@@ -88,14 +88,8 @@ class HMASDAgent:
         self.env_log_probs = {}  # 各环境的log probabilities
         self.env_hidden_states = {}  # 各环境的GRU隐藏状态
         
-        # 预初始化32个并行环境的奖励累积和技能计时器(与config.num_envs=32对应)
-        for i in range(32):
-            self.env_reward_sums[i] = 0.0
-            self.env_timers[i] = 0
-            self.env_team_skills[i] = None
-            self.env_agent_skills[i] = None
-            self.env_log_probs[i] = None
-            self.env_hidden_states[i] = None
+        # 动态初始化环境状态字典 - 将在实际使用时按需初始化
+        # 不再预分配固定数量的环境槽位
         self.accumulated_rewards = 0.0  # 用于测试的累积奖励属性
         self.episode_rewards = []  # 记录每个完整episode的奖励
 
@@ -143,13 +137,13 @@ class HMASDAgent:
         self.cumulative_ind_disc_reward = 0.0
         self.reward_component_counts = 0
     
-    def reset_buffers(self):
-        """重置所有经验缓冲区"""
-        main_logger.info("重置所有经验缓冲区")
+    def clear_buffers(self):
+        """清空经验缓冲区（用于严格on-policy训练）"""
+        main_logger.info("清空经验缓冲区")
         self.high_level_buffer.clear()
         self.high_level_buffer_with_logprobs = []
         self.low_level_buffer.clear()
-        self.state_skill_dataset.clear()
+        # 注意：不清空 state_skill_dataset，因为它用于判别器训练
         
         # 重置计数器和累积值
         self.current_high_level_reward_sum = 0.0
@@ -273,6 +267,16 @@ class HMASDAgent:
         # 启用自动求导异常检测，帮助查找梯度计算失败的操作
         #torch.autograd.set_detect_anomaly(True)
         
+        # 确保环境ID已初始化
+        if env_id not in self.env_timers:
+            self.env_reward_sums[env_id] = 0.0
+            self.env_timers[env_id] = 0
+            self.env_team_skills[env_id] = None
+            self.env_agent_skills[env_id] = None
+            self.env_log_probs[env_id] = None
+            self.env_hidden_states[env_id] = None
+            main_logger.debug(f"初始化环境 {env_id} 的状态")
+
         # 获取或初始化环境特定的状态
         current_team_skill = self.env_team_skills.get(env_id, self.current_team_skill)
         current_agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
