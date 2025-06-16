@@ -9,6 +9,11 @@ import os
 from collections import deque
 from torch.utils.tensorboard import SummaryWriter
 
+# 确保在多进程环境中使用安全的matplotlib后端
+import matplotlib
+if matplotlib.get_backend() != 'Agg':
+    matplotlib.use('Agg')
+
 from logger import main_logger
 from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
 from hmasd.utils import ReplayBuffer, StateSkillDataset, compute_gae, compute_ppo_loss, one_hot

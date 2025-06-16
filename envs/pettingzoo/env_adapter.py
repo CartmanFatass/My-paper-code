@@ -1,6 +1,16 @@
 import numpy as np
 import gymnasium as gym
 from gymnasium.spaces import Box
+import os
+import multiprocessing as mp
+
+# 确保在子进程中使用安全的matplotlib后端
+try:
+    import matplotlib
+    if matplotlib.get_backend() != 'Agg':
+        matplotlib.use('Agg')
+except ImportError:
+    pass  # matplotlib不可用时忽略
 
 class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
     """
@@ -252,9 +262,19 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         return data_dict
 
     def render(self, mode="human"):
-        """Renders the environment."""
-        # Use the underlying PettingZoo environment's render method
-        return self.env.render() # Assuming the base env render matches Gym modes
+        """Renders the environment with multiprocessing safety."""
+        # 检查是否在子进程中运行
+        if mp.current_process().name != 'MainProcess':
+            # 在子进程中，跳过GUI渲染以避免线程安全问题
+            print(f"[{mp.current_process().name}] 跳过GUI渲染以避免多进程冲突")
+            return None
+        
+        try:
+            # 只在主进程中进行渲染
+            return self.env.render() if hasattr(self.env, 'render') else None
+        except Exception as e:
+            print(f"渲染错误: {e}")
+            return None
 
     def close(self):
         """Closes the environment."""
