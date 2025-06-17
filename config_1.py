@@ -9,9 +9,9 @@ class Config:
     action_dim = 3    # 每个智能体输出3D速度向量
 
     # HMASD参数 - 基于论文Table 3中的3m场景
-    n_Z = 3           # 团队技能数量 (论文中3m场景为3)
-    n_z = 3           # 个体技能数量 (论文中3m场景为3)
-    k = 10            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
+    n_Z = 10           # 团队技能数量 (论文中3m场景为3)
+    n_z = 10           # 个体技能数量 (论文中3m场景为3)
+    k = 32            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -34,7 +34,7 @@ class Config:
 
     # HMASD损失权重 - 基于论文Table 3中的3m场景
     # 注意：lambda_e参数已调整为100.0，与论文中一致
-    lambda_e = 1.0       # 外部奖励权重 (论文中3m场景为100)
+    lambda_e = 0.1       # 外部奖励权重 (论文中3m场景为100)
     lambda_D = 0.1           # 团队技能判别器奖励权重 (论文中3m场景为0.1)
     lambda_d = 0.5           # 个体技能判别器奖励权重 (论文中3m场景为0.5)
     lambda_h = 0.001         # 高层策略熵权重 (论文中3m场景为0.001)
@@ -47,8 +47,8 @@ class Config:
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
     rollout_length = 128     # 每次rollout收集的步数 (严格on-policy)
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
-    eval_interval = 160000   # 评估间隔 (32并行环境 * 每环境5000步)
-    episode_length = 5000    # 每个episode的最大长度 (基于观察到的实际行为)
+    episode_length = 5120    # 每个episode的最大长度 (基于观察到的实际行为)
+    eval_interval = episode_length*num_envs   # 评估间隔 (32并行环境 * 每环境5120步)
     eval_episodes = 4      # 评估时的episode数量 (论文中SMAC为100)
     eval_rollout_threads = 4 # 评估时的并行线程数 (论文中SMAC为4)
     

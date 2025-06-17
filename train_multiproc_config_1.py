@@ -74,37 +74,6 @@ class EnhancedRewardTracker:
             'avg_throughput_per_user': []  # 新增：平均用户吞吐量记录
         }
         
-        # 训练进度追踪
-        self.training_progress = {
-            'start_time': time.time(),
-            'total_target_steps': config.total_timesteps,
-            'steps_per_second_history': deque(maxlen=100),
-            'step_timestamps': deque(maxlen=100),
-            'last_progress_log_time': time.time(),
-            'last_progress_log_step': 0
-        }
-        
-        # 回程瓶颈分析
-        self.backhaul_analysis = {
-            'frontend_limited_count': [],
-            'backhaul_limited_count': [],
-            'direct_backhaul_count': [],
-            'multi_hop_count': [],
-            'efficiency_loss_history': [],
-            'path_length_distribution': defaultdict(int),
-            'unused_capacity_history': [],
-            'bottleneck_type_history': []
-        }
-        
-        # 吞吐量详细分析
-        self.throughput_analysis = {
-            'uav_contributions': defaultdict(list),  # 每个UAV的吞吐量贡献历史
-            'system_effective_throughput': [],  # 系统有效吞吐量
-            'backhaul_utilization': [],  # 回程利用率
-            'throughput_stability': [],  # 吞吐量稳定性
-            'capacity_waste': []  # 容量浪费
-        }
-        
         # 滑动窗口统计
         self.window_size = 100
         self.recent_rewards = deque(maxlen=self.window_size)
@@ -116,25 +85,13 @@ class EnhancedRewardTracker:
         
     def log_training_step(self, step, env_id, reward, reward_components=None, info=None):
         """记录训练步骤的奖励信息"""
-        current_time = time.time()
         self.training_rewards['total_steps'] += 1
         self.training_rewards['step_rewards'].append({
             'step': step,
             'env_id': env_id,
             'reward': reward,
-            'timestamp': current_time
+            'timestamp': time.time()
         })
-        
-        # 更新训练进度追踪
-        self.training_progress['step_timestamps'].append(current_time)
-        
-        # 计算训练速度（每100步更新一次）
-        if len(self.training_progress['step_timestamps']) >= 10:
-            recent_timestamps = list(self.training_progress['step_timestamps'])[-10:]
-            time_diff = recent_timestamps[-1] - recent_timestamps[0]
-            if time_diff > 0:
-                steps_per_second = 9 / time_diff  # 9个时间间隔对应10个时间戳
-                self.training_progress['steps_per_second_history'].append(steps_per_second)
         
         if reward_components:
             for comp_name, comp_value in reward_components.items():
@@ -179,7 +136,7 @@ class EnhancedRewardTracker:
                         'step': step,
                         'env_id': env_id,
                         'system_throughput_mbps': reward_info['system_throughput_mbps'],
-                        'timestamp': current_time
+                        'timestamp': time.time()
                     })
                 
                 if 'avg_throughput_per_user_mbps' in reward_info:
@@ -187,136 +144,8 @@ class EnhancedRewardTracker:
                         'step': step,
                         'env_id': env_id,
                         'avg_throughput_per_user_mbps': reward_info['avg_throughput_per_user_mbps'],
-                        'timestamp': current_time
+                        'timestamp': time.time()
                     })
-                
-                # 收集回程瓶颈分析数据（新增）
-                self._collect_backhaul_analysis(step, env_id, reward_info, current_time)
-    
-    def _collect_backhaul_analysis(self, step, env_id, reward_info, timestamp):
-        """收集回程瓶颈分析数据"""
-        
-        # 从reward_info中提取回程相关数据（如果环境提供）
-        # 这些字段需要在环境中计算并提供
-        frontend_limited = 0
-        backhaul_limited = 0
-        direct_backhaul = 0
-        multi_hop = 0
-        efficiency_loss = 0
-        unused_capacity = 0
-        
-        # 尝试从reward_info中获取回程分析数据
-        if 'backhaul_analysis' in reward_info:
-            backhaul_data = reward_info['backhaul_analysis']
-            frontend_limited = backhaul_data.get('frontend_limited_uavs', 0)
-            backhaul_limited = backhaul_data.get('backhaul_limited_uavs', 0)
-            direct_backhaul = backhaul_data.get('direct_backhaul_uavs', 0)
-            multi_hop = backhaul_data.get('multi_hop_uavs', 0)
-            efficiency_loss = backhaul_data.get('multi_hop_efficiency_loss', 0)
-            unused_capacity = backhaul_data.get('unused_backhaul_capacity_mbps', 0)
-        
-        # 记录瓶颈类型统计
-        self.backhaul_analysis['frontend_limited_count'].append({
-            'step': step,
-            'env_id': env_id,
-            'count': frontend_limited,
-            'timestamp': timestamp
-        })
-        
-        self.backhaul_analysis['backhaul_limited_count'].append({
-            'step': step,
-            'env_id': env_id,
-            'count': backhaul_limited,
-            'timestamp': timestamp
-        })
-        
-        self.backhaul_analysis['direct_backhaul_count'].append({
-            'step': step,
-            'env_id': env_id,
-            'count': direct_backhaul,
-            'timestamp': timestamp
-        })
-        
-        self.backhaul_analysis['multi_hop_count'].append({
-            'step': step,
-            'env_id': env_id,
-            'count': multi_hop,
-            'timestamp': timestamp
-        })
-        
-        self.backhaul_analysis['efficiency_loss_history'].append({
-            'step': step,
-            'env_id': env_id,
-            'efficiency_loss': efficiency_loss,
-            'timestamp': timestamp
-        })
-        
-        self.backhaul_analysis['unused_capacity_history'].append({
-            'step': step,
-            'env_id': env_id,
-            'unused_capacity_mbps': unused_capacity,
-            'timestamp': timestamp
-        })
-        
-        # 记录路径长度分布（如果提供）
-        if 'path_lengths' in reward_info:
-            path_lengths = reward_info['path_lengths']
-            for path_length in path_lengths:
-                self.backhaul_analysis['path_length_distribution'][path_length] += 1
-        
-        # 记录瓶颈类型分布
-        total_uavs = frontend_limited + backhaul_limited
-        if total_uavs > 0:
-            bottleneck_type = {
-                'step': step,
-                'env_id': env_id,
-                'frontend_ratio': frontend_limited / total_uavs,
-                'backhaul_ratio': backhaul_limited / total_uavs,
-                'timestamp': timestamp
-            }
-            self.backhaul_analysis['bottleneck_type_history'].append(bottleneck_type)
-        
-        # 记录吞吐量详细分析
-        if 'system_throughput_mbps' in reward_info:
-            system_throughput = reward_info['system_throughput_mbps']
-            self.throughput_analysis['system_effective_throughput'].append({
-                'step': step,
-                'env_id': env_id,
-                'throughput_mbps': system_throughput,
-                'timestamp': timestamp
-            })
-            
-            # 计算回程利用率（如果有总回程容量信息）
-            if 'total_backhaul_capacity_mbps' in reward_info:
-                total_capacity = reward_info['total_backhaul_capacity_mbps']
-                if total_capacity > 0:
-                    utilization = system_throughput / total_capacity
-                    self.throughput_analysis['backhaul_utilization'].append({
-                        'step': step,
-                        'env_id': env_id,
-                        'utilization': utilization,
-                        'timestamp': timestamp
-                    })
-            
-            # 计算容量浪费
-            if unused_capacity > 0:
-                self.throughput_analysis['capacity_waste'].append({
-                    'step': step,
-                    'env_id': env_id,
-                    'waste_mbps': unused_capacity,
-                    'timestamp': timestamp
-                })
-        
-        # 记录每个UAV的吞吐量贡献（如果提供）
-        if 'uav_throughput_contributions' in reward_info:
-            uav_contributions = reward_info['uav_throughput_contributions']
-            for uav_id, contribution in enumerate(uav_contributions):
-                self.throughput_analysis['uav_contributions'][uav_id].append({
-                    'step': step,
-                    'env_id': env_id,
-                    'contribution_mbps': contribution,
-                    'timestamp': timestamp
-                })
     
     def log_episode_completion(self, episode_num, env_id, total_reward, episode_length, info=None):
         """记录episode完成信息"""
@@ -406,8 +235,9 @@ class EnhancedRewardTracker:
         with open(os.path.join(export_dir, f'skill_usage_step_{step}.json'), 'w') as f:
             json.dump(skill_stats, f, indent=2)
         
-        # 生成训练曲线图
-        self.generate_training_plots(export_dir, step)
+        # 生成训练曲线图 - 已禁用以避免内存错误
+        # self.generate_training_plots(export_dir, step)
+        main_logger.debug(f"跳过训练过程中的绘图生成 (步骤 {step}) 以避免内存问题")
         
         # 记录到TensorBoard（如果提供）
         if writer:
@@ -532,28 +362,6 @@ class EnhancedRewardTracker:
     
     def log_to_tensorboard(self, writer, step):
         """记录详细数据到TensorBoard"""
-        
-        # 训练进度指标（新增）
-        current_time = time.time()
-        
-        # 计算总步数和进度百分比
-        writer.add_scalar('Training/Total_Steps', self.training_rewards['total_steps'], step)
-        
-        if self.training_progress['total_target_steps'] > 0:
-            progress_percentage = (self.training_rewards['total_steps'] / self.training_progress['total_target_steps']) * 100
-            writer.add_scalar('Training/Progress_Percentage', progress_percentage, step)
-        
-        # 训练速度统计
-        if self.training_progress['steps_per_second_history']:
-            avg_speed = np.mean(list(self.training_progress['steps_per_second_history']))
-            writer.add_scalar('Training/Steps_Per_Second', avg_speed, step)
-            
-            # 计算预计剩余时间（ETA）
-            if avg_speed > 0 and self.training_progress['total_target_steps'] > 0:
-                remaining_steps = max(0, self.training_progress['total_target_steps'] - self.training_rewards['total_steps'])
-                eta_seconds = remaining_steps / avg_speed
-                eta_minutes = eta_seconds / 60
-                writer.add_scalar('Training/ETA_Minutes', eta_minutes, step)
         
         # 训练奖励统计
         if self.recent_rewards:
@@ -707,184 +515,6 @@ class EnhancedRewardTracker:
                     if throughput_values:
                         env_avg_user_throughput = np.mean(throughput_values)
                         writer.add_scalar(f'Performance/Env_{env_id}_Avg_User_Throughput_Mbps', env_avg_user_throughput, step)
-        
-        # 回程瓶颈分析指标（新增）
-        self._log_backhaul_analysis_to_tensorboard(writer, step)
-        
-        # 吞吐量详细分析指标（新增）
-        self._log_throughput_analysis_to_tensorboard(writer, step)
-    
-    def _log_backhaul_analysis_to_tensorboard(self, writer, step):
-        """记录回程瓶颈分析到TensorBoard"""
-        
-        # 前端vs回程瓶颈统计
-        if self.backhaul_analysis['frontend_limited_count']:
-            recent_frontend_data = self.backhaul_analysis['frontend_limited_count'][-100:]
-            recent_frontend_counts = [d['count'] for d in recent_frontend_data]
-            
-            if recent_frontend_counts:
-                avg_frontend_limited = np.mean(recent_frontend_counts)
-                writer.add_scalar('Performance/Frontend_Limited_UAVs_100steps', avg_frontend_limited, step)
-        
-        if self.backhaul_analysis['backhaul_limited_count']:
-            recent_backhaul_data = self.backhaul_analysis['backhaul_limited_count'][-100:]
-            recent_backhaul_counts = [d['count'] for d in recent_backhaul_data]
-            
-            if recent_backhaul_counts:
-                avg_backhaul_limited = np.mean(recent_backhaul_counts)
-                writer.add_scalar('Performance/Backhaul_Limited_UAVs_100steps', avg_backhaul_limited, step)
-        
-        # 直连vs多跳UAV统计
-        if self.backhaul_analysis['direct_backhaul_count']:
-            recent_direct_data = self.backhaul_analysis['direct_backhaul_count'][-100:]
-            recent_direct_counts = [d['count'] for d in recent_direct_data]
-            
-            if recent_direct_counts:
-                avg_direct_backhaul = np.mean(recent_direct_counts)
-                writer.add_scalar('Performance/Direct_Backhaul_UAVs_100steps', avg_direct_backhaul, step)
-        
-        if self.backhaul_analysis['multi_hop_count']:
-            recent_multi_hop_data = self.backhaul_analysis['multi_hop_count'][-100:]
-            recent_multi_hop_counts = [d['count'] for d in recent_multi_hop_data]
-            
-            if recent_multi_hop_counts:
-                avg_multi_hop = np.mean(recent_multi_hop_counts)
-                writer.add_scalar('Performance/Multi_Hop_UAVs_100steps', avg_multi_hop, step)
-        
-        # 多跳效率损失
-        if self.backhaul_analysis['efficiency_loss_history']:
-            recent_efficiency_data = self.backhaul_analysis['efficiency_loss_history'][-100:]
-            recent_efficiency_loss = [d['efficiency_loss'] for d in recent_efficiency_data]
-            
-            if recent_efficiency_loss:
-                avg_efficiency_loss = np.mean(recent_efficiency_loss)
-                writer.add_scalar('Performance/Multi_Hop_Efficiency_Loss_100steps', avg_efficiency_loss, step)
-        
-        # 未使用回程容量
-        if self.backhaul_analysis['unused_capacity_history']:
-            recent_unused_data = self.backhaul_analysis['unused_capacity_history'][-100:]
-            recent_unused_capacity = [d['unused_capacity_mbps'] for d in recent_unused_data]
-            
-            if recent_unused_capacity:
-                avg_unused_capacity = np.mean(recent_unused_capacity)
-                writer.add_scalar('Performance/Unused_Backhaul_Capacity_Mbps_100steps', avg_unused_capacity, step)
-        
-        # 瓶颈类型比例
-        if self.backhaul_analysis['bottleneck_type_history']:
-            recent_bottleneck_data = self.backhaul_analysis['bottleneck_type_history'][-100:]
-            
-            if recent_bottleneck_data:
-                frontend_ratios = [d['frontend_ratio'] for d in recent_bottleneck_data]
-                backhaul_ratios = [d['backhaul_ratio'] for d in recent_bottleneck_data]
-                
-                avg_frontend_ratio = np.mean(frontend_ratios)
-                avg_backhaul_ratio = np.mean(backhaul_ratios)
-                
-                writer.add_scalar('Performance/Frontend_Bottleneck_Ratio_100steps', avg_frontend_ratio, step)
-                writer.add_scalar('Performance/Backhaul_Bottleneck_Ratio_100steps', avg_backhaul_ratio, step)
-        
-        # 路径长度分布
-        if self.backhaul_analysis['path_length_distribution']:
-            total_paths = sum(self.backhaul_analysis['path_length_distribution'].values())
-            if total_paths > 0:
-                # 计算平均路径长度
-                weighted_sum = sum(length * count for length, count in self.backhaul_analysis['path_length_distribution'].items())
-                avg_path_length = weighted_sum / total_paths
-                writer.add_scalar('Performance/Avg_Path_Length', avg_path_length, step)
-                
-                # 记录最大路径长度
-                max_path_length = max(self.backhaul_analysis['path_length_distribution'].keys())
-                writer.add_scalar('Performance/Max_Path_Length', max_path_length, step)
-                
-                # 记录各路径长度的分布
-                for path_length, count in self.backhaul_analysis['path_length_distribution'].items():
-                    ratio = count / total_paths
-                    writer.add_scalar(f'Performance/Path_Length_{path_length}_Ratio', ratio, step)
-    
-    def _log_throughput_analysis_to_tensorboard(self, writer, step):
-        """记录吞吐量详细分析到TensorBoard"""
-        
-        # 系统有效吞吐量（考虑回程瓶颈后）
-        if self.throughput_analysis['system_effective_throughput']:
-            recent_effective_data = self.throughput_analysis['system_effective_throughput'][-100:]
-            recent_effective_throughput = [d['throughput_mbps'] for d in recent_effective_data]
-            
-            if recent_effective_throughput:
-                avg_effective_throughput = np.mean(recent_effective_throughput)
-                writer.add_scalar('Performance/System_Effective_Throughput_Mbps_100steps', avg_effective_throughput, step)
-                
-                # 吞吐量稳定性指标
-                throughput_std = np.std(recent_effective_throughput)
-                throughput_cv = throughput_std / max(avg_effective_throughput, 1e-8)
-                
-                writer.add_scalar('Performance/System_Throughput_Stability_Std_100steps', throughput_std, step)
-                writer.add_scalar('Performance/System_Throughput_Stability_CV_100steps', throughput_cv, step)
-                
-                # 记录到稳定性历史
-                self.throughput_analysis['throughput_stability'].append({
-                    'step': step,
-                    'std': throughput_std,
-                    'cv': throughput_cv,
-                    'timestamp': time.time()
-                })
-        
-        # 回程利用率
-        if self.throughput_analysis['backhaul_utilization']:
-            recent_utilization_data = self.throughput_analysis['backhaul_utilization'][-100:]
-            recent_utilization = [d['utilization'] for d in recent_utilization_data]
-            
-            if recent_utilization:
-                avg_utilization = np.mean(recent_utilization)
-                writer.add_scalar('Performance/Backhaul_Utilization_Ratio_100steps', avg_utilization, step)
-                
-                # 利用率分布统计
-                utilization_std = np.std(recent_utilization)
-                writer.add_scalar('Performance/Backhaul_Utilization_Std_100steps', utilization_std, step)
-        
-        # 容量浪费统计
-        if self.throughput_analysis['capacity_waste']:
-            recent_waste_data = self.throughput_analysis['capacity_waste'][-100:]
-            recent_waste = [d['waste_mbps'] for d in recent_waste_data]
-            
-            if recent_waste:
-                avg_waste = np.mean(recent_waste)
-                total_waste = np.sum(recent_waste)
-                
-                writer.add_scalar('Performance/Avg_Capacity_Waste_Mbps_100steps', avg_waste, step)
-                writer.add_scalar('Performance/Total_Capacity_Waste_Mbps_100steps', total_waste, step)
-        
-        # 按UAV的吞吐量贡献分析
-        if self.throughput_analysis['uav_contributions']:
-            # 只分析前5个UAV以避免过多指标
-            max_uavs_to_log = min(5, len(self.throughput_analysis['uav_contributions']))
-            
-            for uav_id in range(max_uavs_to_log):
-                if uav_id in self.throughput_analysis['uav_contributions']:
-                    uav_data = self.throughput_analysis['uav_contributions'][uav_id][-100:]
-                    
-                    if uav_data:
-                        recent_contributions = [d['contribution_mbps'] for d in uav_data]
-                        avg_contribution = np.mean(recent_contributions)
-                        
-                        writer.add_scalar(f'Performance/UAV_{uav_id}_Contribution_Mbps_100steps', avg_contribution, step)
-            
-            # 计算UAV贡献的不平衡性（基尼系数或方差）
-            all_recent_contributions = []
-            for uav_id, uav_data in self.throughput_analysis['uav_contributions'].items():
-                if uav_data:
-                    recent_data = uav_data[-10:]  # 最近10个数据点
-                    if recent_data:
-                        avg_uav_contribution = np.mean([d['contribution_mbps'] for d in recent_data])
-                        all_recent_contributions.append(avg_uav_contribution)
-            
-            if len(all_recent_contributions) > 1:
-                # 计算贡献不平衡性
-                contribution_std = np.std(all_recent_contributions)
-                contribution_mean = np.mean(all_recent_contributions)
-                contribution_cv = contribution_std / max(contribution_mean, 1e-8)
-                
-                writer.add_scalar('Performance/UAV_Contribution_Imbalance_CV_100steps', contribution_cv, step)
-                writer.add_scalar('Performance/UAV_Contribution_Std_100steps', contribution_std, step)
     
     def get_summary_statistics(self):
         """获取训练摘要统计信息"""
