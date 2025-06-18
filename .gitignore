@@ -44,6 +44,7 @@ data/
 *.md
 !README.md
 *.txt
+*.tar
 
 # 生成的模型和结果
 models/
