@@ -1311,7 +1311,7 @@ def parse_args():
     parser.add_argument('--export_interval', type=int, default=1000, 
                         help='数据导出间隔步数')
     parser.add_argument('--detailed_logging', action='store_true', 
-                        help='启用详细的奖励日志记录')
+                        help='启用详细的奖励和吞吐量日志记录')
     
     return parser.parse_args()
 
@@ -1462,6 +1462,34 @@ def train(config, args, device):
                         rewards.append(reward)
                         dones.append(done)
                         infos.append(info)
+                        
+                        # 记录环境的吞吐量和其他性能指标 - 如果启用了详细日志记录
+                        if args.detailed_logging:
+                            try:
+                                # 计算每个智能体的奖励（简化处理）
+                                agent_rewards = [reward] * n_agents
+                                
+                                # 记录训练步骤信息，包括吞吐量
+                                reward_tracker.log_training_step(
+                                    step=total_steps + i,  # 为每个环境分配不同的步骤编号
+                                    env_id=i,
+                                    reward=reward,
+                                    agent_rewards=agent_rewards,
+                                    info=info
+                                )
+                                
+                                # 记录吞吐量信息到日志（如果存在）
+                                if 'reward_info' in info and 'system_throughput_mbps' in info['reward_info']:
+                                    throughput_mbps = info['reward_info']['system_throughput_mbps']
+                                    main_logger.debug(f"步骤 {total_steps}: 环境{i} 系统吞吐量={throughput_mbps:.2f} Mbps")
+                                
+                                # 记录平均用户吞吐量（如果存在）
+                                if 'reward_info' in info and 'avg_throughput_per_user_mbps' in info['reward_info']:
+                                    avg_throughput_mbps = info['reward_info']['avg_throughput_per_user_mbps']
+                                    main_logger.debug(f"步骤 {total_steps}: 环境{i} 平均用户吞吐量={avg_throughput_mbps:.2f} Mbps")
+                                    
+                            except Exception as log_e:
+                                main_logger.warning(f"步骤 {total_steps}: 记录环境{i}吞吐量信息失败: {log_e}")
                         
                     except Exception as e:
                         main_logger.error(f"步骤 {total_steps}: 环境{i}步骤执行失败: {e}")
