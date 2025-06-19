@@ -28,10 +28,10 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         min_sinr=0,  # 最小SINR阈值 (dB)
         max_connections=10,  # 每个无人机最大连接数
         max_hops=3,  # 最大跳数 (3-5可调)
-        coverage_weight=0.4,  # 覆盖率权重
-        quality_weight=0.2,  # 服务质量权重
-        connectivity_weight=0.2,  # 网络连通性权重
-        throughput_weight=0.2,  # 吞吐量权重
+        coverage_weight=0.0,  # 覆盖率权重
+        quality_weight=0.0,  # 服务质量权重
+        connectivity_weight=0.0,  # 网络连通性权重
+        throughput_weight=1.0,  # 吞吐量权重
         n_ground_bs=1,  # 地面基站数量
     ):
         """
@@ -461,7 +461,10 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
     
     def _compute_throughput(self, uav_idx, user_idx):
         """
-        计算UAV-用户连接的吞吐量 (bps)
+        计算UAV-用户连接的吞吐量 (bps) - 【已弃用，仅用于兼容性】
+        
+        注意：此函数假设用户独占全部带宽，不适合多用户场景
+        仅用于兼容性，实际计算应使用 _compute_user_throughput_with_sharing
         
         参数:
             uav_idx: 无人机索引
@@ -483,6 +486,58 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         throughput = self.bandwidth * np.log2(1 + sinr_linear)
         
         return throughput  # 单位：bps
+    
+    def _compute_user_throughput_with_sharing(self, uav_idx, user_idx):
+        """
+        计算考虑带宽共享的单用户吞吐量 (bps)
+        
+        参数:
+            uav_idx: 无人机索引
+            user_idx: 用户索引
+            
+        返回:
+            user_throughput: 该用户的实际吞吐量 (bps)
+        """
+        if not self.connections[uav_idx, user_idx]:
+            return 0
+        
+        # 获取连接到该UAV的所有用户
+        connected_users = []
+        for j in range(self.n_users):
+            if self.connections[uav_idx, j]:
+                connected_users.append(j)
+        
+        if len(connected_users) == 0:
+            return 0
+        
+        # 计算UAV的前端总容量
+        total_frontend_capacity = self._compute_uav_frontend_capacity(uav_idx, connected_users)
+        
+        # 方法1: 按SINR比例分配带宽
+        # 计算所有连接用户的SINR权重
+        sinr_weights = []
+        total_sinr_weight = 0
+        
+        for user in connected_users:
+            sinr_db = self.sinr_matrix[uav_idx, user]
+            sinr_linear = 10 ** (sinr_db / 10)
+            sinr_weights.append(sinr_linear)
+            total_sinr_weight += sinr_linear
+        
+        # 找到目标用户在列表中的位置
+        try:
+            user_position = connected_users.index(user_idx)
+            user_sinr_weight = sinr_weights[user_position]
+        except ValueError:
+            return 0  # 用户不在连接列表中
+        
+        if total_sinr_weight == 0:
+            return 0
+        
+        # 按SINR权重分配总容量
+        user_throughput = total_frontend_capacity * (user_sinr_weight / total_sinr_weight)
+        
+        return user_throughput
     
     def _compute_backhaul_capacity(self, uav_idx):
         """
@@ -557,7 +612,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
     
     def _compute_effective_throughput(self, uav_idx, user_idx):
         """
-        计算考虑多跳路径的有效吞吐量
+        计算考虑多跳路径的有效吞吐量（使用带宽共享的新方法）
         
         参数:
             uav_idx: 无人机索引
@@ -569,8 +624,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         if not self.connections[uav_idx, user_idx]:
             return 0
         
-        # 基础吞吐量（UAV到用户的链路容量）
-        base_throughput = self._compute_throughput(uav_idx, user_idx)
+        # 使用新的带宽共享方法计算基础吞吐量
+        base_throughput = self._compute_user_throughput_with_sharing(uav_idx, user_idx)
         
         # 如果UAV有到地面基站的路径，考虑回程瓶颈
         if uav_idx in self.routing_paths:
@@ -591,6 +646,71 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             effective_throughput = 0
         
         return effective_throughput
+    
+    def _compute_uav_frontend_capacity(self, uav_idx, connected_users):
+        """
+        计算UAV的前端总容量（考虑带宽共享）
+        
+        参数:
+            uav_idx: 无人机索引
+            connected_users: 连接到该UAV的用户索引列表
+            
+        返回:
+            frontend_capacity: 前端总容量 (bps)
+        """
+        if len(connected_users) == 0:
+            return 0
+        
+        # 方法1：基于最差用户的SINR来计算总容量
+        # 这假设UAV使用相同的功率向所有用户广播
+        min_sinr_db = float('inf')
+        for user_idx in connected_users:
+            sinr_db = self.sinr_matrix[uav_idx, user_idx]
+            min_sinr_db = min(min_sinr_db, sinr_db)
+        
+        if min_sinr_db == float('inf'):
+            return 0
+        
+        # 使用最差SINR和全部带宽计算总容量
+        min_sinr_linear = 10 ** (min_sinr_db / 10)
+        total_capacity = self.bandwidth * np.log2(1 + min_sinr_linear)
+        
+        return total_capacity
+    
+    def _compute_realistic_max_throughput(self):
+        """
+        计算考虑系统瓶颈的现实最大吞吐量
+        
+        返回:
+            max_realistic_throughput: 现实最大系统吞吐量 (bps)
+        """
+        max_system_throughput = 0
+        
+        for i in range(self.n_uavs):
+            # 计算UAV的理论最大前端容量（单UAV在最优SINR下的总容量）
+            max_sinr_linear = 10 ** (30 / 10)  # 30dB转换为线性
+            max_frontend_capacity = self.bandwidth * np.log2(1 + max_sinr_linear)
+            
+            # 计算UAV的理论最大回程容量（直连最近地面基站的情况）
+            if len(self.ground_bs_positions) > 0:
+                min_distance_to_bs = min([
+                    self._compute_distance(self.uav_positions[i], bs_pos) 
+                    for bs_pos in self.ground_bs_positions
+                ])
+                safe_distance = max(min_distance_to_bs, 1e-6)
+                path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi * self.carrier_frequency / 3e8)
+                rx_power = self.ground_bs_tx_power - path_loss
+                sinr_db = rx_power - self.noise_power
+                sinr_linear = 10 ** (sinr_db / 10)
+                max_backhaul_capacity = self.bandwidth * np.log2(1 + sinr_linear)
+            else:
+                max_backhaul_capacity = max_frontend_capacity  # 没有地面基站时使用前端容量
+            
+            # UAV的实际最大吞吐量 = min(前端容量, 回程容量)
+            uav_max_throughput = min(max_frontend_capacity, max_backhaul_capacity)
+            max_system_throughput += uav_max_throughput
+        
+        return max_system_throughput
     
     def _compute_reward(self):
         """
@@ -620,26 +740,22 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         connectivity_ratio = self._compute_connectivity_ratio()
         connectivity_reward = connectivity_ratio
         
-        # 【修正】考虑回程瓶颈的系统吞吐量计算
+        # 【修正】考虑带宽共享的系统吞吐量计算
         system_throughput = 0
-        max_possible_system_throughput = 0
         
-        # 按UAV计算有效吞吐量（考虑回程瓶颈）
+        # 按UAV计算有效吞吐量（修正带宽共享问题）
         for i in range(self.n_uavs):
-            # 计算该UAV服务的所有用户的总需求吞吐量
-            uav_user_throughput = 0
-            uav_max_possible_throughput = 0
-            
+            # 获取连接到该UAV的用户列表
+            connected_users_to_uav = []
             for j in range(self.n_users):
                 if self.connections[i, j]:
-                    # 计算前端链路吞吐量（UAV到用户）
-                    user_throughput = self._compute_throughput(i, j)
-                    uav_user_throughput += user_throughput
-                
-                # 计算理论最大前端链路吞吐量
-                max_sinr_linear = 10 ** (30 / 10)  # 30dB转换为线性
-                max_link_throughput = self.bandwidth * np.log2(1 + max_sinr_linear)
-                uav_max_possible_throughput += max_link_throughput
+                    connected_users_to_uav.append(j)
+            
+            if len(connected_users_to_uav) == 0:
+                continue  # 该UAV没有连接用户
+            
+            # 计算该UAV的前端总容量（考虑带宽共享）
+            uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
             
             # 获取该UAV的回程容量限制
             if i in self.routing_paths:
@@ -653,19 +769,18 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
                 # 有效回程容量
                 effective_backhaul = backhaul_capacity * hop_efficiency
                 
-                # 实际有效吞吐量 = min(前端总需求, 有效回程容量)
-                uav_effective_throughput = min(uav_user_throughput, effective_backhaul)
+                # 实际有效吞吐量 = min(前端容量, 有效回程容量)
+                uav_effective_throughput = min(uav_frontend_capacity, effective_backhaul)
             else:
                 # 无回程路径，吞吐量为0
                 uav_effective_throughput = 0
             
             # 累加到系统总吞吐量
             system_throughput += uav_effective_throughput
-            max_possible_system_throughput += min(uav_max_possible_throughput, 
-                                                  self.bandwidth * np.log2(1 + 10**(30/10)))  # 单UAV理论最大回程容量
         
-        # 归一化吞吐量奖励
-        throughput_reward = system_throughput / max_possible_system_throughput if max_possible_system_throughput > 0 else 0
+        # 使用修正后的现实最大吞吐量进行归一化
+        max_realistic_throughput = self._compute_realistic_max_throughput()
+        throughput_reward = system_throughput / max_realistic_throughput if max_realistic_throughput > 0 else 0
         
         # 跳数惩罚：路径越长，惩罚越大
         total_hops = 0
@@ -675,14 +790,21 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         avg_hops = total_hops / max(len(self.routing_paths), 1)
         hop_penalty = avg_hops / self.max_hops * 0.1  # 归一化并缩放
         
-        # 组合奖励
-        reward = (
+        # 组合奖励（原始奖励）
+        raw_reward = (
             self.coverage_weight * coverage_reward + 
             self.quality_weight * quality_reward + 
             self.connectivity_weight * connectivity_reward +
             self.throughput_weight * throughput_reward -
             hop_penalty
         )
+        
+        # 最终归一化：将奖励映射到[0, 1]范围
+        # 理论范围分析：
+        # - 最大值: 0.4 + 0.2 + 0.2 + 0.2 = 1.0
+        # - 最小值: 0 - 0.1 = -0.1 (最坏情况下的跳数惩罚)
+        # 因此将[-0.1, 1.0]映射到[0, 1]
+        normalized_reward = np.clip((raw_reward + 0.1) / 1.1, 0, 1)
         
         # 记录奖励组成（修正后的数据）
         self.reward_info = {
@@ -691,16 +813,18 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             "connectivity_reward": connectivity_reward,
             "throughput_reward": throughput_reward,
             "hop_penalty": hop_penalty,
-            "total_reward": reward,
-            "system_throughput_mbps": system_throughput / 1e6,  # 系统实际吞吐量（考虑回程瓶颈）
+            "raw_reward": raw_reward,
+            "normalized_reward": normalized_reward,
+            "system_throughput_mbps": system_throughput / 1e6,  # 系统实际吞吐量（修正带宽共享）
             "avg_throughput_per_user_mbps": (system_throughput / max(connected_users, 1)) / 1e6,
+            "max_realistic_throughput_mbps": max_realistic_throughput / 1e6,  # 现实最大吞吐量
             # 额外的调试信息
             "connected_users": connected_users,
             "connectivity_ratio": connectivity_ratio,
             "avg_hops": avg_hops
         }
         
-        return reward
+        return normalized_reward
     
     def _render_frame(self):
         """渲染单帧"""

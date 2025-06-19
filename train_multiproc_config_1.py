@@ -568,7 +568,7 @@ def get_device(device_pref):
         return torch.device('cpu')
 
 # 创建环境函数 (修改后用于 SubprocVecEnv)
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_hops=None, render_mode=None, rank=0, seed=0):
+def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0):
     """
     创建环境实例的函数 (用于 SubprocVecEnv)
 
@@ -578,6 +578,7 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_ho
         n_users: 用户数量
         user_distribution: 用户分布类型
         channel_model: 信道模型
+        config: 配置对象，包含奖励权重等参数
         max_hops: 最大跳数 (仅用于场景2)
         render_mode: 渲染模式
         rank: 环境的索引 (用于设置不同的种子)
@@ -598,6 +599,16 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_ho
                 seed=env_seed # 将种子传递给原始环境
             )
         elif scenario == 2:
+            # 准备奖励权重参数（如果配置可用）
+            reward_kwargs = {}
+            if config is not None:
+                reward_kwargs.update({
+                    'coverage_weight': config.coverage_weight,
+                    'quality_weight': config.quality_weight,
+                    'connectivity_weight': config.connectivity_weight,
+                    'throughput_weight': config.throughput_weight
+                })
+            
             raw_env = UAVCooperativeNetworkEnv(
                 n_uavs=n_uavs,
                 n_users=n_users,
@@ -605,7 +616,8 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_ho
                 user_distribution=user_distribution,
                 channel_model=channel_model,
                 render_mode=render_mode,
-                seed=env_seed # 将种子传递给原始环境
+                seed=env_seed, # 将种子传递给原始环境
+                **reward_kwargs # 传递奖励权重参数
             )
         else:
             raise ValueError(f"未知的场景: {scenario}")
@@ -727,6 +739,12 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Parameters/num_envs', str(num_envs), 0) # Use num_envs variable
     agent.writer.add_text('Parameters/export_interval', str(args.export_interval), 0)
     agent.writer.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
+    
+    # 记录环境奖励权重配置
+    agent.writer.add_text('Environment/coverage_weight', str(config.coverage_weight), 0)
+    agent.writer.add_text('Environment/quality_weight', str(config.quality_weight), 0)
+    agent.writer.add_text('Environment/connectivity_weight', str(config.connectivity_weight), 0)
+    agent.writer.add_text('Environment/throughput_weight', str(config.throughput_weight), 0)
 
     # 训练变量
     total_steps = 0
@@ -1402,6 +1420,7 @@ def main():
         n_users=args.n_users,
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
+        config=config,  # 传递配置对象
         max_hops=args.max_hops if args.scenario == 2 else None,
         render_mode=None,
         rank=i,
@@ -1414,6 +1433,7 @@ def main():
         n_users=args.n_users,
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
+        config=config,  # 传递配置对象
         max_hops=args.max_hops if args.scenario == 2 else None,
         render_mode="human" if args.render and i == 0 else None, # 只在第一个评估环境中渲染
         rank=i,

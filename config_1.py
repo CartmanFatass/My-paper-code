@@ -61,6 +61,13 @@ class Config:
     num_mini_batch = 1       # mini batch数量
     use_huber_loss = True    # 使用Huber损失
     huber_delta = 10         # Huber delta
+    
+    # 环境奖励权重配置 - 场景2协作组网
+    coverage_weight = 0.0      # 覆盖率权重 (保持)
+    quality_weight = 0.0       # 服务质量权重 (设为0，不考虑)
+    connectivity_weight = 0.0  # 网络连通性权重 (设为0，不考虑)
+    throughput_weight = 1.0    # 吞吐量权重 (保持)
+    # 注意：跳数惩罚在当前设置下影响很小(最大0.1)，暂时保留
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

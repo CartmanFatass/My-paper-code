@@ -35,6 +35,27 @@ from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 # 导入工具类
 from hmasd.utils import ReplayBuffer, compute_gae, compute_ppo_loss
 
+# 初始化默认的主logger，供模块级别导入使用
+main_logger = None
+
+def init_main_logger():
+    """初始化主logger"""
+    global main_logger
+    if main_logger is None:
+        # 创建一个基本的logger作为默认值
+        import logging
+        main_logger = logging.getLogger("MAPPO-Enhanced-Default")
+        main_logger.setLevel(logging.INFO)
+        if not main_logger.handlers:
+            handler = logging.StreamHandler()
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            handler.setFormatter(formatter)
+            main_logger.addHandler(handler)
+    return main_logger
+
+# 初始化默认logger
+main_logger = init_main_logger()
+
 # 数值稳定性和监控工具
 def check_tensor_health(tensor, name="", logger=None, raise_on_error=False):
     """检查张量的数值健康状况 - 增强版本，支持布尔张量"""
@@ -100,7 +121,11 @@ def check_tensor_health(tensor, name="", logger=None, raise_on_error=False):
             tensor_min = float_tensor.min().item()
             tensor_max = float_tensor.max().item()
             tensor_mean = float_tensor.mean().item()
-            tensor_std = float_tensor.std().item()
+            # 避免对单元素张量计算标准差时的UserWarning
+            if float_tensor.numel() > 1:
+                tensor_std = torch.std(float_tensor).item()
+            else:
+                tensor_std = 0.0
             
             # 检查数值是否过大或过小
             if abs(tensor_max) > 1e6 or abs(tensor_min) > 1e6:
@@ -1270,7 +1295,7 @@ def parse_args():
                         choices=['free_space', 'urban', 'suburban','3gpp-36777'], help='信道模型')
     
     # 并行参数
-    parser.add_argument('--num_envs', type=int, default=8, help='并行环境数量')
+    parser.add_argument('--num_envs', type=int, default=32, help='并行环境数量')
     
     # MAPPO超参数
     parser.add_argument('--learning_rate', type=float, default=3e-4, help='学习率')
@@ -1377,195 +1402,215 @@ def train(config, args, device):
     last_save_step = 0
     save_interval = 5000
     
+    # 严格on-policy训练循环 - 基于rollout的训练模式
+    rollout_steps = 0  # 当前rollout中的步数
+    
     while total_steps < config.total_timesteps:
         try:
             # 定期记录内存使用情况
             if total_steps % 1000 == 0:
                 log_memory_usage(main_logger, total_steps)
             
-            # 选择动作
-            try:
-                actions, log_probs, values = agent.select_actions(observations, states)
-                
-                # 检查动作的有效性
-                if not isinstance(actions, np.ndarray) or np.isnan(actions).any() or np.isinf(actions).any():
-                    main_logger.error(f"步骤 {total_steps}: 动作选择异常，跳过此步")
+            # 收集rollout数据 - 固定长度的数据收集
+            for rollout_step in range(config.rollout_length):
+                # 选择动作
+                try:
+                    actions, log_probs, values = agent.select_actions(observations, states)
+                    
+                    # 检查动作的有效性
+                    if not isinstance(actions, np.ndarray) or np.isnan(actions).any() or np.isinf(actions).any():
+                        main_logger.error(f"步骤 {total_steps}: 动作选择异常，跳过此步")
+                        consecutive_errors += 1
+                        if consecutive_errors >= max_consecutive_errors:
+                            main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
+                            break
+                        continue
+                    
+                except Exception as e:
+                    main_logger.error(f"步骤 {total_steps}: 动作选择失败: {e}")
                     consecutive_errors += 1
                     if consecutive_errors >= max_consecutive_errors:
                         main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
                         break
                     continue
                 
-            except Exception as e:
-                main_logger.error(f"步骤 {total_steps}: 动作选择失败: {e}")
-                consecutive_errors += 1
-                if consecutive_errors >= max_consecutive_errors:
-                    main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
-                    break
-                continue
-            
-            # 执行动作
-            next_observations = []
-            next_states = []
-            rewards = []
-            dones = []
-            infos = []
-            
-            env_step_success = True
-            
-            for i, env in enumerate(envs):
-                try:
-                    next_obs, reward, terminated, truncated, info = env.step(actions[i])
-                    done = bool(terminated or truncated)  # 显式转换为Python bool
-                    
-                    # 验证环境返回值
-                    if next_obs is None or np.isnan(next_obs).any() or np.isinf(next_obs).any():
-                        main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常观察值")
-                        next_obs = observations[i]  # 使用上一步的观察
-                    
-                    if not isinstance(reward, (int, float)) or np.isnan(reward) or np.isinf(reward):
-                        main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常奖励值: {reward}")
-                        reward = 0.0  # 使用默认奖励
-                    
-                    next_observations.append(next_obs)
-                    next_states.append(info.get('next_state', np.zeros(state_dim)))
-                    rewards.append(reward)
-                    dones.append(done)
-                    infos.append(info)
-                    
-                except Exception as e:
-                    main_logger.error(f"步骤 {total_steps}: 环境{i}步骤执行失败: {e}")
-                    # 使用安全的默认值
-                    next_observations.append(observations[i])
-                    next_states.append(states[i])
-                    rewards.append(0.0)
-                    dones.append(False)
-                    infos.append({})
-                    env_step_success = False
-            
-            if not env_step_success:
-                consecutive_errors += 1
-                if consecutive_errors >= max_consecutive_errors:
-                    main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
-                    break
-                continue
-            
-            # 转换为数组
-            try:
-                next_observations = np.array(next_observations)
-                next_states = np.array(next_states)
-                rewards = np.array(rewards)
-                dones = np.array(dones)
+                # 执行动作
+                next_observations = []
+                next_states = []
+                rewards = []
+                dones = []
+                infos = []
                 
-                # 验证数组健康性
-                if np.isnan(next_observations).any() or np.isinf(next_observations).any():
-                    main_logger.error(f"步骤 {total_steps}: next_observations包含异常值")
-                    consecutive_errors += 1
-                    continue
-                    
-                if np.isnan(rewards).any() or np.isinf(rewards).any():
-                    main_logger.error(f"步骤 {total_steps}: rewards包含异常值")
-                    consecutive_errors += 1
-                    continue
-                    
-            except Exception as e:
-                main_logger.error(f"步骤 {total_steps}: 数组转换失败: {e}")
-                consecutive_errors += 1
-                continue
-            
-            # 存储经验 - 需要逐个环境存储
-            storage_success = True
-            for i in range(num_envs):
-                try:
-                    # 确保数据为单个标量值，而不是数组，并显式转换布尔类型
-                    env_reward = float(rewards[i]) if isinstance(rewards[i], np.ndarray) else float(rewards[i])
-                    env_done = bool(dones[i])  # 显式转换为Python bool，无论原始类型
-                    
-                    # 验证数据有效性
-                    if np.isnan(env_reward) or np.isinf(env_reward):
-                        main_logger.warning(f"步骤 {total_steps}: 环境{i}奖励异常，使用0.0")
-                        env_reward = 0.0
-                    
-                    agent.store_transition(
-                        observations[i], next_observations[i], states[i], next_states[i],
-                        actions[i], env_reward, env_done, log_probs[i], values[i]
-                    )
-                    
-                except Exception as e:
-                    main_logger.error(f"步骤 {total_steps}: 存储环境{i}转换失败: {e}")
-                    storage_success = False
-            
-            if not storage_success:
-                consecutive_errors += 1
-                if consecutive_errors >= max_consecutive_errors:
-                    main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
-                    break
-                continue
-            
-            # 更新环境奖励和长度
-            env_episode_rewards += rewards
-            env_episode_lengths += 1
-            
-            # 处理episode结束
-            for i, done in enumerate(dones):
-                if done:
-                    episode_count += 1
-                    
+                env_step_success = True
+                
+                for i, env in enumerate(envs):
                     try:
-                        # 记录episode完成
-                        agent_rewards = [env_episode_rewards[i]] * n_agents  # 简化处理
-                        reward_tracker.log_episode_completion(
-                            episode_count, i, env_episode_rewards[i], 
-                            env_episode_lengths[i], agent_rewards, infos[i]
-                        )
+                        next_obs, reward, terminated, truncated, info = env.step(actions[i])
+                        done = bool(terminated or truncated)  # 显式转换为Python bool
                         
-                        main_logger.info(f"Episode {episode_count}: 环境{i}, 奖励={env_episode_rewards[i]:.2f}, 长度={env_episode_lengths[i]}")
+                        # 验证环境返回值
+                        if next_obs is None or np.isnan(next_obs).any() or np.isinf(next_obs).any():
+                            main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常观察值")
+                            next_obs = observations[i]  # 使用上一步的观察
                         
-                        # 重置环境
-                        obs, info = envs[i].reset()
+                        if not isinstance(reward, (int, float)) or np.isnan(reward) or np.isinf(reward):
+                            main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常奖励值: {reward}")
+                            reward = 0.0  # 使用默认奖励
                         
-                        # 验证重置后的观察
-                        if obs is None or np.isnan(obs).any() or np.isinf(obs).any():
-                            main_logger.error(f"环境{i}重置后观察异常")
-                            obs = np.zeros_like(observations[i])
-                            
-                        observations[i] = obs
-                        states[i] = info.get('state', np.zeros(state_dim))
-                        env_episode_rewards[i] = 0
-                        env_episode_lengths[i] = 0
+                        next_observations.append(next_obs)
+                        next_states.append(info.get('next_state', np.zeros(state_dim)))
+                        rewards.append(reward)
+                        dones.append(done)
+                        infos.append(info)
                         
                     except Exception as e:
-                        main_logger.error(f"处理环境{i} episode结束时失败: {e}")
-                        # 强制重置
+                        main_logger.error(f"步骤 {total_steps}: 环境{i}步骤执行失败: {e}")
+                        # 使用安全的默认值
+                        next_observations.append(observations[i])
+                        next_states.append(states[i])
+                        rewards.append(0.0)
+                        dones.append(False)
+                        infos.append({})
+                        env_step_success = False
+                
+                if not env_step_success:
+                    consecutive_errors += 1
+                    if consecutive_errors >= max_consecutive_errors:
+                        main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
+                        break
+                    continue
+                
+                # 转换为数组
+                try:
+                    next_observations = np.array(next_observations)
+                    next_states = np.array(next_states)
+                    rewards = np.array(rewards)
+                    dones = np.array(dones)
+                    
+                    # 验证数组健康性
+                    if np.isnan(next_observations).any() or np.isinf(next_observations).any():
+                        main_logger.error(f"步骤 {total_steps}: next_observations包含异常值")
+                        consecutive_errors += 1
+                        continue
+                        
+                    if np.isnan(rewards).any() or np.isinf(rewards).any():
+                        main_logger.error(f"步骤 {total_steps}: rewards包含异常值")
+                        consecutive_errors += 1
+                        continue
+                        
+                except Exception as e:
+                    main_logger.error(f"步骤 {total_steps}: 数组转换失败: {e}")
+                    consecutive_errors += 1
+                    continue
+                
+                # 存储经验 - 需要逐个环境存储
+                storage_success = True
+                for i in range(num_envs):
+                    try:
+                        # 确保数据为单个标量值，而不是数组，并显式转换布尔类型
+                        env_reward = float(rewards[i]) if isinstance(rewards[i], np.ndarray) else float(rewards[i])
+                        env_done = bool(dones[i])  # 显式转换为Python bool，无论原始类型
+                        
+                        # 验证数据有效性
+                        if np.isnan(env_reward) or np.isinf(env_reward):
+                            main_logger.warning(f"步骤 {total_steps}: 环境{i}奖励异常，使用0.0")
+                            env_reward = 0.0
+                        
+                        agent.store_transition(
+                            observations[i], next_observations[i], states[i], next_states[i],
+                            actions[i], env_reward, env_done, log_probs[i], values[i]
+                        )
+                        
+                    except Exception as e:
+                        main_logger.error(f"步骤 {total_steps}: 存储环境{i}转换失败: {e}")
+                        storage_success = False
+                
+                if not storage_success:
+                    consecutive_errors += 1
+                    if consecutive_errors >= max_consecutive_errors:
+                        main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
+                        break
+                    continue
+                
+                # 更新环境奖励和长度
+                env_episode_rewards += rewards
+                env_episode_lengths += 1
+                
+                # 处理episode结束
+                for i, done in enumerate(dones):
+                    if done:
+                        episode_count += 1
+                        
                         try:
+                            # 记录episode完成
+                            agent_rewards = [env_episode_rewards[i]] * n_agents  # 简化处理
+                            reward_tracker.log_episode_completion(
+                                episode_count, i, env_episode_rewards[i], 
+                                env_episode_lengths[i], agent_rewards, infos[i]
+                            )
+                            
+                            main_logger.info(f"Episode {episode_count}: 环境{i}, 奖励={env_episode_rewards[i]:.2f}, 长度={env_episode_lengths[i]}")
+                            
+                            # 重置环境
                             obs, info = envs[i].reset()
-                            observations[i] = obs if obs is not None else np.zeros_like(observations[i])
-                            states[i] = info.get('state', np.zeros(state_dim)) if info else np.zeros(state_dim)
+                            
+                            # 验证重置后的观察
+                            if obs is None or np.isnan(obs).any() or np.isinf(obs).any():
+                                main_logger.error(f"环境{i}重置后观察异常")
+                                obs = np.zeros_like(observations[i])
+                                
+                            observations[i] = obs
+                            states[i] = info.get('state', np.zeros(state_dim))
                             env_episode_rewards[i] = 0
                             env_episode_lengths[i] = 0
-                        except:
-                            main_logger.error(f"环境{i}强制重置也失败")
+                            
+                        except Exception as e:
+                            main_logger.error(f"处理环境{i} episode结束时失败: {e}")
+                            # 强制重置
+                            try:
+                                obs, info = envs[i].reset()
+                                observations[i] = obs if obs is not None else np.zeros_like(observations[i])
+                                states[i] = info.get('state', np.zeros(state_dim)) if info else np.zeros(state_dim)
+                                env_episode_rewards[i] = 0
+                                env_episode_lengths[i] = 0
+                            except:
+                                main_logger.error(f"环境{i}强制重置也失败")
+                
+                # 更新状态
+                observations = next_observations
+                states = next_states
+                total_steps += num_envs
+                rollout_steps += 1
+                
+                # 重置连续错误计数器
+                consecutive_errors = 0
+                
+                # 如果达到总步数限制，跳出rollout收集循环
+                if total_steps >= config.total_timesteps:
+                    break
             
-            # 更新状态
-            observations = next_observations
-            states = next_states
-            total_steps += num_envs
-            
-            # 重置连续错误计数器
-            consecutive_errors = 0
-            
-            # 更新网络
+            # Rollout数据收集完成，进行网络更新
             try:
-                if len(agent.buffer) >= config.buffer_size // 4:
+                if len(agent.buffer) >= agent.config.batch_size:
                     update_info = agent.update()
                     if update_info and 'error' not in update_info:
-                        main_logger.info(f"步骤 {total_steps}: Actor损失={update_info['actor_loss']:.4f}, Critic损失={update_info['critic_loss']:.4f}")
+                        main_logger.info(f"Rollout更新 (收集了 {rollout_steps} 步), 总步数 {total_steps}, "
+                              f"Actor损失={update_info['actor_loss']:.4f}, Critic损失={update_info['critic_loss']:.4f}")
                     elif 'error' in update_info:
                         main_logger.error(f"步骤 {total_steps}: 网络更新失败: {update_info['error']}")
+                        
+                    # 清空缓冲区 (严格on-policy)
+                    agent.buffer.clear()
+                    main_logger.debug(f"已清空缓冲区，开始新的rollout")
+                else:
+                    main_logger.warning(f"缓冲区数据不足，跳过更新。当前缓冲区大小: {len(agent.buffer)}")
                         
             except Exception as e:
                 main_logger.error(f"步骤 {total_steps}: 网络更新异常: {e}")
                 main_logger.error(f"异常详情: {traceback.format_exc()}")
+            
+            # 重置rollout步数计数器
+            rollout_steps = 0
             
             # 定期保存模型和导出数据
             try:
