@@ -812,7 +812,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             next_observations, rewards, dones, infos = vec_env.step(actions_array)
 
             # 从 infos 提取 next_states
-            next_states = np.array([info.get('next_state', np.zeros(state_dim)) for info in infos])
+            next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
 
             # 存储经验到缓冲区
             for i in range(num_envs):
