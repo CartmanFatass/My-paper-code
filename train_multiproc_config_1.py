@@ -646,6 +646,8 @@ def parse_args():
     parser.add_argument('--render', action='store_true', help='是否渲染环境')
     parser.add_argument('--device', type=str, default='auto', 
                         choices=['auto', 'cuda', 'cpu'], help='计算设备: auto=自动选择, cuda=GPU, cpu=CPU')
+    parser.add_argument('--resume_from', type=str, default='', 
+                        help='预训练模型路径，用于继续训练（如果为空则从头开始训练）')
 
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=5, help='初始无人机数量')
@@ -684,31 +686,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     """
     num_envs = vec_env.num_envs # Get num_envs from SubprocVecEnv
     main_logger.info(f"开始训练HMASD (多进程版本，使用 {num_envs} 个并行环境)...")
-
-    # 更新环境维度 (从 SubprocVecEnv 获取)
-    # 注意: SubprocVecEnv 没有 get_state_dim 方法。我们需要从适配器获取或推断。
-    # 我们可以通过 get_attr 获取适配器的属性
-    state_dim = vec_env.get_attr('state_dim')[0] # 获取第一个环境的 state_dim
-    # obs_dim 可以从 observation_space 获取
-    obs_shape = vec_env.observation_space.shape
-    # obs_shape is (num_envs, n_uavs, obs_dim_per_uav) if ParallelToArrayAdapter returns (n_uavs, obs_dim)
-    # Or obs_shape is (num_envs, obs_dim_flat) if adapter returns flattened obs
-    # Based on ParallelToArrayAdapter, it returns (n_uavs, obs_dim), so obs_shape[2] is obs_dim_per_uav
-    if len(obs_shape) == 3:
-         obs_dim = obs_shape[2]
-         n_uavs_check = obs_shape[1] # Should match config.n_agents
-         main_logger.info(f"从 observation_space 推断: obs_dim={obs_dim}, n_uavs={n_uavs_check}")
-         if n_uavs_check != config.n_agents:
-              main_logger.warning(f"从 observation_space 推断的 n_uavs ({n_uavs_check}) 与配置 ({config.n_agents}) 不匹配。")
-              # Fallback to getting from adapter attribute
-              obs_dim = vec_env.get_attr('obs_dim')[0]
-    else:
-         # Fallback if shape is not as expected
-         main_logger.warning("无法从 observation_space 推断 obs_dim，尝试从适配器属性获取。")
-         obs_dim = vec_env.get_attr('obs_dim')[0]
-
-    config.update_env_dims(state_dim, obs_dim)
-    main_logger.info(f"更新配置: state_dim={state_dim}, obs_dim={obs_dim}")
+    main_logger.info(f"配置已预先初始化: state_dim={config.state_dim}, obs_dim={config.obs_dim}, n_agents={config.n_agents}")
 
     # 创建日志目录
     log_dir = os.path.join(args.log_dir, f"sb3_multiproc_paper_config_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
@@ -718,6 +696,33 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     
     # 创建HMASD代理
     agent = HMASDAgent(config, log_dir=log_dir, device=device)
+    
+    # 如果指定了预训练模型路径，加载模型继续训练
+    if args.resume_from and os.path.exists(args.resume_from):
+        main_logger.info(f"加载预训练模型: {args.resume_from}")
+        try:
+            # 为了兼容新版PyTorch的安全加载机制，添加Config类到安全全局列表
+            import torch.serialization
+            torch.serialization.add_safe_globals([Config])
+            main_logger.debug("已将Config类添加到PyTorch安全全局列表")
+            
+            agent.load_model(args.resume_from)
+            main_logger.info(f"成功加载预训练模型，将在此基础上继续训练")
+            
+            # 记录续训信息到TensorBoard
+            agent.writer.add_text('Training/resumed_from', args.resume_from, 0)
+            agent.writer.add_text('Training/mode', 'resume_training', 0)
+        except Exception as e:
+            main_logger.error(f"加载预训练模型失败: {e}")
+            main_logger.info("将从头开始训练")
+            agent.writer.add_text('Training/mode', 'from_scratch_due_to_load_error', 0)
+    elif args.resume_from:
+        main_logger.warning(f"指定的预训练模型文件不存在: {args.resume_from}")
+        main_logger.info("将从头开始训练")
+        agent.writer.add_text('Training/mode', 'from_scratch_due_to_missing_file', 0)
+    else:
+        main_logger.info("从头开始训练")
+        agent.writer.add_text('Training/mode', 'from_scratch', 0)
     
     # 创建增强的奖励追踪器
     reward_tracker = EnhancedRewardTracker(log_dir, config)
@@ -1440,28 +1445,43 @@ def main():
         seed=base_seed + num_envs # Use different seeds for eval envs
     ) for i in range(eval_rollout_threads)]
 
-    # 创建向量化环境 (使用 SubprocVecEnv)
+    # 首先创建一个临时环境来获取维度信息
+    main_logger.info("创建临时环境以获取状态和观测维度...")
+    temp_env_fn = make_env(
+        scenario=args.scenario,
+        n_uavs=args.n_uavs,
+        n_users=args.n_users,
+        user_distribution=args.user_distribution,
+        channel_model=args.channel_model,
+        config=config,
+        max_hops=args.max_hops if args.scenario == 2 else None,
+        render_mode=None,
+        rank=0,
+        seed=base_seed
+    )
+    temp_env = temp_env_fn()
+    
+    # 从临时环境获取维度信息
+    state_dim = temp_env.state_dim
+    obs_dim = temp_env.obs_dim
+    n_agents_from_env = temp_env.n_uavs
+    
+    # 更新配置
+    config.update_env_dims(state_dim, obs_dim)
+    config.n_agents = n_agents_from_env
+    
+    main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}, n_agents={n_agents_from_env}")
+    
+    # 关闭临时环境
+    temp_env.close()
+    main_logger.info("临时环境已关闭")
+
+    # 现在创建向量化环境 (使用 SubprocVecEnv)
     main_logger.info("创建 SubprocVecEnv...")
     train_vec_env = SubprocVecEnv(train_env_fns, start_method='spawn') # Use spawn for better compatibility
     eval_vec_env = SubprocVecEnv(eval_env_fns, start_method='spawn')
     main_logger.info("SubprocVecEnv 已创建。")
 
-    # 更新配置中的智能体数量 (从环境中获取)
-    # SubprocVecEnv wraps the adapter, which wraps the raw env.
-    # We need to get n_uavs from the adapter.
-    try:
-         # Get n_uavs from the first environment's adapter instance
-         n_agents_from_env = train_vec_env.get_attr('n_uavs')[0]
-         config.n_agents = n_agents_from_env
-         main_logger.info(f"从环境更新智能体数量: n_agents={config.n_agents}")
-    except Exception as e:
-         main_logger.warning(f"无法从环境获取 n_uavs: {e}. 使用命令行参数: {args.n_uavs}")
-         config.n_agents = args.n_uavs # Fallback to argument
-
-    # 获取 state_dim 和 obs_dim 用于打印 (已在 train 函数中处理)
-    # state_dim_print = train_vec_env.get_attr('state_dim')[0]
-    # obs_dim_print = train_vec_env.get_attr('obs_dim')[0]
-    # print(f"环境已创建: n_agents={config.n_agents}, state_dim={state_dim_print}, obs_dim={obs_dim_print}")
     main_logger.info(f"使用论文中的超参数: n_Z={config.n_Z}, n_z={config.n_z}, k={config.k}, lambda_e={config.lambda_e}")
 
     if args.mode == 'train':

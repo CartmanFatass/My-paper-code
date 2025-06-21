@@ -105,8 +105,9 @@ class StateEncoder(nn.Module):
     def __init__(self, state_dim, obs_dim, embedding_dim, n_layers, n_heads):
         super(StateEncoder, self).__init__()
         
-        self.state_embedding = None  # 将在forward方法中根据实际输入维度初始化
-        self.obs_embedding = None  # 将在forward方法中根据实际输入维度初始化
+        # 及早初始化嵌入层，而不是延迟初始化
+        self.state_embedding = nn.Linear(state_dim, embedding_dim)
+        self.obs_embedding = nn.Linear(obs_dim, embedding_dim)
         self.embedding_dim = embedding_dim
         self.positional_encoding = PositionalEncoding(embedding_dim)
         
@@ -117,6 +118,14 @@ class StateEncoder(nn.Module):
             batch_first=True
         )
         self.transformer_encoder = nn.TransformerEncoder(encoder_layer, n_layers)
+        
+        # 初始化权重
+        self._init_weights()
+    
+    def _init_weights(self):
+        """初始化网络权重"""
+        initialize_weights(self.state_embedding, gain=1.0)
+        initialize_weights(self.obs_embedding, gain=1.0)
     
     def forward(self, state, observations):
         """
@@ -134,17 +143,6 @@ class StateEncoder(nn.Module):
         # 确保输入是float32类型
         state = state.float()
         observations = observations.float()
-        
-        # 根据实际输入维度初始化嵌入层（如果尚未初始化）
-        if self.state_embedding is None:
-            main_logger.info(f"初始化state_embedding: 实际状态维度 = {state_dim}")
-            self.state_embedding = nn.Linear(state_dim, self.embedding_dim)
-            self.state_embedding = self.state_embedding.to(state.device)
-            
-        if self.obs_embedding is None:
-            main_logger.info(f"初始化obs_embedding: 实际观测维度 = {obs_dim}")
-            self.obs_embedding = nn.Linear(obs_dim, self.embedding_dim)
-            self.obs_embedding = self.obs_embedding.to(observations.device)
         
         # 嵌入全局状态和局部观测
         embedded_state = self.state_embedding(state).unsqueeze(1)  # [batch_size, 1, embedding_dim]
@@ -532,9 +530,8 @@ class SkillDiscoverer(nn.Module):
         self.gru_hidden_dim = config.gru_hidden_size
         
         # Actor网络（每个智能体共享）
-        # 使用实际观测维度初始化网络，而不是配置中的obs_dim
-        # 这样可以处理不同场景中不同的观测维度
-        self.actor_mlp = None  # 将在forward方法中根据实际输入维度初始化
+        # 及早初始化网络层，避免延迟初始化导致的模型加载问题
+        self.actor_mlp = MLP(config.obs_dim + config.n_z, config.hidden_size, config.hidden_size)
         self.actor_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
         
         # 动作均值和标准差
@@ -548,18 +545,21 @@ class SkillDiscoverer(nn.Module):
         self.actor_hidden = None
         
         # Critic网络（中心化价值函数）
-        self.critic_mlp = None  # 将在get_value方法中根据实际输入维度初始化
+        self.critic_mlp = MLP(config.state_dim + config.n_Z, config.hidden_size, config.hidden_size)
         self.critic_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
         self.value_head = nn.Linear(config.gru_hidden_size, 1)
         
         # 重置参数
         self.critic_hidden = None
         
-        # 初始化GRU和价值头的权重
+        # 初始化网络权重
         self._init_weights()
     
     def _init_weights(self):
         """初始化网络权重，提高训练稳定性"""
+        # 初始化MLP层权重 (已在MLP构造函数中完成，这里无需重复)
+        # self.actor_mlp 和 self.critic_mlp 在构造时已经初始化了权重
+        
         # 初始化GRU权重
         initialize_weights(self.actor_gru, gain=1.0)
         initialize_weights(self.critic_gru, gain=1.0)
@@ -614,14 +614,6 @@ class SkillDiscoverer(nn.Module):
         
         # 拼接状态和团队技能
         critic_input = torch.cat([state, team_skill_onehot], dim=-1)
-        
-        # 根据实际输入维度初始化critic_mlp（如果尚未初始化）
-        if not hasattr(self, 'critic_mlp') or self.critic_mlp is None:
-            actual_state_dim = state.size(-1)
-            main_logger.info(f"初始化critic_mlp: 实际状态维度 = {actual_state_dim}, 团队技能维度 = {self.config.n_Z}")
-            self.critic_mlp = MLP(actual_state_dim + self.config.n_Z, self.hidden_dim, self.hidden_dim)
-            # 将critic_mlp移动到与state相同的设备上
-            self.critic_mlp = self.critic_mlp.to(state.device)
         
         # 前向传播
         critic_features = self.critic_mlp(critic_input)
@@ -682,14 +674,6 @@ class SkillDiscoverer(nn.Module):
         # 拼接观测和个体技能
         actor_input = torch.cat([observation, agent_skill_onehot], dim=-1)
         self.logger.debug(f"SkillDiscoverer.forward: actor_input shape: {actor_input.shape}, dtype: {actor_input.dtype}")
-        
-        # 根据实际输入维度初始化actor_mlp（如果尚未初始化）
-        if self.actor_mlp is None:
-            actual_obs_dim = observation.size(-1)
-            print(f"初始化actor_mlp: 实际观测维度 = {actual_obs_dim}, 技能维度 = {self.n_z}")
-            self.actor_mlp = MLP(actual_obs_dim + self.n_z, self.hidden_dim, self.hidden_dim)
-            # 将actor_mlp移动到与observation相同的设备上
-            self.actor_mlp = self.actor_mlp.to(observation.device)
         
         # 前向传播
         actor_features = self.actor_mlp(actor_input).unsqueeze(1)  # 添加时序维度

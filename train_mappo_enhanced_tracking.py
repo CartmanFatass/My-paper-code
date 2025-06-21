@@ -1407,6 +1407,7 @@ def train(config, args, device):
     
     while total_steps < config.total_timesteps:
         try:
+            rollout_throughputs = []
             # 定期记录内存使用情况
             if total_steps % 1000 == 0:
                 log_memory_usage(main_logger, total_steps)
@@ -1507,6 +1508,11 @@ def train(config, args, device):
                         main_logger.error(f"连续错误达到 {max_consecutive_errors} 次，退出训练")
                         break
                     continue
+                
+                # 从info中收集吞吐量数据
+                for info in infos:
+                    if 'reward_info' in info and 'system_throughput_mbps' in info['reward_info']:
+                        rollout_throughputs.append(info['reward_info']['system_throughput_mbps'])
                 
                 # 转换为数组
                 try:
@@ -1619,6 +1625,12 @@ def train(config, args, device):
             
             # Rollout数据收集完成，进行网络更新
             try:
+                # 记录rollout的平均吞吐量
+                if rollout_throughputs:
+                    avg_throughput = np.mean(rollout_throughputs)
+                    agent.writer.add_scalar('Performance/System_Throughput_Mbps', avg_throughput, total_steps)
+                    main_logger.debug(f"Rollout Throughput: Avg={avg_throughput:.2f} Mbps over {len(rollout_throughputs)} samples")
+
                 if len(agent.buffer) >= agent.config.batch_size:
                     update_info = agent.update()
                     if update_info and 'error' not in update_info:
