@@ -6,6 +6,68 @@ from torch.distributions import Normal, Categorical
 import logging
 from logger import main_logger
 
+def sparsemax(logits, dim=-1):
+    """
+    Sparsemax激活函数实现
+    基于论文: "From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification"
+    
+    参数:
+        logits: 输入张量 [..., d]
+        dim: 应用sparsemax的维度
+        
+    返回:
+        稀疏概率分布 [..., d]
+    """
+    # 获取输入的形状和设备
+    original_shape = logits.shape
+    device = logits.device
+    
+    # 重塑为二维张量以便处理
+    if dim != -1 and dim != len(original_shape) - 1:
+        # 将指定维度移动到最后
+        logits = logits.transpose(dim, -1)
+    
+    # 展平除最后一维外的所有维度
+    batch_size = logits.shape[:-1].numel()
+    d = logits.shape[-1]
+    logits_2d = logits.reshape(batch_size, d)
+    
+    # 对每个样本应用sparsemax
+    output = torch.zeros_like(logits_2d)
+    
+    for i in range(batch_size):
+        z = logits_2d[i]
+        
+        # 按降序排序
+        z_sorted, _ = torch.sort(z, descending=True)
+        
+        # 计算累积和
+        cumsum = torch.cumsum(z_sorted, dim=0)
+        
+        # 找到支持集大小
+        k_vals = torch.arange(1, d + 1, device=device, dtype=torch.float32)
+        support_condition = 1 + k_vals * z_sorted > cumsum
+        
+        if support_condition.any():
+            k = support_condition.nonzero()[-1].item() + 1
+        else:
+            k = 1
+        
+        # 计算阈值
+        tau = (cumsum[k-1] - 1) / k
+        
+        # 应用阈值
+        output[i] = torch.clamp(z - tau, min=0.0)
+    
+    # 重塑回原始形状
+    output = output.reshape(original_shape)
+    
+    # 如果之前移动了维度，现在移回去
+    if dim != -1 and dim != len(original_shape) - 1:
+        output = output.transpose(dim, -1)
+    
+    return output
+
 def initialize_weights(module, gain=1.0, last_layer_gain=None):
     """
     初始化网络权重，防止数值不稳定。
@@ -34,12 +96,14 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
                     nn.init.orthogonal_(m.weight.data, last_layer_gain)
                 else:
                     nn.init.orthogonal_(m.weight.data, gain)
-                nn.init.zeros_(m.bias.data)
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias.data)
     
     elif isinstance(module, nn.Linear):
         # 单个线性层
         nn.init.orthogonal_(module.weight.data, gain)
-        nn.init.zeros_(module.bias.data)
+        if module.bias is not None:
+            nn.init.zeros_(module.bias.data)
     
     elif isinstance(module, nn.GRU) or isinstance(module, nn.LSTM):
         # RNN层
@@ -100,10 +164,259 @@ class PositionalEncoding(nn.Module):
         x = x + self.pe[:, :x.size(1)]
         return x
 
+class OPT(nn.Module):
+    """
+    OPT (Interaction Pattern Disentangling) 模块
+    基于论文: "Interaction Pattern Disentangling for Multi-Agent Reinforcement Learning"
+    """
+    def __init__(self, input_dim, num_prototypes, prototype_dim, num_layers=1):
+        super(OPT, self).__init__()
+        
+        self.input_dim = input_dim
+        self.num_prototypes = num_prototypes  # N
+        self.prototype_dim = prototype_dim    # d_x
+        self.num_layers = num_layers
+        
+        # 输入嵌入层
+        self.input_embedding = nn.Linear(input_dim, prototype_dim)
+        
+        # N个交互原型的参数矩阵（每个原型有独立的Q, K, V）
+        self.prototype_projections = nn.ModuleList([
+            nn.ModuleDict({
+                'W_Q': nn.Linear(prototype_dim, prototype_dim, bias=False),
+                'W_K': nn.Linear(prototype_dim, prototype_dim, bias=False),
+                'W_V': nn.Linear(prototype_dim, prototype_dim, bias=False)
+            }) for _ in range(num_prototypes)
+        ])
+        
+        # 原型聚合器 (Prototype Aggregator)
+        self.prototype_aggregator = nn.Sequential(
+            nn.Linear(prototype_dim, prototype_dim // 2),
+            nn.ReLU(),
+            nn.Linear(prototype_dim // 2, num_prototypes),
+            nn.Softmax(dim=-1)
+        )
+        
+        # 变分近似器 (用于CMI损失)
+        self.variational_approximator = nn.Sequential(
+            nn.Linear(prototype_dim, prototype_dim // 2),
+            nn.ReLU(),
+            nn.Linear(prototype_dim // 2, num_prototypes),
+            nn.Softmax(dim=-1)
+        )
+        
+        # 历史编码器 (GRU for history encoding)
+        self.history_encoder = nn.GRU(
+            input_size=prototype_dim,
+            hidden_size=prototype_dim,
+            batch_first=True
+        )
+        
+        # 初始化权重
+        self._init_weights()
+    
+    def _init_weights(self):
+        """初始化网络权重"""
+        initialize_weights(self.input_embedding, gain=1.0)
+        
+        # 初始化原型投影层
+        for prototype_proj in self.prototype_projections:
+            for layer in prototype_proj.values():
+                initialize_weights(layer, gain=1.0)
+        
+        # 初始化聚合器
+        for layer in self.prototype_aggregator:
+            if isinstance(layer, nn.Linear):
+                initialize_weights(layer, gain=1.0)
+        
+        # 初始化变分近似器
+        for layer in self.variational_approximator:
+            if isinstance(layer, nn.Linear):
+                initialize_weights(layer, gain=1.0)
+        
+        # 初始化GRU
+        initialize_weights(self.history_encoder, gain=1.0)
+    
+    def disentangling_step(self, X):
+        """
+        解耦步骤：生成N个稀疏交互原型
+        
+        参数:
+            X: 输入嵌入 [batch_size, M, prototype_dim]
+            
+        返回:
+            prototypes: 交互原型列表 [N个 [batch_size, M, M]]
+            prototype_values: 对应的值矩阵列表 [N个 [batch_size, M, prototype_dim]]
+        """
+        batch_size, M, _ = X.shape
+        device = X.device
+        
+        prototypes = []
+        prototype_values = []
+        
+        for n in range(self.num_prototypes):
+            # 获取第n个原型的投影矩阵
+            W_Q = self.prototype_projections[n]['W_Q']
+            W_K = self.prototype_projections[n]['W_K']
+            W_V = self.prototype_projections[n]['W_V']
+            
+            # 计算Q, K, V
+            Q = W_Q(X)  # [batch_size, M, prototype_dim]
+            K = W_K(X)  # [batch_size, M, prototype_dim]
+            V = W_V(X)  # [batch_size, M, prototype_dim]
+            
+            # 计算注意力权重
+            attention_scores = torch.bmm(Q, K.transpose(1, 2)) / np.sqrt(self.prototype_dim)  # [batch_size, M, M]
+            
+            # 应用sparsemax而不是softmax
+            P_n = sparsemax(attention_scores, dim=-1)  # [batch_size, M, M]
+            
+            # 计算原型值
+            prototype_value = torch.bmm(P_n, V)  # [batch_size, M, prototype_dim]
+            
+            prototypes.append(P_n)
+            prototype_values.append(prototype_value)
+        
+        return prototypes, prototype_values
+    
+    def compute_cd_loss(self, prototype_values):
+        """
+        计算对比散度损失 (Contrastive Disagreement Loss)
+        
+        参数:
+            prototype_values: 原型值列表 [N个 [batch_size, M, prototype_dim]]
+            
+        返回:
+            cd_loss: 对比散度损失
+        """
+        if len(prototype_values) < 2:
+            return torch.tensor(0.0, device=prototype_values[0].device, requires_grad=True)
+        
+        batch_size, M, prototype_dim = prototype_values[0].shape
+        device = prototype_values[0].device
+        
+        # 对每个实体计算对比损失
+        total_loss = 0.0
+        num_entities = 0
+        
+        for e in range(M):  # 对每个实体
+            entity_prototypes = []
+            for n in range(len(prototype_values)):
+                # 获取实体e在原型n下的表示
+                entity_repr = prototype_values[n][:, e, :]  # [batch_size, prototype_dim]
+                entity_prototypes.append(entity_repr)
+            
+            # 计算对比损失
+            for n in range(len(entity_prototypes)):
+                positive = entity_prototypes[n]  # [batch_size, prototype_dim]
+                
+                # 计算与自身的相似度（正样本）
+                pos_sim = torch.sum(positive * positive, dim=-1)  # [batch_size]
+                
+                # 计算与其他原型的相似度（负样本）
+                neg_sims = []
+                for i in range(len(entity_prototypes)):
+                    if i != n:
+                        negative = entity_prototypes[i]
+                        neg_sim = torch.sum(positive * negative, dim=-1)  # [batch_size]
+                        neg_sims.append(torch.exp(neg_sim))
+                
+                if neg_sims:
+                    neg_sum = torch.stack(neg_sims, dim=0).sum(dim=0)  # [batch_size]
+                    loss = -torch.log(torch.exp(pos_sim) / (torch.exp(pos_sim) + neg_sum + 1e-8))
+                    total_loss += loss.mean()
+                    num_entities += 1
+        
+        if num_entities > 0:
+            return total_loss / num_entities
+        else:
+            return torch.tensor(0.0, device=device, requires_grad=True)
+    
+    def restructuring_step(self, prototype_values, global_context, history_context=None):
+        """
+        重构步骤：根据全局上下文聚合交互原型
+        
+        参数:
+            prototype_values: 原型值列表 [N个 [batch_size, M, prototype_dim]]
+            global_context: 全局上下文 [batch_size, prototype_dim]
+            history_context: 历史上下文 [batch_size, prototype_dim] (用于CMI损失)
+            
+        返回:
+            final_output: 最终输出 [batch_size, M, prototype_dim]
+            aggregation_weights: 聚合权重 [batch_size, num_prototypes]
+            cmi_loss: 条件互信息损失
+        """
+        batch_size = global_context.shape[0]
+        device = global_context.device
+        
+        # 计算聚合权重
+        aggregation_weights = self.prototype_aggregator(global_context)  # [batch_size, num_prototypes]
+        
+        # 加权聚合原型值
+        final_output = torch.zeros_like(prototype_values[0])  # [batch_size, M, prototype_dim]
+        
+        for n, prototype_value in enumerate(prototype_values):
+            weight = aggregation_weights[:, n:n+1].unsqueeze(2)  # [batch_size, 1, 1]
+            final_output += weight * prototype_value
+        
+        # 计算CMI损失
+        cmi_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        if history_context is not None:
+            # 变分近似器估计后验分布
+            q_posterior = self.variational_approximator(history_context)  # [batch_size, num_prototypes]
+            p_prior = aggregation_weights  # [batch_size, num_prototypes]
+            
+            # 计算KL散度
+            kl_div = F.kl_div(
+                q_posterior.log(),
+                p_prior,
+                reduction='batchmean'
+            )
+            cmi_loss = kl_div
+        
+        return final_output, aggregation_weights, cmi_loss
+    
+    def forward(self, X, history_context=None):
+        """
+        前向传播
+        
+        参数:
+            X: 输入序列 [batch_size, M, input_dim]
+            history_context: 历史上下文 [batch_size, prototype_dim] (可选)
+            
+        返回:
+            output: 输出 [batch_size, M, prototype_dim]
+            cd_loss: 对比散度损失
+            cmi_loss: 条件互信息损失
+            aggregation_weights: 聚合权重
+        """
+        # 输入嵌入
+        X_embedded = self.input_embedding(X)  # [batch_size, M, prototype_dim]
+        
+        # 解耦步骤
+        prototypes, prototype_values = self.disentangling_step(X_embedded)
+        
+        # 计算对比散度损失
+        cd_loss = self.compute_cd_loss(prototype_values)
+        
+        # 计算全局上下文（均值池化）
+        global_context = X_embedded.mean(dim=1)  # [batch_size, prototype_dim]
+        
+        # 重构步骤
+        output, aggregation_weights, cmi_loss = self.restructuring_step(
+            prototype_values, global_context, history_context
+        )
+        
+        return output, cd_loss, cmi_loss, aggregation_weights
+
+
 class StateEncoder(nn.Module):
     """状态编码器"""
-    def __init__(self, state_dim, obs_dim, embedding_dim, n_layers, n_heads):
+    def __init__(self, state_dim, obs_dim, embedding_dim, n_layers, n_heads, config=None):
         super(StateEncoder, self).__init__()
+        
+        self.config = config
+        self.use_opt = config.use_opt if config is not None else False
         
         # 及早初始化嵌入层，而不是延迟初始化
         self.state_embedding = nn.Linear(state_dim, embedding_dim)
@@ -111,13 +424,28 @@ class StateEncoder(nn.Module):
         self.embedding_dim = embedding_dim
         self.positional_encoding = PositionalEncoding(embedding_dim)
         
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=embedding_dim,
-            nhead=n_heads,
-            dim_feedforward=embedding_dim * 4,
-            batch_first=True
-        )
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, n_layers)
+        if self.use_opt:
+            # 使用OPT模块
+            self.opt_module = OPT(
+                input_dim=embedding_dim,
+                num_prototypes=config.opt_num_prototypes,
+                prototype_dim=config.opt_prototype_dim,
+                num_layers=config.opt_layers
+            )
+            # 投影层将OPT输出映射回embedding_dim
+            if config.opt_prototype_dim != embedding_dim:
+                self.output_projection = nn.Linear(config.opt_prototype_dim, embedding_dim)
+            else:
+                self.output_projection = nn.Identity()
+        else:
+            # 使用标准的Transformer编码器
+            encoder_layer = nn.TransformerEncoderLayer(
+                d_model=embedding_dim,
+                nhead=n_heads,
+                dim_feedforward=embedding_dim * 4,
+                batch_first=True
+            )
+            self.transformer_encoder = nn.TransformerEncoder(encoder_layer, n_layers)
         
         # 初始化权重
         self._init_weights()
@@ -126,16 +454,22 @@ class StateEncoder(nn.Module):
         """初始化网络权重"""
         initialize_weights(self.state_embedding, gain=1.0)
         initialize_weights(self.obs_embedding, gain=1.0)
+        
+        if self.use_opt and hasattr(self, 'output_projection'):
+            initialize_weights(self.output_projection, gain=1.0)
     
-    def forward(self, state, observations):
+    def forward(self, state, observations, history_context=None):
         """
         参数:
             state: 全局状态 [batch_size, state_dim]
             observations: 所有智能体观测 [batch_size, n_agents, obs_dim]
+            history_context: 历史上下文 [batch_size, prototype_dim] (仅在使用OPT时需要)
             
         返回:
             encoded_state: 编码后的状态 [batch_size, 1, embedding_dim]
             encoded_observations: 编码后的观测 [batch_size, n_agents, embedding_dim]
+            cd_loss: 对比散度损失 (仅在使用OPT时)
+            cmi_loss: 条件互信息损失 (仅在使用OPT时)
         """
         batch_size, n_agents, obs_dim = observations.size()
         state_dim = state.size(-1)
@@ -155,14 +489,32 @@ class StateEncoder(nn.Module):
         # 位置编码
         sequence = self.positional_encoding(sequence)
         
-        # Transformer编码器
-        encoded_sequence = self.transformer_encoder(sequence)
-        
-        # 拆分回状态和观测
-        encoded_state = encoded_sequence[:, 0:1, :]
-        encoded_observations = encoded_sequence[:, 1:, :]
-        
-        return encoded_state, encoded_observations
+        if self.use_opt:
+            # 使用OPT模块
+            opt_output, cd_loss, cmi_loss, aggregation_weights = self.opt_module(sequence, history_context)
+            
+            # 投影回原始维度
+            encoded_sequence = self.output_projection(opt_output)
+            
+            # 拆分回状态和观测
+            encoded_state = encoded_sequence[:, 0:1, :]
+            encoded_observations = encoded_sequence[:, 1:, :]
+            
+            return encoded_state, encoded_observations, cd_loss, cmi_loss
+        else:
+            # 使用标准的Transformer编码器
+            encoded_sequence = self.transformer_encoder(sequence)
+            
+            # 拆分回状态和观测
+            encoded_state = encoded_sequence[:, 0:1, :]
+            encoded_observations = encoded_sequence[:, 1:, :]
+            
+            # 返回零损失以保持接口一致性
+            device = sequence.device
+            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
+            cmi_loss = torch.tensor(0.0, device=device, requires_grad=True)
+            
+            return encoded_state, encoded_observations, cd_loss, cmi_loss
 
 class SkillDecoder(nn.Module):
     """技能解码器"""
@@ -329,7 +681,8 @@ class SkillCoordinator(nn.Module):
             config.obs_dim,
             config.embedding_dim,
             config.n_encoder_layers,
-            config.n_heads
+            config.n_heads,
+            config
         )
         
         # 技能解码器
@@ -357,9 +710,9 @@ class SkillCoordinator(nn.Module):
         for value_head in self.value_heads_obs:
             initialize_weights(value_head, gain=0.01)
     
-    def get_value(self, state, observations):
+    def get_value(self, state, observations, history_context=None):
         """获取高层价值函数值"""
-        encoded_state, encoded_observations = self.state_encoder(state, observations)
+        encoded_state, encoded_observations, _, _ = self.state_encoder(state, observations, history_context)
         
         # 全局状态价值
         state_value = self.value_head_state(encoded_state.squeeze(1))
@@ -372,7 +725,7 @@ class SkillCoordinator(nn.Module):
             
         return state_value, agent_values
     
-    def forward(self, state, observations, deterministic=False):
+    def forward(self, state, observations, deterministic=False, history_context=None):
         """
         前向传播，按顺序生成技能
         
@@ -380,12 +733,15 @@ class SkillCoordinator(nn.Module):
             state: 全局状态 [batch_size, state_dim]
             observations: 所有智能体观测 [batch_size, n_agents, obs_dim]
             deterministic: 是否使用确定性策略
+            history_context: 历史上下文 [batch_size, prototype_dim] (仅在使用OPT时需要)
             
         返回:
             Z: 团队技能索引 [batch_size]
             z: 个体技能索引 [batch_size, n_agents]
             Z_logits: 团队技能logits [batch_size, n_Z]
             z_logits: 个体技能logits列表 [n_agents个 [batch_size, n_z]]
+            cd_loss: 对比散度损失 (仅在使用OPT时)
+            cmi_loss: 条件互信息损失 (仅在使用OPT时)
         """
         batch_size = state.size(0)
         n_agents = observations.size(1)
@@ -396,7 +752,7 @@ class SkillCoordinator(nn.Module):
         observations = observations.float()
         
         # 编码状态和观测
-        encoded_state, encoded_observations = self.state_encoder(state, observations)
+        encoded_state, encoded_observations, cd_loss, cmi_loss = self.state_encoder(state, observations, history_context)
         
         # 生成团队技能Z
         Z_logits = self.skill_decoder(encoded_state, encoded_observations)
@@ -503,7 +859,7 @@ class SkillCoordinator(nn.Module):
                     z[:, i] = 0  # 使用0作为默认技能索引
                     main_logger.warning(f"已为第{i}个智能体使用默认技能索引0")
                 
-            return Z, z, Z_logits, z_logits
+            return Z, z, Z_logits, z_logits, cd_loss, cmi_loss
             
         except Exception as e:
             main_logger.error(f"在SkillCoordinator.forward中创建Categorical分布时发生错误: {e}")
@@ -513,7 +869,7 @@ class SkillCoordinator(nn.Module):
             default_Z_logits = torch.zeros((batch_size, self.n_Z), device=device)
             default_z_logits = [torch.zeros((batch_size, self.n_z), device=device) for _ in range(n_agents)]
             main_logger.warning("由于错误，返回默认值")
-            return default_Z, default_z, default_Z_logits, default_z_logits
+            return default_Z, default_z, default_Z_logits, default_z_logits, cd_loss, cmi_loss
 
 class SkillDiscoverer(nn.Module):
     """技能发现器（低层策略）"""

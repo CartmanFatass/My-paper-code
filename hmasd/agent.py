@@ -232,7 +232,7 @@ class HMASDAgent:
         obs_tensor = torch.FloatTensor(observations).unsqueeze(0).to(self.device)
         
         with torch.no_grad():
-            team_skill, agent_skills, Z_logits, z_logits = self.skill_coordinator(
+            team_skill, agent_skills, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(
                 state_tensor, obs_tensor, deterministic
             )
             
@@ -727,7 +727,7 @@ class HMASDAgent:
         
         # 获取当前策略
         try:
-            Z, z, Z_logits, z_logits = self.skill_coordinator(states, observations)
+            Z, z, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(states, observations)
             
             # 在使用logits前检查是否有异常值
             Z_logits_has_nan = torch.isnan(Z_logits).any().item()

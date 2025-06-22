@@ -62,6 +62,14 @@ class Config:
     use_huber_loss = True    # 使用Huber损失
     huber_delta = 10         # Huber delta
     
+    # OPT (Interaction Pattern Disentangling) 参数 - 基于论文《Interaction Pattern Disentangling for Multi-Agent Reinforcement Learning》
+    use_opt = True           # 是否使用OPT模块 (设为False可对比原始性能)
+    opt_num_prototypes = 4   # 交互原型数量 (论文中N=4)
+    opt_prototype_dim = 32   # 交互原型特征维度 (论文中d_x=32)
+    opt_alpha = 0.5          # 对比散度损失权重 (论文中α=0.5)
+    opt_beta = 0.1           # 条件互信息损失权重 (论文中β=0.1)
+    opt_layers = 2           # OPT模块层数 (论文中K=2)
+    
     # 环境奖励权重配置 - 场景2协作组网
     coverage_weight = 0.0      # 覆盖率权重 (保持)
     quality_weight = 0.0       # 服务质量权重 (设为0，不考虑)
