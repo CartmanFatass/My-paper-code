@@ -26,6 +26,7 @@ from config_1 import Config
 from hmasd.agent import HMASDAgent
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
+from envs.pettingzoo.scenario3 import UAVMultiHopEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 # Removed VectorizedEnvAdapter class
@@ -71,7 +72,24 @@ class EnhancedRewardTracker:
             'served_users': [],
             'network_efficiency': [],
             'total_throughput': [],  # 新增：总吞吐量记录
-            'avg_throughput_per_user': []  # 新增：平均用户吞吐量记录
+            'avg_throughput_per_user': [],  # 新增：平均用户吞吐量记录
+            
+            # 奖励组成部分记录 (场景2和场景3通用)
+            'reward_components': {
+                # 通用奖励组成
+                'throughput_rewards': [],  # 吞吐量奖励 (场景2和3都有)
+                'coverage_rewards': [],    # 覆盖率奖励 (场景2有)
+                
+                # 场景3特有的奖励组成
+                'effective_coverage_rewards': [],    # 有效覆盖率奖励
+                'load_balance_rewards': [],          # 负载均衡奖励
+                'network_connectivity_rewards': [],  # 网络连通性奖励
+                
+                # 其他指标
+                'avg_hops': [],           # 平均跳数
+                'connected_users': [],    # 连接用户数
+                'coverage_ratios': []     # 覆盖率比例
+            }
         }
         
         # 滑动窗口统计
@@ -144,6 +162,74 @@ class EnhancedRewardTracker:
                         'step': step,
                         'env_id': env_id,
                         'avg_throughput_per_user_mbps': reward_info['avg_throughput_per_user_mbps'],
+                        'timestamp': time.time()
+                    })
+                
+                # 记录奖励组成部分 (场景2和场景3通用)
+                # 通用指标
+                if 'throughput_reward' in reward_info:
+                    self.performance_metrics['reward_components']['throughput_rewards'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['throughput_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                if 'coverage_reward' in reward_info:
+                    self.performance_metrics['reward_components']['coverage_rewards'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['coverage_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                # 场景3特有指标
+                if 'effective_coverage_reward' in reward_info:
+                    self.performance_metrics['reward_components']['effective_coverage_rewards'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['effective_coverage_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                if 'load_balance_reward' in reward_info:
+                    self.performance_metrics['reward_components']['load_balance_rewards'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['load_balance_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                if 'network_connectivity_reward' in reward_info:
+                    self.performance_metrics['reward_components']['network_connectivity_rewards'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['network_connectivity_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                # 其他有用指标
+                if 'avg_hops' in reward_info:
+                    self.performance_metrics['reward_components']['avg_hops'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['avg_hops'],
+                        'timestamp': time.time()
+                    })
+                
+                if 'connected_users' in reward_info:
+                    self.performance_metrics['reward_components']['connected_users'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['connected_users'],
+                        'timestamp': time.time()
+                    })
+                
+                if 'coverage_ratio' in reward_info:
+                    self.performance_metrics['reward_components']['coverage_ratios'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['coverage_ratio'],
                         'timestamp': time.time()
                     })
     
@@ -515,6 +601,60 @@ class EnhancedRewardTracker:
                     if throughput_values:
                         env_avg_user_throughput = np.mean(throughput_values)
                         writer.add_scalar(f'Performance/Env_{env_id}_Avg_User_Throughput_Mbps', env_avg_user_throughput, step)
+        
+        # 记录环境奖励组成部分到TensorBoard (场景2和场景3通用)
+        reward_components = self.performance_metrics['reward_components']
+        
+        # 通用奖励组成
+        if reward_components['throughput_rewards']:
+            recent_throughput_rewards = reward_components['throughput_rewards'][-100:]
+            if recent_throughput_rewards:
+                avg_throughput_reward = np.mean([r['value'] for r in recent_throughput_rewards])
+                writer.add_scalar('Reward_Components/Throughput_Reward_100steps', avg_throughput_reward, step)
+        
+        if reward_components['coverage_rewards']:
+            recent_coverage_rewards = reward_components['coverage_rewards'][-100:]
+            if recent_coverage_rewards:
+                avg_coverage_reward = np.mean([r['value'] for r in recent_coverage_rewards])
+                writer.add_scalar('Reward_Components/Coverage_Reward_100steps', avg_coverage_reward, step)
+        
+        # 场景3特有奖励组成
+        if reward_components['effective_coverage_rewards']:
+            recent_effective_coverage = reward_components['effective_coverage_rewards'][-100:]
+            if recent_effective_coverage:
+                avg_effective_coverage = np.mean([r['value'] for r in recent_effective_coverage])
+                writer.add_scalar('Reward_Components/Effective_Coverage_Reward_100steps', avg_effective_coverage, step)
+        
+        if reward_components['load_balance_rewards']:
+            recent_load_balance = reward_components['load_balance_rewards'][-100:]
+            if recent_load_balance:
+                avg_load_balance = np.mean([r['value'] for r in recent_load_balance])
+                writer.add_scalar('Reward_Components/Load_Balance_Reward_100steps', avg_load_balance, step)
+        
+        if reward_components['network_connectivity_rewards']:
+            recent_network_connectivity = reward_components['network_connectivity_rewards'][-100:]
+            if recent_network_connectivity:
+                avg_network_connectivity = np.mean([r['value'] for r in recent_network_connectivity])
+                writer.add_scalar('Reward_Components/Network_Connectivity_Reward_100steps', avg_network_connectivity, step)
+        
+        # 其他有用指标
+        if reward_components['avg_hops']:
+            recent_avg_hops = reward_components['avg_hops'][-100:]
+            if recent_avg_hops:
+                avg_hops_value = np.mean([r['value'] for r in recent_avg_hops])
+                writer.add_scalar('Performance/Avg_Hops_100steps', avg_hops_value, step)
+        
+        if reward_components['connected_users']:
+            recent_connected_users = reward_components['connected_users'][-100:]
+            if recent_connected_users:
+                avg_connected_users = np.mean([r['value'] for r in recent_connected_users])
+                writer.add_scalar('Performance/Connected_Users_100steps', avg_connected_users, step)
+        
+        if reward_components['coverage_ratios']:
+            recent_coverage_ratios = reward_components['coverage_ratios'][-100:]
+            if recent_coverage_ratios:
+                avg_coverage_ratio = np.mean([r['value'] for r in recent_coverage_ratios])
+                writer.add_scalar('Performance/Coverage_Ratio_100steps', avg_coverage_ratio, step)
     
     def get_summary_statistics(self):
         """获取训练摘要统计信息"""
@@ -568,21 +708,25 @@ def get_device(device_pref):
         return torch.device('cpu')
 
 # 创建环境函数 (修改后用于 SubprocVecEnv)
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0):
+def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0, n_clusters=None, cluster_std=None, central_area_ratio=None, area_size=None):
     """
     创建环境实例的函数 (用于 SubprocVecEnv)
 
     参数:
-        scenario: 场景编号 (1=基站模式, 2=协作组网模式)
+        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式)
         n_uavs: 无人机数量
         n_users: 用户数量
         user_distribution: 用户分布类型
         channel_model: 信道模型
         config: 配置对象，包含奖励权重等参数
-        max_hops: 最大跳数 (仅用于场景2)
+        max_hops: 最大跳数 (仅用于场景2和3)
         render_mode: 渲染模式
         rank: 环境的索引 (用于设置不同的种子)
         seed: 基础随机种子
+        n_clusters: 用户簇数量 (仅用于场景3)
+        cluster_std: 簇内用户分布标准差 (仅用于场景3)
+        central_area_ratio: 中心用户区域占总区域的比例 (仅用于场景3)
+        area_size: 区域大小 (仅用于场景3)
 
     返回:
         一个返回环境实例的函数
@@ -599,16 +743,7 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                 seed=env_seed # 将种子传递给原始环境
             )
         elif scenario == 2:
-            # 准备奖励权重参数（如果配置可用）
-            reward_kwargs = {}
-            if config is not None:
-                reward_kwargs.update({
-                    'coverage_weight': config.coverage_weight,
-                    'quality_weight': config.quality_weight,
-                    'connectivity_weight': config.connectivity_weight,
-                    'throughput_weight': config.throughput_weight
-                })
-            
+            # 场景2不再需要传递奖励权重参数，奖励已固化为覆盖率+归一化吞吐量
             raw_env = UAVCooperativeNetworkEnv(
                 n_uavs=n_uavs,
                 n_users=n_users,
@@ -616,8 +751,40 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                 user_distribution=user_distribution,
                 channel_model=channel_model,
                 render_mode=render_mode,
+                seed=env_seed # 将种子传递给原始环境
+            )
+        elif scenario == 3:
+            # 准备场景3的新奖励权重参数（如果配置可用）
+            reward_kwargs = {}
+            if config is not None:
+                reward_kwargs.update({
+                    'effective_coverage_weight': config.effective_coverage_weight,
+                    'throughput_weight': config.throughput_weight,
+                    'load_balance_weight': config.load_balance_weight,
+                    'network_connectivity_weight': config.network_connectivity_weight
+                })
+            
+            # 准备场景3特有的参数
+            scenario3_kwargs = {}
+            if n_clusters is not None:
+                scenario3_kwargs['n_clusters'] = n_clusters
+            if cluster_std is not None:
+                scenario3_kwargs['cluster_std'] = cluster_std
+            if central_area_ratio is not None:
+                scenario3_kwargs['central_area_ratio'] = central_area_ratio
+            if area_size is not None:
+                scenario3_kwargs['area_size'] = area_size
+            
+            raw_env = UAVMultiHopEnv(
+                n_uavs=n_uavs,
+                n_users=n_users,
+                max_hops=max_hops,
+                user_distribution=user_distribution,
+                channel_model=channel_model,
+                render_mode=render_mode,
                 seed=env_seed, # 将种子传递给原始环境
-                **reward_kwargs # 传递奖励权重参数
+                **reward_kwargs, # 传递场景3的新奖励权重参数
+                **scenario3_kwargs # 传递场景3特有参数
             )
         else:
             raise ValueError(f"未知的场景: {scenario}")
@@ -633,7 +800,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='使用论文《Hierarchical Multi-Agent Skill Discovery》中的超参数运行HMASD (多进程版本)')
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=2, help='场景: 1=基站模式, 2=协作组网模式')
+    parser.add_argument('--scenario', type=int, default=3, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -650,13 +817,19 @@ def parse_args():
                         help='预训练模型路径，用于继续训练（如果为空则从头开始训练）')
 
     # 环境参数
-    parser.add_argument('--n_uavs', type=int, default=5, help='初始无人机数量')
-    parser.add_argument('--n_users', type=int, default=50, help='用户数量')
-    parser.add_argument('--max_hops', type=int, default=3, help='最大跳数 (仅用于场景2)')
-    parser.add_argument('--user_distribution', type=str, default='uniform', 
-                        choices=['uniform', 'cluster', 'hotspot'], help='用户分布类型')
+    parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 (场景3默认20)')
+    parser.add_argument('--n_users', type=int, default=50, help='用户数量 (场景3默认150)')
+    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 场景3默认3000)')
+    parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
+    parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
+                        choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
     parser.add_argument('--channel_model', type=str, default='3gpp-36777',
                         choices=['free_space', 'urban', 'suburban','3gpp-36777'], help='信道模型')
+    
+    # 场景3特有参数
+    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
+    parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3)')
+    parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3)')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=0, 
@@ -745,11 +918,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Parameters/export_interval', str(args.export_interval), 0)
     agent.writer.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
     
-    # 记录环境奖励权重配置
-    agent.writer.add_text('Environment/coverage_weight', str(config.coverage_weight), 0)
-    agent.writer.add_text('Environment/quality_weight', str(config.quality_weight), 0)
-    agent.writer.add_text('Environment/connectivity_weight', str(config.connectivity_weight), 0)
+    # 记录环境奖励权重配置（场景3的新权重）
+    agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
     agent.writer.add_text('Environment/throughput_weight', str(config.throughput_weight), 0)
+    agent.writer.add_text('Environment/load_balance_weight', str(config.load_balance_weight), 0)
+    agent.writer.add_text('Environment/network_connectivity_weight', str(config.network_connectivity_weight), 0)
 
     # 训练变量
     total_steps = 0
@@ -1426,10 +1599,15 @@ def main():
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
         config=config,  # 传递配置对象
-        max_hops=args.max_hops if args.scenario == 2 else None,
+        max_hops=args.max_hops if args.scenario in [2, 3] else None,
         render_mode=None,
         rank=i,
-        seed=base_seed
+        seed=base_seed,
+        # 场景3特有参数
+        n_clusters=args.n_clusters if args.scenario == 3 else None,
+        cluster_std=args.cluster_std if args.scenario == 3 else None,
+        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
+        area_size=args.area_size if args.scenario == 3 else None
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
@@ -1439,10 +1617,15 @@ def main():
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
         config=config,  # 传递配置对象
-        max_hops=args.max_hops if args.scenario == 2 else None,
+        max_hops=args.max_hops if args.scenario in [2, 3] else None,
         render_mode="human" if args.render and i == 0 else None, # 只在第一个评估环境中渲染
         rank=i,
-        seed=base_seed + num_envs # Use different seeds for eval envs
+        seed=base_seed + num_envs, # Use different seeds for eval envs
+        # 场景3特有参数
+        n_clusters=args.n_clusters if args.scenario == 3 else None,
+        cluster_std=args.cluster_std if args.scenario == 3 else None,
+        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
+        area_size=args.area_size if args.scenario == 3 else None
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -1454,10 +1637,15 @@ def main():
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
         config=config,
-        max_hops=args.max_hops if args.scenario == 2 else None,
+        max_hops=args.max_hops if args.scenario in [2, 3] else None,
         render_mode=None,
         rank=0,
-        seed=base_seed
+        seed=base_seed,
+        # 场景3特有参数
+        n_clusters=args.n_clusters if args.scenario == 3 else None,
+        cluster_std=args.cluster_std if args.scenario == 3 else None,
+        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
+        area_size=args.area_size if args.scenario == 3 else None
     )
     temp_env = temp_env_fn()
     

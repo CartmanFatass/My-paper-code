@@ -70,12 +70,12 @@ class Config:
     opt_beta = 0.1           # 条件互信息损失权重 (论文中β=0.1)
     opt_layers = 2           # OPT模块层数 (论文中K=2)
     
-    # 环境奖励权重配置 - 场景2协作组网
-    coverage_weight = 0.0      # 覆盖率权重 (保持)
-    quality_weight = 0.0       # 服务质量权重 (设为0，不考虑)
-    connectivity_weight = 0.0  # 网络连通性权重 (设为0，不考虑)
-    throughput_weight = 1.0    # 吞吐量权重 (保持)
-    # 注意：跳数惩罚在当前设置下影响很小(最大0.1)，暂时保留
+    # 环境奖励权重配置 - 场景3多跳环境
+    # 注意：场景2不再需要传入奖励权重，其奖励已固化为覆盖率+归一化吞吐量
+    effective_coverage_weight = 0.4     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
+    throughput_weight = 0.3            # 系统吞吐量权重 
+    load_balance_weight = 0.2          # 负载均衡权重 (衡量UAV负载分布的均衡性)
+    network_connectivity_weight = 0.1   # 网络连通性权重 (拥有有效回程路径的UAV比例)
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

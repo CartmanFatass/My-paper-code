@@ -9,7 +9,9 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
     - 无人机可根据情况合作组网，分别担任基站以及中继
     - 需要回程到地面基站
     - 跳数最多为3-5可调
-    - 优化目标是最大化用户覆盖率、服务质量和网络连通性
+    - 优化目标是最大化用户覆盖率和系统吞吐量
+    - 多跳路径的容量损失直接体现在吞吐量计算中，无显式惩罚项
+    - 奖励函数简化为：覆盖率 + 归一化吞吐量
     """
     
     def __init__(
@@ -28,14 +30,17 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         min_sinr=0,  # 最小SINR阈值 (dB)
         max_connections=10,  # 每个无人机最大连接数
         max_hops=3,  # 最大跳数 (3-5可调)
-        coverage_weight=0.0,  # 覆盖率权重
-        quality_weight=0.0,  # 服务质量权重
-        connectivity_weight=0.0,  # 网络连通性权重
-        throughput_weight=1.0,  # 吞吐量权重
         n_ground_bs=1,  # 地面基站数量
     ):
         """
         初始化UAV协作组网环境
+        
+        特点：
+        - 无人机可根据情况合作组网，分别担任基站以及中继
+        - 需要回程到地面基站
+        - 跳数最多为3-5可调
+        - 优化目标是最大化用户覆盖率和系统吞吐量
+        - 多跳路径的容量损失直接体现在吞吐量计算中
         
         参数:
             n_uavs: 无人机数量
@@ -52,10 +57,6 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             min_sinr: 最小SINR阈值 (dB)
             max_connections: 每个无人机最大连接数
             max_hops: 最大跳数 (3-5可调)
-            coverage_weight: 覆盖率权重
-            quality_weight: 服务质量权重
-            connectivity_weight: 网络连通性权重
-            throughput_weight: 吞吐量权重
             n_ground_bs: 地面基站数量
         """
         # 先保存关键参数，防止在父类初始化时就需要使用
@@ -63,10 +64,6 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         self.max_hops = max_hops
         self.min_sinr = min_sinr
         self.max_connections = max_connections
-        self.coverage_weight = coverage_weight
-        self.quality_weight = quality_weight
-        self.connectivity_weight = connectivity_weight
-        self.throughput_weight = throughput_weight
         self.area_size = area_size  # 需要在初始化地面基站之前设置
         
         # 初始化地面基站位置（在调用父类初始化之前）
@@ -714,36 +711,21 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
     
     def _compute_reward(self):
         """
-        计算奖励
+        计算简化的覆盖率+吞吐量奖励
+        
+        多跳损失直接体现在吞吐量计算中，不再使用显式惩罚项
         
         返回:
             reward: 全局奖励
         """
-        # 基本奖励：已连接用户数（覆盖率）
+        # 覆盖率奖励：已连接用户数比例
         connected_users = np.sum(self.connections)
-        coverage_ratio = connected_users / self.n_users
-        coverage_reward = coverage_ratio
+        coverage_reward = connected_users / self.n_users
         
-        # 服务质量奖励：SINR质量
-        total_sinr = 0
-        for i in range(self.n_uavs):
-            for j in range(self.n_users):
-                if self.connections[i, j]:
-                    # 归一化SINR到[0,1]范围
-                    normalized_sinr = np.clip((self.sinr_matrix[i, j] - self.min_sinr) / 30, 0, 1)
-                    total_sinr += normalized_sinr
-        
-        # 平均SINR质量
-        quality_reward = total_sinr / max(connected_users, 1)
-        
-        # 网络连通性奖励
-        connectivity_ratio = self._compute_connectivity_ratio()
-        connectivity_reward = connectivity_ratio
-        
-        # 【修正】考虑带宽共享的系统吞吐量计算
+        # 系统吞吐量计算（多跳损失已内嵌在此计算中）
         system_throughput = 0
         
-        # 按UAV计算有效吞吐量（修正带宽共享问题）
+        # 按UAV计算有效吞吐量
         for i in range(self.n_uavs):
             # 获取连接到该UAV的用户列表
             connected_users_to_uav = []
@@ -761,7 +743,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             if i in self.routing_paths:
                 backhaul_capacity = self._compute_backhaul_capacity(i)
                 
-                # 考虑多跳效率损失
+                # 考虑多跳效率损失（这里体现多跳的容量损失）
                 path = self.routing_paths[i]
                 hop_count = len(path)
                 hop_efficiency = 1.0 / hop_count if hop_count > 0 else 0
@@ -778,50 +760,30 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             # 累加到系统总吞吐量
             system_throughput += uav_effective_throughput
         
-        # 使用修正后的现实最大吞吐量进行归一化
+        # 归一化吞吐量奖励
         max_realistic_throughput = self._compute_realistic_max_throughput()
         throughput_reward = system_throughput / max_realistic_throughput if max_realistic_throughput > 0 else 0
         
-        # 跳数惩罚：路径越长，惩罚越大
-        total_hops = 0
-        for path in self.routing_paths.values():
-            total_hops += len(path)
+        # 简化的奖励组合：覆盖率 + 吞吐量
+        raw_reward = coverage_reward + throughput_reward
         
-        avg_hops = total_hops / max(len(self.routing_paths), 1)
-        hop_penalty = avg_hops / self.max_hops * 0.1  # 归一化并缩放
+        # 将奖励映射到[0, 1]范围
+        # 理论最大值: 1.0 (覆盖率) + 1.0 (吞吐量) = 2.0
+        # 因此将[0, 2.0]映射到[0, 1]
+        normalized_reward = np.clip(raw_reward / 2.0, 0, 1)
         
-        # 组合奖励（原始奖励）
-        raw_reward = (
-            self.coverage_weight * coverage_reward + 
-            self.quality_weight * quality_reward + 
-            self.connectivity_weight * connectivity_reward +
-            self.throughput_weight * throughput_reward -
-            hop_penalty
-        )
-        
-        # 最终归一化：将奖励映射到[0, 1]范围
-        # 理论范围分析：
-        # - 最大值: 0.4 + 0.2 + 0.2 + 0.2 = 1.0
-        # - 最小值: 0 - 0.1 = -0.1 (最坏情况下的跳数惩罚)
-        # 因此将[-0.1, 1.0]映射到[0, 1]
-        normalized_reward = np.clip((raw_reward + 0.1) / 1.1, 0, 1)
-        
-        # 记录奖励组成（修正后的数据）
+        # 记录奖励组成信息
         self.reward_info = {
             "coverage_reward": coverage_reward,
-            "quality_reward": quality_reward,
-            "connectivity_reward": connectivity_reward,
             "throughput_reward": throughput_reward,
-            "hop_penalty": hop_penalty,
             "raw_reward": raw_reward,
             "normalized_reward": normalized_reward,
-            "system_throughput_mbps": system_throughput / 1e6,  # 系统实际吞吐量（修正带宽共享）
+            "system_throughput_mbps": system_throughput / 1e6,
             "avg_throughput_per_user_mbps": (system_throughput / max(connected_users, 1)) / 1e6,
-            "max_realistic_throughput_mbps": max_realistic_throughput / 1e6,  # 现实最大吞吐量
-            # 额外的调试信息
+            "max_realistic_throughput_mbps": max_realistic_throughput / 1e6,
             "connected_users": connected_users,
-            "connectivity_ratio": connectivity_ratio,
-            "avg_hops": avg_hops
+            "coverage_ratio": coverage_reward,
+            "avg_hops": sum(len(path) for path in self.routing_paths.values()) / max(len(self.routing_paths), 1)
         }
         
         return normalized_reward
