@@ -3,7 +3,7 @@
 class Config:
     # 环境参数
     # 注意：实际环境中应该获取这些值
-    n_agents = 10  # 无人机数量上限
+    n_agents = None  # 无人机数量（将由训练脚本根据--n_uavs参数设置）
     state_dim = None  # 全局状态维度（将在环境初始化时获取）
     obs_dim = None    # 单个智能体观测维度（将在环境初始化时获取）
     action_dim = 3    # 每个智能体输出3D速度向量

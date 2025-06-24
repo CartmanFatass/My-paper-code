@@ -34,9 +34,10 @@ from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 class EnhancedRewardTracker:
     """增强的奖励追踪器，用于论文数据收集"""
     
-    def __init__(self, log_dir, config):
+    def __init__(self, log_dir, config, n_users=None):
         self.log_dir = log_dir
         self.config = config
+        self.n_users = n_users  # 存储用户总数，用于准确计算服务率
         
         # 训练过程中的奖励数据收集
         self.training_rewards = {
@@ -120,30 +121,30 @@ class EnhancedRewardTracker:
                         'value': comp_value
                     })
         
-        # 记录额外信息（修正字段名映射）
+        # 记录额外信息（简化后只记录served_users）
         if info:
-            # 修正：从reward_info中获取connected_users，或者从coverage_ratio计算
             served_users = 0
-            total_users = 0
             
+            # 从多个来源获取服务用户数
             if 'reward_info' in info and 'connected_users' in info['reward_info']:
                 served_users = info['reward_info']['connected_users']
+            elif 'coverage_ratio' in info and self.n_users is not None:
+                # 从覆盖率计算服务用户数，使用固定的n_users
+                served_users = int(info['coverage_ratio'] * self.n_users)
             elif 'coverage_ratio' in info and 'n_users' in info:
-                # 从覆盖率计算服务用户数
+                # 备用方案：从info中获取n_users
                 served_users = int(info['coverage_ratio'] * info['n_users'])
-                total_users = info['n_users']
             elif 'served_users' in info:
                 # 兼容原有字段名
                 served_users = info['served_users']
-                total_users = info.get('total_users', 0)
             
             # 如果获取到了服务用户信息，记录到性能指标
-            if served_users > 0 or total_users > 0:
+            if served_users > 0:
                 self.performance_metrics['served_users'].append({
                     'step': step,
                     'env_id': env_id,
                     'served_users': served_users,
-                    'total_users': total_users
+                    'total_users': self.n_users  # 使用固定的n_users
                 })
             
             # 记录吞吐量信息（修正后的字段名）
@@ -490,8 +491,8 @@ class EnhancedRewardTracker:
                     proportion = comp_value / total_intrinsic
                     writer.add_scalar(f'Training/Reward_Proportion_{comp_name}', proportion, step)
         
-        # Throughput统计（新增）
-        if self.performance_metrics['served_users']:
+        # Throughput统计（修正后使用n_users）
+        if self.performance_metrics['served_users'] and self.n_users is not None:
             # 计算最近100步的滑动窗口平均吞吐量
             recent_served_data = self.performance_metrics['served_users'][-100:]
             recent_served_users = [u['served_users'] for u in recent_served_data]
@@ -502,12 +503,12 @@ class EnhancedRewardTracker:
                 avg_served_users = np.mean(recent_served_users)
                 writer.add_scalar('Performance/Throughput_ServedUsers_100steps', avg_served_users, step)
                 
-                # 平均总用户数
+                # 平均总用户数（记录但不用于计算服务率）
                 avg_total_users = np.mean(recent_total_users)
                 writer.add_scalar('Performance/Throughput_TotalUsers_100steps', avg_total_users, step)
                 
-                # 服务率（吞吐率）
-                service_rate = avg_served_users / max(avg_total_users, 1)
+                # 服务率（吞吐率）- 使用固定的n_users作为分母
+                service_rate = avg_served_users / self.n_users
                 writer.add_scalar('Performance/Throughput_ServiceRate_100steps', service_rate, step)
                 
                 # 计算吞吐率变化趋势（最近50步 vs 前50步）
@@ -843,6 +844,10 @@ def parse_args():
     parser.add_argument('--detailed_logging', action='store_true', 
                         help='启用详细的奖励日志记录')
     
+    # OPT模块参数
+    parser.add_argument('--use_opt', action=argparse.BooleanOptionalAction, default=True,
+                        help='是否使用OPT (Interaction Pattern Disentangling) 模块 (使用--use_opt启用，--no-use_opt禁用)')
+    
     return parser.parse_args()
 
 # 训练函数
@@ -898,7 +903,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         agent.writer.add_text('Training/mode', 'from_scratch', 0)
     
     # 创建增强的奖励追踪器
-    reward_tracker = EnhancedRewardTracker(log_dir, config)
+    reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=args.n_users)
     reward_tracker.export_interval = args.export_interval
     
     # 记录超参数
@@ -917,6 +922,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Parameters/num_envs', str(num_envs), 0) # Use num_envs variable
     agent.writer.add_text('Parameters/export_interval', str(args.export_interval), 0)
     agent.writer.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
+    agent.writer.add_text('Parameters/use_opt', str(config.use_opt), 0)
     
     # 记录环境奖励权重配置（场景3的新权重）
     agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
@@ -1579,6 +1585,14 @@ def main():
     # 使用config_1.py中的配置（基于论文超参数）
     config = Config()
     
+    # 设置无人机数量（n_agents和n_uavs是同一个参数）
+    config.n_agents = args.n_uavs
+    main_logger.info(f"设置无人机数量: n_agents = n_uavs = {config.n_agents}")
+    
+    # 根据命令行参数设置OPT模块使用状态
+    config.use_opt = args.use_opt
+    main_logger.info(f"OPT模块使用状态: use_opt = {config.use_opt}")
+    
     # 获取计算设备
     device = get_device(args.device)
     
@@ -1652,13 +1666,12 @@ def main():
     # 从临时环境获取维度信息
     state_dim = temp_env.state_dim
     obs_dim = temp_env.obs_dim
-    n_agents_from_env = temp_env.n_uavs
     
-    # 更新配置
+    # 更新配置维度（n_agents已在之前设置）
     config.update_env_dims(state_dim, obs_dim)
-    config.n_agents = n_agents_from_env
     
-    main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}, n_agents={n_agents_from_env}")
+    main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}")
+    main_logger.info(f"确认无人机数量: n_agents={config.n_agents}")
     
     # 关闭临时环境
     temp_env.close()
