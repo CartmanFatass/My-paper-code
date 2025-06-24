@@ -16,7 +16,7 @@ class Config:
     # HMASD参数 - 基于论文Table 3中的3m场景
     n_Z = 5           # 团队技能数量 (论文中3m场景为3)
     n_z = 5           # 个体技能数量 (论文中3m场景为3)
-    k = 64            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
+    k = 32            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -50,7 +50,7 @@ class Config:
     batch_size = 128         # 批处理大小
     high_level_batch_size = 128  # 高层更新的批处理大小
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
-    rollout_length = 256     # 每次rollout收集的步数 (严格on-policy)
+    rollout_length = 128     # 每次rollout收集的步数 (严格on-policy)
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
     episode_length = 5120    # 每个episode的最大长度 (基于观察到的实际行为)
     eval_interval = episode_length*num_envs   # 评估间隔 (32并行环境 * 每环境5120步)
@@ -77,10 +77,10 @@ class Config:
     
     # 环境奖励权重配置 - 场景3多跳环境
     # 注意：场景2不再需要传入奖励权重，其奖励已固化为覆盖率+归一化吞吐量
-    effective_coverage_weight = 0.4     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
-    throughput_weight = 0.4            # 系统吞吐量权重 
-    load_balance_weight = 0.1          # 负载均衡权重 (衡量UAV负载分布的均衡性)
-    proximity_penalty_weight = 0.1   # 网络连通性权重 (拥有有效回程路径的UAV比例)
+    effective_coverage_weight = 0.8     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
+    throughput_weight = 0.1            # 系统吞吐量权重 
+    load_balance_weight = 0.05          # 负载均衡权重 (衡量UAV负载分布的均衡性)
+    proximity_penalty_weight = 0.05   # 网络连通性权重 (拥有有效回程路径的UAV比例)
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

@@ -922,7 +922,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
     agent.writer.add_text('Environment/throughput_weight', str(config.throughput_weight), 0)
     agent.writer.add_text('Environment/load_balance_weight', str(config.load_balance_weight), 0)
-    agent.writer.add_text('Environment/network_connectivity_weight', str(config.network_connectivity_weight), 0)
+    # agent.writer.add_text('Environment/network_connectivity_weight', str(config.network_connectivity_weight), 0)  # 已废弃
 
     # 训练变量
     total_steps = 0
