@@ -29,6 +29,8 @@ class MultiUAVEnv(ParallelEnv):
         channel_model="free_space",  # 信道模型
         render_mode=None,
         seed=None,
+        max_observed_uavs=10,  # 最大观测无人机数量
+        max_observed_users=20,  # 最大观测用户数量
     ):
         """
         初始化多无人机基站环境
@@ -61,6 +63,10 @@ class MultiUAVEnv(ParallelEnv):
         self.render_mode = render_mode
         self.seed_val = seed
         
+        # 局部观测参数
+        self.max_observed_uavs = max_observed_uavs
+        self.max_observed_users = max_observed_users
+        
         # 初始化随机数生成器
         self.np_random = np.random.RandomState(seed)
         
@@ -85,7 +91,9 @@ class MultiUAVEnv(ParallelEnv):
         
         # 状态和观测维度
         self.state_dim = 3 * n_uavs + 2 * n_users + 1  # UAV位置 + 用户位置 + 当前步数
-        self.obs_dim = 3 + 2 * n_users + n_uavs * 3 + 1  # 自身位置 + 用户位置 + 其他UAV位置 + 当前步数
+        # 新的观测维度：自身位置(3) + 局部用户相对位置(max_observed_users*3) + 局部无人机相对位置(max_observed_uavs*4) + 当前步数(1)
+        # 注意：用户使用3维是因为包含相对位置(x,y)和距离(1)；无人机使用4维是因为包含相对位置(x,y,z)和距离(1)
+        self.obs_dim = 3 + max_observed_users * 3 + max_observed_uavs * 4 + 1
         
         # 创建智能体列表
         self.possible_agents = [f"uav_{i}" for i in range(n_uavs)]
@@ -279,7 +287,7 @@ class MultiUAVEnv(ParallelEnv):
     
     def _get_observation(self, agent):
         """
-        获取指定智能体的观测
+        获取指定智能体基于通信能力的局部观测
         
         参数:
             agent: 智能体ID
@@ -288,29 +296,62 @@ class MultiUAVEnv(ParallelEnv):
             observation: 智能体的观测
         """
         agent_idx = int(agent.split("_")[1])
-        
-        # 自身位置
         own_position = self.uav_positions[agent_idx]
         
-        # 用户位置
-        user_positions_flat = self.user_positions.flatten()
+        # 初始化观测向量
+        obs_components = []
         
-        # 其他无人机位置
-        other_uav_positions = []
-        for i in range(self.n_uavs):
-            if i != agent_idx:
-                other_uav_positions.append(self.uav_positions[i])
-            else:
-                # 为了保持维度一致，添加自身位置
-                other_uav_positions.append(self.uav_positions[i])
+        # 1. 自身位置 (3维) - 归一化到[0,1]范围
+        normalized_position = own_position / self.area_size
+        normalized_position[2] = (own_position[2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])
+        obs_components.append(normalized_position)
         
-        other_uav_positions_flat = np.array(other_uav_positions).flatten()
+        # 2. 局部用户观测 (max_observed_users * 3维)
+        local_users = self._get_local_users(agent_idx)
+        user_obs = np.zeros(self.max_observed_users * 3)
         
-        # 当前步数
+        for i, (user_idx, sinr_db) in enumerate(local_users):
+            if i >= self.max_observed_users:
+                break
+            
+            user_pos = self.user_positions[user_idx]
+            # 相对位置 (x, y) - 归一化
+            relative_pos = (user_pos - own_position[:2]) / self.area_size
+            # 归一化SINR到[0,1]范围 (假设SINR范围为-10dB到40dB)
+            normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
+            
+            start_idx = i * 3
+            user_obs[start_idx:start_idx+3] = [relative_pos[0], relative_pos[1], normalized_sinr]
+        
+        obs_components.append(user_obs)
+        
+        # 3. 局部无人机观测 (max_observed_uavs * 4维)
+        local_uavs = self._get_local_uavs(agent_idx)
+        uav_obs = np.zeros(self.max_observed_uavs * 4)
+        
+        for i, (uav_idx, sinr_db) in enumerate(local_uavs):
+            if i >= self.max_observed_uavs:
+                break
+            
+            other_uav_pos = self.uav_positions[uav_idx]
+            # 相对位置 (x, y, z) - 归一化
+            relative_pos = other_uav_pos - own_position
+            relative_pos[:2] = relative_pos[:2] / self.area_size
+            relative_pos[2] = relative_pos[2] / (self.height_range[1] - self.height_range[0])
+            # 归一化SINR到[0,1]范围
+            normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
+            
+            start_idx = i * 4
+            uav_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], relative_pos[2], normalized_sinr]
+        
+        obs_components.append(uav_obs)
+        
+        # 4. 当前步数 (1维)
         step_normalized = np.array([self.current_step / self.max_steps])
+        obs_components.append(step_normalized)
         
-        # 组合观测
-        obs = np.concatenate([own_position, user_positions_flat, other_uav_positions_flat, step_normalized])
+        # 组合所有观测
+        obs = np.concatenate(obs_components)
         
         # 动作掩码（这里我们不限制动作，所以全为1）
         action_mask = np.ones(3)
@@ -377,6 +418,57 @@ class MultiUAVEnv(ParallelEnv):
         
         return user_positions
     
+    def _get_local_users(self, agent_idx):
+        """
+        获取指定无人机可通信的用户列表（基于SINR阈值）
+        
+        参数:
+            agent_idx: 无人机索引
+            
+        返回:
+            local_users: 按SINR降序排序的(用户索引, SINR)元组列表
+        """
+        local_users = []
+        
+        for user_idx in range(self.n_users):
+            # 计算SINR
+            sinr_db = self._compute_sinr(agent_idx, user_idx)
+            
+            # 只有SINR大于等于最小阈值的用户才能被观测
+            if sinr_db >= self.min_sinr:
+                local_users.append((user_idx, sinr_db))
+        
+        # 按SINR降序排序（SINR最高的在前）
+        local_users.sort(key=lambda x: x[1], reverse=True)
+        return local_users
+    
+    def _get_local_uavs(self, agent_idx):
+        """
+        获取指定无人机可通信的其他无人机列表（基于SINR阈值）
+        
+        参数:
+            agent_idx: 无人机索引
+            
+        返回:
+            local_uavs: 按SINR降序排序的(无人机索引, SINR)元组列表
+        """
+        local_uavs = []
+        
+        for other_idx in range(self.n_uavs):
+            if other_idx == agent_idx:
+                continue  # 跳过自己
+            
+            # 计算无人机间的SINR
+            sinr_db = self._compute_uav_to_uav_sinr(agent_idx, other_idx)
+            
+            # 只有SINR大于等于最小阈值的无人机才能被观测
+            if sinr_db >= self.min_sinr:
+                local_uavs.append((other_idx, sinr_db))
+        
+        # 按SINR降序排序（SINR最高的在前）
+        local_uavs.sort(key=lambda x: x[1], reverse=True)
+        return local_uavs
+
     def _compute_distance(self, pos1, pos2):
         """
         计算两点之间的欧几里得距离
@@ -532,6 +624,88 @@ class MultiUAVEnv(ParallelEnv):
         sinr = rx_power - interference_plus_noise_dbm
         
         return sinr
+    
+    def _compute_uav_to_uav_sinr(self, sender_idx, receiver_idx):
+        """
+        计算无人机间通信的SINR (Signal to Interference plus Noise Ratio)
+        
+        参数:
+            sender_idx: 发送方无人机索引
+            receiver_idx: 接收方无人机索引
+            
+        返回:
+            sinr: SINR值 (dB)
+        """
+        sender_pos = self.uav_positions[sender_idx]
+        receiver_pos = self.uav_positions[receiver_idx]
+        
+        # 计算路径损耗（使用无人机到无人机的路径损耗计算）
+        path_loss = self._compute_uav_path_loss(sender_pos, receiver_pos)
+        
+        # 计算接收功率 (dBm)
+        rx_power = self.tx_power - path_loss
+        
+        # 计算干扰功率：来自所有其他无人机的干扰
+        interference_power = []
+        for i in range(self.n_uavs):
+            if i != sender_idx and i != receiver_idx:  # 排除发送方和接收方
+                interferer_pos = self.uav_positions[i]
+                interferer_path_loss = self._compute_uav_path_loss(interferer_pos, receiver_pos)
+                interferer_power = self.tx_power - interferer_path_loss
+                interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
+        
+        # 总干扰功率 (dBm)
+        total_interference = np.sum(interference_power) if interference_power else 0
+        total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+        
+        # 计算SINR (dB)
+        noise_power_dbm = self.noise_power
+        interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
+        
+        sinr = rx_power - interference_plus_noise_dbm
+        
+        return sinr
+    
+    def _compute_uav_path_loss(self, uav_pos1, uav_pos2):
+        """
+        计算无人机间的路径损耗
+        
+        参数:
+            uav_pos1: 无人机1位置 [3]
+            uav_pos2: 无人机2位置 [3]
+            
+        返回:
+            path_loss: 路径损耗 (dB)
+        """
+        # 计算3D距离
+        distance_3d = self._compute_distance(uav_pos1, uav_pos2)
+        
+        # 确保距离不为零，避免log10(0)错误
+        safe_distance = max(distance_3d, 1e-6)
+        
+        # 根据不同信道模型计算路径损耗
+        if self.channel_model == "free_space":
+            # 自由空间路径损耗 (dB)
+            wavelength = 3e8 / self.carrier_frequency
+            path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+        
+        elif self.channel_model == "urban":
+            # 简化的城市环境路径损耗模型
+            path_loss = 128.1 + 37.6 * np.log10(safe_distance / 1000)
+        
+        elif self.channel_model == "suburban":
+            # 简化的郊区环境路径损耗模型
+            path_loss = 120 + 35 * np.log10(safe_distance / 1000)
+            
+        elif self.channel_model == "3gpp-36777":
+            # 对于无人机间通信，简化为自由空间模型
+            wavelength = 3e8 / self.carrier_frequency
+            path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+        
+        else:
+            raise ValueError(f"未知的信道模型: {self.channel_model}")
+            
+        return path_loss
     
     def _update_channel_state(self):
         """

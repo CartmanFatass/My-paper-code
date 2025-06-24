@@ -817,9 +817,9 @@ def parse_args():
                         help='预训练模型路径，用于继续训练（如果为空则从头开始训练）')
 
     # 环境参数
-    parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 (场景3默认20)')
-    parser.add_argument('--n_users', type=int, default=50, help='用户数量 (场景3默认150)')
-    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 场景3默认3000)')
+    parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
+    parser.add_argument('--n_users', type=int, default=30, help='用户数量 ')
+    parser.add_argument('--area_size', type=int, default=1500, help='区域大小 (米, 场景3默认3000)')
     parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
@@ -827,7 +827,7 @@ def parse_args():
                         choices=['free_space', 'urban', 'suburban','3gpp-36777'], help='信道模型')
     
     # 场景3特有参数
-    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
+    parser.add_argument('--n_clusters', type=int, default=3, help='用户簇数量 (仅用于场景3)')
     parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3)')
     parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3)')
     

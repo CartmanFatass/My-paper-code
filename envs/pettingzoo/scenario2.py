@@ -31,6 +31,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         max_connections=10,  # 每个无人机最大连接数
         max_hops=3,  # 最大跳数 (3-5可调)
         n_ground_bs=1,  # 地面基站数量
+        max_observed_uavs=10,  # 最大观测无人机数量
+        max_observed_users=20,  # 最大观测用户数量
     ):
         """
         初始化UAV协作组网环境
@@ -82,6 +84,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             channel_model=channel_model,
             render_mode=render_mode,
             seed=seed,
+            max_observed_uavs=max_observed_uavs,
+            max_observed_users=max_observed_users,
         )
         
         # 场景名称
@@ -94,7 +98,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         self.routing_paths = {}  # 路由路径 {uav_idx: [path_to_ground_bs]}
         
         # 扩展观测空间
-        self.obs_dim += 3 + self.n_ground_bs + 1  # 添加UAV角色(3)、到地面基站的连接(n_ground_bs)和跳数信息(1)
+        self.obs_dim += self.n_ground_bs + 1  # 添加到地面基站的连接(n_ground_bs)和跳数信息(1)
     
     def _init_ground_bs(self):
         """初始化地面基站位置"""
@@ -218,7 +222,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
     
     def _update_observations_dict(self, observations_dict):
         """
-        更新观测，添加UAV角色和连接信息（用于字典格式的观测）
+        更新观测，添加连接信息（用于字典格式的观测）
         
         参数:
             observations_dict: 原始观测字典
@@ -233,11 +237,6 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             obs_dict = observations_dict[agent]
             obs = obs_dict["obs"]
             
-            # 添加UAV角色信息（独热编码）
-            role_onehot = np.zeros(3)  # [未分配, 基站, 中继]
-            if self.uav_roles[i] < 3:
-                role_onehot[self.uav_roles[i]] = 1
-            
             # 添加到地面基站的连接信息
             bs_connections = self.uav_bs_connections[i]
             
@@ -248,8 +247,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             else:
                 normalized_hop = 1.0  # 无路径时设为最大值
             
-            # 组合新的观测
-            new_obs = np.concatenate([obs, role_onehot, bs_connections, [normalized_hop]])
+            # 组合新的观测（不包括角色信息）
+            new_obs = np.concatenate([obs, bs_connections, [normalized_hop]])
             
             # 更新观测字典
             updated_obs_dict = {
@@ -312,18 +311,12 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         # 更新UAV之间的连接
         for i in range(self.n_uavs):
             for j in range(i+1, self.n_uavs):
-                # 计算UAV之间的距离
-                distance = self._compute_distance(self.uav_positions[i], self.uav_positions[j])
+                # 使用精确的SINR计算（考虑所有其他无人机的干扰）
+                sinr_ij = self._compute_uav_to_uav_sinr(i, j)
+                sinr_ji = self._compute_uav_to_uav_sinr(j, i)
                 
-                # 计算UAV之间的SINR
-                # 确保距离不为零，避免log10(0)错误
-                safe_distance = max(distance, 1e-6)  # 使用一个很小的正数代替零
-                path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi * self.carrier_frequency / 3e8)
-                rx_power = self.tx_power - path_loss
-                sinr = rx_power - self.noise_power
-                
-                # 如果SINR大于阈值，则建立连接
-                if sinr >= self.min_sinr:
+                # 双向连接需要两个方向的SINR都满足阈值
+                if sinr_ij >= self.min_sinr and sinr_ji >= self.min_sinr:
                     self.uav_connections[i, j] = True
                     self.uav_connections[j, i] = True
                 else:
@@ -333,15 +326,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         # 更新UAV到地面基站的连接
         for i in range(self.n_uavs):
             for j in range(self.n_ground_bs):
-                # 计算UAV到地面基站的距离
-                distance = self._compute_distance(self.uav_positions[i], self.ground_bs_positions[j])
-                
-                # 计算UAV到地面基站的SINR
-                # 确保距离不为零，避免log10(0)错误
-                safe_distance = max(distance, 1e-6)  # 使用一个很小的正数代替零
-                path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi * self.carrier_frequency / 3e8)
-                rx_power = self.ground_bs_tx_power - path_loss  # 地面基站发射功率更高
-                sinr = rx_power - self.noise_power
+                # 使用精确的SINR计算（考虑所有其他无人机的干扰）
+                sinr = self._compute_uav_to_bs_sinr(i, j)
                 
                 # 如果SINR大于阈值，则建立连接
                 if sinr >= self.min_sinr:
@@ -440,6 +426,47 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
                     queue.append((next_uav, path + [("uav", current)]))
         
         return None  # 没有找到路径
+    
+    def _compute_uav_to_bs_sinr(self, uav_idx, bs_idx):
+        """
+        计算无人机到地面基站通信的SINR (Signal to Interference plus Noise Ratio)
+        
+        参数:
+            uav_idx: 无人机索引
+            bs_idx: 地面基站索引
+            
+        返回:
+            sinr: SINR值 (dB)
+        """
+        uav_pos = self.uav_positions[uav_idx]
+        bs_pos = self.ground_bs_positions[bs_idx]
+        
+        # 计算路径损耗（使用无人机到地面基站的路径损耗计算）
+        path_loss = self._compute_uav_path_loss(uav_pos, bs_pos)
+        
+        # 计算接收功率 (dBm) - 地面基站发射功率更高
+        rx_power = self.ground_bs_tx_power - path_loss
+        
+        # 计算干扰功率：来自所有其他无人机的干扰
+        interference_power = []
+        for i in range(self.n_uavs):
+            if i != uav_idx:  # 排除目标无人机
+                interferer_pos = self.uav_positions[i]
+                interferer_path_loss = self._compute_uav_path_loss(interferer_pos, bs_pos)
+                interferer_power = self.tx_power - interferer_path_loss
+                interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
+        
+        # 总干扰功率 (dBm)
+        total_interference = np.sum(interference_power) if interference_power else 0
+        total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+        
+        # 计算SINR (dB)
+        noise_power_dbm = self.noise_power
+        interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
+        
+        sinr = rx_power - interference_plus_noise_dbm
+        
+        return sinr
     
     def _compute_connectivity_ratio(self):
         """

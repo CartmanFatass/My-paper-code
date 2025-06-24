@@ -28,14 +28,17 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         min_sinr=0,  # 最小SINR阈值 (dB)
         max_connections=15,  # 每个无人机最大连接数（增加以支持更多用户）
         max_hops=5,  # 最大跳数
-        effective_coverage_weight=0.4,  # 有效覆盖率权重
-        throughput_weight=0.3,  # 系统吞吐量权重
+        effective_coverage_weight=0.45,  # 有效覆盖率权重（增强）
+        throughput_weight=0.25,  # 系统吞吐量权重
         load_balance_weight=0.2,  # 负载均衡权重
-        network_connectivity_weight=0.1,  # 网络连通性权重
+        network_connectivity_weight=0.0,  # 网络连通性权重（移除）
+        proximity_penalty_weight=0.1,  # 邻近惩罚权重 (新增)
         n_ground_bs=4,  # 地面基站数量（四个角落）
         n_clusters=7,  # 用户簇数量
         cluster_std=150,  # 簇内用户分布标准差（米）
         central_area_ratio=0.5,  # 中心用户区域占总区域的比例
+        max_observed_uavs=10,  # 最大观测无人机数量
+        max_observed_users=20,  # 最大观测用户数量
     ):
         """
         初始化UAV强制多跳环境
@@ -74,6 +77,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         self.throughput_weight = throughput_weight
         self.load_balance_weight = load_balance_weight
         self.network_connectivity_weight = network_connectivity_weight
+        self.proximity_penalty_weight = proximity_penalty_weight
         
         # 调用父类初始化
         super().__init__(
@@ -92,6 +96,8 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             max_connections=max_connections,
             max_hops=max_hops,
             n_ground_bs=n_ground_bs,
+            max_observed_uavs=max_observed_uavs,
+            max_observed_users=max_observed_users,
         )
         
         # 场景名称
@@ -239,10 +245,10 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         计算专为多跳场景设计的奖励函数
         
         奖励由四个部分组成：
-        1. 有效覆盖率奖励：只计算连接到有回程路径的UAV的用户
+        1. 有效覆盖率奖励：只计算连接到有回程路径的UAV的用户（权重增强）
         2. 系统吞吐量奖励：使用scenario2中成熟的吞吐量计算
         3. 负载均衡奖励：衡量UAV负载分布的均衡性
-        4. 网络连通性奖励：鼓励形成连通的网络拓扑
+        4. 邻近惩罚项：防止UAV过于靠近导致信号干扰
         
         返回:
             reward: 全局奖励 [0, 1]
@@ -343,12 +349,28 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         connected_uavs = len(self.routing_paths)
         network_connectivity_reward = connected_uavs / self.n_uavs if self.n_uavs > 0 else 0
         
-        # 组合最终奖励
+        # 5. 邻近惩罚项：防止UAV过于靠近导致信号干扰
+        proximity_penalty = 0
+        min_safe_distance = 150  # 无人机之间的最小安全距离 (米)，可根据场景调整
+        num_pairs = 0
+        
+        for i in range(self.n_uavs):
+            for j in range(i + 1, self.n_uavs):
+                distance = self._compute_distance(self.uav_positions[i], self.uav_positions[j])
+                if distance < min_safe_distance:
+                    # 距离越近，惩罚越大（线性递减）
+                    proximity_penalty += (1 - (distance / min_safe_distance))
+                num_pairs += 1
+        
+        # 归一化邻近惩罚（除以总的UAV对数）
+        normalized_proximity_penalty = proximity_penalty / num_pairs if num_pairs > 0 else 0
+        
+        # 组合最终奖励 (减去惩罚项，移除连通性奖励)
         final_reward = (
             self.effective_coverage_weight * effective_coverage_reward +
             self.throughput_weight * throughput_reward +
-            self.load_balance_weight * load_balance_reward +
-            self.network_connectivity_weight * network_connectivity_reward
+            self.load_balance_weight * load_balance_reward -
+            self.proximity_penalty_weight * normalized_proximity_penalty  # 减去惩罚
         )
         
         # 确保奖励在[0, 1]范围内
@@ -364,6 +386,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             "throughput_reward": throughput_reward,
             "load_balance_reward": load_balance_reward,
             "network_connectivity_reward": network_connectivity_reward,
+            "proximity_penalty": normalized_proximity_penalty,  # 新增：邻近惩罚值
             "final_reward": final_reward,
             "effective_connected_users": effective_connected_users,
             "total_connected_users": np.sum(self.connections),
@@ -411,13 +434,15 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         # 添加多跳统计信息
         if hasattr(self, 'reward_info'):
             reward_info = self.reward_info
-            self.ax.text2D(0.02, 0.75, f'有效覆盖率: {reward_info.get("effective_coverage_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.80, f'有效覆盖率: {reward_info.get("effective_coverage_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.70, f'吞吐量奖励: {reward_info.get("throughput_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.75, f'吞吐量奖励: {reward_info.get("throughput_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.65, f'负载均衡: {reward_info.get("load_balance_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.70, f'负载均衡: {reward_info.get("load_balance_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.60, f'网络连通性: {reward_info.get("network_connectivity_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.65, f'网络连通性: {reward_info.get("network_connectivity_reward", 0):.3f}', 
+                          transform=self.ax.transAxes)
+            self.ax.text2D(0.02, 0.60, f'邻近惩罚: {reward_info.get("proximity_penalty", 0):.3f}', 
                           transform=self.ax.transAxes)
             self.ax.text2D(0.02, 0.55, f'平均跳数: {reward_info.get("avg_hops", 0):.1f}', 
                           transform=self.ax.transAxes)
