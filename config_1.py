@@ -80,7 +80,7 @@ class Config:
     effective_coverage_weight = 0.4     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
     throughput_weight = 0.4            # 系统吞吐量权重 
     load_balance_weight = 0.1          # 负载均衡权重 (衡量UAV负载分布的均衡性)
-    network_connectivity_weight = 0.1   # 网络连通性权重 (拥有有效回程路径的UAV比例)
+    proximity_penalty_weight = 0.1   # 网络连通性权重 (拥有有效回程路径的UAV比例)
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

@@ -761,7 +761,7 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                     'effective_coverage_weight': config.effective_coverage_weight,
                     'throughput_weight': config.throughput_weight,
                     'load_balance_weight': config.load_balance_weight,
-                    'network_connectivity_weight': config.network_connectivity_weight
+                    'proximity_penalty_weight': config.proximity_penalty_weight
                 })
             
             # 准备场景3特有的参数
