@@ -1417,9 +1417,17 @@ class HMASDAgent:
 
     def load_model(self, path):
         """加载模型"""
+        # 导入 Config 类并将其添加到安全列表
+        from config_1 import Config
+        torch.serialization.add_safe_globals([Config])
+        
         checkpoint = torch.load(path, map_location=self.device)
-        self.skill_coordinator.load_state_dict(checkpoint['skill_coordinator'])
-        self.skill_discoverer.load_state_dict(checkpoint['skill_discoverer'])
-        self.team_discriminator.load_state_dict(checkpoint['team_discriminator'])
-        self.individual_discriminator.load_state_dict(checkpoint['individual_discriminator'])
-        main_logger.info(f"模型已从 {path} 加载")
+        
+        # 使用 strict=False 来处理模型架构不匹配的问题
+        # 这允许加载匹配的层，同时忽略不匹配的层（如旧的transformer vs 新的opt，或变化的智能体数量）
+        self.skill_coordinator.load_state_dict(checkpoint['skill_coordinator'], strict=False)
+        self.skill_discoverer.load_state_dict(checkpoint['skill_discoverer'], strict=False)
+        self.team_discriminator.load_state_dict(checkpoint['team_discriminator'], strict=False)
+        self.individual_discriminator.load_state_dict(checkpoint['individual_discriminator'], strict=False)
+        
+        main_logger.info(f"模型已从 {path} 加载 (使用非严格模式)")

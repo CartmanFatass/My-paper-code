@@ -1208,6 +1208,10 @@ class MAPPOAgent:
     
     def load_model(self, path):
         """加载模型"""
+        # 导入 Config 类并将其添加到安全列表
+        from config_1 import Config
+        torch.serialization.add_safe_globals([Config])
+        
         checkpoint = torch.load(path, map_location=self.device)
         self.actor.load_state_dict(checkpoint['actor_state_dict'])
         self.critic.load_state_dict(checkpoint['critic_state_dict'])

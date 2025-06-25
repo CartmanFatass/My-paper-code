@@ -287,7 +287,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
                 
                 # 考虑多跳效率损失
                 path = self.routing_paths[i]
-                hop_count = len(path)
+                hop_count = len(path) - 1  # 路径长度减1才是真实跳数
                 hop_efficiency = 1.0 / hop_count if hop_count > 0 else 0
                 
                 # 有效回程容量
@@ -377,7 +377,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         final_reward = np.clip(final_reward, 0, 1)
         
         # 计算一些统计信息
-        total_hops = sum(len(path) for path in self.routing_paths.values())
+        total_hops = sum(len(path) - 1 for path in self.routing_paths.values())
         avg_hops = total_hops / max(len(self.routing_paths), 1)
         
         # 更新奖励信息用于调试和可视化

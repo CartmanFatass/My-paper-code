@@ -91,10 +91,9 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         # 场景名称
         self.metadata["name"] = "uav_cooperative_network_v0"
         
-        # 初始化UAV连接矩阵和角色
+        # 初始化UAV连接矩阵
         self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)  # UAV之间的连接
         self.uav_bs_connections = np.zeros((self.n_uavs, self.n_ground_bs), dtype=bool)  # UAV到地面基站的连接
-        self.uav_roles = np.zeros(self.n_uavs, dtype=int)  # 0: 未分配, 1: 基站, 2: 中继
         self.routing_paths = {}  # 路由路径 {uav_idx: [path_to_ground_bs]}
         
         # 扩展观测空间
@@ -167,15 +166,13 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         # 调用父类的reset
         observations, infos = super().reset(seed, options)
         
-        # 重置UAV连接矩阵和角色
+        # 重置UAV连接矩阵
         self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)
         self.uav_bs_connections = np.zeros((self.n_uavs, self.n_ground_bs), dtype=bool)
-        self.uav_roles = np.zeros(self.n_uavs, dtype=int)
         self.routing_paths = {}
         
-        # 更新UAV连接和角色
+        # 更新UAV连接
         self._update_uav_connections()
-        self._assign_uav_roles()
         self._compute_routing_paths()
         
         # 更新观测 (使用字典版本)
@@ -183,42 +180,6 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         
         return observations, infos
     
-    def _update_observations(self, observations):
-        """
-        更新观测，添加UAV角色和连接信息（用于数组格式的观测）
-        
-        参数:
-            observations: 原始观测
-            
-        返回:
-            updated_observations: 更新后的观测
-        """
-        updated_observations = []
-        
-        for i, agent in enumerate(self.agents):
-            # 获取原始观测
-            obs = observations[i]
-            
-            # 添加UAV角色信息（独热编码）
-            role_onehot = np.zeros(3)  # [未分配, 基站, 中继]
-            if self.uav_roles[i] < 3:
-                role_onehot[self.uav_roles[i]] = 1
-            
-            # 添加到地面基站的连接信息
-            bs_connections = self.uav_bs_connections[i]
-            
-            # 添加跳数信息（归一化）
-            if i in self.routing_paths:
-                hop_count = len(self.routing_paths[i])
-                normalized_hop = min(hop_count / self.max_hops, 1.0)
-            else:
-                normalized_hop = 1.0  # 无路径时设为最大值
-            
-            # 组合新的观测
-            new_obs = np.concatenate([obs, role_onehot, bs_connections, [normalized_hop]])
-            updated_observations.append(new_obs)
-        
-        return np.array(updated_observations)
     
     def _update_observations_dict(self, observations_dict):
         """
@@ -276,9 +237,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         # 执行父类的step
         observations, rewards, terminations, truncations, infos = super().step(actions)
         
-        # 更新UAV连接和角色
+        # 更新UAV连接
         self._update_uav_connections()
-        self._assign_uav_roles()
         self._compute_routing_paths()
         
         # 更新观测
@@ -297,7 +257,6 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             "reward_info": self.reward_info if hasattr(self, "reward_info") else {},
             "coverage_ratio": np.sum(self.connections) / self.n_users if self.n_users > 0 else 0,  # 避免除零错误
             "connectivity_ratio": self._compute_connectivity_ratio(),
-            "uav_roles": self.uav_roles.copy(),
             "routing_paths": {k: v.copy() for k, v in self.routing_paths.items()},
         }
         
@@ -335,48 +294,49 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
                 else:
                     self.uav_bs_connections[i, j] = False
     
-    def _assign_uav_roles(self):
-        """
-        分配UAV角色（基站或中继）
-        
-        策略：
-        1. 直接连接到地面基站的UAV可以作为基站或中继
-        2. 不直接连接到地面基站但能通过其他UAV连接的UAV作为基站
-        3. 其余UAV作为未分配
-        """
-        # 重置角色
-        self.uav_roles = np.zeros(self.n_uavs, dtype=int)
-        
-        # 计算每个UAV连接的用户数
-        uav_user_counts = np.sum(self.connections, axis=1)
-        
-        # 首先标记直接连接到地面基站的UAV
-        direct_bs_connected = np.any(self.uav_bs_connections, axis=1)
-        
-        # 根据连接的用户数和到地面基站的连接情况分配角色
-        for i in range(self.n_uavs):
-            if direct_bs_connected[i]:
-                # 直接连接到地面基站的UAV
-                if uav_user_counts[i] > 0:
-                    # 如果连接了用户，则作为基站
-                    self.uav_roles[i] = 1  # 基站
-                else:
-                    # 如果没有连接用户，则作为中继
-                    self.uav_roles[i] = 2  # 中继
-            else:
-                # 不直接连接到地面基站的UAV
-                if uav_user_counts[i] > 0:
-                    # 如果连接了用户，则作为基站
-                    self.uav_roles[i] = 1  # 基站
-                else:
-                    # 如果没有连接用户，则作为未分配
-                    self.uav_roles[i] = 0  # 未分配
     
+    def _find_best_bs_connection(self, uav_idx):
+        """
+        为给定的UAV找到最佳的地面基站连接（基于距离）
+        
+        参数:
+            uav_idx: 无人机索引
+            
+        返回:
+            best_bs_idx: 最佳基站索引，如果没有可连接的基站则返回None
+        """
+        available_bs = []
+        for bs_idx in range(self.n_ground_bs):
+            if self.uav_bs_connections[uav_idx, bs_idx]:
+                available_bs.append(bs_idx)
+        
+        if not available_bs:
+            return None
+        
+        # 如果只有一个可用基站，直接返回
+        if len(available_bs) == 1:
+            return available_bs[0]
+        
+        # 计算到每个可用基站的距离，选择最近的
+        min_distance = float('inf')
+        best_bs_idx = available_bs[0]
+        
+        uav_pos = self.uav_positions[uav_idx]
+        for bs_idx in available_bs:
+            bs_pos = self.ground_bs_positions[bs_idx]
+            distance = self._compute_distance(uav_pos, bs_pos)
+            
+            if distance < min_distance:
+                min_distance = distance
+                best_bs_idx = bs_idx
+        
+        return best_bs_idx
+
     def _compute_routing_paths(self):
         """
         计算每个UAV到地面基站的路由路径
         
-        使用广度优先搜索找到最短路径
+        使用广度优先搜索找到最短路径，优先选择距离最近的基站
         """
         self.routing_paths = {}
         
@@ -384,9 +344,11 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         for i in range(self.n_uavs):
             # 如果UAV直接连接到地面基站
             if np.any(self.uav_bs_connections[i]):
-                # 找到连接的地面基站索引
-                bs_idx = np.where(self.uav_bs_connections[i])[0][0]
-                self.routing_paths[i] = [("ground_bs", bs_idx)]
+                # 找到最佳的地面基站连接（距离最近的）
+                best_bs_idx = self._find_best_bs_connection(i)
+                if best_bs_idx is not None:
+                    # 确保路径包含起始UAV节点
+                    self.routing_paths[i] = [("uav", i), ("ground_bs", best_bs_idx)]
                 continue
             
             # 否则，使用BFS寻找到地面基站的路径
@@ -396,7 +358,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
     
     def _bfs_shortest_path(self, start_uav):
         """
-        使用BFS寻找从UAV到地面基站的最短路径
+        使用BFS寻找从UAV到地面基站的最短路径，优先选择距离最近的基站
         
         参数:
             start_uav: 起始UAV索引
@@ -412,14 +374,36 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             current, path = queue.pop(0)
             
             # 检查是否直接连接到地面基站
+            available_bs = []
             for bs_idx in range(self.n_ground_bs):
                 if self.uav_bs_connections[current, bs_idx]:
-                    return path + [("uav", current), ("ground_bs", bs_idx)]
+                    available_bs.append(bs_idx)
+            
+            # 如果找到可连接的基站，选择距离最近的那个
+            if available_bs:
+                if len(available_bs) == 1:
+                    # 只有一个可用基站，直接返回
+                    best_bs_idx = available_bs[0]
+                else:
+                    # 多个可用基站，选择距离最近的
+                    min_distance = float('inf')
+                    best_bs_idx = available_bs[0]
+                    
+                    current_uav_pos = self.uav_positions[current]
+                    for bs_idx in available_bs:
+                        bs_pos = self.ground_bs_positions[bs_idx]
+                        distance = self._compute_distance(current_uav_pos, bs_pos)
+                        
+                        if distance < min_distance:
+                            min_distance = distance
+                            best_bs_idx = bs_idx
+                
+                return path + [("uav", current), ("ground_bs", best_bs_idx)]
             
             # 检查连接到的其他UAV
             for next_uav in range(self.n_uavs):
                 if self.uav_connections[current, next_uav] and next_uav not in visited:
-                    if len(path) >= self.max_hops - 1:
+                    if len(path) >= self.max_hops:
                         continue  # 超过最大跳数限制
                     
                     visited.add(next_uav)
@@ -476,7 +460,10 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             connectivity_ratio: 连通性比率 [0,1]
         """
         # 计算有效路由的UAV数量
-        connected_uavs = len(self.routing_paths)
+        if hasattr(self, 'routing_paths'):
+            connected_uavs = len(self.routing_paths)
+        else:
+            connected_uavs = 0
         
         # 计算连通性比率
         connectivity_ratio = connected_uavs / self.n_uavs
@@ -772,7 +759,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
                 
                 # 考虑多跳效率损失（这里体现多跳的容量损失）
                 path = self.routing_paths[i]
-                hop_count = len(path)
+                hop_count = len(path) - 1  # 路径长度减1才是真实跳数
                 hop_efficiency = 1.0 / hop_count if hop_count > 0 else 0
                 
                 # 有效回程容量
@@ -810,7 +797,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             "max_realistic_throughput_mbps": max_realistic_throughput / 1e6,
             "connected_users": connected_users,
             "coverage_ratio": coverage_reward,
-            "avg_hops": sum(len(path) for path in self.routing_paths.values()) / max(len(self.routing_paths), 1)
+            "avg_hops": sum(len(path) - 1 for path in self.routing_paths.values()) / max(len(self.routing_paths), 1)
         }
         
         return normalized_reward
@@ -829,59 +816,31 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         frame = super()._render_frame()
         
         # 添加UAV之间的连接和UAV到地面基站的连接
-        for i in range(self.n_uavs):
-            uav_pos_i = self.uav_positions[i]
-            
-            # 绘制UAV之间的连接
-            for j in range(i+1, self.n_uavs):
-                if self.uav_connections[i, j]:
-                    uav_pos_j = self.uav_positions[j]
-                    self.ax.plot([uav_pos_i[0], uav_pos_j[0]], 
-                                [uav_pos_i[1], uav_pos_j[1]], 
-                                [uav_pos_i[2], uav_pos_j[2]], 
-                                'y-', alpha=0.5, linewidth=1.5)
-            
-            # 绘制UAV到地面基站的连接
-            for j in range(self.n_ground_bs):
-                if self.uav_bs_connections[i, j]:
-                    bs_pos = self.ground_bs_positions[j]
-                    self.ax.plot([uav_pos_i[0], bs_pos[0]], 
-                                [uav_pos_i[1], bs_pos[1]], 
-                                [uav_pos_i[2], bs_pos[2]], 
-                                'c-', alpha=0.7, linewidth=2.0)
-        
-        # 根据角色为UAV添加不同的颜色
-        for i in range(self.n_uavs):
-            uav_pos = self.uav_positions[i]
-            role = self.uav_roles[i]
-            
-            # 清除之前的UAV标记
-            if hasattr(self, 'uav_markers'):
-                for marker in self.uav_markers:
-                    if marker in self.ax.collections:
-                        marker.remove()
-            
-            # 根据角色设置颜色
-            if role == 0:  # 未分配
-                color = 'gray'
-            elif role == 1:  # 基站
-                color = 'red'
-            elif role == 2:  # 中继
-                color = 'orange'
-            
-            # 重新绘制UAV
-            self.ax.scatter(uav_pos[0], uav_pos[1], uav_pos[2], 
-                           c=color, marker='^', s=100, 
-                           label=f'UAV {i} ({["未分配", "基站", "中继"][role]})' if i == 0 else "")
+        if hasattr(self, 'uav_connections') and hasattr(self, 'uav_bs_connections'):
+            for i in range(self.n_uavs):
+                uav_pos_i = self.uav_positions[i]
+                
+                # 绘制UAV之间的连接
+                for j in range(i+1, self.n_uavs):
+                    if self.uav_connections[i, j]:
+                        uav_pos_j = self.uav_positions[j]
+                        self.ax.plot([uav_pos_i[0], uav_pos_j[0]], 
+                                    [uav_pos_i[1], uav_pos_j[1]], 
+                                    [uav_pos_i[2], uav_pos_j[2]], 
+                                    'y-', alpha=0.5, linewidth=1.5)
+                
+                # 绘制UAV到地面基站的连接
+                for j in range(self.n_ground_bs):
+                    if self.uav_bs_connections[i, j]:
+                        bs_pos = self.ground_bs_positions[j]
+                        self.ax.plot([uav_pos_i[0], bs_pos[0]], 
+                                    [uav_pos_i[1], bs_pos[1]], 
+                                    [uav_pos_i[2], bs_pos[2]], 
+                                    'c-', alpha=0.7, linewidth=2.0)
         
         # 添加连通性信息
         connectivity_ratio = self._compute_connectivity_ratio()
         self.ax.text2D(0.02, 0.90, f'网络连通性: {connectivity_ratio:.2%}', transform=self.ax.transAxes)
-        
-        # 添加角色统计
-        role_counts = np.bincount(self.uav_roles, minlength=3)
-        self.ax.text2D(0.02, 0.85, f'角色: 基站={role_counts[1]}, 中继={role_counts[2]}, 未分配={role_counts[0]}', 
-                      transform=self.ax.transAxes)
         
         # 添加吞吐量信息
         if hasattr(self, 'reward_info') and 'total_throughput_mbps' in self.reward_info:
