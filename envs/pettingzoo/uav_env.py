@@ -34,7 +34,7 @@ class MultiUAVEnv(ParallelEnv):
         use_shadowing=False,  # 是否启用阴影衰落（默认关闭）
         paper_reward=False,  # 是否使用论文中的奖励函数
         use_fdma=False,  # 是否启用FDMA频分多址（无干扰模式）
-        bandwidth=20e6 / 5,  # 每个无人机的带宽 (Hz)，默认为20MHz/5个UAV
+        bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
     ):
         """
         初始化多无人机基站环境

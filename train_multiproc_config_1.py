@@ -740,7 +740,7 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
         # 如果未提供带宽，则使用默认值
         effective_bandwidth = bandwidth
         if effective_bandwidth is None:
-            effective_bandwidth = 20e6 / n_uavs
+            effective_bandwidth = 20e6
         
         # 准备通用环境参数
         env_kwargs = {
@@ -832,8 +832,8 @@ def parse_args():
     
     # FDMA 参数
     parser.add_argument('--use-fdma', action=argparse.BooleanOptionalAction, default=True,
-                        help='是否启用FDMA频分多址以减少干扰 (默认: --use-fdma, 使用 --no-use-fdma 禁用)')
-    parser.add_argument('--bandwidth', type=float, default=None, help='每个无人机的带宽 (Hz)。默认: 20e6 / n_uavs')
+                        help='理想FDMA,0干扰 (默认: --use-fdma, 使用 --no-use-fdma 禁用)')
+    parser.add_argument('--bandwidth', type=float, default=20e6, help='每个无人机的带宽 (Hz)。默认: 20e6')
     
     # 场景3特有参数
     parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
