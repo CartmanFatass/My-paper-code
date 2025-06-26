@@ -77,10 +77,10 @@ class Config:
     
     # 环境奖励权重配置 - 场景3多跳环境
     # 注意：场景2不再需要传入奖励权重，其奖励已固化为覆盖率+归一化吞吐量
-    effective_coverage_weight = 0.8     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
-    throughput_weight = 0.1            # 系统吞吐量权重 
-    load_balance_weight = 0.05          # 负载均衡权重 (衡量UAV负载分布的均衡性)
-    proximity_penalty_weight = 0.05   # 网络连通性权重 (拥有有效回程路径的UAV比例)
+    effective_coverage_weight = 0.1     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
+    throughput_weight = 0.7            # 系统吞吐量权重 
+    load_balance_weight = 0.1          # 负载均衡权重 (衡量UAV负载分布的均衡性)
+    proximity_penalty_weight = 0.1   # 网络连通性权重 (拥有有效回程路径的UAV比例)
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

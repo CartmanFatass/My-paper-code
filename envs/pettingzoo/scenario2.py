@@ -33,6 +33,10 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         n_ground_bs=1,  # 地面基站数量
         max_observed_uavs=10,  # 最大观测无人机数量
         max_observed_users=20,  # 最大观测用户数量
+        use_shadowing=False,  # 是否启用阴影衰落（默认关闭）
+        paper_reward=False,  # 是否使用论文中的奖励函数
+        use_fdma=True,  # 是否启用FDMA频分多址
+        bandwidth=20e6 / 5,  # 每个无人机的带宽 (Hz)，默认为20MHz/5个UAV
     ):
         """
         初始化UAV协作组网环境
@@ -86,6 +90,10 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             seed=seed,
             max_observed_uavs=max_observed_uavs,
             max_observed_users=max_observed_users,
+            use_shadowing=use_shadowing,
+            paper_reward=paper_reward,
+            use_fdma=use_fdma,
+            bandwidth=bandwidth,
         )
         
         # 场景名称

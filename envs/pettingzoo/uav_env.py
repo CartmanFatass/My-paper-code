@@ -31,6 +31,10 @@ class MultiUAVEnv(ParallelEnv):
         seed=None,
         max_observed_uavs=10,  # 最大观测无人机数量
         max_observed_users=20,  # 最大观测用户数量
+        use_shadowing=False,  # 是否启用阴影衰落（默认关闭）
+        paper_reward=False,  # 是否使用论文中的奖励函数
+        use_fdma=False,  # 是否启用FDMA频分多址（无干扰模式）
+        bandwidth=20e6 / 5,  # 每个无人机的带宽 (Hz)，默认为20MHz/5个UAV
     ):
         """
         初始化多无人机基站环境
@@ -67,16 +71,36 @@ class MultiUAVEnv(ParallelEnv):
         self.max_observed_uavs = max_observed_uavs
         self.max_observed_users = max_observed_users
         
+        # 阴影衰落参数
+        self.use_shadowing = use_shadowing
+        
+        # FDMA参数
+        self.use_fdma = use_fdma
+        
         # 初始化随机数生成器
         self.np_random = np.random.RandomState(seed)
         
-        # 通信参数
-        self.carrier_frequency = 2.4e9  # 载波频率 (Hz)
-        self.bandwidth = 20e6  # 带宽 (Hz)
-        self.tx_power = 20  # 发射功率 (dBm)
-        self.noise_power = -104  # 噪声功率 (dBm)
-        self.min_sinr = 0  # 最小SINR (dB)
+        # 通信参数 - 基于论文模型
+        self.carrier_frequency = 2e9  # 载波频率 (Hz) - 论文中为2 GHz
+        self.bandwidth = bandwidth  # 子信道带宽 (Hz) - 可配置参数
+        self.tx_power = 23  # 发射功率 (dBm) - 论文中最大发射功率
+        self.noise_power = -80  # 噪声功率 (dBm) - 论文中的σ²
+        self.min_sinr = 3  # 最小SINR阈值 (dB) - 论文中的γ̄
         self.max_connections = 10  # 每个无人机最大连接数
+        
+        # 论文中的概率信道模型参数
+        self.prob_channel_a = 9.61  # 环境常数a
+        self.prob_channel_b = 0.16  # 环境常数b
+        self.eta_los = 1.0  # LoS额外损耗 (dB)
+        self.eta_nlos = 20.0  # NLoS额外损耗 (dB)
+        #self.uav_height = 100  # 无人机飞行高度 (m) - 论文中的H
+        
+        # 论文中的信号与性能模型参数
+        self.sinr_threshold_db = 3  # 最低SINR阈值γ̄ (dB)
+        self.power_cost_weight = 100  # 单位功率成本w_m
+        
+        # 奖励函数选择
+        self.paper_reward = paper_reward  # 是否使用论文中的奖励函数
         
         # 地面基站参数 (用于场景2)
         # 默认地面基站数量，可以被子类覆盖
@@ -167,6 +191,7 @@ class MultiUAVEnv(ParallelEnv):
                 self.np_random.uniform(0, self.area_size),
                 self.np_random.uniform(*self.height_range)
             ]
+        
         
         # 初始化用户位置
         self.user_positions = self._generate_user_positions()
@@ -549,24 +574,57 @@ class MultiUAVEnv(ParallelEnv):
             # 非视距路径损耗 (NLoS path loss)
             pl_nlos = 22.7 + 41 * np.log10(safe_distance) + 20 * np.log10(f_c)
             
-            # 阴影衰落标准差 (Shadow fading standard deviation)
-            sigma_los = 4.0
-            sigma_nlos = 8.0
-            
-            # 应用阴影衰落 (假设常规高斯分布)
+            # 模拟信道状态：根据LoS概率决定是LoS还是NLoS
+            # 这是一个更符合实际仿真的蒙特卡洛方法，而不是计算期望值
             if hasattr(self, 'np_random'):
-                shadow_los = self.np_random.normal(0, sigma_los)
-                shadow_nlos = self.np_random.normal(0, sigma_nlos)
+                is_los = self.np_random.uniform(0, 1) < p_los
             else:
-                shadow_los = np.random.normal(0, sigma_los)
-                shadow_nlos = np.random.normal(0, sigma_nlos)
+                is_los = np.random.uniform(0, 1) < p_los
             
-            # 计算总路径损耗
-            path_loss_los = pl_los + shadow_los
-            path_loss_nlos = pl_nlos + shadow_nlos
+            if is_los:
+                # 视距 (LoS) 链路
+                path_loss = pl_los
+                if self.use_shadowing:
+                    sigma_los = 4.0
+                    if hasattr(self, 'np_random'):
+                        shadowing = self.np_random.normal(0, sigma_los)
+                    else:
+                        shadowing = np.random.normal(0, sigma_los)
+                    path_loss += shadowing
+            else:
+                # 非视距 (NLoS) 链路
+                path_loss = pl_nlos
+                if self.use_shadowing:
+                    sigma_nlos = 8.0
+                    if hasattr(self, 'np_random'):
+                        shadowing = self.np_random.normal(0, sigma_nlos)
+                    else:
+                        shadowing = np.random.normal(0, sigma_nlos)
+                    path_loss += shadowing
+        
+        # 论文中的概率信道模型 (Probabilistic Channel Model)
+        elif self.channel_model == "probabilistic":
+            # 步骤1: 计算LoS概率 (Eq. 1)
+            # θ = arcsin(H / d_m,l(t))，其中H是无人机高度，d_m,l是3D距离
+            theta_rad = np.arcsin(height / safe_distance)  # 仰角 (弧度)
+            theta_deg = np.degrees(theta_rad)  # 仰角 (度)
             
-            # 根据视距概率加权平均
-            path_loss = p_los * path_loss_los + (1 - p_los) * path_loss_nlos
+            # P_LoS = 1 / (1 + a * exp(-b * (θ - a)))
+            p_los = 1 / (1 + self.prob_channel_a * np.exp(-self.prob_channel_b * (theta_deg - self.prob_channel_a)))
+            p_nlos = 1 - p_los
+            
+            # 步骤2: 计算自由空间路径损耗 (Free Space Path Loss)
+            # L_FS = 20*log10(d) + 20*log10(f) + 20*log10(4π/c)
+            wavelength = 3e8 / self.carrier_frequency
+            l_fs = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+            
+            # 步骤3: 计算LoS和NLoS路径损耗 (Eq. 2a, 2b)
+            pl_los = l_fs + self.eta_los   # LoS路径损耗
+            pl_nlos = l_fs + self.eta_nlos # NLoS路径损耗
+            
+            # 步骤4: 计算平均路径损耗 (Eq. 3)
+            # L(t) = P_LoS * PL_LoS + P_NLoS * PL_NLoS
+            path_loss = p_los * pl_los + p_nlos * pl_nlos
         
         else:
             raise ValueError(f"未知的信道模型: {self.channel_model}")
@@ -604,24 +662,29 @@ class MultiUAVEnv(ParallelEnv):
         # 计算接收功率 (dBm)
         rx_power = self.tx_power - path_loss
         
-        # 计算干扰功率 (dBm)
-        interference_power = []
-        for i in range(self.n_uavs):
-            if i != uav_idx:
-                interferer_pos = self.uav_positions[i]
-                interferer_path_loss = self._compute_path_loss(interferer_pos, user_pos)
-                interferer_power = self.tx_power - interferer_path_loss
-                interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
-        
-        # 总干扰功率 (dBm)
-        total_interference = np.sum(interference_power) if interference_power else 0
-        total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
-        
-        # 计算SINR (dB)
-        noise_power_dbm = self.noise_power
-        interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
-        
-        sinr = rx_power - interference_plus_noise_dbm
+        # 如果启用FDMA，无人机间无干扰，SINR = SNR
+        if self.use_fdma:
+            # FDMA模式：无干扰，SINR = 接收功率 - 噪声功率
+            sinr = rx_power - self.noise_power
+        else:
+            # 原始模式：计算干扰功率
+            interference_power = []
+            for i in range(self.n_uavs):
+                if i != uav_idx:
+                    interferer_pos = self.uav_positions[i]
+                    interferer_path_loss = self._compute_path_loss(interferer_pos, user_pos)
+                    interferer_power = self.tx_power - interferer_path_loss
+                    interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
+            
+            # 总干扰功率 (dBm)
+            total_interference = np.sum(interference_power) if interference_power else 0
+            total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+            
+            # 计算SINR (dB)
+            noise_power_dbm = self.noise_power
+            interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
+            
+            sinr = rx_power - interference_plus_noise_dbm
         
         return sinr
     
@@ -645,24 +708,29 @@ class MultiUAVEnv(ParallelEnv):
         # 计算接收功率 (dBm)
         rx_power = self.tx_power - path_loss
         
-        # 计算干扰功率：来自所有其他无人机的干扰
-        interference_power = []
-        for i in range(self.n_uavs):
-            if i != sender_idx and i != receiver_idx:  # 排除发送方和接收方
-                interferer_pos = self.uav_positions[i]
-                interferer_path_loss = self._compute_uav_path_loss(interferer_pos, receiver_pos)
-                interferer_power = self.tx_power - interferer_path_loss
-                interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
-        
-        # 总干扰功率 (dBm)
-        total_interference = np.sum(interference_power) if interference_power else 0
-        total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
-        
-        # 计算SINR (dB)
-        noise_power_dbm = self.noise_power
-        interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
-        
-        sinr = rx_power - interference_plus_noise_dbm
+        # 如果启用FDMA，无人机间无干扰，SINR = SNR
+        if self.use_fdma:
+            # FDMA模式：无干扰，SINR = 接收功率 - 噪声功率
+            sinr = rx_power - self.noise_power
+        else:
+            # 原始模式：计算干扰功率
+            interference_power = []
+            for i in range(self.n_uavs):
+                if i != sender_idx and i != receiver_idx:  # 排除发送方和接收方
+                    interferer_pos = self.uav_positions[i]
+                    interferer_path_loss = self._compute_uav_path_loss(interferer_pos, receiver_pos)
+                    interferer_power = self.tx_power - interferer_path_loss
+                    interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
+            
+            # 总干扰功率 (dBm)
+            total_interference = np.sum(interference_power) if interference_power else 0
+            total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+            
+            # 计算SINR (dB)
+            noise_power_dbm = self.noise_power
+            interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
+            
+            sinr = rx_power - interference_plus_noise_dbm
         
         return sinr
     
@@ -701,6 +769,23 @@ class MultiUAVEnv(ParallelEnv):
             # 对于无人机间通信，简化为自由空间模型
             wavelength = 3e8 / self.carrier_frequency
             path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+        
+        elif self.channel_model == "probabilistic":
+            # 对于无人机间通信，使用简化的概率信道模型
+            # 由于两个无人机都在空中，LoS概率较高，简化为主要考虑自由空间损耗
+            wavelength = 3e8 / self.carrier_frequency
+            l_fs = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+            
+            # 对于无人机间通信，假设LoS概率较高（0.9），NLoS概率较低（0.1）
+            p_los = 0.9
+            p_nlos = 0.1
+            
+            # LoS和NLoS路径损耗
+            pl_los = l_fs + self.eta_los
+            pl_nlos = l_fs + self.eta_nlos
+            
+            # 加权平均路径损耗
+            path_loss = p_los * pl_los + p_nlos * pl_nlos
         
         else:
             raise ValueError(f"未知的信道模型: {self.channel_model}")
@@ -742,31 +827,68 @@ class MultiUAVEnv(ParallelEnv):
     
     def _compute_reward(self):
         """
-        计算奖励
+        计算奖励 - 支持原始奖励和论文奖励两种模式
         
         返回:
             reward: 全局奖励
         """
-        # 基本奖励：已连接用户数
-        connected_users = np.sum(self.connections)
-        reward = connected_users / self.n_users
+        if self.paper_reward:
+            # 论文中的奖励函数 (Eq. 13)
+            total_reward = 0.0
+            
+            for i in range(self.n_uavs):
+                uav_reward = 0.0
+                
+                # 计算该无人机服务的所有用户的奖励
+                for j in range(self.n_users):
+                    if self.connections[i, j]:
+                        sinr_db = self.sinr_matrix[i, j]
+                        
+                        # 检查SINR是否达到阈值
+                        if sinr_db >= self.sinr_threshold_db:
+                            # 将SINR从dB转换为线性值
+                            sinr_linear = 10 ** (sinr_db / 10)
+                            
+                            # 根据香农公式计算吞吐量 (bps)
+                            # R = (W/K) * log2(1 + γ)
+                            throughput = self.bandwidth * np.log2(1 + sinr_linear)
+                            
+                            # 计算功率成本
+                            # 将发射功率从dBm转换为瓦特
+                            tx_power_watts = 10 ** ((self.tx_power - 30) / 10)
+                            power_cost = self.power_cost_weight * tx_power_watts
+                            
+                            # 计算该连接的奖励
+                            connection_reward = throughput - power_cost
+                            uav_reward += connection_reward
+                        # 如果SINR未达到阈值，该连接的奖励为0（已经是默认值）
+                
+                total_reward += uav_reward
+            
+            return total_reward
         
-        # 额外奖励：SINR质量
-        total_sinr = 0
-        for i in range(self.n_uavs):
-            for j in range(self.n_users):
-                if self.connections[i, j]:
-                    # 归一化SINR到[0,1]范围
-                    normalized_sinr = np.clip((self.sinr_matrix[i, j] - self.min_sinr) / 30, 0, 1)
-                    total_sinr += normalized_sinr
-        
-        # 平均SINR质量
-        avg_sinr_quality = total_sinr / max(connected_users, 1)
-        
-        # 组合奖励
-        reward = 0.7 * reward + 0.3 * avg_sinr_quality
-        
-        return reward
+        else:
+            # 原始奖励函数
+            # 基本奖励：已连接用户数
+            connected_users = np.sum(self.connections)
+            reward = connected_users / self.n_users
+            
+            # 额外奖励：SINR质量
+            total_sinr = 0
+            for i in range(self.n_uavs):
+                for j in range(self.n_users):
+                    if self.connections[i, j]:
+                        # 归一化SINR到[0,1]范围
+                        normalized_sinr = np.clip((self.sinr_matrix[i, j] - self.min_sinr) / 30, 0, 1)
+                        total_sinr += normalized_sinr
+            
+            # 平均SINR质量
+            avg_sinr_quality = total_sinr / max(connected_users, 1)
+            
+            # 组合奖励
+            reward = 0.7 * reward + 0.3 * avg_sinr_quality
+            
+            return reward
     
     def render(self):
         """

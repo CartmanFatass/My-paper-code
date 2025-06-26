@@ -453,6 +453,10 @@ def create_env(scenario, args, save_path=None):
     返回:
         env: 环境实例
     """
+    # FDMA参数设置
+    use_fdma = getattr(args, 'use_fdma', True)  # 默认启用FDMA
+    bandwidth = getattr(args, 'bandwidth', 5)  # 默认3个信道
+    
     if scenario == 1:
         raw_env = UAVBaseStationEnv(
             n_uavs=args.n_uavs,
@@ -461,7 +465,9 @@ def create_env(scenario, args, save_path=None):
             user_distribution=args.user_distribution,
             channel_model=args.channel_model,
             render_mode="human",
-            seed=args.seed
+            seed=args.seed,
+            use_fdma=use_fdma,
+            bandwidth=bandwidth
         )
     elif scenario == 2:
         raw_env = UAVCooperativeNetworkEnv(
@@ -472,7 +478,9 @@ def create_env(scenario, args, save_path=None):
             user_distribution=args.user_distribution,
             channel_model=args.channel_model,
             render_mode="human",
-            seed=args.seed
+            seed=args.seed,
+            use_fdma=use_fdma,
+            bandwidth=bandwidth
         )
     elif scenario == 3:
         raw_env = UAVMultiHopEnv(
@@ -486,7 +494,9 @@ def create_env(scenario, args, save_path=None):
             seed=args.seed,
             n_clusters=args.n_clusters,
             cluster_std=args.cluster_std,
-            central_area_ratio=args.central_area_ratio
+            central_area_ratio=args.central_area_ratio,
+            use_fdma=use_fdma,
+            bandwidth=bandwidth
         )
     else:
         raise ValueError(f"未知的场景: {scenario}")
@@ -623,12 +633,24 @@ def parse_args():
     parser.add_argument('--central_area_ratio', type=float, default=0.5,
                        help='中心用户区域占总区域的比例 (仅用于场景3)')
     
+    # FDMA参数
+    parser.add_argument('--use_fdma', action='store_true', default=True,
+                       help='是否启用FDMA频分多址 (默认启用)')
+    parser.add_argument('--no_fdma', action='store_true',
+                       help='禁用FDMA频分多址')
+    parser.add_argument('--bandwidth', type=int, default=20e6/5,
+                       help='FDMA信道数量 (默认5个)')
+    
     return parser.parse_args()
 
 
 def main():
     """主函数"""
     args = parse_args()
+    
+    # 处理FDMA参数逻辑
+    if args.no_fdma:
+        args.use_fdma = False
     
     # 检查模型文件是否存在
     if not os.path.exists(args.model_path):
@@ -640,6 +662,9 @@ def main():
     print(f"无人机数量: {args.n_uavs}")
     print(f"用户数量: {args.n_users}")
     print(f"区域大小: {args.area_size}m")
+    print(f"FDMA启用状态: {args.use_fdma}")
+    if args.use_fdma:
+        print(f"FDMA信道数量: {args.bandwidth}")
     
     # 创建评估结果保存文件夹
     save_path = create_evaluation_folder(args)

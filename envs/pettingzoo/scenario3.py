@@ -39,6 +39,10 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         central_area_ratio=0.5,  # 中心用户区域占总区域的比例
         max_observed_uavs=10,  # 最大观测无人机数量
         max_observed_users=20,  # 最大观测用户数量
+        use_shadowing=False,  # 是否启用阴影衰落（默认关闭）
+        paper_reward=False,  # 是否使用论文中的奖励函数
+        use_fdma=True,  # 是否启用FDMA频分多址
+        bandwidth=20e6 / 5,  # 每个无人机的带宽 (Hz)，默认为20MHz/5个UAV
     ):
         """
         初始化UAV强制多跳环境
@@ -98,6 +102,10 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             n_ground_bs=n_ground_bs,
             max_observed_uavs=max_observed_uavs,
             max_observed_users=max_observed_users,
+            use_shadowing=use_shadowing,
+            paper_reward=paper_reward,
+            use_fdma=use_fdma,
+            bandwidth=bandwidth,
         )
         
         # 场景名称

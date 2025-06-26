@@ -709,7 +709,7 @@ def get_device(device_pref):
         return torch.device('cpu')
 
 # 创建环境函数 (修改后用于 SubprocVecEnv)
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0, n_clusters=None, cluster_std=None, central_area_ratio=None, area_size=None):
+def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0, n_clusters=None, cluster_std=None, central_area_ratio=None, area_size=None, use_fdma=True, bandwidth=None):
     """
     创建环境实例的函数 (用于 SubprocVecEnv)
 
@@ -728,31 +728,39 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
         cluster_std: 簇内用户分布标准差 (仅用于场景3)
         central_area_ratio: 中心用户区域占总区域的比例 (仅用于场景3)
         area_size: 区域大小 (仅用于场景3)
+        use_fdma: 是否启用FDMA
+        bandwidth: 每个无人机的带宽 (Hz)
 
     返回:
         一个返回环境实例的函数
     """
     def _init():
         env_seed = seed + rank # 为每个并行环境设置不同的种子
+        
+        # 如果未提供带宽，则使用默认值
+        effective_bandwidth = bandwidth
+        if effective_bandwidth is None:
+            effective_bandwidth = 20e6 / n_uavs
+        
+        # 准备通用环境参数
+        env_kwargs = {
+            'n_uavs': n_uavs,
+            'n_users': n_users,
+            'user_distribution': user_distribution,
+            'channel_model': channel_model,
+            'render_mode': render_mode,
+            'seed': env_seed,
+            'use_fdma': use_fdma,
+            'bandwidth': effective_bandwidth
+        }
+        
         if scenario == 1:
-            raw_env = UAVBaseStationEnv(
-                n_uavs=n_uavs,
-                n_users=n_users,
-                user_distribution=user_distribution,
-                channel_model=channel_model,
-                render_mode=render_mode,
-                seed=env_seed # 将种子传递给原始环境
-            )
+            raw_env = UAVBaseStationEnv(**env_kwargs)
         elif scenario == 2:
             # 场景2不再需要传递奖励权重参数，奖励已固化为覆盖率+归一化吞吐量
             raw_env = UAVCooperativeNetworkEnv(
-                n_uavs=n_uavs,
-                n_users=n_users,
                 max_hops=max_hops,
-                user_distribution=user_distribution,
-                channel_model=channel_model,
-                render_mode=render_mode,
-                seed=env_seed # 将种子传递给原始环境
+                **env_kwargs
             )
         elif scenario == 3:
             # 准备场景3的新奖励权重参数（如果配置可用）
@@ -777,13 +785,8 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                 scenario3_kwargs['area_size'] = area_size
             
             raw_env = UAVMultiHopEnv(
-                n_uavs=n_uavs,
-                n_users=n_users,
                 max_hops=max_hops,
-                user_distribution=user_distribution,
-                channel_model=channel_model,
-                render_mode=render_mode,
-                seed=env_seed, # 将种子传递给原始环境
+                **env_kwargs, # 传递通用参数
                 **reward_kwargs, # 传递场景3的新奖励权重参数
                 **scenario3_kwargs # 传递场景3特有参数
             )
@@ -819,16 +822,21 @@ def parse_args():
 
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
-    parser.add_argument('--n_users', type=int, default=30, help='用户数量 ')
-    parser.add_argument('--area_size', type=int, default=1500, help='区域大小 (米, 场景3默认3000)')
+    parser.add_argument('--n_users', type=int, default=50, help='用户数量 ')
+    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 场景3默认3000)')
     parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
-    parser.add_argument('--channel_model', type=str, default='3gpp-36777',
-                        choices=['free_space', 'urban', 'suburban','3gpp-36777'], help='信道模型')
+    parser.add_argument('--channel_model', type=str, default='probabilistic',
+                        choices=['free_space', 'urban', 'suburban','3gpp-36777', 'probabilistic'], help='信道模型')
+    
+    # FDMA 参数
+    parser.add_argument('--use-fdma', action=argparse.BooleanOptionalAction, default=True,
+                        help='是否启用FDMA频分多址以减少干扰 (默认: --use-fdma, 使用 --no-use-fdma 禁用)')
+    parser.add_argument('--bandwidth', type=float, default=None, help='每个无人机的带宽 (Hz)。默认: 20e6 / n_uavs')
     
     # 场景3特有参数
-    parser.add_argument('--n_clusters', type=int, default=3, help='用户簇数量 (仅用于场景3)')
+    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
     parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3)')
     parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3)')
     
@@ -1621,7 +1629,9 @@ def main():
         n_clusters=args.n_clusters if args.scenario == 3 else None,
         cluster_std=args.cluster_std if args.scenario == 3 else None,
         central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
-        area_size=args.area_size if args.scenario == 3 else None
+        area_size=args.area_size if args.scenario == 3 else None,
+        use_fdma=args.use_fdma,
+        bandwidth=args.bandwidth
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
@@ -1639,7 +1649,9 @@ def main():
         n_clusters=args.n_clusters if args.scenario == 3 else None,
         cluster_std=args.cluster_std if args.scenario == 3 else None,
         central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
-        area_size=args.area_size if args.scenario == 3 else None
+        area_size=args.area_size if args.scenario == 3 else None,
+        use_fdma=args.use_fdma,
+        bandwidth=args.bandwidth
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -1659,7 +1671,9 @@ def main():
         n_clusters=args.n_clusters if args.scenario == 3 else None,
         cluster_std=args.cluster_std if args.scenario == 3 else None,
         central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
-        area_size=args.area_size if args.scenario == 3 else None
+        area_size=args.area_size if args.scenario == 3 else None,
+        use_fdma=args.use_fdma,
+        bandwidth=args.bandwidth
     )
     temp_env = temp_env_fn()
     
