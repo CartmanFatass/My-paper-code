@@ -272,7 +272,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         
         effective_coverage_reward = effective_connected_users / self.n_users if self.n_users > 0 else 0
         
-        # 2. 系统吞吐量奖励：使用scenario2中的成熟计算逻辑
+        # 2. 系统吞吐量奖励：在理想FDMA模型下只考虑前端容量
         system_throughput = 0
         
         # 按UAV计算有效吞吐量
@@ -286,25 +286,15 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             if len(connected_users_to_uav) == 0:
                 continue  # 该UAV没有连接用户
             
-            # 计算该UAV的前端总容量（考虑带宽共享）
-            uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
-            
-            # 获取该UAV的回程容量限制
+            # 在理想FDMA模型下，只有当UAV有回程路径时，其前端容量才有效
             if i in self.routing_paths:
-                backhaul_capacity = self._compute_backhaul_capacity(i)
+                # 计算该UAV的前端总容量（考虑带宽共享）
+                uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
                 
-                # 考虑多跳效率损失
-                path = self.routing_paths[i]
-                hop_count = len(path) - 1  # 路径长度减1才是真实跳数
-                hop_efficiency = 1.0 / hop_count if hop_count > 0 else 0
-                
-                # 有效回程容量
-                effective_backhaul = backhaul_capacity * hop_efficiency
-                
-                # 实际有效吞吐量 = min(前端容量, 有效回程容量)
-                uav_effective_throughput = min(uav_frontend_capacity, effective_backhaul)
+                # 在理想FDMA下，前端和回程使用不同频率，因此系统吞吐量 = 前端容量
+                uav_effective_throughput = uav_frontend_capacity
             else:
-                # 无回程路径，吞吐量为0
+                # 无回程路径，吞吐量为0（无法将数据传输到核心网络）
                 uav_effective_throughput = 0
             
             # 累加到系统总吞吐量

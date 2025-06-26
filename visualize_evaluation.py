@@ -620,7 +620,7 @@ def parse_args():
                        choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'],
                        help='用户分布类型')
     parser.add_argument('--channel_model', type=str, default='3gpp-36777',
-                       choices=['free_space', 'urban', 'suburban', '3gpp-36777'],
+                       choices=['free_space', 'urban', 'suburban', '3gpp-36777','probabilistic'],
                        help='信道模型')
     parser.add_argument('--seed', type=int, default=42,
                        help='随机种子')

@@ -439,24 +439,29 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         # 计算接收功率 (dBm) - 地面基站发射功率更高
         rx_power = self.ground_bs_tx_power - path_loss
         
-        # 计算干扰功率：来自所有其他无人机的干扰
-        interference_power = []
-        for i in range(self.n_uavs):
-            if i != uav_idx:  # 排除目标无人机
-                interferer_pos = self.uav_positions[i]
-                interferer_path_loss = self._compute_uav_path_loss(interferer_pos, bs_pos)
-                interferer_power = self.tx_power - interferer_path_loss
-                interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
-        
-        # 总干扰功率 (dBm)
-        total_interference = np.sum(interference_power) if interference_power else 0
-        total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
-        
-        # 计算SINR (dB)
-        noise_power_dbm = self.noise_power
-        interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
-        
-        sinr = rx_power - interference_plus_noise_dbm
+        # 如果启用理想的FDMA，则SINR = SNR（无干扰）
+        if self.use_fdma:
+            # FDMA模式：无干扰，SINR = 接收功率 - 噪声功率
+            sinr = rx_power - self.noise_power
+        else:
+            # 原始模式：计算干扰功率：来自所有其他无人机的干扰
+            interference_power = []
+            for i in range(self.n_uavs):
+                if i != uav_idx:  # 排除目标无人机
+                    interferer_pos = self.uav_positions[i]
+                    interferer_path_loss = self._compute_uav_path_loss(interferer_pos, bs_pos)
+                    interferer_power = self.tx_power - interferer_path_loss
+                    interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
+            
+            # 总干扰功率 (dBm)
+            total_interference = np.sum(interference_power) if interference_power else 0
+            total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+            
+            # 计算SINR (dB)
+            noise_power_dbm = self.noise_power
+            interference_plus_noise_dbm = 10 * np.log10(10 ** (noise_power_dbm / 10) + 10 ** (total_interference_dbm / 10)) if total_interference_dbm != -float('inf') else noise_power_dbm
+            
+            sinr = rx_power - interference_plus_noise_dbm
         
         return sinr
     
@@ -735,7 +740,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         """
         计算简化的覆盖率+吞吐量奖励
         
-        多跳损失直接体现在吞吐量计算中，不再使用显式惩罚项
+        在理想FDMA模型下，前端和回程使用不同频率，因此系统吞吐量只由前端容量决定
         
         返回:
             reward: 全局奖励
@@ -744,7 +749,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         connected_users = np.sum(self.connections)
         coverage_reward = connected_users / self.n_users
         
-        # 系统吞吐量计算（多跳损失已内嵌在此计算中）
+        # 系统吞吐量计算（理想FDMA下只考虑前端容量）
         system_throughput = 0
         
         # 按UAV计算有效吞吐量
@@ -758,25 +763,15 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             if len(connected_users_to_uav) == 0:
                 continue  # 该UAV没有连接用户
             
-            # 计算该UAV的前端总容量（考虑带宽共享）
-            uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
-            
-            # 获取该UAV的回程容量限制
+            # 在理想FDMA模型下，只有当UAV有回程路径时，其前端容量才有效
             if i in self.routing_paths:
-                backhaul_capacity = self._compute_backhaul_capacity(i)
+                # 计算该UAV的前端总容量（考虑带宽共享）
+                uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
                 
-                # 考虑多跳效率损失（这里体现多跳的容量损失）
-                path = self.routing_paths[i]
-                hop_count = len(path) - 1  # 路径长度减1才是真实跳数
-                hop_efficiency = 1.0 / hop_count if hop_count > 0 else 0
-                
-                # 有效回程容量
-                effective_backhaul = backhaul_capacity * hop_efficiency
-                
-                # 实际有效吞吐量 = min(前端容量, 有效回程容量)
-                uav_effective_throughput = min(uav_frontend_capacity, effective_backhaul)
+                # 在理想FDMA下，前端和回程使用不同频率，因此系统吞吐量 = 前端容量
+                uav_effective_throughput = uav_frontend_capacity
             else:
-                # 无回程路径，吞吐量为0
+                # 无回程路径，吞吐量为0（无法将数据传输到核心网络）
                 uav_effective_throughput = 0
             
             # 累加到系统总吞吐量

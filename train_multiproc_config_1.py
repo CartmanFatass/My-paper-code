@@ -827,7 +827,7 @@ def parse_args():
     parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
-    parser.add_argument('--channel_model', type=str, default='probabilistic',
+    parser.add_argument('--channel_model', type=str, default='3gpp-36777',
                         choices=['free_space', 'urban', 'suburban','3gpp-36777', 'probabilistic'], help='信道模型')
     
     # FDMA 参数
