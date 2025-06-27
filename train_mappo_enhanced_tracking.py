@@ -23,13 +23,14 @@ from torch.utils.tensorboard import SummaryWriter
 from torch.distributions import Categorical, Normal
 
 # 导入 Stable Baselines3 向量化环境
-from stable_baselines3.common.vec_env import SubprocVecEnv
+from stable_baselines3.common.vec_env import SubprocVecEnv, VecEnv
 from stable_baselines3.common.monitor import Monitor
 
 # 导入配置和环境
 from config_1 import Config
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
+from envs.pettingzoo.scenario3 import UAVMultiHopEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 # 导入工具类
@@ -368,9 +369,10 @@ def safe_tensor_ops_wrapper(func):
 class EnhancedRewardTracker:
     """增强的奖励追踪器，用于MAPPO训练数据收集"""
     
-    def __init__(self, log_dir, config):
+    def __init__(self, log_dir, config, n_users=None):
         self.log_dir = log_dir
         self.config = config
+        self.n_users = n_users  # 存储用户总数，用于准确计算服务率
         
         # 训练过程中的奖励数据收集
         self.training_rewards = {
@@ -1239,7 +1241,7 @@ def get_device(device_pref):
         main_logger.info("使用CPU")
         return 'cpu'
 
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_hops=None, render_mode=None, rank=0, seed=0):
+def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_hops=None, render_mode=None, rank=0, seed=0, area_size=None, n_clusters=None, cluster_std=None, central_area_ratio=None):
     """创建环境实例的函数"""
     def _init():
         env_seed = seed + rank
@@ -1262,6 +1264,20 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_ho
                 render_mode=render_mode,
                 seed=env_seed
             )
+        elif scenario == 3:
+            raw_env = UAVMultiHopEnv(
+                n_uavs=n_uavs,
+                n_users=n_users,
+                user_distribution=user_distribution,
+                channel_model=channel_model,
+                max_hops=max_hops,
+                render_mode=render_mode,
+                seed=env_seed,
+                area_size=area_size,
+                n_clusters=n_clusters,
+                cluster_std=cluster_std,
+                central_area_ratio=central_area_ratio
+            )
         else:
             raise ValueError(f"未知的场景: {scenario}")
 
@@ -1275,7 +1291,7 @@ def parse_args():
     
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=2, help='场景: 1=基站模式, 2=协作组网模式')
+    parser.add_argument('--scenario', type=int, default=3, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式')
     parser.add_argument('--model_path', type=str, default='models/mappo_enhanced_tracking.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -1290,13 +1306,19 @@ def parse_args():
                         choices=['auto', 'cuda', 'cpu'], help='计算设备')
 
     # 环境参数
-    parser.add_argument('--n_uavs', type=int, default=5, help='初始无人机数量')
+    parser.add_argument('--n_uavs', type=int, default=10, help='初始无人机数量')
     parser.add_argument('--n_users', type=int, default=50, help='用户数量')
-    parser.add_argument('--max_hops', type=int, default=3, help='最大跳数 (仅用于场景2)')
-    parser.add_argument('--user_distribution', type=str, default='uniform', 
-                        choices=['uniform', 'cluster', 'hotspot'], help='用户分布类型')
+    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 仅用于场景3)')
+    parser.add_argument('--max_hops', type=int, default=3, help='最大跳数 (场景2和3使用)')
+    parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
+                        choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
     parser.add_argument('--channel_model', type=str, default='3gpp-36777',
                         choices=['free_space', 'urban', 'suburban','3gpp-36777'], help='信道模型')
+    
+    # 场景3特有参数
+    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
+    parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3)')
+    parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3)')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=32, help='并行环境数量')
@@ -1320,11 +1342,11 @@ def parse_args():
     return parser.parse_args()
 
 def train(config, args, device):
-    """MAPPO训练函数"""
-    main_logger.info("开始MAPPO训练...")
+    """MAPPO训练函数 - GPU加速版本，使用SubprocVecEnv"""
+    main_logger.info("开始MAPPO训练（GPU加速版本）...")
 
     num_envs = args.num_envs
-    main_logger.info(f"使用 {num_envs} 个并行训练环境")
+    main_logger.info(f"使用 {num_envs} 个并行训练环境（SubprocVecEnv）")
     
     # 创建日志目录
     log_dir = os.path.join(args.log_dir, f"mappo_enhanced_tracking_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
@@ -1342,21 +1364,37 @@ def train(config, args, device):
         n_users=args.n_users,
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
-        max_hops=args.max_hops if args.scenario == 2 else None,
+        max_hops=args.max_hops if args.scenario in [2, 3] else None,
         render_mode=None,
         rank=i,
-        seed=base_seed
+        seed=base_seed,
+        area_size=args.area_size if args.scenario == 3 else None,
+        n_clusters=args.n_clusters if args.scenario == 3 else None,
+        cluster_std=args.cluster_std if args.scenario == 3 else None,
+        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None
     ) for i in range(num_envs)]
 
-    # 创建环境实例
-    envs = [env_fn() for env_fn in env_fns]
-    
-    # 获取环境信息
-    sample_env = envs[0]
-    n_agents = sample_env.n_uavs
-    obs_dim = sample_env.obs_dim
-    state_dim = sample_env.state_dim
-    action_dim = sample_env.action_dim
+    # 使用SubprocVecEnv创建并行环境
+    try:
+        envs = SubprocVecEnv(env_fns)
+        main_logger.info("SubprocVecEnv创建成功")
+    except Exception as e:
+        main_logger.error(f"SubprocVecEnv创建失败: {e}")
+        main_logger.info("回退到单个环境实例")
+        envs = [env_fn() for env_fn in env_fns]
+        sample_env = envs[0]
+        n_agents = sample_env.n_uavs
+        obs_dim = sample_env.obs_dim
+        state_dim = sample_env.state_dim
+        action_dim = sample_env.action_dim
+    else:
+        # 获取环境信息（从单个环境实例）
+        sample_env = env_fns[0]()
+        n_agents = sample_env.n_uavs
+        obs_dim = sample_env.obs_dim
+        state_dim = sample_env.state_dim
+        action_dim = sample_env.action_dim
+        sample_env.close()  # 关闭临时环境
     
     # 更新配置
     config.n_agents = n_agents
@@ -1378,19 +1416,28 @@ def train(config, args, device):
     agent = MAPPOAgent(config, log_dir, device)
     
     # 创建增强的奖励追踪器
-    reward_tracker = EnhancedRewardTracker(log_dir, config)
+    reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=args.n_users)
     reward_tracker.export_interval = args.export_interval
     
     # 初始化环境
-    observations = []
-    states = []
-    for env in envs:
-        obs, info = env.reset()
-        observations.append(obs)
-        states.append(info.get('state', np.zeros(state_dim)))
-    
-    observations = np.array(observations)
-    states = np.array(states)
+    if isinstance(envs, SubprocVecEnv):
+        # 使用SubprocVecEnv的向量化接口
+        observations = envs.reset()
+        # 从第一个环境获取状态信息（假设所有环境状态维度相同）
+        states = np.zeros((num_envs, state_dim))
+        main_logger.info("使用SubprocVecEnv向量化接口初始化环境")
+    else:
+        # 回退到原始方式
+        observations = []
+        states = []
+        for env in envs:
+            obs, info = env.reset()
+            observations.append(obs)
+            states.append(info.get('state', np.zeros(state_dim)))
+        
+        observations = np.array(observations)
+        states = np.array(states)
+        main_logger.info("使用传统方式初始化环境")
     
     # 训练循环
     total_steps = 0
@@ -1412,6 +1459,7 @@ def train(config, args, device):
     while total_steps < config.total_timesteps:
         try:
             rollout_throughputs = []
+            rollout_service_rates = []
             # 定期记录内存使用情况
             if total_steps % 1000 == 0:
                 log_memory_usage(main_logger, total_steps)
@@ -1439,72 +1487,92 @@ def train(config, args, device):
                         break
                     continue
                 
-                # 执行动作
-                next_observations = []
-                next_states = []
-                rewards = []
-                dones = []
-                infos = []
-                
-                env_step_success = True
-                
-                for i, env in enumerate(envs):
+                # 执行动作 - 支持SubprocVecEnv和传统环境
+                if isinstance(envs, SubprocVecEnv):
+                    # 使用SubprocVecEnv的向量化接口
                     try:
-                        next_obs, reward, terminated, truncated, info = env.step(actions[i])
-                        done = bool(terminated or truncated)  # 显式转换为Python bool
+                        next_observations, rewards, dones, infos = envs.step(actions)
                         
-                        # 验证环境返回值
-                        if next_obs is None or np.isnan(next_obs).any() or np.isinf(next_obs).any():
-                            main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常观察值")
-                            next_obs = observations[i]  # 使用上一步的观察
+                        # SubprocVecEnv返回的dones可能是terminated和truncated的组合
+                        if isinstance(dones, tuple) and len(dones) == 2:
+                            terminated, truncated = dones
+                            dones = np.logical_or(terminated, truncated)
                         
-                        if not isinstance(reward, (int, float)) or np.isnan(reward) or np.isinf(reward):
-                            main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常奖励值: {reward}")
-                            reward = 0.0  # 使用默认奖励
+                        # 生成next_states（简化处理，假设与observations相同维度）
+                        next_states = np.zeros((num_envs, state_dim))
                         
-                        next_observations.append(next_obs)
-                        next_states.append(info.get('next_state', np.zeros(state_dim)))
-                        rewards.append(reward)
-                        dones.append(done)
-                        infos.append(info)
+                        # 验证向量化环境返回值
+                        if next_observations is None or np.isnan(next_observations).any() or np.isinf(next_observations).any():
+                            main_logger.warning(f"步骤 {total_steps}: SubprocVecEnv返回异常观察值")
+                            next_observations = observations  # 使用上一步的观察
                         
-                        # 记录环境的吞吐量和其他性能指标 - 如果启用了详细日志记录
-                        if args.detailed_logging:
-                            try:
-                                # 计算每个智能体的奖励（简化处理）
-                                agent_rewards = [reward] * n_agents
-                                
-                                # 记录训练步骤信息，包括吞吐量
-                                reward_tracker.log_training_step(
-                                    step=total_steps + i,  # 为每个环境分配不同的步骤编号
-                                    env_id=i,
-                                    reward=reward,
-                                    agent_rewards=agent_rewards,
-                                    info=info
-                                )
-                                
-                                # 记录吞吐量信息到日志（如果存在）
-                                if 'reward_info' in info and 'system_throughput_mbps' in info['reward_info']:
-                                    throughput_mbps = info['reward_info']['system_throughput_mbps']
-                                    main_logger.debug(f"步骤 {total_steps}: 环境{i} 系统吞吐量={throughput_mbps:.2f} Mbps")
-                                
-                                # 记录平均用户吞吐量（如果存在）
-                                if 'reward_info' in info and 'avg_throughput_per_user_mbps' in info['reward_info']:
-                                    avg_throughput_mbps = info['reward_info']['avg_throughput_per_user_mbps']
-                                    main_logger.debug(f"步骤 {total_steps}: 环境{i} 平均用户吞吐量={avg_throughput_mbps:.2f} Mbps")
-                                    
-                            except Exception as log_e:
-                                main_logger.warning(f"步骤 {total_steps}: 记录环境{i}吞吐量信息失败: {log_e}")
+                        if np.isnan(rewards).any() or np.isinf(rewards).any():
+                            main_logger.warning(f"步骤 {total_steps}: SubprocVecEnv返回异常奖励值")
+                            rewards = np.zeros(num_envs)  # 使用默认奖励
+                        
+                        env_step_success = True
                         
                     except Exception as e:
-                        main_logger.error(f"步骤 {total_steps}: 环境{i}步骤执行失败: {e}")
+                        main_logger.error(f"步骤 {total_steps}: SubprocVecEnv步骤执行失败: {e}")
                         # 使用安全的默认值
-                        next_observations.append(observations[i])
-                        next_states.append(states[i])
-                        rewards.append(0.0)
-                        dones.append(False)
-                        infos.append({})
+                        next_observations = observations
+                        next_states = states
+                        rewards = np.zeros(num_envs)
+                        dones = np.zeros(num_envs, dtype=bool)
+                        infos = [{}] * num_envs
                         env_step_success = False
+                        
+                else:
+                    # 传统环境循环方式
+                    next_observations = []
+                    next_states = []
+                    rewards = []
+                    dones = []
+                    infos = []
+                    
+                    env_step_success = True
+                    
+                    for i, env in enumerate(envs):
+                        try:
+                            next_obs, reward, terminated, truncated, info = env.step(actions[i])
+                            done = bool(terminated or truncated)  # 显式转换为Python bool
+                            
+                            # 验证环境返回值
+                            if next_obs is None or np.isnan(next_obs).any() or np.isinf(next_obs).any():
+                                main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常观察值")
+                                next_obs = observations[i]  # 使用上一步的观察
+                            
+                            if not isinstance(reward, (int, float)) or np.isnan(reward) or np.isinf(reward):
+                                main_logger.warning(f"步骤 {total_steps}: 环境{i}返回异常奖励值: {reward}")
+                                reward = 0.0  # 使用默认奖励
+                            
+                            next_observations.append(next_obs)
+                            next_states.append(info.get('next_state', np.zeros(state_dim)))
+                            rewards.append(reward)
+                            dones.append(done)
+                            infos.append(info)
+                            
+                        except Exception as e:
+                            main_logger.error(f"步骤 {total_steps}: 环境{i}步骤执行失败: {e}")
+                            # 使用安全的默认值
+                            next_observations.append(observations[i])
+                            next_states.append(states[i])
+                            rewards.append(0.0)
+                            dones.append(False)
+                            infos.append({})
+                            env_step_success = False
+                    
+                    # 转换为数组
+                    try:
+                        next_observations = np.array(next_observations)
+                        next_states = np.array(next_states)
+                        rewards = np.array(rewards)
+                        dones = np.array(dones)
+                        
+                    except Exception as e:
+                        main_logger.error(f"步骤 {total_steps}: 数组转换失败: {e}")
+                        consecutive_errors += 1
+                        continue
                 
                 if not env_step_success:
                     consecutive_errors += 1
@@ -1513,31 +1581,53 @@ def train(config, args, device):
                         break
                     continue
                 
-                # 从info中收集吞吐量数据
+                # 记录详细日志和吞吐量数据
+                if args.detailed_logging:
+                    for i, info in enumerate(infos):
+                        try:
+                            # 计算每个智能体的奖励（简化处理）
+                            agent_rewards = [rewards[i]] * n_agents
+                            
+                            # 记录训练步骤信息，包括吞吐量
+                            reward_tracker.log_training_step(
+                                step=total_steps + i,  # 为每个环境分配不同的步骤编号
+                                env_id=i,
+                                reward=rewards[i],
+                                agent_rewards=agent_rewards,
+                                info=info
+                            )
+                            
+                            # 记录吞吐量信息到日志（如果存在）
+                            if 'reward_info' in info and 'system_throughput_mbps' in info['reward_info']:
+                                throughput_mbps = info['reward_info']['system_throughput_mbps']
+                                main_logger.debug(f"步骤 {total_steps}: 环境{i} 系统吞吐量={throughput_mbps:.2f} Mbps")
+                            
+                            # 记录平均用户吞吐量（如果存在）
+                            if 'reward_info' in info and 'avg_throughput_per_user_mbps' in info['reward_info']:
+                                avg_throughput_mbps = info['reward_info']['avg_throughput_per_user_mbps']
+                                main_logger.debug(f"步骤 {total_steps}: 环境{i} 平均用户吞吐量={avg_throughput_mbps:.2f} Mbps")
+                                
+                        except Exception as log_e:
+                            main_logger.warning(f"步骤 {total_steps}: 记录环境{i}吞吐量信息失败: {log_e}")
+                
+                # 从info中收集吞吐量和用户服务率数据
                 for info in infos:
                     if 'reward_info' in info and 'system_throughput_mbps' in info['reward_info']:
                         rollout_throughputs.append(info['reward_info']['system_throughput_mbps'])
-                
-                # 转换为数组
-                try:
-                    next_observations = np.array(next_observations)
-                    next_states = np.array(next_states)
-                    rewards = np.array(rewards)
-                    dones = np.array(dones)
                     
-                    # 验证数组健康性
-                    if np.isnan(next_observations).any() or np.isinf(next_observations).any():
-                        main_logger.error(f"步骤 {total_steps}: next_observations包含异常值")
-                        consecutive_errors += 1
-                        continue
-                        
-                    if np.isnan(rewards).any() or np.isinf(rewards).any():
-                        main_logger.error(f"步骤 {total_steps}: rewards包含异常值")
-                        consecutive_errors += 1
-                        continue
-                        
-                except Exception as e:
-                    main_logger.error(f"步骤 {total_steps}: 数组转换失败: {e}")
+                    # 记录用户服务率
+                    if 'served_users' in info and 'total_users' in info and info['total_users'] > 0:
+                        service_rate = info['served_users'] / info['total_users']
+                        rollout_service_rates.append(service_rate)
+                
+                # 验证数组健康性
+                if np.isnan(next_observations).any() or np.isinf(next_observations).any():
+                    main_logger.error(f"步骤 {total_steps}: next_observations包含异常值")
+                    consecutive_errors += 1
+                    continue
+                    
+                if np.isnan(rewards).any() or np.isinf(rewards).any():
+                    main_logger.error(f"步骤 {total_steps}: rewards包含异常值")
                     consecutive_errors += 1
                     continue
                 
@@ -1574,7 +1664,7 @@ def train(config, args, device):
                 env_episode_rewards += rewards
                 env_episode_lengths += 1
                 
-                # 处理episode结束
+                # 处理episode结束 - 支持SubprocVecEnv和传统环境
                 for i, done in enumerate(dones):
                     if done:
                         episode_count += 1
@@ -1589,30 +1679,36 @@ def train(config, args, device):
                             
                             main_logger.info(f"Episode {episode_count}: 环境{i}, 奖励={env_episode_rewards[i]:.2f}, 长度={env_episode_lengths[i]}")
                             
-                            # 重置环境
-                            obs, info = envs[i].reset()
-                            
-                            # 验证重置后的观察
-                            if obs is None or np.isnan(obs).any() or np.isinf(obs).any():
-                                main_logger.error(f"环境{i}重置后观察异常")
-                                obs = np.zeros_like(observations[i])
+                            # 重置环境状态（SubprocVecEnv会自动重置）
+                            if not isinstance(envs, SubprocVecEnv):
+                                # 传统环境需要手动重置
+                                obs, info = envs[i].reset()
                                 
-                            observations[i] = obs
-                            states[i] = info.get('state', np.zeros(state_dim))
+                                # 验证重置后的观察
+                                if obs is None or np.isnan(obs).any() or np.isinf(obs).any():
+                                    main_logger.error(f"环境{i}重置后观察异常")
+                                    obs = np.zeros_like(observations[i])
+                                    
+                                observations[i] = obs
+                                states[i] = info.get('state', np.zeros(state_dim))
+                            
+                            # 重置奖励和长度计数器
                             env_episode_rewards[i] = 0
                             env_episode_lengths[i] = 0
                             
                         except Exception as e:
                             main_logger.error(f"处理环境{i} episode结束时失败: {e}")
                             # 强制重置
-                            try:
-                                obs, info = envs[i].reset()
-                                observations[i] = obs if obs is not None else np.zeros_like(observations[i])
-                                states[i] = info.get('state', np.zeros(state_dim)) if info else np.zeros(state_dim)
-                                env_episode_rewards[i] = 0
-                                env_episode_lengths[i] = 0
-                            except:
-                                main_logger.error(f"环境{i}强制重置也失败")
+                            if not isinstance(envs, SubprocVecEnv):
+                                try:
+                                    obs, info = envs[i].reset()
+                                    observations[i] = obs if obs is not None else np.zeros_like(observations[i])
+                                    states[i] = info.get('state', np.zeros(state_dim)) if info else np.zeros(state_dim)
+                                except:
+                                    main_logger.error(f"环境{i}强制重置也失败")
+                            
+                            env_episode_rewards[i] = 0
+                            env_episode_lengths[i] = 0
                 
                 # 更新状态
                 observations = next_observations
@@ -1634,6 +1730,19 @@ def train(config, args, device):
                     avg_throughput = np.mean(rollout_throughputs)
                     agent.writer.add_scalar('Performance/System_Throughput_Mbps', avg_throughput, total_steps)
                     main_logger.debug(f"Rollout Throughput: Avg={avg_throughput:.2f} Mbps over {len(rollout_throughputs)} samples")
+
+                # 记录用户服务率 (与 train_multiproc_config_1.py 保持一致)
+                if reward_tracker.performance_metrics['served_users'] and reward_tracker.n_users is not None:
+                    # 使用最近1000个数据点计算滑动平均
+                    recent_served_data = reward_tracker.performance_metrics['served_users'][-1000:]
+                    if recent_served_data:
+                        recent_served_users = [u['served_users'] for u in recent_served_data]
+                        avg_served_users = np.mean(recent_served_users)
+                        
+                        # 使用固定的 n_users 计算服务率
+                        service_rate = avg_served_users / reward_tracker.n_users
+                        agent.writer.add_scalar('Performance/User_Service_Rate_1000steps', service_rate, total_steps)
+                        main_logger.debug(f"User Service Rate (1000 steps avg): {service_rate:.4f}")
 
                 if len(agent.buffer) >= agent.config.batch_size:
                     update_info = agent.update()
@@ -1716,16 +1825,26 @@ def train(config, args, device):
                     torch.cuda.empty_cache()
                 gc.collect()
                 
-                # 重置环境状态
-                for i, env in enumerate(envs):
+                # 重置环境状态 - 支持SubprocVecEnv和传统环境
+                if isinstance(envs, SubprocVecEnv):
                     try:
-                        obs, info = env.reset()
-                        observations[i] = obs if obs is not None else np.zeros_like(observations[i])
-                        states[i] = info.get('state', np.zeros(state_dim)) if info else np.zeros(state_dim)
-                        env_episode_rewards[i] = 0
-                        env_episode_lengths[i] = 0
+                        observations = envs.reset()
+                        states = np.zeros((num_envs, state_dim))
+                        env_episode_rewards = np.zeros(num_envs)
+                        env_episode_lengths = np.zeros(num_envs, dtype=int)
+                        main_logger.info("SubprocVecEnv环境重置成功")
                     except Exception as reset_e:
-                        main_logger.error(f"重置环境{i}失败: {reset_e}")
+                        main_logger.error(f"SubprocVecEnv重置失败: {reset_e}")
+                else:
+                    for i, env in enumerate(envs):
+                        try:
+                            obs, info = env.reset()
+                            observations[i] = obs if obs is not None else np.zeros_like(observations[i])
+                            states[i] = info.get('state', np.zeros(state_dim)) if info else np.zeros(state_dim)
+                            env_episode_rewards[i] = 0
+                            env_episode_lengths[i] = 0
+                        except Exception as reset_e:
+                            main_logger.error(f"重置环境{i}失败: {reset_e}")
                         
                 main_logger.info("尝试恢复训练状态")
                 
@@ -1755,29 +1874,48 @@ def train(config, args, device):
     main_logger.info(f"训练数据已保存到: {log_dir}")
     
     # 关闭环境
-    for env in envs:
-        env.close()
+    if isinstance(envs, SubprocVecEnv):
+        envs.close()
+        main_logger.info("SubprocVecEnv已关闭")
+    else:
+        for env in envs:
+            env.close()
+        main_logger.info("传统环境已关闭")
     
     return agent
 
 def evaluate(agent, envs, n_episodes=10, render=False):
-    """评估MAPPO模型"""
+    """评估MAPPO模型 - 支持SubprocVecEnv和传统环境"""
     main_logger.info(f"开始评估: {n_episodes} episodes")
     
-    num_envs = len(envs)
+    # 检查环境类型
+    if isinstance(envs, SubprocVecEnv):
+        num_envs = envs.num_envs
+        use_vecenv = True
+        main_logger.info("使用SubprocVecEnv进行评估")
+    else:
+        num_envs = len(envs)
+        use_vecenv = False
+        main_logger.info("使用传统环境进行评估")
+    
     episode_rewards = []
     completed_episodes = 0
     
     # 重置环境
-    observations = []
-    states = []
-    for env in envs:
-        obs, info = env.reset()
-        observations.append(obs)
-        states.append(info.get('state', np.zeros(agent.config.state_dim)))
+    if use_vecenv:
+        observations = envs.reset()
+        states = np.zeros((num_envs, agent.config.state_dim))
+    else:
+        observations = []
+        states = []
+        for env in envs:
+            obs, info = env.reset()
+            observations.append(obs)
+            states.append(info.get('state', np.zeros(agent.config.state_dim)))
+        
+        observations = np.array(observations)
+        states = np.array(states)
     
-    observations = np.array(observations)
-    states = np.array(states)
     env_rewards = np.zeros(num_envs)
     
     while completed_episodes < n_episodes:
@@ -1785,23 +1923,39 @@ def evaluate(agent, envs, n_episodes=10, render=False):
         actions, _, _ = agent.select_actions(observations, states, deterministic=True)
         
         # 执行动作
-        next_observations = []
-        next_states = []
-        rewards = []
-        dones = []
-        
-        for i, env in enumerate(envs):
-            next_obs, reward, terminated, truncated, info = env.step(actions[i])
-            done = bool(terminated or truncated)  # 显式转换为Python bool
-            next_observations.append(next_obs)
-            next_states.append(info.get('next_state', np.zeros(agent.config.state_dim)))
-            rewards.append(reward)
-            dones.append(done)
-        
-        next_observations = np.array(next_observations)
-        next_states = np.array(next_states)
-        rewards = np.array(rewards)
-        dones = np.array(dones)
+        if use_vecenv:
+            # 使用SubprocVecEnv的向量化接口
+            next_observations, rewards, dones, infos = envs.step(actions)
+            
+            # 处理dones格式
+            if isinstance(dones, tuple) and len(dones) == 2:
+                terminated, truncated = dones
+                dones = np.logical_or(terminated, truncated)
+            
+            # 生成next_states（简化处理）
+            next_states = np.zeros((num_envs, agent.config.state_dim))
+            
+        else:
+            # 传统环境循环方式
+            next_observations = []
+            next_states = []
+            rewards = []
+            dones = []
+            infos = []
+            
+            for i, env in enumerate(envs):
+                next_obs, reward, terminated, truncated, info = env.step(actions[i])
+                done = bool(terminated or truncated)  # 显式转换为Python bool
+                next_observations.append(next_obs)
+                next_states.append(info.get('next_state', np.zeros(agent.config.state_dim)))
+                rewards.append(reward)
+                dones.append(done)
+                infos.append(info)
+            
+            next_observations = np.array(next_observations)
+            next_states = np.array(next_states)
+            rewards = np.array(rewards)
+            dones = np.array(dones)
         
         env_rewards += rewards
         
@@ -1812,10 +1966,13 @@ def evaluate(agent, envs, n_episodes=10, render=False):
                 completed_episodes += 1
                 main_logger.info(f"评估 Episode {completed_episodes}/{n_episodes}, 奖励: {env_rewards[i]:.2f}")
                 
-                # 重置环境
-                obs, info = envs[i].reset()
-                observations[i] = obs
-                states[i] = info.get('state', np.zeros(agent.config.state_dim))
+                # 重置环境状态（SubprocVecEnv会自动重置）
+                if not use_vecenv:
+                    # 传统环境需要手动重置
+                    obs, info = envs[i].reset()
+                    observations[i] = obs
+                    states[i] = info.get('state', np.zeros(agent.config.state_dim))
+                
                 env_rewards[i] = 0
         
         observations = next_observations
@@ -1881,10 +2038,14 @@ def main():
             n_users=args.n_users,
             user_distribution=args.user_distribution,
             channel_model=args.channel_model,
-            max_hops=args.max_hops if args.scenario == 2 else None,
+            max_hops=args.max_hops if args.scenario in [2, 3] else None,
             render_mode="human" if args.render and i == 0 else None,
             rank=i,
-            seed=base_seed
+            seed=base_seed,
+            area_size=args.area_size if args.scenario == 3 else None,
+            n_clusters=args.n_clusters if args.scenario == 3 else None,
+            cluster_std=args.cluster_std if args.scenario == 3 else None,
+            central_area_ratio=args.central_area_ratio if args.scenario == 3 else None
         ) for i in range(4)]  # 少量环境用于评估
         
         eval_envs = [env_fn() for env_fn in eval_env_fns]
@@ -1911,8 +2072,11 @@ def main():
         
         main_logger.info(f"评估结果: 平均奖励 {mean_reward:.2f} ± {std_reward:.2f}, 最大/最小: {max_reward:.2f}/{min_reward:.2f}")
         
-        for env in eval_envs:
-            env.close()
+        if isinstance(eval_envs, SubprocVecEnv):
+            eval_envs.close()
+        else:
+            for env in eval_envs:
+                env.close()
     else:
         main_logger.error(f"未知的运行模式: {args.mode}")
 
