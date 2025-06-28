@@ -422,6 +422,10 @@ class HMASDAgent:
             
             intrinsic_reward = env_reward_component + team_disc_component + ind_disc_component
             
+            # 新增：对总内在奖励进行裁剪，以稳定训练
+            # 这防止了因奖励值过大导致的损失爆炸问题
+            intrinsic_reward = np.clip(intrinsic_reward, -10.0, 10.0)
+            
             # 存储低层经验
             low_level_experience = (
                 state_tensor,                           # 全局状态s
@@ -609,7 +613,7 @@ class HMASDAgent:
             self.last_high_level_buffer_size = buffer_len
             
             # 保持与函数正常返回值相同数量的元素
-            return 0, 0, 0, 0, 0, 0, 0, 0
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
         
         # 缓冲区已满，继续更新
         main_logger.debug(f"高层缓冲区满足更新条件，从{buffer_len}个样本中采样{required_batch_size}个")
@@ -632,7 +636,7 @@ class HMASDAgent:
         main_logger.debug(f"高层奖励统计: 均值={reward_mean:.4f}, 标准差={reward_std:.4f}, 最小值={reward_min:.4f}, 最大值={reward_max:.4f}")
         
         # 获取当前状态价值
-        state_values, agent_values = self.skill_coordinator.get_value(states, observations)
+        state_values, agent_values, cd_loss_critic = self.skill_coordinator.get_value(states, observations)
         
         # 由于我们假设每个高层经验都是一个k步序列的端点，
         # 所以我们可以假设下一状态价值为0（或者可以从新的状态计算）
@@ -924,7 +928,9 @@ class HMASDAgent:
             entropy_loss = -(Z_entropy + z_entropy) * self.config.lambda_h
             
             # 总损失
-            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+            # 同时加上来自actor和critic路径的CD loss
+            total_cd_loss = cd_loss + cd_loss_critic
+            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + self.config.lambda_cd * total_cd_loss
             
             # 检查总损失是否有异常值
             if torch.isnan(loss).any().item() or torch.isinf(loss).any().item():
@@ -1086,12 +1092,12 @@ class HMASDAgent:
         # 返回：总损失, 策略损失, 价值损失, 团队熵, 个体熵, 状态价值均值, 智能体价值均值, 高层奖励均值
         return loss.item(), policy_loss.item(), value_loss.item(), \
                Z_entropy.item(), z_entropy.item(), \
-               mean_state_value, mean_agent_value, mean_high_level_reward
+               mean_state_value, mean_agent_value, mean_high_level_reward, total_cd_loss.item()
     
     def update_discoverer(self):
         """更新低层技能发现器网络"""
         if len(self.low_level_buffer) < self.config.batch_size:
-            return 0, 0, 0, 0, 0, 0, 0, 0 # 增加返回数量以匹配期望
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0 # 增加返回数量以匹配期望
         
         # 从缓冲区采样数据，包含内在奖励的三个组成部分
         batch = self.low_level_buffer.sample(self.config.batch_size)
@@ -1268,7 +1274,7 @@ class HMASDAgent:
         
         # 更新高层技能协调器
         coordinator_loss, coordinator_policy_loss, coordinator_value_loss, team_skill_entropy, agent_skill_entropy, \
-        mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward = self.update_coordinator()
+        mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator()
         
         # 更新低层技能发现器
         discoverer_loss, discoverer_policy_loss, discoverer_value_loss, action_entropy, \
@@ -1325,6 +1331,9 @@ class HMASDAgent:
         self.writer.add_scalar('ValueEstimates/Coordinator/AgentValue_Average_Mean', mean_coord_agent_val, self.global_step)
         self.writer.add_scalar('ValueEstimates/Discoverer/Value_Mean', avg_discoverer_val, self.global_step)
 
+        # CD Loss
+        self.writer.add_scalar('Losses/Coordinator/CD_Loss', cd_loss_val, self.global_step)
+
         # 添加一个固定的测试值，用于调试TensorBoard显示问题
         self.writer.add_scalar('Debug/test_value', 1.0, self.global_step)
         
@@ -1350,7 +1359,8 @@ class HMASDAgent:
             'mean_coord_state_val': mean_coord_state_val,
             'mean_coord_agent_val': mean_coord_agent_val,
             'avg_discoverer_val': avg_discoverer_val,
-            'mean_high_level_reward': mean_high_level_reward # 高层奖励均值
+            'mean_high_level_reward': mean_high_level_reward, # 高层奖励均值
+            'cd_loss': cd_loss_val
         }
     
     def save_model(self, path):

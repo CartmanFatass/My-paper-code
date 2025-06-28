@@ -1136,6 +1136,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                       f"高层损失 {update_info['coordinator_loss']:.4f}, "
                       f"低层损失 {update_info['discoverer_loss']:.4f}, "
                       f"判别器损失 {update_info['discriminator_loss']:.4f}, "
+                      f"CD损失 {update_info.get('cd_loss', 0):.4f}, "
                       f"已用时间 {elapsed:.2f}s")
                 
                 # 清空缓冲区 (严格on-policy)

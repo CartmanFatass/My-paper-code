@@ -297,40 +297,53 @@ class OPT(nn.Module):
         
         # 对每个实体计算对比损失
         total_loss = 0.0
-        num_entities = 0
+        
+        # 将原型值堆叠成一个张量 [N, batch_size, M, prototype_dim]
+        stacked_prototypes = torch.stack(prototype_values, dim=0)
+        
+        # 归一化原型向量以提高稳定性
+        stacked_prototypes = F.normalize(stacked_prototypes, p=2, dim=-1)
         
         for e in range(M):  # 对每个实体
-            entity_prototypes = []
-            for n in range(len(prototype_values)):
-                # 获取实体e在原型n下的表示
-                entity_repr = prototype_values[n][:, e, :]  # [batch_size, prototype_dim]
-                entity_prototypes.append(entity_repr)
+            # 获取实体e在所有原型下的表示 [N, batch_size, prototype_dim]
+            entity_prototypes = stacked_prototypes[:, :, e, :]
             
-            # 计算对比损失
-            for n in range(len(entity_prototypes)):
-                positive = entity_prototypes[n]  # [batch_size, prototype_dim]
+            # 计算所有原型之间的相似度矩阵 [N, N, batch_size]
+            # (N, batch_size, dim) x (N, batch_size, dim) -> (N, N, batch_size)
+            similarity_matrix = torch.einsum('nbd,mbd->nmb', entity_prototypes, entity_prototypes)
+            
+            # 使用 log-sum-exp 技巧来稳定计算
+            # log(exp(pos_sim) / sum(exp(neg_sim))) = pos_sim - log(sum(exp(neg_sim)))
+            
+            # 正样本相似度是对角线元素
+            positive_sim = torch.diagonal(similarity_matrix, dim1=0, dim2=1) # [batch_size, N]
+            
+            # 负样本是所有非对角线元素
+            # 创建一个掩码以排除对角线元素
+            mask = ~torch.eye(len(prototype_values), dtype=torch.bool, device=device)
+            
+            # 对每个原型计算损失
+            for n in range(len(prototype_values)):
+                pos_sim = positive_sim[:, n] # [batch_size]
                 
-                # 计算与自身的相似度（正样本）
-                pos_sim = torch.sum(positive * positive, dim=-1)  # [batch_size]
+                # 获取第n个原型的负样本相似度
+                neg_sims = similarity_matrix[n, mask[n], :] # [N-1, batch_size]
                 
-                # 计算与其他原型的相似度（负样本）
-                neg_sims = []
-                for i in range(len(entity_prototypes)):
-                    if i != n:
-                        negative = entity_prototypes[i]
-                        neg_sim = torch.sum(positive * negative, dim=-1)  # [batch_size]
-                        neg_sims.append(torch.exp(neg_sim))
+                # 使用 logsumexp 计算负样本部分
+                log_sum_exp_neg = torch.logsumexp(neg_sims, dim=0) # [batch_size]
                 
-                if neg_sims:
-                    neg_sum = torch.stack(neg_sims, dim=0).sum(dim=0)  # [batch_size]
-                    loss = -torch.log(torch.exp(pos_sim) / (torch.exp(pos_sim) + neg_sum + 1e-8))
-                    total_loss += loss.mean()
-                    num_entities += 1
-        
-        if num_entities > 0:
-            return total_loss / num_entities
-        else:
-            return torch.tensor(0.0, device=device, requires_grad=True)
+                # 计算最终的对比损失
+                # loss = -log(exp(pos) / (exp(pos) + sum(exp(neg))))
+                #      = - (pos - log(exp(pos) + sum(exp(neg))))
+                #      = - (pos - logsumexp([pos] + neg))
+                all_sims = torch.cat([pos_sim.unsqueeze(0), neg_sims], dim=0)
+                log_sum_exp_all = torch.logsumexp(all_sims, dim=0)
+                
+                loss = -(pos_sim - log_sum_exp_all)
+                total_loss += loss.mean()
+
+        # 返回平均损失
+        return total_loss / (M * len(prototype_values)) if (M * len(prototype_values)) > 0 else torch.tensor(0.0, device=device)
     
     def restructuring_step(self, prototype_values, global_context, history_context=None):
         """
@@ -710,9 +723,10 @@ class SkillCoordinator(nn.Module):
         for value_head in self.value_heads_obs:
             initialize_weights(value_head, gain=0.01)
     
-    def get_value(self, state, observations, history_context=None):
+    def get_value(self, state, observations):
         """获取高层价值函数值"""
-        encoded_state, encoded_observations, _, _ = self.state_encoder(state, observations, history_context)
+        # 在critic网络中，我们不需要history_context，因此cmi_loss将为0
+        encoded_state, encoded_observations, cd_loss, _ = self.state_encoder(state, observations)
         
         # 全局状态价值
         state_value = self.value_head_state(encoded_state.squeeze(1))
@@ -723,7 +737,8 @@ class SkillCoordinator(nn.Module):
             agent_value = self.value_heads_obs[i](encoded_observations[:, i, :])
             agent_values.append(agent_value)
             
-        return state_value, agent_values
+        # 返回价值和CD损失，以便在训练中使用
+        return state_value, agent_values, cd_loss
     
     def forward(self, state, observations, deterministic=False, history_context=None):
         """
