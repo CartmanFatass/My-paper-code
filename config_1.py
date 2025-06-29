@@ -51,7 +51,7 @@ class Config:
     batch_size = 128         # 批处理大小
     high_level_batch_size = 128  # 高层更新的批处理大小
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
-    rollout_length = 128     # 每次rollout收集的步数 (严格on-policy)
+    rollout_length = 150     # 每次rollout收集的步数 (严格on-policy)
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
     episode_length = 5120    # 每个episode的最大长度 (基于观察到的实际行为)
     eval_interval = episode_length*num_envs   # 评估间隔 (32并行环境 * 每环境5120步)
