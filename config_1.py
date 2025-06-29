@@ -14,9 +14,9 @@ class Config:
     max_observed_users = 15   # 最大观测用户数量
 
     # HMASD参数 - 基于论文Table 3中的3m场景
-    n_Z = 5           # 团队技能数量 (论文中3m场景为3)
-    n_z = 5           # 个体技能数量 (论文中3m场景为3)
-    k = 32            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
+    n_Z = 3           # 团队技能数量 (论文中3m场景为3)
+    n_z = 3           # 个体技能数量 (论文中3m场景为3)
+    k = 16            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -39,7 +39,7 @@ class Config:
 
     # HMASD损失权重 - 基于论文Table 3中的3m场景
     # 注意：lambda_e参数已调整为0.1，以稳定训练
-    lambda_e = 0.1       # 外部奖励权重 (调整为0.1以稳定训练)
+    lambda_e = 10       # 外部奖励权重 (调整为0.1以稳定训练)
     lambda_D = 0.1           # 团队技能判别器奖励权重 (论文中3m场景为0.1)
     lambda_d = 0.5           # 个体技能判别器奖励权重 (论文中3m场景为0.5)
     lambda_h = 0.001         # 高层策略熵权重 (论文中3m场景为0.001)
@@ -76,12 +76,13 @@ class Config:
     opt_beta = 0.1           # 条件互信息损失权重 (论文中β=0.1)
     opt_layers = 2           # OPT模块层数 (论文中K=2)
     
-    # 环境奖励权重配置 - 场景3多跳环境
+    # 环境奖励权重配置 - 场景3多跳环境（优化后的权重分配）
     # 注意：场景2不再需要传入奖励权重，其奖励已固化为覆盖率+归一化吞吐量
-    effective_coverage_weight = 0.4     # 有效覆盖率权重 (只计算连接到有回程路径的UAV的用户)
-    throughput_weight = 0.4            # 系统吞吐量权重 
-    load_balance_weight = 0.1          # 负载均衡权重 (衡量UAV负载分布的均衡性)
-    proximity_penalty_weight = 0.1   # 网络连通性权重 (拥有有效回程路径的UAV比例)
+    effective_coverage_weight = 0.6     # 有效覆盖率权重（大幅增强，优先覆盖所有用户）
+    throughput_weight = 0.2            # 系统吞吐量权重（降低，避免与覆盖目标冲突）
+    load_balance_weight = 0.15          # 负载均衡权重（适度降低）
+    proximity_penalty_weight = 0.05   # 邻近惩罚权重（降低，减少对探索的限制）
+    coverage_curve_steepness = 2.0     # 覆盖率奖励曲线陡峭度（新增，增强高覆盖率区域奖励）
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

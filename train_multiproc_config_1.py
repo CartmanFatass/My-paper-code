@@ -1139,6 +1139,23 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                       f"CD损失 {update_info.get('cd_loss', 0):.4f}, "
                       f"已用时间 {elapsed:.2f}s")
                 
+                # 详细记录低层损失的组成部分
+                main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
+                      f"策略损失: {update_info['discoverer_policy_loss']:.4f}, "
+                      f"价值损失: {update_info['discoverer_value_loss']:.4f}, "
+                      f"动作熵: {update_info['action_entropy']:.4f}")
+                
+                # 详细记录内在奖励组成部分
+                main_logger.info(f"内在奖励组成 - 平均总奖励: {update_info['avg_intrinsic_reward']:.4f}, "
+                      f"环境奖励部分: {update_info['avg_env_comp']:.4f}, "
+                      f"团队判别器部分: {update_info['avg_team_disc_comp']:.4f}, "
+                      f"个体判别器部分: {update_info['avg_ind_disc_comp']:.4f}")
+                
+                # 详细记录价值函数估计
+                main_logger.info(f"价值函数估计 - Discoverer均值: {update_info['avg_discoverer_val']:.4f}, "
+                      f"Coordinator状态价值: {update_info['mean_coord_state_val']:.4f}, "
+                      f"Coordinator智能体价值: {update_info['mean_coord_agent_val']:.4f}")
+                
                 # 清空缓冲区 (严格on-policy)
                 agent.clear_buffers()
                 main_logger.debug(f"已清空缓冲区，开始新的rollout")

@@ -28,11 +28,12 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         min_sinr=0,  # 最小SINR阈值 (dB)
         max_connections=15,  # 每个无人机最大连接数（增加以支持更多用户）
         max_hops=5,  # 最大跳数
-        effective_coverage_weight=0.45,  # 有效覆盖率权重（增强）
-        throughput_weight=0.25,  # 系统吞吐量权重
-        load_balance_weight=0.2,  # 负载均衡权重
+        effective_coverage_weight=0.6,  # 有效覆盖率权重（大幅增强）
+        throughput_weight=0.2,  # 系统吞吐量权重（降低）
+        load_balance_weight=0.15,  # 负载均衡权重（降低）
         network_connectivity_weight=0.0,  # 网络连通性权重（移除）
-        proximity_penalty_weight=0.1,  # 邻近惩罚权重 (新增)
+        proximity_penalty_weight=0.05,  # 邻近惩罚权重（降低）
+        coverage_curve_steepness=2.0,  # 覆盖率奖励曲线陡峭度（新增）
         n_ground_bs=4,  # 地面基站数量（四个角落）
         n_clusters=7,  # 用户簇数量
         cluster_std=150,  # 簇内用户分布标准差（米）
@@ -82,6 +83,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         self.load_balance_weight = load_balance_weight
         self.network_connectivity_weight = network_connectivity_weight
         self.proximity_penalty_weight = proximity_penalty_weight
+        self.coverage_curve_steepness = coverage_curve_steepness
         
         # 调用父类初始化
         super().__init__(
@@ -270,7 +272,24 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             if i in self.routing_paths and self.routing_paths[i]:
                 effective_connected_users += np.sum(self.connections[i])
         
-        effective_coverage_reward = effective_connected_users / self.n_users if self.n_users > 0 else 0
+        # 基础覆盖率
+        base_coverage_ratio = effective_connected_users / self.n_users if self.n_users > 0 else 0
+        
+        # 应用非线性变换：使用指数函数增强高覆盖率区域的奖励
+        # f(x) = x^steepness，其中steepness > 1时，高覆盖率区域奖励增长更快
+        effective_coverage_reward = np.power(base_coverage_ratio, 1.0 / self.coverage_curve_steepness)
+        
+        # 添加渐进式奖励：在不同覆盖率阈值给予额外奖励
+        coverage_bonus = 0
+        if base_coverage_ratio >= 0.95:  # 95%以上覆盖率
+            coverage_bonus += 0.1
+        elif base_coverage_ratio >= 0.90:  # 90%以上覆盖率
+            coverage_bonus += 0.05
+        elif base_coverage_ratio >= 0.85:  # 85%以上覆盖率
+            coverage_bonus += 0.02
+        
+        # 将奖励加成应用到最终的覆盖率奖励上
+        effective_coverage_reward = min(1.0, effective_coverage_reward + coverage_bonus)
         
         # 2. 系统吞吐量奖励：在理想FDMA模型下只考虑前端容量
         system_throughput = 0
@@ -381,10 +400,12 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         # 更新奖励信息用于调试和可视化
         self.reward_info = {
             "effective_coverage_reward": effective_coverage_reward,
+            "base_coverage_ratio": base_coverage_ratio,  # 新增：基础覆盖率
+            "coverage_bonus": coverage_bonus,  # 新增：覆盖率奖励加成
             "throughput_reward": throughput_reward,
             "load_balance_reward": load_balance_reward,
             "network_connectivity_reward": network_connectivity_reward,
-            "proximity_penalty": normalized_proximity_penalty,  # 新增：邻近惩罚值
+            "proximity_penalty": normalized_proximity_penalty,
             "final_reward": final_reward,
             "effective_connected_users": effective_connected_users,
             "total_connected_users": np.sum(self.connections),
@@ -394,6 +415,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             "connected_uavs": connected_uavs,
             "total_uavs": self.n_uavs,
             "coverage_efficiency": effective_coverage_reward / max(np.sum(self.connections) / self.n_users, 1e-6),
+            "coverage_ratio": base_coverage_ratio,  # 兼容性字段，用于现有的监控代码
         }
         
         return final_reward

@@ -973,17 +973,16 @@ class SkillDiscoverer(nn.Module):
             if isinstance(team_skill, int):
                 team_skill = torch.tensor([team_skill], device=state.device)
             elif team_skill.dim() == 0:  # 处理标量张量
-                team_skill = team_skill.unsqueeze(0)  # 转换为一维张量
+                team_skill = team_skill.unsqueeze(0)
             
-            # 确保是一维张量后进行独热编码
             if team_skill.dim() == 1:
                 team_skill_onehot = F.one_hot(team_skill, self.config.n_Z).float()
             else:
-                team_skill_onehot = team_skill.float()  # 已经是独热编码，确保是float32
+                team_skill_onehot = team_skill.float()
         else:
             team_skill_onehot = team_skill.float()
-        
-        # 拼接状态和团队技能
+
+        # 拼接全局状态和团队技能
         critic_input = torch.cat([state, team_skill_onehot], dim=-1)
         
         # 前向传播
