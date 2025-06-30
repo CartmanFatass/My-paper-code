@@ -15,8 +15,9 @@ if matplotlib.get_backend() != 'Agg':
     matplotlib.use('Agg')
 
 from logger import main_logger
-from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
-from hmasd.utils import ReplayBuffer, StateSkillDataset, compute_gae, compute_ppo_loss, one_hot
+from hmalsd.networks import SkillCoordinator, SkillDiscoverer, IndividualDiscriminator
+from hmalsd.utils import ReplayBuffer, StateSkillDataset, compute_gae, compute_ppo_loss, one_hot
+from hmalsd.louvain_utils import LouvainSkillHierarchy
 
 class ValueNorm:
     """
@@ -65,9 +66,9 @@ class ValueNorm:
         self.running_std = self.running_std.to(device)
         return self
 
-class HMASDAgent:
+class HMALSAgent:
     """
-    层次化多智能体技能发现（HMASD）代理
+    层次化多智能体Louvain技能发现（HMALS）代理
     """
     def __init__(self, config, log_dir='logs', device=None, debug=False):
         """
@@ -102,8 +103,13 @@ class HMASDAgent:
         # 创建网络
         self.skill_coordinator = SkillCoordinator(config).to(self.device)
         self.skill_discoverer = SkillDiscoverer(config, logger=main_logger).to(self.device) # Pass logger
-        self.team_discriminator = TeamDiscriminator(config).to(self.device)
         self.individual_discriminator = IndividualDiscriminator(config).to(self.device)
+        
+        # 新增：Louvain技能层次结构
+        self.louvain_hierarchy = LouvainSkillHierarchy(
+            resolution=config.louvain_resolution,
+            min_cluster_size=config.louvain_min_cluster_size
+        )
         
         # 创建优化器
         self.coordinator_optimizer = Adam(
@@ -115,8 +121,7 @@ class HMASDAgent:
             lr=config.lr_discoverer
         )
         self.discriminator_optimizer = Adam(
-            list(self.team_discriminator.parameters()) + 
-            list(self.individual_discriminator.parameters()),
+            self.individual_discriminator.parameters(),
             lr=config.lr_discriminator
         )
         
@@ -125,6 +130,7 @@ class HMASDAgent:
         self.high_level_buffer_with_logprobs = []  # 新增：高层经验缓冲区（带log probabilities）
         self.low_level_buffer = ReplayBuffer(config.buffer_size)
         self.state_skill_dataset = StateSkillDataset(config.buffer_size)
+        self.trajectory_buffer = ReplayBuffer(config.trajectory_buffer_size) # 用于构建Louvain图
         
         # 其他初始化
         self.current_team_skill = None  # 当前团队技能 (保留用于单环境兼容性)
@@ -161,7 +167,6 @@ class HMASDAgent:
             'episode_rewards': [],
             # 新增用于记录内在奖励组件和价值估计的列表
             'intrinsic_reward_env_component': [],
-            'intrinsic_reward_team_disc_component': [],
             'intrinsic_reward_ind_disc_component': [],
             'intrinsic_reward_low_level_average': [], # 用于记录批次平均内在奖励
             'coordinator_state_value_mean': [],
@@ -185,7 +190,6 @@ class HMASDAgent:
         
         # 记录内在奖励组成部分的累积值，用于统计分析
         self.cumulative_env_reward = 0.0
-        self.cumulative_team_disc_reward = 0.0
         self.cumulative_ind_disc_reward = 0.0
         self.reward_component_counts = 0
         
@@ -220,7 +224,6 @@ class HMASDAgent:
         
         # 重置奖励组成部分的累积值
         self.cumulative_env_reward = 0.0
-        self.cumulative_team_disc_reward = 0.0
         self.cumulative_ind_disc_reward = 0.0
         self.reward_component_counts = 0
         
@@ -286,7 +289,7 @@ class HMASDAgent:
     
     def assign_skills(self, state, observations, deterministic=False):
         """
-        为所有智能体分配技能
+        为所有智能体分配分层技能 (HMALS version)
         
         参数:
             state: 全局状态 [state_dim]
@@ -294,22 +297,39 @@ class HMASDAgent:
             deterministic: 是否使用确定性策略
             
         返回:
-            team_skill: 团队技能索引
+            active_skill_path: 从高到低层的Louvain技能路径
             agent_skills: 个体技能索引列表 [n_agents]
-            log_probs: 包含团队技能和个体技能log probabilities的字典
+            log_probs: 包含各层技能和个体技能log probabilities的字典
         """
+        # 根本原因修复：检查Louvain层次结构是否已准备好
+        if not self.louvain_hierarchy.partitions:
+            main_logger.warning("Louvain层次结构尚未构建，使用默认技能。")
+            # 返回一个默认的、有效的技能路径和个体技能
+            n_agents = observations.shape[0]
+            active_skill_path_py = [0]  # 默认最高层技能为0
+            agent_skills_np = np.zeros(n_agents, dtype=int) # 默认所有个体技能为0
+            log_probs = {
+                'louvain_log_probs': [0.0], # 默认log_prob
+                'agent_log_probs': [0.0] * n_agents
+            }
+            return active_skill_path_py, agent_skills_np, log_probs
+
         state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
         obs_tensor = torch.FloatTensor(observations).unsqueeze(0).to(self.device)
         
         with torch.no_grad():
-            team_skill, agent_skills, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(
-                state_tensor, obs_tensor, deterministic
+            # 调用新的SkillCoordinator forward方法
+            active_skill_path, agent_skills, louvain_skills_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(
+                state_tensor, obs_tensor, self.louvain_hierarchy, deterministic
             )
             
             # 计算log probabilities
-            Z_dist = torch.distributions.Categorical(logits=Z_logits)
-            Z_log_prob = Z_dist.log_prob(team_skill)
-            
+            louvain_log_probs = []
+            for i, logits in enumerate(louvain_skills_logits):
+                dist = torch.distributions.Categorical(logits=logits)
+                log_prob = dist.log_prob(active_skill_path[i])
+                louvain_log_probs.append(log_prob.item())
+
             z_log_probs = []
             n_agents_actual = agent_skills.size(1)
             for i in range(n_agents_actual):
@@ -318,99 +338,66 @@ class HMASDAgent:
                 z_log_probs.append(zi_log_prob.item())
             
             log_probs = {
-                'team_log_prob': Z_log_prob.item(),
+                'louvain_log_probs': louvain_log_probs,
                 'agent_log_probs': z_log_probs
             }
         
-        return team_skill.item(), agent_skills.squeeze(0).cpu().numpy(), log_probs
+        # active_skill_path 是一个 tensor 列表, agent_skills 是一个 tensor
+        # 需要将它们转换为Python列表和numpy数组
+        active_skill_path_py = [p.item() for p in active_skill_path]
+        agent_skills_np = agent_skills.squeeze(0).cpu().numpy()
+
+        return active_skill_path_py, agent_skills_np, log_probs
     
     def step(self, state, observations, ep_t, deterministic=False, env_id=0):
         """
-        执行一个环境步骤
-        
-        参数:
-            state: 全局状态 [state_dim]
-            observations: 所有智能体的观测 [n_agents, obs_dim]
-            ep_t: 当前episode中的时间步
-            deterministic: 是否使用确定性策略（用于评估）
-            env_id: 环境ID，用于多环境并行训练
-            
-        返回:
-            actions: 所有智能体的动作 [n_agents, action_dim]
-            info: 额外信息，如当前技能
+        执行一个环境步骤 (HMALS version)
         """
-        # 启用自动求导异常检测，帮助查找梯度计算失败的操作
-        #torch.autograd.set_detect_anomaly(True)
-        
         # 确保环境ID已初始化
         if env_id not in self.env_timers:
             self.env_reward_sums[env_id] = 0.0
             self.env_timers[env_id] = 0
-            self.env_team_skills[env_id] = None
+            self.env_team_skills[env_id] = None  # 将存储 active_skill_path
             self.env_agent_skills[env_id] = None
             self.env_log_probs[env_id] = None
             self.env_hidden_states[env_id] = None
             main_logger.debug(f"初始化环境 {env_id} 的状态")
 
         # 获取或初始化环境特定的状态
-        current_team_skill = self.env_team_skills.get(env_id, self.current_team_skill)
-        current_agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
-        env_timer = self.env_timers.get(env_id, 0)
+        current_skill_path = self.env_team_skills.get(env_id)
         
         # 判断是否需要重新分配技能
-        main_logger.debug(f"step: env_id={env_id}, ep_t={ep_t}, k={self.config.k}, ep_t % k = {ep_t % self.config.k}, current_team_skill={current_team_skill}")
-        if ep_t % self.config.k == 0 or current_team_skill is None:
-            # 重置环境特定的累积奖励
-            if env_id not in self.env_reward_sums:
-                self.env_reward_sums[env_id] = 0.0
-            else:
-                self.env_reward_sums[env_id] = 0.0
+        # 在HMALS中，高层决策在每个k步发生
+        if ep_t % self.config.k == 0:
+            self.env_reward_sums[env_id] = 0.0
                 
             # 分配新技能
-            team_skill, agent_skills, log_probs = self.assign_skills(state, observations, deterministic)
+            active_skill_path, agent_skills, log_probs = self.assign_skills(state, observations, deterministic)
             
             # 更新环境特定的状态
-            self.env_team_skills[env_id] = team_skill
+            self.env_team_skills[env_id] = active_skill_path
             self.env_agent_skills[env_id] = agent_skills
             self.env_log_probs[env_id] = log_probs
             self.env_timers[env_id] = 0
             
-            # 同时更新全局状态（用于兼容性）
-            if env_id == 0:  # 只有环境0更新全局状态
-                self.current_team_skill = team_skill
-                self.current_agent_skills = agent_skills
-                self.current_log_probs = log_probs
-                self.skill_change_timer = 0
-                self.current_high_level_reward_sum = 0.0
-                self.accumulated_rewards = 0.0
-            
             skill_changed = True
-            main_logger.debug(f"环境{env_id}技能已更新: team_skill={team_skill}, timer重置为0")
+            main_logger.debug(f"环境{env_id}技能已更新: path={active_skill_path}, timer重置为0")
 
-            # 更新技能使用计数（只有环境0更新全局计数）
-            if env_id == 0:
-                # 初始化 agent skill counts 列表（如果尚未初始化或智能体数量已更改）
-                if not self.episode_agent_skill_counts or len(self.episode_agent_skill_counts) != len(agent_skills):
-                    self.episode_agent_skill_counts = [{} for _ in range(len(agent_skills))]
-
-                # 记录团队技能
-                self.episode_team_skill_counts[team_skill] = self.episode_team_skill_counts.get(team_skill, 0) + 1
-                # 记录个体技能
-                for i, agent_skill in enumerate(agent_skills):
-                    self.episode_agent_skill_counts[i][agent_skill] = self.episode_agent_skill_counts[i].get(agent_skill, 0) + 1
+            # TODO: 更新技能使用计数逻辑以适应分层技能
         else:
             self.env_timers[env_id] += 1
-            # 同时更新全局计时器（用于兼容性）
-            if env_id == 0:
-                self.skill_change_timer += 1
             skill_changed = False
             main_logger.debug(f"环境{env_id}技能未更新: timer增加到{self.env_timers[env_id]}")
             
-        # 选择动作，使用环境特定的技能
+        # 选择动作，使用环境特定的个体技能
         actions, action_logprobs = self.select_action(observations, self.env_agent_skills[env_id], deterministic, env_id)
         
+        # 从技能路径中提取最低层技能用于记录和判别器
+        lowest_level_skill = self.env_team_skills[env_id][-1] if self.env_team_skills[env_id] else -1 # 使用-1作为无效技能
+
         info = {
-            'team_skill': self.env_team_skills[env_id],
+            'active_skill_path': self.env_team_skills[env_id],
+            'team_skill': lowest_level_skill, # 兼容旧接口，使用最低层技能
             'agent_skills': self.env_agent_skills[env_id],
             'action_logprobs': action_logprobs,
             'skill_changed': skill_changed,
@@ -425,9 +412,9 @@ class HMASDAgent:
     
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
-                         skill_timer_for_env=None, env_id=0):
+                         skill_timer_for_env=None, env_id=0, active_skill_path=None):
         """
-        存储环境交互经验
+        存储环境交互经验 (HMALS version)
         
         参数:
             state: 全局状态 [state_dim]
@@ -437,12 +424,13 @@ class HMASDAgent:
             actions: 所有智能体的动作 [n_agents, action_dim]
             rewards: 环境奖励
             dones: 是否结束 [n_agents]
-            team_skill: 团队技能索引
+            team_skill: 最低层团队技能索引 Z_1
             agent_skills: 个体技能索引列表 [n_agents]
             action_logprobs: 动作对数概率 [n_agents]
-            log_probs: 技能的log probabilities字典，包含'team_log_prob'和'agent_log_probs'
-            skill_timer_for_env: 当前环境的技能计时器值，用于多环境并行训练
-            env_id: 环境ID，用于多环境并行训练
+            log_probs: 技能的log probabilities字典
+            skill_timer_for_env: 当前环境的技能计时器值
+            env_id: 环境ID
+            active_skill_path: 完整的Louvain技能路径
         """
         n_agents = len(agent_skills)
         state_tensor = torch.FloatTensor(state).to(self.device)
@@ -463,12 +451,6 @@ class HMASDAgent:
         main_logger.debug(f"store_transition: 环境ID={env_id}, step={self.global_step}, skill_timer={skill_timer_for_env}, "
                           f"当前步奖励={current_reward:.4f}, 此环境累积高层奖励={self.env_reward_sums[env_id]:.4f}")
         
-        # 计算团队技能判别器输出
-        with torch.no_grad():
-            team_disc_logits = self.team_discriminator(next_state_tensor.unsqueeze(0))
-            team_disc_log_probs = F.log_softmax(team_disc_logits, dim=-1)
-            team_skill_log_prob = team_disc_log_probs[0, team_skill]
-        
         # 为每个智能体存储低层经验
         for i in range(n_agents):
             obs = torch.FloatTensor(observations[i]).to(self.device)
@@ -478,19 +460,68 @@ class HMASDAgent:
             
             # 计算个体技能判别器输出
             with torch.no_grad():
-                agent_disc_logits = self.individual_discriminator(
-                    next_obs.unsqueeze(0), 
-                    team_skill_tensor
-                )
-                agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
-                agent_skill_log_prob = agent_disc_log_probs[0, agent_skills[i]]
+                try:
+                    # 首先验证输入的有效性
+                    agent_skill_idx = int(agent_skills[i])  # 确保索引是整数类型
+                    
+                    # 在调用判别器之前就进行边界检查
+                    if not (0 <= agent_skill_idx < self.config.n_z):
+                        main_logger.error(f"智能体 {i} 的技能索引 {agent_skill_idx} 超出配置范围 [0, {self.config.n_z - 1}]. "
+                                          f"agent_skills完整数组: {agent_skills}")
+                        # 修正索引
+                        agent_skill_idx = int(np.clip(agent_skill_idx, 0, self.config.n_z - 1))
+                        main_logger.warning(f"已将智能体 {i} 的索引修正为: {agent_skill_idx}")
+                    
+                    agent_disc_logits = self.individual_discriminator(
+                        next_obs.unsqueeze(0), 
+                        team_skill_tensor
+                    )
+                    agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
+                    
+                    num_possible_skills = agent_disc_log_probs.shape[1]
+                    
+                    # 添加详细的调试信息
+                    main_logger.debug(f"智能体 {i}: agent_skill_idx={agent_skill_idx}, "
+                                    f"num_possible_skills={num_possible_skills}, "
+                                    f"agent_skills数组={agent_skills}, "
+                                    f"config.n_z={self.config.n_z}, "
+                                    f"判别器输出形状={agent_disc_logits.shape}")
+
+                    # 再次验证判别器输出的维度是否与配置一致
+                    if num_possible_skills != self.config.n_z:
+                        main_logger.error(f"判别器输出维度 {num_possible_skills} 与配置的n_z {self.config.n_z} 不匹配!")
+                        # 使用较小的维度作为安全边界
+                        safe_max_idx = min(num_possible_skills, self.config.n_z) - 1
+                        agent_skill_idx = min(agent_skill_idx, safe_max_idx)
+                        main_logger.warning(f"已将索引限制为安全值: {agent_skill_idx}")
+
+                    # 最终的边界检查
+                    if not (0 <= agent_skill_idx < num_possible_skills):
+                        main_logger.error(f"最终检查: 索引 {agent_skill_idx} 仍然超出范围 [0, {num_possible_skills - 1}]")
+                        agent_skill_idx = 0
+                        main_logger.warning(f"强制使用索引0")
+
+                    # 使用最安全的索引方式
+                    agent_skill_idx = max(0, min(agent_skill_idx, agent_disc_log_probs.shape[1] - 1))
+                    
+                    # 在实际索引之前，将张量移到CPU进行索引操作，避免CUDA索引问题
+                    agent_disc_log_probs_cpu = agent_disc_log_probs.cpu()
+                    agent_skill_log_prob_cpu = agent_disc_log_probs_cpu[0, agent_skill_idx]
+                    agent_skill_log_prob = agent_skill_log_prob_cpu.to(self.device)
+                    
+                except Exception as e:
+                    main_logger.error(f"计算个体技能判别器输出时发生错误: {e}")
+                    main_logger.error(f"错误详情: 智能体={i}, agent_skills={agent_skills}, "
+                                    f"team_skill={team_skill}, next_obs.shape={next_obs.shape}")
+                    # 使用安全的默认值
+                    agent_skill_log_prob = torch.tensor(0.0, device=self.device)
+                    main_logger.warning(f"智能体 {i} 使用默认的技能log概率: 0.0")
                 
             # 计算低层奖励（Eq. 4）及其组成部分
             env_reward_component = self.config.lambda_e * current_reward # 使用 current_reward
-            team_disc_component = self.config.lambda_D * team_skill_log_prob.item()
             ind_disc_component = self.config.lambda_d * agent_skill_log_prob.item()
             
-            intrinsic_reward = env_reward_component + team_disc_component + ind_disc_component
+            intrinsic_reward = env_reward_component + ind_disc_component
             
             # 新增：对总内在奖励进行裁剪，以稳定训练
             # 这防止了因奖励值过大导致的损失爆炸问题
@@ -507,7 +538,6 @@ class HMASDAgent:
                 torch.tensor(done, dtype=torch.float, device=self.device),  # 是否结束
                 torch.tensor(action_logprobs[i], device=self.device),  # 动作对数概率
                 torch.tensor(env_reward_component, device=self.device), # 环境奖励部分
-                torch.tensor(team_disc_component, device=self.device),  # 团队判别器部分
                 torch.tensor(ind_disc_component, device=self.device)   # 个体判别器部分
             )
             self.low_level_buffer.push(low_level_experience)
@@ -531,6 +561,11 @@ class HMASDAgent:
         
         # 记录当前技能计时器状态
         main_logger.debug(f"store_transition: 环境ID={env_id}, skill_timer={skill_timer}, k={self.config.k}, 条件判断={skill_timer == self.config.k - 1}")
+        
+        # 存储轨迹用于Louvain图构建
+        state_np = state if isinstance(state, np.ndarray) else state.cpu().numpy()
+        next_state_np = next_state if isinstance(next_state, np.ndarray) else next_state.cpu().numpy()
+        self.trajectory_buffer.push((state_np, actions, next_state_np))
         
         # 获取或初始化环境的最后贡献时间
         if env_id not in self.env_last_contribution:
@@ -558,9 +593,39 @@ class HMASDAgent:
         should_store_high_level = (skill_timer == self.config.k - 1) or dones or force_collection
         
         if should_store_high_level:
-            # 获取当前环境的累积奖励
-            env_accumulated_reward = self.env_reward_sums.get(env_id, 0.0)
+            # --- 新的基于技能完成的高层奖励计算 ---
+            high_level_reward = 0.0
+            # 仅在技能周期结束时计算基于完成度的奖励
+            if skill_timer == self.config.k - 1 and active_skill_path:
+                start_state_np = state if isinstance(state, np.ndarray) else state.cpu().numpy()
+                end_state_np = next_state if isinstance(next_state, np.ndarray) else next_state.cpu().numpy()
+                
+                # 获取最高层级的技能和社区
+                top_level = len(self.louvain_hierarchy.partitions)
+                target_community_id = active_skill_path[0] # 最高层技能即为目标社区
+                
+                start_community = self.louvain_hierarchy.find_community(start_state_np, top_level)
+                end_community = self.louvain_hierarchy.find_community(end_state_np, top_level)
+                
+                if start_community is not None and end_community is not None:
+                    if end_community == target_community_id:
+                        high_level_reward = 1.0  # 成功到达目标社区
+                        main_logger.info(f"环境 {env_id}: 技能完成! 到达目标社区 {target_community_id}。")
+                    elif start_community != end_community:
+                        high_level_reward = 0.1 # 到达了非目标的新社区，给予少量奖励
+                        main_logger.info(f"环境 {env_id}: 到达新社区 {end_community} (目标是 {target_community_id})。")
+                    else:
+                        high_level_reward = -0.1 # 未能离开起始社区
+                else:
+                    # 如果无法确定社区，则退回到使用环境累积奖励
+                    high_level_reward = self.env_reward_sums.get(env_id, 0.0)
+            else:
+                # 在episode结束或强制收集时，仍然使用累积奖励
+                high_level_reward = self.env_reward_sums.get(env_id, 0.0)
             
+            env_accumulated_reward = high_level_reward # 使用新的高层奖励
+            # --- 奖励计算结束 ---
+
             # 记录高层经验存储检查信息
             reason = "未知原因"
             if skill_timer == self.config.k - 1:
@@ -638,13 +703,14 @@ class HMASDAgent:
             
             # 将带有log probabilities的经验存储到专用缓冲区
             if log_probs is not None:
+                # HMALS版本存储整个技能路径和对应的log_probs
                 self.high_level_buffer_with_logprobs.append({
                     'state': state_tensor.clone(),
-                    'team_skill': team_skill,
+                    'active_skill_path': active_skill_path, # 存储完整路径
                     'observations': observations_tensor.clone(),
                     'agent_skills': agent_skills_tensor.clone(),
-                    'reward': env_accumulated_reward,  # 使用环境特定的累积奖励
-                    'team_log_prob': log_probs['team_log_prob'],
+                    'reward': env_accumulated_reward,
+                    'louvain_log_probs': log_probs['louvain_log_probs'], # 存储分层log_probs
                     'agent_log_probs': log_probs['agent_log_probs']
                 })
                 
@@ -654,15 +720,27 @@ class HMASDAgent:
             
             # 重置该环境的奖励累积
             self.env_reward_sums[env_id] = 0.0
-            
-            # 重置该环境的技能计时器
-            self.env_timers[env_id] = 0
-            
-        # else:
-        #     # 如果不到技能周期结束时间，增加该环境的技能计时器，但确保不超过k-1
-        #     # if self.env_timers[env_id] < self.config.k - 1:
-        #     #     self.env_timers[env_id] += 1
     
+    def update_skill_hierarchy(self):
+        """
+        使用收集到的轨迹更新Louvain技能层次结构。
+        """
+        if len(self.trajectory_buffer) == 0:
+            main_logger.info("轨迹缓冲区为空，跳过技能层次结构更新。")
+            return
+
+        main_logger.info(f"开始更新技能层次结构，使用 {len(self.trajectory_buffer)} 条轨迹。")
+        
+        # 从缓冲区获取所有轨迹
+        trajectories = list(self.trajectory_buffer.buffer)
+        
+        # 使用轨迹构建图并生成层次结构
+        self.louvain_hierarchy.build_graph_from_trajectories(trajectories)
+        self.louvain_hierarchy.generate_skill_hierarchy()
+        
+        # 注意：目前不清空缓冲区，以便累积更稳健的图
+        main_logger.info("技能层次结构更新完成。")
+
     def update_coordinator(self):
         """更新高层技能协调器网络"""
         # 记录高层缓冲区状态
@@ -801,7 +879,18 @@ class HMASDAgent:
         
         # 获取当前策略
         try:
-            Z, z, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(states, observations)
+            # HMALS的调用方式已改变
+            active_skill_path, z, louvain_skills_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(
+                states, observations, self.louvain_hierarchy
+            )
+            
+            # 为了与现有PPO框架兼容，我们暂时将多层决策的联合log_prob作为策略的log_prob
+            # Z_logits 和 Z_log_probs 需要被重新定义
+            # Z_entropy 也需要重新计算
+            
+            # 此处简化：我们假设 team_skills 对应于最低层技能
+            # 这是一个临时的简化，理想情况下应处理整个序列
+            Z_logits = louvain_skills_logits[-1] if louvain_skills_logits else torch.zeros((states.size(0), self.config.n_louvain_skills), device=self.device)
             
             # 在使用logits前检查是否有异常值
             Z_logits_has_nan = torch.isnan(Z_logits).any().item()
@@ -844,8 +933,16 @@ class HMASDAgent:
                 
                 # 从带log probabilities的缓冲区中随机选择样本
                 indices = torch.randperm(len(self.high_level_buffer_with_logprobs))[:self.config.high_level_batch_size]
-                old_team_log_probs = [self.high_level_buffer_with_logprobs[i]['team_log_prob'] for i in indices]
-                old_team_log_probs_tensor = torch.tensor(old_team_log_probs, device=self.device).detach()  # 使用detach()防止求导错误
+                
+                # HMALS版本：使用分层log_probs的总和作为旧的log_prob
+                # 这是一个简化，理想情况下应分别处理每一层的PPO loss
+                old_log_probs_list = []
+                for i in indices:
+                    # 将一个路径中的所有log_prob相加
+                    path_log_prob = sum(self.high_level_buffer_with_logprobs[i]['louvain_log_probs'])
+                    old_log_probs_list.append(path_log_prob)
+                
+                old_team_log_probs_tensor = torch.tensor(old_log_probs_list, device=self.device).detach()
                 
                 # 检查old_team_log_probs_tensor是否有异常值
                 old_log_probs_has_nan = torch.isnan(old_team_log_probs_tensor).any().item()
@@ -1182,7 +1279,7 @@ class HMASDAgent:
         # 从缓冲区采样数据，包含内在奖励的三个组成部分
         batch = self.low_level_buffer.sample(self.config.batch_size)
         states, team_skills, observations, agent_skills, actions, rewards, dones, old_log_probs, \
-        env_rewards_comp, team_disc_rewards_comp, ind_disc_rewards_comp = zip(*batch)
+        env_rewards_comp, ind_disc_rewards_comp = zip(*batch)
         
         states = torch.stack(states)
         team_skills = torch.stack(team_skills)
@@ -1298,14 +1395,13 @@ class HMASDAgent:
         # 计算内在奖励各部分的平均值
         avg_intrinsic_reward = rewards.mean().item()
         avg_env_reward_comp = torch.stack(env_rewards_comp).mean().item()
-        avg_team_disc_reward_comp = torch.stack(team_disc_rewards_comp).mean().item()
         avg_ind_disc_reward_comp = torch.stack(ind_disc_rewards_comp).mean().item()
         avg_discoverer_value = current_values.mean().item() # 使用更新前的 current_values
         
         action_entropy_val = -entropy_loss.item() / self.config.lambda_l if self.config.lambda_l > 0 else 0.0
 
         return loss.item(), policy_loss.item(), value_loss.item(), action_entropy_val, \
-               avg_intrinsic_reward, avg_env_reward_comp, avg_team_disc_reward_comp, avg_ind_disc_reward_comp, avg_discoverer_value
+               avg_intrinsic_reward, avg_env_reward_comp, avg_ind_disc_reward_comp, avg_discoverer_value
     
     def update_discriminators(self):
         """更新技能判别器网络"""
@@ -1321,23 +1417,21 @@ class HMASDAgent:
         observations = torch.stack(observations)
         agent_skills = torch.stack(agent_skills)
         
-        # 更新团队技能判别器
-        team_disc_logits = self.team_discriminator(states)
-        team_disc_loss = F.cross_entropy(team_disc_logits, team_skills)
-        
         # 更新个体技能判别器
         batch_size, n_agents = agent_skills.shape
         
         # 扁平化处理
         observations_flat = observations.reshape(-1, observations.size(-1))
         agent_skills_flat = agent_skills.reshape(-1)
+        # 注意：在HMALS中，个体判别器应该以最低层团队技能Z_1为条件
+        # 目前暂时保持原样，后续在实现分层逻辑时再修改
         team_skills_expanded = team_skills.unsqueeze(1).expand(-1, n_agents).reshape(-1)
         
         agent_disc_logits = self.individual_discriminator(observations_flat, team_skills_expanded)
-        agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills_flat)
+        agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills_flat.long())
         
-        # 总技能判别器损失
-        disc_loss = team_disc_loss + agent_disc_loss
+        # 总技能判别器损失 (现在只有个体部分)
+        disc_loss = agent_disc_loss
         
         # 更新网络
         self.discriminator_optimizer.zero_grad()
@@ -1351,6 +1445,10 @@ class HMASDAgent:
         # 更新全局步数
         self.global_step += 1
         main_logger.debug(f"HMASDAgent.update (step {self.global_step}): self.writer object: {self.writer}")
+        
+        # 定期更新技能层次结构
+        if self.global_step > 0 and self.global_step % self.config.louvain_update_interval == 0:
+            self.update_skill_hierarchy()
         
         # 更频繁地检查环境贡献情况（从1000步降至200步）
         if self.global_step % 200 == 0:
@@ -1401,7 +1499,7 @@ class HMASDAgent:
         
         # 更新低层技能发现器
         discoverer_loss, discoverer_policy_loss, discoverer_value_loss, action_entropy, \
-        avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, \
+        avg_intrinsic_reward, avg_env_comp, avg_ind_disc_comp, \
         avg_discoverer_val = self.update_discoverer()
         
         # 更新训练信息
@@ -1414,7 +1512,6 @@ class HMASDAgent:
         
         self.training_info['intrinsic_reward_low_level_average'].append(avg_intrinsic_reward)
         self.training_info['intrinsic_reward_env_component'].append(avg_env_comp)
-        self.training_info['intrinsic_reward_team_disc_component'].append(avg_team_disc_comp)
         self.training_info['intrinsic_reward_ind_disc_component'].append(avg_ind_disc_comp)
         
         self.training_info['coordinator_state_value_mean'].append(mean_coord_state_val)
@@ -1446,7 +1543,6 @@ class HMASDAgent:
         # 内在奖励记录
         self.writer.add_scalar('Rewards/Intrinsic/LowLevel_Average', avg_intrinsic_reward, self.global_step)
         self.writer.add_scalar('Rewards/Intrinsic/Components/Environmental_Portion_Average', avg_env_comp, self.global_step)
-        self.writer.add_scalar('Rewards/Intrinsic/Components/TeamDiscriminator_Portion_Average', avg_team_disc_comp, self.global_step)
         self.writer.add_scalar('Rewards/Intrinsic/Components/IndividualDiscriminator_Portion_Average', avg_ind_disc_comp, self.global_step)
 
         # 价值函数估计记录
@@ -1490,7 +1586,6 @@ class HMASDAgent:
             'action_entropy': action_entropy, # 低层动作熵
             'avg_intrinsic_reward': avg_intrinsic_reward,
             'avg_env_comp': avg_env_comp,
-            'avg_team_disc_comp': avg_team_disc_comp,
             'avg_ind_disc_comp': avg_ind_disc_comp,
             'mean_coord_state_val': mean_coord_state_val,
             'mean_coord_agent_val': mean_coord_agent_val,
@@ -1504,7 +1599,6 @@ class HMASDAgent:
         torch.save({
             'skill_coordinator': self.skill_coordinator.state_dict(),
             'skill_discoverer': self.skill_discoverer.state_dict(),
-            'team_discriminator': self.team_discriminator.state_dict(),
             'individual_discriminator': self.individual_discriminator.state_dict(),
             'config': self.config
         }, path)
@@ -1573,7 +1667,6 @@ class HMASDAgent:
         # 这允许加载匹配的层，同时忽略不匹配的层（如旧的transformer vs 新的opt，或变化的智能体数量）
         self.skill_coordinator.load_state_dict(checkpoint['skill_coordinator'], strict=False)
         self.skill_discoverer.load_state_dict(checkpoint['skill_discoverer'], strict=False)
-        self.team_discriminator.load_state_dict(checkpoint['team_discriminator'], strict=False)
         self.individual_discriminator.load_state_dict(checkpoint['individual_discriminator'], strict=False)
         
         main_logger.info(f"模型已从 {path} 加载 (使用非严格模式)")

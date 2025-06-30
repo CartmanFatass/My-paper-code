@@ -911,7 +911,7 @@ class MAPPOAgent:
             main_logger.debug(f"开始网络更新，缓冲区大小: {len(self.buffer)}")
             
             # 记录内存使用情况
-            log_memory_usage(main_logger, self.update_step)
+            #log_memory_usage(main_logger, self.update_step)
             
             # 从ReplayBuffer获取批次数据
             batch_size = min(len(self.buffer), self.config.buffer_size // 2)
@@ -1461,8 +1461,8 @@ def train(config, args, device):
             rollout_throughputs = []
             rollout_service_rates = []
             # 定期记录内存使用情况
-            if total_steps % 1000 == 0:
-                log_memory_usage(main_logger, total_steps)
+            # if total_steps % 1000 == 0:
+            #     log_memory_usage(main_logger, total_steps)
             
             # 收集rollout数据 - 固定长度的数据收集
             for rollout_step in range(config.rollout_length):
@@ -1498,8 +1498,8 @@ def train(config, args, device):
                             terminated, truncated = dones
                             dones = np.logical_or(terminated, truncated)
                         
-                        # 生成next_states（简化处理，假设与observations相同维度）
-                        next_states = np.zeros((num_envs, state_dim))
+                        # 从infos字典中提取真实的全局状态
+                        next_states = np.array([info.get('state', np.zeros(state_dim)) for info in infos])
                         
                         # 验证向量化环境返回值
                         if next_observations is None or np.isnan(next_observations).any() or np.isinf(next_observations).any():
