@@ -932,6 +932,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
     agent.writer.add_text('Parameters/use_opt', str(config.use_opt), 0)
     
+    # 记录OPT相关参数
+    if config.use_opt:
+        agent.writer.add_text('Parameters/lambda_cd', str(config.lambda_cd), 0)
+    
     # 记录环境奖励权重配置（场景3的新权重）
     agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
     agent.writer.add_text('Environment/throughput_weight', str(config.throughput_weight), 0)

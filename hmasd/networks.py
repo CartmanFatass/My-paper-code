@@ -687,16 +687,35 @@ class SkillCoordinator(nn.Module):
         self.config = config
         self.n_Z = config.n_Z
         self.n_z = config.n_z
+        self.use_opt = config.use_opt
         
-        # 状态编码器
-        self.state_encoder = StateEncoder(
-            config.state_dim,
-            config.obs_dim,
-            config.embedding_dim,
-            config.n_encoder_layers,
-            config.n_heads,
-            config
-        )
+        # 实体特征嵌入层
+        self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
+        self.obs_embedding = nn.Linear(config.obs_dim, config.embedding_dim)
+        self.positional_encoding = PositionalEncoding(config.embedding_dim)
+        
+        if self.use_opt:
+            # 决策层OPT模块：专门用于技能选择的交互解耦
+            self.decision_opt = OPT(
+                input_dim=config.embedding_dim,
+                num_prototypes=config.opt_num_prototypes,
+                prototype_dim=config.opt_prototype_dim,
+                num_layers=config.opt_layers
+            )
+            # 将OPT输出投影到适合技能解码的维度
+            if config.opt_prototype_dim != config.embedding_dim:
+                self.opt_to_decoder_projection = nn.Linear(config.opt_prototype_dim, config.embedding_dim)
+            else:
+                self.opt_to_decoder_projection = nn.Identity()
+        else:
+            # 使用标准的Transformer编码器作为后备
+            encoder_layer = nn.TransformerEncoderLayer(
+                d_model=config.embedding_dim,
+                nhead=config.n_heads,
+                dim_feedforward=config.embedding_dim * 4,
+                batch_first=True
+            )
+            self.fallback_encoder = nn.TransformerEncoder(encoder_layer, config.n_encoder_layers)
         
         # 技能解码器
         self.skill_decoder = SkillDecoder(
@@ -707,7 +726,7 @@ class SkillCoordinator(nn.Module):
             config.n_z
         )
         
-        # 高层价值函数
+        # 高层价值函数 - 基于解耦后的特征
         self.value_head_state = nn.Linear(config.embedding_dim, 1)
         self.value_heads_obs = nn.ModuleList([
             nn.Linear(config.embedding_dim, 1) for _ in range(config.n_agents)
@@ -718,15 +737,66 @@ class SkillCoordinator(nn.Module):
     
     def _init_weights(self):
         """初始化网络权重，提高训练稳定性"""
+        # 初始化嵌入层
+        initialize_weights(self.state_embedding, gain=1.0)
+        initialize_weights(self.obs_embedding, gain=1.0)
+        
         # 初始化价值头权重
         initialize_weights(self.value_head_state, gain=0.01)  # 价值函数输出层使用较小的初始化
         for value_head in self.value_heads_obs:
             initialize_weights(value_head, gain=0.01)
     
+    def _build_entity_sequence(self, state, observations):
+        """
+        构造实体特征序列，用于OPT模块处理
+        
+        参数:
+            state: 全局状态 [batch_size, state_dim]
+            observations: 所有智能体观测 [batch_size, n_agents, obs_dim]
+            
+        返回:
+            entity_features: 实体特征序列 [batch_size, 1+n_agents, embedding_dim]
+        """
+        batch_size, n_agents, obs_dim = observations.size()
+        
+        # 嵌入全局状态和局部观测
+        embedded_state = self.state_embedding(state).unsqueeze(1)  # [batch_size, 1, embedding_dim]
+        embedded_obs = self.obs_embedding(observations.reshape(-1, obs_dim))
+        embedded_obs = embedded_obs.reshape(batch_size, n_agents, -1)  # [batch_size, n_agents, embedding_dim]
+        
+        # 将状态和观测拼接作为实体序列
+        entity_features = torch.cat([embedded_state, embedded_obs], dim=1)  # [batch_size, 1+n_agents, embedding_dim]
+        
+        # 应用位置编码
+        entity_features = self.positional_encoding(entity_features)
+        
+        return entity_features
+    
     def get_value(self, state, observations):
         """获取高层价值函数值"""
-        # 在critic网络中，我们不需要history_context，因此cmi_loss将为0
-        encoded_state, encoded_observations, cd_loss, _ = self.state_encoder(state, observations)
+        batch_size, n_agents, obs_dim = observations.size()
+        device = state.device
+        
+        # 确保输入是float32类型
+        state = state.float()
+        observations = observations.float()
+        
+        # 构造实体特征序列
+        entity_features = self._build_entity_sequence(state, observations)
+        
+        if self.use_opt:
+            # 使用决策层OPT进行交互解耦
+            disentangled_features, cd_loss, cmi_loss, _ = self.decision_opt(entity_features)
+            # 投影到解码器维度
+            processed_features = self.opt_to_decoder_projection(disentangled_features)
+        else:
+            # 使用标准编码器
+            processed_features = self.fallback_encoder(entity_features)
+            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        
+        # 拆分处理后的特征
+        encoded_state = processed_features[:, 0:1, :]  # [batch_size, 1, embedding_dim]
+        encoded_observations = processed_features[:, 1:, :]  # [batch_size, n_agents, embedding_dim]
         
         # 全局状态价值
         state_value = self.value_head_state(encoded_state.squeeze(1))
@@ -766,8 +836,23 @@ class SkillCoordinator(nn.Module):
         state = state.float()
         observations = observations.float()
         
-        # 编码状态和观测
-        encoded_state, encoded_observations, cd_loss, cmi_loss = self.state_encoder(state, observations, history_context)
+        # 构造实体特征序列
+        entity_features = self._build_entity_sequence(state, observations)
+        
+        if self.use_opt:
+            # 使用决策层OPT进行交互解耦
+            disentangled_features, cd_loss, cmi_loss, _ = self.decision_opt(entity_features, history_context)
+            # 投影到解码器维度
+            processed_features = self.opt_to_decoder_projection(disentangled_features)
+        else:
+            # 使用标准编码器
+            processed_features = self.fallback_encoder(entity_features)
+            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
+            cmi_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        
+        # 拆分处理后的特征
+        encoded_state = processed_features[:, 0:1, :]  # [batch_size, 1, embedding_dim]
+        encoded_observations = processed_features[:, 1:, :]  # [batch_size, n_agents, embedding_dim]
         
         # 生成团队技能Z
         Z_logits = self.skill_decoder(encoded_state, encoded_observations)
@@ -899,6 +984,7 @@ class SkillDiscoverer(nn.Module):
         self.action_dim = config.action_dim
         self.hidden_dim = config.hidden_size
         self.gru_hidden_dim = config.gru_hidden_size
+        self.use_opt = config.use_opt
         
         # Actor网络（每个智能体共享）
         # 及早初始化网络层，避免延迟初始化导致的模型加载问题
@@ -915,8 +1001,28 @@ class SkillDiscoverer(nn.Module):
         # 重置参数
         self.actor_hidden = None
         
-        # Critic网络（中心化价值函数）
-        self.critic_mlp = MLP(config.state_dim + config.n_Z, config.hidden_size, config.hidden_size)
+        # Critic网络（中心化价值函数）- 增强OPT支持
+        if self.use_opt:
+            # 低层OPT模块：用于处理全局状态的交互解耦
+            self.critic_opt = OPT(
+                input_dim=config.embedding_dim,
+                num_prototypes=config.opt_num_prototypes,
+                prototype_dim=config.opt_prototype_dim,
+                num_layers=config.opt_layers
+            )
+            # 状态嵌入层
+            self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
+            # 将OPT输出投影到适合价值计算的维度
+            if config.opt_prototype_dim != config.embedding_dim:
+                self.opt_to_value_projection = nn.Linear(config.opt_prototype_dim, config.embedding_dim)
+            else:
+                self.opt_to_value_projection = nn.Identity()
+            # 价值网络接收解耦后的全局状态特征和团队技能
+            self.critic_mlp = MLP(config.embedding_dim + config.n_Z, config.hidden_size, config.hidden_size)
+        else:
+            # 标准Critic网络
+            self.critic_mlp = MLP(config.state_dim + config.n_Z, config.hidden_size, config.hidden_size)
+        
         self.critic_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
         self.value_head = nn.Linear(config.gru_hidden_size, 1)
         
@@ -940,6 +1046,12 @@ class SkillDiscoverer(nn.Module):
         
         # 初始化价值头
         initialize_weights(self.value_head, gain=0.01)  # 价值函数输出层使用较小的初始化
+        
+        # 如果使用OPT，初始化状态嵌入层和投影层
+        if self.use_opt:
+            initialize_weights(self.state_embedding, gain=1.0)
+            if hasattr(self, 'opt_to_value_projection'):
+                initialize_weights(self.opt_to_value_projection, gain=1.0)
     
     def init_hidden(self, batch_size=1):
         """初始化GRU隐藏状态"""
@@ -964,6 +1076,7 @@ class SkillDiscoverer(nn.Module):
     def get_value(self, state, team_skill, batch_first=True):
         """获取价值函数值"""
         batch_size = state.size(0)
+        device = state.device
         
         # 确保state是float32类型
         state = state.float()
@@ -982,8 +1095,22 @@ class SkillDiscoverer(nn.Module):
         else:
             team_skill_onehot = team_skill.float()
 
-        # 拼接全局状态和团队技能
-        critic_input = torch.cat([state, team_skill_onehot], dim=-1)
+        if self.use_opt:
+            # 使用低层OPT处理全局状态
+            # 将状态嵌入到embedding空间
+            embedded_state = self.state_embedding(state).unsqueeze(1)  # [batch_size, 1, embedding_dim]
+            
+            # 通过OPT解耦全局状态中的交互模式
+            disentangled_state, _, _, _ = self.critic_opt(embedded_state)
+            
+            # 投影回价值计算维度并去除序列维度
+            processed_state = self.opt_to_value_projection(disentangled_state).squeeze(1)  # [batch_size, embedding_dim]
+            
+            # 拼接解耦后的状态特征和团队技能
+            critic_input = torch.cat([processed_state, team_skill_onehot], dim=-1)
+        else:
+            # 标准方式：直接拼接全局状态和团队技能
+            critic_input = torch.cat([state, team_skill_onehot], dim=-1)
         
         # 前向传播
         critic_features = self.critic_mlp(critic_input)
@@ -994,7 +1121,6 @@ class SkillDiscoverer(nn.Module):
         
         # 初始化隐藏状态（如果需要）
         if self.critic_hidden is None or self.critic_hidden.size(1) != batch_size:
-            device = critic_features.device
             self.critic_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
             
         critic_output, self.critic_hidden = self.critic_gru(critic_features, self.critic_hidden)

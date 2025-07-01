@@ -1010,7 +1010,11 @@ class HMASDAgent:
             # 总损失
             # 同时加上来自actor和critic路径的CD loss
             total_cd_loss = cd_loss + cd_loss_critic
-            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + self.config.lambda_cd * total_cd_loss
+            # 只有在使用OPT时才添加CD损失
+            if self.config.use_opt:
+                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + self.config.lambda_cd * total_cd_loss
+            else:
+                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
             
             # 检查总损失是否有异常值
             if torch.isnan(loss).any().item() or torch.isinf(loss).any().item():
