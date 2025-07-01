@@ -27,6 +27,7 @@ from hmasd.agent import HMASDAgent
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
+from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 # Removed VectorizedEnvAdapter class
@@ -790,6 +791,27 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                 **reward_kwargs, # 传递场景3的新奖励权重参数
                 **scenario3_kwargs # 传递场景3特有参数
             )
+        elif scenario == 4:
+            # 场景4：强制多跳中继环境
+            # 使用优化的默认参数
+            scenario4_kwargs = {
+                'user_distribution': 'forced_relay_cluster',
+                'max_hops': max_hops or 4,
+                'area_size': area_size or 2500,
+                'n_clusters': n_clusters or 4,
+                'cluster_std': cluster_std or 80,
+                'central_area_ratio': central_area_ratio or 0.6,
+                'min_sinr': 3,  # 降低SINR门槛
+                'max_connections': 25,  # 增加连接数上限
+                'coverage_weight': 0.8,
+                'connectivity_weight': 0.15,
+                'efficiency_weight': 0.05,
+            }
+            
+            # 更新环境参数
+            env_kwargs.update(scenario4_kwargs)
+            
+            raw_env = UAVForcedRelayEnv(**env_kwargs)
         else:
             raise ValueError(f"未知的场景: {scenario}")
 
@@ -804,7 +826,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='使用论文《Hierarchical Multi-Agent Skill Discovery》中的超参数运行HMASD (多进程版本)')
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=3, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式')
+    parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -823,11 +845,11 @@ def parse_args():
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
     parser.add_argument('--n_users', type=int, default=50, help='用户数量 ')
-    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 场景3默认3000)')
+    parser.add_argument('--area_size', type=int, default=2000, help='区域大小 (米, 场景3默认3000)')
     parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
-    parser.add_argument('--channel_model', type=str, default='3gpp-36777',
+    parser.add_argument('--channel_model', type=str, default='probabilistic',
                         choices=['free_space', 'urban', 'suburban','3gpp-36777', 'probabilistic'], help='信道模型')
     
     # FDMA 参数
@@ -837,8 +859,8 @@ def parse_args():
     
     # 场景3特有参数
     parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
-    parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3)')
-    parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3)')
+    parser.add_argument('--cluster_std', type=int, default=100, help='簇内用户分布标准差 (米, 仅用于场景3)')
+    parser.add_argument('--central_area_ratio', type=float, default=0.6, help='中心用户区域占总区域的比例 (仅用于场景3)')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=0, 
@@ -1647,11 +1669,11 @@ def main():
         render_mode=None,
         rank=i,
         seed=base_seed,
-        # 场景3特有参数
-        n_clusters=args.n_clusters if args.scenario == 3 else None,
-        cluster_std=args.cluster_std if args.scenario == 3 else None,
-        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
-        area_size=args.area_size if args.scenario == 3 else None,
+        # 场景3和场景4参数
+        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
+        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
+        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
+        area_size=args.area_size if args.scenario in [3, 4] else None,
         use_fdma=args.use_fdma,
         bandwidth=args.bandwidth
     ) for i in range(num_envs)]
@@ -1667,11 +1689,11 @@ def main():
         render_mode="human" if args.render and i == 0 else None, # 只在第一个评估环境中渲染
         rank=i,
         seed=base_seed + num_envs, # Use different seeds for eval envs
-        # 场景3特有参数
-        n_clusters=args.n_clusters if args.scenario == 3 else None,
-        cluster_std=args.cluster_std if args.scenario == 3 else None,
-        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
-        area_size=args.area_size if args.scenario == 3 else None,
+        # 场景3和场景4参数
+        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
+        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
+        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
+        area_size=args.area_size if args.scenario in [3, 4] else None,
         use_fdma=args.use_fdma,
         bandwidth=args.bandwidth
     ) for i in range(eval_rollout_threads)]
@@ -1685,15 +1707,15 @@ def main():
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
         config=config,
-        max_hops=args.max_hops if args.scenario in [2, 3] else None,
+        max_hops=args.max_hops if args.scenario in [2, 3, 4] else None,
         render_mode=None,
         rank=0,
         seed=base_seed,
-        # 场景3特有参数
-        n_clusters=args.n_clusters if args.scenario == 3 else None,
-        cluster_std=args.cluster_std if args.scenario == 3 else None,
-        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None,
-        area_size=args.area_size if args.scenario == 3 else None,
+        # 场景3和场景4参数
+        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
+        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
+        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
+        area_size=args.area_size if args.scenario in [3, 4] else None,
         use_fdma=args.use_fdma,
         bandwidth=args.bandwidth
     )

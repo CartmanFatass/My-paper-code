@@ -25,7 +25,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         channel_model="free_space",
         render_mode=None,
         seed=None,
-        min_sinr=0,  # 最小SINR阈值 (dB)
+        min_sinr=3,  # 最小SINR阈值 (dB)
         max_connections=15,  # 每个无人机最大连接数（增加以支持更多用户）
         max_hops=5,  # 最大跳数
         effective_coverage_weight=0.6,  # 有效覆盖率权重（大幅增强）
@@ -454,21 +454,21 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         # 添加多跳统计信息
         if hasattr(self, 'reward_info'):
             reward_info = self.reward_info
-            self.ax.text2D(0.02, 0.80, f'有效覆盖率: {reward_info.get("effective_coverage_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.80, f'Effective Coverage: {reward_info.get("effective_coverage_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.75, f'吞吐量奖励: {reward_info.get("throughput_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.75, f'Throughput Reward: {reward_info.get("throughput_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.70, f'负载均衡: {reward_info.get("load_balance_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.70, f'Load Balance: {reward_info.get("load_balance_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.65, f'网络连通性: {reward_info.get("network_connectivity_reward", 0):.3f}', 
+            self.ax.text2D(0.02, 0.65, f'Network Connectivity: {reward_info.get("network_connectivity_reward", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.60, f'邻近惩罚: {reward_info.get("proximity_penalty", 0):.3f}', 
+            self.ax.text2D(0.02, 0.60, f'Proximity Penalty: {reward_info.get("proximity_penalty", 0):.3f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.55, f'平均跳数: {reward_info.get("avg_hops", 0):.1f}', 
+            self.ax.text2D(0.02, 0.55, f'Avg Hops: {reward_info.get("avg_hops", 0):.1f}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.50, f'有效用户: {reward_info.get("effective_connected_users", 0)}/{self.n_users}', 
+            self.ax.text2D(0.02, 0.50, f'Effective Users: {reward_info.get("effective_connected_users", 0)}/{self.n_users}', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.45, f'连通UAV: {reward_info.get("connected_uavs", 0)}/{self.n_uavs}', 
+            self.ax.text2D(0.02, 0.45, f'Connected UAVs: {reward_info.get("connected_uavs", 0)}/{self.n_uavs}', 
                           transform=self.ax.transAxes)
         
         self.fig.canvas.draw()

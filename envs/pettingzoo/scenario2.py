@@ -27,7 +27,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         channel_model="free_space",
         render_mode=None,
         seed=None,
-        min_sinr=0,  # 最小SINR阈值 (dB)
+        min_sinr=3,  # 最小SINR阈值 (dB)
         max_connections=10,  # 每个无人机最大连接数
         max_hops=3,  # 最大跳数 (3-5可调)
         n_ground_bs=1,  # 地面基站数量
@@ -37,6 +37,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         paper_reward=False,  # 是否使用论文中的奖励函数
         use_fdma=True,  # 是否启用FDMA频分多址
         bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
+        ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
     ):
         """
         初始化UAV协作组网环境
@@ -94,6 +95,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             paper_reward=paper_reward,
             use_fdma=use_fdma,
             bandwidth=bandwidth,
+            ground_bs_tx_power=ground_bs_tx_power,
         )
         
         # 场景名称
@@ -843,15 +845,15 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         
         # 添加连通性信息
         connectivity_ratio = self._compute_connectivity_ratio()
-        self.ax.text2D(0.02, 0.90, f'网络连通性: {connectivity_ratio:.2%}', transform=self.ax.transAxes)
+        self.ax.text2D(0.02, 0.90, f'Network Connectivity: {connectivity_ratio:.2%}', transform=self.ax.transAxes)
         
         # 添加吞吐量信息
         if hasattr(self, 'reward_info') and 'total_throughput_mbps' in self.reward_info:
             total_throughput_mbps = self.reward_info['total_throughput_mbps']
             avg_throughput_mbps = self.reward_info['avg_throughput_per_user_mbps']
-            self.ax.text2D(0.02, 0.80, f'总吞吐量: {total_throughput_mbps:.1f} Mbps', 
+            self.ax.text2D(0.02, 0.80, f'Total Throughput: {total_throughput_mbps:.1f} Mbps', 
                           transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.75, f'平均用户吞吐量: {avg_throughput_mbps:.1f} Mbps', 
+            self.ax.text2D(0.02, 0.75, f'Avg User Throughput: {avg_throughput_mbps:.1f} Mbps', 
                           transform=self.ax.transAxes)
         
         self.fig.canvas.draw()

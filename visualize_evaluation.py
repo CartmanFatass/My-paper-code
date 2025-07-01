@@ -14,7 +14,87 @@ from hmasd.agent import HMASDAgent
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
+from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
+
+class RandomAgent:
+    """
+    随机策略智能体，用于在没有训练模型时提供基线演示
+    
+    模拟 HMASDAgent 的接口，但使用随机动作
+    """
+    
+    def __init__(self, config, seed=None):
+        """
+        初始化随机智能体
+        
+        参数:
+            config: 配置对象，包含智能体数量和技能数量信息
+            seed: 随机种子
+        """
+        self.config = config
+        self.action_dim = 3  # 3D速度控制 (x, y, z)
+        
+        # 设置随机种子
+        if seed is not None:
+            np.random.seed(seed)
+        
+        # 模拟技能状态
+        self.current_team_skill = 0
+        self.current_agent_skills = [0] * config.n_agents
+        self.skill_timer = 0
+        self.skill_duration = 10  # 每10步切换一次技能
+        
+        print(f"初始化随机策略智能体: {config.n_agents}个无人机, 动作维度={self.action_dim}")
+    
+    def step(self, state, obs, step_count, deterministic=True, env_id=0):
+        """
+        选择随机动作
+        
+        参数:
+            state: 全局状态 (未使用)
+            obs: 观测 (未使用)
+            step_count: 当前步数
+            deterministic: 是否确定性 (对随机策略无影响)
+            env_id: 环境ID (未使用)
+        
+        返回:
+            actions: 随机动作数组 [n_agents, action_dim]
+            agent_info: 智能体信息字典
+        """
+        # 生成随机动作：3D速度控制，范围 [-1, 1]
+        actions = np.random.uniform(-1, 1, size=(self.config.n_agents, self.action_dim))
+        
+        # 更新技能状态（模拟技能切换）
+        skill_changed = False
+        if self.skill_timer >= self.skill_duration:
+            # 切换团队技能
+            self.current_team_skill = np.random.randint(0, self.config.n_Z)
+            
+            # 切换个体技能
+            self.current_agent_skills = [
+                np.random.randint(0, self.config.n_z) 
+                for _ in range(self.config.n_agents)
+            ]
+            
+            self.skill_timer = 0
+            skill_changed = True
+        else:
+            self.skill_timer += 1
+        
+        # 构建智能体信息
+        agent_info = {
+            'team_skill': self.current_team_skill,
+            'agent_skills': self.current_agent_skills.copy(),
+            'skill_changed': skill_changed,
+            'action_logprobs': np.zeros((self.config.n_agents, self.action_dim)),  # 随机策略无logprobs
+            'log_probs': {
+                'team_logprob': 0.0,
+                'agent_logprobs': [0.0] * self.config.n_agents
+            }
+        }
+        
+        return actions, agent_info
 
 class EnhancedVisualizationEnv:
     """
@@ -116,14 +196,26 @@ class EnhancedVisualizationEnv:
         else:
             team_skill_info = '团队技能: N/A'
         
+        # 检测智能体类型以添加到标题
+        agent_type_info = ""
+        if skill_info:
+            # 通过检查技能信息的特征来判断智能体类型
+            if 'action_logprobs' in skill_info:
+                # 检查logprobs是否全为0（随机策略的特征）
+                logprobs = skill_info['action_logprobs']
+                if isinstance(logprobs, np.ndarray) and np.all(logprobs == 0):
+                    agent_type_info = " | 🎲 随机策略"
+                else:
+                    agent_type_info = " | 🤖 训练模型"
+        
         if hasattr(self.base_env.env, 'reward_info') and self.base_env.env.reward_info:
             reward_info = self.base_env.env.reward_info
-            title = f'无人机网络通信链路可视化 - {step_info} | {team_skill_info}\n'
+            title = f'无人机网络通信链路可视化 - {step_info} | {team_skill_info}{agent_type_info}\n'
             title += f'总奖励: {reward_info.get("final_reward", 0):.3f} | '
             title += f'有效用户: {reward_info.get("effective_connected_users", 0)}/{self.base_env.env.n_users} | '
             title += f'平均跳数: {reward_info.get("avg_hops", 0):.1f}'
         else:
-            title = f'无人机网络通信链路可视化 - {step_info} | {team_skill_info}'
+            title = f'无人机网络通信链路可视化 - {step_info} | {team_skill_info}{agent_type_info}'
         
         self.ax.set_title(title, fontsize=12, pad=20)
         
@@ -498,6 +590,29 @@ def create_env(scenario, args, save_path=None):
             use_fdma=use_fdma,
             bandwidth=bandwidth
         )
+    elif scenario == 4:
+        # 场景4：强制多跳中继环境
+        # 使用优化的默认参数，参考 train_multiproc_config_1.py
+        raw_env = UAVForcedRelayEnv(
+            n_uavs=args.n_uavs,
+            n_users=args.n_users,
+            area_size=args.area_size,
+            max_hops=args.max_hops,
+            user_distribution='forced_relay_cluster',  # 场景4特有的用户分布
+            channel_model=args.channel_model,
+            render_mode="human",
+            seed=args.seed,
+            n_clusters=args.n_clusters,
+            cluster_std=args.cluster_std,
+            central_area_ratio=args.central_area_ratio,
+            min_sinr=3,  # 降低SINR门槛
+            max_connections=25,  # 增加连接数上限
+            coverage_weight=0.8,
+            connectivity_weight=0.15,
+            efficiency_weight=0.05,
+            use_fdma=use_fdma,
+            bandwidth=bandwidth
+        )
     else:
         raise ValueError(f"未知的场景: {scenario}")
     
@@ -600,46 +715,48 @@ def parse_args():
     parser = argparse.ArgumentParser(description='可视化评估训练好的HMASD模型')
     
     # 模型参数
-    parser.add_argument('--model_path', type=str, required=True,
-                       help='训练好的模型文件路径')
-    parser.add_argument('--scenario', type=int, default=3,
-                       help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式')
+    parser.add_argument('--model_path', type=str, default=None,
+                       help='训练好的模型文件路径 (如果未提供或不存在，将使用随机策略)')
+    parser.add_argument('--use_random', action='store_true',
+                       help='强制使用随机策略 (忽略模型文件)')
+    parser.add_argument('--scenario', type=int, default=4,
+                       help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
     parser.add_argument('--n_episodes', type=int, default=5,
                        help='评估的episode数量')
     
-    # 环境参数
-    parser.add_argument('--n_uavs', type=int, default=10,
-                       help='无人机数量')
-    parser.add_argument('--n_users', type=int, default=30,
-                       help='用户数量')
-    parser.add_argument('--area_size', type=int, default=1500,
-                       help='区域大小 (米)')
-    parser.add_argument('--max_hops', type=int, default=5,
-                       help='最大跳数 (场景2和3使用)')
-    parser.add_argument('--user_distribution', type=str, default='multi_cluster',
-                       choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'],
-                       help='用户分布类型')
-    parser.add_argument('--channel_model', type=str, default='3gpp-36777',
+    # 环境参数 - 为场景4调整默认值
+    parser.add_argument('--n_uavs', type=int, default=12,
+                       help='无人机数量 (场景4推荐12架)')
+    parser.add_argument('--n_users', type=int, default=80,
+                       help='用户数量 (场景4推荐80个)')
+    parser.add_argument('--area_size', type=int, default=2500,
+                       help='区域大小 (米, 场景4推荐2500m)')
+    parser.add_argument('--max_hops', type=int, default=4,
+                       help='最大跳数 (场景2、3、4使用, 场景4推荐4跳)')
+    parser.add_argument('--user_distribution', type=str, default='forced_relay_cluster',
+                       choices=['uniform', 'cluster', 'hotspot', 'multi_cluster', 'forced_relay_cluster'],
+                       help='用户分布类型 (场景4特有: forced_relay_cluster)')
+    parser.add_argument('--channel_model', type=str, default='probabilistic',
                        choices=['free_space', 'urban', 'suburban', '3gpp-36777','probabilistic'],
-                       help='信道模型')
+                       help='信道模型 (场景4推荐free_space)')
     parser.add_argument('--seed', type=int, default=42,
                        help='随机种子')
     
-    # 场景3特有参数
-    parser.add_argument('--n_clusters', type=int, default=3,
-                       help='用户簇数量 (仅用于场景3)')
-    parser.add_argument('--cluster_std', type=int, default=150,
-                       help='簇内用户分布标准差 (米, 仅用于场景3)')
-    parser.add_argument('--central_area_ratio', type=float, default=0.5,
-                       help='中心用户区域占总区域的比例 (仅用于场景3)')
+    # 场景3和场景4共同参数 - 为场景4调整默认值
+    parser.add_argument('--n_clusters', type=int, default=4,
+                       help='用户簇数量 (场景3和4使用, 场景4推荐4个)')
+    parser.add_argument('--cluster_std', type=int, default=80,
+                       help='簇内用户分布标准差 (米, 场景3和4使用, 场景4推荐80m)')
+    parser.add_argument('--central_area_ratio', type=float, default=0.6,
+                       help='中心用户区域占总区域的比例 (场景3和4使用, 场景4推荐0.6)')
     
     # FDMA参数
     parser.add_argument('--use_fdma', action='store_true', default=True,
                        help='是否启用FDMA频分多址 (默认启用)')
     parser.add_argument('--no_fdma', action='store_true',
                        help='禁用FDMA频分多址')
-    parser.add_argument('--bandwidth', type=int, default=20e6/5,
-                       help='FDMA信道数量 (默认5个)')
+    parser.add_argument('--bandwidth', type=int, default=20e6,
+                       help='每个无人机的带宽 (Hz, 默认20MHz)')
     
     return parser.parse_args()
 
@@ -652,22 +769,19 @@ def main():
     if args.no_fdma:
         args.use_fdma = False
     
-    # 检查模型文件是否存在
-    if not os.path.exists(args.model_path):
-        print(f"错误: 模型文件 {args.model_path} 不存在")
-        return
+    # 判断是否使用随机策略
+    use_random_agent = args.use_random or args.model_path is None or not os.path.exists(args.model_path or "")
     
-    print(f"加载模型: {args.model_path}")
     print(f"场景: {args.scenario}")
     print(f"无人机数量: {args.n_uavs}")
     print(f"用户数量: {args.n_users}")
     print(f"区域大小: {args.area_size}m")
+    print(f"最大跳数: {args.max_hops}")
+    print(f"用户分布: {args.user_distribution}")
+    print(f"信道模型: {args.channel_model}")
     print(f"FDMA启用状态: {args.use_fdma}")
     if args.use_fdma:
-        print(f"FDMA信道数量: {args.bandwidth}")
-    
-    # 创建评估结果保存文件夹
-    save_path = create_evaluation_folder(args)
+        print(f"无人机带宽: {args.bandwidth/1e6:.0f} MHz")
     
     # 创建配置
     config = Config()
@@ -682,10 +796,53 @@ def main():
     
     print(f"环境维度: state_dim={state_dim}, obs_dim={obs_dim}")
     
-    # 创建智能体并加载模型
-    agent = HMASDAgent(config, device=torch.device('cpu'))
-    agent.load_model(args.model_path)
-    print("模型加载成功")
+    # 智能体选择和创建
+    if use_random_agent:
+        # 使用随机策略
+        if args.use_random:
+            print("🎲 强制使用随机策略进行演示")
+        elif args.model_path is None:
+            print("🎲 未提供模型路径，使用随机策略进行演示")
+        else:
+            print(f"🎲 模型文件 {args.model_path} 不存在，使用随机策略进行演示")
+        
+        agent = RandomAgent(config, seed=args.seed)
+        
+        # 创建评估结果保存文件夹 (随机策略)
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        experiment_config = f"scen{args.scenario}_uav{args.n_uavs}_usr{args.n_users}_{args.user_distribution}"
+        folder_name = f"{timestamp}_{experiment_config}_random_agent"
+        evaluation_dir = "evaluation"
+        save_path = os.path.join(evaluation_dir, folder_name)
+        os.makedirs(save_path, exist_ok=True)
+        print(f"评估结果将保存到: {save_path}")
+        
+    else:
+        # 使用训练好的模型
+        print(f"🤖 加载训练好的模型: {args.model_path}")
+        
+        try:
+            agent = HMASDAgent(config, device=torch.device('cpu'))
+            agent.load_model(args.model_path)
+            print("✅ 模型加载成功")
+            
+            # 创建评估结果保存文件夹
+            save_path = create_evaluation_folder(args)
+            
+        except Exception as e:
+            print(f"❌ 模型加载失败: {e}")
+            print("🎲 回退到随机策略进行演示")
+            
+            agent = RandomAgent(config, seed=args.seed)
+            
+            # 创建评估结果保存文件夹 (回退到随机策略)
+            timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            experiment_config = f"scen{args.scenario}_uav{args.n_uavs}_usr{args.n_users}_{args.user_distribution}"
+            folder_name = f"{timestamp}_{experiment_config}_random_fallback"
+            evaluation_dir = "evaluation"
+            save_path = os.path.join(evaluation_dir, folder_name)
+            os.makedirs(save_path, exist_ok=True)
+            print(f"评估结果将保存到: {save_path}")
     
     # 创建可视化环境（带保存路径）
     env = create_env(args.scenario, args, save_path=save_path)

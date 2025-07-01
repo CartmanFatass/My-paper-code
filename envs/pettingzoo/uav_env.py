@@ -35,6 +35,7 @@ class MultiUAVEnv(ParallelEnv):
         paper_reward=False,  # 是否使用论文中的奖励函数
         use_fdma=False,  # 是否启用FDMA频分多址（无干扰模式）
         bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
+        ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
     ):
         """
         初始化多无人机基站环境
@@ -111,7 +112,7 @@ class MultiUAVEnv(ParallelEnv):
         if not hasattr(self, 'ground_bs_positions'):
             self.ground_bs_positions = np.array([[area_size/2, area_size/2, 30]])  # 中心位置
         
-        self.ground_bs_tx_power = 30  # 地面基站发射功率 (dBm)
+        self.ground_bs_tx_power = ground_bs_tx_power  # 地面基站发射功率 (dBm)
         
         # 状态和观测维度
         self.state_dim = 3 * n_uavs + 2 * n_users + 1  # UAV位置 + 用户位置 + 当前步数
@@ -930,13 +931,13 @@ class MultiUAVEnv(ParallelEnv):
         self.ax.set_xlabel('X (m)')
         self.ax.set_ylabel('Y (m)')
         self.ax.set_zlabel('Z (m)')
-        self.ax.set_title(f'多无人机基站环境 - 步数: {self.current_step}/{self.max_steps}')
+        self.ax.set_title(f'Multi-UAV Base Station Environment - Step: {self.current_step}/{self.max_steps}')
         
         # 绘制用户
         user_x = self.user_positions[:, 0]
         user_y = self.user_positions[:, 1]
         user_z = np.zeros(self.n_users)  # 用户在地面
-        self.ax.scatter(user_x, user_y, user_z, c='blue', marker='.', label='用户')
+        self.ax.scatter(user_x, user_y, user_z, c='blue', marker='.', label='Users')
         
         # 绘制无人机
         for i in range(self.n_uavs):
@@ -954,7 +955,7 @@ class MultiUAVEnv(ParallelEnv):
             bs_x = self.ground_bs_positions[:, 0]
             bs_y = self.ground_bs_positions[:, 1]
             bs_z = self.ground_bs_positions[:, 2]
-            self.ax.scatter(bs_x, bs_y, bs_z, c='black', marker='s', s=100, label='地面基站')
+            self.ax.scatter(bs_x, bs_y, bs_z, c='black', marker='s', s=100, label='Ground BS')
         
         # 添加图例
         handles, labels = self.ax.get_legend_handles_labels()
@@ -964,7 +965,7 @@ class MultiUAVEnv(ParallelEnv):
         # 添加统计信息
         connected_users = np.sum(self.connections)
         coverage_ratio = connected_users / self.n_users
-        self.ax.text2D(0.02, 0.95, f'已连接用户: {connected_users}/{self.n_users} ({coverage_ratio:.2%})', transform=self.ax.transAxes)
+        self.ax.text2D(0.02, 0.95, f'Connected Users: {connected_users}/{self.n_users} ({coverage_ratio:.2%})', transform=self.ax.transAxes)
         
         self.fig.canvas.draw()
         
