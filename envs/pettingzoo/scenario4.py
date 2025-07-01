@@ -116,6 +116,32 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         # 场景名称
         self.metadata["name"] = "uav_forced_relay_env_v0"
     
+    def _compute_path_loss(self, uav_pos, user_pos):
+        """
+        重写父类的路径损耗计算方法，使用精确的A2G模型
+        
+        参数:
+            uav_pos: 无人机位置 [3]
+            user_pos: 用户位置 [2] 或索引
+            
+        返回:
+            path_loss: 路径损耗 (dB)
+        """
+        # 检查 user_pos 是否为整数索引，如果是则获取对应的用户位置
+        if isinstance(user_pos, (int, np.integer)):
+            user_pos = self.user_positions[user_pos]
+            
+        # 确保 user_pos 是二维的 (x, y)，假设用户在地面
+        if len(user_pos) > 2:
+            user_pos_2d = user_pos[:2]
+            user_pos_3d = user_pos
+        else:
+            user_pos_2d = user_pos
+            user_pos_3d = np.append(user_pos, 0)  # 用户在地面，z=0
+        
+        # 使用scenario4中的精确A2G路径损耗模型
+        return self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+    
     def _init_ground_bs(self):
         """初始化地面基站位置 - 强制多跳的关键设计"""
         self.ground_bs_positions = np.zeros((self.n_ground_bs, 3))
@@ -536,13 +562,13 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
     
     def _get_link_capacity(self, node1_type, node1_idx, node2_type, node2_idx):
         """
-        计算两个节点之间的链路容量
+        计算两个节点之间的链路容量（修正版本，符合移动通信常识）
         
         参数:
-            node1_type: 节点1类型 ("uav" 或 "ground_bs")
-            node1_idx: 节点1索引
-            node2_type: 节点2类型 ("uav" 或 "ground_bs")
-            node2_idx: 节点2索引
+            node1_type: 发送节点类型 ("uav" 或 "ground_bs")
+            node1_idx: 发送节点索引
+            node2_type: 接收节点类型 ("uav" 或 "ground_bs") 
+            node2_idx: 接收节点索引
             
         返回:
             capacity: 链路容量 (bps)，如果无法建立连接则返回0
@@ -566,30 +592,27 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         distance = self._compute_distance(pos1, pos2)
         safe_distance = max(distance, 1e-6)
         
-        # 计算路径损耗
+        # 根据链路类型选择正确的路径损耗计算和发射功率
         if node1_type == "uav" and node2_type == "uav":
-            # UAV到UAV的路径损耗
-            path_loss = self._compute_uav_path_loss(pos1, pos2)
-            tx_power = self.tx_power
-        elif (node1_type == "uav" and node2_type == "ground_bs") or (node1_type == "ground_bs" and node2_type == "uav"):
-            # UAV到地面基站的路径损耗
-            if node1_type == "uav":
-                path_loss = self._compute_uav_path_loss(pos1, pos2)
-            else:
-                path_loss = self._compute_uav_path_loss(pos2, pos1)
-            tx_power = self.ground_bs_tx_power
+            # 空对空通信：UAV到UAV - 使用精确的A2A自由空间模型
+            path_loss = self._compute_air_to_air_path_loss(pos1, pos2)
+            tx_power = self.tx_power  # 使用UAV发射功率
+        elif node1_type == "uav" and node2_type == "ground_bs":
+            # 上行链路：UAV到地面基站 - 使用A2G模型
+            path_loss = self._compute_air_to_ground_path_loss(pos1, pos2)
+            tx_power = self.tx_power  # 使用UAV发射功率
+        elif node1_type == "ground_bs" and node2_type == "uav":
+            # 下行链路：地面基站到UAV - 使用G2A模型
+            path_loss = self._compute_ground_to_air_path_loss(pos1, pos2)
+            tx_power = self.ground_bs_tx_power  # 使用基站发射功率
         else:
             return 0  # 不支持的连接类型
         
         # 计算接收功率 (dBm)
         rx_power = tx_power - path_loss
         
-        # 计算SINR (dB) - 在FDMA模式下简化为SNR
-        if self.use_fdma:
-            sinr_db = rx_power - self.noise_power
-        else:
-            # 非FDMA模式需要考虑干扰，这里简化处理
-            sinr_db = rx_power - self.noise_power
+        # 计算SINR (dB) - 考虑实际干扰情况
+        sinr_db = self._compute_link_sinr(node1_type, node1_idx, node2_type, node2_idx, rx_power)
         
         # 检查SINR是否满足最小阈值
         if sinr_db < self.min_sinr:
@@ -600,6 +623,189 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         capacity = self.bandwidth * np.log2(1 + sinr_linear)
         
         return capacity
+    
+    def _compute_air_to_ground_path_loss(self, uav_pos, ground_pos):
+        """
+        计算空对地路径损耗（A2G）- 使用精确的概率性LoS/NLoS模型
+        
+        参数:
+            uav_pos: UAV位置 [3] (x, y, z)
+            ground_pos: 地面位置 [3] (x, y, z)
+            
+        返回:
+            path_loss: 路径损耗 (dB)
+        """
+        # 计算3D距离和水平距离
+        distance_3d = self._compute_distance(uav_pos, ground_pos)
+        distance_2d = np.sqrt((uav_pos[0] - ground_pos[0])**2 + (uav_pos[1] - ground_pos[1])**2)
+        height = abs(uav_pos[2] - ground_pos[2])
+        
+        # 确保距离不为零
+        safe_distance_3d = max(distance_3d, 1e-6)
+        safe_distance_2d = max(distance_2d, 1e-6)
+        
+        # 计算仰角 (度)
+        elevation_angle = np.degrees(np.arctan(height / safe_distance_2d))
+        
+        # 环境参数设置 (基于您提供的模型参数)
+        if hasattr(self, 'environment_type'):
+            env_type = self.environment_type
+        else:
+            env_type = "suburban"  # 默认郊区环境
+        
+        # LoS概率参数
+        if env_type == "suburban":
+            a, b, phi_0 = 0.77, 0.05, 15.0
+            eta_los, eta_nlos = 0.1, 21.0
+        elif env_type == "urban":
+            a, b, phi_0 = 0.63, 0.09, 15.0
+            eta_los, eta_nlos = 1.0, 20.0
+        elif env_type == "dense_urban":
+            a, b, phi_0 = 0.37, 0.21, 15.0
+            eta_los, eta_nlos = 1.6, 23.0
+        else:
+            # 默认郊区参数
+            a, b, phi_0 = 0.77, 0.05, 15.0
+            eta_los, eta_nlos = 0.1, 21.0
+        
+        # 计算LoS概率
+        if elevation_angle >= phi_0:
+            p_los = a * ((elevation_angle - phi_0) ** b)
+        else:
+            p_los = 0.1  # 低仰角时给一个最小LoS概率
+        
+        p_los = np.clip(p_los, 0.0, 1.0)
+        
+        # 基础自由空间路径损耗
+        wavelength = 3e8 / self.carrier_frequency
+        fspl = 20 * np.log10(safe_distance_3d) + 20 * np.log10(4 * np.pi / wavelength)
+        
+        # 计算LoS和NLoS路径损耗
+        pl_los = fspl + eta_los
+        pl_nlos = fspl + eta_nlos
+        
+        # 根据设置决定使用确定性还是随机性模型
+        if hasattr(self, 'use_deterministic_channel') and self.use_deterministic_channel:
+            # 确定性模型：使用平均路径损耗（在线性域加权，然后转回dB）
+            pl_los_linear = 10 ** (-pl_los / 10)
+            pl_nlos_linear = 10 ** (-pl_nlos / 10)
+            pl_avg_linear = p_los * pl_los_linear + (1 - p_los) * pl_nlos_linear
+            path_loss = -10 * np.log10(pl_avg_linear)
+        else:
+            # 随机性模型：根据概率随机选择LoS或NLoS
+            if hasattr(self, 'np_random'):
+                random_val = self.np_random.uniform(0, 1)
+            else:
+                random_val = np.random.uniform(0, 1)
+            
+            if random_val < p_los:
+                path_loss = pl_los
+            else:
+                path_loss = pl_nlos
+        
+        return path_loss
+    
+    def _compute_ground_to_air_path_loss(self, ground_pos, uav_pos):
+        """
+        计算地对空路径损耗（G2A）- 与A2G使用相同模型
+        
+        参数:
+            ground_pos: 地面位置 [3] (x, y, z)
+            uav_pos: UAV位置 [3] (x, y, z)
+            
+        返回:
+            path_loss: 路径损耗 (dB)
+        """
+        # G2A与A2G使用相同的物理传播模型
+        return self._compute_air_to_ground_path_loss(uav_pos, ground_pos)
+    
+    def _compute_air_to_air_path_loss(self, uav_pos1, uav_pos2):
+        """
+        计算空对空路径损耗（A2A）- 使用自由空间模型
+        
+        参数:
+            uav_pos1: UAV1位置 [3] (x, y, z)
+            uav_pos2: UAV2位置 [3] (x, y, z)
+            
+        返回:
+            path_loss: 路径损耗 (dB)
+        """
+        # 计算3D距离
+        distance_3d = self._compute_distance(uav_pos1, uav_pos2)
+        safe_distance = max(distance_3d, 1e-6)
+        
+        # A2A使用纯自由空间路径损耗模型
+        # 路径损耗指数 α = 2.0
+        wavelength = 3e8 / self.carrier_frequency
+        path_loss = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+        
+        return path_loss
+    
+    def _compute_link_sinr(self, tx_type, tx_idx, rx_type, rx_idx, rx_power):
+        """
+        计算链路SINR，考虑实际干扰情况
+        
+        参数:
+            tx_type: 发送节点类型
+            tx_idx: 发送节点索引
+            rx_type: 接收节点类型
+            rx_idx: 接收节点索引
+            rx_power: 接收功率 (dBm)
+            
+        返回:
+            sinr_db: SINR (dB)
+        """
+        if self.use_fdma:
+            # FDMA模式：考虑邻频干扰和其他实际干扰源
+            # 简化模型：假设邻频干扰为主要接收功率的10%
+            adjacent_interference_ratio = 0.1
+            interference_power_linear = (10 ** (rx_power / 10)) * adjacent_interference_ratio
+            interference_power_dbm = 10 * np.log10(interference_power_linear) if interference_power_linear > 0 else -float('inf')
+            
+            # 噪声加干扰功率
+            noise_power_linear = 10 ** (self.noise_power / 10)
+            total_interference_noise = noise_power_linear + interference_power_linear
+            total_interference_noise_dbm = 10 * np.log10(total_interference_noise)
+            
+            sinr_db = rx_power - total_interference_noise_dbm
+        else:
+            # 非FDMA模式：计算同频干扰
+            interference_powers = []
+            
+            if rx_type == "uav":
+                # 计算其他UAV对该接收UAV的干扰
+                for i in range(self.n_uavs):
+                    if i != tx_idx and i != rx_idx:  # 排除发送方和接收方
+                        interferer_pos = self.uav_positions[i]
+                        rx_pos = self.uav_positions[rx_idx]
+                        interferer_path_loss = self._compute_air_to_air_path_loss(interferer_pos, rx_pos)
+                        interferer_power = self.tx_power - interferer_path_loss
+                        interference_powers.append(10 ** (interferer_power / 10))
+            elif rx_type == "ground_bs":
+                # 计算其他UAV对该接收基站的干扰
+                for i in range(self.n_uavs):
+                    if i != tx_idx:  # 排除发送UAV
+                        interferer_pos = self.uav_positions[i]
+                        rx_pos = self.ground_bs_positions[rx_idx]
+                        interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, rx_pos)
+                        interferer_power = self.tx_power - interferer_path_loss
+                        interference_powers.append(10 ** (interferer_power / 10))
+            
+            # 总干扰功率
+            total_interference = np.sum(interference_powers) if interference_powers else 0
+            total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+            
+            # 噪声加干扰功率
+            noise_power_linear = 10 ** (self.noise_power / 10)
+            if total_interference_dbm != -float('inf'):
+                interference_plus_noise = noise_power_linear + total_interference
+                interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise)
+            else:
+                interference_plus_noise_dbm = self.noise_power
+            
+            sinr_db = rx_power - interference_plus_noise_dbm
+        
+        return sinr_db
     
     def _compute_routing_paths(self):
         """
@@ -684,22 +890,36 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
                 
                 neighbor_type, neighbor_idx = neighbor
                 
-                # 计算双向链路容量，取其最小值作为有效容量
-                forward_capacity = self._get_link_capacity(
-                    current_type, current_idx,
-                    neighbor_type, neighbor_idx
-                )
-                
-                reverse_capacity = self._get_link_capacity(
-                    neighbor_type, neighbor_idx,
-                    current_type, current_idx
-                )
-                
-                # 链路的有效容量是双向容量中的较小者
-                effective_link_capacity = min(forward_capacity, reverse_capacity)
+                # 修正：根据数据流方向计算链路容量
+                # 回程链路主要承载下行数据流（从基站到用户方向）
+                if current_type == "uav" and neighbor_type == "ground_bs":
+                    # UAV直连基站：考虑下行容量（基站到UAV）
+                    effective_link_capacity = self._get_link_capacity(
+                        neighbor_type, neighbor_idx,  # 基站作为发送方
+                        current_type, current_idx     # UAV作为接收方
+                    )
+                elif current_type == "uav" and neighbor_type == "uav":
+                    # UAV间中继：考虑中继转发能力
+                    # 取上行和下行容量的较小值作为中继瓶颈
+                    forward_capacity = self._get_link_capacity(
+                        current_type, current_idx,
+                        neighbor_type, neighbor_idx
+                    )
+                    reverse_capacity = self._get_link_capacity(
+                        neighbor_type, neighbor_idx,
+                        current_type, current_idx
+                    )
+                    # 对于中继节点，确实需要考虑双向转发能力
+                    effective_link_capacity = min(forward_capacity, reverse_capacity)
+                else:
+                    # 其他情况：使用前向链路容量
+                    effective_link_capacity = self._get_link_capacity(
+                        current_type, current_idx,
+                        neighbor_type, neighbor_idx
+                    )
                 
                 if effective_link_capacity <= 0:
-                    continue  # 无法建立有效的双向连接
+                    continue  # 无法建立有效连接
                 
                 # 计算通过当前路径到达邻居节点的瓶颈容量
                 path_bottleneck = min(max_bottleneck.get(current_node, 0), effective_link_capacity)
