@@ -1200,8 +1200,8 @@ class HMASDAgent:
         # 初始化GRU隐藏状态
         self.skill_discoverer.init_hidden(batch_size=self.config.batch_size)
         
-        # 获取当前状态价值
-        values = self.skill_discoverer.get_value(states, team_skills)
+        # 获取当前状态价值和cd_loss
+        values, cd_loss_discoverer = self.skill_discoverer.get_value(states, team_skills)
         
         # 构造下一状态的占位符
         next_values = torch.zeros_like(values)  # 实际应用中应该使用真实下一状态计算
@@ -1249,7 +1249,7 @@ class HMASDAgent:
         self.skill_discoverer.init_hidden(batch_size=self.config.batch_size)
         
         # 计算价值损失
-        current_values = self.skill_discoverer.get_value(states, team_skills) # Shape [128, 1]
+        current_values, _ = self.skill_discoverer.get_value(states, team_skills) # Shape [128, 1]
         # 确保维度匹配并转换为float32类型
         current_values = current_values.float()
         # returns 是 [128], 需要 unsqueeze 匹配 current_values
@@ -1284,7 +1284,11 @@ class HMASDAgent:
                          f"动作熵均值={action_dist.entropy().mean().item():.6f}")
         
         # 总损失
-        loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+        # 只有在使用OPT时才添加CD损失
+        if self.config.use_opt:
+            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + self.config.lambda_cd * cd_loss_discoverer
+        else:
+            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
         
         # 记录总损失和各组成部分的权重影响
         main_logger.debug(f"Discoverer 损失权重影响: "

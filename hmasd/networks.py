@@ -786,7 +786,7 @@ class SkillCoordinator(nn.Module):
         
         if self.use_opt:
             # 使用决策层OPT进行交互解耦
-            disentangled_features, cd_loss, cmi_loss, _ = self.decision_opt(entity_features)
+            disentangled_features, cd_loss, _, _ = self.decision_opt(entity_features)
             # 投影到解码器维度
             processed_features = self.opt_to_decoder_projection(disentangled_features)
         else:
@@ -1101,7 +1101,7 @@ class SkillDiscoverer(nn.Module):
             embedded_state = self.state_embedding(state).unsqueeze(1)  # [batch_size, 1, embedding_dim]
             
             # 通过OPT解耦全局状态中的交互模式
-            disentangled_state, _, _, _ = self.critic_opt(embedded_state)
+            disentangled_state, cd_loss, _, _ = self.critic_opt(embedded_state)
             
             # 投影回价值计算维度并去除序列维度
             processed_state = self.opt_to_value_projection(disentangled_state).squeeze(1)  # [batch_size, embedding_dim]
@@ -1111,6 +1111,7 @@ class SkillDiscoverer(nn.Module):
         else:
             # 标准方式：直接拼接全局状态和团队技能
             critic_input = torch.cat([state, team_skill_onehot], dim=-1)
+            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
         
         # 前向传播
         critic_features = self.critic_mlp(critic_input)
@@ -1130,8 +1131,8 @@ class SkillDiscoverer(nn.Module):
             
         value = self.value_head(critic_output)
         
-        # 确保返回的值是float32类型
-        return value.float()
+        # 确保返回的值是float32类型，同时返回cd_loss
+        return value.float(), cd_loss
     
     def forward(self, observation, agent_skill, deterministic=False):
         """

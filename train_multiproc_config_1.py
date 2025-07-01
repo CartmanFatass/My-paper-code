@@ -1165,6 +1165,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                       f"CD损失 {update_info.get('cd_loss', 0):.4f}, "
                       f"已用时间 {elapsed:.2f}s")
                 
+                # 记录CD损失到TensorBoard
+                if config.use_opt and 'cd_loss' in update_info:
+                    agent.writer.add_scalar('Losses/CD_Loss', update_info['cd_loss'], total_steps)
+                
                 # 详细记录低层损失的组成部分
                 main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
                       f"策略损失: {update_info['discoverer_policy_loss']:.4f}, "
