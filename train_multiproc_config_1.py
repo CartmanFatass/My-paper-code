@@ -793,23 +793,39 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
             )
         elif scenario == 4:
             # 场景4：强制多跳中继环境
-            # 使用优化的默认参数
-            scenario4_kwargs = {
-                'user_distribution': 'forced_relay_cluster',
-                'max_hops': max_hops or 4,
-                'area_size': area_size or 2500,
-                'n_clusters': n_clusters or 4,
-                'cluster_std': cluster_std or 80,
-                'central_area_ratio': central_area_ratio or 0.6,
-                'min_sinr': 3,  # 降低SINR门槛
-                'max_connections': 25,  # 增加连接数上限
+            # 修正参数覆盖问题：首先定义默认值，然后用传入参数更新
+            scenario4_defaults = {
+                'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
+                'max_hops': 4,
+                'area_size': 2500,
+                'n_clusters': 4,
+                'cluster_std': 80,
+                'central_area_ratio': 0.6,
+                'min_sinr': 3,
+                'max_connections': 25,
                 'coverage_weight': 0.8,
                 'connectivity_weight': 0.15,
                 'efficiency_weight': 0.05,
             }
             
-            # 更新环境参数
-            env_kwargs.update(scenario4_kwargs)
+            # 将所有可能的场景4特定参数打包，但排除user_distribution
+            # 因为场景4只支持'forced_relay_cluster'类型
+            provided_scenario4_args = {
+                'max_hops': max_hops,
+                'area_size': area_size,
+                'n_clusters': n_clusters,
+                'cluster_std': cluster_std,
+                'central_area_ratio': central_area_ratio,
+            }
+            
+            # 过滤掉未提供的参数 (值为None)
+            provided_scenario4_args = {k: v for k, v in provided_scenario4_args.items() if v is not None}
+            
+            # 用提供的参数更新默认值（但保持user_distribution为固定值）
+            scenario4_defaults.update(provided_scenario4_args)
+            
+            # 将最终的场景参数合并到通用参数中
+            env_kwargs.update(scenario4_defaults)
             
             raw_env = UAVForcedRelayEnv(**env_kwargs)
         else:

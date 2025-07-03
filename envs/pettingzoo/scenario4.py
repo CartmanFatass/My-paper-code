@@ -115,6 +115,28 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         
         # 场景名称
         self.metadata["name"] = "uav_forced_relay_env_v0"
+        
+        # 重新计算并设置场景4的状态维度
+        # 1. 无人机位置: n_uavs * 3
+        uav_pos_dim = self.n_uavs * 3
+        
+        # 2. 用户位置: n_users * 2
+        user_pos_dim = self.n_users * 2
+        
+        # 3. 地面基站位置: n_ground_bs * 3
+        bs_pos_dim = self.n_ground_bs * 3
+        
+        # 4. 用户覆盖状态: n_users
+        user_covered_dim = self.n_users
+        
+        # 5. 无人机连接状态: n_uavs
+        uav_connected_dim = self.n_uavs
+        
+        # 6. 当前步数: 1
+        step_dim = 1
+        
+        # 重新设置state_dim
+        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + step_dim
     
     def _compute_path_loss(self, uav_pos, user_pos):
         """
@@ -527,7 +549,7 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         
         # 关键：用当前类的方法重新计算 state，并更新 infos 字典
         # 父类的 reset 可能没有设置 state，我们在这里设置正确的 state
-        current_state = self.get_global_state()
+        current_state = self._get_state()
         self.state = current_state  # 更新内部状态
         
         # 为每个智能体的 info 添加正确的 state
@@ -554,7 +576,7 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         observations, rewards, terminations, truncations, infos = super().step(actions)
         
         # 关键：用当前类的方法重新计算 next_state，并更新 info 字典
-        next_state = self.get_global_state()
+        next_state = self._get_state()
         self.state = next_state  # 更新内部状态以备下一步使用
         
         # 为每个智能体的 info 添加正确的 next_state
@@ -873,7 +895,7 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
             if best_path and len(best_path) <= self.max_hops + 1:  # +1因为路径包含起始节点
                 self.routing_paths[start_uav] = best_path
     
-    def get_global_state(self):
+    def _get_state(self):
         """
         获取针对强制中继场景优化的全局状态
         
