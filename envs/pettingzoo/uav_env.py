@@ -289,6 +289,13 @@ class MultiUAVEnv(ParallelEnv):
         
         for agent in self.agents:
             infos[agent].update({"global": global_info})
+            # 添加实体位置信息，供GNN Agent使用
+            entity_positions = {
+                'uav_positions': self.uav_positions,
+                'user_positions': self.user_positions,
+                'ground_bs_positions': self.ground_bs_positions
+            }
+            infos[agent].update({'entity_positions': entity_positions})
         
         # 如果在渲染模式下，更新渲染
         if self.render_mode == "human":

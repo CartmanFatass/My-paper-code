@@ -25,23 +25,23 @@ class Config:
     n_decoder_layers = 3     # 解码器层数
     n_heads = 8              # 多头注意力头数
     gru_hidden_size = 64     # GRU隐藏层大小 (与hidden_size保持一致)
-    lr_coordinator = 1e-4    # 技能协调器学习率 (论文Table 2中SMAC为1e-4)
-    lr_discoverer = 1e-4     # 技能发现器学习率 (论文Table 2中SMAC为1e-4)
-    lr_discriminator = 1e-4  # 技能判别器学习率 (论文Table 2中SMAC为1e-4)
+    lr_coordinator = 1e-4    # 技能协调器学习率 (适当降低以稳定高层策略学习)
+    lr_discoverer = 1e-4     # 技能发现器学习率 (降低以稳定低层策略学习)
+    lr_discriminator = 1e-4  # 技能判别器学习率 (适当降低，防止其过强)
 
     # PPO参数 - 基于论文Table 1
     gamma = 0.99             # 折扣因子
     gae_lambda = 0.95        # GAE参数
-    clip_epsilon = 0.2       # PPO裁剪参数
-    ppo_epochs = 15          # PPO迭代次数
+    clip_epsilon = 0.2       # PPO裁剪参数 (更保守以稳定学习)
+    ppo_epochs = 15          # PPO迭代次数 (减少以稳定学习)
     value_loss_coef = 1.0    # 价值损失系数 (论文中为1.0)
-    max_grad_norm = 0.5      # 最大梯度范数
+    max_grad_norm = 0.5      # 最大梯度范数 (更严格的梯度裁剪)
 
     # HMASD损失权重 - 基于论文Table 3中的3m场景
     # 注意：lambda_e参数已调整为0.1，以稳定训练
-    lambda_e = 100      # 外部奖励权重 (调整为0.1以稳定训练)
-    lambda_D = 0.1           # 团队技能判别器奖励权重 (论文中3m场景为0.1)
-    lambda_d = 0.5           # 个体技能判别器奖励权重 (论文中3m场景为0.5)
+    lambda_e = 20.0          # 外部奖励权重 (从100降低，但保持足够强度)
+    lambda_D = 0.05          # 团队技能判别器奖励权重 (适度降低团队判别器权重)
+    lambda_d = 0.2           # 个体技能判别器奖励权重 (适度降低个体判别器权重)
     lambda_h = 0.001         # 高层策略熵权重 (论文中3m场景为0.001)
     lambda_l = 0.01          # 低层策略熵权重 (论文中3m场景为0.01)
     lambda_cd = 0.5          # 对比散度损失权重 (新增)
@@ -53,7 +53,7 @@ class Config:
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
     rollout_length = 150     # 每次rollout收集的步数 (严格on-policy)
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
-    episode_length = 5120    # 每个episode的最大长度 (基于观察到的实际行为)
+    episode_length = 1500    # 每个episode的最大长度 (基于观察到的实际行为)
     eval_interval = episode_length*num_envs   # 评估间隔 (32并行环境 * 每环境5120步)
     eval_episodes = 4      # 评估时的episode数量 (论文中SMAC为100)
     eval_rollout_threads = 4 # 评估时的并行线程数 (论文中SMAC为4)
@@ -63,7 +63,7 @@ class Config:
     use_orthogonal = True    # 使用正交初始化
     gain = 0.01              # 增益
     optimizer_epsilon = 1e-5 # 优化器epsilon
-    weight_decay = 0         # 权重衰减
+    weight_decay = 1e-4      # 权重衰减
     num_mini_batch = 1       # mini batch数量
     use_huber_loss = True    # 使用Huber损失
     huber_delta = 10         # Huber delta
@@ -83,6 +83,24 @@ class Config:
     load_balance_weight = 0.15          # 负载均衡权重（适度降低）
     proximity_penalty_weight = 0.05   # 邻近惩罚权重（降低，减少对探索的限制）
     coverage_curve_steepness = 2.0     # 覆盖率奖励曲线陡峭度（新增，增强高覆盖率区域奖励）
+
+    # 权重退火参数 - 用于解决奖励空窗期问题
+    use_reward_annealing = True         # 是否启用奖励权重退火机制
+    w_intrinsic_initial = 5.0          # 内在奖励初始权重倍数（早期强调探索）
+    w_intrinsic_final = 1.0            # 内在奖励最终权重倍数（后期回到正常水平）
+    w_extrinsic_initial = 0.5          # 外部奖励初始权重倍数（早期弱化利用）
+    w_extrinsic_final = 2.0            # 外部奖励最终权重倍数（后期强化利用）
+    anneal_steps = 1000000             # 权重退火总步数（约25%的训练时间）
+    anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
+
+    # --- GNN-HMASD 参数 ---
+    use_gnn_hmasd = False        # 是否启用GNN方案
+    num_roles = 2                # 角色数量 (e.g., 2 for 'SERVER', 'RELAY')
+    role_embedding_dim = 16      # 角色嵌入维度
+    gnn_hidden_dim = 64          # GNN隐藏层维度
+    node_feature_dim = 8         # 图节点特征维度 (3 pos + 1 type_specific + 4 type_onehot)
+    num_user_clusters = 10       # 用户聚类数量
+    graph_build_d_max = 1500     # 建图的最大通信距离 (m)
 
     def update_env_dims(self, state_dim, obs_dim):
         """更新环境维度"""

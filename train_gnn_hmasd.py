@@ -24,6 +24,15 @@ from stable_baselines3.common.env_util import make_vec_env # Can also use this h
 # 导入论文中的配置
 from config_1 import Config
 from hmasd.agent import HMASDAgent
+
+# 尝试导入GNN-HMASD实现
+try:
+    from gnn_hmasd.agent import GNNHMASDAgent
+    GNN_AVAILABLE = True
+except ImportError as e:
+    GNN_AVAILABLE = False
+    print(f"警告: GNN-HMASD不可用: {e}")
+
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
@@ -878,21 +887,9 @@ def parse_args():
     parser.add_argument('--use_opt', action=argparse.BooleanOptionalAction, default=True,
                         help='是否使用OPT (Interaction Pattern Disentangling) 模块 (使用--use_opt启用，--no-use_opt禁用)')
     
-    # 权重退火参数
-    parser.add_argument('--use_reward_annealing', action=argparse.BooleanOptionalAction, default=True,
-                        help='是否启用奖励权重退火机制 (使用--use_reward_annealing启用，--no-use_reward_annealing禁用)')
-    parser.add_argument('--w_intrinsic_initial', type=float, default=5.0,
-                        help='内在奖励初始权重倍数（早期强调探索）')
-    parser.add_argument('--w_intrinsic_final', type=float, default=1.0,
-                        help='内在奖励最终权重倍数（后期回到正常水平）')
-    parser.add_argument('--w_extrinsic_initial', type=float, default=0.5,
-                        help='外部奖励初始权重倍数（早期弱化利用）')
-    parser.add_argument('--w_extrinsic_final', type=float, default=2.0,
-                        help='外部奖励最终权重倍数（后期强化利用）')
-    parser.add_argument('--anneal_steps', type=int, default=1000000,
-                        help='权重退火总步数（约25%的训练时间）')
-    parser.add_argument('--anneal_schedule', type=str, default='linear',
-                        choices=['linear', 'cosine'], help='退火计划（linear 或 cosine）')
+    # GNN-HMASD参数
+    parser.add_argument('--use_gnn_hmasd', action=argparse.BooleanOptionalAction, default=False,
+                        help='是否使用GNN-HMASD方案 (使用--use_gnn_hmasd启用，--no-use_gnn_hmasd禁用)')
     
     return parser.parse_args()
 
@@ -918,8 +915,14 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     model_dir = os.path.dirname(args.model_path)
     os.makedirs(model_dir, exist_ok=True)
     
-    # 创建HMASD代理
-    agent = HMASDAgent(config, log_dir=log_dir, device=device)
+    # 创建代理（根据配置选择HMASD或GNN-HMASD）
+    if config.use_gnn_hmasd:
+        main_logger.info("创建GNN-HMASD代理...")
+        agent = GNNHMASDAgent(config, log_dir=log_dir, device=device)
+        log_dir = os.path.join(args.log_dir, f"gnn_hmasd_multiproc_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
+    else:
+        main_logger.info("创建传统HMASD代理...")
+        agent = HMASDAgent(config, log_dir=log_dir, device=device)
     
     # 如果指定了预训练模型路径，加载模型继续训练
     if args.resume_from and os.path.exists(args.resume_from):
@@ -973,16 +976,6 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     # 记录OPT相关参数
     if config.use_opt:
         agent.writer.add_text('Parameters/lambda_cd', str(config.lambda_cd), 0)
-    
-    # 记录权重退火相关参数
-    agent.writer.add_text('Parameters/use_reward_annealing', str(config.use_reward_annealing), 0)
-    if config.use_reward_annealing:
-        agent.writer.add_text('Parameters/w_intrinsic_initial', str(config.w_intrinsic_initial), 0)
-        agent.writer.add_text('Parameters/w_intrinsic_final', str(config.w_intrinsic_final), 0)
-        agent.writer.add_text('Parameters/w_extrinsic_initial', str(config.w_extrinsic_initial), 0)
-        agent.writer.add_text('Parameters/w_extrinsic_final', str(config.w_extrinsic_final), 0)
-        agent.writer.add_text('Parameters/anneal_steps', str(config.anneal_steps), 0)
-        agent.writer.add_text('Parameters/anneal_schedule', str(config.anneal_schedule), 0)
     
     # 记录环境奖励权重配置（场景3的新权重）
     agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
@@ -1675,21 +1668,15 @@ def main():
     config.use_opt = args.use_opt
     main_logger.info(f"OPT模块使用状态: use_opt = {config.use_opt}")
     
-    # 根据命令行参数设置权重退火机制
-    config.use_reward_annealing = args.use_reward_annealing
-    if config.use_reward_annealing:
-        config.w_intrinsic_initial = args.w_intrinsic_initial
-        config.w_intrinsic_final = args.w_intrinsic_final
-        config.w_extrinsic_initial = args.w_extrinsic_initial
-        config.w_extrinsic_final = args.w_extrinsic_final
-        config.anneal_steps = args.anneal_steps
-        config.anneal_schedule = args.anneal_schedule
-        main_logger.info(f"权重退火机制已启用: "
-                       f"内在权重 {config.w_intrinsic_initial}→{config.w_intrinsic_final}, "
-                       f"外部权重 {config.w_extrinsic_initial}→{config.w_extrinsic_final}, "
-                       f"退火步数: {config.anneal_steps}, 退火计划: {config.anneal_schedule}")
-    else:
-        main_logger.info("权重退火机制已禁用")
+    # 根据命令行参数设置GNN-HMASD使用状态
+    config.use_gnn_hmasd = args.use_gnn_hmasd
+    main_logger.info(f"GNN-HMASD使用状态: use_gnn_hmasd = {config.use_gnn_hmasd}")
+    
+    # 检查GNN-HMASD依赖
+    if config.use_gnn_hmasd and not GNN_AVAILABLE:
+        main_logger.error("GNN-HMASD被启用但依赖库不可用。请安装以下库：")
+        main_logger.error("pip install torch_geometric scikit-learn scipy")
+        return
     
     # 获取计算设备
     device = get_device(args.device)

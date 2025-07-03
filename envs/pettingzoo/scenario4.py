@@ -22,7 +22,7 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         height_range=(50, 200),
         max_speed=30,
         time_step=1.0,
-        max_steps=5000,
+        max_steps=1500,
         user_distribution="forced_relay_cluster",
         channel_model="probabilistic",
         render_mode=None,
@@ -514,6 +514,55 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         
         return cluster_centers
     
+    def reset(self, seed=None, options=None):
+        """
+        重置环境 - 确保使用场景4特定的全局状态
+        
+        返回:
+            observations: 所有智能体的观测字典
+            infos: 所有智能体的信息字典
+        """
+        # 调用父类的 reset 来完成大部分初始化工作
+        observations, infos = super().reset(seed=seed, options=options)
+        
+        # 关键：用当前类的方法重新计算 state，并更新 infos 字典
+        # 父类的 reset 可能没有设置 state，我们在这里设置正确的 state
+        current_state = self.get_global_state()
+        self.state = current_state  # 更新内部状态
+        
+        # 为每个智能体的 info 添加正确的 state
+        for agent in self.agents:
+            infos[agent]['state'] = current_state.copy()
+        
+        return observations, infos
+    
+    def step(self, actions):
+        """
+        执行环境步骤 - 确保使用场景4特定的全局状态
+        
+        参数:
+            actions: 所有智能体的动作字典 {agent_id: action}
+            
+        返回:
+            observations: 所有智能体的下一个观测字典
+            rewards: 所有智能体的奖励字典
+            terminations: 所有智能体的终止状态字典
+            truncations: 所有智能体的截断状态字典
+            infos: 所有智能体的信息字典
+        """
+        # 调用父类的 step 来执行动作并获取基本返回
+        observations, rewards, terminations, truncations, infos = super().step(actions)
+        
+        # 关键：用当前类的方法重新计算 next_state，并更新 info 字典
+        next_state = self.get_global_state()
+        self.state = next_state  # 更新内部状态以备下一步使用
+        
+        # 为每个智能体的 info 添加正确的 next_state
+        for agent in self.agents:
+            infos[agent]['next_state'] = next_state.copy()
+        
+        return observations, rewards, terminations, truncations, infos
+
     def get_scenario_info(self):
         """
         获取场景特定信息
@@ -823,6 +872,63 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
             best_path = self._find_widest_path_to_ground_bs(start_uav)
             if best_path and len(best_path) <= self.max_hops + 1:  # +1因为路径包含起始节点
                 self.routing_paths[start_uav] = best_path
+    
+    def get_global_state(self):
+        """
+        获取针对强制中继场景优化的全局状态
+        
+        包含以下信息：
+        1. 无人机位置 (n_uavs * 3)
+        2. 用户位置 (n_users * 2) 
+        3. 地面基站位置 (n_ground_bs * 3) - 关键信息
+        4. 用户覆盖状态 (n_users) - 每个用户是否被覆盖
+        5. 无人机连接状态 (n_uavs) - 每个无人机是否有到基站的路径
+        6. 当前步数 (1)
+        
+        返回:
+            state: 完整的全局状态向量
+        """
+        state_components = []
+        
+        # 1. 无人机位置 (归一化到[0,1])
+        normalized_uav_positions = self.uav_positions.copy()
+        normalized_uav_positions[:, :2] /= self.area_size  # x, y 归一化
+        normalized_uav_positions[:, 2] = (normalized_uav_positions[:, 2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])  # z 归一化
+        state_components.append(normalized_uav_positions.flatten())
+        
+        # 2. 用户位置 (归一化到[0,1])
+        normalized_user_positions = self.user_positions / self.area_size
+        state_components.append(normalized_user_positions.flatten())
+        
+        # 3. 地面基站位置 (归一化到[0,1]) - 强制中继场景的关键信息
+        normalized_bs_positions = self.ground_bs_positions.copy()
+        normalized_bs_positions[:, :2] /= self.area_size  # x, y 归一化
+        normalized_bs_positions[:, 2] /= 200  # z 归一化 (假设最大高度200m)
+        state_components.append(normalized_bs_positions.flatten())
+        
+        # 4. 用户覆盖状态 (0或1)
+        user_covered = np.zeros(self.n_users)
+        for j in range(self.n_users):
+            if np.any(self.connections[:, j]):  # 如果有任何无人机连接了该用户
+                user_covered[j] = 1.0
+        state_components.append(user_covered)
+        
+        # 5. 无人机连接状态 (0或1) - 每个无人机是否有到基站的回程路径
+        uav_connected = np.zeros(self.n_uavs)
+        if hasattr(self, 'routing_paths'):
+            for i in range(self.n_uavs):
+                if i in self.routing_paths and self.routing_paths[i]:
+                    uav_connected[i] = 1.0
+        state_components.append(uav_connected)
+        
+        # 6. 当前步数 (归一化到[0,1])
+        step_normalized = np.array([self.current_step / self.max_steps])
+        state_components.append(step_normalized)
+        
+        # 组合所有状态组件
+        state = np.concatenate(state_components)
+        
+        return state
     
     def _find_widest_path_to_ground_bs(self, start_uav):
         """

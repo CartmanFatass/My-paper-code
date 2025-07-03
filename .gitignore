@@ -64,3 +64,5 @@ evaluation/
 test*.py
 *.doc
 *.docx
+debug/
+test/

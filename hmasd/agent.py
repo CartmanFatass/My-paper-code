@@ -108,16 +108,19 @@ class HMASDAgent:
         # 创建优化器
         self.coordinator_optimizer = Adam(
             self.skill_coordinator.parameters(),
-            lr=config.lr_coordinator
+            lr=config.lr_coordinator,
+            weight_decay=config.weight_decay
         )
         self.discoverer_optimizer = Adam(
             self.skill_discoverer.parameters(),
-            lr=config.lr_discoverer
+            lr=config.lr_discoverer,
+            weight_decay=config.weight_decay
         )
         self.discriminator_optimizer = Adam(
             list(self.team_discriminator.parameters()) + 
             list(self.individual_discriminator.parameters()),
-            lr=config.lr_discriminator
+            lr=config.lr_discriminator,
+            weight_decay=config.weight_decay
         )
         
         # 创建经验回放缓冲区
@@ -188,6 +191,22 @@ class HMASDAgent:
         self.cumulative_team_disc_reward = 0.0
         self.cumulative_ind_disc_reward = 0.0
         self.reward_component_counts = 0
+        
+        # 权重退火相关初始化
+        self.use_reward_annealing = getattr(config, 'use_reward_annealing', False)
+        if self.use_reward_annealing:
+            self.w_intrinsic_initial = getattr(config, 'w_intrinsic_initial', 3.0)
+            self.w_intrinsic_final = getattr(config, 'w_intrinsic_final', 1.0)
+            self.w_extrinsic_initial = getattr(config, 'w_extrinsic_initial', 0.5)
+            self.w_extrinsic_final = getattr(config, 'w_extrinsic_final', 1.5)
+            self.anneal_steps = getattr(config, 'anneal_steps', 1000000)
+            self.anneal_schedule = getattr(config, 'anneal_schedule', 'linear')
+            main_logger.info(f"已启用权重退火机制: "
+                           f"内在奖励权重 {self.w_intrinsic_initial}→{self.w_intrinsic_final}, "
+                           f"外部奖励权重 {self.w_extrinsic_initial}→{self.w_extrinsic_final}, "
+                           f"退火步数: {self.anneal_steps}, 退火计划: {self.anneal_schedule}")
+        else:
+            main_logger.info("未启用权重退火机制")
         
         # 初始化Value Normalization
         if config.use_valuenorm:
@@ -485,10 +504,40 @@ class HMASDAgent:
                 agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
                 agent_skill_log_prob = agent_disc_log_probs[0, agent_skills[i]]
                 
-            # 计算低层奖励（Eq. 4）及其组成部分
-            env_reward_component = self.config.lambda_e * current_reward # 使用 current_reward
-            team_disc_component = self.config.lambda_D * team_skill_log_prob.item()
-            ind_disc_component = self.config.lambda_d * agent_skill_log_prob.item()
+            # 计算动态权重（权重退火机制）
+            if self.use_reward_annealing:
+                # 计算退火进度 (0.0 到 1.0)
+                progress = min(self.global_step / self.anneal_steps, 1.0)
+                
+                # 根据退火计划计算当前权重
+                if self.anneal_schedule == 'cosine':
+                    # 余弦退火：前期变化慢，后期变化快
+                    progress_adjusted = 0.5 * (1 - np.cos(np.pi * progress))
+                else:
+                    # 线性退火
+                    progress_adjusted = progress
+                
+                # 线性插值计算当前权重倍数
+                w_intrinsic_current = self.w_intrinsic_initial + (self.w_intrinsic_final - self.w_intrinsic_initial) * progress_adjusted
+                w_extrinsic_current = self.w_extrinsic_initial + (self.w_extrinsic_final - self.w_extrinsic_initial) * progress_adjusted
+                
+                # 应用动态权重到各个奖励组件
+                env_reward_component = self.config.lambda_e * w_extrinsic_current * current_reward
+                team_disc_component = self.config.lambda_D * w_intrinsic_current * team_skill_log_prob.item()
+                ind_disc_component = self.config.lambda_d * w_intrinsic_current * agent_skill_log_prob.item()
+                
+                # 记录当前权重到日志（每1000步记录一次以避免日志过多）
+                if self.global_step % 1000 == 0:
+                    main_logger.info(f"权重退火进度: {progress:.3f} ({self.global_step}/{self.anneal_steps}), "
+                                   f"内在权重倍数: {w_intrinsic_current:.3f}, "
+                                   f"外部权重倍数: {w_extrinsic_current:.3f}")
+            else:
+                # 使用固定权重（原始方式）
+                env_reward_component = self.config.lambda_e * current_reward
+                team_disc_component = self.config.lambda_D * team_skill_log_prob.item()
+                ind_disc_component = self.config.lambda_d * agent_skill_log_prob.item()
+                w_intrinsic_current = 1.0
+                w_extrinsic_current = 1.0
             
             intrinsic_reward = env_reward_component + team_disc_component + ind_disc_component
             
@@ -1428,6 +1477,29 @@ class HMASDAgent:
         self.training_info['coordinator_state_value_mean'].append(mean_coord_state_val)
         self.training_info['coordinator_agent_value_mean'].append(mean_coord_agent_val)
         self.training_info['discoverer_value_mean'].append(avg_discoverer_val)
+
+        # 记录权重退火信息到TensorBoard
+        if self.use_reward_annealing:
+            # 计算当前权重
+            progress = min(self.global_step / self.anneal_steps, 1.0)
+            if self.anneal_schedule == 'cosine':
+                progress_adjusted = 0.5 * (1 - np.cos(np.pi * progress))
+            else:
+                progress_adjusted = progress
+            
+            w_intrinsic_current = self.w_intrinsic_initial + (self.w_intrinsic_final - self.w_intrinsic_initial) * progress_adjusted
+            w_extrinsic_current = self.w_extrinsic_initial + (self.w_extrinsic_final - self.w_extrinsic_initial) * progress_adjusted
+            
+            # 记录权重退火相关指标
+            self.writer.add_scalar('RewardAnnealing/Progress', progress, self.global_step)
+            self.writer.add_scalar('RewardAnnealing/Progress_Adjusted', progress_adjusted, self.global_step)
+            self.writer.add_scalar('RewardAnnealing/Intrinsic_Weight_Multiplier', w_intrinsic_current, self.global_step)
+            self.writer.add_scalar('RewardAnnealing/Extrinsic_Weight_Multiplier', w_extrinsic_current, self.global_step)
+            
+            # 记录实际生效的权重
+            self.writer.add_scalar('RewardAnnealing/Effective_Lambda_D', self.config.lambda_D * w_intrinsic_current, self.global_step)
+            self.writer.add_scalar('RewardAnnealing/Effective_Lambda_d', self.config.lambda_d * w_intrinsic_current, self.global_step)
+            self.writer.add_scalar('RewardAnnealing/Effective_Lambda_e', self.config.lambda_e * w_extrinsic_current, self.global_step)
 
         # 记录到TensorBoard
         # 损失函数记录
