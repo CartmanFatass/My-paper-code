@@ -145,9 +145,13 @@ class HeuristicController:
 class StateCollector:
     """
     状态收集器：运行环境并收集高奖励状态
-    支持混合策略：预训练模型 + 启发式控制器 + 随机探索
+    支持三种收集模式：
+    1. 单一策略模式：每个episode使用固定策略
+    2. 分离收集模式：不同策略分别收集数据
+    3. 混合策略模式：在episode内随机切换（保留原有功能）
     """
-    def __init__(self, env, controller, reward_threshold=0.8, model=None, exploration_ratio=0.3, model_ratio=0.4):
+    def __init__(self, env, controller, reward_threshold=0.8, model=None, 
+                 exploration_ratio=0.3, model_ratio=0.4, collection_mode='separated'):
         self.env = env
         self.controller = controller
         self.reward_threshold = reward_threshold
@@ -155,6 +159,7 @@ class StateCollector:
         self.exploration_ratio = exploration_ratio  # 随机探索比例
         self.model_ratio = model_ratio  # 模型策略比例
         self.heuristic_ratio = 1.0 - exploration_ratio - model_ratio  # 启发式策略比例
+        self.collection_mode = collection_mode  # 'separated', 'single_episode', 'mixed'
         
         # 确保比例合理
         if self.heuristic_ratio < 0:
@@ -165,10 +170,22 @@ class StateCollector:
             self.exploration_ratio /= total
             self.heuristic_ratio /= total
         
-        # 收集的数据
-        self.good_states = []
-        self.rewards = []
-        self.episode_rewards = []
+        # 收集的数据 - 按策略分类存储
+        self.good_states = {
+            'model': [],
+            'heuristic': [],
+            'random': []
+        }
+        self.rewards = {
+            'model': [],
+            'heuristic': [],
+            'random': []
+        }
+        self.episode_rewards = {
+            'model': [],
+            'heuristic': [],
+            'random': []
+        }
         
         # 统计使用的策略类型
         self.strategy_stats = {
@@ -177,13 +194,32 @@ class StateCollector:
             'random': 0
         }
         
-        main_logger.info(f"StateCollector初始化 - 策略比例: 模型={self.model_ratio:.2f}, 启发式={self.heuristic_ratio:.2f}, 随机={self.exploration_ratio:.2f}")
+        # 计算每种策略应该运行的episode数量
+        if collection_mode == 'separated':
+            self.episodes_per_strategy = {
+                'model': int(model_ratio * 100) if model is not None else 0,
+                'heuristic': int(self.heuristic_ratio * 100),
+                'random': int(exploration_ratio * 100)
+            }
+            # 确保总数为100%
+            total_episodes = sum(self.episodes_per_strategy.values())
+            if total_episodes < 100:
+                self.episodes_per_strategy['heuristic'] += (100 - total_episodes)
+        else:
+            self.episodes_per_strategy = None
+        
+        main_logger.info(f"StateCollector初始化 - 收集模式: {collection_mode}")
+        main_logger.info(f"策略比例: 模型={self.model_ratio:.2f}, 启发式={self.heuristic_ratio:.2f}, 随机={self.exploration_ratio:.2f}")
+        
+        if collection_mode == 'separated' and self.episodes_per_strategy:
+            main_logger.info(f"分离收集模式 - 每种策略的episode数: {self.episodes_per_strategy}")
+        
         if model is not None:
             main_logger.info("已加载预训练模型用于数据收集")
         else:
             main_logger.info("未加载预训练模型，将使用启发式+随机策略")
         
-    def _get_mixed_actions(self, observations, current_positions, episode_step=0):
+    def _get_mixed_actions(self, observations, current_positions, episode_step=0, episode_idx=0):
         """
         使用混合策略生成动作
         
@@ -191,6 +227,7 @@ class StateCollector:
             observations: 环境观测
             current_positions: 当前无人机位置
             episode_step: 当前episode中的步数
+            episode_idx: episode索引
             
         返回:
             actions: 动作数组
@@ -230,10 +267,17 @@ class StateCollector:
                 )
                 
                 self.strategy_stats['model'] += 1
+                
+                # 每100步输出一次模型策略使用信息
+                if episode_step % 100 == 0:
+                    main_logger.info(f"Episode {episode_idx + 1}, Step {episode_step + 1}: "
+                                   f"使用模型策略 (概率={rand:.3f} < {self.model_ratio:.3f})")
+                
                 return actions, 'model'
                 
             except Exception as e:
-                main_logger.warning(f"模型预测失败: {e}，回退到启发式策略")
+                main_logger.warning(f"Episode {episode_idx + 1}, Step {episode_step + 1}: "
+                                  f"模型预测失败: {e}，回退到启发式策略")
                 # 回退到启发式策略
                 actions = self.controller.get_actions(current_positions)
                 self.strategy_stats['heuristic'] += 1
@@ -243,29 +287,109 @@ class StateCollector:
             # 随机探索
             actions = np.random.uniform(-1, 1, (self.env.n_uavs, 3)) * 30  # 随机速度 [-30, 30] m/s
             self.strategy_stats['random'] += 1
+            
+            # 每150步输出一次随机策略使用信息
+            if episode_step % 150 == 0:
+                main_logger.info(f"Episode {episode_idx + 1}, Step {episode_step + 1}: "
+                               f"使用随机探索策略 (概率={rand:.3f} 在 [{self.model_ratio:.3f}, {self.model_ratio + self.exploration_ratio:.3f}])")
+            
             return actions, 'random'
         
         else:
             # 启发式策略
             actions = self.controller.get_actions(current_positions)
             self.strategy_stats['heuristic'] += 1
+            
+            # 每120步输出一次启发式策略使用信息
+            if episode_step % 120 == 0:
+                main_logger.info(f"Episode {episode_idx + 1}, Step {episode_step + 1}: "
+                               f"使用启发式策略 (概率={rand:.3f} >= {self.model_ratio + self.exploration_ratio:.3f})")
+            
             return actions, 'heuristic'
 
-    def collect_episode(self, max_steps=1500, render=False):
+    def _get_single_strategy_actions(self, observations, current_positions, strategy_type, episode_step=0, episode_idx=0):
+        """
+        使用单一策略生成动作
+        
+        参数:
+            observations: 环境观测
+            current_positions: 当前无人机位置
+            strategy_type: 策略类型 ('model', 'heuristic', 'random')
+            episode_step: 当前episode中的步数
+            episode_idx: episode索引
+            
+        返回:
+            actions: 动作数组
+            strategy_used: 使用的策略类型
+        """
+        if strategy_type == 'model' and self.model is not None:
+            try:
+                # 获取全局状态
+                global_state = self.env._get_state()
+                
+                # 将观测转换为模型需要的格式
+                if isinstance(observations, dict):
+                    obs_list = []
+                    for agent_id in sorted(observations.keys()):
+                        if "obs" in observations[agent_id]:
+                            obs_list.append(observations[agent_id]["obs"])
+                        else:
+                            obs_list.append(observations[agent_id])
+                    obs = np.array(obs_list)
+                else:
+                    obs = observations
+                
+                actions, _ = self.model.step(
+                    state=global_state,
+                    observations=obs,
+                    ep_t=episode_step,
+                    deterministic=True,
+                    env_id=0
+                )
+                
+                self.strategy_stats['model'] += 1
+                return actions, 'model'
+                
+            except Exception as e:
+                main_logger.warning(f"Episode {episode_idx + 1}, Step {episode_step + 1}: "
+                                  f"模型预测失败: {e}，回退到启发式策略")
+                actions = self.controller.get_actions(current_positions)
+                self.strategy_stats['heuristic'] += 1
+                return actions, 'heuristic'
+        
+        elif strategy_type == 'random':
+            actions = np.random.uniform(-1, 1, (self.env.n_uavs, 3)) * 30
+            self.strategy_stats['random'] += 1
+            return actions, 'random'
+        
+        else:  # heuristic or fallback
+            actions = self.controller.get_actions(current_positions)
+            self.strategy_stats['heuristic'] += 1
+            return actions, 'heuristic'
+
+    def collect_episode(self, max_steps=1500, render=False, episode_idx=0, fixed_strategy=None):
         """
         收集一个episode的数据
         
         参数:
             max_steps: 最大步数
             render: 是否渲染
+            episode_idx: episode索引（用于日志）
+            fixed_strategy: 固定策略类型，如果为None则使用混合策略
             
         返回:
             episode_reward: episode总奖励
             good_states_count: 收集到的好状态数量
+            strategy_used: 主要使用的策略类型
         """
+        strategy_info = f"固定策略={fixed_strategy}" if fixed_strategy else "混合策略"
+        main_logger.info(f"开始Episode {episode_idx + 1}: 最大步数={max_steps}, 奖励阈值={self.reward_threshold}, {strategy_info}")
+        
         observations, infos = self.env.reset()
         episode_reward = 0
         good_states_count = 0
+        step_rewards = []
+        episode_strategy = fixed_strategy or 'mixed'
         
         for step in range(max_steps):
             # 获取当前全局状态
@@ -274,33 +398,69 @@ class StateCollector:
             # 获取当前无人机位置
             current_positions = self.env.uav_positions.copy()
             
-            # 使用混合策略生成动作
-            actions, strategy_used = self._get_mixed_actions(observations, current_positions, step)
+            # 根据模式选择动作生成方法
+            if fixed_strategy:
+                actions, strategy_used = self._get_single_strategy_actions(
+                    observations, current_positions, fixed_strategy, step, episode_idx)
+            else:
+                actions, strategy_used = self._get_mixed_actions(
+                    observations, current_positions, step, episode_idx)
             
             # 执行动作
             observations, rewards, dones, truncated, infos = self.env.step(actions)
             
-            # 获取奖励（假设所有智能体共享相同的奖励）
+            # 获取奖励
             step_reward = rewards[list(rewards.keys())[0]] if isinstance(rewards, dict) else rewards
             episode_reward += step_reward
+            step_rewards.append(step_reward)
             
-            # 如果当前状态奖励较高，收集它
+            # 收集好状态
             if step_reward >= self.reward_threshold:
-                self.good_states.append(current_state.copy())
-                self.rewards.append(step_reward)
+                # 根据收集模式存储到对应的策略分类中
+                if fixed_strategy:
+                    self.good_states[fixed_strategy].append(current_state.copy())
+                    self.rewards[fixed_strategy].append(step_reward)
+                else:
+                    # 混合模式下存储到对应的策略分类
+                    self.good_states[strategy_used].append(current_state.copy())
+                    self.rewards[strategy_used].append(step_reward)
+                
                 good_states_count += 1
+                main_logger.info(f"Episode {episode_idx + 1}, Step {step + 1}: 收集到好状态 "
+                               f"(奖励={step_reward:.4f}, 策略={strategy_used}, 累计好状态={good_states_count})")
             
-            # 渲染（如果需要）
+            # 定期输出进度信息
+            if (step + 1) % 200 == 0:
+                avg_reward_recent = np.mean(step_rewards[-200:]) if len(step_rewards) >= 200 else np.mean(step_rewards)
+                main_logger.info(f"Episode {episode_idx + 1}, Step {step + 1}/{max_steps}: "
+                               f"累计奖励={episode_reward:.3f}, 近期平均奖励={avg_reward_recent:.4f}, "
+                               f"本episode好状态数={good_states_count}, 当前策略={strategy_used}")
+            
+            # 渲染
             if render and step % 50 == 0:
                 self.env.render()
             
             # 检查是否结束
             done_any = any(dones.values()) if isinstance(dones, dict) else dones
             if done_any:
+                main_logger.info(f"Episode {episode_idx + 1} 提前结束于Step {step + 1} (done={done_any})")
                 break
         
-        self.episode_rewards.append(episode_reward)
-        return episode_reward, good_states_count
+        # 存储episode奖励到对应策略分类
+        if fixed_strategy:
+            self.episode_rewards[fixed_strategy].append(episode_reward)
+        else:
+            # 混合模式下存储到mixed类别（需要添加）
+            if 'mixed' not in self.episode_rewards:
+                self.episode_rewards['mixed'] = []
+            self.episode_rewards['mixed'].append(episode_reward)
+        
+        # Episode结束时的总结信息
+        avg_step_reward = episode_reward / max(step + 1, 1)
+        main_logger.info(f"Episode {episode_idx + 1} 完成: 总步数={step + 1}, 总奖励={episode_reward:.3f}, "
+                        f"平均步奖励={avg_step_reward:.4f}, 收集好状态数={good_states_count}, 策略={episode_strategy}")
+        
+        return episode_reward, good_states_count, episode_strategy
     
     def collect_data(self, n_episodes=50, render=False):
         """
@@ -314,50 +474,162 @@ class StateCollector:
             summary: 收集统计信息
         """
         main_logger.info(f"开始收集数据，共{n_episodes}个episodes，奖励阈值={self.reward_threshold}")
+        main_logger.info(f"收集模式: {self.collection_mode}")
         
         total_good_states = 0
         successful_episodes = 0
         
-        for episode in range(n_episodes):
-            try:
-                episode_reward, good_states_count = self.collect_episode(render=render)
-                total_good_states += good_states_count
+        if self.collection_mode == 'separated':
+            # 分离收集模式：每种策略分别运行指定数量的episodes
+            episode_count = 0
+            
+            for strategy, num_episodes in self.episodes_per_strategy.items():
+                if num_episodes == 0:
+                    continue
+                    
+                main_logger.info(f"开始收集 {strategy} 策略数据，共 {num_episodes} episodes")
                 
-                # 定义成功episode（平均奖励较高）
-                if episode_reward / 1500 >= 0.5:  # 假设平均奖励0.5以上为成功
-                    successful_episodes += 1
+                for i in range(num_episodes):
+                    if episode_count >= n_episodes:
+                        break
+                        
+                    try:
+                        episode_reward, good_states_count, strategy_used = self.collect_episode(
+                            render=render, 
+                            episode_idx=episode_count,
+                            fixed_strategy=strategy
+                        )
+                        total_good_states += good_states_count
+                        
+                        if episode_reward / 1500 >= 0.5:
+                            successful_episodes += 1
+                        
+                        episode_count += 1
+                        
+                        # 每5个episode输出进度
+                        if (episode_count) % 5 == 0:
+                            current_success_rate = successful_episodes / episode_count
+                            main_logger.info(f"进度报告 [{episode_count}/{n_episodes}] ({strategy}): "
+                                           f"累计好状态数={total_good_states}, "
+                                           f"当前成功率={current_success_rate:.2%}")
+                        
+                    except Exception as e:
+                        main_logger.warning(f"Episode {episode_count + 1} ({strategy})执行失败: {e}")
+                        episode_count += 1
+                        continue
                 
-                # 记录进度
-                if (episode + 1) % 10 == 0:
-                    main_logger.info(f"Episode {episode + 1}/{n_episodes}: "
-                                   f"本episode奖励={episode_reward:.3f}, "
-                                   f"收集好状态数={good_states_count}, "
-                                   f"累计好状态数={total_good_states}")
-            except Exception as e:
-                main_logger.warning(f"Episode {episode}执行失败: {e}")
-                continue
+                main_logger.info(f"{strategy} 策略收集完成，收集了 {len(self.good_states[strategy])} 个好状态")
+        
+        elif self.collection_mode == 'single_episode':
+            # 单一策略模式：每个episode随机选择一种策略并保持整个episode
+            strategies = ['model', 'heuristic', 'random']
+            if self.model is None:
+                strategies.remove('model')
+            
+            for episode in range(n_episodes):
+                # 根据比例随机选择策略
+                rand = np.random.random()
+                if self.model is not None and rand < self.model_ratio:
+                    strategy = 'model'
+                elif rand < self.model_ratio + self.exploration_ratio:
+                    strategy = 'random'
+                else:
+                    strategy = 'heuristic'
+                
+                try:
+                    episode_reward, good_states_count, strategy_used = self.collect_episode(
+                        render=render, 
+                        episode_idx=episode,
+                        fixed_strategy=strategy
+                    )
+                    total_good_states += good_states_count
+                    
+                    if episode_reward / 1500 >= 0.5:
+                        successful_episodes += 1
+                    
+                    # 每5个episode输出进度
+                    if (episode + 1) % 5 == 0:
+                        current_success_rate = successful_episodes / (episode + 1)
+                        main_logger.info(f"进度报告 [{episode + 1}/{n_episodes}]: "
+                                       f"累计好状态数={total_good_states}, "
+                                       f"当前成功率={current_success_rate:.2%}")
+                    
+                except Exception as e:
+                    main_logger.warning(f"Episode {episode + 1} ({strategy})执行失败: {e}")
+                    continue
+        
+        else:
+            # 混合策略模式：保持原有的随机切换行为
+            for episode in range(n_episodes):
+                try:
+                    episode_reward, good_states_count, strategy_used = self.collect_episode(
+                        render=render, 
+                        episode_idx=episode
+                    )
+                    total_good_states += good_states_count
+                    
+                    if episode_reward / 1500 >= 0.5:
+                        successful_episodes += 1
+                    
+                    # 每5个episode输出进度
+                    if (episode + 1) % 5 == 0:
+                        current_success_rate = successful_episodes / (episode + 1)
+                        main_logger.info(f"进度报告 [{episode + 1}/{n_episodes}]: "
+                                       f"累计好状态数={total_good_states}, "
+                                       f"当前成功率={current_success_rate:.2%}")
+                    
+                except Exception as e:
+                    main_logger.warning(f"Episode {episode + 1}执行失败: {e}")
+                    continue
         
         # 统计信息
         total_strategy_calls = sum(self.strategy_stats.values())
         strategy_percentages = {k: (v / max(total_strategy_calls, 1)) * 100 for k, v in self.strategy_stats.items()}
         
+        # 计算各策略的统计信息
+        strategy_summaries = {}
+        all_episode_rewards = []
+        
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.episode_rewards[strategy]) > 0:
+                strategy_summaries[strategy] = {
+                    'episodes': len(self.episode_rewards[strategy]),
+                    'good_states': len(self.good_states[strategy]),
+                    'avg_episode_reward': np.mean(self.episode_rewards[strategy]),
+                    'std_episode_reward': np.std(self.episode_rewards[strategy])
+                }
+                all_episode_rewards.extend(self.episode_rewards[strategy])
+        
+        # 处理混合模式的数据
+        if 'mixed' in self.episode_rewards and len(self.episode_rewards['mixed']) > 0:
+            all_episode_rewards.extend(self.episode_rewards['mixed'])
+        
         summary = {
-            'total_episodes': n_episodes,
+            'collection_mode': self.collection_mode,
+            'total_episodes': len(all_episode_rewards),
             'successful_episodes': successful_episodes,
-            'success_rate': successful_episodes / n_episodes,
+            'success_rate': successful_episodes / max(len(all_episode_rewards), 1),
             'total_good_states': total_good_states,
-            'avg_good_states_per_episode': total_good_states / n_episodes,
-            'avg_episode_reward': np.mean(self.episode_rewards),
-            'std_episode_reward': np.std(self.episode_rewards),
+            'avg_good_states_per_episode': total_good_states / max(len(all_episode_rewards), 1),
+            'avg_episode_reward': np.mean(all_episode_rewards) if all_episode_rewards else 0,
+            'std_episode_reward': np.std(all_episode_rewards) if all_episode_rewards else 0,
             'reward_threshold': self.reward_threshold,
             'strategy_stats': self.strategy_stats,
-            'strategy_percentages': strategy_percentages
+            'strategy_percentages': strategy_percentages,
+            'strategy_summaries': strategy_summaries
         }
         
         main_logger.info(f"数据收集完成: {summary}")
         main_logger.info(f"策略使用统计: 模型={strategy_percentages['model']:.1f}%, "
                         f"启发式={strategy_percentages['heuristic']:.1f}%, "
                         f"随机={strategy_percentages['random']:.1f}%")
+        
+        # 输出各策略的详细统计
+        for strategy, stats in strategy_summaries.items():
+            main_logger.info(f"{strategy}策略: episodes={stats['episodes']}, "
+                           f"好状态={stats['good_states']}, "
+                           f"平均奖励={stats['avg_episode_reward']:.3f}")
+        
         return summary
     
     def save_data(self, save_dir):
@@ -526,7 +798,7 @@ def main():
     """主函数"""
     parser = argparse.ArgumentParser(description='收集高奖励状态用于VAE训练')
     parser.add_argument('--n_episodes', type=int, default=100, help='收集的episode数量')
-    parser.add_argument('--reward_threshold', type=float, default=0.7, help='好状态的奖励阈值')
+    parser.add_argument('--reward_threshold', type=float, default=0.08, help='好状态的奖励阈值')
     parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量')
     parser.add_argument('--n_users', type=int, default=50, help='用户数量')
     parser.add_argument('--area_size', type=int, default=2000, help='区域大小 (默认值与train_multiproc_config_1.py一致，可通过命令行参数覆盖)')
@@ -534,7 +806,7 @@ def main():
     parser.add_argument('--render', action='store_true', help='是否渲染')
     parser.add_argument('--seed', type=int, default=42, help='随机种子')
     
-    # 混合策略相关参数
+    # 策略相关参数
     parser.add_argument('--model_path', type=str, default='scripts/hmasd_multiproc_paper_config.pt', 
                        help='预训练模型路径')
     parser.add_argument('--exploration_ratio', type=float, default=0.3, 
@@ -543,6 +815,11 @@ def main():
                        help='模型策略比例 (0.0-1.0)')
     parser.add_argument('--use_model', action='store_true', 
                        help='是否使用预训练模型（如果不指定，仅使用启发式+随机策略）')
+    
+    # 收集模式参数
+    parser.add_argument('--collection_mode', type=str, default='separated', 
+                       choices=['separated', 'single_episode', 'mixed'],
+                       help='数据收集模式: separated=分离收集各策略, single_episode=每episode固定策略, mixed=episode内混合策略')
     
     args = parser.parse_args()
     
@@ -644,7 +921,8 @@ def main():
         reward_threshold=args.reward_threshold,
         model=model,
         exploration_ratio=args.exploration_ratio,
-        model_ratio=args.model_ratio
+        model_ratio=args.model_ratio,
+        collection_mode=args.collection_mode
     )
     
     # 收集数据
