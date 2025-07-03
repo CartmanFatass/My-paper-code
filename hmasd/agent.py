@@ -123,6 +123,47 @@ class HMASDAgent:
             weight_decay=config.weight_decay
         )
         
+        # 初始化学习率调度器
+        if getattr(config, 'use_lr_decay', False):
+            from torch.optim.lr_scheduler import LinearLR, CosineAnnealingLR, ExponentialLR
+            
+            if config.lr_decay_schedule == 'linear':
+                self.coordinator_scheduler = LinearLR(
+                    self.coordinator_optimizer, 
+                    start_factor=1.0, 
+                    end_factor=config.coordinator_lr_decay_factor,
+                    total_iters=config.lr_decay_steps
+                )
+                self.discoverer_scheduler = LinearLR(
+                    self.discoverer_optimizer,
+                    start_factor=1.0,
+                    end_factor=config.discoverer_lr_decay_factor, 
+                    total_iters=config.lr_decay_steps
+                )
+                self.discriminator_scheduler = LinearLR(
+                    self.discriminator_optimizer,
+                    start_factor=1.0,
+                    end_factor=config.discriminator_lr_decay_factor,
+                    total_iters=config.lr_decay_steps
+                )
+            elif config.lr_decay_schedule == 'cosine':
+                self.coordinator_scheduler = CosineAnnealingLR(
+                    self.coordinator_optimizer, T_max=config.lr_decay_steps
+                )
+                self.discoverer_scheduler = CosineAnnealingLR(
+                    self.discoverer_optimizer, T_max=config.lr_decay_steps
+                )
+                self.discriminator_scheduler = CosineAnnealingLR(
+                    self.discriminator_optimizer, T_max=config.lr_decay_steps
+                )
+            
+            main_logger.info(f"已启用学习率衰减: {config.lr_decay_schedule}, 衰减步数: {config.lr_decay_steps}")
+        else:
+            self.coordinator_scheduler = None
+            self.discoverer_scheduler = None  
+            self.discriminator_scheduler = None
+            main_logger.info("未启用学习率衰减")
+        
         # 创建经验回放缓冲区
         self.high_level_buffer = ReplayBuffer(config.buffer_size)
         self.high_level_buffer_with_logprobs = []  # 新增：高层经验缓冲区（带log probabilities）
@@ -528,7 +569,7 @@ class HMASDAgent:
                 
                 # 记录当前权重到日志（每1000步记录一次以避免日志过多）
                 if self.global_step % 1000 == 0:
-                    main_logger.info(f"权重退火进度: {progress:.3f} ({self.global_step}/{self.anneal_steps}), "
+                    main_logger.debug(f"权重退火进度: {progress:.3f} ({self.global_step}/{self.anneal_steps}), "
                                    f"内在权重倍数: {w_intrinsic_current:.3f}, "
                                    f"外部权重倍数: {w_extrinsic_current:.3f}")
             else:
@@ -1461,6 +1502,15 @@ class HMASDAgent:
         avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, \
         avg_discoverer_val = self.update_discoverer()
         
+        # 更新学习率调度器
+        if getattr(self.config, 'use_lr_decay', False) and self.global_step <= self.config.lr_decay_steps:
+            if self.coordinator_scheduler is not None:
+                self.coordinator_scheduler.step()
+            if self.discoverer_scheduler is not None:
+                self.discoverer_scheduler.step()
+            if self.discriminator_scheduler is not None:
+                self.discriminator_scheduler.step()
+
         # 更新训练信息
         self.training_info['high_level_loss'].append(coordinator_loss)
         self.training_info['low_level_loss'].append(discoverer_loss)
@@ -1533,6 +1583,16 @@ class HMASDAgent:
         self.writer.add_scalar('ValueEstimates/Coordinator/StateValue_Mean', mean_coord_state_val, self.global_step)
         self.writer.add_scalar('ValueEstimates/Coordinator/AgentValue_Average_Mean', mean_coord_agent_val, self.global_step)
         self.writer.add_scalar('ValueEstimates/Discoverer/Value_Mean', avg_discoverer_val, self.global_step)
+
+        # 记录当前学习率
+        if hasattr(self, 'writer'):
+            current_coord_lr = self.coordinator_optimizer.param_groups[0]['lr']
+            current_disc_lr = self.discoverer_optimizer.param_groups[0]['lr']
+            current_discriminator_lr = self.discriminator_optimizer.param_groups[0]['lr']
+            
+            self.writer.add_scalar('LearningRate/Coordinator', current_coord_lr, self.global_step)
+            self.writer.add_scalar('LearningRate/Discoverer', current_disc_lr, self.global_step)
+            self.writer.add_scalar('LearningRate/Discriminator', current_discriminator_lr, self.global_step)
 
         # CD Loss
         self.writer.add_scalar('Losses/Coordinator/CD_Loss', cd_loss_val, self.global_step)

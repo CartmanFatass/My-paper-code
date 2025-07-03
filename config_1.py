@@ -39,7 +39,7 @@ class Config:
 
     # HMASD损失权重 - 基于论文Table 3中的3m场景
     # 注意：lambda_e参数已调整为0.1，以稳定训练
-    lambda_e = 20.0          # 外部奖励权重 (从100降低，但保持足够强度)
+    lambda_e = 100.0          # 外部奖励权重 (从100降低，但保持足够强度)
     lambda_D = 0.05          # 团队技能判别器奖励权重 (适度降低团队判别器权重)
     lambda_d = 0.2           # 个体技能判别器奖励权重 (适度降低个体判别器权重)
     lambda_h = 0.001         # 高层策略熵权重 (论文中3m场景为0.001)
@@ -63,8 +63,16 @@ class Config:
     use_orthogonal = True    # 使用正交初始化
     gain = 0.01              # 增益
     optimizer_epsilon = 1e-5 # 优化器epsilon
-    weight_decay = 1e-4      # 权重衰减
+    weight_decay = 0.0       # 权重衰减 (根据建议移除)
     num_mini_batch = 1       # mini batch数量
+    
+    # 学习率衰减参数
+    use_lr_decay = True                    # 是否启用学习率衰减
+    lr_decay_schedule = 'linear'           # 衰减计划 ('linear', 'cosine', 'exponential')
+    lr_decay_steps = 2000000               # 学习率衰减总步数 (约50%的训练时间)
+    coordinator_lr_decay_factor = 0.2      # 协调器最终学习率为初始的20%
+    discoverer_lr_decay_factor = 0.2       # 发现器最终学习率为初始的20%
+    discriminator_lr_decay_factor = 0.3    # 判别器衰减得慢一些，保持判别能力
     use_huber_loss = True    # 使用Huber损失
     huber_delta = 10         # Huber delta
     

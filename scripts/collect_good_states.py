@@ -196,15 +196,9 @@ class StateCollector:
         
         # 计算每种策略应该运行的episode数量
         if collection_mode == 'separated':
-            self.episodes_per_strategy = {
-                'model': int(model_ratio * 100) if model is not None else 0,
-                'heuristic': int(self.heuristic_ratio * 100),
-                'random': int(exploration_ratio * 100)
-            }
-            # 确保总数为100%
-            total_episodes = sum(self.episodes_per_strategy.values())
-            if total_episodes < 100:
-                self.episodes_per_strategy['heuristic'] += (100 - total_episodes)
+            # 这里应该基于实际的episode数量，而不是固定的100
+            # 在collect_data方法中会根据n_episodes重新计算
+            self.episodes_per_strategy = None
         else:
             self.episodes_per_strategy = None
         
@@ -481,9 +475,27 @@ class StateCollector:
         
         if self.collection_mode == 'separated':
             # 分离收集模式：每种策略分别运行指定数量的episodes
+            # 根据实际的n_episodes和策略比例计算每种策略的episode数
+            episodes_per_strategy = {
+                'model': int(n_episodes * self.model_ratio) if self.model is not None else 0,
+                'heuristic': int(n_episodes * self.heuristic_ratio),
+                'random': int(n_episodes * self.exploration_ratio)
+            }
+            
+            # 确保总数等于n_episodes
+            total_allocated = sum(episodes_per_strategy.values())
+            if total_allocated < n_episodes:
+                episodes_per_strategy['heuristic'] += (n_episodes - total_allocated)
+            elif total_allocated > n_episodes:
+                # 如果超出，从最大的策略中减少
+                max_strategy = max(episodes_per_strategy, key=episodes_per_strategy.get)
+                episodes_per_strategy[max_strategy] -= (total_allocated - n_episodes)
+            
+            main_logger.info(f"分离收集模式 - 每种策略的episode数: {episodes_per_strategy}")
+            
             episode_count = 0
             
-            for strategy, num_episodes in self.episodes_per_strategy.items():
+            for strategy, num_episodes in episodes_per_strategy.items():
                 if num_episodes == 0:
                     continue
                     
@@ -641,30 +653,80 @@ class StateCollector:
         """
         os.makedirs(save_dir, exist_ok=True)
         
-        # 保存好状态
-        good_states_array = np.array(self.good_states)
-        good_states_path = os.path.join(save_dir, 'good_states.npy')
-        np.save(good_states_path, good_states_array)
+        # 合并所有策略的好状态数据
+        all_good_states = []
+        all_rewards = []
         
-        # 保存对应的奖励
-        rewards_array = np.array(self.rewards)
-        rewards_path = os.path.join(save_dir, 'good_states_rewards.npy')
-        np.save(rewards_path, rewards_array)
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.good_states[strategy]) > 0:
+                all_good_states.extend(self.good_states[strategy])
+                all_rewards.extend(self.rewards[strategy])
         
-        # 保存episode奖励
-        episode_rewards_array = np.array(self.episode_rewards)
-        episode_rewards_path = os.path.join(save_dir, 'episode_rewards.npy')
-        np.save(episode_rewards_path, episode_rewards_array)
+        # 保存合并的好状态
+        if len(all_good_states) > 0:
+            good_states_array = np.array(all_good_states)
+            good_states_path = os.path.join(save_dir, 'good_states.npy')
+            np.save(good_states_path, good_states_array)
+            
+            # 保存对应的奖励
+            rewards_array = np.array(all_rewards)
+            rewards_path = os.path.join(save_dir, 'good_states_rewards.npy')
+            np.save(rewards_path, rewards_array)
+            
+            main_logger.info(f"合并数据已保存到 {save_dir}")
+            main_logger.info(f"好状态数据形状: {good_states_array.shape}")
+            main_logger.info(f"好状态奖励范围: [{rewards_array.min():.3f}, {rewards_array.max():.3f}]")
+        else:
+            main_logger.warning("没有收集到好状态数据")
+            good_states_path = None
+            rewards_path = None
+            good_states_array = np.array([])
+            rewards_array = np.array([])
         
-        main_logger.info(f"数据已保存到 {save_dir}")
-        main_logger.info(f"好状态数据形状: {good_states_array.shape}")
-        main_logger.info(f"好状态奖励范围: [{rewards_array.min():.3f}, {rewards_array.max():.3f}]")
+        # 分别保存各策略的数据
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.good_states[strategy]) > 0:
+                strategy_states = np.array(self.good_states[strategy])
+                strategy_rewards = np.array(self.rewards[strategy])
+                
+                strategy_states_path = os.path.join(save_dir, f'good_states_{strategy}.npy')
+                strategy_rewards_path = os.path.join(save_dir, f'good_states_rewards_{strategy}.npy')
+                
+                np.save(strategy_states_path, strategy_states)
+                np.save(strategy_rewards_path, strategy_rewards)
+                
+                main_logger.info(f"{strategy}策略数据: {len(strategy_states)}个好状态, "
+                               f"奖励范围[{strategy_rewards.min():.3f}, {strategy_rewards.max():.3f}]")
+        
+        # 保存episode奖励数据
+        all_episode_rewards = []
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.episode_rewards[strategy]) > 0:
+                all_episode_rewards.extend(self.episode_rewards[strategy])
+        
+        # 处理混合模式的episode奖励
+        if 'mixed' in self.episode_rewards and len(self.episode_rewards['mixed']) > 0:
+            all_episode_rewards.extend(self.episode_rewards['mixed'])
+        
+        if len(all_episode_rewards) > 0:
+            episode_rewards_array = np.array(all_episode_rewards)
+            episode_rewards_path = os.path.join(save_dir, 'episode_rewards.npy')
+            np.save(episode_rewards_path, episode_rewards_array)
+        else:
+            episode_rewards_path = None
+        
+        # 保存策略分类的episode奖励
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.episode_rewards[strategy]) > 0:
+                strategy_ep_rewards = np.array(self.episode_rewards[strategy])
+                strategy_ep_path = os.path.join(save_dir, f'episode_rewards_{strategy}.npy')
+                np.save(strategy_ep_path, strategy_ep_rewards)
         
         return {
             'good_states_path': good_states_path,
             'rewards_path': rewards_path,
             'episode_rewards_path': episode_rewards_path,
-            'n_good_states': len(good_states_array),
+            'n_good_states': len(all_good_states),
             'state_dim': good_states_array.shape[1] if len(good_states_array) > 0 else 0
         }
     
@@ -675,29 +737,45 @@ class StateCollector:
         参数:
             save_dir: 保存目录
         """
-        if len(self.episode_rewards) == 0:
+        # 合并所有策略的episode奖励数据
+        all_episode_rewards = []
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.episode_rewards[strategy]) > 0:
+                all_episode_rewards.extend(self.episode_rewards[strategy])
+        
+        # 处理混合模式的episode奖励
+        if 'mixed' in self.episode_rewards and len(self.episode_rewards['mixed']) > 0:
+            all_episode_rewards.extend(self.episode_rewards['mixed'])
+        
+        # 合并所有策略的好状态奖励数据
+        all_rewards = []
+        for strategy in ['model', 'heuristic', 'random']:
+            if len(self.rewards[strategy]) > 0:
+                all_rewards.extend(self.rewards[strategy])
+        
+        if len(all_episode_rewards) == 0:
             main_logger.warning("没有数据用于可视化")
             return
         
         fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 10))
         
         # 1. Episode奖励趋势
-        ax1.plot(self.episode_rewards)
+        ax1.plot(all_episode_rewards)
         ax1.set_title('Episode奖励趋势')
         ax1.set_xlabel('Episode')
         ax1.set_ylabel('总奖励')
         ax1.grid(True)
         
         # 2. 奖励分布直方图
-        ax2.hist(self.episode_rewards, bins=20, alpha=0.7)
+        ax2.hist(all_episode_rewards, bins=20, alpha=0.7)
         ax2.set_title('Episode奖励分布')
         ax2.set_xlabel('总奖励')
         ax2.set_ylabel('频次')
         ax2.grid(True)
         
         # 3. 好状态奖励分布
-        if len(self.rewards) > 0:
-            ax3.hist(self.rewards, bins=30, alpha=0.7, color='green')
+        if len(all_rewards) > 0:
+            ax3.hist(all_rewards, bins=30, alpha=0.7, color='green')
             ax3.axvline(self.reward_threshold, color='red', linestyle='--', 
                        label=f'阈值={self.reward_threshold}')
             ax3.set_title('好状态奖励分布')
@@ -705,15 +783,35 @@ class StateCollector:
             ax3.set_ylabel('频次')
             ax3.legend()
             ax3.grid(True)
+        else:
+            ax3.text(0.5, 0.5, '没有好状态数据', ha='center', va='center', transform=ax3.transAxes)
+            ax3.set_title('好状态奖励分布')
         
-        # 4. 累积好状态数量
-        cumulative_good_states = np.cumsum([len([r for r in self.rewards if r >= self.reward_threshold])])
-        if len(cumulative_good_states) > 0:
-            ax4.plot(cumulative_good_states)
-            ax4.set_title('累积好状态数量')
-            ax4.set_xlabel('Episode')
-            ax4.set_ylabel('累积好状态数')
-            ax4.grid(True)
+        # 4. 策略使用比例饼图
+        strategy_counts = {}
+        for strategy in ['model', 'heuristic', 'random']:
+            if self.strategy_stats[strategy] > 0:
+                strategy_counts[strategy] = self.strategy_stats[strategy]
+        
+        if len(strategy_counts) > 0:
+            labels = []
+            sizes = []
+            colors = ['#ff9999', '#66b3ff', '#99ff99']  # 红、蓝、绿
+            
+            for i, (strategy, count) in enumerate(strategy_counts.items()):
+                if strategy == 'model':
+                    labels.append(f'模型策略 ({count})')
+                elif strategy == 'heuristic':
+                    labels.append(f'启发式策略 ({count})')
+                else:
+                    labels.append(f'随机策略 ({count})')
+                sizes.append(count)
+            
+            ax4.pie(sizes, labels=labels, colors=colors[:len(sizes)], autopct='%1.1f%%', startangle=90)
+            ax4.set_title('策略使用比例')
+        else:
+            ax4.text(0.5, 0.5, '没有策略统计数据', ha='center', va='center', transform=ax4.transAxes)
+            ax4.set_title('策略使用比例')
         
         plt.tight_layout()
         
@@ -830,7 +928,7 @@ def main():
         log_dir='logs',
         log_file=log_filename,
         file_level=logging.INFO,
-        console_level=logging.INFO
+        console_level=logging.WARNING
     )
     
     main_logger.info("=" * 60)

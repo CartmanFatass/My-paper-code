@@ -710,27 +710,28 @@ def get_device(device_pref):
         return torch.device('cpu')
 
 # 创建环境函数 (修改后用于 SubprocVecEnv)
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0, n_clusters=None, cluster_std=None, central_area_ratio=None, area_size=None, use_fdma=True, bandwidth=None):
+def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0, n_clusters=None, cluster_std=None, central_area_ratio=None, area_size=None, use_fdma=True, bandwidth=None, **kwargs):
     """
     创建环境实例的函数 (用于 SubprocVecEnv)
 
     参数:
-        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式)
+        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式)
         n_uavs: 无人机数量
         n_users: 用户数量
         user_distribution: 用户分布类型
         channel_model: 信道模型
         config: 配置对象，包含奖励权重等参数
-        max_hops: 最大跳数 (仅用于场景2和3)
+        max_hops: 最大跳数 (仅用于场景2, 3, 4)
         render_mode: 渲染模式
         rank: 环境的索引 (用于设置不同的种子)
         seed: 基础随机种子
-        n_clusters: 用户簇数量 (仅用于场景3)
-        cluster_std: 簇内用户分布标准差 (仅用于场景3)
-        central_area_ratio: 中心用户区域占总区域的比例 (仅用于场景3)
-        area_size: 区域大小 (仅用于场景3)
+        n_clusters: 用户簇数量 (仅用于场景3, 4)
+        cluster_std: 簇内用户分布标准差 (仅用于场景3, 4)
+        central_area_ratio: 中心用户区域占总区域的比例 (仅用于场景3, 4)
+        area_size: 区域大小 (仅用于场景3, 4)
         use_fdma: 是否启用FDMA
         bandwidth: 每个无人机的带宽 (Hz)
+        **kwargs: 其他特定于场景的参数
 
     返回:
         一个返回环境实例的函数
@@ -793,39 +794,25 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
             )
         elif scenario == 4:
             # 场景4：强制多跳中继环境
-            # 修正参数覆盖问题：首先定义默认值，然后用传入参数更新
-            scenario4_defaults = {
+            scenario4_kwargs = {
                 'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
-                'max_hops': 4,
-                'area_size': 2500,
-                'n_clusters': 4,
-                'cluster_std': 80,
-                'central_area_ratio': 0.6,
-                'min_sinr': 3,
-                'max_connections': 25,
-                'coverage_weight': 0.8,
-                'connectivity_weight': 0.15,
-                'efficiency_weight': 0.05,
-            }
-            
-            # 将所有可能的场景4特定参数打包，但排除user_distribution
-            # 因为场景4只支持'forced_relay_cluster'类型
-            provided_scenario4_args = {
                 'max_hops': max_hops,
                 'area_size': area_size,
                 'n_clusters': n_clusters,
                 'cluster_std': cluster_std,
                 'central_area_ratio': central_area_ratio,
+                'min_sinr': kwargs.get('min_sinr'),
+                'max_connections': kwargs.get('max_connections'),
+                'coverage_weight': kwargs.get('coverage_weight'),
+                'connectivity_weight': kwargs.get('connectivity_weight'),
+                'efficiency_weight': kwargs.get('efficiency_weight'),
             }
             
-            # 过滤掉未提供的参数 (值为None)
-            provided_scenario4_args = {k: v for k, v in provided_scenario4_args.items() if v is not None}
+            # 过滤掉值为None的参数，以便环境使用其内部默认值
+            scenario4_kwargs = {k: v for k, v in scenario4_kwargs.items() if v is not None}
             
-            # 用提供的参数更新默认值（但保持user_distribution为固定值）
-            scenario4_defaults.update(provided_scenario4_args)
-            
-            # 将最终的场景参数合并到通用参数中
-            env_kwargs.update(scenario4_defaults)
+            # 将场景4的参数合并到通用参数中
+            env_kwargs.update(scenario4_kwargs)
             
             raw_env = UAVForcedRelayEnv(**env_kwargs)
         else:
@@ -861,7 +848,7 @@ def parse_args():
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
     parser.add_argument('--n_users', type=int, default=50, help='用户数量 ')
-    parser.add_argument('--area_size', type=int, default=2000, help='区域大小 (米, 场景3默认3000)')
+    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 场景3默认3000)')
     parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
@@ -877,6 +864,13 @@ def parse_args():
     parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
     parser.add_argument('--cluster_std', type=int, default=100, help='簇内用户分布标准差 (米, 仅用于场景3)')
     parser.add_argument('--central_area_ratio', type=float, default=0.6, help='中心用户区域占总区域的比例 (仅用于场景3)')
+
+    # 场景4特有参数
+    parser.add_argument('--min_sinr', type=float, default=3, help='最小信噪比 (仅用于场景4)')
+    parser.add_argument('--max_connections', type=int, default=25, help='最大连接数 (仅用于场景4)')
+    parser.add_argument('--coverage_weight', type=float, default=0.8, help='覆盖率奖励权重 (仅用于场景4)')
+    parser.add_argument('--connectivity_weight', type=float, default=0.15, help='连通性奖励权重 (仅用于场景4)')
+    parser.add_argument('--efficiency_weight', type=float, default=0.05, help='效率奖励权重 (仅用于场景4)')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=0, 
@@ -909,6 +903,20 @@ def parse_args():
                         help='权重退火总步数（约25%的训练时间）')
     parser.add_argument('--anneal_schedule', type=str, default='linear',
                         choices=['linear', 'cosine'], help='退火计划（linear 或 cosine）')
+
+    # 学习率衰减参数
+    parser.add_argument('--use_lr_decay', action=argparse.BooleanOptionalAction, default=True,
+                        help='是否启用学习率衰减 (使用--use_lr_decay启用，--no-use_lr_decay禁用)')
+    parser.add_argument('--lr_decay_schedule', type=str, default='linear',
+                        choices=['linear', 'cosine'], help='学习率衰减计划')
+    parser.add_argument('--lr_decay_steps', type=int, default=2000000,
+                        help='学习率衰减总步数')
+    parser.add_argument('--coordinator_lr_decay_factor', type=float, default=0.2,
+                        help='协调器学习率衰减因子')
+    parser.add_argument('--discoverer_lr_decay_factor', type=float, default=0.2,
+                        help='发现器学习率衰减因子')
+    parser.add_argument('--discriminator_lr_decay_factor', type=float, default=0.3,
+                        help='判别器学习率衰减因子')
     
     return parser.parse_args()
 
@@ -999,6 +1007,15 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         agent.writer.add_text('Parameters/w_extrinsic_final', str(config.w_extrinsic_final), 0)
         agent.writer.add_text('Parameters/anneal_steps', str(config.anneal_steps), 0)
         agent.writer.add_text('Parameters/anneal_schedule', str(config.anneal_schedule), 0)
+
+    # 记录学习率衰减相关参数
+    agent.writer.add_text('Parameters/use_lr_decay', str(config.use_lr_decay), 0)
+    if config.use_lr_decay:
+        agent.writer.add_text('Parameters/lr_decay_schedule', str(config.lr_decay_schedule), 0)
+        agent.writer.add_text('Parameters/lr_decay_steps', str(config.lr_decay_steps), 0)
+        agent.writer.add_text('Parameters/coordinator_lr_decay_factor', str(config.coordinator_lr_decay_factor), 0)
+        agent.writer.add_text('Parameters/discoverer_lr_decay_factor', str(config.discoverer_lr_decay_factor), 0)
+        agent.writer.add_text('Parameters/discriminator_lr_decay_factor', str(config.discriminator_lr_decay_factor), 0)
     
     # 记录环境奖励权重配置（场景3的新权重）
     agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
@@ -1706,6 +1723,19 @@ def main():
                        f"退火步数: {config.anneal_steps}, 退火计划: {config.anneal_schedule}")
     else:
         main_logger.info("权重退火机制已禁用")
+
+    # 根据命令行参数设置学习率衰减机制
+    config.use_lr_decay = args.use_lr_decay
+    if config.use_lr_decay:
+        config.lr_decay_schedule = args.lr_decay_schedule
+        config.lr_decay_steps = args.lr_decay_steps
+        config.coordinator_lr_decay_factor = args.coordinator_lr_decay_factor
+        config.discoverer_lr_decay_factor = args.discoverer_lr_decay_factor
+        config.discriminator_lr_decay_factor = args.discriminator_lr_decay_factor
+        main_logger.info(f"学习率衰减机制已启用: "
+                       f"计划: {config.lr_decay_schedule}, 步数: {config.lr_decay_steps}")
+    else:
+        main_logger.info("学习率衰减机制已禁用")
     
     # 获取计算设备
     device = get_device(args.device)
@@ -1726,18 +1756,23 @@ def main():
         n_users=args.n_users,
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
-        config=config,  # 传递配置对象
-        max_hops=args.max_hops if args.scenario in [2, 3] else None,
+        config=config,
+        max_hops=args.max_hops,
         render_mode=None,
         rank=i,
         seed=base_seed,
-        # 场景3和场景4参数
-        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
-        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
-        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
-        area_size=args.area_size if args.scenario in [3, 4] else None,
+        n_clusters=args.n_clusters,
+        cluster_std=args.cluster_std,
+        central_area_ratio=args.central_area_ratio,
+        area_size=args.area_size,
         use_fdma=args.use_fdma,
-        bandwidth=args.bandwidth
+        bandwidth=args.bandwidth,
+        # 场景4参数
+        min_sinr=args.min_sinr,
+        max_connections=args.max_connections,
+        coverage_weight=args.coverage_weight,
+        connectivity_weight=args.connectivity_weight,
+        efficiency_weight=args.efficiency_weight
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
@@ -1746,18 +1781,23 @@ def main():
         n_users=args.n_users,
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
-        config=config,  # 传递配置对象
-        max_hops=args.max_hops if args.scenario in [2, 3] else None,
-        render_mode="human" if args.render and i == 0 else None, # 只在第一个评估环境中渲染
+        config=config,
+        max_hops=args.max_hops,
+        render_mode="human" if args.render and i == 0 else None,
         rank=i,
-        seed=base_seed + num_envs, # Use different seeds for eval envs
-        # 场景3和场景4参数
-        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
-        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
-        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
-        area_size=args.area_size if args.scenario in [3, 4] else None,
+        seed=base_seed + num_envs,
+        n_clusters=args.n_clusters,
+        cluster_std=args.cluster_std,
+        central_area_ratio=args.central_area_ratio,
+        area_size=args.area_size,
         use_fdma=args.use_fdma,
-        bandwidth=args.bandwidth
+        bandwidth=args.bandwidth,
+        # 场景4参数
+        min_sinr=args.min_sinr,
+        max_connections=args.max_connections,
+        coverage_weight=args.coverage_weight,
+        connectivity_weight=args.connectivity_weight,
+        efficiency_weight=args.efficiency_weight
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -1769,17 +1809,22 @@ def main():
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
         config=config,
-        max_hops=args.max_hops if args.scenario in [2, 3, 4] else None,
+        max_hops=args.max_hops,
         render_mode=None,
         rank=0,
         seed=base_seed,
-        # 场景3和场景4参数
-        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
-        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
-        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
-        area_size=args.area_size if args.scenario in [3, 4] else None,
+        n_clusters=args.n_clusters,
+        cluster_std=args.cluster_std,
+        central_area_ratio=args.central_area_ratio,
+        area_size=args.area_size,
         use_fdma=args.use_fdma,
-        bandwidth=args.bandwidth
+        bandwidth=args.bandwidth,
+        # 场景4参数
+        min_sinr=args.min_sinr,
+        max_connections=args.max_connections,
+        coverage_weight=args.coverage_weight,
+        connectivity_weight=args.connectivity_weight,
+        efficiency_weight=args.efficiency_weight
     )
     temp_env = temp_env_fn()
     
@@ -1792,6 +1837,40 @@ def main():
     
     main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}")
     main_logger.info(f"确认无人机数量: n_agents={config.n_agents}")
+
+    # 打印环境参数以供确认
+    main_logger.info("="*50)
+    main_logger.info("已应用的环境参数:")
+    
+    env_to_check = temp_env.unwrapped if hasattr(temp_env, 'unwrapped') else temp_env
+    
+    # 定义所有可能相关的参数
+    all_possible_params = [
+        # 通用参数
+        "n_uavs", "n_users", "area_size", "user_distribution", "channel_model",
+        "use_fdma", "bandwidth", "max_hops",
+        # 场景3 & 4 参数
+        "n_clusters", "cluster_std", "central_area_ratio",
+        # 场景3 特有奖励权重
+        "effective_coverage_weight", "throughput_weight", "load_balance_weight", "proximity_penalty_weight",
+        # 场景4 特有参数
+        "min_sinr", "max_connections", "coverage_weight", "connectivity_weight", "efficiency_weight"
+    ]
+    
+    applied_params_count = 0
+    for key in all_possible_params:
+        if hasattr(env_to_check, key):
+            value = getattr(env_to_check, key)
+            main_logger.info(f"  - {key}: {value}")
+            applied_params_count += 1
+        else:
+            # 使用debug级别记录未找到的参数，避免在info级别下刷屏
+            main_logger.debug(f"参数 '{key}' 在环境 '{type(env_to_check).__name__}' 中未找到，跳过打印。")
+            
+    if applied_params_count == 0:
+        main_logger.warning("未能从环境中获取任何可识别的参数进行打印。")
+
+    main_logger.info("="*50)
     
     # 关闭临时环境
     temp_env.close()
