@@ -66,3 +66,4 @@ test*.py
 *.docx
 debug/
 test/
+temp_collection_log/

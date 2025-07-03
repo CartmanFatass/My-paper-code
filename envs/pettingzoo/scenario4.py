@@ -1071,3 +1071,150 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
             return path
         
         return None  # 没有找到路径
+    
+    def _compute_uav_frontend_capacity(self, uav_idx, connected_users):
+        """
+        重写父类方法：计算UAV的前端总容量（使用精确的信道模型）
+        
+        参数:
+            uav_idx: 无人机索引
+            connected_users: 连接到该UAV的用户索引列表
+            
+        返回:
+            frontend_capacity: 前端总容量 (bps)
+        """
+        if len(connected_users) == 0:
+            return 0
+        
+        # 使用我们自定义的精确SINR计算，而不是依赖父类的sinr_matrix
+        user_capacities = []
+        
+        for user_idx in connected_users:
+            # 计算UAV到用户的精确SINR
+            uav_pos = self.uav_positions[uav_idx]
+            user_pos_3d = np.append(self.user_positions[user_idx], 0)  # 用户在地面，z=0
+            
+            # 计算路径损耗（使用我们的精确A2G模型）
+            path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+            
+            # 计算接收功率 (dBm)
+            rx_power = self.tx_power - path_loss
+            
+            # 计算精确的SINR（考虑所有干扰源）
+            sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+            
+            # 检查SINR是否满足最小阈值
+            if sinr_db >= self.min_sinr:
+                # 转换为线性单位并计算单用户容量
+                sinr_linear = 10 ** (sinr_db / 10)
+                user_capacity = self.bandwidth * np.log2(1 + sinr_linear)
+                user_capacities.append(user_capacity)
+            else:
+                # SINR不满足阈值，该用户无法获得服务
+                user_capacities.append(0)
+        
+        # 在FDMA模式下，每个用户分配独立的频率资源
+        if self.use_fdma:
+            # FDMA：用户间无干扰，总容量为各用户容量之和
+            # 但受限于UAV的总带宽
+            total_user_capacity = sum(user_capacities)
+            
+            # 计算每个用户分配的带宽比例
+            if len(connected_users) > 0:
+                bandwidth_per_user = self.bandwidth / len(connected_users)
+                # 重新计算基于分配带宽的容量
+                adjusted_capacities = []
+                for i, user_idx in enumerate(connected_users):
+                    if user_capacities[i] > 0:
+                        # 使用分配的带宽重新计算容量
+                        uav_pos = self.uav_positions[uav_idx]
+                        user_pos_3d = np.append(self.user_positions[user_idx], 0)
+                        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+                        rx_power = self.tx_power - path_loss
+                        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+                        sinr_linear = 10 ** (sinr_db / 10)
+                        adjusted_capacity = bandwidth_per_user * np.log2(1 + sinr_linear)
+                        adjusted_capacities.append(adjusted_capacity)
+                    else:
+                        adjusted_capacities.append(0)
+                
+                frontend_capacity = sum(adjusted_capacities)
+            else:
+                frontend_capacity = 0
+        else:
+            # 非FDMA模式：用户共享频谱，使用最差用户的SINR
+            if len(user_capacities) > 0 and max(user_capacities) > 0:
+                # 找到有效用户中SINR最差的
+                valid_sinrs = []
+                for i, user_idx in enumerate(connected_users):
+                    if user_capacities[i] > 0:
+                        uav_pos = self.uav_positions[uav_idx]
+                        user_pos_3d = np.append(self.user_positions[user_idx], 0)
+                        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+                        rx_power = self.tx_power - path_loss
+                        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+                        valid_sinrs.append(sinr_db)
+                
+                if valid_sinrs:
+                    min_sinr_db = min(valid_sinrs)
+                    min_sinr_linear = 10 ** (min_sinr_db / 10)
+                    frontend_capacity = self.bandwidth * np.log2(1 + min_sinr_linear)
+                else:
+                    frontend_capacity = 0
+            else:
+                frontend_capacity = 0
+        
+        return frontend_capacity
+    
+    def _compute_uav_to_user_sinr(self, uav_idx, user_idx, rx_power):
+        """
+        计算UAV到用户通信的精确SINR（使用我们的信道模型）
+        
+        参数:
+            uav_idx: 无人机索引
+            user_idx: 用户索引
+            rx_power: 接收功率 (dBm)
+            
+        返回:
+            sinr_db: SINR (dB)
+        """
+        if self.use_fdma:
+            # FDMA模式：考虑邻频干扰
+            adjacent_interference_ratio = 0.1
+            interference_power_linear = (10 ** (rx_power / 10)) * adjacent_interference_ratio
+            interference_power_dbm = 10 * np.log10(interference_power_linear) if interference_power_linear > 0 else -float('inf')
+            
+            # 噪声加干扰功率
+            noise_power_linear = 10 ** (self.noise_power / 10)
+            total_interference_noise = noise_power_linear + interference_power_linear
+            total_interference_noise_dbm = 10 * np.log10(total_interference_noise)
+            
+            sinr_db = rx_power - total_interference_noise_dbm
+        else:
+            # 非FDMA模式：计算来自其他UAV的同频干扰
+            interference_powers = []
+            user_pos_3d = np.append(self.user_positions[user_idx], 0)  # 用户在地面
+            
+            for i in range(self.n_uavs):
+                if i != uav_idx:  # 排除目标UAV
+                    interferer_pos = self.uav_positions[i]
+                    # 使用精确的A2G路径损耗模型计算干扰
+                    interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
+                    interferer_power = self.tx_power - interferer_path_loss
+                    interference_powers.append(10 ** (interferer_power / 10))
+            
+            # 总干扰功率
+            total_interference = np.sum(interference_powers) if interference_powers else 0
+            total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
+            
+            # 噪声加干扰功率
+            noise_power_linear = 10 ** (self.noise_power / 10)
+            if total_interference_dbm != -float('inf'):
+                interference_plus_noise = noise_power_linear + total_interference
+                interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise)
+            else:
+                interference_plus_noise_dbm = self.noise_power
+            
+            sinr_db = rx_power - interference_plus_noise_dbm
+        
+        return sinr_db

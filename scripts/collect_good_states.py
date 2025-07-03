@@ -8,6 +8,7 @@ import torch
 import os
 import sys
 import argparse
+import logging
 from datetime import datetime
 import matplotlib.pyplot as plt
 
@@ -15,9 +16,9 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
-from logger import main_logger
+from logger import main_logger, init_multiproc_logging
 from config_1 import Config
-from manifold_hmasd.agent import ManifoldHMASDAgent
+from hmasd.agent import HMASDAgent
 
 # 导入强化学习模型相关库
 try:
@@ -182,13 +183,14 @@ class StateCollector:
         else:
             main_logger.info("未加载预训练模型，将使用启发式+随机策略")
         
-    def _get_mixed_actions(self, observations, current_positions):
+    def _get_mixed_actions(self, observations, current_positions, episode_step=0):
         """
         使用混合策略生成动作
         
         参数:
             observations: 环境观测
             current_positions: 当前无人机位置
+            episode_step: 当前episode中的步数
             
         返回:
             actions: 动作数组
@@ -201,7 +203,7 @@ class StateCollector:
             # 使用预训练模型
             try:
                 # 获取全局状态
-                global_state = self.env.get_global_state()
+                global_state = self.env._get_state()
                 
                 # 将观测转换为模型需要的格式
                 if isinstance(observations, dict):
@@ -216,13 +218,15 @@ class StateCollector:
                 else:
                     obs = observations
                 
-                # 使用ManifoldHMASD模型的step方法
-                # 参数: observations, global_state, env_id, episode_step
+                # 使用HMASD模型的step方法
+                # 参数: state, observations, ep_t, deterministic, env_id
+                # 设置deterministic=True来实现评估模式的效果
                 actions, _ = self.model.step(
+                    state=global_state,
                     observations=obs,
-                    global_state=global_state,
-                    env_id=0,  # 使用默认环境ID
-                    episode_step=0  # 使用默认步数
+                    ep_t=episode_step,
+                    deterministic=True,  # 使用确定性策略进行数据收集
+                    env_id=0  # 使用默认环境ID
                 )
                 
                 self.strategy_stats['model'] += 1
@@ -265,13 +269,13 @@ class StateCollector:
         
         for step in range(max_steps):
             # 获取当前全局状态
-            current_state = self.env.get_global_state()
+            current_state = self.env._get_state()
             
             # 获取当前无人机位置
             current_positions = self.env.uav_positions.copy()
             
             # 使用混合策略生成动作
-            actions, strategy_used = self._get_mixed_actions(observations, current_positions)
+            actions, strategy_used = self._get_mixed_actions(observations, current_positions, step)
             
             # 执行动作
             observations, rewards, dones, truncated, infos = self.env.step(actions)
@@ -448,24 +452,19 @@ class StateCollector:
         
         main_logger.info(f"统计图表已保存到 {plot_path}")
 
-def load_pretrained_model(model_path, vae_path, config):
+def load_pretrained_model(model_path, current_config):
     """
-    加载预训练的ManifoldHMASD模型
+    加载预训练的HMASD模型
     
     参数:
         model_path: 模型文件路径
-        vae_path: VAE模型路径
-        config: 配置对象
+        current_config: 当前环境的配置对象
         
     返回:
-        agent: ManifoldHMASDAgent实例，如果失败则返回None
+        agent: HMASDAgent实例，如果失败则返回None
     """
     if not os.path.exists(model_path):
         main_logger.warning(f"模型文件不存在: {model_path}")
-        return None
-    
-    if not os.path.exists(vae_path):
-        main_logger.warning(f"VAE模型文件不存在: {vae_path}")
         return None
     
     try:
@@ -474,21 +473,53 @@ def load_pretrained_model(model_path, vae_path, config):
         torch.serialization.add_safe_globals([Config])
         main_logger.debug("已将Config类添加到PyTorch安全全局列表")
         
-        # 创建ManifoldHMASD智能体实例
-        agent = ManifoldHMASDAgent(
-            config=config,
-            vae_model_path=vae_path,
+        # 首先加载检查点以获取原始配置
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        checkpoint = torch.load(model_path, map_location=device)
+        
+        if 'config' not in checkpoint:
+            main_logger.error("检查点文件中未找到配置信息")
+            return None
+        
+        # 获取原始训练时的配置
+        original_config = checkpoint['config']
+        main_logger.info(f"从检查点加载原始配置: use_opt={getattr(original_config, 'use_opt', False)}")
+        
+        # 创建一个混合配置：使用原始的网络架构配置，但更新环境维度
+        # 这确保网络结构与预训练模型完全匹配
+        hybrid_config = original_config
+        
+        # 更新当前环境的维度信息
+        hybrid_config.state_dim = current_config.state_dim
+        hybrid_config.obs_dim = current_config.obs_dim
+        hybrid_config.n_agents = current_config.n_agents
+        
+        main_logger.info(f"使用混合配置创建模型: "
+                        f"state_dim={hybrid_config.state_dim}, "
+                        f"obs_dim={hybrid_config.obs_dim}, "
+                        f"n_agents={hybrid_config.n_agents}, "
+                        f"use_opt={getattr(hybrid_config, 'use_opt', False)}")
+        
+        # 使用混合配置创建HMASD智能体实例
+        agent = HMASDAgent(
+            config=hybrid_config,
             log_dir='temp_collection_log',  # 临时日志目录
-            device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            device=device
         )
         
-        # 加载模型权重
+        # 加载模型权重（现在应该完全匹配）
         agent.load_model(model_path)
-        main_logger.info(f"成功加载ManifoldHMASD模型: {model_path}")
+        
+        # 注意：HMASD模型通过在step方法中设置deterministic=True来实现评估模式
+        # 不需要显式调用eval()方法，因为HMASDAgent类没有该方法
+        main_logger.info(f"成功加载HMASD模型: {model_path}")
+        main_logger.info("模型将在数据收集时使用确定性策略（deterministic=True）")
         return agent
         
     except Exception as e:
         main_logger.error(f"加载模型时发生错误: {e}")
+        import traceback
+        main_logger.error(f"详细错误信息: {traceback.format_exc()}")
         return None
 
 def main():
@@ -506,8 +537,6 @@ def main():
     # 混合策略相关参数
     parser.add_argument('--model_path', type=str, default='scripts/hmasd_multiproc_paper_config.pt', 
                        help='预训练模型路径')
-    parser.add_argument('--vae_path', type=str, default='models/vae/vae_model.pth', 
-                       help='VAE模型路径')
     parser.add_argument('--exploration_ratio', type=float, default=0.3, 
                        help='随机探索比例 (0.0-1.0)')
     parser.add_argument('--model_ratio', type=float, default=0.4, 
@@ -516,6 +545,22 @@ def main():
                        help='是否使用预训练模型（如果不指定，仅使用启发式+随机策略）')
     
     args = parser.parse_args()
+    
+    # 初始化日志记录器，生成带时间戳的日志文件
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_filename = f"collect_good_states_{timestamp}.log"
+    init_multiproc_logging(
+        log_dir='logs',
+        log_file=log_filename,
+        file_level=logging.INFO,
+        console_level=logging.INFO
+    )
+    
+    main_logger.info("=" * 60)
+    main_logger.info("开始运行状态收集脚本")
+    main_logger.info(f"日志文件: logs/{log_filename}")
+    main_logger.info(f"运行参数: {vars(args)}")
+    main_logger.info("=" * 60)
     
     # 验证参数
     if args.exploration_ratio + args.model_ratio > 1.0:
@@ -530,14 +575,29 @@ def main():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     save_dir = f"{args.save_dir}_{timestamp}"
     
-    # 创建环境
+    # 创建环境 - 使用与train_multiproc_config_1.py完全一致的参数
+    # 根据train_multiproc_config_1.py中make_env函数的场景4配置
     env = UAVForcedRelayEnv(
         n_uavs=args.n_uavs,
         n_users=args.n_users,
-        area_size=args.area_size,
-        max_steps=1500,
+        user_distribution='forced_relay_cluster',  # 场景4强制使用此分布
+        channel_model='probabilistic',  # 使用默认信道模型
         render_mode='human' if args.render else None,
-        seed=args.seed
+        seed=args.seed,
+        use_fdma=True,  # 默认启用FDMA
+        bandwidth=20e6,  # 默认带宽
+        # 场景4特有参数 - 使用train_multiproc_config_1.py中的默认值
+        max_hops=4,
+        area_size=2500,
+        n_clusters=4,
+        cluster_std=80,
+        central_area_ratio=0.6,
+        min_sinr=3,
+        max_connections=25,
+        coverage_weight=0.8,
+        connectivity_weight=0.15,
+        efficiency_weight=0.05,
+        max_steps=1500
     )
     
     # 初始化环境以获取位置信息和维度
@@ -547,22 +607,13 @@ def main():
     config = Config()
     config.n_agents = args.n_uavs
     
-    # 获取环境维度
-    state_dim = env.get_global_state().shape[0]
+    # 在环境reset后获取真实的维度
+    # state_dim 通过调用内部方法获取
+    state_dim = env._get_state().shape[0]
     
-    # 正确获取观测维度
-    if isinstance(observations, dict):
-        # 获取第一个智能体的观测
-        first_agent_obs = observations[list(observations.keys())[0]]
-        if isinstance(first_agent_obs, dict) and "obs" in first_agent_obs:
-            # 如果观测是字典格式，提取实际的观测数组
-            obs_dim = first_agent_obs["obs"].shape[0]
-        else:
-            # 如果观测直接是数组
-            obs_dim = first_agent_obs.shape[0]
-    else:
-        # 如果observations不是字典，直接获取第一个元素的维度
-        obs_dim = observations[0].shape[0]
+    # obs_dim 从返回的Dict观测空间中获取
+    first_agent = env.possible_agents[0]
+    obs_dim = env.get_obs_dim()
     
     # 更新配置
     config.update_env_dims(state_dim, obs_dim)
@@ -570,7 +621,7 @@ def main():
     # 加载预训练模型（如果指定）
     model = None
     if args.use_model:
-        model = load_pretrained_model(args.model_path, args.vae_path, config)
+        model = load_pretrained_model(args.model_path, config)
         if model is None:
             main_logger.warning("模型加载失败，将仅使用启发式+随机策略")
             args.model_ratio = 0.0  # 设置模型比例为0
@@ -581,7 +632,7 @@ def main():
     # 创建启发式控制器
     controller = HeuristicController(
         n_uavs=args.n_uavs,
-        area_size=args.area_size,
+        area_size=2500,  # 使用与环境一致的area_size
         user_positions=env.user_positions,
         ground_bs_positions=env.ground_bs_positions
     )
@@ -614,8 +665,8 @@ def main():
         'summary': summary,
         'save_info': save_info,
         'env_info': {
-            'state_dim': env.get_global_state().shape[0],
-            'obs_dim': obs_dim,  # 使用之前计算好的obs_dim
+            'state_dim': state_dim,
+            'obs_dim': obs_dim,
             'action_dim': 3,
             'n_uavs': args.n_uavs,
             'n_users': args.n_users,
