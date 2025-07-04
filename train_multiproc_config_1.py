@@ -848,10 +848,10 @@ def parse_args():
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
     parser.add_argument('--n_users', type=int, default=50, help='用户数量 ')
-    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 场景3默认3000)')
-    parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2和3使用)')
+    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米)')
+    parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2, 3, 4使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
-                        choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
+                        choices=['uniform', 'cluster', 'hotspot', 'multi_cluster', 'forced_relay_cluster'], help='用户分布类型')
     parser.add_argument('--channel_model', type=str, default='probabilistic',
                         choices=['free_space', 'urban', 'suburban','3gpp-36777', 'probabilistic'], help='信道模型')
     
@@ -860,10 +860,10 @@ def parse_args():
                         help='理想FDMA,0干扰 (默认: --use-fdma, 使用 --no-use-fdma 禁用)')
     parser.add_argument('--bandwidth', type=float, default=20e6, help='每个无人机的带宽 (Hz)。默认: 20e6')
     
-    # 场景3特有参数
-    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
-    parser.add_argument('--cluster_std', type=int, default=100, help='簇内用户分布标准差 (米, 仅用于场景3)')
-    parser.add_argument('--central_area_ratio', type=float, default=0.6, help='中心用户区域占总区域的比例 (仅用于场景3)')
+    # 场景3和4共用参数
+    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (场景3和4使用)')
+    parser.add_argument('--cluster_std', type=int, default=100, help='簇内用户分布标准差 (米, 场景3和4使用)')
+    parser.add_argument('--central_area_ratio', type=float, default=0.6, help='中心用户区域占总区域的比例 (场景3和4使用)')
 
     # 场景4特有参数
     parser.add_argument('--min_sinr', type=float, default=3, help='最小信噪比 (仅用于场景4)')
