@@ -806,6 +806,8 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                 'coverage_weight': kwargs.get('coverage_weight'),
                 'connectivity_weight': kwargs.get('connectivity_weight'),
                 'efficiency_weight': kwargs.get('efficiency_weight'),
+                'uav_init_mode': kwargs.get('uav_init_mode'),
+                'uav_start_area_size': kwargs.get('uav_start_area_size'),
             }
             
             # 过滤掉值为None的参数，以便环境使用其内部默认值
@@ -871,6 +873,11 @@ def parse_args():
     parser.add_argument('--coverage_weight', type=float, default=0.8, help='覆盖率奖励权重 (仅用于场景4)')
     parser.add_argument('--connectivity_weight', type=float, default=0.15, help='连通性奖励权重 (仅用于场景4)')
     parser.add_argument('--efficiency_weight', type=float, default=0.05, help='效率奖励权重 (仅用于场景4)')
+    
+    # 场景4无人机初始化参数
+    parser.add_argument('--uav_init_mode', type=str, default='start_area', 
+                        choices=['random', 'start_area'], help='无人机初始化模式 (仅用于场景4): random=随机分布, start_area=起始区域均匀分布')
+    parser.add_argument('--uav_start_area_size', type=int, default=500, help='起始区域大小（米），仅在uav_init_mode=start_area时使用 (仅用于场景4)')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=0, 
@@ -1772,7 +1779,9 @@ def main():
         max_connections=args.max_connections,
         coverage_weight=args.coverage_weight,
         connectivity_weight=args.connectivity_weight,
-        efficiency_weight=args.efficiency_weight
+        efficiency_weight=args.efficiency_weight,
+        uav_init_mode=args.uav_init_mode,
+        uav_start_area_size=args.uav_start_area_size
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
@@ -1797,7 +1806,9 @@ def main():
         max_connections=args.max_connections,
         coverage_weight=args.coverage_weight,
         connectivity_weight=args.connectivity_weight,
-        efficiency_weight=args.efficiency_weight
+        efficiency_weight=args.efficiency_weight,
+        uav_init_mode=args.uav_init_mode,
+        uav_start_area_size=args.uav_start_area_size
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -1824,7 +1835,9 @@ def main():
         max_connections=args.max_connections,
         coverage_weight=args.coverage_weight,
         connectivity_weight=args.connectivity_weight,
-        efficiency_weight=args.efficiency_weight
+        efficiency_weight=args.efficiency_weight,
+        uav_init_mode=args.uav_init_mode,
+        uav_start_area_size=args.uav_start_area_size
     )
     temp_env = temp_env_fn()
     

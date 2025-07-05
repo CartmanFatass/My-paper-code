@@ -1,8 +1,9 @@
 import numpy as np
 import heapq
-from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
+from pettingzoo import ParallelEnv
+from gymnasium.spaces import Box, Dict
 
-class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
+class UAVForcedRelayEnv(ParallelEnv):
     """
     场景4：强制多跳中继无人机环境
     
@@ -14,6 +15,12 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
     - 所有无人机地位平等，通过算法自主选择行为
     """
     
+    metadata = {
+        "render_modes": ["human", "rgb_array"],
+        "name": "uav_forced_relay_env_v0",
+        "is_parallelizable": True,
+    }
+
     def __init__(
         self,
         n_uavs=12,
@@ -27,94 +34,98 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         channel_model="probabilistic",
         render_mode=None,
         seed=None,
-        min_sinr=3,  # 降低SINR门槛便于建立连接
-        max_connections=25,  # 增加连接数上限
-        max_hops=4,  # 允许最多4跳
-        coverage_weight=0.8,  # 覆盖率权重80%
-        connectivity_weight=0.15,  # 网络连通性权重15%
-        efficiency_weight=0.05,  # 路径效率权重5%
-        n_ground_bs=2,  # 2个地面基站
-        n_clusters=4,  # 4个用户簇
-        cluster_std=80,  # 簇内用户分布标准差（米）
-        central_area_ratio=0.6,  # 中心用户区域占总区域的比例
-        base_station_distance_factor=0.8,  # 基站距离因子
-        uav_communication_range=600,  # 无人机通信范围
-        max_observed_uavs=15,  # 最大观测无人机数量
-        max_observed_users=25,  # 最大观测用户数量
-        use_shadowing=False,  # 是否启用阴影衰落（默认关闭）
-        paper_reward=False,  # 是否使用论文中的奖励函数
-        use_fdma=True,  # 是否启用FDMA频分多址
-        bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
-        ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
+        min_sinr=3,
+        max_connections=25,
+        max_hops=4,
+        coverage_weight=0.8,
+        connectivity_weight=0.15,
+        efficiency_weight=0.05,
+        n_ground_bs=2,
+        n_clusters=4,
+        cluster_std=80,
+        central_area_ratio=0.6,
+        base_station_distance_factor=0.8,
+        uav_communication_range=600,
+        max_observed_uavs=15,
+        max_observed_users=25,
+        use_shadowing=False,
+        paper_reward=False,
+        use_fdma=True,
+        bandwidth=20e6,
+        ground_bs_tx_power=30,
+        uav_init_mode="random",
+        uav_start_area_size=500,
     ):
-        """
-        初始化UAV强制中继环境
-        
-        参数:
-            n_uavs: 无人机数量（推荐12架）
-            n_users: 用户数量（推荐80个）
-            area_size: 区域大小 (m)（推荐2500m）
-            height_range: 无人机高度范围 (m)
-            max_speed: 最大速度 (m/s)
-            time_step: 时间步长 (s)
-            max_steps: 最大步数
-            user_distribution: 用户分布类型
-            channel_model: 信道模型
-            render_mode: 渲染模式
-            seed: 随机种子
-            min_sinr: 最小SINR阈值 (dB)
-            max_connections: 每个无人机最大连接数
-            max_hops: 最大跳数
-            coverage_weight: 覆盖率权重
-            connectivity_weight: 网络连通性权重
-            efficiency_weight: 路径效率权重
-            n_ground_bs: 地面基站数量
-            n_clusters: 用户簇数量
-            cluster_std: 簇内用户分布标准差（米）
-            central_area_ratio: 中心用户区域占总区域的比例
-            base_station_distance_factor: 基站距离因子
-            uav_communication_range: 无人机通信范围
-        """
-        # 保存场景4特有的参数
+        super().__init__()
+
+        # 环境参数
+        self.n_uavs = n_uavs
+        self.n_users = n_users
+        self.area_size = area_size
+        self.height_range = height_range
+        self.max_speed = max_speed
+        self.time_step = time_step
+        self.max_steps = max_steps
+        self.user_distribution = user_distribution
+        self.channel_model = channel_model
+        self.render_mode = render_mode
+        self.seed_val = seed
+        self.np_random = np.random.RandomState(seed)
+
+        # 场景特定参数
         self.n_clusters = n_clusters
         self.cluster_std = cluster_std
         self.central_area_ratio = central_area_ratio
         self.base_station_distance_factor = base_station_distance_factor
         self.uav_communication_range = uav_communication_range
-        
-        # 保存奖励权重
+        self.uav_init_mode = uav_init_mode
+        self.uav_start_area_size = uav_start_area_size
         self.coverage_weight = coverage_weight
         self.connectivity_weight = connectivity_weight
         self.efficiency_weight = efficiency_weight
+        self.n_ground_bs = n_ground_bs
+        self.max_hops = max_hops
+        self.min_sinr = min_sinr
+        self.max_connections = max_connections
         
-        # 调用父类初始化
-        super().__init__(
-            n_uavs=n_uavs,
-            n_users=n_users,
-            area_size=area_size,
-            height_range=height_range,
-            max_speed=max_speed,
-            time_step=time_step,
-            max_steps=max_steps,
-            user_distribution=user_distribution,
-            channel_model=channel_model,
-            render_mode=render_mode,
-            seed=seed,
-            min_sinr=min_sinr,
-            max_connections=max_connections,
-            max_hops=max_hops,
-            n_ground_bs=n_ground_bs,
-            max_observed_uavs=max_observed_uavs,
-            max_observed_users=max_observed_users,
-            use_shadowing=use_shadowing,
-            paper_reward=paper_reward,
-            use_fdma=use_fdma,
-            bandwidth=bandwidth,
-            ground_bs_tx_power=ground_bs_tx_power,
-        )
+        # 通信参数
+        self.carrier_frequency = 2e9
+        self.tx_power = 23
+        self.noise_power = -80
+        self.use_shadowing = use_shadowing
+        self.paper_reward = paper_reward
+        self.use_fdma = use_fdma
+        self.bandwidth = bandwidth
+        self.ground_bs_tx_power = ground_bs_tx_power
+
+        # 局部观测参数
+        self.max_observed_uavs = max_observed_uavs
+        self.max_observed_users = max_observed_users
+
+        # 智能体列表
+        self.possible_agents = [f"uav_{i}" for i in range(n_uavs)]
+        self.agents = self.possible_agents.copy()
+
+        # 观测和动作空间
+        self.obs_dim = 3 + max_observed_users * 3 + max_observed_uavs * 4 + 1 + self.n_ground_bs + 1
+        self.observation_spaces = {
+            agent: Dict({
+                "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
+                "action_mask": Box(low=0, high=1, shape=(3,))
+            }) for agent in self.possible_agents
+        }
+        self.action_spaces = {
+            agent: Box(low=-1, high=1, shape=(3,))
+            for agent in self.possible_agents
+        }
+
+        # 初始化地面基站
+        self._init_ground_bs()
         
-        # 场景名称
-        self.metadata["name"] = "uav_forced_relay_env_v0"
+        # 渲染相关
+        self.viewer = None
+        self.fig = None
+        self.ax = None
         
         # 重新计算并设置场景4的状态维度
         # 1. 无人机位置: n_uavs * 3
@@ -137,7 +148,15 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         
         # 重新设置state_dim
         self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + step_dim
+
+    def get_state_dim(self):
+        """返回全局状态维度"""
+        return self.state_dim
     
+    def get_obs_dim(self):
+        """返回观测维度"""
+        return self.obs_dim
+
     def _compute_path_loss(self, uav_pos, user_pos):
         """
         重写父类的路径损耗计算方法，使用精确的A2G模型
@@ -225,16 +244,24 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
     
     def _generate_user_positions(self):
         """
-        生成针对强制中继优化的用户分布
+        生成用户位置
         
         返回:
             user_positions: 用户位置 [n_users, 2]
         """
         if self.user_distribution == "forced_relay_cluster":
             return self._generate_forced_relay_cluster_positions()
+        elif self.user_distribution == "uniform":
+            user_positions = np.zeros((self.n_users, 2))
+            for i in range(self.n_users):
+                user_positions[i] = [
+                    self.np_random.uniform(0, self.area_size),
+                    self.np_random.uniform(0, self.area_size)
+                ]
+            return user_positions
         else:
-            # 如果指定了其他分布类型，调用父类方法
-            return super()._generate_user_positions()
+            # 默认或未指定时，也使用强制中继的簇分布
+            return self._generate_forced_relay_cluster_positions()
     
     def _generate_forced_relay_cluster_positions(self):
         """
@@ -329,6 +356,91 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
                 user_idx += 1
         
         return user_positions
+    
+    def _init_uav_positions(self):
+        """
+        初始化无人机位置 - 支持多种初始化模式
+        
+        模式：
+        - 'random': 在整个区域内随机分布（默认行为）
+        - 'start_area': 在指定的起始区域内均匀分布
+        
+        返回:
+            uav_positions: 无人机位置 [n_uavs, 3]
+        """
+        if self.uav_init_mode == "start_area":
+            return self._init_uav_positions_start_area()
+        else:
+            # 'random' 模式：在整个区域内随机分布
+            uav_positions = np.zeros((self.n_uavs, 3))
+            for i in range(self.n_uavs):
+                uav_positions[i] = [
+                    self.np_random.uniform(0, self.area_size),
+                    self.np_random.uniform(0, self.area_size),
+                    self.np_random.uniform(*self.height_range)
+                ]
+            return uav_positions
+    
+    def _init_uav_positions_start_area(self):
+        """
+        在指定的起始区域内均匀分布无人机
+        
+        特点：
+        - 无人机在地图边缘的一个正方形区域内均匀分布
+        - 区域大小由 uav_start_area_size 参数控制
+        - 高度在指定范围内随机分布
+        
+        返回:
+            uav_positions: 无人机位置 [n_uavs, 3]
+        """
+        uav_positions = np.zeros((self.n_uavs, 3))
+        
+        # 将起始区域设置在地图边缘（左下角）
+        margin = 50  # 距离边界的最小距离
+        
+        # 确保起始区域不超出地图边界
+        max_start_area_size = min(self.uav_start_area_size, self.area_size - 2 * margin)
+        
+        start_area_min = margin
+        start_area_max = margin + max_start_area_size
+        
+        # 计算网格布局参数
+        grid_size = int(np.ceil(np.sqrt(self.n_uavs)))
+        
+        # 在起始区域内创建网格布局
+        uav_idx = 0
+        for i in range(grid_size):
+            for j in range(grid_size):
+                if uav_idx >= self.n_uavs:
+                    break
+                
+                # 计算网格位置（均匀分布）
+                if grid_size == 1:
+                    # 如果只有一个无人机，放在起始区域中心
+                    x = (start_area_min + start_area_max) / 2
+                    y = (start_area_min + start_area_max) / 2
+                else:
+                    # 多个无人机时，在网格中均匀分布
+                    x = start_area_min + (start_area_max - start_area_min) * (i + 0.5) / grid_size
+                    y = start_area_min + (start_area_max - start_area_min) * (j + 0.5) / grid_size
+                
+                # 添加小的随机偏移以避免完全重叠
+                x_offset = self.np_random.uniform(-20, 20)  # ±20米随机偏移
+                y_offset = self.np_random.uniform(-20, 20)
+                
+                x = np.clip(x + x_offset, 10, self.area_size - 10)
+                y = np.clip(y + y_offset, 10, self.area_size - 10)
+                
+                # 随机高度
+                z = self.np_random.uniform(self.height_range[0], self.height_range[1])
+                
+                uav_positions[uav_idx] = [x, y, z]
+                uav_idx += 1
+                
+            if uav_idx >= self.n_uavs:
+                break
+        
+        return uav_positions
     
     def _compute_reward(self):
         """
@@ -437,6 +549,18 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         
         return final_reward
     
+    def render(self):
+        """
+        渲染环境
+        
+        返回:
+            frame: 渲染帧
+        """
+        if self.render_mode is None:
+            return
+        
+        return self._render_frame()
+
     def _render_frame(self):
         """渲染单帧 - 添加强制中继特定的可视化元素"""
         try:
@@ -447,25 +571,60 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
             print("渲染需要matplotlib库")
             return None
         
-        # 调用父类的渲染方法
-        frame = super()._render_frame()
+        if self.fig is None:
+            self.fig = plt.figure(figsize=(10, 8))
+            self.ax = self.fig.add_subplot(111, projection='3d')
+        else:
+            self.ax.clear()
+
+        # 设置坐标轴
+        self.ax.set_xlim(0, self.area_size)
+        self.ax.set_ylim(0, self.area_size)
+        self.ax.set_zlim(0, self.height_range[1] * 1.2)
+        self.ax.set_xlabel('X (m)')
+        self.ax.set_ylabel('Y (m)')
+        self.ax.set_zlabel('Z (m)')
+        self.ax.set_title(f'Forced Relay UAV Environment - Step: {self.current_step}/{self.max_steps}')
+
+        # 绘制用户
+        if self.user_positions is not None:
+            user_x = self.user_positions[:, 0]
+            user_y = self.user_positions[:, 1]
+            user_z = np.zeros(self.n_users)
+            self.ax.scatter(user_x, user_y, user_z, c='blue', marker='.', label='Users')
+
+        # 绘制无人机和连接
+        if self.uav_positions is not None:
+            for i in range(self.n_uavs):
+                uav_pos = self.uav_positions[i]
+                self.ax.scatter(uav_pos[0], uav_pos[1], uav_pos[2], c='red', marker='^', s=100, label=f'UAV {i}' if i == 0 else "")
+                
+                # 绘制到用户的连接
+                if self.connections is not None:
+                    for j in range(self.n_users):
+                        if self.connections[i, j]:
+                            user_pos = self.user_positions[j]
+                            self.ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], [uav_pos[2], 0], 'g-', alpha=0.3)
         
-        # 添加用户簇的可视化
-        if hasattr(self, 'user_positions'):
-            # 绘制用户簇的边界（半透明圆圈）
-            cluster_centers = self._get_cluster_centers()
-            
-            for center in cluster_centers:
-                # 在地面绘制簇的范围
-                circle = Circle(
-                    (center[0], center[1]), 
-                    self.cluster_std * 2,  # 2倍标准差作为可视化半径
-                    fill=False, 
-                    edgecolor='lightblue', 
-                    alpha=0.4, 
-                    linestyle='--'
-                )
-                # 注意：3D绘图中需要特殊处理2D圆圈
+        # 绘制地面基站
+        if self.ground_bs_positions is not None:
+            bs_x = self.ground_bs_positions[:, 0]
+            bs_y = self.ground_bs_positions[:, 1]
+            bs_z = self.ground_bs_positions[:, 2]
+            self.ax.scatter(bs_x, bs_y, bs_z, c='black', marker='s', s=120, label='Ground BS')
+
+        # 绘制路由路径
+        if hasattr(self, 'routing_paths'):
+            for uav_idx, path in self.routing_paths.items():
+                for i in range(len(path) - 1):
+                    pos1 = self._get_node_pos(path[i])
+                    pos2 = self._get_node_pos(path[i+1])
+                    self.ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], [pos1[2], pos2[2]], 'y--', alpha=0.7, linewidth=1.5)
+        
+        # 添加图例
+        handles, labels = self.ax.get_legend_handles_labels()
+        by_label = dict(zip(labels, handles))
+        self.ax.legend(by_label.values(), by_label.keys(), loc='upper right')
         
         # 添加强制中继统计信息
         if hasattr(self, 'reward_info'):
@@ -501,7 +660,15 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
         
         self.fig.canvas.draw()
         
-        return frame
+        if self.render_mode == "human":
+            plt.pause(0.01)
+            return None
+        
+        from matplotlib.backends.backend_agg import FigureCanvasAgg
+        canvas = FigureCanvasAgg(self.fig)
+        canvas.draw()
+        image = np.array(canvas.renderer.buffer_rgba())
+        return image
     
     def _get_cluster_centers(self):
         """
@@ -544,23 +711,158 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
             observations: 所有智能体的观测字典
             infos: 所有智能体的信息字典
         """
-        # 调用父类的 reset 来完成大部分初始化工作
-        observations, infos = super().reset(seed=seed, options=options)
+        # 1. 重置随机种子和基本环境状态
+        if seed is not None:
+            self.seed_val = seed
+            self.np_random = np.random.RandomState(seed)
         
-        # 关键：用当前类的方法重新计算 state，并更新 infos 字典
-        # 父类的 reset 可能没有设置 state，我们在这里设置正确的 state
+        self.current_step = 0
+        self.agents = self.possible_agents.copy()
+        
+        # 2. 使用本类的方法初始化UAV和用户位置
+        self.uav_positions = self._init_uav_positions()
+        self.user_positions = self._generate_user_positions()
+        
+        # 3. 初始化连接和路由信息
+        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
+        self.sinr_matrix = np.zeros((self.n_uavs, self.n_users))
+        self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)
+        self.uav_bs_connections = np.zeros((self.n_uavs, self.n_ground_bs), dtype=bool)
+        self.routing_paths = {}
+        
+        # 4. 更新信道状态、连接和路由
+        self._update_channel_state()  # 从父类继承
+        self._update_uav_connections() # 从父类继承
+        self._compute_routing_paths()  # 使用本类的路由计算
+        
+        # 5. 获取观测值
+        observations = {}
+        infos = {}
+        for agent in self.agents:
+            # 注意：这里需要调用父类的_get_observation和_update_observations_dict
+            # 为了简化，我们先获取基础观测，再在循环外统一更新
+            observations[agent] = self._get_observation(agent)
+            infos[agent] = {}
+            
+        # 6. 更新包含连接和跳数信息的观测
+        observations = self._update_observations_dict(observations)
+        
+        # 7. 计算并设置正确的全局状态
         current_state = self._get_state()
-        self.state = current_state  # 更新内部状态
+        self.state = current_state
         
-        # 为每个智能体的 info 添加正确的 state
+        # 为每个智能体的info添加正确的state
         for agent in self.agents:
             infos[agent]['state'] = current_state.copy()
-        
+            
         return observations, infos
+
+    def _compute_sinr(self, uav_idx, user_idx):
+        """
+        重写父类方法，使用场景4的精确信道模型计算SINR
+        """
+        uav_pos = self.uav_positions[uav_idx]
+        user_pos_3d = np.append(self.user_positions[user_idx], 0)
+        
+        # 使用精确的A2G路径损耗模型
+        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+        
+        # 计算接收功率
+        rx_power = self.tx_power - path_loss
+        
+        # 使用精确的UAV-User SINR计算
+        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+        
+        return sinr_db
+
+    def _update_channel_state(self):
+        """
+        重写父类方法，确保使用场景4的精确SINR计算
+        """
+        # 计算所有UAV-用户对的SINR
+        for i in range(self.n_uavs):
+            for j in range(self.n_users):
+                self.sinr_matrix[i, j] = self._compute_sinr(i, j)
+        
+        # 更新连接（贪婪算法）
+        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
+        
+        # 按SINR降序排列所有UAV-用户对
+        uav_user_pairs = []
+        for i in range(self.n_uavs):
+            for j in range(self.n_users):
+                if self.sinr_matrix[i, j] >= self.min_sinr:
+                    uav_user_pairs.append((i, j, self.sinr_matrix[i, j]))
+        
+        # 按SINR降序排序
+        uav_user_pairs.sort(key=lambda x: x[2], reverse=True)
+        
+        # 分配连接
+        uav_connections = [0] * self.n_uavs
+        user_connected = [False] * self.n_users
+        
+        for uav_idx, user_idx, sinr in uav_user_pairs:
+            # 如果UAV未达到最大连接数且用户未连接
+            if uav_connections[uav_idx] < self.max_connections and not user_connected[user_idx]:
+                self.connections[uav_idx, user_idx] = True
+                uav_connections[uav_idx] += 1
+                user_connected[user_idx] = True
+
+    def _compute_uav_to_uav_sinr(self, sender_idx, receiver_idx):
+        """
+        使用场景4的精确信道模型计算UAV到UAV的SINR
+        """
+        sender_pos = self.uav_positions[sender_idx]
+        receiver_pos = self.uav_positions[receiver_idx]
+        
+        # 使用精确的A2A路径损耗模型
+        path_loss = self._compute_air_to_air_path_loss(sender_pos, receiver_pos)
+        
+        # 计算接收功率
+        rx_power = self.tx_power - path_loss
+        
+        # 使用精确的链路SINR计算（考虑干扰）
+        sinr_db = self._compute_link_sinr("uav", sender_idx, "uav", receiver_idx, rx_power)
+        
+        return sinr_db
+
+    def _update_uav_connections(self):
+        """
+        重写父类方法，确保使用场景4的精确信道模型更新UAV间和UAV到基站的连接
+        """
+        # 更新UAV之间的连接
+        for i in range(self.n_uavs):
+            for j in range(i + 1, self.n_uavs):
+                # 使用本类的精确SINR计算
+                sinr_ij = self._compute_uav_to_uav_sinr(i, j)
+                sinr_ji = self._compute_uav_to_uav_sinr(j, i)
+                
+                # 双向连接需要两个方向的SINR都满足阈值
+                if sinr_ij >= self.min_sinr and sinr_ji >= self.min_sinr:
+                    self.uav_connections[i, j] = True
+                    self.uav_connections[j, i] = True
+                else:
+                    self.uav_connections[i, j] = False
+                    self.uav_connections[j, i] = False
+        
+        # 更新UAV到地面基站的连接
+        for i in range(self.n_uavs):
+            for j in range(self.n_ground_bs):
+                # 使用精确的链路容量计算，如果容量大于0，则认为可连接
+                # G2A方向（下行）
+                capacity_g2a = self._get_link_capacity("ground_bs", j, "uav", i)
+                # A2G方向（上行）
+                capacity_a2g = self._get_link_capacity("uav", i, "ground_bs", j)
+                
+                # 需要双向都能通信才算建立连接
+                if capacity_g2a > 0 and capacity_a2g > 0:
+                    self.uav_bs_connections[i, j] = True
+                else:
+                    self.uav_bs_connections[i, j] = False
     
     def step(self, actions):
         """
-        执行环境步骤 - 确保使用场景4特定的全局状态
+        执行环境步骤 - 确保使用场景4特定的全局状态和信道模型
         
         参数:
             actions: 所有智能体的动作字典 {agent_id: action}
@@ -572,18 +874,228 @@ class UAVForcedRelayEnv(UAVCooperativeNetworkEnv):
             truncations: 所有智能体的截断状态字典
             infos: 所有智能体的信息字典
         """
-        # 调用父类的 step 来执行动作并获取基本返回
-        observations, rewards, terminations, truncations, infos = super().step(actions)
+        # 1. 更新所有无人机位置
+        for agent_idx, agent in enumerate(self.agents):
+            if agent in actions:
+                velocity = actions[agent] * self.max_speed
+                new_position = self.uav_positions[agent_idx] + velocity * self.time_step
+                
+                # 边界检查
+                new_position[0] = np.clip(new_position[0], 0, self.area_size)
+                new_position[1] = np.clip(new_position[1], 0, self.area_size)
+                new_position[2] = np.clip(new_position[2], *self.height_range)
+                self.uav_positions[agent_idx] = new_position
         
-        # 关键：用当前类的方法重新计算 next_state，并更新 info 字典
+        # 2. 使用本类的方法更新信道状态、连接和路由
+        self._update_channel_state()
+        self._update_uav_connections()
+        self._compute_routing_paths()
+        
+        # 3. 使用本类的方法计算奖励
+        global_reward = self._compute_reward()
+        
+        # 4. 更新步数和完成状态
+        self.current_step += 1
+        done = self.current_step >= self.max_steps
+        
+        # 5. 准备返回值
+        observations = {}
+        rewards = {}
+        terminations = {}
+        truncations = {}
+        infos = {}
+        
+        # 6. 获取新的观测和填充返回值
+        for agent_idx, agent in enumerate(self.agents):
+            observations[agent] = self._get_observation(agent)
+            rewards[agent] = global_reward / self.n_uavs  # 平均分配奖励
+            terminations[agent] = done
+            truncations[agent] = False
+            infos[agent] = {
+                "reward_info": self.reward_info.copy(),
+                "coverage_ratio": self.reward_info.get("coverage_ratio", 0),
+                "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
+            }
+        
+        # 7. 更新观测值（在循环外一次性完成）
+        observations = self._update_observations_dict(observations)
+
+        # 8. 计算并添加 next_state 到 infos
         next_state = self._get_state()
-        self.state = next_state  # 更新内部状态以备下一步使用
-        
-        # 为每个智能体的 info 添加正确的 next_state
+        self.state = next_state
         for agent in self.agents:
             infos[agent]['next_state'] = next_state.copy()
-        
+            
         return observations, rewards, terminations, truncations, infos
+
+    def observation_space(self, agent):
+        return self.observation_spaces[agent]
+
+    def action_space(self, agent):
+        return self.action_spaces[agent]
+
+    def close(self):
+        if self.fig is not None:
+            import matplotlib.pyplot as plt
+            plt.close(self.fig)
+            self.fig = None
+            self.ax = None
+
+    def _get_node_pos(self, node):
+        node_type, node_idx = node
+        if node_type == "uav":
+            return self.uav_positions[node_idx]
+        elif node_type == "ground_bs":
+            return self.ground_bs_positions[node_idx]
+        return None
+
+    def _compute_distance(self, pos1, pos2):
+        return np.sqrt(np.sum((pos1 - pos2) ** 2))
+
+    def _update_observations_dict(self, observations_dict):
+        updated_observations_dict = {}
+        for i, agent in enumerate(self.agents):
+            obs_dict = observations_dict[agent]
+            obs = obs_dict["obs"]
+            
+            bs_connections = self.uav_bs_connections[i]
+            
+            if i in self.routing_paths:
+                hop_count = len(self.routing_paths[i])
+                normalized_hop = min(hop_count / self.max_hops, 1.0)
+            else:
+                normalized_hop = 1.0
+            
+            new_obs = np.concatenate([obs, bs_connections, [normalized_hop]])
+            
+            updated_obs_dict = {
+                "obs": new_obs,
+                "action_mask": obs_dict["action_mask"]
+            }
+            updated_observations_dict[agent] = updated_obs_dict
+        
+        return updated_observations_dict
+
+    def _get_observation(self, agent):
+        """
+        获取指定智能体基于通信能力的局部观测
+        
+        参数:
+            agent: 智能体ID
+            
+        返回:
+            observation: 智能体的观测
+        """
+        agent_idx = int(agent.split("_")[1])
+        own_position = self.uav_positions[agent_idx]
+        
+        # 初始化观测向量
+        obs_components = []
+        
+        # 1. 自身位置 (3维) - 归一化到[0,1]范围
+        normalized_position = own_position.copy()
+        normalized_position[:2] /= self.area_size
+        normalized_position[2] = (own_position[2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])
+        obs_components.append(normalized_position)
+        
+        # 2. 局部用户观测 (max_observed_users * 3维)
+        local_users = self._get_local_users(agent_idx)
+        user_obs = np.zeros(self.max_observed_users * 3)
+        
+        for i, (user_idx, sinr_db) in enumerate(local_users):
+            if i >= self.max_observed_users:
+                break
+            
+            user_pos = self.user_positions[user_idx]
+            # 相对位置 (x, y) - 归一化
+            relative_pos = (user_pos - own_position[:2]) / self.area_size
+            # 归一化SINR到[0,1]范围 (假设SINR范围为-10dB到40dB)
+            normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
+            
+            start_idx = i * 3
+            user_obs[start_idx:start_idx+3] = [relative_pos[0], relative_pos[1], normalized_sinr]
+        
+        obs_components.append(user_obs)
+        
+        # 3. 局部无人机观测 (max_observed_uavs * 4维)
+        local_uavs = self._get_local_uavs(agent_idx)
+        uav_obs = np.zeros(self.max_observed_uavs * 4)
+        
+        for i, (uav_idx, sinr_db) in enumerate(local_uavs):
+            if i >= self.max_observed_uavs:
+                break
+            
+            other_uav_pos = self.uav_positions[uav_idx]
+            # 相对位置 (x, y, z) - 归一化
+            relative_pos = other_uav_pos - own_position
+            relative_pos[:2] = relative_pos[:2] / self.area_size
+            relative_pos[2] = (relative_pos[2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])
+            # 归一化SINR到[0,1]范围
+            normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
+            
+            start_idx = i * 4
+            uav_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], relative_pos[2], normalized_sinr]
+        
+        obs_components.append(uav_obs)
+        
+        # 4. 当前步数 (1维)
+        step_normalized = np.array([self.current_step / self.max_steps])
+        obs_components.append(step_normalized)
+        
+        # 组合所有观测
+        obs = np.concatenate(obs_components)
+        
+        # 动作掩码（这里我们不限制动作，所以全为1）
+        action_mask = np.ones(3)
+        
+        return {"obs": obs, "action_mask": action_mask}
+
+    def _get_local_users(self, agent_idx):
+        """
+        获取指定无人机可通信的用户列表（基于SINR阈值）
+        
+        参数:
+            agent_idx: 无人机索引
+            
+        返回:
+            local_users: 按SINR降序排序的(用户索引, SINR)元组列表
+        """
+        local_users = []
+        
+        for user_idx in range(self.n_users):
+            # 使用本类重写的_compute_sinr
+            sinr_db = self._compute_sinr(agent_idx, user_idx)
+            
+            if sinr_db >= self.min_sinr:
+                local_users.append((user_idx, sinr_db))
+        
+        local_users.sort(key=lambda x: x[1], reverse=True)
+        return local_users
+
+    def _get_local_uavs(self, agent_idx):
+        """
+        获取指定无人机可通信的其他无人机列表（基于SINR阈值）
+        
+        参数:
+            agent_idx: 无人机索引
+            
+        返回:
+            local_uavs: 按SINR降序排序的(无人机索引, SINR)元组列表
+        """
+        local_uavs = []
+        
+        for other_idx in range(self.n_uavs):
+            if other_idx == agent_idx:
+                continue
+            
+            # 使用本类重写的_compute_uav_to_uav_sinr
+            sinr_db = self._compute_uav_to_uav_sinr(agent_idx, other_idx)
+            
+            if sinr_db >= self.min_sinr:
+                local_uavs.append((other_idx, sinr_db))
+        
+        local_uavs.sort(key=lambda x: x[1], reverse=True)
+        return local_uavs
 
     def get_scenario_info(self):
         """
