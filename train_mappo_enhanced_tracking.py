@@ -31,6 +31,7 @@ from config_1 import Config
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
+from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 # 导入工具类
@@ -428,22 +429,36 @@ class EnhancedRewardTracker:
         
         # 记录额外信息
         if info:
-            if 'served_users' in info:
+            served_users = 0
+            
+            # 从多个来源获取服务用户数
+            if 'reward_info' in info and 'effective_connected_users' in info['reward_info']:
+                served_users = info['reward_info']['effective_connected_users']
+            elif 'reward_info' in info and 'connected_users' in info['reward_info']:
+                served_users = info['reward_info']['connected_users']
+            elif 'coverage_ratio' in info and self.n_users is not None:
+                # 从覆盖率计算服务用户数，使用固定的n_users
+                served_users = int(info['coverage_ratio'] * self.n_users)
+            elif 'served_users' in info:
+                # 兼容原有字段名
+                served_users = info['served_users']
+
+            if served_users > 0:
                 self.performance_metrics['served_users'].append({
                     'step': step,
                     'env_id': env_id,
-                    'served_users': info['served_users'],
-                    'total_users': info.get('total_users', 0)
+                    'served_users': served_users,
+                    'total_users': self.n_users
                 })
             
             # 记录吞吐量信息
             if 'reward_info' in info:
                 reward_info = info['reward_info']
-                if 'total_throughput_mbps' in reward_info:
+                if 'system_throughput_mbps' in reward_info:
                     self.performance_metrics['total_throughput'].append({
                         'step': step,
                         'env_id': env_id,
-                        'total_throughput_mbps': reward_info['total_throughput_mbps'],
+                        'total_throughput_mbps': reward_info['system_throughput_mbps'],
                         'timestamp': time.time()
                     })
     
@@ -1241,7 +1256,7 @@ def get_device(device_pref):
         main_logger.info("使用CPU")
         return 'cpu'
 
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_hops=None, render_mode=None, rank=0, seed=0, area_size=None, n_clusters=None, cluster_std=None, central_area_ratio=None):
+def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_hops=None, render_mode=None, rank=0, seed=0, area_size=None, n_clusters=None, cluster_std=None, central_area_ratio=None, **kwargs):
     """创建环境实例的函数"""
     def _init():
         env_seed = seed + rank
@@ -1278,6 +1293,33 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, max_ho
                 cluster_std=cluster_std,
                 central_area_ratio=central_area_ratio
             )
+        elif scenario == 4:
+            # 场景4：强制多跳中继环境
+            scenario4_kwargs = {
+                'n_uavs': n_uavs,
+                'n_users': n_users,
+                'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
+                'channel_model': channel_model,
+                'render_mode': render_mode,
+                'seed': env_seed,
+                'max_hops': max_hops,
+                'area_size': area_size,
+                'n_clusters': n_clusters,
+                'cluster_std': cluster_std,
+                'central_area_ratio': central_area_ratio,
+                'min_sinr': kwargs.get('min_sinr'),
+                'max_connections': kwargs.get('max_connections'),
+                'coverage_weight': kwargs.get('coverage_weight'),
+                'connectivity_weight': kwargs.get('connectivity_weight'),
+                'efficiency_weight': kwargs.get('efficiency_weight'),
+                'uav_init_mode': kwargs.get('uav_init_mode'),
+                'uav_start_area_size': kwargs.get('uav_start_area_size'),
+            }
+            
+            # 过滤掉值为None的参数，以便环境使用其内部默认值
+            scenario4_kwargs = {k: v for k, v in scenario4_kwargs.items() if v is not None}
+            
+            raw_env = UAVForcedRelayEnv(**scenario4_kwargs)
         else:
             raise ValueError(f"未知的场景: {scenario}")
 
@@ -1291,7 +1333,7 @@ def parse_args():
     
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=3, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式')
+    parser.add_argument('--scenario', type=int, default=3, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
     parser.add_argument('--model_path', type=str, default='models/mappo_enhanced_tracking.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -1308,7 +1350,7 @@ def parse_args():
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=10, help='初始无人机数量')
     parser.add_argument('--n_users', type=int, default=50, help='用户数量')
-    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米, 仅用于场景3)')
+    parser.add_argument('--area_size', type=int, default=2000, help='区域大小 (米, 仅用于场景3)')
     parser.add_argument('--max_hops', type=int, default=3, help='最大跳数 (场景2和3使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster'], help='用户分布类型')
@@ -1316,9 +1358,21 @@ def parse_args():
                         choices=['free_space', 'urban', 'suburban','3gpp-36777'], help='信道模型')
     
     # 场景3特有参数
-    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3)')
-    parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3)')
-    parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3)')
+    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (仅用于场景3和4)')
+    parser.add_argument('--cluster_std', type=int, default=150, help='簇内用户分布标准差 (米, 仅用于场景3和4)')
+    parser.add_argument('--central_area_ratio', type=float, default=0.5, help='中心用户区域占总区域的比例 (仅用于场景3和4)')
+
+    # 场景4特有参数
+    parser.add_argument('--min_sinr', type=float, default=3, help='最小信噪比 (仅用于场景4)')
+    parser.add_argument('--max_connections', type=int, default=25, help='最大连接数 (仅用于场景4)')
+    parser.add_argument('--coverage_weight', type=float, default=0.8, help='覆盖率奖励权重 (仅用于场景4)')
+    parser.add_argument('--connectivity_weight', type=float, default=0.15, help='连通性奖励权重 (仅用于场景4)')
+    parser.add_argument('--efficiency_weight', type=float, default=0.05, help='效率奖励权重 (仅用于场景4)')
+    
+    # 场景4无人机初始化参数
+    parser.add_argument('--uav_init_mode', type=str, default='start_area', 
+                        choices=['random', 'start_area'], help='无人机初始化模式 (仅用于场景4): random=随机分布, start_area=起始区域均匀分布')
+    parser.add_argument('--uav_start_area_size', type=int, default=500, help='起始区域大小（米），仅在uav_init_mode=start_area时使用 (仅用于场景4)')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=32, help='并行环境数量')
@@ -1364,14 +1418,22 @@ def train(config, args, device):
         n_users=args.n_users,
         user_distribution=args.user_distribution,
         channel_model=args.channel_model,
-        max_hops=args.max_hops if args.scenario in [2, 3] else None,
+        max_hops=args.max_hops if args.scenario in [2, 3, 4] else None,
         render_mode=None,
         rank=i,
         seed=base_seed,
-        area_size=args.area_size if args.scenario == 3 else None,
-        n_clusters=args.n_clusters if args.scenario == 3 else None,
-        cluster_std=args.cluster_std if args.scenario == 3 else None,
-        central_area_ratio=args.central_area_ratio if args.scenario == 3 else None
+        area_size=args.area_size if args.scenario in [3, 4] else None,
+        n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
+        cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
+        central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
+        # 场景4参数
+        min_sinr=args.min_sinr if args.scenario == 4 else None,
+        max_connections=args.max_connections if args.scenario == 4 else None,
+        coverage_weight=args.coverage_weight if args.scenario == 4 else None,
+        connectivity_weight=args.connectivity_weight if args.scenario == 4 else None,
+        efficiency_weight=args.efficiency_weight if args.scenario == 4 else None,
+        uav_init_mode=args.uav_init_mode if args.scenario == 4 else None,
+        uav_start_area_size=args.uav_start_area_size if args.scenario == 4 else None
     ) for i in range(num_envs)]
 
     # 使用SubprocVecEnv创建并行环境
@@ -1581,34 +1643,33 @@ def train(config, args, device):
                         break
                     continue
                 
-                # 记录详细日志和吞吐量数据
-                if args.detailed_logging:
-                    for i, info in enumerate(infos):
-                        try:
-                            # 计算每个智能体的奖励（简化处理）
-                            agent_rewards = [rewards[i]] * n_agents
-                            
-                            # 记录训练步骤信息，包括吞吐量
-                            reward_tracker.log_training_step(
-                                step=total_steps + i,  # 为每个环境分配不同的步骤编号
-                                env_id=i,
-                                reward=rewards[i],
-                                agent_rewards=agent_rewards,
-                                info=info
-                            )
-                            
-                            # 记录吞吐量信息到日志（如果存在）
+                # 记录训练步骤信息
+                for i, info in enumerate(infos):
+                    try:
+                        # 计算每个智能体的奖励（简化处理）
+                        agent_rewards = [rewards[i]] * n_agents
+                        
+                        # 记录训练步骤信息，包括吞吐量和服务用户数
+                        reward_tracker.log_training_step(
+                            step=total_steps + i,  # 为每个环境分配不同的步骤编号
+                            env_id=i,
+                            reward=rewards[i],
+                            agent_rewards=agent_rewards,
+                            info=info
+                        )
+                        
+                        # 如果启用了详细日志，则记录更多信息到控制台
+                        if args.detailed_logging:
                             if 'reward_info' in info and 'system_throughput_mbps' in info['reward_info']:
                                 throughput_mbps = info['reward_info']['system_throughput_mbps']
                                 main_logger.debug(f"步骤 {total_steps}: 环境{i} 系统吞吐量={throughput_mbps:.2f} Mbps")
                             
-                            # 记录平均用户吞吐量（如果存在）
                             if 'reward_info' in info and 'avg_throughput_per_user_mbps' in info['reward_info']:
                                 avg_throughput_mbps = info['reward_info']['avg_throughput_per_user_mbps']
                                 main_logger.debug(f"步骤 {total_steps}: 环境{i} 平均用户吞吐量={avg_throughput_mbps:.2f} Mbps")
                                 
-                        except Exception as log_e:
-                            main_logger.warning(f"步骤 {total_steps}: 记录环境{i}吞吐量信息失败: {log_e}")
+                    except Exception as log_e:
+                        main_logger.warning(f"步骤 {total_steps}: 记录环境{i}信息失败: {log_e}")
                 
                 # 从info中收集吞吐量和用户服务率数据
                 for info in infos:
@@ -2038,14 +2099,22 @@ def main():
             n_users=args.n_users,
             user_distribution=args.user_distribution,
             channel_model=args.channel_model,
-            max_hops=args.max_hops if args.scenario in [2, 3] else None,
+            max_hops=args.max_hops if args.scenario in [2, 3, 4] else None,
             render_mode="human" if args.render and i == 0 else None,
             rank=i,
             seed=base_seed,
-            area_size=args.area_size if args.scenario == 3 else None,
-            n_clusters=args.n_clusters if args.scenario == 3 else None,
-            cluster_std=args.cluster_std if args.scenario == 3 else None,
-            central_area_ratio=args.central_area_ratio if args.scenario == 3 else None
+            area_size=args.area_size if args.scenario in [3, 4] else None,
+            n_clusters=args.n_clusters if args.scenario in [3, 4] else None,
+            cluster_std=args.cluster_std if args.scenario in [3, 4] else None,
+            central_area_ratio=args.central_area_ratio if args.scenario in [3, 4] else None,
+            # 场景4参数
+            min_sinr=args.min_sinr if args.scenario == 4 else None,
+            max_connections=args.max_connections if args.scenario == 4 else None,
+            coverage_weight=args.coverage_weight if args.scenario == 4 else None,
+            connectivity_weight=args.connectivity_weight if args.scenario == 4 else None,
+            efficiency_weight=args.efficiency_weight if args.scenario == 4 else None,
+            uav_init_mode=args.uav_init_mode if args.scenario == 4 else None,
+            uav_start_area_size=args.uav_start_area_size if args.scenario == 4 else None
         ) for i in range(4)]  # 少量环境用于评估
         
         eval_envs = [env_fn() for env_fn in eval_env_fns]

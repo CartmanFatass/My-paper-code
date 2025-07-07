@@ -14,9 +14,9 @@ class Config:
     max_observed_users = 15   # 最大观测用户数量
 
     # HMASD参数 - 基于论文Table 3中的3m场景
-    n_Z = 5           # 团队技能数量 (论文中3m场景为3)
-    n_z = 5           # 个体技能数量 (论文中3m场景为3)
-    k = 30            # 技能分配间隔 (论文中3m场景为25，为适应无人机场景改为10)
+    n_Z = 3           # [关键] 降低团队技能数量
+    n_z = 3           # [关键] 降低个体技能数量
+    k = 20            # [关键] 缩短技能分配间隔
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -27,32 +27,43 @@ class Config:
     gru_hidden_size = 64     # GRU隐藏层大小 (与hidden_size保持一致)
     lr_coordinator = 1e-4    # 技能协调器学习率 (适当降低以稳定高层策略学习)
     lr_discoverer = 1e-4     # 技能发现器学习率 (降低以稳定低层策略学习)
-    lr_discriminator = 1e-4  # 技能判别器学习率 (适当降低，防止其过强)
+    lr_discriminator = 3e-4  # [关键] 提高判别器学习率
+    lr_prototype_discriminator = 1e-4 # 原型判别器学习率 (新增)
 
     # PPO参数 - 基于论文Table 1
     gamma = 0.99             # 折扣因子
     gae_lambda = 0.95        # GAE参数
     clip_epsilon = 0.2       # PPO裁剪参数 (更保守以稳定学习)
-    ppo_epochs = 15          # PPO迭代次数 (减少以稳定学习)
+    ppo_epochs = 5          # [关键] 减少PPO迭代，防止过拟合
     value_loss_coef = 1.0    # 价值损失系数 (论文中为1.0)
     max_grad_norm = 0.5      # 最大梯度范数 (更严格的梯度裁剪)
 
     # HMASD损失权重 - 基于论文Table 3中的3m场景
     # 注意：根据训练曲线分析调整权重，解决个体技能学习停滞问题
-    lambda_e = 100.0          # 外部奖励权重 (适度降低，为判别器奖励让出空间)
-    lambda_D = 0.2           # 团队技能判别器奖励权重 (适度增加，保持团队技能学习)
-    lambda_d = 0.2           # 个体技能判别器奖励权重 (大幅增加，强化个体技能区分度)
+    lambda_e = 100.0         # 外部奖励权重
+    lambda_D = 0.1           # 团队技能判别器奖励权重
+    lambda_d = 0.5           # [关键] 适度提高个体技能判别器奖励权重
     lambda_h = 0.001         # 高层策略熵权重 (论文中3m场景为0.001)
     lambda_l = 0.01          # 低层策略熵权重 (论文中3m场景为0.01)
-    lambda_cd = 0.5          # 对比散度损失权重 (新增)
+    lambda_cd = 0.0          # 对比散度损失权重 (禁用)
+    lambda_mi = 0.1          # 互信息奖励权重 (新增)
 
     # 训练参数 - 部分基于论文Table 1和Table 2
-    buffer_size = 1024       # 经验回放缓冲区大小
-    batch_size = 128         # 批处理大小
+    buffer_size = 4800       # 经验回放缓冲区大小
+    batch_size = 4800         # 批处理大小
     high_level_batch_size = 128  # 高层更新的批处理大小
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
     rollout_length = 150     # 每次rollout收集的步数 (严格on-policy)
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
+    
+    def set_short_test_mode(self):
+        """设置短时间测试模式"""
+        self.total_timesteps = 5000  # 短时间测试
+        self.eval_interval = 1000    # 更频繁的评估
+        self.rollout_length = 50     # 更短的rollout
+        self.buffer_size = 1000      # 更小的缓冲区
+        self.batch_size = 500        # 更小的批次
+        self.high_level_batch_size = 32  # 更小的高层批次
     episode_length = 1500    # 每个episode的最大长度 (基于观察到的实际行为)
     eval_interval = episode_length*num_envs   # 评估间隔 (32并行环境 * 每环境5120步)
     eval_episodes = 4      # 评估时的episode数量 (论文中SMAC为100)
@@ -64,7 +75,7 @@ class Config:
     gain = 0.01              # 增益
     optimizer_epsilon = 1e-5 # 优化器epsilon
     weight_decay = 0.0       # 权重衰减 (根据建议移除)
-    num_mini_batch = 1       # mini batch数量
+    num_mini_batch = 4       # mini batch数量
     
     # 学习率衰减参数
     use_lr_decay = True                    # 是否启用学习率衰减
@@ -77,7 +88,9 @@ class Config:
     huber_delta = 10         # Huber delta
     
     # OPT (Interaction Pattern Disentangling) 参数 - 基于论文《Interaction Pattern Disentangling for Multi-Agent Reinforcement Learning》
-    use_opt = True           # 是否使用OPT模块 (设为False可对比原始性能)
+    use_opt_coordinator = False        # 禁用额外模块
+    use_opt_discoverer_actor = False   # 禁用额外模块
+    use_opt_discoverer_critic = False  # 禁用额外模块
     opt_num_prototypes = 4   # 交互原型数量 (论文中N=4)
     opt_prototype_dim = 32   # 交互原型特征维度 (论文中d_x=32)
     opt_alpha = 0.5          # 对比散度损失权重 (论文中α=0.5)
@@ -93,7 +106,7 @@ class Config:
     coverage_curve_steepness = 2.0     # 覆盖率奖励曲线陡峭度（新增，增强高覆盖率区域奖励）
 
     # 权重退火参数 - 用于解决奖励空窗期问题
-    use_reward_annealing = True         # 是否启用奖励权重退火机制
+    use_reward_annealing = False         # 禁用额外模块
     w_intrinsic_initial = 5.0          # 内在奖励初始权重倍数（早期强调探索）
     w_intrinsic_final = 1.0            # 内在奖励最终权重倍数（后期回到正常水平）
     w_extrinsic_initial = 0.5          # 外部奖励初始权重倍数（早期弱化利用）
