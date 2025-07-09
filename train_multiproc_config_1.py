@@ -148,6 +148,19 @@ class EnhancedRewardTracker:
                     'total_users': self.n_users  # 使用固定的n_users
                 })
             
+            # 场景4特有指标：覆盖栅格数 (从info根部获取)
+            if 'covered_grids' in info:
+                # 确保 covered_grids 列表存在
+                if 'covered_grids' not in self.performance_metrics['reward_components']:
+                    self.performance_metrics['reward_components']['covered_grids'] = []
+                
+                self.performance_metrics['reward_components']['covered_grids'].append({
+                    'step': step,
+                    'env_id': env_id,
+                    'value': info['covered_grids'],
+                    'timestamp': time.time()
+                })
+
             # 记录吞吐量信息（修正后的字段名）
             if 'reward_info' in info:
                 reward_info = info['reward_info']
@@ -207,6 +220,32 @@ class EnhancedRewardTracker:
                         'step': step,
                         'env_id': env_id,
                         'value': reward_info['network_connectivity_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                # 场景4特有指标：探索奖励
+                if 'exploration_reward' in reward_info:
+                    # 确保 exploration_rewards 列表存在
+                    if 'exploration_rewards' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['exploration_rewards'] = []
+                    
+                    self.performance_metrics['reward_components']['exploration_rewards'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['exploration_reward'],
+                        'timestamp': time.time()
+                    })
+                
+                # 场景4特有指标：覆盖重叠惩罚
+                if 'overlap_penalty' in reward_info:
+                    # 确保 overlap_penalty 列表存在
+                    if 'overlap_penalty' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['overlap_penalty'] = []
+                    
+                    self.performance_metrics['reward_components']['overlap_penalty'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['overlap_penalty'],
                         'timestamp': time.time()
                     })
                 
@@ -284,10 +323,10 @@ class EnhancedRewardTracker:
             'total_agents': len(agent_skills)
         })
     
-    def export_training_data(self, step, writer=None):
+    def export_training_data(self, step, writer=None, args=None):
         """导出训练数据用于论文分析"""
         if step - self.last_export_step < self.export_interval:
-            return    
+            return
         
         export_dir = os.path.join(self.log_dir, 'paper_data')
         os.makedirs(export_dir, exist_ok=True)
@@ -306,6 +345,17 @@ class EnhancedRewardTracker:
                     'env_id': entry['env_id'],
                     'component': comp_name,
                     'value': entry['value']
+                })
+        
+        # 导出性能指标中的奖励组成部分
+        for comp_name, comp_list in self.performance_metrics['reward_components'].items():
+            for entry in comp_list:
+                components_data.append({
+                    'step': entry['step'],
+                    'env_id': entry['env_id'],
+                    'component': comp_name,
+                    'value': entry['value'],
+                    'timestamp': entry.get('timestamp', 0)
                 })
         
         if components_data:
@@ -329,7 +379,7 @@ class EnhancedRewardTracker:
         
         # 记录到TensorBoard（如果提供）
         if writer:
-            self.log_to_tensorboard(writer, step)
+            self.log_to_tensorboard(writer, step, args=args)
         
         self.last_export_step = step
         main_logger.debug(f"已导出步骤 {step} 的训练数据到 {export_dir}")
@@ -448,7 +498,7 @@ class EnhancedRewardTracker:
             plt.savefig(os.path.join(export_dir, f'skill_analysis_step_{step}.png'), dpi=300, bbox_inches='tight')
             plt.close()
     
-    def log_to_tensorboard(self, writer, step):
+    def log_to_tensorboard(self, writer, step, args=None):
         """记录详细数据到TensorBoard"""
         
         # 训练奖励统计
@@ -604,40 +654,180 @@ class EnhancedRewardTracker:
                         env_avg_user_throughput = np.mean(throughput_values)
                         writer.add_scalar(f'Performance/Env_{env_id}_Avg_User_Throughput_Mbps', env_avg_user_throughput, step)
         
-        # 记录环境奖励组成部分到TensorBoard (场景2和场景3通用)
+        # 记录环境奖励组成部分到TensorBoard (场景2、场景3和场景4通用)
         reward_components = self.performance_metrics['reward_components']
         
-        # 通用奖励组成
+        # 通用奖励组成 - 统一到Rewards分类
         if reward_components['throughput_rewards']:
             recent_throughput_rewards = reward_components['throughput_rewards'][-100:]
             if recent_throughput_rewards:
                 avg_throughput_reward = np.mean([r['value'] for r in recent_throughput_rewards])
-                writer.add_scalar('Reward_Components/Throughput_Reward_100steps', avg_throughput_reward, step)
+                writer.add_scalar('Rewards/Throughput_Reward_100steps', avg_throughput_reward, step)
         
         if reward_components['coverage_rewards']:
             recent_coverage_rewards = reward_components['coverage_rewards'][-100:]
             if recent_coverage_rewards:
                 avg_coverage_reward = np.mean([r['value'] for r in recent_coverage_rewards])
-                writer.add_scalar('Reward_Components/Coverage_Reward_100steps', avg_coverage_reward, step)
+                writer.add_scalar('Rewards/Coverage_Reward_100steps', avg_coverage_reward, step)
         
-        # 场景3特有奖励组成
+        # 场景3特有奖励组成 - 统一到Rewards分类
         if reward_components['effective_coverage_rewards']:
             recent_effective_coverage = reward_components['effective_coverage_rewards'][-100:]
             if recent_effective_coverage:
                 avg_effective_coverage = np.mean([r['value'] for r in recent_effective_coverage])
-                writer.add_scalar('Reward_Components/Effective_Coverage_Reward_100steps', avg_effective_coverage, step)
+                writer.add_scalar('Rewards/Effective_Coverage_Reward_100steps', avg_effective_coverage, step)
         
         if reward_components['load_balance_rewards']:
             recent_load_balance = reward_components['load_balance_rewards'][-100:]
             if recent_load_balance:
                 avg_load_balance = np.mean([r['value'] for r in recent_load_balance])
-                writer.add_scalar('Reward_Components/Load_Balance_Reward_100steps', avg_load_balance, step)
+                writer.add_scalar('Rewards/Load_Balance_Reward_100steps', avg_load_balance, step)
         
         if reward_components['network_connectivity_rewards']:
             recent_network_connectivity = reward_components['network_connectivity_rewards'][-100:]
             if recent_network_connectivity:
                 avg_network_connectivity = np.mean([r['value'] for r in recent_network_connectivity])
-                writer.add_scalar('Reward_Components/Network_Connectivity_Reward_100steps', avg_network_connectivity, step)
+                writer.add_scalar('Rewards/Network_Connectivity_Reward_100steps', avg_network_connectivity, step)
+        
+        # 场景4特有奖励组成 - 统一到Rewards分类
+        if reward_components.get('exploration_rewards'):
+            recent_exploration_rewards_data = reward_components['exploration_rewards'][-100:]
+            if recent_exploration_rewards_data:
+                recent_values = [r['value'] for r in recent_exploration_rewards_data]
+                avg_exploration_reward = np.mean(recent_values)
+                writer.add_scalar('Rewards/Exploration_Reward_Mean_100steps', avg_exploration_reward, step)
+                
+                # 探索奖励统计
+                writer.add_scalar('Rewards/Exploration_Reward_Std_100steps', np.std(recent_values), step)
+                writer.add_scalar('Rewards/Exploration_Reward_Max_100steps', np.max(recent_values), step)
+                writer.add_scalar('Rewards/Exploration_Reward_Min_100steps', np.min(recent_values), step)
+                
+                # 探索奖励占总奖励的比例
+                if self.recent_rewards:
+                    recent_total_rewards = list(self.recent_rewards)
+                    if recent_total_rewards:
+                        avg_total_reward = np.mean(recent_total_rewards)
+                        if avg_total_reward != 0:
+                            exploration_ratio = avg_exploration_reward / abs(avg_total_reward)
+                            writer.add_scalar('Rewards/Exploration_Reward_Ratio_100ep', exploration_ratio, step)
+
+        if reward_components.get('overlap_penalty'):
+            recent_overlap_penalties_data = reward_components['overlap_penalty'][-100:]
+            if recent_overlap_penalties_data:
+                recent_values = [r['value'] for r in recent_overlap_penalties_data]
+                avg_overlap_penalty = np.mean(recent_values)
+                writer.add_scalar('Rewards/Overlap_Penalty_Mean_100steps', avg_overlap_penalty, step)
+                
+                # 重叠惩罚统计
+                writer.add_scalar('Rewards/Overlap_Penalty_Std_100steps', np.std(recent_values), step)
+                writer.add_scalar('Rewards/Overlap_Penalty_Max_100steps', np.max(recent_values), step)
+                writer.add_scalar('Rewards/Overlap_Penalty_Min_100steps', np.min(recent_values), step)
+                
+                # 重叠惩罚趋势（最近50步 vs 前50步）
+                if len(recent_values) >= 100:
+                    first_half_avg = np.mean(recent_values[:50])
+                    second_half_avg = np.mean(recent_values[50:])
+                    penalty_trend = second_half_avg - first_half_avg
+                    writer.add_scalar('Rewards/Overlap_Penalty_Trend_100steps', penalty_trend, step)
+
+        # 场景4特有：覆盖栅格统计 - 移到Exploration分类
+        if reward_components.get('covered_grids'):
+            recent_covered_grids_data = reward_components['covered_grids'][-100:]
+            if recent_covered_grids_data:
+                recent_values = [r['value'] for r in recent_covered_grids_data]
+                avg_covered_grids = np.mean(recent_values)
+                writer.add_scalar('Exploration/Covered_Grids_Mean_100steps', avg_covered_grids, step)
+                writer.add_scalar('Exploration/Covered_Grids_Std_100steps', np.std(recent_values), step)
+                
+                # 覆盖进度（覆盖栅格数的变化趋势）
+                if len(recent_values) >= 100:
+                    first_half_avg = np.mean(recent_values[:50])
+                    second_half_avg = np.mean(recent_values[50:])
+                    coverage_progress = second_half_avg - first_half_avg
+                    writer.add_scalar('Exploration/Coverage_Progress_100steps', coverage_progress, step)
+        
+        # 计算Real_Rewards（乘以超参数后的真实值）
+        # 需要从环境或配置中获取权重参数
+        # 这里我们假设可以从某个地方获取到这些权重
+        real_rewards_calculated = False
+        
+        # 尝试从不同来源获取权重参数
+        weights = {}
+        
+        # 首先从config获取权重 (主要是场景3)
+        if hasattr(self, 'config') and self.config:
+            if hasattr(self.config, 'effective_coverage_weight'):
+                weights['effective_coverage_weight'] = self.config.effective_coverage_weight
+            if hasattr(self.config, 'throughput_weight'):
+                weights['throughput_weight'] = self.config.throughput_weight
+            if hasattr(self.config, 'load_balance_weight'):
+                weights['load_balance_weight'] = self.config.load_balance_weight
+        
+        # 如果提供了args，则从中获取权重 (主要是场景4)，这会覆盖config中的同名参数
+        if args:
+            if hasattr(args, 'coverage_weight'):
+                weights['coverage_weight'] = args.coverage_weight
+            if hasattr(args, 'connectivity_weight'):
+                weights['connectivity_weight'] = args.connectivity_weight
+            if hasattr(args, 'efficiency_weight'):
+                weights['efficiency_weight'] = args.efficiency_weight
+            if hasattr(args, 'exploration_reward_weight'):
+                weights['exploration_reward_weight'] = args.exploration_reward_weight
+            if hasattr(args, 'coverage_overlap_penalty_weight'):
+                weights['coverage_overlap_penalty_weight'] = args.coverage_overlap_penalty_weight
+        
+        # 计算Real_Rewards（奖励组成 × 对应权重）
+        if weights:
+            real_rewards_calculated = True
+            
+            # 场景4的Real_Rewards
+            if reward_components.get('exploration_rewards') and 'exploration_reward_weight' in weights:
+                recent_exploration_rewards = reward_components['exploration_rewards'][-100:]
+                if recent_exploration_rewards:
+                    avg_exploration_reward = np.mean([r['value'] for r in recent_exploration_rewards])
+                    real_exploration_reward = avg_exploration_reward * weights['exploration_reward_weight']
+                    writer.add_scalar('Real_Rewards/Exploration_Real_100steps', real_exploration_reward, step)
+            
+            if reward_components.get('overlap_penalty') and 'coverage_overlap_penalty_weight' in weights:
+                recent_overlap_penalties = reward_components['overlap_penalty'][-100:]
+                if recent_overlap_penalties:
+                    avg_overlap_penalty = np.mean([r['value'] for r in recent_overlap_penalties])
+                    real_overlap_penalty = avg_overlap_penalty * weights['coverage_overlap_penalty_weight']
+                    writer.add_scalar('Real_Rewards/Overlap_Penalty_Real_100steps', real_overlap_penalty, step)
+            
+            # 场景3的Real_Rewards
+            if reward_components.get('effective_coverage_rewards') and 'effective_coverage_weight' in weights:
+                recent_effective_coverage = reward_components['effective_coverage_rewards'][-100:]
+                if recent_effective_coverage:
+                    avg_effective_coverage = np.mean([r['value'] for r in recent_effective_coverage])
+                    real_effective_coverage = avg_effective_coverage * weights['effective_coverage_weight']
+                    writer.add_scalar('Real_Rewards/Effective_Coverage_Real_100steps', real_effective_coverage, step)
+            
+            if reward_components.get('throughput_rewards') and 'throughput_weight' in weights:
+                recent_throughput_rewards = reward_components['throughput_rewards'][-100:]
+                if recent_throughput_rewards:
+                    avg_throughput_reward = np.mean([r['value'] for r in recent_throughput_rewards])
+                    real_throughput_reward = avg_throughput_reward * weights['throughput_weight']
+                    writer.add_scalar('Real_Rewards/Throughput_Real_100steps', real_throughput_reward, step)
+            
+            if reward_components.get('load_balance_rewards') and 'load_balance_weight' in weights:
+                recent_load_balance = reward_components['load_balance_rewards'][-100:]
+                if recent_load_balance:
+                    avg_load_balance = np.mean([r['value'] for r in recent_load_balance])
+                    real_load_balance = avg_load_balance * weights['load_balance_weight']
+                    writer.add_scalar('Real_Rewards/Load_Balance_Real_100steps', real_load_balance, step)
+            
+            # 通用奖励组成的Real_Rewards（如果有对应权重）
+            if reward_components.get('coverage_rewards') and 'coverage_weight' in weights:
+                recent_coverage_rewards = reward_components['coverage_rewards'][-100:]
+                if recent_coverage_rewards:
+                    avg_coverage_reward = np.mean([r['value'] for r in recent_coverage_rewards])
+                    real_coverage_reward = avg_coverage_reward * weights['coverage_weight']
+                    writer.add_scalar('Real_Rewards/Coverage_Real_100steps', real_coverage_reward, step)
+        
+        if not real_rewards_calculated:
+            # 如果无法获取权重参数，记录一个提示
+            writer.add_text('Real_Rewards/Note', 'Real rewards calculation requires weight parameters from config', step)
         
         # 其他有用指标
         if reward_components['avg_hops']:
@@ -808,6 +998,8 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
                 'efficiency_weight': kwargs.get('efficiency_weight'),
                 'uav_init_mode': kwargs.get('uav_init_mode'),
                 'uav_start_area_size': kwargs.get('uav_start_area_size'),
+                'grid_resolution': kwargs.get('grid_resolution'),
+                'exploration_reward_weight': kwargs.get('exploration_reward_weight'),
             }
             
             # 过滤掉值为None的参数，以便环境使用其内部默认值
@@ -849,8 +1041,8 @@ def parse_args():
 
     # 环境参数
     parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
-    parser.add_argument('--n_users', type=int, default=50, help='用户数量 ')
-    parser.add_argument('--area_size', type=int, default=3000, help='区域大小 (米)')
+    parser.add_argument('--n_users', type=int, default=30, help='用户数量 ')
+    parser.add_argument('--area_size', type=int, default=2000, help='区域大小 (米)')
     parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2, 3, 4使用)')
     parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
                         choices=['uniform', 'cluster', 'hotspot', 'multi_cluster', 'forced_relay_cluster'], help='用户分布类型')
@@ -863,8 +1055,8 @@ def parse_args():
     parser.add_argument('--bandwidth', type=float, default=20e6, help='每个无人机的带宽 (Hz)。默认: 20e6')
     
     # 场景3和4共用参数
-    parser.add_argument('--n_clusters', type=int, default=5, help='用户簇数量 (场景3和4使用)')
-    parser.add_argument('--cluster_std', type=int, default=100, help='簇内用户分布标准差 (米, 场景3和4使用)')
+    parser.add_argument('--n_clusters', type=int, default=3, help='用户簇数量 (场景3和4使用)')
+    parser.add_argument('--cluster_std', type=int, default=80, help='簇内用户分布标准差 (米, 场景3和4使用)')
     parser.add_argument('--central_area_ratio', type=float, default=0.6, help='中心用户区域占总区域的比例 (场景3和4使用)')
 
     # 场景4特有参数
@@ -879,6 +1071,13 @@ def parse_args():
                         choices=['random', 'start_area'], help='无人机初始化模式 (仅用于场景4): random=随机分布, start_area=起始区域均匀分布')
     parser.add_argument('--uav_start_area_size', type=int, default=500, help='起始区域大小（米），仅在uav_init_mode=start_area时使用 (仅用于场景4)')
     
+    # 场景4探索奖励参数
+    parser.add_argument('--grid_resolution', type=int, default=100, help='探索栅格分辨率（米），仅用于场景4')
+    parser.add_argument('--exploration_reward_weight', type=float, default=5, help='探索奖励权重，仅用于场景4')
+    
+    # 场景4重叠惩罚参数
+    parser.add_argument('--coverage_overlap_penalty_weight', type=float, default=0.1, help='覆盖重叠惩罚权重，仅用于场景4')
+    
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=0, 
                         help='并行环境数量 (0=使用配置文件中的值)')
@@ -892,11 +1091,11 @@ def parse_args():
                         help='启用详细的奖励日志记录')
     
     # OPT模块参数
-    parser.add_argument('--use_opt', action=argparse.BooleanOptionalAction, default=True,
+    parser.add_argument('--use_opt', action=argparse.BooleanOptionalAction, default=False,
                         help='是否使用OPT (Interaction Pattern Disentangling) 模块 (使用--use_opt启用，--no-use_opt禁用)')
     
     # 权重退火参数
-    parser.add_argument('--use_reward_annealing', action=argparse.BooleanOptionalAction, default=True,
+    parser.add_argument('--use_reward_annealing', action=argparse.BooleanOptionalAction, default=False,
                         help='是否启用奖励权重退火机制 (使用--use_reward_annealing启用，--no-use_reward_annealing禁用)')
     parser.add_argument('--w_intrinsic_initial', type=float, default=5.0,
                         help='内在奖励初始权重倍数（早期强调探索）')
@@ -912,7 +1111,7 @@ def parse_args():
                         choices=['linear', 'cosine'], help='退火计划（linear 或 cosine）')
 
     # 学习率衰减参数
-    parser.add_argument('--use_lr_decay', action=argparse.BooleanOptionalAction, default=True,
+    parser.add_argument('--use_lr_decay', action=argparse.BooleanOptionalAction, default=False,
                         help='是否启用学习率衰减 (使用--use_lr_decay启用，--no-use_lr_decay禁用)')
     parser.add_argument('--lr_decay_schedule', type=str, default='linear',
                         choices=['linear', 'cosine'], help='学习率衰减计划')
@@ -1024,11 +1223,17 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         agent.writer.add_text('Parameters/discoverer_lr_decay_factor', str(config.discoverer_lr_decay_factor), 0)
         agent.writer.add_text('Parameters/discriminator_lr_decay_factor', str(config.discriminator_lr_decay_factor), 0)
     
-    # 记录环境奖励权重配置（场景3的新权重）
-    agent.writer.add_text('Environment/effective_coverage_weight', str(config.effective_coverage_weight), 0)
-    agent.writer.add_text('Environment/throughput_weight', str(config.throughput_weight), 0)
-    agent.writer.add_text('Environment/load_balance_weight', str(config.load_balance_weight), 0)
-    # agent.writer.add_text('Environment/network_connectivity_weight', str(config.network_connectivity_weight), 0)  # 已废弃
+    # 记录环境奖励权重配置到Parameters分组
+    agent.writer.add_text('Parameters/effective_coverage_weight', str(config.effective_coverage_weight), 0)
+    agent.writer.add_text('Parameters/throughput_weight', str(config.throughput_weight), 0)
+    agent.writer.add_text('Parameters/load_balance_weight', str(config.load_balance_weight), 0)
+    
+    # 记录场景4的奖励权重参数
+    agent.writer.add_text('Parameters/coverage_weight', str(args.coverage_weight), 0)
+    agent.writer.add_text('Parameters/connectivity_weight', str(args.connectivity_weight), 0)
+    agent.writer.add_text('Parameters/efficiency_weight', str(args.efficiency_weight), 0)
+    agent.writer.add_text('Parameters/exploration_reward_weight', str(args.exploration_reward_weight), 0)
+    agent.writer.add_text('Parameters/coverage_overlap_penalty_weight', str(args.coverage_overlap_penalty_weight), 0)
 
     # 训练变量
     total_steps = 0
@@ -1365,7 +1570,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     agent.writer.add_scalar(f'Buffer/collection_reason_{reason}', count, total_steps)
         
         # 定期导出训练数据
-        reward_tracker.export_training_data(total_steps, agent.writer)
+        reward_tracker.export_training_data(total_steps, agent.writer, args=args)
         
         # 评估 (基于总步数和上次评估的时间)
         if total_steps >= last_eval_step + config.eval_interval:
@@ -1389,7 +1594,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
 
     # 最终数据导出和统计
     main_logger.info("生成最终训练统计报告...")
-    reward_tracker.export_training_data(total_steps, agent.writer)
+    reward_tracker.export_training_data(total_steps, agent.writer, args=args)
     
     # 获取并打印训练摘要统计
     summary_stats = reward_tracker.get_summary_statistics()
@@ -1781,7 +1986,10 @@ def main():
         connectivity_weight=args.connectivity_weight,
         efficiency_weight=args.efficiency_weight,
         uav_init_mode=args.uav_init_mode,
-        uav_start_area_size=args.uav_start_area_size
+        uav_start_area_size=args.uav_start_area_size,
+        grid_resolution=args.grid_resolution,
+        exploration_reward_weight=args.exploration_reward_weight,
+        coverage_overlap_penalty_weight=args.coverage_overlap_penalty_weight
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
@@ -1808,7 +2016,10 @@ def main():
         connectivity_weight=args.connectivity_weight,
         efficiency_weight=args.efficiency_weight,
         uav_init_mode=args.uav_init_mode,
-        uav_start_area_size=args.uav_start_area_size
+        uav_start_area_size=args.uav_start_area_size,
+        grid_resolution=args.grid_resolution,
+        exploration_reward_weight=args.exploration_reward_weight,
+        coverage_overlap_penalty_weight=args.coverage_overlap_penalty_weight
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息

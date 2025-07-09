@@ -117,6 +117,7 @@ class EnhancedVisualizationEnv:
         self.save_path = save_path
         self.current_episode = 0
         self.current_step = 0
+        self.history = {}
         
         # 可视化配置
         self.link_colors = {
@@ -137,12 +138,25 @@ class EnhancedVisualizationEnv:
         return getattr(self.base_env, name)
     
     def reset(self, **kwargs):
-        """重置环境"""
-        return self.base_env.reset(**kwargs)
-    
+        """重置环境并记录初始状态"""
+        obs, info = self.base_env.reset(**kwargs)
+        
+        # 重置历史记录
+        self.history = {
+            'steps': [],
+            'uav_positions': [],
+            'connectivity': [],
+            'throughput': []
+        }
+        self._record_history() # 记录初始状态
+        
+        return obs, info
+
     def step(self, action):
-        """执行环境步骤"""
-        return self.base_env.step(action)
+        """执行环境步骤并记录状态"""
+        next_obs, reward, done, truncated, info = self.base_env.step(action)
+        self._record_history() # 记录此步之后的状态
+        return next_obs, reward, done, truncated, info
     
     def render(self, skill_info=None):
         """增强的渲染方法"""
@@ -487,7 +501,114 @@ class EnhancedVisualizationEnv:
         self.ax.text2D(0.75, 0.95, stats_text, transform=self.ax.transAxes,
                       fontsize=10, verticalalignment='top',
                       bbox=dict(boxstyle="round,pad=0.3", facecolor="lightgray", alpha=0.8))
-    
+
+    def _record_history(self):
+        """记录当前时间步的历史数据"""
+        # 记录UAV位置
+        self.history['steps'].append(self.base_env.env.current_step)
+        self.history['uav_positions'].append(self.base_env.env.uav_positions.copy())
+        
+        # 记录性能指标
+        reward_info = getattr(self.base_env.env, 'reward_info', {})
+        self.history['connectivity'].append(reward_info.get('effective_connected_users', 0))
+        self.history['throughput'].append(reward_info.get('system_throughput_mbps', 0))
+
+    def save_episode_plots(self, args):
+        """在episode结束时，保存所有额外的分析图表"""
+        if not self.save_path:
+            return
+        
+        print(f"为 Episode {self.current_episode + 1} 生成额外的分析图表...")
+        self._save_2d_topology_plot(args)
+        self._save_performance_plots()
+
+    def _save_2d_topology_plot(self, args):
+        """生成并保存带轨迹的2D俯瞰拓扑图"""
+        fig, ax = plt.subplots(figsize=(10, 10))
+        
+        # 绘制历史轨迹
+        positions_history = np.array(self.history['uav_positions']) # [steps, n_uavs, 3]
+        for i in range(self.base_env.env.n_uavs):
+            # 使用颜色循环来区分不同无人机
+            color = plt.cm.jet(i / self.base_env.env.n_uavs)
+            ax.plot(positions_history[:, i, 0], positions_history[:, i, 1], 
+                    color=color, alpha=0.6, linewidth=1.5,
+                    label=f'UAV {i} 轨迹' if i == 0 else "") # 只为一个UAV添加图例
+            
+            # 标记轨迹快照点
+            if args.trajectory_snapshot_interval > 0 and args.trajectory_snapshot_interval < len(positions_history):
+                for step_idx in range(args.trajectory_snapshot_interval, len(positions_history), args.trajectory_snapshot_interval):
+                    ax.scatter(positions_history[step_idx, i, 0], positions_history[step_idx, i, 1],
+                               marker='x', color=color, s=40, alpha=0.9)
+            
+            # 标记起点和终点
+            ax.scatter(positions_history[0, i, 0], positions_history[0, i, 1],
+                       marker='o', color=color, s=50, edgecolors='black') # 起点
+            ax.scatter(positions_history[-1, i, 0], positions_history[-1, i, 1],
+                       marker='>', color=color, s=100, edgecolors='black') # 终点
+
+        # 绘制最终状态的实体和连接
+        # 1. 地面基站
+        if hasattr(self.base_env.env, 'ground_bs_positions'):
+            bs_pos = self.base_env.env.ground_bs_positions
+            ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, label='地面基站', zorder=5)
+
+        # 2. 用户
+        user_pos = self.base_env.env.user_positions
+        ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, label='用户', zorder=5)
+
+        # 3. 无人机 (最终位置)
+        uav_pos = self.base_env.env.uav_positions
+        ax.scatter(uav_pos[:, 0], uav_pos[:, 1], c='red', marker='^', s=150, label='UAV (最终位置)', zorder=5)
+        for i in range(self.base_env.env.n_uavs):
+            ax.text(uav_pos[i, 0] + 10, uav_pos[i, 1] + 10, f'UAV{i}', fontsize=9)
+
+        # 4. 连接线 (根据用户反馈已移除)
+
+        ax.set_title(f'Episode {self.current_episode + 1}: 2D拓扑与无人机轨迹')
+        ax.set_xlabel('X (m)')
+        ax.set_ylabel('Y (m)')
+        ax.set_xlim(0, self.base_env.env.area_size)
+        ax.set_ylim(0, self.base_env.env.area_size)
+        ax.set_aspect('equal', adjustable='box')
+        ax.legend()
+        ax.grid(True, linestyle='--', alpha=0.5)
+        
+        filename = f"episode_{self.current_episode + 1}_topology_2d.png"
+        save_file_path = os.path.join(self.save_path, filename)
+        fig.savefig(save_file_path, dpi=200, bbox_inches='tight')
+        plt.close(fig)
+        print(f"2D拓扑图已保存: {save_file_path}")
+
+    def _save_performance_plots(self):
+        """生成并保存性能指标（连通性、吞吐量）随时间变化的图表"""
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+        
+        steps = self.history['steps']
+        connectivity = self.history['connectivity']
+        throughput = self.history['throughput']
+        
+        # 连通性图
+        ax1.plot(steps, connectivity, color='b', marker='.', linestyle='-', label='有效连接用户数')
+        ax1.set_title(f'Episode {self.current_episode + 1}: 网络性能变化')
+        ax1.set_ylabel('有效连接用户数')
+        ax1.grid(True, linestyle='--', alpha=0.6)
+        ax1.legend()
+        
+        # 吞吐量图
+        ax2.plot(steps, throughput, color='g', marker='.', linestyle='-', label='系统吞吐量')
+        ax2.set_ylabel('系统吞吐量 (Mbps)')
+        ax2.set_xlabel('时间步 (Step)')
+        ax2.grid(True, linestyle='--', alpha=0.6)
+        ax2.legend()
+        
+        fig.tight_layout()
+        filename = f"episode_{self.current_episode + 1}_performance.png"
+        save_file_path = os.path.join(self.save_path, filename)
+        fig.savefig(save_file_path, dpi=200, bbox_inches='tight')
+        plt.close(fig)
+        print(f"性能图表已保存: {save_file_path}")
+
     def close(self):
         """关闭可视化环境"""
         if self.fig is not None:
@@ -625,15 +746,16 @@ def create_env(scenario, args, save_path=None):
     return enhanced_env
 
 
-def visualize_evaluation(env, agent, n_episodes=5):
+def visualize_evaluation(env, agent, args):
     """
     运行可视化评估
     
     参数:
         env: 环境实例
         agent: 智能体实例
-        n_episodes: 评估的episode数量
+        args: 命令行参数
     """
+    n_episodes = args.n_episodes
     print(f"\n开始可视化评估，将运行 {n_episodes} 个episodes...")
     
     episode_rewards = []
@@ -674,8 +796,9 @@ def visualize_evaluation(env, agent, n_episodes=5):
             # 更新环境的step计数
             env.current_step = step_count
             
-            # 渲染当前状态，传入技能信息
-            env.render(skill_info=agent_info)
+            # 根据渲染间隔渲染当前状态
+            if step_count % args.render_interval == 0:
+                env.render(skill_info=agent_info)
             
             # 打印当前步骤信息（包含技能信息）
             if hasattr(env.base_env.env, 'reward_info') and env.base_env.env.reward_info:
@@ -692,10 +815,18 @@ def visualize_evaluation(env, agent, n_episodes=5):
             
             # 检查是否结束
             if done or truncated:
+                # 强制渲染最终状态
+                print("渲染最终状态...")
+                env.render(skill_info=agent_info)
+                
+                # 如果启用了额外绘图，则在episode结束时生成
+                if args.save_extra_plots:
+                    env.save_episode_plots(args)
+                
                 break
             
             # 暂停一下以便观察
-            time.sleep(0.5)
+            #time.sleep(0.1)
         
         episode_rewards.append(episode_reward)
         print(f"Episode {episode + 1} 完成: 总奖励={episode_reward:.3f}, 总步数={step_count}")
@@ -723,13 +854,19 @@ def parse_args():
                        help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
     parser.add_argument('--n_episodes', type=int, default=5,
                        help='评估的episode数量')
+    parser.add_argument('--render_interval', type=int, default=1,
+                        help='每隔多少步渲染一次 (默认: 1, 即每步都渲染)')
+    parser.add_argument('--save_extra_plots', action='store_true',
+                        help='生成并保存额外的分析图表 (2D拓扑图、性能变化图)')
+    parser.add_argument('--trajectory_snapshot_interval', type=int, default=500,
+                        help='在2D拓扑图上标记轨迹快照的频率 (步数)')
     
     # 环境参数 - 为场景4调整默认值
-    parser.add_argument('--n_uavs', type=int, default=12,
+    parser.add_argument('--n_uavs', type=int, default=10,
                        help='无人机数量 (场景4推荐12架)')
-    parser.add_argument('--n_users', type=int, default=80,
+    parser.add_argument('--n_users', type=int, default=30,
                        help='用户数量 (场景4推荐80个)')
-    parser.add_argument('--area_size', type=int, default=2500,
+    parser.add_argument('--area_size', type=int, default=2000,
                        help='区域大小 (米, 场景4推荐2500m)')
     parser.add_argument('--max_hops', type=int, default=4,
                        help='最大跳数 (场景2、3、4使用, 场景4推荐4跳)')
@@ -743,7 +880,7 @@ def parse_args():
                        help='随机种子')
     
     # 场景3和场景4共同参数 - 为场景4调整默认值
-    parser.add_argument('--n_clusters', type=int, default=4,
+    parser.add_argument('--n_clusters', type=int, default=3,
                        help='用户簇数量 (场景3和4使用, 场景4推荐4个)')
     parser.add_argument('--cluster_std', type=int, default=80,
                        help='簇内用户分布标准差 (米, 场景3和4使用, 场景4推荐80m)')
@@ -786,6 +923,8 @@ def main():
     # 创建配置
     config = Config()
     config.n_agents = args.n_uavs
+    config.use_opt = False
+
     
     # 创建环境获取维度信息
     temp_env = create_env(args.scenario, args)
@@ -849,7 +988,7 @@ def main():
     
     try:
         # 运行可视化评估
-        visualize_evaluation(env, agent, args.n_episodes)
+        visualize_evaluation(env, agent, args)
     finally:
         # 清理资源
         env.close()

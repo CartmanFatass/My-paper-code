@@ -29,7 +29,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         height_range=(50, 200),
         max_speed=30,
         time_step=1.0,
-        max_steps=1500,
+        max_steps=5000,
         user_distribution="forced_relay_cluster",
         channel_model="probabilistic",
         render_mode=None,
@@ -53,8 +53,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         use_fdma=True,
         bandwidth=20e6,
         ground_bs_tx_power=30,
-        uav_init_mode="random",
+        uav_init_mode="start_area",
         uav_start_area_size=500,
+        grid_resolution=100,
+        exploration_reward_weight=0.1,
+        coverage_overlap_penalty_weight=0.1,
     ):
         super().__init__()
 
@@ -72,6 +75,18 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.seed_val = seed
         self.np_random = np.random.RandomState(seed)
 
+        # 探索奖励参数
+        self.grid_resolution = grid_resolution
+        self.exploration_reward_weight = exploration_reward_weight
+        
+        # 重叠惩罚参数
+        self.coverage_overlap_penalty_weight = coverage_overlap_penalty_weight
+        
+        # 初始化覆盖栅格和不确定性地图
+        self.grid_size = int(np.ceil(self.area_size / self.grid_resolution))
+        self.coverage_grid = np.zeros((self.grid_size, self.grid_size), dtype=bool)
+        self.uncertainty_map = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
+        
         # 场景特定参数
         self.n_clusters = n_clusters
         self.cluster_std = cluster_std
@@ -357,6 +372,154 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return user_positions
     
+    def _get_grid_coords(self, position):
+        """
+        将连续坐标转换为离散的栅格坐标
+        
+        参数:
+            position: 位置坐标 [x, y] 或 [x, y, z]
+            
+        返回:
+            grid_coords: 栅格坐标 (grid_x, grid_y)
+        """
+        x, y = position[0], position[1]
+        
+        # 将坐标转换为栅格索引
+        grid_x = int(np.clip(x / self.grid_resolution, 0, self.grid_size - 1))
+        grid_y = int(np.clip(y / self.grid_resolution, 0, self.grid_size - 1))
+        
+        return (grid_x, grid_y)
+    
+    def _calculate_uav_coverage_radius(self, uav_pos):
+        """
+        根据无人机高度动态计算其地面覆盖半径。
+        
+        该计算基于简化的自由空间路径损耗模型，求解使得接收信号强度
+        恰好等于最小SINR阈值时的水平距离。
+        
+        参数:
+            uav_pos: 无人机位置 [x, y, z]
+            
+        返回:
+            coverage_radius: 地面覆盖半径 (米)
+        """
+        height = uav_pos[2]
+        
+        # 简化假设：探索时主要考虑SNR，忽略干扰
+        # SNR = P_tx - PL - N_noise
+        # 我们需要找到路径损耗PL的最大值，使得SNR = min_sinr
+        max_path_loss = self.tx_power - self.noise_power - self.min_sinr
+        
+        # 使用自由空间路径损耗公式反向求解距离
+        # PL = 20 * log10(d) + 20 * log10(f) + 20 * log10(4*pi/c)
+        # PL = 20 * log10(d) + C
+        wavelength = 3e8 / self.carrier_frequency
+        constant_factor = 20 * np.log10(4 * np.pi / wavelength)
+        
+        # 从最大路径损耗计算最大通信距离 (3D)
+        log_d_3d = (max_path_loss - constant_factor) / 20
+        max_distance_3d = 10 ** log_d_3d
+        
+        # 根据3D距离和高度，计算地面覆盖半径 (水平距离)
+        if max_distance_3d > height:
+            coverage_radius = np.sqrt(max_distance_3d**2 - height**2)
+        else:
+            coverage_radius = 0  # 如果高度太高，无法在地面形成有效覆盖
+            
+        return coverage_radius
+
+    def _compute_exploration_reward(self):
+        """
+        计算基于动态覆盖范围和不确定性地图的信息增益探索奖励。
+        
+        返回:
+            exploration_reward: 探索奖励值
+        """
+        all_covered_grids = set()
+        
+        # 遍历每个无人机，计算其覆盖的栅格
+        for uav_pos in self.uav_positions:
+            # 动态计算覆盖半径
+            coverage_radius = self._calculate_uav_coverage_radius(uav_pos)
+            
+            if coverage_radius > 0:
+                # 将覆盖半径转换为栅格单位
+                radius_in_grids = int(np.ceil(coverage_radius / self.grid_resolution))
+                uav_grid_x, uav_grid_y = self._get_grid_coords(uav_pos)
+                
+                # 遍历以无人机为中心的矩形区域，检查哪些栅格在圆形覆盖范围内
+                for dx in range(-radius_in_grids, radius_in_grids + 1):
+                    for dy in range(-radius_in_grids, radius_in_grids + 1):
+                        # 检查是否在圆形区域内
+                        if dx**2 + dy**2 <= radius_in_grids**2:
+                            grid_x = uav_grid_x + dx
+                            grid_y = uav_grid_y + dy
+                            
+                            # 确保栅格坐标在地图范围内
+                            if 0 <= grid_x < self.grid_size and 0 <= grid_y < self.grid_size:
+                                all_covered_grids.add((grid_x, grid_y))
+
+        # 计算信息增益（访问不确定性高的区域）
+        information_gain = 0
+        for grid_x, grid_y in all_covered_grids:
+            # 奖励等于该区域的不确定性值
+            information_gain += self.uncertainty_map[grid_x, grid_y]
+            # 访问后，该区域的不确定性清零
+            self.uncertainty_map[grid_x, grid_y] = 0
+            
+            # 同时更新旧的覆盖栅格，以保持兼容性
+            if not self.coverage_grid[grid_x, grid_y]:
+                self.coverage_grid[grid_x, grid_y] = True
+
+        # 归一化信息增益并应用权重
+        # 使用总栅格数作为归一化因子，更稳定
+        normalization_factor = self.grid_size * self.grid_size
+        if normalization_factor == 0:
+            normalization_factor = 1e-6
+
+        normalized_gain = information_gain / normalization_factor
+        exploration_reward = normalized_gain * self.exploration_reward_weight
+        
+        return exploration_reward
+    
+    def _compute_coverage_overlap_penalty(self):
+        """
+        计算基于潜在覆盖能力的重叠惩罚
+        
+        重叠定义：一个用户同时被多个无人机以高于SINR阈值的信号覆盖
+        这能惩罚"扎堆"行为，即使最终只有一个无人机提供服务
+        
+        返回:
+            overlap_penalty: 重叠惩罚值 [0, 1]
+        """
+        if not hasattr(self, 'sinr_matrix') or self.sinr_matrix is None:
+            return 0.0
+        
+        total_redundant_coverage = 0
+        
+        # 遍历每个用户，统计能够覆盖它的无人机数量
+        for user_idx in range(self.n_users):
+            # 统计能够覆盖该用户的无人机数量（SINR达标）
+            potential_servers = np.sum(self.sinr_matrix[:, user_idx] >= self.min_sinr)
+            
+            # 如果有多个无人机可以覆盖同一用户，产生冗余
+            if potential_servers > 1:
+                redundant_count = potential_servers - 1  # 冗余覆盖数 = 总覆盖数 - 1
+                total_redundant_coverage += redundant_count
+        
+        # 归一化惩罚值：用总冗余覆盖数除以用户总数
+        # 这可以理解为"平均每个用户的冗余覆盖度"
+        if self.n_users > 0:
+            # 将惩罚归一化到[0,1]范围，假设平均冗余不超过5
+            normalized_penalty = total_redundant_coverage / (self.n_users * 5)
+        else:
+            normalized_penalty = 0.0
+        
+        # 确保惩罚值在合理范围内
+        overlap_penalty = np.clip(normalized_penalty, 0.0, 1.0)
+        
+        return overlap_penalty
+    
     def _init_uav_positions(self):
         """
         初始化无人机位置 - 支持多种初始化模式
@@ -518,12 +681,15 @@ class UAVForcedRelayEnv(ParallelEnv):
                 uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
                 system_throughput += uav_frontend_capacity
         
-        # 组合最终奖励
+        # 5. 计算覆盖重叠惩罚
+        overlap_penalty = self._compute_coverage_overlap_penalty()
+        
+        # 组合最终奖励（减去重叠惩罚）
         final_reward = (
             self.coverage_weight * final_coverage_reward +
             self.connectivity_weight * connectivity_reward +
             self.efficiency_weight * efficiency_reward
-        )
+        ) - self.coverage_overlap_penalty_weight * overlap_penalty
         
         # 确保奖励在[0, 1]范围内
         final_reward = np.clip(final_reward, 0, 1)
@@ -535,6 +701,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             "coverage_bonus": coverage_bonus,
             "connectivity_reward": connectivity_reward,
             "efficiency_reward": efficiency_reward,
+            "overlap_penalty": overlap_penalty,
             "final_reward": final_reward,
             "effective_connected_users": effective_connected_users,
             "total_connected_users": connected_users,
@@ -545,6 +712,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             "total_uavs": self.n_uavs,
             "coverage_ratio": coverage_ratio,  # 兼容性字段
             "target_coverage_achieved": coverage_ratio >= 0.90,  # 是否达到90%目标
+            "exploration_reward": 0,  # 将在step方法中更新
         }
         
         return final_reward
@@ -647,7 +815,9 @@ class UAVForcedRelayEnv(ParallelEnv):
                           transform=self.ax.transAxes, fontsize=9)
             self.ax.text2D(0.75, 0.75, f'Efficiency Reward: {reward_info.get("efficiency_reward", 0):.3f}', 
                           transform=self.ax.transAxes, fontsize=9)
-            self.ax.text2D(0.75, 0.70, f'Total Reward: {reward_info.get("final_reward", 0):.3f}', 
+            self.ax.text2D(0.75, 0.70, f'Overlap Penalty: {reward_info.get("overlap_penalty", 0):.3f}', 
+                          transform=self.ax.transAxes, fontsize=9, color='red')
+            self.ax.text2D(0.75, 0.65, f'Total Reward: {reward_info.get("final_reward", 0):.3f}', 
                           transform=self.ax.transAxes, fontsize=9, weight='bold')
             
             # 目标达成状态
@@ -718,6 +888,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         self.current_step = 0
         self.agents = self.possible_agents.copy()
+        
+        # 重置覆盖栅格和不确定性地图
+        self.coverage_grid.fill(False)
+        self.uncertainty_map.fill(0)
         
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
@@ -874,6 +1048,9 @@ class UAVForcedRelayEnv(ParallelEnv):
             truncations: 所有智能体的截断状态字典
             infos: 所有智能体的信息字典
         """
+        # 0. 更新不确定性地图（老化）
+        self.uncertainty_map += 1
+        
         # 1. 更新所有无人机位置
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
@@ -886,13 +1063,22 @@ class UAVForcedRelayEnv(ParallelEnv):
                 new_position[2] = np.clip(new_position[2], *self.height_range)
                 self.uav_positions[agent_idx] = new_position
         
-        # 2. 使用本类的方法更新信道状态、连接和路由
+        # 2. 计算探索奖励
+        exploration_reward = self._compute_exploration_reward()
+        
+        # 3. 使用本类的方法更新信道状态、连接和路由
         self._update_channel_state()
         self._update_uav_connections()
         self._compute_routing_paths()
         
-        # 3. 使用本类的方法计算奖励
-        global_reward = self._compute_reward()
+        # 4. 使用本类的方法计算基础奖励
+        base_reward = self._compute_reward()
+        
+        # 5. 更新奖励信息中的探索奖励
+        self.reward_info["exploration_reward"] = exploration_reward
+        
+        # 6. 组合最终奖励（基础奖励 + 探索奖励）
+        global_reward = base_reward + exploration_reward
         
         # 4. 更新步数和完成状态
         self.current_step += 1
@@ -915,6 +1101,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "reward_info": self.reward_info.copy(),
                 "coverage_ratio": self.reward_info.get("coverage_ratio", 0),
                 "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
+                "covered_grids": np.sum(self.coverage_grid),  # 添加覆盖栅格数量信息
             }
         
         # 7. 更新观测值（在循环外一次性完成）

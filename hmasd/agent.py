@@ -1597,6 +1597,12 @@ class HMASDAgent:
         # CD Loss
         self.writer.add_scalar('Losses/Coordinator/CD_Loss', cd_loss_val, self.global_step)
 
+        # 记录关键超参数
+        self.writer.add_scalar('Parameters/Lambda_D', self.config.lambda_D, self.global_step)
+        self.writer.add_scalar('Parameters/Lambda_d', self.config.lambda_d, self.global_step)
+        self.writer.add_scalar('Parameters/Lambda_h', self.config.lambda_h, self.global_step)
+        self.writer.add_scalar('Parameters/Lambda_l', self.config.lambda_l, self.global_step)
+
         # Value Normalization统计信息记录
         if self.config.use_valuenorm:
             if self.value_norm_coordinator is not None:
