@@ -684,7 +684,7 @@ def train(vec_env, eval_vec_env, config, args, device):
     # 训练变量
     total_steps = 0
     n_episodes = 0
-    max_episodes = config.total_timesteps // config.buffer_size
+    max_episodes = config.total_timesteps // config.low_level_buffer_size
     episode_rewards = []
     update_times = 0
     best_reward = float('-inf')
@@ -894,7 +894,7 @@ def train(vec_env, eval_vec_env, config, args, device):
                     main_logger.info(f"最近10个episodes: 平均奖励 {avg_reward:.2f} ± {std_reward:.2f}, 最大/最小: {max_reward:.2f}/{min_reward:.2f}")
 
             # 更新网络
-            if total_steps // num_envs > 0 and (total_steps // num_envs) % (config.buffer_size // num_envs) == 0:
+            if total_steps // num_envs > 0 and (total_steps // num_envs) % (config.low_level_buffer_size // num_envs) == 0:
                 if len(agent.low_level_buffer) >= agent.config.batch_size:
                     try:
                         update_info = agent.update()

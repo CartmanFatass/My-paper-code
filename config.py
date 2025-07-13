@@ -34,11 +34,20 @@ class Config:
     max_grad_norm = 0.5      # 最大梯度范数
 
     # HMASD损失权重
-    lambda_e = 1.0           # 外部奖励权重（因为是非稀疏奖励，设置较大）
-    lambda_D = 0.1           # 团队技能判别器奖励权重
-    lambda_d = 0.1           # 个体技能判别器奖励权重
+    lambda_e = 10.0          # [退火优化] 设置一个中性的基础外部奖励权重，由退火机制动态调整
+    lambda_D = 1.0           # [退火优化] 提高基础团队判别器奖励权重
+    lambda_d = 2.0           # [退火优化] 提高基础个体判别器奖励权重
     lambda_h = 0.01          # 高层策略熵权重
-    lambda_l = 0.01          # 低层策略熵权重
+    lambda_l = 0.1           # [优化] 提高低层策略熵权重，鼓励动作探索
+
+    # 权重退火参数 - 用于解决奖励空窗期问题
+    use_reward_annealing = True         # [启用] 启用权重退火机制
+    w_intrinsic_initial = 5.0          # 内在奖励初始权重倍数（早期强调探索）
+    w_intrinsic_final = 1.0            # 内在奖励最终权重倍数（后期回到正常水平）
+    w_extrinsic_initial = 0.5          # 外部奖励初始权重倍数（早期弱化利用）
+    w_extrinsic_final = 2.0            # 外部奖励最终权重倍数（后期强化利用）
+    anneal_steps = 1000000             # 权重退火总步数（约25%的训练时间）
+    anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
 
     # 训练参数
     buffer_size = 1024       # 经验回放缓冲区大小

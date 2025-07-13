@@ -328,7 +328,8 @@ class EnhancedRewardTracker:
         if step - self.last_export_step < self.export_interval:
             return
         
-        export_dir = os.path.join(self.log_dir, 'paper_data')
+        #export_dir = os.path.join(self.log_dir, 'paper_data')
+        export_dir = '../autodl-tmp/paper_data'
         os.makedirs(export_dir, exist_ok=True)
         
         # 导出奖励数据
@@ -573,24 +574,6 @@ class EnhancedRewardTracker:
                     throughput_trend = second_half_rate - first_half_rate
                     writer.add_scalar('Performance/Throughput_Trend_100steps', throughput_trend, step)
             
-            # 按环境分别统计吞吐量
-            env_throughputs = defaultdict(list)
-            env_total_users = defaultdict(list)
-            for entry in recent_served_data:
-                env_throughputs[entry['env_id']].append(entry['served_users'])
-                env_total_users[entry['env_id']].append(entry['total_users'])
-            
-            for env_id in env_throughputs.keys():
-                served_values = env_throughputs[env_id]
-                total_values = env_total_users[env_id]
-                
-                if served_values:
-                    env_avg_served = np.mean(served_values)
-                    env_avg_total = np.mean(total_values)
-                    env_service_rate = env_avg_served / max(env_avg_total, 1)
-                    
-                    writer.add_scalar(f'Performance/Env_{env_id}_ServedUsers', env_avg_served, step)
-                    writer.add_scalar(f'Performance/Env_{env_id}_ServiceRate', env_service_rate, step)
             
             # 吞吐量方差（稳定性指标）
             if len(recent_served_users) > 1:
@@ -618,16 +601,6 @@ class EnhancedRewardTracker:
                 writer.add_scalar('Performance/System_Throughput_Max_100steps', np.max(recent_system_throughput), step)
                 writer.add_scalar('Performance/System_Throughput_Min_100steps', np.min(recent_system_throughput), step)
                 
-                # 按环境分别统计系统吞吐量
-                env_system_throughputs = defaultdict(list)
-                for entry in recent_throughput_data:
-                    if 'system_throughput_mbps' in entry:
-                        env_system_throughputs[entry['env_id']].append(entry['system_throughput_mbps'])
-                
-                for env_id, throughput_values in env_system_throughputs.items():
-                    if throughput_values:
-                        env_avg_throughput = np.mean(throughput_values)
-                        writer.add_scalar(f'Performance/Env_{env_id}_System_Throughput_Mbps', env_avg_throughput, step)
         
         # 平均用户吞吐量统计（新增）
         if self.performance_metrics['avg_throughput_per_user']:
@@ -644,15 +617,6 @@ class EnhancedRewardTracker:
                 user_throughput_std = np.std(recent_avg_throughput)
                 writer.add_scalar('Performance/Avg_User_Throughput_Std_100steps', user_throughput_std, step)
                 
-                # 按环境分别统计平均用户吞吐量
-                env_avg_user_throughputs = defaultdict(list)
-                for entry in recent_avg_throughput_data:
-                    env_avg_user_throughputs[entry['env_id']].append(entry['avg_throughput_per_user_mbps'])
-                
-                for env_id, throughput_values in env_avg_user_throughputs.items():
-                    if throughput_values:
-                        env_avg_user_throughput = np.mean(throughput_values)
-                        writer.add_scalar(f'Performance/Env_{env_id}_Avg_User_Throughput_Mbps', env_avg_user_throughput, step)
         
         # 记录环境奖励组成部分到TensorBoard (场景2、场景3和场景4通用)
         reward_components = self.performance_metrics['reward_components']
@@ -746,88 +710,96 @@ class EnhancedRewardTracker:
                     coverage_progress = second_half_avg - first_half_avg
                     writer.add_scalar('Exploration/Coverage_Progress_100steps', coverage_progress, step)
         
+        # 场景4新增：信念地图统计 - 新的Belief分类
+        belief_fields = [
+            'belief_entropy', 'max_belief_value', 'min_belief_value', 'mean_belief_value',
+            'belief_concentration', 'high_belief_cells', 'belief_variance', 'belief_skewness',
+            'total_belief_mass', 'current_potential', 'previous_potential', 'sparse_task_reward'
+        ]
+        
+        for field in belief_fields:
+            if reward_components.get(field):
+                recent_data = reward_components[field][-100:]
+                if recent_data:
+                    recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
+                    if recent_values:
+                        avg_value = np.mean(recent_values)
+                        
+                        # 根据字段类型选择合适的TensorBoard分类
+                        if field in ['belief_entropy', 'max_belief_value', 'min_belief_value', 'mean_belief_value', 
+                                     'belief_concentration', 'belief_variance', 'belief_skewness', 'total_belief_mass']:
+                            category = 'Belief'
+                        elif field in ['current_potential', 'previous_potential']:
+                            category = 'Potential'
+                        elif field == 'sparse_task_reward':
+                            category = 'Rewards'
+                        elif field == 'high_belief_cells':
+                            category = 'Belief'
+                        else:
+                            category = 'Belief'
+                        
+                        # 格式化字段名
+                        formatted_field = field.replace('_', ' ').title().replace(' ', '_')
+                        writer.add_scalar(f'{category}/{formatted_field}_Mean_100steps', avg_value, step)
+                        
+                        # 为数值型字段添加额外统计
+                        if len(recent_values) > 1:
+                            std_value = np.std(recent_values)
+                            max_value = np.max(recent_values)
+                            min_value = np.min(recent_values)
+                            
+                            writer.add_scalar(f'{category}/{formatted_field}_Std_100steps', std_value, step)
+                            writer.add_scalar(f'{category}/{formatted_field}_Max_100steps', max_value, step)
+                            writer.add_scalar(f'{category}/{formatted_field}_Min_100steps', min_value, step)
+                            
+                            # 为某些关键字段添加趋势分析
+                            if field in ['belief_entropy', 'current_potential', 'sparse_task_reward'] and len(recent_values) >= 100:
+                                first_half_avg = np.mean(recent_values[:50])
+                                second_half_avg = np.mean(recent_values[50:])
+                                trend = second_half_avg - first_half_avg
+                                writer.add_scalar(f'{category}/{formatted_field}_Trend_100steps', trend, step)
+        
         # 计算Real_Rewards（乘以超参数后的真实值）
-        # 需要从环境或配置中获取权重参数
-        # 这里我们假设可以从某个地方获取到这些权重
+        # 权重参数统一从 self.config 读取
+        
+        # 定义奖励组件、其权重名称和显示名称的映射
+        reward_to_weight_map = {
+            # 奖励组件内部名称: (config中的权重属性名, TensorBoard中的显示名)
+            'exploration_rewards': ('potential_reward_weight', 'Exploration'),
+            'overlap_penalty': ('coverage_overlap_penalty_weight', 'OverlapPenalty'),
+            'effective_coverage_rewards': ('effective_coverage_weight', 'EffectiveCoverage'),
+            'throughput_rewards': ('throughput_weight', 'Throughput'),
+            'load_balance_rewards': ('load_balance_weight', 'LoadBalance'),
+            'coverage_rewards': ('coverage_weight', 'Coverage'),
+            'network_connectivity_rewards': ('connectivity_weight', 'Connectivity'),
+            # 可以根据需要添加更多映射
+        }
+
         real_rewards_calculated = False
-        
-        # 尝试从不同来源获取权重参数
-        weights = {}
-        
-        # 首先从config获取权重 (主要是场景3)
         if hasattr(self, 'config') and self.config:
-            if hasattr(self.config, 'effective_coverage_weight'):
-                weights['effective_coverage_weight'] = self.config.effective_coverage_weight
-            if hasattr(self.config, 'throughput_weight'):
-                weights['throughput_weight'] = self.config.throughput_weight
-            if hasattr(self.config, 'load_balance_weight'):
-                weights['load_balance_weight'] = self.config.load_balance_weight
-        
-        # 如果提供了args，则从中获取权重 (主要是场景4)，这会覆盖config中的同名参数
-        if args:
-            if hasattr(args, 'coverage_weight'):
-                weights['coverage_weight'] = args.coverage_weight
-            if hasattr(args, 'connectivity_weight'):
-                weights['connectivity_weight'] = args.connectivity_weight
-            if hasattr(args, 'efficiency_weight'):
-                weights['efficiency_weight'] = args.efficiency_weight
-            if hasattr(args, 'exploration_reward_weight'):
-                weights['exploration_reward_weight'] = args.exploration_reward_weight
-            if hasattr(args, 'coverage_overlap_penalty_weight'):
-                weights['coverage_overlap_penalty_weight'] = args.coverage_overlap_penalty_weight
-        
-        # 计算Real_Rewards（奖励组成 × 对应权重）
-        if weights:
-            real_rewards_calculated = True
-            
-            # 场景4的Real_Rewards
-            if reward_components.get('exploration_rewards') and 'exploration_reward_weight' in weights:
-                recent_exploration_rewards = reward_components['exploration_rewards'][-100:]
-                if recent_exploration_rewards:
-                    avg_exploration_reward = np.mean([r['value'] for r in recent_exploration_rewards])
-                    real_exploration_reward = avg_exploration_reward * weights['exploration_reward_weight']
-                    writer.add_scalar('Real_Rewards/Exploration_Real_100steps', real_exploration_reward, step)
-            
-            if reward_components.get('overlap_penalty') and 'coverage_overlap_penalty_weight' in weights:
-                recent_overlap_penalties = reward_components['overlap_penalty'][-100:]
-                if recent_overlap_penalties:
-                    avg_overlap_penalty = np.mean([r['value'] for r in recent_overlap_penalties])
-                    real_overlap_penalty = avg_overlap_penalty * weights['coverage_overlap_penalty_weight']
-                    writer.add_scalar('Real_Rewards/Overlap_Penalty_Real_100steps', real_overlap_penalty, step)
-            
-            # 场景3的Real_Rewards
-            if reward_components.get('effective_coverage_rewards') and 'effective_coverage_weight' in weights:
-                recent_effective_coverage = reward_components['effective_coverage_rewards'][-100:]
-                if recent_effective_coverage:
-                    avg_effective_coverage = np.mean([r['value'] for r in recent_effective_coverage])
-                    real_effective_coverage = avg_effective_coverage * weights['effective_coverage_weight']
-                    writer.add_scalar('Real_Rewards/Effective_Coverage_Real_100steps', real_effective_coverage, step)
-            
-            if reward_components.get('throughput_rewards') and 'throughput_weight' in weights:
-                recent_throughput_rewards = reward_components['throughput_rewards'][-100:]
-                if recent_throughput_rewards:
-                    avg_throughput_reward = np.mean([r['value'] for r in recent_throughput_rewards])
-                    real_throughput_reward = avg_throughput_reward * weights['throughput_weight']
-                    writer.add_scalar('Real_Rewards/Throughput_Real_100steps', real_throughput_reward, step)
-            
-            if reward_components.get('load_balance_rewards') and 'load_balance_weight' in weights:
-                recent_load_balance = reward_components['load_balance_rewards'][-100:]
-                if recent_load_balance:
-                    avg_load_balance = np.mean([r['value'] for r in recent_load_balance])
-                    real_load_balance = avg_load_balance * weights['load_balance_weight']
-                    writer.add_scalar('Real_Rewards/Load_Balance_Real_100steps', real_load_balance, step)
-            
-            # 通用奖励组成的Real_Rewards（如果有对应权重）
-            if reward_components.get('coverage_rewards') and 'coverage_weight' in weights:
-                recent_coverage_rewards = reward_components['coverage_rewards'][-100:]
-                if recent_coverage_rewards:
-                    avg_coverage_reward = np.mean([r['value'] for r in recent_coverage_rewards])
-                    real_coverage_reward = avg_coverage_reward * weights['coverage_weight']
-                    writer.add_scalar('Real_Rewards/Coverage_Real_100steps', real_coverage_reward, step)
-        
+            for reward_key, (weight_key, display_name) in reward_to_weight_map.items():
+                # 检查奖励数据和权重是否存在
+                if reward_components.get(reward_key) and hasattr(self.config, weight_key):
+                    recent_rewards_data = reward_components[reward_key][-100:]
+                    weight_value = getattr(self.config, weight_key)
+                    
+                    if recent_rewards_data:
+                        # 计算平均原始奖励值
+                        avg_raw_reward = np.mean([r['value'] for r in recent_rewards_data])
+                        # 计算加权后的真实奖励
+                        real_reward = avg_raw_reward * weight_value
+                        
+                        # 构建TensorBoard标签
+                        # 格式: Real_Rewards/奖励名字_权重名字_权重数值
+                        tb_tag = f"Real_Rewards/{display_name}_{weight_key}_{weight_value:.4f}"
+                        
+                        # 记录到TensorBoard
+                        writer.add_scalar(tb_tag, real_reward, step)
+                        real_rewards_calculated = True
+
         if not real_rewards_calculated:
-            # 如果无法获取权重参数，记录一个提示
-            writer.add_text('Real_Rewards/Note', 'Real rewards calculation requires weight parameters from config', step)
+            # 如果没有任何一个真实奖励被计算和记录，则记录一个提示
+            writer.add_text('Real_Rewards/Note', 'No real rewards were calculated. Check config for weights.', step)
         
         # 其他有用指标
         if reward_components['avg_hops']:
@@ -899,29 +871,17 @@ def get_device(device_pref):
         main_logger.info("使用CPU")
         return torch.device('cpu')
 
-# 创建环境函数 (修改后用于 SubprocVecEnv)
-def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config=None, max_hops=None, render_mode=None, rank=0, seed=0, n_clusters=None, cluster_std=None, central_area_ratio=None, area_size=None, use_fdma=True, bandwidth=None, **kwargs):
+# 创建环境函数 (简化后用于 SubprocVecEnv)
+def make_env(rank, seed, config, scenario, render_mode=None):
     """
-    创建环境实例的函数 (用于 SubprocVecEnv)
+    创建环境实例的函数 (用于 SubprocVecEnv) - 简化版本
 
     参数:
-        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式)
-        n_uavs: 无人机数量
-        n_users: 用户数量
-        user_distribution: 用户分布类型
-        channel_model: 信道模型
-        config: 配置对象，包含奖励权重等参数
-        max_hops: 最大跳数 (仅用于场景2, 3, 4)
-        render_mode: 渲染模式
         rank: 环境的索引 (用于设置不同的种子)
         seed: 基础随机种子
-        n_clusters: 用户簇数量 (仅用于场景3, 4)
-        cluster_std: 簇内用户分布标准差 (仅用于场景3, 4)
-        central_area_ratio: 中心用户区域占总区域的比例 (仅用于场景3, 4)
-        area_size: 区域大小 (仅用于场景3, 4)
-        use_fdma: 是否启用FDMA
-        bandwidth: 每个无人机的带宽 (Hz)
-        **kwargs: 其他特定于场景的参数
+        config: 配置对象，包含所有环境参数和奖励权重
+        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式)
+        render_mode: 渲染模式
 
     返回:
         一个返回环境实例的函数
@@ -929,21 +889,16 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
     def _init():
         env_seed = seed + rank # 为每个并行环境设置不同的种子
         
-        # 如果未提供带宽，则使用默认值
-        effective_bandwidth = bandwidth
-        if effective_bandwidth is None:
-            effective_bandwidth = 20e6
-        
-        # 准备通用环境参数
+        # 从配置对象获取通用环境参数
         env_kwargs = {
-            'n_uavs': n_uavs,
-            'n_users': n_users,
-            'user_distribution': user_distribution,
-            'channel_model': channel_model,
+            'n_uavs': config.n_agents,
+            'n_users': config.n_users,
+            'user_distribution': config.user_distribution,
+            'channel_model': config.channel_model,
             'render_mode': render_mode,
             'seed': env_seed,
-            'use_fdma': use_fdma,
-            'bandwidth': effective_bandwidth
+            'use_fdma': config.use_fdma,
+            'bandwidth': config.bandwidth
         }
         
         if scenario == 1:
@@ -951,59 +906,55 @@ def make_env(scenario, n_uavs, n_users, user_distribution, channel_model, config
         elif scenario == 2:
             # 场景2不再需要传递奖励权重参数，奖励已固化为覆盖率+归一化吞吐量
             raw_env = UAVCooperativeNetworkEnv(
-                max_hops=max_hops,
+                max_hops=config.max_hops,
                 **env_kwargs
             )
         elif scenario == 3:
-            # 准备场景3的新奖励权重参数（如果配置可用）
-            reward_kwargs = {}
-            if config is not None:
-                reward_kwargs.update({
-                    'effective_coverage_weight': config.effective_coverage_weight,
-                    'throughput_weight': config.throughput_weight,
-                    'load_balance_weight': config.load_balance_weight,
-                    'proximity_penalty_weight': config.proximity_penalty_weight
-                })
+            # 场景3的奖励权重参数（从配置对象获取）
+            reward_kwargs = {
+                'effective_coverage_weight': config.effective_coverage_weight,
+                'throughput_weight': config.throughput_weight,
+                'load_balance_weight': config.load_balance_weight,
+                'proximity_penalty_weight': config.proximity_penalty_weight
+            }
             
-            # 准备场景3特有的参数
-            scenario3_kwargs = {}
-            if n_clusters is not None:
-                scenario3_kwargs['n_clusters'] = n_clusters
-            if cluster_std is not None:
-                scenario3_kwargs['cluster_std'] = cluster_std
-            if central_area_ratio is not None:
-                scenario3_kwargs['central_area_ratio'] = central_area_ratio
-            if area_size is not None:
-                scenario3_kwargs['area_size'] = area_size
+            # 场景3特有的参数（从配置对象获取）
+            scenario3_kwargs = {
+                'n_clusters': config.n_clusters,
+                'cluster_std': config.cluster_std,
+                'central_area_ratio': config.central_area_ratio,
+                'area_size': config.area_size
+            }
             
             raw_env = UAVMultiHopEnv(
-                max_hops=max_hops,
+                max_hops=config.max_hops,
                 **env_kwargs, # 传递通用参数
-                **reward_kwargs, # 传递场景3的新奖励权重参数
+                **reward_kwargs, # 传递场景3的奖励权重参数
                 **scenario3_kwargs # 传递场景3特有参数
             )
         elif scenario == 4:
-            # 场景4：强制多跳中继环境
+            # 场景4：强制多跳中继环境（从配置对象获取所有参数）
             scenario4_kwargs = {
                 'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
-                'max_hops': max_hops,
-                'area_size': area_size,
-                'n_clusters': n_clusters,
-                'cluster_std': cluster_std,
-                'central_area_ratio': central_area_ratio,
-                'min_sinr': kwargs.get('min_sinr'),
-                'max_connections': kwargs.get('max_connections'),
-                'coverage_weight': kwargs.get('coverage_weight'),
-                'connectivity_weight': kwargs.get('connectivity_weight'),
-                'efficiency_weight': kwargs.get('efficiency_weight'),
-                'uav_init_mode': kwargs.get('uav_init_mode'),
-                'uav_start_area_size': kwargs.get('uav_start_area_size'),
-                'grid_resolution': kwargs.get('grid_resolution'),
-                'exploration_reward_weight': kwargs.get('exploration_reward_weight'),
+                'max_hops': config.max_hops,
+                'area_size': config.area_size,
+                'n_clusters': config.n_clusters,
+                'cluster_std': config.cluster_std,
+                'central_area_ratio': config.central_area_ratio,
+                'min_sinr': config.min_sinr,
+                'max_connections': config.max_connections,
+                'coverage_weight': config.coverage_weight,
+                'connectivity_weight': config.connectivity_weight,
+                'efficiency_weight': config.efficiency_weight,
+                'uav_init_mode': config.uav_init_mode,
+                'uav_start_area_size': config.uav_start_area_size,
+                'grid_resolution': config.grid_resolution,
+                'potential_reward_weight': config.potential_reward_weight,
+                'belief_decay_factor': config.belief_decay_factor,
+                'recon_interval': config.recon_interval,
+                'recon_strength': config.recon_strength,
+                'coverage_overlap_penalty_weight': config.coverage_overlap_penalty_weight
             }
-            
-            # 过滤掉值为None的参数，以便环境使用其内部默认值
-            scenario4_kwargs = {k: v for k, v in scenario4_kwargs.items() if v is not None}
             
             # 将场景4的参数合并到通用参数中
             env_kwargs.update(scenario4_kwargs)
@@ -1071,12 +1022,18 @@ def parse_args():
                         choices=['random', 'start_area'], help='无人机初始化模式 (仅用于场景4): random=随机分布, start_area=起始区域均匀分布')
     parser.add_argument('--uav_start_area_size', type=int, default=500, help='起始区域大小（米），仅在uav_init_mode=start_area时使用 (仅用于场景4)')
     
-    # 场景4探索奖励参数
-    parser.add_argument('--grid_resolution', type=int, default=100, help='探索栅格分辨率（米），仅用于场景4')
-    parser.add_argument('--exploration_reward_weight', type=float, default=5, help='探索奖励权重，仅用于场景4')
+    # 场景4基于信念的势函数奖励参数
+    parser.add_argument('--gamma', type=float, default=0.99, help='折扣因子，用于势函数计算（仅用于场景4）')
+    parser.add_argument('--potential_reward_weight', type=float, default=0, help='势函数奖励权重，仅用于场景4')
+    parser.add_argument('--belief_decay_factor', type=float, default=0.1, help='信念衰减因子，仅用于场景4')
+    parser.add_argument('--recon_interval', type=int, default=100, help='信念重构间隔，仅用于场景4')
+    parser.add_argument('--recon_strength', type=float, default=0.1, help='信念重构强度，仅用于场景4')
     
     # 场景4重叠惩罚参数
     parser.add_argument('--coverage_overlap_penalty_weight', type=float, default=0.1, help='覆盖重叠惩罚权重，仅用于场景4')
+    
+    # 场景4栅格分辨率参数
+    parser.add_argument('--grid_resolution', type=int, default=50, help='栅格分辨率，仅用于场景4')
     
     # 并行参数
     parser.add_argument('--num_envs', type=int, default=0, 
@@ -1232,13 +1189,16 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Parameters/coverage_weight', str(args.coverage_weight), 0)
     agent.writer.add_text('Parameters/connectivity_weight', str(args.connectivity_weight), 0)
     agent.writer.add_text('Parameters/efficiency_weight', str(args.efficiency_weight), 0)
-    agent.writer.add_text('Parameters/exploration_reward_weight', str(args.exploration_reward_weight), 0)
+    agent.writer.add_text('Parameters/potential_reward_weight', str(args.potential_reward_weight), 0)
+    agent.writer.add_text('Parameters/belief_decay_factor', str(args.belief_decay_factor), 0)
+    agent.writer.add_text('Parameters/recon_interval', str(args.recon_interval), 0)
+    agent.writer.add_text('Parameters/recon_strength', str(args.recon_strength), 0)
     agent.writer.add_text('Parameters/coverage_overlap_penalty_weight', str(args.coverage_overlap_penalty_weight), 0)
 
     # 训练变量
     total_steps = 0
     n_episodes = 0
-    max_episodes = config.total_timesteps // config.buffer_size  # 估计的最大episode数量
+    max_episodes = config.total_timesteps // config.batch_size  # 估计的最大episode数量
     episode_rewards = []
     update_times = 0
     best_reward = float('-inf')
@@ -1249,7 +1209,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     last_check_total_steps = 0              # 上次检查时的总步数
     last_check_hl_samples = 0               # 上次检查时的高层样本数
     last_high_level_buffer_size = 0         # 上次检查时的高层缓冲区大小
-    check_interval_steps = config.buffer_size * num_envs  # 检查间隔步数
+    check_interval_steps = config.batch_size * num_envs  # 检查间隔步数
     warning_threshold_ratio = 0.1  # 如果实际样本数少于预期的10%，则发出警告
     error_threshold_steps = config.k * num_envs * 10  # 足够执行10个完整技能周期的步数
     
@@ -1557,17 +1517,6 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 last_check_hl_samples = current_high_level_samples_total
                 last_high_level_buffer_size = current_high_level_buffer_size
                 
-                # 将高层样本累积情况记录到TensorBoard（增强记录指标）
-                agent.writer.add_scalar('Buffer/high_level_buffer_size', current_high_level_buffer_size, total_steps)
-                agent.writer.add_scalar('Buffer/high_level_samples_collected_total', current_high_level_samples_total, total_steps)
-                agent.writer.add_scalar('Buffer/contributing_environments', contributing_envs, total_steps)
-                if parallel_steps_since_last_check > 0:
-                    samples_per_k_steps = (samples_since_last_check / parallel_steps_since_last_check) * config.k
-                    agent.writer.add_scalar('Buffer/high_level_samples_per_k_steps', samples_per_k_steps, total_steps)
-                    
-                # 记录各种收集原因的比例
-                for reason, count in high_level_samples_by_reason.items():
-                    agent.writer.add_scalar(f'Buffer/collection_reason_{reason}', count, total_steps)
         
         # 定期导出训练数据
         reward_tracker.export_training_data(total_steps, agent.writer, args=args)
@@ -1841,14 +1790,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
             if agent.config.n_agents > 3:
                 main_logger.info(f"... (共 {agent.config.n_agents} 个智能体)")
     
-        # 记录到TensorBoard
-        if hasattr(agent, 'writer'):
-            for z in range(agent.config.n_Z):
-                agent.writer.add_scalar(f'Eval/TeamSkill_{z}_Probability', team_skill_probs[z], eval_step)
-            
-            for i in range(agent.config.n_agents):
-                for z in range(agent.config.n_z):
-                    agent.writer.add_scalar(f'Eval/Agent{i}_Skill_{z}_Probability', agent_skill_probs[i][z], eval_step)
 
     # 打印奖励统计信息
     if high_level_rewards:
@@ -1916,6 +1857,40 @@ def main():
     config.n_agents = args.n_uavs
     main_logger.info(f"设置无人机数量: n_agents = n_uavs = {config.n_agents}")
     
+    # 将命令行参数更新到配置对象中（实现统一配置管理）
+    # 场景4奖励权重参数
+    config.coverage_weight = args.coverage_weight
+    config.connectivity_weight = args.connectivity_weight
+    config.efficiency_weight = args.efficiency_weight
+    config.potential_reward_weight = args.potential_reward_weight
+    config.coverage_overlap_penalty_weight = args.coverage_overlap_penalty_weight
+    
+    # 场景4信念地图与势函数参数
+    config.belief_decay_factor = args.belief_decay_factor
+    config.recon_interval = args.recon_interval
+    config.recon_strength = args.recon_strength
+    
+    # 场景4环境和空间参数
+    config.min_sinr = args.min_sinr
+    config.max_connections = args.max_connections
+    config.uav_init_mode = args.uav_init_mode
+    config.uav_start_area_size = args.uav_start_area_size
+    config.grid_resolution = args.grid_resolution
+    
+    # 通用环境参数
+    config.n_users = args.n_users
+    config.area_size = args.area_size
+    config.max_hops = args.max_hops
+    config.user_distribution = args.user_distribution
+    config.channel_model = args.channel_model
+    config.n_clusters = args.n_clusters
+    config.cluster_std = args.cluster_std
+    config.central_area_ratio = args.central_area_ratio
+    config.use_fdma = args.use_fdma
+    config.bandwidth = args.bandwidth
+    
+    main_logger.info("已将命令行参数更新到配置对象中，实现统一配置管理")
+    
     # 根据命令行参数设置OPT模块使用状态
     config.use_opt = args.use_opt
     main_logger.info(f"OPT模块使用状态: use_opt = {config.use_opt}")
@@ -1963,92 +1938,29 @@ def main():
     main_logger.info(f"基础种子: {base_seed}")
 
     train_env_fns = [make_env(
-        scenario=args.scenario,
-        n_uavs=args.n_uavs,
-        n_users=args.n_users,
-        user_distribution=args.user_distribution,
-        channel_model=args.channel_model,
-        config=config,
-        max_hops=args.max_hops,
-        render_mode=None,
         rank=i,
         seed=base_seed,
-        n_clusters=args.n_clusters,
-        cluster_std=args.cluster_std,
-        central_area_ratio=args.central_area_ratio,
-        area_size=args.area_size,
-        use_fdma=args.use_fdma,
-        bandwidth=args.bandwidth,
-        # 场景4参数
-        min_sinr=args.min_sinr,
-        max_connections=args.max_connections,
-        coverage_weight=args.coverage_weight,
-        connectivity_weight=args.connectivity_weight,
-        efficiency_weight=args.efficiency_weight,
-        uav_init_mode=args.uav_init_mode,
-        uav_start_area_size=args.uav_start_area_size,
-        grid_resolution=args.grid_resolution,
-        exploration_reward_weight=args.exploration_reward_weight,
-        coverage_overlap_penalty_weight=args.coverage_overlap_penalty_weight
+        config=config,
+        scenario=args.scenario,
+        render_mode=None
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
-        scenario=args.scenario,
-        n_uavs=args.n_uavs,
-        n_users=args.n_users,
-        user_distribution=args.user_distribution,
-        channel_model=args.channel_model,
-        config=config,
-        max_hops=args.max_hops,
-        render_mode="human" if args.render and i == 0 else None,
         rank=i,
         seed=base_seed + num_envs,
-        n_clusters=args.n_clusters,
-        cluster_std=args.cluster_std,
-        central_area_ratio=args.central_area_ratio,
-        area_size=args.area_size,
-        use_fdma=args.use_fdma,
-        bandwidth=args.bandwidth,
-        # 场景4参数
-        min_sinr=args.min_sinr,
-        max_connections=args.max_connections,
-        coverage_weight=args.coverage_weight,
-        connectivity_weight=args.connectivity_weight,
-        efficiency_weight=args.efficiency_weight,
-        uav_init_mode=args.uav_init_mode,
-        uav_start_area_size=args.uav_start_area_size,
-        grid_resolution=args.grid_resolution,
-        exploration_reward_weight=args.exploration_reward_weight,
-        coverage_overlap_penalty_weight=args.coverage_overlap_penalty_weight
+        config=config,
+        scenario=args.scenario,
+        render_mode="human" if args.render and i == 0 else None
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
     main_logger.info("创建临时环境以获取状态和观测维度...")
     temp_env_fn = make_env(
-        scenario=args.scenario,
-        n_uavs=args.n_uavs,
-        n_users=args.n_users,
-        user_distribution=args.user_distribution,
-        channel_model=args.channel_model,
-        config=config,
-        max_hops=args.max_hops,
-        render_mode=None,
         rank=0,
         seed=base_seed,
-        n_clusters=args.n_clusters,
-        cluster_std=args.cluster_std,
-        central_area_ratio=args.central_area_ratio,
-        area_size=args.area_size,
-        use_fdma=args.use_fdma,
-        bandwidth=args.bandwidth,
-        # 场景4参数
-        min_sinr=args.min_sinr,
-        max_connections=args.max_connections,
-        coverage_weight=args.coverage_weight,
-        connectivity_weight=args.connectivity_weight,
-        efficiency_weight=args.efficiency_weight,
-        uav_init_mode=args.uav_init_mode,
-        uav_start_area_size=args.uav_start_area_size
+        config=config,
+        scenario=args.scenario,
+        render_mode=None
     )
     temp_env = temp_env_fn()
     
@@ -2064,35 +1976,174 @@ def main():
 
     # 打印环境参数以供确认
     main_logger.info("="*50)
-    main_logger.info("已应用的环境参数:")
+    main_logger.info("已应用的环境和算法配置参数:")
     
-    env_to_check = temp_env.unwrapped if hasattr(temp_env, 'unwrapped') else temp_env
+    # 根据场景分类参数
+    scenario_param_categories = {
+        1: "基站模式参数",
+        2: "协作组网模式参数", 
+        3: "强制多跳模式参数",
+        4: "强制中继模式参数"
+    }
     
-    # 定义所有可能相关的参数
-    all_possible_params = [
-        # 通用参数
-        "n_uavs", "n_users", "area_size", "user_distribution", "channel_model",
-        "use_fdma", "bandwidth", "max_hops",
-        # 场景3 & 4 参数
-        "n_clusters", "cluster_std", "central_area_ratio",
-        # 场景3 特有奖励权重
-        "effective_coverage_weight", "throughput_weight", "load_balance_weight", "proximity_penalty_weight",
-        # 场景4 特有参数
-        "min_sinr", "max_connections", "coverage_weight", "connectivity_weight", "efficiency_weight"
+    main_logger.info(f"当前场景: {args.scenario} ({scenario_param_categories.get(args.scenario, '未知场景')})")
+    main_logger.info("")
+
+    def print_config_section(title, config_obj, attr_names, format_func=None):
+        """打印配置对象的指定属性"""
+        params = []
+        for attr_name in attr_names:
+            if hasattr(config_obj, attr_name):
+                value = getattr(config_obj, attr_name)
+                if format_func:
+                    formatted_value = format_func(value)
+                else:
+                    formatted_value = str(value)
+                params.append(f"{attr_name}: {formatted_value}")
+        
+        if params:
+            main_logger.info(f"{title}:")
+            for param in params:
+                main_logger.info(f"  - {param}")
+            main_logger.info("")
+        return len(params)
+
+    # 基础环境参数
+    basic_env_params = [
+        "n_agents", "n_users", "area_size", "user_distribution", "channel_model",
+        "use_fdma", "bandwidth", "max_hops"
     ]
     
-    applied_params_count = 0
-    for key in all_possible_params:
-        if hasattr(env_to_check, key):
-            value = getattr(env_to_check, key)
-            main_logger.info(f"  - {key}: {value}")
-            applied_params_count += 1
-        else:
-            # 使用debug级别记录未找到的参数，避免在info级别下刷屏
-            main_logger.debug(f"参数 '{key}' 在环境 '{type(env_to_check).__name__}' 中未找到，跳过打印。")
-            
-    if applied_params_count == 0:
-        main_logger.warning("未能从环境中获取任何可识别的参数进行打印。")
+    # 场景3&4共用参数
+    common_scenario_params = [
+        "n_clusters", "cluster_std", "central_area_ratio"
+    ]
+    
+    # 场景3特有奖励权重
+    scenario3_reward_params = [
+        "effective_coverage_weight", "throughput_weight", "load_balance_weight", 
+        "proximity_penalty_weight", "coverage_curve_steepness"
+    ]
+    
+    # 场景4特有奖励权重参数
+    scenario4_reward_params = [
+        "coverage_weight", "connectivity_weight", "efficiency_weight", 
+        "potential_reward_weight", "coverage_overlap_penalty_weight"
+    ]
+    
+    # 场景4特有环境参数
+    scenario4_env_params = [
+        "min_sinr", "max_connections", "uav_init_mode", "uav_start_area_size", 
+        "grid_resolution"
+    ]
+    
+    # 场景4信念地图与势函数参数
+    scenario4_belief_params = [
+        "belief_decay_factor", "recon_interval", "recon_strength"
+    ]
+    
+    # HMASD算法核心参数
+    hmasd_core_params = [
+        "n_Z", "n_z", "k", "state_dim", "obs_dim", "action_dim"
+    ]
+    
+    # HMASD超参数
+    hmasd_hyperparams = [
+        "gamma", "lambda_e", "lambda_D", "lambda_d", "lambda_h", "lambda_l",
+        "lr_coordinator", "lr_discoverer", "lr_discriminator"
+    ]
+    
+    # 训练参数
+    training_params = [
+        "total_timesteps", "num_envs", "eval_rollout_threads", "rollout_length",
+        "buffer_size", "batch_size", "high_level_batch_size", "eval_interval", 
+        "eval_episodes"
+    ]
+    
+    # 网络结构参数
+    network_params = [
+        "hidden_size", "embedding_dim", "n_encoder_layers", "n_decoder_layers",
+        "n_heads", "gru_hidden_size"
+    ]
+    
+    # OPT模块参数
+    opt_params = [
+        "use_opt_coordinator", "use_opt_discoverer_actor", "use_opt_discoverer_critic",
+        "opt_num_prototypes", "opt_prototype_dim", "opt_alpha", "opt_beta", "opt_layers"
+    ]
+    
+    # 权重退火参数
+    annealing_params = [
+        "use_reward_annealing", "w_intrinsic_initial", "w_intrinsic_final",
+        "w_extrinsic_initial", "w_extrinsic_final", "anneal_steps", "anneal_schedule"
+    ]
+    
+    # 学习率衰减参数
+    lr_decay_params = [
+        "use_lr_decay", "lr_decay_schedule", "lr_decay_steps",
+        "coordinator_lr_decay_factor", "discoverer_lr_decay_factor", "discriminator_lr_decay_factor"
+    ]
+
+    # 打印各类参数
+    total_params = 0
+    
+    # 1. 基础环境参数
+    total_params += print_config_section("基础环境参数", config, basic_env_params)
+    
+    # 2. 场景3&4共用参数
+    if args.scenario in [3, 4]:
+        total_params += print_config_section("场景共用参数", config, common_scenario_params)
+    
+    # 3. 场景特定奖励权重参数
+    if args.scenario == 3:
+        total_params += print_config_section("场景3奖励权重参数", config, scenario3_reward_params)
+    elif args.scenario == 4:
+        total_params += print_config_section("场景4奖励权重参数", config, scenario4_reward_params)
+        total_params += print_config_section("场景4环境参数", config, scenario4_env_params)
+        total_params += print_config_section("场景4信念地图参数", config, scenario4_belief_params)
+    
+    # 4. HMASD算法参数
+    total_params += print_config_section("HMASD核心参数", config, hmasd_core_params)
+    total_params += print_config_section("HMASD超参数", config, hmasd_hyperparams)
+    
+    # 5. 训练参数
+    total_params += print_config_section("训练参数", config, training_params)
+    
+    # 6. 网络结构参数
+    total_params += print_config_section("网络结构参数", config, network_params)
+    
+    # 7. 可选模块参数（只有在启用时才打印）
+    if hasattr(config, 'use_opt_coordinator') and (config.use_opt_coordinator or config.use_opt_discoverer_actor or config.use_opt_discoverer_critic):
+        total_params += print_config_section("OPT模块参数", config, opt_params)
+    
+    if hasattr(config, 'use_reward_annealing') and config.use_reward_annealing:
+        total_params += print_config_section("奖励权重退火参数", config, annealing_params)
+    
+    if hasattr(config, 'use_lr_decay') and config.use_lr_decay:
+        total_params += print_config_section("学习率衰减参数", config, lr_decay_params)
+
+    # 总结
+    main_logger.info(f"总计显示了 {total_params} 个配置参数")
+    
+    # 额外验证：从环境获取部分关键参数进行对比
+    env_to_check = temp_env.unwrapped if hasattr(temp_env, 'unwrapped') else temp_env
+    env_verification_params = ["n_uavs", "n_users", "area_size"]
+    
+    verification_info = []
+    for param in env_verification_params:
+        if hasattr(env_to_check, param):
+            env_value = getattr(env_to_check, param)
+            config_value = getattr(config, param, "未设置")
+            if env_value == config_value:
+                verification_info.append(f"{param}: ✓ ({env_value})")
+            else:
+                verification_info.append(f"{param}: ⚠ 环境={env_value}, 配置={config_value}")
+    
+    if verification_info:
+        main_logger.info("配置与环境一致性验证:")
+        for info in verification_info:
+            main_logger.info(f"  - {info}")
+        main_logger.info("")
 
     main_logger.info("="*50)
     

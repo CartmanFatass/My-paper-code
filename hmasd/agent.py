@@ -20,49 +20,53 @@ from hmasd.utils import ReplayBuffer, StateSkillDataset, compute_gae, compute_pp
 
 class ValueNorm:
     """
-    价值标准化类，用于稳定价值函数训练
-    通过维护运行时的均值和标准差来标准化returns
+    MAPPO标准的价值标准化类
+    用于稳定价值函数训练，通过维护运行时的均值和标准差来标准化returns
     """
-    def __init__(self, shape, clip=10.0, epsilon=1e-8, device=None):
+    def __init__(self, shape, clip=5.0, epsilon=1e-8, device=None):
         self.shape = shape
         self.clip = clip
         self.epsilon = epsilon
         self.device = device if device is not None else torch.device("cpu")
         
-        # 初始化运行时统计量
-        self.running_mean = torch.zeros(shape, device=self.device)
-        self.running_std = torch.ones(shape, device=self.device)
-        self.count = epsilon
-        self.momentum = 0.01  # 更新动量
+        # 初始化运行时统计量 - MAPPO标准
+        self.running_mean = torch.zeros(shape, dtype=torch.float32, device=self.device)
+        self.running_std = torch.ones(shape, dtype=torch.float32, device=self.device)
+        self.count = 0
+        # MAPPO标准momentum - 作为tensor存储在设备上
+        self.momentum = torch.tensor(0.01, dtype=torch.float32, device=self.device)
         
     def update(self, v):
-        """更新运行时统计量"""
-        v = v.detach().to(self.device)
-        batch_mean = v.mean(dim=0, keepdim=True)
-        batch_var = v.var(dim=0, keepdim=True, unbiased=False)
-        batch_std = torch.sqrt(batch_var + self.epsilon)
+        """更新运行时统计量 - MAPPO标准实现"""
+        v = v.detach().to(self.device).float()
         
-        # 使用指数移动平均更新统计量
+        batch_mean = v.mean(dim=0, keepdim=True).float()
+        batch_var = v.var(dim=0, keepdim=True, unbiased=False).float()
+        batch_std = torch.sqrt(batch_var + self.epsilon).float()
+        
+        # MAPPO标准的指数移动平均更新
         self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * batch_mean
         self.running_std = (1 - self.momentum) * self.running_std + self.momentum * batch_std
+        
         self.count += v.size(0)
         
     def normalize(self, v):
-        """标准化输入值"""
-        v = v.to(self.device)
+        """标准化输入值 - MAPPO标准实现"""
+        v = v.to(self.device).float()
         normalized = (v - self.running_mean) / (self.running_std + self.epsilon)
-        return torch.clamp(normalized, -self.clip, self.clip)
+        return torch.clamp(normalized, -self.clip, self.clip).float()
         
     def denormalize(self, v):
         """反标准化输入值"""
-        v = v.to(self.device)
-        return v * (self.running_std + self.epsilon) + self.running_mean
+        v = v.to(self.device).float()
+        return (v * (self.running_std + self.epsilon) + self.running_mean).float()
         
     def to(self, device):
         """移动到指定设备"""
         self.device = device
-        self.running_mean = self.running_mean.to(device)
-        self.running_std = self.running_std.to(device)
+        self.running_mean = self.running_mean.to(device).float()
+        self.running_std = self.running_std.to(device).float()
+        self.momentum = self.momentum.to(device).float()
         return self
 
 class HMASDAgent:
@@ -165,10 +169,19 @@ class HMASDAgent:
             main_logger.info("未启用学习率衰减")
         
         # 创建经验回放缓冲区
-        self.high_level_buffer = ReplayBuffer(config.buffer_size)
+        # 训练脚本应已通过调用 config.calculate_and_set_buffer_sizes() 设置了这些值
+        # 使用断言确保配置已正确设置，避免使用不明确的备用值
+        assert hasattr(config, 'high_level_buffer_size') and config.high_level_buffer_size is not None, \
+            "config.high_level_buffer_size 未设置, 请确保在创建Agent前调用了config.update_env_dims()"
+        assert hasattr(config, 'low_level_buffer_size') and config.low_level_buffer_size is not None, \
+            "config.low_level_buffer_size 未设置, 请确保在创建Agent前调用了config.update_env_dims()"
+
+        main_logger.info(f"初始化 Replay Buffers: High-level size={config.high_level_buffer_size}, Low-level size={config.low_level_buffer_size}")
+
+        self.high_level_buffer = ReplayBuffer(config.high_level_buffer_size)
         self.high_level_buffer_with_logprobs = []  # 新增：高层经验缓冲区（带log probabilities）
-        self.low_level_buffer = ReplayBuffer(config.buffer_size)
-        self.state_skill_dataset = StateSkillDataset(config.buffer_size)
+        self.low_level_buffer = ReplayBuffer(config.low_level_buffer_size)
+        self.state_skill_dataset = StateSkillDataset(config.low_level_buffer_size) # 判别器数据集与低层buffer大小保持一致
         
         # 其他初始化
         self.current_team_skill = None  # 当前团队技能 (保留用于单环境兼容性)
@@ -288,18 +301,12 @@ class HMASDAgent:
         self.episode_team_skill_counts = {}
         self.episode_agent_skill_counts = []
         
-        # 重置Value Normalization统计量（如果启用）
+        # 注意：不重置Value Normalization统计量
+        # ValueNorm的running_mean和running_std应该在整个训练过程中累积
+        # 这符合MAPPO的标准实现，确保价值函数标准化的稳定性
+        # 只有在模型初始化或显式要求时才重置ValueNorm统计量
         if self.config.use_valuenorm:
-            if self.value_norm_coordinator is not None:
-                self.value_norm_coordinator.running_mean.zero_()
-                self.value_norm_coordinator.running_std.fill_(1.0)
-                self.value_norm_coordinator.count = self.value_norm_coordinator.epsilon
-                main_logger.debug("已重置Coordinator的Value Normalization统计量")
-            if self.value_norm_discoverer is not None:
-                self.value_norm_discoverer.running_mean.zero_()
-                self.value_norm_discoverer.running_std.fill_(1.0)
-                self.value_norm_discoverer.count = self.value_norm_discoverer.epsilon
-                main_logger.debug("已重置Discoverer的Value Normalization统计量")
+            main_logger.debug("保持Value Normalization统计量不变，继续累积训练数据")
     
     def select_action(self, observations, agent_skills=None, deterministic=False, env_id=0):
         """
@@ -343,6 +350,22 @@ class HMASDAgent:
         self.env_hidden_states[env_id] = self.skill_discoverer.actor_hidden
         
         return actions.cpu().numpy(), action_logprobs.cpu().numpy()
+    
+    def reset_value_norm(self):
+        """显式重置Value Normalization统计量"""
+        if self.config.use_valuenorm:
+            if self.value_norm_coordinator is not None:
+                self.value_norm_coordinator.running_mean.zero_()
+                self.value_norm_coordinator.running_std.fill_(1.0)
+                self.value_norm_coordinator.count = 0
+                main_logger.info("已重置Coordinator的Value Normalization统计量")
+            if self.value_norm_discoverer is not None:
+                self.value_norm_discoverer.running_mean.zero_()
+                self.value_norm_discoverer.running_std.fill_(1.0)
+                self.value_norm_discoverer.count = 0
+                main_logger.info("已重置Discoverer的Value Normalization统计量")
+        else:
+            main_logger.warning("Value Normalization未启用，无法重置")
     
     def assign_skills(self, state, observations, deterministic=False):
         """
@@ -738,9 +761,10 @@ class HMASDAgent:
                     'agent_log_probs': log_probs['agent_log_probs']
                 })
                 
-                # 保持缓冲区大小不超过config.buffer_size
-                if len(self.high_level_buffer_with_logprobs) > self.config.buffer_size:
-                    self.high_level_buffer_with_logprobs = self.high_level_buffer_with_logprobs[-self.config.buffer_size:]
+                # 保持缓冲区大小不超过其配置的大小
+                buffer_capacity = self.config.high_level_buffer_size
+                if len(self.high_level_buffer_with_logprobs) > buffer_capacity:
+                    self.high_level_buffer_with_logprobs = self.high_level_buffer_with_logprobs[-buffer_capacity:]
             
             # 重置该环境的奖励累积
             self.env_reward_sums[env_id] = 0.0
@@ -844,6 +868,29 @@ class HMASDAgent:
             # advantages 和 returns 都是 [batch_size]，分离计算图
             advantages = advantages.detach()
             returns = returns.detach()
+            
+            # 【关键修复】对 GAE 计算出的 returns (V_target) 进行归一化处理
+            # 这是解决 Value Loss 爆炸问题的核心
+            main_logger.debug(f"GAE returns 归一化前统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+            
+            # 使用 MAPPO 的 ValueNorm 方案进行归一化
+            if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+                # 确保 returns 的维度正确 [batch_size, 1]
+                returns_for_norm = returns.unsqueeze(-1) if returns.dim() == 1 else returns
+                
+                # 先更新统计量（使用 detach 避免梯度传播）
+                self.value_norm_coordinator.update(returns_for_norm.detach())
+                
+                # 再进行归一化
+                normalized_returns = self.value_norm_coordinator.normalize(returns_for_norm)
+                # 转换回原始维度
+                returns = normalized_returns.squeeze(-1) if normalized_returns.dim() > 1 else normalized_returns
+                
+                main_logger.debug(f"使用 ValueNorm 归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+            else:
+                # 如果不使用 ValueNorm，使用简单的批量归一化作为备选
+                returns = (returns - returns.mean()) / (returns.std() + 1e-8)
+                main_logger.debug(f"使用批量归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
             
             # 检查 advantages 和 returns 的统计信息
             adv_mean = advantages.mean().item()
@@ -1007,15 +1054,24 @@ class HMASDAgent:
             # returns 是 [batch_size], 需要 unsqueeze 匹配 state_values
             returns = returns.float().unsqueeze(-1) # Shape [batch_size, 1]
             
-            # 应用Value Normalization（如果启用）
+            # 【修复15】应用Value Normalization的一致性修复（同discoverer）
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                # 更新统计量
-                self.value_norm_coordinator.update(returns)
-                # 标准化returns用于损失计算
+                # 【修复16】保存原始returns，用于统计量更新
+                original_returns = returns.clone().detach()
+                
+                # 先用原始returns更新统计量（避免循环依赖）
+                self.value_norm_coordinator.update(original_returns)
+                
+                # 【修复17】同时对state_values和returns进行归一化，确保损失计算的一致性
                 normalized_returns = self.value_norm_coordinator.normalize(returns)
-                Z_value_loss = F.mse_loss(state_values, normalized_returns)
-                main_logger.debug(f"Coordinator使用Value Normalization: 原始returns均值={returns.mean().item():.4f}, "
-                                f"标准化后均值={normalized_returns.mean().item():.4f}")
+                normalized_state_values = self.value_norm_coordinator.normalize(state_values)
+                
+                Z_value_loss = F.mse_loss(normalized_state_values, normalized_returns)
+                main_logger.debug(f"Coordinator使用Value Normalization: "
+                                f"原始returns均值={returns.mean().item():.4f}, "
+                                f"标准化后returns均值={normalized_returns.mean().item():.4f}, "
+                                f"原始state_values均值={state_values.mean().item():.4f}, "
+                                f"标准化后state_values均值={normalized_state_values.mean().item():.4f}")
             else:
                 Z_value_loss = F.mse_loss(state_values, returns)
             
@@ -1287,7 +1343,8 @@ class HMASDAgent:
         dones = torch.stack(dones)
         old_log_probs = torch.stack(old_log_probs)
         
-        # 初始化GRU隐藏状态
+        # 关键修复：在Off-Policy更新中，为乱序批次数据初始化一次隐藏状态
+        # 这确保了在整个更新步骤中使用一致的隐藏状态，避免引入不相关的历史信息
         self.skill_discoverer.init_hidden(batch_size=self.config.batch_size)
         
         # 获取当前状态价值和cd_loss
@@ -1304,14 +1361,37 @@ class HMASDAgent:
         # advantages 和 returns 都是 [batch_size]，分离计算图
         advantages = advantages.detach()
         returns = returns.detach()
+        
+        # 【关键修复】对 GAE 计算出的 returns (V_target) 进行归一化处理
+        # 这是解决 Value Loss 爆炸问题的核心
+        main_logger.debug(f"Discoverer GAE returns 归一化前统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+        
+        # 【修复7】先保存原始returns，用于统计量更新
+        original_returns = returns.clone().detach()
+        
+        # 使用 MAPPO 的 ValueNorm 方案进行归一化
+        if self.config.use_valuenorm and self.value_norm_discoverer is not None:
+            # 确保 original_returns 的维度正确 [batch_size, 1]
+            returns_for_update = original_returns.unsqueeze(-1) if original_returns.dim() == 1 else original_returns
+            
+            # 【修复8】先用原始returns更新统计量（避免循环依赖）
+            self.value_norm_discoverer.update(returns_for_update.detach())
+            
+            # 【修复9】然后用原始returns进行归一化（保证一致性）
+            normalized_returns = self.value_norm_discoverer.normalize(returns_for_update)
+            # 转换回原始维度
+            returns = normalized_returns.squeeze(-1) if normalized_returns.dim() > 1 else normalized_returns
+            
+            main_logger.debug(f"Discoverer 使用 ValueNorm 归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+        else:
+            # 如果不使用 ValueNorm，使用简单的批量归一化作为备选
+            returns = (returns - returns.mean()) / (returns.std() + 1e-8)
+            main_logger.debug(f"Discoverer 使用批量归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
 
         # 新增：优势归一化，稳定策略更新
         advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
         
-        # 重新初始化GRU隐藏状态
-        self.skill_discoverer.init_hidden(batch_size=self.config.batch_size)
-        
-        # 获取当前策略
+        # 获取当前策略（复用已初始化的隐藏状态）
         _, action_log_probs, action_dist = self.skill_discoverer(observations, agent_skills)
         
         # 计算策略比率，使用detach()防止求导错误
@@ -1335,10 +1415,7 @@ class HMASDAgent:
                          f"最大值={advantages.max().item():.4f}, "
                          f"最小值={advantages.min().item():.4f}")
         
-        # 重新初始化GRU隐藏状态
-        self.skill_discoverer.init_hidden(batch_size=self.config.batch_size)
-        
-        # 计算价值损失
+        # 计算价值损失（复用已初始化的隐藏状态）
         current_values, _ = self.skill_discoverer.get_value(states, team_skills) # Shape [128, 1]
         # 确保维度匹配并转换为float32类型
         current_values = current_values.float()
@@ -1351,15 +1428,20 @@ class HMASDAgent:
                          f"目标returns均值={returns.mean().item():.4f}, "
                          f"目标returns标准差={returns.std().item():.4f}")
         
-        # 应用Value Normalization（如果启用）
+        # 【修复10】应用Value Normalization的一致性修复
         if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            # 更新统计量
-            self.value_norm_discoverer.update(returns)
-            # 标准化returns用于损失计算
+            # 【修复11】同时对current_values进行归一化，确保损失计算的一致性
+            # 注意：不要重复更新统计量，因为前面已经用original_returns更新过了
             normalized_returns = self.value_norm_discoverer.normalize(returns)
-            value_loss = F.mse_loss(current_values, normalized_returns)
-            main_logger.debug(f"Discoverer使用Value Normalization: 原始returns均值={returns.mean().item():.4f}, "
-                            f"标准化后均值={normalized_returns.mean().item():.4f}")
+            # 【修复12】同样对current_values进行归一化
+            normalized_current_values = self.value_norm_discoverer.normalize(current_values)
+            
+            value_loss = F.mse_loss(normalized_current_values, normalized_returns)
+            main_logger.debug(f"Discoverer使用Value Normalization: "
+                            f"原始returns均值={returns.mean().item():.4f}, "
+                            f"标准化后returns均值={normalized_returns.mean().item():.4f}, "
+                            f"原始current_values均值={current_values.mean().item():.4f}, "
+                            f"标准化后current_values均值={normalized_current_values.mean().item():.4f}")
         else:
             value_loss = F.mse_loss(current_values, returns)
         
@@ -1406,7 +1488,7 @@ class HMASDAgent:
                avg_intrinsic_reward, avg_env_reward_comp, avg_team_disc_reward_comp, avg_ind_disc_reward_comp, avg_discoverer_value
     
     def update_discriminators(self):
-        """更新技能判别器网络"""
+        """更新技能判别器网络（添加正则化防止过度训练）"""
         if len(self.state_skill_dataset) < self.config.batch_size:
             return 0
         
@@ -1423,6 +1505,10 @@ class HMASDAgent:
         team_disc_logits = self.team_discriminator(states)
         team_disc_loss = F.cross_entropy(team_disc_logits, team_skills)
         
+        # 添加团队判别器熵正则化（防止过度自信）
+        team_disc_probs = F.softmax(team_disc_logits, dim=-1)
+        team_disc_entropy = -(team_disc_probs * F.log_softmax(team_disc_logits, dim=-1)).sum(dim=-1).mean()
+        
         # 更新个体技能判别器
         batch_size, n_agents = agent_skills.shape
         
@@ -1434,13 +1520,33 @@ class HMASDAgent:
         agent_disc_logits = self.individual_discriminator(observations_flat, team_skills_expanded)
         agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills_flat)
         
-        # 总技能判别器损失
-        disc_loss = team_disc_loss + agent_disc_loss
+        # 添加个体判别器熵正则化（防止过度自信）
+        agent_disc_probs = F.softmax(agent_disc_logits, dim=-1)
+        agent_disc_entropy = -(agent_disc_probs * F.log_softmax(agent_disc_logits, dim=-1)).sum(dim=-1).mean()
+        
+        # 总技能判别器损失（添加熵正则化项）
+        entropy_reg_weight = 0.1  # 熵正则化权重
+        disc_loss = team_disc_loss + agent_disc_loss - entropy_reg_weight * (team_disc_entropy + agent_disc_entropy)
         
         # 更新网络
         self.discriminator_optimizer.zero_grad()
         disc_loss.backward()
         self.discriminator_optimizer.step()
+        
+        # 每100步记录判别器性能监控指标
+        if self.global_step % 100 == 0:
+            with torch.no_grad():
+                # 计算判别器准确率
+                team_disc_acc = (team_disc_logits.argmax(dim=-1) == team_skills).float().mean()
+                agent_disc_acc = (agent_disc_logits.argmax(dim=-1) == agent_skills_flat).float().mean()
+                
+                # 记录到TensorBoard
+                self.writer.add_scalar('Discriminator/Team_Accuracy', team_disc_acc.item(), self.global_step)
+                self.writer.add_scalar('Discriminator/Agent_Accuracy', agent_disc_acc.item(), self.global_step)
+                self.writer.add_scalar('Discriminator/Team_Entropy', team_disc_entropy.item(), self.global_step)
+                self.writer.add_scalar('Discriminator/Agent_Entropy', agent_disc_entropy.item(), self.global_step)
+                self.writer.add_scalar('Discriminator/Team_Loss', team_disc_loss.item(), self.global_step)
+                self.writer.add_scalar('Discriminator/Agent_Loss', agent_disc_loss.item(), self.global_step)
         
         return disc_loss.item()
     
@@ -1647,13 +1753,35 @@ class HMASDAgent:
     
     def save_model(self, path):
         """保存模型"""
-        torch.save({
+        checkpoint = {
             'skill_coordinator': self.skill_coordinator.state_dict(),
             'skill_discoverer': self.skill_discoverer.state_dict(),
             'team_discriminator': self.team_discriminator.state_dict(),
             'individual_discriminator': self.individual_discriminator.state_dict(),
             'config': self.config
-        }, path)
+        }
+        
+        # 保存ValueNorm状态（如果启用）
+        if self.config.use_valuenorm:
+            valuenorm_state = {}
+            if self.value_norm_coordinator is not None:
+                valuenorm_state['coordinator'] = {
+                    'running_mean': self.value_norm_coordinator.running_mean,
+                    'running_std': self.value_norm_coordinator.running_std,
+                    'count': self.value_norm_coordinator.count,
+                    'momentum': self.value_norm_coordinator.momentum
+                }
+            if self.value_norm_discoverer is not None:
+                valuenorm_state['discoverer'] = {
+                    'running_mean': self.value_norm_discoverer.running_mean,
+                    'running_std': self.value_norm_discoverer.running_std,
+                    'count': self.value_norm_discoverer.count,
+                    'momentum': self.value_norm_discoverer.momentum
+                }
+            checkpoint['valuenorm_state'] = valuenorm_state
+            main_logger.info("已保存ValueNorm状态")
+        
+        torch.save(checkpoint, path)
         main_logger.info(f"模型已保存到 {path}")
     
     def log_skill_distribution(self, team_skill, agent_skills, episode=None):
@@ -1721,5 +1849,28 @@ class HMASDAgent:
         self.skill_discoverer.load_state_dict(checkpoint['skill_discoverer'], strict=False)
         self.team_discriminator.load_state_dict(checkpoint['team_discriminator'], strict=False)
         self.individual_discriminator.load_state_dict(checkpoint['individual_discriminator'], strict=False)
+        
+        # 加载ValueNorm状态（如果存在且启用）
+        if self.config.use_valuenorm and 'valuenorm_state' in checkpoint:
+            valuenorm_state = checkpoint['valuenorm_state']
+            
+            if 'coordinator' in valuenorm_state and self.value_norm_coordinator is not None:
+                coord_state = valuenorm_state['coordinator']
+                self.value_norm_coordinator.running_mean = coord_state['running_mean'].to(self.device)
+                self.value_norm_coordinator.running_std = coord_state['running_std'].to(self.device)
+                self.value_norm_coordinator.count = coord_state['count']
+                self.value_norm_coordinator.momentum = coord_state['momentum'].to(self.device)
+                main_logger.info("已恢复Coordinator的ValueNorm状态")
+                
+            if 'discoverer' in valuenorm_state and self.value_norm_discoverer is not None:
+                disc_state = valuenorm_state['discoverer']
+                self.value_norm_discoverer.running_mean = disc_state['running_mean'].to(self.device)
+                self.value_norm_discoverer.running_std = disc_state['running_std'].to(self.device)
+                self.value_norm_discoverer.count = disc_state['count']
+                self.value_norm_discoverer.momentum = disc_state['momentum'].to(self.device)
+                main_logger.info("已恢复Discoverer的ValueNorm状态")
+                
+        elif self.config.use_valuenorm:
+            main_logger.warning("ValueNorm已启用，但checkpoint中未找到ValueNorm状态，将使用初始化值")
         
         main_logger.info(f"模型已从 {path} 加载 (使用非严格模式)")

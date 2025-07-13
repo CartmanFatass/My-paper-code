@@ -810,7 +810,7 @@ class MAPPOAgent:
         self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=config.lr_coordinator)
         
         # 经验缓冲区 - 使用ReplayBuffer
-        self.buffer = ReplayBuffer(capacity=config.buffer_size)
+        self.buffer = ReplayBuffer(capacity=config.low_level_buffer_size)
         
         # 为每个环境创建独立的缓冲区
         self.env_buffers = {}
@@ -919,8 +919,8 @@ class MAPPOAgent:
     def update(self):
         """更新网络 - 增强异常处理和监控"""
         try:
-            if len(self.buffer) < self.config.buffer_size // 4:  # 当缓冲区有足够数据时再更新
-                main_logger.debug(f"缓冲区数据不足: {len(self.buffer)}/{self.config.buffer_size//4}")
+            if len(self.buffer) < self.config.low_level_buffer_size // 4:  # 当缓冲区有足够数据时再更新
+                main_logger.debug(f"缓冲区数据不足: {len(self.buffer)}/{self.config.low_level_buffer_size//4}")
                 return {}
             
             main_logger.debug(f"开始网络更新，缓冲区大小: {len(self.buffer)}")
@@ -929,7 +929,7 @@ class MAPPOAgent:
             #log_memory_usage(main_logger, self.update_step)
             
             # 从ReplayBuffer获取批次数据
-            batch_size = min(len(self.buffer), self.config.buffer_size // 2)
+            batch_size = min(len(self.buffer), self.config.low_level_buffer_size // 2)
             experiences = self.buffer.sample(batch_size)
             
             if not experiences:
@@ -1470,7 +1470,7 @@ def train(config, args, device):
     config.entropy_coef = args.entropy_coef
     config.max_grad_norm = args.max_grad_norm
     config.ppo_epochs = args.ppo_epochs
-    config.buffer_size = args.buffer_size
+    config.low_level_buffer_size = args.buffer_size
     
     main_logger.info(f"环境信息: n_agents={n_agents}, obs_dim={obs_dim}, state_dim={state_dim}, action_dim={action_dim}")
 

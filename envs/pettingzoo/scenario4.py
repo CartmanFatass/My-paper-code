@@ -2,6 +2,7 @@ import numpy as np
 import heapq
 from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict
+from scipy.spatial.distance import cdist
 
 class UAVForcedRelayEnv(ParallelEnv):
     """
@@ -56,8 +57,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         uav_init_mode="start_area",
         uav_start_area_size=500,
         grid_resolution=100,
-        exploration_reward_weight=0.1,
+        # exploration_reward_weight=0.1, # Replaced by potential_reward_weight
         coverage_overlap_penalty_weight=0.1,
+        # Belief-based potential function parameters
+        gamma=0.99,  # Discount factor for RL
+        potential_reward_weight=0.2,
+        belief_decay_factor=0.1,
+        recon_interval=100,  # Steps between reconnaissance updates
+        recon_strength=0.1,  # How much belief is added by recon
     ):
         super().__init__()
 
@@ -77,15 +84,33 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         # 探索奖励参数
         self.grid_resolution = grid_resolution
-        self.exploration_reward_weight = exploration_reward_weight
         
         # 重叠惩罚参数
         self.coverage_overlap_penalty_weight = coverage_overlap_penalty_weight
         
-        # 初始化覆盖栅格和不确定性地图
+        # Belief Map and Grid setup
         self.grid_size = int(np.ceil(self.area_size / self.grid_resolution))
-        self.coverage_grid = np.zeros((self.grid_size, self.grid_size), dtype=bool)
-        self.uncertainty_map = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
+        self.belief_map = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
+        
+        # Store grid cell center coordinates for efficient distance calculation
+        y, x = np.indices((self.grid_size, self.grid_size))
+        self.cell_centers = np.stack([
+            (x + 0.5) * self.grid_resolution, 
+            (y + 0.5) * self.grid_resolution
+        ], axis=-1).reshape(-1, 2)
+
+        # For storing the potential value between steps
+        self.current_potential = 0.0
+        
+        # Belief-based potential function parameters
+        self.gamma = gamma
+        self.potential_reward_weight = potential_reward_weight
+        self.belief_decay_factor = belief_decay_factor
+        self.recon_interval = recon_interval
+        self.recon_strength = recon_strength
+
+        # Track user service status to provide sparse rewards correctly
+        self.user_serviced_status = np.zeros(self.n_users, dtype=bool)
         
         # 场景特定参数
         self.n_clusters = n_clusters
@@ -390,97 +415,95 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return (grid_x, grid_y)
     
-    def _calculate_uav_coverage_radius(self, uav_pos):
-        """
-        根据无人机高度动态计算其地面覆盖半径。
-        
-        该计算基于简化的自由空间路径损耗模型，求解使得接收信号强度
-        恰好等于最小SINR阈值时的水平距离。
-        
-        参数:
-            uav_pos: 无人机位置 [x, y, z]
-            
-        返回:
-            coverage_radius: 地面覆盖半径 (米)
-        """
-        height = uav_pos[2]
-        
-        # 简化假设：探索时主要考虑SNR，忽略干扰
-        # SNR = P_tx - PL - N_noise
-        # 我们需要找到路径损耗PL的最大值，使得SNR = min_sinr
-        max_path_loss = self.tx_power - self.noise_power - self.min_sinr
-        
-        # 使用自由空间路径损耗公式反向求解距离
-        # PL = 20 * log10(d) + 20 * log10(f) + 20 * log10(4*pi/c)
-        # PL = 20 * log10(d) + C
-        wavelength = 3e8 / self.carrier_frequency
-        constant_factor = 20 * np.log10(4 * np.pi / wavelength)
-        
-        # 从最大路径损耗计算最大通信距离 (3D)
-        log_d_3d = (max_path_loss - constant_factor) / 20
-        max_distance_3d = 10 ** log_d_3d
-        
-        # 根据3D距离和高度，计算地面覆盖半径 (水平距离)
-        if max_distance_3d > height:
-            coverage_radius = np.sqrt(max_distance_3d**2 - height**2)
-        else:
-            coverage_radius = 0  # 如果高度太高，无法在地面形成有效覆盖
-            
-        return coverage_radius
+    def _initialize_belief(self):
+        """Initialize or reset the belief map to a uniform prior."""
+        if self.belief_map.size > 0:
+            self.belief_map.fill(1.0 / self.belief_map.size)
 
-    def _compute_exploration_reward(self):
+    def _update_belief_map(self):
         """
-        计算基于动态覆盖范围和不确定性地图的信息增益探索奖励。
-        
-        返回:
-            exploration_reward: 探索奖励值
+        Updates the belief map based on agent actions and observations.
+        This method is called within step().
         """
-        all_covered_grids = set()
+        # 1. Decay belief for observed cells based on a more precise observation model.
+        # A cell's belief is decayed only if it's observed by a UAV and found to be empty of unserviced users.
         
-        # 遍历每个无人机，计算其覆盖的栅格
+        # Create a set of grid cells that contain unserviced users for efficient lookup
+        unserviced_user_cells = set()
+        for user_idx, is_serviced in enumerate(self.user_serviced_status):
+            if not is_serviced:
+                user_pos = self.user_positions[user_idx]
+                user_gx, user_gy = self._get_grid_coords(user_pos)
+                unserviced_user_cells.add((user_gx, user_gy))
+
+        # Identify all cells observed by any UAV in this step
+        all_observed_cells = set()
         for uav_pos in self.uav_positions:
-            # 动态计算覆盖半径
-            coverage_radius = self._calculate_uav_coverage_radius(uav_pos)
-            
-            if coverage_radius > 0:
-                # 将覆盖半径转换为栅格单位
-                radius_in_grids = int(np.ceil(coverage_radius / self.grid_resolution))
-                uav_grid_x, uav_grid_y = self._get_grid_coords(uav_pos)
-                
-                # 遍历以无人机为中心的矩形区域，检查哪些栅格在圆形覆盖范围内
-                for dx in range(-radius_in_grids, radius_in_grids + 1):
-                    for dy in range(-radius_in_grids, radius_in_grids + 1):
-                        # 检查是否在圆形区域内
-                        if dx**2 + dy**2 <= radius_in_grids**2:
-                            grid_x = uav_grid_x + dx
-                            grid_y = uav_grid_y + dy
-                            
-                            # 确保栅格坐标在地图范围内
-                            if 0 <= grid_x < self.grid_size and 0 <= grid_y < self.grid_size:
-                                all_covered_grids.add((grid_x, grid_y))
-
-        # 计算信息增益（访问不确定性高的区域）
-        information_gain = 0
-        for grid_x, grid_y in all_covered_grids:
-            # 奖励等于该区域的不确定性值
-            information_gain += self.uncertainty_map[grid_x, grid_y]
-            # 访问后，该区域的不确定性清零
-            self.uncertainty_map[grid_x, grid_y] = 0
-            
-            # 同时更新旧的覆盖栅格，以保持兼容性
-            if not self.coverage_grid[grid_x, grid_y]:
-                self.coverage_grid[grid_x, grid_y] = True
-
-        # 归一化信息增益并应用权重
-        # 使用总栅格数作为归一化因子，更稳定
-        normalization_factor = self.grid_size * self.grid_size
-        if normalization_factor == 0:
-            normalization_factor = 1e-6
-
-        normalized_gain = information_gain / normalization_factor
-        exploration_reward = normalized_gain * self.exploration_reward_weight
+            # Assume a UAV observes its current grid cell and immediate neighbors (3x3 area)
+            gx, gy = self._get_grid_coords(uav_pos)
+            for y_offset in range(-1, 2):
+                for x_offset in range(-1, 2):
+                    cell_y, cell_x = gy + y_offset, gx + x_offset
+                    if 0 <= cell_y < self.grid_size and 0 <= cell_x < self.grid_size:
+                        all_observed_cells.add((cell_x, cell_y))
         
-        return exploration_reward
+        # Decay belief only for cells that are observed but contain no unserviced users
+        for gx, gy in all_observed_cells:
+            if (gx, gy) not in unserviced_user_cells:
+                self.belief_map[gy, gx] *= self.belief_decay_factor
+
+        # 2. Simulate reconnaissance hint (e.g., every recon_interval steps)
+        # This simulates receiving noisy, delayed AOI (Area of Interest) data.
+        if self.current_step > 0 and self.current_step % self.recon_interval == 0:
+            for user_pos in self.user_positions:
+                # Check if this user is still a target (not yet serviced)
+                # This requires tracking serviced users. We'll assume for now
+                # that `self.user_serviced_status` exists.
+                user_grid_x, user_grid_y = self._get_grid_coords(user_pos)
+                
+                # Increase belief in a small 3x3 area around the user
+                # We use clipping to handle boundaries gracefully.
+                y_min, y_max = max(0, user_grid_y - 1), min(self.grid_size, user_grid_y + 2)
+                x_min, x_max = max(0, user_grid_x - 1), min(self.grid_size, user_grid_x + 2)
+                self.belief_map[y_min:y_max, x_min:x_max] += self.recon_strength
+
+        # 3. Handle serviced users (This is done in the step method logic)
+        # When a user is serviced, the belief at that location is set to 0.
+
+        # 4. Normalize the belief map
+        # Ensure the sum of probabilities is 1.
+        map_sum = self.belief_map.sum()
+        if map_sum > 0:
+            self.belief_map /= map_sum
+        else:
+            # If all belief is zero, re-initialize to uniform to avoid getting stuck
+            self._initialize_belief()
+
+    def _calculate_potential(self):
+        """
+        Calculates the global potential Φ(s) based on the current belief_map.
+        Formula: Φ(s) = Σ [ belief(y,x) * (-min_dist_to_drone(y,x)) ]
+        """
+        if self.n_uavs == 0:
+            return 0.0
+
+        # Get drone positions in 2D for distance calculation
+        drone_positions_2d = self.uav_positions[:, :2]
+
+        # Calculate distances from all cell centers to all drones efficiently
+        # distances shape: (num_cells, num_agents)
+        distances = cdist(self.cell_centers, drone_positions_2d)
+        
+        # Find the distance to the *nearest* drone for each cell
+        # min_distances shape: (num_cells,)
+        min_distances = distances.min(axis=1)
+        
+        # Get belief probabilities for all cells as a flat array
+        belief_flat = self.belief_map.flatten()
+        
+        # Calculate potential: dot product of beliefs and negative distances
+        potential = np.dot(belief_flat, -min_distances)
+        return potential
     
     def _compute_coverage_overlap_penalty(self):
         """
@@ -519,6 +542,76 @@ class UAVForcedRelayEnv(ParallelEnv):
         overlap_penalty = np.clip(normalized_penalty, 0.0, 1.0)
         
         return overlap_penalty
+    
+    def _compute_belief_stats(self):
+        """
+        计算信念地图的统计信息，用于TensorBoard记录
+        
+        返回:
+            belief_stats: 信念统计字典，包含熵、最大值、最小值等
+        """
+        if not hasattr(self, 'belief_map') or self.belief_map.size == 0:
+            return {
+                'belief_entropy': 0.0,
+                'max_belief_value': 0.0,
+                'min_belief_value': 0.0,
+                'mean_belief_value': 0.0,
+                'belief_concentration': 0.0,
+                'high_belief_cells': 0
+            }
+        
+        # 获取信念地图的扁平化数组
+        belief_flat = self.belief_map.flatten()
+        
+        # 1. 计算信念熵
+        # 熵 = -Σ(p * log(p))，其中p是每个栅格的信念概率
+        # 高熵表示信念分散（高不确定性），低熵表示信念集中
+        epsilon = 1e-10  # 避免log(0)
+        belief_probs = belief_flat + epsilon
+        belief_entropy = -np.sum(belief_probs * np.log(belief_probs + epsilon))
+        
+        # 归一化熵到[0,1]范围 (最大熵为log(N)，其中N是栅格总数)
+        max_entropy = np.log(self.belief_map.size)
+        normalized_entropy = belief_entropy / max_entropy if max_entropy > 0 else 0.0
+        
+        # 2. 计算基本统计量
+        max_belief = np.max(belief_flat)
+        min_belief = np.min(belief_flat)
+        mean_belief = np.mean(belief_flat)
+        
+        # 3. 计算信念集中度
+        # 集中度定义为：顶部10%栅格的信念总和
+        top_10_percent_count = max(1, int(0.1 * self.belief_map.size))
+        sorted_beliefs = np.sort(belief_flat)[::-1]  # 降序排列
+        top_10_percent_sum = np.sum(sorted_beliefs[:top_10_percent_count])
+        belief_concentration = top_10_percent_sum
+        
+        # 4. 计算高信念栅格数量
+        # 定义"高信念"为超过平均值2倍的栅格
+        high_belief_threshold = mean_belief * 2
+        high_belief_cells = np.sum(belief_flat > high_belief_threshold)
+        
+        # 5. 计算信念方差
+        belief_variance = np.var(belief_flat)
+        
+        # 6. 计算信念分布的偏度（衡量分布的非对称性）
+        # 正偏度表示信念主要集中在低值区域，负偏度表示集中在高值区域
+        if belief_variance > 0:
+            belief_skewness = np.mean(((belief_flat - mean_belief) / np.sqrt(belief_variance)) ** 3)
+        else:
+            belief_skewness = 0.0
+        
+        return {
+            'belief_entropy': float(normalized_entropy),
+            'max_belief_value': float(max_belief),
+            'min_belief_value': float(min_belief),
+            'mean_belief_value': float(mean_belief),
+            'belief_concentration': float(belief_concentration),
+            'high_belief_cells': int(high_belief_cells),
+            'belief_variance': float(belief_variance),
+            'belief_skewness': float(belief_skewness),
+            'total_belief_mass': float(np.sum(belief_flat))
+        }
     
     def _init_uav_positions(self):
         """
@@ -712,7 +805,10 @@ class UAVForcedRelayEnv(ParallelEnv):
             "total_uavs": self.n_uavs,
             "coverage_ratio": coverage_ratio,  # 兼容性字段
             "target_coverage_achieved": coverage_ratio >= 0.90,  # 是否达到90%目标
-            "exploration_reward": 0,  # 将在step方法中更新
+            # 探索相关字段，将在step方法中更新
+            "exploration_reward": 0,
+            "sparse_task_reward": 0,
+            "potential_reward": 0,
         }
         
         return final_reward
@@ -889,9 +985,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.current_step = 0
         self.agents = self.possible_agents.copy()
         
-        # 重置覆盖栅格和不确定性地图
-        self.coverage_grid.fill(False)
-        self.uncertainty_map.fill(0)
+        # Reset belief map and user serviced status
+        self._initialize_belief()
+        self.user_serviced_status.fill(False)
         
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
@@ -921,7 +1017,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 6. 更新包含连接和跳数信息的观测
         observations = self._update_observations_dict(observations)
         
-        # 7. 计算并设置正确的全局状态
+        # 7. Calculate initial potential and set state
+        self.current_potential = self._calculate_potential()
         current_state = self._get_state()
         self.state = current_state
         
@@ -1048,50 +1145,91 @@ class UAVForcedRelayEnv(ParallelEnv):
             truncations: 所有智能体的截断状态字典
             infos: 所有智能体的信息字典
         """
-        # 0. 更新不确定性地图（老化）
-        self.uncertainty_map += 1
-        
-        # 1. 更新所有无人机位置
+        # 1. Store potential from the previous step
+        potential_t = self.current_potential
+
+        # 2. Update agent positions based on actions
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
                 velocity = actions[agent] * self.max_speed
                 new_position = self.uav_positions[agent_idx] + velocity * self.time_step
                 
-                # 边界检查
+                # Boundary checks
                 new_position[0] = np.clip(new_position[0], 0, self.area_size)
                 new_position[1] = np.clip(new_position[1], 0, self.area_size)
                 new_position[2] = np.clip(new_position[2], *self.height_range)
                 self.uav_positions[agent_idx] = new_position
         
-        # 2. 计算探索奖励
-        exploration_reward = self._compute_exploration_reward()
-        
-        # 3. 使用本类的方法更新信道状态、连接和路由
+        # 3. Update system state based on new positions
         self._update_channel_state()
         self._update_uav_connections()
         self._compute_routing_paths()
-        
-        # 4. 使用本类的方法计算基础奖励
+
+        # 4. Check for newly serviced users and update belief map
+        sparse_task_reward = 0
+        for user_idx in range(self.n_users):
+            # Check if user is not yet serviced but is now connected by a UAV with a valid route
+            is_effectively_connected = False
+            if not self.user_serviced_status[user_idx]:
+                for uav_idx in range(self.n_uavs):
+                    if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
+                        is_effectively_connected = True
+                        break
+            
+            if is_effectively_connected:
+                self.user_serviced_status[user_idx] = True
+                sparse_task_reward += 1.0 # Give a sparse reward of 1.0 for each new user serviced
+                
+                # Set belief at the user's location to zero as they are found
+                user_grid_x, user_grid_y = self._get_grid_coords(self.user_positions[user_idx])
+                self.belief_map[user_grid_y, user_grid_x] = 0.0
+
+        # 5. Update belief map (decay, recon, normalization)
+        self._update_belief_map()
+
+        # 6. Calculate new potential and the potential-based shaping reward
+        potential_t1 = self._calculate_potential()
+        potential_reward = self.gamma * potential_t1 - potential_t
+        self.current_potential = potential_t1
+
+        # 7. Compute the base task reward (coverage, connectivity, etc.)
         base_reward = self._compute_reward()
         
-        # 5. 更新奖励信息中的探索奖励
-        self.reward_info["exploration_reward"] = exploration_reward
+        # 8. Update reward_info with exploration-related values
+        # 8.1 Update exploration reward (potential reward)
+        self.reward_info["exploration_reward"] = potential_reward
+        self.reward_info["potential_reward"] = potential_reward
         
-        # 6. 组合最终奖励（基础奖励 + 探索奖励）
-        global_reward = base_reward + exploration_reward
+        # 8.2 Update sparse task reward
+        self.reward_info["sparse_task_reward"] = sparse_task_reward
         
-        # 4. 更新步数和完成状态
+        # 8.3 Compute and update belief statistics
+        belief_stats = self._compute_belief_stats()
+        self.reward_info.update(belief_stats)
+        
+        # 8.4 Store the current potential value for reference
+        self.reward_info["current_potential"] = potential_t1
+        self.reward_info["previous_potential"] = potential_t
+        
+        # 9. Combine all rewards
+        global_reward = (
+            base_reward + 
+            sparse_task_reward + 
+            self.potential_reward_weight * potential_reward
+        )
+
+        # 10. Update step counter and check for termination
         self.current_step += 1
         done = self.current_step >= self.max_steps
         
-        # 5. 准备返回值
+        # 11. 准备返回值
         observations = {}
         rewards = {}
         terminations = {}
         truncations = {}
         infos = {}
         
-        # 6. 获取新的观测和填充返回值
+        # 12. 获取新的观测和填充返回值
         for agent_idx, agent in enumerate(self.agents):
             observations[agent] = self._get_observation(agent)
             rewards[agent] = global_reward / self.n_uavs  # 平均分配奖励
@@ -1101,7 +1239,6 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "reward_info": self.reward_info.copy(),
                 "coverage_ratio": self.reward_info.get("coverage_ratio", 0),
                 "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
-                "covered_grids": np.sum(self.coverage_grid),  # 添加覆盖栅格数量信息
             }
         
         # 7. 更新观测值（在循环外一次性完成）

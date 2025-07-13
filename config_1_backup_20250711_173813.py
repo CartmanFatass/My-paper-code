@@ -13,10 +13,10 @@ class Config:
     max_observed_uavs = 8     # 最大观测无人机数量
     max_observed_users = 15   # 最大观测用户数量
 
-    # HMASD参数 - 优化技能探索参数
+    # HMASD参数 - 基于论文Table 3中的3m场景
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 3           # [关键] 降低个体技能数量
-    k = 20           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 20            # [关键] 缩短技能分配间隔
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -25,9 +25,9 @@ class Config:
     n_decoder_layers = 3     # 解码器层数
     n_heads = 8              # 多头注意力头数
     gru_hidden_size = 64     # GRU隐藏层大小 (与hidden_size保持一致)
-    lr_coordinator = 2e-4    # 技能协调器学习率 (适度提高以加速收敛)
-    lr_discoverer = 2e-4     # 技能发现器学习率 (适度提高以加速收敛)
-    lr_discriminator = 3e-4  # [紧急修复] 大幅降低判别器学习率防止过度训练
+    lr_coordinator = 1e-4    # 技能协调器学习率 (适当降低以稳定高层策略学习)
+    lr_discoverer = 1e-4     # 技能发现器学习率 (降低以稳定低层策略学习)
+    lr_discriminator = 3e-4  # [关键] 提高判别器学习率
     lr_prototype_discriminator = 1e-4 # 原型判别器学习率 (新增)
 
     # PPO参数 - 基于论文Table 1
@@ -35,16 +35,16 @@ class Config:
     gae_lambda = 0.95        # GAE参数
     clip_epsilon = 0.2       # PPO裁剪参数 (更保守以稳定学习)
     ppo_epochs = 15          # [关键] 减少PPO迭代，防止过拟合
-    value_loss_coef = 1.0    # MAPPO标准价值损失系数
-    max_grad_norm = 0.5      # MAPPO标准梯度裁剪
+    value_loss_coef = 1.0    # 价值损失系数 (论文中为1.0)
+    max_grad_norm = 0.5      # 最大梯度范数 (更严格的梯度裁剪)
 
-    # HMASD损失权重 - 紧急修复判别器崩溃问题
-    # 注意：重新平衡奖励权重，解决判别器过度训练和技能学习停滞问题
-    lambda_e = 10           # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
-    lambda_D = 1.0           # [紧急修复] 大幅提高团队技能判别器奖励权重，从0.1提高到1.0
-    lambda_d = 2.0           # [紧急修复] 大幅提高个体技能判别器奖励权重，从0.5提高到2.0
-    lambda_h = 0.01          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
-    lambda_l = 0.1           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
+    # HMASD损失权重 - 基于论文Table 3中的3m场景
+    # 注意：根据训练曲线分析调整权重，解决个体技能学习停滞问题
+    lambda_e = 100.0         # 外部奖励权重
+    lambda_D = 0.1           # 团队技能判别器奖励权重
+    lambda_d = 0.5           # [关键] 适度提高个体技能判别器奖励权重
+    lambda_h = 0.001         # 高层策略熵权重 (论文中3m场景为0.001)
+    lambda_l = 0.01          # 低层策略熵权重 (论文中3m场景为0.01)
     lambda_cd = 0.0          # 对比散度损失权重 (禁用)
     lambda_mi = 0.1          # 互信息奖励权重 (新增)
 
@@ -55,7 +55,7 @@ class Config:
     high_level_buffer_size = None  # 高层经验缓冲区大小 (动态计算)
     high_level_batch_size = None   # 高层更新的批处理大小 (动态计算)
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
-    rollout_length = 5000    # [调整] 增加rollout长度，从2500增加到5000，确保容纳足够的技能周期
+    rollout_length = 2500     # 每次rollout收集的步数 (严格on-policy)
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
     
     def set_short_test_mode(self):
@@ -110,10 +110,10 @@ class Config:
     # 权重退火参数 - 用于解决奖励空窗期问题
     use_reward_annealing = False         # 禁用额外模块
     w_intrinsic_initial = 5.0          # 内在奖励初始权重倍数（早期强调探索）
-    w_intrinsic_final = 0.1            # 内在奖励最终权重倍数（后期回到正常水平）
-    w_extrinsic_initial = 0.05          # 外部奖励初始权重倍数（早期弱化利用）
+    w_intrinsic_final = 1.0            # 内在奖励最终权重倍数（后期回到正常水平）
+    w_extrinsic_initial = 0.5          # 外部奖励初始权重倍数（早期弱化利用）
     w_extrinsic_final = 2.0            # 外部奖励最终权重倍数（后期强化利用）
-    anneal_steps = 2000000             # 权重退火总步数（约25%的训练时间）
+    anneal_steps = 1000000             # 权重退火总步数（约25%的训练时间）
     anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
 
     # --- 场景4: 强制中继模式奖励权重 ---

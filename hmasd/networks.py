@@ -1001,7 +1001,7 @@ class SkillDiscoverer(nn.Module):
         # 重置参数
         self.actor_hidden = None
         
-        # Critic网络（中心化价值函数）- 增强OPT支持
+        # Critic网络（中心化价值函数）- 使用FiLM进行状态-技能融合
         if self.use_opt:
             # 低层OPT模块：用于处理全局状态的交互解耦
             self.critic_opt = OPT(
@@ -1017,11 +1017,14 @@ class SkillDiscoverer(nn.Module):
                 self.opt_to_value_projection = nn.Linear(config.opt_prototype_dim, config.embedding_dim)
             else:
                 self.opt_to_value_projection = nn.Identity()
-            # 价值网络接收解耦后的全局状态特征和团队技能
-            self.critic_mlp = MLP(config.embedding_dim + config.n_Z, config.hidden_size, config.hidden_size)
+            # 状态编码器：只处理状态特征，不再拼接技能
+            self.critic_state_encoder = MLP(config.embedding_dim, config.hidden_size, config.hidden_size)
         else:
-            # 标准Critic网络
-            self.critic_mlp = MLP(config.state_dim + config.n_Z, config.hidden_size, config.hidden_size)
+            # 状态编码器：只处理状态特征，不再拼接技能
+            self.critic_state_encoder = MLP(config.state_dim, config.hidden_size, config.hidden_size)
+        
+        # FiLM层：团队技能生成调制参数
+        self.critic_skill_film_generator = nn.Linear(config.n_Z, config.hidden_size * 2)  # 生成gamma和beta
         
         self.critic_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
         self.value_head = nn.Linear(config.gru_hidden_size, 1)
@@ -1074,7 +1077,7 @@ class SkillDiscoverer(nn.Module):
                 self.init_hidden(batch_size)
     
     def get_value(self, state, team_skill, batch_first=True):
-        """获取价值函数值"""
+        """获取价值函数值 - 使用FiLM进行状态-技能融合"""
         batch_size = state.size(0)
         device = state.device
         
@@ -1105,26 +1108,32 @@ class SkillDiscoverer(nn.Module):
             
             # 投影回价值计算维度并去除序列维度
             processed_state = self.opt_to_value_projection(disentangled_state).squeeze(1)  # [batch_size, embedding_dim]
-            
-            # 拼接解耦后的状态特征和团队技能
-            critic_input = torch.cat([processed_state, team_skill_onehot], dim=-1)
         else:
-            # 标准方式：直接拼接全局状态和团队技能
-            critic_input = torch.cat([state, team_skill_onehot], dim=-1)
+            # 标准方式：直接处理全局状态
+            processed_state = state
             cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
         
-        # 前向传播
-        critic_features = self.critic_mlp(critic_input)
+        # 关键修改：使用FiLM代替简单拼接
+        # 1. 状态特征编码（不包含技能信息）
+        state_features = self.critic_state_encoder(processed_state)  # [batch_size, hidden_size]
         
-        # 确保critic_features是3D的 [batch_size, seq_len, hidden_dim]
-        if critic_features.dim() == 2:
-            critic_features = critic_features.unsqueeze(1)  # 添加时序维度
+        # 2. 技能生成FiLM调制参数
+        film_params = self.critic_skill_film_generator(team_skill_onehot)  # [batch_size, hidden_size * 2]
+        gamma, beta = torch.chunk(film_params, 2, dim=-1)  # 各自为 [batch_size, hidden_size]
+        
+        # 3. FiLM调制：gamma * state_features + beta
+        # 这种方式让技能信息能够动态调整状态特征，实现强条件依赖
+        modulated_features = gamma * state_features + beta  # [batch_size, hidden_size]
+        
+        # 确保modulated_features是3D的 [batch_size, seq_len, hidden_dim]
+        if modulated_features.dim() == 2:
+            modulated_features = modulated_features.unsqueeze(1)  # 添加时序维度
         
         # 初始化隐藏状态（如果需要）
         if self.critic_hidden is None or self.critic_hidden.size(1) != batch_size:
             self.critic_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
             
-        critic_output, self.critic_hidden = self.critic_gru(critic_features, self.critic_hidden)
+        critic_output, self.critic_hidden = self.critic_gru(modulated_features, self.critic_hidden)
         
         # 移除时序维度
         critic_output = critic_output.squeeze(1)
