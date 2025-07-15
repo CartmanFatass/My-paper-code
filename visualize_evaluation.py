@@ -621,12 +621,14 @@ class EnhancedVisualizationEnv:
             self.base_env.close()
 
 
-def create_evaluation_folder(args):
+def create_evaluation_folder(config, scenario, model_path):
     """
     创建评估结果保存文件夹
     
     参数:
-        args: 命令行参数
+        config: 配置对象
+        scenario: 场景编号
+        model_path: 模型路径
     
     返回:
         save_path: 保存路径
@@ -635,10 +637,10 @@ def create_evaluation_folder(args):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     
     # 提取模型名称（去掉路径和扩展名）
-    model_name = os.path.splitext(os.path.basename(args.model_path))[0]
+    model_name = os.path.splitext(os.path.basename(model_path))[0]
     
-    # 构建实验设置字符串
-    experiment_config = f"scen{args.scenario}_uav{args.n_uavs}_usr{args.n_users}_{args.user_distribution}"
+    # 构建实验设置字符串 - 从config读取参数
+    experiment_config = f"scen{scenario}_uav{config.n_agents}_usr{config.n_users}_{config.user_distribution}"
     
     # 创建文件夹名称
     folder_name = f"{timestamp}_{experiment_config}_{model_name}"
@@ -654,91 +656,95 @@ def create_evaluation_folder(args):
     return save_path
 
 
-def create_env(scenario, args, save_path=None):
+def create_env(scenario, config, seed, save_path=None):
     """
     创建环境实例
     
     参数:
         scenario: 场景编号
-        args: 命令行参数
+        config: 配置对象
+        seed: 随机种子
         save_path: 图像保存路径
     
     返回:
         env: 环境实例
     """
-    # FDMA参数设置
-    use_fdma = getattr(args, 'use_fdma', True)  # 默认启用FDMA
-    bandwidth = getattr(args, 'bandwidth', 5)  # 默认3个信道
+    # 从配置对象获取通用环境参数
+    env_kwargs = {
+        'n_uavs': config.n_agents,
+        'n_users': config.n_users,
+        'user_distribution': config.user_distribution,
+        'channel_model': config.channel_model,
+        'render_mode': "human",
+        'seed': seed,
+        'use_fdma': config.use_fdma,
+        'bandwidth': config.bandwidth
+    }
     
     if scenario == 1:
-        raw_env = UAVBaseStationEnv(
-            n_uavs=args.n_uavs,
-            n_users=args.n_users,
-            area_size=args.area_size,
-            user_distribution=args.user_distribution,
-            channel_model=args.channel_model,
-            render_mode="human",
-            seed=args.seed,
-            use_fdma=use_fdma,
-            bandwidth=bandwidth
-        )
+        raw_env = UAVBaseStationEnv(**env_kwargs)
     elif scenario == 2:
+        # 场景2不再需要传递奖励权重参数，奖励已固化为覆盖率+归一化吞吐量
         raw_env = UAVCooperativeNetworkEnv(
-            n_uavs=args.n_uavs,
-            n_users=args.n_users,
-            area_size=args.area_size,
-            max_hops=args.max_hops,
-            user_distribution=args.user_distribution,
-            channel_model=args.channel_model,
-            render_mode="human",
-            seed=args.seed,
-            use_fdma=use_fdma,
-            bandwidth=bandwidth
+            max_hops=config.max_hops,
+            **env_kwargs
         )
     elif scenario == 3:
+        # 场景3的奖励权重参数（从配置对象获取）
+        reward_kwargs = {
+            'effective_coverage_weight': config.effective_coverage_weight,
+            'throughput_weight': config.throughput_weight,
+            'load_balance_weight': config.load_balance_weight,
+            'proximity_penalty_weight': config.proximity_penalty_weight
+        }
+        
+        # 场景3特有的参数（从配置对象获取）
+        scenario3_kwargs = {
+            'n_clusters': config.n_clusters,
+            'cluster_std': config.cluster_std,
+            'central_area_ratio': config.central_area_ratio,
+            'area_size': config.area_size
+        }
+        
         raw_env = UAVMultiHopEnv(
-            n_uavs=args.n_uavs,
-            n_users=args.n_users,
-            area_size=args.area_size,
-            max_hops=args.max_hops,
-            user_distribution=args.user_distribution,
-            channel_model=args.channel_model,
-            render_mode="human",
-            seed=args.seed,
-            n_clusters=args.n_clusters,
-            cluster_std=args.cluster_std,
-            central_area_ratio=args.central_area_ratio,
-            use_fdma=use_fdma,
-            bandwidth=bandwidth
+            max_hops=config.max_hops,
+            **env_kwargs, # 传递通用参数
+            **reward_kwargs, # 传递场景3的奖励权重参数
+            **scenario3_kwargs # 传递场景3特有参数
         )
     elif scenario == 4:
-        # 场景4：强制多跳中继环境
-        # 使用优化的默认参数，参考 train_multiproc_config_1.py
-        raw_env = UAVForcedRelayEnv(
-            n_uavs=args.n_uavs,
-            n_users=args.n_users,
-            area_size=args.area_size,
-            max_hops=args.max_hops,
-            user_distribution='forced_relay_cluster',  # 场景4特有的用户分布
-            channel_model=args.channel_model,
-            render_mode="human",
-            seed=args.seed,
-            n_clusters=args.n_clusters,
-            cluster_std=args.cluster_std,
-            central_area_ratio=args.central_area_ratio,
-            min_sinr=3,  # 降低SINR门槛
-            max_connections=25,  # 增加连接数上限
-            coverage_weight=0.8,
-            connectivity_weight=0.15,
-            efficiency_weight=0.05,
-            use_fdma=use_fdma,
-            bandwidth=bandwidth
-        )
+        # 场景4：强制多跳中继环境（从配置对象获取所有参数）
+        scenario4_kwargs = {
+            'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
+            'max_hops': config.max_hops,
+            'area_size': config.area_size,
+            'n_clusters': config.n_clusters,
+            'cluster_std': config.cluster_std,
+            'central_area_ratio': config.central_area_ratio,
+            'min_sinr': config.min_sinr,
+            'max_connections': config.max_connections,
+            'coverage_weight': config.coverage_weight,
+            'connectivity_weight': config.connectivity_weight,
+            'efficiency_weight': config.efficiency_weight,
+            'uav_init_mode': config.uav_init_mode,
+            'uav_start_area_size': config.uav_start_area_size,
+            'grid_resolution': config.grid_resolution,
+            'potential_reward_weight': config.potential_reward_weight,
+            'belief_decay_factor': config.belief_decay_factor,
+            'recon_interval': config.recon_interval,
+            'recon_strength': config.recon_strength,
+            'coverage_overlap_penalty_weight': config.coverage_overlap_penalty_weight
+        }
+        
+        # 将场景4的参数合并到通用参数中
+        env_kwargs.update(scenario4_kwargs)
+        
+        raw_env = UAVForcedRelayEnv(**env_kwargs)
     else:
         raise ValueError(f"未知的场景: {scenario}")
     
     # 使用适配器包装环境
-    adapted_env = ParallelToArrayAdapter(raw_env, seed=args.seed)
+    adapted_env = ParallelToArrayAdapter(raw_env, seed=seed)
     
     # 使用增强可视化包装器
     enhanced_env = EnhancedVisualizationEnv(adapted_env, save_path=save_path)
@@ -842,58 +848,30 @@ def visualize_evaluation(env, agent, args):
 
 
 def parse_args():
-    """解析命令行参数"""
+    """解析命令行参数 - 简化版本，大多数参数从config_1.py读取"""
     parser = argparse.ArgumentParser(description='可视化评估训练好的HMASD模型')
     
-    # 模型参数
+    # 模型和场景参数
     parser.add_argument('--model_path', type=str, default=None,
                        help='训练好的模型文件路径 (如果未提供或不存在，将使用随机策略)')
     parser.add_argument('--use_random', action='store_true',
                        help='强制使用随机策略 (忽略模型文件)')
     parser.add_argument('--scenario', type=int, default=4,
                        help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
+    
+    # 评估控制参数
     parser.add_argument('--n_episodes', type=int, default=5,
                        help='评估的episode数量')
-    parser.add_argument('--render_interval', type=int, default=1,
+    parser.add_argument('--seed', type=int, default=42,
+                       help='随机种子')
+    
+    # 可视化参数
+    parser.add_argument('--render_interval', type=int, default=50,
                         help='每隔多少步渲染一次 (默认: 1, 即每步都渲染)')
     parser.add_argument('--save_extra_plots', action='store_true',
                         help='生成并保存额外的分析图表 (2D拓扑图、性能变化图)')
     parser.add_argument('--trajectory_snapshot_interval', type=int, default=500,
                         help='在2D拓扑图上标记轨迹快照的频率 (步数)')
-    
-    # 环境参数 - 为场景4调整默认值
-    parser.add_argument('--n_uavs', type=int, default=10,
-                       help='无人机数量 (场景4推荐12架)')
-    parser.add_argument('--n_users', type=int, default=30,
-                       help='用户数量 (场景4推荐80个)')
-    parser.add_argument('--area_size', type=int, default=2000,
-                       help='区域大小 (米, 场景4推荐2500m)')
-    parser.add_argument('--max_hops', type=int, default=4,
-                       help='最大跳数 (场景2、3、4使用, 场景4推荐4跳)')
-    parser.add_argument('--user_distribution', type=str, default='forced_relay_cluster',
-                       choices=['uniform', 'cluster', 'hotspot', 'multi_cluster', 'forced_relay_cluster'],
-                       help='用户分布类型 (场景4特有: forced_relay_cluster)')
-    parser.add_argument('--channel_model', type=str, default='probabilistic',
-                       choices=['free_space', 'urban', 'suburban', '3gpp-36777','probabilistic'],
-                       help='信道模型 (场景4推荐free_space)')
-    parser.add_argument('--seed', type=int, default=42,
-                       help='随机种子')
-    
-    # 场景3和场景4共同参数 - 为场景4调整默认值
-    parser.add_argument('--n_clusters', type=int, default=3,
-                       help='用户簇数量 (场景3和4使用, 场景4推荐4个)')
-    parser.add_argument('--cluster_std', type=int, default=80,
-                       help='簇内用户分布标准差 (米, 场景3和4使用, 场景4推荐80m)')
-    parser.add_argument('--central_area_ratio', type=float, default=0.6,
-                       help='中心用户区域占总区域的比例 (场景3和4使用, 场景4推荐0.6)')
-    
-    # FDMA参数
-    parser.add_argument('--use_fdma', action='store_true', default=True,
-                       help='是否启用FDMA频分多址 (默认启用)')
-    parser.add_argument('--no_fdma', action='store_true',
-                       help='禁用FDMA频分多址')
-    parser.add_argument('--bandwidth', type=int, default=20e6,
-                       help='每个无人机的带宽 (Hz, 默认20MHz)')
     
     return parser.parse_args()
 
@@ -902,32 +880,26 @@ def main():
     """主函数"""
     args = parse_args()
     
-    # 处理FDMA参数逻辑
-    if args.no_fdma:
-        args.use_fdma = False
-    
     # 判断是否使用随机策略
     use_random_agent = args.use_random or args.model_path is None or not os.path.exists(args.model_path or "")
     
-    print(f"场景: {args.scenario}")
-    print(f"无人机数量: {args.n_uavs}")
-    print(f"用户数量: {args.n_users}")
-    print(f"区域大小: {args.area_size}m")
-    print(f"最大跳数: {args.max_hops}")
-    print(f"用户分布: {args.user_distribution}")
-    print(f"信道模型: {args.channel_model}")
-    print(f"FDMA启用状态: {args.use_fdma}")
-    if args.use_fdma:
-        print(f"无人机带宽: {args.bandwidth/1e6:.0f} MHz")
-    
-    # 创建配置
+    # 加载配置（基于论文参数）
     config = Config()
-    config.n_agents = args.n_uavs
     config.use_opt = False
-
+    
+    print(f"场景: {args.scenario}")
+    print(f"无人机数量: {config.n_agents}")
+    print(f"用户数量: {config.n_users}")
+    print(f"区域大小: {config.area_size}m")
+    print(f"最大跳数: {config.max_hops}")
+    print(f"用户分布: {config.user_distribution}")
+    print(f"信道模型: {config.channel_model}")
+    print(f"FDMA启用状态: {config.use_fdma}")
+    if config.use_fdma:
+        print(f"无人机带宽: {config.bandwidth/1e6:.0f} MHz")
     
     # 创建环境获取维度信息
-    temp_env = create_env(args.scenario, args)
+    temp_env = create_env(args.scenario, config, args.seed)
     state_dim = temp_env.state_dim
     obs_dim = temp_env.obs_dim
     config.update_env_dims(state_dim, obs_dim)
@@ -949,7 +921,7 @@ def main():
         
         # 创建评估结果保存文件夹 (随机策略)
         timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-        experiment_config = f"scen{args.scenario}_uav{args.n_uavs}_usr{args.n_users}_{args.user_distribution}"
+        experiment_config = f"scen{args.scenario}_uav{config.n_agents}_usr{config.n_users}_{config.user_distribution}"
         folder_name = f"{timestamp}_{experiment_config}_random_agent"
         evaluation_dir = "evaluation"
         save_path = os.path.join(evaluation_dir, folder_name)
@@ -966,7 +938,7 @@ def main():
             print("✅ 模型加载成功")
             
             # 创建评估结果保存文件夹
-            save_path = create_evaluation_folder(args)
+            save_path = create_evaluation_folder(config, args.scenario, args.model_path)
             
         except Exception as e:
             print(f"❌ 模型加载失败: {e}")
@@ -976,7 +948,7 @@ def main():
             
             # 创建评估结果保存文件夹 (回退到随机策略)
             timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-            experiment_config = f"scen{args.scenario}_uav{args.n_uavs}_usr{args.n_users}_{args.user_distribution}"
+            experiment_config = f"scen{args.scenario}_uav{config.n_agents}_usr{config.n_users}_{config.user_distribution}"
             folder_name = f"{timestamp}_{experiment_config}_random_fallback"
             evaluation_dir = "evaluation"
             save_path = os.path.join(evaluation_dir, folder_name)
@@ -984,7 +956,7 @@ def main():
             print(f"评估结果将保存到: {save_path}")
     
     # 创建可视化环境（带保存路径）
-    env = create_env(args.scenario, args, save_path=save_path)
+    env = create_env(args.scenario, config, args.seed, save_path=save_path)
     
     try:
         # 运行可视化评估

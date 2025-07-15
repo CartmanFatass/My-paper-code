@@ -1151,7 +1151,20 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 2. Update agent positions based on actions
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
-                velocity = actions[agent] * self.max_speed
+                # 计算原始速度向量
+                raw_velocity = actions[agent] * self.max_speed
+                
+                # 计算速度向量的模长（3D速度）
+                speed = np.linalg.norm(raw_velocity)
+                
+                # 确保3D速度不超过最大限制
+                if speed > self.max_speed:
+                    # 如果速度超过了最大限制，则将速度向量归一化，然后乘以最大速度
+                    velocity = raw_velocity / speed * self.max_speed
+                else:
+                    # 如果速度未超过限制，则直接使用
+                    velocity = raw_velocity
+                
                 new_position = self.uav_positions[agent_idx] + velocity * self.time_step
                 
                 # Boundary checks
@@ -1166,7 +1179,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         self._compute_routing_paths()
 
         # 4. Check for newly serviced users and update belief map
-        sparse_task_reward = 0
         for user_idx in range(self.n_users):
             # Check if user is not yet serviced but is now connected by a UAV with a valid route
             is_effectively_connected = False
@@ -1178,7 +1190,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             
             if is_effectively_connected:
                 self.user_serviced_status[user_idx] = True
-                sparse_task_reward += 1.0 # Give a sparse reward of 1.0 for each new user serviced
                 
                 # Set belief at the user's location to zero as they are found
                 user_grid_x, user_grid_y = self._get_grid_coords(self.user_positions[user_idx])
@@ -1200,8 +1211,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.reward_info["exploration_reward"] = potential_reward
         self.reward_info["potential_reward"] = potential_reward
         
-        # 8.2 Update sparse task reward
-        self.reward_info["sparse_task_reward"] = sparse_task_reward
+        # 8.2 Update sparse task reward (removed - using base_reward only)
+        self.reward_info["sparse_task_reward"] = 0
         
         # 8.3 Compute and update belief statistics
         belief_stats = self._compute_belief_stats()
@@ -1212,11 +1223,12 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.reward_info["previous_potential"] = potential_t
         
         # 9. Combine all rewards
-        global_reward = (
-            base_reward + 
-            sparse_task_reward + 
-            self.potential_reward_weight * potential_reward
-        )
+        # The potential-based reward is an exploration bonus and should primarily guide the
+        # low-level policy. Including it in the main reward signal can confuse the high-level
+        # coordinator, which should focus on the task reward (coverage, connectivity).
+        # We will only use the task-related rewards for the main signal.
+        # The exploration reward is still available in `reward_info` if needed elsewhere.
+        global_reward = base_reward
 
         # 10. Update step counter and check for termination
         self.current_step += 1

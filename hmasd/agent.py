@@ -508,7 +508,7 @@ class HMASDAgent:
     
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
-                         skill_timer_for_env=None, env_id=0):
+                         skill_timer_for_env=None, env_id=0, potential_reward=0.0):
         """
         存储环境交互经验
         
@@ -526,6 +526,7 @@ class HMASDAgent:
             log_probs: 技能的log probabilities字典，包含'team_log_prob'和'agent_log_probs'
             skill_timer_for_env: 当前环境的技能计时器值，用于多环境并行训练
             env_id: 环境ID，用于多环境并行训练
+            potential_reward: 基于信念地图的探索奖励，用于低层策略
         """
         n_agents = len(agent_skills)
         state_tensor = torch.FloatTensor(state).to(self.device)
@@ -603,7 +604,11 @@ class HMASDAgent:
                 w_intrinsic_current = 1.0
                 w_extrinsic_current = 1.0
             
-            intrinsic_reward = env_reward_component + team_disc_component + ind_disc_component
+            # 添加基于信念地图的探索奖励到内在奖励中
+            # 这个探索奖励主要用于指导低层策略的探索行为
+            exploration_component = self.config.potential_reward_weight * potential_reward if hasattr(self.config, 'potential_reward_weight') else 0.0
+            
+            intrinsic_reward = env_reward_component + team_disc_component + ind_disc_component + exploration_component
             
             # 新增：对总内在奖励进行裁剪，以稳定训练
             # 这防止了因奖励值过大导致的损失爆炸问题
@@ -869,28 +874,9 @@ class HMASDAgent:
             advantages = advantages.detach()
             returns = returns.detach()
             
-            # 【关键修复】对 GAE 计算出的 returns (V_target) 进行归一化处理
-            # 这是解决 Value Loss 爆炸问题的核心
-            main_logger.debug(f"GAE returns 归一化前统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
-            
-            # 使用 MAPPO 的 ValueNorm 方案进行归一化
-            if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                # 确保 returns 的维度正确 [batch_size, 1]
-                returns_for_norm = returns.unsqueeze(-1) if returns.dim() == 1 else returns
-                
-                # 先更新统计量（使用 detach 避免梯度传播）
-                self.value_norm_coordinator.update(returns_for_norm.detach())
-                
-                # 再进行归一化
-                normalized_returns = self.value_norm_coordinator.normalize(returns_for_norm)
-                # 转换回原始维度
-                returns = normalized_returns.squeeze(-1) if normalized_returns.dim() > 1 else normalized_returns
-                
-                main_logger.debug(f"使用 ValueNorm 归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
-            else:
-                # 如果不使用 ValueNorm，使用简单的批量归一化作为备选
-                returns = (returns - returns.mean()) / (returns.std() + 1e-8)
-                main_logger.debug(f"使用批量归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+            # The GAE returns (V_target) will be normalized later, right before the value loss calculation.
+            # This avoids incorrect double normalization and ensures consistency.
+            main_logger.debug(f"GAE returns (unnormalized): 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
             
             # 检查 advantages 和 returns 的统计信息
             adv_mean = advantages.mean().item()
@@ -1054,25 +1040,24 @@ class HMASDAgent:
             # returns 是 [batch_size], 需要 unsqueeze 匹配 state_values
             returns = returns.float().unsqueeze(-1) # Shape [batch_size, 1]
             
-            # 【修复15】应用Value Normalization的一致性修复（同discoverer）
+            # Correctly apply Value Normalization for the value loss calculation.
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                # 【修复16】保存原始returns，用于统计量更新
-                original_returns = returns.clone().detach()
+                # 1. Update the running stats with the unnormalized returns from GAE.
+                self.value_norm_coordinator.update(returns)
                 
-                # 先用原始returns更新统计量（避免循环依赖）
-                self.value_norm_coordinator.update(original_returns)
-                
-                # 【修复17】同时对state_values和returns进行归一化，确保损失计算的一致性
-                normalized_returns = self.value_norm_coordinator.normalize(returns)
+                # 2. Normalize the network's value prediction.
                 normalized_state_values = self.value_norm_coordinator.normalize(state_values)
                 
+                # 3. Normalize the target returns.
+                normalized_returns = self.value_norm_coordinator.normalize(returns)
+                
+                # 4. Calculate the loss using the normalized values.
                 Z_value_loss = F.mse_loss(normalized_state_values, normalized_returns)
-                main_logger.debug(f"Coordinator使用Value Normalization: "
-                                f"原始returns均值={returns.mean().item():.4f}, "
-                                f"标准化后returns均值={normalized_returns.mean().item():.4f}, "
-                                f"原始state_values均值={state_values.mean().item():.4f}, "
-                                f"标准化后state_values均值={normalized_state_values.mean().item():.4f}")
+                main_logger.debug(f"Coordinator using ValueNorm: "
+                                f"Normalized state_values mean={normalized_state_values.mean().item():.4f}, "
+                                f"Normalized returns mean={normalized_returns.mean().item():.4f}")
             else:
+                # Without ValueNorm, use raw values.
                 Z_value_loss = F.mse_loss(state_values, returns)
             
             # 检查价值损失是否有异常值
@@ -1362,31 +1347,8 @@ class HMASDAgent:
         advantages = advantages.detach()
         returns = returns.detach()
         
-        # 【关键修复】对 GAE 计算出的 returns (V_target) 进行归一化处理
-        # 这是解决 Value Loss 爆炸问题的核心
-        main_logger.debug(f"Discoverer GAE returns 归一化前统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
-        
-        # 【修复7】先保存原始returns，用于统计量更新
-        original_returns = returns.clone().detach()
-        
-        # 使用 MAPPO 的 ValueNorm 方案进行归一化
-        if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            # 确保 original_returns 的维度正确 [batch_size, 1]
-            returns_for_update = original_returns.unsqueeze(-1) if original_returns.dim() == 1 else original_returns
-            
-            # 【修复8】先用原始returns更新统计量（避免循环依赖）
-            self.value_norm_discoverer.update(returns_for_update.detach())
-            
-            # 【修复9】然后用原始returns进行归一化（保证一致性）
-            normalized_returns = self.value_norm_discoverer.normalize(returns_for_update)
-            # 转换回原始维度
-            returns = normalized_returns.squeeze(-1) if normalized_returns.dim() > 1 else normalized_returns
-            
-            main_logger.debug(f"Discoverer 使用 ValueNorm 归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
-        else:
-            # 如果不使用 ValueNorm，使用简单的批量归一化作为备选
-            returns = (returns - returns.mean()) / (returns.std() + 1e-8)
-            main_logger.debug(f"Discoverer 使用批量归一化后统计: 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+        # The GAE returns (V_target) will be normalized later, right before the value loss calculation.
+        main_logger.debug(f"Discoverer GAE returns (unnormalized): 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
 
         # 新增：优势归一化，稳定策略更新
         advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
@@ -1428,21 +1390,24 @@ class HMASDAgent:
                          f"目标returns均值={returns.mean().item():.4f}, "
                          f"目标returns标准差={returns.std().item():.4f}")
         
-        # 【修复10】应用Value Normalization的一致性修复
+        # Correctly apply Value Normalization for the value loss calculation.
         if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            # 【修复11】同时对current_values进行归一化，确保损失计算的一致性
-            # 注意：不要重复更新统计量，因为前面已经用original_returns更新过了
-            normalized_returns = self.value_norm_discoverer.normalize(returns)
-            # 【修复12】同样对current_values进行归一化
+            # 1. Update the running stats with the unnormalized returns from GAE.
+            self.value_norm_discoverer.update(returns)
+            
+            # 2. Normalize the network's value prediction.
             normalized_current_values = self.value_norm_discoverer.normalize(current_values)
             
+            # 3. Normalize the target returns.
+            normalized_returns = self.value_norm_discoverer.normalize(returns)
+            
+            # 4. Calculate the loss using the normalized values.
             value_loss = F.mse_loss(normalized_current_values, normalized_returns)
-            main_logger.debug(f"Discoverer使用Value Normalization: "
-                            f"原始returns均值={returns.mean().item():.4f}, "
-                            f"标准化后returns均值={normalized_returns.mean().item():.4f}, "
-                            f"原始current_values均值={current_values.mean().item():.4f}, "
-                            f"标准化后current_values均值={normalized_current_values.mean().item():.4f}")
+            main_logger.debug(f"Discoverer using ValueNorm: "
+                            f"Normalized current_values mean={normalized_current_values.mean().item():.4f}, "
+                            f"Normalized returns mean={normalized_returns.mean().item():.4f}")
         else:
+            # Without ValueNorm, use raw values.
             value_loss = F.mse_loss(current_values, returns)
         
         # 计算熵损失

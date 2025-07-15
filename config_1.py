@@ -3,20 +3,34 @@
 class Config:
     # 环境参数
     # 注意：实际环境中应该获取这些值
-    n_agents = None  # 无人机数量（将由训练脚本根据--n_uavs参数设置）
+    n_agents = 10     # 无人机数量 (默认值，可通过代码设置)
     state_dim = None  # 全局状态维度（将在环境初始化时获取）
     obs_dim = None    # 单个智能体观测维度（将在环境初始化时获取）
     action_dim = 3    # 每个智能体输出3D速度向量
     
+    # 通用环境参数
+    n_users = 30                    # 用户数量
+    area_size = 2000               # 区域大小 (米)
+    max_hops = 5                   # 最大跳数 (场景2, 3, 4使用)
+    user_distribution = 'multi_cluster'  # 用户分布类型
+    channel_model = 'probabilistic'      # 信道模型
+    use_fdma = True                      # 理想FDMA,0干扰
+    bandwidth = 20e6                     # 每个无人机的带宽 (Hz)
+    
+    # 场景3和4共用参数
+    n_clusters = 3                 # 用户簇数量 (场景3和4使用)
+    cluster_std = 80              # 簇内用户分布标准差 (米, 场景3和4使用)
+    central_area_ratio = 0.6      # 中心用户区域占总区域的比例 (场景3和4使用)
+    
     # 局部观测参数
     #observation_radius = 500  # 观测半径 (m) 使用真实通信范围代替
-    max_observed_uavs = 8     # 最大观测无人机数量
-    max_observed_users = 15   # 最大观测用户数量
+    max_observed_uavs = 10     # 最大观测无人机数量
+    max_observed_users = 30   # 最大观测用户数量
 
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 3           # [关键] 降低个体技能数量
-    k = 20           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 30           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -41,10 +55,10 @@ class Config:
     # HMASD损失权重 - 紧急修复判别器崩溃问题
     # 注意：重新平衡奖励权重，解决判别器过度训练和技能学习停滞问题
     lambda_e = 10           # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
-    lambda_D = 1.0           # [紧急修复] 大幅提高团队技能判别器奖励权重，从0.1提高到1.0
-    lambda_d = 2.0           # [紧急修复] 大幅提高个体技能判别器奖励权重，从0.5提高到2.0
-    lambda_h = 0.01          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
-    lambda_l = 0.1           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
+    lambda_D = 0.1           # [紧急修复] 大幅提高团队技能判别器奖励权重，从0.1提高到1.0
+    lambda_d = 0.5           # [紧急修复] 大幅提高个体技能判别器奖励权重，从0.5提高到2.0
+    lambda_h = 0.001          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
+    lambda_l = 0.01           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
     lambda_cd = 0.0          # 对比散度损失权重 (禁用)
     lambda_mi = 0.1          # 互信息奖励权重 (新增)
 
@@ -52,10 +66,11 @@ class Config:
     # buffer和batch大小将根据环境参数动态计算
     low_level_buffer_size = None   # 低层经验回放缓冲区大小 (动态计算)
     batch_size = None              # 低层批处理大小 (动态计算, 兼容旧代码)
+    buffer_size = None             # 兼容性别名，指向low_level_buffer_size
     high_level_buffer_size = None  # 高层经验缓冲区大小 (动态计算)
     high_level_batch_size = None   # 高层更新的批处理大小 (动态计算)
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
-    rollout_length = 5000    # [调整] 增加rollout长度，从2500增加到5000，确保容纳足够的技能周期
+    rollout_length = 512    # [调整] 增加rollout长度，从2500增加到5000，确保容纳足够的技能周期
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
     
     def set_short_test_mode(self):
@@ -101,10 +116,10 @@ class Config:
     
     # 环境奖励权重配置 - 场景3多跳环境（优化后的权重分配）
     # 注意：场景2不再需要传入奖励权重，其奖励已固化为覆盖率+归一化吞吐量
-    effective_coverage_weight = 0.6     # 有效覆盖率权重（大幅增强，优先覆盖所有用户）
-    throughput_weight = 0.2            # 系统吞吐量权重（降低，避免与覆盖目标冲突）
-    load_balance_weight = 0.15          # 负载均衡权重（适度降低）
-    proximity_penalty_weight = 0.05   # 邻近惩罚权重（降低，减少对探索的限制）
+    effective_coverage_weight = 1.0     # 有效覆盖率权重（大幅增强，优先覆盖所有用户）
+    throughput_weight = 0            # 系统吞吐量权重（降低，避免与覆盖目标冲突）
+    load_balance_weight = 0          # 负载均衡权重（适度降低）
+    proximity_penalty_weight = 0   # 邻近惩罚权重（降低，减少对探索的限制）
     coverage_curve_steepness = 2.0     # 覆盖率奖励曲线陡峭度（新增，增强高覆盖率区域奖励）
 
     # 权重退火参数 - 用于解决奖励空窗期问题
@@ -117,11 +132,11 @@ class Config:
     anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
 
     # --- 场景4: 强制中继模式奖励权重 ---
-    coverage_weight = 0.8                    # 覆盖率奖励权重
-    connectivity_weight = 0.15               # 连通性奖励权重
-    efficiency_weight = 0.05                 # 效率奖励权重
-    potential_reward_weight = 0.2            # 势函数奖励权重
-    coverage_overlap_penalty_weight = 0.1    # 覆盖重叠惩罚权重
+    coverage_weight = 0.5                    # 覆盖率奖励权重
+    connectivity_weight = 0              # 连通性奖励权重
+    efficiency_weight = 0                 # 效率奖励权重
+    potential_reward_weight = 0.5            # 势函数奖励权重
+    coverage_overlap_penalty_weight = 0    # 覆盖重叠惩罚权重
 
     # --- 场景4: 信念地图与势函数参数 ---
     belief_decay_factor = 0.1                # 信念衰减因子
@@ -159,6 +174,8 @@ class Config:
         self.low_level_buffer_size = buffer_size * self.n_agents
         # 低层batch：每次训练使用的样本数（考虑所有智能体）
         self.batch_size = minibatch_size * self.n_agents
+        # 兼容性别名
+        self.buffer_size = self.low_level_buffer_size
         
         # === 高层计算保持不变 ===
         total_high_level_samples = self.num_envs * (self.rollout_length // self.k)

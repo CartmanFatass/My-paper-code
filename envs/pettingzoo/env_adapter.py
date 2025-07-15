@@ -276,6 +276,45 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             print(f"渲染错误: {e}")
             return None
 
+    def get_current_state(self):
+        """获取当前环境状态用于绘图和分析"""
+        try:
+            state_info = {}
+            
+            # 获取UAV位置
+            if hasattr(self.env, 'uav_positions'):
+                state_info['uav_positions'] = self.env.uav_positions.copy()
+            
+            # 获取用户位置
+            if hasattr(self.env, 'user_positions'):
+                state_info['user_positions'] = self.env.user_positions.copy()
+            
+            # 获取地面基站位置
+            if hasattr(self.env, 'ground_bs_positions'):
+                state_info['ground_bs_positions'] = self.env.ground_bs_positions.copy()
+            
+            # 获取区域大小
+            if hasattr(self.env, 'area_size'):
+                state_info['area_size'] = self.env.area_size
+            
+            # 获取连接矩阵
+            if hasattr(self.env, 'connections'):
+                state_info['connections'] = self.env.connections.copy()
+            
+            # 获取其他有用信息
+            if hasattr(self.env, 'current_step'):
+                state_info['current_step'] = self.env.current_step
+            
+            if hasattr(self.env, 'max_steps'):
+                state_info['max_steps'] = self.env.max_steps
+            
+            return state_info
+            
+        except Exception as e:
+            # 如果获取状态失败，返回空字典
+            print(f"获取环境状态时出错: {e}")
+            return {}
+
     def close(self):
         """Closes the environment."""
         self.env.close()

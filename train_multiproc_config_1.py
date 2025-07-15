@@ -122,21 +122,26 @@ class EnhancedRewardTracker:
                         'value': comp_value
                     })
         
-        # 记录额外信息（简化后只记录served_users）
+        # 记录额外信息（修正为优先使用瞬时值）
         if info:
             served_users = 0
             
-            # 从多个来源获取服务用户数
-            if 'reward_info' in info and 'connected_users' in info['reward_info']:
+            # 优先使用瞬时有效连接用户数
+            if 'reward_info' in info and 'effective_connected_users' in info['reward_info']:
+                served_users = info['reward_info']['effective_connected_users']
+            elif 'reward_info' in info and 'connected_users' in info['reward_info']:
                 served_users = info['reward_info']['connected_users']
+            elif 'reward_info' in info and 'coverage_ratio' in info['reward_info'] and self.n_users is not None:
+                # 从瞬时覆盖率计算服务用户数，使用固定的n_users
+                served_users = int(info['reward_info']['coverage_ratio'] * self.n_users)
             elif 'coverage_ratio' in info and self.n_users is not None:
-                # 从覆盖率计算服务用户数，使用固定的n_users
+                # 备用方案：从info根部获取coverage_ratio（可能是累积值，谨慎使用）
                 served_users = int(info['coverage_ratio'] * self.n_users)
             elif 'coverage_ratio' in info and 'n_users' in info:
-                # 备用方案：从info中获取n_users
+                # 更保守的备用方案：从info中获取n_users
                 served_users = int(info['coverage_ratio'] * info['n_users'])
             elif 'served_users' in info:
-                # 兼容原有字段名
+                # 兼容原有字段名（可能是累积值）
                 served_users = info['served_users']
             
             # 如果获取到了服务用户信息，记录到性能指标
@@ -258,19 +263,20 @@ class EnhancedRewardTracker:
                         'timestamp': time.time()
                     })
                 
-                if 'connected_users' in reward_info:
-                    self.performance_metrics['reward_components']['connected_users'].append({
-                        'step': step,
-                        'env_id': env_id,
-                        'value': reward_info['connected_users'],
-                        'timestamp': time.time()
-                    })
-                
                 if 'coverage_ratio' in reward_info:
                     self.performance_metrics['reward_components']['coverage_ratios'].append({
                         'step': step,
                         'env_id': env_id,
                         'value': reward_info['coverage_ratio'],
+                        'timestamp': time.time()
+                    })
+                
+                # 确保使用瞬时有效连接用户数
+                if 'effective_connected_users' in reward_info:
+                    self.performance_metrics['reward_components']['connected_users'].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': reward_info['effective_connected_users'],
                         'timestamp': time.time()
                     })
     
@@ -935,6 +941,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
         elif scenario == 4:
             # 场景4：强制多跳中继环境（从配置对象获取所有参数）
             scenario4_kwargs = {
+                'max_steps': config.episode_length,           # 从配置中传入episode长度
                 'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
                 'max_hops': config.max_hops,
                 'area_size': config.area_size,
@@ -972,6 +979,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
 # 解析命令行参数
 def parse_args():
     parser = argparse.ArgumentParser(description='使用论文《Hierarchical Multi-Agent Skill Discovery》中的超参数运行HMASD (多进程版本)')
+    
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
     parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
@@ -990,52 +998,7 @@ def parse_args():
     parser.add_argument('--resume_from', type=str, default='', 
                         help='预训练模型路径，用于继续训练（如果为空则从头开始训练）')
 
-    # 环境参数
-    parser.add_argument('--n_uavs', type=int, default=10, help='无人机数量 ')
-    parser.add_argument('--n_users', type=int, default=30, help='用户数量 ')
-    parser.add_argument('--area_size', type=int, default=2000, help='区域大小 (米)')
-    parser.add_argument('--max_hops', type=int, default=5, help='最大跳数 (场景2, 3, 4使用)')
-    parser.add_argument('--user_distribution', type=str, default='multi_cluster', 
-                        choices=['uniform', 'cluster', 'hotspot', 'multi_cluster', 'forced_relay_cluster'], help='用户分布类型')
-    parser.add_argument('--channel_model', type=str, default='probabilistic',
-                        choices=['free_space', 'urban', 'suburban','3gpp-36777', 'probabilistic'], help='信道模型')
-    
-    # FDMA 参数
-    parser.add_argument('--use-fdma', action=argparse.BooleanOptionalAction, default=True,
-                        help='理想FDMA,0干扰 (默认: --use-fdma, 使用 --no-use-fdma 禁用)')
-    parser.add_argument('--bandwidth', type=float, default=20e6, help='每个无人机的带宽 (Hz)。默认: 20e6')
-    
-    # 场景3和4共用参数
-    parser.add_argument('--n_clusters', type=int, default=3, help='用户簇数量 (场景3和4使用)')
-    parser.add_argument('--cluster_std', type=int, default=80, help='簇内用户分布标准差 (米, 场景3和4使用)')
-    parser.add_argument('--central_area_ratio', type=float, default=0.6, help='中心用户区域占总区域的比例 (场景3和4使用)')
-
-    # 场景4特有参数
-    parser.add_argument('--min_sinr', type=float, default=3, help='最小信噪比 (仅用于场景4)')
-    parser.add_argument('--max_connections', type=int, default=25, help='最大连接数 (仅用于场景4)')
-    parser.add_argument('--coverage_weight', type=float, default=0.8, help='覆盖率奖励权重 (仅用于场景4)')
-    parser.add_argument('--connectivity_weight', type=float, default=0.15, help='连通性奖励权重 (仅用于场景4)')
-    parser.add_argument('--efficiency_weight', type=float, default=0.05, help='效率奖励权重 (仅用于场景4)')
-    
-    # 场景4无人机初始化参数
-    parser.add_argument('--uav_init_mode', type=str, default='start_area', 
-                        choices=['random', 'start_area'], help='无人机初始化模式 (仅用于场景4): random=随机分布, start_area=起始区域均匀分布')
-    parser.add_argument('--uav_start_area_size', type=int, default=500, help='起始区域大小（米），仅在uav_init_mode=start_area时使用 (仅用于场景4)')
-    
-    # 场景4基于信念的势函数奖励参数
-    parser.add_argument('--gamma', type=float, default=0.99, help='折扣因子，用于势函数计算（仅用于场景4）')
-    parser.add_argument('--potential_reward_weight', type=float, default=0, help='势函数奖励权重，仅用于场景4')
-    parser.add_argument('--belief_decay_factor', type=float, default=0.1, help='信念衰减因子，仅用于场景4')
-    parser.add_argument('--recon_interval', type=int, default=100, help='信念重构间隔，仅用于场景4')
-    parser.add_argument('--recon_strength', type=float, default=0.1, help='信念重构强度，仅用于场景4')
-    
-    # 场景4重叠惩罚参数
-    parser.add_argument('--coverage_overlap_penalty_weight', type=float, default=0.1, help='覆盖重叠惩罚权重，仅用于场景4')
-    
-    # 场景4栅格分辨率参数
-    parser.add_argument('--grid_resolution', type=int, default=50, help='栅格分辨率，仅用于场景4')
-    
-    # 并行参数
+    # 并行参数 (可覆盖配置文件中的值)
     parser.add_argument('--num_envs', type=int, default=0, 
                         help='并行环境数量 (0=使用配置文件中的值)')
     parser.add_argument('--eval_rollout_threads', type=int, default=0, 
@@ -1047,39 +1010,13 @@ def parse_args():
     parser.add_argument('--detailed_logging', action='store_true', 
                         help='启用详细的奖励日志记录')
     
-    # OPT模块参数
+    # 高级功能开关 (详细参数在config_1.py中定义)
     parser.add_argument('--use_opt', action=argparse.BooleanOptionalAction, default=False,
                         help='是否使用OPT (Interaction Pattern Disentangling) 模块 (使用--use_opt启用，--no-use_opt禁用)')
-    
-    # 权重退火参数
     parser.add_argument('--use_reward_annealing', action=argparse.BooleanOptionalAction, default=False,
                         help='是否启用奖励权重退火机制 (使用--use_reward_annealing启用，--no-use_reward_annealing禁用)')
-    parser.add_argument('--w_intrinsic_initial', type=float, default=5.0,
-                        help='内在奖励初始权重倍数（早期强调探索）')
-    parser.add_argument('--w_intrinsic_final', type=float, default=1.0,
-                        help='内在奖励最终权重倍数（后期回到正常水平）')
-    parser.add_argument('--w_extrinsic_initial', type=float, default=0.5,
-                        help='外部奖励初始权重倍数（早期弱化利用）')
-    parser.add_argument('--w_extrinsic_final', type=float, default=2.0,
-                        help='外部奖励最终权重倍数（后期强化利用）')
-    parser.add_argument('--anneal_steps', type=int, default=1000000,
-                        help='权重退火总步数（约25%的训练时间）')
-    parser.add_argument('--anneal_schedule', type=str, default='linear',
-                        choices=['linear', 'cosine'], help='退火计划（linear 或 cosine）')
-
-    # 学习率衰减参数
     parser.add_argument('--use_lr_decay', action=argparse.BooleanOptionalAction, default=False,
                         help='是否启用学习率衰减 (使用--use_lr_decay启用，--no-use_lr_decay禁用)')
-    parser.add_argument('--lr_decay_schedule', type=str, default='linear',
-                        choices=['linear', 'cosine'], help='学习率衰减计划')
-    parser.add_argument('--lr_decay_steps', type=int, default=2000000,
-                        help='学习率衰减总步数')
-    parser.add_argument('--coordinator_lr_decay_factor', type=float, default=0.2,
-                        help='协调器学习率衰减因子')
-    parser.add_argument('--discoverer_lr_decay_factor', type=float, default=0.2,
-                        help='发现器学习率衰减因子')
-    parser.add_argument('--discriminator_lr_decay_factor', type=float, default=0.3,
-                        help='判别器学习率衰减因子')
     
     return parser.parse_args()
 
@@ -1136,7 +1073,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         agent.writer.add_text('Training/mode', 'from_scratch', 0)
     
     # 创建增强的奖励追踪器
-    reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=args.n_users)
+    reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=config.n_users)
     reward_tracker.export_interval = args.export_interval
     
     # 记录超参数
@@ -1186,14 +1123,14 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     agent.writer.add_text('Parameters/load_balance_weight', str(config.load_balance_weight), 0)
     
     # 记录场景4的奖励权重参数
-    agent.writer.add_text('Parameters/coverage_weight', str(args.coverage_weight), 0)
-    agent.writer.add_text('Parameters/connectivity_weight', str(args.connectivity_weight), 0)
-    agent.writer.add_text('Parameters/efficiency_weight', str(args.efficiency_weight), 0)
-    agent.writer.add_text('Parameters/potential_reward_weight', str(args.potential_reward_weight), 0)
-    agent.writer.add_text('Parameters/belief_decay_factor', str(args.belief_decay_factor), 0)
-    agent.writer.add_text('Parameters/recon_interval', str(args.recon_interval), 0)
-    agent.writer.add_text('Parameters/recon_strength', str(args.recon_strength), 0)
-    agent.writer.add_text('Parameters/coverage_overlap_penalty_weight', str(args.coverage_overlap_penalty_weight), 0)
+    agent.writer.add_text('Parameters/coverage_weight', str(config.coverage_weight), 0)
+    agent.writer.add_text('Parameters/connectivity_weight', str(config.connectivity_weight), 0)
+    agent.writer.add_text('Parameters/efficiency_weight', str(config.efficiency_weight), 0)
+    agent.writer.add_text('Parameters/potential_reward_weight', str(config.potential_reward_weight), 0)
+    agent.writer.add_text('Parameters/belief_decay_factor', str(config.belief_decay_factor), 0)
+    agent.writer.add_text('Parameters/recon_interval', str(config.recon_interval), 0)
+    agent.writer.add_text('Parameters/recon_strength', str(config.recon_strength), 0)
+    agent.writer.add_text('Parameters/coverage_overlap_penalty_weight', str(config.coverage_overlap_penalty_weight), 0)
 
     # 训练变量
     total_steps = 0
@@ -1263,6 +1200,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 current_agent_info = all_agent_infos_list[i]
                 skill_timer_value = env_skill_durations[i]
                 
+                # 从环境信息中提取potential_reward（如果可用）
+                potential_reward = 0.0
+                if 'reward_info' in infos[i] and 'potential_reward' in infos[i]['reward_info']:
+                    potential_reward = infos[i]['reward_info']['potential_reward']
+                
                 # 存储转换
                 agent.store_transition(
                     states[i], next_states[i], observations[i], next_observations[i],
@@ -1270,7 +1212,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     current_agent_info['agent_skills'], current_agent_info['action_logprobs'],
                     log_probs=current_agent_info['log_probs'],
                     skill_timer_for_env=skill_timer_value,
-                    env_id=i
+                    env_id=i,
+                    potential_reward=potential_reward
                 )
                 
                 # 更新技能持续时间
@@ -1617,6 +1560,15 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
     active_envs = np.ones(num_envs, dtype=bool) # Track which envs are still running for the current eval round
     completed_episodes = 0
     
+    # 为绘图收集历史数据
+    env_histories = [
+        {
+            'steps': [], 'uav_positions': [], 'connectivity': [], 'throughput': [],
+            'static_info': None  # 用于存储静态信息
+        } for _ in range(num_envs)
+    ]
+    first_episode_history_saved = False  # 标记是否已保存第一个episode的绘图数据
+    
     # 统计信息
     all_team_skills = []  # 记录每个时间步的团队技能
     all_agent_skills = []  # 记录每个时间步的个体技能
@@ -1691,6 +1643,43 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                 if active_envs[i]:
                     env_steps[i] += 1
                     env_rewards[i] += rewards[i]
+                    
+                    # 收集历史数据用于绘图
+                    try:
+                        # 获取当前环境状态用于绘图
+                        env_state = vec_env.env_method('get_current_state', indices=[i])[0]
+                        
+                        # 记录步数
+                        env_histories[i]['steps'].append(env_steps[i])
+                        
+                        # 记录UAV位置
+                        if 'uav_positions' in env_state:
+                            env_histories[i]['uav_positions'].append(env_state['uav_positions'].copy())
+                        
+                        # 记录连通性和吞吐量
+                        connectivity = 0
+                        throughput = 0
+                        if 'reward_info' in infos[i]:
+                            reward_info = infos[i]['reward_info']
+                            connectivity = reward_info.get('effective_connected_users', 0)
+                            throughput = reward_info.get('system_throughput_mbps', 0)
+                        
+                        env_histories[i]['connectivity'].append(connectivity)
+                        env_histories[i]['throughput'].append(throughput)
+                        
+                        # 收集静态信息（只需要收集一次）
+                        if env_histories[i]['static_info'] is None:
+                            static_info = {}
+                            if 'user_positions' in env_state:
+                                static_info['user_positions'] = env_state['user_positions'].copy()
+                            if 'ground_bs_positions' in env_state:
+                                static_info['ground_bs_positions'] = env_state['ground_bs_positions'].copy()
+                            if 'area_size' in env_state:
+                                static_info['area_size'] = env_state['area_size']
+                            env_histories[i]['static_info'] = static_info
+                            
+                    except Exception as e:
+                        main_logger.warning(f"收集环境 {i} 的历史数据时出错: {e}")
 
                     if render and i == 0:
                         try:
@@ -1705,16 +1694,18 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                             episode_rewards.append(env_rewards[i])
                             episode_lengths.append(env_steps[i])
                             
-                            # 获取服务用户数和覆盖率信息（如果可用）
-                            if 'global' in infos[i] and 'served_users' in infos[i]['global']:
-                                served_users = infos[i]['global']['served_users']
-                                n_users = len(infos[i]['global']['connections'][0]) if infos[i]['global']['connections'].shape[0] > 0 else 0
+                            # 获取服务用户数和覆盖率信息（修正为使用瞬时值）
+                            if 'reward_info' in infos[i] and 'effective_connected_users' in infos[i]['reward_info']:
+                                # 使用瞬时有效连接用户数，而不是累积值
+                                served_users = infos[i]['reward_info']['effective_connected_users']
+                                # 从配置中获取用户总数
+                                n_users = agent.config.n_users if hasattr(agent, 'config') and hasattr(agent.config, 'n_users') else 0
                                 coverage_ratio = served_users / n_users if n_users > 0 else 0
                                 
                                 total_served_users.append(served_users)
                                 total_coverage_ratios.append(coverage_ratio)
                                 
-                                main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}, 服务用户数: {served_users}/{n_users} ({coverage_ratio:.2%})")
+                                main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}, 瞬时有效连接用户数: {served_users}/{n_users} ({coverage_ratio:.2%})")
                             else:
                                 main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}")
 
@@ -1728,6 +1719,38 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
 
                             # 记录高层奖励
                             high_level_rewards.append(env_rewards[i])
+                            
+                            # 为第一个完成的episode生成绘图
+                            if not first_episode_history_saved and len(env_histories[i]['uav_positions']) > 0:
+                                try:
+                                    # 创建保存目录
+                                    eval_plots_dir = os.path.join(agent.log_dir, 'evaluation_plots')
+                                    os.makedirs(eval_plots_dir, exist_ok=True)
+                                    
+                                    # 生成2D拓扑图
+                                    topology_path = os.path.join(eval_plots_dir, f'eval_episode_{completed_episodes+1}_topology_2d.png')
+                                    save_evaluation_2d_topology_plot(
+                                        env_histories[i], 
+                                        env_histories[i]['static_info'], 
+                                        topology_path, 
+                                        completed_episodes+1, 
+                                        agent.config
+                                    )
+                                    
+                                    # 生成性能图表
+                                    performance_path = os.path.join(eval_plots_dir, f'eval_episode_{completed_episodes+1}_performance.png')
+                                    save_evaluation_performance_plot(
+                                        env_histories[i], 
+                                        performance_path, 
+                                        completed_episodes+1
+                                    )
+                                    
+                                    first_episode_history_saved = True
+                                    main_logger.info(f"已为第一个完成的评估episode生成绘图: {eval_plots_dir}")
+                                    
+                                except Exception as e:
+                                    main_logger.error(f"生成评估绘图时出错: {e}")
+                            
                             completed_episodes += 1
 
                         # 标记此环境在此评估轮次中完成
@@ -1853,76 +1876,13 @@ def main():
     # 使用config_1.py中的配置（基于论文超参数）
     config = Config()
     
-    # 设置无人机数量（n_agents和n_uavs是同一个参数）
-    config.n_agents = args.n_uavs
-    main_logger.info(f"设置无人机数量: n_agents = n_uavs = {config.n_agents}")
-    
-    # 将命令行参数更新到配置对象中（实现统一配置管理）
-    # 场景4奖励权重参数
-    config.coverage_weight = args.coverage_weight
-    config.connectivity_weight = args.connectivity_weight
-    config.efficiency_weight = args.efficiency_weight
-    config.potential_reward_weight = args.potential_reward_weight
-    config.coverage_overlap_penalty_weight = args.coverage_overlap_penalty_weight
-    
-    # 场景4信念地图与势函数参数
-    config.belief_decay_factor = args.belief_decay_factor
-    config.recon_interval = args.recon_interval
-    config.recon_strength = args.recon_strength
-    
-    # 场景4环境和空间参数
-    config.min_sinr = args.min_sinr
-    config.max_connections = args.max_connections
-    config.uav_init_mode = args.uav_init_mode
-    config.uav_start_area_size = args.uav_start_area_size
-    config.grid_resolution = args.grid_resolution
-    
-    # 通用环境参数
-    config.n_users = args.n_users
-    config.area_size = args.area_size
-    config.max_hops = args.max_hops
-    config.user_distribution = args.user_distribution
-    config.channel_model = args.channel_model
-    config.n_clusters = args.n_clusters
-    config.cluster_std = args.cluster_std
-    config.central_area_ratio = args.central_area_ratio
-    config.use_fdma = args.use_fdma
-    config.bandwidth = args.bandwidth
-    
-    main_logger.info("已将命令行参数更新到配置对象中，实现统一配置管理")
-    
-    # 根据命令行参数设置OPT模块使用状态
+    # 只设置少量开关参数（其他参数已在config_1.py中定义）
     config.use_opt = args.use_opt
-    main_logger.info(f"OPT模块使用状态: use_opt = {config.use_opt}")
-    
-    # 根据命令行参数设置权重退火机制
     config.use_reward_annealing = args.use_reward_annealing
-    if config.use_reward_annealing:
-        config.w_intrinsic_initial = args.w_intrinsic_initial
-        config.w_intrinsic_final = args.w_intrinsic_final
-        config.w_extrinsic_initial = args.w_extrinsic_initial
-        config.w_extrinsic_final = args.w_extrinsic_final
-        config.anneal_steps = args.anneal_steps
-        config.anneal_schedule = args.anneal_schedule
-        main_logger.info(f"权重退火机制已启用: "
-                       f"内在权重 {config.w_intrinsic_initial}→{config.w_intrinsic_final}, "
-                       f"外部权重 {config.w_extrinsic_initial}→{config.w_extrinsic_final}, "
-                       f"退火步数: {config.anneal_steps}, 退火计划: {config.anneal_schedule}")
-    else:
-        main_logger.info("权重退火机制已禁用")
-
-    # 根据命令行参数设置学习率衰减机制
     config.use_lr_decay = args.use_lr_decay
-    if config.use_lr_decay:
-        config.lr_decay_schedule = args.lr_decay_schedule
-        config.lr_decay_steps = args.lr_decay_steps
-        config.coordinator_lr_decay_factor = args.coordinator_lr_decay_factor
-        config.discoverer_lr_decay_factor = args.discoverer_lr_decay_factor
-        config.discriminator_lr_decay_factor = args.discriminator_lr_decay_factor
-        main_logger.info(f"学习率衰减机制已启用: "
-                       f"计划: {config.lr_decay_schedule}, 步数: {config.lr_decay_steps}")
-    else:
-        main_logger.info("学习率衰减机制已禁用")
+    
+    main_logger.info("配置已从config_1.py加载，运行时开关参数已设置")
+    main_logger.info(f"OPT模块: {config.use_opt}, 权重退火: {config.use_reward_annealing}, 学习率衰减: {config.use_lr_decay}")
     
     # 获取计算设备
     device = get_device(args.device)
@@ -2241,6 +2201,140 @@ def env_log(level, message, queue=None):
         pid = os.getpid()
         print(f"[Env-{pid}] {message} (日志记录失败: {e})")
         return False
+
+def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_num, config):
+    """
+    生成并保存2D俯瞰拓扑图，显示无人机轨迹
+    
+    参数:
+        history: 包含历史数据的字典，包含 'uav_positions' 列表
+        static_info: 静态环境信息，包含 'user_positions', 'ground_bs_positions', 'area_size'
+        save_path: 图像保存的完整文件路径
+        episode_num: episode编号
+        config: 配置对象
+    """
+    try:
+        import matplotlib.pyplot as plt
+        
+        # 配置中文字体支持
+        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        fig, ax = plt.subplots(figsize=(10, 10))
+        
+        # 绘制历史轨迹
+        positions_history = np.array(history['uav_positions'])  # [steps, n_uavs, 3]
+        
+        if len(positions_history) == 0:
+            main_logger.warning("没有轨迹数据可绘制")
+            return
+            
+        for i in range(config.n_agents):
+            # 使用颜色循环来区分不同无人机
+            color = plt.cm.jet(i / config.n_agents)
+            ax.plot(positions_history[:, i, 0], positions_history[:, i, 1], 
+                    color=color, alpha=0.6, linewidth=1.5,
+                    label=f'UAV {i} 轨迹' if i < 3 else "")  # 只为前3个UAV添加图例
+            
+            # 标记起点和终点
+            ax.scatter(positions_history[0, i, 0], positions_history[0, i, 1],
+                       marker='o', color=color, s=50, edgecolors='black')  # 起点
+            ax.scatter(positions_history[-1, i, 0], positions_history[-1, i, 1],
+                       marker='>', color=color, s=100, edgecolors='black')  # 终点
+
+        # 绘制静态实体
+        if static_info:
+            # 1. 地面基站
+            if 'ground_bs_positions' in static_info and static_info['ground_bs_positions'] is not None:
+                bs_pos = static_info['ground_bs_positions']
+                ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, 
+                          label='地面基站', zorder=5)
+
+            # 2. 用户
+            if 'user_positions' in static_info and static_info['user_positions'] is not None:
+                user_pos = static_info['user_positions']
+                ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, 
+                          label='用户', zorder=5)
+
+        # 3. 无人机最终位置
+        uav_final_pos = positions_history[-1]
+        ax.scatter(uav_final_pos[:, 0], uav_final_pos[:, 1], c='red', marker='^', s=150, 
+                  label='UAV (最终位置)', zorder=5)
+        for i in range(config.n_agents):
+            ax.text(uav_final_pos[i, 0] + 10, uav_final_pos[i, 1] + 10, f'UAV{i}', fontsize=9)
+
+        ax.set_title(f'评估 Episode {episode_num}: 2D拓扑与无人机轨迹')
+        ax.set_xlabel('X (m)')
+        ax.set_ylabel('Y (m)')
+        
+        area_size = static_info.get('area_size', 1000) if static_info else 1000
+        ax.set_xlim(0, area_size)
+        ax.set_ylim(0, area_size)
+        ax.set_aspect('equal', adjustable='box')
+        ax.legend()
+        ax.grid(True, linestyle='--', alpha=0.5)
+        
+        # 保存图像
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        fig.savefig(save_path, dpi=200, bbox_inches='tight')
+        plt.close(fig)
+        main_logger.info(f"2D拓扑图已保存: {save_path}")
+        
+    except Exception as e:
+        main_logger.error(f"生成2D拓扑图时出错: {e}")
+
+
+def save_evaluation_performance_plot(history, save_path, episode_num):
+    """
+    生成并保存性能指标随时间变化的图表
+    
+    参数:
+        history: 包含历史数据的字典，包含 'steps', 'connectivity', 'throughput'
+        save_path: 图像保存的完整文件路径
+        episode_num: episode编号
+    """
+    try:
+        import matplotlib.pyplot as plt
+        
+        # 配置中文字体支持
+        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+        
+        steps = history['steps']
+        connectivity = history['connectivity']
+        throughput = history['throughput']
+        
+        if len(steps) == 0:
+            main_logger.warning("没有性能数据可绘制")
+            return
+        
+        # 连通性图
+        ax1.plot(steps, connectivity, color='b', marker='.', linestyle='-', label='有效连接用户数')
+        ax1.set_title(f'评估 Episode {episode_num}: 网络性能变化')
+        ax1.set_ylabel('有效连接用户数')
+        ax1.grid(True, linestyle='--', alpha=0.6)
+        ax1.legend()
+        
+        # 吞吐量图
+        ax2.plot(steps, throughput, color='g', marker='.', linestyle='-', label='系统吞吐量')
+        ax2.set_ylabel('系统吞吐量 (Mbps)')
+        ax2.set_xlabel('时间步 (Step)')
+        ax2.grid(True, linestyle='--', alpha=0.6)
+        ax2.legend()
+        
+        fig.tight_layout()
+        
+        # 保存图像
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        fig.savefig(save_path, dpi=200, bbox_inches='tight')
+        plt.close(fig)
+        main_logger.info(f"性能图表已保存: {save_path}")
+        
+    except Exception as e:
+        main_logger.error(f"生成性能图表时出错: {e}")
+
 
 if __name__ == "__main__":
     # 设置多进程启动方法
