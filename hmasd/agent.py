@@ -14,60 +14,13 @@ import matplotlib
 if matplotlib.get_backend() != 'Agg':
     matplotlib.use('Agg')
 
+# 导入SB3的RunningMeanStd
+from stable_baselines3.common.running_mean_std import RunningMeanStd
+
 from logger import main_logger
 from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
 from hmasd.utils import ReplayBuffer, StateSkillDataset, compute_gae, compute_ppo_loss, one_hot
 
-class ValueNorm:
-    """
-    MAPPO标准的价值标准化类
-    用于稳定价值函数训练，通过维护运行时的均值和标准差来标准化returns
-    """
-    def __init__(self, shape, clip=5.0, epsilon=1e-8, device=None):
-        self.shape = shape
-        self.clip = clip
-        self.epsilon = epsilon
-        self.device = device if device is not None else torch.device("cpu")
-        
-        # 初始化运行时统计量 - MAPPO标准
-        self.running_mean = torch.zeros(shape, dtype=torch.float32, device=self.device)
-        self.running_std = torch.ones(shape, dtype=torch.float32, device=self.device)
-        self.count = 0
-        # MAPPO标准momentum - 作为tensor存储在设备上
-        self.momentum = torch.tensor(0.01, dtype=torch.float32, device=self.device)
-        
-    def update(self, v):
-        """更新运行时统计量 - MAPPO标准实现"""
-        v = v.detach().to(self.device).float()
-        
-        batch_mean = v.mean(dim=0, keepdim=True).float()
-        batch_var = v.var(dim=0, keepdim=True, unbiased=False).float()
-        batch_std = torch.sqrt(batch_var + self.epsilon).float()
-        
-        # MAPPO标准的指数移动平均更新
-        self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * batch_mean
-        self.running_std = (1 - self.momentum) * self.running_std + self.momentum * batch_std
-        
-        self.count += v.size(0)
-        
-    def normalize(self, v):
-        """标准化输入值 - MAPPO标准实现"""
-        v = v.to(self.device).float()
-        normalized = (v - self.running_mean) / (self.running_std + self.epsilon)
-        return torch.clamp(normalized, -self.clip, self.clip).float()
-        
-    def denormalize(self, v):
-        """反标准化输入值"""
-        v = v.to(self.device).float()
-        return (v * (self.running_std + self.epsilon) + self.running_mean).float()
-        
-    def to(self, device):
-        """移动到指定设备"""
-        self.device = device
-        self.running_mean = self.running_mean.to(device).float()
-        self.running_std = self.running_std.to(device).float()
-        self.momentum = self.momentum.to(device).float()
-        return self
 
 class HMASDAgent:
     """
@@ -262,16 +215,38 @@ class HMASDAgent:
         else:
             main_logger.info("未启用权重退火机制")
         
-        # 初始化Value Normalization
+        # 初始化Value Normalization - 使用SB3的RunningMeanStd
         if config.use_valuenorm:
-            self.value_norm_coordinator = ValueNorm(shape=1, device=self.device)
-            self.value_norm_discoverer = ValueNorm(shape=1, device=self.device)
-            main_logger.info("已启用Value Normalization")
+            self.value_norm_coordinator = RunningMeanStd(shape=())
+            self.value_norm_discoverer = RunningMeanStd(shape=())
+            main_logger.info("已启用Value Normalization (使用SB3 RunningMeanStd)")
         else:
             self.value_norm_coordinator = None
             self.value_norm_discoverer = None
             main_logger.info("未启用Value Normalization")
     
+    def _normalize_values(self, values, running_mean_std):
+        """使用SB3的RunningMeanStd进行标准化"""
+        if not self.config.use_valuenorm:
+            return values
+        
+        # 转换为numpy进行标准化
+        values_np = values.detach().cpu().numpy()
+        normalized_np = (values_np - running_mean_std.mean) / np.sqrt(running_mean_std.var + 1e-8)
+        
+        # 裁剪并转回tensor
+        normalized_np = np.clip(normalized_np, -5.0, 5.0)
+        return torch.tensor(normalized_np, dtype=values.dtype, device=values.device)
+
+    def _denormalize_values(self, values, running_mean_std):
+        """使用SB3的RunningMeanStd进行反标准化"""
+        if not self.config.use_valuenorm:
+            return values
+        
+        values_np = values.detach().cpu().numpy()
+        denormalized_np = values_np * np.sqrt(running_mean_std.var + 1e-8) + running_mean_std.mean
+        return torch.tensor(denormalized_np, dtype=values.dtype, device=values.device)
+
     def clear_buffers(self):
         """清空经验缓冲区（用于严格on-policy训练）"""
         main_logger.info("清空经验缓冲区")
@@ -831,25 +806,35 @@ class HMASDAgent:
         # 所以我们可以假设下一状态价值为0（或者可以从新的状态计算）
         next_values = torch.zeros_like(state_values)
         
+        # 【关键修复】在计算GAE之前，对价值网络输出进行反归一化
+        # 这确保了用于GAE计算的价值与原始尺度的奖励在同一数值尺度上
+        if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+            denormalized_state_values = self._denormalize_values(state_values, self.value_norm_coordinator)
+            denormalized_next_values = self._denormalize_values(next_values, self.value_norm_coordinator)
+            main_logger.debug(f"Coordinator GAE: 使用反归一化后的价值进行GAE计算")
+        else:
+            denormalized_state_values = state_values
+            denormalized_next_values = next_values
+        
         # 在计算GAE之前详细记录奖励和价值的统计信息
         rewards_mean = rewards.mean().item()
         rewards_std = rewards.std().item()
         rewards_min = rewards.min().item()
         rewards_max = rewards.max().item()
-        state_values_mean = state_values.mean().item()
-        state_values_std = state_values.std().item()
-        state_values_min = state_values.min().item()
-        state_values_max = state_values.max().item()
+        denorm_values_mean = denormalized_state_values.mean().item()
+        denorm_values_std = denormalized_state_values.std().item()
+        denorm_values_min = denormalized_state_values.min().item()
+        denorm_values_max = denormalized_state_values.max().item()
         
         main_logger.debug(f"GAE输入统计:")
         main_logger.debug(f"  rewards: 均值={rewards_mean:.4f}, 标准差={rewards_std:.4f}, 最小值={rewards_min:.4f}, 最大值={rewards_max:.4f}")
-        main_logger.debug(f"  state_values: 均值={state_values_mean:.4f}, 标准差={state_values_std:.4f}, 最小值={state_values_min:.4f}, 最大值={state_values_max:.4f}")
+        main_logger.debug(f"  denormalized_state_values: 均值={denorm_values_mean:.4f}, 标准差={denorm_values_std:.4f}, 最小值={denorm_values_min:.4f}, 最大值={denorm_values_max:.4f}")
         
         # 检查是否有异常值
         rewards_has_nan = torch.isnan(rewards).any().item()
         rewards_has_inf = torch.isinf(rewards).any().item()
-        values_has_nan = torch.isnan(state_values).any().item()
-        values_has_inf = torch.isinf(state_values).any().item()
+        values_has_nan = torch.isnan(denormalized_state_values).any().item()
+        values_has_inf = torch.isinf(denormalized_state_values).any().item()
         
         if rewards_has_nan or rewards_has_inf:
             main_logger.error(f"奖励中存在NaN或Inf: NaN={rewards_has_nan}, Inf={rewards_has_inf}")
@@ -858,17 +843,18 @@ class HMASDAgent:
             main_logger.info("已将奖励中的NaN/Inf值替换为有限值")
         
         if values_has_nan or values_has_inf:
-            main_logger.error(f"状态价值中存在NaN或Inf: NaN={values_has_nan}, Inf={values_has_inf}")
+            main_logger.error(f"反归一化状态价值中存在NaN或Inf: NaN={values_has_nan}, Inf={values_has_inf}")
             # 尝试修复NaN/Inf值
-            state_values = torch.nan_to_num(state_values, nan=0.0, posinf=10.0, neginf=-10.0)
-            main_logger.info("已将状态价值中的NaN/Inf值替换为有限值")
+            denormalized_state_values = torch.nan_to_num(denormalized_state_values, nan=0.0, posinf=10.0, neginf=-10.0)
+            denormalized_next_values = torch.nan_to_num(denormalized_next_values, nan=0.0, posinf=10.0, neginf=-10.0)
+            main_logger.info("已将反归一化状态价值中的NaN/Inf值替换为有限值")
         
-        # 计算GAE
+        # 计算GAE - 使用反归一化后的价值
         dones = torch.zeros_like(rewards)  # 假设高层经验不包含终止信息
         # 确保传递给compute_gae的values是1D，使用clone避免原地操作
         try:
-            advantages, returns = compute_gae(rewards.clone(), state_values.squeeze(-1).clone(), 
-                                            next_values.squeeze(-1).clone(), dones.clone(), 
+            advantages, returns = compute_gae(rewards.clone(), denormalized_state_values.squeeze(-1).clone(), 
+                                            denormalized_next_values.squeeze(-1).clone(), dones.clone(), 
                                             self.config.gamma, self.config.gae_lambda)
             # advantages 和 returns 都是 [batch_size]，分离计算图
             advantages = advantages.detach()
@@ -1042,17 +1028,16 @@ class HMASDAgent:
             
             # Correctly apply Value Normalization for the value loss calculation.
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                # 1. Update the running stats with the unnormalized returns from GAE.
-                self.value_norm_coordinator.update(returns)
+                # 1. 先用当前统计量标准化（确保网络输出和targets使用相同的标准化基准）
+                normalized_state_values = self._normalize_values(state_values, self.value_norm_coordinator)
+                normalized_returns = self._normalize_values(returns, self.value_norm_coordinator)
                 
-                # 2. Normalize the network's value prediction.
-                normalized_state_values = self.value_norm_coordinator.normalize(state_values)
-                
-                # 3. Normalize the target returns.
-                normalized_returns = self.value_norm_coordinator.normalize(returns)
-                
-                # 4. Calculate the loss using the normalized values.
+                # 2. 计算损失（使用一致的标准化基准）
                 Z_value_loss = F.mse_loss(normalized_state_values, normalized_returns)
+                
+                # 3. 最后更新统计量（为下次使用做准备）
+                self.value_norm_coordinator.update(returns.detach().cpu().numpy())
+                
                 main_logger.debug(f"Coordinator using ValueNorm: "
                                 f"Normalized state_values mean={normalized_state_values.mean().item():.4f}, "
                                 f"Normalized returns mean={normalized_returns.mean().item():.4f}")
@@ -1338,10 +1323,20 @@ class HMASDAgent:
         # 构造下一状态的占位符
         next_values = torch.zeros_like(values)  # 实际应用中应该使用真实下一状态计算
         
-        # 计算GAE
+        # 【关键修复】在计算GAE之前，对价值网络输出进行反归一化
+        # 这确保了用于GAE计算的价值与原始尺度的奖励在同一数值尺度上
+        if self.config.use_valuenorm and self.value_norm_discoverer is not None:
+            denormalized_values = self._denormalize_values(values, self.value_norm_discoverer)
+            denormalized_next_values = self._denormalize_values(next_values, self.value_norm_discoverer)
+            main_logger.debug(f"Discoverer GAE: 使用反归一化后的价值进行GAE计算")
+        else:
+            denormalized_values = values
+            denormalized_next_values = next_values
+        
+        # 计算GAE - 使用反归一化后的价值
         # 确保传递给compute_gae的values是1D，使用clone避免原地操作
-        advantages, returns = compute_gae(rewards.clone(), values.squeeze(-1).clone(), 
-                                         next_values.squeeze(-1).clone(), dones.clone(), 
+        advantages, returns = compute_gae(rewards.clone(), denormalized_values.squeeze(-1).clone(), 
+                                         denormalized_next_values.squeeze(-1).clone(), dones.clone(), 
                                          self.config.gamma, self.config.gae_lambda)
         # advantages 和 returns 都是 [batch_size]，分离计算图
         advantages = advantages.detach()
@@ -1392,17 +1387,16 @@ class HMASDAgent:
         
         # Correctly apply Value Normalization for the value loss calculation.
         if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            # 1. Update the running stats with the unnormalized returns from GAE.
-            self.value_norm_discoverer.update(returns)
+            # 1. 先用当前统计量标准化（确保网络输出和targets使用相同的标准化基准）
+            normalized_current_values = self._normalize_values(current_values, self.value_norm_discoverer)
+            normalized_returns = self._normalize_values(returns, self.value_norm_discoverer)
             
-            # 2. Normalize the network's value prediction.
-            normalized_current_values = self.value_norm_discoverer.normalize(current_values)
-            
-            # 3. Normalize the target returns.
-            normalized_returns = self.value_norm_discoverer.normalize(returns)
-            
-            # 4. Calculate the loss using the normalized values.
+            # 2. 计算损失（使用一致的标准化基准）
             value_loss = F.mse_loss(normalized_current_values, normalized_returns)
+            
+            # 3. 最后更新统计量（为下次使用做准备）
+            self.value_norm_discoverer.update(returns.detach().cpu().numpy())
+            
             main_logger.debug(f"Discoverer using ValueNorm: "
                             f"Normalized current_values mean={normalized_current_values.mean().item():.4f}, "
                             f"Normalized returns mean={normalized_returns.mean().item():.4f}")
@@ -1674,18 +1668,22 @@ class HMASDAgent:
         self.writer.add_scalar('Parameters/Lambda_h', self.config.lambda_h, self.global_step)
         self.writer.add_scalar('Parameters/Lambda_l', self.config.lambda_l, self.global_step)
 
-        # Value Normalization统计信息记录
+        # Value Normalization统计信息记录 - 使用SB3 RunningMeanStd
         if self.config.use_valuenorm:
             if self.value_norm_coordinator is not None:
-                self.writer.add_scalar('ValueNorm/Coordinator/RunningMean', 
-                                     self.value_norm_coordinator.running_mean.item(), self.global_step)
-                self.writer.add_scalar('ValueNorm/Coordinator/RunningStd', 
-                                     self.value_norm_coordinator.running_std.item(), self.global_step)
+                self.writer.add_scalar('ValueNorm/Coordinator/Mean', 
+                                     self.value_norm_coordinator.mean.item(), self.global_step)
+                self.writer.add_scalar('ValueNorm/Coordinator/Std', 
+                                     np.sqrt(self.value_norm_coordinator.var.item()), self.global_step)
+                self.writer.add_scalar('ValueNorm/Coordinator/Count', 
+                                     self.value_norm_coordinator.count, self.global_step)
             if self.value_norm_discoverer is not None:
-                self.writer.add_scalar('ValueNorm/Discoverer/RunningMean', 
-                                     self.value_norm_discoverer.running_mean.item(), self.global_step)
-                self.writer.add_scalar('ValueNorm/Discoverer/RunningStd', 
-                                     self.value_norm_discoverer.running_std.item(), self.global_step)
+                self.writer.add_scalar('ValueNorm/Discoverer/Mean', 
+                                     self.value_norm_discoverer.mean.item(), self.global_step)
+                self.writer.add_scalar('ValueNorm/Discoverer/Std', 
+                                     np.sqrt(self.value_norm_discoverer.var.item()), self.global_step)
+                self.writer.add_scalar('ValueNorm/Discoverer/Count', 
+                                     self.value_norm_discoverer.count, self.global_step)
 
         # 添加一个固定的测试值，用于调试TensorBoard显示问题
         self.writer.add_scalar('Debug/test_value', 1.0, self.global_step)
@@ -1726,25 +1724,23 @@ class HMASDAgent:
             'config': self.config
         }
         
-        # 保存ValueNorm状态（如果启用）
+        # 保存SB3 RunningMeanStd状态（如果启用）
         if self.config.use_valuenorm:
             valuenorm_state = {}
             if self.value_norm_coordinator is not None:
                 valuenorm_state['coordinator'] = {
-                    'running_mean': self.value_norm_coordinator.running_mean,
-                    'running_std': self.value_norm_coordinator.running_std,
-                    'count': self.value_norm_coordinator.count,
-                    'momentum': self.value_norm_coordinator.momentum
+                    'mean': self.value_norm_coordinator.mean,
+                    'var': self.value_norm_coordinator.var,
+                    'count': self.value_norm_coordinator.count
                 }
             if self.value_norm_discoverer is not None:
                 valuenorm_state['discoverer'] = {
-                    'running_mean': self.value_norm_discoverer.running_mean,
-                    'running_std': self.value_norm_discoverer.running_std,
-                    'count': self.value_norm_discoverer.count,
-                    'momentum': self.value_norm_discoverer.momentum
+                    'mean': self.value_norm_discoverer.mean,
+                    'var': self.value_norm_discoverer.var,
+                    'count': self.value_norm_discoverer.count
                 }
             checkpoint['valuenorm_state'] = valuenorm_state
-            main_logger.info("已保存ValueNorm状态")
+            main_logger.info("已保存SB3 RunningMeanStd状态")
         
         torch.save(checkpoint, path)
         main_logger.info(f"模型已保存到 {path}")
@@ -1815,25 +1811,23 @@ class HMASDAgent:
         self.team_discriminator.load_state_dict(checkpoint['team_discriminator'], strict=False)
         self.individual_discriminator.load_state_dict(checkpoint['individual_discriminator'], strict=False)
         
-        # 加载ValueNorm状态（如果存在且启用）
+        # 加载SB3 RunningMeanStd状态（如果存在且启用）
         if self.config.use_valuenorm and 'valuenorm_state' in checkpoint:
             valuenorm_state = checkpoint['valuenorm_state']
             
             if 'coordinator' in valuenorm_state and self.value_norm_coordinator is not None:
                 coord_state = valuenorm_state['coordinator']
-                self.value_norm_coordinator.running_mean = coord_state['running_mean'].to(self.device)
-                self.value_norm_coordinator.running_std = coord_state['running_std'].to(self.device)
+                self.value_norm_coordinator.mean = coord_state['mean']
+                self.value_norm_coordinator.var = coord_state['var']
                 self.value_norm_coordinator.count = coord_state['count']
-                self.value_norm_coordinator.momentum = coord_state['momentum'].to(self.device)
-                main_logger.info("已恢复Coordinator的ValueNorm状态")
+                main_logger.info("已恢复Coordinator的SB3 RunningMeanStd状态")
                 
             if 'discoverer' in valuenorm_state and self.value_norm_discoverer is not None:
                 disc_state = valuenorm_state['discoverer']
-                self.value_norm_discoverer.running_mean = disc_state['running_mean'].to(self.device)
-                self.value_norm_discoverer.running_std = disc_state['running_std'].to(self.device)
+                self.value_norm_discoverer.mean = disc_state['mean']
+                self.value_norm_discoverer.var = disc_state['var']
                 self.value_norm_discoverer.count = disc_state['count']
-                self.value_norm_discoverer.momentum = disc_state['momentum'].to(self.device)
-                main_logger.info("已恢复Discoverer的ValueNorm状态")
+                main_logger.info("已恢复Discoverer的SB3 RunningMeanStd状态")
                 
         elif self.config.use_valuenorm:
             main_logger.warning("ValueNorm已启用，但checkpoint中未找到ValueNorm状态，将使用初始化值")

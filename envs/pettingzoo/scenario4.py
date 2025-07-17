@@ -41,7 +41,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         coverage_weight=0.8,
         connectivity_weight=0.15,
         efficiency_weight=0.05,
-        n_ground_bs=2,
+        n_ground_bs=1,
         n_clusters=4,
         cluster_std=80,
         central_area_ratio=0.6,
@@ -65,6 +65,13 @@ class UAVForcedRelayEnv(ParallelEnv):
         belief_decay_factor=0.1,
         recon_interval=100,  # Steps between reconnaissance updates
         recon_strength=0.1,  # How much belief is added by recon
+        # Randomization control parameters
+        randomize_bs=True,  # 是否随机化基站位置
+        randomize_users=True,  # 是否随机化用户簇中心
+        randomize_uav_start=True,  # 是否随机化无人机起始区域
+        # Discovery reward parameters
+        discovery_reward_weight=0.0,  # 发现奖励权重
+        discovery_reward_value=10.0,  # 每发现一个新用户的奖励值
     ):
         super().__init__()
 
@@ -127,6 +134,19 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.max_hops = max_hops
         self.min_sinr = min_sinr
         self.max_connections = max_connections
+        
+        # 随机化控制参数
+        self.randomize_bs = randomize_bs
+        self.randomize_users = randomize_users
+        self.randomize_uav_start = randomize_uav_start
+        
+        # 发现奖励参数
+        self.discovery_reward_weight = discovery_reward_weight
+        self.discovery_reward_value = discovery_reward_value
+        
+        # 初始化发现奖励计算结果存储变量
+        self.last_discovery_reward = 0.0
+        self.last_newly_discovered_count = 0
         
         # 通信参数
         self.carrier_frequency = 2e9
@@ -224,63 +244,91 @@ class UAVForcedRelayEnv(ParallelEnv):
         return self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
     
     def _init_ground_bs(self):
-        """初始化地面基站位置 - 强制多跳的关键设计"""
+        """初始化地面基站位置 - 支持固定或随机边界分布"""
         self.ground_bs_positions = np.zeros((self.n_ground_bs, 3))
         
-        # 计算基站到用户区域中心的距离
-        user_center = self.area_size / 2
-        base_distance = self.area_size * self.base_station_distance_factor
-        
-        if self.n_ground_bs == 1:
-            # 单个基站放在远离中心的角落
-            self.ground_bs_positions[0] = [
-                self.area_size * 0.05,  # 靠近边界
-                self.area_size * 0.05,
-                30
-            ]
-        elif self.n_ground_bs == 2:
-            # 两个基站放在对角，距离用户区域中心很远
-            # 基站1：左下角
-            self.ground_bs_positions[0] = [
-                self.area_size * 0.05,
-                self.area_size * 0.05,
-                30
-            ]
-            # 基站2：右上角
-            self.ground_bs_positions[1] = [
-                self.area_size * 0.95,
-                self.area_size * 0.95,
-                30
-            ]
-        elif self.n_ground_bs == 3:
-            # 三个基站分布在三个角落
-            self.ground_bs_positions[0] = [self.area_size * 0.05, self.area_size * 0.05, 30]
-            self.ground_bs_positions[1] = [self.area_size * 0.95, self.area_size * 0.05, 30]
-            self.ground_bs_positions[2] = [self.area_size * 0.05, self.area_size * 0.95, 30]
-        elif self.n_ground_bs >= 4:
-            # 四个角落
-            self.ground_bs_positions[0] = [self.area_size * 0.05, self.area_size * 0.05, 30]
-            self.ground_bs_positions[1] = [self.area_size * 0.95, self.area_size * 0.05, 30]
-            self.ground_bs_positions[2] = [self.area_size * 0.95, self.area_size * 0.95, 30]
-            self.ground_bs_positions[3] = [self.area_size * 0.05, self.area_size * 0.95, 30]
+        # 如果关闭随机化，则使用原有的固定位置逻辑
+        if not self.randomize_bs:
+            # 计算基站到用户区域中心的距离
+            user_center = self.area_size / 2
+            base_distance = self.area_size * self.base_station_distance_factor
             
-            # 如果有更多基站，分布在边界
-            for i in range(4, self.n_ground_bs):
-                edge = i % 4
-                if edge == 0:  # 下边界
-                    x = np.random.uniform(self.area_size * 0.1, self.area_size * 0.9)
-                    y = self.area_size * 0.05
-                elif edge == 1:  # 右边界
-                    x = self.area_size * 0.95
-                    y = np.random.uniform(self.area_size * 0.1, self.area_size * 0.9)
-                elif edge == 2:  # 上边界
-                    x = np.random.uniform(self.area_size * 0.1, self.area_size * 0.9)
-                    y = self.area_size * 0.95
-                else:  # 左边界
-                    x = self.area_size * 0.05
-                    y = np.random.uniform(self.area_size * 0.1, self.area_size * 0.9)
+            if self.n_ground_bs == 1:
+                # 单个基站放在远离中心的角落
+                self.ground_bs_positions[0] = [
+                    self.area_size * 0.05,  # 靠近边界
+                    self.area_size * 0.05,
+                    30
+                ]
+            elif self.n_ground_bs == 2:
+                # 两个基站放在对角，距离用户区域中心很远
+                # 基站1：左下角
+                self.ground_bs_positions[0] = [
+                    self.area_size * 0.05,
+                    self.area_size * 0.05,
+                    30
+                ]
+                # 基站2：右上角
+                self.ground_bs_positions[1] = [
+                    self.area_size * 0.95,
+                    self.area_size * 0.95,
+                    30
+                ]
+            elif self.n_ground_bs == 3:
+                # 三个基站分布在三个角落
+                self.ground_bs_positions[0] = [self.area_size * 0.05, self.area_size * 0.05, 30]
+                self.ground_bs_positions[1] = [self.area_size * 0.95, self.area_size * 0.05, 30]
+                self.ground_bs_positions[2] = [self.area_size * 0.05, self.area_size * 0.95, 30]
+            elif self.n_ground_bs >= 4:
+                # 四个角落
+                self.ground_bs_positions[0] = [self.area_size * 0.05, self.area_size * 0.05, 30]
+                self.ground_bs_positions[1] = [self.area_size * 0.95, self.area_size * 0.05, 30]
+                self.ground_bs_positions[2] = [self.area_size * 0.95, self.area_size * 0.95, 30]
+                self.ground_bs_positions[3] = [self.area_size * 0.05, self.area_size * 0.95, 30]
                 
-                self.ground_bs_positions[i] = [x, y, 30]
+                # 如果有更多基站，分布在边界
+                for i in range(4, self.n_ground_bs):
+                    edge = i % 4
+                    if edge == 0:  # 下边界
+                        x = self.np_random.uniform(self.area_size * 0.1, self.area_size * 0.9)
+                        y = self.area_size * 0.05
+                    elif edge == 1:  # 右边界
+                        x = self.area_size * 0.95
+                        y = self.np_random.uniform(self.area_size * 0.1, self.area_size * 0.9)
+                    elif edge == 2:  # 上边界
+                        x = self.np_random.uniform(self.area_size * 0.1, self.area_size * 0.9)
+                        y = self.area_size * 0.95
+                    else:  # 左边界
+                        x = self.area_size * 0.05
+                        y = self.np_random.uniform(self.area_size * 0.1, self.area_size * 0.9)
+                    
+                    self.ground_bs_positions[i] = [x, y, 30]
+            return
+        
+        # --- 新的随机化逻辑 ---
+        # 将边界划分为四个区域：0:下, 1:右, 2:上, 3:左
+        # 为每个基站随机选择一个边界区域，避免所有基站挤在一起
+        
+        # 定义边界区域的范围
+        margin = self.area_size * 0.1  # 距离角落的最小距离
+        
+        for i in range(self.n_ground_bs):
+            edge = self.np_random.randint(0, 4)  # 随机选择一个边界
+            
+            if edge == 0:  # 下边界
+                x = self.np_random.uniform(margin, self.area_size - margin)
+                y = self.np_random.uniform(0, self.area_size * 0.05)
+            elif edge == 1:  # 右边界
+                x = self.np_random.uniform(self.area_size * 0.95, self.area_size)
+                y = self.np_random.uniform(margin, self.area_size - margin)
+            elif edge == 2:  # 上边界
+                x = self.np_random.uniform(margin, self.area_size - margin)
+                y = self.np_random.uniform(self.area_size * 0.95, self.area_size)
+            else:  # 左边界
+                x = self.np_random.uniform(0, self.area_size * 0.05)
+                y = self.np_random.uniform(margin, self.area_size - margin)
+                
+            self.ground_bs_positions[i] = [x, y, 30]  # 高度固定为30
     
     def _generate_user_positions(self):
         """
@@ -305,7 +353,7 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _generate_forced_relay_cluster_positions(self):
         """
-        生成针对强制中继优化的用户簇分布
+        生成针对强制中继优化的用户簇分布 - 支持固定或随机的簇中心
         
         特点：
         - 用户集中在中心区域，便于覆盖
@@ -321,46 +369,79 @@ class UAVForcedRelayEnv(ParallelEnv):
         central_size = self.area_size * self.central_area_ratio
         central_margin = (self.area_size - central_size) / 2
         
-        # 生成簇中心位置 - 采用更规整的布局
+        # 生成簇中心位置
         cluster_centers = np.zeros((self.n_clusters, 2))
         
-        if self.n_clusters == 4:
-            # 4个簇形成2x2网格
-            cluster_centers[0] = [central_margin + central_size * 0.3, central_margin + central_size * 0.3]
-            cluster_centers[1] = [central_margin + central_size * 0.7, central_margin + central_size * 0.3]
-            cluster_centers[2] = [central_margin + central_size * 0.3, central_margin + central_size * 0.7]
-            cluster_centers[3] = [central_margin + central_size * 0.7, central_margin + central_size * 0.7]
-        elif self.n_clusters == 3:
-            # 3个簇形成三角形
-            cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.2]
-            cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
-            cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
-        elif self.n_clusters == 5:
-            # 5个簇：中心1个 + 四周4个
-            cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.5]
-            cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.2]
-            cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.2]
-            cluster_centers[3] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
-            cluster_centers[4] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
+        # --- 随机化簇中心 ---
+        if self.randomize_users:
+            # 随机在中心区域内生成簇中心
+            for i in range(self.n_clusters):
+                # 确保簇中心之间有足够的距离，避免重叠
+                max_attempts = 50
+                for attempt in range(max_attempts):
+                    x = self.np_random.uniform(central_margin, central_margin + central_size)
+                    y = self.np_random.uniform(central_margin, central_margin + central_size)
+                    new_center = np.array([x, y])
+                    
+                    # 检查与已有簇中心的距离
+                    min_distance = self.cluster_std * 3  # 簇中心之间的最小距离
+                    valid = True
+                    for j in range(i):
+                        distance = np.linalg.norm(new_center - cluster_centers[j])
+                        if distance < min_distance:
+                            valid = False
+                            break
+                    
+                    if valid:
+                        cluster_centers[i] = new_center
+                        break
+                else:
+                    # 如果找不到合适的位置，使用网格布局作为备选
+                    grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
+                    grid_i = i // grid_size
+                    grid_j = i % grid_size
+                    x = central_margin + central_size * (grid_i + 0.5) / grid_size
+                    y = central_margin + central_size * (grid_j + 0.5) / grid_size
+                    cluster_centers[i] = [x, y]
         else:
-            # 其他情况使用网格布局
-            grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
-            cluster_idx = 0
-            
-            for i in range(grid_size):
-                for j in range(grid_size):
+            # --- 保留原有的固定簇中心逻辑 ---
+            if self.n_clusters == 4:
+                # 4个簇形成2x2网格
+                cluster_centers[0] = [central_margin + central_size * 0.3, central_margin + central_size * 0.3]
+                cluster_centers[1] = [central_margin + central_size * 0.7, central_margin + central_size * 0.3]
+                cluster_centers[2] = [central_margin + central_size * 0.3, central_margin + central_size * 0.7]
+                cluster_centers[3] = [central_margin + central_size * 0.7, central_margin + central_size * 0.7]
+            elif self.n_clusters == 3:
+                # 3个簇形成三角形
+                cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.2]
+                cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
+                cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
+            elif self.n_clusters == 5:
+                # 5个簇：中心1个 + 四周4个
+                cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.5]
+                cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.2]
+                cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.2]
+                cluster_centers[3] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
+                cluster_centers[4] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
+            else:
+                # 其他情况使用网格布局
+                grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
+                cluster_idx = 0
+                
+                for i in range(grid_size):
+                    for j in range(grid_size):
+                        if cluster_idx >= self.n_clusters:
+                            break
+                        
+                        # 网格位置
+                        grid_x = central_margin + central_size * (i + 0.5) / grid_size
+                        grid_y = central_margin + central_size * (j + 0.5) / grid_size
+                        
+                        cluster_centers[cluster_idx] = [grid_x, grid_y]
+                        cluster_idx += 1
+                    
                     if cluster_idx >= self.n_clusters:
                         break
-                    
-                    # 网格位置
-                    grid_x = central_margin + central_size * (i + 0.5) / grid_size
-                    grid_y = central_margin + central_size * (j + 0.5) / grid_size
-                    
-                    cluster_centers[cluster_idx] = [grid_x, grid_y]
-                    cluster_idx += 1
-                
-                if cluster_idx >= self.n_clusters:
-                    break
         
         # 计算每个簇的用户数量 - 确保总数正确
         base_users_per_cluster = self.n_users // self.n_clusters
@@ -543,6 +624,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return overlap_penalty
     
+    
     def _compute_belief_stats(self):
         """
         计算信念地图的统计信息，用于TensorBoard记录
@@ -639,7 +721,7 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _init_uav_positions_start_area(self):
         """
-        在指定的起始区域内均匀分布无人机
+        在指定的起始区域内均匀分布无人机 - 支持固定或随机的起始角落
         
         特点：
         - 无人机在地图边缘的一个正方形区域内均匀分布
@@ -651,14 +733,36 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         uav_positions = np.zeros((self.n_uavs, 3))
         
-        # 将起始区域设置在地图边缘（左下角）
         margin = 50  # 距离边界的最小距离
         
         # 确保起始区域不超出地图边界
-        max_start_area_size = min(self.uav_start_area_size, self.area_size - 2 * margin)
+        max_start_area_size = min(self.uav_start_area_size, self.area_size / 2 - margin)
         
-        start_area_min = margin
-        start_area_max = margin + max_start_area_size
+        # 起始区域的位置
+        start_x_min, start_y_min = 0, 0
+        
+        # --- 随机化起始角落 ---
+        if self.randomize_uav_start:
+            corner = self.np_random.randint(0, 4)  # 0:左下, 1:右下, 2:右上, 3:左上
+            if corner == 0:  # 左下
+                start_x_min = margin
+                start_y_min = margin
+            elif corner == 1:  # 右下
+                start_x_min = self.area_size - max_start_area_size - margin
+                start_y_min = margin
+            elif corner == 2:  # 右上
+                start_x_min = self.area_size - max_start_area_size - margin
+                start_y_min = self.area_size - max_start_area_size - margin
+            else:  # 左上
+                start_x_min = margin
+                start_y_min = self.area_size - max_start_area_size - margin
+        else:
+            # --- 保留原有的固定左下角逻辑 ---
+            start_x_min = margin
+            start_y_min = margin
+        
+        start_x_max = start_x_min + max_start_area_size
+        start_y_max = start_y_min + max_start_area_size
         
         # 计算网格布局参数
         grid_size = int(np.ceil(np.sqrt(self.n_uavs)))
@@ -673,12 +777,12 @@ class UAVForcedRelayEnv(ParallelEnv):
                 # 计算网格位置（均匀分布）
                 if grid_size == 1:
                     # 如果只有一个无人机，放在起始区域中心
-                    x = (start_area_min + start_area_max) / 2
-                    y = (start_area_min + start_area_max) / 2
+                    x = (start_x_min + start_x_max) / 2
+                    y = (start_y_min + start_y_max) / 2
                 else:
                     # 多个无人机时，在网格中均匀分布
-                    x = start_area_min + (start_area_max - start_area_min) * (i + 0.5) / grid_size
-                    y = start_area_min + (start_area_max - start_area_min) * (j + 0.5) / grid_size
+                    x = start_x_min + (start_x_max - start_x_min) * (i + 0.5) / grid_size
+                    y = start_y_min + (start_y_max - start_y_min) * (j + 0.5) / grid_size
                 
                 # 添加小的随机偏移以避免完全重叠
                 x_offset = self.np_random.uniform(-20, 20)  # ±20米随机偏移
@@ -989,6 +1093,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         self._initialize_belief()
         self.user_serviced_status.fill(False)
         
+        # [关键] 添加发现用户追踪机制
+        self.discovered_users_this_episode = set()
+        
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
         self.user_positions = self._generate_user_positions()
@@ -1049,6 +1156,7 @@ class UAVForcedRelayEnv(ParallelEnv):
     def _update_channel_state(self):
         """
         重写父类方法，确保使用场景4的精确SINR计算
+        同时在此函数中计算发现奖励，确保使用最新的信道状态
         """
         # 计算所有UAV-用户对的SINR
         for i in range(self.n_uavs):
@@ -1078,6 +1186,45 @@ class UAVForcedRelayEnv(ParallelEnv):
                 self.connections[uav_idx, user_idx] = True
                 uav_connections[uav_idx] += 1
                 user_connected[user_idx] = True
+        
+        # 移除这里的发现奖励计算调用 - 将在step函数中的正确位置调用
+    
+    def _calculate_discovery_reward_inline(self):
+        """
+        内联计算发现用户奖励 - 使用最新的SINR矩阵和连接状态
+        
+        核心思想：
+        - 只有第一次发现的用户才能获得奖励
+        - 发现是指无人机能够覆盖（SINR达标）一个之前未被发现的用户
+        - 这个奖励鼓励无人机分散探索，而不是聚集在一起
+        
+        结果存储在实例变量中，供step函数使用
+        """
+        newly_discovered_user_count = 0
+        
+        # 获取当前所有被覆盖的用户位置（无论是否连接）
+        all_covered_users = set()
+        
+        # 遍历所有UAV-用户对，找出能够覆盖的用户
+        # 直接使用刚刚计算的sinr_matrix，确保数据一致性
+        for uav_idx in range(self.n_uavs):
+            for user_idx in range(self.n_users):
+                if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
+                    all_covered_users.add(user_idx)
+        
+        # 检查新发现的用户
+        for user_idx in all_covered_users:
+            if user_idx not in self.discovered_users_this_episode:
+                newly_discovered_user_count += 1
+                self.discovered_users_this_episode.add(user_idx)
+        
+        # 计算发现奖励
+        discovery_reward_value = getattr(self, 'discovery_reward_value', 10.0)
+        discovery_reward = newly_discovered_user_count * discovery_reward_value
+        
+        # 存储结果到实例变量，供step函数使用
+        self.last_discovery_reward = discovery_reward
+        self.last_newly_discovered_count = newly_discovered_user_count
 
     def _compute_uav_to_uav_sinr(self, sender_idx, receiver_idx):
         """
@@ -1178,6 +1325,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         self._update_uav_connections()
         self._compute_routing_paths()
 
+        # 3.5. 在所有连接和路由都更新完毕后，计算发现奖励
+        self._calculate_discovery_reward_inline()
+
         # 4. Check for newly serviced users and update belief map
         for user_idx in range(self.n_users):
             # Check if user is not yet serviced but is now connected by a UAV with a valid route
@@ -1203,32 +1353,44 @@ class UAVForcedRelayEnv(ParallelEnv):
         potential_reward = self.gamma * potential_t1 - potential_t
         self.current_potential = potential_t1
 
-        # 7. Compute the base task reward (coverage, connectivity, etc.)
+        # 7. 获取发现奖励 - 使用在_update_channel_state中已经计算的结果
+        discovery_reward = getattr(self, 'last_discovery_reward', 0.0)
+        newly_discovered_count = getattr(self, 'last_newly_discovered_count', 0)
+        
+        # 8. Compute the base task reward (coverage, connectivity, etc.)
         base_reward = self._compute_reward()
         
-        # 8. Update reward_info with exploration-related values
-        # 8.1 Update exploration reward (potential reward)
+        # 9. Update reward_info with exploration-related values
+        # 9.1 Update exploration reward (potential reward)
         self.reward_info["exploration_reward"] = potential_reward
         self.reward_info["potential_reward"] = potential_reward
         
-        # 8.2 Update sparse task reward (removed - using base_reward only)
+        # 9.2 Update discovery reward
+        self.reward_info["discovery_reward"] = discovery_reward
+        self.reward_info["discovered_users_count"] = newly_discovered_count
+        
+        # 9.3 Update sparse task reward (removed - using base_reward only)
         self.reward_info["sparse_task_reward"] = 0
         
-        # 8.3 Compute and update belief statistics
+        # 9.4 Compute and update belief statistics
         belief_stats = self._compute_belief_stats()
         self.reward_info.update(belief_stats)
         
-        # 8.4 Store the current potential value for reference
+        # 9.5 Store the current potential value for reference
         self.reward_info["current_potential"] = potential_t1
         self.reward_info["previous_potential"] = potential_t
         
-        # 9. Combine all rewards
-        # The potential-based reward is an exploration bonus and should primarily guide the
-        # low-level policy. Including it in the main reward signal can confuse the high-level
-        # coordinator, which should focus on the task reward (coverage, connectivity).
-        # We will only use the task-related rewards for the main signal.
-        # The exploration reward is still available in `reward_info` if needed elsewhere.
-        global_reward = base_reward
+        # 10. Combine all rewards
+        # 发现奖励权重将从配置中获取
+        discovery_reward_weight = getattr(self, 'discovery_reward_weight', 0.0)
+        
+        # 组合最终奖励：基础任务奖励 + 发现奖励
+        global_reward = base_reward + discovery_reward_weight * discovery_reward
+        
+        # 更新奖励信息以供调试
+        self.reward_info["final_global_reward"] = global_reward
+        self.reward_info["base_task_reward"] = base_reward
+        self.reward_info["weighted_discovery_reward"] = discovery_reward_weight * discovery_reward
 
         # 10. Update step counter and check for termination
         self.current_step += 1
@@ -1603,24 +1765,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         pl_los = fspl + eta_los
         pl_nlos = fspl + eta_nlos
         
-        # 根据设置决定使用确定性还是随机性模型
-        if hasattr(self, 'use_deterministic_channel') and self.use_deterministic_channel:
-            # 确定性模型：使用平均路径损耗（在线性域加权，然后转回dB）
-            pl_los_linear = 10 ** (-pl_los / 10)
-            pl_nlos_linear = 10 ** (-pl_nlos / 10)
-            pl_avg_linear = p_los * pl_los_linear + (1 - p_los) * pl_nlos_linear
-            path_loss = -10 * np.log10(pl_avg_linear)
-        else:
-            # 随机性模型：根据概率随机选择LoS或NLoS
-            if hasattr(self, 'np_random'):
-                random_val = self.np_random.uniform(0, 1)
-            else:
-                random_val = np.random.uniform(0, 1)
-            
-            if random_val < p_los:
-                path_loss = pl_los
-            else:
-                path_loss = pl_nlos
+        # 使用期望值模型：使用平均路径损耗（在线性域加权，然后转回dB）
+        pl_los_linear = 10 ** (-pl_los / 10)
+        pl_nlos_linear = 10 ** (-pl_nlos / 10)
+        pl_avg_linear = p_los * pl_los_linear + (1 - p_los) * pl_nlos_linear
+        path_loss = -10 * np.log10(pl_avg_linear)
         
         return path_loss
     

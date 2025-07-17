@@ -154,10 +154,24 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
                 info["scenario"] = agent_info["scenario"]
             if "reward_info" in agent_info:
                 info["reward_info"] = agent_info["reward_info"]
+                # 专门添加发现奖励相关信息
+                reward_info = agent_info["reward_info"]
+                if "discovery_reward" in reward_info:
+                    info["discovery_reward"] = reward_info["discovery_reward"]
+                if "discovered_users_count" in reward_info:
+                    info["discovered_users_count"] = reward_info["discovered_users_count"]
+                if "weighted_discovery_reward" in reward_info:
+                    info["weighted_discovery_reward"] = reward_info["weighted_discovery_reward"]
             if "coverage_ratio" in agent_info:
                 info["coverage_ratio"] = agent_info["coverage_ratio"]
             if "served_users" in agent_info:
                  info["served_users"] = agent_info.get("global", {}).get("served_users", 0) # Get global served users
+        
+        # 添加发现用户追踪信息（如果环境支持）
+        if hasattr(self.env, 'discovered_users_this_episode'):
+            info["discovered_users_this_episode"] = len(self.env.discovered_users_this_episode)
+            info["total_users"] = getattr(self.env, 'n_users', 0)
+            info["discovery_progress"] = len(self.env.discovered_users_this_episode) / max(getattr(self.env, 'n_users', 1), 1)
 
         return next_observations_array.astype(np.float32), float(reward), terminated, truncated, info
 

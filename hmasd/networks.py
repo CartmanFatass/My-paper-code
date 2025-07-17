@@ -121,7 +121,7 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
 
 class MLP(nn.Module):
     """多层感知机"""
-    def __init__(self, input_dim, hidden_dim, output_dim, n_layers=2):
+    def __init__(self, input_dim, hidden_dim, output_dim, n_layers=2, last_layer_gain=0.01):
         super(MLP, self).__init__()
         
         layers = []
@@ -135,7 +135,7 @@ class MLP(nn.Module):
         self.model = nn.Sequential(*layers)
         
         # 初始化权重，使用较小的增益因子以避免大梯度
-        initialize_weights(self.model, gain=1.0, last_layer_gain=0.01)
+        initialize_weights(self.model, gain=1.0, last_layer_gain=last_layer_gain)
     
     def forward(self, x):
         # 确保输入是float32类型
@@ -1282,7 +1282,8 @@ class TeamDiscriminator(nn.Module):
             input_dim=config.state_dim,
             hidden_dim=config.hidden_size,
             output_dim=config.n_Z,
-            n_layers=2
+            n_layers=2,
+            last_layer_gain=1.0  # 为判别器使用更大的初始化增益
         )
     
     def forward(self, state):
@@ -1309,7 +1310,8 @@ class IndividualDiscriminator(nn.Module):
             input_dim=config.obs_dim + config.n_Z,  # 观测 + 团队技能
             hidden_dim=config.hidden_size,
             output_dim=config.n_z,
-            n_layers=2
+            n_layers=2,
+            last_layer_gain=1.0  # 为判别器使用更大的初始化增益
         )
     
     def forward(self, observation, team_skill):

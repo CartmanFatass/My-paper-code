@@ -57,6 +57,10 @@ class EnhancedRewardTracker:
             'total_steps': 0
         }
         
+        # 数据聚合缓冲区 - 用于解决并行环境数据堆积问题
+        self.step_metric_buffer = defaultdict(list)
+        self.last_tensorboard_step = 0  # 记录上次记录TensorBoard的步数
+        
         # 技能使用统计
         self.skill_usage = {
             'team_skills': defaultdict(int),
@@ -90,7 +94,12 @@ class EnhancedRewardTracker:
                 # 其他指标
                 'avg_hops': [],           # 平均跳数
                 'connected_users': [],    # 连接用户数
-                'coverage_ratios': []     # 覆盖率比例
+                'coverage_ratios': [],    # 覆盖率比例
+                
+                # 场景4发现机制指标
+                'discovery_reward': [],
+                'weighted_discovery_reward': [],
+                'discovered_users_count': []
             }
         }
         
@@ -103,6 +112,77 @@ class EnhancedRewardTracker:
         self.export_interval = 1000  # 每1000步导出一次数据
         self.last_export_step = 0
         
+    def _log_aggregated_metrics(self, writer, step, data_list, metric_name, category="Training", 
+                               recent_window=100, value_field='value'):
+        """
+        辅助函数：处理数据聚合并写入TensorBoard
+        
+        参数:
+            writer: TensorBoard writer
+            step: 当前步数
+            data_list: 包含数据的列表
+            metric_name: 指标名称
+            category: TensorBoard分类
+            recent_window: 最近数据窗口大小
+            value_field: 数据字段名
+        """
+        if not data_list:
+            return
+            
+        # 获取最近的数据
+        recent_data = data_list[-recent_window:]
+        if not recent_data:
+            return
+            
+        # 按step分组并聚合
+        try:
+            # 构建DataFrame
+            df_data = []
+            for entry in recent_data:
+                if isinstance(entry, dict):
+                    step_value = entry.get('step', step)
+                    env_id = entry.get('env_id', 0)
+                    value = entry.get(value_field, 0)
+                    df_data.append({
+                        'step': step_value,
+                        'env_id': env_id,
+                        'value': value
+                    })
+            
+            if not df_data:
+                return
+                
+            df = pd.DataFrame(df_data)
+            
+            # 按step分组，计算每个step的平均值（跨环境聚合）
+            step_aggregated = df.groupby('step')['value'].agg(['mean', 'std', 'min', 'max']).reset_index()
+            
+            if len(step_aggregated) == 0:
+                return
+                
+            # 计算这些聚合值的最终统计
+            final_mean = step_aggregated['mean'].mean()
+            final_std = step_aggregated['mean'].std() if len(step_aggregated) > 1 else 0
+            final_min = step_aggregated['mean'].min()
+            final_max = step_aggregated['mean'].max()
+            
+            # 写入TensorBoard
+            writer.add_scalar(f'{category}/{metric_name}_Mean_{recent_window}steps', final_mean, step)
+            if final_std > 0:
+                writer.add_scalar(f'{category}/{metric_name}_Std_{recent_window}steps', final_std, step)
+            writer.add_scalar(f'{category}/{metric_name}_Min_{recent_window}steps', final_min, step)
+            writer.add_scalar(f'{category}/{metric_name}_Max_{recent_window}steps', final_max, step)
+            
+            # 计算趋势（如果有足够数据）
+            if len(step_aggregated) >= 20:
+                first_half = step_aggregated['mean'].iloc[:len(step_aggregated)//2].mean()
+                second_half = step_aggregated['mean'].iloc[len(step_aggregated)//2:].mean()
+                trend = second_half - first_half
+                writer.add_scalar(f'{category}/{metric_name}_Trend_{recent_window}steps', trend, step)
+                
+        except Exception as e:
+            main_logger.warning(f"聚合指标 {metric_name} 时出错: {e}")
+    
     def log_training_step(self, step, env_id, reward, reward_components=None, info=None):
         """记录训练步骤的奖励信息"""
         self.training_rewards['total_steps'] += 1
@@ -110,7 +190,8 @@ class EnhancedRewardTracker:
             'step': step,
             'env_id': env_id,
             'reward': reward,
-            'timestamp': time.time()
+            'timestamp': time.time(),
+            'info': info  # 保存完整的info字典
         })
         
         if reward_components:
@@ -126,7 +207,7 @@ class EnhancedRewardTracker:
         if info:
             served_users = 0
             
-            # 优先使用瞬时有效连接用户数
+            # 严格优先使用 reward_info 中的数据，避免使用不可靠的根部字段
             if 'reward_info' in info and 'effective_connected_users' in info['reward_info']:
                 served_users = info['reward_info']['effective_connected_users']
             elif 'reward_info' in info and 'connected_users' in info['reward_info']:
@@ -134,24 +215,16 @@ class EnhancedRewardTracker:
             elif 'reward_info' in info and 'coverage_ratio' in info['reward_info'] and self.n_users is not None:
                 # 从瞬时覆盖率计算服务用户数，使用固定的n_users
                 served_users = int(info['reward_info']['coverage_ratio'] * self.n_users)
-            elif 'coverage_ratio' in info and self.n_users is not None:
-                # 备用方案：从info根部获取coverage_ratio（可能是累积值，谨慎使用）
-                served_users = int(info['coverage_ratio'] * self.n_users)
-            elif 'coverage_ratio' in info and 'n_users' in info:
-                # 更保守的备用方案：从info中获取n_users
-                served_users = int(info['coverage_ratio'] * info['n_users'])
-            elif 'served_users' in info:
-                # 兼容原有字段名（可能是累积值）
-                served_users = info['served_users']
+            # 注意：移除了不可靠的备用方案，避免使用 info['coverage_ratio'] 和其他根部字段
+            # 这些字段可能被环境适配器或其他中间件修改，导致数据不一致
             
-            # 如果获取到了服务用户信息，记录到性能指标
-            if served_users > 0:
-                self.performance_metrics['served_users'].append({
-                    'step': step,
-                    'env_id': env_id,
-                    'served_users': served_users,
-                    'total_users': self.n_users  # 使用固定的n_users
-                })
+            # 修复：无论服务用户数是否为0，都记录到性能指标，以保证与coverage_ratio一致
+            self.performance_metrics['served_users'].append({
+                'step': step,
+                'env_id': env_id,
+                'served_users': served_users,
+                'total_users': self.n_users  # 使用固定的n_users
+            })
             
             # 场景4特有指标：覆盖栅格数 (从info根部获取)
             if 'covered_grids' in info:
@@ -278,6 +351,20 @@ class EnhancedRewardTracker:
                         'env_id': env_id,
                         'value': reward_info['effective_connected_users'],
                         'timestamp': time.time()
+                    })
+                
+                # 场景4发现机制指标
+                if 'discovery_reward' in reward_info:
+                    self.performance_metrics['reward_components']['discovery_reward'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['discovery_reward'], 'timestamp': time.time()
+                    })
+                if 'weighted_discovery_reward' in reward_info:
+                    self.performance_metrics['reward_components']['weighted_discovery_reward'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['weighted_discovery_reward'], 'timestamp': time.time()
+                    })
+                if 'discovered_users_count' in reward_info:
+                    self.performance_metrics['reward_components']['discovered_users_count'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['discovered_users_count'], 'timestamp': time.time()
                     })
     
     def log_episode_completion(self, episode_num, env_id, total_reward, episode_length, info=None):
@@ -506,14 +593,23 @@ class EnhancedRewardTracker:
             plt.close()
     
     def log_to_tensorboard(self, writer, step, args=None):
-        """记录详细数据到TensorBoard"""
+        """记录详细数据到TensorBoard - 使用聚合数据避免并行环境数据堆积"""
         
-        # 训练奖励统计
+        # 训练奖励统计 - 使用coordinator的reward，保持兼容性
         if self.recent_rewards:
-            writer.add_scalar('Training/Reward_Mean_100ep', np.mean(self.recent_rewards), step)
-            writer.add_scalar('Training/Reward_Std_100ep', np.std(self.recent_rewards), step)
-            writer.add_scalar('Training/Reward_Min_100ep', np.min(self.recent_rewards), step)
-            writer.add_scalar('Training/Reward_Max_100ep', np.max(self.recent_rewards), step)
+            coordinator_rewards = list(self.recent_rewards)  # 这些是coordinator的k步奖励
+            
+            # 计算coordinator奖励的统计信息
+            writer.add_scalar('Training/Coordinator_Reward_Mean_100ep', np.mean(coordinator_rewards), step)
+            writer.add_scalar('Training/Coordinator_Reward_Std_100ep', np.std(coordinator_rewards), step)
+            writer.add_scalar('Training/Coordinator_Reward_Min_100ep', np.min(coordinator_rewards), step)
+            writer.add_scalar('Training/Coordinator_Reward_Max_100ep', np.max(coordinator_rewards), step)
+            
+            # 保留原有的字段名以保持兼容性
+            writer.add_scalar('Training/Reward_Mean_100ep', np.mean(coordinator_rewards), step)
+            writer.add_scalar('Training/Reward_Std_100ep', np.std(coordinator_rewards), step)
+            writer.add_scalar('Training/Reward_Min_100ep', np.min(coordinator_rewards), step)
+            writer.add_scalar('Training/Reward_Max_100ep', np.max(coordinator_rewards), step)
         
         if self.recent_lengths:
             writer.add_scalar('Training/EpisodeLength_Mean_100ep', np.mean(self.recent_lengths), step)
@@ -588,92 +684,65 @@ class EnhancedRewardTracker:
                 writer.add_scalar('Performance/Throughput_Std_100steps', throughput_std, step)
                 writer.add_scalar('Performance/Throughput_CV_100steps', throughput_cv, step)
         
-        # 系统吞吐量统计（修正后）
-        if self.performance_metrics['total_throughput']:
-            # 计算最近100步的系统吞吐量统计
-            recent_throughput_data = self.performance_metrics['total_throughput'][-100:]
-            recent_system_throughput = [t['system_throughput_mbps'] for t in recent_throughput_data if 'system_throughput_mbps' in t]
-            
-            if recent_system_throughput:
-                # 平均系统吞吐量
-                avg_system_throughput = np.mean(recent_system_throughput)
-                writer.add_scalar('Performance/System_Throughput_Mbps_100steps', avg_system_throughput, step)
-                
-                # 系统吞吐量标准差
-                throughput_std = np.std(recent_system_throughput)
-                writer.add_scalar('Performance/System_Throughput_Std_100steps', throughput_std, step)
-                
-                # 系统吞吐量最大值和最小值
-                writer.add_scalar('Performance/System_Throughput_Max_100steps', np.max(recent_system_throughput), step)
-                writer.add_scalar('Performance/System_Throughput_Min_100steps', np.min(recent_system_throughput), step)
-                
+        # 使用新的聚合逻辑处理性能指标
+        # 系统吞吐量统计
+        self._log_aggregated_metrics(writer, step, 
+                                   self.performance_metrics['total_throughput'], 
+                                   'System_Throughput_Mbps', 
+                                   'Performance',
+                                   value_field='system_throughput_mbps')
         
-        # 平均用户吞吐量统计（新增）
-        if self.performance_metrics['avg_throughput_per_user']:
-            # 计算最近100步的平均用户吞吐量统计
-            recent_avg_throughput_data = self.performance_metrics['avg_throughput_per_user'][-100:]
-            recent_avg_throughput = [t['avg_throughput_per_user_mbps'] for t in recent_avg_throughput_data]
-            
-            if recent_avg_throughput:
-                # 平均用户吞吐量
-                avg_user_throughput = np.mean(recent_avg_throughput)
-                writer.add_scalar('Performance/Avg_User_Throughput_Mbps_100steps', avg_user_throughput, step)
-                
-                # 平均用户吞吐量标准差
-                user_throughput_std = np.std(recent_avg_throughput)
-                writer.add_scalar('Performance/Avg_User_Throughput_Std_100steps', user_throughput_std, step)
-                
+        # 平均用户吞吐量统计
+        self._log_aggregated_metrics(writer, step, 
+                                   self.performance_metrics['avg_throughput_per_user'], 
+                                   'Avg_User_Throughput_Mbps', 
+                                   'Performance',
+                                   value_field='avg_throughput_per_user_mbps')
         
-        # 记录环境奖励组成部分到TensorBoard (场景2、场景3和场景4通用)
+        # 使用新的聚合逻辑处理环境奖励组成部分
         reward_components = self.performance_metrics['reward_components']
         
         # 通用奖励组成 - 统一到Rewards分类
-        if reward_components['throughput_rewards']:
-            recent_throughput_rewards = reward_components['throughput_rewards'][-100:]
-            if recent_throughput_rewards:
-                avg_throughput_reward = np.mean([r['value'] for r in recent_throughput_rewards])
-                writer.add_scalar('Rewards/Throughput_Reward_100steps', avg_throughput_reward, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['throughput_rewards'], 
+                                   'Throughput_Reward', 
+                                   'Rewards')
         
-        if reward_components['coverage_rewards']:
-            recent_coverage_rewards = reward_components['coverage_rewards'][-100:]
-            if recent_coverage_rewards:
-                avg_coverage_reward = np.mean([r['value'] for r in recent_coverage_rewards])
-                writer.add_scalar('Rewards/Coverage_Reward_100steps', avg_coverage_reward, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['coverage_rewards'], 
+                                   'Coverage_Reward', 
+                                   'Rewards')
         
         # 场景3特有奖励组成 - 统一到Rewards分类
-        if reward_components['effective_coverage_rewards']:
-            recent_effective_coverage = reward_components['effective_coverage_rewards'][-100:]
-            if recent_effective_coverage:
-                avg_effective_coverage = np.mean([r['value'] for r in recent_effective_coverage])
-                writer.add_scalar('Rewards/Effective_Coverage_Reward_100steps', avg_effective_coverage, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['effective_coverage_rewards'], 
+                                   'Effective_Coverage_Reward', 
+                                   'Rewards')
         
-        if reward_components['load_balance_rewards']:
-            recent_load_balance = reward_components['load_balance_rewards'][-100:]
-            if recent_load_balance:
-                avg_load_balance = np.mean([r['value'] for r in recent_load_balance])
-                writer.add_scalar('Rewards/Load_Balance_Reward_100steps', avg_load_balance, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['load_balance_rewards'], 
+                                   'Load_Balance_Reward', 
+                                   'Rewards')
         
-        if reward_components['network_connectivity_rewards']:
-            recent_network_connectivity = reward_components['network_connectivity_rewards'][-100:]
-            if recent_network_connectivity:
-                avg_network_connectivity = np.mean([r['value'] for r in recent_network_connectivity])
-                writer.add_scalar('Rewards/Network_Connectivity_Reward_100steps', avg_network_connectivity, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['network_connectivity_rewards'], 
+                                   'Network_Connectivity_Reward', 
+                                   'Rewards')
         
-        # 场景4特有奖励组成 - 统一到Rewards分类
+        # 场景4特有奖励组成 - 使用聚合逻辑
+        # 探索奖励
         if reward_components.get('exploration_rewards'):
-            recent_exploration_rewards_data = reward_components['exploration_rewards'][-100:]
-            if recent_exploration_rewards_data:
-                recent_values = [r['value'] for r in recent_exploration_rewards_data]
-                avg_exploration_reward = np.mean(recent_values)
-                writer.add_scalar('Rewards/Exploration_Reward_Mean_100steps', avg_exploration_reward, step)
-                
-                # 探索奖励统计
-                writer.add_scalar('Rewards/Exploration_Reward_Std_100steps', np.std(recent_values), step)
-                writer.add_scalar('Rewards/Exploration_Reward_Max_100steps', np.max(recent_values), step)
-                writer.add_scalar('Rewards/Exploration_Reward_Min_100steps', np.min(recent_values), step)
-                
-                # 探索奖励占总奖励的比例
-                if self.recent_rewards:
+            self._log_aggregated_metrics(writer, step, 
+                                       reward_components['exploration_rewards'], 
+                                       'Exploration_Reward', 
+                                       'Rewards')
+            
+            # 探索奖励占总奖励的比例（仍需单独计算）
+            if self.recent_rewards:
+                recent_exploration_rewards_data = reward_components['exploration_rewards'][-100:]
+                if recent_exploration_rewards_data:
+                    recent_values = [r['value'] for r in recent_exploration_rewards_data]
+                    avg_exploration_reward = np.mean(recent_values)
                     recent_total_rewards = list(self.recent_rewards)
                     if recent_total_rewards:
                         avg_total_reward = np.mean(recent_total_rewards)
@@ -681,40 +750,17 @@ class EnhancedRewardTracker:
                             exploration_ratio = avg_exploration_reward / abs(avg_total_reward)
                             writer.add_scalar('Rewards/Exploration_Reward_Ratio_100ep', exploration_ratio, step)
 
-        if reward_components.get('overlap_penalty'):
-            recent_overlap_penalties_data = reward_components['overlap_penalty'][-100:]
-            if recent_overlap_penalties_data:
-                recent_values = [r['value'] for r in recent_overlap_penalties_data]
-                avg_overlap_penalty = np.mean(recent_values)
-                writer.add_scalar('Rewards/Overlap_Penalty_Mean_100steps', avg_overlap_penalty, step)
-                
-                # 重叠惩罚统计
-                writer.add_scalar('Rewards/Overlap_Penalty_Std_100steps', np.std(recent_values), step)
-                writer.add_scalar('Rewards/Overlap_Penalty_Max_100steps', np.max(recent_values), step)
-                writer.add_scalar('Rewards/Overlap_Penalty_Min_100steps', np.min(recent_values), step)
-                
-                # 重叠惩罚趋势（最近50步 vs 前50步）
-                if len(recent_values) >= 100:
-                    first_half_avg = np.mean(recent_values[:50])
-                    second_half_avg = np.mean(recent_values[50:])
-                    penalty_trend = second_half_avg - first_half_avg
-                    writer.add_scalar('Rewards/Overlap_Penalty_Trend_100steps', penalty_trend, step)
+        # 重叠惩罚
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('overlap_penalty', []), 
+                                   'Overlap_Penalty', 
+                                   'Rewards')
 
-        # 场景4特有：覆盖栅格统计 - 移到Exploration分类
-        if reward_components.get('covered_grids'):
-            recent_covered_grids_data = reward_components['covered_grids'][-100:]
-            if recent_covered_grids_data:
-                recent_values = [r['value'] for r in recent_covered_grids_data]
-                avg_covered_grids = np.mean(recent_values)
-                writer.add_scalar('Exploration/Covered_Grids_Mean_100steps', avg_covered_grids, step)
-                writer.add_scalar('Exploration/Covered_Grids_Std_100steps', np.std(recent_values), step)
-                
-                # 覆盖进度（覆盖栅格数的变化趋势）
-                if len(recent_values) >= 100:
-                    first_half_avg = np.mean(recent_values[:50])
-                    second_half_avg = np.mean(recent_values[50:])
-                    coverage_progress = second_half_avg - first_half_avg
-                    writer.add_scalar('Exploration/Coverage_Progress_100steps', coverage_progress, step)
+        # 覆盖栅格统计 - 移到Exploration分类
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('covered_grids', []), 
+                                   'Covered_Grids', 
+                                   'Exploration')
         
         # 场景4新增：信念地图统计 - 新的Belief分类
         belief_fields = [
@@ -765,6 +811,74 @@ class EnhancedRewardTracker:
                                 trend = second_half_avg - first_half_avg
                                 writer.add_scalar(f'{category}/{formatted_field}_Trend_100steps', trend, step)
         
+        # 场景4新增：发现奖励机制统计 - 新的Discovery分类
+        discovery_fields = [
+            'discovery_reward', 'weighted_discovery_reward', 'discovered_users_count'
+        ]
+        
+        for field in discovery_fields:
+            if reward_components.get(field):
+                recent_data = reward_components[field][-100:]
+                if recent_data:
+                    recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
+                    if recent_values:
+                        avg_value = np.mean(recent_values)
+                        
+                        # 格式化字段名
+                        formatted_field = field.replace('_', ' ').title().replace(' ', '_')
+                        writer.add_scalar(f'Discovery/{formatted_field}_Mean_100steps', avg_value, step)
+                        
+                        # 为数值型字段添加额外统计
+                        if len(recent_values) > 1:
+                            std_value = np.std(recent_values)
+                            max_value = np.max(recent_values)
+                            min_value = np.min(recent_values)
+                            
+                            writer.add_scalar(f'Discovery/{formatted_field}_Std_100steps', std_value, step)
+                            writer.add_scalar(f'Discovery/{formatted_field}_Max_100steps', max_value, step)
+                            writer.add_scalar(f'Discovery/{formatted_field}_Min_100steps', min_value, step)
+                            
+                            # 为发现奖励添加趋势分析
+                            if field in ['discovery_reward', 'weighted_discovery_reward'] and len(recent_values) >= 100:
+                                first_half_avg = np.mean(recent_values[:50])
+                                second_half_avg = np.mean(recent_values[50:])
+                                trend = second_half_avg - first_half_avg
+                                writer.add_scalar(f'Discovery/{formatted_field}_Trend_100steps', trend, step)
+        
+        # 场景4新增：发现进度统计（从环境适配器获取）
+        # 这些数据可能直接来自环境的info，不在reward_components中
+        # 我们需要从self.training_rewards或其他地方获取
+        discovery_progress_fields = [
+            'discovered_users_this_episode', 'total_users', 'discovery_progress'
+        ]
+        
+        # 尝试从最近的训练步骤中获取发现进度信息
+        if self.training_rewards and 'step_rewards' in self.training_rewards:
+            recent_step_rewards = self.training_rewards['step_rewards'][-100:]
+            if recent_step_rewards:
+                # 从最近的步骤中提取发现进度信息
+                for field in discovery_progress_fields:
+                    field_values = []
+                    for step_reward in recent_step_rewards:
+                        # 增加对 step_reward['info'] 的非空检查
+                        if 'info' in step_reward and step_reward['info'] and field in step_reward['info']:
+                            field_values.append(step_reward['info'][field])
+                    
+                    if field_values:
+                        avg_value = np.mean(field_values)
+                        formatted_field = field.replace('_', ' ').title().replace(' ', '_')
+                        writer.add_scalar(f'Discovery/{formatted_field}_Mean_100steps', avg_value, step)
+                        
+                        # 为发现进度添加最大值和最小值
+                        if len(field_values) > 1:
+                            std_value = np.std(field_values)
+                            max_value = np.max(field_values)
+                            min_value = np.min(field_values)
+                            
+                            writer.add_scalar(f'Discovery/{formatted_field}_Std_100steps', std_value, step)
+                            writer.add_scalar(f'Discovery/{formatted_field}_Max_100steps', max_value, step)
+                            writer.add_scalar(f'Discovery/{formatted_field}_Min_100steps', min_value, step)
+        
         # 计算Real_Rewards（乘以超参数后的真实值）
         # 权重参数统一从 self.config 读取
         
@@ -807,24 +921,21 @@ class EnhancedRewardTracker:
             # 如果没有任何一个真实奖励被计算和记录，则记录一个提示
             writer.add_text('Real_Rewards/Note', 'No real rewards were calculated. Check config for weights.', step)
         
-        # 其他有用指标
-        if reward_components['avg_hops']:
-            recent_avg_hops = reward_components['avg_hops'][-100:]
-            if recent_avg_hops:
-                avg_hops_value = np.mean([r['value'] for r in recent_avg_hops])
-                writer.add_scalar('Performance/Avg_Hops_100steps', avg_hops_value, step)
+        # 其他有用指标 - 使用聚合逻辑
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['avg_hops'], 
+                                   'Avg_Hops', 
+                                   'Performance')
         
-        if reward_components['connected_users']:
-            recent_connected_users = reward_components['connected_users'][-100:]
-            if recent_connected_users:
-                avg_connected_users = np.mean([r['value'] for r in recent_connected_users])
-                writer.add_scalar('Performance/Connected_Users_100steps', avg_connected_users, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['connected_users'], 
+                                   'Connected_Users', 
+                                   'Performance')
         
-        if reward_components['coverage_ratios']:
-            recent_coverage_ratios = reward_components['coverage_ratios'][-100:]
-            if recent_coverage_ratios:
-                avg_coverage_ratio = np.mean([r['value'] for r in recent_coverage_ratios])
-                writer.add_scalar('Performance/Coverage_Ratio_100steps', avg_coverage_ratio, step)
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['coverage_ratios'], 
+                                   'Coverage_Ratio', 
+                                   'Performance')
     
     def get_summary_statistics(self):
         """获取训练摘要统计信息"""
@@ -960,7 +1071,10 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'belief_decay_factor': config.belief_decay_factor,
                 'recon_interval': config.recon_interval,
                 'recon_strength': config.recon_strength,
-                'coverage_overlap_penalty_weight': config.coverage_overlap_penalty_weight
+                'coverage_overlap_penalty_weight': config.coverage_overlap_penalty_weight,
+                # 发现奖励机制参数
+                'discovery_reward_weight': config.discovery_reward_weight,
+                'discovery_reward_value': config.discovery_reward_value
             }
             
             # 将场景4的参数合并到通用参数中
@@ -984,7 +1098,7 @@ def parse_args():
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
     parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
-    parser.add_argument('--log_dir', type=str, default='logs', help='日志目录')
+    parser.add_argument('--log_dir', type=str, default='../tf-logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
                         choices=['debug', 'info', 'warning', 'error', 'critical'], 
                         help='日志级别 (debug=详细, info=信息, warning=警告, error=错误, critical=严重)')
@@ -1007,7 +1121,7 @@ def parse_args():
     # 数据收集参数
     parser.add_argument('--export_interval', type=int, default=1000, 
                         help='数据导出间隔步数')
-    parser.add_argument('--detailed_logging', action='store_true', 
+    parser.add_argument('--detailed_logging', action='store_true', default=True,
                         help='启用详细的奖励日志记录')
     
     # 高级功能开关 (详细参数在config_1.py中定义)
@@ -1554,20 +1668,59 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
     # Use agent.config.state_dim for default state shape
     states = np.array([info.get('state', np.zeros(agent.config.state_dim)) for info in initial_infos]) # Use agent's state_dim
 
-    # 环境状态跟踪
-    env_steps = np.zeros(num_envs, dtype=int)
-    env_rewards = np.zeros(num_envs)
-    active_envs = np.ones(num_envs, dtype=bool) # Track which envs are still running for the current eval round
-    completed_episodes = 0
-    
-    # 为绘图收集历史数据
+    # 为绘图收集历史数据 - 增强版本（基于visualize_evaluation.py）
     env_histories = [
         {
             'steps': [], 'uav_positions': [], 'connectivity': [], 'throughput': [],
             'static_info': None  # 用于存储静态信息
         } for _ in range(num_envs)
     ]
-    first_episode_history_saved = False  # 标记是否已保存第一个episode的绘图数据
+    plots_generated = 0  # 追踪本次评估已生成的图片数量
+    
+    # 记录初始状态的历史数据
+    infos = initial_infos  # 临时设置用于记录初始状态
+    
+    def record_env_history(env_id, step_count):
+        """记录环境历史数据 - 基于visualize_evaluation.py的成功方案"""
+        try:
+            # 获取当前环境状态
+            env_state = vec_env.env_method('get_current_state', indices=[env_id])[0]
+            
+            # 记录步数和UAV位置
+            env_histories[env_id]['steps'].append(step_count)
+            env_histories[env_id]['uav_positions'].append(env_state['uav_positions'].copy())
+            
+            # 记录性能指标
+            if 'reward_info' in infos[env_id]:
+                reward_info = infos[env_id]['reward_info']
+                env_histories[env_id]['connectivity'].append(reward_info.get('effective_connected_users', 0))
+                env_histories[env_id]['throughput'].append(reward_info.get('system_throughput_mbps', 0))
+            else:
+                env_histories[env_id]['connectivity'].append(0)
+                env_histories[env_id]['throughput'].append(0)
+            
+            # 收集静态信息（只需要收集一次）
+            if env_histories[env_id]['static_info'] is None:
+                static_info = {}
+                if 'user_positions' in env_state:
+                    static_info['user_positions'] = env_state['user_positions'].copy()
+                if 'ground_bs_positions' in env_state:
+                    static_info['ground_bs_positions'] = env_state['ground_bs_positions'].copy()
+                if 'area_size' in env_state:
+                    static_info['area_size'] = env_state['area_size']
+                env_histories[env_id]['static_info'] = static_info
+                
+        except Exception as e:
+            main_logger.warning(f"记录环境 {env_id} 历史数据时出错: {e}")
+    
+    for i in range(num_envs):
+        record_env_history(i, 0)
+
+    # 环境状态跟踪
+    env_steps = np.zeros(num_envs, dtype=int)
+    env_rewards = np.zeros(num_envs)
+    active_envs = np.ones(num_envs, dtype=bool) # Track which envs are still running for the current eval round
+    completed_episodes = 0
     
     # 统计信息
     all_team_skills = []  # 记录每个时间步的团队技能
@@ -1642,7 +1795,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
             for i in range(num_envs):
                 if active_envs[i]:
                     env_steps[i] += 1
-                    env_rewards[i] += rewards[i]
+                    
+                    # 修正：直接使用来自环境的外部奖励 (final_reward) 进行评估
+                    extrinsic_reward = infos[i].get('reward_info', {}).get('final_reward', rewards[i])
+                    env_rewards[i] += extrinsic_reward
                     
                     # 收集历史数据用于绘图
                     try:
@@ -1720,15 +1876,15 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                             # 记录高层奖励
                             high_level_rewards.append(env_rewards[i])
                             
-                            # 为第一个完成的episode生成绘图
-                            if not first_episode_history_saved and len(env_histories[i]['uav_positions']) > 0:
+                            # 为最先完成的4个环境生成绘图
+                            if plots_generated < 4 and len(env_histories[i]['uav_positions']) > 0:
                                 try:
                                     # 创建保存目录
                                     eval_plots_dir = os.path.join(agent.log_dir, 'evaluation_plots')
                                     os.makedirs(eval_plots_dir, exist_ok=True)
                                     
-                                    # 生成2D拓扑图
-                                    topology_path = os.path.join(eval_plots_dir, f'eval_episode_{completed_episodes+1}_topology_2d.png')
+                                    # 生成2D拓扑图 - 为当前环境单独生成
+                                    topology_path = os.path.join(eval_plots_dir, f'eval_topology_step_{eval_step}_env_{i}.png')
                                     save_evaluation_2d_topology_plot(
                                         env_histories[i], 
                                         env_histories[i]['static_info'], 
@@ -1737,19 +1893,19 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                                         agent.config
                                     )
                                     
-                                    # 生成性能图表
-                                    performance_path = os.path.join(eval_plots_dir, f'eval_episode_{completed_episodes+1}_performance.png')
+                                    # 生成性能图表（使用当前环境的数据）
+                                    performance_path = os.path.join(eval_plots_dir, f'eval_performance_step_{eval_step}_env_{i}.png')
                                     save_evaluation_performance_plot(
                                         env_histories[i], 
                                         performance_path, 
                                         completed_episodes+1
                                     )
                                     
-                                    first_episode_history_saved = True
-                                    main_logger.info(f"已为第一个完成的评估episode生成绘图: {eval_plots_dir}")
+                                    plots_generated += 1
+                                    main_logger.info(f"已为环境 {i} 生成评估绘图 ({plots_generated}/4): {eval_plots_dir}")
                                     
                                 except Exception as e:
-                                    main_logger.error(f"生成评估绘图时出错: {e}")
+                                    main_logger.error(f"为环境 {i} 生成评估绘图时出错: {e}")
                             
                             completed_episodes += 1
 
@@ -2283,6 +2439,123 @@ def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_nu
     except Exception as e:
         main_logger.error(f"生成2D拓扑图时出错: {e}")
 
+
+def save_evaluation_2d_topology_plot_enhanced(env_histories, save_path, config):
+    """
+    增强版2D拓扑图绘制函数 - 基于visualize_evaluation.py的成功方案
+    选择最佳轨迹进行绘制
+    
+    参数:
+        env_histories: 所有环境的历史数据列表
+        save_path: 图像保存的完整文件路径
+        config: 配置对象
+    """
+    main_logger.info(f"[DEBUG] save_evaluation_2d_topology_plot_enhanced 函数开始执行")
+    main_logger.info(f"[DEBUG] 输入参数: env_histories长度={len(env_histories)}, save_path={save_path}")
+    
+    try:
+        import matplotlib.pyplot as plt
+        
+        # 配置中文字体支持
+        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        # 选择最佳轨迹进行绘制
+        best_history = None
+        best_score = 0
+        
+        for i, history in enumerate(env_histories):
+            if len(history['uav_positions']) < 2:
+                continue
+                
+            # 计算轨迹质量分数
+            trajectory_length = len(history['uav_positions'])
+            positions_array = np.array(history['uav_positions'])
+            
+            # 计算总移动距离
+            total_distance = 0
+            for uav_idx in range(positions_array.shape[1]):
+                uav_positions = positions_array[:, uav_idx, :2]
+                distances = np.sqrt(np.sum(np.diff(uav_positions, axis=0)**2, axis=1))
+                total_distance += np.sum(distances)
+            
+            # 综合评分：长度权重0.7，移动距离权重0.3
+            score = trajectory_length * 0.7 + total_distance * 0.3
+            
+            if score > best_score:
+                best_score = score
+                best_history = history
+        
+        if best_history is None:
+            main_logger.warning("没有找到合适的轨迹数据进行绘制")
+            return
+        
+        # 使用与visualize_evaluation.py相同的绘图逻辑
+        fig, ax = plt.subplots(figsize=(10, 10))
+        
+        positions_history = np.array(best_history['uav_positions'])
+        main_logger.info(f"绘制轨迹数据：{positions_history.shape} (步数={len(positions_history)})")
+        
+        # 输出调试信息
+        for i in range(config.n_agents):
+            start_pos = positions_history[0, i, :2]
+            end_pos = positions_history[-1, i, :2]
+            distance = np.linalg.norm(end_pos - start_pos)
+            main_logger.info(f"UAV{i}: 起点({start_pos[0]:.1f}, {start_pos[1]:.1f}) -> 终点({end_pos[0]:.1f}, {end_pos[1]:.1f}), 距离={distance:.1f}m")
+        
+        # 绘制轨迹（与visualize_evaluation.py完全相同的逻辑）
+        for i in range(config.n_agents):
+            color = plt.cm.jet(i / config.n_agents)
+            ax.plot(positions_history[:, i, 0], positions_history[:, i, 1], 
+                    color=color, alpha=0.6, linewidth=1.5,
+                    label=f'UAV {i} 轨迹' if i < 3 else "")
+            
+            # 标记起点和终点
+            ax.scatter(positions_history[0, i, 0], positions_history[0, i, 1],
+                       marker='o', color=color, s=50, edgecolors='black')
+            ax.scatter(positions_history[-1, i, 0], positions_history[-1, i, 1],
+                       marker='>', color=color, s=100, edgecolors='black')
+        
+        # 绘制静态实体（与visualize_evaluation.py相同）
+        static_info = best_history['static_info']
+        if static_info:
+            if 'ground_bs_positions' in static_info and static_info['ground_bs_positions'] is not None:
+                bs_pos = static_info['ground_bs_positions']
+                ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, 
+                          label='地面基站', zorder=5)
+            
+            if 'user_positions' in static_info and static_info['user_positions'] is not None:
+                user_pos = static_info['user_positions']
+                ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, 
+                          label='用户', zorder=5)
+        
+        # 无人机最终位置
+        uav_final_pos = positions_history[-1]
+        ax.scatter(uav_final_pos[:, 0], uav_final_pos[:, 1], c='red', marker='^', s=150, 
+                  label='UAV (最终位置)', zorder=5)
+        
+        for i in range(config.n_agents):
+            ax.text(uav_final_pos[i, 0] + 10, uav_final_pos[i, 1] + 10, f'UAV{i}', fontsize=9)
+        
+        ax.set_title('评估结果: 2D拓扑与无人机轨迹（增强版）')
+        ax.set_xlabel('X (m)')
+        ax.set_ylabel('Y (m)')
+        
+        area_size = static_info.get('area_size', 1000) if static_info else 1000
+        ax.set_xlim(0, area_size)
+        ax.set_ylim(0, area_size)
+        ax.set_aspect('equal', adjustable='box')
+        ax.legend()
+        ax.grid(True, linestyle='--', alpha=0.5)
+        
+        # 保存图像
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        fig.savefig(save_path, dpi=200, bbox_inches='tight')
+        plt.close(fig)
+        main_logger.info(f"增强版2D拓扑图已保存: {save_path}")
+        
+    except Exception as e:
+        main_logger.error(f"生成增强版2D拓扑图时出错: {e}")
 
 def save_evaluation_performance_plot(history, save_path, episode_num):
     """

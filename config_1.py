@@ -30,7 +30,7 @@ class Config:
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 3           # [关键] 降低个体技能数量
-    k = 30           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 20           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 64         # 隐藏层大小 (论文中为64)
@@ -39,9 +39,9 @@ class Config:
     n_decoder_layers = 3     # 解码器层数
     n_heads = 8              # 多头注意力头数
     gru_hidden_size = 64     # GRU隐藏层大小 (与hidden_size保持一致)
-    lr_coordinator = 2e-4    # 技能协调器学习率 (适度提高以加速收敛)
-    lr_discoverer = 2e-4     # 技能发现器学习率 (适度提高以加速收敛)
-    lr_discriminator = 3e-4  # [紧急修复] 大幅降低判别器学习率防止过度训练
+    lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
+    lr_discoverer = 1e-4     # 技能发现器学习率 参考原论文
+    lr_discriminator = 1e-4  # 参考原论文
     lr_prototype_discriminator = 1e-4 # 原型判别器学习率 (新增)
 
     # PPO参数 - 基于论文Table 1
@@ -54,7 +54,7 @@ class Config:
 
     # HMASD损失权重 - 紧急修复判别器崩溃问题
     # 注意：重新平衡奖励权重，解决判别器过度训练和技能学习停滞问题
-    lambda_e = 10           # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
+    lambda_e = 1           # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
     lambda_D = 0.1           # [紧急修复] 大幅提高团队技能判别器奖励权重，从0.1提高到1.0
     lambda_d = 0.5           # [紧急修复] 大幅提高个体技能判别器奖励权重，从0.5提高到2.0
     lambda_h = 0.001          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
@@ -70,7 +70,7 @@ class Config:
     high_level_buffer_size = None  # 高层经验缓冲区大小 (动态计算)
     high_level_batch_size = None   # 高层更新的批处理大小 (动态计算)
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
-    rollout_length = 512    # [调整] 增加rollout长度，从2500增加到5000，确保容纳足够的技能周期
+    rollout_length = 400    # [调整] 增加rollout长度，从2500增加到5000，确保容纳足够的技能周期
     total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
     
     def set_short_test_mode(self):
@@ -81,8 +81,8 @@ class Config:
         self.buffer_size = 1000      # 更小的缓冲区
         self.batch_size = 500        # 更小的批次
         self.high_level_batch_size = 32  # 更小的高层批次
-    episode_length = 5000    # 每个episode的最大长度 (基于观察到的实际行为)
-    eval_interval = episode_length*num_envs   # 评估间隔 
+    episode_length = 400    # 每个episode的最大长度 (基于观察到的实际行为)
+    eval_interval = episode_length*num_envs*10   # 评估间隔 
     eval_episodes = 4      # 评估时的episode数量 (论文中SMAC为100)
     eval_rollout_threads = 4 # 评估时的并行线程数 (论文中SMAC为4)
     
@@ -92,7 +92,7 @@ class Config:
     gain = 0.01              # 增益
     optimizer_epsilon = 1e-5 # 优化器epsilon
     weight_decay = 0.0       # 权重衰减 (根据建议移除)
-    num_mini_batch = 20      # mini batch数量 (基于PPO标准框架)
+    num_mini_batch = 1      # mini batch数量 (基于PPO标准框架)
     
     # 学习率衰减参数False
     use_lr_decay = False                    # 是否启用学习率衰减
@@ -132,11 +132,15 @@ class Config:
     anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
 
     # --- 场景4: 强制中继模式奖励权重 ---
-    coverage_weight = 0.5                    # 覆盖率奖励权重
+    coverage_weight = 1.0                    # 覆盖率奖励权重
     connectivity_weight = 0              # 连通性奖励权重
     efficiency_weight = 0                 # 效率奖励权重
-    potential_reward_weight = 0.5            # 势函数奖励权重
+    potential_reward_weight = 0            # 势函数奖励权重
     coverage_overlap_penalty_weight = 0    # 覆盖重叠惩罚权重
+    
+    # --- 场景4: 发现奖励机制参数 ---
+    discovery_reward_weight = 0           # [关键] 发现奖励权重，激励探索分散
+    discovery_reward_value = 0            # 每发现一个新用户的奖励值
 
     # --- 场景4: 信念地图与势函数参数 ---
     belief_decay_factor = 0.1                # 信念衰减因子
@@ -147,7 +151,7 @@ class Config:
     min_sinr = 3.0                          # 最小信噪比
     max_connections = 25                     # 最大连接数
     uav_init_mode = 'start_area'            # 无人机初始化模式
-    uav_start_area_size = 500               # 起始区域大小（米）
+    uav_start_area_size = 100               # 起始区域大小（米）
     grid_resolution = 50                    # 栅格分辨率
 
     # --- GNN-HMASD 参数 ---
