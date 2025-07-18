@@ -715,7 +715,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                 uav_positions[i] = [
                     self.np_random.uniform(0, self.area_size),
                     self.np_random.uniform(0, self.area_size),
-                    self.np_random.uniform(*self.height_range)
+                    self.height_range[0]  # 固定为最小高度（50m）
                 ]
             return uav_positions
     
@@ -791,8 +791,8 @@ class UAVForcedRelayEnv(ParallelEnv):
                 x = np.clip(x + x_offset, 10, self.area_size - 10)
                 y = np.clip(y + y_offset, 10, self.area_size - 10)
                 
-                # 随机高度
-                z = self.np_random.uniform(self.height_range[0], self.height_range[1])
+                # 固定高度为最小高度（50m）
+                z = self.height_range[0]
                 
                 uav_positions[uav_idx] = [x, y, z]
                 uav_idx += 1
