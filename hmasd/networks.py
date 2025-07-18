@@ -142,6 +142,27 @@ class MLP(nn.Module):
         x = x.float()
         return self.model(x)
 
+class ResBlock(nn.Module):
+    """残差块 - 用于构建更深的网络"""
+    def __init__(self, hidden_dim):
+        super(ResBlock, self).__init__()
+        self.block = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.GELU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim)
+        )
+        self.activation = nn.GELU()
+        
+        # 初始化权重
+        for layer in self.block:
+            if isinstance(layer, nn.Linear):
+                initialize_weights(layer, gain=1.0)
+
+    def forward(self, x):
+        return self.activation(x + self.block(x))  # 残差连接
+
 class PositionalEncoding(nn.Module):
     """位置编码"""
     def __init__(self, d_model, max_len=100):
@@ -1274,17 +1295,23 @@ class SkillDiscoverer(nn.Module):
         return action, action_logprob, action_distribution
 
 class TeamDiscriminator(nn.Module):
-    """团队技能判别器"""
+    """团队技能判别器 - 升级版3层MLP"""
     def __init__(self, config):
         super(TeamDiscriminator, self).__init__()
         
-        self.model = MLP(
-            input_dim=config.state_dim,
-            hidden_dim=config.hidden_size,
-            output_dim=config.n_Z,
-            n_layers=2,
-            last_layer_gain=1.0  # 为判别器使用更大的初始化增益
+        # 使用您建议的更稳健的3层MLP结构
+        self.net = nn.Sequential(
+            nn.Linear(config.state_dim, config.hidden_size),
+            nn.LayerNorm(config.hidden_size),
+            nn.GELU(),
+            nn.Linear(config.hidden_size, config.hidden_size),
+            nn.LayerNorm(config.hidden_size),
+            nn.GELU(),
+            nn.Linear(config.hidden_size, config.n_Z)
         )
+        
+        # 确保最后一层初始化正常
+        initialize_weights(self.net[-1], gain=1.0)
     
     def forward(self, state):
         """
@@ -1296,23 +1323,32 @@ class TeamDiscriminator(nn.Module):
         """
         # 确保state是float32类型
         state = state.float()
-        return self.model(state)
+        return self.net(state)
 
 class IndividualDiscriminator(nn.Module):
-    """个体技能判别器"""
+    """个体技能判别器 - 升级版3层MLP"""
     def __init__(self, config):
         super(IndividualDiscriminator, self).__init__()
         
         self.config = config
         self.n_Z = config.n_Z
         
-        self.model = MLP(
-            input_dim=config.obs_dim + config.n_Z,  # 观测 + 团队技能
-            hidden_dim=config.hidden_size,
-            output_dim=config.n_z,
-            n_layers=2,
-            last_layer_gain=1.0  # 为判别器使用更大的初始化增益
+        # 使用Embedding层处理团队技能
+        self.team_skill_embedding = nn.Embedding(config.n_Z, config.embedding_dim)
+        
+        # 使用您建议的更稳健的3层MLP结构
+        self.net = nn.Sequential(
+            nn.Linear(config.obs_dim + config.embedding_dim, config.hidden_size),
+            nn.LayerNorm(config.hidden_size),
+            nn.GELU(),
+            nn.Linear(config.hidden_size, config.hidden_size),
+            nn.LayerNorm(config.hidden_size),
+            nn.GELU(),
+            nn.Linear(config.hidden_size, config.n_z)
         )
+        
+        # 确保最后一层初始化正常
+        initialize_weights(self.net[-1], gain=1.0)
     
     def forward(self, observation, team_skill):
         """
@@ -1333,15 +1369,19 @@ class IndividualDiscriminator(nn.Module):
             elif team_skill.dim() == 0:  # 处理标量张量
                 team_skill = team_skill.unsqueeze(0)  # 转换为一维张量
             
-            # 确保是一维张量后进行独热编码
+            # 直接使用索引进行嵌入（而不是独热编码）
             if team_skill.dim() == 1:
-                team_skill_onehot = F.one_hot(team_skill, self.config.n_Z).float()
+                team_skill_embedded = self.team_skill_embedding(team_skill)
             else:
-                team_skill_onehot = team_skill.float()  # 已经是独热编码，确保是float32
+                # 如果已经是独热编码，转换回索引
+                team_skill_idx = team_skill.argmax(dim=-1)
+                team_skill_embedded = self.team_skill_embedding(team_skill_idx)
         else:
-            team_skill_onehot = team_skill.float()
+            # 处理独热编码输入
+            team_skill_idx = team_skill.argmax(dim=-1)
+            team_skill_embedded = self.team_skill_embedding(team_skill_idx)
         
-        # 拼接观测和团队技能
-        discriminator_input = torch.cat([observation, team_skill_onehot], dim=-1)
+        # 拼接观测和团队技能嵌入
+        discriminator_input = torch.cat([observation, team_skill_embedded], dim=-1)
         
-        return self.model(discriminator_input)
+        return self.net(discriminator_input)
