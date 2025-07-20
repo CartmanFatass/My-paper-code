@@ -32,34 +32,135 @@ from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 # Removed VectorizedEnvAdapter class
 
+class TrajectoryRecorder:
+    """轨迹记录管理器 - 完整记录每一步的轨迹数据"""
+    
+    def __init__(self, config):
+        # 启用完整记录模式，记录每一步
+        self.full_recording_mode = getattr(config, 'full_trajectory_recording', True)
+        self.enable_trajectory_smoothing = getattr(config, 'enable_trajectory_smoothing', True)
+        
+        # 保留原有配置以保持兼容性
+        self.interval = getattr(config, 'trajectory_record_interval', 1)  # 默认每步记录
+        self.max_points = getattr(config, 'max_trajectory_points', 10000)  # 增大限制
+        self.enable_points = getattr(config, 'enable_trajectory_points', True)
+        self.point_size = getattr(config, 'trajectory_point_size', 3)
+        self.record_skill_changes = getattr(config, 'record_skill_change_points', True)
+        self.record_episode_end = getattr(config, 'record_episode_end', True)
+        
+        # 记录状态
+        self.last_recorded_step = {}  # 每个环境上次记录的步数
+        self.trajectory_counts = {}   # 每个环境的轨迹点计数
+    
+    def should_record(self, env_id, current_step, skill_changed=False, episode_end=False):
+        """判断是否应该记录轨迹点 - 完整记录模式下每步都记录"""
+        if self.full_recording_mode:
+            # 完整记录模式：每步都记录
+            return True
+        
+        # 保留原有逻辑以保持兼容性
+        if episode_end and self.record_episode_end:
+            return True
+        
+        if skill_changed and self.record_skill_changes:
+            return True
+        
+        # 第一步总是记录
+        if env_id not in self.last_recorded_step:
+            self.last_recorded_step[env_id] = current_step
+            self.trajectory_counts[env_id] = 1
+            return True
+        
+        # 检查轨迹点数量限制
+        if self.trajectory_counts.get(env_id, 0) >= self.max_points:
+            return False
+        
+        # 间隔检查
+        steps_since_last = current_step - self.last_recorded_step[env_id]
+        if steps_since_last >= self.interval:
+            self.last_recorded_step[env_id] = current_step
+            self.trajectory_counts[env_id] = self.trajectory_counts.get(env_id, 0) + 1
+            return True
+        
+        return False
+    
+    def reset_env(self, env_id):
+        """重置环境的记录状态 - episode完成后清除数据"""
+        self.last_recorded_step.pop(env_id, None)
+        self.trajectory_counts.pop(env_id, None)
+
 class EnhancedRewardTracker:
-    """增强的奖励追踪器，用于论文数据收集"""
+    """增强的奖励追踪器，用于论文数据收集 - 存储空间优化版本"""
     
     def __init__(self, log_dir, config, n_users=None):
         self.log_dir = log_dir
         self.config = config
         self.n_users = n_users  # 存储用户总数，用于准确计算服务率
         
-        # 训练过程中的奖励数据收集
-        self.training_rewards = {
-            'episode_rewards': [],
-            'step_rewards': [],
-            'env_rewards': [],
-            'intrinsic_rewards': [],
-            'reward_components': {
-                'env_component': [],
-                'team_disc_component': [],
-                'ind_disc_component': []
-            },
-            'cumulative_rewards': [],
-            'reward_variance': [],
-            'episodes_completed': 0,
-            'total_steps': 0
-        }
+        # === 存储优化配置 ===
+        self.paper_data_level = getattr(config, 'paper_data_level', 'standard')
+        self.enable_data_sampling = getattr(config, 'enable_data_sampling', True)
+        self.data_sampling_interval = getattr(config, 'data_sampling_interval', 50)  # 增加采样间隔
+        self.enable_data_aggregation = getattr(config, 'enable_data_aggregation', True)
+        self.enable_incremental_export = getattr(config, 'enable_incremental_export', True)
+        self.max_step_data_buffer = getattr(config, 'max_step_data_buffer', 500)  # 减少缓冲区大小
+        self.auto_clear_old_data = getattr(config, 'auto_clear_old_data', True)
+        self.enable_data_compression = getattr(config, 'enable_data_compression', True)  # 启用压缩
+        self.max_export_files = getattr(config, 'max_export_files', 10)  # 限制导出文件数量
+        
+        # === 选择性数据收集控制 ===
+        self.collect_step_rewards = getattr(config, 'collect_step_rewards', False)
+        self.collect_skill_diversity = getattr(config, 'collect_skill_diversity', True)
+        self.collect_performance_metrics = getattr(config, 'collect_performance_metrics', True)
+        self.collect_reward_components = getattr(config, 'collect_reward_components', False)
+        
+        # === 优化后的数据结构 ===
+        if self.paper_data_level == 'minimal':
+            # 最小模式：只保留核心统计信息
+            self.training_rewards = {
+                'episode_rewards': [],  # 只保留episode级别的奖励
+                'episodes_completed': 0,
+                'total_steps': 0
+            }
+        elif self.paper_data_level == 'standard':
+            # 标准模式：保留重要信息但减少详细数据
+            self.training_rewards = {
+                'episode_rewards': [],
+                'step_rewards': deque(maxlen=self.max_step_data_buffer) if self.collect_step_rewards else [],
+                'reward_components': {
+                    'env_component': deque(maxlen=self.max_step_data_buffer//2),
+                    'team_disc_component': deque(maxlen=self.max_step_data_buffer//2),
+                    'ind_disc_component': deque(maxlen=self.max_step_data_buffer//2)
+                } if self.collect_reward_components else {},
+                'reward_variance': [],
+                'episodes_completed': 0,
+                'total_steps': 0
+            }
+        else:  # detailed
+            # 详细模式：保留所有数据（原始行为）
+            self.training_rewards = {
+                'episode_rewards': [],
+                'step_rewards': [],
+                'env_rewards': [],
+                'intrinsic_rewards': [],
+                'reward_components': {
+                    'env_component': [],
+                    'team_disc_component': [],
+                    'ind_disc_component': []
+                },
+                'cumulative_rewards': [],
+                'reward_variance': [],
+                'episodes_completed': 0,
+                'total_steps': 0
+            }
         
         # 数据聚合缓冲区 - 用于解决并行环境数据堆积问题
         self.step_metric_buffer = defaultdict(list)
         self.last_tensorboard_step = 0  # 记录上次记录TensorBoard的步数
+        
+        # === 数据采样控制 ===
+        self.sample_counter = 0  # 采样计数器
+        self.last_exported_episode = 0  # 上次导出的episode数
         
         # 技能使用统计
         self.skill_usage = {
@@ -108,9 +209,17 @@ class EnhancedRewardTracker:
         self.recent_rewards = deque(maxlen=self.window_size)
         self.recent_lengths = deque(maxlen=self.window_size)
         
-        # 数据导出设置
-        self.export_interval = 1000  # 每1000步导出一次数据
+        # 数据导出设置 - 增加导出间隔
+        self.export_interval = 5000  # 每5000步导出一次数据（减少导出频率）
         self.last_export_step = 0
+        
+        # 数据聚合缓冲区 - 用于存储聚合后的数据
+        self.aggregated_episode_data = []
+        self.aggregated_performance_data = []
+        
+        # 清理控制
+        self.last_cleanup_step = 0
+        self.cleanup_interval = 50000  # 每50000步清理一次旧数据
         
     def _log_aggregated_metrics(self, writer, step, data_list, metric_name, category="Training", 
                                recent_window=100, value_field='value'):
@@ -134,7 +243,7 @@ class EnhancedRewardTracker:
         if not recent_data:
             return
             
-        # 按step分组并聚合
+        # 按环境分组并聚合（修改聚合逻辑：先环境内平均，再跨环境平均）
         try:
             # 构建DataFrame
             df_data = []
@@ -154,45 +263,94 @@ class EnhancedRewardTracker:
                 
             df = pd.DataFrame(df_data)
             
-            # 按step分组，计算每个step的平均值（跨环境聚合）
-            step_aggregated = df.groupby('step')['value'].agg(['mean', 'std', 'min', 'max']).reset_index()
+            # 按env_id分组，先计算每个环境的内部平均值
+            env_aggregated = df.groupby('env_id')['value'].agg(['mean', 'std', 'min', 'max', 'count']).reset_index()
             
-            if len(step_aggregated) == 0:
+            if len(env_aggregated) == 0:
                 return
                 
-            # 计算这些聚合值的最终统计
-            final_mean = step_aggregated['mean'].mean()
-            final_std = step_aggregated['mean'].std() if len(step_aggregated) > 1 else 0
-            final_min = step_aggregated['mean'].min()
-            final_max = step_aggregated['mean'].max()
+            # 计算跨环境的最终统计
+            env_mean_values = env_aggregated['mean'].values
+            final_mean = np.mean(env_mean_values)  # 跨环境平均
+            final_std = np.std(env_mean_values) if len(env_mean_values) > 1 else 0
+            final_min = np.min(env_mean_values)  # 各环境平均值的最小值
+            final_max = np.max(env_mean_values)  # 各环境平均值的最大值
             
-            # 写入TensorBoard
+            # 写入TensorBoard - 基本统计
             writer.add_scalar(f'{category}/{metric_name}_Mean_{recent_window}steps', final_mean, step)
             if final_std > 0:
                 writer.add_scalar(f'{category}/{metric_name}_Std_{recent_window}steps', final_std, step)
             writer.add_scalar(f'{category}/{metric_name}_Min_{recent_window}steps', final_min, step)
             writer.add_scalar(f'{category}/{metric_name}_Max_{recent_window}steps', final_max, step)
             
-            # 计算趋势（如果有足够数据）
-            if len(step_aggregated) >= 20:
-                first_half = step_aggregated['mean'].iloc[:len(step_aggregated)//2].mean()
-                second_half = step_aggregated['mean'].iloc[len(step_aggregated)//2:].mean()
-                trend = second_half - first_half
-                writer.add_scalar(f'{category}/{metric_name}_Trend_{recent_window}steps', trend, step)
+            # 写入TensorBoard - 增强统计
+            env_variation_coeff = final_std / final_mean if final_mean != 0 else 0
+            writer.add_scalar(f'{category}/{metric_name}_EnvVariation_{recent_window}steps', env_variation_coeff, step)
+            writer.add_scalar(f'{category}/{metric_name}_ActiveEnvs_{recent_window}steps', len(env_aggregated), step)
+            
+            # 如果有足够的环境数，添加中位数
+            if len(env_mean_values) >= 3:
+                final_median = np.median(env_mean_values)
+                writer.add_scalar(f'{category}/{metric_name}_Median_{recent_window}steps', final_median, step)
+            
+            # 计算基于环境的趋势（如果有足够数据）
+            if len(env_aggregated) >= 2:  # 至少需要2个环境
+                env_trends = []
+                for env_id in env_aggregated['env_id']:
+                    env_data = df[df['env_id'] == env_id].sort_values('step')
+                    if len(env_data) >= 10:  # 每个环境至少10个数据点
+                        mid_point = len(env_data) // 2
+                        first_half_mean = env_data['value'].iloc[:mid_point].mean()
+                        second_half_mean = env_data['value'].iloc[mid_point:].mean()
+                        env_trend = second_half_mean - first_half_mean
+                        env_trends.append(env_trend)
+                
+                if env_trends:
+                    avg_trend = np.mean(env_trends)
+                    writer.add_scalar(f'{category}/{metric_name}_Trend_{recent_window}steps', avg_trend, step)
                 
         except Exception as e:
             main_logger.warning(f"聚合指标 {metric_name} 时出错: {e}")
+            # 添加更详细的错误信息用于调试
+            try:
+                main_logger.debug(f"聚合错误详情 - 数据形状: {df.shape if 'df' in locals() else 'df未定义'}, "
+                                 f"recent_data长度: {len(recent_data) if recent_data else 0}, "
+                                 f"metric_name: {metric_name}, category: {category}")
+            except:
+                pass  # 避免调试信息本身出错
     
     def log_training_step(self, step, env_id, reward, reward_components=None, info=None):
-        """记录训练步骤的奖励信息"""
+        """记录训练步骤的奖励信息 - 存储优化版本"""
         self.training_rewards['total_steps'] += 1
-        self.training_rewards['step_rewards'].append({
-            'step': step,
-            'env_id': env_id,
-            'reward': reward,
-            'timestamp': time.time(),
-            'info': info  # 保存完整的info字典
-        })
+        
+        # === 数据采样逻辑 ===
+        self.sample_counter += 1
+        should_record_step = True
+        
+        if self.enable_data_sampling:
+            # 只在采样间隔时记录详细的步级数据
+            should_record_step = (self.sample_counter % self.data_sampling_interval == 0)
+        
+        # === 记录步级数据（根据采样策略和数据级别） ===
+        if should_record_step and self.collect_step_rewards:
+            if isinstance(self.training_rewards['step_rewards'], list):
+                # 详细模式：正常列表
+                self.training_rewards['step_rewards'].append({
+                    'step': step,
+                    'env_id': env_id,
+                    'reward': reward,
+                    'timestamp': time.time(),
+                    'info': info if self.paper_data_level == 'detailed' else None  # 最小模式下不保存info
+                })
+            elif hasattr(self.training_rewards['step_rewards'], 'append'):
+                # 标准模式：有界队列
+                self.training_rewards['step_rewards'].append({
+                    'step': step,
+                    'env_id': env_id,
+                    'reward': reward,
+                    'timestamp': time.time(),
+                    'info': None  # 标准模式下不保存详细info
+                })
         
         if reward_components:
             for comp_name, comp_value in reward_components.items():
@@ -416,19 +574,132 @@ class EnhancedRewardTracker:
             'total_agents': len(agent_skills)
         })
     
+    def _cleanup_old_export_files(self, export_dir):
+        """清理旧的导出文件，保持文件数量在限制范围内"""
+        try:
+            import glob
+            
+            # 获取所有导出文件
+            files = []
+            patterns = ['episode_rewards_*.csv*', 'reward_components_*.csv*', 'skill_usage_*.json']
+            
+            for pattern in patterns:
+                files.extend(glob.glob(os.path.join(export_dir, pattern)))
+            
+            if len(files) <= self.max_export_files:
+                return
+            
+            # 按修改时间排序，删除最旧的文件
+            files.sort(key=os.path.getmtime)
+            files_to_delete = files[:-self.max_export_files]
+            
+            for file_path in files_to_delete:
+                try:
+                    os.remove(file_path)
+                    main_logger.debug(f"已删除旧导出文件: {file_path}")
+                except Exception as e:
+                    main_logger.warning(f"删除文件 {file_path} 失败: {e}")
+                    
+            main_logger.info(f"清理完成，删除了 {len(files_to_delete)} 个旧文件，保留 {len(files) - len(files_to_delete)} 个最新文件")
+            
+        except Exception as e:
+            main_logger.error(f"清理旧导出文件时出错: {e}")
+    
+    def _export_minimal_data(self, step, writer=None, args=None):
+        """最小模式数据导出 - 只导出核心统计信息"""
+        try:
+            export_dir = '../autodl-tmp/paper_data'
+            os.makedirs(export_dir, exist_ok=True)
+            
+            # 只导出episode级别的统计摘要
+            summary_data = {
+                'timestamp': time.time(),
+                'step': step,
+                'total_episodes': self.training_rewards['episodes_completed'],
+                'total_steps': self.training_rewards['total_steps'],
+                'skill_switches': self.skill_usage['skill_switches']
+            }
+            
+            # 添加奖励统计（如果有数据）
+            if self.training_rewards['episode_rewards']:
+                rewards = [r['total_reward'] for r in self.training_rewards['episode_rewards']]
+                summary_data.update({
+                    'reward_mean': np.mean(rewards),
+                    'reward_std': np.std(rewards),
+                    'reward_min': np.min(rewards),
+                    'reward_max': np.max(rewards),
+                    'recent_10_reward_mean': np.mean(rewards[-10:]) if len(rewards) >= 10 else np.mean(rewards)
+                })
+            
+            # 导出到JSON文件
+            import json
+            filename = f'training_summary_minimal_step_{step}.json'
+            filepath = os.path.join(export_dir, filename)
+            
+            with open(filepath, 'w') as f:
+                json.dump(summary_data, f, indent=2)
+            
+            main_logger.debug(f"最小模式数据已导出: {filepath}")
+            
+            # 记录到TensorBoard（如果提供）
+            if writer:
+                self.log_to_tensorboard(writer, step, args=args)
+                
+        except Exception as e:
+            main_logger.error(f"最小模式数据导出失败: {e}")
+    
     def export_training_data(self, step, writer=None, args=None):
-        """导出训练数据用于论文分析"""
-        if step - self.last_export_step < self.export_interval:
+        """导出训练数据用于论文分析 - 存储优化版本"""
+        # 应用配置中的导出间隔倍数
+        effective_export_interval = self.export_interval * getattr(self.config, 'export_interval_multiplier', 1)
+        
+        if step - self.last_export_step < effective_export_interval:
             return
         
-        #export_dir = os.path.join(self.log_dir, 'paper_data')
+        # 如果是最小模式，只导出基础统计信息
+        if self.paper_data_level == 'minimal':
+            self._export_minimal_data(step, writer, args)
+            return
+        
+        # 原始导出目录
         export_dir = '../autodl-tmp/paper_data'
         os.makedirs(export_dir, exist_ok=True)
         
-        # 导出奖励数据
-        if self.training_rewards['episode_rewards']:
-            rewards_df = pd.DataFrame(self.training_rewards['episode_rewards'])
-            rewards_df.to_csv(os.path.join(export_dir, f'episode_rewards_step_{step}.csv'), index=False)
+        # === 数据轮转管理 ===
+        if self.max_export_files > 0:
+            self._cleanup_old_export_files(export_dir)
+        
+        # === 定期数据清理 ===
+        if self.auto_clear_old_data and step - self.last_cleanup_step >= self.cleanup_interval:
+            self._perform_data_cleanup(step)
+            self.last_cleanup_step = step
+        
+        # === 增量导出逻辑 ===
+        if self.enable_incremental_export:
+            # 只导出新的episode数据
+            new_episodes = self.training_rewards['episodes_completed'] - self.last_exported_episode
+            if new_episodes > 0:
+                recent_episode_data = self.training_rewards['episode_rewards'][-new_episodes:]
+                if recent_episode_data:
+                    rewards_df = pd.DataFrame(recent_episode_data)
+                    # 使用增量文件名
+                    filename = f'episode_rewards_incremental_step_{step}_episodes_{new_episodes}.csv'
+                    if self.enable_data_compression:
+                        filename = filename.replace('.csv', '.csv.gz')
+                        rewards_df.to_csv(os.path.join(export_dir, filename), index=False, compression='gzip')
+                    else:
+                        rewards_df.to_csv(os.path.join(export_dir, filename), index=False)
+                self.last_exported_episode = self.training_rewards['episodes_completed']
+        else:
+            # 传统的全量导出
+            if self.training_rewards['episode_rewards']:
+                rewards_df = pd.DataFrame(self.training_rewards['episode_rewards'])
+                filename = f'episode_rewards_step_{step}.csv'
+                if self.enable_data_compression:
+                    filename = filename.replace('.csv', '.csv.gz')
+                    rewards_df.to_csv(os.path.join(export_dir, filename), index=False, compression='gzip')
+                else:
+                    rewards_df.to_csv(os.path.join(export_dir, filename), index=False)
         
         # 导出奖励组成分析
         components_data = []
@@ -477,6 +748,43 @@ class EnhancedRewardTracker:
         
         self.last_export_step = step
         main_logger.debug(f"已导出步骤 {step} 的训练数据到 {export_dir}")
+    
+    def _perform_data_cleanup(self, current_step):
+        """执行数据清理，释放内存"""
+        try:
+            cleanup_count = 0
+            
+            # 清理旧的step级数据（超过缓冲区限制的部分）
+            if hasattr(self.training_rewards['step_rewards'], '__len__') and len(self.training_rewards['step_rewards']) > self.max_step_data_buffer:
+                if isinstance(self.training_rewards['step_rewards'], list):
+                    # 只保留最近的数据
+                    self.training_rewards['step_rewards'] = self.training_rewards['step_rewards'][-self.max_step_data_buffer:]
+                    cleanup_count += 1
+            
+            # 清理旧的技能多样性历史数据
+            if len(self.skill_usage['skill_diversity_history']) > self.max_step_data_buffer:
+                self.skill_usage['skill_diversity_history'] = self.skill_usage['skill_diversity_history'][-self.max_step_data_buffer:]
+                cleanup_count += 1
+            
+            # 清理性能指标中的数据
+            for metric_name, metric_data in self.performance_metrics.items():
+                if isinstance(metric_data, list) and len(metric_data) > self.max_step_data_buffer * 2:
+                    self.performance_metrics[metric_name] = metric_data[-self.max_step_data_buffer:]
+                    cleanup_count += 1
+            
+            # 清理奖励组成部分数据
+            for comp_name, comp_data in self.performance_metrics['reward_components'].items():
+                if isinstance(comp_data, list) and len(comp_data) > self.max_step_data_buffer:
+                    self.performance_metrics['reward_components'][comp_name] = comp_data[-self.max_step_data_buffer:]
+                    cleanup_count += 1
+            
+            if cleanup_count > 0:
+                main_logger.info(f"数据清理完成: 清理了 {cleanup_count} 个数据缓冲区，释放内存")
+            else:
+                main_logger.debug("数据清理检查: 无需清理")
+                
+        except Exception as e:
+            main_logger.error(f"执行数据清理时出错: {e}")
     
     def generate_training_plots(self, export_dir, step):
         """生成训练过程的可视化图表"""
@@ -1668,7 +1976,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
     # Use agent.config.state_dim for default state shape
     states = np.array([info.get('state', np.zeros(agent.config.state_dim)) for info in initial_infos]) # Use agent's state_dim
 
-    # 为绘图收集历史数据 - 增强版本（基于visualize_evaluation.py）
+    # 创建轨迹记录器
+    trajectory_recorder = TrajectoryRecorder(agent.config)
+    
+    # 为绘图收集历史数据 - 使用灵活的记录管理器
     env_histories = [
         {
             'steps': [], 'uav_positions': [], 'connectivity': [], 'throughput': [],
@@ -1677,11 +1988,14 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
     ]
     plots_generated = 0  # 追踪本次评估已生成的图片数量
     
-    # 记录初始状态的历史数据
-    infos = initial_infos  # 临时设置用于记录初始状态
-    
-    def record_env_history(env_id, step_count):
-        """记录环境历史数据 - 基于visualize_evaluation.py的成功方案"""
+    def record_env_history(env_id, step_count, skill_changed=False, episode_end=False):
+        """记录环境历史数据 - 使用轨迹记录器控制记录频率"""
+        # 使用轨迹记录器判断是否应该记录
+        should_record = trajectory_recorder.should_record(env_id, step_count, skill_changed, episode_end)
+        
+        if not should_record:
+            return False
+        
         try:
             # 获取当前环境状态
             env_state = vec_env.env_method('get_current_state', indices=[env_id])[0]
@@ -1691,7 +2005,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
             env_histories[env_id]['uav_positions'].append(env_state['uav_positions'].copy())
             
             # 记录性能指标
-            if 'reward_info' in infos[env_id]:
+            if env_id < len(infos) and 'reward_info' in infos[env_id]:
                 reward_info = infos[env_id]['reward_info']
                 env_histories[env_id]['connectivity'].append(reward_info.get('effective_connected_users', 0))
                 env_histories[env_id]['throughput'].append(reward_info.get('system_throughput_mbps', 0))
@@ -1709,10 +2023,16 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                 if 'area_size' in env_state:
                     static_info['area_size'] = env_state['area_size']
                 env_histories[env_id]['static_info'] = static_info
+            
+            main_logger.debug(f"已记录环境 {env_id} 步骤 {step_count} 的轨迹数据 (总计: {len(env_histories[env_id]['steps'])} 个点)")
+            return True
                 
         except Exception as e:
             main_logger.warning(f"记录环境 {env_id} 历史数据时出错: {e}")
+            return False
     
+    # 记录初始状态的历史数据
+    infos = initial_infos  # 临时设置用于记录初始状态
     for i in range(num_envs):
         record_env_history(i, 0)
 
@@ -1796,46 +2116,13 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                 if active_envs[i]:
                     env_steps[i] += 1
                     
-                    # 修正：直接使用来自环境的外部奖励 (final_reward) 进行评估
-                    extrinsic_reward = infos[i].get('reward_info', {}).get('final_reward', rewards[i])
+                    # 统一使用global_reward进行评估
+                    extrinsic_reward = infos[i].get('reward_info', {}).get('final_global_reward', rewards[i])
                     env_rewards[i] += extrinsic_reward
                     
-                    # 收集历史数据用于绘图
-                    try:
-                        # 获取当前环境状态用于绘图
-                        env_state = vec_env.env_method('get_current_state', indices=[i])[0]
-                        
-                        # 记录步数
-                        env_histories[i]['steps'].append(env_steps[i])
-                        
-                        # 记录UAV位置
-                        if 'uav_positions' in env_state:
-                            env_histories[i]['uav_positions'].append(env_state['uav_positions'].copy())
-                        
-                        # 记录连通性和吞吐量
-                        connectivity = 0
-                        throughput = 0
-                        if 'reward_info' in infos[i]:
-                            reward_info = infos[i]['reward_info']
-                            connectivity = reward_info.get('effective_connected_users', 0)
-                            throughput = reward_info.get('system_throughput_mbps', 0)
-                        
-                        env_histories[i]['connectivity'].append(connectivity)
-                        env_histories[i]['throughput'].append(throughput)
-                        
-                        # 收集静态信息（只需要收集一次）
-                        if env_histories[i]['static_info'] is None:
-                            static_info = {}
-                            if 'user_positions' in env_state:
-                                static_info['user_positions'] = env_state['user_positions'].copy()
-                            if 'ground_bs_positions' in env_state:
-                                static_info['ground_bs_positions'] = env_state['ground_bs_positions'].copy()
-                            if 'area_size' in env_state:
-                                static_info['area_size'] = env_state['area_size']
-                            env_histories[i]['static_info'] = static_info
-                            
-                    except Exception as e:
-                        main_logger.warning(f"收集环境 {i} 的历史数据时出错: {e}")
+                    # 使用轨迹记录器收集历史数据用于绘图
+                    skill_changed = all_agent_infos_list[i].get('skill_changed', False) if i < len(all_agent_infos_list) else False
+                    record_env_history(i, env_steps[i], skill_changed=skill_changed, episode_end=False)
 
                     if render and i == 0:
                         try:
@@ -1875,6 +2162,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
 
                             # 记录高层奖励
                             high_level_rewards.append(env_rewards[i])
+                            
+                            # 确保记录episode结束时的最终位置
+                            record_env_history(i, env_steps[i], skill_changed=False, episode_end=True)
                             
                             # 为最先完成的4个环境生成绘图
                             if plots_generated < 4 and len(env_histories[i]['uav_positions']) > 0:
@@ -2312,6 +2602,29 @@ def main():
     train_vec_env.close()
     eval_vec_env.close()
 
+def smooth_trajectory(trajectory, window_size=3):
+    """
+    平滑轨迹，减少噪声
+    
+    参数:
+        trajectory: 轨迹数组 [steps, 2] (x, y坐标)
+        window_size: 滑动窗口大小
+    
+    返回:
+        smoothed: 平滑后的轨迹数组
+    """
+    if len(trajectory) <= window_size:
+        return trajectory
+    
+    # 使用简单的移动平均
+    smoothed = np.zeros_like(trajectory)
+    for i in range(len(trajectory)):
+        start_idx = max(0, i - window_size // 2)
+        end_idx = min(len(trajectory), i + window_size // 2 + 1)
+        smoothed[i] = np.mean(trajectory[start_idx:end_idx], axis=0)
+    
+    return smoothed
+
 # 全局队列引用，供子进程使用
 _shared_log_queue = None
 
@@ -2360,7 +2673,7 @@ def env_log(level, message, queue=None):
 
 def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_num, config):
     """
-    生成并保存2D俯瞰拓扑图，显示无人机轨迹
+    生成并保存2D俯瞰拓扑图，显示无人机轨迹（优化版）
     
     参数:
         history: 包含历史数据的字典，包含 'uav_positions' 列表
@@ -2384,19 +2697,36 @@ def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_nu
         if len(positions_history) == 0:
             main_logger.warning("没有轨迹数据可绘制")
             return
-            
+        
+        # 检查是否启用轨迹平滑
+        enable_smoothing = getattr(config, 'enable_trajectory_smoothing', True)
+        
         for i in range(config.n_agents):
             # 使用颜色循环来区分不同无人机
             color = plt.cm.jet(i / config.n_agents)
-            ax.plot(positions_history[:, i, 0], positions_history[:, i, 1], 
+            
+            # 提取轨迹数据（只使用x, y坐标）
+            trajectory = positions_history[:, i, :2]
+            
+            # 平滑轨迹（如果启用且点数足够）
+            if enable_smoothing and len(trajectory) > 5:
+                trajectory = smooth_trajectory(trajectory)
+            
+            # 绘制轨迹线
+            ax.plot(trajectory[:, 0], trajectory[:, 1], 
                     color=color, alpha=0.6, linewidth=1.5,
                     label=f'UAV {i} 轨迹' if i < 3 else "")  # 只为前3个UAV添加图例
             
-            # 标记起点和终点
-            ax.scatter(positions_history[0, i, 0], positions_history[0, i, 1],
-                       marker='o', color=color, s=50, edgecolors='black')  # 起点
-            ax.scatter(positions_history[-1, i, 0], positions_history[-1, i, 1],
-                       marker='>', color=color, s=100, edgecolors='black')  # 终点
+            # 起点：圆形标记
+            ax.scatter(trajectory[0, 0], trajectory[0, 1],
+                       marker='o', color=color, s=80, edgecolors='black', zorder=6)
+            
+            # 终点：三角形标记（唯一的终点标记）
+            ax.scatter(trajectory[-1, 0], trajectory[-1, 1],
+                       marker='^', color=color, s=120, edgecolors='black', zorder=6)
+            
+            # 添加UAV标识文本
+            ax.text(trajectory[-1, 0] + 10, trajectory[-1, 1] + 10, f'UAV{i}', fontsize=9)
 
         # 绘制静态实体
         if static_info:
@@ -2412,14 +2742,20 @@ def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_nu
                 ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, 
                           label='用户', zorder=5)
 
-        # 3. 无人机最终位置
-        uav_final_pos = positions_history[-1]
-        ax.scatter(uav_final_pos[:, 0], uav_final_pos[:, 1], c='red', marker='^', s=150, 
-                  label='UAV (最终位置)', zorder=5)
-        for i in range(config.n_agents):
-            ax.text(uav_final_pos[i, 0] + 10, uav_final_pos[i, 1] + 10, f'UAV{i}', fontsize=9)
-
-        ax.set_title(f'评估 Episode {episode_num}: 2D拓扑与无人机轨迹')
+        # 添加图例说明
+        from matplotlib.lines import Line2D
+        legend_elements = []
+        if enable_smoothing:
+            legend_elements.append(Line2D([0], [0], marker='o', color='gray', label='起点',
+                                        markerfacecolor='gray', markersize=8, linestyle='None'))
+            legend_elements.append(Line2D([0], [0], marker='^', color='gray', label='终点',
+                                        markerfacecolor='gray', markersize=10, linestyle='None'))
+        
+        # 获取现有图例并添加起点终点说明
+        handles, labels = ax.get_legend_handles_labels()
+        handles.extend(legend_elements)
+        
+        ax.set_title(f'评估 Episode {episode_num}: 2D拓扑与无人机轨迹{"（平滑）" if enable_smoothing else ""}')
         ax.set_xlabel('X (m)')
         ax.set_ylabel('Y (m)')
         
@@ -2427,7 +2763,7 @@ def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_nu
         ax.set_xlim(0, area_size)
         ax.set_ylim(0, area_size)
         ax.set_aspect('equal', adjustable='box')
-        ax.legend()
+        ax.legend(handles=handles)
         ax.grid(True, linestyle='--', alpha=0.5)
         
         # 保存图像

@@ -119,28 +119,6 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
         if module.bias is not None:
             nn.init.zeros_(module.bias.data)
 
-class MLP(nn.Module):
-    """多层感知机"""
-    def __init__(self, input_dim, hidden_dim, output_dim, n_layers=2, last_layer_gain=0.01):
-        super(MLP, self).__init__()
-        
-        layers = []
-        dims = [input_dim] + [hidden_dim] * n_layers + [output_dim]
-        
-        for i in range(len(dims) - 1):
-            layers.append(nn.Linear(dims[i], dims[i+1]))
-            if i < len(dims) - 2:  # 不在最后一层应用激活函数
-                layers.append(nn.ReLU())
-        
-        self.model = nn.Sequential(*layers)
-        
-        # 初始化权重，使用较小的增益因子以避免大梯度
-        initialize_weights(self.model, gain=1.0, last_layer_gain=last_layer_gain)
-    
-    def forward(self, x):
-        # 确保输入是float32类型
-        x = x.float()
-        return self.model(x)
 
 class ResBlock(nn.Module):
     """残差块 - 用于构建更深的网络"""
@@ -1008,8 +986,12 @@ class SkillDiscoverer(nn.Module):
         self.use_opt = config.use_opt
         
         # Actor网络（每个智能体共享）
-        # 及早初始化网络层，避免延迟初始化导致的模型加载问题
-        self.actor_mlp = MLP(config.obs_dim + config.n_z, config.hidden_size, config.hidden_size)
+        # 直接使用 nn.Sequential 定义 actor_mlp，提高代码清晰度
+        self.actor_mlp = nn.Sequential(
+            nn.Linear(config.obs_dim + config.n_z, config.hidden_size),
+            nn.ReLU(),
+            nn.Linear(config.hidden_size, config.hidden_size)
+        )
         self.actor_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
         
         # 动作均值和标准差
@@ -1022,48 +1004,29 @@ class SkillDiscoverer(nn.Module):
         # 重置参数
         self.actor_hidden = None
         
-        # Critic网络（中心化价值函数）- 使用FiLM进行状态-技能融合
-        if self.use_opt:
-            # 低层OPT模块：用于处理全局状态的交互解耦
-            self.critic_opt = OPT(
-                input_dim=config.embedding_dim,
-                num_prototypes=config.opt_num_prototypes,
-                prototype_dim=config.opt_prototype_dim,
-                num_layers=config.opt_layers
-            )
-            # 状态嵌入层
-            self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
-            # 将OPT输出投影到适合价值计算的维度
-            if config.opt_prototype_dim != config.embedding_dim:
-                self.opt_to_value_projection = nn.Linear(config.opt_prototype_dim, config.embedding_dim)
-            else:
-                self.opt_to_value_projection = nn.Identity()
-            # 状态编码器：只处理状态特征，不再拼接技能
-            self.critic_state_encoder = MLP(config.embedding_dim, config.hidden_size, config.hidden_size)
-        else:
-            # 状态编码器：只处理状态特征，不再拼接技能
-            self.critic_state_encoder = MLP(config.state_dim, config.hidden_size, config.hidden_size)
-        
-        # FiLM层：团队技能生成调制参数
-        self.critic_skill_film_generator = nn.Linear(config.n_Z, config.hidden_size * 2)  # 生成gamma和beta
-        
-        self.critic_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
-        self.value_head = nn.Linear(config.gru_hidden_size, 1)
-        
-        # 重置参数
-        self.critic_hidden = None
+        # Critic网络（中心化价值函数）- 简化的前馈网络直接评估V(s, Z)
+        self.critic_net = nn.Sequential(
+            nn.Linear(config.state_dim + config.n_Z, config.hidden_size),
+            nn.LayerNorm(config.hidden_size),
+            nn.GELU(),
+            ResBlock(config.hidden_size),
+            ResBlock(config.hidden_size),
+            nn.Linear(config.hidden_size, config.hidden_size),
+            nn.LayerNorm(config.hidden_size),
+            nn.GELU()
+        )
+        self.value_head = nn.Linear(config.hidden_size, 1)
         
         # 初始化网络权重
         self._init_weights()
     
     def _init_weights(self):
         """初始化网络权重，提高训练稳定性"""
-        # 初始化MLP层权重 (已在MLP构造函数中完成，这里无需重复)
-        # self.actor_mlp 和 self.critic_mlp 在构造时已经初始化了权重
+        # 初始化 actor_mlp 网络权重
+        initialize_weights(self.actor_mlp, gain=1.0)
         
         # 初始化GRU权重
         initialize_weights(self.actor_gru, gain=1.0)
-        initialize_weights(self.critic_gru, gain=1.0)
         
         # 初始化动作均值输出层
         initialize_weights(self.action_mean, gain=0.01)
@@ -1071,17 +1034,13 @@ class SkillDiscoverer(nn.Module):
         # 初始化价值头
         initialize_weights(self.value_head, gain=0.01)  # 价值函数输出层使用较小的初始化
         
-        # 如果使用OPT，初始化状态嵌入层和投影层
-        if self.use_opt:
-            initialize_weights(self.state_embedding, gain=1.0)
-            if hasattr(self, 'opt_to_value_projection'):
-                initialize_weights(self.opt_to_value_projection, gain=1.0)
+        # 初始化critic网络权重
+        initialize_weights(self.critic_net, gain=1.0)
     
     def init_hidden(self, batch_size=1):
         """初始化GRU隐藏状态"""
         device = next(self.parameters()).device
         self.actor_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
-        self.critic_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
     
     def reset_hidden_periodic(self, episode_step, reset_interval=100):
         """
@@ -1092,77 +1051,27 @@ class SkillDiscoverer(nn.Module):
             reset_interval: 重置间隔步数，默认每100步重置一次
         """
         if episode_step % reset_interval == 0 and episode_step > 0:
-            if self.actor_hidden is not None and self.critic_hidden is not None:
+            if self.actor_hidden is not None:
                 batch_size = self.actor_hidden.size(1)
                 self.logger.debug(f"在步骤 {episode_step} 周期性重置隐藏状态")
                 self.init_hidden(batch_size)
     
-    def get_value(self, state, team_skill, batch_first=True):
-        """获取价值函数值 - 使用FiLM进行状态-技能融合"""
-        batch_size = state.size(0)
-        device = state.device
+    def get_value(self, state, team_skill):
+        """获取价值函数值 - 简化的、无GRU的中心化Critic"""
+        # 将 team_skill 转为 one-hot
+        if isinstance(team_skill, int):
+            team_skill = torch.tensor([team_skill], device=state.device)
+        elif team_skill.dim() == 0:
+            team_skill = team_skill.unsqueeze(0)
         
-        # 确保state是float32类型
-        state = state.float()
+        team_skill_onehot = F.one_hot(team_skill.long(), num_classes=self.config.n_Z).float()
+        critic_input = torch.cat([state, team_skill_onehot], dim=-1)
         
-        if isinstance(team_skill, int) or isinstance(team_skill, torch.Tensor):
-            # 将技能索引转换为独热编码
-            if isinstance(team_skill, int):
-                team_skill = torch.tensor([team_skill], device=state.device)
-            elif team_skill.dim() == 0:  # 处理标量张量
-                team_skill = team_skill.unsqueeze(0)
-            
-            if team_skill.dim() == 1:
-                team_skill_onehot = F.one_hot(team_skill, self.config.n_Z).float()
-            else:
-                team_skill_onehot = team_skill.float()
-        else:
-            team_skill_onehot = team_skill.float()
-
-        if self.use_opt:
-            # 使用低层OPT处理全局状态
-            # 将状态嵌入到embedding空间
-            embedded_state = self.state_embedding(state).unsqueeze(1)  # [batch_size, 1, embedding_dim]
-            
-            # 通过OPT解耦全局状态中的交互模式
-            disentangled_state, cd_loss, _, _ = self.critic_opt(embedded_state)
-            
-            # 投影回价值计算维度并去除序列维度
-            processed_state = self.opt_to_value_projection(disentangled_state).squeeze(1)  # [batch_size, embedding_dim]
-        else:
-            # 标准方式：直接处理全局状态
-            processed_state = state
-            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        # 直接通过强大的前馈网络
+        features = self.critic_net(critic_input) 
+        value = self.value_head(features)
         
-        # 关键修改：使用FiLM代替简单拼接
-        # 1. 状态特征编码（不包含技能信息）
-        state_features = self.critic_state_encoder(processed_state)  # [batch_size, hidden_size]
-        
-        # 2. 技能生成FiLM调制参数
-        film_params = self.critic_skill_film_generator(team_skill_onehot)  # [batch_size, hidden_size * 2]
-        gamma, beta = torch.chunk(film_params, 2, dim=-1)  # 各自为 [batch_size, hidden_size]
-        
-        # 3. FiLM调制：gamma * state_features + beta
-        # 这种方式让技能信息能够动态调整状态特征，实现强条件依赖
-        modulated_features = gamma * state_features + beta  # [batch_size, hidden_size]
-        
-        # 确保modulated_features是3D的 [batch_size, seq_len, hidden_dim]
-        if modulated_features.dim() == 2:
-            modulated_features = modulated_features.unsqueeze(1)  # 添加时序维度
-        
-        # 初始化隐藏状态（如果需要）
-        if self.critic_hidden is None or self.critic_hidden.size(1) != batch_size:
-            self.critic_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
-            
-        critic_output, self.critic_hidden = self.critic_gru(modulated_features, self.critic_hidden)
-        
-        # 移除时序维度
-        critic_output = critic_output.squeeze(1)
-            
-        value = self.value_head(critic_output)
-        
-        # 确保返回的值是float32类型，同时返回cd_loss
-        return value.float(), cd_loss
+        return value, torch.tensor(0.0, device=state.device, requires_grad=True)  # 返回零损失
     
     def forward(self, observation, agent_skill, deterministic=False):
         """
@@ -1326,17 +1235,15 @@ class TeamDiscriminator(nn.Module):
         return self.net(state)
 
 class IndividualDiscriminator(nn.Module):
-    """个体技能判别器 - 升级版3层MLP"""
+    """个体技能判别器 - 使用 Embedding 层处理团队技能"""
     def __init__(self, config):
         super(IndividualDiscriminator, self).__init__()
-        
         self.config = config
-        self.n_Z = config.n_Z
         
-        # 使用Embedding层处理团队技能
+        # 使用 Embedding 层处理离散的团队技能
         self.team_skill_embedding = nn.Embedding(config.n_Z, config.embedding_dim)
         
-        # 使用您建议的更稳健的3层MLP结构
+        # 网络的输入维度现在是 obs_dim + embedding_dim
         self.net = nn.Sequential(
             nn.Linear(config.obs_dim + config.embedding_dim, config.hidden_size),
             nn.LayerNorm(config.hidden_size),
@@ -1346,42 +1253,21 @@ class IndividualDiscriminator(nn.Module):
             nn.GELU(),
             nn.Linear(config.hidden_size, config.n_z)
         )
-        
-        # 确保最后一层初始化正常
         initialize_weights(self.net[-1], gain=1.0)
-    
+
     def forward(self, observation, team_skill):
-        """
-        参数:
-            observation: 智能体观测 [batch_size, obs_dim]
-            team_skill: 团队技能索引 [batch_size] 或独热编码 [batch_size, n_Z]
-            
-        返回:
-            logits: 个体技能logits [batch_size, n_z]
-        """
-        # 确保observation是float32类型
-        observation = observation.float()
+        # 确保 team_skill 是长整型的索引
+        if team_skill.dtype != torch.long:
+            team_skill = team_skill.long()
+
+        # team_skill shape: [batch_size] 或者标量
+        team_skill_embedded = self.team_skill_embedding(team_skill)
         
-        if isinstance(team_skill, int) or isinstance(team_skill, torch.Tensor):
-            # 将技能索引转换为独热编码
-            if isinstance(team_skill, int):
-                team_skill = torch.tensor([team_skill], device=observation.device)
-            elif team_skill.dim() == 0:  # 处理标量张量
-                team_skill = team_skill.unsqueeze(0)  # 转换为一维张量
-            
-            # 直接使用索引进行嵌入（而不是独热编码）
-            if team_skill.dim() == 1:
-                team_skill_embedded = self.team_skill_embedding(team_skill)
-            else:
-                # 如果已经是独热编码，转换回索引
-                team_skill_idx = team_skill.argmax(dim=-1)
-                team_skill_embedded = self.team_skill_embedding(team_skill_idx)
-        else:
-            # 处理独热编码输入
-            team_skill_idx = team_skill.argmax(dim=-1)
-            team_skill_embedded = self.team_skill_embedding(team_skill_idx)
+        # 确保维度匹配：如果 team_skill_embedded 是 1D，则扩展为 2D
+        if team_skill_embedded.dim() == 1:
+            team_skill_embedded = team_skill_embedded.unsqueeze(0)
         
-        # 拼接观测和团队技能嵌入
+        # 拼接观测和嵌入后的团队技能
         discriminator_input = torch.cat([observation, team_skill_embedded], dim=-1)
         
         return self.net(discriminator_input)

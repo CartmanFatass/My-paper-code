@@ -272,7 +272,10 @@ class EnhancedVisualizationEnv:
             self.ax.scatter(connected_x, connected_y, connected_z, 
                           c='blue', marker='o', s=50, label='已连接用户', alpha=0.8)
         
-        # 3. 绘制无人机
+        # 3. 计算有效回程路径和UAV角色
+        valid_backhaul_uavs, effective_routing_paths, relay_uavs = self._compute_effective_routing_paths()
+        
+        # 4. 绘制无人机
         uav_colors = []
         uav_sizes = []
         uav_labels = []
@@ -280,25 +283,26 @@ class EnhancedVisualizationEnv:
         for i in range(self.base_env.env.n_uavs):
             # 根据无人机的连接状态确定颜色和大小
             has_users = np.sum(self.base_env.env.connections[i]) > 0
-            has_backhaul = hasattr(self.base_env.env, 'routing_paths') and i in self.base_env.env.routing_paths
+            has_valid_backhaul = i in valid_backhaul_uavs
+            is_relay = i in relay_uavs
             
-            if has_users and has_backhaul:
-                # 既有用户连接又有回程路径
+            if has_users and has_valid_backhaul:
+                # 既有用户连接又有有效回程路径
                 uav_colors.append('red')
                 uav_sizes.append(150)
                 uav_labels.append('服务型UAV')
-            elif has_backhaul:
-                # 只有回程路径，作为中继
+            elif is_relay:
+                # 真正的中继UAV：不服务用户但在有效路径的中间位置起转发作用
                 uav_colors.append('darkorange')
                 uav_sizes.append(120)
                 uav_labels.append('中继型UAV')
             elif has_users:
-                # 只有用户连接，没有回程
+                # 只有用户连接，没有有效回程
                 uav_colors.append('coral')
                 uav_sizes.append(100)
                 uav_labels.append('孤立型UAV')
             else:
-                # 既没有用户也没有回程
+                # 既没有用户也没有有效回程，或者虽然在路径上但不起中继作用
                 uav_colors.append('gray')
                 uav_sizes.append(80)
                 uav_labels.append('空闲UAV')
@@ -324,7 +328,7 @@ class EnhancedVisualizationEnv:
                         label_text, fontsize=8, ha='center', va='bottom',
                         bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.8, edgecolor='gray'))
         
-        # 4. 绘制用户服务链路 (基础连接)
+        # 5. 绘制用户服务链路 (基础连接)
         for i in range(self.base_env.env.n_uavs):
             uav_pos = self.base_env.env.uav_positions[i]
             for j in range(self.base_env.env.n_users):
@@ -336,11 +340,10 @@ class EnhancedVisualizationEnv:
                                color=self.link_colors['user_service'],
                                **self.link_styles['user_service'])
         
-        # 5. 绘制无人机中继链路和回程链路
-        if hasattr(self.base_env.env, 'routing_paths'):
-            self._draw_routing_paths()
+        # 6. 绘制有效的无人机中继链路和回程链路
+        self._draw_effective_routing_paths(effective_routing_paths)
         
-        # 6. 添加图例
+        # 7. 添加图例
         handles, labels = self.ax.get_legend_handles_labels()
         
         # 添加UAV类型的图例
@@ -373,10 +376,10 @@ class EnhancedVisualizationEnv:
                                loc='upper left', bbox_to_anchor=(0.02, 0.98),
                                ncol=1, fontsize=9, framealpha=0.9)
         
-        # 7. 添加详细统计信息
-        self._add_statistics_text()
+        # 8. 添加详细统计信息
+        self._add_statistics_text(valid_backhaul_uavs, relay_uavs)
         
-        # 8. 设置视角
+        # 9. 设置视角
         self.ax.view_init(elev=30, azim=45)
         
         self.fig.canvas.draw()
@@ -400,9 +403,128 @@ class EnhancedVisualizationEnv:
         image = np.array(canvas.renderer.buffer_rgba())
         return image
     
+    def _compute_effective_routing_paths(self):
+        """
+        计算有效的回程路径和UAV角色
+        
+        返回:
+            valid_backhaul_uavs: 具有有效回程路径的UAV集合
+            effective_routing_paths: 过滤后的有效路由路径
+            relay_uavs: 真正起中继作用的UAV集合
+        """
+        valid_backhaul_uavs = set()
+        effective_routing_paths = {}
+        relay_uavs = set()
+        
+        if not hasattr(self.base_env.env, 'routing_paths'):
+            return valid_backhaul_uavs, effective_routing_paths, relay_uavs
+        
+        routing_paths = self.base_env.env.routing_paths
+        
+        if not routing_paths:
+            return valid_backhaul_uavs, effective_routing_paths, relay_uavs
+        
+        # 首先找出所有直接服务用户的UAV
+        serving_uavs = set()
+        for i in range(self.base_env.env.n_uavs):
+            if np.sum(self.base_env.env.connections[i]) > 0:
+                serving_uavs.add(i)
+        
+        # 对每个路径进行验证，确保只有承载了来自服务用户的数据流的路径才是有效的
+        for uav_idx, path in routing_paths.items():
+            if not path or len(path) < 2:
+                continue
+
+            # 检查路径是否以地面基站结束
+            last_node_type, last_node_idx = path[-1]
+            if last_node_type != 'ground_bs':
+                continue  # 路径不以地面基站结束，不是有效回程路径
+
+            # 找到路径中第一个服务用户的UAV位置
+            first_serving_uav_idx = -1
+            path_uavs = []  # 记录路径中所有UAV的索引位置和ID
+            
+            for i, (node_type, node_idx) in enumerate(path):
+                if node_type == 'uav':
+                    path_uavs.append((i, node_idx))
+                    if node_idx in serving_uavs and first_serving_uav_idx == -1:
+                        first_serving_uav_idx = i
+
+            # 只有包含服务用户的UAV的路径才被认为是有效的
+            if first_serving_uav_idx != -1:
+                # 从第一个服务UAV开始的路径才是有效的
+                effective_path = path[first_serving_uav_idx:]
+                effective_routing_paths[uav_idx] = effective_path
+                
+                # 标记从第一个服务UAV开始到基站的所有UAV为有效回程UAV
+                for i, (node_type, node_idx) in enumerate(effective_path):
+                    if node_type == 'uav':
+                        valid_backhaul_uavs.add(node_idx)
+                        
+                        # 识别真正的中继UAV：
+                        # 1. 不直接服务用户
+                        # 2. 在有效路径中（即在第一个服务UAV之后）
+                        # 3. 确实承载了来自服务UAV的数据流
+                        if node_idx not in serving_uavs and i > 0:  # 不是服务UAV且不是路径起点
+                            relay_uavs.add(node_idx)
+        
+        return valid_backhaul_uavs, effective_routing_paths, relay_uavs
+    
+    def _draw_effective_routing_paths(self, effective_routing_paths):
+        """
+        绘制有效的路由路径（中继链路和回程链路）
+        
+        参数:
+            effective_routing_paths: 有效的路由路径字典
+        """
+        if not effective_routing_paths:
+            return
+        
+        for uav_idx, path in effective_routing_paths.items():
+            if not path:
+                continue
+            
+            # 绘制路径中的每一段链路
+            for i in range(len(path) - 1):
+                src_type, src_idx = path[i]
+                dst_type, dst_idx = path[i + 1]
+                
+                # 获取源节点位置
+                if src_type == 'uav':
+                    src_pos = self.base_env.env.uav_positions[src_idx]
+                elif src_type == 'ground_bs':
+                    src_pos = self.base_env.env.ground_bs_positions[src_idx]
+                else:
+                    continue
+                
+                # 获取目标节点位置
+                if dst_type == 'uav':
+                    dst_pos = self.base_env.env.uav_positions[dst_idx]
+                elif dst_type == 'ground_bs':
+                    dst_pos = self.base_env.env.ground_bs_positions[dst_idx]
+                else:
+                    continue
+                
+                # 确定链路类型和样式
+                if dst_type == 'ground_bs':
+                    # 到地面基站的链路 - 回程链路
+                    link_color = self.link_colors['backhaul']
+                    link_style = self.link_styles['backhaul']
+                else:
+                    # UAV到UAV的链路 - 中继链路
+                    link_color = self.link_colors['uav_relay']
+                    link_style = self.link_styles['uav_relay']
+                
+                # 绘制链路
+                self.ax.plot([src_pos[0], dst_pos[0]], 
+                           [src_pos[1], dst_pos[1]], 
+                           [src_pos[2], dst_pos[2]], 
+                           color=link_color, **link_style)
+    
     def _draw_routing_paths(self):
         """
         绘制路由路径（中继链路和回程链路）
+        [保留此方法以保持向后兼容性，但现在不再使用]
         """
         if not hasattr(self.base_env.env, 'routing_paths'):
             return
@@ -454,46 +576,52 @@ class EnhancedVisualizationEnv:
                            [src_pos[2], dst_pos[2]], 
                            color=link_color, **link_style)
     
-    def _add_statistics_text(self):
+    def _add_statistics_text(self, valid_backhaul_uavs, relay_uavs):
         """
         添加详细的统计信息文本
+        
+        参数:
+            valid_backhaul_uavs: 具有有效回程路径的UAV集合
+            relay_uavs: 真正起中继作用的UAV集合
         """
         if not hasattr(self.base_env.env, 'reward_info') or not self.base_env.env.reward_info:
             return
         
         reward_info = self.base_env.env.reward_info
         
-        # 计算统计信息
+        # 计算统计信息 - 使用有效覆盖率
         total_connections = np.sum(self.base_env.env.connections)
-        coverage_ratio = total_connections / self.base_env.env.n_users
+        effective_connected_users = reward_info.get('effective_connected_users', 0)
+        effective_coverage_ratio = effective_connected_users / self.base_env.env.n_users
         
-        # 统计UAV类型
-        serving_uavs = 0
-        relay_uavs = 0
-        isolated_uavs = 0
-        idle_uavs = 0
+        # 统计UAV类型（使用新的分类逻辑）
+        serving_uavs_count = 0
+        relay_uavs_count = 0
+        isolated_uavs_count = 0
+        idle_uavs_count = 0
         
         for i in range(self.base_env.env.n_uavs):
             has_users = np.sum(self.base_env.env.connections[i]) > 0
-            has_backhaul = hasattr(self.base_env.env, 'routing_paths') and i in self.base_env.env.routing_paths
+            has_valid_backhaul = i in valid_backhaul_uavs
+            is_relay = i in relay_uavs
             
-            if has_users and has_backhaul:
-                serving_uavs += 1
-            elif has_backhaul:
-                relay_uavs += 1
+            if has_users and has_valid_backhaul:
+                serving_uavs_count += 1
+            elif is_relay:
+                relay_uavs_count += 1
             elif has_users:
-                isolated_uavs += 1
+                isolated_uavs_count += 1
             else:
-                idle_uavs += 1
+                idle_uavs_count += 1
         
-        # 构建统计文本
+        # 构建统计文本 - 统一为有效覆盖率
         stats_text = f"""统计信息:
-总连接数: {total_connections}/{self.base_env.env.n_users} ({coverage_ratio:.1%})
-有效连接数: {reward_info.get('effective_connected_users', 0)}
-服务型UAV: {serving_uavs}
-中继型UAV: {relay_uavs}
-孤立型UAV: {isolated_uavs}
-空闲UAV: {idle_uavs}
+覆盖率: {effective_connected_users}/{self.base_env.env.n_users} ({effective_coverage_ratio:.1%})
+总连接数: {total_connections}
+服务型UAV: {serving_uavs_count}
+中继型UAV: {relay_uavs_count}
+孤立型UAV: {isolated_uavs_count}
+空闲UAV: {idle_uavs_count}
 网络连通性: {reward_info.get('connected_uavs', 0)}/{self.base_env.env.n_uavs}
 系统吞吐量: {reward_info.get('system_throughput_mbps', 0):.1f} Mbps"""
         
@@ -524,61 +652,350 @@ class EnhancedVisualizationEnv:
 
     def _save_2d_topology_plot(self, args):
         """生成并保存带轨迹的2D俯瞰拓扑图"""
-        fig, ax = plt.subplots(figsize=(10, 10))
-        
-        # 绘制历史轨迹
         positions_history = np.array(self.history['uav_positions']) # [steps, n_uavs, 3]
-        for i in range(self.base_env.env.n_uavs):
-            # 使用颜色循环来区分不同无人机
-            color = plt.cm.jet(i / self.base_env.env.n_uavs)
-            ax.plot(positions_history[:, i, 0], positions_history[:, i, 1], 
-                    color=color, alpha=0.6, linewidth=1.5,
-                    label=f'UAV {i} 轨迹' if i == 0 else "") # 只为一个UAV添加图例
+        
+        # 获取可视化参数
+        trajectory_mode = getattr(args, 'trajectory_mode', 'important')
+        max_trajectory_points = getattr(args, 'max_trajectory_points', 50)
+        trajectory_alpha_decay = getattr(args, 'trajectory_alpha_decay', False)
+        separate_trajectory_plot = getattr(args, 'separate_trajectory_plot', False)
+        
+        if separate_trajectory_plot:
+            # 创建分离的多子图布局
+            self._save_enhanced_2d_plots(args, positions_history)
+        else:
+            # 创建单一改进的2D图
+            self._save_single_improved_2d_plot(args, positions_history, trajectory_mode, 
+                                             max_trajectory_points, trajectory_alpha_decay)
+
+    def _save_single_improved_2d_plot(self, args, positions_history, trajectory_mode, 
+                                     max_trajectory_points, trajectory_alpha_decay):
+        """保存单一改进的2D拓扑图"""
+        fig, ax = plt.subplots(figsize=(12, 10))
+        
+        # 获取更好的颜色方案
+        colors = self._get_distinct_colors(self.base_env.env.n_uavs)
+        
+        # 筛选要显示轨迹的无人机
+        if trajectory_mode == 'important':
+            trajectory_uavs = self._filter_important_trajectories(positions_history)
+        elif trajectory_mode == 'simplified':
+            trajectory_uavs = list(range(0, self.base_env.env.n_uavs, 2))  # 每隔一个显示
+        else:  # 'all'
+            trajectory_uavs = list(range(self.base_env.env.n_uavs))
+        
+        # 限制轨迹点数
+        if len(positions_history) > max_trajectory_points:
+            step_size = len(positions_history) // max_trajectory_points
+            trajectory_indices = list(range(0, len(positions_history), step_size))
+            if trajectory_indices[-1] != len(positions_history) - 1:
+                trajectory_indices.append(len(positions_history) - 1)
+        else:
+            trajectory_indices = list(range(len(positions_history)))
+        
+        trajectory_positions = positions_history[trajectory_indices]
+        
+        # 绘制轨迹
+        for i in trajectory_uavs:
+            color = colors[i]
+            trajectory = trajectory_positions[:, i, :2]  # 只取x,y坐标
             
-            # 标记轨迹快照点
-            if args.trajectory_snapshot_interval > 0 and args.trajectory_snapshot_interval < len(positions_history):
-                for step_idx in range(args.trajectory_snapshot_interval, len(positions_history), args.trajectory_snapshot_interval):
-                    ax.scatter(positions_history[step_idx, i, 0], positions_history[step_idx, i, 1],
-                               marker='x', color=color, s=40, alpha=0.9)
+            # 平滑轨迹（如果点数足够）
+            if len(trajectory) > 5:
+                trajectory = self._smooth_trajectory(trajectory)
+            
+            if trajectory_alpha_decay:
+                # 使用渐变透明度
+                for j in range(len(trajectory) - 1):
+                    alpha = 0.2 + 0.6 * (j / (len(trajectory) - 1))  # 从0.2到0.8
+                    ax.plot(trajectory[j:j+2, 0], trajectory[j:j+2, 1], 
+                           color=color, alpha=alpha, linewidth=2)
+            else:
+                # 统一透明度
+                ax.plot(trajectory[:, 0], trajectory[:, 1], 
+                       color=color, alpha=0.7, linewidth=2,
+                       label=f'UAV {i}' if len(trajectory_uavs) <= 5 else "")
             
             # 标记起点和终点
-            ax.scatter(positions_history[0, i, 0], positions_history[0, i, 1],
-                       marker='o', color=color, s=50, edgecolors='black') # 起点
-            ax.scatter(positions_history[-1, i, 0], positions_history[-1, i, 1],
-                       marker='>', color=color, s=100, edgecolors='black') # 终点
+            ax.scatter(trajectory[0, 0], trajectory[0, 1],
+                      marker='o', color=color, s=80, edgecolors='white', linewidth=2,
+                      label='起点' if i == trajectory_uavs[0] else "", zorder=10, alpha=0.9)
+            ax.scatter(trajectory[-1, 0], trajectory[-1, 1],
+                      marker='>', color=color, s=120, edgecolors='white', linewidth=2,
+                      label='终点' if i == trajectory_uavs[0] else "", zorder=10, alpha=0.9)
 
-        # 绘制最终状态的实体和连接
-        # 1. 地面基站
-        if hasattr(self.base_env.env, 'ground_bs_positions'):
-            bs_pos = self.base_env.env.ground_bs_positions
-            ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, label='地面基站', zorder=5)
-
-        # 2. 用户
-        user_pos = self.base_env.env.user_positions
-        ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, label='用户', zorder=5)
-
-        # 3. 无人机 (最终位置)
-        uav_pos = self.base_env.env.uav_positions
-        ax.scatter(uav_pos[:, 0], uav_pos[:, 1], c='red', marker='^', s=150, label='UAV (最终位置)', zorder=5)
-        for i in range(self.base_env.env.n_uavs):
-            ax.text(uav_pos[i, 0] + 10, uav_pos[i, 1] + 10, f'UAV{i}', fontsize=9)
-
-        # 4. 连接线 (根据用户反馈已移除)
-
-        ax.set_title(f'Episode {self.current_episode + 1}: 2D拓扑与无人机轨迹')
-        ax.set_xlabel('X (m)')
-        ax.set_ylabel('Y (m)')
+        # 绘制最终状态的实体
+        self._draw_final_state_entities(ax)
+        
+        # 设置图形属性
+        ax.set_title(f'Episode {self.current_episode + 1}: 2D拓扑与无人机轨迹\n'
+                    f'轨迹模式: {trajectory_mode} | 显示UAV: {len(trajectory_uavs)}/{self.base_env.env.n_uavs}',
+                    fontsize=12, pad=15)
+        ax.set_xlabel('X (m)', fontsize=11)
+        ax.set_ylabel('Y (m)', fontsize=11)
         ax.set_xlim(0, self.base_env.env.area_size)
         ax.set_ylim(0, self.base_env.env.area_size)
         ax.set_aspect('equal', adjustable='box')
-        ax.legend()
-        ax.grid(True, linestyle='--', alpha=0.5)
         
-        filename = f"episode_{self.current_episode + 1}_topology_2d.png"
+        # 优化图例
+        handles, labels = ax.get_legend_handles_labels()
+        if len(handles) > 0:
+            ax.legend(handles, labels, loc='upper left', bbox_to_anchor=(1.02, 1), 
+                     fontsize=9, framealpha=0.9)
+        
+        ax.grid(True, linestyle='--', alpha=0.3)
+        
+        # 添加统计文本
+        self._add_trajectory_statistics(ax, positions_history, trajectory_uavs)
+        
+        filename = f"episode_{self.current_episode + 1}_topology_2d_improved.png"
         save_file_path = os.path.join(self.save_path, filename)
-        fig.savefig(save_file_path, dpi=200, bbox_inches='tight')
+        fig.savefig(save_file_path, dpi=200, bbox_inches='tight', facecolor='white')
         plt.close(fig)
-        print(f"2D拓扑图已保存: {save_file_path}")
+        print(f"改进的2D拓扑图已保存: {save_file_path}")
+
+    def _save_enhanced_2d_plots(self, args, positions_history):
+        """保存增强的多子图2D分析"""
+        fig = plt.figure(figsize=(16, 12))
+        
+        # 创建2x2子图布局
+        ax1 = plt.subplot(2, 2, 1)  # 纯轨迹图
+        ax2 = plt.subplot(2, 2, 2)  # 最终状态图
+        ax3 = plt.subplot(2, 2, 3)  # 移动热力图
+        ax4 = plt.subplot(2, 2, 4)  # 关键事件图
+        
+        colors = self._get_distinct_colors(self.base_env.env.n_uavs)
+        
+        # 子图1: 纯轨迹图
+        self._plot_pure_trajectories(ax1, positions_history, colors)
+        
+        # 子图2: 最终状态图
+        self._plot_final_state(ax2, colors)
+        
+        # 子图3: 移动热力图
+        self._plot_movement_heatmap(ax3, positions_history)
+        
+        # 子图4: 关键事件图
+        self._plot_key_events(ax4, positions_history, colors)
+        
+        plt.tight_layout()
+        filename = f"episode_{self.current_episode + 1}_topology_2d_enhanced.png"
+        save_file_path = os.path.join(self.save_path, filename)
+        fig.savefig(save_file_path, dpi=200, bbox_inches='tight', facecolor='white')
+        plt.close(fig)
+        print(f"增强的2D分析图已保存: {save_file_path}")
+
+    def _get_distinct_colors(self, n_colors):
+        """获取易区分的颜色方案"""
+        if n_colors <= 12:
+            # 手动定义易区分的颜色
+            predefined_colors = [
+                '#FF0000',  # 红色
+                '#0000FF',  # 蓝色
+                '#00FF00',  # 绿色
+                '#FF8000',  # 橙色
+                '#8000FF',  # 紫色
+                '#FF0080',  # 品红
+                '#00FFFF',  # 青色
+                '#FFFF00',  # 黄色
+                '#800000',  # 栗色
+                '#008000',  # 深绿
+                '#000080',  # 海军蓝
+                '#808080'   # 灰色
+            ]
+            return predefined_colors[:n_colors]
+        else:
+            # 使用HSV色彩空间生成均匀分布的颜色
+            import matplotlib.colors as mcolors
+            hsv_colors = []
+            for i in range(n_colors):
+                hue = i / n_colors
+                hsv_colors.append(mcolors.hsv_to_rgb([hue, 0.8, 0.9]))
+            return hsv_colors
+
+    def _filter_important_trajectories(self, positions_history, min_distance=50):
+        """筛选重要轨迹（移动距离超过阈值）"""
+        important_uavs = []
+        for i in range(self.base_env.env.n_uavs):
+            trajectory = positions_history[:, i, :2]
+            if len(trajectory) > 1:
+                total_distance = np.sum(np.linalg.norm(np.diff(trajectory, axis=0), axis=1))
+                if total_distance > min_distance:
+                    important_uavs.append(i)
+        
+        # 确保至少显示一些轨迹
+        if len(important_uavs) == 0:
+            important_uavs = list(range(min(3, self.base_env.env.n_uavs)))
+        
+        return important_uavs
+
+    def _smooth_trajectory(self, trajectory, window_size=3):
+        """平滑轨迹，减少噪声"""
+        if len(trajectory) <= window_size:
+            return trajectory
+        
+        # 使用简单的移动平均
+        smoothed = np.zeros_like(trajectory)
+        for i in range(len(trajectory)):
+            start_idx = max(0, i - window_size // 2)
+            end_idx = min(len(trajectory), i + window_size // 2 + 1)
+            smoothed[i] = np.mean(trajectory[start_idx:end_idx], axis=0)
+        
+        return smoothed
+
+    def _draw_final_state_entities(self, ax):
+        """绘制最终状态的实体"""
+        # 1. 地面基站
+        if hasattr(self.base_env.env, 'ground_bs_positions') and len(self.base_env.env.ground_bs_positions) > 0:
+            bs_pos = self.base_env.env.ground_bs_positions
+            ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=300, 
+                      label='地面基站', zorder=8, edgecolors='white', linewidth=2)
+
+        # 2. 用户（区分连接状态）
+        user_pos = self.base_env.env.user_positions
+        connected_users = set()
+        for i in range(self.base_env.env.n_uavs):
+            for j in range(self.base_env.env.n_users):
+                if self.base_env.env.connections[i, j]:
+                    connected_users.add(j)
+        
+        # 未连接用户
+        unconnected_users = [j for j in range(self.base_env.env.n_users) if j not in connected_users]
+        if unconnected_users:
+            unconnected_pos = user_pos[unconnected_users]
+            ax.scatter(unconnected_pos[:, 0], unconnected_pos[:, 1], 
+                      c='lightblue', marker='.', s=50, label='未连接用户', 
+                      zorder=6, alpha=0.7)
+        
+        # 已连接用户
+        if connected_users:
+            connected_pos = user_pos[list(connected_users)]
+            ax.scatter(connected_pos[:, 0], connected_pos[:, 1], 
+                      c='blue', marker='o', s=80, label='已连接用户', 
+                      zorder=7, edgecolors='white', linewidth=1)
+
+        # 3. 无人机最终位置
+        uav_pos = self.base_env.env.uav_positions
+        ax.scatter(uav_pos[:, 0], uav_pos[:, 1], c='red', marker='^', s=200, 
+                  label='UAV最终位置', zorder=9, edgecolors='white', linewidth=2)
+        
+        # 添加UAV标签（智能放置，避免重叠）
+        self._add_smart_uav_labels(ax, uav_pos)
+
+    def _add_smart_uav_labels(self, ax, uav_pos):
+        """智能添加UAV标签，避免重叠"""
+        for i in range(self.base_env.env.n_uavs):
+            # 计算标签偏移，避免重叠
+            offset_x = 15 if i % 2 == 0 else -15
+            offset_y = 15 if i % 4 < 2 else -15
+            
+            ax.annotate(f'UAV{i}', 
+                       xy=(uav_pos[i, 0], uav_pos[i, 1]),
+                       xytext=(uav_pos[i, 0] + offset_x, uav_pos[i, 1] + offset_y),
+                       fontsize=8, ha='center', va='center',
+                       bbox=dict(boxstyle="round,pad=0.2", facecolor="white", 
+                                alpha=0.8, edgecolor='gray'),
+                       arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=0.1',
+                                     color='gray', alpha=0.6, lw=1))
+
+    def _add_trajectory_statistics(self, ax, positions_history, trajectory_uavs):
+        """添加轨迹统计信息"""
+        # 计算移动统计
+        total_distances = []
+        for i in trajectory_uavs:
+            trajectory = positions_history[:, i, :2]
+            if len(trajectory) > 1:
+                distance = np.sum(np.linalg.norm(np.diff(trajectory, axis=0), axis=1))
+                total_distances.append(distance)
+        
+        if total_distances:
+            avg_distance = np.mean(total_distances)
+            max_distance = np.max(total_distances)
+            
+            stats_text = f"""轨迹统计:
+显示轨迹: {len(trajectory_uavs)}/{self.base_env.env.n_uavs}
+平均移动距离: {avg_distance:.1f}m
+最大移动距离: {max_distance:.1f}m
+轨迹点数: {len(positions_history)}"""
+            
+            ax.text(0.02, 0.02, stats_text, transform=ax.transAxes,
+                   fontsize=9, verticalalignment='bottom',
+                   bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow", 
+                            alpha=0.8, edgecolor='orange'))
+
+    def _plot_pure_trajectories(self, ax, positions_history, colors):
+        """绘制纯轨迹图"""
+        important_uavs = self._filter_important_trajectories(positions_history)
+        
+        for i in important_uavs:
+            trajectory = positions_history[:, i, :2]
+            color = colors[i]
+            ax.plot(trajectory[:, 0], trajectory[:, 1], 
+                   color=color, alpha=0.8, linewidth=2, label=f'UAV {i}')
+        
+        ax.set_title('无人机轨迹', fontsize=11)
+        ax.set_xlim(0, self.base_env.env.area_size)
+        ax.set_ylim(0, self.base_env.env.area_size)
+        ax.set_aspect('equal')
+        ax.grid(True, alpha=0.3)
+        if len(important_uavs) <= 8:
+            ax.legend(fontsize=8)
+
+    def _plot_final_state(self, ax, colors):
+        """绘制最终状态图"""
+        self._draw_final_state_entities(ax)
+        ax.set_title('最终状态分布', fontsize=11)
+        ax.set_xlim(0, self.base_env.env.area_size)
+        ax.set_ylim(0, self.base_env.env.area_size)
+        ax.set_aspect('equal')
+        ax.grid(True, alpha=0.3)
+
+    def _plot_movement_heatmap(self, ax, positions_history):
+        """绘制移动热力图"""
+        # 创建密度图
+        all_positions = positions_history.reshape(-1, 3)[:, :2]  # 展平并取x,y
+        
+        # 使用hexbin创建热力图
+        hb = ax.hexbin(all_positions[:, 0], all_positions[:, 1], 
+                      gridsize=20, cmap='YlOrRd', alpha=0.7)
+        
+        ax.set_title('无人机活动热力图', fontsize=11)
+        ax.set_xlim(0, self.base_env.env.area_size)
+        ax.set_ylim(0, self.base_env.env.area_size)
+        ax.set_aspect('equal')
+        plt.colorbar(hb, ax=ax, label='活动密度')
+
+    def _plot_key_events(self, ax, positions_history, colors):
+        """绘制关键事件图"""
+        # 检测急剧方向变化的位置
+        for i in range(self.base_env.env.n_uavs):
+            trajectory = positions_history[:, i, :2]
+            color = colors[i]
+            
+            if len(trajectory) > 3:
+                # 计算方向变化
+                directions = np.diff(trajectory, axis=0)
+                direction_changes = []
+                
+                for j in range(1, len(directions)):
+                    if np.linalg.norm(directions[j-1]) > 0 and np.linalg.norm(directions[j]) > 0:
+                        cos_angle = np.dot(directions[j-1], directions[j]) / (
+                            np.linalg.norm(directions[j-1]) * np.linalg.norm(directions[j]))
+                        angle = np.arccos(np.clip(cos_angle, -1.0, 1.0))
+                        if angle > np.pi/3:  # 60度以上的转向
+                            direction_changes.append(j)
+                
+                # 绘制关键转向点
+                if direction_changes:
+                    change_points = trajectory[direction_changes]
+                    ax.scatter(change_points[:, 0], change_points[:, 1], 
+                             color=color, marker='x', s=60, alpha=0.8)
+        
+        ax.set_title('关键转向事件', fontsize=11)
+        ax.set_xlim(0, self.base_env.env.area_size)
+        ax.set_ylim(0, self.base_env.env.area_size)
+        ax.set_aspect('equal')
+        ax.grid(True, alpha=0.3)
 
     def _save_performance_plots(self):
         """生成并保存性能指标（连通性、吞吐量）随时间变化的图表"""
@@ -867,11 +1284,21 @@ def parse_args():
     
     # 可视化参数
     parser.add_argument('--render_interval', type=int, default=50,
-                        help='每隔多少步渲染一次 (默认: 1, 即每步都渲染)')
+                        help='每隔多少步渲染一次 (默认: 50)')
     parser.add_argument('--save_extra_plots', action='store_true',
                         help='生成并保存额外的分析图表 (2D拓扑图、性能变化图)')
     parser.add_argument('--trajectory_snapshot_interval', type=int, default=500,
                         help='在2D拓扑图上标记轨迹快照的频率 (步数)')
+    
+    # 新增轨迹优化参数
+    parser.add_argument('--trajectory_mode', choices=['all', 'important', 'simplified'], 
+                       default='important', help='轨迹显示模式: all=显示所有, important=仅重要轨迹, simplified=简化显示')
+    parser.add_argument('--max_trajectory_points', type=int, default=50,
+                       help='每条轨迹最大显示点数，用于减少密集轨迹')
+    parser.add_argument('--trajectory_alpha_decay', action='store_true',
+                       help='启用轨迹透明度衰减效果，突出最近路径')
+    parser.add_argument('--separate_trajectory_plot', action='store_true',
+                       help='生成分离的多子图2D分析 (轨迹图、状态图、热力图、事件图)')
     
     return parser.parse_args()
 

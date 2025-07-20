@@ -1800,9 +1800,10 @@ class HMASDAgent:
         """加载模型"""
         # 导入 Config 类并将其添加到安全列表
         from config_1 import Config
-        torch.serialization.add_safe_globals([Config])
+        import numpy.core.multiarray
+        torch.serialization.add_safe_globals([Config, numpy.core.multiarray._reconstruct])
         
-        checkpoint = torch.load(path, map_location=self.device)
+        checkpoint = torch.load(path, map_location=self.device, weights_only=False)
         
         # 使用 strict=False 来处理模型架构不匹配的问题
         # 这允许加载匹配的层，同时忽略不匹配的层（如旧的transformer vs 新的opt，或变化的智能体数量）
