@@ -992,7 +992,7 @@ class SkillDiscoverer(nn.Module):
             nn.ReLU(),
             nn.Linear(config.hidden_size, config.hidden_size)
         )
-        self.actor_gru = nn.GRU(config.hidden_size, config.gru_hidden_size, batch_first=True)
+        self.actor_gru = nn.GRU(config.hidden_size, config.gru_hidden_size)
         
         # 动作均值和标准差
         self.action_mean = nn.Linear(config.gru_hidden_size, config.action_dim)
@@ -1073,6 +1073,91 @@ class SkillDiscoverer(nn.Module):
         
         return value, torch.tensor(0.0, device=state.device, requires_grad=True)  # 返回零损失
     
+    def evaluate_sequence(self, obs_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs):
+        """
+        评估一个完整的序列批次，实现真正的BPTT
+        
+        参数:
+            obs_seq (Tensor): 观测序列，Shape: (T, B, obs_dim)
+            agent_skills_seq (Tensor): 技能序列，Shape: (T, B)
+            actions_seq (Tensor): 动作序列，Shape: (T, B, action_dim)
+            global_states_seq (Tensor): 全局状态序列，Shape: (T, B, state_dim)
+            team_skills_seq (Tensor): 团队技能序列，Shape: (T, B)
+            initial_hxs (Tensor): 初始隐状态，Shape: (B, hidden_size)
+            
+        返回:
+            log_probs (Tensor): 动作对数概率，Shape: (T, B)
+            values (Tensor): 价值估计，Shape: (T, B)
+            entropy (Tensor): 策略熵，Shape: ()
+        """
+        T, B = obs_seq.shape[:2]
+        device = obs_seq.device
+        
+        # --- Actor 部分：处理整个序列 ---
+        # 1. 预处理输入：将技能one-hot编码并与观测拼接
+        skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()  # (T, B, n_z)
+        actor_input = torch.cat([obs_seq, skills_onehot], dim=2)  # (T, B, obs_dim + n_z)
+        
+        # 2. 通过MLP处理
+        # 将时序维度展平处理 - 使用reshape代替view解决内存不连续问题
+        actor_input_flat = actor_input.reshape(T * B, -1)  # (T*B, obs_dim + n_z)
+        actor_features_flat = self.actor_mlp(actor_input_flat)  # (T*B, hidden_size)
+        
+        # 3. 重塑为GRU输入格式并处理整个序列 - 使用reshape代替view
+        gru_input = actor_features_flat.reshape(T, B, -1)  # (T, B, hidden_size)
+        
+        # 【关键修改】确保initial_hxs的batch_size与gru_input匹配
+        # initial_hxs的shape应该是(B, hidden_size)，需要变为(1, B, hidden_size)
+        # 如果batch_size不匹配，需要进行调整
+        if initial_hxs.size(0) != B:
+            # 如果initial_hxs的batch_size与当前批次不匹配，创建正确大小的初始隐状态
+            device = initial_hxs.device
+            initial_hxs = torch.zeros(B, self.gru_hidden_dim, device=device)
+            self.logger.warning(f"initial_hxs batch_size {initial_hxs.size(0)} 与 gru_input batch_size {B} 不匹配，已重新初始化")
+        
+        # 注意GRU的隐状态输入维度是 (num_layers, batch_size, hidden_size)
+        gru_output, _ = self.actor_gru(gru_input, initial_hxs.unsqueeze(0))  # (T, B, gru_hidden_size)
+        
+        # 4. 计算动作分布参数 - 使用reshape代替view
+        gru_output_flat = gru_output.reshape(T * B, -1)  # (T*B, gru_hidden_size)
+        
+        # 生成动作分布参数并进行数值稳定性处理
+        action_mean_raw = self.action_mean(gru_output_flat)
+        action_mean = torch.tanh(action_mean_raw) * 3.0  # 限制在[-3,3]范围内
+        
+        action_log_std = torch.clamp(self.action_log_std(gru_output_flat), min=-10.0, max=2.0)
+        action_std = torch.exp(action_log_std) + 1e-6  # 添加小的epsilon以防止标准差为零
+        
+        # 数值稳定性处理
+        action_mean = torch.nan_to_num(action_mean, nan=0.0, posinf=3.0, neginf=-3.0)
+        action_std = torch.clamp(torch.nan_to_num(action_std, nan=1.0, posinf=1.0), min=1e-6)
+        
+        # 5. 创建动作分布并评估动作
+        action_dist = Normal(action_mean, action_std)
+        
+        # 评估序列中的动作 - 使用reshape代替view解决内存不连续问题
+        actions_flat = actions_seq.reshape(T * B, -1)  # (T*B, action_dim)
+        log_probs_flat = action_dist.log_prob(actions_flat).sum(dim=-1)  # (T*B,)
+        
+        # 检查并处理无穷大/NaN的log_prob
+        if torch.isnan(log_probs_flat).any() or torch.isinf(log_probs_flat).any():
+            self.logger.warning("检测到序列评估中log_probs有NaN或Inf值")
+            log_probs_flat = torch.nan_to_num(log_probs_flat, nan=0.0, posinf=-1e3, neginf=-1e3)
+        
+        log_probs = log_probs_flat.reshape(T, B)  # (T, B) - 使用reshape代替view
+        entropy = action_dist.entropy().mean()
+        
+        # --- Critic 部分：使用正确对齐的数据一次性计算价值函数 ---
+        # 将时序维度展平 - 使用reshape代替view
+        global_states_flat = global_states_seq.reshape(T * B, -1)  # (T*B, state_dim)
+        team_skills_flat = team_skills_seq.reshape(T * B)  # (T*B,)
+
+        # 一次性计算所有时间步的价值
+        values_flat, _ = self.get_value(global_states_flat, team_skills_flat)  # (T*B, 1)
+        values = values_flat.reshape(T, B)  # (T, B) - 使用reshape代替view
+        
+        return log_probs, values, entropy
+
     def forward(self, observation, agent_skill, deterministic=False):
         """
         前向传播，生成动作

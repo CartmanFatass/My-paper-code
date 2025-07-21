@@ -88,8 +88,13 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # Ensure the underlying env's reset uses the seed if provided
         observations_dict, infos_dict = self.env.reset(seed=seed, options=options)
 
-        # 获取全局状态 (assuming the env has a _get_state method)
-        state = self.env._get_state() if hasattr(self.env, '_get_state') else None
+        # 获取全局状态 - 直接调用环境的_get_state方法
+        # 移除不稳定的hasattr检查，在多进程环境中可能失败
+        try:
+            state = self.env._get_state()
+        except AttributeError:
+            # 如果环境没有_get_state方法，抛出明确错误而不是静默失败
+            raise AttributeError(f"Environment {type(self.env).__name__} does not have a '_get_state' method")
 
         # 将字典格式的观测转换为数组格式
         observations_array = self._dict_to_array(observations_dict)
@@ -122,8 +127,13 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # 调用环境的step方法，获取字典格式的结果
         observations_dict, rewards_dict, terminations_dict, truncations_dict, infos_dict = self.env.step(actions_dict)
 
-        # 获取全局状态
-        next_state = self.env._get_state() if hasattr(self.env, '_get_state') else None
+        # 获取全局状态 - 直接调用环境的_get_state方法
+        # 移除不稳定的hasattr检查，在多进程环境中可能失败
+        try:
+            next_state = self.env._get_state()
+        except AttributeError:
+            # 如果环境没有_get_state方法，抛出明确错误而不是静默失败
+            raise AttributeError(f"Environment {type(self.env).__name__} does not have a '_get_state' method")
 
         # 将字典格式的观测转换为数组格式
         next_observations_array = self._dict_to_array(observations_dict)

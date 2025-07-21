@@ -19,7 +19,7 @@ from stable_baselines3.common.running_mean_std import RunningMeanStd
 
 from logger import main_logger
 from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
-from hmasd.utils import ReplayBuffer, StateSkillDataset, compute_gae, compute_ppo_loss, one_hot
+from hmasd.utils import RolloutBuffer, StateSkillDataset, compute_gae, compute_ppo_loss, one_hot
 
 
 class HMASDAgent:
@@ -121,20 +121,27 @@ class HMASDAgent:
             self.discriminator_scheduler = None
             main_logger.info("未启用学习率衰减")
         
-        # 创建经验回放缓冲区
-        # 训练脚本应已通过调用 config.calculate_and_set_buffer_sizes() 设置了这些值
-        # 使用断言确保配置已正确设置，避免使用不明确的备用值
-        assert hasattr(config, 'high_level_buffer_size') and config.high_level_buffer_size is not None, \
-            "config.high_level_buffer_size 未设置, 请确保在创建Agent前调用了config.update_env_dims()"
-        assert hasattr(config, 'low_level_buffer_size') and config.low_level_buffer_size is not None, \
-            "config.low_level_buffer_size 未设置, 请确保在创建Agent前调用了config.update_env_dims()"
-
-        main_logger.info(f"初始化 Replay Buffers: High-level size={config.high_level_buffer_size}, Low-level size={config.low_level_buffer_size}")
-
-        self.high_level_buffer = ReplayBuffer(config.high_level_buffer_size)
-        self.high_level_buffer_with_logprobs = []  # 新增：高层经验缓冲区（带log probabilities）
-        self.low_level_buffer = ReplayBuffer(config.low_level_buffer_size)
-        self.state_skill_dataset = StateSkillDataset(config.low_level_buffer_size) # 判别器数据集与低层buffer大小保持一致
+        # 保留状态-技能数据集用于判别器训练
+        self.state_skill_dataset = StateSkillDataset(getattr(config, 'low_level_buffer_size', 10000))
+        
+        # 统一的Rollout缓冲区，同时存储高层和低层策略数据
+        rollout_length = getattr(config, 'rollout_length', 2048)  # 默认rollout长度
+        num_envs = getattr(config, 'num_envs', 1)  # 并行环境数量
+        gru_hidden_size = getattr(config, 'gru_hidden_size', 128)  # GRU隐状态大小
+        
+        self.rollout_buffer = RolloutBuffer(
+            num_steps=rollout_length,
+            num_envs=num_envs,
+            n_agents=config.n_agents,
+            obs_dim=config.obs_dim,
+            action_dim=config.action_dim,
+            gru_hidden_size=gru_hidden_size,
+            n_Z=config.n_Z,
+            n_z=config.n_z,
+            state_dim=config.state_dim
+        )
+        main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
+                        f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
         
         # 其他初始化
         self.current_team_skill = None  # 当前团队技能 (保留用于单环境兼容性)
@@ -249,11 +256,11 @@ class HMASDAgent:
 
     def clear_buffers(self):
         """清空经验缓冲区（用于严格on-policy训练）"""
-        main_logger.info("清空经验缓冲区")
-        self.high_level_buffer.clear()
-        self.high_level_buffer_with_logprobs = []
-        self.low_level_buffer.clear()
+        main_logger.info("清空统一的经验缓冲区")
         # 注意：不清空 state_skill_dataset，因为它用于判别器训练
+        
+        # 清空统一的rollout缓冲区
+        self.rollout_buffer.reset()
         
         # 重置计数器和累积值
         self.current_high_level_reward_sum = 0.0
@@ -283,7 +290,8 @@ class HMASDAgent:
         if self.config.use_valuenorm:
             main_logger.debug("保持Value Normalization统计量不变，继续累积训练数据")
     
-    def select_action(self, observations, agent_skills=None, deterministic=False, env_id=0):
+    
+    def select_action(self, observations, agent_skills=None, deterministic=False, env_id=0, state=None):
         """
         为所有智能体选择动作
         
@@ -292,10 +300,12 @@ class HMASDAgent:
             agent_skills: 所有智能体的技能 [n_agents]，如果为None则使用当前技能
             deterministic: 是否使用确定性策略
             env_id: 环境ID，用于多环境并行训练
+            state: 全局状态 [state_dim]，用于价值估计
             
         返回:
             actions: 所有智能体的动作 [n_agents, action_dim]
             action_logprobs: 所有智能体的动作对数概率 [n_agents]
+            values: 所有智能体的价值估计 [n_agents] (新增返回值)
         """
         if agent_skills is None:
             agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
@@ -303,6 +313,7 @@ class HMASDAgent:
         n_agents = observations.shape[0]
         actions = torch.zeros((n_agents, self.config.action_dim), device=self.device)
         action_logprobs = torch.zeros(n_agents, device=self.device)
+        values = torch.zeros(n_agents, device=self.device)  # 新增返回值
         
         # 初始化或获取环境特定的GRU隐藏状态
         if env_id not in self.env_hidden_states or self.env_hidden_states[env_id] is None:
@@ -312,6 +323,17 @@ class HMASDAgent:
             self.skill_discoverer.actor_hidden = self.env_hidden_states[env_id]
         
         with torch.no_grad():
+            # 获取当前团队技能用于价值估计
+            current_team_skill = self.env_team_skills.get(env_id, self.current_team_skill)
+            if current_team_skill is not None and state is not None:
+                # 使用真实的全局状态计算价值估计（用于所有智能体）
+                global_state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
+                team_skill_tensor = torch.tensor(current_team_skill, device=self.device).unsqueeze(0)
+                global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
+                global_value_scalar = global_value.squeeze().item()
+            else:
+                global_value_scalar = 0.0
+            
             for i in range(n_agents):
                 obs = torch.FloatTensor(observations[i]).unsqueeze(0).to(self.device)
                 skill = torch.tensor(agent_skills[i], device=self.device)
@@ -320,11 +342,15 @@ class HMASDAgent:
                 
                 actions[i] = action.squeeze(0)
                 action_logprobs[i] = action_logprob.squeeze(0)
+                values[i] = global_value_scalar  # 所有智能体使用相同的全局价值估计
         
         # 保存更新后的GRU隐藏状态
         self.env_hidden_states[env_id] = self.skill_discoverer.actor_hidden
+        # 确保隐藏状态是二维张量，去掉多余的维度
+        if self.env_hidden_states[env_id].dim() > 2:
+            self.env_hidden_states[env_id] = self.env_hidden_states[env_id].squeeze(0)
         
-        return actions.cpu().numpy(), action_logprobs.cpu().numpy()
+        return actions.cpu().numpy(), action_logprobs.cpu().numpy(), values.cpu().numpy()
     
     def reset_value_norm(self):
         """显式重置Value Normalization统计量"""
@@ -464,13 +490,14 @@ class HMASDAgent:
             skill_changed = False
             main_logger.debug(f"环境{env_id}技能未更新: timer增加到{self.env_timers[env_id]}")
             
-        # 选择动作，使用环境特定的技能
-        actions, action_logprobs = self.select_action(observations, self.env_agent_skills[env_id], deterministic, env_id)
+        # 选择动作，使用环境特定的技能，并传递真实的全局状态
+        actions, action_logprobs, values = self.select_action(observations, self.env_agent_skills[env_id], deterministic, env_id, state)
         
         info = {
             'team_skill': self.env_team_skills[env_id],
             'agent_skills': self.env_agent_skills[env_id],
             'action_logprobs': action_logprobs,
+            'values': values,  # 将values也放入info，方便传递
             'skill_changed': skill_changed,
             'skill_timer': self.env_timers[env_id],
             'log_probs': self.env_log_probs[env_id],
@@ -481,11 +508,283 @@ class HMASDAgent:
     
 
     
+    def store_rollout_step(self, t, state, observations, actions, rewards, dones, values, log_probs, 
+                          gru_hidden_states, env_id, team_skill=None, agent_skills=None, 
+                          buffer_type='discoverer', reward_components=None):
+        """
+        将一个时间步的所有智能体数据存储到统一rollout缓冲区
+        
+        参数:
+            t: 时间步索引
+            state: 全局状态 [state_dim]
+            observations: 所有智能体观测 [n_agents, obs_dim]
+            actions: 所有智能体动作 [n_agents, action_dim]
+            rewards: 奖励数据 [n_agents] 或单个值
+            dones: 完成标志 [n_agents] 或单个值
+            values: 价值估计 [n_agents]
+            log_probs: 对数概率 [n_agents]
+            gru_hidden_states: GRU隐状态 [n_agents, hidden_size]
+            env_id: 环境索引
+            team_skill: 团队技能索引
+            agent_skills: 个体技能索引 [n_agents]
+            buffer_type: 'coordinator' 或 'discoverer' （已适配统一缓冲区）
+            reward_components: 包含奖励组成的字典 (新增)
+        """
+        # 现在所有数据都存储到统一的rollout缓冲区
+        # buffer_type参数主要用于标识数据类型和日志记录
+        
+        # 存储数据到统一rollout缓冲区，传递时间步索引 t 和 state
+        self.rollout_buffer.add(
+            t=t,
+            state=state,
+            obs=observations,
+            action=actions,
+            reward=rewards,
+            done=dones,
+            value=values,
+            log_prob=log_probs,
+            gru_hidden_state=gru_hidden_states.cpu(),
+            env_idx=env_id,
+            team_skill=team_skill,
+            agent_skills=agent_skills,
+            reward_components=reward_components
+        )
+        
+        main_logger.debug(f"数据已存储到统一rollout缓冲区（{buffer_type}类型），环境{env_id}，"
+                         f"时间步: {t}")
+
+
+    def _store_discoverer_experience(self, next_state, observations, actions, rewards, dones, values, 
+                                   action_logprobs, team_skill, agent_skills, env_id, potential_reward):
+        """
+        存储低层策略经验到discoverer rollout缓冲区
+        
+        参数:
+            next_state: 下一全局状态 [state_dim]
+            observations: 所有智能体的观测 [n_agents, obs_dim]
+            actions: 所有智能体的动作 [n_agents, action_dim]
+            rewards: 环境奖励（标量）
+            dones: 是否结束 [n_agents]
+            values: 价值估计 [n_agents]
+            action_logprobs: 动作对数概率 [n_agents]
+            team_skill: 团队技能索引
+            agent_skills: 个体技能索引列表 [n_agents]
+            env_id: 环境ID
+            potential_reward: 基于信念地图的探索奖励
+        """
+        if values is None:
+            return
+        
+        n_agents = len(agent_skills)
+        
+        # 准备内在奖励数组
+        intrinsic_rewards_array = np.zeros(n_agents)
+        env_rewards_array = np.zeros(n_agents)
+        team_disc_rewards_array = np.zeros(n_agents)
+        ind_disc_rewards_array = np.zeros(n_agents)
+        
+        for i in range(n_agents):
+            # 使用统一的内在奖励计算函数
+            intrinsic_reward, env_comp, team_disc_comp, ind_disc_comp = self._compute_intrinsic_reward(
+                next_state, rewards, observations[i], team_skill, agent_skills[i]
+            )
+            
+            # 添加探索奖励组件
+            exploration_component = self.config.potential_reward_weight * potential_reward if hasattr(self.config, 'potential_reward_weight') else 0.0
+            final_intrinsic_reward = intrinsic_reward + exploration_component
+            intrinsic_rewards_array[i] = np.clip(final_intrinsic_reward, -10.0, 10.0)
+            
+            # 存储奖励组成
+            env_rewards_array[i] = env_comp
+            team_disc_rewards_array[i] = team_disc_comp
+            ind_disc_rewards_array[i] = ind_disc_comp
+            
+        # 准备奖励组成字典
+        reward_components = {
+            'env': env_rewards_array,
+            'team_disc': team_disc_rewards_array,
+            'ind_disc': ind_disc_rewards_array
+        }
+        
+        # 获取或创建环境特定的GRU隐藏状态
+        if env_id in self.env_hidden_states and self.env_hidden_states[env_id] is not None:
+            # 确保隐藏状态是二维张量，去掉多余的维度
+            hidden_state = self.env_hidden_states[env_id]
+            if hidden_state.dim() > 2:
+                hidden_state = hidden_state.squeeze(0)
+            gru_hidden_states = hidden_state.expand(n_agents, -1)  # [n_agents, hidden_size]
+        else:
+            gru_hidden_size = getattr(self.config, 'gru_hidden_size', 128)
+            gru_hidden_states = torch.zeros(n_agents, gru_hidden_size, device=self.device)
+        
+        # 一次性存储所有智能体的数据到discoverer rollout缓冲区
+        # 注意：这里需要一个时间步索引，我们需要从外部传入或者维护一个全局计数器
+        # 暂时使用全局步数的模取rollout长度作为时间步索引
+        t = self.global_step % self.rollout_buffer.num_steps
+        self.store_rollout_step(
+            t=t,
+            state=next_state,
+            observations=observations,
+            actions=actions,
+            rewards=intrinsic_rewards_array,
+            dones=dones,
+            values=values,
+            log_probs=action_logprobs,
+            gru_hidden_states=gru_hidden_states,
+            env_id=env_id,
+            team_skill=team_skill,
+            agent_skills=agent_skills,
+            buffer_type='discoverer',
+            reward_components=reward_components
+        )
+
+    def _store_coordinator_experience(self, state, observations, env_id, team_skill, agent_skills, 
+                                    log_probs, dones, skill_timer, steps_since_contribution, force_collection):
+        """
+        判断并存储高层策略经验到coordinator rollout缓冲区
+        
+        参数:
+            state: 全局状态 [state_dim]
+            observations: 所有智能体的观测 [n_agents, obs_dim]
+            env_id: 环境ID
+            team_skill: 团队技能索引
+            agent_skills: 个体技能索引列表 [n_agents]
+            log_probs: 技能的log probabilities字典
+            dones: 是否结束
+            skill_timer: 当前技能计时器值
+            steps_since_contribution: 距离上次贡献的步数
+            force_collection: 是否强制收集
+            
+        返回:
+            bool: 是否成功存储了高层经验
+        """
+        # 判断是否应该存储高层经验
+        should_store_high_level = (skill_timer == self.config.k - 1) or dones or force_collection
+        
+        if not should_store_high_level:
+            return False
+        
+        # 获取当前环境的累积奖励
+        env_accumulated_reward = self.env_reward_sums.get(env_id, 0.0)
+        
+        # 确定存储原因
+        reason = "未知原因"
+        if skill_timer == self.config.k - 1:
+            reason = "技能周期结束"
+            main_logger.debug(f"环境ID={env_id}技能周期结束: 累积奖励={env_accumulated_reward:.4f}, "
+                           f"离上次贡献={steps_since_contribution}步, k={self.config.k}")
+        elif dones:
+            reason = "环境终止"
+            main_logger.info(f"Episode结束 - 环境ID: {env_id}, "
+                           f"总奖励: {env_accumulated_reward:.4f}, "
+                           f"技能计时器: {skill_timer}, "
+                           f"团队技能: {team_skill}, "
+                           f"个体技能: {agent_skills}")
+        elif force_collection:
+            reason = "强制收集"
+            main_logger.info(f"环境ID={env_id}强制收集: 累积奖励={env_accumulated_reward:.4f}, 技能计时器={skill_timer}")
+        
+        # 计算高层策略的价值估计
+        with torch.no_grad():
+            state_tensor_for_value = torch.FloatTensor(state).unsqueeze(0).to(self.device)
+            obs_tensor_for_value = torch.FloatTensor(observations).unsqueeze(0).to(self.device)
+            high_level_value, _, _ = self.skill_coordinator.get_value(state_tensor_for_value, obs_tensor_for_value)
+            high_level_value_np = high_level_value.squeeze().cpu().numpy()
+
+        # 计算联合log概率：team_log_prob + sum(agent_log_probs)
+        if log_probs:
+            total_log_prob = log_probs['team_log_prob'] + sum(log_probs['agent_log_probs'])
+            high_level_log_probs = np.array([total_log_prob])
+        else:
+            high_level_log_probs = np.array([0.0])
+        
+        # 存储高层策略经验
+        # 需要传递时间步索引 t
+        t = self.global_step % self.rollout_buffer.num_steps
+        self.store_rollout_step(
+            t=t,
+            state=state,
+            observations=observations,  # 所有智能体观测
+            actions=np.array(agent_skills).reshape(-1, 1),  # 个体技能作为"动作"
+            rewards=env_accumulated_reward,  # k步累积奖励
+            dones=dones,
+            values=high_level_value_np,  # 使用真实的价值估计
+            log_probs=high_level_log_probs,  # 使用联合log概率
+            gru_hidden_states=torch.zeros(self.config.n_agents, getattr(self.config, 'gru_hidden_size', 128), device=self.device),
+            env_id=env_id,
+            team_skill=team_skill,
+            agent_skills=agent_skills,
+            buffer_type='coordinator'
+        )
+
+        # ==================== 修复高层数据缺失问题 ====================
+        # 在存储高层经验后，必须将对应的掩码位置设为True
+        self.rollout_buffer.high_level_valid_mask[t, env_id] = True
+        main_logger.debug(f"高层经验有效性掩码已设置: t={t}, env_id={env_id}")
+        # ================================================================
+    
+        # 更新统计信息
+        self.high_level_samples_total += 1
+        self.high_level_samples_by_env[env_id] = self.high_level_samples_by_env.get(env_id, 0) + 1
+        self.high_level_samples_by_reason[reason] = self.high_level_samples_by_reason.get(reason, 0) + 1
+        
+        # 更新环境最后贡献时间
+        self.env_last_contribution[env_id] = self.global_step
+        
+        # 重置强制收集标志
+        if force_collection:
+            self.force_high_level_collection[env_id] = False
+        
+        # 定期记录统计信息
+        if self.high_level_samples_total % 5 == 0:
+            main_logger.debug(f"高层经验统计 - 总样本: {self.high_level_samples_total}, 环境贡献: {self.high_level_samples_by_env}, 原因统计: {self.high_level_samples_by_reason}")
+            
+            # 记录到TensorBoard
+            if hasattr(self, 'writer'):
+                self.writer.add_scalar('Buffer/high_level_samples_total', self.high_level_samples_total, self.global_step)
+                # 记录各环境的样本贡献比例
+                for e_id, count in self.high_level_samples_by_env.items():
+                    self.writer.add_scalar(f'Buffer/env_{e_id}_contribution', count, self.global_step)
+    
+        # 记录详细日志
+        current_buffer_pos = self.global_step % self.rollout_buffer.num_steps
+        main_logger.debug(f"高层经验添加状态：环境ID={env_id}, step={self.global_step}, "
+                       f"统一rollout缓冲区当前大小: {current_buffer_pos}, 此环境累积奖励: {env_accumulated_reward:.4f}, "
+                       f"原因：{reason}")
+        
+        # 重置该环境的奖励累积和计时器
+        self.env_reward_sums[env_id] = 0.0
+        self.env_timers[env_id] = 0
+        
+        return True
+
+    def _store_discriminator_data(self, next_state, team_skill, next_observations, agent_skills):
+        """
+        存储技能判别器训练数据
+        
+        参数:
+            next_state: 下一全局状态 [state_dim]
+            team_skill: 团队技能索引
+            next_observations: 所有智能体的下一观测 [n_agents, obs_dim]
+            agent_skills: 个体技能索引列表 [n_agents]
+        """
+        next_state_tensor = torch.FloatTensor(next_state).to(self.device)
+        team_skill_tensor = torch.tensor(team_skill, device=self.device)
+        observations_tensor = torch.FloatTensor(next_observations).to(self.device)
+        agent_skills_tensor = torch.tensor(agent_skills, device=self.device)
+        
+        self.state_skill_dataset.push(
+            next_state_tensor,
+            team_skill_tensor,
+            observations_tensor,
+            agent_skills_tensor
+        )
+
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
-                         skill_timer_for_env=None, env_id=0, potential_reward=0.0):
+                         skill_timer_for_env=None, env_id=0, potential_reward=0.0, values=None):
         """
-        存储环境交互经验
+        存储环境交互经验（重构后的简化版本）
         
         参数:
             state: 全局状态 [state_dim]
@@ -502,949 +801,500 @@ class HMASDAgent:
             skill_timer_for_env: 当前环境的技能计时器值，用于多环境并行训练
             env_id: 环境ID，用于多环境并行训练
             potential_reward: 基于信念地图的探索奖励，用于低层策略
+            values: 价值估计 [n_agents]（新增参数，用于rollout存储）
         """
-        n_agents = len(agent_skills)
-        state_tensor = torch.FloatTensor(state).to(self.device)
-        next_state_tensor = torch.FloatTensor(next_state).to(self.device)
-        team_skill_tensor = torch.tensor(team_skill, device=self.device)
-        
-        # 累加当前步的团队奖励
         # 确保rewards是数值类型
         current_reward = rewards if isinstance(rewards, (int, float)) else rewards.item()
         
-        # 使用环境ID为键创建或更新环境特定的奖励累积
+        # 更新环境特定的奖励累积
         if env_id not in self.env_reward_sums:
             self.env_reward_sums[env_id] = 0.0
-        
         self.env_reward_sums[env_id] += current_reward
         
-        # 记录高层奖励累积情况（增加total_step和skill_timer信息）
+        # 记录调试信息
         main_logger.debug(f"store_transition: 环境ID={env_id}, step={self.global_step}, skill_timer={skill_timer_for_env}, "
                           f"当前步奖励={current_reward:.4f}, 此环境累积高层奖励={self.env_reward_sums[env_id]:.4f}")
         
-        # 计算团队技能判别器输出
+        # 1. 存储低层策略经验
+        self._store_discoverer_experience(
+            next_state, observations, actions, current_reward, dones, values, 
+            action_logprobs, team_skill, agent_skills, env_id, potential_reward
+        )
+        
+        # 2. 存储技能判别器训练数据
+        self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)
+        
+        # 3. 处理高层策略经验存储
+        # 初始化环境状态（如果需要）
+        if env_id not in self.env_timers:
+            self.env_timers[env_id] = 0
+        if env_id not in self.env_last_contribution:
+            self.env_last_contribution[env_id] = 0
+        if env_id not in self.env_reward_thresholds:
+            self.env_reward_thresholds[env_id] = 0.0
+        
+        # 获取技能计时器值
+        skill_timer = skill_timer_for_env if skill_timer_for_env is not None else self.env_timers[env_id]
+        
+        # 判断是否需要强制收集高层样本
+        steps_since_contribution = self.global_step - self.env_last_contribution.get(env_id, 0)
+        force_collection = self.force_high_level_collection.get(env_id, False)
+        
+        # 对长时间未贡献的环境强制收集
+        if steps_since_contribution > self.config.force_collection_threshold:
+            self.force_high_level_collection[env_id] = True
+            if steps_since_contribution % self.config.force_collection_threshold == 0:  # 避免日志过多
+                main_logger.info(f"环境ID={env_id}已{steps_since_contribution}步未贡献高层样本，将强制收集")
+        
+        # 存储高层策略经验（如果满足条件）
+        self._store_coordinator_experience(
+            state, observations, env_id, team_skill, agent_skills, 
+            log_probs, dones, skill_timer, steps_since_contribution, force_collection
+        )
+    
+    def _check_and_fix_tensor_anomalies(self, tensor, name, nan_replacement=0.0, inf_replacement=10.0):
+        """
+        检查并修复张量中的NaN或Inf值（提取为可重用函数以减少代码重复）
+        
+        参数:
+            tensor: 需要检查的张量
+            name: 张量名称（用于日志）
+            nan_replacement: NaN值的替换值
+            inf_replacement: Inf值的替换值（正数）
+            
+        返回:
+            fixed_tensor: 修复后的张量
+            has_anomalies: 是否发现异常值
+        """
+        has_nan = torch.isnan(tensor).any().item()
+        has_inf = torch.isinf(tensor).any().item()
+        
+        if has_nan or has_inf:
+            main_logger.error(f"{name}中存在NaN或Inf: NaN={has_nan}, Inf={has_inf}")
+            fixed_tensor = torch.nan_to_num(tensor, nan=nan_replacement, 
+                                          posinf=inf_replacement, neginf=-inf_replacement)
+            main_logger.info(f"已将{name}中的NaN/Inf值替换为有限值")
+            return fixed_tensor, True
+        
+        return tensor, False
+
+    def _compute_intrinsic_reward(self, next_state, reward, next_obs, team_skill, agent_skill):
+        """
+        计算单个智能体的内在奖励（提取为独立函数以减少代码重复）
+        
+        参数:
+            next_state: 下一全局状态
+            reward: 环境奖励
+            next_obs: 智能体的下一观测
+            team_skill: 团队技能索引
+            agent_skill: 智能体技能索引
+            
+        返回:
+            intrinsic_reward: 内在奖励值
+            env_component: 环境奖励组件
+            team_disc_component: 团队判别器奖励组件
+            ind_disc_component: 个体判别器奖励组件
+        """
         with torch.no_grad():
-            team_disc_logits = self.team_discriminator(next_state_tensor.unsqueeze(0))
+            # 计算团队技能判别器奖励
+            next_state_tensor = torch.FloatTensor(next_state).unsqueeze(0).to(self.device)
+            team_disc_logits = self.team_discriminator(next_state_tensor)
             team_disc_log_probs = F.log_softmax(team_disc_logits, dim=-1)
             team_skill_log_prob = team_disc_log_probs[0, team_skill]
-        
-        # 为每个智能体存储低层经验
-        for i in range(n_agents):
-            obs = torch.FloatTensor(observations[i]).to(self.device)
-            next_obs = torch.FloatTensor(next_observations[i]).to(self.device)
-            action = torch.FloatTensor(actions[i]).to(self.device)
-            done = dones[i] if isinstance(dones, list) else dones
             
-            # 计算个体技能判别器输出
-            with torch.no_grad():
-                agent_disc_logits = self.individual_discriminator(
-                    next_obs.unsqueeze(0), 
-                    team_skill_tensor
-                )
-                agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
-                agent_skill_log_prob = agent_disc_log_probs[0, agent_skills[i]]
-                
-            # 计算动态权重（权重退火机制）
+            # 计算个体技能判别器奖励
+            agent_obs_tensor = torch.FloatTensor(next_obs).unsqueeze(0).to(self.device)
+            team_skill_tensor = torch.tensor(team_skill, device=self.device)
+            agent_disc_logits = self.individual_discriminator(agent_obs_tensor, team_skill_tensor)
+            agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
+            agent_skill_log_prob = agent_disc_log_probs[0, agent_skill]
+            
+            # 计算动态权重
             if self.use_reward_annealing:
-                # 计算退火进度 (0.0 到 1.0)
                 progress = min(self.global_step / self.anneal_steps, 1.0)
-                
-                # 根据退火计划计算当前权重
                 if self.anneal_schedule == 'cosine':
-                    # 余弦退火：前期变化慢，后期变化快
                     progress_adjusted = 0.5 * (1 - np.cos(np.pi * progress))
                 else:
-                    # 线性退火
                     progress_adjusted = progress
                 
-                # 线性插值计算当前权重倍数
                 w_intrinsic_current = self.w_intrinsic_initial + (self.w_intrinsic_final - self.w_intrinsic_initial) * progress_adjusted
                 w_extrinsic_current = self.w_extrinsic_initial + (self.w_extrinsic_final - self.w_extrinsic_initial) * progress_adjusted
                 
-                # 应用动态权重到各个奖励组件
-                env_reward_component = self.config.lambda_e * w_extrinsic_current * current_reward
+                env_component = self.config.lambda_e * w_extrinsic_current * reward
                 team_disc_component = self.config.lambda_D * w_intrinsic_current * team_skill_log_prob.item()
                 ind_disc_component = self.config.lambda_d * w_intrinsic_current * agent_skill_log_prob.item()
-                
-                # 记录当前权重到日志（每1000步记录一次以避免日志过多）
-                if self.global_step % 1000 == 0:
-                    main_logger.debug(f"权重退火进度: {progress:.3f} ({self.global_step}/{self.anneal_steps}), "
-                                   f"内在权重倍数: {w_intrinsic_current:.3f}, "
-                                   f"外部权重倍数: {w_extrinsic_current:.3f}")
             else:
-                # 使用固定权重（原始方式）
-                env_reward_component = self.config.lambda_e * current_reward
+                env_component = self.config.lambda_e * reward
                 team_disc_component = self.config.lambda_D * team_skill_log_prob.item()
                 ind_disc_component = self.config.lambda_d * agent_skill_log_prob.item()
-                w_intrinsic_current = 1.0
-                w_extrinsic_current = 1.0
             
-            # 添加基于信念地图的探索奖励到内在奖励中
-            # 这个探索奖励主要用于指导低层策略的探索行为
-            exploration_component = self.config.potential_reward_weight * potential_reward if hasattr(self.config, 'potential_reward_weight') else 0.0
-            
-            intrinsic_reward = env_reward_component + team_disc_component + ind_disc_component + exploration_component
-            
-            # 新增：对总内在奖励进行裁剪，以稳定训练
-            # 这防止了因奖励值过大导致的损失爆炸问题
+            intrinsic_reward = env_component + team_disc_component + ind_disc_component
             intrinsic_reward = np.clip(intrinsic_reward, -10.0, 10.0)
             
-            # 存储低层经验
-            low_level_experience = (
-                state_tensor,                           # 全局状态s
-                team_skill_tensor,                      # 团队技能Z
-                obs,                                    # 智能体观测o_i
-                torch.tensor(agent_skills[i], device=self.device),  # 个体技能z_i
-                action,                                 # 动作a_i
-                torch.tensor(intrinsic_reward, device=self.device),  # 总内在奖励r_i
-                torch.tensor(done, dtype=torch.float, device=self.device),  # 是否结束
-                torch.tensor(action_logprobs[i], device=self.device),  # 动作对数概率
-                torch.tensor(env_reward_component, device=self.device), # 环境奖励部分
-                torch.tensor(team_disc_component, device=self.device),  # 团队判别器部分
-                torch.tensor(ind_disc_component, device=self.device)   # 个体判别器部分
-            )
-            self.low_level_buffer.push(low_level_experience)
-            
-        # 存储技能判别器训练数据
-        observations_tensor = torch.FloatTensor(next_observations).to(self.device)
-        agent_skills_tensor = torch.tensor(agent_skills, device=self.device)
-        self.state_skill_dataset.push(
-            next_state_tensor,
-            team_skill_tensor,
-            observations_tensor,
-            agent_skills_tensor
-        )
-        
-        # 获取或初始化当前环境的技能计时器
-        if env_id not in self.env_timers:
-            self.env_timers[env_id] = 0
-        
-        # 优先使用传入的技能计时器值，如果没有则使用环境专用计时器
-        skill_timer = skill_timer_for_env if skill_timer_for_env is not None else self.env_timers[env_id]
-        
-        # 记录当前技能计时器状态
-        main_logger.debug(f"store_transition: 环境ID={env_id}, skill_timer={skill_timer}, k={self.config.k}, 条件判断={skill_timer == self.config.k - 1}")
-        
-        # 获取或初始化环境的最后贡献时间
-        if env_id not in self.env_last_contribution:
-            self.env_last_contribution[env_id] = 0
-        
-        # 获取或初始化环境特定的奖励阈值
-        if env_id not in self.env_reward_thresholds:
-            self.env_reward_thresholds[env_id] = 0.0  # 将默认阈值设为0，确保始终能存储高层经验
-        
-        # 判断该环境是否需要强制收集高层样本
-        force_collection = self.force_high_level_collection.get(env_id, False)
-        
-        # 简化逻辑：取消所有奖励阈值，确保始终收集高层样本
-        self.env_reward_thresholds[env_id] = 0.0
-        
-        # 对长时间未贡献的环境强制收集
-        steps_since_contribution = self.global_step - self.env_last_contribution.get(env_id, 0)
-        if steps_since_contribution > 500:  # 降低检查间隔至500步
-            self.force_high_level_collection[env_id] = True
-            if steps_since_contribution % 500 == 0:  # 避免日志过多
-                main_logger.info(f"环境ID={env_id}已{steps_since_contribution}步未贡献高层样本，将强制收集")
-        
-        # 存储高层经验（每k步一次或者环境终止时）
-        # 简化存储条件：每当达到k-1步或环境终止或强制收集时，都存储高层经验
-        should_store_high_level = (skill_timer == self.config.k - 1) or dones or force_collection
-        
-        if should_store_high_level:
-            # 获取当前环境的累积奖励
-            env_accumulated_reward = self.env_reward_sums.get(env_id, 0.0)
-            
-            # 记录高层经验存储检查信息
-            reason = "未知原因"
-            if skill_timer == self.config.k - 1:
-                reason = "技能周期结束"
-                main_logger.debug(f"环境ID={env_id}技能周期结束: 累积奖励={env_accumulated_reward:.4f}, "
-                               f"离上次贡献={steps_since_contribution}步, k={self.config.k}")
-            elif dones:
-                reason = "环境终止"
-                # 记录episode结束信息，包含环境ID和详细信息
-                episode_info = {
-                    'env_id': env_id,
-                    'total_reward': env_accumulated_reward,
-                    'skill_timer': skill_timer,
-                    'team_skill': team_skill,
-                    'agent_skills': agent_skills
-                }
-                
-                # 从环境信息中提取额外的episode统计信息
-                if hasattr(next_state, '__len__') and len(next_state) > 0:
-                    episode_info['final_state_norm'] = float(torch.norm(torch.tensor(next_state)).item())
-                
-                # 记录episode结束的详细信息
-                main_logger.info(f"Episode结束 - 环境ID: {env_id}, "
-                               f"总奖励: {env_accumulated_reward:.4f}, "
-                               f"技能计时器: {skill_timer}, "
-                               f"团队技能: {team_skill}, "
-                               f"个体技能: {agent_skills}")
-            elif force_collection:
-                reason = "强制收集"
-                main_logger.info(f"环境ID={env_id}强制收集: 累积奖励={env_accumulated_reward:.4f}, 技能计时器={skill_timer}")
-            # 创建高层经验元组
-            high_level_experience = (
-                state_tensor,                  # 全局状态s
-                team_skill_tensor,             # 团队技能Z
-                observations_tensor,           # 所有智能体观测o
-                agent_skills_tensor,           # 所有个体技能z
-                torch.tensor(env_accumulated_reward, device=self.device) # 存储该环境的k步累积奖励
-            )
-            
-            # 存储高层经验
-            self.high_level_buffer.push(high_level_experience)
-        
-            # 无论buffer长度是否变化，都认为成功添加了一个样本
-            # 避免在buffer满时因为长度不变而误判为未添加样本
-            samples_added = 1
-            self.high_level_samples_total += samples_added
-            # 记录环境贡献
-            self.high_level_samples_by_env[env_id] = self.high_level_samples_by_env.get(env_id, 0) + 1
-            # 记录原因统计
-            self.high_level_samples_by_reason[reason] = self.high_level_samples_by_reason.get(reason, 0) + 1
-            
-            # 更新环境最后贡献时间
-            self.env_last_contribution[env_id] = self.global_step
-            
-            # 重置强制收集标志
-            if force_collection:
-                self.force_high_level_collection[env_id] = False
-            
-            # 每收集5个样本记录一次统计信息（从10改为5，增加反馈频率）
-            if self.high_level_samples_total % 5 == 0:
-                main_logger.debug(f"高层经验统计 - 总样本: {self.high_level_samples_total}, 环境贡献: {self.high_level_samples_by_env}, 原因统计: {self.high_level_samples_by_reason}")
-                
-                # 记录到TensorBoard
-                if hasattr(self, 'writer'):
-                    self.writer.add_scalar('Buffer/high_level_samples_total', self.high_level_samples_total, self.global_step)
-                    # 记录各环境的样本贡献比例
-                    for e_id, count in self.high_level_samples_by_env.items():
-                        self.writer.add_scalar(f'Buffer/env_{e_id}_contribution', count, self.global_step)
-        
-            # 增加日志以便跟踪高层经验添加状态
-            current_buffer_size = len(self.high_level_buffer)
-            main_logger.debug(f"高层经验添加状态：环境ID={env_id}, step={self.global_step}, "
-                           f"当前缓冲区大小: {current_buffer_size}, 此环境累积奖励: {env_accumulated_reward:.4f}, "
-                           f"原因：{reason}")
-            
-            # 将带有log probabilities的经验存储到专用缓冲区
-            if log_probs is not None:
-                self.high_level_buffer_with_logprobs.append({
-                    'state': state_tensor.clone(),
-                    'team_skill': team_skill,
-                    'observations': observations_tensor.clone(),
-                    'agent_skills': agent_skills_tensor.clone(),
-                    'reward': env_accumulated_reward,  # 使用环境特定的累积奖励
-                    'team_log_prob': log_probs['team_log_prob'],
-                    'agent_log_probs': log_probs['agent_log_probs']
-                })
-                
-                # 保持缓冲区大小不超过其配置的大小
-                buffer_capacity = self.config.high_level_buffer_size
-                if len(self.high_level_buffer_with_logprobs) > buffer_capacity:
-                    self.high_level_buffer_with_logprobs = self.high_level_buffer_with_logprobs[-buffer_capacity:]
-            
-            # 重置该环境的奖励累积
-            self.env_reward_sums[env_id] = 0.0
-            
-            # 重置该环境的技能计时器
-            self.env_timers[env_id] = 0
-            
-        # else:
-        #     # 如果不到技能周期结束时间，增加该环境的技能计时器，但确保不超过k-1
-        #     # if self.env_timers[env_id] < self.config.k - 1:
-        #     #     self.env_timers[env_id] += 1
-    
+            return intrinsic_reward, env_component, team_disc_component, ind_disc_component
+
     def update_coordinator(self):
-        """更新高层技能协调器网络"""
-        # 记录高层缓冲区状态
-        buffer_len = len(self.high_level_buffer)
-        required_batch_size = self.config.high_level_batch_size
-        main_logger.debug(f"高层缓冲区状态: {buffer_len}/{required_batch_size} (当前/所需)")
+        """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
+        # 这里需要传递实际的数据收集步数，而不是使用 self.rollout_buffer.ptr
+        # 我们使用一个简化的方法：假设缓冲区是满的或者使用配置中的rollout长度
+        num_steps = getattr(self.config, 'rollout_length', 2048)
         
-        if buffer_len < required_batch_size:
-            # 如果缓冲区不足，使用计数器减少警告日志频率
-            # 只有当缓冲区大小变化或者每10次更新才记录一次警告
-            if buffer_len != self.last_high_level_buffer_size or self.high_level_buffer_warning_counter % 10 == 0:
-                main_logger.warning(f"高层缓冲区样本不足，需要{required_batch_size}个样本，但只有{buffer_len}个。跳过更新。")
-            else:
-                main_logger.debug(f"高层缓冲区样本不足，需要{required_batch_size}个样本，但只有{buffer_len}个。跳过更新。")
-            
-            # 更新计数器和上次缓冲区大小
-            self.high_level_buffer_warning_counter += 1
-            self.last_high_level_buffer_size = buffer_len
-            
-            # 保持与函数正常返回值相同数量的元素
+        # 检查是否有有效的高层数据
+        high_level_data_count = np.sum(self.rollout_buffer.high_level_valid_mask[:num_steps])
+        if high_level_data_count == 0:
+            main_logger.warning("没有有效的高层策略数据，跳过Coordinator更新")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
         
-        # 缓冲区已满，继续更新
-        main_logger.debug(f"高层缓冲区满足更新条件，从{buffer_len}个样本中采样{required_batch_size}个")
+        main_logger.info(f"开始使用统一缓冲区更新Coordinator，有效高层数据: {high_level_data_count}个")
+        
+        # 计算高层策略的GAE，传递实际使用的步数
+        self.rollout_buffer.compute_high_level_advantages(num_steps=num_steps)
+        
+        # 累积损失统计
+        total_policy_loss = 0.0
+        total_value_loss = 0.0
+        total_entropy_loss = 0.0
+        total_loss = 0.0
+        total_cd_loss = 0.0
+        total_team_entropy = 0.0
+        total_agent_entropy = 0.0
+        update_count = 0
+        
+        # 【关键修改】使用标准的batch_size而不是序列长度
+        coordinator_batch_size = getattr(self.config, 'coordinator_batch_size', 128)
+        
+        # 【修复】使用专门的Coordinator采样器进行标准PPO更新
+        high_level_sampler = self.rollout_buffer.get_coordinator_sampler(
+            num_steps,
+            getattr(self.config, 'ppo_epochs', 10), 
+            coordinator_batch_size
+        )
+        
+        if high_level_sampler is None:
+            main_logger.error("无法从统一rollout缓冲区获取Coordinator采样器")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+        
+        main_logger.info(f"Coordinator 标准PPO训练配置: {getattr(self.config, 'ppo_epochs', 10)}个epoch, "
+                        f"每批{coordinator_batch_size}个样本")
+        
+        for batch in high_level_sampler:
+            # 提取离散批次数据（注意没有时间维度T）
+            observations_batch = batch['observations'].to(self.device)  # Shape: (B, n_agents, obs_dim)
+            states_batch = batch['states'].to(self.device)             # Shape: (B, state_dim)
+            team_skills_batch = batch['team_skills'].to(self.device)    # Shape: (B,)
+            agent_skills_batch = batch['agent_skills'].to(self.device) # Shape: (B, n_agents)
+            old_log_probs_batch = batch['log_probs'].to(self.device)    # Shape: (B,)
+            advantages_batch = batch['advantages'].to(self.device)      # Shape: (B,)
+            returns_batch = batch['returns'].to(self.device)           # Shape: (B,)
             
-        # 从缓冲区采样数据
-        batch = self.high_level_buffer.sample(self.config.high_level_batch_size)
-        states, team_skills, observations, agent_skills, rewards = zip(*batch)
-        
-        states = torch.stack(states)
-        team_skills = torch.stack(team_skills)
-        observations = torch.stack(observations)
-        agent_skills = torch.stack(agent_skills)
-        rewards = torch.stack(rewards) # rewards现在是累积的k步奖励r_h
-        
-        # 记录高层奖励的统计信息
-        reward_mean = rewards.mean().item()
-        reward_std = rewards.std().item()
-        reward_min = rewards.min().item()
-        reward_max = rewards.max().item()
-        main_logger.debug(f"高层奖励统计: 均值={reward_mean:.4f}, 标准差={reward_std:.4f}, 最小值={reward_min:.4f}, 最大值={reward_max:.4f}")
-        
-        # 获取当前状态价值
-        state_values, agent_values, cd_loss_critic = self.skill_coordinator.get_value(states, observations)
-        
-        # 由于我们假设每个高层经验都是一个k步序列的端点，
-        # 所以我们可以假设下一状态价值为0（或者可以从新的状态计算）
-        next_values = torch.zeros_like(state_values)
-        
-        # 【关键修复】在计算GAE之前，对价值网络输出进行反归一化
-        # 这确保了用于GAE计算的价值与原始尺度的奖励在同一数值尺度上
-        if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-            denormalized_state_values = self._denormalize_values(state_values, self.value_norm_coordinator)
-            denormalized_next_values = self._denormalize_values(next_values, self.value_norm_coordinator)
-            main_logger.debug(f"Coordinator GAE: 使用反归一化后的价值进行GAE计算")
-        else:
-            denormalized_state_values = state_values
-            denormalized_next_values = next_values
-        
-        # 在计算GAE之前详细记录奖励和价值的统计信息
-        rewards_mean = rewards.mean().item()
-        rewards_std = rewards.std().item()
-        rewards_min = rewards.min().item()
-        rewards_max = rewards.max().item()
-        denorm_values_mean = denormalized_state_values.mean().item()
-        denorm_values_std = denormalized_state_values.std().item()
-        denorm_values_min = denormalized_state_values.min().item()
-        denorm_values_max = denormalized_state_values.max().item()
-        
-        main_logger.debug(f"GAE输入统计:")
-        main_logger.debug(f"  rewards: 均值={rewards_mean:.4f}, 标准差={rewards_std:.4f}, 最小值={rewards_min:.4f}, 最大值={rewards_max:.4f}")
-        main_logger.debug(f"  denormalized_state_values: 均值={denorm_values_mean:.4f}, 标准差={denorm_values_std:.4f}, 最小值={denorm_values_min:.4f}, 最大值={denorm_values_max:.4f}")
-        
-        # 检查是否有异常值
-        rewards_has_nan = torch.isnan(rewards).any().item()
-        rewards_has_inf = torch.isinf(rewards).any().item()
-        values_has_nan = torch.isnan(denormalized_state_values).any().item()
-        values_has_inf = torch.isinf(denormalized_state_values).any().item()
-        
-        if rewards_has_nan or rewards_has_inf:
-            main_logger.error(f"奖励中存在NaN或Inf: NaN={rewards_has_nan}, Inf={rewards_has_inf}")
-            # 尝试修复NaN/Inf值，以避免整个训练中断
-            rewards = torch.nan_to_num(rewards, nan=0.0, posinf=10.0, neginf=-10.0)
-            main_logger.info("已将奖励中的NaN/Inf值替换为有限值")
-        
-        if values_has_nan or values_has_inf:
-            main_logger.error(f"反归一化状态价值中存在NaN或Inf: NaN={values_has_nan}, Inf={values_has_inf}")
-            # 尝试修复NaN/Inf值
-            denormalized_state_values = torch.nan_to_num(denormalized_state_values, nan=0.0, posinf=10.0, neginf=-10.0)
-            denormalized_next_values = torch.nan_to_num(denormalized_next_values, nan=0.0, posinf=10.0, neginf=-10.0)
-            main_logger.info("已将反归一化状态价值中的NaN/Inf值替换为有限值")
-        
-        # 计算GAE - 使用反归一化后的价值
-        dones = torch.zeros_like(rewards)  # 假设高层经验不包含终止信息
-        # 确保传递给compute_gae的values是1D，使用clone避免原地操作
-        try:
-            advantages, returns = compute_gae(rewards.clone(), denormalized_state_values.squeeze(-1).clone(), 
-                                            denormalized_next_values.squeeze(-1).clone(), dones.clone(), 
-                                            self.config.gamma, self.config.gae_lambda)
-            # advantages 和 returns 都是 [batch_size]，分离计算图
-            advantages = advantages.detach()
-            returns = returns.detach()
+            # --- 核心改动：不使用 evaluate_sequence，而是直接调用 forward 和 get_value ---
+            # 1. 重新评估当前策略下的 log_probs 和 entropy
+            _, _, Z_logits, z_logits_list, _, _ = self.skill_coordinator(states_batch, observations_batch)
             
-            # The GAE returns (V_target) will be normalized later, right before the value loss calculation.
-            # This avoids incorrect double normalization and ensures consistency.
-            main_logger.debug(f"GAE returns (unnormalized): 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
-            
-            # 检查 advantages 和 returns 的统计信息
-            adv_mean = advantages.mean().item()
-            adv_std = advantages.std().item()
-            adv_min = advantages.min().item()
-            adv_max = advantages.max().item()
-            ret_mean = returns.mean().item()
-            ret_std = returns.std().item()
-            ret_min = returns.min().item()
-            ret_max = returns.max().item()
-            
-            main_logger.debug(f"GAE输出统计:")
-            main_logger.debug(f"  Advantages: 均值={adv_mean:.4f}, 标准差={adv_std:.4f}, 最小值={adv_min:.4f}, 最大值={adv_max:.4f}")
-            main_logger.debug(f"  Returns: 均值={ret_mean:.4f}, 标准差={ret_std:.4f}, 最小值={ret_min:.4f}, 最大值={ret_max:.4f}")
-            
-            # 检查GAE输出是否有异常值
-            adv_has_nan = torch.isnan(advantages).any().item()
-            adv_has_inf = torch.isinf(advantages).any().item()
-            ret_has_nan = torch.isnan(returns).any().item()
-            ret_has_inf = torch.isinf(returns).any().item()
-            
-            if adv_has_nan or adv_has_inf:
-                main_logger.error(f"advantages中存在NaN或Inf: NaN={adv_has_nan}, Inf={adv_has_inf}")
-                # 尝试修复NaN/Inf值
-                advantages = torch.nan_to_num(advantages, nan=0.0, posinf=10.0, neginf=-10.0)
-                main_logger.info("已将advantages中的NaN/Inf值替换为有限值")
-            
-            if ret_has_nan or ret_has_inf:
-                main_logger.error(f"returns中存在NaN或Inf: NaN={ret_has_nan}, Inf={ret_has_inf}")
-                # 尝试修复NaN/Inf值
-                returns = torch.nan_to_num(returns, nan=0.0, posinf=10.0, neginf=-10.0)
-                main_logger.info("已将returns中的NaN/Inf值替换为有限值")
-                
-            # 归一化advantages，有助于稳定训练
-            if adv_std > 0:
-                advantages = (advantages - adv_mean) / (adv_std + 1e-8)
-                main_logger.debug("已对advantages进行归一化处理")
-                
-        except Exception as e:
-            main_logger.error(f"计算GAE时发生错误: {e}")
-            # 使用安全的默认值
-            advantages = torch.zeros_like(rewards)
-            returns = rewards.clone()  # 在缺乏更好选择的情况下，使用原始奖励作为返回值
-            main_logger.info("由于GAE计算失败，使用安全的默认值作为替代")
-        
-        # 获取当前策略
-        try:
-            Z, z, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(states, observations)
-            
-            # 在使用logits前检查是否有异常值
-            Z_logits_has_nan = torch.isnan(Z_logits).any().item()
-            Z_logits_has_inf = torch.isinf(Z_logits).any().item()
-            
-            if Z_logits_has_nan or Z_logits_has_inf:
-                main_logger.error(f"Z_logits中存在NaN或Inf: NaN={Z_logits_has_nan}, Inf={Z_logits_has_inf}")
-                # 尝试修复NaN/Inf值
-                Z_logits = torch.nan_to_num(Z_logits, nan=0.0, posinf=10.0, neginf=-10.0)
-                main_logger.info("已将Z_logits中的NaN/Inf值替换为有限值")
-            
-            # 重新计算团队技能概率分布
-            team_skills_detached = team_skills.clone().detach()  # 分离计算图，防止原地操作
             Z_dist = Categorical(logits=Z_logits)
-            Z_log_probs = Z_dist.log_prob(team_skills_detached)
-            Z_entropy = Z_dist.entropy().mean()
+            team_log_probs = Z_dist.log_prob(team_skills_batch)
+            team_entropy = Z_dist.entropy()
+
+            agent_log_probs = []
+            agent_entropies = []
+            for i in range(self.config.n_agents):
+                zi_dist = Categorical(logits=z_logits_list[i])
+                agent_log_probs.append(zi_dist.log_prob(agent_skills_batch[:, i]))
+                agent_entropies.append(zi_dist.entropy())
+                
+            agent_log_probs = torch.stack(agent_log_probs, dim=1).sum(dim=1)
+            agent_entropy = torch.stack(agent_entropies).mean()  # 或者 .sum()
+
+            # 计算联合log_prob和总熵
+            total_log_probs = team_log_probs + agent_log_probs
+            entropy = (team_entropy + agent_entropy).mean()
+
+            # 2. 获取当前策略下的价值估计
+            state_values, _, _ = self.skill_coordinator.get_value(states_batch, observations_batch)
+            values = state_values.squeeze(-1)  # Shape: (B,)
+
+            # 【核心改动】移除优势标准化，使用Value Normalization作为替代
+            # advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
             
-            # 记录团队技能熵的统计信息
-            main_logger.debug(f"团队技能熵: {Z_entropy.item():.4f}")
+            # --- 计算PPO损失 (标准的、非序列化的) ---
+            ratios = torch.exp(total_log_probs - old_log_probs_batch.detach())
+            surr1 = ratios * advantages_batch
+            surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_batch
+            policy_loss = -torch.min(surr1, surr2).mean()
             
-        except Exception as e:
-            main_logger.error(f"在计算策略分布时发生错误: {e}")
-            # 使用安全的默认值
-            batch_size = states.size(0)
-            Z = torch.zeros(batch_size, dtype=torch.long, device=self.device)
-            z = torch.zeros(batch_size, self.config.n_agents, dtype=torch.long, device=self.device)
-            Z_logits = torch.zeros((batch_size, self.config.n_Z), device=self.device)
-            z_logits = [torch.zeros((batch_size, self.config.n_z), device=self.device) for _ in range(self.config.n_agents)]
-            Z_log_probs = torch.zeros(batch_size, device=self.device)
-            Z_entropy = torch.tensor(0.0, device=self.device)
-            main_logger.info("由于错误，使用安全的默认值进行计算")
-        
-        # 检查是否有带log probabilities的高层经验
-        use_stored_logprobs = len(self.high_level_buffer_with_logprobs) >= self.config.high_level_batch_size
-        
-        try:
-            # 计算高层策略损失
-            if use_stored_logprobs:
-                # 使用存储的log probabilities计算更准确的PPO ratio
-                
-                # 从带log probabilities的缓冲区中随机选择样本
-                indices = torch.randperm(len(self.high_level_buffer_with_logprobs))[:self.config.high_level_batch_size]
-                old_team_log_probs = [self.high_level_buffer_with_logprobs[i]['team_log_prob'] for i in indices]
-                old_team_log_probs_tensor = torch.tensor(old_team_log_probs, device=self.device).detach()  # 使用detach()防止求导错误
-                
-                # 检查old_team_log_probs_tensor是否有异常值
-                old_log_probs_has_nan = torch.isnan(old_team_log_probs_tensor).any().item()
-                old_log_probs_has_inf = torch.isinf(old_team_log_probs_tensor).any().item()
-                
-                if old_log_probs_has_nan or old_log_probs_has_inf:
-                    main_logger.error(f"old_team_log_probs_tensor中存在NaN或Inf: NaN={old_log_probs_has_nan}, Inf={old_log_probs_has_inf}")
-                    # 尝试修复NaN/Inf值
-                    old_team_log_probs_tensor = torch.nan_to_num(old_team_log_probs_tensor, nan=0.0, posinf=0.0, neginf=0.0)
-                    main_logger.info("已将old_team_log_probs_tensor中的NaN/Inf值替换为0")
-                
-                # 记录log_probs的统计信息
-                main_logger.debug(f"当前log_probs统计: 均值={Z_log_probs.mean().item():.4f}, 标准差={Z_log_probs.std().item():.4f}")
-                main_logger.debug(f"历史log_probs统计: 均值={old_team_log_probs_tensor.mean().item():.4f}, 标准差={old_team_log_probs_tensor.std().item():.4f}")
-                
-                # 安全计算PPO ratio，避免数值上溢
-                log_ratio = Z_log_probs - old_team_log_probs_tensor
-                # 裁剪log_ratio以避免exp操作导致数值溢出
-                log_ratio = torch.clamp(log_ratio, -10.0, 10.0)
-                Z_ratio = torch.exp(log_ratio)
-                
-                # 记录ratio的统计信息
-                ratio_mean = Z_ratio.mean().item()
-                ratio_std = Z_ratio.std().item()
-                ratio_min = Z_ratio.min().item()
-                ratio_max = Z_ratio.max().item()
-                main_logger.debug(f"PPO ratio统计: 均值={ratio_mean:.4f}, 标准差={ratio_std:.4f}, 最小值={ratio_min:.4f}, 最大值={ratio_max:.4f}")
-                
-                # 打印debug信息
-                main_logger.debug(f"使用存储的log probabilities进行PPO更新，共有{len(self.high_level_buffer_with_logprobs)}个样本")
-            else:
-                # 如果没有存储log probabilities，则假设old_log_probs=0
-                # 同样需要裁剪以避免数值溢出
-                log_ratio = torch.clamp(Z_log_probs, -10.0, 10.0)
-                Z_ratio = torch.exp(log_ratio)
-                main_logger.warning("未使用存储的log probabilities，假设old_log_probs=0")
-            
-            # 检查ratio是否有异常值
-            ratio_has_nan = torch.isnan(Z_ratio).any().item()
-            ratio_has_inf = torch.isinf(Z_ratio).any().item()
-            
-            if ratio_has_nan or ratio_has_inf:
-                main_logger.error(f"Z_ratio中存在NaN或Inf: NaN={ratio_has_nan}, Inf={ratio_has_inf}")
-                # 尝试修复NaN/Inf值
-                Z_ratio = torch.nan_to_num(Z_ratio, nan=1.0, posinf=2.0, neginf=0.5)
-                main_logger.info("已将Z_ratio中的NaN/Inf值替换为有限值")
-            
-            # 计算带裁剪的目标函数
-            Z_surr1 = Z_ratio * advantages
-            Z_surr2 = torch.clamp(Z_ratio, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages
-            Z_policy_loss = -torch.min(Z_surr1, Z_surr2).mean()
-            
-            # 检查损失是否有异常值
-            if torch.isnan(Z_policy_loss).any().item() or torch.isinf(Z_policy_loss).any().item():
-                main_logger.error(f"Z_policy_loss包含NaN或Inf值: {Z_policy_loss.item()}")
-                # 使用一个安全的默认损失值
-                Z_policy_loss = torch.tensor(0.1, device=self.device, requires_grad=True)
-                main_logger.info("已将Z_policy_loss替换为安全的默认值0.1")
-                
-        except Exception as e:
-            main_logger.error(f"计算高层策略损失时发生错误: {e}")
-            # 使用安全的默认损失值
-            Z_policy_loss = torch.tensor(0.1, device=self.device, requires_grad=True)
-            main_logger.info("由于错误，使用安全的默认值0.1作为Z_policy_loss")
-        
-        try:
-            # 计算高层价值损失
-            state_values = state_values.float() # Shape [batch_size, 1]
-            # returns 是 [batch_size], 需要 unsqueeze 匹配 state_values
-            returns = returns.float().unsqueeze(-1) # Shape [batch_size, 1]
-            
-            # Correctly apply Value Normalization for the value loss calculation.
+            # 价值损失
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                # 1. 先用当前统计量标准化（确保网络输出和targets使用相同的标准化基准）
-                normalized_state_values = self._normalize_values(state_values, self.value_norm_coordinator)
-                normalized_returns = self._normalize_values(returns, self.value_norm_coordinator)
-                
-                # 2. 计算损失（使用一致的标准化基准）
-                Z_value_loss = F.mse_loss(normalized_state_values, normalized_returns)
-                
-                # 3. 最后更新统计量（为下次使用做准备）
-                self.value_norm_coordinator.update(returns.detach().cpu().numpy())
-                
-                main_logger.debug(f"Coordinator using ValueNorm: "
-                                f"Normalized state_values mean={normalized_state_values.mean().item():.4f}, "
-                                f"Normalized returns mean={normalized_returns.mean().item():.4f}")
+                normalized_values = self._normalize_values(values.unsqueeze(-1), self.value_norm_coordinator).squeeze(-1)
+                normalized_returns = self._normalize_values(returns_batch.unsqueeze(-1), self.value_norm_coordinator).squeeze(-1)
+                value_loss = F.mse_loss(normalized_values, normalized_returns)
+                # 更新统计量
+                self.value_norm_coordinator.update(returns_batch.unsqueeze(-1).detach().cpu().numpy())
             else:
-                # Without ValueNorm, use raw values.
-                Z_value_loss = F.mse_loss(state_values, returns)
+                value_loss = F.mse_loss(values, returns_batch)
             
-            # 检查价值损失是否有异常值
-            if torch.isnan(Z_value_loss).any().item() or torch.isinf(Z_value_loss).any().item():
-                main_logger.error(f"Z_value_loss包含NaN或Inf值: {Z_value_loss.item()}")
-                # 使用安全的默认损失值
-                Z_value_loss = torch.tensor(0.1, device=self.device, requires_grad=True)
-                main_logger.info("已将Z_value_loss替换为安全的默认值0.1")
+            # 熵损失
+            entropy_loss = -entropy * self.config.lambda_h
             
-        except Exception as e:
-            main_logger.error(f"计算高层价值损失时发生错误: {e}")
-            # 使用安全的默认损失值
-            Z_value_loss = torch.tensor(0.1, device=self.device, requires_grad=True)
-            main_logger.info("由于错误，使用安全的默认值0.1作为Z_value_loss")
-        
-        # 初始化智能体策略损失
-        z_policy_losses = []
-        z_entropy_losses = []
-        z_value_losses = []
-        
-        # 处理每个智能体的个体技能损失
-        # 使用实际智能体数量，由智能体技能形状决定，而不是配置中的n_agents
-        n_agents_actual = agent_skills.shape[1]  # 从采样的agent_skills中获取实际智能体数量
-        for i in range(n_agents_actual):
-            agent_skills_i = agent_skills[:, i].clone().detach()  # 分离计算图，防止原地操作
-            zi_dist = Categorical(logits=z_logits[i])
-            zi_log_probs = zi_dist.log_prob(agent_skills_i)
-            zi_entropy = zi_dist.entropy().mean()
-            
-            if use_stored_logprobs:
-                # 使用存储的agent log probabilities
-                old_agent_log_probs = [self.high_level_buffer_with_logprobs[j]['agent_log_probs'][i] 
-                                      for j in indices 
-                                      if i < len(self.high_level_buffer_with_logprobs[j]['agent_log_probs'])]
-                
-                if len(old_agent_log_probs) == len(zi_log_probs):
-                    old_agent_log_probs_tensor = torch.tensor(old_agent_log_probs, device=self.device).detach()  # 使用detach()防止求导错误
-                    zi_ratio = torch.exp(zi_log_probs - old_agent_log_probs_tensor)
-                else:
-                    # 如果长度不匹配（例如智能体数量变化），则退回到假设old_log_probs=0
-                    zi_ratio = torch.exp(zi_log_probs)
-            else:
-                # 如果没有存储的log probabilities，则假设old_log_probs=0
-                zi_ratio = torch.exp(zi_log_probs)
-                
-            zi_surr1 = zi_ratio * advantages
-            zi_surr2 = torch.clamp(zi_ratio, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages
-            zi_policy_loss = -torch.min(zi_surr1, zi_surr2).mean()
-            
-            z_policy_losses.append(zi_policy_loss)
-            z_entropy_losses.append(zi_entropy)
-            
-            if i < len(agent_values):
-                # 确保数据类型匹配
-                agent_value = agent_values[i].float() # Shape [128, 1]
-                # returns 已经是 [128, 1]
-                returns_i = returns.float() 
-                
-                zi_value_loss = F.mse_loss(agent_value, returns_i)
-                z_value_losses.append(zi_value_loss)
-        
-        # 合并所有智能体的损失
-        z_policy_loss = torch.stack(z_policy_losses).mean()
-        z_entropy = torch.stack(z_entropy_losses).mean()
-        
-        if z_value_losses:
-            z_value_loss = torch.stack(z_value_losses).mean()
-        else:
-            z_value_loss = torch.tensor(0.0, device=self.device)
-        
-        try:
-            # 总策略损失
-            policy_loss = Z_policy_loss + z_policy_loss
-            
-            # 总价值损失
-            value_loss = Z_value_loss + z_value_loss
-            
-            # 总熵损失
-            entropy_loss = -(Z_entropy + z_entropy) * self.config.lambda_h
+            # CD损失（如果启用OPT）
+            cd_loss = torch.tensor(0.0, device=self.device, requires_grad=True)
+            if getattr(self.config, 'use_opt_coordinator', False):
+                # 对批次中的样本计算平均CD损失
+                _, _, cd_loss = self.skill_coordinator.get_value(states_batch, observations_batch)
             
             # 总损失
-            # 同时加上来自actor和critic路径的CD loss
-            total_cd_loss = cd_loss + cd_loss_critic
-            # 只有在使用OPT时才添加CD损失
-            if self.config.use_opt:
-                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + self.config.lambda_cd * total_cd_loss
+            if getattr(self.config, 'use_opt_coordinator', False):
+                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + getattr(self.config, 'lambda_cd', 0.1) * cd_loss
             else:
                 loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
             
-            # 检查总损失是否有异常值
-            if torch.isnan(loss).any().item() or torch.isinf(loss).any().item():
-                main_logger.error(f"总损失包含NaN或Inf值: {loss.item()}")
-                # 分析损失组成部分
-                main_logger.error(f"损失组成部分: policy_loss={policy_loss.item()}, value_loss={value_loss.item()}, entropy_loss={entropy_loss.item()}")
-                
-                # 尝试创建一个新的、安全的损失
-                policy_loss_safe = torch.tensor(0.1, device=self.device, requires_grad=True)
-                value_loss_safe = torch.tensor(0.1, device=self.device, requires_grad=True)
-                entropy_loss_safe = torch.tensor(-0.1, device=self.device, requires_grad=True)
-                loss = policy_loss_safe + self.config.value_loss_coef * value_loss_safe + entropy_loss_safe
-                main_logger.info("已将总损失替换为安全的默认值")
-            
-            # 记录损失值
-            main_logger.debug(f"损失统计: 总损失={loss.item():.6f}, 策略损失={policy_loss.item():.6f}, 价值损失={value_loss.item():.6f}, 熵损失={entropy_loss.item():.6f}")
-            
             # 更新网络
             self.coordinator_optimizer.zero_grad()
-            loss.backward()
-            
-        except Exception as e:
-            main_logger.error(f"计算总损失时发生错误: {e}")
-            # 创建一个新的、安全的损失
-            loss = torch.tensor(0.3, device=self.device, requires_grad=True)
-            policy_loss = torch.tensor(0.1, device=self.device)
-            value_loss = torch.tensor(0.1, device=self.device)
-            entropy_loss = torch.tensor(-0.1, device=self.device)
-            
-            main_logger.info("由于错误，使用安全的默认值作为损失")
-            
-            # 更新网络
-            self.coordinator_optimizer.zero_grad()
-            loss.backward()
-        
-        # 检查loss是否正确连接到计算图
-        main_logger.debug(f"损失连接状态: requires_grad={loss.requires_grad}, grad_fn={loss.grad_fn}")
-        
-        # 检查coordinator参数是否正确设置requires_grad
-        params_requiring_grad = 0
-        for name, param in self.skill_coordinator.named_parameters():
-            if param.requires_grad:
-                params_requiring_grad += 1
-                main_logger.debug(f"参数 {name} requires_grad=True")
-        main_logger.debug(f"Coordinator中需要梯度的参数数量: {params_requiring_grad}")
-        
-        # 详细记录梯度信息
-        params_with_grads = [p for p in self.skill_coordinator.parameters() if p.grad is not None]
-        if params_with_grads:
-            # 检查梯度是否包含NaN或Inf
-            has_nan_grad = any(torch.isnan(p.grad).any().item() for p in params_with_grads)
-            has_inf_grad = any(torch.isinf(p.grad).any().item() for p in params_with_grads)
-            
-            if has_nan_grad or has_inf_grad:
-                main_logger.error(f"梯度中包含NaN或Inf值: NaN={has_nan_grad}, Inf={has_inf_grad}")
-                # 尝试修复梯度中的NaN/Inf值
-                for p in params_with_grads:
-                    if torch.isnan(p.grad).any() or torch.isinf(p.grad).any():
-                        p.grad.data = torch.nan_to_num(p.grad.data, nan=0.0, posinf=1.0, neginf=-1.0)
-                main_logger.info("已将梯度中的NaN和Inf值替换为有限值")
-            
-            # 计算梯度的统计信息
-            grad_norms = [torch.norm(p.grad.detach()).item() for p in params_with_grads]
-            mean_norm = np.mean(grad_norms)
-            max_norm = max(grad_norms)
-            min_norm = min(grad_norms)
-            std_norm = np.std(grad_norms)
-            total_norm = torch.sqrt(sum(p.grad.detach().pow(2).sum() for p in params_with_grads)).item()
-            
-            main_logger.debug(f"梯度统计 (裁剪前): 总范数={total_norm:.6f}, 均值={mean_norm:.6f}, "
-                             f"标准差={std_norm:.6f}, 最大={max_norm:.6f}, 最小={min_norm:.6f}")
-            
-            # 检查是否有较大梯度
-            large_grad_threshold = 10.0
-            large_grads = [(name, torch.norm(param.grad).item()) 
-                           for name, param in self.skill_coordinator.named_parameters() 
-                           if param.grad is not None and torch.norm(param.grad).item() > large_grad_threshold]
-            
-            if large_grads:
-                main_logger.warning(f"检测到{len(large_grads)}个参数具有较大梯度 (>{large_grad_threshold}):")
-                for name, norm in large_grads[:5]:  # 只显示前5个
-                    main_logger.warning(f"  参数 {name}: 梯度范数 = {norm:.6f}")
-                if len(large_grads) > 5:
-                    main_logger.warning(f"  ... 还有{len(large_grads)-5}个参数有较大梯度")
-            
-            # 梯度裁剪
-            try:
-                torch.nn.utils.clip_grad_norm_(self.skill_coordinator.parameters(), self.config.max_grad_norm)
-                
-                # 记录裁剪后的梯度信息
-                params_with_grads_after = [p for p in self.skill_coordinator.parameters() if p.grad is not None]
-                if params_with_grads_after:
-                    grad_norms_after = [torch.norm(p.grad.detach()).item() for p in params_with_grads_after]
-                    mean_norm_after = np.mean(grad_norms_after)
-                    max_norm_after = max(grad_norms_after)
-                    min_norm_after = min(grad_norms_after)
-                    std_norm_after = np.std(grad_norms_after)
-                    total_norm_after = torch.sqrt(sum(p.grad.detach().pow(2).sum() for p in params_with_grads_after)).item()
-                    
-                    main_logger.debug(f"梯度统计 (裁剪后): 总范数={total_norm_after:.6f}, 均值={mean_norm_after:.6f}, "
-                                     f"标准差={std_norm_after:.6f}, 最大={max_norm_after:.6f}, 最小={min_norm_after:.6f}")
-            except Exception as e:
-                main_logger.error(f"梯度裁剪失败: {e}")
-                
-        else:
-            main_logger.warning("没有参数接收到梯度! 检查loss.backward()是否正确传播梯度。")
-            
-            # 详细检查每个参数的梯度状态
-            grad_status = {}
-            for name, param in self.skill_coordinator.named_parameters():
-                if param.grad is None:
-                    grad_status[name] = "None"
-                else:
-                    norm = torch.norm(param.grad).item()
-                    has_nan = torch.isnan(param.grad).any().item()
-                    has_inf = torch.isinf(param.grad).any().item()
-                    grad_status[name] = f"有梯度，范数: {norm:.6f}, NaN: {has_nan}, Inf: {has_inf}"
-            
-            # 记录所有参数的梯度状态
-            main_logger.debug("详细的参数梯度状态:")
-            for name, status in grad_status.items():
-                main_logger.debug(f"参数 {name} 梯度状态: {status}")
-        
-        # 记录参数更新前的多个网络参数样本
-        sample_params = {}
-        for name, param in list(self.skill_coordinator.named_parameters())[:5]:  # 只取前5个参数作为样本
-            if param.requires_grad and param.numel() > 0:
-                sample_params[name] = param.clone().detach()
-                main_logger.debug(f"参数 {name} 更新前: 均值={param.mean().item():.6f}, 标准差={param.std().item():.6f}")
-        
-        try:
+            loss.backward()  # 标准的PPO反向传播
+            torch.nn.utils.clip_grad_norm_(self.skill_coordinator.parameters(), self.config.max_grad_norm)
             self.coordinator_optimizer.step()
             
-            # 记录参数更新后的变化
-            for name, old_param in sample_params.items():
-                for curr_name, curr_param in self.skill_coordinator.named_parameters():
-                    if curr_name == name:
-                        param_mean_diff = (curr_param.detach().mean() - old_param.mean()).item()
-                        param_abs_diff = torch.mean(torch.abs(curr_param.detach() - old_param)).item()
-                        main_logger.debug(f"参数 {name} 更新后: 均值变化={param_mean_diff:.6f}, 平均绝对变化={param_abs_diff:.6f}")
-                        break
-                        
-        except Exception as e:
-            main_logger.error(f"优化器step失败: {e}")
-            # 这种情况下我们无法继续，但至少记录了错误
-        
-        # 计算平均价值估计
-        mean_state_value = state_values.mean().item()
-        mean_agent_value = 0.0
-        if agent_values and len(agent_values) > 0:
-            # agent_values 是一个列表的张量，每个张量是 [batch_size, 1]
-            # 我们需要将它们堆叠起来，然后计算均值
-            stacked_agent_values = torch.stack(agent_values, dim=0) # Shape [n_agents, batch_size, 1]
-            mean_agent_value = stacked_agent_values.mean().item()
-        
-        # rewards 是累积的k步环境奖励 r_h
-        mean_high_level_reward = rewards.mean().item()
+            # 累积统计
+            total_policy_loss += policy_loss.item()
+            total_value_loss += value_loss.item()
+            total_entropy_loss += entropy_loss.item()
+            total_loss += loss.item()
+            total_cd_loss += cd_loss.item()
             
-        # 返回：总损失, 策略损失, 价值损失, 团队熵, 个体熵, 状态价值均值, 智能体价值均值, 高层奖励均值
-        return loss.item(), policy_loss.item(), value_loss.item(), \
-               Z_entropy.item(), z_entropy.item(), \
-               mean_state_value, mean_agent_value, mean_high_level_reward, total_cd_loss.item()
+            # 分别统计团队技能和个体技能的熵
+            total_team_entropy += team_entropy.mean().item()
+            total_agent_entropy += agent_entropy.item()
+            
+            update_count += 1
+            
+            main_logger.debug(f"Coordinator 标准更新 #{update_count}: "
+                            f"Loss={loss.item():.6f}, Policy={policy_loss.item():.6f}, "
+                            f"Value={value_loss.item():.6f}, Entropy={entropy.item():.6f}")
+        
+        # 计算平均损失
+        avg_policy_loss = total_policy_loss / update_count if update_count > 0 else 0.0
+        avg_value_loss = total_value_loss / update_count if update_count > 0 else 0.0
+        avg_entropy_loss = total_entropy_loss / update_count if update_count > 0 else 0.0
+        avg_total_loss = total_loss / update_count if update_count > 0 else 0.0
+        avg_cd_loss = total_cd_loss / update_count if update_count > 0 else 0.0
+        avg_team_entropy = total_team_entropy / update_count if update_count > 0 else 0.0
+        avg_agent_entropy = total_agent_entropy / update_count if update_count > 0 else 0.0
+        
+        # 计算其他统计信息（从统一缓冲区获取高层数据）
+        if high_level_data_count > 0:
+            # 计算平均奖励（只考虑有效的高层数据）
+            valid_high_level_rewards = []
+            for t in range(num_steps):
+                for env_idx in range(self.rollout_buffer.num_envs):
+                    if self.rollout_buffer.high_level_valid_mask[t, env_idx]:
+                        valid_high_level_rewards.append(self.rollout_buffer.high_level_rewards[t, env_idx])
+            
+            if len(valid_high_level_rewards) > 0:
+                avg_high_level_reward = np.mean(valid_high_level_rewards)
+                
+                # 计算平均价值（随机采样一些状态进行估计）
+                sample_size = min(50, len(valid_high_level_rewards))
+                sample_states = []
+                sample_observations = []
+                for t in range(num_steps):
+                    for env_idx in range(self.rollout_buffer.num_envs):
+                        if self.rollout_buffer.high_level_valid_mask[t, env_idx] and len(sample_states) < sample_size:
+                            sample_states.append(self.rollout_buffer.states[t, env_idx])
+                            sample_observations.append(self.rollout_buffer.obs[t, env_idx])
+                
+                if len(sample_states) > 0:
+                    sample_values = []
+                    sample_agent_values = []
+                    for i in range(len(sample_states)):
+                        with torch.no_grad():
+                            state_val, agent_vals, _ = self.skill_coordinator.get_value(
+                                torch.FloatTensor(sample_states[i]).unsqueeze(0).to(self.device),
+                                torch.FloatTensor(sample_observations[i]).unsqueeze(0).to(self.device)
+                            )
+                            sample_values.append(state_val.item())
+                            if agent_vals is not None and len(agent_vals) > 0:
+                                # agent_vals is a list of tensors, stack them and then take the mean
+                                agent_vals_tensor = torch.stack(agent_vals)
+                                sample_agent_values.append(agent_vals_tensor.mean().item())
+                    mean_state_value = np.mean(sample_values) if sample_values else 0.0
+                    mean_agent_value = np.mean(sample_agent_values) if sample_agent_values else 0.0
+                else:
+                    mean_state_value = 0.0
+                    mean_agent_value = 0.0
+            else:
+                avg_high_level_reward = 0.0
+                mean_state_value = 0.0
+                mean_agent_value = 0.0
+        else:
+            avg_high_level_reward = 0.0
+            mean_state_value = 0.0
+            mean_agent_value = 0.0
+        
+        main_logger.info(f"Coordinator 标准更新完成: {update_count}次更新, "
+                        f"平均损失={avg_total_loss:.6f}, 平均策略损失={avg_policy_loss:.6f}, "
+                        f"平均价值损失={avg_value_loss:.6f}")
+        
+        return avg_total_loss, avg_policy_loss, avg_value_loss, \
+               avg_team_entropy, avg_agent_entropy, \
+               mean_state_value, mean_agent_value, avg_high_level_reward, avg_cd_loss
     
-    def update_discoverer(self):
-        """更新低层技能发现器网络"""
-        if len(self.low_level_buffer) < self.config.batch_size:
-            return 0, 0, 0, 0, 0, 0, 0, 0, 0 # 增加返回数量以匹配期望
+    def update_discoverer_from_rollout(self, ppo_epochs=4):
+        """
+        使用统一rollout缓冲区更新低层技能发现器网络，实现真正的BPTT
+        这是新PPO流程的核心：一次性评估整个序列并进行反向传播
         
-        # 从缓冲区采样数据，包含内在奖励的三个组成部分
-        batch = self.low_level_buffer.sample(self.config.batch_size)
-        states, team_skills, observations, agent_skills, actions, rewards, dones, old_log_probs, \
-        env_rewards_comp, team_disc_rewards_comp, ind_disc_rewards_comp = zip(*batch)
+        注意：GAE计算已经在主训练循环中完成，这里直接使用预计算的advantages和returns
         
-        states = torch.stack(states)
-        team_skills = torch.stack(team_skills)
-        observations = torch.stack(observations)
-        agent_skills = torch.stack(agent_skills)
-        actions = torch.stack(actions)
-        rewards = torch.stack(rewards)
-        dones = torch.stack(dones)
-        old_log_probs = torch.stack(old_log_probs)
+        参数:
+            ppo_epochs: PPO更新轮数
+            
+        返回:
+            与原update_discoverer相同格式的返回值
+        """
+        # 使用配置中的rollout长度
+        num_steps = getattr(self.config, 'rollout_length', 2048)
         
-        # 关键修复：在Off-Policy更新中，为乱序批次数据初始化一次隐藏状态
-        # 这确保了在整个更新步骤中使用一致的隐藏状态，避免引入不相关的历史信息
-        self.skill_discoverer.init_hidden(batch_size=self.config.batch_size)
+        main_logger.info(f"开始使用统一缓冲区更新Discoverer (真正的BPTT)，低层数据量: {num_steps}步")
+        main_logger.info("GAE已在主训练循环中计算完成，直接使用预计算的advantages和returns")
         
-        # 获取当前状态价值和cd_loss
-        values, cd_loss_discoverer = self.skill_discoverer.get_value(states, team_skills)
+        # 累积损失统计
+        total_policy_loss = 0.0
+        total_value_loss = 0.0
+        total_entropy_loss = 0.0
+        total_loss = 0.0
+        update_count = 0
         
-        # 构造下一状态的占位符
-        next_values = torch.zeros_like(values)  # 实际应用中应该使用真实下一状态计算
+        # 计算每个批次包含的序列数量（环境数×智能体数）
+        num_sequences_per_batch = getattr(self.config, 'sequence_batch_size', 
+                                        min(self.rollout_buffer.num_envs * self.rollout_buffer.n_agents, 32))
         
-        # 【关键修复】在计算GAE之前，对价值网络输出进行反归一化
-        # 这确保了用于GAE计算的价值与原始尺度的奖励在同一数值尺度上
-        if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            denormalized_values = self._denormalize_values(values, self.value_norm_discoverer)
-            denormalized_next_values = self._denormalize_values(next_values, self.value_norm_discoverer)
-            main_logger.debug(f"Discoverer GAE: 使用反归一化后的价值进行GAE计算")
+        # 【修复】使用专门的Discoverer采样器进行GRU友好的更新
+        sequence_sampler = self.rollout_buffer.get_discoverer_sampler(num_steps, ppo_epochs, num_sequences_per_batch)
+        
+        if sequence_sampler is None:
+            main_logger.error("无法从统一rollout缓冲区获取Discoverer序列采样器")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+        
+        for batch in sequence_sampler:
+            # 提取序列批次数据
+            observations_seq = batch['observations']  # Shape: (T, batch_size, obs_dim)
+            actions_seq = batch['actions']           # Shape: (T, batch_size, action_dim)
+            old_log_probs_seq = batch['log_probs']    # Shape: (T, batch_size)
+            advantages_seq = batch['advantages']      # Shape: (T, batch_size)
+            returns_seq = batch['returns']           # Shape: (T, batch_size)
+            global_states_seq = batch['global_states'] # Shape: (T, batch_size, state_dim) # 新增
+            team_skills_seq = batch['team_skills']    # Shape: (T, batch_size)           # 新增
+            agent_skills_seq = batch['agent_skills'] # Shape: (T, batch_size)
+            # **** 提取新增的 initial_hxs ****
+            initial_hxs = batch['initial_hxs']       # Shape: (batch_size, hidden_size)
+            
+            # 转换到正确的设备
+            observations_seq = observations_seq.to(self.device)
+            actions_seq = actions_seq.to(self.device)
+            old_log_probs_seq = old_log_probs_seq.to(self.device)
+            advantages_seq = advantages_seq.to(self.device)
+            returns_seq = returns_seq.to(self.device)
+            global_states_seq = global_states_seq.to(self.device)  # 新增
+            team_skills_seq = team_skills_seq.to(self.device)      # 新增
+            agent_skills_seq = agent_skills_seq.to(self.device)
+            initial_hxs = initial_hxs.to(self.device)
+            
+            T, batch_size = observations_seq.shape[:2]
+            
+            # **** 核心改动：将 initial_hxs 传递给 evaluate_sequence ****
+            new_log_probs, new_values, entropy = self.skill_discoverer.evaluate_sequence(
+                observations_seq, agent_skills_seq, actions_seq, 
+                global_states_seq, team_skills_seq,
+                initial_hxs  # **** 传入初始隐状态 ****
+            )
+            
+            # --- 将所有数据展平以计算损失 ---
+            # 展平数据: (T, B) -> (T*B)
+            advantages_flat = advantages_seq.reshape(-1)
+            returns_flat = returns_seq.reshape(-1)
+            old_log_probs_flat = old_log_probs_seq.reshape(-1)
+            new_log_probs_flat = new_log_probs.reshape(-1)
+            new_values_flat = new_values.reshape(-1)
+            
+            # 【核心改动】移除优势标准化，使用Value Normalization作为替代
+            # advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
+            
+            # --- 计算PPO损失（在展平后的数据上） ---
+            ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
+            surr1 = ratios * advantages_flat
+            surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_flat
+            policy_loss = -torch.min(surr1, surr2).mean()
+            
+            # 价值损失
+            if self.config.use_valuenorm and self.value_norm_discoverer is not None:
+                normalized_new_values = self._normalize_values(new_values_flat.unsqueeze(-1), self.value_norm_discoverer).squeeze(-1)
+                normalized_returns = self._normalize_values(returns_flat.unsqueeze(-1), self.value_norm_discoverer).squeeze(-1)
+                value_loss = F.mse_loss(normalized_new_values, normalized_returns)
+                # 更新统计量
+                self.value_norm_discoverer.update(returns_flat.unsqueeze(-1).detach().cpu().numpy())
+            else:
+                value_loss = F.mse_loss(new_values_flat, returns_flat)
+            
+            # 熵损失
+            entropy_loss = -entropy * self.config.lambda_l
+            
+            # 总损失
+            if self.config.use_opt:
+                # 注意：这里没有cd_loss，因为evaluate_sequence方法中没有返回CD损失
+                # 如果需要CD损失，需要在evaluate_sequence中添加相应逻辑
+                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+            else:
+                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+            
+            # 更新网络
+            self.discoverer_optimizer.zero_grad()
+            loss.backward()  # <--- 这一步会通过整个序列反向传播！实现真正的BPTT
+            torch.nn.utils.clip_grad_norm_(self.skill_discoverer.parameters(), self.config.max_grad_norm)
+            self.discoverer_optimizer.step()
+            
+            # 累积统计
+            total_policy_loss += policy_loss.item()
+            total_value_loss += value_loss.item()
+            total_entropy_loss += entropy_loss.item()
+            total_loss += loss.item()
+            update_count += 1
+            
+            main_logger.debug(f"Discoverer BPTT更新 #{update_count}: "
+                            f"Loss={loss.item():.6f}, Policy={policy_loss.item():.6f}, "
+                            f"Value={value_loss.item():.6f}, Entropy={entropy.item():.6f}")
+        
+        # 计算平均损失
+        avg_policy_loss = total_policy_loss / update_count if update_count > 0 else 0.0
+        avg_value_loss = total_value_loss / update_count if update_count > 0 else 0.0
+        avg_entropy_loss = total_entropy_loss / update_count if update_count > 0 else 0.0
+        avg_total_loss = total_loss / update_count if update_count > 0 else 0.0
+        
+        # 计算其他统计信息（从统一rollout缓冲区获取）
+        # 假设缓冲区已满，使用num_steps进行计算
+        if num_steps > 0:
+            # 计算平均奖励（所有环境和智能体）
+            avg_intrinsic_reward = np.mean(self.rollout_buffer.rewards[:num_steps])
+            # 计算平均价值（所有环境和智能体）
+            avg_discoverer_value = np.mean(self.rollout_buffer.values[:num_steps])
+            action_entropy_val = -avg_entropy_loss / self.config.lambda_l if self.config.lambda_l > 0 else 0.0
+            # 从rollout缓冲区计算奖励组成部分的平均值
+            avg_env_comp = np.mean(self.rollout_buffer.rewards_env[:num_steps])
+            avg_team_disc_comp = np.mean(self.rollout_buffer.rewards_team_disc[:num_steps])
+            avg_ind_disc_comp = np.mean(self.rollout_buffer.rewards_ind_disc[:num_steps])
         else:
-            denormalized_values = values
-            denormalized_next_values = next_values
+            avg_intrinsic_reward = 0.0
+            avg_discoverer_value = 0.0
+            action_entropy_val = 0.0
+            avg_env_comp = 0.0
+            avg_team_disc_comp = 0.0
+            avg_ind_disc_comp = 0.0
         
-        # 计算GAE - 使用反归一化后的价值
-        # 确保传递给compute_gae的values是1D，使用clone避免原地操作
-        advantages, returns = compute_gae(rewards.clone(), denormalized_values.squeeze(-1).clone(), 
-                                         denormalized_next_values.squeeze(-1).clone(), dones.clone(), 
-                                         self.config.gamma, self.config.gae_lambda)
-        # advantages 和 returns 都是 [batch_size]，分离计算图
-        advantages = advantages.detach()
-        returns = returns.detach()
+        main_logger.info(f"Discoverer BPTT更新完成: {update_count}次更新, "
+                        f"平均损失={avg_total_loss:.6f}, 平均策略损失={avg_policy_loss:.6f}, "
+                        f"平均价值损失={avg_value_loss:.6f}, 平均动作熵={action_entropy_val:.6f}")
         
-        # The GAE returns (V_target) will be normalized later, right before the value loss calculation.
-        main_logger.debug(f"Discoverer GAE returns (unnormalized): 均值={returns.mean().item():.4f}, 标准差={returns.std().item():.4f}")
+        return avg_total_loss, avg_policy_loss, avg_value_loss, action_entropy_val, \
+               avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, avg_discoverer_value
 
-        # 新增：优势归一化，稳定策略更新
-        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
-        
-        # 获取当前策略（复用已初始化的隐藏状态）
-        _, action_log_probs, action_dist = self.skill_discoverer(observations, agent_skills)
-        
-        # 计算策略比率，使用detach()防止求导错误
-        old_log_probs_detached = old_log_probs.clone().detach()
-        ratios = torch.exp(action_log_probs - old_log_probs_detached)
-        
-        # 限制策略比率
-        surr1 = ratios * advantages
-        surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages
-        
-        # 计算策略损失
-        policy_loss = -torch.min(surr1, surr2).mean()
-        
-        # 记录PPO相关统计信息
-        main_logger.debug(f"Discoverer PPO统计: 比率均值={ratios.mean().item():.4f}, "
-                         f"比率标准差={ratios.std().item():.4f}, "
-                         f"比率最大值={ratios.max().item():.4f}, "
-                         f"比率最小值={ratios.min().item():.4f}")
-        main_logger.debug(f"Discoverer 优势值统计: 均值={advantages.mean().item():.4f}, "
-                         f"标准差={advantages.std().item():.4f}, "
-                         f"最大值={advantages.max().item():.4f}, "
-                         f"最小值={advantages.min().item():.4f}")
-        
-        # 计算价值损失（复用已初始化的隐藏状态）
-        current_values, _ = self.skill_discoverer.get_value(states, team_skills) # Shape [128, 1]
-        # 确保维度匹配并转换为float32类型
-        current_values = current_values.float()
-        # returns 是 [128], 需要 unsqueeze 匹配 current_values
-        returns = returns.float().unsqueeze(-1) # Shape [128, 1]
-        
-        # 记录价值函数相关统计信息
-        main_logger.debug(f"Discoverer 价值函数统计: 当前价值均值={current_values.mean().item():.4f}, "
-                         f"当前价值标准差={current_values.std().item():.4f}, "
-                         f"目标returns均值={returns.mean().item():.4f}, "
-                         f"目标returns标准差={returns.std().item():.4f}")
-        
-        # Correctly apply Value Normalization for the value loss calculation.
-        if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            # 1. 先用当前统计量标准化（确保网络输出和targets使用相同的标准化基准）
-            normalized_current_values = self._normalize_values(current_values, self.value_norm_discoverer)
-            normalized_returns = self._normalize_values(returns, self.value_norm_discoverer)
-            
-            # 2. 计算损失（使用一致的标准化基准）
-            value_loss = F.mse_loss(normalized_current_values, normalized_returns)
-            
-            # 3. 最后更新统计量（为下次使用做准备）
-            self.value_norm_discoverer.update(returns.detach().cpu().numpy())
-            
-            main_logger.debug(f"Discoverer using ValueNorm: "
-                            f"Normalized current_values mean={normalized_current_values.mean().item():.4f}, "
-                            f"Normalized returns mean={normalized_returns.mean().item():.4f}")
-        else:
-            # Without ValueNorm, use raw values.
-            value_loss = F.mse_loss(current_values, returns)
-        
-        # 计算熵损失
-        entropy_loss = -action_dist.entropy().mean() * self.config.lambda_l
-        
-        # 记录各项损失的详细信息
-        main_logger.debug(f"Discoverer 损失组成详情: "
-                         f"策略损失={policy_loss.item():.6f}, "
-                         f"价值损失={value_loss.item():.6f}, "
-                         f"熵损失={entropy_loss.item():.6f}, "
-                         f"动作熵均值={action_dist.entropy().mean().item():.6f}")
-        
-        # 总损失
-        # 只有在使用OPT时才添加CD损失
-        if self.config.use_opt:
-            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss + self.config.lambda_cd * cd_loss_discoverer
-        else:
-            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
-        
-        # 记录总损失和各组成部分的权重影响
-        main_logger.debug(f"Discoverer 损失权重影响: "
-                         f"策略损失贡献={policy_loss.item():.6f}, "
-                         f"价值损失贡献={self.config.value_loss_coef * value_loss.item():.6f}, "
-                         f"熵损失贡献={entropy_loss.item():.6f}, "
-                         f"总损失={loss.item():.6f}")
-        
-        # 更新网络
-        self.discoverer_optimizer.zero_grad()
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.skill_discoverer.parameters(), self.config.max_grad_norm)
-        self.discoverer_optimizer.step()
-        
-        # 计算内在奖励各部分的平均值
-        avg_intrinsic_reward = rewards.mean().item()
-        avg_env_reward_comp = torch.stack(env_rewards_comp).mean().item()
-        avg_team_disc_reward_comp = torch.stack(team_disc_rewards_comp).mean().item()
-        avg_ind_disc_reward_comp = torch.stack(ind_disc_rewards_comp).mean().item()
-        avg_discoverer_value = current_values.mean().item() # 使用更新前的 current_values
-        
-        action_entropy_val = -entropy_loss.item() / self.config.lambda_l if self.config.lambda_l > 0 else 0.0
-
-        return loss.item(), policy_loss.item(), value_loss.item(), action_entropy_val, \
-               avg_intrinsic_reward, avg_env_reward_comp, avg_team_disc_reward_comp, avg_ind_disc_reward_comp, avg_discoverer_value
     
     def update_discriminators(self):
         """更新技能判别器网络（添加正则化防止过度训练）"""
@@ -1532,13 +1382,17 @@ class HMASDAgent:
                     # 同时将这些环境的奖励阈值重置为0
                     self.env_reward_thresholds[env_id] = 0.0
             
-            # 记录高层缓冲区状态
-            high_level_buffer_size = len(self.high_level_buffer)
-            main_logger.debug(f"当前高层缓冲区大小: {high_level_buffer_size}/{self.config.high_level_batch_size} (当前/所需)")
+            # 记录rollout缓冲区状态（统一缓冲区）
+            rollout_buffer_pos = self.global_step % self.rollout_buffer.num_steps
+            rollout_buffer_full = rollout_buffer_pos == self.rollout_buffer.num_steps - 1
+            main_logger.debug(f"当前rollout缓冲区状态: {rollout_buffer_pos}/{self.rollout_buffer.num_steps} (当前/总容量), 完整: {rollout_buffer_full}")
             
-            # 如果高层缓冲区增长过慢，强制所有环境进行贡献
-            if high_level_buffer_size < self.config.high_level_batch_size * 0.5 and self.global_step > 5000:
-                main_logger.warning(f"高层缓冲区增长过慢 ({high_level_buffer_size}/{self.config.high_level_batch_size})，强制所有环境贡献样本")
+            # 检查高层策略数据是否足够
+            high_level_data_count = np.sum(self.rollout_buffer.high_level_valid_mask[:rollout_buffer_pos])
+            
+            # 如果高层数据增长过慢，强制所有环境进行贡献
+            if high_level_data_count < 10 and self.global_step > 5000:  # 至少需要10个高层决策样本
+                main_logger.warning(f"高层策略数据增长过慢 (有效高层样本: {high_level_data_count})，强制所有环境贡献样本")
                 for env_id in range(32):
                     self.force_high_level_collection[env_id] = True
                     self.env_reward_thresholds[env_id] = 0.0
@@ -1562,10 +1416,10 @@ class HMASDAgent:
         coordinator_loss, coordinator_policy_loss, coordinator_value_loss, team_skill_entropy, agent_skill_entropy, \
         mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator()
         
-        # 更新低层技能发现器
+        # 更新低层技能发现器 - 使用新的rollout方法
         discoverer_loss, discoverer_policy_loss, discoverer_value_loss, action_entropy, \
         avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, \
-        avg_discoverer_val = self.update_discoverer()
+        avg_discoverer_val = self.update_discoverer_from_rollout()
         
         # 更新学习率调度器
         if getattr(self.config, 'use_lr_decay', False) and self.global_step <= self.config.lr_decay_steps:

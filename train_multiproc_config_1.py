@@ -1454,6 +1454,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         args: 命令行参数
         device: 计算设备
     """
+    import torch  # 添加这行确保 torch 在函数作用域内可用
+    
     num_envs = vec_env.num_envs # Get num_envs from SubprocVecEnv
     main_logger.info(f"开始训练HMASD (多进程版本，使用 {num_envs} 个并行环境)...")
     main_logger.info(f"配置已预先初始化: state_dim={config.state_dim}, obs_dim={config.obs_dim}, n_agents={config.n_agents}")
@@ -1627,11 +1629,15 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 if 'reward_info' in infos[i] and 'potential_reward' in infos[i]['reward_info']:
                     potential_reward = infos[i]['reward_info']['potential_reward']
                 
+                # 从agent_info中提取values（新的agent.py API）
+                values = current_agent_info.get('values', None)
+                
                 # 存储转换
                 agent.store_transition(
                     states[i], next_states[i], observations[i], next_observations[i],
                     actions_array[i], rewards[i], dones[i], current_agent_info['team_skill'],
                     current_agent_info['agent_skills'], current_agent_info['action_logprobs'],
+                    values=values,
                     log_probs=current_agent_info['log_probs'],
                     skill_timer_for_env=skill_timer_value,
                     env_id=i,
@@ -1747,50 +1753,84 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             if total_steps >= config.total_timesteps:
                 break
 
-        # Rollout数据收集完成，进行更新
-        if len(agent.low_level_buffer) >= agent.config.batch_size:
-            try:
-                update_info = agent.update()
-                update_times += 1
-                elapsed = time.time() - start_time
+        # --- 在更新前计算GAE和Returns ---
+        # Rollout数据收集完成，现在为低层策略计算优势。
+        # 这确保了GAE是在刚刚收集的完整、新鲜的数据上计算的。
+        # 注意：高层策略的GAE计算仍在 agent.update_coordinator 内部。
+        main_logger.info("为低层策略(Discoverer)计算GAE...")
+        
+        # 获取rollout最后一步的观测和状态，用于计算last_values
+        # 使用当前的states和observations作为最后一步的输入
+        last_step_observations = observations  # Shape: (num_envs, n_agents, obs_dim)
+        last_step_states = states  # Shape: (num_envs, state_dim)
+        
+        # 计算last_values：使用agent.discoverer.critic网络
+        last_values = np.zeros((num_envs, config.n_agents), dtype=np.float32)
+        last_dones = np.zeros((num_envs, config.n_agents), dtype=bool)
+        
+        for i in range(num_envs):
+            # 为每个环境获取当前的团队技能
+            current_team_skill = agent.env_team_skills.get(i, 0)
+            
+            # 使用discoverer的critic网络计算价值
+            with torch.no_grad():
+                global_state_tensor = torch.FloatTensor(last_step_states[i]).unsqueeze(0).to(agent.device)
+                team_skill_tensor = torch.tensor(current_team_skill, device=agent.device).unsqueeze(0)
+                global_value, _ = agent.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
+                global_value_scalar = global_value.squeeze().item()
+                
+                # 所有智能体使用相同的全局价值估计
+                last_values[i, :] = global_value_scalar
+            
+            # 假设rollout结束时环境没有终止（除非明确终止）
+            # 这里可以根据实际情况调整
+            last_dones[i, :] = False
+        
+        # 调用修复后的compute_advantages方法
+        agent.rollout_buffer.compute_advantages(
+            last_values=last_values, 
+            dones=last_dones, 
+            gamma=config.gamma, 
+            gae_lambda=config.gae_lambda
+        )
 
-                main_logger.info(f"Rollout更新 {update_times} (收集了 {rollout_steps} 步), 总步数 {total_steps}, "
-                      f"高层损失 {update_info['coordinator_loss']:.4f}, "
-                      f"低层损失 {update_info['discoverer_loss']:.4f}, "
-                      f"判别器损失 {update_info['discriminator_loss']:.4f}, "
-                      f"CD损失 {update_info.get('cd_loss', 0):.4f}, "
-                      f"已用时间 {elapsed:.2f}s")
-                
-                # 记录CD损失到TensorBoard
-                if config.use_opt and 'cd_loss' in update_info:
-                    agent.writer.add_scalar('Losses/CD_Loss', update_info['cd_loss'], total_steps)
-                
-                # 详细记录低层损失的组成部分
-                main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
-                      f"策略损失: {update_info['discoverer_policy_loss']:.4f}, "
-                      f"价值损失: {update_info['discoverer_value_loss']:.4f}, "
-                      f"动作熵: {update_info['action_entropy']:.4f}")
-                
-                # 详细记录内在奖励组成部分
-                main_logger.info(f"内在奖励组成 - 平均总奖励: {update_info['avg_intrinsic_reward']:.4f}, "
-                      f"环境奖励部分: {update_info['avg_env_comp']:.4f}, "
-                      f"团队判别器部分: {update_info['avg_team_disc_comp']:.4f}, "
-                      f"个体判别器部分: {update_info['avg_ind_disc_comp']:.4f}")
-                
-                # 详细记录价值函数估计
-                main_logger.info(f"价值函数估计 - Discoverer均值: {update_info['avg_discoverer_val']:.4f}, "
-                      f"Coordinator状态价值: {update_info['mean_coord_state_val']:.4f}, "
-                      f"Coordinator智能体价值: {update_info['mean_coord_agent_val']:.4f}")
-                
-                # 清空缓冲区 (严格on-policy)
-                agent.clear_buffers()
-                main_logger.debug(f"已清空缓冲区，开始新的rollout")
-                
-            except ValueError as e:
-                main_logger.error(f"更新错误: {e}")
-                update_times += 1
-        else:
-            main_logger.warning(f"缓冲区数据不足，跳过更新。当前缓冲区大小: {len(agent.low_level_buffer)}")
+        # Rollout数据收集完成，进行更新
+        try:
+            update_info = agent.update()
+            update_times += 1
+            elapsed = time.time() - start_time
+
+            main_logger.info(f"Rollout更新 {update_times} (收集了 {rollout_steps} 步), 总步数 {total_steps}, "
+                  f"高层损失 {update_info['coordinator_loss']:.4f}, "
+                  f"低层损失 {update_info['discoverer_loss']:.4f}, "
+                  f"判别器损失 {update_info['discriminator_loss']:.4f}, "
+                  f"CD损失 {update_info.get('cd_loss', 0):.4f}, "
+                  f"已用时间 {elapsed:.2f}s")
+            
+            # 记录CD损失到TensorBoard
+            if config.use_opt and 'cd_loss' in update_info:
+                agent.writer.add_scalar('Losses/CD_Loss', update_info['cd_loss'], total_steps)
+            
+            # 详细记录低层损失的组成部分
+            main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
+                  f"策略损失: {update_info['discoverer_policy_loss']:.4f}, "
+                  f"价值损失: {update_info['discoverer_value_loss']:.4f}, "
+                  f"动作熵: {update_info['action_entropy']:.4f}")
+            
+            # 详细记录内在奖励组成部分
+            main_logger.info(f"内在奖励组成 - 平均总奖励: {update_info['avg_intrinsic_reward']:.4f}, "
+                  f"环境奖励部分: {update_info['avg_env_comp']:.4f}, "
+                  f"团队判别器部分: {update_info['avg_team_disc_comp']:.4f}, "
+                  f"个体判别器部分: {update_info['avg_ind_disc_comp']:.4f}")
+            
+            # 详细记录价值函数估计
+            main_logger.info(f"价值函数估计 - Discoverer均值: {update_info['avg_discoverer_val']:.4f}, "
+                  f"Coordinator状态价值: {update_info['mean_coord_state_val']:.4f}, "
+                  f"Coordinator智能体价值: {update_info['mean_coord_agent_val']:.4f}")
+            
+        except ValueError as e:
+            main_logger.error(f"更新错误: {e}")
+            update_times += 1
 
         # 重置rollout步数计数器
         rollout_steps = 0
@@ -1955,6 +1995,8 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
         min_reward: 最小奖励
         max_reward: 最大奖励
     """
+    import torch  # 添加这行确保 torch 在函数作用域内可用
+    
     # 打印评估参数
     num_envs = vec_env.num_envs
     main_logger.info(f"开始评估: 目标完成 {n_episodes} 个episodes，使用 {num_envs} 个并行环境，是否渲染: {render}")

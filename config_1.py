@@ -192,6 +192,9 @@ class Config:
     collect_skill_diversity = True      # 是否收集技能多样性数据  
     collect_performance_metrics = True  # 是否收集性能指标
     collect_reward_components = False   # 是否收集详细的奖励组成（减少存储）
+    
+    # 强制收集参数 - 解决环境样本贡献不均问题
+    force_collection_threshold = 500    # 环境距离上次贡献超过此步数时强制收集高层样本
 
     def calculate_and_set_buffer_sizes(self):
         """根据标准PPO框架计算buffer和batch大小"""
