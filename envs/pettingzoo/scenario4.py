@@ -139,7 +139,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 通信参数
         self.carrier_frequency = 2e9
         self.tx_power = 23
-        self.noise_power = -80
+        self.noise_power = -95  # 或 -94，一个更合理的值
         self.use_shadowing = use_shadowing
         self.paper_reward = paper_reward
         self.use_fdma = use_fdma
@@ -213,7 +213,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         参数:
             uav_pos: 无人机位置 [3]
-            user_pos: 用户位置 [2] 或索引
+            user_pos: 用户位置 [3] 或索引
             
         返回:
             path_loss: 路径损耗 (dB)
@@ -222,13 +222,12 @@ class UAVForcedRelayEnv(ParallelEnv):
         if isinstance(user_pos, (int, np.integer)):
             user_pos = self.user_positions[user_pos]
             
-        # 确保 user_pos 是二维的 (x, y)，假设用户在地面
-        if len(user_pos) > 2:
-            user_pos_2d = user_pos[:2]
-            user_pos_3d = user_pos
+        # 确保 user_pos 是三维的 (x, y, z)
+        if len(user_pos) >= 3:
+            user_pos_3d = user_pos[:3]
         else:
-            user_pos_2d = user_pos
-            user_pos_3d = np.append(user_pos, 0)  # 用户在地面，z=0
+            # 兼容性处理：如果传入的是二维位置，则添加1.5米高度
+            user_pos_3d = np.append(user_pos, 1.5)
         
         # 使用scenario4中的精确A2G路径损耗模型
         return self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
@@ -325,16 +324,17 @@ class UAVForcedRelayEnv(ParallelEnv):
         生成用户位置
         
         返回:
-            user_positions: 用户位置 [n_users, 2]
+            user_positions: 用户位置 [n_users, 3] (包含高度1.5米)
         """
         if self.user_distribution == "forced_relay_cluster":
             return self._generate_forced_relay_cluster_positions()
         elif self.user_distribution == "uniform":
-            user_positions = np.zeros((self.n_users, 2))
+            user_positions = np.zeros((self.n_users, 3))
             for i in range(self.n_users):
                 user_positions[i] = [
                     self.np_random.uniform(0, self.area_size),
-                    self.np_random.uniform(0, self.area_size)
+                    self.np_random.uniform(0, self.area_size),
+                    1.5  # 用户高度设为1.5米
                 ]
             return user_positions
         else:
@@ -351,9 +351,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         - 距离地面基站较远，强制多跳
         
         返回:
-            user_positions: 用户位置 [n_users, 2]
+            user_positions: 用户位置 [n_users, 3] (包含高度1.5米)
         """
-        user_positions = np.zeros((self.n_users, 2))
+        user_positions = np.zeros((self.n_users, 3))
         
         # 定义中心区域的边界（用户集中在这里）
         central_size = self.area_size * self.central_area_ratio
@@ -457,13 +457,16 @@ class UAVForcedRelayEnv(ParallelEnv):
                     cov=[[self.cluster_std**2, 0], [0, self.cluster_std**2]]
                 )
                 
-                user_position = cluster_center + offset
+                user_position_2d = cluster_center + offset
                 
                 # 确保用户位置在有效区域内
-                user_position[0] = np.clip(user_position[0], 10, self.area_size - 10)
-                user_position[1] = np.clip(user_position[1], 10, self.area_size - 10)
+                user_position_2d[0] = np.clip(user_position_2d[0], 10, self.area_size - 10)
+                user_position_2d[1] = np.clip(user_position_2d[1], 10, self.area_size - 10)
                 
-                user_positions[user_idx] = user_position
+                # 创建三维用户位置（包含1.5米高度）
+                user_position_3d = np.array([user_position_2d[0], user_position_2d[1], 1.5])
+                
+                user_positions[user_idx] = user_position_3d
                 user_idx += 1
         
         return user_positions
@@ -1212,7 +1215,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         重写父类方法，使用场景4的精确信道模型计算SINR
         """
         uav_pos = self.uav_positions[uav_idx]
-        user_pos_3d = np.append(self.user_positions[user_idx], 0)
+        user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
         
         # 使用精确的A2G路径损耗模型
         path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
@@ -1563,8 +1566,8 @@ class UAVForcedRelayEnv(ParallelEnv):
                 break
             
             user_pos = self.user_positions[user_idx]
-            # 相对位置 (x, y) - 归一化
-            relative_pos = (user_pos - own_position[:2]) / self.area_size
+            # 相对位置 (x, y) - 归一化，只取前两个维度
+            relative_pos = (user_pos[:2] - own_position[:2]) / self.area_size
             # 归一化SINR到[0,1]范围 (假设SINR范围为-10dB到40dB)
             normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
             
@@ -1797,28 +1800,30 @@ class UAVForcedRelayEnv(ParallelEnv):
         if hasattr(self, 'environment_type'):
             env_type = self.environment_type
         else:
-            env_type = "suburban"  # 默认郊区环境
-        
-        # LoS概率参数
+            env_type = "urban"  # 默认城市环境
+
+        # LoS概率参数 (基于ITU-R P.2108-0 和相关研究的Sigmoid模型)
         if env_type == "suburban":
-            a, b, phi_0 = 0.77, 0.05, 15.0
-            eta_los, eta_nlos = 0.1, 21.0
+            # 郊区环境参数
+            a, b = 5.0, 0.3
+            eta_los, eta_nlos = 1.0, 20.0 # 使用您提供的典型值范围
         elif env_type == "urban":
-            a, b, phi_0 = 0.63, 0.09, 15.0
-            eta_los, eta_nlos = 1.0, 20.0
+            # 城市环境参数
+            a, b = 3.0, 0.5
+            eta_los, eta_nlos = 1.5, 25.0
         elif env_type == "dense_urban":
-            a, b, phi_0 = 0.37, 0.21, 15.0
-            eta_los, eta_nlos = 1.6, 23.0
-        else:
-            # 默认郊区参数
-            a, b, phi_0 = 0.77, 0.05, 15.0
-            eta_los, eta_nlos = 0.1, 21.0
-        
-        # 计算LoS概率
-        if elevation_angle >= phi_0:
-            p_los = a * ((elevation_angle - phi_0) ** b)
-        else:
-            p_los = 0.1  # 低仰角时给一个最小LoS概率
+            # 密集城区参数
+            a, b = 2.5, 0.7
+            eta_los, eta_nlos = 5.0, 30.0
+        else: # 默认使用郊区
+            a, b = 5.0, 0.3
+            eta_los, eta_nlos = 1.0, 20.0
+
+        # 使用更精确的、基于仰角的平滑LoS概率公式
+        # P_LoS(θ) = 1 / (1 + a * exp(-b * (θ - a))) 的修正和常用形式
+        # 注意：这里的参数a,b与公式中的a,b不同，为避免混淆，使用p1, p2
+        p1, p2 = a, b
+        p_los = 1 / (1 + p1 * np.exp(-p2 * (elevation_angle - p1)))
         
         p_los = np.clip(p_los, 0.0, 1.0)
         
@@ -2031,7 +2036,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         state_components.append(normalized_uav_positions.flatten())
         
         # 2. 用户位置 (归一化到[0,1])
-        normalized_user_positions = self.user_positions / self.area_size
+        normalized_user_positions = self.user_positions[:, :2] / self.area_size
         state_components.append(normalized_user_positions.flatten())
         
         # 3. 地面基站位置 (归一化到[0,1]) - 强制中继场景的关键信息
@@ -2159,7 +2164,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         for user_idx in connected_users:
             # 计算UAV到用户的精确SINR
             uav_pos = self.uav_positions[uav_idx]
-            user_pos_3d = np.append(self.user_positions[user_idx], 0)  # 用户在地面，z=0
+            user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
             
             # 计算路径损耗（使用我们的精确A2G模型）
             path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
@@ -2196,7 +2201,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                     if user_capacities[i] > 0:
                         # 使用分配的带宽重新计算容量
                         uav_pos = self.uav_positions[uav_idx]
-                        user_pos_3d = np.append(self.user_positions[user_idx], 0)
+                        user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
                         path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
                         rx_power = self.tx_power - path_loss
                         sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
@@ -2251,7 +2256,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                 
                 # 计算干扰源到用户的路径损耗
                 interferer_pos = self.uav_positions[i]
-                user_pos_3d = np.append(self.user_positions[user_idx], 0)  # 用户在地面
+                user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
                 interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
                 
                 # 计算干扰功率：发射功率 - 路径损耗，然后转为线性值，再乘以ACLR
@@ -2271,7 +2276,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         else:
             # 非FDMA模式：计算来自其他UAV的同频干扰
             interference_powers = []
-            user_pos_3d = np.append(self.user_positions[user_idx], 0)  # 用户在地面
+            user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
             
             for i in range(self.n_uavs):
                 if i != uav_idx:  # 排除目标UAV
