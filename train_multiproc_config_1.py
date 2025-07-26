@@ -29,6 +29,188 @@ from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
+from torch.utils.tensorboard import SummaryWriter
+
+class TensorBoardManager:
+    """统一的TensorBoard管理器 - 处理从agent.py移除的所有TensorBoard写入逻辑"""
+    
+    def __init__(self, log_dir, config):
+        self.log_dir = log_dir
+        self.config = config
+        self.writer = SummaryWriter(log_dir)
+        
+        # 记录配置参数到TensorBoard
+        self._log_config_parameters()
+    
+    def _log_config_parameters(self):
+        """记录配置参数到TensorBoard"""
+        # 基础参数
+        self.writer.add_text('Parameters/n_agents', str(self.config.n_agents), 0)
+        self.writer.add_text('Parameters/n_Z', str(self.config.n_Z), 0)
+        self.writer.add_text('Parameters/n_z', str(self.config.n_z), 0)
+        self.writer.add_text('Parameters/k', str(self.config.k), 0)
+        self.writer.add_text('Parameters/gamma', str(self.config.gamma), 0)
+        self.writer.add_text('Parameters/lambda_e', str(self.config.lambda_e), 0)
+        self.writer.add_text('Parameters/lambda_D', str(self.config.lambda_D), 0)
+        self.writer.add_text('Parameters/lambda_d', str(self.config.lambda_d), 0)
+        self.writer.add_text('Parameters/lambda_h', str(self.config.lambda_h), 0)
+        self.writer.add_text('Parameters/lambda_l', str(self.config.lambda_l), 0)
+        self.writer.add_text('Parameters/hidden_size', str(self.config.hidden_size), 0)
+        self.writer.add_text('Parameters/lr_coordinator', str(self.config.lr_coordinator), 0)
+        self.writer.add_text('Parameters/lr_discoverer', str(self.config.lr_discoverer), 0)
+        self.writer.add_text('Parameters/lr_discriminator', str(self.config.lr_discriminator), 0)
+        
+        # 高级功能参数
+        self.writer.add_text('Parameters/use_opt', str(self.config.use_opt), 0)
+        self.writer.add_text('Parameters/use_reward_annealing', str(getattr(self.config, 'use_reward_annealing', False)), 0)
+        self.writer.add_text('Parameters/use_lr_decay', str(getattr(self.config, 'use_lr_decay', False)), 0)
+        self.writer.add_text('Parameters/use_valuenorm', str(getattr(self.config, 'use_valuenorm', False)), 0)
+        
+        # OPT相关参数
+        if self.config.use_opt:
+            self.writer.add_text('Parameters/lambda_cd', str(getattr(self.config, 'lambda_cd', 0.1)), 0)
+        
+        # 权重退火相关参数
+        if getattr(self.config, 'use_reward_annealing', False):
+            self.writer.add_text('Parameters/w_intrinsic_initial', str(getattr(self.config, 'w_intrinsic_initial', 3.0)), 0)
+            self.writer.add_text('Parameters/w_intrinsic_final', str(getattr(self.config, 'w_intrinsic_final', 1.0)), 0)
+            self.writer.add_text('Parameters/w_extrinsic_initial', str(getattr(self.config, 'w_extrinsic_initial', 0.5)), 0)
+            self.writer.add_text('Parameters/w_extrinsic_final', str(getattr(self.config, 'w_extrinsic_final', 1.5)), 0)
+            self.writer.add_text('Parameters/anneal_steps', str(getattr(self.config, 'anneal_steps', 1000000)), 0)
+            self.writer.add_text('Parameters/anneal_schedule', str(getattr(self.config, 'anneal_schedule', 'linear')), 0)
+
+        # 学习率衰减相关参数
+        if getattr(self.config, 'use_lr_decay', False):
+            self.writer.add_text('Parameters/lr_decay_schedule', str(getattr(self.config, 'lr_decay_schedule', 'linear')), 0)
+            self.writer.add_text('Parameters/lr_decay_steps', str(getattr(self.config, 'lr_decay_steps', 100000)), 0)
+            self.writer.add_text('Parameters/coordinator_lr_decay_factor', str(getattr(self.config, 'coordinator_lr_decay_factor', 0.1)), 0)
+            self.writer.add_text('Parameters/discoverer_lr_decay_factor', str(getattr(self.config, 'discoverer_lr_decay_factor', 0.1)), 0)
+            self.writer.add_text('Parameters/discriminator_lr_decay_factor', str(getattr(self.config, 'discriminator_lr_decay_factor', 0.1)), 0)
+    
+    def log_training_metrics(self, step, update_info, args=None):
+        """记录训练指标到TensorBoard"""
+        # 基础损失
+        self.writer.add_scalar('Losses/Coordinator/Total', update_info['coordinator_loss'], step)
+        self.writer.add_scalar('Losses/Discoverer/Total', update_info['discoverer_loss'], step)
+        self.writer.add_scalar('Losses/Discriminator/Total', update_info['discriminator_loss'], step)
+        
+        # 详细损失组成
+        self.writer.add_scalar('Losses/Coordinator/Policy', update_info['coordinator_policy_loss'], step)
+        self.writer.add_scalar('Losses/Coordinator/Value', update_info['coordinator_value_loss'], step)
+        self.writer.add_scalar('Losses/Discoverer/Policy', update_info['discoverer_policy_loss'], step)
+        self.writer.add_scalar('Losses/Discoverer/Value', update_info['discoverer_value_loss'], step)
+        
+        # 熵记录
+        self.writer.add_scalar('Entropy/Coordinator/TeamSkill_Z', update_info['team_skill_entropy'], step)
+        self.writer.add_scalar('Entropy/Coordinator/AgentSkill_z_Average', update_info['agent_skill_entropy'], step)
+        self.writer.add_scalar('Entropy/Discoverer/Action', update_info['action_entropy'], step)
+
+        # 奖励记录
+        self.writer.add_scalar('Rewards/HighLevel/K_Step_Accumulated_Mean', update_info['mean_high_level_reward'], step)
+        
+        # 内在奖励记录
+        self.writer.add_scalar('Rewards/Intrinsic/LowLevel_Average', update_info['avg_intrinsic_reward'], step)
+        self.writer.add_scalar('Rewards/Intrinsic/Components/Environmental_Portion_Average', update_info['avg_env_comp'], step)
+        self.writer.add_scalar('Rewards/Intrinsic/Components/TeamDiscriminator_Portion_Average', update_info['avg_team_disc_comp'], step)
+        self.writer.add_scalar('Rewards/Intrinsic/Components/IndividualDiscriminator_Portion_Average', update_info['avg_ind_disc_comp'], step)
+
+        # 价值函数估计记录
+        self.writer.add_scalar('ValueEstimates/Coordinator/StateValue_Mean', update_info['mean_coord_state_val'], step)
+        self.writer.add_scalar('ValueEstimates/Coordinator/AgentValue_Average_Mean', update_info['mean_coord_agent_val'], step)
+        self.writer.add_scalar('ValueEstimates/Discoverer/Value_Mean', update_info['avg_discoverer_val'], step)
+
+        # CD Loss
+        if 'cd_loss' in update_info:
+            self.writer.add_scalar('Losses/Coordinator/CD_Loss', update_info['cd_loss'], step)
+
+        # 记录关键超参数
+        self.writer.add_scalar('Parameters/Lambda_D', self.config.lambda_D, step)
+        self.writer.add_scalar('Parameters/Lambda_d', self.config.lambda_d, step)
+        self.writer.add_scalar('Parameters/Lambda_h', self.config.lambda_h, step)
+        self.writer.add_scalar('Parameters/Lambda_l', self.config.lambda_l, step)
+    
+    def log_annealing_stats(self, step, annealing_stats):
+        """记录权重退火信息到TensorBoard"""
+        if not annealing_stats:
+            return
+            
+        self.writer.add_scalar('RewardAnnealing/Progress', annealing_stats['progress'], step)
+        self.writer.add_scalar('RewardAnnealing/Progress_Adjusted', annealing_stats['progress_adjusted'], step)
+        self.writer.add_scalar('RewardAnnealing/Intrinsic_Weight_Multiplier', annealing_stats['w_intrinsic_current'], step)
+        self.writer.add_scalar('RewardAnnealing/Extrinsic_Weight_Multiplier', annealing_stats['w_extrinsic_current'], step)
+        
+        # 记录实际生效的权重
+        self.writer.add_scalar('RewardAnnealing/Effective_Lambda_D', annealing_stats['effective_lambda_D'], step)
+        self.writer.add_scalar('RewardAnnealing/Effective_Lambda_d', annealing_stats['effective_lambda_d'], step)
+        self.writer.add_scalar('RewardAnnealing/Effective_Lambda_e', annealing_stats['effective_lambda_e'], step)
+    
+    def log_learning_rates(self, step, learning_rates):
+        """记录学习率到TensorBoard"""
+        self.writer.add_scalar('LearningRate/Coordinator', learning_rates['coordinator_lr'], step)
+        self.writer.add_scalar('LearningRate/Discoverer', learning_rates['discoverer_lr'], step)
+        self.writer.add_scalar('LearningRate/Discriminator', learning_rates['discriminator_lr'], step)
+    
+    def log_value_norm_stats(self, step, value_norm_stats):
+        """记录Value Normalization统计信息到TensorBoard"""
+        if 'coordinator' in value_norm_stats:
+            coord_stats = value_norm_stats['coordinator']
+            self.writer.add_scalar('ValueNorm/Coordinator/Mean', coord_stats['mean'], step)
+            self.writer.add_scalar('ValueNorm/Coordinator/Std', coord_stats['std'], step)
+            self.writer.add_scalar('ValueNorm/Coordinator/Count', coord_stats['count'], step)
+        
+        if 'discoverer' in value_norm_stats:
+            disc_stats = value_norm_stats['discoverer']
+            self.writer.add_scalar('ValueNorm/Discoverer/Mean', disc_stats['mean'], step)
+            self.writer.add_scalar('ValueNorm/Discoverer/Std', disc_stats['std'], step)
+            self.writer.add_scalar('ValueNorm/Discoverer/Count', disc_stats['count'], step)
+    
+    def log_episode_completion(self, episode_num, env_id, total_reward, episode_length):
+        """记录episode完成信息"""
+        self.writer.add_scalar('Reward/episode_reward', total_reward, episode_num)
+        self.writer.add_scalar('Reward/episode_length', episode_length, episode_num)
+    
+    def log_skill_distribution(self, team_skill, agent_skills, step=None, episode=None):
+        """记录技能分配分布到TensorBoard"""
+        use_step = episode if episode is not None else step
+        if use_step is None:
+            return
+            
+        # 记录当前团队技能
+        self.writer.add_scalar('Skills/Current/TeamSkill', team_skill, use_step)
+        
+        # 记录当前个体技能分布
+        for i, skill_val in enumerate(agent_skills):
+            self.writer.add_scalar(f'Skills/Current/Agent{i}_Skill', skill_val, use_step)
+        
+        # 计算并记录当前个体技能的多样性
+        if len(agent_skills) > 0:
+            current_skill_counts = {}
+            for skill_val in agent_skills:
+                current_skill_counts[skill_val] = current_skill_counts.get(skill_val, 0) + 1
+            
+            n_agents_current = len(agent_skills)
+            current_skill_entropy = 0
+            for count in current_skill_counts.values():
+                p = count / n_agents_current
+                if p > 0:
+                    current_skill_entropy -= p * np.log(p)
+            self.writer.add_scalar('Skills/Current/Diversity', current_skill_entropy, use_step)
+    
+    def add_text(self, tag, text_string, global_step=None):
+        """添加文本到TensorBoard"""
+        self.writer.add_text(tag, text_string, global_step)
+    
+    def add_scalar(self, tag, scalar_value, global_step=None):
+        """添加标量到TensorBoard"""
+        self.writer.add_scalar(tag, scalar_value, global_step)
+    
+    def flush(self):
+        """刷新TensorBoard写入"""
+        self.writer.flush()
+    
+    def close(self):
+        """关闭TensorBoard writer"""
+        self.writer.close()
 
 # Removed VectorizedEnvAdapter class
 
@@ -204,8 +386,8 @@ class EnhancedRewardTracker:
             }
         }
         
-        # 滑动窗口统计
-        self.window_size = 100
+        # 滑动窗口统计 - 使用rollout_length作为窗口大小
+        self.window_size = config.rollout_length
         self.recent_rewards = deque(maxlen=self.window_size)
         self.recent_lengths = deque(maxlen=self.window_size)
         
@@ -222,9 +404,9 @@ class EnhancedRewardTracker:
         self.cleanup_interval = 50000  # 每50000步清理一次旧数据
         
     def _log_aggregated_metrics(self, writer, step, data_list, metric_name, category="Training", 
-                               recent_window=100, value_field='value'):
+                               recent_window=None, value_field='value'):
         """
-        辅助函数：处理数据聚合并写入TensorBoard
+        辅助函数：处理数据聚合并写入TensorBoard - 简化版本，只记录平均值
         
         参数:
             writer: TensorBoard writer
@@ -232,18 +414,22 @@ class EnhancedRewardTracker:
             data_list: 包含数据的列表
             metric_name: 指标名称
             category: TensorBoard分类
-            recent_window: 最近数据窗口大小
+            recent_window: 最近数据窗口大小 (如果为None，使用rollout_length)
             value_field: 数据字段名
         """
         if not data_list:
             return
+        
+        # 使用rollout_length作为默认窗口大小
+        if recent_window is None:
+            recent_window = self.config.rollout_length
             
         # 获取最近的数据
         recent_data = data_list[-recent_window:]
         if not recent_data:
             return
             
-        # 按环境分组并聚合（修改聚合逻辑：先环境内平均，再跨环境平均）
+        # 按环境分组并聚合（简化版本：只计算平均值）
         try:
             # 构建DataFrame
             df_data = []
@@ -264,50 +450,17 @@ class EnhancedRewardTracker:
             df = pd.DataFrame(df_data)
             
             # 按env_id分组，先计算每个环境的内部平均值
-            env_aggregated = df.groupby('env_id')['value'].agg(['mean', 'std', 'min', 'max', 'count']).reset_index()
+            env_aggregated = df.groupby('env_id')['value'].mean().reset_index()
             
             if len(env_aggregated) == 0:
                 return
                 
-            # 计算跨环境的最终统计
-            env_mean_values = env_aggregated['mean'].values
+            # 计算跨环境的最终平均值
+            env_mean_values = env_aggregated['value'].values
             final_mean = np.mean(env_mean_values)  # 跨环境平均
-            final_std = np.std(env_mean_values) if len(env_mean_values) > 1 else 0
-            final_min = np.min(env_mean_values)  # 各环境平均值的最小值
-            final_max = np.max(env_mean_values)  # 各环境平均值的最大值
             
-            # 写入TensorBoard - 基本统计
-            writer.add_scalar(f'{category}/{metric_name}_Mean_{recent_window}steps', final_mean, step)
-            if final_std > 0:
-                writer.add_scalar(f'{category}/{metric_name}_Std_{recent_window}steps', final_std, step)
-            writer.add_scalar(f'{category}/{metric_name}_Min_{recent_window}steps', final_min, step)
-            writer.add_scalar(f'{category}/{metric_name}_Max_{recent_window}steps', final_max, step)
-            
-            # 写入TensorBoard - 增强统计
-            env_variation_coeff = final_std / final_mean if final_mean != 0 else 0
-            writer.add_scalar(f'{category}/{metric_name}_EnvVariation_{recent_window}steps', env_variation_coeff, step)
-            writer.add_scalar(f'{category}/{metric_name}_ActiveEnvs_{recent_window}steps', len(env_aggregated), step)
-            
-            # 如果有足够的环境数，添加中位数
-            if len(env_mean_values) >= 3:
-                final_median = np.median(env_mean_values)
-                writer.add_scalar(f'{category}/{metric_name}_Median_{recent_window}steps', final_median, step)
-            
-            # 计算基于环境的趋势（如果有足够数据）
-            if len(env_aggregated) >= 2:  # 至少需要2个环境
-                env_trends = []
-                for env_id in env_aggregated['env_id']:
-                    env_data = df[df['env_id'] == env_id].sort_values('step')
-                    if len(env_data) >= 10:  # 每个环境至少10个数据点
-                        mid_point = len(env_data) // 2
-                        first_half_mean = env_data['value'].iloc[:mid_point].mean()
-                        second_half_mean = env_data['value'].iloc[mid_point:].mean()
-                        env_trend = second_half_mean - first_half_mean
-                        env_trends.append(env_trend)
-                
-                if env_trends:
-                    avg_trend = np.mean(env_trends)
-                    writer.add_scalar(f'{category}/{metric_name}_Trend_{recent_window}steps', avg_trend, step)
+            # 只写入TensorBoard平均值 - 使用rollout标识
+            writer.add_scalar(f'{category}/{metric_name}_Mean_Rollout', final_mean, step)
                 
         except Exception as e:
             main_logger.warning(f"聚合指标 {metric_name} 时出错: {e}")
@@ -361,28 +514,26 @@ class EnhancedRewardTracker:
                         'value': comp_value
                     })
         
-        # 记录额外信息（修正为优先使用瞬时值）
-        if info:
-            served_users = 0
+        # 记录额外信息（修正为仅在找到有效数据时记录，避免错误地记录0）
+        if info and 'reward_info' in info:
+            reward_info = info['reward_info']
+            served_users = None  # 初始化为 None，表示"未找到"
             
-            # 严格优先使用 reward_info 中的数据，避免使用不可靠的根部字段
-            if 'reward_info' in info and 'effective_connected_users' in info['reward_info']:
-                served_users = info['reward_info']['effective_connected_users']
-            elif 'reward_info' in info and 'connected_users' in info['reward_info']:
-                served_users = info['reward_info']['connected_users']
-            elif 'reward_info' in info and 'coverage_ratio' in info['reward_info'] and self.n_users is not None:
-                # 从瞬时覆盖率计算服务用户数，使用固定的n_users
-                served_users = int(info['reward_info']['coverage_ratio'] * self.n_users)
-            # 注意：移除了不可靠的备用方案，避免使用 info['coverage_ratio'] 和其他根部字段
-            # 这些字段可能被环境适配器或其他中间件修改，导致数据不一致
+            # 严格优先使用 'effective_connected_users'
+            if 'effective_connected_users' in reward_info:
+                served_users = reward_info['effective_connected_users']
+            elif 'connected_users' in reward_info:
+                # 如果没有 effective_connected_users，则回退到 connected_users
+                served_users = reward_info['connected_users']
             
-            # 修复：无论服务用户数是否为0，都记录到性能指标，以保证与coverage_ratio一致
-            self.performance_metrics['served_users'].append({
-                'step': step,
-                'env_id': env_id,
-                'served_users': served_users,
-                'total_users': self.n_users  # 使用固定的n_users
-            })
+            # 只有在成功获取到 served_users 值 (不为 None) 时才记录
+            if served_users is not None:
+                self.performance_metrics['served_users'].append({
+                    'step': step,
+                    'env_id': env_id,
+                    'served_users': served_users,
+                    'total_users': self.n_users  # 使用固定的n_users
+                })
             
             # 场景4特有指标：覆盖栅格数 (从info根部获取)
             if 'covered_grids' in info:
@@ -485,6 +636,43 @@ class EnhancedRewardTracker:
                         'timestamp': time.time()
                     })
                 
+                # 场景4新增：Reward Shaping机制
+                if 'connectivity_shaping_reward' in reward_info:
+                    if 'connectivity_shaping_reward' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['connectivity_shaping_reward'] = []
+                    self.performance_metrics['reward_components']['connectivity_shaping_reward'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['connectivity_shaping_reward'], 'timestamp': time.time()
+                    })
+                
+                if 'quality_shaping_reward' in reward_info:
+                    if 'quality_shaping_reward' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['quality_shaping_reward'] = []
+                    self.performance_metrics['reward_components']['quality_shaping_reward'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['quality_shaping_reward'], 'timestamp': time.time()
+                    })
+                
+                if 'distance_overlap_penalty' in reward_info:
+                    if 'distance_overlap_penalty' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['distance_overlap_penalty'] = []
+                    self.performance_metrics['reward_components']['distance_overlap_penalty'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['distance_overlap_penalty'], 'timestamp': time.time()
+                    })
+                
+                # 场景4新增：信念地图相关统计
+                belief_fields = [
+                    'belief_entropy', 'max_belief_value', 'min_belief_value', 'mean_belief_value',
+                    'belief_concentration', 'high_belief_cells', 'belief_variance', 'belief_skewness',
+                    'total_belief_mass', 'current_potential', 'previous_potential'
+                ]
+                
+                for field in belief_fields:
+                    if field in reward_info:
+                        if field not in self.performance_metrics['reward_components']:
+                            self.performance_metrics['reward_components'][field] = []
+                        self.performance_metrics['reward_components'][field].append({
+                            'step': step, 'env_id': env_id, 'value': reward_info[field], 'timestamp': time.time()
+                        })
+                
                 # 其他有用指标
                 if 'avg_hops' in reward_info:
                     self.performance_metrics['reward_components']['avg_hops'].append({
@@ -523,6 +711,21 @@ class EnhancedRewardTracker:
                 if 'discovered_users_count' in reward_info:
                     self.performance_metrics['reward_components']['discovered_users_count'].append({
                         'step': step, 'env_id': env_id, 'value': reward_info['discovered_users_count'], 'timestamp': time.time()
+                    })
+                
+                # 场景4新增：潜能奖励
+                if 'potential_reward' in reward_info:
+                    if 'potential_reward' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['potential_reward'] = []
+                    self.performance_metrics['reward_components']['potential_reward'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['potential_reward'], 'timestamp': time.time()
+                    })
+                
+                if 'weighted_potential_reward' in reward_info:
+                    if 'weighted_potential_reward' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['weighted_potential_reward'] = []
+                    self.performance_metrics['reward_components']['weighted_potential_reward'].append({
+                        'step': step, 'env_id': env_id, 'value': reward_info['weighted_potential_reward'], 'timestamp': time.time()
                     })
     
     def log_episode_completion(self, episode_num, env_id, total_reward, episode_length, info=None):
@@ -628,7 +831,7 @@ class EnhancedRewardTracker:
                     'reward_std': np.std(rewards),
                     'reward_min': np.min(rewards),
                     'reward_max': np.max(rewards),
-                    'recent_10_reward_mean': np.mean(rewards[-10:]) if len(rewards) >= 10 else np.mean(rewards)
+                    'recent_10_reward_mean': np.mean(rewards[-self.window_size:]) if len(rewards) >= self.window_size else np.mean(rewards)
                 })
             
             # 导出到JSON文件
@@ -900,32 +1103,109 @@ class EnhancedRewardTracker:
             plt.savefig(os.path.join(export_dir, f'skill_analysis_step_{step}.png'), dpi=300, bbox_inches='tight')
             plt.close()
     
+    def log_rollout_metrics_to_tensorboard(self, writer, step, args=None):
+        """记录rollout指标到TensorBoard - 与agent.update()同步调用
+        
+        这个函数专门用于记录需要与Environmental_Portion同步的性能指标，
+        解决TensorBoard图表时间戳不一致的问题。
+        
+        参数:
+            writer: TensorBoard writer
+            step: 当前步数
+            args: 命令行参数
+        """
+        
+        # Throughput统计（修正后使用n_users，使用rollout_length窗口）
+        if self.performance_metrics['served_users'] and self.n_users is not None:
+            # 计算最近rollout_length步的滑动窗口平均吞吐量
+            recent_served_data = self.performance_metrics['served_users'][-self.window_size:]
+            recent_served_users = [u['served_users'] for u in recent_served_data]
+            recent_total_users = [u['total_users'] for u in recent_served_data]
+            
+            if recent_served_users:
+                # 平均服务用户数
+                avg_served_users = np.mean(recent_served_users)
+                writer.add_scalar('Performance/Throughput_ServedUsers_Rollout', avg_served_users, step)
+                
+                # 平均总用户数（记录但不用于计算服务率）
+                avg_total_users = np.mean(recent_total_users)
+                writer.add_scalar('Performance/Throughput_TotalUsers_Rollout', avg_total_users, step)
+                
+                # 服务率（吞吐率）- 使用固定的n_users作为分母
+                service_rate = avg_served_users / self.n_users
+                writer.add_scalar('Performance/Throughput_ServiceRate_Rollout', service_rate, step)
+        
+        # 系统吞吐量统计
+        self._log_aggregated_metrics(writer, step, 
+                                   self.performance_metrics['total_throughput'], 
+                                   'System_Throughput_Mbps', 
+                                   'Performance',
+                                   value_field='system_throughput_mbps')
+        
+        # 平均用户吞吐量统计
+        self._log_aggregated_metrics(writer, step, 
+                                   self.performance_metrics['avg_throughput_per_user'], 
+                                   'Avg_User_Throughput_Mbps', 
+                                   'Performance',
+                                   value_field='avg_throughput_per_user_mbps')
+        
+        # 使用新的聚合逻辑处理环境奖励组成部分
+        reward_components = self.performance_metrics['reward_components']
+        
+        # 连接用户数统计
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['connected_users'], 
+                                   'Connected_Users', 
+                                   'Performance')
+        
+        # 覆盖率统计
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components['coverage_ratios'], 
+                                   'Coverage_Ratio', 
+                                   'Performance')
+
     def log_to_tensorboard(self, writer, step, args=None):
         """记录详细数据到TensorBoard - 使用聚合数据避免并行环境数据堆积"""
         
-        # 训练奖励统计 - 使用coordinator的reward，保持兼容性
+        # 训练奖励统计 - 使用"均值的均值"方法统一标准
         if self.recent_rewards:
             coordinator_rewards = list(self.recent_rewards)  # 这些是coordinator的k步奖励
             
-            # 计算coordinator奖励的统计信息
-            writer.add_scalar('Training/Coordinator_Reward_Mean_100ep', np.mean(coordinator_rewards), step)
-            writer.add_scalar('Training/Coordinator_Reward_Std_100ep', np.std(coordinator_rewards), step)
-            writer.add_scalar('Training/Coordinator_Reward_Min_100ep', np.min(coordinator_rewards), step)
-            writer.add_scalar('Training/Coordinator_Reward_Max_100ep', np.max(coordinator_rewards), step)
+            # 如果有足够的数据，按环境分组计算平均值，然后再求总平均值
+            # 注意：self.recent_rewards是从多个环境收集的奖励
+            # 我们需要重新构造按环境分组的逻辑
             
-            # 保留原有的字段名以保持兼容性
-            writer.add_scalar('Training/Reward_Mean_100ep', np.mean(coordinator_rewards), step)
-            writer.add_scalar('Training/Reward_Std_100ep', np.std(coordinator_rewards), step)
-            writer.add_scalar('Training/Reward_Min_100ep', np.min(coordinator_rewards), step)
-            writer.add_scalar('Training/Reward_Max_100ep', np.max(coordinator_rewards), step)
+            # 由于这里的数据已经是聚合后的coordinator奖励，直接计算平均值
+            # 但为了统一标准，我们保持命名一致性
+            mean_reward = np.mean(coordinator_rewards)
+            
+            # 使用rollout标识，保持与agent.py中的命名一致
+            writer.add_scalar('Training/Coordinator_Reward_Mean_Rollout', mean_reward, step)
+            writer.add_scalar('Training/Reward_Mean_Rollout', mean_reward, step)
         
         if self.recent_lengths:
-            writer.add_scalar('Training/EpisodeLength_Mean_100ep', np.mean(self.recent_lengths), step)
+            mean_length = np.mean(self.recent_lengths)
+            writer.add_scalar('Training/EpisodeLength_Mean_Rollout', mean_length, step)
         
-        # 技能多样性
+        # 技能多样性 - 使用"均值的均值"方法统一标准
         if self.skill_usage['skill_diversity_history']:
-            recent_diversity = self.skill_usage['skill_diversity_history'][-10:]  # 最近10次
-            avg_diversity = np.mean([d['diversity'] for d in recent_diversity])
+            recent_diversity = self.skill_usage['skill_diversity_history'][-self.window_size:]  # 使用rollout_length窗口
+            
+            # 按环境分组计算多样性平均值，然后再计算总平均值
+            env_diversity_dict = {}
+            for d in recent_diversity:
+                env_id = d.get('env_id', 0)  # 如果没有env_id字段，默认为0
+                if env_id not in env_diversity_dict:
+                    env_diversity_dict[env_id] = []
+                env_diversity_dict[env_id].append(d['diversity'])
+            
+            # 计算每个环境的平均多样性，然后计算跨环境平均值
+            if env_diversity_dict:
+                env_means = [np.mean(values) for values in env_diversity_dict.values()]
+                avg_diversity = np.mean(env_means)
+            else:
+                avg_diversity = 0.0
+            
             writer.add_scalar('Training/Skill_Diversity_Recent', avg_diversity, step)
         
         # 技能使用分布熵
@@ -939,12 +1219,12 @@ class EnhancedRewardTracker:
         writer.add_scalar('Training/Episodes_Completed', self.training_rewards['episodes_completed'], step)
         writer.add_scalar('Training/Skill_Switches_Total', self.skill_usage['skill_switches'], step)
         
-        # 奖励组成比例
+        # 奖励组成比例（使用rollout_length窗口）
         if any(self.training_rewards['reward_components'].values()):
             recent_components = {}
             for comp_name, comp_list in self.training_rewards['reward_components'].items():
                 if comp_list:
-                    recent_data = comp_list[-100:]  # 最近100个数据点
+                    recent_data = comp_list[-self.window_size:]  # 使用rollout_length窗口
                     recent_components[comp_name] = np.mean([d['value'] for d in recent_data])
             
             total_intrinsic = sum(recent_components.values())
@@ -953,44 +1233,25 @@ class EnhancedRewardTracker:
                     proportion = comp_value / total_intrinsic
                     writer.add_scalar(f'Training/Reward_Proportion_{comp_name}', proportion, step)
         
-        # Throughput统计（修正后使用n_users）
+        # Throughput统计（修正后使用n_users，使用rollout_length窗口）
         if self.performance_metrics['served_users'] and self.n_users is not None:
-            # 计算最近100步的滑动窗口平均吞吐量
-            recent_served_data = self.performance_metrics['served_users'][-100:]
+            # 计算最近rollout_length步的滑动窗口平均吞吐量
+            recent_served_data = self.performance_metrics['served_users'][-self.window_size:]
             recent_served_users = [u['served_users'] for u in recent_served_data]
             recent_total_users = [u['total_users'] for u in recent_served_data]
             
             if recent_served_users:
                 # 平均服务用户数
                 avg_served_users = np.mean(recent_served_users)
-                writer.add_scalar('Performance/Throughput_ServedUsers_100steps', avg_served_users, step)
+                writer.add_scalar('Performance/Throughput_ServedUsers_Rollout', avg_served_users, step)
                 
                 # 平均总用户数（记录但不用于计算服务率）
                 avg_total_users = np.mean(recent_total_users)
-                writer.add_scalar('Performance/Throughput_TotalUsers_100steps', avg_total_users, step)
+                writer.add_scalar('Performance/Throughput_TotalUsers_Rollout', avg_total_users, step)
                 
                 # 服务率（吞吐率）- 使用固定的n_users作为分母
                 service_rate = avg_served_users / self.n_users
-                writer.add_scalar('Performance/Throughput_ServiceRate_100steps', service_rate, step)
-                
-                # 计算吞吐率变化趋势（最近50步 vs 前50步）
-                if len(recent_served_data) >= 100:
-                    first_half = recent_served_data[:50]
-                    second_half = recent_served_data[50:]
-                    
-                    first_half_rate = np.mean([u['served_users'] for u in first_half]) / max(np.mean([u['total_users'] for u in first_half]), 1)
-                    second_half_rate = np.mean([u['served_users'] for u in second_half]) / max(np.mean([u['total_users'] for u in second_half]), 1)
-                    
-                    throughput_trend = second_half_rate - first_half_rate
-                    writer.add_scalar('Performance/Throughput_Trend_100steps', throughput_trend, step)
-            
-            
-            # 吞吐量方差（稳定性指标）
-            if len(recent_served_users) > 1:
-                throughput_std = np.std(recent_served_users)
-                throughput_cv = throughput_std / max(np.mean(recent_served_users), 1e-8)  # 变异系数
-                writer.add_scalar('Performance/Throughput_Std_100steps', throughput_std, step)
-                writer.add_scalar('Performance/Throughput_CV_100steps', throughput_cv, step)
+                writer.add_scalar('Performance/Throughput_ServiceRate_Rollout', service_rate, step)
         
         # 使用新的聚合逻辑处理性能指标
         # 系统吞吐量统计
@@ -1045,9 +1306,9 @@ class EnhancedRewardTracker:
                                        'Exploration_Reward', 
                                        'Rewards')
             
-            # 探索奖励占总奖励的比例（仍需单独计算）
+            # 探索奖励占总奖励的比例（使用rollout_length窗口）
             if self.recent_rewards:
-                recent_exploration_rewards_data = reward_components['exploration_rewards'][-100:]
+                recent_exploration_rewards_data = reward_components['exploration_rewards'][-self.window_size:]
                 if recent_exploration_rewards_data:
                     recent_values = [r['value'] for r in recent_exploration_rewards_data]
                     avg_exploration_reward = np.mean(recent_values)
@@ -1056,7 +1317,7 @@ class EnhancedRewardTracker:
                         avg_total_reward = np.mean(recent_total_rewards)
                         if avg_total_reward != 0:
                             exploration_ratio = avg_exploration_reward / abs(avg_total_reward)
-                            writer.add_scalar('Rewards/Exploration_Reward_Ratio_100ep', exploration_ratio, step)
+                            writer.add_scalar('Rewards/Exploration_Reward_Ratio_Rollout', exploration_ratio, step)
 
         # 重叠惩罚
         self._log_aggregated_metrics(writer, step, 
@@ -1079,7 +1340,7 @@ class EnhancedRewardTracker:
         
         for field in belief_fields:
             if reward_components.get(field):
-                recent_data = reward_components[field][-100:]
+                recent_data = reward_components[field][-self.window_size:]
                 if recent_data:
                     recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
                     if recent_values:
@@ -1100,24 +1361,7 @@ class EnhancedRewardTracker:
                         
                         # 格式化字段名
                         formatted_field = field.replace('_', ' ').title().replace(' ', '_')
-                        writer.add_scalar(f'{category}/{formatted_field}_Mean_100steps', avg_value, step)
-                        
-                        # 为数值型字段添加额外统计
-                        if len(recent_values) > 1:
-                            std_value = np.std(recent_values)
-                            max_value = np.max(recent_values)
-                            min_value = np.min(recent_values)
-                            
-                            writer.add_scalar(f'{category}/{formatted_field}_Std_100steps', std_value, step)
-                            writer.add_scalar(f'{category}/{formatted_field}_Max_100steps', max_value, step)
-                            writer.add_scalar(f'{category}/{formatted_field}_Min_100steps', min_value, step)
-                            
-                            # 为某些关键字段添加趋势分析
-                            if field in ['belief_entropy', 'current_potential', 'sparse_task_reward'] and len(recent_values) >= 100:
-                                first_half_avg = np.mean(recent_values[:50])
-                                second_half_avg = np.mean(recent_values[50:])
-                                trend = second_half_avg - first_half_avg
-                                writer.add_scalar(f'{category}/{formatted_field}_Trend_100steps', trend, step)
+                        writer.add_scalar(f'{category}/{formatted_field}_Mean_Rollout', avg_value, step)
         
         # 场景4新增：发现奖励机制统计 - 新的Discovery分类
         discovery_fields = [
@@ -1126,7 +1370,7 @@ class EnhancedRewardTracker:
         
         for field in discovery_fields:
             if reward_components.get(field):
-                recent_data = reward_components[field][-100:]
+                recent_data = reward_components[field][-self.window_size:]
                 if recent_data:
                     recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
                     if recent_values:
@@ -1134,24 +1378,24 @@ class EnhancedRewardTracker:
                         
                         # 格式化字段名
                         formatted_field = field.replace('_', ' ').title().replace(' ', '_')
-                        writer.add_scalar(f'Discovery/{formatted_field}_Mean_100steps', avg_value, step)
+                        writer.add_scalar(f'Discovery/{formatted_field}_Mean_Rollout', avg_value, step)
+        
+        # 场景4新增：Reward Shaping机制统计 - 新的RewardShaping分类
+        reward_shaping_fields = [
+            'connectivity_shaping_reward', 'quality_shaping_reward', 'distance_overlap_penalty'
+        ]
+        
+        for field in reward_shaping_fields:
+            if reward_components.get(field):
+                recent_data = reward_components[field][-self.window_size:]
+                if recent_data:
+                    recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
+                    if recent_values:
+                        avg_value = np.mean(recent_values)
                         
-                        # 为数值型字段添加额外统计
-                        if len(recent_values) > 1:
-                            std_value = np.std(recent_values)
-                            max_value = np.max(recent_values)
-                            min_value = np.min(recent_values)
-                            
-                            writer.add_scalar(f'Discovery/{formatted_field}_Std_100steps', std_value, step)
-                            writer.add_scalar(f'Discovery/{formatted_field}_Max_100steps', max_value, step)
-                            writer.add_scalar(f'Discovery/{formatted_field}_Min_100steps', min_value, step)
-                            
-                            # 为发现奖励添加趋势分析
-                            if field in ['discovery_reward', 'weighted_discovery_reward'] and len(recent_values) >= 100:
-                                first_half_avg = np.mean(recent_values[:50])
-                                second_half_avg = np.mean(recent_values[50:])
-                                trend = second_half_avg - first_half_avg
-                                writer.add_scalar(f'Discovery/{formatted_field}_Trend_100steps', trend, step)
+                        # 格式化字段名
+                        formatted_field = field.replace('_', ' ').title().replace(' ', '_')
+                        writer.add_scalar(f'RewardShaping/{formatted_field}_Mean_Rollout', avg_value, step)
         
         # 场景4新增：发现进度统计（从环境适配器获取）
         # 这些数据可能直接来自环境的info，不在reward_components中
@@ -1162,7 +1406,7 @@ class EnhancedRewardTracker:
         
         # 尝试从最近的训练步骤中获取发现进度信息
         if self.training_rewards and 'step_rewards' in self.training_rewards:
-            recent_step_rewards = self.training_rewards['step_rewards'][-100:]
+            recent_step_rewards = self.training_rewards['step_rewards'][-self.window_size:]
             if recent_step_rewards:
                 # 从最近的步骤中提取发现进度信息
                 for field in discovery_progress_fields:
@@ -1175,17 +1419,7 @@ class EnhancedRewardTracker:
                     if field_values:
                         avg_value = np.mean(field_values)
                         formatted_field = field.replace('_', ' ').title().replace(' ', '_')
-                        writer.add_scalar(f'Discovery/{formatted_field}_Mean_100steps', avg_value, step)
-                        
-                        # 为发现进度添加最大值和最小值
-                        if len(field_values) > 1:
-                            std_value = np.std(field_values)
-                            max_value = np.max(field_values)
-                            min_value = np.min(field_values)
-                            
-                            writer.add_scalar(f'Discovery/{formatted_field}_Std_100steps', std_value, step)
-                            writer.add_scalar(f'Discovery/{formatted_field}_Max_100steps', max_value, step)
-                            writer.add_scalar(f'Discovery/{formatted_field}_Min_100steps', min_value, step)
+                        writer.add_scalar(f'Discovery/{formatted_field}_Mean_Rollout', avg_value, step)
         
         # 计算Real_Rewards（乘以超参数后的真实值）
         # 权重参数统一从 self.config 读取
@@ -1208,7 +1442,7 @@ class EnhancedRewardTracker:
             for reward_key, (weight_key, display_name) in reward_to_weight_map.items():
                 # 检查奖励数据和权重是否存在
                 if reward_components.get(reward_key) and hasattr(self.config, weight_key):
-                    recent_rewards_data = reward_components[reward_key][-100:]
+                    recent_rewards_data = reward_components[reward_key][-self.window_size:]
                     weight_value = getattr(self.config, weight_key)
                     
                     if recent_rewards_data:
@@ -1358,7 +1592,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 **scenario3_kwargs # 传递场景3特有参数
             )
         elif scenario == 4:
-            # 场景4：强制多跳中继环境（从配置对象获取所有参数）
+            # 场景4：强制多跳中继环境（使用简化的奖励权重参数）
             scenario4_kwargs = {
                 'max_steps': config.episode_length,           # 从配置中传入episode长度
                 'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
@@ -1369,9 +1603,9 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'central_area_ratio': config.central_area_ratio,
                 'min_sinr': config.min_sinr,
                 'max_connections': config.max_connections,
+                # 简化的奖励权重参数
                 'coverage_weight': config.coverage_weight,
-                'connectivity_weight': config.connectivity_weight,
-                'efficiency_weight': config.efficiency_weight,
+                'link_quality_weight': config.link_quality_weight,  # 统一的链路质量权重
                 'uav_init_mode': config.uav_init_mode,
                 'uav_start_area_size': config.uav_start_area_size,
                 'grid_resolution': config.grid_resolution,
@@ -1379,10 +1613,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'belief_decay_factor': config.belief_decay_factor,
                 'recon_interval': config.recon_interval,
                 'recon_strength': config.recon_strength,
-                'coverage_overlap_penalty_weight': config.coverage_overlap_penalty_weight,
-                # 发现奖励机制参数
-                'discovery_reward_weight': config.discovery_reward_weight,
-                'discovery_reward_value': config.discovery_reward_value
+                'distance_overlap_penalty_weight': config.distance_overlap_penalty_weight,
             }
             
             # 将场景4的参数合并到通用参数中
@@ -1466,8 +1697,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     model_dir = os.path.dirname(args.model_path)
     os.makedirs(model_dir, exist_ok=True)
     
-    # 创建HMASD代理
+    # 创建HMASD代理（不再有TensorBoard writer）
     agent = HMASDAgent(config, log_dir=log_dir, device=device)
+    
+    # 创建统一的TensorBoard管理器
+    tb_manager = TensorBoardManager(log_dir, config)
     
     # 如果指定了预训练模型路径，加载模型继续训练
     if args.resume_from and os.path.exists(args.resume_from):
@@ -1482,79 +1716,42 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             main_logger.info(f"成功加载预训练模型，将在此基础上继续训练")
             
             # 记录续训信息到TensorBoard
-            agent.writer.add_text('Training/resumed_from', args.resume_from, 0)
-            agent.writer.add_text('Training/mode', 'resume_training', 0)
+            tb_manager.add_text('Training/resumed_from', args.resume_from, 0)
+            tb_manager.add_text('Training/mode', 'resume_training', 0)
         except Exception as e:
             main_logger.error(f"加载预训练模型失败: {e}")
             main_logger.info("将从头开始训练")
-            agent.writer.add_text('Training/mode', 'from_scratch_due_to_load_error', 0)
+            tb_manager.add_text('Training/mode', 'from_scratch_due_to_load_error', 0)
     elif args.resume_from:
         main_logger.warning(f"指定的预训练模型文件不存在: {args.resume_from}")
         main_logger.info("将从头开始训练")
-        agent.writer.add_text('Training/mode', 'from_scratch_due_to_missing_file', 0)
+        tb_manager.add_text('Training/mode', 'from_scratch_due_to_missing_file', 0)
     else:
         main_logger.info("从头开始训练")
-        agent.writer.add_text('Training/mode', 'from_scratch', 0)
+        tb_manager.add_text('Training/mode', 'from_scratch', 0)
     
     # 创建增强的奖励追踪器
     reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=config.n_users)
     reward_tracker.export_interval = args.export_interval
     
-    # 记录超参数
-    agent.writer.add_text('Parameters/n_agents', str(config.n_agents), 0)
-    agent.writer.add_text('Parameters/n_Z', str(config.n_Z), 0)
-    agent.writer.add_text('Parameters/n_z', str(config.n_z), 0)
-    agent.writer.add_text('Parameters/k', str(config.k), 0)
-    agent.writer.add_text('Parameters/gamma', str(config.gamma), 0)
-    agent.writer.add_text('Parameters/lambda_e', str(config.lambda_e), 0)
-    agent.writer.add_text('Parameters/lambda_D', str(config.lambda_D), 0)
-    agent.writer.add_text('Parameters/lambda_d', str(config.lambda_d), 0)
-    agent.writer.add_text('Parameters/lambda_h', str(config.lambda_h), 0)
-    agent.writer.add_text('Parameters/lambda_l', str(config.lambda_l), 0)
-    agent.writer.add_text('Parameters/hidden_size', str(config.hidden_size), 0)
-    agent.writer.add_text('Parameters/lr', str(config.lr_coordinator), 0)
-    agent.writer.add_text('Parameters/num_envs', str(num_envs), 0) # Use num_envs variable
-    agent.writer.add_text('Parameters/export_interval', str(args.export_interval), 0)
-    agent.writer.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
-    agent.writer.add_text('Parameters/use_opt', str(config.use_opt), 0)
-    
-    # 记录OPT相关参数
-    if config.use_opt:
-        agent.writer.add_text('Parameters/lambda_cd', str(config.lambda_cd), 0)
-    
-    # 记录权重退火相关参数
-    agent.writer.add_text('Parameters/use_reward_annealing', str(config.use_reward_annealing), 0)
-    if config.use_reward_annealing:
-        agent.writer.add_text('Parameters/w_intrinsic_initial', str(config.w_intrinsic_initial), 0)
-        agent.writer.add_text('Parameters/w_intrinsic_final', str(config.w_intrinsic_final), 0)
-        agent.writer.add_text('Parameters/w_extrinsic_initial', str(config.w_extrinsic_initial), 0)
-        agent.writer.add_text('Parameters/w_extrinsic_final', str(config.w_extrinsic_final), 0)
-        agent.writer.add_text('Parameters/anneal_steps', str(config.anneal_steps), 0)
-        agent.writer.add_text('Parameters/anneal_schedule', str(config.anneal_schedule), 0)
-
-    # 记录学习率衰减相关参数
-    agent.writer.add_text('Parameters/use_lr_decay', str(config.use_lr_decay), 0)
-    if config.use_lr_decay:
-        agent.writer.add_text('Parameters/lr_decay_schedule', str(config.lr_decay_schedule), 0)
-        agent.writer.add_text('Parameters/lr_decay_steps', str(config.lr_decay_steps), 0)
-        agent.writer.add_text('Parameters/coordinator_lr_decay_factor', str(config.coordinator_lr_decay_factor), 0)
-        agent.writer.add_text('Parameters/discoverer_lr_decay_factor', str(config.discoverer_lr_decay_factor), 0)
-        agent.writer.add_text('Parameters/discriminator_lr_decay_factor', str(config.discriminator_lr_decay_factor), 0)
+    # 记录额外超参数
+    tb_manager.add_text('Parameters/num_envs', str(num_envs), 0)
+    tb_manager.add_text('Parameters/export_interval', str(args.export_interval), 0)
+    tb_manager.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
     
     # 记录环境奖励权重配置到Parameters分组
-    agent.writer.add_text('Parameters/effective_coverage_weight', str(config.effective_coverage_weight), 0)
-    agent.writer.add_text('Parameters/throughput_weight', str(config.throughput_weight), 0)
-    agent.writer.add_text('Parameters/load_balance_weight', str(config.load_balance_weight), 0)
+    tb_manager.add_text('Parameters/effective_coverage_weight', str(config.effective_coverage_weight), 0)
+    tb_manager.add_text('Parameters/throughput_weight', str(config.throughput_weight), 0)
+    tb_manager.add_text('Parameters/load_balance_weight', str(config.load_balance_weight), 0)
     
-    # 记录场景4的奖励权重参数
-    agent.writer.add_text('Parameters/coverage_weight', str(config.coverage_weight), 0)
-    agent.writer.add_text('Parameters/connectivity_weight', str(config.connectivity_weight), 0)
-    agent.writer.add_text('Parameters/efficiency_weight', str(config.efficiency_weight), 0)
-    agent.writer.add_text('Parameters/potential_reward_weight', str(config.potential_reward_weight), 0)
-    agent.writer.add_text('Parameters/belief_decay_factor', str(config.belief_decay_factor), 0)
-    agent.writer.add_text('Parameters/recon_interval', str(config.recon_interval), 0)
-    agent.writer.add_text('Parameters/recon_strength', str(config.recon_strength), 0)
-    agent.writer.add_text('Parameters/coverage_overlap_penalty_weight', str(config.coverage_overlap_penalty_weight), 0)
+    # 记录场景4的奖励权重参数（简化版本）
+    tb_manager.add_text('Parameters/coverage_weight', str(config.coverage_weight), 0)
+    tb_manager.add_text('Parameters/link_quality_weight', str(config.link_quality_weight), 0)  # 统一的链路质量权重
+    tb_manager.add_text('Parameters/potential_reward_weight', str(config.potential_reward_weight), 0)
+    tb_manager.add_text('Parameters/belief_decay_factor', str(config.belief_decay_factor), 0)
+    tb_manager.add_text('Parameters/recon_interval', str(config.recon_interval), 0)
+    tb_manager.add_text('Parameters/recon_strength', str(config.recon_strength), 0)
+    tb_manager.add_text('Parameters/distance_overlap_penalty_weight', str(config.distance_overlap_penalty_weight), 0)
 
     # 训练变量
     total_steps = 0
@@ -1632,8 +1829,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 # 从agent_info中提取values（新的agent.py API）
                 values = current_agent_info.get('values', None)
                 
-                # 存储转换
-                agent.store_transition(
+                # 存储转换，并获取返回的奖励组成部分，传递正确的时间步索引
+                returned_reward_components = agent.store_transition(
                     states[i], next_states[i], observations[i], next_observations[i],
                     actions_array[i], rewards[i], dones[i], current_agent_info['team_skill'],
                     current_agent_info['agent_skills'], current_agent_info['action_logprobs'],
@@ -1641,9 +1838,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     log_probs=current_agent_info['log_probs'],
                     skill_timer_for_env=skill_timer_value,
                     env_id=i,
-                    potential_reward=potential_reward
+                    potential_reward=potential_reward,
+                    rollout_step_idx=rollout_step  # 【修复】传递正确的rollout步数索引
                 )
-                
+
                 # 更新技能持续时间
                 if dones[i]:
                     env_skill_durations[i] = 0
@@ -1660,16 +1858,12 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
 
                 # 使用增强的奖励追踪器记录训练步骤
                 if args.detailed_logging:
-                    # 获取奖励组成部分（如果可用）
-                    reward_components = None
-                    if hasattr(agent, 'last_reward_components') and agent.last_reward_components:
-                        reward_components = agent.last_reward_components.get(i, None)
-                    
+                    # 使用从 store_transition 返回的奖励组成部分
                     reward_tracker.log_training_step(
                         step=total_steps - num_envs + i + 1,
                         env_id=i,
                         reward=rewards[i],
-                        reward_components=reward_components,
+                        reward_components=returned_reward_components,
                         info=infos[i]
                     )
 
@@ -1683,7 +1877,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
 
                 # 记录技能分布
                 if current_agent_info['skill_changed']:
-                    agent.log_skill_distribution(
+                    tb_manager.log_skill_distribution(
                         current_agent_info['team_skill'],
                         current_agent_info['agent_skills'],
                         episode=n_episodes
@@ -1709,29 +1903,32 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
 
                     # 记录到 TensorBoard
                     agent.training_info['episode_rewards'].append(env_rewards[i])
-                    agent.writer.add_scalar('Reward/episode_reward', env_rewards[i], n_episodes)
-                    agent.writer.add_scalar('Reward/episode_length', env_steps[i], n_episodes)
+                    tb_manager.log_episode_completion(n_episodes, i, env_rewards[i], env_steps[i])
 
                     main_logger.info(f"环境 {i}/{num_envs} 完成: Episode {n_episodes}, 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}")
 
                     # 重置环境状态跟踪
                     env_steps[i] = 0
                     env_rewards[i] = 0
+                    
+                    # 【修复】重置智能体中该环境的内部状态
+                    agent.reset_env_state(i)
 
                     # 奖励统计
-                    if len(episode_rewards) >= 10:
-                        recent_rewards = episode_rewards[-10:]
+                    window_size = min(config.rollout_length, len(episode_rewards))
+                    if len(episode_rewards) >= window_size:
+                        recent_rewards = episode_rewards[-window_size:]
                         avg_reward = np.mean(recent_rewards)
                         std_reward = np.std(recent_rewards)
                         max_reward = np.max(recent_rewards)
                         min_reward = np.min(recent_rewards)
 
-                        agent.writer.add_scalar('Reward/avg_reward_10', avg_reward, n_episodes)
-                        agent.writer.add_scalar('Reward/std_reward_10', std_reward, n_episodes)
-                        agent.writer.add_scalar('Reward/max_reward_10', max_reward, n_episodes)
-                        agent.writer.add_scalar('Reward/min_reward_10', min_reward, n_episodes)
+                        tb_manager.add_scalar(f'Reward/avg_reward_{window_size}', avg_reward, n_episodes)
+                        tb_manager.add_scalar(f'Reward/std_reward_{window_size}', std_reward, n_episodes)
+                        tb_manager.add_scalar(f'Reward/max_reward_{window_size}', max_reward, n_episodes)
+                        tb_manager.add_scalar(f'Reward/min_reward_{window_size}', min_reward, n_episodes)
 
-                        main_logger.info(f"最近10个episodes: 平均奖励 {avg_reward:.2f} ± {std_reward:.2f}, 最大/最小: {max_reward:.2f}/{min_reward:.2f}")
+                        main_logger.info(f"最近{window_size}个episodes: 平均奖励 {avg_reward:.2f} ± {std_reward:.2f}, 最大/最小: {max_reward:.2f}/{min_reward:.2f}")
 
                     # 绘图
                     if n_episodes % 10 == 0:
@@ -1757,7 +1954,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         # Rollout数据收集完成，现在为低层策略计算优势。
         # 这确保了GAE是在刚刚收集的完整、新鲜的数据上计算的。
         # 注意：高层策略的GAE计算仍在 agent.update_coordinator 内部。
-        main_logger.info("为低层策略(Discoverer)计算GAE...")
+        main_logger.debug("为低层策略(Discoverer)计算GAE...")
         
         # 获取rollout最后一步的观测和状态，用于计算last_values
         # 使用当前的states和observations作为最后一步的输入
@@ -1769,8 +1966,13 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         last_dones = np.zeros((num_envs, config.n_agents), dtype=bool)
         
         for i in range(num_envs):
-            # 为每个环境获取当前的团队技能
+            # 获取当前的团队技能，处理标记值 -1
             current_team_skill = agent.env_team_skills.get(i, 0)
+            
+            # 如果遇到标记值 -1，使用默认技能 0
+            if current_team_skill == -1:
+                current_team_skill = 0
+                main_logger.debug(f"环境 {i} 的团队技能为标记值 -1，使用默认值 0")
             
             # 使用discoverer的critic网络计算价值
             with torch.no_grad():
@@ -1807,9 +2009,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                   f"CD损失 {update_info.get('cd_loss', 0):.4f}, "
                   f"已用时间 {elapsed:.2f}s")
             
-            # 记录CD损失到TensorBoard
-            if config.use_opt and 'cd_loss' in update_info:
-                agent.writer.add_scalar('Losses/CD_Loss', update_info['cd_loss'], total_steps)
+            # 记录训练指标到TensorBoard
+            tb_manager.log_training_metrics(total_steps, update_info, args=args)
             
             # 详细记录低层损失的组成部分
             main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
@@ -1837,8 +2038,9 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
 
         # 加强高层样本的累积情况监控
         if total_steps >= last_check_total_steps + check_interval_steps:
-                # 获取当前高层缓冲区大小
-                current_high_level_buffer_size = len(agent.high_level_buffer)
+                # 获取当前高层缓冲区大小 (从统一的rollout buffer中计算)
+                num_steps_in_buffer = config.rollout_length
+                current_high_level_buffer_size = np.sum(agent.rollout_buffer.high_level_valid_mask[:num_steps_in_buffer])
                 
                 # 从agent获取总收集的高层样本数(现在总是准确的，不受缓冲区满的影响)
                 current_high_level_samples_total = agent.high_level_samples_total
@@ -1849,7 +2051,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 samples_since_last_check = current_high_level_samples_total - last_check_hl_samples
                 
                 # 记录样本收集情况
-                main_logger.info(f"高层样本收集统计: 当前总样本数={current_high_level_samples_total}, "
+                main_logger.debug(f"高层样本收集统计: 当前总样本数={current_high_level_samples_total}, "
                                f"上次检查时样本数={last_check_hl_samples}, 新增样本数={samples_since_last_check}")
                 
                 # 更改理论期望样本计算：每k个时间步应该产生一个高层样本
@@ -1924,7 +2126,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 
         
         # 定期导出训练数据
-        reward_tracker.export_training_data(total_steps, agent.writer, args=args)
+        reward_tracker.export_training_data(total_steps, tb_manager.writer, args=args)
         
         # 评估 (基于总步数和上次评估的时间)
         if total_steps >= last_eval_step + config.eval_interval:
@@ -1943,12 +2145,16 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             # 更新上次评估步数
             last_eval_step = total_steps
 
+        # 在调用 agent.update() 之后立即记录rollout指标到TensorBoard
+        reward_tracker.log_rollout_metrics_to_tensorboard(tb_manager.writer, total_steps, args=args)
+
+    # 【修复】将"训练完成"相关代码移出while循环
     main_logger.info(f"训练完成! 总步数: {total_steps}, 总episodes: {n_episodes}")
     main_logger.info(f"最佳奖励: {best_reward:.2f}")
 
     # 最终数据导出和统计
     main_logger.info("生成最终训练统计报告...")
-    reward_tracker.export_training_data(total_steps, agent.writer, args=args)
+    reward_tracker.export_training_data(total_steps, tb_manager.writer, args=args)
     
     # 获取并打印训练摘要统计
     summary_stats = reward_tracker.get_summary_statistics()
@@ -2194,13 +2400,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                             else:
                                 main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}")
 
-                            # 记录到TensorBoard
-                            if hasattr(agent, 'writer'):
-                                agent.writer.add_scalar('Eval/episode_reward', env_rewards[i], eval_step + completed_episodes)
-                                agent.writer.add_scalar('Eval/episode_length', env_steps[i], eval_step + completed_episodes)
-                                if 'global' in infos[i] and 'served_users' in infos[i]['global']:
-                                    agent.writer.add_scalar('Eval/served_users', served_users, eval_step + completed_episodes)
-                                    agent.writer.add_scalar('Eval/coverage_ratio', coverage_ratio, eval_step + completed_episodes)
+                            # 记录到TensorBoard (评估函数中暂时跳过，因为没有传入writer)
+                            # 在实际使用中，应该通过参数传入TensorBoard writer
+                            pass
 
                             # 记录高层奖励
                             high_level_rewards.append(env_rewards[i])
@@ -2265,12 +2467,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
     max_reward = np.max(episode_rewards) if episode_rewards else 0
     mean_length = np.mean(episode_lengths) if episode_lengths else 0
 
-    # 记录评估统计信息
-    if hasattr(agent, 'writer'):
-        agent.writer.add_scalar('Eval/mean_reward', mean_reward, eval_step)
-        agent.writer.add_scalar('Eval/reward_std', std_reward, eval_step)
-        agent.writer.add_scalar('Eval/mean_episode_length', mean_length, eval_step)
-        agent.writer.flush()
+    # 记录评估统计信息 (评估函数中暂时跳过，因为没有传入writer)
+    # 在实际使用中，应该通过参数传入TensorBoard writer
+    pass
 
     # 分析技能使用分布
     if all_team_skills:
@@ -2323,12 +2522,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
         main_logger.info(f"env.step 平均耗时: {avg_env_step_time:.6f}秒/步 (占 {avg_env_step_time/avg_step_time*100:.1f}%)")
         main_logger.info(f"其他操作耗时: {avg_step_time - avg_agent_step_time - avg_env_step_time:.6f}秒/步")
         
-        # 将性能指标也记录到TensorBoard中
-        if hasattr(agent, 'writer'):
-            agent.writer.add_scalar('Performance/total_eval_time', eval_total_time, eval_step)
-            agent.writer.add_scalar('Performance/avg_step_time', avg_step_time, eval_step)
-            agent.writer.add_scalar('Performance/avg_agent_step_time', avg_agent_step_time, eval_step)
-            agent.writer.add_scalar('Performance/avg_env_step_time', avg_env_step_time, eval_step)
+        # 将性能指标也记录到TensorBoard中 (评估函数中暂时跳过，因为没有传入writer)
+        # 在实际使用中，应该通过参数传入TensorBoard writer
+        pass
     
     main_logger.info(f"\n评估完成 ({len(episode_rewards)} episodes): 平均奖励 {mean_reward:.2f} ± {std_reward:.2f}, 平均步数: {mean_length:.2f}")
 
@@ -2473,10 +2669,10 @@ def main():
         "proximity_penalty_weight", "coverage_curve_steepness"
     ]
     
-    # 场景4特有奖励权重参数
+    # 场景4特有奖励权重参数（简化版本）
     scenario4_reward_params = [
-        "coverage_weight", "connectivity_weight", "efficiency_weight", 
-        "potential_reward_weight", "coverage_overlap_penalty_weight"
+        "coverage_weight", "link_quality_weight", 
+        "potential_reward_weight", "distance_overlap_penalty_weight"
     ]
     
     # 场景4特有环境参数
@@ -2629,11 +2825,14 @@ def main():
         agent = HMASDAgent(config, log_dir=log_dir, device=device)
         agent.load_model(args.model_path)
         
+        # 创建评估用的TensorBoard管理器
+        eval_tb_manager = TensorBoardManager(log_dir, config)
+        
         # 记录模型配置
-        agent.writer.add_text('Eval/model_path', args.model_path, 0)
-        agent.writer.add_text('Eval/scenario', str(args.scenario), 0)
-        agent.writer.add_text('Eval/n_agents', str(config.n_agents), 0)
-        agent.writer.add_text('Eval/num_envs', str(eval_vec_env.num_envs), 0)
+        eval_tb_manager.add_text('Eval/model_path', args.model_path, 0)
+        eval_tb_manager.add_text('Eval/scenario', str(args.scenario), 0)
+        eval_tb_manager.add_text('Eval/n_agents', str(config.n_agents), 0)
+        eval_tb_manager.add_text('Eval/num_envs', str(eval_vec_env.num_envs), 0)
 
         # 评估模型
         evaluate(eval_vec_env, agent, n_episodes=args.eval_episodes, render=args.render)

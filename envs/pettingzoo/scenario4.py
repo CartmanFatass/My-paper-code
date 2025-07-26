@@ -39,8 +39,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         max_connections=25,
         max_hops=4,
         coverage_weight=0.8,
-        connectivity_weight=0.15,
-        efficiency_weight=0.05,
+        link_quality_weight=0.2,  # 统一的链路质量权重，替代原来的connectivity_weight和efficiency_weight
         n_ground_bs=1,
         n_clusters=4,
         cluster_std=80,
@@ -57,21 +56,19 @@ class UAVForcedRelayEnv(ParallelEnv):
         uav_init_mode="start_area",
         uav_start_area_size=500,
         grid_resolution=100,
-        # exploration_reward_weight=0.1, # Replaced by potential_reward_weight
-        coverage_overlap_penalty_weight=0.1,
         # Belief-based potential function parameters
         gamma=0.99,  # Discount factor for RL
         potential_reward_weight=0.2,
         belief_decay_factor=0.1,
         recon_interval=100,  # Steps between reconnaissance updates
         recon_strength=0.1,  # How much belief is added by recon
+        # Distance overlap penalty parameters
+        distance_overlap_penalty_weight=0.05,
         # Randomization control parameters
         randomize_bs=True,  # 是否随机化基站位置
         randomize_users=True,  # 是否随机化用户簇中心
         randomize_uav_start=True,  # 是否随机化无人机起始区域
-        # Discovery reward parameters
-        discovery_reward_weight=0.0,  # 发现奖励权重
-        discovery_reward_value=10.0,  # 每发现一个新用户的奖励值
+        aclr_db=45,  # 邻道泄漏比 (Adjacent Channel Leakage Ratio) in dB
     ):
         super().__init__()
 
@@ -91,9 +88,6 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         # 探索奖励参数
         self.grid_resolution = grid_resolution
-        
-        # 重叠惩罚参数
-        self.coverage_overlap_penalty_weight = coverage_overlap_penalty_weight
         
         # Belief Map and Grid setup
         self.grid_size = int(np.ceil(self.area_size / self.grid_resolution))
@@ -128,8 +122,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.uav_init_mode = uav_init_mode
         self.uav_start_area_size = uav_start_area_size
         self.coverage_weight = coverage_weight
-        self.connectivity_weight = connectivity_weight
-        self.efficiency_weight = efficiency_weight
+        self.link_quality_weight = link_quality_weight  # 存储独立的链路质量权重
         self.n_ground_bs = n_ground_bs
         self.max_hops = max_hops
         self.min_sinr = min_sinr
@@ -140,13 +133,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.randomize_users = randomize_users
         self.randomize_uav_start = randomize_uav_start
         
-        # 发现奖励参数
-        self.discovery_reward_weight = discovery_reward_weight
-        self.discovery_reward_value = discovery_reward_value
-        
-        # 初始化发现奖励计算结果存储变量
-        self.last_discovery_reward = 0.0
-        self.last_newly_discovered_count = 0
+        # 距离重叠惩罚参数
+        self.distance_overlap_penalty_weight = distance_overlap_penalty_weight
         
         # 通信参数
         self.carrier_frequency = 2e9
@@ -157,6 +145,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.use_fdma = use_fdma
         self.bandwidth = bandwidth
         self.ground_bs_tx_power = ground_bs_tx_power
+        self.aclr_db = aclr_db  # 存储ACLR值
+        self.aclr_linear = 10 ** (-self.aclr_db / 10)  # 转换为线性值以便计算
 
         # 局部观测参数
         self.max_observed_uavs = max_observed_uavs
@@ -624,6 +614,93 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return overlap_penalty
     
+    def _calculate_link_quality_reward(self):
+        """
+        计算统一的"链路质量"奖励，取代之前分散的连通性、效率、中继等奖励。
+        
+        核心思想:
+        - 直接奖励高质量的完整通信链路。
+        - 链路质量由其"瓶颈容量"和"跳数"共同决定。
+        - 容量高、跳数少的链路获得更高奖励。
+        - 【重要修正】：只有实际服务了用户的无人机才能获得链路质量奖励。
+        
+        返回:
+            link_quality_reward: 归一化的链路质量总奖励 [0, 1]
+        """
+        if not hasattr(self, 'routing_paths') or not self.routing_paths:
+            return 0.0
+
+        total_quality_score = 0
+        
+        # 设定一个理论上的最大容量用于归一化，例如基于30dB SINR计算
+        # C = B * log2(1 + SINR_linear)
+        # SINR = 30dB -> SINR_linear = 1000
+        # C_max = 20e6 * log2(1001) ≈ 20e6 * 9.96 ≈ 200 Mbps
+        max_theoretical_capacity = 200e6  # 200 Mbps
+
+        for uav_idx, (path, bottleneck_capacity) in self.routing_paths.items():
+            # 【核心修正】：检查这架拥有回程路径的无人机是否连接了任何用户
+            # 如果没有连接用户，那么它的高质量链路是无用的，不应给予奖励
+            if np.sum(self.connections[uav_idx]) == 0:
+                continue  # 跳过这个无人机，不给予链路质量奖励
+            
+            if not path or bottleneck_capacity <= 0:
+                continue
+
+            # 1. 容量得分 (Capacity Score)
+            # 将瓶颈容量归一化
+            capacity_score = np.clip(bottleneck_capacity / max_theoretical_capacity, 0, 1)
+
+            # 2. 效率得分 (Efficiency Score)
+            # 跳数越少，效率得分越高
+            hops = len(path) - 1
+            efficiency_score = max(0, 1 - (hops - 1) / (self.max_hops * 1.5)) # 放宽分母，使惩罚更平滑
+
+            # 3. 综合路径质量分
+            # 将容量和效率结合，容量的权重更高
+            path_quality_score = capacity_score * (0.7 + 0.3 * efficiency_score)
+            total_quality_score += path_quality_score
+
+        # 归一化：用总得分除以无人机数量，得到平均链路质量
+        # 这样，目标就是为每个无人机都建立一条高质量链路
+        if self.n_uavs > 0:
+            normalized_reward = total_quality_score / self.n_uavs
+        else:
+            normalized_reward = 0.0
+            
+        return np.clip(normalized_reward, 0, 1)
+    
+    def _calculate_distance_overlap_penalty(self):
+        """
+        计算基于距离的重叠惩罚 - 使用平滑的距离函数替代SINR重叠惩罚
+        
+        核心思想：
+        - 当无人机距离过近时施加惩罚
+        - 使用平滑的距离函数，避免突变
+        - 服务半径内的距离产生较大惩罚，两倍服务半径外无惩罚
+        
+        返回:
+            overlap_penalty: 距离重叠惩罚值 [0, 1]
+        """
+        overlap_penalty = 0.0
+        # 一个预估的服务半径，例如150米（通信范围的1/4）
+        service_radius = self.uav_communication_range / 4 
+        
+        for i in range(self.n_uavs):
+            for j in range(i + 1, self.n_uavs):
+                # 计算两个无人机之间的2D距离（忽略高度差异）
+                dist = np.linalg.norm(self.uav_positions[i, :2] - self.uav_positions[j, :2])
+                
+                # 如果距离小于两倍服务半径，施加惩罚
+                if dist < 2 * service_radius:
+                    # 使用平滑的二次函数：(1 - dist / (2 * service_radius))^2
+                    penalty = (1 - dist / (2 * service_radius)) ** 2
+                    overlap_penalty += penalty
+        
+        # 归一化，最大惩罚发生在所有无人机都在一点，为 n_uavs * (n_uavs-1) / 2
+        max_penalty = self.n_uavs * (self.n_uavs - 1) / 2
+        return overlap_penalty / max_penalty if max_penalty > 0 else 0.0
+    
     
     def _compute_belief_stats(self):
         """
@@ -802,120 +879,115 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return uav_positions
     
-    def _compute_reward(self):
+    def _compute_reward(self, potential_reward, potential_reward_raw=None):
         """
-        计算针对强制中继优化的奖励函数
+        计算并组合所有奖励分量，以生成最终的全局奖励。
         
-        重点：
-        1. 用户覆盖率奖励（权重80%）
-        2. 网络连通性奖励（权重15%）
-        3. 路径效率奖励（权重5%）
+        再次重构后的逻辑：
+        - 核心目标奖励：用户覆盖率。
+        - 统一链路塑造奖励：一个综合指标，评估整个网络骨干的质量（容量+效率）。
+        - 其他塑造奖励：探索奖励。
+        - 惩罚项：重叠惩罚。
         
+        参数:
+            potential_reward: 从step函数传入的归一化后的基于势函数的塑形奖励
+            potential_reward_raw: 原始未归一化的势函数奖励（用于调试和记录）
+            
         返回:
-            reward: 全局奖励 [0, 1]
+            global_reward: 最终组合的全局奖励
         """
         
-        # 1. 用户覆盖率奖励
-        connected_users = 0
+        # 1. 核心目标奖励 (Primary Goal Reward) - 用户覆盖率
         effective_connected_users = 0
-        
-        # 统计总连接用户和有效连接用户（有回程路径的）
+        total_connected_users = 0
         for i in range(self.n_uavs):
             uav_connected_users = np.sum(self.connections[i])
-            connected_users += uav_connected_users
-            
-            # 只有当UAV有到地面基站的路径时，其连接的用户才算有效
-            if i in self.routing_paths and self.routing_paths[i]:
+            total_connected_users += uav_connected_users
+            # 检查 self.routing_paths[i] 是否存在且非空
+            if i in self.routing_paths and self.routing_paths[i][0]:
                 effective_connected_users += uav_connected_users
         
-        # 基础覆盖率
         coverage_ratio = effective_connected_users / self.n_users if self.n_users > 0 else 0
-        
-        # 非线性覆盖率奖励：使用幂函数激励高覆盖率
-        # f(x) = x^0.5 在低覆盖率时增长较快，在高覆盖率时趋于平缓
-        coverage_reward = np.power(coverage_ratio, 0.5)
-        
-        # 添加高覆盖率奖励阶梯
+        coverage_reward_raw = np.power(coverage_ratio, 0.5)
         coverage_bonus = 0
-        if coverage_ratio >= 0.95:  # 95%以上覆盖率
-            coverage_bonus = 0.15
-        elif coverage_ratio >= 0.90:  # 90%以上覆盖率
-            coverage_bonus = 0.10
-        elif coverage_ratio >= 0.85:  # 85%以上覆盖率
-            coverage_bonus = 0.05
+        if coverage_ratio >= 0.95: coverage_bonus = 0.15
+        elif coverage_ratio >= 0.90: coverage_bonus = 0.10
+        elif coverage_ratio >= 0.85: coverage_bonus = 0.05
+        final_coverage_reward = min(1.0, coverage_reward_raw + coverage_bonus)
+
+        # 2. 行为塑造奖励 (Shaping Rewards)
+        # 2.1 统一的链路质量奖励 (Unified Link Quality Reward)
+        link_quality_reward = self._calculate_link_quality_reward()
         
-        # 最终覆盖率奖励
-        final_coverage_reward = min(1.0, coverage_reward + coverage_bonus)
+        # 2.2 探索奖励 (从step函数传入)
+        # potential_reward is already calculated
         
-        # 2. 网络连通性奖励
-        connected_uavs = len(self.routing_paths)
-        connectivity_reward = connected_uavs / self.n_uavs if self.n_uavs > 0 else 0
+        # 3. 惩罚项 (Penalties)
+        # 使用基于SINR的重叠惩罚，因为它与信道模型更一致
+        coverage_overlap_penalty = self._compute_coverage_overlap_penalty()
         
-        # 3. 路径效率奖励（平均跳数的倒数）
-        if len(self.routing_paths) > 0:
-            total_hops = sum(len(path) - 1 for path in self.routing_paths.values())
-            avg_hops = total_hops / len(self.routing_paths)
-            # 将平均跳数转换为效率奖励（2-4跳的范围内）
-            efficiency_reward = max(0, 1 - (avg_hops - 1) / 3)  # 1跳=1.0, 4跳=0.0
-        else:
-            efficiency_reward = 0
-            avg_hops = 0
+        # 4. 组合所有奖励分量
+        # 获取各分量权重
+        coverage_weight = self.coverage_weight # 核心目标权重
+        link_quality_weight = self.link_quality_weight # 使用独立定义的链路质量权重
+        potential_reward_weight = self.potential_reward_weight
+        # 注意：这里我们复用 distance_overlap_penalty_weight 作为覆盖重叠惩罚的权重
+        overlap_penalty_weight = self.distance_overlap_penalty_weight
         
-        # 4. 系统吞吐量计算（用于信息记录）
+        # 计算最终全局奖励
+        global_reward = (
+            coverage_weight * final_coverage_reward +
+            link_quality_weight * link_quality_reward +
+            potential_reward_weight * potential_reward -
+            overlap_penalty_weight * coverage_overlap_penalty
+        )
+        
+        # 5. 计算系统吞吐量和性能指标（用于信息记录）
         system_throughput = 0
-        
+        avg_hops = 0
+        connected_uavs = len(self.routing_paths)
+        if connected_uavs > 0:
+            total_hops = sum(len(path) - 1 for path, capacity in self.routing_paths.values())
+            avg_hops = total_hops / connected_uavs
+
         for i in range(self.n_uavs):
-            connected_users_to_uav = []
-            for j in range(self.n_users):
-                if self.connections[i, j]:
-                    connected_users_to_uav.append(j)
-            
-            if len(connected_users_to_uav) == 0:
-                continue
-            
-            # 只有有回程路径的UAV才能提供有效吞吐量
             if i in self.routing_paths:
-                uav_frontend_capacity = self._compute_uav_frontend_capacity(i, connected_users_to_uav)
-                system_throughput += uav_frontend_capacity
-        
-        # 5. 计算覆盖重叠惩罚
-        overlap_penalty = self._compute_coverage_overlap_penalty()
-        
-        # 组合最终奖励（减去重叠惩罚）
-        final_reward = (
-            self.coverage_weight * final_coverage_reward +
-            self.connectivity_weight * connectivity_reward +
-            self.efficiency_weight * efficiency_reward
-        ) - self.coverage_overlap_penalty_weight * overlap_penalty
-        
-        # 确保奖励在[0, 1]范围内
-        final_reward = np.clip(final_reward, 0, 1)
-        
-        # 更新奖励信息用于调试和可视化
+                connected_users_to_uav = [j for j, connected in enumerate(self.connections[i]) if connected]
+                if connected_users_to_uav:
+                    system_throughput += self._compute_uav_frontend_capacity(i, connected_users_to_uav)
+
+        # 6. 更新奖励信息字典，用于调试和可视化
         self.reward_info = {
+            # 核心目标
             "coverage_reward": final_coverage_reward,
-            "base_coverage_ratio": coverage_ratio,
-            "coverage_bonus": coverage_bonus,
-            "connectivity_reward": connectivity_reward,
-            "efficiency_reward": efficiency_reward,
-            "overlap_penalty": overlap_penalty,
-            "final_reward": final_reward,
+            
+            # 塑造奖励 & 惩罚
+            "link_quality_reward": link_quality_reward,
+            "potential_reward": potential_reward,
+            "potential_reward_raw": potential_reward_raw if potential_reward_raw is not None else 0.0,
+            "coverage_overlap_penalty": coverage_overlap_penalty,
+            
+            # 加权后的各分量贡献
+            "weighted_coverage": coverage_weight * final_coverage_reward,
+            "weighted_link_quality": link_quality_weight * link_quality_reward,
+            "weighted_potential": potential_reward_weight * potential_reward,
+            "weighted_overlap_penalty": -overlap_penalty_weight * coverage_overlap_penalty,
+            
+            # 最终奖励
+            "final_global_reward": global_reward,
+            
+            # 性能指标
+            "coverage_ratio": coverage_ratio,
             "effective_connected_users": effective_connected_users,
-            "total_connected_users": connected_users,
+            "total_connected_users": total_connected_users,
+            "connected_uavs": connected_uavs,
+            "avg_hops": avg_hops,
             "system_throughput_mbps": system_throughput / 1e6,
             "avg_throughput_per_user_mbps": (system_throughput / max(effective_connected_users, 1)) / 1e6,
-            "avg_hops": avg_hops,
-            "connected_uavs": connected_uavs,
-            "total_uavs": self.n_uavs,
-            "coverage_ratio": coverage_ratio,  # 兼容性字段
-            "target_coverage_achieved": coverage_ratio >= 0.90,  # 是否达到90%目标
-            # 探索相关字段，将在step方法中更新
-            "exploration_reward": 0,
-            "sparse_task_reward": 0,
-            "potential_reward": 0,
+            "target_coverage_achieved": coverage_ratio >= 0.90,
         }
         
-        return final_reward
+        return global_reward
     
     def render(self):
         """
@@ -1093,9 +1165,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         self._initialize_belief()
         self.user_serviced_status.fill(False)
         
-        # [关键] 添加发现用户追踪机制
-        self.discovered_users_this_episode = set()
-        
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
         self.user_positions = self._generate_user_positions()
@@ -1111,6 +1180,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         self._update_channel_state()  # 从父类继承
         self._update_uav_connections() # 从父类继承
         self._compute_routing_paths()  # 使用本类的路由计算
+        
+        # 4.5 初始化新增的 Reward Shaping 相关变量
+        self.previous_bottleneck_capacities = np.zeros(self.n_uavs)
         
         # 5. 获取观测值
         observations = {}
@@ -1191,16 +1263,19 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _calculate_discovery_reward_inline(self):
         """
-        内联计算发现用户奖励 - 使用最新的SINR矩阵和连接状态
+        基于信念地图计算发现用户奖励 (Belief-Modulated Discovery Reward)
         
         核心思想：
         - 只有第一次发现的用户才能获得奖励
-        - 发现是指无人机能够覆盖（SINR达标）一个之前未被发现的用户
-        - 这个奖励鼓励无人机分散探索，而不是聚集在一起
+        - 发现奖励的大小与发现时该区域的信念值成反比
+        - 在低信念区域（意外区域）发现用户获得更高奖励
+        - 在高信念区域（预期区域）发现用户获得较低奖励
         
         结果存储在实例变量中，供step函数使用
         """
+        total_discovery_reward = 0.0
         newly_discovered_user_count = 0
+        epsilon = 1e-8  # 防止除以零的小常数
         
         # 获取当前所有被覆盖的用户位置（无论是否连接）
         all_covered_users = set()
@@ -1212,18 +1287,25 @@ class UAVForcedRelayEnv(ParallelEnv):
                 if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
                     all_covered_users.add(user_idx)
         
-        # 检查新发现的用户
+        # 检查新发现的用户并计算基于信念的动态奖励
         for user_idx in all_covered_users:
             if user_idx not in self.discovered_users_this_episode:
                 newly_discovered_user_count += 1
                 self.discovered_users_this_episode.add(user_idx)
-        
-        # 计算发现奖励
-        discovery_reward_value = getattr(self, 'discovery_reward_value', 10.0)
-        discovery_reward = newly_discovered_user_count * discovery_reward_value
+                
+                # 获取用户所在栅格的信念值
+                user_pos = self.user_positions[user_idx]
+                gx, gy = self._get_grid_coords(user_pos)
+                belief_at_discovery = self.belief_map[gy, gx]
+                
+                # 基于信念值计算动态奖励
+                # 信念值越低（越意外），奖励越高
+                base_reward = getattr(self, 'discovery_reward_value', 10.0)
+                dynamic_reward = base_reward / (belief_at_discovery + epsilon)
+                total_discovery_reward += dynamic_reward
         
         # 存储结果到实例变量，供step函数使用
-        self.last_discovery_reward = discovery_reward
+        self.last_discovery_reward = total_discovery_reward
         self.last_newly_discovered_count = newly_discovered_user_count
 
     def _compute_uav_to_uav_sinr(self, sender_idx, receiver_idx):
@@ -1325,8 +1407,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         self._update_uav_connections()
         self._compute_routing_paths()
 
-        # 3.5. 在所有连接和路由都更新完毕后，计算发现奖励
-        self._calculate_discovery_reward_inline()
 
         # 4. Check for newly serviced users and update belief map
         for user_idx in range(self.n_users):
@@ -1350,63 +1430,41 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         # 6. Calculate new potential and the potential-based shaping reward
         potential_t1 = self._calculate_potential()
-        potential_reward = self.gamma * potential_t1 - potential_t
+        potential_reward_raw = self.gamma * potential_t1 - potential_t
         self.current_potential = potential_t1
 
-        # 7. 获取发现奖励 - 使用在_update_channel_state中已经计算的结果
-        discovery_reward = getattr(self, 'last_discovery_reward', 0.0)
-        newly_discovered_count = getattr(self, 'last_newly_discovered_count', 0)
+        # 6.1 归一化 potential_reward
+        # 估算单步内无人机可能产生的最大势能变化量
+        max_potential_change = self.max_speed * self.time_step * self.n_uavs
+        potential_reward = np.clip(potential_reward_raw / max_potential_change, -1.0, 1.0)
         
-        # 8. Compute the base task reward (coverage, connectivity, etc.)
-        base_reward = self._compute_reward()
-        
-        # 9. Update reward_info with exploration-related values
-        # 9.1 Update exploration reward (potential reward)
-        self.reward_info["exploration_reward"] = potential_reward
-        self.reward_info["potential_reward"] = potential_reward
-        
-        # 9.2 Update discovery reward
-        self.reward_info["discovery_reward"] = discovery_reward
-        self.reward_info["discovered_users_count"] = newly_discovered_count
-        
-        # 9.3 Update sparse task reward (removed - using base_reward only)
-        self.reward_info["sparse_task_reward"] = 0
-        
-        # 9.4 Compute and update belief statistics
+        # 7. 计算全局奖励（所有奖励计算已集中到 _compute_reward 中）
+        global_reward = self._compute_reward(potential_reward, potential_reward_raw)
+
+        # 8. 更新 info 字典中需要额外计算的统计数据
+        # 8.1 计算并更新信念地图统计信息
         belief_stats = self._compute_belief_stats()
         self.reward_info.update(belief_stats)
         
-        # 9.5 Store the current potential value for reference
+        # 8.2 存储当前和上一时刻的势函数值
         self.reward_info["current_potential"] = potential_t1
         self.reward_info["previous_potential"] = potential_t
         
-        # 10. Combine all rewards
-        # 发现奖励权重将从配置中获取
-        discovery_reward_weight = getattr(self, 'discovery_reward_weight', 0.0)
-        
-        # 组合最终奖励：基础任务奖励 + 发现奖励
-        global_reward = base_reward + discovery_reward_weight * discovery_reward
-        
-        # 更新奖励信息以供调试
-        self.reward_info["final_global_reward"] = global_reward
-        self.reward_info["base_task_reward"] = base_reward
-        self.reward_info["weighted_discovery_reward"] = discovery_reward_weight * discovery_reward
-
-        # 10. Update step counter and check for termination
+        # 9. 更新步数并检查终止条件
         self.current_step += 1
         done = self.current_step >= self.max_steps
         
-        # 11. 准备返回值
+        # 10. 准备返回值
         observations = {}
         rewards = {}
         terminations = {}
         truncations = {}
         infos = {}
         
-        # 12. 获取新的观测和填充返回值
+        # 11. 获取新的观测并填充返回值
         for agent_idx, agent in enumerate(self.agents):
             observations[agent] = self._get_observation(agent)
-            rewards[agent] = global_reward / self.n_uavs  # 平均分配奖励
+            rewards[agent] = global_reward / self.n_uavs  # 平均分配全局奖励
             terminations[agent] = done
             truncations[agent] = False
             infos[agent] = {
@@ -1615,8 +1673,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             "min_distance_to_bs": self._compute_min_distance_to_bs(),
             "target_coverage_rate": 0.90,
             "coverage_weight": self.coverage_weight,
-            "connectivity_weight": self.connectivity_weight,
-            "efficiency_weight": self.efficiency_weight,
+            "link_quality_weight": self.link_quality_weight,
         }
         
         return info
@@ -1699,9 +1756,17 @@ class UAVForcedRelayEnv(ParallelEnv):
         if sinr_db < self.min_sinr:
             return 0
         
+        # 确定用于计算容量的带宽
+        if self.use_fdma:
+            # FDMA模式下，假设总带宽被平均分配给每个UAV用于其回程链路
+            link_bandwidth = self.bandwidth / self.n_uavs
+        else:
+            # 非FDMA模式下，链路独占全部带宽
+            link_bandwidth = self.bandwidth
+            
         # 转换为线性单位并计算容量
         sinr_linear = 10 ** (sinr_db / 10)
-        capacity = self.bandwidth * np.log2(1 + sinr_linear)
+        capacity = link_bandwidth * np.log2(1 + sinr_linear)
         
         return capacity
     
@@ -1824,18 +1889,66 @@ class UAVForcedRelayEnv(ParallelEnv):
             sinr_db: SINR (dB)
         """
         if self.use_fdma:
-            # FDMA模式：考虑邻频干扰和其他实际干扰源
-            # 简化模型：假设邻频干扰为主要接收功率的10%
-            adjacent_interference_ratio = 0.1
-            interference_power_linear = (10 ** (rx_power / 10)) * adjacent_interference_ratio
-            interference_power_dbm = 10 * np.log10(interference_power_linear) if interference_power_linear > 0 else -float('inf')
+            # FDMA模式：计算来自其他所有活动链路的邻道干扰 (ACI)
+            # 简化模型：干扰功率 = 发射功率 * 路径损耗 * ACLR
+            # 我们进一步简化，假设所有干扰源的路径损耗对接收机的影响相似，
+            # 直接使用 发射功率 * ACLR 作为干扰项。
+            interference_powers_linear = []
+            
+            # 1. 来自其他UAV的干扰
+            for i in range(self.n_uavs):
+                # 排除发送方自身
+                if tx_type == "uav" and i == tx_idx:
+                    continue
+                
+                # 计算干扰源到接收机的路径损耗
+                interferer_pos = self.uav_positions[i]
+                if rx_type == "uav":
+                    rx_pos = self.uav_positions[rx_idx]
+                    interferer_path_loss = self._compute_air_to_air_path_loss(interferer_pos, rx_pos)
+                elif rx_type == "ground_bs":
+                    rx_pos = self.ground_bs_positions[rx_idx]
+                    interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, rx_pos)
+                else:
+                    continue
+                
+                # 计算干扰功率：发射功率 - 路径损耗，然后转为线性值，再乘以ACLR
+                interferer_rx_power_dbm = self.tx_power - interferer_path_loss
+                interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
+                # 邻道干扰功率 = 接收功率 * ACLR
+                interference_powers_linear.append(interferer_rx_power_linear * self.aclr_linear)
+
+            # 2. 来自其他BS的干扰
+            for i in range(self.n_ground_bs):
+                if tx_type == "ground_bs" and i == tx_idx:
+                    continue
+                
+                # 计算干扰源到接收机的路径损耗
+                interferer_pos = self.ground_bs_positions[i]
+                if rx_type == "uav":
+                    rx_pos = self.uav_positions[rx_idx]
+                    interferer_path_loss = self._compute_ground_to_air_path_loss(interferer_pos, rx_pos)
+                elif rx_type == "ground_bs":
+                    # BS到BS的干扰（通常在实际中很少，但为完整性保留）
+                    rx_pos = self.ground_bs_positions[rx_idx]
+                    interferer_path_loss = self._compute_air_to_air_path_loss(interferer_pos, rx_pos)  # 使用A2A作为近似
+                else:
+                    continue
+                
+                # 计算干扰功率：发射功率 - 路径损耗，然后转为线性值，再乘以ACLR
+                interferer_rx_power_dbm = self.ground_bs_tx_power - interferer_path_loss
+                interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
+                # 邻道干扰功率 = 接收功率 * ACLR
+                interference_powers_linear.append(interferer_rx_power_linear * self.aclr_linear)
+
+            total_interference_linear = np.sum(interference_powers_linear)
             
             # 噪声加干扰功率
             noise_power_linear = 10 ** (self.noise_power / 10)
-            total_interference_noise = noise_power_linear + interference_power_linear
-            total_interference_noise_dbm = 10 * np.log10(total_interference_noise)
+            interference_plus_noise_linear = noise_power_linear + total_interference_linear
+            interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
             
-            sinr_db = rx_power - total_interference_noise_dbm
+            sinr_db = rx_power - interference_plus_noise_dbm
         else:
             # 非FDMA模式：计算同频干扰
             interference_powers = []
@@ -1859,7 +1972,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                         interferer_power = self.tx_power - interferer_path_loss
                         interference_powers.append(10 ** (interferer_power / 10))
             
-            # 总干扰功率
+            # 总干扰功率 (所有干扰源的线性叠加)
             total_interference = np.sum(interference_powers) if interference_powers else 0
             total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
             
@@ -1877,20 +1990,22 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_routing_paths(self):
         """
-        使用基于瓶颈容量的智能路由算法计算每个UAV到地面基站的最优路径
+        使用基于瓶颈容量的智能路由算法计算每个UAV到地面基站的最优路径。
         
         新算法特点：
-        1. 寻找瓶颈容量最大的路径，而不是跳数最少的路径
-        2. 使用类似Dijkstra的"最宽路径"算法
-        3. 智能选择高质量的多跳中继路径，即使跳数更多
+        1. 寻找瓶颈容量最大的路径，而不是跳数最少的路径。
+        2. 使用类似Dijkstra的"最宽路径"算法。
+        3. 智能选择高质量的多跳中继路径，即使跳数更多。
+        4. 修改：现在存储路径和其对应的瓶颈容量。
         """
         self.routing_paths = {}
         
         # 为每个UAV计算最优路径
         for start_uav in range(self.n_uavs):
-            best_path = self._find_widest_path_to_ground_bs(start_uav)
-            if best_path and len(best_path) <= self.max_hops + 1:  # +1因为路径包含起始节点
-                self.routing_paths[start_uav] = best_path
+            path, capacity = self._find_widest_path_to_ground_bs(start_uav)
+            # 确保路径有效且不超过最大跳数限制
+            if path and capacity > 0 and len(path) <= self.max_hops + 1:
+                self.routing_paths[start_uav] = (path, capacity)
     
     def _get_state(self):
         """
@@ -1936,7 +2051,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         uav_connected = np.zeros(self.n_uavs)
         if hasattr(self, 'routing_paths'):
             for i in range(self.n_uavs):
-                if i in self.routing_paths and self.routing_paths[i]:
+                if i in self.routing_paths and self.routing_paths[i][0]:
                     uav_connected[i] = 1.0
         state_components.append(uav_connected)
         
@@ -1951,123 +2066,78 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _find_widest_path_to_ground_bs(self, start_uav):
         """
-        使用改进的Dijkstra算法寻找从UAV到地面基站的最宽路径
+        使用改进的Dijkstra算法寻找从UAV到地面基站的最宽路径。
         
         参数:
             start_uav: 起始UAV索引
             
         返回:
-            best_path: 最优路径列表 [(node_type, node_idx), ...]，如果没有路径则返回None
+            (best_path, best_capacity): 一个元组，包含最优路径列表和该路径的瓶颈容量。
+                                        如果没有路径，则返回 (None, 0)。
         """
-        # 初始化距离数组（这里存储的是瓶颈容量）
         max_bottleneck = {}
         parent = {}
-        visited = set()
-        
-        # 优先队列：(-瓶颈容量, 节点标识符)
-        # 使用负值因为heapq是最小堆，我们需要最大瓶颈容量
-        pq = []
-        
-        # 初始化起始UAV
+        pq = []  # 优先队列: (-瓶颈容量, 节点标识符)
+
         start_node = ("uav", start_uav)
-        max_bottleneck[start_node] = float('inf')  # 起始节点的瓶颈容量设为无穷大
+        max_bottleneck[start_node] = float('inf')
         parent[start_node] = None
-        heapq.heappush(pq, (0, start_node))  # 起始节点的优先级最高
-        
-        # 所有可能的目标节点（地面基站）
-        target_nodes = [("ground_bs", bs_idx) for bs_idx in range(self.n_ground_bs)]
-        best_target = None
-        best_capacity = 0
-        
+        heapq.heappush(pq, (-float('inf'), start_node))
+
+        best_target_path = None
+        best_target_capacity = 0
+
         while pq:
             neg_capacity, current_node = heapq.heappop(pq)
             current_capacity = -neg_capacity
-            
-            if current_node in visited:
+
+            if current_capacity < max_bottleneck.get(current_node, 0):
                 continue
-                
-            visited.add(current_node)
+
             current_type, current_idx = current_node
-            
-            # 检查是否到达地面基站
-            if current_type == "ground_bs":
-                if current_capacity > best_capacity:
-                    best_capacity = current_capacity
-                    best_target = current_node
-                continue
-            
+
             # 探索邻居节点
             neighbors = []
-            
             if current_type == "uav":
-                # 添加其他UAV作为邻居
+                # 添加其他UAV和地面基站作为邻居
                 for next_uav in range(self.n_uavs):
                     if next_uav != current_idx:
                         neighbors.append(("uav", next_uav))
-                
-                # 添加地面基站作为邻居
                 for bs_idx in range(self.n_ground_bs):
                     neighbors.append(("ground_bs", bs_idx))
-            
+
             for neighbor in neighbors:
-                if neighbor in visited:
-                    continue
-                
                 neighbor_type, neighbor_idx = neighbor
                 
-                # 修正：根据数据流方向计算链路容量
-                # 回程链路主要承载下行数据流（从基站到用户方向）
-                if current_type == "uav" and neighbor_type == "ground_bs":
-                    # UAV直连基站：考虑下行容量（基站到UAV）
-                    effective_link_capacity = self._get_link_capacity(
-                        neighbor_type, neighbor_idx,  # 基站作为发送方
-                        current_type, current_idx     # UAV作为接收方
-                    )
-                elif current_type == "uav" and neighbor_type == "uav":
-                    # UAV间中继：考虑中继转发能力
-                    # 取上行和下行容量的较小值作为中继瓶颈
-                    forward_capacity = self._get_link_capacity(
-                        current_type, current_idx,
-                        neighbor_type, neighbor_idx
-                    )
-                    reverse_capacity = self._get_link_capacity(
-                        neighbor_type, neighbor_idx,
-                        current_type, current_idx
-                    )
-                    # 对于中继节点，确实需要考虑双向转发能力
-                    effective_link_capacity = min(forward_capacity, reverse_capacity)
-                else:
-                    # 其他情况：使用前向链路容量
-                    effective_link_capacity = self._get_link_capacity(
-                        current_type, current_idx,
-                        neighbor_type, neighbor_idx
-                    )
-                
-                if effective_link_capacity <= 0:
-                    continue  # 无法建立有效连接
-                
-                # 计算通过当前路径到达邻居节点的瓶颈容量
-                path_bottleneck = min(max_bottleneck.get(current_node, 0), effective_link_capacity)
-                
-                # 如果找到更好的路径
-                if neighbor not in max_bottleneck or path_bottleneck > max_bottleneck[neighbor]:
+                # 计算链路容量
+                link_capacity = self._get_link_capacity(current_type, current_idx, neighbor_type, neighbor_idx)
+                if link_capacity <= 0:
+                    continue
+
+                path_bottleneck = min(current_capacity, link_capacity)
+
+                if path_bottleneck > max_bottleneck.get(neighbor, 0):
                     max_bottleneck[neighbor] = path_bottleneck
                     parent[neighbor] = current_node
                     heapq.heappush(pq, (-path_bottleneck, neighbor))
+
+                    # 如果邻居是基站，更新找到的最佳路径
+                    if neighbor_type == "ground_bs":
+                        if path_bottleneck > best_target_capacity:
+                            best_target_capacity = path_bottleneck
+                            # 重构路径
+                            path = []
+                            curr = neighbor
+                            while curr is not None:
+                                path.append(curr)
+                                curr = parent.get(curr)
+                            path.reverse()
+                            best_target_path = path
         
-        # 重构最优路径
-        if best_target and best_capacity > 0:
-            path = []
-            current = best_target
-            
-            while current is not None:
-                path.append(current)
-                current = parent.get(current)
-            
-            path.reverse()
-            return path
-        
-        return None  # 没有找到路径
+        if best_target_path:
+            return best_target_path, best_target_capacity
+        else:
+            return None, 0
     
     def _compute_uav_frontend_capacity(self, uav_idx, connected_users):
         """
@@ -2112,13 +2182,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 在FDMA模式下，每个用户分配独立的频率资源
         if self.use_fdma:
-            # FDMA：用户间无干扰，总容量为各用户容量之和
-            # 但受限于UAV的总带宽
-            total_user_capacity = sum(user_capacities)
-            
-            # 计算每个用户分配的带宽比例
+            # FDMA模式下，假设每个UAV将其均分到的带宽(self.bandwidth / self.n_uavs)
+            # 再次平均分配给其连接的所有用户。
             if len(connected_users) > 0:
-                bandwidth_per_user = self.bandwidth / len(connected_users)
+                # 首先计算该UAV可用于接入的总带宽
+                access_bandwidth_for_uav = self.bandwidth / self.n_uavs
+                # 然后将此带宽均分给其连接的用户
+                bandwidth_per_user = access_bandwidth_for_uav / len(connected_users)
+                
                 # 重新计算基于分配带宽的容量
                 adjusted_capacities = []
                 for i, user_idx in enumerate(connected_users):
@@ -2139,23 +2210,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             else:
                 frontend_capacity = 0
         else:
-            # 非FDMA模式：用户共享频谱，使用最差用户的SINR
-            if len(user_capacities) > 0 and max(user_capacities) > 0:
-                # 找到有效用户中SINR最差的
-                valid_sinrs = []
-                for i, user_idx in enumerate(connected_users):
-                    if user_capacities[i] > 0:
-                        uav_pos = self.uav_positions[uav_idx]
-                        user_pos_3d = np.append(self.user_positions[user_idx], 0)
-                        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
-                        rx_power = self.tx_power - path_loss
-                        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
-                        valid_sinrs.append(sinr_db)
-                
-                if valid_sinrs:
-                    min_sinr_db = min(valid_sinrs)
-                    min_sinr_linear = 10 ** (min_sinr_db / 10)
-                    frontend_capacity = self.bandwidth * np.log2(1 + min_sinr_linear)
+            # 非FDMA模式：用户共享频谱，总容量由瓶颈（最小）用户容量决定
+            if user_capacities:
+                # 找出有效连接用户的最小容量
+                valid_capacities = [cap for cap in user_capacities if cap > 0]
+                if valid_capacities:
+                    # 共享信道的总容量等于瓶颈用户的容量
+                    frontend_capacity = min(valid_capacities)
                 else:
                     frontend_capacity = 0
             else:
@@ -2176,17 +2237,37 @@ class UAVForcedRelayEnv(ParallelEnv):
             sinr_db: SINR (dB)
         """
         if self.use_fdma:
-            # FDMA模式：考虑邻频干扰
-            adjacent_interference_ratio = 0.1
-            interference_power_linear = (10 ** (rx_power / 10)) * adjacent_interference_ratio
-            interference_power_dbm = 10 * np.log10(interference_power_linear) if interference_power_linear > 0 else -float('inf')
+            # FDMA模式：计算来自其他所有UAV的邻道干扰 (ACI)
+            # 简化模型：干扰功率 = 发射功率 * 路径损耗 * ACLR
+            # 我们进一步简化，假设所有干扰源的路径损耗对接收机的影响相似，
+            # 直接使用 发射功率 * ACLR 作为干扰项。
+            interference_powers_linear = []
+            
+            # 遍历所有其他UAV作为干扰源
+            for i in range(self.n_uavs):
+                # 排除发送方自身
+                if i == uav_idx:
+                    continue
+                
+                # 计算干扰源到用户的路径损耗
+                interferer_pos = self.uav_positions[i]
+                user_pos_3d = np.append(self.user_positions[user_idx], 0)  # 用户在地面
+                interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
+                
+                # 计算干扰功率：发射功率 - 路径损耗，然后转为线性值，再乘以ACLR
+                interferer_rx_power_dbm = self.tx_power - interferer_path_loss
+                interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
+                # 邻道干扰功率 = 接收功率 * ACLR
+                interference_powers_linear.append(interferer_rx_power_linear * self.aclr_linear)
+
+            total_interference_linear = np.sum(interference_powers_linear)
             
             # 噪声加干扰功率
             noise_power_linear = 10 ** (self.noise_power / 10)
-            total_interference_noise = noise_power_linear + interference_power_linear
-            total_interference_noise_dbm = 10 * np.log10(total_interference_noise)
+            interference_plus_noise_linear = noise_power_linear + total_interference_linear
+            interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
             
-            sinr_db = rx_power - total_interference_noise_dbm
+            sinr_db = rx_power - interference_plus_noise_dbm
         else:
             # 非FDMA模式：计算来自其他UAV的同频干扰
             interference_powers = []
@@ -2200,7 +2281,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                     interferer_power = self.tx_power - interferer_path_loss
                     interference_powers.append(10 ** (interferer_power / 10))
             
-            # 总干扰功率
+            # 总干扰功率 (所有干扰源的线性叠加)
             total_interference = np.sum(interference_powers) if interference_powers else 0
             total_interference_dbm = 10 * np.log10(total_interference) if total_interference > 0 else -float('inf')
             

@@ -122,7 +122,7 @@ class RolloutBuffer:
         # 移除了ptr和full属性，缓冲区重置由外部管理
         pass
         
-    def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_components=None):
+    def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None):
         """
         在指定的时间步 t 和环境索引 env_idx 存储数据。
         
@@ -139,7 +139,9 @@ class RolloutBuffer:
             env_idx: 环境索引
             team_skill: 团队技能索引
             agent_skills: 个体技能索引 [n_agents]
-            reward_components: 包含奖励组成的字典 (新增)
+            reward_env: 环境奖励
+            reward_team_disc: 团队判别器奖励
+            reward_ind_disc: 个体判别器奖励
         """
         if t >= self.num_steps:
             main_logger.error(f"RolloutBuffer: 尝试在越界的时间步 {t} 添加数据")
@@ -177,10 +179,12 @@ class RolloutBuffer:
             self.agent_skills[t, env_idx] = agent_skills
             
         # 新增：存储奖励组成
-        if reward_components:
-            self.rewards_env[t, env_idx] = reward_components.get('env', 0)
-            self.rewards_team_disc[t, env_idx] = reward_components.get('team_disc', 0)
-            self.rewards_ind_disc[t, env_idx] = reward_components.get('ind_disc', 0)
+        if reward_env is not None:
+            self.rewards_env[t, env_idx] = reward_env
+        if reward_team_disc is not None:
+            self.rewards_team_disc[t, env_idx] = reward_team_disc
+        if reward_ind_disc is not None:
+            self.rewards_ind_disc[t, env_idx] = reward_ind_disc
     
     def add_high_level_data(self, env_idx, time_step, value, joint_log_prob, accumulated_reward):
         """

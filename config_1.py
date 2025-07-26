@@ -14,7 +14,7 @@ class Config:
     max_hops = 5                   # 最大跳数 (场景2, 3, 4使用)
     user_distribution = 'multi_cluster'  # 用户分布类型
     channel_model = 'probabilistic'      # 信道模型
-    use_fdma = False                      # 理想FDMA,0干扰
+    use_fdma = True                      # FDMA
     bandwidth = 20e6                     # 每个无人机的带宽 (Hz)
     
     # 场景3和4共用参数
@@ -30,15 +30,15 @@ class Config:
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 3           # [关键] 降低个体技能数量
-    k = 40           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 20           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
-    hidden_size = 256         # 隐藏层大小 (论文中为64)
-    embedding_dim = 256       # 嵌入维度 (与hidden_size保持一致)
+    hidden_size = 128         # 隐藏层大小 (论文中为64)
+    embedding_dim = 128       # 嵌入维度 (与hidden_size保持一致)
     n_encoder_layers = 2     # 编码器层数
     n_decoder_layers = 2     # 解码器层数
     n_heads = 8              # 多头注意力头数
-    gru_hidden_size = 256     # GRU隐藏层大小 (与hidden_size保持一致)
+    gru_hidden_size = 128     # GRU隐藏层大小 (与hidden_size保持一致)
     lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
     lr_discoverer = 1e-4     # 技能发现器学习率 参考原论文
     lr_discriminator = 1e-4  # 参考原论文
@@ -81,7 +81,7 @@ class Config:
         self.buffer_size = 1000      # 更小的缓冲区
         self.batch_size = 500        # 更小的批次
         self.high_level_batch_size = 32  # 更小的高层批次
-    episode_length = 1200    # 每个episode的最大长度 (基于观察到的实际行为)
+    episode_length = 400    # 每个episode的最大长度 (基于观察到的实际行为)
     eval_interval = episode_length*num_envs*10   # 评估间隔 
     eval_episodes = 4      # 评估时的episode数量 (论文中SMAC为100)
     eval_rollout_threads = 4 # 评估时的并行线程数 (论文中SMAC为4)
@@ -131,16 +131,17 @@ class Config:
     anneal_steps = 2000000             # 权重退火总步数（约25%的训练时间）
     anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
 
-    # --- 场景4: 强制中继模式奖励权重 ---
-    coverage_weight = 1.0                    # 覆盖率奖励权重
-    connectivity_weight = 0              # 连通性奖励权重
-    efficiency_weight = 0                 # 效率奖励权重
-    potential_reward_weight = 0            # 势函数奖励权重
-    coverage_overlap_penalty_weight = 0    # 覆盖重叠惩罚权重
+    # --- 场景4: 强制中继模式奖励权重（简化版本）---
+    coverage_weight = 0.8                    # 核心目标：用户覆盖率权重
+    link_quality_weight = 0.2                # 统一的链路质量权重（替代原connectivity_weight + efficiency_weight）
+    potential_reward_weight = 0.2            # 基于势函数的探索奖励权重
+    distance_overlap_penalty_weight = 0.05  # 距离重叠惩罚权重
     
-    # --- 场景4: 发现奖励机制参数 ---
-    discovery_reward_weight = 0           # [关键] 发现奖励权重，激励探索分散
-    discovery_reward_value = 0            # 每发现一个新用户的奖励值
+    # 注意：以下参数已被移除，因为新的奖励机制已简化
+    # - connectivity_weight: 已合并到link_quality_weight中
+    # - efficiency_weight: 已合并到link_quality_weight中  
+    # - relay_weight: 已合并到link_quality_weight中
+    # - overlap_penalty_weight: 已替换为distance_overlap_penalty_weight
 
     # --- 场景4: 信念地图与势函数参数 ---
     belief_decay_factor = 0.1                # 信念衰减因子
