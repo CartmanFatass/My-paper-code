@@ -24,9 +24,6 @@ from stable_baselines3.common.env_util import make_vec_env # Can also use this h
 # 导入论文中的配置
 from config_1 import Config
 from hmasd.agent import HMASDAgent
-from envs.pettingzoo.scenario1 import UAVBaseStationEnv
-from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
-from envs.pettingzoo.scenario3 import UAVMultiHopEnv
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
@@ -624,15 +621,15 @@ class EnhancedRewardTracker:
                     })
                 
                 # 场景4特有指标：覆盖重叠惩罚
-                if 'overlap_penalty' in reward_info:
-                    # 确保 overlap_penalty 列表存在
-                    if 'overlap_penalty' not in self.performance_metrics['reward_components']:
-                        self.performance_metrics['reward_components']['overlap_penalty'] = []
+                if 'coverage_overlap_penalty' in reward_info:
+                    # 确保 coverage_overlap_penalty 列表存在
+                    if 'coverage_overlap_penalty' not in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components']['coverage_overlap_penalty'] = []
                     
-                    self.performance_metrics['reward_components']['overlap_penalty'].append({
+                    self.performance_metrics['reward_components']['coverage_overlap_penalty'].append({
                         'step': step,
                         'env_id': env_id,
-                        'value': reward_info['overlap_penalty'],
+                        'value': reward_info['coverage_overlap_penalty'],
                         'timestamp': time.time()
                     })
                 
@@ -657,21 +654,6 @@ class EnhancedRewardTracker:
                     self.performance_metrics['reward_components']['distance_overlap_penalty'].append({
                         'step': step, 'env_id': env_id, 'value': reward_info['distance_overlap_penalty'], 'timestamp': time.time()
                     })
-                
-                # 场景4新增：信念地图相关统计
-                belief_fields = [
-                    'belief_entropy', 'max_belief_value', 'min_belief_value', 'mean_belief_value',
-                    'belief_concentration', 'high_belief_cells', 'belief_variance', 'belief_skewness',
-                    'total_belief_mass', 'current_potential', 'previous_potential'
-                ]
-                
-                for field in belief_fields:
-                    if field in reward_info:
-                        if field not in self.performance_metrics['reward_components']:
-                            self.performance_metrics['reward_components'][field] = []
-                        self.performance_metrics['reward_components'][field].append({
-                            'step': step, 'env_id': env_id, 'value': reward_info[field], 'timestamp': time.time()
-                        })
                 
                 # 其他有用指标
                 if 'avg_hops' in reward_info:
@@ -1321,8 +1303,8 @@ class EnhancedRewardTracker:
 
         # 重叠惩罚
         self._log_aggregated_metrics(writer, step, 
-                                   reward_components.get('overlap_penalty', []), 
-                                   'Overlap_Penalty', 
+                                   reward_components.get('coverage_overlap_penalty', []), 
+                                   'Coverage_Overlap_Penalty', 
                                    'Rewards')
 
         # 覆盖栅格统计 - 移到Exploration分类
@@ -1330,38 +1312,6 @@ class EnhancedRewardTracker:
                                    reward_components.get('covered_grids', []), 
                                    'Covered_Grids', 
                                    'Exploration')
-        
-        # 场景4新增：信念地图统计 - 新的Belief分类
-        belief_fields = [
-            'belief_entropy', 'max_belief_value', 'min_belief_value', 'mean_belief_value',
-            'belief_concentration', 'high_belief_cells', 'belief_variance', 'belief_skewness',
-            'total_belief_mass', 'current_potential', 'previous_potential', 'sparse_task_reward'
-        ]
-        
-        for field in belief_fields:
-            if reward_components.get(field):
-                recent_data = reward_components[field][-self.window_size:]
-                if recent_data:
-                    recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
-                    if recent_values:
-                        avg_value = np.mean(recent_values)
-                        
-                        # 根据字段类型选择合适的TensorBoard分类
-                        if field in ['belief_entropy', 'max_belief_value', 'min_belief_value', 'mean_belief_value', 
-                                     'belief_concentration', 'belief_variance', 'belief_skewness', 'total_belief_mass']:
-                            category = 'Belief'
-                        elif field in ['current_potential', 'previous_potential']:
-                            category = 'Potential'
-                        elif field == 'sparse_task_reward':
-                            category = 'Rewards'
-                        elif field == 'high_belief_cells':
-                            category = 'Belief'
-                        else:
-                            category = 'Belief'
-                        
-                        # 格式化字段名
-                        formatted_field = field.replace('_', ' ').title().replace(' ', '_')
-                        writer.add_scalar(f'{category}/{formatted_field}_Mean_Rollout', avg_value, step)
         
         # 场景4新增：发现奖励机制统计 - 新的Discovery分类
         discovery_fields = [
@@ -1553,45 +1503,13 @@ def make_env(rank, seed, config, scenario, render_mode=None):
             'n_uavs': config.n_agents,
             'n_users': config.n_users,
             'user_distribution': config.user_distribution,
-            'channel_model': config.channel_model,
             'render_mode': render_mode,
             'seed': env_seed,
             'use_fdma': config.use_fdma,
             'bandwidth': config.bandwidth
         }
         
-        if scenario == 1:
-            raw_env = UAVBaseStationEnv(**env_kwargs)
-        elif scenario == 2:
-            # 场景2不再需要传递奖励权重参数，奖励已固化为覆盖率+归一化吞吐量
-            raw_env = UAVCooperativeNetworkEnv(
-                max_hops=config.max_hops,
-                **env_kwargs
-            )
-        elif scenario == 3:
-            # 场景3的奖励权重参数（从配置对象获取）
-            reward_kwargs = {
-                'effective_coverage_weight': config.effective_coverage_weight,
-                'throughput_weight': config.throughput_weight,
-                'load_balance_weight': config.load_balance_weight,
-                'proximity_penalty_weight': config.proximity_penalty_weight
-            }
-            
-            # 场景3特有的参数（从配置对象获取）
-            scenario3_kwargs = {
-                'n_clusters': config.n_clusters,
-                'cluster_std': config.cluster_std,
-                'central_area_ratio': config.central_area_ratio,
-                'area_size': config.area_size
-            }
-            
-            raw_env = UAVMultiHopEnv(
-                max_hops=config.max_hops,
-                **env_kwargs, # 传递通用参数
-                **reward_kwargs, # 传递场景3的奖励权重参数
-                **scenario3_kwargs # 传递场景3特有参数
-            )
-        elif scenario == 4:
+        if scenario == 4:
             # 场景4：强制多跳中继环境（使用简化的奖励权重参数）
             scenario4_kwargs = {
                 'max_steps': config.episode_length,           # 从配置中传入episode长度
@@ -1603,17 +1521,8 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'central_area_ratio': config.central_area_ratio,
                 'min_sinr': config.min_sinr,
                 'max_connections': config.max_connections,
-                # 简化的奖励权重参数
-                'coverage_weight': config.coverage_weight,
-                'link_quality_weight': config.link_quality_weight,  # 统一的链路质量权重
                 'uav_init_mode': config.uav_init_mode,
                 'uav_start_area_size': config.uav_start_area_size,
-                'grid_resolution': config.grid_resolution,
-                'potential_reward_weight': config.potential_reward_weight,
-                'belief_decay_factor': config.belief_decay_factor,
-                'recon_interval': config.recon_interval,
-                'recon_strength': config.recon_strength,
-                'distance_overlap_penalty_weight': config.distance_overlap_penalty_weight,
             }
             
             # 将场景4的参数合并到通用参数中
@@ -1739,20 +1648,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     tb_manager.add_text('Parameters/export_interval', str(args.export_interval), 0)
     tb_manager.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
     
-    # 记录环境奖励权重配置到Parameters分组
-    tb_manager.add_text('Parameters/effective_coverage_weight', str(config.effective_coverage_weight), 0)
-    tb_manager.add_text('Parameters/throughput_weight', str(config.throughput_weight), 0)
-    tb_manager.add_text('Parameters/load_balance_weight', str(config.load_balance_weight), 0)
     
-    # 记录场景4的奖励权重参数（简化版本）
-    tb_manager.add_text('Parameters/coverage_weight', str(config.coverage_weight), 0)
-    tb_manager.add_text('Parameters/link_quality_weight', str(config.link_quality_weight), 0)  # 统一的链路质量权重
-    tb_manager.add_text('Parameters/potential_reward_weight', str(config.potential_reward_weight), 0)
-    tb_manager.add_text('Parameters/belief_decay_factor', str(config.belief_decay_factor), 0)
-    tb_manager.add_text('Parameters/recon_interval', str(config.recon_interval), 0)
-    tb_manager.add_text('Parameters/recon_strength', str(config.recon_strength), 0)
-    tb_manager.add_text('Parameters/distance_overlap_penalty_weight', str(config.distance_overlap_penalty_weight), 0)
-
     # 训练变量
     total_steps = 0
     n_episodes = 0
@@ -1816,20 +1712,23 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             # 从 infos 提取 next_states
             next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
 
+            # 简化奖励处理，直接使用环境原始奖励，与agent.py逻辑保持一致
+            reward_components_list = []
+            
+            for i in range(num_envs):
+                # 提取奖励组成部分（用于详细记录和分析）
+                reward_components = infos[i].get('reward_components', {})
+                reward_components_list.append(reward_components)
+
             # 存储经验到缓冲区
             for i in range(num_envs):
                 current_agent_info = all_agent_infos_list[i]
                 skill_timer_value = env_skill_durations[i]
                 
-                # 从环境信息中提取potential_reward（如果可用）
-                potential_reward = 0.0
-                if 'reward_info' in infos[i] and 'potential_reward' in infos[i]['reward_info']:
-                    potential_reward = infos[i]['reward_info']['potential_reward']
-                
                 # 从agent_info中提取values（新的agent.py API）
                 values = current_agent_info.get('values', None)
                 
-                # 存储转换，并获取返回的奖励组成部分，传递正确的时间步索引
+                # 使用环境原始奖励，与agent.py逻辑保持一致
                 returned_reward_components = agent.store_transition(
                     states[i], next_states[i], observations[i], next_observations[i],
                     actions_array[i], rewards[i], dones[i], current_agent_info['team_skill'],
@@ -1838,7 +1737,6 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     log_probs=current_agent_info['log_probs'],
                     skill_timer_for_env=skill_timer_value,
                     env_id=i,
-                    potential_reward=potential_reward,
                     rollout_step_idx=rollout_step  # 【修复】传递正确的rollout步数索引
                 )
 
@@ -1854,6 +1752,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
 
                 # 更新环境状态跟踪
                 env_steps[i] += 1
+                # 使用环境原始奖励累积
                 env_rewards[i] += rewards[i]
 
                 # 使用增强的奖励追踪器记录训练步骤
@@ -1862,7 +1761,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     reward_tracker.log_training_step(
                         step=total_steps - num_envs + i + 1,
                         env_id=i,
-                        reward=rewards[i],
+                        reward=rewards[i],  # 【修复】记录原始环境奖励，而不是未定义的高层奖励
                         reward_components=returned_reward_components,
                         info=infos[i]
                     )
@@ -1950,55 +1849,55 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             if total_steps >= config.total_timesteps:
                 break
 
-        # --- 在更新前计算GAE和Returns ---
-        # Rollout数据收集完成，现在为低层策略计算优势。
-        # 这确保了GAE是在刚刚收集的完整、新鲜的数据上计算的。
-        # 注意：高层策略的GAE计算仍在 agent.update_coordinator 内部。
+        # --- 在更新前计算GAE和Returns (最终修正版) ---
         main_logger.debug("为低层策略(Discoverer)计算GAE...")
-        
-        # 获取rollout最后一步的观测和状态，用于计算last_values
-        # 使用当前的states和observations作为最后一步的输入
-        last_step_observations = observations  # Shape: (num_envs, n_agents, obs_dim)
-        last_step_states = states  # Shape: (num_envs, state_dim)
-        
-        # 计算last_values：使用agent.discoverer.critic网络
-        last_values = np.zeros((num_envs, config.n_agents), dtype=np.float32)
-        last_dones = np.zeros((num_envs, config.n_agents), dtype=bool)
-        
-        for i in range(num_envs):
-            # 获取当前的团队技能，处理标记值 -1
-            current_team_skill = agent.env_team_skills.get(i, 0)
-            
-            # 如果遇到标记值 -1，使用默认技能 0
-            if current_team_skill == -1:
-                current_team_skill = 0
-                main_logger.debug(f"环境 {i} 的团队技能为标记值 -1，使用默认值 0")
-            
-            # 使用discoverer的critic网络计算价值
-            with torch.no_grad():
-                global_state_tensor = torch.FloatTensor(last_step_states[i]).unsqueeze(0).to(agent.device)
-                team_skill_tensor = torch.tensor(current_team_skill, device=agent.device).unsqueeze(0)
-                global_value, _ = agent.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
-                global_value_scalar = global_value.squeeze().item()
+
+        # 1. 获取最后一步的价值 (Critic的直接输出)
+        last_values_predicted = np.zeros((num_envs, config.n_agents), dtype=np.float32)
+        with torch.no_grad():
+            for i in range(num_envs):
+                current_team_skill = agent.env_team_skills.get(i, 0)
+                if current_team_skill == -1: current_team_skill = 0
                 
-                # 所有智能体使用相同的全局价值估计
-                last_values[i, :] = global_value_scalar
+                global_state_tensor = torch.FloatTensor(states[i]).unsqueeze(0).to(agent.device)
+                team_skill_tensor = torch.tensor(current_team_skill, device=agent.device).unsqueeze(0)
+                global_value_tensor, _ = agent.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
+                
+                last_values_predicted[i, :] = global_value_tensor.squeeze().item()
+
+        # 2. 将所有价值（缓冲区内的和最后一步的）反归一化到原始奖励尺度
+        if config.use_valuenorm:
+            main_logger.info("ValueNorm已启用，正在反归一化价值以计算GAE...")
+            # a. 反归一化缓冲区中存储的价值
+            values_in_buffer_tensor = torch.from_numpy(agent.rollout_buffer.values[:rollout_steps]).to(agent.device)
+            values_in_buffer_denorm = agent._denormalize_values(values_in_buffer_tensor, agent.value_norm_discoverer)
             
-            # 假设rollout结束时环境没有终止（除非明确终止）
-            # 这里可以根据实际情况调整
-            last_dones[i, :] = False
-        
-        # 调用修复后的compute_advantages方法
+            # b. 反归一化最后一步的价值
+            last_values_tensor = torch.from_numpy(last_values_predicted).to(agent.device)
+            last_values_denorm = agent._denormalize_values(last_values_tensor, agent.value_norm_discoverer)
+            
+            # 将反归一化后的值（numpy格式）传递给 GAE 计算
+            values_for_gae = values_in_buffer_denorm.cpu().numpy()
+            last_values_for_gae = last_values_denorm.cpu().numpy()
+        else:
+            # 如果不使用ValueNorm，直接使用Critic的原始输出
+            values_for_gae = agent.rollout_buffer.values[:rollout_steps]
+            last_values_for_gae = last_values_predicted
+
+        # 3. 调用 compute_advantages，现在所有价值都在正确的原始尺度上
+        # 使用已有的 denormalized_values 和 denormalized_last_values 参数
         agent.rollout_buffer.compute_advantages(
-            last_values=last_values, 
-            dones=last_dones, 
+            last_values=last_values_predicted, # 原始的预测值，用于兼容性
+            dones=np.zeros((num_envs, config.n_agents), dtype=bool), # 假设rollout结束时非终止
             gamma=config.gamma, 
-            gae_lambda=config.gae_lambda
+            gae_lambda=config.gae_lambda,
+            denormalized_values=values_for_gae, # 传入反归一化后的序列价值
+            denormalized_last_values=last_values_for_gae # 传入反归一化后的最后一步价值
         )
 
         # Rollout数据收集完成，进行更新
         try:
-            update_info = agent.update()
+            update_info = agent.update(steps_in_buffer=rollout_steps)
             update_times += 1
             elapsed = time.time() - start_time
 
@@ -2032,6 +1931,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         except ValueError as e:
             main_logger.error(f"更新错误: {e}")
             update_times += 1
+
+        # 【修复】更新完成后，清空缓冲区，为下一次rollout做准备
+        # 这是解决“重复存储”问题的关键
+        agent.clear_buffers()
 
         # 重置rollout步数计数器
         rollout_steps = 0
@@ -2658,32 +2561,15 @@ def main():
         "use_fdma", "bandwidth", "max_hops"
     ]
     
-    # 场景3&4共用参数
-    common_scenario_params = [
+    # 场景4参数
+    scenario4_params = [
         "n_clusters", "cluster_std", "central_area_ratio"
-    ]
-    
-    # 场景3特有奖励权重
-    scenario3_reward_params = [
-        "effective_coverage_weight", "throughput_weight", "load_balance_weight", 
-        "proximity_penalty_weight", "coverage_curve_steepness"
-    ]
-    
-    # 场景4特有奖励权重参数（简化版本）
-    scenario4_reward_params = [
-        "coverage_weight", "link_quality_weight", 
-        "potential_reward_weight", "distance_overlap_penalty_weight"
     ]
     
     # 场景4特有环境参数
     scenario4_env_params = [
         "min_sinr", "max_connections", "uav_init_mode", "uav_start_area_size", 
         "grid_resolution"
-    ]
-    
-    # 场景4信念地图与势函数参数
-    scenario4_belief_params = [
-        "belief_decay_factor", "recon_interval", "recon_strength"
     ]
     
     # HMASD算法核心参数
@@ -2734,17 +2620,10 @@ def main():
     # 1. 基础环境参数
     total_params += print_config_section("基础环境参数", config, basic_env_params)
     
-    # 2. 场景3&4共用参数
-    if args.scenario in [3, 4]:
-        total_params += print_config_section("场景共用参数", config, common_scenario_params)
-    
-    # 3. 场景特定奖励权重参数
-    if args.scenario == 3:
-        total_params += print_config_section("场景3奖励权重参数", config, scenario3_reward_params)
-    elif args.scenario == 4:
-        total_params += print_config_section("场景4奖励权重参数", config, scenario4_reward_params)
+    # 2. 场景4参数
+    if args.scenario == 4:
+        total_params += print_config_section("场景4参数", config, scenario4_params)
         total_params += print_config_section("场景4环境参数", config, scenario4_env_params)
-        total_params += print_config_section("场景4信念地图参数", config, scenario4_belief_params)
     
     # 4. HMASD算法参数
     total_params += print_config_section("HMASD核心参数", config, hmasd_core_params)

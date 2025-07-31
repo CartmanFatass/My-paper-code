@@ -138,11 +138,38 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # 将字典格式的观测转换为数组格式
         next_observations_array = self._dict_to_array(observations_dict)
 
-        # 计算全局奖励（所有智能体奖励的平均值） - 可以根据需要调整
-        # reward = sum(rewards_dict.values()) / len(rewards_dict) if rewards_dict else 0
-        # 或者使用第一个智能体的奖励作为代理，如果奖励设计是全局的
+        # 【重要改动】构建丰富的奖励信息字典而不是简单的标量奖励
         first_agent = self.agents[0]
-        reward = rewards_dict.get(first_agent, 0) # Assuming global reward reflected in each agent's reward
+        
+        # 从第一个智能体获取奖励信息（假设所有智能体共享相同的奖励结构）
+        agent_info = infos_dict.get(first_agent, {})
+        reward_info = agent_info.get("reward_info", {})
+        
+        # 计算个体化奖励（每个智能体的奖励）
+        individual_rewards = [rewards_dict.get(agent, 0.0) for agent in self.agents]
+        
+        # 计算共享的全局奖励（用作低层策略的基础奖励）
+        shared_global_reward = sum(rewards_dict.values()) / len(rewards_dict) if rewards_dict else 0.0
+        
+        # 从环境奖励信息中提取重叠惩罚（如果存在）
+        overlap_penalties = []
+        if "coverage_overlap_penalty" in reward_info:
+            # 假设重叠惩罚对所有智能体相同，或从环境中获取每个智能体的惩罚
+            overlap_penalty = reward_info["coverage_overlap_penalty"]
+            overlap_penalties = [overlap_penalty] * len(self.agents)
+        else:
+            overlap_penalties = [0.0] * len(self.agents)
+        
+        # 构建丰富的奖励字典
+        reward_dict = {
+            'individual_rewards': individual_rewards,
+            'shared_global_reward': shared_global_reward,
+            'overlap_penalties': overlap_penalties,
+            'reward_info': reward_info  # 保留原始奖励信息以供进一步分析
+        }
+        
+        # 为了兼容性，仍然返回一个标量奖励（但这将被训练循环忽略，转而使用丰富的奖励字典）
+        scalar_reward = shared_global_reward
 
         # 判断是否终止或截断 (任一智能体终止或截断)
         terminated = any(terminations_dict.values())
@@ -154,7 +181,8 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             "terminations_dict": terminations_dict,
             "truncations_dict": truncations_dict,
             "rewards_dict": rewards_dict,
-            "infos_dict": infos_dict
+            "infos_dict": infos_dict,
+            "reward_components": reward_dict  # 【新增】添加丰富的奖励信息
         }
 
         # 添加场景特定信息（从第一个智能体的info中获取，如果存在）
@@ -183,7 +211,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             info["total_users"] = getattr(self.env, 'n_users', 0)
             info["discovery_progress"] = len(self.env.discovered_users_this_episode) / max(getattr(self.env, 'n_users', 1), 1)
 
-        return next_observations_array.astype(np.float32), float(reward), terminated, truncated, info
+        return next_observations_array.astype(np.float32), float(scalar_reward), terminated, truncated, info
 
     def _dict_to_array(self, data_dict):
         """

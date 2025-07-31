@@ -1,4 +1,5 @@
 # HMASD算法配置参数 - 基于论文《Hierarchical Multi-Agent Skill Discovery》附录E中的超参数设置
+# 专用于场景4：强制中继模式
 
 class Config:
     # 环境参数
@@ -7,25 +8,27 @@ class Config:
     state_dim = None  # 全局状态维度（将在环境初始化时获取）
     obs_dim = None    # 单个智能体观测维度（将在环境初始化时获取）
     action_dim = 3    # 每个智能体输出3D速度向量
+    action_bound = 3.0 # 动作输出的最大值（用于tanh缩放）
     
     # 通用环境参数
     n_users = 30                    # 用户数量
-    area_size = 2000               # 区域大小 (米)
-    max_hops = 5                   # 最大跳数 (场景2, 3, 4使用)
+    area_size = 5000               # 区域大小 (米)
+    max_hops = 5                   # 最大跳数
     user_distribution = 'multi_cluster'  # 用户分布类型
     channel_model = 'probabilistic'      # 信道模型
     use_fdma = True                      # FDMA
     bandwidth = 20e6                     # 每个无人机的带宽 (Hz)
     
-    # 场景3和4共用参数
-    n_clusters = 5                 # 用户簇数量 (场景3和4使用)
-    cluster_std = 80              # 簇内用户分布标准差 (米, 场景3和4使用)
-    central_area_ratio = 0.6      # 中心用户区域占总区域的比例 (场景3和4使用)
+    # 场景4参数
+    n_clusters = 5                 # 用户簇数量
+    cluster_std = 80              # 簇内用户分布标准差 (米)
+    central_area_ratio = 0.5      # 中心用户区域占总区域的比例
     
     # 局部观测参数
-    #observation_radius = 500  # 观测半径 (m) 使用真实通信范围代替
-    max_observed_uavs = 6     # 最大观测无人机数量
-    max_observed_users = 30   # 最大观测用户数量
+    observation_radius = 600  # [新增] 固定的侦测范围 (米)
+    max_observed_uavs = 6     # 原为6，可以适当增大以容纳更多邻居
+    max_observed_users = 30   # 原为30
+    max_observed_bs = 2       # [新增] 最大观测基站数量
 
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
@@ -40,7 +43,7 @@ class Config:
     n_heads = 8              # 多头注意力头数
     gru_hidden_size = 128     # GRU隐藏层大小 (与hidden_size保持一致)
     lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
-    lr_discoverer = 1e-4     # 技能发现器学习率 参考原论文
+    lr_discoverer = 5e-5     # 技能发现器学习率 参考原论文
     lr_discriminator = 1e-4  # 参考原论文
     lr_prototype_discriminator = 1e-4 # 原型判别器学习率 (新增)
 
@@ -48,13 +51,14 @@ class Config:
     gamma = 0.99             # 折扣因子
     gae_lambda = 0.95        # GAE参数
     clip_epsilon = 0.2       # PPO裁剪参数 (更保守以稳定学习)
-    ppo_epochs = 15          # [关键] 减少PPO迭代，防止过拟合
+    ppo_epochs = 10          # [关键] 减少PPO迭代，防止过拟合
     value_loss_coef = 1.0    # MAPPO标准价值损失系数
     max_grad_norm = 0.5      # MAPPO标准梯度裁剪
+    value_clip = 10.0        # [新增] 价值函数裁剪范围，用于Value Normalization
 
     # HMASD损失权重 - 紧急修复判别器崩溃问题
     # 注意：重新平衡奖励权重，解决判别器过度训练和技能学习停滞问题
-    lambda_e = 100          # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
+    lambda_e = 1          # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
     lambda_D = 0.1           # [紧急修复] 大幅提高团队技能判别器奖励权重，从0.1提高到1.0
     lambda_d = 0.5           # [紧急修复] 大幅提高个体技能判别器奖励权重，从0.5提高到2.0
     lambda_h = 0.001          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
@@ -114,14 +118,13 @@ class Config:
     opt_beta = 0.1           # 条件互信息损失权重 (论文中β=0.1)
     opt_layers = 2           # OPT模块层数 (论文中K=2)
     
-    # 环境奖励权重配置 - 场景3多跳环境（优化后的权重分配）
-    # 注意：场景2不再需要传入奖励权重，其奖励已固化为覆盖率+归一化吞吐量
-    effective_coverage_weight = 1.0     # 有效覆盖率权重（大幅增强，优先覆盖所有用户）
-    throughput_weight = 0            # 系统吞吐量权重（降低，避免与覆盖目标冲突）
-    load_balance_weight = 0          # 负载均衡权重（适度降低）
-    proximity_penalty_weight = 0   # 邻近惩罚权重（降低，减少对探索的限制）
-    coverage_curve_steepness = 2.0     # 覆盖率奖励曲线陡峭度（新增，增强高覆盖率区域奖励）
-
+    # --- 场景4: 强制中继模式奖励权重（已废弃，奖励函数已简化）---
+    # 注意：以下参数已被移除，因为新的奖励机制已简化
+    # - coverage_weight
+    # - link_quality_weight
+    # - potential_reward_weight
+    # - distance_overlap_penalty_weight
+    
     # 权重退火参数 - 用于解决奖励空窗期问题
     use_reward_annealing = False         # 禁用额外模块
     w_intrinsic_initial = 5.0          # 内在奖励初始权重倍数（早期强调探索）
@@ -130,18 +133,6 @@ class Config:
     w_extrinsic_final = 2.0            # 外部奖励最终权重倍数（后期强化利用）
     anneal_steps = 2000000             # 权重退火总步数（约25%的训练时间）
     anneal_schedule = 'linear'         # 退火计划（'linear' 或 'cosine'）
-
-    # --- 场景4: 强制中继模式奖励权重（简化版本）---
-    coverage_weight = 0.8                    # 核心目标：用户覆盖率权重
-    link_quality_weight = 0.2                # 统一的链路质量权重（替代原connectivity_weight + efficiency_weight）
-    potential_reward_weight = 0.2            # 基于势函数的探索奖励权重
-    distance_overlap_penalty_weight = 0.05  # 距离重叠惩罚权重
-    
-    # 注意：以下参数已被移除，因为新的奖励机制已简化
-    # - connectivity_weight: 已合并到link_quality_weight中
-    # - efficiency_weight: 已合并到link_quality_weight中  
-    # - relay_weight: 已合并到link_quality_weight中
-    # - overlap_penalty_weight: 已替换为distance_overlap_penalty_weight
 
     # --- 场景4: 信念地图与势函数参数 ---
     belief_decay_factor = 0.1                # 信念衰减因子

@@ -232,27 +232,40 @@ class HMASDAgent:
             self.value_norm_discoverer = None
             main_logger.info("未启用Value Normalization")
     
-    def _normalize_values(self, values, running_mean_std):
-        """使用SB3的RunningMeanStd进行标准化"""
-        if not self.config.use_valuenorm:
-            return values
+    def _normalize_values(self, values_tensor, running_mean_std):
+        """
+        [修正] 使用当前的统计量归一化一个张量。
+        这个函数不更新统计量。
+        """
+        if not self.config.use_valuenorm or running_mean_std is None:
+            return values_tensor
         
-        # 转换为numpy进行标准化
-        values_np = values.detach().cpu().numpy()
-        normalized_np = (values_np - running_mean_std.mean) / np.sqrt(running_mean_std.var + 1e-8)
+        # 从 SB3 对象获取当前的均值和方差
+        current_mean = torch.tensor(running_mean_std.mean, device=self.device, dtype=torch.float32)
+        current_var = torch.tensor(running_mean_std.var, device=self.device, dtype=torch.float32)
         
-        # 裁剪并转回tensor
-        normalized_np = np.clip(normalized_np, -5.0, 5.0)
-        return torch.tensor(normalized_np, dtype=values.dtype, device=values.device)
+        # 归一化
+        normalized_tensor = (values_tensor - current_mean) / torch.sqrt(current_var + 1e-8)
+        # 裁剪
+        normalized_tensor = torch.clamp(normalized_tensor, -self.config.value_clip, self.config.value_clip)
+        
+        return normalized_tensor
 
-    def _denormalize_values(self, values, running_mean_std):
-        """使用SB3的RunningMeanStd进行反标准化"""
-        if not self.config.use_valuenorm:
-            return values
+    def _denormalize_values(self, normalized_values_tensor, running_mean_std):
+        """
+        [修正] 使用当前的统计量反归一化一个张量。
+        """
+        if not self.config.use_valuenorm or running_mean_std is None:
+            return normalized_values_tensor
         
-        values_np = values.detach().cpu().numpy()
-        denormalized_np = values_np * np.sqrt(running_mean_std.var + 1e-8) + running_mean_std.mean
-        return torch.tensor(denormalized_np, dtype=values.dtype, device=values.device)
+        # 从 SB3 对象获取当前的均值和方差
+        current_mean = torch.tensor(running_mean_std.mean, device=self.device, dtype=torch.float32)
+        current_var = torch.tensor(running_mean_std.var, device=self.device, dtype=torch.float32)
+        
+        # 反归一化
+        denormalized_tensor = normalized_values_tensor * torch.sqrt(current_var + 1e-8) + current_mean
+        
+        return denormalized_tensor
 
     def clear_buffers(self):
         """清空经验缓冲区（用于严格on-policy训练）"""
@@ -291,50 +304,20 @@ class HMASDAgent:
             main_logger.debug("保持Value Normalization统计量不变，继续累积训练数据")
     
     def reset_env_state(self, env_id):
-        """
-        【修复】重置指定环境的内部状态
-        
-        参数:
-            env_id: 要重置的环境ID
-        """
-        # 重置环境特定的GRU隐藏状态
+        """Resets the internal state for a specific environment."""
         if env_id in self.env_hidden_states:
             self.env_hidden_states[env_id] = None
-            main_logger.debug(f"已重置环境 {env_id} 的GRU隐藏状态")
-        
-        # 重置环境特定的技能状态 - 标记为需要重新分配而不是设置固定值
-        # 这样可以保持技能探索的多样性，在下一次step时会触发新的技能分配
+            main_logger.debug(f"Reset hidden state for env {env_id}")
+        # ... (rest of the reset logic for skills, etc., is the same)
         if env_id in self.env_team_skills:
-            # 使用特殊标记值 -1 表示需要重新分配，但在tensor创建前会被处理
             self.env_team_skills[env_id] = -1
         if env_id in self.env_agent_skills:
-            # 使用特殊标记值 -1 表示需要重新分配
             self.env_agent_skills[env_id] = np.full(self.config.n_agents, -1, dtype=int)
-        if env_id in self.env_log_probs:
-            self.env_log_probs[env_id] = None
-        
-        # 保留奖励累积和计时器的重置（这些应该在外部调用时处理）
-        # 不在这里重置 self.env_reward_sums[env_id] 和 self.env_timers[env_id]
-        # 因为这些由训练循环管理
-        
-        main_logger.debug(f"环境 {env_id} 的内部状态已重置，技能将在下次step时重新分配")
     
     
     def select_action(self, observations, agent_skills=None, deterministic=False, env_id=0, state=None):
         """
-        为所有智能体选择动作
-        
-        参数:
-            observations: 所有智能体的观测 [n_agents, obs_dim]
-            agent_skills: 所有智能体的技能 [n_agents]，如果为None则使用当前技能
-            deterministic: 是否使用确定性策略
-            env_id: 环境ID，用于多环境并行训练
-            state: 全局状态 [state_dim]，用于价值估计
-            
-        返回:
-            actions: 所有智能体的动作 [n_agents, action_dim]
-            action_logprobs: 所有智能体的动作对数概率 [n_agents]
-            values: 所有智能体的价值估计 [n_agents] (新增返回值)
+        [最终修正版] 选择动作，并为每个环境管理正确的隐藏状态形状。
         """
         if agent_skills is None:
             agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
@@ -342,44 +325,39 @@ class HMASDAgent:
         n_agents = observations.shape[0]
         actions = torch.zeros((n_agents, self.config.action_dim), device=self.device)
         action_logprobs = torch.zeros(n_agents, device=self.device)
-        values = torch.zeros(n_agents, device=self.device)  # 新增返回值
+        values = torch.zeros(n_agents, device=self.device)
         
-        # 初始化或获取环境特定的GRU隐藏状态
-        if env_id not in self.env_hidden_states or self.env_hidden_states[env_id] is None:
-            self.skill_discoverer.init_hidden(batch_size=1)
-            self.env_hidden_states[env_id] = self.skill_discoverer.actor_hidden
-        else:
-            self.skill_discoverer.actor_hidden = self.env_hidden_states[env_id]
-        
+        # --- 核心隐藏状态管理 ---
+        gru_hidden_size = self.config.gru_hidden_size
+        hidden_state = self.env_hidden_states.get(env_id)
+        if hidden_state is None:
+            # --- 核心修正：初始化为正确的2D形状 [n_agents, gru_hidden_size] ---
+            hidden_state = torch.zeros(n_agents, gru_hidden_size, device=self.device)
+
         with torch.no_grad():
-            # 获取当前团队技能用于价值估计
+            # Get global value (this part is correct and does not need to change)
             current_team_skill = self.env_team_skills.get(env_id, self.current_team_skill)
             if current_team_skill is not None and state is not None:
-                # 使用真实的全局状态计算价值估计（用于所有智能体）
                 global_state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
                 team_skill_tensor = torch.tensor(current_team_skill, device=self.device).unsqueeze(0)
                 global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
-                global_value_scalar = global_value.squeeze().item()
+                values.fill_(global_value.item())
             else:
-                global_value_scalar = 0.0
+                values.fill_(0.0)
+
+            # 将所有智能体作为单个批次处理
+            obs_batch = torch.FloatTensor(observations).to(self.device)
+            skill_batch = torch.tensor(agent_skills, device=self.device)
+
+            # 将环境的 hidden_state (现在是正确的2D形状) 传入网络
+            actions_batch, logprobs_batch, _, new_hidden_state = self.skill_discoverer.forward(
+                obs_batch, skill_batch, hidden_state, deterministic
+            )
             
-            for i in range(n_agents):
-                obs = torch.FloatTensor(observations[i]).unsqueeze(0).to(self.device)
-                skill = torch.tensor(agent_skills[i], device=self.device)
-                
-                action, action_logprob, _ = self.skill_discoverer(obs, skill, deterministic)
-                
-                actions[i] = action.squeeze(0)
-                action_logprobs[i] = action_logprob.squeeze(0)
-                values[i] = global_value_scalar  # 所有智能体使用相同的全局价值估计
-        
-        # 保存更新后的GRU隐藏状态
-        self.env_hidden_states[env_id] = self.skill_discoverer.actor_hidden
-        # 确保隐藏状态是二维张量，去掉多余的维度
-        if self.env_hidden_states[env_id].dim() > 2:
-            self.env_hidden_states[env_id] = self.env_hidden_states[env_id].squeeze(0)
-        
-        return actions.cpu().numpy(), action_logprobs.cpu().numpy(), values.cpu().numpy()
+            # 存储更新后的 hidden_state (也是2D形状)
+            self.env_hidden_states[env_id] = new_hidden_state
+
+        return actions_batch.cpu().numpy(), logprobs_batch.cpu().numpy(), values.cpu().numpy()
     
     def reset_value_norm(self):
         """显式重置Value Normalization统计量"""
@@ -567,12 +545,9 @@ class HMASDAgent:
             buffer_type: 'coordinator' 或 'discoverer' （已适配统一缓冲区）
             reward_components: 包含奖励组成的字典 (必须提供！)
         """
-        # 【关键修复】强制要求提供reward_components，禁止存储空的奖励组成部分
         if reward_components is None:
-            main_logger.error(f"store_rollout_step: reward_components不能为None！这会污染内在奖励统计。"
-                            f"环境{env_id}，时间步{t}，buffer_type={buffer_type}")
-            main_logger.error("如果要存储高层数据，请使用add_high_level_data函数！")
-            return  # 直接返回，拒绝存储
+            main_logger.error(f"store_rollout_step: reward_components cannot be None. env={env_id}, t={t}")
+            return
         
         # 提取真实的奖励组成部分
         reward_env = reward_components.get('env', np.zeros_like(rewards, dtype=np.float32))
@@ -580,7 +555,7 @@ class HMASDAgent:
         reward_ind_disc = reward_components.get('ind_disc', np.zeros_like(rewards, dtype=np.float32))
 
         # 存储数据到统一rollout缓冲区，传递时间步索引 t 和 state
-        self.rollout_buffer.add(
+        success = self.rollout_buffer.add(
             t=t,
             state=state,
             obs=observations,
@@ -598,28 +573,34 @@ class HMASDAgent:
             reward_ind_disc=reward_ind_disc
         )
         
+        # 检查存储是否成功
+        if not success:
+            main_logger.warning(f"低层数据存储失败（可能重复存储），环境{env_id}，时间步: {t}")
+            return False
+        
         main_logger.debug(f"数据已存储到统一rollout缓冲区（{buffer_type}类型），环境{env_id}，"
                          f"时间步: {t}，奖励组成：env={np.mean(reward_env):.4f}, "
                          f"team_disc={np.mean(reward_team_disc):.4f}, ind_disc={np.mean(reward_ind_disc):.4f}")
+        
+        return True
 
 
-    def _store_discoverer_experience(self, next_state, next_observations, actions, rewards, dones, values, 
-                                   action_logprobs, team_skill, agent_skills, env_id, potential_reward, rollout_step_idx=None):
+    def _store_discoverer_experience(self, state, observations, actions, rewards, dones, values, 
+                                   action_logprobs, team_skill, agent_skills, env_id, rollout_step_idx=None):
         """
         存储低层策略经验到discoverer rollout缓冲区
         
         参数:
-            next_state: 下一全局状态 [state_dim]
-            next_observations: 所有智能体的下一观测 [n_agents, obs_dim]
+            state: 当前全局状态 [state_dim] (修复：使用当前状态而非下一状态)
+            observations: 所有智能体的当前观测 [n_agents, obs_dim] (修复：使用当前观测而非下一观测)
             actions: 所有智能体的动作 [n_agents, action_dim]
-            rewards: 环境奖励（标量）
+            rewards: 环境奖励（标量, 现在是全局共享奖励）
             dones: 是否结束 [n_agents]
             values: 价值估计 [n_agents]
             action_logprobs: 动作对数概率 [n_agents]
             team_skill: 团队技能索引
             agent_skills: 个体技能索引列表 [n_agents]
             env_id: 环境ID
-            potential_reward: 基于信念地图的探索奖励
             rollout_step_idx: 在rollout中的实际步数索引（0到rollout_length-1）
         """
         if values is None:
@@ -634,26 +615,27 @@ class HMASDAgent:
         ind_disc_rewards_array = np.zeros(n_agents)
         
         for i in range(n_agents):
-            # 使用统一的内在奖励计算函数 - 现在使用正确的 next_observations[i]
+            # 【重要修复】使用当前观测而非下一观测计算内在奖励
+            # 这确保决策时和训练时看到的数据特征一致
             intrinsic_reward, env_comp, team_disc_comp, ind_disc_comp = self._compute_intrinsic_reward(
-                next_state, rewards, next_observations[i], team_skill, agent_skills[i]
+                state, rewards, observations[i], team_skill, agent_skills[i]
             )
             
-            # 【调试日志6】记录每个智能体接收到的奖励组件
-            main_logger.debug(f"[REWARD_DEBUG] 智能体{i}接收到的组件: env={env_comp:.6f}, team_disc={team_disc_comp:.6f}, ind_disc={ind_disc_comp:.6f}")
+            main_logger.debug(f"Reward components for agent {i}: env={env_comp:.6f}, team_disc={team_disc_comp:.6f}, ind_disc={ind_disc_comp:.6f}")
             
-            # 添加探索奖励组件
-            exploration_component = self.config.potential_reward_weight * potential_reward if hasattr(self.config, 'potential_reward_weight') else 0.0
-            final_intrinsic_reward = intrinsic_reward + exploration_component
-            intrinsic_rewards_array[i] = np.clip(final_intrinsic_reward, -10.0, 10.0)
+            # 【重要改动】移除基于潜能的个体化塑形奖励
+            # 探索奖励的职责现在由判别器内在奖励机制承担
+            # exploration_component = self.config.potential_reward_weight * potential_reward if hasattr(self.config, 'potential_reward_weight') else 0.0
+            # final_intrinsic_reward = intrinsic_reward + exploration_component
+            final_intrinsic_reward = intrinsic_reward # 直接使用计算出的内在奖励
+            intrinsic_rewards_array[i] = final_intrinsic_reward
             
             # 存储奖励组成
             env_rewards_array[i] = env_comp
             team_disc_rewards_array[i] = team_disc_comp
             ind_disc_rewards_array[i] = ind_disc_comp
             
-            # 【调试日志7】记录存储到数组中的奖励组件
-            main_logger.debug(f"[REWARD_DEBUG] 智能体{i}存储到数组: env={env_rewards_array[i]:.6f}, team_disc={team_disc_rewards_array[i]:.6f}, ind_disc={ind_disc_rewards_array[i]:.6f}")
+            main_logger.debug(f"Reward components stored for agent {i}: env={env_rewards_array[i]:.6f}, team_disc={team_disc_rewards_array[i]:.6f}, ind_disc={ind_disc_rewards_array[i]:.6f}")
             
         # 准备奖励组成字典
         reward_components = {
@@ -673,18 +655,16 @@ class HMASDAgent:
             gru_hidden_size = getattr(self.config, 'gru_hidden_size', 128)
             gru_hidden_states = torch.zeros(n_agents, gru_hidden_size, device=self.device)
         
-        # 【关键修复】使用正确的时间索引而不是错误的global_step
-        # 如果提供了rollout_step_idx，使用它；否则fallback到原来的逻辑（但这会有警告）
         if rollout_step_idx is not None:
             t = rollout_step_idx
         else:
             t = self.global_step % self.rollout_buffer.num_steps
-            main_logger.warning(f"_store_discoverer_experience: rollout_step_idx未提供，fallback到global_step模取rollout长度={t}")
+            main_logger.warning(f"_store_discoverer_experience: rollout_step_idx not provided, falling back to modulo logic. t={t}")
         
         self.store_rollout_step(
             t=t,
-            state=next_state,
-            observations=next_observations,
+            state=state,  # 【重要修复】存储当前状态而非下一状态
+            observations=observations,  # 【重要修复】存储当前观测而非下一观测
             actions=actions,
             rewards=intrinsic_rewards_array,
             dones=dones,
@@ -701,12 +681,13 @@ class HMASDAgent:
         return reward_components
 
     def _store_coordinator_experience(self, state, observations, env_id, team_skill, agent_skills, 
-                                    log_probs, dones, skill_timer, steps_since_contribution, force_collection):
+                                    log_probs, dones, skill_timer, steps_since_contribution, force_collection, rollout_step_idx=None):
         """
         判断并存储高层策略经验到coordinator rollout缓冲区 (已修复数据覆盖问题)
         
         参数:
             ...
+            rollout_step_idx: 当前rollout的步数索引 (关键修复)
         """
         # 判断是否应该存储高层经验
         should_store_high_level = (skill_timer == self.config.k - 1) or dones or force_collection
@@ -739,18 +720,30 @@ class HMASDAgent:
         else:
             total_log_prob = 0.0
         
-        # ▼▼▼▼▼▼▼▼▼▼【核心修复】▼▼▼▼▼▼▼▼▼▼
-        # 不再调用 store_rollout_step，而是调用专用的 add_high_level_data
-        # 这可以防止覆盖掉已经存储的低层内在奖励组成部分。
-        t = self.global_step % self.rollout_buffer.num_steps
-        self.rollout_buffer.add_high_level_data(
+        # Use the dedicated add_high_level_data to prevent overwriting low-level rewards.
+        if rollout_step_idx is None:
+            main_logger.error("rollout_step_idx is None! Cannot store high-level experience correctly.")
+            return False
+            
+        time_step_of_decision = rollout_step_idx - skill_timer
+        if time_step_of_decision < 0:
+            main_logger.warning(f"Calculated a negative time_step_of_decision: {time_step_of_decision}. Clamping to 0.")
+            time_step_of_decision = 0
+            
+        t = time_step_of_decision
+        
+        # 调用add_high_level_data并检查返回值
+        success = self.rollout_buffer.add_high_level_data(
             env_idx=env_id,
             time_step=t,
             value=high_level_value_np,
             joint_log_prob=total_log_prob,
             accumulated_reward=env_accumulated_reward
         )
-        # ▲▲▲▲▲▲▲▲▲▲【核心修复】▲▲▲▲▲▲▲▲▲▲
+        
+        # 如果存储失败（比如重复存储），直接返回False
+        if not success:
+            return False
     
         # 更新统计信息 (这部分逻辑保持不变)
         self.high_level_samples_total += 1
@@ -770,7 +763,7 @@ class HMASDAgent:
 
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
-                         skill_timer_for_env=None, env_id=0, potential_reward=0.0, values=None, rollout_step_idx=None):
+                         skill_timer_for_env=None, env_id=0, values=None, rollout_step_idx=None):
         """
         存储环境交互经验（重构后的简化版本）
         
@@ -788,7 +781,6 @@ class HMASDAgent:
             log_probs: 技能的log probabilities字典，包含'team_log_prob'和'agent_log_probs'
             skill_timer_for_env: 当前环境的技能计时器值，用于多环境并行训练
             env_id: 环境ID，用于多环境并行训练
-            potential_reward: 基于信念地图的探索奖励，用于低层策略
             values: 价值估计 [n_agents]（新增参数，用于rollout存储）
             rollout_step_idx: 在rollout中的实际步数索引（0到rollout_length-1）
         """
@@ -805,9 +797,10 @@ class HMASDAgent:
                           f"当前步奖励={current_reward:.4f}, 此环境累积高层奖励={self.env_reward_sums[env_id]:.4f}")
         
         # 1. 存储低层策略经验并获取奖励组成
+        # 【重要修复】传递当前状态和观测而非下一状态和观测
         returned_reward_components = self._store_discoverer_experience(
-            next_state, next_observations, actions, current_reward, dones, values, 
-            action_logprobs, team_skill, agent_skills, env_id, potential_reward, rollout_step_idx
+            state, observations, actions, current_reward, dones, values, 
+            action_logprobs, team_skill, agent_skills, env_id, rollout_step_idx
         )
         
         # 2. 判别器训练数据现在直接从RolloutBuffer获取，无需单独存储
@@ -836,9 +829,11 @@ class HMASDAgent:
                 main_logger.info(f"环境ID={env_id}已{steps_since_contribution}步未贡献高层样本，将强制收集")
         
         # 存储高层策略经验（如果满足条件）
+        # 【注意】高层策略数据继续使用当前状态和观测，这是正确的
         self._store_coordinator_experience(
             state, observations, env_id, team_skill, agent_skills, 
-            log_probs, dones, skill_timer, steps_since_contribution, force_collection
+            log_probs, dones, skill_timer, steps_since_contribution, force_collection,
+            rollout_step_idx=rollout_step_idx
         )
         
         # 返回奖励组成部分给训练循环
@@ -872,11 +867,16 @@ class HMASDAgent:
 
     def _compute_intrinsic_reward(self, next_state, reward, next_obs, team_skill, agent_skill):
         """
-        计算单个智能体的内在奖励（提取为独立函数以减少代码重复）
+        计算单个智能体的内在奖励（修改版本，确保High-Level和Low-Level协调一致）
+        
+        核心修改：
+        - 环境奖励组件：直接使用纯净的团队奖励（不加权重）
+        - 判别器奖励：保持原有的内在奖励机制，用于技能多样性
+        - 确保两个层次优化相同的底层团队目标
         
         参数:
             next_state: 下一全局状态
-            reward: 环境奖励
+            reward: 环境奖励（现在是纯净的团队奖励）
             next_obs: 智能体的下一观测
             team_skill: 团队技能索引
             agent_skill: 智能体技能索引
@@ -894,8 +894,7 @@ class HMASDAgent:
             team_disc_log_probs = F.log_softmax(team_disc_logits, dim=-1)
             team_skill_log_prob = team_disc_log_probs[0, team_skill]
             
-            # 【调试日志1】记录团队技能原始log概率
-            main_logger.debug(f"[REWARD_DEBUG] 团队技能判别器: team_skill={team_skill}, raw_log_prob={team_skill_log_prob.item():.6f}")
+            # main_logger.debug(f"Team discriminator: team_skill={team_skill}, raw_log_prob={team_skill_log_prob.item():.6f}")
             
             # 计算个体技能判别器奖励
             agent_obs_tensor = torch.FloatTensor(next_obs).unsqueeze(0).to(self.device)
@@ -904,10 +903,13 @@ class HMASDAgent:
             agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
             agent_skill_log_prob = agent_disc_log_probs[0, agent_skill]
             
-            # 【调试日志2】记录个体技能原始log概率
-            main_logger.debug(f"[REWARD_DEBUG] 个体技能判别器: agent_skill={agent_skill}, raw_log_prob={agent_skill_log_prob.item():.6f}")
+            # main_logger.debug(f"Individual discriminator: agent_skill={agent_skill}, raw_log_prob={agent_skill_log_prob.item():.6f}")
             
-            # 计算动态权重
+           
+            
+            env_component = self.config.lambda_e * reward
+
+            # 判别器内在奖励：保持原有机制，用于技能多样性和探索
             if self.use_reward_annealing:
                 progress = min(self.global_step / self.anneal_steps, 1.0)
                 if self.anneal_schedule == 'cosine':
@@ -916,37 +918,29 @@ class HMASDAgent:
                     progress_adjusted = progress
                 
                 w_intrinsic_current = self.w_intrinsic_initial + (self.w_intrinsic_final - self.w_intrinsic_initial) * progress_adjusted
-                w_extrinsic_current = self.w_extrinsic_initial + (self.w_extrinsic_final - self.w_extrinsic_initial) * progress_adjusted
                 
-                env_component = self.config.lambda_e * w_extrinsic_current * reward
                 team_disc_component = self.config.lambda_D * w_intrinsic_current * team_skill_log_prob.item()
                 ind_disc_component = self.config.lambda_d * w_intrinsic_current * agent_skill_log_prob.item()
                 
-                # 【调试日志3】记录权重退火后的奖励组件
-                main_logger.debug(f"[REWARD_DEBUG] 权重退火模式: w_intrinsic={w_intrinsic_current:.4f}, w_extrinsic={w_extrinsic_current:.4f}")
-                main_logger.debug(f"[REWARD_DEBUG] 退火后奖励组件: team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
+                # main_logger.debug(f"Annealing mode: w_intrinsic={w_intrinsic_current:.4f}")
+                # main_logger.debug(f"Annealed reward components: team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
             else:
-                env_component = self.config.lambda_e * reward
                 team_disc_component = self.config.lambda_D * team_skill_log_prob.item()
                 ind_disc_component = self.config.lambda_d * agent_skill_log_prob.item()
                 
-                # 【调试日志4】记录正常模式下的奖励组件
-                main_logger.debug(f"[REWARD_DEBUG] 正常模式: lambda_D={self.config.lambda_D}, lambda_d={self.config.lambda_d}")
-                main_logger.debug(f"[REWARD_DEBUG] 计算后奖励组件: team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
+                # main_logger.debug(f"Normal mode: lambda_D={self.config.lambda_D}, lambda_d={self.config.lambda_d}")
+                # main_logger.debug(f"Calculated reward components: team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
             
+            # 【核心修改】Low-Level策略接收：纯净团队奖励 + 判别器内在奖励
             intrinsic_reward = env_component + team_disc_component + ind_disc_component
-            # intrinsic_reward = np.clip(intrinsic_reward, -10.0, 10.0) # 移除此处的裁剪，让上层函数决定是否裁剪
             
-            # 【调试日志5】记录最终返回值
-            main_logger.debug(f"[REWARD_DEBUG] 函数返回: team_disc_component={team_disc_component:.6f}, ind_disc_component={ind_disc_component:.6f}")
+            # main_logger.debug(f"Modified intrinsic reward: env={env_component:.6f}, team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
             
             return intrinsic_reward, env_component, team_disc_component, ind_disc_component
 
-    def update_coordinator(self):
+    def update_coordinator(self, num_steps):
         """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
-        # 这里需要传递实际的数据收集步数，而不是使用 self.rollout_buffer.ptr
-        # 我们使用一个简化的方法：假设缓冲区是满的或者使用配置中的rollout长度
-        num_steps = getattr(self.config, 'rollout_length', 2048)
+        # num_steps 现在是实际在缓冲区中的有效数据量
         
         # 检查是否有有效的高层数据
         high_level_data_count = np.sum(self.rollout_buffer.high_level_valid_mask[:num_steps])
@@ -975,17 +969,26 @@ class HMASDAgent:
         # 【修复】使用专门的Coordinator采样器进行标准PPO更新
         high_level_sampler = self.rollout_buffer.get_coordinator_sampler(
             num_steps,
-            getattr(self.config, 'ppo_epochs', 10), 
+            getattr(self.config, 'ppo_epochs', 10),
             coordinator_batch_size
         )
-        
+
         if high_level_sampler is None:
             main_logger.error("无法从统一rollout缓冲区获取Coordinator采样器")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
-        
+
+        # --- 1. 在所有PPO Epochs开始前，一次性更新统计量 ---
+        if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+            # 获取整个rollout buffer中有效的高层回报
+            all_returns = self.rollout_buffer.get_all_high_level_returns(num_steps)
+            if all_returns.size > 0:
+                # 使用这批数据更新运行统计量
+                self.value_norm_coordinator.update(all_returns)
+                main_logger.info(f"Coordinator ValueNorm已更新. 新均值: {self.value_norm_coordinator.mean:.4f}, 新标准差: {np.sqrt(self.value_norm_coordinator.var):.4f}")
+
         main_logger.info(f"Coordinator 标准PPO训练配置: {getattr(self.config, 'ppo_epochs', 10)}个epoch, "
                         f"每批{coordinator_batch_size}个样本")
-        
+
         for batch in high_level_sampler:
             # 提取离散批次数据（注意没有时间维度T）
             observations_batch = batch['observations'].to(self.device)  # Shape: (B, n_agents, obs_dim)
@@ -1036,12 +1039,13 @@ class HMASDAgent:
             
             # 价值损失
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                normalized_values = self._normalize_values(values.unsqueeze(-1), self.value_norm_coordinator).squeeze(-1)
-                normalized_returns = self._normalize_values(returns_batch.unsqueeze(-1), self.value_norm_coordinator).squeeze(-1)
-                value_loss = F.mse_loss(normalized_values, normalized_returns)
-                # 更新统计量
-                self.value_norm_coordinator.update(returns_batch.unsqueeze(-1).detach().cpu().numpy())
+                # a. Critic的预测值需要被归一化，以便与归一化的目标进行比较
+                values_for_loss = self._normalize_values(values, self.value_norm_coordinator)
+                # b. Critic的训练目标(returns)也需要被归一化
+                returns_for_loss = self._normalize_values(returns_batch, self.value_norm_coordinator)
+                value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
             else:
+                # 如果不使用ValueNorm，一切照旧
                 value_loss = F.mse_loss(values, returns_batch)
             
             # 熵损失
@@ -1153,7 +1157,7 @@ class HMASDAgent:
                avg_team_entropy, avg_agent_entropy, \
                mean_state_value, mean_agent_value, avg_high_level_reward, avg_cd_loss
     
-    def update_discoverer_from_rollout(self, ppo_epochs=4):
+    def update_discoverer_from_rollout(self, num_steps, ppo_epochs=4):
         """
         使用统一rollout缓冲区更新低层技能发现器网络，实现真正的BPTT
         这是新PPO流程的核心：一次性评估整个序列并进行反向传播
@@ -1161,13 +1165,12 @@ class HMASDAgent:
         注意：GAE计算已经在主训练循环中完成，这里直接使用预计算的advantages和returns
         
         参数:
+            num_steps: 缓冲区中的有效步数
             ppo_epochs: PPO更新轮数
             
         返回:
             与原update_discoverer相同格式的返回值
         """
-        # 使用配置中的rollout长度
-        num_steps = getattr(self.config, 'rollout_length', 2048)
         
         main_logger.info(f"开始使用统一缓冲区更新Discoverer (真正的BPTT)，低层数据量: {num_steps}步")
         main_logger.info("GAE已在主训练循环中计算完成，直接使用预计算的advantages和returns")
@@ -1189,7 +1192,15 @@ class HMASDAgent:
         if sequence_sampler is None:
             main_logger.error("无法从统一rollout缓冲区获取Discoverer序列采样器")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
-        
+            
+        # --- 1. 在所有PPO Epochs开始前，一次性更新统计量 ---
+        if self.config.use_valuenorm and self.value_norm_discoverer is not None:
+            # 获取整个rollout buffer的回报
+            all_returns = self.rollout_buffer.returns[:num_steps].reshape(-1)
+            # 使用这批数据更新运行统计量
+            self.value_norm_discoverer.update(all_returns)
+            main_logger.info(f"Discoverer ValueNorm已更新. 新均值: {self.value_norm_discoverer.mean:.4f}, 新标准差: {np.sqrt(self.value_norm_discoverer.var):.4f}")
+
         for batch in sequence_sampler:
             # 提取序列批次数据
             observations_seq = batch['observations']  # Shape: (T, batch_size, obs_dim)
@@ -1202,6 +1213,7 @@ class HMASDAgent:
             agent_skills_seq = batch['agent_skills'] # Shape: (T, batch_size)
             # **** 提取新增的 initial_hxs ****
             initial_hxs = batch['initial_hxs']       # Shape: (batch_size, hidden_size)
+            dones_seq = batch['dones'].to(self.device)
             
             # 转换到正确的设备
             observations_seq = observations_seq.to(self.device)
@@ -1220,7 +1232,8 @@ class HMASDAgent:
             new_log_probs, new_values, entropy = self.skill_discoverer.evaluate_sequence(
                 observations_seq, agent_skills_seq, actions_seq, 
                 global_states_seq, team_skills_seq,
-                initial_hxs  # **** 传入初始隐状态 ****
+                initial_hxs,  # **** 传入初始隐状态 ****
+                dones_seq
             )
             
             # --- 将所有数据展平以计算损失 ---
@@ -1242,12 +1255,13 @@ class HMASDAgent:
             
             # 价值损失
             if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-                normalized_new_values = self._normalize_values(new_values_flat.unsqueeze(-1), self.value_norm_discoverer).squeeze(-1)
-                normalized_returns = self._normalize_values(returns_flat.unsqueeze(-1), self.value_norm_discoverer).squeeze(-1)
-                value_loss = F.mse_loss(normalized_new_values, normalized_returns)
-                # 更新统计量
-                self.value_norm_discoverer.update(returns_flat.unsqueeze(-1).detach().cpu().numpy())
+                # a. Critic的预测值需要被归一化，以便与归一化的目标进行比较
+                values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
+                # b. Critic的训练目标(returns)也需要被归一化
+                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
+                value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
             else:
+                # 如果不使用ValueNorm，一切照旧
                 value_loss = F.mse_loss(new_values_flat, returns_flat)
             
             # 熵损失
@@ -1318,13 +1332,9 @@ class HMASDAgent:
                avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, avg_discoverer_value
 
     
-    def update_discriminators(self):
+    def update_discriminators(self, num_steps):
         """更新技能判别器网络（使用RolloutBuffer数据，修复多进程问题）"""
-        # 从RolloutBuffer中获取最近收集的数据
-        # 使用配置中的rollout长度作为数据源
-        num_steps = getattr(self.config, 'rollout_length', 2048)
-        
-        # 检查RolloutBuffer中是否有足够的数据
+        # Now 'num_steps' is the actual amount of valid data
         total_samples = num_steps * self.rollout_buffer.num_envs * self.rollout_buffer.n_agents
         if total_samples < self.config.batch_size:
             main_logger.warning(f"RolloutBuffer中的样本数({total_samples})少于批次大小({self.config.batch_size})，跳过判别器更新")
@@ -1332,7 +1342,7 @@ class HMASDAgent:
         
         # 从RolloutBuffer中采样数据
         # 随机选择时间步、环境和智能体
-        batch_size = min(self.config.batch_size, total_samples)
+        batch_size = self.config.batch_size
         
         # 生成随机索引
         time_indices = np.random.choice(num_steps, batch_size, replace=True)
@@ -1390,6 +1400,10 @@ class HMASDAgent:
         # 更新网络
         self.discriminator_optimizer.zero_grad()
         disc_loss.backward()
+        torch.nn.utils.clip_grad_norm_(
+            list(self.team_discriminator.parameters()) + list(self.individual_discriminator.parameters()),
+            self.config.max_grad_norm
+        )
         self.discriminator_optimizer.step()
         
         # 每100步记录判别器性能监控指标（移除TensorBoard写入，只保留日志）
@@ -1406,11 +1420,11 @@ class HMASDAgent:
         
         return disc_loss.item()
     
-    def update(self):
+    def update(self, steps_in_buffer):
         """更新所有网络"""
         # 更新全局步数
         self.global_step += 1
-        main_logger.debug(f"HMASDAgent.update (step {self.global_step}): 开始更新所有网络")
+        main_logger.debug(f"HMASDAgent.update (step {self.global_step}): 开始更新所有网络，有效步数: {steps_in_buffer}")
         
         # 更频繁地检查环境贡献情况（从1000步降至200步）
         if self.global_step % 200 == 0:
@@ -1454,16 +1468,16 @@ class HMASDAgent:
             contrib_envs = np.sum(contrib_data > 0)
         
         # 更新技能判别器
-        discriminator_loss = self.update_discriminators()
+        discriminator_loss = self.update_discriminators(steps_in_buffer)
         
         # 更新高层技能协调器
         coordinator_loss, coordinator_policy_loss, coordinator_value_loss, team_skill_entropy, agent_skill_entropy, \
-        mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator()
+        mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator(steps_in_buffer)
         
         # 更新低层技能发现器 - 使用新的rollout方法
         discoverer_loss, discoverer_policy_loss, discoverer_value_loss, action_entropy, \
         avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, \
-        avg_discoverer_val = self.update_discoverer_from_rollout()
+        avg_discoverer_val = self.update_discoverer_from_rollout(steps_in_buffer)
         
         # 更新学习率调度器
         if getattr(self.config, 'use_lr_decay', False) and self.global_step <= self.config.lr_decay_steps:

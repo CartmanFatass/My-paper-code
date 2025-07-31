@@ -96,7 +96,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 通信参数
         self.carrier_frequency = 2e9
         self.tx_power = 23
-        self.noise_power = -94  # 
+        self.noise_power = -95  # 或 -94，一个更合理的值
         self.use_fdma = use_fdma
         self.bandwidth = bandwidth
         self.ground_bs_tx_power = ground_bs_tx_power
@@ -903,12 +903,11 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_interference_radius(self):
         """
-        基于信道条件动态计算干扰半径（移除上限，增强干扰）
+        基于信道条件动态计算干扰半径
         
         核心思想：
         - 计算在给定发射功率下，能够产生有意义干扰的最大传播距离
         - "有意义干扰"定义为干扰功率高于噪声功率一定倍数（如3dB）
-        - 移除上限，确保所有可能的干扰源都被考虑
         
         返回:
             interference_radius: 动态计算的干扰半径（米）
@@ -932,10 +931,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         distance_exponent = (path_loss_required - fspl_constant) / 20.0
         max_interference_distance = 10 ** distance_exponent
         
-        # 移除上限，只保留最小值以确保合理性
+        # 设置合理的上下限
         min_radius = 500.0  # 最小500米
+        max_radius = 3000.0  # 最大3000米
         
-        interference_radius = max(max_interference_distance, min_radius)
+        interference_radius = np.clip(max_interference_distance, min_radius, max_radius)
         
         return interference_radius
 
@@ -1139,13 +1139,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 不添加任何个体塑形奖励或探索奖励
         final_shared_reward = shared_global_reward
 
-        # 11. 更新步数并检查终止/截断条件
+        # 11. 更新步数并检查终止条件
         self.current_step += 1
-        # 检查是否因为达到最大步数而被截断
-        is_truncated = self.current_step >= self.max_steps
-        # 在这个环境中，我们没有定义其他自然终止条件，所以 is_terminated 总是 False
-        is_terminated = False
-
+        done = self.current_step >= self.max_steps
+        
         # 12. 准备返回值
         observations = {}
         rewards = {}
@@ -1160,9 +1157,8 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 将 final_shared_reward 赋值给所有 agent
             rewards[agent] = final_shared_reward
 
-            # 【核心修正】正确设置 termination 和 truncation
-            terminations[agent] = is_terminated
-            truncations[agent] = is_truncated
+            terminations[agent] = done
+            truncations[agent] = False
             
             # 更新 info
             agent_reward_info = self.reward_info.copy()
@@ -1642,11 +1638,11 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_link_sinr(self, tx_type, tx_idx, rx_type, rx_idx, rx_power):
         """
-        计算链路SINR，使用确定性的干扰模型（移除随机性，增强干扰）
+        计算链路SINR，使用更真实的、无缩放因子的干扰模型
         
         改进原则：
-        1. 空间隔离：基于信道条件计算动态干扰半径（已移除上限）
-        2. 确定性干扰：移除随机性，使用固定权重模拟MAC层协议
+        1. 空间隔离：基于信道条件计算动态干扰半径
+        2. 时间隔离：引入活动因子模拟MAC层协议
         3. 精确路径损耗：为每条干扰链路计算正确的路径损耗
         
         参数:
@@ -1659,12 +1655,12 @@ class UAVForcedRelayEnv(ParallelEnv):
         返回:
             sinr_db: SINR (dB)
         """
-        # 原则1: 动态干扰半径 - 基于能够产生有意义干扰的最大距离（已移除上限）
+        # 原则1: 动态干扰半径 - 基于能够产生有意义干扰的最大距离
+        # 计算在给定发射功率和最小有意义干扰功率下的最大传播距离
         interference_radius = self._compute_interference_radius()
         
-        # 原则2: 确定性干扰权重 - 模拟MAC层协议，提高干扰强度
-        # 设置为1.0，表示所有干扰源都产生100%的干扰，更接近真实同频干扰场景
-        uav_interference_weight = 1.0
+        # 原则2: 活动因子 - 模拟MAC层，假设UAV只有30%的时间在发射
+        uav_activity_factor = 0.3
         
         interference_powers_linear = []
         
@@ -1685,10 +1681,14 @@ class UAVForcedRelayEnv(ParallelEnv):
                 
                 interferer_pos = self.uav_positions[i]
                 
-                # 原则1：检查距离 - 考虑干扰半径内的所有无人机
+                # 原则1：检查距离 - 只考虑干扰半径内的无人机
                 dist_to_receiver = self._compute_distance(interferer_pos, rx_pos)
                 if dist_to_receiver > interference_radius:
                     continue  # 干扰源太远，忽略
+                
+                # 原则2：检查活动状态 - 模拟MAC层协议
+                if self.np_random.rand() > uav_activity_factor:
+                    continue  # 干扰源此刻未发射，忽略
                 
                 # 原则3：为干扰链路计算正确的路径损耗
                 if rx_type == "uav":
@@ -1702,15 +1702,12 @@ class UAVForcedRelayEnv(ParallelEnv):
                 interferer_rx_power_dbm = self.tx_power - interferer_path_loss
                 interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
                 
-                # 应用确定性干扰权重
-                weighted_interference_power = interferer_rx_power_linear * uav_interference_weight
-                
                 if self.use_fdma:
-                    # FDMA模式：邻道干扰功率 = 加权干扰功率 * ACLR
-                    interference_powers_linear.append(weighted_interference_power * self.aclr_linear)
+                    # FDMA模式：邻道干扰功率 = 接收功率 * ACLR
+                    interference_powers_linear.append(interferer_rx_power_linear * self.aclr_linear)
                 else:
                     # 非FDMA模式：同频干扰
-                    interference_powers_linear.append(weighted_interference_power)
+                    interference_powers_linear.append(interferer_rx_power_linear)
         
         # 计算总干扰加噪声功率
         total_interference_linear = np.sum(interference_powers_linear)
@@ -1724,91 +1721,23 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_routing_paths(self):
         """
-        修复后的路由路径计算方法
+        使用基于瓶颈容量的智能路由算法计算每个UAV到地面基站的最优路径。
         
-        改进策略：
-        1. 优先建立直连路径（1跳）
-        2. 为无法直连的UAV建立多跳路径
-        3. 确保所有连接了用户的UAV都有回程路径
+        新算法特点：
+        1. 寻找瓶颈容量最大的路径，而不是跳数最少的路径。
+        2. 使用类似Dijkstra的"最宽路径"算法。
+        3. 智能选择高质量的多跳中继路径，即使跳数更多。
+        4. 修改：现在存储路径和其对应的瓶颈容量。
         """
         self.routing_paths = {}
         
-        # 第一步：为所有能直连基站的UAV建立直连路径
-        for uav_idx in range(self.n_uavs):
-            # 检查是否有用户连接到这个UAV
-            has_users = np.sum(self.connections[uav_idx]) > 0
-            if not has_users:
-                continue  # 跳过没有用户连接的UAV
-            
-            # 检查能否直连任何基站
-            best_bs_capacity = 0
-            best_bs_idx = -1
-            
-            for bs_idx in range(self.n_ground_bs):
-                capacity = self._get_link_capacity("uav", uav_idx, "ground_bs", bs_idx)
-                if capacity > best_bs_capacity:
-                    best_bs_capacity = capacity
-                    best_bs_idx = bs_idx
-            
-            # 如果能直连基站，建立直连路径
-            if best_bs_capacity > 0:
-                direct_path = [("uav", uav_idx), ("ground_bs", best_bs_idx)]
-                self.routing_paths[uav_idx] = (direct_path, best_bs_capacity)
-        
-        # 第二步：为无法直连的UAV寻找多跳路径
-        for uav_idx in range(self.n_uavs):
-            # 跳过已有路径的UAV
-            if uav_idx in self.routing_paths:
-                continue
-            
-            # 检查是否有用户连接到这个UAV
-            has_users = np.sum(self.connections[uav_idx]) > 0
-            if not has_users:
-                continue
-            
-            # 使用原有的最宽路径算法寻找多跳路径
-            path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
+        # 为每个UAV计算最优路径
+        for start_uav in range(self.n_uavs):
+            path, capacity = self._find_widest_path_to_ground_bs(start_uav)
+            # 确保路径有效且不超过最大跳数限制
             if path and capacity > 0 and len(path) <= self.max_hops + 1:
-                self.routing_paths[uav_idx] = (path, capacity)
-        
-        # 第三步：验证和统计
-        connected_uavs_with_users = sum(1 for i in range(self.n_uavs) if np.sum(self.connections[i]) > 0)
-        uavs_with_routes = len(self.routing_paths)
-        
-        # 如果仍有UAV没有路径，尝试降低标准
-        if uavs_with_routes < connected_uavs_with_users:
-            for uav_idx in range(self.n_uavs):
-                if uav_idx in self.routing_paths:
-                    continue
-                
-                has_users = np.sum(self.connections[uav_idx]) > 0
-                if not has_users:
-                    continue
-                
-                # 尝试通过任何有路径的UAV中继
-                best_relay_capacity = 0
-                best_relay_path = None
-                
-                for relay_uav in self.routing_paths:
-                    # 计算到中继UAV的容量
-                    relay_capacity = self._get_link_capacity("uav", uav_idx, "uav", relay_uav)
-                    if relay_capacity > 0:
-                        # 构建通过中继的路径
-                        relay_path = [("uav", uav_idx), ("uav", relay_uav)]
-                        # 添加中继UAV到基站的路径
-                        original_path = self.routing_paths[relay_uav][0]
-                        for node in original_path[1:]:  # 跳过中继UAV自身
-                            relay_path.append(node)
-                        
-                        # 计算瓶颈容量
-                        bottleneck = min(relay_capacity, self.routing_paths[relay_uav][1])
-                        
-                        if bottleneck > best_relay_capacity:
-                            best_relay_capacity = bottleneck
-                            best_relay_path = relay_path
-                
-                if best_relay_path and best_relay_capacity > 0:
-                    self.routing_paths[uav_idx] = (best_relay_path, best_relay_capacity)
+                self.routing_paths[start_uav] = (path, capacity)
+    
     def _get_state(self):
         """
         获取针对强制中继场景优化的全局状态
@@ -2028,11 +1957,11 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_uav_to_user_sinr(self, uav_idx, user_idx, rx_power):
         """
-        计算UAV到用户通信的精确SINR，使用确定性的干扰模型（移除随机性，增强干扰）
+        计算UAV到用户通信的精确SINR，使用更真实的干扰模型
         
         改进原则：
-        1. 空间隔离：基于信道条件计算动态干扰半径（已移除上限）
-        2. 确定性干扰：移除随机性，使用固定权重模拟MAC层协议
+        1. 空间隔离：基于信道条件计算动态干扰半径
+        2. 时间隔离：引入活动因子模拟MAC层协议
         3. 精确路径损耗：为每条干扰链路计算正确的A2G路径损耗
         
         参数:
@@ -2043,12 +1972,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         返回:
             sinr_db: SINR (dB)
         """
-        # 原则1: 动态干扰半径 - 基于能够产生有意义干扰的最大距离（已移除上限）
+        # 原则1: 动态干扰半径 - 基于能够产生有意义干扰的最大距离
         interference_radius = self._compute_interference_radius()
         
-        # 原则2: 确定性干扰权重 - 模拟MAC层协议，提高干扰强度
-        # 设置为1.0，表示所有干扰源都产生100%的干扰，更接近真实同频干扰场景
-        uav_interference_weight = 1.0
+        # 原则2: 活动因子 - 模拟MAC层，假设UAV只有30%的时间在发射
+        uav_activity_factor = 0.3
         
         interference_powers_linear = []
         user_pos_3d = self.user_positions[user_idx]  # 用户位置已经是三维的
@@ -2058,25 +1986,26 @@ class UAVForcedRelayEnv(ParallelEnv):
             if i != uav_idx:  # 排除目标UAV自身
                 interferer_pos = self.uav_positions[i]
                 
-                # 原则1：检查距离 - 考虑干扰半径内的所有无人机
+                # 原则1：检查距离 - 只考虑干扰半径内的无人机
                 dist_to_user = self._compute_distance(interferer_pos, user_pos_3d)
                 if dist_to_user > interference_radius:
                     continue  # 干扰源太远，忽略
+                
+                # 原则2：检查活动状态 - 模拟MAC层协议
+                if self.np_random.rand() > uav_activity_factor:
+                    continue  # 干扰源此刻未发射，忽略
                 
                 # 原则3：使用精确的A2G路径损耗模型计算干扰
                 interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
                 interferer_rx_power_dbm = self.tx_power - interferer_path_loss
                 interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
                 
-                # 应用确定性干扰权重
-                weighted_interference_power = interferer_rx_power_linear * uav_interference_weight
-                
                 if self.use_fdma:
-                    # FDMA模式：邻道干扰功率 = 加权干扰功率 * ACLR
-                    interference_powers_linear.append(weighted_interference_power * self.aclr_linear)
+                    # FDMA模式：邻道干扰功率 = 接收功率 * ACLR
+                    interference_powers_linear.append(interferer_rx_power_linear * self.aclr_linear)
                 else:
                     # 非FDMA模式：同频干扰
-                    interference_powers_linear.append(weighted_interference_power)
+                    interference_powers_linear.append(interferer_rx_power_linear)
         
         # 计算总干扰加噪声功率
         total_interference_linear = np.sum(interference_powers_linear)

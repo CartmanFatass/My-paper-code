@@ -80,6 +80,10 @@ class RolloutBuffer:
         self.n_z = n_z  # 个体技能数量
         self.state_dim = state_dim  # 全局状态维度
         
+        # === 【关键修复】添加专门的存储状态跟踪数组 ===
+        self.low_level_stored_mask = np.zeros((num_steps, num_envs), dtype=np.bool_)  # 低层数据存储状态
+        self.high_level_stored_mask = np.zeros((num_steps, num_envs), dtype=np.bool_)  # 高层数据存储状态
+        
         # === 低层策略数据 (每个智能体每步) ===
         self.obs = np.zeros((num_steps, num_envs, n_agents, obs_dim), dtype=np.float32)
         self.actions = np.zeros((num_steps, num_envs, n_agents, action_dim), dtype=np.float32)
@@ -117,10 +121,36 @@ class RolloutBuffer:
         
         # 移除了 self.ptr 和 self.full，现在由外部管理时间步索引
         
+        # === 【关键修复】添加存储操作统计和调试信息 ===
+        self.storage_stats = {
+            'total_low_level_attempts': 0,
+            'total_low_level_success': 0,
+            'total_high_level_attempts': 0,
+            'total_high_level_success': 0,
+            'duplicate_low_level_attempts': 0,
+            'duplicate_high_level_attempts': 0,
+            'last_storage_info': {}  # 记录最近的存储操作信息
+        }
+        
     def reset(self):
         """重置缓冲区，准备收集新的rollout"""
-        # 移除了ptr和full属性，缓冲区重置由外部管理
-        pass
+        # 【关键修复】重置存储状态跟踪数组
+        self.low_level_stored_mask.fill(False)
+        self.high_level_stored_mask.fill(False)
+        self.high_level_valid_mask.fill(False)
+        
+        # 重置存储统计信息
+        self.storage_stats = {
+            'total_low_level_attempts': 0,
+            'total_low_level_success': 0,
+            'total_high_level_attempts': 0,
+            'total_high_level_success': 0,
+            'duplicate_low_level_attempts': 0,
+            'duplicate_high_level_attempts': 0,
+            'last_storage_info': {}
+        }
+        
+        main_logger.debug("RolloutBuffer已重置，存储状态跟踪数组已清空")
         
     def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None):
         """
@@ -143,9 +173,67 @@ class RolloutBuffer:
             reward_team_disc: 团队判别器奖励
             reward_ind_disc: 个体判别器奖励
         """
+        # 【关键修复】更新存储统计信息
+        self.storage_stats['total_low_level_attempts'] += 1
+        
+        # 【关键修复】添加边界检查和详细调试信息
         if t >= self.num_steps:
-            main_logger.error(f"RolloutBuffer: 尝试在越界的时间步 {t} 添加数据")
-            return
+            main_logger.error(f"RolloutBuffer.add: 时间步越界! t={t} >= num_steps={self.num_steps}, env_idx={env_idx}")
+            return False
+        
+        if env_idx >= self.num_envs:
+            main_logger.error(f"RolloutBuffer.add: 环境索引越界! env_idx={env_idx} >= num_envs={self.num_envs}, t={t}")
+            return False
+        
+        # 【关键修复】使用专门的存储状态跟踪数组检查重复存储
+        if self.low_level_stored_mask[t, env_idx]:
+            self.storage_stats['duplicate_low_level_attempts'] += 1
+            main_logger.warning(f"RolloutBuffer.add: 重复存储低层数据! time_step={t}, env_idx={env_idx}")
+            main_logger.warning(f"低层数据存储失败（可能重复存储），环境{env_idx}，时间步: {t}")
+            return False  # 阻止重复写入
+        
+        # 【关键修复】数据形状验证
+        try:
+            # 验证观测形状
+            if obs.shape != (self.n_agents, self.obs_dim):
+                main_logger.error(f"RolloutBuffer.add: 观测形状不匹配! 期望{(self.n_agents, self.obs_dim)}, 实际{obs.shape}, t={t}, env_idx={env_idx}")
+                return False
+            
+            # 验证动作形状
+            if action.shape != (self.n_agents, self.action_dim):
+                main_logger.error(f"RolloutBuffer.add: 动作形状不匹配! 期望{(self.n_agents, self.action_dim)}, 实际{action.shape}, t={t}, env_idx={env_idx}")
+                return False
+            
+            # 验证状态形状
+            if state.shape != (self.state_dim,):
+                main_logger.error(f"RolloutBuffer.add: 状态形状不匹配! 期望{(self.state_dim,)}, 实际{state.shape}, t={t}, env_idx={env_idx}")
+                return False
+            
+            # 验证价值和log_prob形状
+            if value.shape != (self.n_agents,):
+                main_logger.error(f"RolloutBuffer.add: 价值形状不匹配! 期望{(self.n_agents,)}, 实际{value.shape}, t={t}, env_idx={env_idx}")
+                return False
+            
+            if log_prob.shape != (self.n_agents,):
+                main_logger.error(f"RolloutBuffer.add: log_prob形状不匹配! 期望{(self.n_agents,)}, 实际{log_prob.shape}, t={t}, env_idx={env_idx}")
+                return False
+        
+        except Exception as e:
+            main_logger.error(f"RolloutBuffer.add: 数据验证时出错! t={t}, env_idx={env_idx}, 错误={e}")
+            return False
+        
+        # 【关键修复】数据合理性检查
+        if np.isnan(obs).any() or np.isinf(obs).any():
+            main_logger.error(f"RolloutBuffer.add: 无效的观测数据! t={t}, env_idx={env_idx}")
+            return False
+        
+        if np.isnan(action).any() or np.isinf(action).any():
+            main_logger.error(f"RolloutBuffer.add: 无效的动作数据! t={t}, env_idx={env_idx}")
+            return False
+        
+        if np.isnan(value).any() or np.isinf(value).any():
+            main_logger.error(f"RolloutBuffer.add: 无效的价值数据! t={t}, env_idx={env_idx}")
+            return False
         
         # 使用 t 作为索引，而不是 self.ptr
         self.obs[t, env_idx] = obs
@@ -185,6 +273,26 @@ class RolloutBuffer:
             self.rewards_team_disc[t, env_idx] = reward_team_disc
         if reward_ind_disc is not None:
             self.rewards_ind_disc[t, env_idx] = reward_ind_disc
+        
+        # 【关键修复】标记该位置已存储低层数据
+        self.low_level_stored_mask[t, env_idx] = True
+        self.storage_stats['total_low_level_success'] += 1
+        
+        # 【关键修复】记录最近的存储操作信息
+        self.storage_stats['last_storage_info'] = {
+            'type': 'low_level',
+            'time_step': t,
+            'env_idx': env_idx,
+            'team_skill': team_skill,
+            'reward_mean': np.mean(reward) if hasattr(reward, '__len__') else reward
+        }
+        
+        # 【关键修复】添加详细的调试信息（仅在必要时）
+        if t % 500 == 0 or env_idx == 0:  # 减少日志频率
+            main_logger.debug(f"RolloutBuffer.add: 成功存储数据 t={t}, env_idx={env_idx}, "
+                             f"team_skill={team_skill}, reward={np.mean(reward) if hasattr(reward, '__len__') else reward:.4f}")
+        
+        return True
     
     def add_high_level_data(self, env_idx, time_step, value, joint_log_prob, accumulated_reward):
         """
@@ -197,19 +305,60 @@ class RolloutBuffer:
             joint_log_prob: 联合对数概率（团队技能+个体技能）
             accumulated_reward: k步累积奖励
         """
+        # 【关键修复】更新存储统计信息
+        self.storage_stats['total_high_level_attempts'] += 1
+        
+        # 【第三优先级修复】增强边界检查和数据验证
         if time_step >= self.num_steps:
-            main_logger.warning(f"时间步{time_step}超出缓冲区容量{self.num_steps}")
-            return
+            main_logger.error(f"add_high_level_data: 时间步越界! time_step={time_step} >= num_steps={self.num_steps}, env_idx={env_idx}")
+            return False
+        
+        if env_idx >= self.num_envs:
+            main_logger.error(f"add_high_level_data: 环境索引越界! env_idx={env_idx} >= num_envs={self.num_envs}, time_step={time_step}")
+            return False
+        
+        # 【关键修复】使用专门的存储状态跟踪数组检查重复存储
+        if self.high_level_valid_mask[time_step, env_idx]:
+            self.storage_stats['duplicate_high_level_attempts'] += 1
+            main_logger.warning(f"add_high_level_data: 重复存储高层数据! time_step={time_step}, env_idx={env_idx}")
+            return False  # 阻止重复写入
+        
+        # 【第三优先级修复】数据合理性检查
+        if np.isnan(value) or np.isinf(value):
+            main_logger.error(f"add_high_level_data: 无效的价值估计! value={value}, time_step={time_step}, env_idx={env_idx}")
+            return False
+        
+        if np.isnan(joint_log_prob) or np.isinf(joint_log_prob):
+            main_logger.error(f"add_high_level_data: 无效的log概率! joint_log_prob={joint_log_prob}, time_step={time_step}, env_idx={env_idx}")
+            return False
+        
+        if np.isnan(accumulated_reward) or np.isinf(accumulated_reward):
+            main_logger.error(f"add_high_level_data: 无效的累积奖励! accumulated_reward={accumulated_reward}, time_step={time_step}, env_idx={env_idx}")
+            return False
         
         self.high_level_values[time_step, env_idx] = value
         self.high_level_joint_log_probs[time_step, env_idx] = joint_log_prob
         self.high_level_rewards[time_step, env_idx] = accumulated_reward
         self.high_level_valid_mask[time_step, env_idx] = True
         
-        main_logger.debug(f"存储高层数据: env={env_idx}, step={time_step}, "
+        # 【关键修复】标记该位置已存储高层数据并更新统计
+        self.high_level_stored_mask[time_step, env_idx] = True
+        self.storage_stats['total_high_level_success'] += 1
+        
+        # 【关键修复】记录最近的高层存储操作信息
+        self.storage_stats['last_storage_info'] = {
+            'type': 'high_level',
+            'time_step': time_step,
+            'env_idx': env_idx,
+            'value': value,
+            'accumulated_reward': accumulated_reward
+        }
+        
+        main_logger.debug(f"add_high_level_data: 成功存储高层数据 env={env_idx}, step={time_step}, "
                          f"value={value:.4f}, log_prob={joint_log_prob:.4f}, reward={accumulated_reward:.4f}")
+        return True
     
-    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95):
+    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
         """
         【修复版本】标准化的GAE计算方法，在整个rollout收集完毕后调用一次。
         这确保了严格的on-policy更新流程。
@@ -219,11 +368,39 @@ class RolloutBuffer:
             dones (np.ndarray): 最后一步的完成标志，Shape (num_envs, n_agents) 或 (num_envs,)
             gamma (float): 折扣因子
             gae_lambda (float): GAE lambda参数
+            denormalized_values (np.ndarray, optional): 【新增】反归一化后的价值估计。如果提供，将使用此值计算GAE。
+            denormalized_last_values (np.ndarray, optional): 【新增】反归一化后的最后一步价值。
         """
+        # 【第三优先级修复】增强输入验证和调试信息
+        main_logger.debug(f"compute_advantages: 开始计算GAE，last_values形状={last_values.shape}, dones形状={dones.shape}")
+        
+        # 验证输入形状
+        if last_values.shape != (self.num_envs, self.n_agents):
+            main_logger.error(f"compute_advantages: last_values形状错误! 期望{(self.num_envs, self.n_agents)}, 实际{last_values.shape}")
+            return
+        
         # 确保dones的形状正确
         if dones.ndim == 1:
             # 如果dones是 (num_envs,)，扩展为 (num_envs, n_agents)
             dones = np.broadcast_to(dones[:, np.newaxis], (self.num_envs, self.n_agents))
+            main_logger.debug(f"compute_advantages: 扩展dones形状为 {dones.shape}")
+        
+        # 【第三优先级修复】检查数据中的NaN/Inf值
+        if np.isnan(last_values).any() or np.isinf(last_values).any():
+            main_logger.error("compute_advantages: last_values中发现NaN或Inf值!")
+            return
+        
+        if np.isnan(self.rewards).any() or np.isinf(self.rewards).any():
+            main_logger.error("compute_advantages: rewards中发现NaN或Inf值!")
+            return
+        
+        if np.isnan(self.values).any() or np.isinf(self.values).any():
+            main_logger.error("compute_advantages: values中发现NaN或Inf值!")
+            return
+
+        # 【核心修改】选择用于计算的价值
+        values_for_gae = denormalized_values if denormalized_values is not None else self.values
+        last_values_for_gae = denormalized_last_values if denormalized_last_values is not None else last_values
         
         # 将dones转换为masks，方便计算
         # masks[t] = 1.0 if a transition from t -> t+1 is not terminal, else 0.0
@@ -231,29 +408,57 @@ class RolloutBuffer:
 
         last_advantage = np.zeros((self.num_envs, self.n_agents), dtype=np.float32)
         
+        # 【第三优先级修复】添加详细的计算过程调试信息
+        nan_count = 0
+        inf_count = 0
+        
         # 从后往前计算GAE
         for t in reversed(range(self.num_steps)):
             # 如果是缓冲区的最后一步，next_value就是传入的last_values
             if t == self.num_steps - 1:
-                next_values = last_values
+                next_values = last_values_for_gae
                 next_done = dones.astype(np.float32)
             else:
-                next_values = self.values[t + 1]
+                next_values = values_for_gae[t + 1]
                 next_done = self.dones[t + 1].astype(np.float32)
             
             # delta_t = r_t + gamma * V(s_{t+1}) * (1 - done_{t+1}) - V(s_t)
             delta = (self.rewards[t] + 
                     gamma * next_values * (1.0 - next_done) - 
-                    self.values[t])
+                    values_for_gae[t])
             
             # advantage_t = delta_t + gamma * lambda * advantage_{t+1} * (1 - done_t)
             last_advantage = (delta + 
                             gamma * gae_lambda * last_advantage * (1.0 - next_done))
             self.advantages[t] = last_advantage
+            
+            # 【第三优先级修复】检查每步计算结果
+            if np.isnan(last_advantage).any():
+                nan_count += 1
+                if nan_count <= 3:  # 只记录前几个错误
+                    main_logger.error(f"compute_advantages: 步骤{t}产生NaN优势值! delta范围=[{np.min(delta):.4f}, {np.max(delta):.4f}]")
+            
+            if np.isinf(last_advantage).any():
+                inf_count += 1
+                if inf_count <= 3:  # 只记录前几个错误
+                    main_logger.error(f"compute_advantages: 步骤{t}产生Inf优势值! delta范围=[{np.min(delta):.4f}, {np.max(delta):.4f}]")
 
         # 计算Returns = GAE + V(s)
-        self.returns = self.advantages + self.values
-        main_logger.info("RolloutBuffer: 标准化GAE和Returns计算完成。")
+        self.returns = self.advantages + values_for_gae
+        
+        # 【第三优先级修复】最终结果验证和统计
+        adv_mean = np.mean(self.advantages)
+        adv_std = np.std(self.advantages)
+        ret_mean = np.mean(self.returns)
+        ret_std = np.std(self.returns)
+        
+        main_logger.info(f"compute_advantages: GAE计算完成。优势值统计: 均值={adv_mean:.4f}, 标准差={adv_std:.4f}")
+        main_logger.info(f"compute_advantages: Returns统计: 均值={ret_mean:.4f}, 标准差={ret_std:.4f}")
+        
+        if nan_count > 0:
+            main_logger.error(f"compute_advantages: 发现{nan_count}个时间步产生NaN值!")
+        if inf_count > 0:
+            main_logger.error(f"compute_advantages: 发现{inf_count}个时间步产生Inf值!")
 
     def compute_high_level_advantages(self, high_level_last_values=None, num_steps=None, gamma=0.99, gae_lambda=0.95):
         """
@@ -336,12 +541,11 @@ class RolloutBuffer:
         # 我们有 num_envs * n_agents 个独立的序列
         num_total_sequences = self.num_envs * self.n_agents
 
-        # 【关键修复】使用 swapaxes 和 reshape 来安全地展平 E 和 A 维度
-        # 原始维度: (T, E, A, F) -> (E, A, T, F) -> (E*A, T, F)
-        # 然后再换回 (T, E*A, F)
+        # 使用 swapaxes 和 reshape 来安全地展平 E 和 A 维度
+        # (T, E, A, F) -> (E, A, T, F) -> (E*A, T, F) -> (T, E*A, F)
         def flatten_sequences(arr):
             # T, E, A, ... -> E, A, T, ...
-            swapped = arr[:num_steps].swapaxes(0, 1).swapaxes(1, 2) 
+            swapped = arr[:num_steps].swapaxes(0, 1).swapaxes(1, 2).copy()
             # E, A, T, ... -> E*A, T, ...
             flat = swapped.reshape(num_total_sequences, num_steps, *swapped.shape[3:])
             # E*A, T, ... -> T, E*A, ...
@@ -352,27 +556,31 @@ class RolloutBuffer:
         log_probs_flat = flatten_sequences(self.log_probs)
         advantages_flat = flatten_sequences(self.advantages)
         returns_flat = flatten_sequences(self.returns)
+        dones_flat = flatten_sequences(self.dones)
         
-        # 对于没有Agent维度的数据
+        # 对于没有Agent维度的数据，通过重复扩展以匹配序列总数
         def flatten_sequences_no_agent(arr):
-            swapped = arr[:num_steps].swapaxes(0, 1) # T, E, ... -> E, T, ...
-            # 扩展Agent维度
-            expanded = np.repeat(swapped[:, :, np.newaxis], self.n_agents, axis=2) # E, T, A
-            flat = expanded.reshape(num_total_sequences, num_steps, *expanded.shape[3:])
+            # T, E, ... -> E, T, ...
+            swapped = arr[:num_steps].swapaxes(0, 1)
+            # E, T, ... -> E, 1, T, ...
+            expanded = np.expand_dims(swapped, axis=1)
+            # E, 1, T, ... -> E, A, T, ...
+            repeated = np.repeat(expanded, self.n_agents, axis=1)
+            # E, A, T, ... -> E*A, T, ...
+            flat = repeated.reshape(num_total_sequences, num_steps, *repeated.shape[3:])
+            # E*A, T, ... -> T, E*A, ...
             return flat.swapaxes(0, 1)
         
         global_states_flat = flatten_sequences_no_agent(self.states)
         team_skills_flat = flatten_sequences_no_agent(self.team_skills)
         agent_skills_flat = flatten_sequences(self.agent_skills)
 
-        # 初始隐状态的变形也需要修正
-        # 原始维度 (T, E, A, H) -> [0] -> (E, A, H) -> (E*A, H)
+        # 初始隐状态 (T, E, A, H) -> [0] -> (E, A, H) -> (E*A, H)
         initial_hxs = self.gru_hidden_states[0].reshape(num_total_sequences, -1)
         
         sequence_indices = np.arange(num_total_sequences)
         
-        main_logger.debug(f"Discoverer采样器: {num_total_sequences}个序列({self.num_envs}环境 × {self.n_agents}智能体), "
-                         f"每批{num_sequences_per_batch}个序列, {ppo_epochs}个epoch")
+        main_logger.debug(f"Discoverer sampler: {num_total_sequences} sequences, {num_sequences_per_batch} per batch, {ppo_epochs} epochs.")
         
         for epoch in range(ppo_epochs):
             np.random.shuffle(sequence_indices)
@@ -381,19 +589,144 @@ class RolloutBuffer:
                 end = min(start + num_sequences_per_batch, num_total_sequences)
                 batch_indices = sequence_indices[start:end]
                 
-                # 【关键修改】在yield中加入初始隐状态
+                obs_tensor = torch.from_numpy(obs_flat[:, batch_indices]).float()
+                hxs_tensor = torch.from_numpy(initial_hxs[batch_indices]).float()
+
                 yield {
-                    'observations': torch.from_numpy(obs_flat[:, batch_indices]).float(),  # Shape: (T, batch_size, obs_dim)
+                    'observations': obs_tensor,
                     'actions': torch.from_numpy(actions_flat[:, batch_indices]).float(),
                     'log_probs': torch.from_numpy(log_probs_flat[:, batch_indices]).float(),
                     'advantages': torch.from_numpy(advantages_flat[:, batch_indices]).float(),
                     'returns': torch.from_numpy(returns_flat[:, batch_indices]).float(),
-                    'global_states': torch.from_numpy(global_states_flat[:, batch_indices]).float(),  # 新增
-                    'team_skills': torch.from_numpy(team_skills_flat[:, batch_indices]).long(),   # 新增
+                    'global_states': torch.from_numpy(global_states_flat[:, batch_indices]).float(),
+                    'team_skills': torch.from_numpy(team_skills_flat[:, batch_indices]).long(),
                     'agent_skills': torch.from_numpy(agent_skills_flat[:, batch_indices]).long(),
-                    # **** 新增 ****
-                    'initial_hxs': torch.from_numpy(initial_hxs[batch_indices]).float()
+                    'initial_hxs': hxs_tensor,
+                    'dones': torch.from_numpy(dones_flat[:, batch_indices]).float()
                 }
+
+    def diagnose_buffer_state(self, num_steps=None):
+        """
+        【第三优先级修复】诊断缓冲区状态，检查数据完整性和一致性
+        
+        参数:
+            num_steps: 要检查的步数，如果为None则检查所有步数
+        """
+        if num_steps is None:
+            num_steps = self.num_steps
+        
+        main_logger.info("=" * 50)
+        main_logger.info("RolloutBuffer 诊断报告")
+        main_logger.info("=" * 50)
+        
+        # 基础信息
+        main_logger.info(f"缓冲区配置: {self.num_steps}步 x {self.num_envs}环境 x {self.n_agents}智能体")
+        main_logger.info(f"检查范围: 前{num_steps}步")
+        
+        # 检查低层数据完整性
+        obs_filled = np.any(self.obs[:num_steps] != 0, axis=(2, 3))  # (T, E)
+        actions_filled = np.any(self.actions[:num_steps] != 0, axis=(2, 3))  # (T, E)
+        rewards_filled = np.any(self.rewards[:num_steps] != 0, axis=2)  # (T, E)
+        values_filled = np.any(self.values[:num_steps] != 0, axis=2)  # (T, E)
+        
+        obs_fill_rate = np.mean(obs_filled) * 100
+        actions_fill_rate = np.mean(actions_filled) * 100
+        rewards_fill_rate = np.mean(rewards_filled) * 100
+        values_fill_rate = np.mean(values_filled) * 100
+        
+        main_logger.info(f"低层数据填充率:")
+        main_logger.info(f"  观测: {obs_fill_rate:.1f}%, 动作: {actions_fill_rate:.1f}%")
+        main_logger.info(f"  奖励: {rewards_fill_rate:.1f}%, 价值: {values_fill_rate:.1f}%")
+        
+        # 检查高层数据完整性
+        high_level_count = np.sum(self.high_level_valid_mask[:num_steps])
+        high_level_rate = high_level_count / (num_steps * self.num_envs) * 100
+        
+        main_logger.info(f"高层数据:")
+        main_logger.info(f"  有效决策: {high_level_count}个 ({high_level_rate:.1f}%)")
+        
+        # 按环境统计高层数据分布
+        env_high_level_counts = np.sum(self.high_level_valid_mask[:num_steps], axis=0)
+        main_logger.info(f"  各环境高层决策数: {env_high_level_counts}")
+        
+        # 检查数据质量
+        nan_issues = []
+        inf_issues = []
+        
+        # 检查观测数据
+        if np.isnan(self.obs[:num_steps]).any():
+            nan_issues.append("观测")
+        if np.isinf(self.obs[:num_steps]).any():
+            inf_issues.append("观测")
+        
+        # 检查奖励数据
+        if np.isnan(self.rewards[:num_steps]).any():
+            nan_issues.append("奖励")
+        if np.isinf(self.rewards[:num_steps]).any():
+            inf_issues.append("奖励")
+        
+        # 检查价值数据
+        if np.isnan(self.values[:num_steps]).any():
+            nan_issues.append("价值")
+        if np.isinf(self.values[:num_steps]).any():
+            inf_issues.append("价值")
+        
+        # 检查高层数据
+        if np.isnan(self.high_level_values[:num_steps]).any():
+            nan_issues.append("高层价值")
+        if np.isinf(self.high_level_values[:num_steps]).any():
+            inf_issues.append("高层价值")
+        
+        if nan_issues:
+            main_logger.error(f"发现NaN值: {', '.join(nan_issues)}")
+        if inf_issues:
+            main_logger.error(f"发现Inf值: {', '.join(inf_issues)}")
+        
+        if not nan_issues and not inf_issues:
+            main_logger.info("数据质量检查: 通过 ✓")
+        
+        # 奖励统计
+        reward_mean = np.mean(self.rewards[:num_steps])
+        reward_std = np.std(self.rewards[:num_steps])
+        reward_min = np.min(self.rewards[:num_steps])
+        reward_max = np.max(self.rewards[:num_steps])
+        
+        main_logger.info(f"奖励统计: 均值={reward_mean:.4f}, 标准差={reward_std:.4f}")
+        main_logger.info(f"奖励范围: [{reward_min:.4f}, {reward_max:.4f}]")
+        
+        # 技能分布统计
+        if np.any(self.team_skills[:num_steps] >= 0):
+            team_skill_counts = np.bincount(self.team_skills[:num_steps].flatten(), minlength=self.n_Z)
+            main_logger.info(f"团队技能分布: {team_skill_counts}")
+        
+        main_logger.info("=" * 50)
+        return {
+            'obs_fill_rate': obs_fill_rate,
+            'actions_fill_rate': actions_fill_rate,
+            'rewards_fill_rate': rewards_fill_rate,
+            'values_fill_rate': values_fill_rate,
+            'high_level_count': high_level_count,
+            'high_level_rate': high_level_rate,
+            'has_nan': len(nan_issues) > 0,
+            'has_inf': len(inf_issues) > 0,
+            'reward_stats': {
+                'mean': reward_mean,
+                'std': reward_std,
+                'min': reward_min,
+                'max': reward_max
+            }
+        }
+
+    def get_all_high_level_returns(self, num_steps):
+        """
+        获取所有有效的高层回报，用于更新Value Normalization统计量。
+        """
+        valid_returns = []
+        for t in range(num_steps):
+            for env_idx in range(self.num_envs):
+                if self.high_level_valid_mask[t, env_idx]:
+                    valid_returns.append(self.high_level_returns[t, env_idx])
+        return np.array(valid_returns, dtype=np.float32)
 
     def get_coordinator_sampler(self, num_steps, ppo_epochs, num_sequences_per_batch):
         """
@@ -497,6 +830,44 @@ class RolloutBuffer:
         """
         main_logger.warning("使用了已废弃的get_sequence_sampler方法，建议使用get_discoverer_sampler或get_coordinator_sampler")
         return self.get_discoverer_sampler(num_steps, ppo_epochs, num_sequences_per_batch)
+    
+    def get_storage_stats(self):
+        """
+        【关键修复】获取存储操作的统计信息，用于调试和监控
+        
+        返回:
+            dict: 包含存储统计信息的字典
+        """
+        stats = self.storage_stats.copy()
+        
+        # 计算成功率
+        if stats['total_low_level_attempts'] > 0:
+            stats['low_level_success_rate'] = stats['total_low_level_success'] / stats['total_low_level_attempts']
+        else:
+            stats['low_level_success_rate'] = 0.0
+            
+        if stats['total_high_level_attempts'] > 0:
+            stats['high_level_success_rate'] = stats['total_high_level_success'] / stats['total_high_level_attempts']
+        else:
+            stats['high_level_success_rate'] = 0.0
+        
+        # 计算重复率
+        if stats['total_low_level_attempts'] > 0:
+            stats['low_level_duplicate_rate'] = stats['duplicate_low_level_attempts'] / stats['total_low_level_attempts']
+        else:
+            stats['low_level_duplicate_rate'] = 0.0
+            
+        if stats['total_high_level_attempts'] > 0:
+            stats['high_level_duplicate_rate'] = stats['duplicate_high_level_attempts'] / stats['total_high_level_attempts']
+        else:
+            stats['high_level_duplicate_rate'] = 0.0
+        
+        # 添加存储状态掩码的统计
+        stats['low_level_stored_positions'] = int(np.sum(self.low_level_stored_mask))
+        stats['high_level_stored_positions'] = int(np.sum(self.high_level_stored_mask))
+        stats['high_level_valid_positions'] = int(np.sum(self.high_level_valid_mask))
+        
+        return stats
     
     # 删除了依赖 self.ptr 和 self.full 的方法，这些现在由外部管理
 

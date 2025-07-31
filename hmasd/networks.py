@@ -1001,14 +1001,12 @@ class SkillDiscoverer(nn.Module):
         self.action_log_std.weight.data.fill_(0.0)
         self.action_log_std.bias.data.fill_(-1.0)  # exp(-1) ≈ 0.37
         
-        # 重置参数
-        self.actor_hidden = None
-        
         # Critic网络（中心化价值函数）- 简化的前馈网络直接评估V(s, Z)
         self.critic_net = nn.Sequential(
             nn.Linear(config.state_dim + config.n_Z, config.hidden_size),
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
+            ResBlock(config.hidden_size),
             ResBlock(config.hidden_size),
             ResBlock(config.hidden_size),
             nn.Linear(config.hidden_size, config.hidden_size),
@@ -1036,11 +1034,6 @@ class SkillDiscoverer(nn.Module):
         
         # 初始化critic网络权重
         initialize_weights(self.critic_net, gain=1.0)
-    
-    def init_hidden(self, batch_size=1):
-        """初始化GRU隐藏状态"""
-        device = next(self.parameters()).device
-        self.actor_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
     
     def reset_hidden_periodic(self, episode_step, reset_interval=100):
         """
@@ -1073,220 +1066,128 @@ class SkillDiscoverer(nn.Module):
         
         return value, torch.tensor(0.0, device=state.device, requires_grad=True)  # 返回零损失
     
-    def evaluate_sequence(self, obs_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs):
+    def forward(self, observation, agent_skill, hidden_state, deterministic=False):
         """
-        评估一个完整的序列批次，实现真正的BPTT
-        
-        参数:
-            obs_seq (Tensor): 观测序列，Shape: (T, B, obs_dim)
-            agent_skills_seq (Tensor): 技能序列，Shape: (T, B)
-            actions_seq (Tensor): 动作序列，Shape: (T, B, action_dim)
-            global_states_seq (Tensor): 全局状态序列，Shape: (T, B, state_dim)
-            team_skills_seq (Tensor): 团队技能序列，Shape: (T, B)
-            initial_hxs (Tensor): 初始隐状态，Shape: (B, hidden_size)
-            
-        返回:
-            log_probs (Tensor): 动作对数概率，Shape: (T, B)
-            values (Tensor): 价值估计，Shape: (T, B)
-            entropy (Tensor): 策略熵，Shape: ()
+        [最终修正版]
+        前向传播，正确处理GRU的输入和输出形状。
         """
-        T, B = obs_seq.shape[:2]
-        device = obs_seq.device
-        
-        # --- Actor 部分：处理整个序列 ---
-        # 1. 预处理输入：将技能one-hot编码并与观测拼接
-        skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()  # (T, B, n_z)
-        actor_input = torch.cat([obs_seq, skills_onehot], dim=2)  # (T, B, obs_dim + n_z)
-        
-        # 2. 通过MLP处理
-        # 将时序维度展平处理 - 使用reshape代替view解决内存不连续问题
-        actor_input_flat = actor_input.reshape(T * B, -1)  # (T*B, obs_dim + n_z)
-        actor_features_flat = self.actor_mlp(actor_input_flat)  # (T*B, hidden_size)
-        
-        # 3. 重塑为GRU输入格式并处理整个序列 - 使用reshape代替view
-        gru_input = actor_features_flat.reshape(T, B, -1)  # (T, B, hidden_size)
-        
-        # 【关键修改】确保initial_hxs的batch_size与gru_input匹配
-        # initial_hxs的shape应该是(B, hidden_size)，需要变为(1, B, hidden_size)
-        # 如果batch_size不匹配，需要进行调整
-        if initial_hxs.size(0) != B:
-            # 如果initial_hxs的batch_size与当前批次不匹配，创建正确大小的初始隐状态
-            device = initial_hxs.device
-            initial_hxs = torch.zeros(B, self.gru_hidden_dim, device=device)
-            self.logger.warning(f"initial_hxs batch_size {initial_hxs.size(0)} 与 gru_input batch_size {B} 不匹配，已重新初始化")
-        
-        # 注意GRU的隐状态输入维度是 (num_layers, batch_size, hidden_size)
-        gru_output, _ = self.actor_gru(gru_input, initial_hxs.unsqueeze(0))  # (T, B, gru_hidden_size)
-        
-        # 4. 计算动作分布参数 - 使用reshape代替view
-        gru_output_flat = gru_output.reshape(T * B, -1)  # (T*B, gru_hidden_size)
-        
-        # 生成动作分布参数并进行数值稳定性处理
-        action_mean_raw = self.action_mean(gru_output_flat)
-        action_mean = torch.tanh(action_mean_raw) * 3.0  # 限制在[-3,3]范围内
-        
-        action_log_std = torch.clamp(self.action_log_std(gru_output_flat), min=-10.0, max=2.0)
-        action_std = torch.exp(action_log_std) + 1e-6  # 添加小的epsilon以防止标准差为零
-        
-        # 数值稳定性处理
-        action_mean = torch.nan_to_num(action_mean, nan=0.0, posinf=3.0, neginf=-3.0)
-        action_std = torch.clamp(torch.nan_to_num(action_std, nan=1.0, posinf=1.0), min=1e-6)
-        
-        # 5. 创建动作分布并评估动作
-        action_dist = Normal(action_mean, action_std)
-        
-        # 评估序列中的动作 - 使用reshape代替view解决内存不连续问题
-        actions_flat = actions_seq.reshape(T * B, -1)  # (T*B, action_dim)
-        log_probs_flat = action_dist.log_prob(actions_flat).sum(dim=-1)  # (T*B,)
-        
-        # 检查并处理无穷大/NaN的log_prob
-        if torch.isnan(log_probs_flat).any() or torch.isinf(log_probs_flat).any():
-            self.logger.warning("检测到序列评估中log_probs有NaN或Inf值")
-            log_probs_flat = torch.nan_to_num(log_probs_flat, nan=0.0, posinf=-1e3, neginf=-1e3)
-        
-        log_probs = log_probs_flat.reshape(T, B)  # (T, B) - 使用reshape代替view
-        entropy = action_dist.entropy().mean()
-        
-        # --- Critic 部分：使用正确对齐的数据一次性计算价值函数 ---
-        # 将时序维度展平 - 使用reshape代替view
-        global_states_flat = global_states_seq.reshape(T * B, -1)  # (T*B, state_dim)
-        team_skills_flat = team_skills_seq.reshape(T * B)  # (T*B,)
-
-        # 一次性计算所有时间步的价值
-        values_flat, _ = self.get_value(global_states_flat, team_skills_flat)  # (T*B, 1)
-        values = values_flat.reshape(T, B)  # (T, B) - 使用reshape代替view
-        
-        return log_probs, values, entropy
-
-    def forward(self, observation, agent_skill, deterministic=False):
-        """
-        前向传播，生成动作
-        
-        参数:
-            observation: 智能体观测 [batch_size, obs_dim]
-            agent_skill: 个体技能索引 [batch_size] 或独热编码 [batch_size, n_z]
-            deterministic: 是否使用确定性策略
-            
-        返回:
-            action: 动作 [batch_size, action_dim]
-            action_logprob: 动作对数概率 [batch_size]
-            action_distribution: 动作分布
-        """
-        batch_size = observation.size(0)
-        
-        # 确保observation是float32类型
         observation = observation.float()
         
-        if isinstance(agent_skill, int) or isinstance(agent_skill, torch.Tensor):
-            # 将技能索引转换为独热编码
-            if isinstance(agent_skill, int):
-                agent_skill = torch.tensor([agent_skill], device=observation.device)
-            elif agent_skill.dim() == 0:  # 处理标量张量
-                agent_skill = agent_skill.unsqueeze(0)  # 转换为一维张量
-            
-            # 确保是一维张量后进行独热编码
-            if agent_skill.dim() == 1:
-                agent_skill_onehot = F.one_hot(agent_skill, self.n_z).float()
-            else:
-                agent_skill_onehot = agent_skill.float()  # 已经是独热编码，确保是float32
-        else:
-            agent_skill_onehot = agent_skill.float()
+        # 将离散的技能索引转换为one-hot编码
+        if isinstance(agent_skill, int) or agent_skill.dim() == 0:
+            # 处理单个样本的情况
+            agent_skill = torch.tensor([agent_skill] if isinstance(agent_skill, int) else agent_skill.item(), 
+                                       device=observation.device, dtype=torch.long)
+        agent_skill_onehot = F.one_hot(agent_skill, self.n_z).float()
         
-        # 拼接观测和个体技能
+        # 如果 observation 是一维的 (单个样本)，则增加批次维度
+        if observation.dim() == 1:
+            observation = observation.unsqueeze(0)
+        if agent_skill_onehot.dim() == 1:
+            agent_skill_onehot = agent_skill_onehot.unsqueeze(0)
+            
         actor_input = torch.cat([observation, agent_skill_onehot], dim=-1)
-        self.logger.debug(f"SkillDiscoverer.forward: actor_input shape: {actor_input.shape}, dtype: {actor_input.dtype}")
         
-        # 前向传播
-        actor_features = self.actor_mlp(actor_input).unsqueeze(1)  # 添加时序维度
+        # --- 核心修正 ---
+        actor_features = self.actor_mlp(actor_input)
         
-        # 初始化隐藏状态（如果需要）
-        if self.actor_hidden is None or self.actor_hidden.size(1) != batch_size:
-            device = actor_features.device
-            self.actor_hidden = torch.zeros(1, batch_size, self.gru_hidden_dim, device=device)
-            
-        actor_output, self.actor_hidden = self.actor_gru(actor_features, self.actor_hidden)
-        actor_output = actor_output.squeeze(1)  # 移除时序维度
+        # 1. 为GRU调整输入形状：(B, H) -> (1, B, H) (序列长度为1)
+        actor_features_seq = actor_features.unsqueeze(0)
         
-        # 生成动作分布参数并进行数值稳定性处理
-        # 1. 使用tanh限制action_mean的范围在[-1,1]之间，然后可以根据需要进行缩放
-        action_mean_raw = self.action_mean(actor_output)
-        action_mean = torch.tanh(action_mean_raw) * 3.0  # 限制在[-3,3]范围内
+        # 2. 为GRU调整隐藏状态形状：(B, H) -> (1, B, H) (层数为1)
+        hidden_state_seq = hidden_state.unsqueeze(0)
         
-        # 2. 限制action_log_std的范围，防止exp后溢出
+        # GRU现在接收正确形状的输入
+        actor_output_seq, new_hidden_state_seq = self.actor_gru(actor_features_seq, hidden_state_seq)
+        
+        # 3. 将输出形状还原：(1, B, H) -> (B, H)
+        actor_output = actor_output_seq.squeeze(0)
+        new_hidden_state = new_hidden_state_seq.squeeze(0)
+        
+        # --- 剩余部分逻辑不变 ---
+        action_mean = torch.tanh(self.action_mean(actor_output)) * self.config.action_bound
         action_log_std = torch.clamp(self.action_log_std(actor_output), min=-10.0, max=2.0)
-        
-        # 3. 确保std不为0，避免除零错误
-        action_std = torch.exp(action_log_std) + 1e-6
-        
-        # 检查NaN或Inf并记录日志
-        if torch.isnan(action_mean).any() or torch.isinf(action_mean).any():
-            self.logger.warning("警告: action_mean中检测到NaN或Inf值!")
-            self.logger.warning(f"action_mean统计: 形状={action_mean.shape}, 均值={action_mean.mean().item() if not torch.isnan(action_mean).all() else 'NaN'}, 标准差={action_mean.std().item() if not torch.isnan(action_mean).all() else 'NaN'}")
-            # 替换NaN和Inf值
-            action_mean = torch.nan_to_num(action_mean, nan=0.0, posinf=1.0, neginf=-1.0)
-            self.logger.info("已将action_mean中的NaN和Inf值替换为有限值")
-            
-        if torch.isnan(action_std).any() or torch.isinf(action_std).any() or (action_std <= 1e-6).any():
-            self.logger.warning(f"警告: action_std中检测到NaN、Inf或非常小的值!")
-            self.logger.warning(f"action_std统计: 形状={action_std.shape}, 均值={action_std.mean().item() if not torch.isnan(action_std).all() else 'NaN'}, 标准差={action_std.std().item() if not torch.isnan(action_std).all() else 'NaN'}")
-            # 替换NaN和Inf值
-            action_std = torch.nan_to_num(action_std, nan=1.0, posinf=1.0, neginf=1.0)
-            self.logger.info("已将action_std中的NaN和Inf值替换为有限值")
-            
-        # 添加数值稳定性处理
-        # 确保action_std不会太小，避免数值问题
-        action_std = torch.clamp(action_std, min=1e-6)
-        
-        # 创建正态分布前再次确保参数有效
-        action_mean = torch.nan_to_num(action_mean, nan=0.0, posinf=3.0, neginf=-3.0)
-        action_std = torch.clamp(torch.nan_to_num(action_std, nan=1.0, posinf=1.0), min=1e-6)
-        
+        action_std = torch.exp(action_log_std)
+
         try:
-            # 创建正态分布
             action_distribution = Normal(action_mean, action_std)
-            
-            # 采样或选择最佳动作
-            if deterministic:
-                action = action_mean
-            else:
-                try:
-                    # 使用重参数化技巧采样，可能更稳定
-                    # reparameterization trick: 先从标准正态分布采样，再缩放平移
-                    epsilon = torch.randn_like(action_mean)
-                    action = action_mean + action_std * epsilon
-                except Exception as e:
-                    self.logger.error(f"采样动作时发生错误: {e}")
-                    # 安全回退到确定性动作
-                    action = action_mean
-                    self.logger.info("采样失败，回退到确定性动作")
-            
-            # 计算动作对数概率
-            try:
-                action_logprob = action_distribution.log_prob(action).sum(dim=-1)
-                # 检查并处理无穷大/NaN的log_prob
-                if torch.isnan(action_logprob).any() or torch.isinf(action_logprob).any():
-                    self.logger.warning("检测到action_logprob中有NaN或Inf值")
-                    action_logprob = torch.nan_to_num(action_logprob, nan=0.0, posinf=-1e3, neginf=-1e3)
-            except Exception as e:
-                self.logger.error(f"计算动作对数概率时发生错误: {e}")
-                action_logprob = torch.zeros(batch_size, device=action_mean.device)
-                self.logger.info("已使用零对数概率作为回退值")
-                
+            action = action_distribution.sample() if not deterministic else action_mean
+            action_logprob = action_distribution.log_prob(action).sum(dim=-1)
         except Exception as e:
-            # 完全回退方案：使用标准正态分布
-            self.logger.error(f"创建Normal分布时发生错误: {e}")
-            self.logger.error(f"action_mean: {action_mean}")
-            self.logger.error(f"action_std: {action_std}")
-            
-            # 使用安全的默认值
+            self.logger.error(f"创建Normal分布时发生错误: {e}, mean: {action_mean}, std: {action_std}")
+            # 安全回退
             action_mean = torch.zeros_like(action_mean)
             action_std = torch.ones_like(action_std)
             action_distribution = Normal(action_mean, action_std)
-            action = action_mean if deterministic else action_mean + action_std * torch.randn_like(action_mean)
-            action_logprob = torch.zeros(batch_size, device=action_mean.device)
-            self.logger.info("使用安全的默认分布和动作")
+            action = action_mean
+            action_logprob = action_distribution.log_prob(action).sum(dim=-1)
+
+        return action, action_logprob, action_distribution, new_hidden_state
+
+    def evaluate_sequence(self, obs_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs, dones_seq):
+        """
+        [最终修正版]
+        评估序列，正确地逐个时间步展开循环状态并处理形状。
+        """
+        T, B, _ = obs_seq.shape
+        device = obs_seq.device
+
+        # --- Actor部分：逐个时间步处理序列 ---
+        skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()
+        actor_input = torch.cat([obs_seq, skills_onehot], dim=-1)
         
-        return action, action_logprob, action_distribution
+        # MLP处理可以一次性完成
+        actor_input_flat = actor_input.contiguous().view(T * B, -1)
+        actor_features_flat = self.actor_mlp(actor_input_flat)
+        gru_input = actor_features_flat.contiguous().view(T, B, -1)
+
+        # 逐个时间步展开GRU
+        hidden_states = initial_hxs  # 形状: (B, H)
+        all_gru_outputs = []
+        
+        if dones_seq.dim() == 2:
+            dones_seq = dones_seq.unsqueeze(-1)
+
+        for t in range(T):
+            # 掩码会在上一个时间步为'done'的情况下重置隐藏状态
+            mask = (1.0 - dones_seq[t-1]) if t > 0 else torch.ones_like(dones_seq[0])
+            hidden_states = hidden_states * mask
+            
+            # --- 核心修正 ---
+            # 1. 为GRU调整输入形状：(B, H) -> (1, B, H)
+            gru_input_t = gru_input[t].unsqueeze(0)
+            
+            # 2. 为GRU调整隐藏状态形状：(B, H) -> (1, B, H)
+            hidden_states_t = hidden_states.unsqueeze(0)
+            
+            # GRU进行单步计算
+            gru_output_t, new_hidden_states_t = self.actor_gru(gru_input_t, hidden_states_t)
+            
+            # 3. 将输出形状还原以用于下一步循环
+            hidden_states = new_hidden_states_t.squeeze(0)
+            all_gru_outputs.append(gru_output_t.squeeze(0))
+
+        gru_output = torch.stack(all_gru_outputs)  # 形状: (T, B, H)
+
+        # --- 剩余部分逻辑不变 ---
+        gru_output_flat = gru_output.contiguous().view(T * B, -1)
+        action_mean = torch.tanh(self.action_mean(gru_output_flat)) * self.config.action_bound
+        action_log_std = torch.clamp(self.action_log_std(gru_output_flat), min=-10.0, max=2.0)
+        action_std = torch.exp(action_log_std)
+
+        action_dist = Normal(action_mean, action_std)
+        actions_flat = actions_seq.contiguous().view(T * B, -1)
+        log_probs_flat = action_dist.log_prob(actions_flat).sum(dim=-1)
+        log_probs = log_probs_flat.contiguous().view(T, B)
+        entropy = action_dist.entropy().sum(dim=-1).mean()
+
+        # --- Critic部分 (保持不变) ---
+        global_states_flat = global_states_seq.contiguous().view(T * B, -1)
+        team_skills_flat = team_skills_seq.contiguous().view(T * B)
+        values_flat, _ = self.get_value(global_states_flat, team_skills_flat)
+        values = values_flat.contiguous().view(T, B)
+        
+        return log_probs, values, entropy
 
 class TeamDiscriminator(nn.Module):
     """团队技能判别器 - 升级版3层MLP"""
@@ -1301,6 +1202,7 @@ class TeamDiscriminator(nn.Module):
             nn.Linear(config.hidden_size, config.hidden_size),
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
+            nn.Tanh(),
             nn.Linear(config.hidden_size, config.n_Z)
         )
         
@@ -1336,6 +1238,7 @@ class IndividualDiscriminator(nn.Module):
             nn.Linear(config.hidden_size, config.hidden_size),
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
+            nn.Tanh(),
             nn.Linear(config.hidden_size, config.n_z)
         )
         initialize_weights(self.net[-1], gain=1.0)
