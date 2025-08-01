@@ -2,9 +2,11 @@
 # 专用于场景4：强制中继模式
 
 class Config:
+    # 调试参数
+    test_reward_mode = True  # 是否测试奖励函数
     # 环境参数
     # 注意：实际环境中应该获取这些值
-    n_agents = 6     # 无人机数量 (默认值，可通过代码设置)
+    n_agents = 8     # 无人机数量 (默认值，可通过代码设置)
     state_dim = None  # 全局状态维度（将在环境初始化时获取）
     obs_dim = None    # 单个智能体观测维度（将在环境初始化时获取）
     action_dim = 3    # 每个智能体输出3D速度向量
@@ -12,7 +14,7 @@ class Config:
     
     # 通用环境参数
     n_users = 30                    # 用户数量
-    area_size = 5000               # 区域大小 (米)
+    area_size = 8000               # 区域大小 (米)
     max_hops = 5                   # 最大跳数
     user_distribution = 'multi_cluster'  # 用户分布类型
     channel_model = 'probabilistic'      # 信道模型
@@ -26,14 +28,14 @@ class Config:
     
     # 局部观测参数
     observation_radius = 600  # [新增] 固定的侦测范围 (米)
-    max_observed_uavs = 6     # 原为6，可以适当增大以容纳更多邻居
+    max_observed_uavs = 8     # 原为6，可以适当增大以容纳更多邻居
     max_observed_users = 30   # 原为30
     max_observed_bs = 2       # [新增] 最大观测基站数量
 
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 3           # [关键] 降低个体技能数量
-    k = 20           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 10           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 128         # 隐藏层大小 (论文中为64)
@@ -56,13 +58,13 @@ class Config:
     max_grad_norm = 0.5      # MAPPO标准梯度裁剪
     value_clip = 10.0        # [新增] 价值函数裁剪范围，用于Value Normalization
 
-    # HMASD损失权重 - 紧急修复判别器崩溃问题
-    # 注意：重新平衡奖励权重，解决判别器过度训练和技能学习停滞问题
-    lambda_e = 1          # [紧急修复] 大幅降低外部奖励权重，从100.0降到0.5
-    lambda_D = 0.1           # [紧急修复] 大幅提高团队技能判别器奖励权重，从0.1提高到1.0
-    lambda_d = 0.5           # [紧急修复] 大幅提高个体技能判别器奖励权重，从0.5提高到2.0
-    lambda_h = 0.001          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
-    lambda_l = 0.01           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
+    # HMASD损失权重 - 根据代码审查建议调整
+    # 优先保证外在奖励，以确保智能体首先学习解决任务
+    lambda_e = 1.0           # 外在奖励权重
+    lambda_D = 0.1          # 团队技能判别器奖励权重
+    lambda_d = 0.5          # 个体技能判别器奖励权重
+    lambda_h = 0.01          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
+    lambda_l = 0.1           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
     lambda_cd = 0.0          # 对比散度损失权重 (禁用)
     lambda_mi = 0.1          # 互信息奖励权重 (新增)
 
@@ -109,6 +111,7 @@ class Config:
     huber_delta = 10         # Huber delta
     
     # OPT (Interaction Pattern Disentangling) 参数 - 基于论文《Interaction Pattern Disentangling for Multi-Agent Reinforcement Learning》
+    use_opt = False                    # 总开关：是否使用OPT模块
     use_opt_coordinator = False        # 禁用额外模块
     use_opt_discoverer_actor = False   # 禁用额外模块
     use_opt_discoverer_critic = False  # 禁用额外模块
@@ -142,7 +145,7 @@ class Config:
     # --- 场景4: 环境和空间参数 ---
     min_sinr = 3.0                          # 最小信噪比
     max_connections = 25                     # 最大连接数
-    uav_init_mode = 'start_area'            # 无人机初始化模式
+    uav_init_mode = 'random'            # 无人机初始化模式
     uav_start_area_size = 100               # 起始区域大小（米）
     grid_resolution = 50                    # 栅格分辨率
 

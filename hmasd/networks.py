@@ -1068,19 +1068,18 @@ class SkillDiscoverer(nn.Module):
     
     def forward(self, observation, agent_skill, hidden_state, deterministic=False):
         """
-        [最终修正版]
-        前向传播，正确处理GRU的输入和输出形状。
+        [CORRECTED VERSION]
+        Forward pass with correct GRU input/output shapes.
         """
         observation = observation.float()
         
-        # 将离散的技能索引转换为one-hot编码
+        # Convert discrete skill index to one-hot encoding
         if isinstance(agent_skill, int) or agent_skill.dim() == 0:
-            # 处理单个样本的情况
             agent_skill = torch.tensor([agent_skill] if isinstance(agent_skill, int) else agent_skill.item(), 
                                        device=observation.device, dtype=torch.long)
         agent_skill_onehot = F.one_hot(agent_skill, self.n_z).float()
         
-        # 如果 observation 是一维的 (单个样本)，则增加批次维度
+        # Ensure batch dimension exists for single samples
         if observation.dim() == 1:
             observation = observation.unsqueeze(0)
         if agent_skill_onehot.dim() == 1:
@@ -1088,23 +1087,23 @@ class SkillDiscoverer(nn.Module):
             
         actor_input = torch.cat([observation, agent_skill_onehot], dim=-1)
         
-        # --- 核心修正 ---
+        # --- Core Fix ---
         actor_features = self.actor_mlp(actor_input)
         
-        # 1. 为GRU调整输入形状：(B, H) -> (1, B, H) (序列长度为1)
+        # 1. Reshape for GRU: (B, H) -> (1, B, H) for a sequence of length 1
         actor_features_seq = actor_features.unsqueeze(0)
         
-        # 2. 为GRU调整隐藏状态形状：(B, H) -> (1, B, H) (层数为1)
+        # 2. Reshape hidden state for GRU: (B, H) -> (1, B, H) for 1 layer
         hidden_state_seq = hidden_state.unsqueeze(0)
         
-        # GRU现在接收正确形状的输入
+        # GRU now receives correctly shaped inputs
         actor_output_seq, new_hidden_state_seq = self.actor_gru(actor_features_seq, hidden_state_seq)
         
-        # 3. 将输出形状还原：(1, B, H) -> (B, H)
+        # 3. Squeeze outputs back to original shape: (1, B, H) -> (B, H)
         actor_output = actor_output_seq.squeeze(0)
         new_hidden_state = new_hidden_state_seq.squeeze(0)
         
-        # --- 剩余部分逻辑不变 ---
+        # --- Rest of the logic is unchanged ---
         action_mean = torch.tanh(self.action_mean(actor_output)) * self.config.action_bound
         action_log_std = torch.clamp(self.action_log_std(actor_output), min=-10.0, max=2.0)
         action_std = torch.exp(action_log_std)
@@ -1114,8 +1113,8 @@ class SkillDiscoverer(nn.Module):
             action = action_distribution.sample() if not deterministic else action_mean
             action_logprob = action_distribution.log_prob(action).sum(dim=-1)
         except Exception as e:
-            self.logger.error(f"创建Normal分布时发生错误: {e}, mean: {action_mean}, std: {action_std}")
-            # 安全回退
+            self.logger.error(f"Error creating Normal distribution: {e}, mean: {action_mean}, std: {action_std}")
+            # Safe fallback
             action_mean = torch.zeros_like(action_mean)
             action_std = torch.ones_like(action_std)
             action_distribution = Normal(action_mean, action_std)
@@ -1124,52 +1123,57 @@ class SkillDiscoverer(nn.Module):
 
         return action, action_logprob, action_distribution, new_hidden_state
 
-    def evaluate_sequence(self, obs_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs, dones_seq):
+    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None):
         """
-        [最终修正版]
-        评估序列，正确地逐个时间步展开循环状态并处理形状。
+        [CORRECTED VERSION]
+        Evaluate a sequence, correctly unrolling the recurrent state step-by-step.
         """
-        T, B, _ = obs_seq.shape
-        device = obs_seq.device
+        T, B, _ = observations_seq.shape
+        device = observations_seq.device
 
-        # --- Actor部分：逐个时间步处理序列 ---
+        # 如果没有提供初始隐藏状态，则使用零状态
+        if initial_hxs is None:
+            initial_hxs = torch.zeros(B, self.gru_hidden_dim, device=device)
+
+        # --- Actor Part: Process sequence step-by-step ---
         skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()
-        actor_input = torch.cat([obs_seq, skills_onehot], dim=-1)
+        actor_input = torch.cat([observations_seq, skills_onehot], dim=-1)
         
-        # MLP处理可以一次性完成
+        # MLP processing can be done in one go
         actor_input_flat = actor_input.contiguous().view(T * B, -1)
         actor_features_flat = self.actor_mlp(actor_input_flat)
         gru_input = actor_features_flat.contiguous().view(T, B, -1)
 
-        # 逐个时间步展开GRU
-        hidden_states = initial_hxs  # 形状: (B, H)
+        # Unroll GRU step-by-step
+        hidden_states = initial_hxs  # Shape: (B, H)
         all_gru_outputs = []
         
-        if dones_seq.dim() == 2:
+        if dones_seq is not None and dones_seq.dim() == 2:
             dones_seq = dones_seq.unsqueeze(-1)
 
         for t in range(T):
-            # 掩码会在上一个时间步为'done'的情况下重置隐藏状态
-            mask = (1.0 - dones_seq[t-1]) if t > 0 else torch.ones_like(dones_seq[0])
-            hidden_states = hidden_states * mask
+            # Mask resets hidden state if the previous step was 'done'
+            if dones_seq is not None and t > 0:
+                mask = (1.0 - dones_seq[t-1])
+                hidden_states = hidden_states * mask
             
-            # --- 核心修正 ---
-            # 1. 为GRU调整输入形状：(B, H) -> (1, B, H)
+            # --- Core Fix ---
+            # 1. Reshape input for GRU: (B, H) -> (1, B, H)
             gru_input_t = gru_input[t].unsqueeze(0)
             
-            # 2. 为GRU调整隐藏状态形状：(B, H) -> (1, B, H)
+            # 2. Reshape hidden state for GRU: (B, H) -> (1, B, H)
             hidden_states_t = hidden_states.unsqueeze(0)
             
-            # GRU进行单步计算
+            # GRU single step computation
             gru_output_t, new_hidden_states_t = self.actor_gru(gru_input_t, hidden_states_t)
             
-            # 3. 将输出形状还原以用于下一步循环
+            # 3. Squeeze output shape back for the next loop iteration
             hidden_states = new_hidden_states_t.squeeze(0)
             all_gru_outputs.append(gru_output_t.squeeze(0))
 
-        gru_output = torch.stack(all_gru_outputs)  # 形状: (T, B, H)
+        gru_output = torch.stack(all_gru_outputs)  # Shape: (T, B, H)
 
-        # --- 剩余部分逻辑不变 ---
+        # --- Rest of the logic is unchanged ---
         gru_output_flat = gru_output.contiguous().view(T * B, -1)
         action_mean = torch.tanh(self.action_mean(gru_output_flat)) * self.config.action_bound
         action_log_std = torch.clamp(self.action_log_std(gru_output_flat), min=-10.0, max=2.0)
@@ -1181,7 +1185,7 @@ class SkillDiscoverer(nn.Module):
         log_probs = log_probs_flat.contiguous().view(T, B)
         entropy = action_dist.entropy().sum(dim=-1).mean()
 
-        # --- Critic部分 (保持不变) ---
+        # --- Critic Part (Unchanged) ---
         global_states_flat = global_states_seq.contiguous().view(T * B, -1)
         team_skills_flat = team_skills_seq.contiguous().view(T * B)
         values_flat, _ = self.get_value(global_states_flat, team_skills_flat)

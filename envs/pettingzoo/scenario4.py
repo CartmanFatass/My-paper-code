@@ -56,6 +56,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         randomize_users=True,  # 是否随机化用户簇中心
         randomize_uav_start=True,  # 是否随机化无人机起始区域
         aclr_db=45,  # 邻道泄漏比 (Adjacent Channel Leakage Ratio) in dB
+        test_reward_mode=False,
     ):
         super().__init__()
 
@@ -92,6 +93,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.randomize_bs = randomize_bs
         self.randomize_users = randomize_users
         self.randomize_uav_start = randomize_uav_start
+        self.test_reward_mode = test_reward_mode
         
         # 通信参数
         self.carrier_frequency = 2e9
@@ -113,8 +115,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.agents = self.possible_agents.copy()
 
         # 观测和动作空间
-        # obs_dim: 3(自身位置) + N_user*3(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数) + 1(跳数)
-        self.obs_dim = 3 + max_observed_users * 3 + max_observed_uavs * 4 + max_observed_bs * 4 + 1 + 1
+        # obs_dim: 3(自身位置) + 3(最近邻无人机) + N_user*3(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数) + 1(跳数)
+        self.obs_dim = 3 + 3 + max_observed_users * 3 + max_observed_uavs * 4 + max_observed_bs * 4 + 1 + 1
         self.observation_spaces = {
             agent: Dict({
                 "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
@@ -486,31 +488,45 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _calculate_individual_distance_overlap_penalties(self):
         """
-        Calculates an individual distance-based overlap penalty for EACH agent.
-        This provides a decentralized and more direct learning signal.
+        计算每个智能体的个体距离重叠惩罚（增强版）。
+        这个函数提供了一个去中心化且更直接的学习信号。
 
-        Returns:
-            individual_penalties (np.ndarray): An array of shape (n_uavs,)
-                                               containing the penalty for each agent.
+        返回:
+            individual_penalties (np.ndarray): 形状为 (n_uavs,) 的数组，
+                                               包含每个智能体的惩罚值。
         """
         individual_penalties = np.zeros(self.n_uavs)
-        service_radius = self.observation_radius / 4.0  # e.g., 150m
+        # 增加惩罚乘数，使其在奖励信号中更显著
+        penalty_multiplier = getattr(self, 'proximity_penalty_multiplier', 5.0)
+        
+        # 定义一个安全距离，小于此距离将受到惩罚
+        # 使用观测半径的1/3作为基础安全距离，例如 600/3 = 200m
+        safety_radius = self.observation_radius / 3.0
 
         for i in range(self.n_uavs):
             min_dist_to_neighbor = float('inf')
-            # Find the distance to the nearest neighbor for agent i
+            
+            # 找到智能体i的最近邻居
             for j in range(self.n_uavs):
                 if i == j:
                     continue
+                # 使用2D距离进行计算，因为主要关注水平分散
                 dist = np.linalg.norm(self.uav_positions[i, :2] - self.uav_positions[j, :2])
                 if dist < min_dist_to_neighbor:
                     min_dist_to_neighbor = dist
 
-            # Apply penalty if the nearest neighbor is too close
-            if min_dist_to_neighbor < 2 * service_radius:
-                # Use a smooth quadratic function. The penalty is highest at dist=0.
-                penalty = (1 - min_dist_to_neighbor / (2 * service_radius)) ** 2
-                individual_penalties[i] = penalty
+            # 如果最近邻居距离过近，则施加惩罚
+            if min_dist_to_neighbor < safety_radius:
+                # 使用更平滑且在接近零时梯度更大的惩罚函数
+                # 当距离为0时，惩罚为1；当距离为safety_radius时，惩罚为0
+                # (1 - x)^2 在 x 接近1时梯度较小，(1 - x^0.5) 在 x 接近1时梯度更大
+                normalized_dist = min_dist_to_neighbor / safety_radius
+                penalty = (1 - np.sqrt(normalized_dist))
+                
+                # 应用惩罚乘数
+                individual_penalties[i] = penalty * penalty_multiplier
+                
+        return individual_penalties
         
     def _init_uav_positions(self):
         """
@@ -525,6 +541,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         if self.uav_init_mode == "start_area":
             return self._init_uav_positions_start_area()
+        elif self.uav_init_mode == "hybrid_test":
+            return self._init_uav_positions_hybrid_test()
         else:
             # 'random' 模式：在整个区域内随机分布
             uav_positions = np.zeros((self.n_uavs, 3))
@@ -535,6 +553,62 @@ class UAVForcedRelayEnv(ParallelEnv):
                     self.height_range[0]  # 固定为最小高度（50m）
                 ]
             return uav_positions
+    
+    def _init_uav_positions_hybrid_test(self):
+        """
+        混合初始化模式，用于严格测试分散行为。
+        一半无人机在角落密集出生，另一半随机分布。
+        """
+        uav_positions = np.zeros((self.n_uavs, 3))
+        
+        # 计算集群中的无人机数量
+        num_in_cluster = self.n_uavs // 2
+        
+        # --- 1. 生成集群中的无人机 ---
+        # (复用 _init_uav_positions_start_area 的逻辑)
+        margin = 50
+        max_start_area_size = min(self.uav_start_area_size, self.area_size / 2 - margin)
+        start_x_min = margin
+        start_y_min = margin
+        start_x_max = start_x_min + max_start_area_size
+        start_y_max = start_y_min + max_start_area_size
+        
+        grid_size = int(np.ceil(np.sqrt(num_in_cluster)))
+        
+        cluster_idx = 0
+        for i in range(grid_size):
+            for j in range(grid_size):
+                if cluster_idx >= num_in_cluster:
+                    break
+                
+                if grid_size == 1:
+                    x = (start_x_min + start_x_max) / 2
+                    y = (start_y_min + start_y_max) / 2
+                else:
+                    x = start_x_min + (start_x_max - start_x_min) * (i + 0.5) / grid_size
+                    y = start_y_min + (start_y_max - start_y_min) * (j + 0.5) / grid_size
+                
+                x_offset = self.np_random.uniform(-20, 20)
+                y_offset = self.np_random.uniform(-20, 20)
+                
+                x = np.clip(x + x_offset, 10, self.area_size - 10)
+                y = np.clip(y + y_offset, 10, self.area_size - 10)
+                z = self.height_range[0]
+                
+                uav_positions[cluster_idx] = [x, y, z]
+                cluster_idx += 1
+            if cluster_idx >= num_in_cluster:
+                break
+
+        # --- 2. 生成随机分布的无人机 ---
+        for i in range(num_in_cluster, self.n_uavs):
+            uav_positions[i] = [
+                self.np_random.uniform(0, self.area_size),
+                self.np_random.uniform(0, self.area_size),
+                self.height_range[0]
+            ]
+            
+        return uav_positions
     
     def _init_uav_positions_start_area(self):
         """
@@ -1135,10 +1209,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 7. 计算纯净的全局共享奖励
         shared_global_reward = self._compute_reward()
 
-        # 【核心修改】所有智能体接收完全相同的纯净团队奖励
-        # 不添加任何个体塑形奖励或探索奖励
-        final_shared_reward = shared_global_reward
-
         # 11. 更新步数并检查终止/截断条件
         self.current_step += 1
         # 检查是否因为达到最大步数而被截断
@@ -1153,12 +1223,23 @@ class UAVForcedRelayEnv(ParallelEnv):
         truncations = {}
         infos = {}
         
+        # 根据模式计算奖励
+        if self.test_reward_mode:
+            penalties = self._calculate_individual_distance_overlap_penalties()
+            # 【修复】计算平均惩罚，并将其作为共享奖励信号
+            mean_penalty = np.mean(penalties)
+            shared_reward = -mean_penalty
+            for agent in self.agents:
+                rewards[agent] = shared_reward
+        else:
+            # 原始奖励逻辑
+            final_shared_reward = shared_global_reward
+            for agent in self.agents:
+                rewards[agent] = final_shared_reward
+
         # 13. 获取新的观测并填充返回值
         for agent_idx, agent in enumerate(self.agents):
             observations[agent] = self._get_observation(agent)
-            
-            # 将 final_shared_reward 赋值给所有 agent
-            rewards[agent] = final_shared_reward
 
             # 【核心修正】正确设置 termination 和 truncation
             terminations[agent] = is_terminated
@@ -1166,7 +1247,11 @@ class UAVForcedRelayEnv(ParallelEnv):
             
             # 更新 info
             agent_reward_info = self.reward_info.copy()
-            agent_reward_info["final_agent_reward"] = final_shared_reward
+            if self.test_reward_mode:
+                agent_reward_info["final_agent_reward"] = rewards[agent]
+                agent_reward_info["proximity_penalty"] = -rewards[agent]
+            else:
+                agent_reward_info["final_agent_reward"] = rewards[agent]
 
             infos[agent] = {
                 "reward_info": agent_reward_info,
@@ -1253,6 +1338,28 @@ class UAVForcedRelayEnv(ParallelEnv):
         normalized_position[:2] /= self.area_size
         normalized_position[2] = (own_position[2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])
         obs_components.append(normalized_position)
+
+        # 1.5. 最近邻无人机信息 (3维) - 新增的关键信息
+        nearest_uav_obs = np.zeros(3)
+        min_dist_to_neighbor = float('inf')
+        nearest_neighbor_pos = None
+
+        for other_idx in range(self.n_uavs):
+            if other_idx == agent_idx:
+                continue
+            dist = np.linalg.norm(own_position - self.uav_positions[other_idx])
+            if dist < min_dist_to_neighbor:
+                min_dist_to_neighbor = dist
+                nearest_neighbor_pos = self.uav_positions[other_idx]
+
+        if nearest_neighbor_pos is not None:
+            # 归一化距离
+            normalized_dist = min_dist_to_neighbor / self.area_size
+            # 归一化相对位置 (x, y)
+            relative_pos = (nearest_neighbor_pos[:2] - own_position[:2]) / self.area_size
+            nearest_uav_obs = np.array([normalized_dist, relative_pos[0], relative_pos[1]])
+        
+        obs_components.append(nearest_uav_obs)
         
         # 2. 局部用户观测 (max_observed_users * 3维)
         local_users = self._get_local_users(agent_idx)

@@ -415,108 +415,164 @@ class HMASDAgent:
         
         return team_skill.item(), agent_skills.squeeze(0).cpu().numpy(), log_probs
     
-    def step(self, state, observations, ep_t, deterministic=False, env_id=0):
+    def _batched_assign_skills(self, states_batch, observations_batch, env_steps_batch, dones_batch, deterministic=False):
         """
-        执行一个环境步骤
-        
-        参数:
-            state: 全局状态 [state_dim]
-            observations: 所有智能体的观测 [n_agents, obs_dim]
-            ep_t: 当前episode中的时间步
-            deterministic: 是否使用确定性策略（用于评估）
-            env_id: 环境ID，用于多环境并行训练
-            
-        返回:
-            actions: 所有智能体的动作 [n_agents, action_dim]
-            info: 额外信息，如当前技能
+        [新方法] 为一批环境分配技能。
+        只为需要更新的环境运行神经网络。
         """
-        # 启用自动求导异常检测，帮助查找梯度计算失败的操作
-        #torch.autograd.set_detect_anomaly(True)
+        num_envs = states_batch.shape[0]
         
-        # 确保环境ID已初始化
-        if env_id not in self.env_timers:
-            self.env_reward_sums[env_id] = 0.0
-            self.env_timers[env_id] = 0
-            self.env_team_skills[env_id] = 0  # 使用有效的默认值而不是None
-            self.env_agent_skills[env_id] = np.zeros(self.config.n_agents, dtype=int)  # 使用有效的默认值
-            self.env_log_probs[env_id] = None
-            self.env_hidden_states[env_id] = None
-            main_logger.debug(f"初始化环境 {env_id} 的状态")
+        # 找出哪些环境需要重新分配技能 (技能周期结束 或 环境刚重置)
+        needs_reassignment_mask = (env_steps_batch % self.config.k == 0) | dones_batch
+        indices_to_update = np.where(needs_reassignment_mask)[0]
 
-        # 获取或初始化环境特定的状态
-        current_team_skill = self.env_team_skills.get(env_id, self.current_team_skill)
-        current_agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
-        env_timer = self.env_timers.get(env_id, 0)
-        
-        # 判断是否需要重新分配技能
-        # 检查是否是标记值（需要重新分配）或常规重新分配条件
-        needs_reassignment = (ep_t % self.config.k == 0 or 
-                            current_team_skill is None or 
-                            current_team_skill == -1)
-        
-        main_logger.debug(f"step: env_id={env_id}, ep_t={ep_t}, k={self.config.k}, ep_t % k = {ep_t % self.config.k}, current_team_skill={current_team_skill}, needs_reassignment={needs_reassignment}")
-        
-        if needs_reassignment:
-            # 初始化环境特定的累积奖励（如果不存在）
-            if env_id not in self.env_reward_sums:
-                self.env_reward_sums[env_id] = 0.0
-            # 注意：不在这里重置累积奖励！重置应该在存储高层经验之后进行
-                
-            # 分配新技能
-            team_skill, agent_skills, log_probs = self.assign_skills(state, observations, deterministic)
-            
-            # 更新环境特定的状态
-            self.env_team_skills[env_id] = team_skill
-            self.env_agent_skills[env_id] = agent_skills
-            self.env_log_probs[env_id] = log_probs
-            self.env_timers[env_id] = 0
-            
-            # 同时更新全局状态（用于兼容性）
-            if env_id == 0:  # 只有环境0更新全局状态
-                self.current_team_skill = team_skill
-                self.current_agent_skills = agent_skills
-                self.current_log_probs = log_probs
-                self.skill_change_timer = 0
-                # self.current_high_level_reward_sum = 0.0 # 正确的重置已在_store_coordinator_experience中完成
-                # self.accumulated_rewards = 0.0 # 正确的重置已在_store_coordinator_experience中完成
-            
-            skill_changed = True
-            main_logger.debug(f"环境{env_id}技能已更新: team_skill={team_skill}, timer重置为0")
+        # 准备最终的技能批次，默认为当前技能
+        new_team_skills_batch = np.array([self.env_team_skills.get(i, -1) for i in range(num_envs)], dtype=int)
+        new_agent_skills_batch = np.array([self.env_agent_skills.get(i, np.full(self.config.n_agents, -1)) for i in range(num_envs)], dtype=int)
+        new_log_probs_batch = [self.env_log_probs.get(i, {}) for i in range(num_envs)]
 
-            # 更新技能使用计数（只有环境0更新全局计数）
-            if env_id == 0:
-                # 初始化 agent skill counts 列表（如果尚未初始化或智能体数量已更改）
-                if not self.episode_agent_skill_counts or len(self.episode_agent_skill_counts) != len(agent_skills):
-                    self.episode_agent_skill_counts = [{} for _ in range(len(agent_skills))]
+        if len(indices_to_update) > 0:
+            # 提取需要更新的状态和观测
+            states_to_process = torch.FloatTensor(states_batch[indices_to_update]).to(self.device)
+            obs_to_process = torch.FloatTensor(observations_batch[indices_to_update]).to(self.device)
 
-                # 记录团队技能
-                self.episode_team_skill_counts[team_skill] = self.episode_team_skill_counts.get(team_skill, 0) + 1
-                # 记录个体技能
-                for i, agent_skill in enumerate(agent_skills):
-                    self.episode_agent_skill_counts[i][agent_skill] = self.episode_agent_skill_counts[i].get(agent_skill, 0) + 1
-        else:
-            self.env_timers[env_id] += 1
-            # 同时更新全局计时器（用于兼容性）
-            if env_id == 0:
-                self.skill_change_timer += 1
-            skill_changed = False
-            main_logger.debug(f"环境{env_id}技能未更新: timer增加到{self.env_timers[env_id]}")
+            # 批量运行 SkillCoordinator
+            with torch.no_grad():
+                team_skills, agent_skills, Z_logits, z_logits, _, _ = self.skill_coordinator(
+                    states_to_process, obs_to_process, deterministic
+                )
             
-        # 选择动作，使用环境特定的技能，并传递真实的全局状态
-        actions, action_logprobs, values = self.select_action(observations, self.env_agent_skills[env_id], deterministic, env_id, state)
+            # 将新技能放回正确的位置
+            for i, env_idx in enumerate(indices_to_update):
+                # 计算log_probs
+                Z_dist = torch.distributions.Categorical(logits=Z_logits[i])
+                z_log_probs_list = []
+                for agent_i in range(self.config.n_agents):
+                    zi_dist = torch.distributions.Categorical(logits=z_logits[agent_i][i])
+                    z_log_probs_list.append(zi_dist.log_prob(agent_skills[i, agent_i]).item())
+
+                log_probs = {
+                    'team_log_prob': Z_dist.log_prob(team_skills[i]).item(),
+                    'agent_log_probs': z_log_probs_list
+                }
+
+                # 更新该环境的状态
+                new_team_skills_batch[env_idx] = team_skills[i].item()
+                new_agent_skills_batch[env_idx] = agent_skills[i].cpu().numpy()
+                new_log_probs_batch[env_idx] = log_probs
+                self.env_timers[env_idx] = 0 # 重置计时器
         
-        info = {
-            'team_skill': self.env_team_skills[env_id],
-            'agent_skills': self.env_agent_skills[env_id],
-            'action_logprobs': action_logprobs,
-            'values': values,  # 将values也放入info，方便传递
-            'skill_changed': skill_changed,
-            'skill_timer': self.env_timers[env_id],
-            'log_probs': self.env_log_probs[env_id],
-            'env_id': env_id
-        }
+        # 增加未更新环境的计时器
+        indices_not_updated = np.where(~needs_reassignment_mask)[0]
+        for env_idx in indices_not_updated:
+            self.env_timers[env_idx] = self.env_timers.get(env_idx, 0) + 1
+
+        # 更新智能体的内部状态
+        for i in range(num_envs):
+            self.env_team_skills[i] = new_team_skills_batch[i]
+            self.env_agent_skills[i] = new_agent_skills_batch[i]
+            self.env_log_probs[i] = new_log_probs_batch[i]
+            
+        return new_team_skills_batch, new_agent_skills_batch, new_log_probs_batch
+
+    def _batched_select_action(self, states_batch, observations_batch, agent_skills_batch, team_skills_batch, dones_batch, deterministic=False):
+        """
+        [最终修正版] 为一批环境选择动作，并正确计算价值估计。
+        """
+        num_envs, n_agents, _ = observations_batch.shape
         
-        return actions, info
+        # 1. 获取或初始化批量的隐藏状态 (这部分逻辑保持不变)
+        hidden_states_batch = np.zeros((num_envs, n_agents, self.config.gru_hidden_size), dtype=np.float32)
+        for i in range(num_envs):
+            if i in self.env_hidden_states and self.env_hidden_states[i] is not None:
+                hidden_states_batch[i] = self.env_hidden_states[i].cpu().numpy()
+
+        hidden_states_batch[dones_batch] = 0.0
+
+        # 2. 准备批量输入 (这部分逻辑保持不变)
+        obs_flat = observations_batch.reshape(-1, self.config.obs_dim)
+        skills_flat = agent_skills_batch.reshape(-1)
+        hidden_states_flat = hidden_states_batch.reshape(-1, self.config.gru_hidden_size)
+
+        obs_tensor = torch.FloatTensor(obs_flat).to(self.device)
+        skills_tensor = torch.LongTensor(skills_flat).to(self.device)
+        hidden_tensor = torch.FloatTensor(hidden_states_flat).to(self.device)
+        
+        with torch.no_grad():
+            # 3. 批量运行 Actor 网络获取动作 (这部分逻辑保持不变)
+            actions_flat, logprobs_flat, _, new_hidden_flat = self.skill_discoverer(
+                obs_tensor, skills_tensor, hidden_tensor, deterministic
+            )
+
+            # ======================= ▼▼▼ 核心修复点 ▼▼▼ =======================
+            # 4. 批量运行 Critic 网络获取价值估计 V(s, Z)
+            #    为批次中的每个智能体提供其对应的全局状态和团队技能
+            states_expanded = np.repeat(states_batch, n_agents, axis=0)
+            team_skills_expanded = np.repeat(team_skills_batch, n_agents, axis=0)
+            
+            states_tensor = torch.FloatTensor(states_expanded).to(self.device)
+            team_skills_tensor = torch.LongTensor(team_skills_expanded).to(self.device)
+            
+            # 从 Critic 获取价值估计 - 这是被切断的关键信号！
+            values_flat, _ = self.skill_discoverer.get_value(states_tensor, team_skills_tensor)
+            # ======================= ▲▲▲ 核心修复点 ▲▲▲ =======================
+            
+        # 5. Reshape back (这部分逻辑保持不变)
+        actions_batch = actions_flat.cpu().numpy().reshape(num_envs, n_agents, self.config.action_dim)
+        logprobs_batch = logprobs_flat.cpu().numpy().reshape(num_envs, n_agents)
+        new_hidden_batch = new_hidden_flat.reshape(num_envs, n_agents, self.config.gru_hidden_size)
+        
+        # 6. 【重要】将计算出的价值也 Reshape 并准备返回
+        values_batch = values_flat.cpu().numpy().reshape(num_envs, n_agents)
+        
+        # 7. 更新内部隐藏状态 (这部分逻辑保持不变)
+        for i in range(num_envs):
+            self.env_hidden_states[i] = new_hidden_batch[i]
+            
+        # 8. 【重要】在返回值中包含正确的 values_batch
+        return actions_batch, logprobs_batch, values_batch
+
+    def step(self, states_batch, observations_batch, env_steps_batch, dones_batch, deterministic=False):
+        """
+        [重构后的核心方法] 为所有并行环境执行一个完整的、批量的步骤。
+        这个方法将由训练循环在每一步调用一次。
+        """
+        num_envs = states_batch.shape[0]
+        
+        # 初始化环境状态（如果需要）
+        for i in range(num_envs):
+            if i not in self.env_timers:
+                self.env_timers[i] = 0
+                self.env_team_skills[i] = -1
+                self.env_agent_skills[i] = np.full(self.config.n_agents, -1)
+                self.env_log_probs[i] = {}
+                self.env_hidden_states[i] = None
+
+        # 1. 批量分配技能
+        team_skills, agent_skills, log_probs_list = self._batched_assign_skills(
+            states_batch, observations_batch, env_steps_batch, dones_batch, deterministic
+        )
+
+        # 2. 批量选择动作
+        actions, action_logprobs, values = self._batched_select_action(
+            states_batch, observations_batch, agent_skills, team_skills, dones_batch, deterministic
+        )
+        
+        # 3. 准备info字典列表
+        infos_list = []
+        for i in range(num_envs):
+            infos_list.append({
+                'team_skill': team_skills[i],
+                'agent_skills': agent_skills[i],
+                'action_logprobs': action_logprobs[i],
+                'values': values[i],
+                'skill_changed': (env_steps_batch[i] % self.config.k == 0) or dones_batch[i],
+                'skill_timer': self.env_timers[i],
+                'log_probs': log_probs_list[i],
+                'env_id': i
+            })
+            
+        return actions, infos_list
     
 
     
@@ -585,14 +641,16 @@ class HMASDAgent:
         return True
 
 
-    def _store_discoverer_experience(self, state, observations, actions, rewards, dones, values, 
+    def _store_discoverer_experience(self, state, next_state, observations, next_observations, actions, rewards, dones, values, 
                                    action_logprobs, team_skill, agent_skills, env_id, rollout_step_idx=None):
         """
         存储低层策略经验到discoverer rollout缓冲区
         
         参数:
-            state: 当前全局状态 [state_dim] (修复：使用当前状态而非下一状态)
-            observations: 所有智能体的当前观测 [n_agents, obs_dim] (修复：使用当前观测而非下一观测)
+            state: 当前全局状态 [state_dim]
+            next_state: 下一全局状态 [state_dim] (新增)
+            observations: 所有智能体的当前观测 [n_agents, obs_dim]
+            next_observations: 所有智能体的下一观测 [n_agents, obs_dim] (新增)
             actions: 所有智能体的动作 [n_agents, action_dim]
             rewards: 环境奖励（标量, 现在是全局共享奖励）
             dones: 是否结束 [n_agents]
@@ -615,10 +673,10 @@ class HMASDAgent:
         ind_disc_rewards_array = np.zeros(n_agents)
         
         for i in range(n_agents):
-            # 【重要修复】使用当前观测而非下一观测计算内在奖励
-            # 这确保决策时和训练时看到的数据特征一致
+            # 【重要修复】使用下一状态和下一观测计算内在奖励，与论文保持一致
+            # 这确保了奖励是基于动作的直接后果
             intrinsic_reward, env_comp, team_disc_comp, ind_disc_comp = self._compute_intrinsic_reward(
-                state, rewards, observations[i], team_skill, agent_skills[i]
+                next_state, rewards, next_observations[i], team_skill, agent_skills[i]
             )
             
             main_logger.debug(f"Reward components for agent {i}: env={env_comp:.6f}, team_disc={team_disc_comp:.6f}, ind_disc={ind_disc_comp:.6f}")
@@ -690,7 +748,9 @@ class HMASDAgent:
             rollout_step_idx: 当前rollout的步数索引 (关键修复)
         """
         # 判断是否应该存储高层经验
-        should_store_high_level = (skill_timer == self.config.k - 1) or dones or force_collection
+        # 修复：正确处理dones数组
+        any_done = np.any(dones) if hasattr(dones, '__iter__') else bool(dones)
+        should_store_high_level = (skill_timer == self.config.k - 1) or any_done or force_collection
         
         if not should_store_high_level:
             return False
@@ -702,7 +762,7 @@ class HMASDAgent:
         reason = "未知原因"
         if skill_timer == self.config.k - 1:
             reason = "技能周期结束"
-        elif dones:
+        elif any_done:
             reason = "环境终止"
         elif force_collection:
             reason = "强制收集"
@@ -711,7 +771,17 @@ class HMASDAgent:
         with torch.no_grad():
             state_tensor_for_value = torch.FloatTensor(state).unsqueeze(0).to(self.device)
             obs_tensor_for_value = torch.FloatTensor(observations).unsqueeze(0).to(self.device)
-            high_level_value, _, _ = self.skill_coordinator.get_value(state_tensor_for_value, obs_tensor_for_value)
+            state_val, agent_vals, _ = self.skill_coordinator.get_value(state_tensor_for_value, obs_tensor_for_value)
+            
+            # 【修复】将全局状态价值与所有智能体价值的平均值相加
+            if agent_vals is not None and len(agent_vals) > 0:
+                # agent_vals 是一个张量列表，将它们堆叠起来然后计算均值
+                agent_vals_tensor = torch.stack(agent_vals)
+                mean_agent_val = agent_vals_tensor.mean()
+                high_level_value = state_val + mean_agent_val
+            else:
+                high_level_value = state_val
+
             high_level_value_np = high_level_value.squeeze().cpu().numpy()
 
         # 计算联合log概率
@@ -797,9 +867,9 @@ class HMASDAgent:
                           f"当前步奖励={current_reward:.4f}, 此环境累积高层奖励={self.env_reward_sums[env_id]:.4f}")
         
         # 1. 存储低层策略经验并获取奖励组成
-        # 【重要修复】传递当前状态和观测而非下一状态和观测
+        # 【重要修复】传递下一状态和下一观测以正确计算内在奖励
         returned_reward_components = self._store_discoverer_experience(
-            state, observations, actions, current_reward, dones, values, 
+            state, next_state, observations, next_observations, actions, current_reward, dones, values, 
             action_logprobs, team_skill, agent_skills, env_id, rollout_step_idx
         )
         
@@ -1025,11 +1095,19 @@ class HMASDAgent:
             entropy = total_entropy_per_sample.mean()  # 对批次取均值，得到标量
 
             # 2. 获取当前策略下的价值估计
-            state_values, _, _ = self.skill_coordinator.get_value(states_batch, observations_batch)
-            values = state_values.squeeze(-1)  # Shape: (B,)
+            state_values, agent_values_list, _ = self.skill_coordinator.get_value(states_batch, observations_batch)
+            
+            # 【修复】将全局状态价值与所有智能体价值的平均值相加
+            if agent_values_list is not None and len(agent_values_list) > 0:
+                # agent_values_list 是一个张量列表，将它们堆叠起来然后计算均值
+                agent_values_tensor = torch.stack(agent_values_list).squeeze(-1) # Shape: (n_agents, B)
+                mean_agent_values = agent_values_tensor.mean(dim=0) # Shape: (B,)
+                values = state_values.squeeze(-1) + mean_agent_values # Shape: (B,)
+            else:
+                values = state_values.squeeze(-1)  # Shape: (B,)
 
             # 【核心改动】移除优势标准化，使用Value Normalization作为替代
-            # advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
+            advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
             
             # --- 计算PPO损失 (标准的、非序列化的) ---
             ratios = torch.exp(total_log_probs - old_log_probs_batch.detach())
@@ -1066,6 +1144,9 @@ class HMASDAgent:
             
             # 更新网络
             self.coordinator_optimizer.zero_grad()
+            if torch.isnan(loss).any() or torch.isinf(loss).any():
+                main_logger.error("Loss contains NaN or Inf! Skipping update.")
+                continue # 跳过此次更新
             loss.backward()  # 标准的PPO反向传播
             torch.nn.utils.clip_grad_norm_(self.skill_coordinator.parameters(), self.config.max_grad_norm)
             self.coordinator_optimizer.step()
@@ -1245,7 +1326,7 @@ class HMASDAgent:
             new_values_flat = new_values.reshape(-1)
             
             # 【核心改动】移除优势标准化，使用Value Normalization作为替代
-            # advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
+            advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
             
             # --- 计算PPO损失（在展平后的数据上） ---
             ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
@@ -1277,6 +1358,9 @@ class HMASDAgent:
             
             # 更新网络
             self.discoverer_optimizer.zero_grad()
+            if torch.isnan(loss).any() or torch.isinf(loss).any():
+                main_logger.error("Loss contains NaN or Inf! Skipping update.")
+                continue # 跳过此次更新
             loss.backward()  # <--- 这一步会通过整个序列反向传播！实现真正的BPTT
             torch.nn.utils.clip_grad_norm_(self.skill_discoverer.parameters(), self.config.max_grad_norm)
             self.discoverer_optimizer.step()

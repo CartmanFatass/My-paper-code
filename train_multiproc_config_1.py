@@ -1523,6 +1523,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'max_connections': config.max_connections,
                 'uav_init_mode': config.uav_init_mode,
                 'uav_start_area_size': config.uav_start_area_size,
+                'test_reward_mode': config.test_reward_mode
             }
             
             # 将场景4的参数合并到通用参数中
@@ -1690,103 +1691,55 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     # 严格on-policy训练循环
     rollout_steps = 0  # 当前rollout中的步数
     
+    # 环境状态跟踪 (现在是批量的)
+    env_steps = np.zeros(num_envs, dtype=int)
+    dones_tracker = np.zeros(num_envs, dtype=bool) # 跟踪上一步的dones
+    episode_rewards_tracker = np.zeros(num_envs, dtype=np.float32)
+
     while total_steps < config.total_timesteps:
-        # 收集rollout数据
+        # --- Start of NEW, CORRECTED & BATCHED Rollout Loop ---
         for rollout_step in range(config.rollout_length):
-            # 代理为所有环境选择动作
-            all_actions_list = []
-            all_agent_infos_list = []
+            
+            # 1. 批量选择动作 (只调用一次 agent.step)
+            # 传递上一步的 dones_tracker 以便正确重置内部状态
+            actions_batch, infos_batch = agent.step(
+                states, observations, env_steps, dones_tracker, deterministic=False
+            )
+            
+            # 2. 批量执行环境步骤
+            next_observations, rewards, dones, infos = vec_env.step(actions_batch)
 
-            for i in range(num_envs):
-                # 代理选择动作
-                actions, agent_info = agent.step(states[i], observations[i], env_steps[i], deterministic=False, env_id=i)
-                all_actions_list.append(actions)
-                all_agent_infos_list.append(agent_info)
-
-            # 将动作列表转换为 NumPy 数组
-            actions_array = np.array(all_actions_list)
-
-            # 执行动作
-            next_observations, rewards, dones, infos = vec_env.step(actions_array)
-
-            # 从 infos 提取 next_states
+            # 3. 批量提取下一个状态
             next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
 
-            # 简化奖励处理，直接使用环境原始奖励，与agent.py逻辑保持一致
-            reward_components_list = []
-            
+            # 4. 批量存储经验 (循环是正确的，因为它不涉及神经网络)
             for i in range(num_envs):
-                # 提取奖励组成部分（用于详细记录和分析）
-                reward_components = infos[i].get('reward_components', {})
-                reward_components_list.append(reward_components)
-
-            # 存储经验到缓冲区
-            for i in range(num_envs):
-                current_agent_info = all_agent_infos_list[i]
-                skill_timer_value = env_skill_durations[i]
-                
-                # 从agent_info中提取values（新的agent.py API）
-                values = current_agent_info.get('values', None)
-                
-                # 使用环境原始奖励，与agent.py逻辑保持一致
-                returned_reward_components = agent.store_transition(
-                    states[i], next_states[i], observations[i], next_observations[i],
-                    actions_array[i], rewards[i], dones[i], current_agent_info['team_skill'],
-                    current_agent_info['agent_skills'], current_agent_info['action_logprobs'],
-                    values=values,
-                    log_probs=current_agent_info['log_probs'],
-                    skill_timer_for_env=skill_timer_value,
+                agent.store_transition(
+                    state=states[i], 
+                    next_state=next_states[i], 
+                    observations=observations[i], 
+                    next_observations=next_observations[i],
+                    actions=actions_batch[i], 
+                    rewards=rewards[i], 
+                    dones=dones[i],
+                    team_skill=infos_batch[i]['team_skill'],
+                    agent_skills=infos_batch[i]['agent_skills'],
+                    action_logprobs=infos_batch[i]['action_logprobs'],
+                    values=infos_batch[i]['values'], # value现在来自agent.step
+                    log_probs=infos_batch[i]['log_probs'],
+                    skill_timer_for_env=infos_batch[i]['skill_timer'],
                     env_id=i,
-                    rollout_step_idx=rollout_step  # 【修复】传递正确的rollout步数索引
+                    rollout_step_idx=rollout_step
                 )
 
-                # 更新技能持续时间
-                if dones[i]:
-                    env_skill_durations[i] = 0
-                elif skill_timer_value == config.k - 1:
-                    env_skill_durations[i] = 0
-                elif current_agent_info['skill_changed']:
-                    env_skill_durations[i] = 0
-                else:
-                    env_skill_durations[i] += 1
-
-                # 更新环境状态跟踪
+                # 更新追踪器
                 env_steps[i] += 1
-                # 使用环境原始奖励累积
-                env_rewards[i] += rewards[i]
+                episode_rewards_tracker[i] += rewards[i]
 
-                # 使用增强的奖励追踪器记录训练步骤
-                if args.detailed_logging:
-                    # 使用从 store_transition 返回的奖励组成部分
-                    reward_tracker.log_training_step(
-                        step=total_steps - num_envs + i + 1,
-                        env_id=i,
-                        reward=rewards[i],  # 【修复】记录原始环境奖励，而不是未定义的高层奖励
-                        reward_components=returned_reward_components,
-                        info=infos[i]
-                    )
-
-                # 记录技能使用
-                reward_tracker.log_skill_usage(
-                    step=total_steps - num_envs + i + 1,
-                    team_skill=current_agent_info['team_skill'],
-                    agent_skills=current_agent_info['agent_skills'],
-                    skill_changed=current_agent_info.get('skill_changed', False)
-                )
-
-                # 记录技能分布
-                if current_agent_info['skill_changed']:
-                    tb_manager.log_skill_distribution(
-                        current_agent_info['team_skill'],
-                        current_agent_info['agent_skills'],
-                        episode=n_episodes
-                    )
-
-                # 处理episode完成
                 if dones[i]:
                     n_episodes += 1
-                    episode_rewards.append(env_rewards[i])
-
+                    main_logger.info(f"环境 {i} 完成第 {n_episodes} 个 episode, 奖励: {episode_rewards_tracker[i]:.2f}, 步数: {env_steps[i]}")
+                    
                     # 使用增强的奖励追踪器记录episode完成
                     episode_info = {}
                     if 'global' in infos[i]:
@@ -1795,25 +1748,17 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     reward_tracker.log_episode_completion(
                         episode_num=n_episodes,
                         env_id=i,
-                        total_reward=env_rewards[i],
+                        total_reward=episode_rewards_tracker[i],
                         episode_length=env_steps[i],
                         info=episode_info
                     )
 
                     # 记录到 TensorBoard
-                    agent.training_info['episode_rewards'].append(env_rewards[i])
-                    tb_manager.log_episode_completion(n_episodes, i, env_rewards[i], env_steps[i])
-
-                    main_logger.info(f"环境 {i}/{num_envs} 完成: Episode {n_episodes}, 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}")
-
-                    # 重置环境状态跟踪
-                    env_steps[i] = 0
-                    env_rewards[i] = 0
-                    
-                    # 【修复】重置智能体中该环境的内部状态
-                    agent.reset_env_state(i)
+                    agent.training_info['episode_rewards'].append(episode_rewards_tracker[i])
+                    tb_manager.log_episode_completion(n_episodes, i, episode_rewards_tracker[i], env_steps[i])
 
                     # 奖励统计
+                    episode_rewards.append(episode_rewards_tracker[i])
                     window_size = min(config.rollout_length, len(episode_rewards))
                     if len(episode_rewards) >= window_size:
                         recent_rewards = episode_rewards[-window_size:]
@@ -1838,16 +1783,21 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                         plt.ylabel('Reward')
                         plt.savefig(os.path.join(log_dir, 'rewards.png'))
                         plt.close()
-
-            # 更新状态和观测
+                    
+                    # 重置追踪器
+                    env_steps[i] = 0
+                    episode_rewards_tracker[i] = 0
+                    agent.reset_env_state(i)
+            
+            # 5. 更新状态为下一步做准备
             states = next_states
             observations = next_observations
+            dones_tracker = dones  # 保存当前步的dones供下一步使用
             total_steps += num_envs
-            rollout_steps += 1
 
-            # 如果达到总步数限制，跳出rollout收集循环
             if total_steps >= config.total_timesteps:
                 break
+        # --- End of NEW Rollout Loop ---
 
         # --- 在更新前计算GAE和Returns (最终修正版) ---
         main_logger.debug("为低层策略(Discoverer)计算GAE...")
@@ -1865,39 +1815,31 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 
                 last_values_predicted[i, :] = global_value_tensor.squeeze().item()
 
-        # 2. 将所有价值（缓冲区内的和最后一步的）反归一化到原始奖励尺度
-        if config.use_valuenorm:
-            main_logger.info("ValueNorm已启用，正在反归一化价值以计算GAE...")
-            # a. 反归一化缓冲区中存储的价值
-            values_in_buffer_tensor = torch.from_numpy(agent.rollout_buffer.values[:rollout_steps]).to(agent.device)
-            values_in_buffer_denorm = agent._denormalize_values(values_in_buffer_tensor, agent.value_norm_discoverer)
-            
-            # b. 反归一化最后一步的价值
-            last_values_tensor = torch.from_numpy(last_values_predicted).to(agent.device)
-            last_values_denorm = agent._denormalize_values(last_values_tensor, agent.value_norm_discoverer)
-            
-            # 将反归一化后的值（numpy格式）传递给 GAE 计算
-            values_for_gae = values_in_buffer_denorm.cpu().numpy()
-            last_values_for_gae = last_values_denorm.cpu().numpy()
-        else:
-            # 如果不使用ValueNorm，直接使用Critic的原始输出
-            values_for_gae = agent.rollout_buffer.values[:rollout_steps]
-            last_values_for_gae = last_values_predicted
-
-        # 3. 调用 compute_advantages，现在所有价值都在正确的原始尺度上
-        # 使用已有的 denormalized_values 和 denormalized_last_values 参数
+        # ===================================================================
+        # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 关键修复：简化价值处理 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        # 无论是否启用ValueNorm，GAE计算都应该使用原始的、未经处理的价值。
+        # Value Normalization只在损失函数计算时使用。
+        steps_in_rollout = rollout_step + 1
+        values_for_gae = agent.rollout_buffer.values[:steps_in_rollout]
+        
+        # 3. 使用正确的 `dones` 调用 compute_advantages
+        # `dones_tracker` 保存了 rollout 最后一轮的真实终止状态
         agent.rollout_buffer.compute_advantages(
-            last_values=last_values_predicted, # 原始的预测值，用于兼容性
-            dones=np.zeros((num_envs, config.n_agents), dtype=bool), # 假设rollout结束时非终止
+            last_values=last_values_predicted, # GAE内部会处理denormalized_last_values
+            dones=dones_tracker,               # <-- 确保这里是真实的dones
             gamma=config.gamma, 
             gae_lambda=config.gae_lambda,
-            denormalized_values=values_for_gae, # 传入反归一化后的序列价值
-            denormalized_last_values=last_values_for_gae # 传入反归一化后的最后一步价值
+            denormalized_values=values_for_gae, # 传入原始价值
+            denormalized_last_values=last_values_predicted # 传入原始的最后一步价值
         )
+        # ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        # ===================================================================
 
         # Rollout数据收集完成，进行更新
+        # 修复：使用实际收集的步数，而不是可能不准确的rollout_steps变量
+        steps_in_rollout = rollout_step + 1
         try:
-            update_info = agent.update(steps_in_buffer=rollout_steps)
+            update_info = agent.update(steps_in_buffer=steps_in_rollout)
             update_times += 1
             elapsed = time.time() - start_time
 
@@ -2212,34 +2154,42 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
         while completed_episodes < n_episodes:
             loop_start_time = time.time()
             
-            # 为活跃环境选择动作
-            all_actions_list = []
-            all_agent_infos_list = [] # Store agent info for logging if needed
-
-            # 记录agent.step总时间
+            # 使用批量化的agent.step进行评估（与训练保持一致）
             agent_step_start = time.time()
-            for i in range(num_envs):
-                if active_envs[i]:
-                    # 记录每个agent.step调用的时间
-                    step_start = time.time()
-                    actions, agent_info = agent.step(states[i], observations[i], env_steps[i], deterministic=True, env_id=i)
-                    step_end = time.time()
-                    agent_step_times.append(step_end - step_start)
-                    
-                    all_actions_list.append(actions)
-                    all_agent_infos_list.append(agent_info)
+            
+            # 准备批量输入（只为活跃环境）
+            active_indices = np.where(active_envs)[0]
+            if len(active_indices) > 0:
+                # 提取活跃环境的状态和观测
+                active_states = states[active_indices]
+                active_observations = observations[active_indices] 
+                active_env_steps = env_steps[active_indices]
+                active_dones = np.zeros(len(active_indices), dtype=bool)  # 评估中不使用dones重置
+                
+                # 批量调用agent.step
+                active_actions_batch, active_infos_batch = agent.step(
+                    active_states, active_observations, active_env_steps, active_dones, deterministic=True
+                )
+                
+                # 重新组装为完整的actions数组
+                actions_array = np.zeros((num_envs,) + vec_env.action_space.shape)
+                all_agent_infos_list = [{}] * num_envs  # 初始化为空字典
+                
+                for idx, env_i in enumerate(active_indices):
+                    actions_array[env_i] = active_actions_batch[idx]
+                    all_agent_infos_list[env_i] = active_infos_batch[idx]
                     
                     # 收集技能分布信息
-                    all_team_skills.append(agent_info['team_skill'])
-                    all_agent_skills.append(agent_info['agent_skills'])
-                else:
-                    # Append dummy action if env is already done for this eval round
-                    all_actions_list.append(np.zeros(vec_env.action_space.shape[1:])) # Use action space shape
-                    all_agent_infos_list.append({}) # Dummy info
+                    all_team_skills.append(active_infos_batch[idx]['team_skill'])
+                    all_agent_skills.append(active_infos_batch[idx]['agent_skills'])
+            else:
+                # 如果没有活跃环境，创建空的actions数组
+                actions_array = np.zeros((num_envs,) + vec_env.action_space.shape[1:])
+                all_agent_infos_list = [{}] * num_envs
+            
             agent_step_end = time.time()
             agent_step_total = agent_step_end - agent_step_start
-
-            actions_array = np.array(all_actions_list)
+            agent_step_times.append(agent_step_total)
 
             # 执行动作并记录环境步进时间
             env_step_start = time.time()

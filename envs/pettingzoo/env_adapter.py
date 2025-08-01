@@ -367,6 +367,14 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             print(f"获取环境状态时出错: {e}")
             return {}
 
+    def _get_state(self):
+        """获取全局状态"""
+        try:
+            return self.env._get_state()
+        except AttributeError:
+            # 如果底层环境没有_get_state方法，抛出明确错误
+            raise AttributeError(f"Environment {type(self.env).__name__} does not have a '_get_state' method")
+
     def close(self):
         """Closes the environment."""
         self.env.close()

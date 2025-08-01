@@ -255,7 +255,7 @@ class RolloutBuffer:
         self.log_probs[t, env_idx] = log_prob
         
         # 存储GRU隐状态
-        self.gru_hidden_states[t, env_idx] = gru_hidden_state
+        self.gru_hidden_states[t, env_idx] = gru_hidden_state.cpu().numpy()
         
         # 存储真正的全局状态，而不是obs.flatten()
         self.states[t, env_idx] = state
