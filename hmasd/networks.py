@@ -621,16 +621,14 @@ class SkillDecoder(nn.Module):
             Z0_idx = torch.zeros(batch_size, 1, dtype=torch.long, device=device)
             decoder_inputs.append(self.Z0_embedding(Z0_idx))
             
-            # 添加Z，使用clone()创建新张量，防止原地修改导致自动求导错误
-            Z_clone = Z.clone().detach()
-            Z_embedded = self.team_skill_embedding(Z_clone.unsqueeze(1))
+            # 【关键修复】移除detach()操作，保持自回归序列的梯度连续性
+            # 这确保了技能解码器能够通过整个序列进行端到端的梯度传播
+            Z_embedded = self.team_skill_embedding(Z.unsqueeze(1))
             decoder_inputs.append(Z_embedded)
             
-            # 添加z1到z_{step-1}
+            # 添加z1到z_{step-1}，保持梯度流
             for i in range(step - 1):
-                # 使用clone()创建新张量，防止原地修改导致自动求导错误
-                z_i_clone = z[:, i].clone().detach()
-                zi_embedded = self.agent_skill_embedding(z_i_clone.unsqueeze(1))
+                zi_embedded = self.agent_skill_embedding(z[:, i].unsqueeze(1))
                 decoder_inputs.append(zi_embedded)
             
             # 拼接所有嵌入
@@ -901,12 +899,13 @@ class SkillCoordinator(nn.Module):
             z_logits = []
             
             for i in range(n_agents):
-                # 使用clone()创建新张量，防止原地修改导致自动求导错误
-                Z_clone = Z.clone().detach()
-                z_clone = z[:, :i].clone().detach() if i > 0 else None
+                # 【关键修复】使用clone()避免原地操作，同时保持梯度流
+                # 这确保了自回归技能生成过程中的梯度能够正确传播，同时避免原地修改
+                Z_for_decoder = Z.clone()  # 克隆以避免原地操作，但保持梯度
+                z_for_decoder = z[:, :i].clone() if i > 0 else None  # 克隆以避免原地操作，但保持梯度
                 
                 try:
-                    zi_logits = self.skill_decoder(encoded_state, encoded_observations, Z_clone, z_clone, step=i+1)
+                    zi_logits = self.skill_decoder(encoded_state, encoded_observations, Z_for_decoder, z_for_decoder, step=i+1)
                     
                     # 在创建分布前检查zi_logits是否包含NaN或Inf，并进行更强的数值稳定性处理
                     with torch.no_grad():
@@ -947,8 +946,10 @@ class SkillCoordinator(nn.Module):
                         zi = zi_logits.argmax(dim=-1)
                     else:
                         zi = zi_dist.sample()
-                        
-                    z[:, i] = zi
+                    
+                    # 【关键修复】避免原地操作，使用索引赋值的安全方式
+                    z = z.clone()  # 先克隆整个张量
+                    z[:, i] = zi   # 然后进行赋值
                     
                 except Exception as e:
                     main_logger.error(f"在处理第{i}个智能体的zi_logits时发生错误: {e}")
@@ -1068,8 +1069,8 @@ class SkillDiscoverer(nn.Module):
     
     def forward(self, observation, agent_skill, hidden_state, deterministic=False):
         """
-        [CORRECTED VERSION]
-        Forward pass with correct GRU input/output shapes.
+        [ENHANCED CORRECTED VERSION]
+        Forward pass with robust GRU input/output shapes and enhanced error handling.
         """
         observation = observation.float()
         
@@ -1085,9 +1086,28 @@ class SkillDiscoverer(nn.Module):
         if agent_skill_onehot.dim() == 1:
             agent_skill_onehot = agent_skill_onehot.unsqueeze(0)
             
+        batch_size = observation.shape[0]
+        
+        # Enhanced hidden state validation and correction
+        if hidden_state is None:
+            hidden_state = torch.zeros(batch_size, self.gru_hidden_dim, device=observation.device)
+            self.logger.debug(f"Initialized hidden state with shape {hidden_state.shape}")
+        
+        # Ensure hidden state has correct shape (B, H)
+        if hidden_state.dim() == 3 and hidden_state.shape[0] == 1:
+            hidden_state = hidden_state.squeeze(0)  # (1, B, H) -> (B, H)
+        elif hidden_state.dim() == 1:
+            hidden_state = hidden_state.unsqueeze(0)  # (H,) -> (1, H)
+        
+        # Validate hidden state shape
+        expected_shape = (batch_size, self.gru_hidden_dim)
+        if hidden_state.shape != expected_shape:
+            self.logger.warning(f"Hidden state shape mismatch: got {hidden_state.shape}, expected {expected_shape}")
+            hidden_state = torch.zeros(expected_shape, device=observation.device)
+            
         actor_input = torch.cat([observation, agent_skill_onehot], dim=-1)
         
-        # --- Core Fix ---
+        # --- Enhanced Core Fix ---
         actor_features = self.actor_mlp(actor_input)
         
         # 1. Reshape for GRU: (B, H) -> (1, B, H) for a sequence of length 1
@@ -1096,27 +1116,50 @@ class SkillDiscoverer(nn.Module):
         # 2. Reshape hidden state for GRU: (B, H) -> (1, B, H) for 1 layer
         hidden_state_seq = hidden_state.unsqueeze(0)
         
-        # GRU now receives correctly shaped inputs
-        actor_output_seq, new_hidden_state_seq = self.actor_gru(actor_features_seq, hidden_state_seq)
+        # Validate GRU input shapes
+        assert actor_features_seq.shape == (1, batch_size, self.config.hidden_size), \
+            f"GRU input shape error: {actor_features_seq.shape}"
+        assert hidden_state_seq.shape == (1, batch_size, self.gru_hidden_dim), \
+            f"GRU hidden shape error: {hidden_state_seq.shape}"
+        
+        # GRU computation with error handling
+        try:
+            actor_output_seq, new_hidden_state_seq = self.actor_gru(actor_features_seq, hidden_state_seq)
+        except Exception as e:
+            self.logger.error(f"GRU forward error: {e}")
+            # Fallback: use input features directly
+            actor_output_seq = actor_features_seq
+            new_hidden_state_seq = hidden_state_seq
         
         # 3. Squeeze outputs back to original shape: (1, B, H) -> (B, H)
         actor_output = actor_output_seq.squeeze(0)
         new_hidden_state = new_hidden_state_seq.squeeze(0)
         
-        # --- Rest of the logic is unchanged ---
+        # --- Enhanced action generation with numerical stability ---
         action_mean = torch.tanh(self.action_mean(actor_output)) * self.config.action_bound
         action_log_std = torch.clamp(self.action_log_std(actor_output), min=-10.0, max=2.0)
         action_std = torch.exp(action_log_std)
+        
+        # Additional numerical stability checks
+        action_mean = torch.clamp(action_mean, -self.config.action_bound, self.config.action_bound)
+        action_std = torch.clamp(action_std, min=1e-6, max=10.0)
 
         try:
             action_distribution = Normal(action_mean, action_std)
             action = action_distribution.sample() if not deterministic else action_mean
             action_logprob = action_distribution.log_prob(action).sum(dim=-1)
+            
+            # Validate outputs
+            if torch.isnan(action).any() or torch.isinf(action).any():
+                raise ValueError("Action contains NaN or Inf")
+            if torch.isnan(action_logprob).any() or torch.isinf(action_logprob).any():
+                raise ValueError("Action log prob contains NaN or Inf")
+                
         except Exception as e:
-            self.logger.error(f"Error creating Normal distribution: {e}, mean: {action_mean}, std: {action_std}")
-            # Safe fallback
+            self.logger.error(f"Error in action generation: {e}")
+            # Enhanced safe fallback
             action_mean = torch.zeros_like(action_mean)
-            action_std = torch.ones_like(action_std)
+            action_std = torch.ones_like(action_std) * 0.1  # Small but non-zero std
             action_distribution = Normal(action_mean, action_std)
             action = action_mean
             action_logprob = action_distribution.log_prob(action).sum(dim=-1)

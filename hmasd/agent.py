@@ -390,7 +390,9 @@ class HMASDAgent:
             log_probs: 包含团队技能和个体技能log probabilities的字典
         """
         state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
-        obs_tensor = torch.FloatTensor(observations).unsqueeze(0).to(self.device)
+        # 修复：先转换为numpy数组再创建tensor，避免从列表创建tensor的警告
+        obs_array = np.array(observations) if not isinstance(observations, np.ndarray) else observations
+        obs_tensor = torch.FloatTensor(obs_array).unsqueeze(0).to(self.device)
         
         with torch.no_grad():
             team_skill, agent_skills, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(
@@ -1121,9 +1123,11 @@ class HMASDAgent:
                 values_for_loss = self._normalize_values(values, self.value_norm_coordinator)
                 # b. Critic的训练目标(returns)也需要被归一化
                 returns_for_loss = self._normalize_values(returns_batch, self.value_norm_coordinator)
-                value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
+                # **关键修复**: 移除detach()，保持梯度流
+                value_loss = F.mse_loss(values_for_loss, returns_for_loss)
             else:
                 # 如果不使用ValueNorm，一切照旧
+                # **关键修复**: 移除detach()，保持梯度流
                 value_loss = F.mse_loss(values, returns_batch)
             
             # 熵损失
@@ -1340,7 +1344,8 @@ class HMASDAgent:
                 values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
                 # b. Critic的训练目标(returns)也需要被归一化
                 returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
-                value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
+                # **关键修复**: 移除detach()，保持梯度流
+                value_loss = F.mse_loss(values_for_loss, returns_for_loss)
             else:
                 # 如果不使用ValueNorm，一切照旧
                 value_loss = F.mse_loss(new_values_flat, returns_flat)
