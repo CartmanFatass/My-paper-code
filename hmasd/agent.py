@@ -359,22 +359,6 @@ class HMASDAgent:
 
         return actions_batch.cpu().numpy(), logprobs_batch.cpu().numpy(), values.cpu().numpy()
     
-    def reset_value_norm(self):
-        """显式重置Value Normalization统计量"""
-        if self.config.use_valuenorm:
-            if self.value_norm_coordinator is not None:
-                self.value_norm_coordinator.running_mean.zero_()
-                self.value_norm_coordinator.running_std.fill_(1.0)
-                self.value_norm_coordinator.count = 0
-                main_logger.info("已重置Coordinator的Value Normalization统计量")
-            if self.value_norm_discoverer is not None:
-                self.value_norm_discoverer.running_mean.zero_()
-                self.value_norm_discoverer.running_std.fill_(1.0)
-                self.value_norm_discoverer.count = 0
-                main_logger.info("已重置Discoverer的Value Normalization统计量")
-        else:
-            main_logger.warning("Value Normalization未启用，无法重置")
-    
     def assign_skills(self, state, observations, deterministic=False):
         """
         为所有智能体分配技能
@@ -775,14 +759,10 @@ class HMASDAgent:
             obs_tensor_for_value = torch.FloatTensor(observations).unsqueeze(0).to(self.device)
             state_val, agent_vals, _ = self.skill_coordinator.get_value(state_tensor_for_value, obs_tensor_for_value)
             
-            # 【修复】将全局状态价值与所有智能体价值的平均值相加
-            if agent_vals is not None and len(agent_vals) > 0:
-                # agent_vals 是一个张量列表，将它们堆叠起来然后计算均值
-                agent_vals_tensor = torch.stack(agent_vals)
-                mean_agent_val = agent_vals_tensor.mean()
-                high_level_value = state_val + mean_agent_val
-            else:
-                high_level_value = state_val
+            # 【论文一致性修复】根据论文Figure 3，分别使用状态价值和智能体价值
+            # 这里我们使用状态价值作为高层策略的主要价值估计
+            # 因为高层策略主要负责团队技能的选择
+            high_level_value = state_val
 
             high_level_value_np = high_level_value.squeeze().cpu().numpy()
 
@@ -939,76 +919,101 @@ class HMASDAgent:
 
     def _compute_intrinsic_reward(self, next_state, reward, next_obs, team_skill, agent_skill):
         """
-        计算单个智能体的内在奖励（修改版本，确保High-Level和Low-Level协调一致）
+        【恢复完整版本】计算内在奖励，使用完整的normalization机制
         
-        核心修改：
-        - 环境奖励组件：直接使用纯净的团队奖励（不加权重）
-        - 判别器奖励：保持原有的内在奖励机制，用于技能多样性
-        - 确保两个层次优化相同的底层团队目标
-        
-        参数:
-            next_state: 下一全局状态
-            reward: 环境奖励（现在是纯净的团队奖励）
-            next_obs: 智能体的下一观测
-            team_skill: 团队技能索引
-            agent_skill: 智能体技能索引
-            
-        返回:
-            intrinsic_reward: 内在奖励值
-            env_component: 环境奖励组件
-            team_disc_component: 团队判别器奖励组件
-            ind_disc_component: 个体判别器奖励组件
+        关键特性:
+        1. 使用互信息: I(s;z) = log q(z|s) - log p(z) 而不是原始的 log q(z|s)
+        2. 基线减法（baseline subtraction）用于方差减少
+        3. 奖励标准化和裁剪防止极值
+        4. 运行统计量维护确保训练稳定性
         """
         with torch.no_grad():
-            # 计算团队技能判别器奖励
-            next_state_tensor = torch.FloatTensor(next_state).unsqueeze(0).to(self.device)
-            team_disc_logits = self.team_discriminator(next_state_tensor)
-            team_disc_log_probs = F.log_softmax(team_disc_logits, dim=-1)
-            team_skill_log_prob = team_disc_log_probs[0, team_skill]
-            
-            # main_logger.debug(f"Team discriminator: team_skill={team_skill}, raw_log_prob={team_skill_log_prob.item():.6f}")
-            
-            # 计算个体技能判别器奖励
-            agent_obs_tensor = torch.FloatTensor(next_obs).unsqueeze(0).to(self.device)
-            team_skill_tensor = torch.tensor(team_skill, device=self.device)
-            agent_disc_logits = self.individual_discriminator(agent_obs_tensor, team_skill_tensor)
-            agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
-            agent_skill_log_prob = agent_disc_log_probs[0, agent_skill]
-            
-            # main_logger.debug(f"Individual discriminator: agent_skill={agent_skill}, raw_log_prob={agent_skill_log_prob.item():.6f}")
-            
-           
-            
-            env_component = self.config.lambda_e * reward
-
-            # 判别器内在奖励：保持原有机制，用于技能多样性和探索
-            if self.use_reward_annealing:
-                progress = min(self.global_step / self.anneal_steps, 1.0)
-                if self.anneal_schedule == 'cosine':
-                    progress_adjusted = 0.5 * (1 - np.cos(np.pi * progress))
-                else:
-                    progress_adjusted = progress
+            try:
+                # === Team Discriminator Reward (Fixed) ===
+                next_state_tensor = torch.FloatTensor(next_state).unsqueeze(0).to(self.device)
+                team_disc_logits = self.team_discriminator(next_state_tensor)
                 
-                w_intrinsic_current = self.w_intrinsic_initial + (self.w_intrinsic_final - self.w_intrinsic_initial) * progress_adjusted
+                # Use log_softmax for numerical stability
+                team_disc_log_probs = F.log_softmax(team_disc_logits, dim=-1)
+                team_skill_log_prob = team_disc_log_probs[0, team_skill]
                 
-                team_disc_component = self.config.lambda_D * w_intrinsic_current * team_skill_log_prob.item()
-                ind_disc_component = self.config.lambda_d * w_intrinsic_current * agent_skill_log_prob.item()
+                # CRITICAL FIX: Use mutual information instead of raw log probability
+                # I(s;Z) = log q_D(Z|s) - log p(Z)
+                # Assume uniform prior: log p(Z) = -log(n_Z)
+                team_skill_prior_log_prob = -np.log(self.config.n_Z)
+                team_mutual_info = team_skill_log_prob.item() - team_skill_prior_log_prob
                 
-                # main_logger.debug(f"Annealing mode: w_intrinsic={w_intrinsic_current:.4f}")
-                # main_logger.debug(f"Annealed reward components: team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
-            else:
-                team_disc_component = self.config.lambda_D * team_skill_log_prob.item()
-                ind_disc_component = self.config.lambda_d * agent_skill_log_prob.item()
+                # === Individual Discriminator Reward (Fixed) ===
+                agent_obs_tensor = torch.FloatTensor(next_obs).unsqueeze(0).to(self.device)
+                team_skill_tensor = torch.tensor(team_skill, device=self.device)
+                agent_disc_logits = self.individual_discriminator(agent_obs_tensor, team_skill_tensor)
                 
-                # main_logger.debug(f"Normal mode: lambda_D={self.config.lambda_D}, lambda_d={self.config.lambda_d}")
-                # main_logger.debug(f"Calculated reward components: team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
-            
-            # 【核心修改】Low-Level策略接收：纯净团队奖励 + 判别器内在奖励
-            intrinsic_reward = env_component + team_disc_component + ind_disc_component
-            
-            # main_logger.debug(f"Modified intrinsic reward: env={env_component:.6f}, team_disc={team_disc_component:.6f}, ind_disc={ind_disc_component:.6f}")
-            
-            return intrinsic_reward, env_component, team_disc_component, ind_disc_component
+                agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
+                agent_skill_log_prob = agent_disc_log_probs[0, agent_skill]
+                
+                # CRITICAL FIX: Use mutual information for individual skills too
+                # I(o;z|Z) = log q_d(z|o,Z) - log p(z|Z)
+                # Assume uniform conditional prior: log p(z|Z) = -log(n_z)
+                agent_skill_prior_log_prob = -np.log(self.config.n_z)
+                agent_mutual_info = agent_skill_log_prob.item() - agent_skill_prior_log_prob
+                
+                # === Baseline Subtraction for Variance Reduction ===
+                # Initialize running baselines if not exists
+                if not hasattr(self, 'team_disc_baseline'):
+                    self.team_disc_baseline = 0.0
+                    self.ind_disc_baseline = 0.0
+                    self.baseline_update_rate = 0.01
+                
+                # Update baselines with exponential moving average
+                self.team_disc_baseline = (1 - self.baseline_update_rate) * self.team_disc_baseline + \
+                                        self.baseline_update_rate * team_mutual_info
+                self.ind_disc_baseline = (1 - self.baseline_update_rate) * self.ind_disc_baseline + \
+                                       self.baseline_update_rate * agent_mutual_info
+                
+                # Subtract baselines
+                team_disc_reward = team_mutual_info - self.team_disc_baseline
+                ind_disc_reward = agent_mutual_info - self.ind_disc_baseline
+                
+                # === Reward Normalization and Clipping ===
+                # Initialize running statistics if not exists
+                if not hasattr(self, 'team_disc_reward_std'):
+                    self.team_disc_reward_std = 1.0
+                    self.ind_disc_reward_std = 1.0
+                    self.reward_std_update_rate = 0.01
+                
+                # Update reward standard deviations
+                self.team_disc_reward_std = (1 - self.reward_std_update_rate) * self.team_disc_reward_std + \
+                                          self.reward_std_update_rate * abs(team_disc_reward)
+                self.ind_disc_reward_std = (1 - self.reward_std_update_rate) * self.ind_disc_reward_std + \
+                                         self.reward_std_update_rate * abs(ind_disc_reward)
+                
+                # Normalize rewards
+                team_disc_reward_normalized = team_disc_reward / (self.team_disc_reward_std + 1e-8)
+                ind_disc_reward_normalized = ind_disc_reward / (self.ind_disc_reward_std + 1e-8)
+                
+                # Clip rewards to prevent extreme values
+                team_disc_reward_clipped = np.clip(team_disc_reward_normalized, -5.0, 5.0)
+                ind_disc_reward_clipped = np.clip(ind_disc_reward_normalized, -5.0, 5.0)
+                
+                # === Final Reward Computation ===
+                env_component = self.config.lambda_e * reward
+                team_disc_component = self.config.lambda_D * team_disc_reward_clipped
+                ind_disc_component = self.config.lambda_d * ind_disc_reward_clipped
+                
+                intrinsic_reward = env_component + team_disc_component + ind_disc_component
+                
+                # Ensure finite values
+                if not np.isfinite(intrinsic_reward):
+                    intrinsic_reward = env_component
+                    team_disc_component = 0.0
+                    ind_disc_component = 0.0
+                
+                return intrinsic_reward, env_component, team_disc_component, ind_disc_component
+                
+            except Exception as e:
+                main_logger.error(f"Error in fixed intrinsic reward computation: {e}")
+                env_component = self.config.lambda_e * reward if hasattr(self.config, 'lambda_e') else 0.0
+                return env_component, env_component, 0.0, 0.0
 
     def update_coordinator(self, num_steps):
         """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
@@ -1099,17 +1104,20 @@ class HMASDAgent:
             # 2. 获取当前策略下的价值估计
             state_values, agent_values_list, _ = self.skill_coordinator.get_value(states_batch, observations_batch)
             
-            # 【修复】将全局状态价值与所有智能体价值的平均值相加
+            # 【论文一致性修复】按照论文公式(6)分别处理团队技能和个体技能的价值
+            # 不再合并价值函数，而是分别计算损失
+            state_values = state_values.squeeze(-1)  # Shape: (B,) - 用于团队技能
+            
+            # 将智能体价值列表转换为张量，用于个体技能
+            batch_size = states_batch.size(0)
             if agent_values_list is not None and len(agent_values_list) > 0:
-                # agent_values_list 是一个张量列表，将它们堆叠起来然后计算均值
-                agent_values_tensor = torch.stack(agent_values_list).squeeze(-1) # Shape: (n_agents, B)
-                mean_agent_values = agent_values_tensor.mean(dim=0) # Shape: (B,)
-                values = state_values.squeeze(-1) + mean_agent_values # Shape: (B,)
+                agent_values_tensor = torch.stack(agent_values_list).squeeze(-1)  # Shape: (n_agents, B)
             else:
-                values = state_values.squeeze(-1)  # Shape: (B,)
+                agent_values_tensor = torch.zeros(self.config.n_agents, batch_size, device=self.device)
 
-            # 【核心改动】移除优势标准化，使用Value Normalization作为替代
-            advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
+            # 【关键修复】移除优势标准化，这会导致训练不稳定和灾难性遗忘
+            # 在稀疏奖励环境中，优势标准化会破坏奖励信号的相对重要性
+            # advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
             
             # --- 计算PPO损失 (标准的、非序列化的) ---
             ratios = torch.exp(total_log_probs - old_log_probs_batch.detach())
@@ -1117,25 +1125,35 @@ class HMASDAgent:
             surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_batch
             policy_loss = -torch.min(surr1, surr2).mean()
             
-            # 价值损失
+            # 【论文一致性修复】按照论文公式(6)分别计算团队技能和个体技能的价值损失
+            # 团队技能使用状态价值函数 V^h(ŝ)
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
-                # a. Critic的预测值需要被归一化，以便与归一化的目标进行比较
-                values_for_loss = self._normalize_values(values, self.value_norm_coordinator)
-                # b. Critic的训练目标(returns)也需要被归一化
+                state_values_for_loss = self._normalize_values(state_values, self.value_norm_coordinator)
                 returns_for_loss = self._normalize_values(returns_batch, self.value_norm_coordinator)
-                # **关键修复**: 移除detach()，保持梯度流
-                value_loss = F.mse_loss(values_for_loss, returns_for_loss)
+                team_value_loss = F.mse_loss(state_values_for_loss, returns_for_loss.detach())
+                
+                # 个体技能使用智能体价值函数 V^h(ô_i)
+                agent_value_loss = 0.0
+                for i in range(self.config.n_agents):
+                    agent_values_for_loss = self._normalize_values(agent_values_tensor[i], self.value_norm_coordinator)
+                    agent_value_loss += F.mse_loss(agent_values_for_loss, returns_for_loss.detach())
+                agent_value_loss /= self.config.n_agents
             else:
-                # 如果不使用ValueNorm，一切照旧
-                # **关键修复**: 移除detach()，保持梯度流
-                value_loss = F.mse_loss(values, returns_batch)
+                team_value_loss = F.mse_loss(state_values, returns_batch.detach())
+                agent_value_loss = 0.0
+                for i in range(self.config.n_agents):
+                    agent_value_loss += F.mse_loss(agent_values_tensor[i], returns_batch.detach())
+                agent_value_loss /= self.config.n_agents
+            
+            # 【论文公式(6)】组合团队和个体价值损失
+            value_loss = team_value_loss + agent_value_loss
             
             # 熵损失
             # 【修复】使用config中定义的统一熵系数，严格按照论文公式
             entropy_loss = -self.config.lambda_h * entropy
             
             # CD损失（如果启用OPT）
-            cd_loss = torch.tensor(0.0, device=self.device, requires_grad=True)
+            cd_loss = torch.tensor(0.0, device=self.device)
             if getattr(self.config, 'use_opt_coordinator', False):
                 # 对批次中的样本计算平均CD损失
                 _, _, cd_loss = self.skill_coordinator.get_value(states_batch, observations_batch)
@@ -1329,8 +1347,9 @@ class HMASDAgent:
             new_log_probs_flat = new_log_probs.reshape(-1)
             new_values_flat = new_values.reshape(-1)
             
-            # 【核心改动】移除优势标准化，使用Value Normalization作为替代
-            advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
+            # 【关键修复】移除优势标准化，这会导致训练不稳定和灾难性遗忘
+            # 在稀疏奖励环境中，优势标准化会破坏奖励信号的相对重要性
+            # advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
             
             # --- 计算PPO损失（在展平后的数据上） ---
             ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
@@ -1344,11 +1363,11 @@ class HMASDAgent:
                 values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
                 # b. Critic的训练目标(returns)也需要被归一化
                 returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
-                # **关键修复**: 移除detach()，保持梯度流
-                value_loss = F.mse_loss(values_for_loss, returns_for_loss)
+                # **关键修复**: 目标值需要detach()以防止梯度流向GAE计算
+                value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
             else:
                 # 如果不使用ValueNorm，一切照旧
-                value_loss = F.mse_loss(new_values_flat, returns_flat)
+                value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
             
             # 熵损失
             entropy_loss = -entropy * self.config.lambda_l

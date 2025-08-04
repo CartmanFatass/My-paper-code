@@ -46,7 +46,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         max_observed_uavs=15,
         max_observed_users=25,
         max_observed_bs=4,
-        use_fdma=True,
+        use_fdma=False,
         bandwidth=20e6,
         ground_bs_tx_power=30,
         uav_init_mode="start_area",
@@ -1632,7 +1632,8 @@ class UAVForcedRelayEnv(ParallelEnv):
             # FDMA模式下，假设总带宽被平均分配给每个UAV用于其回程链路
             link_bandwidth = self.bandwidth / self.n_uavs
         else:
-            # 非FDMA模式下，链路独占全部带宽
+            # 非FDMA模式（同频干扰）下，所有链路共享全部带宽，但受到同频干扰影响
+            # 这里使用全部带宽，干扰影响已经在SINR计算中体现
             link_bandwidth = self.bandwidth
             
         # 转换为线性单位并计算容量

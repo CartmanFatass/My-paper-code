@@ -547,6 +547,9 @@ class SkillDecoder(nn.Module):
         )
         self.transformer_decoder = nn.TransformerDecoder(decoder_layer, n_layers)
         
+        # 【数值稳定性修复】添加LayerNorm层防止exploding logits
+        self.output_norm = nn.LayerNorm(embedding_dim)
+        
         # 输出头
         self.team_skill_head = nn.Linear(embedding_dim, n_Z)
         self.agent_skill_head = nn.Linear(embedding_dim, n_z)
@@ -576,8 +579,11 @@ class SkillDecoder(nn.Module):
             memory = torch.cat([encoded_state, encoded_observations], dim=1)
             decoded = self.transformer_decoder(decoder_input, memory)
             
+            # 【数值稳定性修复】应用LayerNorm防止exploding logits
+            normalized_decoded = self.output_norm(decoded)
+            
             # 输出团队技能分布
-            team_skill_logits = self.team_skill_head(decoded).squeeze(1)
+            team_skill_logits = self.team_skill_head(normalized_decoded).squeeze(1)
             
             # 记录团队技能logits的统计信息
             with torch.no_grad():
@@ -770,7 +776,15 @@ class SkillCoordinator(nn.Module):
         return entity_features
     
     def get_value(self, state, observations):
-        """获取高层价值函数值"""
+        """
+        【论文一致性修复】获取高层价值函数值
+        
+        根据论文Figure 3和公式(6)，高层策略有分别的价值函数：
+        - V^h(ŝ): 基于编码状态的价值函数，用于团队技能
+        - V^h(ô_i): 基于每个智能体编码观测的价值函数，用于个体技能
+        
+        返回分离的价值函数，而不是合并的单一价值
+        """
         batch_size, n_agents, obs_dim = observations.size()
         device = state.device
         
@@ -791,20 +805,20 @@ class SkillCoordinator(nn.Module):
             processed_features = self.fallback_encoder(entity_features)
             cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
         
-        # 拆分处理后的特征
+        # 【论文一致性修复】按照Figure 3实现分别的价值函数
+        # 1. 基于编码状态的价值函数 V^h(ŝ) - 用于团队技能
         encoded_state = processed_features[:, 0:1, :]  # [batch_size, 1, embedding_dim]
+        state_value = self.value_head_state(encoded_state.squeeze(1))  # [batch_size, 1]
+        
+        # 2. 基于每个智能体编码观测的价值函数 V^h(ô_i) - 用于个体技能
         encoded_observations = processed_features[:, 1:, :]  # [batch_size, n_agents, embedding_dim]
-        
-        # 全局状态价值
-        state_value = self.value_head_state(encoded_state.squeeze(1))
-        
-        # 每个智能体的观测价值
         agent_values = []
-        for i in range(min(self.config.n_agents, encoded_observations.size(1))):
-            agent_value = self.value_heads_obs[i](encoded_observations[:, i, :])
+        for i in range(n_agents):
+            agent_value = self.value_heads_obs[i](encoded_observations[:, i, :])  # [batch_size, 1]
             agent_values.append(agent_value)
-            
-        # 返回价值和CD损失，以便在训练中使用
+        
+        # 【关键修复】返回分离的价值函数，严格按照论文Figure 3的设计
+        # 不再合并状态价值和智能体价值，而是分别返回
         return state_value, agent_values, cd_loss
     
     def forward(self, state, observations, deterministic=False, history_context=None):
@@ -899,10 +913,11 @@ class SkillCoordinator(nn.Module):
             z_logits = []
             
             for i in range(n_agents):
-                # 【关键修复】使用clone()避免原地操作，同时保持梯度流
-                # 这确保了自回归技能生成过程中的梯度能够正确传播，同时避免原地修改
-                Z_for_decoder = Z.clone()  # 克隆以避免原地操作，但保持梯度
-                z_for_decoder = z[:, :i].clone() if i > 0 else None  # 克隆以避免原地操作，但保持梯度
+                # 【关键修复】在前向传播中保持梯度连续性
+                # 梯度切断应该只在损失计算时进行，而不是在前向传播中
+                # 这确保了技能间的依赖关系能够正确学习
+                Z_for_decoder = Z  # 保持梯度流，允许技能间依赖学习
+                z_for_decoder = z[:, :i] if i > 0 else None  # 保持梯度流，允许技能间依赖学习
                 
                 try:
                     zi_logits = self.skill_decoder(encoded_state, encoded_observations, Z_for_decoder, z_for_decoder, step=i+1)
@@ -947,9 +962,11 @@ class SkillCoordinator(nn.Module):
                     else:
                         zi = zi_dist.sample()
                     
-                    # 【关键修复】避免原地操作，使用索引赋值的安全方式
-                    z = z.clone()  # 先克隆整个张量
-                    z[:, i] = zi   # 然后进行赋值
+                    # 【保持原地操作修复】避免原地操作，使用索引赋值的安全方式
+                    # 创建新的张量而不是原地修改，确保数值稳定性
+                    new_z = z.clone()
+                    new_z[:, i] = zi
+                    z = new_z  # 重新赋值而不是原地修改
                     
                 except Exception as e:
                     main_logger.error(f"在处理第{i}个智能体的zi_logits时发生错误: {e}")
@@ -999,8 +1016,9 @@ class SkillDiscoverer(nn.Module):
         self.action_mean = nn.Linear(config.gru_hidden_size, config.action_dim)
         self.action_log_std = nn.Linear(config.gru_hidden_size, config.action_dim)
         # 将log_std初始化为较小的值，这样训练开始时标准差接近1
-        self.action_log_std.weight.data.fill_(0.0)
-        self.action_log_std.bias.data.fill_(-1.0)  # exp(-1) ≈ 0.37
+        # 使用 nn.init 而不是直接访问 .data 以保持梯度流
+        nn.init.constant_(self.action_log_std.weight, 0.0)
+        nn.init.constant_(self.action_log_std.bias, -1.0)  # exp(-1) ≈ 0.37
         
         # Critic网络（中心化价值函数）- 简化的前馈网络直接评估V(s, Z)
         self.critic_net = nn.Sequential(

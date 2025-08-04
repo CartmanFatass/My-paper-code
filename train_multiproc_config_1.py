@@ -1803,14 +1803,33 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         main_logger.debug("为低层策略(Discoverer)计算GAE...")
 
         # 1. 获取最后一步的价值 (Critic的直接输出)
+        # 【关键修复】使用正确的下一步技能进行价值引导，修复陈旧技能Bug
         last_values_predicted = np.zeros((num_envs, config.n_agents), dtype=np.float32)
         with torch.no_grad():
             for i in range(num_envs):
-                current_team_skill = agent.env_team_skills.get(i, 0)
-                if current_team_skill == -1: current_team_skill = 0
+                # 【关键修复】确定在 next_state 将使用什么技能
+                # 因为 rollout_step == rollout_length-1, 下一步的 rollout_step 将是 0, 这是一个技能更换点。
+                # 因此，我们必须为 next_state 分配新技能。
                 
+                # 检查下一步是否是技能切换点
+                next_rollout_step = (rollout_step + 1) % config.rollout_length
+                is_skill_change_point = (next_rollout_step % config.k == 0)
+                
+                if is_skill_change_point:
+                    # 为 next_state 分配新技能
+                    next_team_skill, next_agent_skills, _ = agent.assign_skills(
+                        states[i], observations[i]
+                    )
+                    main_logger.debug(f"环境 {i}: 检测到技能切换点，为 s_{{T+1}} 分配新技能 Z_{{T+1}}={next_team_skill}")
+                else:
+                    # 使用当前技能
+                    next_team_skill = agent.env_team_skills.get(i, 0)
+                    if next_team_skill == -1: 
+                        next_team_skill = 0
+                
+                # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
                 global_state_tensor = torch.FloatTensor(states[i]).unsqueeze(0).to(agent.device)
-                team_skill_tensor = torch.tensor(current_team_skill, device=agent.device).unsqueeze(0)
+                team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
                 global_value_tensor, _ = agent.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
                 
                 last_values_predicted[i, :] = global_value_tensor.squeeze().item()

@@ -5,7 +5,7 @@ class Config:
     # Environment parameters
     n_agents = 2
     state_dim = 16  # agent_pos (4) + button_pos (4) + diamond_pos (4) + button_pressed (2) + diamond_collected (2)
-    obs_dim = 12    # Using global state as observation for simplicity
+    obs_dim = 20    # Local observation: my_pos(2) + visible_items(6*3=18) = 20
     action_dim = 2  # 2D velocity vector
     action_bound = 1.0
 
