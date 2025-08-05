@@ -105,12 +105,28 @@ class RolloutBuffer:
         self.rewards_team_disc = np.zeros((num_steps, num_envs, n_agents), dtype=np.float32)
         self.rewards_ind_disc = np.zeros((num_steps, num_envs, n_agents), dtype=np.float32)
         
-        # === 高层策略专属数据 (每个环境每k步) ===
+        # === 【关键修复】高层策略专属数据 - 分离团队技能和个体技能 ===
         self.high_level_rewards = np.zeros((num_steps, num_envs), dtype=np.float32)  # k步累积奖励
-        self.high_level_values = np.zeros((num_steps, num_envs), dtype=np.float32)   # 高层价值估计
-        self.high_level_joint_log_probs = np.zeros((num_steps, num_envs), dtype=np.float32)  # 联合log概率
+        
+        # 分离的价值函数存储
+        self.high_level_state_values = np.zeros((num_steps, num_envs), dtype=np.float32)   # 状态价值 V^h(ŝ)
+        self.high_level_agent_values = np.zeros((num_steps, num_envs, n_agents), dtype=np.float32)  # 智能体价值 V^h(ô_i)
+        
+        # 分离的log概率存储
+        self.high_level_team_log_probs = np.zeros((num_steps, num_envs), dtype=np.float32)  # 团队技能log概率
+        self.high_level_agent_log_probs = np.zeros((num_steps, num_envs, n_agents), dtype=np.float32)  # 个体技能log概率
+        self.high_level_joint_log_probs = np.zeros((num_steps, num_envs), dtype=np.float32)  # 联合log概率（向后兼容）
+        
+        # 分离的优势函数和回报
+        self.high_level_team_advantages = np.zeros((num_steps, num_envs), dtype=np.float32)
+        self.high_level_agent_advantages = np.zeros((num_steps, num_envs, n_agents), dtype=np.float32)
+        self.high_level_team_returns = np.zeros((num_steps, num_envs), dtype=np.float32)
+        self.high_level_agent_returns = np.zeros((num_steps, num_envs, n_agents), dtype=np.float32)
+        
+        # 向后兼容的统一存储（将被逐步废弃）
         self.high_level_advantages = np.zeros((num_steps, num_envs), dtype=np.float32)
         self.high_level_returns = np.zeros((num_steps, num_envs), dtype=np.float32)
+        self.high_level_values = np.zeros((num_steps, num_envs), dtype=np.float32)
         
         # 标记哪些时间步有有效的高层决策数据
         self.high_level_valid_mask = np.zeros((num_steps, num_envs), dtype=np.bool_)
@@ -294,16 +310,22 @@ class RolloutBuffer:
         
         return True
     
-    def add_high_level_data(self, env_idx, time_step, value, joint_log_prob, accumulated_reward):
+    def add_high_level_data(self, env_idx, time_step, state_value=None, agent_values=None, 
+                           team_log_prob=None, agent_log_probs=None, joint_log_prob=None, 
+                           accumulated_reward=None, value=None):
         """
-        为高层策略添加数据到指定的时间步和环境
+        【关键修复】为高层策略添加分离的数据到指定的时间步和环境
         
         参数:
             env_idx: 环境索引
             time_step: 时间步索引（通常是技能分配时的时间步）
-            value: 高层价值估计
-            joint_log_prob: 联合对数概率（团队技能+个体技能）
-            accumulated_reward: k步累积奖励
+            state_value: 状态价值 V^h(ŝ) [标量]
+            agent_values: 智能体价值列表 V^h(ô_i) [n_agents]
+            team_log_prob: 团队技能log概率 [标量]
+            agent_log_probs: 个体技能log概率列表 [n_agents]
+            joint_log_prob: 联合log概率（向后兼容）[标量]
+            accumulated_reward: k步累积奖励 [标量]
+            value: 统一价值估计（向后兼容）[标量]
         """
         # 【关键修复】更新存储统计信息
         self.storage_stats['total_high_level_attempts'] += 1
@@ -323,22 +345,61 @@ class RolloutBuffer:
             main_logger.warning(f"add_high_level_data: 重复存储高层数据! time_step={time_step}, env_idx={env_idx}")
             return False  # 阻止重复写入
         
+        # 【关键修复】处理向后兼容性和新的分离数据格式
+        # 优先使用新的分离数据格式，如果没有提供则使用旧格式
+        final_state_value = state_value if state_value is not None else value
+        final_agent_values = agent_values if agent_values is not None else [value] * self.n_agents
+        final_team_log_prob = team_log_prob if team_log_prob is not None else joint_log_prob
+        final_agent_log_probs = agent_log_probs if agent_log_probs is not None else [joint_log_prob / self.n_agents] * self.n_agents
+        final_joint_log_prob = joint_log_prob if joint_log_prob is not None else (final_team_log_prob + sum(final_agent_log_probs))
+        final_accumulated_reward = accumulated_reward if accumulated_reward is not None else 0.0
+        
         # 【第三优先级修复】数据合理性检查
-        if np.isnan(value) or np.isinf(value):
-            main_logger.error(f"add_high_level_data: 无效的价值估计! value={value}, time_step={time_step}, env_idx={env_idx}")
+        if final_state_value is not None and (np.isnan(final_state_value) or np.isinf(final_state_value)):
+            main_logger.error(f"add_high_level_data: 无效的状态价值! state_value={final_state_value}, time_step={time_step}, env_idx={env_idx}")
             return False
         
-        if np.isnan(joint_log_prob) or np.isinf(joint_log_prob):
-            main_logger.error(f"add_high_level_data: 无效的log概率! joint_log_prob={joint_log_prob}, time_step={time_step}, env_idx={env_idx}")
+        if final_agent_values is not None:
+            for i, agent_val in enumerate(final_agent_values):
+                if np.isnan(agent_val) or np.isinf(agent_val):
+                    main_logger.error(f"add_high_level_data: 无效的智能体{i}价值! agent_value={agent_val}, time_step={time_step}, env_idx={env_idx}")
+                    return False
+        
+        if final_team_log_prob is not None and (np.isnan(final_team_log_prob) or np.isinf(final_team_log_prob)):
+            main_logger.error(f"add_high_level_data: 无效的团队log概率! team_log_prob={final_team_log_prob}, time_step={time_step}, env_idx={env_idx}")
             return False
         
-        if np.isnan(accumulated_reward) or np.isinf(accumulated_reward):
-            main_logger.error(f"add_high_level_data: 无效的累积奖励! accumulated_reward={accumulated_reward}, time_step={time_step}, env_idx={env_idx}")
+        if final_agent_log_probs is not None:
+            for i, agent_log_prob in enumerate(final_agent_log_probs):
+                if np.isnan(agent_log_prob) or np.isinf(agent_log_prob):
+                    main_logger.error(f"add_high_level_data: 无效的智能体{i}log概率! agent_log_prob={agent_log_prob}, time_step={time_step}, env_idx={env_idx}")
+                    return False
+        
+        if np.isnan(final_accumulated_reward) or np.isinf(final_accumulated_reward):
+            main_logger.error(f"add_high_level_data: 无效的累积奖励! accumulated_reward={final_accumulated_reward}, time_step={time_step}, env_idx={env_idx}")
             return False
         
-        self.high_level_values[time_step, env_idx] = value
-        self.high_level_joint_log_probs[time_step, env_idx] = joint_log_prob
-        self.high_level_rewards[time_step, env_idx] = accumulated_reward
+        # 【关键修复】存储分离的高层数据
+        if final_state_value is not None:
+            self.high_level_state_values[time_step, env_idx] = final_state_value
+        
+        if final_agent_values is not None:
+            self.high_level_agent_values[time_step, env_idx] = final_agent_values
+        
+        if final_team_log_prob is not None:
+            self.high_level_team_log_probs[time_step, env_idx] = final_team_log_prob
+        
+        if final_agent_log_probs is not None:
+            self.high_level_agent_log_probs[time_step, env_idx] = final_agent_log_probs
+        
+        # 存储联合数据和累积奖励
+        self.high_level_joint_log_probs[time_step, env_idx] = final_joint_log_prob
+        self.high_level_rewards[time_step, env_idx] = final_accumulated_reward
+        
+        # 向后兼容：存储统一价值（使用状态价值）
+        self.high_level_values[time_step, env_idx] = final_state_value if final_state_value is not None else 0.0
+        
+        # 标记有效数据
         self.high_level_valid_mask[time_step, env_idx] = True
         
         # 【关键修复】标记该位置已存储高层数据并更新统计
@@ -350,12 +411,14 @@ class RolloutBuffer:
             'type': 'high_level',
             'time_step': time_step,
             'env_idx': env_idx,
-            'value': value,
-            'accumulated_reward': accumulated_reward
+            'state_value': final_state_value,
+            'team_log_prob': final_team_log_prob,
+            'accumulated_reward': final_accumulated_reward
         }
         
-        main_logger.debug(f"add_high_level_data: 成功存储高层数据 env={env_idx}, step={time_step}, "
-                         f"value={value:.4f}, log_prob={joint_log_prob:.4f}, reward={accumulated_reward:.4f}")
+        main_logger.debug(f"add_high_level_data: 成功存储分离的高层数据 env={env_idx}, step={time_step}, "
+                         f"state_value={final_state_value:.4f}, team_log_prob={final_team_log_prob:.4f}, "
+                         f"reward={final_accumulated_reward:.4f}")
         return True
     
     def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
@@ -462,20 +525,32 @@ class RolloutBuffer:
 
     def compute_high_level_advantages(self, high_level_last_values=None, num_steps=None, gamma=0.99, gae_lambda=0.95):
         """
-        为高层策略计算GAE优势和返回值
+        【关键修复】为高层策略计算分离的GAE优势和返回值
+        支持团队技能和个体技能的分离价值函数
         
         参数:
-            high_level_last_values: 最后状态的高层价值估计 [num_envs]
+            high_level_last_values: 最后状态的高层价值估计，可以是：
+                - dict: {'state': [num_envs], 'agents': [num_envs, n_agents]}
+                - array: [num_envs] (向后兼容，将用作状态价值)
             num_steps: 实际收集的时间步数
             gamma: 折扣因子
             gae_lambda: GAE参数
         """
-        if high_level_last_values is None:
-            high_level_last_values = np.zeros(self.num_envs, dtype=np.float32)
-        
         if num_steps is None:
             main_logger.error("compute_high_level_advantages: 必须提供 num_steps 参数")
             return
+        
+        # 处理最后价值的输入格式
+        if high_level_last_values is None:
+            last_state_values = np.zeros(self.num_envs, dtype=np.float32)
+            last_agent_values = np.zeros((self.num_envs, self.n_agents), dtype=np.float32)
+        elif isinstance(high_level_last_values, dict):
+            last_state_values = high_level_last_values.get('state', np.zeros(self.num_envs, dtype=np.float32))
+            last_agent_values = high_level_last_values.get('agents', np.zeros((self.num_envs, self.n_agents), dtype=np.float32))
+        else:
+            # 向后兼容：将单一价值用作状态价值
+            last_state_values = high_level_last_values
+            last_agent_values = np.tile(high_level_last_values[:, np.newaxis], (1, self.n_agents))
         
         # 为每个环境分别计算高层策略的GAE
         for env_idx in range(self.num_envs):
@@ -488,35 +563,69 @@ class RolloutBuffer:
             if len(valid_steps) == 0:
                 continue
             
-            # 提取该环境的高层序列数据
+            # 【关键修复】分别处理团队技能和个体技能的GAE计算
+            
+            # === 1. 团队技能GAE计算（使用状态价值函数） ===
             rewards_seq = self.high_level_rewards[valid_steps, env_idx]
-            values_seq = self.high_level_values[valid_steps, env_idx]
+            state_values_seq = self.high_level_state_values[valid_steps, env_idx]
             
             # 计算next_values序列
-            next_values_seq = np.zeros_like(values_seq)
+            next_state_values_seq = np.zeros_like(state_values_seq)
             if len(valid_steps) > 1:
-                next_values_seq[:-1] = values_seq[1:]
-            next_values_seq[-1] = high_level_last_values[env_idx]
+                next_state_values_seq[:-1] = state_values_seq[1:]
+            next_state_values_seq[-1] = last_state_values[env_idx]
             
             # 高层策略没有中间的done信号，所以全部设为False
-            dones_seq = np.zeros_like(values_seq, dtype=np.float32)
+            dones_seq = np.zeros_like(state_values_seq, dtype=np.float32)
             
-            # 转换为tensor并计算GAE
+            # 转换为tensor并计算团队技能GAE
             rewards_tensor = torch.tensor(rewards_seq, dtype=torch.float32)
-            values_tensor = torch.tensor(values_seq, dtype=torch.float32)
-            next_values_tensor = torch.tensor(next_values_seq, dtype=torch.float32)
+            state_values_tensor = torch.tensor(state_values_seq, dtype=torch.float32)
+            next_state_values_tensor = torch.tensor(next_state_values_seq, dtype=torch.float32)
             dones_tensor = torch.tensor(dones_seq, dtype=torch.float32)
             
-            advantages, returns = compute_gae(
-                rewards_tensor, values_tensor, next_values_tensor, dones_tensor, gamma, gae_lambda
+            team_advantages, team_returns = compute_gae(
+                rewards_tensor, state_values_tensor, next_state_values_tensor, dones_tensor, gamma, gae_lambda
             )
             
-            # 存储结果回对应的时间步
+            # 存储团队技能的结果
             for i, t in enumerate(valid_steps):
-                self.high_level_advantages[t, env_idx] = advantages[i].item()
-                self.high_level_returns[t, env_idx] = returns[i].item()
+                self.high_level_team_advantages[t, env_idx] = team_advantages[i].item()
+                self.high_level_team_returns[t, env_idx] = team_returns[i].item()
+            
+            # === 2. 个体技能GAE计算（使用智能体价值函数） ===
+            agent_values_seq = self.high_level_agent_values[valid_steps, env_idx]  # (len(valid_steps), n_agents)
+            
+            # 为每个智能体分别计算GAE
+            for agent_idx in range(self.n_agents):
+                agent_values_single = agent_values_seq[:, agent_idx]
+                
+                # 计算next_values序列
+                next_agent_values_seq = np.zeros_like(agent_values_single)
+                if len(valid_steps) > 1:
+                    next_agent_values_seq[:-1] = agent_values_single[1:]
+                next_agent_values_seq[-1] = last_agent_values[env_idx, agent_idx]
+                
+                # 转换为tensor并计算个体技能GAE
+                agent_values_tensor = torch.tensor(agent_values_single, dtype=torch.float32)
+                next_agent_values_tensor = torch.tensor(next_agent_values_seq, dtype=torch.float32)
+                
+                agent_advantages, agent_returns = compute_gae(
+                    rewards_tensor, agent_values_tensor, next_agent_values_tensor, dones_tensor, gamma, gae_lambda
+                )
+                
+                # 存储个体技能的结果
+                for i, t in enumerate(valid_steps):
+                    self.high_level_agent_advantages[t, env_idx, agent_idx] = agent_advantages[i].item()
+                    self.high_level_agent_returns[t, env_idx, agent_idx] = agent_returns[i].item()
+            
+            # === 3. 向后兼容：计算统一的优势和回报 ===
+            # 使用团队技能的结果作为统一结果（向后兼容）
+            for i, t in enumerate(valid_steps):
+                self.high_level_advantages[t, env_idx] = team_advantages[i].item()
+                self.high_level_returns[t, env_idx] = team_returns[i].item()
         
-        main_logger.debug(f"高层策略GAE计算完成，共处理{np.sum(self.high_level_valid_mask[:num_steps])}个有效决策")
+        main_logger.debug(f"高层策略分离GAE计算完成，共处理{np.sum(self.high_level_valid_mask[:num_steps])}个有效决策")
     
     # 删除了 finish_rollout 和 finish_path 方法，它们依赖于已移除的 self.ptr
     # 现在统一使用 compute_advantages 方法

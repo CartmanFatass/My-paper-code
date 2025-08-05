@@ -3,10 +3,10 @@
 
 class Config:
     # 调试参数
-    test_reward_mode = True  # 是否测试奖励函数
+    test_reward_mode = False#True  # 是否测试奖励函数
     # 环境参数
     # 注意：实际环境中应该获取这些值
-    n_agents = 8     # 无人机数量 (默认值，可通过代码设置)
+    n_agents = 6     # 无人机数量 (默认值，可通过代码设置)
     state_dim = None  # 全局状态维度（将在环境初始化时获取）
     obs_dim = None    # 单个智能体观测维度（将在环境初始化时获取）
     action_dim = 3    # 每个智能体输出3D速度向量
@@ -34,8 +34,8 @@ class Config:
 
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
-    n_z = 3           # [关键] 降低个体技能数量
-    k = 50           # [修正] 匹配论文中的技能间隔 (原为10)
+    n_z = 6           # [关键] 降低个体技能数量
+    k = 6           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 128         # 隐藏层大小 (论文中为64)
@@ -45,7 +45,7 @@ class Config:
     n_heads = 8              # 多头注意力头数
     gru_hidden_size = 128     # GRU隐藏层大小 (与hidden_size保持一致)
     lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
-    lr_discoverer = 5e-5     # 技能发现器学习率 参考原论文
+    lr_discoverer = 1e-4     # 技能发现器学习率 参考原论文
     lr_discriminator = 1e-4  # 参考原论文
     lr_prototype_discriminator = 1e-4 # 原型判别器学习率 (新增)
 
@@ -145,7 +145,7 @@ class Config:
     # --- 场景4: 环境和空间参数 ---
     min_sinr = 3.0                          # 最小信噪比
     max_connections = 25                     # 最大连接数
-    uav_init_mode = 'random'            # 无人机初始化模式
+    uav_init_mode = 'start_area'            # 无人机初始化模式
     uav_start_area_size = 100               # 起始区域大小（米）
     grid_resolution = 50                    # 栅格分辨率
 

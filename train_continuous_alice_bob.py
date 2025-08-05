@@ -12,32 +12,73 @@ from config_continuous_alice_bob import Config
 from logger import init_multiproc_logging, main_logger
 
 def plot_trajectories_with_skills(log_dir, episode, trajectories, button_pos, diamond_pos, 
-                                 button_colors, diamond_colors, team_skills, agent_skills_history, k):
+                                 button_colors, diamond_colors, team_skills, agent_skills_history, k, 
+                                 diamond_collected=None):
     """Plots and saves the agent trajectories with skill annotations for an episode."""
-    fig, ax = plt.subplots(figsize=(10, 8))
+    # Create figure with more space for legends
+    fig, ax = plt.subplots(figsize=(14, 8))
     ax.set_xlim(0, 8)
     ax.set_ylim(0, 8)
-    ax.set_title(f"Episode {episode} Trajectories with Skills")
+    
+    # Calculate task completion statistics
+    total_diamonds = len(diamond_pos) if diamond_pos is not None else 0
+    collected_diamonds = sum(diamond_collected) if diamond_collected is not None else 0
+    completion_rate = (collected_diamonds / total_diamonds * 100) if total_diamonds > 0 else 0
+    
+    # Enhanced title with task completion info
+    ax.set_title(f"Episode {episode} Trajectories with Skills\n"
+                f"Task Completion: {collected_diamonds}/{total_diamonds} Diamonds Collected ({completion_rate:.1f}%)")
     ax.set_aspect('equal')
     
     # Color mapping for items: 0=blue, 1=red
     color_map = {0: 'blue', 1: 'red'}
     
-    # Plot buttons with correct colors
+    # Plot buttons with correct colors (avoid duplicate labels)
+    button_labels_added = set()
     for i, pos in enumerate(button_pos):
         color = color_map[button_colors[i]]
-        ax.scatter(pos[0], pos[1], c=color, marker='s', s=150, 
-                  label=f'{"Blue" if button_colors[i]==0 else "Red"} Button' if i == button_colors[i] else "")
+        button_type = "Blue" if button_colors[i]==0 else "Red"
+        label = f'{button_type} Button' if button_type not in button_labels_added else ""
+        if label:
+            button_labels_added.add(button_type)
+        ax.scatter(pos[0], pos[1], c=color, marker='s', s=150, label=label)
     
-    # Plot diamonds with correct colors  
+    # Plot diamonds with correct colors and collection status (avoid duplicate labels)
+    diamond_labels_added = set()
     for i, pos in enumerate(diamond_pos):
         color = color_map[diamond_colors[i]]
-        ax.scatter(pos[0], pos[1], c=color, marker='D', s=150,
-                  label=f'{"Blue" if diamond_colors[i]==0 else "Red"} Diamond' if i == diamond_colors[i] else "")
+        diamond_name = "Blue" if diamond_colors[i]==0 else "Red"
+        
+        if diamond_collected is not None and diamond_collected[i]:
+            # Show collected diamonds as faded with an 'X' overlay
+            label_key = f'{diamond_name}_collected'
+            label = f'{diamond_name} Diamond (Collected)' if label_key not in diamond_labels_added else ""
+            if label:
+                diamond_labels_added.add(label_key)
+            ax.scatter(pos[0], pos[1], c=color, marker='D', s=150, alpha=0.3, label=label)
+            # Add 'X' mark to show it's collected
+            ax.scatter(pos[0], pos[1], c='black', marker='x', s=100, linewidth=3)
+        else:
+            # Show uncollected diamonds normally
+            label_key = f'{diamond_name}_uncollected'
+            label = f'{diamond_name} Diamond' if label_key not in diamond_labels_added else ""
+            if label:
+                diamond_labels_added.add(label_key)
+            ax.scatter(pos[0], pos[1], c=color, marker='D', s=150, label=label)
+
+    # Collect all unique skills used by each agent
+    all_agent_skills = {0: set(), 1: set()}  # Alice: 0, Bob: 1
+    for skill_segment in agent_skills_history:
+        for agent_idx, skill in enumerate(skill_segment):
+            all_agent_skills[agent_idx].add(skill)
 
     # Plot trajectories with skill segments
     agent_colors = ['darkred', 'darkorange']
     agent_labels = ['Alice', 'Bob']
+    skill_styles = ['-', '--', '-.', ':']
+    
+    # Track which skill labels have been added to avoid duplicates
+    skill_labels_added = set()
     
     for agent_idx, traj in enumerate(trajectories):
         if len(traj) == 0:
@@ -50,7 +91,6 @@ def plot_trajectories_with_skills(log_dir, episode, trajectories, button_pos, di
                alpha=0.3, linewidth=1, label=f'{agent_labels[agent_idx]} Path')
         
         # Plot skill segments with different line styles
-        skill_styles = ['-', '--', '-.', ':']
         for skill_idx in range(len(agent_skills_history)):
             start_step = skill_idx * k
             end_step = min((skill_idx + 1) * k, len(traj))
@@ -62,28 +102,46 @@ def plot_trajectories_with_skills(log_dir, episode, trajectories, button_pos, di
             if len(segment) > 1:
                 agent_skill = agent_skills_history[skill_idx][agent_idx]
                 style = skill_styles[agent_skill % len(skill_styles)]
+                
+                # Create unique label for this agent-skill combination
+                skill_label_key = f'{agent_labels[agent_idx]}_Skill_{agent_skill}'
+                label = f'{agent_labels[agent_idx]} Skill {agent_skill}' if skill_label_key not in skill_labels_added else ""
+                if label:
+                    skill_labels_added.add(skill_label_key)
+                
                 ax.plot(segment[:, 0], segment[:, 1], 
-                       color=agent_colors[agent_idx], linestyle=style, linewidth=2,
-                       label=f'{agent_labels[agent_idx]} Skill {agent_skill}' if skill_idx == 0 else "")
+                       color=agent_colors[agent_idx], linestyle=style, linewidth=2, label=label)
         
         # Mark start and end points
         ax.scatter(traj_np[0, 0], traj_np[0, 1], color=agent_colors[agent_idx], 
-                  marker='o', s=100, edgecolor='black', linewidth=2)
+                  marker='o', s=100, edgecolor='black', linewidth=2, 
+                  label=f'{agent_labels[agent_idx]} Start' if agent_idx == 0 else "")
         ax.scatter(traj_np[-1, 0], traj_np[-1, 1], color=agent_colors[agent_idx], 
-                  marker='x', s=100, linewidth=3)
+                  marker='x', s=100, linewidth=3,
+                  label=f'{agent_labels[agent_idx]} End' if agent_idx == 0 else "")
 
-    # Add skill legend
+    # Create a more compact team skills legend positioned to avoid overlap
     skill_legend_text = "Team Skills by Segment:\n"
     for i, team_skill in enumerate(team_skills):
-        skill_legend_text += f"Segment {i}: Team Skill {team_skill}\n"
+        skill_legend_text += f"Seg {i}: Team Skill {team_skill}\n"
     
-    ax.text(0.02, 0.98, skill_legend_text, transform=ax.transAxes, 
-           verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+    # Position the text box in upper right area of the plot, but within the axes
+    ax.text(0.98, 0.98, skill_legend_text, transform=ax.transAxes, 
+           verticalalignment='top', horizontalalignment='right',
+           bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.8))
     
-    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    # Add explanation text about task completion
+    explanation_text = ("Task: Collect diamonds by pressing matching color buttons\n"
+                       "✓ = Collected diamond, ○ = Start point, × = End point")
+    ax.text(0.02, 0.98, explanation_text, transform=ax.transAxes, 
+           verticalalignment='top', horizontalalignment='left',
+           bbox=dict(boxstyle='round', facecolor='lightyellow', alpha=0.8))
+    
+    # Position main legend outside the plot area
+    ax.legend(bbox_to_anchor=(1.02, 1), loc='upper left')
     ax.grid(True, alpha=0.3)
     
-    # Save figure
+    # Save figure with tight layout
     save_path = os.path.join(log_dir, f"trajectory_skills_episode_{episode}.png")
     plt.tight_layout()
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
@@ -300,8 +358,8 @@ def main():
         writer.add_scalar("charts/episode_reward", episode_reward, global_step)
         main_logger.info(f"Episode {episode}: Total Reward: {episode_reward:.2f}, Avg Reward (last 100): {avg_reward:.2f}")
 
-        # Plot trajectories every 20 episodes
-        if episode % 20 == 0:
+        # Plot trajectories every 100 episodes
+        if episode % 100 == 0:
             # Use enhanced plotting with skill annotations
             if len(episode_team_skills) > 0 and len(episode_agent_skills) > 0:
                 plot_trajectories_with_skills(
@@ -314,7 +372,8 @@ def main():
                     diamond_colors=env.env.diamond_colors,
                     team_skills=episode_team_skills,
                     agent_skills_history=episode_agent_skills,
-                    k=config.k
+                    k=config.k,
+                    diamond_collected=env.env.diamond_collected
                 )
                 main_logger.info(f"Saved enhanced trajectory plot with skills for episode {episode} to {log_dir}")
             else:

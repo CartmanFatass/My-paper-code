@@ -9,9 +9,9 @@ class Config:
     action_dim = 3    # 每个智能体输出3D速度向量
 
     # HMASD参数
-    n_Z = 10          # 团队技能数量
-    n_z = 10          # 个体技能数量
-    k = 50            # 技能分配间隔
+    n_Z = 6          # 团队技能数量
+    n_z = 6          # 个体技能数量
+    k = 40            # 技能分配间隔
 
     # 网络参数
     hidden_size = 256        # 隐藏层大小
@@ -20,9 +20,9 @@ class Config:
     n_decoder_layers = 3     # 解码器层数
     n_heads = 8             # 多头注意力头数
     gru_hidden_size = 256    # GRU隐藏层大小
-    lr_coordinator = 3e-4    # 技能协调器学习率
-    lr_discoverer = 3e-4     # 技能发现器学习率
-    lr_discriminator = 3e-4  # 技能判别器学习率
+    lr_coordinator = 1e-4    # 技能协调器学习率
+    lr_discoverer = 1e-4     # 技能发现器学习率
+    lr_discriminator = 1e-4  # 技能判别器学习率
 
     # PPO参数
     gamma = 0.99             # 折扣因子

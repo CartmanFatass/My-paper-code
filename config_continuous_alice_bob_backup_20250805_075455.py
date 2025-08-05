@@ -28,8 +28,8 @@ class Config:
     # PPO parameters from paper (Table 1)
     gamma = 0.99
     gae_lambda = 0.95
-    clip_epsilon = 0.2
-    ppo_epochs = 10
+    clip_epsilon = 0.1
+    ppo_epochs = 4
     value_loss_coef = 1.0
     max_grad_norm = 0.5
     value_clip = 10.0
@@ -39,8 +39,8 @@ class Config:
     lambda_e = 0.0      # CRITICAL: Low-level policy is purely intrinsic
     lambda_D = 0.1
     lambda_d = 0.2
-    lambda_h = 0.1      # High-level entropy
-    lambda_l = 0.01     # Low-level entropy
+    lambda_h = 0.05      # High-level entropy
+    lambda_l = 0.001     # Low-level entropy
     lambda_cd = 0.0
     lambda_mi = 0.0
 

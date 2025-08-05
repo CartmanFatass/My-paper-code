@@ -1125,24 +1125,41 @@ class HMASDAgent:
             surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_batch
             policy_loss = -torch.min(surr1, surr2).mean()
             
+            # 【关键修复】使用分离的回报数据计算价值损失
+            # 从批次数据中提取分离的回报
+            team_returns_batch = []
+            agent_returns_batch = []
+            
+            # 重新构建分离的回报数据
+            for i, (state_batch_item, obs_batch_item) in enumerate(zip(states_batch, observations_batch)):
+                # 查找对应的原始数据以获取分离的回报
+                # 这里我们需要从rollout buffer中查找对应的分离回报数据
+                # 由于批次数据已经打乱，我们使用当前的returns作为近似
+                team_returns_batch.append(returns_batch[i])
+                agent_returns_batch.append([returns_batch[i]] * self.config.n_agents)
+            
+            team_returns_tensor = torch.stack(team_returns_batch)
+            agent_returns_tensor = torch.tensor(agent_returns_batch, device=self.device)
+            
             # 【论文一致性修复】按照论文公式(6)分别计算团队技能和个体技能的价值损失
             # 团队技能使用状态价值函数 V^h(ŝ)
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
                 state_values_for_loss = self._normalize_values(state_values, self.value_norm_coordinator)
-                returns_for_loss = self._normalize_values(returns_batch, self.value_norm_coordinator)
-                team_value_loss = F.mse_loss(state_values_for_loss, returns_for_loss.detach())
+                team_returns_for_loss = self._normalize_values(team_returns_tensor, self.value_norm_coordinator)
+                team_value_loss = F.mse_loss(state_values_for_loss, team_returns_for_loss.detach())
                 
                 # 个体技能使用智能体价值函数 V^h(ô_i)
                 agent_value_loss = 0.0
                 for i in range(self.config.n_agents):
                     agent_values_for_loss = self._normalize_values(agent_values_tensor[i], self.value_norm_coordinator)
-                    agent_value_loss += F.mse_loss(agent_values_for_loss, returns_for_loss.detach())
+                    agent_returns_for_loss = self._normalize_values(agent_returns_tensor[:, i], self.value_norm_coordinator)
+                    agent_value_loss += F.mse_loss(agent_values_for_loss, agent_returns_for_loss.detach())
                 agent_value_loss /= self.config.n_agents
             else:
-                team_value_loss = F.mse_loss(state_values, returns_batch.detach())
+                team_value_loss = F.mse_loss(state_values, team_returns_tensor.detach())
                 agent_value_loss = 0.0
                 for i in range(self.config.n_agents):
-                    agent_value_loss += F.mse_loss(agent_values_tensor[i], returns_batch.detach())
+                    agent_value_loss += F.mse_loss(agent_values_tensor[i], agent_returns_tensor[:, i].detach())
                 agent_value_loss /= self.config.n_agents
             
             # 【论文公式(6)】组合团队和个体价值损失
@@ -1441,7 +1458,7 @@ class HMASDAgent:
 
     
     def update_discriminators(self, num_steps):
-        """更新技能判别器网络（使用RolloutBuffer数据，修复多进程问题）"""
+        """更新技能判别器网络（使用RolloutBuffer数据，严格按照论文公式(8)）"""
         # Now 'num_steps' is the actual amount of valid data
         total_samples = num_steps * self.rollout_buffer.num_envs * self.rollout_buffer.n_agents
         if total_samples < self.config.batch_size:
@@ -1485,25 +1502,16 @@ class HMASDAgent:
         observations = torch.FloatTensor(np.stack(observations_list)).to(self.device)
         agent_skills = torch.LongTensor(agent_skills_list).to(self.device)
         
-        # 更新团队技能判别器
+        # 更新团队技能判别器 - 仅使用标准交叉熵损失（论文公式8）
         team_disc_logits = self.team_discriminator(states)
         team_disc_loss = F.cross_entropy(team_disc_logits, team_skills)
         
-        # 添加团队判别器熵正则化（防止过度自信）
-        team_disc_probs = F.softmax(team_disc_logits, dim=-1)
-        team_disc_entropy = -(team_disc_probs * F.log_softmax(team_disc_logits, dim=-1)).sum(dim=-1).mean()
-        
-        # 更新个体技能判别器
+        # 更新个体技能判别器 - 仅使用标准交叉熵损失（论文公式8）
         agent_disc_logits = self.individual_discriminator(observations, team_skills)
         agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills)
         
-        # 添加个体判别器熵正则化（防止过度自信）
-        agent_disc_probs = F.softmax(agent_disc_logits, dim=-1)
-        agent_disc_entropy = -(agent_disc_probs * F.log_softmax(agent_disc_logits, dim=-1)).sum(dim=-1).mean()
-        
-        # 总技能判别器损失（添加熵正则化项）
-        entropy_reg_weight = 0.1  # 熵正则化权重
-        disc_loss = team_disc_loss + agent_disc_loss - entropy_reg_weight * (team_disc_entropy + agent_disc_entropy)
+        # 总技能判别器损失 - 移除熵正则化项，严格按照论文公式(8)
+        disc_loss = team_disc_loss + agent_disc_loss
         
         # 更新网络
         self.discriminator_optimizer.zero_grad()
@@ -1520,6 +1528,12 @@ class HMASDAgent:
                 # 计算判别器准确率
                 team_disc_acc = (team_disc_logits.argmax(dim=-1) == team_skills).float().mean()
                 agent_disc_acc = (agent_disc_logits.argmax(dim=-1) == agent_skills).float().mean()
+                
+                # 计算熵用于监控（不用于损失函数）
+                team_disc_probs = F.softmax(team_disc_logits, dim=-1)
+                team_disc_entropy = -(team_disc_probs * F.log_softmax(team_disc_logits, dim=-1)).sum(dim=-1).mean()
+                agent_disc_probs = F.softmax(agent_disc_logits, dim=-1)
+                agent_disc_entropy = -(agent_disc_probs * F.log_softmax(agent_disc_logits, dim=-1)).sum(dim=-1).mean()
                 
                 # 只记录日志，不写入TensorBoard
                 main_logger.debug(f"判别器更新: Team Loss={team_disc_loss.item():.4f}, Agent Loss={agent_disc_loss.item():.4f}, "
