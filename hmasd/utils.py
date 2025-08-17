@@ -421,7 +421,7 @@ class RolloutBuffer:
                          f"reward={final_accumulated_reward:.4f}")
         return True
     
-    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
+    def compute_advantages(self, last_values, dones, num_steps, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
         """
         【修复版本】标准化的GAE计算方法，在整个rollout收集完毕后调用一次。
         这确保了严格的on-policy更新流程。
@@ -429,6 +429,7 @@ class RolloutBuffer:
         参数:
             last_values (np.ndarray): Rollout最后一步之后的状态价值，Shape (num_envs, n_agents)
             dones (np.ndarray): 最后一步的完成标志，Shape (num_envs, n_agents) 或 (num_envs,)
+            num_steps (int): 实际收集的步数
             gamma (float): 折扣因子
             gae_lambda (float): GAE lambda参数
             denormalized_values (np.ndarray, optional): 【新增】反归一化后的价值估计。如果提供，将使用此值计算GAE。
@@ -476,23 +477,26 @@ class RolloutBuffer:
         inf_count = 0
         
         # 从后往前计算GAE
-        for t in reversed(range(self.num_steps)):
-            # 如果是缓冲区的最后一步，next_value就是传入的last_values
-            if t == self.num_steps - 1:
+        for t in reversed(range(num_steps)):
+            # Correctly determine the next value and done state
+            if t == num_steps - 1:
+                next_non_terminal = 1.0 - dones.astype(np.float32)
                 next_values = last_values_for_gae
-                next_done = dones.astype(np.float32)
             else:
+                # The done signal for the transition at step t is self.dones[t].
+                # The advantage calculation needs to know if the *next* state is terminal,
+                # which is indicated by self.dones[t+1].
+                next_non_terminal = 1.0 - self.dones[t].astype(np.float32)
                 next_values = values_for_gae[t + 1]
-                next_done = self.dones[t + 1].astype(np.float32)
+
+            # TD-error, delta_t = r_t + gamma * V(s_{t+1}) * (1 - done_t) - V(s_t)
+            # Note: The done flag for the transition (s_t, a_t, r_t, s_{t+1}) is self.dones[t]
+            # However, the advantage propagation depends on the *next* state being non-terminal.
+            # So we use next_non_terminal for discounting future values and advantages.
+            delta = self.rewards[t] + gamma * next_values * next_non_terminal - values_for_gae[t]
             
-            # delta_t = r_t + gamma * V(s_{t+1}) * (1 - done_{t+1}) - V(s_t)
-            delta = (self.rewards[t] + 
-                    gamma * next_values * (1.0 - next_done) - 
-                    values_for_gae[t])
-            
-            # advantage_t = delta_t + gamma * lambda * advantage_{t+1} * (1 - done_t)
-            last_advantage = (delta + 
-                            gamma * gae_lambda * last_advantage * (1.0 - next_done))
+            # GAE advantage: A_t = delta_t + gamma * lambda * A_{t+1} * (1 - done_{t+1})
+            last_advantage = delta + gamma * gae_lambda * next_non_terminal * last_advantage
             self.advantages[t] = last_advantage
             
             # 【第三优先级修复】检查每步计算结果
@@ -1026,7 +1030,7 @@ class StateSkillDataset:
 
 def compute_gae(rewards, values, next_values, dones, gamma, lam):
     """
-    计算广义优势估计（GAE）
+    【修复版本】计算广义优势估计（GAE）
     
     参数:
         rewards: 一批奖励 [batch_size]
@@ -1046,12 +1050,19 @@ def compute_gae(rewards, values, next_values, dones, gamma, lam):
     # 逆序遍历时序数据进行计算
     for t in reversed(range(len(rewards))):
         if t == len(rewards) - 1:
+            # 最后一步：使用bootstrap价值
+            next_non_terminal = 1.0 - dones[t]
             next_value = next_values[t]
         else:
+            # 【关键修复】中间步骤：使用下一步的价值，但done信号应该是当前步的
+            next_non_terminal = 1.0 - dones[t]
             next_value = values[t + 1]
-            
-        delta = rewards[t] + gamma * next_value * (1 - dones[t]) - values[t]
-        advantages[t] = last_gae = delta + gamma * lam * (1 - dones[t]) * last_gae
+
+        # TD误差
+        delta = rewards[t] + gamma * next_value * next_non_terminal - values[t]
+        
+        # GAE优势
+        advantages[t] = last_gae = delta + gamma * lam * next_non_terminal * last_gae
     
     returns = advantages + values
     
@@ -1112,17 +1123,22 @@ def one_hot(indices, depth):
         one_hot: 独热编码张量 [batch_size, depth]
     """
     if isinstance(indices, int):
-        indices = torch.tensor([indices])
+        indices = torch.tensor([indices], dtype=torch.long)
     elif isinstance(indices, list):
-        indices = torch.tensor(indices)
+        indices = torch.tensor(indices, dtype=torch.long)
+    elif isinstance(indices, np.ndarray):
+        indices = torch.from_numpy(indices).long()
+    elif isinstance(indices, torch.Tensor):
+        indices = indices.long()  # 确保是LongTensor
+    
     if indices.dim() == 0:
         indices = indices.unsqueeze(0)
     
     device = indices.device
-    one_hot = torch.zeros(indices.size(0), depth, device=device)
-    one_hot.scatter_(1, indices.unsqueeze(1), 1)
+    one_hot_tensor = torch.zeros(indices.size(0), depth, device=device)
+    one_hot_tensor.scatter_(1, indices.unsqueeze(1), 1)
     
-    return one_hot
+    return one_hot_tensor
 
 def setup_optimizer(model, lr):
     """设置优化器"""

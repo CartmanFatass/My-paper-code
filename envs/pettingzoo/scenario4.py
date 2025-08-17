@@ -8,12 +8,6 @@ class UAVForcedRelayEnv(ParallelEnv):
     """
     场景4：强制多跳中继无人机环境
     
-    特点：
-    - 专为强制协作设计的拓扑结构
-    - 地面基站距离用户群体很远，强制要求多跳中继
-    - 优化的用户分布，便于实现90%以上覆盖率
-    - 重点激励用户覆盖率，简化奖励机制
-    - 所有无人机地位平等，通过算法自主选择行为
     """
     
     metadata = {
@@ -115,8 +109,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.agents = self.possible_agents.copy()
 
         # 观测和动作空间
-        # obs_dim: 3(自身位置) + 3(最近邻无人机) + N_user*3(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数) + 1(跳数)
-        self.obs_dim = 3 + 3 + max_observed_users * 3 + max_observed_uavs * 4 + max_observed_bs * 4 + 1 + 1
+        # obs_dim: 3(自身位置) + 3(最近邻无人机) + 4(自身状态，包含跳数) + N_user*4(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+        self.obs_dim = 3 + 3 + 4 + max_observed_users * 4 + max_observed_uavs * 4 + max_observed_bs * 4 + 1
         self.observation_spaces = {
             agent: Dict({
                 "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
@@ -140,8 +134,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 1. 无人机位置: n_uavs * 3
         uav_pos_dim = self.n_uavs * 3
         
-        # 2. 用户位置: n_users * 2
-        user_pos_dim = self.n_users * 2
+        # 2. 用户位置: n_users * 3 (改为3维，保持一致性)
+        user_pos_dim = self.n_users * 3
         
         # 3. 地面基站位置: n_ground_bs * 3
         bs_pos_dim = self.n_ground_bs * 3
@@ -152,11 +146,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 5. 无人机连接状态: n_uavs
         uav_connected_dim = self.n_uavs
         
-        # 6. 当前步数: 1
+        # 6. 系统通信质量指标: 4 (平均SINR, 连接质量, 平均跳数, 系统吞吐量)
+        comm_quality_dim = 4
+        
+        # 7. 当前步数: 1
         step_dim = 1
         
         # 重新设置state_dim
-        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + step_dim
+        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + comm_quality_dim + step_dim
 
     def get_state_dim(self):
         """返回全局状态维度"""
@@ -1165,19 +1162,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 2. Update agent positions based on actions
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
-                # 计算原始速度向量
-                raw_velocity = actions[agent] * self.max_speed
-                
-                # 计算速度向量的模长（3D速度）
-                speed = np.linalg.norm(raw_velocity)
-                
-                # 确保3D速度不超过最大限制
-                if speed > self.max_speed:
-                    # 如果速度超过了最大限制，则将速度向量归一化，然后乘以最大速度
-                    velocity = raw_velocity / speed * self.max_speed
-                else:
-                    # 如果速度未超过限制，则直接使用
-                    velocity = raw_velocity
+                # 【关键修复】正确处理动作向量以控制速度和方向
+                # The action vector from the policy is in the range [-1, 1] for each dimension.
+                # We directly scale this to the maximum velocity.
+                action_vec = actions[agent]
+                velocity = action_vec * self.max_speed
                 
                 new_position = self.uav_positions[agent_idx] + velocity * self.time_step
                 
@@ -1208,6 +1197,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 7. 计算纯净的全局共享奖励
         shared_global_reward = self._compute_reward()
+
+        # 8. 计算系统吞吐量 (在计算完路由和奖励之后)
+        system_throughput_mbps, avg_throughput_per_user_mbps = self._calculate_system_throughput()
+        self.reward_info['system_throughput_mbps'] = system_throughput_mbps
+        self.reward_info['avg_throughput_per_user_mbps'] = avg_throughput_per_user_mbps
 
         # 11. 更新步数并检查终止/截断条件
         self.current_step += 1
@@ -1257,6 +1251,8 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "reward_info": agent_reward_info,
                 "coverage_ratio": self.reward_info.get("coverage_ratio", 0),
                 "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
+                # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
+                "uav_positions": self.uav_positions.copy(),
             }
         
         # 7. 更新观测值（在循环外一次性完成）
@@ -1291,31 +1287,64 @@ class UAVForcedRelayEnv(ParallelEnv):
             return self.ground_bs_positions[node_idx]
         return None
 
+    def _calculate_system_throughput(self):
+        """
+        计算整个系统的总吞吐量和平均用户吞吐量。
+        
+        返回:
+            total_throughput_mbps (float): 系统总吞吐量 (Mbps)
+            avg_throughput_per_user_mbps (float): 平均每个有效用户的吞吐量 (Mbps)
+        """
+        total_throughput_bps = 0
+        effective_users = set()
+
+        # 遍历所有具有有效回程路径的UAV
+        for uav_idx, (path, bottleneck_capacity) in self.routing_paths.items():
+            # 找出连接到这个UAV的用户
+            connected_user_indices = np.where(self.connections[uav_idx])[0]
+            
+            if len(connected_user_indices) == 0:
+                continue
+
+            # 计算该UAV的前端总容量
+            frontend_capacity = self._compute_uav_frontend_capacity(uav_idx, connected_user_indices)
+            
+            # 该UAV能提供的总吞吐量受限于前端容量和回程瓶颈容量
+            uav_throughput = min(frontend_capacity, bottleneck_capacity)
+            
+            # 将该UAV的吞吐量累加到系统总吞吐量
+            total_throughput_bps += uav_throughput
+            
+            # 将这些用户标记为有效用户
+            for user_idx in connected_user_indices:
+                effective_users.add(user_idx)
+
+        total_throughput_mbps = total_throughput_bps / 1e6  # 转换为Mbps
+        
+        num_effective_users = len(effective_users)
+        if num_effective_users > 0:
+            avg_throughput_per_user_mbps = total_throughput_mbps / num_effective_users
+        else:
+            avg_throughput_per_user_mbps = 0
+
+        return total_throughput_mbps, avg_throughput_per_user_mbps
+
     def _compute_distance(self, pos1, pos2):
         return np.sqrt(np.sum((pos1 - pos2) ** 2))
 
     def _update_observations_dict(self, observations_dict):
-        updated_observations_dict = {}
-        for i, agent in enumerate(self.agents):
-            obs_dict = observations_dict[agent]
-            obs = obs_dict["obs"]
-            
-            if i in self.routing_paths:
-                path, _ = self.routing_paths[i]
-                hop_count = len(path)
-                normalized_hop = min(hop_count / self.max_hops, 1.0)
-            else:
-                normalized_hop = 1.0
-            
-            new_obs = np.concatenate([obs, [normalized_hop]])
-            
-            updated_obs_dict = {
-                "obs": new_obs,
-                "action_mask": obs_dict["action_mask"]
-            }
-            updated_observations_dict[agent] = updated_obs_dict
+        """
+        更新观测字典（不再添加额外的跳数信息，因为已经在自身状态中包含）
         
-        return updated_observations_dict
+        参数:
+            observations_dict: 原始观测字典
+            
+        返回:
+            updated_observations_dict: 更新后的观测字典
+        """
+        # 由于跳数信息已经在 _get_observation 的 self_state[2] 中包含，
+        # 这里直接返回原始观测，不做额外修改
+        return observations_dict
 
     def _get_observation(self, agent):
         """
@@ -1361,9 +1390,39 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         obs_components.append(nearest_uav_obs)
         
-        # 2. 局部用户观测 (max_observed_users * 3维)
+        # 2. 自身状态信息 (4维) - 连接状态、路由状态、连接用户数、跳数
+        self_state = np.zeros(4)
+        
+        # 连接用户数量（归一化）
+        connected_users = np.sum(self.connections[agent_idx])
+        self_state[0] = connected_users / self.max_connections
+        
+        # 是否有回程路径
+        has_backhaul = 1.0 if agent_idx in self.routing_paths else 0.0
+        self_state[1] = has_backhaul
+        
+        # 跳数（归一化）
+        if agent_idx in self.routing_paths:
+            path, _ = self.routing_paths[agent_idx]
+            hops = len(path) - 1
+            normalized_hops = hops / self.max_hops
+        else:
+            normalized_hops = 1.0  # 无路径时设为最大值
+        self_state[2] = normalized_hops
+        
+        # 到最近基站的距离（归一化）
+        min_bs_dist = float('inf')
+        for bs_idx in range(self.n_ground_bs):
+            bs_pos = self.ground_bs_positions[bs_idx]
+            dist = np.linalg.norm(own_position - bs_pos)
+            min_bs_dist = min(min_bs_dist, dist)
+        self_state[3] = min_bs_dist / self.area_size if min_bs_dist != float('inf') else 1.0
+        
+        obs_components.append(self_state)
+        
+        # 3. 局部用户观测 (max_observed_users * 4维)
         local_users = self._get_local_users(agent_idx)
-        user_obs = np.zeros(self.max_observed_users * 3)
+        user_obs = np.zeros(self.max_observed_users * 4)
         
         for i, (user_idx, sinr_db) in enumerate(local_users):
             if i >= self.max_observed_users:
@@ -1374,9 +1433,11 @@ class UAVForcedRelayEnv(ParallelEnv):
             relative_pos = (user_pos[:2] - own_position[:2]) / self.area_size
             # 归一化SINR到[0,1]范围 (假设SINR范围为-10dB到40dB)
             normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
+            # 连接状态 - 该用户是否被当前UAV连接
+            is_connected = 1.0 if self.connections[agent_idx, user_idx] else 0.0
             
-            start_idx = i * 3
-            user_obs[start_idx:start_idx+3] = [relative_pos[0], relative_pos[1], normalized_sinr]
+            start_idx = i * 4
+            user_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], normalized_sinr, is_connected]
         
         obs_components.append(user_obs)
         
@@ -1923,11 +1984,12 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         包含以下信息：
         1. 无人机位置 (n_uavs * 3)
-        2. 用户位置 (n_users * 2) 
+        2. 用户位置 (n_users * 3) - 包含高度，保持一致性
         3. 地面基站位置 (n_ground_bs * 3) - 关键信息
         4. 用户覆盖状态 (n_users) - 每个用户是否被覆盖
         5. 无人机连接状态 (n_uavs) - 每个无人机是否有到基站的路径
-        6. 当前步数 (1)
+        6. 系统通信质量指标 (4) - 平均SINR、连接质量、平均跳数、系统吞吐量
+        7. 当前步数 (1)
         
         返回:
             state: 完整的全局状态向量
@@ -1940,8 +2002,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         normalized_uav_positions[:, 2] = (normalized_uav_positions[:, 2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])  # z 归一化
         state_components.append(normalized_uav_positions.flatten())
         
-        # 2. 用户位置 (归一化到[0,1])
-        normalized_user_positions = self.user_positions[:, :2] / self.area_size
+        # 2. 用户位置 (归一化到[0,1]) - 现在包含高度
+        normalized_user_positions = self.user_positions.copy()
+        normalized_user_positions[:, :2] /= self.area_size  # x, y 归一化
+        normalized_user_positions[:, 2] /= 10  # z 归一化 (用户高度固定为1.5m，用10m作为归一化基准)
         state_components.append(normalized_user_positions.flatten())
         
         # 3. 地面基站位置 (归一化到[0,1]) - 强制中继场景的关键信息
@@ -1965,7 +2029,47 @@ class UAVForcedRelayEnv(ParallelEnv):
                     uav_connected[i] = 1.0
         state_components.append(uav_connected)
         
-        # 6. 当前步数 (归一化到[0,1])
+        # 6. 系统通信质量指标 (4维)
+        comm_quality = np.zeros(4)
+        
+        # 6.1 平均SINR (归一化到[0,1]，假设SINR范围为-10dB到40dB)
+        if hasattr(self, 'sinr_matrix'):
+            valid_sinr_values = self.sinr_matrix[self.sinr_matrix >= self.min_sinr]
+            if len(valid_sinr_values) > 0:
+                avg_sinr = np.mean(valid_sinr_values)
+                comm_quality[0] = np.clip((avg_sinr + 10) / 50, 0, 1)  # 归一化到[0,1]
+            else:
+                comm_quality[0] = 0
+        else:
+            comm_quality[0] = 0
+        
+        # 6.2 连接质量（有回程路径的UAV比例）
+        if hasattr(self, 'routing_paths'):
+            comm_quality[1] = len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0
+        else:
+            comm_quality[1] = 0
+        
+        # 6.3 平均跳数 (归一化)
+        if hasattr(self, 'routing_paths') and len(self.routing_paths) > 0:
+            hop_counts = [len(path) - 1 for path, _ in self.routing_paths.values() if path]
+            if hop_counts:
+                avg_hops = np.mean(hop_counts)
+                comm_quality[2] = np.clip(avg_hops / self.max_hops, 0, 1)
+            else:
+                comm_quality[2] = 1.0
+        else:
+            comm_quality[2] = 1.0
+        
+        # 6.4 系统吞吐量 (归一化，假设最大1Gbps)
+        if hasattr(self, 'reward_info') and self.reward_info:
+            throughput_mbps = self.reward_info.get('system_throughput_mbps', 0)
+            comm_quality[3] = np.clip(throughput_mbps / 1000, 0, 1)  # 归一化到[0,1]
+        else:
+            comm_quality[3] = 0
+        
+        state_components.append(comm_quality)
+        
+        # 7. 当前步数 (归一化到[0,1])
         step_normalized = np.array([self.current_step / self.max_steps])
         state_components.append(step_normalized)
         

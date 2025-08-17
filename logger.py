@@ -32,7 +32,7 @@ def _setup_log_process(queue, log_file_path, file_level, console_level):
     
     return listener
 
-def init_multiproc_logging(log_dir='logs', log_file=None, file_level=logging.INFO, console_level=logging.WARNING):
+def init_multiproc_logging(log_dir='logs', log_file=None, file_level=logging.INFO, console_level=logging.INFO):
     """初始化多进程日志系统"""
     global _log_queue, _queue_listener, _mp_manager
     
@@ -201,7 +201,7 @@ def set_log_level(level_name, console_level_name=None):
     root_logger.setLevel(min(level, console_level))
 
 # 保留原有的setup_logger函数用于向后兼容
-def setup_logger(name, log_dir='debug', log_file=None, level=logging.INFO, console_level=logging.WARNING):
+def setup_logger(name, log_dir='debug', log_file=None, level=logging.INFO, console_level=logging.INFO):
     """单进程日志设置函数（保留用于向后兼容）"""
     os.makedirs(log_dir, exist_ok=True)
     

@@ -65,5 +65,5 @@ test*.py
 *.doc
 *.docx
 debug/
-test/
+#test/
 temp_collection_log/

@@ -6,8 +6,10 @@ from torch.optim import Adam
 from torch.distributions import Categorical
 import time
 import os
+import threading
 from collections import deque
 from torch.utils.tensorboard import SummaryWriter
+from queue import Queue
 
 # 确保在多进程环境中使用安全的matplotlib后端
 import matplotlib
@@ -20,6 +22,168 @@ from stable_baselines3.common.running_mean_std import RunningMeanStd
 from logger import main_logger
 from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
 from hmasd.utils import RolloutBuffer, compute_gae, compute_ppo_loss, one_hot
+
+# 导入SB3集成功能
+try:
+    from hmasd.sb3_integration import (
+        AdvancedNumericalStabilizer,
+        PerformanceMonitor,
+        ThreadSafeMetricsCollector as SB3ThreadSafeMetricsCollector
+    )
+    SB3_INTEGRATION_AVAILABLE = True
+    main_logger.info("SB3集成功能已导入")
+except ImportError as e:
+    main_logger.warning(f"SB3集成功能导入失败: {e}，将使用内置实现")
+    SB3_INTEGRATION_AVAILABLE = False
+
+
+class EnvironmentStateManager:
+    """环境状态管理器，防止内存泄漏和提供线程安全访问"""
+    def __init__(self, max_envs=64):
+        self.max_envs = max_envs
+        self.lock = threading.RLock()  # 使用可重入锁
+        self.states = {}
+        self.access_times = {}
+        self.cleanup_threshold = 3600  # 1小时未使用则清理
+        
+    def get_state(self, env_id, default=None):
+        """线程安全地获取环境状态"""
+        with self.lock:
+            self.access_times[env_id] = time.time()
+            return self.states.get(env_id, default)
+    
+    def set_state(self, env_id, state):
+        """线程安全地设置环境状态"""
+        with self.lock:
+            # 如果超过最大环境数，清理最旧的
+            if len(self.states) >= self.max_envs and env_id not in self.states:
+                self._cleanup_oldest()
+            
+            self.states[env_id] = state
+            self.access_times[env_id] = time.time()
+    
+    def remove_state(self, env_id):
+        """线程安全地移除环境状态"""
+        with self.lock:
+            self.states.pop(env_id, None)
+            self.access_times.pop(env_id, None)
+    
+    def _cleanup_oldest(self):
+        """清理最旧的环境状态（内部方法，需要在锁内调用）"""
+        if not self.access_times:
+            return
+        oldest_env = min(self.access_times, key=self.access_times.get)
+        self.states.pop(oldest_env, None)
+        self.access_times.pop(oldest_env, None)
+        main_logger.debug(f"清理最旧的环境状态: env_id={oldest_env}")
+    
+    def cleanup_inactive(self, timeout=None):
+        """清理超时未使用的环境状态"""
+        if timeout is None:
+            timeout = self.cleanup_threshold
+            
+        with self.lock:
+            current_time = time.time()
+            to_remove = [env_id for env_id, last_access in self.access_times.items()
+                        if current_time - last_access > timeout]
+            
+            for env_id in to_remove:
+                self.states.pop(env_id, None)
+                self.access_times.pop(env_id, None)
+            
+            if to_remove:
+                main_logger.info(f"清理了 {len(to_remove)} 个超时环境状态: {to_remove}")
+    
+    def get_stats(self):
+        """获取状态管理器统计信息"""
+        with self.lock:
+            return {
+                'active_envs': len(self.states),
+                'max_envs': self.max_envs,
+                'oldest_access': min(self.access_times.values()) if self.access_times else None,
+                'newest_access': max(self.access_times.values()) if self.access_times else None
+            }
+
+
+class NumericalStabilizer:
+    """数值稳定性工具类"""
+    
+    @staticmethod
+    def safe_log(x, eps=1e-8):
+        """安全的对数运算"""
+        return torch.log(torch.clamp(x, min=eps))
+    
+    @staticmethod
+    def safe_div(numerator, denominator, eps=1e-8):
+        """安全的除法运算"""
+        return numerator / (denominator + eps)
+    
+    @staticmethod
+    def check_and_fix_tensor(tensor, name="tensor", nan_replacement=0.0, inf_replacement=10.0):
+        """检查并修复张量中的异常值"""
+        if not isinstance(tensor, torch.Tensor):
+            return tensor
+            
+        has_nan = torch.isnan(tensor).any().item()
+        has_inf = torch.isinf(tensor).any().item()
+        
+        if has_nan or has_inf:
+            main_logger.warning(f"数值异常检测到在 {name}: NaN={has_nan}, Inf={has_inf}")
+            tensor = torch.nan_to_num(tensor, nan=nan_replacement, 
+                                    posinf=inf_replacement, neginf=-inf_replacement)
+            main_logger.info(f"已修复 {name} 中的数值异常")
+        
+        return tensor
+    
+    @staticmethod
+    def safe_normalize(tensor, dim=-1, eps=1e-8):
+        """安全的归一化操作"""
+        norm = torch.norm(tensor, dim=dim, keepdim=True)
+        return tensor / (norm + eps)
+
+
+class ThreadSafeMetricsCollector:
+    """线程安全的指标收集器"""
+    def __init__(self, max_size=10000):
+        self.lock = threading.Lock()
+        self.metrics = {}
+        self.max_size = max_size
+    
+    def add_metric(self, key, value, timestamp=None):
+        """线程安全地添加指标"""
+        if timestamp is None:
+            timestamp = time.time()
+            
+        with self.lock:
+            if key not in self.metrics:
+                self.metrics[key] = deque(maxlen=self.max_size)
+            self.metrics[key].append({'value': value, 'timestamp': timestamp})
+    
+    def get_metrics(self, key=None):
+        """线程安全地获取指标"""
+        with self.lock:
+            if key is None:
+                return {k: list(v) for k, v in self.metrics.items()}
+            else:
+                return list(self.metrics.get(key, []))
+    
+    def get_recent_mean(self, key, n=100):
+        """获取最近n个值的平均值"""
+        with self.lock:
+            if key not in self.metrics:
+                return None
+            recent_values = list(self.metrics[key])[-n:]
+            if not recent_values:
+                return None
+            return np.mean([item['value'] for item in recent_values])
+    
+    def clear_metrics(self, key=None):
+        """清理指标"""
+        with self.lock:
+            if key is None:
+                self.metrics.clear()
+            else:
+                self.metrics.pop(key, None)
 
 
 class HMASDAgent:
@@ -55,6 +219,7 @@ class HMASDAgent:
         # self.writer = SummaryWriter(log_dir)  # 移除
         # main_logger.debug(f"HMASDAgent.__init__: SummaryWriter created: {self.writer}")
         self.global_step = 0
+        self.num_timesteps = 0  # Add SB3 compatibility attribute
         
         # 创建网络
         self.skill_coordinator = SkillCoordinator(config).to(self.device)
@@ -151,16 +316,39 @@ class HMASDAgent:
         self.env_reward_sums = {}  # 用于存储每个环境ID的累积奖励，用于并行训练
         self.env_timers = {}  # 用于存储每个环境ID的技能计时器，用于并行训练
         
-        # 新增：环境特定的状态跟踪
-        self.env_team_skills = {}  # 各环境的当前团队技能
-        self.env_agent_skills = {}  # 各环境的当前个体技能列表
-        self.env_log_probs = {}  # 各环境的log probabilities
-        self.env_hidden_states = {}  # 各环境的GRU隐藏状态
+        # 使用新的环境状态管理器替代原有的字典
+        max_envs = max(64, getattr(config, 'num_envs', 1) * 2)  # 预留更多空间
+        self.env_state_manager = EnvironmentStateManager(max_envs=max_envs)
+        
+        # 初始化数值稳定性工具
+        if SB3_INTEGRATION_AVAILABLE:
+            self.numerical_stabilizer = AdvancedNumericalStabilizer()
+            main_logger.info("使用SB3增强的数值稳定性工具")
+        else:
+            self.numerical_stabilizer = NumericalStabilizer()
+            main_logger.info("使用内置的数值稳定性工具")
+        
+        # 创建线程安全的指标收集器
+        if SB3_INTEGRATION_AVAILABLE:
+            self.metrics_collector = SB3ThreadSafeMetricsCollector(max_size=10000)
+            main_logger.info("使用SB3增强的线程安全指标收集器")
+        else:
+            self.metrics_collector = ThreadSafeMetricsCollector(max_size=10000)
+            main_logger.info("使用内置的线程安全指标收集器")
+        
+        # 保留兼容性接口（将逐步迁移到新的管理器）
+        self.env_team_skills = {}  # 将逐步迁移到env_state_manager
+        self.env_agent_skills = {}  # 将逐步迁移到env_state_manager
+        self.env_log_probs = {}  # 将逐步迁移到env_state_manager
+        self.env_hidden_states = {}  # 将逐步迁移到env_state_manager
         
         # 动态初始化环境状态字典 - 将在实际使用时按需初始化
         # 不再预分配固定数量的环境槽位
         self.accumulated_rewards = 0.0  # 用于测试的累积奖励属性
         self.episode_rewards = []  # 记录每个完整episode的奖励
+        
+        main_logger.info(f"已初始化环境状态管理器，最大环境数: {max_envs}")
+        main_logger.info("已初始化线程安全指标收集器")
 
         # 用于记录整个episode的技能使用计数
         self.episode_team_skill_counts = {}
@@ -226,13 +414,26 @@ class HMASDAgent:
         if config.use_valuenorm:
             self.value_norm_coordinator = RunningMeanStd(shape=())
             self.value_norm_discoverer = RunningMeanStd(shape=())
-            main_logger.info("已启用Value Normalization (使用SB3 RunningMeanStd)")
+            # 添加更新频率控制
+            self.value_norm_update_freq = getattr(config, 'value_norm_update_freq', 10)  # 每10步更新一次
+            self.value_norm_update_counter = 0
+            main_logger.info(f"已启用Value Normalization (使用SB3 RunningMeanStd), 更新频率: {self.value_norm_update_freq}")
         else:
             self.value_norm_coordinator = None
             self.value_norm_discoverer = None
+            self.value_norm_update_freq = 0
+            self.value_norm_update_counter = 0
             main_logger.info("未启用Value Normalization")
+        
+        # 初始化Observation Normalization - 使用SB3的RunningMeanStd
+        if getattr(config, 'use_obsnorm', False):
+            self.obs_norm = RunningMeanStd(shape=(config.obs_dim,))
+            main_logger.info("已启用Observation Normalization (使用SB3 RunningMeanStd)")
+        else:
+            self.obs_norm = None
+            main_logger.info("未启用Observation Normalization")
     
-    def _normalize_values(self, values_tensor, running_mean_std):
+    def _normalize_values(self, values_tensor, running_mean_std, clip=True):
         """
         [修正] 使用当前的统计量归一化一个张量。
         这个函数不更新统计量。
@@ -246,8 +447,10 @@ class HMASDAgent:
         
         # 归一化
         normalized_tensor = (values_tensor - current_mean) / torch.sqrt(current_var + 1e-8)
-        # 裁剪
-        normalized_tensor = torch.clamp(normalized_tensor, -self.config.value_clip, self.config.value_clip)
+        
+        if clip:
+            # 裁剪
+            normalized_tensor = torch.clamp(normalized_tensor, -self.config.value_clip, self.config.value_clip)
         
         return normalized_tensor
 
@@ -266,6 +469,56 @@ class HMASDAgent:
         denormalized_tensor = normalized_values_tensor * torch.sqrt(current_var + 1e-8) + current_mean
         
         return denormalized_tensor
+
+    def _normalize_observations(self, observations):
+        """
+        归一化观测数据，解决输入尺度问题
+        
+        参数:
+            observations: 观测数据，可以是numpy数组或torch张量
+            
+        返回:
+            normalized_observations: 归一化后的观测数据
+        """
+        if not getattr(self.config, 'use_obsnorm', False) or self.obs_norm is None:
+            return observations
+        
+        # 转换为numpy数组进行处理
+        if isinstance(observations, torch.Tensor):
+            obs_np = observations.cpu().numpy()
+            return_tensor = True
+        else:
+            obs_np = observations
+            return_tensor = False
+        
+        # 更新观测统计量
+        if obs_np.ndim == 1:
+            # 单个观测
+            self.obs_norm.update(obs_np)
+        elif obs_np.ndim == 2:
+            # 多个智能体的观测 [n_agents, obs_dim]
+            for i in range(obs_np.shape[0]):
+                self.obs_norm.update(obs_np[i])
+        elif obs_np.ndim == 3:
+            # 批量观测 [batch_size, n_agents, obs_dim]
+            for i in range(obs_np.shape[0]):
+                for j in range(obs_np.shape[1]):
+                    self.obs_norm.update(obs_np[i, j])
+        
+        # 归一化
+        current_mean = self.obs_norm.mean
+        current_var = self.obs_norm.var
+        
+        normalized_obs = (obs_np - current_mean) / np.sqrt(current_var + 1e-8)
+        
+        # 裁剪到合理范围
+        normalized_obs = np.clip(normalized_obs, -10.0, 10.0)
+        
+        # 如果输入是张量，返回张量
+        if return_tensor:
+            return torch.FloatTensor(normalized_obs).to(self.device)
+        else:
+            return normalized_obs
 
     def clear_buffers(self):
         """清空经验缓冲区（用于严格on-policy训练）"""
@@ -296,12 +549,46 @@ class HMASDAgent:
         self.episode_team_skill_counts = {}
         self.episode_agent_skill_counts = []
         
+        # 定期清理环境状态管理器中的超时状态
+        if hasattr(self, 'env_state_manager'):
+            self.env_state_manager.cleanup_inactive()
+            stats = self.env_state_manager.get_stats()
+            main_logger.debug(f"环境状态管理器统计: {stats}")
+        
+        # 清理指标收集器中的旧数据
+        if hasattr(self, 'metrics_collector'):
+            # 只保留最近的指标
+            self.metrics_collector.clear_metrics()
+            main_logger.debug("已清理指标收集器中的旧数据")
+        
         # 注意：不重置Value Normalization统计量
         # ValueNorm的running_mean和running_std应该在整个训练过程中累积
         # 这符合MAPPO的标准实现，确保价值函数标准化的稳定性
         # 只有在模型初始化或显式要求时才重置ValueNorm统计量
         if self.config.use_valuenorm:
             main_logger.debug("保持Value Normalization统计量不变，继续累积训练数据")
+    
+    def get_env_state_stats(self):
+        """获取环境状态管理器的统计信息"""
+        if hasattr(self, 'env_state_manager'):
+            return self.env_state_manager.get_stats()
+        return {'active_envs': 0, 'max_envs': 0}
+    
+    def cleanup_inactive_envs(self, timeout=3600):
+        """手动清理超时的环境状态"""
+        if hasattr(self, 'env_state_manager'):
+            self.env_state_manager.cleanup_inactive(timeout)
+    
+    def add_training_metric(self, key, value):
+        """添加训练指标到线程安全收集器"""
+        if hasattr(self, 'metrics_collector'):
+            self.metrics_collector.add_metric(key, value)
+    
+    def get_recent_metric_mean(self, key, n=100):
+        """获取最近n个指标的平均值"""
+        if hasattr(self, 'metrics_collector'):
+            return self.metrics_collector.get_recent_mean(key, n)
+        return None
     
     def reset_env_state(self, env_id):
         """Resets the internal state for a specific environment."""
@@ -322,7 +609,14 @@ class HMASDAgent:
         if agent_skills is None:
             agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
             
+        # 【关键修复】确保agent_skills有效，如果无效则分配随机技能
         n_agents = observations.shape[0]
+        if agent_skills is None or len(agent_skills) != n_agents or np.any(np.array(agent_skills) < 0):
+            main_logger.warning(f"环境{env_id}的agent_skills无效: {agent_skills}，分配随机技能")
+            agent_skills = np.random.randint(0, self.config.n_z, size=n_agents)
+            # 更新环境状态
+            self.env_agent_skills[env_id] = agent_skills
+            
         actions = torch.zeros((n_agents, self.config.action_dim), device=self.device)
         action_logprobs = torch.zeros(n_agents, device=self.device)
         values = torch.zeros(n_agents, device=self.device)
@@ -340,13 +634,18 @@ class HMASDAgent:
             if current_team_skill is not None and state is not None:
                 global_state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
                 team_skill_tensor = torch.tensor(current_team_skill, device=self.device).unsqueeze(0)
-                global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
+                # Aggregate hidden states for the centralized critic
+                agg_hidden_state = hidden_state.mean(dim=0, keepdim=True)
+                global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor, agg_hidden_state)
                 values.fill_(global_value.item())
             else:
                 values.fill_(0.0)
 
+            # 【关键修复】应用观测归一化，解决输入尺度问题
+            observations_normalized = self._normalize_observations(observations)
+            
             # 将所有智能体作为单个批次处理
-            obs_batch = torch.FloatTensor(observations).to(self.device)
+            obs_batch = torch.FloatTensor(observations_normalized).to(self.device)
             skill_batch = torch.tensor(agent_skills, device=self.device)
 
             # 将环境的 hidden_state (现在是正确的2D形状) 传入网络
@@ -376,7 +675,11 @@ class HMASDAgent:
         state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
         # 修复：先转换为numpy数组再创建tensor，避免从列表创建tensor的警告
         obs_array = np.array(observations) if not isinstance(observations, np.ndarray) else observations
-        obs_tensor = torch.FloatTensor(obs_array).unsqueeze(0).to(self.device)
+        
+        # 【关键修复】应用观测归一化，解决输入尺度问题
+        obs_array_normalized = self._normalize_observations(obs_array)
+        
+        obs_tensor = torch.FloatTensor(obs_array_normalized).unsqueeze(0).to(self.device)
         
         with torch.no_grad():
             team_skill, agent_skills, Z_logits, z_logits, cd_loss, cmi_loss = self.skill_coordinator(
@@ -420,7 +723,10 @@ class HMASDAgent:
         if len(indices_to_update) > 0:
             # 提取需要更新的状态和观测
             states_to_process = torch.FloatTensor(states_batch[indices_to_update]).to(self.device)
-            obs_to_process = torch.FloatTensor(observations_batch[indices_to_update]).to(self.device)
+            
+            # 【关键修复】应用观测归一化，解决输入尺度问题
+            obs_to_process_normalized = self._normalize_observations(observations_batch[indices_to_update])
+            obs_to_process = torch.FloatTensor(obs_to_process_normalized).to(self.device)
 
             # 批量运行 SkillCoordinator
             with torch.no_grad():
@@ -475,12 +781,16 @@ class HMASDAgent:
 
         hidden_states_batch[dones_batch] = 0.0
 
-        # 2. 准备批量输入 (这部分逻辑保持不变)
+        # 2. 准备批量输入 - 添加观测归一化
         obs_flat = observations_batch.reshape(-1, self.config.obs_dim)
+        
+        # 【关键修复】应用观测归一化，解决输入尺度问题
+        obs_flat_normalized = self._normalize_observations(obs_flat)
+        
         skills_flat = agent_skills_batch.reshape(-1)
         hidden_states_flat = hidden_states_batch.reshape(-1, self.config.gru_hidden_size)
 
-        obs_tensor = torch.FloatTensor(obs_flat).to(self.device)
+        obs_tensor = torch.FloatTensor(obs_flat_normalized).to(self.device)
         skills_tensor = torch.LongTensor(skills_flat).to(self.device)
         hidden_tensor = torch.FloatTensor(hidden_states_flat).to(self.device)
         
@@ -499,8 +809,8 @@ class HMASDAgent:
             states_tensor = torch.FloatTensor(states_expanded).to(self.device)
             team_skills_tensor = torch.LongTensor(team_skills_expanded).to(self.device)
             
-            # 从 Critic 获取价值估计 - 这是被切断的关键信号！
-            values_flat, _ = self.skill_discoverer.get_value(states_tensor, team_skills_tensor)
+            # 从 Critic 获取价值估计 - 现在传入GRU输出
+            values_flat, _ = self.skill_discoverer.get_value(states_tensor, team_skills_tensor, new_hidden_flat)
             # ======================= ▲▲▲ 核心修复点 ▲▲▲ =======================
             
         # 5. Reshape back (这部分逻辑保持不变)
@@ -529,9 +839,28 @@ class HMASDAgent:
         for i in range(num_envs):
             if i not in self.env_timers:
                 self.env_timers[i] = 0
-                self.env_team_skills[i] = -1
-                self.env_agent_skills[i] = np.full(self.config.n_agents, -1)
-                self.env_log_probs[i] = {}
+                # 【关键修复】立即为新环境分配随机技能，而不是使用-1占位符
+                with torch.no_grad():
+                    # 随机分配团队技能
+                    random_team_skill = np.random.randint(0, self.config.n_Z)
+                    # 随机分配个体技能
+                    random_agent_skills = np.random.randint(0, self.config.n_z, size=self.config.n_agents)
+                    
+                    self.env_team_skills[i] = random_team_skill
+                    self.env_agent_skills[i] = random_agent_skills
+                    
+                    # 创建对应的log_probs（使用均匀分布的log概率）
+                    uniform_team_log_prob = -np.log(self.config.n_Z)
+                    uniform_agent_log_probs = [-np.log(self.config.n_z)] * self.config.n_agents
+                    
+                    self.env_log_probs[i] = {
+                        'team_log_prob': uniform_team_log_prob,
+                        'agent_log_probs': uniform_agent_log_probs
+                    }
+                    
+                    main_logger.info(f"环境{i}初始化: 团队技能={random_team_skill}, "
+                                   f"个体技能={random_agent_skills}")
+                
                 self.env_hidden_states[i] = None
 
         # 1. 批量分配技能
@@ -707,8 +1036,8 @@ class HMASDAgent:
         
         self.store_rollout_step(
             t=t,
-            state=state,  # 【重要修复】存储当前状态而非下一状态
-            observations=observations,  # 【重要修复】存储当前观测而非下一观测
+            state=state,
+            observations=observations,
             actions=actions,
             rewards=intrinsic_rewards_array,
             dones=dones,
@@ -917,21 +1246,74 @@ class HMASDAgent:
         
         return tensor, False
 
+    def compute_adaptive_advantage_normalization(self, advantages, sparse_reward_threshold=0.01):
+        """
+        自适应优势标准化：根据奖励稀疏程度调整标准化强度
+        
+        参数:
+            advantages: 优势值张量
+            sparse_reward_threshold: 判断稀疏奖励的阈值
+            
+        返回:
+            normalized_advantages: 标准化后的优势值
+        """
+        # 计算非零优势的比例（作为奖励稀疏度的代理指标）
+        non_zero_ratio = (advantages.abs() > sparse_reward_threshold).float().mean()
+        
+        if non_zero_ratio < 0.1:  # 非常稀疏的奖励
+            # 使用更温和的标准化或不标准化
+            if advantages.std() > 1e-8:
+                # 只进行部分标准化，保留更多原始信号
+                normalization_strength = 0.1  # 10%的标准化强度
+                mean = advantages.mean()
+                std = advantages.std()
+                normalized = (advantages - mean) / (std + 1e-8)
+                advantages = advantages * (1 - normalization_strength) + normalized * normalization_strength
+                main_logger.debug(f"使用轻度优势标准化 (稀疏度: {non_zero_ratio:.3f}, 强度: {normalization_strength})")
+        elif non_zero_ratio < 0.3:  # 中等稀疏
+            # 使用软标准化
+            if advantages.std() > 1e-8:
+                # 使用更大的epsilon避免过度放大小信号
+                advantages = (advantages - advantages.mean()) / (advantages.std() + 0.1)
+                main_logger.debug(f"使用软优势标准化 (稀疏度: {non_zero_ratio:.3f})")
+        else:  # 密集奖励
+            # 使用标准的优势标准化
+            if advantages.std() > 1e-8:
+                advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+                main_logger.debug(f"使用标准优势标准化 (稀疏度: {non_zero_ratio:.3f})")
+        
+        # 裁剪极值，避免数值问题
+        advantages = torch.clamp(advantages, -10, 10)
+        
+        return advantages
+
     def _compute_intrinsic_reward(self, next_state, reward, next_obs, team_skill, agent_skill):
         """
-        【恢复完整版本】计算内在奖励，使用完整的normalization机制
+        【SB3集成版本】计算内在奖励，集成数值稳定性检查
         
         关键特性:
         1. 使用互信息: I(s;z) = log q(z|s) - log p(z) 而不是原始的 log q(z|s)
         2. 基线减法（baseline subtraction）用于方差减少
         3. 奖励标准化和裁剪防止极值
         4. 运行统计量维护确保训练稳定性
+        5. 集成SB3数值稳定性检查
         """
         with torch.no_grad():
             try:
                 # === Team Discriminator Reward (Fixed) ===
                 next_state_tensor = torch.FloatTensor(next_state).unsqueeze(0).to(self.device)
+                
+                # 数值稳定性检查
+                next_state_tensor = self.numerical_stabilizer.check_and_fix_tensor(
+                    next_state_tensor, "next_state_tensor"
+                )
+                
                 team_disc_logits = self.team_discriminator(next_state_tensor)
+                
+                # 数值稳定性检查
+                team_disc_logits = self.numerical_stabilizer.check_and_fix_tensor(
+                    team_disc_logits, "team_disc_logits"
+                )
                 
                 # Use log_softmax for numerical stability
                 team_disc_log_probs = F.log_softmax(team_disc_logits, dim=-1)
@@ -941,12 +1323,23 @@ class HMASDAgent:
                 # I(s;Z) = log q_D(Z|s) - log p(Z)
                 # Assume uniform prior: log p(Z) = -log(n_Z)
                 team_skill_prior_log_prob = -np.log(self.config.n_Z)
-                team_mutual_info = team_skill_log_prob.item() - team_skill_prior_log_prob
+                team_mutual_info = team_skill_log_prob.item()# - team_skill_prior_log_prob
                 
                 # === Individual Discriminator Reward (Fixed) ===
                 agent_obs_tensor = torch.FloatTensor(next_obs).unsqueeze(0).to(self.device)
+                
+                # 数值稳定性检查
+                agent_obs_tensor = self.numerical_stabilizer.check_and_fix_tensor(
+                    agent_obs_tensor, "agent_obs_tensor"
+                )
+                
                 team_skill_tensor = torch.tensor(team_skill, device=self.device)
                 agent_disc_logits = self.individual_discriminator(agent_obs_tensor, team_skill_tensor)
+                
+                # 数值稳定性检查
+                agent_disc_logits = self.numerical_stabilizer.check_and_fix_tensor(
+                    agent_disc_logits, "agent_disc_logits"
+                )
                 
                 agent_disc_log_probs = F.log_softmax(agent_disc_logits, dim=-1)
                 agent_skill_log_prob = agent_disc_log_probs[0, agent_skill]
@@ -955,7 +1348,7 @@ class HMASDAgent:
                 # I(o;z|Z) = log q_d(z|o,Z) - log p(z|Z)
                 # Assume uniform conditional prior: log p(z|Z) = -log(n_z)
                 agent_skill_prior_log_prob = -np.log(self.config.n_z)
-                agent_mutual_info = agent_skill_log_prob.item() - agent_skill_prior_log_prob
+                agent_mutual_info = agent_skill_log_prob.item()# - agent_skill_prior_log_prob
                 
                 # === Baseline Subtraction for Variance Reduction ===
                 # Initialize running baselines if not exists
@@ -970,9 +1363,9 @@ class HMASDAgent:
                 self.ind_disc_baseline = (1 - self.baseline_update_rate) * self.ind_disc_baseline + \
                                        self.baseline_update_rate * agent_mutual_info
                 
-                # Subtract baselines
-                team_disc_reward = team_mutual_info - self.team_disc_baseline
-                ind_disc_reward = agent_mutual_info - self.ind_disc_baseline
+                # using raw cross entropy seems perform better
+                team_disc_reward = team_mutual_info# - self.team_disc_baseline
+                ind_disc_reward = agent_mutual_info# - self.ind_disc_baseline
                 
                 # === Reward Normalization and Clipping ===
                 # Initialize running statistics if not exists
@@ -1000,18 +1393,45 @@ class HMASDAgent:
                 team_disc_component = self.config.lambda_D * team_disc_reward_clipped
                 ind_disc_component = self.config.lambda_d * ind_disc_reward_clipped
                 
+                main_logger.info(f"[Reward Debug] env_comp: {env_component:.4f} (lambda_e: {self.config.lambda_e}, reward: {reward:.4f})")
+                main_logger.info(f"[Reward Debug] team_disc_comp: {team_disc_component:.4f} (lambda_D: {self.config.lambda_D}, value: {team_disc_reward_clipped:.4f})")
+                main_logger.info(f"[Reward Debug] ind_disc_comp: {ind_disc_component:.4f} (lambda_d: {self.config.lambda_d}, value: {ind_disc_reward_clipped:.4f})")
+
                 intrinsic_reward = env_component + team_disc_component + ind_disc_component
+                main_logger.info(f"[Reward Debug] Final Intrinsic Reward: {intrinsic_reward:.4f}")
                 
-                # Ensure finite values
-                if not np.isfinite(intrinsic_reward):
-                    intrinsic_reward = env_component
-                    team_disc_component = 0.0
-                    ind_disc_component = 0.0
+                # 使用SB3数值稳定性工具进行最终检查
+                if SB3_INTEGRATION_AVAILABLE:
+                    # 检查所有组件的数值稳定性
+                    components = {
+                        'env_component': env_component,
+                        'team_disc_component': team_disc_component,
+                        'ind_disc_component': ind_disc_component,
+                        'intrinsic_reward': intrinsic_reward
+                    }
+                    
+                    for name, value in components.items():
+                        if not np.isfinite(value):
+                            main_logger.warning(f"数值异常检测到在 {name}: {value}")
+                            if name == 'intrinsic_reward':
+                                intrinsic_reward = env_component
+                                team_disc_component = 0.0
+                                ind_disc_component = 0.0
+                            elif name == 'team_disc_component':
+                                team_disc_component = 0.0
+                            elif name == 'ind_disc_component':
+                                ind_disc_component = 0.0
+                else:
+                    # 使用内置的数值检查
+                    if not np.isfinite(intrinsic_reward):
+                        intrinsic_reward = env_component
+                        team_disc_component = 0.0
+                        ind_disc_component = 0.0
                 
                 return intrinsic_reward, env_component, team_disc_component, ind_disc_component
                 
             except Exception as e:
-                main_logger.error(f"Error in fixed intrinsic reward computation: {e}")
+                main_logger.error(f"Error in SB3-integrated intrinsic reward computation: {e}")
                 env_component = self.config.lambda_e * reward if hasattr(self.config, 'lambda_e') else 0.0
                 return env_component, env_component, 0.0, 0.0
 
@@ -1115,9 +1535,8 @@ class HMASDAgent:
             else:
                 agent_values_tensor = torch.zeros(self.config.n_agents, batch_size, device=self.device)
 
-            # 【关键修复】移除优势标准化，这会导致训练不稳定和灾难性遗忘
-            # 在稀疏奖励环境中，优势标准化会破坏奖励信号的相对重要性
-            # advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
+            # --- 关键修复: 添加标准的优势标准化 ---
+            advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
             
             # --- 计算PPO损失 (标准的、非序列化的) ---
             ratios = torch.exp(total_log_probs - old_log_probs_batch.detach())
@@ -1356,6 +1775,16 @@ class HMASDAgent:
                 dones_seq
             )
             
+            # --- [新增] 详细日志记录 ---
+            main_logger.debug(f"  PPO Batch Info (Update #{update_count+1}):")
+            main_logger.debug(f"    - Advantages: mean={advantages_seq.mean().item():.4f}, std={advantages_seq.std().item():.4f}")
+            main_logger.debug(f"    - Returns: mean={returns_seq.mean().item():.4f}, std={returns_seq.std().item():.4f}")
+            main_logger.debug(f"    - Old Log Probs: mean={old_log_probs_seq.mean().item():.4f}")
+            main_logger.debug(f"    - New Log Probs: mean={new_log_probs.mean().item():.4f}")
+            main_logger.debug(f"    - New Values: mean={new_values.mean().item():.4f}")
+            main_logger.debug(f"    - Entropy: {entropy.item():.4f}")
+            # --- [结束] 详细日志记录 ---
+            
             # --- 将所有数据展平以计算损失 ---
             # 展平数据: (T, B) -> (T*B)
             advantages_flat = advantages_seq.reshape(-1)
@@ -1364,9 +1793,8 @@ class HMASDAgent:
             new_log_probs_flat = new_log_probs.reshape(-1)
             new_values_flat = new_values.reshape(-1)
             
-            # 【关键修复】移除优势标准化，这会导致训练不稳定和灾难性遗忘
-            # 在稀疏奖励环境中，优势标准化会破坏奖励信号的相对重要性
-            # advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
+            # --- 关键修复: 添加标准的优势标准化 ---
+            advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
             
             # --- 计算PPO损失（在展平后的数据上） ---
             ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
@@ -1376,15 +1804,22 @@ class HMASDAgent:
             
             # 价值损失
             if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-                # a. Critic的预测值需要被归一化，以便与归一化的目标进行比较
-                values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
-                # b. Critic的训练目标(returns)也需要被归一化
-                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
+                # a. Critic的预测值需要被归一化和裁剪
+                values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer, clip=True)
+                # b. Critic的训练目标(returns)也需要被归一化，但不裁剪
+                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer, clip=False)
                 # **关键修复**: 目标值需要detach()以防止梯度流向GAE计算
                 value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
             else:
                 # 如果不使用ValueNorm，一切照旧
                 value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
+
+            # [调试日志] 打印价值学习的关键信息
+            if update_count % 4 == 0: # 每4次更新打印一次以减少日志量
+                main_logger.info(f"  [Value-Debug] Update #{update_count+1}:")
+                main_logger.info(f"    - Target Returns (mean): {returns_flat.mean().item():.4f}, (std): {returns_flat.std().item():.4f}")
+                main_logger.info(f"    - Predicted Values (mean): {new_values_flat.mean().item():.4f}, (std): {new_values_flat.std().item():.4f}")
+                main_logger.info(f"    - Value Loss: {value_loss.item():.4f}")
             
             # 熵损失
             entropy_loss = -entropy * self.config.lambda_l
@@ -1396,6 +1831,12 @@ class HMASDAgent:
                 loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
             else:
                 loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+
+            # --- [新增] 详细日志记录 ---
+            main_logger.debug(f"    - Policy Loss: {policy_loss.item():.6f}")
+            main_logger.debug(f"    - Value Loss: {value_loss.item():.6f}")
+            main_logger.debug(f"    - Total Loss: {loss.item():.6f}")
+            # --- [结束] 详细日志记录 ---
             
             # 更新网络
             self.discoverer_optimizer.zero_grad()
@@ -1482,19 +1923,34 @@ class HMASDAgent:
         
         for i in range(batch_size):
             t, env_idx, agent_idx = time_indices[i], env_indices[i], agent_indices[i]
+
+            # 【CRITICAL FIX】判别器应该学习 p(z | s')，即从下一个状态预测导致该状态的技能
+            # 因此，我们需要从 t+1 获取状态/观测，但使用 t 的技能作为标签
             
-            # 获取全局状态和团队技能
-            state = self.rollout_buffer.states[t, env_idx]
-            team_skill = self.rollout_buffer.team_skills[t, env_idx]
+            # 确定下一个时间步 t_next
+            t_next = t + 1
             
-            # 获取特定智能体的观测和技能
-            observation = self.rollout_buffer.obs[t, env_idx, agent_idx]
-            agent_skill = self.rollout_buffer.agent_skills[t, env_idx, agent_idx]
+            # 如果 t 是缓冲区的最后一步，我们没有 s'，所以跳过这个样本
+            if t_next >= num_steps:
+                continue
+
+            # 获取下一个全局状态 (s') 和团队技能 (z)
+            next_state = self.rollout_buffer.states[t_next, env_idx]
+            team_skill = self.rollout_buffer.team_skills[t, env_idx] # 使用当前时间步的技能
             
-            states_list.append(state)
+            # 获取特定智能体的下一个观测 (o') 和个体技能 (z)
+            next_observation = self.rollout_buffer.obs[t_next, env_idx, agent_idx]
+            agent_skill = self.rollout_buffer.agent_skills[t, env_idx, agent_idx] # 使用当前时间步的技能
+            
+            states_list.append(next_state)
             team_skills_list.append(team_skill)
-            observations_list.append(observation)
+            observations_list.append(next_observation)
             agent_skills_list.append(agent_skill)
+        
+        # 如果所有样本都被跳过，则提前退出
+        if not states_list:
+            main_logger.warning("判别器更新：所有采样样本都在rollout的最后一步，跳过更新")
+            return 0
         
         # 转换为张量
         states = torch.FloatTensor(np.stack(states_list)).to(self.device)
@@ -1507,6 +1963,9 @@ class HMASDAgent:
         team_disc_loss = F.cross_entropy(team_disc_logits, team_skills)
         
         # 更新个体技能判别器 - 仅使用标准交叉熵损失（论文公式8）
+        # 【关键修复】确保 team_skills 的形状正确 (B,)
+        if team_skills.dim() > 1:
+            team_skills = team_skills.squeeze(-1)
         agent_disc_logits = self.individual_discriminator(observations, team_skills)
         agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills)
         
@@ -1542,8 +2001,68 @@ class HMASDAgent:
         
         return disc_loss.item()
     
-    def update(self, steps_in_buffer):
+    def update(self, steps_in_buffer, last_next_state=None, last_dones=None, last_next_obs=None):
         """更新所有网络"""
+        # 如果提供了最后一步的信息（通常在测试脚本中），则为发现器计算GAE
+        if last_next_state is not None and last_dones is not None and last_next_obs is not None:
+            main_logger.debug("为低层策略(Discoverer)计算GAE (测试模式)...")
+            
+            last_values_predicted = np.zeros((self.config.num_envs, self.config.n_agents), dtype=np.float32)
+            
+            with torch.no_grad():
+                # 【关键修复】测试脚本使用单个环境 (env_id=0)
+                # V(s_T+1, Z_T+1)的计算应该使用在第T步决定的技能Z_T，而不是为T+1重新分配一个新技能
+                # 从环境中获取在最后一步实际使用的团队技能
+                last_used_team_skill = self.env_team_skills.get(0, 0) # 默认值为0
+                
+                global_state_tensor = torch.FloatTensor(last_next_state).unsqueeze(0).to(self.device)
+                team_skill_tensor = torch.tensor(last_used_team_skill, device=self.device).unsqueeze(0)
+                # Dummy hidden state for the last step
+                dummy_hidden = torch.zeros(1, self.config.gru_hidden_size, device=self.device)
+                global_value_tensor, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor, dummy_hidden)
+                
+                # 将此价值广播到env 0的所有智能体
+                last_values_predicted[0, :] = global_value_tensor.squeeze().item()
+                main_logger.info(f"GAE自举(bootstrap)计算: 使用最后一步的团队技能 {last_used_team_skill}, "
+                               f"计算出的下一状态价值 V(s') = {last_values_predicted[0, 0]:.4f}")
+
+            dones_for_gae = np.zeros(self.config.num_envs, dtype=bool)
+            dones_for_gae[0] = last_dones
+
+            # --- GAE Calculation Fix ---
+            # If ValueNorm is enabled, the values in the buffer are normalized.
+            # We must de-normalize them before computing advantages.
+            values_for_gae = self.rollout_buffer.values[:steps_in_buffer]
+            last_values_for_gae = last_values_predicted
+
+            if self.config.use_valuenorm and self.value_norm_discoverer is not None:
+                main_logger.info("ValueNorm is enabled. De-normalizing values before GAE computation.")
+                
+                # Convert numpy arrays to tensors for de-normalization
+                values_tensor = torch.tensor(values_for_gae, device=self.device, dtype=torch.float32)
+                last_values_tensor = torch.tensor(last_values_for_gae, device=self.device, dtype=torch.float32)
+
+                # De-normalize
+                denormalized_values = self._denormalize_values(values_tensor, self.value_norm_discoverer)
+                denormalized_last_values = self._denormalize_values(last_values_tensor, self.value_norm_discoverer)
+                
+                # Convert back to numpy for the buffer function
+                values_for_gae = denormalized_values.cpu().numpy()
+                last_values_for_gae = denormalized_last_values.cpu().numpy()
+                
+                main_logger.debug(f"Original last value: {last_values_predicted[0, 0]:.4f}, "
+                                f"De-normalized last value: {last_values_for_gae[0, 0]:.4f}")
+
+            self.rollout_buffer.compute_advantages(
+                last_values=last_values_for_gae,
+                dones=dones_for_gae,
+                num_steps=steps_in_buffer,
+                gamma=self.config.gamma, 
+                gae_lambda=self.config.gae_lambda,
+                denormalized_values=values_for_gae,
+                denormalized_last_values=last_values_for_gae
+            )
+
         # 更新全局步数
         self.global_step += 1
         main_logger.debug(f"HMASDAgent.update (step {self.global_step}): 开始更新所有网络，有效步数: {steps_in_buffer}")

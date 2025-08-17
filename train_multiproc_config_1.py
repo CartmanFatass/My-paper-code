@@ -24,9 +24,17 @@ from stable_baselines3.common.env_util import make_vec_env # Can also use this h
 # 导入论文中的配置
 from config_1 import Config
 from hmasd.agent import HMASDAgent
+from hmasd.sb3_integration import (
+    create_hmasd_training_setup, 
+    AdvancedNumericalStabilizer,
+    PerformanceMonitor,
+    HMASDCallback,
+    HMASDVecEnvWrapper
+)
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
+from visualization import VisualizationManager
 
 class TensorBoardManager:
     """统一的TensorBoard管理器 - 处理从agent.py移除的所有TensorBoard写入逻辑"""
@@ -210,63 +218,6 @@ class TensorBoardManager:
         self.writer.close()
 
 # Removed VectorizedEnvAdapter class
-
-class TrajectoryRecorder:
-    """轨迹记录管理器 - 完整记录每一步的轨迹数据"""
-    
-    def __init__(self, config):
-        # 启用完整记录模式，记录每一步
-        self.full_recording_mode = getattr(config, 'full_trajectory_recording', True)
-        self.enable_trajectory_smoothing = getattr(config, 'enable_trajectory_smoothing', True)
-        
-        # 保留原有配置以保持兼容性
-        self.interval = getattr(config, 'trajectory_record_interval', 1)  # 默认每步记录
-        self.max_points = getattr(config, 'max_trajectory_points', 10000)  # 增大限制
-        self.enable_points = getattr(config, 'enable_trajectory_points', True)
-        self.point_size = getattr(config, 'trajectory_point_size', 3)
-        self.record_skill_changes = getattr(config, 'record_skill_change_points', True)
-        self.record_episode_end = getattr(config, 'record_episode_end', True)
-        
-        # 记录状态
-        self.last_recorded_step = {}  # 每个环境上次记录的步数
-        self.trajectory_counts = {}   # 每个环境的轨迹点计数
-    
-    def should_record(self, env_id, current_step, skill_changed=False, episode_end=False):
-        """判断是否应该记录轨迹点 - 完整记录模式下每步都记录"""
-        if self.full_recording_mode:
-            # 完整记录模式：每步都记录
-            return True
-        
-        # 保留原有逻辑以保持兼容性
-        if episode_end and self.record_episode_end:
-            return True
-        
-        if skill_changed and self.record_skill_changes:
-            return True
-        
-        # 第一步总是记录
-        if env_id not in self.last_recorded_step:
-            self.last_recorded_step[env_id] = current_step
-            self.trajectory_counts[env_id] = 1
-            return True
-        
-        # 检查轨迹点数量限制
-        if self.trajectory_counts.get(env_id, 0) >= self.max_points:
-            return False
-        
-        # 间隔检查
-        steps_since_last = current_step - self.last_recorded_step[env_id]
-        if steps_since_last >= self.interval:
-            self.last_recorded_step[env_id] = current_step
-            self.trajectory_counts[env_id] = self.trajectory_counts.get(env_id, 0) + 1
-            return True
-        
-        return False
-    
-    def reset_env(self, env_id):
-        """重置环境的记录状态 - episode完成后清除数据"""
-        self.last_recorded_step.pop(env_id, None)
-        self.trajectory_counts.pop(env_id, None)
 
 class EnhancedRewardTracker:
     """增强的奖励追踪器，用于论文数据收集 - 存储空间优化版本"""
@@ -923,10 +874,6 @@ class EnhancedRewardTracker:
         with open(os.path.join(export_dir, f'skill_usage_step_{step}.json'), 'w') as f:
             json.dump(skill_stats, f, indent=2)
         
-        # 生成训练曲线图 - 已禁用以避免内存错误
-        # self.generate_training_plots(export_dir, step)
-        main_logger.debug(f"跳过训练过程中的绘图生成 (步骤 {step}) 以避免内存问题")
-        
         # 记录到TensorBoard（如果提供）
         if writer:
             self.log_to_tensorboard(writer, step, args=args)
@@ -970,120 +917,6 @@ class EnhancedRewardTracker:
                 
         except Exception as e:
             main_logger.error(f"执行数据清理时出错: {e}")
-    
-    def generate_training_plots(self, export_dir, step):
-        """生成训练过程的可视化图表"""
-        
-        # 1. Episode奖励趋势图
-        if self.training_rewards['episode_rewards']:
-            episodes = [r['episode'] for r in self.training_rewards['episode_rewards']]
-            rewards = [r['total_reward'] for r in self.training_rewards['episode_rewards']]
-            
-            plt.figure(figsize=(12, 8))
-            
-            # 原始奖励曲线
-            plt.subplot(2, 2, 1)
-            plt.plot(episodes, rewards, alpha=0.3, color='blue', label='Episode Rewards')
-            # 滑动平均
-            if len(rewards) >= 10:
-                window = 50
-                if len(rewards) >= window:
-                    smoothed = pd.Series(rewards).rolling(window=window, center=True).mean()
-                    plt.plot(episodes, smoothed, color='red', linewidth=2, label=f'{window}-episode MA')
-            plt.xlabel('Episode')
-            plt.ylabel('Total Reward')
-            plt.title('Training Reward Progress')
-            plt.legend()
-            plt.grid(True, alpha=0.3)
-            
-            # 奖励分布直方图
-            plt.subplot(2, 2, 2)
-            plt.hist(rewards, bins=50, alpha=0.7, color='green')
-            plt.xlabel('Total Reward')
-            plt.ylabel('Frequency')
-            plt.title('Reward Distribution')
-            plt.grid(True, alpha=0.3)
-            
-            # Episode长度趋势
-            if self.performance_metrics['episode_lengths'] or len(episodes) == len([r['episode_length'] for r in self.training_rewards['episode_rewards']]):
-                lengths = [r['episode_length'] for r in self.training_rewards['episode_rewards']]
-                plt.subplot(2, 2, 3)
-                plt.plot(episodes, lengths, alpha=0.6, color='orange')
-                plt.xlabel('Episode')
-                plt.ylabel('Episode Length')
-                plt.title('Episode Length Progression')
-                plt.grid(True, alpha=0.3)
-            
-            # 奖励方差趋势
-            if self.training_rewards['reward_variance']:
-                var_episodes = [v['episode'] for v in self.training_rewards['reward_variance']]
-                var_means = [v['mean'] for v in self.training_rewards['reward_variance']]
-                var_stds = [v['std'] for v in self.training_rewards['reward_variance']]
-                
-                plt.subplot(2, 2, 4)
-                plt.errorbar(var_episodes, var_means, yerr=var_stds, alpha=0.7, color='purple')
-                plt.xlabel('Episode')
-                plt.ylabel('Mean Reward ± Std')
-                plt.title('Reward Stability (100-episode window)')
-                plt.grid(True, alpha=0.3)
-            
-            plt.tight_layout()
-            plt.savefig(os.path.join(export_dir, f'training_progress_step_{step}.png'), dpi=300, bbox_inches='tight')
-            plt.close()
-        
-        # 2. 奖励组成分析图
-        if any(self.training_rewards['reward_components'].values()):
-            plt.figure(figsize=(15, 5))
-            
-            components = ['env_component', 'team_disc_component', 'ind_disc_component']
-            colors = ['blue', 'red', 'green']
-            
-            for i, (comp_name, color) in enumerate(zip(components, colors)):
-                if comp_name in self.training_rewards['reward_components'] and self.training_rewards['reward_components'][comp_name]:
-                    comp_data = self.training_rewards['reward_components'][comp_name]
-                    steps = [d['step'] for d in comp_data]
-                    values = [d['value'] for d in comp_data]
-                    
-                    plt.subplot(1, 3, i+1)
-                    plt.plot(steps, values, alpha=0.6, color=color)
-                    plt.xlabel('Training Step')
-                    plt.ylabel('Reward Component Value')
-                    plt.title(f'{comp_name.replace("_", " ").title()}')
-                    plt.grid(True, alpha=0.3)
-            
-            plt.tight_layout()
-            plt.savefig(os.path.join(export_dir, f'reward_components_step_{step}.png'), dpi=300, bbox_inches='tight')
-            plt.close()
-        
-        # 3. 技能使用分析图
-        if self.skill_usage['skill_diversity_history']:
-            plt.figure(figsize=(12, 4))
-            
-            diversity_data = self.skill_usage['skill_diversity_history']
-            steps = [d['step'] for d in diversity_data]
-            diversity_values = [d['diversity'] for d in diversity_data]
-            
-            plt.subplot(1, 2, 1)
-            plt.plot(steps, diversity_values, alpha=0.7, color='purple')
-            plt.xlabel('Training Step')
-            plt.ylabel('Skill Diversity')
-            plt.title('Agent Skill Diversity Over Time')
-            plt.grid(True, alpha=0.3)
-            
-            # 团队技能使用分布
-            if self.skill_usage['team_skills']:
-                plt.subplot(1, 2, 2)
-                skills = list(self.skill_usage['team_skills'].keys())
-                counts = list(self.skill_usage['team_skills'].values())
-                plt.bar(skills, counts, alpha=0.7, color='orange')
-                plt.xlabel('Team Skill ID')
-                plt.ylabel('Usage Count')
-                plt.title('Team Skill Usage Distribution')
-                plt.grid(True, alpha=0.3)
-            
-            plt.tight_layout()
-            plt.savefig(os.path.join(export_dir, f'skill_analysis_step_{step}.png'), dpi=300, bbox_inches='tight')
-            plt.close()
     
     def log_rollout_metrics_to_tensorboard(self, writer, step, args=None):
         """记录rollout指标到TensorBoard - 与agent.update()同步调用
@@ -1580,6 +1413,7 @@ def parse_args():
                         help='是否启用奖励权重退火机制 (使用--use_reward_annealing启用，--no-use_reward_annealing禁用)')
     parser.add_argument('--use_lr_decay', action=argparse.BooleanOptionalAction, default=False,
                         help='是否启用学习率衰减 (使用--use_lr_decay启用，--no-use_lr_decay禁用)')
+    parser.add_argument('--debug', action='store_true', help='启用调试模式，在训练期间收集数据并生成拓扑图')
     
     return parser.parse_args()
 
@@ -1609,6 +1443,24 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     
     # 创建HMASD代理（不再有TensorBoard writer）
     agent = HMASDAgent(config, log_dir=log_dir, device=device)
+    
+    # 创建增强的训练设置
+    main_logger.info("设置增强的训练环境...")
+    wrapped_vec_env, callbacks, performance_monitor, numerical_stabilizer = create_hmasd_training_setup(
+        agent, vec_env, log_dir
+    )
+    
+    # 确保智能体使用SB3集成的组件
+    if hasattr(agent, 'numerical_stabilizer') and agent.numerical_stabilizer is not None:
+        main_logger.info(f"智能体已使用SB3数值稳定器: {type(agent.numerical_stabilizer).__name__}")
+    else:
+        main_logger.info("智能体将使用训练设置中的数值稳定器")
+        agent.numerical_stabilizer = numerical_stabilizer
+    
+    if hasattr(agent, 'metrics_collector') and agent.metrics_collector is not None:
+        main_logger.info(f"智能体已使用SB3指标收集器: {type(agent.metrics_collector).__name__}")
+    else:
+        main_logger.info("智能体将使用内置指标收集器")
     
     # 创建统一的TensorBoard管理器
     tb_manager = TensorBoardManager(log_dir, config)
@@ -1644,6 +1496,30 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=config.n_users)
     reward_tracker.export_interval = args.export_interval
     
+    # 调试模式下的可视化设置
+    visualizers = None
+    static_infos = None
+    if args.debug:
+        main_logger.info("调试模式已启用：将在训练期间生成拓扑图。")
+        main_logger.warning("注意：在调试模式下，由于需要频繁从环境获取状态，训练速度会显著下降。")
+        visualizers = [VisualizationManager(episode_num=i, log_dir=log_dir, config=config) for i in range(num_envs)]
+        
+        # 收集一次静态信息
+        try:
+            initial_env_states = [vec_env.env_method('get_current_state', indices=[i])[0] for i in range(num_envs)]
+            static_infos = []
+            for env_state in initial_env_states:
+                static_infos.append({
+                    'user_positions': env_state.get('user_positions'),
+                    'ground_bs_positions': env_state.get('ground_bs_positions'),
+                    'area_size': env_state.get('area_size')
+                })
+            main_logger.info("已为所有环境收集静态信息用于调试可视化。")
+        except Exception as e:
+            main_logger.error(f"为调试模式收集静态信息时出错: {e}")
+            main_logger.warning("无法收集静态信息，拓扑图可能不完整。将禁用调试模式。")
+            args.debug = False # 出现错误时禁用调试模式
+    
     # 记录额外超参数
     tb_manager.add_text('Parameters/num_envs', str(num_envs), 0)
     tb_manager.add_text('Parameters/export_interval', str(args.export_interval), 0)
@@ -1671,6 +1547,12 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     # 记录训练开始时间
     start_time = time.time()
 
+    # 初始化并启动回调
+    for callback in callbacks:
+        # 传递 agent 作为模型，并初始化
+        callback.init_callback(agent)
+        callback.on_training_start(locals(), globals())
+
     # 重置所有环境 (使用 SubprocVecEnv)
     # SubprocVecEnv.reset() 只返回 observations
     # 我们需要通过 env_method 获取初始状态
@@ -1697,8 +1579,13 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     episode_rewards_tracker = np.zeros(num_envs, dtype=np.float32)
 
     while total_steps < config.total_timesteps:
+        # 调用 on_rollout_start 回调
+        for callback in callbacks:
+            callback.on_rollout_start()
+
         # --- Start of NEW, CORRECTED & BATCHED Rollout Loop ---
         for rollout_step in range(config.rollout_length):
+            step_start_time = time.time()
             
             # 1. 批量选择动作 (只调用一次 agent.step)
             # 传递上一步的 dones_tracker 以便正确重置内部状态
@@ -1707,12 +1594,23 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             )
             
             # 2. 批量执行环境步骤
-            next_observations, rewards, dones, infos = vec_env.step(actions_batch)
+            next_observations, rewards, dones, infos = wrapped_vec_env.step(actions_batch)
 
             # 3. 批量提取下一个状态
             next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
 
-            # 4. 批量存储经验 (循环是正确的，因为它不涉及神经网络)
+            # 4. 数值稳定性检查
+            tensor_dict = {
+                'states': torch.FloatTensor(states),
+                'next_states': torch.FloatTensor(next_states),
+                'observations': torch.FloatTensor(observations),
+                'next_observations': torch.FloatTensor(next_observations),
+                'actions': torch.FloatTensor(actions_batch),
+                'rewards': torch.FloatTensor(rewards)
+            }
+            tensor_dict = numerical_stabilizer.comprehensive_check(tensor_dict)
+
+            # 5. 批量存储经验 (循环是正确的，因为它不涉及神经网络)
             for i in range(num_envs):
                 agent.store_transition(
                     state=states[i], 
@@ -1735,10 +1633,54 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 # 更新追踪器
                 env_steps[i] += 1
                 episode_rewards_tracker[i] += rewards[i]
+                
+                # 记录性能指标
+                performance_monitor.record_step_time(time.time() - step_start_time)
+                performance_monitor.record_memory_usage()
+
+                # 如果启用调试模式，则记录可视化数据
+                if args.debug and visualizers is not None:
+                    try:
+                        # 【关键修复】从嵌套的info结构中正确提取UAV位置
+                        # 尝试从 infos_dict 中的任意一个智能体获取共享的 uav_positions
+                        uav_positions = np.zeros((agent.config.n_agents, 3))
+                        if 'infos_dict' in infos[i] and infos[i]['infos_dict']:
+                            # 从第一个可用的智能体信息中获取 uav_positions
+                            for agent_key, agent_info in infos[i]['infos_dict'].items():
+                                if 'uav_positions' in agent_info:
+                                    uav_positions = agent_info['uav_positions']
+                                    break
+                        # 如果仍然没有找到，尝试直接从 infos[i] 获取
+                        if np.array_equal(uav_positions, np.zeros((agent.config.n_agents, 3))):
+                            uav_positions = infos[i].get('uav_positions', np.zeros((agent.config.n_agents, 3)))
+
+                        visualizers[i].record_step(
+                            step_count=env_steps[i],
+                            uav_positions=uav_positions,
+                            team_skill=infos_batch[i].get('team_skill', -1),
+                            agent_skills=infos_batch[i].get('agent_skills', []),
+                            reward_info=infos[i].get('reward_info', {}),
+                            static_info=static_infos[i] if static_infos else {}
+                        )
+                    except Exception as e:
+                        main_logger.warning(f"[调试模式] 环境 {i} 记录步骤数据时出错: {e}")
 
                 if dones[i]:
                     n_episodes += 1
                     main_logger.info(f"环境 {i} 完成第 {n_episodes} 个 episode, 奖励: {episode_rewards_tracker[i]:.2f}, 步数: {env_steps[i]}")
+                    
+                    # 如果启用调试模式，则生成绘图并重置可视化器
+                    if args.debug and visualizers is not None:
+                        try:
+                            main_logger.info(f"[调试模式] 环境 {i} Episode {n_episodes} 结束，正在生成拓扑图...")
+                            visualizers[i].episode_num = n_episodes # 更新 episode 编号
+                            visualizers[i].generate_plots(prefix='train_debug') # 添加前缀以区分评估图
+                            
+                            # 为下一个episode重置此环境的可视化器
+                            visualizers[i] = VisualizationManager(episode_num=i, log_dir=log_dir, config=config)
+                            main_logger.info(f"[调试模式] 环境 {i} 的可视化器已重置。")
+                        except Exception as e:
+                            main_logger.error(f"[调试模式] 环境 {i} 生成绘图时出错: {e}")
                     
                     # 使用增强的奖励追踪器记录episode完成
                     episode_info = {}
@@ -1833,6 +1775,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 global_value_tensor, _ = agent.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
                 
                 last_values_predicted[i, :] = global_value_tensor.squeeze().item()
+                
+                # 数值稳定性检查
+                last_values_predicted[i, :] = numerical_stabilizer.check_and_fix_tensor(
+                    torch.FloatTensor(last_values_predicted[i, :]), name='last_values'
+                ).numpy()
 
         # ===================================================================
         # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 关键修复：简化价值处理 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -1846,6 +1793,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         agent.rollout_buffer.compute_advantages(
             last_values=last_values_predicted, # GAE内部会处理denormalized_last_values
             dones=dones_tracker,               # <-- 确保这里是真实的dones
+            num_steps=steps_in_rollout,        # <-- 【修复】传入实际收集的步数
             gamma=config.gamma, 
             gae_lambda=config.gae_lambda,
             denormalized_values=values_for_gae, # 传入原始价值
@@ -1858,11 +1806,15 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         # 修复：使用实际收集的步数，而不是可能不准确的rollout_steps变量
         steps_in_rollout = rollout_step + 1
         try:
+            # 执行回调函数 - 在更新前
+            for callback in callbacks:
+                callback.on_rollout_end()
+            
             update_info = agent.update(steps_in_buffer=steps_in_rollout)
             update_times += 1
             elapsed = time.time() - start_time
 
-            main_logger.info(f"Rollout更新 {update_times} (收集了 {rollout_steps} 步), 总步数 {total_steps}, "
+            main_logger.info(f"Rollout更新 {update_times} (收集了 {steps_in_rollout} 步), 总步数 {total_steps}, "
                   f"高层损失 {update_info['coordinator_loss']:.4f}, "
                   f"低层损失 {update_info['discoverer_loss']:.4f}, "
                   f"判别器损失 {update_info['discriminator_loss']:.4f}, "
@@ -1871,6 +1823,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             
             # 记录训练指标到TensorBoard
             tb_manager.log_training_metrics(total_steps, update_info, args=args)
+            
+            # 执行回调函数 - 在更新后
+            for callback in callbacks:
+                callback.on_step()
             
             # 详细记录低层损失的组成部分
             main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
@@ -1893,9 +1849,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             main_logger.error(f"更新错误: {e}")
             update_times += 1
 
-        # 【修复】更新完成后，清空缓冲区，为下一次rollout做准备
-        # 这是解决“重复存储”问题的关键
+        # 【关键修复】更新完成后，立即清空缓冲区，为下一次rollout做准备
+        # 这是解决"陈旧数据污染"和"策略退化"问题的关键
         agent.clear_buffers()
+        main_logger.debug(f"已清空经验缓冲区，准备下一次rollout (更新 {update_times})")
 
         # 重置rollout步数计数器
         rollout_steps = 0
@@ -1992,12 +1949,22 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         # 定期导出训练数据
         reward_tracker.export_training_data(total_steps, tb_manager.writer, args=args)
         
+        # 记录性能监控指标
+        if hasattr(performance_monitor, 'log_performance'):
+            performance_monitor.log_performance()
+        
+        # 记录数值稳定性统计
+        if hasattr(numerical_stabilizer, 'get_statistics'):
+            stability_stats = numerical_stabilizer.get_statistics()
+            if stability_stats['total_repairs'] > 0:
+                main_logger.info(f"数值稳定性统计: {stability_stats}")
+        
         # 评估 (基于总步数和上次评估的时间)
         if total_steps >= last_eval_step + config.eval_interval:
             main_logger.info(f"即将进行评估，将评估 {config.eval_episodes} 个episodes...")
             main_logger.info(f"当前步数: {total_steps}, 距离上次评估: {total_steps - last_eval_step} 步")
             # 使用 eval_vec_env 进行评估
-            eval_reward, eval_std, eval_min, eval_max = evaluate(eval_vec_env, agent, config.eval_episodes)
+            eval_reward, eval_std, eval_min, eval_max = evaluate(eval_vec_env, agent, config.eval_episodes, render=args.render, eval_step=total_steps)
             main_logger.info(f"评估完成 ({config.eval_episodes} 个episodes): 平均奖励 {eval_reward:.2f} ± {eval_std:.2f}, 最大/最小: {eval_max:.2f}/{eval_min:.2f}")
 
             # 保存最佳模型
@@ -2045,11 +2012,15 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     final_model_path = os.path.join(model_dir, 'hmasd_sb3_multiproc_paper_config_final.pt') # Update filename
     agent.save_model(final_model_path)
     main_logger.info(f"最终模型已保存到 {final_model_path}")
+
+    # 调用 on_training_end 回调
+    for callback in callbacks:
+        callback.on_training_end()
     
     return agent
 
 # 评估函数
-def evaluate(vec_env, agent, n_episodes=10, render=False):
+def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     """
     评估HMASD代理 (使用 SubprocVecEnv)
 
@@ -2058,6 +2029,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
         agent: HMASD代理实例
         n_episodes: 评估的episode数量 (总共要评估的episode数量)
         render: 是否渲染环境 (只渲染第一个环境)
+        eval_step (int): 当前的训练总步数，用于唯一标识评估图像
 
     返回:
         mean_reward: 平均奖励
@@ -2088,66 +2060,19 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
     # Use agent.config.state_dim for default state shape
     states = np.array([info.get('state', np.zeros(agent.config.state_dim)) for info in initial_infos]) # Use agent's state_dim
 
-    # 创建轨迹记录器
-    trajectory_recorder = TrajectoryRecorder(agent.config)
+    # 为每个并行环境创建一个可视化管理器
+    visualizers = [VisualizationManager(episode_num=i, log_dir=agent.log_dir, config=agent.config) for i in range(num_envs)]
     
-    # 为绘图收集历史数据 - 使用灵活的记录管理器
-    env_histories = [
-        {
-            'steps': [], 'uav_positions': [], 'connectivity': [], 'throughput': [],
-            'static_info': None  # 用于存储静态信息
-        } for _ in range(num_envs)
-    ]
-    plots_generated = 0  # 追踪本次评估已生成的图片数量
+    # 收集一次静态信息
+    initial_env_states = [vec_env.env_method('get_current_state', indices=[i])[0] for i in range(num_envs)]
+    static_infos = []
+    for env_state in initial_env_states:
+        static_infos.append({
+            'user_positions': env_state.get('user_positions'),
+            'ground_bs_positions': env_state.get('ground_bs_positions'),
+            'area_size': env_state.get('area_size')
+        })
     
-    def record_env_history(env_id, step_count, skill_changed=False, episode_end=False):
-        """记录环境历史数据 - 使用轨迹记录器控制记录频率"""
-        # 使用轨迹记录器判断是否应该记录
-        should_record = trajectory_recorder.should_record(env_id, step_count, skill_changed, episode_end)
-        
-        if not should_record:
-            return False
-        
-        try:
-            # 获取当前环境状态
-            env_state = vec_env.env_method('get_current_state', indices=[env_id])[0]
-            
-            # 记录步数和UAV位置
-            env_histories[env_id]['steps'].append(step_count)
-            env_histories[env_id]['uav_positions'].append(env_state['uav_positions'].copy())
-            
-            # 记录性能指标
-            if env_id < len(infos) and 'reward_info' in infos[env_id]:
-                reward_info = infos[env_id]['reward_info']
-                env_histories[env_id]['connectivity'].append(reward_info.get('effective_connected_users', 0))
-                env_histories[env_id]['throughput'].append(reward_info.get('system_throughput_mbps', 0))
-            else:
-                env_histories[env_id]['connectivity'].append(0)
-                env_histories[env_id]['throughput'].append(0)
-            
-            # 收集静态信息（只需要收集一次）
-            if env_histories[env_id]['static_info'] is None:
-                static_info = {}
-                if 'user_positions' in env_state:
-                    static_info['user_positions'] = env_state['user_positions'].copy()
-                if 'ground_bs_positions' in env_state:
-                    static_info['ground_bs_positions'] = env_state['ground_bs_positions'].copy()
-                if 'area_size' in env_state:
-                    static_info['area_size'] = env_state['area_size']
-                env_histories[env_id]['static_info'] = static_info
-            
-            main_logger.debug(f"已记录环境 {env_id} 步骤 {step_count} 的轨迹数据 (总计: {len(env_histories[env_id]['steps'])} 个点)")
-            return True
-                
-        except Exception as e:
-            main_logger.warning(f"记录环境 {env_id} 历史数据时出错: {e}")
-            return False
-    
-    # 记录初始状态的历史数据
-    infos = initial_infos  # 临时设置用于记录初始状态
-    for i in range(num_envs):
-        record_env_history(i, 0)
-
     # 环境状态跟踪
     env_steps = np.zeros(num_envs, dtype=int)
     env_rewards = np.zeros(num_envs)
@@ -2187,7 +2112,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                 
                 # 批量调用agent.step
                 active_actions_batch, active_infos_batch = agent.step(
-                    active_states, active_observations, active_env_steps, active_dones, deterministic=True
+                    active_states, active_observations, active_env_steps, active_dones, deterministic=False
                 )
                 
                 # 重新组装为完整的actions数组
@@ -2240,9 +2165,29 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                     extrinsic_reward = infos[i].get('reward_info', {}).get('final_global_reward', rewards[i])
                     env_rewards[i] += extrinsic_reward
                     
-                    # 使用轨迹记录器收集历史数据用于绘图
-                    skill_changed = all_agent_infos_list[i].get('skill_changed', False) if i < len(all_agent_infos_list) else False
-                    record_env_history(i, env_steps[i], skill_changed=skill_changed, episode_end=False)
+                    # 使用新的可视化管理器记录数据
+                    agent_info = all_agent_infos_list[i]
+                    # 【关键修复】从嵌套的info结构中正确提取UAV位置
+                    # 尝试从 infos_dict 中的任意一个智能体获取共享的 uav_positions
+                    uav_positions = np.zeros((agent.config.n_agents, 3))
+                    if 'infos_dict' in infos[i] and infos[i]['infos_dict']:
+                        # 从第一个可用的智能体信息中获取 uav_positions
+                        for agent_key, agent_info_dict in infos[i]['infos_dict'].items():
+                            if 'uav_positions' in agent_info_dict:
+                                uav_positions = agent_info_dict['uav_positions']
+                                break
+                    # 如果仍然没有找到，尝试直接从 infos[i] 获取
+                    if np.array_equal(uav_positions, np.zeros((agent.config.n_agents, 3))):
+                        uav_positions = infos[i].get('uav_positions', np.zeros((agent.config.n_agents, 3)))
+
+                    visualizers[i].record_step(
+                        step_count=env_steps[i],
+                        uav_positions=uav_positions, # 使用从info获取的正确位置
+                        team_skill=agent_info.get('team_skill', -1),
+                        agent_skills=agent_info.get('agent_skills', []),
+                        reward_info=infos[i].get('reward_info', {}),
+                        static_info=static_infos[i]
+                    )
 
                     if render and i == 0:
                         try:
@@ -2279,39 +2224,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False):
                             # 记录高层奖励
                             high_level_rewards.append(env_rewards[i])
                             
-                            # 确保记录episode结束时的最终位置
-                            record_env_history(i, env_steps[i], skill_changed=False, episode_end=True)
-                            
-                            # 为最先完成的4个环境生成绘图
-                            if plots_generated < 4 and len(env_histories[i]['uav_positions']) > 0:
-                                try:
-                                    # 创建保存目录
-                                    eval_plots_dir = os.path.join(agent.log_dir, 'evaluation_plots')
-                                    os.makedirs(eval_plots_dir, exist_ok=True)
-                                    
-                                    # 生成2D拓扑图 - 为当前环境单独生成
-                                    topology_path = os.path.join(eval_plots_dir, f'eval_topology_step_{eval_step}_env_{i}.png')
-                                    save_evaluation_2d_topology_plot(
-                                        env_histories[i], 
-                                        env_histories[i]['static_info'], 
-                                        topology_path, 
-                                        completed_episodes+1, 
-                                        agent.config
-                                    )
-                                    
-                                    # 生成性能图表（使用当前环境的数据）
-                                    performance_path = os.path.join(eval_plots_dir, f'eval_performance_step_{eval_step}_env_{i}.png')
-                                    save_evaluation_performance_plot(
-                                        env_histories[i], 
-                                        performance_path, 
-                                        completed_episodes+1
-                                    )
-                                    
-                                    plots_generated += 1
-                                    main_logger.info(f"已为环境 {i} 生成评估绘图 ({plots_generated}/4): {eval_plots_dir}")
-                                    
-                                except Exception as e:
-                                    main_logger.error(f"为环境 {i} 生成评估绘图时出错: {e}")
+                            # episode结束，生成并保存绘图
+                            visualizers[i].episode_num = completed_episodes + 1
+                            visualizers[i].generate_plots(eval_step=eval_step)
                             
                             completed_episodes += 1
 
@@ -2691,29 +2606,6 @@ def main():
     train_vec_env.close()
     eval_vec_env.close()
 
-def smooth_trajectory(trajectory, window_size=3):
-    """
-    平滑轨迹，减少噪声
-    
-    参数:
-        trajectory: 轨迹数组 [steps, 2] (x, y坐标)
-        window_size: 滑动窗口大小
-    
-    返回:
-        smoothed: 平滑后的轨迹数组
-    """
-    if len(trajectory) <= window_size:
-        return trajectory
-    
-    # 使用简单的移动平均
-    smoothed = np.zeros_like(trajectory)
-    for i in range(len(trajectory)):
-        start_idx = max(0, i - window_size // 2)
-        end_idx = min(len(trajectory), i + window_size // 2 + 1)
-        smoothed[i] = np.mean(trajectory[start_idx:end_idx], axis=0)
-    
-    return smoothed
-
 # 全局队列引用，供子进程使用
 _shared_log_queue = None
 
@@ -2759,280 +2651,6 @@ def env_log(level, message, queue=None):
         pid = os.getpid()
         print(f"[Env-{pid}] {message} (日志记录失败: {e})")
         return False
-
-def save_evaluation_2d_topology_plot(history, static_info, save_path, episode_num, config):
-    """
-    生成并保存2D俯瞰拓扑图，显示无人机轨迹（优化版）
-    
-    参数:
-        history: 包含历史数据的字典，包含 'uav_positions' 列表
-        static_info: 静态环境信息，包含 'user_positions', 'ground_bs_positions', 'area_size'
-        save_path: 图像保存的完整文件路径
-        episode_num: episode编号
-        config: 配置对象
-    """
-    try:
-        import matplotlib.pyplot as plt
-        
-        # 配置中文字体支持
-        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
-        plt.rcParams['axes.unicode_minus'] = False
-        
-        fig, ax = plt.subplots(figsize=(10, 10))
-        
-        # 绘制历史轨迹
-        positions_history = np.array(history['uav_positions'])  # [steps, n_uavs, 3]
-        
-        if len(positions_history) == 0:
-            main_logger.warning("没有轨迹数据可绘制")
-            return
-        
-        # 检查是否启用轨迹平滑
-        enable_smoothing = getattr(config, 'enable_trajectory_smoothing', True)
-        
-        for i in range(config.n_agents):
-            # 使用颜色循环来区分不同无人机
-            color = plt.cm.jet(i / config.n_agents)
-            
-            # 提取轨迹数据（只使用x, y坐标）
-            trajectory = positions_history[:, i, :2]
-            
-            # 平滑轨迹（如果启用且点数足够）
-            if enable_smoothing and len(trajectory) > 5:
-                trajectory = smooth_trajectory(trajectory)
-            
-            # 绘制轨迹线
-            ax.plot(trajectory[:, 0], trajectory[:, 1], 
-                    color=color, alpha=0.6, linewidth=1.5,
-                    label=f'UAV {i} 轨迹' if i < 3 else "")  # 只为前3个UAV添加图例
-            
-            # 起点：圆形标记
-            ax.scatter(trajectory[0, 0], trajectory[0, 1],
-                       marker='o', color=color, s=80, edgecolors='black', zorder=6)
-            
-            # 终点：三角形标记（唯一的终点标记）
-            ax.scatter(trajectory[-1, 0], trajectory[-1, 1],
-                       marker='^', color=color, s=120, edgecolors='black', zorder=6)
-            
-            # 添加UAV标识文本
-            ax.text(trajectory[-1, 0] + 10, trajectory[-1, 1] + 10, f'UAV{i}', fontsize=9)
-
-        # 绘制静态实体
-        if static_info:
-            # 1. 地面基站
-            if 'ground_bs_positions' in static_info and static_info['ground_bs_positions'] is not None:
-                bs_pos = static_info['ground_bs_positions']
-                ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, 
-                          label='地面基站', zorder=5)
-
-            # 2. 用户
-            if 'user_positions' in static_info and static_info['user_positions'] is not None:
-                user_pos = static_info['user_positions']
-                ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, 
-                          label='用户', zorder=5)
-
-        # 添加图例说明
-        from matplotlib.lines import Line2D
-        legend_elements = []
-        if enable_smoothing:
-            legend_elements.append(Line2D([0], [0], marker='o', color='gray', label='起点',
-                                        markerfacecolor='gray', markersize=8, linestyle='None'))
-            legend_elements.append(Line2D([0], [0], marker='^', color='gray', label='终点',
-                                        markerfacecolor='gray', markersize=10, linestyle='None'))
-        
-        # 获取现有图例并添加起点终点说明
-        handles, labels = ax.get_legend_handles_labels()
-        handles.extend(legend_elements)
-        
-        ax.set_title(f'评估 Episode {episode_num}: 2D拓扑与无人机轨迹{"（平滑）" if enable_smoothing else ""}')
-        ax.set_xlabel('X (m)')
-        ax.set_ylabel('Y (m)')
-        
-        area_size = static_info.get('area_size', 1000) if static_info else 1000
-        ax.set_xlim(0, area_size)
-        ax.set_ylim(0, area_size)
-        ax.set_aspect('equal', adjustable='box')
-        ax.legend(handles=handles)
-        ax.grid(True, linestyle='--', alpha=0.5)
-        
-        # 保存图像
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        fig.savefig(save_path, dpi=200, bbox_inches='tight')
-        plt.close(fig)
-        main_logger.info(f"2D拓扑图已保存: {save_path}")
-        
-    except Exception as e:
-        main_logger.error(f"生成2D拓扑图时出错: {e}")
-
-
-def save_evaluation_2d_topology_plot_enhanced(env_histories, save_path, config):
-    """
-    增强版2D拓扑图绘制函数 - 基于visualize_evaluation.py的成功方案
-    选择最佳轨迹进行绘制
-    
-    参数:
-        env_histories: 所有环境的历史数据列表
-        save_path: 图像保存的完整文件路径
-        config: 配置对象
-    """
-    main_logger.info(f"[DEBUG] save_evaluation_2d_topology_plot_enhanced 函数开始执行")
-    main_logger.info(f"[DEBUG] 输入参数: env_histories长度={len(env_histories)}, save_path={save_path}")
-    
-    try:
-        import matplotlib.pyplot as plt
-        
-        # 配置中文字体支持
-        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
-        plt.rcParams['axes.unicode_minus'] = False
-        
-        # 选择最佳轨迹进行绘制
-        best_history = None
-        best_score = 0
-        
-        for i, history in enumerate(env_histories):
-            if len(history['uav_positions']) < 2:
-                continue
-                
-            # 计算轨迹质量分数
-            trajectory_length = len(history['uav_positions'])
-            positions_array = np.array(history['uav_positions'])
-            
-            # 计算总移动距离
-            total_distance = 0
-            for uav_idx in range(positions_array.shape[1]):
-                uav_positions = positions_array[:, uav_idx, :2]
-                distances = np.sqrt(np.sum(np.diff(uav_positions, axis=0)**2, axis=1))
-                total_distance += np.sum(distances)
-            
-            # 综合评分：长度权重0.7，移动距离权重0.3
-            score = trajectory_length * 0.7 + total_distance * 0.3
-            
-            if score > best_score:
-                best_score = score
-                best_history = history
-        
-        if best_history is None:
-            main_logger.warning("没有找到合适的轨迹数据进行绘制")
-            return
-        
-        # 使用与visualize_evaluation.py相同的绘图逻辑
-        fig, ax = plt.subplots(figsize=(10, 10))
-        
-        positions_history = np.array(best_history['uav_positions'])
-        main_logger.info(f"绘制轨迹数据：{positions_history.shape} (步数={len(positions_history)})")
-        
-        # 输出调试信息
-        for i in range(config.n_agents):
-            start_pos = positions_history[0, i, :2]
-            end_pos = positions_history[-1, i, :2]
-            distance = np.linalg.norm(end_pos - start_pos)
-            main_logger.info(f"UAV{i}: 起点({start_pos[0]:.1f}, {start_pos[1]:.1f}) -> 终点({end_pos[0]:.1f}, {end_pos[1]:.1f}), 距离={distance:.1f}m")
-        
-        # 绘制轨迹（与visualize_evaluation.py完全相同的逻辑）
-        for i in range(config.n_agents):
-            color = plt.cm.jet(i / config.n_agents)
-            ax.plot(positions_history[:, i, 0], positions_history[:, i, 1], 
-                    color=color, alpha=0.6, linewidth=1.5,
-                    label=f'UAV {i} 轨迹' if i < 3 else "")
-            
-            # 标记起点和终点
-            ax.scatter(positions_history[0, i, 0], positions_history[0, i, 1],
-                       marker='o', color=color, s=50, edgecolors='black')
-            ax.scatter(positions_history[-1, i, 0], positions_history[-1, i, 1],
-                       marker='>', color=color, s=100, edgecolors='black')
-        
-        # 绘制静态实体（与visualize_evaluation.py相同）
-        static_info = best_history['static_info']
-        if static_info:
-            if 'ground_bs_positions' in static_info and static_info['ground_bs_positions'] is not None:
-                bs_pos = static_info['ground_bs_positions']
-                ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, 
-                          label='地面基站', zorder=5)
-            
-            if 'user_positions' in static_info and static_info['user_positions'] is not None:
-                user_pos = static_info['user_positions']
-                ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, 
-                          label='用户', zorder=5)
-        
-        # 无人机最终位置
-        uav_final_pos = positions_history[-1]
-        ax.scatter(uav_final_pos[:, 0], uav_final_pos[:, 1], c='red', marker='^', s=150, 
-                  label='UAV (最终位置)', zorder=5)
-        
-        for i in range(config.n_agents):
-            ax.text(uav_final_pos[i, 0] + 10, uav_final_pos[i, 1] + 10, f'UAV{i}', fontsize=9)
-        
-        ax.set_title('评估结果: 2D拓扑与无人机轨迹（增强版）')
-        ax.set_xlabel('X (m)')
-        ax.set_ylabel('Y (m)')
-        
-        area_size = static_info.get('area_size', 1000) if static_info else 1000
-        ax.set_xlim(0, area_size)
-        ax.set_ylim(0, area_size)
-        ax.set_aspect('equal', adjustable='box')
-        ax.legend()
-        ax.grid(True, linestyle='--', alpha=0.5)
-        
-        # 保存图像
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        fig.savefig(save_path, dpi=200, bbox_inches='tight')
-        plt.close(fig)
-        main_logger.info(f"增强版2D拓扑图已保存: {save_path}")
-        
-    except Exception as e:
-        main_logger.error(f"生成增强版2D拓扑图时出错: {e}")
-
-def save_evaluation_performance_plot(history, save_path, episode_num):
-    """
-    生成并保存性能指标随时间变化的图表
-    
-    参数:
-        history: 包含历史数据的字典，包含 'steps', 'connectivity', 'throughput'
-        save_path: 图像保存的完整文件路径
-        episode_num: episode编号
-    """
-    try:
-        import matplotlib.pyplot as plt
-        
-        # 配置中文字体支持
-        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
-        plt.rcParams['axes.unicode_minus'] = False
-        
-        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
-        
-        steps = history['steps']
-        connectivity = history['connectivity']
-        throughput = history['throughput']
-        
-        if len(steps) == 0:
-            main_logger.warning("没有性能数据可绘制")
-            return
-        
-        # 连通性图
-        ax1.plot(steps, connectivity, color='b', marker='.', linestyle='-', label='有效连接用户数')
-        ax1.set_title(f'评估 Episode {episode_num}: 网络性能变化')
-        ax1.set_ylabel('有效连接用户数')
-        ax1.grid(True, linestyle='--', alpha=0.6)
-        ax1.legend()
-        
-        # 吞吐量图
-        ax2.plot(steps, throughput, color='g', marker='.', linestyle='-', label='系统吞吐量')
-        ax2.set_ylabel('系统吞吐量 (Mbps)')
-        ax2.set_xlabel('时间步 (Step)')
-        ax2.grid(True, linestyle='--', alpha=0.6)
-        ax2.legend()
-        
-        fig.tight_layout()
-        
-        # 保存图像
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        fig.savefig(save_path, dpi=200, bbox_inches='tight')
-        plt.close(fig)
-        main_logger.info(f"性能图表已保存: {save_path}")
-        
-    except Exception as e:
-        main_logger.error(f"生成性能图表时出错: {e}")
-
 
 if __name__ == "__main__":
     # 设置多进程启动方法

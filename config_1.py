@@ -35,14 +35,14 @@ class Config:
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 6           # [关键] 降低个体技能数量
-    k = 6           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 40           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 128         # 隐藏层大小 (论文中为64)
     embedding_dim = 128       # 嵌入维度 (与hidden_size保持一致)
     n_encoder_layers = 2     # 编码器层数
     n_decoder_layers = 2     # 解码器层数
-    n_heads = 8              # 多头注意力头数
+    n_heads = 8              # 多头注意力头数 (必须为偶数以支持nested tensor优化)
     gru_hidden_size = 128     # GRU隐藏层大小 (与hidden_size保持一致)
     lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
     lr_discoverer = 1e-4     # 技能发现器学习率 参考原论文
@@ -94,6 +94,7 @@ class Config:
     
     # 其他论文中提到的参数
     use_valuenorm = True     # 使用价值标准化
+    use_obsnorm = True       # 使用观测标准化 (新增，解决输入尺度问题)
     use_orthogonal = True    # 使用正交初始化
     gain = 0.01              # 增益
     optimizer_epsilon = 1e-5 # 优化器epsilon
@@ -226,6 +227,35 @@ class Config:
         print(f"  batch_size: {self.batch_size:,}")
         print("="*60)
 
+    def validate_config(self):
+        """验证配置参数的有效性"""
+        # 确保注意力头数为偶数，避免PyTorch nested tensor警告
+        if self.n_heads % 2 != 0:
+            print(f"警告: n_heads={self.n_heads} 为奇数，PyTorch nested tensor优化将被禁用")
+            print(f"建议使用偶数个注意力头以获得更好的性能")
+            # 自动调整为最近的偶数
+            self.n_heads = self.n_heads + 1 if self.n_heads > 1 else 2
+            print(f"已自动调整 n_heads 为 {self.n_heads}")
+        
+        # 确保embedding_dim能被n_heads整除
+        if self.embedding_dim % self.n_heads != 0:
+            print(f"警告: embedding_dim={self.embedding_dim} 不能被 n_heads={self.n_heads} 整除")
+            # 调整embedding_dim为n_heads的倍数
+            self.embedding_dim = ((self.embedding_dim // self.n_heads) + 1) * self.n_heads
+            print(f"已自动调整 embedding_dim 为 {self.embedding_dim}")
+        
+        # 确保最小网络尺寸
+        min_hidden_size = 8
+        if self.hidden_size < min_hidden_size:
+            print(f"警告: hidden_size={self.hidden_size} 过小，可能导致训练不稳定")
+            self.hidden_size = max(self.hidden_size, min_hidden_size)
+            print(f"已调整 hidden_size 为 {self.hidden_size}")
+        
+        # 确保GRU隐藏层大小合理
+        if self.gru_hidden_size < min_hidden_size:
+            self.gru_hidden_size = max(self.gru_hidden_size, min_hidden_size)
+            print(f"已调整 gru_hidden_size 为 {self.gru_hidden_size}")
+
     def update_env_dims(self, state_dim, obs_dim, n_agents=None):
         """更新环境维度并动态计算buffer大小"""
         self.state_dim = state_dim
@@ -234,6 +264,9 @@ class Config:
             self.n_agents = n_agents
         
         print(f"环境维度已更新：state_dim={state_dim}, obs_dim={obs_dim}, n_agents={self.n_agents}")
+        
+        # 验证配置参数
+        self.validate_config()
         
         # 动态计算并设置buffer大小
         self.calculate_and_set_buffer_sizes()
