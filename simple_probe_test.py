@@ -247,21 +247,21 @@ def test_simple_value_function():
         config.n_encoder_layers = 1
         config.n_decoder_layers = 1
         
-        # 学习率配置 - 调整价值函数学习率以促进收敛
-        config.lr_coordinator = 1e-4  # 调整学习率
-        config.lr_discoverer = 1e-2   # 调整学习率
+        # 学习率配置 - 大幅提高价值函数学习率以促进收敛
+        config.lr_coordinator = 5e-4  # 提高协调器学习率
+        config.lr_discoverer = 3e-2   # 大幅提高发现器学习率，专注价值函数学习
         config.lr_discriminator = 1e-2
         
-        # 其他训练参数
-        config.clip_epsilon = 0.3
-        config.value_loss_coef = 1.0
+        # 其他训练参数 - 优化价值函数学习
+        config.clip_epsilon = 0.2  # 减小裁剪范围，提高稳定性
+        config.value_loss_coef = 2.0  # 增加价值损失权重，专注价值函数学习
         config.lambda_h = 0.1
         config.lambda_l = 0.1
         config.lambda_e = 1.0
         config.lambda_D = 0.0
         config.lambda_d = 0.0
         config.k = 8
-        config.max_grad_norm = 1.0
+        config.max_grad_norm = 0.5  # 减小梯度裁剪，避免梯度消失
         config.use_valuenorm = False
         config.use_obsnorm = False
         config.use_opt = False
@@ -292,7 +292,7 @@ def test_simple_value_function():
         value_predictions = []
         step_count = 0
         
-        for episode in range(50):
+        for episode in range(80):  # 增加训练轮数从50到80
             try:
                 if done:
                     obs_list, state_list = env.reset()

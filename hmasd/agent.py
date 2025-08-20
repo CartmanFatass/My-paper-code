@@ -21,7 +21,8 @@ from stable_baselines3.common.running_mean_std import RunningMeanStd
 
 from logger import main_logger
 from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
-from hmasd.utils import RolloutBuffer, compute_gae, compute_ppo_loss, one_hot
+from hmasd.utils import RolloutBuffer, compute_gae, compute_ppo_loss, one_hot, DiscriminatorBuffer
+import random
 
 # 导入SB3集成功能
 try:
@@ -286,8 +287,9 @@ class HMASDAgent:
             self.discriminator_scheduler = None
             main_logger.info("未启用学习率衰减")
         
-        # 状态-技能数据集已废弃，判别器现在直接从RolloutBuffer获取数据
-        # self.state_skill_dataset = StateSkillDataset(getattr(config, 'low_level_buffer_size', 10000))  # 已废弃
+        # 新增：与论文一致的、Off-Policy的判别器Buffer
+        discriminator_buffer_size = getattr(config, 'discriminator_buffer_size', 100000)
+        self.discriminator_buffer = DiscriminatorBuffer(capacity=discriminator_buffer_size)
         
         # 统一的Rollout缓冲区，同时存储高层和低层策略数据
         rollout_length = getattr(config, 'rollout_length', 2048)  # 默认rollout长度
@@ -433,7 +435,7 @@ class HMASDAgent:
             self.obs_norm = None
             main_logger.info("未启用Observation Normalization")
     
-    def _normalize_values(self, values_tensor, running_mean_std, clip=True):
+    def _normalize_values(self, values_tensor, running_mean_std):
         """
         [修正] 使用当前的统计量归一化一个张量。
         这个函数不更新统计量。
@@ -447,10 +449,8 @@ class HMASDAgent:
         
         # 归一化
         normalized_tensor = (values_tensor - current_mean) / torch.sqrt(current_var + 1e-8)
-        
-        if clip:
-            # 裁剪
-            normalized_tensor = torch.clamp(normalized_tensor, -self.config.value_clip, self.config.value_clip)
+        # 裁剪
+        normalized_tensor = torch.clamp(normalized_tensor, -self.config.value_clip, self.config.value_clip)
         
         return normalized_tensor
 
@@ -521,12 +521,12 @@ class HMASDAgent:
             return normalized_obs
 
     def clear_buffers(self):
-        """清空经验缓冲区（用于严格on-policy训练）"""
-        main_logger.info("清空统一的经验缓冲区")
-        # 注意：不清空 state_skill_dataset，因为它用于判别器训练
-        
-        # 清空统一的rollout缓冲区
+        """清空on-policy的经验缓冲区，但保留off-policy的判别器Buffer"""
+        main_logger.info("清空统一的on-policy经验缓冲区 (RolloutBuffer)...")
         self.rollout_buffer.reset()
+        
+        # *** 关键：不要清空 self.discriminator_buffer ***
+        main_logger.info(f"保持Off-Policy判别器Buffer不变，当前大小: {len(self.discriminator_buffer)}")
         
         # 重置计数器和累积值
         self.current_high_level_reward_sum = 0.0
@@ -634,9 +634,7 @@ class HMASDAgent:
             if current_team_skill is not None and state is not None:
                 global_state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
                 team_skill_tensor = torch.tensor(current_team_skill, device=self.device).unsqueeze(0)
-                # Aggregate hidden states for the centralized critic
-                agg_hidden_state = hidden_state.mean(dim=0, keepdim=True)
-                global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor, agg_hidden_state)
+                global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
                 values.fill_(global_value.item())
             else:
                 values.fill_(0.0)
@@ -809,8 +807,8 @@ class HMASDAgent:
             states_tensor = torch.FloatTensor(states_expanded).to(self.device)
             team_skills_tensor = torch.LongTensor(team_skills_expanded).to(self.device)
             
-            # 从 Critic 获取价值估计 - 现在传入GRU输出
-            values_flat, _ = self.skill_discoverer.get_value(states_tensor, team_skills_tensor, new_hidden_flat)
+            # 从 Critic 获取价值估计 - 这是被切断的关键信号！
+            values_flat, _ = self.skill_discoverer.get_value(states_tensor, team_skills_tensor)
             # ======================= ▲▲▲ 核心修复点 ▲▲▲ =======================
             
         # 5. Reshape back (这部分逻辑保持不变)
@@ -1036,8 +1034,8 @@ class HMASDAgent:
         
         self.store_rollout_step(
             t=t,
-            state=state,
-            observations=observations,
+            state=state,  # 【重要修复】存储当前状态而非下一状态
+            observations=observations,  # 【重要修复】存储当前观测而非下一观测
             actions=actions,
             rewards=intrinsic_rewards_array,
             dones=dones,
@@ -1140,7 +1138,23 @@ class HMASDAgent:
         
         return True
 
-    # _store_discriminator_data 函数已废弃，判别器现在直接从RolloutBuffer获取数据
+    def _store_discriminator_data(self, next_state, team_skill, next_observations, agent_skills):
+        """
+        将状态-技能对存储到独立的、Off-Policy的判别器Buffer中。
+        """
+        # 存储团队技能数据
+        self.discriminator_buffer.push(
+            {'type': 'team', 'state': next_state, 'skill': team_skill}
+        )
+        
+        # 存储每个智能体的个体技能数据
+        for i in range(self.config.n_agents):
+            self.discriminator_buffer.push(
+                {'type': 'individual', 
+                 'obs': next_observations[i], 
+                 'team_skill': team_skill, # 个体技能判别器需要团队技能作为条件
+                 'skill': agent_skills[i]}
+            )
 
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
@@ -1184,8 +1198,9 @@ class HMASDAgent:
             action_logprobs, team_skill, agent_skills, env_id, rollout_step_idx
         )
         
-        # 2. 判别器训练数据现在直接从RolloutBuffer获取，无需单独存储
-        # self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)  # 已废弃
+        # 新增：将 (下一状态, 技能) 对存储到判别器Buffer
+        # 根据论文，我们使用 t+1 时刻的状态/观测
+        self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)
         
         # 3. 处理高层策略经验存储
         # 初始化环境状态（如果需要）
@@ -1393,12 +1408,7 @@ class HMASDAgent:
                 team_disc_component = self.config.lambda_D * team_disc_reward_clipped
                 ind_disc_component = self.config.lambda_d * ind_disc_reward_clipped
                 
-                main_logger.info(f"[Reward Debug] env_comp: {env_component:.4f} (lambda_e: {self.config.lambda_e}, reward: {reward:.4f})")
-                main_logger.info(f"[Reward Debug] team_disc_comp: {team_disc_component:.4f} (lambda_D: {self.config.lambda_D}, value: {team_disc_reward_clipped:.4f})")
-                main_logger.info(f"[Reward Debug] ind_disc_comp: {ind_disc_component:.4f} (lambda_d: {self.config.lambda_d}, value: {ind_disc_reward_clipped:.4f})")
-
                 intrinsic_reward = env_component + team_disc_component + ind_disc_component
-                main_logger.info(f"[Reward Debug] Final Intrinsic Reward: {intrinsic_reward:.4f}")
                 
                 # 使用SB3数值稳定性工具进行最终检查
                 if SB3_INTEGRATION_AVAILABLE:
@@ -1535,8 +1545,8 @@ class HMASDAgent:
             else:
                 agent_values_tensor = torch.zeros(self.config.n_agents, batch_size, device=self.device)
 
-            # --- 关键修复: 添加标准的优势标准化 ---
-            advantages_batch = (advantages_batch - advantages_batch.mean()) / (advantages_batch.std() + 1e-8)
+            # 【关键修复】使用自适应优势标准化，根据奖励稀疏程度调整标准化强度
+            advantages_batch = self.compute_adaptive_advantage_normalization(advantages_batch)
             
             # --- 计算PPO损失 (标准的、非序列化的) ---
             ratios = torch.exp(total_log_probs - old_log_probs_batch.detach())
@@ -1775,16 +1785,6 @@ class HMASDAgent:
                 dones_seq
             )
             
-            # --- [新增] 详细日志记录 ---
-            main_logger.debug(f"  PPO Batch Info (Update #{update_count+1}):")
-            main_logger.debug(f"    - Advantages: mean={advantages_seq.mean().item():.4f}, std={advantages_seq.std().item():.4f}")
-            main_logger.debug(f"    - Returns: mean={returns_seq.mean().item():.4f}, std={returns_seq.std().item():.4f}")
-            main_logger.debug(f"    - Old Log Probs: mean={old_log_probs_seq.mean().item():.4f}")
-            main_logger.debug(f"    - New Log Probs: mean={new_log_probs.mean().item():.4f}")
-            main_logger.debug(f"    - New Values: mean={new_values.mean().item():.4f}")
-            main_logger.debug(f"    - Entropy: {entropy.item():.4f}")
-            # --- [结束] 详细日志记录 ---
-            
             # --- 将所有数据展平以计算损失 ---
             # 展平数据: (T, B) -> (T*B)
             advantages_flat = advantages_seq.reshape(-1)
@@ -1793,8 +1793,8 @@ class HMASDAgent:
             new_log_probs_flat = new_log_probs.reshape(-1)
             new_values_flat = new_values.reshape(-1)
             
-            # --- 关键修复: 添加标准的优势标准化 ---
-            advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
+            # 【关键修复】使用自适应优势标准化，根据奖励稀疏程度调整标准化强度
+            advantages_flat = self.compute_adaptive_advantage_normalization(advantages_flat)
             
             # --- 计算PPO损失（在展平后的数据上） ---
             ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
@@ -1804,22 +1804,15 @@ class HMASDAgent:
             
             # 价值损失
             if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-                # a. Critic的预测值需要被归一化和裁剪
-                values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer, clip=True)
-                # b. Critic的训练目标(returns)也需要被归一化，但不裁剪
-                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer, clip=False)
+                # a. Critic的预测值需要被归一化，以便与归一化的目标进行比较
+                values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
+                # b. Critic的训练目标(returns)也需要被归一化
+                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
                 # **关键修复**: 目标值需要detach()以防止梯度流向GAE计算
                 value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
             else:
                 # 如果不使用ValueNorm，一切照旧
                 value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
-
-            # [调试日志] 打印价值学习的关键信息
-            if update_count % 4 == 0: # 每4次更新打印一次以减少日志量
-                main_logger.info(f"  [Value-Debug] Update #{update_count+1}:")
-                main_logger.info(f"    - Target Returns (mean): {returns_flat.mean().item():.4f}, (std): {returns_flat.std().item():.4f}")
-                main_logger.info(f"    - Predicted Values (mean): {new_values_flat.mean().item():.4f}, (std): {new_values_flat.std().item():.4f}")
-                main_logger.info(f"    - Value Loss: {value_loss.item():.4f}")
             
             # 熵损失
             entropy_loss = -entropy * self.config.lambda_l
@@ -1831,12 +1824,6 @@ class HMASDAgent:
                 loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
             else:
                 loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
-
-            # --- [新增] 详细日志记录 ---
-            main_logger.debug(f"    - Policy Loss: {policy_loss.item():.6f}")
-            main_logger.debug(f"    - Value Loss: {value_loss.item():.6f}")
-            main_logger.debug(f"    - Total Loss: {loss.item():.6f}")
-            # --- [结束] 详细日志记录 ---
             
             # 更新网络
             self.discoverer_optimizer.zero_grad()
@@ -1898,171 +1885,80 @@ class HMASDAgent:
                avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, avg_discoverer_value
 
     
-    def update_discriminators(self, num_steps):
-        """更新技能判别器网络（使用RolloutBuffer数据，严格按照论文公式(8)）"""
-        # Now 'num_steps' is the actual amount of valid data
-        total_samples = num_steps * self.rollout_buffer.num_envs * self.rollout_buffer.n_agents
-        if total_samples < self.config.batch_size:
-            main_logger.warning(f"RolloutBuffer中的样本数({total_samples})少于批次大小({self.config.batch_size})，跳过判别器更新")
-            return 0
+    def update_discriminators(self, num_steps): # num_steps 参数现在可以忽略了
+        """更新技能判别器网络（从Off-Policy的discriminator_buffer中采样）"""
         
-        # 从RolloutBuffer中采样数据
-        # 随机选择时间步、环境和智能体
         batch_size = self.config.batch_size
         
-        # 生成随机索引
-        time_indices = np.random.choice(num_steps, batch_size, replace=True)
-        env_indices = np.random.choice(self.rollout_buffer.num_envs, batch_size, replace=True)
-        agent_indices = np.random.choice(self.rollout_buffer.n_agents, batch_size, replace=True)
-        
-        # 收集批次数据
-        states_list = []
-        team_skills_list = []
-        observations_list = []
-        agent_skills_list = []
-        
-        for i in range(batch_size):
-            t, env_idx, agent_idx = time_indices[i], env_indices[i], agent_indices[i]
-
-            # 【CRITICAL FIX】判别器应该学习 p(z | s')，即从下一个状态预测导致该状态的技能
-            # 因此，我们需要从 t+1 获取状态/观测，但使用 t 的技能作为标签
-            
-            # 确定下一个时间步 t_next
-            t_next = t + 1
-            
-            # 如果 t 是缓冲区的最后一步，我们没有 s'，所以跳过这个样本
-            if t_next >= num_steps:
-                continue
-
-            # 获取下一个全局状态 (s') 和团队技能 (z)
-            next_state = self.rollout_buffer.states[t_next, env_idx]
-            team_skill = self.rollout_buffer.team_skills[t, env_idx] # 使用当前时间步的技能
-            
-            # 获取特定智能体的下一个观测 (o') 和个体技能 (z)
-            next_observation = self.rollout_buffer.obs[t_next, env_idx, agent_idx]
-            agent_skill = self.rollout_buffer.agent_skills[t, env_idx, agent_idx] # 使用当前时间步的技能
-            
-            states_list.append(next_state)
-            team_skills_list.append(team_skill)
-            observations_list.append(next_observation)
-            agent_skills_list.append(agent_skill)
-        
-        # 如果所有样本都被跳过，则提前退出
-        if not states_list:
-            main_logger.warning("判别器更新：所有采样样本都在rollout的最后一步，跳过更新")
+        # 检查Buffer中是否有足够的数据
+        if len(self.discriminator_buffer) < batch_size:
+            main_logger.warning(f"判别器Buffer中的样本数({len(self.discriminator_buffer)})"
+                              f"少于批次大小({batch_size})，跳过判别器更新")
             return 0
         
-        # 转换为张量
-        states = torch.FloatTensor(np.stack(states_list)).to(self.device)
-        team_skills = torch.LongTensor(team_skills_list).to(self.device)
-        observations = torch.FloatTensor(np.stack(observations_list)).to(self.device)
-        agent_skills = torch.LongTensor(agent_skills_list).to(self.device)
+        # 从Off-Policy Buffer中随机采样一个minibatch
+        minibatch = self.discriminator_buffer.sample(batch_size)
         
-        # 更新团队技能判别器 - 仅使用标准交叉熵损失（论文公式8）
-        team_disc_logits = self.team_discriminator(states)
-        team_disc_loss = F.cross_entropy(team_disc_logits, team_skills)
+        # 分离团队和个体技能的数据
+        team_data = [d for d in minibatch if d['type'] == 'team']
+        ind_data = [d for d in minibatch if d['type'] == 'individual']
         
-        # 更新个体技能判别器 - 仅使用标准交叉熵损失（论文公式8）
-        # 【关键修复】确保 team_skills 的形状正确 (B,)
-        if team_skills.dim() > 1:
-            team_skills = team_skills.squeeze(-1)
-        agent_disc_logits = self.individual_discriminator(observations, team_skills)
-        agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills)
-        
-        # 总技能判别器损失 - 移除熵正则化项，严格按照论文公式(8)
+        total_loss = 0.0
+        team_disc_loss = torch.tensor(0.0, device=self.device)
+        agent_disc_loss = torch.tensor(0.0, device=self.device)
+
+        # 更新团队技能判别器
+        if len(team_data) > 0:
+            states = torch.FloatTensor(np.array([d['state'] for d in team_data])).to(self.device)
+            team_skills = torch.LongTensor([d['skill'] for d in team_data]).to(self.device)
+            
+            team_disc_logits = self.team_discriminator(states)
+            team_disc_loss = F.cross_entropy(team_disc_logits, team_skills)
+            total_loss += team_disc_loss.item()
+
+        # 更新个体技能判别器
+        if len(ind_data) > 0:
+            observations = torch.FloatTensor(np.array([d['obs'] for d in ind_data])).to(self.device)
+            team_skills_cond = torch.LongTensor([d['team_skill'] for d in ind_data]).to(self.device)
+            agent_skills = torch.LongTensor([d['skill'] for d in ind_data]).to(self.device)
+            
+            agent_disc_logits = self.individual_discriminator(observations, team_skills_cond)
+            agent_disc_loss = F.cross_entropy(agent_disc_logits, agent_skills)
+            total_loss += agent_disc_loss.item()
+            
+        # 总技能判别器损失
         disc_loss = team_disc_loss + agent_disc_loss
         
         # 更新网络
-        self.discriminator_optimizer.zero_grad()
-        disc_loss.backward()
-        torch.nn.utils.clip_grad_norm_(
-            list(self.team_discriminator.parameters()) + list(self.individual_discriminator.parameters()),
-            self.config.max_grad_norm
-        )
-        self.discriminator_optimizer.step()
+        if disc_loss.item() != 0:
+            self.discriminator_optimizer.zero_grad()
+            disc_loss.backward()
+            torch.nn.utils.clip_grad_norm_(
+                list(self.team_discriminator.parameters()) + list(self.individual_discriminator.parameters()),
+                self.config.max_grad_norm
+            )
+            self.discriminator_optimizer.step()
         
-        # 每100步记录判别器性能监控指标（移除TensorBoard写入，只保留日志）
+        # 日志记录部分
         if self.global_step % 100 == 0:
             with torch.no_grad():
-                # 计算判别器准确率
-                team_disc_acc = (team_disc_logits.argmax(dim=-1) == team_skills).float().mean()
-                agent_disc_acc = (agent_disc_logits.argmax(dim=-1) == agent_skills).float().mean()
+                if len(team_data) > 0:
+                    team_disc_acc = (team_disc_logits.argmax(dim=-1) == team_skills).float().mean().item()
+                else:
+                    team_disc_acc = 0.0
                 
-                # 计算熵用于监控（不用于损失函数）
-                team_disc_probs = F.softmax(team_disc_logits, dim=-1)
-                team_disc_entropy = -(team_disc_probs * F.log_softmax(team_disc_logits, dim=-1)).sum(dim=-1).mean()
-                agent_disc_probs = F.softmax(agent_disc_logits, dim=-1)
-                agent_disc_entropy = -(agent_disc_probs * F.log_softmax(agent_disc_logits, dim=-1)).sum(dim=-1).mean()
+                if len(ind_data) > 0:
+                    agent_disc_acc = (agent_disc_logits.argmax(dim=-1) == agent_skills).float().mean().item()
+                else:
+                    agent_disc_acc = 0.0
                 
-                # 只记录日志，不写入TensorBoard
-                main_logger.debug(f"判别器更新: Team Loss={team_disc_loss.item():.4f}, Agent Loss={agent_disc_loss.item():.4f}, "
-                                f"Team Acc={team_disc_acc.item():.4f}, Agent Acc={agent_disc_acc.item():.4f}, "
-                                f"Team Entropy={team_disc_entropy.item():.4f}, Agent Entropy={agent_disc_entropy.item():.4f}")
+                main_logger.debug(f"判别器更新: Total Loss={total_loss:.4f}, "
+                                f"Team Acc={team_disc_acc:.4f}, Agent Acc={agent_disc_acc:.4f}")
         
-        return disc_loss.item()
+        return total_loss
     
-    def update(self, steps_in_buffer, last_next_state=None, last_dones=None, last_next_obs=None):
+    def update(self, steps_in_buffer):
         """更新所有网络"""
-        # 如果提供了最后一步的信息（通常在测试脚本中），则为发现器计算GAE
-        if last_next_state is not None and last_dones is not None and last_next_obs is not None:
-            main_logger.debug("为低层策略(Discoverer)计算GAE (测试模式)...")
-            
-            last_values_predicted = np.zeros((self.config.num_envs, self.config.n_agents), dtype=np.float32)
-            
-            with torch.no_grad():
-                # 【关键修复】测试脚本使用单个环境 (env_id=0)
-                # V(s_T+1, Z_T+1)的计算应该使用在第T步决定的技能Z_T，而不是为T+1重新分配一个新技能
-                # 从环境中获取在最后一步实际使用的团队技能
-                last_used_team_skill = self.env_team_skills.get(0, 0) # 默认值为0
-                
-                global_state_tensor = torch.FloatTensor(last_next_state).unsqueeze(0).to(self.device)
-                team_skill_tensor = torch.tensor(last_used_team_skill, device=self.device).unsqueeze(0)
-                # Dummy hidden state for the last step
-                dummy_hidden = torch.zeros(1, self.config.gru_hidden_size, device=self.device)
-                global_value_tensor, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor, dummy_hidden)
-                
-                # 将此价值广播到env 0的所有智能体
-                last_values_predicted[0, :] = global_value_tensor.squeeze().item()
-                main_logger.info(f"GAE自举(bootstrap)计算: 使用最后一步的团队技能 {last_used_team_skill}, "
-                               f"计算出的下一状态价值 V(s') = {last_values_predicted[0, 0]:.4f}")
-
-            dones_for_gae = np.zeros(self.config.num_envs, dtype=bool)
-            dones_for_gae[0] = last_dones
-
-            # --- GAE Calculation Fix ---
-            # If ValueNorm is enabled, the values in the buffer are normalized.
-            # We must de-normalize them before computing advantages.
-            values_for_gae = self.rollout_buffer.values[:steps_in_buffer]
-            last_values_for_gae = last_values_predicted
-
-            if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-                main_logger.info("ValueNorm is enabled. De-normalizing values before GAE computation.")
-                
-                # Convert numpy arrays to tensors for de-normalization
-                values_tensor = torch.tensor(values_for_gae, device=self.device, dtype=torch.float32)
-                last_values_tensor = torch.tensor(last_values_for_gae, device=self.device, dtype=torch.float32)
-
-                # De-normalize
-                denormalized_values = self._denormalize_values(values_tensor, self.value_norm_discoverer)
-                denormalized_last_values = self._denormalize_values(last_values_tensor, self.value_norm_discoverer)
-                
-                # Convert back to numpy for the buffer function
-                values_for_gae = denormalized_values.cpu().numpy()
-                last_values_for_gae = denormalized_last_values.cpu().numpy()
-                
-                main_logger.debug(f"Original last value: {last_values_predicted[0, 0]:.4f}, "
-                                f"De-normalized last value: {last_values_for_gae[0, 0]:.4f}")
-
-            self.rollout_buffer.compute_advantages(
-                last_values=last_values_for_gae,
-                dones=dones_for_gae,
-                num_steps=steps_in_buffer,
-                gamma=self.config.gamma, 
-                gae_lambda=self.config.gae_lambda,
-                denormalized_values=values_for_gae,
-                denormalized_last_values=last_values_for_gae
-            )
-
         # 更新全局步数
         self.global_step += 1
         main_logger.debug(f"HMASDAgent.update (step {self.global_step}): 开始更新所有网络，有效步数: {steps_in_buffer}")

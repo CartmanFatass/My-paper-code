@@ -1793,7 +1793,6 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         agent.rollout_buffer.compute_advantages(
             last_values=last_values_predicted, # GAE内部会处理denormalized_last_values
             dones=dones_tracker,               # <-- 确保这里是真实的dones
-            num_steps=steps_in_rollout,        # <-- 【修复】传入实际收集的步数
             gamma=config.gamma, 
             gae_lambda=config.gae_lambda,
             denormalized_values=values_for_gae, # 传入原始价值

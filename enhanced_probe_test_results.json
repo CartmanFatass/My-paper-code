@@ -2,9 +2,9 @@
   "value_function": {
     "test_name": "价值函数测试",
     "status": "FAILED",
-    "start_time": 1755445831.3026307,
-    "end_time": 1755445911.2426937,
-    "duration": 79.94006299972534,
+    "start_time": 1755524087.920403,
+    "end_time": 1755524094.0945032,
+    "duration": 6.174100160598755,
     "error_category": null,
     "error_message": null,
     "error_traceback": null,
@@ -12,1269 +12,1030 @@
       {
         "name": "配置初始化",
         "success": true,
-        "timestamp": 1755445831.3026307,
+        "timestamp": 1755524087.920403,
         "details": {}
       },
       {
         "name": "环境创建",
         "success": true,
-        "timestamp": 1755445831.303685,
+        "timestamp": 1755524087.920403,
         "details": {}
       },
       {
         "name": "智能体创建",
         "success": true,
-        "timestamp": 1755445831.303685,
+        "timestamp": 1755524087.920403,
         "details": {}
       },
       {
         "name": "开始训练循环",
         "success": true,
-        "timestamp": 1755445832.224806,
+        "timestamp": 1755524088.90681,
         "details": {}
       },
       {
         "name": "结果分析",
         "success": true,
-        "timestamp": 1755445911.2426937,
+        "timestamp": 1755524094.0945032,
         "details": {}
       }
     ],
-    "steps_failed": [],
+    "steps_failed": [
+      {
+        "name": "Episode 0 训练",
+        "success": false,
+        "timestamp": 1755524088.9684396,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 1 训练",
+        "success": false,
+        "timestamp": 1755524089.0401034,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 2 训练",
+        "success": false,
+        "timestamp": 1755524089.1087918,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 3 训练",
+        "success": false,
+        "timestamp": 1755524089.1706834,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 4 训练",
+        "success": false,
+        "timestamp": 1755524089.2439215,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 5 训练",
+        "success": false,
+        "timestamp": 1755524089.3130555,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 6 训练",
+        "success": false,
+        "timestamp": 1755524089.3750453,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 7 训练",
+        "success": false,
+        "timestamp": 1755524089.4409227,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 8 训练",
+        "success": false,
+        "timestamp": 1755524089.5220783,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 9 训练",
+        "success": false,
+        "timestamp": 1755524089.5848653,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 10 训练",
+        "success": false,
+        "timestamp": 1755524089.6440086,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 11 训练",
+        "success": false,
+        "timestamp": 1755524089.7087212,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 12 训练",
+        "success": false,
+        "timestamp": 1755524089.7683742,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 13 训练",
+        "success": false,
+        "timestamp": 1755524089.8308325,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 14 训练",
+        "success": false,
+        "timestamp": 1755524089.8952641,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 15 训练",
+        "success": false,
+        "timestamp": 1755524089.9556532,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 16 训练",
+        "success": false,
+        "timestamp": 1755524090.0185049,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 17 训练",
+        "success": false,
+        "timestamp": 1755524090.0822475,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 18 训练",
+        "success": false,
+        "timestamp": 1755524090.1435745,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 19 训练",
+        "success": false,
+        "timestamp": 1755524090.2043006,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 20 训练",
+        "success": false,
+        "timestamp": 1755524090.266508,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 21 训练",
+        "success": false,
+        "timestamp": 1755524090.327215,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 22 训练",
+        "success": false,
+        "timestamp": 1755524090.3877769,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 23 训练",
+        "success": false,
+        "timestamp": 1755524090.4523869,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 24 训练",
+        "success": false,
+        "timestamp": 1755524090.5143178,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 25 训练",
+        "success": false,
+        "timestamp": 1755524090.5735483,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 26 训练",
+        "success": false,
+        "timestamp": 1755524090.6362927,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 27 训练",
+        "success": false,
+        "timestamp": 1755524090.6961088,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 28 训练",
+        "success": false,
+        "timestamp": 1755524090.761044,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 29 训练",
+        "success": false,
+        "timestamp": 1755524090.8202398,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 30 训练",
+        "success": false,
+        "timestamp": 1755524090.8822997,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 31 训练",
+        "success": false,
+        "timestamp": 1755524090.9444103,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 32 训练",
+        "success": false,
+        "timestamp": 1755524091.0027256,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 33 训练",
+        "success": false,
+        "timestamp": 1755524091.06856,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 34 训练",
+        "success": false,
+        "timestamp": 1755524091.1327202,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 35 训练",
+        "success": false,
+        "timestamp": 1755524091.1940668,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 36 训练",
+        "success": false,
+        "timestamp": 1755524091.2575014,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 37 训练",
+        "success": false,
+        "timestamp": 1755524091.3173718,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 38 训练",
+        "success": false,
+        "timestamp": 1755524091.3794754,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 39 训练",
+        "success": false,
+        "timestamp": 1755524091.4390383,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 40 训练",
+        "success": false,
+        "timestamp": 1755524091.507026,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 41 训练",
+        "success": false,
+        "timestamp": 1755524091.5716858,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 42 训练",
+        "success": false,
+        "timestamp": 1755524091.6311383,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 43 训练",
+        "success": false,
+        "timestamp": 1755524091.6937647,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 44 训练",
+        "success": false,
+        "timestamp": 1755524091.7539666,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 45 训练",
+        "success": false,
+        "timestamp": 1755524091.815245,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 46 训练",
+        "success": false,
+        "timestamp": 1755524091.8764107,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 47 训练",
+        "success": false,
+        "timestamp": 1755524091.9591124,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 48 训练",
+        "success": false,
+        "timestamp": 1755524092.029644,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 49 训练",
+        "success": false,
+        "timestamp": 1755524092.1032114,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 50 训练",
+        "success": false,
+        "timestamp": 1755524092.1795187,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 51 训练",
+        "success": false,
+        "timestamp": 1755524092.2548556,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 52 训练",
+        "success": false,
+        "timestamp": 1755524092.3282008,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 53 训练",
+        "success": false,
+        "timestamp": 1755524092.4018059,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 54 训练",
+        "success": false,
+        "timestamp": 1755524092.4628367,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 55 训练",
+        "success": false,
+        "timestamp": 1755524092.5335946,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 56 训练",
+        "success": false,
+        "timestamp": 1755524092.597681,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 57 训练",
+        "success": false,
+        "timestamp": 1755524092.6652062,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 58 训练",
+        "success": false,
+        "timestamp": 1755524092.7310376,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 59 训练",
+        "success": false,
+        "timestamp": 1755524092.7930415,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 60 训练",
+        "success": false,
+        "timestamp": 1755524092.8564134,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 61 训练",
+        "success": false,
+        "timestamp": 1755524092.9252899,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 62 训练",
+        "success": false,
+        "timestamp": 1755524092.9883013,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 63 训练",
+        "success": false,
+        "timestamp": 1755524093.052096,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 64 训练",
+        "success": false,
+        "timestamp": 1755524093.1132035,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 65 训练",
+        "success": false,
+        "timestamp": 1755524093.1760244,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 66 训练",
+        "success": false,
+        "timestamp": 1755524093.243776,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 67 训练",
+        "success": false,
+        "timestamp": 1755524093.3089907,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 68 训练",
+        "success": false,
+        "timestamp": 1755524093.3724341,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 69 训练",
+        "success": false,
+        "timestamp": 1755524093.4325426,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 70 训练",
+        "success": false,
+        "timestamp": 1755524093.5022013,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 71 训练",
+        "success": false,
+        "timestamp": 1755524093.5635686,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 72 训练",
+        "success": false,
+        "timestamp": 1755524093.6263297,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 73 训练",
+        "success": false,
+        "timestamp": 1755524093.6925633,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 74 训练",
+        "success": false,
+        "timestamp": 1755524093.749968,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 75 训练",
+        "success": false,
+        "timestamp": 1755524093.8401685,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 76 训练",
+        "success": false,
+        "timestamp": 1755524093.9015255,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 77 训练",
+        "success": false,
+        "timestamp": 1755524093.9637043,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 78 训练",
+        "success": false,
+        "timestamp": 1755524094.029228,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      },
+      {
+        "name": "Episode 79 训练",
+        "success": false,
+        "timestamp": 1755524094.0945032,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 2]' is invalid for input of size 32",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 348, in test_simple_value_function\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 2]' is invalid for input of size 32\n"
+        }
+      }
+    ],
     "metrics": {
       "期望价值": {
         "value": 4.90099501,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445831.303685
-      },
-      "Episode_0_Discoverer_Loss": {
-        "value": 3.3260254859924316,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445833.8991628
-      },
-      "Episode_0_Coordinator_Loss": {
-        "value": 81.75717620849609,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445833.8991628
-      },
-      "Episode_0_Value_Prediction": {
-        "value": "-0.0005397239",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445833.8991628
-      },
-      "Episode_0_Value_Error": {
-        "value": 4.901534733900147,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445833.8991628
-      },
-      "Episode_1_Discoverer_Loss": {
-        "value": 2.4138426184654236,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445835.4560533
-      },
-      "Episode_1_Coordinator_Loss": {
-        "value": 81.53932495117188,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445835.4560533
-      },
-      "Episode_1_Value_Prediction": {
-        "value": "0.23311055",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445835.4560533
-      },
-      "Episode_1_Value_Error": {
-        "value": 4.667884462934265,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445835.4560533
-      },
-      "Episode_2_Discoverer_Loss": {
-        "value": 1.1085900515317917,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445837.0557888
-      },
-      "Episode_2_Coordinator_Loss": {
-        "value": 81.29950561523438,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445837.0557888
-      },
-      "Episode_2_Value_Prediction": {
-        "value": "1.1451452",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445837.0571141
-      },
-      "Episode_2_Value_Error": {
-        "value": 3.7558498321588134,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445837.0571141
-      },
-      "Episode_3_Discoverer_Loss": {
-        "value": 1.07966148853302,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445838.6553571
-      },
-      "Episode_3_Coordinator_Loss": {
-        "value": 81.04423599243164,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445838.6553571
-      },
-      "Episode_3_Value_Prediction": {
-        "value": "2.9391625",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445838.6553571
-      },
-      "Episode_3_Value_Error": {
-        "value": 1.9618325172479247,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445838.6553571
-      },
-      "Episode_4_Discoverer_Loss": {
-        "value": 0.7856975346803665,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445840.2414377
-      },
-      "Episode_4_Coordinator_Loss": {
-        "value": 80.79906692504883,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445840.2414377
-      },
-      "Episode_4_Value_Prediction": {
-        "value": "2.5533109",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445840.24246
-      },
-      "Episode_4_Value_Error": {
-        "value": 2.3476841388757324,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445840.24246
-      },
-      "Episode_5_Discoverer_Loss": {
-        "value": 0.5507468432188034,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445841.8336465
-      },
-      "Episode_5_Coordinator_Loss": {
-        "value": 80.48776016235351,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445841.8336465
-      },
-      "Episode_5_Value_Prediction": {
-        "value": "2.3331313",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445841.8336465
-      },
-      "Episode_5_Value_Error": {
-        "value": 2.5678636966760253,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445841.8336465
-      },
-      "Episode_6_Discoverer_Loss": {
-        "value": 0.30260178446769714,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445843.3975067
-      },
-      "Episode_6_Coordinator_Loss": {
-        "value": 80.26912460327148,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445843.3975067
-      },
-      "Episode_6_Value_Prediction": {
-        "value": "2.6280699",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445843.3986323
-      },
-      "Episode_6_Value_Error": {
-        "value": 2.272925132375488,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445843.3986323
-      },
-      "Episode_7_Discoverer_Loss": {
-        "value": 0.8323801755905151,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445844.9613848
-      },
-      "Episode_7_Coordinator_Loss": {
-        "value": 79.95793151855469,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445844.9624925
-      },
-      "Episode_7_Value_Prediction": {
-        "value": "1.0189891",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445844.9624925
-      },
-      "Episode_7_Value_Error": {
-        "value": 3.882005923848877,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445844.9624925
-      },
-      "Episode_8_Discoverer_Loss": {
-        "value": 2.217826545238495,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445846.5236545
-      },
-      "Episode_8_Coordinator_Loss": {
-        "value": 79.65079727172852,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445846.5236545
-      },
-      "Episode_8_Value_Prediction": {
-        "value": "0.82160765",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445846.5246944
-      },
-      "Episode_8_Value_Error": {
-        "value": 4.0793873606736755,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445846.5246944
-      },
-      "Episode_9_Discoverer_Loss": {
-        "value": 1.476862221956253,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445848.1214194
-      },
-      "Episode_9_Coordinator_Loss": {
-        "value": 79.36907272338867,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445848.1214194
-      },
-      "Episode_9_Value_Prediction": {
-        "value": "1.117156",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445848.1214194
-      },
-      "Episode_9_Value_Error": {
-        "value": 3.7838389812524413,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445848.1225426
-      },
-      "Episode_10_Discoverer_Loss": {
-        "value": 1.0547819584608078,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445849.7174447
-      },
-      "Episode_10_Coordinator_Loss": {
-        "value": 79.06740036010743,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445849.7174447
-      },
-      "Episode_10_Value_Prediction": {
-        "value": "1.6416996",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445849.7187085
-      },
-      "Episode_10_Value_Error": {
-        "value": 3.259295457463989,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445849.7187085
-      },
-      "Episode_11_Discoverer_Loss": {
-        "value": 0.9586589187383652,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445851.289659
-      },
-      "Episode_11_Coordinator_Loss": {
-        "value": 78.75668563842774,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445851.289659
-      },
-      "Episode_11_Value_Prediction": {
-        "value": "2.6919618",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445851.289659
-      },
-      "Episode_11_Value_Error": {
-        "value": 2.2090332447106933,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445851.29069
-      },
-      "Episode_12_Discoverer_Loss": {
-        "value": 0.6033981442451477,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445852.8657293
-      },
-      "Episode_12_Coordinator_Loss": {
-        "value": 78.4287712097168,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445852.8668902
-      },
-      "Episode_12_Value_Prediction": {
-        "value": "2.5706701",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445852.8668902
-      },
-      "Episode_12_Value_Error": {
-        "value": 2.3303248821313476,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445852.8668902
-      },
-      "Episode_13_Discoverer_Loss": {
-        "value": 0.49354425072669983,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445854.4629993
-      },
-      "Episode_13_Coordinator_Loss": {
-        "value": 78.12042007446288,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445854.4629993
-      },
-      "Episode_13_Value_Prediction": {
-        "value": "2.3198276",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445854.4629993
-      },
-      "Episode_13_Value_Error": {
-        "value": 2.5811674533898925,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445854.4642024
-      },
-      "Episode_14_Discoverer_Loss": {
-        "value": 0.28085640631616116,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445856.0156887
-      },
-      "Episode_14_Coordinator_Loss": {
-        "value": 77.80967712402344,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445856.0156887
-      },
-      "Episode_14_Value_Prediction": {
-        "value": "2.3894684",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445856.0156887
-      },
-      "Episode_14_Value_Error": {
-        "value": 2.5115265785272216,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445856.0156887
-      },
-      "Episode_15_Discoverer_Loss": {
-        "value": 0.418329693377018,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445857.5512278
-      },
-      "Episode_15_Coordinator_Loss": {
-        "value": 77.50492553710937,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445857.5512278
-      },
-      "Episode_15_Value_Prediction": {
-        "value": "1.6236196",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445857.5512278
-      },
-      "Episode_15_Value_Error": {
-        "value": 3.277375453572998,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445857.5512278
-      },
-      "Episode_16_Discoverer_Loss": {
-        "value": 0.908862367272377,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445859.1193202
-      },
-      "Episode_16_Coordinator_Loss": {
-        "value": 77.15483703613282,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445859.1193202
-      },
-      "Episode_16_Value_Prediction": {
-        "value": "1.6719558",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445859.1206403
-      },
-      "Episode_16_Value_Error": {
-        "value": 3.2290391861016845,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445859.1206403
-      },
-      "Episode_17_Discoverer_Loss": {
-        "value": 0.5880958139896393,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445860.673109
-      },
-      "Episode_17_Coordinator_Loss": {
-        "value": 76.87200012207032,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445860.673109
-      },
-      "Episode_17_Value_Prediction": {
-        "value": "2.2110114",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445860.6741269
-      },
-      "Episode_17_Value_Error": {
-        "value": 2.6899836002404784,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445860.6741269
-      },
-      "Episode_18_Discoverer_Loss": {
-        "value": 0.5359437540173531,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445862.3249161
-      },
-      "Episode_18_Coordinator_Loss": {
-        "value": 76.58104705810547,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445862.3249161
-      },
-      "Episode_18_Value_Prediction": {
-        "value": "2.541183",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445862.3259408
-      },
-      "Episode_18_Value_Error": {
-        "value": 2.3598120151574706,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445862.3259408
-      },
-      "Episode_19_Discoverer_Loss": {
-        "value": 0.8786900192499161,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445863.951657
-      },
-      "Episode_19_Coordinator_Loss": {
-        "value": 76.23739166259766,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445863.951657
-      },
-      "Episode_19_Value_Prediction": {
-        "value": "5.367505",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445863.9526913
-      },
-      "Episode_19_Value_Error": {
-        "value": 0.46651006354736335,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445863.9526913
-      },
-      "Episode_20_Discoverer_Loss": {
-        "value": 0.35321566835045815,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445865.5737681
-      },
-      "Episode_20_Coordinator_Loss": {
-        "value": 75.93899002075196,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445865.5737681
-      },
-      "Episode_20_Value_Prediction": {
-        "value": "3.3308537",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445865.5737681
-      },
-      "Episode_20_Value_Error": {
-        "value": 1.5701413093621825,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445865.5737681
-      },
-      "Episode_21_Discoverer_Loss": {
-        "value": 0.7487167716026306,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445867.2027833
-      },
-      "Episode_21_Coordinator_Loss": {
-        "value": 75.62509078979492,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445867.2027833
-      },
-      "Episode_21_Value_Prediction": {
-        "value": "2.5181456",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445867.2027833
-      },
-      "Episode_21_Value_Error": {
-        "value": 2.382849448781738,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445867.2038794
-      },
-      "Episode_22_Discoverer_Loss": {
-        "value": 0.345319926738739,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445868.764371
-      },
-      "Episode_22_Coordinator_Loss": {
-        "value": 75.34390258789062,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445868.764371
-      },
-      "Episode_22_Value_Prediction": {
-        "value": "2.976749",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445868.7653933
-      },
-      "Episode_22_Value_Error": {
-        "value": 1.9242460666711425,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445868.7653933
-      },
-      "Episode_23_Discoverer_Loss": {
-        "value": 0.5593957006931305,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445870.3181024
-      },
-      "Episode_23_Coordinator_Loss": {
-        "value": 75.03768157958984,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445870.3192582
-      },
-      "Episode_23_Value_Prediction": {
-        "value": "1.2042406",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445870.3192582
-      },
-      "Episode_23_Value_Error": {
-        "value": 3.6967544494683837,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445870.3192582
-      },
-      "Episode_24_Discoverer_Loss": {
-        "value": 1.0132087618112564,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445871.8536217
-      },
-      "Episode_24_Coordinator_Loss": {
-        "value": 74.71859512329101,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445871.8536217
-      },
-      "Episode_24_Value_Prediction": {
-        "value": "1.367738",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445871.8546753
-      },
-      "Episode_24_Value_Error": {
-        "value": 3.5332570015008544,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445871.8546753
-      },
-      "Episode_25_Discoverer_Loss": {
-        "value": 0.672011062502861,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445873.398315
-      },
-      "Episode_25_Coordinator_Loss": {
-        "value": 74.39892654418945,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445873.398315
-      },
-      "Episode_25_Value_Prediction": {
-        "value": "2.5690026",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445873.399334
-      },
-      "Episode_25_Value_Error": {
-        "value": 2.331992381673584,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445873.399334
-      },
-      "Episode_26_Discoverer_Loss": {
-        "value": 0.4348025470972061,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445874.985651
-      },
-      "Episode_26_Coordinator_Loss": {
-        "value": 74.1213623046875,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445874.985651
-      },
-      "Episode_26_Value_Prediction": {
-        "value": "2.9735498",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445874.9867477
-      },
-      "Episode_26_Value_Error": {
-        "value": 1.9274451671655273,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445874.9867477
-      },
-      "Episode_27_Discoverer_Loss": {
-        "value": 0.3111335039138794,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445876.571777
-      },
-      "Episode_27_Coordinator_Loss": {
-        "value": 73.83863677978516,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445876.571777
-      },
-      "Episode_27_Value_Prediction": {
-        "value": "2.5628417",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445876.5727851
-      },
-      "Episode_27_Value_Error": {
-        "value": 2.3381533561761474,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445876.5727851
-      },
-      "Episode_28_Discoverer_Loss": {
-        "value": 0.511225588619709,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445878.1717482
-      },
-      "Episode_28_Coordinator_Loss": {
-        "value": 73.48883895874023,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445878.1717482
-      },
-      "Episode_28_Value_Prediction": {
-        "value": "2.2743967",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445878.1725779
-      },
-      "Episode_28_Value_Error": {
-        "value": 2.6265983520562743,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445878.1725779
-      },
-      "Episode_29_Discoverer_Loss": {
-        "value": 0.4770193547010422,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445879.8054662
-      },
-      "Episode_29_Coordinator_Loss": {
-        "value": 73.22119674682617,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445879.8054662
-      },
-      "Episode_29_Value_Prediction": {
-        "value": "2.9074888",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445879.8054662
-      },
-      "Episode_29_Value_Error": {
-        "value": 1.9935061870629882,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445879.8066187
-      },
-      "Episode_30_Discoverer_Loss": {
-        "value": 0.31340317055583,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445881.4200418
-      },
-      "Episode_30_Coordinator_Loss": {
-        "value": 72.92032318115234,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445881.4200418
-      },
-      "Episode_30_Value_Prediction": {
-        "value": "2.3528674",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445881.4210658
-      },
-      "Episode_30_Value_Error": {
-        "value": 2.548127645116577,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445881.4210658
-      },
-      "Episode_31_Discoverer_Loss": {
-        "value": 0.43888533115386963,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445882.9868221
-      },
-      "Episode_31_Coordinator_Loss": {
-        "value": 72.6177963256836,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445882.9878402
-      },
-      "Episode_31_Value_Prediction": {
-        "value": "2.015825",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445882.9878402
-      },
-      "Episode_31_Value_Error": {
-        "value": 2.8851699768121337,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445882.9878402
-      },
-      "Episode_32_Discoverer_Loss": {
-        "value": 0.5207326337695122,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445884.5278702
-      },
-      "Episode_32_Coordinator_Loss": {
-        "value": 72.29858474731445,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445884.5278702
-      },
-      "Episode_32_Value_Prediction": {
-        "value": "2.5623944",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445884.5278702
-      },
-      "Episode_32_Value_Error": {
-        "value": 2.338600629430542,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445884.5288734
-      },
-      "Episode_33_Discoverer_Loss": {
-        "value": 0.2968062572181225,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445886.0915217
-      },
-      "Episode_33_Coordinator_Loss": {
-        "value": 72.03056488037109,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445886.0925436
-      },
-      "Episode_33_Value_Prediction": {
-        "value": "2.7318568",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445886.0925436
-      },
-      "Episode_33_Value_Error": {
-        "value": 2.1691381870324706,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445886.0925436
-      },
-      "Episode_34_Discoverer_Loss": {
-        "value": 0.3115035183727741,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445887.7250729
-      },
-      "Episode_34_Coordinator_Loss": {
-        "value": 71.66992950439453,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445887.7250729
-      },
-      "Episode_34_Value_Prediction": {
-        "value": "2.7179713",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445887.7250729
-      },
-      "Episode_34_Value_Error": {
-        "value": 2.1830236850793456,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445887.7250729
-      },
-      "Episode_35_Discoverer_Loss": {
-        "value": 0.49269744753837585,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445889.3220098
-      },
-      "Episode_35_Coordinator_Loss": {
-        "value": 71.43572311401367,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445889.3220098
-      },
-      "Episode_35_Value_Prediction": {
-        "value": "2.125621",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445889.3220098
-      },
-      "Episode_35_Value_Error": {
-        "value": 2.7753739296014404,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445889.3220098
-      },
-      "Episode_36_Discoverer_Loss": {
-        "value": 0.5458962693810463,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445890.9148426
-      },
-      "Episode_36_Coordinator_Loss": {
-        "value": 71.07813568115235,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445890.9148426
-      },
-      "Episode_36_Value_Prediction": {
-        "value": "2.1375175",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445890.9158819
-      },
-      "Episode_36_Value_Error": {
-        "value": 2.7634775577600097,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445890.9158819
-      },
-      "Episode_37_Discoverer_Loss": {
-        "value": 0.3587789572775364,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445892.48524
-      },
-      "Episode_37_Coordinator_Loss": {
-        "value": 70.78475952148438,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445892.48524
-      },
-      "Episode_37_Value_Prediction": {
-        "value": "2.6160598",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445892.4867291
-      },
-      "Episode_37_Value_Error": {
-        "value": 2.2849352298791503,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445892.4867291
-      },
-      "Episode_38_Discoverer_Loss": {
-        "value": 0.2586774192750454,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445894.018068
-      },
-      "Episode_38_Coordinator_Loss": {
-        "value": 70.51054916381835,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445894.0191681
-      },
-      "Episode_38_Value_Prediction": {
-        "value": "2.8066533",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445894.0191681
-      },
-      "Episode_38_Value_Error": {
-        "value": 2.0943417488153075,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445894.0191681
-      },
-      "Episode_39_Discoverer_Loss": {
-        "value": 0.42133037745952606,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445895.5693064
-      },
-      "Episode_39_Coordinator_Loss": {
-        "value": 70.27343368530273,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445895.5693064
-      },
-      "Episode_39_Value_Prediction": {
-        "value": "3.3839288",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445895.5693064
-      },
-      "Episode_39_Value_Error": {
-        "value": 1.5170662342126464,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445895.5703454
-      },
-      "Episode_40_Discoverer_Loss": {
-        "value": 0.38955628126859665,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445897.1111915
-      },
-      "Episode_40_Coordinator_Loss": {
-        "value": 69.936767578125,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445897.1111915
-      },
-      "Episode_40_Value_Prediction": {
-        "value": "2.0913806",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445897.1122198
-      },
-      "Episode_40_Value_Error": {
-        "value": 2.8096144138391113,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445897.1122198
-      },
-      "Episode_41_Discoverer_Loss": {
-        "value": 0.9013136923313141,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445898.6671553
-      },
-      "Episode_41_Coordinator_Loss": {
-        "value": 69.62809829711914,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445898.6671553
-      },
-      "Episode_41_Value_Prediction": {
-        "value": "1.2895488",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445898.668172
-      },
-      "Episode_41_Value_Error": {
-        "value": 3.6114462553079223,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445898.668172
-      },
-      "Episode_42_Discoverer_Loss": {
-        "value": 0.6837708726525307,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445900.259991
-      },
-      "Episode_42_Coordinator_Loss": {
-        "value": 69.36710052490234,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445900.259991
-      },
-      "Episode_42_Value_Prediction": {
-        "value": "2.1762757",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445900.259991
-      },
-      "Episode_42_Value_Error": {
-        "value": 2.7247192798669433,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445900.259991
-      },
-      "Episode_43_Discoverer_Loss": {
-        "value": 0.3200008347630501,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445901.866819
-      },
-      "Episode_43_Coordinator_Loss": {
-        "value": 69.07488555908203,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445901.868062
-      },
-      "Episode_43_Value_Prediction": {
-        "value": "2.3807049",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445901.868062
-      },
-      "Episode_43_Value_Error": {
-        "value": 2.5202901302392577,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445901.868062
-      },
-      "Episode_44_Discoverer_Loss": {
-        "value": 0.4221688285470009,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445903.4494116
-      },
-      "Episode_44_Coordinator_Loss": {
-        "value": 68.77086715698242,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445903.4494116
-      },
-      "Episode_44_Value_Prediction": {
-        "value": "2.685738",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445903.4504511
-      },
-      "Episode_44_Value_Error": {
-        "value": 2.2152569232995605,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445903.4504511
-      },
-      "Episode_45_Discoverer_Loss": {
-        "value": 0.38351675122976303,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445905.0386367
-      },
-      "Episode_45_Coordinator_Loss": {
-        "value": 68.46155319213867,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445905.0386367
-      },
-      "Episode_45_Value_Prediction": {
-        "value": "2.535909",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445905.0396361
-      },
-      "Episode_45_Value_Error": {
-        "value": 2.3650860725457763,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445905.0396361
-      },
-      "Episode_46_Discoverer_Loss": {
-        "value": 0.29400548338890076,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445906.5824494
-      },
-      "Episode_46_Coordinator_Loss": {
-        "value": 68.18280639648438,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445906.5824494
-      },
-      "Episode_46_Value_Prediction": {
-        "value": "2.4524531",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445906.5834613
-      },
-      "Episode_46_Value_Error": {
-        "value": 2.448541873555908,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445906.5834613
-      },
-      "Episode_47_Discoverer_Loss": {
-        "value": 0.29611433669924736,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445908.1349893
-      },
-      "Episode_47_Coordinator_Loss": {
-        "value": 67.85893096923829,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445908.1349893
-      },
-      "Episode_47_Value_Prediction": {
-        "value": "2.3321514",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445908.1363914
-      },
-      "Episode_47_Value_Error": {
-        "value": 2.5688435970361327,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445908.1363914
-      },
-      "Episode_48_Discoverer_Loss": {
-        "value": 0.2948555648326874,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445909.67812
-      },
-      "Episode_48_Coordinator_Loss": {
-        "value": 67.56729202270508,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445909.67812
-      },
-      "Episode_48_Value_Prediction": {
-        "value": "2.4884498",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445909.679184
-      },
-      "Episode_48_Value_Error": {
-        "value": 2.412545198064575,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445909.679184
-      },
-      "Episode_49_Discoverer_Loss": {
-        "value": 0.18334054201841354,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445911.2416208
-      },
-      "Episode_49_Coordinator_Loss": {
-        "value": 67.33821868896484,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445911.2416208
-      },
-      "Episode_49_Value_Prediction": {
-        "value": "2.1414893",
-        "expected": 4.90099501,
-        "threshold": null,
-        "timestamp": 1755445911.2426937
-      },
-      "Episode_49_Value_Error": {
-        "value": 2.7595057426507568,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445911.2426937
+        "timestamp": 1755524087.920403
       },
       "最终平均价值": {
-        "value": "1.7409668",
+        "value": "0.008859902",
         "expected": 4.90099501,
         "threshold": null,
-        "timestamp": 1755445911.2426937
+        "timestamp": 1755524094.0945032
       },
       "最终价值误差": {
-        "value": 3.160028213125,
+        "value": 4.892135108311007,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445911.2426937
+        "timestamp": 1755524094.0945032
       },
       "总训练步数": {
-        "value": 800,
+        "value": 1280,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445911.2426937
+        "timestamp": 1755524094.0945032
       },
       "是否收敛": {
         "value": "False",
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445911.2426937
+        "timestamp": 1755524094.0945032
       }
     },
     "warnings": [],
     "recommendations": [
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
       "尝试增加训练轮数",
       "调整学习率",
       "检查网络结构配置"
@@ -1282,10 +1043,10 @@
   },
   "policy_learning": {
     "test_name": "策略学习测试",
-    "status": "PASSED",
-    "start_time": 1755445911.2437215,
-    "end_time": 1755445933.5154405,
-    "duration": 22.271718978881836,
+    "status": "FAILED",
+    "start_time": 1755524094.095567,
+    "end_time": 1755524094.6190684,
+    "duration": 0.5235013961791992,
     "error_category": null,
     "error_message": null,
     "error_traceback": null,
@@ -1293,669 +1054,315 @@
       {
         "name": "配置初始化",
         "success": true,
-        "timestamp": 1755445911.2437215,
+        "timestamp": 1755524094.095567,
         "details": {}
       },
       {
         "name": "环境创建",
         "success": true,
-        "timestamp": 1755445911.2437215,
+        "timestamp": 1755524094.095567,
         "details": {}
       },
       {
         "name": "智能体创建",
         "success": true,
-        "timestamp": 1755445911.2447367,
+        "timestamp": 1755524094.0965922,
         "details": {}
       },
       {
         "name": "开始训练循环",
         "success": true,
-        "timestamp": 1755445911.2516236,
+        "timestamp": 1755524094.1090806,
         "details": {}
-      },
-      {
-        "name": "Episode 5: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445917.9543424,
-        "details": {
-          "positive_ratio": 0.75
-        }
-      },
-      {
-        "name": "Episode 6: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445919.0668895,
-        "details": {
-          "positive_ratio": 0.7857142857142857
-        }
-      },
-      {
-        "name": "Episode 7: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445920.1554315,
-        "details": {
-          "positive_ratio": 0.8125
-        }
-      },
-      {
-        "name": "Episode 8: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445921.3109708,
-        "details": {
-          "positive_ratio": 0.8333333333333334
-        }
-      },
-      {
-        "name": "Episode 9: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445922.3980825,
-        "details": {
-          "positive_ratio": 0.85
-        }
-      },
-      {
-        "name": "Episode 10: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445923.5208695,
-        "details": {
-          "positive_ratio": 0.8636363636363636
-        }
-      },
-      {
-        "name": "Episode 11: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445924.6287115,
-        "details": {
-          "positive_ratio": 0.875
-        }
-      },
-      {
-        "name": "Episode 12: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445925.7520082,
-        "details": {
-          "positive_ratio": 0.8846153846153846
-        }
-      },
-      {
-        "name": "Episode 13: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445926.8429055,
-        "details": {
-          "positive_ratio": 0.8928571428571429
-        }
-      },
-      {
-        "name": "Episode 14: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445927.9647732,
-        "details": {
-          "positive_ratio": 0.9
-        }
-      },
-      {
-        "name": "Episode 15: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445929.0762012,
-        "details": {
-          "positive_ratio": 0.90625
-        }
-      },
-      {
-        "name": "Episode 16: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445930.1788492,
-        "details": {
-          "positive_ratio": 0.8676470588235294
-        }
-      },
-      {
-        "name": "Episode 17: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445931.3269389,
-        "details": {
-          "positive_ratio": 0.8472222222222222
-        }
-      },
-      {
-        "name": "Episode 18: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445932.4167383,
-        "details": {
-          "positive_ratio": 0.8421052631578947
-        }
-      },
-      {
-        "name": "Episode 19: 学习进展良好",
-        "success": true,
-        "timestamp": 1755445933.5154405,
-        "details": {
-          "positive_ratio": 0.825
-        }
       },
       {
         "name": "结果分析",
         "success": true,
-        "timestamp": 1755445933.5154405,
+        "timestamp": 1755524094.6178122,
         "details": {}
       }
     ],
-    "steps_failed": [],
+    "steps_failed": [
+      {
+        "name": "Episode 0 训练",
+        "success": false,
+        "timestamp": 1755524094.1325479,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 1 训练",
+        "success": false,
+        "timestamp": 1755524094.1584501,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 2 训练",
+        "success": false,
+        "timestamp": 1755524094.18359,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 3 训练",
+        "success": false,
+        "timestamp": 1755524094.2059588,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 4 训练",
+        "success": false,
+        "timestamp": 1755524094.2281938,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 5 训练",
+        "success": false,
+        "timestamp": 1755524094.2587664,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 6 训练",
+        "success": false,
+        "timestamp": 1755524094.2840998,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 7 训练",
+        "success": false,
+        "timestamp": 1755524094.3082237,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 8 训练",
+        "success": false,
+        "timestamp": 1755524094.3328955,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 9 训练",
+        "success": false,
+        "timestamp": 1755524094.3572707,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 10 训练",
+        "success": false,
+        "timestamp": 1755524094.3799853,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 11 训练",
+        "success": false,
+        "timestamp": 1755524094.406496,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 12 训练",
+        "success": false,
+        "timestamp": 1755524094.4293244,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 13 训练",
+        "success": false,
+        "timestamp": 1755524094.456052,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 14 训练",
+        "success": false,
+        "timestamp": 1755524094.4791255,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 15 训练",
+        "success": false,
+        "timestamp": 1755524094.5103047,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 16 训练",
+        "success": false,
+        "timestamp": 1755524094.5370817,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 17 训练",
+        "success": false,
+        "timestamp": 1755524094.5647168,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 18 训练",
+        "success": false,
+        "timestamp": 1755524094.5904138,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      },
+      {
+        "name": "Episode 19 训练",
+        "success": false,
+        "timestamp": 1755524094.6178122,
+        "details": {
+          "error": "维度不匹配错误: shape '[1, 1]' is invalid for input of size 16",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\project\\HMASD\\simple_probe_test.py\", line 557, in test_simple_policy_learning\n    update_results = agent.update(\n  File \"C:\\project\\HMASD\\hmasd\\agent.py\", line 1973, in update\n    last_values = last_values_flat.reshape(self.config.num_envs, self.config.n_agents).cpu().numpy()\nRuntimeError: shape '[1, 1]' is invalid for input of size 16\n"
+        }
+      }
+    ],
     "metrics": {
-      "Episode_0_Mean_Action": {
-        "value": "-0.44671905",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445912.3966997
-      },
-      "Episode_0_Positive_Ratio": {
-        "value": 0.125,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445912.3966997
-      },
-      "Episode_0_Mean_Reward": {
-        "value": -0.75,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445912.3977284
-      },
-      "Episode_0_Policy_Loss": {
-        "value": 1.8419208526611328,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445912.3977284
-      },
-      "Episode_1_Mean_Action": {
-        "value": "-0.004224915",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445913.4900053
-      },
-      "Episode_1_Positive_Ratio": {
-        "value": 0.5,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445913.4900053
-      },
-      "Episode_1_Mean_Reward": {
-        "value": 0.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445913.4900053
-      },
-      "Episode_1_Policy_Loss": {
-        "value": 1.1082037687301636,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445913.4900053
-      },
-      "Episode_2_Mean_Action": {
-        "value": "0.5070465",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445914.5985806
-      },
-      "Episode_2_Positive_Ratio": {
-        "value": 0.875,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445914.5985806
-      },
-      "Episode_2_Mean_Reward": {
-        "value": 0.75,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445914.5996287
-      },
-      "Episode_2_Policy_Loss": {
-        "value": 10.199819564819336,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445914.5996287
-      },
-      "Episode_3_Mean_Action": {
-        "value": "0.9856982",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445915.7332363
-      },
-      "Episode_3_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445915.7332363
-      },
-      "Episode_3_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445915.7332363
-      },
-      "Episode_3_Policy_Loss": {
-        "value": 10.984116792678833,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445915.7332363
-      },
-      "Episode_4_Mean_Action": {
-        "value": "1.0905962",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445916.853969
-      },
-      "Episode_4_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445916.853969
-      },
-      "Episode_4_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445916.853969
-      },
-      "Episode_4_Policy_Loss": {
-        "value": 7.652826189994812,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445916.853969
-      },
-      "Episode_5_Mean_Action": {
-        "value": "1.0296278",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445917.9531624
-      },
-      "Episode_5_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445917.9531624
-      },
-      "Episode_5_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445917.9543424
-      },
-      "Episode_5_Policy_Loss": {
-        "value": 6.454633116722107,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445917.9543424
-      },
-      "Episode_6_Mean_Action": {
-        "value": "0.8507303",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445919.0656621
-      },
-      "Episode_6_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445919.0656621
-      },
-      "Episode_6_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445919.0668895
-      },
-      "Episode_6_Policy_Loss": {
-        "value": 6.114455819129944,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445919.0668895
-      },
-      "Episode_7_Mean_Action": {
-        "value": "0.91809523",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445920.1544175
-      },
-      "Episode_7_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445920.1544175
-      },
-      "Episode_7_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445920.1554315
-      },
-      "Episode_7_Policy_Loss": {
-        "value": 5.691799283027649,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445920.1554315
-      },
-      "Episode_8_Mean_Action": {
-        "value": "1.0779577",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445921.3109708
-      },
-      "Episode_8_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445921.3109708
-      },
-      "Episode_8_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445921.3109708
-      },
-      "Episode_8_Policy_Loss": {
-        "value": 5.7564756870269775,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445921.3109708
-      },
-      "Episode_9_Mean_Action": {
-        "value": "0.95256305",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445922.397039
-      },
-      "Episode_9_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445922.3980825
-      },
-      "Episode_9_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445922.3980825
-      },
-      "Episode_9_Policy_Loss": {
-        "value": 3.6256951093673706,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445922.3980825
-      },
-      "Episode_10_Mean_Action": {
-        "value": "0.945657",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445923.5197906
-      },
-      "Episode_10_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445923.5197906
-      },
-      "Episode_10_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445923.5197906
-      },
-      "Episode_10_Policy_Loss": {
-        "value": 2.1182331144809723,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445923.5208695
-      },
-      "Episode_11_Mean_Action": {
-        "value": "0.83155847",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445924.6287115
-      },
-      "Episode_11_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445924.6287115
-      },
-      "Episode_11_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445924.6287115
-      },
-      "Episode_11_Policy_Loss": {
-        "value": 1.348191261291504,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445924.6287115
-      },
-      "Episode_12_Mean_Action": {
-        "value": "0.5077301",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445925.7520082
-      },
-      "Episode_12_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445925.7520082
-      },
-      "Episode_12_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445925.7520082
-      },
-      "Episode_12_Policy_Loss": {
-        "value": 2.4914960861206055,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445925.7520082
-      },
-      "Episode_13_Mean_Action": {
-        "value": "0.5846586",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445926.8429055
-      },
-      "Episode_13_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445926.8429055
-      },
-      "Episode_13_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445926.8429055
-      },
-      "Episode_13_Policy_Loss": {
-        "value": 1.49271360039711,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445926.8429055
-      },
-      "Episode_14_Mean_Action": {
-        "value": "0.90887594",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445927.9647732
-      },
-      "Episode_14_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445927.9647732
-      },
-      "Episode_14_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445927.9647732
-      },
-      "Episode_14_Policy_Loss": {
-        "value": 1.7078984379768372,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445927.9658244
-      },
-      "Episode_15_Mean_Action": {
-        "value": "0.5037017",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445929.0750806
-      },
-      "Episode_15_Positive_Ratio": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445929.0762012
-      },
-      "Episode_15_Mean_Reward": {
-        "value": 1.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445929.0762012
-      },
-      "Episode_15_Policy_Loss": {
-        "value": 1.2342996001243591,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445929.0762012
-      },
-      "Episode_16_Mean_Action": {
-        "value": "-0.1731112",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445930.1778162
-      },
-      "Episode_16_Positive_Ratio": {
-        "value": 0.25,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445930.1778162
-      },
-      "Episode_16_Mean_Reward": {
-        "value": -0.5,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445930.1778162
-      },
-      "Episode_16_Policy_Loss": {
-        "value": 2.208043783903122,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445930.1788492
-      },
-      "Episode_17_Mean_Action": {
-        "value": "0.08309768",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445931.3258257
-      },
-      "Episode_17_Positive_Ratio": {
-        "value": 0.5,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445931.3258257
-      },
-      "Episode_17_Mean_Reward": {
-        "value": 0.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445931.3269389
-      },
-      "Episode_17_Policy_Loss": {
-        "value": 1.2952681183815002,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445931.3269389
-      },
-      "Episode_18_Mean_Action": {
-        "value": "0.12435162",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445932.4167383
-      },
-      "Episode_18_Positive_Ratio": {
-        "value": 0.75,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445932.4167383
-      },
-      "Episode_18_Mean_Reward": {
-        "value": 0.5,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445932.4167383
-      },
-      "Episode_18_Policy_Loss": {
-        "value": 2.601822793483734,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445932.4167383
-      },
-      "Episode_19_Mean_Action": {
-        "value": "-0.17254072",
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445933.514406
-      },
-      "Episode_19_Positive_Ratio": {
-        "value": 0.5,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445933.514406
-      },
-      "Episode_19_Mean_Reward": {
-        "value": 0.0,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445933.514406
-      },
-      "Episode_19_Policy_Loss": {
-        "value": 0.6134306639432907,
-        "expected": null,
-        "threshold": null,
-        "timestamp": 1755445933.5154405
-      },
       "最终正动作比例": {
-        "value": 0.825,
+        "value": 0.48125,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445933.5154405
+        "timestamp": 1755524094.6178122
       },
       "总动作数": {
         "value": 160,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445933.5154405
+        "timestamp": 1755524094.6178122
       },
       "最终平均奖励": {
-        "value": 0.2,
+        "value": -0.4,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445933.5154405
+        "timestamp": 1755524094.6178122
       },
       "是否学会": {
-        "value": true,
+        "value": false,
         "expected": null,
         "threshold": null,
-        "timestamp": 1755445933.5154405
+        "timestamp": 1755524094.6178122
       }
     },
     "warnings": [],
-    "recommendations": []
+    "recommendations": [
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "检查批次大小配置是否一致",
+      "验证网络输入输出维度",
+      "确认rollout_length和batch_size匹配",
+      "增加训练轮数",
+      "调整学习率或熵正则化系数",
+      "检查奖励函数设计",
+      "学习进度缓慢，可能需要更多训练时间"
+    ]
   },
   "test_summary": {
-    "timestamp": "2025-08-17T23:52:13.515440",
+    "timestamp": "2025-08-18T21:34:54.619068",
     "total_tests": 2,
-    "passed_tests": 1,
-    "failed_tests": 1,
+    "passed_tests": 0,
+    "failed_tests": 2,
     "error_tests": 0
   }
 }

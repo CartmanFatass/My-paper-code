@@ -421,7 +421,7 @@ class RolloutBuffer:
                          f"reward={final_accumulated_reward:.4f}")
         return True
     
-    def compute_advantages(self, last_values, dones, num_steps, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
+    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
         """
         【修复版本】标准化的GAE计算方法，在整个rollout收集完毕后调用一次。
         这确保了严格的on-policy更新流程。
@@ -429,7 +429,6 @@ class RolloutBuffer:
         参数:
             last_values (np.ndarray): Rollout最后一步之后的状态价值，Shape (num_envs, n_agents)
             dones (np.ndarray): 最后一步的完成标志，Shape (num_envs, n_agents) 或 (num_envs,)
-            num_steps (int): 实际收集的步数
             gamma (float): 折扣因子
             gae_lambda (float): GAE lambda参数
             denormalized_values (np.ndarray, optional): 【新增】反归一化后的价值估计。如果提供，将使用此值计算GAE。
@@ -477,26 +476,27 @@ class RolloutBuffer:
         inf_count = 0
         
         # 从后往前计算GAE
-        for t in reversed(range(num_steps)):
-            # Correctly determine the next value and done state
-            if t == num_steps - 1:
-                next_non_terminal = 1.0 - dones.astype(np.float32)
+        # 【关键修复】使用传入的价值数组的实际长度，而不是缓冲区的最大容量
+        num_actual_steps = values_for_gae.shape[0]
+        for t in reversed(range(num_actual_steps)):
+            # 如果是缓冲区的最后一步，next_value就是传入的last_values
+            if t == num_actual_steps - 1:
                 next_values = last_values_for_gae
             else:
-                # The done signal for the transition at step t is self.dones[t].
-                # The advantage calculation needs to know if the *next* state is terminal,
-                # which is indicated by self.dones[t+1].
-                next_non_terminal = 1.0 - self.dones[t].astype(np.float32)
                 next_values = values_for_gae[t + 1]
 
-            # TD-error, delta_t = r_t + gamma * V(s_{t+1}) * (1 - done_t) - V(s_t)
-            # Note: The done flag for the transition (s_t, a_t, r_t, s_{t+1}) is self.dones[t]
-            # However, the advantage propagation depends on the *next* state being non-terminal.
-            # So we use next_non_terminal for discounting future values and advantages.
-            delta = self.rewards[t] + gamma * next_values * next_non_terminal - values_for_gae[t]
-            
-            # GAE advantage: A_t = delta_t + gamma * lambda * A_{t+1} * (1 - done_{t+1})
-            last_advantage = delta + gamma * gae_lambda * next_non_terminal * last_advantage
+            # 决定是否从下一步传播价值的掩码，取决于当前步是否是终止步。
+            # self.dones[t] 表示 s_{t+1} 是否是终止状态。
+            non_terminal = 1.0 - self.dones[t].astype(np.float32)
+
+            # delta_t = r_t + gamma * V(s_{t+1}) * (1 - done_t) - V(s_t)
+            delta = (self.rewards[t] +
+                     gamma * next_values * non_terminal -
+                     values_for_gae[t])
+
+            # advantage_t = delta_t + gamma * lambda * advantage_{t+1} * (1 - done_t)
+            last_advantage = (delta +
+                              gamma * gae_lambda * last_advantage * non_terminal)
             self.advantages[t] = last_advantage
             
             # 【第三优先级修复】检查每步计算结果
@@ -984,42 +984,64 @@ class RolloutBuffer:
     
     # 删除了依赖 self.ptr 和 self.full 的方法，这些现在由外部管理
 
-class StateSkillDataset:
-    """状态-技能对数据集，用于训练技能判别器"""
+class DiscriminatorBuffer:
+    """
+    独立的、Off-Policy的判别器经验回放缓冲区。
+    存储状态-技能对，用于训练判别器网络。
+    """
     def __init__(self, capacity):
+        """
+        初始化判别器缓冲区。
+        
+        参数:
+            capacity (int): 缓冲区的最大容量。
+        """
         self.buffer = deque(maxlen=capacity)
         self.capacity = capacity
         self._total_added = 0
         self._total_sampled = 0
-    
-    def push(self, state, team_skill, observations, agent_skills):
-        """将状态-技能对存入数据集"""
-        experience = (state, team_skill, observations, agent_skills)
+        main_logger.info(f"初始化Off-Policy判别器Buffer，最大容量: {capacity}")
+
+    def push(self, experience):
+        """
+        将单个经验存入缓冲区。
+        经验应该是一个字典，包含type, state/obs, skill等信息。
         
-        # 记录添加计数
-        if len(self.buffer) >= self.capacity:
-            self._total_added += 1
+        参数:
+            experience (dict): 经验字典。
+        """
+        if not isinstance(experience, dict):
+            main_logger.error(f"判别器Buffer只接受字典类型的经验, 但收到了 {type(experience)}")
+            return
             
         self.buffer.append(experience)
-        
-    def clear(self):
-        """清空数据集"""
-        self.buffer.clear()
-        self._total_added = 0
-        self._total_sampled = 0
-    
+        self._total_added += 1
+
     def sample(self, batch_size):
-        """从数据集中随机采样一批数据"""
-        sampled_batch = random.sample(self.buffer, min(len(self.buffer), batch_size))
+        """
+        从缓冲区中随机采样一批经验。
+        
+        参数:
+            batch_size (int): 采样批次的大小。
+            
+        返回:
+            list: 包含经验字典的列表。
+        """
+        if len(self.buffer) < batch_size:
+            # main_logger.warning(f"判别器Buffer中的样本数({len(self.buffer)})"
+            #                   f"少于请求的批次大小({batch_size})，将返回所有可用样本。")
+            batch_size = len(self.buffer)
+            
+        sampled_batch = random.sample(self.buffer, batch_size)
         self._total_sampled += len(sampled_batch)
         return sampled_batch
-    
+
     def __len__(self):
-        """返回数据集的当前大小"""
+        """返回缓冲区的当前大小。"""
         return len(self.buffer)
-        
+
     def get_stats(self):
-        """获取数据集统计信息"""
+        """获取缓冲区统计信息。"""
         return {
             "size": len(self.buffer),
             "capacity": self.capacity,
@@ -1030,7 +1052,7 @@ class StateSkillDataset:
 
 def compute_gae(rewards, values, next_values, dones, gamma, lam):
     """
-    【修复版本】计算广义优势估计（GAE）
+    计算广义优势估计（GAE）
     
     参数:
         rewards: 一批奖励 [batch_size]
@@ -1050,19 +1072,12 @@ def compute_gae(rewards, values, next_values, dones, gamma, lam):
     # 逆序遍历时序数据进行计算
     for t in reversed(range(len(rewards))):
         if t == len(rewards) - 1:
-            # 最后一步：使用bootstrap价值
-            next_non_terminal = 1.0 - dones[t]
             next_value = next_values[t]
         else:
-            # 【关键修复】中间步骤：使用下一步的价值，但done信号应该是当前步的
-            next_non_terminal = 1.0 - dones[t]
             next_value = values[t + 1]
-
-        # TD误差
-        delta = rewards[t] + gamma * next_value * next_non_terminal - values[t]
-        
-        # GAE优势
-        advantages[t] = last_gae = delta + gamma * lam * next_non_terminal * last_gae
+            
+        delta = rewards[t] + gamma * next_value * (1 - dones[t]) - values[t]
+        advantages[t] = last_gae = delta + gamma * lam * (1 - dones[t]) * last_gae
     
     returns = advantages + values
     
@@ -1123,22 +1138,17 @@ def one_hot(indices, depth):
         one_hot: 独热编码张量 [batch_size, depth]
     """
     if isinstance(indices, int):
-        indices = torch.tensor([indices], dtype=torch.long)
+        indices = torch.tensor([indices])
     elif isinstance(indices, list):
-        indices = torch.tensor(indices, dtype=torch.long)
-    elif isinstance(indices, np.ndarray):
-        indices = torch.from_numpy(indices).long()
-    elif isinstance(indices, torch.Tensor):
-        indices = indices.long()  # 确保是LongTensor
-    
+        indices = torch.tensor(indices)
     if indices.dim() == 0:
         indices = indices.unsqueeze(0)
     
     device = indices.device
-    one_hot_tensor = torch.zeros(indices.size(0), depth, device=device)
-    one_hot_tensor.scatter_(1, indices.unsqueeze(1), 1)
+    one_hot = torch.zeros(indices.size(0), depth, device=device)
+    one_hot.scatter_(1, indices.unsqueeze(1), 1)
     
-    return one_hot_tensor
+    return one_hot
 
 def setup_optimizer(model, lr):
     """设置优化器"""

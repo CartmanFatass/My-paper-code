@@ -72,6 +72,7 @@ class Config:
     # buffer和batch大小将根据环境参数动态计算
     low_level_buffer_size = None   # 低层经验回放缓冲区大小 (动态计算)
     batch_size = None              # 低层批处理大小 (动态计算, 兼容旧代码)
+    discriminator_buffer_size = 100000 # 判别器off-policy经验缓冲区大小
     buffer_size = None             # 兼容性别名，指向low_level_buffer_size
     high_level_buffer_size = None  # 高层经验缓冲区大小 (动态计算)
     high_level_batch_size = None   # 高层更新的批处理大小 (动态计算)
