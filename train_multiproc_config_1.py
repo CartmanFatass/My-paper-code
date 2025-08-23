@@ -17,6 +17,25 @@ from collections import defaultdict, deque
 # from functools import partial # No longer needed for make_env directly
 from logger import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEVELS, set_log_level
 
+def convert_numpy_types(obj):
+    """
+    递归转换numpy类型为原生Python类型，用于JSON序列化
+    """
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_numpy_types(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy_types(item) for item in obj]
+    elif isinstance(obj, tuple):
+        return tuple(convert_numpy_types(item) for item in obj)
+    else:
+        return obj
+
 # 导入 Stable Baselines3 的向量化环境
 from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.env_util import make_vec_env # Can also use this helper
@@ -330,7 +349,17 @@ class EnhancedRewardTracker:
                 # 场景4发现机制指标
                 'discovery_reward': [],
                 'weighted_discovery_reward': [],
-                'discovered_users_count': []
+                'discovered_users_count': [],
+
+                # 网络健康度得分组成
+                'rt_final_health_score': [],
+                'connectivity_score': [],
+                'role_diversity_bonus': [],
+                'effective_coverage_score': [],
+                'dispersion_penalty': [],
+                'serving_uavs_count': [],
+                'pure_relay_uavs_count': [],
+                'weighted_serving_score': [] # 新增：服务贡献加权分
             }
         }
         
@@ -645,6 +674,18 @@ class EnhancedRewardTracker:
                     self.performance_metrics['reward_components']['discovered_users_count'].append({
                         'step': step, 'env_id': env_id, 'value': reward_info['discovered_users_count'], 'timestamp': time.time()
                     })
+
+                # 网络健康度得分组成
+                health_score_keys = [
+                    'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
+                    'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
+                    'pure_relay_uavs_count', 'weighted_serving_score' # 新增
+                ]
+                for key in health_score_keys:
+                    if key in reward_info:
+                        self.performance_metrics['reward_components'][key].append({
+                            'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
+                        })
                 
                 # 场景4新增：潜能奖励
                 if 'potential_reward' in reward_info:
@@ -1180,6 +1221,34 @@ class EnhancedRewardTracker:
                         formatted_field = field.replace('_', ' ').title().replace(' ', '_')
                         writer.add_scalar(f'RewardShaping/{formatted_field}_Mean_Rollout', avg_value, step)
         
+        # 场景4新增：网络健康度统计 - 新的HealthScore分类
+        health_score_fields = [
+            'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
+            'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
+            'pure_relay_uavs_count', 'weighted_serving_score' # 新增
+        ]
+
+        for field in health_score_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(writer, step,
+                                           reward_components[field],
+                                           field.replace('_', ' ').title().replace(' ', '_'),
+                                           'HealthScore')
+
+        # 场景4新增：网络健康度统计 - 新的HealthScore分类
+        health_score_fields = [
+            'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
+            'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
+            'pure_relay_uavs_count'
+        ]
+
+        for field in health_score_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(writer, step,
+                                           reward_components[field],
+                                           field.replace('_', ' ').title().replace(' ', '_'),
+                                           'HealthScore')
+
         # 场景4新增：发现进度统计（从环境适配器获取）
         # 这些数据可能直接来自环境的info，不在reward_components中
         # 我们需要从self.training_rewards或其他地方获取
@@ -1356,7 +1425,12 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'max_connections': config.max_connections,
                 'uav_init_mode': config.uav_init_mode,
                 'uav_start_area_size': config.uav_start_area_size,
-                'test_reward_mode': config.test_reward_mode
+                'test_reward_mode': config.test_reward_mode,
+                # 传递网络健康度权重
+                'w_connectivity': config.w_connectivity,
+                'w_diversity': config.w_diversity,
+                'w_coverage': config.w_coverage,
+                'w_dispersion': config.w_dispersion,
             }
             
             # 将场景4的参数合并到通用参数中
@@ -1629,6 +1703,9 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     env_id=i,
                     rollout_step_idx=rollout_step
                 )
+
+                # 记录每一步的详细信息
+                reward_tracker.log_training_step(total_steps + i, i, rewards[i], info=infos[i])
 
                 # 更新追踪器
                 env_steps[i] += 1
@@ -2004,7 +2081,9 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     import json
     final_summary_path = os.path.join(log_dir, 'final_training_summary.json')
     with open(final_summary_path, 'w') as f:
-        json.dump(summary_stats, f, indent=2)
+        # 转换numpy类型为原生Python类型以确保JSON序列化兼容性
+        json_compatible_stats = convert_numpy_types(summary_stats)
+        json.dump(json_compatible_stats, f, indent=2)
     main_logger.info(f"最终训练摘要已保存到: {final_summary_path}")
 
     # 保存最终模型
@@ -2160,8 +2239,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                 if active_envs[i]:
                     env_steps[i] += 1
                     
-                    # 统一使用global_reward进行评估
-                    extrinsic_reward = infos[i].get('reward_info', {}).get('final_global_reward', rewards[i])
+                    # 直接使用环境返回的奖励值进行评估
+                    # 在scenario4中，这是网络健康度奖励(shaped_team_reward)或测试模式下的距离惩罚
+                    extrinsic_reward = rewards[i]
                     env_rewards[i] += extrinsic_reward
                     
                     # 使用新的可视化管理器记录数据

@@ -27,15 +27,15 @@ class Config:
     central_area_ratio = 0.5      # 中心用户区域占总区域的比例
     
     # 局部观测参数
-    observation_radius = 600  # [新增] 固定的侦测范围 (米)
-    max_observed_uavs = 8     # 原为6，可以适当增大以容纳更多邻居
+    observation_radius = 1500  # [新增] 固定的侦测范围 (米)
+    max_observed_uavs = 6     # 原为6，可以适当增大以容纳更多邻居
     max_observed_users = 30   # 原为30
     max_observed_bs = 2       # [新增] 最大观测基站数量
 
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
-    n_z = 6           # [关键] 降低个体技能数量
-    k = 40           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    n_z = 3          # [关键] 降低个体技能数量
+    k = 50           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 128         # 隐藏层大小 (论文中为64)
@@ -63,8 +63,8 @@ class Config:
     lambda_e = 1.0           # 外在奖励权重
     lambda_D = 0.1          # 团队技能判别器奖励权重
     lambda_d = 0.5          # 个体技能判别器奖励权重
-    lambda_h = 0.01          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
-    lambda_l = 0.1           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
+    lambda_h = 0.001          # [优化] 提高高层策略熵权重，从0.001提高到0.01，鼓励技能多样性
+    lambda_l = 0.01           # [优化] 提高低层策略熵权重，从0.01提高到0.1，鼓励动作探索
     lambda_cd = 0.0          # 对比散度损失权重 (禁用)
     lambda_mi = 0.1          # 互信息奖励权重 (新增)
 
@@ -72,13 +72,13 @@ class Config:
     # buffer和batch大小将根据环境参数动态计算
     low_level_buffer_size = None   # 低层经验回放缓冲区大小 (动态计算)
     batch_size = None              # 低层批处理大小 (动态计算, 兼容旧代码)
-    discriminator_buffer_size = 100000 # 判别器off-policy经验缓冲区大小
+    discriminator_buffer_size = 500000 # 判别器off-policy经验缓冲区大小
     buffer_size = None             # 兼容性别名，指向low_level_buffer_size
     high_level_buffer_size = None  # 高层经验缓冲区大小 (动态计算)
     high_level_batch_size = None   # 高层更新的批处理大小 (动态计算)
     num_envs = 32            # 并行环境数量 (论文中rollout threads为32)
     rollout_length = 400    # [调整] 增加rollout长度，从2500增加到5000，确保容纳足够的技能周期
-    total_timesteps = 4e6 #4e6    # 总时间步数 (论文中SMAC为2e6)
+    total_timesteps = num_envs*rollout_length*400 #4e6    # 总时间步数 (论文中SMAC为2e6)
     
     def set_short_test_mode(self):
         """设置短时间测试模式"""
@@ -123,12 +123,11 @@ class Config:
     opt_beta = 0.1           # 条件互信息损失权重 (论文中β=0.1)
     opt_layers = 2           # OPT模块层数 (论文中K=2)
     
-    # --- 场景4: 强制中继模式奖励权重（已废弃，奖励函数已简化）---
-    # 注意：以下参数已被移除，因为新的奖励机制已简化
-    # - coverage_weight
-    # - link_quality_weight
-    # - potential_reward_weight
-    # - distance_overlap_penalty_weight
+    # --- 场景4: 网络健康度奖励权重 (Network Health Score) ---
+    w_connectivity = 0.5  # 奖励网络骨干的形成
+    w_diversity = 1.0     # 大力奖励角色分工
+    w_coverage = 1.0      # 奖励最终的任务目标
+    w_dispersion = 0.05   # 轻微惩罚聚集，鼓励分散
     
     # 权重退火参数 - 用于解决奖励空窗期问题
     use_reward_annealing = False         # 禁用额外模块
@@ -147,7 +146,7 @@ class Config:
     # --- 场景4: 环境和空间参数 ---
     min_sinr = 3.0                          # 最小信噪比
     max_connections = 25                     # 最大连接数
-    uav_init_mode = 'start_area'            # 无人机初始化模式
+    uav_init_mode = 'random'#'start_area'            # 无人机初始化模式
     uav_start_area_size = 100               # 起始区域大小（米）
     grid_resolution = 50                    # 栅格分辨率
 

@@ -1003,13 +1003,18 @@ class SkillDiscoverer(nn.Module):
         self.gru_hidden_dim = config.gru_hidden_size
         self.use_opt = config.use_opt
         
-        # Actor网络（每个智能体共享）
-        # 直接使用 nn.Sequential 定义 actor_mlp，提高代码清晰度
-        self.actor_mlp = nn.Sequential(
-            nn.Linear(config.obs_dim + config.n_z, config.hidden_size),
+        # FiLM架构: 状态编码器 + 技能FiLM层
+        # 1. 观测编码器
+        self.obs_encoder = nn.Sequential(
+            nn.Linear(config.obs_dim, config.hidden_size),
             nn.ReLU(),
             nn.Linear(config.hidden_size, config.hidden_size)
         )
+        
+        # 2. FiLM参数生成器 (从技能生成gamma和beta)
+        # 输出维度是 2 * hidden_size，一半是gamma，一半是beta
+        self.film_generator = nn.Linear(config.n_z, 2 * config.hidden_size)
+        
         self.actor_gru = nn.GRU(config.hidden_size, config.gru_hidden_size)
         
         # 动作均值和标准差
@@ -1020,13 +1025,18 @@ class SkillDiscoverer(nn.Module):
         nn.init.constant_(self.action_log_std.weight, 0.0)
         nn.init.constant_(self.action_log_std.bias, -1.0)  # exp(-1) ≈ 0.37
         
-        # Critic网络（中心化价值函数）- 简化的前馈网络直接评估V(s, Z)
-        self.critic_net = nn.Sequential(
-            nn.Linear(config.state_dim + config.n_Z, config.hidden_size),
-            nn.LayerNorm(config.hidden_size),
+        # Critic网络 (FiLM架构)
+        # 1. 状态编码器
+        self.critic_state_encoder = nn.Sequential(
+            nn.Linear(config.state_dim, config.hidden_size),
             nn.GELU(),
-            ResBlock(config.hidden_size),
-            ResBlock(config.hidden_size),
+            ResBlock(config.hidden_size)
+        )
+        # 2. FiLM参数生成器 (从团队技能Z生成)
+        self.critic_film_generator = nn.Linear(config.n_Z, 2 * config.hidden_size)
+        
+        # 3. 后续处理网络
+        self.critic_post_film = nn.Sequential(
             ResBlock(config.hidden_size),
             nn.Linear(config.hidden_size, config.hidden_size),
             nn.LayerNorm(config.hidden_size),
@@ -1039,8 +1049,9 @@ class SkillDiscoverer(nn.Module):
     
     def _init_weights(self):
         """初始化网络权重，提高训练稳定性"""
-        # 初始化 actor_mlp 网络权重
-        initialize_weights(self.actor_mlp, gain=1.0)
+        # 初始化FiLM架构的权重
+        initialize_weights(self.obs_encoder, gain=1.0)
+        initialize_weights(self.film_generator, gain=1.0)
         
         # 初始化GRU权重
         initialize_weights(self.actor_gru, gain=1.0)
@@ -1052,7 +1063,9 @@ class SkillDiscoverer(nn.Module):
         initialize_weights(self.value_head, gain=0.01)  # 价值函数输出层使用较小的初始化
         
         # 初始化critic网络权重
-        initialize_weights(self.critic_net, gain=1.0)
+        initialize_weights(self.critic_state_encoder, gain=1.0)
+        initialize_weights(self.critic_film_generator, gain=1.0)
+        initialize_weights(self.critic_post_film, gain=1.0)
     
     def reset_hidden_periodic(self, episode_step, reset_interval=100):
         """
@@ -1077,10 +1090,20 @@ class SkillDiscoverer(nn.Module):
             team_skill = team_skill.unsqueeze(0)
         
         team_skill_onehot = F.one_hot(team_skill.long(), num_classes=self.config.n_Z).float()
-        critic_input = torch.cat([state, team_skill_onehot], dim=-1)
         
-        # 直接通过强大的前馈网络
-        features = self.critic_net(critic_input) 
+        # --- Critic FiLM 架构实现 ---
+        # 1. 编码状态
+        encoded_state = self.critic_state_encoder(state)
+        
+        # 2. 从团队技能生成FiLM参数
+        film_params = self.critic_film_generator(team_skill_onehot)
+        gamma, beta = torch.chunk(film_params, 2, dim=-1)
+        
+        # 3. 应用FiLM调制
+        modulated_state = gamma * encoded_state + beta
+        
+        # 4. 通过后续网络处理
+        features = self.critic_post_film(modulated_state)
         value = self.value_head(features)
         
         return value, torch.tensor(0.0, device=state.device, requires_grad=True)  # 返回零损失
@@ -1123,10 +1146,21 @@ class SkillDiscoverer(nn.Module):
             self.logger.warning(f"Hidden state shape mismatch: got {hidden_state.shape}, expected {expected_shape}")
             hidden_state = torch.zeros(expected_shape, device=observation.device)
             
-        actor_input = torch.cat([observation, agent_skill_onehot], dim=-1)
+        # --- FiLM 架构实现 ---
+        # 1. 编码观测
+        encoded_obs = self.obs_encoder(observation)
         
-        # --- Enhanced Core Fix ---
-        actor_features = self.actor_mlp(actor_input)
+        # 2. 从技能生成FiLM参数 (gamma, beta)
+        # film_params 的形状是 [batch_size, 2 * hidden_size]
+        film_params = self.film_generator(agent_skill_onehot)
+        # 使用 torch.chunk 将其沿最后一个维度分割成两部分
+        gamma, beta = torch.chunk(film_params, 2, dim=-1)
+        
+        # 3. 应用FiLM调制
+        # gamma 和 beta 的形状是 [batch_size, hidden_size]
+        # encoded_obs 的形状是 [batch_size, hidden_size]
+        actor_features = gamma * encoded_obs + beta
+        # --- FiLM 结束 ---
         
         # 1. Reshape for GRU: (B, H) -> (1, B, H) for a sequence of length 1
         actor_features_seq = actor_features.unsqueeze(0)
@@ -1199,13 +1233,23 @@ class SkillDiscoverer(nn.Module):
         if initial_hxs is None:
             initial_hxs = torch.zeros(B, self.gru_hidden_dim, device=device)
 
-        # --- Actor Part: Process sequence step-by-step ---
-        skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()
-        actor_input = torch.cat([observations_seq, skills_onehot], dim=-1)
+        # --- Actor Part: Process sequence step-by-step with FiLM ---
+        T, B, _ = observations_seq.shape
         
-        # MLP processing can be done in one go
-        actor_input_flat = actor_input.contiguous().view(T * B, -1)
-        actor_features_flat = self.actor_mlp(actor_input_flat)
+        # 1. 编码观测序列
+        obs_flat = observations_seq.contiguous().view(T * B, -1)
+        encoded_obs_flat = self.obs_encoder(obs_flat)
+        
+        # 2. 从技能序列生成FiLM参数
+        skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()
+        skills_onehot_flat = skills_onehot.contiguous().view(T * B, -1)
+        film_params_flat = self.film_generator(skills_onehot_flat)
+        gamma_flat, beta_flat = torch.chunk(film_params_flat, 2, dim=-1)
+        
+        # 3. 应用FiLM调制
+        actor_features_flat = gamma_flat * encoded_obs_flat + beta_flat
+        
+        # 将处理后的特征重塑为 (T, B, H) 以输入GRU
         gru_input = actor_features_flat.contiguous().view(T, B, -1)
 
         # Unroll GRU step-by-step
@@ -1293,17 +1337,24 @@ class TeamDiscriminator(nn.Module):
         return self.net(state)
 
 class IndividualDiscriminator(nn.Module):
-    """个体技能判别器 - 使用 Embedding 层处理团队技能"""
+    """个体技能判别器 - 使用FiLM层处理团队技能"""
     def __init__(self, config):
         super(IndividualDiscriminator, self).__init__()
         self.config = config
         
-        # 使用 Embedding 层处理离散的团队技能
-        self.team_skill_embedding = nn.Embedding(config.n_Z, config.embedding_dim)
+        # 1. 观测编码器
+        self.obs_encoder = nn.Sequential(
+            nn.Linear(config.obs_dim, config.hidden_size),
+            nn.GELU()
+        )
         
-        # 网络的输入维度现在是 obs_dim + embedding_dim
-        self.net = nn.Sequential(
-            nn.Linear(config.obs_dim + config.embedding_dim, config.hidden_size),
+        # 2. FiLM参数生成器 (从团队技能Z生成)
+        # 使用Embedding层处理离散的团队技能，然后映射到FiLM参数
+        self.team_skill_embedding = nn.Embedding(config.n_Z, config.embedding_dim)
+        self.film_generator = nn.Linear(config.embedding_dim, 2 * config.hidden_size)
+        
+        # 3. 后续处理网络
+        self.post_film_net = nn.Sequential(
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
             nn.Linear(config.hidden_size, config.hidden_size),
@@ -1312,21 +1363,37 @@ class IndividualDiscriminator(nn.Module):
             nn.Tanh(),
             nn.Linear(config.hidden_size, config.n_z)
         )
-        initialize_weights(self.net[-1], gain=1.0)
+        
+        # 初始化权重
+        initialize_weights(self.obs_encoder, gain=1.0)
+        initialize_weights(self.team_skill_embedding, gain=1.0)
+        initialize_weights(self.film_generator, gain=1.0)
+        initialize_weights(self.post_film_net, gain=1.0)
 
     def forward(self, observation, team_skill):
         # 确保 team_skill 是长整型的索引
         if team_skill.dtype != torch.long:
             team_skill = team_skill.long()
 
-        # team_skill shape: [batch_size] 或者标量
-        team_skill_embedded = self.team_skill_embedding(team_skill)
+        # --- Discriminator FiLM 架构实现 ---
+        # 1. 编码观测
+        encoded_obs = self.obs_encoder(observation)
         
-        # 确保维度匹配：如果 team_skill_embedded 是 1D，则扩展为 2D
+        # 2. 从团队技能生成FiLM参数
+        team_skill_embedded = self.team_skill_embedding(team_skill)
         if team_skill_embedded.dim() == 1:
             team_skill_embedded = team_skill_embedded.unsqueeze(0)
+            
+        film_params = self.film_generator(team_skill_embedded)
+        gamma, beta = torch.chunk(film_params, 2, dim=-1)
         
-        # 拼接观测和嵌入后的团队技能
-        discriminator_input = torch.cat([observation, team_skill_embedded], dim=-1)
+        # 3. 应用FiLM调制
+        # 确保gamma和beta可以广播到encoded_obs的形状
+        if gamma.dim() < encoded_obs.dim():
+            gamma = gamma.unsqueeze(1)
+            beta = beta.unsqueeze(1)
+            
+        modulated_obs = gamma * encoded_obs + beta
         
-        return self.net(discriminator_input)
+        # 4. 通过后续网络处理
+        return self.post_film_net(modulated_obs)
