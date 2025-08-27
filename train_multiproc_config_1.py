@@ -51,6 +51,7 @@ from hmasd.sb3_integration import (
     HMASDVecEnvWrapper
 )
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
 from visualization import VisualizationManager
@@ -359,8 +360,23 @@ class EnhancedRewardTracker:
                 'dispersion_penalty': [],
                 'serving_uavs_count': [],
                 'pure_relay_uavs_count': [],
-                'weighted_serving_score': [] # 新增：服务贡献加权分
-            }
+                'weighted_serving_score': [], # 新增：服务贡献加权分
+                
+                # 场景5特有：信念地图相关指标
+                'belief_map_entropy': [],
+                'belief_map_coverage': [],
+                'belief_map_max_value': [],
+                'belief_map_min_value': [],
+                'belief_map_std': [],
+                'discovered_vs_predicted': [],
+                'belief_prediction_accuracy': [],
+                'high_belief_regions_count': [],
+                'low_belief_regions_count': [],
+                'belief_concentration_ratio': []
+            },
+            
+            # 【新增】Episode结束时的专门数据记录
+            'episode_end_metrics': []  # 存储每个episode结束时的详细性能指标
         }
         
         # 滑动窗口统计 - 使用rollout_length作为窗口大小
@@ -701,9 +717,140 @@ class EnhancedRewardTracker:
                     self.performance_metrics['reward_components']['weighted_potential_reward'].append({
                         'step': step, 'env_id': env_id, 'value': reward_info['weighted_potential_reward'], 'timestamp': time.time()
                     })
+        
+        # 场景5特有：信念地图相关指标记录
+        if info and hasattr(info, 'get'):
+            # 尝试从环境info中提取信念地图数据
+            belief_map_data = info.get('belief_map_data', None)
+            if belief_map_data:
+                self._log_belief_map_metrics(step, env_id, belief_map_data)
+            
+            # 如果环境直接提供了信念地图统计信息
+            if 'belief_map_stats' in info:
+                belief_stats = info['belief_map_stats']
+                for stat_name, stat_value in belief_stats.items():
+                    if stat_name in self.performance_metrics['reward_components']:
+                        self.performance_metrics['reward_components'][stat_name].append({
+                            'step': step,
+                            'env_id': env_id,
+                            'value': stat_value,
+                            'timestamp': time.time()
+                        })
+    
+    def _log_belief_map_metrics(self, step, env_id, belief_map_data):
+        """
+        处理信念地图数据并计算关键统计指标
+        
+        参数:
+            step: 当前步数
+            env_id: 环境ID
+            belief_map_data: 从环境获取的信念地图数据，包含：
+                - belief_map: 信念地图矩阵 (grid_resolution x grid_resolution)
+                - discovered_users_this_episode: 本episode发现的用户集合
+                - total_users: 总用户数
+                - grid_resolution: 栅格分辨率
+        """
+        try:
+            belief_map = belief_map_data.get('belief_map', None)
+            if belief_map is None:
+                return
+            
+            # 确保belief_map是numpy数组
+            if not isinstance(belief_map, np.ndarray):
+                belief_map = np.array(belief_map)
+            
+            # 1. 计算信念地图熵 (Shannon Entropy)
+            # H = -Σ p_i * log(p_i)，衡量信念分布的不确定性
+            flat_belief = belief_map.flatten()
+            # 过滤掉零值以避免log(0)
+            non_zero_beliefs = flat_belief[flat_belief > 1e-12]
+            if len(non_zero_beliefs) > 0:
+                belief_entropy = -np.sum(non_zero_beliefs * np.log(non_zero_beliefs + 1e-12))
+            else:
+                belief_entropy = 0.0
+            
+            # 2. 计算信念地图覆盖度 (有效信念区域比例)
+            # 定义"有效信念"阈值，高于此阈值的区域被认为是有意义的
+            effective_belief_threshold = 1.0 / (belief_map.size * 0.1)  # 比均匀分布高10倍
+            effective_regions = np.sum(belief_map > effective_belief_threshold)
+            belief_coverage = effective_regions / belief_map.size
+            
+            # 3. 计算信念地图的基本统计量
+            belief_max = np.max(belief_map)
+            belief_min = np.min(belief_map)
+            belief_std = np.std(belief_map)
+            
+            # 4. 计算发现准确性指标
+            discovered_users = belief_map_data.get('discovered_users_this_episode', set())
+            total_users = belief_map_data.get('total_users', 0)
+            
+            # 发现进度 = 已发现用户数 / 总用户数
+            discovery_progress = len(discovered_users) / total_users if total_users > 0 else 0
+            
+            # 5. 计算信念预测准确性
+            # 这需要用户的实际位置信息，如果环境提供的话
+            user_positions = belief_map_data.get('user_positions', None)
+            prediction_accuracy = 0.0
+            if user_positions is not None:
+                grid_resolution = belief_map_data.get('grid_resolution', 100)
+                area_size = belief_map_data.get('area_size', 2500)
+                
+                # 计算每个用户所在栅格的信念值
+                user_belief_values = []
+                for user_pos in user_positions:
+                    # 转换用户位置到栅格坐标
+                    gx = int(np.clip(user_pos[0] / area_size * grid_resolution, 0, grid_resolution - 1))
+                    gy = int(np.clip(user_pos[1] / area_size * grid_resolution, 0, grid_resolution - 1))
+                    user_belief_values.append(belief_map[gy, gx])
+                
+                # 预测准确性 = 用户所在位置的平均信念值
+                prediction_accuracy = np.mean(user_belief_values) if user_belief_values else 0.0
+            
+            # 6. 计算高/低信念区域数量
+            # 高信念区域：信念值高于平均值的2倍
+            mean_belief = np.mean(belief_map)
+            high_belief_threshold = mean_belief * 2.0
+            low_belief_threshold = mean_belief * 0.5
+            
+            high_belief_regions = np.sum(belief_map > high_belief_threshold)
+            low_belief_regions = np.sum(belief_map < low_belief_threshold)
+            
+            # 7. 计算信念集中度比例
+            # 前10%最高信念区域包含的总信念量
+            sorted_beliefs = np.sort(belief_map.flatten())[::-1]  # 降序排列
+            top_10_percent_count = max(1, int(0.1 * len(sorted_beliefs)))
+            top_10_percent_belief = np.sum(sorted_beliefs[:top_10_percent_count])
+            belief_concentration_ratio = top_10_percent_belief
+            
+            # 8. 记录所有计算出的指标
+            belief_metrics = {
+                'belief_map_entropy': belief_entropy,
+                'belief_map_coverage': belief_coverage,
+                'belief_map_max_value': belief_max,
+                'belief_map_min_value': belief_min,
+                'belief_map_std': belief_std,
+                'discovered_vs_predicted': discovery_progress,
+                'belief_prediction_accuracy': prediction_accuracy,
+                'high_belief_regions_count': high_belief_regions,
+                'low_belief_regions_count': low_belief_regions,
+                'belief_concentration_ratio': belief_concentration_ratio
+            }
+            
+            # 将指标添加到性能指标记录中
+            for metric_name, metric_value in belief_metrics.items():
+                if metric_name in self.performance_metrics['reward_components']:
+                    self.performance_metrics['reward_components'][metric_name].append({
+                        'step': step,
+                        'env_id': env_id,
+                        'value': metric_value,
+                        'timestamp': time.time()
+                    })
+            
+        except Exception as e:
+            main_logger.warning(f"处理信念地图指标时出错 (步骤 {step}, 环境 {env_id}): {e}")
     
     def log_episode_completion(self, episode_num, env_id, total_reward, episode_length, info=None):
-        """记录episode完成信息"""
+        """记录episode完成信息 - 增强版本，专门捕获episode结束时的性能指标"""
         self.training_rewards['episodes_completed'] += 1
         
         episode_data = {
@@ -720,6 +867,33 @@ class EnhancedRewardTracker:
         self.training_rewards['episode_rewards'].append(episode_data)
         self.recent_rewards.append(total_reward)
         self.recent_lengths.append(episode_length)
+        
+        # 【新增】专门记录episode结束时的详细性能指标
+        # 这些数据将用于生成"Episode End"类别的TensorBoard图表
+        if info and 'reward_info' in info:
+            episode_end_data = {
+                'episode': episode_num,
+                'env_id': env_id,
+                'total_reward': total_reward,
+                'episode_length': episode_length,
+                'timestamp': time.time(),
+                'final_metrics': info['reward_info'].copy()  # 复制完整的reward_info
+            }
+            
+            # 添加一些计算出的衍生指标
+            reward_info = info['reward_info']
+            if 'effective_connected_users' in reward_info and self.n_users:
+                episode_end_data['final_coverage_rate'] = reward_info['effective_connected_users'] / self.n_users
+            
+            if 'coverage_ratio' in reward_info:
+                episode_end_data['final_coverage_ratio'] = reward_info['coverage_ratio']
+            
+            # 存储到专门的episode结束指标列表
+            self.performance_metrics['episode_end_metrics'].append(episode_end_data)
+            
+            main_logger.debug(f"Episode {episode_num} (环境 {env_id}) 结束时指标已记录: "
+                             f"覆盖率={episode_end_data.get('final_coverage_ratio', 'N/A')}, "
+                             f"连接用户={reward_info.get('effective_connected_users', 'N/A')}")
         
         # 计算滑动窗口统计
         if len(self.recent_rewards) >= 10:
@@ -1019,6 +1193,137 @@ class EnhancedRewardTracker:
                                    reward_components['coverage_ratios'], 
                                    'Coverage_Ratio', 
                                    'Performance')
+        
+        # 场景5特有：信念地图统计 - 新的BeliefMap分类
+        belief_map_fields = [
+            'belief_map_entropy', 'belief_map_coverage', 'belief_map_max_value',
+            'belief_map_min_value', 'belief_map_std', 'discovered_vs_predicted',
+            'belief_prediction_accuracy', 'high_belief_regions_count',
+            'low_belief_regions_count', 'belief_concentration_ratio'
+        ]
+        
+        for field in belief_map_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(writer, step,
+                                           reward_components[field],
+                                           field.replace('_', ' ').title().replace(' ', '_'),
+                                           'BeliefMap')
+        
+        # 【新增】记录Episode结束时的指标到TensorBoard
+        self._log_episode_end_metrics_to_tensorboard(writer, step)
+
+    def _log_episode_end_metrics_to_tensorboard(self, writer, step):
+        """
+        专门记录episode结束时的性能指标到TensorBoard
+        
+        这些指标与rollout过程中的平均指标形成对比，帮助分析算法的真实性能
+        
+        参数:
+            writer: TensorBoard writer
+            step: 当前步数
+        """
+        if not self.performance_metrics['episode_end_metrics']:
+            return
+        
+        # 使用最近的episode结束数据（使用episode数量作为窗口大小）
+        recent_episodes = self.performance_metrics['episode_end_metrics'][-self.window_size:]
+        if not recent_episodes:
+            return
+        
+        # 提取各项指标的episode结束时数值
+        episode_end_coverage_ratios = []
+        episode_end_connected_users = []
+        episode_end_health_scores = []
+        episode_end_connectivity_scores = []
+        episode_end_diversity_scores = []
+        episode_end_dispersion_penalties = []
+        episode_end_serving_uavs = []
+        episode_end_relay_uavs = []
+        episode_end_avg_hops = []
+        episode_end_system_throughput = []
+        
+        for episode_data in recent_episodes:
+            final_metrics = episode_data.get('final_metrics', {})
+            
+            # 覆盖率相关指标
+            if 'coverage_ratio' in final_metrics:
+                episode_end_coverage_ratios.append(final_metrics['coverage_ratio'])
+            
+            if 'effective_connected_users' in final_metrics:
+                episode_end_connected_users.append(final_metrics['effective_connected_users'])
+            
+            # 网络健康度相关指标
+            if 'rt_final_health_score' in final_metrics:
+                episode_end_health_scores.append(final_metrics['rt_final_health_score'])
+            
+            if 'connectivity_score' in final_metrics:
+                episode_end_connectivity_scores.append(final_metrics['connectivity_score'])
+            
+            if 'role_diversity_bonus' in final_metrics:
+                episode_end_diversity_scores.append(final_metrics['role_diversity_bonus'])
+            
+            if 'dispersion_penalty' in final_metrics:
+                episode_end_dispersion_penalties.append(final_metrics['dispersion_penalty'])
+            
+            if 'serving_uavs_count' in final_metrics:
+                episode_end_serving_uavs.append(final_metrics['serving_uavs_count'])
+            
+            if 'pure_relay_uavs_count' in final_metrics:
+                episode_end_relay_uavs.append(final_metrics['pure_relay_uavs_count'])
+            
+            if 'avg_hops' in final_metrics:
+                episode_end_avg_hops.append(final_metrics['avg_hops'])
+            
+            if 'system_throughput_mbps' in final_metrics:
+                episode_end_system_throughput.append(final_metrics['system_throughput_mbps'])
+        
+        # 计算并记录各项指标的episode结束时平均值
+        if episode_end_coverage_ratios:
+            avg_final_coverage = np.mean(episode_end_coverage_ratios)
+            writer.add_scalar('Performance/EpisodeEnd/Coverage_Ratio_Final', avg_final_coverage, step)
+        
+        if episode_end_connected_users:
+            avg_final_connected = np.mean(episode_end_connected_users)
+            writer.add_scalar('Performance/EpisodeEnd/Connected_Users_Final', avg_final_connected, step)
+            
+            # 计算最终服务率
+            if self.n_users:
+                final_service_rate = avg_final_connected / self.n_users
+                writer.add_scalar('Performance/EpisodeEnd/Service_Rate_Final', final_service_rate, step)
+        
+        if episode_end_health_scores:
+            avg_final_health = np.mean(episode_end_health_scores)
+            writer.add_scalar('HealthScore/EpisodeEnd/Final_Health_Score', avg_final_health, step)
+        
+        if episode_end_connectivity_scores:
+            avg_final_connectivity = np.mean(episode_end_connectivity_scores)
+            writer.add_scalar('HealthScore/EpisodeEnd/Connectivity_Score_Final', avg_final_connectivity, step)
+        
+        if episode_end_diversity_scores:
+            avg_final_diversity = np.mean(episode_end_diversity_scores)
+            writer.add_scalar('HealthScore/EpisodeEnd/Role_Diversity_Final', avg_final_diversity, step)
+        
+        if episode_end_dispersion_penalties:
+            avg_final_dispersion = np.mean(episode_end_dispersion_penalties)
+            writer.add_scalar('HealthScore/EpisodeEnd/Dispersion_Penalty_Final', avg_final_dispersion, step)
+        
+        if episode_end_serving_uavs:
+            avg_final_serving = np.mean(episode_end_serving_uavs)
+            writer.add_scalar('HealthScore/EpisodeEnd/Serving_UAVs_Final', avg_final_serving, step)
+        
+        if episode_end_relay_uavs:
+            avg_final_relay = np.mean(episode_end_relay_uavs)
+            writer.add_scalar('HealthScore/EpisodeEnd/Relay_UAVs_Final', avg_final_relay, step)
+        
+        if episode_end_avg_hops:
+            avg_final_hops = np.mean(episode_end_avg_hops)
+            writer.add_scalar('Performance/EpisodeEnd/Avg_Hops_Final', avg_final_hops, step)
+        
+        if episode_end_system_throughput:
+            avg_final_throughput = np.mean(episode_end_system_throughput)
+            writer.add_scalar('Performance/EpisodeEnd/System_Throughput_Final', avg_final_throughput, step)
+        
+        main_logger.debug(f"已记录 {len(recent_episodes)} 个episode的结束时指标到TensorBoard")
 
     def log_to_tensorboard(self, writer, step, args=None):
         """记录详细数据到TensorBoard - 使用聚合数据避免并行环境数据堆积"""
@@ -1426,6 +1731,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 'uav_init_mode': config.uav_init_mode,
                 'uav_start_area_size': config.uav_start_area_size,
                 'test_reward_mode': config.test_reward_mode,
+                'reward_type': config.reward_type,  # 传递奖励类型参数
                 # 传递网络健康度权重
                 'w_connectivity': config.w_connectivity,
                 'w_diversity': config.w_diversity,
@@ -1437,6 +1743,34 @@ def make_env(rank, seed, config, scenario, render_mode=None):
             env_kwargs.update(scenario4_kwargs)
             
             raw_env = UAVForcedRelayEnv(**env_kwargs)
+        elif scenario == 5:
+            # 场景5：基于信念地图的动态用户覆盖环境
+            scenario5_kwargs = {
+                'max_steps': config.episode_length,
+                'user_distribution': 'forced_relay_cluster', # scenario5 also uses this
+                'max_hops': config.max_hops,
+                'area_size': config.area_size,
+                'n_clusters': config.n_clusters,
+                'cluster_std': config.cluster_std,
+                'central_area_ratio': config.central_area_ratio,
+                'min_sinr': config.min_sinr,
+                'max_connections': config.max_connections,
+                'uav_init_mode': config.uav_init_mode,
+                'uav_start_area_size': config.uav_start_area_size,
+                'test_reward_mode': config.test_reward_mode,
+                # 传递网络健康度权重 (与场景4相同)
+                'w_connectivity': config.w_connectivity,
+                'w_diversity': config.w_diversity,
+                'w_coverage': config.w_coverage,
+                'w_dispersion': config.w_dispersion,
+                # 场景5特有参数 (使用config中的默认值或环境的默认值)
+                'users_dynamic': getattr(config, 'users_dynamic', True),
+                'user_max_speed': getattr(config, 'user_max_speed', 5),
+                'grid_resolution': getattr(config, 'grid_resolution', 100),
+                'belief_decay': getattr(config, 'belief_decay', 0.99),
+            }
+            env_kwargs.update(scenario5_kwargs)
+            raw_env = UAVBeliefMapEnv(**env_kwargs)
         else:
             raise ValueError(f"未知的场景: {scenario}")
 
@@ -1452,7 +1786,7 @@ def parse_args():
     
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
+    parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='../tf-logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -1731,16 +2065,28 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                         if np.array_equal(uav_positions, np.zeros((agent.config.n_agents, 3))):
                             uav_positions = infos[i].get('uav_positions', np.zeros((agent.config.n_agents, 3)))
 
+                        # 【修复】确保reward_info包含完整的性能数据
+                        reward_info = infos[i].get('reward_info', {})
+                        
+                        # 调试输出：检查reward_info内容
+                        if env_steps[i] % 100 == 0:  # 每100步输出一次调试信息
+                            main_logger.debug(f"[调试模式] 环境 {i} 步骤 {env_steps[i]} reward_info内容: "
+                                             f"coverage_ratio={reward_info.get('coverage_ratio', 'N/A')}, "
+                                             f"effective_connected_users={reward_info.get('effective_connected_users', 'N/A')}, "
+                                             f"system_throughput_mbps={reward_info.get('system_throughput_mbps', 'N/A')}")
+
                         visualizers[i].record_step(
                             step_count=env_steps[i],
                             uav_positions=uav_positions,
                             team_skill=infos_batch[i].get('team_skill', -1),
                             agent_skills=infos_batch[i].get('agent_skills', []),
-                            reward_info=infos[i].get('reward_info', {}),
+                            reward_info=reward_info,
                             static_info=static_infos[i] if static_infos else {}
                         )
                     except Exception as e:
                         main_logger.warning(f"[调试模式] 环境 {i} 记录步骤数据时出错: {e}")
+                        # 添加更详细的错误信息
+                        main_logger.debug(f"[调试模式] 错误详情 - infos[{i}]键: {list(infos[i].keys()) if infos[i] else 'None'}")
 
                 if dones[i]:
                     n_episodes += 1
@@ -1759,8 +2105,9 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                         except Exception as e:
                             main_logger.error(f"[调试模式] 环境 {i} 生成绘图时出错: {e}")
                     
-                    # 使用增强的奖励追踪器记录episode完成
-                    episode_info = {}
+                    # 【关键修复】使用增强的奖励追踪器记录episode完成，传递完整的环境信息
+                    # 确保episode结束时的reward_info被正确捕获
+                    episode_info = infos[i].copy()  # 复制完整的环境信息
                     if 'global' in infos[i]:
                         episode_info.update(infos[i]['global'])
                     
@@ -1769,7 +2116,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                         env_id=i,
                         total_reward=episode_rewards_tracker[i],
                         episode_length=env_steps[i],
-                        info=episode_info
+                        info=episode_info  # 传递包含reward_info的完整信息
                     )
 
                     # 记录到 TensorBoard
@@ -1859,13 +2206,16 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 ).numpy()
 
         # ===================================================================
-        # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 关键修复：简化价值处理 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 关键修复：支持可变长度rollout的GAE计算 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        # 【关键修复】计算实际收集的步数，解决提前终止导致的形状不匹配问题
+        steps_in_rollout = rollout_step + 1
+        main_logger.info(f"Rollout收集完成: 实际步数={steps_in_rollout}, 预期步数={config.rollout_length}")
+        
         # 无论是否启用ValueNorm，GAE计算都应该使用原始的、未经处理的价值。
         # Value Normalization只在损失函数计算时使用。
-        steps_in_rollout = rollout_step + 1
         values_for_gae = agent.rollout_buffer.values[:steps_in_rollout]
         
-        # 3. 使用正确的 `dones` 调用 compute_advantages
+        # 3. 使用正确的 `dones` 调用 compute_advantages，并传入实际步数
         # `dones_tracker` 保存了 rollout 最后一轮的真实终止状态
         agent.rollout_buffer.compute_advantages(
             last_values=last_values_predicted, # GAE内部会处理denormalized_last_values
@@ -1873,7 +2223,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             gamma=config.gamma, 
             gae_lambda=config.gae_lambda,
             denormalized_values=values_for_gae, # 传入原始价值
-            denormalized_last_values=last_values_predicted # 传入原始的最后一步价值
+            denormalized_last_values=last_values_predicted, # 传入原始的最后一步价值
+            steps_in_rollout=steps_in_rollout  # 【关键修复】传入实际收集的步数
         )
         # ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
         # ===================================================================
@@ -2121,6 +2472,13 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     num_envs = vec_env.num_envs
     main_logger.info(f"开始评估: 目标完成 {n_episodes} 个episodes，使用 {num_envs} 个并行环境，是否渲染: {render}")
     
+    # 【新增】创建评估专用的TensorBoard管理器和奖励追踪器
+    eval_log_dir = os.path.join(agent.log_dir, f'evaluation_step_{eval_step}')
+    os.makedirs(eval_log_dir, exist_ok=True)
+    
+    eval_tb_manager = TensorBoardManager(eval_log_dir, agent.config)
+    eval_reward_tracker = EnhancedRewardTracker(eval_log_dir, agent.config, n_users=agent.config.n_users)
+    
     # 用于计时的变量
     eval_start_time = time.time()
     step_times = []
@@ -2128,7 +2486,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     env_step_times = []
     episode_rewards = []
     episode_lengths = []
-    eval_step = getattr(agent, 'global_step', 0) # Get current training step if available
+    eval_step = getattr(agent, 'global_step', eval_step) # Get current training step if available
     num_envs = vec_env.num_envs
 
     # 重置所有环境并获取初始状态
@@ -2139,7 +2497,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     states = np.array([info.get('state', np.zeros(agent.config.state_dim)) for info in initial_infos]) # Use agent's state_dim
 
     # 为每个并行环境创建一个可视化管理器
-    visualizers = [VisualizationManager(episode_num=i, log_dir=agent.log_dir, config=agent.config) for i in range(num_envs)]
+    visualizers = [VisualizationManager(episode_num=i, log_dir=eval_log_dir, config=agent.config) for i in range(num_envs)]
     
     # 收集一次静态信息
     initial_env_states = [vec_env.env_method('get_current_state', indices=[i])[0] for i in range(num_envs)]
@@ -2156,6 +2514,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     env_rewards = np.zeros(num_envs)
     active_envs = np.ones(num_envs, dtype=bool) # Track which envs are still running for the current eval round
     completed_episodes = 0
+    
+    # 【新增】评估期间的覆盖率追踪
+    coverage_history = []  # 记录整个评估期间的覆盖率变化
+    step_coverage_data = []  # 记录每步的覆盖率数据
     
     # 统计信息
     all_team_skills = []  # 记录每个时间步的团队技能
@@ -2259,12 +2621,62 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                     if np.array_equal(uav_positions, np.zeros((agent.config.n_agents, 3))):
                         uav_positions = infos[i].get('uav_positions', np.zeros((agent.config.n_agents, 3)))
 
+                    # 【关键修复】正确提取reward_info从并行环境的嵌套结构
+                    # 并行环境返回的infos是一个字典，每个agent都有自己的info
+                    # 但reward_info是环境级别的，需要从任意一个agent的info中提取
+                    reward_info = {}
+                    
+                    # 方法1：直接从环境级别的info获取
+                    if 'reward_info' in infos[i]:
+                        reward_info = infos[i]['reward_info']
+                    else:
+                        # 方法2：从第一个agent的info中获取（如果环境级别没有）
+                        # 在并行环境中，每个agent的info可能包含相同的环境级别信息
+                        first_agent_key = f"uav_0"  # 假设第一个agent的key
+                        if first_agent_key in infos[i]:
+                            agent_info_dict = infos[i][first_agent_key]
+                            if 'reward_info' in agent_info_dict:
+                                reward_info = agent_info_dict['reward_info']
+                    
+                    # 【新增】记录每步的覆盖率数据到评估追踪器
+                    if reward_info:
+                        eval_reward_tracker.log_training_step(
+                            step=env_steps[i], 
+                            env_id=i, 
+                            reward=extrinsic_reward, 
+                            info={'reward_info': reward_info}
+                        )
+                        
+                        # 记录到覆盖率历史
+                        coverage_ratio = reward_info.get('coverage_ratio', 0)
+                        step_coverage_data.append({
+                            'step': env_steps[i],
+                            'env_id': i,
+                            'coverage_ratio': coverage_ratio,
+                            'effective_connected_users': reward_info.get('effective_connected_users', 0),
+                            'system_throughput_mbps': reward_info.get('system_throughput_mbps', 0),
+                            'rt_final_health_score': reward_info.get('rt_final_health_score', 0)
+                        })
+                    
+                    # 调试输出：检查reward_info内容（评估模式）
+                    if env_steps[i] % 50 == 0:  # 评估时更频繁地输出调试信息
+                        main_logger.debug(f"[评估] 环境 {i} 步骤 {env_steps[i]} - infos结构: {list(infos[i].keys())}")
+                        main_logger.debug(f"[评估] 环境 {i} 步骤 {env_steps[i]} reward_info内容: "
+                                         f"coverage_ratio={reward_info.get('coverage_ratio', 'N/A')}, "
+                                         f"effective_connected_users={reward_info.get('effective_connected_users', 'N/A')}, "
+                                         f"system_throughput_mbps={reward_info.get('system_throughput_mbps', 'N/A')}, "
+                                         f"rt_final_health_score={reward_info.get('rt_final_health_score', 'N/A')}")
+                        
+                        # 如果reward_info为空，打印更详细的调试信息
+                        if not reward_info:
+                            main_logger.warning(f"[评估] 环境 {i} reward_info为空！完整infos内容: {infos[i]}")
+
                     visualizers[i].record_step(
                         step_count=env_steps[i],
                         uav_positions=uav_positions, # 使用从info获取的正确位置
                         team_skill=agent_info.get('team_skill', -1),
                         agent_skills=agent_info.get('agent_skills', []),
-                        reward_info=infos[i].get('reward_info', {}),
+                        reward_info=reward_info,
                         static_info=static_infos[i]
                     )
 
@@ -2281,10 +2693,23 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                             episode_rewards.append(env_rewards[i])
                             episode_lengths.append(env_steps[i])
                             
-                            # 获取服务用户数和覆盖率信息（修正为使用瞬时值）
-                            if 'reward_info' in infos[i] and 'effective_connected_users' in infos[i]['reward_info']:
+                            # 【修复】获取服务用户数和覆盖率信息，使用与步骤中相同的提取逻辑
+                            episode_reward_info = {}
+                            
+                            # 方法1：直接从环境级别的info获取
+                            if 'reward_info' in infos[i]:
+                                episode_reward_info = infos[i]['reward_info']
+                            else:
+                                # 方法2：从第一个agent的info中获取
+                                first_agent_key = f"uav_0"
+                                if first_agent_key in infos[i]:
+                                    agent_info_dict = infos[i][first_agent_key]
+                                    if 'reward_info' in agent_info_dict:
+                                        episode_reward_info = agent_info_dict['reward_info']
+                            
+                            if episode_reward_info and 'effective_connected_users' in episode_reward_info:
                                 # 使用瞬时有效连接用户数，而不是累积值
-                                served_users = infos[i]['reward_info']['effective_connected_users']
+                                served_users = episode_reward_info['effective_connected_users']
                                 # 从配置中获取用户总数
                                 n_users = agent.config.n_users if hasattr(agent, 'config') and hasattr(agent.config, 'n_users') else 0
                                 coverage_ratio = served_users / n_users if n_users > 0 else 0
@@ -2293,8 +2718,18 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                                 total_coverage_ratios.append(coverage_ratio)
                                 
                                 main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}, 瞬时有效连接用户数: {served_users}/{n_users} ({coverage_ratio:.2%})")
+                                
+                                # 【新增】记录episode结束时的完整性能指标到评估追踪器
+                                eval_reward_tracker.log_episode_completion(
+                                    episode_num=completed_episodes + 1,
+                                    env_id=i,
+                                    total_reward=env_rewards[i],
+                                    episode_length=env_steps[i],
+                                    info={'reward_info': episode_reward_info}
+                                )
                             else:
                                 main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}")
+                                main_logger.warning(f"[评估] Episode结束时未找到reward_info，infos[{i}]键: {list(infos[i].keys())}")
 
                             # 记录到TensorBoard (评估函数中暂时跳过，因为没有传入writer)
                             # 在实际使用中，应该通过参数传入TensorBoard writer
@@ -2392,7 +2827,132 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
         # 在实际使用中，应该通过参数传入TensorBoard writer
         pass
     
+    # 【新增】生成评估期间的覆盖率变化图表
+    if step_coverage_data:
+        main_logger.info(f"生成评估期间覆盖率变化图表，共收集 {len(step_coverage_data)} 个数据点")
+        
+        # 创建覆盖率变化图
+        try:
+            plt.figure(figsize=(15, 10))
+            
+            # 按环境分组数据
+            env_data = {}
+            for data_point in step_coverage_data:
+                env_id = data_point['env_id']
+                if env_id not in env_data:
+                    env_data[env_id] = {'steps': [], 'coverage': [], 'users': [], 'throughput': [], 'health': []}
+                
+                env_data[env_id]['steps'].append(data_point['step'])
+                env_data[env_id]['coverage'].append(data_point['coverage_ratio'])
+                env_data[env_id]['users'].append(data_point['effective_connected_users'])
+                env_data[env_id]['throughput'].append(data_point['system_throughput_mbps'])
+                env_data[env_id]['health'].append(data_point['rt_final_health_score'])
+            
+            # 创建2x2子图
+            fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+            fig.suptitle(f'评估期间性能变化 (训练步数: {eval_step})', fontsize=16, fontweight='bold')
+            
+            # 子图1：覆盖率变化
+            ax1 = axes[0, 0]
+            for env_id, data in env_data.items():
+                ax1.plot(data['steps'], data['coverage'], label=f'环境 {env_id}', alpha=0.7)
+            ax1.set_title('覆盖率变化')
+            ax1.set_xlabel('Episode内步数')
+            ax1.set_ylabel('覆盖率')
+            ax1.grid(True, alpha=0.3)
+            ax1.legend()
+            
+            # 子图2：连接用户数变化
+            ax2 = axes[0, 1]
+            for env_id, data in env_data.items():
+                ax2.plot(data['steps'], data['users'], label=f'环境 {env_id}', alpha=0.7)
+            ax2.set_title('有效连接用户数变化')
+            ax2.set_xlabel('Episode内步数')
+            ax2.set_ylabel('连接用户数')
+            ax2.grid(True, alpha=0.3)
+            ax2.legend()
+            
+            # 子图3：系统吞吐量变化
+            ax3 = axes[1, 0]
+            for env_id, data in env_data.items():
+                ax3.plot(data['steps'], data['throughput'], label=f'环境 {env_id}', alpha=0.7)
+            ax3.set_title('系统吞吐量变化')
+            ax3.set_xlabel('Episode内步数')
+            ax3.set_ylabel('吞吐量 (Mbps)')
+            ax3.grid(True, alpha=0.3)
+            ax3.legend()
+            
+            # 子图4：网络健康度变化
+            ax4 = axes[1, 1]
+            for env_id, data in env_data.items():
+                ax4.plot(data['steps'], data['health'], label=f'环境 {env_id}', alpha=0.7)
+            ax4.set_title('网络健康度变化')
+            ax4.set_xlabel('Episode内步数')
+            ax4.set_ylabel('健康度分数')
+            ax4.grid(True, alpha=0.3)
+            ax4.legend()
+            
+            plt.tight_layout()
+            
+            # 保存图表
+            coverage_plot_path = os.path.join(eval_log_dir, f'evaluation_coverage_changes_step_{eval_step}.png')
+            plt.savefig(coverage_plot_path, dpi=200, bbox_inches='tight')
+            plt.close()
+            
+            main_logger.info(f"评估期间覆盖率变化图表已保存: {coverage_plot_path}")
+            
+        except Exception as e:
+            main_logger.error(f"生成覆盖率变化图表时出错: {e}")
+    
+    # 【新增】记录评估统计到TensorBoard
+    if step_coverage_data:
+        # 计算整个评估期间的平均指标
+        all_coverage = [d['coverage_ratio'] for d in step_coverage_data]
+        all_users = [d['effective_connected_users'] for d in step_coverage_data]
+        all_throughput = [d['system_throughput_mbps'] for d in step_coverage_data]
+        all_health = [d['rt_final_health_score'] for d in step_coverage_data]
+        
+        if all_coverage:
+            eval_tb_manager.add_scalar('Evaluation/Average_Coverage_Ratio', np.mean(all_coverage), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Max_Coverage_Ratio', np.max(all_coverage), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Min_Coverage_Ratio', np.min(all_coverage), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Coverage_Std', np.std(all_coverage), eval_step)
+        
+        if all_users:
+            eval_tb_manager.add_scalar('Evaluation/Average_Connected_Users', np.mean(all_users), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Max_Connected_Users', np.max(all_users), eval_step)
+        
+        if all_throughput:
+            eval_tb_manager.add_scalar('Evaluation/Average_System_Throughput', np.mean(all_throughput), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Max_System_Throughput', np.max(all_throughput), eval_step)
+        
+        if all_health:
+            eval_tb_manager.add_scalar('Evaluation/Average_Health_Score', np.mean(all_health), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Max_Health_Score', np.max(all_health), eval_step)
+    
+    # 记录episode级别的评估统计
+    if total_coverage_ratios:
+        eval_tb_manager.add_scalar('Evaluation/Episode_Average_Coverage', np.mean(total_coverage_ratios), eval_step)
+        eval_tb_manager.add_scalar('Evaluation/Episode_Coverage_Std', np.std(total_coverage_ratios), eval_step)
+    
+    if total_served_users:
+        eval_tb_manager.add_scalar('Evaluation/Episode_Average_Served_Users', np.mean(total_served_users), eval_step)
+    
+    # 记录基本评估指标
+    eval_tb_manager.add_scalar('Evaluation/Mean_Episode_Reward', mean_reward, eval_step)
+    eval_tb_manager.add_scalar('Evaluation/Std_Episode_Reward', std_reward, eval_step)
+    eval_tb_manager.add_scalar('Evaluation/Mean_Episode_Length', mean_length, eval_step)
+    eval_tb_manager.add_scalar('Evaluation/Episodes_Completed', len(episode_rewards), eval_step)
+    
+    # 关闭评估TensorBoard
+    eval_tb_manager.close()
+    
     main_logger.info(f"\n评估完成 ({len(episode_rewards)} episodes): 平均奖励 {mean_reward:.2f} ± {std_reward:.2f}, 平均步数: {mean_length:.2f}")
+    main_logger.info(f"评估数据已记录到TensorBoard: {eval_log_dir}")
+    
+    if step_coverage_data:
+        final_avg_coverage = np.mean([d['coverage_ratio'] for d in step_coverage_data])
+        main_logger.info(f"评估期间平均覆盖率: {final_avg_coverage:.2%}")
 
     return mean_reward, std_reward, min_reward, max_reward
 

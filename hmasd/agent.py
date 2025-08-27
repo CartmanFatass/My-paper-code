@@ -1399,9 +1399,9 @@ class HMASDAgent:
                 team_disc_reward_normalized = team_disc_reward / (self.team_disc_reward_std + 1e-8)
                 ind_disc_reward_normalized = ind_disc_reward / (self.ind_disc_reward_std + 1e-8)
                 
-                # Clip rewards to prevent extreme values
-                team_disc_reward_clipped = np.clip(team_disc_reward_normalized, -5.0, 5.0)
-                ind_disc_reward_clipped = np.clip(ind_disc_reward_normalized, -5.0, 5.0)
+                # 【临时禁用标准化】直接使用原始奖励值
+                team_disc_reward_clipped = team_disc_reward#np.clip(team_disc_reward, -10.0, 10.0)
+                ind_disc_reward_clipped = ind_disc_reward#np.clip(ind_disc_reward, -10.0, 10.0)
                 
                 # === Final Reward Computation ===
                 env_component = self.config.lambda_e * reward

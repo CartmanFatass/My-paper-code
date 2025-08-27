@@ -421,10 +421,12 @@ class RolloutBuffer:
                          f"reward={final_accumulated_reward:.4f}")
         return True
     
-    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None):
+    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, denormalized_values=None, denormalized_last_values=None, steps_in_rollout=None):
         """
         【修复版本】标准化的GAE计算方法，在整个rollout收集完毕后调用一次。
         这确保了严格的on-policy更新流程。
+        
+        【关键修复】现在支持可变长度的rollout数据，解决提前终止导致的形状不匹配问题。
 
         参数:
             last_values (np.ndarray): Rollout最后一步之后的状态价值，Shape (num_envs, n_agents)
@@ -433,9 +435,19 @@ class RolloutBuffer:
             gae_lambda (float): GAE lambda参数
             denormalized_values (np.ndarray, optional): 【新增】反归一化后的价值估计。如果提供，将使用此值计算GAE。
             denormalized_last_values (np.ndarray, optional): 【新增】反归一化后的最后一步价值。
+            steps_in_rollout (int, optional): 【新增】实际收集的步数，用于处理可变长度rollout
         """
+        # 【关键修复】确定实际使用的步数
+        if steps_in_rollout is not None:
+            num_actual_steps = steps_in_rollout
+            main_logger.debug(f"compute_advantages: 使用指定的rollout步数: {num_actual_steps}")
+        else:
+            # 如果没有指定，使用缓冲区的最大容量（向后兼容）
+            num_actual_steps = self.num_steps
+            main_logger.debug(f"compute_advantages: 使用默认的缓冲区步数: {num_actual_steps}")
+        
         # 【第三优先级修复】增强输入验证和调试信息
-        main_logger.debug(f"compute_advantages: 开始计算GAE，last_values形状={last_values.shape}, dones形状={dones.shape}")
+        main_logger.debug(f"compute_advantages: 开始计算GAE，last_values形状={last_values.shape}, dones形状={dones.shape}, 实际步数={num_actual_steps}")
         
         # 验证输入形状
         if last_values.shape != (self.num_envs, self.n_agents):
@@ -448,26 +460,41 @@ class RolloutBuffer:
             dones = np.broadcast_to(dones[:, np.newaxis], (self.num_envs, self.n_agents))
             main_logger.debug(f"compute_advantages: 扩展dones形状为 {dones.shape}")
         
+        # 【关键修复】对提前终止的环境，强制将其自举价值设为0
+        # 这确保了已结束的episode不会错误地使用新episode的初始状态价值进行自举
+        corrected_last_values = last_values.copy()
+        for env_idx in range(self.num_envs):
+            if np.any(dones[env_idx]):  # 如果该环境有任何智能体处于done状态
+                corrected_last_values[env_idx] = 0.0
+                main_logger.debug(f"compute_advantages: 环境{env_idx}已终止，将自举价值设为0")
+        
         # 【第三优先级修复】检查数据中的NaN/Inf值
-        if np.isnan(last_values).any() or np.isinf(last_values).any():
-            main_logger.error("compute_advantages: last_values中发现NaN或Inf值!")
+        if np.isnan(corrected_last_values).any() or np.isinf(corrected_last_values).any():
+            main_logger.error("compute_advantages: corrected_last_values中发现NaN或Inf值!")
             return
         
-        if np.isnan(self.rewards).any() or np.isinf(self.rewards).any():
+        if np.isnan(self.rewards[:num_actual_steps]).any() or np.isinf(self.rewards[:num_actual_steps]).any():
             main_logger.error("compute_advantages: rewards中发现NaN或Inf值!")
             return
         
-        if np.isnan(self.values).any() or np.isinf(self.values).any():
+        if np.isnan(self.values[:num_actual_steps]).any() or np.isinf(self.values[:num_actual_steps]).any():
             main_logger.error("compute_advantages: values中发现NaN或Inf值!")
             return
 
-        # 【核心修改】选择用于计算的价值
-        values_for_gae = denormalized_values if denormalized_values is not None else self.values
-        last_values_for_gae = denormalized_last_values if denormalized_last_values is not None else last_values
+        # 【核心修改】选择用于计算的价值，并确保只使用实际收集的步数
+        if denormalized_values is not None:
+            values_for_gae = denormalized_values[:num_actual_steps]
+        else:
+            values_for_gae = self.values[:num_actual_steps]
+            
+        if denormalized_last_values is not None:
+            last_values_for_gae = denormalized_last_values
+        else:
+            last_values_for_gae = corrected_last_values
         
-        # 将dones转换为masks，方便计算
+        # 将dones转换为masks，方便计算，只使用实际收集的步数
         # masks[t] = 1.0 if a transition from t -> t+1 is not terminal, else 0.0
-        masks = 1.0 - self.dones.astype(np.float32)
+        masks = 1.0 - self.dones[:num_actual_steps].astype(np.float32)
 
         last_advantage = np.zeros((self.num_envs, self.n_agents), dtype=np.float32)
         
@@ -476,8 +503,7 @@ class RolloutBuffer:
         inf_count = 0
         
         # 从后往前计算GAE
-        # 【关键修复】使用传入的价值数组的实际长度，而不是缓冲区的最大容量
-        num_actual_steps = values_for_gae.shape[0]
+        # 【关键修复】使用实际收集的步数，确保数组形状匹配
         for t in reversed(range(num_actual_steps)):
             # 如果是缓冲区的最后一步，next_value就是传入的last_values
             if t == num_actual_steps - 1:
@@ -510,16 +536,17 @@ class RolloutBuffer:
                 if inf_count <= 3:  # 只记录前几个错误
                     main_logger.error(f"compute_advantages: 步骤{t}产生Inf优势值! delta范围=[{np.min(delta):.4f}, {np.max(delta):.4f}]")
 
-        # 计算Returns = GAE + V(s)
-        self.returns = self.advantages + values_for_gae
+        # 【关键修复】计算Returns = GAE + V(s)，确保只使用实际收集的步数
+        # 只对实际收集的步数计算returns，避免形状不匹配
+        self.returns[:num_actual_steps] = self.advantages[:num_actual_steps] + values_for_gae
         
-        # 【第三优先级修复】最终结果验证和统计
-        adv_mean = np.mean(self.advantages)
-        adv_std = np.std(self.advantages)
-        ret_mean = np.mean(self.returns)
-        ret_std = np.std(self.returns)
+        # 【第三优先级修复】最终结果验证和统计，只统计实际收集的步数
+        adv_mean = np.mean(self.advantages[:num_actual_steps])
+        adv_std = np.std(self.advantages[:num_actual_steps])
+        ret_mean = np.mean(self.returns[:num_actual_steps])
+        ret_std = np.std(self.returns[:num_actual_steps])
         
-        main_logger.info(f"compute_advantages: GAE计算完成。优势值统计: 均值={adv_mean:.4f}, 标准差={adv_std:.4f}")
+        main_logger.info(f"compute_advantages: GAE计算完成 (实际步数={num_actual_steps})。优势值统计: 均值={adv_mean:.4f}, 标准差={adv_std:.4f}")
         main_logger.info(f"compute_advantages: Returns统计: 均值={ret_mean:.4f}, 标准差={ret_std:.4f}")
         
         if nan_count > 0:

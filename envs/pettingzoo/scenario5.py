@@ -4,15 +4,15 @@ from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict
 from scipy.spatial.distance import cdist
 
-class UAVForcedRelayEnv(ParallelEnv):
+class UAVBeliefMapEnv(ParallelEnv):
     """
-    场景4：强制多跳中继无人机环境
+    场景5: 基于信念地图的动态用户覆盖环境
     
     """
     
     metadata = {
         "render_modes": ["human", "rgb_array"],
-        "name": "uav_forced_relay_env_v0",
+        "name": "uav_belief_map_env_v0",
         "is_parallelizable": True,
     }
 
@@ -24,7 +24,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         height_range=(50, 200),
         max_speed=30,
         time_step=1.0,
-        max_steps=5000,
+        max_steps=1800,
         user_distribution="forced_relay_cluster",
         render_mode=None,
         seed=None,
@@ -51,13 +51,30 @@ class UAVForcedRelayEnv(ParallelEnv):
         randomize_uav_start=True,  # 是否随机化无人机起始区域
         aclr_db=45,  # 邻道泄漏比 (Adjacent Channel Leakage Ratio) in dB
         test_reward_mode=False,
-        # Reward type selection
-        reward_type="health",  # "naive" for coverage only, "health" for network health score
         # Network Health Score Weights
         w_connectivity=0.5,
         w_diversity=1.0,
         w_coverage=1.0,
         w_dispersion=0.05,
+        # --- New parameters for Dynamic Environment ---
+        users_dynamic=True,
+        user_max_speed=20,  # m/s, high-speed scenario (72 km/h) - 车辆速度
+        user_movement_model="rpgm",  # 标准参考点群体移动模型
+        grid_resolution=100, # M x N grid, e.g., 100x100 for a 2500m area
+        belief_decay=0.99,
+        belief_diffusion_factor=0.1,
+        belief_update_strength=0.2,
+        discovery_reward_value=10.0,
+        # --- High-Speed RPGM Parameters ---
+        cluster_migration_speed=15.0,  # m/s, 高速簇中心移动速度 (54 km/h)
+        cluster_pause_time_range=(0, 5),  # 簇中心暂停时间范围 (秒) - 大幅减少
+        user_pause_time_range=(0, 3),  # 用户暂停时间范围 (秒) - 大幅减少
+        # --- Dynamic Density Prediction Parameters ---
+        density_prediction=True,  # 启用动态密度预测功能
+        prediction_horizon_k=10,  # 预测未来k步的用户密度分布
+        density_grid_resolution=50,  # 密度预测网格分辨率 (50x50)
+        density_diffusion_rate=0.1,  # 密度扩散率
+        velocity_smoothing_factor=0.8,  # 速度平滑因子
     ):
         super().__init__()
 
@@ -96,12 +113,65 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.randomize_uav_start = randomize_uav_start
         self.test_reward_mode = test_reward_mode
 
-        # Store reward type and weights
-        self.reward_type = reward_type
+        # Store reward weights
         self.w_connectivity = w_connectivity
         self.w_diversity = w_diversity
         self.w_coverage = w_coverage
         self.w_dispersion = w_dispersion
+
+        # --- New Dynamic Environment Parameters ---
+        self.users_dynamic = users_dynamic
+        self.user_max_speed = user_max_speed
+        self.user_movement_model = user_movement_model
+        self.grid_resolution = grid_resolution
+        self.belief_decay = belief_decay
+        self.belief_diffusion_factor = belief_diffusion_factor
+        self.belief_update_strength = belief_update_strength
+        self.discovery_reward_value = discovery_reward_value
+
+        # --- Standard RPGM Parameters ---
+        self.cluster_migration_speed = cluster_migration_speed
+        self.cluster_pause_time_range = cluster_pause_time_range
+        self.user_pause_time_range = user_pause_time_range
+
+        # --- Dynamic Density Prediction Parameters ---
+        self.density_prediction = density_prediction
+        self.prediction_horizon_k = prediction_horizon_k
+        self.density_grid_resolution = density_grid_resolution
+        self.density_diffusion_rate = density_diffusion_rate
+        self.velocity_smoothing_factor = velocity_smoothing_factor
+
+        # --- New State Variables ---
+        self.user_velocities = np.zeros((self.n_users, 2)) # 2D velocity (x, y)
+        self.user_waypoints = np.zeros((self.n_users, 2))
+        self.user_cluster_assignments = np.zeros(self.n_users, dtype=int) # Track which cluster each user belongs to
+        self.cluster_centers_history = np.zeros((self.n_clusters, 2)) # Store cluster centers for mobility
+        self.belief_map = np.ones((grid_resolution, grid_resolution)) / (grid_resolution**2) # Initial uniform belief
+        self.discovered_users_this_episode = set()
+
+        # --- Dynamic Density Prediction State Variables ---
+        if self.density_prediction:
+            # 当前时刻的用户密度图 (G x G)
+            self.density_map = np.zeros((self.density_grid_resolution, self.density_grid_resolution))
+            # 当前时刻的平均速度图 (G x G x 2) - 每个网格的平均用户速度向量
+            self.velocity_map = np.zeros((self.density_grid_resolution, self.density_grid_resolution, 2))
+            # 预测的未来用户密度图 (G x G)
+            self.predicted_density_map = np.zeros((self.density_grid_resolution, self.density_grid_resolution))
+            # 网格单元大小 (米)
+            self.density_cell_size = self.area_size / self.density_grid_resolution
+        else:
+            # 如果关闭密度预测，设置为None
+            self.density_map = None
+            self.velocity_map = None
+            self.predicted_density_map = None
+            self.density_cell_size = None
+        
+        # --- Enhanced Mobility State Variables ---
+        self.cluster_velocities = np.zeros((self.n_clusters, 2))  # 簇中心移动速度
+        self.cluster_waypoints = np.zeros((self.n_clusters, 2))   # 簇中心目标点
+        self.enhanced_cluster_std = max(500, cluster_std * 5)  # 大幅扩展簇活动范围
+        self.user_pause_times = np.zeros(self.n_users)  # 用户暂停时间
+        self.user_movement_phases = np.zeros(self.n_users, dtype=int)  # 用户移动阶段 (0:正常, 1:逃离, 2:跳跃)
         
         # 通信参数
         self.carrier_frequency = 2e9
@@ -166,8 +236,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 7. 当前步数: 1
         step_dim = 1
         
+        # 8. 动态密度预测图维度 (如果启用)
+        if self.density_prediction:
+            density_map_dim = self.density_grid_resolution * self.density_grid_resolution  # 预测密度图
+        else:
+            density_map_dim = 0
+        
         # 重新设置state_dim
-        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + comm_quality_dim + step_dim
+        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + comm_quality_dim + step_dim + density_map_dim
 
     def get_state_dim(self):
         """返回全局状态维度"""
@@ -298,8 +374,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         if self.user_distribution == "forced_relay_cluster":
             return self._generate_forced_relay_cluster_positions()
-        elif self.user_distribution == "coverage_hole":
-            return self._generate_coverage_hole_positions()
         elif self.user_distribution == "uniform":
             user_positions = np.zeros((self.n_users, 3))
             for i in range(self.n_users):
@@ -315,38 +389,67 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _generate_forced_relay_cluster_positions(self):
         """
-        生成针对强制中继优化的用户簇分布 - 支持固定或随机的簇中心
+        生成针对强制中继优化的用户簇分布 - 改进的最远点圆形区域策略
         
-        特点：
-        - 用户集中在中心区域，便于覆盖
-        - 形成紧密的簇，减少覆盖难度
-        - 距离地面基站较远，强制多跳
+        新特点：
+        - 找到距离基站最远的点作为用户区域中心
+        - 在该点周围定义一个大的圆形区域用于用户生成
+        - 空间利用率更高，不再局限于单一象限
+        - 仍然确保强制多跳中继的效果
         
         返回:
             user_positions: 用户位置 [n_users, 3] (包含高度1.5米)
         """
         user_positions = np.zeros((self.n_users, 3))
         
-        # 定义中心区域的边界（用户集中在这里）
-        central_size = self.area_size * self.central_area_ratio
-        central_margin = (self.area_size - central_size) / 2
+        # 1. 计算所有地面基站的几何中心
+        bs_center = np.mean(self.ground_bs_positions[:, :2], axis=0)
         
-        # 生成簇中心位置
+        # 2. 找到距离基站中心最远的点（通常在地图的某个角落）
+        # 检查四个角落，找到距离基站中心最远的那个
+        corners = [
+            [self.area_size * 0.05, self.area_size * 0.05],  # 左下
+            [self.area_size * 0.95, self.area_size * 0.05],  # 右下
+            [self.area_size * 0.95, self.area_size * 0.95],  # 右上
+            [self.area_size * 0.05, self.area_size * 0.95],  # 左上
+        ]
+        
+        max_distance = 0
+        farthest_corner = corners[0]
+        for corner in corners:
+            distance = np.linalg.norm(np.array(corner) - bs_center)
+            if distance > max_distance:
+                max_distance = distance
+                farthest_corner = corner
+        
+        # 3. 以最远点为中心，定义用户生成的圆形区域
+        user_region_center = np.array(farthest_corner)
+        user_region_radius = self.area_size * 0.35  # 圆形区域半径，覆盖更大面积
+        
+        # 4. 在圆形区域内生成簇中心位置
         cluster_centers = np.zeros((self.n_clusters, 2))
         
         # --- 随机化簇中心 ---
         if self.randomize_users:
-            # 随机在中心区域内生成簇中心
+            # 在圆形区域内随机生成簇中心
             for i in range(self.n_clusters):
-                # 确保簇中心之间有足够的距离，避免重叠
                 max_attempts = 50
                 for attempt in range(max_attempts):
-                    x = self.np_random.uniform(central_margin, central_margin + central_size)
-                    y = self.np_random.uniform(central_margin, central_margin + central_size)
+                    # 在圆形区域内随机生成点
+                    angle = self.np_random.uniform(0, 2 * np.pi)
+                    radius = self.np_random.uniform(0, user_region_radius)
+                    
+                    x = user_region_center[0] + radius * np.cos(angle)
+                    y = user_region_center[1] + radius * np.sin(angle)
+                    
+                    # 确保在地图边界内
+                    x = np.clip(x, self.area_size * 0.05, self.area_size * 0.95)
+                    y = np.clip(y, self.area_size * 0.05, self.area_size * 0.95)
+                    
                     new_center = np.array([x, y])
                     
                     # 检查与已有簇中心的距离
-                    min_distance = self.cluster_std * 3  # 簇中心之间的最小距离
+                    min_distance = self.cluster_std * 2.5
                     valid = True
                     for j in range(i):
                         distance = np.linalg.norm(new_center - cluster_centers[j])
@@ -358,63 +461,42 @@ class UAVForcedRelayEnv(ParallelEnv):
                         cluster_centers[i] = new_center
                         break
                 else:
-                    # 如果找不到合适的位置，使用网格布局作为备选
-                    grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
-                    grid_i = i // grid_size
-                    grid_j = i % grid_size
-                    x = central_margin + central_size * (grid_i + 0.5) / grid_size
-                    y = central_margin + central_size * (grid_j + 0.5) / grid_size
+                    # 备选方案：在圆形区域内使用极坐标网格
+                    angle = 2 * np.pi * i / self.n_clusters
+                    radius = user_region_radius * 0.7  # 使用70%的半径
+                    x = user_region_center[0] + radius * np.cos(angle)
+                    y = user_region_center[1] + radius * np.sin(angle)
+                    x = np.clip(x, self.area_size * 0.05, self.area_size * 0.95)
+                    y = np.clip(y, self.area_size * 0.05, self.area_size * 0.95)
                     cluster_centers[i] = [x, y]
         else:
-            # --- 保留原有的固定簇中心逻辑 ---
-            if self.n_clusters == 4:
-                # 4个簇形成2x2网格
-                cluster_centers[0] = [central_margin + central_size * 0.3, central_margin + central_size * 0.3]
-                cluster_centers[1] = [central_margin + central_size * 0.7, central_margin + central_size * 0.3]
-                cluster_centers[2] = [central_margin + central_size * 0.3, central_margin + central_size * 0.7]
-                cluster_centers[3] = [central_margin + central_size * 0.7, central_margin + central_size * 0.7]
-            elif self.n_clusters == 3:
-                # 3个簇形成三角形
-                cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.2]
-                cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
-                cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
-            elif self.n_clusters == 5:
-                # 5个簇：中心1个 + 四周4个
-                cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.5]
-                cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.2]
-                cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.2]
-                cluster_centers[3] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
-                cluster_centers[4] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
-            else:
-                # 其他情况使用网格布局
-                grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
-                cluster_idx = 0
-                
-                for i in range(grid_size):
-                    for j in range(grid_size):
-                        if cluster_idx >= self.n_clusters:
-                            break
-                        
-                        # 网格位置
-                        grid_x = central_margin + central_size * (i + 0.5) / grid_size
-                        grid_y = central_margin + central_size * (j + 0.5) / grid_size
-                        
-                        cluster_centers[cluster_idx] = [grid_x, grid_y]
-                        cluster_idx += 1
-                    
-                    if cluster_idx >= self.n_clusters:
-                        break
+            # --- 固定簇中心逻辑（在圆形区域内使用极坐标布局） ---
+            for i in range(self.n_clusters):
+                if self.n_clusters == 1:
+                    # 单簇情况，放在圆心
+                    cluster_centers[i] = user_region_center
+                else:
+                    # 多簇情况，均匀分布在圆周上
+                    angle = 2 * np.pi * i / self.n_clusters
+                    radius = user_region_radius * 0.6  # 使用60%的半径
+                    x = user_region_center[0] + radius * np.cos(angle)
+                    y = user_region_center[1] + radius * np.sin(angle)
+                    x = np.clip(x, self.area_size * 0.05, self.area_size * 0.95)
+                    y = np.clip(y, self.area_size * 0.05, self.area_size * 0.95)
+                    cluster_centers[i] = [x, y]
         
-        # 计算每个簇的用户数量 - 确保总数正确
+        # 存储簇中心用于移动模型
+        self.cluster_centers_history = cluster_centers.copy()
+        
+        # 5. 计算每个簇的用户数量
         base_users_per_cluster = self.n_users // self.n_clusters
         remaining_users = self.n_users % self.n_clusters
         
         cluster_user_counts = [base_users_per_cluster] * self.n_clusters
-        # 将剩余用户分配给前几个簇
         for i in range(remaining_users):
             cluster_user_counts[i] += 1
         
-        # 为每个簇生成用户
+        # 6. 为每个簇生成用户并记录簇分配
         user_idx = 0
         
         for cluster_idx in range(self.n_clusters):
@@ -439,175 +521,8 @@ class UAVForcedRelayEnv(ParallelEnv):
                 user_position_3d = np.array([user_position_2d[0], user_position_2d[1], 1.5])
                 
                 user_positions[user_idx] = user_position_3d
-                user_idx += 1
-        
-        return user_positions
-    
-    def _generate_coverage_hole_positions(self):
-        """
-        生成覆盖空洞场景的用户分布 - 专门用于中继场景研究
-        
-        特点：
-        - 所有用户都位于远离基站的区域，形成明显的覆盖空洞
-        - 用户无法直接与基站建立有效通信，强制需要无人机中继
-        - 符合无线通信研究中的标准覆盖空洞场景设置
-        
-        返回:
-            user_positions: 用户位置 [n_users, 3] (包含高度1.5米)
-        """
-        user_positions = np.zeros((self.n_users, 3))
-        
-        # 获取基站位置（假设单基站场景）
-        if self.n_ground_bs > 0:
-            bs_pos = self.ground_bs_positions[0]  # 使用第一个基站
-        else:
-            # 如果没有基站，默认基站在左下角
-            bs_pos = np.array([self.area_size * 0.05, self.area_size * 0.05, 30])
-        
-        # 确定覆盖空洞区域（与基站对角线相对的区域）
-        # 基站在左下角 -> 用户在右上角
-        # 基站在右上角 -> 用户在左下角
-        # 基站在左上角 -> 用户在右下角
-        # 基站在右下角 -> 用户在左上角
-        
-        area_center = self.area_size / 2
-        
-        # 判断基站在哪个象限
-        if bs_pos[0] < area_center and bs_pos[1] < area_center:
-            # 基站在左下角，用户区域在右上角
-            hole_x_min = self.area_size * 0.6
-            hole_x_max = self.area_size * 0.95
-            hole_y_min = self.area_size * 0.6
-            hole_y_max = self.area_size * 0.95
-        elif bs_pos[0] > area_center and bs_pos[1] > area_center:
-            # 基站在右上角，用户区域在左下角
-            hole_x_min = self.area_size * 0.05
-            hole_x_max = self.area_size * 0.4
-            hole_y_min = self.area_size * 0.05
-            hole_y_max = self.area_size * 0.4
-        elif bs_pos[0] < area_center and bs_pos[1] > area_center:
-            # 基站在左上角，用户区域在右下角
-            hole_x_min = self.area_size * 0.6
-            hole_x_max = self.area_size * 0.95
-            hole_y_min = self.area_size * 0.05
-            hole_y_max = self.area_size * 0.4
-        else:
-            # 基站在右下角，用户区域在左上角
-            hole_x_min = self.area_size * 0.05
-            hole_x_max = self.area_size * 0.4
-            hole_y_min = self.area_size * 0.6
-            hole_y_max = self.area_size * 0.95
-        
-        # 在覆盖空洞区域内生成用户簇
-        hole_width = hole_x_max - hole_x_min
-        hole_height = hole_y_max - hole_y_min
-        
-        # 生成簇中心位置
-        cluster_centers = np.zeros((self.n_clusters, 2))
-        
-        if self.randomize_users:
-            # 随机在覆盖空洞区域内生成簇中心
-            for i in range(self.n_clusters):
-                # 确保簇中心之间有足够的距离，避免重叠
-                max_attempts = 50
-                for attempt in range(max_attempts):
-                    x = self.np_random.uniform(hole_x_min, hole_x_max)
-                    y = self.np_random.uniform(hole_y_min, hole_y_max)
-                    new_center = np.array([x, y])
-                    
-                    # 检查与已有簇中心的距离
-                    min_distance = self.cluster_std * 2.5  # 簇中心之间的最小距离
-                    valid = True
-                    for j in range(i):
-                        distance = np.linalg.norm(new_center - cluster_centers[j])
-                        if distance < min_distance:
-                            valid = False
-                            break
-                    
-                    if valid:
-                        cluster_centers[i] = new_center
-                        break
-                else:
-                    # 如果找不到合适的位置，使用网格布局作为备选
-                    grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
-                    grid_i = i // grid_size
-                    grid_j = i % grid_size
-                    x = hole_x_min + hole_width * (grid_i + 0.5) / grid_size
-                    y = hole_y_min + hole_height * (grid_j + 0.5) / grid_size
-                    cluster_centers[i] = [x, y]
-        else:
-            # 固定簇中心布局
-            if self.n_clusters == 1:
-                # 单个簇在覆盖空洞中心
-                cluster_centers[0] = [(hole_x_min + hole_x_max) / 2, (hole_y_min + hole_y_max) / 2]
-            elif self.n_clusters == 2:
-                # 两个簇对角分布
-                cluster_centers[0] = [hole_x_min + hole_width * 0.3, hole_y_min + hole_height * 0.3]
-                cluster_centers[1] = [hole_x_min + hole_width * 0.7, hole_y_min + hole_height * 0.7]
-            elif self.n_clusters == 3:
-                # 三个簇形成三角形
-                cluster_centers[0] = [hole_x_min + hole_width * 0.5, hole_y_min + hole_height * 0.2]
-                cluster_centers[1] = [hole_x_min + hole_width * 0.2, hole_y_min + hole_height * 0.8]
-                cluster_centers[2] = [hole_x_min + hole_width * 0.8, hole_y_min + hole_height * 0.8]
-            elif self.n_clusters == 4:
-                # 四个簇形成2x2网格
-                cluster_centers[0] = [hole_x_min + hole_width * 0.3, hole_y_min + hole_height * 0.3]
-                cluster_centers[1] = [hole_x_min + hole_width * 0.7, hole_y_min + hole_height * 0.3]
-                cluster_centers[2] = [hole_x_min + hole_width * 0.3, hole_y_min + hole_height * 0.7]
-                cluster_centers[3] = [hole_x_min + hole_width * 0.7, hole_y_min + hole_height * 0.7]
-            else:
-                # 其他情况使用网格布局
-                grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
-                cluster_idx = 0
-                
-                for i in range(grid_size):
-                    for j in range(grid_size):
-                        if cluster_idx >= self.n_clusters:
-                            break
-                        
-                        x = hole_x_min + hole_width * (i + 0.5) / grid_size
-                        y = hole_y_min + hole_height * (j + 0.5) / grid_size
-                        
-                        cluster_centers[cluster_idx] = [x, y]
-                        cluster_idx += 1
-                    
-                    if cluster_idx >= self.n_clusters:
-                        break
-        
-        # 计算每个簇的用户数量 - 确保总数正确
-        base_users_per_cluster = self.n_users // self.n_clusters
-        remaining_users = self.n_users % self.n_clusters
-        
-        cluster_user_counts = [base_users_per_cluster] * self.n_clusters
-        # 将剩余用户分配给前几个簇
-        for i in range(remaining_users):
-            cluster_user_counts[i] += 1
-        
-        # 为每个簇生成用户
-        user_idx = 0
-        
-        for cluster_idx in range(self.n_clusters):
-            cluster_center = cluster_centers[cluster_idx]
-            n_users_in_cluster = cluster_user_counts[cluster_idx]
-            
-            # 在簇中心周围生成用户（二维高斯分布）
-            for _ in range(n_users_in_cluster):
-                # 生成二维高斯分布的偏移
-                offset = self.np_random.multivariate_normal(
-                    mean=[0, 0],
-                    cov=[[self.cluster_std**2, 0], [0, self.cluster_std**2]]
-                )
-                
-                user_position_2d = cluster_center + offset
-                
-                # 确保用户位置在覆盖空洞区域内
-                user_position_2d[0] = np.clip(user_position_2d[0], hole_x_min + 10, hole_x_max - 10)
-                user_position_2d[1] = np.clip(user_position_2d[1], hole_y_min + 10, hole_y_max - 10)
-                
-                # 创建三维用户位置（包含1.5米高度）
-                user_position_3d = np.array([user_position_2d[0], user_position_2d[1], 1.5])
-                
-                user_positions[user_idx] = user_position_3d
+                # 记录用户所属的簇
+                self.user_cluster_assignments[user_idx] = cluster_idx
                 user_idx += 1
         
         return user_positions
@@ -919,9 +834,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             "avg_hops": avg_hops,
             "target_coverage_achieved": coverage_ratio >= 0.90,
             "pure_team_reward": shared_global_reward,  # 明确标记这是纯净团队奖励
-            # 【新增】确保包含所有关键性能指标，供可视化工具使用
-            "served_users": effective_connected_users,  # 为兼容性添加别名
-            "service_rate": coverage_ratio,  # 服务率等同于覆盖率
         }
         
         return coverage_ratio
@@ -1135,7 +1047,7 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _get_cluster_centers(self):
         """
-        获取用户簇的中心位置（用于可视化）
+        获取用户簇的中心位置（用于可视化） - 更新为动态计算
         
         返回:
             cluster_centers: 簇中心位置列表
@@ -1143,32 +1055,75 @@ class UAVForcedRelayEnv(ParallelEnv):
         if not hasattr(self, 'user_positions') or self.user_positions is None:
             return []
         
-        # 使用预定义的簇中心（因为我们用的是规整布局）
-        central_size = self.area_size * self.central_area_ratio
-        central_margin = (self.area_size - central_size) / 2
+        # 重新计算动态用户区域（与_generate_forced_relay_cluster_positions保持一致）
+        bs_center = np.mean(self.ground_bs_positions[:, :2], axis=0)
+        map_center = np.array([self.area_size / 2, self.area_size / 2])
+        
+        user_area_margin = self.area_size * 0.1
+        user_area_size = self.area_size * 0.4
+        
+        # 根据基站中心位置确定用户区域的位置
+        if bs_center[0] < map_center[0]:  # 基站在左侧
+            user_x_min = self.area_size - user_area_size - user_area_margin
+            user_x_max = self.area_size - user_area_margin
+        else:  # 基站在右侧
+            user_x_min = user_area_margin
+            user_x_max = user_area_margin + user_area_size
+            
+        if bs_center[1] < map_center[1]:  # 基站在下方
+            user_y_min = self.area_size - user_area_size - user_area_margin
+            user_y_max = self.area_size - user_area_margin
+        else:  # 基站在上方
+            user_y_min = user_area_margin
+            user_y_max = user_area_margin + user_area_size
         
         cluster_centers = []
         
         if self.n_clusters == 4:
             cluster_centers = [
-                [central_margin + central_size * 0.3, central_margin + central_size * 0.3],
-                [central_margin + central_size * 0.7, central_margin + central_size * 0.3],
-                [central_margin + central_size * 0.3, central_margin + central_size * 0.7],
-                [central_margin + central_size * 0.7, central_margin + central_size * 0.7]
+                [user_x_min + (user_x_max - user_x_min) * 0.3, user_y_min + (user_y_max - user_y_min) * 0.3],
+                [user_x_min + (user_x_max - user_x_min) * 0.7, user_y_min + (user_y_max - user_y_min) * 0.3],
+                [user_x_min + (user_x_max - user_x_min) * 0.3, user_y_min + (user_y_max - user_y_min) * 0.7],
+                [user_x_min + (user_x_max - user_x_min) * 0.7, user_y_min + (user_y_max - user_y_min) * 0.7]
             ]
         elif self.n_clusters == 3:
             cluster_centers = [
-                [central_margin + central_size * 0.5, central_margin + central_size * 0.2],
-                [central_margin + central_size * 0.2, central_margin + central_size * 0.8],
-                [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
+                [user_x_min + (user_x_max - user_x_min) * 0.5, user_y_min + (user_y_max - user_y_min) * 0.2],
+                [user_x_min + (user_x_max - user_x_min) * 0.2, user_y_min + (user_y_max - user_y_min) * 0.8],
+                [user_x_min + (user_x_max - user_x_min) * 0.8, user_y_min + (user_y_max - user_y_min) * 0.8]
             ]
-        # 可以根据需要添加更多预定义布局
+        elif self.n_clusters == 5:
+            cluster_centers = [
+                [user_x_min + (user_x_max - user_x_min) * 0.5, user_y_min + (user_y_max - user_y_min) * 0.5],
+                [user_x_min + (user_x_max - user_x_min) * 0.2, user_y_min + (user_y_max - user_y_min) * 0.2],
+                [user_x_min + (user_x_max - user_x_min) * 0.8, user_y_min + (user_y_max - user_y_min) * 0.2],
+                [user_x_min + (user_x_max - user_x_min) * 0.2, user_y_min + (user_y_max - user_y_min) * 0.8],
+                [user_x_min + (user_x_max - user_x_min) * 0.8, user_y_min + (user_y_max - user_y_min) * 0.8]
+            ]
+        else:
+            # 其他情况使用网格布局
+            grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
+            cluster_idx = 0
+            
+            for i in range(grid_size):
+                for j in range(grid_size):
+                    if cluster_idx >= self.n_clusters:
+                        break
+                    
+                    grid_x = user_x_min + (user_x_max - user_x_min) * (i + 0.5) / grid_size
+                    grid_y = user_y_min + (user_y_max - user_y_min) * (j + 0.5) / grid_size
+                    
+                    cluster_centers.append([grid_x, grid_y])
+                    cluster_idx += 1
+                
+                if cluster_idx >= self.n_clusters:
+                    break
         
         return cluster_centers
     
     def reset(self, seed=None, options=None):
         """
-        重置环境 - 确保使用场景4特定的全局状态
+        重置环境，为新一轮的动态仿真做准备。
         
         返回:
             observations: 所有智能体的观测字典
@@ -1184,10 +1139,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # Reset belief map and user serviced status
         self.user_serviced_status.fill(False)
+        # Initialize belief map to uniform distribution
+        self.belief_map.fill(1.0 / (self.grid_resolution**2))
+        self.discovered_users_this_episode.clear()
         
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
         self.user_positions = self._generate_user_positions()
+        self._initialize_user_waypoints()
         
         # 3. 初始化连接和路由信息
         self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
@@ -1203,6 +1162,13 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 4.5 初始化新增的 Reward Shaping 相关变量
         self.previous_bottleneck_capacities = np.zeros(self.n_uavs)
+        
+        # 4.6 初始化密度预测系统（如果启用）
+        if self.density_prediction:
+            # 更新初始密度图和速度图
+            self._update_density_and_velocity_maps()
+            # 预测未来密度分布
+            self._predict_future_density_map()
         
         # 5. 获取观测值
         observations = {}
@@ -1243,6 +1209,386 @@ class UAVForcedRelayEnv(ParallelEnv):
         sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
         
         return sinr_db
+
+    def _update_density_and_velocity_maps(self):
+        """
+        更新密度图和速度图 - 基于当前用户位置和速度
+        
+        此方法会在每个step中被调用。它会遍历所有用户，根据其当前位置和速度，
+        将他们'分配'到对应的网格中，从而计算出最新的self.density_map和self.velocity_map。
+        
+        核心思想：
+        - 将连续的用户位置离散化到网格单元中
+        - 计算每个网格单元的用户密度（用户数量/单元面积）
+        - 计算每个网格单元的平均用户速度向量
+        - 使用高斯核进行空间平滑，避免过度离散化
+        """
+        if not self.density_prediction:
+            return
+        
+        # 边界检查：确保必要的属性存在
+        if not hasattr(self, 'density_map') or self.density_map is None:
+            return
+        if not hasattr(self, 'velocity_map') or self.velocity_map is None:
+            return
+        if not hasattr(self, 'user_positions') or self.user_positions is None:
+            return
+        if not hasattr(self, 'user_velocities') or self.user_velocities is None:
+            return
+        
+        # 重置密度图和速度图
+        self.density_map.fill(0.0)
+        self.velocity_map.fill(0.0)
+        
+        # 用于累积每个网格单元的用户数量和速度
+        user_count_per_cell = np.zeros((self.density_grid_resolution, self.density_grid_resolution))
+        velocity_sum_per_cell = np.zeros((self.density_grid_resolution, self.density_grid_resolution, 2))
+        
+        # 遍历所有用户，将其分配到对应的网格单元
+        for user_idx in range(self.n_users):
+            user_pos = self.user_positions[user_idx, :2]  # 只取x, y坐标
+            user_vel = self.user_velocities[user_idx]  # 2D速度向量
+            
+            # 计算用户所在的网格坐标
+            grid_x = int(np.clip(user_pos[0] / self.density_cell_size, 0, self.density_grid_resolution - 1))
+            grid_y = int(np.clip(user_pos[1] / self.density_cell_size, 0, self.density_grid_resolution - 1))
+            
+            # 基础分配：将用户分配到其所在的网格单元
+            user_count_per_cell[grid_y, grid_x] += 1.0
+            velocity_sum_per_cell[grid_y, grid_x] += user_vel
+            
+            # 高斯平滑：将用户的影响扩散到邻近网格单元
+            # 使用标准差为1个网格单元的高斯核
+            sigma = 1.0  # 网格单元为单位
+            gaussian_radius = 2  # 影响半径（网格单元数）
+            
+            for dy in range(-gaussian_radius, gaussian_radius + 1):
+                for dx in range(-gaussian_radius, gaussian_radius + 1):
+                    neighbor_x = grid_x + dx
+                    neighbor_y = grid_y + dy
+                    
+                    # 检查邻居网格是否在有效范围内
+                    if (0 <= neighbor_x < self.density_grid_resolution and 
+                        0 <= neighbor_y < self.density_grid_resolution):
+                        
+                        # 计算高斯权重
+                        distance_sq = dx*dx + dy*dy
+                        weight = np.exp(-distance_sq / (2 * sigma*sigma))
+                        
+                        # 如果不是中心网格，应用高斯权重
+                        if dx != 0 or dy != 0:
+                            user_count_per_cell[neighbor_y, neighbor_x] += weight * 0.3  # 30%的扩散强度
+                            velocity_sum_per_cell[neighbor_y, neighbor_x] += weight * 0.3 * user_vel
+        
+        # 计算密度图：用户数量除以网格单元面积
+        cell_area = self.density_cell_size * self.density_cell_size  # 平方米
+        self.density_map = user_count_per_cell / cell_area  # 用户数量/平方米
+        
+        # 计算平均速度图：总速度除以用户数量
+        for y in range(self.density_grid_resolution):
+            for x in range(self.density_grid_resolution):
+                if user_count_per_cell[y, x] > 0:
+                    self.velocity_map[y, x] = velocity_sum_per_cell[y, x] / user_count_per_cell[y, x]
+                else:
+                    self.velocity_map[y, x] = np.zeros(2)  # 无用户的网格速度为零
+        
+        # 应用速度平滑滤波器，减少噪声
+        if self.velocity_smoothing_factor > 0:
+            self._apply_velocity_smoothing()
+
+    def _apply_velocity_smoothing(self):
+        """
+        对速度图应用空间平滑滤波器，减少噪声和不连续性
+        
+        使用简单的3x3平均滤波器进行平滑
+        """
+        smoothed_velocity_map = self.velocity_map.copy()
+        
+        for y in range(1, self.density_grid_resolution - 1):
+            for x in range(1, self.density_grid_resolution - 1):
+                # 计算3x3邻域的平均速度
+                neighborhood_velocities = self.velocity_map[y-1:y+2, x-1:x+2]  # 3x3区域
+                
+                # 只考虑有用户的网格单元
+                valid_mask = np.any(neighborhood_velocities != 0, axis=2)  # 检查速度向量是否非零
+                
+                if np.any(valid_mask):
+                    # 计算有效邻居的平均速度
+                    valid_velocities = neighborhood_velocities[valid_mask]
+                    avg_velocity = np.mean(valid_velocities, axis=0)
+                    
+                    # 应用平滑因子：原始速度 * (1-α) + 平滑速度 * α
+                    original_velocity = self.velocity_map[y, x]
+                    smoothed_velocity_map[y, x] = (
+                        (1 - self.velocity_smoothing_factor) * original_velocity + 
+                        self.velocity_smoothing_factor * avg_velocity
+                    )
+        
+        self.velocity_map = smoothed_velocity_map
+
+    def _predict_future_density_map(self):
+        """
+        使用拉格朗日平流（Lagrangian Advection）预测未来k步后的用户密度分布
+        
+        核心算法：
+        1. 基于当前密度图和速度图，使用拉格朗日平流方程预测密度演化
+        2. 拉格朗日平流方程：∂ρ/∂t + ∇·(ρv) = 0
+        3. 离散化实现：ρ(t+Δt) = ρ(t) - Δt * ∇·(ρv)
+        4. 迭代k步得到未来密度分布
+        
+        这种方法的优势：
+        - 不需要预先知道用户群体结构
+        - 能够处理动态变化的用户分布
+        - 基于物理原理，具有良好的理论基础
+        """
+        if not self.density_prediction:
+            return
+        
+        # 初始化预测密度图为当前密度图
+        predicted_density = self.density_map.copy()
+        predicted_velocity = self.velocity_map.copy()
+        
+        # 时间步长（秒）
+        dt = self.time_step
+        
+        # 迭代预测k步
+        for step in range(self.prediction_horizon_k):
+            # 应用拉格朗日平流方程的离散化版本
+            predicted_density = self._apply_lagrangian_advection_step(
+                predicted_density, predicted_velocity, dt
+            )
+            
+            # 应用密度扩散（模拟用户的随机移动和不确定性）
+            predicted_density = self._apply_density_diffusion(predicted_density)
+            
+            # 更新速度图（简化假设：速度在短期内保持相对稳定）
+            # 在实际应用中，可以根据历史数据学习速度演化模式
+            predicted_velocity = self._update_predicted_velocity(predicted_velocity)
+        
+        # 存储预测结果
+        self.predicted_density_map = predicted_density
+        
+        # 确保密度图的非负性和数值稳定性
+        self.predicted_density_map = np.clip(self.predicted_density_map, 0, np.inf)
+
+    def _apply_lagrangian_advection_step(self, density, velocity, dt):
+        """
+        应用拉格朗日平流方程的一个时间步
+        
+        使用上风差分格式（Upwind Scheme）求解平流方程：
+        ∂ρ/∂t + ∇·(ρv) = 0
+        
+        参数:
+            density: 当前密度图 (G x G)
+            velocity: 当前速度图 (G x G x 2)
+            dt: 时间步长
+            
+        返回:
+            new_density: 更新后的密度图 (G x G)
+        """
+        new_density = density.copy()
+        
+        # 网格间距（米）
+        dx = self.density_cell_size
+        dy = self.density_cell_size
+        
+        # 遍历所有内部网格点（避免边界问题）
+        for y in range(1, self.density_grid_resolution - 1):
+            for x in range(1, self.density_grid_resolution - 1):
+                # 当前网格的密度和速度
+                rho = density[y, x]
+                vx = velocity[y, x, 0]  # x方向速度
+                vy = velocity[y, x, 1]  # y方向速度
+                
+                # 计算密度梯度（中心差分）
+                drho_dx = (density[y, x+1] - density[y, x-1]) / (2 * dx)
+                drho_dy = (density[y+1, x] - density[y-1, x]) / (2 * dy)
+                
+                # 计算速度散度（中心差分）
+                dvx_dx = (velocity[y, x+1, 0] - velocity[y, x-1, 0]) / (2 * dx)
+                dvy_dy = (velocity[y+1, x, 1] - velocity[y-1, x, 1]) / (2 * dy)
+                
+                # 拉格朗日平流方程的离散化：
+                # ∂ρ/∂t = -∇·(ρv) = -(ρ∇·v + v·∇ρ)
+                advection_term = -(rho * (dvx_dx + dvy_dy) + vx * drho_dx + vy * drho_dy)
+                
+                # 更新密度
+                new_density[y, x] = density[y, x] + dt * advection_term
+        
+        # 处理边界条件（使用零梯度边界条件）
+        new_density[0, :] = new_density[1, :]      # 下边界
+        new_density[-1, :] = new_density[-2, :]   # 上边界
+        new_density[:, 0] = new_density[:, 1]     # 左边界
+        new_density[:, -1] = new_density[:, -2]   # 右边界
+        
+        return new_density
+
+    def _apply_density_diffusion(self, density):
+        """
+        应用密度扩散，模拟用户移动的随机性和不确定性
+        
+        使用简单的扩散方程：∂ρ/∂t = D∇²ρ
+        其中D是扩散系数
+        
+        参数:
+            density: 当前密度图 (G x G)
+            
+        返回:
+            diffused_density: 扩散后的密度图 (G x G)
+        """
+        diffused_density = density.copy()
+        
+        # 扩散系数
+        D = self.density_diffusion_rate
+        
+        # 网格间距
+        dx = self.density_cell_size
+        dy = self.density_cell_size
+        
+        # 时间步长
+        dt = self.time_step
+        
+        # 遍历所有内部网格点
+        for y in range(1, self.density_grid_resolution - 1):
+            for x in range(1, self.density_grid_resolution - 1):
+                # 计算拉普拉斯算子（二阶导数）
+                d2rho_dx2 = (density[y, x+1] - 2*density[y, x] + density[y, x-1]) / (dx*dx)
+                d2rho_dy2 = (density[y+1, x] - 2*density[y, x] + density[y-1, x]) / (dy*dy)
+                
+                # 扩散项
+                diffusion_term = D * (d2rho_dx2 + d2rho_dy2)
+                
+                # 更新密度
+                diffused_density[y, x] = density[y, x] + dt * diffusion_term
+        
+        return diffused_density
+
+    def _update_predicted_velocity(self, velocity):
+        """
+        更新预测的速度图
+        
+        简化假设：速度在短期内保持相对稳定，但会逐渐衰减
+        在更复杂的实现中，可以基于历史数据学习速度演化模式
+        
+        参数:
+            velocity: 当前速度图 (G x G x 2)
+            
+        返回:
+            updated_velocity: 更新后的速度图 (G x G x 2)
+        """
+        # 简单的速度衰减模型
+        velocity_decay_factor = 0.95  # 速度逐渐衰减
+        
+        updated_velocity = velocity * velocity_decay_factor
+        
+        return updated_velocity
+
+    def _calculate_belief_map_statistics(self):
+        """
+        计算信念地图的统计信息，用于TensorBoard记录
+        
+        返回:
+            belief_stats: 包含各种信念地图统计信息的字典
+        """
+        belief_stats = {}
+        
+        # 1. 信念地图熵 (Shannon Entropy)
+        # H = -Σ p_i * log(p_i)
+        epsilon = 1e-9
+        belief_flat = self.belief_map.flatten()
+        belief_flat_safe = np.clip(belief_flat, epsilon, 1.0)
+        entropy = -np.sum(belief_flat_safe * np.log(belief_flat_safe))
+        belief_stats['belief_map_entropy'] = entropy
+        
+        # 2. 信念地图覆盖度 (非零信念区域的比例)
+        non_zero_cells = np.sum(self.belief_map > epsilon)
+        total_cells = self.grid_resolution * self.grid_resolution
+        coverage = non_zero_cells / total_cells
+        belief_stats['belief_map_coverage'] = coverage
+        
+        # 3. 信念地图最大值和最小值
+        belief_stats['belief_map_max_value'] = np.max(self.belief_map)
+        belief_stats['belief_map_min_value'] = np.min(self.belief_map)
+        
+        # 4. 信念地图标准差
+        belief_stats['belief_map_std'] = np.std(self.belief_map)
+        
+        # 5. 发现vs预测准确性
+        # 计算实际发现用户的位置与高信念区域的重叠度
+        if hasattr(self, 'discovered_users_this_episode') and self.discovered_users_this_episode:
+            discovered_positions = []
+            for user_idx in self.discovered_users_this_episode:
+                if user_idx < len(self.user_positions):
+                    discovered_positions.append(self.user_positions[user_idx])
+            
+            if discovered_positions:
+                # 计算发现位置的平均信念值
+                total_belief_at_discoveries = 0
+                for pos in discovered_positions:
+                    gx, gy = self._get_grid_coords(pos)
+                    total_belief_at_discoveries += self.belief_map[gy, gx]
+                
+                avg_belief_at_discoveries = total_belief_at_discoveries / len(discovered_positions)
+                # 归一化为预测准确性分数 (0-1)
+                max_possible_belief = np.max(self.belief_map)
+                if max_possible_belief > epsilon:
+                    prediction_accuracy = avg_belief_at_discoveries / max_possible_belief
+                else:
+                    prediction_accuracy = 0
+                belief_stats['belief_prediction_accuracy'] = prediction_accuracy
+                belief_stats['discovered_vs_predicted'] = avg_belief_at_discoveries
+            else:
+                belief_stats['belief_prediction_accuracy'] = 0
+                belief_stats['discovered_vs_predicted'] = 0
+        else:
+            belief_stats['belief_prediction_accuracy'] = 0
+            belief_stats['discovered_vs_predicted'] = 0
+        
+        # 6. 高信念和低信念区域计数
+        # 定义阈值：高于平均值的为高信念区域，低于平均值的为低信念区域
+        mean_belief = np.mean(self.belief_map)
+        high_belief_regions = np.sum(self.belief_map > mean_belief)
+        low_belief_regions = np.sum(self.belief_map < mean_belief)
+        
+        belief_stats['high_belief_regions_count'] = high_belief_regions
+        belief_stats['low_belief_regions_count'] = low_belief_regions
+        
+        # 7. 信念集中度比率 (前10%最高信念区域包含的总信念比例)
+        belief_flat_sorted = np.sort(belief_flat)[::-1]  # 降序排列
+        top_10_percent_count = max(1, int(0.1 * len(belief_flat_sorted)))
+        top_10_percent_belief = np.sum(belief_flat_sorted[:top_10_percent_count])
+        total_belief = np.sum(belief_flat_sorted)
+        
+        if total_belief > epsilon:
+            concentration_ratio = top_10_percent_belief / total_belief
+        else:
+            concentration_ratio = 0
+        belief_stats['belief_concentration_ratio'] = concentration_ratio
+        
+        return belief_stats
+
+    def get_current_state(self):
+        """
+        获取当前环境状态，用于调试和可视化
+        
+        返回:
+            state_dict: 包含当前环境状态的字典
+        """
+        state_dict = {
+            'uav_positions': self.uav_positions.copy() if hasattr(self, 'uav_positions') else None,
+            'user_positions': self.user_positions.copy() if hasattr(self, 'user_positions') else None,
+            'ground_bs_positions': self.ground_bs_positions.copy() if hasattr(self, 'ground_bs_positions') else None,
+            'area_size': self.area_size,
+            'current_step': getattr(self, 'current_step', 0),
+            'max_steps': self.max_steps,
+            'belief_map': self.belief_map.copy() if hasattr(self, 'belief_map') else None,
+            'discovered_users_this_episode': list(self.discovered_users_this_episode) if hasattr(self, 'discovered_users_this_episode') else [],
+            'grid_resolution': self.grid_resolution,
+            'connections': self.connections.copy() if hasattr(self, 'connections') else None,
+            'routing_paths': dict(self.routing_paths) if hasattr(self, 'routing_paths') else {}
+        }
+        
+        return state_dict
     
     def _compute_interference_radius(self):
         """
@@ -1449,9 +1795,20 @@ class UAVForcedRelayEnv(ParallelEnv):
                 self.uav_positions[agent_idx] = new_position
         
         # 3. Update system state based on new positions
+        self._update_user_positions()
+        self._predict_belief_map()
         self._update_channel_state()
+        self._update_belief_map_from_observation() # Update belief based on new observations
         self._update_uav_connections()
         self._compute_routing_paths()
+        self._calculate_discovery_reward_inline() # Calculate discovery reward after all updates
+
+        # 3.5 更新密度预测系统（如果启用）
+        if self.density_prediction:
+            # 更新当前密度图和速度图
+            self._update_density_and_velocity_maps()
+            # 预测未来密度分布
+            self._predict_future_density_map()
 
 
         # 4. Check for newly serviced users and update belief map
@@ -1473,6 +1830,17 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         # 然后，计算新的、综合性的“网络健康度”作为共享团队奖励 r_t
         shaped_team_reward, reward_components = self.calculate_network_health_reward()
+        
+        # Add the belief-modulated discovery reward
+        discovery_reward = getattr(self, 'last_discovery_reward', 0.0)
+        shaped_team_reward += discovery_reward
+        reward_components['discovery_reward'] = discovery_reward
+
+        # 计算信念地图统计信息
+        belief_map_stats = self._calculate_belief_map_statistics()
+        # 将信念地图统计信息添加到奖励组件中，供TensorBoard记录
+        reward_components.update(belief_map_stats)
+
 
         # 8. 计算系统吞吐量 (在计算完路由和奖励之后)
         system_throughput_mbps, avg_throughput_per_user_mbps = self._calculate_system_throughput()
@@ -1483,11 +1851,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.current_step += 1
         # 检查是否因为达到最大步数而被截断
         is_truncated = self.current_step >= self.max_steps
-        # 【方案A修改】不再因为100%覆盖而提前终止，让episode自然运行到max_steps
-        # 这样可以解决GAE问题，并鼓励智能体学会维持最优状态
-        # coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-        # is_terminated = coverage_ratio >= 1.0
-        is_terminated = False  # 永不提前终止
+        # 在这个环境中，我们没有定义其他自然终止条件，所以 is_terminated 总是 False
+        is_terminated = False
 
         # 12. 准备返回值
         observations = {}
@@ -1505,21 +1870,9 @@ class UAVForcedRelayEnv(ParallelEnv):
             for agent in self.agents:
                 rewards[agent] = shared_reward
         else:
-            # 根据reward_type参数选择奖励类型
-            if self.reward_type == "naive":
-                # naive模式：直接使用覆盖率作为奖励
-                coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-                shared_reward = coverage_ratio
-            elif self.reward_type == "health":
-                # health模式：使用网络健康度参数
-                shared_reward = shaped_team_reward
-            else:
-                # 默认使用health模式
-                shared_reward = shaped_team_reward
-            
-            # 所有智能体接收完全相同的共享团队奖励
+            # 所有智能体接收完全相同的共享团队奖励 r_t
             for agent in self.agents:
-                rewards[agent] = shared_reward
+                rewards[agent] = shaped_team_reward
 
         # 13. 获取新的观测并填充返回值
         for agent_idx, agent in enumerate(self.agents):
@@ -1529,25 +1882,11 @@ class UAVForcedRelayEnv(ParallelEnv):
             terminations[agent] = is_terminated
             truncations[agent] = is_truncated
             
-            # 【关键修复】创建统一的 reward_info 字典，包含所有性能指标
-            # 合并基础覆盖指标和网络健康度组件
-            unified_reward_info = self.reward_info.copy()  # 包含基础覆盖指标
-            unified_reward_info.update(reward_components)  # 添加网络健康度组件
-            
-            # 添加额外的性能指标
-            unified_reward_info.update({
-                "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
-                "total_connected_users": sum(np.sum(self.connections[i]) for i in range(self.n_uavs)),
-                "uavs_with_backhaul": len(self.routing_paths),
-                "system_throughput_mbps": system_throughput_mbps,
-                "avg_throughput_per_user_mbps": avg_throughput_per_user_mbps,
-            })
-            
-            # 将统一的奖励信息放入 info 字典，用于监控、调试和可视化
+            # 将详细的奖励分解信息放入 info 字典，用于监控和调试
             infos[agent] = {
-                "reward_info": unified_reward_info,
-                "coverage_ratio": unified_reward_info.get("coverage_ratio", 0),
-                "connectivity_ratio": unified_reward_info.get("connectivity_ratio", 0),
+                "reward_info": reward_components,
+                "coverage_ratio": self.reward_info.get("coverage_ratio", 0),
+                "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
                 # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
                 "uav_positions": self.uav_positions.copy(),
             }
@@ -2187,6 +2526,812 @@ class UAVForcedRelayEnv(ParallelEnv):
         sinr_db = rx_power - interference_plus_noise_dbm
         
         return sinr_db
+
+    def _get_grid_coords(self, pos):
+        """Converts a 2D position to grid coordinates."""
+        x, y = pos[0], pos[1]
+        gx = int(np.clip(x / self.area_size * self.grid_resolution, 0, self.grid_resolution - 1))
+        gy = int(np.clip(y / self.area_size * self.grid_resolution, 0, self.grid_resolution - 1))
+        return gx, gy
+
+    def _initialize_user_waypoints(self):
+        """
+        初始化用户路径点 - 基于增强的动态热点迁移模型
+        
+        特点：
+        - 初始化簇中心的移动状态
+        - 为用户设置基于增强簇标准差的路径点
+        - 支持动态热点迁移模式
+        """
+        # 初始化簇中心的移动状态
+        self._initialize_cluster_migration()
+        
+        for i in range(self.n_users):
+            # 获取用户所属的簇
+            user_cluster = self.user_cluster_assignments[i]
+            
+            if self.user_movement_model == "dynamic_hotspot_migration":
+                # 使用增强的簇标准差生成路径点
+                self._generate_enhanced_cluster_waypoint(i, user_cluster)
+            else:
+                # 回退到原有的RPGM模型
+                if self.np_random.random() < 0.8:  # 80%概率在本簇内移动
+                    self._generate_intra_cluster_waypoint(i, user_cluster)
+                else:  # 20%概率跨簇移动
+                    self._generate_inter_cluster_waypoint(i)
+            
+            # 设置初始速度
+            direction = self.user_waypoints[i] - self.user_positions[i, :2]
+            distance = np.linalg.norm(direction)
+            if distance > 1e-6:
+                speed = self.np_random.uniform(self.user_max_speed * 0.5, self.user_max_speed)
+                self.user_velocities[i] = (direction / distance) * speed
+            else:
+                self.user_velocities[i] = np.zeros(2)
+    
+    def _initialize_cluster_migration(self):
+        """
+        初始化簇中心的迁移状态
+        """
+        # 为每个簇中心设置初始移动目标
+        for cluster_idx in range(self.n_clusters):
+            # 在当前簇中心周围选择一个迁移目标
+            current_center = self.cluster_centers_history[cluster_idx]
+            
+            # 生成迁移目标（在较大范围内）
+            migration_range = self.enhanced_cluster_std * 0.8  # 迁移范围
+            angle = self.np_random.uniform(0, 2 * np.pi)
+            radius = self.np_random.uniform(migration_range * 0.3, migration_range)
+            
+            target_x = current_center[0] + radius * np.cos(angle)
+            target_y = current_center[1] + radius * np.sin(angle)
+            
+            # 确保目标在地图边界内
+            target_x = np.clip(target_x, self.area_size * 0.05, self.area_size * 0.95)
+            target_y = np.clip(target_y, self.area_size * 0.05, self.area_size * 0.95)
+            
+            self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+            
+            # 设置簇中心的移动速度
+            direction = self.cluster_waypoints[cluster_idx] - current_center
+            distance = np.linalg.norm(direction)
+            if distance > 1e-6:
+                self.cluster_velocities[cluster_idx] = (direction / distance) * self.cluster_migration_speed
+            else:
+                self.cluster_velocities[cluster_idx] = np.zeros(2)
+    
+    def _generate_enhanced_cluster_waypoint(self, user_idx, cluster_idx):
+        """
+        基于增强簇标准差为用户生成路径点
+        
+        参数:
+            user_idx: 用户索引
+            cluster_idx: 簇索引
+        """
+        cluster_center = self.cluster_centers_history[cluster_idx]
+        
+        # 使用增强的簇标准差作为活动范围
+        activity_radius = self.enhanced_cluster_std
+        
+        # 生成极坐标形式的随机偏移
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(0, activity_radius)
+        
+        waypoint = cluster_center + radius * np.array([np.cos(angle), np.sin(angle)])
+        
+        # 确保路径点在地图边界内
+        waypoint[0] = np.clip(waypoint[0], 10, self.area_size - 10)
+        waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
+        
+        self.user_waypoints[user_idx] = waypoint
+    
+    def _generate_intra_cluster_waypoint(self, user_idx, cluster_idx):
+        """
+        在指定簇内为用户生成路径点
+        
+        参数:
+            user_idx: 用户索引
+            cluster_idx: 簇索引
+        """
+        cluster_center = self.cluster_centers_history[cluster_idx]
+        
+        # 在簇中心周围生成路径点（使用簇标准差的1.5倍作为活动范围）
+        activity_radius = self.cluster_std * 1.5
+        
+        # 生成极坐标形式的随机偏移
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(0, activity_radius)
+        
+        waypoint = cluster_center + radius * np.array([np.cos(angle), np.sin(angle)])
+        
+        # 确保路径点在地图边界内
+        waypoint[0] = np.clip(waypoint[0], 10, self.area_size - 10)
+        waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
+        
+        self.user_waypoints[user_idx] = waypoint
+    
+    def _generate_inter_cluster_waypoint(self, user_idx):
+        """
+        为用户生成跨簇路径点
+        
+        参数:
+            user_idx: 用户索引
+        """
+        # 随机选择一个不同的簇作为目标
+        current_cluster = self.user_cluster_assignments[user_idx]
+        available_clusters = [i for i in range(self.n_clusters) if i != current_cluster]
+        
+        if available_clusters:
+            target_cluster = self.np_random.choice(available_clusters)
+            target_cluster_center = self.cluster_centers_history[target_cluster]
+            
+            # 在目标簇附近生成路径点
+            activity_radius = self.cluster_std * 1.2
+            angle = self.np_random.uniform(0, 2 * np.pi)
+            radius = self.np_random.uniform(0, activity_radius)
+            
+            waypoint = target_cluster_center + radius * np.array([np.cos(angle), np.sin(angle)])
+            
+            # 确保路径点在地图边界内
+            waypoint[0] = np.clip(waypoint[0], 10, self.area_size - 10)
+            waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
+            
+            self.user_waypoints[user_idx] = waypoint
+            
+            # 更新用户的簇分配（模拟用户迁移到新的热点区域）
+            self.user_cluster_assignments[user_idx] = target_cluster
+        else:
+            # 如果只有一个簇，则在本簇内生成路径点
+            self._generate_intra_cluster_waypoint(user_idx, current_cluster)
+
+    def _update_user_positions(self):
+        """
+        更新用户位置 - 标准参考点群体移动模型 (Standard RPGM)
+        
+        标准RPGM特点：
+        - 簇中心按照设定速度移动
+        - 用户围绕其所属簇的参考点移动
+        - 支持标准的暂停时间
+        - 移除非标准行为（逃离、跳跃等）
+        """
+        if not self.users_dynamic:
+            return
+
+        # 1. 更新簇中心位置（标准RPGM的参考点移动）
+        self._update_cluster_centers_standard_rpgm()
+
+        # 2. 更新用户位置 - 标准RPGM版本
+        for i in range(self.n_users):
+            # 检查用户暂停状态
+            if self.user_pause_times[i] > 0:
+                self.user_pause_times[i] -= self.time_step
+                continue  # 暂停期间不移动
+            
+            # 标准RPGM移动：用户跟随其参考点移动
+            self.user_positions[i, :2] += self.user_velocities[i] * self.time_step
+            
+            # 边界检查
+            self.user_positions[i, 0] = np.clip(self.user_positions[i, 0], 0, self.area_size)
+            self.user_positions[i, 1] = np.clip(self.user_positions[i, 1], 0, self.area_size)
+
+            # 检查是否到达路径点
+            dist_to_waypoint = np.linalg.norm(self.user_positions[i, :2] - self.user_waypoints[i])
+            if dist_to_waypoint < self.user_max_speed * self.time_step:  # 如果足够接近
+                # 获取用户当前所属的簇
+                user_cluster = self.user_cluster_assignments[i]
+                
+                # 高速RPGM：增加跨簇移动概率以模拟更大范围的快速移动
+                if self.np_random.random() < 0.6:  # 60%概率在本簇内移动
+                    self._generate_intra_cluster_waypoint(i, user_cluster)
+                else:  # 40%概率跨簇移动 - 适合高速场景
+                    self._generate_inter_cluster_waypoint(i)
+                
+                # 设置新的速度
+                direction = self.user_waypoints[i] - self.user_positions[i, :2]
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    speed = self.np_random.uniform(self.user_max_speed * 0.5, self.user_max_speed)
+                    self.user_velocities[i] = (direction / distance) * speed
+                else:
+                    self.user_velocities[i] = np.zeros(2)
+                
+                # 高速场景下减少暂停概率
+                if self.np_random.random() < 0.1:  # 10%概率暂停 - 高速移动很少暂停
+                    pause_time = self.np_random.uniform(*self.user_pause_time_range)
+                    self.user_pause_times[i] = pause_time
+
+    def _execute_long_distance_jump(self, user_idx):
+        """
+        执行用户长距离跳跃行为（模拟车辆快速移动或公共交通）
+        
+        参数:
+            user_idx: 用户索引
+        """
+        # 随机选择一个远距离目标位置
+        jump_distance = self.np_random.uniform(self.max_jump_distance * 0.5, self.max_jump_distance)
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        
+        current_pos = self.user_positions[user_idx, :2]
+        new_x = current_pos[0] + jump_distance * np.cos(angle)
+        new_y = current_pos[1] + jump_distance * np.sin(angle)
+        
+        # 确保新位置在地图边界内
+        new_x = np.clip(new_x, 10, self.area_size - 10)
+        new_y = np.clip(new_y, 10, self.area_size - 10)
+        
+        # 立即移动到新位置
+        self.user_positions[user_idx, :2] = [new_x, new_y]
+        
+        # 设置短暂的暂停时间（模拟到达后的停留）
+        self.user_pause_times[user_idx] = self.np_random.uniform(5, 15)  # 5-15秒暂停
+        
+        # 更新移动阶段
+        self.user_movement_phases[user_idx] = 2  # 跳跃阶段
+        
+        # 重新分配到最近的簇
+        self._reassign_user_to_nearest_cluster(user_idx)
+        
+        # 生成新的路径点
+        new_cluster = self.user_cluster_assignments[user_idx]
+        self._generate_enhanced_cluster_waypoint(user_idx, new_cluster)
+
+    def _execute_user_escape(self, user_idx):
+        """
+        执行用户逃离行为（主动逃离当前UAV覆盖）
+        
+        参数:
+            user_idx: 用户索引
+        """
+        current_pos = self.user_positions[user_idx, :2]
+        
+        # 找到覆盖该用户的所有UAV
+        covering_uavs = []
+        for uav_idx in range(self.n_uavs):
+            if hasattr(self, 'sinr_matrix') and self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
+                covering_uavs.append(uav_idx)
+        
+        if covering_uavs:
+            # 计算所有覆盖UAV的平均位置
+            uav_positions = self.uav_positions[covering_uavs, :2]
+            avg_uav_pos = np.mean(uav_positions, axis=0)
+            
+            # 计算逃离方向（远离UAV的方向）
+            escape_direction = current_pos - avg_uav_pos
+            escape_distance = np.linalg.norm(escape_direction)
+            
+            if escape_distance > 1e-6:
+                # 归一化逃离方向
+                escape_direction = escape_direction / escape_distance
+                
+                # 设置逃离距离（至少逃离UAV覆盖范围）
+                min_escape_distance = self.observation_radius * 1.2
+                max_escape_distance = self.observation_radius * 2.0
+                escape_distance = self.np_random.uniform(min_escape_distance, max_escape_distance)
+                
+                # 计算逃离目标位置
+                escape_target = current_pos + escape_direction * escape_distance
+                
+                # 确保目标位置在地图边界内
+                escape_target[0] = np.clip(escape_target[0], 10, self.area_size - 10)
+                escape_target[1] = np.clip(escape_target[1], 10, self.area_size - 10)
+                
+                # 设置逃离路径点
+                self.user_waypoints[user_idx] = escape_target
+                
+                # 设置高速逃离
+                direction = escape_target - current_pos
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    escape_speed = self.user_max_speed * 1.2  # 逃离时速度提升20%
+                    self.user_velocities[user_idx] = (direction / distance) * escape_speed
+                
+                # 更新移动阶段
+                self.user_movement_phases[user_idx] = 1  # 逃离阶段
+        else:
+            # 如果没有被覆盖，执行随机移动
+            self._generate_random_waypoint(user_idx)
+
+    def _reassign_user_to_nearest_cluster(self, user_idx):
+        """
+        将用户重新分配到最近的簇
+        
+        参数:
+            user_idx: 用户索引
+        """
+        user_pos = self.user_positions[user_idx, :2]
+        min_distance = float('inf')
+        nearest_cluster = 0
+        
+        for cluster_idx in range(self.n_clusters):
+            cluster_center = self.cluster_centers_history[cluster_idx]
+            distance = np.linalg.norm(user_pos - cluster_center)
+            if distance < min_distance:
+                min_distance = distance
+                nearest_cluster = cluster_idx
+        
+        self.user_cluster_assignments[user_idx] = nearest_cluster
+
+    def _generate_random_waypoint(self, user_idx):
+        """
+        为用户生成完全随机的路径点
+        
+        参数:
+            user_idx: 用户索引
+        """
+        # 在整个地图范围内随机生成路径点
+        waypoint = self.np_random.uniform([10, 10], [self.area_size - 10, self.area_size - 10])
+        self.user_waypoints[user_idx] = waypoint
+        
+        # 设置随机速度
+        direction = waypoint - self.user_positions[user_idx, :2]
+        distance = np.linalg.norm(direction)
+        if distance > 1e-6:
+            speed = self.np_random.uniform(self.user_max_speed * 0.3, self.user_max_speed)
+            self.user_velocities[user_idx] = (direction / distance) * speed
+        else:
+            self.user_velocities[user_idx] = np.zeros(2)
+    
+    def _update_cluster_centers_standard_rpgm(self):
+        """
+        更新簇中心位置 - 标准RPGM参考点移动模型
+        
+        标准RPGM特点：
+        - 簇中心（参考点）按照设定的速度移动
+        - 到达目标点后选择新的迁移目标并可能暂停
+        - 移动模式更加规律和可预测
+        """
+        for cluster_idx in range(self.n_clusters):
+            # 检查簇中心是否在暂停状态
+            if not hasattr(self, 'cluster_pause_times'):
+                self.cluster_pause_times = np.zeros(self.n_clusters)
+            
+            if self.cluster_pause_times[cluster_idx] > 0:
+                self.cluster_pause_times[cluster_idx] -= self.time_step
+                continue  # 暂停期间不移动
+            
+            # 移动簇中心
+            self.cluster_centers_history[cluster_idx] += self.cluster_velocities[cluster_idx] * self.time_step
+            
+            # 边界检查
+            self.cluster_centers_history[cluster_idx, 0] = np.clip(
+                self.cluster_centers_history[cluster_idx, 0], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            self.cluster_centers_history[cluster_idx, 1] = np.clip(
+                self.cluster_centers_history[cluster_idx, 1], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            
+            # 检查是否到达目标点
+            dist_to_target = np.linalg.norm(
+                self.cluster_centers_history[cluster_idx] - self.cluster_waypoints[cluster_idx]
+            )
+            
+            if dist_to_target < self.cluster_migration_speed * self.time_step:  # 如果足够接近目标
+                # 选择新的迁移目标
+                self._generate_new_cluster_target_standard_rpgm(cluster_idx)
+                
+                # 更新簇中心的移动速度
+                direction = self.cluster_waypoints[cluster_idx] - self.cluster_centers_history[cluster_idx]
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    self.cluster_velocities[cluster_idx] = (direction / distance) * self.cluster_migration_speed
+                else:
+                    self.cluster_velocities[cluster_idx] = np.zeros(2)
+                
+                # 高速场景下减少簇中心暂停概率
+                if self.np_random.random() < 0.2:  # 20%概率暂停 - 高速场景下簇中心也很少暂停
+                    pause_time = self.np_random.uniform(*self.cluster_pause_time_range)
+                    self.cluster_pause_times[cluster_idx] = pause_time
+
+    def _update_cluster_centers(self):
+        """
+        更新簇中心位置 - 实现动态热点迁移
+        
+        特点：
+        - 簇中心按照设定的速度向目标点移动
+        - 到达目标点后选择新的迁移目标
+        - 确保簇中心移动不会导致用户分布过于分散
+        """
+        for cluster_idx in range(self.n_clusters):
+            # 移动簇中心
+            self.cluster_centers_history[cluster_idx] += self.cluster_velocities[cluster_idx] * self.time_step
+            
+            # 边界检查
+            self.cluster_centers_history[cluster_idx, 0] = np.clip(
+                self.cluster_centers_history[cluster_idx, 0], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            self.cluster_centers_history[cluster_idx, 1] = np.clip(
+                self.cluster_centers_history[cluster_idx, 1], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            
+            # 检查是否到达目标点
+            dist_to_target = np.linalg.norm(
+                self.cluster_centers_history[cluster_idx] - self.cluster_waypoints[cluster_idx]
+            )
+            
+            if dist_to_target < self.cluster_migration_speed * 2:  # 如果足够接近目标
+                # 选择新的迁移目标
+                self._generate_new_cluster_target(cluster_idx)
+                
+                # 更新簇中心的移动速度
+                direction = self.cluster_waypoints[cluster_idx] - self.cluster_centers_history[cluster_idx]
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    self.cluster_velocities[cluster_idx] = (direction / distance) * self.cluster_migration_speed
+                else:
+                    self.cluster_velocities[cluster_idx] = np.zeros(2)
+    
+    def _generate_new_cluster_target_standard_rpgm(self, cluster_idx):
+        """
+        为簇中心生成新的迁移目标 - 标准RPGM版本
+        
+        标准RPGM特点：
+        - 移动范围更加保守，避免过度分散
+        - 移动模式更加规律和可预测
+        
+        参数:
+            cluster_idx: 簇索引
+        """
+        current_center = self.cluster_centers_history[cluster_idx]
+        
+        # 标准RPGM使用更保守的迁移范围
+        migration_range = self.cluster_std * 2.0  # 使用标准簇标准差的2倍作为迁移范围
+        
+        # 使用极坐标生成目标
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(migration_range * 0.3, migration_range)
+        
+        target_x = current_center[0] + radius * np.cos(angle)
+        target_y = current_center[1] + radius * np.sin(angle)
+        
+        # 确保目标在地图边界内，并避免过于接近边界
+        target_x = np.clip(target_x, self.area_size * 0.1, self.area_size * 0.9)
+        target_y = np.clip(target_y, self.area_size * 0.1, self.area_size * 0.9)
+        
+        self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+
+    def _generate_new_cluster_target(self, cluster_idx):
+        """
+        为簇中心生成新的迁移目标
+        
+        参数:
+            cluster_idx: 簇索引
+        """
+        current_center = self.cluster_centers_history[cluster_idx]
+        
+        # 生成新的迁移目标（在更大范围内，但避免过度分散）
+        migration_range = self.enhanced_cluster_std * 0.6  # 适中的迁移范围
+        
+        # 使用极坐标生成目标
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(migration_range * 0.4, migration_range)
+        
+        target_x = current_center[0] + radius * np.cos(angle)
+        target_y = current_center[1] + radius * np.sin(angle)
+        
+        # 确保目标在地图边界内，并避免过于接近边界
+        target_x = np.clip(target_x, self.area_size * 0.1, self.area_size * 0.9)
+        target_y = np.clip(target_y, self.area_size * 0.1, self.area_size * 0.9)
+        
+        self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+
+    def _execute_long_distance_jump(self, user_idx):
+        """
+        执行用户长距离跳跃行为（模拟车辆快速移动或公共交通）
+        
+        参数:
+            user_idx: 用户索引
+        """
+        # 随机选择一个远距离目标位置
+        jump_distance = self.np_random.uniform(self.max_jump_distance * 0.5, self.max_jump_distance)
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        
+        current_pos = self.user_positions[user_idx, :2]
+        new_x = current_pos[0] + jump_distance * np.cos(angle)
+        new_y = current_pos[1] + jump_distance * np.sin(angle)
+        
+        # 确保新位置在地图边界内
+        new_x = np.clip(new_x, 10, self.area_size - 10)
+        new_y = np.clip(new_y, 10, self.area_size - 10)
+        
+        # 立即移动到新位置
+        self.user_positions[user_idx, :2] = [new_x, new_y]
+        
+        # 设置短暂的暂停时间（模拟到达后的停留）
+        self.user_pause_times[user_idx] = self.np_random.uniform(5, 15)  # 5-15秒暂停
+        
+        # 更新移动阶段
+        self.user_movement_phases[user_idx] = 2  # 跳跃阶段
+        
+        # 重新分配到最近的簇
+        self._reassign_user_to_nearest_cluster(user_idx)
+        
+        # 生成新的路径点
+        new_cluster = self.user_cluster_assignments[user_idx]
+        self._generate_enhanced_cluster_waypoint(user_idx, new_cluster)
+
+    def _execute_user_escape(self, user_idx):
+        """
+        执行用户逃离行为（主动逃离当前UAV覆盖）
+        
+        参数:
+            user_idx: 用户索引
+        """
+        current_pos = self.user_positions[user_idx, :2]
+        
+        # 找到覆盖该用户的所有UAV
+        covering_uavs = []
+        for uav_idx in range(self.n_uavs):
+            if hasattr(self, 'sinr_matrix') and self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
+                covering_uavs.append(uav_idx)
+        
+        if covering_uavs:
+            # 计算所有覆盖UAV的平均位置
+            uav_positions = self.uav_positions[covering_uavs, :2]
+            avg_uav_pos = np.mean(uav_positions, axis=0)
+            
+            # 计算逃离方向（远离UAV的方向）
+            escape_direction = current_pos - avg_uav_pos
+            escape_distance = np.linalg.norm(escape_direction)
+            
+            if escape_distance > 1e-6:
+                # 归一化逃离方向
+                escape_direction = escape_direction / escape_distance
+                
+                # 设置逃离距离（至少逃离UAV覆盖范围）
+                min_escape_distance = self.observation_radius * 1.2
+                max_escape_distance = self.observation_radius * 2.0
+                escape_distance = self.np_random.uniform(min_escape_distance, max_escape_distance)
+                
+                # 计算逃离目标位置
+                escape_target = current_pos + escape_direction * escape_distance
+                
+                # 确保目标位置在地图边界内
+                escape_target[0] = np.clip(escape_target[0], 10, self.area_size - 10)
+                escape_target[1] = np.clip(escape_target[1], 10, self.area_size - 10)
+                
+                # 设置逃离路径点
+                self.user_waypoints[user_idx] = escape_target
+                
+                # 设置高速逃离
+                direction = escape_target - current_pos
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    escape_speed = self.user_max_speed * 1.2  # 逃离时速度提升20%
+                    self.user_velocities[user_idx] = (direction / distance) * escape_speed
+                
+                # 更新移动阶段
+                self.user_movement_phases[user_idx] = 1  # 逃离阶段
+        else:
+            # 如果没有被覆盖，执行随机移动
+            self._generate_random_waypoint(user_idx)
+
+    def _reassign_user_to_nearest_cluster(self, user_idx):
+        """
+        将用户重新分配到最近的簇
+        
+        参数:
+            user_idx: 用户索引
+        """
+        user_pos = self.user_positions[user_idx, :2]
+        min_distance = float('inf')
+        nearest_cluster = 0
+        
+        for cluster_idx in range(self.n_clusters):
+            cluster_center = self.cluster_centers_history[cluster_idx]
+            distance = np.linalg.norm(user_pos - cluster_center)
+            if distance < min_distance:
+                min_distance = distance
+                nearest_cluster = cluster_idx
+        
+        self.user_cluster_assignments[user_idx] = nearest_cluster
+
+    def _generate_random_waypoint(self, user_idx):
+        """
+        为用户生成完全随机的路径点
+        
+        参数:
+            user_idx: 用户索引
+        """
+        # 在整个地图范围内随机生成路径点
+        waypoint = self.np_random.uniform([10, 10], [self.area_size - 10, self.area_size - 10])
+        self.user_waypoints[user_idx] = waypoint
+        
+        # 设置随机速度
+        direction = waypoint - self.user_positions[user_idx, :2]
+        distance = np.linalg.norm(direction)
+        if distance > 1e-6:
+            speed = self.np_random.uniform(self.user_max_speed * 0.3, self.user_max_speed)
+            self.user_velocities[user_idx] = (direction / distance) * speed
+        else:
+            self.user_velocities[user_idx] = np.zeros(2)
+    
+    def _update_cluster_centers(self):
+        """
+        更新簇中心位置 - 实现动态热点迁移
+        
+        特点：
+        - 簇中心按照设定的速度向目标点移动
+        - 到达目标点后选择新的迁移目标
+        - 确保簇中心移动不会导致用户分布过于分散
+        """
+        for cluster_idx in range(self.n_clusters):
+            # 移动簇中心
+            self.cluster_centers_history[cluster_idx] += self.cluster_velocities[cluster_idx] * self.time_step
+            
+            # 边界检查
+            self.cluster_centers_history[cluster_idx, 0] = np.clip(
+                self.cluster_centers_history[cluster_idx, 0], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            self.cluster_centers_history[cluster_idx, 1] = np.clip(
+                self.cluster_centers_history[cluster_idx, 1], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            
+            # 检查是否到达目标点
+            dist_to_target = np.linalg.norm(
+                self.cluster_centers_history[cluster_idx] - self.cluster_waypoints[cluster_idx]
+            )
+            
+            if dist_to_target < self.cluster_migration_speed * 2:  # 如果足够接近目标
+                # 选择新的迁移目标
+                self._generate_new_cluster_target(cluster_idx)
+                
+                # 更新簇中心的移动速度
+                direction = self.cluster_waypoints[cluster_idx] - self.cluster_centers_history[cluster_idx]
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    self.cluster_velocities[cluster_idx] = (direction / distance) * self.cluster_migration_speed
+                else:
+                    self.cluster_velocities[cluster_idx] = np.zeros(2)
+    
+    def _generate_new_cluster_target(self, cluster_idx):
+        """
+        为簇中心生成新的迁移目标
+        
+        参数:
+            cluster_idx: 簇索引
+        """
+        current_center = self.cluster_centers_history[cluster_idx]
+        
+        # 生成新的迁移目标（在更大范围内，但避免过度分散）
+        migration_range = self.enhanced_cluster_std * 0.6  # 适中的迁移范围
+        
+        # 使用极坐标生成目标
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(migration_range * 0.4, migration_range)
+        
+        target_x = current_center[0] + radius * np.cos(angle)
+        target_y = current_center[1] + radius * np.sin(angle)
+        
+        # 确保目标在地图边界内，并避免过于接近边界
+        target_x = np.clip(target_x, self.area_size * 0.1, self.area_size * 0.9)
+        target_y = np.clip(target_y, self.area_size * 0.1, self.area_size * 0.9)
+        
+        self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+
+    def _predict_belief_map(self):
+        """
+        Predicts the next state of the belief map based on a diffusion model.
+        This simulates the movement of users.
+        """
+        if not self.users_dynamic:
+            return
+            
+        # 1. Decay: Belief naturally decreases over time
+        self.belief_map *= self.belief_decay
+
+        # 2. Diffusion: Belief spreads to neighbors
+        # Using a simple 3x3 averaging kernel for diffusion
+        kernel = np.ones((3, 3)) * self.belief_diffusion_factor / 9.0
+        center_val = 1 - self.belief_diffusion_factor
+        kernel[1, 1] = center_val
+        
+        # Apply convolution. Using 'scipy.signal.convolve2d' would be better,
+        # but to avoid new dependencies, we'll use a simple manual loop.
+        # For simplicity and performance, we'll use a more direct neighbor sum approach.
+        diffused_map = self.belief_map.copy()
+        padded_map = np.pad(self.belief_map, 1, mode='edge')
+        
+        for r in range(self.grid_resolution):
+            for c in range(self.grid_resolution):
+                # Sum of 8 neighbors
+                neighbor_sum = np.sum(padded_map[r:r+3, c:c+3]) - padded_map[r+1, c+1]
+                # Current cell loses belief to neighbors
+                loss = self.belief_map[r, c] * self.belief_diffusion_factor
+                # Current cell gains belief from neighbors
+                gain = neighbor_sum / 8.0 * self.belief_diffusion_factor
+                diffused_map[r, c] = self.belief_map[r, c] - loss + gain
+        
+        self.belief_map = np.clip(diffused_map, 1e-9, 1.0)
+
+        # 3. Normalize: Ensure the map remains a probability distribution
+        total_belief = np.sum(self.belief_map)
+        if total_belief > 1e-9:
+            self.belief_map /= total_belief
+
+    def _update_belief_map_from_observation(self):
+        """
+        Updates the belief map based on UAV observations.
+        """
+        if not self.users_dynamic:
+            return
+
+        # Create a map of observed cells
+        observed_cells = np.zeros_like(self.belief_map, dtype=bool)
+        user_found_in_cell = np.zeros_like(self.belief_map, dtype=bool)
+
+        # Mark cells with found users
+        for user_idx in range(self.n_users):
+            # Check if this user is covered by any UAV
+            is_covered = False
+            for uav_idx in range(self.n_uavs):
+                if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
+                    is_covered = True
+                    break
+            
+            if is_covered:
+                gx, gy = self._get_grid_coords(self.user_positions[user_idx])
+                user_found_in_cell[gy, gx] = True
+
+        # Mark all observed cells (within UAVs' observation radius)
+        cell_size = self.area_size / self.grid_resolution
+        obs_radius_in_cells = int(self.observation_radius / cell_size)
+        
+        for uav_idx in range(self.n_uavs):
+            uav_gx, uav_gy = self._get_grid_coords(self.uav_positions[uav_idx])
+            
+            # A simple square approximation for the observation circle
+            min_x = max(0, uav_gx - obs_radius_in_cells)
+            max_x = min(self.grid_resolution, uav_gx + obs_radius_in_cells + 1)
+            min_y = max(0, uav_gy - obs_radius_in_cells)
+            max_y = min(self.grid_resolution, uav_gy + obs_radius_in_cells + 1)
+            
+            observed_cells[min_y:max_y, min_x:max_x] = True
+
+        # Apply Bayesian-like updates
+        # P(user|obs) = P(obs|user) * P(user) / P(obs)
+        
+        # Increase belief where users were found
+        # P(user_found | user_present) is high, let's say 0.9
+        # P(user_found | user_absent) is low, let's say 0.1
+        p_obs_given_user = 0.9
+        p_obs_given_no_user = 0.1
+        
+        # Cells where a user was found
+        positive_obs_mask = user_found_in_cell
+        prior_belief = self.belief_map[positive_obs_mask]
+        # Bayes update: P(user|+) = (P(+|user)P(user)) / (P(+|user)P(user) + P(+|no_user)P(no_user))
+        numerator = p_obs_given_user * prior_belief
+        denominator = numerator + p_obs_given_no_user * (1 - prior_belief)
+        posterior_belief_pos = numerator / (denominator + 1e-9)
+        self.belief_map[positive_obs_mask] = (1 - self.belief_update_strength) * prior_belief + self.belief_update_strength * posterior_belief_pos
+
+        # Cells observed but no user was found
+        negative_obs_mask = observed_cells & ~user_found_in_cell
+        prior_belief = self.belief_map[negative_obs_mask]
+        # Bayes update: P(user|-) = (P(-|user)P(user)) / (P(-|user)P(user) + P(-|no_user)P(no_user))
+        # P(-|user) = 1 - P(+|user) = 0.1
+        # P(-|no_user) = 1 - P(+|no_user) = 0.9
+        numerator = (1 - p_obs_given_user) * prior_belief
+        denominator = numerator + (1 - p_obs_given_no_user) * (1 - prior_belief)
+        posterior_belief_neg = numerator / (denominator + 1e-9)
+        self.belief_map[negative_obs_mask] = (1 - self.belief_update_strength) * prior_belief + self.belief_update_strength * posterior_belief_neg
+
+        # Normalize again
+        total_belief = np.sum(self.belief_map)
+        if total_belief > 1e-9:
+            self.belief_map /= total_belief
     
     def _compute_routing_paths(self):
         """
@@ -2302,6 +3447,18 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 7. 当前步数 (归一化到[0,1])
         step_normalized = np.array([self.current_step / self.max_steps])
         state_components.append(step_normalized)
+        
+        # 8. 动态密度预测图 (如果启用) - 核心创新
+        if self.density_prediction and hasattr(self, 'predicted_density_map') and self.predicted_density_map is not None:
+            # 将预测密度图展平并归一化
+            # 使用最大密度值进行归一化，确保数值稳定性
+            max_density = np.max(self.predicted_density_map)
+            if max_density > 1e-9:
+                normalized_predicted_density = self.predicted_density_map.flatten() / max_density
+            else:
+                normalized_predicted_density = self.predicted_density_map.flatten()
+            
+            state_components.append(normalized_predicted_density)
         
         # 组合所有状态组件
         state = np.concatenate(state_components)

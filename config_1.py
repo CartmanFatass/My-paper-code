@@ -1,5 +1,5 @@
 # HMASD算法配置参数 - 基于论文《Hierarchical Multi-Agent Skill Discovery》附录E中的超参数设置
-# 专用于场景4：强制中继模式
+# 专用于场景4和场景5
 
 class Config:
     # 调试参数
@@ -16,10 +16,11 @@ class Config:
     n_users = 30                    # 用户数量
     area_size = 8000               # 区域大小 (米)
     max_hops = 5                   # 最大跳数
-    user_distribution = 'multi_cluster'  # 用户分布类型
+    user_distribution = 'coverage_hole'  # 用户分布类型
     channel_model = 'probabilistic'      # 信道模型
     use_fdma = True                      # FDMA
     bandwidth = 20e6                     # 每个无人机的带宽 (Hz)
+    reward_type = "health"               # 奖励类型: "naive" (仅覆盖率) 或 "health" (网络健康度)
     
     # 场景4参数
     n_clusters = 5                 # 用户簇数量
@@ -148,7 +149,13 @@ class Config:
     max_connections = 25                     # 最大连接数
     uav_init_mode = 'random'#'start_area'            # 无人机初始化模式
     uav_start_area_size = 100               # 起始区域大小（米）
-    grid_resolution = 50                    # 栅格分辨率
+    grid_resolution = 100                    # 栅格分辨率 (场景5使用100, 场景4使用50)
+
+
+    # --- 场景5: 动态环境与信念地图参数 ---
+    users_dynamic = True         # 用户是否动态移动
+    user_max_speed = 5           # 用户最大移动速度 (m/s)
+    belief_decay = 0.99          # 信念地图衰减因子
 
 
     # --- 可视化和绘图参数 ---
