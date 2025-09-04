@@ -1,8 +1,11 @@
 import numpy as np
 import heapq
+import copy
 from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict
 from scipy.spatial.distance import cdist
+from filterpy.kalman import KalmanFilter
+
 
 class UAVForcedRelayEnv(ParallelEnv):
     """
@@ -16,115 +19,205 @@ class UAVForcedRelayEnv(ParallelEnv):
         "is_parallelizable": True,
     }
 
-    def __init__(
-        self,
-        n_uavs=12,
-        n_users=80,
-        area_size=2500,
-        height_range=(50, 200),
-        max_speed=30,
-        time_step=1.0,
-        max_steps=5000,
-        user_distribution="forced_relay_cluster",
-        render_mode=None,
-        seed=None,
-        min_sinr=3,
-        max_connections=25,
-        max_hops=4,
-        n_ground_bs=1,
-        n_clusters=4,
-        cluster_std=80,
-        central_area_ratio=0.6,
-        base_station_distance_factor=0.8,
-        observation_radius=600,
-        max_observed_uavs=15,
-        max_observed_users=25,
-        max_observed_bs=4,
-        use_fdma=False,
-        bandwidth=20e6,
-        ground_bs_tx_power=30,
-        uav_init_mode="start_area",
-        uav_start_area_size=500,
-        # Randomization control parameters
-        randomize_bs=True,  # 是否随机化基站位置
-        randomize_users=True,  # 是否随机化用户簇中心
-        randomize_uav_start=True,  # 是否随机化无人机起始区域
-        aclr_db=45,  # 邻道泄漏比 (Adjacent Channel Leakage Ratio) in dB
-        test_reward_mode=False,
-        # Reward type selection
-        reward_type="health",  # "naive" for coverage only, "health" for network health score
-        # Network Health Score Weights
-        w_connectivity=0.5,
-        w_diversity=1.0,
-        w_coverage=1.0,
-        w_dispersion=0.05,
-    ):
+    def __init__(self, config=None, **kwargs):
         super().__init__()
 
-        # 环境参数
-        self.n_uavs = n_uavs
-        self.n_users = n_users
-        self.area_size = area_size
-        self.height_range = height_range
-        self.max_speed = max_speed
-        self.time_step = time_step
-        self.max_steps = max_steps
-        self.user_distribution = user_distribution
-        self.render_mode = render_mode
-        self.seed_val = seed
-        self.np_random = np.random.RandomState(seed)
+        # 如果没有传入config对象，则使用默认值或kwargs中的值
+        if config is None:
+            # 为了向后兼容，如果没有config对象，使用kwargs中的参数
+            # 基本环境参数
+            self.n_uavs = kwargs.get('n_uavs', 12)
+            self.n_users = kwargs.get('n_users', 80)
+            self.area_size = kwargs.get('area_size', 2500)
+            self.height_range = kwargs.get('height_range', (50, 200))
+            self.max_speed = kwargs.get('max_speed', 30)
+            self.time_step = kwargs.get('time_step', 1.0)
+            self.max_steps = kwargs.get('max_steps', 5000)
+            self.user_distribution = kwargs.get('user_distribution', "forced_relay_cluster")
+            self.user_max_speed = kwargs.get('user_max_speed', 5.0)
+            self.user_movement_model = kwargs.get('user_movement_model', "random_walk")
+            self.cluster_migration_speed = kwargs.get('cluster_migration_speed', 15.0)
+            self.cluster_pause_time_range = kwargs.get('cluster_pause_time_range', (0, 5))
+            self.user_pause_time_range = kwargs.get('user_pause_time_range', (0, 3))
+            self.render_mode = kwargs.get('render_mode', None)
+            self.seed_val = kwargs.get('seed', None)
+            
+            # 场景特定参数
+            self.n_clusters = kwargs.get('n_clusters', 4)
+            self.cluster_std = kwargs.get('cluster_std', 80)
+            self.central_area_ratio = kwargs.get('central_area_ratio', 0.6)
+            self.base_station_distance_factor = kwargs.get('base_station_distance_factor', 0.8)
+            self.observation_radius = kwargs.get('observation_radius', 600)
+            self.uav_init_mode = kwargs.get('uav_init_mode', "start_area")
+            self.uav_start_area_size = kwargs.get('uav_start_area_size', 500)
+            self.n_ground_bs = kwargs.get('n_ground_bs', 1)
+            self.max_hops = kwargs.get('max_hops', 4)
+            self.min_sinr = kwargs.get('min_sinr', 3)
+            self.max_connections = kwargs.get('max_connections', 25)
+            
+            # 随机化控制参数
+            self.randomize_bs = kwargs.get('randomize_bs', True)
+            self.randomize_users = kwargs.get('randomize_users', True)
+            self.randomize_uav_start = kwargs.get('randomize_uav_start', True)
+            self.test_reward_mode = kwargs.get('test_reward_mode', False)
+            
+            # 奖励类型和权重
+            self.reward_type = kwargs.get('reward_type', "health")
+            self.w_connectivity = kwargs.get('w_connectivity', 0.5)
+            self.w_diversity = kwargs.get('w_diversity', 1.0)
+            self.w_coverage = kwargs.get('w_coverage', 1.0)
+            self.w_dispersion = kwargs.get('w_dispersion', 0.05)
+            self.w_throughput = kwargs.get('w_throughput', 1.0)
+            self.w_handover = kwargs.get('w_handover', 0.1)
+            self.w_pingpong = kwargs.get('w_pingpong', 1.0)
+            self.w_outage = kwargs.get('w_outage', 1.0)
+            self.outage_sinr_threshold_db = kwargs.get('outage_sinr_threshold_db', -5)
+            self.predictive_handover = kwargs.get('predictive_handover', False)
+            
+            # 预测状态相关参数
+            self.enable_predictive_state = kwargs.get('enable_predictive_state', False)
+            self.prediction_horizon = kwargs.get('prediction_horizon', 3)
+            
+            # 卡尔曼滤波控制参数
+            self.enable_cluster_kalman_filter = kwargs.get('enable_cluster_kalman_filter', False)
+            
+            # 通信参数
+            self.carrier_frequency = kwargs.get('carrier_frequency', 2e9)
+            self.tx_power = kwargs.get('tx_power', 23)
+            self.noise_power = kwargs.get('noise_power', -94)
+            self.use_fdma = kwargs.get('use_fdma', False)
+            self.bandwidth = kwargs.get('bandwidth', 20e6)
+            self.ground_bs_tx_power = kwargs.get('ground_bs_tx_power', 30)
+            self.aclr_db = kwargs.get('aclr_db', 45)
+            
+            # 局部观测参数
+            self.max_observed_uavs = kwargs.get('max_observed_uavs', 15)
+            self.max_observed_users = kwargs.get('max_observed_users', 25)
+            self.max_observed_bs = kwargs.get('max_observed_bs', 4)
+        else:
+            # 使用config对象通过getattr获取参数
+            # 基本环境参数
+            self.n_uavs = getattr(config, 'n_agents', 12)  # n_agents对应n_uavs
+            self.n_users = getattr(config, 'n_users', 80)
+            self.area_size = getattr(config, 'area_size', 2500)
+            self.height_range = getattr(config, 'height_range', (50, 200))
+            self.max_speed = getattr(config, 'max_speed', 30)
+            self.time_step = getattr(config, 'time_step', 1.0)
+            self.max_steps = getattr(config, 'max_steps', 5000)
+            self.user_distribution = getattr(config, 'user_distribution', "forced_relay_cluster")
+            self.user_max_speed = getattr(config, 'user_max_speed', 5.0)
+            self.user_movement_model = getattr(config, 'user_movement_model', "random_walk")
+            self.cluster_migration_speed = getattr(config, 'cluster_migration_speed', 15.0)
+            self.cluster_pause_time_range = getattr(config, 'cluster_pause_time_range', (0, 5))
+            self.user_pause_time_range = getattr(config, 'user_pause_time_range', (0, 3))
+            self.render_mode = kwargs.get('render_mode', None)  # 渲染模式仍从kwargs获取
+            self.seed_val = kwargs.get('seed', None)  # 种子仍从kwargs获取
+            
+            # 场景特定参数
+            self.n_clusters = getattr(config, 'n_clusters', 4)
+            self.cluster_std = getattr(config, 'cluster_std', 80)
+            self.central_area_ratio = getattr(config, 'central_area_ratio', 0.6)
+            self.base_station_distance_factor = getattr(config, 'base_station_distance_factor', 0.8)
+            self.observation_radius = getattr(config, 'observation_radius', 600)
+            self.uav_init_mode = getattr(config, 'uav_init_mode', "start_area")
+            self.uav_start_area_size = getattr(config, 'uav_start_area_size', 500)
+            self.n_ground_bs = getattr(config, 'n_ground_bs', 1)
+            self.max_hops = getattr(config, 'max_hops', 4)
+            self.min_sinr = getattr(config, 'min_sinr', 3)
+            self.max_connections = getattr(config, 'max_connections', 25)
+            
+            # 随机化控制参数
+            self.randomize_bs = getattr(config, 'randomize_bs', True)
+            self.randomize_users = getattr(config, 'randomize_users', True)
+            self.randomize_uav_start = getattr(config, 'randomize_uav_start', True)
+            self.test_reward_mode = getattr(config, 'test_reward_mode', False)
+            
+            # 奖励类型和权重
+            self.reward_type = getattr(config, 'reward_type', "health")
+            self.w_connectivity = getattr(config, 'w_connectivity', 0.5)
+            self.w_diversity = getattr(config, 'w_diversity', 1.0)
+            self.w_coverage = getattr(config, 'w_coverage', 1.0)
+            self.w_dispersion = getattr(config, 'w_dispersion', 0.05)
+            self.w_throughput = getattr(config, 'w_throughput', 1.0)
+            self.w_handover = getattr(config, 'w_handover', 0.1)
+            self.w_pingpong = getattr(config, 'w_pingpong', 1.0)
+            self.w_outage = getattr(config, 'w_outage', 1.0)
+            self.outage_sinr_threshold_db = getattr(config, 'outage_sinr_threshold_db', -5)
+            self.predictive_handover = getattr(config, 'predictive_handover', False)
+            
+            # 预测状态相关参数
+            self.enable_predictive_state = getattr(config, 'enable_predictive_state', False)
+            self.prediction_horizon = getattr(config, 'prediction_horizon', 3)
+            
+            # 卡尔曼滤波控制参数
+            self.enable_cluster_kalman_filter = getattr(config, 'enable_cluster_kalman_filter', False)
+            
+            # 通信参数
+            self.carrier_frequency = getattr(config, 'carrier_frequency', 2e9)
+            self.tx_power = getattr(config, 'tx_power', 23)
+            self.noise_power = getattr(config, 'noise_power', -94)
+            self.use_fdma = getattr(config, 'use_fdma', False)
+            self.bandwidth = getattr(config, 'bandwidth', 20e6)
+            self.ground_bs_tx_power = getattr(config, 'ground_bs_tx_power', 30)
+            self.aclr_db = getattr(config, 'aclr_db', 45)
+            
+            # 局部观测参数
+            self.max_observed_uavs = getattr(config, 'max_observed_uavs', 15)
+            self.max_observed_users = getattr(config, 'max_observed_users', 25)
+            self.max_observed_bs = getattr(config, 'max_observed_bs', 4)
+
+        # 初始化随机数生成器
+        self.np_random = np.random.RandomState(self.seed_val)
 
         # Track user service status to provide sparse rewards correctly
         self.user_serviced_status = np.zeros(self.n_users, dtype=bool)
         
-        # 场景特定参数
-        self.n_clusters = n_clusters
-        self.cluster_std = cluster_std
-        self.central_area_ratio = central_area_ratio
-        self.base_station_distance_factor = base_station_distance_factor
-        self.observation_radius = observation_radius
-        self.uav_init_mode = uav_init_mode
-        self.uav_start_area_size = uav_start_area_size
-        self.n_ground_bs = n_ground_bs
-        self.max_hops = max_hops
-        self.min_sinr = min_sinr
-        self.max_connections = max_connections
+        # 切换和预测相关
+        # 根据配置决定是使用用户级别还是簇级别的卡尔曼滤波器
+        if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+            # RPGM模式下，为每个簇维持一个卡尔曼滤波器
+            self.cluster_kalman_filters = [self._create_kalman_filter(self.time_step) for _ in range(self.n_clusters)]
+            self.kalman_filters = None  # 不使用用户级别的滤波器
+        else:
+            # 传统模式，为每个用户维持一个卡尔曼滤波器
+            self.kalman_filters = [self._create_kalman_filter(self.time_step) for _ in range(self.n_users)]
+            self.cluster_kalman_filters = None
+            
+        self.user_velocities = np.zeros((self.n_users, 3))
+        self.user_serving_uav = -np.ones(self.n_users, dtype=int) # -1表示未被服务
+        self.user_handover_history = [[] for _ in range(self.n_users)]
+        self.handover_count = 0
+        self.ping_pong_count = 0
+        self.ping_pong_window = getattr(config, 'ping_pong_window', 5) if config else 5 # 5个时间步内发生A->B->A切换算作乒乓切换
         
-        # 随机化控制参数
-        self.randomize_bs = randomize_bs
-        self.randomize_users = randomize_users
-        self.randomize_uav_start = randomize_uav_start
-        self.test_reward_mode = test_reward_mode
-
-        # Store reward type and weights
-        self.reward_type = reward_type
-        self.w_connectivity = w_connectivity
-        self.w_diversity = w_diversity
-        self.w_coverage = w_coverage
-        self.w_dispersion = w_dispersion
+        # RPGM 移动模型状态变量 (仅在 user_movement_model="rpgm" 时使用)
+        self.user_waypoints = np.zeros((self.n_users, 2))  # 用户路径点 (2D)
+        self.user_cluster_assignments = np.zeros(self.n_users, dtype=int)  # 用户簇分配
+        self.cluster_centers_history = np.zeros((self.n_clusters, 2))  # 簇中心历史位置
+        self.cluster_velocities = np.zeros((self.n_clusters, 2))  # 簇中心移动速度
+        self.cluster_waypoints = np.zeros((self.n_clusters, 2))  # 簇中心目标点
+        self.user_pause_times = np.zeros(self.n_users)  # 用户暂停时间
+        self.cluster_pause_times = np.zeros(self.n_clusters)  # 簇中心暂停时间
         
-        # 通信参数
-        self.carrier_frequency = 2e9
-        self.tx_power = 23
-        self.noise_power = -94  # 
-        self.use_fdma = use_fdma
-        self.bandwidth = bandwidth
-        self.ground_bs_tx_power = ground_bs_tx_power
-        self.aclr_db = aclr_db  # 存储ACLR值
+        # 计算ACLR线性值
         self.aclr_linear = 10 ** (-self.aclr_db / 10)  # 转换为线性值以便计算
 
-        # 局部观测参数
-        self.max_observed_uavs = max_observed_uavs
-        self.max_observed_users = max_observed_users
-        self.max_observed_bs = max_observed_bs
-
         # 智能体列表
-        self.possible_agents = [f"uav_{i}" for i in range(n_uavs)]
+        self.possible_agents = [f"uav_{i}" for i in range(self.n_uavs)]
         self.agents = self.possible_agents.copy()
 
         # 观测和动作空间
-        # obs_dim: 3(自身位置) + 3(最近邻无人机) + 4(自身状态，包含跳数) + N_user*4(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
-        self.obs_dim = 3 + 3 + 4 + max_observed_users * 4 + max_observed_uavs * 4 + max_observed_bs * 4 + 1
+        if self.predictive_handover:
+            # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*6(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+            self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 6 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
+            # If predictive handover is enabled, force the reward type to 'handover'
+            if self.reward_type != "handover":
+                print("Warning: predictive_handover is True, forcing reward_type to 'handover'.")
+                self.reward_type = "handover"
+        else:
+            # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*4(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+            self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 4 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
+        
         self.observation_spaces = {
             agent: Dict({
                 "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
@@ -166,8 +259,33 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 7. 当前步数: 1
         step_dim = 1
         
+        # 8. 预测状态flag: 1 (是否启用预测状态)
+        predictive_flag_dim = 1
+        
+        # 9. 预测信息 (如果启用预测状态)
+        predictive_info_dim = 0
+        if self.enable_predictive_state:
+            # 用户预测位置: n_users * 2 (预测的x, y位置)
+            # 用户预测速度: n_users * 2 (预测的vx, vy速度)
+            predictive_info_dim = self.n_users * 2 + self.n_users * 2
+        
         # 重新设置state_dim
-        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + comm_quality_dim + step_dim
+        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + comm_quality_dim + step_dim + predictive_flag_dim + predictive_info_dim
+
+    def _create_kalman_filter(self, dt, process_noise=1.0, measurement_noise=10.0):
+        """创建一个配置好的filterpy卡尔曼滤波器实例"""
+        kf = KalmanFilter(dim_x=4, dim_z=2)
+        kf.x = np.zeros(4)  # 状态向量 [px, py, vx, vy]
+        kf.F = np.array([[1, 0, dt, 0],
+                           [0, 1, 0, dt],
+                           [0, 0, 1, 0],
+                           [0, 0, 0, 1]])  # 状态转移矩阵
+        kf.H = np.array([[1, 0, 0, 0],
+                           [0, 1, 0, 0]])  # 观测矩阵
+        kf.P *= 100  # 初始协方差
+        kf.R = np.eye(2) * measurement_noise  # 测量噪声
+        kf.Q = np.eye(4) * process_noise  # 过程噪声
+        return kf
 
     def get_state_dim(self):
         """返回全局状态维度"""
@@ -439,7 +557,17 @@ class UAVForcedRelayEnv(ParallelEnv):
                 user_position_3d = np.array([user_position_2d[0], user_position_2d[1], 1.5])
                 
                 user_positions[user_idx] = user_position_3d
+                
+                # 【RPGM关键】：记录用户的簇分配，用于RPGM移动模型
+                if hasattr(self, 'user_cluster_assignments'):
+                    self.user_cluster_assignments[user_idx] = cluster_idx
+                
                 user_idx += 1
+        
+        # 【RPGM关键】：初始化簇中心历史位置，用于RPGM移动模型
+        if hasattr(self, 'cluster_centers_history'):
+            for cluster_idx in range(self.n_clusters):
+                self.cluster_centers_history[cluster_idx] = cluster_centers[cluster_idx]
         
         return user_positions
     
@@ -1188,17 +1316,42 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
         self.user_positions = self._generate_user_positions()
+        self._init_user_velocities()
         
+        # 3. 初始化移动模型特定的状态
+        if self.user_movement_model == "rpgm":
+            self._initialize_user_waypoints_rpgm()
+        
+        # 初始化卡尔曼滤波器
+        if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+            # 初始化簇级别的卡尔曼滤波器
+            for cluster_idx in range(self.n_clusters):
+                kf = self.cluster_kalman_filters[cluster_idx]
+                cluster_center = self.cluster_centers_history[cluster_idx]
+                cluster_velocity = self.cluster_velocities[cluster_idx]
+                kf.x = np.array([cluster_center[0], cluster_center[1], cluster_velocity[0], cluster_velocity[1]])
+        else:
+            # 初始化用户级别的卡尔曼滤波器
+            for i in range(self.n_users):
+                kf = self.kalman_filters[i]
+                pos = self.user_positions[i, :2]
+                vel = self.user_velocities[i, :2]
+                kf.x = np.array([pos[0], pos[1], vel[0], vel[1]])
+
         # 3. 初始化连接和路由信息
         self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
         self.sinr_matrix = np.zeros((self.n_uavs, self.n_users))
         self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)
         self.uav_bs_connections = np.zeros((self.n_uavs, self.n_ground_bs), dtype=bool)
         self.routing_paths = {}
+        self.handover_count = 0
+        self.ping_pong_count = 0
+        self.user_serving_uav.fill(-1)
+        self.user_handover_history = [[] for _ in range(self.n_users)]
         
         # 4. 更新信道状态、连接和路由
-        self._update_channel_state()  # 从父类继承
-        self._update_uav_connections() # 从父类继承
+        self._update_channel_state()
+        self._update_uav_connections()
         self._compute_routing_paths()  # 使用本类的路由计算
         
         # 4.5 初始化新增的 Reward Shaping 相关变量
@@ -1223,8 +1376,295 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 为每个智能体的info添加正确的state
         for agent in self.agents:
             infos[agent]['state'] = current_state.copy()
+            infos[agent]['handover_count'] = self.handover_count
+            infos[agent]['ping_pong_count'] = self.ping_pong_count
             
         return observations, infos
+
+    def _init_user_velocities(self):
+        """初始化用户的速度"""
+        for i in range(self.n_users):
+            speed = self.np_random.uniform(0, self.user_max_speed)
+            angle = self.np_random.uniform(0, 2 * np.pi)
+            self.user_velocities[i, 0] = speed * np.cos(angle)  # vx
+            self.user_velocities[i, 1] = speed * np.sin(angle)  # vy
+            self.user_velocities[i, 2] = 0  # vz, 用户在地面移动
+
+    def _move_users(self):
+        """根据选择的移动模型更新用户位置"""
+        if self.user_movement_model == "rpgm":
+            self._update_user_positions_rpgm()
+        else:
+            # 默认使用随机游走模型
+            self._move_users_random_walk()
+
+    def _move_users_random_walk(self):
+        """随机游走移动模型：更新用户位置，并处理边界反弹"""
+        for i in range(self.n_users):
+            self.user_positions[i] += self.user_velocities[i] * self.time_step
+
+            # 边界检测和反弹
+            if not (0 <= self.user_positions[i, 0] <= self.area_size):
+                self.user_velocities[i, 0] *= -1
+                self.user_positions[i, 0] = np.clip(self.user_positions[i, 0], 0, self.area_size)
+            
+            if not (0 <= self.user_positions[i, 1] <= self.area_size):
+                self.user_velocities[i, 1] *= -1
+                self.user_positions[i, 1] = np.clip(self.user_positions[i, 1], 0, self.area_size)
+
+    def _update_user_positions_rpgm(self):
+        """
+        RPGM 移动模型：更新用户位置 - 标准参考点群体移动模型
+        
+        标准RPGM特点：
+        - 簇中心按照设定速度移动
+        - 用户围绕其所属簇的参考点移动
+        - 支持标准的暂停时间
+        """
+        # 1. 更新簇中心位置（标准RPGM的参考点移动）
+        self._update_cluster_centers_rpgm()
+
+        # 2. 更新用户位置 - 标准RPGM版本
+        for i in range(self.n_users):
+            # 检查用户暂停状态
+            if self.user_pause_times[i] > 0:
+                self.user_pause_times[i] -= self.time_step
+                continue  # 暂停期间不移动
+            
+            # 标准RPGM移动：用户跟随其参考点移动
+            self.user_positions[i, :2] += self.user_velocities[i, :2] * self.time_step
+            
+            # 边界检查
+            self.user_positions[i, 0] = np.clip(self.user_positions[i, 0], 0, self.area_size)
+            self.user_positions[i, 1] = np.clip(self.user_positions[i, 1], 0, self.area_size)
+
+            # 检查是否到达路径点
+            dist_to_waypoint = np.linalg.norm(self.user_positions[i, :2] - self.user_waypoints[i])
+            if dist_to_waypoint < self.user_max_speed * self.time_step:  # 如果足够接近
+                # 获取用户当前所属的簇
+                user_cluster = self.user_cluster_assignments[i]
+                
+                # RPGM：增加跨簇移动概率以模拟更大范围的移动
+                if self.np_random.random() < 0.6:  # 60%概率在本簇内移动
+                    self._generate_intra_cluster_waypoint(i, user_cluster)
+                else:  # 40%概率跨簇移动
+                    self._generate_inter_cluster_waypoint(i)
+                
+                # 设置新的速度
+                direction = self.user_waypoints[i] - self.user_positions[i, :2]
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    speed = self.np_random.uniform(self.user_max_speed * 0.5, self.user_max_speed)
+                    self.user_velocities[i, :2] = (direction / distance) * speed
+                else:
+                    self.user_velocities[i, :2] = np.zeros(2)
+                
+                # 设置暂停时间
+                if self.np_random.random() < 0.1:  # 10%概率暂停
+                    pause_time = self.np_random.uniform(*self.user_pause_time_range)
+                    self.user_pause_times[i] = pause_time
+
+    def _update_cluster_centers_rpgm(self):
+        """
+        更新簇中心位置 - 标准RPGM参考点移动模型
+        
+        标准RPGM特点：
+        - 簇中心（参考点）按照设定的速度移动
+        - 到达目标点后选择新的迁移目标并可能暂停
+        - 移动模式更加规律和可预测
+        """
+        for cluster_idx in range(self.n_clusters):
+            # 检查簇中心是否在暂停状态
+            if self.cluster_pause_times[cluster_idx] > 0:
+                self.cluster_pause_times[cluster_idx] -= self.time_step
+                continue  # 暂停期间不移动
+            
+            # 移动簇中心
+            self.cluster_centers_history[cluster_idx] += self.cluster_velocities[cluster_idx] * self.time_step
+            
+            # 边界检查
+            self.cluster_centers_history[cluster_idx, 0] = np.clip(
+                self.cluster_centers_history[cluster_idx, 0], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            self.cluster_centers_history[cluster_idx, 1] = np.clip(
+                self.cluster_centers_history[cluster_idx, 1], 
+                self.area_size * 0.05, 
+                self.area_size * 0.95
+            )
+            
+            # 检查是否到达目标点
+            dist_to_target = np.linalg.norm(
+                self.cluster_centers_history[cluster_idx] - self.cluster_waypoints[cluster_idx]
+            )
+            
+            if dist_to_target < self.cluster_migration_speed * self.time_step:  # 如果足够接近目标
+                # 选择新的迁移目标
+                self._generate_new_cluster_target_rpgm(cluster_idx)
+                
+                # 更新簇中心的移动速度
+                direction = self.cluster_waypoints[cluster_idx] - self.cluster_centers_history[cluster_idx]
+                distance = np.linalg.norm(direction)
+                if distance > 1e-6:
+                    self.cluster_velocities[cluster_idx] = (direction / distance) * self.cluster_migration_speed
+                else:
+                    self.cluster_velocities[cluster_idx] = np.zeros(2)
+                
+                # 设置簇中心暂停概率
+                if self.np_random.random() < 0.2:  # 20%概率暂停
+                    pause_time = self.np_random.uniform(*self.cluster_pause_time_range)
+                    self.cluster_pause_times[cluster_idx] = pause_time
+
+    def _generate_new_cluster_target_rpgm(self, cluster_idx):
+        """
+        为簇中心生成新的迁移目标 - 标准RPGM版本
+        
+        标准RPGM特点：
+        - 移动范围更加保守，避免过度分散
+        - 移动模式更加规律和可预测
+        
+        参数:
+            cluster_idx: 簇索引
+        """
+        current_center = self.cluster_centers_history[cluster_idx]
+        
+        # 标准RPGM使用更保守的迁移范围
+        migration_range = self.cluster_std * 2.0  # 使用标准簇标准差的2倍作为迁移范围
+        
+        # 使用极坐标生成目标
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(migration_range * 0.3, migration_range)
+        
+        target_x = current_center[0] + radius * np.cos(angle)
+        target_y = current_center[1] + radius * np.sin(angle)
+        
+        # 确保目标在地图边界内，并避免过于接近边界
+        target_x = np.clip(target_x, self.area_size * 0.1, self.area_size * 0.9)
+        target_y = np.clip(target_y, self.area_size * 0.1, self.area_size * 0.9)
+        
+        self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+
+    def _generate_intra_cluster_waypoint(self, user_idx, cluster_idx):
+        """
+        在指定簇内为用户生成路径点
+        
+        参数:
+            user_idx: 用户索引
+            cluster_idx: 簇索引
+        """
+        cluster_center = self.cluster_centers_history[cluster_idx]
+        
+        # 在簇中心周围生成路径点（使用簇标准差的1.5倍作为活动范围）
+        activity_radius = self.cluster_std * 1.5
+        
+        # 生成极坐标形式的随机偏移
+        angle = self.np_random.uniform(0, 2 * np.pi)
+        radius = self.np_random.uniform(0, activity_radius)
+        
+        waypoint = cluster_center + radius * np.array([np.cos(angle), np.sin(angle)])
+        
+        # 确保路径点在地图边界内
+        waypoint[0] = np.clip(waypoint[0], 10, self.area_size - 10)
+        waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
+        
+        self.user_waypoints[user_idx] = waypoint
+    
+    def _generate_inter_cluster_waypoint(self, user_idx):
+        """
+        为用户生成跨簇路径点
+        
+        参数:
+            user_idx: 用户索引
+        """
+        # 随机选择一个不同的簇作为目标
+        current_cluster = self.user_cluster_assignments[user_idx]
+        available_clusters = [i for i in range(self.n_clusters) if i != current_cluster]
+        
+        if available_clusters:
+            target_cluster = self.np_random.choice(available_clusters)
+            target_cluster_center = self.cluster_centers_history[target_cluster]
+            
+            # 在目标簇附近生成路径点
+            activity_radius = self.cluster_std * 1.2
+            angle = self.np_random.uniform(0, 2 * np.pi)
+            radius = self.np_random.uniform(0, activity_radius)
+            
+            waypoint = target_cluster_center + radius * np.array([np.cos(angle), np.sin(angle)])
+            
+            # 确保路径点在地图边界内
+            waypoint[0] = np.clip(waypoint[0], 10, self.area_size - 10)
+            waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
+            
+            self.user_waypoints[user_idx] = waypoint
+            
+            # 更新用户的簇分配（模拟用户迁移到新的热点区域）
+            self.user_cluster_assignments[user_idx] = target_cluster
+        else:
+            # 如果只有一个簇，则在本簇内生成路径点
+            self._generate_intra_cluster_waypoint(user_idx, current_cluster)
+
+    def _initialize_user_waypoints_rpgm(self):
+        """
+        初始化用户路径点 - RPGM 模型
+        
+        特点：
+        - 初始化簇中心的移动状态
+        - 为用户设置基于簇的路径点
+        - 支持簇迁移模式
+        """
+        # 初始化簇中心的移动状态
+        self._initialize_cluster_migration_rpgm()
+        
+        for i in range(self.n_users):
+            # 获取用户所属的簇
+            user_cluster = self.user_cluster_assignments[i]
+            
+            # 80%概率在本簇内移动
+            if self.np_random.random() < 0.8:
+                self._generate_intra_cluster_waypoint(i, user_cluster)
+            else:  # 20%概率跨簇移动
+                self._generate_inter_cluster_waypoint(i)
+            
+            # 设置初始速度
+            direction = self.user_waypoints[i] - self.user_positions[i, :2]
+            distance = np.linalg.norm(direction)
+            if distance > 1e-6:
+                speed = self.np_random.uniform(self.user_max_speed * 0.5, self.user_max_speed)
+                self.user_velocities[i, :2] = (direction / distance) * speed
+            else:
+                self.user_velocities[i, :2] = np.zeros(2)
+    
+    def _initialize_cluster_migration_rpgm(self):
+        """
+        初始化簇中心的迁移状态 - RPGM 模型
+        """
+        # 为每个簇中心设置初始移动目标
+        for cluster_idx in range(self.n_clusters):
+            # 在当前簇中心周围选择一个迁移目标
+            current_center = self.cluster_centers_history[cluster_idx]
+            
+            # 生成迁移目标（在较大范围内）
+            migration_range = self.cluster_std * 2.0  # 迁移范围
+            angle = self.np_random.uniform(0, 2 * np.pi)
+            radius = self.np_random.uniform(migration_range * 0.3, migration_range)
+            
+            target_x = current_center[0] + radius * np.cos(angle)
+            target_y = current_center[1] + radius * np.sin(angle)
+            
+            # 确保目标在地图边界内
+            target_x = np.clip(target_x, self.area_size * 0.05, self.area_size * 0.95)
+            target_y = np.clip(target_y, self.area_size * 0.05, self.area_size * 0.95)
+            
+            self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+            
+            # 设置簇中心的移动速度
+            direction = self.cluster_waypoints[cluster_idx] - current_center
+            distance = np.linalg.norm(direction)
+            if distance > 1e-6:
+                self.cluster_velocities[cluster_idx] = (direction / distance) * self.cluster_migration_speed
+            else:
+                self.cluster_velocities[cluster_idx] = np.zeros(2)
 
     def _compute_sinr(self, uav_idx, user_idx):
         """
@@ -1243,6 +1683,86 @@ class UAVForcedRelayEnv(ParallelEnv):
         sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
         
         return sinr_db
+
+    def _calculate_handover_reward(self):
+        """
+        计算精细化的切换奖励函数
+        
+        该函数结合了覆盖率、切换成本、乒乓效应和服务中断的惩罚，
+        专门为预测性切换算法设计。
+        
+        返回:
+            handover_reward: 综合的切换奖励值
+        """
+        # 1. 计算覆盖率奖励（替代吞吐量奖励）
+        coverage_ratio = self.reward_info.get('coverage_ratio', 0)
+        # 覆盖率已经在[0,1]范围内，直接使用
+        coverage_reward = coverage_ratio
+        
+        # 2. 计算切换成本惩罚
+        # 记录上一步的切换次数，计算增量
+        if not hasattr(self, 'prev_handover_count'):
+            self.prev_handover_count = 0
+        
+        handover_increment = self.handover_count - self.prev_handover_count
+        handover_penalty = handover_increment * self.w_handover
+        self.prev_handover_count = self.handover_count
+        
+        # 3. 计算乒乓切换惩罚
+        if not hasattr(self, 'prev_ping_pong_count'):
+            self.prev_ping_pong_count = 0
+            
+        ping_pong_increment = self.ping_pong_count - self.prev_ping_pong_count
+        ping_pong_penalty = ping_pong_increment * self.w_pingpong
+        self.prev_ping_pong_count = self.ping_pong_count
+        
+        # 4. 计算服务中断惩罚
+        outage_users = 0
+        outage_sinr_threshold_linear = 10 ** (self.outage_sinr_threshold_db / 10)
+        
+        for user_idx in range(self.n_users):
+            # 检查用户是否有有效连接
+            user_has_service = False
+            for uav_idx in range(self.n_uavs):
+                if self.connections[uav_idx, user_idx]:
+                    # 检查该UAV是否有回程路径
+                    if uav_idx in self.routing_paths:
+                        # 检查SINR是否满足中断阈值
+                        current_sinr_db = self.sinr_matrix[uav_idx, user_idx]
+                        if current_sinr_db >= self.outage_sinr_threshold_db:
+                            user_has_service = True
+                            break
+            
+            if not user_has_service:
+                outage_users += 1
+        
+        # 归一化中断用户比例
+        outage_ratio = outage_users / self.n_users if self.n_users > 0 else 0
+        outage_penalty = outage_ratio * self.w_outage
+        
+        # 5. 组合最终奖励
+        handover_reward = (self.w_throughput * coverage_reward - 
+                          handover_penalty - 
+                          ping_pong_penalty - 
+                          outage_penalty)
+        
+        # 6. 更新奖励信息用于调试
+        if not hasattr(self, 'reward_info'):
+            self.reward_info = {}
+            
+        self.reward_info.update({
+            'handover_reward': handover_reward,
+            'coverage_reward': coverage_reward,
+            'handover_penalty': handover_penalty,
+            'ping_pong_penalty': ping_pong_penalty,
+            'outage_penalty': outage_penalty,
+            'outage_users': outage_users,
+            'outage_ratio': outage_ratio,
+            'handover_increment': handover_increment,
+            'ping_pong_increment': ping_pong_increment,
+        })
+        
+        return handover_reward
     
     def _compute_interference_radius(self):
         """
@@ -1305,6 +1825,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 按SINR降序排序
         uav_user_pairs.sort(key=lambda x: x[2], reverse=True)
         
+        # 在更新连接前，记录旧的服务UAV状态
+        old_serving_uav = self.user_serving_uav.copy()
+
         # 分配连接
         uav_connections = [0] * self.n_uavs
         user_connected = [False] * self.n_users
@@ -1316,8 +1839,54 @@ class UAVForcedRelayEnv(ParallelEnv):
                 uav_connections[uav_idx] += 1
                 user_connected[user_idx] = True
         
-        # 移除这里的发现奖励计算调用 - 将在step函数中的正确位置调用
-    
+        # 更新切换统计
+        self._update_handover_stats(old_serving_uav)
+
+    def _update_handover_stats(self, old_serving_uav):
+        """根据连接变化，更新切换和乒乓切换计数"""
+        # 首先，确定当前每个用户的服务UAV
+        current_serving_uav = -np.ones(self.n_users, dtype=int)
+        for user_idx in range(self.n_users):
+            connected_uavs = np.where(self.connections[:, user_idx])[0]
+            if len(connected_uavs) > 0:
+                # 如果有多个UAV连接，选择SINR最高的那个作为服务UAV
+                best_uav = -1
+                max_sinr = -np.inf
+                for uav_idx in connected_uavs:
+                    if self.sinr_matrix[uav_idx, user_idx] > max_sinr:
+                        max_sinr = self.sinr_matrix[uav_idx, user_idx]
+                        best_uav = uav_idx
+                current_serving_uav[user_idx] = best_uav
+        
+        # 比较新旧服务UAV，统计切换
+        for user_idx in range(self.n_users):
+            old_uav = old_serving_uav[user_idx]
+            new_uav = current_serving_uav[user_idx]
+
+            if old_uav != new_uav and old_uav != -1 and new_uav != -1:
+                self.handover_count += 1
+                
+                # --- 乒乓切换检测 ---
+                history = self.user_handover_history[user_idx]
+                # 记录格式: (timestamp, from_uav, to_uav)
+                history.append((self.current_step, old_uav, new_uav))
+                
+                # 移除超出时间窗口的历史记录
+                while history and history[0][0] < self.current_step - self.ping_pong_window:
+                    history.pop(0)
+                
+                # 检查是否存在 A -> B -> A 模式
+                if len(history) >= 2:
+                    last_ho = history[-1]
+                    second_last_ho = history[-2]
+                    # 如果最近两次切换是: (t1, X, A) 和 (t2, A, B)，且 B == X
+                    if last_ho[1] == second_last_ho[2] and last_ho[2] == second_last_ho[1]:
+                        self.ping_pong_count += 1
+                        # 清空历史，避免重复计数
+                        self.user_handover_history[user_idx] = []
+
+        self.user_serving_uav = current_serving_uav
+
     def _calculate_discovery_reward_inline(self):
         """
         基于信念地图计算发现用户奖励 (Belief-Modulated Discovery Reward)
@@ -1431,6 +2000,23 @@ class UAVForcedRelayEnv(ParallelEnv):
             truncations: 所有智能体的截断状态字典
             infos: 所有智能体的信息字典
         """
+        # 1. Move users and update their state predictions
+        self._move_users()
+        
+        # 更新卡尔曼滤波器
+        if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+            # 更新簇级别的卡尔曼滤波器
+            for cluster_idx in range(self.n_clusters):
+                kf = self.cluster_kalman_filters[cluster_idx]
+                kf.predict()
+                kf.update(self.cluster_centers_history[cluster_idx])
+        else:
+            # 更新用户级别的卡尔曼滤波器
+            for i in range(self.n_users):
+                kf = self.kalman_filters[i]
+                kf.predict()
+                kf.update(self.user_positions[i, :2])
+
         # 2. Update agent positions based on actions
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
@@ -1513,6 +2099,9 @@ class UAVForcedRelayEnv(ParallelEnv):
             elif self.reward_type == "health":
                 # health模式：使用网络健康度参数
                 shared_reward = shaped_team_reward
+            elif self.reward_type == "handover":
+                # handover模式：精细化奖励函数，考虑切换成本、乒乓效应和服务中断
+                shared_reward = self._calculate_handover_reward()
             else:
                 # 默认使用health模式
                 shared_reward = shaped_team_reward
@@ -1550,6 +2139,9 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "connectivity_ratio": unified_reward_info.get("connectivity_ratio", 0),
                 # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
                 "uav_positions": self.uav_positions.copy(),
+                # 添加切换统计信息
+                "handover_count": self.handover_count,
+                "ping_pong_count": self.ping_pong_count,
             }
         
         # 7. 更新观测值（在循环外一次性完成）
@@ -1628,6 +2220,65 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def _compute_distance(self, pos1, pos2):
         return np.sqrt(np.sum((pos1 - pos2) ** 2))
+
+    def _compute_sinr_at_pos(self, uav_idx, user_pos_3d):
+        """
+        计算无人机到指定3D位置的SINR
+        
+        参数:
+            uav_idx: 无人机索引
+            user_pos_3d: 目标位置的3D坐标 [x, y, z]
+            
+        返回:
+            sinr_db: SINR值 (dB)
+        """
+        uav_pos = self.uav_positions[uav_idx]
+        
+        # 使用精确的A2G路径损耗模型
+        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+        
+        # 计算接收功率
+        rx_power = self.tx_power - path_loss
+        
+        # 使用精确的UAV-User SINR计算
+        sinr_db = self._compute_uav_to_user_sinr_at_pos(uav_idx, user_pos_3d, rx_power)
+        
+        return sinr_db
+
+    def _compute_uav_to_user_sinr_at_pos(self, uav_idx, user_pos_3d, rx_power):
+        """计算UAV到指定位置通信的精确SINR"""
+        interference_radius = self._compute_interference_radius()
+        uav_interference_weight = 1.0
+        
+        interference_powers_linear = []
+        
+        # 计算来自其他UAV的干扰
+        for i in range(self.n_uavs):
+            if i != uav_idx:
+                interferer_pos = self.uav_positions[i]
+                dist_to_user = self._compute_distance(interferer_pos, user_pos_3d)
+                if dist_to_user > interference_radius:
+                    continue
+                
+                interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
+                interferer_rx_power_dbm = self.tx_power - interferer_path_loss
+                interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
+                
+                weighted_interference_power = interferer_rx_power_linear * uav_interference_weight
+                
+                if self.use_fdma:
+                    interference_powers_linear.append(weighted_interference_power * self.aclr_linear)
+                else:
+                    interference_powers_linear.append(weighted_interference_power)
+        
+        total_interference_linear = np.sum(interference_powers_linear)
+        noise_power_linear = 10 ** (self.noise_power / 10)
+        interference_plus_noise_linear = noise_power_linear + total_interference_linear
+        interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
+        
+        sinr_db = rx_power - interference_plus_noise_dbm
+        
+        return sinr_db
 
     def _update_observations_dict(self, observations_dict):
         """
@@ -1717,25 +2368,74 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         obs_components.append(self_state)
         
-        # 3. 局部用户观测 (max_observed_users * 4维)
+        # 3. 局部用户观测
         local_users = self._get_local_users(agent_idx)
-        user_obs = np.zeros(self.max_observed_users * 4)
         
+        if self.predictive_handover:
+            user_obs = np.zeros(self.max_observed_users * 6)
+            obs_dim_per_user = 6
+        else:
+            user_obs = np.zeros(self.max_observed_users * 4)
+            obs_dim_per_user = 4
+
         for i, (user_idx, sinr_db) in enumerate(local_users):
             if i >= self.max_observed_users:
                 break
             
             user_pos = self.user_positions[user_idx]
-            # 相对位置 (x, y) - 归一化，只取前两个维度
             relative_pos = (user_pos[:2] - own_position[:2]) / self.area_size
-            # 归一化SINR到[0,1]范围 (假设SINR范围为-10dB到40dB)
             normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
-            # 连接状态 - 该用户是否被当前UAV连接
             is_connected = 1.0 if self.connections[agent_idx, user_idx] else 0.0
             
-            start_idx = i * 4
+            start_idx = i * obs_dim_per_user
             user_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], normalized_sinr, is_connected]
-        
+
+            if self.predictive_handover:
+                # Get predicted position from Kalman filter
+                if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+                    # Infer user's future position based on cluster's predicted movement
+                    user_cluster_idx = self.user_cluster_assignments[user_idx]
+                    cluster_predicted_state = self.cluster_kalman_filters[user_cluster_idx].x
+                    
+                    # Predict future cluster center position
+                    cluster_future_pos = cluster_predicted_state[:2] + cluster_predicted_state[2:] * self.prediction_horizon * self.time_step
+                    
+                    # Get user's current offset from its cluster center
+                    current_cluster_center = self.cluster_centers_history[user_cluster_idx]
+                    user_offset = self.user_positions[user_idx, :2] - current_cluster_center
+                    
+                    # User's predicted position is the future cluster position + current offset
+                    predicted_pos_2d = cluster_future_pos + user_offset
+                else:
+                    # Use the standard user-level Kalman filter
+                    predicted_state = self.kalman_filters[user_idx].x
+                    predicted_pos_2d = predicted_state[:2]
+                
+                predicted_pos_3d = np.array([predicted_pos_2d[0], predicted_pos_2d[1], 1.5])
+
+                # Calculate predicted SINR from self to user's future position
+                predicted_sinr_self = self._compute_sinr_at_pos(agent_idx, predicted_pos_3d)
+                normalized_predicted_sinr_self = np.clip((predicted_sinr_self + 10) / 50, 0, 1)
+                
+                # Find best neighbor and calculate its predicted SINR
+                best_neighbor_sinr = -np.inf
+                local_uavs = self._get_local_uavs(agent_idx)
+                if local_uavs:
+                    best_neighbor_idx = -1
+                    max_current_sinr_from_neighbor = -np.inf
+                    for uav_idx, _ in local_uavs:
+                        current_sinr_neighbor = self.sinr_matrix[uav_idx, user_idx]
+                        if current_sinr_neighbor > max_current_sinr_from_neighbor:
+                            max_current_sinr_from_neighbor = current_sinr_neighbor
+                            best_neighbor_idx = uav_idx
+                    
+                    if best_neighbor_idx != -1:
+                        best_neighbor_sinr = self._compute_sinr_at_pos(best_neighbor_idx, predicted_pos_3d)
+
+                normalized_predicted_sinr_neighbor = np.clip((best_neighbor_sinr + 10) / 50, 0, 1)
+
+                user_obs[start_idx+4:start_idx+6] = [normalized_predicted_sinr_self, normalized_predicted_sinr_neighbor]
+
         obs_components.append(user_obs)
         
         # 3. 局部无人机观测 (max_observed_uavs * 4维)
@@ -2302,6 +3002,69 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 7. 当前步数 (归一化到[0,1])
         step_normalized = np.array([self.current_step / self.max_steps])
         state_components.append(step_normalized)
+        
+        # 8. 预测状态flag (0或1)
+        predictive_flag = np.array([1.0 if self.enable_predictive_state else 0.0])
+        state_components.append(predictive_flag)
+        
+        # 9. 预测信息 (如果启用预测状态)
+        if self.enable_predictive_state:
+            if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+                # 簇级别预测模式：基于簇中心预测推导用户预测
+                predicted_positions = np.zeros(self.n_users * 2)
+                predicted_velocities = np.zeros(self.n_users * 2)
+                
+                for i in range(self.n_users):
+                    # 获取用户所属的簇
+                    user_cluster = self.user_cluster_assignments[i]
+                    
+                    # 获取簇级别卡尔曼滤波器的预测状态
+                    cluster_predicted_state = self.cluster_kalman_filters[user_cluster].x
+                    
+                    # 预测簇中心未来位置
+                    cluster_future_pos = cluster_predicted_state[:2] + cluster_predicted_state[2:] * self.prediction_horizon * self.time_step
+                    
+                    # 计算用户相对于当前簇中心的偏移
+                    current_cluster_center = self.cluster_centers_history[user_cluster]
+                    user_offset = self.user_positions[i, :2] - current_cluster_center
+                    
+                    # 预测用户未来位置 = 预测的簇中心位置 + 用户偏移
+                    user_future_pos = cluster_future_pos + user_offset
+                    
+                    # 归一化预测位置
+                    predicted_positions[i*2:(i+1)*2] = user_future_pos / self.area_size
+                    
+                    # 用户预测速度基于簇中心速度和用户当前速度的组合
+                    cluster_velocity = cluster_predicted_state[2:]
+                    user_velocity = self.user_velocities[i, :2]
+                    # 使用加权平均：70%簇速度 + 30%用户个体速度
+                    combined_velocity = 0.7 * cluster_velocity + 0.3 * user_velocity
+                    
+                    # 归一化预测速度
+                    predicted_velocities[i*2:(i+1)*2] = combined_velocity / self.user_max_speed
+                
+                state_components.append(predicted_positions)
+                state_components.append(predicted_velocities)
+            else:
+                # 传统用户级别预测模式
+                predicted_positions = np.zeros(self.n_users * 2)
+                predicted_velocities = np.zeros(self.n_users * 2)
+                
+                for i in range(self.n_users):
+                    # 获取用户级别卡尔曼滤波器的预测状态
+                    predicted_state = self.kalman_filters[i].x
+                    
+                    # 预测未来位置 (基于prediction_horizon)
+                    future_pos = predicted_state[:2] + predicted_state[2:] * self.prediction_horizon * self.time_step
+                    
+                    # 归一化预测位置
+                    predicted_positions[i*2:(i+1)*2] = future_pos / self.area_size
+                    
+                    # 归一化预测速度 (假设最大速度为user_max_speed)
+                    predicted_velocities[i*2:(i+1)*2] = predicted_state[2:] / self.user_max_speed
+                
+                state_components.append(predicted_positions)
+                state_components.append(predicted_velocities)
         
         # 组合所有状态组件
         state = np.concatenate(state_components)

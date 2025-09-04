@@ -691,9 +691,22 @@ class SkillCoordinator(nn.Module):
         self.n_Z = config.n_Z
         self.n_z = config.n_z
         self.use_opt = config.use_opt
-        
-        # 实体特征嵌入层
-        self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
+        self.enhanced_state = getattr(config, 'enhanced_state', False)
+
+        # --- 新增：根据模式初始化嵌入层 ---
+        if self.enhanced_state:
+            # 增强模式：为每个状态组件创建独立的嵌入层
+            dims = config.state_component_dims
+            self.current_state_embedding = nn.Linear(dims['current_state_dim'], config.embedding_dim)
+            self.predicted_state_embedding = nn.Linear(dims['predicted_state_dim'], config.embedding_dim)
+            self.uncertainty_state_embedding = nn.Linear(dims['uncertainty_state_dim'], config.embedding_dim)
+            
+            # 附加一个线性层，将拼接后的多头嵌入投影回标准维度
+            self.multi_head_projection = nn.Linear(config.embedding_dim * 3, config.embedding_dim)
+        else:
+            # 兼容旧模式：单一状态嵌入层
+            self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
+
         self.obs_embedding = nn.Linear(config.obs_dim, config.embedding_dim)
         self.positional_encoding = PositionalEncoding(config.embedding_dim)
         
@@ -740,8 +753,15 @@ class SkillCoordinator(nn.Module):
     
     def _init_weights(self):
         """初始化网络权重，提高训练稳定性"""
-        # 初始化嵌入层
-        initialize_weights(self.state_embedding, gain=1.0)
+        # --- 新增：根据模式初始化嵌入层 ---
+        if self.enhanced_state:
+            initialize_weights(self.current_state_embedding, gain=1.0)
+            initialize_weights(self.predicted_state_embedding, gain=1.0)
+            initialize_weights(self.uncertainty_state_embedding, gain=1.0)
+            initialize_weights(self.multi_head_projection, gain=1.0)
+        else:
+            initialize_weights(self.state_embedding, gain=1.0)
+        
         initialize_weights(self.obs_embedding, gain=1.0)
         
         # 初始化价值头权重
@@ -762,15 +782,34 @@ class SkillCoordinator(nn.Module):
         """
         batch_size, n_agents, obs_dim = observations.size()
         
-        # 嵌入全局状态和局部观测
-        embedded_state = self.state_embedding(state).unsqueeze(1)  # [batch_size, 1, embedding_dim]
+        # --- 新增：根据模式处理状态嵌入 ---
+        if self.enhanced_state:
+            main_logger.info("协调器正在使用增强状态模式（多头嵌入）")
+            dims = self.config.state_component_dims
+            current_dim = dims['current_state_dim']
+            predicted_dim = dims['predicted_state_dim']
+            
+            # 拆分状态向量
+            current_state = state[:, :current_dim]
+            predicted_state = state[:, current_dim : current_dim + predicted_dim]
+            uncertainty_state = state[:, current_dim + predicted_dim:]
+            
+            # 分别通过嵌入层
+            embedded_current = self.current_state_embedding(current_state)
+            embedded_predicted = self.predicted_state_embedding(predicted_state)
+            embedded_uncertainty = self.uncertainty_state_embedding(uncertainty_state)
+            
+            # 拼接多头嵌入并投影
+            concatenated_embedding = torch.cat([embedded_current, embedded_predicted, embedded_uncertainty], dim=1)
+            embedded_state = self.multi_head_projection(concatenated_embedding).unsqueeze(1)
+        else:
+            # 旧模式
+            embedded_state = self.state_embedding(state).unsqueeze(1)
+
         embedded_obs = self.obs_embedding(observations.reshape(-1, obs_dim))
-        embedded_obs = embedded_obs.reshape(batch_size, n_agents, -1)  # [batch_size, n_agents, embedding_dim]
+        embedded_obs = embedded_obs.reshape(batch_size, n_agents, -1)
         
-        # 将状态和观测拼接作为实体序列
-        entity_features = torch.cat([embedded_state, embedded_obs], dim=1)  # [batch_size, 1+n_agents, embedding_dim]
-        
-        # 应用位置编码
+        entity_features = torch.cat([embedded_state, embedded_obs], dim=1)
         entity_features = self.positional_encoding(entity_features)
         
         return entity_features

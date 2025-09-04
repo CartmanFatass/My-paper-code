@@ -85,6 +85,41 @@ class TensorBoardManager:
         self.writer.add_text('Parameters/lr_discoverer', str(self.config.lr_discoverer), 0)
         self.writer.add_text('Parameters/lr_discriminator', str(self.config.lr_discriminator), 0)
         
+        # 【新增】奖励类型记录
+        reward_type = getattr(self.config, 'reward_type', 'health')
+        self.writer.add_text('Parameters/reward_type', str(reward_type), 0)
+        
+        # 【新增】根据奖励类型记录相应的权重参数
+        if reward_type == 'health':
+            # 网络健康度奖励权重
+            self.writer.add_text('Parameters/w_connectivity', str(getattr(self.config, 'w_connectivity', 0.5)), 0)
+            self.writer.add_text('Parameters/w_diversity', str(getattr(self.config, 'w_diversity', 1.0)), 0)
+            self.writer.add_text('Parameters/w_coverage', str(getattr(self.config, 'w_coverage', 1.0)), 0)
+            self.writer.add_text('Parameters/w_dispersion', str(getattr(self.config, 'w_dispersion', 0.05)), 0)
+        elif reward_type == 'handover':
+            # 切换奖励权重
+            self.writer.add_text('Parameters/w_throughput', str(getattr(self.config, 'w_throughput', 1.0)), 0)
+            self.writer.add_text('Parameters/w_handover', str(getattr(self.config, 'w_handover', 0.1)), 0)
+            self.writer.add_text('Parameters/w_pingpong', str(getattr(self.config, 'w_pingpong', 1.0)), 0)
+            self.writer.add_text('Parameters/w_outage', str(getattr(self.config, 'w_outage', 1.0)), 0)
+            self.writer.add_text('Parameters/outage_sinr_threshold_db', str(getattr(self.config, 'outage_sinr_threshold_db', -5)), 0)
+        elif reward_type == 'naive':
+            # 朴素奖励模式（直接使用覆盖率）
+            self.writer.add_text('Parameters/reward_mode', 'direct_coverage_ratio', 0)
+        
+        # 【新增】卡尔曼滤波相关参数记录
+        self.writer.add_text('Parameters/enable_predictive_state', str(getattr(self.config, 'enable_predictive_state', False)), 0)
+        self.writer.add_text('Parameters/prediction_horizon', str(getattr(self.config, 'prediction_horizon', 3)), 0)
+        self.writer.add_text('Parameters/enable_cluster_kalman_filter', str(getattr(self.config, 'enable_cluster_kalman_filter', False)), 0)
+        self.writer.add_text('Parameters/predictive_handover', str(getattr(self.config, 'predictive_handover', False)), 0)
+        self.writer.add_text('Parameters/user_movement_model', str(getattr(self.config, 'user_movement_model', 'random_walk')), 0)
+        
+        # 如果启用了RPGM移动模型，记录相关参数
+        if getattr(self.config, 'user_movement_model', 'random_walk') == 'rpgm':
+            self.writer.add_text('Parameters/cluster_migration_speed', str(getattr(self.config, 'cluster_migration_speed', 15.0)), 0)
+            self.writer.add_text('Parameters/cluster_pause_time_range', str(getattr(self.config, 'cluster_pause_time_range', (0, 5))), 0)
+            self.writer.add_text('Parameters/user_pause_time_range', str(getattr(self.config, 'user_pause_time_range', (0, 3))), 0)
+        
         # 高级功能参数
         self.writer.add_text('Parameters/use_opt', str(self.config.use_opt), 0)
         self.writer.add_text('Parameters/use_reward_annealing', str(getattr(self.config, 'use_reward_annealing', False)), 0)
@@ -699,6 +734,39 @@ class EnhancedRewardTracker:
                 ]
                 for key in health_score_keys:
                     if key in reward_info:
+                        self.performance_metrics['reward_components'][key].append({
+                            'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
+                        })
+                
+                # 【新增】切换奖励特有指标记录
+                handover_reward_keys = [
+                    'handover_reward', 'handover_penalty', 'ping_pong_penalty', 
+                    'outage_penalty', 'outage_users', 'outage_ratio',
+                    'handover_increment', 'ping_pong_increment'
+                ]
+                for key in handover_reward_keys:
+                    if key in reward_info:
+                        # 确保列表存在
+                        if key not in self.performance_metrics['reward_components']:
+                            self.performance_metrics['reward_components'][key] = []
+                        
+                        self.performance_metrics['reward_components'][key].append({
+                            'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
+                        })
+                
+                # 【新增】卡尔曼滤波相关指标记录
+                kalman_filter_keys = [
+                    'kalman_prediction_accuracy', 'kalman_innovation_variance', 
+                    'kalman_state_uncertainty', 'cluster_kalman_accuracy',
+                    'user_prediction_error', 'cluster_prediction_error',
+                    'kalman_filter_convergence', 'prediction_horizon_accuracy'
+                ]
+                for key in kalman_filter_keys:
+                    if key in reward_info:
+                        # 确保列表存在
+                        if key not in self.performance_metrics['reward_components']:
+                            self.performance_metrics['reward_components'][key] = []
+                        
                         self.performance_metrics['reward_components'][key].append({
                             'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
                         })
@@ -1509,50 +1577,75 @@ class EnhancedRewardTracker:
                         formatted_field = field.replace('_', ' ').title().replace(' ', '_')
                         writer.add_scalar(f'Discovery/{formatted_field}_Mean_Rollout', avg_value, step)
         
-        # 场景4新增：Reward Shaping机制统计 - 新的RewardShaping分类
-        reward_shaping_fields = [
-            'connectivity_shaping_reward', 'quality_shaping_reward', 'distance_overlap_penalty'
-        ]
-        
-        for field in reward_shaping_fields:
-            if reward_components.get(field):
-                recent_data = reward_components[field][-self.window_size:]
-                if recent_data:
-                    recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
-                    if recent_values:
-                        avg_value = np.mean(recent_values)
-                        
-                        # 格式化字段名
-                        formatted_field = field.replace('_', ' ').title().replace(' ', '_')
-                        writer.add_scalar(f'RewardShaping/{formatted_field}_Mean_Rollout', avg_value, step)
-        
-        # 场景4新增：网络健康度统计 - 新的HealthScore分类
-        health_score_fields = [
-            'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
-            'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
-            'pure_relay_uavs_count', 'weighted_serving_score' # 新增
-        ]
+                # 场景4新增：Reward Shaping机制统计 - 新的RewardShaping分类
+                reward_shaping_fields = [
+                    'connectivity_shaping_reward', 'quality_shaping_reward', 'distance_overlap_penalty'
+                ]
+                
+                for field in reward_shaping_fields:
+                    if reward_components.get(field):
+                        recent_data = reward_components[field][-self.window_size:]
+                        if recent_data:
+                            recent_values = [r['value'] if isinstance(r, dict) and 'value' in r else r for r in recent_data]
+                            if recent_values:
+                                avg_value = np.mean(recent_values)
+                                
+                                # 格式化字段名
+                                formatted_field = field.replace('_', ' ').title().replace(' ', '_')
+                                writer.add_scalar(f'RewardShaping/{formatted_field}_Mean_Rollout', avg_value, step)
+                
+                # 场景4新增：网络健康度统计 - 新的HealthScore分类
+                health_score_fields = [
+                    'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
+                    'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
+                    'pure_relay_uavs_count', 'weighted_serving_score' # 新增
+                ]
 
-        for field in health_score_fields:
-            if reward_components.get(field):
-                self._log_aggregated_metrics(writer, step,
-                                           reward_components[field],
-                                           field.replace('_', ' ').title().replace(' ', '_'),
-                                           'HealthScore')
-
-        # 场景4新增：网络健康度统计 - 新的HealthScore分类
-        health_score_fields = [
-            'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
-            'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
-            'pure_relay_uavs_count'
-        ]
-
-        for field in health_score_fields:
-            if reward_components.get(field):
-                self._log_aggregated_metrics(writer, step,
-                                           reward_components[field],
-                                           field.replace('_', ' ').title().replace(' ', '_'),
-                                           'HealthScore')
+                for field in health_score_fields:
+                    if reward_components.get(field):
+                        self._log_aggregated_metrics(writer, step,
+                                                   reward_components[field],
+                                                   field.replace('_', ' ').title().replace(' ', '_'),
+                                                   'HealthScore')
+                
+                # 【新增】根据奖励类型记录特定的奖励组成部分
+                reward_type = getattr(self.config, 'reward_type', 'health')
+                
+                if reward_type == 'handover':
+                    # 切换奖励特有指标
+                    handover_fields = [
+                        'handover_reward', 'handover_penalty', 'ping_pong_penalty', 
+                        'outage_penalty', 'outage_users', 'outage_ratio',
+                        'handover_increment', 'ping_pong_increment'
+                    ]
+                    
+                    for field in handover_fields:
+                        if reward_components.get(field):
+                            self._log_aggregated_metrics(writer, step,
+                                                       reward_components[field],
+                                                       field.replace('_', ' ').title().replace(' ', '_'),
+                                                       'HandoverReward')
+                
+                elif reward_type == 'naive':
+                    # 朴素奖励模式：主要关注覆盖率
+                    writer.add_scalar('NaiveReward/Coverage_Ratio_Direct', 
+                                    np.mean([r['value'] for r in reward_components.get('coverage_ratios', [])[-self.window_size:]]) 
+                                    if reward_components.get('coverage_ratios') else 0, step)
+                
+                # 【新增】卡尔曼滤波相关指标的TensorBoard记录
+                kalman_filter_fields = [
+                    'kalman_prediction_accuracy', 'kalman_innovation_variance', 
+                    'kalman_state_uncertainty', 'cluster_kalman_accuracy',
+                    'user_prediction_error', 'cluster_prediction_error',
+                    'kalman_filter_convergence', 'prediction_horizon_accuracy'
+                ]
+                
+                for field in kalman_filter_fields:
+                    if reward_components.get(field):
+                        self._log_aggregated_metrics(writer, step,
+                                                   reward_components[field],
+                                                   field.replace('_', ' ').title().replace(' ', '_'),
+                                                   'KalmanFilter')
 
         # 场景4新增：发现进度统计（从环境适配器获取）
         # 这些数据可能直接来自环境的info，不在reward_components中
@@ -1690,13 +1783,13 @@ def get_device(device_pref):
 # 创建环境函数 (简化后用于 SubprocVecEnv)
 def make_env(rank, seed, config, scenario, render_mode=None):
     """
-    创建环境实例的函数 (用于 SubprocVecEnv) - 简化版本
+    创建环境实例的函数 (用于 SubprocVecEnv) - 使用config对象传递参数
 
     参数:
         rank: 环境的索引 (用于设置不同的种子)
         seed: 基础随机种子
         config: 配置对象，包含所有环境参数和奖励权重
-        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式)
+        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式)
         render_mode: 渲染模式
 
     返回:
@@ -1705,72 +1798,20 @@ def make_env(rank, seed, config, scenario, render_mode=None):
     def _init():
         env_seed = seed + rank # 为每个并行环境设置不同的种子
         
-        # 从配置对象获取通用环境参数
-        env_kwargs = {
-            'n_uavs': config.n_agents,
-            'n_users': config.n_users,
-            'user_distribution': config.user_distribution,
-            'render_mode': render_mode,
-            'seed': env_seed,
-            'use_fdma': config.use_fdma,
-            'bandwidth': config.bandwidth
-        }
-        
         if scenario == 4:
-            # 场景4：强制多跳中继环境（使用简化的奖励权重参数）
-            scenario4_kwargs = {
-                'max_steps': config.episode_length,           # 从配置中传入episode长度
-                'user_distribution': 'forced_relay_cluster',  # 场景4强制使用此分布类型
-                'max_hops': config.max_hops,
-                'area_size': config.area_size,
-                'n_clusters': config.n_clusters,
-                'cluster_std': config.cluster_std,
-                'central_area_ratio': config.central_area_ratio,
-                'min_sinr': config.min_sinr,
-                'max_connections': config.max_connections,
-                'uav_init_mode': config.uav_init_mode,
-                'uav_start_area_size': config.uav_start_area_size,
-                'test_reward_mode': config.test_reward_mode,
-                'reward_type': config.reward_type,  # 传递奖励类型参数
-                # 传递网络健康度权重
-                'w_connectivity': config.w_connectivity,
-                'w_diversity': config.w_diversity,
-                'w_coverage': config.w_coverage,
-                'w_dispersion': config.w_dispersion,
-            }
-            
-            # 将场景4的参数合并到通用参数中
-            env_kwargs.update(scenario4_kwargs)
-            
-            raw_env = UAVForcedRelayEnv(**env_kwargs)
+            # 场景4：强制多跳中继环境 - 直接传入config对象
+            raw_env = UAVForcedRelayEnv(
+                config=config,
+                render_mode=render_mode,
+                seed=env_seed
+            )
         elif scenario == 5:
-            # 场景5：基于信念地图的动态用户覆盖环境
-            scenario5_kwargs = {
-                'max_steps': config.episode_length,
-                'user_distribution': 'forced_relay_cluster', # scenario5 also uses this
-                'max_hops': config.max_hops,
-                'area_size': config.area_size,
-                'n_clusters': config.n_clusters,
-                'cluster_std': config.cluster_std,
-                'central_area_ratio': config.central_area_ratio,
-                'min_sinr': config.min_sinr,
-                'max_connections': config.max_connections,
-                'uav_init_mode': config.uav_init_mode,
-                'uav_start_area_size': config.uav_start_area_size,
-                'test_reward_mode': config.test_reward_mode,
-                # 传递网络健康度权重 (与场景4相同)
-                'w_connectivity': config.w_connectivity,
-                'w_diversity': config.w_diversity,
-                'w_coverage': config.w_coverage,
-                'w_dispersion': config.w_dispersion,
-                # 场景5特有参数 (使用config中的默认值或环境的默认值)
-                'users_dynamic': getattr(config, 'users_dynamic', True),
-                'user_max_speed': getattr(config, 'user_max_speed', 5),
-                'grid_resolution': getattr(config, 'grid_resolution', 100),
-                'belief_decay': getattr(config, 'belief_decay', 0.99),
-            }
-            env_kwargs.update(scenario5_kwargs)
-            raw_env = UAVBeliefMapEnv(**env_kwargs)
+            # 场景5：基于信念地图的动态用户覆盖环境 - 直接传入config对象
+            raw_env = UAVBeliefMapEnv(
+                config=config,
+                render_mode=render_mode,
+                seed=env_seed
+            )
         else:
             raise ValueError(f"未知的场景: {scenario}")
 

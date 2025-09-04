@@ -15,17 +15,73 @@ class Config:
     # 通用环境参数
     n_users = 30                    # 用户数量
     area_size = 8000               # 区域大小 (米)
+    height_range = (50, 200)       # 无人机高度范围 (米)
+    max_speed = 30                 # 无人机最大速度 (m/s)
+    time_step = 1.0                # 时间步长 (秒)
+    max_steps = 5000               # 最大步数
     max_hops = 5                   # 最大跳数
-    user_distribution = 'coverage_hole'  # 用户分布类型
+    user_distribution = 'uniform'  # 用户分布类型
     channel_model = 'probabilistic'      # 信道模型
     use_fdma = True                      # FDMA
     bandwidth = 20e6                     # 每个无人机的带宽 (Hz)
-    reward_type = "health"               # 奖励类型: "naive" (仅覆盖率) 或 "health" (网络健康度)
+    reward_type = "handover"               # 奖励类型: "naive" (仅覆盖率) 或 "health" (网络健康度)
+    
+    # 用户移动参数
+    user_max_speed = 15.0          # 用户最大速度 (m/s) - 适合城市车辆场景 (54 km/h)
+    user_movement_model = "rpgm"  # 移动模型: "random_walk" 或 "rpgm"
+    
+    # RPGM参数 (仅在user_movement_model="rpgm"时使用)
+    cluster_migration_speed = 15.0  # m/s, 簇中心移动速度
+    cluster_pause_time_range = (0, 5)  # 簇中心暂停时间范围 (秒)
+    user_pause_time_range = (0, 3)   # 用户暂停时间范围 (秒)
     
     # 场景4参数
     n_clusters = 5                 # 用户簇数量
     cluster_std = 80              # 簇内用户分布标准差 (米)
     central_area_ratio = 0.5      # 中心用户区域占总区域的比例
+    base_station_distance_factor = 0.8  # 基站距离因子
+    n_ground_bs = 1               # 地面基站数量
+    
+    # 通信参数
+    min_sinr = 3                  # 最小信噪比 (dB)
+    max_connections = 25          # 最大连接数
+    carrier_frequency = 2e9       # 载波频率 (Hz)
+    tx_power = 23                 # 发射功率 (dBm)
+    noise_power = -94             # 噪声功率 (dBm)
+    ground_bs_tx_power = 30       # 地面基站发射功率 (dBm)
+    aclr_db = 45                  # 邻道泄漏比 (dB)
+    
+    # 无人机初始化参数
+    uav_init_mode = "random"  # 无人机初始化模式
+    uav_start_area_size = 500     # 起始区域大小 (米)
+    
+    # 随机化控制参数
+    randomize_bs = True           # 是否随机化基站位置
+    randomize_users = True        # 是否随机化用户簇中心
+    randomize_uav_start = True    # 是否随机化无人机起始区域
+    
+    # 预测性切换参数 - 专门用于切换优化算法
+    predictive_handover = False  # 是否启用预测性切换（影响观测维度和奖励类型）
+    w_throughput = 1.0           # 吞吐量权重
+    w_handover = 0.1             # 切换权重
+    w_pingpong = 1.0             # 乒乓切换权重
+    w_outage = 1.0               # 中断权重
+    outage_sinr_threshold_db = -5  # 中断SINR阈值 (dB)
+    
+    # 乒乓切换检测参数
+    ping_pong_window = 5          # 乒乓切换检测时间窗口
+    
+    # 预测状态参数 - 用于全局状态增强
+    enable_predictive_state = True  # 是否启用预测状态功能（仅影响全局状态，不改变观测维度）
+    prediction_horizon = 10           # 预测时间步长
+    
+    # 卡尔曼滤波控制参数
+    enable_cluster_kalman_filter = False  # 是否启用簇级别卡尔曼滤波器（仅在RPGM模式下有效）
+    
+    # 状态增强参数
+    enhanced_state = False    # 是否启用增强状态模式（多头嵌入）
+    state_component_dims = None  # 状态组件维度（增强状态模式需要）
+    w_entropy = 0.0          # 熵权重（用于增强状态模式）
     
     # 局部观测参数
     observation_radius = 1500  # [新增] 固定的侦测范围 (米)
@@ -36,7 +92,7 @@ class Config:
     # HMASD参数 - 优化技能探索参数
     n_Z = 3           # [关键] 降低团队技能数量
     n_z = 3          # [关键] 降低个体技能数量
-    k = 50           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
+    k = 10           # [紧急修复] 增加技能分配间隔，从20增加到100，让智能体充分探索每个技能
 
     # 网络参数 - 基于论文Table 1
     hidden_size = 128         # 隐藏层大小 (论文中为64)
@@ -154,7 +210,7 @@ class Config:
 
     # --- 场景5: 动态环境与信念地图参数 ---
     users_dynamic = True         # 用户是否动态移动
-    user_max_speed = 5           # 用户最大移动速度 (m/s)
+    user_max_speed = 15          # 用户最大移动速度 (m/s) - 适合城市车辆场景 (54 km/h)
     belief_decay = 0.99          # 信念地图衰减因子
 
 

@@ -214,6 +214,10 @@ class HMASDAgent:
         assert config.state_dim is not None, "必须先设置state_dim"
         assert config.obs_dim is not None, "必须先设置obs_dim"
         
+        # 新增：为增强状态模式传递组件维度
+        if getattr(config, 'enhanced_state', False):
+            assert hasattr(config, 'state_component_dims'), "增强状态模式需要 state_component_dims"
+        
         # 移除TensorBoard相关初始化，由训练脚本统一管理
         self.log_dir = log_dir
         os.makedirs(log_dir, exist_ok=True)
@@ -988,7 +992,7 @@ class HMASDAgent:
         for i in range(n_agents):
             # 【重要修复】使用下一状态和下一观测计算内在奖励，与论文保持一致
             # 这确保了奖励是基于动作的直接后果
-            intrinsic_reward, env_comp, team_disc_comp, ind_disc_comp = self._compute_intrinsic_reward(
+            intrinsic_reward, env_comp, team_disc_comp, ind_disc_comp, _ = self._compute_intrinsic_reward(
                 next_state, rewards, next_observations[i], team_skill, agent_skills[i]
             )
             
@@ -1382,6 +1386,25 @@ class HMASDAgent:
                 team_disc_reward = team_mutual_info# - self.team_disc_baseline
                 ind_disc_reward = agent_mutual_info# - self.ind_disc_baseline
                 
+                # === 新增：不确定性奖励（熵惩罚） ===
+                # 从状态中提取不确定性图（熵图）
+                uncertainty_reward = 0.0
+                if self.config.enhanced_state and getattr(self.config, 'w_entropy', 0) > 0:
+                    dims = self.config.state_component_dims
+                    current_dim = dims['current_state_dim']
+                    predicted_dim = dims['predicted_state_dim']
+                    
+                    # 提取不确定性部分
+                    uncertainty_map_flat = next_state[current_dim + predicted_dim:]
+                    # 计算当前智能体观测位置对应的不确定性
+                    # 注意：这里我们只有一个扁平化的观测，需要一种方式来映射回不确定性图
+                    # 简化处理：我们使用整个不确定性图的平均熵作为惩罚
+                    # 一个更优的实现需要将智能体位置映射到不确定性图的特定区域
+                    avg_entropy = np.mean(uncertainty_map_flat) if uncertainty_map_flat.size > 0 else 0
+                    
+                    # 熵越高，惩罚越大，激励智能体去降低不确定性
+                    uncertainty_reward = -self.config.w_entropy * avg_entropy
+
                 # === Reward Normalization and Clipping ===
                 # Initialize running statistics if not exists
                 if not hasattr(self, 'team_disc_reward_std'):
@@ -1408,7 +1431,7 @@ class HMASDAgent:
                 team_disc_component = self.config.lambda_D * team_disc_reward_clipped
                 ind_disc_component = self.config.lambda_d * ind_disc_reward_clipped
                 
-                intrinsic_reward = env_component + team_disc_component + ind_disc_component
+                intrinsic_reward = env_component + team_disc_component + ind_disc_component + uncertainty_reward
                 
                 # 使用SB3数值稳定性工具进行最终检查
                 if SB3_INTEGRATION_AVAILABLE:
@@ -1417,6 +1440,7 @@ class HMASDAgent:
                         'env_component': env_component,
                         'team_disc_component': team_disc_component,
                         'ind_disc_component': ind_disc_component,
+                        'uncertainty_reward': uncertainty_reward, # 新增
                         'intrinsic_reward': intrinsic_reward
                     }
                     
@@ -1427,23 +1451,28 @@ class HMASDAgent:
                                 intrinsic_reward = env_component
                                 team_disc_component = 0.0
                                 ind_disc_component = 0.0
+                                uncertainty_reward = 0.0
                             elif name == 'team_disc_component':
                                 team_disc_component = 0.0
                             elif name == 'ind_disc_component':
                                 ind_disc_component = 0.0
+                            elif name == 'uncertainty_reward':
+                                uncertainty_reward = 0.0
                 else:
                     # 使用内置的数值检查
                     if not np.isfinite(intrinsic_reward):
                         intrinsic_reward = env_component
                         team_disc_component = 0.0
                         ind_disc_component = 0.0
+                        uncertainty_reward = 0.0
                 
-                return intrinsic_reward, env_component, team_disc_component, ind_disc_component
+                # 在返回值中包含不确定性奖励
+                return intrinsic_reward, env_component, team_disc_component, ind_disc_component, uncertainty_reward
                 
             except Exception as e:
                 main_logger.error(f"Error in SB3-integrated intrinsic reward computation: {e}")
                 env_component = self.config.lambda_e * reward if hasattr(self.config, 'lambda_e') else 0.0
-                return env_component, env_component, 0.0, 0.0
+                return env_component, env_component, 0.0, 0.0, 0.0
 
     def update_coordinator(self, num_steps):
         """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
