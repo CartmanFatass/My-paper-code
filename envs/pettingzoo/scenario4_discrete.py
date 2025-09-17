@@ -2506,6 +2506,9 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "uavs_with_backhaul": len(self.routing_paths),
                 "system_throughput_mbps": system_throughput_mbps,
                 "avg_throughput_per_user_mbps": avg_throughput_per_user_mbps,
+                # 【新增】将连接数据移入reward_info以便稳定传递
+                "connections": self.connections.copy(),
+                "routing_paths": copy.deepcopy(self.routing_paths),
             })
             
             # 将统一的奖励信息放入 info 字典，用于监控、调试和可视化

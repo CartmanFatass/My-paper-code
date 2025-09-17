@@ -5,6 +5,7 @@ import numpy as np
 from torch.distributions import Normal, Categorical
 import logging
 from logger import main_logger
+from hmasd.r_mappo_utils import CNNBase, MLPBase, RNNLayer, ACTLayer, PopArt, check, get_shape_from_obs_space, init
 
 def sparsemax(logits, dim=-1):
     """
@@ -683,57 +684,26 @@ class SkillDecoder(nn.Module):
             return agent_skill_logits
 
 class SkillCoordinator(nn.Module):
-    """技能协调器（高层策略）"""
+    """技能协调器（高层策略）- 简化版"""
     def __init__(self, config):
         super(SkillCoordinator, self).__init__()
         
         self.config = config
         self.n_Z = config.n_Z
         self.n_z = config.n_z
-        self.use_opt = config.use_opt
-        self.enhanced_state = getattr(config, 'enhanced_state', False)
-
-        # --- 新增：根据模式初始化嵌入层 ---
-        if self.enhanced_state:
-            # 增强模式：为每个状态组件创建独立的嵌入层
-            dims = config.state_component_dims
-            self.current_state_embedding = nn.Linear(dims['current_state_dim'], config.embedding_dim)
-            self.predicted_state_embedding = nn.Linear(dims['predicted_state_dim'], config.embedding_dim)
-            self.uncertainty_state_embedding = nn.Linear(dims['uncertainty_state_dim'], config.embedding_dim)
-            
-            # 附加一个线性层，将拼接后的多头嵌入投影回标准维度
-            self.multi_head_projection = nn.Linear(config.embedding_dim * 3, config.embedding_dim)
-        else:
-            # 兼容旧模式：单一状态嵌入层
-            self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
-
+        
+        self.state_embedding = nn.Linear(config.state_dim, config.embedding_dim)
         self.obs_embedding = nn.Linear(config.obs_dim, config.embedding_dim)
         self.positional_encoding = PositionalEncoding(config.embedding_dim)
         
-        if self.use_opt:
-            # 决策层OPT模块：专门用于技能选择的交互解耦
-            self.decision_opt = OPT(
-                input_dim=config.embedding_dim,
-                num_prototypes=config.opt_num_prototypes,
-                prototype_dim=config.opt_prototype_dim,
-                num_layers=config.opt_layers
-            )
-            # 将OPT输出投影到适合技能解码的维度
-            if config.opt_prototype_dim != config.embedding_dim:
-                self.opt_to_decoder_projection = nn.Linear(config.opt_prototype_dim, config.embedding_dim)
-            else:
-                self.opt_to_decoder_projection = nn.Identity()
-        else:
-            # 使用标准的Transformer编码器作为后备
-            encoder_layer = nn.TransformerEncoderLayer(
-                d_model=config.embedding_dim,
-                nhead=config.n_heads,
-                dim_feedforward=config.embedding_dim * 4,
-                batch_first=True
-            )
-            self.fallback_encoder = nn.TransformerEncoder(encoder_layer, config.n_encoder_layers)
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=config.embedding_dim,
+            nhead=config.n_heads,
+            dim_feedforward=config.embedding_dim * 4,
+            batch_first=True
+        )
+        self.encoder = nn.TransformerEncoder(encoder_layer, config.n_encoder_layers)
         
-        # 技能解码器
         self.skill_decoder = SkillDecoder(
             config.embedding_dim,
             config.n_decoder_layers,
@@ -742,77 +712,27 @@ class SkillCoordinator(nn.Module):
             config.n_z
         )
         
-        # 高层价值函数 - 基于解耦后的特征
         self.value_head_state = nn.Linear(config.embedding_dim, 1)
         self.value_heads_obs = nn.ModuleList([
             nn.Linear(config.embedding_dim, 1) for _ in range(config.n_agents)
         ])
         
-        # 初始化网络权重
         self._init_weights()
     
     def _init_weights(self):
         """初始化网络权重，提高训练稳定性"""
-        # --- 新增：根据模式初始化嵌入层 ---
-        if self.enhanced_state:
-            initialize_weights(self.current_state_embedding, gain=1.0)
-            initialize_weights(self.predicted_state_embedding, gain=1.0)
-            initialize_weights(self.uncertainty_state_embedding, gain=1.0)
-            initialize_weights(self.multi_head_projection, gain=1.0)
-        else:
-            initialize_weights(self.state_embedding, gain=1.0)
-        
+        initialize_weights(self.state_embedding, gain=1.0)
         initialize_weights(self.obs_embedding, gain=1.0)
-        
-        # 初始化价值头权重
-        initialize_weights(self.value_head_state, gain=0.01)  # 价值函数输出层使用较小的初始化
+        initialize_weights(self.value_head_state, gain=0.01)
         for value_head in self.value_heads_obs:
             initialize_weights(value_head, gain=0.01)
     
     def _build_entity_sequence(self, state, observations):
-        """
-        构造实体特征序列，用于OPT模块处理
-        
-        参数:
-            state: 全局状态 [batch_size, state_dim]
-            observations: 所有智能体观测 [batch_size, n_agents, obs_dim]
-            
-        返回:
-            entity_features: 实体特征序列 [batch_size, 1+n_agents, embedding_dim]
-        """
-        batch_size, n_agents, obs_dim = observations.size()
-        
-        # --- 新增：根据模式处理状态嵌入 ---
-        if self.enhanced_state:
-            main_logger.info("协调器正在使用增强状态模式（多头嵌入）")
-            dims = self.config.state_component_dims
-            current_dim = dims['current_state_dim']
-            predicted_dim = dims['predicted_state_dim']
-            
-            # 拆分状态向量
-            current_state = state[:, :current_dim]
-            predicted_state = state[:, current_dim : current_dim + predicted_dim]
-            uncertainty_state = state[:, current_dim + predicted_dim:]
-            
-            # 分别通过嵌入层
-            embedded_current = self.current_state_embedding(current_state)
-            embedded_predicted = self.predicted_state_embedding(predicted_state)
-            embedded_uncertainty = self.uncertainty_state_embedding(uncertainty_state)
-            
-            # 拼接多头嵌入并投影
-            concatenated_embedding = torch.cat([embedded_current, embedded_predicted, embedded_uncertainty], dim=1)
-            embedded_state = self.multi_head_projection(concatenated_embedding).unsqueeze(1)
-        else:
-            # 旧模式
-            embedded_state = self.state_embedding(state).unsqueeze(1)
-
-        embedded_obs = self.obs_embedding(observations.reshape(-1, obs_dim))
-        embedded_obs = embedded_obs.reshape(batch_size, n_agents, -1)
-        
+        batch_size, n_agents, _ = observations.size()
+        embedded_state = self.state_embedding(state).unsqueeze(1)
+        embedded_obs = self.obs_embedding(observations.view(-1, self.config.obs_dim)).view(batch_size, n_agents, -1)
         entity_features = torch.cat([embedded_state, embedded_obs], dim=1)
-        entity_features = self.positional_encoding(entity_features)
-        
-        return entity_features
+        return self.positional_encoding(entity_features)
     
     def get_value(self, state, observations):
         """
@@ -834,15 +754,8 @@ class SkillCoordinator(nn.Module):
         # 构造实体特征序列
         entity_features = self._build_entity_sequence(state, observations)
         
-        if self.use_opt:
-            # 使用决策层OPT进行交互解耦
-            disentangled_features, cd_loss, _, _ = self.decision_opt(entity_features)
-            # 投影到解码器维度
-            processed_features = self.opt_to_decoder_projection(disentangled_features)
-        else:
-            # 使用标准编码器
-            processed_features = self.fallback_encoder(entity_features)
-            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        processed_features = self.encoder(entity_features)
+        cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
         
         # 【论文一致性修复】按照Figure 3实现分别的价值函数
         # 1. 基于编码状态的价值函数 V^h(ŝ) - 用于团队技能
@@ -889,16 +802,9 @@ class SkillCoordinator(nn.Module):
         # 构造实体特征序列
         entity_features = self._build_entity_sequence(state, observations)
         
-        if self.use_opt:
-            # 使用决策层OPT进行交互解耦
-            disentangled_features, cd_loss, cmi_loss, _ = self.decision_opt(entity_features, history_context)
-            # 投影到解码器维度
-            processed_features = self.opt_to_decoder_projection(disentangled_features)
-        else:
-            # 使用标准编码器
-            processed_features = self.fallback_encoder(entity_features)
-            cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
-            cmi_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        processed_features = self.encoder(entity_features)
+        cd_loss = torch.tensor(0.0, device=device, requires_grad=True)
+        cmi_loss = torch.tensor(0.0, device=device, requires_grad=True)
         
         # 拆分处理后的特征
         encoded_state = processed_features[:, 0:1, :]  # [batch_size, 1, embedding_dim]
@@ -1027,341 +933,254 @@ class SkillCoordinator(nn.Module):
             main_logger.warning("由于错误，返回默认值")
             return default_Z, default_z, default_Z_logits, default_z_logits, cd_loss, cmi_loss
 
-class SkillDiscoverer(nn.Module):
-    """技能发现器（低层策略）"""
-    def __init__(self, config, logger=None): # Add logger parameter
-        super(SkillDiscoverer, self).__init__()
+class R_Actor(nn.Module):
+    def __init__(self, args, obs_space, action_space, n_z, device=torch.device("cpu")):
+        super(R_Actor, self).__init__()
+        self.hidden_size = args.hidden_size
+        self._gain = args.gain
+        self._use_orthogonal = args.use_orthogonal
+        self._use_policy_active_masks = args.use_policy_active_masks
+        self._use_naive_recurrent_policy = args.use_naive_recurrent_policy
+        self._use_recurrent_policy = args.use_recurrent_policy
+        self._recurrent_N = args.recurrent_N
+        self.tpdv = dict(dtype=torch.float32, device=device)
+
+        obs_shape = get_shape_from_obs_space(obs_space)
+        base = CNNBase if len(obs_shape) == 3 else MLPBase
+        self.base = base(args, obs_shape)
         
-        self.config = config
-        # 保存logger参数，如果为None则使用main_logger
-        self.logger = logger if logger is not None else main_logger
-        self.obs_dim = config.obs_dim
-        self.n_z = config.n_z
-        self.action_dim = config.action_dim
-        self.hidden_dim = config.hidden_size
-        self.gru_hidden_dim = config.gru_hidden_size
-        self.use_opt = config.use_opt
+        self.film_generator = nn.Linear(n_z, 2 * self.hidden_size)
+
+        if self._use_naive_recurrent_policy or self._use_recurrent_policy:
+            self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
+
+        self.act = ACTLayer(action_space, self.hidden_size, self._use_orthogonal, self._gain, args)
+
+        self.to(device)
+
+    def forward(self, obs, rnn_states, masks, agent_skill, available_actions=None, deterministic=False):
+        obs = check(obs).to(**self.tpdv)
+        rnn_states = check(rnn_states).to(**self.tpdv)
+        masks = check(masks).to(**self.tpdv)
+        agent_skill = check(agent_skill).to(**self.tpdv)
+        if available_actions is not None:
+            available_actions = check(available_actions).to(**self.tpdv)
+
+        actor_features = self.base(obs)
         
-        # FiLM架构: 状态编码器 + 技能FiLM层
-        # 1. 观测编码器
-        self.obs_encoder = nn.Sequential(
-            nn.Linear(config.obs_dim, config.hidden_size),
-            nn.ReLU(),
-            nn.Linear(config.hidden_size, config.hidden_size)
-        )
-        
-        # 2. FiLM参数生成器 (从技能生成gamma和beta)
-        # 输出维度是 2 * hidden_size，一半是gamma，一半是beta
-        self.film_generator = nn.Linear(config.n_z, 2 * config.hidden_size)
-        
-        self.actor_gru = nn.GRU(config.hidden_size, config.gru_hidden_size)
-        
-        # 动作均值和标准差
-        self.action_mean = nn.Linear(config.gru_hidden_size, config.action_dim)
-        self.action_log_std = nn.Linear(config.gru_hidden_size, config.action_dim)
-        # 将log_std初始化为较小的值，这样训练开始时标准差接近1
-        # 使用 nn.init 而不是直接访问 .data 以保持梯度流
-        nn.init.constant_(self.action_log_std.weight, 0.0)
-        nn.init.constant_(self.action_log_std.bias, -1.0)  # exp(-1) ≈ 0.37
-        
-        # Critic网络 (FiLM架构)
-        # 1. 状态编码器
-        self.critic_state_encoder = nn.Sequential(
-            nn.Linear(config.state_dim, config.hidden_size),
-            nn.GELU(),
-            ResBlock(config.hidden_size)
-        )
-        # 2. FiLM参数生成器 (从团队技能Z生成)
-        self.critic_film_generator = nn.Linear(config.n_Z, 2 * config.hidden_size)
-        
-        # 3. 后续处理网络
-        self.critic_post_film = nn.Sequential(
-            ResBlock(config.hidden_size),
-            nn.Linear(config.hidden_size, config.hidden_size),
-            nn.LayerNorm(config.hidden_size),
-            nn.GELU()
-        )
-        self.value_head = nn.Linear(config.hidden_size, 1)
-        
-        # 初始化网络权重
-        self._init_weights()
-    
-    def _init_weights(self):
-        """初始化网络权重，提高训练稳定性"""
-        # 初始化FiLM架构的权重
-        initialize_weights(self.obs_encoder, gain=1.0)
-        initialize_weights(self.film_generator, gain=1.0)
-        
-        # 初始化GRU权重
-        initialize_weights(self.actor_gru, gain=1.0)
-        
-        # 初始化动作均值输出层
-        initialize_weights(self.action_mean, gain=0.01)
-        
-        # 初始化价值头
-        initialize_weights(self.value_head, gain=0.01)  # 价值函数输出层使用较小的初始化
-        
-        # 初始化critic网络权重
-        initialize_weights(self.critic_state_encoder, gain=1.0)
-        initialize_weights(self.critic_film_generator, gain=1.0)
-        initialize_weights(self.critic_post_film, gain=1.0)
-    
-    def reset_hidden_periodic(self, episode_step, reset_interval=100):
-        """
-        周期性重置GRU隐藏状态，防止长时间积累导致数值不稳定
-        
-        参数:
-            episode_step: 当前回合步数
-            reset_interval: 重置间隔步数，默认每100步重置一次
-        """
-        if episode_step % reset_interval == 0 and episode_step > 0:
-            if self.actor_hidden is not None:
-                batch_size = self.actor_hidden.size(1)
-                self.logger.debug(f"在步骤 {episode_step} 周期性重置隐藏状态")
-                self.init_hidden(batch_size)
-    
-    def get_value(self, state, team_skill):
-        """获取价值函数值 - 简化的、无GRU的中心化Critic"""
-        # 将 team_skill 转为 one-hot
-        if isinstance(team_skill, int):
-            team_skill = torch.tensor([team_skill], device=state.device)
-        elif team_skill.dim() == 0:
-            team_skill = team_skill.unsqueeze(0)
-        
-        team_skill_onehot = F.one_hot(team_skill.long(), num_classes=self.config.n_Z).float()
-        
-        # --- Critic FiLM 架构实现 ---
-        # 1. 编码状态
-        encoded_state = self.critic_state_encoder(state)
-        
-        # 2. 从团队技能生成FiLM参数
-        film_params = self.critic_film_generator(team_skill_onehot)
-        gamma, beta = torch.chunk(film_params, 2, dim=-1)
-        
-        # 3. 应用FiLM调制
-        modulated_state = gamma * encoded_state + beta
-        
-        # 4. 通过后续网络处理
-        features = self.critic_post_film(modulated_state)
-        value = self.value_head(features)
-        
-        return value, torch.tensor(0.0, device=state.device, requires_grad=True)  # 返回零损失
-    
-    def forward(self, observation, agent_skill, hidden_state, deterministic=False):
-        """
-        [ENHANCED CORRECTED VERSION]
-        Forward pass with robust GRU input/output shapes and enhanced error handling.
-        """
-        observation = observation.float()
-        
-        # Convert discrete skill index to one-hot encoding
-        if isinstance(agent_skill, int) or agent_skill.dim() == 0:
-            agent_skill = torch.tensor([agent_skill] if isinstance(agent_skill, int) else agent_skill.item(), 
-                                       device=observation.device, dtype=torch.long)
-        agent_skill_onehot = F.one_hot(agent_skill.long(), self.n_z).float()
-        
-        # Ensure batch dimension exists for single samples
-        if observation.dim() == 1:
-            observation = observation.unsqueeze(0)
-        if agent_skill_onehot.dim() == 1:
-            agent_skill_onehot = agent_skill_onehot.unsqueeze(0)
-            
-        batch_size = observation.shape[0]
-        
-        # Enhanced hidden state validation and correction
-        if hidden_state is None:
-            hidden_state = torch.zeros(batch_size, self.gru_hidden_dim, device=observation.device)
-            self.logger.debug(f"Initialized hidden state with shape {hidden_state.shape}")
-        
-        # Ensure hidden state has correct shape (B, H)
-        if hidden_state.dim() == 3 and hidden_state.shape[0] == 1:
-            hidden_state = hidden_state.squeeze(0)  # (1, B, H) -> (B, H)
-        elif hidden_state.dim() == 1:
-            hidden_state = hidden_state.unsqueeze(0)  # (H,) -> (1, H)
-        
-        # Validate hidden state shape
-        expected_shape = (batch_size, self.gru_hidden_dim)
-        if hidden_state.shape != expected_shape:
-            self.logger.warning(f"Hidden state shape mismatch: got {hidden_state.shape}, expected {expected_shape}")
-            hidden_state = torch.zeros(expected_shape, device=observation.device)
-            
-        # --- FiLM 架构实现 ---
-        # 1. 编码观测
-        encoded_obs = self.obs_encoder(observation)
-        
-        # 2. 从技能生成FiLM参数 (gamma, beta)
-        # film_params 的形状是 [batch_size, 2 * hidden_size]
+        agent_skill_onehot = F.one_hot(agent_skill.long(), num_classes=self.film_generator.in_features).float()
         film_params = self.film_generator(agent_skill_onehot)
-        # 使用 torch.chunk 将其沿最后一个维度分割成两部分
         gamma, beta = torch.chunk(film_params, 2, dim=-1)
-        
-        # 3. 应用FiLM调制
-        # gamma 和 beta 的形状是 [batch_size, hidden_size]
-        # encoded_obs 的形状是 [batch_size, hidden_size]
-        actor_features = gamma * encoded_obs + beta
-        # --- FiLM 结束 ---
-        
-        # 1. Reshape for GRU: (B, H) -> (1, B, H) for a sequence of length 1
-        actor_features_seq = actor_features.unsqueeze(0)
-        
-        # 2. Reshape hidden state for GRU: (B, H) -> (1, B, H) for 1 layer
-        hidden_state_seq = hidden_state.unsqueeze(0)
-        
-        # Validate GRU input shapes
-        assert actor_features_seq.shape == (1, batch_size, self.config.hidden_size), \
-            f"GRU input shape error: {actor_features_seq.shape}"
-        assert hidden_state_seq.shape == (1, batch_size, self.gru_hidden_dim), \
-            f"GRU hidden shape error: {hidden_state_seq.shape}"
-        
-        # GRU computation with error handling
-        try:
-            actor_output_seq, new_hidden_state_seq = self.actor_gru(actor_features_seq, hidden_state_seq)
-        except Exception as e:
-            self.logger.error(f"GRU forward error: {e}")
-            # Fallback: use input features directly
-            actor_output_seq = actor_features_seq
-            new_hidden_state_seq = hidden_state_seq
-        
-        # 3. Squeeze outputs back to original shape: (1, B, H) -> (B, H)
-        actor_output = actor_output_seq.squeeze(0)
-        new_hidden_state = new_hidden_state_seq.squeeze(0)
-        
-        # --- Enhanced action generation with numerical stability ---
-        # CRITICAL FIX: Remove tanh activation to prevent straight-line movement
-        # The tanh function was constraining the action mean to [-1,1] range, causing
-        # untrained agents to produce small but consistent directional biases
-        action_mean = self.action_mean(actor_output)
-        action_log_std = torch.clamp(self.action_log_std(actor_output), min=-10.0, max=2.0)
-        action_std = torch.exp(action_log_std)
-        
-        # Apply action bounds directly without tanh squashing
-        action_mean = torch.clamp(action_mean, -self.config.action_bound, self.config.action_bound)
-        action_std = torch.clamp(action_std, min=1e-6, max=10.0)
+        actor_features = gamma * actor_features + beta
 
-        try:
-            action_distribution = Normal(action_mean, action_std)
-            action = action_distribution.sample() if not deterministic else action_mean
-            action_logprob = action_distribution.log_prob(action).sum(dim=-1)
-            
-            # Validate outputs
-            if torch.isnan(action).any() or torch.isinf(action).any():
-                raise ValueError("Action contains NaN or Inf")
-            if torch.isnan(action_logprob).any() or torch.isinf(action_logprob).any():
-                raise ValueError("Action log prob contains NaN or Inf")
-                
-        except Exception as e:
-            self.logger.error(f"Error in action generation: {e}")
-            # Enhanced safe fallback
-            action_mean = torch.zeros_like(action_mean)
-            action_std = torch.ones_like(action_std) * 0.1  # Small but non-zero std
-            action_distribution = Normal(action_mean, action_std)
-            action = action_mean
-            action_logprob = action_distribution.log_prob(action).sum(dim=-1)
+        if self._use_naive_recurrent_policy or self._use_recurrent_policy:
+            actor_features, rnn_states = self.rnn(actor_features, rnn_states, masks)
 
-        return action, action_logprob, action_distribution, new_hidden_state
+        actions, action_log_probs = self.act(actor_features, available_actions, deterministic)
 
-    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None):
-        """
-        [CORRECTED VERSION]
-        Evaluate a sequence, correctly unrolling the recurrent state step-by-step.
-        """
+        return actions, action_log_probs, rnn_states
+
+    def evaluate_actions(self, obs, rnn_states, action, masks, agent_skill, available_actions=None, active_masks=None):
+        is_sequence = len(obs.shape) > 2
+        if is_sequence:
+            T, B, _ = obs.shape
+        
+        obs = check(obs).to(**self.tpdv)
+        rnn_states = check(rnn_states).to(**self.tpdv)
+        action = check(action).to(**self.tpdv)
+        masks = check(masks).to(**self.tpdv)
+        agent_skill = check(agent_skill).to(**self.tpdv)
+        if available_actions is not None:
+            available_actions = check(available_actions).to(**self.tpdv)
+        if active_masks is not None:
+            active_masks = check(active_masks).to(**self.tpdv)
+
+        actor_features = self.base(obs)
+        
+        agent_skill_onehot = F.one_hot(agent_skill.long(), num_classes=self.film_generator.in_features).float()
+        film_params = self.film_generator(agent_skill_onehot)
+        gamma, beta = torch.chunk(film_params, 2, dim=-1)
+        actor_features = gamma * actor_features + beta
+
+        if self._use_naive_recurrent_policy or self._use_recurrent_policy:
+            actor_features, rnn_states = self.rnn(actor_features, rnn_states, masks)
+        else:
+            if is_sequence:
+                # If not using RNN, flatten the features for the action layer
+                actor_features = actor_features.view(T * B, -1)
+                action = action.view(T * B, -1)
+                if available_actions is not None:
+                    available_actions = available_actions.view(T * B, -1)
+                if active_masks is not None:
+                    active_masks = active_masks.view(T * B, -1)
+
+        action_log_probs, dist_entropy = self.act.evaluate_actions(actor_features, action, available_actions, active_masks=active_masks if self._use_policy_active_masks else None)
+        
+        if is_sequence:
+            action_log_probs = action_log_probs.view(T, B, -1)
+
+        return action_log_probs, dist_entropy
+
+class R_Critic(nn.Module):
+    def __init__(self, args, cent_obs_space, n_Z, device=torch.device("cpu")):
+        super(R_Critic, self).__init__()
+        self.hidden_size = args.hidden_size
+        self._use_orthogonal = args.use_orthogonal
+        self._use_naive_recurrent_policy = args.use_naive_recurrent_policy
+        self._use_recurrent_policy = args.use_recurrent_policy
+        self._recurrent_N = args.recurrent_N
+        self._use_popart = args.use_popart
+        self.tpdv = dict(dtype=torch.float32, device=device)
+        init_method = [nn.init.xavier_uniform_, nn.init.orthogonal_][self._use_orthogonal]
+
+        cent_obs_shape = get_shape_from_obs_space(cent_obs_space)
+        base = CNNBase if len(cent_obs_shape) == 3 else MLPBase
+        self.base = base(args, cent_obs_shape)
+        
+        self.film_generator = nn.Linear(n_Z, 2 * self.hidden_size)
+
+        if self._use_naive_recurrent_policy or self._use_recurrent_policy:
+            self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
+
+        def init_(m):
+            return init(m, init_method, lambda x: nn.init.constant_(x, 0))
+
+        if self._use_popart:
+            self.v_out = init_(PopArt(self.hidden_size, 1, device=device))
+        else:
+            self.v_out = init_(nn.Linear(self.hidden_size, 1))
+
+        self.to(device)
+
+    def forward(self, cent_obs, rnn_states, masks, team_skill):
+        is_sequence = len(cent_obs.shape) > 2
+        if is_sequence:
+            T, B, _ = cent_obs.shape
+
+        cent_obs = check(cent_obs).to(**self.tpdv)
+        rnn_states = check(rnn_states).to(**self.tpdv)
+        masks = check(masks).to(**self.tpdv)
+        team_skill = check(team_skill).to(**self.tpdv)
+
+        critic_features = self.base(cent_obs)
+        
+        team_skill_onehot = F.one_hot(team_skill.long(), num_classes=self.film_generator.in_features).float()
+        film_params = self.film_generator(team_skill_onehot)
+        gamma, beta = torch.chunk(film_params, 2, dim=-1)
+        critic_features = gamma * critic_features + beta
+
+        if self._use_naive_recurrent_policy or self._use_recurrent_policy:
+            critic_features, rnn_states = self.rnn(critic_features, rnn_states, masks)
+        else:
+            if is_sequence:
+                critic_features = critic_features.view(T * B, -1)
+
+        values = self.v_out(critic_features)
+
+        if is_sequence:
+            values = values.view(T, B, -1)
+
+        return values, rnn_states
+
+class SkillDiscoverer(nn.Module):
+    def __init__(self, config, logger=None):
+        super(SkillDiscoverer, self).__init__()
+        self.config = config
+        self.logger = logger if logger is not None else main_logger
+        
+        # Adapt hmasd config to r_mappo's args format
+        class Args:
+            def __init__(self, config):
+                self.hidden_size = config.hidden_size
+                self.gain = 0.01
+                self.use_orthogonal = True
+                self.use_policy_active_masks = True
+                self.use_naive_recurrent_policy = False
+                self.use_recurrent_policy = True
+                self.recurrent_N = 1
+                self.use_feature_normalization = False
+                self.use_popart = False
+        
+        args = Args(config)
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+        # Create dummy spaces for initialization
+        from gymnasium import spaces
+        obs_space = spaces.Box(low=-np.inf, high=np.inf, shape=(config.obs_dim,))
+        if getattr(config, 'action_space_type', 'continuous') == 'discrete':
+            action_space = spaces.Discrete(config.action_dim)
+        else:
+            action_space = spaces.Box(low=-config.action_bound, high=config.action_bound, shape=(config.action_dim,))
+        
+        cent_obs_space = (config.state_dim,)
+
+        self.actor = R_Actor(args, obs_space, action_space, config.n_z, device)
+        self.critic = R_Critic(args, cent_obs_space, config.n_Z, device)
+
+    def forward(self, observation, agent_skill, hidden_state, deterministic=False):
+        # The new R_Actor expects masks. We can pass ones.
+        masks = torch.ones(observation.size(0), 1, device=observation.device)
+        actions, log_probs, new_hidden = self.actor(observation, hidden_state, masks, agent_skill, deterministic=deterministic)
+        # The original forward returned a dummy distribution, we return None for that.
+        return actions, log_probs, None, new_hidden
+
+    def get_value(self, state, team_skill, critic_hidden_state=None):
+        # The new R_Critic expects masks. We can pass ones.
+        masks = torch.ones(state.size(0), 1, device=state.device)
+        return self.critic(state, critic_hidden_state, masks, team_skill)
+
+    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None):
         T, B, _ = observations_seq.shape
-        device = observations_seq.device
-
-        # 如果没有提供初始隐藏状态，则使用零状态
-        if initial_hxs is None:
-            initial_hxs = torch.zeros(B, self.gru_hidden_dim, device=device)
-
-        # --- Actor Part: Process sequence step-by-step with FiLM ---
-        T, B, _ = observations_seq.shape
+        # The dones_seq from buffer might be (T, B, 1), ensure it's (T, B) for mask creation
+        if dones_seq.dim() > 2:
+            dones_seq = dones_seq.squeeze(-1)
+        masks = (1 - dones_seq.float())
         
-        # 1. 编码观测序列
-        obs_flat = observations_seq.contiguous().view(T * B, -1)
-        encoded_obs_flat = self.obs_encoder(obs_flat)
+        # Pass sequences without flattening
+        log_probs, entropy = self.actor.evaluate_actions(
+            observations_seq,
+            initial_hxs,
+            actions_seq,
+            masks,
+            agent_skills_seq
+        )
         
-        # 2. 从技能序列生成FiLM参数
-        skills_onehot = F.one_hot(agent_skills_seq.long(), self.n_z).float()
-        skills_onehot_flat = skills_onehot.contiguous().view(T * B, -1)
-        film_params_flat = self.film_generator(skills_onehot_flat)
-        gamma_flat, beta_flat = torch.chunk(film_params_flat, 2, dim=-1)
-        
-        # 3. 应用FiLM调制
-        actor_features_flat = gamma_flat * encoded_obs_flat + beta_flat
-        
-        # 将处理后的特征重塑为 (T, B, H) 以输入GRU
-        gru_input = actor_features_flat.contiguous().view(T, B, -1)
-
-        # Unroll GRU step-by-step
-        hidden_states = initial_hxs  # Shape: (B, H)
-        all_gru_outputs = []
-        
-        if dones_seq is not None and dones_seq.dim() == 2:
-            dones_seq = dones_seq.unsqueeze(-1)
-
-        for t in range(T):
-            # Mask resets hidden state if the previous step was 'done'
-            if dones_seq is not None and t > 0:
-                mask = (1.0 - dones_seq[t-1])
-                hidden_states = hidden_states * mask
-            
-            # --- Core Fix ---
-            # 1. Reshape input for GRU: (B, H) -> (1, B, H)
-            gru_input_t = gru_input[t].unsqueeze(0)
-            
-            # 2. Reshape hidden state for GRU: (B, H) -> (1, B, H)
-            hidden_states_t = hidden_states.unsqueeze(0)
-            
-            # GRU single step computation
-            gru_output_t, new_hidden_states_t = self.actor_gru(gru_input_t, hidden_states_t)
-            
-            # 3. Squeeze output shape back for the next loop iteration
-            hidden_states = new_hidden_states_t.squeeze(0)
-            all_gru_outputs.append(gru_output_t.squeeze(0))
-
-        gru_output = torch.stack(all_gru_outputs)  # Shape: (T, B, H)
-
-        # --- Rest of the logic is unchanged ---
-        gru_output_flat = gru_output.contiguous().view(T * B, -1)
-        # CRITICAL FIX: Remove tanh activation to prevent straight-line movement
-        action_mean = self.action_mean(gru_output_flat)
-        # Apply action bounds directly
-        action_mean = torch.clamp(action_mean, -self.config.action_bound, self.config.action_bound)
-        action_log_std = torch.clamp(self.action_log_std(gru_output_flat), min=-10.0, max=2.0)
-        action_std = torch.exp(action_log_std)
-
-        action_dist = Normal(action_mean, action_std)
-        actions_flat = actions_seq.contiguous().view(T * B, -1)
-        log_probs_flat = action_dist.log_prob(actions_flat).sum(dim=-1)
-        log_probs = log_probs_flat.contiguous().view(T, B)
-        entropy = action_dist.entropy().sum(dim=-1).mean()
-
-        # --- Critic Part (Unchanged) ---
-        global_states_flat = global_states_seq.contiguous().view(T * B, -1)
-        team_skills_flat = team_skills_seq.contiguous().view(T * B)
-        values_flat, _ = self.get_value(global_states_flat, team_skills_flat)
-        values = values_flat.contiguous().view(T, B)
+        values, _ = self.critic(
+            global_states_seq,
+            initial_critic_hxs,
+            masks,
+            team_skills_seq
+        )
         
         return log_probs, values, entropy
 
 class TeamDiscriminator(nn.Module):
-    """团队技能判别器 - 升级版3层MLP"""
+    """团队技能判别器 - 增强版（解决"弱判别器"问题）+ 残差连接"""
     def __init__(self, config):
         super(TeamDiscriminator, self).__init__()
         
-        # 使用您建议的更稳健的3层MLP结构
-        self.net = nn.Sequential(
-            nn.Linear(config.state_dim, config.hidden_size),
-            nn.LayerNorm(config.hidden_size),
-            nn.GELU(),
-            nn.Linear(config.hidden_size, config.hidden_size),
+        # 【弱判别器修复】使用残差连接的深度网络架构
+        # 输入投影层：将状态维度映射到隐藏维度
+        self.input_projection = nn.Linear(config.state_dim, config.hidden_size)
+        
+        # 【关键增强】添加残差块以提升学习能力和梯度流
+        self.res_blocks = nn.ModuleList([
+            ResBlock(config.hidden_size) for _ in range(2)  # 2个残差块
+        ])
+        
+        # 最终处理层
+        self.final_layers = nn.Sequential(
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
             nn.Tanh(),
             nn.Linear(config.hidden_size, config.n_Z)
         )
         
-        # 确保最后一层初始化正常
-        initialize_weights(self.net[-1], gain=1.0)
+        # 初始化所有权重
+        initialize_weights(self.input_projection, gain=1.0)
+        for layer in self.final_layers:
+            if isinstance(layer, nn.Linear):
+                initialize_weights(layer, gain=1.0)
     
     def forward(self, state):
         """
@@ -1373,50 +1192,84 @@ class TeamDiscriminator(nn.Module):
         """
         # 确保state是float32类型
         state = state.float()
-        return self.net(state)
+        
+        # 输入投影
+        x = self.input_projection(state)
+        
+        # 通过残差块
+        for res_block in self.res_blocks:
+            x = res_block(x)
+        
+        # 最终处理层
+        return self.final_layers(x)
 
 class IndividualDiscriminator(nn.Module):
-    """个体技能判别器 - 使用FiLM层处理团队技能"""
+    """个体技能判别器 - 增强版（解决"弱判别器"问题）+ 残差连接"""
     def __init__(self, config):
         super(IndividualDiscriminator, self).__init__()
         self.config = config
         
-        # 1. 观测编码器
-        self.obs_encoder = nn.Sequential(
-            nn.Linear(config.obs_dim, config.hidden_size),
-            nn.GELU()
-        )
+        # 1. 观测编码器 - 使用残差连接的深度架构
+        self.obs_input_projection = nn.Linear(config.obs_dim, config.hidden_size)
+        
+        # 【关键增强】为观测编码器添加残差块
+        self.obs_res_blocks = nn.ModuleList([
+            ResBlock(config.hidden_size) for _ in range(1)  # 1个残差块用于观测编码
+        ])
         
         # 2. FiLM参数生成器 (从团队技能Z生成)
         # 使用Embedding层处理离散的团队技能，然后映射到FiLM参数
         self.team_skill_embedding = nn.Embedding(config.n_Z, config.embedding_dim)
         self.film_generator = nn.Linear(config.embedding_dim, 2 * config.hidden_size)
         
-        # 3. 后续处理网络
-        self.post_film_net = nn.Sequential(
+        # 3. 【弱判别器修复】后续处理网络 - 使用残差连接
+        # 预处理层
+        self.post_film_pre = nn.Sequential(
             nn.LayerNorm(config.hidden_size),
-            nn.GELU(),
-            nn.Linear(config.hidden_size, config.hidden_size),
+            nn.GELU()
+        )
+        
+        # 【关键增强】为后续处理添加残差块
+        self.post_film_res_blocks = nn.ModuleList([
+            ResBlock(config.hidden_size) for _ in range(1)  # 1个残差块用于后续处理
+        ])
+        
+        # 最终输出层
+        self.final_output = nn.Sequential(
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
             nn.Tanh(),
             nn.Linear(config.hidden_size, config.n_z)
         )
         
-        # 初始化权重
-        initialize_weights(self.obs_encoder, gain=1.0)
+        # 初始化权重 - 确保所有层都正确初始化
+        initialize_weights(self.obs_input_projection, gain=1.0)
         initialize_weights(self.team_skill_embedding, gain=1.0)
         initialize_weights(self.film_generator, gain=1.0)
-        initialize_weights(self.post_film_net, gain=1.0)
+        
+        for layer in self.post_film_pre:
+            if isinstance(layer, nn.Linear):
+                initialize_weights(layer, gain=1.0)
+        
+        for layer in self.final_output:
+            if isinstance(layer, nn.Linear):
+                initialize_weights(layer, gain=1.0)
 
     def forward(self, observation, team_skill):
         # 确保 team_skill 是长整型的索引
         if team_skill.dtype != torch.long:
             team_skill = team_skill.long()
 
-        # --- Discriminator FiLM 架构实现 ---
-        # 1. 编码观测
-        encoded_obs = self.obs_encoder(observation)
+        # --- 增强版 Discriminator FiLM 架构实现（使用残差连接）---
+        # 1. 观测编码 - 使用残差连接
+        # 输入投影
+        x = self.obs_input_projection(observation)
+        
+        # 通过观测残差块
+        for res_block in self.obs_res_blocks:
+            x = res_block(x)
+        
+        encoded_obs = x
         
         # 2. 从团队技能生成FiLM参数
         team_skill_embedded = self.team_skill_embedding(team_skill)
@@ -1434,5 +1287,13 @@ class IndividualDiscriminator(nn.Module):
             
         modulated_obs = gamma * encoded_obs + beta
         
-        # 4. 通过后续网络处理
-        return self.post_film_net(modulated_obs)
+        # 4. 后续处理 - 使用残差连接
+        # 预处理
+        x = self.post_film_pre(modulated_obs)
+        
+        # 通过后续处理残差块
+        for res_block in self.post_film_res_blocks:
+            x = res_block(x)
+        
+        # 最终输出
+        return self.final_output(x)

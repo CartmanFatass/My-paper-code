@@ -1,6 +1,8 @@
 import numpy as np
 import heapq
 import copy
+import matplotlib
+matplotlib.use('Agg')
 from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict
 from scipy.spatial.distance import cdist
@@ -73,6 +75,12 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.w_outage = kwargs.get('w_outage', 1.0)
             self.outage_sinr_threshold_db = kwargs.get('outage_sinr_threshold_db', -5)
             self.predictive_handover = kwargs.get('predictive_handover', False)
+
+            # 软切换和动态簇管理参数
+            self.enable_soft_handover = kwargs.get('enable_soft_handover', False)
+            self.serving_set_size = kwargs.get('serving_set_size', 3)
+            self.handover_hysteresis_db = kwargs.get('handover_hysteresis_db', 3.0)
+            self.w_serving_set_cost = kwargs.get('w_serving_set_cost', 0.01)
             
             # 预测状态相关参数
             self.enable_predictive_state = kwargs.get('enable_predictive_state', False)
@@ -144,6 +152,12 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.w_outage = getattr(config, 'w_outage', 1.0)
             self.outage_sinr_threshold_db = getattr(config, 'outage_sinr_threshold_db', -5)
             self.predictive_handover = getattr(config, 'predictive_handover', False)
+
+            # 软切换和动态簇管理参数
+            self.enable_soft_handover = getattr(config, 'enable_soft_handover', False)
+            self.serving_set_size = getattr(config, 'serving_set_size', 3)
+            self.handover_hysteresis_db = getattr(config, 'handover_hysteresis_db', 3.0)
+            self.w_serving_set_cost = getattr(config, 'w_serving_set_cost', 0.01)
             
             # 预测状态相关参数
             self.enable_predictive_state = getattr(config, 'enable_predictive_state', False)
@@ -184,10 +198,15 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.cluster_kalman_filters = None
             
         self.user_velocities = np.zeros((self.n_users, 3))
-        self.user_serving_uav = -np.ones(self.n_users, dtype=int) # -1表示未被服务
+        self.user_serving_uav = -np.ones(self.n_users, dtype=int) # 硬切换模式下使用
+        self.user_serving_sets = [[] for _ in range(self.n_users)] # 软切换模式下使用
         self.user_handover_history = [[] for _ in range(self.n_users)]
         self.handover_count = 0
         self.ping_pong_count = 0
+        # 软切换性能指标
+        self.serving_set_changes = 0 # 服务簇成员变化次数 (加入或离开)
+        self.uav_joins_count = 0
+        self.uav_leaves_count = 0
         self.ping_pong_window = getattr(config, 'ping_pong_window', 5) if config else 5 # 5个时间步内发生A->B->A切换算作乒乓切换
         
         # RPGM 移动模型状态变量 (仅在 user_movement_model="rpgm" 时使用)
@@ -214,6 +233,9 @@ class UAVForcedRelayEnv(ParallelEnv):
             if self.reward_type != "handover":
                 print("Warning: predictive_handover is True, forcing reward_type to 'handover'.")
                 self.reward_type = "handover"
+        elif self.enable_soft_handover:
+            # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*5(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+            self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 5 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
         else:
             # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*4(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
             self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 4 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
@@ -237,40 +259,27 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.fig = None
         self.ax = None
         
-        # 重新计算并设置场景4的状态维度
+        # 重新计算并设置场景4的状态维度（详细版：包含每个用户的完整信息）
         # 1. 无人机位置: n_uavs * 3
         uav_pos_dim = self.n_uavs * 3
         
-        # 2. 用户位置: n_users * 3 (改为3维，保持一致性)
-        user_pos_dim = self.n_users * 3
+        # 2. 用户详细信息: n_users * 6 (位置x, 位置y, 速度x, 速度y, 连接状态, SINR)
+        user_info_dim = self.n_users * 6
         
         # 3. 地面基站位置: n_ground_bs * 3
         bs_pos_dim = self.n_ground_bs * 3
         
-        # 4. 用户覆盖状态: n_users
-        user_covered_dim = self.n_users
-        
-        # 5. 无人机连接状态: n_uavs
+        # 4. 无人机连接状态: n_uavs
         uav_connected_dim = self.n_uavs
         
-        # 6. 系统通信质量指标: 4 (平均SINR, 连接质量, 平均跳数, 系统吞吐量)
+        # 5. 系统通信质量指标: 4 (平均SINR, 连接质量, 平均跳数, 系统吞吐量)
         comm_quality_dim = 4
         
-        # 7. 当前步数: 1
+        # 6. 当前步数: 1
         step_dim = 1
         
-        # 8. 预测状态flag: 1 (是否启用预测状态)
-        predictive_flag_dim = 1
-        
-        # 9. 预测信息 (如果启用预测状态)
-        predictive_info_dim = 0
-        if self.enable_predictive_state:
-            # 用户预测位置: n_users * 2 (预测的x, y位置)
-            # 用户预测速度: n_users * 2 (预测的vx, vy速度)
-            predictive_info_dim = self.n_users * 2 + self.n_users * 2
-        
         # 重新设置state_dim
-        self.state_dim = uav_pos_dim + user_pos_dim + bs_pos_dim + user_covered_dim + uav_connected_dim + comm_quality_dim + step_dim + predictive_flag_dim + predictive_info_dim
+        self.state_dim = uav_pos_dim + user_info_dim + bs_pos_dim + uav_connected_dim + comm_quality_dim + step_dim
 
     def _create_kalman_filter(self, dt, process_noise=1.0, measurement_noise=10.0):
         """创建一个配置好的filterpy卡尔曼滤波器实例"""
@@ -1016,13 +1025,26 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 统计有效连接的用户数量
         effective_connected_users = 0
+        # 遍历每一个用户，确保每个用户只被计算一次
+        for user_idx in range(self.n_users):
+            is_effectively_covered = False
+            # 查找连接到该用户的所有无人机
+            connected_uavs_indices = np.where(self.connections[:, user_idx])[0]
+            
+            for uav_idx in connected_uavs_indices:
+                # 只要其中任意一个无人机有回程路径，该用户就算作有效覆盖
+                if uav_idx in self.routing_paths and self.routing_paths[uav_idx][0]:
+                    is_effectively_covered = True
+                    break  # 找到一个即可，无需继续检查
+            
+            if is_effectively_covered:
+                effective_connected_users += 1
+
+        # total_connected_users 的计算也需要修正，以避免重复计数
         total_connected_users = 0
-        for i in range(self.n_uavs):
-            uav_connected_users = np.sum(self.connections[i])
-            total_connected_users += uav_connected_users
-            # 只有当UAV有回程路径时，其连接的用户才算有效
-            if i in self.routing_paths and self.routing_paths[i][0]:
-                effective_connected_users += uav_connected_users
+        for user_idx in range(self.n_users):
+            if np.any(self.connections[:, user_idx]):
+                total_connected_users += 1
         
         # 计算覆盖率（线性奖励）
         coverage_ratio = effective_connected_users / self.n_users if self.n_users > 0 else 0
@@ -1050,9 +1072,72 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 【新增】确保包含所有关键性能指标，供可视化工具使用
             "served_users": effective_connected_users,  # 为兼容性添加别名
             "service_rate": coverage_ratio,  # 服务率等同于覆盖率
+            # 【关键修复】添加当前用户位置，用于可视化用户移动轨迹
+            "user_positions": self.user_positions.copy() if hasattr(self, 'user_positions') and self.user_positions is not None else None,
         }
         
         return coverage_ratio
+
+    def _calculate_sinr_distribution_and_qos(self):
+        """
+        计算有效连接用户的SINR分布，并计算一个综合的服务质量(QoS)得分。
+        
+        返回:
+            sinr_stats (dict): 包含SINR分布统计的字典。
+            qos_score (float): 基于SINR的服务质量得分 [0, 1]。
+        """
+        sinr_values = []
+        # 遍历所有有效连接的用户并收集他们的SINR值
+        # 【修正】直接使用 self.connections 和 self.routing_paths 来确定有效连接
+        for uav_idx in range(self.n_uavs):
+            if uav_idx in self.routing_paths:
+                for user_idx in range(self.n_users):
+                    if self.connections[uav_idx, user_idx]:
+                        sinr_db = self.sinr_matrix[uav_idx, user_idx]
+                        sinr_values.append(sinr_db)
+
+        if not sinr_values:
+            stats = {
+                "sinr_dist_below_3dB": 1.0, "sinr_dist_3_to_10dB": 0.0,
+                "sinr_dist_10_to_20dB": 0.0, "sinr_dist_above_20dB": 0.0,
+                "sinr_avg_db": 0.0, "sinr_min_db": 0.0, "sinr_max_db": 0.0,
+                "qos_score": 0.0
+            }
+            return stats, 0.0
+
+        sinr_array = np.array(sinr_values)
+        
+        # 统计SINR分布
+        total_effective_users = len(sinr_array)
+        stats = {
+            "sinr_dist_below_3dB": np.sum(sinr_array < 3) / total_effective_users,
+            "sinr_dist_3_to_10dB": np.sum((sinr_array >= 3) & (sinr_array < 10)) / total_effective_users,
+            "sinr_dist_10_to_20dB": np.sum((sinr_array >= 10) & (sinr_array < 20)) / total_effective_users,
+            "sinr_dist_above_20dB": np.sum(sinr_array >= 20) / total_effective_users,
+            "sinr_avg_db": np.mean(sinr_array),
+            "sinr_min_db": np.min(sinr_array),
+            "sinr_max_db": np.max(sinr_array)
+        }
+
+        # 计算QoS得分 (基于平均SINR)
+        # 1. 计算所有有效连接用户的平均SINR (dB)
+        avg_sinr_db = np.mean(sinr_array)
+        
+        # 2. 将平均SINR归一化到 [0, 1] 范围
+        # 假设一个合理的SINR范围是 [min_sinr, 30dB]
+        # 低于 min_sinr 的连接通常被认为质量不佳
+        sinr_upper_bound = 30.0
+        normalized_avg_sinr = (avg_sinr_db - self.min_sinr) / (sinr_upper_bound - self.min_sinr)
+        normalized_avg_sinr = np.clip(normalized_avg_sinr, 0, 1) # 确保在[0,1]范围内
+        
+        # 3. QoS得分是归一化的平均SINR乘以覆盖率
+        # 这样既考虑了连接质量 (平均SINR)，也考虑了连接数量 (覆盖率)
+        coverage_ratio = total_effective_users / self.n_users if self.n_users > 0 else 0
+        qos_score = normalized_avg_sinr * coverage_ratio
+        
+        stats["qos_score"] = qos_score
+        
+        return stats, qos_score
 
     def calculate_network_health_reward(self):
         """
@@ -1106,25 +1191,38 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 使用加权服务分代替简单的计数
         role_diversity_bonus = np.sqrt(weighted_serving_score * pure_relay_uavs_count) / (self.n_uavs / 2.0 + 1e-8)
 
-        # --- 3. 有效覆盖得分 (Effective Coverage Score) ---
-        # 这就是您原来的奖励，即最终的任务目标。
-        effective_coverage_score = self.reward_info.get("coverage_ratio", 0)
+        # --- 3. 服务质量得分 (Quality of Service Score) ---
+        # 这个分数取代了简单的覆盖率，它同时考虑了连接质量(SINR)和数量。
+        # qos_score 已经在 self.reward_info 中被计算和存储
+        effective_coverage_score = self.reward_info.get("qos_score", 0)
 
         # --- 4. 分散惩罚 (Dispersion Penalty) ---
         # 一个可选但推荐的项，用于防止无人机挤作一团。
         distance_penalties = self._calculate_individual_distance_overlap_penalties()
         dispersion_penalty = np.mean(distance_penalties) if len(distance_penalties) > 0 else 0
 
+        # --- 5. 服务簇成本惩罚 (Serving Set Cost Penalty) ---
+        serving_set_cost = 0
+        if self.enable_soft_handover:
+            total_serving_uavs = sum(len(s) for s in self.user_serving_sets)
+            # 归一化成本：(总服务数 - 理想总服务数) / (最大可能总服务数 - 理想总服务数)
+            ideal_total_serving_uavs = self.n_users 
+            max_total_serving_uavs = self.n_users * self.serving_set_size
+            if max_total_serving_uavs > ideal_total_serving_uavs:
+                cost_ratio = (total_serving_uavs - ideal_total_serving_uavs) / (max_total_serving_uavs - ideal_total_serving_uavs)
+                serving_set_cost = self.w_serving_set_cost * np.clip(cost_ratio, 0, 1)
+
         # --- 组合成最终的 r_t ---
         # 这是一个加权和，反映了网络的整体健康状况。
         shared_team_reward = (W_CONNECTIVITY * connectivity_score +
                              W_DIVERSITY * role_diversity_bonus +
                              W_COVERAGE * effective_coverage_score -
-                             W_DISPERSION * dispersion_penalty)
+                             W_DISPERSION * dispersion_penalty -
+                             serving_set_cost)
         
         # 归一化，使其保持在一个合理的范围内，有利于稳定学习。
         total_positive_weight = W_CONNECTIVITY + W_DIVERSITY + W_COVERAGE
-        final_rt = shared_team_reward / total_positive_weight
+        final_rt = shared_team_reward / total_positive_weight if total_positive_weight > 0 else 0
 
         # 准备一个字典用于日志记录，这对于调试至关重要！
         reward_components = {
@@ -1133,6 +1231,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             "role_diversity_bonus": role_diversity_bonus,
             "effective_coverage_score": effective_coverage_score,
             "dispersion_penalty": dispersion_penalty,
+            "serving_set_cost": serving_set_cost,
             "serving_uavs_count": serving_uavs_count, # 日志中仍保留原始计数
             "pure_relay_uavs_count": pure_relay_uavs_count,
             "weighted_serving_score": weighted_serving_score # 添加新的加权分数
@@ -1153,56 +1252,110 @@ class UAVForcedRelayEnv(ParallelEnv):
         return self._render_frame()
 
     def _render_frame(self):
-        """渲染单帧 - 添加强制中继特定的可视化元素"""
-        try:
-            import matplotlib.pyplot as plt
-            from matplotlib.patches import Circle
-            from mpl_toolkits.mplot3d import Axes3D
-        except ImportError:
-            print("渲染需要matplotlib库")
-            return None
+        """
+        渲染单帧 - 增强版2D视图
+        【多进程修复版】: 移除环境内的后端检测，依赖训练脚本进行设置
+        """
+        import os
+        import threading
+        import traceback
+
+        # 多进程安全性保护 - 使用线程锁确保渲染操作的线程安全
+        if not hasattr(self, '_render_lock'):
+            self._render_lock = threading.Lock()
+
+        with self._render_lock:
+            try:
+                import matplotlib
+                import matplotlib.pyplot as plt
+                from matplotlib.patches import Circle, Arrow
+                
+                # 【诊断日志】在每次渲染时打印当前后端，以便在子进程中进行调试
+                pid = os.getpid()
+                current_backend = matplotlib.get_backend()
+                print(f"[PID: {pid}] 开始渲染 - Matplotlib后端: {current_backend}")
+
+            except ImportError as e:
+                print(f"[PID: {os.getpid()}] 渲染需要matplotlib库: {e}")
+                print(f"[PID: {os.getpid()}] 启用备用渲染策略：纯数据记录模式")
+                return self._fallback_render_strategy()
+            except Exception as e:
+                print(f"[PID: {os.getpid()}] 导入matplotlib时出错: {e}")
+                print(f"[PID: {os.getpid()}] 错误堆栈: {traceback.format_exc()}")
+                print(f"[PID: {os.getpid()}] 启用备用渲染策略：纯数据记录模式")
+                return self._fallback_render_strategy()
         
         if self.fig is None:
-            self.fig = plt.figure(figsize=(10, 8))
-            self.ax = self.fig.add_subplot(111, projection='3d')
+            self.fig = plt.figure(figsize=(12, 10))
+            self.ax = self.fig.add_subplot(111)
         else:
             self.ax.clear()
 
-        # 设置坐标轴
+        # 设置坐标轴 (2D)
         self.ax.set_xlim(0, self.area_size)
         self.ax.set_ylim(0, self.area_size)
-        self.ax.set_zlim(0, self.height_range[1] * 1.2)
         self.ax.set_xlabel('X (m)')
         self.ax.set_ylabel('Y (m)')
-        self.ax.set_zlabel('Z (m)')
-        self.ax.set_title(f'Forced Relay UAV Environment - Step: {self.current_step}/{self.max_steps}')
+        self.ax.set_title(f'UAV Relay Network with User Mobility - Step: {self.current_step}/{self.max_steps}')
+        self.ax.set_aspect('equal', adjustable='box')
+
+        # 绘制用户簇范围
+        if self.user_movement_model == "rpgm" and hasattr(self, 'cluster_centers_history'):
+            cluster_colors = plt.cm.get_cmap('tab10', self.n_clusters)
+            for i in range(self.n_clusters):
+                center = self.cluster_centers_history[i]
+                # 使用 cluster_std 的两倍作为可视化半径
+                radius = self.cluster_std * 2
+                circle = Circle(center, radius, color=cluster_colors(i), alpha=0.15, zorder=1)
+                self.ax.add_patch(circle)
+                
+                # 绘制簇中心移动速度箭头
+                if hasattr(self, 'cluster_velocities'):
+                    velocity = self.cluster_velocities[i]
+                    if np.linalg.norm(velocity) > 0.1:
+                        self.ax.arrow(center[0], center[1], velocity[0] * 5, velocity[1] * 5, 
+                                      head_width=30, head_length=40, fc=cluster_colors(i), ec=cluster_colors(i), zorder=10)
 
         # 绘制用户
         if self.user_positions is not None:
             user_x = self.user_positions[:, 0]
             user_y = self.user_positions[:, 1]
-            user_z = np.zeros(self.n_users)
-            self.ax.scatter(user_x, user_y, user_z, c='blue', marker='.', label='Users')
+            
+            # 根据簇分配为用户着色
+            if self.user_movement_model == "rpgm" and hasattr(self, 'user_cluster_assignments'):
+                colors = [cluster_colors(c) for c in self.user_cluster_assignments]
+                self.ax.scatter(user_x, user_y, c=colors, marker='.', label='Users', zorder=5)
+            else:
+                self.ax.scatter(user_x, user_y, c='blue', marker='.', label='Users', zorder=5)
+            
+            # 绘制用户移动速度箭头
+            if hasattr(self, 'user_velocities'):
+                for i in range(self.n_users):
+                    pos = self.user_positions[i, :2]
+                    vel = self.user_velocities[i, :2]
+                    if np.linalg.norm(vel) > 0.1:
+                        self.ax.arrow(pos[0], pos[1], vel[0] * 5, vel[1] * 5, 
+                                      head_width=15, head_length=20, fc='gray', ec='gray', alpha=0.6, zorder=4)
 
         # 绘制无人机和连接
         if self.uav_positions is not None:
             for i in range(self.n_uavs):
                 uav_pos = self.uav_positions[i]
-                self.ax.scatter(uav_pos[0], uav_pos[1], uav_pos[2], c='red', marker='^', s=100, label=f'UAV {i}' if i == 0 else "")
+                self.ax.scatter(uav_pos[0], uav_pos[1], c='red', marker='^', s=120, label=f'UAV {i}' if i == 0 else "", zorder=8)
+                self.ax.text(uav_pos[0] + 20, uav_pos[1] + 20, f"{int(uav_pos[2])}m", fontsize=8, color='black', zorder=9)
                 
                 # 绘制到用户的连接
                 if self.connections is not None:
                     for j in range(self.n_users):
                         if self.connections[i, j]:
                             user_pos = self.user_positions[j]
-                            self.ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], [uav_pos[2], 0], 'g-', alpha=0.3)
+                            self.ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], 'g-', alpha=0.4, zorder=3)
         
         # 绘制地面基站
         if self.ground_bs_positions is not None:
             bs_x = self.ground_bs_positions[:, 0]
             bs_y = self.ground_bs_positions[:, 1]
-            bs_z = self.ground_bs_positions[:, 2]
-            self.ax.scatter(bs_x, bs_y, bs_z, c='black', marker='s', s=120, label='Ground BS')
+            self.ax.scatter(bs_x, bs_y, c='black', marker='s', s=150, label='Ground BS', zorder=7)
 
         # 绘制路由路径
         if hasattr(self, 'routing_paths'):
@@ -1210,56 +1363,140 @@ class UAVForcedRelayEnv(ParallelEnv):
                 for i in range(len(path) - 1):
                     pos1 = self._get_node_pos(path[i])
                     pos2 = self._get_node_pos(path[i+1])
-                    self.ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], [pos1[2], pos2[2]], 'y--', alpha=0.7, linewidth=1.5)
+                    self.ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 'y--', alpha=0.8, linewidth=2.0, zorder=2)
         
         # 添加图例
         handles, labels = self.ax.get_legend_handles_labels()
         by_label = dict(zip(labels, handles))
         self.ax.legend(by_label.values(), by_label.keys(), loc='upper right')
         
-        # 添加强制中继统计信息
+        # 添加增强的统计信息
         if hasattr(self, 'reward_info'):
             reward_info = self.reward_info
             
-            # 左侧显示关键指标
-            self.ax.text2D(0.02, 0.85, f'Coverage: {reward_info.get("coverage_ratio", 0):.1%}', 
-                          transform=self.ax.transAxes, fontsize=10, weight='bold')
-            self.ax.text2D(0.02, 0.80, f'Effective Users: {reward_info.get("effective_connected_users", 0)}/{self.n_users}', 
-                          transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.75, f'Connected UAVs: {reward_info.get("connected_uavs", 0)}/{self.n_uavs}', 
-                          transform=self.ax.transAxes)
-            self.ax.text2D(0.02, 0.70, f'Avg Hops: {reward_info.get("avg_hops", 0):.1f}', 
-                          transform=self.ax.transAxes)
+            # 构建信息文本
+            info_text = (
+                f'Coverage: {reward_info.get("coverage_ratio", 0):.2%}\n'
+                f'Effective Users: {reward_info.get("effective_connected_users", 0)} / {self.n_users}\n'
+                f'Connected UAVs: {reward_info.get("connected_uavs", 0)} / {self.n_uavs}\n'
+                f'Avg Hops: {reward_info.get("avg_hops", 0):.2f}\n'
+                f'Sys Throughput: {reward_info.get("system_throughput_mbps", 0):.2f} Mbps\n'
+                f'Health Score: {reward_info.get("rt_final_health_score", 0):.3f}'
+            )
             
-            # 右侧显示奖励组成
-            self.ax.text2D(0.75, 0.85, f'Coverage Reward: {reward_info.get("coverage_reward", 0):.3f}', 
-                          transform=self.ax.transAxes, fontsize=9)
-            self.ax.text2D(0.75, 0.80, f'Link Quality Reward: {reward_info.get("link_quality_reward", 0):.3f}', 
-                          transform=self.ax.transAxes, fontsize=9)
-            self.ax.text2D(0.75, 0.70, f'Overlap Penalty: {reward_info.get("coverage_overlap_penalty", 0):.3f}', 
-                          transform=self.ax.transAxes, fontsize=9, color='red')
-            self.ax.text2D(0.75, 0.65, f'Total Reward: {reward_info.get("final_global_reward", 0):.3f}', 
-                          transform=self.ax.transAxes, fontsize=9, weight='bold')
+            # 在图表左下角添加一个带背景框的文本块
+            self.ax.text(0.02, 0.02, info_text, transform=self.ax.transAxes, fontsize=10,
+                         verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.8))
             
             # 目标达成状态
             if reward_info.get("target_coverage_achieved", False):
-                self.ax.text2D(0.02, 0.65, '✓ Target Coverage Achieved!', 
-                              transform=self.ax.transAxes, color='green', weight='bold')
-            else:
-                self.ax.text2D(0.02, 0.65, '⚠ Target Coverage Not Achieved', 
-                              transform=self.ax.transAxes, color='orange')
+                self.ax.text(0.5, 1.02, '✓ Target Coverage Achieved!', transform=self.ax.transAxes, 
+                             color='green', weight='bold', ha='center')
         
-        self.fig.canvas.draw()
+        try:
+            self.fig.canvas.draw()
+        except Exception as e:
+            print(f"绘制图形时出错: {e}")
+            return np.zeros((600, 800, 3), dtype=np.uint8)
         
         if self.render_mode == "human":
-            plt.pause(0.01)
+            try:
+                plt.pause(0.01)
+                return None
+            except Exception as e:
+                print(f"人类模式渲染时出错: {e}")
+                return None
+        elif self.render_mode == "rgb_array":
+            # 【关键修复】确保在 rgb_array 模式下返回有效的图像数组
+            try:
+                from matplotlib.backends.backend_agg import FigureCanvasAgg
+                canvas = FigureCanvasAgg(self.fig)
+                canvas.draw()
+                # 获取 RGBA 缓冲区并转换为 RGB
+                image_rgba = np.array(canvas.renderer.buffer_rgba())
+                # 转换为 RGB (移除 alpha 通道)
+                image_rgb = image_rgba[:, :, :3]
+                print(f"成功生成 {image_rgb.shape} 的渲染帧")
+                return image_rgb
+            except Exception as e:
+                print(f"渲染 rgb_array 时出错: {e}")
+                print(f"错误类型: {type(e).__name__}")
+                import traceback
+                print(f"错误堆栈: {traceback.format_exc()}")
+                # 返回一个默认的黑色图像而不是 None
+                return np.zeros((600, 800, 3), dtype=np.uint8)
+        else:
+            # 其他模式或未指定模式，返回 None
             return None
+    
+    def _fallback_render_strategy(self):
+        """
+        备用渲染策略：当matplotlib不可用时，生成一个包含文本信息的图像帧。
+        这确保了在无GUI服务器上即使渲染失败，也能生成有意义的视频用于调试。
         
-        from matplotlib.backends.backend_agg import FigureCanvasAgg
-        canvas = FigureCanvasAgg(self.fig)
-        canvas.draw()
-        image = np.array(canvas.renderer.buffer_rgba())
-        return image
+        返回:
+            frame: 包含调试信息的图像帧 (numpy array)
+        """
+        try:
+            import cv2
+        except ImportError:
+            # 如果连cv2都没有，返回一个纯黑色的图像
+            print("备用渲染策略需要OpenCV (cv2)。请安装：pip install opencv-python")
+            return np.zeros((600, 800, 3), dtype=np.uint8)
+
+        # 创建一个黑色背景的图像
+        frame = np.zeros((600, 800, 3), dtype=np.uint8)
+        
+        # 定义文本样式
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.7
+        color = (255, 255, 255)  # 白色
+        thickness = 1
+        line_type = cv2.LINE_AA
+
+        # 准备要显示的文本信息
+        info_lines = [
+            "--- Fallback Rendering Mode ---",
+            "Matplotlib rendering failed. Switched to data-only view.",
+            "",
+            f"Step: {self.current_step} / {self.max_steps}"
+        ]
+        
+        # 添加reward_info中的关键指标
+        if hasattr(self, 'reward_info') and self.reward_info:
+            info_lines.extend([
+                "",
+                "--- Performance Metrics ---",
+                f"Coverage Ratio: {self.reward_info.get('coverage_ratio', 0):.2%}",
+                f"Effective Users: {self.reward_info.get('effective_connected_users', 0)} / {self.n_users}",
+                f"Connected UAVs: {self.reward_info.get('connected_uavs', 0)} / {self.n_uavs}",
+                f"Avg Hops: {self.reward_info.get('avg_hops', 0):.2f}",
+                f"Sys Throughput: {self.reward_info.get('system_throughput_mbps', 0):.2f} Mbps",
+                f"Health Score: {self.reward_info.get('rt_final_health_score', 0):.3f}"
+            ])
+        
+        # 添加UAV和用户位置信息（简化版）
+        if hasattr(self, 'uav_positions') and self.uav_positions is not None:
+            info_lines.extend([
+                "",
+                "--- UAV Positions (x, y, z) ---"
+            ])
+            for i in range(min(5, self.n_uavs)):  # 只显示前5个UAV
+                pos = self.uav_positions[i]
+                info_lines.append(f"UAV {i}: ({pos[0]:.0f}, {pos[1]:.0f}, {pos[2]:.0f})")
+            if self.n_uavs > 5:
+                info_lines.append(f"... and {self.n_uavs - 5} more UAVs")
+
+        # 将文本逐行绘制到图像上
+        y_pos = 40
+        for line in info_lines:
+            if y_pos > 550:  # 防止文本超出图像边界
+                break
+            cv2.putText(frame, line, (30, y_pos), font, font_scale, color, thickness, line_type)
+            y_pos += 30
+            
+        print(f"备用渲染策略生成了 {frame.shape} 的调试帧")
+        return frame
     
     def _get_cluster_centers(self):
         """
@@ -1347,6 +1584,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.handover_count = 0
         self.ping_pong_count = 0
         self.user_serving_uav.fill(-1)
+        self.user_serving_sets = [[] for _ in range(self.n_users)]
+        self.serving_set_changes = 0
+        self.uav_joins_count = 0
+        self.uav_leaves_count = 0
         self.user_handover_history = [[] for _ in range(self.n_users)]
         
         # 4. 更新信道状态、连接和路由
@@ -1684,84 +1925,76 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return sinr_db
 
-    def _calculate_handover_reward(self):
+    def _calculate_handover_metrics(self):
         """
-        计算精细化的切换奖励函数
-        
-        该函数结合了覆盖率、切换成本、乒乓效应和服务中断的惩罚，
-        专门为预测性切换算法设计。
+        计算并返回所有与切换相关的性能指标。
+        此函数不计算最终奖励，只负责数据收集。
         
         返回:
-            handover_reward: 综合的切换奖励值
+            metrics (dict): 包含所有切换指标的字典。
         """
-        # 1. 计算覆盖率奖励（替代吞吐量奖励）
-        coverage_ratio = self.reward_info.get('coverage_ratio', 0)
-        # 覆盖率已经在[0,1]范围内，直接使用
-        coverage_reward = coverage_ratio
-        
-        # 2. 计算切换成本惩罚
-        # 记录上一步的切换次数，计算增量
+        # 1. 计算切换成本
         if not hasattr(self, 'prev_handover_count'):
             self.prev_handover_count = 0
-        
         handover_increment = self.handover_count - self.prev_handover_count
-        handover_penalty = handover_increment * self.w_handover
         self.prev_handover_count = self.handover_count
         
-        # 3. 计算乒乓切换惩罚
+        # 2. 计算乒乓切换
         if not hasattr(self, 'prev_ping_pong_count'):
             self.prev_ping_pong_count = 0
-            
         ping_pong_increment = self.ping_pong_count - self.prev_ping_pong_count
-        ping_pong_penalty = ping_pong_increment * self.w_pingpong
         self.prev_ping_pong_count = self.ping_pong_count
         
-        # 4. 计算服务中断惩罚
+        # 3. 计算服务中断
         outage_users = 0
-        outage_sinr_threshold_linear = 10 ** (self.outage_sinr_threshold_db / 10)
-        
         for user_idx in range(self.n_users):
-            # 检查用户是否有有效连接
             user_has_service = False
             for uav_idx in range(self.n_uavs):
-                if self.connections[uav_idx, user_idx]:
-                    # 检查该UAV是否有回程路径
-                    if uav_idx in self.routing_paths:
-                        # 检查SINR是否满足中断阈值
-                        current_sinr_db = self.sinr_matrix[uav_idx, user_idx]
-                        if current_sinr_db >= self.outage_sinr_threshold_db:
-                            user_has_service = True
-                            break
-            
+                if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
+                    if self.sinr_matrix[uav_idx, user_idx] >= self.outage_sinr_threshold_db:
+                        user_has_service = True
+                        break
             if not user_has_service:
                 outage_users += 1
         
-        # 归一化中断用户比例
         outage_ratio = outage_users / self.n_users if self.n_users > 0 else 0
+        
+        # 计算惩罚值
+        handover_penalty = handover_increment * self.w_handover
+        ping_pong_penalty = ping_pong_increment * self.w_pingpong
         outage_penalty = outage_ratio * self.w_outage
         
-        # 5. 组合最终奖励
+        # 4. 将所有指标打包到字典中返回
+        metrics = {
+            'handover_increment': handover_increment,
+            'ping_pong_increment': ping_pong_increment,
+            'outage_users': outage_users,
+            'outage_ratio': outage_ratio,
+            'handover_penalty': handover_penalty,
+            'ping_pong_penalty': ping_pong_penalty,
+            'outage_penalty': outage_penalty,
+        }
+        return metrics
+
+    def _get_handover_reward_from_metrics(self, metrics):
+        """
+        根据已计算的指标计算最终的切换奖励值。
+        
+        参数:
+            metrics (dict): 包含切换指标的字典。
+        
+        返回:
+            handover_reward (float): 最终的切换奖励值。
+        """
+        coverage_reward = self.reward_info.get('coverage_ratio', 0)
+        handover_penalty = metrics['handover_penalty']
+        ping_pong_penalty = metrics['ping_pong_penalty']
+        outage_penalty = metrics['outage_penalty']
+        
         handover_reward = (self.w_throughput * coverage_reward - 
                           handover_penalty - 
                           ping_pong_penalty - 
                           outage_penalty)
-        
-        # 6. 更新奖励信息用于调试
-        if not hasattr(self, 'reward_info'):
-            self.reward_info = {}
-            
-        self.reward_info.update({
-            'handover_reward': handover_reward,
-            'coverage_reward': coverage_reward,
-            'handover_penalty': handover_penalty,
-            'ping_pong_penalty': ping_pong_penalty,
-            'outage_penalty': outage_penalty,
-            'outage_users': outage_users,
-            'outage_ratio': outage_ratio,
-            'handover_increment': handover_increment,
-            'ping_pong_increment': ping_pong_increment,
-        })
-        
         return handover_reward
     
     def _compute_interference_radius(self):
@@ -1811,39 +2044,112 @@ class UAVForcedRelayEnv(ParallelEnv):
         for i in range(self.n_uavs):
             for j in range(self.n_users):
                 self.sinr_matrix[i, j] = self._compute_sinr(i, j)
-        
-        # 更新连接（贪婪算法）
-        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
-        
-        # 按SINR降序排列所有UAV-用户对
+
+        # 记录旧的连接状态，用于切换统计
+        old_connections = self.connections.copy()
+        old_serving_uav = self.user_serving_uav.copy()
+
+        # 根据模式选择连接更新逻辑
+        if self.enable_soft_handover:
+            self._update_serving_sets()
+            self._update_soft_handover_stats(old_connections)
+        else:
+            # 传统硬切换逻辑
+            self._update_hard_connections()
+            self._update_hard_handover_stats(old_serving_uav)
+
+    def _update_hard_connections(self):
+        """传统的硬连接分配逻辑"""
+        self.connections.fill(False)
         uav_user_pairs = []
         for i in range(self.n_uavs):
             for j in range(self.n_users):
                 if self.sinr_matrix[i, j] >= self.min_sinr:
                     uav_user_pairs.append((i, j, self.sinr_matrix[i, j]))
         
-        # 按SINR降序排序
         uav_user_pairs.sort(key=lambda x: x[2], reverse=True)
         
-        # 在更新连接前，记录旧的服务UAV状态
-        old_serving_uav = self.user_serving_uav.copy()
-
-        # 分配连接
-        uav_connections = [0] * self.n_uavs
-        user_connected = [False] * self.n_users
+        uav_connections = np.zeros(self.n_uavs, dtype=int)
+        user_connected = np.zeros(self.n_users, dtype=bool)
         
         for uav_idx, user_idx, sinr in uav_user_pairs:
-            # 如果UAV未达到最大连接数且用户未连接
             if uav_connections[uav_idx] < self.max_connections and not user_connected[user_idx]:
                 self.connections[uav_idx, user_idx] = True
                 uav_connections[uav_idx] += 1
                 user_connected[user_idx] = True
-        
-        # 更新切换统计
-        self._update_handover_stats(old_serving_uav)
 
-    def _update_handover_stats(self, old_serving_uav):
-        """根据连接变化，更新切换和乒乓切换计数"""
+    def _update_serving_sets(self):
+        """动态更新每个用户的服务集，实现软切换"""
+        self.connections.fill(False)
+        
+        for user_idx in range(self.n_users):
+            # 1. 识别并排序候选UAV
+            candidates = []
+            for uav_idx in range(self.n_uavs):
+                sinr = self.sinr_matrix[uav_idx, user_idx]
+                if sinr >= self.min_sinr:
+                    candidates.append({'uav_idx': uav_idx, 'sinr': sinr})
+            
+            candidates.sort(key=lambda x: x['sinr'], reverse=True)
+            
+            # 2. 获取当前服务集
+            current_set = self.user_serving_sets[user_idx]
+            new_set = []
+
+            # 3. 应用迟滞规则构建新的服务集
+            if not candidates:
+                self.user_serving_sets[user_idx] = []
+                continue
+
+            # 将当前服务集中的有效成员加入新集
+            current_set_sinrs = {uav_idx: self.sinr_matrix[uav_idx, user_idx] for uav_idx in current_set}
+            
+            # 过滤掉当前服务集中信号不再满足条件的成员
+            valid_current_set = [uav for uav in current_set if current_set_sinrs.get(uav, -np.inf) >= self.min_sinr]
+            
+            # 合并候选者和当前有效服务者，去重并排序
+            all_possible = {c['uav_idx']: c['sinr'] for c in candidates}
+            for uav in valid_current_set:
+                if uav not in all_possible:
+                    all_possible[uav] = current_set_sinrs[uav]
+            
+            sorted_all = sorted(all_possible.items(), key=lambda item: item[1], reverse=True)
+
+            # 填充新的服务集
+            final_set = []
+            if sorted_all:
+                # 始终保留最好的一个
+                best_uav_idx, best_sinr = sorted_all[0]
+                final_set.append(best_uav_idx)
+
+                # 从次优的开始，应用迟滞规则
+                for uav_idx, sinr in sorted_all[1:]:
+                    if len(final_set) >= self.serving_set_size:
+                        break
+                    
+                    # 检查是否在旧的服务集中
+                    is_in_old_set = uav_idx in valid_current_set
+                    
+                    # 检查是否满足迟滞条件
+                    can_add = True
+                    if not is_in_old_set:
+                        # 如果是新成员，需要比当前最差的好一个阈值
+                        if final_set:
+                            worst_in_set_sinr = self.sinr_matrix[final_set[-1], user_idx]
+                            if sinr < worst_in_set_sinr + self.handover_hysteresis_db:
+                                can_add = False
+                    
+                    if can_add:
+                        final_set.append(uav_idx)
+
+            self.user_serving_sets[user_idx] = final_set
+            
+            # 4. 更新connections矩阵
+            for uav_idx in final_set:
+                self.connections[uav_idx, user_idx] = True
+
+    def _update_hard_handover_stats(self, old_serving_uav):
+        """(原_update_handover_stats)根据连接变化，更新硬切换和乒乓切换计数"""
         # 首先，确定当前每个用户的服务UAV
         current_serving_uav = -np.ones(self.n_users, dtype=int)
         for user_idx in range(self.n_users):
@@ -1886,6 +2192,30 @@ class UAVForcedRelayEnv(ParallelEnv):
                         self.user_handover_history[user_idx] = []
 
         self.user_serving_uav = current_serving_uav
+
+    def _update_soft_handover_stats(self, old_connections):
+        """根据服务集的变化，更新软切换相关的统计数据"""
+        current_connections = self.connections
+        
+        # 遍历每个用户，比较新旧服务集
+        for user_idx in range(self.n_users):
+            old_set = set(np.where(old_connections[:, user_idx])[0])
+            current_set = set(np.where(current_connections[:, user_idx])[0])
+            
+            if old_set != current_set:
+                # 服务集发生了变化
+                self.serving_set_changes += 1
+                
+                # 计算加入和离开的UAV数量
+                joins = len(current_set - old_set)
+                leaves = len(old_set - current_set)
+                
+                self.uav_joins_count += joins
+                self.uav_leaves_count += leaves
+                
+                # 【可选】更精细的乒乓切换检测
+                # 可以在这里实现基于服务集变化的乒乓检测逻辑
+                # 例如，检测 A 加入 -> A 离开 -> A 再次加入的模式
 
     def _calculate_discovery_reward_inline(self):
         """
@@ -2057,8 +2387,15 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 首先，计算核心覆盖指标并更新 self.reward_info，供塑形奖励函数使用
         self._calculate_coverage_metrics()
 
+        # 计算SINR分布和服务质量得分
+        sinr_stats, qos_score = self._calculate_sinr_distribution_and_qos()
+        self.reward_info.update(sinr_stats)
+
         # 然后，计算新的、综合性的“网络健康度”作为共享团队奖励 r_t
         shaped_team_reward, reward_components = self.calculate_network_health_reward()
+
+        # 始终计算切换指标以用于日志记录
+        handover_metrics = self._calculate_handover_metrics()
 
         # 8. 计算系统吞吐量 (在计算完路由和奖励之后)
         system_throughput_mbps, avg_throughput_per_user_mbps = self._calculate_system_throughput()
@@ -2099,9 +2436,14 @@ class UAVForcedRelayEnv(ParallelEnv):
             elif self.reward_type == "health":
                 # health模式：使用网络健康度参数
                 shared_reward = shaped_team_reward
+            elif self.reward_type == "qos":
+                # qos模式：直接使用服务质量得分作为奖励
+                shared_reward = self.reward_info.get("qos_score", 0)
             elif self.reward_type == "handover":
                 # handover模式：精细化奖励函数，考虑切换成本、乒乓效应和服务中断
-                shared_reward = self._calculate_handover_reward()
+                shared_reward = self._get_handover_reward_from_metrics(handover_metrics)
+                # 将计算出的奖励值也添加到指标中，以便记录
+                handover_metrics['handover_reward'] = shared_reward
             else:
                 # 默认使用health模式
                 shared_reward = shaped_team_reward
@@ -2122,6 +2464,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 合并基础覆盖指标和网络健康度组件
             unified_reward_info = self.reward_info.copy()  # 包含基础覆盖指标
             unified_reward_info.update(reward_components)  # 添加网络健康度组件
+            unified_reward_info.update(handover_metrics) # 添加切换指标
             
             # 添加额外的性能指标
             unified_reward_info.update({
@@ -2142,6 +2485,12 @@ class UAVForcedRelayEnv(ParallelEnv):
                 # 添加切换统计信息
                 "handover_count": self.handover_count,
                 "ping_pong_count": self.ping_pong_count,
+                "serving_set_changes": self.serving_set_changes,
+                "uav_joins": self.uav_joins_count,
+                "uav_leaves": self.uav_leaves_count,
+                # 【新增】暴露连接数据用于可视化
+                "connections": self.connections.copy(),
+                "routing_paths": copy.deepcopy(self.routing_paths),
             }
         
         # 7. 更新观测值（在循环外一次性完成）
@@ -2374,6 +2723,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         if self.predictive_handover:
             user_obs = np.zeros(self.max_observed_users * 6)
             obs_dim_per_user = 6
+        elif self.enable_soft_handover:
+            user_obs = np.zeros(self.max_observed_users * 5)
+            obs_dim_per_user = 5
         else:
             user_obs = np.zeros(self.max_observed_users * 4)
             obs_dim_per_user = 4
@@ -2388,7 +2740,16 @@ class UAVForcedRelayEnv(ParallelEnv):
             is_connected = 1.0 if self.connections[agent_idx, user_idx] else 0.0
             
             start_idx = i * obs_dim_per_user
-            user_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], normalized_sinr, is_connected]
+            
+            base_obs = [relative_pos[0], relative_pos[1], normalized_sinr, is_connected]
+            
+            if self.enable_soft_handover:
+                # 添加服务簇大小作为观测维度
+                serving_set_size = len(self.user_serving_sets[user_idx])
+                normalized_set_size = serving_set_size / self.serving_set_size
+                base_obs.append(normalized_set_size)
+
+            user_obs[start_idx : start_idx + len(base_obs)] = base_obs
 
             if self.predictive_handover:
                 # Get predicted position from Kalman filter
@@ -2908,50 +3269,155 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 如果找到了有效的路径，并且满足最大跳数限制
             if path and capacity > 0 and len(path) - 1 <= self.max_hops:
                 self.routing_paths[uav_idx] = (path, capacity)
+    def _kmeans_clustering(self, data, n_clusters, max_iters=100, tol=1e-4):
+        """
+        纯NumPy实现的K-means聚类算法。
+        
+        参数:
+            data (np.ndarray): 要聚类的数据，形状为 (n_samples, n_features)。
+            n_clusters (int): 簇的数量 (k)。
+            max_iters (int): 最大迭代次数。
+            tol (float): 中心点变化的容忍度，用于判断收敛。
+            
+        返回:
+            tuple: (centroids, labels)
+                - centroids (np.ndarray): 簇中心点，形状为 (n_clusters, n_features)。
+                - labels (np.ndarray): 每个样本的簇标签，形状为 (n_samples,)。
+        """
+        # 1. 初始化中心点：随机选择k个数据点作为初始中心
+        initial_indices = self.np_random.choice(data.shape[0], n_clusters, replace=False)
+        centroids = data[initial_indices]
+
+        for i in range(max_iters):
+            # 2. 分配步骤：将每个点分配到最近的中心点
+            distances = cdist(data, centroids, 'euclidean')
+            labels = np.argmin(distances, axis=1)
+
+            # 3. 更新步骤：重新计算每个簇的中心点
+            new_centroids = np.array([data[labels == j].mean(axis=0) for j in range(n_clusters)])
+
+            # 检查收敛性
+            if np.all(np.abs(new_centroids - centroids) <= tol):
+                break
+            
+            centroids = new_centroids
+
+        return centroids, labels
+
+    def _perform_dynamic_clustering(self):
+        """
+        对当前用户位置进行动态K-means聚类（使用内置实现）。
+        
+        返回:
+            cluster_centers: 簇中心位置 [n_clusters, 2]
+            cluster_assignments: 用户簇分配 [n_users]
+            cluster_info: 簇信息 [n_clusters, 4] (中心x, 中心y, 用户数, 覆盖率)
+        """
+        # 获取用户的2D位置
+        user_positions_2d = self.user_positions[:, :2]
+        
+        # 执行内置的K-means聚类
+        cluster_centers, cluster_assignments = self._kmeans_clustering(user_positions_2d, self.n_clusters)
+        
+        # 计算每个簇的详细信息
+        cluster_info = np.zeros((self.n_clusters, 4))
+        
+        for i in range(self.n_clusters):
+            # 找到属于该簇的用户
+            user_indices_in_cluster = np.where(cluster_assignments == i)[0]
+            num_users_in_cluster = len(user_indices_in_cluster)
+            
+            if num_users_in_cluster > 0:
+                # 簇中心位置 (归一化)
+                cluster_info[i, 0] = cluster_centers[i, 0] / self.area_size
+                cluster_info[i, 1] = cluster_centers[i, 1] / self.area_size
+                
+                # 簇内用户数 (归一化)
+                cluster_info[i, 2] = num_users_in_cluster / self.n_users
+                
+                # 簇内覆盖率
+                covered_users_in_cluster = 0
+                for user_idx in user_indices_in_cluster:
+                    # 检查用户是否被有效覆盖 (连接到有回程的UAV)
+                    for uav_idx in range(self.n_uavs):
+                        if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
+                            covered_users_in_cluster += 1
+                            break  # 每个用户只计数一次
+                
+                cluster_info[i, 3] = covered_users_in_cluster / num_users_in_cluster
+            # 如果簇内没有用户，则信息为0
+        
+        return cluster_centers, cluster_assignments, cluster_info
+
     def _get_state(self):
         """
-        获取针对强制中继场景优化的全局状态
+        获取针对强制中继场景优化的全局状态（详细版：包含每个用户的完整信息）
         
         包含以下信息：
         1. 无人机位置 (n_uavs * 3)
-        2. 用户位置 (n_users * 3) - 包含高度，保持一致性
-        3. 地面基站位置 (n_ground_bs * 3) - 关键信息
-        4. 用户覆盖状态 (n_users) - 每个用户是否被覆盖
-        5. 无人机连接状态 (n_uavs) - 每个无人机是否有到基站的路径
-        6. 系统通信质量指标 (4) - 平均SINR、连接质量、平均跳数、系统吞吐量
-        7. 当前步数 (1)
+        2. 用户详细信息 (n_users * 6) - 位置(x,y), 速度(x,y), 连接状态, 最佳SINR
+        3. 地面基站位置 (n_ground_bs * 3)
+        4. 无人机连接状态 (n_uavs)
+        5. 系统通信质量指标 (4)
+        6. 当前步数 (1)
         
         返回:
-            state: 完整的全局状态向量
+            state: 详细的全局状态向量
         """
         state_components = []
         
         # 1. 无人机位置 (归一化到[0,1])
         normalized_uav_positions = self.uav_positions.copy()
-        normalized_uav_positions[:, :2] /= self.area_size  # x, y 归一化
-        normalized_uav_positions[:, 2] = (normalized_uav_positions[:, 2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])  # z 归一化
+        normalized_uav_positions[:, :2] /= self.area_size
+        normalized_uav_positions[:, 2] = (normalized_uav_positions[:, 2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])
         state_components.append(normalized_uav_positions.flatten())
         
-        # 2. 用户位置 (归一化到[0,1]) - 现在包含高度
-        normalized_user_positions = self.user_positions.copy()
-        normalized_user_positions[:, :2] /= self.area_size  # x, y 归一化
-        normalized_user_positions[:, 2] /= 10  # z 归一化 (用户高度固定为1.5m，用10m作为归一化基准)
-        state_components.append(normalized_user_positions.flatten())
+        # 2. 用户详细信息 (每个用户6维信息)
+        user_info = np.zeros((self.n_users, 6))
         
-        # 3. 地面基站位置 (归一化到[0,1]) - 强制中继场景的关键信息
+        for user_idx in range(self.n_users):
+            # 2.1 用户位置 (归一化)
+            user_pos = self.user_positions[user_idx]
+            user_info[user_idx, 0] = user_pos[0] / self.area_size  # x位置
+            user_info[user_idx, 1] = user_pos[1] / self.area_size  # y位置
+            
+            # 2.2 用户速度 (归一化)
+            user_vel = self.user_velocities[user_idx]
+            user_info[user_idx, 2] = user_vel[0] / self.user_max_speed  # x速度
+            user_info[user_idx, 3] = user_vel[1] / self.user_max_speed  # y速度
+            
+            # 2.3 连接状态 (是否被有效覆盖)
+            is_effectively_connected = False
+            best_sinr = -np.inf
+            
+            # 检查是否有UAV连接到该用户且该UAV有回程路径
+            for uav_idx in range(self.n_uavs):
+                if self.connections[uav_idx, user_idx]:
+                    sinr = self.sinr_matrix[uav_idx, user_idx]
+                    best_sinr = max(best_sinr, sinr)
+                    
+                    if uav_idx in self.routing_paths and self.routing_paths[uav_idx][0]:
+                        is_effectively_connected = True
+            
+            user_info[user_idx, 4] = 1.0 if is_effectively_connected else 0.0  # 连接状态
+            
+            # 2.4 最佳SINR (归一化到[0,1])
+            if best_sinr > -np.inf:
+                # 将SINR从[-10, 40]dB范围归一化到[0,1]
+                normalized_sinr = np.clip((best_sinr + 10) / 50, 0, 1)
+            else:
+                normalized_sinr = 0.0
+            user_info[user_idx, 5] = normalized_sinr
+        
+        state_components.append(user_info.flatten())
+        
+        # 3. 地面基站位置 (归一化)
         normalized_bs_positions = self.ground_bs_positions.copy()
-        normalized_bs_positions[:, :2] /= self.area_size  # x, y 归一化
-        normalized_bs_positions[:, 2] /= 200  # z 归一化 (假设最大高度200m)
+        normalized_bs_positions[:, :2] /= self.area_size
+        normalized_bs_positions[:, 2] /= self.height_range[1]
         state_components.append(normalized_bs_positions.flatten())
         
-        # 4. 用户覆盖状态 (0或1)
-        user_covered = np.zeros(self.n_users)
-        for j in range(self.n_users):
-            if np.any(self.connections[:, j]):  # 如果有任何无人机连接了该用户
-                user_covered[j] = 1.0
-        state_components.append(user_covered)
-        
-        # 5. 无人机连接状态 (0或1) - 每个无人机是否有到基站的回程路径
+        # 4. 无人机连接状态 (0或1)
         uav_connected = np.zeros(self.n_uavs)
         if hasattr(self, 'routing_paths'):
             for i in range(self.n_uavs):
@@ -2959,117 +3425,91 @@ class UAVForcedRelayEnv(ParallelEnv):
                     uav_connected[i] = 1.0
         state_components.append(uav_connected)
         
-        # 6. 系统通信质量指标 (4维)
+        # 5. 系统通信质量指标 (4维)
         comm_quality = np.zeros(4)
-        
-        # 6.1 平均SINR (归一化到[0,1]，假设SINR范围为-10dB到40dB)
-        if hasattr(self, 'sinr_matrix'):
-            valid_sinr_values = self.sinr_matrix[self.sinr_matrix >= self.min_sinr]
-            if len(valid_sinr_values) > 0:
-                avg_sinr = np.mean(valid_sinr_values)
-                comm_quality[0] = np.clip((avg_sinr + 10) / 50, 0, 1)  # 归一化到[0,1]
-            else:
-                comm_quality[0] = 0
-        else:
-            comm_quality[0] = 0
-        
-        # 6.2 连接质量（有回程路径的UAV比例）
-        if hasattr(self, 'routing_paths'):
-            comm_quality[1] = len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0
-        else:
-            comm_quality[1] = 0
-        
-        # 6.3 平均跳数 (归一化)
-        if hasattr(self, 'routing_paths') and len(self.routing_paths) > 0:
-            hop_counts = [len(path) - 1 for path, _ in self.routing_paths.values() if path]
-            if hop_counts:
-                avg_hops = np.mean(hop_counts)
-                comm_quality[2] = np.clip(avg_hops / self.max_hops, 0, 1)
-            else:
-                comm_quality[2] = 1.0
-        else:
-            comm_quality[2] = 1.0
-        
-        # 6.4 系统吞吐量 (归一化，假设最大1Gbps)
         if hasattr(self, 'reward_info') and self.reward_info:
+            # 5.1 整体覆盖率 (已在reward_info中计算)
+            comm_quality[0] = self.reward_info.get('coverage_ratio', 0)
+            # 5.2 连接质量 (有回程路径的UAV比例)
+            comm_quality[1] = self.reward_info.get('connected_uavs', 0) / self.n_uavs if self.n_uavs > 0 else 0
+            # 5.3 平均跳数 (归一化)
+            avg_hops = self.reward_info.get('avg_hops', 0)
+            comm_quality[2] = np.clip(avg_hops / self.max_hops, 0, 1)
+            # 5.4 系统吞吐量 (归一化, 假设最大1Gbps)
             throughput_mbps = self.reward_info.get('system_throughput_mbps', 0)
-            comm_quality[3] = np.clip(throughput_mbps / 1000, 0, 1)  # 归一化到[0,1]
-        else:
-            comm_quality[3] = 0
-        
+            comm_quality[3] = np.clip(throughput_mbps / 1000, 0, 1)
         state_components.append(comm_quality)
         
-        # 7. 当前步数 (归一化到[0,1])
+        # 6. 当前步数 (归一化)
         step_normalized = np.array([self.current_step / self.max_steps])
         state_components.append(step_normalized)
-        
-        # 8. 预测状态flag (0或1)
-        predictive_flag = np.array([1.0 if self.enable_predictive_state else 0.0])
-        state_components.append(predictive_flag)
-        
-        # 9. 预测信息 (如果启用预测状态)
-        if self.enable_predictive_state:
-            if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
-                # 簇级别预测模式：基于簇中心预测推导用户预测
-                predicted_positions = np.zeros(self.n_users * 2)
-                predicted_velocities = np.zeros(self.n_users * 2)
-                
-                for i in range(self.n_users):
-                    # 获取用户所属的簇
-                    user_cluster = self.user_cluster_assignments[i]
-                    
-                    # 获取簇级别卡尔曼滤波器的预测状态
-                    cluster_predicted_state = self.cluster_kalman_filters[user_cluster].x
-                    
-                    # 预测簇中心未来位置
-                    cluster_future_pos = cluster_predicted_state[:2] + cluster_predicted_state[2:] * self.prediction_horizon * self.time_step
-                    
-                    # 计算用户相对于当前簇中心的偏移
-                    current_cluster_center = self.cluster_centers_history[user_cluster]
-                    user_offset = self.user_positions[i, :2] - current_cluster_center
-                    
-                    # 预测用户未来位置 = 预测的簇中心位置 + 用户偏移
-                    user_future_pos = cluster_future_pos + user_offset
-                    
-                    # 归一化预测位置
-                    predicted_positions[i*2:(i+1)*2] = user_future_pos / self.area_size
-                    
-                    # 用户预测速度基于簇中心速度和用户当前速度的组合
-                    cluster_velocity = cluster_predicted_state[2:]
-                    user_velocity = self.user_velocities[i, :2]
-                    # 使用加权平均：70%簇速度 + 30%用户个体速度
-                    combined_velocity = 0.7 * cluster_velocity + 0.3 * user_velocity
-                    
-                    # 归一化预测速度
-                    predicted_velocities[i*2:(i+1)*2] = combined_velocity / self.user_max_speed
-                
-                state_components.append(predicted_positions)
-                state_components.append(predicted_velocities)
-            else:
-                # 传统用户级别预测模式
-                predicted_positions = np.zeros(self.n_users * 2)
-                predicted_velocities = np.zeros(self.n_users * 2)
-                
-                for i in range(self.n_users):
-                    # 获取用户级别卡尔曼滤波器的预测状态
-                    predicted_state = self.kalman_filters[i].x
-                    
-                    # 预测未来位置 (基于prediction_horizon)
-                    future_pos = predicted_state[:2] + predicted_state[2:] * self.prediction_horizon * self.time_step
-                    
-                    # 归一化预测位置
-                    predicted_positions[i*2:(i+1)*2] = future_pos / self.area_size
-                    
-                    # 归一化预测速度 (假设最大速度为user_max_speed)
-                    predicted_velocities[i*2:(i+1)*2] = predicted_state[2:] / self.user_max_speed
-                
-                state_components.append(predicted_positions)
-                state_components.append(predicted_velocities)
         
         # 组合所有状态组件
         state = np.concatenate(state_components)
         
         return state
+
+    def _perform_grid_clustering(self):
+        """
+        简化的网格聚类方法（当sklearn不可用时的备选方案）
+        
+        返回:
+            cluster_info: 簇信息 [n_clusters, 4]
+        """
+        # 将区域划分为网格
+        grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
+        cell_width = self.area_size / grid_size
+        cell_height = self.area_size / grid_size
+        
+        cluster_info = np.zeros((self.n_clusters, 4))
+        
+        cluster_idx = 0
+        for i in range(grid_size):
+            for j in range(grid_size):
+                if cluster_idx >= self.n_clusters:
+                    break
+                
+                # 定义网格单元边界
+                x_min = i * cell_width
+                x_max = (i + 1) * cell_width
+                y_min = j * cell_height
+                y_max = (j + 1) * cell_height
+                
+                # 找到在该网格单元内的用户
+                users_in_cell = []
+                for user_idx in range(self.n_users):
+                    user_pos = self.user_positions[user_idx]
+                    if x_min <= user_pos[0] < x_max and y_min <= user_pos[1] < y_max:
+                        users_in_cell.append(user_idx)
+                
+                num_users_in_cell = len(users_in_cell)
+                
+                if num_users_in_cell > 0:
+                    # 计算网格中心 (归一化)
+                    center_x = (x_min + x_max) / 2
+                    center_y = (y_min + y_max) / 2
+                    cluster_info[cluster_idx, 0] = center_x / self.area_size
+                    cluster_info[cluster_idx, 1] = center_y / self.area_size
+                    
+                    # 用户数 (归一化)
+                    cluster_info[cluster_idx, 2] = num_users_in_cell / self.n_users
+                    
+                    # 覆盖率
+                    covered_users = 0
+                    for user_idx in users_in_cell:
+                        for uav_idx in range(self.n_uavs):
+                            if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
+                                covered_users += 1
+                                break
+                    
+                    cluster_info[cluster_idx, 3] = covered_users / num_users_in_cell
+                
+                cluster_idx += 1
+                
+            if cluster_idx >= self.n_clusters:
+                break
+        
+        return cluster_info
     
     def _find_widest_path_to_ground_bs(self, start_uav):
         """

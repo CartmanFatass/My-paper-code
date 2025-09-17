@@ -9,9 +9,9 @@ class Config:
     n_agents = 6     # 无人机数量 (默认值，可通过代码设置)
     state_dim = None  # 全局状态维度（将在环境初始化时获取）
     obs_dim = None    # 单个智能体观测维度（将在环境初始化时获取）
-    action_dim = 3    # 每个智能体输出3D速度向量
-    action_bound = 3.0 # 动作输出的最大值（用于tanh缩放）
-    
+    action_dim = 3    # 每个智能体输出3D速度向量 (连续模式) 或 离散动作数量 (离散模式)
+    action_bound = 3.0 # 动作输出的最大值（用于tanh缩放，仅连续模式使用）
+    action_space_type = 'discrete'  # 动作空间类型: 'continuous' 或 'discrete'
     # 通用环境参数
     n_users = 30                    # 用户数量
     area_size = 8000               # 区域大小 (米)
@@ -102,7 +102,8 @@ class Config:
     n_heads = 8              # 多头注意力头数 (必须为偶数以支持nested tensor优化)
     gru_hidden_size = 128     # GRU隐藏层大小 (与hidden_size保持一致)
     lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
-    lr_discoverer = 1e-4     # 技能发现器学习率 参考原论文
+    lr_discoverer_actor  = 1e-4     # 技能发现器学习率 (离散动作空间下提高学习率以确保有效更新)
+    lr_discoverer_critic = 1e-3
     lr_discriminator = 1e-4  # 参考原论文
     lr_prototype_discriminator = 1e-4 # 原型判别器学习率 (新增)
 

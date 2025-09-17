@@ -7,36 +7,37 @@ from matplotlib.lines import Line2D
 
 class VisualizationManager:
     """
-    统一管理评估过程中的数据收集和可视化绘图。
+    Unified management for data collection and visualization during evaluation.
     """
     def __init__(self, episode_num, log_dir, config):
         """
-        初始化可视化管理器。
+        Initialize visualization manager.
 
-        参数:
-            episode_num (int): 当前评估的 episode 编号。
-            log_dir (str): 保存绘图的目录。
-            config: 训练配置对象。
+        Args:
+            episode_num (int): Current evaluation episode number.
+            log_dir (str): Directory to save plots.
+            config: Training configuration object.
         """
         self.episode_num = episode_num
         self.log_dir = os.path.join(log_dir, 'evaluation_plots')
         os.makedirs(self.log_dir, exist_ok=True)
         self.config = config
         
-        # 扩展的数据存储 - 包含所有环境提供的丰富信息
+        # Extended data storage - includes all rich information provided by environment
         self.history = {
             'steps': [],
             'uav_positions': [],
+            'user_positions': [],  # Add user position tracking for mobility visualization
             'team_skills': [],
             'agent_skills': [],
             
-            # 基础性能指标
+            # Basic performance metrics
             'connectivity': [],
             'throughput': [],
             'coverage_ratios': [],
             'avg_throughput_per_user': [],
             
-            # 网络健康度指标
+            # Network health metrics
             'rt_final_health_score': [],
             'connectivity_score': [],
             'role_diversity_bonus': [],
@@ -46,38 +47,44 @@ class VisualizationManager:
             'pure_relay_uavs_count': [],
             'weighted_serving_score': [],
             
-            # 网络拓扑指标
+            # Network topology metrics
             'avg_hops': [],
             'connected_uavs': [],
             'uavs_with_backhaul': [],
             'connectivity_ratio': [],
             
-            # 用户服务指标
+            # User service metrics
             'total_connected_users': [],
             'served_users': [],
             'service_rate': [],
             
-            # 静态信息
+            # 【新增】连接数据
+            'connections': [],
+            'routing_paths': [],
+            
+            # Static information
             'static_info': None
         }
 
-    def record_step(self, step_count, uav_positions, team_skill, agent_skills, reward_info, static_info=None):
+    def record_step(self, step_count, uav_positions, team_skill, agent_skills, reward_info, static_info=None, connections=None, routing_paths=None):
         """
-        记录评估过程中每一步的数据。
+        Record data for each step during evaluation.
 
-        参数:
-            step_count (int): 当前步数。
-            uav_positions (np.array): 所有无人机的位置。
-            team_skill (int): 当前的团队技能。
-            agent_skills (list): 每个智能体的个体技能。
-            reward_info (dict): 包含性能指标的字典。
-            static_info (dict, optional): 静态环境信息，如用户位置。
+        Args:
+            step_count (int): Current step number.
+            uav_positions (np.array): Positions of all UAVs.
+            team_skill (int): Current team skill.
+            agent_skills (list): Individual skills of each agent.
+            reward_info (dict): Dictionary containing performance metrics.
+            static_info (dict, optional): Static environment information, such as user positions.
+            connections (np.array, optional): UAV-user connection matrix.
+            routing_paths (dict, optional): Backhaul routing paths.
         """
-        # 检查数据记录的顺序是否正确，防止多进程/线程导致的数据错乱
+        # Check if data recording order is correct to prevent data corruption from multiprocessing/threading
         if self.history['steps'] and step_count <= self.history['steps'][-1]:
-            print(f"警告: 检测到乱序或重复的步数记录 (当前: {step_count}, 上一步: {self.history['steps'][-1]})。"
-                  f"这可能由多进程环境下的竞态条件导致。为保证图像正确，将清空当前实例的历史数据。")
-            # 清空历史数据，开始新的记录序列
+            print(f"Warning: Detected out-of-order or duplicate step recording (current: {step_count}, previous: {self.history['steps'][-1]}). "
+                  f"This may be caused by race conditions in multiprocessing environments. Clearing current instance history data to ensure correct visualization.")
+            # Clear history data and start new recording sequence
             for key in self.history:
                 if isinstance(self.history[key], list):
                     self.history[key] = []
@@ -87,6 +94,24 @@ class VisualizationManager:
         self.history['uav_positions'].append(uav_positions.copy())
         self.history['team_skills'].append(team_skill)
         self.history['agent_skills'].append(agent_skills)
+        
+        # 【新增】记录连接数据
+        self.history['connections'].append(connections)
+        self.history['routing_paths'].append(routing_paths)
+        
+        # Record user positions for mobility visualization
+        # Only get current user positions from reward_info (dynamic information)
+        # Do NOT use static_info as fallback since it contains only initial positions
+        current_user_positions = None
+        if reward_info and 'user_positions' in reward_info:
+            current_user_positions = reward_info['user_positions']
+        
+        if current_user_positions is not None:
+            self.history['user_positions'].append(np.array(current_user_positions).copy())
+        else:
+            # If no dynamic user positions available, use empty array to maintain consistency
+            # This prevents misleading visualization with static initial positions
+            self.history['user_positions'].append(np.array([]))
         
         # === 记录基础性能指标 ===
         self.history['connectivity'].append(reward_info.get('effective_connected_users', 0))
@@ -124,117 +149,107 @@ class VisualizationManager:
         if self.history['static_info'] is None and static_info:
             self.history['static_info'] = static_info
 
-    def generate_plots(self, prefix='', eval_step=None):
+    def generate_plots(self, prefix='', eval_step=None, topology_only=False):
         """
-        在 episode 结束后生成所有相关的图表。
+        Generate all relevant charts after episode completion.
         
-        参数:
-            prefix (str, optional): 添加到文件名开头的前缀。
-            eval_step (int, optional): 当前的训练总步数，用于唯一标识评估图像。
+        Args:
+            prefix (str, optional): Prefix to add to the beginning of filename.
+            eval_step (int, optional): Current training total steps for unique evaluation image identification.
+            topology_only (bool, optional): If True, only generate the topology plot.
         """
         if not self.history['steps']:
-            print("没有数据可用于生成绘图。")
+            print("No data available for plot generation.")
             return
 
-        self._create_topology_plot(prefix=prefix, eval_step=eval_step)
-        self._create_performance_plot(prefix=prefix, eval_step=eval_step)
-        self._create_health_score_analysis(prefix=prefix, eval_step=eval_step)
+        if topology_only:
+            # Only generate the topology plot for snapshots
+            self._create_topology_plot(prefix=prefix, eval_step=eval_step)
+        else:
+            # For regular episode completion, generate all plots
+            self._create_topology_plot(prefix=prefix, eval_step=eval_step)
+            self._create_performance_plot(prefix=prefix, eval_step=eval_step)
+            self._create_health_score_analysis(prefix=prefix, eval_step=eval_step)
 
     def _create_topology_plot(self, prefix='', eval_step=None):
         """
-        生成并保存2D拓扑图，根据个体技能使用不同线型绘制无人机轨迹。
+        Generate and save a 2D topology snapshot for the final step of the episode,
+        showing node positions and connections.
         """
         try:
-            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
+            # Use English fonts to avoid Chinese font issues on servers
+            plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Liberation Sans']
             plt.rcParams['axes.unicode_minus'] = False
             
             fig, ax = plt.subplots(figsize=(12, 10))
             
-            positions_history = np.array(self.history['uav_positions'])
-            skills_history = np.array(self.history['agent_skills'])
+            # Get data for the last recorded step
+            last_step_idx = -1
+            uav_positions = self.history['uav_positions'][last_step_idx]
+            user_positions = self.history['user_positions'][last_step_idx]
+            connections = self.history['connections'][last_step_idx]
+            routing_paths = self.history['routing_paths'][last_step_idx]
             
-            if positions_history.ndim != 3:
-                print(f"错误的轨迹数据维度: {positions_history.shape}")
-                return
-            if skills_history.ndim != 2:
-                print(f"错误的技能数据维度: {skills_history.shape}")
-                return
-
-            # 定义技能到线型的映射
-            skill_linestyles = {
-                0: '-',  # 实线
-                1: '--', # 虚线
-                2: ':',  # 点线
-                3: '-.'  # 点划线
-            }
-            # 备用线型，以防技能超过预定义
-            fallback_linestyles = ['-', '--', ':', '-.']
-
-            # 绘制轨迹
-            for i in range(self.config.n_agents):
-                color = plt.cm.jet(i / self.config.n_agents)
-                trajectory = positions_history[:, i, :2]
-                agent_skills = skills_history[:, i]
-
-                # 起点标记
-                ax.scatter(trajectory[0, 0], trajectory[0, 1], marker='o', color=color, s=80, edgecolors='black', zorder=6, label=f'UAV {i} 起点')
-                
-                # 终点标记
-                ax.scatter(trajectory[-1, 0], trajectory[-1, 1], marker='^', color=color, s=120, edgecolors='black', zorder=6, label=f'UAV {i} 终点')
-                ax.text(trajectory[-1, 0] + 10, trajectory[-1, 1] + 10, f'UAV{i}', fontsize=9)
-
-                # 根据技能变化分段绘制轨迹
-                start_idx = 0
-                for step_idx in range(1, len(trajectory)):
-                    if agent_skills[step_idx] != agent_skills[start_idx]:
-                        # 技能变化，绘制上一段轨迹
-                        segment = trajectory[start_idx:step_idx+1]
-                        skill = agent_skills[start_idx]
-                        linestyle = skill_linestyles.get(skill, fallback_linestyles[skill % len(fallback_linestyles)])
-                        ax.plot(segment[:, 0], segment[:, 1], color=color, linestyle=linestyle, linewidth=2, alpha=0.8, zorder=4)
-                        start_idx = step_idx
-                
-                # 绘制最后一段轨迹
-                if start_idx < len(trajectory) - 1:
-                    segment = trajectory[start_idx:]
-                    skill = agent_skills[start_idx]
-                    linestyle = skill_linestyles.get(skill, fallback_linestyles[skill % len(fallback_linestyles)])
-                    ax.plot(segment[:, 0], segment[:, 1], color=color, linestyle=linestyle, linewidth=2, alpha=0.8, zorder=4)
-
-            # 绘制静态实体
+            # Plot static entities from the beginning
             static_info = self.history['static_info']
             if static_info:
                 if 'ground_bs_positions' in static_info and static_info.get('ground_bs_positions') is not None:
                     bs_pos = static_info['ground_bs_positions']
-                    ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, label='地面基站', zorder=5)
-                if 'user_positions' in static_info and static_info.get('user_positions') is not None:
-                    user_pos = static_info['user_positions']
-                    ax.scatter(user_pos[:, 0], user_pos[:, 1], c='blue', marker='.', s=50, label='用户', zorder=5)
+                    ax.scatter(bs_pos[:, 0], bs_pos[:, 1], c='black', marker='s', s=200, label='Ground Base Stations', zorder=5)
 
-            # --- 构建图例 ---
-            # 1. UAV 颜色图例
-            uav_handles = [Line2D([0], [0], color=plt.cm.jet(i / self.config.n_agents), lw=4, label=f'UAV {i}') for i in range(self.config.n_agents)]
+            # Plot users at their final positions
+            if user_positions is not None and user_positions.ndim == 2 and user_positions.shape[0] > 0:
+                ax.scatter(user_positions[:, 0], user_positions[:, 1], c='blue', marker='.', s=50, label='Users', zorder=5)
+
+            # Plot UAVs at their final positions
+            for i in range(self.config.n_agents):
+                color = plt.cm.jet(i / self.config.n_agents)
+                pos = uav_positions[i, :2]
+                ax.scatter(pos[0], pos[1], marker='^', color=color, s=120, edgecolors='black', zorder=6, label=f'UAV {i}')
+                ax.text(pos[0] + 10, pos[1] + 10, f'UAV{i}', fontsize=9)
+
+            # Plot connections: User -> UAV
+            if connections is not None and user_positions is not None:
+                for uav_idx in range(connections.shape[0]):
+                    for user_idx in range(connections.shape[1]):
+                        if connections[uav_idx, user_idx]:
+                            uav_pos = uav_positions[uav_idx]
+                            user_pos = user_positions[user_idx]
+                            ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], 'g-', alpha=0.4, zorder=3)
+
+            # Plot routing paths (backhaul)
+            if routing_paths:
+                for uav_idx, (path, capacity) in routing_paths.items():
+                    for i in range(len(path) - 1):
+                        node1_type, node1_idx = path[i]
+                        node2_type, node2_idx = path[i+1]
+                        
+                        pos1 = None
+                        if node1_type == "uav": pos1 = uav_positions[node1_idx]
+                        elif node1_type == "ground_bs": pos1 = static_info['ground_bs_positions'][node1_idx]
+                            
+                        pos2 = None
+                        if node2_type == "uav": pos2 = uav_positions[node2_idx]
+                        elif node2_type == "ground_bs": pos2 = static_info['ground_bs_positions'][node2_idx]
+
+                        if pos1 is not None and pos2 is not None:
+                            ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 'y--', alpha=0.8, linewidth=2.0, zorder=2)
+
+            # --- Build legend ---
+            handles, labels = ax.get_legend_handles_labels()
+            by_label = {l: h for h, l in zip(handles, labels)} # remove duplicate labels
             
-            # 2. 技能线型图例
-            unique_skills = np.unique(skills_history)
-            skill_handles = []
-            for skill in sorted(unique_skills):
-                linestyle = skill_linestyles.get(skill, fallback_linestyles[skill % len(fallback_linestyles)])
-                skill_handles.append(Line2D([0], [0], color='gray', linestyle=linestyle, lw=2, label=f'个体技能 {skill}'))
-
-            # 3. 静态实体和信息图例
-            other_handles, _ = ax.get_legend_handles_labels()
             final_coverage = self.history['coverage_ratios'][-1]
             team_skill_at_end = self.history['team_skills'][-1]
             info_elements = [
-                Line2D([0], [0], color='w', label=f'最终覆盖率: {final_coverage:.2%}'),
-                Line2D([0], [0], color='w', label=f'团队技能 (Z): {team_skill_at_end}')
+                Line2D([0], [0], color='w', label=f'Final Coverage: {final_coverage:.2%}'),
+                Line2D([0], [0], color='w', label=f'Team Skill (Z): {team_skill_at_end}')
             ]
             
-            # 合并所有图例元素
-            all_handles = uav_handles + skill_handles + other_handles + info_elements
+            all_handles = list(by_label.values()) + info_elements
             
-            ax.set_title(f'评估 Episode {self.episode_num}: 2D拓扑与无人机轨迹 (按技能分段)')
+            current_step = self.history['steps'][-1]
+            ax.set_title(f'Evaluation Episode {self.episode_num}: Network Topology Snapshot at Step {current_step}')
             ax.set_xlabel('X (m)')
             ax.set_ylabel('Y (m)')
             
@@ -242,137 +257,138 @@ class VisualizationManager:
             ax.set_xlim(0, area_size)
             ax.set_ylim(0, area_size)
             ax.set_aspect('equal', adjustable='box')
-            ax.legend(handles=all_handles, title="图例与信息", loc='upper right', bbox_to_anchor=(1.4, 1.0))
+            ax.legend(handles=all_handles, title="Legend & Information", loc='upper right', bbox_to_anchor=(1.4, 1.0))
             ax.grid(True, linestyle='--', alpha=0.5)
             
-            plt.tight_layout(rect=[0, 0, 0.8, 1]) # 为图例留出更多空间
+            plt.tight_layout(rect=[0, 0, 0.8, 1]) # Leave more space for legend
             
-            # 使用 eval_step 和 PID 创建唯一的文件名以避免竞态条件
+            # Use eval_step and PID to create unique filename to avoid race conditions
             pid = os.getpid()
             if eval_step is not None:
-                filename = f'topology_eval_step_{eval_step}_episode_{self.episode_num}_pid_{pid}.png'
+                filename = f'topology_snapshot_eval_step_{eval_step}_episode_{self.episode_num}_step_{current_step}_pid_{pid}.png'
             else:
-                filename = f'topology_episode_{self.episode_num}_pid_{pid}.png'
+                filename = f'topology_snapshot_episode_{self.episode_num}_step_{current_step}_pid_{pid}.png'
                 
             if prefix:
                 filename = f'{prefix}_{filename}'
             save_path = os.path.join(self.log_dir, filename)
             fig.savefig(save_path, dpi=200, bbox_inches='tight')
             plt.close(fig)
-            print(f"拓扑图已保存: {save_path}")
+            print(f"Topology snapshot saved: {save_path}")
 
         except Exception as e:
-            print(f"生成拓扑图时出错: {e}")
+            print(f"Error generating topology plot: {e}")
 
     def _create_performance_plot(self, prefix='', eval_step=None):
         """
-        生成并保存综合性能指标仪表板，包含所有丰富的性能数据。
+        Generate and save comprehensive performance metrics dashboard with all rich performance data.
         
-        参数:
-            prefix (str, optional): 添加到文件名开头的前缀。
-            eval_step (int, optional): 当前的训练总步数，用于唯一标识评估图像。
+        Args:
+            prefix (str, optional): Prefix to add to the beginning of filename.
+            eval_step (int, optional): Current training total steps for unique evaluation image identification.
         """
         try:
-            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
+            # Use English fonts to avoid Chinese font issues on servers
+            plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Liberation Sans']
             plt.rcParams['axes.unicode_minus'] = False
             
-            # 创建一个3x3的子图网格，展示全面的性能指标
+            # Create a 3x3 subplot grid to display comprehensive performance metrics
             fig, axes = plt.subplots(3, 3, figsize=(18, 15))
-            fig.suptitle(f'评估 Episode {self.episode_num}: 综合性能指标仪表板', fontsize=16, fontweight='bold')
+            fig.suptitle(f'Evaluation Episode {self.episode_num}: Comprehensive Performance Dashboard', fontsize=16, fontweight='bold')
             
             steps = self.history['steps']
             
-            # === 第一行：核心性能指标 ===
-            # 1. 覆盖率和连接用户数
+            # === First Row: Core Performance Metrics ===
+            # 1. Coverage Rate and Connected Users
             ax1 = axes[0, 0]
-            ax1.plot(steps, self.history['coverage_ratios'], 'b-', linewidth=2, label='覆盖率')
+            ax1.plot(steps, self.history['coverage_ratios'], 'b-', linewidth=2, label='Coverage Rate')
             ax1_twin = ax1.twinx()
-            ax1_twin.plot(steps, self.history['connectivity'], 'r--', linewidth=2, label='有效连接用户数')
-            ax1.set_ylabel('覆盖率', color='b')
-            ax1_twin.set_ylabel('连接用户数', color='r')
-            ax1.set_title('用户覆盖性能')
+            ax1_twin.plot(steps, self.history['connectivity'], 'r--', linewidth=2, label='Effective Connected Users')
+            ax1.set_ylabel('Coverage Rate', color='b')
+            ax1_twin.set_ylabel('Connected Users', color='r')
+            ax1.set_title('User Coverage Performance')
             ax1.grid(True, alpha=0.3)
             ax1.legend(loc='upper left')
             ax1_twin.legend(loc='upper right')
             
-            # 2. 系统吞吐量
+            # 2. System Throughput
             ax2 = axes[0, 1]
-            ax2.plot(steps, self.history['throughput'], 'g-', linewidth=2, label='系统总吞吐量')
-            ax2.plot(steps, self.history['avg_throughput_per_user'], 'orange', linestyle='--', linewidth=2, label='平均用户吞吐量')
-            ax2.set_ylabel('吞吐量 (Mbps)')
-            ax2.set_title('系统吞吐量性能')
+            ax2.plot(steps, self.history['throughput'], 'g-', linewidth=2, label='Total System Throughput')
+            ax2.plot(steps, self.history['avg_throughput_per_user'], 'orange', linestyle='--', linewidth=2, label='Average User Throughput')
+            ax2.set_ylabel('Throughput (Mbps)')
+            ax2.set_title('System Throughput Performance')
             ax2.grid(True, alpha=0.3)
             ax2.legend()
             
-            # 3. 网络健康度总分
+            # 3. Network Health Score
             ax3 = axes[0, 2]
-            ax3.plot(steps, self.history['rt_final_health_score'], 'purple', linewidth=3, label='网络健康度总分')
-            ax3.set_ylabel('健康度分数')
-            ax3.set_title('网络健康度评分')
+            ax3.plot(steps, self.history['rt_final_health_score'], 'purple', linewidth=3, label='Network Health Score')
+            ax3.set_ylabel('Health Score')
+            ax3.set_title('Network Health Rating')
             ax3.grid(True, alpha=0.3)
             ax3.legend()
             
-            # === 第二行：网络健康度组成部分 ===
-            # 4. 连接性和角色多样性
+            # === Second Row: Network Health Components ===
+            # 4. Connectivity and Role Diversity
             ax4 = axes[1, 0]
-            ax4.plot(steps, self.history['connectivity_score'], 'cyan', linewidth=2, label='连接性得分')
-            ax4.plot(steps, self.history['role_diversity_bonus'], 'magenta', linewidth=2, label='角色多样性奖励')
-            ax4.set_ylabel('得分')
-            ax4.set_title('网络连接性与角色多样性')
+            ax4.plot(steps, self.history['connectivity_score'], 'cyan', linewidth=2, label='Connectivity Score')
+            ax4.plot(steps, self.history['role_diversity_bonus'], 'magenta', linewidth=2, label='Role Diversity Bonus')
+            ax4.set_ylabel('Score')
+            ax4.set_title('Network Connectivity & Role Diversity')
             ax4.grid(True, alpha=0.3)
             ax4.legend()
             
-            # 5. 有效覆盖和分散惩罚
+            # 5. Effective Coverage and Dispersion Penalty
             ax5 = axes[1, 1]
-            ax5.plot(steps, self.history['effective_coverage_score'], 'green', linewidth=2, label='有效覆盖得分')
+            ax5.plot(steps, self.history['effective_coverage_score'], 'green', linewidth=2, label='Effective Coverage Score')
             ax5_twin = ax5.twinx()
-            ax5_twin.plot(steps, self.history['dispersion_penalty'], 'red', linewidth=2, label='分散惩罚')
-            ax5.set_ylabel('覆盖得分', color='green')
-            ax5_twin.set_ylabel('惩罚值', color='red')
-            ax5.set_title('覆盖效果与空间分散')
+            ax5_twin.plot(steps, self.history['dispersion_penalty'], 'red', linewidth=2, label='Dispersion Penalty')
+            ax5.set_ylabel('Coverage Score', color='green')
+            ax5_twin.set_ylabel('Penalty Value', color='red')
+            ax5.set_title('Coverage Effect & Spatial Dispersion')
             ax5.grid(True, alpha=0.3)
             ax5.legend(loc='upper left')
             ax5_twin.legend(loc='upper right')
             
-            # 6. UAV角色分布
+            # 6. UAV Role Distribution
             ax6 = axes[1, 2]
-            ax6.plot(steps, self.history['serving_uavs_count'], 'blue', linewidth=2, marker='o', markersize=3, label='服务型UAV数量')
-            ax6.plot(steps, self.history['pure_relay_uavs_count'], 'red', linewidth=2, marker='s', markersize=3, label='纯中继UAV数量')
-            ax6.plot(steps, self.history['weighted_serving_score'], 'orange', linewidth=2, marker='^', markersize=3, label='加权服务贡献')
-            ax6.set_ylabel('数量/得分')
-            ax6.set_title('UAV角色分布')
+            ax6.plot(steps, self.history['serving_uavs_count'], 'blue', linewidth=2, marker='o', markersize=3, label='Serving UAV Count')
+            ax6.plot(steps, self.history['pure_relay_uavs_count'], 'red', linewidth=2, marker='s', markersize=3, label='Pure Relay UAV Count')
+            ax6.plot(steps, self.history['weighted_serving_score'], 'orange', linewidth=2, marker='^', markersize=3, label='Weighted Serving Score')
+            ax6.set_ylabel('Count/Score')
+            ax6.set_title('UAV Role Distribution')
             ax6.grid(True, alpha=0.3)
             ax6.legend()
             
-            # === 第三行：网络拓扑和服务质量 ===
-            # 7. 网络拓扑指标
+            # === Third Row: Network Topology and Service Quality ===
+            # 7. Network Topology Metrics
             ax7 = axes[2, 0]
-            ax7.plot(steps, self.history['avg_hops'], 'brown', linewidth=2, label='平均跳数')
+            ax7.plot(steps, self.history['avg_hops'], 'brown', linewidth=2, label='Average Hops')
             ax7_twin = ax7.twinx()
-            ax7_twin.plot(steps, self.history['connected_uavs'], 'navy', linewidth=2, label='已连接UAV数')
-            ax7_twin.plot(steps, self.history['connectivity_ratio'], 'teal', linewidth=2, linestyle='--', label='连接比例')
-            ax7.set_ylabel('跳数', color='brown')
-            ax7_twin.set_ylabel('UAV数量/比例', color='navy')
-            ax7.set_title('网络拓扑结构')
+            ax7_twin.plot(steps, self.history['connected_uavs'], 'navy', linewidth=2, label='Connected UAVs')
+            ax7_twin.plot(steps, self.history['connectivity_ratio'], 'teal', linewidth=2, linestyle='--', label='Connectivity Ratio')
+            ax7.set_ylabel('Hops', color='brown')
+            ax7_twin.set_ylabel('UAV Count/Ratio', color='navy')
+            ax7.set_title('Network Topology Structure')
             ax7.grid(True, alpha=0.3)
             ax7.legend(loc='upper left')
             ax7_twin.legend(loc='upper right')
             
-            # 8. 用户服务质量对比
+            # 8. User Service Quality Comparison
             ax8 = axes[2, 1]
-            ax8.plot(steps, self.history['total_connected_users'], 'lightblue', linewidth=2, label='总连接用户数')
-            ax8.plot(steps, self.history['served_users'], 'darkblue', linewidth=2, label='有效服务用户数')
-            ax8.plot(steps, self.history['service_rate'], 'green', linewidth=2, linestyle='--', label='服务率')
-            ax8.set_ylabel('用户数/服务率')
-            ax8.set_title('用户服务质量')
+            ax8.plot(steps, self.history['total_connected_users'], 'lightblue', linewidth=2, label='Total Connected Users')
+            ax8.plot(steps, self.history['served_users'], 'darkblue', linewidth=2, label='Effectively Served Users')
+            ax8.plot(steps, self.history['service_rate'], 'green', linewidth=2, linestyle='--', label='Service Rate')
+            ax8.set_ylabel('User Count/Service Rate')
+            ax8.set_title('User Service Quality')
             ax8.grid(True, alpha=0.3)
             ax8.legend()
             
-            # 9. 关键指标汇总（最后一个子图显示最终值）
+            # 9. Key Metrics Summary (last subplot shows final values)
             ax9 = axes[2, 2]
-            ax9.axis('off')  # 关闭坐标轴，用作文本显示
+            ax9.axis('off')  # Turn off axes for text display
             
-            # 计算最终值
+            # Calculate final values
             final_coverage = self.history['coverage_ratios'][-1] if self.history['coverage_ratios'] else 0
             final_throughput = self.history['throughput'][-1] if self.history['throughput'] else 0
             final_health = self.history['rt_final_health_score'][-1] if self.history['rt_final_health_score'] else 0
@@ -380,37 +396,37 @@ class VisualizationManager:
             final_serving_uavs = self.history['serving_uavs_count'][-1] if self.history['serving_uavs_count'] else 0
             final_relay_uavs = self.history['pure_relay_uavs_count'][-1] if self.history['pure_relay_uavs_count'] else 0
             
-            # 显示关键指标汇总
+            # Display key metrics summary
             summary_text = f"""
-关键指标汇总 (最终值)
+Key Metrics Summary (Final Values)
 
-📊 覆盖性能:
-   • 覆盖率: {final_coverage:.1%}
-   • 连接用户: {self.history['connectivity'][-1] if self.history['connectivity'] else 0}/{self.config.n_users}
+📊 Coverage Performance:
+   • Coverage Rate: {final_coverage:.1%}
+   • Connected Users: {self.history['connectivity'][-1] if self.history['connectivity'] else 0}/{self.config.n_users}
 
-🚀 网络性能:
-   • 系统吞吐量: {final_throughput:.1f} Mbps
-   • 网络健康度: {final_health:.3f}
-   • 平均跳数: {final_hops:.1f}
+🚀 Network Performance:
+   • System Throughput: {final_throughput:.1f} Mbps
+   • Network Health: {final_health:.3f}
+   • Average Hops: {final_hops:.1f}
 
-🛰️ UAV角色分布:
-   • 服务型UAV: {final_serving_uavs}
-   • 中继型UAV: {final_relay_uavs}
-   • 总UAV数: {self.config.n_agents}
+🛰️ UAV Role Distribution:
+   • Serving UAVs: {final_serving_uavs}
+   • Relay UAVs: {final_relay_uavs}
+   • Total UAVs: {self.config.n_agents}
 
-📈 团队技能:
-   • 最终团队技能: {self.history['team_skills'][-1] if self.history['team_skills'] else 'N/A'}
+📈 Team Skill:
+   • Final Team Skill: {self.history['team_skills'][-1] if self.history['team_skills'] else 'N/A'}
             """
             
             ax9.text(0.05, 0.95, summary_text, transform=ax9.transAxes, fontsize=10,
                     verticalalignment='top', fontfamily='monospace',
                     bbox=dict(boxstyle='round,pad=0.5', facecolor='lightgray', alpha=0.8))
-            ax9.set_title('性能汇总', fontweight='bold')
+            ax9.set_title('Performance Summary', fontweight='bold')
             
-            # 设置所有子图的x轴标签（除了汇总图）
+            # Set x-axis labels for all subplots (except summary plot)
             for i in range(3):
-                for j in range(2):  # 前两列需要x轴标签
-                    axes[i, j].set_xlabel('时间步 (Step)')
+                for j in range(2):  # First two columns need x-axis labels
+                    axes[i, j].set_xlabel('Time Step')
             
             plt.tight_layout()
             
@@ -426,120 +442,121 @@ class VisualizationManager:
             save_path = os.path.join(self.log_dir, filename)
             fig.savefig(save_path, dpi=200, bbox_inches='tight')
             plt.close(fig)
-            print(f"综合性能仪表板已保存: {save_path}")
+            print(f"Comprehensive performance dashboard saved: {save_path}")
 
         except Exception as e:
-            print(f"生成综合性能图表时出错: {e}")
+            print(f"Error generating comprehensive performance chart: {e}")
             import traceback
             traceback.print_exc()
 
     def _create_health_score_analysis(self, prefix='', eval_step=None):
         """
-        生成网络健康度组成部分的详细分析图表。
+        Generate detailed analysis charts for network health score components.
         
-        参数:
-            prefix (str, optional): 添加到文件名开头的前缀。
-            eval_step (int, optional): 当前的训练总步数，用于唯一标识评估图像。
+        Args:
+            prefix (str, optional): Prefix to add to the beginning of filename.
+            eval_step (int, optional): Current training total steps for unique evaluation image identification.
         """
         try:
-            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'Microsoft YaHei']
+            # Use English fonts to avoid Chinese font issues on servers
+            plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Liberation Sans']
             plt.rcParams['axes.unicode_minus'] = False
             
-            # 创建2x2的子图网格，专门分析网络健康度
+            # Create 2x2 subplot grid for specialized network health analysis
             fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-            fig.suptitle(f'评估 Episode {self.episode_num}: 网络健康度深度分析', fontsize=16, fontweight='bold')
+            fig.suptitle(f'Evaluation Episode {self.episode_num}: Network Health Deep Analysis', fontsize=16, fontweight='bold')
             
             steps = self.history['steps']
             
-            # === 左上：健康度总分与组成部分堆叠图 ===
+            # === Top Left: Health Score Total and Component Stacked Chart ===
             ax1 = axes[0, 0]
             
-            # 从配置中获取权重（如果可用）
+            # Get weights from configuration (if available)
             w_connectivity = getattr(self.config, 'w_connectivity', 0.5)
             w_diversity = getattr(self.config, 'w_diversity', 1.0)
             w_coverage = getattr(self.config, 'w_coverage', 1.0)
             w_dispersion = getattr(self.config, 'w_dispersion', 0.05)
             
-            # 计算各组成部分的加权贡献
+            # Calculate weighted contributions of each component
             connectivity_contribution = np.array(self.history['connectivity_score']) * w_connectivity
             diversity_contribution = np.array(self.history['role_diversity_bonus']) * w_diversity
             coverage_contribution = np.array(self.history['effective_coverage_score']) * w_coverage
             dispersion_contribution = np.array(self.history['dispersion_penalty']) * w_dispersion
             
-            # 创建堆叠面积图
-            ax1.fill_between(steps, 0, connectivity_contribution, alpha=0.7, label=f'连接性贡献 (×{w_connectivity})', color='cyan')
+            # Create stacked area chart
+            ax1.fill_between(steps, 0, connectivity_contribution, alpha=0.7, label=f'Connectivity Contribution (×{w_connectivity})', color='cyan')
             ax1.fill_between(steps, connectivity_contribution, 
                            connectivity_contribution + diversity_contribution, 
-                           alpha=0.7, label=f'角色多样性贡献 (×{w_diversity})', color='magenta')
+                           alpha=0.7, label=f'Role Diversity Contribution (×{w_diversity})', color='magenta')
             ax1.fill_between(steps, connectivity_contribution + diversity_contribution,
                            connectivity_contribution + diversity_contribution + coverage_contribution,
-                           alpha=0.7, label=f'覆盖贡献 (×{w_coverage})', color='green')
+                           alpha=0.7, label=f'Coverage Contribution (×{w_coverage})', color='green')
             
-            # 分散惩罚用负值显示
+            # Display dispersion penalty as negative value
             ax1.fill_between(steps, connectivity_contribution + diversity_contribution + coverage_contribution,
                            connectivity_contribution + diversity_contribution + coverage_contribution - dispersion_contribution,
-                           alpha=0.7, label=f'分散惩罚 (×{w_dispersion})', color='red')
+                           alpha=0.7, label=f'Dispersion Penalty (×{w_dispersion})', color='red')
             
-            # 叠加总健康度分数线
-            ax1.plot(steps, self.history['rt_final_health_score'], 'k-', linewidth=3, label='总健康度分数')
+            # Overlay total health score line
+            ax1.plot(steps, self.history['rt_final_health_score'], 'k-', linewidth=3, label='Total Health Score')
             
-            ax1.set_ylabel('健康度分数')
-            ax1.set_title('健康度组成部分堆叠分析')
+            ax1.set_ylabel('Health Score')
+            ax1.set_title('Health Score Component Stacked Analysis')
             ax1.grid(True, alpha=0.3)
             ax1.legend(loc='upper left', fontsize=9)
             
-            # === 右上：UAV角色演化分析 ===
+            # === Top Right: UAV Role Evolution Analysis ===
             ax2 = axes[0, 1]
             
-            # 计算角色比例
+            # Calculate role ratios
             total_uavs = self.config.n_agents
             serving_ratio = np.array(self.history['serving_uavs_count']) / total_uavs
             relay_ratio = np.array(self.history['pure_relay_uavs_count']) / total_uavs
             disconnected_ratio = 1 - serving_ratio - relay_ratio
             
-            # 创建堆叠面积图显示角色分布
-            ax2.fill_between(steps, 0, serving_ratio, alpha=0.8, label='服务型UAV比例', color='blue')
+            # Create stacked area chart showing role distribution
+            ax2.fill_between(steps, 0, serving_ratio, alpha=0.8, label='Serving UAV Ratio', color='blue')
             ax2.fill_between(steps, serving_ratio, serving_ratio + relay_ratio, 
-                           alpha=0.8, label='中继型UAV比例', color='orange')
+                           alpha=0.8, label='Relay UAV Ratio', color='orange')
             ax2.fill_between(steps, serving_ratio + relay_ratio, 1, 
-                           alpha=0.8, label='未连接UAV比例', color='gray')
+                           alpha=0.8, label='Disconnected UAV Ratio', color='gray')
             
-            # 叠加加权服务贡献
+            # Overlay weighted serving contribution
             ax2_twin = ax2.twinx()
-            ax2_twin.plot(steps, self.history['weighted_serving_score'], 'r-', linewidth=2, label='加权服务贡献')
-            ax2_twin.set_ylabel('加权服务贡献', color='r')
+            ax2_twin.plot(steps, self.history['weighted_serving_score'], 'r-', linewidth=2, label='Weighted Serving Contribution')
+            ax2_twin.set_ylabel('Weighted Serving Contribution', color='r')
             
-            ax2.set_ylabel('UAV角色比例')
-            ax2.set_title('UAV角色分布演化')
+            ax2.set_ylabel('UAV Role Ratio')
+            ax2.set_title('UAV Role Distribution Evolution')
             ax2.set_ylim(0, 1)
             ax2.grid(True, alpha=0.3)
             ax2.legend(loc='upper left', fontsize=9)
             ax2_twin.legend(loc='upper right', fontsize=9)
             
-            # === 左下：网络效率分析 ===
+            # === Bottom Left: Network Efficiency Analysis ===
             ax3 = axes[1, 0]
             
-            # 计算效率指标
+            # Calculate efficiency metrics
             coverage_efficiency = np.array(self.history['coverage_ratios']) / np.maximum(np.array(self.history['connectivity_ratio']), 0.01)
             throughput_per_uav = np.array(self.history['throughput']) / np.maximum(np.array(self.history['connected_uavs']), 1)
             
-            ax3.plot(steps, coverage_efficiency, 'g-', linewidth=2, label='覆盖效率 (覆盖率/连接比例)')
+            ax3.plot(steps, coverage_efficiency, 'g-', linewidth=2, label='Coverage Efficiency (Coverage/Connection Ratio)')
             ax3_twin = ax3.twinx()
-            ax3_twin.plot(steps, throughput_per_uav, 'b--', linewidth=2, label='单UAV平均吞吐量')
-            ax3_twin.plot(steps, self.history['avg_hops'], 'r:', linewidth=2, label='平均跳数')
+            ax3_twin.plot(steps, throughput_per_uav, 'b--', linewidth=2, label='Average UAV Throughput')
+            ax3_twin.plot(steps, self.history['avg_hops'], 'r:', linewidth=2, label='Average Hops')
             
-            ax3.set_ylabel('覆盖效率', color='g')
-            ax3_twin.set_ylabel('吞吐量(Mbps)/跳数', color='b')
-            ax3.set_title('网络效率指标')
+            ax3.set_ylabel('Coverage Efficiency', color='g')
+            ax3_twin.set_ylabel('Throughput(Mbps)/Hops', color='b')
+            ax3.set_title('Network Efficiency Metrics')
             ax3.grid(True, alpha=0.3)
             ax3.legend(loc='upper left', fontsize=9)
             ax3_twin.legend(loc='upper right', fontsize=9)
             
-            # === 右下：性能稳定性分析 ===
+            # === Bottom Right: Performance Stability Analysis ===
             ax4 = axes[1, 1]
             
-            # 计算滑动窗口标准差（稳定性指标）
-            window_size = min(20, len(steps) // 4)  # 动态窗口大小
+            # Calculate sliding window standard deviation (stability metrics)
+            window_size = min(20, len(steps) // 4)  # Dynamic window size
             if window_size >= 2:
                 coverage_stability = []
                 health_stability = []
@@ -557,23 +574,23 @@ class VisualizationManager:
                     health_stability.append(np.std(health_window))
                     throughput_stability.append(np.std(throughput_window))
                 
-                ax4.plot(steps, coverage_stability, 'g-', linewidth=2, label=f'覆盖率稳定性 (窗口={window_size})')
-                ax4.plot(steps, health_stability, 'purple', linewidth=2, label=f'健康度稳定性 (窗口={window_size})')
-                ax4.plot(steps, throughput_stability, 'orange', linewidth=2, label=f'吞吐量稳定性 (窗口={window_size})')
+                ax4.plot(steps, coverage_stability, 'g-', linewidth=2, label=f'Coverage Stability (Window={window_size})')
+                ax4.plot(steps, health_stability, 'purple', linewidth=2, label=f'Health Stability (Window={window_size})')
+                ax4.plot(steps, throughput_stability, 'orange', linewidth=2, label=f'Throughput Stability (Window={window_size})')
                 
-                ax4.set_ylabel('标准差 (稳定性指标)')
-                ax4.set_title('性能稳定性分析 (越低越稳定)')
+                ax4.set_ylabel('Standard Deviation (Stability Metric)')
+                ax4.set_title('Performance Stability Analysis (Lower is More Stable)')
                 ax4.grid(True, alpha=0.3)
                 ax4.legend(fontsize=9)
             else:
-                ax4.text(0.5, 0.5, '数据点不足\n无法进行稳定性分析', 
+                ax4.text(0.5, 0.5, 'Insufficient Data Points\nUnable to Perform Stability Analysis', 
                         transform=ax4.transAxes, ha='center', va='center', fontsize=12)
-                ax4.set_title('性能稳定性分析')
+                ax4.set_title('Performance Stability Analysis')
             
-            # 设置所有子图的x轴标签
+            # Set x-axis labels for all subplots
             for i in range(2):
                 for j in range(2):
-                    axes[i, j].set_xlabel('时间步 (Step)')
+                    axes[i, j].set_xlabel('Time Step')
             
             plt.tight_layout()
             
@@ -589,9 +606,9 @@ class VisualizationManager:
             save_path = os.path.join(self.log_dir, filename)
             fig.savefig(save_path, dpi=200, bbox_inches='tight')
             plt.close(fig)
-            print(f"网络健康度分析图已保存: {save_path}")
+            print(f"Network health analysis chart saved: {save_path}")
 
         except Exception as e:
-            print(f"生成网络健康度分析图时出错: {e}")
+            print(f"Error generating network health analysis chart: {e}")
             import traceback
             traceback.print_exc()

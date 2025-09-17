@@ -228,6 +228,7 @@ class HMASDAgent:
         
         # 创建网络
         self.skill_coordinator = SkillCoordinator(config).to(self.device)
+        
         self.skill_discoverer = SkillDiscoverer(config, logger=main_logger).to(self.device) # Pass logger
         self.team_discriminator = TeamDiscriminator(config).to(self.device)
         self.individual_discriminator = IndividualDiscriminator(config).to(self.device)
@@ -238,9 +239,15 @@ class HMASDAgent:
             lr=config.lr_coordinator,
             weight_decay=config.weight_decay
         )
-        self.discoverer_optimizer = Adam(
-            self.skill_discoverer.parameters(),
-            lr=config.lr_discoverer,
+        # 【关键修复】为SkillDiscoverer解耦Actor和Critic的优化器
+        self.discoverer_actor_optimizer = Adam(
+            self.skill_discoverer.actor.parameters(),
+            lr=config.lr_discoverer_actor,  # 使用独立的actor学习率
+            weight_decay=config.weight_decay
+        )
+        self.discoverer_critic_optimizer = Adam(
+            self.skill_discoverer.critic.parameters(),
+            lr=config.lr_discoverer_critic, # 使用独立的critic学习率
             weight_decay=config.weight_decay
         )
         self.discriminator_optimizer = Adam(
@@ -261,12 +268,19 @@ class HMASDAgent:
                     end_factor=config.coordinator_lr_decay_factor,
                     total_iters=config.lr_decay_steps
                 )
-                self.discoverer_scheduler = LinearLR(
-                    self.discoverer_optimizer,
+                self.discoverer_actor_scheduler = LinearLR(
+                    self.discoverer_actor_optimizer,
                     start_factor=1.0,
                     end_factor=config.discoverer_lr_decay_factor, 
                     total_iters=config.lr_decay_steps
                 )
+                self.discoverer_critic_scheduler = LinearLR(
+                    self.discoverer_critic_optimizer,
+                    start_factor=1.0,
+                    end_factor=config.discoverer_lr_decay_factor, 
+                    total_iters=config.lr_decay_steps
+                )
+                self.discoverer_scheduler = None # 兼容性设置
                 self.discriminator_scheduler = LinearLR(
                     self.discriminator_optimizer,
                     start_factor=1.0,
@@ -277,9 +291,13 @@ class HMASDAgent:
                 self.coordinator_scheduler = CosineAnnealingLR(
                     self.coordinator_optimizer, T_max=config.lr_decay_steps
                 )
-                self.discoverer_scheduler = CosineAnnealingLR(
-                    self.discoverer_optimizer, T_max=config.lr_decay_steps
+                self.discoverer_actor_scheduler = CosineAnnealingLR(
+                    self.discoverer_actor_optimizer, T_max=config.lr_decay_steps
                 )
+                self.discoverer_critic_scheduler = CosineAnnealingLR(
+                    self.discoverer_critic_optimizer, T_max=config.lr_decay_steps
+                )
+                self.discoverer_scheduler = None # 兼容性设置
                 self.discriminator_scheduler = CosineAnnealingLR(
                     self.discriminator_optimizer, T_max=config.lr_decay_steps
                 )
@@ -299,6 +317,7 @@ class HMASDAgent:
         rollout_length = getattr(config, 'rollout_length', 2048)  # 默认rollout长度
         num_envs = getattr(config, 'num_envs', 1)  # 并行环境数量
         gru_hidden_size = getattr(config, 'gru_hidden_size', 128)  # GRU隐状态大小
+        action_space_type = getattr(config, 'action_space_type', 'continuous')  # 动作空间类型
         
         self.rollout_buffer = RolloutBuffer(
             num_steps=rollout_length,
@@ -309,7 +328,8 @@ class HMASDAgent:
             gru_hidden_size=gru_hidden_size,
             n_Z=config.n_Z,
             n_z=config.n_z,
-            state_dim=config.state_dim
+            state_dim=config.state_dim,
+            action_space_type=action_space_type
         )
         main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
                         f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
@@ -438,7 +458,30 @@ class HMASDAgent:
         else:
             self.obs_norm = None
             main_logger.info("未启用Observation Normalization")
+        
+        # 初始化State Normalization - 使用SB3的RunningMeanStd (新增)
+        if getattr(config, 'use_statenorm', True):  # 默认启用状态标准化
+            self.state_norm = RunningMeanStd(shape=(config.state_dim,))
+            main_logger.info("已启用State Normalization (使用SB3 RunningMeanStd) - 用于Critic输入标准化")
+        else:
+            self.state_norm = None
+            main_logger.info("未启用State Normalization")
+        
+        self.training = True # 训练/评估模式标志
     
+    def train(self, mode=True):
+        """设置智能体为训练或评估模式"""
+        self.training = mode
+        self.skill_coordinator.train(mode)
+        self.skill_discoverer.train(mode)
+        self.team_discriminator.train(mode)
+        self.individual_discriminator.train(mode)
+        main_logger.info(f"智能体模式设置为: {'训练' if mode else '评估'}")
+
+    def eval(self):
+        """设置智能体为评估模式"""
+        self.train(False)
+
     def _normalize_values(self, values_tensor, running_mean_std):
         """
         [修正] 使用当前的统计量归一化一个张量。
@@ -495,19 +538,20 @@ class HMASDAgent:
             obs_np = observations
             return_tensor = False
         
-        # 更新观测统计量
-        if obs_np.ndim == 1:
-            # 单个观测
-            self.obs_norm.update(obs_np)
-        elif obs_np.ndim == 2:
-            # 多个智能体的观测 [n_agents, obs_dim]
-            for i in range(obs_np.shape[0]):
-                self.obs_norm.update(obs_np[i])
-        elif obs_np.ndim == 3:
-            # 批量观测 [batch_size, n_agents, obs_dim]
-            for i in range(obs_np.shape[0]):
-                for j in range(obs_np.shape[1]):
-                    self.obs_norm.update(obs_np[i, j])
+        # 仅在训练模式下更新观测统计量
+        if self.training:
+            if obs_np.ndim == 1:
+                # 单个观测
+                self.obs_norm.update(obs_np)
+            elif obs_np.ndim == 2:
+                # 多个智能体的观测 [n_agents, obs_dim]
+                for i in range(obs_np.shape[0]):
+                    self.obs_norm.update(obs_np[i])
+            elif obs_np.ndim == 3:
+                # 批量观测 [batch_size, n_agents, obs_dim]
+                for i in range(obs_np.shape[0]):
+                    for j in range(obs_np.shape[1]):
+                        self.obs_norm.update(obs_np[i, j])
         
         # 归一化
         current_mean = self.obs_norm.mean
@@ -523,6 +567,52 @@ class HMASDAgent:
             return torch.FloatTensor(normalized_obs).to(self.device)
         else:
             return normalized_obs
+
+    def _normalize_states(self, states):
+        """
+        归一化全局状态数据，解决Critic输入尺度问题
+        
+        参数:
+            states: 全局状态数据，可以是numpy数组或torch张量
+            
+        返回:
+            normalized_states: 归一化后的状态数据
+        """
+        if not getattr(self.config, 'use_statenorm', True) or self.state_norm is None:
+            return states
+        
+        # 转换为numpy数组进行处理
+        if isinstance(states, torch.Tensor):
+            states_np = states.cpu().numpy()
+            return_tensor = True
+        else:
+            states_np = states
+            return_tensor = False
+        
+        # 仅在训练模式下更新状态统计量
+        if self.training:
+            if states_np.ndim == 1:
+                # 单个状态
+                self.state_norm.update(states_np)
+            elif states_np.ndim == 2:
+                # 批量状态 [batch_size, state_dim]
+                for i in range(states_np.shape[0]):
+                    self.state_norm.update(states_np[i])
+        
+        # 归一化
+        current_mean = self.state_norm.mean
+        current_var = self.state_norm.var
+        
+        normalized_states = (states_np - current_mean) / np.sqrt(current_var + 1e-8)
+        
+        # 裁剪到合理范围
+        normalized_states = np.clip(normalized_states, -10.0, 10.0)
+        
+        # 如果输入是张量，返回张量
+        if return_tensor:
+            return torch.FloatTensor(normalized_states).to(self.device)
+        else:
+            return normalized_states
 
     def clear_buffers(self):
         """清空on-policy的经验缓冲区，但保留off-policy的判别器Buffer"""
@@ -608,7 +698,9 @@ class HMASDAgent:
     
     def select_action(self, observations, agent_skills=None, deterministic=False, env_id=0, state=None):
         """
-        [最终修正版] 选择动作，并为每个环境管理正确的隐藏状态形状。
+        【论文一致性修复】选择动作，并为每个环境管理 Actor 和 Critic 的隐藏状态
+        
+        【重要修复】现在每个智能体都有独立的Critic隐状态，与on-policy-main保持一致
         """
         if agent_skills is None:
             agent_skills = self.env_agent_skills.get(env_id, self.current_agent_skills)
@@ -621,25 +713,53 @@ class HMASDAgent:
             # 更新环境状态
             self.env_agent_skills[env_id] = agent_skills
             
-        actions = torch.zeros((n_agents, self.config.action_dim), device=self.device)
+        # 根据动作空间类型初始化动作张量
+        action_space_type = getattr(self.config, 'action_space_type', 'continuous')
+        if action_space_type == 'discrete':
+            actions = torch.zeros(n_agents, dtype=torch.long, device=self.device)
+        else:
+            actions = torch.zeros((n_agents, self.config.action_dim), device=self.device)
         action_logprobs = torch.zeros(n_agents, device=self.device)
         values = torch.zeros(n_agents, device=self.device)
         
-        # --- 核心隐藏状态管理 ---
+        # === 管理 Actor 和 Critic 的隐藏状态 ===
         gru_hidden_size = self.config.gru_hidden_size
-        hidden_state = self.env_hidden_states.get(env_id)
-        if hidden_state is None:
-            # --- 核心修正：初始化为正确的2D形状 [n_agents, gru_hidden_size] ---
-            hidden_state = torch.zeros(n_agents, gru_hidden_size, device=self.device)
+        
+        # Actor 隐藏状态
+        actor_hidden_state = self.env_hidden_states.get(env_id)
+        if actor_hidden_state is None:
+            actor_hidden_state = torch.zeros(n_agents, gru_hidden_size, device=self.device)
+        
+        # 【关键修复】Critic 隐藏状态 - 每个智能体独立
+        critic_hidden_key = f"{env_id}_critic"
+        critic_hidden_state = self.env_hidden_states.get(critic_hidden_key)
+        if critic_hidden_state is None:
+            critic_hidden_state = torch.zeros(n_agents, gru_hidden_size, device=self.device)
 
         with torch.no_grad():
-            # Get global value (this part is correct and does not need to change)
+            # 【关键修复】为每个智能体独立计算价值，使用各自的Critic隐状态
             current_team_skill = self.env_team_skills.get(env_id, self.current_team_skill)
             if current_team_skill is not None and state is not None:
-                global_state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
-                team_skill_tensor = torch.tensor(current_team_skill, device=self.device).unsqueeze(0)
-                global_value, _ = self.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
-                values.fill_(global_value.item())
+                # 【关键修复】应用状态标准化，解决Critic输入尺度问题
+                normalized_state = self._normalize_states(state)
+                
+                # 为每个智能体分别计算价值
+                new_critic_hidden_states = []
+                for i in range(n_agents):
+                    global_state_tensor = torch.FloatTensor(normalized_state).unsqueeze(0).to(self.device)
+                    team_skill_tensor = torch.tensor(current_team_skill, device=self.device).unsqueeze(0)
+                    
+                    # 【关键修复】使用每个智能体独立的Critic隐状态
+                    agent_value, new_critic_hidden = self.skill_discoverer.get_value(
+                        global_state_tensor, team_skill_tensor, 
+                        critic_hidden_state[i:i+1]  # 使用第i个智能体的隐状态
+                    )
+                    values[i] = agent_value.item()
+                    new_critic_hidden_states.append(new_critic_hidden.squeeze(0))
+                
+                # 更新所有智能体的Critic隐状态
+                critic_hidden_state = torch.stack(new_critic_hidden_states)
+                self.env_hidden_states[critic_hidden_key] = critic_hidden_state
             else:
                 values.fill_(0.0)
 
@@ -650,13 +770,13 @@ class HMASDAgent:
             obs_batch = torch.FloatTensor(observations_normalized).to(self.device)
             skill_batch = torch.tensor(agent_skills, device=self.device)
 
-            # 将环境的 hidden_state (现在是正确的2D形状) 传入网络
-            actions_batch, logprobs_batch, _, new_hidden_state = self.skill_discoverer.forward(
-                obs_batch, skill_batch, hidden_state, deterministic
+            # 将环境的 Actor hidden_state 传入网络
+            actions_batch, logprobs_batch, _, new_actor_hidden_state = self.skill_discoverer.forward(
+                obs_batch, skill_batch, actor_hidden_state, deterministic
             )
             
-            # 存储更新后的 hidden_state (也是2D形状)
-            self.env_hidden_states[env_id] = new_hidden_state
+            # 存储更新后的 Actor hidden_state
+            self.env_hidden_states[env_id] = new_actor_hidden_state
 
         return actions_batch.cpu().numpy(), logprobs_batch.cpu().numpy(), values.cpu().numpy()
     
@@ -771,63 +891,92 @@ class HMASDAgent:
 
     def _batched_select_action(self, states_batch, observations_batch, agent_skills_batch, team_skills_batch, dones_batch, deterministic=False):
         """
-        [最终修正版] 为一批环境选择动作，并正确计算价值估计。
+        【论文一致性修复】为一批环境选择动作，正确管理 Actor 和 Critic 的 GRU 隐藏状态
+        
+        【重要修复】现在每个智能体都有独立的Critic隐状态，与on-policy-main保持一致
         """
         num_envs, n_agents, _ = observations_batch.shape
         
-        # 1. 获取或初始化批量的隐藏状态 (这部分逻辑保持不变)
-        hidden_states_batch = np.zeros((num_envs, n_agents, self.config.gru_hidden_size), dtype=np.float32)
+        # === 1. 管理 Actor 和 Critic 的隐藏状态 ===
+        # Actor 隐藏状态
+        actor_hidden_states_batch = np.zeros((num_envs, n_agents, self.config.gru_hidden_size), dtype=np.float32)
         for i in range(num_envs):
             if i in self.env_hidden_states and self.env_hidden_states[i] is not None:
-                hidden_states_batch[i] = self.env_hidden_states[i].cpu().numpy()
+                actor_hidden_states_batch[i] = self.env_hidden_states[i].cpu().numpy()
 
-        hidden_states_batch[dones_batch] = 0.0
+        # 【关键修复】Critic 隐藏状态 - 每个智能体独立
+        critic_hidden_states_batch = np.zeros((num_envs, n_agents, self.config.gru_hidden_size), dtype=np.float32)
+        for i in range(num_envs):
+            critic_hidden_key = f"{i}_critic"
+            if critic_hidden_key in self.env_hidden_states and self.env_hidden_states[critic_hidden_key] is not None:
+                # 【关键修复】不再广播，而是直接使用每个智能体的独立隐状态
+                critic_hidden_states_batch[i] = self.env_hidden_states[critic_hidden_key].cpu().numpy()
 
-        # 2. 准备批量输入 - 添加观测归一化
+        # 重置已完成环境的隐藏状态
+        actor_hidden_states_batch[dones_batch] = 0.0
+        critic_hidden_states_batch[dones_batch] = 0.0
+
+        # === 2. 准备批量输入 ===
         obs_flat = observations_batch.reshape(-1, self.config.obs_dim)
         
         # 【关键修复】应用观测归一化，解决输入尺度问题
         obs_flat_normalized = self._normalize_observations(obs_flat)
         
         skills_flat = agent_skills_batch.reshape(-1)
-        hidden_states_flat = hidden_states_batch.reshape(-1, self.config.gru_hidden_size)
+        actor_hidden_flat = actor_hidden_states_batch.reshape(-1, self.config.gru_hidden_size)
 
         obs_tensor = torch.FloatTensor(obs_flat_normalized).to(self.device)
         skills_tensor = torch.LongTensor(skills_flat).to(self.device)
-        hidden_tensor = torch.FloatTensor(hidden_states_flat).to(self.device)
+        actor_hidden_tensor = torch.FloatTensor(actor_hidden_flat).to(self.device)
         
         with torch.no_grad():
-            # 3. 批量运行 Actor 网络获取动作 (这部分逻辑保持不变)
-            actions_flat, logprobs_flat, _, new_hidden_flat = self.skill_discoverer(
-                obs_tensor, skills_tensor, hidden_tensor, deterministic
+            # === 3. 批量运行 Actor 网络获取动作 ===
+            actions_flat, logprobs_flat, _, new_actor_hidden_flat = self.skill_discoverer(
+                obs_tensor, skills_tensor, actor_hidden_tensor, deterministic
             )
 
-            # ======================= ▼▼▼ 核心修复点 ▼▼▼ =======================
-            # 4. 批量运行 Critic 网络获取价值估计 V(s, Z)
-            #    为批次中的每个智能体提供其对应的全局状态和团队技能
+            # === 4. 批量运行 Critic 网络获取价值估计 (使用独立的Critic隐状态) ===
+            # 为每个智能体提供对应的全局状态和团队技能
             states_expanded = np.repeat(states_batch, n_agents, axis=0)
             team_skills_expanded = np.repeat(team_skills_batch, n_agents, axis=0)
             
-            states_tensor = torch.FloatTensor(states_expanded).to(self.device)
+            # 【关键修复】应用状态标准化，解决Critic输入尺度问题
+            states_expanded_normalized = self._normalize_states(states_expanded)
+            
+            states_tensor = torch.FloatTensor(states_expanded_normalized).to(self.device)
             team_skills_tensor = torch.LongTensor(team_skills_expanded).to(self.device)
             
-            # 从 Critic 获取价值估计 - 这是被切断的关键信号！
-            values_flat, _ = self.skill_discoverer.get_value(states_tensor, team_skills_tensor)
-            # ======================= ▲▲▲ 核心修复点 ▲▲▲ =======================
+            # 【关键修复】使用每个智能体独立的Critic隐状态
+            critic_hidden_flat = critic_hidden_states_batch.reshape(-1, self.config.gru_hidden_size)
+            critic_hidden_tensor = torch.FloatTensor(critic_hidden_flat).to(self.device)
             
-        # 5. Reshape back (这部分逻辑保持不变)
-        actions_batch = actions_flat.cpu().numpy().reshape(num_envs, n_agents, self.config.action_dim)
+            # 【关键修复】使用新的 get_value 方法，传入每个智能体独立的Critic隐状态
+            values_flat, new_critic_hidden_flat = self.skill_discoverer.get_value(
+                states_tensor, team_skills_tensor, critic_hidden_tensor
+            )
+            
+        # === 5. Reshape 输出 ===
+        # 根据动作空间类型正确reshape动作
+        action_space_type = getattr(self.config, 'action_space_type', 'continuous')
+        if action_space_type == 'discrete':
+            actions_batch = actions_flat.cpu().numpy().reshape(num_envs, n_agents)
+        else:
+            actions_batch = actions_flat.cpu().numpy().reshape(num_envs, n_agents, self.config.action_dim)
         logprobs_batch = logprobs_flat.cpu().numpy().reshape(num_envs, n_agents)
-        new_hidden_batch = new_hidden_flat.reshape(num_envs, n_agents, self.config.gru_hidden_size)
-        
-        # 6. 【重要】将计算出的价值也 Reshape 并准备返回
         values_batch = values_flat.cpu().numpy().reshape(num_envs, n_agents)
         
-        # 7. 更新内部隐藏状态 (这部分逻辑保持不变)
+        new_actor_hidden_batch = new_actor_hidden_flat.reshape(num_envs, n_agents, self.config.gru_hidden_size)
+        new_critic_hidden_batch = new_critic_hidden_flat.cpu().numpy().reshape(num_envs, n_agents, self.config.gru_hidden_size)
+        
+        # === 6. 更新内部隐藏状态 ===
         for i in range(num_envs):
-            self.env_hidden_states[i] = new_hidden_batch[i]
+            # 更新 Actor 隐藏状态
+            self.env_hidden_states[i] = new_actor_hidden_batch[i]
             
-        # 8. 【重要】在返回值中包含正确的 values_batch
+            # 【关键修复】更新每个智能体独立的Critic隐状态
+            critic_hidden_key = f"{i}_critic"
+            self.env_hidden_states[critic_hidden_key] = torch.FloatTensor(new_critic_hidden_batch[i]).to(self.device)
+            
         return actions_batch, logprobs_batch, values_batch
 
     def step(self, states_batch, observations_batch, env_steps_batch, dones_batch, deterministic=False):
@@ -928,6 +1077,7 @@ class HMASDAgent:
         reward_ind_disc = reward_components.get('ind_disc', np.zeros_like(rewards, dtype=np.float32))
 
         # 存储数据到统一rollout缓冲区，传递时间步索引 t 和 state
+        
         success = self.rollout_buffer.add(
             t=t,
             state=state,
@@ -1097,12 +1247,6 @@ class HMASDAgent:
 
             high_level_value_np = high_level_value.squeeze().cpu().numpy()
 
-        # 计算联合log概率
-        if log_probs:
-            total_log_prob = log_probs['team_log_prob'] + sum(log_probs['agent_log_probs'])
-        else:
-            total_log_prob = 0.0
-        
         # Use the dedicated add_high_level_data to prevent overwriting low-level rewards.
         if rollout_step_idx is None:
             main_logger.error("rollout_step_idx is None! Cannot store high-level experience correctly.")
@@ -1115,13 +1259,17 @@ class HMASDAgent:
             
         t = time_step_of_decision
         
-        # 调用add_high_level_data并检查返回值
+        # 【修复】调用add_high_level_data并传递分离的log_probs和values
+        # 不再计算和存储联合log_prob，以支持解耦的策略损失
         success = self.rollout_buffer.add_high_level_data(
             env_idx=env_id,
             time_step=t,
-            value=high_level_value_np,
-            joint_log_prob=total_log_prob,
-            accumulated_reward=env_accumulated_reward
+            state_value=state_val.squeeze().cpu().numpy(),
+            agent_values=[v.squeeze().cpu().numpy() for v in agent_vals],
+            team_log_prob=log_probs.get('team_log_prob', 0.0),
+            agent_log_probs=log_probs.get('agent_log_probs', [0.0] * self.config.n_agents),
+            accumulated_reward=env_accumulated_reward,
+            value=high_level_value_np # Keep for backward compatibility if needed
         )
         
         # 如果存储失败（比如重复存储），直接返回False
@@ -1183,8 +1331,11 @@ class HMASDAgent:
             values: 价值估计 [n_agents]（新增参数，用于rollout存储）
             rollout_step_idx: 在rollout中的实际步数索引（0到rollout_length-1）
         """
-        # 确保rewards是数值类型
-        current_reward = rewards if isinstance(rewards, (int, float)) else rewards.item()
+        # 确保rewards是数值类型 (更稳健的处理)
+        if isinstance(rewards, np.ndarray):
+            current_reward = np.mean(rewards) # 如果是数组，取平均值（因为是共享奖励）
+        else:
+            current_reward = rewards # 如果是标量，直接使用
         
         # 更新环境特定的奖励累积
         if env_id not in self.env_reward_sums:
@@ -1406,25 +1557,9 @@ class HMASDAgent:
                     uncertainty_reward = -self.config.w_entropy * avg_entropy
 
                 # === Reward Normalization and Clipping ===
-                # Initialize running statistics if not exists
-                if not hasattr(self, 'team_disc_reward_std'):
-                    self.team_disc_reward_std = 1.0
-                    self.ind_disc_reward_std = 1.0
-                    self.reward_std_update_rate = 0.01
-                
-                # Update reward standard deviations
-                self.team_disc_reward_std = (1 - self.reward_std_update_rate) * self.team_disc_reward_std + \
-                                          self.reward_std_update_rate * abs(team_disc_reward)
-                self.ind_disc_reward_std = (1 - self.reward_std_update_rate) * self.ind_disc_reward_std + \
-                                         self.reward_std_update_rate * abs(ind_disc_reward)
-                
-                # Normalize rewards
-                team_disc_reward_normalized = team_disc_reward / (self.team_disc_reward_std + 1e-8)
-                ind_disc_reward_normalized = ind_disc_reward / (self.ind_disc_reward_std + 1e-8)
-                
                 # 【临时禁用标准化】直接使用原始奖励值
-                team_disc_reward_clipped = team_disc_reward#np.clip(team_disc_reward, -10.0, 10.0)
-                ind_disc_reward_clipped = ind_disc_reward#np.clip(ind_disc_reward, -10.0, 10.0)
+                team_disc_reward_clipped = np.clip(team_disc_reward, -10.0, 10.0)
+                ind_disc_reward_clipped = np.clip(ind_disc_reward, -10.0, 10.0)
                 
                 # === Final Reward Computation ===
                 env_component = self.config.lambda_e * reward
@@ -1478,16 +1613,28 @@ class HMASDAgent:
         """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
         # num_steps 现在是实际在缓冲区中的有效数据量
         
+        # 【修复】首先从缓冲区获取数据以检查有效样本数
+        rollout_data = self.rollout_buffer._get_full_rollout_data()
+        if rollout_data is None:
+            main_logger.warning("没有有效的Rollout数据，跳过Coordinator更新")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+            
         # 检查是否有有效的高层数据
-        high_level_data_count = np.sum(self.rollout_buffer.high_level_valid_mask[:num_steps])
+        high_level_valid_mask = rollout_data["high_level_valid_mask"]
+        high_level_data_count = np.sum(high_level_valid_mask[:num_steps])
         if high_level_data_count == 0:
             main_logger.warning("没有有效的高层策略数据，跳过Coordinator更新")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
         
         main_logger.info(f"开始使用统一缓冲区更新Coordinator，有效高层数据: {high_level_data_count}个")
         
-        # 计算高层策略的GAE，传递实际使用的步数
-        self.rollout_buffer.compute_high_level_advantages(num_steps=num_steps)
+        # 【修复】计算高层策略的GAE
+        # 由于无法直接访问 last_state, 我们假设 last_value 为 0。
+        high_level_last_values = {
+            'state': np.zeros(self.rollout_buffer.num_envs),
+            'agents': np.zeros((self.rollout_buffer.num_envs, self.config.n_agents))
+        }
+        self.rollout_buffer.compute_high_level_advantages(high_level_last_values)
         
         # 累积损失统计
         total_policy_loss = 0.0
@@ -1531,9 +1678,16 @@ class HMASDAgent:
             states_batch = batch['states'].to(self.device)             # Shape: (B, state_dim)
             team_skills_batch = batch['team_skills'].to(self.device)    # Shape: (B,)
             agent_skills_batch = batch['agent_skills'].to(self.device) # Shape: (B, n_agents)
-            old_log_probs_batch = batch['log_probs'].to(self.device)    # Shape: (B,)
-            advantages_batch = batch['advantages'].to(self.device)      # Shape: (B,)
-            returns_batch = batch['returns'].to(self.device)           # Shape: (B,)
+            
+            # 【关键修复】使用分离的旧log_probs
+            old_team_log_probs_batch = batch['old_team_log_probs'].to(self.device)
+            old_agent_log_probs_batch = batch['old_agent_log_probs'].to(self.device)
+            
+            # 【关键修复】使用分离的优势和回报数据
+            team_advantages_batch = batch['team_advantages'].to(self.device)
+            agent_advantages_batch = batch['agent_advantages'].to(self.device)
+            team_returns_tensor = batch['team_returns'].to(self.device)
+            agent_returns_tensor = batch['agent_returns'].to(self.device)
             
             # --- 核心改动：不使用 evaluate_sequence，而是直接调用 forward 和 get_value ---
             # 1. 重新评估当前策略下的 log_probs 和 entropy
@@ -1543,18 +1697,17 @@ class HMASDAgent:
             team_log_probs = Z_dist.log_prob(team_skills_batch)
             team_entropy = Z_dist.entropy()
 
-            agent_log_probs = []
+            agent_log_probs_list = []
             agent_entropies = []
             for i in range(self.config.n_agents):
                 zi_dist = Categorical(logits=z_logits_list[i])
-                agent_log_probs.append(zi_dist.log_prob(agent_skills_batch[:, i]))
+                agent_log_probs_list.append(zi_dist.log_prob(agent_skills_batch[:, i]))
                 agent_entropies.append(zi_dist.entropy())
-                
-            agent_log_probs = torch.stack(agent_log_probs, dim=1).sum(dim=1)
+            
+            # 【修复】保持agent_log_probs的形状为 [B, n_agents] 以进行解耦损失计算
+            agent_log_probs = torch.stack(agent_log_probs_list, dim=1)
             agent_entropies_tensor = torch.stack(agent_entropies, dim=1)  # Shape: (B, n_agents)
 
-            # 计算联合log_prob和总熵
-            total_log_probs = team_log_probs + agent_log_probs
             # 【修复】按照论文公式计算总熵：E[H(π_h(Z|...)) + Σ H(π_h(z_i|...))]
             # 先计算每个批次样本的总熵（团队熵 + 所有个体熵之和），然后取期望（均值）
             total_entropy_per_sample = team_entropy + agent_entropies_tensor.sum(dim=1)  # Shape: (B,)
@@ -1574,31 +1727,30 @@ class HMASDAgent:
             else:
                 agent_values_tensor = torch.zeros(self.config.n_agents, batch_size, device=self.device)
 
-            # 【关键修复】使用自适应优势标准化，根据奖励稀疏程度调整标准化强度
-            advantages_batch = self.compute_adaptive_advantage_normalization(advantages_batch)
+            # 【关键修复】分别对团队和个体优势进行标准化
+            team_advantages_batch = (team_advantages_batch - team_advantages_batch.mean()) / (team_advantages_batch.std() + 1e-8)
+            agent_advantages_batch = (agent_advantages_batch - agent_advantages_batch.mean()) / (agent_advantages_batch.std() + 1e-8)
+
+            # --- 【修复】计算解耦的PPO策略损失 ---
+            # 1. 团队策略损失
+            team_ratios = torch.exp(team_log_probs - old_team_log_probs_batch.detach())
+            team_surr1 = team_ratios * team_advantages_batch
+            team_surr2 = torch.clamp(team_ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * team_advantages_batch
+            team_policy_loss = -torch.min(team_surr1, team_surr2).mean()
+
+            # 2. 个体策略损失
+            # agent_log_probs shape: [B, n_agents]
+            # old_agent_log_probs_batch shape: [B, n_agents]
+            # agent_advantages_batch shape: [B, n_agents]
+            agent_ratios = torch.exp(agent_log_probs - old_agent_log_probs_batch.detach())
             
-            # --- 计算PPO损失 (标准的、非序列化的) ---
-            ratios = torch.exp(total_log_probs - old_log_probs_batch.detach())
-            surr1 = ratios * advantages_batch
-            surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_batch
-            policy_loss = -torch.min(surr1, surr2).mean()
-            
-            # 【关键修复】使用分离的回报数据计算价值损失
-            # 从批次数据中提取分离的回报
-            team_returns_batch = []
-            agent_returns_batch = []
-            
-            # 重新构建分离的回报数据
-            for i, (state_batch_item, obs_batch_item) in enumerate(zip(states_batch, observations_batch)):
-                # 查找对应的原始数据以获取分离的回报
-                # 这里我们需要从rollout buffer中查找对应的分离回报数据
-                # 由于批次数据已经打乱，我们使用当前的returns作为近似
-                team_returns_batch.append(returns_batch[i])
-                agent_returns_batch.append([returns_batch[i]] * self.config.n_agents)
-            
-            team_returns_tensor = torch.stack(team_returns_batch)
-            agent_returns_tensor = torch.tensor(agent_returns_batch, device=self.device)
-            
+            agent_surr1 = agent_ratios * agent_advantages_batch
+            agent_surr2 = torch.clamp(agent_ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * agent_advantages_batch
+            agent_policy_loss = -torch.min(agent_surr1, agent_surr2).mean()
+
+            # 组合策略损失
+            policy_loss = team_policy_loss + agent_policy_loss
+
             # 【论文一致性修复】按照论文公式(6)分别计算团队技能和个体技能的价值损失
             # 团队技能使用状态价值函数 V^h(ŝ)
             if self.config.use_valuenorm and self.value_norm_coordinator is not None:
@@ -1680,10 +1832,10 @@ class HMASDAgent:
             valid_high_level_rewards = []
             for t in range(num_steps):
                 for env_idx in range(self.rollout_buffer.num_envs):
-                    if self.rollout_buffer.high_level_valid_mask[t, env_idx]:
+                    if high_level_valid_mask[t, env_idx]:
                         # ▼▼▼▼▼▼▼▼▼▼【恢复此处的修改】▼▼▼▼▼▼▼▼▼▼
                         # 从专用的 high_level_rewards 缓冲区读取
-                        valid_high_level_rewards.append(self.rollout_buffer.high_level_rewards[t, env_idx])
+                        valid_high_level_rewards.append(rollout_data["high_level_rewards"][t, env_idx])
                         # ▲▲▲▲▲▲▲▲▲▲【恢复此处的修改】▲▲▲▲▲▲▲▲▲▲
             
             if len(valid_high_level_rewards) > 0:
@@ -1695,9 +1847,9 @@ class HMASDAgent:
                 sample_observations = []
                 for t in range(num_steps):
                     for env_idx in range(self.rollout_buffer.num_envs):
-                        if self.rollout_buffer.high_level_valid_mask[t, env_idx] and len(sample_states) < sample_size:
-                            sample_states.append(self.rollout_buffer.states[t, env_idx])
-                            sample_observations.append(self.rollout_buffer.obs[t, env_idx])
+                        if high_level_valid_mask[t, env_idx] and len(sample_states) < sample_size:
+                            sample_states.append(rollout_data["states"][t, env_idx])
+                            sample_observations.append(rollout_data["obs"][t, env_idx])
                 
                 if len(sample_states) > 0:
                     sample_values = []
@@ -1735,183 +1887,140 @@ class HMASDAgent:
                avg_team_entropy, avg_agent_entropy, \
                mean_state_value, mean_agent_value, avg_high_level_reward, avg_cd_loss
     
-    def update_discoverer_from_rollout(self, num_steps, ppo_epochs=4):
+    def update_discoverer_from_rollout(self, last_values, dones):
         """
-        使用统一rollout缓冲区更新低层技能发现器网络，实现真正的BPTT
-        这是新PPO流程的核心：一次性评估整个序列并进行反向传播
-        
-        注意：GAE计算已经在主训练循环中完成，这里直接使用预计算的advantages和returns
-        
-        参数:
-            num_steps: 缓冲区中的有效步数
-            ppo_epochs: PPO更新轮数
-            
-        返回:
-            与原update_discoverer相同格式的返回值
+        使用重构后的RolloutBuffer更新低层技能发现器网络。
         """
+        main_logger.info("开始使用重构后的RolloutBuffer更新Discoverer...")
         
-        main_logger.info(f"开始使用统一缓冲区更新Discoverer (真正的BPTT)，低层数据量: {num_steps}步")
-        main_logger.info("GAE已在主训练循环中计算完成，直接使用预计算的advantages和returns")
+        # 1. 计算GAE
+        self.rollout_buffer.compute_advantages(last_values, dones, self.config.gamma, self.config.gae_lambda)
         
         # 累积损失统计
-        total_policy_loss = 0.0
-        total_value_loss = 0.0
-        total_entropy_loss = 0.0
-        total_loss = 0.0
+        total_policy_loss, total_value_loss, total_entropy_loss, total_loss = 0.0, 0.0, 0.0, 0.0
         update_count = 0
         
-        # 计算每个批次包含的序列数量（环境数×智能体数）
-        num_sequences_per_batch = getattr(self.config, 'sequence_batch_size', 
-                                        min(self.rollout_buffer.num_envs * self.rollout_buffer.n_agents, 32))
+        ppo_epochs = getattr(self.config, 'ppo_epochs', 4)
+        num_sequences_per_batch = getattr(self.config, 'sequence_batch_size', 32)
         
-        # 【修复】使用专门的Discoverer采样器进行GRU友好的更新
-        sequence_sampler = self.rollout_buffer.get_discoverer_sampler(num_steps, ppo_epochs, num_sequences_per_batch)
+        # 2. 获取采样器
+        sequence_sampler = self.rollout_buffer.get_discoverer_sampler(ppo_epochs, num_sequences_per_batch)
         
         if sequence_sampler is None:
-            main_logger.error("无法从统一rollout缓冲区获取Discoverer序列采样器")
+            main_logger.error("无法获取Discoverer采样器，跳过更新。")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
-            
-        # --- 1. 在所有PPO Epochs开始前，一次性更新统计量 ---
+
+        # --- 在所有PPO Epochs开始前，一次性更新统计量 ---
         if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-            # 获取整个rollout buffer的回报
-            all_returns = self.rollout_buffer.returns[:num_steps].reshape(-1)
-            # 使用这批数据更新运行统计量
+            all_returns = self.rollout_buffer.returns.reshape(-1)
             self.value_norm_discoverer.update(all_returns)
             main_logger.info(f"Discoverer ValueNorm已更新. 新均值: {self.value_norm_discoverer.mean:.4f}, 新标准差: {np.sqrt(self.value_norm_discoverer.var):.4f}")
 
         for batch in sequence_sampler:
-            # 提取序列批次数据
-            observations_seq = batch['observations']  # Shape: (T, batch_size, obs_dim)
-            actions_seq = batch['actions']           # Shape: (T, batch_size, action_dim)
-            old_log_probs_seq = batch['log_probs']    # Shape: (T, batch_size)
-            advantages_seq = batch['advantages']      # Shape: (T, batch_size)
-            returns_seq = batch['returns']           # Shape: (T, batch_size)
-            global_states_seq = batch['global_states'] # Shape: (T, batch_size, state_dim) # 新增
-            team_skills_seq = batch['team_skills']    # Shape: (T, batch_size)           # 新增
-            agent_skills_seq = batch['agent_skills'] # Shape: (T, batch_size)
-            # **** 提取新增的 initial_hxs ****
-            initial_hxs = batch['initial_hxs']       # Shape: (batch_size, hidden_size)
+            # ... (与旧版本类似的PPO更新逻辑) ...
+            # 此处省略了详细的PPO更新代码，因为它与旧版本非常相似，
+            # 关键区别在于现在的数据来自一个干净的、无污染的采样器。
+            # 核心是使用 batch 中的 'advantages' 和 'returns'
+            
+            # 提取并转换数据
+            observations_seq = batch['observations'].to(self.device)
+            agent_skills_seq = batch['agent_skills'].to(self.device)
+            actions_seq = batch['actions'].to(self.device)
+            global_states_seq = batch['global_states'].to(self.device)
+            team_skills_seq = batch['team_skills'].to(self.device)
+            initial_hxs = batch['initial_hxs'].to(self.device)
             dones_seq = batch['dones'].to(self.device)
+            initial_critic_hxs = batch['initial_critic_hxs'].to(self.device)
             
-            # 转换到正确的设备
-            observations_seq = observations_seq.to(self.device)
-            actions_seq = actions_seq.to(self.device)
-            old_log_probs_seq = old_log_probs_seq.to(self.device)
-            advantages_seq = advantages_seq.to(self.device)
-            returns_seq = returns_seq.to(self.device)
-            global_states_seq = global_states_seq.to(self.device)  # 新增
-            team_skills_seq = team_skills_seq.to(self.device)      # 新增
-            agent_skills_seq = agent_skills_seq.to(self.device)
-            initial_hxs = initial_hxs.to(self.device)
-            
-            T, batch_size = observations_seq.shape[:2]
-            
-            # **** 核心改动：将 initial_hxs 传递给 evaluate_sequence ****
+            old_log_probs_seq = batch['log_probs'].to(self.device)
+            advantages_seq = batch['advantages'].to(self.device)
+            returns_seq = batch['returns'].to(self.device)
+            value_preds_seq = batch['value_preds'].to(self.device)
+            masks_seq = batch['masks'].to(self.device)
+
+            # 重新评估序列
             new_log_probs, new_values, entropy = self.skill_discoverer.evaluate_sequence(
                 observations_seq, agent_skills_seq, actions_seq, 
                 global_states_seq, team_skills_seq,
-                initial_hxs,  # **** 传入初始隐状态 ****
-                dones_seq
+                initial_hxs, dones_seq, initial_critic_hxs=initial_critic_hxs
             )
-            
-            # --- 将所有数据展平以计算损失 ---
-            # 展平数据: (T, B) -> (T*B)
+
+            # 展平数据
             advantages_flat = advantages_seq.reshape(-1)
             returns_flat = returns_seq.reshape(-1)
+            value_preds_flat = value_preds_seq.reshape(-1)
             old_log_probs_flat = old_log_probs_seq.reshape(-1)
             new_log_probs_flat = new_log_probs.reshape(-1)
             new_values_flat = new_values.reshape(-1)
+            masks_flat = masks_seq.reshape(-1)
+
+            # 在计算损失前，使用掩码过滤无效数据
+            valid_indices = masks_flat.nonzero(as_tuple=False).squeeze()
             
-            # 【关键修复】使用自适应优势标准化，根据奖励稀疏程度调整标准化强度
-            advantages_flat = self.compute_adaptive_advantage_normalization(advantages_flat)
-            
-            # --- 计算PPO损失（在展平后的数据上） ---
+            if valid_indices.numel() == 0:
+                main_logger.warning("在Discoverer更新中，当前批次没有有效数据，跳过。")
+                continue
+
+            advantages_flat = advantages_flat[valid_indices]
+            returns_flat = returns_flat[valid_indices]
+            old_log_probs_flat = old_log_probs_flat[valid_indices]
+            new_log_probs_flat = new_log_probs_flat[valid_indices]
+            new_values_flat = new_values_flat[valid_indices]
+
+            # 优势归一化
+            advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
+
+            # 计算PPO损失
             ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
             surr1 = ratios * advantages_flat
             surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_flat
             policy_loss = -torch.min(surr1, surr2).mean()
-            
+
             # 价值损失
-            if self.config.use_valuenorm and self.value_norm_discoverer is not None:
-                # a. Critic的预测值需要被归一化，以便与归一化的目标进行比较
-                values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
-                # b. Critic的训练目标(returns)也需要被归一化
-                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
-                # **关键修复**: 目标值需要detach()以防止梯度流向GAE计算
-                value_loss = F.mse_loss(values_for_loss, returns_for_loss.detach())
-            else:
-                # 如果不使用ValueNorm，一切照旧
-                value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
+            value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
             
             # 熵损失
             entropy_loss = -entropy * self.config.lambda_l
-            
-            # 总损失
-            if self.config.use_opt:
-                # 注意：这里没有cd_loss，因为evaluate_sequence方法中没有返回CD损失
-                # 如果需要CD损失，需要在evaluate_sequence中添加相应逻辑
-                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
-            else:
-                loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
-            
-            # 更新网络
-            self.discoverer_optimizer.zero_grad()
-            if torch.isnan(loss).any() or torch.isinf(loss).any():
-                main_logger.error("Loss contains NaN or Inf! Skipping update.")
-                continue # 跳过此次更新
-            loss.backward()  # <--- 这一步会通过整个序列反向传播！实现真正的BPTT
-            torch.nn.utils.clip_grad_norm_(self.skill_discoverer.parameters(), self.config.max_grad_norm)
-            self.discoverer_optimizer.step()
-            
-            # 累积统计
+
+            # 解耦更新
+            actor_loss = policy_loss + entropy_loss
+            critic_loss = self.config.value_loss_coef * value_loss
+
+            self.discoverer_actor_optimizer.zero_grad()
+            actor_loss.backward()
+            torch.nn.utils.clip_grad_norm_(self.skill_discoverer.actor.parameters(), self.config.max_grad_norm)
+            self.discoverer_actor_optimizer.step()
+
+            self.discoverer_critic_optimizer.zero_grad()
+            critic_loss.backward()
+            torch.nn.utils.clip_grad_norm_(self.skill_discoverer.critic.parameters(), self.config.max_grad_norm)
+            self.discoverer_critic_optimizer.step()
+
+            total_loss += (actor_loss + critic_loss).item()
             total_policy_loss += policy_loss.item()
             total_value_loss += value_loss.item()
             total_entropy_loss += entropy_loss.item()
-            total_loss += loss.item()
             update_count += 1
-            
-            main_logger.debug(f"Discoverer BPTT更新 #{update_count}: "
-                            f"Loss={loss.item():.6f}, Policy={policy_loss.item():.6f}, "
-                            f"Value={value_loss.item():.6f}, Entropy={entropy.item():.6f}")
+
+        # 计算平均值
+        avg_loss = total_loss / update_count if update_count > 0 else 0
+        avg_policy_loss = total_policy_loss / update_count if update_count > 0 else 0
+        avg_value_loss = total_value_loss / update_count if update_count > 0 else 0
+        avg_entropy_loss = total_entropy_loss / update_count if update_count > 0 else 0
         
-        # 计算平均损失
-        avg_policy_loss = total_policy_loss / update_count if update_count > 0 else 0.0
-        avg_value_loss = total_value_loss / update_count if update_count > 0 else 0.0
-        avg_entropy_loss = total_entropy_loss / update_count if update_count > 0 else 0.0
-        avg_total_loss = total_loss / update_count if update_count > 0 else 0.0
+        # 其他统计信息
+        data = self.rollout_buffer._get_full_rollout_data()
+        avg_intrinsic_reward = np.mean(data["rewards"]) if data and "rewards" in data else 0
+        avg_env_comp = np.mean(data["reward_env"]) if data and "reward_env" in data else 0
+        avg_team_disc_comp = np.mean(data["reward_team_disc"]) if data and "reward_team_disc" in data else 0
+        avg_ind_disc_comp = np.mean(data["reward_ind_disc"]) if data and "reward_ind_disc" in data else 0
+        avg_discoverer_val = np.mean(data["values"]) if data and "values" in data else 0
+        action_entropy_val = -avg_entropy_loss / self.config.lambda_l if self.config.lambda_l > 0 else 0
+
+        main_logger.info(f"Discoverer更新完成: 平均损失={avg_loss:.4f}")
         
-        # 计算其他统计信息（从统一rollout缓冲区获取）
-        # 假设缓冲区已满，使用num_steps进行计算
-        if num_steps > 0:
-            # 计算平均奖励（所有环境和智能体）
-            avg_intrinsic_reward = np.mean(self.rollout_buffer.rewards[:num_steps])
-            # 计算平均价值（所有环境和智能体）
-            avg_discoverer_value = np.mean(self.rollout_buffer.values[:num_steps])
-            action_entropy_val = -avg_entropy_loss / self.config.lambda_l if self.config.lambda_l > 0 else 0.0
-            # 从rollout缓冲区计算奖励组成部分的平均值（统一为"均值的均值"方法）
-            # 1. 先计算每个环境内部的平均值（跨越steps和agents维度）
-            env_means_env_comp = np.mean(self.rollout_buffer.rewards_env[:num_steps], axis=(0, 2))
-            env_means_team_disc_comp = np.mean(self.rollout_buffer.rewards_team_disc[:num_steps], axis=(0, 2))
-            env_means_ind_disc_comp = np.mean(self.rollout_buffer.rewards_ind_disc[:num_steps], axis=(0, 2))
-            
-            # 2. 再计算所有环境平均值的平均值
-            avg_env_comp = np.mean(env_means_env_comp)
-            avg_team_disc_comp = np.mean(env_means_team_disc_comp)
-            avg_ind_disc_comp = np.mean(env_means_ind_disc_comp)
-        else:
-            avg_intrinsic_reward = 0.0
-            avg_discoverer_value = 0.0
-            action_entropy_val = 0.0
-            avg_env_comp = 0.0
-            avg_team_disc_comp = 0.0
-            avg_ind_disc_comp = 0.0
-        
-        main_logger.info(f"Discoverer BPTT更新完成: {update_count}次更新, "
-                        f"平均损失={avg_total_loss:.6f}, 平均策略损失={avg_policy_loss:.6f}, "
-                        f"平均价值损失={avg_value_loss:.6f}, 平均动作熵={action_entropy_val:.6f}")
-        
-        return avg_total_loss, avg_policy_loss, avg_value_loss, action_entropy_val, \
-               avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, avg_discoverer_value
+        return avg_loss, avg_policy_loss, avg_value_loss, action_entropy_val, \
+               avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, avg_discoverer_val
 
     
     def update_discriminators(self, num_steps): # num_steps 参数现在可以忽略了
@@ -1986,7 +2095,7 @@ class HMASDAgent:
         
         return total_loss
     
-    def update(self, steps_in_buffer):
+    def update(self, last_values, dones, steps_in_buffer):
         """更新所有网络"""
         # 更新全局步数
         self.global_step += 1
@@ -2043,14 +2152,17 @@ class HMASDAgent:
         # 更新低层技能发现器 - 使用新的rollout方法
         discoverer_loss, discoverer_policy_loss, discoverer_value_loss, action_entropy, \
         avg_intrinsic_reward, avg_env_comp, avg_team_disc_comp, avg_ind_disc_comp, \
-        avg_discoverer_val = self.update_discoverer_from_rollout(steps_in_buffer)
+        avg_discoverer_val = self.update_discoverer_from_rollout(last_values, dones)
         
         # 更新学习率调度器
         if getattr(self.config, 'use_lr_decay', False) and self.global_step <= self.config.lr_decay_steps:
             if self.coordinator_scheduler is not None:
                 self.coordinator_scheduler.step()
-            if self.discoverer_scheduler is not None:
-                self.discoverer_scheduler.step()
+            # 【关键修复】更新解耦后的Discoverer调度器
+            if hasattr(self, 'discoverer_actor_scheduler') and self.discoverer_actor_scheduler is not None:
+                self.discoverer_actor_scheduler.step()
+            if hasattr(self, 'discoverer_critic_scheduler') and self.discoverer_critic_scheduler is not None:
+                self.discoverer_critic_scheduler.step()
             if self.discriminator_scheduler is not None:
                 self.discriminator_scheduler.step()
 
@@ -2096,12 +2208,14 @@ class HMASDAgent:
 
         # 获取当前学习率（供训练脚本记录）
         current_coord_lr = self.coordinator_optimizer.param_groups[0]['lr']
-        current_disc_lr = self.discoverer_optimizer.param_groups[0]['lr']
+        current_disc_actor_lr = self.discoverer_actor_optimizer.param_groups[0]['lr']
+        current_disc_critic_lr = self.discoverer_critic_optimizer.param_groups[0]['lr']
         current_discriminator_lr = self.discriminator_optimizer.param_groups[0]['lr']
         
         learning_rates = {
             'coordinator_lr': current_coord_lr,
-            'discoverer_lr': current_disc_lr,
+            'discoverer_actor_lr': current_disc_actor_lr,
+            'discoverer_critic_lr': current_disc_critic_lr,
             'discriminator_lr': current_discriminator_lr
         }
 
@@ -2151,6 +2265,10 @@ class HMASDAgent:
             'skill_discoverer': self.skill_discoverer.state_dict(),
             'team_discriminator': self.team_discriminator.state_dict(),
             'individual_discriminator': self.individual_discriminator.state_dict(),
+            'coordinator_optimizer': self.coordinator_optimizer.state_dict(),
+            'discoverer_actor_optimizer': self.discoverer_actor_optimizer.state_dict(),
+            'discoverer_critic_optimizer': self.discoverer_critic_optimizer.state_dict(),
+            'discriminator_optimizer': self.discriminator_optimizer.state_dict(),
             'config': self.config
         }
         
@@ -2171,6 +2289,24 @@ class HMASDAgent:
                 }
             checkpoint['valuenorm_state'] = valuenorm_state
             main_logger.info("已保存SB3 RunningMeanStd状态")
+        
+        # 保存观测和状态标准化统计信息（新增）
+        normalization_state = {}
+        if getattr(self.config, 'use_obsnorm', False) and self.obs_norm is not None:
+            normalization_state['obs_norm'] = {
+                'mean': self.obs_norm.mean,
+                'var': self.obs_norm.var,
+                'count': self.obs_norm.count
+            }
+        if getattr(self.config, 'use_statenorm', True) and self.state_norm is not None:
+            normalization_state['state_norm'] = {
+                'mean': self.state_norm.mean,
+                'var': self.state_norm.var,
+                'count': self.state_norm.count
+            }
+        if normalization_state:
+            checkpoint['normalization_state'] = normalization_state
+            main_logger.info("已保存观测和状态标准化统计信息")
         
         torch.save(checkpoint, path)
         main_logger.info(f"模型已保存到 {path}")
@@ -2242,6 +2378,22 @@ class HMASDAgent:
         self.team_discriminator.load_state_dict(checkpoint['team_discriminator'], strict=False)
         self.individual_discriminator.load_state_dict(checkpoint['individual_discriminator'], strict=False)
         
+        # 加载优化器状态（如果存在）
+        if 'coordinator_optimizer' in checkpoint:
+            self.coordinator_optimizer.load_state_dict(checkpoint['coordinator_optimizer'])
+            main_logger.info("已恢复Coordinator优化器状态")
+        if 'discoverer_actor_optimizer' in checkpoint and 'discoverer_critic_optimizer' in checkpoint:
+            self.discoverer_actor_optimizer.load_state_dict(checkpoint['discoverer_actor_optimizer'])
+            self.discoverer_critic_optimizer.load_state_dict(checkpoint['discoverer_critic_optimizer'])
+            main_logger.info("已恢复Discoverer Actor和Critic优化器状态")
+        elif 'discoverer_optimizer' in checkpoint: # 兼容旧模型
+            self.discoverer_actor_optimizer.load_state_dict(checkpoint['discoverer_optimizer'])
+            self.discoverer_critic_optimizer.load_state_dict(checkpoint['discoverer_optimizer'])
+            main_logger.warning("从旧的组合优化器状态恢复Discoverer Actor和Critic优化器")
+        if 'discriminator_optimizer' in checkpoint:
+            self.discriminator_optimizer.load_state_dict(checkpoint['discriminator_optimizer'])
+            main_logger.info("已恢复Discriminator优化器状态")
+        
         # 加载SB3 RunningMeanStd状态（如果存在且启用）
         if self.config.use_valuenorm and 'valuenorm_state' in checkpoint:
             valuenorm_state = checkpoint['valuenorm_state']
@@ -2262,5 +2414,28 @@ class HMASDAgent:
                 
         elif self.config.use_valuenorm:
             main_logger.warning("ValueNorm已启用，但checkpoint中未找到ValueNorm状态，将使用初始化值")
+        
+        # 加载观测和状态标准化统计信息（新增）
+        if 'normalization_state' in checkpoint:
+            normalization_state = checkpoint['normalization_state']
+            
+            if 'obs_norm' in normalization_state and getattr(self.config, 'use_obsnorm', False) and self.obs_norm is not None:
+                obs_state = normalization_state['obs_norm']
+                self.obs_norm.mean = obs_state['mean']
+                self.obs_norm.var = obs_state['var']
+                self.obs_norm.count = obs_state['count']
+                main_logger.info("已恢复观测标准化统计信息")
+                
+            if 'state_norm' in normalization_state and getattr(self.config, 'use_statenorm', True) and self.state_norm is not None:
+                state_state = normalization_state['state_norm']
+                self.state_norm.mean = state_state['mean']
+                self.state_norm.var = state_state['var']
+                self.state_norm.count = state_state['count']
+                main_logger.info("已恢复状态标准化统计信息")
+        else:
+            if getattr(self.config, 'use_obsnorm', False):
+                main_logger.warning("观测标准化已启用，但checkpoint中未找到标准化状态，将使用初始化值")
+            if getattr(self.config, 'use_statenorm', True):
+                main_logger.warning("状态标准化已启用，但checkpoint中未找到标准化状态，将使用初始化值")
         
         main_logger.info(f"模型已从 {path} 加载 (使用非严格模式)")

@@ -4,11 +4,18 @@ import numpy as np
 import torch
 import argparse
 import logging
+import cv2
 
-# 修复多进程环境中的matplotlib线程安全问题
+# 【关键修复】强制配置matplotlib后端 - 必须在任何其他导入之前
+# 这是解决服务器环境视频录制问题的根本性修复
 import matplotlib
-matplotlib.use('Agg')  # 使用非GUI后端，避免tkinter冲突
+matplotlib.use('Agg', force=True)  # 强制使用非GUI后端
 import matplotlib.pyplot as plt
+
+# 【额外保护】设置环境变量确保无GUI模式
+os.environ['MPLBACKEND'] = 'Agg'
+if 'DISPLAY' not in os.environ:
+    os.environ['DISPLAY'] = ''
 
 from datetime import datetime
 import multiprocessing as mp
@@ -82,7 +89,8 @@ class TensorBoardManager:
         self.writer.add_text('Parameters/lambda_l', str(self.config.lambda_l), 0)
         self.writer.add_text('Parameters/hidden_size', str(self.config.hidden_size), 0)
         self.writer.add_text('Parameters/lr_coordinator', str(self.config.lr_coordinator), 0)
-        self.writer.add_text('Parameters/lr_discoverer', str(self.config.lr_discoverer), 0)
+        self.writer.add_text('Parameters/lr_discoverer_actor', str(self.config.lr_discoverer_actor), 0)
+        self.writer.add_text('Parameters/lr_discoverer_critic', str(self.config.lr_discoverer_critic), 0)
         self.writer.add_text('Parameters/lr_discriminator', str(self.config.lr_discriminator), 0)
         
         # 【新增】奖励类型记录
@@ -103,6 +111,9 @@ class TensorBoardManager:
             self.writer.add_text('Parameters/w_pingpong', str(getattr(self.config, 'w_pingpong', 1.0)), 0)
             self.writer.add_text('Parameters/w_outage', str(getattr(self.config, 'w_outage', 1.0)), 0)
             self.writer.add_text('Parameters/outage_sinr_threshold_db', str(getattr(self.config, 'outage_sinr_threshold_db', -5)), 0)
+        elif reward_type == 'qos':
+            # QoS奖励模式
+            self.writer.add_text('Parameters/reward_mode', 'direct_qos_score', 0)
         elif reward_type == 'naive':
             # 朴素奖励模式（直接使用覆盖率）
             self.writer.add_text('Parameters/reward_mode', 'direct_coverage_ratio', 0)
@@ -150,34 +161,34 @@ class TensorBoardManager:
     def log_training_metrics(self, step, update_info, args=None):
         """记录训练指标到TensorBoard"""
         # 基础损失
-        self.writer.add_scalar('Losses/Coordinator/Total', update_info['coordinator_loss'], step)
-        self.writer.add_scalar('Losses/Discoverer/Total', update_info['discoverer_loss'], step)
-        self.writer.add_scalar('Losses/Discriminator/Total', update_info['discriminator_loss'], step)
+        self.writer.add_scalar('Losses/Coordinator/Total', update_info.get('coordinator_loss', 0), step)
+        self.writer.add_scalar('Losses/Discoverer/Total', update_info.get('discoverer_loss', 0), step)
+        self.writer.add_scalar('Losses/Discriminator/Total', update_info.get('discriminator_loss', 0), step)
         
         # 详细损失组成
-        self.writer.add_scalar('Losses/Coordinator/Policy', update_info['coordinator_policy_loss'], step)
-        self.writer.add_scalar('Losses/Coordinator/Value', update_info['coordinator_value_loss'], step)
-        self.writer.add_scalar('Losses/Discoverer/Policy', update_info['discoverer_policy_loss'], step)
-        self.writer.add_scalar('Losses/Discoverer/Value', update_info['discoverer_value_loss'], step)
+        self.writer.add_scalar('Losses/Coordinator/Policy', update_info.get('coordinator_policy_loss', 0), step)
+        self.writer.add_scalar('Losses/Coordinator/Value', update_info.get('coordinator_value_loss', 0), step)
+        self.writer.add_scalar('Losses/Discoverer/Policy', update_info.get('discoverer_policy_loss', 0), step)
+        self.writer.add_scalar('Losses/Discoverer/Value', update_info.get('discoverer_value_loss', 0), step)
         
         # 熵记录
-        self.writer.add_scalar('Entropy/Coordinator/TeamSkill_Z', update_info['team_skill_entropy'], step)
-        self.writer.add_scalar('Entropy/Coordinator/AgentSkill_z_Average', update_info['agent_skill_entropy'], step)
-        self.writer.add_scalar('Entropy/Discoverer/Action', update_info['action_entropy'], step)
+        self.writer.add_scalar('Entropy/Coordinator/TeamSkill_Z', update_info.get('team_skill_entropy', 0), step)
+        self.writer.add_scalar('Entropy/Coordinator/AgentSkill_z_Average', update_info.get('agent_skill_entropy', 0), step)
+        self.writer.add_scalar('Entropy/Discoverer/Action', update_info.get('action_entropy', 0), step)
 
         # 奖励记录
-        self.writer.add_scalar('Rewards/HighLevel/K_Step_Accumulated_Mean', update_info['mean_high_level_reward'], step)
+        self.writer.add_scalar('Rewards/HighLevel/K_Step_Accumulated_Mean', update_info.get('mean_high_level_reward', 0), step)
         
-        # 内在奖励记录
-        self.writer.add_scalar('Rewards/Intrinsic/LowLevel_Average', update_info['avg_intrinsic_reward'], step)
-        self.writer.add_scalar('Rewards/Intrinsic/Components/Environmental_Portion_Average', update_info['avg_env_comp'], step)
-        self.writer.add_scalar('Rewards/Intrinsic/Components/TeamDiscriminator_Portion_Average', update_info['avg_team_disc_comp'], step)
-        self.writer.add_scalar('Rewards/Intrinsic/Components/IndividualDiscriminator_Portion_Average', update_info['avg_ind_disc_comp'], step)
+        # 内在奖励记录 (使用 .get() 方法确保安全访问)
+        self.writer.add_scalar('Rewards/Intrinsic/LowLevel_Average', update_info.get('avg_intrinsic_reward', 0), step)
+        self.writer.add_scalar('Rewards/Intrinsic/Components/Environmental_Portion_Average', update_info.get('avg_env_comp', 0), step)
+        self.writer.add_scalar('Rewards/Intrinsic/Components/TeamDiscriminator_Portion_Average', update_info.get('avg_team_disc_comp', 0), step)
+        self.writer.add_scalar('Rewards/Intrinsic/Components/IndividualDiscriminator_Portion_Average', update_info.get('avg_ind_disc_comp', 0), step)
 
         # 价值函数估计记录
-        self.writer.add_scalar('ValueEstimates/Coordinator/StateValue_Mean', update_info['mean_coord_state_val'], step)
-        self.writer.add_scalar('ValueEstimates/Coordinator/AgentValue_Average_Mean', update_info['mean_coord_agent_val'], step)
-        self.writer.add_scalar('ValueEstimates/Discoverer/Value_Mean', update_info['avg_discoverer_val'], step)
+        self.writer.add_scalar('ValueEstimates/Coordinator/StateValue_Mean', update_info.get('mean_coord_state_val', 0), step)
+        self.writer.add_scalar('ValueEstimates/Coordinator/AgentValue_Average_Mean', update_info.get('mean_coord_agent_val', 0), step)
+        self.writer.add_scalar('ValueEstimates/Discoverer/Value_Mean', update_info.get('avg_discoverer_val', 0), step)
 
         # CD Loss
         if 'cd_loss' in update_info:
@@ -407,7 +418,17 @@ class EnhancedRewardTracker:
                 'belief_prediction_accuracy': [],
                 'high_belief_regions_count': [],
                 'low_belief_regions_count': [],
-                'belief_concentration_ratio': []
+                'belief_concentration_ratio': [],
+                
+                # 【新增】场景4 QoS 和 SINR 分布指标
+                'qos_score': [],
+                'sinr_dist_below_3dB': [],
+                'sinr_dist_3_to_10dB': [],
+                'sinr_dist_10_to_20dB': [],
+                'sinr_dist_above_20dB': [],
+                'sinr_avg_db': [],
+                'sinr_min_db': [],
+                'sinr_max_db': []
             },
             
             # 【新增】Episode结束时的专门数据记录
@@ -742,7 +763,8 @@ class EnhancedRewardTracker:
                 handover_reward_keys = [
                     'handover_reward', 'handover_penalty', 'ping_pong_penalty', 
                     'outage_penalty', 'outage_users', 'outage_ratio',
-                    'handover_increment', 'ping_pong_increment'
+                    'handover_increment', 'ping_pong_increment',
+                    'serving_set_changes', 'uav_joins', 'uav_leaves'
                 ]
                 for key in handover_reward_keys:
                     if key in reward_info:
@@ -762,6 +784,22 @@ class EnhancedRewardTracker:
                     'kalman_filter_convergence', 'prediction_horizon_accuracy'
                 ]
                 for key in kalman_filter_keys:
+                    if key in reward_info:
+                        # 确保列表存在
+                        if key not in self.performance_metrics['reward_components']:
+                            self.performance_metrics['reward_components'][key] = []
+                        
+                        self.performance_metrics['reward_components'][key].append({
+                            'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
+                        })
+
+                # 【新增】QoS 和 SINR 分布指标记录
+                qos_sinr_keys = [
+                    'qos_score', 'sinr_dist_below_3dB', 'sinr_dist_3_to_10dB',
+                    'sinr_dist_10_to_20dB', 'sinr_dist_above_20dB', 'sinr_avg_db',
+                    'sinr_min_db', 'sinr_max_db'
+                ]
+                for key in qos_sinr_keys:
                     if key in reward_info:
                         # 确保列表存在
                         if key not in self.performance_metrics['reward_components']:
@@ -1280,6 +1318,90 @@ class EnhancedRewardTracker:
         # 【新增】记录Episode结束时的指标到TensorBoard
         self._log_episode_end_metrics_to_tensorboard(writer, step)
 
+        # 【新增】记录QoS和SINR分布指标
+        self._log_qos_and_sinr_metrics_to_tensorboard(writer, step)
+
+        # 【新增】记录软切换指标
+        self._log_soft_handover_metrics_to_tensorboard(writer, step)
+
+        # 【新增】记录切换奖励指标
+        self._log_handover_reward_metrics_to_tensorboard(writer, step)
+
+    def _log_handover_reward_metrics_to_tensorboard(self, writer, step):
+        """记录切换奖励相关指标到TensorBoard"""
+        reward_components = self.performance_metrics['reward_components']
+        
+        # 切换奖励特有指标
+        handover_fields = [
+            'handover_reward', 'handover_penalty', 'ping_pong_penalty', 
+            'outage_penalty', 'outage_users', 'outage_ratio',
+            'handover_increment', 'ping_pong_increment'
+        ]
+        
+        for field in handover_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(writer, step,
+                                           reward_components[field],
+                                           field.replace('_', ' ').title().replace(' ', '_'),
+                                           'HandoverReward')
+
+    def _log_soft_handover_metrics_to_tensorboard(self, writer, step):
+        """记录软切换相关指标到TensorBoard"""
+        reward_components = self.performance_metrics['reward_components']
+        
+        soft_handover_keys = [
+            'serving_set_changes', 'uav_joins', 'uav_leaves'
+        ]
+        
+        for key in soft_handover_keys:
+            if reward_components.get(key):
+                self._log_aggregated_metrics(writer, step,
+                                           reward_components[key],
+                                           key.replace('_', ' ').title().replace(' ', '_'),
+                                           'SoftHandover')
+
+    def _log_qos_and_sinr_metrics_to_tensorboard(self, writer, step):
+        """记录服务质量(QoS)和SINR分布指标到TensorBoard"""
+        reward_components = self.performance_metrics['reward_components']
+        
+        # QoS得分
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('qos_score', []), 
+                                   'QoS_Score', 
+                                   'QoS')
+        
+        # SINR统计
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_avg_db', []), 
+                                   'SINR_Average_dB', 
+                                   'QoS')
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_min_db', []), 
+                                   'SINR_Min_dB', 
+                                   'QoS')
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_max_db', []), 
+                                   'SINR_Max_dB', 
+                                   'QoS')
+
+        # SINR分布
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_dist_below_3dB', []), 
+                                   'Distribution_Below_3dB', 
+                                   'QoS/SINR_Distribution')
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_dist_3_to_10dB', []), 
+                                   'Distribution_3_to_10dB', 
+                                   'QoS/SINR_Distribution')
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_dist_10_to_20dB', []), 
+                                   'Distribution_10_to_20dB', 
+                                   'QoS/SINR_Distribution')
+        self._log_aggregated_metrics(writer, step, 
+                                   reward_components.get('sinr_dist_above_20dB', []), 
+                                   'Distribution_Above_20dB', 
+                                   'QoS/SINR_Distribution')
+
     def _log_episode_end_metrics_to_tensorboard(self, writer, step):
         """
         专门记录episode结束时的性能指标到TensorBoard
@@ -1611,22 +1733,7 @@ class EnhancedRewardTracker:
                 # 【新增】根据奖励类型记录特定的奖励组成部分
                 reward_type = getattr(self.config, 'reward_type', 'health')
                 
-                if reward_type == 'handover':
-                    # 切换奖励特有指标
-                    handover_fields = [
-                        'handover_reward', 'handover_penalty', 'ping_pong_penalty', 
-                        'outage_penalty', 'outage_users', 'outage_ratio',
-                        'handover_increment', 'ping_pong_increment'
-                    ]
-                    
-                    for field in handover_fields:
-                        if reward_components.get(field):
-                            self._log_aggregated_metrics(writer, step,
-                                                       reward_components[field],
-                                                       field.replace('_', ' ').title().replace(' ', '_'),
-                                                       'HandoverReward')
-                
-                elif reward_type == 'naive':
+                if reward_type == 'naive':
                     # 朴素奖励模式：主要关注覆盖率
                     writer.add_scalar('NaiveReward/Coverage_Ratio_Direct', 
                                     np.mean([r['value'] for r in reward_components.get('coverage_ratios', [])[-self.window_size:]]) 
@@ -1837,7 +1944,8 @@ def parse_args():
                         choices=['debug', 'info', 'warning', 'error', 'critical'], 
                         help='控制台日志级别')
     parser.add_argument('--eval_episodes', type=int, default=10, help='评估的episode数量')
-    parser.add_argument('--render', action='store_true', help='是否渲染环境')
+    parser.add_argument('--render', action='store_true', help='是否实时渲染环境（仅第一个环境）')
+    parser.add_argument('--record_video', action='store_true', help='是否将评估过程录制为视频')
     parser.add_argument('--device', type=str, default='auto', 
                         choices=['auto', 'cuda', 'cpu'], help='计算设备: auto=自动选择, cuda=GPU, cpu=CPU')
     parser.add_argument('--resume_from', type=str, default='', 
@@ -1959,7 +2067,6 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             static_infos = []
             for env_state in initial_env_states:
                 static_infos.append({
-                    'user_positions': env_state.get('user_positions'),
                     'ground_bs_positions': env_state.get('ground_bs_positions'),
                     'area_size': env_state.get('area_size')
                 })
@@ -2122,7 +2229,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                             team_skill=infos_batch[i].get('team_skill', -1),
                             agent_skills=infos_batch[i].get('agent_skills', []),
                             reward_info=reward_info,
-                            static_info=static_infos[i] if static_infos else {}
+                            static_info=static_infos[i] if static_infos else {},
+                            # 【修复】在调试模式下传递连接和路由信息
+                            connections=reward_info.get('connections'),
+                            routing_paths=reward_info.get('routing_paths')
                         )
                     except Exception as e:
                         main_logger.warning(f"[调试模式] 环境 {i} 记录步骤数据时出错: {e}")
@@ -2237,7 +2347,21 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
                 global_state_tensor = torch.FloatTensor(states[i]).unsqueeze(0).to(agent.device)
                 team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
-                global_value_tensor, _ = agent.skill_discoverer.get_value(global_state_tensor, team_skill_tensor)
+                
+                # 【根本原因修复】从agent获取并传递正确的critic隐藏状态
+                critic_hidden_key = f"{i}_critic"
+                last_critic_hidden_state = agent.env_hidden_states.get(critic_hidden_key)
+                
+                # 【正确修复】确保隐藏状态的批量维度与输入的批量维度(1)匹配
+                if last_critic_hidden_state is not None:
+                    # Critic的隐藏状态在同一环境中对所有智能体都是相同的，因此我们只取第一个
+                    last_critic_hidden_state = last_critic_hidden_state[0:1]
+
+                global_value_tensor, _ = agent.skill_discoverer.get_value(
+                    global_state_tensor, 
+                    team_skill_tensor,
+                    critic_hidden_state=last_critic_hidden_state
+                )
                 
                 last_values_predicted[i, :] = global_value_tensor.squeeze().item()
                 
@@ -2246,39 +2370,16 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     torch.FloatTensor(last_values_predicted[i, :]), name='last_values'
                 ).numpy()
 
-        # ===================================================================
-        # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 关键修复：支持可变长度rollout的GAE计算 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-        # 【关键修复】计算实际收集的步数，解决提前终止导致的形状不匹配问题
-        steps_in_rollout = rollout_step + 1
-        main_logger.info(f"Rollout收集完成: 实际步数={steps_in_rollout}, 预期步数={config.rollout_length}")
-        
-        # 无论是否启用ValueNorm，GAE计算都应该使用原始的、未经处理的价值。
-        # Value Normalization只在损失函数计算时使用。
-        values_for_gae = agent.rollout_buffer.values[:steps_in_rollout]
-        
-        # 3. 使用正确的 `dones` 调用 compute_advantages，并传入实际步数
-        # `dones_tracker` 保存了 rollout 最后一轮的真实终止状态
-        agent.rollout_buffer.compute_advantages(
-            last_values=last_values_predicted, # GAE内部会处理denormalized_last_values
-            dones=dones_tracker,               # <-- 确保这里是真实的dones
-            gamma=config.gamma, 
-            gae_lambda=config.gae_lambda,
-            denormalized_values=values_for_gae, # 传入原始价值
-            denormalized_last_values=last_values_predicted, # 传入原始的最后一步价值
-            steps_in_rollout=steps_in_rollout  # 【关键修复】传入实际收集的步数
-        )
-        # ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-        # ===================================================================
-
         # Rollout数据收集完成，进行更新
         # 修复：使用实际收集的步数，而不是可能不准确的rollout_steps变量
         steps_in_rollout = rollout_step + 1
+        main_logger.info(f"Rollout收集完成: 实际步数={steps_in_rollout}, 预期步数={config.rollout_length}")
         try:
             # 执行回调函数 - 在更新前
             for callback in callbacks:
                 callback.on_rollout_end()
             
-            update_info = agent.update(steps_in_buffer=steps_in_rollout)
+            update_info = agent.update(last_values_predicted, dones_tracker, steps_in_buffer=steps_in_rollout)
             update_times += 1
             elapsed = time.time() - start_time
 
@@ -2432,7 +2533,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             main_logger.info(f"即将进行评估，将评估 {config.eval_episodes} 个episodes...")
             main_logger.info(f"当前步数: {total_steps}, 距离上次评估: {total_steps - last_eval_step} 步")
             # 使用 eval_vec_env 进行评估
-            eval_reward, eval_std, eval_min, eval_max = evaluate(eval_vec_env, agent, config.eval_episodes, render=args.render, eval_step=total_steps)
+            eval_reward, eval_std, eval_min, eval_max = evaluate(eval_vec_env, agent, config.eval_episodes, render=args.render, record_video=args.record_video, eval_step=total_steps)
             main_logger.info(f"评估完成 ({config.eval_episodes} 个episodes): 平均奖励 {eval_reward:.2f} ± {eval_std:.2f}, 最大/最小: {eval_max:.2f}/{eval_min:.2f}")
 
             # 保存最佳模型
@@ -2490,7 +2591,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     return agent
 
 # 评估函数
-def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
+def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, eval_step=0):
     """
     评估HMASD代理 (使用 SubprocVecEnv)
 
@@ -2498,7 +2599,8 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
         vec_env: SubprocVecEnv 实例
         agent: HMASD代理实例
         n_episodes: 评估的episode数量 (总共要评估的episode数量)
-        render: 是否渲染环境 (只渲染第一个环境)
+        render: 是否实时渲染环境 (只渲染第一个环境)
+        record_video: 是否将评估过程录制为视频
         eval_step (int): 当前的训练总步数，用于唯一标识评估图像
 
     返回:
@@ -2511,7 +2613,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     
     # 打印评估参数
     num_envs = vec_env.num_envs
-    main_logger.info(f"开始评估: 目标完成 {n_episodes} 个episodes，使用 {num_envs} 个并行环境，是否渲染: {render}")
+    main_logger.info(f"开始评估: 目标完成 {n_episodes} 个episodes，使用 {num_envs} 个并行环境，实时渲染: {render}, 录制视频: {record_video}")
+    
+    # 切换到评估模式
+    agent.eval()
     
     # 【新增】创建评估专用的TensorBoard管理器和奖励追踪器
     eval_log_dir = os.path.join(agent.log_dir, f'evaluation_step_{eval_step}')
@@ -2520,6 +2625,26 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     eval_tb_manager = TensorBoardManager(eval_log_dir, agent.config)
     eval_reward_tracker = EnhancedRewardTracker(eval_log_dir, agent.config, n_users=agent.config.n_users)
     
+    # 视频录制设置
+    video_writers = [None] * num_envs
+    if record_video:
+        video_dir = os.path.join(eval_log_dir, 'videos')
+        os.makedirs(video_dir, exist_ok=True)
+        # 获取帧尺寸
+        frame = vec_env.env_method('render', indices=[0])[0]
+        if frame is not None and frame.shape[0] > 0 and frame.shape[1] > 0:
+            height, width, _ = frame.shape
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            for i in range(num_envs):
+                video_path = os.path.join(video_dir, f'eval_episode_{i}_step_{eval_step}.mp4')
+                video_writers[i] = cv2.VideoWriter(video_path, fourcc, 10.0, (width, height))
+                main_logger.info(f"为环境 {i} 初始化视频录制器，保存至: {video_path}")
+        else:
+            # 【增强日志】打印更详细的错误信息
+            frame_shape = frame.shape if frame is not None else "None"
+            main_logger.error(f"无法获取有效的渲染帧来初始化录制器 (帧形状: {frame_shape})，视频录制功能已禁用。")
+            record_video = False
+
     # 用于计时的变量
     eval_start_time = time.time()
     step_times = []
@@ -2545,7 +2670,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
     static_infos = []
     for env_state in initial_env_states:
         static_infos.append({
-            'user_positions': env_state.get('user_positions'),
             'ground_bs_positions': env_state.get('ground_bs_positions'),
             'area_size': env_state.get('area_size')
         })
@@ -2601,7 +2725,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                 all_agent_infos_list = [{}] * num_envs  # 初始化为空字典
                 
                 for idx, env_i in enumerate(active_indices):
-                    actions_array[env_i] = active_actions_batch[idx]
+                    actions_array[env_i] = active_actions_batch[idx].reshape(-1, 1)
                     all_agent_infos_list[env_i] = active_infos_batch[idx]
                     
                     # 收集技能分布信息
@@ -2609,7 +2733,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                     all_agent_skills.append(active_infos_batch[idx]['agent_skills'])
             else:
                 # 如果没有活跃环境，创建空的actions数组
-                actions_array = np.zeros((num_envs,) + vec_env.action_space.shape[1:])
+                actions_array = np.zeros((num_envs,) + vec_env.action_space.shape)
                 all_agent_infos_list = [{}] * num_envs
             
             agent_step_end = time.time()
@@ -2710,23 +2834,60 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
                         
                         # 如果reward_info为空，打印更详细的调试信息
                         if not reward_info:
-                            main_logger.warning(f"[评估] 环境 {i} reward_info为空！完整infos内容: {infos[i]}")
+                            main_logger.warning(f"[评估] Episode结束时未找到reward_info，infos[{i}]键: {list(infos[i].keys())}")
 
                     visualizers[i].record_step(
                         step_count=env_steps[i],
-                        uav_positions=uav_positions, # 使用从info获取的正确位置
+                        uav_positions=uav_positions,
                         team_skill=agent_info.get('team_skill', -1),
                         agent_skills=agent_info.get('agent_skills', []),
                         reward_info=reward_info,
-                        static_info=static_infos[i]
+                        static_info=static_infos[i],
+                        # 【修复】从reward_info中稳定地获取连接和路由信息
+                        connections=reward_info.get('connections'),
+                        routing_paths=reward_info.get('routing_paths')
                     )
 
+                    # 【修复】恢复周期性拓扑图生成，但只生成拓扑图
+                    if env_steps[i] % 50 == 0:
+                        main_logger.info(f"在步骤 {env_steps[i]} 为评估环境 {i} 生成拓扑快照...")
+                        try:
+                            # 生成当前步骤的图像，只生成拓扑图
+                            visualizers[i].generate_plots(eval_step=eval_step, prefix=f'snapshot_step_{env_steps[i]}', topology_only=True)
+                        except Exception as e:
+                            main_logger.error(f"生成拓扑快照时出错: {e}")
+
+                    # 实时渲染或录制视频
+                    frame_to_process = None
                     if render and i == 0:
                         try:
-                            vec_env.env_method('render', indices=[0]) # Render only the first env
+                            # render() 返回图像帧用于显示或保存
+                            frame_to_process = vec_env.env_method('render', indices=[0])[0]
+                            if frame_to_process is not None:
+                                # Matplotlib返回RGBA，需要转为BGR给OpenCV显示
+                                frame_bgr = cv2.cvtColor(frame_to_process, cv2.COLOR_RGBA2BGR)
+                                cv2.imshow(f'Evaluation Env {i}', frame_bgr)
+                                cv2.waitKey(1)
                         except Exception as e:
                             main_logger.error(f"渲染错误: {e}")
                             render = False # Disable rendering if it fails
+                    
+                    if record_video and video_writers[i] is not None:
+                        try:
+                            # 如果之前没有为实时渲染获取帧，现在获取它
+                            if frame_to_process is None:
+                                frame_to_process = vec_env.env_method('render', indices=[i])[0]
+                            
+                            if frame_to_process is not None:
+                                frame_bgr = cv2.cvtColor(frame_to_process, cv2.COLOR_RGBA2BGR)
+                                video_writers[i].write(frame_bgr)
+                        except Exception as e:
+                            main_logger.error(f"为环境 {i} 录制视频帧时出错: {e}")
+
+                    # 强制设置环境长度为1500步
+                    if env_steps[i] >= 1500:
+                        dones[i] = True
+                        main_logger.info(f"评估 Episode (来自环境 {i}) 达到1500步上限，强制结束。")
 
                     # 如果环境完成
                     if dones[i]:
@@ -2802,6 +2963,15 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
             if not np.any(active_envs):
                 main_logger.warning("所有评估环境都已完成，但尚未达到目标 episode 数量。")
                 break
+    
+    # 评估结束后，释放所有视频写入器
+    if record_video:
+        for i in range(num_envs):
+            if video_writers[i] is not None:
+                video_writers[i].release()
+                main_logger.info(f"环境 {i} 的视频已保存。")
+        if render:
+            cv2.destroyAllWindows()
 
     mean_reward = np.mean(episode_rewards) if episode_rewards else 0
     std_reward = np.std(episode_rewards) if episode_rewards else 0
@@ -2995,6 +3165,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, eval_step=0):
         final_avg_coverage = np.mean([d['coverage_ratio'] for d in step_coverage_data])
         main_logger.info(f"评估期间平均覆盖率: {final_avg_coverage:.2%}")
 
+    # 切换回训练模式
+    agent.train()
+
     return mean_reward, std_reward, min_reward, max_reward
 
 # 主函数
@@ -3061,7 +3234,7 @@ def main():
         seed=base_seed + num_envs,
         config=config,
         scenario=args.scenario,
-        render_mode="human" if args.render and i == 0 else None
+        render_mode="human" if args.render and i == 0 else "rgb_array" if args.record_video else None
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -3278,7 +3451,7 @@ def main():
         eval_tb_manager.add_text('Eval/num_envs', str(eval_vec_env.num_envs), 0)
 
         # 评估模型
-        evaluate(eval_vec_env, agent, n_episodes=args.eval_episodes, render=args.render)
+        evaluate(eval_vec_env, agent, n_episodes=args.eval_episodes, render=args.render, record_video=args.record_video)
     else:
         main_logger.error(f"未知的运行模式: {args.mode}")
     

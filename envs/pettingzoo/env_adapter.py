@@ -36,14 +36,25 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         self.n_uavs = len(self.agents)
         self.state_dim = self.env.get_state_dim() # Use getter methods
         self.obs_dim = self.env.get_obs_dim() # Use getter methods
-        self.action_dim = self.env.action_space(self.agents[0]).shape[0] # Get action dim from space
+        
+        # Handle both Discrete and Box action spaces
+        action_space = self.env.action_space(self.agents[0])
+        if isinstance(action_space, gym.spaces.Discrete):
+            self.action_dim = action_space.n
+            # For discrete actions, the adapted action space should still be Box
+            # because the policy will output logits or probabilities over the discrete actions.
+            # The actual action sampling will be handled by the agent/policy.
+            # However, to pass a single value, we can use a Box of shape (1,).
+            self.action_space = Box(low=0, high=self.action_dim - 1, shape=(self.n_uavs, 1), dtype=np.int64)
+        elif isinstance(action_space, gym.spaces.Box):
+            self.action_dim = action_space.shape[0]
+            self.action_space = Box(low=action_space.low, high=action_space.high, shape=(self.n_uavs, self.action_dim), dtype=np.float32)
+        else:
+            raise TypeError(f"Unsupported action space type: {type(action_space)}")
 
         # Define observation and action spaces for the adapted environment
         # Observation space is an array of observations for all UAVs
         self.observation_space = Box(low=-np.inf, high=np.inf, shape=(self.n_uavs, self.obs_dim), dtype=np.float32)
-        # Action space is an array of actions for all UAVs
-        self.action_space = Box(low=-1, high=1, shape=(self.n_uavs, self.action_dim), dtype=np.float32)
-
         # 保留环境的其他属性
         self.n_users = getattr(env, 'n_users', None) # Use getattr for safety
         self.area_size = getattr(env, 'area_size', None)
@@ -122,6 +133,11 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             info: 包含下一状态和其他信息的字典
         """
         # 将数组格式的动作转换为字典格式
+        # If the original space was Discrete, actions might be float; cast to int.
+        original_action_space = self.env.action_space(self.agents[0])
+        if isinstance(original_action_space, gym.spaces.Discrete):
+            actions_array = actions_array.astype(np.int64).flatten()
+
         actions_dict = self._array_to_dict(actions_array)
 
         # 调用环境的step方法，获取字典格式的结果
