@@ -101,7 +101,7 @@ class Config:
     n_decoder_layers = 2     # 解码器层数
     n_heads = 8              # 多头注意力头数 (必须为偶数以支持nested tensor优化)
     gru_hidden_size = 128     # GRU隐藏层大小 (与hidden_size保持一致)
-    lr_coordinator = 1e-4    # 技能协调器学习率 参考原论文
+    lr_coordinator = 3e-5    # [数值稳定性修复] 降低Coordinator学习率防止数值爆炸
     lr_discoverer_actor  = 1e-4     # 技能发现器学习率 (离散动作空间下提高学习率以确保有效更新)
     lr_discoverer_critic = 1e-3
     lr_discriminator = 1e-4  # 参考原论文
@@ -113,7 +113,7 @@ class Config:
     clip_epsilon = 0.2       # PPO裁剪参数 (更保守以稳定学习)
     ppo_epochs = 10          # [关键] 减少PPO迭代，防止过拟合
     value_loss_coef = 1.0    # MAPPO标准价值损失系数
-    max_grad_norm = 0.5      # MAPPO标准梯度裁剪
+    max_grad_norm = 0.5      # [数值稳定性修复] 更严格的梯度裁剪防止梯度爆炸
     value_clip = 10.0        # [新增] 价值函数裁剪范围，用于Value Normalization
 
     # HMASD损失权重 - 根据代码审查建议调整

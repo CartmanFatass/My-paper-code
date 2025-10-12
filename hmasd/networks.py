@@ -1056,6 +1056,12 @@ class R_Critic(nn.Module):
         is_sequence = len(cent_obs.shape) > 2
         if is_sequence:
             T, B, _ = cent_obs.shape
+        else:
+            B = cent_obs.shape[0]
+
+        if rnn_states is None:
+            # Initialize hidden state if not provided
+            rnn_states = np.zeros((B, self.hidden_size), dtype=np.float32)
 
         cent_obs = check(cent_obs).to(**self.tpdv)
         rnn_states = check(rnn_states).to(**self.tpdv)

@@ -23,6 +23,9 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def __init__(self, config=None, **kwargs):
         super().__init__()
+        
+        n_uavs_for_hop_map = kwargs.get('n_uavs', 12) if config is None else getattr(config, 'n_agents', 12)
+        self.hop_map = {i: float('inf') for i in range(n_uavs_for_hop_map)}
 
         # 如果没有传入config对象，则使用默认值或kwargs中的值
         if config is None:
@@ -103,6 +106,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.max_observed_uavs = kwargs.get('max_observed_uavs', 15)
             self.max_observed_users = kwargs.get('max_observed_users', 25)
             self.max_observed_bs = kwargs.get('max_observed_bs', 4)
+            self.routing_protocol = kwargs.get('routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
         else:
             # 使用config对象通过getattr获取参数
             # 基本环境参数
@@ -181,6 +185,10 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.max_observed_uavs = getattr(config, 'max_observed_uavs', 15)
             self.max_observed_users = getattr(config, 'max_observed_users', 25)
             self.max_observed_bs = getattr(config, 'max_observed_bs', 4)
+            self.routing_protocol = getattr(config, 'routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
+            
+            # HGGR 分层路由参数
+            self.hggr_update_interval = getattr(config, 'k', 10) # 默认为10
 
         # 初始化随机数生成器
         self.np_random = np.random.RandomState(self.seed_val)
@@ -287,7 +295,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.fig = None
         self.ax = None
         
-        # 重新计算并设置场景4的状态维度（详细版：包含每个用户的完整信息）
+        # 重新计算并设置场景4的状态维度（简化版：仅包含物理实体状态）
         # 1. 无人机位置: n_uavs * 3
         uav_pos_dim = self.n_uavs * 3
         
@@ -297,17 +305,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 3. 地面基站位置: n_ground_bs * 3
         bs_pos_dim = self.n_ground_bs * 3
         
-        # 4. 无人机连接状态: n_uavs
-        uav_connected_dim = self.n_uavs
-        
-        # 5. 系统通信质量指标: 4 (平均SINR, 连接质量, 平均跳数, 系统吞吐量)
-        comm_quality_dim = 4
-        
-        # 6. 当前步数: 1
+        # 4. 当前步数: 1
         step_dim = 1
         
-        # 重新设置state_dim
-        self.state_dim = uav_pos_dim + user_info_dim + bs_pos_dim + uav_connected_dim + comm_quality_dim + step_dim
+        # 重新设置state_dim (移除了 uav_connected_dim 和 comm_quality_dim)
+        self.state_dim = uav_pos_dim + user_info_dim + bs_pos_dim + step_dim
 
     def _create_kalman_filter(self, dt, process_noise=1.0, measurement_noise=10.0):
         """创建一个配置好的filterpy卡尔曼滤波器实例"""
@@ -331,6 +333,23 @@ class UAVForcedRelayEnv(ParallelEnv):
     def get_obs_dim(self):
         """返回观测维度"""
         return self.obs_dim
+
+    def get_global_info(self):
+        """返回计算跳数地图所需的全局信息 (用于HGGR算法)"""
+        return {
+            "n_uavs": self.n_uavs,
+            "n_ground_bs": self.n_ground_bs,
+            "uav_positions": self.uav_positions,
+            "ground_bs_positions": self.ground_bs_positions,
+            "get_link_capacity_func": self._get_link_capacity
+        }
+
+    def set_hop_map(self, hop_map):
+        """从外部设置计算好的跳数地图 (用于HGGR算法)"""
+        if isinstance(hop_map, dict):
+            self.hop_map = hop_map
+        else:
+            self.hop_map = {i: hop_map[i] for i in range(len(hop_map))}
 
     def _compute_path_loss(self, uav_pos, user_pos):
         """
@@ -2087,23 +2106,47 @@ class UAVForcedRelayEnv(ParallelEnv):
             self._update_hard_handover_stats(old_serving_uav)
 
     def _update_hard_connections(self):
-        """传统的硬连接分配逻辑"""
+        """
+        两阶段硬连接分配逻辑：优先保护中继骨干网，再进行用户接入
+        
+        阶段一：识别潜在的关键中继节点
+        阶段二：带保护机制的用户接入分配
+        """
         self.connections.fill(False)
-        uav_user_pairs = []
-        for i in range(self.n_uavs):
-            for j in range(self.n_users):
-                if self.sinr_matrix[i, j] >= self.min_sinr:
-                    uav_user_pairs.append((i, j, self.sinr_matrix[i, j]))
         
-        uav_user_pairs.sort(key=lambda x: x[2], reverse=True)
+        # 阶段一：识别潜在的关键中继节点
+        critical_relay_nodes = self._identify_critical_relay_nodes()
         
+        # 阶段二：以用户为中心的连接分配，带中继节点保护机制
         uav_connections = np.zeros(self.n_uavs, dtype=int)
         user_connected = np.zeros(self.n_users, dtype=bool)
         
-        for uav_idx, user_idx, sinr in uav_user_pairs:
-            if uav_connections[uav_idx] < self.max_connections and not user_connected[user_idx]:
-                self.connections[uav_idx, user_idx] = True
-                uav_connections[uav_idx] += 1
+        # 为每个用户寻找最佳的服务无人机
+        for user_idx in range(self.n_users):
+            if user_connected[user_idx]:
+                continue
+                
+            # 找出所有能为该用户提供服务的无人机候选
+            candidates = []
+            for uav_idx in range(self.n_uavs):
+                if (self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr and 
+                    uav_connections[uav_idx] < self.max_connections):
+                    candidates.append((uav_idx, self.sinr_matrix[uav_idx, user_idx]))
+            
+            if not candidates:
+                continue  # 该用户无法被任何无人机服务
+            
+            # 按信号质量排序
+            candidates.sort(key=lambda x: x[1], reverse=True)
+            
+            # 应用中继节点保护机制
+            selected_uav = self._select_uav_with_relay_protection(
+                user_idx, candidates, critical_relay_nodes
+            )
+            
+            if selected_uav is not None:
+                self.connections[selected_uav, user_idx] = True
+                uav_connections[selected_uav] += 1
                 user_connected[user_idx] = True
 
     def _update_serving_sets(self):
@@ -2400,6 +2443,13 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 3. Update system state based on new positions
         self._update_channel_state()
         self._update_uav_connections()
+        
+        # 【核心修改】实现分层的路由计算
+        # 高层决策：周期性更新全局 hop_map
+        if self.routing_protocol == 'hggr' and self.current_step % self.hggr_update_interval == 0:
+            self.hop_map = self._calculate_hop_map()
+        
+        # 低层决策：每一步都基于当前（可能过时的）信息计算路径
         self._compute_routing_paths()
 
 
@@ -3284,24 +3334,187 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_routing_paths(self):
         """
-        修复后的路由路径计算方法 (V2)
-        
-        改进策略：
-        1. 将所有UAV和基站视为一个图中的节点。
-        2. 为每一个UAV，独立地计算其到任何一个地面基站的最宽路径。
-        3. 这样可以自然地形成中继链路，因为一个UAV到基站的路径可能会经过另一个UAV。
+        根据指定的路由协议计算路由路径。
+        这是一个调度器方法，会调用具体的路由算法实现。
+        """
+        if self.routing_protocol == 'hggr':
+            self._compute_routing_paths_hggr()
+        elif self.routing_protocol == 'geographic':
+            self._compute_routing_paths_geo()
+        else:  # 默认使用 'widest_path'
+            self._compute_routing_paths_widest()
+
+    def _compute_routing_paths_hggr(self):
+        """
+        【优化版】使用 HGGR 算法计算路由路径，并重建完整路径。
         """
         self.routing_paths = {}
-        
-        # 为每一个UAV都尝试寻找一条到基站的最宽路径
         for uav_idx in range(self.n_uavs):
-            # 使用最宽路径算法寻找多跳路径
-            # 这个算法会考虑通过其他UAV进行中继
-            path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
+            # 对于每个无人机，尝试重建其到基站的完整路径
+            path, bottleneck_capacity = self._reconstruct_hggr_path(uav_idx)
+            if path and bottleneck_capacity > 0:
+                self.routing_paths[uav_idx] = (path, bottleneck_capacity)
+
+    def _reconstruct_hggr_path(self, start_uav_idx):
+        """
+        从指定的无人机开始，沿着跳数梯度重建到基站的完整路径。
+        """
+        path = [("uav", start_uav_idx)]
+        bottleneck_capacity = float('inf')
+        
+        current_node_idx = start_uav_idx
+        
+        # 循环构建路径，直到到达基站或无法继续
+        for _ in range(self.max_hops + 1):
+            current_hop = self.hop_map.get(current_node_idx, float('inf'))
+            if current_hop == float('inf'):
+                return None, 0 # 当前节点不可达
+
+            # --- 寻找最优的下一跳 ---
+            best_next_hop_node = None
+            max_link_capacity = 0.0
+
+            # 候选1：其他无人机
+            for neighbor_idx in range(self.n_uavs):
+                if current_node_idx == neighbor_idx or not self.uav_connections[current_node_idx, neighbor_idx]:
+                    continue
+                
+                neighbor_hop = self.hop_map.get(neighbor_idx, float('inf'))
+                if neighbor_hop < current_hop:
+                    capacity = self._get_link_capacity("uav", current_node_idx, "uav", neighbor_idx)
+                    if capacity > max_link_capacity:
+                        max_link_capacity = capacity
+                        best_next_hop_node = ("uav", neighbor_idx)
             
-            # 如果找到了有效的路径，并且满足最大跳数限制
+            # 候选2：地面基站 (跳数为0)
+            for bs_idx in range(self.n_ground_bs):
+                if self.uav_bs_connections[current_node_idx, bs_idx]:
+                    if 0 < current_hop:
+                        capacity = self._get_link_capacity("uav", current_node_idx, "ground_bs", bs_idx)
+                        if capacity > max_link_capacity:
+                            max_link_capacity = capacity
+                            best_next_hop_node = ("ground_bs", bs_idx)
+
+            # --- 更新路径和瓶颈 ---
+            if best_next_hop_node:
+                path.append(best_next_hop_node)
+                bottleneck_capacity = min(bottleneck_capacity, max_link_capacity)
+                
+                # 如果下一跳是基站，路径构建完成
+                if best_next_hop_node[0] == "ground_bs":
+                    return path, bottleneck_capacity
+                
+                # 更新当前节点以继续构建路径
+                current_node_idx = best_next_hop_node[1]
+            else:
+                # 找不到下一跳，路径中断
+                return None, 0
+        
+        # 如果超出最大跳数仍未到达基站，则路径无效
+        return None, 0
+
+    def _calculate_hop_map(self):
+        """
+        为 HGGR 协议动态计算跳数地图（全局BFS）。
+        在分层模型中，这个函数相当于高层策略的一部分。
+        """
+        import collections
+        q = collections.deque()
+        hop_map = {i: float('inf') for i in range(self.n_uavs)}
+
+        # 1. 将所有直连到基站的无人机作为第一层（跳数为1）
+        for uav_idx in range(self.n_uavs):
+            for bs_idx in range(self.n_ground_bs):
+                if self.uav_bs_connections[uav_idx, bs_idx]:
+                    if hop_map[uav_idx] == float('inf'):
+                        hop_map[uav_idx] = 1
+                        q.append(uav_idx)
+                    break
+
+        # 2. 从第一层开始，通过BFS计算其他无人机的跳数
+        while q:
+            current_uav = q.popleft()
+            current_hop = hop_map[current_uav]
+
+            for neighbor_idx in range(self.n_uavs):
+                if self.uav_connections[current_uav, neighbor_idx]:
+                    if hop_map[neighbor_idx] == float('inf'):
+                        hop_map[neighbor_idx] = current_hop + 1
+                        q.append(neighbor_idx)
+        
+        return hop_map
+                
+    def _compute_routing_paths_geo(self):
+        """
+        【优化版】使用简化的地理路由算法计算路由路径，并重建完整路径。
+        无人机总是选择物理距离上最接近任何一个基站的邻居作为下一跳。
+        """
+        self.routing_paths = {}
+
+        # 预先计算所有无人机到最近基站的物理距离
+        uav_dist_to_bs = {i: min(np.linalg.norm(self.uav_positions[i] - bs_pos) for bs_pos in self.ground_bs_positions) for i in range(self.n_uavs)}
+
+        for uav_idx in range(self.n_uavs):
+            path = [("uav", uav_idx)]
+            bottleneck_capacity = float('inf')
+            current_node_idx = uav_idx
+            
+            # 迭代构建路径
+            for _ in range(self.max_hops + 1):
+                own_dist = uav_dist_to_bs.get(current_node_idx, float('inf'))
+                if own_dist == float('inf'): # Should not happen if start is a uav
+                    break
+
+                best_next_hop_node = None
+                max_link_capacity = 0.0
+
+                # 候选1：寻找距离基站更近的无人机邻居
+                for neighbor_idx in range(self.n_uavs):
+                    if current_node_idx == neighbor_idx or not self.uav_connections[current_node_idx, neighbor_idx]:
+                        continue
+                    
+                    neighbor_dist = uav_dist_to_bs.get(neighbor_idx, float('inf'))
+                    if neighbor_dist < own_dist:
+                        capacity = self._get_link_capacity("uav", current_node_idx, "uav", neighbor_idx)
+                        if capacity > max_link_capacity:
+                            max_link_capacity = capacity
+                            best_next_hop_node = ("uav", neighbor_idx)
+
+                # 候选2：检查到基站的直连
+                for bs_idx in range(self.n_ground_bs):
+                    if self.uav_bs_connections[current_node_idx, bs_idx]:
+                        capacity = self._get_link_capacity("uav", current_node_idx, "ground_bs", bs_idx)
+                        if capacity > max_link_capacity:
+                            max_link_capacity = capacity
+                            best_next_hop_node = ("ground_bs", bs_idx)
+
+                # 更新路径
+                if best_next_hop_node:
+                    path.append(best_next_hop_node)
+                    bottleneck_capacity = min(bottleneck_capacity, max_link_capacity)
+                    
+                    if best_next_hop_node[0] == "ground_bs":
+                        # 成功到达基站
+                        self.routing_paths[uav_idx] = (path, bottleneck_capacity)
+                        break
+                    
+                    current_node_idx = best_next_hop_node[1]
+                else:
+                    # 路径中断
+                    break
+            # 如果循环结束仍未设置路径，则说明失败
+
+    def _compute_routing_paths_widest(self):
+        """
+        原始的最宽路径路由算法。
+        为每一个UAV独立计算其到任何一个基站的最宽路径。
+        """
+        self.routing_paths = {}
+        for uav_idx in range(self.n_uavs):
+            path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
             if path and capacity > 0 and len(path) - 1 <= self.max_hops:
                 self.routing_paths[uav_idx] = (path, capacity)
+
     def _kmeans_clustering(self, data, n_clusters, max_iters=100, tol=1e-4):
         """
         纯NumPy实现的K-means聚类算法。
@@ -3390,12 +3603,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         1. 无人机位置 (n_uavs * 3)
         2. 用户详细信息 (n_users * 6) - 位置(x,y), 速度(x,y), 连接状态, 最佳SINR
         3. 地面基站位置 (n_ground_bs * 3)
-        4. 无人机连接状态 (n_uavs)
-        5. 系统通信质量指标 (4)
-        6. 当前步数 (1)
+        4. 当前步数 (1)
         
         返回:
-            state: 详细的全局状态向量
+            state: 简化的全局状态向量
         """
         state_components = []
         
@@ -3450,30 +3661,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         normalized_bs_positions[:, 2] /= self.height_range[1]
         state_components.append(normalized_bs_positions.flatten())
         
-        # 4. 无人机连接状态 (0或1)
-        uav_connected = np.zeros(self.n_uavs)
-        if hasattr(self, 'routing_paths'):
-            for i in range(self.n_uavs):
-                if i in self.routing_paths and self.routing_paths[i][0]:
-                    uav_connected[i] = 1.0
-        state_components.append(uav_connected)
-        
-        # 5. 系统通信质量指标 (4维)
-        comm_quality = np.zeros(4)
-        if hasattr(self, 'reward_info') and self.reward_info:
-            # 5.1 整体覆盖率 (已在reward_info中计算)
-            comm_quality[0] = self.reward_info.get('coverage_ratio', 0)
-            # 5.2 连接质量 (有回程路径的UAV比例)
-            comm_quality[1] = self.reward_info.get('connected_uavs', 0) / self.n_uavs if self.n_uavs > 0 else 0
-            # 5.3 平均跳数 (归一化)
-            avg_hops = self.reward_info.get('avg_hops', 0)
-            comm_quality[2] = np.clip(avg_hops / self.max_hops, 0, 1)
-            # 5.4 系统吞吐量 (归一化, 假设最大1Gbps)
-            throughput_mbps = self.reward_info.get('system_throughput_mbps', 0)
-            comm_quality[3] = np.clip(throughput_mbps / 1000, 0, 1)
-        state_components.append(comm_quality)
-        
-        # 6. 当前步数 (归一化)
+        # 4. 当前步数 (归一化)
         step_normalized = np.array([self.current_step / self.max_steps])
         state_components.append(step_normalized)
         
@@ -3765,3 +3953,156 @@ class UAVForcedRelayEnv(ParallelEnv):
         sinr_db = rx_power - interference_plus_noise_dbm
         
         return sinr_db
+
+    def _identify_critical_relay_nodes(self):
+        """
+        阶段一：识别潜在的关键中继节点
+        
+        通过在"干净"环境下（忽略用户）计算无人机间的连接质量，
+        识别出那些在网络拓扑中处于关键"桥梁"位置的无人机。
+        
+        返回:
+            critical_relay_nodes: 关键中继节点的集合
+        """
+        critical_relay_nodes = set()
+        
+        # 临时保存当前的连接状态
+        temp_connections = self.connections.copy()
+        
+        # 创建一个"干净"的环境：暂时清空用户连接，只考虑UAV间连接
+        self.connections.fill(False)
+        
+        # 计算所有UAV之间的潜在连接质量
+        uav_link_qualities = {}
+        for i in range(self.n_uavs):
+            for j in range(i + 1, self.n_uavs):
+                # 计算UAV间的链路容量
+                capacity_ij = self._get_link_capacity("uav", i, "uav", j)
+                capacity_ji = self._get_link_capacity("uav", j, "uav", i)
+                
+                # 双向链路的容量取较小值
+                bidirectional_capacity = min(capacity_ij, capacity_ji)
+                
+                if bidirectional_capacity > 0:
+                    uav_link_qualities[(i, j)] = bidirectional_capacity
+        
+        # 计算每个UAV到地面基站的直连质量
+        uav_bs_qualities = {}
+        for i in range(self.n_uavs):
+            max_bs_capacity = 0
+            for bs_idx in range(self.n_ground_bs):
+                # 计算UAV到基站的链路容量
+                capacity_to_bs = self._get_link_capacity("uav", i, "ground_bs", bs_idx)
+                capacity_from_bs = self._get_link_capacity("ground_bs", bs_idx, "uav", i)
+                
+                # 双向链路的容量取较小值
+                bidirectional_capacity = min(capacity_to_bs, capacity_from_bs)
+                max_bs_capacity = max(max_bs_capacity, bidirectional_capacity)
+            
+            uav_bs_qualities[i] = max_bs_capacity
+        
+        # 使用简化的中心性分析识别关键节点
+        # 计算每个UAV的"桥梁重要性"
+        for uav_idx in range(self.n_uavs):
+            importance_score = 0
+            
+            # 1. 连接度重要性：连接到多少其他UAV
+            connected_uavs = 0
+            for i, j in uav_link_qualities.keys():
+                if i == uav_idx or j == uav_idx:
+                    connected_uavs += 1
+            
+            # 2. 位置重要性：是否处于网络的"中间"位置
+            # 通过计算到其他所有UAV的平均距离来衡量
+            total_distance = 0
+            for other_idx in range(self.n_uavs):
+                if other_idx != uav_idx:
+                    dist = self._compute_distance(
+                        self.uav_positions[uav_idx], 
+                        self.uav_positions[other_idx]
+                    )
+                    total_distance += dist
+            
+            avg_distance = total_distance / (self.n_uavs - 1) if self.n_uavs > 1 else 0
+            
+            # 3. 基站连接质量：到基站的直连能力
+            bs_connection_quality = uav_bs_qualities.get(uav_idx, 0)
+            
+            # 综合评分：连接度高、位置居中、但基站连接不是最强的UAV
+            # 更可能是好的中继节点
+            if connected_uavs > 0:
+                # 归一化各项指标
+                normalized_connectivity = connected_uavs / self.n_uavs
+                normalized_centrality = 1.0 / (1.0 + avg_distance / self.area_size)  # 距离越小，中心性越高
+                
+                # 基站连接质量归一化（这里我们希望中继节点的基站连接不要太强）
+                max_bs_quality = max(uav_bs_qualities.values()) if uav_bs_qualities.values() else 1
+                normalized_bs_quality = bs_connection_quality / max_bs_quality if max_bs_quality > 0 else 0
+                
+                # 综合评分：连接度和中心性高，但基站连接适中的节点
+                importance_score = (
+                    0.4 * normalized_connectivity +
+                    0.4 * normalized_centrality +
+                    0.2 * (1.0 - normalized_bs_quality)  # 基站连接不要太强
+                )
+                
+                # 如果重要性评分超过阈值，标记为关键中继节点
+                if importance_score > 0.5:  # 可调整的阈值
+                    critical_relay_nodes.add(uav_idx)
+        
+        # 恢复原始的连接状态
+        self.connections = temp_connections
+        
+        return critical_relay_nodes
+
+    def _select_uav_with_relay_protection(self, user_idx, candidates, critical_relay_nodes):
+        """
+        阶段二：带保护机制的无人机选择
+        
+        为指定用户从候选无人机中选择最佳的服务无人机，
+        同时保护关键中继节点不被轻易占用。
+        
+        参数:
+            user_idx: 用户索引
+            candidates: 候选无人机列表 [(uav_idx, sinr), ...] (已按SINR降序排序)
+            critical_relay_nodes: 关键中继节点集合
+            
+        返回:
+            selected_uav: 选中的无人机索引，如果没有合适的则返回None
+        """
+        if not candidates:
+            return None
+        
+        # 保护阈值：关键中继节点需要比非关键节点强多少dB才会被选中
+        protection_threshold_db = 10.0  # 可调整的保护阈值
+        
+        # 首先尝试从非关键节点中选择
+        non_critical_candidates = [
+            (uav_idx, sinr) for uav_idx, sinr in candidates 
+            if uav_idx not in critical_relay_nodes
+        ]
+        
+        if non_critical_candidates:
+            # 如果有非关键节点可用，直接选择信号最好的
+            return non_critical_candidates[0][0]
+        
+        # 如果只有关键节点可用，应用保护机制
+        critical_candidates = [
+            (uav_idx, sinr) for uav_idx, sinr in candidates 
+            if uav_idx in critical_relay_nodes
+        ]
+        
+        if not critical_candidates:
+            return None
+        
+        # 选择信号最强的关键节点，但需要满足保护条件
+        best_critical_uav, best_critical_sinr = critical_candidates[0]
+        
+        # 检查是否有其他用户已经"预订"了更好的非关键节点
+        # 这里简化处理：如果关键节点的信号足够强（超过最小阈值+保护阈值），
+        # 则允许使用
+        if best_critical_sinr >= self.min_sinr + protection_threshold_db:
+            return best_critical_uav
+        
+        # 否则，不分配任何无人机给这个用户（保护中继节点）
+        return None

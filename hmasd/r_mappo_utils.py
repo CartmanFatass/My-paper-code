@@ -127,10 +127,14 @@ def init(module, weight_init, bias_init, gain=1):
 def get_shape_from_obs_space(obs_space):
     if obs_space.__class__.__name__ == 'Box':
         obs_shape = obs_space.shape
-    elif obs_space.__class__.__name__ == 'list' or obs_space.__class__.__name__ == 'tuple':
+    elif isinstance(obs_space, (list, tuple)):
         obs_shape = obs_space
     else:
-        raise NotImplementedError
+        # Fallback for other space types that might have a shape attribute
+        try:
+            obs_shape = obs_space.shape
+        except AttributeError:
+            raise NotImplementedError(f"Unsupported observation space type: {type(obs_space)}")
     return obs_shape
 
 def check(input):

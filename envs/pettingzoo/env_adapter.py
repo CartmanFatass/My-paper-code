@@ -48,7 +48,19 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             self.action_space = Box(low=0, high=self.action_dim - 1, shape=(self.n_uavs, 1), dtype=np.int64)
         elif isinstance(action_space, gym.spaces.Box):
             self.action_dim = action_space.shape[0]
-            self.action_space = Box(low=action_space.low, high=action_space.high, shape=(self.n_uavs, self.action_dim), dtype=np.float32)
+            
+            # 【修复】确保low和high的形状与最终的动作空间形状匹配
+            # 原始的 action_space.low.shape 是 (action_dim,)
+            # 我们需要将其扩展为 (n_uavs, action_dim)
+            if action_space.low.shape == (self.action_dim,):
+                low = np.repeat(action_space.low[np.newaxis, :], self.n_uavs, axis=0)
+                high = np.repeat(action_space.high[np.newaxis, :], self.n_uavs, axis=0)
+            else:
+                # 如果形状已经是正确的，则直接使用
+                low = action_space.low
+                high = action_space.high
+
+            self.action_space = Box(low=low, high=high, shape=(self.n_uavs, self.action_dim), dtype=np.float32)
         else:
             raise TypeError(f"Unsupported action space type: {type(action_space)}")
 

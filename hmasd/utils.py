@@ -112,32 +112,78 @@ class RolloutBuffer:
     def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None):
         """
         将一个时间步的数据追加到指定环境的列表中。
+        增强了数据验证和错误处理。
         """
+        # 【修复1】增强输入验证
         if env_idx >= self.num_envs:
             main_logger.error(f"RolloutBuffer.add: 环境索引越界! env_idx={env_idx} >= num_envs={self.num_envs}")
             return False
         
+        # 【修复2】验证数据维度
+        try:
+            obs = np.asarray(obs)
+            action = np.asarray(action)
+            reward = np.asarray(reward)
+            done = np.asarray(done)
+            value = np.asarray(value)
+            log_prob = np.asarray(log_prob)
+            
+            # 验证观测维度
+            if obs.shape != (self.n_agents, self.obs_dim):
+                main_logger.error(f"观测维度错误: 期望 ({self.n_agents}, {self.obs_dim}), 实际 {obs.shape}")
+                return False
+            
+            # 验证动作维度
+            expected_action_shape = (self.n_agents, self.action_dim) if self.action_space_type == 'continuous' else (self.n_agents,)
+            if action.shape != expected_action_shape:
+                main_logger.error(f"动作维度错误: 期望 {expected_action_shape}, 实际 {action.shape}")
+                return False
+            
+            # 验证GRU隐状态维度
+            if isinstance(gru_hidden_state, torch.Tensor):
+                if gru_hidden_state.shape != (self.n_agents, self.gru_hidden_size):
+                    main_logger.error(f"GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {gru_hidden_state.shape}")
+                    return False
+                gru_hidden_state_np = gru_hidden_state.cpu().numpy()
+            else:
+                gru_hidden_state_np = np.asarray(gru_hidden_state)
+                if gru_hidden_state_np.shape != (self.n_agents, self.gru_hidden_size):
+                    main_logger.error(f"GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {gru_hidden_state_np.shape}")
+                    return False
+            
+        except Exception as e:
+            main_logger.error(f"数据类型转换失败: {e}")
+            return False
+        
+        # 【修复3】检查时间步一致性
+        if self.buffers[env_idx]:
+            last_t = self.buffers[env_idx][-1].get("t", -1)
+            if t <= last_t:
+                main_logger.error(f"时间步倒退或重复: 环境{env_idx}, 当前t={t}, 上一个t={last_t}")
+                return False
+        
         # 检查当前环境的缓冲区是否已满
         if len(self.buffers[env_idx]) >= self.num_steps:
-            main_logger.warning(f"RolloutBuffer.add: 环境 {env_idx} 的缓冲区已满 (容量: {self.num_steps})，无法添加更多数据。这可能表示训练循环逻辑有误。")
+            main_logger.error(f"RolloutBuffer.add: 环境 {env_idx} 的缓冲区已满 (容量: {self.num_steps})，这表示训练循环逻辑有严重错误！")
+            # 【修复4】更严格的溢出处理
             return False
 
         # 将所有数据打包成一个字典并追加
         experience = {
             "t": t,
-            "state": state,
-            "obs": obs,
-            "action": action,
-            "reward": reward,
-            "done": done,
-            "value": value,
-            "log_prob": log_prob,
-            "gru_hidden_state": gru_hidden_state.cpu().numpy(),
-            "team_skill": team_skill,
-            "agent_skills": agent_skills,
-            "reward_env": reward_env,
-            "reward_team_disc": reward_team_disc,
-            "reward_ind_disc": reward_ind_disc,
+            "state": np.asarray(state, dtype=np.float32),
+            "obs": obs.astype(np.float32),
+            "action": action,  # 保持原始类型（可能是int或float）
+            "reward": reward.astype(np.float32),
+            "done": done.astype(np.bool_),
+            "value": value.astype(np.float32),
+            "log_prob": log_prob.astype(np.float32),
+            "gru_hidden_state": gru_hidden_state_np.astype(np.float32),
+            "team_skill": int(team_skill) if team_skill is not None else -1,
+            "agent_skills": np.asarray(agent_skills, dtype=np.int64) if agent_skills is not None else np.full(self.n_agents, -1, dtype=np.int64),
+            "reward_env": np.asarray(reward_env, dtype=np.float32) if reward_env is not None else np.zeros_like(reward, dtype=np.float32),
+            "reward_team_disc": np.asarray(reward_team_disc, dtype=np.float32) if reward_team_disc is not None else np.zeros_like(reward, dtype=np.float32),
+            "reward_ind_disc": np.asarray(reward_ind_disc, dtype=np.float32) if reward_ind_disc is not None else np.zeros_like(reward, dtype=np.float32),
             # 高层数据占位符
             "is_high_level": False,
             "high_level_state_value": 0.0,
@@ -218,6 +264,11 @@ class RolloutBuffer:
         high_level_agent_values = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.float32)
         high_level_team_log_probs = np.zeros((num_actual_steps, self.num_envs), dtype=np.float32)
         high_level_agent_log_probs = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        
+        # 【关键修复】为内在奖励组成部分预分配数组
+        reward_env = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        reward_team_disc = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        reward_ind_disc = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.float32)
 
         # 填充数组
         for env_idx, buffer in enumerate(self.buffers):
@@ -235,6 +286,14 @@ class RolloutBuffer:
                 team_skills[t, env_idx] = exp["team_skill"]
                 agent_skills[t, env_idx] = exp["agent_skills"]
                 gru_hidden_states[t, env_idx] = exp["gru_hidden_state"]
+                
+                # 【关键修复】填充内在奖励组成部分
+                if exp["reward_env"] is not None:
+                    reward_env[t, env_idx] = exp["reward_env"]
+                if exp["reward_team_disc"] is not None:
+                    reward_team_disc[t, env_idx] = exp["reward_team_disc"]
+                if exp["reward_ind_disc"] is not None:
+                    reward_ind_disc[t, env_idx] = exp["reward_ind_disc"]
                 
                 if exp["is_high_level"]:
                     high_level_valid_mask[t, env_idx] = True
@@ -256,7 +315,11 @@ class RolloutBuffer:
             "high_level_state_values": high_level_state_values,
             "high_level_agent_values": high_level_agent_values,
             "high_level_team_log_probs": high_level_team_log_probs,
-            "high_level_agent_log_probs": high_level_agent_log_probs
+            "high_level_agent_log_probs": high_level_agent_log_probs,
+            # 【关键修复】在返回的字典中包含奖励组成部分
+            "reward_env": reward_env,
+            "reward_team_disc": reward_team_disc,
+            "reward_ind_disc": reward_ind_disc
         }
 
     def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95):
@@ -396,15 +459,62 @@ class RolloutBuffer:
         num_total_sequences = self.num_envs * self.n_agents
 
         def flatten_sequences(arr):
-            swapped = arr.swapaxes(0, 1).swapaxes(1, 2).copy()
-            return swapped.reshape(num_total_sequences, num_steps, *swapped.shape[3:]).swapaxes(0, 1)
+            """
+            【修复】安全的序列展平，保持物理意义
+            输入: (T, E, A, D) -> 输出: (T, E*A, D)
+            保持时间步连续性和智能体-环境对应关系
+            """
+            T, E, A = arr.shape[:3]
+            remaining_dims = arr.shape[3:]
+            
+            # 验证输入维度
+            expected_shape = (num_steps, self.num_envs, self.n_agents) + remaining_dims
+            if arr.shape[:3] != expected_shape[:3]:
+                main_logger.error(f"flatten_sequences输入维度错误: 期望前3维{expected_shape[:3]}, 实际{arr.shape[:3]}")
+                raise ValueError(f"维度不匹配: {arr.shape} vs {expected_shape}")
+            
+            # 安全的维度变换: (T, E, A, D) -> (T, E*A, D)
+            # 方法: 先转置为 (E, A, T, D)，然后重塑为 (E*A, T, D)，最后转置为 (T, E*A, D)
+            result = arr.transpose(1, 2, 0, *range(3, len(arr.shape)))  # (E, A, T, D...)
+            result = result.reshape(E * A, T, *remaining_dims)  # (E*A, T, D...)
+            result = result.transpose(1, 0, *range(2, len(result.shape)))  # (T, E*A, D...)
+            
+            # 验证输出维度
+            expected_output_shape = (T, E * A) + remaining_dims
+            if result.shape != expected_output_shape:
+                main_logger.error(f"flatten_sequences输出维度错误: 期望{expected_output_shape}, 实际{result.shape}")
+                raise ValueError(f"输出维度错误: {result.shape}")
+            
+            return result
 
         def flatten_sequences_no_agent(arr):
-            swapped = arr.swapaxes(0, 1)
-            expanded = np.expand_dims(swapped, axis=1)
-            repeated = np.repeat(expanded, self.n_agents, axis=1)
-            flat = repeated.reshape(num_total_sequences, num_steps, *repeated.shape[3:])
-            return flat.swapaxes(0, 1)
+            """
+            【修复】安全的无智能体维度序列展平
+            输入: (T, E) -> 输出: (T, E*A)
+            为每个环境复制智能体维度
+            """
+            T, E = arr.shape[:2]
+            remaining_dims = arr.shape[2:]
+            
+            # 验证输入维度
+            expected_shape = (num_steps, self.num_envs) + remaining_dims
+            if arr.shape[:2] != expected_shape[:2]:
+                main_logger.error(f"flatten_sequences_no_agent输入维度错误: 期望前2维{expected_shape[:2]}, 实际{arr.shape[:2]}")
+                raise ValueError(f"维度不匹配: {arr.shape} vs {expected_shape}")
+            
+            # 安全的维度变换: (T, E, D) -> (T, E*A, D)
+            # 方法: 添加智能体维度并重复，然后展平
+            result = np.expand_dims(arr, axis=2)  # (T, E, 1, D...)
+            result = np.repeat(result, self.n_agents, axis=2)  # (T, E, A, D...)
+            result = result.reshape(T, E * self.n_agents, *remaining_dims)  # (T, E*A, D...)
+            
+            # 验证输出维度
+            expected_output_shape = (T, E * self.n_agents) + remaining_dims
+            if result.shape != expected_output_shape:
+                main_logger.error(f"flatten_sequences_no_agent输出维度错误: 期望{expected_output_shape}, 实际{result.shape}")
+                raise ValueError(f"输出维度错误: {result.shape}")
+            
+            return result
 
         masks_flat = flatten_sequences_no_agent(data["masks"])
         obs_flat = flatten_sequences(data["obs"])

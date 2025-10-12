@@ -1052,7 +1052,7 @@ class HMASDAgent:
         ⚠️ 高层策略数据必须通过 add_high_level_data 存储！
         
         参数:
-            t: 时间步索引
+            t: 时间步索引 (必须是连续且一致的)
             state: 全局状态 [state_dim]
             observations: 所有智能体观测 [n_agents, obs_dim]
             actions: 所有智能体动作 [n_agents, action_dim]
@@ -1069,15 +1069,23 @@ class HMASDAgent:
         """
         if reward_components is None:
             main_logger.error(f"store_rollout_step: reward_components cannot be None. env={env_id}, t={t}")
-            return
+            return False
+        
+        # 【修复】验证时间步索引的有效性
+        if t < 0 or t >= self.rollout_buffer.num_steps:
+            main_logger.error(f"时间步索引越界: t={t}, 有效范围[0, {self.rollout_buffer.num_steps-1}], env={env_id}")
+            return False
         
         # 提取真实的奖励组成部分
         reward_env = reward_components.get('env', np.zeros_like(rewards, dtype=np.float32))
         reward_team_disc = reward_components.get('team_disc', np.zeros_like(rewards, dtype=np.float32))
         reward_ind_disc = reward_components.get('ind_disc', np.zeros_like(rewards, dtype=np.float32))
 
-        # 存储数据到统一rollout缓冲区，传递时间步索引 t 和 state
+        # 【修复】确保GRU隐状态是tensor类型
+        if not isinstance(gru_hidden_states, torch.Tensor):
+            gru_hidden_states = torch.tensor(gru_hidden_states, device=self.device)
         
+        # 存储数据到统一rollout缓冲区，传递时间步索引 t 和 state
         success = self.rollout_buffer.add(
             t=t,
             state=state,
@@ -1087,7 +1095,7 @@ class HMASDAgent:
             done=dones,
             value=values,
             log_prob=log_probs,
-            gru_hidden_state=gru_hidden_states.cpu(),
+            gru_hidden_state=gru_hidden_states,  # 移除.cpu()，让RolloutBuffer处理
             env_idx=env_id,
             team_skill=team_skill,
             agent_skills=agent_skills,
@@ -1098,7 +1106,7 @@ class HMASDAgent:
         
         # 检查存储是否成功
         if not success:
-            main_logger.warning(f"低层数据存储失败（可能重复存储），环境{env_id}，时间步: {t}")
+            main_logger.warning(f"低层数据存储失败，环境{env_id}，时间步: {t}")
             return False
         
         main_logger.debug(f"数据已存储到统一rollout缓冲区（{buffer_type}类型），环境{env_id}，"
@@ -1180,13 +1188,21 @@ class HMASDAgent:
             gru_hidden_size = getattr(self.config, 'gru_hidden_size', 128)
             gru_hidden_states = torch.zeros(n_agents, gru_hidden_size, device=self.device)
         
+        # 【修复】确保时间步索引的一致性和有效性
         if rollout_step_idx is not None:
             t = rollout_step_idx
+            # 验证时间步索引的有效性
+            if t < 0 or t >= self.rollout_buffer.num_steps:
+                main_logger.error(f"_store_discoverer_experience: 无效的rollout_step_idx={t}, "
+                                f"有效范围[0, {self.rollout_buffer.num_steps-1}], env={env_id}")
+                return None
         else:
-            t = self.global_step % self.rollout_buffer.num_steps
-            main_logger.warning(f"_store_discoverer_experience: rollout_step_idx not provided, falling back to modulo logic. t={t}")
+            # 【修复】不再使用模运算，而是要求明确提供时间步索引
+            main_logger.error(f"_store_discoverer_experience: rollout_step_idx is required but not provided, env={env_id}")
+            return None
         
-        self.store_rollout_step(
+        # 【修复】调用store_rollout_step并检查返回值
+        success = self.store_rollout_step(
             t=t,
             state=state,  # 【重要修复】存储当前状态而非下一状态
             observations=observations,  # 【重要修复】存储当前观测而非下一观测
@@ -1202,6 +1218,10 @@ class HMASDAgent:
             buffer_type='discoverer',
             reward_components=reward_components
         )
+        
+        if not success:
+            main_logger.warning(f"_store_discoverer_experience: 数据存储失败, env={env_id}, t={t}")
+            return None
 
         return reward_components
 
@@ -1457,6 +1477,105 @@ class HMASDAgent:
         
         return advantages
 
+    def _compute_high_level_bootstrap_values(self, num_steps):
+        """
+        【GAE引导价值修复】计算高层策略的bootstrap values
+        
+        从rollout buffer的最后有效数据计算更准确的引导价值，
+        而不是简单假设last_value为0，这将显著减少GAE估计的偏差。
+        
+        参数:
+            num_steps: 当前rollout中的有效步数
+            
+        返回:
+            high_level_last_values: 包含state和agents价值的字典
+        """
+        try:
+            # 获取rollout数据
+            rollout_data = self.rollout_buffer._get_full_rollout_data()
+            if rollout_data is None:
+                main_logger.warning("无法获取rollout数据，使用零值作为bootstrap")
+                return {
+                    'state': np.zeros(self.rollout_buffer.num_envs),
+                    'agents': np.zeros((self.rollout_buffer.num_envs, self.config.n_agents))
+                }
+            
+            # 寻找每个环境的最后有效状态和观测
+            last_states = np.zeros((self.rollout_buffer.num_envs, self.config.state_dim))
+            last_observations = np.zeros((self.rollout_buffer.num_envs, self.config.n_agents, self.config.obs_dim))
+            found_last_data = np.zeros(self.rollout_buffer.num_envs, dtype=bool)
+            
+            # 从后往前搜索每个环境的最后有效数据
+            for env_idx in range(self.rollout_buffer.num_envs):
+                for t in range(num_steps - 1, -1, -1):  # 从最新到最旧
+                    if t < rollout_data["states"].shape[0] and env_idx < rollout_data["states"].shape[1]:
+                        # 检查是否有有效的状态数据
+                        state_data = rollout_data["states"][t, env_idx]
+                        obs_data = rollout_data["obs"][t, env_idx]
+                        
+                        # 简单的有效性检查：非全零且非NaN
+                        if not np.all(state_data == 0) and not np.isnan(state_data).any():
+                            last_states[env_idx] = state_data
+                            last_observations[env_idx] = obs_data
+                            found_last_data[env_idx] = True
+                            break
+            
+            # 使用找到的最后状态计算bootstrap values
+            bootstrap_state_values = np.zeros(self.rollout_buffer.num_envs)
+            bootstrap_agent_values = np.zeros((self.rollout_buffer.num_envs, self.config.n_agents))
+            
+            # 批量计算有效环境的价值
+            valid_env_indices = np.where(found_last_data)[0]
+            if len(valid_env_indices) > 0:
+                # 提取有效环境的状态和观测
+                valid_states = last_states[valid_env_indices]
+                valid_observations = last_observations[valid_env_indices]
+                
+                # 应用状态和观测标准化
+                valid_states_normalized = self._normalize_states(valid_states)
+                valid_observations_normalized = self._normalize_observations(valid_observations)
+                
+                # 转换为tensors
+                states_tensor = torch.FloatTensor(valid_states_normalized).to(self.device)
+                observations_tensor = torch.FloatTensor(valid_observations_normalized).to(self.device)
+                
+                with torch.no_grad():
+                    # 使用skill coordinator计算价值
+                    state_values, agent_values_list, _ = self.skill_coordinator.get_value(
+                        states_tensor, observations_tensor
+                    )
+                    
+                    # 提取价值
+                    if state_values is not None:
+                        bootstrap_state_values[valid_env_indices] = state_values.cpu().numpy().flatten()
+                    
+                    if agent_values_list is not None and len(agent_values_list) > 0:
+                        # 将agent values列表转换为numpy数组
+                        for i, agent_value in enumerate(agent_values_list):
+                            if i < self.config.n_agents:
+                                agent_vals = agent_value.cpu().numpy().flatten()
+                                if len(agent_vals) == len(valid_env_indices):
+                                    bootstrap_agent_values[valid_env_indices, i] = agent_vals
+                
+                main_logger.info(f"成功为{len(valid_env_indices)}个环境计算bootstrap values, "
+                               f"状态价值范围: [{bootstrap_state_values.min():.4f}, {bootstrap_state_values.max():.4f}], "
+                               f"智能体价值范围: [{bootstrap_agent_values.min():.4f}, {bootstrap_agent_values.max():.4f}]")
+            else:
+                main_logger.warning("未找到任何有效的最后状态数据，使用零值作为bootstrap")
+            
+            return {
+                'state': bootstrap_state_values,
+                'agents': bootstrap_agent_values
+            }
+            
+        except Exception as e:
+            main_logger.error(f"计算bootstrap values时发生错误: {e}")
+            main_logger.warning("使用零值作为fallback bootstrap values")
+            return {
+                'state': np.zeros(self.rollout_buffer.num_envs),
+                'agents': np.zeros((self.rollout_buffer.num_envs, self.config.n_agents))
+            }
+
     def _compute_intrinsic_reward(self, next_state, reward, next_obs, team_skill, agent_skill):
         """
         【SB3集成版本】计算内在奖励，集成数值稳定性检查
@@ -1628,12 +1747,9 @@ class HMASDAgent:
         
         main_logger.info(f"开始使用统一缓冲区更新Coordinator，有效高层数据: {high_level_data_count}个")
         
-        # 【修复】计算高层策略的GAE
-        # 由于无法直接访问 last_state, 我们假设 last_value 为 0。
-        high_level_last_values = {
-            'state': np.zeros(self.rollout_buffer.num_envs),
-            'agents': np.zeros((self.rollout_buffer.num_envs, self.config.n_agents))
-        }
+        # 【GAE引导价值修复】计算更准确的last_values而不是简单假设为0
+        # 获取buffer中最后的有效状态和观测来计算bootstrap值
+        high_level_last_values = self._compute_high_level_bootstrap_values(num_steps)
         self.rollout_buffer.compute_high_level_advantages(high_level_last_values)
         
         # 累积损失统计
@@ -1727,9 +1843,11 @@ class HMASDAgent:
             else:
                 agent_values_tensor = torch.zeros(self.config.n_agents, batch_size, device=self.device)
 
-            # 【关键修复】分别对团队和个体优势进行标准化
-            team_advantages_batch = (team_advantages_batch - team_advantages_batch.mean()) / (team_advantages_batch.std() + 1e-8)
-            agent_advantages_batch = (agent_advantages_batch - agent_advantages_batch.mean()) / (agent_advantages_batch.std() + 1e-8)
+            # 【致命问题修复】移除错误的独立优势标准化
+            # 团队技能和个体技能的优势来源于同一个奖励流，应保持相对尺度
+            # PPO的主要优势来自裁剪，而非标准化。让原始优势值指导策略更新。
+            # team_advantages_batch = (team_advantages_batch - team_advantages_batch.mean()) / (team_advantages_batch.std() + 1e-8)
+            # agent_advantages_batch = (agent_advantages_batch - agent_advantages_batch.mean()) / (agent_advantages_batch.std() + 1e-8)
 
             # --- 【修复】计算解耦的PPO策略损失 ---
             # 1. 团队策略损失
@@ -2014,6 +2132,7 @@ class HMASDAgent:
         avg_env_comp = np.mean(data["reward_env"]) if data and "reward_env" in data else 0
         avg_team_disc_comp = np.mean(data["reward_team_disc"]) if data and "reward_team_disc" in data else 0
         avg_ind_disc_comp = np.mean(data["reward_ind_disc"]) if data and "reward_ind_disc" in data else 0
+        
         avg_discoverer_val = np.mean(data["values"]) if data and "values" in data else 0
         action_entropy_val = -avg_entropy_loss / self.config.lambda_l if self.config.lambda_l > 0 else 0
 
@@ -2124,7 +2243,11 @@ class HMASDAgent:
             main_logger.debug(f"当前rollout缓冲区状态: {rollout_buffer_pos}/{self.rollout_buffer.num_steps} (当前/总容量), 完整: {rollout_buffer_full}")
             
             # 检查高层策略数据是否足够
-            high_level_data_count = np.sum(self.rollout_buffer.high_level_valid_mask[:rollout_buffer_pos])
+            rollout_data_for_check = self.rollout_buffer._get_full_rollout_data()
+            if rollout_data_for_check:
+                high_level_data_count = np.sum(rollout_data_for_check['high_level_valid_mask'][:rollout_buffer_pos])
+            else:
+                high_level_data_count = 0
             
             # 如果高层数据增长过慢，强制所有环境进行贡献
             if high_level_data_count < 10 and self.global_step > 5000:  # 至少需要10个高层决策样本

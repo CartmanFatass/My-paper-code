@@ -57,7 +57,7 @@ from hmasd.sb3_integration import (
     HMASDCallback,
     HMASDVecEnvWrapper
 )
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.scenario4_discrete import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
@@ -455,7 +455,7 @@ class EnhancedRewardTracker:
     def _log_aggregated_metrics(self, writer, step, data_list, metric_name, category="Training", 
                                recent_window=None, value_field='value'):
         """
-        辅助函数：处理数据聚合并写入TensorBoard - 简化版本，只记录平均值
+        辅助函数：处理数据聚合并写入TensorBoard - 【性能优化版本】使用轻量级聚合，避免DataFrame开销
         
         参数:
             writer: TensorBoard writer
@@ -478,35 +478,34 @@ class EnhancedRewardTracker:
         if not recent_data:
             return
             
-        # 按环境分组并聚合（简化版本：只计算平均值）
+        # 【性能优化】使用defaultdict直接聚合，避免DataFrame开销
         try:
-            # 构建DataFrame
-            df_data = []
+            # 使用轻量级字典聚合，按环境分组
+            env_values = defaultdict(list)
+            
             for entry in recent_data:
                 if isinstance(entry, dict):
-                    step_value = entry.get('step', step)
                     env_id = entry.get('env_id', 0)
                     value = entry.get(value_field, 0)
-                    df_data.append({
-                        'step': step_value,
-                        'env_id': env_id,
-                        'value': value
-                    })
+                    if value is not None and not (isinstance(value, float) and np.isnan(value)):
+                        env_values[env_id].append(value)
             
-            if not df_data:
+            if not env_values:
                 return
                 
-            df = pd.DataFrame(df_data)
+            # 计算每个环境的平均值，然后计算跨环境平均值
+            env_means = []
+            for env_id, values in env_values.items():
+                if values:  # 确保列表不为空
+                    env_mean = np.mean(values)
+                    if not np.isnan(env_mean):
+                        env_means.append(env_mean)
             
-            # 按env_id分组，先计算每个环境的内部平均值
-            env_aggregated = df.groupby('env_id')['value'].mean().reset_index()
-            
-            if len(env_aggregated) == 0:
+            if not env_means:
                 return
                 
-            # 计算跨环境的最终平均值
-            env_mean_values = env_aggregated['value'].values
-            final_mean = np.mean(env_mean_values)  # 跨环境平均
+            # 计算最终的跨环境平均值
+            final_mean = np.mean(env_means)
             
             # 只写入TensorBoard平均值 - 使用rollout标识
             writer.add_scalar(f'{category}/{metric_name}_Mean_Rollout', final_mean, step)
@@ -515,8 +514,8 @@ class EnhancedRewardTracker:
             main_logger.warning(f"聚合指标 {metric_name} 时出错: {e}")
             # 添加更详细的错误信息用于调试
             try:
-                main_logger.debug(f"聚合错误详情 - 数据形状: {df.shape if 'df' in locals() else 'df未定义'}, "
-                                 f"recent_data长度: {len(recent_data) if recent_data else 0}, "
+                main_logger.debug(f"聚合错误详情 - recent_data长度: {len(recent_data) if recent_data else 0}, "
+                                 f"env_values键数: {len(env_values) if 'env_values' in locals() else 0}, "
                                  f"metric_name: {metric_name}, category: {category}")
             except:
                 pass  # 避免调试信息本身出错
@@ -568,12 +567,11 @@ class EnhancedRewardTracker:
             reward_info = info['reward_info']
             served_users = None  # 初始化为 None，表示"未找到"
             
-            # 严格优先使用 'effective_connected_users'
-            if 'effective_connected_users' in reward_info:
-                served_users = reward_info['effective_connected_users']
-            elif 'connected_users' in reward_info:
+            # 严格优先使用 'effective_connected_users' - 【关键修复】使用安全的字典访问
+            served_users = reward_info.get('effective_connected_users')
+            if served_users is None:
                 # 如果没有 effective_connected_users，则回退到 connected_users
-                served_users = reward_info['connected_users']
+                served_users = reward_info.get('connected_users')
             
             # 只有在成功获取到 served_users 值 (不为 None) 时才记录
             if served_users is not None:
@@ -2307,7 +2305,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     agent.reset_env_state(i)
             
             # 5. 更新状态为下一步做准备
-            states = next_states
+            states = next_states # 在循环的下一次迭代开始时，'states' 将是正确的当前状态
             observations = next_observations
             dones_tracker = dones  # 保存当前步的dones供下一步使用
             total_steps += num_envs
@@ -2325,27 +2323,29 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         with torch.no_grad():
             for i in range(num_envs):
                 # 【关键修复】确定在 next_state 将使用什么技能
-                # 因为 rollout_step == rollout_length-1, 下一步的 rollout_step 将是 0, 这是一个技能更换点。
-                # 因此，我们必须为 next_state 分配新技能。
+                # 【重要修复】使用实际的env_steps而不是rollout_step来判断技能切换点
+                # 这样可以正确处理环境重置导致的env_steps重置情况
                 
-                # 检查下一步是否是技能切换点
-                next_rollout_step = (rollout_step + 1) % config.rollout_length
-                is_skill_change_point = (next_rollout_step % config.k == 0)
+                # 检查下一步是否是技能切换点 - 使用实际的环境步数
+                next_env_step = env_steps[i] + 1
+                is_skill_change_point = (next_env_step % config.k == 0)
                 
                 if is_skill_change_point:
-                    # 为 next_state 分配新技能
+                    # 为 next_state 分配新技能，确保使用正确的 next_states 和 next_observations
                     next_team_skill, next_agent_skills, _ = agent.assign_skills(
-                        states[i], observations[i]
+                        next_states[i], next_observations[i]
                     )
-                    main_logger.debug(f"环境 {i}: 检测到技能切换点，为 s_{{T+1}} 分配新技能 Z_{{T+1}}={next_team_skill}")
+                    main_logger.debug(f"环境 {i}: 检测到技能切换点 (env_step={env_steps[i]}, next_env_step={next_env_step}), 为 s_{{T+1}} 分配新技能 Z_{{T+1}}={next_team_skill}")
                 else:
                     # 使用当前技能
                     next_team_skill = agent.env_team_skills.get(i, 0)
                     if next_team_skill == -1: 
                         next_team_skill = 0
+                    main_logger.debug(f"环境 {i}: 继续使用当前技能 Z={next_team_skill} (env_step={env_steps[i]}, next_env_step={next_env_step})")
                 
                 # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
-                global_state_tensor = torch.FloatTensor(states[i]).unsqueeze(0).to(agent.device)
+                # 此处的 'states' 变量实际上是 rollout 循环结束时的 'next_states'
+                global_state_tensor = torch.FloatTensor(next_states[i]).unsqueeze(0).to(agent.device)
                 team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
                 
                 # 【根本原因修复】从agent获取并传递正确的critic隐藏状态
@@ -2355,7 +2355,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 # 【正确修复】确保隐藏状态的批量维度与输入的批量维度(1)匹配
                 if last_critic_hidden_state is not None:
                     # Critic的隐藏状态在同一环境中对所有智能体都是相同的，因此我们只取第一个
-                    last_critic_hidden_state = last_critic_hidden_state[0:1]
+                    if last_critic_hidden_state.shape[0] > 1:
+                        last_critic_hidden_state = last_critic_hidden_state[0:1]
 
                 global_value_tensor, _ = agent.skill_discoverer.get_value(
                     global_state_tensor, 
@@ -2379,7 +2380,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             for callback in callbacks:
                 callback.on_rollout_end()
             
-            update_info = agent.update(last_values_predicted, dones_tracker, steps_in_buffer=steps_in_rollout)
+            update_info = agent.update(steps_in_buffer=steps_in_rollout, last_values=last_values_predicted, dones=dones_tracker)
             update_times += 1
             elapsed = time.time() - start_time
 
@@ -2430,7 +2431,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         if total_steps >= last_check_total_steps + check_interval_steps:
                 # 获取当前高层缓冲区大小 (从统一的rollout buffer中计算)
                 num_steps_in_buffer = config.rollout_length
-                current_high_level_buffer_size = np.sum(agent.rollout_buffer.high_level_valid_mask[:num_steps_in_buffer])
+                current_high_level_buffer_size = agent.high_level_samples_total
                 
                 # 从agent获取总收集的高层样本数(现在总是准确的，不受缓冲区满的影响)
                 current_high_level_samples_total = agent.high_level_samples_total
@@ -2715,9 +2716,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                 active_env_steps = env_steps[active_indices]
                 active_dones = np.zeros(len(active_indices), dtype=bool)  # 评估中不使用dones重置
                 
-                # 批量调用agent.step
+                # 批量调用agent.step - 【关键修复】评估时使用确定性模式
                 active_actions_batch, active_infos_batch = agent.step(
-                    active_states, active_observations, active_env_steps, active_dones, deterministic=False
+                    active_states, active_observations, active_env_steps, active_dones, deterministic=True
                 )
                 
                 # 重新组装为完整的actions数组
@@ -2725,6 +2726,8 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                 all_agent_infos_list = [{}] * num_envs  # 初始化为空字典
                 
                 for idx, env_i in enumerate(active_indices):
+                    # 【关键修复】直接使用确定性模式下返回的正确形状的动作
+                    # agent.step在确定性模式下已经返回了正确形状的动作，无需reshape
                     actions_array[env_i] = active_actions_batch[idx].reshape(-1, 1)
                     all_agent_infos_list[env_i] = active_infos_batch[idx]
                     
