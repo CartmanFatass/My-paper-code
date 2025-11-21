@@ -19,7 +19,8 @@ class VisualizationManager:
             config: Training configuration object.
         """
         self.episode_num = episode_num
-        self.log_dir = os.path.join(log_dir, 'evaluation_plots')
+        # 为每个并行环境创建独立的子文件夹
+        self.log_dir = os.path.join(log_dir, 'evaluation_plots', f'episode_{episode_num}')
         os.makedirs(self.log_dir, exist_ok=True)
         self.config = config
         
@@ -177,8 +178,8 @@ class VisualizationManager:
         showing node positions and connections.
         """
         try:
-            # Use English fonts to avoid Chinese font issues on servers
-            plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Liberation Sans']
+            # 设置支持中文和表情符号的字体
+            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial', 'Liberation Sans', 'Noto Color Emoji']
             plt.rcParams['axes.unicode_minus'] = False
             
             fig, ax = plt.subplots(figsize=(12, 10))
@@ -208,32 +209,65 @@ class VisualizationManager:
                 ax.scatter(pos[0], pos[1], marker='^', color=color, s=120, edgecolors='black', zorder=6, label=f'UAV {i}')
                 ax.text(pos[0] + 10, pos[1] + 10, f'UAV{i}', fontsize=9)
 
-            # Plot connections: User -> UAV
+            # Plot connections: User -> UAV with a less obtrusive style
             if connections is not None and user_positions is not None:
+                # Add a single legend entry for all user links
+                ax.plot([], [], 'g:', alpha=0.5, label='User Links')
                 for uav_idx in range(connections.shape[0]):
                     for user_idx in range(connections.shape[1]):
                         if connections[uav_idx, user_idx]:
                             uav_pos = uav_positions[uav_idx]
                             user_pos = user_positions[user_idx]
-                            ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], 'g-', alpha=0.4, zorder=3)
+                            # Use a dotted line to reduce visual clutter
+                            ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], 'g:', alpha=0.5, zorder=3)
 
-            # Plot routing paths (backhaul)
-            if routing_paths:
+            # 【新增】绘制无人机飞行轨迹（在背景中）
+            if len(self.history['uav_positions']) > 1:  # 确保有足够的历史位置数据
+                # 仅为第一个无人机添加起点图例，避免重复
+                ax.scatter([], [], color='gray', marker='*', s=80, alpha=0.8, label='UAV Initial Position')
+                for i in range(self.config.n_agents):
+                    # 提取该无人机的完整飞行轨迹
+                    trajectory_x = [positions[i, 0] for positions in self.history['uav_positions']]
+                    trajectory_y = [positions[i, 1] for positions in self.history['uav_positions']]
+                    
+                    # 使用与无人机相同的颜色但更淡的透明度绘制轨迹
+                    color = plt.cm.jet(i / self.config.n_agents)
+                    ax.plot(trajectory_x, trajectory_y, color=color, alpha=0.3, linewidth=1.5, linestyle='-', zorder=1)
+                    
+                    # 在起点绘制一个星形标记，以区别于用户
+                    ax.scatter(trajectory_x[0], trajectory_y[0], color=color, marker='*', s=80, alpha=0.8, zorder=2, edgecolors='white', linewidths=0.5)
+
+            # Plot routing paths (backhaul) - Reworked for robustness
+            if routing_paths and static_info and 'ground_bs_positions' in static_info:
+                # --- Pre-build a robust node position lookup dictionary ---
+                node_positions = {}
+                # Add UAV positions
+                for i in range(len(uav_positions)):
+                    node_positions[('uav', i)] = uav_positions[i, :2]
+                # Add Ground Base Station positions
+                bs_positions = static_info['ground_bs_positions']
+                for i in range(len(bs_positions)):
+                    node_positions[('ground_bs', i)] = bs_positions[i, :2]
+
+                backhaul_legend_added = False
                 for uav_idx, (path, capacity) in routing_paths.items():
+                    if not path or len(path) < 2:
+                        continue
+                    
                     for i in range(len(path) - 1):
-                        node1_type, node1_idx = path[i]
-                        node2_type, node2_idx = path[i+1]
+                        node1_key = tuple(path[i]) # path is list of lists, convert to tuple for dict key
+                        node2_key = tuple(path[i+1])
                         
-                        pos1 = None
-                        if node1_type == "uav": pos1 = uav_positions[node1_idx]
-                        elif node1_type == "ground_bs": pos1 = static_info['ground_bs_positions'][node1_idx]
-                            
-                        pos2 = None
-                        if node2_type == "uav": pos2 = uav_positions[node2_idx]
-                        elif node2_type == "ground_bs": pos2 = static_info['ground_bs_positions'][node2_idx]
+                        pos1 = node_positions.get(node1_key)
+                        pos2 = node_positions.get(node2_key)
 
                         if pos1 is not None and pos2 is not None:
-                            ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 'y--', alpha=0.8, linewidth=2.0, zorder=2)
+                            label = 'Backhaul Routing Paths' if not backhaul_legend_added else None
+                            ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 
+                                    'b--', alpha=0.9, linewidth=2.5, zorder=5, label=label)
+                            backhaul_legend_added = True
+                        else:
+                            print(f"Warning: Could not find position for one or both nodes in path segment: {node1_key} -> {node2_key}")
 
             # --- Build legend ---
             handles, labels = ax.get_legend_handles_labels()
@@ -288,8 +322,8 @@ class VisualizationManager:
             eval_step (int, optional): Current training total steps for unique evaluation image identification.
         """
         try:
-            # Use English fonts to avoid Chinese font issues on servers
-            plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Liberation Sans']
+            # 设置支持中文和表情符号的字体
+            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial', 'Liberation Sans', 'Noto Color Emoji']
             plt.rcParams['axes.unicode_minus'] = False
             
             # Create a 3x3 subplot grid to display comprehensive performance metrics
@@ -458,8 +492,8 @@ Key Metrics Summary (Final Values)
             eval_step (int, optional): Current training total steps for unique evaluation image identification.
         """
         try:
-            # Use English fonts to avoid Chinese font issues on servers
-            plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Liberation Sans']
+            # 设置支持中文和表情符号的字体
+            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial', 'Liberation Sans', 'Noto Color Emoji']
             plt.rcParams['axes.unicode_minus'] = False
             
             # Create 2x2 subplot grid for specialized network health analysis

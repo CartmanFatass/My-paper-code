@@ -48,7 +48,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.env_util import make_vec_env # Can also use this helper
 
 # 导入论文中的配置
-from config_1 import Config
+# from config_1 import Config # Now dynamically imported
 from hmasd.agent import HMASDAgent
 from hmasd.sb3_integration import (
     create_hmasd_training_setup, 
@@ -377,6 +377,12 @@ class EnhancedRewardTracker:
             'total_throughput': [],  # 新增：总吞吐量记录
             'avg_throughput_per_user': [],  # 新增：平均用户吞吐量记录
             
+            # 新增: Episode级别的覆盖率统计
+            'episode_coverage_mean': [],
+            'episode_coverage_std': [],
+            'episode_coverage_min': [],
+            'episode_coverage_max': [],
+            
             # 奖励组成部分记录 (场景2和场景3通用)
             'reward_components': {
                 # 通用奖励组成
@@ -439,6 +445,9 @@ class EnhancedRewardTracker:
         self.window_size = config.rollout_length
         self.recent_rewards = deque(maxlen=self.window_size)
         self.recent_lengths = deque(maxlen=self.window_size)
+
+        # 新增: 用于最差表现优化的性能历史记录
+        self.episode_performance_history = []
         
         # 数据导出设置 - 增加导出间隔
         self.export_interval = 5000  # 每5000步导出一次数据（减少导出频率）
@@ -1470,6 +1479,18 @@ class EnhancedRewardTracker:
             avg_final_coverage = np.mean(episode_end_coverage_ratios)
             writer.add_scalar('Performance/EpisodeEnd/Coverage_Ratio_Final', avg_final_coverage, step)
         
+        # 新增: 记录Episode覆盖率的min, max, std
+        episode_end_coverage_std = [m.get('final_metrics', {}).get('episode_coverage_std', 0) for m in recent_episodes]
+        episode_end_coverage_min = [m.get('final_metrics', {}).get('episode_coverage_min', 0) for m in recent_episodes]
+        episode_end_coverage_max = [m.get('final_metrics', {}).get('episode_coverage_max', 0) for m in recent_episodes]
+
+        if episode_end_coverage_std:
+            writer.add_scalar('Performance/EpisodeEnd/Coverage_Std_Final', np.mean(episode_end_coverage_std), step)
+        if episode_end_coverage_min:
+            writer.add_scalar('Performance/EpisodeEnd/Coverage_Min_Final', np.mean(episode_end_coverage_min), step)
+        if episode_end_coverage_max:
+            writer.add_scalar('Performance/EpisodeEnd/Coverage_Max_Final', np.mean(episode_end_coverage_max), step)
+
         if episode_end_connected_users:
             avg_final_connected = np.mean(episode_end_connected_users)
             writer.add_scalar('Performance/EpisodeEnd/Connected_Users_Final', avg_final_connected, step)
@@ -1930,6 +1951,11 @@ def make_env(rank, seed, config, scenario, render_mode=None):
 def parse_args():
     parser = argparse.ArgumentParser(description='使用论文《Hierarchical Multi-Agent Skill Discovery》中的超参数运行HMASD (多进程版本)')
     
+    # 实验管理参数
+    parser.add_argument('--exp_name', type=str, default='hmasd_experiment', help='实验名称，用于组织日志')
+    parser.add_argument('--seed', type=int, default=1, help='随机种子')
+    parser.add_argument('--config', type=str, default='config_1', help='要使用的配置文件名 (不带.py后缀)')
+    
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
     parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式')
@@ -1990,11 +2016,22 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     main_logger.info(f"开始训练HMASD (多进程版本，使用 {num_envs} 个并行环境)...")
     main_logger.info(f"配置已预先初始化: state_dim={config.state_dim}, obs_dim={config.obs_dim}, n_agents={config.n_agents}")
 
-    # 创建日志目录
-    log_dir = os.path.join(args.log_dir, f"sb3_multiproc_paper_config_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
+    # 设置随机种子以保证可复现性
+    import random
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed)
+    random.seed(args.seed)
+    main_logger.info(f"已为torch, numpy, random设置随机种子: {args.seed}")
+
+    # 使用实验名称和种子来创建结构化的日志目录
+    log_dir = os.path.join(args.log_dir, args.exp_name, f"seed_{args.seed}")
     os.makedirs(log_dir, exist_ok=True)
-    model_dir = os.path.dirname(args.model_path)
+    
+    # 模型保存路径也应结构化
+    model_dir = os.path.join(log_dir, 'models')
     os.makedirs(model_dir, exist_ok=True)
+    # 更新模型路径以包含新的目录结构
+    args.model_path = os.path.join(model_dir, 'best_model.pt')
     
     # 创建HMASD代理（不再有TensorBoard writer）
     agent = HMASDAgent(config, log_dir=log_dir, device=device)
@@ -2026,8 +2063,9 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
         try:
             # 为了兼容新版PyTorch的安全加载机制，添加Config类到安全全局列表
             import torch.serialization
-            torch.serialization.add_safe_globals([Config])
-            main_logger.debug("已将Config类添加到PyTorch安全全局列表")
+            # Config is now defined in main and passed to train
+            # torch.serialization.add_safe_globals([Config]) 
+            # main_logger.debug("已将Config类添加到PyTorch安全全局列表")
             
             agent.load_model(args.resume_from)
             main_logger.info(f"成功加载预训练模型，将在此基础上继续训练")
@@ -2088,6 +2126,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     update_times = 0
     best_reward = float('-inf')
     last_eval_step = 0  # 跟踪上次评估的步数
+    
+    # 【新增】用于存储评估结果的列表
+    eval_steps_history = []
+    eval_mean_rewards_history = []
+    eval_std_rewards_history = []
     
     # 高层样本累积检测变量
     high_level_samples_collected_total = 0  # 总共收集的高层样本数
@@ -2260,6 +2303,33 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     if 'global' in infos[i]:
                         episode_info.update(infos[i]['global'])
                     
+                    # 在记录前，计算并添加当前episode的覆盖率统计信息
+                    current_episode_coverages = [
+                        step_data['coverage_ratio'] 
+                        for step_data in reward_tracker.step_metric_buffer[i] 
+                        if 'coverage_ratio' in step_data
+                    ]
+                    if current_episode_coverages:
+                        mean_cov = np.mean(current_episode_coverages)
+                        std_cov = np.std(current_episode_coverages)
+                        min_cov = np.min(current_episode_coverages)
+                        max_cov = np.max(current_episode_coverages)
+                        
+                        # 将统计信息添加到info中，以便被log_episode_completion记录
+                        if 'reward_info' not in episode_info:
+                            episode_info['reward_info'] = {}
+                        episode_info['reward_info']['episode_coverage_mean'] = mean_cov
+                        episode_info['reward_info']['episode_coverage_std'] = std_cov
+                        episode_info['reward_info']['episode_coverage_min'] = min_cov
+                        episode_info['reward_info']['episode_coverage_max'] = max_cov
+                        
+                        # 新增: 将episode表现记录到历史中，用于最差表现优化
+                        reward_tracker.episode_performance_history.append({
+                            'episode_num': n_episodes,
+                            'env_id': i,
+                            'avg_coverage': mean_cov
+                        })
+
                     reward_tracker.log_episode_completion(
                         episode_num=n_episodes,
                         env_id=i,
@@ -2267,6 +2337,9 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                         episode_length=env_steps[i],
                         info=episode_info  # 传递包含reward_info的完整信息
                     )
+
+                    # 清空该环境的步级缓冲区
+                    reward_tracker.step_metric_buffer[i].clear()
 
                     # 记录到 TensorBoard
                     agent.training_info['episode_rewards'].append(episode_rewards_tracker[i])
@@ -2313,6 +2386,27 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             if total_steps >= config.total_timesteps:
                 break
         # --- End of NEW Rollout Loop ---
+
+        # 【新增】最差表现优化 (Worst-Case Optimization)
+        # 在计算GAE之前，识别并惩罚表现差的episode
+        # ----------------------------------------------------------------
+        worst_case_episodes = []
+        if config.use_worst_case_optimization and reward_tracker.episode_performance_history:
+            # 1. 获取所有已完成episode的平均覆盖率
+            historical_perf = [perf['avg_coverage'] for perf in reward_tracker.episode_performance_history]
+            
+            # 2. 计算性能阈值 (例如，后20%)
+            threshold = np.percentile(historical_perf, config.worst_case_threshold_percentile)
+            
+            # 3. 识别当前rollout中完成的、表现低于阈值的episode
+            for i in range(num_envs):
+                if dones_tracker[i]: # 如果这个环境在上一步结束了一个episode
+                    # 从追踪器中找到这个刚结束的episode的性能
+                    # 假设log_episode_completion已经将性能记录下来
+                    last_perf_entry = next((item for item in reversed(reward_tracker.episode_performance_history) if item['env_id'] == i), None)
+                    if last_perf_entry and last_perf_entry['avg_coverage'] < threshold:
+                        worst_case_episodes.append(i)
+                        main_logger.info(f"[鲁棒性优化] 环境 {i} 的Episode表现 ({last_perf_entry['avg_coverage']:.2f}) 低于阈值 ({threshold:.2f})，将施加惩罚。")
 
         # --- 在更新前计算GAE和Returns (最终修正版) ---
         main_logger.debug("为低层策略(Discoverer)计算GAE...")
@@ -2380,6 +2474,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             for callback in callbacks:
                 callback.on_rollout_end()
             
+            # 在调用update之前，应用最差情况优化
+            if worst_case_episodes:
+                main_logger.debug(f"对环境 {worst_case_episodes} 的回报应用惩罚权重...")
+                agent.apply_reward_weighting(worst_case_episodes, config.worst_case_penalty_weight)
+
             update_info = agent.update(steps_in_buffer=steps_in_rollout, last_values=last_values_predicted, dones=dones_tracker)
             update_times += 1
             elapsed = time.time() - start_time
@@ -2537,6 +2636,11 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             eval_reward, eval_std, eval_min, eval_max = evaluate(eval_vec_env, agent, config.eval_episodes, render=args.render, record_video=args.record_video, eval_step=total_steps)
             main_logger.info(f"评估完成 ({config.eval_episodes} 个episodes): 平均奖励 {eval_reward:.2f} ± {eval_std:.2f}, 最大/最小: {eval_max:.2f}/{eval_min:.2f}")
 
+            # 【新增】记录评估结果
+            eval_steps_history.append(total_steps)
+            eval_mean_rewards_history.append(eval_reward)
+            eval_std_rewards_history.append(eval_std)
+
             # 保存最佳模型
             if eval_reward > best_reward:
                 best_reward = eval_reward
@@ -2545,6 +2649,51 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             
             # 更新上次评估步数
             last_eval_step = total_steps
+            
+            # 【新增】绘制并保存更新的评估性能曲线
+            if eval_steps_history:
+                main_logger.info("正在更新评估性能曲线图...")
+                plt.figure(figsize=(12, 8))
+                
+                # 转换为numpy数组方便计算
+                eval_steps_history_np = np.array(eval_steps_history)
+                eval_mean_rewards_history_np = np.array(eval_mean_rewards_history)
+                eval_std_rewards_history_np = np.array(eval_std_rewards_history)
+                
+                # 绘制平均奖励曲线
+                plt.plot(eval_steps_history_np, eval_mean_rewards_history_np, label='Mean Evaluation Reward', color='b', linewidth=2)
+                
+                # 绘制标准差范围（阴影区域）
+                plt.fill_between(eval_steps_history_np, 
+                                 eval_mean_rewards_history_np - eval_std_rewards_history_np, 
+                                 eval_mean_rewards_history_np + eval_std_rewards_history_np, 
+                                 color='b', alpha=0.2, label='Standard Deviation')
+                
+                plt.title('Evaluation Reward vs. Training Steps', fontsize=16)
+                plt.xlabel('Total Training Steps', fontsize=12)
+                plt.ylabel('Mean Reward', fontsize=12)
+                plt.grid(True, linestyle='--', alpha=0.6)
+                plt.legend(fontsize=10)
+                plt.tight_layout()
+                
+                # 保存图像 (覆盖旧文件)
+                eval_plot_path = os.path.join(log_dir, 'evaluation_performance_curve.png')
+                plt.savefig(eval_plot_path, dpi=300)
+                plt.close()
+                main_logger.info(f"评估性能曲线图已更新并保存至: {eval_plot_path}")
+
+                # 【新增】保存绘图数据
+                try:
+                    eval_data_df = pd.DataFrame({
+                        'steps': eval_steps_history_np,
+                        'mean_reward': eval_mean_rewards_history_np,
+                        'std_reward': eval_std_rewards_history_np
+                    })
+                    eval_data_path = os.path.join(log_dir, 'evaluation_performance_data.csv')
+                    eval_data_df.to_csv(eval_data_path, index=False)
+                    #main_logger.info(f"评估性能数据已保存至: {eval_data_path}")
+                except Exception as e:
+                    main_logger.error(f"保存评估性能数据时出错: {e}")
 
         # 在调用 agent.update() 之后立即记录rollout指标到TensorBoard
         reward_tracker.log_rollout_metrics_to_tensorboard(tb_manager.writer, total_steps, args=args)
@@ -2728,7 +2877,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                 for idx, env_i in enumerate(active_indices):
                     # 【关键修复】直接使用确定性模式下返回的正确形状的动作
                     # agent.step在确定性模式下已经返回了正确形状的动作，无需reshape
-                    actions_array[env_i] = active_actions_batch[idx].reshape(-1, 1)
+                    actions_array[env_i] = active_actions_batch[idx]
                     all_agent_infos_list[env_i] = active_infos_batch[idx]
                     
                     # 收集技能分布信息
@@ -2887,10 +3036,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                         except Exception as e:
                             main_logger.error(f"为环境 {i} 录制视频帧时出错: {e}")
 
-                    # 强制设置环境长度为1500步
-                    if env_steps[i] >= 1500:
+                    # 强制设置环境长度与训练一致
+                    if env_steps[i] >= agent.config.episode_length:
                         dones[i] = True
-                        main_logger.info(f"评估 Episode (来自环境 {i}) 达到1500步上限，强制结束。")
+                        main_logger.info(f"评估 Episode (来自环境 {i}) 达到 {agent.config.episode_length} 步上限，强制结束。")
 
                     # 如果环境完成
                     if dones[i]:
@@ -3200,7 +3349,17 @@ def main():
     main_logger.info(f"多进程日志系统已初始化: 文件级别={args.log_level}, 控制台级别={args.console_log_level}")
     main_logger.info(f"日志文件: {os.path.join(args.log_dir, log_file)}")
     
-    # 使用config_1.py中的配置（基于论文超参数）
+    # 动态导入指定的配置文件
+    try:
+        import importlib
+        config_module = importlib.import_module(args.config)
+        Config = getattr(config_module, 'Config')
+        main_logger.info(f"成功从 '{args.config}.py' 加载配置")
+    except (ImportError, AttributeError) as e:
+        main_logger.error(f"错误：无法找到或加载配置文件 '{args.config}.py' 或其中缺少 'Config' 类。请确保文件存在且正确。详细错误: {e}")
+        return
+
+    # 使用加载的配置
     config = Config()
     
     # 只设置少量开关参数（其他参数已在config_1.py中定义）
@@ -3221,12 +3380,13 @@ def main():
     main_logger.info(f"使用 {num_envs} 个并行训练环境和 {eval_rollout_threads} 个并行评估环境")
     
     # 创建环境构造函数列表 (使用修改后的 make_env)
-    base_seed = config.seed if hasattr(config, 'seed') else int(time.time()) # Use config seed or time
+    # 确保基础种子与命令行参数一致
+    base_seed = args.seed
     main_logger.info(f"基础种子: {base_seed}")
 
     train_env_fns = [make_env(
         rank=i,
-        seed=base_seed,
+        seed=base_seed, # 使用命令行传入的种子
         config=config,
         scenario=args.scenario,
         render_mode=None

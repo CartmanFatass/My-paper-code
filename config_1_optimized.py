@@ -62,9 +62,6 @@ class Config:
     # 预测状态参数False
     enable_predictive_state = False
     prediction_horizon = 10
-    
-    # 卡尔曼滤波控制参数
-    enable_cluster_kalman_filter = False
 
     # 软切换和动态簇管理参数
     enable_soft_handover = True

@@ -468,6 +468,26 @@ class HMASDAgent:
             main_logger.info("未启用State Normalization")
         
         self.training = True # 训练/评估模式标志
+
+    def apply_reward_weighting(self, env_indices, weight):
+        """
+        对指定环境的回报应用一个权重。
+        用于最差表现优化，放大表现不佳的episode的奖励信号。
+        """
+        if not env_indices:
+            return
+        
+        main_logger.info(f"正在为环境 {env_indices} 的回报应用权重 {weight}...")
+        try:
+            # 直接修改rollout buffer中的rewards
+            # 注意：这里修改的是原始的内在奖励，GAE计算会基于此进行
+            self.rollout_buffer.rewards[:, env_indices] *= weight
+            main_logger.info(f"已成功对环境 {env_indices} 的奖励应用权重。")
+        except IndexError:
+            main_logger.error(f"在应用奖励权重时发生索引错误。请求的环境索引: {env_indices}, "
+                            f"缓冲区环境数量: {self.rollout_buffer.num_envs}")
+        except Exception as e:
+            main_logger.error(f"应用奖励权重时发生未知错误: {e}")
     
     def train(self, mode=True):
         """设置智能体为训练或评估模式"""
@@ -1846,8 +1866,8 @@ class HMASDAgent:
             # 【致命问题修复】移除错误的独立优势标准化
             # 团队技能和个体技能的优势来源于同一个奖励流，应保持相对尺度
             # PPO的主要优势来自裁剪，而非标准化。让原始优势值指导策略更新。
-            # team_advantages_batch = (team_advantages_batch - team_advantages_batch.mean()) / (team_advantages_batch.std() + 1e-8)
-            # agent_advantages_batch = (agent_advantages_batch - agent_advantages_batch.mean()) / (agent_advantages_batch.std() + 1e-8)
+            team_advantages_batch = (team_advantages_batch - team_advantages_batch.mean()) / (team_advantages_batch.std() + 1e-8)
+            agent_advantages_batch = (agent_advantages_batch - agent_advantages_batch.mean()) / (agent_advantages_batch.std() + 1e-8)
 
             # --- 【修复】计算解耦的PPO策略损失 ---
             # 1. 团队策略损失
@@ -2095,7 +2115,12 @@ class HMASDAgent:
             policy_loss = -torch.min(surr1, surr2).mean()
 
             # 价值损失
-            value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
+            if self.config.use_valuenorm and self.value_norm_discoverer is not None:
+                new_values_for_loss = self._normalize_values(new_values_flat, self.value_norm_discoverer)
+                returns_for_loss = self._normalize_values(returns_flat, self.value_norm_discoverer)
+                value_loss = F.mse_loss(new_values_for_loss, returns_for_loss.detach())
+            else:
+                value_loss = F.mse_loss(new_values_flat, returns_flat.detach())
             
             # 熵损失
             entropy_loss = -entropy * self.config.lambda_l
@@ -2392,7 +2417,8 @@ class HMASDAgent:
             'discoverer_actor_optimizer': self.discoverer_actor_optimizer.state_dict(),
             'discoverer_critic_optimizer': self.discoverer_critic_optimizer.state_dict(),
             'discriminator_optimizer': self.discriminator_optimizer.state_dict(),
-            'config': self.config
+            'config': self.config,
+            'discriminator_buffer': self.discriminator_buffer
         }
         
         # 保存SB3 RunningMeanStd状态（如果启用）
@@ -2516,6 +2542,13 @@ class HMASDAgent:
         if 'discriminator_optimizer' in checkpoint:
             self.discriminator_optimizer.load_state_dict(checkpoint['discriminator_optimizer'])
             main_logger.info("已恢复Discriminator优化器状态")
+        
+        # 恢复判别器缓冲区
+        if 'discriminator_buffer' in checkpoint:
+            self.discriminator_buffer = checkpoint['discriminator_buffer']
+            main_logger.info(f"已恢复Discriminator缓冲区，当前大小: {len(self.discriminator_buffer)}")
+        else:
+            main_logger.warning("在checkpoint中未找到Discriminator缓冲区，将使用新的空缓冲区")
         
         # 加载SB3 RunningMeanStd状态（如果存在且启用）
         if self.config.use_valuenorm and 'valuenorm_state' in checkpoint:

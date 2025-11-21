@@ -83,7 +83,7 @@ class DiagGaussian(nn.Module):
 
     def forward(self, x, available_actions=None, deterministic=False):
         action_mean = self.fc_mean(x)
-        zeros = torch.zeros(action_mean.size())
+        zeros = torch.zeros_like(action_mean)
         if x.is_cuda:
             zeros = zeros.cuda()
         action_logstd = self.logstd(zeros)
@@ -93,16 +93,19 @@ class DiagGaussian(nn.Module):
         else:
             action = dist.sample()
         return action, dist.log_probs(action)
-    
+
     def evaluate_actions(self, x, action, available_actions=None, active_masks=None):
         action_mean = self.fc_mean(x)
-        zeros = torch.zeros(action_mean.size())
+        zeros = torch.zeros_like(action_mean)
         if x.is_cuda:
             zeros = zeros.cuda()
         action_logstd = self.logstd(zeros)
         dist = FixedNormal(action_mean, action_logstd.exp())
         action_log_probs = dist.log_probs(action)
-        dist_entropy = dist.entropy().mean()
+        if active_masks is not None:
+            dist_entropy = (dist.entropy() * active_masks).sum() / active_masks.sum()
+        else:
+            dist_entropy = dist.entropy().mean()
         return action_log_probs, dist_entropy
 
 class AddBias(nn.Module):
@@ -113,8 +116,14 @@ class AddBias(nn.Module):
     def forward(self, x):
         if x.dim() == 2:
             bias = self._bias.t().view(1, -1)
+        # Handle 3D tensor for sequence data (T, B, D)
+        elif x.dim() == 3:
+            bias = self._bias.t().view(1, 1, -1)
+        # Handle 4D tensor for image data
         else:
             bias = self._bias.t().view(1, -1, 1, 1)
+            
+        # The bias will be broadcasted to match the shape of x
         return x + bias
 
 # -- End of distributions.py content --

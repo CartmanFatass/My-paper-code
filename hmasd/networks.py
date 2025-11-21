@@ -553,9 +553,12 @@ class SkillDecoder(nn.Module):
         
         # 输出头
         self.team_skill_head = nn.Linear(embedding_dim, n_Z)
-        self.agent_skill_head = nn.Linear(embedding_dim, n_z)
+        
+        # [!!! 关键修改 !!!] 调整 agent_skill_head 的输入维度
+        # 它现在接收来自解码器的通用输出和特定智能体的编码观测的拼接
+        self.agent_skill_head = nn.Linear(embedding_dim * 2, n_z)
     
-    def forward(self, encoded_state, encoded_observations, Z=None, z=None, step=0):
+    def forward(self, encoded_state, encoded_observations, Z=None, z=None, step=0, agent_specific_query=None):
         """
         参数:
             encoded_state: 编码后的状态 [batch_size, 1, embedding_dim]
@@ -563,6 +566,7 @@ class SkillDecoder(nn.Module):
             Z: 已选择的团队技能索引 [batch_size]，可选
             z: 已选择的个体技能索引列表 [batch_size, step]，可选
             step: 当前解码步骤
+            agent_specific_query: 特定智能体的编码观测 [batch_size, 1, embedding_dim] (新增)
             
         返回:
             output: 技能分布 [batch_size, n_Z/n_z]
@@ -620,6 +624,10 @@ class SkillDecoder(nn.Module):
             
             return team_skill_logits
         else:  # 生成第step个智能体的个体技能zi
+            # 【新增】检查 agent_specific_query 是否提供
+            if agent_specific_query is None:
+                raise ValueError("agent_specific_query must be provided when decoding an agent's skill.")
+
             # 构建已解码序列
             seq_len = step + 1  # Z0 + Z + z1 + ... + z_{step-1}
             decoder_inputs = []
@@ -646,8 +654,15 @@ class SkillDecoder(nn.Module):
             memory = torch.cat([encoded_state, encoded_observations], dim=1)
             decoded = self.transformer_decoder(decoder_input, memory)
             
-            # 输出个体技能分布（仅取最后一步）
-            agent_skill_logits = self.agent_skill_head(decoded[:, -1, :])
+            # generic_output 是解码器基于序列历史和全局上下文的输出
+            generic_output = decoded[:, -1, :] # Shape: [batch_size, embedding_dim]
+
+            # [!!! 关键修改 !!!] 将通用输出与智能体特定信息结合
+            # 将解码器的通用输出与该智能体独特的编码观测拼接起来
+            combined_feature = torch.cat([generic_output, agent_specific_query.squeeze(1)], dim=1)
+            
+            # 使用这个特征更丰富的、智能体特异性的输入来预测技能
+            agent_skill_logits = self.agent_skill_head(combined_feature)
             
             # 记录个体技能logits的统计信息
             with torch.no_grad():
@@ -864,8 +879,19 @@ class SkillCoordinator(nn.Module):
                 Z_for_decoder = Z  # 保持梯度流，允许技能间依赖学习
                 z_for_decoder = z[:, :i] if i > 0 else None  # 保持梯度流，允许技能间依赖学习
                 
+                # [!!! 关键修改 !!!] 提取当前智能体的编码观测作为特异性查询
+                agent_i_encoded_obs = encoded_observations[:, i:i+1, :]
+
                 try:
-                    zi_logits = self.skill_decoder(encoded_state, encoded_observations, Z_for_decoder, z_for_decoder, step=i+1)
+                    # [!!! 关键修改 !!!] 将特异性查询传递给解码器
+                    zi_logits = self.skill_decoder(
+                        encoded_state,
+                        encoded_observations,
+                        Z_for_decoder,
+                        z_for_decoder,
+                        step=i+1,
+                        agent_specific_query=agent_i_encoded_obs # 传递 agent i 的信息
+                    )
                     
                     # 在创建分布前检查zi_logits是否包含NaN或Inf，并进行更强的数值稳定性处理
                     with torch.no_grad():
@@ -954,7 +980,7 @@ class R_Actor(nn.Module):
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
             self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
 
-        self.act = ACTLayer(action_space, self.hidden_size, self._use_orthogonal, self._gain, args)
+        self.act = ACTLayer(action_space, self.hidden_size, self._use_orthogonal, self._gain)
 
         self.to(device)
 
@@ -976,7 +1002,13 @@ class R_Actor(nn.Module):
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
             actor_features, rnn_states = self.rnn(actor_features, rnn_states, masks)
 
-        actions, action_log_probs = self.act(actor_features, available_actions, deterministic)
+        # 确保传递给ACTLayer的特征维度是正确的hidden_size
+        # 在连续动作空间的情况下，actor_features可能是拼接的，维度过高
+        final_actor_features = actor_features
+        if final_actor_features.shape[-1] != self.hidden_size:
+            final_actor_features = final_actor_features[..., -self.hidden_size:]
+
+        actions, action_log_probs = self.act(final_actor_features, available_actions, deterministic)
 
         return actions, action_log_probs, rnn_states
 
@@ -1004,20 +1036,13 @@ class R_Actor(nn.Module):
 
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
             actor_features, rnn_states = self.rnn(actor_features, rnn_states, masks)
-        else:
-            if is_sequence:
-                # If not using RNN, flatten the features for the action layer
-                actor_features = actor_features.view(T * B, -1)
-                action = action.view(T * B, -1)
-                if available_actions is not None:
-                    available_actions = available_actions.view(T * B, -1)
-                if active_masks is not None:
-                    active_masks = active_masks.view(T * B, -1)
 
-        action_log_probs, dist_entropy = self.act.evaluate_actions(actor_features, action, available_actions, active_masks=active_masks if self._use_policy_active_masks else None)
-        
-        if is_sequence:
-            action_log_probs = action_log_probs.view(T, B, -1)
+        # 确保传递给ACTLayer的特征维度是正确的hidden_size
+        final_actor_features = actor_features
+        if final_actor_features.shape[-1] != self.hidden_size:
+            final_actor_features = final_actor_features[..., -self.hidden_size:]
+
+        action_log_probs, dist_entropy = self.act.evaluate_actions(final_actor_features, action, available_actions, active_masks=active_masks if self._use_policy_active_masks else None)
 
         return action_log_probs, dist_entropy
 
