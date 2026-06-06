@@ -19,13 +19,16 @@ class Config:
     height_range = (50, 200)
     max_speed = 30
     time_step = 1.0
-    max_steps = 1500                # [优化] 匹配 episode_length
+    episode_length = 500            # [新增] 基础 episode 长度参数
+    max_steps = episode_length       # [修复] 直接引用 episode_length，确保一致性
     max_hops = 5
     user_distribution = 'forced_relay_cluster'  # [优化] 使用簇分布
     use_fdma = True
     bandwidth = 20e6
-    reward_type = "load_balance"         # [优化] 使用网络健康度奖励 _health
+    reward_type = 'test_reward'#"load_balance"         # [优化] 使用网络健康度奖励 _health
     w_load_balance = 0.5
+    w_first_contact = 0#0.2
+    w_repulsion = 0#0.3
     # 用户移动参数
     user_max_speed = 15.0
     user_movement_model = "rpgm"
@@ -86,10 +89,10 @@ class Config:
     max_observed_bs = 2
 
     # HMASD参数
-    n_Z = 4
-    n_z = 5
-    k = 60
-
+    n_Z = 6
+    n_z = 6
+    k = 10
+    discriminator_noise_std = 0#0.05
     # 网络参数 - 【弱判别器修复】增强配置
     hidden_size = 256                  # [增强] 从128提升到256，配合残差网络
     embedding_dim = 256
@@ -97,48 +100,62 @@ class Config:
     n_decoder_layers = 2
     n_heads = 8
     gru_hidden_size = 256
-    lr_coordinator = 1e-5
+    lr_coordinator = 1e-4
     lr_discoverer_actor  = 1e-4     # 技能发现器学习率 (离散动作空间下提高学习率以确保有效更新)
     lr_discoverer_critic = 1e-4
-    lr_discriminator = 3e-4              # [关键修复] 提高Discriminator学习率，加快学习速度
+    lr_discriminator = 1e-4             # [关键修复] 提高Discriminator学习率，加快学习速度
     #lr_prototype_discriminator = 3e-4    # [关键修复] 同步提高学习率
 
     # PPO参数
     gamma = 0.99
     gae_lambda = 0.95
     clip_epsilon = 0.2
-    ppo_epochs = 10
+    ppo_epochs = 15
     value_loss_coef = 1.0
     max_grad_norm = 0.5
     value_clip = 10.0
 
     # HMASD损失权重
     lambda_e = 1.0
-    lambda_D = 0.01
-    lambda_d = 0.05
-    lambda_h = 0.001
-    lambda_l = 0.01
+    lambda_D = 0.05
+    lambda_d = 0.02
+    lambda_h = 0.07
+    lambda_l = 0.05
     lambda_cd = 0.0
-    lambda_mi = 0.1
+    lambda_mi = 0.0
+
+
 
     # 训练参数
     low_level_buffer_size = None
     batch_size = None
-    discriminator_buffer_size = 500000
+    discriminator_buffer_size = 1000000
     buffer_size = None
     high_level_buffer_size = None
     high_level_batch_size = None
     num_envs = 32
-    rollout_length = 1000
-    total_timesteps = num_envs * rollout_length * 300
-    
-    episode_length = 1000
-    eval_interval = episode_length * num_envs * 5
+    rollout_length = 500
+    total_timesteps = num_envs * rollout_length * 100
+
+    # 严格对齐HMASD论文/标准实现：高层样本只在技能周期边界闭合。
+    strict_hmasd_alignment = True
+
+    # 非论文机制默认关闭；如需工程增强，可显式改回 True。
+    use_entropy_annealing = False
+    lambda_h_initial = 0.07   # 高层初始熵系数 (较高以鼓励探索)
+    lambda_h_final = 0.01    # 高层最终熵系数
+    lambda_l_initial = 0.05   # 低层初始熵系数
+    lambda_l_final = 0.01    # 低层最终熵系数
+    entropy_anneal_steps = 15e5 # 退火持续
+    entropy_anneal_schedule = 'linear'
+
+    eval_interval = episode_length * num_envs * 10
     eval_episodes = 8
     eval_rollout_threads = 8
     
     use_valuenorm = True
-    use_obsnorm = True
+    use_obsnorm = False
+    use_statenorm = False
     use_orthogonal = True
     gain = 0.01
     optimizer_epsilon = 1e-5

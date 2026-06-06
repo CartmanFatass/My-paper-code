@@ -6,16 +6,11 @@ import argparse
 import logging
 import cv2
 
-# 【关键修复】强制配置matplotlib后端 - 必须在任何其他导入之前
-# 这是解决服务器环境视频录制问题的根本性修复
+# 使用非GUI后端生成图像，避免训练进程依赖桌面显示或虚拟显示。
+os.environ.setdefault('MPLBACKEND', 'Agg')
 import matplotlib
 matplotlib.use('Agg', force=True)  # 强制使用非GUI后端
 import matplotlib.pyplot as plt
-
-# 【额外保护】设置环境变量确保无GUI模式
-os.environ['MPLBACKEND'] = 'Agg'
-if 'DISPLAY' not in os.environ:
-    os.environ['DISPLAY'] = ''
 
 from datetime import datetime
 import multiprocessing as mp
@@ -23,6 +18,9 @@ import pandas as pd
 from collections import defaultdict, deque
 # from functools import partial # No longer needed for make_env directly
 from logger import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEVELS, set_log_level
+
+# 初始化主日志器（如果尚未初始化）
+main_logger = get_logger("HMASD-Main")
 
 def convert_numpy_types(obj):
     """
@@ -57,6 +55,7 @@ from hmasd.sb3_integration import (
     HMASDCallback,
     HMASDVecEnvWrapper
 )
+from hmasd.sharded_vec_env import ShardedSubprocVecEnv
 from envs.pettingzoo.scenario4_discrete import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
@@ -1968,9 +1967,11 @@ def parse_args():
                         choices=['debug', 'info', 'warning', 'error', 'critical'], 
                         help='控制台日志级别')
     parser.add_argument('--eval_episodes', type=int, default=10, help='评估的episode数量')
-    parser.add_argument('--render', action='store_true', help='是否实时渲染环境（仅第一个环境）')
-    parser.add_argument('--record_video', action='store_true', help='是否将评估过程录制为视频')
-    parser.add_argument('--device', type=str, default='auto', 
+    parser.add_argument('--render', action=argparse.BooleanOptionalAction, default=False,
+                        help='是否实时渲染环境（使用--render启用，--no-render禁用）')
+    parser.add_argument('--record_video', action=argparse.BooleanOptionalAction, default=False,
+                        help='是否将评估过程录制为视频（使用--record_video启用，--no-record_video禁用）')
+    parser.add_argument('--device', type=str, default='auto',
                         choices=['auto', 'cuda', 'cpu'], help='计算设备: auto=自动选择, cuda=GPU, cpu=CPU')
     parser.add_argument('--resume_from', type=str, default='', 
                         help='预训练模型路径，用于继续训练（如果为空则从头开始训练）')
@@ -1978,8 +1979,32 @@ def parse_args():
     # 并行参数 (可覆盖配置文件中的值)
     parser.add_argument('--num_envs', type=int, default=0, 
                         help='并行环境数量 (0=使用配置文件中的值)')
+    parser.add_argument('--num_workers', type=int, default=0,
+                        help='分片采样worker数量 (0=自动，根据num_envs和envs_per_worker计算)')
+    parser.add_argument('--envs_per_worker', type=int, default=0,
+                        help='每个分片worker内串行运行的环境数量 (0=自动)')
+    parser.add_argument('--collector_backend', type=str, default='auto',
+                        choices=['auto', 'sharded', 'subproc'],
+                        help='训练采样后端: auto=按环境数自动选择, sharded=分片共享内存, subproc=SB3 SubprocVecEnv')
+    parser.add_argument('--metrics_mode', type=str, default='light',
+                        choices=['light', 'full', 'train_only'],
+                        help='分片采样器回传指标级别: light=核心指标, full=完整info, train_only=只训练')
     parser.add_argument('--eval_rollout_threads', type=int, default=0, 
                         help='评估时的并行线程数 (0=使用配置文件中的值)')
+    parser.add_argument('--rollout_length', type=int, default=0,
+                        help='覆盖配置中的rollout长度 (0=使用配置文件)')
+    parser.add_argument('--total_timesteps', type=int, default=0,
+                        help='覆盖配置中的总训练步数 (0=使用配置文件)')
+    parser.add_argument('--eval_interval', type=int, default=0,
+                        help='覆盖配置中的评估间隔 (0=使用配置文件)')
+    parser.add_argument('--disable_eval', action='store_true',
+                        help='训练期间禁用定期评估')
+    parser.add_argument('--strict_hmasd_alignment', action=argparse.BooleanOptionalAction, default=None,
+                        help='严格按HMASD论文对齐高层样本语义（默认使用配置文件）')
+    parser.add_argument('--stability_check_interval', type=int, default=10,
+                        help='数值稳定性检查间隔（按vector step计；1=每步，0=禁用）')
+    parser.add_argument('--memory_monitor_interval', type=int, default=16,
+                        help='显存监控间隔（按vector step计；1=每步）')
     
     # 数据收集参数
     parser.add_argument('--export_interval', type=int, default=1000, 
@@ -1999,7 +2024,7 @@ def parse_args():
     return parser.parse_args()
 
 # 训练函数
-def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env parameter
+def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=None): # Add eval_vec_env parameter
     """
     训练HMASD代理 (多进程版本)
 
@@ -2058,27 +2083,28 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     tb_manager = TensorBoardManager(log_dir, config)
     
     # 如果指定了预训练模型路径，加载模型继续训练
-    if args.resume_from and os.path.exists(args.resume_from):
-        main_logger.info(f"加载预训练模型: {args.resume_from}")
+    resume_from = getattr(args, 'resume_from', '')
+    if resume_from and os.path.exists(resume_from):
+        main_logger.info(f"加载预训练模型: {resume_from}")
         try:
             # 为了兼容新版PyTorch的安全加载机制，添加Config类到安全全局列表
             import torch.serialization
             # Config is now defined in main and passed to train
-            # torch.serialization.add_safe_globals([Config]) 
+            # torch.serialization.add_safe_globals([Config])
             # main_logger.debug("已将Config类添加到PyTorch安全全局列表")
-            
-            agent.load_model(args.resume_from)
+
+            agent.load_model(resume_from)
             main_logger.info(f"成功加载预训练模型，将在此基础上继续训练")
-            
+
             # 记录续训信息到TensorBoard
-            tb_manager.add_text('Training/resumed_from', args.resume_from, 0)
+            tb_manager.add_text('Training/resumed_from', resume_from, 0)
             tb_manager.add_text('Training/mode', 'resume_training', 0)
         except Exception as e:
             main_logger.error(f"加载预训练模型失败: {e}")
             main_logger.info("将从头开始训练")
             tb_manager.add_text('Training/mode', 'from_scratch_due_to_load_error', 0)
-    elif args.resume_from:
-        main_logger.warning(f"指定的预训练模型文件不存在: {args.resume_from}")
+    elif resume_from:
+        main_logger.warning(f"指定的预训练模型文件不存在: {resume_from}")
         main_logger.info("将从头开始训练")
         tb_manager.add_text('Training/mode', 'from_scratch_due_to_missing_file', 0)
     else:
@@ -2131,6 +2157,7 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     eval_steps_history = []
     eval_mean_rewards_history = []
     eval_std_rewards_history = []
+    created_eval_vec_env = False
     
     # 高层样本累积检测变量
     high_level_samples_collected_total = 0  # 总共收集的高层样本数
@@ -2196,37 +2223,42 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             # 3. 批量提取下一个状态
             next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
 
-            # 4. 数值稳定性检查
-            tensor_dict = {
-                'states': torch.FloatTensor(states),
-                'next_states': torch.FloatTensor(next_states),
-                'observations': torch.FloatTensor(observations),
-                'next_observations': torch.FloatTensor(next_observations),
-                'actions': torch.FloatTensor(actions_batch),
-                'rewards': torch.FloatTensor(rewards)
-            }
-            tensor_dict = numerical_stabilizer.comprehensive_check(tensor_dict)
+            # 4. 数值稳定性检查。该检查主要用于诊断，默认降频以减少每步Tensor构造开销。
+            if args.stability_check_interval > 0 and rollout_step % args.stability_check_interval == 0:
+                tensor_dict = {
+                    'states': torch.FloatTensor(states),
+                    'next_states': torch.FloatTensor(next_states),
+                    'observations': torch.FloatTensor(observations),
+                    'next_observations': torch.FloatTensor(next_observations),
+                    'actions': torch.FloatTensor(actions_batch),
+                    'rewards': torch.FloatTensor(rewards)
+                }
+                tensor_dict = numerical_stabilizer.comprehensive_check(tensor_dict)
 
-            # 5. 批量存储经验 (循环是正确的，因为它不涉及神经网络)
+            # 5. 批量存储经验。done环境中collector会返回reset后的next_observation用于下一步策略输入；
+            # rollout/discriminator数据必须使用terminal_observation，避免把新episode初始观测写进终止transition。
+            storage_next_states = next_states.copy()
+            storage_next_observations = next_observations.copy()
             for i in range(num_envs):
-                agent.store_transition(
-                    state=states[i], 
-                    next_state=next_states[i], 
-                    observations=observations[i], 
-                    next_observations=next_observations[i],
-                    actions=actions_batch[i], 
-                    rewards=rewards[i], 
-                    dones=dones[i],
-                    team_skill=infos_batch[i]['team_skill'],
-                    agent_skills=infos_batch[i]['agent_skills'],
-                    action_logprobs=infos_batch[i]['action_logprobs'],
-                    values=infos_batch[i]['values'], # value现在来自agent.step
-                    log_probs=infos_batch[i]['log_probs'],
-                    skill_timer_for_env=infos_batch[i]['skill_timer'],
-                    env_id=i,
-                    rollout_step_idx=rollout_step
-                )
+                if dones[i] and 'terminal_state' in infos[i]:
+                    storage_next_states[i] = infos[i]['terminal_state']
+                if dones[i] and 'terminal_observation' in infos[i]:
+                    storage_next_observations[i] = infos[i]['terminal_observation']
 
+            agent.store_transition_batch(
+                states=states,
+                next_states=storage_next_states,
+                observations=observations,
+                next_observations=storage_next_observations,
+                actions=actions_batch,
+                rewards=rewards,
+                dones=dones,
+                infos_batch=infos_batch,
+                rollout_step_idx=rollout_step
+            )
+
+            # 6. 更新逐环境追踪器、日志和episode状态
+            for i in range(num_envs):
                 # 记录每一步的详细信息
                 reward_tracker.log_training_step(total_steps + i, i, rewards[i], info=infos[i])
 
@@ -2234,10 +2266,6 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 env_steps[i] += 1
                 episode_rewards_tracker[i] += rewards[i]
                 
-                # 记录性能指标
-                performance_monitor.record_step_time(time.time() - step_start_time)
-                performance_monitor.record_memory_usage()
-
                 # 如果启用调试模式，则记录可视化数据
                 if args.debug and visualizers is not None:
                     try:
@@ -2281,6 +2309,10 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                         main_logger.debug(f"[调试模式] 错误详情 - infos[{i}]键: {list(infos[i].keys()) if infos[i] else 'None'}")
 
                 if dones[i]:
+                    # 【关键修复】Episode结束时立即更新dones_tracker
+                    # 这确保了在下一次agent.step调用时，新Episode的第一步会正确触发技能重新分配
+                    dones_tracker[i] = True
+                    
                     n_episodes += 1
                     main_logger.info(f"环境 {i} 完成第 {n_episodes} 个 episode, 奖励: {episode_rewards_tracker[i]:.2f}, 步数: {env_steps[i]}")
                     
@@ -2377,11 +2409,20 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     episode_rewards_tracker[i] = 0
                     agent.reset_env_state(i)
             
-            # 5. 更新状态为下一步做准备
-            states = next_states # 在循环的下一次迭代开始时，'states' 将是正确的当前状态
+            # 7. 更新状态为下一步做准备。done环境如果collector提供reset_state，则下一步策略使用reset后的状态；
+            # rollout存储仍然使用上面的next_states（终止状态）来保持当前transition语义。
+            policy_next_states = next_states.copy()
+            for i in range(num_envs):
+                if dones[i] and 'reset_state' in infos[i]:
+                    policy_next_states[i] = infos[i]['reset_state']
+            states = policy_next_states
             observations = next_observations
             dones_tracker = dones  # 保存当前步的dones供下一步使用
             total_steps += num_envs
+            # 记录单个环境步的等效耗时，使steps_per_second表示总环境步吞吐。
+            performance_monitor.record_step_time((time.time() - step_start_time) / max(num_envs, 1))
+            if args.memory_monitor_interval <= 1 or rollout_step % args.memory_monitor_interval == 0:
+                performance_monitor.record_memory_usage()
 
             if total_steps >= config.total_timesteps:
                 break
@@ -2439,7 +2480,8 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 
                 # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
                 # 此处的 'states' 变量实际上是 rollout 循环结束时的 'next_states'
-                global_state_tensor = torch.FloatTensor(next_states[i]).unsqueeze(0).to(agent.device)
+                normalized_next_state = agent._normalize_states(next_states[i], update=False)
+                global_state_tensor = torch.FloatTensor(normalized_next_state).unsqueeze(0).to(agent.device)
                 team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
                 
                 # 【根本原因修复】从agent获取并传递正确的critic隐藏状态
@@ -2457,6 +2499,12 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                     team_skill_tensor,
                     critic_hidden_state=last_critic_hidden_state
                 )
+
+                if config.use_valuenorm and agent.value_norm_discoverer is not None:
+                    global_value_tensor = agent._denormalize_values(
+                        global_value_tensor,
+                        agent.value_norm_discoverer
+                    )
                 
                 last_values_predicted[i, :] = global_value_tensor.squeeze().item()
                 
@@ -2479,7 +2527,17 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 main_logger.debug(f"对环境 {worst_case_episodes} 的回报应用惩罚权重...")
                 agent.apply_reward_weighting(worst_case_episodes, config.worst_case_penalty_weight)
 
-            update_info = agent.update(steps_in_buffer=steps_in_rollout, last_values=last_values_predicted, dones=dones_tracker)
+            # 准备最后的状态和观测数据用于GAE引导价值计算
+            last_states_batch = states.copy()
+            last_observations_batch = observations.copy()
+
+            update_info = agent.update(
+                steps_in_buffer=steps_in_rollout,
+                last_values=last_values_predicted,
+                dones=dones_tracker,
+                last_state=last_states_batch,
+                last_observations=last_observations_batch
+            )
             update_times += 1
             elapsed = time.time() - start_time
 
@@ -2629,7 +2687,13 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
                 main_logger.info(f"数值稳定性统计: {stability_stats}")
         
         # 评估 (基于总步数和上次评估的时间)
-        if total_steps >= last_eval_step + config.eval_interval:
+        if (not args.disable_eval) and total_steps >= last_eval_step + config.eval_interval:
+            if eval_vec_env is None:
+                if eval_env_fns is None:
+                    raise RuntimeError("评估环境尚未创建，且未提供eval_env_fns用于延迟创建")
+                main_logger.info("延迟创建评估 SubprocVecEnv...")
+                eval_vec_env = SubprocVecEnv(eval_env_fns, start_method='spawn')
+                created_eval_vec_env = True
             main_logger.info(f"即将进行评估，将评估 {config.eval_episodes} 个episodes...")
             main_logger.info(f"当前步数: {total_steps}, 距离上次评估: {total_steps - last_eval_step} 步")
             # 使用 eval_vec_env 进行评估
@@ -2640,6 +2704,16 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
             eval_steps_history.append(total_steps)
             eval_mean_rewards_history.append(eval_reward)
             eval_std_rewards_history.append(eval_std)
+
+            # Optuna: 报告进度并支持剪枝
+            if trial is not None:
+                import optuna
+                # 报告当前评估奖励作为中间指标
+                trial.report(eval_reward, total_steps)
+
+                # 检查是否应该剪枝（提前终止表现不佳的实验）
+                if trial.should_prune():
+                    raise optuna.TrialPruned()
 
             # 保存最佳模型
             if eval_reward > best_reward:
@@ -2705,21 +2779,21 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     # 最终数据导出和统计
     main_logger.info("生成最终训练统计报告...")
     reward_tracker.export_training_data(total_steps, tb_manager.writer, args=args)
-    
+
     # 获取并打印训练摘要统计
     summary_stats = reward_tracker.get_summary_statistics()
     main_logger.info("\n===== 训练摘要统计 =====")
     main_logger.info(f"总训练步数: {summary_stats['total_steps']}")
     main_logger.info(f"总完成episodes: {summary_stats['total_episodes']}")
     main_logger.info(f"技能切换总次数: {summary_stats['skill_switches']}")
-    
+
     if 'reward_mean' in summary_stats:
         main_logger.info(f"平均episode奖励: {summary_stats['reward_mean']:.2f} ± {summary_stats['reward_std']:.2f}")
         main_logger.info(f"最大/最小episode奖励: {summary_stats['reward_max']:.2f}/{summary_stats['reward_min']:.2f}")
-    
+
     if 'team_skill_usage' in summary_stats:
         main_logger.info(f"团队技能使用分布: {summary_stats['team_skill_usage']}")
-    
+
     # 导出最终数据摘要到JSON文件
     import json
     final_summary_path = os.path.join(log_dir, 'final_training_summary.json')
@@ -2737,7 +2811,17 @@ def train(vec_env, eval_vec_env, config, args, device): # Add eval_vec_env param
     # 调用 on_training_end 回调
     for callback in callbacks:
         callback.on_training_end()
-    
+
+    # 为 Optuna 返回最佳评估奖励
+    if trial is not None:
+        # 将最佳奖励存储在agent对象中，供Optuna使用
+        agent.best_eval_reward = best_reward
+        main_logger.info(f"为Optuna记录最佳评估奖励: {best_reward:.3f}")
+
+    if created_eval_vec_env and eval_vec_env is not None:
+        eval_vec_env.close()
+        main_logger.info("延迟创建的评估环境已关闭")
+
     return agent
 
 # 评估函数
@@ -3000,15 +3084,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                         routing_paths=reward_info.get('routing_paths')
                     )
 
-                    # 【修复】恢复周期性拓扑图生成，但只生成拓扑图
-                    if env_steps[i] % 50 == 0:
-                        main_logger.info(f"在步骤 {env_steps[i]} 为评估环境 {i} 生成拓扑快照...")
-                        try:
-                            # 生成当前步骤的图像，只生成拓扑图
-                            visualizers[i].generate_plots(eval_step=eval_step, prefix=f'snapshot_step_{env_steps[i]}', topology_only=True)
-                        except Exception as e:
-                            main_logger.error(f"生成拓扑快照时出错: {e}")
-
                     # 实时渲染或录制视频
                     frame_to_process = None
                     if render and i == 0:
@@ -3016,14 +3091,16 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                             # render() 返回图像帧用于显示或保存
                             frame_to_process = vec_env.env_method('render', indices=[0])[0]
                             if frame_to_process is not None:
-                                # Matplotlib返回RGBA，需要转为BGR给OpenCV显示
+                                # Matplotlib返回RGBA，需要转为BGR给OpenCV显示。
                                 frame_bgr = cv2.cvtColor(frame_to_process, cv2.COLOR_RGBA2BGR)
-                                cv2.imshow(f'Evaluation Env {i}', frame_bgr)
-                                cv2.waitKey(1)
+                                try:
+                                    cv2.imshow(f'Evaluation Env {i}', frame_bgr)
+                                    cv2.waitKey(1)
+                                except Exception as e:
+                                    main_logger.warning(f"cv2.imshow 失败: {e}")
                         except Exception as e:
-                            main_logger.error(f"渲染错误: {e}")
-                            render = False # Disable rendering if it fails
-                    
+                            main_logger.error(f"渲染帧时出错: {e}")
+
                     if record_video and video_writers[i] is not None:
                         try:
                             # 如果之前没有为实时渲染获取帧，现在获取它
@@ -3123,7 +3200,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                 video_writers[i].release()
                 main_logger.info(f"环境 {i} 的视频已保存。")
         if render:
-            cv2.destroyAllWindows()
+            try:
+                cv2.destroyAllWindows()
+            except Exception as e:
+                main_logger.warning(f"cv2.destroyAllWindows 失败: {e}")
 
     mean_reward = np.mean(episode_rewards) if episode_rewards else 0
     std_reward = np.std(episode_rewards) if episode_rewards else 0
@@ -3366,18 +3446,71 @@ def main():
     config.use_opt = args.use_opt
     config.use_reward_annealing = args.use_reward_annealing
     config.use_lr_decay = args.use_lr_decay
+    if args.strict_hmasd_alignment is not None:
+        config.strict_hmasd_alignment = bool(args.strict_hmasd_alignment)
     
     main_logger.info("配置已从config_1.py加载，运行时开关参数已设置")
-    main_logger.info(f"OPT模块: {config.use_opt}, 权重退火: {config.use_reward_annealing}, 学习率衰减: {config.use_lr_decay}")
+    main_logger.info(
+        f"OPT模块: {config.use_opt}, 权重退火: {config.use_reward_annealing}, "
+        f"学习率衰减: {config.use_lr_decay}, 严格HMASD对齐: {getattr(config, 'strict_hmasd_alignment', True)}"
+    )
     
     # 获取计算设备
     device = get_device(args.device)
     
-    # 确定并行环境数量
-    num_envs = args.num_envs if args.num_envs > 0 else config.num_envs
+    # 确定并行环境数量，并同步写回config，确保buffer/batch尺寸与实际collector一致。
+    requested_backend = args.collector_backend
+    base_num_envs = args.num_envs if args.num_envs > 0 else config.num_envs
+    if requested_backend == 'auto':
+        explicit_sharding = args.num_workers > 0 or args.envs_per_worker > 0
+        cpu_count = os.cpu_count() or 1
+        args.collector_backend = 'sharded' if explicit_sharding or base_num_envs > cpu_count * 2 else 'subproc'
+        main_logger.info(
+            f"collector_backend=auto 已解析为 {args.collector_backend} "
+            f"(num_envs={base_num_envs}, cpu_count={cpu_count}, explicit_sharding={explicit_sharding})"
+        )
+
+    if args.collector_backend == 'sharded':
+        if args.num_envs > 0:
+            num_envs = int(args.num_envs)
+        elif args.num_workers > 0 and args.envs_per_worker > 0:
+            num_envs = int(args.num_workers * args.envs_per_worker)
+        else:
+            num_envs = int(config.num_envs)
+
+        if args.num_workers > 0 and args.envs_per_worker <= 0:
+            num_workers = int(args.num_workers)
+            envs_per_worker = int(np.ceil(num_envs / num_workers))
+        else:
+            envs_per_worker = args.envs_per_worker if args.envs_per_worker > 0 else min(8, max(1, num_envs))
+            num_workers = args.num_workers if args.num_workers > 0 else max(1, int(np.ceil(num_envs / envs_per_worker)))
+
+        if num_workers * envs_per_worker < num_envs:
+            num_workers = int(np.ceil(num_envs / envs_per_worker))
+            main_logger.warning(
+                f"分片容量小于num_envs，已将num_workers调整为{num_workers}以容纳{num_envs}个环境"
+            )
+        args.num_workers = num_workers
+        args.envs_per_worker = envs_per_worker
+    else:
+        num_envs = args.num_envs if args.num_envs > 0 else config.num_envs
+        args.num_workers = 0
+        args.envs_per_worker = 0
     eval_rollout_threads = args.eval_rollout_threads if args.eval_rollout_threads > 0 else config.eval_rollout_threads
+
+    config.num_envs = int(num_envs)
+    config.eval_rollout_threads = int(eval_rollout_threads)
+    if args.rollout_length > 0:
+        config.rollout_length = int(args.rollout_length)
+    if args.total_timesteps > 0:
+        config.total_timesteps = int(args.total_timesteps)
+    if args.eval_interval > 0:
+        config.eval_interval = int(args.eval_interval)
     
-    main_logger.info(f"使用 {num_envs} 个并行训练环境和 {eval_rollout_threads} 个并行评估环境")
+    main_logger.info(
+        f"使用 {num_envs} 个并行训练环境和 {eval_rollout_threads} 个并行评估环境 "
+        f"(collector={args.collector_backend}, workers={args.num_workers}, envs_per_worker={args.envs_per_worker}, metrics={args.metrics_mode})"
+    )
     
     # 创建环境构造函数列表 (使用修改后的 make_env)
     # 确保基础种子与命令行参数一致
@@ -3397,7 +3530,7 @@ def main():
         seed=base_seed + num_envs,
         config=config,
         scenario=args.scenario,
-        render_mode="human" if args.render and i == 0 else "rgb_array" if args.record_video else None
+        render_mode="rgb_array" if args.render or args.record_video else None
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -3414,11 +3547,20 @@ def main():
     # 从临时环境获取维度信息
     state_dim = temp_env.state_dim
     obs_dim = temp_env.obs_dim
+    action_dim = getattr(temp_env, 'action_dim', None)
+    if action_dim is None:
+        action_space = getattr(temp_env, 'action_space', None)
+        if hasattr(action_space, 'n'):
+            action_dim = action_space.n
+        elif hasattr(action_space, 'shape') and action_space.shape:
+            action_dim = action_space.shape[-1]
     
     # 更新配置维度（n_agents已在之前设置）
     config.update_env_dims(state_dim, obs_dim)
+    if action_dim is not None:
+        config.action_dim = int(action_dim)
     
-    main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}")
+    main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}, action_dim={config.action_dim}")
     main_logger.info(f"确认无人机数量: n_agents={config.n_agents}")
 
     # 打印环境参数以供确认
@@ -3574,21 +3716,40 @@ def main():
     temp_env.close()
     main_logger.info("临时环境已关闭")
 
-    # 现在创建向量化环境 (使用 SubprocVecEnv)
-    main_logger.info("创建 SubprocVecEnv...")
-    train_vec_env = SubprocVecEnv(train_env_fns, start_method='spawn') # Use spawn for better compatibility
-    eval_vec_env = SubprocVecEnv(eval_env_fns, start_method='spawn')
-    main_logger.info("SubprocVecEnv 已创建。")
+    # 现在按运行模式创建向量化环境。训练模式下评估环境延迟创建。
+    train_vec_env = None
+    eval_vec_env = None
+    if args.mode == 'train':
+        if args.collector_backend == 'sharded':
+            main_logger.info("创建 ShardedSubprocVecEnv...")
+            train_vec_env = ShardedSubprocVecEnv(
+                train_env_fns,
+                num_workers=args.num_workers,
+                envs_per_worker=args.envs_per_worker,
+                metrics_mode=args.metrics_mode,
+                start_method='spawn'
+            )
+            main_logger.info("ShardedSubprocVecEnv 已创建。")
+        else:
+            main_logger.info("创建 SubprocVecEnv...")
+            train_vec_env = SubprocVecEnv(train_env_fns, start_method='spawn') # Use spawn for better compatibility
+            main_logger.info("SubprocVecEnv 已创建。")
+    elif args.mode == 'eval':
+        main_logger.info("创建评估 SubprocVecEnv...")
+        eval_vec_env = SubprocVecEnv(eval_env_fns, start_method='spawn')
+        main_logger.info("评估 SubprocVecEnv 已创建。")
 
     main_logger.info(f"使用论文中的超参数: n_Z={config.n_Z}, n_z={config.n_z}, k={config.k}, lambda_e={config.lambda_e}")
 
     if args.mode == 'train':
         # Pass eval_vec_env to the train function
-        agent = train(train_vec_env, eval_vec_env, config, args, device)
+        agent = train(train_vec_env, eval_vec_env, config, args, device, eval_env_fns=eval_env_fns)
     elif args.mode == 'eval':
         # 加载模型
         if not os.path.exists(args.model_path):
             main_logger.error(f"模型文件 {args.model_path} 不存在")
+            if eval_vec_env is not None:
+                eval_vec_env.close()
             return
         
         # 更新环境维度 (在 evaluate 函数内部处理，或在这里获取)
@@ -3619,8 +3780,10 @@ def main():
         main_logger.error(f"未知的运行模式: {args.mode}")
     
     # 关闭环境
-    train_vec_env.close()
-    eval_vec_env.close()
+    if train_vec_env is not None:
+        train_vec_env.close()
+    if eval_vec_env is not None:
+        eval_vec_env.close()
 
 # 全局队列引用，供子进程使用
 _shared_log_queue = None
@@ -3671,10 +3834,17 @@ def env_log(level, message, queue=None):
 if __name__ == "__main__":
     # 设置多进程启动方法
     mp.set_start_method('spawn', force=True)
+    
     try:
         main()
+    except KeyboardInterrupt:
+        print("\n训练被用户中断")
+    except Exception as e:
+        print(f"\n训练过程中发生错误: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
-        # 确保关闭日志系统，刷新所有日志
+        # 1. 确保关闭日志系统，刷新所有日志
         try:
             shutdown_logging()
             print("日志系统已关闭")

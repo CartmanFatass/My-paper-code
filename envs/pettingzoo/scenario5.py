@@ -209,6 +209,13 @@ class UAVBeliefMapEnv(ParallelEnv):
         # 初始化地面基站
         self._init_ground_bs()
         
+        # 【关键修复】初始化状态变量，防止在reset()之前调用render()时出错
+        self.current_step = 0
+        self.uav_positions = np.zeros((self.n_uavs, 3))
+        self.user_positions = np.zeros((self.n_users, 3))
+        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
+        self.routing_paths = {}
+        
         # 渲染相关
         self.viewer = None
         self.fig = None

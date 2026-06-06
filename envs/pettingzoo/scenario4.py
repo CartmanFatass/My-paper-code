@@ -6,7 +6,13 @@ matplotlib.use('Agg')
 from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict
 from scipy.spatial.distance import cdist
-from filterpy.kalman import KalmanFilter
+try:
+    from filterpy.kalman import KalmanFilter
+except ImportError as exc:
+    raise ImportError(
+        "envs.pettingzoo.scenario4 requires the 'filterpy' package. "
+        "Install it with `pip install filterpy` or use scenario4_discrete.py if Kalman filtering is not needed."
+    ) from exc
 
 
 class UAVForcedRelayEnv(ParallelEnv):
@@ -1086,17 +1092,19 @@ class UAVForcedRelayEnv(ParallelEnv):
             sinr_stats (dict): 包含SINR分布统计的字典。
             qos_score (float): 基于SINR的服务质量得分 [0, 1]。
         """
-        sinr_values = []
-        # 遍历所有有效连接的用户并收集他们的SINR值
-        # 【修正】直接使用 self.connections 和 self.routing_paths 来确定有效连接
+        best_sinr_by_user = {}
+        # 遍历所有有效连接的用户，并按用户去重。软切换时同一用户可能由多个UAV服务。
         for uav_idx in range(self.n_uavs):
             if uav_idx in self.routing_paths:
                 for user_idx in range(self.n_users):
                     if self.connections[uav_idx, user_idx]:
                         sinr_db = self.sinr_matrix[uav_idx, user_idx]
-                        sinr_values.append(sinr_db)
+                        best_sinr_by_user[user_idx] = max(
+                            best_sinr_by_user.get(user_idx, -np.inf),
+                            sinr_db
+                        )
 
-        if not sinr_values:
+        if not best_sinr_by_user:
             stats = {
                 "sinr_dist_below_3dB": 1.0, "sinr_dist_3_to_10dB": 0.0,
                 "sinr_dist_10_to_20dB": 0.0, "sinr_dist_above_20dB": 0.0,
@@ -1105,7 +1113,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             }
             return stats, 0.0
 
-        sinr_array = np.array(sinr_values)
+        sinr_array = np.array(list(best_sinr_by_user.values()))
         
         # 统计SINR分布
         total_effective_users = len(sinr_array)
@@ -1583,6 +1591,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.routing_paths = {}
         self.handover_count = 0
         self.ping_pong_count = 0
+        self.prev_handover_count = 0
+        self.prev_ping_pong_count = 0
         self.user_serving_uav.fill(-1)
         self.user_serving_sets = [[] for _ in range(self.n_users)]
         self.serving_set_changes = 0

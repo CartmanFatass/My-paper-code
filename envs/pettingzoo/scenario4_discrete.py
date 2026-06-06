@@ -92,6 +92,20 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.w_freshness_penalty = kwargs.get('w_freshness_penalty', 0.5)  # awareness模式需要
             self.w_first_contact = kwargs.get('w_first_contact', 0.1)  # load_balance模式的催化剂奖励
             self.w_repulsion = kwargs.get('w_repulsion', 0.3)  # 斥力场惩罚权重
+            
+            # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
+            # 基于大疆(DJI)等典型四旋翼参数估算
+            # 假设 max_speed = 30 m/s
+            # 最大水平能耗因子: 1.0
+            # 最大垂直能耗因子: 2.5 (垂直机动代价远高于水平)
+            self.energy_weight_xy = kwargs.get('energy_weight_xy', 1.0)
+            self.energy_weight_z = kwargs.get('energy_weight_z', 2.5)
+            
+            # 计算理论最大单步能耗代价 (用于归一化)
+            # Max cost = (weight_xy * max_speed) + (weight_z * max_speed)
+            # 注意：实际上无人机很难同时在水平和垂直方向都达到最大速度，但作为归一化分母足够安全
+            self.max_step_energy_cost = (self.energy_weight_xy * self.max_speed + 
+                                         self.energy_weight_z * self.max_speed) * self.time_step
 
             self.outage_sinr_threshold_db = kwargs.get('outage_sinr_threshold_db', -5)
             self.predictive_handover = kwargs.get('predictive_handover', False)
@@ -173,6 +187,15 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.w_first_contact = getattr(config, 'w_first_contact', 0.1)  # load_balance模式的催化剂奖励
             self.w_repulsion = getattr(config, 'w_repulsion', 0.3)  # 斥力场惩罚权重
             
+            # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
+            # 基于大疆(DJI)等典型四旋翼参数估算
+            self.energy_weight_xy = getattr(config, 'energy_weight_xy', 1.0)
+            self.energy_weight_z = getattr(config, 'energy_weight_z', 2.5)
+            
+            # 计算理论最大单步能耗代价 (用于归一化)
+            self.max_step_energy_cost = (self.energy_weight_xy * self.max_speed + 
+                                         self.energy_weight_z * self.max_speed) * self.time_step
+            
             self.outage_sinr_threshold_db = getattr(config, 'outage_sinr_threshold_db', -5)
             self.predictive_handover = getattr(config, 'predictive_handover', False)
 
@@ -205,6 +228,36 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.max_observed_overloaded_uavs = getattr(config, 'max_observed_overloaded_uavs', 3) # 新增：观测过载无人机的数量
             self.routing_protocol = getattr(config, 'routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
             self.action_space_type = getattr(config, 'action_space_type', 'discrete')
+
+        # === 无人机动力学参数 (基于 IEEE TWC 论文: Zeng et al. 2019) ===
+        # 参考型号: 类似 DJI Phantom 4 的小型旋翼机
+        self.P0 = 79.86  # 悬停叶片轮廓功率 (W)
+        self.Pi = 88.63  # 悬停诱导功率 (W)
+        self.U_tip = 120 # 叶尖速度 (m/s)
+        self.v0 = 4.03   # 平均诱导速度 (m/s)
+        self.d0 = 0.6    # 机身阻力系数
+        self.rho = 1.225 # 空气密度 (kg/m^3)
+        self.s = 0.05    # 旋翼实度
+        self.A = 0.503   # 桨盘面积 (m^2)
+        
+        # 预计算常数项，减少step中的计算量
+        self.k1 = 3 / (self.U_tip ** 2)
+        self.k2 = 1 / (2 * self.v0 ** 2) # 用于 1/(2v0^2)
+        self.k3 = 0.5 * self.d0 * self.rho * self.s * self.A
+        
+        # 垂直飞行能耗权重 (近似处理: 爬升功率 = mg * Vz)
+        # 假设无人机质量 m=1.5kg, g=9.8 => mg ≈ 15N
+        # 垂直功率 P_z ≈ 15 * Vz (Watts)
+        self.P_z_coeff = 15.0 
+        
+        # 归一化基准：计算最大速度下的功率，用于将惩罚缩放到 [0,1]
+        # 假设最大水平速度和垂直速度
+        # 这里的 max_speed 来自 config
+        self.max_power_consumption = self._calculate_power_consumption(self.max_speed, self.max_speed) if hasattr(self, 'max_speed') else 300.0 # 默认给个值
+        
+        # 惩罚系数：决定能耗在总奖励中的占比
+        # 如果设为 0.05，意味着满功率飞行的惩罚相当于损失了 5% 的覆盖率
+        self.w_energy = 0.05
             
         # HGGR 分层路由参数
         self.hggr_update_interval = getattr(config, 'k', 10) if config else 10 # 默认为10
@@ -244,6 +297,13 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         # 初始化随机数生成器
         self.np_random = np.random.RandomState(self.seed_val)
+        
+        # 【关键修复】初始化状态变量，防止在reset()之前调用render()时出错
+        self.current_step = 0
+        self.uav_positions = np.zeros((self.n_uavs, 3))
+        self.user_positions = np.zeros((self.n_users, 3))
+        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
+        self.routing_paths = {}
 
         # 新增: 探索发现相关的状态变量
         self.discovered_users_this_episode = set()
@@ -328,10 +388,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         else:
             self.obs_dim = base_obs_dim + self.max_observed_users * 5 # 4 -> 5
         
+        action_mask_dim = self.n_discrete_actions if self.action_space_type == 'discrete' else 3
         self.observation_spaces = {
             agent: Dict({
                 "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
-                "action_mask": Box(low=0, high=1, shape=(3,))
+                "action_mask": Box(low=0, high=1, shape=(action_mask_dim,))
             }) for agent in self.possible_agents
         }
         if self.action_space_type == 'discrete':
@@ -410,6 +471,33 @@ class UAVForcedRelayEnv(ParallelEnv):
             except Exception as e:
                 print(f"路由协议初始化失败: {e}")
                 self.router = None
+
+    def _calculate_power_consumption(self, v_xy, v_z):
+        """
+        基于物理模型的功率计算 (Zeng et al. 2019)
+        返回单位: Watts
+        """
+        # 1. 叶片轮廓功率 (Profile Power)
+        # P_profile = P0 * (1 + 3 * V_xy^2 / U_tip^2)
+        p_profile = self.P0 * (1 + self.k1 * (v_xy ** 2))
+        
+        # 2. 诱导功率 (Induced Power)
+        # P_induced = Pi * sqrt( sqrt(1 + V_xy^4 / (4*v0^4)) - V_xy^2 / (2*v0^2) )
+        # 注意数值稳定性
+        term1 = 1 + (v_xy ** 4) / (4 * self.v0 ** 4)
+        term2 = (v_xy ** 2) * self.k2
+        # 【关键修复】增加 np.maximum(0, ...) 以防止浮点误差导致负数
+        p_induced = self.Pi * np.sqrt(np.maximum(0, np.sqrt(term1) - term2))
+        
+        # 3. 寄生功率 (Parasitic Power) - 仅在高速时显著
+        # P_parasitic = 0.5 * d0 * rho * s * A * V_xy^3
+        p_parasitic = self.k3 * (v_xy ** 3)
+        
+        # 4. 垂直功率 (Vertical Power)
+        # 简化模型：主要惩罚爬升，对下降也给予一定惩罚以防震荡
+        p_vertical = self.P_z_coeff * abs(v_z)
+        
+        return p_profile + p_induced + p_parasitic + p_vertical
 
     def get_state_dim(self):
         """返回全局状态维度"""
@@ -1524,8 +1612,8 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def _render_frame(self):
         """
-        渲染单帧 - 增强版2D视图
-        【多进程修复版】: 移除环境内的后端检测，依赖训练脚本进行设置
+        渲染单帧 - 3D 视图 (优化版)
+        【多进程修复版v2】: 在每次渲染前确保matplotlib后端正确配置
         """
         import os
         import threading
@@ -1538,130 +1626,156 @@ class UAVForcedRelayEnv(ParallelEnv):
         with self._render_lock:
             try:
                 import matplotlib
-                import matplotlib.pyplot as plt
-                from matplotlib.patches import Circle, Arrow
-                
-                # 【诊断日志】在每次渲染时打印当前后端，以便在子进程中进行调试
                 pid = os.getpid()
                 current_backend = matplotlib.get_backend()
-                print(f"[PID: {pid}] 开始渲染 - Matplotlib后端: {current_backend}")
-
+                
+                # 【关键修复】在子进程中，每次渲染前都确保使用Agg后端
+                if current_backend.lower() != 'agg':
+                    # print(f"[PID: {pid}] 检测到非Agg后端 ({current_backend})，正在切换...")
+                    matplotlib.use('Agg', force=True)
+                    # print(f"[PID: {pid}] 已切换到Agg后端")
+                    import importlib
+                    import matplotlib.pyplot
+                    importlib.reload(matplotlib.pyplot)
+                
+                import matplotlib.pyplot as plt
+                from matplotlib.patches import Circle
+                from mpl_toolkits.mplot3d import Axes3D
+                import mpl_toolkits.mplot3d.art3d as art3d
+                
             except ImportError as e:
                 print(f"[PID: {os.getpid()}] 渲染需要matplotlib库: {e}")
-                print(f"[PID: {os.getpid()}] 启用备用渲染策略：纯数据记录模式")
                 return self._fallback_render_strategy()
             except Exception as e:
                 print(f"[PID: {os.getpid()}] 导入matplotlib时出错: {e}")
-                print(f"[PID: {os.getpid()}] 错误堆栈: {traceback.format_exc()}")
-                print(f"[PID: {os.getpid()}] 启用备用渲染策略：纯数据记录模式")
                 return self._fallback_render_strategy()
         
         if self.fig is None:
-            self.fig = plt.figure(figsize=(12, 10))
-            self.ax = self.fig.add_subplot(111)
+            self.fig = plt.figure(figsize=(14, 10)) # 稍微加宽一点
+            self.ax = self.fig.add_subplot(111, projection='3d')
         else:
             self.ax.clear()
 
-        # 设置坐标轴 (2D)
+        # 设置坐标轴 (3D)
         self.ax.set_xlim(0, self.area_size)
         self.ax.set_ylim(0, self.area_size)
+        self.ax.set_zlim(0, 300) # Z轴限制：假设最大高度300米
+        
         self.ax.set_xlabel('X (m)')
         self.ax.set_ylabel('Y (m)')
-        self.ax.set_title(f'UAV Relay Network with User Mobility - Step: {self.current_step}/{self.max_steps}')
-        self.ax.set_aspect('equal', adjustable='box')
+        self.ax.set_zlabel('Height (m)')
+        
+        # 标题只显示当前步数
+        self.ax.set_title(f'UAV Relay Network (3D) - Step: {self.current_step}')
+        
+        # 调整视角 (仰角 30 度，方位角 45 度)
+        self.ax.view_init(elev=30, azim=45)
 
-        # 绘制用户簇范围
+        # 绘制用户簇范围 (投射在 z=0 平面)
         if self.user_movement_model == "rpgm" and hasattr(self, 'cluster_centers_history'):
-            cluster_colors = plt.cm.get_cmap('tab10', self.n_clusters)
+            try:
+                import matplotlib as mpl
+                cluster_colors = mpl.colormaps['tab10'].resampled(self.n_clusters)
+            except AttributeError:
+                cluster_colors = plt.cm.get_cmap('tab10', self.n_clusters)
+            
             for i in range(self.n_clusters):
                 center = self.cluster_centers_history[i]
-                # 使用 cluster_std 的两倍作为可视化半径
                 radius = self.cluster_std * 2
-                circle = Circle(center, radius, color=cluster_colors(i), alpha=0.15, zorder=1)
+                circle = Circle(center, radius, color=cluster_colors(i), alpha=0.1)
                 self.ax.add_patch(circle)
-                
-                # 绘制簇中心移动速度箭头
-                if hasattr(self, 'cluster_velocities'):
-                    velocity = self.cluster_velocities[i]
-                    if np.linalg.norm(velocity) > 0.1:
-                        self.ax.arrow(center[0], center[1], velocity[0] * 5, velocity[1] * 5, 
-                                      head_width=30, head_length=40, fc=cluster_colors(i), ec=cluster_colors(i), zorder=10)
+                art3d.pathpatch_2d_to_3d(circle, z=0, zdir="z")
 
-        # 绘制用户
+        # 绘制用户 (位于地面 z=0)
         if self.user_positions is not None:
             user_x = self.user_positions[:, 0]
             user_y = self.user_positions[:, 1]
+            user_z = np.zeros_like(user_x)
             
-            # 根据簇分配为用户着色
             if self.user_movement_model == "rpgm" and hasattr(self, 'user_cluster_assignments'):
                 colors = [cluster_colors(c) for c in self.user_cluster_assignments]
-                self.ax.scatter(user_x, user_y, c=colors, marker='.', label='Users', zorder=5)
+                self.ax.scatter(user_x, user_y, user_z, c=colors, marker='.', label='Users', alpha=0.6)
             else:
-                self.ax.scatter(user_x, user_y, c='blue', marker='.', label='Users', zorder=5)
-            
-            # 绘制用户移动速度箭头
-            if hasattr(self, 'user_velocities'):
-                for i in range(self.n_users):
-                    pos = self.user_positions[i, :2]
-                    vel = self.user_velocities[i, :2]
-                    if np.linalg.norm(vel) > 0.1:
-                        self.ax.arrow(pos[0], pos[1], vel[0] * 5, vel[1] * 5, 
-                                      head_width=15, head_length=20, fc='gray', ec='gray', alpha=0.6, zorder=4)
+                self.ax.scatter(user_x, user_y, user_z, c='blue', marker='.', label='Users', alpha=0.6)
 
-        # 绘制无人机和连接
+        # 绘制无人机和连接 (3D)
         if self.uav_positions is not None:
+            # 绘制无人机主体
+            uav_xs = self.uav_positions[:, 0]
+            uav_ys = self.uav_positions[:, 1]
+            uav_zs = self.uav_positions[:, 2]
+            
+            self.ax.scatter(uav_xs, uav_ys, uav_zs, c='red', marker='^', s=100, label='UAVs')
+            
+            # 为每个无人机绘制投影线和连接
             for i in range(self.n_uavs):
                 uav_pos = self.uav_positions[i]
-                self.ax.scatter(uav_pos[0], uav_pos[1], c='red', marker='^', s=120, label=f'UAV {i}' if i == 0 else "", zorder=8)
-                self.ax.text(uav_pos[0] + 20, uav_pos[1] + 20, f"{int(uav_pos[2])}m", fontsize=8, color='black', zorder=9)
                 
-                # 绘制到用户的连接
+                # 投影线 (Ground Projection)
+                self.ax.plot([uav_pos[0], uav_pos[0]], [uav_pos[1], uav_pos[1]], [0, uav_pos[2]], 
+                             'k--', alpha=0.1, linewidth=0.5)
+                
+                # 绘制连接线 (UAV -> User)
                 if self.connections is not None:
-                    for j in range(self.n_users):
-                        if self.connections[i, j]:
-                            user_pos = self.user_positions[j]
-                            self.ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], 'g-', alpha=0.4, zorder=3)
-        
-        # 绘制地面基站
+                    # 找出连接的用户
+                    connected_users = np.where(self.connections[i])[0]
+                    if len(connected_users) > 0:
+                        # 批量绘制线段以提高性能
+                        for user_idx in connected_users:
+                            user_pos = self.user_positions[user_idx]
+                            # 线段: UAV(x,y,z) -> User(x,y,0)
+                            self.ax.plot([uav_pos[0], user_pos[0]], 
+                                         [uav_pos[1], user_pos[1]], 
+                                         [uav_pos[2], 0], 
+                                         'g-', alpha=0.15, linewidth=0.5)
+
+        # 绘制地面基站 (3D)
         if self.ground_bs_positions is not None:
             bs_x = self.ground_bs_positions[:, 0]
             bs_y = self.ground_bs_positions[:, 1]
-            self.ax.scatter(bs_x, bs_y, c='black', marker='s', s=150, label='Ground BS', zorder=7)
+            bs_z = self.ground_bs_positions[:, 2]
+            self.ax.scatter(bs_x, bs_y, bs_z, c='black', marker='s', s=150, label='Ground BS')
 
-        # 绘制路由路径
+        # 绘制路由路径 (回程链路, 3D)
         if hasattr(self, 'routing_paths'):
             for uav_idx, (path, capacity) in self.routing_paths.items():
                 for i in range(len(path) - 1):
                     pos1 = self._get_node_pos(path[i])
                     pos2 = self._get_node_pos(path[i+1])
-                    self.ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 'y--', alpha=0.8, linewidth=2.0, zorder=2)
+                    
+                    if pos1 is not None and pos2 is not None:
+                        # 确保 z 坐标存在 (如果是用户位置可能需要处理，但路由节点通常是 UAV 或 BS)
+                        z1 = pos1[2] if len(pos1) > 2 else 0
+                        z2 = pos2[2] if len(pos2) > 2 else 0
+                        
+                        self.ax.plot([pos1[0], pos2[0]], 
+                                     [pos1[1], pos2[1]], 
+                                     [z1, z2], 
+                                     'y--', alpha=0.8, linewidth=2.0)
         
-        # 添加图例
+        # 添加图例 (去重)
         handles, labels = self.ax.get_legend_handles_labels()
         by_label = dict(zip(labels, handles))
-        self.ax.legend(by_label.values(), by_label.keys(), loc='upper right')
+        self.ax.legend(by_label.values(), by_label.keys(), loc='upper right', fontsize='small')
         
-        # 添加增强的统计信息
+        # 添加统计信息 (在 2D 坐标系中显示)
         if hasattr(self, 'reward_info'):
             reward_info = self.reward_info
             
-            # 构建信息文本
             info_text = (
                 f'Coverage: {reward_info.get("coverage_ratio", 0):.2%}\n'
-                f'Effective Users: {reward_info.get("effective_connected_users", 0)} / {self.n_users}\n'
-                f'Connected UAVs: {reward_info.get("connected_uavs", 0)} / {self.n_uavs}\n'
+                f'Eff. Users: {reward_info.get("effective_connected_users", 0)} / {self.n_users}\n'
+                f'Conn. UAVs: {reward_info.get("connected_uavs", 0)} / {self.n_uavs}\n'
                 f'Avg Hops: {reward_info.get("avg_hops", 0):.2f}\n'
-                f'Sys Throughput: {reward_info.get("system_throughput_mbps", 0):.2f} Mbps\n'
-                f'Health Score: {reward_info.get("rt_final_health_score", 0):.3f}'
+                f'Sys T-put: {reward_info.get("system_throughput_mbps", 0):.2f} Mbps'
             )
             
-            # 在图表左下角添加一个带背景框的文本块
-            self.ax.text(0.02, 0.02, info_text, transform=self.ax.transAxes, fontsize=10,
-                         verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.8))
+            # 使用 text2D 在固定的 2D 屏幕坐标上绘制
+            self.ax.text2D(0.02, 0.02, info_text, transform=self.ax.transAxes, fontsize=9,
+                           verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', fc='white', alpha=0.7))
             
-            # 目标达成状态
             if reward_info.get("target_coverage_achieved", False):
-                self.ax.text(0.5, 1.02, '✓ Target Coverage Achieved!', transform=self.ax.transAxes, 
+                self.ax.text2D(0.5, 0.95, '✓ Target Coverage Achieved!', transform=self.ax.transAxes, 
                              color='green', weight='bold', ha='center')
         
         try:
@@ -1675,29 +1789,20 @@ class UAVForcedRelayEnv(ParallelEnv):
                 plt.pause(0.01)
                 return None
             except Exception as e:
-                print(f"人类模式渲染时出错: {e}")
+                # print(f"人类模式渲染时出错: {e}")
                 return None
         elif self.render_mode == "rgb_array":
-            # 【关键修复】确保在 rgb_array 模式下返回有效的图像数组
             try:
                 from matplotlib.backends.backend_agg import FigureCanvasAgg
                 canvas = FigureCanvasAgg(self.fig)
                 canvas.draw()
-                # 获取 RGBA 缓冲区并转换为 RGB
                 image_rgba = np.array(canvas.renderer.buffer_rgba())
-                # 转换为 RGB (移除 alpha 通道)
                 image_rgb = image_rgba[:, :, :3]
-                print(f"成功生成 {image_rgb.shape} 的渲染帧")
                 return image_rgb
             except Exception as e:
                 print(f"渲染 rgb_array 时出错: {e}")
-                print(f"错误类型: {type(e).__name__}")
-                import traceback
-                print(f"错误堆栈: {traceback.format_exc()}")
-                # 返回一个默认的黑色图像而不是 None
                 return np.zeros((600, 800, 3), dtype=np.uint8)
         else:
-            # 其他模式或未指定模式，返回 None
             return None
     
     def _fallback_render_strategy(self):
@@ -2816,6 +2921,106 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 更新日志
             reward_components["freshness_penalty"] = freshness_penalty
             reward_components["awareness_reward"] = shared_reward
+        elif self.reward_type == "test_reward":
+            # ===== test_reward Ver2.0: 基于真实物理能耗模型 =====
+            
+            # --- Part 1: 基于 IEEE TWC (Zeng et al. 2019) 的物理能耗惩罚 ---
+            total_power_watts = 0.0
+            
+            for i, agent in enumerate(self.agents):
+                if agent in actions:
+                    # 获取速度 (增加安全检查)
+                    if self.action_space_type == 'discrete':
+                        action = actions[agent]
+                        if action in self.action_to_velocity:
+                            vel = self.action_to_velocity[action]
+                        else:
+                            # 默认悬停
+                            vel = self.action_to_velocity[0]
+                    else:
+                        vel = actions[agent] * self.max_speed
+                    
+                    v_xy = np.linalg.norm(vel[:2])
+                    v_z = vel[2] # 保留符号，虽然我们在计算功率时用了abs
+                    
+                    # 计算该无人机的瞬时功率 (W)
+                    power = self._calculate_power_consumption(v_xy, v_z)
+                    
+                    # 我们主要惩罚 "额外的运动能耗"，而不是悬停能耗
+                    # 因此减去悬停功率 (v=0时的功率)
+                    # P_hover = P0 + Pi ≈ 168W
+                    # 这样静止时的惩罚为 0
+                    p_hover = self.P0 + self.Pi
+                    extra_power = max(0, power - p_hover)
+                    
+                    total_power_watts += extra_power
+
+            # 归一化处理
+            # 这里的 max_power_consumption 也是减去悬停功率后的值
+            max_extra_power = self.max_power_consumption - (self.P0 + self.Pi)
+            # 防止除以零或过小
+            if max_extra_power <= 1e-3:
+                max_extra_power = 1.0
+            
+            normalized_energy_penalty = total_power_watts / (self.n_uavs * max_extra_power)
+            
+            # 【安全保护】防止惩罚值爆炸
+            if normalized_energy_penalty > 2.0:
+                # print(f"Warning: Energy penalty exploded ({normalized_energy_penalty:.2f}). Total Watts: {total_power_watts:.2f}, Max Extra/UAV: {max_extra_power:.2f}")
+                normalized_energy_penalty = 2.0 # 软截断
+            
+            # --- Part 2: 稳定性迟滞惩罚 (Hysteresis) ---
+            # 比较当前连接状态与上一步连接状态
+            current_connected = set()
+            prev_connected = getattr(self, '_prev_connected_ues', set())
+            
+            for user_idx in range(self.n_users):
+                for uav_idx in range(self.n_uavs):
+                    if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
+                        current_connected.add(user_idx)
+                        break
+            
+            # 计算新上线和掉线的用户数量
+            new_connected = current_connected - prev_connected  # 新上线
+            disconnected = prev_connected - current_connected   # 掉线
+            
+            # 迟滞系数：掉线惩罚是上线收益的2.5倍
+            hysteresis_ratio = 2.5
+            connection_gain = len(new_connected) * 1.0
+            disconnection_loss = len(disconnected) * hysteresis_ratio
+            
+            # 归一化迟滞惩罚到 [-1, 1]
+            # 正值表示净收益，负值表示净损失
+            if self.n_users > 0:
+                hysteresis_score = (connection_gain - disconnection_loss) / self.n_users
+            else:
+                hysteresis_score = 0.0
+            hysteresis_score = np.clip(hysteresis_score, -1.0, 1.0)
+            
+            # 保存当前状态用于下一步
+            self._prev_connected_ues = current_connected.copy()
+            
+            # --- Part 3: 组合最终奖励 ---
+            # 基础覆盖率奖励 (使用已计算的覆盖率)
+            coverage_reward = self.reward_info.get("coverage_ratio", 0)
+            
+            # 组合公式：
+            # R = w_cov * coverage - w_energy * energy_penalty + w_hysteresis * hysteresis_score
+            w_coverage = 0.5
+            # w_energy 建议 0.05 ~ 0.1, 使用初始化时设定的值
+            w_energy = self.w_energy 
+            w_hysteresis = 0.3
+            
+            shared_reward = (w_coverage * coverage_reward - 
+                            w_energy * normalized_energy_penalty + 
+                            w_hysteresis * hysteresis_score)
+            
+            # 更新日志
+            reward_components["test_reward"] = shared_reward
+            reward_components["energy_penalty"] = normalized_energy_penalty
+            reward_components["hysteresis_score"] = hysteresis_score
+            reward_components["coverage_component"] = coverage_reward
+            reward_components["total_power_watts"] = total_power_watts # 记录总功率以便调试
         else:
             # 默认使用naive模式
             coverage_ratio = self.reward_info.get("coverage_ratio", 0)
@@ -3279,7 +3484,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         obs = np.concatenate(obs_components)
         
         # 动作掩码（这里我们不限制动作，所以全为1）
-        action_mask = np.ones(3)
+        action_mask_dim = self.n_discrete_actions if self.action_space_type == 'discrete' else 3
+        action_mask = np.ones(action_mask_dim)
         
         return {"obs": obs, "action_mask": action_mask}
 

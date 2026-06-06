@@ -227,9 +227,9 @@ class HMASDVecEnvWrapper(VecEnvWrapper):
                 self.episode_lengths[i] = 0.0
                 self.episode_count += 1
                 
-                # 清理智能体的环境状态
-                if self.agent is not None and hasattr(self.agent, 'reset_env_state'):
-                    self.agent.reset_env_state(i)
+                # 不在 wrapper 内重置 agent 状态。
+                # 训练/评估循环需要先用 terminal transition 写入 buffer，
+                # 然后再调用 agent.reset_env_state(i)，否则会提前清掉高层 pending 样本。
         
         return obs, rewards, dones, infos
 

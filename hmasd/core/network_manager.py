@@ -32,7 +32,7 @@ class NetworkManager:
     def _create_networks(self):
         """创建所有神经网络"""
         self.skill_coordinator = SkillCoordinator(self.config).to(self.device)
-        self.skill_discoverer = SkillDiscoverer(self.config, logger=main_logger).to(self.device)
+        self.skill_discoverer = SkillDiscoverer(self.config, logger=main_logger, device=self.device).to(self.device)
         self.team_discriminator = TeamDiscriminator(self.config).to(self.device)
         self.individual_discriminator = IndividualDiscriminator(self.config).to(self.device)
         

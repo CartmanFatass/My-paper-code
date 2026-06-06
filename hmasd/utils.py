@@ -16,18 +16,16 @@ class ReplayBuffer:
     def push(self, experience):
         """
         将经验存入缓冲区
-        
+
         参数:
             experience: 经验元组，或参数列表(通过*args收集的多个参数)
         """
-        # 如果传入的是多个参数，自动打包为元组
         if not isinstance(experience, tuple):
             experience = (experience,)
-        
-        # 记录添加计数
+
         if len(self.buffer) >= self.capacity:
             self._total_added += 1
-        
+
         self.buffer.append(experience)
         
     def clear(self):
@@ -71,7 +69,6 @@ class RolloutBuffer:
     在每次训练更新后，缓冲区将被清空，确保新旧rollout数据完全隔离。
     """
     def __init__(self, num_steps, num_envs, n_agents, obs_dim, action_dim, gru_hidden_size, n_Z, n_z, state_dim, action_space_type='continuous'):
-        # 存储配置参数
         self.num_steps = num_steps
         self.num_envs = num_envs
         self.n_agents = n_agents
@@ -82,8 +79,7 @@ class RolloutBuffer:
         self.n_z = n_z
         self.state_dim = state_dim
         self.action_space_type = action_space_type
-        
-        # 初始化数据存储结构
+
         self.reset()
         main_logger.info("已初始化重构后的RolloutBuffer，采用基于列表的独立存储。")
 
@@ -92,34 +88,30 @@ class RolloutBuffer:
         清空所有存储的数据，为下一个完整的rollout做准备。
         这是解决数据污染问题的核心机制。
         """
-        # 为每个环境创建一个独立的存储列表
         self.buffers = [[] for _ in range(self.num_envs)]
-        
-        # GAE和Returns现在是实例属性，在计算时被填充
+
         self.advantages = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
         self.returns = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
-        
-        # 高层策略的GAE和Returns
+
         self.high_level_advantages = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
         self.high_level_returns = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
         self.high_level_team_advantages = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
         self.high_level_agent_advantages = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
         self.high_level_team_returns = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
         self.high_level_agent_returns = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
-        
+
         main_logger.debug("RolloutBuffer已重置，所有环境的数据列表已清空。")
 
-    def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None):
+    def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, critic_gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None):
         """
         将一个时间步的数据追加到指定环境的列表中。
         增强了数据验证和错误处理。
+        增加 critic_gru_hidden_state 参数。
         """
-        # 【修复1】增强输入验证
         if env_idx >= self.num_envs:
             main_logger.error(f"RolloutBuffer.add: 环境索引越界! env_idx={env_idx} >= num_envs={self.num_envs}")
             return False
-        
-        # 【修复2】验证数据维度
+
         try:
             obs = np.asarray(obs)
             action = np.asarray(action)
@@ -127,45 +119,50 @@ class RolloutBuffer:
             done = np.asarray(done)
             value = np.asarray(value)
             log_prob = np.asarray(log_prob)
-            
-            # 验证观测维度
+
             if obs.shape != (self.n_agents, self.obs_dim):
                 main_logger.error(f"观测维度错误: 期望 ({self.n_agents}, {self.obs_dim}), 实际 {obs.shape}")
                 return False
-            
-            # 验证动作维度
+
             expected_action_shape = (self.n_agents, self.action_dim) if self.action_space_type == 'continuous' else (self.n_agents,)
             if action.shape != expected_action_shape:
                 main_logger.error(f"动作维度错误: 期望 {expected_action_shape}, 实际 {action.shape}")
                 return False
-            
-            # 验证GRU隐状态维度
+
             if isinstance(gru_hidden_state, torch.Tensor):
                 if gru_hidden_state.shape != (self.n_agents, self.gru_hidden_size):
-                    main_logger.error(f"GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {gru_hidden_state.shape}")
+                    main_logger.error(f"Actor GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {gru_hidden_state.shape}")
                     return False
                 gru_hidden_state_np = gru_hidden_state.cpu().numpy()
             else:
                 gru_hidden_state_np = np.asarray(gru_hidden_state)
                 if gru_hidden_state_np.shape != (self.n_agents, self.gru_hidden_size):
-                    main_logger.error(f"GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {gru_hidden_state_np.shape}")
+                    main_logger.error(f"Actor GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {gru_hidden_state_np.shape}")
                     return False
-            
+
+            if isinstance(critic_gru_hidden_state, torch.Tensor):
+                if critic_gru_hidden_state.shape != (self.n_agents, self.gru_hidden_size):
+                    main_logger.error(f"Critic GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {critic_gru_hidden_state.shape}, env={env_idx}, t={t}")
+                    return False
+                critic_gru_hidden_state_np = critic_gru_hidden_state.cpu().numpy()
+            else:
+                critic_gru_hidden_state_np = np.asarray(critic_gru_hidden_state)
+                if critic_gru_hidden_state_np.shape != (self.n_agents, self.gru_hidden_size):
+                    main_logger.error(f"Critic GRU隐状态维度错误: 期望 ({self.n_agents}, {self.gru_hidden_size}), 实际 {critic_gru_hidden_state_np.shape}")
+                    return False
+
         except Exception as e:
             main_logger.error(f"数据类型转换失败: {e}")
             return False
-        
-        # 【修复3】检查时间步一致性
+
         if self.buffers[env_idx]:
             last_t = self.buffers[env_idx][-1].get("t", -1)
             if t <= last_t:
                 main_logger.error(f"时间步倒退或重复: 环境{env_idx}, 当前t={t}, 上一个t={last_t}")
                 return False
-        
-        # 检查当前环境的缓冲区是否已满
+
         if len(self.buffers[env_idx]) >= self.num_steps:
             main_logger.error(f"RolloutBuffer.add: 环境 {env_idx} 的缓冲区已满 (容量: {self.num_steps})，这表示训练循环逻辑有严重错误！")
-            # 【修复4】更严格的溢出处理
             return False
 
         # 将所有数据打包成一个字典并追加
@@ -179,6 +176,7 @@ class RolloutBuffer:
             "value": value.astype(np.float32),
             "log_prob": log_prob.astype(np.float32),
             "gru_hidden_state": gru_hidden_state_np.astype(np.float32),
+            "critic_gru_hidden_state": critic_gru_hidden_state_np.astype(np.float32),
             "team_skill": int(team_skill) if team_skill is not None else -1,
             "agent_skills": np.asarray(agent_skills, dtype=np.int64) if agent_skills is not None else np.full(self.n_agents, -1, dtype=np.int64),
             "reward_env": np.asarray(reward_env, dtype=np.float32) if reward_env is not None else np.zeros_like(reward, dtype=np.float32),
@@ -227,11 +225,9 @@ class RolloutBuffer:
         if not any(self.buffers):
             return None
 
-        # 【修复】使用最大长度，并创建掩码
         max_steps = 0
         for buf in self.buffers:
             if buf:
-                # 确保 't' 存在
                 if 't' in buf[-1]:
                     max_steps = max(max_steps, buf[-1]['t'] + 1)
         max_steps = min(max_steps, self.num_steps)
@@ -242,7 +238,6 @@ class RolloutBuffer:
         num_actual_steps = max_steps
         masks = np.zeros((num_actual_steps, self.num_envs), dtype=np.bool_)
         
-        # 根据数据类型和形状预分配Numpy数组
         obs = np.zeros((num_actual_steps, self.num_envs, self.n_agents, self.obs_dim), dtype=np.float32)
         if self.action_space_type == 'discrete':
             actions = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.int64)
@@ -256,8 +251,8 @@ class RolloutBuffer:
         team_skills = np.zeros((num_actual_steps, self.num_envs), dtype=np.int64)
         agent_skills = np.zeros((num_actual_steps, self.num_envs, self.n_agents), dtype=np.int64)
         gru_hidden_states = np.zeros((num_actual_steps, self.num_envs, self.n_agents, self.gru_hidden_size), dtype=np.float32)
+        critic_gru_hidden_states = np.zeros((num_actual_steps, self.num_envs, self.n_agents, self.gru_hidden_size), dtype=np.float32)
         
-        # 高层数据
         high_level_valid_mask = np.zeros((num_actual_steps, self.num_envs), dtype=np.bool_)
         high_level_rewards = np.zeros((num_actual_steps, self.num_envs), dtype=np.float32)
         high_level_state_values = np.zeros((num_actual_steps, self.num_envs), dtype=np.float32)
@@ -286,6 +281,12 @@ class RolloutBuffer:
                 team_skills[t, env_idx] = exp["team_skill"]
                 agent_skills[t, env_idx] = exp["agent_skills"]
                 gru_hidden_states[t, env_idx] = exp["gru_hidden_state"]
+                # 兼容性检查：如果buffer中没有critic hidden state（旧数据），则使用actor hidden state或零
+                # 但由于我们重置了buffer，这应该只发生在代码更新过程中。
+                if "critic_gru_hidden_state" in exp:
+                    critic_gru_hidden_states[t, env_idx] = exp["critic_gru_hidden_state"]
+                else:
+                    critic_gru_hidden_states[t, env_idx] = exp["gru_hidden_state"] # Fallback
                 
                 # 【关键修复】填充内在奖励组成部分
                 if exp["reward_env"] is not None:
@@ -310,6 +311,7 @@ class RolloutBuffer:
             "log_probs": log_probs, "dones": dones, "states": states,
             "team_skills": team_skills, "agent_skills": agent_skills,
             "gru_hidden_states": gru_hidden_states,
+            "critic_gru_hidden_states": critic_gru_hidden_states,
             "high_level_valid_mask": high_level_valid_mask,
             "high_level_rewards": high_level_rewards,
             "high_level_state_values": high_level_state_values,
@@ -322,9 +324,13 @@ class RolloutBuffer:
             "reward_ind_disc": reward_ind_disc
         }
 
-    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95):
+    def compute_advantages(self, last_values, dones, gamma=0.99, gae_lambda=0.95, value_normalizer=None):
         """
         在整个rollout收集完毕后，计算低层策略的GAE。
+        
+        【RunningMeanStd归一化修复】
+        如果提供了 value_normalizer，则网络输出的 values 是归一化的。
+        必须将其反归一化为真实尺度，才能与真实尺度的 rewards 进行 GAE 计算。
         """
         data = self._get_full_rollout_data()
         if data is None:
@@ -337,36 +343,60 @@ class RolloutBuffer:
         dones_rollout = data["dones"]
         masks = data.get("masks", np.ones((num_actual_steps, self.num_envs), dtype=np.bool_))
 
+        # 【反归一化逻辑】
+        if value_normalizer is not None:
+            mean = value_normalizer.mean
+            var = value_normalizer.var
+            std = np.sqrt(var + 1e-8)
+            
+            # 反归一化 values (网络输出)
+            # 注意：我们创建一个副本用于计算，不修改 stored values (因为PPO update需要归一化的values)
+            values_real = values * std + mean
+            
+            # 反归一化 last_values (网络输出)
+            last_values_real = last_values * std + mean
+            
+            main_logger.debug("RolloutBuffer: 已对低层价值进行反归一化用于GAE计算。")
+        else:
+            values_real = values
+            last_values_real = last_values
+
         last_advantage = np.zeros((self.num_envs, self.n_agents), dtype=np.float32)
         
-        # 确保 dones 形状正确
         if dones.ndim == 1:
             dones = np.broadcast_to(dones[:, np.newaxis], (self.num_envs, self.n_agents))
 
-        # 对终止的环境，将last_values置零
-        last_values = last_values * (1.0 - dones)
+        last_values_real = last_values_real * (1.0 - dones)
 
         for t in reversed(range(num_actual_steps)):
             mask_t = masks[t]
+
             if t == num_actual_steps - 1:
                 next_non_terminal = 1.0 - dones
-                next_values = last_values
+                curr_next_val = last_values_real
             else:
                 next_non_terminal = 1.0 - dones_rollout[t + 1]
-                next_values = values[t + 1]
-            
-            delta = rewards[t] + gamma * next_values * next_non_terminal - values[t]
+                curr_next_val = values_real[t + 1]
+
+            curr_val = values_real[t]
+
+            delta = rewards[t] + gamma * curr_next_val * next_non_terminal - curr_val
+
             last_advantage = delta + gamma * gae_lambda * next_non_terminal * last_advantage
-            
-            # 使用掩码确保只更新有效步骤的优势
+
             self.advantages[t] = last_advantage * mask_t[:, np.newaxis]
 
-        self.returns = self.advantages + values
+        self.returns = self.advantages + values_real
+            
         main_logger.debug(f"低层策略GAE计算完成，共处理 {num_actual_steps} 步。")
 
-    def compute_high_level_advantages(self, high_level_last_values, gamma=0.99, gae_lambda=0.95):
+    def compute_high_level_advantages(self, high_level_last_values, gamma=0.99, gae_lambda=0.95, value_normalizer=None):
         """
         为高层策略计算GAE。
+        
+        【RunningMeanStd归一化修复】
+        如果提供了 value_normalizer，则网络输出的 values 是归一化的。
+        必须将其反归一化为真实尺度，才能与真实尺度的 rewards 进行 GAE 计算。
         """
         data = self._get_full_rollout_data()
         if data is None:
@@ -375,13 +405,26 @@ class RolloutBuffer:
         
         num_actual_steps = data["num_actual_steps"]
         
-        # 处理不同格式的 last_values
         if isinstance(high_level_last_values, dict):
             last_state_values = high_level_last_values.get('state', np.zeros(self.num_envs))
             last_agent_values = high_level_last_values.get('agents', np.zeros((self.num_envs, self.n_agents)))
-        else: # 兼容旧格式
+        else:
             last_state_values = high_level_last_values
             last_agent_values = np.tile(high_level_last_values[:, np.newaxis], (1, self.n_agents))
+
+        if value_normalizer is not None:
+            mean = value_normalizer.mean
+            var = value_normalizer.var
+            std = np.sqrt(var + 1e-8)
+
+            last_state_values_real = last_state_values * std + mean
+            last_agent_values_real = last_agent_values * std + mean
+
+            main_logger.debug("RolloutBuffer: 已对高层价值进行反归一化用于GAE计算。")
+        else:
+            mean, std = 0.0, 1.0
+            last_state_values_real = last_state_values
+            last_agent_values_real = last_agent_values
 
         for env_idx in range(self.num_envs):
             valid_steps = [t for t, exp in enumerate(self.buffers[env_idx]) if exp["is_high_level"]]
@@ -389,35 +432,46 @@ class RolloutBuffer:
                 continue
 
             rewards_seq = np.array([self.buffers[env_idx][t]["high_level_reward"] for t in valid_steps])
+
             state_values_seq = np.array([self.buffers[env_idx][t]["high_level_state_value"] for t in valid_steps])
-            
-            next_state_values_seq = np.zeros_like(state_values_seq)
+
+            if value_normalizer is not None:
+                state_values_seq_real = state_values_seq * std + mean
+            else:
+                state_values_seq_real = state_values_seq
+
+            next_state_values_seq_real = np.zeros_like(state_values_seq_real)
             if len(valid_steps) > 1:
-                next_state_values_seq[:-1] = state_values_seq[1:]
-            next_state_values_seq[-1] = last_state_values[env_idx]
-            
-            dones_seq = np.zeros_like(state_values_seq, dtype=np.float32) # 高层策略无中间done
+                next_state_values_seq_real[:-1] = state_values_seq_real[1:]
+            next_state_values_seq_real[-1] = last_state_values_real[env_idx]
+
+            dones_seq = np.zeros_like(state_values_seq_real, dtype=np.float32)
 
             team_advantages, team_returns = self._compute_gae_torch(
-                rewards_seq, state_values_seq, next_state_values_seq, dones_seq, gamma, gae_lambda
+                rewards_seq, state_values_seq_real, next_state_values_seq_real, dones_seq, gamma, gae_lambda
             )
 
             for i, t in enumerate(valid_steps):
                 self.high_level_team_advantages[t, env_idx] = team_advantages[i].item()
                 self.high_level_team_returns[t, env_idx] = team_returns[i].item()
-                self.high_level_advantages[t, env_idx] = team_advantages[i].item() # 向后兼容
-                self.high_level_returns[t, env_idx] = team_returns[i].item()   # 向后兼容
+                self.high_level_advantages[t, env_idx] = team_advantages[i].item()
+                self.high_level_returns[t, env_idx] = team_returns[i].item()
 
-            # 为每个智能体计算GAE
             for agent_idx in range(self.n_agents):
                 agent_values_seq = np.array([self.buffers[env_idx][t]["high_level_agent_values"][agent_idx] for t in valid_steps])
-                next_agent_values_seq = np.zeros_like(agent_values_seq)
+
+                if value_normalizer is not None:
+                    agent_values_seq_real = agent_values_seq * std + mean
+                else:
+                    agent_values_seq_real = agent_values_seq
+
+                next_agent_values_seq_real = np.zeros_like(agent_values_seq_real)
                 if len(valid_steps) > 1:
-                    next_agent_values_seq[:-1] = agent_values_seq[1:]
-                next_agent_values_seq[-1] = last_agent_values[env_idx, agent_idx]
+                    next_agent_values_seq_real[:-1] = agent_values_seq_real[1:]
+                next_agent_values_seq_real[-1] = last_agent_values_real[env_idx, agent_idx]
 
                 agent_advantages, agent_returns = self._compute_gae_torch(
-                    rewards_seq, agent_values_seq, next_agent_values_seq, dones_seq, gamma, gae_lambda
+                    rewards_seq, agent_values_seq_real, next_agent_values_seq_real, dones_seq, gamma, gae_lambda
                 )
                 for i, t in enumerate(valid_steps):
                     self.high_level_agent_advantages[t, env_idx, agent_idx] = agent_advantages[i].item()
@@ -446,9 +500,19 @@ class RolloutBuffer:
         all_returns = np.concatenate([team_returns.flatten(), agent_returns.flatten()])
         return all_returns
 
-    def get_discoverer_sampler(self, ppo_epochs, num_sequences_per_batch):
+    def get_discoverer_sampler(self, ppo_epochs, num_sequences_per_batch, chunk_length=None):
         """
-        为Discoverer生成序列采样器。
+        为Discoverer生成序列采样器，支持基于 Chunk 的序列切分。
+
+        关键改进：
+        引入 chunk_length 参数（通常为技能步长 k），将完整 Rollout 切分为多个小片段。
+        每次 yield 的数据是一个 Batch 的小片段（Chunks），而不是整个 Rollout。
+        这实现了真正的 Chunk-based PPO Update，解决了长序列梯度问题并提高了样本利用率。
+
+        参数:
+            ppo_epochs: 训练轮数
+            num_sequences_per_batch: 每个 Batch 包含的序列（Chunk）数量
+            chunk_length: 切分长度 (default: None, 即不切分)
         """
         data = self._get_full_rollout_data()
         if data is None:
@@ -456,82 +520,97 @@ class RolloutBuffer:
             return None
 
         num_steps = data["num_actual_steps"]
-        num_total_sequences = self.num_envs * self.n_agents
-
-        def flatten_sequences(arr):
-            """
-            【修复】安全的序列展平，保持物理意义
-            输入: (T, E, A, D) -> 输出: (T, E*A, D)
-            保持时间步连续性和智能体-环境对应关系
-            """
-            T, E, A = arr.shape[:3]
-            remaining_dims = arr.shape[3:]
-            
-            # 验证输入维度
-            expected_shape = (num_steps, self.num_envs, self.n_agents) + remaining_dims
-            if arr.shape[:3] != expected_shape[:3]:
-                main_logger.error(f"flatten_sequences输入维度错误: 期望前3维{expected_shape[:3]}, 实际{arr.shape[:3]}")
-                raise ValueError(f"维度不匹配: {arr.shape} vs {expected_shape}")
-            
-            # 安全的维度变换: (T, E, A, D) -> (T, E*A, D)
-            # 方法: 先转置为 (E, A, T, D)，然后重塑为 (E*A, T, D)，最后转置为 (T, E*A, D)
-            result = arr.transpose(1, 2, 0, *range(3, len(arr.shape)))  # (E, A, T, D...)
-            result = result.reshape(E * A, T, *remaining_dims)  # (E*A, T, D...)
-            result = result.transpose(1, 0, *range(2, len(result.shape)))  # (T, E*A, D...)
-            
-            # 验证输出维度
-            expected_output_shape = (T, E * A) + remaining_dims
-            if result.shape != expected_output_shape:
-                main_logger.error(f"flatten_sequences输出维度错误: 期望{expected_output_shape}, 实际{result.shape}")
-                raise ValueError(f"输出维度错误: {result.shape}")
-            
-            return result
-
-        def flatten_sequences_no_agent(arr):
-            """
-            【修复】安全的无智能体维度序列展平
-            输入: (T, E) -> 输出: (T, E*A)
-            为每个环境复制智能体维度
-            """
-            T, E = arr.shape[:2]
-            remaining_dims = arr.shape[2:]
-            
-            # 验证输入维度
-            expected_shape = (num_steps, self.num_envs) + remaining_dims
-            if arr.shape[:2] != expected_shape[:2]:
-                main_logger.error(f"flatten_sequences_no_agent输入维度错误: 期望前2维{expected_shape[:2]}, 实际{arr.shape[:2]}")
-                raise ValueError(f"维度不匹配: {arr.shape} vs {expected_shape}")
-            
-            # 安全的维度变换: (T, E, D) -> (T, E*A, D)
-            # 方法: 添加智能体维度并重复，然后展平
-            result = np.expand_dims(arr, axis=2)  # (T, E, 1, D...)
-            result = np.repeat(result, self.n_agents, axis=2)  # (T, E, A, D...)
-            result = result.reshape(T, E * self.n_agents, *remaining_dims)  # (T, E*A, D...)
-            
-            # 验证输出维度
-            expected_output_shape = (T, E * self.n_agents) + remaining_dims
-            if result.shape != expected_output_shape:
-                main_logger.error(f"flatten_sequences_no_agent输出维度错误: 期望{expected_output_shape}, 实际{result.shape}")
-                raise ValueError(f"输出维度错误: {result.shape}")
-            
-            return result
-
-        masks_flat = flatten_sequences_no_agent(data["masks"])
-        obs_flat = flatten_sequences(data["obs"])
-        actions_flat = flatten_sequences(data["actions"])
-        log_probs_flat = flatten_sequences(data["log_probs"])
-        advantages_flat = flatten_sequences(self.advantages)
-        returns_flat = flatten_sequences(self.returns)
-        value_preds_flat = flatten_sequences(data["values"])
-        dones_flat = flatten_sequences(data["dones"])
-        global_states_flat = flatten_sequences_no_agent(data["states"])
-        team_skills_flat = flatten_sequences_no_agent(data["team_skills"])
-        agent_skills_flat = flatten_sequences(data["agent_skills"])
+        num_total_env_agents = self.num_envs * self.n_agents
         
-        # 初始隐状态
-        initial_hxs = data["gru_hidden_states"][0].reshape(num_total_sequences, -1)
-        initial_critic_hxs = data["gru_hidden_states"][0].reshape(num_total_sequences, -1)
+        # 如果未指定 chunk_length，则使用整个 rollout 长度（兼容旧行为）
+        actual_chunk_length = chunk_length if chunk_length is not None else num_steps
         
+        # 计算切分数量
+        num_chunks = num_steps // actual_chunk_length
+        # 如果不能整除，舍弃最后不足一个 chunk 的部分
+        effective_steps = num_chunks * actual_chunk_length
+        
+        if num_chunks == 0:
+            main_logger.warning(f"Rollout长度({num_steps})小于Chunk长度({actual_chunk_length})，无法切分。")
+            actual_chunk_length = num_steps
+            num_chunks = 1
+            effective_steps = num_steps
+
+        # 总的序列（Chunk）数量 = 轨迹数 * 每条轨迹的Chunk数
+        num_total_sequences = num_total_env_agents * num_chunks
+        
+        main_logger.info(f"Creating Discoverer Sampler: Rollout={num_steps}, Chunk={actual_chunk_length}, "
+                        f"Num Chunks per Traj={num_chunks}, Total Sequences={num_total_sequences}")
+
+        def flatten_and_chunk_sequences(arr, with_agent_dim=True):
+            """
+            将数据展平并切分为 Chunks。
+            输出形状: (chunk_length, num_total_sequences, ...)
+            """
+            if with_agent_dim:
+                # (T, E, A, ...)
+                T, E, A = arr.shape[:3]
+                remaining_dims = arr.shape[3:]
+                # 1. 截断无效尾部数据
+                arr = arr[:effective_steps]
+                # 2. (T', E, A, ...) -> (num_chunks, chunk_len, E, A, ...)
+                arr = arr.reshape(num_chunks, actual_chunk_length, E, A, *remaining_dims)
+                # 3. (num_chunks, chunk_len, E, A, ...) -> (chunk_len, num_chunks, E, A, ...)
+                arr = arr.transpose(1, 0, 2, 3, *range(4, len(arr.shape)))
+                # 4. -> (chunk_len, num_chunks * E * A, ...)
+                arr = arr.reshape(actual_chunk_length, num_chunks * E * A, *remaining_dims)
+                return arr
+            else:
+                # (T, E, ...) - 需要广播 Agent 维度
+                T, E = arr.shape[:2]
+                remaining_dims = arr.shape[2:]
+                # 0. 扩展 Agent 维度: (T, E, ...) -> (T, E, A, ...)
+                arr = np.expand_dims(arr, axis=2)
+                arr = np.repeat(arr, self.n_agents, axis=2)
+                
+                # 1. 截断
+                arr = arr[:effective_steps]
+                # 2. -> (num_chunks, chunk_len, E, A, ...)
+                arr = arr.reshape(num_chunks, actual_chunk_length, E, self.n_agents, *remaining_dims)
+                # 3. -> (chunk_len, num_chunks, E, A, ...)
+                arr = arr.transpose(1, 0, 2, 3, *range(4, len(arr.shape)))
+                # 4. -> (chunk_len, num_chunks * E * A, ...)
+                arr = arr.reshape(actual_chunk_length, num_chunks * E * self.n_agents, *remaining_dims)
+                return arr
+
+        # 处理所有数据
+        masks_flat = flatten_and_chunk_sequences(data["masks"], with_agent_dim=False)
+        obs_flat = flatten_and_chunk_sequences(data["obs"])
+        actions_flat = flatten_and_chunk_sequences(data["actions"])
+        log_probs_flat = flatten_and_chunk_sequences(data["log_probs"])
+        advantages_flat = flatten_and_chunk_sequences(self.advantages)
+        returns_flat = flatten_and_chunk_sequences(self.returns)
+        value_preds_flat = flatten_and_chunk_sequences(data["values"])
+        dones_flat = flatten_and_chunk_sequences(data["dones"])
+        global_states_flat = flatten_and_chunk_sequences(data["states"], with_agent_dim=False)
+        team_skills_flat = flatten_and_chunk_sequences(data["team_skills"], with_agent_dim=False)
+        agent_skills_flat = flatten_and_chunk_sequences(data["agent_skills"])
+        
+        # --- 处理初始 Hidden State ---
+        # 我们需要取出每个 Chunk 起始时刻的 Hidden State
+        # data["gru_hidden_states"] 形状: (T, E, A, H)
+        
+        # 1. 取出所有 Chunk 的起始步: 0, L, 2L, ...
+        chunk_start_indices = np.arange(0, effective_steps, actual_chunk_length)
+        
+        # 2. 提取对应时刻的 Hidden State: (num_chunks, E, A, H)
+        initial_hxs_chunked = data["gru_hidden_states"][chunk_start_indices]
+        initial_critic_hxs_chunked = data["critic_gru_hidden_states"][chunk_start_indices]
+        
+        # 3. 展平为 (num_chunks * E * A, H)
+        # 注意这里的顺序必须和上面 flatten_and_chunk_sequences 中的 reshape 顺序一致
+        # 上面是 (chunk_len, num_chunks, E, A) -> reshape -> (chunk_len, num_chunks * E * A)
+        # 也就意味着 batch 维度的顺序是: Chunk 0 (all envs/agents), Chunk 1 (all envs/agents)...
+        # 所以我们这里也要保持这个顺序
+        
+        initial_hxs_flat = initial_hxs_chunked.reshape(num_chunks * self.num_envs * self.n_agents, -1)
+        initial_critic_hxs_flat = initial_critic_hxs_chunked.reshape(num_chunks * self.num_envs * self.n_agents, -1)
+
         sequence_indices = np.arange(num_total_sequences)
         
         for epoch in range(ppo_epochs):
@@ -544,7 +623,6 @@ class RolloutBuffer:
                 agent_skills_batch = agent_skills_flat[:, batch_indices]
                 if np.any(agent_skills_batch < 0) or np.any(agent_skills_batch >= self.n_z):
                     main_logger.error(f"发现无效的agent_skill值! 范围: [{np.min(agent_skills_batch)}, {np.max(agent_skills_batch)}]")
-                    # 跳过这个有问题的批次
                     continue
 
                 yield {
@@ -557,8 +635,8 @@ class RolloutBuffer:
                     'global_states': torch.from_numpy(global_states_flat[:, batch_indices]).float(),
                     'team_skills': torch.from_numpy(team_skills_flat[:, batch_indices]).long(),
                     'agent_skills': torch.from_numpy(agent_skills_batch).long(),
-                    'initial_hxs': torch.from_numpy(initial_hxs[batch_indices]).float(),
-                    'initial_critic_hxs': torch.from_numpy(initial_critic_hxs[batch_indices]).float(),
+                    'initial_hxs': torch.from_numpy(initial_hxs_flat[batch_indices]).float(),
+                    'initial_critic_hxs': torch.from_numpy(initial_critic_hxs_flat[batch_indices]).float(),
                     'dones': torch.from_numpy(dones_flat[:, batch_indices]).float(),
                     'masks': torch.from_numpy(masks_flat[:, batch_indices]).bool()
                 }
@@ -635,6 +713,12 @@ class DiscriminatorBuffer:
         self.buffer.append(experience)
         self._total_added += 1
 
+    def clear(self):
+        """清空缓冲区"""
+        self.buffer.clear()
+        self._total_added = 0
+        self._total_sampled = 0
+
     def sample(self, batch_size):
         """
         从缓冲区中随机采样一批经验。
@@ -646,13 +730,22 @@ class DiscriminatorBuffer:
             list: 包含经验字典的列表。
         """
         if len(self.buffer) < batch_size:
-            # main_logger.warning(f"判别器Buffer中的样本数({len(self.buffer)})"
-            #                   f"少于请求的批次大小({batch_size})，将返回所有可用样本。")
             batch_size = len(self.buffer)
             
         sampled_batch = random.sample(self.buffer, batch_size)
         self._total_sampled += len(sampled_batch)
         return sampled_batch
+
+    def get_all(self):
+        """
+        【论文一致性修复】获取当前 rollout 收集的全部数据。
+        
+        用于 On-Policy 的判别器更新，确保使用当前策略产生的完整数据进行训练。
+        
+        返回:
+            list: 包含所有经验字典的列表。
+        """
+        return list(self.buffer)
 
     def __len__(self):
         """返回缓冲区的当前大小。"""
@@ -686,8 +779,7 @@ def compute_gae(rewards, values, next_values, dones, gamma, lam):
     """
     advantages = torch.zeros_like(rewards)
     last_gae = 0
-    
-    # 逆序遍历时序数据进行计算
+
     for t in reversed(range(len(rewards))):
         if t == len(rewards) - 1:
             next_value = next_values[t]
@@ -723,20 +815,16 @@ def compute_ppo_loss(policy, values, old_log_probs, actions, advantages, returns
         value_loss: 价值损失值
         entropy_loss: 熵损失值
     """
-    # 计算当前策略对动作的对数概率
     dist = policy
     log_probs = dist.log_prob(actions)
-    
-    # 计算策略比率并限制在[1-epsilon, 1+epsilon]范围内
+
     ratio = torch.exp(log_probs - old_log_probs)
     surr1 = ratio * advantages
     surr2 = torch.clamp(ratio, 1.0 - clip_epsilon, 1.0 + clip_epsilon) * advantages
     policy_loss = -torch.min(surr1, surr2).mean()
-    
-    # 计算价值损失（均方误差）
+
     value_loss = 0.5 * ((returns - values) ** 2).mean()
-    
-    # 计算熵，鼓励探索
+
     entropy_loss = -dist.entropy().mean()
     
     # 加权组合三个损失

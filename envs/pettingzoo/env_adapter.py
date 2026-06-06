@@ -41,11 +41,9 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         action_space = self.env.action_space(self.agents[0])
         if isinstance(action_space, gym.spaces.Discrete):
             self.action_dim = action_space.n
-            # For discrete actions, the adapted action space should still be Box
-            # because the policy will output logits or probabilities over the discrete actions.
-            # The actual action sampling will be handled by the agent/policy.
-            # However, to pass a single value, we can use a Box of shape (1,).
-            self.action_space = Box(low=0, high=self.action_dim - 1, shape=(self.n_uavs, 1), dtype=np.int64)
+            # One integer action per UAV. Keep this shape aligned with HMASDAgent
+            # discrete outputs and RolloutBuffer's expected (n_agents,) action shape.
+            self.action_space = Box(low=0, high=self.action_dim - 1, shape=(self.n_uavs,), dtype=np.int64)
         elif isinstance(action_space, gym.spaces.Box):
             self.action_dim = action_space.shape[0]
             
@@ -343,14 +341,10 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
 
     def render(self, mode="human"):
         """Renders the environment with multiprocessing safety."""
-        # 检查是否在子进程中运行
-        if mp.current_process().name != 'MainProcess':
-            # 在子进程中，跳过GUI渲染以避免线程安全问题
-            print(f"[{mp.current_process().name}] 跳过GUI渲染以避免多进程冲突")
-            return None
+        # 【修改】允许在子进程中渲染，但依赖底层环境处理线程安全和后端问题
+        # 只要底层环境（如scenario4_discrete.py）正确配置了Agg后端，子进程渲染就是安全的
         
         try:
-            # 只在主进程中进行渲染
             return self.env.render() if hasattr(self.env, 'render') else None
         except Exception as e:
             print(f"渲染错误: {e}")

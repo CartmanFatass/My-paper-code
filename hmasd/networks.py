@@ -1114,10 +1114,11 @@ class R_Critic(nn.Module):
         return values, rnn_states
 
 class SkillDiscoverer(nn.Module):
-    def __init__(self, config, logger=None):
+    def __init__(self, config, logger=None, device=None):
         super(SkillDiscoverer, self).__init__()
         self.config = config
         self.logger = logger if logger is not None else main_logger
+        self.device = device if device is not None else torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         
         # Adapt hmasd config to r_mappo's args format
         class Args:
@@ -1133,7 +1134,6 @@ class SkillDiscoverer(nn.Module):
                 self.use_popart = False
         
         args = Args(config)
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         # Create dummy spaces for initialization
         from gymnasium import spaces
@@ -1145,8 +1145,8 @@ class SkillDiscoverer(nn.Module):
         
         cent_obs_space = (config.state_dim,)
 
-        self.actor = R_Actor(args, obs_space, action_space, config.n_z, device)
-        self.critic = R_Critic(args, cent_obs_space, config.n_Z, device)
+        self.actor = R_Actor(args, obs_space, action_space, config.n_z, self.device)
+        self.critic = R_Critic(args, cent_obs_space, config.n_Z, self.device)
 
     def forward(self, observation, agent_skill, hidden_state, deterministic=False):
         # The new R_Actor expects masks. We can pass ones.
@@ -1186,11 +1186,19 @@ class SkillDiscoverer(nn.Module):
         return log_probs, values, entropy
 
 class TeamDiscriminator(nn.Module):
-    """团队技能判别器 - 增强版（解决"弱判别器"问题）+ 残差连接"""
+    """团队技能判别器 - 增强版（解决"弱判别器"问题）+ 残差连接
+    
+    【关键修复】
+    1. 添加输入层 LayerNorm 以稳定输入尺度
+    2. 移除 Tanh 激活，避免梯度消失
+    """
     def __init__(self, config):
         super(TeamDiscriminator, self).__init__()
         
-        # 【弱判别器修复】使用残差连接的深度网络架构
+        # 【关键修复1】添加输入层 LayerNorm 以稳定输入尺度
+        # SMAC 的状态数值范围差异巨大，LayerNorm 能强行拉回标准正态分布
+        self.input_norm = nn.LayerNorm(config.state_dim)
+        
         # 输入投影层：将状态维度映射到隐藏维度
         self.input_projection = nn.Linear(config.state_dim, config.hidden_size)
         
@@ -1199,11 +1207,12 @@ class TeamDiscriminator(nn.Module):
             ResBlock(config.hidden_size) for _ in range(2)  # 2个残差块
         ])
         
-        # 最终处理层
+        # 【关键修复2】最终处理层 - 移除 Tanh，保持 Logits 的全范围输出
+        # Tanh 会将输出压缩到 (-1, 1)，导致梯度消失，Discriminator 学不动
         self.final_layers = nn.Sequential(
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
-            nn.Tanh(),
+            # 移除 nn.Tanh()，让 Logits 能输出全范围
             nn.Linear(config.hidden_size, config.n_Z)
         )
         
@@ -1224,8 +1233,9 @@ class TeamDiscriminator(nn.Module):
         # 确保state是float32类型
         state = state.float()
         
-        # 输入投影
-        x = self.input_projection(state)
+        # 【关键修复】先进行 LayerNorm 归一化，再投影
+        x = self.input_norm(state)
+        x = self.input_projection(x)
         
         # 通过残差块
         for res_block in self.res_blocks:
@@ -1235,10 +1245,19 @@ class TeamDiscriminator(nn.Module):
         return self.final_layers(x)
 
 class IndividualDiscriminator(nn.Module):
-    """个体技能判别器 - 增强版（解决"弱判别器"问题）+ 残差连接"""
+    """个体技能判别器 - 增强版（解决"弱判别器"问题）+ 残差连接
+    
+    【关键修复】
+    1. 添加输入层 LayerNorm 以稳定输入尺度
+    2. 移除 Tanh 激活，避免梯度消失
+    """
     def __init__(self, config):
         super(IndividualDiscriminator, self).__init__()
         self.config = config
+        
+        # 【关键修复1】添加输入层 LayerNorm 以稳定输入尺度
+        # 观测的数值范围差异巨大，LayerNorm 能强行拉回标准正态分布
+        self.input_norm = nn.LayerNorm(config.obs_dim)
         
         # 1. 观测编码器 - 使用残差连接的深度架构
         self.obs_input_projection = nn.Linear(config.obs_dim, config.hidden_size)
@@ -1265,11 +1284,12 @@ class IndividualDiscriminator(nn.Module):
             ResBlock(config.hidden_size) for _ in range(1)  # 1个残差块用于后续处理
         ])
         
-        # 最终输出层
+        # 【关键修复2】最终输出层 - 移除 Tanh，保持 Logits 的全范围输出
+        # Tanh 会将输出压缩到 (-1, 1)，导致梯度消失，Discriminator 学不动
         self.final_output = nn.Sequential(
             nn.LayerNorm(config.hidden_size),
             nn.GELU(),
-            nn.Tanh(),
+            # 移除 nn.Tanh()，让 Logits 能输出全范围
             nn.Linear(config.hidden_size, config.n_z)
         )
         
@@ -1292,6 +1312,9 @@ class IndividualDiscriminator(nn.Module):
             team_skill = team_skill.long()
 
         # --- 增强版 Discriminator FiLM 架构实现（使用残差连接）---
+        # 【关键修复】先进行 LayerNorm 归一化，再投影
+        observation = self.input_norm(observation.float())
+        
         # 1. 观测编码 - 使用残差连接
         # 输入投影
         x = self.obs_input_projection(observation)
