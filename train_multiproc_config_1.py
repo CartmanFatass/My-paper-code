@@ -58,6 +58,7 @@ from hmasd.sb3_integration import (
 from hmasd.sharded_vec_env import ShardedSubprocVecEnv
 from envs.pettingzoo.scenario4_discrete import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
+from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
 from visualization import VisualizationManager
@@ -433,7 +434,27 @@ class EnhancedRewardTracker:
                 'sinr_dist_above_20dB': [],
                 'sinr_avg_db': [],
                 'sinr_min_db': [],
-                'sinr_max_db': []
+                'sinr_max_db': [],
+
+                # load_balance模式：回传断联与健壮性惩罚指标
+                'backhaul_outage_users': [],
+                'backhaul_outage_ratio': [],
+                'service_drop_users': [],
+                'service_drop_ratio': [],
+                'backhaul_drop_users': [],
+                'backhaul_drop_ratio': [],
+                'isolated_serving_uavs': [],
+                'isolated_serving_uav_ratio': [],
+                'full_network_disconnect': [],
+                'full_disconnect_streak': [],
+                'coverage_drop_ratio': [],
+                'backhaul_outage_ema': [],
+                'instant_outage_intensity': [],
+                'robustness_penalty': [],
+                'backhaul_outage_penalty': [],
+                'full_disconnect_penalty': [],
+                'coverage_drop_penalty': [],
+                'outage_memory_penalty': []
             },
             
             # 【新增】Episode结束时的专门数据记录
@@ -778,6 +799,27 @@ class EnhancedRewardTracker:
                         if key not in self.performance_metrics['reward_components']:
                             self.performance_metrics['reward_components'][key] = []
                         
+                        self.performance_metrics['reward_components'][key].append({
+                            'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
+                        })
+
+                # load_balance模式：回传断联与健壮性惩罚指标
+                robustness_keys = [
+                    'backhaul_outage_users', 'backhaul_outage_ratio',
+                    'service_drop_users', 'service_drop_ratio',
+                    'backhaul_drop_users', 'backhaul_drop_ratio',
+                    'isolated_serving_uavs', 'isolated_serving_uav_ratio',
+                    'full_network_disconnect', 'full_disconnect_streak',
+                    'coverage_drop_ratio', 'backhaul_outage_ema',
+                    'instant_outage_intensity', 'robustness_penalty',
+                    'backhaul_outage_penalty', 'full_disconnect_penalty',
+                    'coverage_drop_penalty', 'outage_memory_penalty'
+                ]
+                for key in robustness_keys:
+                    if key in reward_info:
+                        if key not in self.performance_metrics['reward_components']:
+                            self.performance_metrics['reward_components'][key] = []
+
                         self.performance_metrics['reward_components'][key].append({
                             'step': step, 'env_id': env_id, 'value': reward_info[key], 'timestamp': time.time()
                         })
@@ -1747,6 +1789,25 @@ class EnhancedRewardTracker:
                                                    reward_components[field],
                                                    field.replace('_', ' ').title().replace(' ', '_'),
                                                    'HealthScore')
+
+                robustness_fields = [
+                    'backhaul_outage_users', 'backhaul_outage_ratio',
+                    'service_drop_users', 'service_drop_ratio',
+                    'backhaul_drop_users', 'backhaul_drop_ratio',
+                    'isolated_serving_uavs', 'isolated_serving_uav_ratio',
+                    'full_network_disconnect', 'full_disconnect_streak',
+                    'coverage_drop_ratio', 'backhaul_outage_ema',
+                    'instant_outage_intensity', 'robustness_penalty',
+                    'backhaul_outage_penalty', 'full_disconnect_penalty',
+                    'coverage_drop_penalty', 'outage_memory_penalty'
+                ]
+
+                for field in robustness_fields:
+                    if reward_components.get(field):
+                        self._log_aggregated_metrics(writer, step,
+                                                   reward_components[field],
+                                                   field.replace('_', ' ').title().replace(' ', '_'),
+                                                   'LoadBalanceRobustness')
                 
                 # 【新增】根据奖励类型记录特定的奖励组成部分
                 reward_type = getattr(self.config, 'reward_type', 'health')
@@ -1906,7 +1967,7 @@ def get_device(device_pref):
         return torch.device('cpu')
 
 # 创建环境函数 (简化后用于 SubprocVecEnv)
-def make_env(rank, seed, config, scenario, render_mode=None):
+def make_env(rank, seed, config, scenario, render_mode=None, scale_mode=None):
     """
     创建环境实例的函数 (用于 SubprocVecEnv) - 使用config对象传递参数
 
@@ -1914,7 +1975,7 @@ def make_env(rank, seed, config, scenario, render_mode=None):
         rank: 环境的索引 (用于设置不同的种子)
         seed: 基础随机种子
         config: 配置对象，包含所有环境参数和奖励权重
-        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式)
+        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式, 6=递进强制中继基准)
         render_mode: 渲染模式
 
     返回:
@@ -1937,6 +1998,14 @@ def make_env(rank, seed, config, scenario, render_mode=None):
                 render_mode=render_mode,
                 seed=env_seed
             )
+        elif scenario == 6:
+            # 场景6：递进式强制中继基准环境
+            raw_env = UAVProgressiveRelayEnv(
+                config=config,
+                render_mode=render_mode,
+                seed=env_seed,
+                scale_mode=scale_mode or "train",
+            )
         else:
             raise ValueError(f"未知的场景: {scenario}")
 
@@ -1957,7 +2026,7 @@ def parse_args():
     
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式')
+    parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式, 6=递进强制中继基准')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='../tf-logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -3522,7 +3591,8 @@ def main():
         seed=base_seed, # 使用命令行传入的种子
         config=config,
         scenario=args.scenario,
-        render_mode=None
+        render_mode=None,
+        scale_mode="train"
     ) for i in range(num_envs)]
 
     eval_env_fns = [make_env(
@@ -3530,7 +3600,8 @@ def main():
         seed=base_seed + num_envs,
         config=config,
         scenario=args.scenario,
-        render_mode="rgb_array" if args.render or args.record_video else None
+        render_mode="rgb_array" if args.render or args.record_video else None,
+        scale_mode="eval"
     ) for i in range(eval_rollout_threads)]
 
     # 首先创建一个临时环境来获取维度信息
@@ -3540,7 +3611,8 @@ def main():
         seed=base_seed,
         config=config,
         scenario=args.scenario,
-        render_mode=None
+        render_mode=None,
+        scale_mode="train"
     )
     temp_env = temp_env_fn()
     
@@ -3572,7 +3644,9 @@ def main():
         1: "基站模式参数",
         2: "协作组网模式参数", 
         3: "强制多跳模式参数",
-        4: "强制中继模式参数"
+        4: "强制中继模式参数",
+        5: "信念地图模式参数",
+        6: "递进强制中继基准参数"
     }
     
     main_logger.info(f"当前场景: {args.scenario} ({scenario_param_categories.get(args.scenario, '未知场景')})")

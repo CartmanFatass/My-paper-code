@@ -25,10 +25,16 @@ class Config:
     user_distribution = 'forced_relay_cluster'  # [优化] 使用簇分布
     use_fdma = True
     bandwidth = 20e6
-    reward_type = 'test_reward'#"load_balance"         # [优化] 使用网络健康度奖励 _health
-    w_load_balance = 0.5
+    reward_type = 'load_balance'#"load_balance"         # [优化] 使用网络健康度奖励 _health
+    w_load_balance = 0.35
     w_first_contact = 0#0.2
-    w_repulsion = 0#0.3
+    w_repulsion = 0.0#0.3
+    # load_balance模式下的网络健壮性惩罚：统计并惩罚回传/路由断联导致的QoS中断
+    w_backhaul_outage = 0.8
+    w_full_disconnect = 1.0
+    w_coverage_drop = 0.5
+    w_outage_memory = 0.25
+    outage_memory_decay = 0.90
     # 用户移动参数
     user_max_speed = 15.0
     user_movement_model = "rpgm"

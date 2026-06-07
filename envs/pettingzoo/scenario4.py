@@ -1147,6 +1147,60 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return stats, qos_score
 
+    def calculate_coverage_balance_reward(self):
+        """
+        计算覆盖率 * 负载均衡奖励，用于单独实验高覆盖率下的服务负载分摊。
+
+        负载均衡使用 Jain fairness index，并只统计有回程路径的 UAV。拥有回程路径但
+        当前未服务用户的 UAV 负载为 0，会降低均衡分，从而鼓励把用户服务压力分摊到
+        多个可用接入 UAV 上。
+
+        返回:
+            coverage_balance_reward (float): 覆盖率与负载均衡的乘积。
+            reward_components (dict): 用于日志记录的奖励组成部分。
+        """
+        coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+
+        if not hasattr(self, 'routing_paths') or not self.routing_paths:
+            reward_components = {
+                "coverage_balance_reward": 0.0,
+                "load_balance_score": 0.0,
+                "load_balance_num_uavs": 0,
+                "load_balance_total_load": 0.0,
+                "load_balance_mean_load": 0.0,
+                "load_balance_std_load": 0.0,
+                "load_balance_max_load": 0.0,
+                "load_balance_min_load": 0.0,
+            }
+            return 0.0, reward_components
+
+        loads = np.array([
+            np.sum(self.connections[uav_idx])
+            for uav_idx in self.routing_paths.keys()
+        ], dtype=float)
+
+        total_load = np.sum(loads)
+        if len(loads) <= 1 or total_load <= 0:
+            balance_score = 0.0
+        else:
+            balance_score = (total_load ** 2) / (len(loads) * np.sum(loads ** 2) + 1e-8)
+            balance_score = np.clip(balance_score, 0, 1)
+
+        coverage_balance_reward = coverage_ratio * balance_score
+
+        reward_components = {
+            "coverage_balance_reward": coverage_balance_reward,
+            "load_balance_score": balance_score,
+            "load_balance_num_uavs": len(loads),
+            "load_balance_total_load": total_load,
+            "load_balance_mean_load": np.mean(loads) if len(loads) > 0 else 0.0,
+            "load_balance_std_load": np.std(loads) if len(loads) > 0 else 0.0,
+            "load_balance_max_load": np.max(loads) if len(loads) > 0 else 0.0,
+            "load_balance_min_load": np.min(loads) if len(loads) > 0 else 0.0,
+        }
+
+        return coverage_balance_reward, reward_components
+
     def calculate_network_health_reward(self):
         """
         计算一个综合性的、单一的、共享的团队奖励 r_t，称为“网络健康度”。
@@ -2404,6 +2458,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 然后，计算新的、综合性的“网络健康度”作为共享团队奖励 r_t
         shaped_team_reward, reward_components = self.calculate_network_health_reward()
 
+        # 计算覆盖率 * 负载均衡奖励，作为独立 reward_type 的候选项
+        coverage_balance_reward, coverage_balance_components = self.calculate_coverage_balance_reward()
+
         # 始终计算切换指标以用于日志记录
         handover_metrics = self._calculate_handover_metrics()
 
@@ -2449,6 +2506,9 @@ class UAVForcedRelayEnv(ParallelEnv):
             elif self.reward_type == "qos":
                 # qos模式：直接使用服务质量得分作为奖励
                 shared_reward = self.reward_info.get("qos_score", 0)
+            elif self.reward_type == "coverage_balance":
+                # coverage_balance模式：覆盖率 * 有回程UAV间的Jain负载均衡指数
+                shared_reward = coverage_balance_reward
             elif self.reward_type == "handover":
                 # handover模式：精细化奖励函数，考虑切换成本、乒乓效应和服务中断
                 shared_reward = self._get_handover_reward_from_metrics(handover_metrics)
@@ -2474,6 +2534,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 合并基础覆盖指标和网络健康度组件
             unified_reward_info = self.reward_info.copy()  # 包含基础覆盖指标
             unified_reward_info.update(reward_components)  # 添加网络健康度组件
+            unified_reward_info.update(coverage_balance_components)  # 添加覆盖率*负载均衡组件
             unified_reward_info.update(handover_metrics) # 添加切换指标
             
             # 添加额外的性能指标

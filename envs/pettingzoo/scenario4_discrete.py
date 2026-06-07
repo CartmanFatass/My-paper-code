@@ -88,10 +88,15 @@ class UAVForcedRelayEnv(ParallelEnv):
             
             # 奖励类型和权重 - 简化版：仅保留必要的权重参数
             self.reward_type = kwargs.get('reward_type', "naive")  # 默认为naive模式
-            self.w_load_balance = kwargs.get('w_load_balance', 0.5)  # load_balance模式需要
+            self.w_load_balance = kwargs.get('w_load_balance', 0.35)  # load_balance模式需要
             self.w_freshness_penalty = kwargs.get('w_freshness_penalty', 0.5)  # awareness模式需要
             self.w_first_contact = kwargs.get('w_first_contact', 0.1)  # load_balance模式的催化剂奖励
-            self.w_repulsion = kwargs.get('w_repulsion', 0.3)  # 斥力场惩罚权重
+            self.w_repulsion = kwargs.get('w_repulsion', 0.0)  # 斥力场惩罚权重
+            self.w_backhaul_outage = kwargs.get('w_backhaul_outage', 0.8)  # load_balance模式：回传断联惩罚
+            self.w_full_disconnect = kwargs.get('w_full_disconnect', 1.0)  # load_balance模式：整网断联惩罚
+            self.w_coverage_drop = kwargs.get('w_coverage_drop', 0.5)  # load_balance模式：覆盖率骤降惩罚
+            self.w_outage_memory = kwargs.get('w_outage_memory', 0.25)  # load_balance模式：短期断联记忆惩罚
+            self.outage_memory_decay = kwargs.get('outage_memory_decay', 0.90)
             
             # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
             # 基于大疆(DJI)等典型四旋翼参数估算
@@ -182,10 +187,15 @@ class UAVForcedRelayEnv(ParallelEnv):
             
             # 奖励类型和权重 - 简化版：仅保留必要的权重参数
             self.reward_type = getattr(config, 'reward_type', "naive")  # 默认为naive模式
-            self.w_load_balance = getattr(config, 'w_load_balance', 0.5)  # load_balance模式需要
+            self.w_load_balance = getattr(config, 'w_load_balance', 0.35)  # load_balance模式需要
             self.w_freshness_penalty = getattr(config, 'w_freshness_penalty', 0.5)  # awareness模式需要
             self.w_first_contact = getattr(config, 'w_first_contact', 0.1)  # load_balance模式的催化剂奖励
-            self.w_repulsion = getattr(config, 'w_repulsion', 0.3)  # 斥力场惩罚权重
+            self.w_repulsion = getattr(config, 'w_repulsion', 0.0)  # 斥力场惩罚权重
+            self.w_backhaul_outage = getattr(config, 'w_backhaul_outage', 0.8)  # load_balance模式：回传断联惩罚
+            self.w_full_disconnect = getattr(config, 'w_full_disconnect', 1.0)  # load_balance模式：整网断联惩罚
+            self.w_coverage_drop = getattr(config, 'w_coverage_drop', 0.5)  # load_balance模式：覆盖率骤降惩罚
+            self.w_outage_memory = getattr(config, 'w_outage_memory', 0.25)  # load_balance模式：短期断联记忆惩罚
+            self.outage_memory_decay = getattr(config, 'outage_memory_decay', 0.90)
             
             # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
             # 基于大疆(DJI)等典型四旋翼参数估算
@@ -274,6 +284,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 新增: stability_aware 奖励所需的状态追踪变量
         self.previous_coverage_ratio = 0.0
         self.previous_serving_uavs = set()
+        self.prev_effective_user_service_status = np.zeros(self.n_users, dtype=bool)
+        self.prev_load_balance_coverage_ratio = 0.0
+        self.backhaul_outage_ema = 0.0
+        self.full_disconnect_streak = 0
 
         # 新增: 层次强化学习中的全局基站信息缓存机制
         self.global_bs_cache = {}  # 存储全局同步的基站信息 {bs_idx: (normalized_pos, visibility_flag)}
@@ -1224,6 +1238,100 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return coverage_ratio
 
+    def _calculate_backhaul_outage_metrics(self):
+        """
+        统计由回传/路由断联导致的服务中断。
+
+        access_connected 表示用户至少被某个UAV接入；effective_service 表示该接入UAV
+        至少有一条有效回传路径。两者的差值用于区分“接入覆盖不足”和“网络断联”。
+        """
+        access_connected_status = np.any(self.connections, axis=0) if self.n_users > 0 else np.array([], dtype=bool)
+        effective_service_status = np.zeros(self.n_users, dtype=bool)
+
+        for user_idx in range(self.n_users):
+            connected_uavs = np.where(self.connections[:, user_idx])[0]
+            for uav_idx in connected_uavs:
+                if uav_idx in self.routing_paths and self.routing_paths[uav_idx][0]:
+                    effective_service_status[user_idx] = True
+                    break
+
+        access_connected_users = int(np.sum(access_connected_status))
+        access_no_backhaul_status = access_connected_status & ~effective_service_status
+        access_no_backhaul_users = int(np.sum(access_no_backhaul_status))
+        access_no_backhaul_ratio = access_no_backhaul_users / self.n_users if self.n_users > 0 else 0.0
+
+        prev_effective_status = getattr(
+            self,
+            'prev_effective_user_service_status',
+            np.zeros(self.n_users, dtype=bool)
+        )
+        dropped_service_status = prev_effective_status & ~effective_service_status
+        backhaul_drop_status = dropped_service_status & access_connected_status
+        dropped_service_users = int(np.sum(dropped_service_status))
+        backhaul_drop_users = int(np.sum(backhaul_drop_status))
+        prev_effective_users = int(np.sum(prev_effective_status))
+        service_drop_ratio = dropped_service_users / prev_effective_users if prev_effective_users > 0 else 0.0
+        backhaul_drop_ratio = backhaul_drop_users / prev_effective_users if prev_effective_users > 0 else 0.0
+
+        serving_uav_status = np.any(self.connections, axis=1) if self.n_uavs > 0 else np.array([], dtype=bool)
+        serving_uavs = int(np.sum(serving_uav_status))
+        isolated_serving_uavs = int(sum(
+            1 for uav_idx, has_users in enumerate(serving_uav_status)
+            if has_users and uav_idx not in self.routing_paths
+        ))
+        isolated_serving_uav_ratio = isolated_serving_uavs / serving_uavs if serving_uavs > 0 else 0.0
+
+        coverage_ratio = self.reward_info.get("coverage_ratio", 0.0)
+        prev_coverage = getattr(self, 'prev_load_balance_coverage_ratio', 0.0)
+        coverage_drop_ratio = max(0.0, prev_coverage - coverage_ratio)
+
+        has_any_backhaul = len(self.routing_paths) > 0
+        full_network_disconnect = bool(access_connected_users > 0 and not has_any_backhaul)
+        coverage_collapse = bool(prev_coverage > 0.0 and coverage_ratio <= 1e-6)
+
+        instant_outage_intensity = max(
+            access_no_backhaul_ratio,
+            backhaul_drop_ratio,
+            coverage_drop_ratio
+        )
+        if full_network_disconnect or coverage_collapse:
+            instant_outage_intensity = 1.0
+
+        decay = float(np.clip(getattr(self, 'outage_memory_decay', 0.85), 0.0, 0.99))
+        self.backhaul_outage_ema = max(
+            instant_outage_intensity,
+            decay * getattr(self, 'backhaul_outage_ema', 0.0) + (1.0 - decay) * instant_outage_intensity
+        )
+
+        if full_network_disconnect:
+            self.full_disconnect_streak = getattr(self, 'full_disconnect_streak', 0) + 1
+        else:
+            self.full_disconnect_streak = 0
+
+        metrics = {
+            "access_connected_users": access_connected_users,
+            "backhaul_outage_users": access_no_backhaul_users,
+            "backhaul_outage_ratio": access_no_backhaul_ratio,
+            "service_drop_users": dropped_service_users,
+            "service_drop_ratio": service_drop_ratio,
+            "backhaul_drop_users": backhaul_drop_users,
+            "backhaul_drop_ratio": backhaul_drop_ratio,
+            "isolated_serving_uavs": isolated_serving_uavs,
+            "isolated_serving_uav_ratio": isolated_serving_uav_ratio,
+            "full_network_disconnect": int(full_network_disconnect),
+            "full_disconnect_streak": self.full_disconnect_streak,
+            "coverage_drop_ratio": coverage_drop_ratio,
+            "backhaul_outage_ema": self.backhaul_outage_ema,
+            "instant_outage_intensity": instant_outage_intensity,
+        }
+
+        self.reward_info.update(metrics)
+        self.user_serviced_status = effective_service_status.copy()
+        self.prev_effective_user_service_status = effective_service_status.copy()
+        self.prev_load_balance_coverage_ratio = coverage_ratio
+
+        return metrics
+
     def _get_spectral_efficiency_from_sinr(self, sinr_db):
         """根据SINR值从MCS查找表中获取频谱效率"""
         for sinr_threshold, se in self.mcs_table:
@@ -1966,6 +2074,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 重置稳定性奖励的状态变量
         self.previous_coverage_ratio = 0.0
         self.previous_serving_uavs = set()
+        self.prev_effective_user_service_status = np.zeros(self.n_users, dtype=bool)
+        self.prev_load_balance_coverage_ratio = 0.0
+        self.backhaul_outage_ema = 0.0
+        self.full_disconnect_streak = 0
 
         # 重置路由协议状态
         if ROUTING_PROTOCOLS_AVAILABLE and hasattr(self, 'router') and self.router is not None:
@@ -2814,6 +2926,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 7. CALCULATE REWARDS
         # 首先，计算核心覆盖指标并更新 self.reward_info，供塑形奖励函数使用
         self._calculate_coverage_metrics()
+        backhaul_outage_metrics = self._calculate_backhaul_outage_metrics()
         reward_components = {}
         # 始终计算切换指标以用于日志记录
         #handover_metrics = self._calculate_handover_metrics()
@@ -2851,6 +2964,11 @@ class UAVForcedRelayEnv(ParallelEnv):
             coverage_ratio = self.reward_info.get("coverage_ratio", 0)
             load_balance_penalty = self._calculate_load_balancing_penalty()
             repulsion_penalty = self._calculate_repulsion_penalty()
+            backhaul_outage_ratio = backhaul_outage_metrics.get("backhaul_outage_ratio", 0.0)
+            backhaul_drop_ratio = backhaul_outage_metrics.get("backhaul_drop_ratio", 0.0)
+            coverage_drop_ratio = backhaul_outage_metrics.get("coverage_drop_ratio", 0.0)
+            outage_memory_penalty = backhaul_outage_metrics.get("backhaul_outage_ema", 0.0)
+            full_disconnect_penalty = float(backhaul_outage_metrics.get("full_network_disconnect", 0))
             
             # 组合惩罚项：负载均衡 + 斥力场
             # 使用权重参数来平衡两种惩罚的影响
@@ -2858,6 +2976,16 @@ class UAVForcedRelayEnv(ParallelEnv):
             combined_penalty = self.w_load_balance * load_balance_penalty + w_repulsion * repulsion_penalty
             
             shared_reward = coverage_ratio * (1 - combined_penalty)
+
+            # 回传断联惩罚不乘覆盖率。即使瞬时覆盖率已经掉到0，也保留负梯度，
+            # 避免策略把短时断联当作普通低覆盖状态处理。
+            robustness_penalty = (
+                self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio) +
+                self.w_full_disconnect * full_disconnect_penalty +
+                self.w_coverage_drop * coverage_drop_ratio +
+                self.w_outage_memory * outage_memory_penalty
+            )
+            shared_reward -= robustness_penalty
 
             # === 灯塔导航奖励 (Lighthouse/Navigation Reward) ===
             # 替代原有的 catalyst_reward，解决极端位置导致的稀疏性问题
@@ -2901,6 +3029,11 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "load_balance_penalty": load_balance_penalty,
                 "repulsion_penalty": repulsion_penalty,
                 "combined_penalty": combined_penalty,
+                "robustness_penalty": robustness_penalty,
+                "backhaul_outage_penalty": self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio),
+                "full_disconnect_penalty": self.w_full_disconnect * full_disconnect_penalty,
+                "coverage_drop_penalty": self.w_coverage_drop * coverage_drop_ratio,
+                "outage_memory_penalty": self.w_outage_memory * outage_memory_penalty,
                 "nav_reward": nav_reward  # 记录导航奖励以便观察
             })
         elif self.reward_type == "awareness":
