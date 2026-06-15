@@ -69,6 +69,163 @@ def convert_numpy_types(obj):
     else:
         return obj
 
+
+class TrainingProfiler:
+    PHASES = (
+        'agent_step',
+        'env_step',
+        'stability_check',
+        'transition_store',
+        'reward_tracking',
+        'debug_visualization',
+        'bootstrap',
+        'callback',
+        'update',
+        'eval_save',
+        'post_rollout',
+    )
+
+    def __init__(self, enabled=False, interval=1, warmup_rollouts=1):
+        self.enabled = bool(enabled)
+        self.interval = max(1, int(interval))
+        self.warmup_rollouts = max(0, int(warmup_rollouts))
+        self.rollout_index = 0
+        self.current = {}
+        self.rollout_start_time = None
+        self._sharded_start_profile = None
+
+    def start_rollout(self, agent=None, vec_env=None):
+        if not self.enabled:
+            return
+        self.rollout_index += 1
+        self.current = {phase: 0.0 for phase in self.PHASES}
+        self.rollout_start_time = time.perf_counter()
+        self._sharded_start_profile = self._collector_profile(vec_env)
+        if agent is not None and hasattr(agent, 'reset_step_profile'):
+            agent.reset_step_profile()
+        if agent is not None and hasattr(agent, 'reset_transition_profile'):
+            agent.reset_transition_profile()
+        if agent is not None and hasattr(agent, 'reset_update_profile'):
+            agent.reset_update_profile()
+        if agent is not None and getattr(getattr(agent, 'device', None), 'type', None) == 'cuda':
+            torch.cuda.reset_peak_memory_stats(agent.device)
+
+    def add(self, phase, elapsed):
+        if self.enabled:
+            self.current[phase] = self.current.get(phase, 0.0) + float(elapsed)
+
+    def finish_rollout(self, total_steps, steps_in_rollout, num_envs, agent=None, vec_env=None):
+        if not self.enabled or self.rollout_start_time is None:
+            return
+
+        wall_time = max(time.perf_counter() - self.rollout_start_time, 1e-12)
+        agent_profile = {}
+        if agent is not None and hasattr(agent, 'get_step_profile'):
+            agent_profile = agent.get_step_profile(reset=True)
+        transition_profile = {}
+        if agent is not None and hasattr(agent, 'get_transition_profile'):
+            transition_profile = agent.get_transition_profile(reset=True)
+        update_profile = {}
+        if agent is not None and hasattr(agent, 'get_update_profile'):
+            update_profile = agent.get_update_profile(reset=True)
+        sharded_profile = self._collector_profile_delta(vec_env)
+
+        if self.rollout_index <= self.warmup_rollouts:
+            return
+        if (self.rollout_index - self.warmup_rollouts) % self.interval != 0:
+            return
+
+        env_steps = int(steps_in_rollout) * int(num_envs)
+        throughput = env_steps / wall_time
+        tracked_time = sum(self.current.get(phase, 0.0) for phase in self.PHASES)
+        untracked_time = max(wall_time - tracked_time, 0.0)
+
+        parts = []
+        for phase in self.PHASES:
+            elapsed = self.current.get(phase, 0.0)
+            if elapsed > 0.0:
+                parts.append(f"{phase}={elapsed:.3f}s/{elapsed / wall_time * 100:.1f}%")
+        if untracked_time > 0.001:
+            parts.append(f"untracked={untracked_time:.3f}s/{untracked_time / wall_time * 100:.1f}%")
+
+        detail_parts = []
+        if agent_profile:
+            detail_parts.append(
+                "agent_step_detail("
+                f"input={agent_profile.get('input_prepare', 0.0):.3f}s, "
+                f"gpu_forward={agent_profile.get('gpu_forward', 0.0):.3f}s, "
+                f"output_sync={agent_profile.get('output_sync', 0.0):.3f}s, "
+                f"hidden_update={agent_profile.get('hidden_state_update', 0.0):.3f}s, "
+                f"calls={int(agent_profile.get('calls', 0))})"
+            )
+        if sharded_profile:
+            detail_parts.append(
+                "sharded("
+                f"action_copy={sharded_profile.get('action_copy_time', 0.0):.3f}s, "
+                f"worker_wait={sharded_profile.get('worker_wait_time', 0.0):.3f}s, "
+                f"info_rebuild={sharded_profile.get('info_rebuild_time', 0.0):.3f}s, "
+                f"steps={int(sharded_profile.get('steps', 0))})"
+            )
+        if transition_profile:
+            detail_parts.append(
+                "transition_detail("
+                f"intrinsic={transition_profile.get('intrinsic_reward_compute', 0.0):.3f}s, "
+                f"normalize={transition_profile.get('intrinsic_normalize', 0.0):.3f}s, "
+                f"team_forward={transition_profile.get('intrinsic_team_forward', 0.0):.3f}s, "
+                f"ind_forward={transition_profile.get('intrinsic_ind_forward', 0.0):.3f}s, "
+                f"postprocess={transition_profile.get('intrinsic_postprocess', 0.0):.3f}s, "
+                f"buffer_write={transition_profile.get('rollout_buffer_write', 0.0):.3f}s, "
+                f"disc_write={transition_profile.get('discriminator_buffer_write', 0.0):.3f}s, "
+                f"high_level={transition_profile.get('high_level_bookkeeping', 0.0):.3f}s, "
+                f"pack={transition_profile.get('full_rollout_pack', 0.0):.3f}s, "
+                f"pack_calls={int(transition_profile.get('full_rollout_pack_calls', 0))}, "
+                f"cache_hits={int(transition_profile.get('full_rollout_cache_hits', 0))}, "
+                f"store_calls={int(transition_profile.get('store_calls', 0))})"
+            )
+        if update_profile:
+            detail_parts.append(
+                "update_detail("
+                f"coord_adv={update_profile.get('coord_advantage', 0.0):.3f}s, "
+                f"coord_sampler={update_profile.get('coord_sampler', 0.0):.3f}s, "
+                f"coord_fb={update_profile.get('coord_forward_backward', 0.0):.3f}s, "
+                f"coord_stats={update_profile.get('coord_stats', 0.0):.3f}s, "
+                f"discoverer_adv={update_profile.get('discoverer_advantage', 0.0):.3f}s, "
+                f"discoverer_sampler={update_profile.get('discoverer_sampler', 0.0):.3f}s, "
+                f"discoverer_eval={update_profile.get('discoverer_eval', 0.0):.3f}s, "
+                f"discoverer_backward={update_profile.get('discoverer_backward', 0.0):.3f}s, "
+                f"discoverer_stats={update_profile.get('discoverer_stats', 0.0):.3f}s, "
+                f"disc_pack={update_profile.get('disc_pack', 0.0):.3f}s, "
+                f"disc_train={update_profile.get('disc_train', 0.0):.3f}s, "
+                f"disc_acc={update_profile.get('disc_accuracy', 0.0):.3f}s)"
+            )
+        if agent is not None and getattr(getattr(agent, 'device', None), 'type', None) == 'cuda':
+            peak_mb = torch.cuda.max_memory_allocated(agent.device) / (1024 ** 2)
+            detail_parts.append(f"cuda_peak_alloc={peak_mb:.1f}MB")
+
+        detail_text = " | " + " | ".join(detail_parts) if detail_parts else ""
+        main_logger.info(
+            f"[TrainingProfiler] rollout={self.rollout_index}, total_steps={total_steps}, "
+            f"wall={wall_time:.3f}s, env_steps={env_steps}, env_steps/s={throughput:.1f}; "
+            f"{'; '.join(parts)}{detail_text}"
+        )
+
+    def _collector_profile(self, vec_env):
+        if vec_env is not None and hasattr(vec_env, 'get_profile'):
+            try:
+                return vec_env.get_profile()
+            except Exception:
+                return None
+        return None
+
+    def _collector_profile_delta(self, vec_env):
+        current = self._collector_profile(vec_env)
+        if not current or not self._sharded_start_profile:
+            return None
+        return {
+            key: current.get(key, 0.0) - self._sharded_start_profile.get(key, 0.0)
+            for key in current
+        }
+
 # 导入 Stable Baselines3 的向量化环境
 from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.env_util import make_vec_env # Can also use this helper
@@ -654,6 +811,83 @@ class EnhancedRewardTracker:
             paper_record['ground_bs_remaining_capacity_mbps'] = self._record_value(remaining_bs)
 
         self.performance_metrics['paper_step_metrics'].append(paper_record)
+
+    def _record_light_step_metrics(self, step, env_id, reward, info, should_record_step):
+        if not should_record_step or not info or 'reward_info' not in info:
+            return
+
+        reward_info = info['reward_info']
+        if not isinstance(reward_info, dict):
+            return
+
+        timestamp = time.time()
+        served_users = reward_info.get('effective_connected_users')
+        if served_users is None:
+            served_users = reward_info.get('connected_users')
+        if served_users is not None:
+            self.performance_metrics['served_users'].append({
+                'step': step,
+                'env_id': env_id,
+                'served_users': served_users,
+                'total_users': self.n_users
+            })
+
+        if 'system_throughput_mbps' in reward_info:
+            self.performance_metrics['total_throughput'].append({
+                'step': step,
+                'env_id': env_id,
+                'system_throughput_mbps': reward_info['system_throughput_mbps'],
+                'timestamp': timestamp
+            })
+
+        if 'avg_throughput_per_user_mbps' in reward_info:
+            self.performance_metrics['avg_throughput_per_user'].append({
+                'step': step,
+                'env_id': env_id,
+                'avg_throughput_per_user_mbps': reward_info['avg_throughput_per_user_mbps'],
+                'timestamp': timestamp
+            })
+
+        core_scalar_keys = (
+            'coverage_ratio',
+            'effective_connected_users',
+            'connected_users',
+            'system_throughput_mbps',
+            'avg_throughput_per_user_mbps',
+            'rt_final_health_score',
+            'load_balance_score',
+            'load_balance_penalty',
+            'demand_satisfaction_ratio',
+            'capacity_limited_throughput_mbps',
+            'relay_route_loss_ratio',
+            'robustness_penalty',
+            'backhaul_margin_penalty_raw',
+            'min_serving_backhaul_bottleneck_mbps',
+            'backhaul_outage_ratio',
+            'avg_hops',
+            'discovery_reward',
+            'weighted_discovery_reward',
+            'discovered_users_count',
+            'nav_reward',
+            'coverage_reward',
+            'throughput_reward',
+        )
+
+        step_record = {
+            'step': step,
+            'env_id': env_id,
+            'reward': self._record_value(reward),
+        }
+        for key in core_scalar_keys:
+            if key in reward_info:
+                self._append_reward_component(key, reward_info[key], step, env_id, timestamp=timestamp)
+                scalar = self._numeric_scalar(reward_info[key])
+                if scalar is not None:
+                    step_record[key] = scalar
+
+        if len(step_record) > 3:
+            self.step_metric_buffer[env_id].append(step_record)
+            self.performance_metrics['paper_step_metrics'].append(step_record)
         
     def _log_aggregated_metrics(self, writer, step, data_list, metric_name, category="Training", 
                                recent_window=None, value_field='value'):
@@ -723,9 +957,11 @@ class EnhancedRewardTracker:
             except:
                 pass  # 避免调试信息本身出错
     
-    def log_training_step(self, step, env_id, reward, reward_components=None, info=None):
+    def log_training_step(self, step, env_id, reward, reward_components=None, info=None, metrics_level='full'):
         """记录训练步骤的奖励信息 - 存储优化版本"""
         self.training_rewards['total_steps'] += 1
+        if metrics_level == 'off':
+            return
         
         # === 数据采样逻辑 ===
         self.sample_counter += 1
@@ -734,6 +970,9 @@ class EnhancedRewardTracker:
         if self.enable_data_sampling:
             # 只在采样间隔时记录详细的步级数据
             should_record_step = (self.sample_counter % self.data_sampling_interval == 0)
+
+        if metrics_level == 'minimal':
+            return
         
         # === 记录步级数据（根据采样策略和数据级别） ===
         if should_record_step and self.collect_step_rewards:
@@ -764,6 +1003,10 @@ class EnhancedRewardTracker:
                         'env_id': env_id,
                         'value': comp_value
                     })
+
+        if metrics_level == 'light':
+            self._record_light_step_metrics(step, env_id, reward, info, should_record_step)
+            return
         
         # 记录额外信息（修正为仅在找到有效数据时记录，避免错误地记录0）
         if info and 'reward_info' in info:
@@ -827,7 +1070,7 @@ class EnhancedRewardTracker:
                         'value': reward_info['throughput_reward'],
                         'timestamp': time.time()
                     })
-                
+
                 if 'coverage_reward' in reward_info:
                     self.performance_metrics['reward_components']['coverage_rewards'].append({
                         'step': step,
@@ -1073,6 +1316,54 @@ class EnhancedRewardTracker:
                             'value': stat_value,
                             'timestamp': time.time()
                         })
+
+    def log_training_step_batch(self, step_start, rewards, infos, metrics_level='light'):
+        """轻量训练指标的批量记录路径，避免每个env一步都走完整dict处理。"""
+        num_envs = len(rewards)
+        if metrics_level == 'full':
+            for env_id in range(num_envs):
+                self.log_training_step(
+                    step_start + env_id,
+                    env_id,
+                    rewards[env_id],
+                    info=infos[env_id] if infos is not None else None,
+                    metrics_level='full'
+                )
+            return
+
+        self.training_rewards['total_steps'] += num_envs
+        if metrics_level in {'off', 'minimal'}:
+            return
+
+        if metrics_level != 'light':
+            return
+
+        for env_id in range(num_envs):
+            self.sample_counter += 1
+            should_record_step = True
+            if self.enable_data_sampling:
+                should_record_step = (self.sample_counter % self.data_sampling_interval == 0)
+            if not should_record_step:
+                continue
+
+            if self.collect_step_rewards and 'step_rewards' in self.training_rewards:
+                step_record = {
+                    'step': step_start + env_id,
+                    'env_id': env_id,
+                    'reward': rewards[env_id],
+                    'info': None
+                }
+                target = self.training_rewards['step_rewards']
+                if hasattr(target, 'append'):
+                    target.append(step_record)
+
+            self._record_light_step_metrics(
+                step_start + env_id,
+                env_id,
+                rewards[env_id],
+                infos[env_id] if infos is not None else None,
+                True
+            )
     
     def _log_belief_map_metrics(self, step, env_id, belief_map_data):
         """
@@ -2362,6 +2653,18 @@ def parse_args():
                         help='数值稳定性检查间隔（按vector step计；1=每步，0=禁用）')
     parser.add_argument('--memory_monitor_interval', type=int, default=16,
                         help='显存监控间隔（按vector step计；1=每步）')
+    parser.add_argument('--profile_training', action='store_true',
+                        help='启用训练分段profiler，记录rollout各阶段耗时')
+    parser.add_argument('--profile_interval', type=int, default=1,
+                        help='profiler输出间隔（按rollout计，仅在--profile_training时生效）')
+    parser.add_argument('--profile_warmup_rollouts', type=int, default=1,
+                        help='profiler预热rollout数量，预热期不输出统计')
+    parser.add_argument('--training_metrics_level', type=str, default='light',
+                        choices=['full', 'light', 'minimal', 'off'],
+                        help='训练逐步指标记录级别: full=完整逐步指标, light=核心标量采样, minimal=只保留episode级统计, off=跳过逐步指标')
+    parser.add_argument('--discriminator_update_mode', type=str, default='fused',
+                        choices=['fused', 'legacy'],
+                        help='判别器更新模式: fused=合并team/individual小批次更新, legacy=保留旧的分开更新')
     
     # 数据收集参数
     parser.add_argument('--export_interval', type=int, default=1000, 
@@ -2418,6 +2721,18 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     
     # 创建算法代理（HMASD或基线；不再有TensorBoard writer）
     agent = create_agent(config, args.algorithm, log_dir=log_dir, device=device)
+    training_profiler = TrainingProfiler(
+        enabled=args.profile_training,
+        interval=args.profile_interval,
+        warmup_rollouts=args.profile_warmup_rollouts,
+    )
+    if hasattr(agent, 'set_runtime_profiling'):
+        agent.set_runtime_profiling(training_profiler.enabled)
+    if training_profiler.enabled:
+        main_logger.info(
+            f"训练profiler已启用: interval={training_profiler.interval}, "
+            f"warmup_rollouts={training_profiler.warmup_rollouts}"
+        )
     
     # 创建增强的训练设置
     main_logger.info("设置增强的训练环境...")
@@ -2500,6 +2815,9 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     tb_manager.add_text('Parameters/num_envs', str(num_envs), 0)
     tb_manager.add_text('Parameters/export_interval', str(args.export_interval), 0)
     tb_manager.add_text('Parameters/detailed_logging', str(args.detailed_logging), 0)
+    tb_manager.add_text('Parameters/training_metrics_level', str(args.training_metrics_level), 0)
+    tb_manager.add_text('Parameters/discriminator_update_mode', str(args.discriminator_update_mode), 0)
+    tb_manager.add_text('Parameters/profile_training', str(args.profile_training), 0)
     
     
     # 训练变量
@@ -2507,6 +2825,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     n_episodes = 0
     max_episodes = config.total_timesteps // config.batch_size  # 估计的最大episode数量
     episode_rewards = []
+    reward_plot_interval = max(100, num_envs * 10)
     update_times = 0
     best_reward = float('-inf')
     last_eval_step = 0  # 跟踪上次评估的步数
@@ -2535,15 +2854,20 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         callback.init_callback(agent)
         callback.on_training_start(locals(), globals())
 
-    # 重置所有环境 (使用 SubprocVecEnv)
-    # SubprocVecEnv.reset() 只返回 observations
-    # 我们需要通过 env_method 获取初始状态
+    is_sharded_vec_env = isinstance(vec_env, ShardedSubprocVecEnv)
+
+    # 重置所有环境。ShardedSubprocVecEnv 将状态写入共享内存，避免 reset 时回传完整结果。
     main_logger.info("重置并行环境...")
-    results = vec_env.env_method('reset') # This calls reset on each env in parallel
-    observations = np.array([res[0] for res in results]) # Shape: (num_envs, n_uavs, obs_dim)
-    initial_infos = [res[1] for res in results]
-    # Use agent.config.state_dim for default state shape
-    states = np.array([info.get('state', np.zeros(agent.config.state_dim)) for info in initial_infos]) # Extract initial states, provide default
+    if is_sharded_vec_env:
+        observations = wrapped_vec_env.reset()
+        states = vec_env.get_states()
+    else:
+        # SubprocVecEnv.reset() 只返回 observations；这里继续用 env_method 获取初始 state，保持旧路径行为。
+        results = vec_env.env_method('reset') # This calls reset on each env in parallel
+        observations = np.array([res[0] for res in results]) # Shape: (num_envs, n_uavs, obs_dim)
+        initial_infos = [res[1] for res in results]
+        # Use agent.config.state_dim for default state shape
+        states = np.array([info.get('state', np.zeros(agent.config.state_dim)) for info in initial_infos]) # Extract initial states, provide default
     main_logger.info(f"环境已重置。观测形状: {observations.shape}, 状态形状: {states.shape}")
 
     # 环境状态跟踪
@@ -2561,9 +2885,14 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     episode_rewards_tracker = np.zeros(num_envs, dtype=np.float32)
 
     while total_steps < config.total_timesteps:
+        training_profiler.start_rollout(agent=agent, vec_env=vec_env)
+
         # 调用 on_rollout_start 回调
+        callback_start = time.perf_counter() if training_profiler.enabled else 0.0
         for callback in callbacks:
             callback.on_rollout_start()
+        if training_profiler.enabled:
+            training_profiler.add('callback', time.perf_counter() - callback_start)
 
         # --- Start of NEW, CORRECTED & BATCHED Rollout Loop ---
         for rollout_step in range(config.rollout_length):
@@ -2571,18 +2900,28 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
             
             # 1. 批量选择动作 (只调用一次 agent.step)
             # 传递上一步的 dones_tracker 以便正确重置内部状态
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             actions_batch, infos_batch = agent.step(
                 states, observations, env_steps, dones_tracker, deterministic=False
             )
+            if training_profiler.enabled:
+                training_profiler.add('agent_step', time.perf_counter() - phase_start)
             
             # 2. 批量执行环境步骤
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             next_observations, rewards, dones, infos = wrapped_vec_env.step(actions_batch)
+            if training_profiler.enabled:
+                training_profiler.add('env_step', time.perf_counter() - phase_start)
 
             # 3. 批量提取下一个状态
-            next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
+            if is_sharded_vec_env:
+                next_states = vec_env.get_next_states()
+            else:
+                next_states = np.array([info.get('next_state', np.zeros(config.state_dim)) for info in infos])
 
             # 4. 数值稳定性检查。该检查主要用于诊断，默认降频以减少每步Tensor构造开销。
             if args.stability_check_interval > 0 and rollout_step % args.stability_check_interval == 0:
+                phase_start = time.perf_counter() if training_profiler.enabled else 0.0
                 tensor_dict = {
                     'states': torch.FloatTensor(states),
                     'next_states': torch.FloatTensor(next_states),
@@ -2592,16 +2931,25 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     'rewards': torch.FloatTensor(rewards)
                 }
                 tensor_dict = numerical_stabilizer.comprehensive_check(tensor_dict)
+                if training_profiler.enabled:
+                    training_profiler.add('stability_check', time.perf_counter() - phase_start)
 
             # 5. 批量存储经验。done环境中collector会返回reset后的next_observation用于下一步策略输入；
             # rollout/discriminator数据必须使用terminal_observation，避免把新episode初始观测写进终止transition。
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             storage_next_states = next_states.copy()
             storage_next_observations = next_observations.copy()
-            for i in range(num_envs):
-                if dones[i] and 'terminal_state' in infos[i]:
-                    storage_next_states[i] = infos[i]['terminal_state']
-                if dones[i] and 'terminal_observation' in infos[i]:
-                    storage_next_observations[i] = infos[i]['terminal_observation']
+            if is_sharded_vec_env:
+                done_mask = np.asarray(dones, dtype=bool)
+                if np.any(done_mask):
+                    terminal_observations = vec_env.get_terminal_observations()
+                    storage_next_observations[done_mask] = terminal_observations[done_mask]
+            else:
+                for i in range(num_envs):
+                    if dones[i] and 'terminal_state' in infos[i]:
+                        storage_next_states[i] = infos[i]['terminal_state']
+                    if dones[i] and 'terminal_observation' in infos[i]:
+                        storage_next_observations[i] = infos[i]['terminal_observation']
 
             agent.store_transition_batch(
                 states=states,
@@ -2614,11 +2962,29 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 infos_batch=infos_batch,
                 rollout_step_idx=rollout_step
             )
+            if training_profiler.enabled:
+                training_profiler.add('transition_store', time.perf_counter() - phase_start)
 
             # 6. 更新逐环境追踪器、日志和episode状态
+            tracking_start = time.perf_counter() if training_profiler.enabled else 0.0
+            debug_elapsed = 0.0
+            if args.training_metrics_level != 'full':
+                reward_tracker.log_training_step_batch(
+                    total_steps,
+                    rewards,
+                    infos,
+                    metrics_level=args.training_metrics_level
+                )
             for i in range(num_envs):
                 # 记录每一步的详细信息
-                reward_tracker.log_training_step(total_steps + i, i, rewards[i], info=infos[i])
+                if args.training_metrics_level == 'full':
+                    reward_tracker.log_training_step(
+                        total_steps + i,
+                        i,
+                        rewards[i],
+                        info=infos[i],
+                        metrics_level=args.training_metrics_level
+                    )
 
                 # 更新追踪器
                 env_steps[i] += 1
@@ -2626,6 +2992,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 
                 # 如果启用调试模式，则记录可视化数据
                 if args.debug and visualizers is not None:
+                    debug_start = time.perf_counter() if training_profiler.enabled else 0.0
                     try:
                         # 【关键修复】从嵌套的info结构中正确提取UAV位置
                         # 尝试从 infos_dict 中的任意一个智能体获取共享的 uav_positions
@@ -2665,6 +3032,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         main_logger.warning(f"[调试模式] 环境 {i} 记录步骤数据时出错: {e}")
                         # 添加更详细的错误信息
                         main_logger.debug(f"[调试模式] 错误详情 - infos[{i}]键: {list(infos[i].keys()) if infos[i] else 'None'}")
+                    if training_profiler.enabled:
+                        debug_elapsed += time.perf_counter() - debug_start
 
                 if dones[i]:
                     # 【关键修复】Episode结束时立即更新dones_tracker
@@ -2676,6 +3045,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     
                     # 如果启用调试模式，则生成绘图并重置可视化器
                     if args.debug and visualizers is not None:
+                        debug_start = time.perf_counter() if training_profiler.enabled else 0.0
                         try:
                             main_logger.info(f"[调试模式] 环境 {i} Episode {n_episodes} 结束，正在生成拓扑图...")
                             visualizers[i].episode_num = n_episodes # 更新 episode 编号
@@ -2686,6 +3056,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                             main_logger.info(f"[调试模式] 环境 {i} 的可视化器已重置。")
                         except Exception as e:
                             main_logger.error(f"[调试模式] 环境 {i} 生成绘图时出错: {e}")
+                        if training_profiler.enabled:
+                            debug_elapsed += time.perf_counter() - debug_start
                     
                     # 【关键修复】使用增强的奖励追踪器记录episode完成，传递完整的环境信息
                     # 确保episode结束时的reward_info被正确捕获
@@ -2753,7 +3125,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         main_logger.info(f"最近{window_size}个episodes: 平均奖励 {avg_reward:.2f} ± {std_reward:.2f}, 最大/最小: {max_reward:.2f}/{min_reward:.2f}")
 
                     # 绘图
-                    if n_episodes % 10 == 0:
+                    if n_episodes % reward_plot_interval == 0:
                         plt.figure(figsize=(10, 5))
                         plt.plot(episode_rewards)
                         plt.title('Episode Rewards')
@@ -2766,13 +3138,20 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     env_steps[i] = 0
                     episode_rewards_tracker[i] = 0
                     agent.reset_env_state(i)
+            if training_profiler.enabled:
+                tracking_elapsed = time.perf_counter() - tracking_start
+                training_profiler.add('debug_visualization', debug_elapsed)
+                training_profiler.add('reward_tracking', max(tracking_elapsed - debug_elapsed, 0.0))
             
             # 7. 更新状态为下一步做准备。done环境如果collector提供reset_state，则下一步策略使用reset后的状态；
             # rollout存储仍然使用上面的next_states（终止状态）来保持当前transition语义。
-            policy_next_states = next_states.copy()
-            for i in range(num_envs):
-                if dones[i] and 'reset_state' in infos[i]:
-                    policy_next_states[i] = infos[i]['reset_state']
+            if is_sharded_vec_env:
+                policy_next_states = vec_env.get_states()
+            else:
+                policy_next_states = next_states.copy()
+                for i in range(num_envs):
+                    if dones[i] and 'reset_state' in infos[i]:
+                        policy_next_states[i] = infos[i]['reset_state']
             states = policy_next_states
             observations = next_observations
             dones_tracker = dones  # 保存当前步的dones供下一步使用
@@ -2789,6 +3168,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         # 【新增】最差表现优化 (Worst-Case Optimization)
         # 在计算GAE之前，识别并惩罚表现差的episode
         # ----------------------------------------------------------------
+        phase_start = time.perf_counter() if training_profiler.enabled else 0.0
         worst_case_episodes = []
         if config.use_worst_case_optimization and reward_tracker.episode_performance_history:
             # 1. 获取所有已完成episode的平均覆盖率
@@ -2806,6 +3186,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     if last_perf_entry and last_perf_entry['avg_coverage'] < threshold:
                         worst_case_episodes.append(i)
                         main_logger.info(f"[鲁棒性优化] 环境 {i} 的Episode表现 ({last_perf_entry['avg_coverage']:.2f}) 低于阈值 ({threshold:.2f})，将施加惩罚。")
+        if training_profiler.enabled:
+            training_profiler.add('post_rollout', time.perf_counter() - phase_start)
 
         # --- 在更新前计算GAE和Returns (最终修正版) ---
         main_logger.debug("为低层策略(Discoverer)计算GAE...")
@@ -2813,7 +3195,9 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         # 1. 获取最后一步的价值 (Critic的直接输出)。非学习基线没有critic，使用零值bootstrap。
         last_values_predicted = np.zeros((num_envs, config.n_agents), dtype=np.float32)
         if getattr(agent, 'uses_learned_value_function', True):
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             with torch.no_grad():
+                next_team_skills = np.zeros(num_envs, dtype=np.int64)
                 for i in range(num_envs):
                     # 【关键修复】确定在 next_state 将使用什么技能
                     # 【重要修复】使用实际的env_steps而不是rollout_step来判断技能切换点
@@ -2835,41 +3219,46 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         if next_team_skill == -1: 
                             next_team_skill = 0
                         main_logger.debug(f"环境 {i}: 继续使用当前技能 Z={next_team_skill} (env_step={env_steps[i]}, next_env_step={next_env_step})")
-                    
-                    # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
-                    # 此处的 'states' 变量实际上是 rollout 循环结束时的 'next_states'
-                    normalized_next_state = agent._normalize_states(next_states[i], update=False)
-                    global_state_tensor = torch.FloatTensor(normalized_next_state).unsqueeze(0).to(agent.device)
-                    team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
-                    
-                    # 【根本原因修复】从agent获取并传递正确的critic隐藏状态
+                    next_team_skills[i] = int(next_team_skill)
+
+                # 【性能优化】批量计算 V(s_{T+1}, Z_{T+1})，避免每个环境一次GPU调用。
+                normalized_next_states = agent._normalize_states(next_states, update=False)
+                global_state_tensor = torch.FloatTensor(normalized_next_states).to(agent.device)
+                team_skill_tensor = torch.as_tensor(next_team_skills, dtype=torch.long, device=agent.device)
+
+                critic_hidden_batch = np.zeros((num_envs, config.gru_hidden_size), dtype=np.float32)
+                for i in range(num_envs):
                     critic_hidden_key = f"{i}_critic"
                     last_critic_hidden_state = agent.env_hidden_states.get(critic_hidden_key)
-                    
-                    # 【正确修复】确保隐藏状态的批量维度与输入的批量维度(1)匹配
                     if last_critic_hidden_state is not None:
-                        # Critic的隐藏状态在同一环境中对所有智能体都是相同的，因此我们只取第一个
-                        if last_critic_hidden_state.shape[0] > 1:
-                            last_critic_hidden_state = last_critic_hidden_state[0:1]
+                        if isinstance(last_critic_hidden_state, torch.Tensor):
+                            hidden_np = last_critic_hidden_state.detach().cpu().numpy()
+                        else:
+                            hidden_np = np.asarray(last_critic_hidden_state, dtype=np.float32)
+                        if hidden_np.ndim > 1:
+                            hidden_np = hidden_np[0]
+                        critic_hidden_batch[i] = hidden_np
 
-                    global_value_tensor, _ = agent.skill_discoverer.get_value(
-                        global_state_tensor, 
-                        team_skill_tensor,
-                        critic_hidden_state=last_critic_hidden_state
+                critic_hidden_tensor = torch.FloatTensor(critic_hidden_batch).to(agent.device)
+                global_value_tensor, _ = agent.skill_discoverer.get_value(
+                    global_state_tensor,
+                    team_skill_tensor,
+                    critic_hidden_state=critic_hidden_tensor
+                )
+
+                if config.use_valuenorm and agent.value_norm_discoverer is not None:
+                    global_value_tensor = agent._denormalize_values(
+                        global_value_tensor,
+                        agent.value_norm_discoverer
                     )
 
-                    if config.use_valuenorm and agent.value_norm_discoverer is not None:
-                        global_value_tensor = agent._denormalize_values(
-                            global_value_tensor,
-                            agent.value_norm_discoverer
-                        )
-                    
-                    last_values_predicted[i, :] = global_value_tensor.squeeze().item()
-                    
-                    # 数值稳定性检查
-                    last_values_predicted[i, :] = numerical_stabilizer.check_and_fix_tensor(
-                        torch.FloatTensor(last_values_predicted[i, :]), name='last_values'
-                    ).numpy()
+                bootstrap_values = global_value_tensor.squeeze(-1).detach().cpu().numpy().reshape(num_envs, 1)
+                last_values_predicted[:, :] = bootstrap_values
+                last_values_predicted = numerical_stabilizer.check_and_fix_tensor(
+                    torch.FloatTensor(last_values_predicted), name='last_values'
+                ).numpy()
+            if training_profiler.enabled:
+                training_profiler.add('bootstrap', time.perf_counter() - phase_start)
 
         # Rollout数据收集完成，进行更新
         # 修复：使用实际收集的步数，而不是可能不准确的rollout_steps变量
@@ -2877,8 +3266,11 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         main_logger.info(f"Rollout收集完成: 实际步数={steps_in_rollout}, 预期步数={config.rollout_length}")
         try:
             # 执行回调函数 - 在更新前
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             for callback in callbacks:
                 callback.on_rollout_end()
+            if training_profiler.enabled:
+                training_profiler.add('callback', time.perf_counter() - phase_start)
             
             # 在调用update之前，应用最差情况优化
             if worst_case_episodes:
@@ -2889,6 +3281,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
             last_states_batch = states.copy()
             last_observations_batch = observations.copy()
 
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             update_info = agent.update(
                 steps_in_buffer=steps_in_rollout,
                 last_values=last_values_predicted,
@@ -2896,6 +3289,10 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 last_state=last_states_batch,
                 last_observations=last_observations_batch
             )
+            if training_profiler.enabled:
+                if getattr(agent.device, 'type', None) == 'cuda':
+                    torch.cuda.synchronize(agent.device)
+                training_profiler.add('update', time.perf_counter() - phase_start)
             update_times += 1
             elapsed = time.time() - start_time
 
@@ -2910,8 +3307,11 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
             tb_manager.log_training_metrics(total_steps, update_info, args=args)
             
             # 执行回调函数 - 在更新后
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             for callback in callbacks:
                 callback.on_step()
+            if training_profiler.enabled:
+                training_profiler.add('callback', time.perf_counter() - phase_start)
             
             # 详细记录低层损失的组成部分
             main_logger.info(f"低层损失详情 - 总损失: {update_info['discoverer_loss']:.4f}, "
@@ -2936,13 +3336,17 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
 
         # 【关键修复】更新完成后，立即清空缓冲区，为下一次rollout做准备
         # 这是解决"陈旧数据污染"和"策略退化"问题的关键
+        phase_start = time.perf_counter() if training_profiler.enabled else 0.0
         agent.clear_buffers()
         main_logger.debug(f"已清空经验缓冲区，准备下一次rollout (更新 {update_times})")
+        if training_profiler.enabled:
+            training_profiler.add('post_rollout', time.perf_counter() - phase_start)
 
         # 重置rollout步数计数器
         rollout_steps = 0
 
         # 加强高层样本的累积情况监控
+        phase_start = time.perf_counter() if training_profiler.enabled else 0.0
         if getattr(agent, 'collects_high_level_samples', True) and total_steps >= last_check_total_steps + check_interval_steps:
                 # 获取当前高层缓冲区大小 (从统一的rollout buffer中计算)
                 num_steps_in_buffer = config.rollout_length
@@ -3030,8 +3434,11 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 last_check_hl_samples = current_high_level_samples_total
                 last_high_level_buffer_size = current_high_level_buffer_size
                 
+        if training_profiler.enabled:
+            training_profiler.add('post_rollout', time.perf_counter() - phase_start)
         
         # 定期导出训练数据
+        phase_start = time.perf_counter() if training_profiler.enabled else 0.0
         reward_tracker.export_training_data(total_steps, tb_manager.writer, args=args)
         
         # 记录性能监控指标
@@ -3043,9 +3450,12 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
             stability_stats = numerical_stabilizer.get_statistics()
             if stability_stats['total_repairs'] > 0:
                 main_logger.info(f"数值稳定性统计: {stability_stats}")
+        if training_profiler.enabled:
+            training_profiler.add('post_rollout', time.perf_counter() - phase_start)
         
         # 评估 (基于总步数和上次评估的时间)
         if (not args.disable_eval) and total_steps >= last_eval_step + config.eval_interval:
+            phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             if eval_vec_env is None:
                 if eval_env_fns is None:
                     raise RuntimeError("评估环境尚未创建，且未提供eval_env_fns用于延迟创建")
@@ -3126,9 +3536,22 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     #main_logger.info(f"评估性能数据已保存至: {eval_data_path}")
                 except Exception as e:
                     main_logger.error(f"保存评估性能数据时出错: {e}")
+            if training_profiler.enabled:
+                training_profiler.add('eval_save', time.perf_counter() - phase_start)
 
         # 在调用 agent.update() 之后立即记录rollout指标到TensorBoard
-        reward_tracker.log_rollout_metrics_to_tensorboard(tb_manager.writer, total_steps, args=args)
+        phase_start = time.perf_counter() if training_profiler.enabled else 0.0
+        if args.training_metrics_level != 'off':
+            reward_tracker.log_rollout_metrics_to_tensorboard(tb_manager.writer, total_steps, args=args)
+        if training_profiler.enabled:
+            training_profiler.add('post_rollout', time.perf_counter() - phase_start)
+            training_profiler.finish_rollout(
+                total_steps=total_steps,
+                steps_in_rollout=steps_in_rollout,
+                num_envs=num_envs,
+                agent=agent,
+                vec_env=vec_env
+            )
 
     # 【修复】将"训练完成"相关代码移出while循环
     main_logger.info(f"训练完成! 总步数: {total_steps}, 总episodes: {n_episodes}")
@@ -3986,13 +4409,15 @@ def main():
     config.use_opt = args.use_opt
     config.use_reward_annealing = args.use_reward_annealing
     config.use_lr_decay = args.use_lr_decay
+    config.discriminator_update_mode = args.discriminator_update_mode
     if args.strict_hmasd_alignment is not None:
         config.strict_hmasd_alignment = bool(args.strict_hmasd_alignment)
     
     main_logger.info("配置已从config_1.py加载，运行时开关参数已设置")
     main_logger.info(
         f"OPT模块: {config.use_opt}, 权重退火: {config.use_reward_annealing}, "
-        f"学习率衰减: {config.use_lr_decay}, 严格HMASD对齐: {getattr(config, 'strict_hmasd_alignment', True)}"
+        f"学习率衰减: {config.use_lr_decay}, 严格HMASD对齐: {getattr(config, 'strict_hmasd_alignment', True)}, "
+        f"判别器更新模式: {config.discriminator_update_mode}"
     )
     
     # 获取计算设备
@@ -4001,13 +4426,15 @@ def main():
     # 确定并行环境数量，并同步写回config，确保buffer/batch尺寸与实际collector一致。
     requested_backend = args.collector_backend
     base_num_envs = args.num_envs if args.num_envs > 0 else config.num_envs
+    cpu_count = os.cpu_count() or 1
     if requested_backend == 'auto':
         explicit_sharding = args.num_workers > 0 or args.envs_per_worker > 0
-        cpu_count = os.cpu_count() or 1
-        args.collector_backend = 'sharded' if explicit_sharding or base_num_envs > cpu_count * 2 else 'subproc'
+        sharded_process_limit = max(64, cpu_count * 4)
+        args.collector_backend = 'sharded' if explicit_sharding or base_num_envs > sharded_process_limit else 'subproc'
         main_logger.info(
             f"collector_backend=auto 已解析为 {args.collector_backend} "
-            f"(num_envs={base_num_envs}, cpu_count={cpu_count}, explicit_sharding={explicit_sharding})"
+            f"(num_envs={base_num_envs}, cpu_count={cpu_count}, explicit_sharding={explicit_sharding}, "
+            f"sharded_process_limit={sharded_process_limit})"
         )
 
     if args.collector_backend == 'sharded':
@@ -4018,20 +4445,45 @@ def main():
         else:
             num_envs = int(config.num_envs)
 
-        if args.num_workers > 0 and args.envs_per_worker <= 0:
+        if args.num_workers > 0 and args.envs_per_worker > 0:
+            num_workers = int(args.num_workers)
+            envs_per_worker = int(args.envs_per_worker)
+        elif args.num_workers > 0 and args.envs_per_worker <= 0:
             num_workers = int(args.num_workers)
             envs_per_worker = int(np.ceil(num_envs / num_workers))
+        elif args.num_workers <= 0 and args.envs_per_worker > 0:
+            envs_per_worker = int(args.envs_per_worker)
+            num_workers = max(1, int(np.ceil(num_envs / envs_per_worker)))
         else:
-            envs_per_worker = args.envs_per_worker if args.envs_per_worker > 0 else min(8, max(1, num_envs))
-            num_workers = args.num_workers if args.num_workers > 0 else max(1, int(np.ceil(num_envs / envs_per_worker)))
+            num_workers = max(1, min(int(num_envs), int(cpu_count)))
+            envs_per_worker = int(np.ceil(num_envs / num_workers))
+
+        if num_workers > num_envs:
+            main_logger.warning(
+                f"num_workers={num_workers} 大于 num_envs={num_envs}，已裁剪为 {num_envs}"
+            )
+            num_workers = int(num_envs)
+            envs_per_worker = max(1, int(np.ceil(num_envs / num_workers)))
 
         if num_workers * envs_per_worker < num_envs:
             num_workers = int(np.ceil(num_envs / envs_per_worker))
             main_logger.warning(
                 f"分片容量小于num_envs，已将num_workers调整为{num_workers}以容纳{num_envs}个环境"
             )
+        if envs_per_worker > 1 and num_workers < min(num_envs, cpu_count):
+            main_logger.warning(
+                f"ShardedSubprocVecEnv 将在每个worker内串行运行多个环境 "
+                f"(workers={num_workers}, envs_per_worker={envs_per_worker}, cpu_count={cpu_count})；"
+                f"如果环境step较重，这可能慢于subproc。"
+            )
         args.num_workers = num_workers
         args.envs_per_worker = envs_per_worker
+        if args.training_metrics_level in {'minimal', 'off'} and args.metrics_mode != 'train_only':
+            main_logger.info(
+                f"training_metrics_level={args.training_metrics_level} 将 sharded metrics_mode "
+                f"从 {args.metrics_mode} 调整为 train_only，以跳过reward_info重建"
+            )
+            args.metrics_mode = 'train_only'
     else:
         num_envs = args.num_envs if args.num_envs > 0 else config.num_envs
         args.num_workers = 0
@@ -4049,7 +4501,8 @@ def main():
     
     main_logger.info(
         f"使用 {num_envs} 个并行训练环境和 {eval_rollout_threads} 个并行评估环境 "
-        f"(collector={args.collector_backend}, workers={args.num_workers}, envs_per_worker={args.envs_per_worker}, metrics={args.metrics_mode})"
+        f"(collector={args.collector_backend}, workers={args.num_workers}, envs_per_worker={args.envs_per_worker}, "
+        f"metrics={args.metrics_mode}, training_metrics_level={args.training_metrics_level})"
     )
     
     # 创建环境构造函数列表 (使用修改后的 make_env)
