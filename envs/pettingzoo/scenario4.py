@@ -11,7 +11,7 @@ try:
 except ImportError as exc:
     raise ImportError(
         "envs.pettingzoo.scenario4 requires the 'filterpy' package. "
-        "Install it with `pip install filterpy` or use scenario4_discrete.py if Kalman filtering is not needed."
+        "Install it with `pip install filterpy` or use scenario_base.py if Kalman filtering is not needed."
     ) from exc
 
 

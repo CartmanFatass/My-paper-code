@@ -5,6 +5,7 @@ import torch
 import argparse
 import logging
 import cv2
+import json
 
 # 使用非GUI后端生成图像，避免训练进程依赖桌面显示或虚拟显示。
 os.environ.setdefault('MPLBACKEND', 'Agg')
@@ -21,6 +22,33 @@ from logger import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEV
 
 # 初始化主日志器（如果尚未初始化）
 main_logger = get_logger("HMASD-Main")
+
+def normalize_scenario(scenario):
+    """Normalize legacy numeric scenario ids to semantic scenario names."""
+    scenario_key = str(scenario).strip().lower()
+    aliases = {
+        "4": "base",
+        "s4": "base",
+        "scenario4": "base",
+        "scenario_base": "base",
+        "base": "base",
+        "5": "belief_map",
+        "s5": "belief_map",
+        "scenario5": "belief_map",
+        "belief": "belief_map",
+        "belief_map": "belief_map",
+        "6": "progress",
+        "s6": "progress",
+        "scenario6": "progress",
+        "progressive": "progress",
+        "progress": "progress",
+    }
+    if scenario_key not in aliases:
+        raise ValueError(
+            f"未知的场景: {scenario}. 可选: base, progress, belief_map "
+            f"(兼容旧别名 4, 6, 5)"
+        )
+    return aliases[scenario_key]
 
 def convert_numpy_types(obj):
     """
@@ -47,7 +75,7 @@ from stable_baselines3.common.env_util import make_vec_env # Can also use this h
 
 # 导入论文中的配置
 # from config_1 import Config # Now dynamically imported
-from hmasd.agent import HMASDAgent
+from hmasd.baselines import ALGORITHM_CHOICES, apply_algorithm_config, create_agent
 from hmasd.sb3_integration import (
     create_hmasd_training_setup, 
     AdvancedNumericalStabilizer,
@@ -56,7 +84,7 @@ from hmasd.sb3_integration import (
     HMASDVecEnvWrapper
 )
 from hmasd.sharded_vec_env import ShardedSubprocVecEnv
-from envs.pettingzoo.scenario4_discrete import UAVForcedRelayEnv
+from envs.pettingzoo.scenario_base import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
 from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
@@ -77,6 +105,7 @@ class TensorBoardManager:
     def _log_config_parameters(self):
         """记录配置参数到TensorBoard"""
         # 基础参数
+        self.writer.add_text('Parameters/algorithm', str(getattr(self.config, 'algorithm', 'hmasd')), 0)
         self.writer.add_text('Parameters/n_agents', str(self.config.n_agents), 0)
         self.writer.add_text('Parameters/n_Z', str(self.config.n_Z), 0)
         self.writer.add_text('Parameters/n_z', str(self.config.n_z), 0)
@@ -450,12 +479,41 @@ class EnhancedRewardTracker:
                 'coverage_drop_ratio': [],
                 'backhaul_outage_ema': [],
                 'instant_outage_intensity': [],
+                'relay_route_lost_uavs': [],
+                'relay_route_lost_users': [],
+                'relay_route_loss_ratio': [],
+                'relay_route_loss_prev_served_ratio': [],
+                'prev_backhaul_served_users': [],
+                'current_backhaul_served_users': [],
+                'backhaul_margin_penalty_raw': [],
+                'min_serving_backhaul_bottleneck_mbps': [],
+                'avg_serving_backhaul_bottleneck_mbps': [],
                 'robustness_penalty': [],
                 'backhaul_outage_penalty': [],
                 'full_disconnect_penalty': [],
                 'coverage_drop_penalty': [],
-                'outage_memory_penalty': []
+                'outage_memory_penalty': [],
+                'relay_break_penalty': [],
+                'backhaul_margin_penalty': [],
+
+                # 论文实验统一指标：scenario4 reward shaping + scenario6 progressive
+                'load_balance_penalty': [],
+                'load_balance_score': [],
+                'progressive_coverage_balance_reward': [],
+                'coverage_balance_reward': [],
+                'demand_satisfaction_ratio': [],
+                'capacity_limited_throughput_mbps': [],
+                'active_ground_bs_count': [],
+                'failed_ground_bs_count': [],
+                'min_ground_bs_remaining_capacity_mbps': [],
+                'mean_ground_bs_remaining_capacity_mbps': [],
+                'backhaul_guard_checked_actions': [],
+                'backhaul_guard_blocked_actions': [],
+                'nav_reward': []
             },
+
+            # 论文图表用的统一逐步记录。这里允许保存字符串/JSON字段，不进入TensorBoard聚合。
+            'paper_step_metrics': [],
             
             # 【新增】Episode结束时的专门数据记录
             'episode_end_metrics': []  # 存储每个episode结束时的详细性能指标
@@ -480,6 +538,122 @@ class EnhancedRewardTracker:
         # 清理控制
         self.last_cleanup_step = 0
         self.cleanup_interval = 50000  # 每50000步清理一次旧数据
+
+        self.paper_export_dir = getattr(config, 'paper_data_dir', None) or os.path.join(self.log_dir, 'paper_data')
+
+    @staticmethod
+    def _json_safe_value(value):
+        return json.dumps(convert_numpy_types(value), ensure_ascii=False)
+
+    @staticmethod
+    def _numeric_scalar(value):
+        if value is None:
+            return None
+        if isinstance(value, (bool, np.bool_)):
+            return float(value)
+        if isinstance(value, (int, float, np.integer, np.floating)):
+            if np.isfinite(float(value)):
+                return float(value)
+            return None
+        arr = np.asarray(value) if isinstance(value, (list, tuple, np.ndarray)) else None
+        if arr is not None and arr.size == 1:
+            scalar = float(arr.reshape(-1)[0])
+            return scalar if np.isfinite(scalar) else None
+        return None
+
+    @staticmethod
+    def _record_value(value):
+        scalar = EnhancedRewardTracker._numeric_scalar(value)
+        if scalar is not None:
+            return scalar
+        return EnhancedRewardTracker._json_safe_value(value)
+
+    def _append_reward_component(self, key, value, step, env_id, timestamp=None):
+        if key not in self.performance_metrics['reward_components']:
+            self.performance_metrics['reward_components'][key] = []
+        scalar = self._numeric_scalar(value)
+        if scalar is None:
+            return
+        entry = {'step': step, 'env_id': env_id, 'value': scalar}
+        if timestamp is not None:
+            entry['timestamp'] = timestamp
+        self.performance_metrics['reward_components'][key].append(entry)
+
+    def _record_paper_step_metrics(self, step, env_id, reward, reward_info):
+        if not reward_info:
+            return
+
+        active_bs = reward_info.get('ground_bs_active')
+        remaining_bs = reward_info.get('ground_bs_remaining_capacity_mbps')
+
+        active_bs_count = None
+        failed_bs_count = None
+        if active_bs is not None:
+            active_arr = np.asarray(active_bs, dtype=bool)
+            active_bs_count = int(np.sum(active_arr))
+            failed_bs_count = int(active_arr.size - active_bs_count)
+            self._append_reward_component('active_ground_bs_count', active_bs_count, step, env_id)
+            self._append_reward_component('failed_ground_bs_count', failed_bs_count, step, env_id)
+
+        if remaining_bs is not None:
+            remaining_arr = np.asarray(remaining_bs, dtype=float)
+            finite_remaining = remaining_arr[remaining_arr >= 0]
+            if finite_remaining.size > 0:
+                self._append_reward_component(
+                    'min_ground_bs_remaining_capacity_mbps',
+                    float(np.min(finite_remaining)),
+                    step,
+                    env_id
+                )
+                self._append_reward_component(
+                    'mean_ground_bs_remaining_capacity_mbps',
+                    float(np.mean(finite_remaining)),
+                    step,
+                    env_id
+                )
+
+        scalar_fields = [
+            'coverage_ratio', 'effective_connected_users', 'system_throughput_mbps',
+            'avg_throughput_per_user_mbps', 'load_balance_score',
+            'progressive_coverage_balance_reward', 'coverage_balance_reward',
+            'load_balance_penalty', 'robustness_penalty', 'relay_route_loss_ratio',
+            'min_serving_backhaul_bottleneck_mbps', 'demand_satisfaction_ratio',
+            'capacity_limited_throughput_mbps', 'backhaul_outage_ratio',
+            'backhaul_drop_ratio', 'avg_hops', 'backhaul_guard_checked_actions',
+            'backhaul_guard_blocked_actions', 'nav_reward'
+        ]
+
+        for key in scalar_fields:
+            if key in reward_info:
+                self._append_reward_component(key, reward_info[key], step, env_id)
+
+        record_fields = [
+            'coverage_ratio', 'effective_connected_users', 'system_throughput_mbps',
+            'avg_throughput_per_user_mbps', 'load_balance_score',
+            'progressive_coverage_balance_reward', 'coverage_balance_reward',
+            'load_balance_penalty', 'robustness_penalty', 'relay_route_loss_ratio',
+            'min_serving_backhaul_bottleneck_mbps', 'demand_satisfaction_ratio',
+            'capacity_limited_throughput_mbps', 'backhaul_outage_ratio',
+            'backhaul_drop_ratio', 'avg_hops', 'progressive_stage', 'scale_mode'
+        ]
+        paper_record = {
+            'step': step,
+            'env_id': env_id,
+            'reward': self._record_value(reward),
+            'preset': getattr(self.config, 'experiment_preset', ''),
+            'scenario_label': getattr(self.config, 'scenario_label', ''),
+        }
+        for key in record_fields:
+            if key in reward_info:
+                paper_record[key] = self._record_value(reward_info[key])
+        if active_bs is not None:
+            paper_record['ground_bs_active'] = self._record_value(active_bs)
+            paper_record['active_ground_bs_count'] = active_bs_count
+            paper_record['failed_ground_bs_count'] = failed_bs_count
+        if remaining_bs is not None:
+            paper_record['ground_bs_remaining_capacity_mbps'] = self._record_value(remaining_bs)
+
+        self.performance_metrics['paper_step_metrics'].append(paper_record)
         
     def _log_aggregated_metrics(self, writer, step, data_list, metric_name, category="Training", 
                                recent_window=None, value_field='value'):
@@ -594,6 +768,7 @@ class EnhancedRewardTracker:
         # 记录额外信息（修正为仅在找到有效数据时记录，避免错误地记录0）
         if info and 'reward_info' in info:
             reward_info = info['reward_info']
+            self._record_paper_step_metrics(step, env_id, reward, reward_info)
             served_users = None  # 初始化为 None，表示"未找到"
             
             # 严格优先使用 'effective_connected_users' - 【关键修复】使用安全的字典访问
@@ -811,9 +986,17 @@ class EnhancedRewardTracker:
                     'isolated_serving_uavs', 'isolated_serving_uav_ratio',
                     'full_network_disconnect', 'full_disconnect_streak',
                     'coverage_drop_ratio', 'backhaul_outage_ema',
-                    'instant_outage_intensity', 'robustness_penalty',
+                    'instant_outage_intensity',
+                    'relay_route_lost_uavs', 'relay_route_lost_users',
+                    'relay_route_loss_ratio', 'relay_route_loss_prev_served_ratio',
+                    'prev_backhaul_served_users', 'current_backhaul_served_users',
+                    'backhaul_margin_penalty_raw',
+                    'min_serving_backhaul_bottleneck_mbps',
+                    'avg_serving_backhaul_bottleneck_mbps',
+                    'robustness_penalty',
                     'backhaul_outage_penalty', 'full_disconnect_penalty',
-                    'coverage_drop_penalty', 'outage_memory_penalty'
+                    'coverage_drop_penalty', 'outage_memory_penalty',
+                    'relay_break_penalty', 'backhaul_margin_penalty'
                 ]
                 for key in robustness_keys:
                     if key in reward_info:
@@ -1113,7 +1296,7 @@ class EnhancedRewardTracker:
     def _export_minimal_data(self, step, writer=None, args=None):
         """最小模式数据导出 - 只导出核心统计信息"""
         try:
-            export_dir = '../autodl-tmp/paper_data'
+            export_dir = self.paper_export_dir
             os.makedirs(export_dir, exist_ok=True)
             
             # 只导出episode级别的统计摘要
@@ -1167,7 +1350,7 @@ class EnhancedRewardTracker:
             return
         
         # 原始导出目录
-        export_dir = '../autodl-tmp/paper_data'
+        export_dir = self.paper_export_dir
         os.makedirs(export_dir, exist_ok=True)
         
         # === 数据轮转管理 ===
@@ -1231,6 +1414,11 @@ class EnhancedRewardTracker:
         if components_data:
             components_df = pd.DataFrame(components_data)
             components_df.to_csv(os.path.join(export_dir, f'reward_components_step_{step}.csv'), index=False)
+
+        paper_step_metrics = self.performance_metrics.get('paper_step_metrics', [])
+        if paper_step_metrics:
+            paper_df = pd.DataFrame(paper_step_metrics)
+            paper_df.to_csv(os.path.join(export_dir, f'paper_step_metrics_step_{step}.csv'), index=False)
         
         # 导出技能使用统计
         skill_stats = {
@@ -1375,6 +1563,9 @@ class EnhancedRewardTracker:
         # 【新增】记录切换奖励指标
         self._log_handover_reward_metrics_to_tensorboard(writer, step)
 
+        # 论文实验核心指标：独立于Discovery记录，保证reward shaping数据稳定写入。
+        self._log_paper_reward_metrics_to_tensorboard(writer, step)
+
     def _log_handover_reward_metrics_to_tensorboard(self, writer, step):
         """记录切换奖励相关指标到TensorBoard"""
         reward_components = self.performance_metrics['reward_components']
@@ -1392,6 +1583,85 @@ class EnhancedRewardTracker:
                                            reward_components[field],
                                            field.replace('_', ' ').title().replace(' ', '_'),
                                            'HandoverReward')
+
+    def _log_paper_reward_metrics_to_tensorboard(self, writer, step):
+        """记录论文实验所需的reward shaping、健康度、复杂场景指标。"""
+        reward_components = self.performance_metrics['reward_components']
+
+        reward_shaping_fields = [
+            'coverage_rewards', 'load_balance_rewards', 'load_balance_penalty',
+            'progressive_coverage_balance_reward', 'coverage_balance_reward',
+            'nav_reward'
+        ]
+        for field in reward_shaping_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(
+                    writer, step, reward_components[field],
+                    field.replace('_', ' ').title().replace(' ', '_'),
+                    'RewardShaping'
+                )
+
+        health_score_fields = [
+            'rt_final_health_score', 'connectivity_score', 'role_diversity_bonus',
+            'effective_coverage_score', 'dispersion_penalty', 'serving_uavs_count',
+            'pure_relay_uavs_count', 'weighted_serving_score'
+        ]
+        for field in health_score_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(
+                    writer, step, reward_components[field],
+                    field.replace('_', ' ').title().replace(' ', '_'),
+                    'HealthScore'
+                )
+
+        robustness_fields = [
+            'backhaul_outage_users', 'backhaul_outage_ratio',
+            'service_drop_users', 'service_drop_ratio',
+            'backhaul_drop_users', 'backhaul_drop_ratio',
+            'isolated_serving_uavs', 'isolated_serving_uav_ratio',
+            'full_network_disconnect', 'full_disconnect_streak',
+            'coverage_drop_ratio', 'backhaul_outage_ema',
+            'instant_outage_intensity',
+            'relay_route_lost_uavs', 'relay_route_lost_users',
+            'relay_route_loss_ratio', 'relay_route_loss_prev_served_ratio',
+            'prev_backhaul_served_users', 'current_backhaul_served_users',
+            'backhaul_margin_penalty_raw',
+            'min_serving_backhaul_bottleneck_mbps',
+            'avg_serving_backhaul_bottleneck_mbps',
+            'robustness_penalty',
+            'backhaul_outage_penalty', 'full_disconnect_penalty',
+            'coverage_drop_penalty', 'outage_memory_penalty',
+            'relay_break_penalty', 'backhaul_margin_penalty',
+            'backhaul_guard_checked_actions', 'backhaul_guard_blocked_actions'
+        ]
+        for field in robustness_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(
+                    writer, step, reward_components[field],
+                    field.replace('_', ' ').title().replace(' ', '_'),
+                    'LoadBalanceRobustness'
+                )
+
+        progressive_fields = [
+            'demand_satisfaction_ratio', 'capacity_limited_throughput_mbps',
+            'load_balance_score', 'active_ground_bs_count', 'failed_ground_bs_count',
+            'min_ground_bs_remaining_capacity_mbps',
+            'mean_ground_bs_remaining_capacity_mbps'
+        ]
+        for field in progressive_fields:
+            if reward_components.get(field):
+                self._log_aggregated_metrics(
+                    writer, step, reward_components[field],
+                    field.replace('_', ' ').title().replace(' ', '_'),
+                    'Scenario6'
+                )
+
+        reward_type = getattr(self.config, 'reward_type', 'health')
+        if reward_type == 'naive' and reward_components.get('coverage_ratios'):
+            recent = reward_components['coverage_ratios'][-self.window_size:]
+            values = [entry['value'] for entry in recent if isinstance(entry, dict) and 'value' in entry]
+            if values:
+                writer.add_scalar('NaiveReward/Coverage_Ratio_Direct', np.mean(values), step)
 
     def _log_soft_handover_metrics_to_tensorboard(self, writer, step):
         """记录软切换相关指标到TensorBoard"""
@@ -1797,9 +2067,17 @@ class EnhancedRewardTracker:
                     'isolated_serving_uavs', 'isolated_serving_uav_ratio',
                     'full_network_disconnect', 'full_disconnect_streak',
                     'coverage_drop_ratio', 'backhaul_outage_ema',
-                    'instant_outage_intensity', 'robustness_penalty',
+                    'instant_outage_intensity',
+                    'relay_route_lost_uavs', 'relay_route_lost_users',
+                    'relay_route_loss_ratio', 'relay_route_loss_prev_served_ratio',
+                    'prev_backhaul_served_users', 'current_backhaul_served_users',
+                    'backhaul_margin_penalty_raw',
+                    'min_serving_backhaul_bottleneck_mbps',
+                    'avg_serving_backhaul_bottleneck_mbps',
+                    'robustness_penalty',
                     'backhaul_outage_penalty', 'full_disconnect_penalty',
-                    'coverage_drop_penalty', 'outage_memory_penalty'
+                    'coverage_drop_penalty', 'outage_memory_penalty',
+                    'relay_break_penalty', 'backhaul_margin_penalty'
                 ]
 
                 for field in robustness_fields:
@@ -1914,6 +2192,9 @@ class EnhancedRewardTracker:
                                    reward_components['coverage_ratios'], 
                                    'Coverage_Ratio', 
                                    'Performance')
+
+        # 论文实验核心指标：不要依赖Discovery字段是否存在。
+        self._log_paper_reward_metrics_to_tensorboard(writer, step)
     
     def get_summary_statistics(self):
         """获取训练摘要统计信息"""
@@ -1975,31 +2256,33 @@ def make_env(rank, seed, config, scenario, render_mode=None, scale_mode=None):
         rank: 环境的索引 (用于设置不同的种子)
         seed: 基础随机种子
         config: 配置对象，包含所有环境参数和奖励权重
-        scenario: 场景编号 (1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式, 6=递进强制中继基准)
+        scenario: 场景名称 (base=基础强制中继, belief_map=信念地图, progress=递进强制中继)
         render_mode: 渲染模式
 
     返回:
         一个返回环境实例的函数
     """
+    scenario = normalize_scenario(scenario)
+
     def _init():
         env_seed = seed + rank # 为每个并行环境设置不同的种子
         
-        if scenario == 4:
-            # 场景4：强制多跳中继环境 - 直接传入config对象
+        if scenario == "base":
+            # 基础强制中继环境 - 直接传入config对象
             raw_env = UAVForcedRelayEnv(
                 config=config,
                 render_mode=render_mode,
                 seed=env_seed
             )
-        elif scenario == 5:
-            # 场景5：基于信念地图的动态用户覆盖环境 - 直接传入config对象
+        elif scenario == "belief_map":
+            # 基于信念地图的动态用户覆盖环境 - 直接传入config对象
             raw_env = UAVBeliefMapEnv(
                 config=config,
                 render_mode=render_mode,
                 seed=env_seed
             )
-        elif scenario == 6:
-            # 场景6：递进式强制中继基准环境
+        elif scenario == "progress":
+            # 递进式强制中继基准环境
             raw_env = UAVProgressiveRelayEnv(
                 config=config,
                 render_mode=render_mode,
@@ -2023,10 +2306,15 @@ def parse_args():
     parser.add_argument('--exp_name', type=str, default='hmasd_experiment', help='实验名称，用于组织日志')
     parser.add_argument('--seed', type=int, default=1, help='随机种子')
     parser.add_argument('--config', type=str, default='config_1', help='要使用的配置文件名 (不带.py后缀)')
+    parser.add_argument('--algorithm', type=str, default='hmasd', choices=ALGORITHM_CHOICES,
+                        help='算法/基线: hmasd=原算法, mappo=平坦MAPPO基线, random=随机动作, greedy_coverage=覆盖优先启发式')
+    parser.add_argument('--preset', type=str, default='',
+                        help='论文实验preset，例如 S4-R0/R1/R2/R3 或 S6-S4/S5/S6/S7/S8/S9/S10；需要配置类支持 apply_preset')
     
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
-    parser.add_argument('--scenario', type=int, default=4, help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 5=信念地图模式, 6=递进强制中继基准')
+    parser.add_argument('--scenario', type=str, default='base',
+                        help='场景: base=基础强制中继(scenario_base), progress=递进强制中继, belief_map=信念地图；兼容旧值4/6/5')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='../tf-logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -2118,7 +2406,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     main_logger.info(f"已为torch, numpy, random设置随机种子: {args.seed}")
 
     # 使用实验名称和种子来创建结构化的日志目录
-    log_dir = os.path.join(args.log_dir, args.exp_name, f"seed_{args.seed}")
+    algorithm_name = getattr(config, 'algorithm', args.algorithm)
+    log_dir = os.path.join(args.log_dir, args.exp_name, algorithm_name, f"seed_{args.seed}")
     os.makedirs(log_dir, exist_ok=True)
     
     # 模型保存路径也应结构化
@@ -2127,8 +2416,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     # 更新模型路径以包含新的目录结构
     args.model_path = os.path.join(model_dir, 'best_model.pt')
     
-    # 创建HMASD代理（不再有TensorBoard writer）
-    agent = HMASDAgent(config, log_dir=log_dir, device=device)
+    # 创建算法代理（HMASD或基线；不再有TensorBoard writer）
+    agent = create_agent(config, args.algorithm, log_dir=log_dir, device=device)
     
     # 创建增强的训练设置
     main_logger.info("设置增强的训练环境...")
@@ -2521,66 +2810,66 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         # --- 在更新前计算GAE和Returns (最终修正版) ---
         main_logger.debug("为低层策略(Discoverer)计算GAE...")
 
-        # 1. 获取最后一步的价值 (Critic的直接输出)
-        # 【关键修复】使用正确的下一步技能进行价值引导，修复陈旧技能Bug
+        # 1. 获取最后一步的价值 (Critic的直接输出)。非学习基线没有critic，使用零值bootstrap。
         last_values_predicted = np.zeros((num_envs, config.n_agents), dtype=np.float32)
-        with torch.no_grad():
-            for i in range(num_envs):
-                # 【关键修复】确定在 next_state 将使用什么技能
-                # 【重要修复】使用实际的env_steps而不是rollout_step来判断技能切换点
-                # 这样可以正确处理环境重置导致的env_steps重置情况
-                
-                # 检查下一步是否是技能切换点 - 使用实际的环境步数
-                next_env_step = env_steps[i] + 1
-                is_skill_change_point = (next_env_step % config.k == 0)
-                
-                if is_skill_change_point:
-                    # 为 next_state 分配新技能，确保使用正确的 next_states 和 next_observations
-                    next_team_skill, next_agent_skills, _ = agent.assign_skills(
-                        next_states[i], next_observations[i]
-                    )
-                    main_logger.debug(f"环境 {i}: 检测到技能切换点 (env_step={env_steps[i]}, next_env_step={next_env_step}), 为 s_{{T+1}} 分配新技能 Z_{{T+1}}={next_team_skill}")
-                else:
-                    # 使用当前技能
-                    next_team_skill = agent.env_team_skills.get(i, 0)
-                    if next_team_skill == -1: 
-                        next_team_skill = 0
-                    main_logger.debug(f"环境 {i}: 继续使用当前技能 Z={next_team_skill} (env_step={env_steps[i]}, next_env_step={next_env_step})")
-                
-                # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
-                # 此处的 'states' 变量实际上是 rollout 循环结束时的 'next_states'
-                normalized_next_state = agent._normalize_states(next_states[i], update=False)
-                global_state_tensor = torch.FloatTensor(normalized_next_state).unsqueeze(0).to(agent.device)
-                team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
-                
-                # 【根本原因修复】从agent获取并传递正确的critic隐藏状态
-                critic_hidden_key = f"{i}_critic"
-                last_critic_hidden_state = agent.env_hidden_states.get(critic_hidden_key)
-                
-                # 【正确修复】确保隐藏状态的批量维度与输入的批量维度(1)匹配
-                if last_critic_hidden_state is not None:
-                    # Critic的隐藏状态在同一环境中对所有智能体都是相同的，因此我们只取第一个
-                    if last_critic_hidden_state.shape[0] > 1:
-                        last_critic_hidden_state = last_critic_hidden_state[0:1]
+        if getattr(agent, 'uses_learned_value_function', True):
+            with torch.no_grad():
+                for i in range(num_envs):
+                    # 【关键修复】确定在 next_state 将使用什么技能
+                    # 【重要修复】使用实际的env_steps而不是rollout_step来判断技能切换点
+                    # 这样可以正确处理环境重置导致的env_steps重置情况
+                    
+                    # 检查下一步是否是技能切换点 - 使用实际的环境步数
+                    next_env_step = env_steps[i] + 1
+                    is_skill_change_point = (next_env_step % config.k == 0)
+                    
+                    if is_skill_change_point:
+                        # 为 next_state 分配新技能，确保使用正确的 next_states 和 next_observations
+                        next_team_skill, next_agent_skills, _ = agent.assign_skills(
+                            next_states[i], next_observations[i]
+                        )
+                        main_logger.debug(f"环境 {i}: 检测到技能切换点 (env_step={env_steps[i]}, next_env_step={next_env_step}), 为 s_{{T+1}} 分配新技能 Z_{{T+1}}={next_team_skill}")
+                    else:
+                        # 使用当前技能
+                        next_team_skill = agent.env_team_skills.get(i, 0)
+                        if next_team_skill == -1: 
+                            next_team_skill = 0
+                        main_logger.debug(f"环境 {i}: 继续使用当前技能 Z={next_team_skill} (env_step={env_steps[i]}, next_env_step={next_env_step})")
+                    
+                    # 【关键修复】使用正确的、未来的技能来计算自举价值 V(s_{T+1}, Z_{T+1})
+                    # 此处的 'states' 变量实际上是 rollout 循环结束时的 'next_states'
+                    normalized_next_state = agent._normalize_states(next_states[i], update=False)
+                    global_state_tensor = torch.FloatTensor(normalized_next_state).unsqueeze(0).to(agent.device)
+                    team_skill_tensor = torch.tensor(next_team_skill, device=agent.device).unsqueeze(0)
+                    
+                    # 【根本原因修复】从agent获取并传递正确的critic隐藏状态
+                    critic_hidden_key = f"{i}_critic"
+                    last_critic_hidden_state = agent.env_hidden_states.get(critic_hidden_key)
+                    
+                    # 【正确修复】确保隐藏状态的批量维度与输入的批量维度(1)匹配
+                    if last_critic_hidden_state is not None:
+                        # Critic的隐藏状态在同一环境中对所有智能体都是相同的，因此我们只取第一个
+                        if last_critic_hidden_state.shape[0] > 1:
+                            last_critic_hidden_state = last_critic_hidden_state[0:1]
 
-                global_value_tensor, _ = agent.skill_discoverer.get_value(
-                    global_state_tensor, 
-                    team_skill_tensor,
-                    critic_hidden_state=last_critic_hidden_state
-                )
-
-                if config.use_valuenorm and agent.value_norm_discoverer is not None:
-                    global_value_tensor = agent._denormalize_values(
-                        global_value_tensor,
-                        agent.value_norm_discoverer
+                    global_value_tensor, _ = agent.skill_discoverer.get_value(
+                        global_state_tensor, 
+                        team_skill_tensor,
+                        critic_hidden_state=last_critic_hidden_state
                     )
-                
-                last_values_predicted[i, :] = global_value_tensor.squeeze().item()
-                
-                # 数值稳定性检查
-                last_values_predicted[i, :] = numerical_stabilizer.check_and_fix_tensor(
-                    torch.FloatTensor(last_values_predicted[i, :]), name='last_values'
-                ).numpy()
+
+                    if config.use_valuenorm and agent.value_norm_discoverer is not None:
+                        global_value_tensor = agent._denormalize_values(
+                            global_value_tensor,
+                            agent.value_norm_discoverer
+                        )
+                    
+                    last_values_predicted[i, :] = global_value_tensor.squeeze().item()
+                    
+                    # 数值稳定性检查
+                    last_values_predicted[i, :] = numerical_stabilizer.check_and_fix_tensor(
+                        torch.FloatTensor(last_values_predicted[i, :]), name='last_values'
+                    ).numpy()
 
         # Rollout数据收集完成，进行更新
         # 修复：使用实际收集的步数，而不是可能不准确的rollout_steps变量
@@ -2654,7 +2943,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         rollout_steps = 0
 
         # 加强高层样本的累积情况监控
-        if total_steps >= last_check_total_steps + check_interval_steps:
+        if getattr(agent, 'collects_high_level_samples', True) and total_steps >= last_check_total_steps + check_interval_steps:
                 # 获取当前高层缓冲区大小 (从统一的rollout buffer中计算)
                 num_steps_in_buffer = config.rollout_length
                 current_high_level_buffer_size = agent.high_level_samples_total
@@ -2873,7 +3162,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     main_logger.info(f"最终训练摘要已保存到: {final_summary_path}")
 
     # 保存最终模型
-    final_model_path = os.path.join(model_dir, 'hmasd_sb3_multiproc_paper_config_final.pt') # Update filename
+    final_model_path = os.path.join(model_dir, f'{getattr(config, "algorithm", args.algorithm)}_multiproc_final.pt')
     agent.save_model(final_model_path)
     main_logger.info(f"最终模型已保存到 {final_model_path}")
 
@@ -2992,6 +3281,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
     all_agent_skills = []  # 记录每个时间步的个体技能
     total_served_users = []  # 记录每个episode的服务用户数
     total_coverage_ratios = []  # 记录每个episode的覆盖率
+    episode_eval_records = []
     
     # 奖励统计
     high_level_rewards = []  # 高层奖励 (环境奖励)
@@ -3122,10 +3412,29 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                         step_coverage_data.append({
                             'step': env_steps[i],
                             'env_id': i,
+                            'preset': getattr(agent.config, 'experiment_preset', ''),
+                            'scenario_label': getattr(agent.config, 'scenario_label', ''),
                             'coverage_ratio': coverage_ratio,
                             'effective_connected_users': reward_info.get('effective_connected_users', 0),
                             'system_throughput_mbps': reward_info.get('system_throughput_mbps', 0),
-                            'rt_final_health_score': reward_info.get('rt_final_health_score', 0)
+                            'avg_throughput_per_user_mbps': reward_info.get('avg_throughput_per_user_mbps', 0),
+                            'rt_final_health_score': reward_info.get('rt_final_health_score', 0),
+                            'load_balance_score': reward_info.get('load_balance_score', np.nan),
+                            'load_balance_penalty': reward_info.get('load_balance_penalty', np.nan),
+                            'demand_satisfaction_ratio': reward_info.get('demand_satisfaction_ratio', np.nan),
+                            'capacity_limited_throughput_mbps': reward_info.get('capacity_limited_throughput_mbps', np.nan),
+                            'relay_route_loss_ratio': reward_info.get('relay_route_loss_ratio', 0),
+                            'robustness_penalty': reward_info.get('robustness_penalty', 0),
+                            'backhaul_margin_penalty_raw': reward_info.get('backhaul_margin_penalty_raw', 0),
+                            'min_serving_backhaul_bottleneck_mbps': reward_info.get('min_serving_backhaul_bottleneck_mbps', 0),
+                            'backhaul_outage_ratio': reward_info.get('backhaul_outage_ratio', 0),
+                            'avg_hops': reward_info.get('avg_hops', 0),
+                            'progressive_stage': reward_info.get('progressive_stage', getattr(agent.config, 'progressive_stage', '')),
+                            'scale_mode': reward_info.get('scale_mode', ''),
+                            'ground_bs_active': EnhancedRewardTracker._record_value(reward_info.get('ground_bs_active')) if 'ground_bs_active' in reward_info else '',
+                            'active_ground_bs_count': int(np.sum(np.asarray(reward_info.get('ground_bs_active'), dtype=bool))) if 'ground_bs_active' in reward_info else np.nan,
+                            'failed_ground_bs_count': int(np.asarray(reward_info.get('ground_bs_active'), dtype=bool).size - np.sum(np.asarray(reward_info.get('ground_bs_active'), dtype=bool))) if 'ground_bs_active' in reward_info else np.nan,
+                            'ground_bs_remaining_capacity_mbps': EnhancedRewardTracker._record_value(reward_info.get('ground_bs_remaining_capacity_mbps')) if 'ground_bs_remaining_capacity_mbps' in reward_info else '',
                         })
                     
                     # 调试输出：检查reward_info内容（评估模式）
@@ -3230,6 +3539,28 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                             else:
                                 main_logger.info(f"评估 Episode {completed_episodes+1}/{n_episodes} (来自环境 {i}), 奖励: {env_rewards[i]:.2f}, 步数: {env_steps[i]}")
                                 main_logger.warning(f"[评估] Episode结束时未找到reward_info，infos[{i}]键: {list(infos[i].keys())}")
+
+                            episode_eval_records.append({
+                                'episode': completed_episodes + 1,
+                                'env_id': i,
+                                'preset': getattr(agent.config, 'experiment_preset', ''),
+                                'scenario_label': getattr(agent.config, 'scenario_label', ''),
+                                'reward': env_rewards[i],
+                                'episode_length': env_steps[i],
+                                'coverage_ratio_final': episode_reward_info.get('coverage_ratio', np.nan),
+                                'effective_connected_users_final': episode_reward_info.get('effective_connected_users', np.nan),
+                                'system_throughput_mbps_final': episode_reward_info.get('system_throughput_mbps', np.nan),
+                                'avg_throughput_per_user_mbps_final': episode_reward_info.get('avg_throughput_per_user_mbps', np.nan),
+                                'load_balance_score_final': episode_reward_info.get('load_balance_score', np.nan),
+                                'load_balance_penalty_final': episode_reward_info.get('load_balance_penalty', np.nan),
+                                'demand_satisfaction_ratio_final': episode_reward_info.get('demand_satisfaction_ratio', np.nan),
+                                'capacity_limited_throughput_mbps_final': episode_reward_info.get('capacity_limited_throughput_mbps', np.nan),
+                                'relay_route_loss_ratio_final': episode_reward_info.get('relay_route_loss_ratio', np.nan),
+                                'backhaul_outage_ratio_final': episode_reward_info.get('backhaul_outage_ratio', np.nan),
+                                'avg_hops_final': episode_reward_info.get('avg_hops', np.nan),
+                                'active_ground_bs_count_final': int(np.sum(np.asarray(episode_reward_info.get('ground_bs_active'), dtype=bool))) if 'ground_bs_active' in episode_reward_info else np.nan,
+                                'failed_ground_bs_count_final': int(np.asarray(episode_reward_info.get('ground_bs_active'), dtype=bool).size - np.sum(np.asarray(episode_reward_info.get('ground_bs_active'), dtype=bool))) if 'ground_bs_active' in episode_reward_info else np.nan,
+                            })
 
                             # 记录到TensorBoard (评估函数中暂时跳过，因为没有传入writer)
                             # 在实际使用中，应该通过参数传入TensorBoard writer
@@ -3352,13 +3683,19 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             for data_point in step_coverage_data:
                 env_id = data_point['env_id']
                 if env_id not in env_data:
-                    env_data[env_id] = {'steps': [], 'coverage': [], 'users': [], 'throughput': [], 'health': []}
+                    env_data[env_id] = {
+                        'steps': [], 'coverage': [], 'users': [], 'throughput': [], 'health': [],
+                        'relay_loss': [], 'backhaul_margin': [], 'min_bottleneck': []
+                    }
                 
                 env_data[env_id]['steps'].append(data_point['step'])
                 env_data[env_id]['coverage'].append(data_point['coverage_ratio'])
                 env_data[env_id]['users'].append(data_point['effective_connected_users'])
                 env_data[env_id]['throughput'].append(data_point['system_throughput_mbps'])
                 env_data[env_id]['health'].append(data_point['rt_final_health_score'])
+                env_data[env_id]['relay_loss'].append(data_point.get('relay_route_loss_ratio', 0))
+                env_data[env_id]['backhaul_margin'].append(data_point.get('backhaul_margin_penalty_raw', 0))
+                env_data[env_id]['min_bottleneck'].append(data_point.get('min_serving_backhaul_bottleneck_mbps', 0))
             
             # 创建2x2子图
             fig, axes = plt.subplots(2, 2, figsize=(15, 10))
@@ -3394,13 +3731,14 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             ax3.grid(True, alpha=0.3)
             ax3.legend()
             
-            # 子图4：网络健康度变化
+            # 子图4：中继回程风险变化
             ax4 = axes[1, 1]
             for env_id, data in env_data.items():
-                ax4.plot(data['steps'], data['health'], label=f'环境 {env_id}', alpha=0.7)
-            ax4.set_title('网络健康度变化')
+                ax4.plot(data['steps'], data['relay_loss'], label=f'环境 {env_id} 断裂', alpha=0.7)
+                ax4.plot(data['steps'], data['backhaul_margin'], linestyle='--', alpha=0.5)
+            ax4.set_title('中继回程风险变化')
             ax4.set_xlabel('Episode内步数')
-            ax4.set_ylabel('健康度分数')
+            ax4.set_ylabel('断裂率 / 瓶颈惩罚')
             ax4.grid(True, alpha=0.3)
             ax4.legend()
             
@@ -3415,6 +3753,111 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             
         except Exception as e:
             main_logger.error(f"生成覆盖率变化图表时出错: {e}")
+
+    # 【论文实验】导出统一评估CSV和基础图表，所有论文图从CSV复现。
+    try:
+        paper_dir = os.path.join(eval_log_dir, 'paper_data')
+        os.makedirs(paper_dir, exist_ok=True)
+
+        eval_step_df = pd.DataFrame(step_coverage_data)
+        episode_eval_df = pd.DataFrame(episode_eval_records)
+
+        if not eval_step_df.empty:
+            step_csv_path = os.path.join(paper_dir, f'paper_eval_step_{eval_step}.csv')
+            eval_step_df.to_csv(step_csv_path, index=False)
+            main_logger.info(f"论文评估逐步数据已保存: {step_csv_path}")
+
+        if not episode_eval_df.empty:
+            episode_csv_path = os.path.join(paper_dir, f'paper_eval_episodes_step_{eval_step}.csv')
+            episode_eval_df.to_csv(episode_csv_path, index=False)
+            main_logger.info(f"论文评估episode数据已保存: {episode_csv_path}")
+
+        summary_rows = []
+        summary_source = episode_eval_df if not episode_eval_df.empty else eval_step_df
+        summary_metrics = [
+            'reward',
+            'coverage_ratio_final',
+            'effective_connected_users_final',
+            'system_throughput_mbps_final',
+            'load_balance_score_final',
+            'demand_satisfaction_ratio_final',
+            'relay_route_loss_ratio_final',
+            'backhaul_outage_ratio_final',
+            'avg_hops_final',
+            'coverage_ratio',
+            'effective_connected_users',
+            'system_throughput_mbps',
+            'load_balance_score',
+            'demand_satisfaction_ratio',
+            'relay_route_loss_ratio',
+            'backhaul_outage_ratio',
+            'avg_hops',
+        ]
+
+        if not summary_source.empty:
+            for metric in summary_metrics:
+                if metric not in summary_source.columns:
+                    continue
+                values = pd.to_numeric(summary_source[metric], errors='coerce').dropna()
+                if values.empty:
+                    continue
+                std = float(values.std(ddof=1)) if len(values) > 1 else 0.0
+                ci95 = 1.96 * std / np.sqrt(len(values)) if len(values) > 1 else 0.0
+                summary_rows.append({
+                    'preset': getattr(agent.config, 'experiment_preset', ''),
+                    'scenario_label': getattr(agent.config, 'scenario_label', ''),
+                    'metric': metric,
+                    'count': int(len(values)),
+                    'mean': float(values.mean()),
+                    'std': std,
+                    'min': float(values.min()),
+                    'max': float(values.max()),
+                    'ci95': float(ci95),
+                })
+
+        if summary_rows:
+            summary_df = pd.DataFrame(summary_rows)
+            summary_csv_path = os.path.join(paper_dir, f'paper_eval_summary_step_{eval_step}.csv')
+            summary_df.to_csv(summary_csv_path, index=False)
+            main_logger.info(f"论文评估摘要数据已保存: {summary_csv_path}")
+
+        if not eval_step_df.empty:
+            fig, axes = plt.subplots(2, 2, figsize=(14, 9))
+            fig.suptitle(f'Paper Evaluation Metrics (step {eval_step})', fontsize=14, fontweight='bold')
+
+            plot_specs = [
+                ('coverage_ratio', 'Coverage Ratio', axes[0, 0]),
+                ('system_throughput_mbps', 'System Throughput (Mbps)', axes[0, 1]),
+                ('load_balance_score', 'Load Balance Jain Score', axes[1, 0]),
+                ('demand_satisfaction_ratio', 'Demand Satisfaction Ratio', axes[1, 1]),
+            ]
+
+            for column, title, ax in plot_specs:
+                if column not in eval_step_df.columns:
+                    ax.set_title(title)
+                    ax.text(0.5, 0.5, 'N/A', ha='center', va='center', transform=ax.transAxes)
+                    ax.grid(True, alpha=0.3)
+                    continue
+                for env_id, group in eval_step_df.groupby('env_id'):
+                    x = pd.to_numeric(group['step'], errors='coerce')
+                    y = pd.to_numeric(group[column], errors='coerce')
+                    valid = x.notna() & y.notna()
+                    if valid.any():
+                        ax.plot(x[valid], y[valid], alpha=0.75, label=f'env {env_id}')
+                ax.set_title(title)
+                ax.set_xlabel('Episode Step')
+                ax.grid(True, alpha=0.3)
+                if len(eval_step_df['env_id'].unique()) <= 8:
+                    ax.legend(fontsize=8)
+
+            fig.tight_layout()
+            paper_plot_path = os.path.join(paper_dir, f'paper_eval_metrics_step_{eval_step}.png')
+            fig.savefig(paper_plot_path, dpi=200, bbox_inches='tight')
+            plt.close(fig)
+            main_logger.info(f"论文评估基础图表已保存: {paper_plot_path}")
+
+    except Exception as e:
+        main_logger.error(f"导出论文评估数据时出错: {e}")
     
     # 【新增】记录评估统计到TensorBoard
     if step_coverage_data:
@@ -3423,6 +3866,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         all_users = [d['effective_connected_users'] for d in step_coverage_data]
         all_throughput = [d['system_throughput_mbps'] for d in step_coverage_data]
         all_health = [d['rt_final_health_score'] for d in step_coverage_data]
+        all_relay_loss = [d.get('relay_route_loss_ratio', 0) for d in step_coverage_data]
+        all_backhaul_margin = [d.get('backhaul_margin_penalty_raw', 0) for d in step_coverage_data]
+        all_min_bottleneck = [d.get('min_serving_backhaul_bottleneck_mbps', 0) for d in step_coverage_data]
         
         if all_coverage:
             eval_tb_manager.add_scalar('Evaluation/Average_Coverage_Ratio', np.mean(all_coverage), eval_step)
@@ -3437,6 +3883,16 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         if all_throughput:
             eval_tb_manager.add_scalar('Evaluation/Average_System_Throughput', np.mean(all_throughput), eval_step)
             eval_tb_manager.add_scalar('Evaluation/Max_System_Throughput', np.max(all_throughput), eval_step)
+
+        if all_relay_loss:
+            eval_tb_manager.add_scalar('Evaluation/Average_Relay_Route_Loss_Ratio', np.mean(all_relay_loss), eval_step)
+            eval_tb_manager.add_scalar('Evaluation/Max_Relay_Route_Loss_Ratio', np.max(all_relay_loss), eval_step)
+
+        if all_backhaul_margin:
+            eval_tb_manager.add_scalar('Evaluation/Average_Backhaul_Margin_Penalty', np.mean(all_backhaul_margin), eval_step)
+
+        if all_min_bottleneck:
+            eval_tb_manager.add_scalar('Evaluation/Min_Serving_Backhaul_Bottleneck_Mbps', np.min(all_min_bottleneck), eval_step)
         
         if all_health:
             eval_tb_manager.add_scalar('Evaluation/Average_Health_Score', np.mean(all_health), eval_step)
@@ -3509,7 +3965,22 @@ def main():
         return
 
     # 使用加载的配置
-    config = Config()
+    if args.preset:
+        try:
+            config = Config(args.preset)
+        except TypeError:
+            config = Config()
+    else:
+        config = Config()
+    if args.preset and hasattr(config, 'apply_preset'):
+        # Config(args.preset) already applies the preset for config_paper_adaptation,
+        # but this keeps compatibility with simple Config classes that ignore __init__ args.
+        if getattr(config, 'experiment_preset', '').upper() != args.preset.upper():
+            config.apply_preset(args.preset)
+        if hasattr(config, 'scenario'):
+            args.scenario = normalize_scenario(config.scenario)
+    args.scenario = normalize_scenario(args.scenario)
+    config.scenario = args.scenario
     
     # 只设置少量开关参数（其他参数已在config_1.py中定义）
     config.use_opt = args.use_opt
@@ -3619,6 +4090,13 @@ def main():
     # 从临时环境获取维度信息
     state_dim = temp_env.state_dim
     obs_dim = temp_env.obs_dim
+    n_agents = getattr(temp_env, 'n_uavs', None)
+    if n_agents is None:
+        n_agents = getattr(temp_env, 'num_envs', None)
+    if n_agents is None and hasattr(temp_env, 'observation_space') and hasattr(temp_env.observation_space, 'shape'):
+        obs_shape = temp_env.observation_space.shape
+        if obs_shape:
+            n_agents = obs_shape[0]
     action_dim = getattr(temp_env, 'action_dim', None)
     if action_dim is None:
         action_space = getattr(temp_env, 'action_space', None)
@@ -3627,13 +4105,15 @@ def main():
         elif hasattr(action_space, 'shape') and action_space.shape:
             action_dim = action_space.shape[-1]
     
-    # 更新配置维度（n_agents已在之前设置）
-    config.update_env_dims(state_dim, obs_dim)
+    # 更新配置维度，并以实际环境agent数为准，避免progressive preset覆盖n_agents后网络头数量不匹配。
+    config.update_env_dims(state_dim, obs_dim, n_agents=n_agents)
     if action_dim is not None:
         config.action_dim = int(action_dim)
+    apply_algorithm_config(config, args.algorithm)
     
     main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}, action_dim={config.action_dim}")
     main_logger.info(f"确认无人机数量: n_agents={config.n_agents}")
+    main_logger.info(f"当前算法/基线: {getattr(config, 'algorithm', args.algorithm)}")
 
     # 打印环境参数以供确认
     main_logger.info("="*50)
@@ -3641,12 +4121,9 @@ def main():
     
     # 根据场景分类参数
     scenario_param_categories = {
-        1: "基站模式参数",
-        2: "协作组网模式参数", 
-        3: "强制多跳模式参数",
-        4: "强制中继模式参数",
-        5: "信念地图模式参数",
-        6: "递进强制中继基准参数"
+        "base": "基础强制中继参数",
+        "belief_map": "信念地图模式参数",
+        "progress": "递进强制中继基准参数",
     }
     
     main_logger.info(f"当前场景: {args.scenario} ({scenario_param_categories.get(args.scenario, '未知场景')})")
@@ -3737,7 +4214,7 @@ def main():
     total_params += print_config_section("基础环境参数", config, basic_env_params)
     
     # 2. 场景4参数
-    if args.scenario == 4:
+    if args.scenario == "base":
         total_params += print_config_section("场景4参数", config, scenario4_params)
         total_params += print_config_section("场景4环境参数", config, scenario4_env_params)
     
@@ -3832,11 +4309,14 @@ def main():
         # config.update_env_dims(state_dim_eval, obs_dim_eval) # Ensure config matches eval env if different
 
         # 创建日志目录
-        log_dir = os.path.join(args.log_dir, f"eval_sb3_multiproc_paper_config_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
+        log_dir = os.path.join(
+            args.log_dir,
+            f"eval_{getattr(config, 'algorithm', args.algorithm)}_{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        )
         os.makedirs(log_dir, exist_ok=True)
         
         # 创建代理并加载模型
-        agent = HMASDAgent(config, log_dir=log_dir, device=device)
+        agent = create_agent(config, args.algorithm, log_dir=log_dir, device=device)
         agent.load_model(args.model_path)
         
         # 创建评估用的TensorBoard管理器

@@ -209,6 +209,8 @@ class HMASDAgent:
         self.config = config
         self.device = device if device is not None else torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         main_logger.info(f"使用设备: {self.device}")
+        self.uses_learned_value_function = True
+        self.collects_high_level_samples = not getattr(config, 'disable_high_level_training', False)
         
         # 确保环境维度已设置
         assert config.state_dim is not None, "必须先设置state_dim"
@@ -1594,7 +1596,8 @@ class HMASDAgent:
         
         # 新增：将 (下一状态, 技能) 对存储到判别器Buffer
         # 根据论文，我们使用 t+1 时刻的状态/观测
-        self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)
+        if not getattr(self.config, 'disable_discriminator_training', False):
+            self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)
 
         # 论文对齐：高层PPO样本的 old log_prob/value 必须固定在技能决策时刻。
         # 这里仅登记待闭合样本；等 skill_timer == k - 1 时只补上累计环境奖励。
@@ -1642,11 +1645,12 @@ class HMASDAgent:
         
         # 存储高层策略经验（如果满足条件）
         # 【注意】高层策略数据继续使用当前状态和观测，这是正确的
-        self._store_coordinator_experience(
-            state, observations, env_id, team_skill, agent_skills, 
-            log_probs, dones, skill_timer, steps_since_contribution, force_collection,
-            rollout_step_idx=rollout_step_idx
-        )
+        if not getattr(self.config, 'disable_high_level_training', False):
+            self._store_coordinator_experience(
+                state, observations, env_id, team_skill, agent_skills, 
+                log_probs, dones, skill_timer, steps_since_contribution, force_collection,
+                rollout_step_idx=rollout_step_idx
+            )
         
         # 返回奖励组成部分给训练循环
         return returned_reward_components
@@ -1864,6 +1868,10 @@ class HMASDAgent:
         【归一化修复】确保判别器输入与策略网络使用相同的归一化，
         解决"归一化地狱"问题。
         """
+        if getattr(self.config, 'disable_discriminator_rewards', False):
+            env_component = self.config.lambda_e * reward if hasattr(self.config, 'lambda_e') else reward
+            return env_component, env_component, 0.0, 0.0, 0.0
+
         with torch.no_grad():
             try:
                 # === 【关键修复】归一化输入，确保与策略网络和判别器训练数据一致 ===
@@ -2808,10 +2816,15 @@ class HMASDAgent:
         # 步骤 1: 更新高层技能协调器 (Coordinator)
         # 使用基于"旧" Discriminator 计算的内在奖励进行 PPO 更新
         # 【Bootstrap修复】传入计算好的 bootstrap_values
-        coordinator_loss, coordinator_policy_loss, coordinator_value_loss, team_skill_entropy, agent_skill_entropy, \
-        mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator(
-            steps_in_buffer, bootstrap_values=coord_bootstrap_values
-        )
+        if getattr(self.config, 'disable_high_level_training', False):
+            coordinator_loss = coordinator_policy_loss = coordinator_value_loss = 0.0
+            team_skill_entropy = agent_skill_entropy = 0.0
+            mean_coord_state_val = mean_coord_agent_val = mean_high_level_reward = cd_loss_val = 0.0
+        else:
+            coordinator_loss, coordinator_policy_loss, coordinator_value_loss, team_skill_entropy, agent_skill_entropy, \
+            mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator(
+                steps_in_buffer, bootstrap_values=coord_bootstrap_values
+            )
         
         # 步骤 2: 更新低层技能发现器 (Discoverer)
         # 同样使用基于"旧" Discriminator 计算的内在奖励进行 PPO 更新
@@ -2824,7 +2837,10 @@ class HMASDAgent:
         # 这确保了：
         # - 当前 rollout 的内在奖励是基于"旧" Discriminator 计算的（已在上面使用）
         # - 更新后的 Discriminator 将用于下一轮采样时计算新的内在奖励
-        discriminator_loss = self.update_discriminators(steps_in_buffer)
+        if getattr(self.config, 'disable_discriminator_training', False):
+            discriminator_loss = 0.0
+        else:
+            discriminator_loss = self.update_discriminators(steps_in_buffer)
         
         # 更新学习率调度器
         if getattr(self.config, 'use_lr_decay', False) and self.global_step <= self.config.lr_decay_steps:

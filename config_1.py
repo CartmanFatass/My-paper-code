@@ -2,10 +2,14 @@
 # 专用于解决场景4覆盖率低的问题
 
 class Config:
+    scenario = "base"
+    scenario_label = ""
+    experiment_preset = ""
+
     # 调试参数
     test_reward_mode = False
     # 环境参数
-    n_agents = 5
+    n_agents = 6
     state_dim = None
     obs_dim = None
     action_dim = 3
@@ -32,9 +36,15 @@ class Config:
     # load_balance模式下的网络健壮性惩罚：统计并惩罚回传/路由断联导致的QoS中断
     w_backhaul_outage = 0.8
     w_full_disconnect = 1.0
-    w_coverage_drop = 0.5
+    w_coverage_drop = 0.2
     w_outage_memory = 0.25
+    w_relay_break = 1.2
+    w_backhaul_margin = 0.6
+    backhaul_margin_target_mbps = 10.0
     outage_memory_decay = 0.90
+    enable_backhaul_action_guard = True
+    backhaul_guard_min_capacity_mbps = 5.0
+    backhaul_guard_reject_speed_scale = 0.0
     # 用户移动参数
     user_max_speed = 15.0
     user_movement_model = "rpgm"
@@ -92,7 +102,18 @@ class Config:
     observation_radius = 1500  # [优化] 调整观测半径
     max_observed_uavs = 6
     max_observed_users = 30
-    max_observed_bs = 2
+    max_observed_bs = 3
+
+    # Scenario6 progressive presets. These fields are plain scalar/list config
+    # entries so the same shape can be loaded from JSON/YAML later.
+    progressive_stage = "S0"
+    progressive_scale_mode = "train"
+    scenario6_reward_type = None
+    progressive_max_agents = 6
+    progressive_max_users = 30
+    progressive_max_ground_bs = 3
+    progressive_fixed_agent_count = True
+    progressive_s7_agents = 6
 
     # HMASD参数
     n_Z = 6
@@ -141,7 +162,7 @@ class Config:
     high_level_batch_size = None
     num_envs = 32
     rollout_length = 500
-    total_timesteps = num_envs * rollout_length * 100
+    total_timesteps = num_envs * rollout_length * 200
 
     # 严格对齐HMASD论文/标准实现：高层样本只在技能周期边界闭合。
     strict_hmasd_alignment = True
@@ -189,6 +210,99 @@ class Config:
     
     # 强制收集参数 - 解决环境样本贡献不均问题
     force_collection_threshold = 500    # 环境距离上次贡献超过此步数时强制收集高层样本
+
+    def __init__(self, preset=None):
+        if preset:
+            self.apply_preset(preset)
+
+    def apply_preset(self, preset):
+        preset = str(preset).upper()
+        self.experiment_preset = preset
+
+        if preset.startswith("S6-S"):
+            self._apply_scenario6_progressive_preset(preset)
+        elif preset.startswith("S4-R"):
+            self._apply_scenario4_reward_preset(preset)
+        else:
+            raise ValueError(
+                f"Unknown preset '{preset}'. Expected S4-R0/R1/R2/R3 or S6-S0/S1/S2/S3/S4/S5/S6/S7/S8/S9/S10."
+            )
+
+    def _disable_backhaul_robustness(self):
+        self.w_backhaul_outage = 0.0
+        self.w_full_disconnect = 0.0
+        self.w_coverage_drop = 0.0
+        self.w_outage_memory = 0.0
+        self.w_relay_break = 0.0
+        self.w_backhaul_margin = 0.0
+        self.enable_backhaul_action_guard = False
+
+    def _restore_backhaul_robustness(self):
+        self.w_backhaul_outage = 0.8
+        self.w_full_disconnect = 1.0
+        self.w_coverage_drop = 0.2
+        self.w_outage_memory = 0.25
+        self.w_relay_break = 1.2
+        self.w_backhaul_margin = 0.6
+
+    def _apply_scenario4_reward_preset(self, preset):
+        self.scenario = 4
+        self.scenario_label = preset
+        self.scenario6_reward_type = None
+        self.progressive_stage = "S0"
+
+        if preset == "S4-R0":
+            self.reward_type = "naive"
+            self.w_load_balance = 0.0
+            self.w_first_contact = 0.0
+            self.w_repulsion = 0.0
+            self._disable_backhaul_robustness()
+        elif preset == "S4-R1":
+            self.reward_type = "load_balance"
+            self.w_load_balance = 0.35
+            self.w_first_contact = 0.0
+            self.w_repulsion = 0.0
+            self._disable_backhaul_robustness()
+        elif preset == "S4-R2":
+            self.reward_type = "load_balance"
+            self.w_load_balance = 0.35
+            self.w_first_contact = 0.0
+            self.w_repulsion = 0.0
+            self._restore_backhaul_robustness()
+            self.enable_backhaul_action_guard = False
+        elif preset == "S4-R3":
+            self.reward_type = "load_balance"
+            self.w_load_balance = 0.35
+            self.w_first_contact = 0.0
+            self.w_repulsion = 0.0
+            self._restore_backhaul_robustness()
+            self.enable_backhaul_action_guard = True
+        else:
+            raise ValueError(f"Unknown scenario4 reward preset '{preset}'.")
+
+    def _apply_scenario6_progressive_preset(self, preset):
+        stage = preset.split("-", 1)[1]
+        valid_stages = {f"S{i}" for i in range(11)}
+        if stage not in valid_stages:
+            raise ValueError(f"Unknown scenario6 stage preset '{preset}'.")
+
+        self.scenario = 6
+        self.scenario_label = preset
+        self.progressive_stage = stage
+        self.progressive_scale_mode = "train"
+        self.scenario6_reward_type = "progressive_coverage_balance"
+        self.reward_type = "load_balance"
+
+        # Fixed maxima keep scenario6 state shape stable across staged profiles.
+        self.progressive_max_agents = 6
+        self.progressive_max_users = 30
+        self.progressive_max_ground_bs = 3
+        self.max_observed_bs = 3
+        self.max_observed_uavs = max(getattr(self, "max_observed_uavs", 6), 6)
+        self.max_observed_users = max(getattr(self, "max_observed_users", 30), 30)
+
+        self._restore_backhaul_robustness()
+        self.enable_backhaul_action_guard = stage in {"S6", "S7", "S8", "S9", "S10"}
 
     def calculate_and_set_buffer_sizes(self):
         if self.n_agents is None:

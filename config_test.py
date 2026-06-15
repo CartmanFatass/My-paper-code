@@ -19,7 +19,7 @@ class Config(BaseConfig):
     max_observed_users = 8
     max_observed_bs = 1
 
-    # Use the actual scenario4_discrete training path.
+    # Use the actual scenario_base training path.
     action_space_type = 'discrete'
     action_dim = 3
 

@@ -96,7 +96,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.w_full_disconnect = kwargs.get('w_full_disconnect', 1.0)  # load_balance模式：整网断联惩罚
             self.w_coverage_drop = kwargs.get('w_coverage_drop', 0.5)  # load_balance模式：覆盖率骤降惩罚
             self.w_outage_memory = kwargs.get('w_outage_memory', 0.25)  # load_balance模式：短期断联记忆惩罚
+            self.w_relay_break = kwargs.get('w_relay_break', 1.2)  # load_balance模式：承载用户的回程路径断裂惩罚
+            self.w_backhaul_margin = kwargs.get('w_backhaul_margin', 0.6)  # load_balance模式：回程瓶颈容量余量惩罚
+            self.backhaul_margin_target_mbps = kwargs.get('backhaul_margin_target_mbps', 10.0)
             self.outage_memory_decay = kwargs.get('outage_memory_decay', 0.90)
+            self.enable_backhaul_action_guard = kwargs.get('enable_backhaul_action_guard', True)
+            self.backhaul_guard_min_capacity_mbps = kwargs.get('backhaul_guard_min_capacity_mbps', 5.0)
+            self.backhaul_guard_reject_speed_scale = kwargs.get('backhaul_guard_reject_speed_scale', 0.0)
             
             # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
             # 基于大疆(DJI)等典型四旋翼参数估算
@@ -195,7 +201,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.w_full_disconnect = getattr(config, 'w_full_disconnect', 1.0)  # load_balance模式：整网断联惩罚
             self.w_coverage_drop = getattr(config, 'w_coverage_drop', 0.5)  # load_balance模式：覆盖率骤降惩罚
             self.w_outage_memory = getattr(config, 'w_outage_memory', 0.25)  # load_balance模式：短期断联记忆惩罚
+            self.w_relay_break = getattr(config, 'w_relay_break', 1.2)  # load_balance模式：承载用户的回程路径断裂惩罚
+            self.w_backhaul_margin = getattr(config, 'w_backhaul_margin', 0.6)  # load_balance模式：回程瓶颈容量余量惩罚
+            self.backhaul_margin_target_mbps = getattr(config, 'backhaul_margin_target_mbps', 10.0)
             self.outage_memory_decay = getattr(config, 'outage_memory_decay', 0.90)
+            self.enable_backhaul_action_guard = getattr(config, 'enable_backhaul_action_guard', True)
+            self.backhaul_guard_min_capacity_mbps = getattr(config, 'backhaul_guard_min_capacity_mbps', 5.0)
+            self.backhaul_guard_reject_speed_scale = getattr(config, 'backhaul_guard_reject_speed_scale', 0.0)
             
             # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
             # 基于大疆(DJI)等典型四旋翼参数估算
@@ -288,6 +300,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.prev_load_balance_coverage_ratio = 0.0
         self.backhaul_outage_ema = 0.0
         self.full_disconnect_streak = 0
+        self.previous_routing_paths_snapshot = {}
+        self.previous_connections_snapshot = np.zeros((self.n_uavs, self.n_users), dtype=bool)
 
         # 新增: 层次强化学习中的全局基站信息缓存机制
         self.global_bs_cache = {}  # 存储全局同步的基站信息 {bs_idx: (normalized_pos, visibility_flag)}
@@ -1330,6 +1344,84 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.prev_effective_user_service_status = effective_service_status.copy()
         self.prev_load_balance_coverage_ratio = coverage_ratio
 
+        return metrics
+
+    def _calculate_relay_backhaul_metrics(self):
+        """
+        统计中继骨干断裂和回程容量余量。
+
+        重点不是覆盖率结果，而是上一时刻正在承载用户的源UAV是否丢失回程路径，
+        以及当前仍在服务用户的回程路径瓶颈容量是否低于安全余量。
+        """
+        prev_routing_paths = getattr(self, 'previous_routing_paths_snapshot', {})
+        prev_connections = getattr(
+            self,
+            'previous_connections_snapshot',
+            np.zeros((self.n_uavs, self.n_users), dtype=bool)
+        )
+
+        relay_route_lost_uavs = 0
+        relay_route_lost_users = 0
+        prev_backhaul_served_users = 0
+
+        for uav_idx, (prev_path, _) in prev_routing_paths.items():
+            prev_user_count = int(np.sum(prev_connections[uav_idx])) if uav_idx < prev_connections.shape[0] else 0
+            if prev_user_count <= 0:
+                continue
+
+            prev_backhaul_served_users += prev_user_count
+            if uav_idx not in self.routing_paths:
+                relay_route_lost_uavs += 1
+                relay_route_lost_users += prev_user_count
+
+        relay_route_loss_ratio = relay_route_lost_users / self.n_users if self.n_users > 0 else 0.0
+        relay_route_loss_prev_served_ratio = (
+            relay_route_lost_users / prev_backhaul_served_users
+            if prev_backhaul_served_users > 0 else 0.0
+        )
+
+        target_mbps = max(1e-6, float(getattr(self, 'backhaul_margin_target_mbps', 10.0)))
+        serving_bottlenecks_mbps = []
+        weighted_margin_deficit = 0.0
+        current_backhaul_served_users = 0
+
+        for uav_idx, (path, bottleneck_capacity_bps) in self.routing_paths.items():
+            current_user_count = int(np.sum(self.connections[uav_idx]))
+            if current_user_count <= 0:
+                continue
+
+            bottleneck_mbps = bottleneck_capacity_bps / 1e6
+            serving_bottlenecks_mbps.append(bottleneck_mbps)
+            current_backhaul_served_users += current_user_count
+
+            margin_deficit = max(0.0, 1.0 - bottleneck_mbps / target_mbps)
+            weighted_margin_deficit += current_user_count * margin_deficit
+
+        backhaul_margin_penalty_raw = (
+            weighted_margin_deficit / current_backhaul_served_users
+            if current_backhaul_served_users > 0 else 0.0
+        )
+
+        if serving_bottlenecks_mbps:
+            min_serving_backhaul_bottleneck_mbps = float(np.min(serving_bottlenecks_mbps))
+            avg_serving_backhaul_bottleneck_mbps = float(np.mean(serving_bottlenecks_mbps))
+        else:
+            min_serving_backhaul_bottleneck_mbps = 0.0
+            avg_serving_backhaul_bottleneck_mbps = 0.0
+
+        metrics = {
+            "relay_route_lost_uavs": relay_route_lost_uavs,
+            "relay_route_lost_users": relay_route_lost_users,
+            "relay_route_loss_ratio": relay_route_loss_ratio,
+            "relay_route_loss_prev_served_ratio": relay_route_loss_prev_served_ratio,
+            "prev_backhaul_served_users": prev_backhaul_served_users,
+            "current_backhaul_served_users": current_backhaul_served_users,
+            "backhaul_margin_penalty_raw": backhaul_margin_penalty_raw,
+            "min_serving_backhaul_bottleneck_mbps": min_serving_backhaul_bottleneck_mbps,
+            "avg_serving_backhaul_bottleneck_mbps": avg_serving_backhaul_bottleneck_mbps,
+        }
+
+        self.reward_info.update(metrics)
         return metrics
 
     def _get_spectral_efficiency_from_sinr(self, sinr_db):
@@ -2842,6 +2934,83 @@ class UAVForcedRelayEnv(ParallelEnv):
                     self.uav_bs_connections[i, j] = True
                 else:
                     self.uav_bs_connections[i, j] = False
+
+    def _apply_backhaul_action_guard(self, uav_idx, velocity):
+        """
+        对关键回程/服务节点应用动作安全层，避免单步动作直接切断已有回程路径。
+
+        该保护只在 load_balance 模式默认启用。它不改变奖励函数，而是在关键 UAV 的
+        候选移动会让当前依赖它的回程路径任一链路低于阈值时，将速度缩放到悬停或近悬停。
+        """
+        if not getattr(self, 'enable_backhaul_action_guard', False):
+            return velocity
+        if self.reward_type != "load_balance":
+            return velocity
+        if not hasattr(self, 'routing_paths') or not self.routing_paths:
+            return velocity
+        if not self._is_backhaul_guarded_uav(uav_idx):
+            return velocity
+
+        self.backhaul_guard_checked_actions += 1
+
+        current_position = self.uav_positions[uav_idx].copy()
+        proposed_position = current_position + velocity * self.time_step
+        proposed_position[0] = np.clip(proposed_position[0], 0, self.area_size)
+        proposed_position[1] = np.clip(proposed_position[1], 0, self.area_size)
+        proposed_position[2] = np.clip(proposed_position[2], *self.height_range)
+
+        if self._would_preserve_dependent_backhaul_paths(uav_idx, proposed_position):
+            return velocity
+
+        self.backhaul_guard_blocked_actions += 1
+        reject_scale = float(np.clip(getattr(self, 'backhaul_guard_reject_speed_scale', 0.0), 0.0, 1.0))
+        return velocity * reject_scale
+
+    def _is_backhaul_guarded_uav(self, uav_idx):
+        """判断该 UAV 是否正在服务用户或作为其他 UAV 的中继骨干。"""
+        if uav_idx not in self.routing_paths:
+            return False
+        if np.sum(self.connections[uav_idx]) > 0:
+            return True
+
+        node = ("uav", uav_idx)
+        for source_uav, (path, _) in self.routing_paths.items():
+            if source_uav == uav_idx:
+                continue
+            if node in path[1:-1]:
+                return True
+        return False
+
+    def _would_preserve_dependent_backhaul_paths(self, uav_idx, proposed_position):
+        """检查移动后所有依赖该 UAV 的已有回程路径是否仍有链路容量余量。"""
+        node = ("uav", uav_idx)
+        dependent_paths = [
+            path for path, _ in self.routing_paths.values()
+            if node in path
+        ]
+        if not dependent_paths:
+            return True
+
+        min_capacity_bps = max(0.0, getattr(self, 'backhaul_guard_min_capacity_mbps', 1.0)) * 1e6
+        original_position = self.uav_positions[uav_idx].copy()
+
+        try:
+            self.uav_positions[uav_idx] = proposed_position
+            for path in dependent_paths:
+                for edge_idx in range(len(path) - 1):
+                    src_type, src_idx = path[edge_idx]
+                    dst_type, dst_idx = path[edge_idx + 1]
+                    if (src_type, src_idx) != node and (dst_type, dst_idx) != node:
+                        continue
+
+                    forward_capacity = self._get_link_capacity(src_type, src_idx, dst_type, dst_idx)
+                    reverse_capacity = self._get_link_capacity(dst_type, dst_idx, src_type, src_idx)
+
+                    if forward_capacity < min_capacity_bps or reverse_capacity < min_capacity_bps:
+                        return False
+            return True
+        finally:
+            self.uav_positions[uav_idx] = original_position
     
     def step(self, actions):
         """
@@ -2858,9 +3027,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             infos: 所有智能体的信息字典
         """
         # 1. Move users and update their state predictions
+        self.previous_routing_paths_snapshot = copy.deepcopy(self.routing_paths)
+        self.previous_connections_snapshot = self.connections.copy()
         self._move_users()
         
         # 卡尔曼滤波器已被移除，无需更新
+        self.backhaul_guard_checked_actions = 0
+        self.backhaul_guard_blocked_actions = 0
 
         # 2. Update agent positions based on actions
         for agent_idx, agent in enumerate(self.agents):
@@ -2878,9 +3051,10 @@ class UAVForcedRelayEnv(ParallelEnv):
                     velocity = self.action_to_velocity[discrete_action]
                 
                 elif self.action_space_type == 'continuous':
-                    action_vec = actions[agent]
+                    action_vec = np.asarray(actions[agent], dtype=np.float32)
                     velocity = action_vec * self.max_speed
 
+                velocity = self._apply_backhaul_action_guard(agent_idx, velocity)
                 new_position = self.uav_positions[agent_idx] + velocity * self.time_step
                 
                 # Boundary checks
@@ -2927,6 +3101,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 首先，计算核心覆盖指标并更新 self.reward_info，供塑形奖励函数使用
         self._calculate_coverage_metrics()
         backhaul_outage_metrics = self._calculate_backhaul_outage_metrics()
+        relay_backhaul_metrics = self._calculate_relay_backhaul_metrics()
         reward_components = {}
         # 始终计算切换指标以用于日志记录
         #handover_metrics = self._calculate_handover_metrics()
@@ -2969,6 +3144,8 @@ class UAVForcedRelayEnv(ParallelEnv):
             coverage_drop_ratio = backhaul_outage_metrics.get("coverage_drop_ratio", 0.0)
             outage_memory_penalty = backhaul_outage_metrics.get("backhaul_outage_ema", 0.0)
             full_disconnect_penalty = float(backhaul_outage_metrics.get("full_network_disconnect", 0))
+            relay_route_loss_ratio = relay_backhaul_metrics.get("relay_route_loss_ratio", 0.0)
+            relay_margin_penalty = relay_backhaul_metrics.get("backhaul_margin_penalty_raw", 0.0)
             
             # 组合惩罚项：负载均衡 + 斥力场
             # 使用权重参数来平衡两种惩罚的影响
@@ -2983,7 +3160,9 @@ class UAVForcedRelayEnv(ParallelEnv):
                 self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio) +
                 self.w_full_disconnect * full_disconnect_penalty +
                 self.w_coverage_drop * coverage_drop_ratio +
-                self.w_outage_memory * outage_memory_penalty
+                self.w_outage_memory * outage_memory_penalty +
+                self.w_relay_break * relay_route_loss_ratio +
+                self.w_backhaul_margin * relay_margin_penalty
             )
             shared_reward -= robustness_penalty
 
@@ -3026,6 +3205,8 @@ class UAVForcedRelayEnv(ParallelEnv):
 
             reward_components.update({
                 "gated_reward": shared_reward,
+                "load_balance_reward": shared_reward,
+                "rt_final_health_score": shared_reward,
                 "load_balance_penalty": load_balance_penalty,
                 "repulsion_penalty": repulsion_penalty,
                 "combined_penalty": combined_penalty,
@@ -3034,6 +3215,10 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "full_disconnect_penalty": self.w_full_disconnect * full_disconnect_penalty,
                 "coverage_drop_penalty": self.w_coverage_drop * coverage_drop_ratio,
                 "outage_memory_penalty": self.w_outage_memory * outage_memory_penalty,
+                "relay_break_penalty": self.w_relay_break * relay_route_loss_ratio,
+                "backhaul_margin_penalty": self.w_backhaul_margin * relay_margin_penalty,
+                "backhaul_guard_checked_actions": getattr(self, 'backhaul_guard_checked_actions', 0),
+                "backhaul_guard_blocked_actions": getattr(self, 'backhaul_guard_blocked_actions', 0),
                 "nav_reward": nav_reward  # 记录导航奖励以便观察
             })
         elif self.reward_type == "awareness":

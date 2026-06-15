@@ -3,6 +3,7 @@ import time
 import numpy as np
 import torch
 import argparse
+import importlib
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from mpl_toolkits.mplot3d import Axes3D
@@ -15,6 +16,7 @@ from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 class RandomAgent:
@@ -1157,6 +1159,13 @@ def create_env(scenario, config, seed, save_path=None):
         env_kwargs.update(scenario4_kwargs)
         
         raw_env = UAVForcedRelayEnv(**env_kwargs)
+    elif scenario == 6:
+        raw_env = UAVProgressiveRelayEnv(
+            config=config,
+            render_mode="human",
+            seed=seed,
+            scale_mode="eval",
+        )
     else:
         raise ValueError(f"未知的场景: {scenario}")
     
@@ -1271,10 +1280,14 @@ def parse_args():
     # 模型和场景参数
     parser.add_argument('--model_path', type=str, default=None,
                        help='训练好的模型文件路径 (如果未提供或不存在，将使用随机策略)')
+    parser.add_argument('--config', type=str, default='config_1',
+                       help='配置文件名，不带.py后缀')
+    parser.add_argument('--preset', type=str, default='',
+                       help='论文实验preset，例如 S4-R3 或 S6-S6/S8/S9/S10')
     parser.add_argument('--use_random', action='store_true',
                        help='强制使用随机策略 (忽略模型文件)')
     parser.add_argument('--scenario', type=int, default=4,
-                       help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式')
+                       help='场景: 1=基站模式, 2=协作组网模式, 3=强制多跳模式, 4=强制中继模式, 6=递进强制中继基准')
     
     # 评估控制参数
     parser.add_argument('--n_episodes', type=int, default=5,
@@ -1311,7 +1324,19 @@ def main():
     use_random_agent = args.use_random or args.model_path is None or not os.path.exists(args.model_path or "")
     
     # 加载配置（基于论文参数）
-    config = Config()
+    config_module = importlib.import_module(args.config)
+    ConfigClass = getattr(config_module, 'Config')
+    if args.preset:
+        try:
+            config = ConfigClass(args.preset)
+        except TypeError:
+            config = ConfigClass()
+        if hasattr(config, 'apply_preset') and getattr(config, 'experiment_preset', '').upper() != args.preset.upper():
+            config.apply_preset(args.preset)
+        if hasattr(config, 'scenario'):
+            args.scenario = int(config.scenario)
+    else:
+        config = ConfigClass()
     config.use_opt = False
     
     print(f"场景: {args.scenario}")

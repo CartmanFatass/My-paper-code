@@ -342,7 +342,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
     def render(self, mode="human"):
         """Renders the environment with multiprocessing safety."""
         # 【修改】允许在子进程中渲染，但依赖底层环境处理线程安全和后端问题
-        # 只要底层环境（如scenario4_discrete.py）正确配置了Agg后端，子进程渲染就是安全的
+        # 只要底层环境（如scenario_base.py）正确配置了Agg后端，子进程渲染就是安全的
         
         try:
             return self.env.render() if hasattr(self.env, 'render') else None

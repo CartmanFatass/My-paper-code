@@ -40,13 +40,39 @@ class VisualizationManager:
             
             # Network health metrics
             'rt_final_health_score': [],
-            'connectivity_score': [],
-            'role_diversity_bonus': [],
-            'effective_coverage_score': [],
-            'dispersion_penalty': [],
-            'serving_uavs_count': [],
-            'pure_relay_uavs_count': [],
-            'weighted_serving_score': [],
+            'load_balance_reward': [],
+            'load_balance_penalty': [],
+            'robustness_penalty': [],
+            'backhaul_outage_penalty': [],
+            'full_disconnect_penalty': [],
+            'coverage_drop_penalty': [],
+            'outage_memory_penalty': [],
+            'relay_break_penalty': [],
+            'backhaul_margin_penalty': [],
+
+            # Backhaul robustness metrics for load_balance mode
+            'backhaul_outage_users': [],
+            'backhaul_outage_ratio': [],
+            'service_drop_users': [],
+            'service_drop_ratio': [],
+            'backhaul_drop_users': [],
+            'backhaul_drop_ratio': [],
+            'full_network_disconnect': [],
+            'full_disconnect_streak': [],
+            'coverage_drop_ratio': [],
+            'backhaul_outage_ema': [],
+            'instant_outage_intensity': [],
+            'relay_route_lost_uavs': [],
+            'relay_route_lost_users': [],
+            'relay_route_loss_ratio': [],
+            'relay_route_loss_prev_served_ratio': [],
+            'prev_backhaul_served_users': [],
+            'current_backhaul_served_users': [],
+            'backhaul_margin_penalty_raw': [],
+            'min_serving_backhaul_bottleneck_mbps': [],
+            'avg_serving_backhaul_bottleneck_mbps': [],
+            'backhaul_guard_checked_actions': [],
+            'backhaul_guard_blocked_actions': [],
             
             # Network topology metrics
             'avg_hops': [],
@@ -127,13 +153,39 @@ class VisualizationManager:
         
         # === 记录网络健康度指标 ===
         self.history['rt_final_health_score'].append(reward_info.get('rt_final_health_score', 0))
-        self.history['connectivity_score'].append(reward_info.get('connectivity_score', 0))
-        self.history['role_diversity_bonus'].append(reward_info.get('role_diversity_bonus', 0))
-        self.history['effective_coverage_score'].append(reward_info.get('effective_coverage_score', 0))
-        self.history['dispersion_penalty'].append(reward_info.get('dispersion_penalty', 0))
-        self.history['serving_uavs_count'].append(reward_info.get('serving_uavs_count', 0))
-        self.history['pure_relay_uavs_count'].append(reward_info.get('pure_relay_uavs_count', 0))
-        self.history['weighted_serving_score'].append(reward_info.get('weighted_serving_score', 0))
+        self.history['load_balance_reward'].append(reward_info.get('load_balance_reward', reward_info.get('rt_final_health_score', 0)))
+        self.history['load_balance_penalty'].append(reward_info.get('load_balance_penalty', 0))
+        self.history['robustness_penalty'].append(reward_info.get('robustness_penalty', 0))
+        self.history['backhaul_outage_penalty'].append(reward_info.get('backhaul_outage_penalty', 0))
+        self.history['full_disconnect_penalty'].append(reward_info.get('full_disconnect_penalty', 0))
+        self.history['coverage_drop_penalty'].append(reward_info.get('coverage_drop_penalty', 0))
+        self.history['outage_memory_penalty'].append(reward_info.get('outage_memory_penalty', 0))
+        self.history['relay_break_penalty'].append(reward_info.get('relay_break_penalty', 0))
+        self.history['backhaul_margin_penalty'].append(reward_info.get('backhaul_margin_penalty', 0))
+
+        # === 记录回程健壮性指标 ===
+        self.history['backhaul_outage_users'].append(reward_info.get('backhaul_outage_users', 0))
+        self.history['backhaul_outage_ratio'].append(reward_info.get('backhaul_outage_ratio', 0))
+        self.history['service_drop_users'].append(reward_info.get('service_drop_users', 0))
+        self.history['service_drop_ratio'].append(reward_info.get('service_drop_ratio', 0))
+        self.history['backhaul_drop_users'].append(reward_info.get('backhaul_drop_users', 0))
+        self.history['backhaul_drop_ratio'].append(reward_info.get('backhaul_drop_ratio', 0))
+        self.history['full_network_disconnect'].append(reward_info.get('full_network_disconnect', 0))
+        self.history['full_disconnect_streak'].append(reward_info.get('full_disconnect_streak', 0))
+        self.history['coverage_drop_ratio'].append(reward_info.get('coverage_drop_ratio', 0))
+        self.history['backhaul_outage_ema'].append(reward_info.get('backhaul_outage_ema', 0))
+        self.history['instant_outage_intensity'].append(reward_info.get('instant_outage_intensity', 0))
+        self.history['relay_route_lost_uavs'].append(reward_info.get('relay_route_lost_uavs', 0))
+        self.history['relay_route_lost_users'].append(reward_info.get('relay_route_lost_users', 0))
+        self.history['relay_route_loss_ratio'].append(reward_info.get('relay_route_loss_ratio', 0))
+        self.history['relay_route_loss_prev_served_ratio'].append(reward_info.get('relay_route_loss_prev_served_ratio', 0))
+        self.history['prev_backhaul_served_users'].append(reward_info.get('prev_backhaul_served_users', 0))
+        self.history['current_backhaul_served_users'].append(reward_info.get('current_backhaul_served_users', 0))
+        self.history['backhaul_margin_penalty_raw'].append(reward_info.get('backhaul_margin_penalty_raw', 0))
+        self.history['min_serving_backhaul_bottleneck_mbps'].append(reward_info.get('min_serving_backhaul_bottleneck_mbps', 0))
+        self.history['avg_serving_backhaul_bottleneck_mbps'].append(reward_info.get('avg_serving_backhaul_bottleneck_mbps', 0))
+        self.history['backhaul_guard_checked_actions'].append(reward_info.get('backhaul_guard_checked_actions', 0))
+        self.history['backhaul_guard_blocked_actions'].append(reward_info.get('backhaul_guard_blocked_actions', 0))
         
         # === 记录网络拓扑指标 ===
         self.history['avg_hops'].append(reward_info.get('avg_hops', 0))
@@ -170,7 +222,7 @@ class VisualizationManager:
             # For regular episode completion, generate all plots
             self._create_topology_plot(prefix=prefix, eval_step=eval_step)
             self._create_performance_plot(prefix=prefix, eval_step=eval_step)
-            self._create_health_score_analysis(prefix=prefix, eval_step=eval_step)
+            self._create_relay_backhaul_analysis(prefix=prefix, eval_step=eval_step)
 
     def _create_topology_plot(self, prefix='', eval_step=None):
         """
@@ -354,43 +406,53 @@ class VisualizationManager:
             ax2.grid(True, alpha=0.3)
             ax2.legend()
             
-            # 3. Network Health Score
+            # 3. Load-balance reward and robustness penalty
             ax3 = axes[0, 2]
-            ax3.plot(steps, self.history['rt_final_health_score'], 'purple', linewidth=3, label='Network Health Score')
-            ax3.set_ylabel('Health Score')
-            ax3.set_title('Network Health Rating')
+            ax3.plot(steps, self.history['load_balance_reward'], 'purple', linewidth=2, label='Load Balance Reward')
+            ax3.plot(steps, self.history['robustness_penalty'], 'red', linewidth=2, label='Robustness Penalty')
+            ax3.plot(steps, self.history['load_balance_penalty'], 'gray', linestyle='--', linewidth=1.5, label='Load Penalty')
+            ax3.set_ylabel('Reward / Penalty')
+            ax3.set_title('Load Balance Reward & Robustness Cost')
             ax3.grid(True, alpha=0.3)
             ax3.legend()
             
-            # === Second Row: Network Health Components ===
-            # 4. Connectivity and Role Diversity
+            # === Second Row: Backhaul Robustness ===
+            # 4. Relay route breakage
             ax4 = axes[1, 0]
-            ax4.plot(steps, self.history['connectivity_score'], 'cyan', linewidth=2, label='Connectivity Score')
-            ax4.plot(steps, self.history['role_diversity_bonus'], 'magenta', linewidth=2, label='Role Diversity Bonus')
-            ax4.set_ylabel('Score')
-            ax4.set_title('Network Connectivity & Role Diversity')
+            ax4.plot(steps, self.history['relay_route_loss_ratio'], 'red', linewidth=2, label='Relay Route Loss Ratio')
+            ax4.plot(steps, self.history['relay_route_loss_prev_served_ratio'], 'darkred', linestyle='--', linewidth=2, label='Loss / Prev Backhaul Served')
+            ax4_twin = ax4.twinx()
+            ax4_twin.plot(steps, self.history['relay_route_lost_users'], 'black', linewidth=1.5, alpha=0.7, label='Lost Users')
+            ax4.set_ylabel('Ratio', color='red')
+            ax4_twin.set_ylabel('Users', color='black')
+            ax4.set_title('Relay Backhaul Route Breakage')
             ax4.grid(True, alpha=0.3)
-            ax4.legend()
+            ax4.legend(loc='upper left')
+            ax4_twin.legend(loc='upper right')
             
-            # 5. Effective Coverage and Dispersion Penalty
+            # 5. Backhaul bottleneck margin
             ax5 = axes[1, 1]
-            ax5.plot(steps, self.history['effective_coverage_score'], 'green', linewidth=2, label='Effective Coverage Score')
+            ax5.plot(steps, self.history['min_serving_backhaul_bottleneck_mbps'], 'brown', linewidth=2, label='Min Serving Bottleneck')
+            ax5.plot(steps, self.history['avg_serving_backhaul_bottleneck_mbps'], 'orange', linewidth=2, label='Avg Serving Bottleneck')
+            target_mbps = getattr(self.config, 'backhaul_margin_target_mbps', 10.0)
+            ax5.axhline(target_mbps, color='gray', linestyle=':', linewidth=1.5, label=f'Target {target_mbps:.1f} Mbps')
             ax5_twin = ax5.twinx()
-            ax5_twin.plot(steps, self.history['dispersion_penalty'], 'red', linewidth=2, label='Dispersion Penalty')
-            ax5.set_ylabel('Coverage Score', color='green')
-            ax5_twin.set_ylabel('Penalty Value', color='red')
-            ax5.set_title('Coverage Effect & Spatial Dispersion')
+            ax5_twin.plot(steps, self.history['backhaul_margin_penalty_raw'], 'red', linewidth=2, label='Margin Penalty')
+            ax5.set_ylabel('Bottleneck (Mbps)', color='brown')
+            ax5_twin.set_ylabel('Penalty', color='red')
+            ax5.set_title('Backhaul Bottleneck Margin')
             ax5.grid(True, alpha=0.3)
             ax5.legend(loc='upper left')
             ax5_twin.legend(loc='upper right')
             
-            # 6. UAV Role Distribution
+            # 6. Outage and service drop
             ax6 = axes[1, 2]
-            ax6.plot(steps, self.history['serving_uavs_count'], 'blue', linewidth=2, marker='o', markersize=3, label='Serving UAV Count')
-            ax6.plot(steps, self.history['pure_relay_uavs_count'], 'red', linewidth=2, marker='s', markersize=3, label='Pure Relay UAV Count')
-            ax6.plot(steps, self.history['weighted_serving_score'], 'orange', linewidth=2, marker='^', markersize=3, label='Weighted Serving Score')
-            ax6.set_ylabel('Count/Score')
-            ax6.set_title('UAV Role Distribution')
+            ax6.plot(steps, self.history['backhaul_outage_ratio'], 'red', linewidth=2, label='Backhaul Outage Ratio')
+            ax6.plot(steps, self.history['service_drop_ratio'], 'purple', linewidth=2, label='Service Drop Ratio')
+            ax6.plot(steps, self.history['coverage_drop_ratio'], 'orange', linestyle='--', linewidth=1.5, label='Coverage Drop Ratio')
+            ax6.plot(steps, self.history['full_network_disconnect'], 'black', linestyle=':', linewidth=1.5, label='Full Disconnect')
+            ax6.set_ylabel('Ratio / Flag')
+            ax6.set_title('Outage and Service Drop')
             ax6.grid(True, alpha=0.3)
             ax6.legend()
             
@@ -408,15 +470,19 @@ class VisualizationManager:
             ax7.legend(loc='upper left')
             ax7_twin.legend(loc='upper right')
             
-            # 8. User Service Quality Comparison
+            # 8. Guard actions and user service quality
             ax8 = axes[2, 1]
-            ax8.plot(steps, self.history['total_connected_users'], 'lightblue', linewidth=2, label='Total Connected Users')
+            ax8.plot(steps, self.history['total_connected_users'], 'lightblue', linewidth=2, label='Access Connected Users')
             ax8.plot(steps, self.history['served_users'], 'darkblue', linewidth=2, label='Effectively Served Users')
-            ax8.plot(steps, self.history['service_rate'], 'green', linewidth=2, linestyle='--', label='Service Rate')
-            ax8.set_ylabel('User Count/Service Rate')
-            ax8.set_title('User Service Quality')
+            ax8_twin = ax8.twinx()
+            ax8_twin.plot(steps, self.history['backhaul_guard_checked_actions'], 'gray', linestyle='--', linewidth=1.5, label='Guard Checked')
+            ax8_twin.plot(steps, self.history['backhaul_guard_blocked_actions'], 'red', linestyle=':', linewidth=2, label='Guard Blocked')
+            ax8.set_ylabel('Users', color='blue')
+            ax8_twin.set_ylabel('Guard Actions', color='red')
+            ax8.set_title('Service Quality and Backhaul Guard')
             ax8.grid(True, alpha=0.3)
-            ax8.legend()
+            ax8.legend(loc='upper left')
+            ax8_twin.legend(loc='upper right')
             
             # 9. Key Metrics Summary (last subplot shows final values)
             ax9 = axes[2, 2]
@@ -425,30 +491,35 @@ class VisualizationManager:
             # Calculate final values
             final_coverage = self.history['coverage_ratios'][-1] if self.history['coverage_ratios'] else 0
             final_throughput = self.history['throughput'][-1] if self.history['throughput'] else 0
-            final_health = self.history['rt_final_health_score'][-1] if self.history['rt_final_health_score'] else 0
+            final_reward = self.history['load_balance_reward'][-1] if self.history['load_balance_reward'] else 0
+            max_relay_loss = max(self.history['relay_route_loss_ratio']) if self.history['relay_route_loss_ratio'] else 0
+            max_outage = max(self.history['backhaul_outage_ratio']) if self.history['backhaul_outage_ratio'] else 0
+            min_bottleneck = min([v for v in self.history['min_serving_backhaul_bottleneck_mbps'] if v > 0], default=0)
+            total_guard_blocked = sum(self.history['backhaul_guard_blocked_actions']) if self.history['backhaul_guard_blocked_actions'] else 0
             final_hops = self.history['avg_hops'][-1] if self.history['avg_hops'] else 0
-            final_serving_uavs = self.history['serving_uavs_count'][-1] if self.history['serving_uavs_count'] else 0
-            final_relay_uavs = self.history['pure_relay_uavs_count'][-1] if self.history['pure_relay_uavs_count'] else 0
+            final_uavs_with_backhaul = self.history['uavs_with_backhaul'][-1] if self.history['uavs_with_backhaul'] else 0
             
             # Display key metrics summary
             summary_text = f"""
 Key Metrics Summary (Final Values)
 
-📊 Coverage Performance:
+Coverage Performance:
    • Coverage Rate: {final_coverage:.1%}
    • Connected Users: {self.history['connectivity'][-1] if self.history['connectivity'] else 0}/{self.config.n_users}
 
-🚀 Network Performance:
+Network Performance:
    • System Throughput: {final_throughput:.1f} Mbps
-   • Network Health: {final_health:.3f}
+   • Load Balance Reward: {final_reward:.3f}
    • Average Hops: {final_hops:.1f}
+   • UAVs With Backhaul: {final_uavs_with_backhaul}/{self.config.n_agents}
 
-🛰️ UAV Role Distribution:
-   • Serving UAVs: {final_serving_uavs}
-   • Relay UAVs: {final_relay_uavs}
-   • Total UAVs: {self.config.n_agents}
+Backhaul Robustness:
+   • Max Relay Loss Ratio: {max_relay_loss:.3f}
+   • Max Backhaul Outage: {max_outage:.3f}
+   • Min Serving Bottleneck: {min_bottleneck:.1f} Mbps
+   • Guard Blocked Actions: {total_guard_blocked}
 
-📈 Team Skill:
+Team Skill:
    • Final Team Skill: {self.history['team_skills'][-1] if self.history['team_skills'] else 'N/A'}
             """
             
@@ -483,166 +554,112 @@ Key Metrics Summary (Final Values)
             import traceback
             traceback.print_exc()
 
-    def _create_health_score_analysis(self, prefix='', eval_step=None):
+    def _create_relay_backhaul_analysis(self, prefix='', eval_step=None):
         """
-        Generate detailed analysis charts for network health score components.
-        
-        Args:
-            prefix (str, optional): Prefix to add to the beginning of filename.
-            eval_step (int, optional): Current training total steps for unique evaluation image identification.
+        Generate analysis charts for relay-route breakage and backhaul robustness.
+
+        The old health-score component plots are intentionally not generated for
+        load_balance mode because those component fields are not part of this reward.
         """
         try:
-            # 设置支持中文和表情符号的字体
-            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial', 'Liberation Sans', 'Noto Color Emoji']
+            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial', 'Liberation Sans']
             plt.rcParams['axes.unicode_minus'] = False
-            
-            # Create 2x2 subplot grid for specialized network health analysis
+
             fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-            fig.suptitle(f'Evaluation Episode {self.episode_num}: Network Health Deep Analysis', fontsize=16, fontweight='bold')
-            
+            fig.suptitle(f'Evaluation Episode {self.episode_num}: Relay Backhaul Deep Analysis', fontsize=16, fontweight='bold')
+
             steps = self.history['steps']
-            
-            # === Top Left: Health Score Total and Component Stacked Chart ===
+
+            # 1. Reward and penalty decomposition
             ax1 = axes[0, 0]
-            
-            # Get weights from configuration (if available)
-            w_connectivity = getattr(self.config, 'w_connectivity', 0.5)
-            w_diversity = getattr(self.config, 'w_diversity', 1.0)
-            w_coverage = getattr(self.config, 'w_coverage', 1.0)
-            w_dispersion = getattr(self.config, 'w_dispersion', 0.05)
-            
-            # Calculate weighted contributions of each component
-            connectivity_contribution = np.array(self.history['connectivity_score']) * w_connectivity
-            diversity_contribution = np.array(self.history['role_diversity_bonus']) * w_diversity
-            coverage_contribution = np.array(self.history['effective_coverage_score']) * w_coverage
-            dispersion_contribution = np.array(self.history['dispersion_penalty']) * w_dispersion
-            
-            # Create stacked area chart
-            ax1.fill_between(steps, 0, connectivity_contribution, alpha=0.7, label=f'Connectivity Contribution (×{w_connectivity})', color='cyan')
-            ax1.fill_between(steps, connectivity_contribution, 
-                           connectivity_contribution + diversity_contribution, 
-                           alpha=0.7, label=f'Role Diversity Contribution (×{w_diversity})', color='magenta')
-            ax1.fill_between(steps, connectivity_contribution + diversity_contribution,
-                           connectivity_contribution + diversity_contribution + coverage_contribution,
-                           alpha=0.7, label=f'Coverage Contribution (×{w_coverage})', color='green')
-            
-            # Display dispersion penalty as negative value
-            ax1.fill_between(steps, connectivity_contribution + diversity_contribution + coverage_contribution,
-                           connectivity_contribution + diversity_contribution + coverage_contribution - dispersion_contribution,
-                           alpha=0.7, label=f'Dispersion Penalty (×{w_dispersion})', color='red')
-            
-            # Overlay total health score line
-            ax1.plot(steps, self.history['rt_final_health_score'], 'k-', linewidth=3, label='Total Health Score')
-            
-            ax1.set_ylabel('Health Score')
-            ax1.set_title('Health Score Component Stacked Analysis')
+            ax1.plot(steps, self.history['load_balance_reward'], 'k-', linewidth=2.5, label='Load Balance Reward')
+            ax1.plot(steps, self.history['robustness_penalty'], 'red', linewidth=2, label='Total Robustness Penalty')
+            ax1.plot(steps, self.history['relay_break_penalty'], 'darkred', linestyle='--', linewidth=2, label='Relay Break Penalty')
+            ax1.plot(steps, self.history['backhaul_margin_penalty'], 'orange', linestyle='--', linewidth=2, label='Backhaul Margin Penalty')
+            ax1.plot(steps, self.history['backhaul_outage_penalty'], 'purple', linestyle=':', linewidth=2, label='Outage Penalty')
+            ax1.set_ylabel('Reward / Penalty')
+            ax1.set_title('Load Balance Reward Decomposition')
             ax1.grid(True, alpha=0.3)
-            ax1.legend(loc='upper left', fontsize=9)
-            
-            # === Top Right: UAV Role Evolution Analysis ===
+            ax1.legend(fontsize=8)
+
+            # 2. Relay breakage and outage events
             ax2 = axes[0, 1]
-            
-            # Calculate role ratios
-            total_uavs = self.config.n_agents
-            serving_ratio = np.array(self.history['serving_uavs_count']) / total_uavs
-            relay_ratio = np.array(self.history['pure_relay_uavs_count']) / total_uavs
-            disconnected_ratio = 1 - serving_ratio - relay_ratio
-            
-            # Create stacked area chart showing role distribution
-            ax2.fill_between(steps, 0, serving_ratio, alpha=0.8, label='Serving UAV Ratio', color='blue')
-            ax2.fill_between(steps, serving_ratio, serving_ratio + relay_ratio, 
-                           alpha=0.8, label='Relay UAV Ratio', color='orange')
-            ax2.fill_between(steps, serving_ratio + relay_ratio, 1, 
-                           alpha=0.8, label='Disconnected UAV Ratio', color='gray')
-            
-            # Overlay weighted serving contribution
-            ax2_twin = ax2.twinx()
-            ax2_twin.plot(steps, self.history['weighted_serving_score'], 'r-', linewidth=2, label='Weighted Serving Contribution')
-            ax2_twin.set_ylabel('Weighted Serving Contribution', color='r')
-            
-            ax2.set_ylabel('UAV Role Ratio')
-            ax2.set_title('UAV Role Distribution Evolution')
-            ax2.set_ylim(0, 1)
+            ax2.plot(steps, self.history['relay_route_loss_ratio'], 'red', linewidth=2, label='Relay Route Loss Ratio')
+            ax2.plot(steps, self.history['backhaul_outage_ratio'], 'purple', linewidth=2, label='Backhaul Outage Ratio')
+            ax2.plot(steps, self.history['service_drop_ratio'], 'orange', linewidth=2, label='Service Drop Ratio')
+            ax2.plot(steps, self.history['full_network_disconnect'], 'black', linestyle=':', linewidth=1.5, label='Full Disconnect Flag')
+            ax2.set_ylabel('Ratio / Flag')
+            ax2.set_title('Relay Breakage and Service Outage')
             ax2.grid(True, alpha=0.3)
-            ax2.legend(loc='upper left', fontsize=9)
-            ax2_twin.legend(loc='upper right', fontsize=9)
-            
-            # === Bottom Left: Network Efficiency Analysis ===
+            ax2.legend(fontsize=8)
+
+            # 3. Bottleneck capacity margin
             ax3 = axes[1, 0]
-            
-            # Calculate efficiency metrics
-            coverage_efficiency = np.array(self.history['coverage_ratios']) / np.maximum(np.array(self.history['connectivity_ratio']), 0.01)
-            throughput_per_uav = np.array(self.history['throughput']) / np.maximum(np.array(self.history['connected_uavs']), 1)
-            
-            ax3.plot(steps, coverage_efficiency, 'g-', linewidth=2, label='Coverage Efficiency (Coverage/Connection Ratio)')
+            ax3.plot(steps, self.history['min_serving_backhaul_bottleneck_mbps'], 'brown', linewidth=2, label='Min Serving Bottleneck')
+            ax3.plot(steps, self.history['avg_serving_backhaul_bottleneck_mbps'], 'orange', linewidth=2, label='Avg Serving Bottleneck')
+            target_mbps = getattr(self.config, 'backhaul_margin_target_mbps', 10.0)
+            guard_mbps = getattr(self.config, 'backhaul_guard_min_capacity_mbps', 5.0)
+            ax3.axhline(target_mbps, color='gray', linestyle='--', linewidth=1.5, label=f'Margin Target {target_mbps:.1f} Mbps')
+            ax3.axhline(guard_mbps, color='red', linestyle=':', linewidth=1.5, label=f'Guard Min {guard_mbps:.1f} Mbps')
             ax3_twin = ax3.twinx()
-            ax3_twin.plot(steps, throughput_per_uav, 'b--', linewidth=2, label='Average UAV Throughput')
-            ax3_twin.plot(steps, self.history['avg_hops'], 'r:', linewidth=2, label='Average Hops')
-            
-            ax3.set_ylabel('Coverage Efficiency', color='g')
-            ax3_twin.set_ylabel('Throughput(Mbps)/Hops', color='b')
-            ax3.set_title('Network Efficiency Metrics')
+            ax3_twin.plot(steps, self.history['backhaul_margin_penalty_raw'], 'red', linewidth=2, alpha=0.7, label='Margin Penalty Raw')
+            ax3.set_ylabel('Bottleneck Capacity (Mbps)', color='brown')
+            ax3_twin.set_ylabel('Penalty', color='red')
+            ax3.set_title('Backhaul Bottleneck Capacity Margin')
             ax3.grid(True, alpha=0.3)
-            ax3.legend(loc='upper left', fontsize=9)
-            ax3_twin.legend(loc='upper right', fontsize=9)
-            
-            # === Bottom Right: Performance Stability Analysis ===
+            ax3.legend(loc='upper left', fontsize=8)
+            ax3_twin.legend(loc='upper right', fontsize=8)
+
+            # 4. Guard behavior and rolling instability
             ax4 = axes[1, 1]
-            
-            # Calculate sliding window standard deviation (stability metrics)
-            window_size = min(20, len(steps) // 4)  # Dynamic window size
+            ax4.plot(steps, self.history['backhaul_guard_checked_actions'], 'gray', linewidth=1.5, label='Guard Checked Actions')
+            ax4.plot(steps, self.history['backhaul_guard_blocked_actions'], 'red', linewidth=2, label='Guard Blocked Actions')
+
+            window_size = min(20, len(steps) // 4)
             if window_size >= 2:
-                coverage_stability = []
-                health_stability = []
+                relay_loss_stability = []
+                outage_stability = []
                 throughput_stability = []
-                
+
                 for i in range(len(steps)):
                     start_idx = max(0, i - window_size + 1)
                     end_idx = i + 1
-                    
-                    coverage_window = self.history['coverage_ratios'][start_idx:end_idx]
-                    health_window = self.history['rt_final_health_score'][start_idx:end_idx]
-                    throughput_window = self.history['throughput'][start_idx:end_idx]
-                    
-                    coverage_stability.append(np.std(coverage_window))
-                    health_stability.append(np.std(health_window))
-                    throughput_stability.append(np.std(throughput_window))
-                
-                ax4.plot(steps, coverage_stability, 'g-', linewidth=2, label=f'Coverage Stability (Window={window_size})')
-                ax4.plot(steps, health_stability, 'purple', linewidth=2, label=f'Health Stability (Window={window_size})')
-                ax4.plot(steps, throughput_stability, 'orange', linewidth=2, label=f'Throughput Stability (Window={window_size})')
-                
-                ax4.set_ylabel('Standard Deviation (Stability Metric)')
-                ax4.set_title('Performance Stability Analysis (Lower is More Stable)')
-                ax4.grid(True, alpha=0.3)
-                ax4.legend(fontsize=9)
-            else:
-                ax4.text(0.5, 0.5, 'Insufficient Data Points\nUnable to Perform Stability Analysis', 
-                        transform=ax4.transAxes, ha='center', va='center', fontsize=12)
-                ax4.set_title('Performance Stability Analysis')
-            
-            # Set x-axis labels for all subplots
+                    relay_loss_stability.append(np.std(self.history['relay_route_loss_ratio'][start_idx:end_idx]))
+                    outage_stability.append(np.std(self.history['backhaul_outage_ratio'][start_idx:end_idx]))
+                    throughput_stability.append(np.std(self.history['throughput'][start_idx:end_idx]))
+
+                ax4_twin = ax4.twinx()
+                ax4_twin.plot(steps, relay_loss_stability, 'darkred', linestyle='--', linewidth=1.5, label=f'Relay Loss Std W={window_size}')
+                ax4_twin.plot(steps, outage_stability, 'purple', linestyle='--', linewidth=1.5, label=f'Outage Std W={window_size}')
+                ax4_twin.plot(steps, throughput_stability, 'orange', linestyle=':', linewidth=1.5, label=f'Throughput Std W={window_size}')
+                ax4_twin.set_ylabel('Rolling Std', color='purple')
+                ax4_twin.legend(loc='upper right', fontsize=8)
+
+            ax4.set_ylabel('Guard Action Count', color='red')
+            ax4.set_title('Backhaul Guard and Instability')
+            ax4.grid(True, alpha=0.3)
+            ax4.legend(loc='upper left', fontsize=8)
+
             for i in range(2):
                 for j in range(2):
                     axes[i, j].set_xlabel('Time Step')
-            
+
             plt.tight_layout()
-            
-            # 使用 eval_step 和 PID 创建唯一的文件名以避免竞态条件
+
             pid = os.getpid()
             if eval_step is not None:
-                filename = f'health_analysis_eval_step_{eval_step}_episode_{self.episode_num}_pid_{pid}.png'
+                filename = f'relay_backhaul_analysis_eval_step_{eval_step}_episode_{self.episode_num}_pid_{pid}.png'
             else:
-                filename = f'health_analysis_episode_{self.episode_num}_pid_{pid}.png'
+                filename = f'relay_backhaul_analysis_episode_{self.episode_num}_pid_{pid}.png'
 
             if prefix:
                 filename = f'{prefix}_{filename}'
             save_path = os.path.join(self.log_dir, filename)
             fig.savefig(save_path, dpi=200, bbox_inches='tight')
             plt.close(fig)
-            print(f"Network health analysis chart saved: {save_path}")
+            print(f"Relay backhaul analysis chart saved: {save_path}")
 
         except Exception as e:
-            print(f"Error generating network health analysis chart: {e}")
+            print(f"Error generating relay backhaul analysis chart: {e}")
             import traceback
             traceback.print_exc()
