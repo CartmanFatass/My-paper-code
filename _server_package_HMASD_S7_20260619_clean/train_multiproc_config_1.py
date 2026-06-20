@@ -70,7 +70,7 @@ def validate_scenario7_configuration(config, args, env=None):
     stage = str(getattr(config, "energy_stage", "")).upper()
     expected_episode_length = 500 if stage == "S1" else 1500
     expected_values = {
-        "scenario7_config_revision": "scenario7-qos-safety-pbrs-v5",
+        "scenario7_config_revision": "scenario7-energy-interface-v2",
         "n_agents": 8,
         "action_dim": 4,
         "action_bound": 1.0,
@@ -80,8 +80,7 @@ def validate_scenario7_configuration(config, args, env=None):
         "n_charging_stations": 2,
         "max_observed_uavs": 8,
         "continuous_action_distribution": "tanh_gaussian",
-        "scenario7_interface_version": 3,
-        "gamma": 0.99,
+        "scenario7_interface_version": 2,
         "user_movement_model": "rpgm",
     }
     if stage not in {"S1", "S2", "S3", "S4"}:
@@ -103,68 +102,6 @@ def validate_scenario7_configuration(config, args, env=None):
         )
     if stage == "S4" and getattr(config, "uav_failure_min_active", None) < 6:
         errors.append("S4 uav_failure_min_active must be at least 6")
-    if float(getattr(config, "user_qos_rate_mbps", 0.0)) <= 0.0:
-        errors.append("user_qos_rate_mbps must be positive")
-    qos_target_ratio = float(getattr(config, "qos_target_ratio", 0.0))
-    if not (0.0 < qos_target_ratio <= 1.0):
-        errors.append("qos_target_ratio must be in (0, 1]")
-    if float(getattr(config, "return_margin_scale", 0.0)) <= 0.0:
-        errors.append("return_margin_scale must be positive")
-    return_cost_cap = getattr(config, "return_cost_cap", None)
-    if return_cost_cap is not None and float(return_cost_cap) <= 0.0:
-        errors.append("return_cost_cap must be positive or None")
-    for name in (
-        "lambda_return",
-        "cutoff_event_penalty",
-        "depletion_event_penalty",
-        "safety_dual_initial",
-    ):
-        if float(getattr(config, name, -1.0)) < 0.0:
-            errors.append(f"{name} must be non-negative")
-    if int(getattr(config, "outer_update_min_episodes", 0)) < 1:
-        errors.append("outer_update_min_episodes must be at least 1")
-    valid_reward_variants = {
-        "legacy_engineering",
-        "qos_only",
-        "qos_depletion_penalty",
-        "qos_fixed_safety",
-        "qos_fixed_safety_graph_pbrs",
-        "qos_fixed_safety_unbounded_graph_pbrs",
-        "qos_adaptive_safety_graph_pbrs",
-    }
-    reward_variant = str(getattr(config, "scenario7_reward_variant", ""))
-    if reward_variant not in valid_reward_variants:
-        errors.append(
-            f"scenario7_reward_variant={reward_variant!r}, "
-            f"expected one of {sorted(valid_reward_variants)}"
-        )
-    experiment_arm = str(getattr(config, "scenario7_experiment_arm", ""))
-    expected_arms = {
-        "A": ("constrained_qos_safety_pbrs_v1", 200.0, None),
-        "B": ("constrained_qos_safety_pbrs_v2", 200.0, 1.0),
-        "C": ("constrained_qos_safety_pbrs_v2", 160.0, 1.0),
-    }
-    if experiment_arm not in expected_arms:
-        errors.append(
-            f"scenario7_experiment_arm={experiment_arm!r}, expected A, B, or C"
-        )
-    else:
-        model, capacity, cap = expected_arms[experiment_arm]
-        if getattr(config, "scenario7_reward_model", None) != model:
-            errors.append(
-                f"scenario7_reward_model={getattr(config, 'scenario7_reward_model', None)!r}, "
-                f"expected {model!r} for arm {experiment_arm}"
-            )
-        if float(getattr(config, "battery_capacity_wh", -1.0)) != capacity:
-            errors.append(
-                f"battery_capacity_wh={getattr(config, 'battery_capacity_wh', None)!r}, "
-                f"expected {capacity!r} for arm {experiment_arm}"
-            )
-        if getattr(config, "return_cost_cap", None) != cap:
-            errors.append(
-                f"return_cost_cap={getattr(config, 'return_cost_cap', None)!r}, "
-                f"expected {cap!r} for arm {experiment_arm}"
-            )
     allowed_skill_intervals = tuple(
         getattr(config, "scenario7_skill_interval_candidates", (10, 25, 50))
     )
@@ -234,185 +171,6 @@ def validate_scenario7_configuration(config, args, env=None):
         raise ValueError("Scenario 7 configuration validation failed:\n- " + "\n- ".join(errors))
 
 
-def run_scenario7_physical_feasibility_check(config, seed_count=None):
-    """Run the 20-seed static-layout and rotation-charging certificate."""
-    seed_count = max(
-        1,
-        int(
-            seed_count
-            if seed_count is not None
-            else getattr(config, "scenario7_feasibility_seed_count", 20)
-        ),
-    )
-    results = []
-    for seed in range(seed_count):
-        env = UAVEnergyAwareRelayEnv(config=config, seed=seed)
-        try:
-            env.reset(seed=seed)
-            result = env.estimate_rotation_charging_feasibility()
-            result["seed"] = seed
-            results.append(result)
-        finally:
-            env.close()
-
-    qos_feasible_rate = float(np.mean([
-        result["qos_satisfaction_ratio"] >= config.qos_target_ratio
-        for result in results
-    ]))
-    no_charge_pressure_rate = float(np.mean([
-        result["episode_requires_charging"] for result in results
-    ]))
-    charge_success_rate = float(np.mean([
-        result["effective_charging"]
-        and result["schedule_within_horizon"]
-        for result in results
-    ]))
-    depletion_free_rate = float(np.mean([
-        result["depletion_free"] for result in results
-    ]))
-    mean_rotation_qos = float(np.mean([
-        result["rotation_qos_satisfaction_ratio"] for result in results
-    ]))
-    summary = {
-        "seed_count": seed_count,
-        "qos_feasible_rate": qos_feasible_rate,
-        "no_charge_pressure_rate": no_charge_pressure_rate,
-        "charge_success_rate": charge_success_rate,
-        "depletion_free_rate": depletion_free_rate,
-        "mean_rotation_qos_satisfaction_ratio": mean_rotation_qos,
-        "results": results,
-    }
-
-    if str(getattr(config, "scenario7_experiment_arm", "C")).upper() == "C":
-        failures = []
-        if qos_feasible_rate < 1.0:
-            failures.append(
-                f"static QoS feasibility rate {qos_feasible_rate:.1%} is below 100%"
-            )
-        min_pressure = float(
-            getattr(config, "scenario7_no_charge_pressure_min", 0.50)
-        )
-        if no_charge_pressure_rate < min_pressure:
-            failures.append(
-                f"no-charge pressure rate {no_charge_pressure_rate:.1%} "
-                f"is below {min_pressure:.1%}"
-            )
-        min_charge = float(
-            getattr(config, "scenario7_heuristic_charge_success_min", 0.90)
-        )
-        if charge_success_rate < min_charge:
-            failures.append(
-                f"rotation charging success {charge_success_rate:.1%} "
-                f"is below {min_charge:.1%}"
-            )
-        if depletion_free_rate < 1.0:
-            failures.append(
-                f"depletion-free rate {depletion_free_rate:.1%} is below 100%"
-            )
-        min_qos = float(getattr(config, "scenario7_heuristic_qos_min", 0.90))
-        if mean_rotation_qos < min_qos:
-            failures.append(
-                f"rotation QoS {mean_rotation_qos:.3f} is below {min_qos:.3f}"
-            )
-        if failures:
-            raise ValueError(
-                "Scenario 7 physical feasibility check failed:\n- "
-                + "\n- ".join(failures)
-            )
-    return summary
-
-
-class Scenario7SafetyDualController:
-    """Episode-window dual update used only by the adaptive safety ablation."""
-
-    def __init__(self, config, state=None):
-        self.window_size = max(1, int(getattr(config, "outer_update_min_episodes", 32)))
-        self.dual_learning_rate = float(getattr(config, "dual_learning_rate", 0.01))
-        self.dual_max = float(getattr(config, "dual_max", 10.0))
-        self.safety_dual = float(getattr(config, "safety_dual_initial", 0.0))
-        self.episodes = deque(maxlen=self.window_size)
-        self.update_count = 0
-        self.pending_episodes = 0
-        if state:
-            self.load_state_dict(state)
-
-    def record_episode(self, constraint_cost_sum, steps):
-        steps = max(1, int(steps))
-        self.episodes.append({
-            "constraint_cost_sum": float(constraint_cost_sum),
-            "steps": steps,
-        })
-        self.pending_episodes += 1
-
-    def update(self):
-        if len(self.episodes) < self.window_size or self.pending_episodes <= 0:
-            return None
-
-        total_cost = sum(item["constraint_cost_sum"] for item in self.episodes)
-        total_steps = max(1, sum(item["steps"] for item in self.episodes))
-
-        mean_constraint_cost = total_cost / total_steps
-        new_safety_dual = np.clip(
-            self.safety_dual + self.dual_learning_rate * mean_constraint_cost,
-            0.0,
-            self.dual_max,
-        )
-
-        self.safety_dual = float(new_safety_dual)
-        self.update_count += 1
-        self.pending_episodes = 0
-
-        return {
-            "safety_dual": self.safety_dual,
-            "window_mean_return_constraint_cost": float(mean_constraint_cost),
-            "outer_update_count": int(self.update_count),
-            "window_episode_count": int(len(self.episodes)),
-        }
-
-    def parameters(self):
-        return {
-            "safety_dual": float(self.safety_dual),
-        }
-
-    def state_dict(self):
-        return {
-            **self.parameters(),
-            "window_size": int(self.window_size),
-            "dual_learning_rate": float(self.dual_learning_rate),
-            "dual_max": float(self.dual_max),
-            "episodes": list(self.episodes),
-            "update_count": int(self.update_count),
-            "pending_episodes": int(self.pending_episodes),
-        }
-
-    def load_state_dict(self, state):
-        saved_window_size = int(state.get("window_size", self.window_size))
-        if saved_window_size != self.window_size:
-            raise ValueError(
-                "Scenario 7 outer-loop window mismatch: "
-                f"checkpoint={saved_window_size}, current={self.window_size}"
-            )
-        self.safety_dual = float(state.get("safety_dual", self.safety_dual))
-        self.update_count = int(state.get("update_count", 0))
-        self.pending_episodes = int(state.get("pending_episodes", 0))
-        self.episodes.clear()
-        for item in state.get("episodes", []):
-            self.episodes.append({
-                "constraint_cost_sum": float(item["constraint_cost_sum"]),
-                "steps": max(1, int(item["steps"])),
-            })
-
-
-def broadcast_scenario7_safety_dual(vec_env, controller):
-    """Broadcast one frozen safety multiplier to every Scenario 7 environment."""
-    params = controller.parameters()
-    vec_env.env_method(
-        "set_scenario7_safety_dual",
-        params["safety_dual"],
-    )
-    return params
-
-
 def _slugify_path_segment(value, default="default"):
     """Convert a run attribute into a stable, filesystem-safe path segment."""
     text = str(value or "").strip()
@@ -471,16 +229,6 @@ def build_structured_log_dir(args, config, mode=None):
         settings_parts.append(f"workers-{getattr(args, 'num_workers', 0)}x{getattr(args, 'envs_per_worker', 0)}")
         settings_parts.append(f"mmode-{getattr(args, 'metrics_mode', 'light')}")
 
-    reward_variant = getattr(config, "scenario7_reward_variant", "")
-    if reward_variant:
-        settings_parts.append(f"reward-{reward_variant}")
-    experiment_arm = getattr(config, "scenario7_experiment_arm", "")
-    if experiment_arm:
-        settings_parts.append(f"arm-{experiment_arm}")
-        settings_parts.append(
-            f"battery-{getattr(config, 'battery_capacity_wh', 0):g}wh"
-        )
-
     exp_name = getattr(args, "exp_name", "")
     if exp_name and exp_name != "hmasd_experiment":
         settings_parts.append(f"exp-{exp_name}")
@@ -500,7 +248,7 @@ def build_structured_log_dir(args, config, mode=None):
 
 
 def evaluate_scenario7_comparison_gate(config, diagnostics):
-    """Evaluate the 2.4M continuation criteria for Scenario 7 arms."""
+    """Return the deterministic 2.4M-step decision for S7-S3 k experiments."""
     result = {
         'applicable': False,
         'passed': False,
@@ -521,136 +269,36 @@ def evaluate_scenario7_comparison_gate(config, diagnostics):
         return result
 
     skill_interval = int(getattr(config, 'k', 0))
-    experiment_arm = str(
-        getattr(config, "scenario7_experiment_arm", "C")
-    ).upper()
     result.update({
         'applicable': True,
         'gate_step': gate_step,
         'skill_interval': skill_interval,
-        'experiment_arm': experiment_arm,
-        'episode_count': int(diagnostics.get('episode_count', 0)),
+        'median_final_coverage': float(diagnostics.get('median_final_coverage', 0.0)),
+        'zero_coverage_episodes': int(diagnostics.get('zero_coverage_episodes', 0)),
+        'median_coverage_threshold': float(
+            getattr(config, 'scenario7_gate_median_coverage_min', 0.45)
+        ),
+        'max_zero_coverage_episodes': int(
+            getattr(config, 'scenario7_gate_max_zero_coverage_episodes', 2)
+        ),
     })
 
-    if experiment_arm == "A":
-        result.update({
-            'passed': True,
-            'should_stop': True,
-            'reason': 'arm_a_baseline_complete',
-        })
-        return result
-
-    baseline_path = str(
-        getattr(config, "scenario7_baseline_metrics_path", "")
-    ).strip()
-    if not baseline_path or not os.path.exists(baseline_path):
+    if skill_interval == 10:
         result.update({
             'passed': False,
             'should_stop': True,
-            'reason': 'baseline_metrics_missing',
-            'baseline_metrics_path': baseline_path,
-        })
-        return result
-    with open(baseline_path, "r", encoding="utf-8") as handle:
-        baseline = json.load(handle)
-    baseline_contract = {
-        "training_steps": gate_step,
-        "experiment_arm": "A",
-        "reward_model": "constrained_qos_safety_pbrs_v1",
-        "battery_capacity_wh": 200.0,
-        "return_cost_cap": None,
-    }
-    baseline_mismatches = {
-        key: (baseline.get(key), expected)
-        for key, expected in baseline_contract.items()
-        if baseline.get(key) != expected
-    }
-    if baseline_mismatches:
-        result.update({
-            'passed': False,
-            'should_stop': True,
-            'reason': 'baseline_metrics_incompatible',
-            'baseline_metrics_path': baseline_path,
-            'baseline_mismatches': baseline_mismatches,
+            'reason': 'k10_baseline_complete',
         })
         return result
 
-    baseline_median_qos = float(
-        baseline.get("median_episode_qos_utility", 0.0)
+    passed = (
+        result['median_final_coverage'] > result['median_coverage_threshold']
+        and result['zero_coverage_episodes'] <= result['max_zero_coverage_episodes']
     )
-    current_median_qos = float(
-        diagnostics.get("median_episode_qos_utility", 0.0)
-    )
-    qos_threshold = (
-        float(getattr(config, "scenario7_gate_qos_retention", 0.95))
-        * baseline_median_qos
-    )
-
-    baseline_q10 = float(baseline.get("q10_episode_reward", 0.0))
-    tail_fraction = float(
-        getattr(config, "scenario7_gate_tail_improvement", 0.50)
-    )
-    q10_threshold = (
-        baseline_q10 + tail_fraction * abs(baseline_q10)
-        if baseline_q10 < 0.0
-        else baseline_q10 * (1.0 + tail_fraction)
-    )
-    current_q10 = float(diagnostics.get("q10_episode_reward", -np.inf))
-
-    baseline_violation = float(
-        baseline.get("return_violation_episode_ratio", 1.0)
-    )
-    violation_threshold = (
-        baseline_violation
-        * (1.0 - float(
-            getattr(config, "scenario7_gate_violation_reduction", 0.50)
-        ))
-    )
-    current_violation = float(
-        diagnostics.get("return_violation_episode_ratio", 1.0)
-    )
-    charging_ratio = float(
-        diagnostics.get("effective_charging_episode_ratio", 0.0)
-    )
-    catastrophe_ratio = float(
-        diagnostics.get("catastrophe_episode_ratio", 1.0)
-    )
-    numerical_failures = int(diagnostics.get("numerical_failure_count", 1))
-    criteria = {
-        "numerically_stable": numerical_failures == 0,
-        "qos_retained": current_median_qos >= qos_threshold,
-        "tail_improved": current_q10 >= q10_threshold,
-        "violations_reduced": current_violation <= violation_threshold,
-        "charging_learned": charging_ratio >= float(
-            getattr(
-                config,
-                "scenario7_gate_min_charging_episode_ratio",
-                0.50,
-            )
-        ),
-        "catastrophes_bounded": catastrophe_ratio <= float(
-            getattr(config, "scenario7_gate_max_catastrophe_ratio", 0.05)
-        ),
-    }
-    passed = all(criteria.values())
     result.update({
         'passed': bool(passed),
         'should_stop': not bool(passed),
         'reason': 'criteria_passed' if passed else 'criteria_failed',
-        'baseline_metrics_path': baseline_path,
-        'criteria': criteria,
-        'baseline_median_episode_qos': baseline_median_qos,
-        'current_median_episode_qos': current_median_qos,
-        'qos_threshold': qos_threshold,
-        'baseline_q10_episode_reward': baseline_q10,
-        'current_q10_episode_reward': current_q10,
-        'q10_threshold': q10_threshold,
-        'baseline_return_violation_episode_ratio': baseline_violation,
-        'current_return_violation_episode_ratio': current_violation,
-        'violation_threshold': violation_threshold,
-        'effective_charging_episode_ratio': charging_ratio,
-        'catastrophe_episode_ratio': catastrophe_ratio,
-        'numerical_failure_count': numerical_failures,
     })
     return result
 
@@ -672,113 +320,6 @@ def convert_numpy_types(obj):
         return tuple(convert_numpy_types(item) for item in obj)
     else:
         return obj
-
-
-def save_scenario7_training_plots(
-    log_dir,
-    episode_rewards,
-    episode_summaries,
-    window=100,
-):
-    """Save robust reward, safety, and charging training diagnostics."""
-    if not episode_rewards:
-        return
-    rewards = pd.Series(np.asarray(episode_rewards, dtype=float))
-    rolling = rewards.rolling(window=window, min_periods=min(10, len(rewards)))
-    x = np.arange(1, len(rewards) + 1)
-
-    fig, ax = plt.subplots(figsize=(12, 6))
-    ax.plot(x, rewards, color="steelblue", alpha=0.25, linewidth=0.8, label="Reward")
-    ax.plot(x, rolling.median(), color="black", linewidth=2.0, label="Rolling median")
-    for quantile, color, label in (
-        (0.10, "firebrick", "Q10"),
-        (0.25, "darkorange", "Q25"),
-        (0.75, "seagreen", "Q75"),
-        (0.90, "navy", "Q90"),
-    ):
-        ax.plot(x, rolling.quantile(quantile), color=color, linewidth=1.2, label=label)
-    ax.set(title="Episode Reward Distribution", xlabel="Episode", ylabel="Reward")
-    ax.grid(True, alpha=0.3)
-    ax.legend(ncol=3)
-    fig.tight_layout()
-    fig.savefig(os.path.join(log_dir, "rewards_distribution.png"), dpi=200)
-    plt.close(fig)
-
-    if not episode_summaries:
-        return
-    frame = pd.DataFrame(episode_summaries)
-    x = np.arange(1, len(frame) + 1)
-    fig, ax = plt.subplots(figsize=(12, 6))
-    for field, label in (
-        ("episode_qos_utility_sum", "QoS utility"),
-        ("episode_return_risk_penalty_sum", "Return-risk penalty"),
-        ("episode_graph_pbrs_sum", "Graph PBRS"),
-        ("episode_event_penalty_sum", "Cutoff/depletion penalty"),
-    ):
-        if field in frame:
-            ax.plot(
-                x,
-                frame[field].rolling(window, min_periods=10).median(),
-                linewidth=1.5,
-                label=label,
-            )
-    ax.set(title="Episode Reward Components (Rolling Median)", xlabel="Episode")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig(os.path.join(log_dir, "scenario7_reward_components.png"), dpi=200)
-    plt.close(fig)
-
-    fig, ax = plt.subplots(figsize=(12, 6))
-    reward_q10 = rewards.rolling(window, min_periods=10).quantile(0.10)
-    violation = pd.Series(
-        (frame.get("episode_return_risk_steps", 0) > 0).astype(float)
-    ).rolling(window, min_periods=10).mean()
-    catastrophe = pd.Series(
-        (rewards.iloc[:len(frame)] < -1000.0).astype(float)
-    ).rolling(window, min_periods=10).mean()
-    ax.plot(x, reward_q10.iloc[:len(frame)], color="firebrick", label="Reward Q10")
-    ax.set_ylabel("Reward Q10", color="firebrick")
-    ax2 = ax.twinx()
-    ax2.plot(x, violation, color="darkorange", label="Return violation rate")
-    ax2.plot(x, catastrophe, color="purple", label="Catastrophe rate")
-    ax2.set_ylabel("Episode ratio")
-    ax.set(title="Tail Reward and Safety Violations", xlabel="Episode")
-    ax.grid(True, alpha=0.3)
-    ax.legend(loc="upper left")
-    ax2.legend(loc="upper right")
-    fig.tight_layout()
-    fig.savefig(os.path.join(log_dir, "scenario7_tail_risk.png"), dpi=200)
-    plt.close(fig)
-
-    sessions = pd.to_numeric(
-        frame.get("episode_charging_session_count", 0),
-        errors="coerce",
-    ).fillna(0.0)
-    first_charge = pd.to_numeric(
-        frame.get("episode_first_effective_charge_step", np.nan),
-        errors="coerce",
-    )
-    first_charge = first_charge.where(first_charge >= 0)
-    fig, ax = plt.subplots(figsize=(12, 6))
-    success = (sessions > 0).astype(float).rolling(window, min_periods=10).mean()
-    ax.plot(x, success, color="seagreen", label="Charging episode ratio")
-    ax.set_ylabel("Charging episode ratio", color="seagreen")
-    ax2 = ax.twinx()
-    ax2.plot(
-        x,
-        first_charge.rolling(window, min_periods=10).median(),
-        color="navy",
-        label="Median first charge step",
-    )
-    ax2.set_ylabel("First effective charge step", color="navy")
-    ax.set(title="Charging Learning Progress", xlabel="Episode")
-    ax.grid(True, alpha=0.3)
-    ax.legend(loc="upper left")
-    ax2.legend(loc="upper right")
-    fig.tight_layout()
-    fig.savefig(os.path.join(log_dir, "scenario7_charging_progress.png"), dpi=200)
-    plt.close(fig)
 
 
 class TrainingProfiler:
@@ -1567,34 +1108,7 @@ class EnhancedRewardTracker:
             'energy_efficiency_reward_delta',
             'base_load_balance_reward', 'energy_reward_delta_raw',
             'energy_reward_delta_clipped', 'station_approach_reward',
-            'charging_arrival_reward', 'scenario7_reward',
-            'safety_reward_before_pbrs', 'task_utility',
-            'qos_satisfaction_ratio', 'qos_met_fraction', 'qos_target_ratio',
-            'mean_user_rate_mbps', 'std_user_rate_mbps', 'min_user_rate_mbps',
-            'p10_user_rate_mbps', 'median_user_rate_mbps', 'p90_user_rate_mbps',
-            'max_user_rate_mbps', 'effective_end_to_end_throughput_mbps',
-            'normalized_propulsion_energy', 'step_propulsion_energy_wh',
-            'instantaneous_bits_per_joule', 'safety_dual',
-            'return_margin_scale', 'return_cost_cap',
-            'return_penalty_coefficient', 'return_constraint_cost_raw',
-            'return_constraint_cost', 'return_risk_penalty',
-            'return_deficit_max',
-            'cutoff_event_count', 'depletion_event_count',
-            'cutoff_event_penalty', 'depletion_event_penalty',
-            'return_margin_mean',
-            'return_margin_min', 'return_violation_fraction',
-            'graph_potential', 'graph_potential_before',
-            'graph_potential_delta', 'euclidean_potential',
-            'euclidean_potential_before', 'euclidean_potential_delta',
-            'shaping_potential', 'shaping_potential_delta',
-            'effective_charging_session_count', 'episode_qos_utility_sum',
-            'episode_qos_utility_mean', 'episode_return_constraint_cost_sum',
-            'episode_return_risk_penalty_sum', 'episode_return_risk_steps',
-            'episode_max_return_deficit', 'episode_cutoff_event_count',
-            'episode_depletion_event_count', 'episode_charging_session_count',
-            'episode_first_effective_charge_step', 'episode_charging_uav_steps',
-            'episode_energy_charged_wh', 'episode_graph_pbrs_sum',
-            'episode_final_min_return_margin'
+            'charging_arrival_reward'
         ]
 
         for key in scalar_fields:
@@ -1621,34 +1135,7 @@ class EnhancedRewardTracker:
             'energy_efficiency_reward_delta',
             'base_load_balance_reward', 'energy_reward_delta_raw',
             'energy_reward_delta_clipped', 'station_approach_reward',
-            'charging_arrival_reward', 'scenario7_reward',
-            'safety_reward_before_pbrs', 'task_utility',
-            'qos_satisfaction_ratio', 'qos_met_fraction', 'qos_target_ratio',
-            'mean_user_rate_mbps', 'std_user_rate_mbps', 'min_user_rate_mbps',
-            'p10_user_rate_mbps', 'median_user_rate_mbps', 'p90_user_rate_mbps',
-            'max_user_rate_mbps', 'effective_end_to_end_throughput_mbps',
-            'normalized_propulsion_energy', 'step_propulsion_energy_wh',
-            'instantaneous_bits_per_joule', 'safety_dual',
-            'return_margin_scale', 'return_cost_cap',
-            'return_penalty_coefficient', 'return_constraint_cost_raw',
-            'return_constraint_cost', 'return_risk_penalty',
-            'return_deficit_max',
-            'cutoff_event_count', 'depletion_event_count',
-            'cutoff_event_penalty', 'depletion_event_penalty',
-            'return_margin_mean',
-            'return_margin_min', 'return_violation_fraction',
-            'graph_potential', 'graph_potential_before',
-            'graph_potential_delta', 'euclidean_potential',
-            'euclidean_potential_before', 'euclidean_potential_delta',
-            'shaping_potential', 'shaping_potential_delta',
-            'effective_charging_session_count', 'episode_qos_utility_sum',
-            'episode_qos_utility_mean', 'episode_return_constraint_cost_sum',
-            'episode_return_risk_penalty_sum', 'episode_return_risk_steps',
-            'episode_max_return_deficit', 'episode_cutoff_event_count',
-            'episode_depletion_event_count', 'episode_charging_session_count',
-            'episode_first_effective_charge_step', 'episode_charging_uav_steps',
-            'episode_energy_charged_wh', 'episode_graph_pbrs_sum',
-            'episode_final_min_return_margin'
+            'charging_arrival_reward'
         ]
         paper_record = {
             'step': step,
@@ -1757,61 +1244,6 @@ class EnhancedRewardTracker:
             'energy_reward_delta_clipped',
             'station_approach_reward',
             'charging_arrival_reward',
-            'scenario7_reward',
-            'safety_reward_before_pbrs',
-            'task_utility',
-            'qos_satisfaction_ratio',
-            'qos_met_fraction',
-            'qos_target_ratio',
-            'mean_user_rate_mbps',
-            'std_user_rate_mbps',
-            'min_user_rate_mbps',
-            'p10_user_rate_mbps',
-            'median_user_rate_mbps',
-            'p90_user_rate_mbps',
-            'max_user_rate_mbps',
-            'effective_end_to_end_throughput_mbps',
-            'normalized_propulsion_energy',
-            'step_propulsion_energy_wh',
-            'instantaneous_bits_per_joule',
-            'safety_dual',
-            'return_margin_scale',
-            'return_cost_cap',
-            'return_penalty_coefficient',
-            'return_constraint_cost_raw',
-            'return_constraint_cost',
-            'return_risk_penalty',
-            'return_deficit_max',
-            'cutoff_event_count',
-            'depletion_event_count',
-            'cutoff_event_penalty',
-            'depletion_event_penalty',
-            'return_margin_mean',
-            'return_margin_min',
-            'return_violation_fraction',
-            'graph_potential',
-            'graph_potential_before',
-            'graph_potential_delta',
-            'euclidean_potential',
-            'euclidean_potential_before',
-            'euclidean_potential_delta',
-            'shaping_potential',
-            'shaping_potential_delta',
-            'effective_charging_session_count',
-            'episode_qos_utility_sum',
-            'episode_qos_utility_mean',
-            'episode_return_constraint_cost_sum',
-            'episode_return_risk_penalty_sum',
-            'episode_return_risk_steps',
-            'episode_max_return_deficit',
-            'episode_cutoff_event_count',
-            'episode_depletion_event_count',
-            'episode_charging_session_count',
-            'episode_first_effective_charge_step',
-            'episode_charging_uav_steps',
-            'episode_energy_charged_wh',
-            'episode_graph_pbrs_sum',
-            'episode_final_min_return_margin',
         )
 
         step_record = {
@@ -3428,62 +2860,6 @@ class EnhancedRewardTracker:
                                    'Coverage_Ratio', 
                                    'Performance')
 
-        scenario7_metric_groups = {
-            'Scenario7Reward': (
-                'scenario7_reward', 'safety_reward_before_pbrs',
-                'task_utility', 'return_risk_penalty',
-                'cutoff_event_penalty', 'depletion_event_penalty',
-                'graph_potential_delta',
-            ),
-            'Scenario7QoS': (
-                'qos_satisfaction_ratio', 'qos_met_fraction',
-                'mean_user_rate_mbps', 'std_user_rate_mbps',
-                'min_user_rate_mbps', 'p10_user_rate_mbps',
-                'median_user_rate_mbps', 'p90_user_rate_mbps',
-                'effective_end_to_end_throughput_mbps',
-            ),
-            'Scenario7Energy': (
-                'normalized_propulsion_energy', 'step_propulsion_energy_wh',
-                'instantaneous_bits_per_joule', 'return_constraint_cost_raw',
-                'return_constraint_cost',
-                'return_margin_mean', 'return_margin_min',
-                'return_violation_fraction',
-            ),
-            'Scenario7Safety': (
-                'return_margin_scale', 'return_cost_cap',
-                'return_penalty_coefficient', 'return_deficit_max',
-                'safety_dual', 'cutoff_event_count',
-                'depletion_event_count',
-            ),
-            'Scenario7Episode': (
-                'episode_qos_utility_mean',
-                'episode_return_constraint_cost_sum',
-                'episode_return_risk_penalty_sum',
-                'episode_return_risk_steps',
-                'episode_max_return_deficit',
-                'episode_charging_session_count',
-                'episode_first_effective_charge_step',
-                'episode_charging_uav_steps',
-                'episode_energy_charged_wh',
-                'episode_final_min_return_margin',
-            ),
-            'Scenario7PBRS': (
-                'graph_potential', 'graph_potential_before',
-                'euclidean_potential', 'euclidean_potential_before',
-                'shaping_potential', 'shaping_potential_delta',
-            ),
-        }
-        for category, fields in scenario7_metric_groups.items():
-            for field in fields:
-                if reward_components.get(field):
-                    self._log_aggregated_metrics(
-                        writer,
-                        step,
-                        reward_components[field],
-                        field.replace('_', ' ').title().replace(' ', '_'),
-                        category,
-                    )
-
         # 论文实验核心指标：不要依赖Discovery字段是否存在。
         self._log_paper_reward_metrics_to_tensorboard(writer, step)
     
@@ -3650,36 +3026,7 @@ def parse_args():
     parser.add_argument('--rollout_length', type=int, default=0,
                         help='覆盖配置中的rollout长度 (0=使用配置文件)')
     parser.add_argument('--skill_interval', type=int, default=0, choices=[0, 10, 25, 50],
-                        help='覆盖HMASD技能间隔k；0=使用preset默认值，S7-S3默认50')
-    parser.add_argument(
-        '--scenario7_reward_variant',
-        type=str,
-        default='',
-        choices=[
-            '',
-            'legacy_engineering',
-            'qos_only',
-            'qos_depletion_penalty',
-            'qos_fixed_safety',
-            'qos_fixed_safety_graph_pbrs',
-            'qos_fixed_safety_unbounded_graph_pbrs',
-            'qos_adaptive_safety_graph_pbrs',
-        ],
-        help='Scenario 7 reward消融版本；空值使用preset默认的完整图PBRS方法',
-    )
-    parser.add_argument(
-        '--scenario7_experiment_arm',
-        type=str,
-        default='',
-        choices=['', 'A', 'B', 'C', 'a', 'b', 'c'],
-        help='Scenario 7论文实验臂: A=200Wh无界风险, B=200Wh有界风险, C=160Wh有界风险',
-    )
-    parser.add_argument(
-        '--scenario7_baseline_metrics_path',
-        type=str,
-        default='',
-        help='A组100-episode评估diagnostics JSON，用于2.4M继续训练门槛',
-    )
+                        help='覆盖HMASD技能间隔k；0=使用preset默认值，S7-S3默认25')
     parser.add_argument('--total_timesteps', type=int, default=0,
                         help='覆盖配置中的总训练步数 (0=使用配置文件)')
     parser.add_argument('--eval_interval', type=int, default=0,
@@ -3833,34 +3180,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     else:
         main_logger.info("从头开始训练")
         tb_manager.add_text('Training/mode', 'from_scratch', 0)
-
-    scenario7_safety_controller = None
-    uses_adaptive_scenario7_safety = (
-        normalize_scenario(getattr(config, "scenario", "base")) == "energy"
-        and str(getattr(config, "scenario7_reward_model", "")).startswith(
-            "constrained_qos_safety_pbrs_v"
-        )
-        and str(getattr(config, "scenario7_reward_variant", ""))
-        == "qos_adaptive_safety_graph_pbrs"
-    )
-    if uses_adaptive_scenario7_safety:
-        restored_safety_state = getattr(agent, "scenario7_safety_dual_state", None)
-        scenario7_safety_controller = Scenario7SafetyDualController(
-            config,
-            state=restored_safety_state,
-        )
-        agent.scenario7_safety_dual_state = scenario7_safety_controller.state_dict()
-        params = scenario7_safety_controller.parameters()
-        main_logger.info(
-            "Scenario 7自适应安全对偶已初始化: "
-            f"mu_return={params['safety_dual']:.6f}, "
-            f"window={scenario7_safety_controller.window_size}"
-        )
-        tb_manager.add_text(
-            "Scenario7/reward_model",
-            str(config.scenario7_reward_model),
-            0,
-        )
     
     # 创建增强的奖励追踪器
     reward_tracker = EnhancedRewardTracker(log_dir, config, n_users=config.n_users)
@@ -3910,7 +3229,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     n_episodes = 0
     max_episodes = config.total_timesteps // config.batch_size  # 估计的最大episode数量
     episode_rewards = []
-    scenario7_episode_summaries = []
     reward_plot_interval = max(100, num_envs * 10)
     update_times = 0
     best_reward = float('-inf')
@@ -3942,9 +3260,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
 
     is_sharded_vec_env = isinstance(vec_env, ShardedSubprocVecEnv)
 
-    if scenario7_safety_controller is not None:
-        broadcast_scenario7_safety_dual(vec_env, scenario7_safety_controller)
-
     # 重置所有环境。ShardedSubprocVecEnv 将状态写入共享内存，避免 reset 时回传完整结果。
     main_logger.info("重置并行环境...")
     if is_sharded_vec_env:
@@ -3972,8 +3287,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     env_steps = np.zeros(num_envs, dtype=int)
     dones_tracker = np.zeros(num_envs, dtype=bool) # 跟踪上一步的dones
     episode_rewards_tracker = np.zeros(num_envs, dtype=np.float32)
-    safety_episode_constraint_cost_sums = np.zeros(num_envs, dtype=np.float64)
-    safety_episode_steps = np.zeros(num_envs, dtype=np.int64)
     stop_after_comparison_gate = False
 
     while total_steps < config.total_timesteps:
@@ -4088,12 +3401,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 # 更新追踪器
                 env_steps[i] += 1
                 episode_rewards_tracker[i] += rewards[i]
-                if scenario7_safety_controller is not None:
-                    reward_info = infos[i].get("reward_info", {}) if infos[i] else {}
-                    safety_episode_constraint_cost_sums[i] += float(
-                        reward_info.get("return_constraint_cost", 0.0)
-                    )
-                    safety_episode_steps[i] += 1
                 
                 # 如果启用调试模式，则记录可视化数据
                 if args.debug and visualizers is not None:
@@ -4146,13 +3453,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     dones_tracker[i] = True
                     
                     n_episodes += 1
-                    if scenario7_safety_controller is not None:
-                        scenario7_safety_controller.record_episode(
-                            constraint_cost_sum=safety_episode_constraint_cost_sums[i],
-                            steps=safety_episode_steps[i],
-                        )
-                        safety_episode_constraint_cost_sums[i] = 0.0
-                        safety_episode_steps[i] = 0
                     main_logger.info(f"环境 {i} 完成第 {n_episodes} 个 episode, 奖励: {episode_rewards_tracker[i]:.2f}, 步数: {env_steps[i]}")
                     
                     # 如果启用调试模式，则生成绘图并重置可视化器
@@ -4211,46 +3511,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         episode_length=env_steps[i],
                         info=episode_info  # 传递包含reward_info的完整信息
                     )
-                    if normalize_scenario(getattr(config, "scenario", "base")) == "energy":
-                        reward_info = episode_info.get("reward_info", {})
-                        scenario7_episode_summaries.append({
-                            "episode_qos_utility_sum": float(
-                                reward_info.get("episode_qos_utility_sum", 0.0)
-                            ),
-                            "episode_return_risk_penalty_sum": float(
-                                reward_info.get(
-                                    "episode_return_risk_penalty_sum",
-                                    0.0,
-                                )
-                            ),
-                            "episode_graph_pbrs_sum": float(
-                                reward_info.get("episode_graph_pbrs_sum", 0.0)
-                            ),
-                            "episode_event_penalty_sum": float(
-                                reward_info.get("episode_cutoff_event_count", 0.0)
-                                * config.cutoff_event_penalty
-                                + reward_info.get(
-                                    "episode_depletion_event_count",
-                                    0.0,
-                                )
-                                * config.depletion_event_penalty
-                            ),
-                            "episode_return_risk_steps": float(
-                                reward_info.get("episode_return_risk_steps", 0.0)
-                            ),
-                            "episode_charging_session_count": float(
-                                reward_info.get(
-                                    "episode_charging_session_count",
-                                    0.0,
-                                )
-                            ),
-                            "episode_first_effective_charge_step": float(
-                                reward_info.get(
-                                    "episode_first_effective_charge_step",
-                                    -1.0,
-                                )
-                            ),
-                        })
 
                     # 清空该环境的步级缓冲区
                     reward_tracker.step_metric_buffer[i].clear()
@@ -4285,15 +3545,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         plt.ylabel('Reward')
                         plt.savefig(os.path.join(log_dir, 'rewards.png'))
                         plt.close()
-                        if normalize_scenario(
-                            getattr(config, "scenario", "base")
-                        ) == "energy":
-                            save_scenario7_training_plots(
-                                log_dir,
-                                episode_rewards,
-                                scenario7_episode_summaries,
-                                window=min(100, max(10, len(episode_rewards))),
-                            )
                     
                     # 重置追踪器
                     env_steps[i] = 0
@@ -4416,7 +3667,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         # 修复：使用实际收集的步数，而不是可能不准确的rollout_steps变量
         steps_in_rollout = rollout_step + 1
         main_logger.info(f"Rollout收集完成: 实际步数={steps_in_rollout}, 预期步数={config.rollout_length}")
-        policy_update_succeeded = False
         try:
             # 执行回调函数 - 在更新前
             phase_start = time.perf_counter() if training_profiler.enabled else 0.0
@@ -4442,7 +3692,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 last_state=last_states_batch,
                 last_observations=last_observations_batch
             )
-            policy_update_succeeded = True
             update_info['policy_diagnostics'] = agent.get_policy_diagnostics()
             if training_profiler.enabled:
                 if getattr(agent.device, 'type', None) == 'cuda':
@@ -4497,27 +3746,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         except ValueError as e:
             main_logger.error(f"更新错误: {e}")
             update_times += 1
-
-        if scenario7_safety_controller is not None and policy_update_succeeded:
-            safety_update = scenario7_safety_controller.update()
-            agent.scenario7_safety_dual_state = scenario7_safety_controller.state_dict()
-            if safety_update is not None:
-                broadcast_scenario7_safety_dual(
-                    vec_env,
-                    scenario7_safety_controller,
-                )
-                main_logger.info(
-                    "Scenario 7安全对偶更新 - "
-                    f"mu_return={safety_update['safety_dual']:.6f}, "
-                    "返航约束成本="
-                    f"{safety_update['window_mean_return_constraint_cost']:.6f}"
-                )
-                for key, value in safety_update.items():
-                    tb_manager.add_scalar(
-                        f"Scenario7SafetyDual/{key}",
-                        value,
-                        total_steps,
-                    )
 
         # 【关键修复】更新完成后，立即清空缓冲区，为下一次rollout做准备
         # 这是解决"陈旧数据污染"和"策略退化"问题的关键
@@ -4647,49 +3875,18 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 main_logger.info("延迟创建评估 SubprocVecEnv...")
                 eval_vec_env = SubprocVecEnv(eval_env_fns, start_method='spawn')
                 created_eval_vec_env = True
-            if scenario7_safety_controller is not None:
-                broadcast_scenario7_safety_dual(
-                    eval_vec_env,
-                    scenario7_safety_controller,
-                )
-            eval_episode_count = int(config.eval_episodes)
-            if normalize_scenario(getattr(config, "scenario", "base")) == "energy":
-                gate_step = int(
-                    getattr(
-                        config,
-                        "scenario7_comparison_gate_step",
-                        2_400_000,
-                    )
-                )
-                is_gate_eval = last_eval_step < gate_step <= total_steps
-                is_final_eval = total_steps >= int(config.total_timesteps)
-                if is_gate_eval or is_final_eval:
-                    eval_episode_count = int(
-                        getattr(config, "scenario7_key_eval_episodes", 100)
-                    )
-                else:
-                    eval_episode_count = int(
-                        getattr(
-                            config,
-                            "scenario7_intermediate_eval_episodes",
-                            20,
-                        )
-                    )
-            main_logger.info(
-                f"即将进行评估，将评估 {eval_episode_count} 个episodes..."
-            )
+            main_logger.info(f"即将进行评估，将评估 {config.eval_episodes} 个episodes...")
             main_logger.info(f"当前步数: {total_steps}, 距离上次评估: {total_steps - last_eval_step} 步")
             # 使用 eval_vec_env 进行评估
             eval_reward, eval_std, eval_min, eval_max, eval_diagnostics = evaluate(
                 eval_vec_env,
                 agent,
-                eval_episode_count,
+                config.eval_episodes,
                 render=args.render,
                 record_video=args.record_video,
                 eval_step=total_steps,
             )
-            eval_diagnostics["training_steps"] = int(total_steps)
-            main_logger.info(f"评估完成 ({eval_episode_count} 个episodes): 平均奖励 {eval_reward:.2f} ± {eval_std:.2f}, 最大/最小: {eval_max:.2f}/{eval_min:.2f}")
+            main_logger.info(f"评估完成 ({config.eval_episodes} 个episodes): 平均奖励 {eval_reward:.2f} ± {eval_std:.2f}, 最大/最小: {eval_max:.2f}/{eval_min:.2f}")
 
             gate_decision = evaluate_scenario7_comparison_gate(config, eval_diagnostics)
             if gate_decision['applicable']:
@@ -4711,12 +3908,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 agent.save_model(gate_model_path)
                 main_logger.info(
                     "Scenario 7比较门槛: "
-                    f"arm={getattr(config, 'scenario7_experiment_arm', '')}, "
-                    f"k={config.k}, "
-                    f"中位QoS={eval_diagnostics.get('median_episode_qos_utility', 0.0):.3f}, "
-                    f"Q10回报={eval_diagnostics.get('q10_episode_reward', 0.0):.2f}, "
-                    "充电episode="
-                    f"{eval_diagnostics.get('effective_charging_episode_ratio', 0.0):.1%}, "
+                    f"k={config.k}, 中位覆盖率={gate_decision['median_final_coverage']:.2%}, "
+                    f"零覆盖={gate_decision['zero_coverage_episodes']}/{config.eval_episodes}, "
                     f"结论={gate_decision['reason']}"
                 )
                 stop_after_comparison_gate = bool(gate_decision['should_stop'])
@@ -4928,8 +4121,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
     env_step_times = []
     episode_rewards = []
     episode_lengths = []
-    if not eval_step:
-        eval_step = int(getattr(agent, 'global_step', 0))
+    eval_step = getattr(agent, 'global_step', eval_step) # Get current training step if available
     num_envs = vec_env.num_envs
 
     # 重置所有环境并获取初始状态
@@ -4960,13 +4152,8 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
     # 环境状态跟踪
     env_steps = np.zeros(num_envs, dtype=int)
     env_rewards = np.zeros(num_envs)
-    active_envs = np.zeros(num_envs, dtype=bool)
-    active_envs[:min(num_envs, n_episodes)] = True
+    active_envs = np.ones(num_envs, dtype=bool) # Track which envs are still running for the current eval round
     completed_episodes = 0
-    numerical_failure_count = 0
-    visualization_episode_limit = int(
-        getattr(agent.config, "scenario7_eval_visualization_episodes", 8)
-    )
     
     # 【新增】评估期间的覆盖率追踪
     coverage_history = []  # 记录整个评估期间的覆盖率变化
@@ -5017,11 +4204,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                     # 【关键修复】直接使用确定性模式下返回的正确形状的动作
                     # agent.step在确定性模式下已经返回了正确形状的动作，无需reshape
                     actions_array[env_i] = active_actions_batch[idx]
-                    if (
-                        not np.all(np.isfinite(active_actions_batch[idx]))
-                        or np.any(np.abs(active_actions_batch[idx]) > 1.000001)
-                    ):
-                        numerical_failure_count += 1
                     all_agent_infos_list[env_i] = active_infos_batch[idx]
                     
                     # 收集技能分布信息
@@ -5039,8 +4221,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             # 执行动作并记录环境步进时间
             env_step_start = time.time()
             next_observations, rewards, dones, infos = vec_env.step(actions_array)
-            if not np.all(np.isfinite(rewards)):
-                numerical_failure_count += int(np.sum(~np.isfinite(rewards)))
             env_step_end = time.time()
             env_step_times.append(env_step_end - env_step_start)
             
@@ -5132,86 +4312,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                             'min_serving_backhaul_bottleneck_mbps': reward_info.get('min_serving_backhaul_bottleneck_mbps', 0),
                             'backhaul_outage_ratio': reward_info.get('backhaul_outage_ratio', 0),
                             'avg_hops': reward_info.get('avg_hops', 0),
-                            'scenario7_reward': reward_info.get('scenario7_reward', np.nan),
-                            'safety_reward_before_pbrs': reward_info.get(
-                                'safety_reward_before_pbrs', np.nan
-                            ),
-                            'task_utility': reward_info.get('task_utility', np.nan),
-                            'qos_satisfaction_ratio': reward_info.get('qos_satisfaction_ratio', np.nan),
-                            'qos_met_fraction': reward_info.get('qos_met_fraction', np.nan),
-                            'mean_user_rate_mbps': reward_info.get('mean_user_rate_mbps', np.nan),
-                            'std_user_rate_mbps': reward_info.get('std_user_rate_mbps', np.nan),
-                            'p10_user_rate_mbps': reward_info.get('p10_user_rate_mbps', np.nan),
-                            'median_user_rate_mbps': reward_info.get('median_user_rate_mbps', np.nan),
-                            'p90_user_rate_mbps': reward_info.get('p90_user_rate_mbps', np.nan),
-                            'effective_end_to_end_throughput_mbps': reward_info.get(
-                                'effective_end_to_end_throughput_mbps', np.nan
-                            ),
-                            'normalized_propulsion_energy': reward_info.get(
-                                'normalized_propulsion_energy', np.nan
-                            ),
-                            'instantaneous_bits_per_joule': reward_info.get(
-                                'instantaneous_bits_per_joule', np.nan
-                            ),
-                            'battery_min_ratio': reward_info.get(
-                                'battery_min_ratio', np.nan
-                            ),
-                            'charging_uav_count': reward_info.get(
-                                'charging_uav_count', np.nan
-                            ),
-                            'charging_queue_len': reward_info.get(
-                                'charging_queue_len', np.nan
-                            ),
-                            'return_constraint_cost': reward_info.get(
-                                'return_constraint_cost', np.nan
-                            ),
-                            'return_constraint_cost_raw': reward_info.get(
-                                'return_constraint_cost_raw', np.nan
-                            ),
-                            'return_penalty_coefficient': reward_info.get(
-                                'return_penalty_coefficient', np.nan
-                            ),
-                            'return_risk_penalty': reward_info.get('return_risk_penalty', np.nan),
-                            'cutoff_event_count': reward_info.get('cutoff_event_count', np.nan),
-                            'depletion_event_count': reward_info.get('depletion_event_count', np.nan),
-                            'return_violation_fraction': reward_info.get('return_violation_fraction', np.nan),
-                            'effective_charging_session_count': reward_info.get(
-                                'effective_charging_session_count', np.nan
-                            ),
-                            'episode_qos_utility_sum': reward_info.get(
-                                'episode_qos_utility_sum', np.nan
-                            ),
-                            'episode_qos_utility_mean': reward_info.get(
-                                'episode_qos_utility_mean', np.nan
-                            ),
-                            'episode_return_constraint_cost_sum': reward_info.get(
-                                'episode_return_constraint_cost_sum', np.nan
-                            ),
-                            'episode_return_risk_penalty_sum': reward_info.get(
-                                'episode_return_risk_penalty_sum', np.nan
-                            ),
-                            'episode_return_risk_steps': reward_info.get(
-                                'episode_return_risk_steps', np.nan
-                            ),
-                            'episode_charging_session_count': reward_info.get(
-                                'episode_charging_session_count', np.nan
-                            ),
-                            'episode_first_effective_charge_step': reward_info.get(
-                                'episode_first_effective_charge_step', np.nan
-                            ),
-                            'episode_energy_charged_wh': reward_info.get(
-                                'episode_energy_charged_wh', np.nan
-                            ),
-                            'episode_final_min_return_margin': reward_info.get(
-                                'episode_final_min_return_margin', np.nan
-                            ),
-                            'safety_dual': reward_info.get('safety_dual', np.nan),
-                            'graph_potential': reward_info.get('graph_potential', np.nan),
-                            'graph_potential_delta': reward_info.get('graph_potential_delta', np.nan),
-                            'euclidean_potential': reward_info.get('euclidean_potential', np.nan),
-                            'euclidean_potential_delta': reward_info.get('euclidean_potential_delta', np.nan),
-                            'shaping_potential': reward_info.get('shaping_potential', np.nan),
-                            'shaping_potential_delta': reward_info.get('shaping_potential_delta', np.nan),
                             'progressive_stage': reward_info.get('progressive_stage', getattr(agent.config, 'progressive_stage', '')),
                             'scale_mode': reward_info.get('scale_mode', ''),
                             'ground_bs_active': EnhancedRewardTracker._record_value(reward_info.get('ground_bs_active')) if 'ground_bs_active' in reward_info else '',
@@ -5233,17 +4333,17 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                         if not reward_info:
                             main_logger.warning(f"[评估] Episode结束时未找到reward_info，infos[{i}]键: {list(infos[i].keys())}")
 
-                    if completed_episodes < visualization_episode_limit:
-                        visualizers[i].record_step(
-                            step_count=env_steps[i],
-                            uav_positions=uav_positions,
-                            team_skill=agent_info.get('team_skill', -1),
-                            agent_skills=agent_info.get('agent_skills', []),
-                            reward_info=reward_info,
-                            static_info=static_infos[i],
-                            connections=reward_info.get('connections'),
-                            routing_paths=reward_info.get('routing_paths')
-                        )
+                    visualizers[i].record_step(
+                        step_count=env_steps[i],
+                        uav_positions=uav_positions,
+                        team_skill=agent_info.get('team_skill', -1),
+                        agent_skills=agent_info.get('agent_skills', []),
+                        reward_info=reward_info,
+                        static_info=static_infos[i],
+                        # 【修复】从reward_info中稳定地获取连接和路由信息
+                        connections=reward_info.get('connections'),
+                        routing_paths=reward_info.get('routing_paths')
+                    )
 
                     # 实时渲染或录制视频
                     frame_to_process = None
@@ -5341,62 +4441,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                                 'relay_route_loss_ratio_final': episode_reward_info.get('relay_route_loss_ratio', np.nan),
                                 'backhaul_outage_ratio_final': episode_reward_info.get('backhaul_outage_ratio', np.nan),
                                 'avg_hops_final': episode_reward_info.get('avg_hops', np.nan),
-                                'qos_satisfaction_ratio_final': episode_reward_info.get('qos_satisfaction_ratio', np.nan),
-                                'qos_met_fraction_final': episode_reward_info.get('qos_met_fraction', np.nan),
-                                'effective_end_to_end_throughput_mbps_final': episode_reward_info.get(
-                                    'effective_end_to_end_throughput_mbps', np.nan
-                                ),
-                                'instantaneous_bits_per_joule_final': episode_reward_info.get(
-                                    'instantaneous_bits_per_joule', np.nan
-                                ),
-                                'return_constraint_cost_final': episode_reward_info.get(
-                                    'return_constraint_cost', np.nan
-                                ),
-                                'return_violation_fraction_final': episode_reward_info.get(
-                                    'return_violation_fraction', np.nan
-                                ),
-                                'episode_qos_utility_sum': episode_reward_info.get(
-                                    'episode_qos_utility_sum', np.nan
-                                ),
-                                'episode_qos_utility_mean': episode_reward_info.get(
-                                    'episode_qos_utility_mean', np.nan
-                                ),
-                                'episode_return_constraint_cost_sum': episode_reward_info.get(
-                                    'episode_return_constraint_cost_sum', np.nan
-                                ),
-                                'episode_return_risk_penalty_sum': episode_reward_info.get(
-                                    'episode_return_risk_penalty_sum', np.nan
-                                ),
-                                'episode_return_risk_steps': episode_reward_info.get(
-                                    'episode_return_risk_steps', np.nan
-                                ),
-                                'episode_max_return_deficit': episode_reward_info.get(
-                                    'episode_max_return_deficit', np.nan
-                                ),
-                                'episode_cutoff_event_count': episode_reward_info.get(
-                                    'episode_cutoff_event_count', np.nan
-                                ),
-                                'episode_depletion_event_count': episode_reward_info.get(
-                                    'episode_depletion_event_count', np.nan
-                                ),
-                                'episode_charging_session_count': episode_reward_info.get(
-                                    'episode_charging_session_count', np.nan
-                                ),
-                                'episode_first_effective_charge_step': episode_reward_info.get(
-                                    'episode_first_effective_charge_step', np.nan
-                                ),
-                                'episode_charging_uav_steps': episode_reward_info.get(
-                                    'episode_charging_uav_steps', np.nan
-                                ),
-                                'episode_energy_charged_wh': episode_reward_info.get(
-                                    'episode_energy_charged_wh', np.nan
-                                ),
-                                'episode_graph_pbrs_sum': episode_reward_info.get(
-                                    'episode_graph_pbrs_sum', np.nan
-                                ),
-                                'episode_final_min_return_margin': episode_reward_info.get(
-                                    'episode_final_min_return_margin', np.nan
-                                ),
                                 'active_ground_bs_count_final': int(np.sum(np.asarray(episode_reward_info.get('ground_bs_active'), dtype=bool))) if 'ground_bs_active' in episode_reward_info else np.nan,
                                 'failed_ground_bs_count_final': int(np.asarray(episode_reward_info.get('ground_bs_active'), dtype=bool).size - np.sum(np.asarray(episode_reward_info.get('ground_bs_active'), dtype=bool))) if 'ground_bs_active' in episode_reward_info else np.nan,
                             })
@@ -5408,33 +4452,17 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                             # 记录高层奖励
                             high_level_rewards.append(env_rewards[i])
                             
-                            if completed_episodes < visualization_episode_limit:
-                                visualizers[i].episode_num = completed_episodes + 1
-                                visualizers[i].generate_plots(eval_step=eval_step)
+                            # episode结束，生成并保存绘图
+                            visualizers[i].episode_num = completed_episodes + 1
+                            visualizers[i].generate_plots(eval_step=eval_step)
                             
                             completed_episodes += 1
 
-                        if completed_episodes < n_episodes:
-                            env_steps[i] = 0
-                            env_rewards[i] = 0.0
-                            active_envs[i] = True
-                            agent.reset_env_state(i)
-                            visualizers[i] = VisualizationManager(
-                                episode_num=completed_episodes + 1,
-                                log_dir=eval_log_dir,
-                                config=agent.config,
-                            )
-                            if 'reset_state' in infos[i]:
-                                next_states[i] = infos[i]['reset_state']
-                            elif (
-                                hasattr(vec_env, "reset_infos")
-                                and i < len(vec_env.reset_infos)
-                            ):
-                                reset_info = vec_env.reset_infos[i] or {}
-                                if "state" in reset_info:
-                                    next_states[i] = reset_info["state"]
-                        else:
-                            active_envs[i] = False
+                        # 标记此环境在此评估轮次中完成
+                        active_envs[i] = False
+
+                        # 不需要手动重置，SubprocVecEnv 会自动处理
+                        # 也不需要重置 env_steps 和 env_rewards，因为我们只运行 n_episodes
 
             # 更新状态和观测
             states = next_states
@@ -5443,7 +4471,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             # 如果所有需要的 episodes 都已完成，则退出循环
             if completed_episodes >= n_episodes:
                 break
-            # done环境由VecEnv自动reset；没有活跃环境表示评估提前中断。
+            # 如果所有环境都已完成其当前 episode 但仍未达到 n_episodes，也可能需要退出或处理
             if not np.any(active_envs):
                 main_logger.warning("所有评估环境都已完成，但尚未达到目标 episode 数量。")
                 break
@@ -5475,71 +4503,12 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         for record in episode_eval_records
     ], dtype=float)
     episode_throughput_values = episode_throughput_values[np.isfinite(episode_throughput_values)]
-    episode_qos_values = np.asarray([
-        record.get('qos_satisfaction_ratio_final', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_qos_values = episode_qos_values[np.isfinite(episode_qos_values)]
-    episode_energy_efficiency_values = np.asarray([
-        record.get('instantaneous_bits_per_joule_final', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_energy_efficiency_values = episode_energy_efficiency_values[
-        np.isfinite(episode_energy_efficiency_values)
-    ]
-    episode_return_violation_values = np.asarray([
-        record.get('return_violation_fraction_final', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_return_violation_values = episode_return_violation_values[
-        np.isfinite(episode_return_violation_values)
-    ]
-    episode_qos_utility_values = np.asarray([
-        record.get('episode_qos_utility_mean', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_qos_utility_values = episode_qos_utility_values[
-        np.isfinite(episode_qos_utility_values)
-    ]
-    episode_risk_steps = np.asarray([
-        record.get('episode_return_risk_steps', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_risk_steps = episode_risk_steps[np.isfinite(episode_risk_steps)]
-    episode_charging_sessions = np.asarray([
-        record.get('episode_charging_session_count', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_charging_sessions = episode_charging_sessions[
-        np.isfinite(episode_charging_sessions)
-    ]
-    episode_first_charge_steps = np.asarray([
-        record.get('episode_first_effective_charge_step', np.nan)
-        for record in episode_eval_records
-    ], dtype=float)
-    episode_first_charge_steps = episode_first_charge_steps[
-        np.isfinite(episode_first_charge_steps)
-        & (episode_first_charge_steps >= 0)
-    ]
-    episode_rewards_array = np.asarray(episode_rewards, dtype=float)
     evaluation_diagnostics = {
         'training_steps': int(eval_step),
         'skill_interval': int(getattr(agent.config, 'k', 0)),
         'episode_count': int(len(episode_eval_records)),
         'mean_reward': float(mean_reward),
         'std_reward': float(std_reward),
-        'median_episode_reward': (
-            float(np.median(episode_rewards_array))
-            if episode_rewards_array.size else 0.0
-        ),
-        'q10_episode_reward': (
-            float(np.percentile(episode_rewards_array, 10))
-            if episode_rewards_array.size else 0.0
-        ),
-        'catastrophe_episode_ratio': (
-            float(np.mean(episode_rewards_array < -1000.0))
-            if episode_rewards_array.size else 0.0
-        ),
         'median_final_coverage': (
             float(np.median(episode_coverage_values))
             if episode_coverage_values.size else 0.0
@@ -5560,47 +4529,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             float(np.mean(episode_throughput_values))
             if episode_throughput_values.size else 0.0
         ),
-        'mean_final_qos_satisfaction_ratio': (
-            float(np.mean(episode_qos_values))
-            if episode_qos_values.size else 0.0
-        ),
-        'median_final_qos_satisfaction_ratio': (
-            float(np.median(episode_qos_values))
-            if episode_qos_values.size else 0.0
-        ),
-        'mean_final_bits_per_joule': (
-            float(np.mean(episode_energy_efficiency_values))
-            if episode_energy_efficiency_values.size else 0.0
-        ),
-        'mean_final_return_violation_fraction': (
-            float(np.mean(episode_return_violation_values))
-            if episode_return_violation_values.size else 0.0
-        ),
-        'mean_episode_qos_utility': (
-            float(np.mean(episode_qos_utility_values))
-            if episode_qos_utility_values.size else 0.0
-        ),
-        'median_episode_qos_utility': (
-            float(np.median(episode_qos_utility_values))
-            if episode_qos_utility_values.size else 0.0
-        ),
-        'return_violation_episode_ratio': (
-            float(np.mean(episode_risk_steps > 0))
-            if episode_risk_steps.size else 0.0
-        ),
-        'effective_charging_episode_ratio': (
-            float(np.mean(episode_charging_sessions > 0))
-            if episode_charging_sessions.size else 0.0
-        ),
-        'mean_charging_sessions_per_episode': (
-            float(np.mean(episode_charging_sessions))
-            if episode_charging_sessions.size else 0.0
-        ),
-        'mean_first_effective_charge_step': (
-            float(np.mean(episode_first_charge_steps))
-            if episode_first_charge_steps.size else -1.0
-        ),
-        'numerical_failure_count': int(numerical_failure_count),
         **agent.get_policy_diagnostics(),
     }
 
@@ -5777,26 +4705,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             'relay_route_loss_ratio_final',
             'backhaul_outage_ratio_final',
             'avg_hops_final',
-            'qos_satisfaction_ratio_final',
-            'qos_met_fraction_final',
-            'effective_end_to_end_throughput_mbps_final',
-            'instantaneous_bits_per_joule_final',
-            'return_constraint_cost_final',
-            'return_violation_fraction_final',
-            'episode_qos_utility_sum',
-            'episode_qos_utility_mean',
-            'episode_return_constraint_cost_sum',
-            'episode_return_risk_penalty_sum',
-            'episode_return_risk_steps',
-            'episode_max_return_deficit',
-            'episode_cutoff_event_count',
-            'episode_depletion_event_count',
-            'episode_charging_session_count',
-            'episode_first_effective_charge_step',
-            'episode_charging_uav_steps',
-            'episode_energy_charged_wh',
-            'episode_graph_pbrs_sum',
-            'episode_final_min_return_margin',
             'coverage_ratio',
             'effective_connected_users',
             'system_throughput_mbps',
@@ -5805,27 +4713,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             'relay_route_loss_ratio',
             'backhaul_outage_ratio',
             'avg_hops',
-            'qos_satisfaction_ratio',
-            'qos_met_fraction',
-            'mean_user_rate_mbps',
-            'std_user_rate_mbps',
-            'p10_user_rate_mbps',
-            'median_user_rate_mbps',
-            'p90_user_rate_mbps',
-            'effective_end_to_end_throughput_mbps',
-            'instantaneous_bits_per_joule',
-            'return_constraint_cost',
-            'return_penalty_coefficient',
-            'return_risk_penalty',
-            'cutoff_event_count',
-            'depletion_event_count',
-            'return_violation_fraction',
-            'graph_potential',
-            'graph_potential_delta',
-            'euclidean_potential',
-            'euclidean_potential_delta',
-            'shaping_potential',
-            'shaping_potential_delta',
         ]
 
         if not summary_source.empty:
@@ -5875,22 +4762,12 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             fig, axes = plt.subplots(2, 2, figsize=(14, 9))
             fig.suptitle(f'Paper Evaluation Metrics (step {eval_step})', fontsize=14, fontweight='bold')
 
-            if str(
-                getattr(agent.config, 'scenario7_reward_model', '')
-            ).startswith('constrained_qos_safety_pbrs_v'):
-                plot_specs = [
-                    ('qos_satisfaction_ratio', 'End-to-End QoS Satisfaction', axes[0, 0]),
-                    ('effective_end_to_end_throughput_mbps', 'Effective Throughput (Mbps)', axes[0, 1]),
-                    ('instantaneous_bits_per_joule', 'Energy Efficiency (bits/J)', axes[1, 0]),
-                    ('return_violation_fraction', 'Return-Safety Violation', axes[1, 1]),
-                ]
-            else:
-                plot_specs = [
-                    ('coverage_ratio', 'Coverage Ratio', axes[0, 0]),
-                    ('system_throughput_mbps', 'System Throughput (Mbps)', axes[0, 1]),
-                    ('load_balance_score', 'Load Balance Jain Score', axes[1, 0]),
-                    ('demand_satisfaction_ratio', 'Demand Satisfaction Ratio', axes[1, 1]),
-                ]
+            plot_specs = [
+                ('coverage_ratio', 'Coverage Ratio', axes[0, 0]),
+                ('system_throughput_mbps', 'System Throughput (Mbps)', axes[0, 1]),
+                ('load_balance_score', 'Load Balance Jain Score', axes[1, 0]),
+                ('demand_satisfaction_ratio', 'Demand Satisfaction Ratio', axes[1, 1]),
+            ]
 
             for column, title, ax in plot_specs:
                 if column not in eval_step_df.columns:
@@ -5929,19 +4806,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         all_relay_loss = [d.get('relay_route_loss_ratio', 0) for d in step_coverage_data]
         all_backhaul_margin = [d.get('backhaul_margin_penalty_raw', 0) for d in step_coverage_data]
         all_min_bottleneck = [d.get('min_serving_backhaul_bottleneck_mbps', 0) for d in step_coverage_data]
-        all_qos = [d.get('qos_satisfaction_ratio', np.nan) for d in step_coverage_data]
-        all_effective_throughput = [
-            d.get('effective_end_to_end_throughput_mbps', np.nan)
-            for d in step_coverage_data
-        ]
-        all_bits_per_joule = [
-            d.get('instantaneous_bits_per_joule', np.nan)
-            for d in step_coverage_data
-        ]
-        all_return_violations = [
-            d.get('return_violation_fraction', np.nan)
-            for d in step_coverage_data
-        ]
         
         if all_coverage:
             eval_tb_manager.add_scalar('Evaluation/Average_Coverage_Ratio', np.mean(all_coverage), eval_step)
@@ -5970,17 +4834,6 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         if all_health:
             eval_tb_manager.add_scalar('Evaluation/Average_Health_Score', np.mean(all_health), eval_step)
             eval_tb_manager.add_scalar('Evaluation/Max_Health_Score', np.max(all_health), eval_step)
-
-        for tag, values in (
-            ('Evaluation/Scenario7_QoS_Satisfaction', all_qos),
-            ('Evaluation/Scenario7_Effective_Throughput_Mbps', all_effective_throughput),
-            ('Evaluation/Scenario7_Bits_Per_Joule', all_bits_per_joule),
-            ('Evaluation/Scenario7_Return_Violation_Fraction', all_return_violations),
-        ):
-            finite_values = np.asarray(values, dtype=float)
-            finite_values = finite_values[np.isfinite(finite_values)]
-            if finite_values.size:
-                eval_tb_manager.add_scalar(tag, float(np.mean(finite_values)), eval_step)
     
     # 记录episode级别的评估统计
     if total_coverage_ratios:
@@ -6160,22 +5013,6 @@ def main():
         config.eval_interval = int(args.eval_interval)
     if args.scenario7_comparison_gate is not None:
         config.scenario7_comparison_gate_enabled = bool(args.scenario7_comparison_gate)
-    if args.scenario7_experiment_arm:
-        if not hasattr(config, "apply_scenario7_experiment_arm"):
-            raise ValueError(
-                "The selected config does not support Scenario 7 experiment arms"
-            )
-        config.apply_scenario7_experiment_arm(args.scenario7_experiment_arm)
-    if args.scenario7_reward_variant:
-        if not hasattr(config, "apply_scenario7_reward_variant"):
-            raise ValueError(
-                "The selected config does not support Scenario 7 reward ablations"
-            )
-        config.apply_scenario7_reward_variant(args.scenario7_reward_variant)
-    if args.scenario7_baseline_metrics_path:
-        config.scenario7_baseline_metrics_path = os.path.abspath(
-            args.scenario7_baseline_metrics_path
-        )
 
     validate_scenario7_configuration(config, args)
 
@@ -6225,14 +5062,9 @@ def main():
         scale_mode="train"
     ) for i in range(num_envs)]
 
-    eval_seed_base = (
-        int(getattr(config, "scenario7_eval_seed_base", 10000))
-        if normalize_scenario(args.scenario) == "energy"
-        else base_seed + num_envs
-    )
     eval_env_fns = [make_env(
         rank=i,
-        seed=eval_seed_base,
+        seed=base_seed + num_envs,
         config=config,
         scenario=args.scenario,
         render_mode="rgb_array" if args.render or args.record_video else None,
@@ -6274,55 +5106,6 @@ def main():
     if action_dim is not None:
         config.action_dim = int(action_dim)
     validate_scenario7_configuration(config, args, env=temp_env)
-    if normalize_scenario(args.scenario) == "energy":
-        temp_env.reset(seed=base_seed)
-        feasibility = temp_env.estimate_heuristic_qos_feasibility()
-        main_logger.info(
-            "Scenario 7启发式可行性检查: "
-            f"QoS满足度={feasibility['qos_satisfaction_ratio']:.2%}, "
-            f"达标用户={feasibility['qos_met_fraction']:.2%}, "
-            f"吞吐量={feasibility['throughput_mbps']:.2f} Mbps, "
-            f"service_uavs={feasibility.get('service_uavs')}, "
-            f"height={feasibility.get('height_m')} m"
-        )
-        if not feasibility["feasible"]:
-            raise ValueError(
-                "Scenario 7 QoS target is not reached by the deterministic heuristic layout: "
-                f"achieved={feasibility['qos_satisfaction_ratio']:.4f}, "
-                f"target={config.qos_target_ratio:.4f}. "
-                "Adjust physical system parameters (bandwidth, user demand, or UAV count) "
-                "instead of reward coefficients."
-            )
-        if bool(
-            getattr(
-                config,
-                "scenario7_run_physical_feasibility_check",
-                True,
-            )
-        ):
-            physical_feasibility = run_scenario7_physical_feasibility_check(
-                config
-            )
-            feasibility_path = os.path.join(
-                args.run_log_dir,
-                "scenario7_physical_feasibility.json",
-            )
-            with open(feasibility_path, "w", encoding="utf-8") as handle:
-                json.dump(
-                    convert_numpy_types(physical_feasibility),
-                    handle,
-                    ensure_ascii=False,
-                    indent=2,
-                )
-            main_logger.info(
-                "Scenario 7物理可行性检查: "
-                f"静态QoS={physical_feasibility['qos_feasible_rate']:.1%}, "
-                f"无充电安全压力={physical_feasibility['no_charge_pressure_rate']:.1%}, "
-                f"轮换充电成功={physical_feasibility['charge_success_rate']:.1%}, "
-                f"无耗尽={physical_feasibility['depletion_free_rate']:.1%}, "
-                "轮换QoS="
-                f"{physical_feasibility['mean_rotation_qos_satisfaction_ratio']:.3f}"
-            )
     apply_algorithm_config(config, args.algorithm)
     
     main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}, action_dim={config.action_dim}")
@@ -6399,23 +5182,10 @@ def main():
         "continuous_action_distribution", "continuous_logstd_init",
         "continuous_logstd_min", "continuous_logstd_max",
         "lambda_l", "use_entropy_annealing", "scenario7_interface_version",
-        "scenario7_reward_model", "user_qos_rate_mbps", "qos_target_ratio",
-        "scenario7_reward_variant", "scenario7_experiment_arm",
-        "return_margin_scale", "return_cost_cap", "lambda_return",
-        "cutoff_event_penalty", "depletion_event_penalty",
-        "dual_learning_rate", "dual_max", "outer_update_min_episodes",
-        "use_graph_pbrs", "safety_dual_initial",
         "k", "scenario7_skill_interval_candidates",
         "scenario7_comparison_gate_enabled", "scenario7_comparison_gate_step",
-        "scenario7_baseline_metrics_path", "scenario7_gate_qos_retention",
-        "scenario7_gate_tail_improvement",
-        "scenario7_gate_violation_reduction",
-        "scenario7_gate_min_charging_episode_ratio",
-        "scenario7_gate_max_catastrophe_ratio",
-        "scenario7_intermediate_eval_episodes",
-        "scenario7_key_eval_episodes", "scenario7_eval_seed_base",
-        "scenario7_feasibility_seed_count",
-        "scenario7_run_physical_feasibility_check",
+        "scenario7_gate_median_coverage_min",
+        "scenario7_gate_max_zero_coverage_episodes",
     ]
     
     # HMASD算法核心参数
@@ -6570,22 +5340,6 @@ def main():
         # 创建代理并加载模型
         agent = create_agent(config, args.algorithm, log_dir=log_dir, device=device)
         agent.load_model(args.model_path)
-        if (
-            normalize_scenario(getattr(config, "scenario", "base")) == "energy"
-            and str(getattr(config, "scenario7_reward_model", "")).startswith(
-                "constrained_qos_safety_pbrs_v"
-            )
-            and str(getattr(config, "scenario7_reward_variant", ""))
-            == "qos_adaptive_safety_graph_pbrs"
-        ):
-            eval_safety_controller = Scenario7SafetyDualController(
-                config,
-                state=getattr(agent, "scenario7_safety_dual_state", None),
-            )
-            broadcast_scenario7_safety_dual(
-                eval_vec_env,
-                eval_safety_controller,
-            )
         
         # 创建评估用的TensorBoard管理器
         eval_tb_manager = TensorBoardManager(log_dir, config)

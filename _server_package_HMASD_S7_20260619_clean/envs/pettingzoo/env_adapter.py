@@ -33,7 +33,6 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         super().__init__() # Initialize gym.Env
         self.env = env
         self.agents = self.env.possible_agents # Use possible_agents for consistency
-        self.possible_agents = list(self.env.possible_agents)
         self.n_uavs = len(self.agents)
         self.state_dim = self.env.get_state_dim() # Use getter methods
         self.obs_dim = self.env.get_obs_dim() # Use getter methods
@@ -93,43 +92,6 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # Pass seed to underlying PettingZoo env if its reset supports it
         # self.env.reset(seed=seed) # This might reset the env prematurely
         return [seed]
-
-    def set_scenario7_safety_dual(self, safety_dual):
-        """Forward the rollout-frozen Scenario 7 safety multiplier."""
-        setter = getattr(self.env, "set_scenario7_safety_dual", None)
-        if setter is None:
-            raise AttributeError(
-                f"Environment {type(self.env).__name__} does not support a Scenario 7 safety dual"
-            )
-        return setter(safety_dual)
-
-    def estimate_heuristic_qos_feasibility(self):
-        estimator = getattr(self.env, "estimate_heuristic_qos_feasibility", None)
-        if estimator is None:
-            raise AttributeError(
-                f"Environment {type(self.env).__name__} does not support Scenario 7 feasibility checks"
-            )
-        return estimator()
-
-    def estimate_no_charge_safety_pressure(self):
-        estimator = getattr(self.env, "estimate_no_charge_safety_pressure", None)
-        if estimator is None:
-            raise AttributeError(
-                f"Environment {type(self.env).__name__} does not support no-charge safety checks"
-            )
-        return estimator()
-
-    def estimate_rotation_charging_feasibility(self):
-        estimator = getattr(
-            self.env,
-            "estimate_rotation_charging_feasibility",
-            None,
-        )
-        if estimator is None:
-            raise AttributeError(
-                f"Environment {type(self.env).__name__} does not support rotation charging checks"
-            )
-        return estimator()
 
     def reset(self, seed=None, options=None):
         """

@@ -3821,21 +3821,6 @@ class HMASDAgent:
                 'scenario7_interface_version': getattr(
                     self.config, 'scenario7_interface_version', None
                 ),
-                'scenario7_reward_model': getattr(
-                    self.config, 'scenario7_reward_model', None
-                ),
-                'scenario7_reward_variant': getattr(
-                    self.config, 'scenario7_reward_variant', None
-                ),
-                'scenario7_experiment_arm': getattr(
-                    self.config, 'scenario7_experiment_arm', None
-                ),
-                'battery_capacity_wh': getattr(
-                    self.config, 'battery_capacity_wh', None
-                ),
-                'return_cost_cap': getattr(
-                    self.config, 'return_cost_cap', None
-                ),
             },
             'training_interface': {
                 'skill_interval': int(getattr(self.config, 'k', 0)),
@@ -3846,9 +3831,6 @@ class HMASDAgent:
                 'last_discriminator_metrics': dict(self.last_discriminator_metrics),
                 'last_action_entropy': float(self.last_action_entropy),
             },
-            'scenario7_safety_dual_state': dict(
-                getattr(self, 'scenario7_safety_dual_state', {})
-            ),
             # 注意：不再保存discriminator_buffer，因为Discriminator现在是On-Policy模式
         }
         
@@ -3964,26 +3946,7 @@ class HMASDAgent:
                     self.config, 'continuous_action_distribution', 'tanh_gaussian'
                 ),
                 'scenario7_interface_version': getattr(
-                    self.config, 'scenario7_interface_version', 3
-                ),
-                'scenario7_reward_model': getattr(
-                    self.config,
-                    'scenario7_reward_model',
-                    'constrained_qos_safety_pbrs_v2',
-                ),
-                'scenario7_reward_variant': getattr(
-                    self.config,
-                    'scenario7_reward_variant',
-                    'qos_fixed_safety_graph_pbrs',
-                ),
-                'scenario7_experiment_arm': getattr(
-                    self.config, 'scenario7_experiment_arm', 'C'
-                ),
-                'battery_capacity_wh': getattr(
-                    self.config, 'battery_capacity_wh', 160.0
-                ),
-                'return_cost_cap': getattr(
-                    self.config, 'return_cost_cap', 1.0
+                    self.config, 'scenario7_interface_version', 2
                 ),
             }
             if interface is None:
@@ -4003,7 +3966,7 @@ class HMASDAgent:
                 )
                 raise ValueError(
                     f"Scenario 7 检查点接口不兼容（{details}）。"
-                    "旧版动作、reward模型或电池参数不能加载到当前Scenario 7 V5接口。"
+                    "旧版三维动作模型不能加载到当前四维 tanh-Gaussian 策略。"
                 )
 
             training_interface = checkpoint.get('training_interface', {})
@@ -4035,9 +3998,6 @@ class HMASDAgent:
                 self.last_action_entropy = float(
                     saved_diagnostics.get('last_action_entropy', self.last_action_entropy)
                 )
-            self.scenario7_safety_dual_state = dict(
-                checkpoint.get('scenario7_safety_dual_state', {})
-            )
         
         # 使用 strict=False 来处理模型架构不匹配的问题
         # 这允许加载匹配的层，同时忽略不匹配的层（如旧的transformer vs 新的opt，或变化的智能体数量）

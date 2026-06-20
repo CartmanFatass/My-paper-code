@@ -1,0 +1,18 @@
+{
+  "baseline_id": "S7-S3_arm-A_200Wh_unbounded_2400000",
+  "training_steps": 2400000,
+  "skill_interval": 50,
+  "experiment_arm": "A",
+  "reward_model": "constrained_qos_safety_pbrs_v1",
+  "battery_capacity_wh": 200.0,
+  "return_cost_cap": null,
+  "episode_count": 8,
+  "median_episode_qos_utility": 0.059896648629346495,
+  "mean_episode_qos_utility": 0.1428555846286326,
+  "q10_episode_reward": -178.42128357385246,
+  "median_episode_reward": 74.37402781651956,
+  "return_violation_episode_ratio": 0.25,
+  "source_run": "20260619_200608",
+  "source_evaluation_directory": "evaluation_step_2400000",
+  "source_note": "The historical evaluator wrote eval_step=150 inside files. Episode QoS and violation metrics were reconstructed from paper_eval_step_150.csv; reward quantiles were reconstructed from paper_eval_episodes_step_150.csv."
+}

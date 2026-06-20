@@ -1,12 +1,11 @@
 # HMASD算法配置参数 - 优化版
 # 专用于解决场景4覆盖率低的问题
-from pathlib import Path
 
 class Config:
     # Unified configuration revision. Generic class defaults below serve the
     # base/progressive scenarios; Scenario 7 values are applied by S7-S* presets.
-    config_revision = "unified-scenario7-qos-safety-pbrs-v5-20260620"
-    scenario7_config_revision = "scenario7-qos-safety-pbrs-v5"
+    config_revision = "unified-scenario7-energy-v2-k25-20260619"
+    scenario7_config_revision = "scenario7-energy-interface-v2"
     scenario = "base"
     scenario_label = ""
     experiment_preset = ""
@@ -342,22 +341,7 @@ class Config:
         self.max_observed_users = max(getattr(self, "max_observed_users", 30), 30)
         self.action_dim = 4
         self.action_bound = 1.0
-        self.scenario7_interface_version = 3
-        self.scenario7_reward_model = "constrained_qos_safety_pbrs_v2"
-        self.scenario7_reward_variant = "qos_fixed_safety_graph_pbrs"
-        self.scenario7_experiment_arm = "C"
-        self.user_qos_rate_mbps = 1.0
-        self.qos_target_ratio = 0.90
-        self.return_margin_scale = 0.05
-        self.return_cost_cap = 1.0
-        self.lambda_return = 2.0
-        self.cutoff_event_penalty = 5.0
-        self.depletion_event_penalty = 10.0
-        self.dual_learning_rate = 0.01
-        self.dual_max = 10.0
-        self.outer_update_min_episodes = 32
-        self.use_graph_pbrs = True
-        self.safety_dual_initial = 0.0
+        self.scenario7_interface_version = 2
         self.continuous_action_distribution = "tanh_gaussian"
         self.continuous_logstd_init = -1.0
         self.continuous_logstd_min = -5.0
@@ -366,29 +350,12 @@ class Config:
         self.lambda_l_initial = self.lambda_l
         self.lambda_l_final = self.lambda_l
         self.use_entropy_annealing = False
-        self.k = 50 if stage == "S3" else 10
+        self.k = 25 if stage == "S3" else 10
         self.scenario7_skill_interval_candidates = (10, 25, 50)
-        self.scenario7_comparison_gate_enabled = True
+        self.scenario7_comparison_gate_enabled = stage == "S3"
         self.scenario7_comparison_gate_step = 2_400_000
-        self.scenario7_baseline_metrics_path = str(
-            Path(__file__).resolve().parent
-            / "baselines"
-            / "scenario7_arm_a_2400000_metrics.json"
-        )
-        self.scenario7_gate_qos_retention = 0.95
-        self.scenario7_gate_tail_improvement = 0.50
-        self.scenario7_gate_violation_reduction = 0.50
-        self.scenario7_gate_min_charging_episode_ratio = 0.50
-        self.scenario7_gate_max_catastrophe_ratio = 0.05
-        self.scenario7_intermediate_eval_episodes = 20
-        self.scenario7_key_eval_episodes = 100
-        self.scenario7_eval_seed_base = 10000
-        self.scenario7_eval_visualization_episodes = 8
-        self.scenario7_feasibility_seed_count = 20
-        self.scenario7_run_physical_feasibility_check = True
-        self.scenario7_no_charge_pressure_min = 0.50
-        self.scenario7_heuristic_charge_success_min = 0.90
-        self.scenario7_heuristic_qos_min = 0.90
+        self.scenario7_gate_median_coverage_min = 0.45
+        self.scenario7_gate_max_zero_coverage_episodes = 2
 
         self.episode_length = 500 if stage == "S1" else 1500
         self.max_steps = self.episode_length
@@ -401,7 +368,7 @@ class Config:
 
         self.max_energy_charging_stations = 2
         self.n_charging_stations = 2
-        self.battery_capacity_wh = 160.0
+        self.battery_capacity_wh = 200.0
         self.initial_battery_ratio_range = (0.75, 1.0)
         self.return_reserve_ratio = 0.10
         self.return_threshold_min = 0.25
@@ -427,11 +394,7 @@ class Config:
 
         self.user_distribution = "forced_relay_cluster"
         self.randomize_bs = True
-        # Scenario 7 V5 uses end-to-end QoS with a bounded return-safety constraint.
-        # Legacy load-balance/robustness terms remain observable metrics only.
-        self._disable_backhaul_robustness()
-        self.w_load_balance = 0.0
-        self.w_repulsion = 0.0
+        self._restore_backhaul_robustness()
         self.enable_backhaul_action_guard = True
 
         self.battery_enabled = stage in {"S2", "S3", "S4"}
@@ -443,20 +406,17 @@ class Config:
         self.uav_failure_min_active = 6
 
         self.w_first_contact = 0.0
-        self.w_energy_backhaul_potential = 0.0
-        self.w_energy_motion = 0.0
+        self.w_energy_backhaul_potential = 0.20
+        self.w_energy_motion = 0.02
         self.w_energy_efficiency = 0.0
-        self.w_low_battery = 0.0
-        self.w_depleted_battery = 0.0
-        self.w_charge_progress = 0.0
-        self.w_charging_queue = 0.0
-        self.w_station_approach = 0.0
-        self.w_charging_arrival = 0.0
-        self.w_energy_failure = 0.0
+        self.w_low_battery = 0.10
+        self.w_depleted_battery = 0.30
+        self.w_charge_progress = 0.20
+        self.w_charging_queue = 0.02
+        self.w_station_approach = 0.10
+        self.w_charging_arrival = 0.10
+        self.w_energy_failure = 0.20
         self.w_energy_failure_event = 0.0
-        self.apply_scenario7_reward_variant(self.scenario7_reward_variant)
-        self.apply_scenario7_experiment_arm(self.scenario7_experiment_arm)
-        self.eval_episodes = self.scenario7_intermediate_eval_episodes
 
         self.user_movement_model = "rpgm"
         stage_speeds = {
@@ -471,79 +431,6 @@ class Config:
 
         self._validate_scenario7_preset()
 
-    def apply_scenario7_reward_variant(self, variant):
-        valid_variants = {
-            "legacy_engineering",
-            "qos_only",
-            "qos_depletion_penalty",
-            "qos_fixed_safety",
-            "qos_fixed_safety_graph_pbrs",
-            "qos_fixed_safety_unbounded_graph_pbrs",
-            "qos_adaptive_safety_graph_pbrs",
-        }
-        variant = str(variant).strip().lower()
-        if variant not in valid_variants:
-            raise ValueError(
-                f"Unknown Scenario 7 reward variant '{variant}'. "
-                f"Expected one of {sorted(valid_variants)}"
-            )
-        self.scenario7_reward_variant = variant
-        self.use_graph_pbrs = variant in {
-            "qos_fixed_safety_graph_pbrs",
-            "qos_fixed_safety_unbounded_graph_pbrs",
-            "qos_adaptive_safety_graph_pbrs",
-        }
-
-        if variant == "legacy_engineering":
-            self._restore_backhaul_robustness()
-            self.w_load_balance = 0.35
-            self.w_energy_backhaul_potential = 0.20
-            self.w_energy_motion = 0.02
-            self.w_low_battery = 0.10
-            self.w_depleted_battery = 0.30
-            self.w_charge_progress = 0.20
-            self.w_charging_queue = 0.02
-            self.w_station_approach = 0.10
-            self.w_charging_arrival = 0.10
-            self.w_energy_failure = 0.20
-        else:
-            self._disable_backhaul_robustness()
-            self.w_load_balance = 0.0
-            self.w_energy_backhaul_potential = 0.0
-            self.w_energy_motion = 0.0
-            self.w_low_battery = 0.0
-            self.w_depleted_battery = 0.0
-            self.w_charge_progress = 0.0
-            self.w_charging_queue = 0.0
-            self.w_station_approach = 0.0
-            self.w_charging_arrival = 0.0
-            self.w_energy_failure = 0.0
-        self.enable_backhaul_action_guard = True
-
-    def apply_scenario7_experiment_arm(self, arm):
-        """Apply the paper ablation arm without changing HMASD hyperparameters."""
-        arm = str(arm).strip().upper()
-        if arm not in {"A", "B", "C"}:
-            raise ValueError("Scenario 7 experiment arm must be one of A, B, C")
-        self.scenario7_experiment_arm = arm
-        if arm == "A":
-            self.scenario7_reward_model = "constrained_qos_safety_pbrs_v1"
-            self.battery_capacity_wh = 200.0
-            self.return_cost_cap = None
-            self.apply_scenario7_reward_variant(
-                "qos_fixed_safety_unbounded_graph_pbrs"
-            )
-        elif arm == "B":
-            self.scenario7_reward_model = "constrained_qos_safety_pbrs_v2"
-            self.battery_capacity_wh = 200.0
-            self.return_cost_cap = 1.0
-            self.apply_scenario7_reward_variant("qos_fixed_safety_graph_pbrs")
-        else:
-            self.scenario7_reward_model = "constrained_qos_safety_pbrs_v2"
-            self.battery_capacity_wh = 160.0
-            self.return_cost_cap = 1.0
-            self.apply_scenario7_reward_variant("qos_fixed_safety_graph_pbrs")
-
     def _validate_scenario7_preset(self):
         """Validate the complete Scenario 7 contract immediately after preset application."""
         expected = {
@@ -553,8 +440,7 @@ class Config:
             "charging_power_w": 1000.0,
             "max_observed_uavs": 8,
             "continuous_action_distribution": "tanh_gaussian",
-            "scenario7_interface_version": 3,
-            "gamma": 0.99,
+            "scenario7_interface_version": 2,
             "lambda_l": 0.005,
             "use_entropy_annealing": False,
         }
@@ -563,68 +449,8 @@ class Config:
             for name, value in expected.items()
             if getattr(self, name, None) != value
         ]
-        if self.energy_stage == "S3" and self.k != 50:
-            errors.append(f"S7-S3 k={self.k!r}, expected 50")
-        if not (0.0 < self.user_qos_rate_mbps):
-            errors.append("user_qos_rate_mbps must be positive")
-        if not (0.0 < self.qos_target_ratio <= 1.0):
-            errors.append("qos_target_ratio must be in (0, 1]")
-        if not (0.0 < self.return_margin_scale):
-            errors.append("return_margin_scale must be positive")
-        if self.return_cost_cap is not None and self.return_cost_cap <= 0.0:
-            errors.append("return_cost_cap must be positive or None")
-        if self.lambda_return < 0.0:
-            errors.append("lambda_return must be non-negative")
-        if self.cutoff_event_penalty < 0.0:
-            errors.append("cutoff_event_penalty must be non-negative")
-        if self.depletion_event_penalty < 0.0:
-            errors.append("depletion_event_penalty must be non-negative")
-        if self.safety_dual_initial < 0.0:
-            errors.append("safety_dual_initial must be non-negative")
-        if not (0.0 < self.dual_learning_rate):
-            errors.append("dual_learning_rate must be positive")
-        if not (0.0 < self.dual_max):
-            errors.append("dual_max must be positive")
-        if self.outer_update_min_episodes < 1:
-            errors.append("outer_update_min_episodes must be at least 1")
-        if self.scenario7_reward_variant not in {
-            "legacy_engineering",
-            "qos_only",
-            "qos_depletion_penalty",
-            "qos_fixed_safety",
-            "qos_fixed_safety_graph_pbrs",
-            "qos_fixed_safety_unbounded_graph_pbrs",
-            "qos_adaptive_safety_graph_pbrs",
-        }:
-            errors.append(
-                f"unsupported scenario7_reward_variant={self.scenario7_reward_variant!r}"
-            )
-        expected_arm = {
-            "A": ("constrained_qos_safety_pbrs_v1", 200.0, None),
-            "B": ("constrained_qos_safety_pbrs_v2", 200.0, 1.0),
-            "C": ("constrained_qos_safety_pbrs_v2", 160.0, 1.0),
-        }
-        if self.scenario7_experiment_arm not in expected_arm:
-            errors.append(
-                f"unsupported scenario7_experiment_arm={self.scenario7_experiment_arm!r}"
-            )
-        else:
-            model, capacity, cap = expected_arm[self.scenario7_experiment_arm]
-            if self.scenario7_reward_model != model:
-                errors.append(
-                    f"scenario7_reward_model={self.scenario7_reward_model!r}, "
-                    f"expected {model!r} for arm {self.scenario7_experiment_arm}"
-                )
-            if self.battery_capacity_wh != capacity:
-                errors.append(
-                    f"battery_capacity_wh={self.battery_capacity_wh!r}, "
-                    f"expected {capacity!r} for arm {self.scenario7_experiment_arm}"
-                )
-            if self.return_cost_cap != cap:
-                errors.append(
-                    f"return_cost_cap={self.return_cost_cap!r}, "
-                    f"expected {cap!r} for arm {self.scenario7_experiment_arm}"
-                )
+        if self.energy_stage == "S3" and self.k != 25:
+            errors.append(f"S7-S3 k={self.k!r}, expected 25")
         if self.episode_length % self.k != 0:
             errors.append(
                 f"episode_length={self.episode_length} must be divisible by k={self.k}"
