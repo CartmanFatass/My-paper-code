@@ -5,6 +5,14 @@ class Config:
     scenario = "base"
     scenario_label = ""
     experiment_preset = ""
+    paper_data_level = "standard"
+    collect_step_rewards = True
+    collect_reward_components = True
+    collect_performance_metrics = True
+    enable_data_sampling = True
+    data_sampling_interval = 10
+    enable_data_compression = False
+    paper_data_dir = None
 
     # 调试参数
     test_reward_mode = False
@@ -223,9 +231,12 @@ class Config:
             self._apply_scenario6_progressive_preset(preset)
         elif preset.startswith("S4-R"):
             self._apply_scenario4_reward_preset(preset)
+        elif preset.startswith("S7-S"):
+            self._apply_scenario7_energy_preset(preset)
         else:
             raise ValueError(
-                f"Unknown preset '{preset}'. Expected S4-R0/R1/R2/R3 or S6-S0/S1/S2/S3/S4/S5/S6/S7/S8/S9/S10."
+                f"Unknown preset '{preset}'. Expected S4-R0/R1/R2/R3, "
+                f"S6-S0/S1/S2/S3/S4/S5/S6/S7/S8/S9/S10, or S7-S1/S2/S3/S4."
             )
 
     def _disable_backhaul_robustness(self):
@@ -303,6 +314,115 @@ class Config:
 
         self._restore_backhaul_robustness()
         self.enable_backhaul_action_guard = stage in {"S6", "S7", "S8", "S9", "S10"}
+
+    def _apply_scenario7_energy_preset(self, preset):
+        stage = preset.split("-", 1)[1]
+        if stage not in {"S1", "S2", "S3", "S4"}:
+            raise ValueError(f"Unknown scenario7 energy stage preset '{preset}'.")
+
+        self.scenario = 7
+        self.scenario_label = preset
+        self.energy_stage = stage
+        self.energy_scale_mode = "train"
+        self.energy_reward_type = "load_balance"
+        self.reward_type = "load_balance"
+        self.progressive_stage = "S0"
+        self.scenario6_reward_type = None
+
+        self.n_agents = 8
+        self.n_users = 30
+        self.n_ground_bs = 1
+        self.max_observed_uavs = 8
+        self.max_observed_users = max(getattr(self, "max_observed_users", 30), 30)
+        self.action_dim = 4
+        self.action_bound = 1.0
+        self.scenario7_interface_version = 2
+        self.continuous_action_distribution = "tanh_gaussian"
+        self.continuous_logstd_init = -1.0
+        self.continuous_logstd_min = -5.0
+        self.continuous_logstd_max = 0.0
+        self.lambda_l = 0.005
+        self.lambda_l_initial = self.lambda_l
+        self.lambda_l_final = self.lambda_l
+        self.use_entropy_annealing = False
+        self.k = 25 if stage == "S3" else 10
+        self.scenario7_skill_interval_candidates = (10, 25, 50)
+        self.scenario7_comparison_gate_enabled = stage == "S3"
+        self.scenario7_comparison_gate_step = 2_400_000
+        self.scenario7_gate_median_coverage_min = 0.45
+        self.scenario7_gate_max_zero_coverage_episodes = 2
+
+        self.episode_length = 500 if stage == "S1" else 1500
+        self.max_steps = self.episode_length
+        self.eval_interval = self.episode_length * self.num_envs * 10
+        self.total_timesteps = (
+            self.num_envs * self.rollout_length * 200
+            if stage == "S1"
+            else self.num_envs * self.episode_length * 200
+        )
+
+        self.max_energy_charging_stations = 2
+        self.n_charging_stations = 2
+        self.battery_capacity_wh = 200.0
+        self.initial_battery_ratio_range = (0.75, 1.0)
+        self.return_reserve_ratio = 0.10
+        self.return_threshold_min = 0.25
+        self.return_threshold_max = 0.60
+        self.emergency_return_threshold = 0.05
+        self.service_cutoff_threshold = 0.02
+        self.charging_radius_m = 160.0
+        self.charging_capture_radius_m = 20.0
+        self.charging_power_w = 1000.0
+        self.charging_hover_speed_threshold = 1.0
+        self.docking_horizontal_speed_mps = 3.0
+        self.docking_vertical_speed_mps = 1.0
+        self.max_vertical_speed_mps = 5.0
+        self.dock_request_threshold = 0.5
+        self.limp_home_speed_mps = 3.0
+        self.energy_reward_delta_min = -0.5
+        self.energy_reward_delta_max = 0.25
+        self.randomize_charging_stations = True
+        self.charging_station_layout = "service_anchored"
+        self.charging_station_margin_ratio = 0.08
+        self.charging_station_min_separation_m = max(2 * self.charging_radius_m, self.area_size * 0.12)
+        self.charging_station_jitter_m = self.area_size * 0.12
+
+        self.user_distribution = "forced_relay_cluster"
+        self.randomize_bs = True
+        self._restore_backhaul_robustness()
+        self.enable_backhaul_action_guard = True
+
+        self.battery_enabled = stage in {"S2", "S3", "S4"}
+        self.charging_enabled = self.battery_enabled
+        self.charging_station_capacity = [1, 1]
+        self.uav_failure_enabled = stage == "S4"
+        self.uav_failure_probability = 0.001 if stage == "S4" else 0.0
+        self.uav_failure_duration_range = (20, 60)
+        self.uav_failure_min_active = 6
+
+        self.w_first_contact = 0.0
+        self.w_energy_backhaul_potential = 0.20
+        self.w_energy_motion = 0.02
+        self.w_energy_efficiency = 0.0
+        self.w_low_battery = 0.10
+        self.w_depleted_battery = 0.30
+        self.w_charge_progress = 0.20
+        self.w_charging_queue = 0.02
+        self.w_station_approach = 0.10
+        self.w_charging_arrival = 0.10
+        self.w_energy_failure = 0.20
+        self.w_energy_failure_event = 0.0
+
+        self.user_movement_model = "rpgm"
+        stage_speeds = {
+            "S1": (2.0, 2.0),
+            "S2": (3.0, 3.0),
+            "S3": (5.0, 5.0),
+            "S4": (8.0, 10.0),
+        }
+        self.user_max_speed, self.cluster_migration_speed = stage_speeds[stage]
+        self.cluster_pause_time_range = (0, 3) if stage == "S4" else (1, 4)
+        self.user_pause_time_range = (0, 2)
 
     def calculate_and_set_buffer_sizes(self):
         if self.n_agents is None:
