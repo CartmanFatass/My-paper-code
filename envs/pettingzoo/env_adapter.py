@@ -3,6 +3,7 @@ import gymnasium as gym
 from gymnasium.spaces import Box
 import os
 import multiprocessing as mp
+import copy
 
 # 确保在子进程中使用安全的matplotlib后端
 try:
@@ -449,6 +450,15 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             # 获取连接矩阵
             if hasattr(self.env, 'connections'):
                 state_info['connections'] = self.env.connections.copy()
+
+            if hasattr(self.env, 'uav_connections'):
+                state_info['uav_connections'] = self.env.uav_connections.copy()
+
+            if hasattr(self.env, 'uav_bs_connections'):
+                state_info['uav_bs_connections'] = self.env.uav_bs_connections.copy()
+
+            if hasattr(self.env, 'routing_paths'):
+                state_info['routing_paths'] = copy.deepcopy(self.env.routing_paths)
             
             # 获取其他有用信息
             if hasattr(self.env, 'current_step'):

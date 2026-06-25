@@ -62,6 +62,29 @@ class Config(BaseConfig):
     use_opt_coordinator = False
     use_opt_discoverer_actor = False
     use_opt_discoverer_critic = False
+    use_opt_compact = False
+    opt_compact_dim = 32
+    team_code_dim = 32
+    num_team_codes = n_Z
+    use_team_bridge = False
+    team_bridge_type = "deterministic"
+    use_horizon_window = False
+    horizon_type = "none"
+    H_min = 1
+    H_max = 3
+    force_termination_after_H_max = True
+    term_entropy_coef = 0.01
+    skill_entropy_coef = 0.01
+    high_level_assignment_mode = "parallel"
+    use_compact_in_low_level_actor = False
+    use_team_code_discriminator = False
+    use_individual_skill_discriminator = True
+    discriminator_condition_on_compact = False
+    discriminator_condition_on_team_code = True
+    use_segment_discriminator = False
+    skill_lifetime_candidates = (1, 2)
+    process_max_segment_len = 16
+    process_segment_buffer_size = 128
 
     # Keep forced high-level collection responsive in tiny rollouts.
     force_collection_threshold = 16

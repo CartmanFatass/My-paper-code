@@ -214,6 +214,92 @@ class Config:
     opt_alpha = 0.5          # 对比散度损失权重 (论文中α=0.5)
     opt_beta = 0.1           # 条件互信息损失权重 (论文中β=0.1)
     opt_layers = 2           # OPT模块层数 (论文中K=2)
+
+    # HA-CTSE: Horizon-Aware Compact-Team Skill Editing.
+    # These switches are inert for the original HMASD path unless an HA-CTSE
+    # algorithm preset enables them.
+    use_opt_compact = False
+    opt_compact_dim = 64
+    opt_use_sparsemax = True
+    opt_use_cd_loss = True
+    opt_use_cmi_loss = True
+    opt_cd_coef = 0.02
+    opt_cmi_coef = 0.005
+    opt_aggregation_entropy_coef = 0.005
+    use_compact_in_low_level_actor = False
+
+    use_team_bridge = False
+    team_bridge_type = "stochastic"  # none, deterministic, stochastic
+    team_code_dim = 64
+    num_team_codes = n_Z
+
+    use_horizon_window = False
+    horizon_type = "none"  # none, fixed_sticky, learned_termination
+    H_min = 1
+    H_max = 5
+    force_termination_after_H_max = True
+    edit_penalty_alpha = 0.01
+    switch_penalty_beta = 0.005
+    early_switch_penalty_eta = 0.03
+    age_penalty_power = 1.0
+    horizon_penalty_warmup_steps = 160000
+    switch_penalty_warmup_steps = 480000
+    term_entropy_coef = 0.01
+    skill_entropy_coef = 0.01
+    use_entropy_targets = False
+    entropy_target_update_rate = 0.02
+    entropy_coef_min = 1e-4
+    entropy_coef_max = 0.20
+    target_team_code_entropy_frac = 0.75
+    target_term_entropy_frac = 0.65
+    target_skill_entropy_frac = 0.75
+    target_low_level_entropy = -1.0
+    low_level_entropy_target_per_dim = 0.30
+    high_level_assignment_mode = "parallel"  # parallel, autoregressive
+
+    # Algorithm presets may override these fields. During HA-CTSE exploration,
+    # compact-conditioned discriminator variants are allowed as first-class
+    # algorithm hypotheses, not only conservative HMASD compatibility toggles.
+    use_team_code_discriminator = False
+    use_individual_skill_discriminator = True
+    discriminator_condition_on_compact = False
+    discriminator_condition_on_team_code = True
+    use_segment_discriminator = False
+    intrinsic_coef_team = lambda_D
+    intrinsic_coef_skill = lambda_d
+    intrinsic_warmup_steps = 0
+    use_prior_corrected_intrinsic = False
+    normalize_intrinsic_mi = False
+    intrinsic_mi_clip = 2.0
+
+    # Process-centric HA-CTSE exploration. These gates define the next research
+    # core, but process rewards remain disabled until segment data is verified.
+    use_process_exploration = False
+    use_discrete_skill_lifetimes = False
+    skill_lifetime_candidates = (1, 2, 3, 5)
+    allow_early_duration_termination = False
+    duration_entropy_coef = 0.01
+    process_segment_mode = "skill_lifetime"  # fixed_k, skill_lifetime
+    process_max_segment_len = 250
+    process_segment_buffer_size = 20000
+    process_encoder_hidden_dim = 128
+    process_encoder_embedding_dim = 64
+    process_contrastive_dim = 64
+    process_contrastive_temperature = 0.1
+    lr_process_encoder = 1e-4
+    process_encoder_epochs = 2
+    process_encoder_batch_size = 128
+    process_reward_coef = 0.05
+    process_contrastive_coef = 1.0
+    process_outcome_coef = 0.25
+    process_reward_distribution = "mean_over_segment"
+    process_use_duration_baseline = True
+    normalize_process_outcomes = True
+    use_process_reward_for_discoverer = True
+    legacy_mi_reward_coef = 0.5
+    process_reward_warmup_steps = 0
+    process_reward_clip = 2.0
+    discoverer_entropy_target_mode = "adaptive"
     
     # --- 场景4: 网络健康度奖励权重 (Network Health Score) ---
     w_connectivity = 0.5
@@ -648,7 +734,18 @@ class Config:
         self.low_level_buffer_size = buffer_size * self.n_agents
         self.batch_size = minibatch_size * self.n_agents
         self.buffer_size = self.low_level_buffer_size
-        total_high_level_samples = self.num_envs * (self.rollout_length // self.k)
+        if getattr(self, 'use_process_exploration', False) and getattr(self, 'use_discrete_skill_lifetimes', False):
+            lifetime_candidates = tuple(getattr(self, 'skill_lifetime_candidates', ()) or ())
+            expected_lifetime = (
+                sum(float(x) for x in lifetime_candidates) / len(lifetime_candidates)
+                if lifetime_candidates
+                else 1.0
+            )
+            expected_high_level_span = max(1.0, float(self.k) * max(1.0, expected_lifetime))
+            samples_per_env = max(1, int(self.rollout_length / expected_high_level_span))
+            total_high_level_samples = self.num_envs * samples_per_env
+        else:
+            total_high_level_samples = self.num_envs * (self.rollout_length // self.k)
         self.high_level_buffer_size = total_high_level_samples
         self.high_level_batch_size = min(total_high_level_samples, 128)
 

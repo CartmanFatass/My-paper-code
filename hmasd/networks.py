@@ -1304,6 +1304,7 @@ class SkillDiscoverer(nn.Module):
         self.config = config
         self.logger = logger if logger is not None else main_logger
         self.device = device if device is not None else torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.use_compact_context = bool(getattr(config, "use_compact_in_low_level_actor", False))
         
         # Adapt hmasd config to r_mappo's args format
         class Args:
@@ -1332,8 +1333,27 @@ class SkillDiscoverer(nn.Module):
         
         args = Args(config)
 
-        # Create dummy spaces for initialization
-        from gymnasium import spaces
+        # Create dummy spaces for initialization. Keep a tiny fallback so unit
+        # tests can import the model in environments without gymnasium.
+        try:
+            from gymnasium import spaces
+        except ModuleNotFoundError:
+            class Box:
+                def __init__(self, low, high, shape):
+                    self.low = low
+                    self.high = high
+                    self.shape = shape
+
+            class Discrete:
+                def __init__(self, n):
+                    self.n = n
+
+            class _Spaces:
+                pass
+
+            spaces = _Spaces()
+            spaces.Box = Box
+            spaces.Discrete = Discrete
         obs_space = spaces.Box(low=-np.inf, high=np.inf, shape=(config.obs_dim,))
         if getattr(config, 'action_space_type', 'continuous') == 'discrete':
             action_space = spaces.Discrete(config.action_dim)
@@ -1344,29 +1364,83 @@ class SkillDiscoverer(nn.Module):
 
         self.actor = R_Actor(args, obs_space, action_space, config.n_z, self.device)
         self.critic = R_Critic(args, cent_obs_space, config.n_Z, self.device)
+        if self.use_compact_context:
+            compact_dim = int(getattr(config, "opt_compact_dim", getattr(config, "embedding_dim", 128)))
+            self.actor_context_adapter = nn.Sequential(
+                nn.LayerNorm(compact_dim),
+                nn.Linear(compact_dim, config.obs_dim),
+            )
+            self.critic_context_adapter = nn.Sequential(
+                nn.LayerNorm(compact_dim),
+                nn.Linear(compact_dim, config.state_dim),
+            )
+            for adapter in (self.actor_context_adapter, self.critic_context_adapter):
+                linear = adapter[-1]
+                nn.init.zeros_(linear.weight)
+                nn.init.zeros_(linear.bias)
+            self.actor_context_adapter.to(self.device)
+            self.critic_context_adapter.to(self.device)
+        else:
+            self.actor_context_adapter = None
+            self.critic_context_adapter = None
 
-    def forward(self, observation, agent_skill, hidden_state, deterministic=False):
+    def _apply_compact_context(self, tensor, compact_context, adapter):
+        if adapter is None or compact_context is None:
+            return tensor
+        target_device = next(adapter.parameters()).device
+        tensor = tensor.to(device=target_device)
+        if not torch.is_tensor(compact_context):
+            compact_context = torch.as_tensor(compact_context, dtype=tensor.dtype, device=tensor.device)
+        else:
+            compact_context = compact_context.to(device=tensor.device, dtype=tensor.dtype)
+        return tensor + adapter(compact_context)
+
+    def actor_update_parameters(self):
+        params = list(self.actor.parameters())
+        if self.actor_context_adapter is not None:
+            params.extend(self.actor_context_adapter.parameters())
+        return params
+
+    def critic_update_parameters(self):
+        params = list(self.critic.parameters())
+        if self.critic_context_adapter is not None:
+            params.extend(self.critic_context_adapter.parameters())
+        return params
+
+    def forward(self, observation, agent_skill, hidden_state, deterministic=False, compact_context=None):
         # The new R_Actor expects masks. We can pass ones.
+        observation = self._apply_compact_context(observation, compact_context, self.actor_context_adapter)
         masks = torch.ones(observation.size(0), 1, device=observation.device)
         actions, log_probs, new_hidden = self.actor(observation, hidden_state, masks, agent_skill, deterministic=deterministic)
         # The original forward returned a dummy distribution, we return None for that.
         return actions, log_probs, None, new_hidden
 
-    def get_value(self, state, team_skill, critic_hidden_state=None):
+    def get_value(self, state, team_skill, critic_hidden_state=None, compact_context=None):
         # The new R_Critic expects masks. We can pass ones.
+        state = self._apply_compact_context(state, compact_context, self.critic_context_adapter)
         masks = torch.ones(state.size(0), 1, device=state.device)
         return self.critic(state, critic_hidden_state, masks, team_skill)
 
-    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None):
+    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None, compact_context_seq=None):
         T, B, _ = observations_seq.shape
         # The dones_seq from buffer might be (T, B, 1), ensure it's (T, B) for mask creation
         if dones_seq.dim() > 2:
             dones_seq = dones_seq.squeeze(-1)
         masks = (1 - dones_seq.float())
+        actor_observations = self._apply_compact_context(
+            observations_seq,
+            compact_context_seq,
+            self.actor_context_adapter,
+        )
+        critic_states = self._apply_compact_context(
+            global_states_seq,
+            compact_context_seq,
+            self.critic_context_adapter,
+        )
         
         # Pass sequences without flattening
         log_probs, entropy = self.actor.evaluate_actions(
-            observations_seq,
+            actor_observations,
             initial_hxs,
             actions_seq,
             masks,
@@ -1374,7 +1448,7 @@ class SkillDiscoverer(nn.Module):
         )
         
         values, _ = self.critic(
-            global_states_seq,
+            critic_states,
             initial_critic_hxs,
             masks,
             team_skills_seq

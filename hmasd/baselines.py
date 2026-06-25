@@ -8,7 +8,78 @@ from logger import main_logger
 from hmasd.agent import HMASDAgent
 
 
-ALGORITHM_CHOICES = ("hmasd", "mappo", "random", "greedy_coverage")
+HA_CTSE_ALGORITHMS = {
+    "opt_full_sync_skill",
+    "ctb_sse_no_horizon",
+    "horizon_ctb_sse_core",
+    "horizon_ctb_sse_no_discriminator",
+    "horizon_ctb_sse_compact_low_level_ablation",
+    "deterministic_bridge",
+    "stochastic_bridge",
+    "parallel_editor",
+    "autoregressive_editor",
+}
+
+ALGORITHM_CHOICES = (
+    "hmasd",
+    "hmasd_original",
+    "mappo",
+    "opt_mappo_k",
+    *tuple(sorted(HA_CTSE_ALGORITHMS)),
+    "random",
+    "greedy_coverage",
+)
+
+
+def _set_min(config, name, value):
+    current = getattr(config, name, None)
+    if current is None or float(current) < float(value):
+        setattr(config, name, value)
+
+
+def _enable_ha_ctse(config):
+    config.use_opt_compact = True
+    config.use_team_bridge = True
+    config.use_horizon_window = True
+    config.horizon_type = "learned_termination"
+    # HA-CTSE process-core exploration is not discriminator-centric.  Keep the
+    # old discriminator machinery available for HMASD/legacy controls, but do
+    # not mix its supervised MI target into the process/outcome objective.
+    config.use_team_code_discriminator = False
+    config.use_individual_skill_discriminator = False
+    config.discriminator_condition_on_compact = False
+    config.discriminator_condition_on_team_code = False
+    config.disable_discriminator_training = True
+    config.disable_discriminator_rewards = True
+    config.disable_high_level_training = False
+    config.collects_high_level_samples = True
+    config.use_prior_corrected_intrinsic = False
+    config.normalize_intrinsic_mi = False
+    config.use_entropy_targets = True
+    config.use_entropy_annealing = False
+    config.use_process_exploration = True
+    config.use_discrete_skill_lifetimes = True
+    config.process_segment_mode = "skill_lifetime"
+    config.use_process_reward_for_discoverer = True
+    _set_min(config, "process_reward_coef", 0.05)
+    _set_min(config, "process_contrastive_coef", 1.0)
+    _set_min(config, "process_outcome_coef", 0.25)
+    config.legacy_mi_reward_coef = 0.0
+    config.strict_hmasd_alignment = False
+    _set_min(config, "lambda_l", 0.02)
+    config.lambda_l_initial = getattr(config, "lambda_l", 0.02)
+    config.lambda_l_final = getattr(config, "lambda_l", 0.02)
+    _set_min(config, "opt_cd_coef", 0.02)
+    _set_min(config, "opt_cmi_coef", 0.005)
+    _set_min(config, "opt_aggregation_entropy_coef", 0.005)
+    _set_min(config, "edit_penalty_alpha", 0.01)
+    _set_min(config, "early_switch_penalty_eta", 0.03)
+    _set_min(config, "switch_penalty_beta", 0.005)
+    if not hasattr(config, "num_team_codes") or int(getattr(config, "num_team_codes", 0)) <= 0:
+        config.num_team_codes = int(getattr(config, "n_Z", 1))
+    if hasattr(config, "calculate_and_set_buffer_sizes"):
+        config.calculate_and_set_buffer_sizes()
+    return config
 
 
 def apply_algorithm_config(config, algorithm: str):
@@ -17,7 +88,40 @@ def apply_algorithm_config(config, algorithm: str):
     config.algorithm = algorithm
     config.baseline_algorithm = algorithm
 
-    if algorithm == "hmasd":
+    if algorithm in {"hmasd", "hmasd_original"}:
+        config.use_horizon_window = False
+        config.use_team_bridge = False
+        config.use_opt_compact = False
+        config.use_compact_in_low_level_actor = False
+        config.use_team_code_discriminator = False
+        config.discriminator_condition_on_compact = False
+        config.use_process_exploration = False
+        config.use_discrete_skill_lifetimes = False
+        config.use_process_reward_for_discoverer = False
+        return config
+
+    if algorithm == "opt_mappo_k":
+        # Registered as an explicit baseline configuration. The direct
+        # compact-to-actor pathway is guarded by use_compact_in_low_level_actor
+        # and should remain an ablation, not the default HA-CTSE route.
+        config.use_opt_compact = True
+        config.use_compact_in_low_level_actor = True
+        config.discriminator_condition_on_compact = False
+        config.discriminator_condition_on_team_code = False
+        config.use_team_code_discriminator = False
+        config.use_horizon_window = False
+        config.use_team_bridge = False
+        config.disable_high_level_training = True
+        config.disable_discriminator_training = True
+        config.disable_discriminator_rewards = True
+        config.use_process_exploration = False
+        config.use_discrete_skill_lifetimes = False
+        config.use_process_reward_for_discoverer = False
+        config.n_Z = 1
+        config.n_z = 1
+        config.k = max(int(getattr(config, "rollout_length", 1)) + 1, 2)
+        if hasattr(config, "calculate_and_set_buffer_sizes"):
+            config.calculate_and_set_buffer_sizes()
         return config
 
     if algorithm == "mappo":
@@ -36,6 +140,48 @@ def apply_algorithm_config(config, algorithm: str):
         config.disable_discriminator_training = True
         config.disable_discriminator_rewards = True
         config.collects_high_level_samples = False
+        config.use_process_exploration = False
+        config.use_discrete_skill_lifetimes = False
+        config.use_process_reward_for_discoverer = False
+        if hasattr(config, "calculate_and_set_buffer_sizes"):
+            config.calculate_and_set_buffer_sizes()
+        return config
+
+    if algorithm in HA_CTSE_ALGORITHMS:
+        _enable_ha_ctse(config)
+        config.team_bridge_type = "stochastic"
+        config.high_level_assignment_mode = "parallel"
+
+        if algorithm == "opt_full_sync_skill":
+            config.H_min = 0
+            config.H_max = 0
+            config.force_termination_after_H_max = True
+            config.edit_penalty_alpha = 0.0
+            config.switch_penalty_beta = 0.0
+            config.early_switch_penalty_eta = 0.0
+        elif algorithm == "ctb_sse_no_horizon":
+            config.H_min = 0
+            config.H_max = 10**9
+            config.force_termination_after_H_max = False
+        elif algorithm == "horizon_ctb_sse_no_discriminator":
+            config.disable_discriminator_rewards = True
+            config.disable_discriminator_training = True
+            config.use_team_code_discriminator = False
+            config.use_individual_skill_discriminator = False
+            config.discriminator_condition_on_compact = False
+            config.discriminator_condition_on_team_code = False
+        elif algorithm == "horizon_ctb_sse_compact_low_level_ablation":
+            config.use_compact_in_low_level_actor = True
+        elif algorithm == "stochastic_bridge":
+            config.team_bridge_type = "stochastic"
+        elif algorithm == "autoregressive_editor":
+            config.high_level_assignment_mode = "autoregressive"
+
+        if algorithm == "deterministic_bridge":
+            config.team_bridge_type = "deterministic"
+        if algorithm == "parallel_editor":
+            config.high_level_assignment_mode = "parallel"
+
         if hasattr(config, "calculate_and_set_buffer_sizes"):
             config.calculate_and_set_buffer_sizes()
         return config
@@ -46,6 +192,9 @@ def apply_algorithm_config(config, algorithm: str):
         config.disable_high_level_training = True
         config.disable_discriminator_training = True
         config.disable_discriminator_rewards = True
+        config.use_process_exploration = False
+        config.use_discrete_skill_lifetimes = False
+        config.use_process_reward_for_discoverer = False
         return config
 
     raise ValueError(f"Unsupported algorithm: {algorithm}")
@@ -53,7 +202,7 @@ def apply_algorithm_config(config, algorithm: str):
 
 def create_agent(config, algorithm: str, log_dir: str, device=None):
     algorithm = (algorithm or getattr(config, "algorithm", "hmasd")).lower()
-    if algorithm in {"hmasd", "mappo"}:
+    if algorithm in {"hmasd", "hmasd_original", "mappo", "opt_mappo_k"} or algorithm in HA_CTSE_ALGORITHMS:
         return HMASDAgent(config, log_dir=log_dir, device=device)
     if algorithm in {"random", "greedy_coverage"}:
         return HeuristicBaselineAgent(config, algorithm=algorithm, log_dir=log_dir, device=device)

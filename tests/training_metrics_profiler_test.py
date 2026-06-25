@@ -1,6 +1,13 @@
 from types import SimpleNamespace
 
-from train_multiproc_config_1 import EnhancedRewardTracker, TrainingProfiler
+import numpy as np
+
+from train_multiproc_config_1 import (
+    EnhancedRewardTracker,
+    TrainingProfiler,
+    count_skill_switches_for_metrics,
+    uses_process_high_level_flow,
+)
 
 
 def make_tracker(tmp_path):
@@ -61,3 +68,41 @@ def test_training_profiler_disabled_is_noop():
     profiler.start_rollout()
     profiler.add("agent_step", 1.0)
     assert profiler.current == {}
+
+
+def test_skill_switch_counter_uses_hactse_active_skills():
+    assert count_skill_switches_for_metrics(None, fallback_changed=False) == 0
+    assert count_skill_switches_for_metrics({}, fallback_changed=True) == 1
+    assert count_skill_switches_for_metrics(
+        {
+            "active_skill_prev": np.array([-1, -1]),
+            "active_skill": np.array([0, 1]),
+            "initial_assignment_mask": np.array([1.0, 1.0]),
+        },
+        fallback_changed=True,
+    ) == 0
+    assert count_skill_switches_for_metrics(
+        {
+            "active_skill_prev": np.array([0, 1, 2]),
+            "active_skill": np.array([0, 2, 0]),
+            "initial_assignment_mask": np.array([0.0, 0.0, 0.0]),
+        },
+        fallback_changed=True,
+    ) == 2
+
+
+def test_process_high_level_flow_detection():
+    assert uses_process_high_level_flow(
+        SimpleNamespace(use_process_exploration=True, use_discrete_skill_lifetimes=True)
+    )
+    assert not uses_process_high_level_flow(
+        SimpleNamespace(use_process_exploration=True, use_discrete_skill_lifetimes=False)
+    )
+    assert not uses_process_high_level_flow(SimpleNamespace())
+
+
+def test_log_skill_usage_accepts_switch_count(tmp_path):
+    tracker = make_tracker(tmp_path)
+    tracker.log_skill_usage(1, 0, [0, 1], switch_count=2)
+    tracker.log_skill_usage(2, 0, [0, 1], skill_changed=False)
+    assert tracker.skill_usage["skill_switches"] == 2

@@ -4,6 +4,7 @@ import time
 from collections import deque
 import random
 from logger import main_logger
+from hmasd.process_exploration import SkillProcessOutcomeExtractor
 
 class ReplayBuffer:
     """经验回放缓冲区，用于存储和采样训练数据"""
@@ -69,7 +70,20 @@ class RolloutBuffer:
     该缓冲区为每个环境维护一个独立的列表，用于存储一个完整rollout的数据。
     在每次训练更新后，缓冲区将被清空，确保新旧rollout数据完全隔离。
     """
-    def __init__(self, num_steps, num_envs, n_agents, obs_dim, action_dim, gru_hidden_size, n_Z, n_z, state_dim, action_space_type='continuous'):
+    def __init__(
+        self,
+        num_steps,
+        num_envs,
+        n_agents,
+        obs_dim,
+        action_dim,
+        gru_hidden_size,
+        n_Z,
+        n_z,
+        state_dim,
+        action_space_type='continuous',
+        compact_dim=0,
+    ):
         self.num_steps = num_steps
         self.num_envs = num_envs
         self.n_agents = n_agents
@@ -80,6 +94,7 @@ class RolloutBuffer:
         self.n_z = n_z
         self.state_dim = state_dim
         self.action_space_type = action_space_type
+        self.compact_dim = max(1, int(compact_dim or 0))
 
         self.reset()
         main_logger.info("已初始化重构后的RolloutBuffer，采用预分配数组存储。")
@@ -112,6 +127,7 @@ class RolloutBuffer:
         self.reward_env = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
         self.reward_team_disc = np.zeros_like(self.reward_env)
         self.reward_ind_disc = np.zeros_like(self.reward_env)
+        self.reward_process = np.zeros_like(self.reward_env)
 
         self.high_level_valid_mask = np.zeros((self.num_steps, self.num_envs), dtype=np.bool_)
         self.high_level_rewards = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
@@ -123,6 +139,31 @@ class RolloutBuffer:
         self.high_level_agent_log_probs = np.zeros(
             (self.num_steps, self.num_envs, self.n_agents), dtype=np.float32
         )
+        self.high_level_elapsed_steps = np.ones((self.num_steps, self.num_envs), dtype=np.int32)
+        self.high_level_terminal = np.zeros((self.num_steps, self.num_envs), dtype=np.bool_)
+        self.high_level_close_reason = np.zeros((self.num_steps, self.num_envs), dtype=np.int64)
+        self.compact = np.zeros((self.num_steps, self.num_envs, self.compact_dim), dtype=np.float32)
+        self.team_code = np.full((self.num_steps, self.num_envs), -1, dtype=np.int64)
+        self.log_prob_team_code = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
+        self.entropy_team_code = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
+        self.opt_aggregation_entropy = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
+        self.active_skill_prev = np.full((self.num_steps, self.num_envs, self.n_agents), -1, dtype=np.int64)
+        self.active_skill = np.full((self.num_steps, self.num_envs, self.n_agents), -1, dtype=np.int64)
+        self.candidate_skill = np.full((self.num_steps, self.num_envs, self.n_agents), -1, dtype=np.int64)
+        self.skill_age_prev = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.int64)
+        self.skill_age = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.int64)
+        self.duration_candidate = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.int64)
+        self.duration_target = np.ones((self.num_steps, self.num_envs, self.n_agents), dtype=np.int64)
+        self.duration_remaining = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.int64)
+        self.requested_edit_mask = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.executed_edit_mask = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.log_prob_term = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.log_prob_skill = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.log_prob_duration = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.entropy_term = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.entropy_skill = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.entropy_duration = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+        self.initial_assignment_mask = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
 
         self.advantages = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
         self.returns = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
@@ -143,7 +184,7 @@ class RolloutBuffer:
 
         main_logger.debug("RolloutBuffer已重置，预分配数组已清空。")
 
-    def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, critic_gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None):
+    def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, critic_gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None, reward_process=None):
         """
         将一个时间步的数据写入指定环境的预分配数组。
         增强了数据验证和错误处理。
@@ -204,6 +245,11 @@ class RolloutBuffer:
                 np.float32,
                 "reward_ind_disc",
             )
+            reward_process_arr = self._agent_vector(
+                reward_process if reward_process is not None else np.zeros(self.n_agents, dtype=np.float32),
+                np.float32,
+                "reward_process",
+            )
 
         except Exception as e:
             main_logger.error(f"数据类型转换失败: {e}")
@@ -233,10 +279,40 @@ class RolloutBuffer:
         self.reward_env[t, env_idx] = reward_env_arr
         self.reward_team_disc[t, env_idx] = reward_team_disc_arr
         self.reward_ind_disc[t, env_idx] = reward_ind_disc_arr
+        self.reward_process[t, env_idx] = reward_process_arr
         self._cached_rollout_data = None
         return True
 
-    def add_high_level_data(self, env_idx, time_step, state_value=None, agent_values=None, 
+    def add_process_rewards(self, env_idx, agent_idx, step_indices, rewards):
+        env_idx = int(env_idx)
+        agent_idx = int(agent_idx)
+        if env_idx < 0 or env_idx >= self.num_envs or agent_idx < 0 or agent_idx >= self.n_agents:
+            main_logger.error(f"add_process_rewards: 索引越界 env={env_idx}, agent={agent_idx}")
+            return 0
+        step_indices = np.asarray(step_indices, dtype=np.int64).reshape(-1)
+        rewards = np.asarray(rewards, dtype=np.float32).reshape(-1)
+        if rewards.size == 1 and step_indices.size > 1:
+            rewards = np.full(step_indices.size, float(rewards[0]), dtype=np.float32)
+        if rewards.size != step_indices.size:
+            main_logger.error(
+                f"add_process_rewards: rewards长度({rewards.size})与step_indices长度({step_indices.size})不匹配"
+            )
+            return 0
+        applied = 0
+        for step, reward in zip(step_indices, rewards):
+            step = int(step)
+            if step < 0 or step >= self.num_steps:
+                continue
+            if not self.masks[step, env_idx]:
+                continue
+            self.rewards[step, env_idx, agent_idx] += float(reward)
+            self.reward_process[step, env_idx, agent_idx] += float(reward)
+            applied += 1
+        if applied > 0:
+            self._cached_rollout_data = None
+        return applied
+
+    def add_high_level_data(self, env_idx, time_step, state_value=None, agent_values=None,
                            team_log_prob=None, agent_log_probs=None, accumulated_reward=None, **kwargs):
         """
         将高层策略数据更新到指定时间步的数组槽位中。
@@ -267,6 +343,54 @@ class RolloutBuffer:
             "high_level_agent_log_probs",
         )
         self.high_level_rewards[time_step, env_idx] = accumulated_reward if accumulated_reward is not None else 0.0
+        elapsed_steps = int(kwargs.get("elapsed_steps", 1) or 1)
+        self.high_level_elapsed_steps[time_step, env_idx] = max(1, elapsed_steps)
+        self.high_level_terminal[time_step, env_idx] = bool(kwargs.get("terminal", False))
+        self.high_level_close_reason[time_step, env_idx] = int(kwargs.get("close_reason_code", 0) or 0)
+
+        compact = kwargs.get("compact")
+        if compact is not None:
+            compact_arr = np.asarray(compact, dtype=np.float32).reshape(-1)
+            if compact_arr.size != self.compact_dim:
+                if compact_arr.size > self.compact_dim:
+                    compact_arr = compact_arr[:self.compact_dim]
+                else:
+                    compact_arr = np.pad(compact_arr, (0, self.compact_dim - compact_arr.size))
+            self.compact[time_step, env_idx] = compact_arr
+        self.team_code[time_step, env_idx] = int(kwargs.get("team_code", -1))
+        self.log_prob_team_code[time_step, env_idx] = float(kwargs.get("log_prob_team_code", 0.0))
+        self.entropy_team_code[time_step, env_idx] = float(kwargs.get("entropy_team_code", 0.0))
+        self.opt_aggregation_entropy[time_step, env_idx] = float(kwargs.get("opt_aggregation_entropy", 0.0))
+
+        agent_int_fields = {
+            "active_skill_prev": self.active_skill_prev,
+            "active_skill": self.active_skill,
+            "candidate_skill": self.candidate_skill,
+            "skill_age_prev": self.skill_age_prev,
+            "skill_age": self.skill_age,
+            "duration_candidate": self.duration_candidate,
+            "duration_target": self.duration_target,
+            "duration_remaining": self.duration_remaining,
+        }
+        for key, target in agent_int_fields.items():
+            if key in kwargs and kwargs[key] is not None:
+                target[time_step, env_idx] = self._agent_vector(kwargs[key], target.dtype, key)
+
+        agent_float_fields = {
+            "requested_edit_mask": self.requested_edit_mask,
+            "executed_edit_mask": self.executed_edit_mask,
+            "log_prob_term": self.log_prob_term,
+            "log_prob_skill": self.log_prob_skill,
+            "log_prob_duration": self.log_prob_duration,
+            "entropy_term": self.entropy_term,
+            "entropy_skill": self.entropy_skill,
+            "entropy_duration": self.entropy_duration,
+            "initial_assignment_mask": self.initial_assignment_mask,
+        }
+        for key, target in agent_float_fields.items():
+            if key in kwargs and kwargs[key] is not None:
+                target[time_step, env_idx] = self._agent_vector(kwargs[key], np.float32, key)
+
         self._cached_rollout_data = None
         return True
 
@@ -308,9 +432,35 @@ class RolloutBuffer:
             "high_level_agent_values": self.high_level_agent_values[sl],
             "high_level_team_log_probs": self.high_level_team_log_probs[sl],
             "high_level_agent_log_probs": self.high_level_agent_log_probs[sl],
+            "high_level_elapsed_steps": self.high_level_elapsed_steps[sl],
+            "high_level_terminal": self.high_level_terminal[sl],
+            "high_level_close_reason": self.high_level_close_reason[sl],
+            "compact": self.compact[sl],
+            "team_code": self.team_code[sl],
+            "log_prob_team_code": self.log_prob_team_code[sl],
+            "entropy_team_code": self.entropy_team_code[sl],
+            "opt_aggregation_entropy": self.opt_aggregation_entropy[sl],
+            "active_skill_prev": self.active_skill_prev[sl],
+            "active_skill": self.active_skill[sl],
+            "candidate_skill": self.candidate_skill[sl],
+            "skill_age_prev": self.skill_age_prev[sl],
+            "skill_age": self.skill_age[sl],
+            "duration_candidate": self.duration_candidate[sl],
+            "duration_target": self.duration_target[sl],
+            "duration_remaining": self.duration_remaining[sl],
+            "requested_edit_mask": self.requested_edit_mask[sl],
+            "executed_edit_mask": self.executed_edit_mask[sl],
+            "log_prob_term": self.log_prob_term[sl],
+            "log_prob_skill": self.log_prob_skill[sl],
+            "log_prob_duration": self.log_prob_duration[sl],
+            "entropy_term": self.entropy_term[sl],
+            "entropy_skill": self.entropy_skill[sl],
+            "entropy_duration": self.entropy_duration[sl],
+            "initial_assignment_mask": self.initial_assignment_mask[sl],
             "reward_env": self.reward_env[sl],
             "reward_team_disc": self.reward_team_disc[sl],
             "reward_ind_disc": self.reward_ind_disc[sl],
+            "reward_process": self.reward_process[sl],
         }
         self._cached_rollout_data = data
         self._profile["full_rollout_pack"] += time.perf_counter() - start_time
@@ -454,6 +604,14 @@ class RolloutBuffer:
         high_level_rewards = data["high_level_rewards"]
         high_level_state_values = data["high_level_state_values"]
         high_level_agent_values = data["high_level_agent_values"]
+        high_level_elapsed_steps = data.get(
+            "high_level_elapsed_steps",
+            np.ones_like(high_level_rewards, dtype=np.int32),
+        )
+        high_level_terminal = data.get(
+            "high_level_terminal",
+            np.zeros_like(high_level_valid_mask, dtype=np.bool_),
+        )
 
         for env_idx in range(self.num_envs):
             valid_steps = np.flatnonzero(high_level_valid_mask[:num_actual_steps, env_idx])
@@ -462,6 +620,12 @@ class RolloutBuffer:
 
             rewards_seq = high_level_rewards[valid_steps, env_idx]
             state_values_seq = high_level_state_values[valid_steps, env_idx]
+            elapsed_seq = np.maximum(
+                high_level_elapsed_steps[valid_steps, env_idx].astype(np.float32),
+                1.0,
+            )
+            discounts_seq = np.power(float(gamma), elapsed_seq).astype(np.float32)
+            dones_seq = high_level_terminal[valid_steps, env_idx].astype(np.float32)
 
             if value_normalizer is not None:
                 state_values_seq_real = state_values_seq * std + mean
@@ -473,10 +637,13 @@ class RolloutBuffer:
                 next_state_values_seq_real[:-1] = state_values_seq_real[1:]
             next_state_values_seq_real[-1] = last_state_values_real[env_idx]
 
-            dones_seq = np.zeros_like(state_values_seq_real, dtype=np.float32)
-
-            team_advantages, team_returns = self._compute_gae_torch(
-                rewards_seq, state_values_seq_real, next_state_values_seq_real, dones_seq, gamma, gae_lambda
+            team_advantages, team_returns = self._compute_gae_with_discounts_torch(
+                rewards_seq,
+                state_values_seq_real,
+                next_state_values_seq_real,
+                dones_seq,
+                discounts_seq,
+                gae_lambda,
             )
 
             for i, t in enumerate(valid_steps):
@@ -498,8 +665,13 @@ class RolloutBuffer:
                     next_agent_values_seq_real[:-1] = agent_values_seq_real[1:]
                 next_agent_values_seq_real[-1] = last_agent_values_real[env_idx, agent_idx]
 
-                agent_advantages, agent_returns = self._compute_gae_torch(
-                    rewards_seq, agent_values_seq_real, next_agent_values_seq_real, dones_seq, gamma, gae_lambda
+                agent_advantages, agent_returns = self._compute_gae_with_discounts_torch(
+                    rewards_seq,
+                    agent_values_seq_real,
+                    next_agent_values_seq_real,
+                    dones_seq,
+                    discounts_seq,
+                    gae_lambda,
                 )
                 for i, t in enumerate(valid_steps):
                     self.high_level_agent_advantages[t, env_idx, agent_idx] = agent_advantages[i].item()
@@ -513,6 +685,24 @@ class RolloutBuffer:
         next_values = torch.tensor(next_values, dtype=torch.float32)
         dones = torch.tensor(dones, dtype=torch.float32)
         return compute_gae(rewards, values, next_values, dones, gamma, lam)
+
+    def _compute_gae_with_discounts_torch(self, rewards, values, next_values, dones, discounts, lam):
+        rewards = torch.tensor(rewards, dtype=torch.float32)
+        values = torch.tensor(values, dtype=torch.float32)
+        next_values = torch.tensor(next_values, dtype=torch.float32)
+        dones = torch.tensor(dones, dtype=torch.float32)
+        discounts = torch.tensor(discounts, dtype=torch.float32)
+
+        advantages = torch.zeros_like(rewards)
+        last_gae = torch.tensor(0.0, dtype=torch.float32)
+        for t in reversed(range(len(rewards))):
+            non_terminal = 1.0 - dones[t]
+            effective_discount = discounts[t] * non_terminal
+            delta = rewards[t] + effective_discount * next_values[t] - values[t]
+            last_gae = delta + effective_discount * lam * last_gae
+            advantages[t] = last_gae
+        returns = advantages + values
+        return advantages, returns
 
     def get_all_high_level_returns(self, num_steps):
         """获取所有有效的高层回报，用于更新Value Normalization"""
@@ -608,6 +798,15 @@ class RolloutBuffer:
                 arr = arr.reshape(actual_chunk_length, num_chunks * E * self.n_agents, *remaining_dims)
                 return arr
 
+        def flatten_and_chunk_joint_observations(arr):
+            T, E, A, O = arr.shape
+            arr = arr[:effective_steps]
+            arr = np.expand_dims(arr, axis=2)
+            arr = np.repeat(arr, self.n_agents, axis=2)
+            arr = arr.reshape(num_chunks, actual_chunk_length, E, self.n_agents, A, O)
+            arr = arr.transpose(1, 0, 2, 3, 4, 5)
+            return arr.reshape(actual_chunk_length, num_chunks * E * self.n_agents, A, O)
+
         # 处理所有数据
         masks_flat = flatten_and_chunk_sequences(data["masks"], with_agent_dim=False)
         obs_flat = flatten_and_chunk_sequences(data["obs"])
@@ -618,6 +817,7 @@ class RolloutBuffer:
         value_preds_flat = flatten_and_chunk_sequences(data["values"])
         dones_flat = flatten_and_chunk_sequences(data["dones"])
         global_states_flat = flatten_and_chunk_sequences(data["states"], with_agent_dim=False)
+        joint_observations_flat = flatten_and_chunk_joint_observations(data["obs"])
         team_skills_flat = flatten_and_chunk_sequences(data["team_skills"], with_agent_dim=False)
         agent_skills_flat = flatten_and_chunk_sequences(data["agent_skills"])
         
@@ -652,6 +852,7 @@ class RolloutBuffer:
                 'returns': torch.as_tensor(returns_flat, dtype=torch.float32, device=device),
                 'value_preds': torch.as_tensor(value_preds_flat, dtype=torch.float32, device=device),
                 'global_states': torch.as_tensor(global_states_flat, dtype=torch.float32, device=device),
+                'joint_observations': torch.as_tensor(joint_observations_flat, dtype=torch.float32, device=device),
                 'team_skills': torch.as_tensor(team_skills_flat, dtype=torch.long, device=device),
                 'agent_skills': torch.as_tensor(agent_skills_flat, dtype=torch.long, device=device),
                 'initial_hxs': torch.as_tensor(initial_hxs_flat, dtype=torch.float32, device=device),
@@ -682,6 +883,7 @@ class RolloutBuffer:
                         'returns': tensor_cache['returns'][:, batch_tensor],
                         'value_preds': tensor_cache['value_preds'][:, batch_tensor],
                         'global_states': tensor_cache['global_states'][:, batch_tensor],
+                        'joint_observations': tensor_cache['joint_observations'][:, batch_tensor],
                         'team_skills': tensor_cache['team_skills'][:, batch_tensor],
                         'agent_skills': tensor_cache['agent_skills'][:, batch_tensor],
                         'initial_hxs': tensor_cache['initial_hxs'][batch_tensor],
@@ -698,6 +900,7 @@ class RolloutBuffer:
                         'returns': torch.from_numpy(returns_flat[:, batch_indices]).float(),
                         'value_preds': torch.from_numpy(value_preds_flat[:, batch_indices]).float(),
                         'global_states': torch.from_numpy(global_states_flat[:, batch_indices]).float(),
+                        'joint_observations': torch.from_numpy(joint_observations_flat[:, batch_indices]).float(),
                         'team_skills': torch.from_numpy(team_skills_flat[:, batch_indices]).long(),
                         'agent_skills': torch.from_numpy(agent_skills_batch).long(),
                         'initial_hxs': torch.from_numpy(initial_hxs_flat[batch_indices]).float(),
@@ -730,6 +933,31 @@ class RolloutBuffer:
                 'agent_skills': torch.as_tensor(data["agent_skills"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
                 'old_team_log_probs': torch.as_tensor(data["high_level_team_log_probs"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
                 'old_agent_log_probs': torch.as_tensor(data["high_level_agent_log_probs"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'high_level_elapsed_steps': torch.as_tensor(data["high_level_elapsed_steps"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'high_level_terminal': torch.as_tensor(data["high_level_terminal"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'high_level_close_reason': torch.as_tensor(data["high_level_close_reason"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'compact': torch.as_tensor(data["compact"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'team_code': torch.as_tensor(data["team_code"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'log_prob_team_code': torch.as_tensor(data["log_prob_team_code"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'entropy_team_code': torch.as_tensor(data["entropy_team_code"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'opt_aggregation_entropy': torch.as_tensor(data["opt_aggregation_entropy"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'active_skill_prev': torch.as_tensor(data["active_skill_prev"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'active_skill': torch.as_tensor(data["active_skill"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'candidate_skill': torch.as_tensor(data["candidate_skill"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'skill_age_prev': torch.as_tensor(data["skill_age_prev"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'skill_age': torch.as_tensor(data["skill_age"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'duration_candidate': torch.as_tensor(data["duration_candidate"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'duration_target': torch.as_tensor(data["duration_target"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'duration_remaining': torch.as_tensor(data["duration_remaining"][valid_time_steps, valid_env_indices], dtype=torch.long, device=device),
+                'requested_edit_mask': torch.as_tensor(data["requested_edit_mask"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'executed_edit_mask': torch.as_tensor(data["executed_edit_mask"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'log_prob_term': torch.as_tensor(data["log_prob_term"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'log_prob_skill': torch.as_tensor(data["log_prob_skill"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'log_prob_duration': torch.as_tensor(data["log_prob_duration"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'entropy_term': torch.as_tensor(data["entropy_term"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'entropy_skill': torch.as_tensor(data["entropy_skill"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'entropy_duration': torch.as_tensor(data["entropy_duration"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
+                'initial_assignment_mask': torch.as_tensor(data["initial_assignment_mask"][valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
                 'team_advantages': torch.as_tensor(self.high_level_team_advantages[valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
                 'agent_advantages': torch.as_tensor(self.high_level_agent_advantages[valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
                 'team_returns': torch.as_tensor(self.high_level_team_returns[valid_time_steps, valid_env_indices], dtype=torch.float32, device=device),
@@ -757,6 +985,31 @@ class RolloutBuffer:
                         'agent_skills': torch.from_numpy(data["agent_skills"][time_batch, env_batch]).long(),
                         'old_team_log_probs': torch.from_numpy(data["high_level_team_log_probs"][time_batch, env_batch]).float(),
                         'old_agent_log_probs': torch.from_numpy(data["high_level_agent_log_probs"][time_batch, env_batch]).float(),
+                        'high_level_elapsed_steps': torch.from_numpy(data["high_level_elapsed_steps"][time_batch, env_batch]).float(),
+                        'high_level_terminal': torch.from_numpy(data["high_level_terminal"][time_batch, env_batch]).float(),
+                        'high_level_close_reason': torch.from_numpy(data["high_level_close_reason"][time_batch, env_batch]).long(),
+                        'compact': torch.from_numpy(data["compact"][time_batch, env_batch]).float(),
+                        'team_code': torch.from_numpy(data["team_code"][time_batch, env_batch]).long(),
+                        'log_prob_team_code': torch.from_numpy(data["log_prob_team_code"][time_batch, env_batch]).float(),
+                        'entropy_team_code': torch.from_numpy(data["entropy_team_code"][time_batch, env_batch]).float(),
+                        'opt_aggregation_entropy': torch.from_numpy(data["opt_aggregation_entropy"][time_batch, env_batch]).float(),
+                        'active_skill_prev': torch.from_numpy(data["active_skill_prev"][time_batch, env_batch]).long(),
+                        'active_skill': torch.from_numpy(data["active_skill"][time_batch, env_batch]).long(),
+                        'candidate_skill': torch.from_numpy(data["candidate_skill"][time_batch, env_batch]).long(),
+                        'skill_age_prev': torch.from_numpy(data["skill_age_prev"][time_batch, env_batch]).long(),
+                        'skill_age': torch.from_numpy(data["skill_age"][time_batch, env_batch]).long(),
+                        'duration_candidate': torch.from_numpy(data["duration_candidate"][time_batch, env_batch]).long(),
+                        'duration_target': torch.from_numpy(data["duration_target"][time_batch, env_batch]).long(),
+                        'duration_remaining': torch.from_numpy(data["duration_remaining"][time_batch, env_batch]).long(),
+                        'requested_edit_mask': torch.from_numpy(data["requested_edit_mask"][time_batch, env_batch]).float(),
+                        'executed_edit_mask': torch.from_numpy(data["executed_edit_mask"][time_batch, env_batch]).float(),
+                        'log_prob_term': torch.from_numpy(data["log_prob_term"][time_batch, env_batch]).float(),
+                        'log_prob_skill': torch.from_numpy(data["log_prob_skill"][time_batch, env_batch]).float(),
+                        'log_prob_duration': torch.from_numpy(data["log_prob_duration"][time_batch, env_batch]).float(),
+                        'entropy_term': torch.from_numpy(data["entropy_term"][time_batch, env_batch]).float(),
+                        'entropy_skill': torch.from_numpy(data["entropy_skill"][time_batch, env_batch]).float(),
+                        'entropy_duration': torch.from_numpy(data["entropy_duration"][time_batch, env_batch]).float(),
+                        'initial_assignment_mask': torch.from_numpy(data["initial_assignment_mask"][time_batch, env_batch]).float(),
                         'team_advantages': torch.from_numpy(self.high_level_team_advantages[time_batch, env_batch]).float(),
                         'agent_advantages': torch.from_numpy(self.high_level_agent_advantages[time_batch, env_batch]).float(),
                         'team_returns': torch.from_numpy(self.high_level_team_returns[time_batch, env_batch]).float(),
@@ -764,10 +1017,160 @@ class RolloutBuffer:
                         'values': torch.from_numpy(data["high_level_state_values"][time_batch, env_batch]).float(),
                     }
 
+class SkillProcessSegmentBuffer:
+    """Tracks variable-duration executed skill process segments.
+
+    This buffer is intentionally diagnostic/data-contract only. It does not
+    alter rewards; process rewards should be added only after segment closure
+    and labeling are verified.
+    """
+
+    def __init__(self, capacity=20000, max_segment_len=250, outcome_extractor=None):
+        self.capacity = int(capacity)
+        self.max_segment_len = int(max_segment_len)
+        self.active = {}
+        self.completed = deque(maxlen=self.capacity)
+        self.outcome_extractor = outcome_extractor
+
+    def reset(self):
+        self.active.clear()
+        self.completed.clear()
+
+    def _key(self, env_id, agent_id):
+        return int(env_id), int(agent_id)
+
+    def open_segment(self, env_id, agent_id, skill, team_code, compact=None,
+                     start_step=0, duration_target=0):
+        key = self._key(env_id, agent_id)
+        if key in self.active:
+            self.close_segment(env_id, agent_id, reason="reopen", end_step=start_step)
+        compact_arr = None if compact is None else np.asarray(compact, dtype=np.float32).copy()
+        self.active[key] = {
+            "env_id": int(env_id),
+            "agent_id": int(agent_id),
+            "skill": int(skill),
+            "team_code": int(team_code),
+            "compact": compact_arr,
+            "start_step": int(start_step),
+            "end_step": int(start_step),
+            "duration_target": int(duration_target),
+            "obs_seq": [],
+            "next_obs_seq": [],
+            "action_seq": [],
+            "reward_seq": [],
+            "done_seq": [],
+            "reward_info_seq": [],
+            "step_seq": [],
+            "close_reason": None,
+        }
+
+    def append_transition(self, env_id, agent_id, obs, action, reward, done,
+                          next_obs=None, step=None, reward_info=None):
+        key = self._key(env_id, agent_id)
+        segment = self.active.get(key)
+        if segment is None:
+            return False
+        if len(segment["reward_seq"]) >= self.max_segment_len:
+            self.close_segment(env_id, agent_id, reason="max_len", end_step=step)
+            return False
+        segment["obs_seq"].append(np.asarray(obs, dtype=np.float32).copy())
+        segment["next_obs_seq"].append(
+            np.asarray(next_obs if next_obs is not None else obs, dtype=np.float32).copy()
+        )
+        segment["action_seq"].append(np.asarray(action).copy())
+        segment["reward_seq"].append(float(reward))
+        segment["done_seq"].append(bool(done))
+        segment["reward_info_seq"].append(dict(reward_info) if isinstance(reward_info, dict) else {})
+        if step is not None:
+            segment["step_seq"].append(int(step))
+            segment["end_step"] = int(step)
+        return True
+
+    def close_segment(self, env_id, agent_id, reason="closed", end_step=None):
+        key = self._key(env_id, agent_id)
+        segment = self.active.pop(key, None)
+        if segment is None:
+            return None
+        if end_step is not None:
+            segment["end_step"] = int(end_step)
+        segment["close_reason"] = str(reason)
+        segment["length"] = len(segment["reward_seq"])
+        segment["return"] = float(np.sum(segment["reward_seq"])) if segment["reward_seq"] else 0.0
+        if self.outcome_extractor is not None:
+            segment.update(self.outcome_extractor.transform_segment(segment, update=True))
+        self.completed.append(segment)
+        return segment
+
+    def close_env_segments(self, env_id, reason="env_done", end_step=None):
+        closed = []
+        keys = [key for key in self.active if key[0] == int(env_id)]
+        for _, agent_id in keys:
+            segment = self.close_segment(env_id, agent_id, reason=reason, end_step=end_step)
+            if segment is not None:
+                closed.append(segment)
+        return closed
+
+    def get_completed_segments(self):
+        return list(self.completed)
+
+    def stats(self):
+        completed = list(self.completed)
+        lengths = np.asarray([seg.get("length", 0) for seg in completed], dtype=np.float32)
+        returns = np.asarray([seg.get("return", 0.0) for seg in completed], dtype=np.float32)
+        durations = {}
+        for seg in completed:
+            target = int(seg.get("duration_target", 0))
+            durations[target] = durations.get(target, 0) + 1
+        stats = {
+            "process_segments_open": len(self.active),
+            "process_segments_completed": len(completed),
+            "process_segment_length_mean": float(lengths.mean()) if lengths.size else 0.0,
+            "process_segment_length_max": float(lengths.max()) if lengths.size else 0.0,
+            "process_segment_return_mean": float(returns.mean()) if returns.size else 0.0,
+            "process_duration_target_histogram": durations,
+        }
+        if self.outcome_extractor is not None:
+            field_names = self.outcome_extractor.FIELD_NAMES
+            masks = [
+                np.asarray(seg.get("outcome_mask"), dtype=np.bool_)
+                for seg in completed
+                if "outcome_mask" in seg
+            ]
+            normalized = [
+                np.asarray(seg.get("outcome_normalized"), dtype=np.float32)
+                for seg in completed
+                if "outcome_normalized" in seg
+            ]
+            if masks:
+                mask_arr = np.stack(masks, axis=0)
+                availability = mask_arr.mean(axis=0)
+                stats["process_outcome_available_rate"] = float(mask_arr.mean())
+                stats["process_outcome_field_availability"] = {
+                    field_names[idx]: float(availability[idx])
+                    for idx in range(len(field_names))
+                }
+            else:
+                stats["process_outcome_available_rate"] = 0.0
+                stats["process_outcome_field_availability"] = {
+                    field: 0.0 for field in field_names
+                }
+            if normalized:
+                norm_arr = np.stack(normalized, axis=0)
+                stats["process_outcome_norm_mean_abs"] = float(np.mean(np.abs(norm_arr)))
+                stats["process_outcome_norm_max_abs"] = float(np.max(np.abs(norm_arr)))
+            else:
+                stats["process_outcome_norm_mean_abs"] = 0.0
+                stats["process_outcome_norm_max_abs"] = 0.0
+        return stats
+
+
 class DiscriminatorBuffer:
     """
-    独立的、Off-Policy的判别器经验回放缓冲区。
-    存储状态-技能对，用于训练判别器网络。
+    判别器当前rollout缓存。
+
+    该缓存只保存当前策略版本采集到的状态-技能对，并在每次
+    policy/discriminator update 后清空；不要把它当作跨update复用的
+    off-policy replay buffer。
     """
     def __init__(self, capacity):
         """
@@ -780,7 +1183,7 @@ class DiscriminatorBuffer:
         self.capacity = capacity
         self._total_added = 0
         self._total_sampled = 0
-        main_logger.info(f"初始化Off-Policy判别器Buffer，最大容量: {capacity}")
+        main_logger.info(f"初始化On-Policy判别器Rollout缓存，最大容量: {capacity}")
 
     def push(self, experience):
         """

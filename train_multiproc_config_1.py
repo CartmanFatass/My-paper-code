@@ -58,6 +58,33 @@ def normalize_scenario(scenario):
     return aliases[scenario_key]
 
 
+def count_skill_switches_for_metrics(log_probs, fallback_changed=False):
+    """Count real skill switches for training metrics."""
+    if not fallback_changed:
+        return 0
+
+    if isinstance(log_probs, dict) and 'active_skill_prev' in log_probs and 'active_skill' in log_probs:
+        prev = np.asarray(log_probs.get('active_skill_prev'))
+        active = np.asarray(log_probs.get('active_skill'))
+        if prev.shape == active.shape:
+            initial = np.asarray(
+                log_probs.get('initial_assignment_mask', np.zeros_like(active, dtype=np.float32)),
+                dtype=np.float32,
+            )
+            normal_mask = (prev >= 0) & (initial < 0.5)
+            return int(np.sum((active != prev) & normal_mask))
+
+    return int(bool(fallback_changed))
+
+
+def uses_process_high_level_flow(config):
+    """Return True when high-level samples are closed by process duration, not fixed k."""
+    return bool(
+        getattr(config, 'use_process_exploration', False)
+        and getattr(config, 'use_discrete_skill_lifetimes', False)
+    )
+
+
 def validate_scenario7_configuration(config, args, env=None):
     """Fail fast when Scenario 7 is launched with an incompatible interface."""
     if normalize_scenario(getattr(args, "scenario", "base")) != "energy":
@@ -1137,6 +1164,87 @@ class TensorBoardManager:
         # CD Loss
         if 'cd_loss' in update_info:
             self.writer.add_scalar('Losses/Coordinator/CD_Loss', update_info['cd_loss'], step)
+        if 'opt_cd_loss' in update_info:
+            self.writer.add_scalar('HA_CTSE/OPT/CD_Loss', update_info['opt_cd_loss'], step)
+        if 'cmi_loss' in update_info:
+            self.writer.add_scalar('Losses/Coordinator/CMI_Loss', update_info['cmi_loss'], step)
+        if 'opt_cmi_loss' in update_info:
+            self.writer.add_scalar('HA_CTSE/OPT/CMI_Loss', update_info['opt_cmi_loss'], step)
+
+        ha_ctse_scalar_tags = {
+            'avg_requested_edits': 'HA_CTSE/Editing/RequestedEdits_Mean',
+            'avg_executed_edits': 'HA_CTSE/Editing/ExecutedEdits_Mean',
+            'avg_switched_agents': 'HA_CTSE/Editing/SwitchedAgents_Mean',
+            'no_edit_rate': 'HA_CTSE/Editing/NoEdit_Rate',
+            'full_sync_rate': 'HA_CTSE/Editing/FullSync_Rate',
+            'suppressed_edit_rate': 'HA_CTSE/Editing/SuppressedEdit_Rate',
+            'initial_assignment_rate': 'HA_CTSE/Editing/InitialAssignment_Rate',
+            'skill_age_mean': 'HA_CTSE/Horizon/SkillAge_Mean',
+            'skill_persistence_cycles_mean': 'HA_CTSE/Horizon/PersistenceCycles_Mean',
+            'H_min_masked_edit_rate': 'HA_CTSE/Horizon/HMinMaskedEdit_Rate',
+            'H_max_forced_termination_rate': 'HA_CTSE/Horizon/HMaxForcedTermination_Rate',
+            'termination_rate': 'HA_CTSE/Horizon/Termination_Rate',
+            'lifetime_heterogeneity': 'HA_CTSE/Horizon/LifetimeHeterogeneity',
+            'compact_norm_mean': 'HA_CTSE/Compact/Norm_Mean',
+            'compact_norm_std': 'HA_CTSE/Compact/Norm_Std',
+            'team_code_entropy': 'HA_CTSE/Bridge/TeamCodeEntropy',
+            'term_policy_entropy': 'HA_CTSE/Policy/TerminationEntropy',
+            'skill_policy_entropy': 'HA_CTSE/Policy/SkillEntropy',
+            'duration_policy_entropy': 'HA_CTSE/Duration/DurationEntropy',
+            'duration_remaining_mean': 'HA_CTSE/Duration/Remaining_Mean',
+            'duration_target_mean': 'HA_CTSE/Duration/Target_Mean',
+            'high_level_elapsed_steps_mean': 'HA_CTSE/Replay/HighLevelElapsedSteps_Mean',
+            'high_level_elapsed_steps_max': 'HA_CTSE/Replay/HighLevelElapsedSteps_Max',
+            'high_level_terminal_rate': 'HA_CTSE/Replay/HighLevelTerminal_Rate',
+            'process_segments_open': 'HA_CTSE/Process/SegmentsOpen',
+            'process_segments_completed': 'HA_CTSE/Process/SegmentsCompleted',
+            'process_segment_length_mean': 'HA_CTSE/Process/SegmentLength_Mean',
+            'process_segment_length_max': 'HA_CTSE/Process/SegmentLength_Max',
+            'process_segment_return_mean': 'HA_CTSE/Process/SegmentReturn_Mean',
+            'process_outcome_available_rate': 'HA_CTSE/ProcessOutcome/AvailableRate',
+            'process_outcome_norm_mean_abs': 'HA_CTSE/ProcessOutcome/NormMeanAbs',
+            'process_outcome_norm_max_abs': 'HA_CTSE/ProcessOutcome/NormMaxAbs',
+            'process_encoder_loss': 'HA_CTSE/ProcessTraining/EncoderLoss',
+            'process_outcome_loss': 'HA_CTSE/ProcessTraining/OutcomeLoss',
+            'process_contrastive_loss': 'HA_CTSE/ProcessTraining/ContrastiveLoss',
+            'process_contrastive_accuracy': 'HA_CTSE/ProcessTraining/ContrastiveAccuracy',
+            'process_duration_only_accuracy': 'HA_CTSE/ProcessTraining/DurationOnlyAccuracy',
+            'process_reward_mean': 'HA_CTSE/Discoverer/ProcessReward_Mean',
+            'process_reward_abs_mean': 'HA_CTSE/Discoverer/ProcessReward_AbsMean',
+            'process_reward_applied_steps': 'HA_CTSE/Discoverer/ProcessReward_AppliedSteps',
+            'process_segments_trained': 'HA_CTSE/ProcessTraining/SegmentsTrained',
+            'horizon_penalty_scale': 'HA_CTSE/Horizon/PenaltyWarmupScale',
+            'switch_penalty_scale': 'HA_CTSE/Horizon/SwitchPenaltyWarmupScale',
+            'entropy_coef_team_code': 'HA_CTSE/EntropyCoef/TeamCode',
+            'entropy_coef_term': 'HA_CTSE/EntropyCoef/Termination',
+            'entropy_coef_skill': 'HA_CTSE/EntropyCoef/Skill',
+            'entropy_coef_low_level': 'HA_CTSE/EntropyCoef/LowLevelAction',
+            'opt_aggregation_entropy_update': 'HA_CTSE/OPT/AggregationEntropy_Update',
+        }
+        for key, tag in ha_ctse_scalar_tags.items():
+            if key in update_info:
+                self.writer.add_scalar(tag, update_info[key], step)
+
+        team_code_hist = update_info.get('team_code_usage_histogram')
+        if isinstance(team_code_hist, dict):
+            for code, count in team_code_hist.items():
+                self.writer.add_scalar(f'HA_CTSE/Bridge/TeamCodeUsage_{code}', count, step)
+        duration_hist = update_info.get('duration_target_histogram')
+        if isinstance(duration_hist, dict):
+            for duration, count in duration_hist.items():
+                self.writer.add_scalar(f'HA_CTSE/Duration/DurationUsage_{duration}', count, step)
+        process_duration_hist = update_info.get('process_duration_target_histogram')
+        if isinstance(process_duration_hist, dict):
+            for duration, count in process_duration_hist.items():
+                self.writer.add_scalar(f'HA_CTSE/Process/CompletedDuration_{duration}', count, step)
+        outcome_availability = update_info.get('process_outcome_field_availability')
+        if isinstance(outcome_availability, dict):
+            for field_name, availability in outcome_availability.items():
+                self.writer.add_scalar(f'HA_CTSE/ProcessOutcome/Available_{field_name}', availability, step)
+        close_reason_hist = update_info.get('high_level_close_reason_histogram')
+        if isinstance(close_reason_hist, dict):
+            for reason_code, count in close_reason_hist.items():
+                self.writer.add_scalar(f'HA_CTSE/Replay/CloseReason_{reason_code}', count, step)
 
         # 记录关键超参数
         self.writer.add_scalar('Parameters/Lambda_D', self.config.lambda_D, step)
@@ -2477,15 +2585,16 @@ class EnhancedRewardTracker:
                 'max': np.max(self.recent_rewards)
             })
     
-    def log_skill_usage(self, step, team_skill, agent_skills, skill_changed=False):
+    def log_skill_usage(self, step, team_skill, agent_skills, skill_changed=False, switch_count=None):
         """记录技能使用情况"""
         self.skill_usage['team_skills'][team_skill] += 1
         
         for i, skill in enumerate(agent_skills):
             self.skill_usage['agent_skills'][i][skill] += 1
         
-        if skill_changed:
-            self.skill_usage['skill_switches'] += 1
+        if switch_count is None:
+            switch_count = int(bool(skill_changed))
+        self.skill_usage['skill_switches'] += int(max(0, switch_count))
         
         # 计算技能多样性
         unique_skills = len(set(agent_skills))
@@ -3930,6 +4039,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     check_interval_steps = config.batch_size * num_envs  # 检查间隔步数
     warning_threshold_ratio = 0.1  # 如果实际样本数少于预期的10%，则发出警告
     error_threshold_steps = config.k * num_envs * 10  # 足够执行10个完整技能周期的步数
+    process_high_level_flow = uses_process_high_level_flow(config)
     
     # 记录训练开始时间
     start_time = time.time()
@@ -4084,6 +4194,18 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         info=infos[i],
                         metrics_level=args.training_metrics_level
                     )
+
+                switch_count = count_skill_switches_for_metrics(
+                    step_data['log_probs'][i] if step_data.get('log_probs') is not None else None,
+                    fallback_changed=bool(step_data['skill_changed'][i]),
+                )
+                reward_tracker.log_skill_usage(
+                    total_steps + i,
+                    int(step_data['team_skills'][i]),
+                    np.asarray(step_data['agent_skills'][i], dtype=np.int64).tolist(),
+                    skill_changed=switch_count > 0,
+                    switch_count=switch_count,
+                )
 
                 # 更新追踪器
                 env_steps[i] += 1
@@ -4533,62 +4655,75 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         # 加强高层样本的累积情况监控
         phase_start = time.perf_counter() if training_profiler.enabled else 0.0
         if getattr(agent, 'collects_high_level_samples', True) and total_steps >= last_check_total_steps + check_interval_steps:
-                # 获取当前高层缓冲区大小 (从统一的rollout buffer中计算)
-                num_steps_in_buffer = config.rollout_length
-                current_high_level_buffer_size = agent.high_level_samples_total
-                
-                # 从agent获取总收集的高层样本数(现在总是准确的，不受缓冲区满的影响)
-                current_high_level_samples_total = agent.high_level_samples_total
-                
-                # 计算自上次检查以来的步数和增加的高层样本数
-                steps_since_last_check = total_steps - last_check_total_steps
-                parallel_steps_since_last_check = steps_since_last_check // num_envs
-                samples_since_last_check = current_high_level_samples_total - last_check_hl_samples
-                
-                # 记录样本收集情况
-                main_logger.debug(f"高层样本收集统计: 当前总样本数={current_high_level_samples_total}, "
-                               f"上次检查时样本数={last_check_hl_samples}, 新增样本数={samples_since_last_check}")
-                
-                # 更改理论期望样本计算：每k个时间步应该产生一个高层样本
-                # 考虑到不同环境可能步调不一致，使用更宽松的期望值
-                min_expected_environments = num_envs * 0.5  # 假设至少一半的环境应该贡献样本
+            current_high_level_buffer_size = agent.high_level_samples_total
+            current_high_level_samples_total = agent.high_level_samples_total
+            steps_since_last_check = total_steps - last_check_total_steps
+            parallel_steps_since_last_check = steps_since_last_check // num_envs
+            samples_since_last_check = current_high_level_samples_total - last_check_hl_samples
+
+            main_logger.debug(
+                f"高层样本收集统计: 当前总样本数={current_high_level_samples_total}, "
+                f"上次检查时样本数={last_check_hl_samples}, 新增样本数={samples_since_last_check}"
+            )
+
+            high_level_samples_by_env = getattr(agent, 'high_level_samples_by_env', {})
+            high_level_samples_by_reason = getattr(agent, 'high_level_samples_by_reason', {})
+            contributing_envs = sum(1 for count in high_level_samples_by_env.values() if count > 0)
+
+            if process_high_level_flow:
+                process_stats = {}
+                process_segment_buffer = getattr(agent, 'process_segment_buffer', None)
+                if process_segment_buffer is not None and hasattr(process_segment_buffer, 'stats'):
+                    process_stats = process_segment_buffer.stats()
+                duration_remaining = getattr(agent, 'env_skill_duration_remaining', {})
+                remaining_values = []
+                for value in duration_remaining.values():
+                    if value is not None:
+                        remaining_values.extend(np.asarray(value, dtype=np.float32).reshape(-1).tolist())
+                remaining_mean = float(np.mean(remaining_values)) if remaining_values else 0.0
+                remaining_max = float(np.max(remaining_values)) if remaining_values else 0.0
+
+                main_logger.info(
+                    "HA-CTSE过程高层样本诊断: "
+                    f"总步数={total_steps}, 并行步数={total_steps//num_envs}, "
+                    f"新增闭合样本={samples_since_last_check}, "
+                    f"累计闭合样本={current_high_level_samples_total}, "
+                    f"贡献过样本的环境数={contributing_envs}/{num_envs}, "
+                    f"duration_remaining_mean={remaining_mean:.2f}, "
+                    f"duration_remaining_max={remaining_max:.2f}, "
+                    f"process_stats={process_stats}"
+                )
+                main_logger.debug(f"HA-CTSE过程高层样本闭合原因: {high_level_samples_by_reason}")
+            else:
+                # Legacy HMASD fixed-k monitor: only valid when high-level samples
+                # are expected at regular k-step boundaries.
+                min_expected_environments = num_envs * 0.5
                 expected_samples_min = (parallel_steps_since_last_check / config.k) * min_expected_environments
-                
-                # 获取智能体中的样本收集统计
-                high_level_samples_by_env = getattr(agent, 'high_level_samples_by_env', {})
-                high_level_samples_by_reason = getattr(agent, 'high_level_samples_by_reason', {})
-                
-                # 统计各环境的技能计时器状态和奖励累积，以便排查问题
+
                 env_timers_status = {env_id: agent.env_timers.get(env_id, -1) for env_id in range(num_envs)}
                 env_rewards_status = {env_id: agent.env_reward_sums.get(env_id, -1.0) for env_id in range(num_envs)}
-                
-                # 分析样本收集情况
-                contributing_envs = sum(1 for count in high_level_samples_by_env.values() if count > 0)
-                
-                # 记录当前检查点的统计信息（增加环境分析）
-                main_logger.info(f"高层样本累积检查: 总步数: {total_steps}, 并行步数: {total_steps//num_envs}, "
-                     f"自上次检查增加的高层样本数: {samples_since_last_check}, "
-                     f"当前高层缓冲区大小: {current_high_level_buffer_size}/(需要{config.high_level_batch_size}), "
-                     f"正在贡献的环境数: {contributing_envs}/{num_envs}")
-                
-                # 记录详细统计信息
+
+                main_logger.info(
+                    f"高层样本累积检查: 总步数: {total_steps}, 并行步数: {total_steps//num_envs}, "
+                    f"自上次检查增加的高层样本数: {samples_since_last_check}, "
+                    f"当前高层缓冲区大小: {current_high_level_buffer_size}/(需要{config.high_level_batch_size}), "
+                    f"正在贡献的环境数: {contributing_envs}/{num_envs}"
+                )
                 main_logger.info(f"高层样本收集原因: {high_level_samples_by_reason}")
                 main_logger.info(f"环境技能计时器状态: {env_timers_status}")
                 main_logger.info(f"环境奖励累积状态: {env_rewards_status}")
-                
-                # 检查是否有环境未贡献样本
-                non_contributing_envs = [env_id for env_id in range(num_envs) 
-                                         if high_level_samples_by_env.get(env_id, 0) == 0]
+
+                non_contributing_envs = [
+                    env_id for env_id in range(num_envs)
+                    if high_level_samples_by_env.get(env_id, 0) == 0
+                ]
                 if non_contributing_envs:
                     main_logger.warning(f"存在{len(non_contributing_envs)}个环境未贡献高层样本: {non_contributing_envs}")
-                    
-                    # 对未贡献样本的环境强制收集
                     for env_id in non_contributing_envs:
                         if hasattr(agent, 'force_high_level_collection'):
                             agent.force_high_level_collection[env_id] = True
                             main_logger.info(f"已标记环境{env_id}强制收集高层样本")
-                
-                # 如果自上次检查以来收集样本很少，发出警告
+
                 if parallel_steps_since_last_check > config.k * 2 and samples_since_last_check < 1:
                     warning_msg = (
                         f"警告：高层经验累积速度不足！\n"
@@ -4596,8 +4731,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         f"没有收集到高层样本。"
                     )
                     main_logger.warning(warning_msg)
-                
-                # 如果长时间内高层样本几乎没有增长，记录严重错误但不中断训练
+
                 if parallel_steps_since_last_check > config.k * 5 and samples_since_last_check == 0:
                     error_msg = (
                         f"高层经验累积速度严重不足！\n"
@@ -4607,17 +4741,14 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                         f"当前高层缓冲区总大小: {current_high_level_buffer_size} (批次需求: {config.high_level_batch_size})。"
                     )
                     main_logger.error(error_msg)
-                    
-                    # 修改：不再中断训练，而是尝试通过循环强制收集
                     if hasattr(agent, 'force_high_level_collection'):
                         for env_id in range(num_envs):
                             agent.force_high_level_collection[env_id] = True
                         main_logger.info("已强制标记所有环境在下一个技能周期结束时贡献样本")
-                
-                # 更新检查点变量
-                last_check_total_steps = total_steps
-                last_check_hl_samples = current_high_level_samples_total
-                last_high_level_buffer_size = current_high_level_buffer_size
+
+            last_check_total_steps = total_steps
+            last_check_hl_samples = current_high_level_samples_total
+            last_high_level_buffer_size = current_high_level_buffer_size
                 
         if training_profiler.enabled:
             training_profiler.add('post_rollout', time.perf_counter() - phase_start)
