@@ -10,6 +10,9 @@ from typing import Any
 
 import numpy as np
 
+from ha_ctse_process.cooperation_credit import COOPERATION_CREDIT_FIELDS
+from ha_ctse_process.topology_potential import TOPOLOGY_POTENTIAL_FIELDS
+
 try:
     import matplotlib
 
@@ -116,6 +119,12 @@ COMM_METRIC_FIELDS = (
     "routing_overhead",
 )
 
+DERIVED_EVAL_FIELDS = (
+    "backhaul_connected_flag",
+    "backhaul_connected_step_fraction",
+    "throughput_when_backhaul_connected_mbps",
+)
+
 
 UPDATE_FIELDS = (
     "update",
@@ -128,12 +137,126 @@ UPDATE_FIELDS = (
     "process_prior_loss",
     "process_posterior_acc",
     "process_mi_estimate_mean",
+    "process_residual_mi_mean",
+    "process_residual_mi_positive_frac",
+    "process_residual_log_shortcut_mean",
+    "process_residual_log_context_mean",
     "process_log_q_mean",
     "process_log_p_mean",
+    "process_shortcut_loss",
+    "process_shortcut_context_loss",
+    "process_shortcut_margin_loss",
+    "process_reward_warmup_active",
+    "transition_skill_samples",
+    "transition_skill_available_samples",
+    "transition_skill_loss",
+    "transition_skill_prior_loss",
+    "transition_skill_context_loss",
+    "transition_skill_acc",
+    "transition_skill_context_acc",
+    "transition_skill_mi_mean",
+    "transition_skill_mi_positive_frac",
+    "transition_skill_residual_mi_mean",
+    "transition_skill_residual_mi_positive_frac",
+    "transition_skill_reward_mean",
+    "transition_skill_reward_active",
+    "transition_skill_log_q_mean",
+    "transition_skill_log_p_mean",
+    "transition_skill_log_context_mean",
+    "transition_skill_reward_unclipped_mean",
+    "transition_skill_reward_warmup_active",
+    "intrinsic_segment_high_gate_active",
+    "intrinsic_segment_high_gate_score",
+    "intrinsic_segment_high_gate_posterior_minus_shortcut",
+    "intrinsic_segment_high_gate_residual_mi",
+    "intrinsic_segment_high_gate_segment_count",
+    "intrinsic_segment_high_gate_reason_code",
+    "process_shortcut_duration_acc",
+    "process_shortcut_length_acc",
+    "process_shortcut_reward_sum_acc",
+    "process_shortcut_context_acc",
+    "process_shortcut_max_acc",
+    "posterior_acc_minus_shortcut_max",
+    "posterior_acc_minus_context_shortcut",
+    "process_reward_mi_component_mean",
+    "process_reward_outcome_penalty_mean",
+    "process_reward_unclipped_mean",
+    "process_mi_positive_frac",
     "process_reward_mean",
+    "process_reward_high_mean",
+    "process_reward_low_mean",
+    "semantic_shortcut_hard_stop_triggered",
+    "semantic_shortcut_hard_stop_applied",
+    "semantic_shortcut_hard_stop_score",
+    "semantic_shortcut_hard_stop_reason_code",
     "outcome_available_mean",
     "outcome_abs_mean",
+    "outcome_residual_full_loss",
+    "outcome_residual_base_loss",
+    "outcome_residual_total_loss",
+    "outcome_residual_gain_mean",
+    "outcome_residual_gain_positive_frac",
+    "outcome_residual_available_mean",
+    "outcome_residual_target_abs_mean",
+    "outcome_residual_reward_mean",
+    "outcome_residual_reward_active",
+    "outcome_residual_reward_unclipped_mean",
+    "outcome_residual_skill_gain_std",
+    "outcome_residual_team_gain_std",
+    "outcome_residual_duration_gain_std",
+    "outcome_residual_gain_coverage_delta_h",
+    "outcome_residual_gain_qos_delta_h",
+    "outcome_residual_gain_full_disconnect_improvement_h",
+    "outcome_residual_gain_relay_margin_delta_h",
+    "outcome_residual_gain_connected_components_improvement_h",
+    "outcome_residual_gain_teammate_service_gain_h",
+    "outcome_residual_gain_bottleneck_link_gain_h",
+    "topology_role_samples",
+    "topology_role_available_frac",
+    "topology_role_loss",
+    "topology_role_full_loss",
+    "topology_role_shortcut_loss",
+    "topology_role_acc",
+    "topology_role_shortcut_acc",
+    "topology_role_resid_gain_mean",
+    "topology_role_resid_gain_positive_frac",
+    "topology_role_reward_mean",
+    "topology_role_reward_active",
+    "topology_role_reward_unclipped_mean",
+    "topology_role_z_mi",
+    "topology_role_g_mi",
+    "topology_role_frac_idle",
+    "topology_role_frac_relay",
+    "topology_role_frac_service",
+    "topology_role_frac_relay_service",
+    "topology_cf_backhaul_start_mean",
+    "topology_cf_backhaul_mean_mean",
+    "topology_cf_backhaul_max_mean",
+    "topology_cf_backhaul_delta_mean",
+    "topology_cf_components_start_mean",
+    "topology_cf_components_mean_mean",
+    "topology_cf_components_max_mean",
+    "topology_cf_components_delta_mean",
+    "topology_cf_disconnect_start_mean",
+    "topology_cf_disconnect_mean_mean",
+    "topology_cf_disconnect_max_mean",
+    "topology_cf_disconnect_delta_mean",
+    "topology_service_start_mean",
+    "topology_service_mean_mean",
+    "topology_service_max_mean",
+    "topology_service_delta_mean",
+    "topology_coverage_delta_mean",
+    "topology_qos_delta_mean",
+    "topology_battery_start_mean",
+    "topology_battery_delta_mean",
+    "topology_length_log_mean",
+    *TOPOLOGY_POTENTIAL_FIELDS,
     "duration_only_accuracy",
+    "length_only_accuracy",
+    "reward_sum_only_accuracy",
+    "posterior_acc_minus_duration_only",
+    "posterior_acc_minus_length_only",
+    "posterior_acc_minus_reward_sum_only",
     "skill_switch_rate",
     "segment_length_mean",
     "segment_length_max",
@@ -146,6 +269,12 @@ UPDATE_FIELDS = (
     "team_code_usage_entropy",
     "team_code_usage_max_frac",
     "team_code_skill_mi",
+    "g_intervention_kl_active",
+    "g_intervention_kl_samples",
+    "g_intervention_kl_mean",
+    "g_intervention_kl_max",
+    "g_intervention_tv_mean",
+    *COOPERATION_CREDIT_FIELDS,
     "high_loss",
     "high_policy_loss",
     "high_value_loss",
@@ -153,6 +282,13 @@ UPDATE_FIELDS = (
     "high_aux_loss",
     "high_entropy",
     "high_return_mean",
+    "high_env_return_mean",
+    "high_bootstrap_value_mean",
+    "high_bootstrap_contribution_mean",
+    "high_smdp_discount_mean",
+    "high_value_norm_mean",
+    "high_value_norm_std",
+    "high_grad_norm",
     "team_code_entropy",
     "compact_norm_mean",
     "opt_cd_loss",
@@ -162,8 +298,56 @@ UPDATE_FIELDS = (
     "low_policy_loss",
     "low_value_loss",
     "low_entropy_loss",
+    "low_actor_loss",
+    "low_critic_loss",
     "low_entropy",
+    "low_sequence_chunks",
+    "low_value_norm_mean",
+    "low_value_norm_std",
+    "low_value_error_abs_mean",
+    "low_value_error_rmse",
+    "low_advantage_std",
+    "low_ratio_mean",
+    "low_clip_frac",
+    "low_approx_kl",
+    "low_actor_grad_norm",
+    "low_critic_grad_norm",
+    "low_actor_h_norm_mean",
+    "low_critic_h_norm_mean",
+    "low_skill_usage_entropy",
+    "low_skill_return_std",
+    "low_skill_return_range",
+    "low_skill_value_error_abs_std",
+    "low_skill_entropy_std",
+    "low_team_usage_entropy",
+    "low_team_return_std",
+    "low_team_return_range",
+    "low_team_value_error_abs_std",
     "return_mean",
+    # P2-lite recovery-window contribution credit (mirrors empty_p2_metrics()).
+    "p2_available_frac",
+    "p2_window_frac",
+    "p2_phi_sum_mean",
+    "p2_f_team_mean",
+    "p2_f_team_std",
+    "p2_f_team_p95",
+    "p2_w_recovery_mean",
+    "p2_connected_frac_mean",
+    "p2_credit_mean",
+    "p2_credit_std",
+    "p2_credit_p95",
+    "p2_credit_by_disconnect_state",
+    "p2_credit_by_recovery_event",
+    "delta_phi_soft_nonzero_rate_when_full_disconnect",
+    "delta_phi_soft_nonzero_rate_when_near_disconnect",
+    "p2_corr_phi_recovery_event",
+    "p2_delta_bh_frac_mean",
+    "p2_partial_recovery_frac",
+    "p2_corr_credit_delta_bh_frac",
+    "p2_credit_by_partial_recovery_event",
+    "p2_cf_corr",
+    "p2_cf_nonzero_rate",
+    "p2_segments",
 )
 
 EVAL_FIELDS = (
@@ -174,6 +358,7 @@ EVAL_FIELDS = (
     "length",
     *UAV_METRIC_FIELDS,
     *COMM_METRIC_FIELDS,
+    *DERIVED_EVAL_FIELDS,
 )
 
 
@@ -241,6 +426,22 @@ def extract_uav_metrics(info: dict[str, Any] | None) -> dict[str, float]:
             if scalar is not None:
                 metrics[canonical] = scalar
                 break
+    throughput = metrics.get("system_throughput_mbps")
+    served_backhaul = metrics.get(
+        "current_backhaul_served_users",
+        metrics.get("effective_connected_users", metrics.get("served_users", 0.0)),
+    )
+    full_disconnect = metrics.get("full_network_disconnect", 0.0)
+    outage_ratio = metrics.get("backhaul_outage_ratio", 0.0)
+    backhaul_connected = (
+        served_backhaul is not None
+        and float(served_backhaul) > 0.0
+        and float(full_disconnect) < 0.5
+        and float(outage_ratio) < 0.999
+    )
+    metrics["backhaul_connected_flag"] = 1.0 if backhaul_connected else 0.0
+    if throughput is not None and backhaul_connected:
+        metrics["throughput_when_backhaul_connected_mbps"] = float(throughput)
     return metrics
 
 
@@ -329,6 +530,12 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("env_reward_mean", "Env reward mean"),
         ("return_mean", "Low return mean"),
         ("process_reward_mean", "Process reward mean"),
+        ("process_reward_unclipped_mean", "Process reward raw"),
+        ("process_reward_mi_component_mean", "Process MI reward"),
+        ("process_reward_outcome_penalty_mean", "Process outcome penalty"),
+        ("process_reward_high_mean", "Process reward to high"),
+        ("process_reward_low_mean", "Process reward to low"),
+        ("outcome_residual_reward_mean", "Outcome residual reward"),
     ):
         x, y = _series(records, key)
         if y.size:
@@ -346,11 +553,16 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("process_contrastive_loss", "Process contrast"),
         ("process_prior_loss", "Process prior"),
         ("process_outcome_loss", "Process outcome"),
+        ("outcome_residual_full_loss", "Outcome full"),
+        ("outcome_residual_base_loss", "Outcome baseline"),
         ("high_loss", "High loss"),
         ("high_value_loss", "High value"),
         ("high_policy_loss", "High policy"),
+        ("high_grad_norm", "High grad norm"),
         ("low_loss", "Low loss"),
         ("low_value_loss", "Low value"),
+        ("low_actor_loss", "Low actor"),
+        ("low_critic_loss", "Low critic"),
     ):
         x, y = _series(records, key)
         if y.size:
@@ -364,7 +576,59 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
 
     fig, ax = plt.subplots(figsize=(12, 6))
     for key, label in (
+        ("low_value_error_abs_mean", "Low value abs error"),
+        ("low_value_error_rmse", "Low value RMSE"),
+        ("low_advantage_std", "Low advantage std"),
+        ("low_ratio_mean", "Low PPO ratio"),
+        ("low_clip_frac", "Low clip frac"),
+        ("low_approx_kl", "Low approx KL"),
+        ("low_actor_grad_norm", "Low actor grad norm"),
+        ("low_critic_grad_norm", "Low critic grad norm"),
+        ("low_actor_h_norm_mean", "Low actor hidden norm"),
+        ("low_critic_h_norm_mean", "Low critic hidden norm"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Low-Level MAPPO Diagnostics", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_low_level_diagnostics.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("low_skill_usage_entropy", "Skill usage entropy"),
+        ("low_skill_return_std", "Skill return std"),
+        ("low_skill_return_range", "Skill return range"),
+        ("low_skill_value_error_abs_std", "Skill value-error std"),
+        ("low_skill_entropy_std", "Skill action-entropy std"),
+        ("low_team_usage_entropy", "Team-code usage entropy"),
+        ("low_team_return_std", "Team-code return std"),
+        ("low_team_return_range", "Team-code return range"),
+        ("low_team_value_error_abs_std", "Team-code value-error std"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Low-Level Skill/Team-Code Diagnostics", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_low_level_skill_team_diagnostics.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
         ("duration_only_accuracy", "Duration-only accuracy"),
+        ("length_only_accuracy", "Length-only accuracy"),
+        ("reward_sum_only_accuracy", "Reward-sum-only accuracy"),
+        ("process_shortcut_context_acc", "Context shortcut accuracy"),
+        ("posterior_acc_minus_duration_only", "Posterior - duration"),
+        ("posterior_acc_minus_length_only", "Posterior - length"),
+        ("posterior_acc_minus_reward_sum_only", "Posterior - reward-sum"),
+        ("posterior_acc_minus_context_shortcut", "Posterior - context"),
         ("skill_switch_rate", "Skill switch rate"),
         ("segment_length_mean", "Segment length mean"),
         ("skill_usage_entropy", "Skill usage entropy"),
@@ -377,6 +641,31 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("team_code_skill_mi", "Team-code/skill MI"),
         ("process_posterior_acc", "Process posterior acc"),
         ("process_mi_estimate_mean", "Process MI estimate"),
+        ("process_residual_mi_mean", "Residual MI estimate"),
+        ("process_shortcut_max_acc", "Max shortcut acc"),
+        ("process_shortcut_context_loss", "Context shortcut loss"),
+        ("process_shortcut_margin_loss", "Shortcut margin loss"),
+        ("process_reward_warmup_active", "Process reward warmup"),
+        ("semantic_shortcut_hard_stop_triggered", "Semantic shortcut stop"),
+        ("semantic_shortcut_hard_stop_score", "Semantic stop score"),
+        ("transition_skill_acc", "Transition skill acc"),
+        ("transition_skill_context_acc", "Transition context acc"),
+        ("transition_skill_mi_mean", "Transition skill MI"),
+        ("transition_skill_residual_mi_mean", "Transition residual MI"),
+        ("transition_skill_reward_mean", "Transition skill reward"),
+        ("transition_skill_reward_active", "Transition reward active"),
+        ("transition_skill_samples", "Transition samples"),
+        ("intrinsic_segment_high_gate_active", "High intrinsic gate active"),
+        ("intrinsic_segment_high_gate_score", "High intrinsic gate score"),
+        ("intrinsic_segment_high_gate_posterior_minus_shortcut", "High gate posterior gap"),
+        ("posterior_acc_minus_shortcut_max", "Posterior - shortcut"),
+        ("process_mi_positive_frac", "Process MI positive frac"),
+        ("process_residual_mi_positive_frac", "Residual MI positive frac"),
+        ("high_smdp_discount_mean", "SMDP discount mean"),
+        ("high_bootstrap_contribution_mean", "Bootstrap contribution"),
+        ("high_value_norm_std", "High value norm std"),
+        ("g_intervention_kl_mean", "g intervention KL"),
+        ("g_intervention_tv_mean", "g intervention TV"),
     ):
         x, y = _series(records, key)
         if y.size:
@@ -386,6 +675,136 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
     ax.legend()
     fig.tight_layout()
     fig.savefig(log_dir / "ha_ctse_process_diagnostics.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("outcome_residual_gain_mean", "Residual gain mean"),
+        ("outcome_residual_gain_positive_frac", "Gain positive frac"),
+        ("outcome_residual_available_mean", "Target available"),
+        ("outcome_residual_skill_gain_std", "Gain by skill std"),
+        ("outcome_residual_team_gain_std", "Gain by team std"),
+        ("outcome_residual_duration_gain_std", "Gain by duration std"),
+        ("outcome_residual_reward_mean", "Injected reward mean"),
+        ("outcome_residual_reward_active", "Reward active"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Future Cooperation Outcome Residual Probe", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_outcome_residual.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("outcome_residual_gain_coverage_delta_h", "Coverage"),
+        ("outcome_residual_gain_qos_delta_h", "QoS"),
+        ("outcome_residual_gain_full_disconnect_improvement_h", "Full disconnect"),
+        ("outcome_residual_gain_relay_margin_delta_h", "Relay margin"),
+        ("outcome_residual_gain_connected_components_improvement_h", "Components"),
+        ("outcome_residual_gain_teammate_service_gain_h", "Teammate service"),
+        ("outcome_residual_gain_bottleneck_link_gain_h", "Bottleneck link"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Outcome Residual Field Gains", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_outcome_residual_fields.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("topology_role_available_frac", "Available frac"),
+        ("topology_role_acc", "Full role acc"),
+        ("topology_role_shortcut_acc", "Shortcut acc"),
+        ("topology_role_resid_gain_mean", "Residual gain"),
+        ("topology_role_resid_gain_positive_frac", "Gain positive frac"),
+        ("topology_role_z_mi", "z/role MI"),
+        ("topology_role_g_mi", "g/role MI"),
+        ("topology_role_reward_mean", "Injected reward"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Topology Role Residual Probe", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_topology_role_probe.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("topology_role_frac_idle", "Idle"),
+        ("topology_role_frac_relay", "Relay"),
+        ("topology_role_frac_service", "Service"),
+        ("topology_role_frac_relay_service", "Relay service"),
+        ("topology_cf_backhaul_mean_mean", "CF backhaul"),
+        ("topology_cf_components_mean_mean", "CF components"),
+        ("topology_cf_disconnect_mean_mean", "CF disconnect"),
+        ("topology_service_mean_mean", "Service"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Topology Role Labels and Counterfactuals", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_topology_role_fields.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("topology_potential_raw_mean", "Raw potential delta"),
+        ("topology_potential_reward_mean", "Injected reward"),
+        ("topology_potential_phi_start_mean", "Phi start"),
+        ("topology_potential_phi_end_mean", "Phi end"),
+        ("topology_potential_backhaul_up_start_mean", "Backhaul up start"),
+        ("topology_potential_backhaul_up_end_mean", "Backhaul up end"),
+        ("topology_potential_full_disconnect_start_mean", "Disconnect start"),
+        ("topology_potential_full_disconnect_end_mean", "Disconnect end"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Topology Potential Credit Shaping", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_topology_potential.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("credit_full_disconnect_mean", "Full disconnect mean"),
+        ("credit_recovery_rate", "Disconnect recovery rate"),
+        ("credit_collapse_rate", "Connectivity collapse rate"),
+        ("credit_backhaul_connected_step_fraction", "Backhaul connected step fraction"),
+        ("credit_throughput_when_backhaul_connected_mbps", "Throughput | backhaul up"),
+        ("credit_delta_connectivity_ratio_mean", "Delta connectivity ratio"),
+        ("credit_delta_backhaul_served_users_mean", "Delta backhaul served users"),
+        ("credit_delta_backhaul_outage_ratio_mean", "Delta backhaul outage ratio"),
+        ("credit_delta_relay_route_loss_ratio_mean", "Delta relay route loss"),
+        ("credit_bottleneck_mbps_mean", "Backhaul bottleneck Mbps"),
+        ("credit_reward_conn_corr", "Reward/cxn corr"),
+        ("credit_reward_served_corr", "Reward/served corr"),
+        ("credit_reward_outage_corr", "Reward/outage corr"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Cooperation Credit Diagnostics", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_cooperation_credit.png", dpi=180)
     plt.close(fig)
 
 
@@ -426,6 +845,17 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
     if y.size:
         ax2.plot(x, moving_average(y, window), color="purple", label="Throughput Mbps")
         ax2.set_ylabel("Mbps")
+    x, y = _series(records, "throughput_when_backhaul_connected_mbps")
+    if y.size:
+        ax2.plot(
+            x,
+            moving_average(y, window),
+            color="darkorange",
+            linestyle="--",
+            label="Throughput | backhaul up",
+        )
+        ax2.set_ylabel("Mbps")
+    if ax2.lines:
         ax2.legend(loc="upper right")
     fig.tight_layout()
     fig.savefig(log_dir / "eval_service_quality.png", dpi=180)
@@ -449,6 +879,7 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(12, 6))
+    any_series = False
     for key, label in (
         ("episode_charging_session_count", "Charging sessions"),
         ("effective_charging_session_count", "Effective charging sessions"),
@@ -456,12 +887,14 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
     ):
         x, y = _series(records, key)
         if y.size:
+            any_series = True
             ax.plot(x, moving_average(y, window), label=label)
-    ax.set(title="Eval Charging Progress", xlabel="Env steps")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig(log_dir / "eval_charging_progress.png", dpi=180)
+    if any_series:
+        ax.set(title="Eval Charging Progress", xlabel="Env steps")
+        ax.grid(True, alpha=0.3)
+        ax.legend()
+        fig.tight_layout()
+        fig.savefig(log_dir / "eval_charging_progress.png", dpi=180)
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -497,6 +930,8 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
         ("backhaul_drop_ratio", "Backhaul drop ratio"),
         ("coverage_drop_ratio", "Coverage drop ratio"),
         ("full_network_disconnect", "Full disconnect flag"),
+        ("backhaul_connected_step_fraction", "Backhaul connected step fraction"),
+        ("backhaul_connected_flag", "Final backhaul connected flag"),
     ):
         x, y = _series(records, key)
         if y.size:
@@ -550,14 +985,92 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
 
 LOG_KEY_ALIASES = {
     "duration_only_acc": "duration_only_accuracy",
+    "length_only_acc": "length_only_accuracy",
+    "reward_sum_only_acc": "reward_sum_only_accuracy",
+    "posterior_gap_dur": "posterior_acc_minus_duration_only",
+    "posterior_gap_len": "posterior_acc_minus_length_only",
+    "posterior_gap_rew": "posterior_acc_minus_reward_sum_only",
     "switch_rate": "skill_switch_rate",
     "seg_len_mean": "segment_length_mean",
     "process_mi": "process_mi_estimate_mean",
+    "process_resid_mi": "process_residual_mi_mean",
+    "process_shortcut_acc": "process_shortcut_max_acc",
+    "process_margin_loss": "process_shortcut_margin_loss",
+    "process_warmup": "process_reward_warmup_active",
+    "trans_samples": "transition_skill_samples",
+    "trans_acc": "transition_skill_acc",
+    "trans_ctx_acc": "transition_skill_context_acc",
+    "trans_mi": "transition_skill_mi_mean",
+    "trans_resid_mi": "transition_skill_residual_mi_mean",
+    "trans_reward": "transition_skill_reward_mean",
+    "trans_active": "transition_skill_reward_active",
+    "out_full_loss": "outcome_residual_full_loss",
+    "out_base_loss": "outcome_residual_base_loss",
+    "out_gain": "outcome_residual_gain_mean",
+    "out_pos": "outcome_residual_gain_positive_frac",
+    "out_active": "outcome_residual_reward_active",
+    "role_avail": "topology_role_available_frac",
+    "role_acc": "topology_role_acc",
+    "role_ctx_acc": "topology_role_shortcut_acc",
+    "role_gain": "topology_role_resid_gain_mean",
+    "role_pos": "topology_role_resid_gain_positive_frac",
+    "role_z_mi": "topology_role_z_mi",
+    "high_intr_gate": "intrinsic_segment_high_gate_active",
+    "high_intr_score": "intrinsic_segment_high_gate_score",
+    "high_intr_reason": "intrinsic_segment_high_gate_reason_code",
+    "posterior_gap_short": "posterior_acc_minus_shortcut_max",
+    "posterior_gap_ctx": "posterior_acc_minus_context_shortcut",
     "posterior_acc": "process_posterior_acc",
+    "ctx_short_acc": "process_shortcut_context_acc",
+    "process_reward_raw": "process_reward_unclipped_mean",
+    "process_mi_reward": "process_reward_mi_component_mean",
+    "process_reward_high": "process_reward_high_mean",
+    "process_reward_low": "process_reward_low_mean",
+    "semantic_stop": "semantic_shortcut_hard_stop_triggered",
+    "semantic_stop_apply": "semantic_shortcut_hard_stop_applied",
+    "semantic_stop_score": "semantic_shortcut_hard_stop_score",
+    "high_env_return": "high_env_return_mean",
+    "high_bootstrap": "high_bootstrap_value_mean",
+    "high_bootstrap_contrib": "high_bootstrap_contribution_mean",
+    "high_vnorm_mean": "high_value_norm_mean",
+    "high_vnorm_std": "high_value_norm_std",
     "skill_entropy": "skill_usage_entropy",
     "duration_entropy": "duration_usage_entropy",
     "g_entropy": "team_code_usage_entropy",
     "g_skill_mi": "team_code_skill_mi",
+    "g_ikl": "g_intervention_kl_mean",
+    "g_itv": "g_intervention_tv_mean",
+    "low_chunks": "low_sequence_chunks",
+    "low_vnorm_mean": "low_value_norm_mean",
+    "low_vnorm_std": "low_value_norm_std",
+    "low_verr": "low_value_error_abs_mean",
+    "low_vrmse": "low_value_error_rmse",
+    "low_adv_std": "low_advantage_std",
+    "low_ratio": "low_ratio_mean",
+    "low_clip": "low_clip_frac",
+    "low_kl": "low_approx_kl",
+    "low_agn": "low_actor_grad_norm",
+    "low_cgn": "low_critic_grad_norm",
+    "low_ahn": "low_actor_h_norm_mean",
+    "low_chn": "low_critic_h_norm_mean",
+    "low_sent": "low_skill_usage_entropy",
+    "low_sret_std": "low_skill_return_std",
+    "low_sret_rng": "low_skill_return_range",
+    "low_sverr_std": "low_skill_value_error_abs_std",
+    "low_sent_std": "low_skill_entropy_std",
+    "low_tent": "low_team_usage_entropy",
+    "low_tret_std": "low_team_return_std",
+    "low_tret_rng": "low_team_return_range",
+    "low_tverr_std": "low_team_value_error_abs_std",
+    "credit_disc": "credit_full_disconnect_mean",
+    "credit_recover": "credit_recovery_rate",
+    "credit_collapse": "credit_collapse_rate",
+    "credit_bh_frac": "credit_backhaul_connected_step_fraction",
+    "credit_bh_thr": "credit_throughput_when_backhaul_connected_mbps",
+    "credit_d_conn": "credit_delta_connectivity_ratio_mean",
+    "credit_d_served": "credit_delta_backhaul_served_users_mean",
+    "credit_d_outage": "credit_delta_backhaul_outage_ratio_mean",
+    "credit_d_relay_loss": "credit_delta_relay_route_loss_ratio_mean",
 }
 
 

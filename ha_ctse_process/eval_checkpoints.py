@@ -41,7 +41,17 @@ SUMMARY_FIELDS = (
     "coverage",
     "qos",
     "throughput",
+    "backhaul_connected_fraction",
+    "throughput_when_backhaul_connected_mbps",
     "battery_min",
+    "connectivity_ratio",
+    "uavs_with_backhaul",
+    "avg_hops",
+    "relay_route_loss_ratio",
+    "backhaul_outage_ratio",
+    "service_drop_ratio",
+    "full_network_disconnect",
+    "min_serving_backhaul_bottleneck_mbps",
     "checkpoint_path",
 )
 
@@ -58,6 +68,45 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--n_agents", type=int, default=0)
     parser.add_argument("--skill_interval", type=int, default=10)
     parser.add_argument("--skill_lifetime_candidates", default="")
+    parser.add_argument(
+        "--low_level_architecture",
+        choices=("strict_hmasd_mappo", "gru_ctde", "feedforward"),
+        default="",
+    )
+    parser.add_argument(
+        "--process_reward_mode",
+        choices=(
+            "mi_outcome",
+            "mi_only",
+            "positive_mi",
+            "centered_mi",
+            "residual_mi",
+            "positive_residual_mi",
+            "centered_residual_mi",
+            "residual_mi_outcome",
+            "none",
+        ),
+        default="",
+    )
+    parser.add_argument(
+        "--process_reward_injection",
+        choices=("high_only", "high_and_low", "low_only", "none"),
+        default="",
+    )
+    parser.add_argument("--smdp_bootstrap_coef", type=float, default=None)
+    parser.add_argument("--process_shortcut_coef", type=float, default=None)
+    parser.add_argument("--high_max_grad_norm", type=float, default=None)
+    parser.add_argument("--low_max_grad_norm", type=float, default=None)
+    parser.add_argument("--low_rnn_hidden_size", type=int, default=0)
+    parser.add_argument("--low_sequence_length", type=int, default=0)
+    parser.add_argument("--low_sequence_batch_size", type=int, default=0)
+    parser.add_argument("--low_ppo_epochs", type=int, default=0)
+    parser.add_argument("--low_value_loss_coef", type=float, default=None)
+    parser.add_argument("--disable_smdp_discounted_high_return", action="store_true")
+    parser.add_argument("--disable_smdp_bootstrap", action="store_true")
+    parser.add_argument("--disable_high_value_norm", action="store_true")
+    parser.add_argument("--disable_recurrent_low_level", action="store_true")
+    parser.add_argument("--disable_low_value_norm", action="store_true")
     parser.add_argument("--eval_episodes", type=int, default=10)
     parser.add_argument("--eval_max_steps", type=int, default=1500)
     parser.add_argument("--updates", default="", help="Comma-separated updates, e.g. 20,40,60,80,final.")
@@ -70,8 +119,11 @@ def parse_args() -> argparse.Namespace:
 def ensure_training_override_defaults(args: argparse.Namespace) -> None:
     defaults = {
         "team_bridge_type": "",
+        "low_level_architecture": "",
         "opt_compact_dim": 0,
         "opt_num_prototypes": 0,
+        "process_reward_mode": "",
+        "process_reward_injection": "",
         "process_reward_coef": None,
         "process_reward_clip": None,
         "process_contrast_coef": None,
@@ -79,14 +131,80 @@ def ensure_training_override_defaults(args: argparse.Namespace) -> None:
         "process_reward_contrast_coef": None,
         "process_reward_outcome_coef": None,
         "process_prior_coef": None,
+        "process_shortcut_coef": None,
+        "context_shortcut_coef": None,
+        "process_shortcut_margin": None,
+        "process_shortcut_margin_coef": None,
+        "process_reward_warmup_steps": -1,
+        "transition_skill_coef": None,
+        "transition_skill_prior_coef": None,
+        "transition_context_shortcut_coef": None,
+        "transition_skill_reward_coef": None,
+        "transition_skill_reward_clip": None,
+        "transition_skill_reward_warmup_steps": -1,
+        "transition_skill_max_samples": 0,
+        "outcome_residual_horizon": 0,
+        "outcome_residual_coef": None,
+        "outcome_residual_hidden_dim": 0,
+        "outcome_residual_injection": "",
+        "outcome_residual_reward_coef": None,
+        "outcome_residual_reward_clip": None,
+        "topology_role_coef": None,
+        "topology_role_hidden_dim": 0,
+        "topology_role_min_score": None,
+        "topology_role_injection": "",
+        "topology_role_reward_coef": None,
+        "topology_role_reward_clip": None,
+        "topology_potential_injection": "",
+        "topology_potential_coef": None,
+        "topology_potential_clip": None,
+        "topology_potential_warmup_steps": -1,
+        "topology_potential_discount_mode": "",
+        "semantic_shortcut_hard_stop_margin": None,
+        "semantic_shortcut_hard_stop_min_segments": 0,
+        "g_intervention_kl_max_segments": 0,
+        "intrinsic_segment_gate_margin": None,
+        "intrinsic_segment_gate_min_segments": 0,
+        "intrinsic_segment_gate_min_residual_mi": None,
+        "intrinsic_segment_gate_min_posterior_acc": None,
+        "intrinsic_phase_bins": 0,
         "high_entropy_coef": None,
         "low_entropy_coef": None,
+        "high_max_grad_norm": None,
+        "low_max_grad_norm": None,
+        "low_rnn_hidden_size": 0,
+        "low_sequence_length": 0,
+        "low_sequence_batch_size": 0,
+        "low_ppo_epochs": 0,
+        "low_value_loss_coef": None,
+        "low_clip_epsilon": None,
+        "smdp_bootstrap_coef": None,
         "edit_penalty_alpha": None,
         "switch_penalty_beta": None,
         "opt_cd_coef": None,
         "opt_cmi_coef": None,
         "disable_process_reward": False,
         "disable_process_posterior_mi": False,
+        "disable_residual_process_posterior": False,
+        "disable_context_skill_shortcut": False,
+        "disable_transition_skill_discriminator": False,
+        "disable_transition_skill_team_conditioning": False,
+        "disable_outcome_residual_probe": False,
+        "disable_outcome_residual_norm": False,
+        "disable_topology_role_probe": False,
+        "enable_topology_potential_shaping": False,
+        "topology_potential_positive_only": False,
+        "disable_semantic_shortcut_hard_stop": False,
+        "semantic_shortcut_hard_stop_raise": False,
+        "disable_g_intervention_kl_diagnostic": False,
+        "disable_intrinsic_segment_gate": False,
+        "enable_intrinsic_reward_norm": False,
+        "disable_smdp_discounted_high_return": False,
+        "disable_smdp_bootstrap": False,
+        "disable_high_value_norm": False,
+        "disable_recurrent_low_level": False,
+        "disable_low_value_norm": False,
+        "enable_low_actor_team_code": False,
     }
     for key, value in defaults.items():
         if not hasattr(args, key):
@@ -177,7 +295,22 @@ def service_score(metrics: dict[str, float]) -> float:
     qos = float(metrics.get("qos", 0.0))
     throughput = float(metrics.get("throughput", 0.0))
     battery_min = float(metrics.get("battery_min", 0.0))
-    return coverage + qos + throughput / 100.0 + 0.1 * battery_min
+    connectivity = float(metrics.get("connectivity_ratio", 0.0))
+    backhaul_outage = float(metrics.get("backhaul_outage_ratio", 0.0))
+    service_drop = float(metrics.get("service_drop_ratio", 0.0))
+    relay_loss = float(metrics.get("relay_route_loss_ratio", 0.0))
+    full_disconnect = float(metrics.get("full_network_disconnect", 0.0))
+    return (
+        coverage
+        + qos
+        + throughput / 100.0
+        + 0.1 * battery_min
+        + 0.25 * connectivity
+        - 0.5 * backhaul_outage
+        - 0.5 * service_drop
+        - 0.25 * relay_loss
+        - full_disconnect
+    )
 
 
 def main() -> None:
@@ -221,7 +354,23 @@ def main() -> None:
             "coverage": float(metrics.get("coverage", 0.0)),
             "qos": float(metrics.get("qos", 0.0)),
             "throughput": float(metrics.get("throughput", 0.0)),
+            "backhaul_connected_fraction": float(
+                metrics.get("backhaul_connected_step_fraction", metrics.get("backhaul_connected_flag", 0.0))
+            ),
+            "throughput_when_backhaul_connected_mbps": float(
+                metrics.get("throughput_when_backhaul_connected_mbps", 0.0)
+            ),
             "battery_min": float(metrics.get("battery_min", 0.0)),
+            "connectivity_ratio": float(metrics.get("connectivity_ratio", 0.0)),
+            "uavs_with_backhaul": float(metrics.get("uavs_with_backhaul", 0.0)),
+            "avg_hops": float(metrics.get("avg_hops", 0.0)),
+            "relay_route_loss_ratio": float(metrics.get("relay_route_loss_ratio", 0.0)),
+            "backhaul_outage_ratio": float(metrics.get("backhaul_outage_ratio", 0.0)),
+            "service_drop_ratio": float(metrics.get("service_drop_ratio", 0.0)),
+            "full_network_disconnect": float(metrics.get("full_network_disconnect", 0.0)),
+            "min_serving_backhaul_bottleneck_mbps": float(
+                metrics.get("min_serving_backhaul_bottleneck_mbps", 0.0)
+            ),
             "checkpoint_path": str(path),
         }
         rows.append(row)
@@ -240,7 +389,11 @@ def main() -> None:
             f"reward={best['reward_mean']:.6f} "
             f"coverage={best['coverage']:.6f} "
             f"qos={best['qos']:.6f} "
-            f"throughput={best['throughput']:.6f}"
+            f"throughput={best['throughput']:.6f} "
+            f"backhaul_connected={best['backhaul_connected_fraction']:.6f} "
+            f"throughput_when_backhaul_connected={best['throughput_when_backhaul_connected_mbps']:.6f} "
+            f"connectivity={best['connectivity_ratio']:.6f} "
+            f"backhaul_outage={best['backhaul_outage_ratio']:.6f}"
         )
 
 

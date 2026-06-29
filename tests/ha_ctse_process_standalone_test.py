@@ -5,6 +5,7 @@ import torch
 
 from ha_ctse_process import train as process_train
 from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
+from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
 
 def make_process_config(**overrides):
@@ -15,7 +16,11 @@ def make_process_config(**overrides):
         hidden_size=16,
         gamma=0.99,
         clip_epsilon=0.2,
+        low_clip_epsilon=0.1,
         process_reward_coef=1.0,
+        process_reward_warmup_steps=0,
+        process_shortcut_margin=0.1,
+        process_shortcut_margin_coef=0.5,
         normalize_process_outcomes=False,
         lr_discoverer_actor=1e-3,
         lr_coordinator=1e-3,
@@ -132,6 +137,71 @@ def test_process_update_injects_reward_into_matching_rollout_agent():
     assert rollout.rewards[1][0] == 0.0
     assert rollout.rewards[0][1] != 0.0
     assert rollout.rewards[1][1] != 0.0
+
+
+def test_topology_potential_rewards_disconnect_recovery():
+    cfg = SimpleNamespace(
+        use_topology_potential_shaping=True,
+        topology_potential_coef=1.0,
+        topology_potential_clip=10.0,
+        topology_potential_warmup_steps=0,
+        topology_potential_discount_mode="delta",
+        topology_potential_positive_only=False,
+    )
+    segment = Segment(
+        env_id=0,
+        agent_id=0,
+        skill=0,
+        duration_idx=0,
+        start_step=0,
+        high_obs=np.zeros(4, dtype=np.float32),
+        high_logp=0.0,
+        high_value=0.0,
+        high_entropy=0.0,
+    )
+    segment.append(
+        obs=np.zeros(4, dtype=np.float32),
+        action=np.array([1], dtype=np.float32),
+        reward=0.0,
+        next_obs=np.ones(4, dtype=np.float32),
+        rollout_idx=0,
+        reward_info={
+            "coverage_ratio": 0.0,
+            "qos_satisfaction_ratio": 0.0,
+            "uavs_with_backhaul": 0,
+            "full_network_disconnect": 1.0,
+            "backhaul_outage_ratio": 1.0,
+            "system_throughput_mbps": 0.0,
+        },
+    )
+    segment.append(
+        obs=np.ones(4, dtype=np.float32),
+        action=np.array([1], dtype=np.float32),
+        reward=0.0,
+        next_obs=np.ones(4, dtype=np.float32) * 2.0,
+        rollout_idx=1,
+        reward_info={
+            "coverage_ratio": 0.5,
+            "qos_satisfaction_ratio": 0.3,
+            "uavs_with_backhaul": 3,
+            "current_backhaul_served_users": 4,
+            "full_network_disconnect": 0.0,
+            "backhaul_outage_ratio": 0.0,
+            "system_throughput_mbps": 12.0,
+            "min_serving_backhaul_bottleneck_mbps": 8.0,
+        },
+    )
+
+    rewards, metrics = TopologyPotentialShaper(cfg, n_agents=6, gamma=0.99).rewards(
+        [segment],
+        total_steps=0,
+    )
+
+    assert metrics["topology_potential_active"] == 1.0
+    assert metrics["topology_potential_available_frac"] == 1.0
+    assert metrics["topology_potential_phi_end_mean"] > metrics["topology_potential_phi_start_mean"]
+    assert rewards.shape == (1,)
+    assert rewards[0] > 0.0
 
 
 class DummyEvalEnv:

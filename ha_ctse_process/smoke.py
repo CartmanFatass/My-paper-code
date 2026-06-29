@@ -17,11 +17,20 @@ from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
 
 def make_config():
     cfg = Config()
+    cfg.n_Z = 3
     cfg.n_z = 3
     cfg.state_dim = 8
     cfg.skill_lifetime_candidates = (1, 2)
     cfg.hidden_size = 16
+    cfg.low_rnn_hidden_size = 16
+    cfg.low_sequence_length = 2
+    cfg.low_sequence_batch_size = 2
+    cfg.low_ppo_epochs = 1
+    cfg.low_value_loss_coef = 1.0
     cfg.process_reward_coef = 1.0
+    cfg.process_reward_warmup_steps = 0
+    cfg.process_shortcut_margin = 0.1
+    cfg.process_shortcut_margin_coef = 0.5
     cfg.normalize_process_outcomes = False
     cfg.lr_discoverer_actor = 1e-3
     cfg.lr_coordinator = 1e-3
@@ -30,7 +39,7 @@ def make_config():
     cfg.opt_compact_dim = 8
     cfg.opt_num_prototypes = 2
     cfg.team_code_dim = 8
-    cfg.num_team_codes = 2
+    cfg.num_team_codes = 3
     cfg.edit_penalty_alpha = 0.0
     cfg.switch_penalty_beta = 0.0
     cfg.opt_cd_coef = 0.0
@@ -134,7 +143,15 @@ def run_smoke(log_dir: Path) -> dict:
         reward=0.25,
         next_obs=np.ones(4, dtype=np.float32),
         rollout_idx=0,
-        reward_info={"coverage_ratio": 0.2, "qos_satisfaction": 0.1},
+        reward_info={
+            "coverage_ratio": 0.2,
+            "qos_satisfaction": 0.1,
+            "full_network_disconnect": 1.0,
+            "uavs_with_backhaul": 0.0,
+            "connectivity_ratio": 0.0,
+            "current_backhaul_served_users": 0.0,
+            "backhaul_outage_ratio": 1.0,
+        },
     )
     segment.append(
         obs=np.ones(4, dtype=np.float32),
@@ -142,7 +159,15 @@ def run_smoke(log_dir: Path) -> dict:
         reward=0.5,
         next_obs=np.ones(4, dtype=np.float32) * 2.0,
         rollout_idx=1,
-        reward_info={"coverage_ratio": 0.3, "qos_satisfaction": 0.2},
+        reward_info={
+            "coverage_ratio": 0.3,
+            "qos_satisfaction": 0.2,
+            "full_network_disconnect": 0.0,
+            "uavs_with_backhaul": 2.0,
+            "connectivity_ratio": 1.0,
+            "current_backhaul_served_users": 3.0,
+            "backhaul_outage_ratio": 0.0,
+        },
     )
     agent.segments.completed = [segment]
     rollout = SimpleNamespace(rewards=[np.zeros(2, dtype=np.float32), np.zeros(2, dtype=np.float32)])
@@ -151,8 +176,24 @@ def run_smoke(log_dir: Path) -> dict:
         metrics["process_segments"] == 1.0
         and rollout.rewards[0][0] == 0.0
         and rollout.rewards[1][0] == 0.0
-        and rollout.rewards[0][1] != 0.0
-        and rollout.rewards[1][1] != 0.0
+        and rollout.rewards[0][1] == 0.0
+        and rollout.rewards[1][1] == 0.0
+        and metrics["process_reward_mean"] != 0.0
+        and metrics["process_reward_high_mean"] == 0.0
+        and metrics["process_reward_low_mean"] == 0.0
+    )
+    credit_diagnostics_ok = (
+        metrics["credit_probe_available_frac"] == 1.0
+        and metrics["credit_recovery_rate"] == 1.0
+        and metrics["credit_collapse_rate"] == 0.0
+        and metrics["credit_delta_connectivity_ratio_mean"] == 1.0
+        and metrics["credit_delta_backhaul_served_users_mean"] == 3.0
+        and metrics["credit_delta_backhaul_outage_ratio_mean"] == -1.0
+    )
+    residual_metrics_ok = (
+        "process_residual_mi_mean" in metrics
+        and "process_shortcut_max_acc" in metrics
+        and "posterior_acc_minus_shortcut_max" in metrics
     )
 
     eval_agent = make_agent(cfg)
@@ -182,10 +223,18 @@ def run_smoke(log_dir: Path) -> dict:
     return {
         "checkpoint_ok": bool(checkpoint_ok),
         "reward_injection_ok": bool(reward_injection_ok),
+        "credit_diagnostics_ok": bool(credit_diagnostics_ok),
+        "residual_metrics_ok": bool(residual_metrics_ok),
         "eval_restore_ok": bool(eval_restore_ok),
         "process_metrics": metrics,
         "eval_metrics": eval_metrics,
-        "all_ok": bool(checkpoint_ok and reward_injection_ok and eval_restore_ok),
+        "all_ok": bool(
+            checkpoint_ok
+            and reward_injection_ok
+            and credit_diagnostics_ok
+            and residual_metrics_ok
+            and eval_restore_ok
+        ),
     }
 
 

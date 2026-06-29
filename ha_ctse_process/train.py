@@ -42,6 +42,8 @@ from ha_ctse_process.topology_viz import capture_topology_frame, save_topology_a
 
 ALGORITHM_MANIFEST_FIELDS = (
     "algorithm",
+    "network_scale_profile",
+    "low_level_architecture",
     "policy_update_mode",
     "allow_off_policy_policy_updates",
     "process_segment_replay_enabled",
@@ -61,6 +63,8 @@ ALGORITHM_MANIFEST_FIELDS = (
     "lr_process_encoder",
     "process_contrast_coef",
     "process_outcome_coef",
+    "process_reward_mode",
+    "process_reward_injection",
     "process_reward_coef",
     "process_reward_contrast_coef",
     "process_reward_outcome_coef",
@@ -68,8 +72,75 @@ ALGORITHM_MANIFEST_FIELDS = (
     "normalize_process_outcomes",
     "use_process_reward_for_discoverer",
     "use_process_posterior_mi",
+    "use_residual_process_posterior",
     "process_posterior_condition_on_team",
+    "process_shortcut_coef",
+    "use_context_skill_shortcut",
+    "context_shortcut_coef",
+    "intrinsic_phase_bins",
+    "process_shortcut_margin",
+    "process_shortcut_margin_coef",
+    "process_reward_warmup_steps",
+    "use_transition_skill_discriminator",
+    "transition_skill_condition_on_team",
+    "transition_skill_coef",
+    "transition_skill_prior_coef",
+    "transition_context_shortcut_coef",
+    "transition_skill_reward_coef",
+    "transition_skill_reward_warmup_steps",
+    "transition_skill_reward_clip",
+    "transition_skill_max_samples",
+    "use_outcome_residual_probe",
+    "outcome_residual_horizon",
+    "outcome_residual_coef",
+    "outcome_residual_hidden_dim",
+    "normalize_outcome_residual_targets",
+    "outcome_residual_injection",
+    "outcome_residual_reward_coef",
+    "outcome_residual_reward_clip",
+    "use_topology_role_probe",
+    "topology_role_coef",
+    "topology_role_hidden_dim",
+    "topology_role_min_score",
+    "topology_role_injection",
+    "topology_role_reward_coef",
+    "topology_role_reward_clip",
+    "use_topology_potential_shaping",
+    "topology_potential_injection",
+    "topology_potential_coef",
+    "topology_potential_clip",
+    "topology_potential_warmup_steps",
+    "topology_potential_discount_mode",
+    "topology_potential_positive_only",
+    "semantic_shortcut_hard_stop_enabled",
+    "semantic_shortcut_hard_stop_margin",
+    "semantic_shortcut_hard_stop_min_segments",
+    "semantic_shortcut_hard_stop_raise",
+    "use_g_intervention_kl_diagnostic",
+    "g_intervention_kl_max_segments",
+    "intrinsic_segment_gate_enabled",
+    "intrinsic_segment_gate_margin",
+    "intrinsic_segment_gate_min_segments",
+    "intrinsic_segment_gate_min_residual_mi",
+    "intrinsic_segment_gate_min_posterior_acc",
+    "intrinsic_reward_normalize",
     "process_prior_coef",
+    "use_smdp_discounted_high_return",
+    "use_smdp_bootstrap",
+    "smdp_bootstrap_coef",
+    "use_high_value_norm",
+    "use_recurrent_low_level",
+    "use_centralized_low_value",
+    "use_low_value_norm",
+    "low_rnn_hidden_size",
+    "low_sequence_length",
+    "low_sequence_batch_size",
+    "low_ppo_epochs",
+    "low_gae_lambda",
+    "low_value_clip",
+    "low_value_loss_coef",
+    "low_clip_epsilon",
+    "low_max_grad_norm",
     "edit_penalty_alpha",
     "switch_penalty_beta",
 )
@@ -77,8 +148,11 @@ ALGORITHM_MANIFEST_FIELDS = (
 TRAINING_MANIFEST_FIELDS = (
     "gamma",
     "clip_epsilon",
+    "low_clip_epsilon",
     "high_entropy_coef",
     "low_entropy_coef",
+    "high_max_grad_norm",
+    "low_max_grad_norm",
     "lr",
     "lr_actor",
     "lr_critic",
@@ -233,6 +307,11 @@ def export_run_manifest(
             "duration_candidates": jsonable(agent.duration_candidates),
             "action_space_type": str(agent.action_space_type),
             "device": str(agent.device),
+            "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
+            "low_level_architecture": str(agent.low_level_architecture),
+            "low_actor_condition_on_team_code": bool(getattr(agent, "low_actor_condition_on_team_code", False)),
+            "low_rnn_hidden_size": int(agent.low_rnn_hidden_size),
+            "parameter_counts": jsonable(agent.parameter_counts()),
         }
     with (metadata_dir / "run_manifest.json").open("w", encoding="utf-8") as handle:
         json.dump(manifest, handle, ensure_ascii=False, indent=2)
@@ -286,8 +365,33 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--plot_interval", type=int, default=1)
     parser.add_argument("--skill_lifetime_candidates", default="")
     parser.add_argument("--team_bridge_type", choices=("none", "deterministic", "stochastic"), default="")
+    parser.add_argument(
+        "--low_level_architecture",
+        choices=("strict_hmasd_mappo", "gru_ctde", "feedforward"),
+        default="",
+    )
     parser.add_argument("--opt_compact_dim", type=int, default=0)
     parser.add_argument("--opt_num_prototypes", type=int, default=0)
+    parser.add_argument(
+        "--process_reward_mode",
+        choices=(
+            "mi_outcome",
+            "mi_only",
+            "positive_mi",
+            "centered_mi",
+            "residual_mi",
+            "positive_residual_mi",
+            "centered_residual_mi",
+            "residual_mi_outcome",
+            "none",
+        ),
+        default="",
+    )
+    parser.add_argument(
+        "--process_reward_injection",
+        choices=("high_only", "high_and_low", "low_only", "none"),
+        default="",
+    )
     parser.add_argument("--process_reward_coef", type=float, default=None)
     parser.add_argument("--process_reward_clip", type=float, default=None)
     parser.add_argument("--process_contrast_coef", type=float, default=None)
@@ -295,14 +399,103 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--process_reward_contrast_coef", type=float, default=None)
     parser.add_argument("--process_reward_outcome_coef", type=float, default=None)
     parser.add_argument("--process_prior_coef", type=float, default=None)
+    parser.add_argument("--process_shortcut_coef", type=float, default=None)
+    parser.add_argument("--context_shortcut_coef", type=float, default=None)
+    parser.add_argument("--intrinsic_phase_bins", type=int, default=0)
+    parser.add_argument("--process_shortcut_margin", type=float, default=None)
+    parser.add_argument("--process_shortcut_margin_coef", type=float, default=None)
+    parser.add_argument("--process_reward_warmup_steps", type=int, default=-1)
+    parser.add_argument("--transition_skill_coef", type=float, default=None)
+    parser.add_argument("--transition_skill_prior_coef", type=float, default=None)
+    parser.add_argument("--transition_context_shortcut_coef", type=float, default=None)
+    parser.add_argument("--transition_skill_reward_coef", type=float, default=None)
+    parser.add_argument("--transition_skill_reward_warmup_steps", type=int, default=-1)
+    parser.add_argument("--transition_skill_reward_clip", type=float, default=None)
+    parser.add_argument("--transition_skill_max_samples", type=int, default=0)
+    parser.add_argument("--outcome_residual_horizon", type=int, default=0)
+    parser.add_argument("--outcome_residual_coef", type=float, default=None)
+    parser.add_argument("--outcome_residual_hidden_dim", type=int, default=0)
+    parser.add_argument(
+        "--outcome_residual_injection",
+        choices=("high_only", "high_and_low", "low_only", "none"),
+        default="",
+    )
+    parser.add_argument("--outcome_residual_reward_coef", type=float, default=None)
+    parser.add_argument("--outcome_residual_reward_clip", type=float, default=None)
+    parser.add_argument("--topology_role_coef", type=float, default=None)
+    parser.add_argument("--topology_role_hidden_dim", type=int, default=0)
+    parser.add_argument("--topology_role_min_score", type=float, default=None)
+    parser.add_argument(
+        "--topology_role_injection",
+        choices=("high_only", "high_and_low", "low_only", "none"),
+        default="",
+    )
+    parser.add_argument("--topology_role_reward_coef", type=float, default=None)
+    parser.add_argument("--topology_role_reward_clip", type=float, default=None)
+    parser.add_argument(
+        "--topology_potential_injection",
+        choices=("high_only", "high_and_low", "low_only", "none"),
+        default="",
+    )
+    parser.add_argument("--topology_potential_coef", type=float, default=None)
+    parser.add_argument("--topology_potential_clip", type=float, default=None)
+    parser.add_argument("--topology_potential_warmup_steps", type=int, default=-1)
+    parser.add_argument(
+        "--topology_potential_discount_mode",
+        choices=("delta", "one_step", "smdp"),
+        default="",
+    )
+    parser.add_argument("--semantic_shortcut_hard_stop_margin", type=float, default=None)
+    parser.add_argument("--semantic_shortcut_hard_stop_min_segments", type=int, default=0)
+    parser.add_argument("--g_intervention_kl_max_segments", type=int, default=0)
+    parser.add_argument("--intrinsic_segment_gate_margin", type=float, default=None)
+    parser.add_argument("--intrinsic_segment_gate_min_segments", type=int, default=0)
+    parser.add_argument("--intrinsic_segment_gate_min_residual_mi", type=float, default=None)
+    parser.add_argument("--intrinsic_segment_gate_min_posterior_acc", type=float, default=None)
     parser.add_argument("--high_entropy_coef", type=float, default=None)
     parser.add_argument("--low_entropy_coef", type=float, default=None)
+    parser.add_argument("--high_max_grad_norm", type=float, default=None)
+    parser.add_argument("--low_max_grad_norm", type=float, default=None)
+    parser.add_argument("--low_rnn_hidden_size", type=int, default=0)
+    parser.add_argument("--low_sequence_length", type=int, default=0)
+    parser.add_argument("--low_sequence_batch_size", type=int, default=0)
+    parser.add_argument("--low_ppo_epochs", type=int, default=0)
+    parser.add_argument("--low_value_loss_coef", type=float, default=None)
+    parser.add_argument("--low_clip_epsilon", type=float, default=None)
+    parser.add_argument("--smdp_bootstrap_coef", type=float, default=None)
     parser.add_argument("--edit_penalty_alpha", type=float, default=None)
     parser.add_argument("--switch_penalty_beta", type=float, default=None)
     parser.add_argument("--opt_cd_coef", type=float, default=None)
     parser.add_argument("--opt_cmi_coef", type=float, default=None)
     parser.add_argument("--disable_process_reward", action="store_true")
     parser.add_argument("--disable_process_posterior_mi", action="store_true")
+    parser.add_argument("--disable_residual_process_posterior", action="store_true")
+    parser.add_argument("--disable_context_skill_shortcut", action="store_true")
+    parser.add_argument("--disable_transition_skill_discriminator", action="store_true")
+    parser.add_argument("--disable_transition_skill_team_conditioning", action="store_true")
+    parser.add_argument("--disable_outcome_residual_probe", action="store_true")
+    parser.add_argument("--disable_outcome_residual_norm", action="store_true")
+    parser.add_argument("--disable_topology_role_probe", action="store_true")
+    parser.add_argument("--disable_semantic_shortcut_hard_stop", action="store_true")
+    parser.add_argument("--semantic_shortcut_hard_stop_raise", action="store_true")
+    parser.add_argument("--disable_g_intervention_kl_diagnostic", action="store_true")
+    parser.add_argument("--disable_intrinsic_segment_gate", action="store_true")
+    parser.add_argument("--enable_intrinsic_reward_norm", action="store_true")
+    parser.add_argument("--disable_smdp_discounted_high_return", action="store_true")
+    parser.add_argument("--disable_smdp_bootstrap", action="store_true")
+    parser.add_argument("--disable_high_value_norm", action="store_true")
+    parser.add_argument("--disable_recurrent_low_level", action="store_true")
+    parser.add_argument("--disable_low_value_norm", action="store_true")
+    parser.add_argument("--enable_low_actor_team_code", action="store_true")
+    parser.add_argument("--enable_topology_potential_shaping", action="store_true")
+    parser.add_argument("--topology_potential_positive_only", action="store_true")
+    # P2-lite recovery-window contribution credit (default OFF).
+    parser.add_argument("--enable_p2_recovery_compute", action="store_true")
+    parser.add_argument("--enable_p2_recovery_reward", action="store_true")
+    parser.add_argument("--p2_recovery_reward_level", type=str, default=None,
+                        choices=["high_team", "high_per_agent", "low_only"])
+    parser.add_argument("--p2_recovery_reward_coef", type=float, default=None)
+    parser.add_argument("--p2_recovery_reward_clip", type=float, default=None)
     return parser.parse_args()
 
 
@@ -326,10 +519,16 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.skill_lifetime_candidates = candidates
     if args.team_bridge_type:
         config.team_bridge_type = args.team_bridge_type
+    if args.low_level_architecture:
+        config.low_level_architecture = args.low_level_architecture
     if int(args.opt_compact_dim) > 0:
         config.opt_compact_dim = int(args.opt_compact_dim)
     if int(args.opt_num_prototypes) > 0:
         config.opt_num_prototypes = int(args.opt_num_prototypes)
+    if args.process_reward_mode:
+        config.process_reward_mode = args.process_reward_mode
+    if args.process_reward_injection:
+        config.process_reward_injection = args.process_reward_injection
     optional_scalars = (
         "process_reward_coef",
         "process_reward_clip",
@@ -338,8 +537,35 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "process_reward_contrast_coef",
         "process_reward_outcome_coef",
         "process_prior_coef",
+        "process_shortcut_coef",
+        "context_shortcut_coef",
+        "process_shortcut_margin",
+        "process_shortcut_margin_coef",
+        "transition_skill_coef",
+        "transition_skill_prior_coef",
+        "transition_context_shortcut_coef",
+        "transition_skill_reward_coef",
+        "transition_skill_reward_clip",
+        "outcome_residual_coef",
+        "outcome_residual_reward_coef",
+        "outcome_residual_reward_clip",
+        "topology_role_coef",
+        "topology_role_min_score",
+        "topology_role_reward_coef",
+        "topology_role_reward_clip",
+        "topology_potential_coef",
+        "topology_potential_clip",
+        "semantic_shortcut_hard_stop_margin",
+        "intrinsic_segment_gate_margin",
+        "intrinsic_segment_gate_min_residual_mi",
+        "intrinsic_segment_gate_min_posterior_acc",
         "high_entropy_coef",
         "low_entropy_coef",
+        "high_max_grad_norm",
+        "low_max_grad_norm",
+        "low_value_loss_coef",
+        "low_clip_epsilon",
+        "smdp_bootstrap_coef",
         "edit_penalty_alpha",
         "switch_penalty_beta",
         "opt_cd_coef",
@@ -349,10 +575,100 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         value = getattr(args, name)
         if value is not None:
             setattr(config, name, value)
+    if int(args.process_reward_warmup_steps) >= 0:
+        config.process_reward_warmup_steps = int(args.process_reward_warmup_steps)
+    if int(args.transition_skill_reward_warmup_steps) >= 0:
+        config.transition_skill_reward_warmup_steps = int(args.transition_skill_reward_warmup_steps)
+    if int(args.transition_skill_max_samples) > 0:
+        config.transition_skill_max_samples = int(args.transition_skill_max_samples)
+    if int(args.outcome_residual_horizon) > 0:
+        config.outcome_residual_horizon = int(args.outcome_residual_horizon)
+    if int(args.outcome_residual_hidden_dim) > 0:
+        config.outcome_residual_hidden_dim = int(args.outcome_residual_hidden_dim)
+    if args.outcome_residual_injection:
+        config.outcome_residual_injection = args.outcome_residual_injection
+    if int(args.topology_role_hidden_dim) > 0:
+        config.topology_role_hidden_dim = int(args.topology_role_hidden_dim)
+    if args.topology_role_injection:
+        config.topology_role_injection = args.topology_role_injection
+    if args.topology_potential_injection:
+        config.topology_potential_injection = args.topology_potential_injection
+    if args.topology_potential_discount_mode:
+        config.topology_potential_discount_mode = args.topology_potential_discount_mode
+    if int(args.topology_potential_warmup_steps) >= 0:
+        config.topology_potential_warmup_steps = int(args.topology_potential_warmup_steps)
+    if args.enable_p2_recovery_compute:
+        config.p2_recovery_credit_compute_on = True
+    if args.enable_p2_recovery_reward:
+        config.p2_recovery_credit_reward_on = True
+        config.p2_recovery_credit_compute_on = True  # reward requires compute
+    if args.p2_recovery_reward_level:
+        config.p2_recovery_reward_level = args.p2_recovery_reward_level
+    if args.p2_recovery_reward_coef is not None:
+        config.p2_recovery_reward_coef = float(args.p2_recovery_reward_coef)
+    if args.p2_recovery_reward_clip is not None:
+        config.p2_recovery_reward_clip = float(args.p2_recovery_reward_clip)
+    if int(args.semantic_shortcut_hard_stop_min_segments) > 0:
+        config.semantic_shortcut_hard_stop_min_segments = int(args.semantic_shortcut_hard_stop_min_segments)
+    if int(args.g_intervention_kl_max_segments) > 0:
+        config.g_intervention_kl_max_segments = int(args.g_intervention_kl_max_segments)
+    if int(args.intrinsic_phase_bins) > 0:
+        config.intrinsic_phase_bins = int(args.intrinsic_phase_bins)
+    if int(args.intrinsic_segment_gate_min_segments) > 0:
+        config.intrinsic_segment_gate_min_segments = int(args.intrinsic_segment_gate_min_segments)
+    for name in (
+        "low_rnn_hidden_size",
+        "low_sequence_length",
+        "low_sequence_batch_size",
+        "low_ppo_epochs",
+    ):
+        value = int(getattr(args, name))
+        if value > 0:
+            setattr(config, name, value)
     if args.disable_process_reward:
         config.use_process_reward_for_discoverer = False
     if args.disable_process_posterior_mi:
         config.use_process_posterior_mi = False
+    if args.disable_residual_process_posterior:
+        config.use_residual_process_posterior = False
+    if args.disable_context_skill_shortcut:
+        config.use_context_skill_shortcut = False
+    if args.disable_transition_skill_discriminator:
+        config.use_transition_skill_discriminator = False
+    if args.disable_transition_skill_team_conditioning:
+        config.transition_skill_condition_on_team = False
+    if args.disable_outcome_residual_probe:
+        config.use_outcome_residual_probe = False
+    if args.disable_outcome_residual_norm:
+        config.normalize_outcome_residual_targets = False
+    if args.disable_topology_role_probe:
+        config.use_topology_role_probe = False
+    if args.disable_semantic_shortcut_hard_stop:
+        config.semantic_shortcut_hard_stop_enabled = False
+    if args.semantic_shortcut_hard_stop_raise:
+        config.semantic_shortcut_hard_stop_raise = True
+    if args.disable_g_intervention_kl_diagnostic:
+        config.use_g_intervention_kl_diagnostic = False
+    if args.disable_intrinsic_segment_gate:
+        config.intrinsic_segment_gate_enabled = False
+    if args.enable_intrinsic_reward_norm:
+        config.intrinsic_reward_normalize = True
+    if args.disable_smdp_discounted_high_return:
+        config.use_smdp_discounted_high_return = False
+    if args.disable_smdp_bootstrap:
+        config.use_smdp_bootstrap = False
+    if args.disable_high_value_norm:
+        config.use_high_value_norm = False
+    if args.disable_recurrent_low_level:
+        config.use_recurrent_low_level = False
+    if args.disable_low_value_norm:
+        config.use_low_value_norm = False
+    if args.enable_low_actor_team_code:
+        config.low_actor_condition_on_team_code = True
+    if args.enable_topology_potential_shaping:
+        config.use_topology_potential_shaping = True
+    if args.topology_potential_positive_only:
+        config.topology_potential_positive_only = True
 
 
 def resolve_device(requested: str) -> str:
@@ -443,8 +759,27 @@ def checkpoint_payload(
         "low": agent.low.state_dict(),
         "process": agent.process.state_dict(),
         "process_posterior": agent.process_posterior.state_dict(),
+        "outcome_residual_probe": (
+            agent.outcome_residual_probe.state_dict()
+            if getattr(agent, "outcome_residual_probe", None) is not None
+            else None
+        ),
+        "topology_role_probe": (
+            agent.topology_role_probe.state_dict()
+            if getattr(agent, "topology_role_probe", None) is not None
+            else None
+        ),
+        "transition_discriminator": (
+            agent.transition_discriminator.state_dict()
+            if getattr(agent, "transition_discriminator", None) is not None
+            else None
+        ),
         "high_opt": agent.high_opt.state_dict(),
-        "low_opt": agent.low_opt.state_dict(),
+        "low_opt": agent.low_opt.state_dict() if agent.low_opt is not None else None,
+        "low_actor_opt": agent.low_actor_opt.state_dict() if agent.low_actor_opt is not None else None,
+        "low_critic_opt": agent.low_critic_opt.state_dict() if agent.low_critic_opt is not None else None,
+        "high_value_norm": agent.high_value_norm.state_dict() if agent.high_value_norm is not None else None,
+        "low_value_norm": agent.low_value_norm.state_dict() if agent.low_value_norm is not None else None,
         "process_opt": agent.process_opt.state_dict(),
         "total_steps": int(total_steps),
         "update_idx": int(update_idx),
@@ -456,6 +791,9 @@ def checkpoint_payload(
         "n_agents": agent.n_agents,
         "n_skills": agent.n_skills,
         "duration_candidates": agent.duration_candidates,
+        "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
+        "low_level_architecture": str(agent.low_level_architecture),
+        "low_actor_condition_on_team_code": bool(getattr(agent, "low_actor_condition_on_team_code", False)),
         "algorithm": "ha_ctse_process_standalone",
     }
 
@@ -498,18 +836,60 @@ def load_checkpoint(
         agent.compact.load_state_dict(checkpoint["compact"])
     if "bridge" in checkpoint:
         agent.bridge.load_state_dict(checkpoint["bridge"])
-    agent.low.load_state_dict(checkpoint["low"])
+    try:
+        agent.low.load_state_dict(checkpoint["low"])
+    except RuntimeError as exc:
+        raise RuntimeError(
+            "Low-level checkpoint architecture does not match the current agent. "
+            "If this is an older feedforward checkpoint, rerun with "
+            "--disable_recurrent_low_level; if it is a recurrent checkpoint, "
+            "keep recurrent low-level enabled and match low_rnn_hidden_size."
+        ) from exc
     agent.process.load_state_dict(checkpoint["process"])
     if "process_posterior" in checkpoint:
-        agent.process_posterior.load_state_dict(checkpoint["process_posterior"])
+        agent.process_posterior.load_state_dict(checkpoint["process_posterior"], strict=False)
+    if (
+        "outcome_residual_probe" in checkpoint
+        and checkpoint.get("outcome_residual_probe") is not None
+        and getattr(agent, "outcome_residual_probe", None) is not None
+    ):
+        agent.outcome_residual_probe.load_state_dict(checkpoint["outcome_residual_probe"], strict=False)
+    if (
+        "topology_role_probe" in checkpoint
+        and checkpoint.get("topology_role_probe") is not None
+        and getattr(agent, "topology_role_probe", None) is not None
+    ):
+        agent.topology_role_probe.load_state_dict(checkpoint["topology_role_probe"], strict=False)
+    if (
+        "transition_discriminator" in checkpoint
+        and checkpoint.get("transition_discriminator") is not None
+        and getattr(agent, "transition_discriminator", None) is not None
+    ):
+        agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=False)
     if load_optimizers:
         if "high_opt" in checkpoint:
             try:
                 agent.high_opt.load_state_dict(checkpoint["high_opt"])
             except ValueError:
                 pass
-        if "low_opt" in checkpoint:
+        if "low_opt" in checkpoint and checkpoint.get("low_opt") is not None and agent.low_opt is not None:
             agent.low_opt.load_state_dict(checkpoint["low_opt"])
+        if (
+            "low_actor_opt" in checkpoint
+            and checkpoint.get("low_actor_opt") is not None
+            and agent.low_actor_opt is not None
+        ):
+            agent.low_actor_opt.load_state_dict(checkpoint["low_actor_opt"])
+        if (
+            "low_critic_opt" in checkpoint
+            and checkpoint.get("low_critic_opt") is not None
+            and agent.low_critic_opt is not None
+        ):
+            agent.low_critic_opt.load_state_dict(checkpoint["low_critic_opt"])
+        if checkpoint.get("high_value_norm") is not None and agent.high_value_norm is not None:
+            agent.high_value_norm.load_state_dict(checkpoint["high_value_norm"])
+        if checkpoint.get("low_value_norm") is not None and agent.low_value_norm is not None:
+            agent.low_value_norm.load_state_dict(checkpoint["low_value_norm"])
         if "process_opt" in checkpoint:
             try:
                 agent.process_opt.load_state_dict(checkpoint["process_opt"])
@@ -528,6 +908,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "scenario": checkpoint.get("scenario"),
         "total_steps": checkpoint.get("total_steps"),
         "update_idx": checkpoint.get("update_idx"),
+        "low_actor_condition_on_team_code": checkpoint.get("low_actor_condition_on_team_code"),
     }
 
 
@@ -551,6 +932,9 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
             checkpoint_agents,
             int(getattr(config, "max_observed_uavs", checkpoint_agents)),
         )
+
+    if metadata.get("low_actor_condition_on_team_code") is not None:
+        config.low_actor_condition_on_team_code = bool(metadata.get("low_actor_condition_on_team_code"))
 
 
 def run_env_dry_check(config, args: argparse.Namespace) -> None:
@@ -625,6 +1009,9 @@ def evaluate(
     duration_backup = agent.duration_remaining.copy()
     age_backup = agent.skill_age.copy()
     has_active_backup = agent.has_active_skill.copy()
+    team_code_backup = agent.active_team_codes.copy()
+    low_actor_hxs_backup = agent.low_actor_hxs.copy()
+    low_critic_hxs_backup = agent.low_critic_hxs.copy()
     segments_backup = agent.segments
     agent.segments = SegmentManager(agent.num_envs, agent.n_agents)
 
@@ -644,6 +1031,8 @@ def evaluate(
             episode_reward = 0.0
             episode_length = 0
             last_info = info
+            backhaul_connected_steps: list[float] = []
+            throughput_when_backhaul_connected_steps: list[float] = []
             capture_topology = save_topology and episode_idx < topology_episodes
             topology_frames = []
             if capture_topology:
@@ -667,11 +1056,17 @@ def evaluate(
                     env_id=0,
                     deterministic=True,
                 )
-                actions, _, _ = agent.act_low(obs, env_id=0, deterministic=True)
+                actions, _, _ = agent.act_low(obs, env_id=0, deterministic=True, state=state)
                 obs, reward, terminated, truncated, last_info = env.step(actions)
                 state = last_info.get("next_state", state)
                 episode_reward += float(reward)
                 episode_length += 1
+                step_metrics = extract_eval_metrics(last_info)
+                backhaul_flag = float(step_metrics.get("backhaul_connected_flag", 0.0))
+                backhaul_connected_steps.append(backhaul_flag)
+                step_throughput = step_metrics.get("throughput")
+                if backhaul_flag >= 0.5 and step_throughput is not None:
+                    throughput_when_backhaul_connected_steps.append(float(step_throughput))
                 done = bool(terminated or truncated)
                 hit_step_cap = int(args.eval_max_steps) > 0 and episode_length >= int(args.eval_max_steps)
                 if capture_topology and len(topology_frames) < topology_max_frames:
@@ -697,6 +1092,14 @@ def evaluate(
             rewards.append(episode_reward)
             lengths.append(episode_length)
             episode_metrics = extract_eval_metrics(last_info)
+            if backhaul_connected_steps:
+                episode_metrics["backhaul_connected_step_fraction"] = float(np.mean(backhaul_connected_steps))
+            if throughput_when_backhaul_connected_steps:
+                episode_metrics["throughput_when_backhaul_connected_mbps"] = float(
+                    np.mean(throughput_when_backhaul_connected_steps)
+                )
+            else:
+                episode_metrics.pop("throughput_when_backhaul_connected_mbps", None)
             eval_record = {
                 "checkpoint": str(getattr(args, "eval_checkpoint_name", "")),
                 "total_steps": int(total_steps),
@@ -708,6 +1111,8 @@ def evaluate(
             eval_records.append(eval_record)
             append_csv(Path(args.log_dir) / "metrics" / "eval_episodes.csv", eval_record, EVAL_FIELDS)
             for key, value in episode_metrics.items():
+                if value is None or not np.isfinite(float(value)):
+                    continue
                 metric_values.setdefault(key, []).append(value)
             if capture_topology and topology_frames:
                 try:
@@ -739,6 +1144,9 @@ def evaluate(
         agent.duration_remaining = duration_backup
         agent.skill_age = age_backup
         agent.has_active_skill = has_active_backup
+        agent.active_team_codes = team_code_backup
+        agent.low_actor_hxs = low_actor_hxs_backup
+        agent.low_critic_hxs = low_critic_hxs_backup
 
     metrics = {
         "reward_mean": float(np.mean(rewards)) if rewards else 0.0,
@@ -760,6 +1168,8 @@ def evaluate(
         f"coverage={metrics.get('coverage', 0.0):.6f} "
         f"qos={metrics.get('qos', 0.0):.6f} "
         f"throughput={metrics.get('throughput', 0.0):.6f} "
+        f"backhaul_connected_frac={metrics.get('backhaul_connected_step_fraction', metrics.get('backhaul_connected_flag', 0.0)):.6f} "
+        f"throughput_when_backhaul_connected={metrics.get('throughput_when_backhaul_connected_mbps', 0.0):.6f} "
         f"battery_min={metrics.get('battery_min', 0.0):.6f}"
     )
     return metrics
@@ -777,12 +1187,315 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("Process/PriorLoss", process_metrics.get("process_prior_loss", 0.0), total_steps)
     writer.add_scalar("Process/PosteriorAcc", process_metrics.get("process_posterior_acc", 0.0), total_steps)
     writer.add_scalar("Process/MIEstimateMean", process_metrics.get("process_mi_estimate_mean", 0.0), total_steps)
+    writer.add_scalar("Process/ResidualMIMean", process_metrics.get("process_residual_mi_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "Process/ResidualMIPositiveFrac",
+        process_metrics.get("process_residual_mi_positive_frac", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/ResidualLogShortcutMean",
+        process_metrics.get("process_residual_log_shortcut_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/ResidualLogContextMean",
+        process_metrics.get("process_residual_log_context_mean", 0.0),
+        total_steps,
+    )
     writer.add_scalar("Process/LogQMean", process_metrics.get("process_log_q_mean", 0.0), total_steps)
     writer.add_scalar("Process/LogPMean", process_metrics.get("process_log_p_mean", 0.0), total_steps)
+    writer.add_scalar("Process/ShortcutLoss", process_metrics.get("process_shortcut_loss", 0.0), total_steps)
+    writer.add_scalar("Process/ShortcutMarginLoss", process_metrics.get("process_shortcut_margin_loss", 0.0), total_steps)
+    writer.add_scalar("Process/RewardWarmupActive", process_metrics.get("process_reward_warmup_active", 0.0), total_steps)
+    writer.add_scalar("TransitionSkill/Samples", process_metrics.get("transition_skill_samples", 0.0), total_steps)
+    writer.add_scalar(
+        "TransitionSkill/AvailableSamples",
+        process_metrics.get("transition_skill_available_samples", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("TransitionSkill/Loss", process_metrics.get("transition_skill_loss", 0.0), total_steps)
+    writer.add_scalar(
+        "TransitionSkill/PriorLoss",
+        process_metrics.get("transition_skill_prior_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/ContextLoss",
+        process_metrics.get("transition_skill_context_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("TransitionSkill/Acc", process_metrics.get("transition_skill_acc", 0.0), total_steps)
+    writer.add_scalar(
+        "TransitionSkill/ContextAcc",
+        process_metrics.get("transition_skill_context_acc", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("TransitionSkill/MIMean", process_metrics.get("transition_skill_mi_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "TransitionSkill/MIPositiveFrac",
+        process_metrics.get("transition_skill_mi_positive_frac", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/ResidualMIMean",
+        process_metrics.get("transition_skill_residual_mi_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/ResidualMIPositiveFrac",
+        process_metrics.get("transition_skill_residual_mi_positive_frac", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/RewardMean",
+        process_metrics.get("transition_skill_reward_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/RewardActive",
+        process_metrics.get("transition_skill_reward_active", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/RewardUnclippedMean",
+        process_metrics.get("transition_skill_reward_unclipped_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "TransitionSkill/RewardWarmupActive",
+        process_metrics.get("transition_skill_reward_warmup_active", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("TransitionSkill/LogQMean", process_metrics.get("transition_skill_log_q_mean", 0.0), total_steps)
+    writer.add_scalar("TransitionSkill/LogPMean", process_metrics.get("transition_skill_log_p_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "TransitionSkill/LogContextMean",
+        process_metrics.get("transition_skill_log_context_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Intrinsic/SegmentHighGateActive",
+        process_metrics.get("intrinsic_segment_high_gate_active", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Intrinsic/SegmentHighGateScore",
+        process_metrics.get("intrinsic_segment_high_gate_score", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Intrinsic/SegmentHighGatePosteriorMinusShortcut",
+        process_metrics.get("intrinsic_segment_high_gate_posterior_minus_shortcut", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Intrinsic/SegmentHighGateReasonCode",
+        process_metrics.get("intrinsic_segment_high_gate_reason_code", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("Process/ShortcutDurationAcc", process_metrics.get("process_shortcut_duration_acc", 0.0), total_steps)
+    writer.add_scalar("Process/ShortcutLengthAcc", process_metrics.get("process_shortcut_length_acc", 0.0), total_steps)
+    writer.add_scalar(
+        "Process/ShortcutRewardSumAcc",
+        process_metrics.get("process_shortcut_reward_sum_acc", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/ShortcutContextAcc",
+        process_metrics.get("process_shortcut_context_acc", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/ShortcutContextLoss",
+        process_metrics.get("process_shortcut_context_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("Process/ShortcutMaxAcc", process_metrics.get("process_shortcut_max_acc", 0.0), total_steps)
+    writer.add_scalar(
+        "Process/PosteriorMinusShortcutMax",
+        process_metrics.get("posterior_acc_minus_shortcut_max", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/PosteriorMinusContextShortcut",
+        process_metrics.get("posterior_acc_minus_context_shortcut", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/RewardMIComponentMean",
+        process_metrics.get("process_reward_mi_component_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/RewardOutcomePenaltyMean",
+        process_metrics.get("process_reward_outcome_penalty_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/RewardUnclippedMean",
+        process_metrics.get("process_reward_unclipped_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("Process/MIPositiveFrac", process_metrics.get("process_mi_positive_frac", 0.0), total_steps)
     writer.add_scalar("Process/RewardMean", process_metrics["process_reward_mean"], total_steps)
+    writer.add_scalar("Process/RewardHighMean", process_metrics.get("process_reward_high_mean", 0.0), total_steps)
+    writer.add_scalar("Process/RewardLowMean", process_metrics.get("process_reward_low_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "Process/SemanticShortcutHardStopTriggered",
+        process_metrics.get("semantic_shortcut_hard_stop_triggered", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/SemanticShortcutHardStopApplied",
+        process_metrics.get("semantic_shortcut_hard_stop_applied", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/SemanticShortcutHardStopScore",
+        process_metrics.get("semantic_shortcut_hard_stop_score", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/SemanticShortcutHardStopReasonCode",
+        process_metrics.get("semantic_shortcut_hard_stop_reason_code", 0.0),
+        total_steps,
+    )
     writer.add_scalar("Process/OutcomeAvailableMean", process_metrics["outcome_available_mean"], total_steps)
     writer.add_scalar("Process/OutcomeAbsMean", process_metrics["outcome_abs_mean"], total_steps)
+    writer.add_scalar(
+        "OutcomeResidual/FullLoss",
+        process_metrics.get("outcome_residual_full_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/BaselineLoss",
+        process_metrics.get("outcome_residual_base_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/TotalLoss",
+        process_metrics.get("outcome_residual_total_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/GainMean",
+        process_metrics.get("outcome_residual_gain_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/GainPositiveFrac",
+        process_metrics.get("outcome_residual_gain_positive_frac", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/AvailableMean",
+        process_metrics.get("outcome_residual_available_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/TargetAbsMean",
+        process_metrics.get("outcome_residual_target_abs_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/RewardMean",
+        process_metrics.get("outcome_residual_reward_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/RewardActive",
+        process_metrics.get("outcome_residual_reward_active", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/SkillGainStd",
+        process_metrics.get("outcome_residual_skill_gain_std", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/TeamGainStd",
+        process_metrics.get("outcome_residual_team_gain_std", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "OutcomeResidual/DurationGainStd",
+        process_metrics.get("outcome_residual_duration_gain_std", 0.0),
+        total_steps,
+    )
+    for field_name in (
+        "coverage_delta_h",
+        "qos_delta_h",
+        "full_disconnect_improvement_h",
+        "relay_margin_delta_h",
+        "connected_components_improvement_h",
+        "teammate_service_gain_h",
+        "bottleneck_link_gain_h",
+    ):
+        writer.add_scalar(
+            f"OutcomeResidual/Gain/{field_name}",
+            process_metrics.get(f"outcome_residual_gain_{field_name}", 0.0),
+            total_steps,
+        )
+    for key in (
+        "topology_role_samples",
+        "topology_role_available_frac",
+        "topology_role_loss",
+        "topology_role_full_loss",
+        "topology_role_shortcut_loss",
+        "topology_role_acc",
+        "topology_role_shortcut_acc",
+        "topology_role_resid_gain_mean",
+        "topology_role_resid_gain_positive_frac",
+        "topology_role_reward_mean",
+        "topology_role_reward_active",
+        "topology_role_z_mi",
+        "topology_role_g_mi",
+        "topology_cf_backhaul_mean_mean",
+        "topology_cf_components_mean_mean",
+        "topology_cf_disconnect_mean_mean",
+        "topology_service_mean_mean",
+    ):
+        writer.add_scalar(f"TopologyRole/{key}", process_metrics.get(key, 0.0), total_steps)
+    for role_name in ("idle", "relay", "service", "relay_service"):
+        writer.add_scalar(
+            f"TopologyRole/Fraction/{role_name}",
+            process_metrics.get(f"topology_role_frac_{role_name}", 0.0),
+            total_steps,
+        )
+    for key in (
+        "topology_potential_available_frac",
+        "topology_potential_active",
+        "topology_potential_raw_mean",
+        "topology_potential_reward_mean",
+        "topology_potential_high_mean",
+        "topology_potential_low_mean",
+        "topology_potential_phi_start_mean",
+        "topology_potential_phi_end_mean",
+        "topology_potential_backhaul_up_start_mean",
+        "topology_potential_backhaul_up_end_mean",
+        "topology_potential_full_disconnect_start_mean",
+        "topology_potential_full_disconnect_end_mean",
+    ):
+        writer.add_scalar(f"TopologyPotential/{key}", process_metrics.get(key, 0.0), total_steps)
     writer.add_scalar("Process/DurationOnlyAccuracy", process_metrics.get("duration_only_accuracy", 0.0), total_steps)
+    writer.add_scalar("Process/LengthOnlyAccuracy", process_metrics.get("length_only_accuracy", 0.0), total_steps)
+    writer.add_scalar("Process/RewardSumOnlyAccuracy", process_metrics.get("reward_sum_only_accuracy", 0.0), total_steps)
+    writer.add_scalar(
+        "Process/PosteriorMinusDurationOnly",
+        process_metrics.get("posterior_acc_minus_duration_only", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/PosteriorMinusLengthOnly",
+        process_metrics.get("posterior_acc_minus_length_only", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Process/PosteriorMinusRewardSumOnly",
+        process_metrics.get("posterior_acc_minus_reward_sum_only", 0.0),
+        total_steps,
+    )
     writer.add_scalar("Process/SegmentLengthMean", process_metrics.get("segment_length_mean", 0.0), total_steps)
     writer.add_scalar("Process/SegmentLengthMax", process_metrics.get("segment_length_max", 0.0), total_steps)
     writer.add_scalar("Process/DurationTargetMean", process_metrics.get("duration_target_mean", 0.0), total_steps)
@@ -796,6 +1509,48 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("Collapse/TeamCodeUsageEntropy", process_metrics.get("team_code_usage_entropy", 0.0), total_steps)
     writer.add_scalar("Collapse/TeamCodeUsageMaxFrac", process_metrics.get("team_code_usage_max_frac", 0.0), total_steps)
     writer.add_scalar("Collapse/TeamCodeSkillMI", process_metrics.get("team_code_skill_mi", 0.0), total_steps)
+    writer.add_scalar("Collapse/GInterventionKLActive", process_metrics.get("g_intervention_kl_active", 0.0), total_steps)
+    writer.add_scalar("Collapse/GInterventionKLSamples", process_metrics.get("g_intervention_kl_samples", 0.0), total_steps)
+    writer.add_scalar("Collapse/GInterventionKLMean", process_metrics.get("g_intervention_kl_mean", 0.0), total_steps)
+    writer.add_scalar("Collapse/GInterventionKLMax", process_metrics.get("g_intervention_kl_max", 0.0), total_steps)
+    writer.add_scalar("Collapse/GInterventionTVMean", process_metrics.get("g_intervention_tv_mean", 0.0), total_steps)
+    writer.add_scalar("Credit/ProbeAvailableFrac", process_metrics.get("credit_probe_available_frac", 0.0), total_steps)
+    writer.add_scalar("Credit/FullDisconnectMean", process_metrics.get("credit_full_disconnect_mean", 0.0), total_steps)
+    writer.add_scalar("Credit/RecoveryRate", process_metrics.get("credit_recovery_rate", 0.0), total_steps)
+    writer.add_scalar("Credit/CollapseRate", process_metrics.get("credit_collapse_rate", 0.0), total_steps)
+    writer.add_scalar(
+        "Credit/BackhaulConnectedStepFraction",
+        process_metrics.get("credit_backhaul_connected_step_fraction", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Credit/ThroughputWhenBackhaulConnectedMbps",
+        process_metrics.get("credit_throughput_when_backhaul_connected_mbps", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Credit/DeltaConnectivityRatio",
+        process_metrics.get("credit_delta_connectivity_ratio_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Credit/DeltaBackhaulServedUsers",
+        process_metrics.get("credit_delta_backhaul_served_users_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Credit/DeltaBackhaulOutageRatio",
+        process_metrics.get("credit_delta_backhaul_outage_ratio_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Credit/DeltaRelayRouteLossRatio",
+        process_metrics.get("credit_delta_relay_route_loss_ratio_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("Credit/RewardConnectivityCorr", process_metrics.get("credit_reward_conn_corr", 0.0), total_steps)
+    writer.add_scalar("Credit/RewardServedCorr", process_metrics.get("credit_reward_served_corr", 0.0), total_steps)
+    writer.add_scalar("Credit/RewardOutageCorr", process_metrics.get("credit_reward_outage_corr", 0.0), total_steps)
     writer.add_scalar("High/Loss", process_metrics["high_loss"], total_steps)
     writer.add_scalar("High/PolicyLoss", process_metrics.get("high_policy_loss", 0.0), total_steps)
     writer.add_scalar("High/ValueLoss", process_metrics.get("high_value_loss", 0.0), total_steps)
@@ -803,6 +1558,17 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("High/AuxLoss", process_metrics.get("high_aux_loss", 0.0), total_steps)
     writer.add_scalar("High/Entropy", process_metrics["high_entropy"], total_steps)
     writer.add_scalar("High/ReturnMean", process_metrics["high_return_mean"], total_steps)
+    writer.add_scalar("High/EnvReturnMean", process_metrics.get("high_env_return_mean", 0.0), total_steps)
+    writer.add_scalar("High/BootstrapValueMean", process_metrics.get("high_bootstrap_value_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "High/BootstrapContributionMean",
+        process_metrics.get("high_bootstrap_contribution_mean", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("High/SMDPDiscountMean", process_metrics.get("high_smdp_discount_mean", 0.0), total_steps)
+    writer.add_scalar("High/ValueNormMean", process_metrics.get("high_value_norm_mean", 0.0), total_steps)
+    writer.add_scalar("High/ValueNormStd", process_metrics.get("high_value_norm_std", 0.0), total_steps)
+    writer.add_scalar("High/GradNorm", process_metrics.get("high_grad_norm", 0.0), total_steps)
     writer.add_scalar("High/TeamCodeEntropy", process_metrics.get("team_code_entropy", 0.0), total_steps)
     writer.add_scalar("High/CompactNormMean", process_metrics.get("compact_norm_mean", 0.0), total_steps)
     writer.add_scalar("High/OPTCDLoss", process_metrics.get("opt_cd_loss", 0.0), total_steps)
@@ -812,8 +1578,65 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("Low/PolicyLoss", low_metrics.get("low_policy_loss", 0.0), total_steps)
     writer.add_scalar("Low/ValueLoss", low_metrics.get("low_value_loss", 0.0), total_steps)
     writer.add_scalar("Low/EntropyLoss", low_metrics.get("low_entropy_loss", 0.0), total_steps)
+    writer.add_scalar("Low/ActorLoss", low_metrics.get("low_actor_loss", 0.0), total_steps)
+    writer.add_scalar("Low/CriticLoss", low_metrics.get("low_critic_loss", 0.0), total_steps)
     writer.add_scalar("Low/Entropy", low_metrics["low_entropy"], total_steps)
+    writer.add_scalar("Low/SequenceChunks", low_metrics.get("low_sequence_chunks", 0.0), total_steps)
+    writer.add_scalar("Low/ValueNormMean", low_metrics.get("low_value_norm_mean", 0.0), total_steps)
+    writer.add_scalar("Low/ValueNormStd", low_metrics.get("low_value_norm_std", 0.0), total_steps)
+    writer.add_scalar("Low/ValueErrorAbsMean", low_metrics.get("low_value_error_abs_mean", 0.0), total_steps)
+    writer.add_scalar("Low/ValueErrorRMSE", low_metrics.get("low_value_error_rmse", 0.0), total_steps)
+    writer.add_scalar("Low/AdvantageStd", low_metrics.get("low_advantage_std", 0.0), total_steps)
+    writer.add_scalar("Low/RatioMean", low_metrics.get("low_ratio_mean", 0.0), total_steps)
+    writer.add_scalar("Low/ClipFrac", low_metrics.get("low_clip_frac", 0.0), total_steps)
+    writer.add_scalar("Low/ApproxKL", low_metrics.get("low_approx_kl", 0.0), total_steps)
+    writer.add_scalar("Low/ActorGradNorm", low_metrics.get("low_actor_grad_norm", 0.0), total_steps)
+    writer.add_scalar("Low/CriticGradNorm", low_metrics.get("low_critic_grad_norm", 0.0), total_steps)
+    writer.add_scalar("Low/ActorHiddenNormMean", low_metrics.get("low_actor_h_norm_mean", 0.0), total_steps)
+    writer.add_scalar("Low/CriticHiddenNormMean", low_metrics.get("low_critic_h_norm_mean", 0.0), total_steps)
+    writer.add_scalar("LowSkill/UsageEntropy", low_metrics.get("low_skill_usage_entropy", 0.0), total_steps)
+    writer.add_scalar("LowSkill/ReturnStd", low_metrics.get("low_skill_return_std", 0.0), total_steps)
+    writer.add_scalar("LowSkill/ReturnRange", low_metrics.get("low_skill_return_range", 0.0), total_steps)
+    writer.add_scalar("LowSkill/ValueErrorAbsStd", low_metrics.get("low_skill_value_error_abs_std", 0.0), total_steps)
+    writer.add_scalar("LowSkill/EntropyStd", low_metrics.get("low_skill_entropy_std", 0.0), total_steps)
+    writer.add_scalar("LowTeam/UsageEntropy", low_metrics.get("low_team_usage_entropy", 0.0), total_steps)
+    writer.add_scalar("LowTeam/ReturnStd", low_metrics.get("low_team_return_std", 0.0), total_steps)
+    writer.add_scalar("LowTeam/ReturnRange", low_metrics.get("low_team_return_range", 0.0), total_steps)
+    writer.add_scalar("LowTeam/ValueErrorAbsStd", low_metrics.get("low_team_value_error_abs_std", 0.0), total_steps)
     writer.add_scalar("Low/ReturnMean", low_metrics["return_mean"], total_steps)
+    # P2-lite recovery-window contribution credit (Pre-check 2 gate + diagnostics).
+    writer.add_scalar("P2/Segments", process_metrics.get("p2_segments", 0.0), total_steps)
+    writer.add_scalar("P2/AvailableFrac", process_metrics.get("p2_available_frac", 0.0), total_steps)
+    writer.add_scalar("P2/WindowFrac", process_metrics.get("p2_window_frac", 0.0), total_steps)
+    writer.add_scalar("P2/FTeamMean", process_metrics.get("p2_f_team_mean", 0.0), total_steps)
+    writer.add_scalar("P2/CreditMean", process_metrics.get("p2_credit_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "P2/DeltaPhiNonzeroFullDisconnect",
+        process_metrics.get("delta_phi_soft_nonzero_rate_when_full_disconnect", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "P2/DeltaPhiNonzeroNearDisconnect",
+        process_metrics.get("delta_phi_soft_nonzero_rate_when_near_disconnect", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "P2/CorrPhiRecoveryEvent",
+        process_metrics.get("p2_corr_phi_recovery_event", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("P2/PartialRecoveryFrac", process_metrics.get("p2_partial_recovery_frac", 0.0), total_steps)
+    writer.add_scalar("P2/DeltaBhFracMean", process_metrics.get("p2_delta_bh_frac_mean", 0.0), total_steps)
+    writer.add_scalar(
+        "P2/CorrCreditDeltaBhFrac",
+        process_metrics.get("p2_corr_credit_delta_bh_frac", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "P2/CreditByPartialRecovery",
+        process_metrics.get("p2_credit_by_partial_recovery_event", 0.0),
+        total_steps,
+    )
     writer.flush()
 
 
@@ -850,6 +1673,19 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
     collector = create_collector(config, args, scale_mode="train", num_envs=num_envs)
     try:
         observations, states, _infos = collector.reset_all(seed=int(args.seed))
+        # Per-env pre-step state/reward info: the post-step state of step t is the
+        # pre-step (true segment-start) state of step t+1.  Seeded from reset info.
+        def _seed_info(infos, key):
+            out = [{} for _ in range(num_envs)]
+            if isinstance(infos, (list, tuple)):
+                for i in range(min(num_envs, len(infos))):
+                    info_i = infos[i]
+                    if isinstance(info_i, dict) and isinstance(info_i.get(key), dict):
+                        out[i] = dict(info_i[key])
+            return out
+
+        prev_state_info = _seed_info(_infos, "state_info")
+        prev_reward_info = _seed_info(_infos, "reward_info")
         env = SimpleNamespace(**collector.spec)
         action_space_type, _, _ = action_space_details(env)
         state_dim = int(collector.spec.get("state_dim") or 0) or (
@@ -878,6 +1714,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             update_idx=update_idx,
             mode="train",
         )
+        param_counts = agent.parameter_counts()
         emit(
             args,
             "standalone_train_start "
@@ -885,6 +1722,46 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"num_envs={num_envs} n_agents={env.n_uavs} obs_dim={env.obs_dim} action_dim={env.action_dim} "
             f"action_space_type={action_space_type} collector={args.collector_backend} "
             f"policy_update=on_policy "
+            f"process_reward_mode={getattr(config, 'process_reward_mode', 'mi_outcome')} "
+            f"process_reward_injection={getattr(config, 'process_reward_injection', 'none')} "
+            f"process_warmup_steps={int(getattr(config, 'process_reward_warmup_steps', 0))} "
+            f"process_shortcut_margin={float(getattr(config, 'process_shortcut_margin', 0.0))} "
+            f"process_shortcut_margin_coef={float(getattr(config, 'process_shortcut_margin_coef', 0.0))} "
+            f"context_shortcut={bool(getattr(config, 'use_context_skill_shortcut', True))} "
+            f"context_shortcut_coef={float(getattr(config, 'context_shortcut_coef', 0.0))} "
+            f"transition_context_shortcut_coef={float(getattr(config, 'transition_context_shortcut_coef', 0.0))} "
+            f"intrinsic_phase_bins={int(getattr(config, 'intrinsic_phase_bins', 0))} "
+            f"transition_disc={bool(getattr(config, 'use_transition_skill_discriminator', True))} "
+            f"transition_coef={float(getattr(config, 'transition_skill_coef', 0.0))} "
+            f"transition_reward_coef={float(getattr(config, 'transition_skill_reward_coef', 0.0))} "
+            f"transition_reward_warmup={int(getattr(config, 'transition_skill_reward_warmup_steps', 0))} "
+            f"transition_max_samples={int(getattr(config, 'transition_skill_max_samples', 0))} "
+            f"topology_role_probe={bool(getattr(config, 'use_topology_role_probe', True))} "
+            f"topology_role_coef={float(getattr(config, 'topology_role_coef', 0.0))} "
+            f"topology_role_injection={getattr(config, 'topology_role_injection', 'none')} "
+            f"topology_role_reward_coef={float(getattr(config, 'topology_role_reward_coef', 0.0))} "
+            f"semantic_shortcut_hard_stop={bool(getattr(config, 'semantic_shortcut_hard_stop_enabled', True))} "
+            f"semantic_shortcut_margin={float(getattr(config, 'semantic_shortcut_hard_stop_margin', 0.0))} "
+            f"g_intervention_kl={bool(getattr(config, 'use_g_intervention_kl_diagnostic', True))} "
+            f"intrinsic_segment_gate={bool(getattr(config, 'intrinsic_segment_gate_enabled', True))} "
+            f"intrinsic_gate_margin={float(getattr(config, 'intrinsic_segment_gate_margin', 0.0))} "
+            f"intrinsic_gate_min_segments={int(getattr(config, 'intrinsic_segment_gate_min_segments', 0))} "
+            f"smdp_discount={bool(getattr(config, 'use_smdp_discounted_high_return', True))} "
+            f"smdp_bootstrap={bool(getattr(config, 'use_smdp_bootstrap', True))} "
+            f"smdp_bootstrap_coef={float(getattr(config, 'smdp_bootstrap_coef', 1.0))} "
+            f"high_value_norm={bool(getattr(config, 'use_high_value_norm', True))} "
+            f"recurrent_low={bool(getattr(config, 'use_recurrent_low_level', True))} "
+            f"low_arch={getattr(config, 'low_level_architecture', 'strict_hmasd_mappo')} "
+            f"low_actor_team_code={bool(getattr(config, 'low_actor_condition_on_team_code', False))} "
+            f"network_scale={getattr(config, 'network_scale_profile', 'custom')} "
+            f"low_value_norm={bool(getattr(config, 'use_low_value_norm', True))} "
+            f"low_seq_len={int(getattr(config, 'low_sequence_length', 0))} "
+            f"clip={float(getattr(config, 'clip_epsilon', 0.2))} "
+            f"low_clip={float(getattr(config, 'low_clip_epsilon', getattr(config, 'clip_epsilon', 0.2)))} "
+            f"params_total={param_counts.get('total_trainable', 0)} "
+            f"params_high_stack={param_counts.get('high_stack', 0)} "
+            f"params_low={param_counts.get('low', 0)} "
+            f"params_process_stack={param_counts.get('process_stack', 0)} "
             f"duration_candidates={tuple(getattr(config, 'skill_lifetime_candidates', ())) } "
             f"rollout_length={args.rollout_length} total_timesteps={args.total_timesteps} "
             f"save_interval={args.save_interval} checkpoint_keep_last={args.checkpoint_keep_last}"
@@ -899,6 +1776,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 pre_actions = []
                 pre_logp = []
                 pre_values = []
+                pre_low_context = []
                 pre_rollout_indices = []
                 for env_id in range(num_envs):
                     obs = observations[env_id]
@@ -910,11 +1788,17 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         k=int(args.skill_interval),
                         env_id=env_id,
                     )
-                    actions, logp, values = agent.act_low(obs, env_id=env_id)
+                    actions, logp, values, low_context = agent.act_low(
+                        obs,
+                        env_id=env_id,
+                        state=states[env_id],
+                        return_context=True,
+                    )
                     pre_obs.append(obs)
                     pre_actions.append(actions)
                     pre_logp.append(logp)
                     pre_values.append(values)
+                    pre_low_context.append(low_context)
                     pre_rollout_indices.append(rollout_idx)
 
                 step_results = collector.step(pre_actions)
@@ -923,6 +1807,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     actions = pre_actions[env_id]
                     logp = pre_logp[env_id]
                     values = pre_values[env_id]
+                    low_context = pre_low_context[env_id]
                     rollout_idx = pre_rollout_indices[env_id]
                     next_obs = result.obs
                     reward = result.reward
@@ -949,12 +1834,25 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         next_obs,
                         rollout_idx,
                         reward_info=info.get("reward_info", {}),
+                        state_info=info.get("state_info", {}),
+                        next_state=info.get("next_state", states[env_id]),
+                        done=done,
+                        pre_state_info=prev_state_info[env_id],
+                        pre_reward_info=prev_reward_info[env_id],
                     )
+                    # This step's post-step state is the next step's pre-step state.
+                    prev_state_info[env_id] = info.get("state_info", {}) or {}
+                    prev_reward_info[env_id] = info.get("reward_info", {}) or {}
+                    rollout.env_ids.append(int(env_id))
                     rollout.obs.append(np.asarray(obs, dtype=np.float32))
+                    rollout.states.append(np.asarray(low_context["state"], dtype=np.float32))
                     rollout.skills.append(agent.active_skills[env_id].copy())
+                    rollout.team_codes.append(int(low_context["team_code"]))
                     rollout.actions.append(actions.copy())
                     rollout.logp.append(logp.copy())
                     rollout.values.append(values.copy())
+                    rollout.low_actor_hxs.append(np.asarray(low_context["actor_hxs"], dtype=np.float32))
+                    rollout.low_critic_hxs.append(np.asarray(low_context["critic_hxs"], dtype=np.float32))
                     rollout.rewards.append(individual_rewards.copy())
                     rollout.dones.append(done)
                     episode_rewards.append(float(np.mean(individual_rewards)))
@@ -966,12 +1864,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         agent.segments.flush(env_id)
                         observations[env_id], info = collector.reset_one(env_id)
                         states[env_id] = info.get("state")
+                        # Re-seed pre-step info from the reset state for the next segment.
+                        prev_state_info[env_id] = info.get("state_info", {}) or {}
+                        prev_reward_info[env_id] = info.get("reward_info", {}) or {}
                         agent.reset_env_state(env_id)
                 if total_steps >= int(args.total_timesteps):
                     break
 
             agent.segments.flush()
-            process_metrics = agent.process_update(rollout)
+            rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
+            process_metrics = agent.process_update(rollout, total_steps=total_steps)
             low_metrics = agent.update_low(rollout)
             update_idx += 1
             env_reward_mean = float(np.mean(episode_rewards)) if episode_rewards else 0.0
@@ -983,23 +1885,119 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"process_segments={process_metrics['process_segments']:.0f} "
                 f"process_loss={process_metrics['process_loss']:.6f} "
                 f"process_mi={process_metrics.get('process_mi_estimate_mean', 0.0):.6f} "
+                f"process_resid_mi={process_metrics.get('process_residual_mi_mean', 0.0):.6f} "
+                f"process_shortcut_acc={process_metrics.get('process_shortcut_max_acc', 0.0):.3f} "
+                f"process_margin_loss={process_metrics.get('process_shortcut_margin_loss', 0.0):.6f} "
+                f"process_warmup={process_metrics.get('process_reward_warmup_active', 0.0):.0f} "
+                f"trans_samples={process_metrics.get('transition_skill_samples', 0.0):.0f} "
+                f"trans_acc={process_metrics.get('transition_skill_acc', 0.0):.3f} "
+                f"trans_ctx_acc={process_metrics.get('transition_skill_context_acc', 0.0):.3f} "
+                f"trans_mi={process_metrics.get('transition_skill_mi_mean', 0.0):.6f} "
+                f"trans_resid_mi={process_metrics.get('transition_skill_residual_mi_mean', 0.0):.6f} "
+                f"trans_reward={process_metrics.get('transition_skill_reward_mean', 0.0):.6f} "
+                f"trans_active={process_metrics.get('transition_skill_reward_active', 0.0):.0f} "
+                f"high_intr_gate={process_metrics.get('intrinsic_segment_high_gate_active', 0.0):.0f} "
+                f"high_intr_score={process_metrics.get('intrinsic_segment_high_gate_score', 0.0):.6f} "
+                f"high_intr_reason={process_metrics.get('intrinsic_segment_high_gate_reason_code', 0.0):.0f} "
+                f"posterior_gap_short={process_metrics.get('posterior_acc_minus_shortcut_max', 0.0):.3f} "
+                f"posterior_gap_ctx={process_metrics.get('posterior_acc_minus_context_shortcut', 0.0):.3f} "
                 f"posterior_acc={process_metrics.get('process_posterior_acc', 0.0):.3f} "
+                f"ctx_short_acc={process_metrics.get('process_shortcut_context_acc', 0.0):.3f} "
                 f"process_reward_mean={process_metrics['process_reward_mean']:.6f} "
+                f"process_reward_raw={process_metrics.get('process_reward_unclipped_mean', 0.0):.6f} "
+                f"process_mi_reward={process_metrics.get('process_reward_mi_component_mean', 0.0):.6f} "
+                f"process_reward_high={process_metrics.get('process_reward_high_mean', 0.0):.6f} "
+                f"process_reward_low={process_metrics.get('process_reward_low_mean', 0.0):.6f} "
+                f"semantic_stop={process_metrics.get('semantic_shortcut_hard_stop_triggered', 0.0):.0f} "
+                f"semantic_stop_apply={process_metrics.get('semantic_shortcut_hard_stop_applied', 0.0):.0f} "
+                f"semantic_stop_score={process_metrics.get('semantic_shortcut_hard_stop_score', 0.0):.3f} "
                 f"outcome_available={process_metrics['outcome_available_mean']:.3f} "
                 f"outcome_abs_mean={process_metrics['outcome_abs_mean']:.6f} "
+                f"out_full_loss={process_metrics.get('outcome_residual_full_loss', 0.0):.6f} "
+                f"out_base_loss={process_metrics.get('outcome_residual_base_loss', 0.0):.6f} "
+                f"out_gain={process_metrics.get('outcome_residual_gain_mean', 0.0):.6f} "
+                f"out_pos={process_metrics.get('outcome_residual_gain_positive_frac', 0.0):.3f} "
+                f"out_active={process_metrics.get('outcome_residual_reward_active', 0.0):.0f} "
+                f"role_avail={process_metrics.get('topology_role_available_frac', 0.0):.3f} "
+                f"role_acc={process_metrics.get('topology_role_acc', 0.0):.3f} "
+                f"role_ctx_acc={process_metrics.get('topology_role_shortcut_acc', 0.0):.3f} "
+                f"role_gain={process_metrics.get('topology_role_resid_gain_mean', 0.0):.6f} "
+                f"role_pos={process_metrics.get('topology_role_resid_gain_positive_frac', 0.0):.3f} "
+                f"role_z_mi={process_metrics.get('topology_role_z_mi', 0.0):.3f} "
+                f"topo_pot_active={process_metrics.get('topology_potential_active', 0.0):.0f} "
+                f"topo_pot_raw={process_metrics.get('topology_potential_raw_mean', 0.0):.6f} "
+                f"topo_pot_rew={process_metrics.get('topology_potential_reward_mean', 0.0):.6f} "
+                f"topo_pot_low={process_metrics.get('topology_potential_low_mean', 0.0):.6f} "
+                f"topo_phi_start={process_metrics.get('topology_potential_phi_start_mean', 0.0):.6f} "
+                f"topo_phi_end={process_metrics.get('topology_potential_phi_end_mean', 0.0):.6f} "
                 f"duration_only_acc={process_metrics.get('duration_only_accuracy', 0.0):.3f} "
+                f"length_only_acc={process_metrics.get('length_only_accuracy', 0.0):.3f} "
+                f"reward_sum_only_acc={process_metrics.get('reward_sum_only_accuracy', 0.0):.3f} "
+                f"posterior_gap_dur={process_metrics.get('posterior_acc_minus_duration_only', 0.0):.3f} "
+                f"posterior_gap_len={process_metrics.get('posterior_acc_minus_length_only', 0.0):.3f} "
+                f"posterior_gap_rew={process_metrics.get('posterior_acc_minus_reward_sum_only', 0.0):.3f} "
                 f"switch_rate={process_metrics.get('skill_switch_rate', 0.0):.3f} "
                 f"seg_len_mean={process_metrics.get('segment_length_mean', 0.0):.2f} "
                 f"high_loss={process_metrics['high_loss']:.6f} "
                 f"high_value_loss={process_metrics.get('high_value_loss', 0.0):.6f} "
                 f"high_entropy={process_metrics['high_entropy']:.6f} "
                 f"high_return_mean={process_metrics['high_return_mean']:.6f} "
+                f"high_env_return={process_metrics.get('high_env_return_mean', 0.0):.6f} "
+                f"high_bootstrap={process_metrics.get('high_bootstrap_value_mean', 0.0):.6f} "
+                f"high_bootstrap_contrib={process_metrics.get('high_bootstrap_contribution_mean', 0.0):.6f} "
+                f"high_vnorm_mean={process_metrics.get('high_value_norm_mean', 0.0):.6f} "
+                f"high_vnorm_std={process_metrics.get('high_value_norm_std', 0.0):.6f} "
+                f"high_grad_norm={process_metrics.get('high_grad_norm', 0.0):.6f} "
                 f"skill_entropy={process_metrics.get('skill_usage_entropy', 0.0):.3f} "
                 f"duration_entropy={process_metrics.get('duration_usage_entropy', 0.0):.3f} "
                 f"g_entropy={process_metrics.get('team_code_usage_entropy', 0.0):.3f} "
                 f"g_skill_mi={process_metrics.get('team_code_skill_mi', 0.0):.3f} "
+                f"g_ikl={process_metrics.get('g_intervention_kl_mean', 0.0):.6f} "
+                f"g_itv={process_metrics.get('g_intervention_tv_mean', 0.0):.6f} "
+                f"credit_disc={process_metrics.get('credit_full_disconnect_mean', 0.0):.3f} "
+                f"credit_recover={process_metrics.get('credit_recovery_rate', 0.0):.3f} "
+                f"credit_collapse={process_metrics.get('credit_collapse_rate', 0.0):.3f} "
+                f"credit_bh_frac={process_metrics.get('credit_backhaul_connected_step_fraction', 0.0):.3f} "
+                f"credit_bh_thr={process_metrics.get('credit_throughput_when_backhaul_connected_mbps', 0.0):.6f} "
+                f"credit_d_conn={process_metrics.get('credit_delta_connectivity_ratio_mean', 0.0):.6f} "
+                f"credit_d_served={process_metrics.get('credit_delta_backhaul_served_users_mean', 0.0):.6f} "
+                f"credit_d_outage={process_metrics.get('credit_delta_backhaul_outage_ratio_mean', 0.0):.6f} "
+                f"p2_seg={process_metrics.get('p2_segments', 0.0):.0f} "
+                f"p2_avail={process_metrics.get('p2_available_frac', 0.0):.3f} "
+                f"p2_window={process_metrics.get('p2_window_frac', 0.0):.3f} "
+                f"p2_dphi_full={process_metrics.get('delta_phi_soft_nonzero_rate_when_full_disconnect', 0.0):.3f} "
+                f"p2_dphi_near={process_metrics.get('delta_phi_soft_nonzero_rate_when_near_disconnect', 0.0):.3f} "
+                f"p2_corr_rec={process_metrics.get('p2_corr_phi_recovery_event', 0.0):.3f} "
+                f"p2_partial={process_metrics.get('p2_partial_recovery_frac', 0.0):.3f} "
+                f"p2_corr_dbh={process_metrics.get('p2_corr_credit_delta_bh_frac', 0.0):.3f} "
+                f"p2_dbh={process_metrics.get('p2_delta_bh_frac_mean', 0.0):.6f} "
+                f"p2_fteam={process_metrics.get('p2_f_team_mean', 0.0):.6f} "
                 f"low_loss={low_metrics['low_loss']:.6f} "
                 f"low_value_loss={low_metrics.get('low_value_loss', 0.0):.6f} "
+                f"low_actor_loss={low_metrics.get('low_actor_loss', 0.0):.6f} "
+                f"low_critic_loss={low_metrics.get('low_critic_loss', 0.0):.6f} "
+                f"low_chunks={low_metrics.get('low_sequence_chunks', 0.0):.0f} "
+                f"low_vnorm_mean={low_metrics.get('low_value_norm_mean', 0.0):.6f} "
+                f"low_vnorm_std={low_metrics.get('low_value_norm_std', 0.0):.6f} "
+                f"low_verr={low_metrics.get('low_value_error_abs_mean', 0.0):.6f} "
+                f"low_vrmse={low_metrics.get('low_value_error_rmse', 0.0):.6f} "
+                f"low_adv_std={low_metrics.get('low_advantage_std', 0.0):.6f} "
+                f"low_ratio={low_metrics.get('low_ratio_mean', 0.0):.6f} "
+                f"low_clip={low_metrics.get('low_clip_frac', 0.0):.6f} "
+                f"low_kl={low_metrics.get('low_approx_kl', 0.0):.6f} "
+                f"low_agn={low_metrics.get('low_actor_grad_norm', 0.0):.6f} "
+                f"low_cgn={low_metrics.get('low_critic_grad_norm', 0.0):.6f} "
+                f"low_ahn={low_metrics.get('low_actor_h_norm_mean', 0.0):.6f} "
+                f"low_chn={low_metrics.get('low_critic_h_norm_mean', 0.0):.6f} "
+                f"low_sent={low_metrics.get('low_skill_usage_entropy', 0.0):.3f} "
+                f"low_sret_std={low_metrics.get('low_skill_return_std', 0.0):.6f} "
+                f"low_sret_rng={low_metrics.get('low_skill_return_range', 0.0):.6f} "
+                f"low_sverr_std={low_metrics.get('low_skill_value_error_abs_std', 0.0):.6f} "
+                f"low_sent_std={low_metrics.get('low_skill_entropy_std', 0.0):.6f} "
+                f"low_tent={low_metrics.get('low_team_usage_entropy', 0.0):.3f} "
+                f"low_tret_std={low_metrics.get('low_team_return_std', 0.0):.6f} "
+                f"low_tret_rng={low_metrics.get('low_team_return_range', 0.0):.6f} "
+                f"low_tverr_std={low_metrics.get('low_team_value_error_abs_std', 0.0):.6f} "
                 f"return_mean={low_metrics['return_mean']:.6f}"
             )
             log_train_metrics(writer, total_steps, episode_rewards, process_metrics, low_metrics)

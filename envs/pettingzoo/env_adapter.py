@@ -162,6 +162,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # Prepare info dictionary (Gym standard)
         info = {
             "state": state,
+            "state_info": self.get_current_state(),
             "infos_dict": infos_dict # Original PettingZoo infos
         }
 
@@ -243,6 +244,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # 合并信息 (Gym standard)
         info = {
             "next_state": next_state,
+            "state_info": self.get_current_state(),
             "terminations_dict": terminations_dict,
             "truncations_dict": truncations_dict,
             "rewards_dict": rewards_dict,
