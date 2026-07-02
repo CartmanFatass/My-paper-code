@@ -1,0 +1,44 @@
+{
+  "root": "C:\\project\\HMASD\\.pytest_tmp_r12_verify\\test_csv_triage_script_ignores0",
+  "runs": [
+    {
+      "path": "C:\\project\\HMASD\\.pytest_tmp_r12_verify\\test_csv_triage_script_ignores0\\run_bad_values\\metrics\\train_updates.csv",
+      "rows": 2,
+      "missing_fields": [],
+      "fields": {
+        "opt_aggregation_entropy": {
+          "count": 1,
+          "mean": 1.5,
+          "std": 0.0,
+          "min": 1.5,
+          "max": 1.5,
+          "last": 1.5
+        },
+        "opt_cd_loss": {
+          "count": 1,
+          "mean": 0.25,
+          "std": 0.0,
+          "min": 0.25,
+          "max": 0.25,
+          "last": 0.25
+        },
+        "opt_cmi_loss": {
+          "count": 1,
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "last": 0.5
+        },
+        "compact_norm_mean": {
+          "count": 1,
+          "mean": 3.5,
+          "std": 0.0,
+          "min": 3.5,
+          "max": 3.5,
+          "last": 3.5
+        }
+      }
+    }
+  ]
+}

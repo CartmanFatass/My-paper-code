@@ -1,0 +1,83 @@
+{
+  "root": "C:\\project\\HMASD\\.pytest_tmp_r12_compact_verify_final\\test_csv_triage_script_discove0",
+  "runs": [
+    {
+      "path": "C:\\project\\HMASD\\.pytest_tmp_r12_compact_verify_final\\test_csv_triage_script_discove0\\run_a\\metrics\\train_updates.csv",
+      "rows": 1,
+      "missing_fields": [],
+      "fields": {
+        "opt_aggregation_entropy": {
+          "count": 1,
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "last": 1.0
+        },
+        "opt_cd_loss": {
+          "count": 1,
+          "mean": 0.1,
+          "std": 0.0,
+          "min": 0.1,
+          "max": 0.1,
+          "last": 0.1
+        },
+        "opt_cmi_loss": {
+          "count": 1,
+          "mean": 0.2,
+          "std": 0.0,
+          "min": 0.2,
+          "max": 0.2,
+          "last": 0.2
+        },
+        "compact_norm_mean": {
+          "count": 1,
+          "mean": 3.0,
+          "std": 0.0,
+          "min": 3.0,
+          "max": 3.0,
+          "last": 3.0
+        }
+      }
+    },
+    {
+      "path": "C:\\project\\HMASD\\.pytest_tmp_r12_compact_verify_final\\test_csv_triage_script_discove0\\run_b\\metrics\\train_updates.csv",
+      "rows": 1,
+      "missing_fields": [],
+      "fields": {
+        "opt_aggregation_entropy": {
+          "count": 1,
+          "mean": 2.0,
+          "std": 0.0,
+          "min": 2.0,
+          "max": 2.0,
+          "last": 2.0
+        },
+        "opt_cd_loss": {
+          "count": 1,
+          "mean": 0.2,
+          "std": 0.0,
+          "min": 0.2,
+          "max": 0.2,
+          "last": 0.2
+        },
+        "opt_cmi_loss": {
+          "count": 1,
+          "mean": 0.3,
+          "std": 0.0,
+          "min": 0.3,
+          "max": 0.3,
+          "last": 0.3
+        },
+        "compact_norm_mean": {
+          "count": 1,
+          "mean": 4.0,
+          "std": 0.0,
+          "min": 4.0,
+          "max": 4.0,
+          "last": 4.0
+        }
+      }
+    }
+  ]
+}

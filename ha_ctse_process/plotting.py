@@ -11,6 +11,7 @@ from typing import Any
 import numpy as np
 
 from ha_ctse_process.cooperation_credit import COOPERATION_CREDIT_FIELDS
+from ha_ctse_process.g_info_objective import G_INFO_METRIC_FIELDS
 from ha_ctse_process.topology_potential import TOPOLOGY_POTENTIAL_FIELDS
 
 try:
@@ -123,6 +124,15 @@ DERIVED_EVAL_FIELDS = (
     "backhaul_connected_flag",
     "backhaul_connected_step_fraction",
     "throughput_when_backhaul_connected_mbps",
+    "coverage_eq1_step_fraction",
+    "coverage_positive_step_fraction",
+    "coverage_has_eq1_step_flag",
+    "coverage_episode_all_eq1_flag",
+    "coverage_final_eq1_flag",
+    "zero_throughput_step_fraction",
+    "zero_throughput_episode_flag",
+    "throughput_gt5_step_fraction",
+    "throughput_gt5_episode_flag",
 )
 
 
@@ -251,6 +261,108 @@ UPDATE_FIELDS = (
     "topology_battery_delta_mean",
     "topology_length_log_mean",
     *TOPOLOGY_POTENTIAL_FIELDS,
+    "effect_windows",
+    "effect_loss_full",
+    "effect_loss_base",
+    "effect_loss_duration",
+    "effect_loss_reward",
+    "effect_loss_full_raw",
+    "effect_loss_base_raw",
+    "effect_loss_duration_raw",
+    "effect_loss_reward_raw",
+    "effect_gain_mean",
+    "effect_gain_group_balanced_mean",
+    "effect_gain_nonmotion",
+    "effect_gain_positive_frac",
+    "effect_gain_motion",
+    "effect_gain_service",
+    "effect_gain_energy",
+    "effect_gain_topology",
+    "effect_gain_minus_duration_baseline",
+    "effect_gain_minus_reward_baseline",
+    "effect_target_available_frac",
+    "effect_skill_usage_entropy",
+    "effect_skill_usage_max_frac",
+    "effect_action_skill_eta2",
+    "effect_target_skill_eta2",
+    "effect_gain_skill_std",
+    "effect_action_abs_mean",
+    "effect_action_dim",
+    "effect_observed_target_skill_l2_mean",
+    "effect_observed_target_skill_l2_nonmotion",
+    "effect_observed_action_skill_l2_mean",
+    "effect_observed_action_target_corr",
+    "effect_endstate_available_frac",
+    "effect_window_mean_available_frac",
+    "effect_intervention_active",
+    "effect_intervention_samples",
+    "effect_intervention_action_l2_mean",
+    "effect_intervention_action_l2_max",
+    "effect_intervention_action_pairwise_std",
+    "effect_intervention_pred_effect_l2_mean",
+    "effect_intervention_pred_effect_l2_max",
+    "effect_intervention_best_skill_gap",
+    "effect_intervention_low_entropy_mean",
+    "effect_gain_horizon_0",
+    "effect_gain_positive_frac_horizon_0",
+    "effect_horizon_count_0",
+    "effect_gain_horizon_1",
+    "effect_gain_positive_frac_horizon_1",
+    "effect_horizon_count_1",
+    "effect_gain_horizon_2",
+    "effect_gain_positive_frac_horizon_2",
+    "effect_horizon_count_2",
+    "effect_gain_horizon_3",
+    "effect_gain_positive_frac_horizon_3",
+    "effect_horizon_count_3",
+    "effect_field_gain_delta_position_x",
+    "effect_field_gain_delta_position_y",
+    "effect_field_gain_delta_position_z",
+    "effect_field_gain_delta_position_l2",
+    "effect_field_gain_delta_battery",
+    "effect_field_gain_delta_charging",
+    "effect_field_gain_delta_local_service",
+    "effect_field_gain_delta_local_access_count",
+    "effect_field_gain_delta_uav_degree",
+    "effect_field_gain_delta_bs_link",
+    "effect_field_gain_delta_soft_topology",
+    "effect_field_gain_delta_coverage_ratio",
+    "effect_field_gain_delta_qos_satisfaction",
+    "effect_field_gain_delta_system_throughput_mbps",
+    "effect_field_gain_end_local_service",
+    "effect_field_gain_end_local_access_count",
+    "effect_field_gain_end_uav_degree",
+    "effect_field_gain_end_bs_link",
+    "effect_field_gain_end_soft_topology",
+    "effect_field_gain_end_coverage_ratio",
+    "effect_field_gain_end_qos_satisfaction",
+    "effect_field_gain_end_system_throughput_mbps",
+    "effect_field_gain_mean_local_service",
+    "effect_field_gain_mean_uav_degree",
+    "effect_field_gain_mean_bs_link",
+    "effect_field_gain_mean_backhaul_connected_flag",
+    "effect_field_gain_mean_full_disconnect",
+    "effect_reward_low_mean",
+    "effect_reward_applied_steps",
+    "force_reward_low_mean",
+    "force_reward_applied_steps",
+    "force_disc_loss",
+    "force_disc_acc",
+    "force_disc_logp_mean",
+    "force_disc_residual_mean",
+    "force_effect_residual_mean",
+    "force_shortcut_best_acc",
+    "force_shortcut_best_logp_mean",
+    "force_shortcut_margin",
+    "force_shortcut_duration_acc",
+    "force_shortcut_reward_acc",
+    "force_shortcut_context_acc",
+    "force_shortcut_phase_agent_acc",
+    "force_gate_active",
+    "force_gate_reason",
+    "force_reward_unclipped_mean",
+    "force_duration_entropy_bonus",
+    "force_feature_dim",
     "duration_only_accuracy",
     "length_only_accuracy",
     "reward_sum_only_accuracy",
@@ -266,14 +378,36 @@ UPDATE_FIELDS = (
     "duration_usage_entropy",
     "duration_usage_max_frac",
     "skill_duration_mi",
+    "lifetime_heterogeneity",
+    "duration_target_std",
+    "duration_target_cv",
+    "duration_agent_mi",
+    "duration_return_std",
+    "duration_return_range",
+    "duration_return_active_frac",
+    "duration_full_disconnect_std",
+    "duration_full_disconnect_range",
+    "duration_recovery_std",
+    "duration_recovery_range",
+    "duration_bh_frac_std",
+    "duration_bh_frac_range",
+    "renewal_agents_mean",
+    "renewal_agents_std",
+    "renewal_full_sync_rate",
+    "renewal_pairwise_corr_mean",
     "team_code_usage_entropy",
     "team_code_usage_max_frac",
     "team_code_skill_mi",
+    "team_code_duration_mi",
+    "team_code_edit_mi",
+    "g_usage_entropy",
+    "g_usage_max_frac",
     "g_intervention_kl_active",
     "g_intervention_kl_samples",
     "g_intervention_kl_mean",
     "g_intervention_kl_max",
     "g_intervention_tv_mean",
+    *G_INFO_METRIC_FIELDS,
     *COOPERATION_CREDIT_FIELDS,
     "high_loss",
     "high_policy_loss",
@@ -639,6 +773,8 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("team_code_usage_max_frac", "Team-code max fraction"),
         ("skill_duration_mi", "Skill-duration MI"),
         ("team_code_skill_mi", "Team-code/skill MI"),
+        ("team_code_duration_mi", "Team-code/duration MI"),
+        ("team_code_edit_mi", "Team-code/edit MI"),
         ("process_posterior_acc", "Process posterior acc"),
         ("process_mi_estimate_mean", "Process MI estimate"),
         ("process_residual_mi_mean", "Residual MI estimate"),
@@ -666,6 +802,11 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("high_value_norm_std", "High value norm std"),
         ("g_intervention_kl_mean", "g intervention KL"),
         ("g_intervention_tv_mean", "g intervention TV"),
+        ("g_info_skill_mi", "g decision skill MI"),
+        ("g_info_duration_mi", "g decision duration MI"),
+        ("g_itv_tv_skill", "g skill TV"),
+        ("g_itv_tv_duration", "g duration TV"),
+        ("g_joint_assignment_distance", "g joint assignment distance"),
     ):
         x, y = _series(records, key)
         if y.size:
@@ -783,6 +924,130 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
 
     fig, ax = plt.subplots(figsize=(12, 6))
     for key, label in (
+        ("effect_windows", "Micro-windows"),
+        ("effect_loss_full", "Full loss"),
+        ("effect_loss_base", "Context baseline loss"),
+        ("effect_gain_mean", "Full - context gain"),
+        ("effect_gain_group_balanced_mean", "Group-balanced gain"),
+        ("effect_gain_nonmotion", "Non-motion gain"),
+        ("effect_gain_positive_frac", "Positive gain frac"),
+        ("effect_gain_minus_duration_baseline", "Full - duration"),
+        ("effect_gain_minus_reward_baseline", "Full - reward"),
+        ("effect_reward_low_mean", "Injected low reward"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Skill Effect Discovery Probe", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_skill_effect_probe.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("effect_gain_motion", "Motion gain"),
+        ("effect_gain_service", "Service gain"),
+        ("effect_gain_energy", "Energy gain"),
+        ("effect_gain_topology", "Topology gain"),
+        ("effect_target_available_frac", "Target available"),
+        ("effect_reward_applied_steps", "Reward-applied steps"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Skill Effect Fields and Reward-Off Guard", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_skill_effect_fields.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("force_reward_low_mean", "Injected low reward"),
+        ("force_reward_applied_steps", "Reward-applied steps"),
+        ("force_disc_acc", "Residual disc acc"),
+        ("force_shortcut_best_acc", "Best shortcut acc"),
+        ("force_shortcut_margin", "Disc - shortcut acc"),
+        ("force_disc_residual_mean", "Disc residual"),
+        ("force_effect_residual_mean", "Effect residual"),
+        ("force_gate_active", "Gate active"),
+        ("force_gate_reason", "Gate reason"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Skill Forcing Reward Gate", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_skill_forcing_reward.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("effect_gain_horizon_0", "Horizon 0 gain"),
+        ("effect_gain_horizon_1", "Horizon 1 gain"),
+        ("effect_gain_horizon_2", "Horizon 2 gain"),
+        ("effect_gain_horizon_3", "Horizon 3 gain"),
+        ("effect_action_skill_eta2", "Action~skill eta2"),
+        ("effect_target_skill_eta2", "Target~skill eta2"),
+        ("effect_skill_usage_entropy", "Skill usage entropy"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Skill Effect P3-2b Diagnostics", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_skill_effect_p3_2b.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("effect_intervention_active", "Intervention active"),
+        ("effect_intervention_samples", "Samples"),
+        ("effect_intervention_action_l2_mean", "Action L2 mean"),
+        ("effect_intervention_action_l2_max", "Action L2 max"),
+        ("effect_intervention_pred_effect_l2_mean", "Pred-effect L2 mean"),
+        ("effect_intervention_pred_effect_l2_max", "Pred-effect L2 max"),
+        ("effect_intervention_best_skill_gap", "Best skill gap"),
+        ("effect_intervention_low_entropy_mean", "Low entropy"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Skill Effect P3-2c Forced-z Intervention Audit", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_skill_effect_p3_2c_intervention.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("effect_observed_target_skill_l2_mean", "Observed target skill L2"),
+        ("effect_observed_target_skill_l2_nonmotion", "Observed non-motion skill L2"),
+        ("effect_observed_action_skill_l2_mean", "Observed action skill L2"),
+        ("effect_observed_action_target_corr", "Action-target corr"),
+        ("effect_endstate_available_frac", "End-state target available"),
+        ("effect_window_mean_available_frac", "Window-mean target available"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="Skill Effect P3-2d Observed Effect Audit", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_skill_effect_p3_2d_observed.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
         ("credit_full_disconnect_mean", "Full disconnect mean"),
         ("credit_recovery_rate", "Disconnect recovery rate"),
         ("credit_collapse_rate", "Connectivity collapse rate"),
@@ -859,6 +1124,27 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
         ax2.legend(loc="upper right")
     fig.tight_layout()
     fig.savefig(log_dir / "eval_service_quality.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    any_series = False
+    for key, label in (
+        ("coverage_eq1_step_fraction", "Coverage == 1 step fraction"),
+        ("coverage_positive_step_fraction", "Coverage > 0 step fraction"),
+        ("throughput_gt5_step_fraction", "Throughput > 5 Mbps step fraction"),
+        ("zero_throughput_step_fraction", "Zero-throughput step fraction"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            any_series = True
+            ax.plot(x, moving_average(y, window), label=label)
+    if any_series:
+        ax.set(title="Eval Success Fractions", xlabel="Env steps", ylabel="Fraction")
+        ax.set_ylim(bottom=0.0, top=1.02)
+        ax.grid(True, alpha=0.3)
+        ax.legend(loc="upper left")
+        fig.tight_layout()
+        fig.savefig(log_dir / "eval_success_fractions.png", dpi=180)
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -1015,6 +1301,35 @@ LOG_KEY_ALIASES = {
     "role_gain": "topology_role_resid_gain_mean",
     "role_pos": "topology_role_resid_gain_positive_frac",
     "role_z_mi": "topology_role_z_mi",
+    "effect_gain": "effect_gain_mean",
+    "effect_gbal": "effect_gain_group_balanced_mean",
+    "effect_nonmotion": "effect_gain_nonmotion",
+    "effect_pos": "effect_gain_positive_frac",
+    "effect_motion": "effect_gain_motion",
+    "effect_service": "effect_gain_service",
+    "effect_energy": "effect_gain_energy",
+    "effect_topology": "effect_gain_topology",
+    "effect_h0": "effect_gain_horizon_0",
+    "effect_h1": "effect_gain_horizon_1",
+    "effect_h2": "effect_gain_horizon_2",
+    "effect_act_eta": "effect_action_skill_eta2",
+    "effect_tgt_eta": "effect_target_skill_eta2",
+    "effect_obs_tgt_l2": "effect_observed_target_skill_l2_mean",
+    "effect_obs_nm_l2": "effect_observed_target_skill_l2_nonmotion",
+    "effect_act_tgt_corr": "effect_observed_action_target_corr",
+    "effect_gap_dur": "effect_gain_minus_duration_baseline",
+    "effect_gap_rew": "effect_gain_minus_reward_baseline",
+    "effect_low_rew": "effect_reward_low_mean",
+    "effect_steps": "effect_reward_applied_steps",
+    "force_rew": "force_reward_low_mean",
+    "force_steps": "force_reward_applied_steps",
+    "force_disc_acc": "force_disc_acc",
+    "force_resid": "force_disc_residual_mean",
+    "force_eff_resid": "force_effect_residual_mean",
+    "force_shortcut_acc": "force_shortcut_best_acc",
+    "force_margin": "force_shortcut_margin",
+    "force_gate": "force_gate_active",
+    "force_reason": "force_gate_reason",
     "high_intr_gate": "intrinsic_segment_high_gate_active",
     "high_intr_score": "intrinsic_segment_high_gate_score",
     "high_intr_reason": "intrinsic_segment_high_gate_reason_code",
@@ -1036,6 +1351,14 @@ LOG_KEY_ALIASES = {
     "high_vnorm_std": "high_value_norm_std",
     "skill_entropy": "skill_usage_entropy",
     "duration_entropy": "duration_usage_entropy",
+    "life_hetero": "lifetime_heterogeneity",
+    "dur_agent_mi": "duration_agent_mi",
+    "dur_ret_rng": "duration_return_range",
+    "dur_disc_rng": "duration_full_disconnect_range",
+    "dur_rec_rng": "duration_recovery_range",
+    "dur_bh_rng": "duration_bh_frac_range",
+    "renew_sync": "renewal_full_sync_rate",
+    "renew_corr": "renewal_pairwise_corr_mean",
     "g_entropy": "team_code_usage_entropy",
     "g_skill_mi": "team_code_skill_mi",
     "g_ikl": "g_intervention_kl_mean",

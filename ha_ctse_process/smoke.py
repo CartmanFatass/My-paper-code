@@ -32,6 +32,26 @@ def make_config():
     cfg.process_shortcut_margin = 0.1
     cfg.process_shortcut_margin_coef = 0.5
     cfg.normalize_process_outcomes = False
+    cfg.skill_effect_discovery_on = True
+    cfg.skill_effect_reward_on = False
+    cfg.skill_effect_reward_injection = "none"
+    cfg.skill_effect_horizons = (1, 2)
+    cfg.skill_effect_stride = 1
+    cfg.skill_effect_max_windows = 32
+    cfg.skill_effect_hidden_dim = 16
+    cfg.skill_effect_intervention_probe_on = True
+    cfg.skill_effect_intervention_max_samples = 16
+    cfg.skill_force_probe_on = True
+    cfg.enable_skill_forcing_reward = False
+    cfg.skill_force_reward_injection = "low_only"
+    cfg.skill_force_disc_coef = 0.02
+    cfg.skill_force_effect_coef = 0.01
+    cfg.skill_force_duration_entropy_coef = 0.0
+    cfg.skill_force_warmup_steps = 0
+    cfg.skill_force_clip = 0.05
+    cfg.skill_force_shortcut_margin = 0.0
+    cfg.skill_force_kill_on_shortcut = True
+    cfg.skill_force_use_comm_fields = False
     cfg.lr_discoverer_actor = 1e-3
     cfg.lr_coordinator = 1e-3
     cfg.lr_process_encoder = 1e-3
@@ -195,6 +215,34 @@ def run_smoke(log_dir: Path) -> dict:
         and "process_shortcut_max_acc" in metrics
         and "posterior_acc_minus_shortcut_max" in metrics
     )
+    skill_effect_probe_ok = (
+        metrics.get("effect_windows", 0.0) > 0.0
+        and "effect_gain_mean" in metrics
+        and "effect_gain_group_balanced_mean" in metrics
+        and "effect_gain_horizon_0" in metrics
+        and "effect_action_skill_eta2" in metrics
+        and "effect_target_skill_eta2" in metrics
+        and "effect_observed_target_skill_l2_mean" in metrics
+        and "effect_observed_action_skill_l2_mean" in metrics
+        and "effect_observed_action_target_corr" in metrics
+        and "effect_endstate_available_frac" in metrics
+        and "effect_window_mean_available_frac" in metrics
+        and metrics.get("effect_intervention_active", 0.0) == 1.0
+        and metrics.get("effect_intervention_samples", 0.0) > 0.0
+        and "effect_intervention_action_l2_mean" in metrics
+        and "effect_intervention_pred_effect_l2_mean" in metrics
+        and metrics.get("effect_reward_low_mean", 1.0) == 0.0
+        and metrics.get("effect_reward_applied_steps", 1.0) == 0.0
+        and "force_disc_acc" in metrics
+        and "force_shortcut_best_acc" in metrics
+        and "force_disc_residual_mean" in metrics
+        and "force_effect_residual_mean" in metrics
+        and metrics.get("force_gate_active", 1.0) == 0.0
+        and metrics.get("force_reward_low_mean", 1.0) == 0.0
+        and metrics.get("force_reward_applied_steps", 1.0) == 0.0
+        and rollout.rewards[0][1] == 0.0
+        and rollout.rewards[1][1] == 0.0
+    )
 
     eval_agent = make_agent(cfg)
     eval_agent.active_skills[:] = np.array([[2, 1]])
@@ -225,6 +273,7 @@ def run_smoke(log_dir: Path) -> dict:
         "reward_injection_ok": bool(reward_injection_ok),
         "credit_diagnostics_ok": bool(credit_diagnostics_ok),
         "residual_metrics_ok": bool(residual_metrics_ok),
+        "skill_effect_probe_ok": bool(skill_effect_probe_ok),
         "eval_restore_ok": bool(eval_restore_ok),
         "process_metrics": metrics,
         "eval_metrics": eval_metrics,
@@ -233,6 +282,7 @@ def run_smoke(log_dir: Path) -> dict:
             and reward_injection_ok
             and credit_diagnostics_ok
             and residual_metrics_ok
+            and skill_effect_probe_ok
             and eval_restore_ok
         ),
     }

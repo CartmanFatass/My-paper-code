@@ -47,6 +47,14 @@ from ha_ctse_process.recovery_potential import (
     compute_segment_shaping,
     empty_p2_metrics,
 )
+from ha_ctse_process.skill_effect_discovery import (
+    SkillEffectDiscoveryModule,
+    empty_skill_effect_metrics,
+)
+from ha_ctse_process.g_info_objective import (
+    GInfoObjective,
+    empty_g_info_metrics,
+)
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
 
 
@@ -1121,6 +1129,8 @@ class StandaloneProcessAgent:
         self.g_intervention_kl_max_segments = int(
             max(getattr(config, "g_intervention_kl_max_segments", 256), 1)
         )
+        self.use_g_info_diagnostic = bool(getattr(config, "use_g_info_diagnostic", True))
+        self.enable_g_info_objective = bool(getattr(config, "enable_g_info_objective", False))
         self.use_transition_skill_discriminator = bool(
             getattr(config, "use_transition_skill_discriminator", True)
         )
@@ -1378,6 +1388,32 @@ class StandaloneProcessAgent:
             if self.use_transition_skill_discriminator
             else None
         )
+        self.g_info_objective = (
+            GInfoObjective(config)
+            if (self.use_g_info_diagnostic or self.enable_g_info_objective)
+            else None
+        )
+        self.skill_effect_discovery = (
+            SkillEffectDiscoveryModule(
+                config=config,
+                obs_dim=self.obs_dim,
+                n_skills=self.n_skills,
+                n_agents=self.n_agents,
+                num_team_codes=num_team_codes,
+                num_duration_bins=len(self.duration_candidates),
+                device=self.device,
+                action_feature_dim=1 if self.action_space_type == "discrete" else self.action_dim,
+            )
+            if (
+                bool(getattr(config, "skill_effect_discovery_on", False))
+                or bool(getattr(config, "skill_effect_reward_on", False))
+                or bool(getattr(config, "skill_force_probe_on", False))
+                or bool(getattr(config, "enable_skill_forcing_probe", False))
+                or bool(getattr(config, "enable_skill_forcing_reward", False))
+                or bool(getattr(config, "skill_forcing_reward_on", False))
+            )
+            else None
+        )
 
         lr = float(getattr(config, "lr_discoverer_actor", 3e-4))
         high_lr = float(getattr(config, "lr_coordinator", lr))
@@ -1437,6 +1473,7 @@ class StandaloneProcessAgent:
             "outcome_residual_probe": self._count_parameters(self.outcome_residual_probe),
             "topology_role_probe": self._count_parameters(self.topology_role_probe),
             "transition_discriminator": self._count_parameters(self.transition_discriminator),
+            "skill_effect_discovery": self._count_parameters(self.skill_effect_discovery),
         }
         if self.use_recurrent_low_level and hasattr(self.low, "actor_update_parameters"):
             counts["low_actor"] = int(sum(param.numel() for param in self.low.actor_update_parameters()))
@@ -1451,6 +1488,7 @@ class StandaloneProcessAgent:
             + counts["outcome_residual_probe"]
             + counts["topology_role_probe"]
             + counts["transition_discriminator"]
+            + counts["skill_effect_discovery"]
         )
         counts["total_trainable"] = int(
             sum(
@@ -1465,6 +1503,7 @@ class StandaloneProcessAgent:
                     "outcome_residual_probe",
                     "topology_role_probe",
                     "transition_discriminator",
+                    "skill_effect_discovery",
                 )
             )
         )
@@ -1739,6 +1778,82 @@ class StandaloneProcessAgent:
             return (*result, context)
         return (
             *result,
+        )
+
+    def _low_actor_forced_skill_outputs(
+        self,
+        obs_np: np.ndarray,
+        skills_np: np.ndarray,
+        team_codes_np: np.ndarray,
+        agent_ids_np: np.ndarray | None = None,
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Return low-actor action-distribution features under forced skills.
+
+        This is a diagnostic-only path for P3-2c.  It does not sample from or
+        mutate the rollout hidden state; recurrent actors use zero hidden state
+        so the same observation can be compared across all forced skill labels.
+        """
+        obs_t = torch.as_tensor(obs_np, dtype=torch.float32, device=self.device)
+        skills_t = torch.as_tensor(skills_np, dtype=torch.long, device=self.device)
+        team_t = torch.as_tensor(team_codes_np, dtype=torch.long, device=self.device)
+        count = int(obs_t.shape[0])
+
+        def _continuous_from_action_out(action_out, features: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+            if hasattr(action_out, "_distribution"):
+                dist = action_out._distribution(features)
+                mean = torch.tanh(dist.mean) if action_out.__class__.__name__ == "TanhDiagGaussian" else dist.mean
+                entropy = dist.entropy()
+                if entropy.dim() > 1:
+                    entropy = entropy.sum(dim=-1)
+                return mean, entropy
+            if hasattr(action_out, "fc_mean"):
+                mean = action_out.fc_mean(features)
+                return mean, torch.zeros(mean.shape[0], dtype=torch.float32, device=features.device)
+            action, _logp = action_out(features, deterministic=True)
+            if action.dim() == 1:
+                action = action.unsqueeze(-1)
+            return action.float(), torch.zeros(action.shape[0], dtype=torch.float32, device=features.device)
+
+        with torch.no_grad():
+            if isinstance(self.low, StrictHMASDMAPPOLowLevelPolicy):
+                actor_hxs = torch.zeros(count, self.low.hidden_dim, dtype=torch.float32, device=self.device)
+                masks = torch.ones(count, 1, dtype=torch.float32, device=self.device)
+                actor_features = self.low._actor_features(obs_t, skills_t, team_t)
+                actor_features, _new_hxs = self.low.actor_rnn(actor_features, actor_hxs, masks)
+                if self.action_space_type == "discrete":
+                    dist = self.low.actor_act.action_out(actor_features)
+                    action_features = dist.probs.float()
+                    entropy = dist.entropy().float()
+                else:
+                    action_features, entropy = _continuous_from_action_out(self.low.actor_act.action_out, actor_features)
+            elif isinstance(self.low, RecurrentLowLevelPolicy):
+                actor_hxs = torch.zeros(count, self.low.hidden_dim, dtype=torch.float32, device=self.device)
+                actor_input = self.low._actor_features(obs_t, skills_t)
+                actor_h = self.low.actor_rnn(actor_input, actor_hxs)
+                dist, actor_out = self.low._dist(actor_h)
+                if self.action_space_type == "discrete":
+                    action_features = dist.probs.float()
+                    entropy = dist.entropy().float()
+                else:
+                    action_features = actor_out.float()
+                    entropy = dist.entropy()
+                    if entropy.dim() > 1:
+                        entropy = entropy.sum(dim=-1)
+            else:
+                features = self.low._features(obs_t, skills_t)
+                actor_out = self.low.actor(features)
+                if self.action_space_type == "discrete":
+                    dist = torch.distributions.Categorical(logits=actor_out)
+                    action_features = dist.probs.float()
+                    entropy = dist.entropy().float()
+                else:
+                    action_features = actor_out.float()
+                    std = torch.exp(self.low.log_std).expand_as(actor_out)
+                    entropy = torch.distributions.Normal(actor_out, std).entropy().sum(dim=-1)
+
+        return (
+            action_features.detach().cpu().numpy().astype(np.float32),
+            entropy.detach().cpu().numpy().astype(np.float32),
         )
 
     def duration_only_accuracy(self, labels: np.ndarray, durations: np.ndarray) -> float:
@@ -2069,6 +2184,10 @@ class StandaloneProcessAgent:
                 "g_intervention_kl_mean": 0.0,
                 "g_intervention_kl_max": 0.0,
                 "g_intervention_tv_mean": 0.0,
+                "g_usage_entropy": 0.0,
+                "g_usage_max_frac": 0.0,
+                "team_code_duration_mi": 0.0,
+                "team_code_edit_mi": 0.0,
                 "high_loss": 0.0,
                 "high_policy_loss": 0.0,
                 "high_value_loss": 0.0,
@@ -2087,7 +2206,22 @@ class StandaloneProcessAgent:
                 **empty_topology_role_metrics(),
                 **empty_topology_potential_metrics(),
                 **empty_p2_metrics(),
+                **empty_g_info_metrics(),
+                **empty_skill_effect_metrics(),
             }
+
+        effect_metrics, effect_micro_rewards = (
+            self.skill_effect_discovery.update(valid, total_steps=total_steps)
+            if self.skill_effect_discovery is not None
+            else (empty_skill_effect_metrics(), {})
+        )
+        if self.skill_effect_discovery is not None:
+            effect_metrics.update(
+                self.skill_effect_discovery.intervention_audit(
+                    valid,
+                    action_probe_fn=self._low_actor_forced_skill_outputs,
+                )
+            )
 
         max_len = max(s.length for s in valid)
         obs = np.zeros((len(valid), max_len, valid[0].obs[0].shape[0]), dtype=np.float32)
@@ -2727,6 +2861,21 @@ class StandaloneProcessAgent:
             if 0 <= int(rollout_idx) < len(rollout.rewards) and 0 <= int(agent_id) < self.n_agents:
                 rollout.rewards[int(rollout_idx)][int(agent_id)] += float(reward_value)
 
+        if isinstance(effect_micro_rewards, dict):
+            micro_indices = effect_micro_rewards.get("rollout_indices", [])
+            micro_agents = np.asarray(effect_micro_rewards.get("agent_ids", []), dtype=np.int64).reshape(-1)
+            micro_rewards = np.asarray(effect_micro_rewards.get("rewards", []), dtype=np.float32).reshape(-1)
+            for indices, agent_id, reward_value in zip(micro_indices, micro_agents, micro_rewards):
+                step_indices = np.asarray(indices, dtype=np.int64).reshape(-1)
+                if step_indices.size <= 0 or not np.isfinite(float(reward_value)):
+                    continue
+                if not (0 <= int(agent_id) < self.n_agents):
+                    continue
+                per_step = float(reward_value) / float(step_indices.size)
+                for rollout_idx in step_indices:
+                    if 0 <= int(rollout_idx) < len(rollout.rewards):
+                        rollout.rewards[int(rollout_idx)][int(agent_id)] += per_step
+
         for segment, reward_value in zip(valid, combined_low_rewards):
             if segment.length <= 0:
                 continue
@@ -2735,7 +2884,11 @@ class StandaloneProcessAgent:
                 if 0 <= rollout_idx < len(rollout.rewards):
                     rollout.rewards[rollout_idx][segment.agent_id] += per_step
 
-        high_metrics = self.update_high_from_segments(valid, combined_high_rewards)
+        high_metrics = self.update_high_from_segments(
+            valid,
+            combined_high_rewards,
+            total_steps=total_steps,
+        )
 
         lengths = np.asarray([s.length for s in valid], dtype=np.float32)
         reward_sums = np.asarray([np.sum(s.rewards) for s in valid], dtype=np.float32)
@@ -2769,6 +2922,7 @@ class StandaloneProcessAgent:
             process_residual_log_shortcut_mean = float(log_p.detach().mean().cpu().item())
             process_residual_log_context_mean = float(log_p.detach().mean().cpu().item())
         cooperation_credit_metrics = aggregate_cooperation_credit(valid)
+        lifetime_metrics = self._lifetime_diagnostics(valid, durations_np, reward_sums)
         outcome_residual_metrics = {
             "outcome_residual_full_loss": 0.0,
             "outcome_residual_base_loss": 0.0,
@@ -2942,6 +3096,7 @@ class StandaloneProcessAgent:
             **topology_role_metrics,
             **topology_potential_metrics,
             **p2_metrics,
+            **effect_metrics,
             "duration_only_accuracy": duration_only_acc,
             "length_only_accuracy": length_only_acc,
             "reward_sum_only_accuracy": reward_sum_only_acc,
@@ -2960,7 +3115,22 @@ class StandaloneProcessAgent:
             "skill_duration_mi": self._joint_mi_norm(labels, durations_np, self.n_skills, len(self.duration_candidates)),
             "team_code_usage_entropy": team_code_entropy,
             "team_code_usage_max_frac": team_code_max_frac,
+            "g_usage_entropy": team_code_entropy,
+            "g_usage_max_frac": team_code_max_frac,
             "team_code_skill_mi": self._joint_mi_norm(team_codes_np, labels, self.bridge.num_team_codes, self.n_skills),
+            "team_code_duration_mi": self._joint_mi_norm(
+                team_codes_np,
+                durations_np,
+                self.bridge.num_team_codes,
+                len(self.duration_candidates),
+            ),
+            "team_code_edit_mi": self._joint_mi_norm(
+                team_codes_np,
+                np.asarray([int(s.switched) for s in valid], dtype=np.int64),
+                self.bridge.num_team_codes,
+                2,
+            ),
+            **lifetime_metrics,
             **g_intervention_metrics,
             **cooperation_credit_metrics,
             **high_metrics,
@@ -3083,7 +3253,12 @@ class StandaloneProcessAgent:
         values[np.asarray(bootstrap_indices, dtype=np.int64)] = bootstrap_values.detach().cpu().numpy()
         return values
 
-    def update_high_from_segments(self, segments: list[Segment], process_rewards: np.ndarray) -> dict[str, float]:
+    def update_high_from_segments(
+        self,
+        segments: list[Segment],
+        process_rewards: np.ndarray,
+        total_steps: int = 0,
+    ) -> dict[str, float]:
         if not segments:
             return {
                 "high_loss": 0.0,
@@ -3100,6 +3275,7 @@ class StandaloneProcessAgent:
                 "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm is not None else 0.0,
                 "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm is not None else 0.0,
                 "high_grad_norm": 0.0,
+                **empty_g_info_metrics(),
             }
 
         states = torch.as_tensor(
@@ -3174,11 +3350,25 @@ class StandaloneProcessAgent:
         value_loss = F.mse_loss(values, value_targets)
         entropy_loss = -self.high_entropy_coef * entropy.mean()
         aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
+        if self.g_info_objective is not None:
+            g_info_loss, g_info_metrics = self.g_info_objective(
+                high_policy=self.high,
+                bridge=self.bridge,
+                high_obs=high_obs,
+                prev_skills=prev_skills,
+                ages=ages,
+                compact=compact,
+                total_steps=total_steps,
+            )
+        else:
+            g_info_loss = torch.zeros((), device=self.device)
+            g_info_metrics = empty_g_info_metrics()
         loss = (
             policy_loss
             + 0.5 * value_loss
             + entropy_loss
             + aux_loss
+            + g_info_loss
         )
 
         self.high_opt.zero_grad()
@@ -3214,6 +3404,7 @@ class StandaloneProcessAgent:
             "opt_cd_loss": float(cd_loss.detach().cpu().item()),
             "opt_cmi_loss": float(cmi_loss.detach().cpu().item()),
             "opt_aggregation_entropy": float(aggregation_entropy.detach().mean().cpu().item()),
+            **g_info_metrics,
         }
 
     def _empty_low_metrics(self) -> dict[str, float]:
@@ -3290,6 +3481,227 @@ class StandaloneProcessAgent:
             "range": float(np.max(means_arr) - np.min(means_arr)),
             "active_frac": float(active) / float(max(int(num_classes), 1)),
         }
+
+    @staticmethod
+    def _info_scalar(value) -> float | None:
+        if value is None:
+            return None
+        try:
+            arr = np.asarray(value, dtype=np.float64)
+        except (TypeError, ValueError):
+            return None
+        if arr.size == 0:
+            return None
+        finite = arr[np.isfinite(arr)]
+        if finite.size == 0:
+            return None
+        return float(np.mean(finite))
+
+    @classmethod
+    def _segment_info_series(cls, segment: Segment, aliases: tuple[str, ...]) -> list[float]:
+        values: list[float] = []
+        for info in getattr(segment, "reward_info_seq", []):
+            if not isinstance(info, dict):
+                continue
+            for key in aliases:
+                if key in info:
+                    scalar = cls._info_scalar(info.get(key))
+                    if scalar is not None:
+                        values.append(scalar)
+                    break
+        return values
+
+    @classmethod
+    def _segment_full_disconnect_mean(cls, segment: Segment) -> float:
+        values = cls._segment_info_series(
+            segment,
+            (
+                "full_network_disconnect",
+                "full_disconnect",
+                "network_disconnected",
+            ),
+        )
+        return float(np.mean(values)) if values else float("nan")
+
+    @classmethod
+    def _segment_recovery_flag(cls, segment: Segment) -> float:
+        values = cls._segment_info_series(
+            segment,
+            (
+                "full_network_disconnect",
+                "full_disconnect",
+                "network_disconnected",
+            ),
+        )
+        if len(values) < 2:
+            return float("nan")
+        return float(values[0] >= 0.5 and values[-1] < 0.5)
+
+    @classmethod
+    def _segment_backhaul_up_frac(cls, segment: Segment) -> float:
+        flags: list[float] = []
+        for info in getattr(segment, "reward_info_seq", []):
+            if not isinstance(info, dict):
+                continue
+            served = cls._info_scalar(
+                next(
+                    (
+                        info.get(key)
+                        for key in (
+                            "current_backhaul_served_users",
+                            "backhaul_served_users",
+                            "effective_connected_users",
+                            "served_users",
+                        )
+                        if key in info
+                    ),
+                    None,
+                )
+            )
+            disconnect = cls._info_scalar(
+                next(
+                    (
+                        info.get(key)
+                        for key in (
+                            "full_network_disconnect",
+                            "full_disconnect",
+                            "network_disconnected",
+                        )
+                        if key in info
+                    ),
+                    None,
+                )
+            )
+            outage = cls._info_scalar(
+                next(
+                    (
+                        info.get(key)
+                        for key in (
+                            "backhaul_outage_ratio",
+                            "service_drop_ratio",
+                        )
+                        if key in info
+                    ),
+                    None,
+                )
+            )
+            backhaul_up = (
+                served is not None
+                and float(served) > 0.0
+                and (disconnect is None or float(disconnect) < 0.5)
+                and (outage is None or float(outage) < 0.999)
+            )
+            flags.append(1.0 if backhaul_up else 0.0)
+        return float(np.mean(flags)) if flags else float("nan")
+
+    def _lifetime_diagnostics(
+        self,
+        segments: list[Segment],
+        duration_indices: np.ndarray,
+        reward_sums: np.ndarray,
+    ) -> dict[str, float]:
+        metrics = {
+            "lifetime_heterogeneity": 0.0,
+            "duration_target_std": 0.0,
+            "duration_target_cv": 0.0,
+            "duration_agent_mi": 0.0,
+            "duration_return_std": 0.0,
+            "duration_return_range": 0.0,
+            "duration_return_active_frac": 0.0,
+            "duration_full_disconnect_std": 0.0,
+            "duration_full_disconnect_range": 0.0,
+            "duration_recovery_std": 0.0,
+            "duration_recovery_range": 0.0,
+            "duration_bh_frac_std": 0.0,
+            "duration_bh_frac_range": 0.0,
+            "renewal_agents_mean": 0.0,
+            "renewal_agents_std": 0.0,
+            "renewal_full_sync_rate": 0.0,
+            "renewal_pairwise_corr_mean": 0.0,
+        }
+        if not segments:
+            return metrics
+
+        n_durations = int(max(len(self.duration_candidates), 1))
+        duration_indices = np.asarray(duration_indices, dtype=np.int64).reshape(-1)
+        duration_indices = np.clip(duration_indices[: len(segments)], 0, n_durations - 1)
+        reward_sums = np.asarray(reward_sums, dtype=np.float64).reshape(-1)[: len(segments)]
+        duration_targets = np.asarray([s.duration_target for s in segments], dtype=np.float64)
+        agent_ids = np.asarray([s.agent_id for s in segments], dtype=np.int64)
+
+        if duration_targets.size:
+            metrics["duration_target_std"] = float(np.std(duration_targets))
+            target_mean = float(np.mean(np.abs(duration_targets)))
+            metrics["duration_target_cv"] = float(metrics["duration_target_std"] / max(target_mean, 1e-6))
+            if len(self.duration_candidates) > 1:
+                duration_range = float(max(self.duration_candidates) - min(self.duration_candidates))
+                metrics["lifetime_heterogeneity"] = float(
+                    metrics["duration_target_std"] / max(duration_range, 1e-6)
+                )
+
+        metrics["duration_agent_mi"] = self._joint_mi_norm(
+            agent_ids,
+            duration_indices,
+            self.n_agents,
+            n_durations,
+        )
+
+        for prefix, values in (
+            ("duration_return", reward_sums),
+            (
+                "duration_full_disconnect",
+                np.asarray([self._segment_full_disconnect_mean(s) for s in segments], dtype=np.float64),
+            ),
+            (
+                "duration_recovery",
+                np.asarray([self._segment_recovery_flag(s) for s in segments], dtype=np.float64),
+            ),
+            (
+                "duration_bh_frac",
+                np.asarray([self._segment_backhaul_up_frac(s) for s in segments], dtype=np.float64),
+            ),
+        ):
+            summary = self._group_mean_summary(duration_indices, values, n_durations)
+            metrics[f"{prefix}_std"] = float(summary["std"])
+            metrics[f"{prefix}_range"] = float(summary["range"])
+            if prefix == "duration_return":
+                metrics["duration_return_active_frac"] = float(summary["active_frac"])
+
+        starts_by_env_step: dict[tuple[int, int], set[int]] = {}
+        for segment in segments:
+            if segment.initial_assignment:
+                continue
+            key = (int(segment.env_id), int(segment.start_step))
+            starts_by_env_step.setdefault(key, set()).add(int(segment.agent_id))
+        if starts_by_env_step:
+            counts = np.asarray([len(v) for v in starts_by_env_step.values()], dtype=np.float64)
+            metrics["renewal_agents_mean"] = float(np.mean(counts))
+            metrics["renewal_agents_std"] = float(np.std(counts))
+            metrics["renewal_full_sync_rate"] = float(np.mean(counts >= float(self.n_agents)))
+
+            corrs: list[float] = []
+            env_ids = sorted({key[0] for key in starts_by_env_step})
+            for env_id in env_ids:
+                env_keys = sorted(key for key in starts_by_env_step if key[0] == env_id)
+                if len(env_keys) < 2:
+                    continue
+                matrix = np.zeros((len(env_keys), self.n_agents), dtype=np.float64)
+                for row_idx, key in enumerate(env_keys):
+                    for agent_id in starts_by_env_step[key]:
+                        if 0 <= agent_id < self.n_agents:
+                            matrix[row_idx, agent_id] = 1.0
+                for i in range(self.n_agents):
+                    xi = matrix[:, i]
+                    if float(np.std(xi)) <= 1e-8:
+                        continue
+                    for j in range(i + 1, self.n_agents):
+                        xj = matrix[:, j]
+                        if float(np.std(xj)) <= 1e-8:
+                            continue
+                        corrs.append(float(np.corrcoef(xi, xj)[0, 1]))
+            if corrs:
+                metrics["renewal_pairwise_corr_mean"] = float(np.mean(corrs))
+        return metrics
 
     @staticmethod
     def _grad_norm(parameters) -> float:

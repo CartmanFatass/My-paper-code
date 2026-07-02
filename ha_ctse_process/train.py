@@ -112,12 +112,47 @@ ALGORITHM_MANIFEST_FIELDS = (
     "topology_potential_warmup_steps",
     "topology_potential_discount_mode",
     "topology_potential_positive_only",
+    "skill_effect_discovery_on",
+    "skill_effect_reward_on",
+    "skill_effect_reward_injection",
+    "skill_effect_horizons",
+    "skill_effect_stride",
+    "skill_effect_max_windows",
+    "skill_effect_hidden_dim",
+    "skill_effect_group_balanced_loss",
+    "skill_effect_intervention_probe_on",
+    "skill_effect_intervention_max_samples",
+    "skill_effect_warmup_steps",
+    "skill_effect_ctrl_coef",
+    "skill_effect_use_coef",
+    "skill_effect_reward_clip",
+    "skill_effect_min_gain",
+    "skill_effect_min_positive_frac",
+    "skill_force_probe_on",
+    "enable_skill_forcing_reward",
+    "skill_force_reward_injection",
+    "skill_force_disc_coef",
+    "skill_force_effect_coef",
+    "skill_force_duration_entropy_coef",
+    "skill_force_warmup_steps",
+    "skill_force_clip",
+    "skill_force_shortcut_margin",
+    "skill_force_kill_on_shortcut",
+    "skill_force_use_comm_fields",
     "semantic_shortcut_hard_stop_enabled",
     "semantic_shortcut_hard_stop_margin",
     "semantic_shortcut_hard_stop_min_segments",
     "semantic_shortcut_hard_stop_raise",
     "use_g_intervention_kl_diagnostic",
     "g_intervention_kl_max_segments",
+    "use_g_info_diagnostic",
+    "enable_g_info_objective",
+    "g_info_coef_skill",
+    "g_info_coef_duration",
+    "g_info_coef_edit",
+    "g_info_warmup_steps",
+    "g_info_anneal_steps",
+    "g_info_max_segments",
     "intrinsic_segment_gate_enabled",
     "intrinsic_segment_gate_margin",
     "intrinsic_segment_gate_min_segments",
@@ -445,9 +480,45 @@ def parse_args() -> argparse.Namespace:
         choices=("delta", "one_step", "smdp"),
         default="",
     )
+    parser.add_argument("--skill_effect_horizons", default="")
+    parser.add_argument("--skill_effect_stride", type=int, default=0)
+    parser.add_argument("--skill_effect_max_windows", type=int, default=0)
+    parser.add_argument("--skill_effect_hidden_dim", type=int, default=0)
+    parser.add_argument("--disable_skill_effect_group_balanced_loss", action="store_true")
+    parser.add_argument("--skill_effect_intervention_max_samples", type=int, default=0)
+    parser.add_argument("--skill_effect_warmup_steps", type=int, default=-1)
+    parser.add_argument("--skill_effect_ctrl_coef", type=float, default=None)
+    parser.add_argument("--skill_effect_use_coef", type=float, default=None)
+    parser.add_argument("--skill_effect_reward_clip", type=float, default=None)
+    parser.add_argument("--skill_effect_min_gain", type=float, default=None)
+    parser.add_argument("--skill_effect_min_positive_frac", type=float, default=None)
+    parser.add_argument(
+        "--skill_effect_reward_injection",
+        choices=("none", "low_only"),
+        default="",
+    )
+    parser.add_argument(
+        "--skill_force_reward_injection",
+        choices=("none", "low_only"),
+        default="",
+    )
+    parser.add_argument("--skill_force_disc_coef", type=float, default=None)
+    parser.add_argument("--skill_force_effect_coef", type=float, default=None)
+    parser.add_argument("--skill_force_duration_entropy_coef", type=float, default=None)
+    parser.add_argument("--skill_force_warmup_steps", type=int, default=-1)
+    parser.add_argument("--skill_force_clip", type=float, default=None)
+    parser.add_argument("--skill_force_shortcut_margin", type=float, default=None)
+    parser.add_argument("--disable_skill_force_shortcut_gate", action="store_true")
+    parser.add_argument("--skill_force_use_comm_fields", action="store_true")
     parser.add_argument("--semantic_shortcut_hard_stop_margin", type=float, default=None)
     parser.add_argument("--semantic_shortcut_hard_stop_min_segments", type=int, default=0)
     parser.add_argument("--g_intervention_kl_max_segments", type=int, default=0)
+    parser.add_argument("--g_info_coef_skill", type=float, default=None)
+    parser.add_argument("--g_info_coef_duration", type=float, default=None)
+    parser.add_argument("--g_info_coef_edit", type=float, default=None)
+    parser.add_argument("--g_info_warmup_steps", type=int, default=-1)
+    parser.add_argument("--g_info_anneal_steps", type=int, default=-1)
+    parser.add_argument("--g_info_max_segments", type=int, default=0)
     parser.add_argument("--intrinsic_segment_gate_margin", type=float, default=None)
     parser.add_argument("--intrinsic_segment_gate_min_segments", type=int, default=0)
     parser.add_argument("--intrinsic_segment_gate_min_residual_mi", type=float, default=None)
@@ -479,6 +550,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--disable_semantic_shortcut_hard_stop", action="store_true")
     parser.add_argument("--semantic_shortcut_hard_stop_raise", action="store_true")
     parser.add_argument("--disable_g_intervention_kl_diagnostic", action="store_true")
+    parser.add_argument("--disable_g_info_diagnostic", action="store_true")
+    parser.add_argument("--enable_g_info_objective", action="store_true")
     parser.add_argument("--disable_intrinsic_segment_gate", action="store_true")
     parser.add_argument("--enable_intrinsic_reward_norm", action="store_true")
     parser.add_argument("--disable_smdp_discounted_high_return", action="store_true")
@@ -489,6 +562,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--enable_low_actor_team_code", action="store_true")
     parser.add_argument("--enable_topology_potential_shaping", action="store_true")
     parser.add_argument("--topology_potential_positive_only", action="store_true")
+    parser.add_argument("--enable_skill_effect_probe", action="store_true")
+    parser.add_argument("--enable_skill_effect_intervention_probe", action="store_true")
+    parser.add_argument("--enable_skill_effect_reward", action="store_true")
+    parser.add_argument("--enable_skill_forcing_probe", action="store_true")
+    parser.add_argument("--enable_skill_forcing_reward", action="store_true")
     # P2-lite recovery-window contribution credit (default OFF).
     parser.add_argument("--enable_p2_recovery_compute", action="store_true")
     parser.add_argument("--enable_p2_recovery_reward", action="store_true")
@@ -555,7 +633,20 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "topology_role_reward_clip",
         "topology_potential_coef",
         "topology_potential_clip",
+        "skill_effect_ctrl_coef",
+        "skill_effect_use_coef",
+        "skill_effect_reward_clip",
+        "skill_effect_min_gain",
+        "skill_effect_min_positive_frac",
+        "skill_force_disc_coef",
+        "skill_force_effect_coef",
+        "skill_force_duration_entropy_coef",
+        "skill_force_clip",
+        "skill_force_shortcut_margin",
         "semantic_shortcut_hard_stop_margin",
+        "g_info_coef_skill",
+        "g_info_coef_duration",
+        "g_info_coef_edit",
         "intrinsic_segment_gate_margin",
         "intrinsic_segment_gate_min_residual_mi",
         "intrinsic_segment_gate_min_posterior_acc",
@@ -597,6 +688,50 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.topology_potential_discount_mode = args.topology_potential_discount_mode
     if int(args.topology_potential_warmup_steps) >= 0:
         config.topology_potential_warmup_steps = int(args.topology_potential_warmup_steps)
+    effect_horizons = parse_int_tuple(args.skill_effect_horizons)
+    if effect_horizons:
+        config.skill_effect_horizons = effect_horizons
+    if int(args.skill_effect_stride) > 0:
+        config.skill_effect_stride = int(args.skill_effect_stride)
+    if int(args.skill_effect_max_windows) > 0:
+        config.skill_effect_max_windows = int(args.skill_effect_max_windows)
+    if int(args.skill_effect_hidden_dim) > 0:
+        config.skill_effect_hidden_dim = int(args.skill_effect_hidden_dim)
+    if args.disable_skill_effect_group_balanced_loss:
+        config.skill_effect_group_balanced_loss = False
+    if int(args.skill_effect_intervention_max_samples) > 0:
+        config.skill_effect_intervention_max_samples = int(args.skill_effect_intervention_max_samples)
+    if int(args.skill_effect_warmup_steps) >= 0:
+        config.skill_effect_warmup_steps = int(args.skill_effect_warmup_steps)
+    if args.skill_effect_reward_injection:
+        config.skill_effect_reward_injection = args.skill_effect_reward_injection
+    if args.skill_force_reward_injection:
+        config.skill_force_reward_injection = args.skill_force_reward_injection
+    if int(args.skill_force_warmup_steps) >= 0:
+        config.skill_force_warmup_steps = int(args.skill_force_warmup_steps)
+    if args.disable_skill_force_shortcut_gate:
+        config.skill_force_kill_on_shortcut = False
+    if args.skill_force_use_comm_fields:
+        config.skill_force_use_comm_fields = True
+    if args.enable_skill_effect_probe:
+        config.skill_effect_discovery_on = True
+    if args.enable_skill_effect_intervention_probe:
+        config.skill_effect_discovery_on = True
+        config.skill_effect_intervention_probe_on = True
+    if args.enable_skill_effect_reward:
+        config.skill_effect_reward_on = True
+        config.skill_effect_discovery_on = True
+        if not getattr(config, "skill_effect_reward_injection", "none") or config.skill_effect_reward_injection == "none":
+            config.skill_effect_reward_injection = "low_only"
+    if args.enable_skill_forcing_probe:
+        config.skill_force_probe_on = True
+        config.skill_effect_discovery_on = True
+    if args.enable_skill_forcing_reward:
+        config.enable_skill_forcing_reward = True
+        config.skill_force_probe_on = True
+        config.skill_effect_discovery_on = True
+        if not hasattr(config, "skill_force_reward_injection"):
+            config.skill_force_reward_injection = "low_only"
     if args.enable_p2_recovery_compute:
         config.p2_recovery_credit_compute_on = True
     if args.enable_p2_recovery_reward:
@@ -612,6 +747,12 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.semantic_shortcut_hard_stop_min_segments = int(args.semantic_shortcut_hard_stop_min_segments)
     if int(args.g_intervention_kl_max_segments) > 0:
         config.g_intervention_kl_max_segments = int(args.g_intervention_kl_max_segments)
+    if int(args.g_info_warmup_steps) >= 0:
+        config.g_info_warmup_steps = int(args.g_info_warmup_steps)
+    if int(args.g_info_anneal_steps) >= 0:
+        config.g_info_anneal_steps = int(args.g_info_anneal_steps)
+    if int(args.g_info_max_segments) > 0:
+        config.g_info_max_segments = int(args.g_info_max_segments)
     if int(args.intrinsic_phase_bins) > 0:
         config.intrinsic_phase_bins = int(args.intrinsic_phase_bins)
     if int(args.intrinsic_segment_gate_min_segments) > 0:
@@ -649,6 +790,10 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.semantic_shortcut_hard_stop_raise = True
     if args.disable_g_intervention_kl_diagnostic:
         config.use_g_intervention_kl_diagnostic = False
+    if args.disable_g_info_diagnostic:
+        config.use_g_info_diagnostic = False
+    if args.enable_g_info_objective:
+        config.enable_g_info_objective = True
     if args.disable_intrinsic_segment_gate:
         config.intrinsic_segment_gate_enabled = False
     if args.enable_intrinsic_reward_norm:
@@ -774,6 +919,11 @@ def checkpoint_payload(
             if getattr(agent, "transition_discriminator", None) is not None
             else None
         ),
+        "skill_effect_discovery": (
+            agent.skill_effect_discovery.state_dict()
+            if getattr(agent, "skill_effect_discovery", None) is not None
+            else None
+        ),
         "high_opt": agent.high_opt.state_dict(),
         "low_opt": agent.low_opt.state_dict() if agent.low_opt is not None else None,
         "low_actor_opt": agent.low_actor_opt.state_dict() if agent.low_actor_opt is not None else None,
@@ -781,6 +931,11 @@ def checkpoint_payload(
         "high_value_norm": agent.high_value_norm.state_dict() if agent.high_value_norm is not None else None,
         "low_value_norm": agent.low_value_norm.state_dict() if agent.low_value_norm is not None else None,
         "process_opt": agent.process_opt.state_dict(),
+        "skill_effect_opt": (
+            agent.skill_effect_discovery.opt.state_dict()
+            if getattr(agent, "skill_effect_discovery", None) is not None
+            else None
+        ),
         "total_steps": int(total_steps),
         "update_idx": int(update_idx),
         "config_name": args.config,
@@ -866,6 +1021,15 @@ def load_checkpoint(
         and getattr(agent, "transition_discriminator", None) is not None
     ):
         agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=False)
+    if (
+        "skill_effect_discovery" in checkpoint
+        and checkpoint.get("skill_effect_discovery") is not None
+        and getattr(agent, "skill_effect_discovery", None) is not None
+    ):
+        try:
+            agent.skill_effect_discovery.load_state_dict(checkpoint["skill_effect_discovery"], strict=False)
+        except RuntimeError:
+            pass
     if load_optimizers:
         if "high_opt" in checkpoint:
             try:
@@ -893,6 +1057,15 @@ def load_checkpoint(
         if "process_opt" in checkpoint:
             try:
                 agent.process_opt.load_state_dict(checkpoint["process_opt"])
+            except ValueError:
+                pass
+        if (
+            "skill_effect_opt" in checkpoint
+            and checkpoint.get("skill_effect_opt") is not None
+            and getattr(agent, "skill_effect_discovery", None) is not None
+        ):
+            try:
+                agent.skill_effect_discovery.opt.load_state_dict(checkpoint["skill_effect_opt"])
             except ValueError:
                 pass
     return int(checkpoint.get("total_steps", 0)), int(checkpoint.get("update_idx", 0))
@@ -1033,6 +1206,10 @@ def evaluate(
             last_info = info
             backhaul_connected_steps: list[float] = []
             throughput_when_backhaul_connected_steps: list[float] = []
+            coverage_eq1_steps: list[float] = []
+            coverage_positive_steps: list[float] = []
+            zero_throughput_steps: list[float] = []
+            throughput_gt5_steps: list[float] = []
             capture_topology = save_topology and episode_idx < topology_episodes
             topology_frames = []
             if capture_topology:
@@ -1065,6 +1242,15 @@ def evaluate(
                 backhaul_flag = float(step_metrics.get("backhaul_connected_flag", 0.0))
                 backhaul_connected_steps.append(backhaul_flag)
                 step_throughput = step_metrics.get("throughput")
+                step_coverage = step_metrics.get("coverage", step_metrics.get("coverage_ratio"))
+                if step_coverage is not None:
+                    coverage_value = float(step_coverage)
+                    coverage_eq1_steps.append(1.0 if coverage_value >= 0.999 else 0.0)
+                    coverage_positive_steps.append(1.0 if coverage_value > 1e-6 else 0.0)
+                if step_throughput is not None:
+                    throughput_value = float(step_throughput)
+                    zero_throughput_steps.append(1.0 if throughput_value <= 1e-6 else 0.0)
+                    throughput_gt5_steps.append(1.0 if throughput_value > 5.0 else 0.0)
                 if backhaul_flag >= 0.5 and step_throughput is not None:
                     throughput_when_backhaul_connected_steps.append(float(step_throughput))
                 done = bool(terminated or truncated)
@@ -1094,6 +1280,21 @@ def evaluate(
             episode_metrics = extract_eval_metrics(last_info)
             if backhaul_connected_steps:
                 episode_metrics["backhaul_connected_step_fraction"] = float(np.mean(backhaul_connected_steps))
+            if coverage_eq1_steps:
+                episode_metrics["coverage_eq1_step_fraction"] = float(np.mean(coverage_eq1_steps))
+                episode_metrics["coverage_has_eq1_step_flag"] = float(np.max(coverage_eq1_steps))
+                episode_metrics["coverage_episode_all_eq1_flag"] = float(np.min(coverage_eq1_steps))
+            if coverage_positive_steps:
+                episode_metrics["coverage_positive_step_fraction"] = float(np.mean(coverage_positive_steps))
+            final_coverage = episode_metrics.get("coverage", episode_metrics.get("coverage_ratio"))
+            if final_coverage is not None:
+                episode_metrics["coverage_final_eq1_flag"] = 1.0 if float(final_coverage) >= 0.999 else 0.0
+            if zero_throughput_steps:
+                episode_metrics["zero_throughput_step_fraction"] = float(np.mean(zero_throughput_steps))
+                episode_metrics["zero_throughput_episode_flag"] = float(np.min(zero_throughput_steps))
+            if throughput_gt5_steps:
+                episode_metrics["throughput_gt5_step_fraction"] = float(np.mean(throughput_gt5_steps))
+                episode_metrics["throughput_gt5_episode_flag"] = float(np.max(throughput_gt5_steps))
             if throughput_when_backhaul_connected_steps:
                 episode_metrics["throughput_when_backhaul_connected_mbps"] = float(
                     np.mean(throughput_when_backhaul_connected_steps)
@@ -1155,6 +1356,14 @@ def evaluate(
     }
     for key, values in metric_values.items():
         metrics[key] = float(np.mean(values)) if values else 0.0
+    if "coverage_has_eq1_step_flag" in metrics:
+        metrics["coverage_eq1_episode_fraction"] = float(metrics["coverage_has_eq1_step_flag"])
+    if "coverage_final_eq1_flag" in metrics:
+        metrics["coverage_final_eq1_episode_fraction"] = float(metrics["coverage_final_eq1_flag"])
+    if "zero_throughput_episode_flag" in metrics:
+        metrics["zero_throughput_episode_fraction"] = float(metrics["zero_throughput_episode_flag"])
+    if "throughput_gt5_episode_flag" in metrics:
+        metrics["throughput_gt5_episode_fraction"] = float(metrics["throughput_gt5_episode_flag"])
     if eval_records:
         save_eval_plots(args.log_dir, window=max(1, int(getattr(args, "eval_episodes", 1))))
 
@@ -1170,7 +1379,11 @@ def evaluate(
         f"throughput={metrics.get('throughput', 0.0):.6f} "
         f"backhaul_connected_frac={metrics.get('backhaul_connected_step_fraction', metrics.get('backhaul_connected_flag', 0.0)):.6f} "
         f"throughput_when_backhaul_connected={metrics.get('throughput_when_backhaul_connected_mbps', 0.0):.6f} "
-        f"battery_min={metrics.get('battery_min', 0.0):.6f}"
+        f"battery_min={metrics.get('battery_min', 0.0):.6f} "
+        f"coverage_eq1_step_frac={metrics.get('coverage_eq1_step_fraction', 0.0):.6f} "
+        f"coverage_eq1_ep_frac={metrics.get('coverage_eq1_episode_fraction', 0.0):.6f} "
+        f"zero_throughput_ep_frac={metrics.get('zero_throughput_episode_fraction', 0.0):.6f} "
+        f"throughput_gt5_step_frac={metrics.get('throughput_gt5_step_fraction', 0.0):.6f}"
     )
     return metrics
 
@@ -1478,6 +1691,111 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         "topology_potential_full_disconnect_end_mean",
     ):
         writer.add_scalar(f"TopologyPotential/{key}", process_metrics.get(key, 0.0), total_steps)
+    for key in (
+        "effect_windows",
+        "effect_loss_full",
+        "effect_loss_base",
+        "effect_loss_duration",
+        "effect_loss_reward",
+        "effect_loss_full_raw",
+        "effect_loss_base_raw",
+        "effect_loss_duration_raw",
+        "effect_loss_reward_raw",
+        "effect_gain_mean",
+        "effect_gain_group_balanced_mean",
+        "effect_gain_nonmotion",
+        "effect_gain_positive_frac",
+        "effect_gain_motion",
+        "effect_gain_service",
+        "effect_gain_energy",
+        "effect_gain_topology",
+        "effect_gain_minus_duration_baseline",
+        "effect_gain_minus_reward_baseline",
+        "effect_target_available_frac",
+        "effect_skill_usage_entropy",
+        "effect_skill_usage_max_frac",
+        "effect_action_skill_eta2",
+        "effect_target_skill_eta2",
+        "effect_gain_skill_std",
+        "effect_action_abs_mean",
+        "effect_action_dim",
+        "effect_observed_target_skill_l2_mean",
+        "effect_observed_target_skill_l2_nonmotion",
+        "effect_observed_action_skill_l2_mean",
+        "effect_observed_action_target_corr",
+        "effect_endstate_available_frac",
+        "effect_window_mean_available_frac",
+        "effect_intervention_active",
+        "effect_intervention_samples",
+        "effect_intervention_action_l2_mean",
+        "effect_intervention_action_l2_max",
+        "effect_intervention_action_pairwise_std",
+        "effect_intervention_pred_effect_l2_mean",
+        "effect_intervention_pred_effect_l2_max",
+        "effect_intervention_best_skill_gap",
+        "effect_intervention_low_entropy_mean",
+        "effect_gain_horizon_0",
+        "effect_gain_positive_frac_horizon_0",
+        "effect_horizon_count_0",
+        "effect_gain_horizon_1",
+        "effect_gain_positive_frac_horizon_1",
+        "effect_horizon_count_1",
+        "effect_gain_horizon_2",
+        "effect_gain_positive_frac_horizon_2",
+        "effect_horizon_count_2",
+        "effect_gain_horizon_3",
+        "effect_gain_positive_frac_horizon_3",
+        "effect_horizon_count_3",
+        "effect_field_gain_delta_position_x",
+        "effect_field_gain_delta_position_y",
+        "effect_field_gain_delta_position_z",
+        "effect_field_gain_delta_position_l2",
+        "effect_field_gain_delta_battery",
+        "effect_field_gain_delta_charging",
+        "effect_field_gain_delta_local_service",
+        "effect_field_gain_delta_local_access_count",
+        "effect_field_gain_delta_uav_degree",
+        "effect_field_gain_delta_bs_link",
+        "effect_field_gain_delta_soft_topology",
+        "effect_field_gain_delta_coverage_ratio",
+        "effect_field_gain_delta_qos_satisfaction",
+        "effect_field_gain_delta_system_throughput_mbps",
+        "effect_field_gain_end_local_service",
+        "effect_field_gain_end_local_access_count",
+        "effect_field_gain_end_uav_degree",
+        "effect_field_gain_end_bs_link",
+        "effect_field_gain_end_soft_topology",
+        "effect_field_gain_end_coverage_ratio",
+        "effect_field_gain_end_qos_satisfaction",
+        "effect_field_gain_end_system_throughput_mbps",
+        "effect_field_gain_mean_local_service",
+        "effect_field_gain_mean_uav_degree",
+        "effect_field_gain_mean_bs_link",
+        "effect_field_gain_mean_backhaul_connected_flag",
+        "effect_field_gain_mean_full_disconnect",
+        "effect_reward_low_mean",
+        "effect_reward_applied_steps",
+        "force_reward_low_mean",
+        "force_reward_applied_steps",
+        "force_disc_loss",
+        "force_disc_acc",
+        "force_disc_logp_mean",
+        "force_disc_residual_mean",
+        "force_effect_residual_mean",
+        "force_shortcut_best_acc",
+        "force_shortcut_best_logp_mean",
+        "force_shortcut_margin",
+        "force_shortcut_duration_acc",
+        "force_shortcut_reward_acc",
+        "force_shortcut_context_acc",
+        "force_shortcut_phase_agent_acc",
+        "force_gate_active",
+        "force_gate_reason",
+        "force_reward_unclipped_mean",
+        "force_duration_entropy_bonus",
+        "force_feature_dim",
+    ):
+        writer.add_scalar(f"SkillEffect/{key}", process_metrics.get(key, 0.0), total_steps)
     writer.add_scalar("Process/DurationOnlyAccuracy", process_metrics.get("duration_only_accuracy", 0.0), total_steps)
     writer.add_scalar("Process/LengthOnlyAccuracy", process_metrics.get("length_only_accuracy", 0.0), total_steps)
     writer.add_scalar("Process/RewardSumOnlyAccuracy", process_metrics.get("reward_sum_only_accuracy", 0.0), total_steps)
@@ -1506,6 +1824,18 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("Collapse/DurationUsageEntropy", process_metrics.get("duration_usage_entropy", 0.0), total_steps)
     writer.add_scalar("Collapse/DurationUsageMaxFrac", process_metrics.get("duration_usage_max_frac", 0.0), total_steps)
     writer.add_scalar("Collapse/SkillDurationMI", process_metrics.get("skill_duration_mi", 0.0), total_steps)
+    writer.add_scalar("Lifetime/Heterogeneity", process_metrics.get("lifetime_heterogeneity", 0.0), total_steps)
+    writer.add_scalar("Lifetime/DurationAgentMI", process_metrics.get("duration_agent_mi", 0.0), total_steps)
+    writer.add_scalar("Lifetime/DurationReturnRange", process_metrics.get("duration_return_range", 0.0), total_steps)
+    writer.add_scalar(
+        "Lifetime/DurationFullDisconnectRange",
+        process_metrics.get("duration_full_disconnect_range", 0.0),
+        total_steps,
+    )
+    writer.add_scalar("Lifetime/DurationRecoveryRange", process_metrics.get("duration_recovery_range", 0.0), total_steps)
+    writer.add_scalar("Lifetime/DurationBhFracRange", process_metrics.get("duration_bh_frac_range", 0.0), total_steps)
+    writer.add_scalar("Lifetime/RenewalFullSyncRate", process_metrics.get("renewal_full_sync_rate", 0.0), total_steps)
+    writer.add_scalar("Lifetime/RenewalPairwiseCorr", process_metrics.get("renewal_pairwise_corr_mean", 0.0), total_steps)
     writer.add_scalar("Collapse/TeamCodeUsageEntropy", process_metrics.get("team_code_usage_entropy", 0.0), total_steps)
     writer.add_scalar("Collapse/TeamCodeUsageMaxFrac", process_metrics.get("team_code_usage_max_frac", 0.0), total_steps)
     writer.add_scalar("Collapse/TeamCodeSkillMI", process_metrics.get("team_code_skill_mi", 0.0), total_steps)
@@ -1514,6 +1844,26 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("Collapse/GInterventionKLMean", process_metrics.get("g_intervention_kl_mean", 0.0), total_steps)
     writer.add_scalar("Collapse/GInterventionKLMax", process_metrics.get("g_intervention_kl_max", 0.0), total_steps)
     writer.add_scalar("Collapse/GInterventionTVMean", process_metrics.get("g_intervention_tv_mean", 0.0), total_steps)
+    writer.add_scalar("GInfo/Active", process_metrics.get("g_info_active", 0.0), total_steps)
+    writer.add_scalar("GInfo/ObjectiveActive", process_metrics.get("g_info_objective_active", 0.0), total_steps)
+    writer.add_scalar("GInfo/Samples", process_metrics.get("g_info_samples", 0.0), total_steps)
+    writer.add_scalar("GInfo/Loss", process_metrics.get("g_info_loss", 0.0), total_steps)
+    writer.add_scalar("GInfo/CoefScale", process_metrics.get("g_info_coef_scale", 0.0), total_steps)
+    writer.add_scalar("GInfo/SkillMI", process_metrics.get("g_info_skill_mi", 0.0), total_steps)
+    writer.add_scalar("GInfo/DurationMI", process_metrics.get("g_info_duration_mi", 0.0), total_steps)
+    writer.add_scalar("GInfo/EditMI", process_metrics.get("g_info_edit_mi", 0.0), total_steps)
+    writer.add_scalar("GInfo/TotalMI", process_metrics.get("g_info_total_mi", 0.0), total_steps)
+    writer.add_scalar("GInfo/SkillKL", process_metrics.get("g_itv_kl_skill", 0.0), total_steps)
+    writer.add_scalar("GInfo/SkillTV", process_metrics.get("g_itv_tv_skill", 0.0), total_steps)
+    writer.add_scalar("GInfo/DurationKL", process_metrics.get("g_itv_kl_duration", 0.0), total_steps)
+    writer.add_scalar("GInfo/DurationTV", process_metrics.get("g_itv_tv_duration", 0.0), total_steps)
+    writer.add_scalar("GInfo/EditKL", process_metrics.get("g_itv_kl_edit", 0.0), total_steps)
+    writer.add_scalar("GInfo/EditTV", process_metrics.get("g_itv_tv_edit", 0.0), total_steps)
+    writer.add_scalar(
+        "GInfo/JointAssignmentDistance",
+        process_metrics.get("g_joint_assignment_distance", 0.0),
+        total_steps,
+    )
     writer.add_scalar("Credit/ProbeAvailableFrac", process_metrics.get("credit_probe_available_frac", 0.0), total_steps)
     writer.add_scalar("Credit/FullDisconnectMean", process_metrics.get("credit_full_disconnect_mean", 0.0), total_steps)
     writer.add_scalar("Credit/RecoveryRate", process_metrics.get("credit_recovery_rate", 0.0), total_steps)
@@ -1740,9 +2090,34 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"topology_role_coef={float(getattr(config, 'topology_role_coef', 0.0))} "
             f"topology_role_injection={getattr(config, 'topology_role_injection', 'none')} "
             f"topology_role_reward_coef={float(getattr(config, 'topology_role_reward_coef', 0.0))} "
+            f"skill_effect_probe={bool(getattr(config, 'skill_effect_discovery_on', False))} "
+            f"skill_effect_reward={bool(getattr(config, 'skill_effect_reward_on', False))} "
+            f"skill_effect_horizons={tuple(getattr(config, 'skill_effect_horizons', ())) } "
+            f"skill_effect_stride={int(getattr(config, 'skill_effect_stride', 0))} "
+            f"skill_effect_max_windows={int(getattr(config, 'skill_effect_max_windows', 0))} "
+            f"skill_effect_hidden_dim={int(getattr(config, 'skill_effect_hidden_dim', 0))} "
+            f"skill_effect_group_balanced_loss={bool(getattr(config, 'skill_effect_group_balanced_loss', True))} "
+            f"skill_effect_intervention_probe={bool(getattr(config, 'skill_effect_intervention_probe_on', False))} "
+            f"skill_effect_intervention_max_samples={int(getattr(config, 'skill_effect_intervention_max_samples', 0))} "
+            f"skill_force_probe={bool(getattr(config, 'skill_force_probe_on', False))} "
+            f"skill_force_reward={bool(getattr(config, 'enable_skill_forcing_reward', False))} "
+            f"skill_force_injection={getattr(config, 'skill_force_reward_injection', 'low_only')} "
+            f"skill_force_disc_coef={float(getattr(config, 'skill_force_disc_coef', 0.0))} "
+            f"skill_force_effect_coef={float(getattr(config, 'skill_force_effect_coef', 0.0))} "
+            f"skill_force_duration_entropy_coef={float(getattr(config, 'skill_force_duration_entropy_coef', 0.0))} "
+            f"skill_force_warmup={int(getattr(config, 'skill_force_warmup_steps', 0))} "
+            f"skill_force_shortcut_gate={bool(getattr(config, 'skill_force_kill_on_shortcut', True))} "
+            f"skill_force_use_comm_fields={bool(getattr(config, 'skill_force_use_comm_fields', False))} "
             f"semantic_shortcut_hard_stop={bool(getattr(config, 'semantic_shortcut_hard_stop_enabled', True))} "
             f"semantic_shortcut_margin={float(getattr(config, 'semantic_shortcut_hard_stop_margin', 0.0))} "
             f"g_intervention_kl={bool(getattr(config, 'use_g_intervention_kl_diagnostic', True))} "
+            f"g_info_diag={bool(getattr(config, 'use_g_info_diagnostic', True))} "
+            f"g_info_obj={bool(getattr(config, 'enable_g_info_objective', False))} "
+            f"g_info_coef_skill={float(getattr(config, 'g_info_coef_skill', 0.0))} "
+            f"g_info_coef_duration={float(getattr(config, 'g_info_coef_duration', 0.0))} "
+            f"g_info_coef_edit={float(getattr(config, 'g_info_coef_edit', 0.0))} "
+            f"g_info_warmup={int(getattr(config, 'g_info_warmup_steps', 0))} "
+            f"g_info_anneal={int(getattr(config, 'g_info_anneal_steps', 0))} "
             f"intrinsic_segment_gate={bool(getattr(config, 'intrinsic_segment_gate_enabled', True))} "
             f"intrinsic_gate_margin={float(getattr(config, 'intrinsic_segment_gate_margin', 0.0))} "
             f"intrinsic_gate_min_segments={int(getattr(config, 'intrinsic_segment_gate_min_segments', 0))} "
@@ -1762,6 +2137,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"params_high_stack={param_counts.get('high_stack', 0)} "
             f"params_low={param_counts.get('low', 0)} "
             f"params_process_stack={param_counts.get('process_stack', 0)} "
+            f"params_skill_effect={param_counts.get('skill_effect_discovery', 0)} "
             f"duration_candidates={tuple(getattr(config, 'skill_lifetime_candidates', ())) } "
             f"rollout_length={args.rollout_length} total_timesteps={args.total_timesteps} "
             f"save_interval={args.save_interval} checkpoint_keep_last={args.checkpoint_keep_last}"
@@ -1930,6 +2306,44 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"topo_pot_low={process_metrics.get('topology_potential_low_mean', 0.0):.6f} "
                 f"topo_phi_start={process_metrics.get('topology_potential_phi_start_mean', 0.0):.6f} "
                 f"topo_phi_end={process_metrics.get('topology_potential_phi_end_mean', 0.0):.6f} "
+                f"effect_windows={process_metrics.get('effect_windows', 0.0):.0f} "
+                f"effect_loss_full={process_metrics.get('effect_loss_full', 0.0):.6f} "
+                f"effect_loss_base={process_metrics.get('effect_loss_base', 0.0):.6f} "
+                f"effect_gain={process_metrics.get('effect_gain_mean', 0.0):.6f} "
+                f"effect_gbal={process_metrics.get('effect_gain_group_balanced_mean', 0.0):.6f} "
+                f"effect_nonmotion={process_metrics.get('effect_gain_nonmotion', 0.0):.6f} "
+                f"effect_pos={process_metrics.get('effect_gain_positive_frac', 0.0):.3f} "
+                f"effect_motion={process_metrics.get('effect_gain_motion', 0.0):.6f} "
+                f"effect_service={process_metrics.get('effect_gain_service', 0.0):.6f} "
+                f"effect_energy={process_metrics.get('effect_gain_energy', 0.0):.6f} "
+                f"effect_topology={process_metrics.get('effect_gain_topology', 0.0):.6f} "
+                f"effect_h0={process_metrics.get('effect_gain_horizon_0', 0.0):.6f} "
+                f"effect_h1={process_metrics.get('effect_gain_horizon_1', 0.0):.6f} "
+                f"effect_h2={process_metrics.get('effect_gain_horizon_2', 0.0):.6f} "
+                f"effect_act_eta={process_metrics.get('effect_action_skill_eta2', 0.0):.3f} "
+                f"effect_tgt_eta={process_metrics.get('effect_target_skill_eta2', 0.0):.3f} "
+                f"effect_obs_tgt_l2={process_metrics.get('effect_observed_target_skill_l2_mean', 0.0):.6f} "
+                f"effect_obs_nm_l2={process_metrics.get('effect_observed_target_skill_l2_nonmotion', 0.0):.6f} "
+                f"effect_act_tgt_corr={process_metrics.get('effect_observed_action_target_corr', 0.0):.3f} "
+                f"effect_end_avail={process_metrics.get('effect_endstate_available_frac', 0.0):.3f} "
+                f"effect_mean_avail={process_metrics.get('effect_window_mean_available_frac', 0.0):.3f} "
+                f"effect_skill_ent={process_metrics.get('effect_skill_usage_entropy', 0.0):.3f} "
+                f"effect_gap_dur={process_metrics.get('effect_gain_minus_duration_baseline', 0.0):.6f} "
+                f"effect_gap_rew={process_metrics.get('effect_gain_minus_reward_baseline', 0.0):.6f} "
+                f"effect_low_rew={process_metrics.get('effect_reward_low_mean', 0.0):.6f} "
+                f"effect_steps={process_metrics.get('effect_reward_applied_steps', 0.0):.0f} "
+                f"force_rew={process_metrics.get('force_reward_low_mean', 0.0):.6f} "
+                f"force_steps={process_metrics.get('force_reward_applied_steps', 0.0):.0f} "
+                f"force_disc_acc={process_metrics.get('force_disc_acc', 0.0):.3f} "
+                f"force_resid={process_metrics.get('force_disc_residual_mean', 0.0):.6f} "
+                f"force_eff_resid={process_metrics.get('force_effect_residual_mean', 0.0):.6f} "
+                f"force_shortcut_acc={process_metrics.get('force_shortcut_best_acc', 0.0):.3f} "
+                f"force_margin={process_metrics.get('force_shortcut_margin', 0.0):.3f} "
+                f"force_gate={process_metrics.get('force_gate_active', 0.0):.0f} "
+                f"force_reason={process_metrics.get('force_gate_reason', 0.0):.0f} "
+                f"effect_itv_samples={process_metrics.get('effect_intervention_samples', 0.0):.0f} "
+                f"effect_itv_act_l2={process_metrics.get('effect_intervention_action_l2_mean', 0.0):.6f} "
+                f"effect_itv_pred_l2={process_metrics.get('effect_intervention_pred_effect_l2_mean', 0.0):.6f} "
                 f"duration_only_acc={process_metrics.get('duration_only_accuracy', 0.0):.3f} "
                 f"length_only_acc={process_metrics.get('length_only_accuracy', 0.0):.3f} "
                 f"reward_sum_only_acc={process_metrics.get('reward_sum_only_accuracy', 0.0):.3f} "
@@ -1952,8 +2366,18 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"duration_entropy={process_metrics.get('duration_usage_entropy', 0.0):.3f} "
                 f"g_entropy={process_metrics.get('team_code_usage_entropy', 0.0):.3f} "
                 f"g_skill_mi={process_metrics.get('team_code_skill_mi', 0.0):.3f} "
+                f"g_dur_mi={process_metrics.get('team_code_duration_mi', 0.0):.3f} "
+                f"g_edit_mi={process_metrics.get('team_code_edit_mi', 0.0):.3f} "
                 f"g_ikl={process_metrics.get('g_intervention_kl_mean', 0.0):.6f} "
                 f"g_itv={process_metrics.get('g_intervention_tv_mean', 0.0):.6f} "
+                f"g_info_active={process_metrics.get('g_info_active', 0.0):.0f} "
+                f"g_info_obj={process_metrics.get('g_info_objective_active', 0.0):.0f} "
+                f"g_info_loss={process_metrics.get('g_info_loss', 0.0):.6f} "
+                f"g_mi_z={process_metrics.get('g_info_skill_mi', 0.0):.6f} "
+                f"g_mi_dur={process_metrics.get('g_info_duration_mi', 0.0):.6f} "
+                f"g_itv_z={process_metrics.get('g_itv_tv_skill', 0.0):.6f} "
+                f"g_itv_dur={process_metrics.get('g_itv_tv_duration', 0.0):.6f} "
+                f"g_joint_dist={process_metrics.get('g_joint_assignment_distance', 0.0):.6f} "
                 f"credit_disc={process_metrics.get('credit_full_disconnect_mean', 0.0):.3f} "
                 f"credit_recover={process_metrics.get('credit_recovery_rate', 0.0):.3f} "
                 f"credit_collapse={process_metrics.get('credit_collapse_rate', 0.0):.3f} "
