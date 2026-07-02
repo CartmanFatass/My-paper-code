@@ -32,7 +32,9 @@ out/
 
 # 日志和数据
 logs/
+tf-logs/
 *.log
+*.tfevents.*
 *.csv
 *.dat
 *.out
