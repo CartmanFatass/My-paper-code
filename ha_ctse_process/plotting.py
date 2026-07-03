@@ -135,6 +135,31 @@ DERIVED_EVAL_FIELDS = (
     "throughput_gt5_episode_flag",
 )
 
+SITUATION_STAGE1_FIELDS = (
+    "situation_enabled",
+    "situation_change_rate",
+    "situation_unique_kappa",
+    "situation_segment_change_frac",
+    "situation_agent_kappa_enabled",
+    "situation_agent_kappa_change_rate",
+    "situation_agent_kappa_disagreement_rate",
+    "situation_agent_kappa_median_dwell",
+    "situation_agent_kappa_global_mi",
+    "situation_agent_unique_kappa_mean",
+    "situation_agent_unique_kappa_mean",
+    "situation_hazard_control_enabled",
+    "situation_hazard_forced_renewal_rate",
+    "situation_hazard_mode_code",
+    "situation_hazard_conservative_guard",
+    "situation_hazard_guard_event_count",
+    "situation_hazard_guard_allow_rate",
+    "situation_hazard_guard_confirm_block_rate",
+    "situation_hazard_guard_dwell_block_rate",
+    "situation_hazard_guard_rate_cap_block_rate",
+    "situation_hazard_guard_no_change_block_rate",
+    "situation_hazard_guard_recent_force_rate",
+)
+
 
 UPDATE_FIELDS = (
     "update",
@@ -175,6 +200,32 @@ UPDATE_FIELDS = (
     "transition_skill_log_context_mean",
     "transition_skill_reward_unclipped_mean",
     "transition_skill_reward_warmup_active",
+    "proto_disc_active",
+    "proto_disc_samples",
+    "proto_disc_loss",
+    "proto_disc_q_loss",
+    "proto_disc_prior_loss",
+    "proto_disc_acc",
+    "proto_disc_prior_acc",
+    "proto_disc_residual_mean",
+    "proto_disc_residual_positive_frac",
+    "proto_disc_acc_by_skill_std",
+    "proto_disc_reward_mean",
+    "proto_disc_reward_unclipped_mean",
+    "proto_disc_reward_applied_steps",
+    "proto_disc_reward_env_ratio",
+    "proto_skill_selection_entropy",
+    "proto_skill_usage_entropy_by_kappa",
+    "proto_skill_relevance_alignment",
+    "proto_skill_selected_relevance_mean",
+    "proto_omega_nonzero_frac",
+    "proto_bank_drift_cos",
+    "proto_rel_row_entropy_mean",
+    "proto_rel_argmax_dwell_median",
+    "proto_rel_stability_cos",
+    "proto_rel_drop_event_rate_05",
+    "proto_rel_drop_event_rate_03",
+    "proto_rel_drop_event_rate_01",
     "intrinsic_segment_high_gate_active",
     "intrinsic_segment_high_gate_score",
     "intrinsic_segment_high_gate_posterior_minus_shortcut",
@@ -408,6 +459,7 @@ UPDATE_FIELDS = (
     "g_intervention_kl_max",
     "g_intervention_tv_mean",
     *G_INFO_METRIC_FIELDS,
+    *SITUATION_STAGE1_FIELDS,
     *COOPERATION_CREDIT_FIELDS,
     "high_loss",
     "high_policy_loss",
@@ -423,6 +475,8 @@ UPDATE_FIELDS = (
     "high_value_norm_mean",
     "high_value_norm_std",
     "high_grad_norm",
+    "compact_return_loss",
+    "compact_return_active",
     "team_code_entropy",
     "compact_norm_mean",
     "opt_cd_loss",
@@ -807,6 +861,25 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("g_itv_tv_skill", "g skill TV"),
         ("g_itv_tv_duration", "g duration TV"),
         ("g_joint_assignment_distance", "g joint assignment distance"),
+        ("situation_enabled", "Situation diagnostics enabled"),
+        ("situation_change_rate", "Situation change rate"),
+        ("situation_unique_kappa", "Unique kappa"),
+        ("situation_segment_change_frac", "Segment change frac"),
+        ("situation_agent_kappa_change_rate", "Agent kappa change rate"),
+        ("situation_agent_kappa_disagreement_rate", "Agent/global disagreement"),
+        ("situation_agent_kappa_median_dwell", "Agent kappa dwell"),
+        ("situation_agent_kappa_global_mi", "Agent/global kappa MI"),
+        ("situation_agent_unique_kappa_mean", "Unique agent kappa"),
+        ("situation_hazard_control_enabled", "Situation hazard enabled"),
+        ("situation_hazard_forced_renewal_rate", "Situation forced renewal rate"),
+        ("situation_hazard_mode_code", "Situation hazard mode"),
+        ("situation_hazard_conservative_guard", "Conservative guard enabled"),
+        ("situation_hazard_guard_allow_rate", "Guard allow rate"),
+        ("situation_hazard_guard_confirm_block_rate", "Guard confirm block"),
+        ("situation_hazard_guard_dwell_block_rate", "Guard dwell block"),
+        ("situation_hazard_guard_rate_cap_block_rate", "Guard rate-cap block"),
+        ("situation_hazard_guard_no_change_block_rate", "Guard no-change block"),
+        ("situation_hazard_guard_recent_force_rate", "Guard recent force rate"),
     ):
         x, y = _series(records, key)
         if y.size:
@@ -816,6 +889,40 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
     ax.legend()
     fig.tight_layout()
     fig.savefig(log_dir / "ha_ctse_process_diagnostics.png", dpi=180)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for key, label in (
+        ("proto_disc_active", "Prototype disc active"),
+        ("proto_disc_samples", "Prototype disc samples"),
+        ("proto_disc_acc", "Prototype disc acc"),
+        ("proto_disc_prior_acc", "Prototype prior acc"),
+        ("proto_disc_residual_mean", "Prototype residual"),
+        ("proto_disc_residual_positive_frac", "Prototype residual positive"),
+        ("proto_disc_reward_mean", "Prototype reward"),
+        ("proto_disc_reward_applied_steps", "Prototype reward steps"),
+        ("proto_skill_selection_entropy", "Prototype skill entropy"),
+        ("proto_skill_usage_entropy_by_kappa", "Skill entropy by kappa"),
+        ("proto_skill_relevance_alignment", "Skill/relevance MI"),
+        ("proto_skill_selected_relevance_mean", "Selected relevance mean"),
+        ("proto_omega_nonzero_frac", "Omega nonzero frac"),
+        ("proto_bank_drift_cos", "Prototype EMA cosine"),
+        ("proto_rel_row_entropy_mean", "Rel row entropy"),
+        ("proto_rel_argmax_dwell_median", "Rel argmax dwell"),
+        ("proto_rel_stability_cos", "Rel stability cosine"),
+        ("proto_rel_drop_event_rate_05", "Rel drop <0.5"),
+        ("proto_rel_drop_event_rate_03", "Rel drop <0.3"),
+        ("proto_rel_drop_event_rate_01", "Rel drop <0.1"),
+        ("compact_return_loss", "Compact return loss"),
+    ):
+        x, y = _series(records, key)
+        if y.size:
+            ax.plot(x, moving_average(y, window), label=label)
+    ax.set(title="R14 Prototype-Response Diagnostics", xlabel="Env steps")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(log_dir / "ha_ctse_r14_prototype_diagnostics.png", dpi=180)
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -1290,6 +1397,16 @@ LOG_KEY_ALIASES = {
     "trans_resid_mi": "transition_skill_residual_mi_mean",
     "trans_reward": "transition_skill_reward_mean",
     "trans_active": "transition_skill_reward_active",
+    "proto_acc": "proto_disc_acc",
+    "proto_prior_acc": "proto_disc_prior_acc",
+    "proto_resid": "proto_disc_residual_mean",
+    "proto_reward": "proto_disc_reward_mean",
+    "proto_steps": "proto_disc_reward_applied_steps",
+    "proto_skill_ent": "proto_skill_selection_entropy",
+    "proto_kappa_ent": "proto_skill_usage_entropy_by_kappa",
+    "proto_align": "proto_skill_relevance_alignment",
+    "proto_rel_dwell": "proto_rel_argmax_dwell_median",
+    "proto_rel_stab": "proto_rel_stability_cos",
     "out_full_loss": "outcome_residual_full_loss",
     "out_base_loss": "outcome_residual_base_loss",
     "out_gain": "outcome_residual_gain_mean",

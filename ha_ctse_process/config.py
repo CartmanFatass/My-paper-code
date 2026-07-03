@@ -37,6 +37,29 @@ class Config(EnvConfig):
     opt_cd_coef = 0.02
     opt_cmi_coef = 0.005
 
+    # Round 14 Stage 1: prototype-response skill selection.  Default-off.
+    # When enabled, skill codes are aligned to OPT prototypes rather than
+    # arbitrary legacy z labels: n_skills = opt_num_prototypes +
+    # prototype_skill_extra_codes.  The primitive actor still receives only
+    # local observation and active skill.
+    use_prototype_response_skills = False
+    prototype_skill_extra_codes = 0
+    high_condition_on_omega = False
+    use_agent_prototype_relevance = False
+    prototype_bank_ema_tau = 0.005
+    use_per_agent_kappa = False
+    enable_prototype_disc_probe = False
+    enable_prototype_disc_reward = False
+    prototype_disc_reward_coef = 0.1
+    prototype_disc_clip = 2.0
+    prototype_disc_warmup_steps = 20000
+    prototype_disc_condition = "kappa"  # kappa, omega, none
+    prototype_disc_lr = 5e-4
+    prototype_disc_hidden_dim = 0
+    prototype_disc_prior_coef = 1.0
+    use_compact_return_head = False
+    compact_return_coef = 0.1
+
     # Compact-conditioned team code g_tau.
     team_bridge_type = "stochastic"
     team_code_dim = 64
@@ -214,6 +237,28 @@ class Config(EnvConfig):
     g_info_warmup_steps = 80000
     g_info_anneal_steps = 0
     g_info_max_segments = 256
+
+    # Round 12 Stage 1: OPT situation substrate and reward-pure hazard renewal.
+    # Safe by default: diagnostics and control are both off unless explicitly
+    # requested. This stage must not inject SEF/DADS or communication rewards.
+    situation_substrate_source = "omega"  # omega, compact_cluster
+    situation_num_kappa = 4
+    situation_debounce_steps = 2
+    enable_situation_diagnostics = False
+    enable_situation_hazard_control = False
+    situation_hazard_mode = "diagnostic"  # diagnostic, oracle_change, learned_beta
+    situation_hazard_check_interval = 10
+    situation_hazard_min_age = 1
+    situation_hazard_hidden_dim = 128
+    situation_hazard_entropy_coef = 0.005
+    situation_hazard_value_coef = 0.5
+    situation_hazard_clip_epsilon = 0.2
+    situation_hazard_reward_coef = 0.0
+    situation_hazard_conservative_guard = False
+    situation_hazard_min_dwell_checks = 0
+    situation_hazard_confirm_changes = 1
+    situation_hazard_max_force_rate = 1.0
+    situation_hazard_rate_window = 128
 
     use_smdp_discounted_high_return = True
     use_smdp_bootstrap = True

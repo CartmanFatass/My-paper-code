@@ -51,9 +51,25 @@ from ha_ctse_process.skill_effect_discovery import (
     SkillEffectDiscoveryModule,
     empty_skill_effect_metrics,
 )
+from ha_ctse_process.situation_substrate import (
+    PerAgentSituationDebouncer,
+    SituationDebounceConfig,
+    SituationDebouncer,
+    assign_kappa_from_omega,
+)
+from ha_ctse_process.situation_hazard import (
+    ConservativeRenewalConfig,
+    ConservativeRenewalGate,
+    SituationHazardPolicy,
+    should_force_renewal,
+)
 from ha_ctse_process.g_info_objective import (
     GInfoObjective,
     empty_g_info_metrics,
+)
+from ha_ctse_process.prototype_response_discriminator import (
+    PrototypeResponseDiscriminator,
+    empty_prototype_disc_metrics,
 )
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
 
@@ -117,12 +133,24 @@ class InteractionCompactEncoder(nn.Module):
         )
         self.prototype_logits = nn.Linear(compact_dim, self.num_prototypes)
         self.prototypes = nn.Parameter(torch.randn(self.num_prototypes, compact_dim) * 0.02)
+        self.register_buffer("prototype_bank_ema", self.prototypes.detach().clone())
         self.output = nn.Sequential(
             nn.LayerNorm(compact_dim * 2),
             nn.Linear(compact_dim * 2, hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, compact_dim),
         )
+
+    @torch.no_grad()
+    def update_prototype_bank_ema(self, tau: float = 0.005) -> None:
+        tau = float(min(max(tau, 0.0), 1.0))
+        self.prototype_bank_ema.mul_(1.0 - tau).add_(self.prototypes.detach(), alpha=tau)
+
+    @torch.no_grad()
+    def prototype_bank_drift_cos(self) -> torch.Tensor:
+        current = F.normalize(self.prototypes.detach(), dim=-1)
+        ema = F.normalize(self.prototype_bank_ema.detach(), dim=-1)
+        return (current * ema).sum(dim=-1).mean()
 
     def forward(self, state: torch.Tensor, joint_obs: torch.Tensor):
         batch_size, n_agents, obs_dim = joint_obs.shape
@@ -135,6 +163,16 @@ class InteractionCompactEncoder(nn.Module):
         pooled = torch.cat([state_token, obs_tokens], dim=1).mean(dim=1)
         logits = self.prototype_logits(pooled)
         weights = sparsemax(logits, dim=-1) if self.use_sparsemax else F.softmax(logits, dim=-1)
+        agent_logits = self.prototype_logits(obs_tokens.reshape(-1, self.compact_dim)).reshape(
+            batch_size,
+            n_agents,
+            self.num_prototypes,
+        )
+        agent_relevance = (
+            sparsemax(agent_logits, dim=-1)
+            if self.use_sparsemax
+            else F.softmax(agent_logits, dim=-1)
+        )
         proto_mix = weights @ self.prototypes
         compact = self.output(torch.cat([pooled, proto_mix], dim=-1))
 
@@ -146,7 +184,7 @@ class InteractionCompactEncoder(nn.Module):
         uniform = torch.full_like(avg_weights, 1.0 / self.num_prototypes)
         cmi_loss = F.kl_div(avg_weights.log(), uniform, reduction="sum")
         aggregation_entropy = -(weights * weights.clamp_min(1e-8).log()).sum(dim=-1)
-        return compact, cd_loss, cmi_loss, weights, aggregation_entropy
+        return compact, cd_loss, cmi_loss, weights, aggregation_entropy, agent_relevance
 
 
 class CompactTeamBridge(nn.Module):
@@ -737,12 +775,25 @@ class SkillDurationPolicy(nn.Module):
         hidden_dim: int,
         compact_dim: int,
         team_code_dim: int,
+        omega_dim: int = 0,
+        agent_relevance_dim: int = 0,
     ):
         super().__init__()
         self.n_skills = int(n_skills)
+        self.omega_dim = int(max(omega_dim, 0))
+        self.agent_relevance_dim = int(max(agent_relevance_dim, 0))
+        input_dim = (
+            int(obs_dim)
+            + int(n_skills)
+            + 1
+            + int(compact_dim)
+            + int(team_code_dim)
+            + self.omega_dim
+            + self.agent_relevance_dim
+        )
         self.input = nn.Sequential(
-            nn.LayerNorm(obs_dim + n_skills + 1 + compact_dim + team_code_dim),
-            nn.Linear(obs_dim + n_skills + 1 + compact_dim + team_code_dim, hidden_dim),
+            nn.LayerNorm(input_dim),
+            nn.Linear(input_dim, hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, hidden_dim),
             nn.GELU(),
@@ -758,10 +809,26 @@ class SkillDurationPolicy(nn.Module):
         ages: torch.Tensor,
         compact: torch.Tensor,
         team_vector: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
     ) -> torch.Tensor:
         prev_onehot = F.one_hot(prev_skills.long().clamp(0, self.n_skills - 1), num_classes=self.n_skills).float()
         age_feature = torch.log1p(ages.float()).unsqueeze(-1) / 10.0
-        return self.input(torch.cat([obs.float(), prev_onehot, age_feature, compact.float(), team_vector.float()], dim=-1))
+        pieces = [obs.float(), prev_onehot, age_feature, compact.float(), team_vector.float()]
+        if self.omega_dim > 0:
+            if omega is None:
+                omega = torch.zeros(obs.shape[0], self.omega_dim, dtype=obs.dtype, device=obs.device)
+            pieces.append(omega.float())
+        if self.agent_relevance_dim > 0:
+            if agent_relevance is None:
+                agent_relevance = torch.zeros(
+                    obs.shape[0],
+                    self.agent_relevance_dim,
+                    dtype=obs.dtype,
+                    device=obs.device,
+                )
+            pieces.append(agent_relevance.float())
+        return self.input(torch.cat(pieces, dim=-1))
 
     def logits(
         self,
@@ -770,8 +837,10 @@ class SkillDurationPolicy(nn.Module):
         ages: torch.Tensor,
         compact: torch.Tensor,
         team_vector: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        hidden = self._features(obs, prev_skills, ages, compact, team_vector)
+        hidden = self._features(obs, prev_skills, ages, compact, team_vector, omega, agent_relevance)
         return self.skill_head(hidden), self.duration_head(hidden), self.value_head(hidden).squeeze(-1)
 
     def act(
@@ -781,9 +850,19 @@ class SkillDurationPolicy(nn.Module):
         ages: torch.Tensor,
         compact: torch.Tensor,
         team_vector: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
         deterministic: bool = False,
     ):
-        skill_logits, duration_logits, value = self.logits(obs, prev_skills, ages, compact, team_vector)
+        skill_logits, duration_logits, value = self.logits(
+            obs,
+            prev_skills,
+            ages,
+            compact,
+            team_vector,
+            omega=omega,
+            agent_relevance=agent_relevance,
+        )
         skill_dist = Categorical(logits=skill_logits)
         duration_dist = Categorical(logits=duration_logits)
         if deterministic:
@@ -805,8 +884,18 @@ class SkillDurationPolicy(nn.Module):
         team_vector: torch.Tensor,
         skills: torch.Tensor,
         durations: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
     ):
-        skill_logits, duration_logits, value = self.logits(obs, prev_skills, ages, compact, team_vector)
+        skill_logits, duration_logits, value = self.logits(
+            obs,
+            prev_skills,
+            ages,
+            compact,
+            team_vector,
+            omega=omega,
+            agent_relevance=agent_relevance,
+        )
         skill_dist = Categorical(logits=skill_logits)
         duration_dist = Categorical(logits=duration_logits)
         logp = skill_dist.log_prob(skills.long()) + duration_dist.log_prob(durations.long())
@@ -878,6 +967,15 @@ class Segment:
     end_joint_obs: np.ndarray | None = None
     end_state: np.ndarray | None = None
     terminal: bool = False
+    kappa_start: int = -1
+    kappa_end: int = -1
+    raw_kappa_start: int = -1
+    raw_kappa_end: int = -1
+    agent_kappa_start: int = -1
+    raw_agent_kappa_start: int = -1
+    omega_start: np.ndarray | None = None
+    agent_relevance_start: np.ndarray | None = None
+    situation_changed_during_segment: bool = False
 
     def append(
         self,
@@ -947,9 +1045,23 @@ class SegmentManager:
         switched: bool = False,
         duration_target: int = 1,
         renewal_penalty: float = 0.0,
+        kappa_start: int = -1,
+        raw_kappa_start: int = -1,
+        agent_kappa_start: int = -1,
+        raw_agent_kappa_start: int = -1,
+        omega_start=None,
+        agent_relevance_start=None,
     ):
         old = self.active[env_id][agent_id]
         if old is not None and old.length > 0:
+            if int(kappa_start) >= 0:
+                old.kappa_end = int(kappa_start)
+                old.situation_changed_during_segment = bool(
+                    old.situation_changed_during_segment
+                    or (int(old.kappa_start) >= 0 and int(old.kappa_end) != int(old.kappa_start))
+                )
+            if int(raw_kappa_start) >= 0:
+                old.raw_kappa_end = int(raw_kappa_start)
             self.completed.append(old)
         self.active[env_id][agent_id] = Segment(
             env_id=int(env_id),
@@ -971,6 +1083,16 @@ class SegmentManager:
             switched=bool(switched),
             duration_target=int(duration_target),
             renewal_penalty=float(renewal_penalty),
+            kappa_start=int(kappa_start),
+            kappa_end=int(kappa_start),
+            raw_kappa_start=int(raw_kappa_start),
+            raw_kappa_end=int(raw_kappa_start),
+            agent_kappa_start=int(agent_kappa_start),
+            raw_agent_kappa_start=int(raw_agent_kappa_start),
+            omega_start=None if omega_start is None else np.asarray(omega_start, dtype=np.float32),
+            agent_relevance_start=(
+                None if agent_relevance_start is None else np.asarray(agent_relevance_start, dtype=np.float32)
+            ),
         )
 
     def append(
@@ -1056,7 +1178,12 @@ class StandaloneProcessAgent:
         self.n_agents = int(n_agents)
         self.obs_dim = int(obs_dim)
         self.state_dim = int(state_dim or getattr(config, "state_dim", 0) or (self.obs_dim * self.n_agents))
+        self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
+        self.prototype_skill_extra_codes = int(max(getattr(config, "prototype_skill_extra_codes", 0), 0))
+        self.opt_num_prototypes = int(max(getattr(config, "opt_num_prototypes", 4), 1))
         self.n_skills = int(getattr(config, "n_z", 3))
+        if self.use_prototype_response_skills:
+            self.n_skills = int(self.opt_num_prototypes + self.prototype_skill_extra_codes)
         self.duration_candidates = tuple(getattr(config, "skill_lifetime_candidates", (3, 7, 13, 24)))
         if not self.duration_candidates:
             self.duration_candidates = (1,)
@@ -1131,6 +1258,69 @@ class StandaloneProcessAgent:
         )
         self.use_g_info_diagnostic = bool(getattr(config, "use_g_info_diagnostic", True))
         self.enable_g_info_objective = bool(getattr(config, "enable_g_info_objective", False))
+        self.enable_situation_diagnostics = bool(getattr(config, "enable_situation_diagnostics", False))
+        self.enable_situation_hazard_control = bool(getattr(config, "enable_situation_hazard_control", False))
+        self.high_condition_on_omega = bool(
+            getattr(config, "high_condition_on_omega", False) or self.use_prototype_response_skills
+        )
+        self.use_agent_prototype_relevance = bool(getattr(config, "use_agent_prototype_relevance", False))
+        self.prototype_bank_ema_tau = float(getattr(config, "prototype_bank_ema_tau", 0.005))
+        self.use_per_agent_kappa = bool(getattr(config, "use_per_agent_kappa", False))
+        self.situation_diagnostics_active = bool(
+            self.enable_situation_diagnostics
+            or self.enable_situation_hazard_control
+            or self.use_per_agent_kappa
+        )
+        self.situation_substrate_source = str(getattr(config, "situation_substrate_source", "omega"))
+        self.situation_num_kappa = int(max(getattr(config, "situation_num_kappa", 4), 1))
+        self.situation_hazard_mode = str(getattr(config, "situation_hazard_mode", "diagnostic"))
+        self.situation_hazard_check_interval = int(
+            max(getattr(config, "situation_hazard_check_interval", 10), 1)
+        )
+        self.situation_hazard_min_age = int(max(getattr(config, "situation_hazard_min_age", 1), 0))
+        self.situation_hazard_entropy_coef = float(getattr(config, "situation_hazard_entropy_coef", 0.005))
+        self.situation_hazard_reward_coef = float(getattr(config, "situation_hazard_reward_coef", 0.0))
+        self.situation_hazard_conservative_guard = bool(
+            getattr(config, "situation_hazard_conservative_guard", False)
+        )
+        self.situation_hazard_guard = ConservativeRenewalGate(
+            num_envs=self.num_envs,
+            n_agents=self.n_agents,
+            config=ConservativeRenewalConfig(
+                enabled=self.situation_hazard_conservative_guard,
+                min_dwell_checks=int(max(getattr(config, "situation_hazard_min_dwell_checks", 0), 0)),
+                confirm_changes=int(max(getattr(config, "situation_hazard_confirm_changes", 1), 1)),
+                max_force_rate=float(getattr(config, "situation_hazard_max_force_rate", 1.0)),
+                rate_window=int(max(getattr(config, "situation_hazard_rate_window", 128), 1)),
+            ),
+        )
+        self.situation_debouncer = SituationDebouncer(
+            SituationDebounceConfig(
+                min_stable_count=int(max(getattr(config, "situation_debounce_steps", 2), 1))
+            )
+        )
+        self.per_agent_situation_debouncer = PerAgentSituationDebouncer(self.situation_debouncer.config)
+        self._last_situation_state = [None for _ in range(self.num_envs)]
+        self._last_agent_situation_state = [
+            [None for _ in range(self.n_agents)]
+            for _ in range(self.num_envs)
+        ]
+        self._situation_diag_events: list[dict[str, float]] = []
+        self._agent_situation_diag_events: list[dict[str, float]] = []
+        self._situation_hazard_forced_renewals = 0
+        self._situation_hazard_events = 0
+        self.enable_prototype_disc_probe = bool(getattr(config, "enable_prototype_disc_probe", False))
+        self.enable_prototype_disc_reward = bool(getattr(config, "enable_prototype_disc_reward", False))
+        if self.enable_prototype_disc_reward:
+            self.enable_prototype_disc_probe = True
+        self.prototype_disc_reward_coef = float(getattr(config, "prototype_disc_reward_coef", 0.1))
+        self.prototype_disc_clip = float(getattr(config, "prototype_disc_clip", 2.0))
+        self.prototype_disc_warmup_steps = int(getattr(config, "prototype_disc_warmup_steps", 20000))
+        self.prototype_disc_condition = str(getattr(config, "prototype_disc_condition", "kappa")).lower()
+        if self.prototype_disc_condition not in {"kappa", "omega", "none"}:
+            raise ValueError("prototype_disc_condition must be one of: kappa, omega, none")
+        self.prototype_disc_hidden_dim = int(getattr(config, "prototype_disc_hidden_dim", 0) or hidden)
+        self.prototype_disc_prior_coef = float(getattr(config, "prototype_disc_prior_coef", 1.0))
         self.use_transition_skill_discriminator = bool(
             getattr(config, "use_transition_skill_discriminator", True)
         )
@@ -1262,10 +1452,12 @@ class StandaloneProcessAgent:
             self.n_agents,
             hidden,
             compact_dim,
-            int(getattr(config, "opt_num_prototypes", 4)),
+            self.opt_num_prototypes,
             use_sparsemax=bool(getattr(config, "opt_use_sparsemax", True)),
         ).to(self.device)
         self.bridge = CompactTeamBridge(compact_dim, team_code_dim, num_team_codes, bridge_type).to(self.device)
+        high_omega_dim = self.opt_num_prototypes if self.high_condition_on_omega else 0
+        high_agent_relevance_dim = self.opt_num_prototypes if self.use_agent_prototype_relevance else 0
         self.high = SkillDurationPolicy(
             self.obs_dim,
             self.n_skills,
@@ -1273,7 +1465,33 @@ class StandaloneProcessAgent:
             hidden,
             compact_dim,
             team_code_dim,
+            omega_dim=high_omega_dim,
+            agent_relevance_dim=high_agent_relevance_dim,
         ).to(self.device)
+        self.use_compact_return_head = bool(getattr(config, "use_compact_return_head", False))
+        self.compact_return_coef = float(getattr(config, "compact_return_coef", 0.1))
+        self.compact_return_head = (
+            nn.Sequential(
+                nn.LayerNorm(compact_dim),
+                nn.Linear(compact_dim, hidden),
+                nn.GELU(),
+                nn.Linear(hidden, 1),
+            ).to(self.device)
+            if self.use_compact_return_head
+            else None
+        )
+        self.situation_hazard = (
+            SituationHazardPolicy(
+                obs_dim=self.obs_dim,
+                n_skills=self.n_skills,
+                compact_dim=compact_dim,
+                team_code_dim=team_code_dim,
+                n_kappa=self.situation_num_kappa,
+                hidden_dim=int(getattr(config, "situation_hazard_hidden_dim", 128)),
+            ).to(self.device)
+            if self.enable_situation_hazard_control and self.situation_hazard_mode == "learned_beta"
+            else None
+        )
         if self.use_recurrent_low_level and self.low_level_architecture == "strict_hmasd_mappo":
             self.low = StrictHMASDMAPPOLowLevelPolicy(
                 self.obs_dim,
@@ -1388,6 +1606,25 @@ class StandaloneProcessAgent:
             if self.use_transition_skill_discriminator
             else None
         )
+        proto_condition_dim = 0
+        if self.prototype_disc_condition == "kappa":
+            proto_condition_dim += self.situation_num_kappa
+        elif self.prototype_disc_condition == "omega":
+            proto_condition_dim += self.opt_num_prototypes
+        if self.use_agent_prototype_relevance:
+            proto_condition_dim += self.opt_num_prototypes
+        self.prototype_disc_condition_dim = int(proto_condition_dim)
+        self.prototype_discriminator = (
+            PrototypeResponseDiscriminator(
+                obs_dim=self.obs_dim,
+                n_skills=self.n_skills,
+                condition_dim=self.prototype_disc_condition_dim,
+                hidden_dim=self.prototype_disc_hidden_dim,
+                prior_coef=self.prototype_disc_prior_coef,
+            ).to(self.device)
+            if self.enable_prototype_disc_probe
+            else None
+        )
         self.g_info_objective = (
             GInfoObjective(config)
             if (self.use_g_info_diagnostic or self.enable_g_info_objective)
@@ -1430,8 +1667,13 @@ class StandaloneProcessAgent:
             self.low_critic_opt = None
             self.low_value_norm = None
         self.high_value_norm = ScalarRunningMeanStd() if self.use_high_value_norm else None
+        high_params = list(self.compact.parameters()) + list(self.bridge.parameters()) + list(self.high.parameters())
+        if self.compact_return_head is not None:
+            high_params += list(self.compact_return_head.parameters())
+        # Stage 1 Task 5 learned_beta has no PPO buffer/update yet; it is
+        # inference-only and intentionally excluded from high_opt.
         self.high_opt = torch.optim.Adam(
-            list(self.compact.parameters()) + list(self.bridge.parameters()) + list(self.high.parameters()),
+            high_params,
             lr=high_lr,
         )
         self.process_opt = torch.optim.Adam(
@@ -1441,6 +1683,14 @@ class StandaloneProcessAgent:
             + (list(self.topology_role_probe.parameters()) if self.topology_role_probe is not None else [])
             + (list(self.transition_discriminator.parameters()) if self.transition_discriminator is not None else []),
             lr=process_lr,
+        )
+        self.prototype_disc_opt = (
+            torch.optim.Adam(
+                self.prototype_discriminator.parameters(),
+                lr=float(getattr(config, "prototype_disc_lr", 5e-4)),
+            )
+            if self.prototype_discriminator is not None
+            else None
         )
 
         self.active_skills = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
@@ -1473,7 +1723,10 @@ class StandaloneProcessAgent:
             "outcome_residual_probe": self._count_parameters(self.outcome_residual_probe),
             "topology_role_probe": self._count_parameters(self.topology_role_probe),
             "transition_discriminator": self._count_parameters(self.transition_discriminator),
+            "prototype_discriminator": self._count_parameters(self.prototype_discriminator),
+            "compact_return_head": self._count_parameters(self.compact_return_head),
             "skill_effect_discovery": self._count_parameters(self.skill_effect_discovery),
+            "situation_hazard": self._count_parameters(self.situation_hazard),
         }
         if self.use_recurrent_low_level and hasattr(self.low, "actor_update_parameters"):
             counts["low_actor"] = int(sum(param.numel() for param in self.low.actor_update_parameters()))
@@ -1481,13 +1734,14 @@ class StandaloneProcessAgent:
         else:
             counts["low_actor"] = counts["low"]
             counts["low_critic"] = 0
-        counts["high_stack"] = counts["compact"] + counts["bridge"] + counts["high"]
+        counts["high_stack"] = counts["compact"] + counts["bridge"] + counts["high"] + counts["compact_return_head"]
         counts["process_stack"] = (
             counts["process"]
             + counts["process_posterior"]
             + counts["outcome_residual_probe"]
             + counts["topology_role_probe"]
             + counts["transition_discriminator"]
+            + counts["prototype_discriminator"]
             + counts["skill_effect_discovery"]
         )
         counts["total_trainable"] = int(
@@ -1503,7 +1757,10 @@ class StandaloneProcessAgent:
                     "outcome_residual_probe",
                     "topology_role_probe",
                     "transition_discriminator",
+                    "prototype_discriminator",
+                    "compact_return_head",
                     "skill_effect_discovery",
+                    "situation_hazard",
                 )
             )
         )
@@ -1588,13 +1845,98 @@ class StandaloneProcessAgent:
             self.n_agents,
             self.obs_dim,
         )
-        compact, cd_loss, cmi_loss, weights, aggregation_entropy = self.compact(state_t, joint_t)
+        compact, cd_loss, cmi_loss, weights, aggregation_entropy, agent_relevance = self.compact(state_t, joint_t)
         team_code, team_vector, team_logp, team_entropy, team_logits = self.bridge(
             compact,
             deterministic=deterministic,
             forced_team_code=forced_team_code,
         )
-        return compact, team_code, team_vector, team_logp, team_entropy, cd_loss, cmi_loss, aggregation_entropy
+        return (
+            compact,
+            team_code,
+            team_vector,
+            team_logp,
+            team_entropy,
+            cd_loss,
+            cmi_loss,
+            aggregation_entropy,
+            weights,
+            agent_relevance,
+        )
+
+    def _situation_weights_from_context(self, state: np.ndarray, joint_obs: np.ndarray) -> tuple[torch.Tensor, torch.Tensor]:
+        state_t = torch.as_tensor(state, dtype=torch.float32, device=self.device).reshape(1, -1)
+        joint_t = torch.as_tensor(joint_obs, dtype=torch.float32, device=self.device).reshape(
+            1,
+            self.n_agents,
+            self.obs_dim,
+        )
+        with torch.no_grad():
+            _compact, _cd_loss, _cmi_loss, weights, _aggregation_entropy, agent_relevance = self.compact(
+                state_t,
+                joint_t,
+            )
+        return weights, agent_relevance
+
+    def _situation_state_from_context(
+        self,
+        env_id: int,
+        weights: torch.Tensor,
+        agent_relevance: torch.Tensor | None = None,
+    ):
+        if not self.situation_diagnostics_active:
+            return None
+        omega = weights.detach().cpu().numpy().reshape(-1)
+        raw_kappa = assign_kappa_from_omega(omega)
+        state = self.situation_debouncer.update(env_id=env_id, raw_kappa=raw_kappa)
+        self._last_situation_state[env_id] = state
+        self._situation_diag_events.append(
+            {
+                "kappa": float(state.kappa),
+                "raw_kappa": float(state.raw_kappa),
+                "changed": float(state.changed),
+                "stable_count": float(state.stable_count),
+            }
+        )
+        for segment in self.segments.active[env_id]:
+            if segment is None:
+                continue
+            if int(segment.kappa_start) >= 0:
+                segment.kappa_end = int(state.kappa)
+                segment.situation_changed_during_segment = bool(
+                    segment.situation_changed_during_segment
+                    or bool(state.changed)
+                    or int(segment.kappa_end) != int(segment.kappa_start)
+                )
+            if int(segment.raw_kappa_start) >= 0:
+                segment.raw_kappa_end = int(state.raw_kappa)
+        if self.use_per_agent_kappa and agent_relevance is not None:
+            rel_np = agent_relevance.detach().cpu().numpy().reshape(self.n_agents, -1)
+            agent_kappas = []
+            for agent_id in range(self.n_agents):
+                raw_agent_kappa = assign_kappa_from_omega(rel_np[agent_id])
+                agent_state = self.per_agent_situation_debouncer.update(
+                    env_id=env_id,
+                    agent_id=agent_id,
+                    raw_kappa=raw_agent_kappa,
+                )
+                self._last_agent_situation_state[env_id][agent_id] = agent_state
+                agent_kappas.append(int(agent_state.kappa))
+                self._agent_situation_diag_events.append(
+                    {
+                        "env_id": float(env_id),
+                        "agent_id": float(agent_id),
+                        "global_kappa": float(state.kappa),
+                        "agent_kappa": float(agent_state.kappa),
+                        "raw_agent_kappa": float(agent_state.raw_kappa),
+                        "changed": float(agent_state.changed),
+                        "stable_count": float(agent_state.stable_count),
+                        "disagrees": float(int(agent_state.kappa) != int(state.kappa)),
+                    }
+                )
+            unique_agent_kappa = len(set(agent_kappas)) if agent_kappas else 0
+            self._situation_diag_events[-1]["agent_unique_kappa"] = float(unique_agent_kappa)
+        return state
 
     def reset_env_state(self, env_id: int):
         env_id = int(env_id)
@@ -1606,6 +1948,11 @@ class StandaloneProcessAgent:
         self.low_actor_hxs[env_id, :, :] = 0.0
         self.low_critic_hxs[env_id, :, :] = 0.0
         self._last_low_context[env_id] = None
+        self.situation_debouncer.reset_env(env_id)
+        self.per_agent_situation_debouncer.reset_env(env_id)
+        self.situation_hazard_guard.reset_env(env_id)
+        self._last_situation_state[env_id] = None
+        self._last_agent_situation_state[env_id] = [None for _ in range(self.n_agents)]
 
     def reset_all_policy_state(self):
         self.duration_remaining[:, :] = 0
@@ -1616,6 +1963,18 @@ class StandaloneProcessAgent:
         self.low_actor_hxs[:, :, :] = 0.0
         self.low_critic_hxs[:, :, :] = 0.0
         self._last_low_context = [None for _ in range(self.num_envs)]
+        self.situation_debouncer = SituationDebouncer(self.situation_debouncer.config)
+        self.per_agent_situation_debouncer = PerAgentSituationDebouncer(self.situation_debouncer.config)
+        self.situation_hazard_guard.reset_all()
+        self._last_situation_state = [None for _ in range(self.num_envs)]
+        self._last_agent_situation_state = [
+            [None for _ in range(self.n_agents)]
+            for _ in range(self.num_envs)
+        ]
+        self._situation_diag_events = []
+        self._agent_situation_diag_events = []
+        self._situation_hazard_forced_renewals = 0
+        self._situation_hazard_events = 0
         self.segments = SegmentManager(self.num_envs, self.n_agents)
 
     def maybe_assign_skills(
@@ -1631,12 +1990,107 @@ class StandaloneProcessAgent:
         joint_obs = self._joint_obs_array(obs)
         state_arr = self._state_array(state, joint_obs)
         expired = (~self.has_active_skill[env_id]) | (self.duration_remaining[env_id] <= 0)
-        if np.any(expired):
-            compact, team_code, team_vector, team_logp, team_entropy, *_ = self._context_tensors(
+        has_expired = bool(np.any(expired))
+        needs_full_context = bool(has_expired or (self.situation_diagnostics_active and self.enable_situation_hazard_control))
+        context_values = None
+        situation_state = None
+        kappa_value = -1
+        raw_kappa_value = -1
+        agent_relevance = None
+        omega_tensor = None
+        if needs_full_context:
+            context_values = self._context_tensors(
                 state_arr,
                 joint_obs,
                 deterministic=deterministic,
             )
+            weights = context_values[-2]
+            agent_relevance = context_values[-1]
+            omega_tensor = weights
+            situation_state = self._situation_state_from_context(env_id, weights, agent_relevance)
+        elif self.situation_diagnostics_active:
+            weights, agent_relevance = self._situation_weights_from_context(state_arr, joint_obs)
+            omega_tensor = weights
+            situation_state = self._situation_state_from_context(env_id, weights, agent_relevance)
+        if situation_state is not None:
+            kappa_value = int(situation_state.kappa)
+            raw_kappa_value = int(situation_state.raw_kappa)
+        if self.enable_situation_hazard_control and situation_state is not None:
+            assert context_values is not None
+            compact, _team_code, team_vector, *_ = context_values
+            changed = bool(situation_state.changed)
+            hazard_check_due = (int(step) % self.situation_hazard_check_interval) == 0
+            for agent_id in range(self.n_agents):
+                if not bool(self.has_active_skill[env_id, agent_id]) or bool(expired[agent_id]):
+                    continue
+                skill_age = int(self.skill_age[env_id, agent_id])
+                if not hazard_check_due:
+                    continue
+                self._situation_hazard_events += 1
+                hazard_action = 0
+                if (
+                    skill_age >= self.situation_hazard_min_age
+                    and self.situation_hazard is not None
+                ):
+                    obs_t = torch.as_tensor(
+                        joint_obs[agent_id : agent_id + 1],
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    prev_t = torch.as_tensor(
+                        [self.active_skills[env_id, agent_id]],
+                        dtype=torch.long,
+                        device=self.device,
+                    )
+                    age_t = torch.as_tensor(
+                        [skill_age],
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    compact_t = compact.expand(1, -1)
+                    team_vector_t = team_vector.expand(1, -1)
+                    kappa_t = torch.as_tensor(
+                        [max(int(situation_state.kappa), 0)],
+                        dtype=torch.long,
+                        device=self.device,
+                    )
+                    changed_t = torch.as_tensor([float(changed)], dtype=torch.float32, device=self.device)
+                    with torch.no_grad():
+                        action_t, _logp_t, _entropy_t, _value_t = self.situation_hazard.act(
+                            obs_t,
+                            prev_t,
+                            age_t,
+                            compact_t,
+                            team_vector_t,
+                            kappa_t,
+                            changed_t,
+                            deterministic=deterministic,
+                        )
+                    hazard_action = int(action_t.detach().cpu().numpy()[0])
+                guard_decision = self.situation_hazard_guard.check(
+                    env_id=env_id,
+                    agent_id=agent_id,
+                    situation_changed=changed,
+                    skill_age=skill_age,
+                    step=int(step),
+                    stable_count=int(getattr(situation_state, "stable_count", 0)),
+                )
+                forced = should_force_renewal(
+                    mode=self.situation_hazard_mode,
+                    situation_changed=guard_decision.renewal_signal,
+                    skill_age=skill_age,
+                    min_age=self.situation_hazard_min_age,
+                    hazard_action=hazard_action,
+                    guard_allowed=guard_decision.allowed,
+                )
+                self.situation_hazard_guard.record_decision(guard_decision, forced=forced)
+                if forced:
+                    expired[agent_id] = True
+                    self._situation_hazard_forced_renewals += 1
+            has_expired = bool(np.any(expired))
+        if has_expired:
+            assert context_values is not None
+            compact, team_code, team_vector, team_logp, team_entropy, *_mid, weights, agent_relevance = context_values
             expired_ids = np.flatnonzero(expired)
             obs_t = torch.as_tensor(joint_obs[expired_ids], dtype=torch.float32, device=self.device)
             prev_np = self.active_skills[env_id, expired_ids].copy()
@@ -1645,6 +2099,10 @@ class StandaloneProcessAgent:
             age_t = torch.as_tensor(age_np, dtype=torch.float32, device=self.device)
             compact_t = compact.expand(len(expired_ids), -1)
             team_vector_t = team_vector.expand(len(expired_ids), -1)
+            omega_t = weights.expand(len(expired_ids), -1) if self.high_condition_on_omega else None
+            agent_relevance_t = None
+            if self.use_agent_prototype_relevance:
+                agent_relevance_t = agent_relevance[0, expired_ids, :]
             with torch.no_grad():
                 skills, duration_idx, logp, entropy, value = self.high.act(
                     obs_t,
@@ -1652,6 +2110,8 @@ class StandaloneProcessAgent:
                     age_t,
                     compact_t,
                     team_vector_t,
+                    omega=omega_t,
+                    agent_relevance=agent_relevance_t,
                     deterministic=deterministic,
                 )
                 if self.high_value_norm is not None:
@@ -1669,6 +2129,9 @@ class StandaloneProcessAgent:
             old_value = value.cpu().numpy()
             for local_idx, agent_id in enumerate(expired_ids):
                 prev_skill = int(prev_np[local_idx])
+                agent_state = None
+                if self.use_per_agent_kappa:
+                    agent_state = self._last_agent_situation_state[env_id][int(agent_id)]
                 initial = not bool(self.has_active_skill[env_id, agent_id])
                 switched = (not initial) and int(chosen_skills[local_idx]) != prev_skill
                 penalty = 0.0
@@ -1701,11 +2164,122 @@ class StandaloneProcessAgent:
                     switched=switched,
                     duration_target=int(chosen_durations[local_idx]),
                     renewal_penalty=penalty,
+                    kappa_start=kappa_value,
+                    raw_kappa_start=raw_kappa_value,
+                    agent_kappa_start=int(getattr(agent_state, "kappa", -1)),
+                    raw_agent_kappa_start=int(getattr(agent_state, "raw_kappa", -1)),
+                    omega_start=weights.detach().cpu().numpy().reshape(-1),
+                    agent_relevance_start=agent_relevance[0, int(agent_id)].detach().cpu().numpy(),
                 )
 
         active = self.has_active_skill[env_id]
         self.duration_remaining[env_id, active] -= 1
         self.skill_age[env_id, active] += 1
+
+    def _situation_diagnostics(self, segments: list[Segment]) -> dict[str, float]:
+        mode_code = {
+            "diagnostic": 0.0,
+            "oracle_change": 1.0,
+            "learned_beta": 2.0,
+        }.get(str(self.situation_hazard_mode), 0.0)
+        hazard_events = int(self._situation_hazard_events)
+        forced_rate = (
+            float(self._situation_hazard_forced_renewals) / float(hazard_events)
+            if hazard_events > 0
+            else 0.0
+        )
+        hazard_metrics = {
+            "situation_hazard_control_enabled": 1.0 if self.enable_situation_hazard_control else 0.0,
+            "situation_hazard_forced_renewal_rate": forced_rate,
+            "situation_hazard_mode_code": mode_code,
+        }
+        guard_metrics = self.situation_hazard_guard.metrics(reset=True)
+        hazard_metrics.update(
+            {
+                "situation_hazard_conservative_guard": (
+                    1.0 if self.situation_hazard_conservative_guard else 0.0
+                ),
+                **guard_metrics,
+            }
+        )
+        if not self.situation_diagnostics_active:
+            self._situation_hazard_forced_renewals = 0
+            self._situation_hazard_events = 0
+            return {
+                "situation_enabled": 0.0,
+                "situation_change_rate": 0.0,
+                "situation_unique_kappa": 0.0,
+                "situation_segment_change_frac": 0.0,
+                "situation_agent_kappa_enabled": 0.0,
+                "situation_agent_kappa_change_rate": 0.0,
+                "situation_agent_kappa_disagreement_rate": 0.0,
+                "situation_agent_kappa_global_mi": 0.0,
+                "situation_agent_unique_kappa_mean": 0.0,
+                **hazard_metrics,
+            }
+        events = self._situation_diag_events
+        agent_events = self._agent_situation_diag_events
+        changed = [float(row["changed"]) for row in events]
+        kappas = [int(row["kappa"]) for row in events if int(row["kappa"]) >= 0]
+        agent_changed = [float(row["changed"]) for row in agent_events]
+        agent_disagrees = [float(row["disagrees"]) for row in agent_events]
+        agent_kappas = np.asarray([int(row["agent_kappa"]) for row in agent_events], dtype=np.int64)
+        global_for_agent = np.asarray([int(row["global_kappa"]) for row in agent_events], dtype=np.int64)
+        agent_dwell_runs: list[int] = []
+        if agent_events:
+            event_envs = np.asarray([int(row.get("env_id", 0)) for row in agent_events], dtype=np.int64)
+            event_agents = np.asarray([int(row.get("agent_id", 0)) for row in agent_events], dtype=np.int64)
+            for env_id in np.unique(event_envs):
+                env_mask = event_envs == int(env_id)
+                for agent_id in np.unique(event_agents[env_mask]):
+                    labels = agent_kappas[env_mask & (event_agents == int(agent_id))]
+                    if labels.size == 0:
+                        continue
+                    run = 1
+                    for label_idx in range(1, labels.size):
+                        if int(labels[label_idx]) == int(labels[label_idx - 1]):
+                            run += 1
+                        else:
+                            agent_dwell_runs.append(run)
+                            run = 1
+                    agent_dwell_runs.append(run)
+        agent_unique = [float(row.get("agent_unique_kappa", 0.0)) for row in events if "agent_unique_kappa" in row]
+        segment_changed = []
+        for segment in segments:
+            start = int(getattr(segment, "kappa_start", -1))
+            end = int(getattr(segment, "kappa_end", -1))
+            if start < 0 or end < 0:
+                continue
+            segment_changed.append(
+                1.0
+                if bool(getattr(segment, "situation_changed_during_segment", False)) or end != start
+                else 0.0
+            )
+        metrics = {
+            "situation_enabled": 1.0,
+            "situation_change_rate": float(np.mean(changed)) if changed else 0.0,
+            "situation_unique_kappa": float(len(set(kappas))) if kappas else 0.0,
+            "situation_segment_change_frac": float(np.mean(segment_changed)) if segment_changed else 0.0,
+            "situation_agent_kappa_enabled": 1.0 if self.use_per_agent_kappa else 0.0,
+            "situation_agent_kappa_change_rate": float(np.mean(agent_changed)) if agent_changed else 0.0,
+            "situation_agent_kappa_disagreement_rate": float(np.mean(agent_disagrees)) if agent_disagrees else 0.0,
+            "situation_agent_kappa_median_dwell": (
+                float(np.median(np.asarray(agent_dwell_runs, dtype=np.float64))) if agent_dwell_runs else 0.0
+            ),
+            "situation_agent_kappa_global_mi": self._joint_mi_norm(
+                agent_kappas,
+                global_for_agent,
+                self.situation_num_kappa,
+                self.situation_num_kappa,
+            ) if agent_kappas.size and global_for_agent.size else 0.0,
+            "situation_agent_unique_kappa_mean": float(np.mean(agent_unique)) if agent_unique else 0.0,
+            **hazard_metrics,
+        }
+        self._situation_diag_events = []
+        self._agent_situation_diag_events = []
+        self._situation_hazard_forced_renewals = 0
+        self._situation_hazard_events = 0
+        return metrics
 
     def act_low(
         self,
@@ -1937,19 +2511,33 @@ class StandaloneProcessAgent:
             dtype=torch.float32,
             device=self.device,
         )
+        agent_ids = torch.as_tensor(
+            [segment.agent_id for segment in sampled_segments],
+            dtype=torch.long,
+            device=self.device,
+        )
 
         with torch.no_grad():
-            compact, _cd, _cmi, _weights, _entropy = self.compact(states, joint_obs)
+            compact, _cd, _cmi, weights, _entropy, agent_rel = self.compact(states, joint_obs)
             codes = torch.arange(self.num_team_codes, dtype=torch.long, device=self.device)
             team_vectors = self.bridge.code_embedding(codes)
             batch_size = high_obs.shape[0]
             num_codes = int(self.num_team_codes)
+            omega_x = None
+            if self.high_condition_on_omega:
+                omega_x = weights.unsqueeze(1).expand(batch_size, num_codes, -1).reshape(batch_size * num_codes, -1)
+            rel_x = None
+            if self.use_agent_prototype_relevance:
+                rel = agent_rel[torch.arange(batch_size, device=self.device), agent_ids]
+                rel_x = rel.unsqueeze(1).expand(batch_size, num_codes, -1).reshape(batch_size * num_codes, -1)
             skill_logits, _duration_logits, _values = self.high.logits(
                 high_obs.unsqueeze(1).expand(batch_size, num_codes, self.obs_dim).reshape(batch_size * num_codes, -1),
                 prev_skills.unsqueeze(1).expand(batch_size, num_codes).reshape(-1),
                 ages.unsqueeze(1).expand(batch_size, num_codes).reshape(-1),
                 compact.unsqueeze(1).expand(batch_size, num_codes, compact.shape[-1]).reshape(batch_size * num_codes, -1),
                 team_vectors.unsqueeze(0).expand(batch_size, num_codes, team_vectors.shape[-1]).reshape(batch_size * num_codes, -1),
+                omega=omega_x,
+                agent_relevance=rel_x,
             )
             probs = F.softmax(skill_logits, dim=-1).reshape(batch_size, num_codes, self.n_skills)
             log_probs = F.log_softmax(skill_logits, dim=-1).reshape(batch_size, num_codes, self.n_skills)
@@ -2070,6 +2658,94 @@ class StandaloneProcessAgent:
             "agent_ids": np.asarray(agent_rows, dtype=np.int64)[chosen],
             "start_obs": np.asarray(start_obs_rows, dtype=np.float32)[chosen],
             "phase_bins": np.asarray(phase_rows, dtype=np.int64)[chosen],
+            "sample_count": np.asarray([len(chosen)], dtype=np.int64),
+            "available_count": np.asarray([sample_count], dtype=np.int64),
+        }
+
+    def _prototype_disc_condition(self, batch: dict[str, np.ndarray], device: torch.device) -> torch.Tensor:
+        pieces: list[torch.Tensor] = []
+        sample_count = int(batch["labels"].shape[0])
+        if self.prototype_disc_condition == "kappa":
+            kappas = torch.as_tensor(batch["kappas"], dtype=torch.long, device=device)
+            kappas = kappas.clamp(0, max(int(self.situation_num_kappa) - 1, 0))
+            pieces.append(F.one_hot(kappas, num_classes=int(self.situation_num_kappa)).float())
+        elif self.prototype_disc_condition == "omega":
+            pieces.append(torch.as_tensor(batch["omegas"], dtype=torch.float32, device=device))
+        if self.use_agent_prototype_relevance:
+            pieces.append(torch.as_tensor(batch["agent_relevance"], dtype=torch.float32, device=device))
+        if pieces:
+            return torch.cat(pieces, dim=-1)
+        return torch.zeros(sample_count, 0, dtype=torch.float32, device=device)
+
+    def _prototype_discriminator_batch(self, valid: list[Segment]) -> dict[str, np.ndarray] | None:
+        if self.prototype_discriminator is None:
+            return None
+        next_obs_rows: list[np.ndarray] = []
+        label_rows: list[int] = []
+        kappa_rows: list[int] = []
+        omega_rows: list[np.ndarray] = []
+        rel_rows: list[np.ndarray] = []
+        rollout_rows: list[int] = []
+        agent_rows: list[int] = []
+        env_reward_rows: list[float] = []
+
+        for segment in valid:
+            length = int(segment.length)
+            if length <= 0:
+                continue
+            omega = np.asarray(
+                segment.omega_start
+                if segment.omega_start is not None
+                else np.zeros(self.opt_num_prototypes, dtype=np.float32),
+                dtype=np.float32,
+            ).reshape(-1)
+            if omega.size != int(self.opt_num_prototypes):
+                fitted = np.zeros(self.opt_num_prototypes, dtype=np.float32)
+                fitted[: min(fitted.size, omega.size)] = omega[: min(fitted.size, omega.size)]
+                omega = fitted
+            relevance = np.asarray(
+                segment.agent_relevance_start
+                if segment.agent_relevance_start is not None
+                else np.zeros(self.opt_num_prototypes, dtype=np.float32),
+                dtype=np.float32,
+            ).reshape(-1)
+            if relevance.size != int(self.opt_num_prototypes):
+                fitted = np.zeros(self.opt_num_prototypes, dtype=np.float32)
+                fitted[: min(fitted.size, relevance.size)] = relevance[: min(fitted.size, relevance.size)]
+                relevance = fitted
+            for step_idx in range(length):
+                if step_idx + 1 < length:
+                    next_obs = self._fit_vector(segment.obs[step_idx + 1], self.obs_dim)
+                elif segment.end_obs is not None:
+                    next_obs = self._fit_vector(segment.end_obs, self.obs_dim)
+                else:
+                    next_obs = self._fit_vector(segment.obs[step_idx], self.obs_dim)
+                next_obs_rows.append(next_obs)
+                label_rows.append(int(segment.skill))
+                kappa_rows.append(int(segment.kappa_start))
+                omega_rows.append(omega)
+                rel_rows.append(relevance)
+                rollout_rows.append(int(segment.rollout_indices[step_idx]))
+                agent_rows.append(int(segment.agent_id))
+                env_reward_rows.append(float(segment.rewards[step_idx]))
+
+        if not next_obs_rows:
+            return None
+        sample_count = len(next_obs_rows)
+        max_samples = int(max(getattr(self, "transition_skill_max_samples", 8192), 1))
+        if sample_count > max_samples:
+            chosen = np.random.choice(sample_count, size=max_samples, replace=False)
+        else:
+            chosen = np.arange(sample_count)
+        return {
+            "next_obs": np.asarray(next_obs_rows, dtype=np.float32)[chosen],
+            "labels": np.asarray(label_rows, dtype=np.int64)[chosen],
+            "kappas": np.asarray(kappa_rows, dtype=np.int64)[chosen],
+            "omegas": np.asarray(omega_rows, dtype=np.float32)[chosen],
+            "agent_relevance": np.asarray(rel_rows, dtype=np.float32)[chosen],
+            "rollout_indices": np.asarray(rollout_rows, dtype=np.int64)[chosen],
+            "agent_ids": np.asarray(agent_rows, dtype=np.int64)[chosen],
+            "env_rewards": np.asarray(env_reward_rows, dtype=np.float32)[chosen],
             "sample_count": np.asarray([len(chosen)], dtype=np.int64),
             "available_count": np.asarray([sample_count], dtype=np.int64),
         }
@@ -2202,12 +2878,17 @@ class StandaloneProcessAgent:
                 "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm is not None else 0.0,
                 "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm is not None else 0.0,
                 "high_grad_norm": 0.0,
+                "compact_return_loss": 0.0,
+                "compact_return_active": 0.0,
+                **empty_prototype_disc_metrics(),
+                **self._empty_prototype_selection_metrics(),
                 **empty_cooperation_credit_metrics(),
                 **empty_topology_role_metrics(),
                 **empty_topology_potential_metrics(),
                 **empty_p2_metrics(),
                 **empty_g_info_metrics(),
                 **empty_skill_effect_metrics(),
+                **self._situation_diagnostics([]),
             }
 
         effect_metrics, effect_micro_rewards = (
@@ -2311,7 +2992,7 @@ class StandaloneProcessAgent:
         segment_joint_obs_t = torch.as_tensor(segment_joint_obs_np, dtype=torch.float32, device=self.device)
         if self.topology_role_probe is not None:
             with torch.no_grad():
-                opt_context_t, _cd, _cmi, _weights, _entropy = self.compact(segment_states_t, segment_joint_obs_t)
+                opt_context_t, _cd, _cmi, _weights, _entropy, _agent_rel = self.compact(segment_states_t, segment_joint_obs_t)
         else:
             opt_context_t = torch.zeros(
                 (len(valid), int(getattr(self.compact, "compact_dim", 1))),
@@ -2390,6 +3071,69 @@ class StandaloneProcessAgent:
                     transition_context_logits.argmax(dim=-1) == transition_labels_t
                 ).float().mean()
                 transition_context_logits_for_reward = transition_context_logits.detach()
+
+        prototype_batch = self._prototype_discriminator_batch(valid)
+        prototype_metrics = empty_prototype_disc_metrics()
+        prototype_reward_values = np.zeros(0, dtype=np.float32)
+        prototype_rollout_indices = np.zeros(0, dtype=np.int64)
+        prototype_agent_ids = np.zeros(0, dtype=np.int64)
+        if (
+            prototype_batch is not None
+            and self.prototype_discriminator is not None
+            and self.prototype_disc_opt is not None
+        ):
+            proto_next_obs_t = torch.as_tensor(
+                prototype_batch["next_obs"],
+                dtype=torch.float32,
+                device=self.device,
+            )
+            proto_labels_t = torch.as_tensor(
+                prototype_batch["labels"],
+                dtype=torch.long,
+                device=self.device,
+            )
+            proto_condition_t = self._prototype_disc_condition(prototype_batch, self.device)
+            prototype_rollout_indices = np.asarray(prototype_batch["rollout_indices"], dtype=np.int64)
+            prototype_agent_ids = np.asarray(prototype_batch["agent_ids"], dtype=np.int64)
+            with torch.no_grad():
+                prototype_reward_t = self.prototype_discriminator.residual_reward(
+                    proto_next_obs_t,
+                    proto_condition_t,
+                    proto_labels_t,
+                    clip=self.prototype_disc_clip,
+                )
+            proto_loss, prototype_metrics = self.prototype_discriminator.loss_and_metrics(
+                proto_next_obs_t,
+                proto_condition_t,
+                proto_labels_t,
+            )
+            self.prototype_disc_opt.zero_grad()
+            proto_loss.backward()
+            self.prototype_disc_opt.step()
+            reward_active = bool(
+                self.enable_prototype_disc_reward
+                and total_steps >= int(self.prototype_disc_warmup_steps)
+                and abs(float(self.prototype_disc_reward_coef)) > 0.0
+            )
+            env_abs = float(np.mean(np.abs(prototype_batch["env_rewards"]))) + 1e-8
+            prototype_reward_preview = (
+                prototype_reward_t.detach().cpu().numpy().astype(np.float32)
+                * float(self.prototype_disc_reward_coef)
+            )
+            prototype_metrics["proto_disc_reward_env_ratio"] = float(
+                np.mean(np.abs(prototype_reward_preview)) / env_abs
+            )
+            if reward_active:
+                prototype_reward_values = prototype_reward_preview
+                prototype_metrics["proto_disc_reward_mean"] = float(np.mean(prototype_reward_values))
+                prototype_metrics["proto_disc_reward_unclipped_mean"] = float(
+                    np.mean(prototype_reward_t.detach().cpu().numpy())
+                )
+                prototype_metrics["proto_disc_reward_applied_steps"] = float(prototype_reward_values.size)
+            else:
+                prototype_metrics["proto_disc_reward_unclipped_mean"] = float(
+                    np.mean(prototype_reward_t.detach().cpu().numpy())
+                )
 
         emb, pred_outcome, legacy_logits = self.process(obs_t, actions_t, rewards_t, masks_t)
         outcome_sq_error = torch.square(pred_outcome - outcomes_t) * outcome_masks_t
@@ -2861,6 +3605,14 @@ class StandaloneProcessAgent:
             if 0 <= int(rollout_idx) < len(rollout.rewards) and 0 <= int(agent_id) < self.n_agents:
                 rollout.rewards[int(rollout_idx)][int(agent_id)] += float(reward_value)
 
+        for rollout_idx, agent_id, reward_value in zip(
+            prototype_rollout_indices,
+            prototype_agent_ids,
+            prototype_reward_values,
+        ):
+            if 0 <= int(rollout_idx) < len(rollout.rewards) and 0 <= int(agent_id) < self.n_agents:
+                rollout.rewards[int(rollout_idx)][int(agent_id)] += float(reward_value)
+
         if isinstance(effect_micro_rewards, dict):
             micro_indices = effect_micro_rewards.get("rollout_indices", [])
             micro_agents = np.asarray(effect_micro_rewards.get("agent_ids", []), dtype=np.int64).reshape(-1)
@@ -3071,6 +3823,7 @@ class StandaloneProcessAgent:
             "transition_skill_log_context_mean": transition_log_context_mean,
             "transition_skill_reward_unclipped_mean": transition_reward_unclipped_mean,
             "transition_skill_reward_warmup_active": transition_reward_warmup_active,
+            **prototype_metrics,
             **segment_high_gate.metrics("intrinsic_segment_high_gate"),
             "process_shortcut_duration_acc": process_shortcut_duration_acc,
             "process_shortcut_length_acc": process_shortcut_length_acc,
@@ -3133,6 +3886,7 @@ class StandaloneProcessAgent:
             **lifetime_metrics,
             **g_intervention_metrics,
             **cooperation_credit_metrics,
+            **self._situation_diagnostics(valid),
             **high_metrics,
         }
 
@@ -3233,12 +3987,21 @@ class StandaloneProcessAgent:
             dtype=torch.long,
             device=self.device,
         )
+        agent_ids = torch.as_tensor(
+            [segments[idx].agent_id for idx in bootstrap_indices],
+            dtype=torch.long,
+            device=self.device,
+        )
         with torch.no_grad():
-            compact, _cd_loss, _cmi_loss, _weights, _aggregation_entropy = self.compact(states, joint_obs)
+            compact, _cd_loss, _cmi_loss, weights, _aggregation_entropy, agent_rel = self.compact(states, joint_obs)
             _team_code, team_vector, _team_logp, _team_entropy, _team_logits = self.bridge(
                 compact,
                 forced_team_code=team_codes,
             )
+            omega_t = weights if self.high_condition_on_omega else None
+            rel_t = None
+            if self.use_agent_prototype_relevance:
+                rel_t = agent_rel[torch.arange(agent_rel.shape[0], device=self.device), agent_ids]
             _logp, _entropy, bootstrap_values = self.high.evaluate(
                 high_obs,
                 prev_skills,
@@ -3247,11 +4010,163 @@ class StandaloneProcessAgent:
                 team_vector,
                 skills,
                 durations,
+                omega=omega_t,
+                agent_relevance=rel_t,
             )
             if self.high_value_norm is not None:
                 bootstrap_values = self.high_value_norm.denormalize_tensor(bootstrap_values)
         values[np.asarray(bootstrap_indices, dtype=np.int64)] = bootstrap_values.detach().cpu().numpy()
         return values
+
+    @staticmethod
+    def _empty_prototype_selection_metrics() -> dict[str, float]:
+        return {
+            "proto_skill_selection_entropy": 0.0,
+            "proto_skill_usage_entropy_by_kappa": 0.0,
+            "proto_skill_relevance_alignment": 0.0,
+            "proto_skill_selected_relevance_mean": 0.0,
+            "proto_omega_nonzero_frac": 0.0,
+            "proto_bank_drift_cos": 0.0,
+            "proto_rel_row_entropy_mean": 0.0,
+            "proto_rel_argmax_dwell_median": 0.0,
+            "proto_rel_stability_cos": 0.0,
+            "proto_rel_drop_event_rate_05": 0.0,
+            "proto_rel_drop_event_rate_03": 0.0,
+            "proto_rel_drop_event_rate_01": 0.0,
+        }
+
+    def _prototype_selection_metrics(
+        self,
+        weights: torch.Tensor,
+        agent_relevance: torch.Tensor,
+        skills: torch.Tensor,
+        kappa_codes: torch.Tensor,
+        agent_ids: torch.Tensor | None = None,
+        env_ids: np.ndarray | None = None,
+        start_indices: np.ndarray | None = None,
+    ) -> dict[str, float]:
+        metrics = self._empty_prototype_selection_metrics()
+        if weights.numel() == 0 or skills.numel() == 0:
+            return metrics
+        skills_np = skills.detach().cpu().numpy().astype(np.int64)
+        kappa_np = kappa_codes.detach().cpu().numpy().astype(np.int64)
+        metrics["proto_skill_selection_entropy"] = self._usage_stats(skills_np, self.n_skills)[0]
+        if kappa_np.size == skills_np.size and kappa_np.size > 0:
+            entropies = []
+            for code in np.unique(kappa_np):
+                mask = kappa_np == int(code)
+                if np.any(mask):
+                    entropies.append(self._usage_stats(skills_np[mask], self.n_skills)[0])
+            metrics["proto_skill_usage_entropy_by_kappa"] = float(np.mean(entropies)) if entropies else 0.0
+        weights_np = weights.detach().cpu().numpy()
+        metrics["proto_omega_nonzero_frac"] = float(np.mean(weights_np > 1e-6)) if weights_np.size else 0.0
+        if self.use_prototype_response_skills and int(self.n_skills) >= int(self.opt_num_prototypes):
+            rel_np = agent_relevance.detach().cpu().numpy()
+            agent_np = (
+                agent_ids.detach().cpu().numpy().astype(np.int64)
+                if agent_ids is not None
+                else np.zeros_like(skills_np)
+            )
+            aligned = []
+            rel_argmax = []
+            rel_skill = []
+            for row_idx, skill in enumerate(skills_np):
+                proto_id = int(skill)
+                agent_id = int(agent_np[row_idx]) if row_idx < agent_np.size else 0
+                if row_idx < rel_np.shape[0] and 0 <= agent_id < rel_np.shape[1]:
+                    rel_row = rel_np[row_idx, agent_id]
+                    rel_argmax.append(int(np.argmax(rel_row)))
+                    rel_skill.append(proto_id)
+                    if 0 <= proto_id < int(self.opt_num_prototypes):
+                        aligned.append(float(rel_np[row_idx, agent_id, proto_id]))
+            if rel_argmax and rel_skill:
+                metrics["proto_skill_relevance_alignment"] = self._joint_mi_norm(
+                    np.asarray(rel_skill, dtype=np.int64),
+                    np.asarray(rel_argmax, dtype=np.int64),
+                    int(self.n_skills),
+                    int(self.opt_num_prototypes),
+                )
+            metrics["proto_skill_selected_relevance_mean"] = float(np.mean(aligned)) if aligned else 0.0
+        rel_np = agent_relevance.detach().cpu().numpy()
+        if rel_np.size:
+            eps = 1e-8
+            denom = float(np.log(max(int(self.opt_num_prototypes), 2)))
+            all_rows = np.clip(rel_np.reshape(-1, rel_np.shape[-1]), eps, 1.0)
+            entropy = -np.sum(all_rows * np.log(all_rows), axis=-1) / max(denom, eps)
+            metrics["proto_rel_row_entropy_mean"] = float(np.mean(entropy)) if entropy.size else 0.0
+
+            agent_np = (
+                agent_ids.detach().cpu().numpy().astype(np.int64)
+                if agent_ids is not None
+                else np.zeros_like(skills_np)
+            )
+            selected_rel = []
+            selected_env = []
+            selected_agent = []
+            selected_start = []
+            env_np = (
+                np.asarray(env_ids, dtype=np.int64).reshape(-1)
+                if env_ids is not None
+                else np.zeros_like(skills_np)
+            )
+            start_np = (
+                np.asarray(start_indices, dtype=np.int64).reshape(-1)
+                if start_indices is not None
+                else np.arange(skills_np.size, dtype=np.int64)
+            )
+            for row_idx in range(min(rel_np.shape[0], skills_np.size)):
+                agent_id = int(agent_np[row_idx]) if row_idx < agent_np.size else 0
+                if 0 <= agent_id < rel_np.shape[1]:
+                    selected_rel.append(rel_np[row_idx, agent_id].astype(np.float64, copy=False))
+                    selected_env.append(int(env_np[row_idx]) if row_idx < env_np.size else 0)
+                    selected_agent.append(agent_id)
+                    selected_start.append(int(start_np[row_idx]) if row_idx < start_np.size else row_idx)
+            if selected_rel:
+                selected = np.asarray(selected_rel, dtype=np.float64)
+                max_rel = np.max(selected, axis=-1)
+                metrics["proto_rel_drop_event_rate_05"] = float(np.mean(max_rel < 0.5))
+                metrics["proto_rel_drop_event_rate_03"] = float(np.mean(max_rel < 0.3))
+                metrics["proto_rel_drop_event_rate_01"] = float(np.mean(max_rel < 0.1))
+                argmax_rel = np.argmax(selected, axis=-1).astype(np.int64)
+                starts_arr = np.asarray(selected_start, dtype=np.int64)
+                env_arr = np.asarray(selected_env, dtype=np.int64)
+                agent_arr = np.asarray(selected_agent, dtype=np.int64)
+                dwell_runs: list[int] = []
+                stability_cos: list[float] = []
+                for env_id in np.unique(env_arr):
+                    env_mask = env_arr == int(env_id)
+                    for agent_id in np.unique(agent_arr[env_mask]):
+                        mask = env_mask & (agent_arr == int(agent_id))
+                        idx = np.flatnonzero(mask)
+                        if idx.size == 0:
+                            continue
+                        order = idx[np.argsort(starts_arr[idx])]
+                        labels = argmax_rel[order]
+                        if labels.size:
+                            run = 1
+                            for label_idx in range(1, labels.size):
+                                if int(labels[label_idx]) == int(labels[label_idx - 1]):
+                                    run += 1
+                                else:
+                                    dwell_runs.append(run)
+                                    run = 1
+                            dwell_runs.append(run)
+                        if order.size > 1:
+                            prev = selected[order[:-1]]
+                            nxt = selected[order[1:]]
+                            denom_cos = np.linalg.norm(prev, axis=-1) * np.linalg.norm(nxt, axis=-1)
+                            valid = denom_cos > 1e-8
+                            if np.any(valid):
+                                cos = np.sum(prev[valid] * nxt[valid], axis=-1) / denom_cos[valid]
+                                stability_cos.extend(cos.astype(np.float64).tolist())
+                metrics["proto_rel_argmax_dwell_median"] = (
+                    float(np.median(np.asarray(dwell_runs, dtype=np.float64))) if dwell_runs else 0.0
+                )
+                metrics["proto_rel_stability_cos"] = (
+                    float(np.mean(np.asarray(stability_cos, dtype=np.float64))) if stability_cos else 0.0
+                )
+        metrics["proto_bank_drift_cos"] = float(self.compact.prototype_bank_drift_cos().detach().cpu().item())
+        return metrics
 
     def update_high_from_segments(
         self,
@@ -3275,6 +4190,9 @@ class StandaloneProcessAgent:
                 "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm is not None else 0.0,
                 "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm is not None else 0.0,
                 "high_grad_norm": 0.0,
+                "compact_return_loss": 0.0,
+                "compact_return_active": 0.0,
+                **self._empty_prototype_selection_metrics(),
                 **empty_g_info_metrics(),
             }
 
@@ -3293,16 +4211,31 @@ class StandaloneProcessAgent:
         prev_skills = torch.as_tensor([s.prev_skill for s in segments], dtype=torch.long, device=self.device)
         ages = torch.as_tensor([s.skill_age_prev for s in segments], dtype=torch.float32, device=self.device)
         team_codes = torch.as_tensor([s.team_code for s in segments], dtype=torch.long, device=self.device)
+        agent_ids = torch.as_tensor([s.agent_id for s in segments], dtype=torch.long, device=self.device)
+        kappa_codes = torch.as_tensor(
+            [s.kappa_start if int(s.kappa_start) >= 0 else s.team_code for s in segments],
+            dtype=torch.long,
+            device=self.device,
+        )
+        env_ids_np = np.asarray([s.env_id for s in segments], dtype=np.int64)
+        start_indices_np = np.asarray(
+            [s.rollout_indices[0] if s.rollout_indices else 0 for s in segments],
+            dtype=np.int64,
+        )
         skills = torch.as_tensor([s.skill for s in segments], dtype=torch.long, device=self.device)
         durations = torch.as_tensor([s.duration_idx for s in segments], dtype=torch.long, device=self.device)
         old_logp = torch.as_tensor([s.high_logp for s in segments], dtype=torch.float32, device=self.device)
         old_value = torch.as_tensor([s.high_value for s in segments], dtype=torch.float32, device=self.device)
 
-        compact, cd_loss, cmi_loss, _weights, aggregation_entropy = self.compact(states, joint_obs)
+        compact, cd_loss, cmi_loss, weights, aggregation_entropy, agent_relevance = self.compact(states, joint_obs)
         _team_code, team_vector, team_logp, team_entropy, _team_logits = self.bridge(
             compact,
             forced_team_code=team_codes,
         )
+        omega_t = weights if self.high_condition_on_omega else None
+        rel_t = None
+        if self.use_agent_prototype_relevance:
+            rel_t = agent_relevance[torch.arange(agent_relevance.shape[0], device=self.device), agent_ids]
         logp_high, entropy_high, values = self.high.evaluate(
             high_obs,
             prev_skills,
@@ -3311,6 +4244,8 @@ class StandaloneProcessAgent:
             team_vector,
             skills,
             durations,
+            omega=omega_t,
+            agent_relevance=rel_t,
         )
         team_weights = torch.as_tensor(
             [s.team_logp_weight for s in segments],
@@ -3350,6 +4285,13 @@ class StandaloneProcessAgent:
         value_loss = F.mse_loss(values, value_targets)
         entropy_loss = -self.high_entropy_coef * entropy.mean()
         aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
+        compact_return_loss = torch.zeros((), device=self.device)
+        compact_return_active = 0.0
+        if self.compact_return_head is not None and float(self.compact_return_coef) != 0.0:
+            compact_return_pred = self.compact_return_head(compact).squeeze(-1)
+            compact_return_loss = F.mse_loss(compact_return_pred, returns.detach())
+            aux_loss = aux_loss + float(self.compact_return_coef) * compact_return_loss
+            compact_return_active = 1.0
         if self.g_info_objective is not None:
             g_info_loss, g_info_metrics = self.g_info_objective(
                 high_policy=self.high,
@@ -3358,6 +4300,8 @@ class StandaloneProcessAgent:
                 prev_skills=prev_skills,
                 ages=ages,
                 compact=compact,
+                omega=omega_t,
+                agent_relevance=rel_t,
                 total_steps=total_steps,
             )
         else:
@@ -3384,6 +4328,7 @@ class StandaloneProcessAgent:
             if high_params:
                 high_grad_norm = torch.nn.utils.clip_grad_norm_(high_params, self.high_max_grad_norm)
         self.high_opt.step()
+        self.compact.update_prototype_bank_ema(self.prototype_bank_ema_tau)
         return {
             "high_loss": float(loss.detach().cpu().item()),
             "high_policy_loss": float(policy_loss.detach().cpu().item()),
@@ -3399,11 +4344,22 @@ class StandaloneProcessAgent:
             "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm is not None else 0.0,
             "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm is not None else 0.0,
             "high_grad_norm": float(high_grad_norm.detach().cpu().item()),
+            "compact_return_loss": float(compact_return_loss.detach().cpu().item()),
+            "compact_return_active": float(compact_return_active),
             "team_code_entropy": float(team_entropy.detach().mean().cpu().item()),
             "compact_norm_mean": float(compact.detach().norm(dim=-1).mean().cpu().item()),
             "opt_cd_loss": float(cd_loss.detach().cpu().item()),
             "opt_cmi_loss": float(cmi_loss.detach().cpu().item()),
             "opt_aggregation_entropy": float(aggregation_entropy.detach().mean().cpu().item()),
+            **self._prototype_selection_metrics(
+                weights,
+                agent_relevance,
+                skills,
+                kappa_codes,
+                agent_ids,
+                env_ids=env_ids_np,
+                start_indices=start_indices_np,
+            ),
             **g_info_metrics,
         }
 

@@ -56,6 +56,23 @@ ALGORITHM_MANIFEST_FIELDS = (
     "opt_use_sparsemax",
     "opt_cd_coef",
     "opt_cmi_coef",
+    "use_prototype_response_skills",
+    "prototype_skill_extra_codes",
+    "high_condition_on_omega",
+    "use_agent_prototype_relevance",
+    "prototype_bank_ema_tau",
+    "use_per_agent_kappa",
+    "enable_prototype_disc_probe",
+    "enable_prototype_disc_reward",
+    "prototype_disc_reward_coef",
+    "prototype_disc_clip",
+    "prototype_disc_warmup_steps",
+    "prototype_disc_condition",
+    "prototype_disc_lr",
+    "prototype_disc_hidden_dim",
+    "prototype_disc_prior_coef",
+    "use_compact_return_head",
+    "compact_return_coef",
     "team_bridge_type",
     "team_code_dim",
     "num_team_codes",
@@ -153,6 +170,24 @@ ALGORITHM_MANIFEST_FIELDS = (
     "g_info_warmup_steps",
     "g_info_anneal_steps",
     "g_info_max_segments",
+    "situation_substrate_source",
+    "situation_num_kappa",
+    "situation_debounce_steps",
+    "enable_situation_diagnostics",
+    "enable_situation_hazard_control",
+    "situation_hazard_mode",
+    "situation_hazard_check_interval",
+    "situation_hazard_min_age",
+    "situation_hazard_hidden_dim",
+    "situation_hazard_entropy_coef",
+    "situation_hazard_value_coef",
+    "situation_hazard_clip_epsilon",
+    "situation_hazard_reward_coef",
+    "situation_hazard_conservative_guard",
+    "situation_hazard_min_dwell_checks",
+    "situation_hazard_confirm_changes",
+    "situation_hazard_max_force_rate",
+    "situation_hazard_rate_window",
     "intrinsic_segment_gate_enabled",
     "intrinsic_segment_gate_margin",
     "intrinsic_segment_gate_min_segments",
@@ -407,6 +442,23 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--opt_compact_dim", type=int, default=0)
     parser.add_argument("--opt_num_prototypes", type=int, default=0)
+    parser.add_argument("--enable_prototype_response_skills", action="store_true")
+    parser.add_argument("--prototype_skill_extra_codes", type=int, default=-1)
+    parser.add_argument("--enable_high_omega_conditioning", action="store_true")
+    parser.add_argument("--enable_agent_prototype_relevance", action="store_true")
+    parser.add_argument("--prototype_bank_ema_tau", type=float, default=None)
+    parser.add_argument("--enable_per_agent_kappa", action="store_true")
+    parser.add_argument("--enable_prototype_disc_probe", action="store_true")
+    parser.add_argument("--enable_prototype_disc_reward", action="store_true")
+    parser.add_argument("--prototype_disc_reward_coef", type=float, default=None)
+    parser.add_argument("--prototype_disc_clip", type=float, default=None)
+    parser.add_argument("--prototype_disc_warmup_steps", type=int, default=-1)
+    parser.add_argument("--prototype_disc_condition", choices=("kappa", "omega", "none"), default="")
+    parser.add_argument("--prototype_disc_lr", type=float, default=None)
+    parser.add_argument("--prototype_disc_hidden_dim", type=int, default=0)
+    parser.add_argument("--prototype_disc_prior_coef", type=float, default=None)
+    parser.add_argument("--enable_compact_return_head", action="store_true")
+    parser.add_argument("--compact_return_coef", type=float, default=None)
     parser.add_argument(
         "--process_reward_mode",
         choices=(
@@ -519,6 +571,28 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--g_info_warmup_steps", type=int, default=-1)
     parser.add_argument("--g_info_anneal_steps", type=int, default=-1)
     parser.add_argument("--g_info_max_segments", type=int, default=0)
+    parser.add_argument("--enable_situation_diagnostics", action="store_true")
+    parser.add_argument("--enable_situation_hazard_control", action="store_true")
+    parser.add_argument("--situation_substrate_source", choices=("omega", "compact_cluster"), default="")
+    parser.add_argument("--situation_num_kappa", type=int, default=0)
+    parser.add_argument("--situation_debounce_steps", type=int, default=0)
+    parser.add_argument(
+        "--situation_hazard_mode",
+        choices=("diagnostic", "oracle_change", "learned_beta"),
+        default="",
+    )
+    parser.add_argument("--situation_hazard_check_interval", type=int, default=0)
+    parser.add_argument("--situation_hazard_min_age", type=int, default=0)
+    parser.add_argument("--situation_hazard_hidden_dim", type=int, default=0)
+    parser.add_argument("--situation_hazard_entropy_coef", type=float, default=None)
+    parser.add_argument("--situation_hazard_value_coef", type=float, default=None)
+    parser.add_argument("--situation_hazard_clip_epsilon", type=float, default=None)
+    parser.add_argument("--situation_hazard_reward_coef", type=float, default=None)
+    parser.add_argument("--enable_situation_hazard_conservative_guard", action="store_true")
+    parser.add_argument("--situation_hazard_min_dwell_checks", type=int, default=0)
+    parser.add_argument("--situation_hazard_confirm_changes", type=int, default=0)
+    parser.add_argument("--situation_hazard_max_force_rate", type=float, default=None)
+    parser.add_argument("--situation_hazard_rate_window", type=int, default=0)
     parser.add_argument("--intrinsic_segment_gate_margin", type=float, default=None)
     parser.add_argument("--intrinsic_segment_gate_min_segments", type=int, default=0)
     parser.add_argument("--intrinsic_segment_gate_min_residual_mi", type=float, default=None)
@@ -661,6 +735,12 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "switch_penalty_beta",
         "opt_cd_coef",
         "opt_cmi_coef",
+        "prototype_bank_ema_tau",
+        "prototype_disc_reward_coef",
+        "prototype_disc_clip",
+        "prototype_disc_lr",
+        "prototype_disc_prior_coef",
+        "compact_return_coef",
     )
     for name in optional_scalars:
         value = getattr(args, name)
@@ -670,6 +750,14 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.process_reward_warmup_steps = int(args.process_reward_warmup_steps)
     if int(args.transition_skill_reward_warmup_steps) >= 0:
         config.transition_skill_reward_warmup_steps = int(args.transition_skill_reward_warmup_steps)
+    if int(args.prototype_skill_extra_codes) >= 0:
+        config.prototype_skill_extra_codes = int(args.prototype_skill_extra_codes)
+    if int(args.prototype_disc_warmup_steps) >= 0:
+        config.prototype_disc_warmup_steps = int(args.prototype_disc_warmup_steps)
+    if int(args.prototype_disc_hidden_dim) > 0:
+        config.prototype_disc_hidden_dim = int(args.prototype_disc_hidden_dim)
+    if args.prototype_disc_condition:
+        config.prototype_disc_condition = args.prototype_disc_condition
     if int(args.transition_skill_max_samples) > 0:
         config.transition_skill_max_samples = int(args.transition_skill_max_samples)
     if int(args.outcome_residual_horizon) > 0:
@@ -753,6 +841,40 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.g_info_anneal_steps = int(args.g_info_anneal_steps)
     if int(args.g_info_max_segments) > 0:
         config.g_info_max_segments = int(args.g_info_max_segments)
+    if args.enable_situation_diagnostics:
+        config.enable_situation_diagnostics = True
+    if args.enable_situation_hazard_control:
+        config.enable_situation_hazard_control = True
+    if args.enable_situation_hazard_conservative_guard:
+        config.situation_hazard_conservative_guard = True
+    if args.situation_substrate_source:
+        config.situation_substrate_source = args.situation_substrate_source
+    if args.situation_hazard_mode:
+        config.situation_hazard_mode = args.situation_hazard_mode
+    for name in (
+        "situation_num_kappa",
+        "situation_debounce_steps",
+        "situation_hazard_check_interval",
+        "situation_hazard_min_age",
+        "situation_hazard_hidden_dim",
+        "situation_hazard_min_dwell_checks",
+        "situation_hazard_confirm_changes",
+        "situation_hazard_rate_window",
+    ):
+        value = int(getattr(args, name, 0))
+        if value > 0:
+            setattr(config, name, value)
+    for name in (
+        "situation_hazard_entropy_coef",
+        "situation_hazard_value_coef",
+        "situation_hazard_clip_epsilon",
+        "situation_hazard_reward_coef",
+    ):
+        value = getattr(args, name, None)
+        if value is not None:
+            setattr(config, name, float(value))
+    if args.situation_hazard_max_force_rate is not None:
+        config.situation_hazard_max_force_rate = float(args.situation_hazard_max_force_rate)
     if int(args.intrinsic_phase_bins) > 0:
         config.intrinsic_phase_bins = int(args.intrinsic_phase_bins)
     if int(args.intrinsic_segment_gate_min_segments) > 0:
@@ -810,6 +932,23 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.use_low_value_norm = False
     if args.enable_low_actor_team_code:
         config.low_actor_condition_on_team_code = True
+    if args.enable_prototype_response_skills:
+        config.use_prototype_response_skills = True
+        config.high_condition_on_omega = True
+    if args.enable_high_omega_conditioning:
+        config.high_condition_on_omega = True
+    if args.enable_agent_prototype_relevance:
+        config.use_agent_prototype_relevance = True
+    if args.enable_per_agent_kappa:
+        config.use_per_agent_kappa = True
+        config.enable_situation_diagnostics = True
+    if args.enable_prototype_disc_probe:
+        config.enable_prototype_disc_probe = True
+    if args.enable_prototype_disc_reward:
+        config.enable_prototype_disc_probe = True
+        config.enable_prototype_disc_reward = True
+    if args.enable_compact_return_head:
+        config.use_compact_return_head = True
     if args.enable_topology_potential_shaping:
         config.use_topology_potential_shaping = True
     if args.topology_potential_positive_only:
@@ -919,6 +1058,21 @@ def checkpoint_payload(
             if getattr(agent, "transition_discriminator", None) is not None
             else None
         ),
+        "prototype_discriminator": (
+            agent.prototype_discriminator.state_dict()
+            if getattr(agent, "prototype_discriminator", None) is not None
+            else None
+        ),
+        "compact_return_head": (
+            agent.compact_return_head.state_dict()
+            if getattr(agent, "compact_return_head", None) is not None
+            else None
+        ),
+        "situation_hazard": (
+            agent.situation_hazard.state_dict()
+            if getattr(agent, "situation_hazard", None) is not None
+            else None
+        ),
         "skill_effect_discovery": (
             agent.skill_effect_discovery.state_dict()
             if getattr(agent, "skill_effect_discovery", None) is not None
@@ -931,6 +1085,11 @@ def checkpoint_payload(
         "high_value_norm": agent.high_value_norm.state_dict() if agent.high_value_norm is not None else None,
         "low_value_norm": agent.low_value_norm.state_dict() if agent.low_value_norm is not None else None,
         "process_opt": agent.process_opt.state_dict(),
+        "prototype_disc_opt": (
+            agent.prototype_disc_opt.state_dict()
+            if getattr(agent, "prototype_disc_opt", None) is not None
+            else None
+        ),
         "skill_effect_opt": (
             agent.skill_effect_discovery.opt.state_dict()
             if getattr(agent, "skill_effect_discovery", None) is not None
@@ -946,9 +1105,19 @@ def checkpoint_payload(
         "n_agents": agent.n_agents,
         "n_skills": agent.n_skills,
         "duration_candidates": agent.duration_candidates,
+        "opt_num_prototypes": int(getattr(agent, "opt_num_prototypes", getattr(config, "opt_num_prototypes", 0))),
         "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
         "low_level_architecture": str(agent.low_level_architecture),
         "low_actor_condition_on_team_code": bool(getattr(agent, "low_actor_condition_on_team_code", False)),
+        "use_prototype_response_skills": bool(getattr(agent, "use_prototype_response_skills", False)),
+        "prototype_skill_extra_codes": int(getattr(agent, "prototype_skill_extra_codes", 0)),
+        "high_condition_on_omega": bool(getattr(agent, "high_condition_on_omega", False)),
+        "use_agent_prototype_relevance": bool(getattr(agent, "use_agent_prototype_relevance", False)),
+        "use_per_agent_kappa": bool(getattr(agent, "use_per_agent_kappa", False)),
+        "enable_prototype_disc_probe": bool(getattr(agent, "enable_prototype_disc_probe", False)),
+        "enable_prototype_disc_reward": bool(getattr(agent, "enable_prototype_disc_reward", False)),
+        "prototype_disc_condition": str(getattr(agent, "prototype_disc_condition", "kappa")),
+        "use_compact_return_head": bool(getattr(agent, "use_compact_return_head", False)),
         "algorithm": "ha_ctse_process_standalone",
     }
 
@@ -1022,6 +1191,24 @@ def load_checkpoint(
     ):
         agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=False)
     if (
+        "prototype_discriminator" in checkpoint
+        and checkpoint.get("prototype_discriminator") is not None
+        and getattr(agent, "prototype_discriminator", None) is not None
+    ):
+        agent.prototype_discriminator.load_state_dict(checkpoint["prototype_discriminator"], strict=False)
+    if (
+        "compact_return_head" in checkpoint
+        and checkpoint.get("compact_return_head") is not None
+        and getattr(agent, "compact_return_head", None) is not None
+    ):
+        agent.compact_return_head.load_state_dict(checkpoint["compact_return_head"], strict=False)
+    if (
+        "situation_hazard" in checkpoint
+        and checkpoint.get("situation_hazard") is not None
+        and getattr(agent, "situation_hazard", None) is not None
+    ):
+        agent.situation_hazard.load_state_dict(checkpoint["situation_hazard"], strict=False)
+    if (
         "skill_effect_discovery" in checkpoint
         and checkpoint.get("skill_effect_discovery") is not None
         and getattr(agent, "skill_effect_discovery", None) is not None
@@ -1060,6 +1247,15 @@ def load_checkpoint(
             except ValueError:
                 pass
         if (
+            "prototype_disc_opt" in checkpoint
+            and checkpoint.get("prototype_disc_opt") is not None
+            and getattr(agent, "prototype_disc_opt", None) is not None
+        ):
+            try:
+                agent.prototype_disc_opt.load_state_dict(checkpoint["prototype_disc_opt"])
+            except ValueError:
+                pass
+        if (
             "skill_effect_opt" in checkpoint
             and checkpoint.get("skill_effect_opt") is not None
             and getattr(agent, "skill_effect_discovery", None) is not None
@@ -1077,11 +1273,21 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "duration_candidates": checkpoint.get("duration_candidates"),
         "n_agents": checkpoint.get("n_agents"),
         "n_skills": checkpoint.get("n_skills"),
+        "opt_num_prototypes": checkpoint.get("opt_num_prototypes"),
         "preset": checkpoint.get("preset"),
         "scenario": checkpoint.get("scenario"),
         "total_steps": checkpoint.get("total_steps"),
         "update_idx": checkpoint.get("update_idx"),
         "low_actor_condition_on_team_code": checkpoint.get("low_actor_condition_on_team_code"),
+        "use_prototype_response_skills": checkpoint.get("use_prototype_response_skills"),
+        "prototype_skill_extra_codes": checkpoint.get("prototype_skill_extra_codes"),
+        "high_condition_on_omega": checkpoint.get("high_condition_on_omega"),
+        "use_agent_prototype_relevance": checkpoint.get("use_agent_prototype_relevance"),
+        "use_per_agent_kappa": checkpoint.get("use_per_agent_kappa"),
+        "enable_prototype_disc_probe": checkpoint.get("enable_prototype_disc_probe"),
+        "enable_prototype_disc_reward": checkpoint.get("enable_prototype_disc_reward"),
+        "prototype_disc_condition": checkpoint.get("prototype_disc_condition"),
+        "use_compact_return_head": checkpoint.get("use_compact_return_head"),
     }
 
 
@@ -1108,6 +1314,23 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
 
     if metadata.get("low_actor_condition_on_team_code") is not None:
         config.low_actor_condition_on_team_code = bool(metadata.get("low_actor_condition_on_team_code"))
+    for name in (
+        "use_prototype_response_skills",
+        "high_condition_on_omega",
+        "use_agent_prototype_relevance",
+        "use_per_agent_kappa",
+        "enable_prototype_disc_probe",
+        "enable_prototype_disc_reward",
+        "use_compact_return_head",
+    ):
+        if metadata.get(name) is not None:
+            setattr(config, name, bool(metadata.get(name)))
+    if metadata.get("prototype_skill_extra_codes") is not None:
+        config.prototype_skill_extra_codes = int(metadata.get("prototype_skill_extra_codes"))
+    if metadata.get("opt_num_prototypes") is not None:
+        config.opt_num_prototypes = int(metadata.get("opt_num_prototypes"))
+    if metadata.get("prototype_disc_condition"):
+        config.prototype_disc_condition = str(metadata.get("prototype_disc_condition"))
 
 
 def run_env_dry_check(config, args: argparse.Namespace) -> None:
@@ -1487,6 +1710,38 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         process_metrics.get("transition_skill_log_context_mean", 0.0),
         total_steps,
     )
+    for key in (
+        "proto_disc_active",
+        "proto_disc_samples",
+        "proto_disc_loss",
+        "proto_disc_q_loss",
+        "proto_disc_prior_loss",
+        "proto_disc_acc",
+        "proto_disc_prior_acc",
+        "proto_disc_residual_mean",
+        "proto_disc_residual_positive_frac",
+        "proto_disc_acc_by_skill_std",
+        "proto_disc_reward_mean",
+        "proto_disc_reward_unclipped_mean",
+        "proto_disc_reward_applied_steps",
+        "proto_disc_reward_env_ratio",
+    ):
+        writer.add_scalar(f"PrototypeDisc/{key}", process_metrics.get(key, 0.0), total_steps)
+    for key in (
+        "proto_skill_selection_entropy",
+        "proto_skill_usage_entropy_by_kappa",
+        "proto_skill_relevance_alignment",
+        "proto_skill_selected_relevance_mean",
+        "proto_omega_nonzero_frac",
+        "proto_bank_drift_cos",
+        "proto_rel_row_entropy_mean",
+        "proto_rel_argmax_dwell_median",
+        "proto_rel_stability_cos",
+        "proto_rel_drop_event_rate_05",
+        "proto_rel_drop_event_rate_03",
+        "proto_rel_drop_event_rate_01",
+    ):
+        writer.add_scalar(f"PrototypeSelection/{key}", process_metrics.get(key, 0.0), total_steps)
     writer.add_scalar(
         "Intrinsic/SegmentHighGateActive",
         process_metrics.get("intrinsic_segment_high_gate_active", 0.0),
@@ -1864,6 +2119,79 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         process_metrics.get("g_joint_assignment_distance", 0.0),
         total_steps,
     )
+    writer.add_scalar("Situation/Enabled", process_metrics.get("situation_enabled", 0.0), total_steps)
+    writer.add_scalar("Situation/ChangeRate", process_metrics.get("situation_change_rate", 0.0), total_steps)
+    writer.add_scalar("Situation/UniqueKappa", process_metrics.get("situation_unique_kappa", 0.0), total_steps)
+    writer.add_scalar(
+        "Situation/SegmentChangeFrac",
+        process_metrics.get("situation_segment_change_frac", 0.0),
+        total_steps,
+    )
+    for key in (
+        "situation_agent_kappa_enabled",
+        "situation_agent_kappa_change_rate",
+        "situation_agent_kappa_disagreement_rate",
+        "situation_agent_kappa_median_dwell",
+        "situation_agent_kappa_global_mi",
+        "situation_agent_unique_kappa_mean",
+        "situation_agent_unique_kappa_mean",
+    ):
+        writer.add_scalar(f"Situation/{key}", process_metrics.get(key, 0.0), total_steps)
+    writer.add_scalar(
+        "Situation/HazardControlEnabled",
+        process_metrics.get("situation_hazard_control_enabled", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardForcedRenewalRate",
+        process_metrics.get("situation_hazard_forced_renewal_rate", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardModeCode",
+        process_metrics.get("situation_hazard_mode_code", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardConservativeGuard",
+        process_metrics.get("situation_hazard_conservative_guard", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardEventCount",
+        process_metrics.get("situation_hazard_guard_event_count", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardAllowRate",
+        process_metrics.get("situation_hazard_guard_allow_rate", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardConfirmBlockRate",
+        process_metrics.get("situation_hazard_guard_confirm_block_rate", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardDwellBlockRate",
+        process_metrics.get("situation_hazard_guard_dwell_block_rate", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardRateCapBlockRate",
+        process_metrics.get("situation_hazard_guard_rate_cap_block_rate", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardNoChangeBlockRate",
+        process_metrics.get("situation_hazard_guard_no_change_block_rate", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Situation/HazardGuardRecentForceRate",
+        process_metrics.get("situation_hazard_guard_recent_force_rate", 0.0),
+        total_steps,
+    )
     writer.add_scalar("Credit/ProbeAvailableFrac", process_metrics.get("credit_probe_available_frac", 0.0), total_steps)
     writer.add_scalar("Credit/FullDisconnectMean", process_metrics.get("credit_full_disconnect_mean", 0.0), total_steps)
     writer.add_scalar("Credit/RecoveryRate", process_metrics.get("credit_recovery_rate", 0.0), total_steps)
@@ -1919,6 +2247,8 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("High/ValueNormMean", process_metrics.get("high_value_norm_mean", 0.0), total_steps)
     writer.add_scalar("High/ValueNormStd", process_metrics.get("high_value_norm_std", 0.0), total_steps)
     writer.add_scalar("High/GradNorm", process_metrics.get("high_grad_norm", 0.0), total_steps)
+    writer.add_scalar("High/CompactReturnLoss", process_metrics.get("compact_return_loss", 0.0), total_steps)
+    writer.add_scalar("High/CompactReturnActive", process_metrics.get("compact_return_active", 0.0), total_steps)
     writer.add_scalar("High/TeamCodeEntropy", process_metrics.get("team_code_entropy", 0.0), total_steps)
     writer.add_scalar("High/CompactNormMean", process_metrics.get("compact_norm_mean", 0.0), total_steps)
     writer.add_scalar("High/OPTCDLoss", process_metrics.get("opt_cd_loss", 0.0), total_steps)
@@ -2118,6 +2448,24 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"g_info_coef_edit={float(getattr(config, 'g_info_coef_edit', 0.0))} "
             f"g_info_warmup={int(getattr(config, 'g_info_warmup_steps', 0))} "
             f"g_info_anneal={int(getattr(config, 'g_info_anneal_steps', 0))} "
+            f"situation_diag={bool(getattr(config, 'enable_situation_diagnostics', False))} "
+            f"situation_hazard_control={bool(getattr(config, 'enable_situation_hazard_control', False))} "
+            f"situation_source={getattr(config, 'situation_substrate_source', 'omega')} "
+            f"situation_num_kappa={int(getattr(config, 'situation_num_kappa', 0))} "
+            f"situation_debounce={int(getattr(config, 'situation_debounce_steps', 0))} "
+            f"situation_hazard_mode={getattr(config, 'situation_hazard_mode', 'diagnostic')} "
+            f"situation_hazard_interval={int(getattr(config, 'situation_hazard_check_interval', 0))} "
+            f"situation_hazard_min_age={int(getattr(config, 'situation_hazard_min_age', 0))} "
+            f"situation_hazard_hidden={int(getattr(config, 'situation_hazard_hidden_dim', 0))} "
+            f"situation_hazard_entropy_coef={float(getattr(config, 'situation_hazard_entropy_coef', 0.0))} "
+            f"situation_hazard_value_coef={float(getattr(config, 'situation_hazard_value_coef', 0.0))} "
+            f"situation_hazard_clip_epsilon={float(getattr(config, 'situation_hazard_clip_epsilon', 0.0))} "
+            f"situation_hazard_reward_coef={float(getattr(config, 'situation_hazard_reward_coef', 0.0))} "
+            f"situation_hazard_conservative_guard={bool(getattr(config, 'situation_hazard_conservative_guard', False))} "
+            f"situation_hazard_min_dwell={int(getattr(config, 'situation_hazard_min_dwell_checks', 0))} "
+            f"situation_hazard_confirm_changes={int(getattr(config, 'situation_hazard_confirm_changes', 0))} "
+            f"situation_hazard_max_force_rate={float(getattr(config, 'situation_hazard_max_force_rate', 1.0))} "
+            f"situation_hazard_rate_window={int(getattr(config, 'situation_hazard_rate_window', 0))} "
             f"intrinsic_segment_gate={bool(getattr(config, 'intrinsic_segment_gate_enabled', True))} "
             f"intrinsic_gate_margin={float(getattr(config, 'intrinsic_segment_gate_margin', 0.0))} "
             f"intrinsic_gate_min_segments={int(getattr(config, 'intrinsic_segment_gate_min_segments', 0))} "
@@ -2128,6 +2476,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"recurrent_low={bool(getattr(config, 'use_recurrent_low_level', True))} "
             f"low_arch={getattr(config, 'low_level_architecture', 'strict_hmasd_mappo')} "
             f"low_actor_team_code={bool(getattr(config, 'low_actor_condition_on_team_code', False))} "
+            f"prototype_response={bool(getattr(config, 'use_prototype_response_skills', False))} "
+            f"prototype_extra_codes={int(getattr(config, 'prototype_skill_extra_codes', 0))} "
+            f"high_omega={bool(getattr(config, 'high_condition_on_omega', False))} "
+            f"agent_proto_rel={bool(getattr(config, 'use_agent_prototype_relevance', False))} "
+            f"per_agent_kappa={bool(getattr(config, 'use_per_agent_kappa', False))} "
+            f"proto_disc_probe={bool(getattr(config, 'enable_prototype_disc_probe', False))} "
+            f"proto_disc_reward={bool(getattr(config, 'enable_prototype_disc_reward', False))} "
+            f"proto_disc_condition={getattr(config, 'prototype_disc_condition', 'kappa')} "
+            f"proto_disc_coef={float(getattr(config, 'prototype_disc_reward_coef', 0.0))} "
+            f"compact_return_head={bool(getattr(config, 'use_compact_return_head', False))} "
             f"network_scale={getattr(config, 'network_scale_profile', 'custom')} "
             f"low_value_norm={bool(getattr(config, 'use_low_value_norm', True))} "
             f"low_seq_len={int(getattr(config, 'low_sequence_length', 0))} "
@@ -2272,6 +2630,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"trans_resid_mi={process_metrics.get('transition_skill_residual_mi_mean', 0.0):.6f} "
                 f"trans_reward={process_metrics.get('transition_skill_reward_mean', 0.0):.6f} "
                 f"trans_active={process_metrics.get('transition_skill_reward_active', 0.0):.0f} "
+                f"proto_acc={process_metrics.get('proto_disc_acc', 0.0):.3f} "
+                f"proto_prior_acc={process_metrics.get('proto_disc_prior_acc', 0.0):.3f} "
+                f"proto_resid={process_metrics.get('proto_disc_residual_mean', 0.0):.6f} "
+                f"proto_reward={process_metrics.get('proto_disc_reward_mean', 0.0):.6f} "
+                f"proto_steps={process_metrics.get('proto_disc_reward_applied_steps', 0.0):.0f} "
+                f"proto_skill_ent={process_metrics.get('proto_skill_selection_entropy', 0.0):.3f} "
+                f"proto_kappa_ent={process_metrics.get('proto_skill_usage_entropy_by_kappa', 0.0):.3f} "
+                f"proto_align={process_metrics.get('proto_skill_relevance_alignment', 0.0):.3f} "
+                f"proto_rel_dwell={process_metrics.get('proto_rel_argmax_dwell_median', 0.0):.1f} "
+                f"proto_rel_stab={process_metrics.get('proto_rel_stability_cos', 0.0):.3f} "
                 f"high_intr_gate={process_metrics.get('intrinsic_segment_high_gate_active', 0.0):.0f} "
                 f"high_intr_score={process_metrics.get('intrinsic_segment_high_gate_score', 0.0):.6f} "
                 f"high_intr_reason={process_metrics.get('intrinsic_segment_high_gate_reason_code', 0.0):.0f} "
@@ -2378,6 +2746,20 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"g_itv_z={process_metrics.get('g_itv_tv_skill', 0.0):.6f} "
                 f"g_itv_dur={process_metrics.get('g_itv_tv_duration', 0.0):.6f} "
                 f"g_joint_dist={process_metrics.get('g_joint_assignment_distance', 0.0):.6f} "
+                f"situation_enabled={process_metrics.get('situation_enabled', 0.0):.0f} "
+                f"situation_change={process_metrics.get('situation_change_rate', 0.0):.3f} "
+                f"situation_kappa={process_metrics.get('situation_unique_kappa', 0.0):.0f} "
+                f"situation_seg_change={process_metrics.get('situation_segment_change_frac', 0.0):.3f} "
+                f"situation_hazard_enabled={process_metrics.get('situation_hazard_control_enabled', 0.0):.0f} "
+                f"situation_hazard_force={process_metrics.get('situation_hazard_forced_renewal_rate', 0.0):.3f} "
+                f"situation_hazard_mode={process_metrics.get('situation_hazard_mode_code', 0.0):.0f} "
+                f"situation_guard={process_metrics.get('situation_hazard_conservative_guard', 0.0):.0f} "
+                f"situation_guard_events={process_metrics.get('situation_hazard_guard_event_count', 0.0):.0f} "
+                f"situation_guard_allow={process_metrics.get('situation_hazard_guard_allow_rate', 0.0):.3f} "
+                f"situation_guard_confirm={process_metrics.get('situation_hazard_guard_confirm_block_rate', 0.0):.3f} "
+                f"situation_guard_dwell={process_metrics.get('situation_hazard_guard_dwell_block_rate', 0.0):.3f} "
+                f"situation_guard_ratecap={process_metrics.get('situation_hazard_guard_rate_cap_block_rate', 0.0):.3f} "
+                f"situation_guard_recent_force={process_metrics.get('situation_hazard_guard_recent_force_rate', 0.0):.3f} "
                 f"credit_disc={process_metrics.get('credit_full_disconnect_mean', 0.0):.3f} "
                 f"credit_recover={process_metrics.get('credit_recovery_rate', 0.0):.3f} "
                 f"credit_collapse={process_metrics.get('credit_collapse_rate', 0.0):.3f} "

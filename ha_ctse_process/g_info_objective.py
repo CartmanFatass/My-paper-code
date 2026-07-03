@@ -123,6 +123,8 @@ class GInfoObjective(nn.Module):
         prev_skills: torch.Tensor,
         ages: torch.Tensor,
         compact: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
         total_steps: int = 0,
     ) -> tuple[torch.Tensor, dict[str, float]]:
         metrics = empty_g_info_metrics()
@@ -159,6 +161,12 @@ class GInfoObjective(nn.Module):
         ages_x = ages.unsqueeze(1).expand(batch_size, n_codes).reshape(batch_size * n_codes)
         compact_x = compact.unsqueeze(1).expand(batch_size, n_codes, -1).reshape(batch_size * n_codes, -1)
         team_x = team_vectors.reshape(batch_size * n_codes, -1)
+        omega_x = None
+        if omega is not None:
+            omega_x = omega.unsqueeze(1).expand(batch_size, n_codes, -1).reshape(batch_size * n_codes, -1)
+        rel_x = None
+        if agent_relevance is not None:
+            rel_x = agent_relevance.unsqueeze(1).expand(batch_size, n_codes, -1).reshape(batch_size * n_codes, -1)
 
         skill_logits, duration_logits, _values = high_policy.logits(
             high_obs_x,
@@ -166,6 +174,8 @@ class GInfoObjective(nn.Module):
             ages_x,
             compact_x,
             team_x,
+            omega=omega_x,
+            agent_relevance=rel_x,
         )
         skill_probs = F.softmax(skill_logits, dim=-1).reshape(batch_size, n_codes, -1)
         duration_probs = F.softmax(duration_logits, dim=-1).reshape(batch_size, n_codes, -1)
