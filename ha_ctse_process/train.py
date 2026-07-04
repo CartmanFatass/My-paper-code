@@ -58,6 +58,9 @@ ALGORITHM_MANIFEST_FIELDS = (
     "opt_cmi_coef",
     "use_prototype_response_skills",
     "prototype_skill_extra_codes",
+    "legacy_n_skills_override",
+    "use_autoregressive_selection",
+    "parallel_selection",
     "high_condition_on_omega",
     "use_agent_prototype_relevance",
     "prototype_bank_ema_tau",
@@ -70,6 +73,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "prototype_disc_condition",
     "prototype_disc_lr",
     "prototype_disc_hidden_dim",
+    "prototype_disc_use_learned_prior",
     "prototype_disc_prior_coef",
     "use_compact_return_head",
     "compact_return_coef",
@@ -380,6 +384,13 @@ def export_run_manifest(
             "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
             "low_level_architecture": str(agent.low_level_architecture),
             "low_actor_condition_on_team_code": bool(getattr(agent, "low_actor_condition_on_team_code", False)),
+            "use_prototype_response_skills": bool(getattr(agent, "use_prototype_response_skills", False)),
+            "use_autoregressive_selection": bool(getattr(agent, "use_autoregressive_selection", False)),
+            "parallel_selection": bool(getattr(agent, "parallel_selection", False)),
+            "ar_prefix_mode": str(getattr(agent, "ar_prefix_mode", "none")),
+            "prototype_disc_use_learned_prior": bool(
+                getattr(agent, "prototype_disc_use_learned_prior", False)
+            ),
             "low_rnn_hidden_size": int(agent.low_rnn_hidden_size),
             "parameter_counts": jsonable(agent.parameter_counts()),
         }
@@ -444,6 +455,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--opt_num_prototypes", type=int, default=0)
     parser.add_argument("--enable_prototype_response_skills", action="store_true")
     parser.add_argument("--prototype_skill_extra_codes", type=int, default=-1)
+    parser.add_argument("--legacy_n_skills", type=int, default=0)
+    parser.add_argument("--parallel_selection", action="store_true")
+    parser.add_argument("--ar_prefix_mode", choices=("same_check", "roster"), default="")
     parser.add_argument("--enable_high_omega_conditioning", action="store_true")
     parser.add_argument("--enable_agent_prototype_relevance", action="store_true")
     parser.add_argument("--prototype_bank_ema_tau", type=float, default=None)
@@ -456,6 +470,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prototype_disc_condition", choices=("kappa", "omega", "none"), default="")
     parser.add_argument("--prototype_disc_lr", type=float, default=None)
     parser.add_argument("--prototype_disc_hidden_dim", type=int, default=0)
+    parser.add_argument("--prototype_disc_use_learned_prior", action="store_true")
     parser.add_argument("--prototype_disc_prior_coef", type=float, default=None)
     parser.add_argument("--enable_compact_return_head", action="store_true")
     parser.add_argument("--compact_return_coef", type=float, default=None)
@@ -752,6 +767,8 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.transition_skill_reward_warmup_steps = int(args.transition_skill_reward_warmup_steps)
     if int(args.prototype_skill_extra_codes) >= 0:
         config.prototype_skill_extra_codes = int(args.prototype_skill_extra_codes)
+    if int(args.legacy_n_skills) > 0:
+        config.legacy_n_skills_override = int(args.legacy_n_skills)
     if int(args.prototype_disc_warmup_steps) >= 0:
         config.prototype_disc_warmup_steps = int(args.prototype_disc_warmup_steps)
     if int(args.prototype_disc_hidden_dim) > 0:
@@ -935,6 +952,11 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     if args.enable_prototype_response_skills:
         config.use_prototype_response_skills = True
         config.high_condition_on_omega = True
+    if args.parallel_selection:
+        config.parallel_selection = True
+        config.use_autoregressive_selection = False
+    if args.ar_prefix_mode:
+        config.ar_prefix_mode = args.ar_prefix_mode
     if args.enable_high_omega_conditioning:
         config.high_condition_on_omega = True
     if args.enable_agent_prototype_relevance:
@@ -947,6 +969,8 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     if args.enable_prototype_disc_reward:
         config.enable_prototype_disc_probe = True
         config.enable_prototype_disc_reward = True
+    if args.prototype_disc_use_learned_prior:
+        config.prototype_disc_use_learned_prior = True
     if args.enable_compact_return_head:
         config.use_compact_return_head = True
     if args.enable_topology_potential_shaping:
@@ -1111,12 +1135,17 @@ def checkpoint_payload(
         "low_actor_condition_on_team_code": bool(getattr(agent, "low_actor_condition_on_team_code", False)),
         "use_prototype_response_skills": bool(getattr(agent, "use_prototype_response_skills", False)),
         "prototype_skill_extra_codes": int(getattr(agent, "prototype_skill_extra_codes", 0)),
+        "legacy_n_skills_override": int(getattr(config, "legacy_n_skills_override", 0)),
+        "use_autoregressive_selection": bool(getattr(agent, "use_autoregressive_selection", True)),
+        "parallel_selection": bool(getattr(agent, "parallel_selection", False)),
+        "ar_prefix_mode": str(getattr(agent, "ar_prefix_mode", "none")),
         "high_condition_on_omega": bool(getattr(agent, "high_condition_on_omega", False)),
         "use_agent_prototype_relevance": bool(getattr(agent, "use_agent_prototype_relevance", False)),
         "use_per_agent_kappa": bool(getattr(agent, "use_per_agent_kappa", False)),
         "enable_prototype_disc_probe": bool(getattr(agent, "enable_prototype_disc_probe", False)),
         "enable_prototype_disc_reward": bool(getattr(agent, "enable_prototype_disc_reward", False)),
         "prototype_disc_condition": str(getattr(agent, "prototype_disc_condition", "kappa")),
+        "prototype_disc_use_learned_prior": bool(getattr(agent, "prototype_disc_use_learned_prior", False)),
         "use_compact_return_head": bool(getattr(agent, "use_compact_return_head", False)),
         "algorithm": "ha_ctse_process_standalone",
     }
@@ -1281,12 +1310,17 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "low_actor_condition_on_team_code": checkpoint.get("low_actor_condition_on_team_code"),
         "use_prototype_response_skills": checkpoint.get("use_prototype_response_skills"),
         "prototype_skill_extra_codes": checkpoint.get("prototype_skill_extra_codes"),
+        "legacy_n_skills_override": checkpoint.get("legacy_n_skills_override"),
+        "use_autoregressive_selection": checkpoint.get("use_autoregressive_selection"),
+        "parallel_selection": checkpoint.get("parallel_selection"),
+        "ar_prefix_mode": checkpoint.get("ar_prefix_mode"),
         "high_condition_on_omega": checkpoint.get("high_condition_on_omega"),
         "use_agent_prototype_relevance": checkpoint.get("use_agent_prototype_relevance"),
         "use_per_agent_kappa": checkpoint.get("use_per_agent_kappa"),
         "enable_prototype_disc_probe": checkpoint.get("enable_prototype_disc_probe"),
         "enable_prototype_disc_reward": checkpoint.get("enable_prototype_disc_reward"),
         "prototype_disc_condition": checkpoint.get("prototype_disc_condition"),
+        "prototype_disc_use_learned_prior": checkpoint.get("prototype_disc_use_learned_prior"),
         "use_compact_return_head": checkpoint.get("use_compact_return_head"),
     }
 
@@ -1321,12 +1355,19 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         "use_per_agent_kappa",
         "enable_prototype_disc_probe",
         "enable_prototype_disc_reward",
+        "use_autoregressive_selection",
+        "parallel_selection",
+        "prototype_disc_use_learned_prior",
         "use_compact_return_head",
     ):
         if metadata.get(name) is not None:
             setattr(config, name, bool(metadata.get(name)))
+    if metadata.get("ar_prefix_mode"):
+        config.ar_prefix_mode = str(metadata.get("ar_prefix_mode"))
     if metadata.get("prototype_skill_extra_codes") is not None:
         config.prototype_skill_extra_codes = int(metadata.get("prototype_skill_extra_codes"))
+    if metadata.get("legacy_n_skills_override") is not None:
+        config.legacy_n_skills_override = int(metadata.get("legacy_n_skills_override"))
     if metadata.get("opt_num_prototypes") is not None:
         config.opt_num_prototypes = int(metadata.get("opt_num_prototypes"))
     if metadata.get("prototype_disc_condition"):
@@ -1718,6 +1759,16 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         "proto_disc_prior_loss",
         "proto_disc_acc",
         "proto_disc_prior_acc",
+        "proto_disc_null_logp_mean",
+        "proto_assignment_logp_mean",
+        "proto_assignment_logp_std",
+        "proto_ar_parallel_kl",
+        "roster_ar_kl_zeroed",
+        "roster_ar_kl_shuffled",
+        "selection_independence_available",
+        "selection_same_skill_rate",
+        "selection_independence_null_rate",
+        "selection_independence_deficit",
         "proto_disc_residual_mean",
         "proto_disc_residual_positive_frac",
         "proto_disc_acc_by_skill_std",
@@ -2478,11 +2529,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"low_actor_team_code={bool(getattr(config, 'low_actor_condition_on_team_code', False))} "
             f"prototype_response={bool(getattr(config, 'use_prototype_response_skills', False))} "
             f"prototype_extra_codes={int(getattr(config, 'prototype_skill_extra_codes', 0))} "
+            f"legacy_n_skills={int(getattr(config, 'legacy_n_skills_override', 0))} "
+            f"ar_selection={bool(getattr(agent, 'use_autoregressive_selection', False))} "
+            f"parallel_selection={bool(getattr(agent, 'parallel_selection', False))} "
+            f"ar_prefix_mode={str(getattr(agent, 'ar_prefix_mode', 'none'))} "
             f"high_omega={bool(getattr(config, 'high_condition_on_omega', False))} "
             f"agent_proto_rel={bool(getattr(config, 'use_agent_prototype_relevance', False))} "
             f"per_agent_kappa={bool(getattr(config, 'use_per_agent_kappa', False))} "
             f"proto_disc_probe={bool(getattr(config, 'enable_prototype_disc_probe', False))} "
             f"proto_disc_reward={bool(getattr(config, 'enable_prototype_disc_reward', False))} "
+            f"proto_disc_learned_prior={bool(getattr(config, 'prototype_disc_use_learned_prior', False))} "
             f"proto_disc_condition={getattr(config, 'prototype_disc_condition', 'kappa')} "
             f"proto_disc_coef={float(getattr(config, 'prototype_disc_reward_coef', 0.0))} "
             f"compact_return_head={bool(getattr(config, 'use_compact_return_head', False))} "
@@ -2632,6 +2688,10 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"trans_active={process_metrics.get('transition_skill_reward_active', 0.0):.0f} "
                 f"proto_acc={process_metrics.get('proto_disc_acc', 0.0):.3f} "
                 f"proto_prior_acc={process_metrics.get('proto_disc_prior_acc', 0.0):.3f} "
+                f"proto_null={process_metrics.get('proto_disc_null_logp_mean', 0.0):.6f} "
+                f"proto_ar_kl={process_metrics.get('proto_ar_parallel_kl', 0.0):.6f} "
+                f"roster_kl_shuf={process_metrics.get('roster_ar_kl_shuffled', 0.0):.6f} "
+                f"sel_def={process_metrics.get('selection_independence_deficit', 0.0):.6f} "
                 f"proto_resid={process_metrics.get('proto_disc_residual_mean', 0.0):.6f} "
                 f"proto_reward={process_metrics.get('proto_disc_reward_mean', 0.0):.6f} "
                 f"proto_steps={process_metrics.get('proto_disc_reward_applied_steps', 0.0):.0f} "

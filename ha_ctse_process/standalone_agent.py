@@ -764,6 +764,21 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
         return log_probs, entropy_matrix, values
 
 
+@dataclass(frozen=True)
+class HighActionSample:
+    skills: torch.Tensor
+    durations: torch.Tensor
+    logp: torch.Tensor
+    entropy: torch.Tensor
+    value: torch.Tensor
+    skill_logp: torch.Tensor
+    duration_logp: torch.Tensor
+    skill_entropy: torch.Tensor
+    duration_entropy: torch.Tensor
+    skill_logits: torch.Tensor
+    duration_logits: torch.Tensor
+
+
 class SkillDurationPolicy(nn.Module):
     """High-level skill-duration policy conditioned on c_tau and g_tau."""
 
@@ -777,11 +792,13 @@ class SkillDurationPolicy(nn.Module):
         team_code_dim: int,
         omega_dim: int = 0,
         agent_relevance_dim: int = 0,
+        ar_prefix_dim: int = 0,
     ):
         super().__init__()
         self.n_skills = int(n_skills)
         self.omega_dim = int(max(omega_dim, 0))
         self.agent_relevance_dim = int(max(agent_relevance_dim, 0))
+        self.ar_prefix_dim = int(max(ar_prefix_dim, 0))
         input_dim = (
             int(obs_dim)
             + int(n_skills)
@@ -790,6 +807,7 @@ class SkillDurationPolicy(nn.Module):
             + int(team_code_dim)
             + self.omega_dim
             + self.agent_relevance_dim
+            + self.ar_prefix_dim
         )
         self.input = nn.Sequential(
             nn.LayerNorm(input_dim),
@@ -811,6 +829,7 @@ class SkillDurationPolicy(nn.Module):
         team_vector: torch.Tensor,
         omega: torch.Tensor | None = None,
         agent_relevance: torch.Tensor | None = None,
+        ar_prefix: torch.Tensor | None = None,
     ) -> torch.Tensor:
         prev_onehot = F.one_hot(prev_skills.long().clamp(0, self.n_skills - 1), num_classes=self.n_skills).float()
         age_feature = torch.log1p(ages.float()).unsqueeze(-1) / 10.0
@@ -828,6 +847,10 @@ class SkillDurationPolicy(nn.Module):
                     device=obs.device,
                 )
             pieces.append(agent_relevance.float())
+        if self.ar_prefix_dim > 0:
+            if ar_prefix is None:
+                ar_prefix = torch.zeros(obs.shape[0], self.ar_prefix_dim, dtype=obs.dtype, device=obs.device)
+            pieces.append(ar_prefix.float())
         return self.input(torch.cat(pieces, dim=-1))
 
     def logits(
@@ -839,9 +862,67 @@ class SkillDurationPolicy(nn.Module):
         team_vector: torch.Tensor,
         omega: torch.Tensor | None = None,
         agent_relevance: torch.Tensor | None = None,
+        ar_prefix: torch.Tensor | None = None,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        hidden = self._features(obs, prev_skills, ages, compact, team_vector, omega, agent_relevance)
+        hidden = self._features(
+            obs,
+            prev_skills,
+            ages,
+            compact,
+            team_vector,
+            omega,
+            agent_relevance,
+            ar_prefix,
+        )
         return self.skill_head(hidden), self.duration_head(hidden), self.value_head(hidden).squeeze(-1)
+
+    def act_with_parts(
+        self,
+        obs: torch.Tensor,
+        prev_skills: torch.Tensor,
+        ages: torch.Tensor,
+        compact: torch.Tensor,
+        team_vector: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
+        ar_prefix: torch.Tensor | None = None,
+        deterministic: bool = False,
+    ) -> HighActionSample:
+        skill_logits, duration_logits, value = self.logits(
+            obs,
+            prev_skills,
+            ages,
+            compact,
+            team_vector,
+            omega=omega,
+            agent_relevance=agent_relevance,
+            ar_prefix=ar_prefix,
+        )
+        skill_dist = Categorical(logits=skill_logits)
+        duration_dist = Categorical(logits=duration_logits)
+        if deterministic:
+            skills = torch.argmax(skill_logits, dim=-1)
+            durations = torch.argmax(duration_logits, dim=-1)
+        else:
+            skills = skill_dist.sample()
+            durations = duration_dist.sample()
+        skill_logp = skill_dist.log_prob(skills)
+        duration_logp = duration_dist.log_prob(durations)
+        skill_entropy = skill_dist.entropy()
+        duration_entropy = duration_dist.entropy()
+        return HighActionSample(
+            skills=skills,
+            durations=durations,
+            logp=skill_logp + duration_logp,
+            entropy=skill_entropy + duration_entropy,
+            value=value,
+            skill_logp=skill_logp,
+            duration_logp=duration_logp,
+            skill_entropy=skill_entropy,
+            duration_entropy=duration_entropy,
+            skill_logits=skill_logits,
+            duration_logits=duration_logits,
+        )
 
     def act(
         self,
@@ -852,9 +933,10 @@ class SkillDurationPolicy(nn.Module):
         team_vector: torch.Tensor,
         omega: torch.Tensor | None = None,
         agent_relevance: torch.Tensor | None = None,
+        ar_prefix: torch.Tensor | None = None,
         deterministic: bool = False,
     ):
-        skill_logits, duration_logits, value = self.logits(
+        sample = self.act_with_parts(
             obs,
             prev_skills,
             ages,
@@ -862,18 +944,10 @@ class SkillDurationPolicy(nn.Module):
             team_vector,
             omega=omega,
             agent_relevance=agent_relevance,
+            ar_prefix=ar_prefix,
+            deterministic=deterministic,
         )
-        skill_dist = Categorical(logits=skill_logits)
-        duration_dist = Categorical(logits=duration_logits)
-        if deterministic:
-            skills = torch.argmax(skill_logits, dim=-1)
-            durations = torch.argmax(duration_logits, dim=-1)
-        else:
-            skills = skill_dist.sample()
-            durations = duration_dist.sample()
-        logp = skill_dist.log_prob(skills) + duration_dist.log_prob(durations)
-        entropy = skill_dist.entropy() + duration_dist.entropy()
-        return skills, durations, logp, entropy, value
+        return sample.skills, sample.durations, sample.logp, sample.entropy, sample.value
 
     def evaluate(
         self,
@@ -886,6 +960,7 @@ class SkillDurationPolicy(nn.Module):
         durations: torch.Tensor,
         omega: torch.Tensor | None = None,
         agent_relevance: torch.Tensor | None = None,
+        ar_prefix: torch.Tensor | None = None,
     ):
         skill_logits, duration_logits, value = self.logits(
             obs,
@@ -895,6 +970,7 @@ class SkillDurationPolicy(nn.Module):
             team_vector,
             omega=omega,
             agent_relevance=agent_relevance,
+            ar_prefix=ar_prefix,
         )
         skill_dist = Categorical(logits=skill_logits)
         duration_dist = Categorical(logits=duration_logits)
@@ -948,6 +1024,16 @@ class Segment:
     skill_age_prev: int = 0
     team_code: int = 0
     team_logp_weight: float = 1.0
+    skill_assignment_logp: float = 0.0
+    duration_assignment_logp: float = 0.0
+    ar_parallel_kl_start: float = 0.0
+    ar_prefix_start: np.ndarray | None = None
+    roster_active_skills_start: np.ndarray | None = None
+    roster_active_ages_start: np.ndarray | None = None
+    roster_active_mask_start: np.ndarray | None = None
+    roster_ar_kl_zeroed_start: float = 0.0
+    roster_ar_kl_shuffled_start: float = 0.0
+    selection_independence_deficit_start: float = 0.0
     initial_assignment: bool = False
     switched: bool = False
     duration_target: int = 1
@@ -1041,6 +1127,16 @@ class SegmentManager:
         skill_age_prev: int = 0,
         team_code: int = 0,
         team_logp_weight: float = 1.0,
+        skill_assignment_logp: float = 0.0,
+        duration_assignment_logp: float = 0.0,
+        ar_parallel_kl_start: float = 0.0,
+        ar_prefix_start=None,
+        roster_active_skills_start=None,
+        roster_active_ages_start=None,
+        roster_active_mask_start=None,
+        roster_ar_kl_zeroed_start: float = 0.0,
+        roster_ar_kl_shuffled_start: float = 0.0,
+        selection_independence_deficit_start: float = 0.0,
         initial_assignment: bool = False,
         switched: bool = False,
         duration_target: int = 1,
@@ -1079,6 +1175,32 @@ class SegmentManager:
             skill_age_prev=int(skill_age_prev),
             team_code=int(team_code),
             team_logp_weight=float(team_logp_weight),
+            skill_assignment_logp=float(skill_assignment_logp),
+            duration_assignment_logp=float(duration_assignment_logp),
+            ar_parallel_kl_start=float(ar_parallel_kl_start),
+            ar_prefix_start=(
+                None
+                if ar_prefix_start is None
+                else np.asarray(ar_prefix_start, dtype=np.float32).reshape(-1)
+            ),
+            roster_active_skills_start=(
+                None
+                if roster_active_skills_start is None
+                else np.asarray(roster_active_skills_start, dtype=np.int64).reshape(-1)
+            ),
+            roster_active_ages_start=(
+                None
+                if roster_active_ages_start is None
+                else np.asarray(roster_active_ages_start, dtype=np.float32).reshape(-1)
+            ),
+            roster_active_mask_start=(
+                None
+                if roster_active_mask_start is None
+                else np.asarray(roster_active_mask_start, dtype=np.bool_).reshape(-1)
+            ),
+            roster_ar_kl_zeroed_start=float(roster_ar_kl_zeroed_start),
+            roster_ar_kl_shuffled_start=float(roster_ar_kl_shuffled_start),
+            selection_independence_deficit_start=float(selection_independence_deficit_start),
             initial_assignment=bool(initial_assignment),
             switched=bool(switched),
             duration_target=int(duration_target),
@@ -1184,6 +1306,17 @@ class StandaloneProcessAgent:
         self.n_skills = int(getattr(config, "n_z", 3))
         if self.use_prototype_response_skills:
             self.n_skills = int(self.opt_num_prototypes + self.prototype_skill_extra_codes)
+        elif int(getattr(config, "legacy_n_skills_override", 0) or 0) > 0:
+            self.n_skills = int(getattr(config, "legacy_n_skills_override"))
+        self.use_autoregressive_selection = bool(
+            self.use_prototype_response_skills
+            and getattr(config, "use_autoregressive_selection", True)
+        )
+        self.parallel_selection = bool(getattr(config, "parallel_selection", False))
+        requested_ar_prefix_mode = str(getattr(config, "ar_prefix_mode", "same_check")).lower()
+        if requested_ar_prefix_mode not in {"same_check", "roster"}:
+            raise ValueError("ar_prefix_mode must be one of: same_check, roster")
+        self.ar_prefix_mode = requested_ar_prefix_mode if self.use_autoregressive_selection else "none"
         self.duration_candidates = tuple(getattr(config, "skill_lifetime_candidates", (3, 7, 13, 24)))
         if not self.duration_candidates:
             self.duration_candidates = (1,)
@@ -1320,6 +1453,7 @@ class StandaloneProcessAgent:
         if self.prototype_disc_condition not in {"kappa", "omega", "none"}:
             raise ValueError("prototype_disc_condition must be one of: kappa, omega, none")
         self.prototype_disc_hidden_dim = int(getattr(config, "prototype_disc_hidden_dim", 0) or hidden)
+        self.prototype_disc_use_learned_prior = bool(getattr(config, "prototype_disc_use_learned_prior", False))
         self.prototype_disc_prior_coef = float(getattr(config, "prototype_disc_prior_coef", 1.0))
         self.use_transition_skill_discriminator = bool(
             getattr(config, "use_transition_skill_discriminator", True)
@@ -1458,6 +1592,13 @@ class StandaloneProcessAgent:
         self.bridge = CompactTeamBridge(compact_dim, team_code_dim, num_team_codes, bridge_type).to(self.device)
         high_omega_dim = self.opt_num_prototypes if self.high_condition_on_omega else 0
         high_agent_relevance_dim = self.opt_num_prototypes if self.use_agent_prototype_relevance else 0
+        high_ar_prefix_dim = 0
+        if self.use_autoregressive_selection:
+            high_ar_prefix_dim = (
+                self.n_skills * (1 + 2 * self.n_agents)
+                if self.ar_prefix_mode == "roster"
+                else self.n_skills
+            )
         self.high = SkillDurationPolicy(
             self.obs_dim,
             self.n_skills,
@@ -1467,6 +1608,7 @@ class StandaloneProcessAgent:
             team_code_dim,
             omega_dim=high_omega_dim,
             agent_relevance_dim=high_agent_relevance_dim,
+            ar_prefix_dim=high_ar_prefix_dim,
         ).to(self.device)
         self.use_compact_return_head = bool(getattr(config, "use_compact_return_head", False))
         self.compact_return_coef = float(getattr(config, "compact_return_coef", 0.1))
@@ -1620,6 +1762,7 @@ class StandaloneProcessAgent:
                 n_skills=self.n_skills,
                 condition_dim=self.prototype_disc_condition_dim,
                 hidden_dim=self.prototype_disc_hidden_dim,
+                use_learned_prior=self.prototype_disc_use_learned_prior,
                 prior_coef=self.prototype_disc_prior_coef,
             ).to(self.device)
             if self.enable_prototype_disc_probe
@@ -1977,6 +2120,170 @@ class StandaloneProcessAgent:
         self._situation_hazard_events = 0
         self.segments = SegmentManager(self.num_envs, self.n_agents)
 
+    def _ar_prefix_dim(self) -> int:
+        return int(getattr(self.high, "ar_prefix_dim", 0))
+
+    def _empty_ar_prefix(self) -> torch.Tensor:
+        return torch.zeros(1, self._ar_prefix_dim(), dtype=torch.float32, device=self.device)
+
+    def _updated_ar_prefix(self, prefix: torch.Tensor, skill: int) -> torch.Tensor:
+        updated = prefix.clone()
+        if 0 <= int(skill) < int(self.n_skills):
+            updated[0, int(skill)] += 1.0 / float(max(self.n_agents, 1))
+        return updated
+
+    def _roster_age_scale(self) -> float:
+        max_candidate = max(int(value) for value in self.duration_candidates) if self.duration_candidates else 1
+        return float(max(max_candidate, 1))
+
+    def _build_roster_ar_prefix(
+        self,
+        agent_id: int,
+        active_skills,
+        skill_ages,
+        active_mask,
+        processed_new_skills=None,
+    ) -> torch.Tensor:
+        dim = self._ar_prefix_dim()
+        prefix = torch.zeros(1, dim, dtype=torch.float32, device=self.device)
+        if dim <= 0:
+            return prefix
+        active_skills_t = torch.as_tensor(active_skills, dtype=torch.long, device=self.device).reshape(-1)
+        skill_ages_t = torch.as_tensor(skill_ages, dtype=torch.float32, device=self.device).reshape(-1)
+        active_mask_t = torch.as_tensor(active_mask, dtype=torch.bool, device=self.device).reshape(-1)
+        n_agents = min(int(self.n_agents), int(active_skills_t.numel()), int(skill_ages_t.numel()), int(active_mask_t.numel()))
+        scale = 1.0 / float(max(self.n_agents, 1))
+        age_scale = self._roster_age_scale()
+        identity_offset = int(self.n_skills)
+        age_offset = identity_offset + int(self.n_agents) * int(self.n_skills)
+        for other_id in range(n_agents):
+            if int(other_id) == int(agent_id) or not bool(active_mask_t[other_id].item()):
+                continue
+            skill = int(active_skills_t[other_id].item())
+            if skill < 0 or skill >= int(self.n_skills):
+                continue
+            prefix[0, skill] += scale
+            if identity_offset + other_id * self.n_skills + skill < dim:
+                prefix[0, identity_offset + other_id * self.n_skills + skill] = scale
+            if age_offset + other_id * self.n_skills + skill < dim:
+                age_norm = float(torch.clamp(skill_ages_t[other_id], min=0.0).item()) / age_scale
+                prefix[0, age_offset + other_id * self.n_skills + skill] = scale * min(age_norm, 1.0)
+        for skill in processed_new_skills or []:
+            skill = int(skill)
+            if 0 <= skill < int(self.n_skills):
+                prefix[0, skill] += scale
+        return prefix
+
+    def _build_shuffled_roster_ar_prefix(
+        self,
+        agent_id: int,
+        active_skills,
+        skill_ages,
+        active_mask,
+        processed_new_skills=None,
+    ) -> torch.Tensor:
+        skills = np.asarray(active_skills, dtype=np.int64).reshape(-1).copy()
+        mask = np.asarray(active_mask, dtype=np.bool_).reshape(-1).copy()
+        ages = np.asarray(skill_ages, dtype=np.float32).reshape(-1).copy()
+        n = min(skills.size, mask.size, ages.size, int(self.n_agents))
+        candidate = [idx for idx in range(n) if idx != int(agent_id) and bool(mask[idx])]
+        if len(candidate) > 1:
+            original_skills = skills[candidate].copy()
+            original_ages = ages[candidate].copy()
+            skills[candidate] = np.roll(original_skills, 1)
+            ages[candidate] = np.roll(original_ages, 1)
+        return self._build_roster_ar_prefix(
+            agent_id=agent_id,
+            active_skills=skills,
+            skill_ages=ages,
+            active_mask=mask,
+            processed_new_skills=processed_new_skills,
+        )
+
+    def _segment_ar_prefix_tensor(self, segments: list[Segment]) -> torch.Tensor | None:
+        ar_prefix_dim = self._ar_prefix_dim()
+        if ar_prefix_dim <= 0:
+            return None
+        ar_prefix_np = np.zeros((len(segments), ar_prefix_dim), dtype=np.float32)
+        for idx, segment in enumerate(segments):
+            if segment.ar_prefix_start is None:
+                if (
+                    self.ar_prefix_mode == "roster"
+                    and segment.roster_active_skills_start is not None
+                    and segment.roster_active_ages_start is not None
+                    and segment.roster_active_mask_start is not None
+                ):
+                    rebuilt = self._build_roster_ar_prefix(
+                        agent_id=int(segment.agent_id),
+                        active_skills=segment.roster_active_skills_start,
+                        skill_ages=segment.roster_active_ages_start,
+                        active_mask=segment.roster_active_mask_start,
+                    )
+                    prefix = rebuilt.detach().cpu().numpy().reshape(-1)
+                    ar_prefix_np[idx, : min(ar_prefix_dim, prefix.size)] = prefix[: min(ar_prefix_dim, prefix.size)]
+                continue
+            else:
+                prefix = np.asarray(segment.ar_prefix_start, dtype=np.float32).reshape(-1)
+                ar_prefix_np[idx, : min(ar_prefix_dim, prefix.size)] = prefix[: min(ar_prefix_dim, prefix.size)]
+                continue
+        return torch.as_tensor(ar_prefix_np, dtype=torch.float32, device=self.device)
+
+    def _roster_selection_metrics(self, segments: list[Segment]) -> dict[str, float]:
+        selected: list[int] = []
+        same_flags: list[float] = []
+        active_counts: list[int] = []
+        roster_skill_counts = np.zeros(int(self.n_skills), dtype=np.float64)
+        for segment in segments:
+            if segment.roster_active_skills_start is None or segment.roster_active_mask_start is None:
+                continue
+            skills = np.asarray(segment.roster_active_skills_start, dtype=np.int64).reshape(-1)
+            mask = np.asarray(segment.roster_active_mask_start, dtype=np.bool_).reshape(-1)
+            n = min(skills.size, mask.size, int(self.n_agents))
+            skill = int(segment.skill)
+            coactive: list[int] = []
+            for other_id in range(n):
+                if other_id == int(segment.agent_id) or not bool(mask[other_id]):
+                    continue
+                other_skill = int(skills[other_id])
+                if 0 <= other_skill < int(self.n_skills):
+                    coactive.append(other_skill)
+                    roster_skill_counts[other_skill] += 1.0
+            if coactive and 0 <= skill < int(self.n_skills):
+                selected.append(skill)
+                active_counts.append(len(coactive))
+                same_flags.append(1.0 if skill in coactive else 0.0)
+        if not selected:
+            return {
+                "selection_independence_available": 0.0,
+                "selection_same_skill_rate": 0.0,
+                "selection_independence_null_rate": 0.0,
+                "selection_independence_deficit": 0.0,
+            }
+        total_roster = float(np.sum(roster_skill_counts))
+        if total_roster <= 0:
+            probs = np.ones(int(self.n_skills), dtype=np.float64) / float(max(self.n_skills, 1))
+        else:
+            probs = roster_skill_counts / total_roster
+        expected = []
+        for skill, active_count in zip(selected, active_counts):
+            p = float(probs[int(skill)])
+            expected.append(1.0 - (1.0 - p) ** int(max(active_count, 1)))
+        same_rate = float(np.mean(np.asarray(same_flags, dtype=np.float64)))
+        null_rate = float(np.mean(np.asarray(expected, dtype=np.float64))) if expected else 0.0
+        return {
+            "selection_independence_available": 1.0,
+            "selection_same_skill_rate": same_rate,
+            "selection_independence_null_rate": null_rate,
+            "selection_independence_deficit": same_rate - null_rate,
+        }
+
+    @staticmethod
+    def _categorical_kl(logits_p: torch.Tensor, logits_q: torch.Tensor) -> torch.Tensor:
+        log_p = F.log_softmax(logits_p.float(), dim=-1)
+        log_q = F.log_softmax(logits_q.float(), dim=-1)
+        p = torch.exp(log_p)
+        return torch.sum(p * (log_p - log_q), dim=-1)
+
     def maybe_assign_skills(
         self,
         obs: np.ndarray,
@@ -2104,16 +2411,157 @@ class StandaloneProcessAgent:
             if self.use_agent_prototype_relevance:
                 agent_relevance_t = agent_relevance[0, expired_ids, :]
             with torch.no_grad():
-                skills, duration_idx, logp, entropy, value = self.high.act(
-                    obs_t,
-                    prev_t,
-                    age_t,
-                    compact_t,
-                    team_vector_t,
-                    omega=omega_t,
-                    agent_relevance=agent_relevance_t,
-                    deterministic=deterministic,
-                )
+                if self.use_autoregressive_selection and not self.parallel_selection:
+                    skill_parts: list[torch.Tensor] = []
+                    duration_parts: list[torch.Tensor] = []
+                    logp_parts: list[torch.Tensor] = []
+                    entropy_parts: list[torch.Tensor] = []
+                    value_parts: list[torch.Tensor] = []
+                    skill_logp_parts: list[torch.Tensor] = []
+                    duration_logp_parts: list[torch.Tensor] = []
+                    ar_prefix_rows: list[np.ndarray] = []
+                    ar_parallel_kl_rows: list[float] = []
+                    roster_skill_rows: list[np.ndarray | None] = []
+                    roster_age_rows: list[np.ndarray | None] = []
+                    roster_mask_rows: list[np.ndarray | None] = []
+                    roster_kl_zero_rows: list[float] = []
+                    roster_kl_shuffled_rows: list[float] = []
+                    selection_deficit_rows: list[float] = []
+                    ar_prefix = self._empty_ar_prefix()
+                    temp_active_skills = self.active_skills[env_id].copy()
+                    temp_skill_ages = self.skill_age[env_id].copy()
+                    temp_active_mask = self.has_active_skill[env_id].copy()
+                    if self.ar_prefix_mode == "roster":
+                        temp_active_mask[expired_ids] = False
+                    for local_idx in range(len(expired_ids)):
+                        agent_id = int(expired_ids[local_idx])
+                        row_slice = slice(local_idx, local_idx + 1)
+                        roster_skills_snapshot = None
+                        roster_ages_snapshot = None
+                        roster_mask_snapshot = None
+                        if self.ar_prefix_mode == "roster":
+                            roster_skills_snapshot = temp_active_skills.copy()
+                            roster_ages_snapshot = temp_skill_ages.copy()
+                            roster_mask_snapshot = temp_active_mask.copy()
+                            ar_prefix = self._build_roster_ar_prefix(
+                                agent_id=agent_id,
+                                active_skills=roster_skills_snapshot,
+                                skill_ages=roster_ages_snapshot,
+                                active_mask=roster_mask_snapshot,
+                            )
+                        sample = self.high.act_with_parts(
+                            obs_t[row_slice],
+                            prev_t[row_slice],
+                            age_t[row_slice],
+                            compact_t[row_slice],
+                            team_vector_t[row_slice],
+                            omega=None if omega_t is None else omega_t[row_slice],
+                            agent_relevance=None if agent_relevance_t is None else agent_relevance_t[row_slice],
+                            ar_prefix=ar_prefix,
+                            deterministic=deterministic,
+                        )
+                        zero_prefix = torch.zeros_like(ar_prefix)
+                        zero_skill_logits, _zero_duration_logits, _zero_value = self.high.logits(
+                            obs_t[row_slice],
+                            prev_t[row_slice],
+                            age_t[row_slice],
+                            compact_t[row_slice],
+                            team_vector_t[row_slice],
+                            omega=None if omega_t is None else omega_t[row_slice],
+                            agent_relevance=None if agent_relevance_t is None else agent_relevance_t[row_slice],
+                            ar_prefix=zero_prefix,
+                        )
+                        shuffled_kl = 0.0
+                        if self.ar_prefix_mode == "roster" and roster_skills_snapshot is not None:
+                            shuffled_prefix = self._build_shuffled_roster_ar_prefix(
+                                agent_id=agent_id,
+                                active_skills=roster_skills_snapshot,
+                                skill_ages=roster_ages_snapshot,
+                                active_mask=roster_mask_snapshot,
+                            )
+                            shuffled_skill_logits, _shuffled_duration_logits, _shuffled_value = self.high.logits(
+                                obs_t[row_slice],
+                                prev_t[row_slice],
+                                age_t[row_slice],
+                                compact_t[row_slice],
+                                team_vector_t[row_slice],
+                                omega=None if omega_t is None else omega_t[row_slice],
+                                agent_relevance=None if agent_relevance_t is None else agent_relevance_t[row_slice],
+                                ar_prefix=shuffled_prefix,
+                            )
+                            shuffled_kl = float(
+                                self._categorical_kl(sample.skill_logits, shuffled_skill_logits)
+                                .detach()
+                                .cpu()
+                                .item()
+                            )
+                        zero_kl = float(
+                            self._categorical_kl(sample.skill_logits, zero_skill_logits)
+                            .detach()
+                            .cpu()
+                            .item()
+                        )
+                        ar_parallel_kl_rows.append(
+                            shuffled_kl if self.ar_prefix_mode == "roster" else zero_kl
+                        )
+                        roster_kl_zero_rows.append(zero_kl if self.ar_prefix_mode == "roster" else 0.0)
+                        roster_kl_shuffled_rows.append(shuffled_kl if self.ar_prefix_mode == "roster" else 0.0)
+                        selection_deficit_rows.append(0.0)
+                        roster_skill_rows.append(roster_skills_snapshot)
+                        roster_age_rows.append(roster_ages_snapshot)
+                        roster_mask_rows.append(roster_mask_snapshot)
+                        ar_prefix_rows.append(ar_prefix.detach().cpu().numpy().reshape(-1).astype(np.float32))
+                        skill_parts.append(sample.skills)
+                        duration_parts.append(sample.durations)
+                        logp_parts.append(sample.logp)
+                        entropy_parts.append(sample.entropy)
+                        value_parts.append(sample.value)
+                        skill_logp_parts.append(sample.skill_logp)
+                        duration_logp_parts.append(sample.duration_logp)
+                        sampled_skill = int(sample.skills.detach().cpu().item())
+                        if self.ar_prefix_mode == "roster":
+                            temp_active_skills[agent_id] = sampled_skill
+                            temp_skill_ages[agent_id] = 0
+                            temp_active_mask[agent_id] = True
+                        else:
+                            ar_prefix = self._updated_ar_prefix(ar_prefix, sampled_skill)
+                    skills = torch.cat(skill_parts, dim=0)
+                    duration_idx = torch.cat(duration_parts, dim=0)
+                    logp = torch.cat(logp_parts, dim=0)
+                    entropy = torch.cat(entropy_parts, dim=0)
+                    value = torch.cat(value_parts, dim=0)
+                    skill_logp = torch.cat(skill_logp_parts, dim=0)
+                    duration_logp = torch.cat(duration_logp_parts, dim=0)
+                else:
+                    sample = self.high.act_with_parts(
+                        obs_t,
+                        prev_t,
+                        age_t,
+                        compact_t,
+                        team_vector_t,
+                        omega=omega_t,
+                        agent_relevance=agent_relevance_t,
+                        ar_prefix=None,
+                        deterministic=deterministic,
+                    )
+                    skills = sample.skills
+                    duration_idx = sample.durations
+                    logp = sample.logp
+                    entropy = sample.entropy
+                    value = sample.value
+                    skill_logp = sample.skill_logp
+                    duration_logp = sample.duration_logp
+                    ar_prefix_rows = [
+                        np.zeros(self._ar_prefix_dim(), dtype=np.float32)
+                        for _ in range(len(expired_ids))
+                    ]
+                    ar_parallel_kl_rows = [0.0 for _ in range(len(expired_ids))]
+                    roster_skill_rows = [None for _ in range(len(expired_ids))]
+                    roster_age_rows = [None for _ in range(len(expired_ids))]
+                    roster_mask_rows = [None for _ in range(len(expired_ids))]
+                    roster_kl_zero_rows = [0.0 for _ in range(len(expired_ids))]
+                    roster_kl_shuffled_rows = [0.0 for _ in range(len(expired_ids))]
+                    selection_deficit_rows = [0.0 for _ in range(len(expired_ids))]
                 if self.high_value_norm is not None:
                     value = self.high_value_norm.denormalize_tensor(value)
             chosen_skills = skills.cpu().numpy()
@@ -2127,6 +2575,8 @@ class StandaloneProcessAgent:
             old_logp = logp.cpu().numpy() + float(team_logp_share)
             old_entropy = entropy.cpu().numpy() + float(team_entropy_share)
             old_value = value.cpu().numpy()
+            skill_assignment_logp = skill_logp.cpu().numpy()
+            duration_assignment_logp = duration_logp.cpu().numpy()
             for local_idx, agent_id in enumerate(expired_ids):
                 prev_skill = int(prev_np[local_idx])
                 agent_state = None
@@ -2160,6 +2610,16 @@ class StandaloneProcessAgent:
                     skill_age_prev=int(age_np[local_idx]),
                     team_code=team_code_value,
                     team_logp_weight=team_logp_weight,
+                    skill_assignment_logp=float(skill_assignment_logp[local_idx]),
+                    duration_assignment_logp=float(duration_assignment_logp[local_idx]),
+                    ar_parallel_kl_start=float(ar_parallel_kl_rows[local_idx]),
+                    ar_prefix_start=ar_prefix_rows[local_idx],
+                    roster_active_skills_start=roster_skill_rows[local_idx],
+                    roster_active_ages_start=roster_age_rows[local_idx],
+                    roster_active_mask_start=roster_mask_rows[local_idx],
+                    roster_ar_kl_zeroed_start=float(roster_kl_zero_rows[local_idx]),
+                    roster_ar_kl_shuffled_start=float(roster_kl_shuffled_rows[local_idx]),
+                    selection_independence_deficit_start=float(selection_deficit_rows[local_idx]),
                     initial_assignment=initial,
                     switched=switched,
                     duration_target=int(chosen_durations[local_idx]),
@@ -2685,6 +3145,11 @@ class StandaloneProcessAgent:
         kappa_rows: list[int] = []
         omega_rows: list[np.ndarray] = []
         rel_rows: list[np.ndarray] = []
+        null_logp_rows: list[float] = []
+        ar_parallel_kl_rows: list[float] = []
+        roster_kl_zero_rows: list[float] = []
+        roster_kl_shuffled_rows: list[float] = []
+        selection_deficit_rows: list[float] = []
         rollout_rows: list[int] = []
         agent_rows: list[int] = []
         env_reward_rows: list[float] = []
@@ -2725,6 +3190,11 @@ class StandaloneProcessAgent:
                 kappa_rows.append(int(segment.kappa_start))
                 omega_rows.append(omega)
                 rel_rows.append(relevance)
+                null_logp_rows.append(float(segment.skill_assignment_logp))
+                ar_parallel_kl_rows.append(float(segment.ar_parallel_kl_start))
+                roster_kl_zero_rows.append(float(segment.roster_ar_kl_zeroed_start))
+                roster_kl_shuffled_rows.append(float(segment.roster_ar_kl_shuffled_start))
+                selection_deficit_rows.append(float(segment.selection_independence_deficit_start))
                 rollout_rows.append(int(segment.rollout_indices[step_idx]))
                 agent_rows.append(int(segment.agent_id))
                 env_reward_rows.append(float(segment.rewards[step_idx]))
@@ -2743,6 +3213,11 @@ class StandaloneProcessAgent:
             "kappas": np.asarray(kappa_rows, dtype=np.int64)[chosen],
             "omegas": np.asarray(omega_rows, dtype=np.float32)[chosen],
             "agent_relevance": np.asarray(rel_rows, dtype=np.float32)[chosen],
+            "null_logp": np.asarray(null_logp_rows, dtype=np.float32)[chosen],
+            "ar_parallel_kl": np.asarray(ar_parallel_kl_rows, dtype=np.float32)[chosen],
+            "roster_ar_kl_zeroed": np.asarray(roster_kl_zero_rows, dtype=np.float32)[chosen],
+            "roster_ar_kl_shuffled": np.asarray(roster_kl_shuffled_rows, dtype=np.float32)[chosen],
+            "selection_independence_deficit": np.asarray(selection_deficit_rows, dtype=np.float32)[chosen],
             "rollout_indices": np.asarray(rollout_rows, dtype=np.int64)[chosen],
             "agent_ids": np.asarray(agent_rows, dtype=np.int64)[chosen],
             "env_rewards": np.asarray(env_reward_rows, dtype=np.float32)[chosen],
@@ -3093,6 +3568,11 @@ class StandaloneProcessAgent:
                 device=self.device,
             )
             proto_condition_t = self._prototype_disc_condition(prototype_batch, self.device)
+            proto_null_logp_t = torch.as_tensor(
+                prototype_batch["null_logp"],
+                dtype=torch.float32,
+                device=self.device,
+            )
             prototype_rollout_indices = np.asarray(prototype_batch["rollout_indices"], dtype=np.int64)
             prototype_agent_ids = np.asarray(prototype_batch["agent_ids"], dtype=np.int64)
             with torch.no_grad():
@@ -3100,13 +3580,21 @@ class StandaloneProcessAgent:
                     proto_next_obs_t,
                     proto_condition_t,
                     proto_labels_t,
+                    null_logp=proto_null_logp_t,
                     clip=self.prototype_disc_clip,
                 )
             proto_loss, prototype_metrics = self.prototype_discriminator.loss_and_metrics(
                 proto_next_obs_t,
                 proto_condition_t,
                 proto_labels_t,
+                null_logp=proto_null_logp_t,
             )
+            prototype_metrics["proto_assignment_logp_mean"] = float(np.mean(prototype_batch["null_logp"]))
+            prototype_metrics["proto_assignment_logp_std"] = float(np.std(prototype_batch["null_logp"]))
+            prototype_metrics["proto_ar_parallel_kl"] = float(np.mean(prototype_batch["ar_parallel_kl"]))
+            prototype_metrics["roster_ar_kl_zeroed"] = float(np.mean(prototype_batch["roster_ar_kl_zeroed"]))
+            prototype_metrics["roster_ar_kl_shuffled"] = float(np.mean(prototype_batch["roster_ar_kl_shuffled"]))
+            prototype_metrics.update(self._roster_selection_metrics(valid))
             self.prototype_disc_opt.zero_grad()
             proto_loss.backward()
             self.prototype_disc_opt.step()
@@ -3992,6 +4480,7 @@ class StandaloneProcessAgent:
             dtype=torch.long,
             device=self.device,
         )
+        ar_prefix_t = self._segment_ar_prefix_tensor([segments[idx] for idx in bootstrap_indices])
         with torch.no_grad():
             compact, _cd_loss, _cmi_loss, weights, _aggregation_entropy, agent_rel = self.compact(states, joint_obs)
             _team_code, team_vector, _team_logp, _team_entropy, _team_logits = self.bridge(
@@ -4012,6 +4501,7 @@ class StandaloneProcessAgent:
                 durations,
                 omega=omega_t,
                 agent_relevance=rel_t,
+                ar_prefix=ar_prefix_t,
             )
             if self.high_value_norm is not None:
                 bootstrap_values = self.high_value_norm.denormalize_tensor(bootstrap_values)
@@ -4226,6 +4716,7 @@ class StandaloneProcessAgent:
         durations = torch.as_tensor([s.duration_idx for s in segments], dtype=torch.long, device=self.device)
         old_logp = torch.as_tensor([s.high_logp for s in segments], dtype=torch.float32, device=self.device)
         old_value = torch.as_tensor([s.high_value for s in segments], dtype=torch.float32, device=self.device)
+        ar_prefix_t = self._segment_ar_prefix_tensor(segments)
 
         compact, cd_loss, cmi_loss, weights, aggregation_entropy, agent_relevance = self.compact(states, joint_obs)
         _team_code, team_vector, team_logp, team_entropy, _team_logits = self.bridge(
@@ -4246,6 +4737,7 @@ class StandaloneProcessAgent:
             durations,
             omega=omega_t,
             agent_relevance=rel_t,
+            ar_prefix=ar_prefix_t,
         )
         team_weights = torch.as_tensor(
             [s.team_logp_weight for s in segments],

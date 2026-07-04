@@ -1,0 +1,21 @@
+{
+  "remote": "ubuntu@203.0.113.10",
+  "remoteLogRoot": "/home/ubuntu/HMASD/logs_cloud_p0_32env",
+  "localLogRoot": "auto",
+  "intervalMinutes": 30,
+  "ssh": {
+    "sshExe": "ssh",
+    "scpExe": "scp",
+    "port": 22,
+    "identityFile": "C:\\Users\\wu\\.ssh\\hmasd_cloud_ed25519"
+  },
+  "sync": {
+    "includePatterns": [
+      "standalone_train.log",
+      "metrics/*.csv",
+      "_monitor/*.txt"
+    ],
+    "includeFigures": false,
+    "includeCheckpoints": false
+  }
+}

@@ -44,6 +44,13 @@ class Config(EnvConfig):
     # local observation and active skill.
     use_prototype_response_skills = False
     prototype_skill_extra_codes = 0
+    # Round 15: the normal Stage-1 path is autoregressive prototype assignment
+    # with the stored assignment log-prob as discriminator null.  Parallel
+    # selection and learned-prior residuals are explicit fallback ablations.
+    legacy_n_skills_override = 0
+    use_autoregressive_selection = True
+    parallel_selection = False
+    ar_prefix_mode = "same_check"  # same_check, roster
     high_condition_on_omega = False
     use_agent_prototype_relevance = False
     prototype_bank_ema_tau = 0.005
@@ -56,6 +63,7 @@ class Config(EnvConfig):
     prototype_disc_condition = "kappa"  # kappa, omega, none
     prototype_disc_lr = 5e-4
     prototype_disc_hidden_dim = 0
+    prototype_disc_use_learned_prior = False
     prototype_disc_prior_coef = 1.0
     use_compact_return_head = False
     compact_return_coef = 0.1

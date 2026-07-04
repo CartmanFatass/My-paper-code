@@ -150,6 +150,10 @@ class GInfoObjective(nn.Module):
             prev_skills = prev_skills.index_select(0, chosen)
             ages = ages.index_select(0, chosen)
             compact = compact.index_select(0, chosen)
+            if omega is not None:
+                omega = omega.index_select(0, chosen.to(device=omega.device))
+            if agent_relevance is not None:
+                agent_relevance = agent_relevance.index_select(0, chosen.to(device=agent_relevance.device))
             batch_size = int(high_obs.shape[0])
 
         codes = torch.arange(n_codes, dtype=torch.long, device=compact.device)

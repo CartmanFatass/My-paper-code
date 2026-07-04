@@ -69,3 +69,9 @@ test*.py
 debug/
 #test/
 temp_collection_log/
+
+# Keep the isolated remote log sync utility trackable under dist.
+!dist/
+dist/*
+!dist/remote_log_sync/
+!dist/remote_log_sync/**

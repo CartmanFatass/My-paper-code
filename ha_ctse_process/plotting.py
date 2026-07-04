@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import re
 import argparse
+import warnings
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +20,12 @@ try:
 
     matplotlib.use("Agg", force=True)
     import matplotlib.pyplot as plt
+
+    warnings.filterwarnings(
+        "ignore",
+        message="Tight layout not applied.*",
+        category=UserWarning,
+    )
 except Exception:  # pragma: no cover - plotting is optional in headless smoke.
     plt = None
 
@@ -207,6 +214,16 @@ UPDATE_FIELDS = (
     "proto_disc_prior_loss",
     "proto_disc_acc",
     "proto_disc_prior_acc",
+    "proto_disc_null_logp_mean",
+    "proto_assignment_logp_mean",
+    "proto_assignment_logp_std",
+    "proto_ar_parallel_kl",
+    "roster_ar_kl_zeroed",
+    "roster_ar_kl_shuffled",
+    "selection_independence_available",
+    "selection_same_skill_rate",
+    "selection_independence_null_rate",
+    "selection_independence_deficit",
     "proto_disc_residual_mean",
     "proto_disc_residual_positive_frac",
     "proto_disc_acc_by_skill_std",
@@ -897,6 +914,13 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("proto_disc_samples", "Prototype disc samples"),
         ("proto_disc_acc", "Prototype disc acc"),
         ("proto_disc_prior_acc", "Prototype prior acc"),
+        ("proto_disc_null_logp_mean", "Prototype null logp"),
+        ("proto_assignment_logp_mean", "Prototype assignment logp mean"),
+        ("proto_assignment_logp_std", "Prototype assignment logp std"),
+        ("proto_ar_parallel_kl", "Prototype AR vs parallel KL"),
+        ("roster_ar_kl_zeroed", "Roster AR vs zeroed KL"),
+        ("roster_ar_kl_shuffled", "Roster AR vs shuffled KL"),
+        ("selection_independence_deficit", "Selection independence deficit"),
         ("proto_disc_residual_mean", "Prototype residual"),
         ("proto_disc_residual_positive_frac", "Prototype residual positive"),
         ("proto_disc_reward_mean", "Prototype reward"),
@@ -1399,6 +1423,10 @@ LOG_KEY_ALIASES = {
     "trans_active": "transition_skill_reward_active",
     "proto_acc": "proto_disc_acc",
     "proto_prior_acc": "proto_disc_prior_acc",
+    "proto_null": "proto_disc_null_logp_mean",
+    "proto_ar_kl": "proto_ar_parallel_kl",
+    "roster_kl_shuf": "roster_ar_kl_shuffled",
+    "sel_def": "selection_independence_deficit",
     "proto_resid": "proto_disc_residual_mean",
     "proto_reward": "proto_disc_reward_mean",
     "proto_steps": "proto_disc_reward_applied_steps",
