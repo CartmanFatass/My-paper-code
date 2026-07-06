@@ -10,12 +10,12 @@ if [[ ! -f "ha_ctse_process/train.py" ]]; then
 fi
 
 PYTHON_BIN="${PYTHON:-python}"
-EXPERIMENTS="${EXPERIMENTS:-a2r_roster_reward}"
+EXPERIMENTS="${EXPERIMENTS:-core}"
 SEEDS="${SEEDS:-1}"
 TOTAL_TIMESTEPS="${TOTAL_TIMESTEPS:-960000}"
-NUM_ENVS="${NUM_ENVS:-32}"
+NUM_ENVS="${NUM_ENVS:-64}"
 DEVICE="${DEVICE:-cuda}"
-LOG_ROOT="${LOG_ROOT:-logs_cloud_r16_a2r_32env}"
+LOG_ROOT="${LOG_ROOT:-logs_cloud_r19_team_transition_64env}"
 COLLECTOR_BACKEND="${COLLECTOR_BACKEND:-subproc}"
 COLLECTOR_START_METHOD="${COLLECTOR_START_METHOD:-spawn}"
 DRY_RUN="${DRY_RUN:-0}"
@@ -32,33 +32,32 @@ for arg in "$@"; do
     --help|-h)
       cat <<'EOF'
 Usage:
-  EXPERIMENTS=a2r_roster_reward SEEDS=1 bash scripts/run_r16_a2r_remote_32env.sh
+  bash scripts/run_r19_team_transition_64env.sh --dry-run
+  EXPERIMENTS=a2_plus_t SEEDS=1 bash scripts/run_r19_team_transition_64env.sh
 
 Environment variables:
   PYTHON=/path/to/python
-  EXPERIMENTS=a2r_roster_reward,a2r_roster_coef01_entfloor,a2r_roster_coef01_entfloor_coef010,a2r_roster_coef005,a2_samecheck_reward,a1r_roster_probe
+  EXPERIMENTS=core|all|a2_baseline,a2_plus_t_probe,a2_plus_t
   SEEDS=1,2
   TOTAL_TIMESTEPS=960000
-  NUM_ENVS=32
+  NUM_ENVS=64
   DEVICE=cuda
-  LOG_ROOT=logs_cloud_r16_a2r_32env
+  LOG_ROOT=logs_cloud_r19_team_transition_64env
   COLLECTOR_BACKEND=subproc
   COLLECTOR_START_METHOD=spawn
   DRY_RUN=1
   CONTINUE_ON_ERROR=1
 
-Recommended multi-server split:
-  R16.5 confirmation:
-    seed-2 scaffolded replication:
-      EXPERIMENTS=a2r_roster_coef01_entfloor SEEDS=2
-    bounded retry to test whether floor_coef=0.1 holds duration entropy nearer 0.8:
-      EXPERIMENTS=a2r_roster_coef01_entfloor_coef010 SEEDS=1
+Recommended R19-only split:
+  server 1: EXPERIMENTS=a2_plus_t_probe
+  server 2: EXPERIMENTS=a2_plus_t
+  optional control server, only if no matched A2 same-check run exists:
+            EXPERIMENTS=a2_baseline
 
-  legacy R16 split:
-    server 1: EXPERIMENTS=a2r_roster_reward
-    server 2: EXPERIMENTS=a2r_roster_coef005
-    server 3: EXPERIMENTS=a2_samecheck_reward
-    server 4: EXPERIMENTS=a1r_roster_probe
+Arm meaning:
+  a2_baseline     = matched R15 A2 same-check coordinator-residual baseline.
+  a2_plus_t_probe = R19 team-transition heads trained/logged; team reward off.
+  a2_plus_t       = R19 team-transition reward on, one variable vs A2 baseline.
 EOF
       exit 0
       ;;
@@ -68,6 +67,12 @@ EOF
       ;;
   esac
 done
+
+if [[ "$EXPERIMENTS" == "core" ]]; then
+  EXPERIMENTS="a2_plus_t_probe,a2_plus_t"
+elif [[ "$EXPERIMENTS" == "all" ]]; then
+  EXPERIMENTS="a2_baseline,a2_plus_t_probe,a2_plus_t"
+fi
 
 IFS=',' read -r -a EXP_LIST <<< "$EXPERIMENTS"
 IFS=',' read -r -a SEED_LIST <<< "$SEEDS"
@@ -111,7 +116,7 @@ COMMON_ARGS=(
 
 print_header() {
   cat <<EOF
-HA-CTSE R16 A2r remote runner
+HA-CTSE R19 team-transition remote runner
   root:              $ROOT
   experiments:       $EXPERIMENTS
   seeds:             $SEEDS
@@ -122,7 +127,6 @@ HA-CTSE R16 A2r remote runner
   log_root:          $LOG_ROOT
   dry_run:           $DRY_RUN
   continue_on_error: $CONTINUE_ON_ERROR
-  primary read:      roster_ar_kl_shuffled + selection_independence_deficit
 EOF
 }
 
@@ -130,64 +134,11 @@ run_one() {
   local exp="$1"
   local seed="$2"
   local name
-  local guard_mode="kill"
   local -a extra_args
 
   case "$exp" in
-    a2r_roster_reward)
-      name="a2r_roster_reward_coef01"
-      extra_args=(
-        --ar_prefix_mode roster
-        --enable_prototype_disc_reward
-        --prototype_disc_reward_coef 0.1
-        --prototype_disc_clip 2.0
-        --prototype_disc_warmup_steps 20000
-      )
-      ;;
-    a2r_roster_coef01_entfloor)
-      name="a2r_roster_reward_coef01_entfloor"
-      guard_mode="warn"
-      extra_args=(
-        --ar_prefix_mode roster
-        --enable_prototype_disc_reward
-        --prototype_disc_reward_coef 0.1
-        --prototype_disc_clip 2.0
-        --prototype_disc_warmup_steps 20000
-        --reward_ratio_guard_mode warn
-        --enable_duration_entropy_floor
-        --duration_entropy_floor_threshold 0.8
-        --duration_entropy_floor_coef 0.05
-        --duration_entropy_floor_warmup_steps 0
-      )
-      ;;
-    a2r_roster_coef01_entfloor_coef010)
-      name="a2r_roster_reward_coef01_entfloor_coef010"
-      guard_mode="warn"
-      extra_args=(
-        --ar_prefix_mode roster
-        --enable_prototype_disc_reward
-        --prototype_disc_reward_coef 0.1
-        --prototype_disc_clip 2.0
-        --prototype_disc_warmup_steps 20000
-        --reward_ratio_guard_mode warn
-        --enable_duration_entropy_floor
-        --duration_entropy_floor_threshold 0.8
-        --duration_entropy_floor_coef 0.1
-        --duration_entropy_floor_warmup_steps 0
-      )
-      ;;
-    a2r_roster_coef005)
-      name="a2r_roster_reward_coef005"
-      extra_args=(
-        --ar_prefix_mode roster
-        --enable_prototype_disc_reward
-        --prototype_disc_reward_coef 0.05
-        --prototype_disc_clip 2.0
-        --prototype_disc_warmup_steps 20000
-      )
-      ;;
-    a2_samecheck_reward)
-      name="a2_samecheck_reward_coef01"
+    a2_baseline)
+      name="a2_baseline_samecheck_reward_coef01"
       extra_args=(
         --ar_prefix_mode same_check
         --enable_prototype_disc_reward
@@ -196,14 +147,37 @@ run_one() {
         --prototype_disc_warmup_steps 20000
       )
       ;;
-    a1r_roster_probe)
-      name="a1r_roster_probe_reward_off"
+    a2_plus_t_probe)
+      name="a2_plus_t_probe_reward_off"
       extra_args=(
-        --ar_prefix_mode roster
+        --ar_prefix_mode same_check
+        --enable_prototype_disc_reward
+        --prototype_disc_reward_coef 0.1
+        --prototype_disc_clip 2.0
+        --prototype_disc_warmup_steps 20000
+        --enable_team_transition_probe
+        --team_transition_coef 0.05
+        --team_transition_clip 2.0
+        --team_transition_warmup_steps 20000
+      )
+      ;;
+    a2_plus_t)
+      name="a2_plus_t_reward_coef005"
+      extra_args=(
+        --ar_prefix_mode same_check
+        --enable_prototype_disc_reward
+        --prototype_disc_reward_coef 0.1
+        --prototype_disc_clip 2.0
+        --prototype_disc_warmup_steps 20000
+        --enable_team_transition_probe
+        --enable_team_transition_reward
+        --team_transition_coef 0.05
+        --team_transition_clip 2.0
+        --team_transition_warmup_steps 20000
       )
       ;;
     *)
-      echo "Unknown experiment '$exp'. Use a2r_roster_reward, a2r_roster_coef01_entfloor, a2r_roster_coef01_entfloor_coef010, a2r_roster_coef005, a2_samecheck_reward, or a1r_roster_probe." >&2
+      echo "Unknown experiment '$exp'. Use core, all, a2_baseline, a2_plus_t_probe, or a2_plus_t." >&2
       return 2
       ;;
   esac
@@ -218,8 +192,7 @@ run_one() {
   )
 
   echo
-  echo "===== R16 A2r remote: $name seed=$seed ====="
-  echo "guard_mode: $guard_mode"
+  echo "===== HA-CTSE R19 team-transition: $name seed=$seed ====="
   printf '%q ' "${cmd[@]}"
   echo
 

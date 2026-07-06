@@ -88,7 +88,7 @@ function Invoke-R15Stage1Run {
 
 $requested = $Experiments.Split(",") | ForEach-Object { $_.Trim() } | Where-Object { $_ }
 if (-not $requested) {
-    throw "No experiments requested. Use control_legacy4, s1_probe, s1_reward, or r15_p1_ablation."
+    throw "No experiments requested. Use control_legacy4, s1_probe, s1_reward, r15_p1_ablation, a2_plus_t_probe, or a2_plus_t."
 }
 
 Write-Host "R15 Stage 1 steering-objective local CUDA runner"
@@ -100,7 +100,7 @@ Write-Host "  total_timesteps: $TotalTimesteps"
 Write-Host "  device:          $Device"
 Write-Host "  log_root:        $logRoot"
 Write-Host "  dry_run:         $DryRun"
-Write-Host "  default path:    A0+A1 only; reward/fallback arms require explicit names"
+Write-Host "  default path:    A0+A1 only; reward/fallback/R19 arms require explicit names"
 
 foreach ($exp in $requested) {
     switch ($exp) {
@@ -149,8 +149,45 @@ foreach ($exp in $requested) {
                 "--prototype_disc_warmup_steps", "20000"
             )
         }
+        "a2_plus_t_probe" {
+            Invoke-R15Stage1Run "a2_plus_t_probe_reward_off" @(
+                "--enable_prototype_response_skills",
+                "--enable_high_omega_conditioning",
+                "--enable_agent_prototype_relevance",
+                "--enable_per_agent_kappa",
+                "--enable_prototype_disc_probe",
+                "--enable_prototype_disc_reward",
+                "--prototype_disc_condition", "kappa",
+                "--prototype_disc_reward_coef", "0.1",
+                "--prototype_disc_clip", "2.0",
+                "--prototype_disc_warmup_steps", "20000",
+                "--enable_team_transition_probe",
+                "--team_transition_coef", "0.05",
+                "--team_transition_clip", "2.0",
+                "--team_transition_warmup_steps", "20000"
+            )
+        }
+        "a2_plus_t" {
+            Invoke-R15Stage1Run "a2_plus_t_reward_coef005" @(
+                "--enable_prototype_response_skills",
+                "--enable_high_omega_conditioning",
+                "--enable_agent_prototype_relevance",
+                "--enable_per_agent_kappa",
+                "--enable_prototype_disc_probe",
+                "--enable_prototype_disc_reward",
+                "--prototype_disc_condition", "kappa",
+                "--prototype_disc_reward_coef", "0.1",
+                "--prototype_disc_clip", "2.0",
+                "--prototype_disc_warmup_steps", "20000",
+                "--enable_team_transition_probe",
+                "--enable_team_transition_reward",
+                "--team_transition_coef", "0.05",
+                "--team_transition_clip", "2.0",
+                "--team_transition_warmup_steps", "20000"
+            )
+        }
         default {
-            throw "Unknown experiment '$exp'. Use control_legacy4, s1_probe, s1_reward, or r15_p1_ablation."
+            throw "Unknown experiment '$exp'. Use control_legacy4, s1_probe, s1_reward, r15_p1_ablation, a2_plus_t_probe, or a2_plus_t."
         }
     }
 }

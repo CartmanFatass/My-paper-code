@@ -72,10 +72,57 @@ class Config(EnvConfig):
     team_bridge_type = "stochastic"
     team_code_dim = 64
     num_team_codes = n_Z
+    # R21 TeamIntent restoration.  Default-off: when enabled, the bridge is
+    # used as a sampled pi_Z(Z|c,omega) on a slower synchronized clock, while
+    # asynchronous individual renewals dock against the held Z.
+    enable_team_intent = False
+    enable_team_disc_probe = False
+    enable_team_disc_reward = False
+    # K_team is in high-level check intervals. It must exceed the longest
+    # individual lifetime candidate; otherwise Z-boundary atomic reassignment
+    # structurally truncates long duration choices and fabricates collapse.
+    team_intent_k = 48
+    # R16.5 showed 0.1 intrinsic pressure can induce duration-collapse
+    # pathology, while 0.05 was the cleaner stabilized base.
+    team_disc_coef = 0.05
+    team_disc_clip = 2.0
+    team_disc_warmup_steps = 20000
+    team_disc_lr = 5e-4
+    team_disc_hidden_dim = 128
+    # R23-3 hard actionability gate. Default-off (0.0 = no gate; preserves R21
+    # behavior). When > 0, the team discriminator q_D(Z|s_next) REWARD is applied
+    # only when the most recent measured forced-Z assignment KL (g_itv_kl_skill)
+    # is >= this floor. R21 proved an ungated q_D reward is decorative: Z must be
+    # actionable before the discriminator can amplify it.
+    team_disc_actionability_floor = 0.0
+    # R23 architecture correction (actionability). Default-off (0.0). When > 0, the
+    # high policy gets a direct residual path from the team-intent vector into the
+    # skill/duration assignment logits, so sampled Z can actually move the joint
+    # assignment xi. R21 autopsy showed the trunk-only path had ~noise gain
+    # (forced-Z skill KL ~0.002 at random-init AND final). This is the R23-0
+    # static-capacity-gate knob; verify with scripts/r23_capacity_gate.py before
+    # enabling any actionability objective.
+    z_assignment_residual_gain = 0.0
 
     # PPO and entropy.
     high_entropy_coef = 0.01
     low_entropy_coef = 0.01
+    # R16.5 stabilization, default-off.  When enabled, add a duration-head
+    # entropy bonus only after realized duration usage entropy falls below the
+    # floor.  This is a one-variable guard for duration collapse, not a new
+    # task-specific reward.
+    duration_entropy_floor_enabled = False
+    duration_entropy_floor_threshold = 0.8
+    duration_entropy_floor_coef = 0.05
+    duration_entropy_floor_warmup_steps = 0
+    # R21 insurance only: default-off generic entropy floor for the sampled
+    # team-intent head. Enable only if the logged Z usage entropy red flag
+    # fires; do not treat this as evidence of self-sustained heterogeneity.
+    z_entropy_floor_enabled = False
+    z_entropy_floor_threshold = 0.8
+    z_entropy_floor_coef = 0.05
+    z_entropy_floor_warmup_steps = 0
+    reward_ratio_guard_mode = "kill"  # kill, warn
     clip_epsilon = 0.2
     low_clip_epsilon = 0.1
     gamma = 0.99
@@ -267,6 +314,17 @@ class Config(EnvConfig):
     situation_hazard_confirm_changes = 1
     situation_hazard_max_force_rate = 1.0
     situation_hazard_rate_window = 128
+
+    # R19: team situation-transition residual head.  This is the generic team
+    # engine counterpart to individual role diversity: predict kappa' from
+    # (kappa, active-skill counts) against a kappa-only prior.  Default-off.
+    enable_team_transition_probe = False
+    enable_team_transition_reward = False
+    team_transition_coef = 0.05
+    team_transition_clip = 2.0
+    team_transition_warmup_steps = 20000
+    team_transition_lr = 5e-4
+    team_transition_hidden_dim = 128
 
     use_smdp_discounted_high_return = True
     use_smdp_bootstrap = True

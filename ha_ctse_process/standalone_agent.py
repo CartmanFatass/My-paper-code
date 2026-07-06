@@ -63,6 +63,21 @@ from ha_ctse_process.situation_hazard import (
     SituationHazardPolicy,
     should_force_renewal,
 )
+from ha_ctse_process.situation_transition import (
+    SituationTransitionPredictor,
+    TeamTransitionInterval,
+    attribute_interval_rewards_to_segments,
+    empty_team_transition_metrics,
+    pearson_corr,
+    reward_is_active,
+    skill_count_vector,
+    valid_transition_mask,
+)
+from ha_ctse_process.team_intent import (
+    TeamIntentDiscriminator,
+    empty_team_intent_metrics,
+    label_entropy as team_intent_label_entropy,
+)
 from ha_ctse_process.g_info_objective import (
     GInfoObjective,
     empty_g_info_metrics,
@@ -793,12 +808,25 @@ class SkillDurationPolicy(nn.Module):
         omega_dim: int = 0,
         agent_relevance_dim: int = 0,
         ar_prefix_dim: int = 0,
+        z_action_gain: float = 0.0,
     ):
         super().__init__()
         self.n_skills = int(n_skills)
         self.omega_dim = int(max(omega_dim, 0))
         self.agent_relevance_dim = int(max(agent_relevance_dim, 0))
         self.ar_prefix_dim = int(max(ar_prefix_dim, 0))
+        self.team_code_dim = int(team_code_dim)
+        # R23 architecture correction: a direct, controllable residual path from the
+        # team-intent vector into the assignment logits, bypassing the LayerNorm'd
+        # trunk (whose effective Z gain was ~noise, per R21 autopsy). Default-off
+        # (gain 0.0 -> modules absent -> S-base architecture is bit-identical).
+        self.z_action_gain = float(z_action_gain)
+        if self.z_action_gain > 0.0:
+            self.z_skill_residual = nn.Linear(self.team_code_dim, int(n_skills))
+            self.z_duration_residual = nn.Linear(self.team_code_dim, int(n_durations))
+        else:
+            self.z_skill_residual = None
+            self.z_duration_residual = None
         input_dim = (
             int(obs_dim)
             + int(n_skills)
@@ -874,7 +902,12 @@ class SkillDurationPolicy(nn.Module):
             agent_relevance,
             ar_prefix,
         )
-        return self.skill_head(hidden), self.duration_head(hidden), self.value_head(hidden).squeeze(-1)
+        skill_logits = self.skill_head(hidden)
+        duration_logits = self.duration_head(hidden)
+        if self.z_action_gain > 0.0 and self.z_skill_residual is not None:
+            skill_logits = skill_logits + self.z_action_gain * self.z_skill_residual(team_vector.float())
+            duration_logits = duration_logits + self.z_action_gain * self.z_duration_residual(team_vector.float())
+        return skill_logits, duration_logits, self.value_head(hidden).squeeze(-1)
 
     def act_with_parts(
         self,
@@ -978,6 +1011,29 @@ class SkillDurationPolicy(nn.Module):
         entropy = skill_dist.entropy() + duration_dist.entropy()
         return logp, entropy, value
 
+    def entropy_components(
+        self,
+        obs: torch.Tensor,
+        prev_skills: torch.Tensor,
+        ages: torch.Tensor,
+        compact: torch.Tensor,
+        team_vector: torch.Tensor,
+        omega: torch.Tensor | None = None,
+        agent_relevance: torch.Tensor | None = None,
+        ar_prefix: torch.Tensor | None = None,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        skill_logits, duration_logits, _value = self.logits(
+            obs,
+            prev_skills,
+            ages,
+            compact,
+            team_vector,
+            omega=omega,
+            agent_relevance=agent_relevance,
+            ar_prefix=ar_prefix,
+        )
+        return Categorical(logits=skill_logits).entropy(), Categorical(logits=duration_logits).entropy()
+
 
 class ProcessEncoder(nn.Module):
     def __init__(
@@ -1024,6 +1080,8 @@ class Segment:
     skill_age_prev: int = 0
     team_code: int = 0
     team_logp_weight: float = 1.0
+    team_intent_boundary: bool = False
+    team_intent_truncated: bool = False
     skill_assignment_logp: float = 0.0
     duration_assignment_logp: float = 0.0
     ar_parallel_kl_start: float = 0.0
@@ -1127,6 +1185,8 @@ class SegmentManager:
         skill_age_prev: int = 0,
         team_code: int = 0,
         team_logp_weight: float = 1.0,
+        team_intent_boundary: bool = False,
+        team_intent_truncated: bool = False,
         skill_assignment_logp: float = 0.0,
         duration_assignment_logp: float = 0.0,
         ar_parallel_kl_start: float = 0.0,
@@ -1175,6 +1235,8 @@ class SegmentManager:
             skill_age_prev=int(skill_age_prev),
             team_code=int(team_code),
             team_logp_weight=float(team_logp_weight),
+            team_intent_boundary=bool(team_intent_boundary),
+            team_intent_truncated=bool(team_intent_truncated),
             skill_assignment_logp=float(skill_assignment_logp),
             duration_assignment_logp=float(duration_assignment_logp),
             ar_parallel_kl_start=float(ar_parallel_kl_start),
@@ -1269,6 +1331,7 @@ class Rollout:
     env_ids: list[int] = field(default_factory=list)
     obs: list[np.ndarray] = field(default_factory=list)
     states: list[np.ndarray] = field(default_factory=list)
+    next_states: list[np.ndarray] = field(default_factory=list)
     skills: list[np.ndarray] = field(default_factory=list)
     team_codes: list[int] = field(default_factory=list)
     actions: list[np.ndarray] = field(default_factory=list)
@@ -1301,6 +1364,7 @@ class StandaloneProcessAgent:
         self.obs_dim = int(obs_dim)
         self.state_dim = int(state_dim or getattr(config, "state_dim", 0) or (self.obs_dim * self.n_agents))
         self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
+        self.enable_team_intent = bool(getattr(config, "enable_team_intent", False))
         self.prototype_skill_extra_codes = int(max(getattr(config, "prototype_skill_extra_codes", 0), 0))
         self.opt_num_prototypes = int(max(getattr(config, "opt_num_prototypes", 4), 1))
         self.n_skills = int(getattr(config, "n_z", 3))
@@ -1309,14 +1373,30 @@ class StandaloneProcessAgent:
         elif int(getattr(config, "legacy_n_skills_override", 0) or 0) > 0:
             self.n_skills = int(getattr(config, "legacy_n_skills_override"))
         self.use_autoregressive_selection = bool(
-            self.use_prototype_response_skills
+            (self.use_prototype_response_skills or self.enable_team_intent)
             and getattr(config, "use_autoregressive_selection", True)
         )
-        self.parallel_selection = bool(getattr(config, "parallel_selection", False))
+        self.parallel_selection = bool(getattr(config, "parallel_selection", False)) and not self.enable_team_intent
         requested_ar_prefix_mode = str(getattr(config, "ar_prefix_mode", "same_check")).lower()
-        if requested_ar_prefix_mode not in {"same_check", "roster"}:
-            raise ValueError("ar_prefix_mode must be one of: same_check, roster")
+        if requested_ar_prefix_mode not in {"same_check", "roster", "none"}:
+            raise ValueError("ar_prefix_mode must be one of: same_check, roster, none")
+        if self.use_autoregressive_selection and requested_ar_prefix_mode == "none":
+            requested_ar_prefix_mode = "same_check"
         self.ar_prefix_mode = requested_ar_prefix_mode if self.use_autoregressive_selection else "none"
+        if self.enable_team_intent and self.use_autoregressive_selection and self.ar_prefix_mode == "same_check":
+            self.ar_prefix_mode = "roster"
+        self.team_intent_k = int(max(getattr(config, "team_intent_k", 48), 1))
+        self.enable_team_disc_probe = bool(getattr(config, "enable_team_disc_probe", False))
+        self.enable_team_disc_reward = bool(getattr(config, "enable_team_disc_reward", False))
+        if self.enable_team_disc_reward:
+            self.enable_team_disc_probe = True
+        self.team_disc_coef = float(getattr(config, "team_disc_coef", 0.05))
+        self.team_disc_clip = float(getattr(config, "team_disc_clip", 2.0))
+        self.team_disc_warmup_steps = int(getattr(config, "team_disc_warmup_steps", 20000))
+        # R23-3 hard actionability gate on the q_D reward (0.0 = no gate).
+        self.team_disc_actionability_floor = float(getattr(config, "team_disc_actionability_floor", 0.0) or 0.0)
+        # Most recent measured forced-Z assignment KL (updated by the high update).
+        self._last_forced_z_assignment_kl = 0.0
         self.duration_candidates = tuple(getattr(config, "skill_lifetime_candidates", (3, 7, 13, 24)))
         if not self.duration_candidates:
             self.duration_candidates = (1,)
@@ -1391,6 +1471,13 @@ class StandaloneProcessAgent:
         )
         self.use_g_info_diagnostic = bool(getattr(config, "use_g_info_diagnostic", True))
         self.enable_g_info_objective = bool(getattr(config, "enable_g_info_objective", False))
+        self.enable_team_transition_probe = bool(getattr(config, "enable_team_transition_probe", False))
+        self.enable_team_transition_reward = bool(getattr(config, "enable_team_transition_reward", False))
+        if self.enable_team_transition_reward:
+            self.enable_team_transition_probe = True
+        self.team_transition_coef = float(getattr(config, "team_transition_coef", 0.05))
+        self.team_transition_clip = float(getattr(config, "team_transition_clip", 2.0))
+        self.team_transition_warmup_steps = int(getattr(config, "team_transition_warmup_steps", 20000))
         self.enable_situation_diagnostics = bool(getattr(config, "enable_situation_diagnostics", False))
         self.enable_situation_hazard_control = bool(getattr(config, "enable_situation_hazard_control", False))
         self.high_condition_on_omega = bool(
@@ -1403,6 +1490,7 @@ class StandaloneProcessAgent:
             self.enable_situation_diagnostics
             or self.enable_situation_hazard_control
             or self.use_per_agent_kappa
+            or self.enable_team_transition_probe
         )
         self.situation_substrate_source = str(getattr(config, "situation_substrate_source", "omega"))
         self.situation_num_kappa = int(max(getattr(config, "situation_num_kappa", 4), 1))
@@ -1475,6 +1563,20 @@ class StandaloneProcessAgent:
         )
         self.high_entropy_coef = float(getattr(config, "high_entropy_coef", 0.01))
         self.low_entropy_coef = float(getattr(config, "low_entropy_coef", 0.01))
+        self.duration_entropy_floor_enabled = bool(
+            getattr(config, "duration_entropy_floor_enabled", False)
+        )
+        self.duration_entropy_floor_threshold = float(
+            getattr(config, "duration_entropy_floor_threshold", 0.8)
+        )
+        self.duration_entropy_floor_coef = float(getattr(config, "duration_entropy_floor_coef", 0.05))
+        self.duration_entropy_floor_warmup_steps = int(
+            max(getattr(config, "duration_entropy_floor_warmup_steps", 0), 0)
+        )
+        self.z_entropy_floor_enabled = bool(getattr(config, "z_entropy_floor_enabled", False))
+        self.z_entropy_floor_threshold = float(getattr(config, "z_entropy_floor_threshold", 0.8))
+        self.z_entropy_floor_coef = float(getattr(config, "z_entropy_floor_coef", 0.05))
+        self.z_entropy_floor_warmup_steps = int(max(getattr(config, "z_entropy_floor_warmup_steps", 0), 0))
         self.use_smdp_discounted_high_return = bool(getattr(config, "use_smdp_discounted_high_return", True))
         self.use_smdp_bootstrap = bool(getattr(config, "use_smdp_bootstrap", True))
         self.smdp_bootstrap_coef = float(getattr(config, "smdp_bootstrap_coef", 1.0))
@@ -1497,6 +1599,8 @@ class StandaloneProcessAgent:
         self.low_sequence_batch_size = int(max(getattr(config, "low_sequence_batch_size", 16), 1))
         self.low_ppo_epochs = int(max(getattr(config, "low_ppo_epochs", getattr(config, "ppo_epochs", 4)), 1))
         self.low_actor_condition_on_team_code = bool(getattr(config, "low_actor_condition_on_team_code", False))
+        if self.enable_team_intent:
+            self.low_actor_condition_on_team_code = False
         self.use_low_value_norm = bool(getattr(config, "use_low_value_norm", True))
         self.low_gae_lambda = float(getattr(config, "low_gae_lambda", getattr(config, "gae_lambda", 0.95)))
         self.low_value_loss_coef = float(getattr(config, "low_value_loss_coef", getattr(config, "value_loss_coef", 1.0)))
@@ -1578,6 +1682,8 @@ class StandaloneProcessAgent:
         num_team_codes = int(getattr(config, "num_team_codes", getattr(config, "n_Z", 1) or 1))
         self.num_team_codes = int(max(num_team_codes, 1))
         bridge_type = str(getattr(config, "team_bridge_type", "stochastic"))
+        if self.enable_team_intent and bridge_type == "none":
+            raise ValueError("enable_team_intent requires a sampled team bridge; team_bridge_type='none' is invalid.")
         process_embedding_dim = int(getattr(config, "process_encoder_embedding_dim", 64))
 
         self.compact = InteractionCompactEncoder(
@@ -1609,6 +1715,7 @@ class StandaloneProcessAgent:
             omega_dim=high_omega_dim,
             agent_relevance_dim=high_agent_relevance_dim,
             ar_prefix_dim=high_ar_prefix_dim,
+            z_action_gain=float(getattr(config, "z_assignment_residual_gain", 0.0) or 0.0),
         ).to(self.device)
         self.use_compact_return_head = bool(getattr(config, "use_compact_return_head", False))
         self.compact_return_coef = float(getattr(config, "compact_return_coef", 0.1))
@@ -1755,6 +1862,8 @@ class StandaloneProcessAgent:
             proto_condition_dim += self.opt_num_prototypes
         if self.use_agent_prototype_relevance:
             proto_condition_dim += self.opt_num_prototypes
+        if self.enable_team_intent:
+            proto_condition_dim += num_team_codes
         self.prototype_disc_condition_dim = int(proto_condition_dim)
         self.prototype_discriminator = (
             PrototypeResponseDiscriminator(
@@ -1766,6 +1875,15 @@ class StandaloneProcessAgent:
                 prior_coef=self.prototype_disc_prior_coef,
             ).to(self.device)
             if self.enable_prototype_disc_probe
+            else None
+        )
+        self.team_discriminator = (
+            TeamIntentDiscriminator(
+                state_dim=self.state_dim,
+                num_team_codes=num_team_codes,
+                hidden_dim=int(getattr(config, "team_disc_hidden_dim", 128)),
+            ).to(self.device)
+            if self.enable_team_disc_probe
             else None
         )
         self.g_info_objective = (
@@ -1792,6 +1910,15 @@ class StandaloneProcessAgent:
                 or bool(getattr(config, "enable_skill_forcing_reward", False))
                 or bool(getattr(config, "skill_forcing_reward_on", False))
             )
+            else None
+        )
+        self.team_transition = (
+            SituationTransitionPredictor(
+                num_situations=self.situation_num_kappa,
+                n_skills=self.n_skills,
+                hidden_dim=int(getattr(config, "team_transition_hidden_dim", 128)),
+            ).to(self.device)
+            if self.enable_team_transition_probe
             else None
         )
 
@@ -1835,12 +1962,39 @@ class StandaloneProcessAgent:
             if self.prototype_discriminator is not None
             else None
         )
+        self.team_disc_opt = (
+            torch.optim.Adam(
+                self.team_discriminator.parameters(),
+                lr=float(getattr(config, "team_disc_lr", 5e-4)),
+            )
+            if self.team_discriminator is not None
+            else None
+        )
+        self.team_transition_opt = (
+            torch.optim.Adam(
+                self.team_transition.parameters(),
+                lr=float(getattr(config, "team_transition_lr", 5e-4)),
+            )
+            if self.team_transition is not None
+            else None
+        )
 
         self.active_skills = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
+        self.active_duration_indices = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
         self.duration_remaining = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
         self.skill_age = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
         self.has_active_skill = np.zeros((self.num_envs, self.n_agents), dtype=np.bool_)
         self.active_team_codes = np.zeros(self.num_envs, dtype=np.int64)
+        self.team_intent_remaining = np.zeros(self.num_envs, dtype=np.int64)
+        self.team_intent_age = np.zeros(self.num_envs, dtype=np.int64)
+        self.team_intent_prior_counts = np.ones(self.num_team_codes, dtype=np.float64)
+        self._team_intent_boundary_count = 0
+        self._team_intent_boundary_trunc_fracs: list[float] = []
+        self._team_intent_boundary_trunc_by_duration: dict[int, list[float]] = {
+            int(candidate): [] for candidate in self.duration_candidates
+        }
+        self._team_intent_dwell_checks: list[float] = []
+        self._team_intent_age_check_samples: list[float] = []
         self.low_actor_hxs = np.zeros(
             (self.num_envs, self.n_agents, self.low_rnn_hidden_size),
             dtype=np.float32,
@@ -1848,6 +2002,9 @@ class StandaloneProcessAgent:
         self.low_critic_hxs = np.zeros_like(self.low_actor_hxs, dtype=np.float32)
         self._last_low_context: list[dict[str, np.ndarray | int] | None] = [None for _ in range(self.num_envs)]
         self.segments = SegmentManager(self.num_envs, self.n_agents)
+        self._team_transition_open: list[TeamTransitionInterval | None] = [None for _ in range(self.num_envs)]
+        self._team_transition_closed: list[TeamTransitionInterval] = []
+        self._team_transition_env_steps = np.zeros(self.num_envs, dtype=np.int64)
 
     @staticmethod
     def _count_parameters(module: nn.Module | None) -> int:
@@ -1867,9 +2024,11 @@ class StandaloneProcessAgent:
             "topology_role_probe": self._count_parameters(self.topology_role_probe),
             "transition_discriminator": self._count_parameters(self.transition_discriminator),
             "prototype_discriminator": self._count_parameters(self.prototype_discriminator),
+            "team_discriminator": self._count_parameters(self.team_discriminator),
             "compact_return_head": self._count_parameters(self.compact_return_head),
             "skill_effect_discovery": self._count_parameters(self.skill_effect_discovery),
             "situation_hazard": self._count_parameters(self.situation_hazard),
+            "team_transition": self._count_parameters(self.team_transition),
         }
         if self.use_recurrent_low_level and hasattr(self.low, "actor_update_parameters"):
             counts["low_actor"] = int(sum(param.numel() for param in self.low.actor_update_parameters()))
@@ -1885,7 +2044,9 @@ class StandaloneProcessAgent:
             + counts["topology_role_probe"]
             + counts["transition_discriminator"]
             + counts["prototype_discriminator"]
+            + counts["team_discriminator"]
             + counts["skill_effect_discovery"]
+            + counts["team_transition"]
         )
         counts["total_trainable"] = int(
             sum(
@@ -1901,9 +2062,11 @@ class StandaloneProcessAgent:
                     "topology_role_probe",
                     "transition_discriminator",
                     "prototype_discriminator",
+                    "team_discriminator",
                     "compact_return_head",
                     "skill_effect_discovery",
                     "situation_hazard",
+                    "team_transition",
                 )
             )
         )
@@ -2007,6 +2170,38 @@ class StandaloneProcessAgent:
             agent_relevance,
         )
 
+    def _team_intent_forced_tensor(self, env_id: int) -> torch.Tensor | None:
+        if not self.enable_team_intent:
+            return None
+        code = int(np.clip(self.active_team_codes[int(env_id)], 0, self.num_team_codes - 1))
+        return torch.as_tensor([code], dtype=torch.long, device=self.device)
+
+    def _team_intent_boundary_due(self, env_id: int) -> bool:
+        return bool(self.enable_team_intent and int(self.team_intent_remaining[int(env_id)]) <= 0)
+
+    def _open_team_intent_boundary(self, env_id: int, k: int) -> None:
+        env_id = int(env_id)
+        if not self.enable_team_intent:
+            return
+        if int(self.team_intent_age[env_id]) > 0:
+            self._team_intent_dwell_checks.append(
+                float(self.team_intent_age[env_id]) / float(max(int(k), 1))
+            )
+        self.team_intent_remaining[env_id] = int(max(self.team_intent_k, 1)) * int(max(k, 1))
+        self.team_intent_age[env_id] = 0
+        self._team_intent_boundary_count += 1
+
+    def _team_intent_tick(self, env_id: int, k: int) -> None:
+        env_id = int(env_id)
+        if not self.enable_team_intent:
+            return
+        if int(self.team_intent_remaining[env_id]) > 0:
+            self.team_intent_remaining[env_id] -= 1
+            self.team_intent_age[env_id] += 1
+        self._team_intent_age_check_samples.append(
+            float(self.team_intent_age[env_id]) / float(max(int(k), 1))
+        )
+
     def _situation_weights_from_context(self, state: np.ndarray, joint_obs: np.ndarray) -> tuple[torch.Tensor, torch.Tensor]:
         state_t = torch.as_tensor(state, dtype=torch.float32, device=self.device).reshape(1, -1)
         joint_t = torch.as_tensor(joint_obs, dtype=torch.float32, device=self.device).reshape(
@@ -2085,9 +2280,12 @@ class StandaloneProcessAgent:
         env_id = int(env_id)
         self.duration_remaining[env_id, :] = 0
         self.active_skills[env_id, :] = 0
+        self.active_duration_indices[env_id, :] = 0
         self.skill_age[env_id, :] = 0
         self.has_active_skill[env_id, :] = False
         self.active_team_codes[env_id] = 0
+        self.team_intent_remaining[env_id] = 0
+        self.team_intent_age[env_id] = 0
         self.low_actor_hxs[env_id, :, :] = 0.0
         self.low_critic_hxs[env_id, :, :] = 0.0
         self._last_low_context[env_id] = None
@@ -2096,13 +2294,27 @@ class StandaloneProcessAgent:
         self.situation_hazard_guard.reset_env(env_id)
         self._last_situation_state[env_id] = None
         self._last_agent_situation_state[env_id] = [None for _ in range(self.n_agents)]
+        if hasattr(self, "_team_transition_open"):
+            self._team_transition_open[env_id] = None
+        if hasattr(self, "_team_transition_env_steps"):
+            self._team_transition_env_steps[env_id] = 0
 
     def reset_all_policy_state(self):
         self.duration_remaining[:, :] = 0
         self.active_skills[:, :] = 0
+        self.active_duration_indices[:, :] = 0
         self.skill_age[:, :] = 0
         self.has_active_skill[:, :] = False
         self.active_team_codes[:] = 0
+        self.team_intent_remaining[:] = 0
+        self.team_intent_age[:] = 0
+        self._team_intent_boundary_count = 0
+        self._team_intent_boundary_trunc_fracs = []
+        self._team_intent_boundary_trunc_by_duration = {
+            int(candidate): [] for candidate in self.duration_candidates
+        }
+        self._team_intent_dwell_checks = []
+        self._team_intent_age_check_samples = []
         self.low_actor_hxs[:, :, :] = 0.0
         self.low_critic_hxs[:, :, :] = 0.0
         self._last_low_context = [None for _ in range(self.num_envs)]
@@ -2119,6 +2331,51 @@ class StandaloneProcessAgent:
         self._situation_hazard_forced_renewals = 0
         self._situation_hazard_events = 0
         self.segments = SegmentManager(self.num_envs, self.n_agents)
+        self._team_transition_open = [None for _ in range(self.num_envs)]
+        self._team_transition_closed = []
+        self._team_transition_env_steps = np.zeros(self.num_envs, dtype=np.int64)
+
+    def _team_transition_xi(self, env_id: int) -> np.ndarray:
+        active = self.has_active_skill[int(env_id)]
+        skills = self.active_skills[int(env_id), active]
+        return skill_count_vector(skills, self.n_skills)
+
+    def _team_transition_record_check(self, env_id: int, kappa: int, step: int) -> None:
+        if self.team_transition is None:
+            return
+        env_id = int(env_id)
+        local_step = int(self._team_transition_env_steps[env_id])
+        self._team_transition_env_steps[env_id] = local_step + 1
+        interval = int(max(self.situation_hazard_check_interval, 1))
+        if local_step % interval != 0:
+            return
+        current_kappa = int(kappa)
+        open_interval = self._team_transition_open[env_id]
+        if open_interval is not None:
+            closed = TeamTransitionInterval(
+                env_id=open_interval.env_id,
+                start_step=open_interval.start_step,
+                end_step=int(step),
+                kappa=open_interval.kappa,
+                xi=open_interval.xi,
+                kappa_next=current_kappa,
+            )
+            if closed.end_step > closed.start_step:
+                self._team_transition_closed.append(closed)
+        self._team_transition_open[env_id] = TeamTransitionInterval(
+            env_id=env_id,
+            start_step=int(step),
+            end_step=int(step),
+            kappa=current_kappa,
+            xi=self._team_transition_xi(env_id),
+            kappa_next=-1,
+        )
+
+    def _team_transition_clear_rollout_buffers(self) -> None:
+        if not hasattr(self, "_team_transition_open"):
+            return
+        self._team_transition_open = [None for _ in range(self.num_envs)]
+        self._team_transition_closed = []
 
     def _ar_prefix_dim(self) -> int:
         return int(getattr(self.high, "ar_prefix_dim", 0))
@@ -2297,6 +2554,32 @@ class StandaloneProcessAgent:
         joint_obs = self._joint_obs_array(obs)
         state_arr = self._state_array(state, joint_obs)
         expired = (~self.has_active_skill[env_id]) | (self.duration_remaining[env_id] <= 0)
+        team_boundary_due = self._team_intent_boundary_due(env_id)
+        boundary_truncated_mask = (
+            self.has_active_skill[env_id].copy() & (self.duration_remaining[env_id] > 0)
+            if team_boundary_due
+            else np.zeros(self.n_agents, dtype=np.bool_)
+        )
+        if team_boundary_due:
+            active_count = int(np.sum(self.has_active_skill[env_id]))
+            trunc_frac = (
+                float(np.sum(boundary_truncated_mask)) / float(max(active_count, 1))
+                if active_count > 0
+                else 0.0
+            )
+            self._team_intent_boundary_trunc_fracs.append(trunc_frac)
+            for dur_idx, candidate in enumerate(self.duration_candidates):
+                bucket_mask = self.has_active_skill[env_id] & (
+                    self.active_duration_indices[env_id] == int(dur_idx)
+                )
+                bucket_count = int(np.sum(bucket_mask))
+                if bucket_count <= 0:
+                    continue
+                bucket_truncated = int(np.sum(boundary_truncated_mask & bucket_mask))
+                self._team_intent_boundary_trunc_by_duration.setdefault(int(candidate), []).append(
+                    float(bucket_truncated) / float(max(bucket_count, 1))
+                )
+            expired[:] = True
         has_expired = bool(np.any(expired))
         needs_full_context = bool(has_expired or (self.situation_diagnostics_active and self.enable_situation_hazard_control))
         context_values = None
@@ -2306,10 +2589,12 @@ class StandaloneProcessAgent:
         agent_relevance = None
         omega_tensor = None
         if needs_full_context:
+            forced_team_code = None if team_boundary_due else self._team_intent_forced_tensor(env_id)
             context_values = self._context_tensors(
                 state_arr,
                 joint_obs,
                 deterministic=deterministic,
+                forced_team_code=forced_team_code,
             )
             weights = context_values[-2]
             agent_relevance = context_values[-1]
@@ -2399,6 +2684,8 @@ class StandaloneProcessAgent:
             assert context_values is not None
             compact, team_code, team_vector, team_logp, team_entropy, *_mid, weights, agent_relevance = context_values
             expired_ids = np.flatnonzero(expired)
+            if self.enable_team_intent and team_boundary_due:
+                self._open_team_intent_boundary(env_id, k)
             obs_t = torch.as_tensor(joint_obs[expired_ids], dtype=torch.float32, device=self.device)
             prev_np = self.active_skills[env_id, expired_ids].copy()
             age_np = self.skill_age[env_id, expired_ids].copy()
@@ -2569,7 +2856,11 @@ class StandaloneProcessAgent:
             chosen_durations = np.asarray(self.duration_candidates, dtype=np.int64)[chosen_duration_idx]
             team_code_value = int(team_code.detach().cpu().numpy()[0])
             self.active_team_codes[env_id] = team_code_value
-            team_logp_weight = 1.0 / max(len(expired_ids), 1)
+            team_logp_weight = (
+                1.0 / max(len(expired_ids), 1)
+                if (not self.enable_team_intent or team_boundary_due)
+                else 0.0
+            )
             team_logp_share = team_logp.detach().cpu().numpy()[0] * team_logp_weight
             team_entropy_share = team_entropy.detach().cpu().numpy()[0] * team_logp_weight
             old_logp = logp.cpu().numpy() + float(team_logp_share)
@@ -2585,12 +2876,13 @@ class StandaloneProcessAgent:
                 initial = not bool(self.has_active_skill[env_id, agent_id])
                 switched = (not initial) and int(chosen_skills[local_idx]) != prev_skill
                 penalty = 0.0
-                if not initial:
+                if (not initial) and not team_boundary_due:
                     penalty += self.edit_penalty_alpha
-                if switched:
+                if switched and not team_boundary_due:
                     penalty += self.switch_penalty_beta
 
                 self.active_skills[env_id, agent_id] = int(chosen_skills[local_idx])
+                self.active_duration_indices[env_id, agent_id] = int(chosen_duration_idx[local_idx])
                 self.duration_remaining[env_id, agent_id] = int(chosen_durations[local_idx]) * int(k)
                 self.skill_age[env_id, agent_id] = 0
                 self.has_active_skill[env_id, agent_id] = True
@@ -2610,6 +2902,8 @@ class StandaloneProcessAgent:
                     skill_age_prev=int(age_np[local_idx]),
                     team_code=team_code_value,
                     team_logp_weight=team_logp_weight,
+                    team_intent_boundary=team_boundary_due,
+                    team_intent_truncated=bool(boundary_truncated_mask[int(agent_id)]),
                     skill_assignment_logp=float(skill_assignment_logp[local_idx]),
                     duration_assignment_logp=float(duration_assignment_logp[local_idx]),
                     ar_parallel_kl_start=float(ar_parallel_kl_rows[local_idx]),
@@ -2632,9 +2926,17 @@ class StandaloneProcessAgent:
                     agent_relevance_start=agent_relevance[0, int(agent_id)].detach().cpu().numpy(),
                 )
 
+        if (
+            self.team_transition is not None
+            and situation_state is not None
+            and not bool(deterministic)
+        ):
+            self._team_transition_record_check(env_id, kappa_value, step)
+
         active = self.has_active_skill[env_id]
         self.duration_remaining[env_id, active] -= 1
         self.skill_age[env_id, active] += 1
+        self._team_intent_tick(env_id, k)
 
     def _situation_diagnostics(self, segments: list[Segment]) -> dict[str, float]:
         mode_code = {
@@ -3022,6 +3324,233 @@ class StandaloneProcessAgent:
             )
         return metrics
 
+    def _z_assignment_intervention_metric(
+        self,
+        segments: list[Segment],
+        segment_states: torch.Tensor,
+        segment_joint_obs: torch.Tensor,
+        start_obs: torch.Tensor,
+    ) -> float:
+        if not self.enable_team_intent or not segments or self.num_team_codes <= 1:
+            return 0.0
+        sample_count = min(len(segments), int(self.g_intervention_kl_max_segments))
+        if sample_count <= 0:
+            return 0.0
+        if sample_count < len(segments):
+            sample_idx = torch.linspace(
+                0,
+                len(segments) - 1,
+                steps=sample_count,
+                device=self.device,
+            ).long()
+        else:
+            sample_idx = torch.arange(len(segments), device=self.device)
+        sampled_segments = [segments[int(idx.detach().cpu().item())] for idx in sample_idx]
+        states = segment_states.index_select(0, sample_idx)
+        joint_obs = segment_joint_obs.index_select(0, sample_idx)
+        high_obs = start_obs.index_select(0, sample_idx)
+        prev_skills = torch.as_tensor(
+            [segment.prev_skill for segment in sampled_segments],
+            dtype=torch.long,
+            device=self.device,
+        )
+        ages = torch.as_tensor(
+            [segment.skill_age_prev for segment in sampled_segments],
+            dtype=torch.float32,
+            device=self.device,
+        )
+        agent_ids = torch.as_tensor(
+            [segment.agent_id for segment in sampled_segments],
+            dtype=torch.long,
+            device=self.device,
+        )
+        current_codes = torch.as_tensor(
+            [segment.team_code for segment in sampled_segments],
+            dtype=torch.long,
+            device=self.device,
+        ).clamp(0, self.num_team_codes - 1)
+        alt_codes = (current_codes + 1) % int(self.num_team_codes)
+        ar_prefix_t = self._segment_ar_prefix_tensor(sampled_segments)
+        with torch.no_grad():
+            compact, _cd, _cmi, weights, _entropy, agent_rel = self.compact(states, joint_obs)
+            _cur_code, cur_vector, _cur_logp, _cur_entropy, _cur_logits = self.bridge(
+                compact,
+                forced_team_code=current_codes,
+            )
+            _alt_code, alt_vector, _alt_logp, _alt_entropy, _alt_logits = self.bridge(
+                compact,
+                forced_team_code=alt_codes,
+            )
+            omega_t = weights if self.high_condition_on_omega else None
+            rel_t = None
+            if self.use_agent_prototype_relevance:
+                rel_t = agent_rel[torch.arange(agent_rel.shape[0], device=self.device), agent_ids]
+            cur_skill_logits, _cur_duration_logits, _cur_values = self.high.logits(
+                high_obs,
+                prev_skills,
+                ages,
+                compact,
+                cur_vector,
+                omega=omega_t,
+                agent_relevance=rel_t,
+                ar_prefix=ar_prefix_t,
+            )
+            alt_skill_logits, _alt_duration_logits, _alt_values = self.high.logits(
+                high_obs,
+                prev_skills,
+                ages,
+                compact,
+                alt_vector,
+                omega=omega_t,
+                agent_relevance=rel_t,
+                ar_prefix=ar_prefix_t,
+            )
+            kl = self._categorical_kl(cur_skill_logits, alt_skill_logits)
+            return float(kl.detach().mean().cpu().item()) if kl.numel() else 0.0
+
+    def _team_disc_actionability_gate_open(self) -> bool:
+        """R23-3: the q_D reward is allowed only once Z is measurably actionable.
+
+        Floor <= 0 disables the gate (R21-compatible). Otherwise the most recent
+        measured forced-Z assignment KL must reach the floor.
+        """
+        floor = float(self.team_disc_actionability_floor)
+        if floor <= 0.0:
+            return True
+        return float(self._last_forced_z_assignment_kl) >= floor
+
+    def _team_intent_rollout_update(self, rollout: Rollout, total_steps: int) -> dict[str, float]:
+        metrics = empty_team_intent_metrics()
+        if self.enable_team_intent:
+            metrics["team_intent_enabled"] = 1.0
+        if self.team_discriminator is None or self.team_disc_opt is None or not rollout.rewards:
+            return metrics
+
+        labels_np = np.asarray(rollout.team_codes, dtype=np.int64).reshape(-1)
+        if labels_np.size == 0:
+            return metrics
+        next_states_src = rollout.next_states if getattr(rollout, "next_states", None) else rollout.states
+        states_np = np.asarray(
+            [self._fit_vector(state, self.state_dim) for state in next_states_src],
+            dtype=np.float32,
+        )
+        n = min(labels_np.size, states_np.shape[0])
+        if n <= 0:
+            return metrics
+        labels_np = np.clip(labels_np[:n], 0, self.num_team_codes - 1)
+        states_np = states_np[:n]
+        prior_np = self.team_intent_prior_counts.astype(np.float64)
+        prior_np = prior_np / max(float(np.sum(prior_np)), 1.0)
+        states_t = torch.as_tensor(states_np, dtype=torch.float32, device=self.device)
+        labels_t = torch.as_tensor(labels_np, dtype=torch.long, device=self.device)
+        prior_t = torch.as_tensor(prior_np, dtype=torch.float32, device=self.device)
+
+        with torch.no_grad():
+            reward_preview_t = self.team_discriminator.reward(
+                states_t,
+                labels_t,
+                prior_t,
+                coef=self.team_disc_coef,
+                clip=self.team_disc_clip,
+            )
+        terms = self.team_discriminator.losses(states_t, labels_t, prior_t)
+        loss = terms["loss"]
+        self.team_disc_opt.zero_grad()
+        loss.backward()
+        self.team_disc_opt.step()
+
+        actionability_gate_open = self._team_disc_actionability_gate_open()
+        reward_gated_off = bool(
+            self.enable_team_disc_reward
+            and int(total_steps) >= int(self.team_disc_warmup_steps)
+            and abs(float(self.team_disc_coef)) > 0.0
+            and not actionability_gate_open
+        )
+        reward_active = bool(
+            self.enable_team_disc_reward
+            and int(total_steps) >= int(self.team_disc_warmup_steps)
+            and abs(float(self.team_disc_coef)) > 0.0
+            and actionability_gate_open
+        )
+        metrics["team_disc_reward_gated_off"] = 1.0 if reward_gated_off else 0.0
+        metrics["team_disc_forced_z_kl"] = float(self._last_forced_z_assignment_kl)
+        rewards_arr = np.asarray(rollout.rewards, dtype=np.float32)
+        env_abs = float(np.mean(np.abs(rewards_arr))) + 1e-8
+        reward_np = reward_preview_t.detach().cpu().numpy().astype(np.float32)
+        if reward_active:
+            for idx, reward_value in enumerate(reward_np):
+                if idx >= len(rollout.rewards):
+                    break
+                rollout.rewards[idx][:] += float(reward_value)
+
+        counts = np.bincount(labels_np, minlength=self.num_team_codes).astype(np.float64)
+        self.team_intent_prior_counts += counts
+        residual_np = terms["residual"].detach().cpu().numpy().astype(np.float64)
+        metrics.update(
+            {
+                "team_disc_active": 1.0,
+                "team_disc_samples": float(n),
+                "team_disc_loss": float(loss.detach().cpu().item()),
+                "team_disc_acc": float(terms["acc"].detach().cpu().item()),
+                "team_disc_prior_entropy": float(terms["prior_entropy"].detach().cpu().item()),
+                "team_disc_residual_mean": float(np.mean(residual_np)) if residual_np.size else 0.0,
+                "team_disc_residual_positive_frac": float(np.mean(residual_np > 0.0)) if residual_np.size else 0.0,
+                "team_disc_reward_mean": float(np.mean(reward_np)) if reward_active and reward_np.size else 0.0,
+                "team_disc_reward_unclipped_mean": float(np.mean(residual_np)) if residual_np.size else 0.0,
+                "team_disc_reward_applied_steps": (
+                    float(reward_np.size * self.n_agents) if reward_active else 0.0
+                ),
+                "team_disc_reward_env_ratio": (
+                    float(np.mean(np.abs(reward_np)) / env_abs) if reward_np.size else 0.0
+                ),
+            }
+        )
+        return metrics
+
+    def _team_intent_lifetime_metrics(self, team_codes_np: np.ndarray, z_assignment_itv: float) -> dict[str, float]:
+        metrics: dict[str, float] = {}
+        if not self.enable_team_intent:
+            return metrics
+        entropy, max_frac = team_intent_label_entropy(team_codes_np, self.num_team_codes)
+        metrics.update(
+            {
+                "team_intent_enabled": 1.0,
+                "z_usage_entropy": float(entropy),
+                "z_usage_max_frac": float(max_frac),
+                "z_dwell": (
+                    float(np.mean(self._team_intent_dwell_checks))
+                    if self._team_intent_dwell_checks
+                    else 0.0
+                ),
+                "z_age_check_mean": (
+                    float(np.mean(self._team_intent_age_check_samples))
+                    if self._team_intent_age_check_samples
+                    else 0.0
+                ),
+                "z_boundary_count": float(self._team_intent_boundary_count),
+                "z_decisions_per_update": float(self._team_intent_boundary_count),
+                "z_boundary_trunc_rate": (
+                    float(np.mean(self._team_intent_boundary_trunc_fracs))
+                    if self._team_intent_boundary_trunc_fracs
+                    else 0.0
+                ),
+                "z_assignment_itv": float(z_assignment_itv),
+            }
+        )
+        for candidate in self.duration_candidates:
+            values = self._team_intent_boundary_trunc_by_duration.get(int(candidate), [])
+            metrics[f"z_boundary_trunc_rate_dur{int(candidate)}"] = (
+                float(np.mean(values)) if values else 0.0
+            )
+        self._team_intent_boundary_count = 0
+        self._team_intent_boundary_trunc_fracs = []
+        self._team_intent_boundary_trunc_by_duration = {
+            int(candidate): [] for candidate in self.duration_candidates
+        }
+        self._team_intent_dwell_checks = []
+        self._team_intent_age_check_samples = []
+        return metrics
+
     @staticmethod
     def _usage_stats(values: np.ndarray, cardinality: int) -> tuple[float, float]:
         values = np.asarray(values, dtype=np.int64).reshape(-1)
@@ -3133,6 +3662,10 @@ class StandaloneProcessAgent:
             pieces.append(torch.as_tensor(batch["omegas"], dtype=torch.float32, device=device))
         if self.use_agent_prototype_relevance:
             pieces.append(torch.as_tensor(batch["agent_relevance"], dtype=torch.float32, device=device))
+        if self.enable_team_intent:
+            team_codes = torch.as_tensor(batch["team_codes"], dtype=torch.long, device=device)
+            team_codes = team_codes.clamp(0, self.num_team_codes - 1)
+            pieces.append(F.one_hot(team_codes, num_classes=self.num_team_codes).float())
         if pieces:
             return torch.cat(pieces, dim=-1)
         return torch.zeros(sample_count, 0, dtype=torch.float32, device=device)
@@ -3142,6 +3675,7 @@ class StandaloneProcessAgent:
             return None
         next_obs_rows: list[np.ndarray] = []
         label_rows: list[int] = []
+        team_code_rows: list[int] = []
         kappa_rows: list[int] = []
         omega_rows: list[np.ndarray] = []
         rel_rows: list[np.ndarray] = []
@@ -3187,6 +3721,7 @@ class StandaloneProcessAgent:
                     next_obs = self._fit_vector(segment.obs[step_idx], self.obs_dim)
                 next_obs_rows.append(next_obs)
                 label_rows.append(int(segment.skill))
+                team_code_rows.append(int(np.clip(segment.team_code, 0, self.num_team_codes - 1)))
                 kappa_rows.append(int(segment.kappa_start))
                 omega_rows.append(omega)
                 rel_rows.append(relevance)
@@ -3210,6 +3745,7 @@ class StandaloneProcessAgent:
         return {
             "next_obs": np.asarray(next_obs_rows, dtype=np.float32)[chosen],
             "labels": np.asarray(label_rows, dtype=np.int64)[chosen],
+            "team_codes": np.asarray(team_code_rows, dtype=np.int64)[chosen],
             "kappas": np.asarray(kappa_rows, dtype=np.int64)[chosen],
             "omegas": np.asarray(omega_rows, dtype=np.float32)[chosen],
             "agent_relevance": np.asarray(rel_rows, dtype=np.float32)[chosen],
@@ -3225,10 +3761,128 @@ class StandaloneProcessAgent:
             "available_count": np.asarray([sample_count], dtype=np.int64),
         }
 
+    def _team_transition_update(
+        self,
+        segments: list[Segment],
+        total_steps: int = 0,
+    ) -> tuple[dict[str, float], np.ndarray]:
+        metrics = empty_team_transition_metrics()
+        segment_rewards = np.zeros(len(segments), dtype=np.float32)
+        if self.team_transition is None or self.team_transition_opt is None:
+            self._team_transition_clear_rollout_buffers()
+            return metrics, segment_rewards
+
+        intervals_all = list(self._team_transition_closed)
+        self._team_transition_clear_rollout_buffers()
+        if not intervals_all:
+            return metrics, segment_rewards
+
+        kappa_all = np.asarray([interval.kappa for interval in intervals_all], dtype=np.int64)
+        kappa_next_all = np.asarray([interval.kappa_next for interval in intervals_all], dtype=np.int64)
+        valid_mask = valid_transition_mask(kappa_all, kappa_next_all, self.situation_num_kappa)
+        valid_intervals = [
+            interval
+            for interval, keep in zip(intervals_all, valid_mask)
+            if bool(keep)
+        ]
+        total_count = int(len(intervals_all))
+        valid_count = int(len(valid_intervals))
+        metrics["team_transition_missing_frac"] = 1.0 - (float(valid_count) / float(max(total_count, 1)))
+        if not valid_intervals:
+            return metrics, segment_rewards
+
+        kappa_np = np.asarray([interval.kappa for interval in valid_intervals], dtype=np.int64)
+        xi_np = np.asarray([interval.xi for interval in valid_intervals], dtype=np.float32)
+        next_np = np.asarray([interval.kappa_next for interval in valid_intervals], dtype=np.int64)
+        kappa_t = torch.as_tensor(kappa_np, dtype=torch.long, device=self.device)
+        xi_t = torch.as_tensor(xi_np, dtype=torch.float32, device=self.device)
+        next_t = torch.as_tensor(next_np, dtype=torch.long, device=self.device)
+        terms = self.team_transition.losses(kappa_t, xi_t, next_t)
+        loss = terms["posterior_loss"] + terms["prior_loss"]
+        self.team_transition_opt.zero_grad()
+        loss.backward()
+        self.team_transition_opt.step()
+
+        mi_np = terms["mi"].detach().cpu().numpy().astype(np.float64)
+        metrics.update(
+            {
+                "team_transition_active": 1.0,
+                "team_transition_samples": float(valid_count),
+                "team_transition_loss": float(terms["posterior_loss"].detach().cpu().item()),
+                "team_transition_prior_loss": float(terms["prior_loss"].detach().cpu().item()),
+                "team_transition_mi_mean": float(np.mean(mi_np)) if mi_np.size else 0.0,
+                "team_transition_mi_on_self": float(terms["mi_on_self"].detach().cpu().item()),
+                "team_transition_mi_on_change": float(terms["mi_on_change"].detach().cpu().item()),
+                "team_transition_self_frac": float(terms["self_frac"].detach().cpu().item()),
+            }
+        )
+
+        active = reward_is_active(
+            probe_enabled=self.enable_team_transition_probe,
+            reward_enabled=self.enable_team_transition_reward,
+            total_steps=int(total_steps),
+            warmup_steps=self.team_transition_warmup_steps,
+            coef=self.team_transition_coef,
+        )
+        if not active:
+            return metrics, segment_rewards
+
+        reward_t = self.team_transition.reward(
+            kappa_t,
+            xi_t,
+            next_t,
+            coef=self.team_transition_coef,
+            clip=self.team_transition_clip,
+        )
+        interval_rewards = reward_t.detach().cpu().numpy().astype(np.float32)
+        segment_rewards, applied = attribute_interval_rewards_to_segments(
+            valid_intervals,
+            interval_rewards,
+            segments,
+        )
+        env_abs = float(
+            np.mean(
+                np.abs(
+                    np.asarray([np.sum(segment.rewards) for segment in segments], dtype=np.float32)
+                )
+            )
+        ) + 1e-8
+        env_ids = sorted({int(interval.env_id) for interval in valid_intervals})
+        reward_by_env: list[float] = []
+        renewal_by_env: list[float] = []
+        for env_id in env_ids:
+            reward_by_env.append(
+                float(
+                    np.sum(
+                        [
+                            float(reward)
+                            for interval, reward in zip(valid_intervals, interval_rewards)
+                            if int(interval.env_id) == int(env_id)
+                        ]
+                    )
+                )
+            )
+            renewal_by_env.append(float(sum(1 for segment in segments if int(segment.env_id) == int(env_id))))
+        metrics.update(
+            {
+                "team_transition_reward_high_mean": (
+                    float(np.mean(segment_rewards)) if segment_rewards.size else 0.0
+                ),
+                "team_transition_reward_applied_steps": float(applied),
+                "team_transition_reward_env_ratio": (
+                    float(np.mean(np.abs(segment_rewards)) / env_abs) if segment_rewards.size else 0.0
+                ),
+                "team_transition_reward_renewal_corr": pearson_corr(reward_by_env, renewal_by_env),
+            }
+        )
+        return metrics, segment_rewards
+
     def process_update(self, rollout: Rollout, total_steps: int = 0) -> dict[str, float]:
         segments = self.segments.pop_completed()
         valid = [s for s in segments if s.length > 0]
+        team_intent_metrics = self._team_intent_rollout_update(rollout, total_steps=total_steps)
         if not valid:
+            self._team_transition_clear_rollout_buffers()
             return {
                 "process_segments": 0.0,
                 "process_loss": 0.0,
@@ -3343,6 +3997,12 @@ class StandaloneProcessAgent:
                 "high_policy_loss": 0.0,
                 "high_value_loss": 0.0,
                 "high_entropy_loss": 0.0,
+                "duration_entropy_floor_active": 0.0,
+                "duration_entropy_floor_gap": 0.0,
+                "duration_entropy_floor_loss": 0.0,
+                "duration_entropy_floor_coef_active": 0.0,
+                "duration_policy_entropy": 0.0,
+                "duration_policy_entropy_norm": 0.0,
                 "high_aux_loss": 0.0,
                 "high_entropy": 0.0,
                 "high_return_mean": 0.0,
@@ -3362,10 +4022,16 @@ class StandaloneProcessAgent:
                 **empty_topology_potential_metrics(),
                 **empty_p2_metrics(),
                 **empty_g_info_metrics(),
+                **empty_team_transition_metrics(),
+                **team_intent_metrics,
                 **empty_skill_effect_metrics(),
                 **self._situation_diagnostics([]),
             }
 
+        team_transition_metrics, team_transition_high_rewards = self._team_transition_update(
+            valid,
+            total_steps=total_steps,
+        )
         effect_metrics, effect_micro_rewards = (
             self.skill_effect_discovery.update(valid, total_steps=total_steps)
             if self.skill_effect_discovery is not None
@@ -3475,6 +4141,12 @@ class StandaloneProcessAgent:
                 device=self.device,
             )
         g_intervention_metrics = self._g_intervention_kl_metrics(
+            valid,
+            segment_states_t,
+            segment_joint_obs_t,
+            start_obs_t,
+        )
+        z_assignment_itv = self._z_assignment_intervention_metric(
             valid,
             segment_states_t,
             segment_joint_obs_t,
@@ -4076,6 +4748,7 @@ class StandaloneProcessAgent:
             + high_topology_role_rewards
             + high_topology_potential_rewards
             + high_p2_rewards
+            + team_transition_high_rewards
         )
         combined_low_rewards = (
             low_process_rewards
@@ -4135,6 +4808,9 @@ class StandaloneProcessAgent:
         skill_entropy, skill_max_frac = self._usage_stats(labels, self.n_skills)
         duration_entropy, duration_max_frac = self._usage_stats(durations_np, len(self.duration_candidates))
         team_code_entropy, team_code_max_frac = self._usage_stats(team_codes_np, self.bridge.num_team_codes)
+        team_intent_metrics.update(
+            self._team_intent_lifetime_metrics(team_codes_np, z_assignment_itv=z_assignment_itv)
+        )
         posterior_acc_value = float(posterior_acc.detach().cpu().item())
         duration_only_acc = duration_only_acc_for_gate
         length_only_acc = self.binned_scalar_accuracy(labels, lengths)
@@ -4337,6 +5013,7 @@ class StandaloneProcessAgent:
             **topology_role_metrics,
             **topology_potential_metrics,
             **p2_metrics,
+            **team_transition_metrics,
             **effect_metrics,
             "duration_only_accuracy": duration_only_acc,
             "length_only_accuracy": length_only_acc,
@@ -4371,6 +5048,7 @@ class StandaloneProcessAgent:
                 self.bridge.num_team_codes,
                 2,
             ),
+            **team_intent_metrics,
             **lifetime_metrics,
             **g_intervention_metrics,
             **cooperation_credit_metrics,
@@ -4680,6 +5358,9 @@ class StandaloneProcessAgent:
                 "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm is not None else 0.0,
                 "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm is not None else 0.0,
                 "high_grad_norm": 0.0,
+                "z_advantage_mean": 0.0,
+                "z_advantage_std": 0.0,
+                "z_advantage_var": 0.0,
                 "compact_return_loss": 0.0,
                 "compact_return_active": 0.0,
                 **self._empty_prototype_selection_metrics(),
@@ -4761,7 +5442,22 @@ class StandaloneProcessAgent:
             self.smdp_bootstrap_coef * smdp_discounts_np * bootstrap_values_np
         ).astype(np.float32)
         returns = torch.as_tensor(returns_np, dtype=torch.float32, device=self.device)
-        advantages = returns - old_value
+        raw_advantages = returns - old_value
+        z_boundary_mask = team_weights > 0.0
+        if bool(torch.any(z_boundary_mask).detach().cpu().item()):
+            z_advantages = raw_advantages[z_boundary_mask].detach()
+            z_advantage_mean = float(z_advantages.mean().cpu().item())
+            z_advantage_var = (
+                float(z_advantages.var(unbiased=False).cpu().item())
+                if z_advantages.numel() > 1
+                else 0.0
+            )
+            z_advantage_std = float(np.sqrt(max(z_advantage_var, 0.0)))
+        else:
+            z_advantage_mean = 0.0
+            z_advantage_std = 0.0
+            z_advantage_var = 0.0
+        advantages = raw_advantages
         if advantages.numel() > 1:
             advantages = (advantages - advantages.mean()) / (advantages.std(unbiased=False) + 1e-8)
         value_targets = returns
@@ -4776,6 +5472,90 @@ class StandaloneProcessAgent:
         ).mean()
         value_loss = F.mse_loss(values, value_targets)
         entropy_loss = -self.high_entropy_coef * entropy.mean()
+        duration_policy_entropy = torch.zeros_like(entropy_high)
+        duration_policy_entropy_norm = torch.zeros((), device=self.device)
+        duration_entropy_floor_loss = torch.zeros((), device=self.device)
+        duration_entropy_floor_active = 0.0
+        duration_entropy_floor_gap = 0.0
+        duration_entropy_floor_coef_active = 0.0
+        z_entropy_floor_loss = torch.zeros((), device=self.device)
+        z_entropy_floor_active = 0.0
+        z_entropy_floor_gap = 0.0
+        z_entropy_floor_coef_active = 0.0
+        z_policy_entropy = team_entropy.detach().mean()
+        z_policy_entropy_norm = (
+            z_policy_entropy / np.log(float(max(self.num_team_codes, 2)))
+            if self.num_team_codes > 1
+            else torch.zeros((), device=self.device)
+        )
+        duration_usage_for_floor = self._label_entropy_np(
+            np.asarray([int(s.duration_idx) for s in segments], dtype=np.int64),
+            len(self.duration_candidates),
+        )
+        z_usage_for_floor = self._label_entropy_np(
+            np.asarray([int(s.team_code) for s in segments], dtype=np.int64),
+            self.num_team_codes,
+        )
+        if (
+            self.duration_entropy_floor_enabled
+            and len(self.duration_candidates) > 1
+            and int(total_steps) >= self.duration_entropy_floor_warmup_steps
+        ):
+            duration_entropy_floor_gap = max(
+                0.0,
+                float(self.duration_entropy_floor_threshold) - float(duration_usage_for_floor),
+            )
+            if duration_entropy_floor_gap > 0.0 and self.duration_entropy_floor_coef > 0.0:
+                _skill_policy_entropy, duration_policy_entropy = self.high.entropy_components(
+                    high_obs,
+                    prev_skills,
+                    ages,
+                    compact,
+                    team_vector,
+                    omega=omega_t,
+                    agent_relevance=rel_t,
+                    ar_prefix=ar_prefix_t,
+                )
+                duration_entropy_floor_coef_active = (
+                    float(self.duration_entropy_floor_coef) * float(duration_entropy_floor_gap)
+                )
+                duration_entropy_floor_loss = (
+                    -duration_entropy_floor_coef_active * duration_policy_entropy.mean()
+                )
+                duration_entropy_floor_active = 1.0
+        if (
+            self.enable_team_intent
+            and self.z_entropy_floor_enabled
+            and self.num_team_codes > 1
+            and int(total_steps) >= self.z_entropy_floor_warmup_steps
+        ):
+            z_entropy_floor_gap = max(
+                0.0,
+                float(self.z_entropy_floor_threshold) - float(z_usage_for_floor),
+            )
+            if z_entropy_floor_gap > 0.0 and self.z_entropy_floor_coef > 0.0:
+                team_weight_sum_raw = torch.sum(team_weights)
+                if float(team_weight_sum_raw.detach().cpu().item()) > 0.0:
+                    team_weight_sum = team_weight_sum_raw.clamp_min(1e-8)
+                    boundary_team_entropy = torch.sum(team_entropy * team_weights) / team_weight_sum
+                    z_entropy_floor_coef_active = float(self.z_entropy_floor_coef) * float(z_entropy_floor_gap)
+                    z_entropy_floor_loss = -z_entropy_floor_coef_active * boundary_team_entropy
+                    z_entropy_floor_active = 1.0
+        if len(self.duration_candidates) > 1:
+            if torch.count_nonzero(duration_policy_entropy).item() == 0:
+                _skill_policy_entropy, duration_policy_entropy = self.high.entropy_components(
+                    high_obs,
+                    prev_skills,
+                    ages,
+                    compact,
+                    team_vector,
+                    omega=omega_t,
+                    agent_relevance=rel_t,
+                    ar_prefix=ar_prefix_t,
+                )
+            duration_policy_entropy_norm = duration_policy_entropy.mean() / np.log(
+                float(len(self.duration_candidates))
+            )
         aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
         compact_return_loss = torch.zeros((), device=self.device)
         compact_return_active = 0.0
@@ -4799,10 +5579,15 @@ class StandaloneProcessAgent:
         else:
             g_info_loss = torch.zeros((), device=self.device)
             g_info_metrics = empty_g_info_metrics()
+        # R23-3: cache the measured forced-Z assignment KL so the (earlier-in-step)
+        # team-disc reward gate can read a fresh value on the next update.
+        self._last_forced_z_assignment_kl = float(g_info_metrics.get("g_itv_kl_skill", 0.0))
         loss = (
             policy_loss
             + 0.5 * value_loss
             + entropy_loss
+            + duration_entropy_floor_loss
+            + z_entropy_floor_loss
             + aux_loss
             + g_info_loss
         )
@@ -4826,6 +5611,21 @@ class StandaloneProcessAgent:
             "high_policy_loss": float(policy_loss.detach().cpu().item()),
             "high_value_loss": float(value_loss.detach().cpu().item()),
             "high_entropy_loss": float(entropy_loss.detach().cpu().item()),
+            "duration_entropy_floor_active": float(duration_entropy_floor_active),
+            "duration_entropy_floor_gap": float(duration_entropy_floor_gap),
+            "duration_entropy_floor_loss": float(duration_entropy_floor_loss.detach().cpu().item()),
+            "duration_entropy_floor_coef_active": float(duration_entropy_floor_coef_active),
+            "duration_policy_entropy": float(duration_policy_entropy.detach().mean().cpu().item()),
+            "duration_policy_entropy_norm": float(duration_policy_entropy_norm.detach().cpu().item()),
+            "z_entropy_floor_active": float(z_entropy_floor_active),
+            "z_entropy_floor_gap": float(z_entropy_floor_gap),
+            "z_entropy_floor_loss": float(z_entropy_floor_loss.detach().cpu().item()),
+            "z_entropy_floor_coef_active": float(z_entropy_floor_coef_active),
+            "z_policy_entropy": float(z_policy_entropy.detach().cpu().item()),
+            "z_policy_entropy_norm": float(z_policy_entropy_norm.detach().cpu().item()),
+            "z_advantage_mean": float(z_advantage_mean),
+            "z_advantage_std": float(z_advantage_std),
+            "z_advantage_var": float(z_advantage_var),
             "high_aux_loss": float(aux_loss.detach().cpu().item()),
             "high_entropy": float(entropy.detach().mean().cpu().item()),
             "high_return_mean": float(np.mean(returns_np)),

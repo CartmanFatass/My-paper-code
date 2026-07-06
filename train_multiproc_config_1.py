@@ -96,9 +96,11 @@ def validate_scenario7_configuration(config, args, env=None):
 
     stage = str(getattr(config, "energy_stage", "")).upper()
     expected_episode_length = 500 if stage == "S1" else 1500
+    requested_n_agents = int(getattr(args, "n_agents", 0) or 0)
+    expected_n_agents = requested_n_agents if requested_n_agents > 0 else int(getattr(config, "n_agents", 8))
     expected_values = {
         "scenario7_config_revision": "scenario7-qos-safety-pbrs-v5",
-        "n_agents": 8,
+        "n_agents": expected_n_agents,
         "action_dim": 4,
         "action_bound": 1.0,
         "lambda_l": 0.005,
@@ -212,8 +214,11 @@ def validate_scenario7_configuration(config, args, env=None):
 
     if env is not None:
         raw_env = getattr(env, "env", env)
-        if getattr(env, "n_uavs", None) != 8:
-            errors.append(f"environment n_uavs={getattr(env, 'n_uavs', None)!r}, expected 8")
+        if getattr(env, "n_uavs", None) != expected_n_agents:
+            errors.append(
+                f"environment n_uavs={getattr(env, 'n_uavs', None)!r}, "
+                f"expected {expected_n_agents}"
+            )
 
         possible_agents = getattr(raw_env, "possible_agents", None)
         if not possible_agents:
@@ -3723,6 +3728,8 @@ def parse_args():
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
     parser.add_argument('--scenario', type=str, default='base',
                         help='场景: base=基础强制中继(scenario_base), progress=递进强制中继, belief_map=信念地图, energy=能量感知强制中继；兼容旧值4/6/5/7')
+    parser.add_argument('--n_agents', type=int, default=0,
+                        help='覆盖环境无人机/智能体数量；0=使用preset默认值')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')
     parser.add_argument('--log_dir', type=str, default='../tf-logs', help='日志目录')
     parser.add_argument('--log_level', type=str, default='info', 
@@ -5246,6 +5253,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                         step_coverage_data.append({
                             'step': env_steps[i],
                             'env_id': i,
+                            'episode': int(getattr(visualizers[i], 'episode_num', completed_episodes + 1)),
                             'preset': getattr(agent.config, 'experiment_preset', ''),
                             'scenario_label': getattr(agent.config, 'scenario_label', ''),
                             'coverage_ratio': coverage_ratio,
@@ -5653,6 +5661,65 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         & (episode_first_charge_steps >= 0)
     ]
     episode_rewards_array = np.asarray(episode_rewards, dtype=float)
+    step_coverage_values = np.asarray(
+        [record.get('coverage_ratio', np.nan) for record in step_coverage_data],
+        dtype=float,
+    )
+    step_coverage_values = step_coverage_values[np.isfinite(step_coverage_values)]
+    step_throughput_values = np.asarray(
+        [record.get('system_throughput_mbps', np.nan) for record in step_coverage_data],
+        dtype=float,
+    )
+    step_throughput_values = step_throughput_values[np.isfinite(step_throughput_values)]
+    episode_step_groups = {}
+    for record in step_coverage_data:
+        key = (int(record.get('env_id', -1)), int(record.get('episode', -1)))
+        episode_step_groups.setdefault(key, []).append(record)
+    episode_step_full_flags = []
+    episode_step_zero_throughput_flags = []
+    for records in episode_step_groups.values():
+        coverages = np.asarray(
+            [r.get('coverage_ratio', np.nan) for r in records],
+            dtype=float,
+        )
+        coverages = coverages[np.isfinite(coverages)]
+        throughputs = np.asarray(
+            [r.get('system_throughput_mbps', np.nan) for r in records],
+            dtype=float,
+        )
+        throughputs = throughputs[np.isfinite(throughputs)]
+        if coverages.size:
+            episode_step_full_flags.append(float(np.any(coverages >= 1.0 - 1e-6)))
+        if throughputs.size:
+            episode_step_zero_throughput_flags.append(float(np.all(throughputs <= 1e-6)))
+    if not episode_step_full_flags and episode_coverage_values.size:
+        episode_step_full_flags = [float(value >= 1.0 - 1e-6) for value in episode_coverage_values]
+    if not episode_step_zero_throughput_flags and episode_throughput_values.size:
+        episode_step_zero_throughput_flags = [
+            float(value <= 1e-6) for value in episode_throughput_values
+        ]
+    coverage_eq1_episode_fraction = (
+        float(np.mean(episode_step_full_flags)) if episode_step_full_flags else 0.0
+    )
+    zero_throughput_episode_fraction = (
+        float(np.mean(episode_step_zero_throughput_flags))
+        if episode_step_zero_throughput_flags else 0.0
+    )
+    step_metric_fallback_used = not (step_coverage_values.size and step_throughput_values.size)
+    coverage_eq1_step_fraction = (
+        float(np.mean(step_coverage_values >= 1.0 - 1e-6))
+        if step_coverage_values.size
+        else coverage_eq1_episode_fraction
+    )
+    throughput_gt5_step_fraction = (
+        float(np.mean(step_throughput_values > 5.0))
+        if step_throughput_values.size
+        else (
+            float(np.mean(episode_throughput_values > 5.0))
+            if episode_throughput_values.size
+            else 0.0
+        )
+    )
     evaluation_diagnostics = {
         'training_steps': int(eval_step),
         'skill_interval': int(getattr(agent.config, 'k', 0)),
@@ -5686,6 +5753,14 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         'full_coverage_episodes': (
             int(np.sum(episode_coverage_values >= 1.0 - 1e-6))
             if episode_coverage_values.size else 0
+        ),
+        'coverage_eq1_step_fraction': coverage_eq1_step_fraction,
+        'coverage_eq1_episode_fraction': coverage_eq1_episode_fraction,
+        'zero_throughput_episode_fraction': zero_throughput_episode_fraction,
+        'throughput_gt5_step_fraction': throughput_gt5_step_fraction,
+        'parity_step_metric_fallback_used': float(step_metric_fallback_used),
+        'parity_step_metric_sample_count': int(
+            min(step_coverage_values.size, step_throughput_values.size)
         ),
         'mean_final_throughput_mbps': (
             float(np.mean(episode_throughput_values))
@@ -6127,6 +6202,26 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             evaluation_diagnostics['zero_coverage_episodes'],
             eval_step,
         )
+        eval_tb_manager.add_scalar(
+            'Evaluation/Coverage_Eq1_Step_Fraction',
+            evaluation_diagnostics['coverage_eq1_step_fraction'],
+            eval_step,
+        )
+        eval_tb_manager.add_scalar(
+            'Evaluation/Coverage_Eq1_Episode_Fraction',
+            evaluation_diagnostics['coverage_eq1_episode_fraction'],
+            eval_step,
+        )
+        eval_tb_manager.add_scalar(
+            'Evaluation/Zero_Throughput_Episode_Fraction',
+            evaluation_diagnostics['zero_throughput_episode_fraction'],
+            eval_step,
+        )
+        eval_tb_manager.add_scalar(
+            'Evaluation/Throughput_Gt5_Step_Fraction',
+            evaluation_diagnostics['throughput_gt5_step_fraction'],
+            eval_step,
+        )
     
     if total_served_users:
         eval_tb_manager.add_scalar('Evaluation/Episode_Average_Served_Users', np.mean(total_served_users), eval_step)
@@ -6152,7 +6247,13 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         f"最终覆盖率中位数={evaluation_diagnostics['median_final_coverage']:.2%}, "
         f"零覆盖={evaluation_diagnostics['zero_coverage_episodes']}/"
         f"{evaluation_diagnostics['episode_count']}, "
-        f"平均吞吐量={evaluation_diagnostics['mean_final_throughput_mbps']:.2f} Mbps"
+        f"平均吞吐量={evaluation_diagnostics['mean_final_throughput_mbps']:.2f} Mbps, "
+        f"coverage_eq1_step_frac={evaluation_diagnostics['coverage_eq1_step_fraction']:.6f}, "
+        f"coverage_eq1_ep_frac={evaluation_diagnostics['coverage_eq1_episode_fraction']:.6f}, "
+        f"zero_throughput_ep_frac={evaluation_diagnostics['zero_throughput_episode_fraction']:.6f}, "
+        f"throughput_gt5_step_frac={evaluation_diagnostics['throughput_gt5_step_fraction']:.6f}, "
+        f"parity_step_fallback={evaluation_diagnostics['parity_step_metric_fallback_used']:.0f}, "
+        f"parity_step_samples={evaluation_diagnostics['parity_step_metric_sample_count']}"
     )
 
     # 切换回训练模式
@@ -6195,6 +6296,10 @@ def main():
             args.scenario = normalize_scenario(config.scenario)
     args.scenario = normalize_scenario(args.scenario)
     config.scenario = args.scenario
+    if int(getattr(args, "n_agents", 0) or 0) > 0:
+        config.n_agents = int(args.n_agents)
+        if hasattr(config, "n_uavs"):
+            config.n_uavs = int(args.n_agents)
     
     # 只设置少量开关参数（其他参数已在config_1.py中定义）
     config.use_opt = args.use_opt
@@ -6307,6 +6412,10 @@ def main():
         config.scenario7_baseline_metrics_path = os.path.abspath(
             args.scenario7_baseline_metrics_path
         )
+    if int(getattr(args, "n_agents", 0) or 0) > 0:
+        config.n_agents = int(args.n_agents)
+        if hasattr(config, "n_uavs"):
+            config.n_uavs = int(args.n_agents)
 
     validate_scenario7_configuration(config, args)
 

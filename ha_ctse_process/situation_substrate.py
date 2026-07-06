@@ -1,3 +1,4 @@
+
 """Round-12 situation substrate utilities.
 
 This module is pure Python/NumPy. It converts validated OPT substrate outputs

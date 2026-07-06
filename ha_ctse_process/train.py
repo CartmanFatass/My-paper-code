@@ -80,6 +80,15 @@ ALGORITHM_MANIFEST_FIELDS = (
     "team_bridge_type",
     "team_code_dim",
     "num_team_codes",
+    "enable_team_intent",
+    "enable_team_disc_probe",
+    "enable_team_disc_reward",
+    "team_intent_k",
+    "team_disc_coef",
+    "team_disc_clip",
+    "team_disc_warmup_steps",
+    "team_disc_lr",
+    "team_disc_hidden_dim",
     "process_encoder_embedding_dim",
     "lr_process_encoder",
     "process_contrast_coef",
@@ -192,6 +201,13 @@ ALGORITHM_MANIFEST_FIELDS = (
     "situation_hazard_confirm_changes",
     "situation_hazard_max_force_rate",
     "situation_hazard_rate_window",
+    "enable_team_transition_probe",
+    "enable_team_transition_reward",
+    "team_transition_coef",
+    "team_transition_clip",
+    "team_transition_warmup_steps",
+    "team_transition_lr",
+    "team_transition_hidden_dim",
     "intrinsic_segment_gate_enabled",
     "intrinsic_segment_gate_margin",
     "intrinsic_segment_gate_min_segments",
@@ -225,6 +241,15 @@ TRAINING_MANIFEST_FIELDS = (
     "low_clip_epsilon",
     "high_entropy_coef",
     "low_entropy_coef",
+    "duration_entropy_floor_enabled",
+    "duration_entropy_floor_threshold",
+    "duration_entropy_floor_coef",
+    "duration_entropy_floor_warmup_steps",
+    "z_entropy_floor_enabled",
+    "z_entropy_floor_threshold",
+    "z_entropy_floor_coef",
+    "z_entropy_floor_warmup_steps",
+    "reward_ratio_guard_mode",
     "high_max_grad_norm",
     "low_max_grad_norm",
     "lr",
@@ -439,6 +464,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--eval_interval", type=int, default=0)
     parser.add_argument("--eval_episodes", type=int, default=3)
     parser.add_argument("--eval_max_steps", type=int, default=0)
+    parser.add_argument(
+        "--eval_action_mode",
+        choices=("deterministic", "stochastic"),
+        default="deterministic",
+    )
     parser.add_argument("--save_topology", action="store_true")
     parser.add_argument("--topology_interval", type=int, default=25)
     parser.add_argument("--topology_episodes", type=int, default=1)
@@ -608,12 +638,39 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--situation_hazard_confirm_changes", type=int, default=0)
     parser.add_argument("--situation_hazard_max_force_rate", type=float, default=None)
     parser.add_argument("--situation_hazard_rate_window", type=int, default=0)
+    parser.add_argument("--enable_team_transition_probe", action="store_true")
+    parser.add_argument("--enable_team_transition_reward", action="store_true")
+    parser.add_argument("--team_transition_coef", type=float, default=None)
+    parser.add_argument("--team_transition_clip", type=float, default=None)
+    parser.add_argument("--team_transition_warmup_steps", type=int, default=-1)
+    parser.add_argument("--team_transition_lr", type=float, default=None)
+    parser.add_argument("--team_transition_hidden_dim", type=int, default=0)
+    parser.add_argument("--enable_team_intent", action="store_true")
+    parser.add_argument("--enable_team_disc_probe", action="store_true")
+    parser.add_argument("--enable_team_disc_reward", action="store_true")
+    parser.add_argument("--team_intent_k", type=int, default=0)
+    parser.add_argument("--team_disc_coef", type=float, default=None)
+    parser.add_argument("--team_disc_clip", type=float, default=None)
+    parser.add_argument("--team_disc_warmup_steps", type=int, default=-1)
+    parser.add_argument("--team_disc_lr", type=float, default=None)
+    parser.add_argument("--team_disc_hidden_dim", type=int, default=0)
+    parser.add_argument("--z_assignment_residual_gain", type=float, default=None)
+    parser.add_argument("--team_disc_actionability_floor", type=float, default=None)
     parser.add_argument("--intrinsic_segment_gate_margin", type=float, default=None)
     parser.add_argument("--intrinsic_segment_gate_min_segments", type=int, default=0)
     parser.add_argument("--intrinsic_segment_gate_min_residual_mi", type=float, default=None)
     parser.add_argument("--intrinsic_segment_gate_min_posterior_acc", type=float, default=None)
     parser.add_argument("--high_entropy_coef", type=float, default=None)
     parser.add_argument("--low_entropy_coef", type=float, default=None)
+    parser.add_argument("--enable_duration_entropy_floor", action="store_true")
+    parser.add_argument("--duration_entropy_floor_threshold", type=float, default=None)
+    parser.add_argument("--duration_entropy_floor_coef", type=float, default=None)
+    parser.add_argument("--duration_entropy_floor_warmup_steps", type=int, default=-1)
+    parser.add_argument("--enable_z_entropy_floor", action="store_true")
+    parser.add_argument("--z_entropy_floor_threshold", type=float, default=None)
+    parser.add_argument("--z_entropy_floor_coef", type=float, default=None)
+    parser.add_argument("--z_entropy_floor_warmup_steps", type=int, default=-1)
+    parser.add_argument("--reward_ratio_guard_mode", choices=("kill", "warn"), default="")
     parser.add_argument("--high_max_grad_norm", type=float, default=None)
     parser.add_argument("--low_max_grad_norm", type=float, default=None)
     parser.add_argument("--low_rnn_hidden_size", type=int, default=0)
@@ -686,6 +743,10 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.skill_lifetime_candidates = candidates
     if args.team_bridge_type:
         config.team_bridge_type = args.team_bridge_type
+    if getattr(args, "z_assignment_residual_gain", None) is not None:
+        config.z_assignment_residual_gain = float(args.z_assignment_residual_gain)
+    if getattr(args, "team_disc_actionability_floor", None) is not None:
+        config.team_disc_actionability_floor = float(args.team_disc_actionability_floor)
     if args.low_level_architecture:
         config.low_level_architecture = args.low_level_architecture
     if int(args.opt_compact_dim) > 0:
@@ -741,6 +802,10 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "intrinsic_segment_gate_min_posterior_acc",
         "high_entropy_coef",
         "low_entropy_coef",
+        "duration_entropy_floor_threshold",
+        "duration_entropy_floor_coef",
+        "z_entropy_floor_threshold",
+        "z_entropy_floor_coef",
         "high_max_grad_norm",
         "low_max_grad_norm",
         "low_value_loss_coef",
@@ -756,6 +821,12 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "prototype_disc_lr",
         "prototype_disc_prior_coef",
         "compact_return_coef",
+        "team_transition_coef",
+        "team_transition_clip",
+        "team_transition_lr",
+        "team_disc_coef",
+        "team_disc_clip",
+        "team_disc_lr",
     )
     for name in optional_scalars:
         value = getattr(args, name)
@@ -892,6 +963,32 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
             setattr(config, name, float(value))
     if args.situation_hazard_max_force_rate is not None:
         config.situation_hazard_max_force_rate = float(args.situation_hazard_max_force_rate)
+    if args.enable_team_transition_probe:
+        config.enable_team_transition_probe = True
+        config.enable_situation_diagnostics = True
+    if args.enable_team_transition_reward:
+        config.enable_team_transition_probe = True
+        config.enable_team_transition_reward = True
+        config.enable_situation_diagnostics = True
+    if int(args.team_transition_warmup_steps) >= 0:
+        config.team_transition_warmup_steps = int(args.team_transition_warmup_steps)
+    if int(args.team_transition_hidden_dim) > 0:
+        config.team_transition_hidden_dim = int(args.team_transition_hidden_dim)
+    if args.enable_team_intent:
+        config.enable_team_intent = True
+    if args.enable_team_disc_probe:
+        config.enable_team_disc_probe = True
+        config.enable_team_intent = True
+    if args.enable_team_disc_reward:
+        config.enable_team_disc_probe = True
+        config.enable_team_disc_reward = True
+        config.enable_team_intent = True
+    if int(args.team_intent_k) > 0:
+        config.team_intent_k = int(args.team_intent_k)
+    if int(args.team_disc_warmup_steps) >= 0:
+        config.team_disc_warmup_steps = int(args.team_disc_warmup_steps)
+    if int(args.team_disc_hidden_dim) > 0:
+        config.team_disc_hidden_dim = int(args.team_disc_hidden_dim)
     if int(args.intrinsic_phase_bins) > 0:
         config.intrinsic_phase_bins = int(args.intrinsic_phase_bins)
     if int(args.intrinsic_segment_gate_min_segments) > 0:
@@ -933,6 +1030,16 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.use_g_info_diagnostic = False
     if args.enable_g_info_objective:
         config.enable_g_info_objective = True
+    if args.enable_duration_entropy_floor:
+        config.duration_entropy_floor_enabled = True
+    if int(args.duration_entropy_floor_warmup_steps) >= 0:
+        config.duration_entropy_floor_warmup_steps = int(args.duration_entropy_floor_warmup_steps)
+    if args.enable_z_entropy_floor:
+        config.z_entropy_floor_enabled = True
+    if int(args.z_entropy_floor_warmup_steps) >= 0:
+        config.z_entropy_floor_warmup_steps = int(args.z_entropy_floor_warmup_steps)
+    if args.reward_ratio_guard_mode:
+        config.reward_ratio_guard_mode = str(args.reward_ratio_guard_mode)
     if args.disable_intrinsic_segment_gate:
         config.intrinsic_segment_gate_enabled = False
     if args.enable_intrinsic_reward_norm:
@@ -977,6 +1084,10 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.use_topology_potential_shaping = True
     if args.topology_potential_positive_only:
         config.topology_potential_positive_only = True
+    if bool(getattr(config, "enable_team_intent", False)):
+        if str(getattr(config, "team_bridge_type", "stochastic")) == "none":
+            raise ValueError("--enable_team_intent requires team_bridge_type to be deterministic or stochastic, not none")
+        config.low_actor_condition_on_team_code = False
 
 
 def resolve_device(requested: str) -> str:
@@ -1102,6 +1213,24 @@ def checkpoint_payload(
             if getattr(agent, "skill_effect_discovery", None) is not None
             else None
         ),
+        "team_transition": (
+            agent.team_transition.state_dict()
+            if getattr(agent, "team_transition", None) is not None
+            else None
+        ),
+        "team_discriminator": (
+            agent.team_discriminator.state_dict()
+            if getattr(agent, "team_discriminator", None) is not None
+            else None
+        ),
+        "team_intent_prior_counts": (
+            torch.as_tensor(
+                np.asarray(getattr(agent, "team_intent_prior_counts", []), dtype=np.float64),
+                dtype=torch.float64,
+            )
+            if getattr(agent, "enable_team_intent", False)
+            else None
+        ),
         "high_opt": agent.high_opt.state_dict(),
         "low_opt": agent.low_opt.state_dict() if agent.low_opt is not None else None,
         "low_actor_opt": agent.low_actor_opt.state_dict() if agent.low_actor_opt is not None else None,
@@ -1119,6 +1248,16 @@ def checkpoint_payload(
             if getattr(agent, "skill_effect_discovery", None) is not None
             else None
         ),
+        "team_transition_opt": (
+            agent.team_transition_opt.state_dict()
+            if getattr(agent, "team_transition_opt", None) is not None
+            else None
+        ),
+        "team_disc_opt": (
+            agent.team_disc_opt.state_dict()
+            if getattr(agent, "team_disc_opt", None) is not None
+            else None
+        ),
         "total_steps": int(total_steps),
         "update_idx": int(update_idx),
         "config_name": args.config,
@@ -1126,6 +1265,7 @@ def checkpoint_payload(
         "scenario": config.scenario,
         "action_space_type": agent.action_space_type,
         "action_dim": agent.action_dim,
+        "team_bridge_type": str(getattr(config, "team_bridge_type", "stochastic")),
         "n_agents": agent.n_agents,
         "n_skills": agent.n_skills,
         "duration_candidates": agent.duration_candidates,
@@ -1147,6 +1287,23 @@ def checkpoint_payload(
         "prototype_disc_condition": str(getattr(agent, "prototype_disc_condition", "kappa")),
         "prototype_disc_use_learned_prior": bool(getattr(agent, "prototype_disc_use_learned_prior", False)),
         "use_compact_return_head": bool(getattr(agent, "use_compact_return_head", False)),
+        "enable_team_transition_probe": bool(getattr(agent, "enable_team_transition_probe", False)),
+        "enable_team_transition_reward": bool(getattr(agent, "enable_team_transition_reward", False)),
+        "team_transition_coef": float(getattr(agent, "team_transition_coef", 0.0)),
+        "team_transition_clip": float(getattr(agent, "team_transition_clip", 0.0)),
+        "team_transition_warmup_steps": int(getattr(agent, "team_transition_warmup_steps", 0)),
+        "enable_team_intent": bool(getattr(agent, "enable_team_intent", False)),
+        "team_intent_k": int(getattr(agent, "team_intent_k", 0)),
+        "enable_team_disc_probe": bool(getattr(agent, "enable_team_disc_probe", False)),
+        "enable_team_disc_reward": bool(getattr(agent, "enable_team_disc_reward", False)),
+        "team_disc_coef": float(getattr(agent, "team_disc_coef", 0.0)),
+        "team_disc_clip": float(getattr(agent, "team_disc_clip", 0.0)),
+        "team_disc_warmup_steps": int(getattr(agent, "team_disc_warmup_steps", 0)),
+        "team_disc_hidden_dim": int(getattr(config, "team_disc_hidden_dim", 128)),
+        "z_entropy_floor_enabled": bool(getattr(agent, "z_entropy_floor_enabled", False)),
+        "z_entropy_floor_threshold": float(getattr(agent, "z_entropy_floor_threshold", 0.0)),
+        "z_entropy_floor_coef": float(getattr(agent, "z_entropy_floor_coef", 0.0)),
+        "z_entropy_floor_warmup_steps": int(getattr(agent, "z_entropy_floor_warmup_steps", 0)),
         "algorithm": "ha_ctse_process_standalone",
     }
 
@@ -1246,6 +1403,28 @@ def load_checkpoint(
             agent.skill_effect_discovery.load_state_dict(checkpoint["skill_effect_discovery"], strict=False)
         except RuntimeError:
             pass
+    if (
+        "team_transition" in checkpoint
+        and checkpoint.get("team_transition") is not None
+        and getattr(agent, "team_transition", None) is not None
+    ):
+        agent.team_transition.load_state_dict(checkpoint["team_transition"], strict=False)
+    if (
+        "team_discriminator" in checkpoint
+        and checkpoint.get("team_discriminator") is not None
+        and getattr(agent, "team_discriminator", None) is not None
+    ):
+        agent.team_discriminator.load_state_dict(checkpoint["team_discriminator"], strict=False)
+    if "team_intent_prior_counts" in checkpoint and checkpoint.get("team_intent_prior_counts") is not None:
+        raw_prior_counts = checkpoint["team_intent_prior_counts"]
+        if isinstance(raw_prior_counts, torch.Tensor):
+            prior_counts = raw_prior_counts.detach().cpu().numpy().astype(np.float64).reshape(-1)
+        else:
+            prior_counts = np.asarray(raw_prior_counts, dtype=np.float64).reshape(-1)
+        if prior_counts.size > 0 and hasattr(agent, "team_intent_prior_counts"):
+            fitted = np.ones_like(agent.team_intent_prior_counts, dtype=np.float64)
+            fitted[: min(fitted.size, prior_counts.size)] = prior_counts[: min(fitted.size, prior_counts.size)]
+            agent.team_intent_prior_counts = np.maximum(fitted, 1e-6)
     if load_optimizers:
         if "high_opt" in checkpoint:
             try:
@@ -1293,6 +1472,24 @@ def load_checkpoint(
                 agent.skill_effect_discovery.opt.load_state_dict(checkpoint["skill_effect_opt"])
             except ValueError:
                 pass
+        if (
+            "team_transition_opt" in checkpoint
+            and checkpoint.get("team_transition_opt") is not None
+            and getattr(agent, "team_transition_opt", None) is not None
+        ):
+            try:
+                agent.team_transition_opt.load_state_dict(checkpoint["team_transition_opt"])
+            except ValueError:
+                pass
+        if (
+            "team_disc_opt" in checkpoint
+            and checkpoint.get("team_disc_opt") is not None
+            and getattr(agent, "team_disc_opt", None) is not None
+        ):
+            try:
+                agent.team_disc_opt.load_state_dict(checkpoint["team_disc_opt"])
+            except ValueError:
+                pass
     return int(checkpoint.get("total_steps", 0)), int(checkpoint.get("update_idx", 0))
 
 
@@ -1305,6 +1502,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "opt_num_prototypes": checkpoint.get("opt_num_prototypes"),
         "preset": checkpoint.get("preset"),
         "scenario": checkpoint.get("scenario"),
+        "team_bridge_type": checkpoint.get("team_bridge_type"),
         "total_steps": checkpoint.get("total_steps"),
         "update_idx": checkpoint.get("update_idx"),
         "low_actor_condition_on_team_code": checkpoint.get("low_actor_condition_on_team_code"),
@@ -1322,6 +1520,19 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "prototype_disc_condition": checkpoint.get("prototype_disc_condition"),
         "prototype_disc_use_learned_prior": checkpoint.get("prototype_disc_use_learned_prior"),
         "use_compact_return_head": checkpoint.get("use_compact_return_head"),
+        "enable_team_transition_probe": checkpoint.get("enable_team_transition_probe"),
+        "enable_team_transition_reward": checkpoint.get("enable_team_transition_reward"),
+        "team_transition_coef": checkpoint.get("team_transition_coef"),
+        "team_transition_clip": checkpoint.get("team_transition_clip"),
+        "team_transition_warmup_steps": checkpoint.get("team_transition_warmup_steps"),
+        "enable_team_intent": checkpoint.get("enable_team_intent"),
+        "team_intent_k": checkpoint.get("team_intent_k"),
+        "enable_team_disc_probe": checkpoint.get("enable_team_disc_probe"),
+        "enable_team_disc_reward": checkpoint.get("enable_team_disc_reward"),
+        "team_disc_coef": checkpoint.get("team_disc_coef"),
+        "team_disc_clip": checkpoint.get("team_disc_clip"),
+        "team_disc_warmup_steps": checkpoint.get("team_disc_warmup_steps"),
+        "team_disc_hidden_dim": checkpoint.get("team_disc_hidden_dim"),
     }
 
 
@@ -1348,6 +1559,8 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
 
     if metadata.get("low_actor_condition_on_team_code") is not None:
         config.low_actor_condition_on_team_code = bool(metadata.get("low_actor_condition_on_team_code"))
+    if metadata.get("team_bridge_type"):
+        config.team_bridge_type = str(metadata.get("team_bridge_type"))
     for name in (
         "use_prototype_response_skills",
         "high_condition_on_omega",
@@ -1359,9 +1572,17 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         "parallel_selection",
         "prototype_disc_use_learned_prior",
         "use_compact_return_head",
+        "enable_team_transition_probe",
+        "enable_team_transition_reward",
+        "enable_team_intent",
+        "enable_team_disc_probe",
+        "enable_team_disc_reward",
+        "z_entropy_floor_enabled",
     ):
         if metadata.get(name) is not None:
             setattr(config, name, bool(metadata.get(name)))
+    if bool(getattr(config, "enable_team_transition_probe", False)):
+        config.enable_situation_diagnostics = True
     if metadata.get("ar_prefix_mode"):
         config.ar_prefix_mode = str(metadata.get("ar_prefix_mode"))
     if metadata.get("prototype_skill_extra_codes") is not None:
@@ -1372,6 +1593,29 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         config.opt_num_prototypes = int(metadata.get("opt_num_prototypes"))
     if metadata.get("prototype_disc_condition"):
         config.prototype_disc_condition = str(metadata.get("prototype_disc_condition"))
+    for name in ("team_transition_coef", "team_transition_clip"):
+        if metadata.get(name) is not None:
+            setattr(config, name, float(metadata.get(name)))
+    if metadata.get("team_transition_warmup_steps") is not None:
+        config.team_transition_warmup_steps = int(metadata.get("team_transition_warmup_steps"))
+    for name in ("team_disc_coef", "team_disc_clip"):
+        if metadata.get(name) is not None:
+            setattr(config, name, float(metadata.get(name)))
+    for name in ("z_entropy_floor_threshold", "z_entropy_floor_coef"):
+        if metadata.get(name) is not None:
+            setattr(config, name, float(metadata.get(name)))
+    if metadata.get("team_intent_k") is not None:
+        config.team_intent_k = int(metadata.get("team_intent_k"))
+    if metadata.get("team_disc_warmup_steps") is not None:
+        config.team_disc_warmup_steps = int(metadata.get("team_disc_warmup_steps"))
+    if metadata.get("z_entropy_floor_warmup_steps") is not None:
+        config.z_entropy_floor_warmup_steps = int(metadata.get("z_entropy_floor_warmup_steps"))
+    if metadata.get("team_disc_hidden_dim") is not None:
+        config.team_disc_hidden_dim = int(metadata.get("team_disc_hidden_dim"))
+    if bool(getattr(config, "enable_team_intent", False)):
+        if str(getattr(config, "team_bridge_type", "stochastic")) == "none":
+            raise ValueError("checkpoint enables team intent but uses team_bridge_type='none'")
+        config.low_actor_condition_on_team_code = False
 
 
 def run_env_dry_check(config, args: argparse.Namespace) -> None:
@@ -1439,14 +1683,21 @@ def evaluate(
     episodes: int,
     total_steps: int,
 ) -> dict[str, float]:
-    """Run deterministic standalone eval without changing training segments."""
+    """Run standalone eval without changing training segments."""
 
     env = create_env(config, config.scenario, int(args.seed) + 100000, rank=0, scale_mode="eval")
+    deterministic_eval = str(getattr(args, "eval_action_mode", "deterministic")) == "deterministic"
     active_backup = agent.active_skills.copy()
     duration_backup = agent.duration_remaining.copy()
     age_backup = agent.skill_age.copy()
     has_active_backup = agent.has_active_skill.copy()
     team_code_backup = agent.active_team_codes.copy()
+    team_intent_remaining_backup = getattr(agent, "team_intent_remaining", None)
+    if team_intent_remaining_backup is not None:
+        team_intent_remaining_backup = team_intent_remaining_backup.copy()
+    team_intent_age_backup = getattr(agent, "team_intent_age", None)
+    if team_intent_age_backup is not None:
+        team_intent_age_backup = team_intent_age_backup.copy()
     low_actor_hxs_backup = agent.low_actor_hxs.copy()
     low_critic_hxs_backup = agent.low_critic_hxs.copy()
     segments_backup = agent.segments
@@ -1495,9 +1746,9 @@ def evaluate(
                     step=episode_length,
                     k=int(args.skill_interval),
                     env_id=0,
-                    deterministic=True,
+                    deterministic=deterministic_eval,
                 )
-                actions, _, _ = agent.act_low(obs, env_id=0, deterministic=True, state=state)
+                actions, _, _ = agent.act_low(obs, env_id=0, deterministic=deterministic_eval, state=state)
                 obs, reward, terminated, truncated, last_info = env.step(actions)
                 state = last_info.get("next_state", state)
                 episode_reward += float(reward)
@@ -1569,6 +1820,7 @@ def evaluate(
                 "checkpoint": str(getattr(args, "eval_checkpoint_name", "")),
                 "total_steps": int(total_steps),
                 "episode": episode_idx,
+                "action_mode_code": 0.0 if deterministic_eval else 1.0,
                 "reward": episode_reward,
                 "length": episode_length,
                 **episode_metrics,
@@ -1610,6 +1862,10 @@ def evaluate(
         agent.skill_age = age_backup
         agent.has_active_skill = has_active_backup
         agent.active_team_codes = team_code_backup
+        if team_intent_remaining_backup is not None:
+            agent.team_intent_remaining = team_intent_remaining_backup
+        if team_intent_age_backup is not None:
+            agent.team_intent_age = team_intent_age_backup
         agent.low_actor_hxs = low_actor_hxs_backup
         agent.low_critic_hxs = low_critic_hxs_backup
 
@@ -1617,6 +1873,7 @@ def evaluate(
         "reward_mean": float(np.mean(rewards)) if rewards else 0.0,
         "reward_std": float(np.std(rewards)) if rewards else 0.0,
         "length_mean": float(np.mean(lengths)) if lengths else 0.0,
+        "action_mode_code": 0.0 if deterministic_eval else 1.0,
     }
     for key, values in metric_values.items():
         metrics[key] = float(np.mean(values)) if values else 0.0
@@ -1635,6 +1892,7 @@ def evaluate(
         args,
         "standalone_eval "
         f"total_steps={int(total_steps)} episodes={max(int(episodes), 1)} "
+        f"action_mode={getattr(args, 'eval_action_mode', 'deterministic')} "
         f"reward_mean={metrics['reward_mean']:.6f} "
         f"reward_std={metrics['reward_std']:.6f} "
         f"length_mean={metrics['length_mean']:.1f} "
@@ -1752,6 +2010,68 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         total_steps,
     )
     for key in (
+        "team_transition_active",
+        "team_transition_samples",
+        "team_transition_loss",
+        "team_transition_prior_loss",
+        "team_transition_mi_mean",
+        "team_transition_mi_on_self",
+        "team_transition_mi_on_change",
+        "team_transition_self_frac",
+        "team_transition_missing_frac",
+        "team_transition_reward_high_mean",
+        "team_transition_reward_applied_steps",
+        "team_transition_reward_env_ratio",
+        "team_transition_reward_renewal_corr",
+    ):
+        writer.add_scalar(f"TeamTransition/{key}", process_metrics.get(key, 0.0), total_steps)
+    for key in (
+        "team_intent_enabled",
+        "z_usage_entropy",
+        "z_usage_max_frac",
+        "z_dwell",
+        "z_age_check_mean",
+        "z_boundary_count",
+        "z_decisions_per_update",
+        "z_boundary_trunc_rate",
+        "z_boundary_trunc_rate_dur3",
+        "z_boundary_trunc_rate_dur7",
+        "z_boundary_trunc_rate_dur13",
+        "z_boundary_trunc_rate_dur24",
+        "z_advantage_mean",
+        "z_advantage_std",
+        "z_advantage_var",
+        "z_assignment_itv",
+        "z_entropy_floor_active",
+        "z_entropy_floor_gap",
+        "z_entropy_floor_loss",
+        "z_entropy_floor_coef_active",
+        "z_policy_entropy",
+        "z_policy_entropy_norm",
+    ):
+        writer.add_scalar(f"TeamIntent/{key}", process_metrics.get(key, 0.0), total_steps)
+    for key in (
+        "team_disc_active",
+        "team_disc_samples",
+        "team_disc_loss",
+        "team_disc_acc",
+        "team_disc_prior_entropy",
+        "team_disc_residual_mean",
+        "team_disc_residual_positive_frac",
+        "team_disc_reward_mean",
+        "team_disc_reward_unclipped_mean",
+        "team_disc_reward_applied_steps",
+        "team_disc_reward_env_ratio",
+        "team_disc_reward_env_ratio_over05_count",
+        "team_disc_reward_env_ratio_guard_active",
+        "team_disc_reward_env_ratio_kill_triggered",
+        "combined_intrinsic_env_ratio",
+        "combined_intrinsic_env_ratio_over05_count",
+        "combined_intrinsic_env_ratio_guard_active",
+        "combined_intrinsic_env_ratio_kill_triggered",
+    ):
+        writer.add_scalar(f"TeamDisc/{key}", process_metrics.get(key, 0.0), total_steps)
+    for key in (
         "proto_disc_active",
         "proto_disc_samples",
         "proto_disc_loss",
@@ -1776,6 +2096,9 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         "proto_disc_reward_unclipped_mean",
         "proto_disc_reward_applied_steps",
         "proto_disc_reward_env_ratio",
+        "proto_disc_reward_env_ratio_over05_count",
+        "proto_disc_reward_env_ratio_guard_active",
+        "proto_disc_reward_env_ratio_kill_triggered",
     ):
         writer.add_scalar(f"PrototypeDisc/{key}", process_metrics.get(key, 0.0), total_steps)
     for key in (
@@ -2129,6 +2452,32 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     writer.add_scalar("Collapse/SkillUsageMaxFrac", process_metrics.get("skill_usage_max_frac", 0.0), total_steps)
     writer.add_scalar("Collapse/DurationUsageEntropy", process_metrics.get("duration_usage_entropy", 0.0), total_steps)
     writer.add_scalar("Collapse/DurationUsageMaxFrac", process_metrics.get("duration_usage_max_frac", 0.0), total_steps)
+    writer.add_scalar("Collapse/DurationPolicyEntropy", process_metrics.get("duration_policy_entropy", 0.0), total_steps)
+    writer.add_scalar(
+        "Collapse/DurationPolicyEntropyNorm",
+        process_metrics.get("duration_policy_entropy_norm", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Collapse/DurationEntropyFloorActive",
+        process_metrics.get("duration_entropy_floor_active", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Collapse/DurationEntropyFloorGap",
+        process_metrics.get("duration_entropy_floor_gap", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Collapse/DurationEntropyFloorLoss",
+        process_metrics.get("duration_entropy_floor_loss", 0.0),
+        total_steps,
+    )
+    writer.add_scalar(
+        "Collapse/DurationEntropyFloorCoefActive",
+        process_metrics.get("duration_entropy_floor_coef_active", 0.0),
+        total_steps,
+    )
     writer.add_scalar("Collapse/SkillDurationMI", process_metrics.get("skill_duration_mi", 0.0), total_steps)
     writer.add_scalar("Lifetime/Heterogeneity", process_metrics.get("lifetime_heterogeneity", 0.0), total_steps)
     writer.add_scalar("Lifetime/DurationAgentMI", process_metrics.get("duration_agent_mi", 0.0), total_steps)
@@ -2517,12 +2866,33 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"situation_hazard_confirm_changes={int(getattr(config, 'situation_hazard_confirm_changes', 0))} "
             f"situation_hazard_max_force_rate={float(getattr(config, 'situation_hazard_max_force_rate', 1.0))} "
             f"situation_hazard_rate_window={int(getattr(config, 'situation_hazard_rate_window', 0))} "
+            f"team_transition_probe={bool(getattr(config, 'enable_team_transition_probe', False))} "
+            f"team_transition_reward={bool(getattr(config, 'enable_team_transition_reward', False))} "
+            f"team_transition_coef={float(getattr(config, 'team_transition_coef', 0.0))} "
+            f"team_transition_clip={float(getattr(config, 'team_transition_clip', 0.0))} "
+            f"team_transition_warmup={int(getattr(config, 'team_transition_warmup_steps', 0))} "
+            f"team_intent={bool(getattr(config, 'enable_team_intent', False))} "
+            f"team_intent_k={int(getattr(config, 'team_intent_k', 0))} "
+            f"team_disc_probe={bool(getattr(config, 'enable_team_disc_probe', False))} "
+            f"team_disc_reward={bool(getattr(config, 'enable_team_disc_reward', False))} "
+            f"team_disc_coef={float(getattr(config, 'team_disc_coef', 0.0))} "
+            f"team_disc_clip={float(getattr(config, 'team_disc_clip', 0.0))} "
+            f"team_disc_warmup={int(getattr(config, 'team_disc_warmup_steps', 0))} "
             f"intrinsic_segment_gate={bool(getattr(config, 'intrinsic_segment_gate_enabled', True))} "
             f"intrinsic_gate_margin={float(getattr(config, 'intrinsic_segment_gate_margin', 0.0))} "
             f"intrinsic_gate_min_segments={int(getattr(config, 'intrinsic_segment_gate_min_segments', 0))} "
             f"smdp_discount={bool(getattr(config, 'use_smdp_discounted_high_return', True))} "
             f"smdp_bootstrap={bool(getattr(config, 'use_smdp_bootstrap', True))} "
             f"smdp_bootstrap_coef={float(getattr(config, 'smdp_bootstrap_coef', 1.0))} "
+            f"duration_entropy_floor={bool(getattr(config, 'duration_entropy_floor_enabled', False))} "
+            f"duration_entropy_floor_threshold={float(getattr(config, 'duration_entropy_floor_threshold', 0.0))} "
+            f"duration_entropy_floor_coef={float(getattr(config, 'duration_entropy_floor_coef', 0.0))} "
+            f"duration_entropy_floor_warmup={int(getattr(config, 'duration_entropy_floor_warmup_steps', 0))} "
+            f"z_entropy_floor={bool(getattr(config, 'z_entropy_floor_enabled', False))} "
+            f"z_entropy_floor_threshold={float(getattr(config, 'z_entropy_floor_threshold', 0.0))} "
+            f"z_entropy_floor_coef={float(getattr(config, 'z_entropy_floor_coef', 0.0))} "
+            f"z_entropy_floor_warmup={int(getattr(config, 'z_entropy_floor_warmup_steps', 0))} "
+            f"reward_ratio_guard_mode={str(getattr(config, 'reward_ratio_guard_mode', 'kill'))} "
             f"high_value_norm={bool(getattr(config, 'use_high_value_norm', True))} "
             f"recurrent_low={bool(getattr(config, 'use_recurrent_low_level', True))} "
             f"low_arch={getattr(config, 'low_level_architecture', 'strict_hmasd_mappo')} "
@@ -2552,12 +2922,28 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"params_low={param_counts.get('low', 0)} "
             f"params_process_stack={param_counts.get('process_stack', 0)} "
             f"params_skill_effect={param_counts.get('skill_effect_discovery', 0)} "
+            f"params_team_transition={param_counts.get('team_transition', 0)} "
+            f"params_team_disc={param_counts.get('team_discriminator', 0)} "
             f"duration_candidates={tuple(getattr(config, 'skill_lifetime_candidates', ())) } "
             f"rollout_length={args.rollout_length} total_timesteps={args.total_timesteps} "
             f"save_interval={args.save_interval} checkpoint_keep_last={args.checkpoint_keep_last}"
         )
 
         last_eval_step = int(total_steps)
+        proto_ratio_over05_count = 0
+        proto_ratio_consecutive_over05_count = 0
+        proto_ratio_kill_triggered_count = 0
+        proto_ratio_guard_warmup_steps = int(getattr(config, "prototype_disc_warmup_steps", 0))
+        reward_ratio_guard_mode = str(getattr(config, "reward_ratio_guard_mode", "kill")).lower()
+        if reward_ratio_guard_mode not in {"kill", "warn"}:
+            reward_ratio_guard_mode = "kill"
+        team_disc_ratio_over05_count = 0
+        team_disc_ratio_consecutive_over05_count = 0
+        team_disc_ratio_kill_triggered_count = 0
+        team_disc_ratio_guard_warmup_steps = int(getattr(config, "team_disc_warmup_steps", 0))
+        combined_intrinsic_ratio_over05_count = 0
+        combined_intrinsic_ratio_consecutive_over05_count = 0
+        combined_intrinsic_ratio_kill_triggered_count = 0
         while total_steps < int(args.total_timesteps):
             rollout = Rollout()
             episode_rewards = []
@@ -2636,6 +3022,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     rollout.env_ids.append(int(env_id))
                     rollout.obs.append(np.asarray(obs, dtype=np.float32))
                     rollout.states.append(np.asarray(low_context["state"], dtype=np.float32))
+                    rollout.next_states.append(np.asarray(info.get("next_state", states[env_id]), dtype=np.float32))
                     rollout.skills.append(agent.active_skills[env_id].copy())
                     rollout.team_codes.append(int(low_context["team_code"]))
                     rollout.actions.append(actions.copy())
@@ -2667,6 +3054,126 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             low_metrics = agent.update_low(rollout)
             update_idx += 1
             env_reward_mean = float(np.mean(episode_rewards)) if episode_rewards else 0.0
+            proto_ratio = float(process_metrics.get("proto_disc_reward_env_ratio", 0.0))
+            proto_reward_steps = float(process_metrics.get("proto_disc_reward_applied_steps", 0.0))
+            proto_ratio_guard_active = (
+                proto_reward_steps > 0.0 and int(total_steps) >= int(proto_ratio_guard_warmup_steps)
+            )
+            proto_ratio_kill_message = ""
+            if proto_ratio_guard_active and not np.isfinite(proto_ratio):
+                proto_ratio_kill_message = (
+                    "prototype discriminator reward/env ratio became non-finite "
+                    f"at update={update_idx} total_steps={total_steps}"
+                )
+            elif proto_ratio_guard_active:
+                if proto_ratio > 0.5:
+                    proto_ratio_over05_count += 1
+                    proto_ratio_consecutive_over05_count += 1
+                else:
+                    proto_ratio_consecutive_over05_count = 0
+                if proto_ratio > 1.0:
+                    proto_ratio_kill_message = (
+                        "prototype discriminator reward/env ratio exceeded instant guard "
+                        f"ratio={proto_ratio:.6f} update={update_idx} total_steps={total_steps}"
+                    )
+                elif proto_ratio_consecutive_over05_count >= 5:
+                    proto_ratio_kill_message = (
+                        "prototype discriminator reward/env ratio exceeded sustained guard "
+                        f"ratio={proto_ratio:.6f} count={proto_ratio_consecutive_over05_count} "
+                        f"update={update_idx} total_steps={total_steps}"
+                    )
+            else:
+                proto_ratio_consecutive_over05_count = 0
+            if proto_ratio_kill_message:
+                proto_ratio_kill_triggered_count += 1
+            process_metrics["proto_disc_reward_env_ratio_over05_count"] = float(proto_ratio_over05_count)
+            process_metrics["proto_disc_reward_env_ratio_guard_active"] = float(proto_ratio_guard_active)
+            process_metrics["proto_disc_reward_env_ratio_kill_triggered"] = float(
+                proto_ratio_kill_triggered_count
+            )
+            team_disc_ratio = float(process_metrics.get("team_disc_reward_env_ratio", 0.0))
+            team_disc_reward_steps = float(process_metrics.get("team_disc_reward_applied_steps", 0.0))
+            team_disc_ratio_guard_active = (
+                team_disc_reward_steps > 0.0 and int(total_steps) >= int(team_disc_ratio_guard_warmup_steps)
+            )
+            team_disc_ratio_kill_message = ""
+            if team_disc_ratio_guard_active and not np.isfinite(team_disc_ratio):
+                team_disc_ratio_kill_message = (
+                    "team discriminator reward/env ratio became non-finite "
+                    f"at update={update_idx} total_steps={total_steps}"
+                )
+            elif team_disc_ratio_guard_active:
+                if team_disc_ratio > 0.5:
+                    team_disc_ratio_over05_count += 1
+                    team_disc_ratio_consecutive_over05_count += 1
+                else:
+                    team_disc_ratio_consecutive_over05_count = 0
+                if team_disc_ratio > 1.0:
+                    team_disc_ratio_kill_message = (
+                        "team discriminator reward/env ratio exceeded instant guard "
+                        f"ratio={team_disc_ratio:.6f} update={update_idx} total_steps={total_steps}"
+                    )
+                elif team_disc_ratio_consecutive_over05_count >= 5:
+                    team_disc_ratio_kill_message = (
+                        "team discriminator reward/env ratio exceeded sustained guard "
+                        f"ratio={team_disc_ratio:.6f} count={team_disc_ratio_consecutive_over05_count} "
+                        f"update={update_idx} total_steps={total_steps}"
+                    )
+            else:
+                team_disc_ratio_consecutive_over05_count = 0
+            if team_disc_ratio_kill_message:
+                team_disc_ratio_kill_triggered_count += 1
+            process_metrics["team_disc_reward_env_ratio_over05_count"] = float(team_disc_ratio_over05_count)
+            process_metrics["team_disc_reward_env_ratio_guard_active"] = float(team_disc_ratio_guard_active)
+            process_metrics["team_disc_reward_env_ratio_kill_triggered"] = float(
+                team_disc_ratio_kill_triggered_count
+            )
+            proto_component_ratio = float(abs(proto_ratio)) if proto_reward_steps > 0.0 else 0.0
+            team_disc_component_ratio = float(abs(team_disc_ratio)) if team_disc_reward_steps > 0.0 else 0.0
+            combined_intrinsic_ratio = float(proto_component_ratio + team_disc_component_ratio)
+            combined_intrinsic_reward_steps = proto_reward_steps + team_disc_reward_steps
+            combined_intrinsic_guard_active = bool(
+                combined_intrinsic_reward_steps > 0.0
+                and (proto_ratio_guard_active or team_disc_ratio_guard_active)
+            )
+            combined_intrinsic_kill_message = ""
+            if combined_intrinsic_guard_active and not np.isfinite(combined_intrinsic_ratio):
+                combined_intrinsic_kill_message = (
+                    "combined intrinsic reward/env ratio became non-finite "
+                    f"at update={update_idx} total_steps={total_steps}"
+                )
+            elif combined_intrinsic_guard_active:
+                if combined_intrinsic_ratio > 0.5:
+                    combined_intrinsic_ratio_over05_count += 1
+                    combined_intrinsic_ratio_consecutive_over05_count += 1
+                else:
+                    combined_intrinsic_ratio_consecutive_over05_count = 0
+                if combined_intrinsic_ratio > 1.0:
+                    combined_intrinsic_kill_message = (
+                        "combined intrinsic reward/env ratio exceeded instant guard "
+                        f"ratio={combined_intrinsic_ratio:.6f} update={update_idx} total_steps={total_steps}"
+                    )
+                elif combined_intrinsic_ratio_consecutive_over05_count >= 5:
+                    combined_intrinsic_kill_message = (
+                        "combined intrinsic reward/env ratio exceeded sustained guard "
+                        f"ratio={combined_intrinsic_ratio:.6f} "
+                        f"count={combined_intrinsic_ratio_consecutive_over05_count} "
+                        f"update={update_idx} total_steps={total_steps}"
+                    )
+            else:
+                combined_intrinsic_ratio_consecutive_over05_count = 0
+            if combined_intrinsic_kill_message:
+                combined_intrinsic_ratio_kill_triggered_count += 1
+            process_metrics["combined_intrinsic_env_ratio"] = float(combined_intrinsic_ratio)
+            process_metrics["combined_intrinsic_env_ratio_over05_count"] = float(
+                combined_intrinsic_ratio_over05_count
+            )
+            process_metrics["combined_intrinsic_env_ratio_guard_active"] = float(
+                combined_intrinsic_guard_active
+            )
+            process_metrics["combined_intrinsic_env_ratio_kill_triggered"] = float(
+                combined_intrinsic_ratio_kill_triggered_count
+            )
             emit(
                 args,
                 "standalone_update "
@@ -2686,6 +3193,34 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"trans_resid_mi={process_metrics.get('transition_skill_residual_mi_mean', 0.0):.6f} "
                 f"trans_reward={process_metrics.get('transition_skill_reward_mean', 0.0):.6f} "
                 f"trans_active={process_metrics.get('transition_skill_reward_active', 0.0):.0f} "
+                f"team_t_samples={process_metrics.get('team_transition_samples', 0.0):.0f} "
+                f"team_t_mi={process_metrics.get('team_transition_mi_mean', 0.0):.6f} "
+                f"team_t_self={process_metrics.get('team_transition_self_frac', 0.0):.3f} "
+                f"team_t_rew={process_metrics.get('team_transition_reward_high_mean', 0.0):.6f} "
+                f"team_t_ratio={process_metrics.get('team_transition_reward_env_ratio', 0.0):.3f} "
+                f"team_t_renew_corr={process_metrics.get('team_transition_reward_renewal_corr', 0.0):.3f} "
+                f"z_ent={process_metrics.get('z_usage_entropy', 0.0):.3f} "
+                f"z_ent_floor={process_metrics.get('z_entropy_floor_active', 0.0):.0f} "
+                f"z_ent_gap={process_metrics.get('z_entropy_floor_gap', 0.0):.3f} "
+                f"z_dwell={process_metrics.get('z_dwell', 0.0):.2f} "
+                f"z_trunc={process_metrics.get('z_boundary_trunc_rate', 0.0):.3f} "
+                f"z_trunc_d3={process_metrics.get('z_boundary_trunc_rate_dur3', 0.0):.3f} "
+                f"z_trunc_d7={process_metrics.get('z_boundary_trunc_rate_dur7', 0.0):.3f} "
+                f"z_trunc_d13={process_metrics.get('z_boundary_trunc_rate_dur13', 0.0):.3f} "
+                f"z_trunc_d24={process_metrics.get('z_boundary_trunc_rate_dur24', 0.0):.3f} "
+                f"z_itv={process_metrics.get('z_assignment_itv', 0.0):.6f} "
+                f"team_disc_acc={process_metrics.get('team_disc_acc', 0.0):.3f} "
+                f"team_disc_resid={process_metrics.get('team_disc_residual_mean', 0.0):.6f} "
+                f"team_disc_reward={process_metrics.get('team_disc_reward_mean', 0.0):.6f} "
+                f"team_disc_steps={process_metrics.get('team_disc_reward_applied_steps', 0.0):.0f} "
+                f"team_disc_ratio={process_metrics.get('team_disc_reward_env_ratio', 0.0):.3f} "
+                f"team_disc_guard={process_metrics.get('team_disc_reward_env_ratio_guard_active', 0.0):.0f} "
+                f"team_disc_o05={process_metrics.get('team_disc_reward_env_ratio_over05_count', 0.0):.0f} "
+                f"team_disc_kill={process_metrics.get('team_disc_reward_env_ratio_kill_triggered', 0.0):.0f} "
+                f"combined_intr_ratio={process_metrics.get('combined_intrinsic_env_ratio', 0.0):.3f} "
+                f"combined_intr_guard={process_metrics.get('combined_intrinsic_env_ratio_guard_active', 0.0):.0f} "
+                f"combined_intr_o05={process_metrics.get('combined_intrinsic_env_ratio_over05_count', 0.0):.0f} "
+                f"combined_intr_kill={process_metrics.get('combined_intrinsic_env_ratio_kill_triggered', 0.0):.0f} "
                 f"proto_acc={process_metrics.get('proto_disc_acc', 0.0):.3f} "
                 f"proto_prior_acc={process_metrics.get('proto_disc_prior_acc', 0.0):.3f} "
                 f"proto_null={process_metrics.get('proto_disc_null_logp_mean', 0.0):.6f} "
@@ -2695,6 +3230,9 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"proto_resid={process_metrics.get('proto_disc_residual_mean', 0.0):.6f} "
                 f"proto_reward={process_metrics.get('proto_disc_reward_mean', 0.0):.6f} "
                 f"proto_steps={process_metrics.get('proto_disc_reward_applied_steps', 0.0):.0f} "
+                f"proto_ratio_guard={process_metrics.get('proto_disc_reward_env_ratio_guard_active', 0.0):.0f} "
+                f"proto_ratio_o05={process_metrics.get('proto_disc_reward_env_ratio_over05_count', 0.0):.0f} "
+                f"proto_ratio_kill={process_metrics.get('proto_disc_reward_env_ratio_kill_triggered', 0.0):.0f} "
                 f"proto_skill_ent={process_metrics.get('proto_skill_selection_entropy', 0.0):.3f} "
                 f"proto_kappa_ent={process_metrics.get('proto_skill_usage_entropy_by_kappa', 0.0):.3f} "
                 f"proto_align={process_metrics.get('proto_skill_relevance_alignment', 0.0):.3f} "
@@ -2792,6 +3330,22 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"high_grad_norm={process_metrics.get('high_grad_norm', 0.0):.6f} "
                 f"skill_entropy={process_metrics.get('skill_usage_entropy', 0.0):.3f} "
                 f"duration_entropy={process_metrics.get('duration_usage_entropy', 0.0):.3f} "
+                f"duration_policy_entropy={process_metrics.get('duration_policy_entropy_norm', 0.0):.3f} "
+                f"dur_ent_floor={process_metrics.get('duration_entropy_floor_active', 0.0):.0f} "
+                f"dur_ent_gap={process_metrics.get('duration_entropy_floor_gap', 0.0):.3f} "
+                f"dur_ent_loss={process_metrics.get('duration_entropy_floor_loss', 0.0):.6f} "
+                f"z_ent={process_metrics.get('z_usage_entropy', 0.0):.3f} "
+                f"z_ent_floor={process_metrics.get('z_entropy_floor_active', 0.0):.0f} "
+                f"z_ent_gap={process_metrics.get('z_entropy_floor_gap', 0.0):.3f} "
+                f"z_pol_ent={process_metrics.get('z_policy_entropy_norm', 0.0):.3f} "
+                f"z_decisions={process_metrics.get('z_decisions_per_update', 0.0):.0f} "
+                f"z_adv_mean={process_metrics.get('z_advantage_mean', 0.0):.6f} "
+                f"z_adv_std={process_metrics.get('z_advantage_std', 0.0):.6f} "
+                f"z_trunc={process_metrics.get('z_boundary_trunc_rate', 0.0):.3f} "
+                f"z_trunc_d3={process_metrics.get('z_boundary_trunc_rate_dur3', 0.0):.3f} "
+                f"z_trunc_d7={process_metrics.get('z_boundary_trunc_rate_dur7', 0.0):.3f} "
+                f"z_trunc_d13={process_metrics.get('z_boundary_trunc_rate_dur13', 0.0):.3f} "
+                f"z_trunc_d24={process_metrics.get('z_boundary_trunc_rate_dur24', 0.0):.3f} "
                 f"g_entropy={process_metrics.get('team_code_usage_entropy', 0.0):.3f} "
                 f"g_skill_mi={process_metrics.get('team_code_skill_mi', 0.0):.3f} "
                 f"g_dur_mi={process_metrics.get('team_code_duration_mi', 0.0):.3f} "
@@ -2868,6 +3422,24 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             )
             log_train_metrics(writer, total_steps, episode_rewards, process_metrics, low_metrics)
             export_update_metrics(args, update_idx, total_steps, env_reward_mean, process_metrics, low_metrics)
+            if proto_ratio_kill_message:
+                if reward_ratio_guard_mode == "warn":
+                    emit(args, f"standalone_runtime_guard_warn mode=warn {proto_ratio_kill_message}")
+                else:
+                    emit(args, f"standalone_runtime_guard mode=kill {proto_ratio_kill_message}")
+                    raise RuntimeError(proto_ratio_kill_message)
+            if team_disc_ratio_kill_message:
+                if reward_ratio_guard_mode == "warn":
+                    emit(args, f"standalone_runtime_guard_warn mode=warn {team_disc_ratio_kill_message}")
+                else:
+                    emit(args, f"standalone_runtime_guard mode=kill {team_disc_ratio_kill_message}")
+                    raise RuntimeError(team_disc_ratio_kill_message)
+            if combined_intrinsic_kill_message:
+                if reward_ratio_guard_mode == "warn":
+                    emit(args, f"standalone_runtime_guard_warn mode=warn {combined_intrinsic_kill_message}")
+                else:
+                    emit(args, f"standalone_runtime_guard mode=kill {combined_intrinsic_kill_message}")
+                    raise RuntimeError(combined_intrinsic_kill_message)
             agent.reset_all_policy_state()
 
             if int(args.save_interval) > 0 and update_idx % int(args.save_interval) == 0:
@@ -2938,6 +3510,7 @@ def eval_loop(config, args: argparse.Namespace, writer) -> None:
         args,
         "standalone_eval_start "
         f"path={args.resume_from} total_steps={total_steps} update_idx={update_idx} "
+        f"action_mode={getattr(args, 'eval_action_mode', 'deterministic')} "
         f"duration_candidates={tuple(getattr(config, 'skill_lifetime_candidates', ())) }"
     )
     args.eval_checkpoint_name = Path(args.resume_from).name

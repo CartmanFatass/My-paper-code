@@ -45,6 +45,11 @@ data/
 *.pdf
 *.md
 !README.md
+!CLAUDE.md
+# Canonical project memory + plan docs are load-bearing collaboration state — track them
+# (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
+!memory/*.md
+!docs/superpowers/plans/*.md
 *.txt
 *.tar
 *.png
