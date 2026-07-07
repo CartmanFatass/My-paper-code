@@ -12,6 +12,7 @@ from ha_ctse_process.r24_behavior_audit import (
     summarize_audit_records,
     write_audit_csv,
 )
+from scripts.r24_forced_behavior_audit import _parse_horizons, _rollout_action_from_features
 
 
 def test_action_feature_kl_matches_manual_discrete_kl():
@@ -89,3 +90,26 @@ def test_write_audit_csv_roundtrip(tmp_path: Path):
     text = path.read_text(encoding="utf-8")
     assert "r24_audit_records" in text
     assert "0.25" in text
+
+
+def test_parse_horizons_accepts_commas_and_semicolons():
+    assert _parse_horizons("10, 20;50") == (10, 20, 50)
+
+
+def test_parse_horizons_rejects_non_positive_values():
+    with pytest.raises(ValueError, match="positive"):
+        _parse_horizons("10,0")
+
+
+def test_rollout_action_from_features_argmaxes_discrete_probabilities():
+    features = np.asarray([[0.1, 0.8, 0.1], [0.6, 0.1, 0.3]], dtype=np.float32)
+    actions = _rollout_action_from_features(features, action_space_type="discrete")
+    assert actions.dtype == np.int64
+    assert actions.tolist() == [1, 0]
+
+
+def test_rollout_action_from_features_passes_continuous_features_as_float32():
+    features = np.asarray([[0.25, -0.5], [1.0, 0.0]], dtype=np.float64)
+    actions = _rollout_action_from_features(features, action_space_type="continuous")
+    assert actions.dtype == np.float32
+    assert np.allclose(actions, features.astype(np.float32))
