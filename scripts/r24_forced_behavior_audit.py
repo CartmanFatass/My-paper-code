@@ -75,26 +75,6 @@ def _parse_horizons(value: str) -> tuple[int, ...]:
     return tuple(values) if values else (10, 20, 50)
 
 
-def _is_probability_like(action_features: np.ndarray, tol: float = 1e-5) -> bool:
-    arr = np.asarray(action_features, dtype=np.float64)
-    if arr.ndim != 2:
-        return False
-    if np.any(arr < -tol):
-        return False
-    row_sums = arr.sum(axis=-1)
-    return np.all(np.isfinite(row_sums)) and np.allclose(row_sums, 1.0, atol=tol)
-
-
-def _action_feature_distance(forced_actions: np.ndarray, base_actions: np.ndarray) -> float:
-    forced = np.asarray(forced_actions)
-    base = np.asarray(base_actions)
-    if forced.shape != base.shape:
-        return 0.0
-    if _is_probability_like(forced) and _is_probability_like(base):
-        return float(np.mean(action_feature_kl(forced, base)))
-    return float(np.mean(np.linalg.norm(np.asarray(forced, dtype=np.float64) - np.asarray(base, dtype=np.float64), axis=-1)))
-
-
 def _step_env(env, actions):
     out = env.step(actions)
     if len(out) == 5:
@@ -194,7 +174,13 @@ def run_r24_behavior_audit(a: argparse.Namespace) -> dict[str, float]:
                     forced_team,
                 )
 
-                action_kl = _action_feature_distance(forced_actions, base_actions)
+                if base_actions.shape == forced_actions.shape and base_actions.ndim == 2:
+                    if base_actions.shape[1] == forced_actions.shape[1]:
+                        action_kl = float(np.mean(action_feature_kl(forced_actions, base_actions)))
+                    else:
+                        action_kl = 0.0
+                else:
+                    action_kl = 0.0
 
                 for h in horizons:
                     rollout_seed = int(a.seed) + 10_000 * (reset_idx + 1) + label * 100 + int(h)
