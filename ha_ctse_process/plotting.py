@@ -15,6 +15,7 @@ from ha_ctse_process.cooperation_credit import COOPERATION_CREDIT_FIELDS
 from ha_ctse_process.g_info_objective import G_INFO_METRIC_FIELDS
 from ha_ctse_process.assignment_actionability import ASSIGNMENT_ACTIONABILITY_METRIC_FIELDS
 from ha_ctse_process.team_effect_targets import TEAM_EFFECT_TARGET_METRIC_FIELDS
+from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
 from ha_ctse_process.topology_potential import TOPOLOGY_POTENTIAL_FIELDS
 from ha_ctse_process.situation_transition import TEAM_TRANSITION_METRIC_FIELDS
 from ha_ctse_process.team_intent import TEAM_INTENT_METRIC_FIELDS
@@ -493,6 +494,7 @@ UPDATE_FIELDS = (
     *G_INFO_METRIC_FIELDS,
     *ASSIGNMENT_ACTIONABILITY_METRIC_FIELDS,
     *TEAM_EFFECT_TARGET_METRIC_FIELDS,
+    *TEAM_CONDITIONED_QD_METRIC_FIELDS,
     *SITUATION_STAGE1_FIELDS,
     *COOPERATION_CREDIT_FIELDS,
     "high_loss",
@@ -902,6 +904,12 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
         ("team_disc_residual_mean", "Team disc residual"),
         ("team_disc_reward_mean", "Team disc reward"),
         ("team_disc_reward_env_ratio", "Team disc/env ratio"),
+        ("r24_qd_acc_full", "R24 q_d full acc"),
+        ("r24_qd_acc_prior", "R24 q_d prior acc"),
+        ("r24_qd_residual_gain", "R24 q_d residual gain"),
+        ("r24_qd_residual_mean", "R24 q_d residual"),
+        ("r24_qd_positive_frac", "R24 q_d positive frac"),
+        ("r24_qd_samples", "R24 q_d samples"),
         ("combined_intrinsic_env_ratio", "Combined intrinsic/env ratio"),
         ("intrinsic_segment_high_gate_active", "High intrinsic gate active"),
         ("intrinsic_segment_high_gate_score", "High intrinsic gate score"),

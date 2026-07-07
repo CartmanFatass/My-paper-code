@@ -1,5 +1,8 @@
+import numpy as np
 import torch
 
+from ha_ctse_process.config import Config
+from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
 from ha_ctse_process.team_conditioned_qd import (
     TEAM_CONDITIONED_QD_METRIC_FIELDS,
     TeamConditionedQDConfig,
@@ -101,3 +104,91 @@ def test_default_config_is_probe_off():
 
     assert not cfg.probe_on
 
+
+def test_config_defaults_probe_off():
+    config = Config()
+    cfg = TeamConditionedQDConfig.from_config(config)
+
+    assert config.enable_team_conditioned_qd_probe is False
+    assert config.team_conditioned_qd_hidden_dim == 128
+    assert config.team_conditioned_qd_lr == 1e-3
+    assert config.team_conditioned_qd_min_samples == 64
+    assert cfg.probe_on is False
+    assert cfg.hidden_dim == 128
+
+
+def _make_probe_agent():
+    config = Config()
+    config.n_z = 4
+    config.num_team_codes = 3
+    config.hidden_size = 32
+    config.opt_compact_dim = 8
+    config.opt_num_prototypes = 2
+    config.low_level_architecture = "feedforward"
+    config.use_recurrent_low_level = False
+    config.use_outcome_residual_probe = False
+    config.use_topology_role_probe = False
+    config.use_transition_skill_discriminator = False
+    config.enable_team_conditioned_qd_probe = True
+    config.team_conditioned_qd_min_samples = 1
+    return StandaloneProcessAgent(
+        obs_dim=3,
+        action_dim=2,
+        n_agents=2,
+        config=config,
+        device="cpu",
+        action_space_type="discrete",
+        num_envs=1,
+        state_dim=6,
+    )
+
+
+def _segment_for_qd(skill):
+    return Segment(
+        env_id=0,
+        agent_id=0,
+        skill=skill,
+        duration_idx=1,
+        start_step=10,
+        high_obs=np.asarray([1.0, 2.0, 3.0], dtype=np.float32),
+        high_logp=0.0,
+        high_value=0.0,
+        high_entropy=0.0,
+        skill_age_prev=2,
+        team_code=1,
+        duration_target=7,
+        rewards=[0.0, 0.0],
+        end_obs=np.asarray([1.5, 1.0, 4.0], dtype=np.float32),
+        omega_start=np.asarray([0.25, 0.75], dtype=np.float32),
+    )
+
+
+def test_standalone_qd_condition_does_not_include_executed_skill_onehot():
+    agent = _make_probe_agent()
+    segments = [_segment_for_qd(0), _segment_for_qd(3)]
+
+    effect, condition, labels = agent._r24_qd_segment_tensors(segments)
+
+    assert torch.allclose(effect[0], torch.tensor([0.5, -1.0, 1.0]))
+    assert torch.equal(labels, torch.tensor([0, 3]))
+    assert torch.allclose(condition[0], condition[1])
+
+
+def test_standalone_qd_update_returns_empty_metrics_when_disabled():
+    config = Config()
+    config.n_z = 4
+    config.low_level_architecture = "feedforward"
+    config.use_recurrent_low_level = False
+    config.enable_team_conditioned_qd_probe = False
+    agent = StandaloneProcessAgent(
+        obs_dim=3,
+        action_dim=2,
+        n_agents=2,
+        config=config,
+        device="cpu",
+        action_space_type="discrete",
+        num_envs=1,
+        state_dim=6,
+    )
+
+    assert agent._team_conditioned_qd_update([_segment_for_qd(1)]) == empty_team_conditioned_qd_metrics()

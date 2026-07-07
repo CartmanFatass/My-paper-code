@@ -37,6 +37,7 @@ from ha_ctse_process.standalone_agent import (
     SegmentManager,
     StandaloneProcessAgent,
 )
+from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
 from ha_ctse_process.topology_viz import capture_topology_frame, save_topology_artifacts
 
 
@@ -89,6 +90,10 @@ ALGORITHM_MANIFEST_FIELDS = (
     "team_disc_warmup_steps",
     "team_disc_lr",
     "team_disc_hidden_dim",
+    "enable_team_conditioned_qd_probe",
+    "team_conditioned_qd_hidden_dim",
+    "team_conditioned_qd_lr",
+    "team_conditioned_qd_min_samples",
     "process_encoder_embedding_dim",
     "lr_process_encoder",
     "process_contrast_coef",
@@ -707,6 +712,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--enable_team_effect_target_audit", action="store_true")
     parser.add_argument("--team_effect_audit_targets", type=str, default=None)
     parser.add_argument("--team_effect_audit_horizons", type=str, default=None)
+    parser.add_argument("--enable_team_conditioned_qd_probe", action="store_true")
+    parser.add_argument("--team_conditioned_qd_hidden_dim", type=int, default=None)
+    parser.add_argument("--team_conditioned_qd_lr", type=float, default=None)
+    parser.add_argument("--team_conditioned_qd_min_samples", type=int, default=None)
     parser.add_argument("--disable_intrinsic_segment_gate", action="store_true")
     parser.add_argument("--enable_intrinsic_reward_norm", action="store_true")
     parser.add_argument("--disable_smdp_discounted_high_return", action="store_true")
@@ -1057,6 +1066,14 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.team_effect_audit_targets = str(args.team_effect_audit_targets)
     if getattr(args, "team_effect_audit_horizons", None) is not None:
         config.team_effect_audit_horizons = str(args.team_effect_audit_horizons)
+    if args.enable_team_conditioned_qd_probe:
+        config.enable_team_conditioned_qd_probe = True
+    if getattr(args, "team_conditioned_qd_hidden_dim", None) is not None:
+        config.team_conditioned_qd_hidden_dim = int(args.team_conditioned_qd_hidden_dim)
+    if getattr(args, "team_conditioned_qd_lr", None) is not None:
+        config.team_conditioned_qd_lr = float(args.team_conditioned_qd_lr)
+    if getattr(args, "team_conditioned_qd_min_samples", None) is not None:
+        config.team_conditioned_qd_min_samples = int(args.team_conditioned_qd_min_samples)
     if args.enable_duration_entropy_floor:
         config.duration_entropy_floor_enabled = True
     if int(args.duration_entropy_floor_warmup_steps) >= 0:
@@ -2098,6 +2115,8 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         "combined_intrinsic_env_ratio_kill_triggered",
     ):
         writer.add_scalar(f"TeamDisc/{key}", process_metrics.get(key, 0.0), total_steps)
+    for key in TEAM_CONDITIONED_QD_METRIC_FIELDS:
+        writer.add_scalar(f"R24QD/{key}", process_metrics.get(key, 0.0), total_steps)
     for key in (
         "proto_disc_active",
         "proto_disc_samples",

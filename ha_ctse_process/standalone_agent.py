@@ -94,6 +94,11 @@ from ha_ctse_process.team_effect_targets import (
     group_env_sequences,
     build_windows,
 )
+from ha_ctse_process.team_conditioned_qd import (
+    TeamConditionedQDConfig,
+    TeamConditionedQDProbe,
+    empty_team_conditioned_qd_metrics,
+)
 from ha_ctse_process.prototype_response_discriminator import (
     PrototypeResponseDiscriminator,
     empty_prototype_disc_metrics,
@@ -1925,6 +1930,27 @@ class StandaloneProcessAgent:
         ]
         self.team_effect_audit_hidden_dim = int(getattr(config, "team_effect_audit_hidden_dim", 128))
         self.team_effect_probe = None
+        # R24 q_d reward-off probe. The prior condition deliberately excludes
+        # executed individual-skill one-hot labels to avoid leaking z_i into
+        # q_d_prior(z_i | context).
+        self.team_conditioned_qd_cfg = TeamConditionedQDConfig.from_config(config)
+        self._r24_qd_omega_dim = int(max(self.opt_num_prototypes, 0))
+        self._r24_qd_condition_dim = int(
+            max(num_team_codes, 1)
+            + max(len(self.duration_candidates), 1)
+            + 2
+            + self._r24_qd_omega_dim
+        )
+        self.team_conditioned_qd_probe = (
+            TeamConditionedQDProbe(
+                effect_dim=self.obs_dim,
+                condition_dim=self._r24_qd_condition_dim,
+                num_skills=self.n_skills,
+                hidden_dim=self.team_conditioned_qd_cfg.hidden_dim,
+            ).to(self.device)
+            if self.team_conditioned_qd_cfg.probe_on
+            else None
+        )
         self.skill_effect_discovery = (
             SkillEffectDiscoveryModule(
                 config=config,
@@ -2012,6 +2038,14 @@ class StandaloneProcessAgent:
             if self.team_transition is not None
             else None
         )
+        self.team_conditioned_qd_opt = (
+            torch.optim.Adam(
+                self.team_conditioned_qd_probe.parameters(),
+                lr=float(self.team_conditioned_qd_cfg.lr),
+            )
+            if self.team_conditioned_qd_probe is not None
+            else None
+        )
 
         self.active_skills = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
         self.active_duration_indices = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
@@ -2059,6 +2093,7 @@ class StandaloneProcessAgent:
             "transition_discriminator": self._count_parameters(self.transition_discriminator),
             "prototype_discriminator": self._count_parameters(self.prototype_discriminator),
             "team_discriminator": self._count_parameters(self.team_discriminator),
+            "team_conditioned_qd_probe": self._count_parameters(self.team_conditioned_qd_probe),
             "compact_return_head": self._count_parameters(self.compact_return_head),
             "skill_effect_discovery": self._count_parameters(self.skill_effect_discovery),
             "situation_hazard": self._count_parameters(self.situation_hazard),
@@ -2079,6 +2114,7 @@ class StandaloneProcessAgent:
             + counts["transition_discriminator"]
             + counts["prototype_discriminator"]
             + counts["team_discriminator"]
+            + counts["team_conditioned_qd_probe"]
             + counts["skill_effect_discovery"]
             + counts["team_transition"]
         )
@@ -4030,6 +4066,96 @@ class StandaloneProcessAgent:
         )
         return metrics, segment_rewards
 
+    def _r24_qd_segment_tensors(
+        self,
+        valid_segments: list[Segment],
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        effects: list[np.ndarray] = []
+        conditions: list[np.ndarray] = []
+        labels: list[int] = []
+        n_team = int(max(self.num_team_codes, 1))
+        n_duration = int(max(len(self.duration_candidates), 1))
+        max_duration = float(max(max(self.duration_candidates), 1)) if self.duration_candidates else 1.0
+        omega_dim = int(max(getattr(self, "_r24_qd_omega_dim", 0), 0))
+
+        for segment in valid_segments:
+            start_obs = self._fit_vector(segment.high_obs, self.obs_dim)
+            if segment.end_obs is not None:
+                end_obs = self._fit_vector(segment.end_obs, self.obs_dim)
+            elif segment.obs:
+                end_obs = self._fit_vector(segment.obs[-1], self.obs_dim)
+            else:
+                end_obs = start_obs.copy()
+            effects.append((end_obs - start_obs).astype(np.float32, copy=False))
+
+            team_onehot = np.zeros(n_team, dtype=np.float32)
+            team_onehot[int(np.clip(segment.team_code, 0, n_team - 1))] = 1.0
+            duration_onehot = np.zeros(n_duration, dtype=np.float32)
+            duration_onehot[int(np.clip(segment.duration_idx, 0, n_duration - 1))] = 1.0
+            normalizer = max(float(segment.duration_target), float(segment.length), max_duration, 1.0)
+            age_length = np.asarray(
+                [
+                    float(segment.skill_age_prev) / normalizer,
+                    float(segment.length) / normalizer,
+                ],
+                dtype=np.float32,
+            )
+            omega = (
+                self._fit_vector(segment.omega_start, omega_dim)
+                if omega_dim > 0 and segment.omega_start is not None
+                else np.zeros(omega_dim, dtype=np.float32)
+            )
+            # Do not append executed skill one-hot here: z_i is the label.
+            conditions.append(
+                np.concatenate([team_onehot, duration_onehot, age_length, omega]).astype(np.float32, copy=False)
+            )
+            labels.append(int(segment.skill))
+
+        if not labels:
+            return (
+                torch.zeros((0, self.obs_dim), dtype=torch.float32, device=self.device),
+                torch.zeros((0, self._r24_qd_condition_dim), dtype=torch.float32, device=self.device),
+                torch.zeros((0,), dtype=torch.long, device=self.device),
+            )
+        effect_t = torch.as_tensor(np.asarray(effects, dtype=np.float32), dtype=torch.float32, device=self.device)
+        condition_t = torch.as_tensor(
+            np.asarray(conditions, dtype=np.float32),
+            dtype=torch.float32,
+            device=self.device,
+        )
+        labels_t = torch.as_tensor(np.asarray(labels, dtype=np.int64), dtype=torch.long, device=self.device)
+        return effect_t, condition_t, labels_t
+
+    def _team_conditioned_qd_update(self, valid_segments: list[Segment]) -> dict[str, float]:
+        metrics = empty_team_conditioned_qd_metrics()
+        if self.team_conditioned_qd_probe is None or self.team_conditioned_qd_opt is None:
+            return metrics
+        effect_t, condition_t, labels_t = self._r24_qd_segment_tensors(valid_segments)
+        sample_count = int(labels_t.numel())
+        if sample_count <= 0:
+            return metrics
+        metrics["r24_qd_active"] = 1.0
+        metrics["r24_qd_samples"] = float(sample_count)
+        if sample_count < int(self.team_conditioned_qd_cfg.min_samples):
+            return metrics
+
+        terms = self.team_conditioned_qd_probe.losses(effect_t, condition_t, labels_t)
+        self.team_conditioned_qd_opt.zero_grad()
+        terms["loss"].backward()
+        self.team_conditioned_qd_opt.step()
+        metrics.update(
+            {
+                "r24_qd_loss_full": float(terms["loss_full"].detach().cpu().item()),
+                "r24_qd_loss_prior": float(terms["loss_prior"].detach().cpu().item()),
+                "r24_qd_acc_full": float(terms["acc_full"].detach().cpu().item()),
+                "r24_qd_acc_prior": float(terms["acc_prior"].detach().cpu().item()),
+                "r24_qd_residual_gain": float(terms["residual_gain"].detach().cpu().item()),
+                "r24_qd_residual_mean": float(terms["residual_mean"].detach().cpu().item()),
+                "r24_qd_positive_frac": float(terms["positive_frac"].detach().cpu().item()),
+            }
+        )
+        return metrics
+
     def process_update(self, rollout: Rollout, total_steps: int = 0) -> dict[str, float]:
         segments = self.segments.pop_completed()
         valid = [s for s in segments if s.length > 0]
@@ -4180,10 +4306,12 @@ class StandaloneProcessAgent:
                 **empty_team_transition_metrics(),
                 **team_intent_metrics,
                 **team_effect_metrics,
+                **empty_team_conditioned_qd_metrics(),
                 **empty_skill_effect_metrics(),
                 **self._situation_diagnostics([]),
             }
 
+        team_conditioned_qd_metrics = self._team_conditioned_qd_update(valid)
         team_transition_metrics, team_transition_high_rewards = self._team_transition_update(
             valid,
             total_steps=total_steps,
@@ -5171,6 +5299,7 @@ class StandaloneProcessAgent:
             **p2_metrics,
             **team_transition_metrics,
             **effect_metrics,
+            **team_conditioned_qd_metrics,
             "duration_only_accuracy": duration_only_acc,
             "length_only_accuracy": length_only_acc,
             "reward_sum_only_accuracy": reward_sum_only_acc,
