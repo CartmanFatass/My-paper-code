@@ -39,6 +39,23 @@ def _as_2d(x: np.ndarray) -> np.ndarray:
     return arr
 
 
+def effect_distance(
+    base_start: np.ndarray,
+    base_end: np.ndarray,
+    forced_start: np.ndarray,
+    forced_end: np.ndarray,
+) -> float:
+    """Distance between displacement vectors for base vs forced rollouts."""
+    base_delta = np.asarray(base_end, dtype=np.float64).reshape(-1) - np.asarray(base_start, dtype=np.float64).reshape(-1)
+    forced_delta = (
+        np.asarray(forced_end, dtype=np.float64).reshape(-1)
+        - np.asarray(forced_start, dtype=np.float64).reshape(-1)
+    )
+    if base_delta.shape != forced_delta.shape:
+        return 0.0
+    return float(np.linalg.norm(forced_delta - base_delta))
+
+
 def action_feature_kl(p: np.ndarray, q: np.ndarray, eps: float = 1e-8) -> np.ndarray:
     """Row-wise KL for discrete action-probability features.
 
