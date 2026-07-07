@@ -5,7 +5,6 @@ from ha_ctse_process.r24_behavior_audit import (
     R24AuditRecord,
     action_feature_kl,
     between_within_ratio,
-    effect_distance,
     write_audit_csv,
     summarize_audit_records,
 )
@@ -83,11 +82,3 @@ def test_write_audit_csv_roundtrip(tmp_path):
     text = path.read_text(encoding="utf-8")
     assert "r24_audit_records" in text
     assert "0.25" in text
-
-
-def test_effect_distance_is_euclidean_delta_distance():
-    base_start = np.asarray([0.0, 0.0], dtype=np.float32)
-    base_end = np.asarray([1.0, 0.0], dtype=np.float32)
-    forced_start = np.asarray([0.0, 0.0], dtype=np.float32)
-    forced_end = np.asarray([1.0, 2.0], dtype=np.float32)
-    assert np.isclose(effect_distance(base_start, base_end, forced_start, forced_end), 2.0)

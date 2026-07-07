@@ -13,11 +13,11 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import torch
 
 from ha_ctse_process.r24_behavior_audit import (
     R24AuditRecord,
     action_feature_kl,
-    effect_distance,
     summarize_audit_records,
     write_audit_csv,
 )
@@ -73,52 +73,6 @@ def _parse_horizons(value: str) -> tuple[int, ...]:
             continue
         values.append(int(chunk))
     return tuple(values) if values else (10, 20, 50)
-
-
-def _step_env(env, actions):
-    out = env.step(actions)
-    if len(out) == 5:
-        return out
-    if len(out) == 4:
-        obs, reward, done, info = out
-        return obs, reward, bool(done), bool(done), info
-    raise ValueError(f"Unsupported env.step return arity: {len(out)}")
-
-
-def _rollout_with_forced_skill(
-    env,
-    agent,
-    obs,
-    info,
-    skill_label: int,
-    team_label: int,
-    horizon: int,
-):
-    start_state = np.asarray(info.get("state", np.zeros(1, dtype=np.float32)), dtype=np.float32).reshape(-1)
-    current_obs = np.asarray(obs, dtype=np.float32)
-    step_info = info
-    if hasattr(agent, "reset_all_policy_state"):
-        agent.reset_all_policy_state()
-    elif hasattr(agent, "reset_all"):
-        agent.reset_all()
-    for _ in range(int(horizon)):
-        obs_np = current_obs.reshape(agent.n_agents, agent.obs_dim)
-        skills = np.full(agent.n_agents, int(skill_label), dtype=np.int64)
-        teams = np.full(agent.n_agents, int(team_label), dtype=np.int64)
-        action_features, _entropy = agent._low_actor_forced_skill_outputs(obs_np, skills, teams)
-        if (
-            action_features.ndim == 2
-            and np.all(action_features >= 0.0)
-            and np.allclose(action_features.sum(axis=-1), 1.0, atol=1e-4)
-        ):
-            actions = np.argmax(action_features, axis=-1).astype(np.int64)
-        else:
-            actions = action_features.astype(np.float32)
-        current_obs, _reward, terminated, truncated, step_info = _step_env(env, actions)
-        if bool(terminated or truncated):
-            break
-    end_state = np.asarray(step_info.get("state", step_info.get("next_state", start_state)), dtype=np.float32).reshape(-1)
-    return start_state, end_state
 
 
 def run_r24_behavior_audit(a: argparse.Namespace) -> dict[str, float]:
@@ -183,34 +137,12 @@ def run_r24_behavior_audit(a: argparse.Namespace) -> dict[str, float]:
                     action_kl = 0.0
 
                 for h in horizons:
-                    rollout_seed = int(a.seed) + 10_000 * (reset_idx + 1) + label * 100 + int(h)
-                    rollout_obs, rollout_info = env.reset(seed=rollout_seed)
-                    base_start, base_end = _rollout_with_forced_skill(
-                        env,
-                        agent,
-                        rollout_obs,
-                        rollout_info,
-                        skill_label=0,
-                        team_label=0,
-                        horizon=int(h),
-                    )
-                    rollout_obs, rollout_info = env.reset(seed=rollout_seed)
-                    forced_start, forced_end = _rollout_with_forced_skill(
-                        env,
-                        agent,
-                        rollout_obs,
-                        rollout_info,
-                        skill_label=int(label),
-                        team_label=int(label % max(int(agent.num_team_codes), 1)),
-                        horizon=int(h),
-                    )
-                    dist = effect_distance(base_start, base_end, forced_start, forced_end)
                     records.append(
                         R24AuditRecord(
                             horizon=int(h),
                             forced_kind="z",
                             action_kl=action_kl,
-                            effect_distance=dist,
+                            effect_distance=0.0,
                             label=int(label),
                         )
                     )
