@@ -9,6 +9,7 @@ from ha_ctse_process.r24_behavior_audit import (
     write_audit_csv,
     summarize_audit_records,
 )
+from scripts.r24_forced_behavior_audit import _action_feature_distance
 
 
 def test_action_feature_kl_matches_manual_discrete_kl():
@@ -24,6 +25,20 @@ def test_action_feature_kl_raises_on_shape_mismatch():
     q = np.asarray([[0.50, 0.50], [0.25, 0.75]], dtype=np.float32)
     with pytest.raises(ValueError, match=r"shape mismatch"):
         action_feature_kl(p, q)
+
+
+def test_action_feature_distance_uses_kl_for_probabilities():
+    p = np.asarray([[0.75, 0.25], [0.5, 0.5]], dtype=np.float32)
+    q = np.asarray([[0.50, 0.50], [0.25, 0.75]], dtype=np.float32)
+    expected = np.mean(action_feature_kl(p, q))
+    assert np.isclose(_action_feature_distance(p, q), expected)
+
+
+def test_action_feature_distance_uses_rowwise_euclidean_for_continuous():
+    p = np.asarray([[1.0, -2.0, 3.0]], dtype=np.float32)
+    q = np.asarray([[4.0, 2.0, 0.0]], dtype=np.float32)
+    expected = np.linalg.norm(p - q, axis=-1).mean()
+    assert np.isclose(_action_feature_distance(p, q), expected)
 
 
 def test_between_within_ratio_detects_cluster_separation():
