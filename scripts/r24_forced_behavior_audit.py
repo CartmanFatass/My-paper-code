@@ -54,6 +54,7 @@ def _train_args(a: argparse.Namespace) -> argparse.Namespace:
         "--collector_backend", "sync",
         "--enable_team_intent",
         "--enable_assignment_actionability_probe",
+        "--enable_assignment_actionability_reward",
         "--total_timesteps", "1",
         "--rollout_length", "10",
     ]
