@@ -293,3 +293,70 @@ new topology-role reward.
 ```
 Reproduction of the R23-0 result: `PYTHONPATH=. python scripts/r23_capacity_gate.py
 --checkpoint <r21_final.pt>` and `--checkpoint random --structure-from <r21_final.pt>`.
+
+## 11. Post-320k-read forward plan (2026-07-06 addendum)
+
+> STATUS 2026-07-06→07 (CC Executor, user-authorized): (a)–(e) IMPLEMENTED default-off,
+> TDD. T2 gradient audit verdict = **SCALE/FORM** (g-info grad into the Z path <2% of
+> PPO and self-stalling — not a wiring bug), so q_A is the confirmed main line. Plan
+> `docs/superpowers/plans/2026-07-06-r23-next-actionability.md`; modules
+> `ha_ctse_process/assignment_actionability.py` (q_A) + `ha_ctse_process/team_effect_targets.py`
+> (reward-off q_D audit); runner `scripts/run_r23_next_mechanism_matrix_cloud_64env.sh`.
+> Verdict pending a GPU launch of `EXP-20260707-r23-next-mechanism-matrix`.
+
+
+Source of this section: the R23 320k seed1 read
+(`EXP-20260706-r23-actionable-team-intent`, MIXED) + GPT post-read advice
+(`memory/advice_gpt.md`), cross-validated in `cross_validation.md`
+("2026-07-06 GPT R23-result advice"), disposition ACCEPTED-WITH-MODIFICATIONS.
+This is a proposal ledger — nothing here is launched; the new modules need user
+authorization + an Executor pass.
+
+Result recap: R23-0 PASS (Z→ξ capacity real, forced-Z KL 0.04–0.08); R23-1
+FAIL/null (g-info loss ~-2e-4, MI flat, objective-ON MI < objective-OFF);
+R23-2 FAIL (team-disc at chance throughout). Blocker moved from `Z→ξ` (fixed) to
+`ξ→recoverable joint effect` (open). g-info behaves as a smooth usage regularizer,
+not a force that makes ξ a recoverable code.
+
+Accepted next sequence (in order; do NOT sweep g-info coef, do NOT enable q_D
+reward, do NOT run 960k, do NOT open new target-kappa/hazard/DADS branches):
+
+```text
+(a) Decision curves — DONE from train_updates.csv (10-pt/arm). Confirmed:
+    architecture KL stable from update 1; g-info MI/loss flat; team_disc at
+    chance throughout (never briefly-above). Finer tfevents pull optional.
+(b) g-info GRADIENT AUDIT (Executor, small backward, no long run). Log:
+    grad_norm to {Z-embedding, skill head, duration head, edit head, shared high
+    encoder}, ratio_g_info_grad_to_ppo_grad, ratio_g_info_loss_to_policy_loss.
+    Branch: grad≈0 → wiring/detach/enumeration bug (fix, don't sweep);
+            grad≪PPO → scale issue (record); grad OK but MI won't move → the MI
+            form is unsuitable → go to (c).
+(c) PR-1 Option-B q_A residual (NEW module, algorithm change, authorization
+    required). R_A = log q_A_full(Z|ξ,c,ω) − log q_A_prior(Z|c,ω), instantiating
+    the R22 load-bearing I(Z;ξ|c,ω). ξ first version = executed skill ids z_1:n,
+    duration/remaining bucket, edit mask, optional soft skill probs, roster/agent
+    mask summary. Phase-1 reward-off probe (q_A_full_acc, q_A_prior_acc,
+    q_A_residual_gain, best_shortcut_name); Phase-2 small-coef HIGH-LEVEL-only
+    reward (coef 0.02/0.05, warmup 20k, clip 1.0, prior-corrected, q_D still off).
+    MUST include an I(Z;ξ|c,ω) double-count audit vs the existing g-info term
+    (don't silently stack two actionability objectives). Default-off; low-level
+    actor input unchanged; no comm fields.
+(d) q_D EFFECT-TARGET / TIMESCALE audit, reward-off (NEW targets = algorithm
+    change, authorization required). Compare q_D(Z|·) residual signal over targets
+    {s_next, joint_action_summary_H, joint_effect_window_H, Δω/Δc compact_H} and
+    H∈{10,20,50}. Pick the target with real residual BEFORE any reward. Motivated
+    by R23-2 reasons A (ξ differs at logits but executed assignments unstable),
+    B (executed ξ doesn't move low-level behavior → discoverer/z_i capacity),
+    C (q_D target too weak / single-step for the two-clock horizon). OPT grounding:
+    if s_next can't read Z but Δω can, move the disc effect space from raw state to
+    interaction-process space.
+(e) Small 320k MECHANISM matrix (Experiment Manager, on authorization), NOT 960k:
+    Arm0 arch-only (known-pass control) / Arm1 q_A probe reward-off /
+    Arm2 q_A reward coef 0.02–0.05 / Arm3 q_D target audit (best of Arm1/2, q_D
+    reward off). q_D reward-on is allowed ONLY after Arm3 shows non-chance residual.
+```
+
+Principle status: no principle rewrite from a single 320k seed (GPT concurs);
+this stays an interim experiment result until (b)–(e) read. The R22 claim that
+`I(Z;ξ|c,ω)` is load-bearing and `q_D` is an amplifier-not-starter is reinforced,
+not changed.
