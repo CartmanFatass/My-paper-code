@@ -13,6 +13,8 @@ import numpy as np
 
 from ha_ctse_process.cooperation_credit import COOPERATION_CREDIT_FIELDS
 from ha_ctse_process.g_info_objective import G_INFO_METRIC_FIELDS
+from ha_ctse_process.assignment_actionability import ASSIGNMENT_ACTIONABILITY_METRIC_FIELDS
+from ha_ctse_process.team_effect_targets import TEAM_EFFECT_TARGET_METRIC_FIELDS
 from ha_ctse_process.topology_potential import TOPOLOGY_POTENTIAL_FIELDS
 from ha_ctse_process.situation_transition import TEAM_TRANSITION_METRIC_FIELDS
 from ha_ctse_process.team_intent import TEAM_INTENT_METRIC_FIELDS
@@ -489,6 +491,8 @@ UPDATE_FIELDS = (
     "g_intervention_kl_max",
     "g_intervention_tv_mean",
     *G_INFO_METRIC_FIELDS,
+    *ASSIGNMENT_ACTIONABILITY_METRIC_FIELDS,
+    *TEAM_EFFECT_TARGET_METRIC_FIELDS,
     *SITUATION_STAGE1_FIELDS,
     *COOPERATION_CREDIT_FIELDS,
     "high_loss",

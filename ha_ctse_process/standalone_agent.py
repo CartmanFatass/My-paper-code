@@ -82,6 +82,18 @@ from ha_ctse_process.g_info_objective import (
     GInfoObjective,
     empty_g_info_metrics,
 )
+from ha_ctse_process.assignment_actionability import (
+    AssignmentActionabilityConfig,
+    AssignmentActionabilityDiscriminator,
+    empty_assignment_actionability_metrics,
+)
+from ha_ctse_process.team_effect_targets import (
+    TeamEffectTargetProbe,
+    empty_team_effect_target_metrics,
+    summarize_joint_actions,
+    group_env_sequences,
+    build_windows,
+)
 from ha_ctse_process.prototype_response_discriminator import (
     PrototypeResponseDiscriminator,
     empty_prototype_disc_metrics,
@@ -1891,6 +1903,28 @@ class StandaloneProcessAgent:
             if (self.use_g_info_diagnostic or self.enable_g_info_objective)
             else None
         )
+        # R23-next q_A residual actionability (default-off). Module + optimizer are
+        # built lazily on the first high update once xi/context dims are observed, so
+        # flag-off leaves the S-base architecture bit-identical.
+        self.assignment_actionability_cfg = AssignmentActionabilityConfig.from_config(config)
+        self.assignment_actionability = None
+        self.q_a_opt = None
+        # R23-next q_D effect-target/timescale audit (reward-off probe). Built lazily.
+        self.enable_team_effect_target_audit = bool(
+            getattr(config, "enable_team_effect_target_audit", False)
+        )
+        self.team_effect_audit_targets = [
+            t.strip()
+            for t in str(getattr(config, "team_effect_audit_targets", "s_next")).split(",")
+            if t.strip()
+        ]
+        self.team_effect_audit_horizons = [
+            int(h.strip())
+            for h in str(getattr(config, "team_effect_audit_horizons", "10,20,50")).split(",")
+            if h.strip()
+        ]
+        self.team_effect_audit_hidden_dim = int(getattr(config, "team_effect_audit_hidden_dim", 128))
+        self.team_effect_probe = None
         self.skill_effect_discovery = (
             SkillEffectDiscoveryModule(
                 config=config,
@@ -3408,6 +3442,125 @@ class StandaloneProcessAgent:
             kl = self._categorical_kl(cur_skill_logits, alt_skill_logits)
             return float(kl.detach().mean().cpu().item()) if kl.numel() else 0.0
 
+    def _team_effect_target_dims(self) -> dict[str, int]:
+        dims: dict[str, int] = {}
+        for t in self.team_effect_audit_targets:
+            if t == "s_next":
+                dims["s_next"] = int(self.state_dim)
+            elif t == "joint_effect":
+                for h in self.team_effect_audit_horizons:
+                    dims[f"joint_effect_h{h}"] = int(self.state_dim)
+            elif t == "joint_action":
+                for h in self.team_effect_audit_horizons:
+                    dims[f"joint_action_h{h}"] = int(self.action_dim)
+            elif t == "delta_omega":
+                for h in self.team_effect_audit_horizons:
+                    dims[f"delta_omega_h{h}"] = int(self.compact.num_prototypes)
+        return dims
+
+    def _team_effect_target_audit(self, rollout: Rollout, total_steps: int) -> dict[str, float]:
+        """Reward-off probe: which q_D target/horizon (if any) recovers Z beyond a
+        context-free prior? Builds future-effect targets from the rollout (never xi)
+        and trains one online head per (target, horizon). No reward is produced."""
+        targets = self.team_effect_audit_targets
+        horizons = self.team_effect_audit_horizons
+        metrics = empty_team_effect_target_metrics(tuple(targets), tuple(horizons))
+        if not self.enable_team_effect_target_audit or not self.enable_team_intent:
+            return metrics
+        if int(self.num_team_codes) <= 1 or not getattr(rollout, "team_codes", None):
+            return metrics
+        env_ids = list(rollout.env_ids)
+        labels_all = np.asarray(rollout.team_codes, dtype=np.int64).reshape(-1)
+        T = min(len(env_ids), labels_all.size, len(rollout.states))
+        if T < 4:
+            return metrics
+        env_ids = env_ids[:T]
+        labels_all = np.clip(labels_all[:T], 0, self.num_team_codes - 1)
+        seqs = group_env_sequences(env_ids)
+
+        states_arr = np.asarray(
+            [self._fit_vector(s, self.state_dim) for s in rollout.states[:T]], dtype=np.float32
+        )
+        next_src = rollout.next_states if getattr(rollout, "next_states", None) else rollout.states
+        next_arr = np.asarray(
+            [self._fit_vector(s, self.state_dim) for s in next_src[:T]], dtype=np.float32
+        )
+        action_arr = None
+        if "joint_action" in targets:
+            try:
+                action_arr = np.asarray(
+                    [np.asarray(a, dtype=np.float32).reshape(self.n_agents, -1).mean(axis=0)
+                     for a in rollout.actions[:T]],
+                    dtype=np.float32,
+                )
+            except Exception:
+                action_arr = None
+        omega_arr = None
+        if "delta_omega" in targets and getattr(rollout, "obs", None):
+            try:
+                with torch.no_grad():
+                    st = torch.as_tensor(states_arr, dtype=torch.float32, device=self.device)
+                    jo = torch.as_tensor(
+                        np.asarray(
+                            [np.asarray(o, dtype=np.float32).reshape(self.n_agents, self.obs_dim)
+                             for o in rollout.obs[:T]],
+                            dtype=np.float32,
+                        ),
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    _c, _cd, _cmi, weights, _e, _r = self.compact(st, jo)
+                    omega_arr = weights.detach().cpu().numpy().astype(np.float32)
+            except Exception:
+                omega_arr = None
+
+        feats: dict[str, torch.Tensor] = {}
+        labs: dict[str, torch.Tensor] = {}
+
+        def add(key, feat_np, label_np):
+            if feat_np is None or len(label_np) < 4:
+                return
+            feats[key] = torch.as_tensor(np.asarray(feat_np, dtype=np.float32), device=self.device)
+            labs[key] = torch.as_tensor(np.asarray(label_np, dtype=np.int64), dtype=torch.long, device=self.device)
+
+        for t in targets:
+            if t == "s_next":
+                add("s_next", next_arr, labels_all)
+            elif t == "joint_effect":
+                for h in horizons:
+                    idxs, feat = build_windows(seqs, states_arr, h, mode="delta")
+                    if idxs:
+                        add(f"joint_effect_h{h}", feat, labels_all[idxs])
+            elif t == "joint_action" and action_arr is not None:
+                for h in horizons:
+                    idxs, feat = build_windows(seqs, action_arr, h, mode="mean")
+                    if idxs:
+                        add(f"joint_action_h{h}", feat, labels_all[idxs])
+            elif t == "delta_omega" and omega_arr is not None:
+                for h in horizons:
+                    idxs, feat = build_windows(seqs, omega_arr, h, mode="delta")
+                    if idxs:
+                        add(f"delta_omega_h{h}", feat, labels_all[idxs])
+
+        if not feats:
+            return metrics
+        if self.team_effect_probe is None:
+            self.team_effect_probe = TeamEffectTargetProbe(
+                target_dims=self._team_effect_target_dims(),
+                num_team_codes=int(self.num_team_codes),
+                hidden_dim=int(self.team_effect_audit_hidden_dim),
+            ).to(self.device)
+            self._team_effect_prior = torch.full(
+                (int(self.num_team_codes),), 1.0 / float(self.num_team_codes), device=self.device
+            )
+        feats = {k: v for k, v in feats.items() if k in self.team_effect_probe.heads}
+        labs = {k: labs[k] for k in feats}
+        if not feats:
+            return metrics
+        self.team_effect_probe.update(feats, labs, self._team_effect_prior)
+        metrics.update(self.team_effect_probe.evaluate(feats, labs, self._team_effect_prior))
+        return metrics
+
     def _team_disc_actionability_gate_open(self) -> bool:
         """R23-3: the q_D reward is allowed only once Z is measurably actionable.
 
@@ -3881,6 +4034,7 @@ class StandaloneProcessAgent:
         segments = self.segments.pop_completed()
         valid = [s for s in segments if s.length > 0]
         team_intent_metrics = self._team_intent_rollout_update(rollout, total_steps=total_steps)
+        team_effect_metrics = self._team_effect_target_audit(rollout, total_steps=total_steps)
         if not valid:
             self._team_transition_clear_rollout_buffers()
             return {
@@ -4022,8 +4176,10 @@ class StandaloneProcessAgent:
                 **empty_topology_potential_metrics(),
                 **empty_p2_metrics(),
                 **empty_g_info_metrics(),
+                **empty_assignment_actionability_metrics(),
                 **empty_team_transition_metrics(),
                 **team_intent_metrics,
+                **team_effect_metrics,
                 **empty_skill_effect_metrics(),
                 **self._situation_diagnostics([]),
             }
@@ -5049,6 +5205,7 @@ class StandaloneProcessAgent:
                 2,
             ),
             **team_intent_metrics,
+            **team_effect_metrics,
             **lifetime_metrics,
             **g_intervention_metrics,
             **cooperation_credit_metrics,
@@ -5365,6 +5522,7 @@ class StandaloneProcessAgent:
                 "compact_return_active": 0.0,
                 **self._empty_prototype_selection_metrics(),
                 **empty_g_info_metrics(),
+                **empty_assignment_actionability_metrics(),
             }
 
         states = torch.as_tensor(
@@ -5408,6 +5566,77 @@ class StandaloneProcessAgent:
         rel_t = None
         if self.use_agent_prototype_relevance:
             rel_t = agent_relevance[torch.arange(agent_relevance.shape[0], device=self.device), agent_ids]
+
+        # R23-next q_A residual actionability (default-off). Build executed-assignment
+        # features xi and OPT context (c, omega), train q_A_full/q_A_prior reward-off with
+        # a separate optimizer, and (only if reward_on + warmup + probe residual_gain>0)
+        # add a clipped high-level assignment reward into the high returns. The low-level
+        # actor input is untouched; q_D never sees these xi features (double-count rule).
+        q_a_metrics = empty_assignment_actionability_metrics()
+        q_a_reward_np = np.zeros(len(segments), dtype=np.float32)
+        aa_cfg = self.assignment_actionability_cfg
+        if aa_cfg.probe_on and int(self.num_team_codes) > 1 and len(segments) > 1:
+            with torch.no_grad():
+                skill_oh = F.one_hot(skills.clamp(0, self.n_skills - 1), self.n_skills).float()
+                n_dur = int(max(len(self.duration_candidates), 1))
+                dur_oh = F.one_hot(durations.clamp(0, n_dur - 1), n_dur).float()
+                age_feat = torch.log1p(ages.float()).unsqueeze(-1) / 10.0
+                xi_parts = [skill_oh, dur_oh, age_feat]
+                if aa_cfg.include_soft:
+                    sl_q, dl_q, _vq = self.high.logits(
+                        high_obs, prev_skills, ages, compact, team_vector,
+                        omega=omega_t, agent_relevance=rel_t, ar_prefix=ar_prefix_t,
+                    )
+                    xi_parts.append(F.softmax(sl_q, dim=-1))
+                    xi_parts.append(F.softmax(dl_q, dim=-1))
+                xi_feat = torch.cat(xi_parts, dim=-1).detach()
+                ctx_parts = [compact.detach()]
+                if omega_t is not None:
+                    ctx_parts.append(omega_t.detach())
+                ctx_feat = torch.cat(ctx_parts, dim=-1)
+                labels_z = team_codes.detach().long()
+                prior_probs = torch.full(
+                    (int(self.num_team_codes),),
+                    1.0 / float(self.num_team_codes),
+                    device=self.device,
+                )
+            if self.assignment_actionability is None:
+                self.assignment_actionability = AssignmentActionabilityDiscriminator(
+                    xi_dim=int(xi_feat.shape[-1]),
+                    context_dim=int(ctx_feat.shape[-1]),
+                    num_team_codes=int(self.num_team_codes),
+                    hidden_dim=int(aa_cfg.hidden_dim),
+                ).to(self.device)
+                self.q_a_opt = torch.optim.Adam(self.assignment_actionability.parameters(), lr=1e-3)
+            terms = self.assignment_actionability.losses(xi_feat, ctx_feat, labels_z, prior_probs)
+            q_a_loss = terms["loss_full"] + terms["loss_prior"]
+            self.q_a_opt.zero_grad()
+            q_a_loss.backward()
+            self.q_a_opt.step()
+            residual_gain = float(terms["residual_gain"].detach().cpu().item())
+            warmup_ok = int(total_steps) >= int(aa_cfg.warmup_steps)
+            reward_active = bool(aa_cfg.reward_on and warmup_ok and residual_gain > 0.0)
+            if reward_active:
+                r = self.assignment_actionability.reward(
+                    xi_feat, ctx_feat, labels_z, prior_probs,
+                    coef=aa_cfg.coef, clip=aa_cfg.clip,
+                )
+                q_a_reward_np = r.detach().cpu().numpy().astype(np.float32)
+            q_a_metrics.update({
+                "q_a_active": 1.0,
+                "q_a_reward_active": 1.0 if reward_active else 0.0,
+                "q_a_samples": float(len(segments)),
+                "q_a_loss_full": float(terms["loss_full"].detach().cpu().item()),
+                "q_a_loss_prior": float(terms["loss_prior"].detach().cpu().item()),
+                "q_a_acc_full": float(terms["acc_full"].detach().cpu().item()),
+                "q_a_acc_prior": float(terms["acc_prior"].detach().cpu().item()),
+                "q_a_residual_gain": residual_gain,
+                "q_a_residual_mean": float(terms["residual"].detach().mean().cpu().item()),
+                "q_a_prior_entropy": float(terms["prior_entropy"].detach().cpu().item()),
+                "q_a_reward_mean": float(np.mean(q_a_reward_np)) if reward_active else 0.0,
+                "q_a_reward_applied_steps": float(np.count_nonzero(q_a_reward_np)) if reward_active else 0.0,
+            })
+
         logp_high, entropy_high, values = self.high.evaluate(
             high_obs,
             prev_skills,
@@ -5436,6 +5665,7 @@ class StandaloneProcessAgent:
             env_returns_np
             + np.asarray(process_rewards, dtype=np.float32)
             - renewal_penalties_np
+            + q_a_reward_np
             + self.smdp_bootstrap_coef * smdp_discounts_np * bootstrap_values_np
         ).astype(np.float32)
         bootstrap_contrib_np = (
@@ -5653,6 +5883,7 @@ class StandaloneProcessAgent:
                 start_indices=start_indices_np,
             ),
             **g_info_metrics,
+            **q_a_metrics,
         }
 
     def _empty_low_metrics(self) -> dict[str, float]:

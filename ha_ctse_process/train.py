@@ -656,6 +656,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--team_disc_hidden_dim", type=int, default=0)
     parser.add_argument("--z_assignment_residual_gain", type=float, default=None)
     parser.add_argument("--team_disc_actionability_floor", type=float, default=None)
+    parser.add_argument("--assignment_actionability_coef", type=float, default=None)
+    parser.add_argument("--assignment_actionability_clip", type=float, default=None)
+    parser.add_argument("--assignment_actionability_warmup_steps", type=int, default=None)
     parser.add_argument("--intrinsic_segment_gate_margin", type=float, default=None)
     parser.add_argument("--intrinsic_segment_gate_min_segments", type=int, default=0)
     parser.add_argument("--intrinsic_segment_gate_min_residual_mi", type=float, default=None)
@@ -698,6 +701,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--disable_g_intervention_kl_diagnostic", action="store_true")
     parser.add_argument("--disable_g_info_diagnostic", action="store_true")
     parser.add_argument("--enable_g_info_objective", action="store_true")
+    parser.add_argument("--enable_assignment_actionability_probe", action="store_true")
+    parser.add_argument("--enable_assignment_actionability_reward", action="store_true")
+    parser.add_argument("--no_assignment_actionability_soft", action="store_true")
+    parser.add_argument("--enable_team_effect_target_audit", action="store_true")
+    parser.add_argument("--team_effect_audit_targets", type=str, default=None)
+    parser.add_argument("--team_effect_audit_horizons", type=str, default=None)
     parser.add_argument("--disable_intrinsic_segment_gate", action="store_true")
     parser.add_argument("--enable_intrinsic_reward_norm", action="store_true")
     parser.add_argument("--disable_smdp_discounted_high_return", action="store_true")
@@ -747,6 +756,12 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.z_assignment_residual_gain = float(args.z_assignment_residual_gain)
     if getattr(args, "team_disc_actionability_floor", None) is not None:
         config.team_disc_actionability_floor = float(args.team_disc_actionability_floor)
+    if getattr(args, "assignment_actionability_coef", None) is not None:
+        config.assignment_actionability_coef = float(args.assignment_actionability_coef)
+    if getattr(args, "assignment_actionability_clip", None) is not None:
+        config.assignment_actionability_clip = float(args.assignment_actionability_clip)
+    if getattr(args, "assignment_actionability_warmup_steps", None) is not None:
+        config.assignment_actionability_warmup_steps = int(args.assignment_actionability_warmup_steps)
     if args.low_level_architecture:
         config.low_level_architecture = args.low_level_architecture
     if int(args.opt_compact_dim) > 0:
@@ -1030,6 +1045,18 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.use_g_info_diagnostic = False
     if args.enable_g_info_objective:
         config.enable_g_info_objective = True
+    if args.enable_assignment_actionability_probe:
+        config.enable_assignment_actionability_probe = True
+    if args.enable_assignment_actionability_reward:
+        config.enable_assignment_actionability_reward = True
+    if args.no_assignment_actionability_soft:
+        config.assignment_actionability_include_soft = False
+    if args.enable_team_effect_target_audit:
+        config.enable_team_effect_target_audit = True
+    if getattr(args, "team_effect_audit_targets", None) is not None:
+        config.team_effect_audit_targets = str(args.team_effect_audit_targets)
+    if getattr(args, "team_effect_audit_horizons", None) is not None:
+        config.team_effect_audit_horizons = str(args.team_effect_audit_horizons)
     if args.enable_duration_entropy_floor:
         config.duration_entropy_floor_enabled = True
     if int(args.duration_entropy_floor_warmup_steps) >= 0:

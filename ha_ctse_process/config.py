@@ -104,6 +104,31 @@ class Config(EnvConfig):
     # enabling any actionability objective.
     z_assignment_residual_gain = 0.0
 
+    # R23-next q_A residual actionability (Option-B). Cross-entropy successor to the
+    # self-stalling g-info MI objective (2026-07-06 gradient audit: g-info grad into
+    # the Z path was <2% of PPO and MI never moved). q_A_full(Z|xi,c,omega) vs
+    # q_A_prior(Z|c,omega); residual = log q_full - log q_prior. Discriminator-only
+    # (detached inputs, own optimizer), high-level only. All default-off; reward is
+    # gated behind the probe (residual_gain>0) + warmup. q_A may read xi; the team
+    # effect discriminator q_D must NOT (PR-1 double-count contract).
+    enable_assignment_actionability_probe = False
+    enable_assignment_actionability_reward = False
+    assignment_actionability_coef = 0.05
+    assignment_actionability_clip = 1.0
+    assignment_actionability_warmup_steps = 20000
+    assignment_actionability_include_soft = True
+    assignment_actionability_hidden_dim = 128
+
+    # R23-next q_D effect-target / timescale audit (reward-off probe). Compares which
+    # q_D observation space + horizon (if any) carries a recoverable Z signature after
+    # R23-2 read q_D(Z|s_next) at chance. Targets: s_next, joint_action, joint_effect,
+    # delta_omega over the given horizons. No reward is produced (audit only). q_D never
+    # reads xi (double-count contract).
+    enable_team_effect_target_audit = False
+    team_effect_audit_targets = "s_next,joint_action,joint_effect,delta_omega"
+    team_effect_audit_horizons = "10,20,50"
+    team_effect_audit_hidden_dim = 128
+
     # PPO and entropy.
     high_entropy_coef = 0.01
     low_entropy_coef = 0.01
