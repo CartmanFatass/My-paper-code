@@ -5,6 +5,7 @@ from ha_ctse_process.r24_behavior_audit import (
     R24AuditRecord,
     action_feature_kl,
     between_within_ratio,
+    write_audit_csv,
     summarize_audit_records,
 )
 
@@ -68,3 +69,16 @@ def test_summarize_audit_records_reports_horizon_metrics():
     assert out["r24_z_action_kl_h10"] == 0.3
     assert out["r24_z_effect_distance_h10"] == 2.0
     assert out["r24_xi_action_kl_h20"] == 0.8
+
+
+def test_write_audit_csv_roundtrip(tmp_path):
+    metrics = {
+        "r24_audit_records": 2.0,
+        "r24_z_action_kl_h10": 0.25,
+        "r24_z_effect_distance_h10": 1.5,
+    }
+    path = tmp_path / "r24_behavior_audit.csv"
+    write_audit_csv(path, metrics)
+    text = path.read_text(encoding="utf-8")
+    assert "r24_audit_records" in text
+    assert "0.25" in text

@@ -8,6 +8,8 @@ to summarize forced-Z / forced-z_i rollouts from checkpoints.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import csv
+from pathlib import Path
 from typing import Sequence
 
 import numpy as np
@@ -110,3 +112,13 @@ def _entropy(labels: np.ndarray) -> float:
     probs = counts[counts > 0].astype(np.float64)
     probs = probs / probs.sum()
     return float(-np.sum(probs * np.log(probs + 1e-12)))
+
+
+def write_audit_csv(path: str | Path, metrics: dict[str, float]) -> None:
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    keys = sorted(metrics.keys())
+    with target.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        writer.writerow({k: float(metrics.get(k, 0.0)) for k in keys})
