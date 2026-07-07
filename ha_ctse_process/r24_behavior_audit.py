@@ -46,6 +46,8 @@ def action_feature_kl(p: np.ndarray, q: np.ndarray, eps: float = 1e-8) -> np.nda
     """
     p_arr = np.clip(_as_2d(p), eps, 1.0)
     q_arr = np.clip(_as_2d(q), eps, 1.0)
+    if p_arr.shape != q_arr.shape:
+        raise ValueError(f"action_feature_kl shape mismatch: p={p_arr.shape}, q={q_arr.shape}")
     p_arr = p_arr / np.maximum(p_arr.sum(axis=-1, keepdims=True), eps)
     q_arr = q_arr / np.maximum(q_arr.sum(axis=-1, keepdims=True), eps)
     return np.sum(p_arr * (np.log(p_arr) - np.log(q_arr)), axis=-1).astype(np.float64)
@@ -55,7 +57,9 @@ def between_within_ratio(features: np.ndarray, labels: np.ndarray, eps: float = 
     """Return between-label centroid distance divided by within-label variance."""
     feats = _as_2d(np.asarray(features, dtype=np.float64))
     labs = np.asarray(labels, dtype=np.int64).reshape(-1)
-    if feats.shape[0] != labs.shape[0] or feats.shape[0] <= 1:
+    if feats.shape[0] != labs.shape[0]:
+        raise ValueError(f"between_within_ratio row mismatch: features={feats.shape[0]}, labels={labs.shape[0]}")
+    if feats.shape[0] <= 1:
         return 0.0
     unique = np.unique(labs)
     if unique.size <= 1:
@@ -66,6 +70,8 @@ def between_within_ratio(features: np.ndarray, labels: np.ndarray, eps: float = 
     for label in unique:
         mask = labs == int(label)
         group = feats[mask]
+        if group.shape[0] < 2:
+            return 0.0
         if group.size == 0:
             continue
         center = group.mean(axis=0)
