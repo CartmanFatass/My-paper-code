@@ -10,6 +10,7 @@ from ha_ctse_process.r24_behavior_audit import (
     between_within_ratio,
     effect_distance,
     summarize_audit_records,
+    shuffled_between_within_ratio,
     write_audit_csv,
 )
 from scripts.r24_forced_behavior_audit import _parse_horizons, _rollout_action_from_features
@@ -70,16 +71,63 @@ def test_between_within_ratio_returns_zero_for_tiny_label_support():
     assert between_within_ratio(features, labels) == 0.0
 
 
+def test_shuffled_between_within_ratio_is_deterministic():
+    features = np.asarray([[0.0], [0.1], [5.0], [5.1]], dtype=np.float32)
+    labels = np.asarray([0, 0, 1, 1], dtype=np.int64)
+    assert shuffled_between_within_ratio(features, labels, seed=3) == shuffled_between_within_ratio(
+        features,
+        labels,
+        seed=3,
+    )
+
+
 def test_summarize_audit_records_reports_horizon_metrics():
     records = [
-        R24AuditRecord(horizon=10, forced_kind="z", action_distance=0.2, effect_distance=1.0, label=0),
-        R24AuditRecord(horizon=10, forced_kind="z", action_distance=0.4, effect_distance=3.0, label=1),
+        R24AuditRecord(
+            horizon=10,
+            forced_kind="z",
+            action_distance=0.2,
+            effect_distance=1.0,
+            label=0,
+            action_feature=(0.0,),
+            effect_feature=(0.0,),
+        ),
+        R24AuditRecord(
+            horizon=10,
+            forced_kind="z",
+            action_distance=0.4,
+            effect_distance=3.0,
+            label=0,
+            action_feature=(0.1,),
+            effect_feature=(0.1,),
+        ),
+        R24AuditRecord(
+            horizon=10,
+            forced_kind="z",
+            action_distance=0.6,
+            effect_distance=5.0,
+            label=1,
+            action_feature=(5.0,),
+            effect_feature=(5.0,),
+        ),
+        R24AuditRecord(
+            horizon=10,
+            forced_kind="z",
+            action_distance=0.8,
+            effect_distance=7.0,
+            label=1,
+            action_feature=(5.1,),
+            effect_feature=(5.1,),
+        ),
         R24AuditRecord(horizon=20, forced_kind="xi", action_distance=0.8, effect_distance=5.0, label=1),
     ]
     out = summarize_audit_records(records)
-    assert out["r24_audit_records"] == 3.0
-    assert out["r24_z_action_distance_h10"] == 0.3
-    assert out["r24_z_effect_distance_h10"] == 2.0
+    assert out["r24_audit_records"] == 5.0
+    assert out["r24_z_action_distance_h10"] == 0.5
+    assert out["r24_z_effect_distance_h10"] == 4.0
+    assert out["r24_z_action_between_within_ratio_h10"] > 20.0
+    assert out["r24_z_effect_between_within_ratio_h10"] > 20.0
+    assert "r24_z_action_between_within_lift_h10" in out
     assert out["r24_xi_action_distance_h20"] == 0.8
 
 

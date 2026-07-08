@@ -129,10 +129,11 @@ class Config(EnvConfig):
     team_effect_audit_horizons = "10,20,50"
     team_effect_audit_hidden_dim = 128
 
-    # R24 team-conditioned q_d reward-off process probe. This compares
-    # q_d_full(z_i | local_effect_i, generic team/context) against
-    # q_d_prior(z_i | generic team/context). It is diagnostics-only and must
-    # not feed any intrinsic reward path.
+    # R24 team-conditioned q_d reward-off behavior-window probe. This compares
+    # q_d_full(z_i | action/effect window_i, Z, xi_context_i, c, omega) against
+    # q_d_prior(z_i | Z, xi_context_i, c, omega).  xi_context_i excludes the
+    # focal executed z_i label. It is diagnostics-only and must not feed any
+    # intrinsic reward path.
     enable_team_conditioned_qd_probe = False
     team_conditioned_qd_hidden_dim = 128
     team_conditioned_qd_lr = 1e-3

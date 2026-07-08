@@ -1344,6 +1344,24 @@ def checkpoint_payload(
         "team_disc_clip": float(getattr(agent, "team_disc_clip", 0.0)),
         "team_disc_warmup_steps": int(getattr(agent, "team_disc_warmup_steps", 0)),
         "team_disc_hidden_dim": int(getattr(config, "team_disc_hidden_dim", 128)),
+        "z_assignment_residual_gain": float(getattr(config, "z_assignment_residual_gain", 0.0) or 0.0),
+        "team_disc_actionability_floor": float(
+            getattr(config, "team_disc_actionability_floor", 0.0) or 0.0
+        ),
+        "enable_assignment_actionability_probe": bool(
+            getattr(config, "enable_assignment_actionability_probe", False)
+        ),
+        "enable_assignment_actionability_reward": bool(
+            getattr(config, "enable_assignment_actionability_reward", False)
+        ),
+        "assignment_actionability_coef": float(getattr(config, "assignment_actionability_coef", 0.0) or 0.0),
+        "assignment_actionability_clip": float(getattr(config, "assignment_actionability_clip", 0.0) or 0.0),
+        "assignment_actionability_warmup_steps": int(
+            getattr(config, "assignment_actionability_warmup_steps", 0) or 0
+        ),
+        "assignment_actionability_include_soft": bool(
+            getattr(config, "assignment_actionability_include_soft", True)
+        ),
         "z_entropy_floor_enabled": bool(getattr(agent, "z_entropy_floor_enabled", False)),
         "z_entropy_floor_threshold": float(getattr(agent, "z_entropy_floor_threshold", 0.0)),
         "z_entropy_floor_coef": float(getattr(agent, "z_entropy_floor_coef", 0.0)),
@@ -1537,8 +1555,43 @@ def load_checkpoint(
     return int(checkpoint.get("total_steps", 0)), int(checkpoint.get("update_idx", 0))
 
 
+def _load_adjacent_run_manifest(path: str | Path) -> dict[str, Any]:
+    checkpoint_path = Path(path)
+    manifest_path = checkpoint_path.parent / "metadata" / "run_manifest.json"
+    if not manifest_path.exists():
+        return {}
+    try:
+        return json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _manifest_lookup(manifest: dict[str, Any], name: str) -> Any:
+    args = manifest.get("args") if isinstance(manifest.get("args"), dict) else {}
+    algorithm = manifest.get("algorithm_config") if isinstance(manifest.get("algorithm_config"), dict) else {}
+    training = manifest.get("training_config") if isinstance(manifest.get("training_config"), dict) else {}
+
+    if name == "assignment_actionability_include_soft":
+        for container in (args, algorithm, training):
+            if name in container:
+                return container.get(name)
+        if "no_assignment_actionability_soft" in args:
+            return not bool(args.get("no_assignment_actionability_soft"))
+        return None
+
+    for container in (args, algorithm, training):
+        if name in container:
+            return container.get(name)
+    return None
+
+
 def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
     checkpoint = torch.load(Path(path), map_location="cpu")
+    manifest = _load_adjacent_run_manifest(path)
+
+    def meta(name: str) -> Any:
+        return checkpoint.get(name) if name in checkpoint else _manifest_lookup(manifest, name)
+
     return {
         "duration_candidates": checkpoint.get("duration_candidates"),
         "n_agents": checkpoint.get("n_agents"),
@@ -1577,6 +1630,14 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "team_disc_clip": checkpoint.get("team_disc_clip"),
         "team_disc_warmup_steps": checkpoint.get("team_disc_warmup_steps"),
         "team_disc_hidden_dim": checkpoint.get("team_disc_hidden_dim"),
+        "z_assignment_residual_gain": meta("z_assignment_residual_gain"),
+        "team_disc_actionability_floor": meta("team_disc_actionability_floor"),
+        "enable_assignment_actionability_probe": meta("enable_assignment_actionability_probe"),
+        "enable_assignment_actionability_reward": meta("enable_assignment_actionability_reward"),
+        "assignment_actionability_coef": meta("assignment_actionability_coef"),
+        "assignment_actionability_clip": meta("assignment_actionability_clip"),
+        "assignment_actionability_warmup_steps": meta("assignment_actionability_warmup_steps"),
+        "assignment_actionability_include_soft": meta("assignment_actionability_include_soft"),
     }
 
 
@@ -1656,6 +1717,22 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         config.z_entropy_floor_warmup_steps = int(metadata.get("z_entropy_floor_warmup_steps"))
     if metadata.get("team_disc_hidden_dim") is not None:
         config.team_disc_hidden_dim = int(metadata.get("team_disc_hidden_dim"))
+    if metadata.get("z_assignment_residual_gain") is not None:
+        config.z_assignment_residual_gain = float(metadata.get("z_assignment_residual_gain"))
+    if metadata.get("team_disc_actionability_floor") is not None:
+        config.team_disc_actionability_floor = float(metadata.get("team_disc_actionability_floor"))
+    for name in (
+        "enable_assignment_actionability_probe",
+        "enable_assignment_actionability_reward",
+        "assignment_actionability_include_soft",
+    ):
+        if metadata.get(name) is not None:
+            setattr(config, name, bool(metadata.get(name)))
+    for name in ("assignment_actionability_coef", "assignment_actionability_clip"):
+        if metadata.get(name) is not None:
+            setattr(config, name, float(metadata.get(name)))
+    if metadata.get("assignment_actionability_warmup_steps") is not None:
+        config.assignment_actionability_warmup_steps = int(metadata.get("assignment_actionability_warmup_steps"))
     if bool(getattr(config, "enable_team_intent", False)):
         if str(getattr(config, "team_bridge_type", "stochastic")) == "none":
             raise ValueError("checkpoint enables team intent but uses team_bridge_type='none'")

@@ -66,12 +66,13 @@ $commonArgs = @(
     "--log_dir", $LogDir
 )
 
-Write-Host "===== R24 team-conditioned q_d reward-off probe ====="
+Write-Host "===== R24 behavior-window two-stream q_d reward-off probe ====="
 Write-Host "log_dir:  $LogDir"
 Write-Host "seed:     $Seed"
 Write-Host "timesteps:$TotalTimesteps"
 Write-Host "num_envs: $NumEnvs"
 Write-Host "device:   $Device"
+Write-Host "probe:    q_full(z_i | action/effect window_i, Z, xi_context_i, c, omega) vs q_prior"
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 $command = @($Python) + $commonArgs

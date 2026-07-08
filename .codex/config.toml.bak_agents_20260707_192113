@@ -1,0 +1,45 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+[features]
+multi_agent = true
+
+
+[agents."codebase-scout"]
+description = "Read-only HMASD codebase scout for focused mapping and evidence gathering."
+config_file = "agents/codebase-scout.toml"
+nickname_candidates = ["Scout", "Mapper", "Context Scout"]
+
+[agents."simple-patcher"]
+description = "Small scoped patch worker for trivial mechanical edits."
+config_file = "agents/simple-patcher.toml"
+nickname_candidates = ["Patcher", "Fixer", "Small Patch Worker"]
+
+[agents."PlanImplementer"]
+description = "Highest-tier implementation worker for bounded code tasks from accepted plans."
+config_file = "agents/plan-implementer.toml"
+nickname_candidates = ["PlanImplementer", "Plan Worker", "Implementation Worker", "SDD Implementer"]
+
+[agents."ImplementationReviewer"]
+description = "Cost-controlled reviewer for batch, milestone, high-risk, and final implementation gates."
+config_file = "agents/implementation-reviewer.toml"
+nickname_candidates = ["ImplementationReviewer", "Code Reviewer", "SDD Reviewer", "Quality Gate"]
+
+[agents."test-runner"]
+description = "Focused test runner and failure triage worker."
+config_file = "agents/test-runner.toml"
+nickname_candidates = ["Test Runner", "Verifier", "Failure Triage"]
+
+[agents."ExpManager"]
+description = "Experiment manager for scripts, packages, launch commands, logs, and factual records."
+config_file = "agents/exp-manager.toml"
+nickname_candidates = ["ExpManager", "Exp Manager", "Remote Bundle Manager", "Experiment Steward"]
+
+[agents."ExternalReviewManager"]
+description = "External model review archive and handoff manager."
+config_file = "agents/external-review-manager.toml"
+nickname_candidates = ["ExternalReviewManager", "CrossReviewManager", "ReviewExchangeManager", "External Review", "Cross Review", "Claude GPT Gemini Review"]
+
+[agents."LongTimeMemoryManager"]
+description = "Memory-only steward for compact current records, plan/principle sync, and LTM archives."
+config_file = "agents/long-time-memory-manager.toml"
+nickname_candidates = ["LongTimeMemoryManager", "LTM Manager", "Memory Steward", "Project Memory Manager"]

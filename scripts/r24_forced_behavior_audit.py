@@ -182,6 +182,28 @@ def _state_at(states: list[np.ndarray], horizon: int) -> np.ndarray:
     return states[index]
 
 
+def _flat_delta(forced, base) -> tuple[float, ...]:
+    forced_rows = np.asarray(forced, dtype=np.float64).reshape(-1)
+    base_rows = np.asarray(base, dtype=np.float64).reshape(-1)
+    if forced_rows.shape != base_rows.shape:
+        return ()
+    return tuple(float(value) for value in forced_rows - base_rows)
+
+
+def _effect_feature(base_start, base_end, forced_start, forced_end) -> tuple[float, ...]:
+    base_start_arr = np.ravel(np.asarray(base_start, dtype=np.float64))
+    base_end_arr = np.ravel(np.asarray(base_end, dtype=np.float64))
+    forced_start_arr = np.ravel(np.asarray(forced_start, dtype=np.float64))
+    forced_end_arr = np.ravel(np.asarray(forced_end, dtype=np.float64))
+    if base_start_arr.shape != base_end_arr.shape or forced_start_arr.shape != forced_end_arr.shape:
+        return ()
+    base_delta = base_end_arr - base_start_arr
+    forced_delta = forced_end_arr - forced_start_arr
+    if base_delta.shape != forced_delta.shape:
+        return ()
+    return tuple(float(value) for value in forced_delta - base_delta)
+
+
 def _audit_kind(
     env,
     agent,
@@ -217,7 +239,10 @@ def _audit_kind(
                 skill_interval=skill_interval,
             )
             action_distance = action_feature_distance(forced_features, base_features)
+            action_feature = _flat_delta(forced_features, base_features)
             for horizon in horizons:
+                base_end = _state_at(base_states, horizon)
+                forced_end = _state_at(forced_states, horizon)
                 records.append(
                     R24AuditRecord(
                         horizon=int(horizon),
@@ -225,11 +250,13 @@ def _audit_kind(
                         action_distance=float(action_distance),
                         effect_distance=effect_distance(
                             base_start,
-                            _state_at(base_states, horizon),
+                            base_end,
                             forced_start,
-                            _state_at(forced_states, horizon),
+                            forced_end,
                         ),
                         label=int(label),
+                        action_feature=action_feature,
+                        effect_feature=_effect_feature(base_start, base_end, forced_start, forced_end),
                     )
                 )
     return records
@@ -290,7 +317,7 @@ def run_r24_behavior_audit(args: argparse.Namespace) -> dict[str, float]:
                 skill_interval=int(args.skill_interval),
             )
         )
-        metrics = summarize_audit_records(records)
+        metrics = summarize_audit_records(records, shuffle_seed=int(args.shuffle_label_seed))
         out_dir = Path(args.out_dir)
         write_audit_csv(out_dir / "r24_behavior_audit.csv", metrics)
         return metrics
@@ -312,6 +339,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--n_resets", type=int, default=16)
     parser.add_argument("--max_labels", type=int, default=6)
     parser.add_argument("--skill_interval", type=int, default=10)
+    parser.add_argument("--shuffle_label_seed", type=int, default=0)
     return parser.parse_args()
 
 

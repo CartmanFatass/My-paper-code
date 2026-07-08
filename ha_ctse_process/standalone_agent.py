@@ -106,6 +106,9 @@ from ha_ctse_process.prototype_response_discriminator import (
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
 
 
+R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS = 32
+
+
 def mlp(input_dim: int, hidden_dim: int, output_dim: int) -> nn.Sequential:
     return nn.Sequential(
         nn.Linear(input_dim, hidden_dim),
@@ -1115,6 +1118,10 @@ class Segment:
     renewal_penalty: float = 0.0
     obs: list[np.ndarray] = field(default_factory=list)
     actions: list[np.ndarray] = field(default_factory=list)
+    pre_assignment_high_obs: np.ndarray | None = None
+    pre_assignment_obs: list[np.ndarray] = field(default_factory=list)
+    pre_assignment_actions: list[np.ndarray] = field(default_factory=list)
+    pre_assignment_end_obs: np.ndarray | None = None
     rewards: list[float] = field(default_factory=list)
     rollout_indices: list[int] = field(default_factory=list)
     reward_info_seq: list[dict] = field(default_factory=list)
@@ -1226,7 +1233,23 @@ class SegmentManager:
         agent_relevance_start=None,
     ):
         old = self.active[env_id][agent_id]
+        pre_assignment_high_obs = None
+        pre_assignment_obs: list[np.ndarray] = []
+        pre_assignment_actions: list[np.ndarray] = []
+        pre_assignment_end_obs = None
         if old is not None and old.length > 0:
+            pre_assignment_high_obs = np.asarray(old.high_obs, dtype=np.float32).copy()
+            pre_assignment_obs = [
+                np.asarray(row, dtype=np.float32).copy()
+                for row in old.obs[-R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS:]
+            ]
+            pre_assignment_actions = [
+                np.asarray(row, dtype=np.float32).reshape(-1).copy()
+                for row in old.actions[-R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS:]
+            ]
+            pre_assignment_end_obs = (
+                None if old.end_obs is None else np.asarray(old.end_obs, dtype=np.float32).copy()
+            )
             if int(kappa_start) >= 0:
                 old.kappa_end = int(kappa_start)
                 old.situation_changed_during_segment = bool(
@@ -1294,6 +1317,10 @@ class SegmentManager:
             agent_relevance_start=(
                 None if agent_relevance_start is None else np.asarray(agent_relevance_start, dtype=np.float32)
             ),
+            pre_assignment_high_obs=pre_assignment_high_obs,
+            pre_assignment_obs=pre_assignment_obs,
+            pre_assignment_actions=pre_assignment_actions,
+            pre_assignment_end_obs=pre_assignment_end_obs,
         )
 
     def append(
@@ -1935,15 +1962,21 @@ class StandaloneProcessAgent:
         # q_d_prior(z_i | context).
         self.team_conditioned_qd_cfg = TeamConditionedQDConfig.from_config(config)
         self._r24_qd_omega_dim = int(max(self.opt_num_prototypes, 0))
+        self._r24_qd_action_feature_dim = int(1 if self.action_space_type == "discrete" else max(self.action_dim, 1))
+        self._r24_qd_action_stream_dim = int(self._r24_qd_action_feature_dim * 4)
+        self._r24_qd_effect_stream_dim = int(self.obs_dim * 4)
+        self._r24_qd_xi_context_dim = int(max(self.n_skills, 1))
         self._r24_qd_condition_dim = int(
             max(num_team_codes, 1)
             + max(len(self.duration_candidates), 1)
             + 2
             + self._r24_qd_omega_dim
+            + self._r24_qd_xi_context_dim
         )
         self.team_conditioned_qd_probe = (
             TeamConditionedQDProbe(
-                effect_dim=self.obs_dim,
+                action_dim=self._r24_qd_action_stream_dim,
+                effect_dim=self._r24_qd_effect_stream_dim,
                 condition_dim=self._r24_qd_condition_dim,
                 num_skills=self.n_skills,
                 hidden_dim=self.team_conditioned_qd_cfg.hidden_dim,
@@ -4069,8 +4102,12 @@ class StandaloneProcessAgent:
     def _r24_qd_segment_tensors(
         self,
         valid_segments: list[Segment],
-    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        actions: list[np.ndarray] = []
         effects: list[np.ndarray] = []
+        pre_actions: list[np.ndarray] = []
+        pre_effects: list[np.ndarray] = []
+        pre_valid: list[float] = []
         conditions: list[np.ndarray] = []
         labels: list[int] = []
         n_team = int(max(self.num_team_codes, 1))
@@ -4079,14 +4116,11 @@ class StandaloneProcessAgent:
         omega_dim = int(max(getattr(self, "_r24_qd_omega_dim", 0), 0))
 
         for segment in valid_segments:
-            start_obs = self._fit_vector(segment.high_obs, self.obs_dim)
-            if segment.end_obs is not None:
-                end_obs = self._fit_vector(segment.end_obs, self.obs_dim)
-            elif segment.obs:
-                end_obs = self._fit_vector(segment.obs[-1], self.obs_dim)
-            else:
-                end_obs = start_obs.copy()
-            effects.append((end_obs - start_obs).astype(np.float32, copy=False))
+            actions.append(self._r24_qd_action_stream(segment))
+            effects.append(self._r24_qd_effect_stream(segment))
+            pre_actions.append(self._r24_qd_pre_action_stream(segment))
+            pre_effects.append(self._r24_qd_pre_effect_stream(segment))
+            pre_valid.append(float(self._r24_qd_pre_assignment_valid(segment)))
 
             team_onehot = np.zeros(n_team, dtype=np.float32)
             team_onehot[int(np.clip(segment.team_code, 0, n_team - 1))] = 1.0
@@ -4105,18 +4139,27 @@ class StandaloneProcessAgent:
                 if omega_dim > 0 and segment.omega_start is not None
                 else np.zeros(omega_dim, dtype=np.float32)
             )
-            # Do not append executed skill one-hot here: z_i is the label.
+            xi_context = self._r24_qd_xi_context(segment)
+            # Do not append the focal executed skill one-hot here: z_i is the label.
             conditions.append(
-                np.concatenate([team_onehot, duration_onehot, age_length, omega]).astype(np.float32, copy=False)
+                np.concatenate([team_onehot, duration_onehot, age_length, omega, xi_context]).astype(
+                    np.float32,
+                    copy=False,
+                )
             )
             labels.append(int(segment.skill))
 
         if not labels:
             return (
-                torch.zeros((0, self.obs_dim), dtype=torch.float32, device=self.device),
+                torch.zeros((0, self._r24_qd_action_stream_dim), dtype=torch.float32, device=self.device),
+                torch.zeros((0, self._r24_qd_effect_stream_dim), dtype=torch.float32, device=self.device),
                 torch.zeros((0, self._r24_qd_condition_dim), dtype=torch.float32, device=self.device),
                 torch.zeros((0,), dtype=torch.long, device=self.device),
+                torch.zeros((0, self._r24_qd_action_stream_dim), dtype=torch.float32, device=self.device),
+                torch.zeros((0, self._r24_qd_effect_stream_dim), dtype=torch.float32, device=self.device),
+                torch.zeros((0,), dtype=torch.bool, device=self.device),
             )
+        action_t = torch.as_tensor(np.asarray(actions, dtype=np.float32), dtype=torch.float32, device=self.device)
         effect_t = torch.as_tensor(np.asarray(effects, dtype=np.float32), dtype=torch.float32, device=self.device)
         condition_t = torch.as_tensor(
             np.asarray(conditions, dtype=np.float32),
@@ -4124,13 +4167,115 @@ class StandaloneProcessAgent:
             device=self.device,
         )
         labels_t = torch.as_tensor(np.asarray(labels, dtype=np.int64), dtype=torch.long, device=self.device)
-        return effect_t, condition_t, labels_t
+        pre_action_t = torch.as_tensor(
+            np.asarray(pre_actions, dtype=np.float32),
+            dtype=torch.float32,
+            device=self.device,
+        )
+        pre_effect_t = torch.as_tensor(
+            np.asarray(pre_effects, dtype=np.float32),
+            dtype=torch.float32,
+            device=self.device,
+        )
+        pre_valid_t = torch.as_tensor(
+            np.asarray(pre_valid, dtype=np.bool_),
+            dtype=torch.bool,
+            device=self.device,
+        )
+        return action_t, effect_t, condition_t, labels_t, pre_action_t, pre_effect_t, pre_valid_t
+
+    def _r24_qd_action_stream(self, segment: Segment) -> np.ndarray:
+        return self._r24_qd_action_stream_from_actions(segment.actions)
+
+    def _r24_qd_pre_action_stream(self, segment: Segment) -> np.ndarray:
+        return self._r24_qd_action_stream_from_actions(segment.pre_assignment_actions)
+
+    def _r24_qd_action_stream_from_actions(self, actions: list[np.ndarray]) -> np.ndarray:
+        dim = int(max(getattr(self, "_r24_qd_action_feature_dim", 1), 1))
+        if not actions:
+            return np.zeros(dim * 4, dtype=np.float32)
+        rows = np.asarray([self._fit_vector(action, dim) for action in actions], dtype=np.float32)
+        mean = rows.mean(axis=0)
+        std = rows.std(axis=0)
+        delta = rows[-1] - rows[0]
+        span = rows.max(axis=0) - rows.min(axis=0)
+        return np.concatenate([mean, std, delta, span]).astype(np.float32, copy=False)
+
+    def _r24_qd_effect_stream(self, segment: Segment) -> np.ndarray:
+        return self._r24_qd_effect_stream_from_observations(
+            segment.high_obs,
+            segment.obs,
+            segment.end_obs,
+        )
+
+    def _r24_qd_pre_effect_stream(self, segment: Segment) -> np.ndarray:
+        return self._r24_qd_effect_stream_from_observations(
+            segment.pre_assignment_high_obs,
+            segment.pre_assignment_obs,
+            segment.pre_assignment_end_obs,
+        )
+
+    def _r24_qd_effect_stream_from_observations(
+        self,
+        start_obs,
+        obs_rows: list[np.ndarray],
+        end_obs,
+    ) -> np.ndarray:
+        if start_obs is None:
+            return np.zeros(self._r24_qd_effect_stream_dim, dtype=np.float32)
+        start = self._fit_vector(start_obs, self.obs_dim)
+        rows: list[np.ndarray] = [start]
+        rows.extend(self._fit_vector(obs, self.obs_dim) for obs in obs_rows)
+        if end_obs is not None:
+            rows.append(self._fit_vector(end_obs, self.obs_dim))
+        matrix = np.asarray(rows, dtype=np.float32)
+        end = matrix[-1]
+        delta = end - start
+        mean_delta = matrix.mean(axis=0) - start
+        std = matrix.std(axis=0)
+        span = matrix.max(axis=0) - matrix.min(axis=0)
+        return np.concatenate([delta, mean_delta, std, span]).astype(np.float32, copy=False)
+
+    def _r24_qd_pre_assignment_valid(self, segment: Segment) -> bool:
+        return (
+            segment.pre_assignment_high_obs is not None
+            and (bool(segment.pre_assignment_actions) or bool(segment.pre_assignment_obs))
+        )
+
+    def _r24_qd_xi_context(self, segment: Segment) -> np.ndarray:
+        hist = np.zeros(int(max(getattr(self, "_r24_qd_xi_context_dim", self.n_skills), 1)), dtype=np.float32)
+        roster = segment.roster_active_skills_start
+        if roster is None:
+            return hist
+        roster_arr = np.asarray(roster, dtype=np.int64).reshape(-1)
+        if roster_arr.size <= 0:
+            return hist
+        focal = int(segment.agent_id)
+        count = 0
+        for idx, skill in enumerate(roster_arr):
+            if idx == focal:
+                continue
+            skill_idx = int(skill)
+            if 0 <= skill_idx < hist.shape[0]:
+                hist[skill_idx] += 1.0
+                count += 1
+        if count > 0:
+            hist /= float(count)
+        return hist
 
     def _team_conditioned_qd_update(self, valid_segments: list[Segment]) -> dict[str, float]:
         metrics = empty_team_conditioned_qd_metrics()
         if self.team_conditioned_qd_probe is None or self.team_conditioned_qd_opt is None:
             return metrics
-        effect_t, condition_t, labels_t = self._r24_qd_segment_tensors(valid_segments)
+        (
+            action_t,
+            effect_t,
+            condition_t,
+            labels_t,
+            pre_action_t,
+            pre_effect_t,
+            pre_valid_t,
+        ) = self._r24_qd_segment_tensors(valid_segments)
         sample_count = int(labels_t.numel())
         if sample_count <= 0:
             return metrics
@@ -4139,7 +4284,15 @@ class StandaloneProcessAgent:
         if sample_count < int(self.team_conditioned_qd_cfg.min_samples):
             return metrics
 
-        terms = self.team_conditioned_qd_probe.losses(effect_t, condition_t, labels_t)
+        terms = self.team_conditioned_qd_probe.losses(
+            action_t,
+            effect_t,
+            condition_t,
+            labels_t,
+            pre_action=pre_action_t,
+            pre_effect=pre_effect_t,
+            pre_mask=pre_valid_t,
+        )
         self.team_conditioned_qd_opt.zero_grad()
         terms["loss"].backward()
         self.team_conditioned_qd_opt.step()
@@ -4147,11 +4300,39 @@ class StandaloneProcessAgent:
             {
                 "r24_qd_loss_full": float(terms["loss_full"].detach().cpu().item()),
                 "r24_qd_loss_prior": float(terms["loss_prior"].detach().cpu().item()),
+                "r24_qd_loss_behavior": float(terms["loss_behavior"].detach().cpu().item()),
+                "r24_qd_loss_pre": float(terms["loss_pre"].detach().cpu().item()),
                 "r24_qd_acc_full": float(terms["acc_full"].detach().cpu().item()),
                 "r24_qd_acc_prior": float(terms["acc_prior"].detach().cpu().item()),
+                "r24_qd_acc_behavior": float(terms["acc_behavior"].detach().cpu().item()),
+                "r24_qd_acc_pre": float(terms["acc_pre"].detach().cpu().item()),
+                "r24_qd_acc_majority": float(terms["acc_majority"].detach().cpu().item()),
                 "r24_qd_residual_gain": float(terms["residual_gain"].detach().cpu().item()),
                 "r24_qd_residual_mean": float(terms["residual_mean"].detach().cpu().item()),
                 "r24_qd_positive_frac": float(terms["positive_frac"].detach().cpu().item()),
+                "r24_qd_behavior_gain_over_prior": float(
+                    terms["behavior_gain_over_prior"].detach().cpu().item()
+                ),
+                "r24_qd_pre_gain_over_prior": float(terms["pre_gain_over_prior"].detach().cpu().item()),
+                "r24_qd_full_minus_behavior_acc": float(
+                    terms["full_minus_behavior_acc"].detach().cpu().item()
+                ),
+                "r24_qd_full_minus_pre_acc": float(terms["full_minus_pre_acc"].detach().cpu().item()),
+                "r24_qd_pre_valid_frac": float(terms["pre_valid_frac"].detach().cpu().item()),
+                "r24_qd_label_entropy": float(terms["label_entropy"].detach().cpu().item()),
+                "r24_qd_label_max_frac": float(terms["label_max_frac"].detach().cpu().item()),
+                "r24_qd_shuffle_residual_mean": float(terms["shuffle_residual_mean"].detach().cpu().item()),
+                "r24_qd_shuffle_positive_frac": float(terms["shuffle_positive_frac"].detach().cpu().item()),
+                "r24_qd_shuffle_acc_gap": float(terms["shuffle_acc_gap"].detach().cpu().item()),
+                "r24_qd_shuffle_label_changed_frac": float(
+                    terms["shuffle_label_changed_frac"].detach().cpu().item()
+                ),
+                "r24_qd_fake_residual_mean": float(terms["fake_residual_mean"].detach().cpu().item()),
+                "r24_qd_fake_positive_frac": float(terms["fake_positive_frac"].detach().cpu().item()),
+                "r24_qd_fake_acc_gap": float(terms["fake_acc_gap"].detach().cpu().item()),
+                "r24_qd_fake_label_changed_frac": float(
+                    terms["fake_label_changed_frac"].detach().cpu().item()
+                ),
             }
         )
         return metrics

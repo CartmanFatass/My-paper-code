@@ -16,6 +16,8 @@ class R24AuditRecord:
     action_distance: float
     effect_distance: float
     label: int
+    action_feature: tuple[float, ...] = ()
+    effect_feature: tuple[float, ...] = ()
 
 
 def _as_feature_rows(values) -> np.ndarray:
@@ -108,6 +110,29 @@ def between_within_ratio(features, labels) -> float:
     return float(between / max(within, 1e-12))
 
 
+def _same_group_matrix(labels: np.ndarray) -> np.ndarray:
+    rows = np.ravel(np.asarray(labels))
+    return rows[:, None] == rows[None, :]
+
+
+def shuffled_between_within_ratio(features, labels, seed: int = 0, n_shuffles: int = 32) -> float:
+    label_rows = np.ravel(np.asarray(labels))
+    if label_rows.size <= 1:
+        return 0.0
+    rng = np.random.default_rng(int(seed))
+    original_partition = _same_group_matrix(label_rows)
+    ratios: list[float] = []
+    for _ in range(int(max(n_shuffles, 1))):
+        shuffled = np.array(label_rows, copy=True)
+        rng.shuffle(shuffled)
+        if np.array_equal(_same_group_matrix(shuffled), original_partition):
+            continue
+        ratios.append(between_within_ratio(features, shuffled))
+    if not ratios:
+        return 0.0
+    return float(np.mean(np.asarray(ratios, dtype=np.float64)))
+
+
 def _label_entropy(labels: list[int]) -> float:
     if not labels:
         return 0.0
@@ -122,7 +147,18 @@ def _mean(values: list[float]) -> float:
     return float(round(float(np.mean(np.asarray(values, dtype=np.float64))), 12))
 
 
-def summarize_audit_records(records) -> dict[str, float]:
+def _feature_rows(records: list[R24AuditRecord], field: str) -> np.ndarray | None:
+    values = [tuple(getattr(record, field)) for record in records if tuple(getattr(record, field))]
+    if len(values) != len(records):
+        return None
+    return _as_sample_rows(values)
+
+
+def _rounded_ratio(value: float) -> float:
+    return float(round(float(value), 12))
+
+
+def summarize_audit_records(records, shuffle_seed: int = 0) -> dict[str, float]:
     records = list(records)
     metrics: dict[str, float] = {"r24_audit_records": float(len(records))}
     groups: dict[tuple[str, int], list[R24AuditRecord]] = {}
@@ -135,6 +171,21 @@ def summarize_audit_records(records) -> dict[str, float]:
         metrics[f"{prefix}_action_distance_{suffix}"] = _mean([float(record.action_distance) for record in group])
         metrics[f"{prefix}_effect_distance_{suffix}"] = _mean([float(record.effect_distance) for record in group])
         metrics[f"{prefix}_label_entropy_{suffix}"] = _label_entropy([int(record.label) for record in group])
+        labels = [int(record.label) for record in group]
+        for feature_name, metric_name in (
+            ("action_feature", "action_between_within"),
+            ("effect_feature", "effect_between_within"),
+        ):
+            rows = _feature_rows(group, feature_name)
+            if rows is None:
+                continue
+            ratio = between_within_ratio(rows, labels)
+            shuffled_ratio = shuffled_between_within_ratio(rows, labels, seed=int(shuffle_seed) + int(horizon))
+            metrics[f"{prefix}_{metric_name}_ratio_{suffix}"] = _rounded_ratio(ratio)
+            metrics[f"{prefix}_{metric_name}_shuffled_ratio_{suffix}"] = _rounded_ratio(shuffled_ratio)
+            metrics[f"{prefix}_{metric_name}_lift_{suffix}"] = _rounded_ratio(
+                ratio / max(float(shuffled_ratio), 1e-12)
+            )
 
     return metrics
 

@@ -66,6 +66,96 @@ hand-picked fixed duration in a short run.  The important question is whether
 HA-CTSE can reconstruct HMASD's skill-discovery, skill-differentiation, and
 actually-work intrinsic drive under asynchronous skill lifetimes.
 
+## Round 24 Assignment-to-Behavior Bridge (planned)
+
+Status: diagnostics-first / behavior-window q_d probe implemented reward-off /
+no reward changes until Round 3 gates pass.
+
+Source: External review Round 3 in
+`memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` (accepted into compact memory
+on 2026-07-07).
+
+R23-next disposition:
+
+- Keep the q_A result as high-level validation: `Z -> xi` is now learnable and
+  the weak g-info path is superseded for this line.
+- Do not treat R23 as full success. The remaining unproven bridge is
+  `xi -> low-level/joint behavior -> recoverable team effect`.
+- Keep q_D reward off by default. `q_D` can only be revisited after a proven
+  downstream behavioral bridge is in place.
+- `q_d` must **exclude focal `z_i`** from assignment context:
+  `xi_context_i = xi_-i` (teammate labels and related context only).
+- `q_D` must not read `xi` directly, otherwise it double-counts q_A.
+
+Staged gates:
+
+```text
+R24-0 forced-xi / forced-z behavior audit:
+  Load a q_A reward checkpoint.
+  Force matched states through alternative Z/xi/z_i choices.
+  Roll out H={10,20,50}.
+  Measure action KL, trajectory/effect between-within ratio, persistence ratio,
+  low hidden divergence, and joint-effect distance.
+  Pass only if differences persist beyond one-step action-logit effects.
+  Control against matched-no-q_A, random/early, fake/shuffled, and with-label-repeats.
+
+R24-1 team-conditioned q_d reward-off behavior-window probe:
+  Train/evaluate
+  q_d_full(z_i | local_behavior_window_i, Z, xi_context_i, c, omega)
+  versus q_d_prior(z_i | Z, xi_context_i, c, omega)
+  using held-out CE/NLL residual.
+  Build local_behavior_window with separate action stream and state/effect stream.
+  Require:
+    residual_gain_mean >= 0.05 nats,
+    positive_frac >= 0.60,
+    full_minus_prior_acc_gap >= 0.05,
+    residual beats best null/shortcut by >= 1.3x,
+    shuffled-label and pre-assignment residual near 0,
+    between_within_ratio_h50 > 1.2,
+    persistence and horizon-growth.
+  Do not use raw comm/QoS/coverage/recovery fields as intrinsic targets.
+
+  Implementation update (2026-07-07):
+    `TeamConditionedQDProbe` now has separate action and state/effect encoders.
+    `StandaloneProcessAgent` builds action-window summary features, effect-window
+    summary features, and `xi_context_i` from teammate active skills while
+    excluding the focal skill label.  The probe remains reward-off and diagnostic;
+    held-out shortcut/null controls and the residual-gain gates are still required
+    before any low-only q_d reward arm.
+
+  Implementation update (2026-07-08):
+    `docs/superpowers/plans/2026-07-08-r24-qd-null-controls.md` implemented.
+    `TeamConditionedQDProbe` now logs behavior-only, pre-assignment,
+    shuffled-label, fake-label, and label-baseline controls in addition to the
+    full-vs-prior residual. `SegmentManager.renew()` carries a bounded previous
+    behavior window into the new segment so `q_pre` can test whether current
+    skill labels were already predictable before assignment. This is still
+    reward-off only; the next action is a rerun/read of the q_d probe, not
+    reward injection.
+
+  External review Round 4 clarification (GPT web, 2026-07-08):
+    `q_behavior` passing is positive evidence for individual behavior semantics,
+    not automatically a shortcut. But if `q_full - q_behavior` is small, the
+    team-conditioned/cooperative claim is not established. `q_pre` is a
+    selection/history confound control, not a pure leakage detector; if `q_pre`
+    is strong, require `q_full - q_pre` and/or forced post-assignment
+    intervention evidence before treating q_d as executed-skill semantics.
+
+R24-2 low-only q_d reward arm:
+  Allowed only after R24-0 and R24-1 pass the full gate set.
+  Use small clipped low-level-only pressure; keep q_A on and q_D reward off.
+
+R24-3 q_D re-probe / reward gate:
+  Allowed only after q_d creates stable behavior separation and passing its gate
+  conditions. First run reward-off q_D on behavior/effect windows with context prior,
+  not xi input. q_D reward can be reconsidered only if residual beats marginal/prior.
+```
+
+Principle status: no `ALGORITHM_PRINCIPLES.md` rewrite yet. The existing contract
+already says `Z -> xi -> effect -> q_D`; R24 is a plan-level gate that prevents
+promoting the q_A result into a stronger principle before behavioral evidence
+exists.
+
 ## Round 22 Two-Clock Objective Unification (planned)
 
 Source plan:
@@ -564,6 +654,29 @@ As of 2026-06-23:
 LongTaskMemo completion rule: after every task, update the affected memory files
 and `ATTENTION_POINTER.md` before final response.  If no memory update is needed,
 explicitly confirm that the pointer remains accurate.
+
+### Workflow Migration: Superpowers-Style Subagent Lifecycle
+
+Status: complete as of 2026-07-08.
+
+Purpose: move HMASD Codex subagent handling to the Superpowers pattern:
+task brief files, report files, durable progress, explicit statuses, and
+soft `wait_agent` timeouts. A timeout is not a failure. If checkpoint/status
+files show progress, the controller leaves the subagent open and does not
+duplicate the task.
+
+Implemented artifacts:
+
+- `.codex/agents/README.md` mirrors the Superpowers authority, soft-timeout,
+  file-handoff, and role-boundary rules.
+- `.codex/agents/templates/subagent-task-brief.md`,
+  `.codex/agents/templates/subagent-report.md`, and
+  `.codex/agents/templates/expmanager-checkpoint.md` provide reusable handoff
+  templates.
+- `.codex/agents/exp-manager.toml` and
+  `.codex/agents/result-analyst.toml` now require compact status returns and
+  file-based evidence/checkpoints for long or metric-heavy work.
+- `scripts/check_subagent_handoff_contract.ps1` verifies the migration anchors.
 
 Update on 2026-06-24: implementation moved beyond the first pass. The core
 HA-CTSE path, stochastic bridge, autoregressive editor, compact-conditioned
@@ -2035,4 +2148,3 @@ Decision rule:
 ## 2026-06-27 Intrinsic Reward Reconstruction
 
 _Condensed 2026-07-06 (completed/superseded). Full text: `memory/backup_20260706/IMPLEMENTATION_PLAN.md`._
-
