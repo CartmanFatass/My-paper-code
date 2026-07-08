@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-07
+Updated: 2026-07-09
 
 Purpose: factual current experiment state. ExpManager records experiment
 content, running state, commands, package paths, and result facts here.
@@ -27,7 +27,8 @@ Status vocabulary:
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260708-r24-qd-null-control-cloud-handoff | launch-ready | R24 | cloud CUDA / 64env package | ExpManager + controller | run 320k reward-off q_d null-control seeds 1 and 2; read new null-control fields before any q_d/q_D reward decision | `dist/ha_ctse_r24_qd_null_control_cloud_runtime_20260708_190315.zip`; `scripts/run_r24_qd_null_control_cloud_64env.sh`; default log root `logs_cloud_r24_qd_null_control_64env` | Completes the unfinished post-update q_d diagnostic. Local seed1 stopped at 152k via unrelated ratio guard; seed2 stopped at 256k. Cloud runner uses `GUARD_MODE=warn`, CUDA, 64 env, `total_timesteps=320000`, q_A actionability reward on, q_d/q_D reward off. |
+| EXP-20260709-r24-frozen-qd-null-probes | launch-ready | R24 frozen q_d null probes | cloud CUDA / 64env / 320k steps / seeds 1,2 | ExpManager | After launch, read `train_updates.csv`, `runner_output.log`, `r24_qd_windows/*.npz`, and `r24_qd_frozen_nulls/*` from `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/` | `scripts/run_r24_qd_null_control_cloud_64env.sh`; default log root `logs_cloud_r24_qd_null_control_64env`; recorded commands: `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh --dry-run`, `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`, `SEEDS=1 EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`, `SEEDS=2 EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh` | Reward-off diagnostic launch ready; q_d/q_D reward remains blocked until the frozen null archive is inspected. |
+| EXP-20260708-r24-qd-null-control-cloud-handoff | completed | R24 | cloud CUDA / 64env package | ExpManager + controller | ResultAnalyst to read metrics from the completed cloud archive before any q_d/q_D reward decision | `dist/ha_ctse_r24_qd_null_control_cloud_runtime_20260708_190315.zip`; `dist/r24_qd_null_control_log_extract_expmanager_20260708_230322`; `scripts/run_r24_qd_null_control_cloud_64env.sh`; default log root `logs_cloud_r24_qd_null_control_64env` | Cloud archive inspected. Both seeds finished with `exit_code=0` and `total_steps=320000`. Seed1 final eval row: `reward=52.852671269315316`, `coverage_ratio=0.8`, `system_throughput_mbps=8.611111111111114`, `backhaul_connected_step_fraction=0.51`, `zero_throughput_step_fraction=0.49`. Seed2 final eval row: `reward=-4.881497951854478`, `coverage_ratio=0.0`, `system_throughput_mbps=0.0`, `backhaul_connected_step_fraction=0.0`, `zero_throughput_step_fraction=1.0`. No `Traceback`, `RuntimeError`, `NaN`, `OOM`, or `BrokenPipe` matches were found in the runner logs. |
 | EXP-20260707-r24-assignment-to-behavior-bridge | completed / blocked | R24 | local CUDA diagnostics | ExpManager | run matched-null forced-audit controls A-D, then reward-off behavior-window q_d probe; set `q_D/q_d` reward decision only after gate pass | `scripts/run_r24_behavior_audit_local_cuda.ps1`; `scripts/r24_forced_behavior_audit.py`; `logs_r24_qd_probe_local_cuda/seed1`; `logs_r24_behavior_audit_local/r24_behavior_audit.csv`; `logs_r24_behavior_audit_smoke/r24_behavior_audit.csv` | forced-audit signal is positive but insufficient for reward gating. q_d probe is near-null (`residual_gain=0.01105`, `positive_frac=0.52855`) and cannot justify reward-on. `q_D` and `q_d` rewards remain blocked pending matched-null controls + behavior-window `q_d` gate pass (`effect_ratio_h50>=1.3` + `h50-h10` growth + `between_within_ratio_h50>1.2`). |
 | EXP-20260707-r24-assignment-to-behavior-bridge-overnight | completed | R24 | local CUDA / `logs_r24_overnight_existing_local_cuda/run_20260708_000836` | ExpManager | checked arm-level `runner_status.txt`, `runner_output.log`, audit/train tails, and `_watch/watch_state.json` | `scripts/run_r24_overnight_existing_local_cuda.ps1`; `scripts/run_r24_behavior_audit_local_cuda.ps1`; `scripts/run_r24_qd_probe_local_cuda.ps1`; `scripts/watch_r24_overnight_existing.ps1`; `scripts/codex_r24_alert_handler.ps1`; `logs_r24_overnight_existing_local_cuda/run_20260708_000836/arm*` | one-click local overnight runner completed with `NResets=64`, `NumEnvs=16`; all five arms finished with `exit_code=0`. |
 | EXP-20260707-r23-next-mechanism-matrix | completed / mixed (local 16env, single seed) | R23-next | local CUDA; cloud candidate | ExpManager | optional cloud 64env rerun for a matched-env task read + q_D-probe upgrade | `logs_r23_next_mechanism_matrix_local`, `scripts/run_r23_next_mechanism_matrix_local_cuda.ps1`, `scripts/run_r23_next_mechanism_matrix_cloud_64env.sh` | q_A actionability VALIDATED (Z->xi learnable: arm2 residual_gain +0.222, forced-Z KL 0.059->0.070). q_D target audit NULL across all targets/H (underpowered caveat) -> xi->recoverable-joint-effect still unestablished. Task encouraging @160k (cov 0.303 ~3x control) but confounded. Next lever = individual-skill/discoverer half + stronger q_D probe, NOT more q_D targets. Local 32env OOMs (31.6GB box); use 16env locally or 64env cloud. |
@@ -51,6 +52,36 @@ Current overnight run in scope: `logs_r24_overnight_existing_local_cuda/run_2026
   - `runner_status.txt` present for all five arms.
   - `runner_output.log` tails and latest audit/train rows were checked for all five arms.
   - `_watch/watch_state.json` reports `done=true`, `process_count=0`, `issues=[]`.
+
+### EXP-20260708-r24-qd-null-control-cloud-handoff
+
+Cloud archive inspection facts:
+
+- Archive path: `dist/logs_cloud_r24_qd_null_control_64env.zip`.
+- Extracted path: `dist/r24_qd_null_control_log_extract_expmanager_20260708_230322/logs_cloud_r24_qd_null_control_64env`.
+- Top-level run directories in the archive: `seed1`, `seed2`.
+- Each seed contains one run directory:
+  - `seed1/r24_qd_null_control_seed1`
+  - `seed2/r24_qd_null_control_seed2`
+- Key files present in each run directory:
+  - `command.txt`
+  - `runner_status.txt`
+  - `runner_output.log`
+  - `standalone_train.log`
+  - `metrics/train_updates.csv`
+  - `metrics/eval_episodes.csv`
+  - `standalone_process_core_final.pt`
+  - TensorBoard event file(s)
+- `runner_status.txt` facts:
+  - seed1: `state=finished`, `exit_code=0`, `finished=2026-07-08T21:09:34+08:00`
+  - seed2: `state=finished`, `exit_code=0`, `finished=2026-07-08T22:59:13+08:00`
+- Latest `train_updates.csv` row facts:
+  - seed1: `update=10`, `total_steps=320000`, `return_mean=1.3028457164764404`, `process_reward_mean=0.0`
+  - seed2: `update=10`, `total_steps=320000`, `return_mean=0.6852400898933411`, `process_reward_mean=0.0`
+- Latest `eval_episodes.csv` row facts:
+  - seed1: `episode=19`, `total_steps=320000`, `reward=52.852671269315316`, `coverage_ratio=0.8`, `qos_satisfaction_ratio=0.287037037037037`, `system_throughput_mbps=8.611111111111114`, `backhaul_connected_step_fraction=0.51`, `coverage_eq1_step_fraction=0.0`, `zero_throughput_step_fraction=0.49`, `throughput_gt5_step_fraction=0.51`
+  - seed2: `episode=19`, `total_steps=320000`, `reward=-4.881497951854478`, `coverage_ratio=0.0`, `qos_satisfaction_ratio=0.0`, `system_throughput_mbps=0.0`, `backhaul_connected_step_fraction=0.0`, `coverage_eq1_step_fraction=0.0`, `zero_throughput_step_fraction=1.0`, `throughput_gt5_step_fraction=0.0`
+- Bounded log scan on both `runner_output.log` files found no matches for `Traceback`, `RuntimeError`, `NaN`, `OOM`, `CUDA`, or `BrokenPipe`.
 
 - Gate-read facts from the completed overnight run:
   - All five arms finished with `exit_code=0`.
@@ -137,6 +168,33 @@ Cloud handoff facts for the unfinished R24 q_d null-control run:
 - Commands recorded for launch: `bash scripts/run_r24_qd_null_control_cloud_64env.sh --dry-run`,
   `bash scripts/run_r24_qd_null_control_cloud_64env.sh`,
   `SEEDS=1 ...`, `SEEDS=2 ...`.
+
+### EXP-20260709-r24-frozen-qd-null-probes
+
+Launch-ready cloud execution record for the frozen q_d null-probe.
+
+- Status: `launch-ready`
+- Stage/Round: `R24 frozen q_d null probes`
+- Location/compute: cloud CUDA, 64 envs, 320k steps, default seeds `1,2`
+- Runner: `scripts/run_r24_qd_null_control_cloud_64env.sh`
+- Default log root: `logs_cloud_r24_qd_null_control_64env`
+- Commands recorded:
+  - `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh --dry-run`
+  - `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`
+  - `SEEDS=1 EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`
+  - `SEEDS=2 EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`
+- Artifact paths to read after cloud launch:
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/train_updates.csv`
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/runner_output.log`
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/r24_qd_windows/*.npz`
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/r24_qd_frozen_nulls/r24_qd_frozen_nulls.json`
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/r24_qd_frozen_nulls/r24_qd_frozen_nulls.md`
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/frozen_null_command.txt`
+  - `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/frozen_null_output.log`
+- Factual purpose: reward-off diagnostic to capture frozen null controls for q_d before any q_d/q_D reward decision.
+- Read notes:
+  - inspect `r24_qd_acc_full`, `r24_qd_acc_prior`, `r24_qd_residual_gain`, `r24_qd_positive_frac`, `r24_qd_acc_behavior`, `r24_qd_acc_pre`, `r24_qd_shuffle_acc_gap`, and `r24_qd_fake_acc_gap` from the train CSV;
+  - inspect offline analyzer full/prior/residual, matched shuffled-label nulls, fake-label nulls, duration/agent-grouped nulls, and pre/behavior-only comparisons.
 
 Current gate:
 - Full forced behavior audit completed after the 2026-07-07 checkpoint

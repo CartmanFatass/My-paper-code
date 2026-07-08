@@ -69,11 +69,38 @@ actually-work intrinsic drive under asynchronous skill lifetimes.
 ## Round 24 Assignment-to-Behavior Bridge (planned)
 
 Status: diagnostics-first / behavior-window q_d probe implemented reward-off /
-no reward changes until Round 3 gates pass.
+no reward changes until Round 3 gates pass. 2026-07-09: R24 frozen q_d core
+Tasks 1-4 complete and reviewed; Task4 runner wiring + ExpRecord flow is complete,
+and `EXP-20260709-r24-frozen-qd-null-probes` is launch-ready with frozen-null
+export enabled.
 
-Source: External review Round 3 in
+2026-07-08 update: `EXP-20260708-r24-qd-null-control-cloud-handoff`
+completed in 64-env cloud seed1/seed2 at 320k and failed the q_d reward-off gate
+on the latest metrics; q_A->behavior evidence remains under active diagnostic
+refinement and q_D/q_d rewards remain blocked.
+2026-07-09 update: task stack completed for R24 frozen q_d core:
+- `ha_ctse_process/r24_qd_dataset.py` now exports detached windows to
+  `<log_dir>/r24_qd_windows`.
+- `scripts/analyze_r24_qd_frozen_nulls.py` added frozen variants and grouped
+  null-control logic.
+- `tests/r24_qd_frozen_nulls_test.py` now guards grouped null controls and
+  fixed dataset schema checks.
+  Verification: 5 passed (frozen nulls) and 18 passed (team-condition + frozen
+  nulls), and reviewer re-review approved.
+- Launch command for frozen-null readout is:
+  `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`
+  (cloud 64env, 320k seeds).
+
+Source: External review Round 4 continuation in
 `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` (accepted into compact memory
 on 2026-07-07).
+
+Next diagnostic path:
+
+- `docs/superpowers/plans/2026-07-08-r24-frozen-qd-null-probes.md`
+- Export detached q_d windows first (`--r24_qd_export_windows` / `r24_qd_windows`
+  `*.npz`) because existing cloud logs only have aggregate diagnostics.
+  This is the required path before any reward-on consideration.
 
 R23-next disposition:
 
@@ -132,6 +159,12 @@ R24-1 team-conditioned q_d reward-off behavior-window probe:
     skill labels were already predictable before assignment. This is still
     reward-off only; the next action is a rerun/read of the q_d probe, not
     reward injection.
+
+  Implementation update (2026-07-09):
+    Frozen q_d null diagnostic core is completed and reviewed. Grouped control
+    variants preserve within-group label multisets (no global-label fallback),
+    and exported window shards include detached action/effect/condition inputs
+    for offline null analysis.
 
   External review Round 4 clarification (GPT web, 2026-07-08):
     `q_behavior` passing is positive evidence for individual behavior semantics,

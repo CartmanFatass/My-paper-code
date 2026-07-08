@@ -9,6 +9,7 @@ PPO-style high/low updates without legacy discriminator objectives.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -99,6 +100,7 @@ from ha_ctse_process.team_conditioned_qd import (
     TeamConditionedQDProbe,
     empty_team_conditioned_qd_metrics,
 )
+from ha_ctse_process.r24_qd_dataset import QDWindowBatch, sample_qd_rows, write_qd_window_shard
 from ha_ctse_process.prototype_response_discriminator import (
     PrototypeResponseDiscriminator,
     empty_prototype_disc_metrics,
@@ -1984,6 +1986,13 @@ class StandaloneProcessAgent:
             if self.team_conditioned_qd_cfg.probe_on
             else None
         )
+        self.r24_qd_export_windows = bool(getattr(config, "r24_qd_export_windows", False))
+        export_dir = str(getattr(config, "r24_qd_export_dir", "") or "")
+        self.r24_qd_export_dir = Path(export_dir) if export_dir else None
+        self.r24_qd_export_max_rows_per_update = int(
+            max(getattr(config, "r24_qd_export_max_rows_per_update", 4096), 0)
+        )
+        self.r24_qd_export_seed = int(getattr(config, "r24_qd_export_seed", 17))
         self.skill_effect_discovery = (
             SkillEffectDiscoveryModule(
                 config=config,
@@ -4263,7 +4272,60 @@ class StandaloneProcessAgent:
             hist /= float(count)
         return hist
 
-    def _team_conditioned_qd_update(self, valid_segments: list[Segment]) -> dict[str, float]:
+    def _export_r24_qd_window_shard(
+        self,
+        valid_segments: list[Segment],
+        action_t: torch.Tensor,
+        effect_t: torch.Tensor,
+        condition_t: torch.Tensor,
+        labels_t: torch.Tensor,
+        pre_action_t: torch.Tensor,
+        pre_effect_t: torch.Tensor,
+        pre_valid_t: torch.Tensor,
+        *,
+        total_steps: int,
+        update_idx: int,
+    ) -> int:
+        if not self.r24_qd_export_windows or self.r24_qd_export_dir is None:
+            return 0
+        if labels_t.numel() <= 0:
+            return 0
+        total_steps_i = int(total_steps)
+        update_idx_i = int(update_idx)
+        n = int(labels_t.numel())
+        batch = QDWindowBatch(
+            action=action_t.detach().cpu().numpy(),
+            effect=effect_t.detach().cpu().numpy(),
+            condition=condition_t.detach().cpu().numpy(),
+            labels=labels_t.detach().cpu().numpy(),
+            pre_action=pre_action_t.detach().cpu().numpy(),
+            pre_effect=pre_effect_t.detach().cpu().numpy(),
+            pre_valid=pre_valid_t.detach().float().cpu().numpy(),
+            env_id=np.asarray([int(segment.env_id) for segment in valid_segments], dtype=np.int64),
+            agent_id=np.asarray([int(segment.agent_id) for segment in valid_segments], dtype=np.int64),
+            duration_idx=np.asarray([int(segment.duration_idx) for segment in valid_segments], dtype=np.int64),
+            segment_length=np.asarray([int(segment.length) for segment in valid_segments], dtype=np.int64),
+            total_steps=np.full(n, total_steps_i, dtype=np.int64),
+            update_idx=np.full(n, update_idx_i, dtype=np.int64),
+        )
+        sampled = sample_qd_rows(
+            batch,
+            max_rows=int(self.r24_qd_export_max_rows_per_update),
+            seed=int(self.r24_qd_export_seed),
+        )
+        path = (
+            Path(self.r24_qd_export_dir)
+            / f"update_{update_idx_i:06d}_steps_{total_steps_i:012d}.npz"
+        )
+        write_qd_window_shard(path, sampled)
+        return int(sampled.labels.shape[0])
+
+    def _team_conditioned_qd_update(
+        self,
+        valid_segments: list[Segment],
+        total_steps: int = 0,
+        update_idx: int = 0,
+    ) -> dict[str, float]:
         metrics = empty_team_conditioned_qd_metrics()
         if self.team_conditioned_qd_probe is None or self.team_conditioned_qd_opt is None:
             return metrics
@@ -4281,6 +4343,20 @@ class StandaloneProcessAgent:
             return metrics
         metrics["r24_qd_active"] = 1.0
         metrics["r24_qd_samples"] = float(sample_count)
+        exported_rows = self._export_r24_qd_window_shard(
+            valid_segments,
+            action_t,
+            effect_t,
+            condition_t,
+            labels_t,
+            pre_action_t,
+            pre_effect_t,
+            pre_valid_t,
+            total_steps=total_steps,
+            update_idx=update_idx,
+        )
+        if exported_rows > 0:
+            metrics["r24_qd_export_rows"] = float(exported_rows)
         if sample_count < int(self.team_conditioned_qd_cfg.min_samples):
             return metrics
 
@@ -4337,7 +4413,12 @@ class StandaloneProcessAgent:
         )
         return metrics
 
-    def process_update(self, rollout: Rollout, total_steps: int = 0) -> dict[str, float]:
+    def process_update(
+        self,
+        rollout: Rollout,
+        total_steps: int = 0,
+        update_idx: int = 0,
+    ) -> dict[str, float]:
         segments = self.segments.pop_completed()
         valid = [s for s in segments if s.length > 0]
         team_intent_metrics = self._team_intent_rollout_update(rollout, total_steps=total_steps)
@@ -4492,7 +4573,11 @@ class StandaloneProcessAgent:
                 **self._situation_diagnostics([]),
             }
 
-        team_conditioned_qd_metrics = self._team_conditioned_qd_update(valid)
+        team_conditioned_qd_metrics = self._team_conditioned_qd_update(
+            valid,
+            total_steps=total_steps,
+            update_idx=update_idx,
+        )
         team_transition_metrics, team_transition_high_rewards = self._team_transition_update(
             valid,
             total_steps=total_steps,

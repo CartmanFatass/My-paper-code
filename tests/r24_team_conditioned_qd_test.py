@@ -272,6 +272,35 @@ def test_standalone_qd_pre_assignment_window_is_separate_control_stream():
     assert not torch.allclose(effect, pre_effect)
 
 
+def test_standalone_qd_export_writes_detached_window_shard(tmp_path):
+    agent = _make_probe_agent()
+    agent.r24_qd_export_windows = True
+    agent.r24_qd_export_dir = tmp_path
+    agent.r24_qd_export_max_rows_per_update = 8
+    agent.r24_qd_export_seed = 3
+
+    metrics = agent._team_conditioned_qd_update(
+        [_segment_for_qd(1), _segment_for_qd(2)],
+        total_steps=320000,
+        update_idx=10,
+    )
+
+    shards = sorted(tmp_path.glob("*.npz"))
+    assert metrics["r24_qd_samples"] == 2.0
+    assert metrics["r24_qd_export_rows"] == 2.0
+    assert len(shards) == 1
+    assert shards[0].name == "update_000010_steps_000000320000.npz"
+    with np.load(shards[0]) as data:
+        assert data["action"].shape[0] == 2
+        assert data["effect"].shape[0] == 2
+        assert data["condition"].shape[0] == 2
+        assert data["pre_action"].shape[0] == 2
+        assert data["pre_effect"].shape[0] == 2
+        assert data["labels"].tolist() == [1, 2]
+        assert data["labels"].dtype == np.int64
+        assert data["pre_valid"].dtype == np.float32
+
+
 def test_segment_manager_carries_previous_window_into_new_assignment():
     manager = SegmentManager(n_envs=1, n_agents=1)
     manager.renew(

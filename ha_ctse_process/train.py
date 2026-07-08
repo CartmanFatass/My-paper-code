@@ -94,6 +94,10 @@ ALGORITHM_MANIFEST_FIELDS = (
     "team_conditioned_qd_hidden_dim",
     "team_conditioned_qd_lr",
     "team_conditioned_qd_min_samples",
+    "r24_qd_export_windows",
+    "r24_qd_export_dir",
+    "r24_qd_export_max_rows_per_update",
+    "r24_qd_export_seed",
     "process_encoder_embedding_dim",
     "lr_process_encoder",
     "process_contrast_coef",
@@ -716,6 +720,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--team_conditioned_qd_hidden_dim", type=int, default=None)
     parser.add_argument("--team_conditioned_qd_lr", type=float, default=None)
     parser.add_argument("--team_conditioned_qd_min_samples", type=int, default=None)
+    parser.add_argument("--r24_qd_export_windows", action="store_true")
+    parser.add_argument("--r24_qd_export_dir", default="")
+    parser.add_argument("--r24_qd_export_max_rows_per_update", type=int, default=None)
+    parser.add_argument("--r24_qd_export_seed", type=int, default=None)
     parser.add_argument("--disable_intrinsic_segment_gate", action="store_true")
     parser.add_argument("--enable_intrinsic_reward_norm", action="store_true")
     parser.add_argument("--disable_smdp_discounted_high_return", action="store_true")
@@ -1074,6 +1082,18 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.team_conditioned_qd_lr = float(args.team_conditioned_qd_lr)
     if getattr(args, "team_conditioned_qd_min_samples", None) is not None:
         config.team_conditioned_qd_min_samples = int(args.team_conditioned_qd_min_samples)
+    if args.r24_qd_export_windows:
+        config.r24_qd_export_windows = True
+    if args.r24_qd_export_dir:
+        config.r24_qd_export_dir = str(args.r24_qd_export_dir)
+    if getattr(args, "r24_qd_export_max_rows_per_update", None) is not None:
+        config.r24_qd_export_max_rows_per_update = int(args.r24_qd_export_max_rows_per_update)
+    if getattr(args, "r24_qd_export_seed", None) is not None:
+        config.r24_qd_export_seed = int(args.r24_qd_export_seed)
+    if bool(getattr(config, "r24_qd_export_windows", False)) and not str(
+        getattr(config, "r24_qd_export_dir", "") or ""
+    ):
+        config.r24_qd_export_dir = str(Path(args.log_dir) / "r24_qd_windows")
     if args.enable_duration_entropy_floor:
         config.duration_entropy_floor_enabled = True
     if int(args.duration_entropy_floor_warmup_steps) >= 0:
@@ -3001,6 +3021,10 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"team_disc_coef={float(getattr(config, 'team_disc_coef', 0.0))} "
             f"team_disc_clip={float(getattr(config, 'team_disc_clip', 0.0))} "
             f"team_disc_warmup={int(getattr(config, 'team_disc_warmup_steps', 0))} "
+            f"r24_qd_probe={bool(getattr(config, 'enable_team_conditioned_qd_probe', False))} "
+            f"r24_qd_export={bool(getattr(config, 'r24_qd_export_windows', False))} "
+            f"r24_qd_export_dir={getattr(config, 'r24_qd_export_dir', '')} "
+            f"r24_qd_export_max_rows={int(getattr(config, 'r24_qd_export_max_rows_per_update', 0))} "
             f"intrinsic_segment_gate={bool(getattr(config, 'intrinsic_segment_gate_enabled', True))} "
             f"intrinsic_gate_margin={float(getattr(config, 'intrinsic_segment_gate_margin', 0.0))} "
             f"intrinsic_gate_min_segments={int(getattr(config, 'intrinsic_segment_gate_min_segments', 0))} "
@@ -3173,7 +3197,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
 
             agent.segments.flush()
             rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
-            process_metrics = agent.process_update(rollout, total_steps=total_steps)
+            process_metrics = agent.process_update(
+                rollout,
+                total_steps=total_steps,
+                update_idx=update_idx + 1,
+            )
             low_metrics = agent.update_low(rollout)
             update_idx += 1
             env_reward_mean = float(np.mean(episode_rewards)) if episode_rewards else 0.0

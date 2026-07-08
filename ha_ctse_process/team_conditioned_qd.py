@@ -55,6 +55,7 @@ TEAM_CONDITIONED_QD_METRIC_FIELDS = (
     "r24_qd_fake_positive_frac",
     "r24_qd_fake_acc_gap",
     "r24_qd_fake_label_changed_frac",
+    "r24_qd_export_rows",
 )
 
 

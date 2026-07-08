@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 
 Purpose: compact first-read state for the current work only. Full historical
 context is archived under `memory/LTM/`.
@@ -12,8 +12,28 @@ context is archived under `memory/LTM/`.
 - Treat 160k/320k runs as mechanism gates, not final HMASD-comparison verdicts.
 - Current main line: R24 Assignment-to-Behavior Bridge. R23-next validates the
   q_A residual path as high-level `Z -> xi` actionability, not full behavioral
-  closure. R24 now blocks q_D and q_d reward until matched-null controls and
-  a reward-off behavior-window probe pass with threshold gates.
+  closure.
+- Current state update: completion of R24 frozen q_d null-probe core Tasks 1-4 after
+  full review chain:
+  - Added `ha_ctse_process/r24_qd_dataset.py` with detached `q_d` window export
+    to `<log_dir>/r24_qd_windows` (npz shards) for `r24_qd_export_windows`.
+  - Added `scripts/analyze_r24_qd_frozen_nulls.py` with frozen null variants:
+    `real`, `shuffled`, `fake_marginal`, `duration_matched`, `agent_matched`,
+    `behavior_only`, `pre_only`, `action_only`, `effect_only`.
+  - Implemented grouped null semantics without cross-group fallbacks; verified in
+    `tests/r24_qd_frozen_nulls_test.py`.
+  - Verification: `pytest tests\r24_qd_frozen_nulls_test.py -q` (5 passed),
+    `pytest tests\r24_team_conditioned_qd_test.py tests\r24_qd_frozen_nulls_test.py -q`
+    (18 passed), and implementation re-review approved.
+  - No `q_d`/`q_D`/`team_disc` reward path was enabled or altered.
+- Runner path is complete with frozen-null support:
+  `scripts/run_r24_qd_null_control_cloud_64env.sh` supports optional
+  `EXPORT_QD_WINDOWS=1` and `RUN_FROZEN_NULL_ANALYSIS=1`.
+  Launch command:
+  `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`
+  and `EXP-20260709-r24-frozen-qd-null-probes` is marked launch-ready in
+  `memory/ExpRecord.md`.
+- Reward remains blocked (no q_d/q_D reward yet) until matched-null/round-3 gates pass.
 
 ## Active Principle Pointers
 
@@ -22,6 +42,8 @@ context is archived under `memory/LTM/`.
   plan, especially the q_A residual and q_D target audit notes.
 - `memory/R22_TWO_CLOCK_ELBO.md`: two-clock objective framing.
 - `memory/R22_TARGET_ENTROPY_DESIGN.md`: entropy design constraints.
+- `docs/superpowers/plans/2026-07-08-r24-frozen-qd-null-probes.md`: frozen
+  same-capacity q_d null-probe diagnostics for cloud-gate continuation.
 
 ## Active Plan Pointers
 
@@ -120,6 +142,12 @@ context is archived under `memory/LTM/`.
 ## Current Experiment Focus
 
 - `EXP-20260707-r24-assignment-to-behavior-bridge` — diagnostics-complete / gated.
+- 2026-07-08 completed status: `EXP-20260708-r24-qd-null-control-cloud-handoff`
+    reward-off null-control at 320k in both seeds; gate FAIL on latest metrics
+    across both seeds, so no reward path is permitted.
+- 2026-07-09: R24 frozen q_d core diagnostic stack (Tasks 1-4) is implemented and
+    review-approved, including runner wiring and frozen-null artifacts handoff to
+    `memory/ExpRecord.md`.
   - First gate: forced-xi and forced-z behavior audits from a q_A reward
     checkpoint, with H={10,20,50}; action/effect distances rose with horizon
     (`xi_effect 0.17335 -> 0.25677 -> 0.41290`, `z_effect 0.18912 -> 0.27497 ->
@@ -201,12 +229,14 @@ context is archived under `memory/LTM/`.
 
 ## Next Actions
 
-1. Run matched-null forced-audit controls (A-D above) at `H={10,20,50}`,
-   `NResets >= 16` initially, then grow to 64 if the ratio is only suggestive.
-2. Interpret R24 audit as positive-but-insufficient: current forced-label effect
-   perturbation does not yet justify q_D/q_d reward.
-3. Rerun `q_d` reward-off behavior-window probe using held-out behavior-window
-   conditioning and the new null-control fields:
+1. Launch/follow `EXP-20260709-r24-frozen-qd-null-probes` in cloud 64env at
+   320k for both seeds with:
+   `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`.
+2. Read frozen-null diagnostics from:
+   `r24_qd_windows/*.npz`, `r24_qd_frozen_nulls/*.json|.md`, and
+   `train_updates.csv`; treat strong `q_pre`, behavior-only, or null residual as
+   confounds unless post-assignment full-minus-null controls pass.
+3. Re-run matched-null `q_d` diagnostics under the completed core stack:
    `q_d_full(z_i | local_behavior_window_i, Z, xi_context_i, c, omega) - q_d_prior(...)`,
    with separate action/state-evidence streams, matched-null controls, and the Round-3
    gates: residual gain/positive fraction, full-prior accuracy gap, shortcut/null
@@ -215,9 +245,8 @@ context is archived under `memory/LTM/`.
    Interpret `q_behavior` as individual skill behavior evidence when it beats
    nulls; interpret strong `q_pre` as selection/history confound unless the
    post-assignment window exceeds it.
-4. Only after (1) matched-null + (2) gate-compliant behavior-window q_d pass, run
-   low-only q_d reward and then reward-off `q_D` re-probe with behavior-window
-   targets.
+4. Only after full Round-3 gate pass and seed-consistent evidence, run low-only
+   q_d reward and then reward-off `q_D` re-probe with behavior-window targets.
 5. Optional/lower priority: cloud 64env matched rerun of the R23 matrix (both seeds)
    for a non-confounded task read and a clean arm2 320k eval.
 

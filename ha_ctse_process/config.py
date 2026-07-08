@@ -138,6 +138,10 @@ class Config(EnvConfig):
     team_conditioned_qd_hidden_dim = 128
     team_conditioned_qd_lr = 1e-3
     team_conditioned_qd_min_samples = 64
+    r24_qd_export_windows = False
+    r24_qd_export_dir = ""
+    r24_qd_export_max_rows_per_update = 4096
+    r24_qd_export_seed = 17
 
     # PPO and entropy.
     high_entropy_coef = 0.01

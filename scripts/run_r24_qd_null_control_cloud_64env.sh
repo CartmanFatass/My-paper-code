@@ -52,6 +52,14 @@ PROTO_DISC_COEF="${PROTO_DISC_COEF:-0.05}"
 PROTO_DISC_CLIP="${PROTO_DISC_CLIP:-2.0}"
 PROTO_DISC_WARMUP="${PROTO_DISC_WARMUP:-20000}"
 QD_MIN_SAMPLES="${QD_MIN_SAMPLES:-64}"
+EXPORT_QD_WINDOWS="${EXPORT_QD_WINDOWS:-0}"
+QD_EXPORT_MAX_ROWS="${QD_EXPORT_MAX_ROWS:-4096}"
+QD_EXPORT_SEED="${QD_EXPORT_SEED:-17}"
+RUN_FROZEN_NULL_ANALYSIS="${RUN_FROZEN_NULL_ANALYSIS:-0}"
+FROZEN_NULL_STEPS="${FROZEN_NULL_STEPS:-300}"
+FROZEN_NULL_HIDDEN_DIM="${FROZEN_NULL_HIDDEN_DIM:-128}"
+FROZEN_NULL_LR="${FROZEN_NULL_LR:-0.003}"
+FROZEN_NULL_MAX_ROWS="${FROZEN_NULL_MAX_ROWS:-0}"
 
 for arg in "$@"; do
   case "$arg" in
@@ -75,6 +83,14 @@ Environment overrides:
   Z_GAIN=1.0
   QA_COEF=0.05
   QD_MIN_SAMPLES=64
+  EXPORT_QD_WINDOWS=0
+  QD_EXPORT_MAX_ROWS=4096
+  QD_EXPORT_SEED=17
+  RUN_FROZEN_NULL_ANALYSIS=0
+  FROZEN_NULL_STEPS=300
+  FROZEN_NULL_HIDDEN_DIM=128
+  FROZEN_NULL_LR=0.003
+  FROZEN_NULL_MAX_ROWS=0
 
 This is a reward-off q_d diagnostic. It enables q_A actionability reward as the
 current R24 bridge context, but does not enable q_d/q_D reward.
@@ -83,6 +99,11 @@ EOF
     *) echo "Unknown argument: $arg" >&2; exit 2 ;;
   esac
 done
+
+if [[ "$RUN_FROZEN_NULL_ANALYSIS" == "1" && "$EXPORT_QD_WINDOWS" != "1" ]]; then
+  echo "RUN_FROZEN_NULL_ANALYSIS=1 requires EXPORT_QD_WINDOWS=1 so r24_qd_windows inputs exist." >&2
+  exit 2
+fi
 
 IFS=',' read -r -a SEED_LIST <<< "$SEEDS"
 
@@ -155,6 +176,14 @@ HA-CTSE R24 q_d null-control cloud runner
   z_gain:            $Z_GAIN
   qA coef/clip/warm: $QA_COEF / $QA_CLIP / $QA_WARMUP
   qd_min_samples:    $QD_MIN_SAMPLES
+  export_qd_windows: $EXPORT_QD_WINDOWS
+  qd_export_max_rows: $QD_EXPORT_MAX_ROWS
+  qd_export_seed:    $QD_EXPORT_SEED
+  run_frozen_null_analysis: $RUN_FROZEN_NULL_ANALYSIS
+  frozen_null_steps:  $FROZEN_NULL_STEPS
+  frozen_null_hidden_dim: $FROZEN_NULL_HIDDEN_DIM
+  frozen_null_lr:     $FROZEN_NULL_LR
+  frozen_null_max_rows: $FROZEN_NULL_MAX_ROWS
   qd_reward:         OFF
   dry_run:           $DRY_RUN
   continue_on_error: $CONTINUE_ON_ERROR
@@ -166,12 +195,36 @@ run_one() {
   local name="r24_qd_null_control_seed${seed}"
   local log_dir="$LOG_ROOT/seed${seed}/${name}"
   local -a cmd=("$PYTHON_BIN" "${COMMON_ARGS[@]}" --seed "$seed" --log_dir "$log_dir")
+  if [[ "$EXPORT_QD_WINDOWS" == "1" ]]; then
+    cmd+=(
+      --r24_qd_export_windows
+      --r24_qd_export_max_rows_per_update "$QD_EXPORT_MAX_ROWS"
+      --r24_qd_export_seed "$QD_EXPORT_SEED"
+    )
+  fi
+
+  local -a frozen_null_cmd=(
+    "$PYTHON_BIN"
+    scripts/analyze_r24_qd_frozen_nulls.py
+    --input_dir "$log_dir/r24_qd_windows"
+    --output_dir "$log_dir/r24_qd_frozen_nulls"
+    --num_skills 6
+    --hidden_dim "$FROZEN_NULL_HIDDEN_DIM"
+    --steps "$FROZEN_NULL_STEPS"
+    --lr "$FROZEN_NULL_LR"
+    --seed "$QD_EXPORT_SEED"
+    --max_rows "$FROZEN_NULL_MAX_ROWS"
+  )
 
   echo
   echo "===== R24 q_d null-control: seed=$seed ====="
   printf '%q ' "${cmd[@]}"; echo
 
   if [[ "$DRY_RUN" == "1" ]]; then
+    if [[ "$RUN_FROZEN_NULL_ANALYSIS" == "1" ]]; then
+      echo "would run:"
+      printf '%q ' "${frozen_null_cmd[@]}"; echo
+    fi
     return 0
   fi
 
@@ -190,6 +243,8 @@ run_one() {
   local exit_code=$?
   set -e
 
+  local training_succeeded=1
+
   {
     echo "finished=$(date -Is)"
     echo "state=finished"
@@ -200,12 +255,37 @@ run_one() {
   } > "$log_dir/runner_status.txt"
 
   if [[ "$exit_code" -ne 0 ]]; then
+    training_succeeded=0
     local message="R24 q_d null-control seed=$seed failed with exit code $exit_code; see $log_dir/runner_output.log"
     if [[ "$CONTINUE_ON_ERROR" == "1" ]]; then
       echo "WARNING: $message" >&2
     else
       echo "$message" >&2
       return "$exit_code"
+    fi
+  fi
+
+  if [[ "$training_succeeded" == "1" && "$RUN_FROZEN_NULL_ANALYSIS" == "1" ]]; then
+    printf '%q ' "${frozen_null_cmd[@]}" > "$log_dir/frozen_null_command.txt"
+    echo >> "$log_dir/frozen_null_command.txt"
+
+    echo "===== R24 q_d frozen-null analyzer: seed=$seed ====="
+    printf '%q ' "${frozen_null_cmd[@]}"
+    echo
+
+    set +e
+    "${frozen_null_cmd[@]}" > "$log_dir/frozen_null_output.log" 2>&1
+    local frozen_exit_code=$?
+    set -e
+
+    if [[ "$frozen_exit_code" -ne 0 ]]; then
+      local frozen_message="R24 frozen-null analyzer seed=$seed failed with exit code $frozen_exit_code; see $log_dir/frozen_null_output.log"
+      if [[ "$CONTINUE_ON_ERROR" == "1" ]]; then
+        echo "WARNING: $frozen_message" >&2
+      else
+        echo "$frozen_message" >&2
+        return "$frozen_exit_code"
+      fi
     fi
   fi
 }

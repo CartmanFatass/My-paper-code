@@ -96,6 +96,63 @@ significance, next action, or core MARL consequences. If the correct state is
 waiting, name exactly what is being waited on, which metrics decide the next
 branch, and what should not be changed while waiting.
 
+## Experiment Communication Hard Gate
+
+Most HMASD experiments test algorithmic innovation rather than ordinary
+benchmark bookkeeping. Therefore every controller response that launches,
+packages, checks, summarizes, stops, resumes, compares, or recommends an
+experiment must include an explicit experiment-meaning block before or alongside
+commands and file paths.
+
+This gate is mandatory for:
+
+- experiment package or runner creation;
+- launch or dry-run command generation;
+- progress/log/status checks;
+- result reads and metric comparisons;
+- failed-run triage or retry decisions;
+- recommendations to wait, stop, continue, scale, seed, or change code.
+
+The experiment-meaning block must cover:
+
+- Hypothesis: what algorithmic question this experiment is testing.
+- Mechanism path: which part of the HA-CTSE/HMASD-inspired loop is under test,
+  such as q_A, q_d, q_D, team intent, skill discovery, duration/lifetime,
+  intrinsic reward, credit assignment, low-level behavior semantics, or
+  sparse-reward cooperation.
+- Core MARL impact: whether the action touches reward, policy/critic
+  architecture, optimizer/loss/advantage logic, collector semantics,
+  environment dynamics, latent-skill semantics, or is reward-off diagnostic
+  only.
+- Metrics to watch: the exact fields, thresholds, null controls, seed
+  consistency, and warning signs that decide the branch.
+- Decision tree: what to do if the run passes, fails, is mixed, crashes, or is
+  underpowered.
+- Prohibited actions: what must not be changed or enabled while this gate is
+  open, especially reward paths, q_d/q_D injection, new modules, or scale-up
+  runs.
+- Status source: whether facts came from ExpManager, ResultAnalyst, direct
+  controller inspection, external review, or user-provided output.
+
+If the controller gives only a command, package path, log path, or raw metric
+table for a meaningful experiment, the response is incomplete. The controller
+must either add the experiment-meaning block immediately or explicitly mark the
+turn as a narrow mechanical answer where no experiment interpretation was
+requested and no experiment state changed.
+
+Template:
+
+```text
+Experiment meaning:
+- Hypothesis:
+- Mechanism path:
+- Core MARL impact:
+- Metrics/gates:
+- Decision tree:
+- Do not change yet:
+- Status source:
+```
+
 ## Subagent Runtime Rules
 
 ## Subagent Terminal Status Protocol
@@ -475,6 +532,78 @@ code implementation. A Spark-role worker must stop and escalate if the assigned
 task expands into core code or algorithm judgment.
 
 ## Plan-Bound Implementation Dispatch
+
+## Wave Plan Hard Gate
+
+For any non-trivial task that may involve implementation, experiment launch,
+experiment packaging, result analysis, log/progress inspection, external review
+archiving, memory synchronization, workflow auditing, or any subagent dispatch,
+the controller must first create a compact Wave Plan before starting execution.
+
+This rule exists to make the Superpowers pattern stable: plan first, divide by
+independent domain, set file/work boundaries, communicate through files, then
+integrate through the controller. Do not drift into ad hoc serial delegation or
+controller-only execution merely because the next action is easy to start.
+
+The Wave Plan must be shown to the user or written to a task brief when the
+work is substantial, risky, experiment-changing, or subagent-driven. For small
+routine actions it may be a compact controller note, but it must still exist
+before dispatch.
+
+Required Wave Plan fields:
+
+```text
+Wave Plan
+- Objective:
+- Requirements source:
+- Local controller work:
+- Subagent tasks:
+  1. Agent:
+     Task:
+     Owns:
+     Forbids:
+     Output:
+     Checks:
+  2. ...
+- Parallelism: yes/no and why
+- Conflict scan: files, run dirs, memory rows, shared processes, unresolved decisions
+- Core vs non-core routing:
+- Experiment meaning block required? yes/no
+- Expected user-facing report:
+```
+
+If the controller chooses not to use subagents for a task where they would
+normally apply, it must state the reason in the Wave Plan, for example:
+
+- the work is single-threaded core algorithm code with shared state;
+- the task is too small and bounded for delegation overhead;
+- no file/run boundary can be assigned safely;
+- custom agents are unavailable;
+- the next step is immediately blocked on local inspection.
+
+If the controller uses subagents without a Wave Plan, or creates subagent tasks
+without explicit owned files/directories, forbidden scope, output path, and
+next owner, the workflow is invalid and must be corrected before continuing.
+
+Default routing for common HMASD work:
+
+- Experiment status, launch, runner/package facts, and `ExpRecord.md` factual
+  updates -> `ExpManager`.
+- Metric-heavy reads from existing artifacts, gate tables, anomaly extracts ->
+  `ResultAnalyst`.
+- Mechanical non-core runner/package/doc/field-propagation edits ->
+  `SparkImplementer`.
+- Core algorithm, reward, q_A/q_D/q_d, training-loop, checkpoint, collector, or
+  policy/critic semantics -> controller by default, or `PlanImplementer` only
+  with a concrete accepted work package.
+- Outside-model text archiving -> `ExternalReviewManager`.
+- Compact memory/plan/principle synchronization -> `LongTimeMemoryManager`.
+- Workflow and subagent configuration consistency audits -> `WorkflowAuditor`.
+
+Parallelism is preferred only when tasks are genuinely independent. Do not
+parallelize tasks that write the same file, same run directory, same package,
+same `memory/ExpRecord.md` row, same review package, or the same core algorithm
+module. In those cases, run sequential phases or keep the task controller-owned.
 
 ## Pre-Flight Wave Review
 
