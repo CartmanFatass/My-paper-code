@@ -8,7 +8,8 @@
 
 Migrate HMASD's Codex custom agents to the current GPT-5.6 family while
 preserving role boundaries, explicit reasoning settings, and the project's
-review and experiment-control gates. Keep exactly one opt-in
+review and experiment-control gates. Name every runtime agent with its model
+family followed by its responsibility. Keep exactly one opt-in
 `gpt-5.3-codex-spark` role for explicitly requested simple work; make Luna the
 default tier for simple work.
 
@@ -30,6 +31,10 @@ Out of scope:
   remote execution, and model API request schemas.
 - `multi_agent_v2`, which remains disabled because this runtime exposes the
   v1 Codex subagent surface.
+
+The custom-agent `name` field is the runtime identifier, so model distinction
+must live in the name itself rather than only in a display nickname. This pass
+replaces the old generic registrations rather than retaining ambiguous aliases.
 
 The shared cross-controller model table will intentionally remain unchanged in
 this Codex-only pass. A later cross-controller sync must reconcile it before a
@@ -54,30 +59,30 @@ role-aware migration, not a blind string replacement. Therefore:
 
 ## Target Role Map
 
-| Role | Target model | Effort | Default routing |
-| --- | --- | --- | --- |
-| `codebase-scout` | `gpt-5.6-luna` | low | Default for bounded read-only mapping. |
-| `simple-patcher` | `gpt-5.6-luna` | low | Default for trivial, single-file, non-core edits. |
-| `test-runner` | `gpt-5.6-luna` | low | Default for focused assigned tests and failure capture. |
-| `SparkImplementer` | `gpt-5.3-codex-spark` | low | Explicit-only legacy exception for small, non-core work. |
-| `TerraImplementer` (new) | `gpt-5.6-terra` | high | Medium-complexity, bounded multi-file non-core implementation. |
-| `ImplementationReviewerFast` | `gpt-5.6-terra` | medium | Small isolated mechanical-diff review. |
-| `ExpManager` | `gpt-5.6-terra` | medium | Experiment operations and factual records. |
-| `ExternalReviewManager` | `gpt-5.6-terra` | medium | Raw external-review archiving and handoffs. |
-| `LongTimeMemoryManager` | `gpt-5.6-terra` | high | Memory-only consistency and archive work. |
-| `ResultAnalyst` | `gpt-5.6-terra` | high | Bounded, error-sensitive metric and gate extraction. |
-| `PlanImplementer` | `gpt-5.6-sol` | high | Accepted-plan core implementation. |
-| `ImplementationReviewer` | `gpt-5.6-sol` | high | Standard nontrivial review. |
-| `WorkflowAuditor` | `gpt-5.6-sol` | high | Workflow/configuration consistency audit. |
-| `PlanImplementerFrontier` | `gpt-5.6-sol` | xhigh | Rare core implementation requiring judgment while editing. |
-| `ImplementationReviewerFrontier` | `gpt-5.6-sol` | xhigh | High-risk and final whole-branch review. |
+| Runtime agent name | Function | Target model | Effort | Default routing |
+| --- | --- | --- | --- | --- |
+| `LunaCodebaseScout` | Read-only codebase mapping | `gpt-5.6-luna` | low | Default for bounded read-only mapping. |
+| `LunaSimplePatcher` | Trivial patching | `gpt-5.6-luna` | low | Default for trivial, single-file, non-core edits. |
+| `LunaTestRunner` | Focused tests and triage | `gpt-5.6-luna` | low | Default for focused assigned tests and failure capture. |
+| `SparkExplicitSimplePatcher` | Legacy Spark exception | `gpt-5.3-codex-spark` | low | Explicit-only small, non-core work. |
+| `TerraImplementer` | Non-core implementation | `gpt-5.6-terra` | high | Medium-complexity, bounded multi-file non-core implementation. |
+| `TerraFastReviewer` | Fast mechanical review | `gpt-5.6-terra` | medium | Small isolated mechanical-diff review. |
+| `TerraExpManager` | Experiment operations | `gpt-5.6-terra` | medium | Experiment operations and factual records. |
+| `TerraExternalReviewManager` | External-review archiving | `gpt-5.6-terra` | medium | Raw external-review archiving and handoffs. |
+| `TerraLongTimeMemoryManager` | Memory stewardship | `gpt-5.6-terra` | high | Memory-only consistency and archive work. |
+| `TerraResultAnalyst` | Metric/gate extraction | `gpt-5.6-terra` | high | Bounded, error-sensitive metric and gate extraction. |
+| `SolPlanImplementer` | Core implementation | `gpt-5.6-sol` | high | Accepted-plan core implementation. |
+| `SolImplementationReviewer` | Standard review | `gpt-5.6-sol` | high | Standard nontrivial review. |
+| `SolWorkflowAuditor` | Workflow/config audit | `gpt-5.6-sol` | high | Workflow/configuration consistency audit. |
+| `SolPlanImplementerFrontier` | Frontier core implementation | `gpt-5.6-sol` | xhigh | Rare core implementation requiring judgment while editing. |
+| `SolImplementationReviewerFrontier` | Frontier/final review | `gpt-5.6-sol` | xhigh | High-risk and final whole-branch review. |
 
 ## Routing Rules
 
 1. Luna is the default simple-task tier. It is selected for read-only mapping,
    focused test execution, and trivial one-file mechanical patches. Do not route
    a simple task to Terra merely because it writes a file.
-2. `SparkImplementer` is not a default or cost-fallback role. Its dispatch brief
+2. `SparkExplicitSimplePatcher` is not a default or cost-fallback role. Its dispatch brief
    must contain `Legacy Spark opt-in: explicitly requested` and must limit the
    work to simple, non-core files. A missing opt-in is a routing error; select
    Luna or Terra instead.
@@ -103,11 +108,11 @@ role-aware migration, not a blind string replacement. Therefore:
 
 ## Planned File Changes
 
-1. Register `TerraImplementer` in `.codex/config.toml` and replace the
-   descriptions that make `SparkImplementer` the default mechanical worker.
-2. Update all existing `.codex/agents/*.toml` model values and reasoning
-   efforts to the table above; add `terra-implementer.toml`; narrow
-   `spark-implementer.toml` to the explicit-only exception.
+1. Replace `.codex/config.toml` registrations with the exact model-prefixed
+   runtime names in the table above. Do not retain generic-name aliases.
+2. Rename the profile files to match the new names, update their `name` fields,
+   and apply the model/effort map above. Add `terra-implementer.toml`; narrow
+   `spark-explicit-simple-patcher.toml` to the explicit-only exception.
 3. Update `AGENTS.md` and `.codex/agents/README.md` so role routing, model
    floors, reviewer tiers, and reload instructions match the new policy.
    Preserve unrelated uncommitted content in `AGENTS.md`.
@@ -115,8 +120,8 @@ role-aware migration, not a blind string replacement. Therefore:
    required Spark opt-in line, while retaining the mandatory dispatch brief and
    terminal-status contracts.
 5. Extend `scripts/validate_hmasd_subagent_protocol.py` with an exact expected
-   model/effort profile map and a guard that permits Spark only for
-   `SparkImplementer`.
+   name/model/effort profile map, a no-generic-alias guard, and a guard that
+   permits Spark only for `SparkExplicitSimplePatcher`.
 
 ## Validation And Reload
 
@@ -142,6 +147,9 @@ reload.
 - A Spark name can accidentally attract default routing: make the opt-in phrase
   mandatory in both documentation and the profile instructions, and use a
   validator check.
+- Renaming custom agents breaks old dispatch names: update every Codex-side
+  routing reference in the same change, retain no ambiguous aliases, and require
+  a fresh-session schema check before dispatching the new names.
 - Shared Claude/Codex docs can drift: leave them untouched by user direction
   and record their later reconciliation as an explicit residual task.
 - Model migration must not weaken algorithm governance: retain the current
