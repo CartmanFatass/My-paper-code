@@ -60,7 +60,7 @@ role-aware migration, not a blind string replacement. Therefore:
 | `simple-patcher` | `gpt-5.6-luna` | low | Default for trivial, single-file, non-core edits. |
 | `test-runner` | `gpt-5.6-luna` | low | Default for focused assigned tests and failure capture. |
 | `SparkImplementer` | `gpt-5.3-codex-spark` | low | Explicit-only legacy exception for small, non-core work. |
-| `TerraImplementer` (new) | `gpt-5.6-terra` | high | Default for bounded multi-file non-core implementation. |
+| `TerraImplementer` (new) | `gpt-5.6-terra` | high | Medium-complexity, bounded multi-file non-core implementation. |
 | `ImplementationReviewerFast` | `gpt-5.6-terra` | medium | Small isolated mechanical-diff review. |
 | `ExpManager` | `gpt-5.6-terra` | medium | Experiment operations and factual records. |
 | `ExternalReviewManager` | `gpt-5.6-terra` | medium | Raw external-review archiving and handoffs. |
@@ -75,20 +75,31 @@ role-aware migration, not a blind string replacement. Therefore:
 ## Routing Rules
 
 1. Luna is the default simple-task tier. It is selected for read-only mapping,
-   focused test execution, and trivial one-file mechanical patches.
+   focused test execution, and trivial one-file mechanical patches. Do not route
+   a simple task to Terra merely because it writes a file.
 2. `SparkImplementer` is not a default or cost-fallback role. Its dispatch brief
    must contain `Legacy Spark opt-in: explicitly requested` and must limit the
    work to simple, non-core files. A missing opt-in is a routing error; select
    Luna or Terra instead.
-3. `TerraImplementer` owns bounded multi-file mechanical work such as runners,
-   packaging, manifests, documentation, specified field propagation, and
-   non-core tests. It must stop and escalate at core algorithm or numerical
+3. `TerraImplementer` is the medium-complexity non-core tier. It owns bounded
+   multi-file mechanical work such as coordinated runner/package changes,
+   manifests plus their consumers, specified cross-file field propagation, and
+   non-core tests that require consistency across files. It is not the default
+   simple-task route and must stop and escalate at core algorithm or numerical
    semantics.
 4. Sol remains the floor for core algorithm implementation and quality-critical
    review. Existing task-review and final-review gates do not change.
 5. An `NEEDS_CONTEXT` or `BLOCKED` result never authorizes an automatic model
    downgrade or Spark fallback. The controller must change context, scope,
    owner, or plan under the existing no-blind-retry rule.
+
+### Task-Size Classifier
+
+- Simple and bounded: Luna by default.
+- Medium-complexity and non-core, especially multi-file consistency work: Terra.
+- Core algorithm or quality-critical review: Sol.
+- Explicit user/controller request for the legacy Spark exception: Spark only
+  within its simple, non-core scope.
 
 ## Planned File Changes
 
