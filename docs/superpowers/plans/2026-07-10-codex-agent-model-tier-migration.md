@@ -64,10 +64,10 @@ EXPECTED_PROFILES = {
 }
 ```
 
-### Task 1: Create the Progress Ledger and Contract Validator
+### Task 1: Append the Progress Ledger and Create the Contract Validator
 
 **Files:**
-- Create: `.superpowers/sdd/progress.md`
+- Modify: `.superpowers/sdd/progress.md`
 - Modify: `scripts/validate_hmasd_subagent_protocol.py`
 - Test: `scripts/validate_hmasd_subagent_protocol.py`
 
@@ -75,12 +75,13 @@ EXPECTED_PROFILES = {
 - Consumes: the TOML `[agents]` registry and every `.codex/agents/*.toml` profile.
 - Produces: one zero-exit static contract check that later tasks use as their completion gate.
 
-- [ ] **Step 1: Record execution ownership and task state**
+- [ ] **Step 1: Append execution ownership and task state**
 
-Create `.superpowers/sdd/progress.md` with this exact initial ledger:
+Append this exact new section to the existing `.superpowers/sdd/progress.md`
+ledger. Do not replace its historical plan entries:
 
 ```markdown
-# Codex Agent Model-Tier Migration Progress
+## Plan: docs/superpowers/plans/2026-07-10-codex-agent-model-tier-migration.md
 
 - [ ] Task 1: Static contract validator
 - [ ] Task 2: Runtime registry and TOML profiles
@@ -334,8 +335,8 @@ old GPT-5.4/GPT-5.5 profile values.
 
 - [ ] **Step 3: Update the progress ledger**
 
-Replace every Task 1-4 checkbox in `.superpowers/sdd/progress.md` with `[x]`,
-then append:
+Replace the four Task 1-4 checkboxes in this migration's appended ledger
+section with `[x]`, then append:
 
 ```markdown
 Runtime reload handoff: Start a fresh Codex session or restart the app, inspect
