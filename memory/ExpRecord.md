@@ -27,7 +27,9 @@ Status vocabulary:
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260709-r24-frozen-qd-null-probes | launch-ready | R24 frozen q_d null probes | cloud CUDA / 64env / 320k steps / seeds 1,2 | ExpManager | After launch, read `train_updates.csv`, `runner_output.log`, `r24_qd_windows/*.npz`, and `r24_qd_frozen_nulls/*` from `logs_cloud_r24_qd_null_control_64env/seed*/r24_qd_null_control_seed*/` | `scripts/run_r24_qd_null_control_cloud_64env.sh`; default log root `logs_cloud_r24_qd_null_control_64env`; recorded commands: `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh --dry-run`, `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`, `SEEDS=1 EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`, `SEEDS=2 EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh` | Reward-off diagnostic launch ready; q_d/q_D reward remains blocked until the frozen null archive is inspected. |
+| EXP-20260710-r25-qa-verification-1m | launch-ready | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager | when launched: monitor checkpoint progression at 160k intervals; after cloud completion: eval_episodes.csv coverage trajectory vs HMASD milestones; checkpoint maturity for G1 diagnostics | `scripts/run_r25_qa_verification_cloud_64env_1m.sh` (runner); `logs_cloud_r25_qa_verification_1m/arm{0,2}/seed*/` (per-run log roots); `logs/r25_runner_build/dryrun.log` (build evidence) | Verification tier scaling R23-validated q_A mechanism to 1M steps. arm0 = team-intent baseline (no q_A), arm2 = team-intent + q_A actionability residual reward. q_d/q_D rewards OFF. Gate criteria deferred to G1 diagnostics on mature (800k+) checkpoints. |
+| EXP-20260709-r24-frozen-qd-null-probes | completed — 4/4 analyzed (3 CPU, qAoff/seed2 on GPU per user directive); external peer review Round 5 completed; disposition ACCEPTED 2026-07-09 | R24 frozen q_d null probes | cloud archive `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` + local analysis complete | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed synthesis complete | Archive complete; peer review Round 5 text archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | R24-1 FAIL accepted 2026-07-09 (Round 5, SUPPORTS_WITH_CONDITIONS). Wording condition: "fail under tested policies and current diagnostic setup" (3 of 4 collapsed). D2 sensitivity re-run approved-deferred with conditions. D3 pivot direction accepted pending deconfound. q_d/q_D rewards remain BLOCKED. |
+| REF-20260617-hmasd-baseline-s7s1-seed1 | completed (stopped at 66% budget, clean) | HMASD baseline reference curve | local, 32env, rollout 500, metrics-light; `C:\project\tf-logs\hmasd\energy-S7-S1\...\20260617_133148` | ResultAnalyst (read 2026-07-09) | none — reference | `logs/hmasd_baseline_read_20260709/metric_extract.md` | HMASD S7-S1 pace/ceiling reference (seed1): eval coverage >=0.5 and >=0.7 first at 480k, >=0.9 at 800k; plateau ~0.95-0.99 from ~800-960k; final-window (1.76M-2.08M) coverage mean 0.9639, reward mean 380.29; zero-coverage eval episodes gone from 640k. Run stopped externally at 2,112,000/3,200,000 steps, no crash. Caveats: 32env (vs 64env HA-CTSE cloud runs), predates parity metrics (no coverage_eq1 fields), single seed. |
 | EXP-20260708-r24-qd-null-control-cloud-handoff | completed | R24 | cloud CUDA / 64env package | ExpManager + controller | ResultAnalyst to read metrics from the completed cloud archive before any q_d/q_D reward decision | `dist/ha_ctse_r24_qd_null_control_cloud_runtime_20260708_190315.zip`; `dist/r24_qd_null_control_log_extract_expmanager_20260708_230322`; `scripts/run_r24_qd_null_control_cloud_64env.sh`; default log root `logs_cloud_r24_qd_null_control_64env` | Cloud archive inspected. Both seeds finished with `exit_code=0` and `total_steps=320000`. Seed1 final eval row: `reward=52.852671269315316`, `coverage_ratio=0.8`, `system_throughput_mbps=8.611111111111114`, `backhaul_connected_step_fraction=0.51`, `zero_throughput_step_fraction=0.49`. Seed2 final eval row: `reward=-4.881497951854478`, `coverage_ratio=0.0`, `system_throughput_mbps=0.0`, `backhaul_connected_step_fraction=0.0`, `zero_throughput_step_fraction=1.0`. No `Traceback`, `RuntimeError`, `NaN`, `OOM`, or `BrokenPipe` matches were found in the runner logs. |
 | EXP-20260707-r24-assignment-to-behavior-bridge | completed / blocked | R24 | local CUDA diagnostics | ExpManager | run matched-null forced-audit controls A-D, then reward-off behavior-window q_d probe; set `q_D/q_d` reward decision only after gate pass | `scripts/run_r24_behavior_audit_local_cuda.ps1`; `scripts/r24_forced_behavior_audit.py`; `logs_r24_qd_probe_local_cuda/seed1`; `logs_r24_behavior_audit_local/r24_behavior_audit.csv`; `logs_r24_behavior_audit_smoke/r24_behavior_audit.csv` | forced-audit signal is positive but insufficient for reward gating. q_d probe is near-null (`residual_gain=0.01105`, `positive_frac=0.52855`) and cannot justify reward-on. `q_D` and `q_d` rewards remain blocked pending matched-null controls + behavior-window `q_d` gate pass (`effect_ratio_h50>=1.3` + `h50-h10` growth + `between_within_ratio_h50>1.2`). |
 | EXP-20260707-r24-assignment-to-behavior-bridge-overnight | completed | R24 | local CUDA / `logs_r24_overnight_existing_local_cuda/run_20260708_000836` | ExpManager | checked arm-level `runner_status.txt`, `runner_output.log`, audit/train tails, and `_watch/watch_state.json` | `scripts/run_r24_overnight_existing_local_cuda.ps1`; `scripts/run_r24_behavior_audit_local_cuda.ps1`; `scripts/run_r24_qd_probe_local_cuda.ps1`; `scripts/watch_r24_overnight_existing.ps1`; `scripts/codex_r24_alert_handler.ps1`; `logs_r24_overnight_existing_local_cuda/run_20260708_000836/arm*` | one-click local overnight runner completed with `NResets=64`, `NumEnvs=16`; all five arms finished with `exit_code=0`. |
@@ -36,6 +38,111 @@ Status vocabulary:
 | EXP-20260705-r21-team-intent | completed / negative | R21 | cloud CUDA seed1 | ExpManager | none | `dist/logs_cloud_r21_team_intent_64env`, `memory/R21_AUTOPSY_REPORT.md` | Z was near-inert; sampled team code did not create recoverable team effect. No seed2 or sweep on this design. |
 
 ## Active Experiment Detail
+
+### EXP-20260710-r25-qa-verification-1m
+
+Launch-ready cloud execution record for the q_A verification tier.
+
+- Status: `launch-ready`
+- Stage/Round: `R25 verification tier` (scaling R23-validated q_A to 1M steps, 64 env)
+- Location/compute: cloud CUDA, 64 envs, 1M steps (1000000), two arms, default seed `1`
+- Runner script: `scripts/run_r25_qa_verification_cloud_64env_1m.sh`
+- Build validation: `logs/r25_runner_build/dryrun.log` (captured --dry-run output)
+- Bash syntax check: PASS (bash -n validation 2026-07-09 expmanager build)
+
+**Arm configuration (exact R23 flags preserved)**:
+- `arm0_arch_only`: Team-intent baseline (control). Flags:
+  - `--enable_team_intent --enable_team_disc_probe --team_intent_k 8 --z_assignment_residual_gain 0.5`
+  - No q_A reward, no q_d/q_D rewards
+- `arm2_qA_reward`: Team-intent + q_A actionability residual (treatment). Flags:
+  - All arm0 flags, plus:
+  - `--enable_assignment_actionability_reward --assignment_actionability_coef 0.02 --assignment_actionability_clip 1.0 --assignment_actionability_warmup_steps 20000`
+  - q_d/q_D rewards OFF
+
+**Hyperparameters**:
+- Scenario: S7-S1, 6 agents
+- Collector: subproc, spawn start method
+- Rollout length: 500, skill interval: 10
+- Skill durations: 1,2,3,4 (R23 Choice-0, not R24's 3,7,13,24)
+- Total timesteps: 1,000,000
+- Eval interval: 160,000 (eval at 160k, 320k, 480k, 640k, 800k, 960k)
+- Save interval: 5 updates (1M / 64*500 = 31 updates; save every ~160k steps to match eval cadence)
+- Checkpoint keep: 4 (maintains mature checkpoints for G1 diagnostics)
+- Eval episodes: 20 per eval window
+- Guard mode: kill (standard)
+
+**Per-run directory structure** (relative to repo root):
+```
+logs_cloud_r25_qa_verification_1m/
+  arm0_arch_only/
+    seed1/
+      command.txt
+      runner_status.txt (started/finished state)
+      runner_output.log (full trainer output)
+      standalone_train.log (readable log)
+      metrics/
+        train_updates.csv
+        eval_episodes.csv
+      standalone_process_core_update_5.pt (160k checkpoint)
+      standalone_process_core_update_10.pt (320k checkpoint)
+      standalone_process_core_update_15.pt (480k checkpoint)
+      ... (continue every 5 updates)
+      standalone_process_core_final.pt (1M checkpoint)
+      events.* (TensorBoard)
+  arm2_qA_reward/
+    seed1/
+      (same structure)
+```
+
+**Default launch commands** (for controller copy-paste to cloud server):
+```bash
+# Dry-run (no execution; prints all commands):
+bash scripts/run_r25_qa_verification_cloud_64env_1m.sh --dry-run
+
+# Full execution (both arms, seed 1):
+bash scripts/run_r25_qa_verification_cloud_64env_1m.sh
+
+# Single arm/seed variants:
+ARMS=arm0_arch_only bash scripts/run_r25_qa_verification_cloud_64env_1m.sh
+ARMS=arm2_qA_reward bash scripts/run_r25_qa_verification_cloud_64env_1m.sh
+SEEDS=1 bash scripts/run_r25_qa_verification_cloud_64env_1m.sh
+```
+
+**Expected artifacts**:
+- Per-run logs: `logs_cloud_r25_qa_verification_1m/arm{0_arch_only,2_qA_reward}/seed1/{command.txt,runner_status.txt,runner_output.log}`
+- Training metrics: `logs_cloud_r25_qa_verification_1m/arm{0,2}/seed1/metrics/{train_updates.csv,eval_episodes.csv}`
+- Checkpoints: `standalone_process_core_update_{5,10,15,20,25,30}.pt`, `standalone_process_core_final.pt`
+- Build evidence: `logs/r25_runner_build/dryrun.log` (this session's validation)
+
+**Time estimate** (wall-clock, per arm):
+- Baseline from R24 archive: 320k steps on 64 env took ~1.9 hours (per archive timestamps)
+- Scaling: 1M / 320k = 3.125x, so ~5.9 hours per arm
+- Conservative estimate: ~6 hours per arm sequentially, ~12 hours total for both arms
+- Parallel: if controller runs both seeds simultaneously on separate GPUs, ~6 hours wall time
+- Cloud resource: 64 parallel environments, 1 GPU (CUDA, standard cloud instance)
+
+**Read plan** (post-launch analysis):
+1. Monitor checkpoint progression: verify updates 5, 10, 15, ... 30 exist (5-update saves) by ~30 min
+2. Eval trajectory (coverage_ratio field):
+   - Target: arm2 should trend higher than arm0 (mechanistic q_A effect)
+   - Baseline: HMASD S7-S1 (REF-20260617) shows coverage >=0.7 by 480k, >=0.9 by 800k, plateau ~0.96
+   - Interpretation: if arm2 reaches HMASD milestones earlier/higher than arm0, evidence for q_A scaling;
+     if both track HMASD, no task-level q_A boost (but mechanism may still be present in residual_gain)
+3. Mechanism fields (from train_updates.csv):
+   - `assignment_actionability_gain`: should be >0 and rising in arm2 (measure of q_A learning)
+   - `z_usage_entropy`: target >0.8 (skills actively used, not collapsed); baseline ~0.96 in R24
+   - `z_assignment_itv` (forced-Z KL): should be stable or rising in arm2 (Z recoverable under q_A reward)
+4. Checkpoint maturity (by update 20-25 ~ 640k-800k steps):
+   - Verify coverage ~0.7-0.9 reached (ready for G1 skill-differentiation diagnostics)
+   - No collapse signatures (zero_throughput_step_fraction >0.9, z_usage_entropy <0.5)
+5. Final maturity (update 30 ~ 960k steps):
+   - Checkpoints ready for offline G1 probes (don't delete until G1 work complete)
+   - Expected: arm2 checkpoint carries both q_A learning + team-intent structure for G1 individual-skill probing
+
+**Caveats**:
+- Single seed (seed 1 only): results are point estimates; seed-consistency requires seed 2 re-run
+- 64 env matches R23-next matrix cloud baseline; local 16env R23 showed noise-dominated task signal
+- Mature checkpoint criteria (800k+): earlier checkpoints may show high noise; gate decisions deferred to 800k+
 
 ### EXP-20260707-r24-assignment-to-behavior-bridge
 
@@ -336,6 +443,157 @@ baseline fields):
   q_d/q_D reward. Keep rewards blocked; next valid step is a behavior-window
   reward-off q_d/q_D probe design, not reward injection.
 
+### EXP-20260709-r24-frozen-qd-null-probes (smoke verification)
+
+Local pipeline smoke verification (2026-07-09):
+
+- **Smoke objective**: Verify window-export -> frozen-null-analyzer end-to-end pipeline.
+- **Command run**:
+  `python -m ha_ctse_process.train --preset S7-S1 --scenario energy --n_agents 6 --num_envs 4 --collector_backend sync --total_timesteps 2000 --rollout_length 100 --skill_interval 4 --device cuda --enable_team_conditioned_qd_probe --r24_qd_export_windows --log_dir logs\r24_smoke_frozen_null_pipeline`
+- **Training completion**: total_steps=2000 (5 updates at 400-step boundaries), final row at standalone_update 5.
+- **QD window export facts**:
+  - Shards directory: `logs/r24_smoke_frozen_null_pipeline/r24_qd_windows/`
+  - Shard count: 5 npz files (update 1-5 at steps 400, 800, 1200, 1600, 2000)
+  - Array names per shard: `['action', 'effect', 'condition', 'labels', 'pre_action', 'pre_effect', 'pre_valid', 'env_id', 'agent_id', 'duration_idx', 'segment_length', 'total_steps', 'update_idx']`
+  - Total probe samples across shards: 350 labeled windows (train/eval split 267/83 per variant)
+- **Analyzer execution**:
+  - Command: `python scripts/analyze_r24_qd_frozen_nulls.py --input_dir logs/r24_smoke_frozen_null_pipeline/r24_qd_windows --output_dir logs/r24_smoke_frozen_null_pipeline/r24_qd_frozen_nulls --num_skills 6 --steps 300 --seed 17`
+  - Exit status: 0 (success)
+  - Output files created: `r24_qd_frozen_nulls.json` (7125 bytes), `r24_qd_frozen_nulls.md` (987 bytes)
+- **Null variant coverage**: All 9 variants present in json: `real`, `shuffled`, `fake_marginal`, `duration_matched`, `agent_matched`, `behavior_only`, `pre_only`, `action_only`, `effect_only` ✓
+
+Pre-registered gate-read checklist (to apply to cloud data after full-scale 320k-step run):
+
+- **Per-seed residual gain and positive fraction criteria**:
+  - residual_gain >= 0.05 (smoke real=0.0843, strong pass; smoke shuffled=-0.0361, baseline null)
+  - positive_frac >= 0.60 (smoke real=0.5422, borderline/FAIL; smoke shuffled=0.4699, below threshold)
+  - acc_full - acc_prior gap >= 0.05 (smoke real=0.0844, PASS; smoke shuffled=-0.0361, negative)
+- **Real vs. null variant signal separation**:
+  - real residual_gain (0.0843) vs. nulls: shuffled (-0.0361, inverted), fake_marginal (0.0120, ~7x gap), behavior_only (0.0361, ~2.3x), pre_only (0.0602, ~1.4x), effect_only (0.0723, ~1.2x)
+  - shuffled/fake_marginal near-zero or inverted as expected; signal isolation baseline check PASS
+- **Team-conditioned evidence signal (full - behavior_only acc)**:
+  - smoke: full_minus_behavior_acc = -0.0602 (negative; behavior outperforms full model, weak team-context evidence)
+  - GPT Round 4 context: cloud gate criterion is full - behavior > 0 demonstrating team-condition context gain
+- **Per-seed policy health context columns** (to read from cloud eval/train CSV):
+  - final `coverage_ratio`, `zero_throughput_step_fraction`, `z_usage_entropy`
+  - Gate fail trigger: high zero_throughput (>0.9) + low z_usage_entropy (<0.5) indicates collapsed policy, weakening any discriminator evidence
+- **Seed consistency requirement**:
+  - Smoke demonstrates single-seed pipeline (positive)
+  - Cloud gate criterion: both seeds must independently satisfy residual_gain>=0.05 AND positive_frac>=0.60 for reward unblock decision; inconsistency between seeds is automatic gate-fail
+
+**Smoke result**: Pipeline health **PASS**. All 9 frozen-null variants exported and analyzed. Metric values are **throwaway** (2k-step smoke insufficient for convergence).
+
+### EXP-20260709-r24-frozen-qd-null-probes (Cloud Archive & Local Analysis)
+
+**Controller wording amendment (2026-07-09, user calibration):** where the
+notes below say "collapsed policy / policy health", read
+"early-training/underconverged at 320k" — HMASD itself was below 0.5 coverage
+with zero-coverage eval episodes at 320k and converges only ~800k-1M. The R24-1
+fail is therefore "fail at early-training checkpoints under the current
+diagnostic setup"; mature-checkpoint (~1M) re-probes are the fair future test,
+and mechanism diagnostics should preferentially run on mature checkpoints.
+
+**Controller decision/interpretation (2026-07-09, seed1 early gate read):**
+- qAon/seed1 (the HEALTHY policy: coverage 0.700, z_usage_entropy 0.958) frozen
+  gate read = FAIL on all core gates: real residual_gain -0.0319 (negative),
+  positive_frac 0.395, real ranked below 7 of 8 null variants,
+  real - behavior_only = -0.023 (no team-conditioned evidence). Full table:
+  `qAon/seed1/r24_qd_null_control_seed1/r24_qd_frozen_nulls/gate_read_seed1.md`.
+- Verdict per pre-registered tree: q_d gate FAIL on a healthy policy. q_d/q_D
+  rewards remain BLOCKED; no reading of this data supports reward-on.
+- INSTRUMENT CAVEAT (direction-neutral, flagged before verdict): all frozen
+  probes show held-out overfitting (loss_full 2.5-4.7x loss_prior across
+  variants; action_only beats real; in-loop online probe on same run reads
+  +0.010, opposite sign). All residual_gains cluster in a noise band; "no
+  signal" vs "instrument cannot see" is not yet separated.
+- Seed2 update (2026-07-09, collapsed-policy qAon seed): all core gates FAIL
+  again (real residual_gain -0.0073, positive_frac 0.433). Cross-seed
+  CONSISTENT facts: real residual ~0/negative in both seeds; real NEVER beats
+  behavior_only (real - behavior_only = -0.023 in BOTH seeds) -> no
+  team-conditioned evidence on healthy or collapsed policies; in-loop online
+  probe reads small positive (+0.010/+0.011) while frozen reads ~0/negative in
+  both. Pattern differences: seed2 is better-behaved (real 4/9, tight spread
+  0.06, label-nulls below real) vs seed1's wild ordering (real 8/9, spread
+  0.16); consistent instrument artifact in both: reduced-input probes
+  (action_only etc.) generalize better than full-input real at fixed 300 steps
+  (overfitting bias AGAINST real). New seed2 anomalies: two exact-identity
+  degenerate variants (shuffled acc_full==acc_behavior; agent_matched
+  acc_behavior==acc_prior). Table: `qAon/seed2/.../gate_read_seed2.md`.
+- qAoff/seed1 update (2026-07-09, matched NO-q_A control, collapsed policy):
+  all core gates FAIL. KEY: no q_A-dependence is visible — qAoff/seed1's
+  pattern (real rank 8/9, spread 0.146) mirrors qAon/seed1 (8/9, 0.161), not
+  qAon/seed2 (4/9, 0.060); per-seed variability dominates arm identity. real -
+  behavior_only = -0.074 (most negative yet; behavior_only itself +0.061).
+  In-loop/frozen sign AGREEMENT here (both negative), unlike both qAon seeds.
+  No exact-identity degeneracies. Table: `qAoff_coef0/seed1/.../gate_read_qAoff_seed1.md`.
+- Cross-run synthesis (3 of 4 read): (a) team-conditioning (real vs
+  behavior_only) never helps in ANY run — the central R24-1 claim fails
+  uniformly; (b) arm identity (q_A on/off) does not separate the frozen-null
+  patterns — the probe sees the same near-nothing either way; (c) the only
+  variant ever crossing gate-level residual is behavior_only (+0.061) on a
+  collapsed no-q_A run — individual-behavior signal crumbs at best, orthogonal
+  to the team-conditioned hypothesis.
+- Controller posterior after two seeds: mechanism-fail is the likely final
+  read; an instrument fix (early stopping) would need to swing real by ~+0.08
+  to reach gates - implausible. Instrument fix remains worth ONE pre-registered
+  re-run mainly to make the negative result solid, not to rescue the gate.
+- Disposition: (1) fail stands, reward blocked; (2) do NOT modify the analyzer
+  or reinterpret without the design cross-validation gate — any probe-training
+  recipe change (early stopping / regularization) is a diagnostic-instrument
+  change requiring marl-peer-reviewer review with pre-registered acceptance
+  criteria; (3) qAoff/collapsed-seed analyses (retry in flight) will
+  discriminate instrument-noise vs mechanism-fail: same noise-band pattern in
+  qAoff strengthens the instrument-problem hypothesis; (4) pivot discussion
+  (skill-differentiation half, per Do-Not-Do-Yet) folds in Phase-A b/w=0.308
+  and tonight's seed-1 deconfound pair.
+
+**Disposition Accepted (2026-07-09, Round 5 peer review):**
+- External review Round 5 (GPT-5.5 xhigh, SUPPORTS_WITH_CONDITIONS) archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md`.
+- Verdict: R24-1 gate = FAIL accepted with wording condition: "fail under the tested policies and current diagnostic setup" (3 of 4 policies collapsed), NOT a categorical universal negative. q_d/q_D reward paths remain permanently BLOCKED on this evidence line.
+- D2 (sensitivity re-run with early stopping): APPROVED-DEFERRED only for archival solidity (NOT confirmatory); conditions: separate validation split, identical stopping rules, report all outcomes, single device class all-GPU, unexpected pass reopens instrument-validity only.
+- D3 (pivot to individual-skill differentiation): ACCEPTED pending deconfound; diagnostic design deferred until arm0-vs-arm2 matched-seed deconfound pair results available.
+- Date archived: 2026-07-09.
+
+Cloud overnight run completed 2026-07-09 08:34:42 UTC+8. Archive transferred to `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/`.
+
+**Cloud run structure**:
+- Two arms: `qAon` and `qAoff_coef0` (unexpected matched no-q_A control variant)
+- Each arm: seed1, seed2
+- Total runs: 4
+- Each run contains:
+  - `r24_qd_null_control_seed{N}/` dir (server-side log root)
+  - `r24_qd_windows/` subdir with 10 shards (`.npz` files, one per update at steps 32k, 64k, ..., 320k)
+  - `metrics/train_updates.csv` (10 data rows, final: total_steps=320000)
+  - `metrics/eval_episodes.csv` (20 data rows, final: episode=19, total_steps=320000)
+  - `runner_status.txt`, `runner_output.log`, `standalone_train.log`, event files
+  - `frozen_null_command.txt` and `frozen_null_output.log` (server attempted analyzer; failed with ModuleNotFoundError ha_ctse_process)
+  - NO `r24_qd_frozen_nulls/` output yet (server-side analyzer failed; local rerun in progress)
+
+**Inventory facts (all 4 runs)**:
+- qAon/seed1: shards=10, total_steps=320000, z_usage_entropy=0.9581796625966484, r24_qd_acc_full=0.37506040930747986, coverage_ratio=0.7, zero_throughput_step_fraction=0.494
+- qAon/seed2: shards=10, total_steps=320000, z_usage_entropy=0.9740648515987139, r24_qd_acc_full=0.35477069, coverage_ratio=0.0, zero_throughput_step_fraction=1.0
+- qAoff_coef0/seed1: shards=10, total_steps=320000, z_usage_entropy=0.9631162846960536, r24_qd_acc_full=0.34242424, coverage_ratio=0.0, zero_throughput_step_fraction=1.0
+- qAoff_coef0/seed2: shards=10, total_steps=320000, z_usage_entropy=0.9563014133400384, r24_qd_acc_full=0.31430015, coverage_ratio=0.0, zero_throughput_step_fraction=1.0
+
+**Policy health context**:
+- qAon/seed1: reasonable policy (coverage=0.7, 49.4% zero-throughput steps = 50.6% serving)
+- qAon/seed2, qAoff_coef0/*: collapsed policies (coverage=0.0, 100% zero-throughput, no service) — likely reward converged to no-action strategy
+
+**Local analyzer execution** (started 2026-07-09 10:56:25 UTC+8):
+- Script: `_local_analysis/run_final_batch.py` (direct Python invocation with sys.path setup)
+- Configuration: num_skills=6, steps=300, seed=17, hidden_dim=128, lr=3e-3, max_rows=0 (all data)
+- Status: Running in background (PID tracked in `runner_status.txt`)
+- Expected output per run: `r24_qd_frozen_nulls.json` + `r24_qd_frozen_nulls.md` with all 9 variants
+- Log files: `_local_analysis/frozen_null_<arm>_<seed>.log`, `master_progress.log`
+- Estimated time: 30-90 minutes total (depends on GPU speed and batch size with 21k+ rows per run)
+- Monitor: `tail -f _local_analysis/master_progress.log`
+
+**Next factual read point**:
+- When analyzer completes: verify `r24_qd_frozen_nulls.json` + `.md` in each run's output dir
+- Extract per-run variant metrics and compare against pre-registered gate criteria
+- Verify 9-variant count and accuracy fields (full, prior, behavior, pre, majority) per variant
+- Consolidate findings in ExpRecord gate-read section before any reward decision
+
 ### EXP-20260707-r23-next-mechanism-matrix
 
 Current read:
@@ -373,6 +631,87 @@ Operational note:
 
 - Local 32env subproc runs can exceed available RAM. Prefer 16 env locally or a
   cloud 64env package/run.
+
+### EXP-20260709-local-overnight-audit-power-r23-deconfound
+
+Launch-ready overnight sequential runner combining two independent experimental objectives:
+
+**Phase A: R24 Forced-Behavior Audit Power Upgrade (3 audit arms)**
+- Upgrade to NResets=64 (4x the prior 16-reset standard)
+- Horizon list expanded to {10,20,50,100} (added H=100 for finer timescale resolution)
+- Three audit arms, each loading an existing R23 checkpoint and running forced-behavior diagnostics:
+  1. `arm1_qA_checkpoint_forced_audit`: checkpoint=`logs_r23_next_mechanism_matrix_local/seed1/arm2_qA_reward_coef002/standalone_process_core_update_40.pt`
+  2. `arm2_null_arch_no_qA_forced_audit`: checkpoint=`logs_r23_next_mechanism_matrix_local/seed1/arm0_arch_only/standalone_process_core_final.pt`
+  3. `arm3_null_qD_probe_no_qA_forced_audit`: checkpoint=`logs_r23_next_mechanism_matrix_local/seed1/arm3_qD_audit/standalone_process_core_update_40.pt`
+- Each arm writes `r24_behavior_audit.csv` to its arm directory under the run root
+
+**Phase B: R23 Arm0 vs Arm2 Matched-Environment Deconfound (4 training arms)**
+- Budget: 320000 timesteps (per controller specification, matching cloud eval checkpoint interval)
+- Environment configuration: 16 parallel environments (local CUDA capacity limit)
+- Seeds 1 and 2, matched per pair (both arm0 and arm2 get the same seed value for each pair)
+- Arm order: pair-complete-first `[arm0_seed1, arm2_seed1, arm0_seed2, arm2_seed2]` for overnight survivability
+- Four training arms:
+  1. `arm4_training_arm0_seed1`: arm0_arch_only, seed=1
+  2. `arm5_training_arm2_seed1`: arm2_qA_reward (with q_A residual flags), seed=1
+  3. `arm6_training_arm0_seed2`: arm0_arch_only, seed=2
+  4. `arm7_training_arm2_seed2`: arm2_qA_reward (with q_A residual flags), seed=2
+- Arm0 uses base R23 training flags (no assignment_actionability_reward)
+- Arm2 uses base R23 flags + `--enable_assignment_actionability_reward --assignment_actionability_coef 0.02 --assignment_actionability_clip 1.0 --assignment_actionability_warmup_steps 20000`
+- No q_D or q_d reward paths enabled; q_A remains reward-off per R23 precedent
+
+**Runner Script & Status Files**
+- Script: `scripts/run_r24_overnight_20260709_audit_deconfound_local_cuda.ps1`
+- Log root: `logs/r24_overnight_20260709_audit_deconfound/`
+- All output under run root: per-arm `command.txt`, `runner_status.txt`, `runner_output.log`
+- Dry-run validated: `logs/r24_overnight_20260709_audit_deconfound/dryrun_final.log`
+- Checkpoint: `logs/r24_overnight_20260709_audit_deconfound/expmanager_checkpoint.md`
+
+**Controller decision/interpretation (2026-07-09, Phase A read):**
+- Phase A result: `gate_read_phaseA.md` found all three audit arms byte-identical
+  to the 2026-07-08 overnight audit arms. Root cause is a controller design
+  error, not a wiring bug: the 2026-07-08 overnight ALREADY ran `-NResets 64`
+  (1920 records), and the audit script is deterministic
+  (`reset_seed = seed + reset_idx`, default seed 1), so same checkpoints + same
+  NResets + same seed reproduced identical output. The "4x power upgrade"
+  premise was wrong; the prior 16-reset run (480 records) was a different,
+  earlier standalone audit.
+- Additionally, H=100 was never actually passed to the audit script (no h100
+  columns exist despite the packaging claim above; the script supports
+  `--horizons` but the runner did not use it). The Phase A description above
+  overstates what ran.
+- Disposition: between_within_ratio_h50 = 0.308 (z) / 0.228 (xi) FAIL stands as
+  an already-64-reset estimate; tonight's Phase A adds no information. A true
+  power upgrade would need an audit seed sweep (different `--seed` values)
+  and/or `--horizons 10,20,50,100`; DEFERRED — not worth GPU time before the
+  cloud frozen-null verdict. Phase B (deconfound arms) is unaffected and remains
+  the payload of this run.
+- New incidental fact: xi_effect_ratio_h50 vs the qD-probe control FAILS (0.937)
+  while passing vs arch-only (1.307) — forced-audit evidence remains mixed.
+
+**Estimated Runtime & Constraints**
+- Phase A: ~10-15 minutes (audit is lightweight: 3 arms × 64 resets × max 100 steps)
+  [ACTUAL: ~2.5h per audit arm; the estimate above was wrong]
+- Phase B: ~12-16 hours (4 arms × 320k steps / 16 envs ≈ 3-4 hours per arm on local RTX 4070)
+- Total wall time: ~12-16+ hours (suitable for overnight, may exceed one night if stalled)
+- GPU constraint: RTX 4070 Laptop (8 GB VRAM) at ~16 envs = ~1.3 GB per arm during training
+- Storage: ~500 MB expected per training arm (checkpoints + metrics)
+
+**Checkpoints Verified**
+All three source checkpoints exist and are sized 25 MB each:
+- qA checkpoint: `logs_r23_next_mechanism_matrix_local/seed1/arm2_qA_reward_coef002/standalone_process_core_update_40.pt` (created 2026-07-07 12:01)
+- null-arch checkpoint: `logs_r23_next_mechanism_matrix_local/seed1/arm0_arch_only/standalone_process_core_final.pt` (created 2026-07-07 03:28)
+- null-qD checkpoint: `logs_r23_next_mechanism_matrix_local/seed1/arm3_qD_audit/standalone_process_core_update_40.pt` (created 2026-07-07 14:32)
+
+**Launch Command**
+```powershell
+powershell -NoProfile -File scripts/run_r24_overnight_20260709_audit_deconfound_local_cuda.ps1
+```
+
+Optional arguments:
+- `-DryRun`: Print all 7 arm commands without executing
+- `-Python "C:\Users\wu\.conda\envs\SB3\python.exe"`: Specify Python executable (default: C:\Users\wu\.conda\envs\SB3\python.exe)
+- `-RunRoot "logs/r24_overnight_20260709_audit_deconfound"`: Specify run root (default: logs/r24_overnight_20260709_audit_deconfound)
+- `-ContinueOnError`: Continue to next arm if one fails (default: stop on first error)
 
 ## Archive Pointers
 
