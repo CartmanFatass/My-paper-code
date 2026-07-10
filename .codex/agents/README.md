@@ -69,7 +69,7 @@ The controller should:
    the lifecycle protocol below.
 
 Memory delegation is not governance delegation. The controller may outsource
-memory maintenance to LongTimeMemoryManager, but must not outsource user intent
+memory maintenance to TerraLongTimeMemoryManager, but must not outsource user intent
 understanding, algorithm discussion, code/execution decisions, subagent
 coordination, or the final explanation to the user.
 
@@ -130,36 +130,56 @@ agent must carry explicit `model`, `model_reasoning_effort`, sandbox,
 approval, service tier when supported, nicknames, and developer instructions in
 its TOML file.
 
-For `PlanImplementer`, the official TOML uses `service_tier = "fast"` because
+Runtime names state their model family directly: every `Luna*` profile uses
+`gpt-5.6-luna`, every `Terra*` profile uses `gpt-5.6-terra`, and every `Sol*`
+profile uses `gpt-5.6-sol`. `SparkExplicitSimplePatcher` is the sole legacy
+exception on `gpt-5.3-codex-spark`; it is opt-in only, never an automatic
+fallback.
+
+Routing follows those names. `LunaSimplePatcher` is the default for trivial,
+single-file mechanical work. `TerraImplementer` is for bounded
+medium-complexity, multi-file non-core work, not default simple work. Sol roles
+own core, high-risk, or final-review work. `SparkExplicitSimplePatcher` may run
+only when the dispatch contains the literal line `Legacy Spark opt-in:
+explicitly requested`. Do not silently substitute tiers, and do not use
+`max`/`ultra` tiers by default.
+
+Quick routing:
+
+- Simple bounded work -> `LunaCodebaseScout`, `LunaSimplePatcher`, or
+  `LunaTestRunner`.
+- Medium-complexity non-core multi-file work -> `TerraImplementer`.
+- Core algorithm or quality-critical review -> `SolPlanImplementer`,
+  `SolPlanImplementerFrontier`, `SolImplementationReviewer`, or
+  `SolImplementationReviewerFrontier` according to risk.
+- Legacy Spark -> `SparkExplicitSimplePatcher` only with the literal opt-in
+  line above.
+
+For `SolPlanImplementer`, the official TOML uses `service_tier = "fast"` because
 the Codex config reference says `fast` maps to the priority request tier.
-PlanImplementer intentionally uses `model_reasoning_effort = "high"` for
-accepted-plan core implementation: once the controller has decided the plan,
-the worker should execute precisely rather than overthinking or redesigning.
-Use `PlanImplementerFrontier` (`gpt-5.5`, `model_reasoning_effort = "xhigh"`)
-only for rare bounded core tasks whose implementation brief explicitly requires
-architecture or algorithm judgment while editing. Spark roles such as
-`SparkImplementer` intentionally omit `service_tier`.
+SolPlanImplementer intentionally uses `model_reasoning_effort = "high"` for
+accepted-plan core implementation. Use `SolPlanImplementerFrontier`
+(`gpt-5.6-sol`, `model_reasoning_effort = "xhigh"`) only for rare bounded core
+tasks whose implementation brief explicitly requires architecture or algorithm
+judgment while editing.
 
 Reviewer cost control uses explicit model-tier roles instead of reducing review
-frequency. Use `ImplementationReviewerFast` for small isolated mechanical diffs,
-`ImplementationReviewer` for standard multi-file, judgment-heavy, or
-debugging-oriented task reviews, and `ImplementationReviewerFrontier` for
-architecture, high-risk, concurrency, shared-state, API/data-contract, and final
-whole-branch reviews. Each reviewer role has an explicit `model` and
+frequency. Use `TerraFastReviewer` (`gpt-5.6-terra`, medium) for small isolated
+mechanical diffs, `SolImplementationReviewer` (`gpt-5.6-sol`, high) for
+standard multi-file, judgment-heavy, or debugging-oriented task reviews, and
+`SolImplementationReviewerFrontier` (`gpt-5.6-sol`, xhigh) for architecture,
+high-risk, concurrency, shared-state, API/data-contract, and final whole-branch
+reviews. Each reviewer role has an explicit `model` and
 `model_reasoning_effort`; do not depend on inherited runtime defaults.
 
-`ExpManager` intentionally uses `gpt-5.4-mini` with medium reasoning. Its work
-is mostly context-heavy factual coordination: process/log checks, bounded CSV
-extracts, package handoffs, and `ExpRecord.md` updates. Do not treat the model
-upgrade as permission to paste large logs or transcripts into chat; the
-file-based status and context-budget contract remains mandatory.
-
-`ResultAnalyst` intentionally uses `gpt-5.4` with medium reasoning for bounded
-metric/gate extraction from existing experiment artifacts. This role is stronger
-than the mini tier because artifact parsing and gate reads have proven
-error-prone, but it is still not an experiment launcher or record owner.
-`WorkflowAuditor` intentionally uses `gpt-5.3-codex-spark` with high reasoning
-and read-only sandboxing for subagent/workflow consistency checks.
+`TerraExpManager` uses `gpt-5.6-terra` with medium reasoning for factual
+process/log checks, bounded CSV extracts, package handoffs, and `ExpRecord.md`
+updates. `TerraResultAnalyst` uses `gpt-5.6-terra` with high reasoning for
+bounded metric/gate extraction from existing artifacts. `TerraLongTimeMemoryManager`
+uses `gpt-5.6-terra` with high reasoning for memory-only work.
+`SolWorkflowAuditor` uses `gpt-5.6-sol` with high reasoning and a read-only
+sandbox for subagent/workflow consistency checks. These assignments do not
+relax file-based status or bounded-context requirements.
 
 ## Lifecycle Protocol
 
@@ -282,7 +302,7 @@ finalizing the handoff.
 
 For any non-trivial subagent handoff, prefer file templates under
 `.codex/agents/templates/`. The controller gives workers a task brief path and
-requires a report path. ExpManager additionally writes an
+requires a report path. TerraExpManager additionally writes an
 `expmanager_checkpoint.md` before long progress/result checks so controller
 soft timeouts can distinguish in-flight work from workflow faults.
 
@@ -320,8 +340,8 @@ When the user explicitly authorizes a plan execution, experiment workflow,
 external review archive workflow, memory synchronization workflow, or workflow
 configuration audit to use the project subagent system, that authorization
 covers the fixed subagent hooks required by that workflow. The controller may
-spawn the routine LTM, ExpManager, ResultAnalyst, or ExternalReviewManager
-handoff without asking again at every hook, or a WorkflowAuditor check inside
+spawn the routine LTM, TerraExpManager, TerraResultAnalyst, or TerraExternalReviewManager
+handoff without asking again at every hook, or a SolWorkflowAuditor check inside
 an authorized workflow-configuration audit, provided the work stays inside the
 authorized workflow and the selected official custom agent boundary.
 
@@ -331,52 +351,52 @@ external-advice disposition, git boundaries, integration, and final explanation.
 
 Throttle automatic hooks:
 
-- LongTimeMemoryManager: batch memory impact at plan/code/result/external-review
+- TerraLongTimeMemoryManager: batch memory impact at plan/code/result/external-review
   boundaries. Prefer one sync per implementation wave or completed turn; do not
   run it after every small edit.
-- ExpManager: use for meaningful experiment launches, packages, commands,
+- TerraExpManager: use for meaningful experiment launches, packages, commands,
   factual log/result records, and `memory/ExpRecord.md` updates. Do not invoke
   it for ordinary implementation edits. Experiment status/progress queries are
-  ExpManager-owned: process state, log freshness, latest update/eval rows,
+  TerraExpManager-owned: process state, log freshness, latest update/eval rows,
   error scans, key metric extracts, and factual `memory/ExpRecord.md` updates.
-  The controller presents ExpManager's concise summary to the user and only
+  The controller presents TerraExpManager's concise summary to the user and only
   adds controller-level interpretation when needed.
-  When ExpManager generates or verifies facts that change experiment state,
-  ExpManager updates the factual portions of `memory/ExpRecord.md` by default.
+  When TerraExpManager generates or verifies facts that change experiment state,
+  TerraExpManager updates the factual portions of `memory/ExpRecord.md` by default.
   The controller should not make the handoff read-only unless the request is
   explicitly a dry-run/status-only probe with no persistent record. If a
   read-only probe becomes record-worthy, the controller must either issue a
-  follow-up ExpManager record-update task or state why it is using a direct
+  follow-up TerraExpManager record-update task or state why it is using a direct
   fallback.
-  ExpManager dispatches must name the run/log root. New runs should default to
+  TerraExpManager dispatches must name the run/log root. New runs should default to
   `logs/<experiment-id-or-run-id>/...`; existing `logs_*` roots are acceptable
-  only when the dispatch names them. ExpManager must not create loose
+  only when the dispatch names them. TerraExpManager must not create loose
   root-level `.log`, `.out`, `.err`, CSV, or JSON runtime files.
-- ResultAnalyst: use when existing experiment artifacts need metric-heavy
+- TerraResultAnalyst: use when existing experiment artifacts need metric-heavy
   extraction, threshold/gate tables, anomaly extracts, or typical-step
   comparisons. It writes run-local extract files when evidence is large, but it
   does not launch runs, manage processes, package experiments, update
   `memory/ExpRecord.md` by default, or decide scientific acceptance.
-- Non-core but time-consuming experiment operations are Spark-tier work, not
-  controller busywork. Running audit/eval scripts, watching quiet background
+- Non-core but time-consuming experiment operations are Terra operations work,
+  not controller busywork. Running audit/eval scripts, watching quiet background
   jobs, reading process state, and collecting operational CSV/log outputs
-  should go to `ExpManager` when available. Metric-heavy gate tables from
-  already-written artifacts should go to `ResultAnalyst`. Mechanical edits to
+  should go to `TerraExpManager` when available. Metric-heavy gate tables from
+  already-written artifacts should go to `TerraResultAnalyst`. Mechanical edits to
   experiment runners, packaging scripts, and audit-output fields should go to
-  `SparkImplementer` when they have a bounded brief and do not touch core
+  `TerraImplementer` when they have a bounded brief and do not touch core
   algorithm, reward, training-loop, or checkpoint semantics.
-- ExternalReviewManager: use when raw outside-model text is pasted or when
+- TerraExternalReviewManager: use when raw outside-model text is pasted or when
   inbox/archive/index handoff files are needed. It preserves evidence and
   prepares handoffs; it does not decide whether advice is accepted.
-- WorkflowAuditor: use for read-only consistency checks after subagent/workflow
+- SolWorkflowAuditor: use for read-only consistency checks after subagent/workflow
   config changes, before relying on a complex custom-agent setup, or when role
   boundaries/model settings may have drifted. It reports findings only; the
   controller applies any edits.
 - Implementation review: every subagent-driven implementation task receives a
   task review, final whole-branch review remains required, and accepted findings
   go through fix -> re-review. Do not reduce review frequency to save cost;
-  select `ImplementationReviewerFast`, `ImplementationReviewer`, or
-  `ImplementationReviewerFrontier` by task complexity and risk.
+  select `TerraFastReviewer`, `SolImplementationReviewer`, or
+  `SolImplementationReviewerFrontier` by task complexity and risk.
 - Git and publish work: keep controller-owned by default. Batch status/stage/
   commit/push/PR work at explicit user request or branch finalization; do not
   create high-frequency git subagents for routine per-task commits.
@@ -392,7 +412,7 @@ as core.
 
 Core, ambiguous, or high-risk code work is controller-owned by default when it
 is serial and there is no clear parallelism, isolation, or review-throughput
-benefit. Use `PlanImplementer` when an accepted plan or controller-written task
+benefit. Use `SolPlanImplementer` when an accepted plan or controller-written task
 brief defines a concrete work package whose handoff is worth the communication
 cost:
 algorithm mechanisms, training loops, reward and intrinsic-reward paths,
@@ -404,42 +424,48 @@ config flags that change algorithm behavior. Files such as
 modules under `ha_ctse_process/` are core unless the controller explicitly
 scopes a purely mechanical edit.
 
-Use `PlanImplementerFrontier` only when the controller has a concrete xhigh work
+Use `SolPlanImplementerFrontier` only when the controller has a concrete xhigh work
 package and can state why normal high-reasoning implementation is insufficient:
 unresolved architecture tradeoffs inside the implementation, risky algorithm
 semantics that must be reasoned through while editing, or a high-impact change
 where the implementation itself is part of the design proof. Open-ended
 strategy and final scientific interpretation stay with the main controller.
 
-Use `SparkImplementer` for non-core mechanical work from an accepted plan or
-controller-written task brief: experiment runner scripts, packaging scripts,
-dist manifests, documentation or memory formatting, plotting/CSV/TensorBoard
-field propagation when exact fields are specified, small tests for
-already-specified behavior, and wrapper/config text changes whose effects are
-explicit and isolated.
+Use `LunaSimplePatcher` by default for trivial single-file mechanical work. Use
+`TerraImplementer` for bounded medium-complexity, multi-file non-core work from
+an accepted plan or controller-written task brief: coordinated experiment
+runner or packaging scripts, dist manifests with their consumers, specified
+cross-file metric propagation, documentation tied to a configuration change,
+focused non-core tests, and wrapper/config text changes whose effects are
+explicit and isolated. `SparkExplicitSimplePatcher` is a legacy explicit-only
+exception, not a default implementation tier.
 
 Do not ask the user a vague "should I use an implementer?" question. If the
-controller wants to use `PlanImplementer` or `PlanImplementerFrontier` for core
+controller wants to use `SolPlanImplementer` or `SolPlanImplementerFrontier` for core
 work, first present the concrete package: scope, owned files, forbidden files,
 responsibilities, why a subagent helps, model/reasoning tier, and verification
 gates. If that package is not explicit, keep the core implementation in the
-controller session. For non-core mechanical work inside an already authorized
-subagent workflow, the controller may assign `SparkImplementer` directly without
-escalating to a higher-tier implementer.
+controller session. For non-core work inside an already authorized subagent
+workflow, route trivial single-file work to `LunaSimplePatcher` and bounded
+medium-complexity multi-file work to `TerraImplementer` without escalating to a
+Sol implementer. Only use `SparkExplicitSimplePatcher` when the brief contains
+its literal legacy opt-in line.
 
 Time cost alone does not make non-core experiment work controller-owned. If a
 task is mostly running scripts, monitoring logs/processes, or collecting
-operational CSV/log facts, delegate it to `ExpManager` when custom agents are
+operational CSV/log facts, delegate it to `TerraExpManager` when custom agents are
 available. If it is a metric-heavy gate read from already-written artifacts,
-use `ResultAnalyst`. If it is a bounded mechanical script/metric-field change,
-use `SparkImplementer`. Keep the main controller focused on deciding what the
-facts mean and what to do next.
+use `TerraResultAnalyst`. If it is a bounded medium-complexity multi-file
+script/metric-field change, use `TerraImplementer`. Keep the main controller
+focused on deciding what the facts mean and what to do next.
 
-Use `simple-patcher` only for trivial single-file mechanical fixes. Use
-`ExpManager` for experiment operations and factual records, not general code
-implementation. If a Spark-role task expands into core code or algorithm
-judgment, the worker must stop and escalate to the controller or
-`PlanImplementer`.
+Use `LunaSimplePatcher` by default for trivial single-file mechanical fixes.
+Use `SparkExplicitSimplePatcher` only when the dispatch includes `Legacy Spark
+opt-in: explicitly requested`; without that exact line it must return
+`NEEDS_CONTEXT`. Use `TerraExpManager` for experiment operations and factual
+records, not general code implementation. A Spark task that expands into core
+code or algorithm judgment must stop and escalate to the controller or
+`SolPlanImplementer`.
 
 Implementation subagents should not receive open-ended prose prompts. For plan
 work, dispatch from an accepted plan, a task brief path, or an explicit
@@ -450,32 +476,32 @@ policy, and core/non-core tier.
 Use `docs/superpowers/subagent-templates/hmasd-dispatch-templates.md` for
 standard handoff prompts and return formats.
 
-## ExpManager And ResultAnalyst Workflow
+## TerraExpManager And TerraResultAnalyst Workflow
 
-`ExpManager` owns experiment operations and factual run-state records.
-`ResultAnalyst` owns metric-heavy reads from artifacts that already exist. The
+`TerraExpManager` owns experiment operations and factual run-state records.
+`TerraResultAnalyst` owns metric-heavy reads from artifacts that already exist. The
 controller owns the scientific interpretation and next decision.
 
 Default sequence:
 
-1. ExpManager prepares the runner/package/command, launches or checks the run,
+1. TerraExpManager prepares the runner/package/command, launches or checks the run,
    writes status files and transcripts, and updates factual `memory/ExpRecord.md`
    fields when experiment state changes.
-2. ResultAnalyst reads existing artifacts such as CSVs, eval rows,
+2. TerraResultAnalyst reads existing artifacts such as CSVs, eval rows,
    `runner_status.txt`, `runner_output.log`, manifests, checkpoints, and
    controller-provided gate definitions. It writes large evidence to run-local
    files such as `metric_extract.md`, `gate_read.md`, or `error_extract.md`.
-3. The controller integrates ExpManager's run-state facts and ResultAnalyst's
+3. The controller integrates TerraExpManager's run-state facts and TerraResultAnalyst's
    metric/gate evidence, then decides pass/fail/defer, acceptance, reward
    gating, and next action.
-4. ExpManager records any follow-up factual experiment status only when the
-   controller routes that update. LongTimeMemoryManager syncs accepted
+4. TerraExpManager records any follow-up factual experiment status only when the
+   controller routes that update. TerraLongTimeMemoryManager syncs accepted
    conclusions into compact memory or LTM when project memory should change.
 
-ExpManager and ResultAnalyst can run in the same evidence wave only when
-ResultAnalyst reads already-written artifacts and neither agent writes the same
+TerraExpManager and TerraResultAnalyst can run in the same evidence wave only when
+TerraResultAnalyst reads already-written artifacts and neither agent writes the same
 run directory, package path, source file, or `memory/ExpRecord.md` row. If
-ExpManager is still creating artifacts, launching the run, or updating the same
+TerraExpManager is still creating artifacts, launching the run, or updating the same
 experiment record, run the phases sequentially.
 
 ## Pre-Flight Review
@@ -517,12 +543,12 @@ smaller waves only when scopes are fuzzy, tests share mutable state, or
 integration risk is high.
 
 Default to controller-local execution for serial core tasks. Mix
-`PlanImplementer`, `PlanImplementerFrontier`, and `SparkImplementer` according
+`SolPlanImplementer`, `SolPlanImplementerFrontier`, and `TerraImplementer` according
 to task tier. Sidecar
 read-only or evidence tasks can also run in the same wave when they do not
-share state: `codebase-scout` for mapping, `ResultAnalyst` for existing
-artifact metrics, `ExpManager` for process/run-state facts, `test-runner` for
-focused verification, and `WorkflowAuditor` for config drift. Do not run two
+share state: `LunaCodebaseScout` for mapping, `TerraResultAnalyst` for existing
+artifact metrics, `TerraExpManager` for process/run-state facts, `LunaTestRunner` for
+focused verification, and `SolWorkflowAuditor` for config drift. Do not run two
 agents that both write the same memory row, run directory, package path, or
 source file.
 
@@ -603,89 +629,92 @@ mean spawning a subagent when the work has no persistent state impact.
 
 - Plan accepted, changed, completed, or abandoned: sync
   `memory/IMPLEMENTATION_PLAN.md`, `memory/CURRENT_WORK.md`, and relevant LTM
-  archive entries directly or through LongTimeMemoryManager.
+  archive entries directly or through TerraLongTimeMemoryManager.
 - Superpowers execution-plan implementation: classify each task first. Keep
   serial core, ambiguous, or high-risk code in the controller session by
-  default unless the plan provides a concrete `PlanImplementer` or
-  `PlanImplementerFrontier` package and the user has authorized that handoff.
-  Use `SparkImplementer` for non-core
-  mechanical implementation inside an authorized workflow. Group independent
+  default unless the plan provides a concrete `SolPlanImplementer` or
+  `SolPlanImplementerFrontier` package and the user has authorized that handoff.
+  Use `LunaSimplePatcher` by default for trivial single-file mechanical
+  implementation and use `TerraImplementer` for bounded medium-complexity,
+  multi-file non-core implementation inside an authorized workflow.
+  `SparkExplicitSimplePatcher` is available only when the dispatch contains its
+  literal legacy opt-in phrase. Group independent
   tasks into Superpowers-style parallel waves with disjoint file ownership and
   dispatch each whole clean wave in the same response. Read
   `.superpowers/sdd/progress.md` before dispatch. Give each worker a task brief
   path and report path, and require short-status chat output plus a full report
   file. Prefer file paths over pasted plan history in every dispatch.
   Run the required task reviewers after a wave, using the reviewer tier that
-  matches each task's complexity and risk. Run `ImplementationReviewerFrontier`
-  for final whole-branch review. Use `simple-patcher` only for trivial
-  single-file mechanical fixes. If a task requires architecture or algorithm
+  matches each task's complexity and risk. Run `SolImplementationReviewerFrontier`
+  for final whole-branch review. Do not route default simple work to Terra or
+  Spark. If a task requires architecture or algorithm
   strategy beyond the accepted plan, keep it with the main controller or create
-  a new explicit `PlanImplementerFrontier` work package before delegation.
-- Code changes verified: ask LongTimeMemoryManager to sync memory if project
+  a new explicit `SolPlanImplementerFrontier` work package before delegation.
+- Code changes verified: ask TerraLongTimeMemoryManager to sync memory if project
   direction, algorithm behavior, experiment workflow, known risks, or next
   actions changed. For trivial edits, record that no memory update is needed.
-- Meaningful experiment launch: ask ExpManager for the factual record, command,
-  package, and handoff. Use LongTimeMemoryManager only if the launch changes
+- Meaningful experiment launch: ask TerraExpManager for the factual record, command,
+  package, and handoff. Use TerraLongTimeMemoryManager only if the launch changes
   current objective, plan stage, principle state, or archive-worthy context.
 - Experiment handoff ready: the controller must brief the user explicitly,
   not only update `memory/ExpRecord.md`. The brief must include the experiment
   name(s), round/gate being answered, reason for running, exact command or
   script, key flags/parameters, metrics/log fields to monitor, pass/fail or
   next-decision criteria, and the follow-up action for likely outcomes.
-- Experiment logs/results reviewed: ExpManager records factual status in
+- Experiment logs/results reviewed: TerraExpManager records factual status in
   `memory/ExpRecord.md`; the controller owns the substantive interpretation;
   the controller gives the user a situation/meaning/next-plan/recommendation
-  readout; LongTimeMemoryManager syncs compact memory and LTM archives from the
+  readout; TerraLongTimeMemoryManager syncs compact memory and LTM archives from the
   accepted conclusion.
-- Metric-heavy result reads: ResultAnalyst produces bounded metric/gate tables,
+- Metric-heavy result reads: TerraResultAnalyst produces bounded metric/gate tables,
   typical-step comparisons, and run-local extracts from existing artifacts.
-  ExpManager remains responsible for process/run-state facts and factual
+  TerraExpManager remains responsible for process/run-state facts and factual
   `memory/ExpRecord.md` updates; the controller remains responsible for
   scientific interpretation and next actions.
-- Experiment progress requested: route the factual inspection to ExpManager
+- Experiment progress requested: route the factual inspection to TerraExpManager
   when custom agents are available. The controller should avoid duplicating the
-  raw querying work; it should relay ExpManager's summary, then separately state
+  raw querying work; it should relay TerraExpManager's summary, then separately state
   any interpretation, risks, or next action, including whether the correct move
   is wait, inspect another artifact, or change the plan.
-- Experiment result interpretation uses a two-layer record. ExpManager owns
+- Experiment result interpretation uses a two-layer record. TerraExpManager owns
   factual fields: run state, commands, files inspected, latest update/eval
   rows, metric tables, failures, and anomalies. The controller owns scientific
   interpretation, accepted/rejected/deferred disposition, and next action. If
   controller interpretation should persist in `ExpRecord.md`, add it only as a
-  clearly labeled decision/interpretation field after ExpManager's factual
-  update, or ask LongTimeMemoryManager to sync the accepted conclusion. The
+  clearly labeled decision/interpretation field after TerraExpManager's factual
+  update, or ask TerraLongTimeMemoryManager to sync the accepted conclusion. The
   user-facing readout must say whether the result permits any reward or core
   MARL change, or keeps those changes blocked.
-- Non-core experiment execution requested: prefer Spark-tier delegation even
-  when the task is small. Sequential audit/eval runs, quiet-console monitoring,
-  and command-output capture belong to `ExpManager`; metric-heavy gate tables
-  from already-written artifacts belong to `ResultAnalyst`. If the controller
+- Non-core experiment execution requested: prefer Terra operations delegation
+  even when the task is small. Sequential audit/eval runs, quiet-console monitoring,
+  and command-output capture belong to `TerraExpManager`; metric-heavy gate tables
+  from already-written artifacts belong to `TerraResultAnalyst`. If the controller
   needs an immediate blocking fact that is faster to read directly, it may do
-  so. If direct fallback is used because ExpManager or ResultAnalyst is
+  so. If direct fallback is used because TerraExpManager or TerraResultAnalyst is
   unavailable, blocked, or failed, state that explicitly in the user-facing
   report.
-- Long-running or quiet-console ExpManager tasks must use a file-based status
+- Long-running or quiet-console TerraExpManager tasks must use a file-based status
   contract instead of relying on subagent chat. Before each command starts,
-  ExpManager creates or updates a status file under the assigned run/log root,
+  TerraExpManager creates or updates a status file under the assigned run/log root,
   normally `runner_status.txt`, with command, start time, expected output path,
   current phase, and PID when available. It writes stdout/stderr to
   `runner_output.log` or an equivalent transcript under that same root when
   practical, and updates the status file after each command completes or fails.
   Sequential batches are split into atomic phases with a status update before
   the next command starts.
-- ExpManager tasks must use a context-budget contract. The controller should
+- TerraExpManager tasks must use a context-budget contract. The controller should
   ask for bounded reads, metric tables, targeted error extracts, and file paths
   rather than pasted full logs, full CSVs, traceback clusters, or long command
-  transcripts. ExpManager writes large evidence to files such as
+  transcripts. TerraExpManager writes large evidence to files such as
   `expmanager_checkpoint.md`, `metric_extract.md`, `error_extract.md`, or a
   package handoff under the run/package directory, then returns only a compact
   status.
-- Split ExpManager work into atomic phases: package/runner preparation, launch,
+- Split TerraExpManager work into atomic phases: package/runner preparation, launch,
   progress check, metric extraction, and ExpRecord update. For multi-phase or
-  long-running work, ExpManager updates `expmanager_checkpoint.md` before
+  long-running work, TerraExpManager updates `expmanager_checkpoint.md` before
   moving to the next major phase. If context grows too large or compaction risk
-  appears, ExpManager checkpoints and exits cleanly; the controller spawns a
-  fresh ExpManager continuation from the checkpoint instead of waiting for the
+  appears, TerraExpManager checkpoints and exits cleanly; the controller spawns a
+  fresh TerraExpManager continuation from the checkpoint instead of waiting for the
   old chat to fail.
 - Controller waits on long-running or evidence-heavy subagent tasks with
   bounded soft timeouts. A `wait_agent` timeout means only that chat has not
@@ -700,10 +729,10 @@ mean spawning a subagent when the work has no persistent state impact.
   a grace check. If an urgent user answer is needed, the controller may do a
   read-only status peek, but must not terminate the original subagent merely
   because the peek finished first.
-- External review pasted: ExternalReviewManager archives raw text first;
-  LongTimeMemoryManager may update memory only after reading the raw archive
+- External review pasted: TerraExternalReviewManager archives raw text first;
+  TerraLongTimeMemoryManager may update memory only after reading the raw archive
   entry.
-- Subagent/workflow config changed: run or consider a WorkflowAuditor read-only
+- Subagent/workflow config changed: run or consider a SolWorkflowAuditor read-only
   consistency check when the change touches multiple protocol files, model
   settings, role boundaries, or official custom-agent runtime behavior. For
   narrow edits, the controller may validate directly and report that no audit
@@ -720,32 +749,32 @@ Use `memory/CURRENT_WORK.md`, `memory/ALGORITHM_PRINCIPLES.md`,
 memory. Use `memory/LTM/` only for historical archives or when compact memory
 points there.
 
-ExpManager records experiment facts, scripts, packages, commands, logs, and
-operational conclusions. `memory/ExpRecord.md` factual updates are ExpManager's
-default responsibility whenever the experiment state changes. LongTimeMemoryManager
+TerraExpManager records experiment facts, scripts, packages, commands, logs, and
+operational conclusions. `memory/ExpRecord.md` factual updates are TerraExpManager's
+default responsibility whenever the experiment state changes. TerraLongTimeMemoryManager
 may assess memory impact and maintain records from those facts, but the main
 controller owns substantive experiment interpretation and execution decisions.
 
-ResultAnalyst extracts metrics and gate evidence from existing run artifacts.
+TerraResultAnalyst extracts metrics and gate evidence from existing run artifacts.
 It should write large evidence to run-local files such as `metric_extract.md`
 or `gate_read.md` and return compact summaries. It does not update
 `memory/ExpRecord.md` by default; when extracted facts should persist, the
-controller routes the factual record update to ExpManager or asks
-LongTimeMemoryManager to sync accepted conclusions.
+controller routes the factual record update to TerraExpManager or asks
+TerraLongTimeMemoryManager to sync accepted conclusions.
 
-WorkflowAuditor audits Codex workflow consistency only. It is read-only and
+SolWorkflowAuditor audits Codex workflow consistency only. It is read-only and
 does not own controller behavior, lifecycle management, memory updates, or
 subagent spawning.
 
-ExternalReviewManager records copy-paste Claude, GPT-5.5 Pro, and Gemini
+TerraExternalReviewManager records copy-paste Claude, GPT-5.5 Pro, and Gemini
 review rounds. It must preserve raw pasted model text in
 `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` before summarizing.
-LongTimeMemoryManager may assess and apply memory updates from that advice,
+TerraLongTimeMemoryManager may assess and apply memory updates from that advice,
 but the main controller owns whether the advice is accepted, rejected,
 deferred, or used for execution.
 
-ExternalReviewManager summaries and handoffs are indexes, not evidence.
-LongTimeMemoryManager must read the referenced raw archive text before making a
+TerraExternalReviewManager summaries and handoffs are indexes, not evidence.
+TerraLongTimeMemoryManager must read the referenced raw archive text before making a
 memory update or recommendation from outside advice. If raw text is missing,
 ask for recovery or mark the memory update as incomplete rather than promoting
 a summary.

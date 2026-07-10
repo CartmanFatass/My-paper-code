@@ -66,43 +66,25 @@ hand-picked fixed duration in a short run.  The important question is whether
 HA-CTSE can reconstruct HMASD's skill-discovery, skill-differentiation, and
 actually-work intrinsic drive under asynchronous skill lifetimes.
 
-## Round 24 Assignment-to-Behavior Bridge (planned)
+## Round 24 Assignment-to-Behavior Bridge (completed gate)
 
-Status: diagnostics-first / behavior-window q_d probe implemented reward-off /
-no reward changes until Round 3 gates pass. 2026-07-09: R24 frozen q_d core
-Tasks 1-4 complete and reviewed; Task4 runner wiring + ExpRecord flow is complete,
-and `EXP-20260709-r24-frozen-qd-null-probes` is launch-ready with frozen-null
-export enabled.
+Status: R24-1 FAIL accepted 2026-07-09 per external review Round 5 (GPT-5.5 xhigh, SUPPORTS_WITH_CONDITIONS). Staged disposition:
 
-2026-07-08 update: `EXP-20260708-r24-qd-null-control-cloud-handoff`
-completed in 64-env cloud seed1/seed2 at 320k and failed the q_d reward-off gate
-on the latest metrics; q_A->behavior evidence remains under active diagnostic
-refinement and q_D/q_d rewards remain blocked.
-2026-07-09 update: task stack completed for R24 frozen q_d core:
-- `ha_ctse_process/r24_qd_dataset.py` now exports detached windows to
-  `<log_dir>/r24_qd_windows`.
-- `scripts/analyze_r24_qd_frozen_nulls.py` added frozen variants and grouped
-  null-control logic.
-- `tests/r24_qd_frozen_nulls_test.py` now guards grouped null controls and
-  fixed dataset schema checks.
-  Verification: 5 passed (frozen nulls) and 18 passed (team-condition + frozen
-  nulls), and reviewer re-review approved.
-- Launch command for frozen-null readout is:
-  `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`
-  (cloud 64env, 320k seeds).
+**R24-1 (team-conditioned behavior-window q_d gate)**: FAIL accepted with wording condition: "fail under the tested policies and current diagnostic setup" (3 of 4 policies collapsed), NOT a categorical universal negative. All four 320k cloud runs FAIL all core gates (residual_gain -0.0319 to +0.0153 << 0.05 threshold; positive_frac < 0.60; real loses to behavior_only in 3 of 4 seeds). Cross-seed consistent: no team-conditioned evidence (real - behavior_only negative in both qAon seeds). Healthy qAon/seed1 policy failure reinforces mechanism-fail diagnosis. q_d/q_D reward paths remain permanently BLOCKED on this evidence line.
 
-Source: External review Round 4 continuation in
-`memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` (accepted into compact memory
-on 2026-07-07).
+**R24-2/R24-3 (low-only q_d reward / q_D re-probe)**: BLOCKED/CLOSED on R24-1 evidence line. No reward-arm execution until mechanism changes the setting.
 
-Next diagnostic path:
+**D2 (frozen analyzer early-stopping sensitivity re-run)**: APPROVED-DEFERRED with conditions for archival solidity only (NOT confirmatory, NOT gate-reset). Conditions per Round 5 advice: (i) separate validation split, (ii) identical stopping rules across variants, (iii) report all outcomes (negatives + unchanged negatives), (iv) single device class all-GPU, (v) unexpected pass reopens instrument-validity only, does NOT itself justify reward-on. Execution when local GPU frees (post-arm7) or via cloud handoff; do not queue before R24-1/D3 full archival.
 
-- `docs/superpowers/plans/2026-07-08-r24-frozen-qd-null-probes.md`
-- Export detached q_d windows first (`--r24_qd_export_windows` / `r24_qd_windows`
-  `*.npz`) because existing cloud logs only have aggregate diagnostics.
-  This is the required path before any reward-on consideration.
+**D3 (pivot direction to individual-skill behavioral differentiation)**: ACCEPTED pending deconfound. Reviewer proposes minimal diagnostic: blinded behavior-only separability test (predict z_i from post-assignment local action/effect windows vs prior containing agent/duration/phase/pre-window/context), separate from shuffled/fake/duration/agent/pre-window nulls on held-out data, then forced-z_i intervention between/within gate. Detailed design deferred until arm0-vs-arm2 matched-seed deconfound pair (local overnight 2026-07-09 arms 5-7 training) is read. Next step: finalize diagnostic plan + request concretization cross-validation round before implementation.
 
-R23-next disposition:
+Task delivery summary (2026-07-09):
+- `ha_ctse_process/r24_qd_dataset.py` exports detached windows to `<log_dir>/r24_qd_windows`.
+- `scripts/analyze_r24_qd_frozen_nulls.py` analyzes frozen variants with grouped null-control logic.
+- `tests/r24_qd_frozen_nulls_test.py` guards grouped null controls; verified 5+18 tests passed.
+- Cloud 4/4 runs completed (320k each, seeds 1-2); all gates FAIL; peer review Round 5 archived; disposition ACCEPTED 2026-07-09.
+
+R23-next disposition (unchanged):
 
 - Keep the q_A result as high-level validation: `Z -> xi` is now learnable and
   the weak g-info path is superseded for this line.
@@ -113,76 +95,6 @@ R23-next disposition:
 - `q_d` must **exclude focal `z_i`** from assignment context:
   `xi_context_i = xi_-i` (teammate labels and related context only).
 - `q_D` must not read `xi` directly, otherwise it double-counts q_A.
-
-Staged gates:
-
-```text
-R24-0 forced-xi / forced-z behavior audit:
-  Load a q_A reward checkpoint.
-  Force matched states through alternative Z/xi/z_i choices.
-  Roll out H={10,20,50}.
-  Measure action KL, trajectory/effect between-within ratio, persistence ratio,
-  low hidden divergence, and joint-effect distance.
-  Pass only if differences persist beyond one-step action-logit effects.
-  Control against matched-no-q_A, random/early, fake/shuffled, and with-label-repeats.
-
-R24-1 team-conditioned q_d reward-off behavior-window probe:
-  Train/evaluate
-  q_d_full(z_i | local_behavior_window_i, Z, xi_context_i, c, omega)
-  versus q_d_prior(z_i | Z, xi_context_i, c, omega)
-  using held-out CE/NLL residual.
-  Build local_behavior_window with separate action stream and state/effect stream.
-  Require:
-    residual_gain_mean >= 0.05 nats,
-    positive_frac >= 0.60,
-    full_minus_prior_acc_gap >= 0.05,
-    residual beats best null/shortcut by >= 1.3x,
-    shuffled-label and pre-assignment residual near 0,
-    between_within_ratio_h50 > 1.2,
-    persistence and horizon-growth.
-  Do not use raw comm/QoS/coverage/recovery fields as intrinsic targets.
-
-  Implementation update (2026-07-07):
-    `TeamConditionedQDProbe` now has separate action and state/effect encoders.
-    `StandaloneProcessAgent` builds action-window summary features, effect-window
-    summary features, and `xi_context_i` from teammate active skills while
-    excluding the focal skill label.  The probe remains reward-off and diagnostic;
-    held-out shortcut/null controls and the residual-gain gates are still required
-    before any low-only q_d reward arm.
-
-  Implementation update (2026-07-08):
-    `docs/superpowers/plans/2026-07-08-r24-qd-null-controls.md` implemented.
-    `TeamConditionedQDProbe` now logs behavior-only, pre-assignment,
-    shuffled-label, fake-label, and label-baseline controls in addition to the
-    full-vs-prior residual. `SegmentManager.renew()` carries a bounded previous
-    behavior window into the new segment so `q_pre` can test whether current
-    skill labels were already predictable before assignment. This is still
-    reward-off only; the next action is a rerun/read of the q_d probe, not
-    reward injection.
-
-  Implementation update (2026-07-09):
-    Frozen q_d null diagnostic core is completed and reviewed. Grouped control
-    variants preserve within-group label multisets (no global-label fallback),
-    and exported window shards include detached action/effect/condition inputs
-    for offline null analysis.
-
-  External review Round 4 clarification (GPT web, 2026-07-08):
-    `q_behavior` passing is positive evidence for individual behavior semantics,
-    not automatically a shortcut. But if `q_full - q_behavior` is small, the
-    team-conditioned/cooperative claim is not established. `q_pre` is a
-    selection/history confound control, not a pure leakage detector; if `q_pre`
-    is strong, require `q_full - q_pre` and/or forced post-assignment
-    intervention evidence before treating q_d as executed-skill semantics.
-
-R24-2 low-only q_d reward arm:
-  Allowed only after R24-0 and R24-1 pass the full gate set.
-  Use small clipped low-level-only pressure; keep q_A on and q_D reward off.
-
-R24-3 q_D re-probe / reward gate:
-  Allowed only after q_d creates stable behavior separation and passing its gate
-  conditions. First run reward-off q_D on behavior/effect windows with context prior,
-  not xi input. q_D reward can be reconsidered only if residual beats marginal/prior.
-```
 
 Principle status: no `ALGORITHM_PRINCIPLES.md` rewrite yet. The existing contract
 already says `Z -> xi -> effect -> q_D`; R24 is a plan-level gate that prevents

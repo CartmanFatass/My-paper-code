@@ -5,6 +5,17 @@ Updated: 2026-07-09
 Purpose: compact first-read state for the current work only. Full historical
 context is archived under `memory/LTM/`.
 
+## Controller Handoff
+
+- 2026-07-09: R24 execution handed off from the Codex controller to Claude Code.
+  The Claude-side subagent workflow (`.claude/agents/README.md`, cloned from
+  `AGENTS.md`/`.codex/agents/`) now governs delegation; the MARL design
+  cross-validation gate runs through `marl-peer-reviewer` (Codex plugin,
+  gpt-5.5 xhigh). Experiment state below is unchanged by the handoff.
+- Binding handover protocol for all future Claude<->Codex controller switches:
+  `docs/subagents/claude-codex-handover-spec.md` (read at every switch; keep
+  this block current per its section 2).
+
 ## Current Objective
 
 - Reach HMASD-level S7-S1 behavior at roughly 1e6 steps before returning to
@@ -141,72 +152,15 @@ context is archived under `memory/LTM/`.
 
 ## Current Experiment Focus
 
-- `EXP-20260707-r24-assignment-to-behavior-bridge` — diagnostics-complete / gated.
-- 2026-07-08 completed status: `EXP-20260708-r24-qd-null-control-cloud-handoff`
-    reward-off null-control at 320k in both seeds; gate FAIL on latest metrics
-    across both seeds, so no reward path is permitted.
-- 2026-07-09: R24 frozen q_d core diagnostic stack (Tasks 1-4) is implemented and
-    review-approved, including runner wiring and frozen-null artifacts handoff to
-    `memory/ExpRecord.md`.
-  - First gate: forced-xi and forced-z behavior audits from a q_A reward
-    checkpoint, with H={10,20,50}; action/effect distances rose with horizon
-    (`xi_effect 0.17335 -> 0.25677 -> 0.41290`, `z_effect 0.18912 -> 0.27497 ->
-    0.46262`) but this is insufficient for reward gating without matched-null.
-  - Required matched-null forced-audit controls (before any q_D/q_d decision):
-    A) matched architecture, no-q_A reward (`z_assignment_residual_gain = 0.5`,
-    same architecture/checkpoint stage, q_A OFF);
-    B) random-init or early-checkpoint;
-    C) fake/shuffled label control (fake Z or permuted xi labels);
-    D) within-label repeat baseline (same forced labels under different noise seeds,
-    compute between/within).
-  - Required stage-1 gates:
-    `effect_ratio_h50 = effect_qA / effect_control >= 1.3`
-    (strong if >=1.5),
-    `growth_h50-h10` at least 1.3x control growth, and
-    `between_within_ratio_h50 > 1.2`.
-  - Second gate: reward-off q_d behavior-window probe on held-out windows:
-    `log q_d_full(z_i | local_behavior_window_i, Z, xi_context_i, c,omega) -
-    log q_d_prior(z_i | Z, xi_context_i, c,omega)`, where `xi_context_i`
-    excludes focal `z_i`.
-    q_d must use separate action and state/effect streams in `local_behavior_window`,
-    strong prior/subtraction, and null controls (duration/reward/phase/agent
-    shortcuts, matched no-q_A, random/early checkpoint, fake/shuffled labels,
-    pre-assignment windows, between/within repeats).
-    Gate thresholds before any reward: `residual_gain >= 0.05`, `positive_frac >=
-    0.60`, full-prior accuracy gap >= `0.05`, shortcut/null residual ratio >= `1.3x`,
-    shuffled/pre-assignment residual near zero, `between/within_h50 > 1.2`, and
-    persistence/growth across horizons.
-  - Only after matched-null + gate pass plus reward-off q_d probe pass:
-    consider small clipped low-only q_d reward.
-    q_D reward stays blocked; `q_D` re-probe remains reward-off and must not read
-    `xi` directly (`q_D` can only go downstream of q_d behavior separation).
-  - Implementation update (2026-07-07): `ha_ctse_process/team_conditioned_qd.py`
-    and the `StandaloneProcessAgent` R24 q_d plumbing now use a two-stream
-    behavior-window probe:
-    `q_full(z_i | action_window_i, effect_window_i, Z, xi_context_i, c, omega)`
-    versus `q_prior(z_i | Z, xi_context_i, c, omega)`.  `xi_context_i` is a
-    teammate-skill histogram that excludes the focal `z_i`.  This remains
-    reward-off only; held-out/null/shortcut gates still decide whether reward
-    injection is allowed.
-  - Implementation update (2026-07-08): plan
-    `docs/superpowers/plans/2026-07-08-r24-qd-null-controls.md` added and
-    implemented. The q_d probe now also logs behavior-only, pre-assignment
-    window, shuffled-label, fake-label, and label-baseline diagnostics:
-    `q_behavior(z_i | action/effect window)`, `q_pre(z_i | previous
-    pre-assignment window, Z, xi_context_i, c, omega)`, and null residual reads.
-    `SegmentManager.renew()` carries a bounded previous-window summary into the
-    new segment for pre-assignment control. This remains reward-off only.
-  - External review Round 4 (GPT web, 2026-07-08) accepted the reward-off
-    continuation and clarified interpretation:
-    `q_behavior` is not automatically a shortcut; if it beats prior/nulls it is
-    positive evidence for individual skill behavior semantics. However, if
-    `q_full - q_behavior` is small, team-conditioned/cooperative semantics are
-    not proven. `q_pre` is not a pure leakage test or "must be zero" metric; it
-    measures selection/history predictability before execution. If `q_pre` is
-    strong, require post-window gain over pre-window (`q_full - q_pre`) and/or
-    forced intervention evidence before interpreting q_d as executed-skill
-    behavior. Reward remains blocked until seed-consistent q_d residual,
-    null/shortcut controls, and forced-audit between/within gates pass.
+- `EXP-20260709-r24-frozen-qd-null-probes` — completed 4/4 cloud runs with external peer review (Round 5, GPT-5.5 xhigh); disposition ACCEPTED 2026-07-09.
+- R24-1 verdict: **FAIL accepted** with wording condition: "fail under the tested policies and current diagnostic setup" (3 of 4 policies collapsed), NOT a categorical universal negative. q_d/q_D rewards remain BLOCKED on this evidence line.
+- External review Round 5 disposition (raw text verified from DIALOGUE_ARCHIVE.md):
+  - **D1 (R24-1 gate)**: Accepted as FAIL. No existing-data reanalysis would reverse it. q_d/q_D reward paths remain permanently blocked on this evidence line unless a new mechanism changes the setting.
+  - **D2 (sensitivity re-run)**: APPROVED-DEFERRED as a post-hoc instrument-sensitivity check only, NOT as confirmatory. Conditions: (i) separate validation split for early stopping, (ii) identical stopping rules for all variants, (iii) all outcomes reported (including negatives), (iv) single device class all-GPU, (v) if unexpected pass, reopens instrument-validity only, does not itself justify reward-on.
+  - **D3 (pivot direction)**: ACCEPTED. Pivot to individual-skill behavioral differentiation (minimal diagnostic: blinded behavior-only separability vs context/history nulls, then forced-z_i between/within test). Detailed design deferred until arm0-vs-arm2 deconfound pair (running tonight locally) is read.
+  - **Unaffected positives**: q_A actionability (Z->xi) result stands; q_A task-pace observation (coverage 0.7-0.8 @320k vs HMASD 0.7 @480k baseline REF-20260617) pending deconfound.
+- 2026-07-09 update: Frozen q_d null-probe core Tasks 1-4 completed and reviewed; cloud 4/4 runs analyzed (3 CPU, qAoff/seed2 GPU). Gate-read facts: healthy qAon/seed1 and all others FAIL all core gates (real residual_gain -0.0319 to +0.0153 < 0.05 gate; positive_frac < 0.60; real loses to behavior_only in 3 of 4 runs). Cross-seed consistent: team-conditioned evidence absent (real - behavior_only negative in both qAon seeds). Instrument caveat: overfitting bias (loss_full/loss_prior 2.4x-3.7x); frozen residuals ~0/negative while prior in-loop read small positive. Per-seed variability >> arm identity; no q_A-dependence pattern visible. Mechanism-fail likely; D2 re-run worth one pre-registered sensitivity check mainly for publication solidity, not to rescue gate.
+- Local overnight arms 5-7 deconfound (R23 arm0-vs-arm2 seed-matched pairs) resuming; arms 1-4 audits complete. Expected completion ~09:02 UTC+8 2026-07-10. Monitor `train_updates.csv` growth in `logs/r24_overnight_20260709_audit_deconfound/arm*/`.
 - `EXP-20260707-r23-next-mechanism-matrix` — COMPLETE (local 16env, single seed), mixed verdict.
   - **q_A actionability pivot VALIDATED.** arm1 probe residual_gain 0->+0.097; arm2 q_A
     REWARD residual_gain ->+0.222 with forced-Z KL RISING 0.059->0.070 and Z-usage healthy.
@@ -229,37 +183,18 @@ context is archived under `memory/LTM/`.
 
 ## Next Actions
 
-1. Launch/follow `EXP-20260709-r24-frozen-qd-null-probes` in cloud 64env at
-   320k for both seeds with:
-   `EXPORT_QD_WINDOWS=1 RUN_FROZEN_NULL_ANALYSIS=1 bash scripts/run_r24_qd_null_control_cloud_64env.sh`.
-2. Read frozen-null diagnostics from:
-   `r24_qd_windows/*.npz`, `r24_qd_frozen_nulls/*.json|.md`, and
-   `train_updates.csv`; treat strong `q_pre`, behavior-only, or null residual as
-   confounds unless post-assignment full-minus-null controls pass.
-3. Re-run matched-null `q_d` diagnostics under the completed core stack:
-   `q_d_full(z_i | local_behavior_window_i, Z, xi_context_i, c, omega) - q_d_prior(...)`,
-   with separate action/state-evidence streams, matched-null controls, and the Round-3
-   gates: residual gain/positive fraction, full-prior accuracy gap, shortcut/null
-   dominance, horizon persistence/growth, shuffled/pre-assignment near-zero residual,
-   and between/within_h50 ratio.
-   Interpret `q_behavior` as individual skill behavior evidence when it beats
-   nulls; interpret strong `q_pre` as selection/history confound unless the
-   post-assignment window exceeds it.
-4. Only after full Round-3 gate pass and seed-consistent evidence, run low-only
-   q_d reward and then reward-off `q_D` re-probe with behavior-window targets.
-5. Optional/lower priority: cloud 64env matched rerun of the R23 matrix (both seeds)
-   for a non-confounded task read and a clean arm2 320k eval.
+1. Monitor completion of `EXP-20260709-local-overnight-audit-power-r23-deconfound` arms 5-7 (R23 arm0-vs-arm2 matched-seed deconfound pair training) running locally overnight; expected ETA ~09:02 UTC+8 2026-07-10. Read `train_updates.csv` and `eval_episodes.csv` to extract coverage/throughput curves and task-read unconfoundedness vs single-seed R23 arm2 result.
+2. Optional after arms 5-7 completion: D2 approval-deferred sensitivity re-run (early-stopping + all variants + pre-registered acceptance criterion) can be queued for cloud execution when local GPU frees (post-arm7 ~day 2026-07-10) or handed off to user as a standalone diagnostic task. Set conditions per Round 5 advice: separate validation split, identical rules, all outcomes reported, single all-GPU device class, unexpected pass reopens instrument only.
+3. Pending D3 concretization: after arm0-vs-arm2 deconfound read, finalize minimal reward-off diagnostic design for individual-skill behavioral differentiation (blinded behavior-only separability + forced-z_i between/within gate) and get explicit design cross-validation round before implementation. Archive D3 diagnostic design plan to IMPLEMENTATION_PLAN.md once approved.
+4. Do NOT proceed to q_d/q_D reward arms, q_D re-probe design changes, or scale-up until R24-1 disposition fully archived and D3 diagnostic design approved. q_d/q_D rewards remain BLOCKED by R24-1 FAIL + wording condition.
 
 ## Do Not Do Yet
 
-- Do not enable `q_D` or `q_d` reward, `q_D` coefficient sweeps, or more
-  q_D target engineering as the primary branch until the full Round-3 gate stack
-  passes.
-- Do not launch 960k scale/task runs from R23/q_A before the xi-to-behavior bridge
-  is validated and the task read is unconfounded.
-- Do not launch seed2 depth for the weak g-info coefficient line.
-- Do not add new kappa/hazard/DADS/communication-intrinsic mechanisms before
-  the R24 assignment-to-behavior bridge is resolved.
+- Do not enable `q_D` or `q_d` reward, q_D/q_d coefficient sweeps, or q_D target engineering as the primary branch. R24-1 FAIL accepted 2026-07-09; q_d/q_D rewards remain BLOCKED until D3 diagnostic design passes cross-validation and shows individual-skill behavioral differentiation is real.
+- Do not launch 960k scale/task runs from R23/q_A before arm0-vs-arm2 deconfound is read (locally tonight/2026-07-10) and R24-1 disposition is fully archived.
+- Do not launch seed2 depth for the weak g-info coefficient line until R24-1/D3 pivot resolves.
+- Do not add new kappa/hazard/DADS/communication-intrinsic mechanisms before the R24 assignment-to-behavior bridge is resolved (R24-1 FAIL accepted, D3 pivot direction registered, diagnostic design pending).
+- Do not run D2 sensitivity re-run on the frozen analyzer until all four conditions are confirmed (separate validation split, identical stopping rules, all outcomes reported, single all-GPU device class) and q_d/q_D reward paths remain blocked even if D2 passes (instrument-validity reopened only, per Round 5 advice).
 
 ## LTM Archive Pointers
 

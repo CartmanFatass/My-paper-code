@@ -16,6 +16,7 @@ README = ROOT / ".codex" / "agents" / "README.md"
 TEMPLATE = ROOT / "docs" / "superpowers" / "subagent-templates" / "hmasd-dispatch-templates.md"
 REFERENCE = ROOT / "docs" / "subagents" / "hmasd-subagent-workflow-reference.md"
 AGENT_DIR = ROOT / ".codex" / "agents"
+CONFIG = ROOT / ".codex" / "config.toml"
 
 STATUS_TERMS = ("DONE", "DONE_WITH_CONCERNS", "NEEDS_CONTEXT", "BLOCKED")
 RUNTIME_FIELDS = (
@@ -28,6 +29,65 @@ RUNTIME_FIELDS = (
     "nickname_candidates",
     "developer_instructions",
 )
+
+EXPECTED_PROFILES = {
+    "LunaCodebaseScout": ("luna-codebase-scout.toml", "gpt-5.6-luna", "low"),
+    "LunaSimplePatcher": ("luna-simple-patcher.toml", "gpt-5.6-luna", "low"),
+    "LunaTestRunner": ("luna-test-runner.toml", "gpt-5.6-luna", "low"),
+    "SparkExplicitSimplePatcher": (
+        "spark-explicit-simple-patcher.toml",
+        "gpt-5.3-codex-spark",
+        "low",
+    ),
+    "TerraImplementer": ("terra-implementer.toml", "gpt-5.6-terra", "high"),
+    "TerraFastReviewer": ("terra-fast-reviewer.toml", "gpt-5.6-terra", "medium"),
+    "TerraExpManager": ("terra-exp-manager.toml", "gpt-5.6-terra", "medium"),
+    "TerraExternalReviewManager": (
+        "terra-external-review-manager.toml",
+        "gpt-5.6-terra",
+        "medium",
+    ),
+    "TerraLongTimeMemoryManager": (
+        "terra-long-time-memory-manager.toml",
+        "gpt-5.6-terra",
+        "high",
+    ),
+    "TerraResultAnalyst": ("terra-result-analyst.toml", "gpt-5.6-terra", "high"),
+    "SolPlanImplementer": ("sol-plan-implementer.toml", "gpt-5.6-sol", "high"),
+    "SolImplementationReviewer": (
+        "sol-implementation-reviewer.toml",
+        "gpt-5.6-sol",
+        "high",
+    ),
+    "SolWorkflowAuditor": ("sol-workflow-auditor.toml", "gpt-5.6-sol", "high"),
+    "SolPlanImplementerFrontier": (
+        "sol-plan-implementer-frontier.toml",
+        "gpt-5.6-sol",
+        "xhigh",
+    ),
+    "SolImplementationReviewerFrontier": (
+        "sol-implementation-reviewer-frontier.toml",
+        "gpt-5.6-sol",
+        "xhigh",
+    ),
+}
+
+GENERIC_AGENT_NAMES = {
+    "codebase-scout",
+    "simple-patcher",
+    "test-runner",
+    "SparkImplementer",
+    "PlanImplementer",
+    "PlanImplementerFrontier",
+    "ImplementationReviewerFast",
+    "ImplementationReviewer",
+    "ImplementationReviewerFrontier",
+    "ExpManager",
+    "ResultAnalyst",
+    "ExternalReviewManager",
+    "LongTimeMemoryManager",
+    "WorkflowAuditor",
+}
 
 REQUIRED_TEXT = {
     AGENTS: (
@@ -47,6 +107,10 @@ REQUIRED_TEXT = {
         "Code Quality",
         "Do not retry with the same model",
         "batch-fix brief",
+        "LunaSimplePatcher",
+        "TerraImplementer",
+        "SolPlanImplementer",
+        "SparkExplicitSimplePatcher",
     ),
     README: (
         "Terminal Status Protocol",
@@ -65,6 +129,10 @@ REQUIRED_TEXT = {
         "Spec Compliance",
         "Code Quality",
         "one batch-fix brief",
+        "LunaSimplePatcher",
+        "TerraImplementer",
+        "SolPlanImplementer",
+        "SparkExplicitSimplePatcher",
     ),
     TEMPLATE: (
         "Shared Short Reply Contract",
@@ -75,7 +143,7 @@ REQUIRED_TEXT = {
         "Loose repository-root runtime files",
         "PlanImplementer Dispatch",
         "PlanImplementerFrontier Dispatch",
-        "SparkImplementer Dispatch",
+        "SparkExplicitSimplePatcher Dispatch",
         "ExpManager Dispatch",
         "ResultAnalyst Dispatch",
         "ImplementationReviewer Dispatch",
@@ -86,6 +154,10 @@ REQUIRED_TEXT = {
         "TestRunner Dispatch",
         "CodebaseScout Dispatch",
         "WorkflowAuditor Dispatch",
+        "LunaSimplePatcher",
+        "TerraImplementer",
+        "SolPlanImplementer",
+        "SparkExplicitSimplePatcher",
     ),
     REFERENCE: (
         "Status: exploratory living reference",
@@ -121,11 +193,9 @@ FORBIDDEN_PATTERNS = (
 )
 
 REQUIRED_AGENT_NAMES = {
-    "PlanImplementer",
-    "PlanImplementerFrontier",
-    "ImplementationReviewerFast",
-    "ImplementationReviewer",
-    "ImplementationReviewerFrontier",
+    "TerraFastReviewer",
+    "SolImplementationReviewer",
+    "SolImplementationReviewerFrontier",
 }
 
 
@@ -174,6 +244,63 @@ def check_toml(path: Path) -> None:
             raise AssertionError(f"{path} developer_instructions missing short reply field {phrase!r}")
 
 
+def check_agent_identity_contract(toml_files: list[Path]) -> None:
+    config = tomllib.loads(read_text(CONFIG))
+    raw_agents = config.get("agents")
+    if not isinstance(raw_agents, dict):
+        raise AssertionError(f"{CONFIG} missing [agents] table")
+    registry = {
+        name: entry
+        for name, entry in raw_agents.items()
+        if isinstance(entry, dict) and "config_file" in entry
+    }
+    expected_names = set(EXPECTED_PROFILES)
+    registry_names = set(registry)
+    missing = sorted(expected_names - registry_names)
+    unexpected = sorted(registry_names - expected_names)
+    if missing or unexpected:
+        raise AssertionError(
+            f"{CONFIG} agent registry mismatch: missing={missing}, unexpected={unexpected}"
+        )
+    generic = sorted(GENERIC_AGENT_NAMES & registry_names)
+    if generic:
+        raise AssertionError(f"{CONFIG} retains generic agent aliases: {generic}")
+
+    expected_files = {profile[0] for profile in EXPECTED_PROFILES.values()}
+    actual_files = {path.name for path in toml_files}
+    missing_files = sorted(expected_files - actual_files)
+    unexpected_files = sorted(actual_files - expected_files)
+    if missing_files or unexpected_files:
+        raise AssertionError(
+            f"{AGENT_DIR} profile files mismatch: "
+            f"missing={missing_files}, unexpected={unexpected_files}"
+        )
+
+    for name, (filename, model, effort) in EXPECTED_PROFILES.items():
+        entry = registry[name]
+        config_file = str(entry["config_file"])
+        expected_config_file = f"./agents/{filename}"
+        if config_file != expected_config_file:
+            raise AssertionError(
+                f"{CONFIG} registration for {name} points to {config_file!r}, "
+                f"expected {expected_config_file!r}"
+            )
+        profile_path = AGENT_DIR / filename
+        data = tomllib.loads(read_text(profile_path))
+        if data.get("name") != name:
+            raise AssertionError(f"{profile_path} name does not match {name}")
+        if data.get("model") != model:
+            raise AssertionError(f"{profile_path} model does not match {model}")
+        if data.get("model_reasoning_effort") != effort:
+            raise AssertionError(f"{profile_path} effort does not match {effort}")
+        if name == "SparkExplicitSimplePatcher":
+            instructions = str(data.get("developer_instructions", ""))
+            if "Legacy Spark opt-in: explicitly requested" not in instructions:
+                raise AssertionError(
+                    f"{profile_path} missing explicit Legacy Spark opt-in contract"
+                )
+
+
 def check_reviewer_tiers(toml_files: list[Path]) -> None:
     names: set[str] = set()
     for path in toml_files:
@@ -186,13 +313,14 @@ def check_reviewer_tiers(toml_files: list[Path]) -> None:
 
 def main() -> int:
     try:
+        toml_files = sorted(AGENT_DIR.glob("*.toml"))
+        if not toml_files:
+            raise AssertionError(f"no TOML files found under {AGENT_DIR}")
+        check_agent_identity_contract(toml_files)
         for path, terms in REQUIRED_TEXT.items():
             require_terms(path, terms)
         for path in (AGENTS, README, TEMPLATE):
             check_forbidden(path)
-        toml_files = sorted(AGENT_DIR.glob("*.toml"))
-        if not toml_files:
-            raise AssertionError(f"no TOML files found under {AGENT_DIR}")
         check_reviewer_tiers(toml_files)
         for path in toml_files:
             check_toml(path)

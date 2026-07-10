@@ -6,7 +6,8 @@
 
 **Architecture:** The runtime registry in `.codex/config.toml` and every standalone TOML profile become the source of truth for a model-prefixed agent name. Luna owns simple tasks, Terra owns medium-complexity non-core work, Sol owns core/high-risk work, and Spark is an explicit-only legacy exception. The protocol validator encodes the complete name/model/effort matrix so documentation drift and accidental generic aliases fail locally.
 
-**Tech Stack:** TOML custom-agent profiles, Python standard-library `tomllib`, PowerShell, ripgrep, Git.
+**Tech Stack:** TOML custom-agent profiles, Python `tomllib` with the existing
+`tomli` fallback, PowerShell, ripgrep, Git.
 
 ## Global Constraints
 
@@ -237,7 +238,7 @@ generic `[agents."..."]` registration behind.
 Run:
 
 ```powershell
-python -c "import pathlib,runpy,tomllib; root=pathlib.Path('.'); cfg=tomllib.loads((root/'.codex/config.toml').read_text(encoding='utf-8')); registry={name: value for name,value in cfg['agents'].items() if isinstance(value,dict) and 'config_file' in value}; expected=runpy.run_path('scripts/validate_hmasd_subagent_protocol.py')['EXPECTED_PROFILES']; assert set(registry)==set(expected); [tomllib.loads((root/'.codex'/entry['config_file'].removeprefix('./')).read_text(encoding='utf-8')) for entry in registry.values()]; print('profile_contract_ok')"
+python -c "import pathlib,runpy; context=runpy.run_path('scripts/validate_hmasd_subagent_protocol.py'); tomllib=context['tomllib']; root=pathlib.Path('.'); cfg=tomllib.loads((root/'.codex/config.toml').read_text(encoding='utf-8')); registry={name: value for name,value in cfg['agents'].items() if isinstance(value,dict) and 'config_file' in value}; expected=context['EXPECTED_PROFILES']; assert set(registry)==set(expected); [tomllib.loads((root/'.codex'/entry['config_file'].removeprefix('./')).read_text(encoding='utf-8')) for entry in registry.values()]; print('profile_contract_ok')"
 ```
 
 Expected: `profile_contract_ok`. Full documentation validation waits until
@@ -314,7 +315,7 @@ Expected: `HMASD subagent protocol validation ok`.
 Run:
 
 ```powershell
-python -c "import pathlib,runpy,tomllib; root=pathlib.Path('.'); cfg=tomllib.loads((root/'.codex/config.toml').read_text(encoding='utf-8')); registry={name: value for name,value in cfg['agents'].items() if isinstance(value,dict) and 'config_file' in value}; expected=runpy.run_path('scripts/validate_hmasd_subagent_protocol.py')['EXPECTED_PROFILES']; assert set(registry)==set(expected); [tomllib.loads((root/'.codex'/entry['config_file'].removeprefix('./')).read_text(encoding='utf-8')) for entry in registry.values()]; print('toml_registry_ok')"
+python -c "import pathlib,runpy; context=runpy.run_path('scripts/validate_hmasd_subagent_protocol.py'); tomllib=context['tomllib']; root=pathlib.Path('.'); cfg=tomllib.loads((root/'.codex/config.toml').read_text(encoding='utf-8')); registry={name: value for name,value in cfg['agents'].items() if isinstance(value,dict) and 'config_file' in value}; expected=context['EXPECTED_PROFILES']; assert set(registry)==set(expected); [tomllib.loads((root/'.codex'/entry['config_file'].removeprefix('./')).read_text(encoding='utf-8')) for entry in registry.values()]; print('toml_registry_ok')"
 ```
 
 Expected: `toml_registry_ok`.

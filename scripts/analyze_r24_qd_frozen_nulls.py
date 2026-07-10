@@ -101,8 +101,11 @@ def _variant_batch(batch: QDWindowBatch, variant: str, seed: int, num_skills: in
     )
 
 
+_DEVICE = torch.device("cpu")
+
+
 def _tensor(values: np.ndarray, dtype: torch.dtype = torch.float32) -> torch.Tensor:
-    return torch.as_tensor(values, dtype=dtype)
+    return torch.as_tensor(values, dtype=dtype).to(_DEVICE)
 
 
 def _losses(probe: TeamConditionedQDProbe, batch: QDWindowBatch) -> dict[str, torch.Tensor]:
@@ -135,6 +138,7 @@ def _train_probe(
         num_skills=int(num_skills),
         hidden_dim=int(hidden_dim),
     )
+    probe.to(_DEVICE)
     optimizer = torch.optim.Adam(probe.parameters(), lr=float(lr))
     for _ in range(int(max(steps, 0))):
         optimizer.zero_grad()
@@ -211,7 +215,10 @@ def run_frozen_null_analysis(
     hidden_dim: int = 128,
     lr: float = 3e-3,
     max_rows: int = 0,
+    device: str = "cpu",
 ) -> dict[str, dict[str, float]]:
+    global _DEVICE
+    _DEVICE = torch.device(str(device))
     torch.set_num_threads(1)
     batch = read_qd_window_shards(Path(input_dir))
     if int(max_rows) > 0:
@@ -252,6 +259,7 @@ def main() -> None:
     parser.add_argument("--lr", type=float, default=3e-3)
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--max_rows", type=int, default=0)
+    parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
     run_frozen_null_analysis(
         Path(args.input_dir),
@@ -262,6 +270,7 @@ def main() -> None:
         lr=float(args.lr),
         seed=int(args.seed),
         max_rows=int(args.max_rows),
+        device=str(args.device),
     )
 
 
