@@ -19,11 +19,9 @@ AGENT_DIR = ROOT / ".codex" / "agents"
 CONFIG = ROOT / ".codex" / "config.toml"
 
 STATUS_TERMS = ("DONE", "DONE_WITH_CONCERNS", "NEEDS_CONTEXT", "BLOCKED")
-RUNTIME_FIELDS = (
+COMMON_RUNTIME_FIELDS = (
     "name",
     "description",
-    "model",
-    "model_reasoning_effort",
     "sandbox_mode",
     "approval_policy",
     "nickname_candidates",
@@ -31,62 +29,38 @@ RUNTIME_FIELDS = (
 )
 
 EXPECTED_PROFILES = {
-    "LunaCodebaseScout": ("luna-codebase-scout.toml", "gpt-5.6-luna", "low"),
-    "LunaSimplePatcher": ("luna-simple-patcher.toml", "gpt-5.6-luna", "low"),
-    "LunaTestRunner": ("luna-test-runner.toml", "gpt-5.6-luna", "low"),
-    "SparkExplicitSimplePatcher": (
-        "spark-explicit-simple-patcher.toml",
-        "gpt-5.3-codex-spark",
-        "low",
-    ),
-    "TerraImplementer": ("terra-implementer.toml", "gpt-5.6-terra", "high"),
-    "TerraFastReviewer": ("terra-fast-reviewer.toml", "gpt-5.6-terra", "medium"),
-    "TerraExpManager": ("terra-exp-manager.toml", "gpt-5.6-terra", "medium"),
-    "TerraExternalReviewManager": (
-        "terra-external-review-manager.toml",
-        "gpt-5.6-terra",
-        "medium",
-    ),
-    "TerraLongTimeMemoryManager": (
-        "terra-long-time-memory-manager.toml",
-        "gpt-5.6-terra",
-        "high",
-    ),
-    "TerraResultAnalyst": ("terra-result-analyst.toml", "gpt-5.6-terra", "high"),
-    "SolPlanImplementer": ("sol-plan-implementer.toml", "gpt-5.6-sol", "high"),
-    "SolImplementationReviewer": (
-        "sol-implementation-reviewer.toml",
-        "gpt-5.6-sol",
-        "high",
-    ),
-    "SolWorkflowAuditor": ("sol-workflow-auditor.toml", "gpt-5.6-sol", "high"),
-    "SolPlanImplementerFrontier": (
-        "sol-plan-implementer-frontier.toml",
-        "gpt-5.6-sol",
-        "xhigh",
-    ),
-    "SolImplementationReviewerFrontier": (
-        "sol-implementation-reviewer-frontier.toml",
-        "gpt-5.6-sol",
-        "xhigh",
-    ),
+    "CodebaseScout": "codebase-scout.toml",
+    "SimplePatcher": "simple-patcher.toml",
+    "TestRunner": "test-runner.toml",
+    "FastReviewer": "fast-reviewer.toml",
+    "Implementer": "implementer.toml",
+    "PlanImplementer": "plan-implementer.toml",
+    "ImplementationReviewer": "implementation-reviewer.toml",
+    "ExpManager": "exp-manager.toml",
+    "ResultAnalyst": "result-analyst.toml",
+    "ExternalReviewManager": "external-review-manager.toml",
+    "LongTimeMemoryManager": "long-time-memory-manager.toml",
+    "WorkflowAuditor": "workflow-auditor.toml",
+    "PlanImplementerFrontier": "plan-implementer-frontier.toml",
+    "ImplementationReviewerFrontier": "implementation-reviewer-frontier.toml",
+    "SparkExplicitSimplePatcher": "spark-explicit-simple-patcher.toml",
 }
 
-GENERIC_AGENT_NAMES = {
-    "codebase-scout",
-    "simple-patcher",
-    "test-runner",
-    "SparkImplementer",
-    "PlanImplementer",
-    "PlanImplementerFrontier",
-    "ImplementationReviewerFast",
-    "ImplementationReviewer",
-    "ImplementationReviewerFrontier",
-    "ExpManager",
-    "ResultAnalyst",
-    "ExternalReviewManager",
-    "LongTimeMemoryManager",
-    "WorkflowAuditor",
+OBSOLETE_AGENT_NAMES = {
+    "LunaCodebaseScout",
+    "LunaSimplePatcher",
+    "LunaTestRunner",
+    "TerraImplementer",
+    "TerraFastReviewer",
+    "TerraExpManager",
+    "TerraResultAnalyst",
+    "TerraExternalReviewManager",
+    "TerraLongTimeMemoryManager",
+    "SolWorkflowAuditor",
+    "SolPlanImplementer",
+    "SolImplementationReviewer",
+    "SolPlanImplementerFrontier",
+    "SolImplementationReviewerFrontier",
 }
 
 REQUIRED_TEXT = {
@@ -192,10 +166,10 @@ FORBIDDEN_PATTERNS = (
     re.compile(r"Review only at batch, milestone, high-risk, or final gates", re.IGNORECASE),
 )
 
-REQUIRED_AGENT_NAMES = {
-    "TerraFastReviewer",
-    "SolImplementationReviewer",
-    "SolImplementationReviewerFrontier",
+REQUIRED_REVIEWER_NAMES = {
+    "FastReviewer",
+    "ImplementationReviewer",
+    "ImplementationReviewerFrontier",
 }
 
 
@@ -225,7 +199,7 @@ def check_forbidden(path: Path) -> None:
 
 def check_toml(path: Path) -> None:
     data = tomllib.loads(read_text(path))
-    for field in RUNTIME_FIELDS:
+    for field in COMMON_RUNTIME_FIELDS:
         if field not in data:
             raise AssertionError(f"{path} missing runtime field: {field}")
     instructions = str(data["developer_instructions"])
@@ -246,9 +220,24 @@ def check_toml(path: Path) -> None:
 
 def check_agent_identity_contract(toml_files: list[Path]) -> None:
     config = tomllib.loads(read_text(CONFIG))
+    features = config.get("features", {})
+    if features.get("multi_agent") is not True:
+        raise AssertionError("multi_agent must remain true")
+    if features.get("multi_agent_v2") is not False:
+        raise AssertionError("multi_agent_v2 must remain false")
     raw_agents = config.get("agents")
     if not isinstance(raw_agents, dict):
         raise AssertionError(f"{CONFIG} missing [agents] table")
+    for field, expected in (
+        ("max_threads", 6),
+        ("max_depth", 1),
+        ("job_max_runtime_seconds", 1800),
+    ):
+        if raw_agents.get(field) != expected:
+            raise AssertionError(f"agents.{field} must remain {expected}")
+    for field in ("model", "model_reasoning_effort"):
+        if field in config:
+            raise AssertionError(f"project config must not pin controller {field}")
     registry = {
         name: entry
         for name, entry in raw_agents.items()
@@ -262,11 +251,11 @@ def check_agent_identity_contract(toml_files: list[Path]) -> None:
         raise AssertionError(
             f"{CONFIG} agent registry mismatch: missing={missing}, unexpected={unexpected}"
         )
-    generic = sorted(GENERIC_AGENT_NAMES & registry_names)
-    if generic:
-        raise AssertionError(f"{CONFIG} retains generic agent aliases: {generic}")
+    obsolete = sorted(OBSOLETE_AGENT_NAMES & registry_names)
+    if obsolete:
+        raise AssertionError(f"{CONFIG} retains obsolete agent aliases: {obsolete}")
 
-    expected_files = {profile[0] for profile in EXPECTED_PROFILES.values()}
+    expected_files = set(EXPECTED_PROFILES.values())
     actual_files = {path.name for path in toml_files}
     missing_files = sorted(expected_files - actual_files)
     unexpected_files = sorted(actual_files - expected_files)
@@ -276,7 +265,7 @@ def check_agent_identity_contract(toml_files: list[Path]) -> None:
             f"missing={missing_files}, unexpected={unexpected_files}"
         )
 
-    for name, (filename, model, effort) in EXPECTED_PROFILES.items():
+    for name, filename in EXPECTED_PROFILES.items():
         entry = registry[name]
         config_file = str(entry["config_file"])
         expected_config_file = f"./agents/{filename}"
@@ -289,16 +278,24 @@ def check_agent_identity_contract(toml_files: list[Path]) -> None:
         data = tomllib.loads(read_text(profile_path))
         if data.get("name") != name:
             raise AssertionError(f"{profile_path} name does not match {name}")
-        if data.get("model") != model:
-            raise AssertionError(f"{profile_path} model does not match {model}")
-        if data.get("model_reasoning_effort") != effort:
-            raise AssertionError(f"{profile_path} effort does not match {effort}")
+        instructions = str(data.get("developer_instructions", ""))
         if name == "SparkExplicitSimplePatcher":
-            instructions = str(data.get("developer_instructions", ""))
+            if data.get("model") != "gpt-5.3-codex-spark":
+                raise AssertionError(f"{profile_path} must pin gpt-5.3-codex-spark")
+            if data.get("model_reasoning_effort") != "low":
+                raise AssertionError(f"{profile_path} must use low reasoning")
             if "Legacy Spark opt-in: explicitly requested" not in instructions:
                 raise AssertionError(
                     f"{profile_path} missing explicit Legacy Spark opt-in contract"
                 )
+        else:
+            forbidden_pins = sorted(
+                field
+                for field in ("model", "model_reasoning_effort", "service_tier")
+                if field in data
+            )
+            if forbidden_pins:
+                raise AssertionError(f"{profile_path} pins routing fields: {forbidden_pins}")
 
 
 def check_reviewer_tiers(toml_files: list[Path]) -> None:
@@ -306,7 +303,7 @@ def check_reviewer_tiers(toml_files: list[Path]) -> None:
     for path in toml_files:
         data = tomllib.loads(read_text(path))
         names.add(str(data.get("name", "")))
-    missing = sorted(REQUIRED_AGENT_NAMES - names)
+    missing = sorted(REQUIRED_REVIEWER_NAMES - names)
     if missing:
         raise AssertionError(f"missing reviewer tier agents: {', '.join(missing)}")
 

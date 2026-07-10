@@ -9,77 +9,77 @@ max_threads = 6
 max_depth = 1
 job_max_runtime_seconds = 1800
 
-[agents."LunaCodebaseScout"]
-description = "Luna read-only HMASD codebase scout for bounded simple mapping and evidence gathering."
-config_file = "./agents/luna-codebase-scout.toml"
-nickname_candidates = ["Luna Scout", "Luna Mapper", "Luna Context Scout"]
+[agents."CodebaseScout"]
+description = "Read-only HMASD codebase scout for bounded mapping and evidence gathering."
+config_file = "./agents/codebase-scout.toml"
+nickname_candidates = ["Codebase Scout", "Repository Mapper", "Context Scout"]
 
-[agents."LunaSimplePatcher"]
-description = "Luna patch worker for default trivial, single-file mechanical edits."
-config_file = "./agents/luna-simple-patcher.toml"
-nickname_candidates = ["Luna Patcher", "Luna Fixer", "Luna Small Patch"]
+[agents."SimplePatcher"]
+description = "Patch worker for default trivial, single-file mechanical edits."
+config_file = "./agents/simple-patcher.toml"
+nickname_candidates = ["Simple Patcher", "Small Fixer", "Mechanical Patcher"]
 
-[agents."LunaTestRunner"]
-description = "Luna focused test runner and failure triage worker for bounded simple checks."
-config_file = "./agents/luna-test-runner.toml"
-nickname_candidates = ["Luna Test Runner", "Luna Verifier", "Luna Failure Triage"]
+[agents."TestRunner"]
+description = "Focused test runner and failure triage worker for bounded simple checks."
+config_file = "./agents/test-runner.toml"
+nickname_candidates = ["Test Runner", "Focused Verifier", "Failure Triage"]
+
+[agents."FastReviewer"]
+description = "Fast reviewer for small isolated mechanical diffs."
+config_file = "./agents/fast-reviewer.toml"
+nickname_candidates = ["Fast Reviewer", "Mechanical Review", "Small Diff Review"]
+
+[agents."Implementer"]
+description = "Implementation worker for bounded medium-complexity, multi-file, non-core tasks."
+config_file = "./agents/implementer.toml"
+nickname_candidates = ["Implementer", "Non-Core Implementer", "Multi-File Worker"]
+
+[agents."PlanImplementer"]
+description = "Implementation worker for core bounded code tasks from accepted plans."
+config_file = "./agents/plan-implementer.toml"
+nickname_candidates = ["Plan Implementer", "Core Implementer", "SDD Implementer"]
+
+[agents."ImplementationReviewer"]
+description = "Standard reviewer for nontrivial task reviews with model-tiered cost control."
+config_file = "./agents/implementation-reviewer.toml"
+nickname_candidates = ["Implementation Reviewer", "Code Reviewer", "Quality Gate"]
+
+[agents."ExpManager"]
+description = "Experiment manager for scripts, packages, launch commands, progress checks, logs, metrics, and factual records."
+config_file = "./agents/exp-manager.toml"
+nickname_candidates = ["Experiment Manager", "Bundle Manager", "Experiment Steward"]
+
+[agents."ResultAnalyst"]
+description = "Bounded experiment metric extraction and gate-table analyst for existing run artifacts."
+config_file = "./agents/result-analyst.toml"
+nickname_candidates = ["Result Analyst", "Metric Analyst", "Gate Analyst"]
+
+[agents."ExternalReviewManager"]
+description = "External model review archive and handoff manager."
+config_file = "./agents/external-review-manager.toml"
+nickname_candidates = ["External Review Manager", "Cross Review Manager", "Review Archive"]
+
+[agents."LongTimeMemoryManager"]
+description = "Memory-only steward for compact current records, plan/principle sync, and LTM archives."
+config_file = "./agents/long-time-memory-manager.toml"
+nickname_candidates = ["Memory Manager", "LTM Manager", "Memory Steward"]
+
+[agents."WorkflowAuditor"]
+description = "Read-only auditor for Codex subagent config, controller protocol, and workflow-document consistency."
+config_file = "./agents/workflow-auditor.toml"
+nickname_candidates = ["Workflow Auditor", "Config Auditor", "Protocol Auditor"]
+
+[agents."PlanImplementerFrontier"]
+description = "Frontier implementation worker for rare bounded core-code tasks that require architecture or algorithm judgment during implementation."
+config_file = "./agents/plan-implementer-frontier.toml"
+nickname_candidates = ["Frontier Implementer", "Algorithm Implementer", "Max Implementer"]
+
+[agents."ImplementationReviewerFrontier"]
+description = "Frontier reviewer for architecture, high-risk, shared-state, API/data-contract, and final whole-branch reviews."
+config_file = "./agents/implementation-reviewer-frontier.toml"
+nickname_candidates = ["Frontier Reviewer", "Final Reviewer", "Architecture Reviewer"]
 
 [agents."SparkExplicitSimplePatcher"]
 description = "Explicit-only legacy Spark patcher for simple, single-file, non-core tasks."
 config_file = "./agents/spark-explicit-simple-patcher.toml"
 nickname_candidates = ["Spark Explicit Patcher", "Spark Legacy Patcher", "Spark Opt-In Patcher"]
-
-[agents."TerraImplementer"]
-description = "Terra implementation worker for bounded medium-complexity, multi-file, non-core tasks."
-config_file = "./agents/terra-implementer.toml"
-nickname_candidates = ["Terra Implementer", "Terra Mechanical Implementer", "Terra Multi-File Worker"]
-
-[agents."TerraFastReviewer"]
-description = "Terra fast reviewer for small isolated mechanical diffs."
-config_file = "./agents/terra-fast-reviewer.toml"
-nickname_candidates = ["Terra Fast Reviewer", "Terra Mechanical Review", "Terra Diff Review"]
-
-[agents."TerraExpManager"]
-description = "Terra experiment manager for scripts, packages, launch commands, progress checks, logs, metrics, and factual records."
-config_file = "./agents/terra-exp-manager.toml"
-nickname_candidates = ["Terra Exp Manager", "Terra Bundle Manager", "Terra Experiment Steward"]
-
-[agents."TerraExternalReviewManager"]
-description = "Terra external model review archive and handoff manager."
-config_file = "./agents/terra-external-review-manager.toml"
-nickname_candidates = ["Terra External Review", "Terra Cross Review", "Terra Review Archive"]
-
-[agents."TerraLongTimeMemoryManager"]
-description = "Terra memory-only steward for compact current records, plan/principle sync, and LTM archives."
-config_file = "./agents/terra-long-time-memory-manager.toml"
-nickname_candidates = ["Terra Memory Manager", "Terra LTM Manager", "Terra Memory Steward"]
-
-[agents."TerraResultAnalyst"]
-description = "Terra bounded experiment metric extraction and gate-table analyst for existing run artifacts."
-config_file = "./agents/terra-result-analyst.toml"
-nickname_candidates = ["Terra Result Analyst", "Terra Metric Analyst", "Terra Gate Analyst"]
-
-[agents."SolPlanImplementer"]
-description = "Sol implementation worker for core bounded code tasks from accepted plans."
-config_file = "./agents/sol-plan-implementer.toml"
-nickname_candidates = ["Sol Plan Implementer", "Sol Core Implementer", "Sol SDD Implementer"]
-
-[agents."SolImplementationReviewer"]
-description = "Sol standard reviewer for nontrivial task reviews with model-tiered cost control."
-config_file = "./agents/sol-implementation-reviewer.toml"
-nickname_candidates = ["Sol Standard Reviewer", "Sol Code Reviewer", "Sol Quality Gate"]
-
-[agents."SolWorkflowAuditor"]
-description = "Sol read-only auditor for Codex subagent config, controller protocol, and workflow-document consistency."
-config_file = "./agents/sol-workflow-auditor.toml"
-nickname_candidates = ["Sol Workflow Auditor", "Sol Config Auditor", "Sol Protocol Auditor"]
-
-[agents."SolPlanImplementerFrontier"]
-description = "Sol frontier implementation worker for rare bounded core-code tasks that require architecture or algorithm judgment during implementation."
-config_file = "./agents/sol-plan-implementer-frontier.toml"
-nickname_candidates = ["Sol Frontier Implementer", "Sol Algorithm Implementer", "Sol XHigh Implementer"]
-
-[agents."SolImplementationReviewerFrontier"]
-description = "Sol frontier reviewer for architecture, high-risk, shared-state, API/data-contract, and final whole-branch reviews."
-config_file = "./agents/sol-implementation-reviewer-frontier.toml"
-nickname_candidates = ["Sol Frontier Reviewer", "Sol Final Reviewer", "Sol Architecture Reviewer"]
