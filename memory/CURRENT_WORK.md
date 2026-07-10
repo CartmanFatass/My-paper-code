@@ -1,12 +1,23 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 
 Purpose: compact first-read state for the current work only. Full historical
 context is archived under `memory/LTM/`.
 
 ## Controller Handoff
 
+- 2026-07-10: controller direction is Claude Code -> Codex for an isolated
+  theory/design revision on branch `aggressive`. The user approved IMOD-Direct
+  as the replacement direction for graph-first CSOG, and Codex is writing the
+  design spec only. No implementation or experiment was launched in this
+  design turn; existing experiment state remains governed by
+  `memory/ExpRecord.md` and run-local status files. No project subagents were
+  spawned or left open. Pending gates are user review of the written IMOD spec
+  and an independent Claude/Gemini MARL review; same-family GPT review does not
+  satisfy the cross-validation gate. The worktree already contained unrelated
+  user changes under `.codex/`, `AGENTS.md`, one agent-migration plan, and the
+  workflow validator; the IMOD revision must not overwrite or stage them.
 - 2026-07-09: R24 execution handed off from the Codex controller to Claude Code.
   The Claude-side subagent workflow (`.claude/agents/README.md`, cloned from
   `AGENTS.md`/`.codex/agents/`) now governs delegation; the MARL design
@@ -18,6 +29,14 @@ context is archived under `memory/LTM/`.
 
 ## Current Objective
 
+- 2026-07-10 design update: replace graph-first CSOG with IMOD-Direct as the
+  user-approved design draft. The active question is whether randomized real
+  assignment of individual `z_i` causes a stable held-out behavior effect under
+  multi-agent interference. Direct effect precedes spillover; spillover
+  precedes non-additive interaction; graph structure is admitted only as an
+  evidence output. OPT is context substrate only, and world-model, directed
+  temporal geometry, asynchronous operator execution, and any new reward are
+  deferred. This is not yet implementation acceptance.
 - Reach HMASD-level S7-S1 behavior at roughly 1e6 steps before returning to
   S7-S3.
 - Treat 160k/320k runs as mechanism gates, not final HMASD-comparison verdicts.
@@ -183,13 +202,35 @@ context is archived under `memory/LTM/`.
 
 ## Next Actions
 
-1. Monitor completion of `EXP-20260709-local-overnight-audit-power-r23-deconfound` arms 5-7 (R23 arm0-vs-arm2 matched-seed deconfound pair training) running locally overnight; expected ETA ~09:02 UTC+8 2026-07-10. Read `train_updates.csv` and `eval_episodes.csv` to extract coverage/throughput curves and task-read unconfoundedness vs single-seed R23 arm2 result.
-2. Optional after arms 5-7 completion: D2 approval-deferred sensitivity re-run (early-stopping + all variants + pre-registered acceptance criterion) can be queued for cloud execution when local GPU frees (post-arm7 ~day 2026-07-10) or handed off to user as a standalone diagnostic task. Set conditions per Round 5 advice: separate validation split, identical rules, all outcomes reported, single all-GPU device class, unexpected pass reopens instrument only.
-3. Pending D3 concretization: after arm0-vs-arm2 deconfound read, finalize minimal reward-off diagnostic design for individual-skill behavioral differentiation (blinded behavior-only separability + forced-z_i between/within gate) and get explicit design cross-validation round before implementation. Archive D3 diagnostic design plan to IMPLEMENTATION_PLAN.md once approved.
-4. Do NOT proceed to q_d/q_D reward arms, q_D re-probe design changes, or scale-up until R24-1 disposition fully archived and D3 diagnostic design approved. q_d/q_D rewards remain BLOCKED by R24-1 FAIL + wording condition.
+1. User reviews
+   `docs/superpowers/specs/2026-07-10-imod-direct-design.md`; revise the written
+   spec if requested. Do not write a replacement implementation plan yet.
+2. Prepare the unchanged IMOD design for independent Claude/Gemini MARL review
+   and archive the raw review plus controller disposition before scientific
+   acceptance.
+3. After written-spec and cross-family review approval, invoke the
+   Superpowers writing-plans stage for the minimal reward-off G-1/G1 instrument
+   and direct-effect diagnostic only. Do not plan G2/G3 implementation as if G1
+   has already passed.
+4. Existing experiment operations remain separate from this design revision.
+   Before acting, verify the run-local status for
+   `EXP-20260709-local-overnight-audit-power-r23-deconfound`; if its matched
+   arm0/arm2 pairs completed, read their coverage/throughput trajectories and
+   preserve the result as a q_A task-effect deconfound, not IMOD evidence.
+5. `EXP-20260710-r25-qa-verification-1m` remains launch-ready in
+   `memory/ExpRecord.md`; this design turn neither launches nor cancels it.
+6. D2 remains approved-deferred as an archival sensitivity analysis only, with
+   separate validation, identical stopping rules, all outcomes, one all-GPU
+   device class, and no reward unblocking from an unexpected pass.
+7. Do NOT proceed to q_d/q_D reward arms, graph/world-model/async IMOD modules,
+   or a new intrinsic reward. q_d/q_D remain BLOCKED by R24-1, and IMOD has not
+   passed its direct-effect gate.
 
 ## Do Not Do Yet
 
+- Do not execute the superseded CSOG roadmap or Phase-A/G0 plan. Do not create
+  an IMOD implementation plan until the user has reviewed the written spec and
+  the required independent cross-family review is archived.
 - Do not enable `q_D` or `q_d` reward, q_D/q_d coefficient sweeps, or q_D target engineering as the primary branch. R24-1 FAIL accepted 2026-07-09; q_d/q_D rewards remain BLOCKED until D3 diagnostic design passes cross-validation and shows individual-skill behavioral differentiation is real.
 - Do not launch 960k scale/task runs from R23/q_A before arm0-vs-arm2 deconfound is read (locally tonight/2026-07-10) and R24-1 disposition is fully archived.
 - Do not launch seed2 depth for the weak g-info coefficient line until R24-1/D3 pivot resolves.

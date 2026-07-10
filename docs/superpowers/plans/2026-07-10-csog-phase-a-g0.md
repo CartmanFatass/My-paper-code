@@ -1,5 +1,12 @@
 # CSOG Phase A G0 Dynamics Gate Implementation Plan
 
+> **SUPERSEDED 2026-07-10. DO NOT EXECUTE.** IMOD-Direct removes the world
+> model from the first individual-skill gate and uses randomized real
+> interventions as primary evidence. See
+> `docs/superpowers/specs/2026-07-10-imod-direct-design.md`. A replacement plan
+> is prohibited until written-spec review and independent cross-family MARL
+> review complete.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build an independent, reward-off G0 diagnostic that collects real trajectories from a healthy frozen HMASD+OPT policy and determines whether an action-conditioned distributional model can predict frozen OPT interaction dynamics beyond persistence and same-capacity action-shuffle nulls.

@@ -1,5 +1,11 @@
 # CSOG Gate-First Research Roadmap Implementation Plan
 
+> **SUPERSEDED 2026-07-10. DO NOT EXECUTE.** The graph-first CSOG design was
+> replaced by the user-approved IMOD-Direct design draft at
+> `docs/superpowers/specs/2026-07-10-imod-direct-design.md`. Per the
+> brainstorming written-spec review gate, no replacement implementation plan
+> exists yet.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement linked phase plans task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build and evaluate Causal Skill Operator Graph (CSOG) as a clean, gate-first HMASD+OPT successor without carrying the legacy algorithm's compatibility surface into the new research stack.

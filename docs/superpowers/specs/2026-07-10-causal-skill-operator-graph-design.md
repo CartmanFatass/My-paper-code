@@ -1,8 +1,16 @@
 # Causal Skill Operator Graph Design
 
 - Date: 2026-07-10
-- Status: user-approved research design
+- Status: **SUPERSEDED 2026-07-10; do not implement or use as an experiment authorization**
 - Scope: radical HMASD+OPT redesign; design only, no implementation or experiment authorization
+
+> Superseded by
+> `docs/superpowers/specs/2026-07-10-imod-direct-design.md`. The literature
+> review found that graph-first causal skill discovery, world-model causal
+> influence, and skill composition have substantial prior-art overlap. The
+> replacement starts with randomized real individual-skill interventions and
+> permits a graph only as a downstream evidence object. This file is retained
+> as design history.
 
 ## 1. Technical Summary
 
