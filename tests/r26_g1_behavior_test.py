@@ -1,6 +1,9 @@
 from dataclasses import replace
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -500,6 +503,28 @@ def test_cpu_real_run_is_rejected_with_invalid_report(tmp_path: Path):
     payload = json.loads((output_dir / "r26_g1_behavior.json").read_text())
     assert payload["gate"]["status"] == "INVALID"
     assert payload["error"]["type"] == "ValueError"
+
+
+def test_analyzer_absolute_entrypoint_bootstraps_repository_imports(tmp_path: Path):
+    analyzer = (
+        Path(__file__).resolve().parents[1]
+        / "scripts"
+        / "analyze_r26_g1_behavior.py"
+    )
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+
+    completed = subprocess.run(
+        [sys.executable, str(analyzer), "--help"],
+        cwd=tmp_path,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert "usage:" in completed.stdout.lower()
 
 
 def test_markdown_contains_complete_gate_evidence(

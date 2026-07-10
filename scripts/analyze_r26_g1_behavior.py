@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import sys
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Mapping
@@ -12,7 +13,11 @@ from typing import Mapping
 import numpy as np
 import torch
 
-from ha_ctse_process.r26_g1_dataset import (
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from ha_ctse_process.r26_g1_dataset import (  # noqa: E402
     G1DataError,
     G1WindowBatch,
     SplitIndices,
