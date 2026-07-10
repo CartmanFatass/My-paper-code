@@ -1,8 +1,13 @@
+from dataclasses import replace
+import json
+from pathlib import Path
+
 import numpy as np
 import pytest
 import torch
 
 from ha_ctse_process.r26_g1_dataset import G1WindowBatch, grouped_reset_split
+from scripts import analyze_r26_g1_behavior as behavior_analyzer
 from scripts.analyze_r26_g1_behavior import (
     FitConfig,
     VARIANTS,
@@ -224,3 +229,292 @@ def test_checkpoint_analysis_reuses_model_seed_for_every_variant(g1_behavior_bat
         for model in variant["models"].values()
     }
     assert seeds == {26012}
+    assert result["thresholds"] == {
+        "normalized_label_entropy_min": 0.8,
+        "accuracy_gain_min": 0.05,
+        "matched_null_difference": "> 0.0",
+        "matched_null_bootstrap_lower": "> 0.0",
+        "overfit_train_minus_test_accuracy": "> 0.20",
+        "early_stop_min_delta": 1e-4,
+    }
+
+
+def test_label_null_train_and_validation_ignore_original_test_labels(
+    g1_behavior_batch,
+):
+    split = grouped_reset_split(g1_behavior_batch, seed=26011)
+    changed_labels = g1_behavior_batch.label.copy()
+    changed_labels[split.test] = (changed_labels[split.test] + 1) % 3
+    changed = replace(g1_behavior_batch, label=changed_labels)
+
+    for variant in (
+        "shuffled",
+        "fake_marginal",
+        "agent_matched",
+        "duration_matched",
+        "agent_duration_matched",
+    ):
+        first = behavior_analyzer.variant_split_batches(
+            g1_behavior_batch, split, variant, seed=26013
+        )
+        second = behavior_analyzer.variant_split_batches(
+            changed, split, variant, seed=26013
+        )
+        assert np.array_equal(first.train.label, second.train.label)
+        assert np.array_equal(first.validation.label, second.validation.label)
+
+    first = behavior_analyzer.variant_split_batches(
+        g1_behavior_batch, split, "fake_marginal", seed=26013
+    )
+    second = behavior_analyzer.variant_split_batches(
+        changed, split, "fake_marginal", seed=26013
+    )
+    config = FitConfig(
+        max_steps=5,
+        patience=1,
+        hidden_dim=8,
+        lr=3e-3,
+        validation_interval=1,
+    )
+    fitted_first = fit_classifier(
+        kind="behavior",
+        train=first.train,
+        validation=first.validation,
+        num_skills=3,
+        config=config,
+        device=torch.device("cpu"),
+        seed=26012,
+    )
+    fitted_second = fit_classifier(
+        kind="behavior",
+        train=second.train,
+        validation=second.validation,
+        num_skills=3,
+        config=config,
+        device=torch.device("cpu"),
+        seed=26012,
+    )
+    for name, values in fitted_first.model.state_dict().items():
+        assert torch.equal(values, fitted_second.model.state_dict()[name])
+
+
+def test_post_minus_pre_uses_identical_valid_rows(g1_behavior_batch):
+    pre_valid = np.ones_like(g1_behavior_batch.pre_valid)
+    for reset_id in np.unique(g1_behavior_batch.reset_id):
+        reset_rows = np.flatnonzero(g1_behavior_batch.reset_id == reset_id)
+        for label in (1, 2):
+            label_rows = reset_rows[g1_behavior_batch.label[reset_rows] == label]
+            pre_valid[label_rows[:3]] = 0.0
+    pre_action = g1_behavior_batch.post_action.copy()
+    pre_effect = g1_behavior_batch.post_effect.copy()
+    pre_action[pre_valid == 0.0] = 0.0
+    pre_effect[pre_valid == 0.0] = 0.0
+    batch = replace(
+        g1_behavior_batch,
+        pre_action=pre_action,
+        pre_effect=pre_effect,
+        pre_valid=pre_valid,
+    )
+
+    result = analyze_checkpoint(
+        batch,
+        num_skills=3,
+        config=FitConfig(
+            max_steps=80,
+            patience=4,
+            hidden_dim=24,
+            lr=3e-3,
+            validation_interval=5,
+        ),
+        device=torch.device("cpu"),
+        split_seed=26011,
+        model_seed=26012,
+        null_seed=26013,
+        bootstrap_reps=50,
+        bootstrap_seed=26014,
+    )
+    comparison = result["pre_valid_comparison"]
+    assert comparison["train_rows"] < result["split"]["train_rows"]
+    assert comparison["validation_rows"] < result["split"]["validation_rows"]
+    assert comparison["test_rows"] < result["split"]["test_rows"]
+    assert result["behavior_post_minus_pre_accuracy"] == pytest.approx(0.0)
+
+
+def test_post_minus_pre_reports_underpowered_when_valid_rows_lose_a_label(
+    g1_behavior_batch,
+):
+    pre_valid = (g1_behavior_batch.label != 2).astype(np.float32)
+    result = analyze_checkpoint(
+        replace(g1_behavior_batch, pre_valid=pre_valid),
+        num_skills=3,
+        config=FitConfig(max_steps=1, patience=1, hidden_dim=8, validation_interval=1),
+        device=torch.device("cpu"),
+        split_seed=26011,
+        model_seed=26012,
+        null_seed=26013,
+        bootstrap_reps=10,
+        bootstrap_seed=26014,
+    )
+    assert result["underpowered"] is True
+    assert result["gate"]["status"] == "UNDERPOWERED"
+    assert result["missing_pre_valid_labels"] == {
+        "train": [2],
+        "validation": [2],
+        "test": [2],
+    }
+
+
+def test_nonfinite_input_writes_invalid_reports(
+    tmp_path: Path,
+    g1_behavior_batch,
+):
+    input_dir = tmp_path / "input"
+    output_dir = tmp_path / "output"
+    input_dir.mkdir()
+    post_action = g1_behavior_batch.post_action.copy()
+    post_action[5, 2] = np.nan
+    broken = replace(g1_behavior_batch, post_action=post_action)
+    shard_path = input_dir / "reset_005.npz"
+    np.savez_compressed(
+        shard_path,
+        **{
+            field: getattr(broken, field)
+            for field in G1WindowBatch.__dataclass_fields__
+        },
+    )
+
+    with pytest.raises(ValueError, match="post_action"):
+        behavior_analyzer.run_analysis(
+            input_dir,
+            output_dir,
+            num_skills=3,
+            device="cuda",
+            max_steps=1,
+            patience=1,
+            validation_interval=1,
+            hidden_dim=8,
+            bootstrap_reps=10,
+        )
+
+    payload = json.loads((output_dir / "r26_g1_behavior.json").read_text())
+    assert payload["gate"]["status"] == "INVALID"
+    assert payload["error"]["field"] == "post_action"
+    assert payload["error"]["source"].endswith("reset_005.npz")
+    assert payload["error"]["rows"][0]["row_index"] == 5
+    assert payload["error"]["rows"][0]["checkpoint_id"] == "synthetic_update25"
+    markdown = (output_dir / "r26_g1_behavior.md").read_text()
+    assert "**INVALID**" in markdown
+    assert "reset_005.npz" in markdown
+
+
+def test_nonfinite_loss_writes_invalid_reports(
+    tmp_path: Path,
+    g1_behavior_batch,
+):
+    huge = np.full_like(g1_behavior_batch.post_action, np.finfo(np.float32).max)
+    batch = replace(g1_behavior_batch, post_action=huge)
+
+    with pytest.raises(ValueError, match="training loss"):
+        behavior_analyzer.analyze_checkpoint_to_reports(
+            batch,
+            tmp_path,
+            num_skills=3,
+            config=FitConfig(
+                max_steps=1,
+                patience=1,
+                hidden_dim=8,
+                lr=3e-3,
+                validation_interval=1,
+            ),
+            device=torch.device("cpu"),
+            split_seed=26011,
+            model_seed=26012,
+            null_seed=26013,
+            bootstrap_reps=10,
+            bootstrap_seed=26014,
+        )
+
+    payload = json.loads((tmp_path / "r26_g1_behavior.json").read_text())
+    assert payload["gate"]["status"] == "INVALID"
+    assert payload["error"]["stage"] == "training_loss"
+    assert payload["error"]["rows"]
+    assert payload["error"]["rows"][0]["checkpoint_id"] == "synthetic_update25"
+
+
+def test_same_seeds_reproduce_actual_analysis_outputs(g1_behavior_batch):
+    kwargs = dict(
+        num_skills=3,
+        config=FitConfig(
+            max_steps=2,
+            patience=1,
+            hidden_dim=8,
+            lr=3e-3,
+            validation_interval=1,
+        ),
+        device=torch.device("cpu"),
+        split_seed=26011,
+        model_seed=26012,
+        null_seed=26013,
+        bootstrap_reps=10,
+        bootstrap_seed=26014,
+    )
+    first = analyze_checkpoint(g1_behavior_batch, **kwargs)
+    second = analyze_checkpoint(g1_behavior_batch, **kwargs)
+    assert first == second
+
+
+def test_cpu_real_run_is_rejected_with_invalid_report(tmp_path: Path):
+    output_dir = tmp_path / "output"
+    with pytest.raises(ValueError, match="requires CUDA"):
+        behavior_analyzer.run_analysis(
+            tmp_path / "unused-input",
+            output_dir,
+            num_skills=3,
+            device="cpu",
+        )
+    payload = json.loads((output_dir / "r26_g1_behavior.json").read_text())
+    assert payload["gate"]["status"] == "INVALID"
+    assert payload["error"]["type"] == "ValueError"
+
+
+def test_markdown_contains_complete_gate_evidence(
+    tmp_path: Path,
+    g1_behavior_batch,
+):
+    result = analyze_checkpoint(
+        g1_behavior_batch,
+        num_skills=3,
+        config=FitConfig(
+            max_steps=2,
+            patience=1,
+            hidden_dim=8,
+            lr=3e-3,
+            validation_interval=1,
+        ),
+        device=torch.device("cpu"),
+        split_seed=26011,
+        model_seed=26012,
+        null_seed=26013,
+        bootstrap_reps=10,
+        bootstrap_seed=26014,
+    )
+    behavior_analyzer._write_reports(tmp_path, result)
+    markdown = (tmp_path / "r26_g1_behavior.md").read_text()
+    for required in (
+        "## Split",
+        "Train resets",
+        "Normalized label entropy",
+        "Majority accuracy",
+        "## Thresholds",
+        "overfit_train_minus_test_accuracy",
+        "## Primary differences",
+        "full_minus_prior_accuracy",
+        "behavior_post_minus_pre_accuracy",
+        "## Matched nulls",
+        "agent_matched",
+        "duration_matched",
+        "agent_duration_matched",
+        "Bootstrap 95% CI",
+        "## Gate reasons",
+    ):
+        assert required in markdown

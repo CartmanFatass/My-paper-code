@@ -13,6 +13,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process.r26_g1_dataset import (
+    G1DataError,
     G1WindowBatch,
     SplitIndices,
     grouped_reset_split,
@@ -36,6 +37,40 @@ MATCHED_NULLS = ("agent_matched", "duration_matched", "agent_duration_matched")
 KINDS = ("behavior", "prior", "full")
 EARLY_STOP_MIN_DELTA = 1e-4
 OVERFIT_ACCURACY_GAP = 0.20
+
+
+def _threshold_metadata() -> dict[str, object]:
+    return {
+        "normalized_label_entropy_min": 0.8,
+        "accuracy_gain_min": 0.05,
+        "matched_null_difference": "> 0.0",
+        "matched_null_bootstrap_lower": "> 0.0",
+        "overfit_train_minus_test_accuracy": "> 0.20",
+        "early_stop_min_delta": EARLY_STOP_MIN_DELTA,
+    }
+
+
+class AnalysisInvalidError(ValueError):
+    """Analysis failure carrying checkpoint-row audit context."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        stage: str,
+        rows: list[dict[str, object]] | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.stage = stage
+        self.rows = [] if rows is None else rows
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "type": type(self).__name__,
+            "message": str(self),
+            "stage": self.stage,
+            "rows": self.rows,
+        }
 
 
 @dataclass(frozen=True)
@@ -75,6 +110,27 @@ class BootstrapInterval:
 class GateDecision:
     status: str
     reasons: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class VariantSplitBatches:
+    train: G1WindowBatch
+    validation: G1WindowBatch
+    test: G1WindowBatch
+    unchanged_fractions: dict[str, float]
+    seeds: dict[str, int]
+
+    @property
+    def unchanged_fraction(self) -> float:
+        batches = (self.train, self.validation, self.test)
+        names = ("train", "validation", "test")
+        rows = np.asarray([batch.label.size for batch in batches], dtype=np.float64)
+        if float(rows.sum()) == 0.0:
+            return 1.0
+        values = np.asarray(
+            [self.unchanged_fractions[name] for name in names], dtype=np.float64
+        )
+        return float(np.sum(rows * values) / rows.sum())
 
 
 class _Classifier(torch.nn.Module):
@@ -158,6 +214,63 @@ def _batch_arrays(
     return action, effect, context, labels
 
 
+def _analysis_row_identities(
+    batch: G1WindowBatch,
+    indices: np.ndarray,
+) -> list[dict[str, object]]:
+    fields = (
+        "reset_id",
+        "reset_seed",
+        "episode_id",
+        "env_id",
+        "agent_id",
+        "checkpoint_id",
+        "checkpoint_update",
+    )
+    arrays = {
+        field: np.asarray(getattr(batch, field)).reshape(-1) for field in fields
+    }
+    rows: list[dict[str, object]] = []
+    for row_index in np.asarray(indices, dtype=np.int64).reshape(-1):
+        row: dict[str, object] = {"row_index": int(row_index)}
+        for field, values in arrays.items():
+            value = values[int(row_index)]
+            row[field] = str(value) if field == "checkpoint_id" else int(value)
+        rows.append(row)
+    return rows
+
+
+def _finite_loss(
+    losses: torch.Tensor,
+    *,
+    stage: str,
+    batch: G1WindowBatch,
+) -> torch.Tensor:
+    non_finite = (
+        torch.nonzero(~torch.isfinite(losses), as_tuple=False)
+        .reshape(-1)
+        .detach()
+        .cpu()
+        .numpy()
+    )
+    if non_finite.size:
+        display_stage = stage.replace("_", " ")
+        raise AnalysisInvalidError(
+            f"{display_stage} is non-finite",
+            stage=stage,
+            rows=_analysis_row_identities(batch, non_finite),
+        )
+    reduced = losses.mean()
+    if not bool(torch.isfinite(reduced).item()):
+        display_stage = stage.replace("_", " ")
+        raise AnalysisInvalidError(
+            f"{display_stage} is non-finite after reduction",
+            stage=stage,
+            rows=_analysis_row_identities(batch, np.arange(losses.numel())),
+        )
+    return reduced
+
+
 def _tensor(values: np.ndarray, device: torch.device, dtype: torch.dtype) -> torch.Tensor:
     return torch.as_tensor(values, dtype=dtype, device=device).detach()
 
@@ -232,9 +345,13 @@ def fit_classifier(
         model.train()
         optimizer.zero_grad(set_to_none=True)
         train_logits, train_labels = _model_logits(model, train)
-        loss = torch.nn.functional.cross_entropy(train_logits, train_labels)
-        if not torch.isfinite(loss):
-            raise ValueError("training loss is non-finite")
+        loss = _finite_loss(
+            torch.nn.functional.cross_entropy(
+                train_logits, train_labels, reduction="none"
+            ),
+            stage="training_loss",
+            batch=train,
+        )
         loss.backward()
         optimizer.step()
 
@@ -248,12 +365,14 @@ def fit_classifier(
         with torch.no_grad():
             validation_logits, validation_labels = _model_logits(model, validation)
             validation_loss = float(
-                torch.nn.functional.cross_entropy(
-                    validation_logits, validation_labels
+                _finite_loss(
+                    torch.nn.functional.cross_entropy(
+                        validation_logits, validation_labels, reduction="none"
+                    ),
+                    stage="validation_loss",
+                    batch=validation,
                 ).item()
             )
-        if not np.isfinite(validation_loss):
-            raise ValueError("validation loss is non-finite")
         if validation_loss < best_loss - EARLY_STOP_MIN_DELTA:
             best_loss = validation_loss
             best_step = step
@@ -271,7 +390,13 @@ def fit_classifier(
     with torch.no_grad():
         train_logits, train_labels = _model_logits(model, train)
         restored_train_loss = float(
-            torch.nn.functional.cross_entropy(train_logits, train_labels).item()
+            _finite_loss(
+                torch.nn.functional.cross_entropy(
+                    train_logits, train_labels, reduction="none"
+                ),
+                stage="restored_training_loss",
+                batch=train,
+            ).item()
         )
     return FitResult(
         model=model,
@@ -360,9 +485,8 @@ def variant_batch(
         pre_effect = np.asarray(batch.pre_effect, dtype=np.float32)
         if pre_action.shape != post_action.shape or pre_effect.shape != post_effect.shape:
             raise ValueError("pre/post feature dimensions must match for pre_only")
-        valid = np.asarray(batch.pre_valid, dtype=np.float32).reshape(-1, 1) > 0.5
-        post_action = np.where(valid, pre_action, 0.0).astype(np.float32, copy=False)
-        post_effect = np.where(valid, pre_effect, 0.0).astype(np.float32, copy=False)
+        post_action = pre_action.copy()
+        post_effect = pre_effect.copy()
     elif variant == "action_only":
         post_effect = np.zeros_like(post_effect)
     elif variant == "effect_only":
@@ -379,6 +503,59 @@ def variant_batch(
             post_effect=post_effect,
         ),
         unchanged_fraction,
+    )
+
+
+def _variant_split_seed(seed: int, variant: str, split_name: str) -> int:
+    variant_index = VARIANTS.index(variant) + 1
+    split_index = ("train", "validation", "test").index(split_name) + 1
+    return int(
+        (int(seed) + 1_000_003 * variant_index + 10_007 * split_index) % (2**32)
+    )
+
+
+def _transform_split_batches(
+    train: G1WindowBatch,
+    validation: G1WindowBatch,
+    test: G1WindowBatch,
+    variant: str,
+    seed: int,
+) -> VariantSplitBatches:
+    transformed: dict[str, G1WindowBatch] = {}
+    unchanged: dict[str, float] = {}
+    seeds: dict[str, int] = {}
+    for split_name, split_batch in (
+        ("train", train),
+        ("validation", validation),
+        ("test", test),
+    ):
+        split_seed = _variant_split_seed(seed, variant, split_name)
+        transformed[split_name], unchanged[split_name] = variant_batch(
+            split_batch, variant, split_seed
+        )
+        seeds[split_name] = split_seed
+    return VariantSplitBatches(
+        train=transformed["train"],
+        validation=transformed["validation"],
+        test=transformed["test"],
+        unchanged_fractions=unchanged,
+        seeds=seeds,
+    )
+
+
+def variant_split_batches(
+    batch: G1WindowBatch,
+    split: SplitIndices,
+    variant: str,
+    seed: int,
+) -> VariantSplitBatches:
+    """Apply a variant independently after the fixed reset split is known."""
+    return _transform_split_batches(
+        batch.take(split.train),
+        batch.take(split.validation),
+        batch.take(split.test),
+        variant,
+        seed,
     )
 
 
@@ -490,8 +667,7 @@ def _score_summary(score: Score) -> dict[str, float]:
 
 
 def _fit_variant(
-    batch: G1WindowBatch,
-    split: SplitIndices,
+    batches: VariantSplitBatches,
     *,
     kind: str,
     num_skills: int,
@@ -501,15 +677,15 @@ def _fit_variant(
 ) -> tuple[dict[str, object], Score, Score]:
     fitted = fit_classifier(
         kind=kind,
-        train=batch.take(split.train),
-        validation=batch.take(split.validation),
+        train=batches.train,
+        validation=batches.validation,
         num_skills=num_skills,
         config=config,
         device=device,
         seed=seed,
     )
-    train_score = score_classifier(fitted.model, kind, batch.take(split.train))
-    test_score = score_classifier(fitted.model, kind, batch.take(split.test))
+    train_score = score_classifier(fitted.model, kind, batches.train)
+    test_score = score_classifier(fitted.model, kind, batches.test)
     summary: dict[str, object] = {
         "kind": kind,
         "model_seed": int(seed),
@@ -549,6 +725,45 @@ def _split_summary(split: SplitIndices) -> dict[str, object]:
     }
 
 
+def _missing_split_support(
+    active_labels: set[int],
+    batches: VariantSplitBatches,
+) -> dict[str, list[int]]:
+    return {
+        name: sorted(active_labels - set(np.unique(split_batch.label).tolist()))
+        for name, split_batch in (
+            ("train", batches.train),
+            ("validation", batches.validation),
+            ("test", batches.test),
+        )
+        if active_labels - set(np.unique(split_batch.label).tolist())
+    }
+
+
+def _pre_valid_batches(
+    batches: VariantSplitBatches,
+    *,
+    variant: str,
+    seed: int,
+) -> VariantSplitBatches:
+    filtered: list[G1WindowBatch] = []
+    for batch in (batches.train, batches.validation, batches.test):
+        indices = np.flatnonzero(np.asarray(batch.pre_valid).reshape(-1) > 0.5)
+        filtered.append(batch.take(indices))
+    return _transform_split_batches(*filtered, variant=variant, seed=seed)
+
+
+def _variant_split_summary(batches: VariantSplitBatches) -> dict[str, object]:
+    return {
+        "train_rows": int(batches.train.label.size),
+        "validation_rows": int(batches.validation.label.size),
+        "test_rows": int(batches.test.label.size),
+        "train_reset_ids": np.unique(batches.train.reset_id).astype(int).tolist(),
+        "validation_reset_ids": np.unique(batches.validation.reset_id).astype(int).tolist(),
+        "test_reset_ids": np.unique(batches.test.reset_id).astype(int).tolist(),
+    }
+
+
 def analyze_checkpoint(
     batch: G1WindowBatch,
     *,
@@ -570,16 +785,15 @@ def analyze_checkpoint(
         raise ValueError("analyzer input must contain exactly one checkpoint identity")
 
     active_labels = set(np.unique(labels).tolist())
-    split_labels = {
-        "train": set(np.unique(batch.label[split.train]).tolist()),
-        "validation": set(np.unique(batch.label[split.validation]).tolist()),
-        "test": set(np.unique(batch.label[split.test]).tolist()),
-    }
-    missing_support = {
-        name: sorted(active_labels - present)
-        for name, present in split_labels.items()
-        if active_labels - present
-    }
+    real_splits = variant_split_batches(batch, split, "real", seed=int(null_seed))
+    post_valid_splits = _pre_valid_batches(
+        real_splits, variant="real", seed=int(null_seed)
+    )
+    pre_valid_splits = _pre_valid_batches(
+        real_splits, variant="pre_only", seed=int(null_seed)
+    )
+    missing_support = _missing_split_support(active_labels, real_splits)
+    missing_pre_valid = _missing_split_support(active_labels, post_valid_splits)
     result: dict[str, object] = {
         "checkpoint_id": str(checkpoint_ids[0]),
         "checkpoint_update": int(checkpoint_updates[0]),
@@ -587,13 +801,16 @@ def analyze_checkpoint(
         "label_stats": label_stats,
         "normalized_label_entropy": label_stats["normalized_entropy"],
         "split": {"seed": int(split_seed), **_split_summary(split)},
+        "pre_valid_comparison": _variant_split_summary(post_valid_splits),
         "missing_split_labels": missing_support,
+        "missing_pre_valid_labels": missing_pre_valid,
         "valid": True,
-        "underpowered": bool(missing_support),
+        "underpowered": bool(missing_support or missing_pre_valid),
         "variants": {},
         "matched_nulls": {},
+        "thresholds": _threshold_metadata(),
     }
-    if missing_support:
+    if missing_support or missing_pre_valid:
         decision = gate_checkpoint(result)
         result["gate"] = asdict(decision)
         return result
@@ -601,16 +818,17 @@ def analyze_checkpoint(
     variants: dict[str, dict[str, object]] = {}
     row_scores: dict[str, Score] = {}
     train_scores: dict[str, Score] = {}
-    for variant_index, variant in enumerate(VARIANTS):
-        transformed, unchanged = variant_batch(
-            batch, variant, int(null_seed) + 1009 * variant_index
+    for variant in VARIANTS:
+        transformed = (
+            pre_valid_splits
+            if variant == "pre_only"
+            else variant_split_batches(batch, split, variant, seed=int(null_seed))
         )
         kinds = KINDS if variant == "real" else (("prior",) if variant == "context_only" else ("behavior",))
         models: dict[str, object] = {}
         for kind in kinds:
             summary, train_score, test_score = _fit_variant(
                 transformed,
-                split,
                 kind=kind,
                 num_skills=int(num_skills),
                 config=config,
@@ -622,15 +840,32 @@ def analyze_checkpoint(
             row_scores[key] = test_score
             train_scores[key] = train_score
         variants[variant] = {
-            "unchanged_fraction": unchanged,
+            "unchanged_fraction": transformed.unchanged_fraction,
+            "unchanged_fractions": transformed.unchanged_fractions,
+            "split_seeds": transformed.seeds,
             "models": models,
         }
+
+    post_summary, post_train, post = _fit_variant(
+        post_valid_splits,
+        kind="behavior",
+        num_skills=int(num_skills),
+        config=config,
+        device=device,
+        seed=int(model_seed),
+    )
+    variants["pre_only"]["comparison_post_model"] = post_summary
+    row_scores["post_valid:behavior"] = post
+    train_scores["post_valid:behavior"] = post_train
 
     behavior = row_scores["real:behavior"]
     prior = row_scores["real:prior"]
     full = row_scores["real:full"]
     pre = row_scores["pre_only:behavior"]
-    test_reset_ids = np.asarray(batch.reset_id, dtype=np.int64)[split.test]
+    test_reset_ids = np.asarray(real_splits.test.reset_id, dtype=np.int64)
+    pre_valid_test_reset_ids = np.asarray(
+        post_valid_splits.test.reset_id, dtype=np.int64
+    )
     primary_intervals = {
         "full_minus_prior_accuracy": asdict(
             cluster_bootstrap_difference(
@@ -643,9 +878,9 @@ def analyze_checkpoint(
         ),
         "behavior_post_minus_pre_accuracy": asdict(
             cluster_bootstrap_difference(
-                behavior.correct,
+                post.correct,
                 pre.correct,
-                test_reset_ids,
+                pre_valid_test_reset_ids,
                 reps=int(bootstrap_reps),
                 seed=int(bootstrap_seed) + 1,
             )
@@ -668,10 +903,19 @@ def analyze_checkpoint(
         }
 
     true_log_gain = full.true_log_prob - prior.true_log_prob
+    overfit_probe_keys = {
+        "real:behavior",
+        "real:prior",
+        "real:full",
+        "post_valid:behavior",
+        "pre_only:behavior",
+        *(f"{name}:behavior" for name in MATCHED_NULLS),
+    }
     overfit_reasons = [
         key
         for key, train_score in train_scores.items()
-        if train_score.accuracy - row_scores[key].accuracy > OVERFIT_ACCURACY_GAP
+        if key in overfit_probe_keys
+        and train_score.accuracy - row_scores[key].accuracy > OVERFIT_ACCURACY_GAP
     ]
     result.update(
         {
@@ -682,7 +926,7 @@ def analyze_checkpoint(
             ),
             "full_minus_prior_accuracy": full.accuracy - prior.accuracy,
             "behavior_minus_prior_accuracy": behavior.accuracy - prior.accuracy,
-            "behavior_post_minus_pre_accuracy": behavior.accuracy - pre.accuracy,
+            "behavior_post_minus_pre_accuracy": post.accuracy - pre.accuracy,
             "full_minus_prior_true_log_prob_mean": float(true_log_gain.mean()),
             "full_minus_prior_true_log_prob_positive_fraction": float(
                 np.mean(true_log_gain > 0.0)
@@ -691,6 +935,7 @@ def analyze_checkpoint(
             "matched_nulls": matched_nulls,
             "overfit_warning": bool(overfit_reasons),
             "overfit_reasons": overfit_reasons,
+            "overfit_probe_keys": sorted(overfit_probe_keys),
             "seeds": {
                 "split": int(split_seed),
                 "model": int(model_seed),
@@ -702,6 +947,75 @@ def analyze_checkpoint(
     )
     decision = gate_checkpoint(result)
     result["gate"] = asdict(decision)
+    return result
+
+
+def _invalid_result(
+    error: Exception,
+    *,
+    batch: G1WindowBatch | None = None,
+    source: Path | str | None = None,
+) -> dict[str, object]:
+    if isinstance(error, (G1DataError, AnalysisInvalidError)):
+        details = error.as_dict()
+    else:
+        details = {
+            "type": type(error).__name__,
+            "message": str(error),
+            "rows": [],
+        }
+    if source is not None and not details.get("source"):
+        details["source"] = str(source)
+
+    checkpoint_ids: list[str] = []
+    checkpoint_updates: list[int] = []
+    rows = details.get("rows", [])
+    if isinstance(rows, list):
+        checkpoint_ids.extend(
+            str(row["checkpoint_id"])
+            for row in rows
+            if isinstance(row, Mapping) and "checkpoint_id" in row
+        )
+        checkpoint_updates.extend(
+            int(row["checkpoint_update"])
+            for row in rows
+            if isinstance(row, Mapping) and "checkpoint_update" in row
+        )
+    if batch is not None:
+        checkpoint_ids.extend(np.asarray(batch.checkpoint_id).astype(str).tolist())
+        checkpoint_updates.extend(
+            np.asarray(batch.checkpoint_update, dtype=np.int64).astype(int).tolist()
+        )
+    unique_ids = sorted(set(checkpoint_ids))
+    unique_updates = sorted(set(checkpoint_updates))
+    decision = GateDecision("INVALID", (str(error),))
+    return {
+        "checkpoint_id": unique_ids[0] if len(unique_ids) == 1 else "unknown",
+        "checkpoint_update": unique_updates[0] if len(unique_updates) == 1 else None,
+        "rows": 0 if batch is None else int(np.asarray(batch.label).size),
+        "valid": False,
+        "underpowered": False,
+        "variants": {},
+        "matched_nulls": {},
+        "thresholds": _threshold_metadata(),
+        "error": details,
+        "gate": asdict(decision),
+    }
+
+
+def analyze_checkpoint_to_reports(
+    batch: G1WindowBatch,
+    output_dir: Path,
+    **analysis_kwargs: object,
+) -> dict[str, object]:
+    try:
+        result = analyze_checkpoint(batch, **analysis_kwargs)
+    except Exception as error:
+        _write_reports(
+            Path(output_dir), _invalid_result(error, batch=batch)
+        )
+        raise
+    _write_reports(Path(output_dir), result)
     return result
 
 
@@ -720,10 +1034,129 @@ def _write_reports(output_dir: Path, result: Mapping[str, object]) -> None:
         f"- Checkpoint: `{result.get('checkpoint_id', 'unknown')}`",
         f"- Gate: **{gate.get('status', 'INVALID') if isinstance(gate, Mapping) else 'INVALID'}**",
         f"- Rows: {result.get('rows', 0)}",
-        "",
-        "| variant | kind | unchanged | best step | test accuracy | macro-F1 | cross-entropy | train-test gap |",
-        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
+    error = result.get("error")
+    if isinstance(error, Mapping):
+        lines.extend(
+            [
+                "",
+                "## Invalid analysis",
+                "",
+                f"- Type: `{error.get('type', 'unknown')}`",
+                f"- Message: {error.get('message', 'unknown error')}",
+                f"- Source: `{error.get('source', 'unknown')}`",
+                f"- Rows: `{json.dumps(error.get('rows', []), sort_keys=True)}`",
+            ]
+        )
+    split = result.get("split")
+    if isinstance(split, Mapping):
+        lines.extend(
+            [
+                "",
+                "## Split",
+                "",
+                f"- Train rows: {split.get('train_rows', 0)}; Train resets: `{split.get('train_reset_ids', [])}`",
+                f"- Validation rows: {split.get('validation_rows', 0)}; Validation resets: `{split.get('validation_reset_ids', [])}`",
+                f"- Test rows: {split.get('test_rows', 0)}; Test resets: `{split.get('test_reset_ids', [])}`",
+            ]
+        )
+        comparison = result.get("pre_valid_comparison")
+        if isinstance(comparison, Mapping):
+            lines.append(
+                "- Valid-pre comparison rows: train={train}, validation={validation}, test={test}".format(
+                    train=comparison.get("train_rows", 0),
+                    validation=comparison.get("validation_rows", 0),
+                    test=comparison.get("test_rows", 0),
+                )
+            )
+    label_stats = result.get("label_stats")
+    if isinstance(label_stats, Mapping):
+        lines.extend(
+            [
+                "",
+                "## Baselines",
+                "",
+                f"- Label counts: `{label_stats.get('counts', [])}`",
+                f"- Normalized label entropy: {float(label_stats.get('normalized_entropy', 0.0)):.6f}",
+                f"- Maximum label fraction: {float(label_stats.get('maximum_fraction', 0.0)):.6f}",
+                f"- Majority accuracy: {float(result.get('majority_accuracy', 0.0)):.6f}",
+            ]
+        )
+    thresholds = result.get("thresholds")
+    if isinstance(thresholds, Mapping):
+        lines.extend(
+            [
+                "",
+                "## Thresholds",
+                "",
+                "| threshold | pre-registered value |",
+                "| --- | ---: |",
+            ]
+        )
+        for name, value in thresholds.items():
+            lines.append(f"| {name} | `{value}` |")
+    primary = result.get("primary_bootstrap")
+    if isinstance(primary, Mapping):
+        lines.extend(
+            [
+                "",
+                "## Primary differences",
+                "",
+                "| metric | value | Bootstrap 95% CI |",
+                "| --- | ---: | ---: |",
+            ]
+        )
+        for name in (
+            "full_minus_prior_accuracy",
+            "behavior_post_minus_pre_accuracy",
+        ):
+            interval = primary.get(name, {})
+            if not isinstance(interval, Mapping):
+                interval = {}
+            lines.append(
+                "| {name} | {value:.6f} | [{lower:.6f}, {upper:.6f}] |".format(
+                    name=name,
+                    value=float(result.get(name, 0.0)),
+                    lower=float(interval.get("lower", 0.0)),
+                    upper=float(interval.get("upper", 0.0)),
+                )
+            )
+    matched_nulls = result.get("matched_nulls")
+    if isinstance(matched_nulls, Mapping) and matched_nulls:
+        lines.extend(
+            [
+                "",
+                "## Matched nulls",
+                "",
+                "| null | real-minus-null accuracy | Bootstrap 95% CI | unchanged fraction |",
+                "| --- | ---: | ---: | ---: |",
+            ]
+        )
+        for name in MATCHED_NULLS:
+            row = matched_nulls.get(name, {})
+            if not isinstance(row, Mapping):
+                continue
+            interval = row.get("bootstrap", {})
+            if not isinstance(interval, Mapping):
+                interval = {}
+            lines.append(
+                "| {name} | {difference:.6f} | [{lower:.6f}, {upper:.6f}] | {unchanged:.6f} |".format(
+                    name=name,
+                    difference=float(row.get("accuracy_difference", 0.0)),
+                    lower=float(interval.get("lower", 0.0)),
+                    upper=float(interval.get("upper", 0.0)),
+                    unchanged=float(row.get("unchanged_fraction", 0.0)),
+                )
+            )
+    lines.extend(
+        [
+            "",
+            "## Variant scores",
+            "",
+            "| variant | kind | unchanged | best step | test accuracy | macro-F1 | cross-entropy | train-test gap |",
+            "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
     if isinstance(variants, Mapping):
         for variant in VARIANTS:
             row = variants.get(variant, {})
@@ -775,16 +1208,24 @@ def run_analysis(
     bootstrap_reps: int = 2000,
     bootstrap_seed: int = 26014,
 ) -> dict[str, object]:
-    torch_device = torch.device(str(device))
-    if torch_device.type == "cpu":
-        raise ValueError("real R26-G1a analysis requires CUDA; CPU is unit-test only")
-    if torch_device.type != "cuda":
-        raise ValueError(f"unsupported analysis device: {device}")
-    if not torch.cuda.is_available():
-        raise RuntimeError("CUDA was requested for R26-G1a analysis but is unavailable")
-    batch = read_g1_window_shards(Path(input_dir))
-    result = analyze_checkpoint(
+    output_path = Path(output_dir)
+    try:
+        torch_device = torch.device(str(device))
+        if torch_device.type == "cpu":
+            raise ValueError("real R26-G1a analysis requires CUDA; CPU is unit-test only")
+        if torch_device.type != "cuda":
+            raise ValueError(f"unsupported analysis device: {device}")
+        batch = read_g1_window_shards(Path(input_dir))
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA was requested for R26-G1a analysis but is unavailable")
+    except Exception as error:
+        _write_reports(
+            output_path, _invalid_result(error, source=Path(input_dir))
+        )
+        raise
+    return analyze_checkpoint_to_reports(
         batch,
+        output_path,
         num_skills=int(num_skills),
         config=FitConfig(
             max_steps=int(max_steps),
@@ -800,8 +1241,6 @@ def run_analysis(
         bootstrap_reps=int(bootstrap_reps),
         bootstrap_seed=int(bootstrap_seed),
     )
-    _write_reports(Path(output_dir), result)
-    return result
 
 
 def main() -> None:

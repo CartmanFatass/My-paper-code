@@ -8,6 +8,32 @@ from pathlib import Path
 import numpy as np
 
 
+class G1DataError(ValueError):
+    """Dataset contract failure with machine-readable audit context."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        field: str | None = None,
+        source: Path | str | None = None,
+        rows: list[dict[str, object]] | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.field = field
+        self.source = None if source is None else str(source)
+        self.rows = [] if rows is None else rows
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "type": type(self).__name__,
+            "message": str(self),
+            "field": self.field,
+            "source": self.source,
+            "rows": self.rows,
+        }
+
+
 @dataclass(frozen=True)
 class G1WindowBatch:
     label: np.ndarray
@@ -126,19 +152,63 @@ def build_prior_context(
     return result
 
 
-def _validate(batch: G1WindowBatch) -> G1WindowBatch:
+def _row_identities(
+    batch: G1WindowBatch,
+    row_indices: np.ndarray,
+) -> list[dict[str, object]]:
+    identity_fields = (
+        "reset_id",
+        "reset_seed",
+        "episode_id",
+        "env_id",
+        "agent_id",
+        "checkpoint_id",
+        "checkpoint_update",
+    )
+    arrays = {
+        field: np.asarray(getattr(batch, field)).reshape(-1) for field in identity_fields
+    }
+    rows: list[dict[str, object]] = []
+    for row_index in np.asarray(row_indices, dtype=np.int64).reshape(-1):
+        row: dict[str, object] = {"row_index": int(row_index)}
+        for field, values in arrays.items():
+            if 0 <= int(row_index) < values.size:
+                value = values[int(row_index)]
+                row[field] = str(value) if field == "checkpoint_id" else int(value)
+        rows.append(row)
+    return rows
+
+
+def _validate(
+    batch: G1WindowBatch,
+    *,
+    source: Path | str | None = None,
+) -> G1WindowBatch:
     arrays = {field: np.asarray(getattr(batch, field)) for field in FIELDS}
     label = arrays["label"].reshape(-1)
     n_rows = int(label.shape[0])
     for field, array in arrays.items():
         if array.ndim == 0:
-            raise ValueError(f"{field} must have a row dimension")
+            raise G1DataError(
+                f"{field} must have a row dimension", field=field, source=source
+            )
         if int(array.shape[0]) != n_rows:
-            raise ValueError(f"{field} has {array.shape[0]} rows, expected {n_rows}")
+            raise G1DataError(
+                f"{field} has {array.shape[0]} rows, expected {n_rows}",
+                field=field,
+                source=source,
+            )
 
     for field in FLOAT_FIELDS:
-        if not np.isfinite(np.asarray(arrays[field], dtype=np.float32)).all():
-            raise ValueError(f"{field} contains non-finite values")
+        finite = np.isfinite(np.asarray(arrays[field], dtype=np.float32))
+        if not finite.all():
+            bad_rows = np.unique(np.argwhere(~finite)[:, 0]).astype(np.int64)
+            raise G1DataError(
+                f"{field} contains non-finite values at rows {bad_rows.tolist()}",
+                field=field,
+                source=source,
+                rows=_row_identities(batch, bad_rows),
+            )
 
     values: dict[str, np.ndarray] = {}
     for field in FIELDS:
@@ -156,8 +226,8 @@ def _validate(batch: G1WindowBatch) -> G1WindowBatch:
 
 
 def write_g1_window_shard(path: Path, batch: G1WindowBatch) -> None:
-    validated = _validate(batch)
     output_path = Path(path)
+    validated = _validate(batch, source=output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
         output_path, **{field: getattr(validated, field) for field in FIELDS}
@@ -175,13 +245,17 @@ def read_g1_window_shards(root: Path) -> G1WindowBatch:
         with np.load(path, allow_pickle=False) as data:
             missing = [field for field in FIELDS if field not in data]
             if missing:
-                raise ValueError(f"{path} missing fields: {missing}")
+                raise G1DataError(f"{path} missing fields: {missing}", source=path)
+            shard = _validate(
+                G1WindowBatch(**{field: np.asarray(data[field]) for field in FIELDS}),
+                source=path,
+            )
             for field in FIELDS:
-                chunks[field].append(np.asarray(data[field]))
+                chunks[field].append(np.asarray(getattr(shard, field)))
     concatenated = {
         field: np.concatenate(chunks[field], axis=0) for field in FIELDS
     }
-    return _validate(G1WindowBatch(**concatenated))
+    return _validate(G1WindowBatch(**concatenated), source=input_root)
 
 
 def sample_g1_rows(batch: G1WindowBatch, max_rows: int, seed: int) -> G1WindowBatch:
