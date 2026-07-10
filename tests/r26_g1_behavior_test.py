@@ -341,11 +341,13 @@ def test_post_minus_pre_uses_identical_valid_rows(g1_behavior_batch):
 
 
 def test_post_minus_pre_reports_underpowered_when_valid_rows_lose_a_label(
+    tmp_path: Path,
     g1_behavior_batch,
 ):
     pre_valid = (g1_behavior_batch.label != 2).astype(np.float32)
+    batch = replace(g1_behavior_batch, pre_valid=pre_valid)
     result = analyze_checkpoint(
-        replace(g1_behavior_batch, pre_valid=pre_valid),
+        batch,
         num_skills=3,
         config=FitConfig(max_steps=1, patience=1, hidden_dim=8, validation_interval=1),
         device=torch.device("cpu"),
@@ -362,6 +364,29 @@ def test_post_minus_pre_reports_underpowered_when_valid_rows_lose_a_label(
         "validation": [2],
         "test": [2],
     }
+    split = grouped_reset_split(batch, seed=26011)
+    test_counts = np.bincount(batch.label[split.test], minlength=3)
+    expected_majority = float(test_counts.max() / split.test.size)
+    assert result["majority_accuracy"] == pytest.approx(expected_majority)
+
+    behavior_analyzer._write_reports(tmp_path, result)
+    markdown = (tmp_path / "r26_g1_behavior.md").read_text()
+    assert f"- Majority accuracy: {expected_majority:.6f}" in markdown
+    assert "- Missing split labels: `{}`" in markdown
+    assert (
+        '- Missing valid-pre labels: `{"test": [2], "train": [2], '
+        '"validation": [2]}`'
+        in markdown
+    )
+
+    unavailable_result = dict(result)
+    unavailable_result.pop("majority_accuracy")
+    unavailable_dir = tmp_path / "unavailable"
+    behavior_analyzer._write_reports(unavailable_dir, unavailable_result)
+    unavailable_markdown = (
+        unavailable_dir / "r26_g1_behavior.md"
+    ).read_text()
+    assert "- Majority accuracy: unavailable" in unavailable_markdown
 
 
 def test_nonfinite_input_writes_invalid_reports(

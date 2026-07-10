@@ -794,6 +794,13 @@ def analyze_checkpoint(
     )
     missing_support = _missing_split_support(active_labels, real_splits)
     missing_pre_valid = _missing_split_support(active_labels, post_valid_splits)
+    test_labels = labels[split.test]
+    majority_accuracy = None
+    if test_labels.size:
+        majority_accuracy = float(
+            np.bincount(test_labels, minlength=int(num_skills)).max()
+            / test_labels.size
+        )
     result: dict[str, object] = {
         "checkpoint_id": str(checkpoint_ids[0]),
         "checkpoint_update": int(checkpoint_updates[0]),
@@ -804,6 +811,7 @@ def analyze_checkpoint(
         "pre_valid_comparison": _variant_split_summary(post_valid_splits),
         "missing_split_labels": missing_support,
         "missing_pre_valid_labels": missing_pre_valid,
+        "majority_accuracy": majority_accuracy,
         "valid": True,
         "underpowered": bool(missing_support or missing_pre_valid),
         "variants": {},
@@ -920,10 +928,6 @@ def analyze_checkpoint(
     result.update(
         {
             "variants": variants,
-            "majority_accuracy": float(
-                np.bincount(labels[split.test], minlength=int(num_skills)).max()
-                / split.test.size
-            ),
             "full_minus_prior_accuracy": full.accuracy - prior.accuracy,
             "behavior_minus_prior_accuracy": behavior.accuracy - prior.accuracy,
             "behavior_post_minus_pre_accuracy": post.accuracy - pre.accuracy,
@@ -1071,6 +1075,12 @@ def _write_reports(output_dir: Path, result: Mapping[str, object]) -> None:
             )
     label_stats = result.get("label_stats")
     if isinstance(label_stats, Mapping):
+        majority_accuracy = result.get("majority_accuracy")
+        majority_text = "unavailable"
+        if isinstance(majority_accuracy, (int, float, np.integer, np.floating)):
+            majority_value = float(majority_accuracy)
+            if np.isfinite(majority_value):
+                majority_text = f"{majority_value:.6f}"
         lines.extend(
             [
                 "",
@@ -1079,7 +1089,30 @@ def _write_reports(output_dir: Path, result: Mapping[str, object]) -> None:
                 f"- Label counts: `{label_stats.get('counts', [])}`",
                 f"- Normalized label entropy: {float(label_stats.get('normalized_entropy', 0.0)):.6f}",
                 f"- Maximum label fraction: {float(label_stats.get('maximum_fraction', 0.0)):.6f}",
-                f"- Majority accuracy: {float(result.get('majority_accuracy', 0.0)):.6f}",
+                f"- Majority accuracy: {majority_text}",
+            ]
+        )
+    gate_status = gate.get("status") if isinstance(gate, Mapping) else None
+    if gate_status == "UNDERPOWERED":
+        missing_split_labels = result.get("missing_split_labels")
+        missing_pre_valid_labels = result.get("missing_pre_valid_labels")
+        split_support_text = (
+            json.dumps(dict(missing_split_labels), sort_keys=True)
+            if isinstance(missing_split_labels, Mapping)
+            else "unavailable"
+        )
+        pre_valid_support_text = (
+            json.dumps(dict(missing_pre_valid_labels), sort_keys=True)
+            if isinstance(missing_pre_valid_labels, Mapping)
+            else "unavailable"
+        )
+        lines.extend(
+            [
+                "",
+                "## Label support",
+                "",
+                f"- Missing split labels: `{split_support_text}`",
+                f"- Missing valid-pre labels: `{pre_valid_support_text}`",
             ]
         )
     thresholds = result.get("thresholds")
