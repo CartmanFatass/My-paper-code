@@ -201,6 +201,18 @@ Grouped shuffles must never fall back to a global shuffle when a group has one
 row. Singleton groups retain their original label and the unchanged fraction is
 reported.
 
+Every label null is constructed only after the reset-grouped split is fixed.
+Train, validation, and test labels are transformed independently with
+deterministic `(variant, split)` seeds; held-out labels must never determine a
+training or validation permutation or fake-marginal distribution.
+
+`acc_behavior(post) - acc_behavior(pre)` is evaluated on identical rows with a
+valid pre window. Within each already-fixed reset split, both the post and pre
+behavior probes are trained, validated, and tested on the same `pre_valid`
+subset. If filtering removes required label support from any split, this
+comparison is `UNDERPOWERED`; invalid pre windows must not be replaced with a
+one-sided zero feature vector for the gate.
+
 ## 8. Metrics And Pre-Registered G1a Gate
 
 Per checkpoint, report:
@@ -225,6 +237,16 @@ An arm0 checkpoint passes G1a only when all conditions hold:
    lower confidence bound for real versus the strongest matched null is above
    zero;
 5. no train/test overfit warning invalidates the read.
+
+The overfit warning is pre-registered as a strict train-minus-test accuracy gap
+greater than `0.20` for any fitted probe whose result participates in the gate
+or a required matched-null comparison. A gap equal to `0.20` does not trigger
+the warning. This threshold is emitted in result metadata and must not be tuned
+after observing R26 data.
+
+Validation-only early stopping uses a minimum validation-loss improvement of
+`1e-4`; this is a numerical tolerance, not a scientific gate. The tolerance is
+also emitted in result metadata.
 
 The arm0 screening family passes only if at least two of update 25, update 30,
 and final pass in the same direction. Arm2 is reported as a contrast and cannot
@@ -286,6 +308,14 @@ scientific labels or reward path.
 - Missing labels in a split: report `UNDERPOWERED`; do not silently resplit.
 - Non-finite feature or loss: fail the checkpoint analysis and preserve the
   offending row/checkpoint identifiers in the report.
+- Analyzer failures after an output directory is known write structured JSON
+  and Markdown with gate status `INVALID`, error type/message, checkpoint or
+  shard identity, and offending row identifiers when available before the CLI
+  returns a non-zero status.
+- The compact Markdown report includes split identities/counts, entropy and
+  majority baselines, primary gate differences and intervals, all matched-null
+  differences and intervals, thresholds, and gate reasons; JSON remains the
+  complete machine-readable artifact.
 - Every runner arm writes `command.txt`, `runner_status.txt`, stdout/stderr,
   dataset shards, analyzer JSON, analyzer Markdown, and a manifest below its
   assigned run directory.
