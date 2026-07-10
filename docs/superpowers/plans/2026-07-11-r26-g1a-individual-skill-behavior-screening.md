@@ -662,12 +662,14 @@ Expected time: 2-5 minutes on local CUDA with reduced diagnostic settings.
 & "C:\Users\wu\.conda\envs\SB3\python.exe" scripts/analyze_r26_g1_behavior.py `
   --input_dir "logs/r26_g1a_implementation_smoke/arm0_update25/windows" `
   --output_dir "logs/r26_g1a_implementation_smoke/arm0_update25/analysis" `
-  --num_skills 6 --device cuda --max_steps 20 --patience 2 `
+  --num_skills 4 --device cuda --max_steps 20 --patience 2 `
   --validation_interval 2 --bootstrap_reps 20
 ```
 
-The analyzer catches grouped-split or label-support insufficiency, writes an
-`UNDERPOWERED` report, and exits successfully. The smoke verifies the pipeline,
+`num_skills=4` is taken from the verified checkpoint metadata (`n_agents=6` is
+not the skill cardinality). The analyzer writes a structured report and exits
+successfully; a tiny smoke may be `UNDERPOWERED` or `INVALID` because of label
+support or the pre-registered overfit guard. The smoke verifies the pipeline,
 not the scientific gate.
 
 - [ ] **Step 7: Prepare Task 2 report and review package**
@@ -709,12 +711,12 @@ Use this arm table and no others:
 
 ```powershell
 $arms = @(
-    @{ Name = "arm0_update25"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt"; Update = 25 },
-    @{ Name = "arm0_update30"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_30.pt"; Update = 30 },
-    @{ Name = "arm0_final"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_final.pt"; Update = 32 },
-    @{ Name = "arm2_update25"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_update_25.pt"; Update = 25 },
-    @{ Name = "arm2_update30"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_update_30.pt"; Update = 30 },
-    @{ Name = "arm2_final"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_final.pt"; Update = 32 }
+    @{ Name = "arm0_update25"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt"; Update = 25; NumSkills = 4 },
+    @{ Name = "arm0_update30"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_30.pt"; Update = 30; NumSkills = 4 },
+    @{ Name = "arm0_final"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_final.pt"; Update = 32; NumSkills = 4 },
+    @{ Name = "arm2_update25"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_update_25.pt"; Update = 25; NumSkills = 4 },
+    @{ Name = "arm2_update30"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_update_30.pt"; Update = 30; NumSkills = 4 },
+    @{ Name = "arm2_final"; Checkpoint = "dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_final.pt"; Update = 32; NumSkills = 4 }
 )
 ```
 
@@ -734,7 +736,11 @@ param(
 The runner must reject any device other than `cuda`, verify all checkpoints
 before the first arm, print the expected artifact paths, run collection then
 analysis for each arm, and never include reward flags or invoke
-`ha_ctse_process.train`.
+`ha_ctse_process.train`. After collection, it must read
+`collector_manifest.json`, require
+`checkpoint_metadata.n_skills == arm.NumSkills`, and pass that exact value to
+`--num_skills`; a mismatch fails the arm instead of changing the analyzer
+cardinality.
 
 - [ ] **Step 2: Run dry-run verification**
 

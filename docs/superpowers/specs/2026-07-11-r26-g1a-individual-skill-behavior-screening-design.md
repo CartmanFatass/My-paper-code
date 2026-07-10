@@ -148,6 +148,13 @@ duration_idx, segment_length, checkpoint_id, checkpoint_update
 The collector writes compressed NPZ shards under the assigned run root. It
 must never write loose runtime files into the repository root.
 
+The analyzer skill cardinality is the checkpoint's actual `n_skills`, not the
+number of agents. The collector manifest records this value from checkpoint
+metadata, and the runner must pass the same value to the analyzer and reject a
+mismatch. The six registered R25 checkpoints were inspected before Task 2
+review and all use `n_skills=4` with `n_agents=6`; using `num_skills=6` would
+change normalized entropy and invalidate the scientific gate.
+
 ## 6. Held-Out Split And Probe Training
 
 ### 6.1 Grouped split
@@ -298,6 +305,11 @@ Do not modify `ha_ctse_process/standalone_agent.py`, the training loop, reward
 composition, policy/critic architecture, or checkpoint format for G1a. Generic
 window encoding belongs in the new R26 module and may reuse formulas, not R24's
 scientific labels or reward path.
+
+Both Python entrypoints must be directly executable by absolute or relative
+file path from a run/worktree without requiring callers to set `PYTHONPATH`;
+each entrypoint establishes the repository root before importing
+`ha_ctse_process`.
 
 ## 11. Error Handling And Auditability
 
