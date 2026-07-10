@@ -1,16 +1,23 @@
 from __future__ import annotations
 
+import copy
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
 import pytest
+import torch
 
 from ha_ctse_process.r26_g1_dataset import window_summary
+from scripts import collect_r26_g1_windows as collector
 from scripts.collect_r26_g1_windows import (
+    _RUNTIME_ATTRIBUTES,
     PendingWindow,
     collect_reset,
     pending_prior_context,
+    policy_parameter_sha256,
     require_cuda_device,
 )
 
@@ -56,6 +63,9 @@ class FakeEnv:
             "next_state": np.asarray([float(self.steps)], dtype=np.float32)
         }
 
+    def close(self) -> None:
+        pass
+
 
 class FakeAgent:
     def __init__(self, assignments: dict[int, list[tuple[int, int, int]]]) -> None:
@@ -72,6 +82,8 @@ class FakeAgent:
         self.segments = SimpleNamespace(active=[[None, None]])
         self.assignments = assignments
         self.current_step = 0
+        self.assignment_grad_enabled: list[bool] = []
+        self.action_grad_enabled: list[bool] = []
         self.optimizer = SimpleNamespace(step=self._forbidden)
 
     @staticmethod
@@ -103,6 +115,7 @@ class FakeAgent:
         deterministic: bool,
     ) -> None:
         del state, deterministic
+        self.assignment_grad_enabled.append(torch.is_grad_enabled())
         self.current_step = int(step)
         for agent_id, label, duration_idx in self.assignments.get(int(step), []):
             previous_skill = int(self.active_skills[env_id, agent_id])
@@ -154,6 +167,7 @@ class FakeAgent:
         state,
     ):
         del obs, deterministic, state
+        self.action_grad_enabled.append(torch.is_grad_enabled())
         actions = np.asarray(
             [
                 [float(self.current_step), float(self.active_skills[env_id, 0])],
@@ -284,3 +298,236 @@ def test_prior_context_excludes_current_focal_label():
 def test_collector_rejects_non_cuda_real_run():
     with pytest.raises(ValueError, match="requires --device cuda"):
         require_cuda_device("cpu")
+
+
+def test_collector_owns_no_grad_boundary_for_assignment_and_action():
+    agent = FakeAgent({0: [(0, 1, 0)]})
+    collect_reset(
+        FakeEnv(),
+        agent,
+        reset_id=0,
+        reset_seed=1,
+        episode_id=0,
+        skill_interval=1,
+        episode_max_steps=1,
+        checkpoint_id="fixture",
+        checkpoint_update=25,
+    )
+    assert agent.assignment_grad_enabled == [False]
+    assert agent.action_grad_enabled == [False]
+
+
+def test_incomplete_replacement_discards_once_and_emits_only_replacement():
+    batch, stats = _collect(
+        {0: [(0, 0, 0)], 1: [(0, 2, 1)]},
+        skill_interval=2,
+        episode_max_steps=3,
+    )
+    expected_actions = np.asarray([[1.0, 2.0], [2.0, 2.0]], dtype=np.float32)
+    expected_observations = np.asarray(
+        [[1.0, 1.5], [2.0, 2.5], [3.0, 3.5]], dtype=np.float32
+    )
+    assert batch.label.tolist() == [2]
+    assert batch.duration_idx.tolist() == [1]
+    assert np.allclose(batch.post_action[0], window_summary(expected_actions, 2))
+    assert np.allclose(
+        batch.post_effect[0], window_summary(expected_observations, 2)
+    )
+    assert stats.renewal_events == 2
+    assert stats.discarded_incomplete == 1
+    assert stats.completed_windows == 1
+
+
+def test_no_complete_pre_history_emits_zero_summaries_and_invalid_flag():
+    batch, _stats = _collect(
+        {0: [(0, 1, 0)]},
+        skill_interval=2,
+        episode_max_steps=2,
+    )
+    assert batch.pre_valid.tolist() == [0.0]
+    assert np.array_equal(batch.pre_action[0], np.zeros(8, dtype=np.float32))
+    assert np.array_equal(batch.pre_effect[0], np.zeros(8, dtype=np.float32))
+
+
+def test_exact_pre_history_emits_expected_summaries_and_valid_flag():
+    batch, _stats = _collect(
+        {0: [(0, 0, 0)], 2: [(0, 1, 1)]},
+        skill_interval=2,
+        episode_max_steps=4,
+    )
+    expected_actions = np.asarray([[0.0, 0.0], [1.0, 0.0]], dtype=np.float32)
+    expected_observations = np.asarray(
+        [[0.0, 0.5], [1.0, 1.5], [2.0, 2.5]], dtype=np.float32
+    )
+    assert batch.label.tolist() == [0, 1]
+    assert batch.pre_valid.tolist() == [0.0, 1.0]
+    assert np.allclose(batch.pre_action[1], window_summary(expected_actions, 2))
+    assert np.allclose(
+        batch.pre_effect[1], window_summary(expected_observations, 2)
+    )
+
+
+class MutatingFakeAgent(FakeAgent):
+    def act_low(self, obs, *, env_id: int, deterministic: bool, state):
+        actions = super().act_low(
+            obs,
+            env_id=env_id,
+            deterministic=deterministic,
+            state=state,
+        )[0]
+        segment = self.segments.active[env_id][0]
+        segment.skill = 2
+        segment.duration_idx = 1
+        segment.prev_skill = 2
+        segment.skill_age_prev = 99
+        segment.team_code = 0
+        segment.high_obs[:] = -10.0
+        segment.omega_start[:] = -20.0
+        segment.roster_active_skills_start[:] = 2
+        self.active_skills[env_id, :] = 2
+        self.active_team_codes[env_id] = 0
+        return actions, np.zeros(2, dtype=np.float32), np.zeros(2, dtype=np.float32)
+
+
+def test_assignment_time_fields_are_snapshotted_before_later_mutation():
+    agent = MutatingFakeAgent({0: [(0, 1, 0)]})
+    batch, _stats = collect_reset(
+        FakeEnv(),
+        agent,
+        reset_id=0,
+        reset_seed=1,
+        episode_id=0,
+        skill_interval=1,
+        episode_max_steps=1,
+        checkpoint_id="fixture",
+        checkpoint_update=25,
+    )
+    expected = PendingWindow(
+        agent_id=0,
+        label=1,
+        duration_idx=0,
+        previous_skill=0,
+        previous_age=0,
+        team_code=1,
+        assignment_obs=np.asarray([0.0, 0.5], dtype=np.float32),
+        omega=np.asarray([0.25, 0.75], dtype=np.float32),
+        teammate_roster=np.asarray([0, 0], dtype=np.int64),
+        pre_action=np.zeros(8, dtype=np.float32),
+        pre_effect=np.zeros(8, dtype=np.float32),
+        pre_valid=False,
+        actions=[],
+        observations=[],
+    )
+    assert batch.label.tolist() == [1]
+    assert batch.duration_idx.tolist() == [0]
+    assert np.array_equal(
+        batch.prior_context[0], pending_prior_context(agent, expected)
+    )
+
+
+def test_preserve_agent_runtime_restores_every_owned_attribute_by_identity():
+    agent = FakeAgent({0: [(0, 1, 0)]})
+    original_segment = FakeSegment(
+        skill=2,
+        duration_idx=1,
+        prev_skill=1,
+        skill_age_prev=3,
+        team_code=1,
+        high_obs=np.asarray([4.0, 5.0], dtype=np.float32),
+        omega_start=np.asarray([0.2, 0.8], dtype=np.float32),
+        roster_active_skills_start=np.asarray([2, 1], dtype=np.int64),
+        pre_assignment_actions=[],
+        pre_assignment_obs=[],
+        pre_assignment_high_obs=None,
+        pre_assignment_end_obs=None,
+    )
+    agent.segments.active[0][0] = original_segment
+    for index, name in enumerate(_RUNTIME_ATTRIBUTES):
+        if not hasattr(agent, name):
+            setattr(agent, name, {"marker": [index]})
+    originals = {name: getattr(agent, name) for name in _RUNTIME_ATTRIBUTES}
+    value_snapshots = copy.deepcopy(originals)
+
+    collect_reset(
+        FakeEnv(),
+        agent,
+        reset_id=0,
+        reset_seed=1,
+        episode_id=0,
+        skill_interval=1,
+        episode_max_steps=1,
+        checkpoint_id="fixture",
+        checkpoint_update=25,
+    )
+
+    for name, original in originals.items():
+        assert getattr(agent, name) is original, name
+    assert agent.segments.active[0][0] is original_segment
+    assert np.array_equal(agent.active_skills, value_snapshots["active_skills"])
+    assert np.array_equal(
+        agent.active_duration_indices, value_snapshots["active_duration_indices"]
+    )
+    assert np.array_equal(
+        agent.duration_remaining, value_snapshots["duration_remaining"]
+    )
+    assert np.array_equal(
+        agent.active_team_codes, value_snapshots["active_team_codes"]
+    )
+
+
+def test_parameter_hash_is_stable_and_sensitive_to_parameter_changes():
+    agent = SimpleNamespace(policy=torch.nn.Linear(2, 1, bias=False))
+    stable = policy_parameter_sha256(agent)
+    assert policy_parameter_sha256(agent) == stable
+    with torch.no_grad():
+        agent.policy.weight.add_(1.0)
+    assert policy_parameter_sha256(agent) != stable
+
+
+def test_run_collection_writes_one_shard_per_reset_and_manifest_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    checkpoint = tmp_path / "fixture_update25.pt"
+    checkpoint.write_bytes(b"checkpoint-fixture")
+    output_dir = tmp_path / "windows"
+    env = FakeEnv()
+    agent = FakeAgent({0: [(0, 1, 0)]})
+    metadata = {
+        "n_skills": 4,
+        "n_agents": 6,
+        "update_idx": 25,
+        "total_steps": 800000,
+    }
+    monkeypatch.setattr(collector, "require_cuda_device", lambda _device: None)
+    monkeypatch.setattr(
+        collector,
+        "_configure_agent",
+        lambda _args: (SimpleNamespace(), metadata, env, agent, 25),
+    )
+    args = SimpleNamespace(
+        checkpoint=str(checkpoint),
+        output_dir=str(output_dir),
+        config="fixture.config",
+        scenario="energy",
+        preset="S7-S1",
+        seed=7,
+        n_agents=6,
+        device="cuda",
+        skill_interval=1,
+        n_resets=3,
+        episode_max_steps=1,
+        checkpoint_id="fixture_update25",
+        checkpoint_update=25,
+    )
+
+    manifest = collector.run_collection(args)
+
+    assert len(list(output_dir.glob("reset_*.npz"))) == 3
+    written = json.loads((output_dir / "collector_manifest.json").read_text())
+    assert written == manifest
+    assert written["checkpoint_id"] == "fixture_update25"
+    assert written["checkpoint_update"] == 25
+    assert written["checkpoint_metadata"]["n_skills"] == 4
+    assert written["reset_seeds"] == [7, 8, 9]
+    assert written["stats"]["resets"] == 3
+    assert written["policy_parameter_sha256_equal"] is True

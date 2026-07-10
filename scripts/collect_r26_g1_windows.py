@@ -91,15 +91,18 @@ def preserve_agent_runtime(agent: Any) -> Iterator[None]:
     """Restore mutable rollout state after collection from a reused agent."""
 
     missing = object()
-    saved: dict[str, Any] = {}
+    originals: dict[str, Any] = {}
     for name in _RUNTIME_ATTRIBUTES:
         value = getattr(agent, name, missing)
         if value is not missing:
-            saved[name] = copy.deepcopy(value)
+            originals[name] = value
+    working = copy.deepcopy(originals)
+    for name, value in working.items():
+        setattr(agent, name, value)
     try:
         yield
     finally:
-        for name, value in saved.items():
+        for name, value in originals.items():
             setattr(agent, name, value)
 
 
@@ -308,14 +311,15 @@ def collect_reset(
 
         for step in range(int(episode_max_steps)):
             previous_segments = list(agent.segments.active[0])
-            agent.maybe_assign_skills(
-                obs,
-                state=state,
-                step=int(step),
-                k=interval,
-                env_id=0,
-                deterministic=False,
-            )
+            with torch.no_grad():
+                agent.maybe_assign_skills(
+                    obs,
+                    state=state,
+                    step=int(step),
+                    k=interval,
+                    env_id=0,
+                    deterministic=False,
+                )
             current_segments = list(agent.segments.active[0])
             changed = [
                 agent_id
