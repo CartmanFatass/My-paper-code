@@ -21,16 +21,26 @@ ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | 
 
 Status vocabulary:
 `planned`, `launch-ready`, `running`, `completed`, `stopped`, `failed`,
-`invalid`, `superseded`, `blocked`.
+`invalid`, `superseded`, `blocked`, `standing-reference`.
+
+**Standing-reference rule (user directive, 2026-07-10):** rows marked
+`standing-reference` are fixed comparison data — the HMASD baseline curve
+(REF-20260617) and the completed HA-CTSE baseline/control arms (R25 arm0/arm2
+archives). Future experiment designs MUST reuse these archived curves and
+checkpoints instead of re-running them; do not include an HMASD arm or a
+repeat baseline arm in new runner scripts. A new control arm is justified only
+when a config change makes the archived control incomparable (e.g., env-count
+or scenario change), and that exception needs explicit user approval in the
+experiment brief.
 
 ## Current Dashboard
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EXP-20260711-r26-g1a-individual-skill-screening | launch-ready | R26-G1a reward-off screening | local CUDA (RTX 4070 Laptop 8 GB), six frozen R25 checkpoints | ExpManager | per-checkpoint gate plus arm0 2-of-3 family gate | `scripts/run_r26_g1_screening_local_cuda.ps1`; proposed run root `logs/r26_g1a_screening/` | No reward; a pass authorizes only separate G1b design. Launch is not authorized or executed. |
-| EXP-20260710-r25-qa-verification-1m | launch-ready | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager | when launched: monitor checkpoint progression at 160k intervals; after cloud completion: eval_episodes.csv coverage trajectory vs HMASD milestones; checkpoint maturity for G1 diagnostics | `scripts/run_r25_qa_verification_cloud_64env_1m.sh` (runner); `logs_cloud_r25_qa_verification_1m/arm{0,2}/seed*/` (per-run log roots); `logs/r25_runner_build/dryrun.log` (build evidence) | Verification tier scaling R23-validated q_A mechanism to 1M steps. arm0 = team-intent baseline (no q_A), arm2 = team-intent + q_A actionability residual reward. q_d/q_D rewards OFF. Gate criteria deferred to G1 diagnostics on mature (800k+) checkpoints. |
+| EXP-20260710-r25-qa-verification-1m | completed / read + dispositioned 2026-07-10; arm0/arm2 archives now standing-reference (DO NOT RE-RUN — user directive 2026-07-10) | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed single-seed gate analysis complete | `dist/logs_cloud_r25_qa_verification_1m/` (cloud archive); `gate_read_r25_seed1.md` (result analyst read); peer review Round 6 archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | arm0 arch-only beats arm2 q_A at 640k-960k (coverage 0.235→0.417 vs 0.052→0.113; throughput 13.76 vs 2.81 Mbps @960k); neither reaches HMASD milestones (0.7@480k, 0.9@800k); q_A reward demoted to default-off by Round 6 peer review (NOT VERIFIED at 1M verification gate under n=1 single-seed setup); parity OPEN (update-count confound: 32 updates vs HMASD ~2×/step). |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — 4/4 analyzed (3 CPU, qAoff/seed2 on GPU per user directive); external peer review Round 5 completed; disposition ACCEPTED 2026-07-09 | R24 frozen q_d null probes | cloud archive `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` + local analysis complete | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed synthesis complete | Archive complete; peer review Round 5 text archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | R24-1 FAIL accepted 2026-07-09 (Round 5, SUPPORTS_WITH_CONDITIONS). Wording condition: "fail under tested policies and current diagnostic setup" (3 of 4 collapsed). D2 sensitivity re-run approved-deferred with conditions. D3 pivot direction accepted pending deconfound. q_d/q_D rewards remain BLOCKED. |
-| REF-20260617-hmasd-baseline-s7s1-seed1 | completed (stopped at 66% budget, clean) | HMASD baseline reference curve | local, 32env, rollout 500, metrics-light; `C:\project\tf-logs\hmasd\energy-S7-S1\...\20260617_133148` | ResultAnalyst (read 2026-07-09) | none — reference | `logs/hmasd_baseline_read_20260709/metric_extract.md` | HMASD S7-S1 pace/ceiling reference (seed1): eval coverage >=0.5 and >=0.7 first at 480k, >=0.9 at 800k; plateau ~0.95-0.99 from ~800-960k; final-window (1.76M-2.08M) coverage mean 0.9639, reward mean 380.29; zero-coverage eval episodes gone from 640k. Run stopped externally at 2,112,000/3,200,000 steps, no crash. Caveats: 32env (vs 64env HA-CTSE cloud runs), predates parity metrics (no coverage_eq1 fields), single seed. |
+| REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference (completed; stopped at 66% budget, clean; DO NOT RE-RUN — user directive 2026-07-10) | HMASD baseline reference curve | local, 32env, rollout 500, metrics-light; `C:\project\tf-logs\hmasd\energy-S7-S1\...\20260617_133148` | ResultAnalyst (read 2026-07-09) | none — reference | `logs/hmasd_baseline_read_20260709/metric_extract.md` | HMASD S7-S1 pace/ceiling reference (seed1): eval coverage >=0.5 and >=0.7 first at 480k, >=0.9 at 800k; plateau ~0.95-0.99 from ~800-960k; final-window (1.76M-2.08M) coverage mean 0.9639, reward mean 380.29; zero-coverage eval episodes gone from 640k. Run stopped externally at 2,112,000/3,200,000 steps, no crash. Caveats: 32env (vs 64env HA-CTSE cloud runs), predates parity metrics (no coverage_eq1 fields), single seed. |
 | EXP-20260708-r24-qd-null-control-cloud-handoff | completed | R24 | cloud CUDA / 64env package | ExpManager + controller | ResultAnalyst to read metrics from the completed cloud archive before any q_d/q_D reward decision | `dist/ha_ctse_r24_qd_null_control_cloud_runtime_20260708_190315.zip`; `dist/r24_qd_null_control_log_extract_expmanager_20260708_230322`; `scripts/run_r24_qd_null_control_cloud_64env.sh`; default log root `logs_cloud_r24_qd_null_control_64env` | Cloud archive inspected. Both seeds finished with `exit_code=0` and `total_steps=320000`. Seed1 final eval row: `reward=52.852671269315316`, `coverage_ratio=0.8`, `system_throughput_mbps=8.611111111111114`, `backhaul_connected_step_fraction=0.51`, `zero_throughput_step_fraction=0.49`. Seed2 final eval row: `reward=-4.881497951854478`, `coverage_ratio=0.0`, `system_throughput_mbps=0.0`, `backhaul_connected_step_fraction=0.0`, `zero_throughput_step_fraction=1.0`. No `Traceback`, `RuntimeError`, `NaN`, `OOM`, or `BrokenPipe` matches were found in the runner logs. |
 | EXP-20260707-r24-assignment-to-behavior-bridge | completed / blocked | R24 | local CUDA diagnostics | ExpManager | run matched-null forced-audit controls A-D, then reward-off behavior-window q_d probe; set `q_D/q_d` reward decision only after gate pass | `scripts/run_r24_behavior_audit_local_cuda.ps1`; `scripts/r24_forced_behavior_audit.py`; `logs_r24_qd_probe_local_cuda/seed1`; `logs_r24_behavior_audit_local/r24_behavior_audit.csv`; `logs_r24_behavior_audit_smoke/r24_behavior_audit.csv` | forced-audit signal is positive but insufficient for reward gating. q_d probe is near-null (`residual_gain=0.01105`, `positive_frac=0.52855`) and cannot justify reward-on. `q_D` and `q_d` rewards remain blocked pending matched-null controls + behavior-window `q_d` gate pass (`effect_ratio_h50>=1.3` + `h50-h10` growth + `between_within_ratio_h50>1.2`). |
 | EXP-20260707-r24-assignment-to-behavior-bridge-overnight | completed | R24 | local CUDA / `logs_r24_overnight_existing_local_cuda/run_20260708_000836` | ExpManager | checked arm-level `runner_status.txt`, `runner_output.log`, audit/train tails, and `_watch/watch_state.json` | `scripts/run_r24_overnight_existing_local_cuda.ps1`; `scripts/run_r24_behavior_audit_local_cuda.ps1`; `scripts/run_r24_qd_probe_local_cuda.ps1`; `scripts/watch_r24_overnight_existing.ps1`; `scripts/codex_r24_alert_handler.ps1`; `logs_r24_overnight_existing_local_cuda/run_20260708_000836/arm*` | one-click local overnight runner completed with `NResets=64`, `NumEnvs=16`; all five arms finished with `exit_code=0`. |
@@ -139,9 +149,9 @@ gate. Record facts only; the controller owns scientific interpretation.
 
 ### EXP-20260710-r25-qa-verification-1m
 
-Launch-ready cloud execution record for the q_A verification tier.
+Completed cloud execution record for the q_A verification tier.
 
-- Status: `launch-ready`
+- Status: `completed / read + dispositioned 2026-07-10`
 - Stage/Round: `R25 verification tier` (scaling R23-validated q_A to 1M steps, 64 env)
 - Location/compute: cloud CUDA, 64 envs, 1M steps (1000000), two arms, default seed `1`
 - Runner script: `scripts/run_r25_qa_verification_cloud_64env_1m.sh`
@@ -241,6 +251,25 @@ SEEDS=1 bash scripts/run_r25_qa_verification_cloud_64env_1m.sh
 - Single seed (seed 1 only): results are point estimates; seed-consistency requires seed 2 re-run
 - 64 env matches R23-next matrix cloud baseline; local 16env R23 showed noise-dominated task signal
 - Mature checkpoint criteria (800k+): earlier checkpoints may show high noise; gate decisions deferred to 800k+
+
+**Result read (2026-07-10)**:
+
+- Both arms finished cleanly: 1,000,000 steps, 64 envs, 32 PPO updates, seed 1, ~6h10m each, back-to-back on one GPU. Manifests confirm arms differ only in the q_A reward block; q_d/q_D rewards off in both.
+- Eval coverage trajectory (mean of 20 episodes) at 160k/320k/480k/640k/800k/960k: arm0_arch_only 0.067/0.033/0.055/0.235/0.230/0.417 (rising at end); arm2_qA_reward 0.060/0.147/0.085/0.052/0.113/0.113 (flat since 320k). Throughput at 960k: arm0 13.76 Mbps vs arm2 2.81. Episode reward at 960k: arm0 57.7 vs arm2 20.4.
+- Pattern: arm2 led most metrics at 160k–480k; arm0 reversed and widened the gap over the last 3 eval points (all four core metrics aligned).
+- Neither arm crossed HMASD reference milestones (0.7@480k, 0.9@800k, plateau 0.964±0.003). arm0 max 0.417@960k, still rising; arm2 0.113.
+- q_A mechanism itself was live and learning in arm2: reward mean 0.000115→0.0046, acc_full 0.16→0.35 vs prior ~0.18, residual_gain 0.038→0.172 monotone rising. Entropies/switch_rate nearly identical across arms (z_usage ~0.98 both).
+- Anomalies logged: eval `checkpoint` column NaN (use total_steps); arm2 `q_a_reward_applied_steps` drops 7700→2011 at final update (undiagnosed); no 1M eval row (expected, eval_interval boundary).
+- Variance context: nominally identical R24 320k family spanned coverage 0.0–0.7, so single-seed point estimates are wide; the informative signal is the within-pair late reversal, not absolute levels.
+
+**Disposition Accepted (2026-07-10, Round 6 peer review)**:
+
+- External review Round 6 (GPT-5.6-sol max xhigh; raw reply archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md`):
+  - **D1 ACCEPTED**: q_A intrinsic reward = NOT VERIFIED at this gate; demoted from promoted/sanctioned (R23-validated) to default-off. Wording condition: this is a gate failure "under the tested setup, n=1 seed per arm", NOT a settled claim that q_A is causally harmful; arm0 is the stronger line but not "proven superior" from n=1. q_A discriminator remains available probe-only. Architecture flags (team_intent_k 8, z_assignment_residual_gain 0.5) stay mainline.
+  - **D2 ACCEPTED**: HMASD parity OPEN, not failed — update-count confound (32 updates vs HMASD ~2×/step) plus arm0 still rising. Reviewer info-value ranking for follow-ups: 1M@32env update-matched > seed-2 R25 replication > 2M@64env. Next verification run = 1M@32env.
+  - **D3 ACCEPTED**: R26 = G1 individual-skill differentiation / actor-conditioning capacity (per principles G1 gate), screening tier first. Use R25 mature checkpoints (updates 25/30/final, both arms) for diagnostics; treat arm2 as a CONTRAST condition (legibility-vs-task divergence), not a better checkpoint; caveat: 32-update snapshots may be underpowered for G1 probes.
+  - Reviewer red flags recorded: serially-correlated late eval points ≠ independent replications; no CIs on 20-episode eval means; q_A reward magnitude relative to env advantage never quantified (required before any "interference" causal claim); HMASD reference single-run and not update-matched.
+  - Approved-cheap follow-up diagnostics (existing logs/checkpoints only, no training): (i) correlate q_A reward share + residual gain vs task metrics across checkpoints; (ii) offline-score arm0 vs arm2 trajectories with the frozen q_A discriminator (legibility-vs-service dissociation test).
 
 ### EXP-20260707-r24-assignment-to-behavior-bridge
 

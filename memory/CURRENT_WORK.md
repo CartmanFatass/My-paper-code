@@ -8,12 +8,38 @@ context is archived under `memory/LTM/`.
 ## Controller Handoff
 
 - 2026-07-11: Codex is the active controller for the traditional HMASD
-  R24/R25/R26 line in isolated worktree `C:\project\HMASD\.worktrees\r26-g1a`.
+  R24/R25/R26 line on branch `aggressive`. The reviewed R26-G1a work was
+  fast-forwarded from `codex/r26-g1a` at `1bc3456` while preserving the
+  pre-existing aggressive working tree through stash/apply conflict resolution.
   R26-G1a implementation and verification are complete, but the scientific
   six-checkpoint screen has not run. The current gate is explicit user approval
   for an estimated 30--45 minutes of local CUDA work. IMOD remains a separate
   migrated project/track and does not replace or redefine this line. The
   binding handover protocol below remains in force.
+- 2026-07-11 subagent cache policy update: project runtime capacity is now
+  `max_threads = 12`. The controller must reuse compatible child threads by
+  `(profile, model/reasoning, sandbox, workstream, ownership)` for sequential
+  follow-ups; `DONE` no longer implies close. Twelve is retention capacity, not
+  a fan-out target. A Codex app/session restart is required before the runtime
+  exposes the new ceiling.
+- 2026-07-11 correction: HMASD and IMOD are independent active research
+  workspaces. `C:\project\HMASD` continues the traditional HA-CTSE R24/R25
+  line, including R26 individual-skill diagnostics and update-matched parity
+  work. `C:\project\IMOD` carries the separate IMOD-Direct exploration; its
+  design gates do not replace or block the traditional HA-CTSE continuation.
+- 2026-07-10: standalone IMOD workspace migration completed from HMASD to
+  `C:\project\IMOD`. The new repository has independent Git history on branch
+  `main`, root commit `4b84b8b`, and preserves the current working-tree
+  `AGENTS.md` plus complete `.codex/` configuration. Reproducible package:
+  `dist/imod_workspace_bundle_20260710_final.zip`; manifest and per-file
+  SHA256 records are inside the archive. The migrated workspace passed checksum
+  verification, core import smoke, workflow-protocol validation, and focused
+  R24 audit tests (20 passed). No logs, checkpoints, old `.git`, caches, or
+  experiment outputs were migrated. Future IMOD design/implementation work
+  should start in the new workspace. This HMASD repository remains active for
+  the traditional HA-CTSE line and also preserves its source history and
+  experiment archive. Existing q_d/q_D blocks and written-spec / cross-family
+  review gates are unchanged.
 - 2026-07-10: controller direction is Claude Code -> Codex for an isolated
   theory/design revision on branch `aggressive`. The user approved IMOD-Direct
   as the replacement direction for graph-first CSOG, and Codex is writing the
@@ -28,8 +54,9 @@ context is archived under `memory/LTM/`.
 - 2026-07-09: R24 execution handed off from the Codex controller to Claude Code.
   The Claude-side subagent workflow (`.claude/agents/README.md`, cloned from
   `AGENTS.md`/`.codex/agents/`) now governs delegation; the MARL design
-  cross-validation gate runs through `marl-peer-reviewer` (Codex plugin,
-  gpt-5.5 xhigh). Experiment state below is unchanged by the handoff.
+  cross-validation gate runs through `marl-peer-reviewer` (Codex plugin).
+  Peer-review model updated 2026-07-10: pinned to gpt-5.6-sol max (xhigh tier).
+  Experiment state below is unchanged by the handoff.
 - Binding handover protocol for all future Claude<->Codex controller switches:
   `docs/subagents/claude-codex-handover-spec.md` (read at every switch; keep
   this block current per its section 2).
@@ -48,9 +75,10 @@ context is archived under `memory/LTM/`.
 - Reach HMASD-level S7-S1 behavior at roughly 1e6 steps before returning to
   S7-S3.
 - Treat 160k/320k runs as mechanism gates, not final HMASD-comparison verdicts.
-- Current main line: R24 Assignment-to-Behavior Bridge. R23-next validates the
-  q_A residual path as high-level `Z -> xi` actionability, not full behavioral
-  closure.
+- Current main line: R24 Assignment-to-Behavior Bridge. R23-next validated the
+  q_A residual path as high-level `Z -> xi` actionability; R25 verification
+  read complete (2026-07-10): q_A mechanism NOT VERIFIED at 1M scale, n=1 seed,
+  demoted to default-off per Round 6 peer review (D1 ACCEPTED).
 - Current state update: completion of R24 frozen q_d null-probe core Tasks 1-4 after
   full review chain:
   - Added `ha_ctse_process/r24_qd_dataset.py` with detached `q_d` window export
@@ -174,7 +202,7 @@ context is archived under `memory/LTM/`.
   Custom roles live in standalone `.codex/agents/*.toml` files and are
   explicitly registered with `[agents."<name>"].config_file` entries for current
   runtime compatibility. The documented `[agents]` defaults are explicitly
-  recorded: `max_threads = 6`, `max_depth = 1`, and
+  recorded: `max_threads = 12`, `max_depth = 1`, and
   `job_max_runtime_seconds = 1800`. Do not restore the retired YAML manifest.
 - `docs/superpowers/plans/2026-07-06-r23-next-actionability.md`: accepted
   R23-next implementation and experiment matrix plan.
@@ -196,6 +224,7 @@ context is archived under `memory/LTM/`.
   Fail/mixed/underpowered outcomes follow the accepted decision tree and do not
   authorize reward injection. `q_A`/`q_d`/`q_D` reward paths remain
   blocked/default-off while this gate is open.
+- `EXP-20260710-r25-qa-verification-1m` — completed 1M-step verification on 64env, 1 seed, 2 arms; external peer review Round 6 (GPT-5.6-sol max xhigh); disposition ACCEPTED 2026-07-10. q_A NOT VERIFIED at verification gate (demoted to default-off, D1); HMASD parity OPEN pending update-count deconfound (D2); R26 pivot to G1 individual-skill diagnostics approved (D3).
 - `EXP-20260709-r24-frozen-qd-null-probes` — completed 4/4 cloud runs with external peer review (Round 5, GPT-5.5 xhigh); disposition ACCEPTED 2026-07-09.
 - R24-1 verdict: **FAIL accepted** with wording condition: "fail under the tested policies and current diagnostic setup" (3 of 4 policies collapsed), NOT a categorical universal negative. q_d/q_D rewards remain BLOCKED on this evidence line.
 - External review Round 5 disposition (raw text verified from DIALOGUE_ARCHIVE.md):
@@ -233,29 +262,22 @@ context is archived under `memory/LTM/`.
 2. After a launch completes, read the per-checkpoint gate and the arm0 2-of-3
    family gate before choosing PASS/FAIL/MIXED/UNDERPOWERED. Arm2 remains
    contextual; a pass advances only to G1b design with rewards off.
-3. Separately, user reviews
-   `docs/superpowers/specs/2026-07-10-imod-direct-design.md`; revise the written
-   spec if requested. Do not write a replacement implementation plan yet.
-4. Prepare the unchanged IMOD design for independent Claude/Gemini MARL review
-   and archive the raw review plus controller disposition before scientific
-   acceptance.
-5. After written-spec and cross-family review approval, invoke the
-   Superpowers writing-plans stage for the minimal reward-off G-1/G1 instrument
-   and direct-effect diagnostic only. Do not plan G2/G3 implementation as if G1
-   has already passed.
-6. Existing experiment operations remain separate from this design revision.
-   Before acting, verify the run-local status for
-   `EXP-20260709-local-overnight-audit-power-r23-deconfound`; if its matched
-   arm0/arm2 pairs completed, read their coverage/throughput trajectories and
-   preserve the result as a q_A task-effect deconfound, not IMOD evidence.
-7. `EXP-20260710-r25-qa-verification-1m` remains launch-ready in
-   `memory/ExpRecord.md`; this design turn neither launches nor cancels it.
-8. D2 remains approved-deferred as an archival sensitivity analysis only, with
+3. Treat the completed R25 arm0/arm2 archives and HMASD baseline as standing
+   references. Reuse their curves/checkpoints; do not rerun those controls.
+4. Optional cheap q_A interference diagnostics may use existing R25 artifacts:
+   correlate q_A reward share/residual gain with task metrics, or offline-score
+   arm0 versus arm2 trajectories with the frozen q_A discriminator.
+5. The separate update-matched parity question may later use a 1M/32env cloud
+   run prepared through the cloud-handoff protocol. It requires its own explicit
+   user approval and must not duplicate a standing-reference control.
+6. D2 remains approved-deferred as an archival sensitivity analysis only, with
    separate validation, identical stopping rules, all outcomes, one all-GPU
    device class, and no reward unblocking from an unexpected pass.
-9. Do NOT proceed to q_d/q_D reward arms, graph/world-model/async IMOD modules,
-   or a new intrinsic reward. q_d/q_D remain BLOCKED by R24-1, and IMOD has not
-   passed its direct-effect gate.
+7. IMOD design and implementation continue only in the separate
+   `C:\project\IMOD` workspace; do not use IMOD state as evidence for this
+   traditional R24/R25/R26 line.
+8. Do NOT proceed to q_d/q_D reward arms or a new intrinsic reward. q_d/q_D
+   remain BLOCKED by R24-1 and the R26-G1a/G1b sequence.
 
 ## Do Not Do Yet
 
@@ -263,11 +285,18 @@ context is archived under `memory/LTM/`.
   dry-run checks, or implementation smokes as scientific checkpoint evidence.
   Do not enable `q_A`, `q_d`, or `q_D` reward paths; even a G1a family pass
   authorizes only G1b design.
+- Do not re-run the standing-reference runs (user directive 2026-07-10): the
+  HMASD baseline (REF-20260617) and the completed R25 baseline/control arms
+  (arm0_arch_only, arm2_qA_reward archives) are fixed comparison data. Future
+  experiments reuse the archived curves/checkpoints; no HMASD arm and no
+  repeat baseline arm in new runners (exception only for incomparable config
+  changes, with explicit user approval). See the standing-reference rule in
+  `memory/ExpRecord.md`.
 - Do not execute the superseded CSOG roadmap or Phase-A/G0 plan. Do not create
   an IMOD implementation plan until the user has reviewed the written spec and
   the required independent cross-family review is archived.
 - Do not enable `q_D` or `q_d` reward, q_D/q_d coefficient sweeps, or q_D target engineering as the primary branch. R24-1 FAIL accepted 2026-07-09; q_d/q_D rewards remain BLOCKED until D3 diagnostic design passes cross-validation and shows individual-skill behavioral differentiation is real.
-- Do not launch 960k scale/task runs from R23/q_A before arm0-vs-arm2 deconfound is read (locally tonight/2026-07-10) and R24-1 disposition is fully archived.
+- Do not launch 960k scale/task runs from R23/q_A before arm0-vs-arm2 deconfound is read (locally tonight/2026-07-10), R24-1 disposition is fully archived, and R25 non-verification (demotion to default-off, D1) is resolved by G1 diagnostics.
 - Do not launch seed2 depth for the weak g-info coefficient line until R24-1/D3 pivot resolves.
 - Do not add new kappa/hazard/DADS/communication-intrinsic mechanisms before the R24 assignment-to-behavior bridge is resolved (R24-1 FAIL accepted, D3 pivot direction registered, diagnostic design pending).
 - Do not run D2 sensitivity re-run on the frozen analyzer until all four conditions are confirmed (separate validation split, identical stopping rules, all outcomes reported, single all-GPU device class) and q_d/q_D reward paths remain blocked even if D2 passes (instrument-validity reopened only, per Round 5 advice).
