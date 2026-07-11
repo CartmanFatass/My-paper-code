@@ -454,7 +454,19 @@ VARIANTS = (
     "duration_matched", "agent_duration_matched", "pre_only",
     "action_only", "effect_only", "context_only",
 )
+
+MATCHED_NULLS = (
+    "agent_matched", "duration_matched", "agent_duration_matched",
+)
 ```
+
+The three entries in `MATCHED_NULLS` are the exact gate-mandatory grouped
+matched nulls. `shuffled` and `fake_marginal` remain required reported
+diagnostic/global label nulls in `VARIANTS`, but they are excluded from the
+numeric gate, strongest-matched-null bootstrap, and gate-overfit invalidation.
+This is the pre-launch written-contract correction accepted on 2026-07-11;
+R26-G1a has not collected scientific data, and executable semantics are
+unchanged.
 
 `gate_checkpoint` returns `PASS`, `FAIL`, `MIXED`, `UNDERPOWERED`, or `INVALID`
 and checks the five numeric conditions in the design. Reports must include all

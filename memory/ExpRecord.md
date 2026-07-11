@@ -62,6 +62,17 @@ no scientific `PASS`/`FAIL` decision has been made.
 - Status source: TestRunner final verification, controller pace estimate, and
   the accepted R26-G1a design/implementation plan.
 
+**Pre-launch contract correction (2026-07-11):** the prior launch-ready record
+erroneously expanded the numeric gate from the accepted three grouped matched
+nulls to five label nulls. Before any R26-G1a scientific data were collected,
+the record was aligned with the accepted executable contract: the
+gate-mandatory grouped matched nulls are exactly `agent_matched`,
+`duration_matched`, and `agent_duration_matched`. `shuffled` and
+`fake_marginal` remain required reported diagnostic/global label nulls, but are
+excluded from the numeric gate, strongest-matched-null bootstrap, and
+gate-overfit invalidation. No executable semantics or observed result changed;
+the experiment remains launch-ready, not launched, and reward-off.
+
 **Exact proposed command (not executed)**:
 
 ```powershell
@@ -101,10 +112,10 @@ rather than infer or change analyzer cardinality.
 - A checkpoint clears the numeric gate only if all five conditions hold:
   normalized label entropy is at least `0.8`; `acc_full - acc_prior >= 0.05`;
   `acc_behavior(post) - acc_behavior(pre) >= 0.05`; real beats every
-  label-matched null (`shuffled`, `fake_marginal`, `agent_matched`,
-  `duration_matched`, and `agent_duration_matched`) and the reset-cluster
-  bootstrap 95% lower confidence bound for real versus the strongest matched
-  null is above zero; and no train/test overfit warning invalidates the read.
+  gate-mandatory grouped matched null (`agent_matched`, `duration_matched`, and
+  `agent_duration_matched`) and the reset-cluster bootstrap 95% lower
+  confidence bound for real versus the strongest of those three matched nulls
+  is above zero; and no train/test overfit warning invalidates the read.
 - The overfit warning is a strict train-minus-test accuracy gap greater than
   `0.20` for any fitted probe participating in the gate or required matched-null
   comparison; a gap equal to `0.20` does not trigger it.

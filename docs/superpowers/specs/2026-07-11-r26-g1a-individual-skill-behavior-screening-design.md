@@ -213,6 +213,15 @@ Train, validation, and test labels are transformed independently with
 deterministic `(variant, split)` seeds; held-out labels must never determine a
 training or validation permutation or fake-marginal distribution.
 
+**Pre-launch contract correction (2026-07-11, before any R26-G1a data were
+collected):** the gate-mandatory grouped matched nulls are exactly
+`agent_matched`, `duration_matched`, and `agent_duration_matched`. `shuffled`
+and `fake_marginal` remain required reported diagnostic/global label nulls, but
+they are excluded from the numeric gate, strongest-matched-null bootstrap, and
+gate-overfit invalidation. This terminology correction aligns the written
+contract with the accepted Task 1 executable contract; it does not reinterpret
+observed data because the R26-G1a scientific experiment has not run.
+
 `acc_behavior(post) - acc_behavior(pre)` is evaluated on identical rows with a
 valid pre window. Within each already-fixed reset split, both the post and pre
 behavior probes are trained, validated, and tested on the same `pre_valid`
@@ -231,7 +240,7 @@ Per checkpoint, report:
 - `acc_behavior - acc_prior`;
 - `acc_behavior(post) - acc_behavior(pre)`;
 - per-row `log q_full(z_i) - log q_prior(z_i)` mean and positive fraction;
-- real-minus-null differences for every matched null;
+- real-minus-null differences for every gate-mandatory grouped matched null;
 - reset-cluster bootstrap 95% confidence intervals for primary differences;
 - early-stop step and train-versus-test gaps.
 
@@ -240,9 +249,10 @@ An arm0 checkpoint passes G1a only when all conditions hold:
 1. normalized label entropy is at least `0.8`;
 2. `acc_full - acc_prior >= 0.05`;
 3. `acc_behavior(post) - acc_behavior(pre) >= 0.05`;
-4. real beats every label-matched null, and the reset-cluster bootstrap 95%
-   lower confidence bound for real versus the strongest matched null is above
-   zero;
+4. real beats every gate-mandatory grouped matched null (`agent_matched`,
+   `duration_matched`, and `agent_duration_matched`), and the reset-cluster
+   bootstrap 95% lower confidence bound for real versus the strongest of those
+   three matched nulls is above zero;
 5. no train/test overfit warning invalidates the read.
 
 The overfit warning is pre-registered as a strict train-minus-test accuracy gap
