@@ -275,7 +275,406 @@ def test_parse_args_exposes_exact_three_subcommands():
     assert set(choices) == {"collect-static", "synthetic", "aggregate"}
 
 
-def test_aggregate_writes_exact_registered_classification(tmp_path):
+def test_json_writer_rejects_nonfinite_payload(tmp_path):
+    with pytest.raises(ValueError, match="Out of range float values"):
+        collector._write_json(tmp_path / "nonfinite.json", {"value": float("nan")})
+
+
+def test_scientific_contract_rejects_collect_reset_override():
+    args = collector.parse_args(
+        [
+            "collect-static",
+            "--checkpoint",
+            "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt",
+            "--output-dir",
+            "unused",
+            "--checkpoint-id",
+            "arm0_update25",
+            "--checkpoint-update",
+            "25",
+            "--n-resets",
+            "8",
+        ]
+    )
+
+    with pytest.raises(ValueError, match="n_resets must equal 64"):
+        collector.validate_scientific_args(args)
+
+
+def test_scientific_contract_rejects_synthetic_seed_and_budget_overrides():
+    args = collector.parse_args(
+        [
+            "synthetic",
+            "--checkpoint",
+            "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_final.pt",
+            "--snapshot-dir",
+            "unused-snapshots",
+            "--output-dir",
+            "unused",
+            "--synthetic-seeds",
+            "17",
+            "23",
+            "--max-steps",
+            "10",
+        ]
+    )
+
+    with pytest.raises(ValueError, match="synthetic_seeds must equal"):
+        collector.validate_scientific_args(args)
+
+
+def test_explicit_fixture_mode_allows_reduced_contract_but_marks_non_scientific():
+    args = collector.parse_args(
+        [
+            "collect-static",
+            "--checkpoint",
+            "fixture.pt",
+            "--output-dir",
+            "unused",
+            "--checkpoint-id",
+            "fixture_update25",
+            "--checkpoint-update",
+            "25",
+            "--n-resets",
+            "5",
+            "--non-scientific-fixture",
+        ]
+    )
+
+    contract = collector.validate_scientific_args(args)
+
+    assert contract["mode"] == "NON_SCIENTIFIC_FIXTURE"
+    assert contract["eligible_for_aggregate"] is False
+
+
+def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
+    checkpoint_ids = ["arm0_update25", "arm0_update30", "arm0_final"]
+    scientific_contract = {
+        "mode": "R27_G1_SCIENTIFIC",
+        "eligible_for_aggregate": True,
+        "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+        "resolved_contract": collector.SCIENTIFIC_CONTRACT,
+    }
+    for checkpoint_id in checkpoint_ids:
+        registered = collector.REGISTERED_CHECKPOINTS[checkpoint_id]
+        root = tmp_path / checkpoint_id
+        root.mkdir(parents=True)
+        snapshot_dir = root / "capacity_snapshots"
+        snapshot_dir.mkdir()
+        for reset_id in range(64):
+            (snapshot_dir / f"reset_{reset_id:04d}.npz").write_bytes(
+                f"{checkpoint_id}:{reset_id}".encode("ascii")
+            )
+        snapshot_sha256 = collector._snapshot_shards_sha256(snapshot_dir)
+        static = {
+            "checkpoint_id": checkpoint_id,
+            "checkpoint_update": registered["update_idx"],
+            "source_checkpoint_sha256": registered["sha256"],
+            "snapshot_shards_sha256": snapshot_sha256,
+            "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+            "status": "FAIL",
+            "zero_h": {
+                "pass": False,
+                "mean_skl": 0.0,
+                "mean_stdmean_distance": 0.0,
+                "bootstrap": {"mean": 0.0, "lower": 0.0, "upper": 0.0},
+                "shared_logstd_max_abs_error": 0.0,
+                "film_feature_between": 0.0,
+                "post_gru_feature_between": 0.0,
+                "finite": True,
+            },
+            "rollout_h": {
+                "pass": False,
+                "mean_skl": 0.0,
+                "mean_stdmean_distance": 0.0,
+                "bootstrap": {"mean": 0.0, "lower": 0.0, "upper": 0.0},
+                "shared_logstd_max_abs_error": 0.0,
+                "film_feature_between": 0.0,
+                "post_gru_feature_between": 0.0,
+                "finite": True,
+            },
+            "hidden_retention_ratio": 0.0,
+            "inactive_control": {
+                "max_abs_symmetric_kl": 0.0,
+                "max_stdmean_distance": 0.0,
+            },
+            "parity": {
+                "pass": True,
+                "max_action_abs_error": 0.0,
+                "max_hidden_abs_error": 0.0,
+            },
+            "film_code_parameters": {
+                "gamma_by_skill": [[1.0]],
+                "beta_by_skill": [[0.0]],
+                "consistency_max_abs_error": 0.0,
+            },
+        }
+        static_path = root / "static_capacity.json"
+        collector._write_json(static_path, static)
+        manifest = {
+            "checkpoint": registered["path"],
+            "checkpoint_id": checkpoint_id,
+            "checkpoint_update": registered["update_idx"],
+            "checkpoint_sha256_before": registered["sha256"],
+            "checkpoint_sha256_after": registered["sha256"],
+            "checkpoint_sha256_equal": True,
+            "policy_parameter_sha256_before": f"policy-{checkpoint_id}",
+            "policy_parameter_sha256_after": f"policy-{checkpoint_id}",
+            "policy_parameter_sha256_equal": True,
+            "n_resets": 64,
+            "reset_seeds": list(range(1, 65)),
+            "device": "cuda",
+            "snapshot_shards_sha256": snapshot_sha256,
+            "static_report_sha256": collector._file_sha256(static_path),
+            "scientific_contract": scientific_contract,
+            "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+            "checkpoint_identity": {
+                "eligible_for_aggregate": True,
+                "checkpoint_id": checkpoint_id,
+                "checkpoint_update": registered["update_idx"],
+                "checkpoint_sha256": registered["sha256"],
+                "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+            },
+            "parameter_counts": {"low_actor": 558344},
+        }
+        collector._write_json(root / "collector_manifest.json", manifest)
+
+    def seed_report(seed: int, *, passed: bool) -> dict[str, object]:
+        actor_sha = f"actor-{seed}"
+        schedule_sha = f"schedule-{seed}"
+        accuracy = 1.0 if passed else 0.50
+        return {
+            "seed": seed,
+            "status": "PASS" if passed else "FAIL",
+            "pass": passed,
+            "reasons": [],
+            "support": {"test_reset_groups": 12},
+            "evidence_finite": True,
+            "control_contract_valid": True,
+            "synthetic_code_accuracy": accuracy,
+            "synthetic_code_macro_f1": accuracy,
+            "synthetic_target_mse": 0.01,
+            "synthetic_train_accuracy": accuracy,
+            "sham_accuracy": 0.25,
+            "synthetic_active_minus_sham_accuracy": accuracy - 0.25,
+            "synthetic_train_minus_test_accuracy": 0.0,
+            "active_minus_sham_bootstrap": {
+                "mean": accuracy - 0.25,
+                "lower": 0.10,
+                "upper": 0.90,
+            },
+            "source_actor_sha256_before": actor_sha,
+            "source_actor_sha256_after_active_fit": actor_sha,
+            "source_actor_sha256_after": actor_sha,
+            "source_actor_sha256_equal": True,
+            "active_initial_actor_sha256": actor_sha,
+            "sham_initial_actor_sha256": actor_sha,
+            "active_sham_initialization_equal": True,
+            "source_actor_parameter_count": 558344,
+            "active_actor_parameter_count": 558344,
+            "sham_actor_parameter_count": 558344,
+            "active_sham_parameter_count_equal": True,
+            "minibatch_schedule_sha256": schedule_sha,
+            "active_minibatch_schedule_sha256": schedule_sha,
+            "sham_minibatch_schedule_sha256": schedule_sha,
+            "active_sham_shared_minibatch_schedule": True,
+            "active_optimizer_contract": {
+                "class": "torch.optim.adam.Adam",
+                "learning_rate": 3e-4,
+                "betas": [0.9, 0.999],
+                "eps": 1e-8,
+                "weight_decay": 0.0,
+                "amsgrad": False,
+                "maximize": False,
+            },
+            "sham_optimizer_contract": {
+                "class": "torch.optim.adam.Adam",
+                "learning_rate": 3e-4,
+                "betas": [0.9, 0.999],
+                "eps": 1e-8,
+                "weight_decay": 0.0,
+                "amsgrad": False,
+                "maximize": False,
+            },
+            "active_train_rows_sha256": "train-rows",
+            "sham_train_rows_sha256": "train-rows",
+            "active_validation_rows_sha256": "validation-rows",
+            "sham_validation_rows_sha256": "validation-rows",
+            "active_train_targets_sha256": "train-targets",
+            "sham_train_targets_sha256": "train-targets",
+            "active_validation_targets_sha256": "validation-targets",
+            "sham_validation_targets_sha256": "validation-targets",
+        }
+
+    seed_reports = [
+        seed_report(17, passed=True),
+        seed_report(23, passed=True),
+        seed_report(41, passed=False),
+    ]
+    family = collector.gate_synthetic_family(seed_reports)
+    final_registered = collector.REGISTERED_CHECKPOINTS["arm0_final"]
+    final_manifest_path = tmp_path / "arm0_final" / "collector_manifest.json"
+    final_manifest = collector._read_json_strict(final_manifest_path)
+    synthetic = {
+        **family,
+        "checkpoint": final_registered["path"],
+        "checkpoint_sha256_before": final_registered["sha256"],
+        "checkpoint_sha256_after": final_registered["sha256"],
+        "checkpoint_sha256_equal": True,
+        "policy_parameter_sha256_before": "policy-arm0-final",
+        "policy_parameter_sha256_after": "policy-arm0-final",
+        "policy_parameter_sha256_equal": True,
+        "device": "cuda",
+        "seed_reports": seed_reports,
+        "codebook_norm": 0.5,
+        "fit_config": {
+            "learning_rate": 3e-4,
+            "batch_size": 256,
+            "max_steps": 1000,
+            "validation_interval": 25,
+            "patience": 20,
+            "min_delta": 1e-4,
+        },
+        "source_collector_manifest_sha256": collector._file_sha256(
+            final_manifest_path
+        ),
+        "source_snapshot_shards_sha256": final_manifest[
+            "snapshot_shards_sha256"
+        ],
+        "scientific_contract": scientific_contract,
+        "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+        "checkpoint_identity": {
+            "eligible_for_aggregate": True,
+            "checkpoint_id": "arm0_final",
+            "checkpoint_update": 32,
+            "checkpoint_sha256": final_registered["sha256"],
+            "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+        },
+        "parameter_counts": {"low_actor": 558344},
+    }
+    collector._write_json(tmp_path / "synthetic_control.json", synthetic)
+    return checkpoint_ids
+
+
+def test_aggregate_recomputes_valid_leaf_evidence(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "CAPACITY_PRESENT_OBJECTIVE_MISSING"
+    assert result["artifact_identity"] == {
+        "pass": True,
+        "errors": [],
+        "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+    }
+    markdown = (tmp_path / "r27_capacity_autopsy.md").read_text(encoding="utf-8")
+    assert "Artifact identity: `True`" in markdown
+    assert collector.SCIENTIFIC_CONTRACT_SHA256 in markdown
+
+
+def test_aggregate_rejects_mislabeled_arm_and_update_hash_mismatch(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    manifest_path = tmp_path / "arm0_update25" / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["checkpoint"] = "dist/arm2/standalone_process_core_update_25.pt"
+    manifest["checkpoint_update"] = 30
+    collector._write_json(manifest_path, manifest)
+    static_path = tmp_path / "arm0_update30" / "static_capacity.json"
+    static = collector._read_json_strict(static_path)
+    static["source_checkpoint_sha256"] = "wrong-hash"
+    collector._write_json(static_path, static)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+    reasons = " ".join(result["reasons"])
+
+    assert result["classification"] == "INVALID"
+    assert "arm0_update25 manifest path mismatch" in reasons
+    assert "arm0_update25 manifest update mismatch" in reasons
+    assert "arm0_update30 static report checkpoint hash mismatch" in reasons
+    assert "arm0_update30 static report file hash mismatch" in reasons
+
+
+def test_aggregate_rejects_duplicate_missing_seeds_and_forged_summary(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    synthetic_path = tmp_path / "synthetic_control.json"
+    synthetic = collector._read_json_strict(synthetic_path)
+    synthetic["seed_reports"] = [
+        {"seed": 17, "status": "PASS", "pass": True},
+        {"seed": 17, "status": "PASS", "pass": True},
+        {"seed": 23, "status": "FAIL", "pass": False},
+    ]
+    synthetic["passing_seeds"] = 3
+    collector._write_json(synthetic_path, synthetic)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+    reasons = " ".join(result["reasons"])
+
+    assert result["classification"] == "INVALID"
+    assert "synthetic seeds must be exactly" in reasons
+    assert "synthetic top-level passing_seeds" in reasons
+
+
+def test_aggregate_rejects_seed_status_inconsistent_with_leaf_metrics(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    synthetic_path = tmp_path / "synthetic_control.json"
+    synthetic = collector._read_json_strict(synthetic_path)
+    synthetic["seed_reports"][0]["synthetic_code_accuracy"] = 0.0
+    synthetic["seed_reports"][0]["synthetic_code_macro_f1"] = 0.0
+    synthetic["seed_reports"][0]["synthetic_active_minus_sham_accuracy"] = -0.25
+    collector._write_json(synthetic_path, synthetic)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "INVALID"
+    assert "seed 17 status/pass mismatch" in " ".join(result["reasons"])
+
+
+def test_aggregate_rejects_static_pass_inconsistent_with_leaf_metrics(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    static_path = tmp_path / "arm0_update25" / "static_capacity.json"
+    static = collector._read_json_strict(static_path)
+    static["zero_h"]["pass"] = True
+    collector._write_json(static_path, static)
+    manifest_path = tmp_path / "arm0_update25" / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["static_report_sha256"] = collector._file_sha256(static_path)
+    collector._write_json(manifest_path, manifest)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "INVALID"
+    assert "arm0_update25 zero_h pass mismatch" in " ".join(result["reasons"])
+
+
+def test_aggregate_structures_nonfinite_input_json_as_invalid(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    (tmp_path / "synthetic_control.json").write_text(
+        '{"status": "PASS", "value": NaN}\n', encoding="utf-8"
+    )
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "INVALID"
+    assert "non-finite JSON constant" in " ".join(result["reasons"])
+    strict_result = collector._read_json_strict(
+        tmp_path / "r27_capacity_autopsy.json"
+    )
+    assert strict_result["classification"] == "INVALID"
+
+
+def test_aggregate_rejects_forged_top_level_synthetic_summary(tmp_path):
     static = {
         "status": "FAIL",
         "zero_h": {
@@ -369,7 +768,7 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
 
     result = collector.run_aggregate(args)
 
-    assert result["classification"] == "CAPACITY_PRESENT_OBJECTIVE_MISSING"
+    assert result["classification"] == "INVALID"
     json_result = json.loads(
         (tmp_path / "r27_capacity_autopsy.json").read_text(encoding="utf-8")
     )
@@ -377,21 +776,117 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
         encoding="utf-8"
     )
     assert json_result["classification"] == result["classification"]
-    assert "CAPACITY_PRESENT_OBJECTIVE_MISSING" in markdown
+    assert "INVALID" in markdown
+    assert "synthetic seeds must be exactly" in " ".join(result["reasons"])
     assert "No q_A, q_d, q_D, or intrinsic reward" in markdown
-    assert "arm0_update25" in markdown
-    assert "sha-arm0_update25" in markdown
-    assert "low_actor: 558344" in markdown
-    assert "Seed 17" in markdown
-    assert "macro-F1: 0.94" in markdown
-    assert "symmetric KL >= 0.02" in markdown
-    assert "actor-before-sha" in markdown
-    assert "actor-after-sha" in markdown
-    assert "target MSE: 0.01" in markdown
-    assert "evidence finite / control contract valid: True / True" in markdown
-    assert "optimizer contracts equal: True" in markdown
-    assert "train row hashes equal: True" in markdown
-    assert "batch-schedule-sha" in markdown
+
+
+def test_registered_checkpoint_identity_rejects_loaded_update_and_hash_mismatch():
+    args = collector.parse_args(
+        [
+            "collect-static",
+            "--checkpoint",
+            "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt",
+            "--output-dir",
+            "unused",
+            "--checkpoint-id",
+            "arm0_update25",
+            "--checkpoint-update",
+            "25",
+        ]
+    )
+    contract = collector.validate_scientific_args(args)
+    metadata = {
+        "update_idx": 25,
+        "total_steps": 800000,
+        "n_agents": 6,
+        "n_skills": 4,
+        "preset": "S7-S1",
+        "scenario": "energy",
+        "low_actor_condition_on_team_code": False,
+        "enable_team_intent": True,
+    }
+    expected_hash = collector.REGISTERED_CHECKPOINTS["arm0_update25"]["sha256"]
+
+    with pytest.raises(ValueError, match="loaded update"):
+        collector.validate_registered_checkpoint_identity(
+            args,
+            metadata,
+            loaded_update=30,
+            checkpoint_sha256=str(expected_hash),
+            scientific_contract=contract,
+        )
+    with pytest.raises(ValueError, match="checkpoint SHA256"):
+        collector.validate_registered_checkpoint_identity(
+            args,
+            metadata,
+            loaded_update=25,
+            checkpoint_sha256="wrong-hash",
+            scientific_contract=contract,
+        )
+
+
+def test_synthetic_snapshot_binding_rejects_nonfinal_row_identity(tmp_path):
+    snapshot_dir = tmp_path / "arm0_final" / "capacity_snapshots"
+    batch = CapacitySnapshotBatch(
+        observation=np.zeros((1, 6), dtype=np.float32),
+        actor_hidden=np.zeros((1, 8), dtype=np.float32),
+        natural_skill=np.zeros(1, dtype=np.int64),
+        previous_skill=np.zeros(1, dtype=np.int64),
+        duration_idx=np.zeros(1, dtype=np.int64),
+        skill_age=np.zeros(1, dtype=np.int64),
+        episode_done_mask=np.zeros(1, dtype=np.bool_),
+        reset_id=np.zeros(1, dtype=np.int64),
+        reset_seed=np.ones(1, dtype=np.int64),
+        episode_id=np.zeros(1, dtype=np.int64),
+        env_id=np.zeros(1, dtype=np.int64),
+        agent_id=np.zeros(1, dtype=np.int64),
+        checkpoint_id=np.asarray(["arm2_final"]),
+        checkpoint_update=np.asarray([32], dtype=np.int64),
+    )
+    collector.write_capacity_snapshot_shard(
+        snapshot_dir / "reset_0000.npz", batch
+    )
+    final_registered = collector.REGISTERED_CHECKPOINTS["arm0_final"]
+    manifest = {
+        "checkpoint": final_registered["path"],
+        "checkpoint_id": "arm0_final",
+        "checkpoint_update": 32,
+        "checkpoint_sha256_before": final_registered["sha256"],
+        "checkpoint_sha256_equal": True,
+        "policy_parameter_sha256_equal": True,
+        "n_resets": 64,
+        "reset_seeds": list(range(1, 65)),
+        "device": "cuda",
+        "snapshot_shards_sha256": collector._snapshot_shards_sha256(
+            snapshot_dir
+        ),
+        "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+        "scientific_contract": {
+            "mode": "R27_G1_SCIENTIFIC",
+            "eligible_for_aggregate": True,
+        },
+    }
+    collector._write_json(snapshot_dir.parent / "collector_manifest.json", manifest)
+    args = collector.parse_args(
+        [
+            "synthetic",
+            "--checkpoint",
+            str(final_registered["path"]),
+            "--snapshot-dir",
+            str(snapshot_dir),
+            "--output-dir",
+            str(tmp_path / "out"),
+        ]
+    )
+    contract = collector.validate_scientific_args(args)
+
+    with pytest.raises(ValueError, match="snapshot rows are not arm0_final"):
+        collector.validate_synthetic_snapshot_source(
+            snapshot_dir,
+            batch,
+            scientific_contract=contract,
+        )
 
 
 def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp_path):
@@ -427,6 +922,7 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
             "2",
             "--bootstrap-reps",
             "20",
+            "--non-scientific-fixture",
         ]
     )
 
@@ -438,6 +934,15 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
     )
     assert manifest["checkpoint_sha256_equal"] is True
     assert manifest["policy_parameter_sha256_equal"] is True
+    assert manifest["scientific_contract"]["mode"] == "NON_SCIENTIFIC_FIXTURE"
+    assert manifest["scientific_contract"]["eligible_for_aggregate"] is False
+    assert manifest["checkpoint_identity"]["eligible_for_aggregate"] is False
+    assert manifest["snapshot_shards_sha256"] == collector._snapshot_shards_sha256(
+        output_dir / "capacity_snapshots"
+    )
+    assert manifest["static_report_sha256"] == collector._file_sha256(
+        output_dir / "static_capacity.json"
+    )
     assert manifest["stats"] == {
         "renewal_events": 5,
         "resets": 5,
@@ -511,3 +1016,26 @@ def test_runner_rejects_cpu_in_dry_run():
 
     assert result.returncode != 0
     assert "requires -Device cuda" in output
+
+
+def test_runner_rejects_nonregistered_reset_count_in_dry_run():
+    result = subprocess.run(
+        [
+            "powershell.exe",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1",
+            "-DryRun",
+            "-NResets",
+            "8",
+        ],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    output = result.stdout + result.stderr
+
+    assert result.returncode != 0
+    assert "requires -NResets 64" in output

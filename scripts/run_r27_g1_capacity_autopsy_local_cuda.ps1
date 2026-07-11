@@ -63,8 +63,8 @@ function Invoke-PythonPhase {
 if ($Device -cnotmatch '^cuda(?::\d+)?$') {
     throw "R27-G1 capacity autopsy requires -Device cuda; CPU fallback is forbidden."
 }
-if ($NResets -le 0) {
-    throw "NResets must be greater than zero."
+if ($NResets -ne 64) {
+    throw "R27-G1 scientific contract requires -NResets 64."
 }
 if (-not (Test-Path -LiteralPath "scripts\audit_r27_low_actor_capacity.py" -PathType Leaf)) {
     throw "Run this script from the HMASD repository root."

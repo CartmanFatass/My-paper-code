@@ -383,6 +383,14 @@ def _condition_metrics(
     if not pairs:
         raise ValueError("at least two skills are required")
 
+    for label, output in (("active", active), ("inactive", inactive)):
+        for field in ActorForwardBatch.__dataclass_fields__:
+            value = getattr(output, field)
+            if not bool(torch.isfinite(value).all().item()):
+                raise FloatingPointError(
+                    f"non-finite {label} actor-forward field: {field}"
+                )
+
     def shaped(value: torch.Tensor) -> torch.Tensor:
         return value.reshape(int(rows), int(num_skills), value.shape[-1])
 
@@ -459,6 +467,20 @@ def _condition_metrics(
     inactive_stdmean_by_row = torch.stack(inactive_stdmean_pairs, dim=1).mean(
         dim=1
     )
+    film_by_pair = torch.stack(film_pairs, dim=1)
+    post_gru_by_pair = torch.stack(post_gru_pairs, dim=1)
+    derived_tensors = (
+        active_skl_by_row,
+        inactive_skl_by_row,
+        active_stdmean_by_row,
+        inactive_stdmean_by_row,
+        film_by_pair,
+        post_gru_by_pair,
+    )
+    if not all(
+        bool(torch.isfinite(value).all().item()) for value in derived_tensors
+    ):
+        raise FloatingPointError("non-finite static derived evidence")
     interval = cluster_bootstrap_difference(
         active_skl_by_row.cpu().numpy(),
         inactive_skl_by_row.cpu().numpy(),
@@ -468,25 +490,27 @@ def _condition_metrics(
     )
     mean_skl = float(active_skl_by_row.mean().item())
     mean_stdmean = float(active_stdmean_by_row.mean().item())
-    finite = all(
-        torch.isfinite(value).all().item()
-        for value in (
-            active_skl_by_row,
-            inactive_skl_by_row,
-            active_stdmean_by_row,
-            inactive_stdmean_by_row,
-        )
+    scalar_values = np.asarray(
+        [
+            mean_skl,
+            mean_stdmean,
+            interval.mean,
+            interval.lower,
+            interval.upper,
+            shared_logstd_error,
+            float(film_by_pair.mean().item()),
+            float(post_gru_by_pair.mean().item()),
+        ],
+        dtype=np.float64,
     )
+    if not np.isfinite(scalar_values).all():
+        raise FloatingPointError("non-finite static scalar evidence")
     return {
         "mean_skl": mean_skl,
         "mean_stdmean_distance": mean_stdmean,
         "bootstrap": _bootstrap_dict(interval),
-        "film_feature_between": float(
-            torch.stack(film_pairs, dim=1).mean().item()
-        ),
-        "post_gru_feature_between": float(
-            torch.stack(post_gru_pairs, dim=1).mean().item()
-        ),
+        "film_feature_between": float(film_by_pair.mean().item()),
+        "post_gru_feature_between": float(post_gru_by_pair.mean().item()),
         "inactive_max_abs_skl": float(
             torch.stack(inactive_skl_pairs, dim=1).abs().max().item()
         ),
@@ -494,10 +518,9 @@ def _condition_metrics(
             torch.stack(inactive_stdmean_pairs, dim=1).max().item()
         ),
         "shared_logstd_max_abs_error": shared_logstd_error,
-        "finite": bool(finite),
+        "finite": True,
         "pass": bool(
-            finite
-            and shared_logstd_error <= PARITY_TOLERANCE
+            shared_logstd_error <= PARITY_TOLERANCE
             and mean_skl >= STATIC_SKL_MIN
             and mean_stdmean >= STATIC_STDMEAN_MIN
             and interval.lower > 0.0
@@ -540,6 +563,13 @@ def _parity_metrics(
     hidden_error = float(
         torch.max(torch.abs(diagnostic.new_hidden - live_hidden)).item()
     )
+    if not (
+        bool(torch.isfinite(live_action).all().item())
+        and bool(torch.isfinite(live_hidden).all().item())
+        and np.isfinite(action_error)
+        and np.isfinite(hidden_error)
+    ):
+        raise FloatingPointError("non-finite live parity evidence")
     return {
         "max_action_abs_error": action_error,
         "max_hidden_abs_error": hidden_error,
@@ -599,23 +629,43 @@ def evaluate_static_checkpoint(
             actor, observations, skills, hidden, inactive_film=True
         )
         active_outputs[name] = active
-        condition_reports[name] = _condition_metrics(
-            active,
-            inactive,
-            snapshots.reset_id,
-            rows=rows,
-            num_skills=num_skills,
-            bootstrap_reps=int(bootstrap_reps),
-            bootstrap_seed=int(bootstrap_seed) + offset,
-        )
+        try:
+            condition_reports[name] = _condition_metrics(
+                active,
+                inactive,
+                snapshots.reset_id,
+                rows=rows,
+                num_skills=num_skills,
+                bootstrap_reps=int(bootstrap_reps),
+                bootstrap_seed=int(bootstrap_seed) + offset,
+            )
+        except FloatingPointError as error:
+            return {
+                "checkpoint_id": str(checkpoint_id),
+                "rows": rows,
+                "reset_groups": reset_count,
+                "num_skills": num_skills,
+                "status": "INVALID",
+                "reason": str(error),
+            }
 
-    parity = _parity_metrics(
-        actor,
-        observations,
-        skills,
-        rollout_hidden,
-        active_outputs["rollout_h"],
-    )
+    try:
+        parity = _parity_metrics(
+            actor,
+            observations,
+            skills,
+            rollout_hidden,
+            active_outputs["rollout_h"],
+        )
+    except FloatingPointError as error:
+        return {
+            "checkpoint_id": str(checkpoint_id),
+            "rows": rows,
+            "reset_groups": reset_count,
+            "num_skills": num_skills,
+            "status": "INVALID",
+            "reason": str(error),
+        }
     inactive_max_skl = max(
         float(condition_reports[name]["inactive_max_abs_skl"])
         for name in condition_reports
@@ -1524,6 +1574,7 @@ def evaluate_synthetic_seed(
         "synthetic_code_accuracy": active_test.accuracy,
         "synthetic_code_macro_f1": active_test.macro_f1,
         "synthetic_target_mse": active_test.target_mse,
+        "synthetic_train_accuracy": active_train.accuracy,
         "sham_accuracy": sham_test.accuracy,
         "synthetic_active_minus_sham_accuracy": accuracy_difference,
         "synthetic_train_minus_test_accuracy": generalization_gap,

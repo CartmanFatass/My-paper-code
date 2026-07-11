@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import inspect
+from dataclasses import replace
 
 import numpy as np
 import pytest
@@ -187,6 +188,37 @@ def test_identity_film_has_zero_skill_pair_separation():
         4,
         8,
     )
+
+
+def test_static_nonfinite_feature_evidence_is_structured_invalid(monkeypatch):
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=10)
+    original_forward = capacity_audit.forward_actor_snapshot
+    poisoned = False
+
+    def nonfinite_film(*args, **kwargs):
+        nonlocal poisoned
+        result = original_forward(*args, **kwargs)
+        if not kwargs["inactive_film"] and not poisoned:
+            poisoned = True
+            film_feature = result.film_feature.clone()
+            film_feature[0, 0] = float("nan")
+            return replace(result, film_feature=film_feature)
+        return result
+
+    monkeypatch.setattr(
+        capacity_audit, "forward_actor_snapshot", nonfinite_film
+    )
+    report = evaluate_static_checkpoint(
+        actor,
+        batch,
+        checkpoint_id="fixture",
+        bootstrap_reps=20,
+        bootstrap_seed=27021,
+    )
+
+    assert report["status"] == "INVALID"
+    assert "non-finite" in report["reason"]
 
 
 def test_static_family_requires_two_of_three_agreement():
