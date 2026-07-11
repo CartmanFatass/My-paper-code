@@ -66,6 +66,37 @@ hand-picked fixed duration in a short run.  The important question is whether
 HA-CTSE can reconstruct HMASD's skill-discovery, skill-differentiation, and
 actually-work intrinsic drive under asynchronous skill lifetimes.
 
+## Round 26 G1a Individual-Skill Behavior Screening (launch-ready gate)
+
+Status (2026-07-11): the traditional HMASD R24/R25/R26 line continues here;
+IMOD is a separate migrated project/track and does not replace or redefine this
+line. The reward-off R26-G1a behavior-window dataset/analyzer, frozen-checkpoint
+collector, and exact six-checkpoint sequential CUDA runner are implemented.
+Task reviews and final verification are clean: 52 focused tests pass, along
+with compilation, runner dry-run/parser, CUDA/cardinality, diff, and output-
+hygiene checks.
+
+The scientific six-checkpoint experiment has **not** been launched. It is
+launch-ready and awaits explicit user approval for approximately 30--45 minutes
+of local CUDA work. The exact runner is
+`scripts/run_r26_g1_screening_local_cuda.ps1`; current experiment facts, run
+root, and launch command belong in `memory/ExpRecord.md`.
+
+Gate read:
+
+- Evaluate arm0 update 25, update 30, and final independently against the full
+  pre-registered per-checkpoint gate in the accepted R26-G1a design.
+- The arm0 family passes only if at least 2 of 3 checkpoints pass in the same
+  direction. Arm2 is contextual contrast only and cannot rescue arm0.
+- PASS authorizes only a separately designed R26-G1b forced-`z_i` intervention,
+  with rewards still off.
+- FAIL redirects mechanism work to actor-conditioning/discoverer capacity;
+  MIXED or UNDERPOWERED follows the accepted instrument/support decision tree.
+  Do not tune the gate after observing results.
+- `q_A`, `q_d`, and `q_D` reward paths remain blocked/default-off. Neither
+  implementation verification nor a future G1a pass authorizes reward
+  injection, a reward sweep, or scale-up.
+
 ## Round 24 Assignment-to-Behavior Bridge (completed gate)
 
 Status: R24-1 FAIL accepted 2026-07-09 per external review Round 5 (GPT-5.5 xhigh, SUPPORTS_WITH_CONDITIONS). Staged disposition:

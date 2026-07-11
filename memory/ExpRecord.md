@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-09
+Updated: 2026-07-11
 
 Purpose: factual current experiment state. ExpManager records experiment
 content, running state, commands, package paths, and result facts here.
@@ -27,6 +27,7 @@ Status vocabulary:
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260711-r26-g1a-individual-skill-screening | launch-ready | R26-G1a reward-off screening | local CUDA (RTX 4070 Laptop 8 GB), six frozen R25 checkpoints | ExpManager | per-checkpoint gate plus arm0 2-of-3 family gate | `scripts/run_r26_g1_screening_local_cuda.ps1`; proposed run root `logs/r26_g1a_screening/` | No reward; a pass authorizes only separate G1b design. Launch is not authorized or executed. |
 | EXP-20260710-r25-qa-verification-1m | launch-ready | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager | when launched: monitor checkpoint progression at 160k intervals; after cloud completion: eval_episodes.csv coverage trajectory vs HMASD milestones; checkpoint maturity for G1 diagnostics | `scripts/run_r25_qa_verification_cloud_64env_1m.sh` (runner); `logs_cloud_r25_qa_verification_1m/arm{0,2}/seed*/` (per-run log roots); `logs/r25_runner_build/dryrun.log` (build evidence) | Verification tier scaling R23-validated q_A mechanism to 1M steps. arm0 = team-intent baseline (no q_A), arm2 = team-intent + q_A actionability residual reward. q_d/q_D rewards OFF. Gate criteria deferred to G1 diagnostics on mature (800k+) checkpoints. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — 4/4 analyzed (3 CPU, qAoff/seed2 on GPU per user directive); external peer review Round 5 completed; disposition ACCEPTED 2026-07-09 | R24 frozen q_d null probes | cloud archive `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` + local analysis complete | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed synthesis complete | Archive complete; peer review Round 5 text archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | R24-1 FAIL accepted 2026-07-09 (Round 5, SUPPORTS_WITH_CONDITIONS). Wording condition: "fail under tested policies and current diagnostic setup" (3 of 4 collapsed). D2 sensitivity re-run approved-deferred with conditions. D3 pivot direction accepted pending deconfound. q_d/q_D rewards remain BLOCKED. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | completed (stopped at 66% budget, clean) | HMASD baseline reference curve | local, 32env, rollout 500, metrics-light; `C:\project\tf-logs\hmasd\energy-S7-S1\...\20260617_133148` | ResultAnalyst (read 2026-07-09) | none — reference | `logs/hmasd_baseline_read_20260709/metric_extract.md` | HMASD S7-S1 pace/ceiling reference (seed1): eval coverage >=0.5 and >=0.7 first at 480k, >=0.9 at 800k; plateau ~0.95-0.99 from ~800-960k; final-window (1.76M-2.08M) coverage mean 0.9639, reward mean 380.29; zero-coverage eval episodes gone from 640k. Run stopped externally at 2,112,000/3,200,000 steps, no crash. Caveats: 32env (vs 64env HA-CTSE cloud runs), predates parity metrics (no coverage_eq1 fields), single seed. |
@@ -38,6 +39,92 @@ Status vocabulary:
 | EXP-20260705-r21-team-intent | completed / negative | R21 | cloud CUDA seed1 | ExpManager | none | `dist/logs_cloud_r21_team_intent_64env`, `memory/R21_AUTOPSY_REPORT.md` | Z was near-inert; sampled team code did not create recoverable team effect. No seed2 or sweep on this design. |
 
 ## Active Experiment Detail
+
+### EXP-20260711-r26-g1a-individual-skill-screening
+
+Launch-ready factual record for the reward-off R26-G1a six-checkpoint
+individual-skill behavior screening. The experiment has not been launched, and
+no scientific `PASS`/`FAIL` decision has been made.
+
+- Status: `launch-ready`
+- Stage: `R26-G1a reward-off screening`
+- Location/compute: local CUDA only, NVIDIA GeForce RTX 4070 Laptop GPU,
+  8188 MiB (8 GB); no CPU fallback
+- Proposed run root: `logs/r26_g1a_screening/`
+- Runner: `scripts/run_r26_g1_screening_local_cuda.ps1`
+- Estimated wall time: approximately 30-45 minutes for all six sequential
+  checkpoints. This is a controller estimate, not a launch fact, based on the
+  five-reset smoke shard cadence (approximately 16 seconds observed) extrapolated
+  to 64 resets plus analyzer/runtime overhead.
+- Implementation state: 52 focused tests passed; Python compilation, runner
+  dry-run, PowerShell parser, and diff-hygiene checks passed; task reviews are
+  clean. Launch is not authorized or executed.
+- Status source: TestRunner final verification, controller pace estimate, and
+  the accepted R26-G1a design/implementation plan.
+
+**Exact proposed command (not executed)**:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/run_r26_g1_screening_local_cuda.ps1 -RunRoot logs/r26_g1a_screening -Device cuda -NResets 64
+```
+
+**Frozen checkpoint inventory** (`NumSkills=4` for every checkpoint):
+
+- `arm0_update25`: `dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt`
+- `arm0_update30`: `dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_30.pt`
+- `arm0_final`: `dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_final.pt`
+- `arm2_update25`: `dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_update_25.pt`
+- `arm2_update30`: `dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_update_30.pt`
+- `arm2_final`: `dist/logs_cloud_r25_qa_verification_1m/arm2_qA_reward/seed1/standalone_process_core_final.pt`
+
+The runner must verify each collector manifest reports
+`checkpoint_metadata.n_skills=4` before analysis; it must reject a mismatch
+rather than infer or change analyzer cardinality.
+
+**Expected artifacts**:
+
+- Batch: `logs/r26_g1a_screening/batch_status.txt`.
+- Per arm under `logs/r26_g1a_screening/<arm-name>/`: `command.txt`,
+  `runner_status.txt`, `collector_output.log`, `analyzer_output.log`,
+  `windows/` (reset shards and `collector_manifest.json`), and `analysis/`
+  (`r26_g1_behavior.json` and `r26_g1_behavior.md`).
+
+**Pre-registered read**:
+
+- Per checkpoint, report label count, normalized label entropy, maximum label
+  fraction, grouped train/validation/test row and reset counts, test accuracy,
+  macro-F1, cross-entropy, majority accuracy, `acc_full - acc_prior`,
+  `acc_behavior - acc_prior`, `acc_behavior(post) - acc_behavior(pre)`, the
+  per-row `log q_full(z_i) - log q_prior(z_i)` mean and positive fraction,
+  real-minus-null differences, reset-cluster bootstrap 95% confidence
+  intervals, early-stop steps, and train/test gaps.
+- A checkpoint clears the numeric gate only if all five conditions hold:
+  normalized label entropy is at least `0.8`; `acc_full - acc_prior >= 0.05`;
+  `acc_behavior(post) - acc_behavior(pre) >= 0.05`; real beats every
+  label-matched null (`shuffled`, `fake_marginal`, `agent_matched`,
+  `duration_matched`, and `agent_duration_matched`) and the reset-cluster
+  bootstrap 95% lower confidence bound for real versus the strongest matched
+  null is above zero; and no train/test overfit warning invalidates the read.
+- The overfit warning is a strict train-minus-test accuracy gap greater than
+  `0.20` for any fitted probe participating in the gate or required matched-null
+  comparison; a gap equal to `0.20` does not trigger it.
+- The arm0 family gate requires at least two of update 25, update 30, and final
+  to pass in the same direction. Arm2 is context/contrast only and cannot rescue
+  an arm0 family failure. With one R25 seed, any family pass remains screening
+  evidence rather than a publication-level causal claim.
+
+**Prohibited while this gate is open**:
+
+- No `q_d`, `q_D`, or intrinsic-reward injection.
+- No G1b implementation, training/resume, scale-up, or scientific claim before
+  the reward-off screening is run and read.
+- A pass authorizes only separate design and pre-registration of G1b forced-`z_i`
+  intervention; it does not authorize reward.
+
+**Next factual read point**: after an explicitly authorized run, inspect
+`batch_status.txt`, every per-arm status/log/manifest, every analyzer JSON and
+Markdown report, the per-checkpoint gate fields, and the arm0 2-of-3 family
+gate. Record facts only; the controller owns scientific interpretation.
 
 ### EXP-20260710-r25-qa-verification-1m
 

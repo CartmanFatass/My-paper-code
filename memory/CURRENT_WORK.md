@@ -1,12 +1,19 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-10
+Updated: 2026-07-11
 
 Purpose: compact first-read state for the current work only. Full historical
 context is archived under `memory/LTM/`.
 
 ## Controller Handoff
 
+- 2026-07-11: Codex is the active controller for the traditional HMASD
+  R24/R25/R26 line in isolated worktree `C:\project\HMASD\.worktrees\r26-g1a`.
+  R26-G1a implementation and verification are complete, but the scientific
+  six-checkpoint screen has not run. The current gate is explicit user approval
+  for an estimated 30--45 minutes of local CUDA work. IMOD remains a separate
+  migrated project/track and does not replace or redefine this line. The
+  binding handover protocol below remains in force.
 - 2026-07-10: controller direction is Claude Code -> Codex for an isolated
   theory/design revision on branch `aggressive`. The user approved IMOD-Direct
   as the replacement direction for graph-first CSOG, and Codex is writing the
@@ -29,14 +36,15 @@ context is archived under `memory/LTM/`.
 
 ## Current Objective
 
-- 2026-07-10 design update: replace graph-first CSOG with IMOD-Direct as the
-  user-approved design draft. The active question is whether randomized real
-  assignment of individual `z_i` causes a stable held-out behavior effect under
-  multi-agent interference. Direct effect precedes spillover; spillover
-  precedes non-additive interaction; graph structure is admitted only as an
-  evidence output. OPT is context substrate only, and world-model, directed
-  temporal geometry, asynchronous operator execution, and any new reward are
-  deferred. This is not yet implementation acceptance.
+- Current traditional-line gate: launch the reward-off R26-G1a frozen-policy
+  screen only after explicit user approval. It asks whether naturally assigned
+  individual `z_i` labels leave stable held-out local behavior signatures beyond
+  assignment context/history and matched nulls. The implementation includes
+  the behavior-window dataset, analyzer, frozen collector, and exact
+  six-checkpoint CUDA runner; the final focused verification is clean with
+  `52 passed`.
+- IMOD-Direct is a separate migrated project/track. Its design state must not
+  replace, redefine, or supply evidence for the traditional R24/R25/R26 line.
 - Reach HMASD-level S7-S1 behavior at roughly 1e6 steps before returning to
   S7-S3.
 - Treat 160k/320k runs as mechanism gates, not final HMASD-comparison verdicts.
@@ -77,6 +85,10 @@ context is archived under `memory/LTM/`.
 
 ## Active Plan Pointers
 
+- `docs/superpowers/specs/2026-07-11-r26-g1a-individual-skill-behavior-screening-design.md`:
+  accepted reward-off G1a design and pre-registered gates.
+- `docs/superpowers/plans/2026-07-11-r26-g1a-individual-skill-behavior-screening.md`:
+  implemented R26-G1a plan; scientific launch remains a separate user decision.
 - `AGENTS.md`: project-level Codex entrypoint; read before relying on deeper
   docs or historical memory. It defines the main-controller protocol,
   controller communication contract (situation, meaning, next plan,
@@ -171,6 +183,19 @@ context is archived under `memory/LTM/`.
 
 ## Current Experiment Focus
 
+- R26-G1a individual-skill behavior-window screening is **launch-ready, not
+  launched**. Exact runner:
+  `scripts/run_r26_g1_screening_local_cuda.ps1`; experiment facts and the exact
+  run command/root are in `memory/ExpRecord.md`. Expected local CUDA wall time
+  is approximately 30--45 minutes, pending explicit user approval.
+- Read each checkpoint against the full pre-registered gate. The primary arm0
+  family passes only if at least 2 of update 25, update 30, and final pass in
+  the same direction. Arm2 is contextual contrast only and cannot rescue an
+  arm0 failure.
+- A G1a pass authorizes only R26-G1b forced-`z_i` design with rewards still off.
+  Fail/mixed/underpowered outcomes follow the accepted decision tree and do not
+  authorize reward injection. `q_A`/`q_d`/`q_D` reward paths remain
+  blocked/default-off while this gate is open.
 - `EXP-20260709-r24-frozen-qd-null-probes` — completed 4/4 cloud runs with external peer review (Round 5, GPT-5.5 xhigh); disposition ACCEPTED 2026-07-09.
 - R24-1 verdict: **FAIL accepted** with wording condition: "fail under the tested policies and current diagnostic setup" (3 of 4 policies collapsed), NOT a categorical universal negative. q_d/q_D rewards remain BLOCKED on this evidence line.
 - External review Round 5 disposition (raw text verified from DIALOGUE_ARCHIVE.md):
@@ -202,32 +227,42 @@ context is archived under `memory/LTM/`.
 
 ## Next Actions
 
-1. User reviews
+1. Await explicit user approval before launching the exact R26-G1a
+   six-checkpoint local-CUDA runner (estimated 30--45 minutes). Do not infer a
+   scientific pass from implementation tests or smoke artifacts.
+2. After a launch completes, read the per-checkpoint gate and the arm0 2-of-3
+   family gate before choosing PASS/FAIL/MIXED/UNDERPOWERED. Arm2 remains
+   contextual; a pass advances only to G1b design with rewards off.
+3. Separately, user reviews
    `docs/superpowers/specs/2026-07-10-imod-direct-design.md`; revise the written
    spec if requested. Do not write a replacement implementation plan yet.
-2. Prepare the unchanged IMOD design for independent Claude/Gemini MARL review
+4. Prepare the unchanged IMOD design for independent Claude/Gemini MARL review
    and archive the raw review plus controller disposition before scientific
    acceptance.
-3. After written-spec and cross-family review approval, invoke the
+5. After written-spec and cross-family review approval, invoke the
    Superpowers writing-plans stage for the minimal reward-off G-1/G1 instrument
    and direct-effect diagnostic only. Do not plan G2/G3 implementation as if G1
    has already passed.
-4. Existing experiment operations remain separate from this design revision.
+6. Existing experiment operations remain separate from this design revision.
    Before acting, verify the run-local status for
    `EXP-20260709-local-overnight-audit-power-r23-deconfound`; if its matched
    arm0/arm2 pairs completed, read their coverage/throughput trajectories and
    preserve the result as a q_A task-effect deconfound, not IMOD evidence.
-5. `EXP-20260710-r25-qa-verification-1m` remains launch-ready in
+7. `EXP-20260710-r25-qa-verification-1m` remains launch-ready in
    `memory/ExpRecord.md`; this design turn neither launches nor cancels it.
-6. D2 remains approved-deferred as an archival sensitivity analysis only, with
+8. D2 remains approved-deferred as an archival sensitivity analysis only, with
    separate validation, identical stopping rules, all outcomes, one all-GPU
    device class, and no reward unblocking from an unexpected pass.
-7. Do NOT proceed to q_d/q_D reward arms, graph/world-model/async IMOD modules,
+9. Do NOT proceed to q_d/q_D reward arms, graph/world-model/async IMOD modules,
    or a new intrinsic reward. q_d/q_D remain BLOCKED by R24-1, and IMOD has not
    passed its direct-effect gate.
 
 ## Do Not Do Yet
 
+- Do not launch R26-G1a without explicit user approval. Do not treat `52 passed`,
+  dry-run checks, or implementation smokes as scientific checkpoint evidence.
+  Do not enable `q_A`, `q_d`, or `q_D` reward paths; even a G1a family pass
+  authorizes only G1b design.
 - Do not execute the superseded CSOG roadmap or Phase-A/G0 plan. Do not create
   an IMOD implementation plan until the user has reviewed the written spec and
   the required independent cross-family review is archived.
