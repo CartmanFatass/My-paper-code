@@ -278,9 +278,30 @@ def test_parse_args_exposes_exact_three_subcommands():
 def test_aggregate_writes_exact_registered_classification(tmp_path):
     static = {
         "status": "FAIL",
-        "zero_h": {"pass": False, "mean_skl": 0.0},
-        "rollout_h": {"pass": False, "mean_skl": 0.0},
+        "zero_h": {
+            "pass": False,
+            "mean_skl": 0.0,
+            "mean_stdmean_distance": 0.0,
+            "film_feature_between": 0.1,
+            "post_gru_feature_between": 0.01,
+        },
+        "rollout_h": {
+            "pass": False,
+            "mean_skl": 0.0,
+            "mean_stdmean_distance": 0.0,
+            "film_feature_between": 0.1,
+            "post_gru_feature_between": 0.01,
+        },
         "hidden_retention_ratio": 0.0,
+        "inactive_control": {
+            "max_abs_symmetric_kl": 0.0,
+            "max_stdmean_distance": 0.0,
+        },
+        "parity": {"pass": True},
+        "thresholds": {
+            "symmetric_kl_min": 0.02,
+            "standardized_mean_distance_min": 0.20,
+        },
     }
     checkpoint_ids = ["arm0_update25", "arm0_update30", "arm0_final"]
     for checkpoint_id in checkpoint_ids:
@@ -290,11 +311,37 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
         (root / "static_capacity.json").write_text(
             json.dumps(payload), encoding="utf-8"
         )
+        manifest = {
+            "checkpoint_id": checkpoint_id,
+            "checkpoint_sha256_before": f"sha-{checkpoint_id}",
+            "checkpoint_sha256_equal": True,
+            "policy_parameter_sha256_equal": True,
+            "parameter_counts": {"low_actor": 558344},
+        }
+        (root / "collector_manifest.json").write_text(
+            json.dumps(manifest), encoding="utf-8"
+        )
     synthetic = {
         "status": "PASS",
         "pass": True,
         "passing_seeds": 2,
         "failed_seeds": 1,
+        "checkpoint_sha256_before": "sha-arm0-final",
+        "checkpoint_sha256_equal": True,
+        "policy_parameter_sha256_equal": True,
+        "parameter_counts": {"low_actor": 558344},
+        "seed_reports": [
+            {
+                "seed": 17,
+                "status": "PASS",
+                "synthetic_code_accuracy": 0.95,
+                "synthetic_code_macro_f1": 0.94,
+                "sham_accuracy": 0.25,
+                "synthetic_active_minus_sham_accuracy": 0.70,
+                "synthetic_train_minus_test_accuracy": 0.05,
+                "active_minus_sham_bootstrap": {"lower": 0.55},
+            }
+        ],
     }
     (tmp_path / "synthetic_control.json").write_text(
         json.dumps(synthetic), encoding="utf-8"
@@ -315,6 +362,12 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
     assert json_result["classification"] == result["classification"]
     assert "CAPACITY_PRESENT_OBJECTIVE_MISSING" in markdown
     assert "No q_A, q_d, q_D, or intrinsic reward" in markdown
+    assert "arm0_update25" in markdown
+    assert "sha-arm0_update25" in markdown
+    assert "low_actor: 558344" in markdown
+    assert "Seed 17" in markdown
+    assert "macro-F1: 0.94" in markdown
+    assert "symmetric KL >= 0.02" in markdown
 
 
 def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp_path):

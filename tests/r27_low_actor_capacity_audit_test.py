@@ -162,6 +162,14 @@ def test_identity_film_has_zero_skill_pair_separation():
 
     assert report["inactive_control"]["max_abs_symmetric_kl"] <= 1e-8
     assert report["inactive_control"]["max_stdmean_distance"] <= 1e-8
+    assert np.asarray(report["film_code_parameters"]["gamma_by_skill"]).shape == (
+        4,
+        8,
+    )
+    assert np.asarray(report["film_code_parameters"]["beta_by_skill"]).shape == (
+        4,
+        8,
+    )
 
 
 def test_static_family_requires_two_of_three_agreement():

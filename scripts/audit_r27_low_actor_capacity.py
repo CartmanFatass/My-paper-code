@@ -621,15 +621,85 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
 
 
 def _aggregate_markdown(report: dict[str, object]) -> str:
-    return "\n".join(
+    lines = [
+        "# R27-G1 Low-Actor Capacity Autopsy",
+        "",
+        f"- Classification: `{report['classification']}`",
+        f"- Reasons: {'; '.join(report['reasons'])}",
+        f"- Static family: `{report['static_family']['status']}`",
+        f"- Synthetic family: `{report['synthetic_family']['status']}`",
+        "",
+        "## Fixed Thresholds",
+        "",
+        "- symmetric KL >= 0.02 nats",
+        "- standardized action-mean distance >= 0.20",
+        "- active-minus-control reset-bootstrap lower bound > 0",
+        "- recurrent retention < 0.50 for washout",
+        "- synthetic active accuracy and macro-F1 >= 0.90",
+        "- synthetic active-minus-sham accuracy >= 0.50",
+        "- synthetic sham accuracy <= 0.35",
+        "- synthetic train-minus-test accuracy <= 0.20",
+        "",
+        "## Static Checkpoints",
+        "",
+    ]
+    manifests = report.get("collector_manifests", [])
+    for index, static in enumerate(report.get("static_reports", [])):
+        manifest = manifests[index] if index < len(manifests) else {}
+        zero = static.get("zero_h", {})
+        rollout = static.get("rollout_h", {})
+        inactive = static.get("inactive_control", {})
+        parameter_counts = manifest.get("parameter_counts", {})
+        lines.extend(
+            [
+                f"### {static.get('checkpoint_id', 'unknown')}",
+                "",
+                f"- status: `{static.get('status')}`",
+                f"- zero-h KL / standardized distance / pass: {zero.get('mean_skl', 'n/a')} / {zero.get('mean_stdmean_distance', 'n/a')} / {zero.get('pass', False)}",
+                f"- rollout-h KL / standardized distance / pass: {rollout.get('mean_skl', 'n/a')} / {rollout.get('mean_stdmean_distance', 'n/a')} / {rollout.get('pass', False)}",
+                f"- FiLM / post-GRU separation (rollout-h): {rollout.get('film_feature_between', 'n/a')} / {rollout.get('post_gru_feature_between', 'n/a')}",
+                f"- hidden retention ratio: {static.get('hidden_retention_ratio', 'n/a')}",
+                f"- inactive KL / standardized distance: {inactive.get('max_abs_symmetric_kl', 'n/a')} / {inactive.get('max_stdmean_distance', 'n/a')}",
+                f"- live parity: {static.get('parity', {}).get('pass', False)}",
+                f"- checkpoint SHA256: {manifest.get('checkpoint_sha256_before', 'n/a')}",
+                f"- checkpoint / policy immutable: {manifest.get('checkpoint_sha256_equal', False)} / {manifest.get('policy_parameter_sha256_equal', False)}",
+            ]
+        )
+        for name, value in parameter_counts.items():
+            lines.append(f"- {name}: {value}")
+        lines.append("")
+
+    synthetic = report.get("synthetic_report", {})
+    lines.extend(
         [
-            "# R27-G1 Low-Actor Capacity Autopsy",
+            "## Synthetic Active/Sham Control",
             "",
-            f"- Classification: `{report['classification']}`",
-            f"- Reasons: {'; '.join(report['reasons'])}",
-            f"- Static family: `{report['static_family']['status']}`",
-            f"- Synthetic family: `{report['synthetic_family']['status']}`",
-            "",
+            f"- family status: `{synthetic.get('status')}`",
+            f"- passing / failed seeds: {synthetic.get('passing_seeds', 0)} / {synthetic.get('failed_seeds', 0)}",
+            f"- checkpoint SHA256: {synthetic.get('checkpoint_sha256_before', 'n/a')}",
+            f"- checkpoint / policy immutable: {synthetic.get('checkpoint_sha256_equal', False)} / {synthetic.get('policy_parameter_sha256_equal', False)}",
+        ]
+    )
+    for name, value in synthetic.get("parameter_counts", {}).items():
+        lines.append(f"- {name}: {value}")
+    lines.append("")
+    for seed_report in synthetic.get("seed_reports", []):
+        bootstrap = seed_report.get("active_minus_sham_bootstrap", {})
+        lines.extend(
+            [
+                f"### Seed {seed_report.get('seed')}",
+                "",
+                f"- status: `{seed_report.get('status')}`",
+                f"- active accuracy / macro-F1: {seed_report.get('synthetic_code_accuracy')} / {seed_report.get('synthetic_code_macro_f1')}",
+                f"- macro-F1: {seed_report.get('synthetic_code_macro_f1')}",
+                f"- sham accuracy: {seed_report.get('sham_accuracy')}",
+                f"- active-minus-sham accuracy / bootstrap lower: {seed_report.get('synthetic_active_minus_sham_accuracy')} / {bootstrap.get('lower')}",
+                f"- train-minus-test accuracy: {seed_report.get('synthetic_train_minus_test_accuracy')}",
+                "",
+            ]
+        )
+    lines.extend(
+        [
             "## Decision Boundary",
             "",
             "This reward-off audit classifies the existing low-actor path; it does not change the algorithm.",
@@ -641,6 +711,7 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
             "",
         ]
     )
+    return "\n".join(lines)
 
 
 def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
@@ -651,6 +722,14 @@ def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
     static_reports = [
         json.loads(
             (run_root / checkpoint_id / "static_capacity.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        for checkpoint_id in checkpoint_ids
+    ]
+    collector_manifests = [
+        json.loads(
+            (run_root / checkpoint_id / "collector_manifest.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -679,6 +758,7 @@ def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
         "static_family": static_family,
         "synthetic_family": synthetic_family,
         "static_reports": static_reports,
+        "collector_manifests": collector_manifests,
         "synthetic_report": synthetic_report,
         "prohibited_next_actions": [
             "q_A/q_d/q_D or intrinsic reward",

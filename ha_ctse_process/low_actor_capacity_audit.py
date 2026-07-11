@@ -620,10 +620,23 @@ def evaluate_static_checkpoint(
     zero_skl = float(condition_reports["zero_h"]["mean_skl"])
     rollout_skl = float(condition_reports["rollout_h"]["mean_skl"])
     retention = rollout_skl / max(zero_skl, INACTIVE_TOLERANCE)
+    gamma_grid = active_outputs["zero_h"].gamma.reshape(
+        rows, num_skills, actor.hidden_dim
+    )
+    beta_grid = active_outputs["zero_h"].beta.reshape(
+        rows, num_skills, actor.hidden_dim
+    )
+    gamma_reference = gamma_grid[0]
+    beta_reference = beta_grid[0]
+    film_code_consistency_error = max(
+        float(torch.max(torch.abs(gamma_grid - gamma_reference)).item()),
+        float(torch.max(torch.abs(beta_grid - beta_reference)).item()),
+    )
     invalid = bool(
         inactive_max_skl > INACTIVE_TOLERANCE
         or inactive_max_distance > INACTIVE_TOLERANCE
         or not parity["pass"]
+        or film_code_consistency_error > PARITY_TOLERANCE
         or not all(bool(report["finite"]) for report in condition_reports.values())
     )
     status = (
@@ -644,6 +657,11 @@ def evaluate_static_checkpoint(
         "zero_h": condition_reports["zero_h"],
         "rollout_h": condition_reports["rollout_h"],
         "hidden_retention_ratio": float(retention),
+        "film_code_parameters": {
+            "gamma_by_skill": gamma_reference.detach().cpu().tolist(),
+            "beta_by_skill": beta_reference.detach().cpu().tolist(),
+            "consistency_max_abs_error": film_code_consistency_error,
+        },
         "inactive_control": {
             "max_abs_symmetric_kl": inactive_max_skl,
             "max_stdmean_distance": inactive_max_distance,
