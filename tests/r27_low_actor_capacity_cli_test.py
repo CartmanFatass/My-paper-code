@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from dataclasses import dataclass
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -11,6 +13,9 @@ import torch
 from ha_ctse_process.low_actor_capacity_audit import CapacitySnapshotBatch
 from ha_ctse_process.standalone_agent import StrictHMASDMAPPOLowLevelPolicy
 from scripts import audit_r27_low_actor_capacity as collector
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 @dataclass
@@ -363,3 +368,69 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
     }
     assert result["static"]["checkpoint_id"] == "fixture_update25"
     assert (output_dir / "static_capacity.md").is_file()
+
+
+def test_runner_dry_run_has_exact_arm0_checkpoints_and_no_forbidden_flags(
+    tmp_path,
+):
+    run_root = tmp_path / "dry-run-output"
+    result = subprocess.run(
+        [
+            "powershell.exe",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1",
+            "-DryRun",
+            "-RunRoot",
+            str(run_root),
+        ],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    output = result.stdout + result.stderr
+
+    assert output.count("PHASE collect-static") == 3
+    assert "arm0_update25" in output
+    assert "arm0_update30" in output
+    assert "arm0_final" in output
+    assert "arm2_" not in output
+    for forbidden in (
+        "process_reward",
+        "prototype_disc",
+        "team_disc",
+        "q_A",
+        "q_d",
+        "q_D",
+        "total_timesteps",
+    ):
+        assert forbidden not in output
+    assert output.count("PHASE synthetic") == 1
+    assert output.count("PHASE aggregate") == 1
+    assert not run_root.exists()
+
+
+def test_runner_rejects_cpu_in_dry_run():
+    result = subprocess.run(
+        [
+            "powershell.exe",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1",
+            "-DryRun",
+            "-Device",
+            "cpu",
+        ],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    output = result.stdout + result.stderr
+
+    assert result.returncode != 0
+    assert "requires -Device cuda" in output
