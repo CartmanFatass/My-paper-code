@@ -695,6 +695,11 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
                 f"- sham accuracy: {seed_report.get('sham_accuracy')}",
                 f"- active-minus-sham accuracy / bootstrap lower: {seed_report.get('synthetic_active_minus_sham_accuracy')} / {bootstrap.get('lower')}",
                 f"- train-minus-test accuracy: {seed_report.get('synthetic_train_minus_test_accuracy')}",
+                f"- active/sham initialization equal: {seed_report.get('active_sham_initialization_equal', False)}",
+                f"- active/sham parameter count equal: {seed_report.get('active_sham_parameter_count_equal', False)}",
+                f"- active/sham shared minibatch schedule: {seed_report.get('active_sham_shared_minibatch_schedule', False)}",
+                f"- initial actor SHA256: {seed_report.get('initial_actor_sha256', 'n/a')}",
+                f"- minibatch schedule SHA256: {seed_report.get('minibatch_schedule_sha256', 'n/a')}",
                 "",
             ]
         )

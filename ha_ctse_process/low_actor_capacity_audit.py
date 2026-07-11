@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 from dataclasses import dataclass
 from itertools import combinations
 from pathlib import Path
@@ -859,6 +860,32 @@ def _minibatch_schedule(
     )
 
 
+def _actor_state_sha256(actor: Any) -> str:
+    digest = hashlib.sha256()
+    for name, tensor in sorted(actor.state_dict().items()):
+        if not name.startswith("actor_"):
+            continue
+        value = tensor.detach().cpu().contiguous()
+        digest.update(name.encode("utf-8"))
+        digest.update(str(value.dtype).encode("ascii"))
+        digest.update(np.asarray(value.shape, dtype=np.int64).tobytes())
+        digest.update(value.numpy().tobytes())
+    return digest.hexdigest()
+
+
+def _actor_parameter_count(actor: Any) -> int:
+    return int(sum(parameter.numel() for parameter in actor.actor_update_parameters()))
+
+
+def _minibatch_schedule_sha256(schedule: tuple[np.ndarray, ...]) -> str:
+    digest = hashlib.sha256()
+    for indices in schedule:
+        values = np.asarray(indices, dtype=np.int64)
+        digest.update(np.asarray(values.shape, dtype=np.int64).tobytes())
+        digest.update(values.tobytes())
+    return digest.hexdigest()
+
+
 def _synthetic_target(
     codebook: np.ndarray,
     true_skill: np.ndarray,
@@ -913,6 +940,8 @@ def fit_synthetic_clone(
     validation_rows = _validate_synthetic_rows(validation)
     clone = copy.deepcopy(source_actor).to(device)
     clone.device = torch.device(device)
+    initial_actor_sha256 = _actor_state_sha256(clone)
+    actor_parameter_count = _actor_parameter_count(clone)
     clone.train()
     optimizer = torch.optim.Adam(
         clone.actor_update_parameters(), lr=float(config.learning_rate)
@@ -978,6 +1007,8 @@ def fit_synthetic_clone(
         "train_losses": train_losses,
         "validation_losses": validation_losses,
         "validation_evaluations": int(validation_evaluations),
+        "initial_actor_sha256": initial_actor_sha256,
+        "actor_parameter_count": actor_parameter_count,
     }
 
 
@@ -1056,6 +1087,9 @@ def evaluate_synthetic_seed(
     minibatches = _minibatch_schedule(
         train.true_skill.size, config, seed=int(seed) + 400
     )
+    schedule_sha256 = _minibatch_schedule_sha256(minibatches)
+    source_actor_sha256 = _actor_state_sha256(source_actor)
+    source_actor_parameter_count = _actor_parameter_count(source_actor)
     active_fit = fit_synthetic_clone(
         source_actor=source_actor,
         train=train,
@@ -1106,8 +1140,20 @@ def evaluate_synthetic_seed(
     )
     accuracy_difference = active_test.accuracy - sham_test.accuracy
     generalization_gap = active_train.accuracy - active_test.accuracy
+    initialization_equal = bool(
+        active_fit["initial_actor_sha256"]
+        == sham_fit["initial_actor_sha256"]
+        == source_actor_sha256
+    )
+    parameter_count_equal = bool(
+        int(active_fit["actor_parameter_count"])
+        == int(sham_fit["actor_parameter_count"])
+        == source_actor_parameter_count
+    )
+    control_contract_valid = bool(initialization_equal and parameter_count_equal)
     passed = bool(
-        active_test.accuracy >= 0.90
+        control_contract_valid
+        and active_test.accuracy >= 0.90
         and active_test.macro_f1 >= 0.90
         and accuracy_difference >= 0.50
         and interval.lower > 0.0
@@ -1116,7 +1162,7 @@ def evaluate_synthetic_seed(
     )
     return {
         "seed": int(seed),
-        "status": "PASS" if passed else "FAIL",
+        "status": "PASS" if passed else ("INVALID" if not control_contract_valid else "FAIL"),
         "pass": passed,
         "synthetic_code_accuracy": active_test.accuracy,
         "synthetic_code_macro_f1": active_test.macro_f1,
@@ -1132,6 +1178,16 @@ def evaluate_synthetic_seed(
             "sham": int(sham_fit["validation_evaluations"]),
         },
         "test_evaluations": {"active": 1, "sham": 1},
+        "initial_actor_sha256": source_actor_sha256,
+        "active_initial_actor_sha256": active_fit["initial_actor_sha256"],
+        "sham_initial_actor_sha256": sham_fit["initial_actor_sha256"],
+        "active_sham_initialization_equal": initialization_equal,
+        "source_actor_parameter_count": source_actor_parameter_count,
+        "active_actor_parameter_count": int(active_fit["actor_parameter_count"]),
+        "sham_actor_parameter_count": int(sham_fit["actor_parameter_count"]),
+        "active_sham_parameter_count_equal": parameter_count_equal,
+        "minibatch_schedule_sha256": schedule_sha256,
+        "active_sham_shared_minibatch_schedule": True,
         "thresholds": {
             "active_accuracy_min": 0.90,
             "active_macro_f1_min": 0.90,

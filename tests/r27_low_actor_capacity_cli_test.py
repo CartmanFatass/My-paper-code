@@ -340,6 +340,11 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
                 "synthetic_active_minus_sham_accuracy": 0.70,
                 "synthetic_train_minus_test_accuracy": 0.05,
                 "active_minus_sham_bootstrap": {"lower": 0.55},
+                "active_sham_initialization_equal": True,
+                "active_sham_parameter_count_equal": True,
+                "active_sham_shared_minibatch_schedule": True,
+                "initial_actor_sha256": "actor-init-sha",
+                "minibatch_schedule_sha256": "batch-schedule-sha",
             }
         ],
     }
@@ -368,6 +373,8 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
     assert "Seed 17" in markdown
     assert "macro-F1: 0.94" in markdown
     assert "symmetric KL >= 0.02" in markdown
+    assert "actor-init-sha" in markdown
+    assert "batch-schedule-sha" in markdown
 
 
 def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp_path):

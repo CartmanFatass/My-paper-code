@@ -277,6 +277,11 @@ def test_active_clone_learns_better_than_fake_label_sham():
     assert result["synthetic_code_macro_f1"] >= 0.90
     assert result["synthetic_code_accuracy"] > result["sham_accuracy"]
     assert result["test_evaluations"] == {"active": 1, "sham": 1}
+    assert result["active_sham_initialization_equal"] is True
+    assert result["active_sham_parameter_count_equal"] is True
+    assert result["active_sham_shared_minibatch_schedule"] is True
+    assert len(result["initial_actor_sha256"]) == 64
+    assert len(result["minibatch_schedule_sha256"]) == 64
     for name, expected in source_before.items():
         torch.testing.assert_close(actor.state_dict()[name], expected)
 
