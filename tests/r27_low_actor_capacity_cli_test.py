@@ -336,6 +336,7 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
                 "status": "PASS",
                 "synthetic_code_accuracy": 0.95,
                 "synthetic_code_macro_f1": 0.94,
+                "synthetic_target_mse": 0.01,
                 "sham_accuracy": 0.25,
                 "synthetic_active_minus_sham_accuracy": 0.70,
                 "synthetic_train_minus_test_accuracy": 0.05,
@@ -344,7 +345,18 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
                 "active_sham_parameter_count_equal": True,
                 "active_sham_shared_minibatch_schedule": True,
                 "initial_actor_sha256": "actor-init-sha",
+                "source_actor_sha256_before": "actor-before-sha",
+                "source_actor_sha256_after": "actor-after-sha",
+                "source_actor_sha256_equal": True,
                 "minibatch_schedule_sha256": "batch-schedule-sha",
+                "evidence_finite": True,
+                "control_contract_valid": True,
+                "active_optimizer_contract": {"class": "Adam"},
+                "sham_optimizer_contract": {"class": "Adam"},
+                "active_train_rows_sha256": "train-rows-sha",
+                "sham_train_rows_sha256": "train-rows-sha",
+                "active_validation_rows_sha256": "validation-rows-sha",
+                "sham_validation_rows_sha256": "validation-rows-sha",
             }
         ],
     }
@@ -373,7 +385,12 @@ def test_aggregate_writes_exact_registered_classification(tmp_path):
     assert "Seed 17" in markdown
     assert "macro-F1: 0.94" in markdown
     assert "symmetric KL >= 0.02" in markdown
-    assert "actor-init-sha" in markdown
+    assert "actor-before-sha" in markdown
+    assert "actor-after-sha" in markdown
+    assert "target MSE: 0.01" in markdown
+    assert "evidence finite / control contract valid: True / True" in markdown
+    assert "optimizer contracts equal: True" in markdown
+    assert "train row hashes equal: True" in markdown
     assert "batch-schedule-sha" in markdown
 
 

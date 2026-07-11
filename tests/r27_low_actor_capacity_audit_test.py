@@ -6,9 +6,12 @@ import numpy as np
 import pytest
 import torch
 
+import ha_ctse_process.low_actor_capacity_audit as capacity_audit
 from ha_ctse_process.low_actor_capacity_audit import (
     CapacitySnapshotBatch,
     SyntheticFitConfig,
+    SyntheticScore,
+    _decide_synthetic_seed_gate,
     _actor_raw_mean_for_training,
     build_balanced_synthetic_rows,
     build_orthogonal_codebook,
@@ -22,6 +25,7 @@ from ha_ctse_process.low_actor_capacity_audit import (
     gate_synthetic_family,
     grouped_reset_split,
     read_capacity_snapshot_shards,
+    symmetric_kl_diag_gaussian,
     write_capacity_snapshot_shard,
 )
 from ha_ctse_process.standalone_agent import StrictHMASDMAPPOLowLevelPolicy
@@ -93,6 +97,19 @@ def test_reset_cluster_bootstrap_is_deterministic_and_positive():
 
     assert first == second
     assert first.lower > 0.0
+
+
+def test_symmetric_kl_matches_closed_form_and_sums_action_dimensions():
+    mean_a = torch.tensor([[0.0, 0.0]])
+    mean_b = torch.tensor([[1.0, 1.0]])
+    logstd_a = torch.zeros_like(mean_a)
+    logstd_b = torch.full_like(mean_b, float(np.log(2.0)))
+
+    actual = symmetric_kl_diag_gaussian(
+        mean_a, logstd_a, mean_b, logstd_b
+    )
+
+    torch.testing.assert_close(actual, torch.tensor([1.75]))
 
 
 def test_snapshot_rejects_nonfinite_hidden_state(tmp_path):
@@ -280,10 +297,257 @@ def test_active_clone_learns_better_than_fake_label_sham():
     assert result["active_sham_initialization_equal"] is True
     assert result["active_sham_parameter_count_equal"] is True
     assert result["active_sham_shared_minibatch_schedule"] is True
+    assert result["source_actor_sha256_before"] == result["source_actor_sha256_after"]
+    assert result["active_minibatch_schedule_sha256"] == result[
+        "sham_minibatch_schedule_sha256"
+    ] == result["minibatch_schedule_sha256"]
+    assert result["active_optimizer_contract"] == result[
+        "sham_optimizer_contract"
+    ]
+    assert result["active_train_rows_sha256"] == result[
+        "sham_train_rows_sha256"
+    ]
+    assert result["active_validation_rows_sha256"] == result[
+        "sham_validation_rows_sha256"
+    ]
+    assert result["active_train_targets_sha256"] == result[
+        "sham_train_targets_sha256"
+    ]
+    assert result["active_validation_targets_sha256"] == result[
+        "sham_validation_targets_sha256"
+    ]
     assert len(result["initial_actor_sha256"]) == 64
     assert len(result["minibatch_schedule_sha256"]) == 64
     for name, expected in source_before.items():
         torch.testing.assert_close(actor.state_dict()[name], expected)
+
+
+def test_synthetic_seed_gate_accepts_exact_inclusive_thresholds_only():
+    status, passed, reasons = _decide_synthetic_seed_gate(
+        active_accuracy=0.90,
+        active_macro_f1=0.90,
+        active_minus_sham_accuracy=0.50,
+        bootstrap_lower=np.nextafter(0.0, 1.0),
+        sham_accuracy=0.35,
+        generalization_gap=0.20,
+        evidence_finite=True,
+        control_contract_valid=True,
+        support_sufficient=True,
+    )
+    zero_lower_status, zero_lower_passed, _ = _decide_synthetic_seed_gate(
+        active_accuracy=0.90,
+        active_macro_f1=0.90,
+        active_minus_sham_accuracy=0.50,
+        bootstrap_lower=0.0,
+        sham_accuracy=0.35,
+        generalization_gap=0.20,
+        evidence_finite=True,
+        control_contract_valid=True,
+        support_sufficient=True,
+    )
+
+    assert (status, passed, reasons) == ("PASS", True, [])
+    assert (zero_lower_status, zero_lower_passed) == ("FAIL", False)
+
+
+def test_synthetic_seed_returns_underpowered_before_fitting_with_too_few_test_resets(
+    monkeypatch,
+):
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=10, rows_per_reset=2)
+    split = grouped_reset_split(batch.reset_id, seed=27011)
+    codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
+
+    def unexpected_fit(**_kwargs):
+        raise AssertionError("fit must not run without bootstrap support")
+
+    monkeypatch.setattr(capacity_audit, "fit_synthetic_clone", unexpected_fit)
+    result = evaluate_synthetic_seed(
+        actor,
+        batch,
+        split,
+        codebook,
+        seed=17,
+        config=SyntheticFitConfig(max_steps=1, validation_interval=1, patience=1),
+        device=torch.device("cpu"),
+        bootstrap_reps=10,
+    )
+
+    assert result["status"] == "UNDERPOWERED"
+    assert result["pass"] is False
+    assert result["support"]["test_reset_groups"] == 2
+    assert "bootstrap" in " ".join(result["reasons"])
+
+
+def test_nonfinite_synthetic_score_is_structured_invalid(monkeypatch):
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=25, rows_per_reset=2)
+    split = grouped_reset_split(batch.reset_id, seed=27011)
+    codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
+    original_score = capacity_audit.score_synthetic_clone
+
+    def nonfinite_score(model, rows, **kwargs):
+        score = original_score(model, rows, **kwargs)
+        if kwargs["input_label_field"] == "true_skill":
+            return SyntheticScore(
+                accuracy=score.accuracy,
+                macro_f1=score.macro_f1,
+                target_mse=float("nan"),
+                correct=score.correct,
+                predicted_skill=score.predicted_skill,
+                reset_id=score.reset_id,
+            )
+        return score
+
+    monkeypatch.setattr(capacity_audit, "score_synthetic_clone", nonfinite_score)
+    result = evaluate_synthetic_seed(
+        actor,
+        batch,
+        split,
+        codebook,
+        seed=17,
+        config=SyntheticFitConfig(
+            learning_rate=1e-2,
+            batch_size=64,
+            max_steps=20,
+            validation_interval=5,
+            patience=4,
+            min_delta=1e-5,
+        ),
+        device=torch.device("cpu"),
+        bootstrap_reps=20,
+    )
+
+    assert result["status"] == "INVALID"
+    assert result["pass"] is False
+    assert "non-finite" in " ".join(result["reasons"])
+
+
+def test_source_actor_mutation_after_both_fits_is_structured_invalid(monkeypatch):
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=25, rows_per_reset=2)
+    split = grouped_reset_split(batch.reset_id, seed=27011)
+    codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
+    original_fit = capacity_audit.fit_synthetic_clone
+    calls = 0
+
+    def mutating_fit(**kwargs):
+        nonlocal calls
+        result = original_fit(**kwargs)
+        calls += 1
+        if calls == 2:
+            with torch.no_grad():
+                next(actor.parameters()).add_(1.0)
+        return result
+
+    monkeypatch.setattr(capacity_audit, "fit_synthetic_clone", mutating_fit)
+    result = evaluate_synthetic_seed(
+        actor,
+        batch,
+        split,
+        codebook,
+        seed=17,
+        config=SyntheticFitConfig(
+            learning_rate=1e-2,
+            batch_size=64,
+            max_steps=20,
+            validation_interval=5,
+            patience=4,
+            min_delta=1e-5,
+        ),
+        device=torch.device("cpu"),
+        bootstrap_reps=20,
+    )
+
+    assert result["status"] == "INVALID"
+    assert result["pass"] is False
+    assert result["source_actor_sha256_before"] != result[
+        "source_actor_sha256_after"
+    ]
+    assert "source actor changed" in " ".join(result["reasons"])
+
+
+def test_test_rows_are_scored_once_per_clone_and_never_enter_fit(monkeypatch):
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=25, rows_per_reset=2)
+    split = grouped_reset_split(batch.reset_id, seed=27011)
+    codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
+    original_fit = capacity_audit.fit_synthetic_clone
+    original_score = capacity_audit.score_synthetic_clone
+    fit_reset_sets: list[tuple[set[int], set[int]]] = []
+    score_reset_sets: list[tuple[str, set[int]]] = []
+
+    def recording_fit(**kwargs):
+        fit_reset_sets.append(
+            (
+                set(np.unique(kwargs["train"].reset_id).tolist()),
+                set(np.unique(kwargs["validation"].reset_id).tolist()),
+            )
+        )
+        return original_fit(**kwargs)
+
+    def recording_score(model, rows, **kwargs):
+        score_reset_sets.append(
+            (
+                kwargs["input_label_field"],
+                set(np.unique(rows.reset_id).tolist()),
+            )
+        )
+        return original_score(model, rows, **kwargs)
+
+    monkeypatch.setattr(capacity_audit, "fit_synthetic_clone", recording_fit)
+    monkeypatch.setattr(
+        capacity_audit, "score_synthetic_clone", recording_score
+    )
+    result = evaluate_synthetic_seed(
+        actor,
+        batch,
+        split,
+        codebook,
+        seed=17,
+        config=SyntheticFitConfig(
+            learning_rate=1e-2,
+            batch_size=64,
+            max_steps=20,
+            validation_interval=5,
+            patience=4,
+            min_delta=1e-5,
+        ),
+        device=torch.device("cpu"),
+        bootstrap_reps=20,
+    )
+
+    expected_train = set(split.train_reset_ids)
+    expected_validation = set(split.validation_reset_ids)
+    expected_test = set(split.test_reset_ids)
+    assert fit_reset_sets == [
+        (expected_train, expected_validation),
+        (expected_train, expected_validation),
+    ]
+    assert score_reset_sets.count(("true_skill", expected_test)) == 1
+    assert score_reset_sets.count(("fake_skill", expected_test)) == 1
+    assert ("true_skill", expected_train) in score_reset_sets
+    assert result["test_evaluations"] == {"active": 1, "sham": 1}
+
+
+def test_synthetic_family_propagates_invalid_and_underpowered_seed_statuses():
+    invalid = gate_synthetic_family(
+        [
+            {"status": "PASS", "pass": True},
+            {"status": "PASS", "pass": True},
+            {"status": "INVALID", "pass": False},
+        ]
+    )
+    underpowered = gate_synthetic_family(
+        [
+            {"status": "PASS", "pass": True},
+            {"status": "FAIL", "pass": False},
+            {"status": "UNDERPOWERED", "pass": False},
+        ]
+    )
+
+    assert invalid["status"] == "INVALID"
+    assert underpowered["status"] == "UNDERPOWERED"
 
 
 def test_synthetic_family_requires_two_of_three_seed_agreement():

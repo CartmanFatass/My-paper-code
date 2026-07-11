@@ -19,6 +19,12 @@ STATIC_STDMEAN_MIN = 0.20
 RECURRENT_RETENTION_MAX = 0.50
 INACTIVE_TOLERANCE = 1e-8
 PARITY_TOLERANCE = 1e-6
+SYNTHETIC_ACCURACY_MIN = 0.90
+SYNTHETIC_MACRO_F1_MIN = 0.90
+SYNTHETIC_ACTIVE_MINUS_SHAM_MIN = 0.50
+SYNTHETIC_GENERALIZATION_GAP_MAX = 0.20
+SYNTHETIC_SHAM_MARGIN = 0.10
+MIN_BOOTSTRAP_RESET_GROUPS = 5
 
 
 @dataclass(frozen=True)
@@ -886,6 +892,106 @@ def _minibatch_schedule_sha256(schedule: tuple[np.ndarray, ...]) -> str:
     return digest.hexdigest()
 
 
+def _array_payload_sha256(named_arrays: dict[str, np.ndarray]) -> str:
+    digest = hashlib.sha256()
+    for name, array in sorted(named_arrays.items()):
+        value = np.ascontiguousarray(np.asarray(array))
+        digest.update(name.encode("utf-8"))
+        digest.update(str(value.dtype).encode("ascii"))
+        digest.update(np.asarray(value.shape, dtype=np.int64).tobytes())
+        digest.update(value.tobytes())
+    return digest.hexdigest()
+
+
+def _synthetic_rows_sha256(rows: SyntheticRows) -> str:
+    return _array_payload_sha256(
+        {
+            field: np.asarray(getattr(rows, field))
+            for field in SyntheticRows.__dataclass_fields__
+        }
+    )
+
+
+def _synthetic_targets_sha256(
+    codebook: np.ndarray, true_skill: np.ndarray
+) -> str:
+    targets = np.asarray(codebook, dtype=np.float32)[
+        np.asarray(true_skill, dtype=np.int64)
+    ]
+    return _array_payload_sha256({"targets": targets})
+
+
+def _optimizer_contract(optimizer: torch.optim.Optimizer) -> dict[str, object]:
+    defaults = optimizer.defaults
+    return {
+        "class": f"{type(optimizer).__module__}.{type(optimizer).__qualname__}",
+        "learning_rate": float(defaults["lr"]),
+        "betas": [float(value) for value in defaults["betas"]],
+        "eps": float(defaults["eps"]),
+        "weight_decay": float(defaults["weight_decay"]),
+        "amsgrad": bool(defaults["amsgrad"]),
+        "maximize": bool(defaults.get("maximize", False)),
+        "foreach": defaults.get("foreach"),
+        "capturable": bool(defaults.get("capturable", False)),
+        "differentiable": bool(defaults.get("differentiable", False)),
+        "fused": defaults.get("fused"),
+    }
+
+
+def _synthetic_thresholds(num_skills: int) -> dict[str, object]:
+    return {
+        "active_accuracy_min": SYNTHETIC_ACCURACY_MIN,
+        "active_macro_f1_min": SYNTHETIC_MACRO_F1_MIN,
+        "active_minus_sham_accuracy_min": SYNTHETIC_ACTIVE_MINUS_SHAM_MIN,
+        "bootstrap_lower": "> 0.0",
+        "sham_accuracy_max": 1.0 / int(num_skills) + SYNTHETIC_SHAM_MARGIN,
+        "train_minus_test_accuracy_max": SYNTHETIC_GENERALIZATION_GAP_MAX,
+    }
+
+
+def _decide_synthetic_seed_gate(
+    *,
+    active_accuracy: float,
+    active_macro_f1: float,
+    active_minus_sham_accuracy: float,
+    bootstrap_lower: float,
+    sham_accuracy: float,
+    generalization_gap: float,
+    evidence_finite: bool,
+    control_contract_valid: bool,
+    support_sufficient: bool,
+    num_skills: int = 4,
+) -> tuple[str, bool, list[str]]:
+    """Apply the pre-registered seed gate with explicit precedence."""
+
+    if not support_sufficient:
+        return "UNDERPOWERED", False, ["bootstrap reset support is insufficient"]
+    if not evidence_finite:
+        return "INVALID", False, ["non-finite synthetic evidence"]
+    if not control_contract_valid:
+        return "INVALID", False, ["active/sham control contract failed"]
+
+    checks = (
+        (active_accuracy >= SYNTHETIC_ACCURACY_MIN, "active accuracy below threshold"),
+        (active_macro_f1 >= SYNTHETIC_MACRO_F1_MIN, "active macro-F1 below threshold"),
+        (
+            active_minus_sham_accuracy >= SYNTHETIC_ACTIVE_MINUS_SHAM_MIN,
+            "active-minus-sham accuracy below threshold",
+        ),
+        (bootstrap_lower > 0.0, "bootstrap lower bound is not positive"),
+        (
+            sham_accuracy <= 1.0 / int(num_skills) + SYNTHETIC_SHAM_MARGIN,
+            "sham accuracy above threshold",
+        ),
+        (
+            generalization_gap <= SYNTHETIC_GENERALIZATION_GAP_MAX,
+            "train-minus-test accuracy above threshold",
+        ),
+    )
+    reasons = [reason for passed, reason in checks if not passed]
+    return ("PASS", True, []) if not reasons else ("FAIL", False, reasons)
+
+
 def _synthetic_target(
     codebook: np.ndarray,
     true_skill: np.ndarray,
@@ -946,6 +1052,16 @@ def fit_synthetic_clone(
     optimizer = torch.optim.Adam(
         clone.actor_update_parameters(), lr=float(config.learning_rate)
     )
+    optimizer_contract = _optimizer_contract(optimizer)
+    minibatch_schedule_sha256 = _minibatch_schedule_sha256(minibatches)
+    train_rows_sha256 = _synthetic_rows_sha256(train_rows)
+    validation_rows_sha256 = _synthetic_rows_sha256(validation_rows)
+    train_targets_sha256 = _synthetic_targets_sha256(
+        codebook, train_rows.true_skill
+    )
+    validation_targets_sha256 = _synthetic_targets_sha256(
+        codebook, validation_rows.true_skill
+    )
     best_validation_loss = float("inf")
     best_step = 0
     best_state: dict[str, torch.Tensor] | None = None
@@ -962,6 +1078,8 @@ def fit_synthetic_clone(
         loss = _synthetic_loss(
             clone, batch, input_label_field, codebook, torch.device(device)
         )
+        if not bool(torch.isfinite(loss).item()):
+            raise FloatingPointError("non-finite synthetic training loss")
         loss.backward()
         optimizer.step()
         train_losses.append(float(loss.detach().item()))
@@ -983,6 +1101,8 @@ def fit_synthetic_clone(
                     torch.device(device),
                 ).item()
             )
+        if not np.isfinite(validation_loss):
+            raise FloatingPointError("non-finite synthetic validation loss")
         clone.train()
         validation_evaluations += 1
         validation_losses.append({"step": step, "loss": validation_loss})
@@ -1009,6 +1129,12 @@ def fit_synthetic_clone(
         "validation_evaluations": int(validation_evaluations),
         "initial_actor_sha256": initial_actor_sha256,
         "actor_parameter_count": actor_parameter_count,
+        "optimizer_contract": optimizer_contract,
+        "minibatch_schedule_sha256": minibatch_schedule_sha256,
+        "train_rows_sha256": train_rows_sha256,
+        "validation_rows_sha256": validation_rows_sha256,
+        "train_targets_sha256": train_targets_sha256,
+        "validation_targets_sha256": validation_targets_sha256,
     }
 
 
@@ -1049,6 +1175,13 @@ def score_synthetic_clone(
         )
         prediction = distances.argmin(dim=1).cpu().numpy().astype(np.int64)
         mse = float(F.mse_loss(predicted_mean, target).item())
+    if not (
+        bool(torch.isfinite(predicted_mean).all().item())
+        and bool(torch.isfinite(target).all().item())
+        and bool(torch.isfinite(distances).all().item())
+        and np.isfinite(mse)
+    ):
+        raise FloatingPointError("non-finite synthetic score")
     truth = np.asarray(values.true_skill, dtype=np.int64)
     correct = prediction == truth
     return SyntheticScore(
@@ -1059,6 +1192,60 @@ def score_synthetic_clone(
         predicted_skill=prediction,
         reset_id=np.asarray(values.reset_id, dtype=np.int64),
     )
+
+
+def _synthetic_split_support(
+    batch: CapacitySnapshotBatch, split: ResetSplit
+) -> dict[str, int]:
+    reset_ids = np.asarray(batch.reset_id, dtype=np.int64)
+
+    def count_groups(indices: np.ndarray) -> int:
+        values = np.asarray(indices, dtype=np.int64)
+        return int(np.unique(reset_ids[values]).size) if values.size else 0
+
+    return {
+        "train_rows": int(np.asarray(split.train).size),
+        "validation_rows": int(np.asarray(split.validation).size),
+        "test_rows": int(np.asarray(split.test).size),
+        "train_reset_groups": count_groups(split.train),
+        "validation_reset_groups": count_groups(split.validation),
+        "test_reset_groups": count_groups(split.test),
+    }
+
+
+def _terminal_synthetic_seed_report(
+    *,
+    seed: int,
+    status: str,
+    reasons: list[str],
+    num_skills: int,
+    source_actor_sha256_before: str,
+    source_actor_sha256_after: str,
+    source_actor_parameter_count: int,
+    support: dict[str, int],
+) -> dict[str, object]:
+    return {
+        "seed": int(seed),
+        "status": status,
+        "pass": False,
+        "reasons": list(reasons),
+        "support": dict(support),
+        "source_actor_sha256_before": source_actor_sha256_before,
+        "source_actor_sha256_after": source_actor_sha256_after,
+        "source_actor_sha256_equal": source_actor_sha256_before
+        == source_actor_sha256_after,
+        "source_actor_parameter_count": int(source_actor_parameter_count),
+        "thresholds": _synthetic_thresholds(num_skills),
+    }
+
+
+def _fit_evidence_is_finite(fit: dict[str, object]) -> bool:
+    values = [float(fit["best_validation_loss"])]
+    values.extend(float(value) for value in fit["train_losses"])
+    values.extend(
+        float(item["loss"]) for item in fit["validation_losses"]
+    )
+    return bool(np.isfinite(np.asarray(values, dtype=np.float64)).all())
 
 
 def evaluate_synthetic_seed(
@@ -1075,95 +1262,265 @@ def evaluate_synthetic_seed(
     """Run one paired active/fake-label capacity control seed."""
 
     num_skills = int(source_actor.n_skills)
-    train = build_balanced_synthetic_rows(
-        batch, split.train, num_skills, seed=int(seed) + 100
+    source_actor_sha256_before = _actor_state_sha256(source_actor)
+    source_actor_parameter_count = _actor_parameter_count(source_actor)
+    try:
+        validated_batch = validate_capacity_snapshots(batch)
+        support = _synthetic_split_support(validated_batch, split)
+    except (IndexError, ValueError) as error:
+        source_after = _actor_state_sha256(source_actor)
+        return _terminal_synthetic_seed_report(
+            seed=seed,
+            status="INVALID",
+            reasons=[f"invalid snapshot/split contract: {error}"],
+            num_skills=num_skills,
+            source_actor_sha256_before=source_actor_sha256_before,
+            source_actor_sha256_after=source_after,
+            source_actor_parameter_count=source_actor_parameter_count,
+            support={},
+        )
+
+    support_sufficient = bool(
+        support["train_rows"] > 0
+        and support["validation_rows"] > 0
+        and support["test_rows"] > 0
+        and support["test_reset_groups"] >= MIN_BOOTSTRAP_RESET_GROUPS
     )
-    validation = build_balanced_synthetic_rows(
-        batch, split.validation, num_skills, seed=int(seed) + 200
-    )
-    test = build_balanced_synthetic_rows(
-        batch, split.test, num_skills, seed=int(seed) + 300
-    )
+    if not support_sufficient:
+        return _terminal_synthetic_seed_report(
+            seed=seed,
+            status="UNDERPOWERED",
+            reasons=[
+                f"bootstrap requires at least {MIN_BOOTSTRAP_RESET_GROUPS} test reset groups"
+            ],
+            num_skills=num_skills,
+            source_actor_sha256_before=source_actor_sha256_before,
+            source_actor_sha256_after=_actor_state_sha256(source_actor),
+            source_actor_parameter_count=source_actor_parameter_count,
+            support=support,
+        )
+
+    codebook_values = np.asarray(codebook, dtype=np.float32)
+    expected_codebook_shape = (num_skills, int(source_actor.action_dim))
+    if (
+        codebook_values.shape != expected_codebook_shape
+        or not np.isfinite(codebook_values).all()
+    ):
+        return _terminal_synthetic_seed_report(
+            seed=seed,
+            status="INVALID",
+            reasons=[
+                "codebook shape or finite-value contract failed: "
+                f"expected {expected_codebook_shape}, got {codebook_values.shape}"
+            ],
+            num_skills=num_skills,
+            source_actor_sha256_before=source_actor_sha256_before,
+            source_actor_sha256_after=_actor_state_sha256(source_actor),
+            source_actor_parameter_count=source_actor_parameter_count,
+            support=support,
+        )
+
+    try:
+        train = build_balanced_synthetic_rows(
+            validated_batch, split.train, num_skills, seed=int(seed) + 100
+        )
+        validation = build_balanced_synthetic_rows(
+            validated_batch, split.validation, num_skills, seed=int(seed) + 200
+        )
+        test = build_balanced_synthetic_rows(
+            validated_batch, split.test, num_skills, seed=int(seed) + 300
+        )
+    except ValueError as error:
+        return _terminal_synthetic_seed_report(
+            seed=seed,
+            status="INVALID",
+            reasons=[f"invalid balanced synthetic rows: {error}"],
+            num_skills=num_skills,
+            source_actor_sha256_before=source_actor_sha256_before,
+            source_actor_sha256_after=_actor_state_sha256(source_actor),
+            source_actor_parameter_count=source_actor_parameter_count,
+            support=support,
+        )
+
     minibatches = _minibatch_schedule(
         train.true_skill.size, config, seed=int(seed) + 400
     )
     schedule_sha256 = _minibatch_schedule_sha256(minibatches)
-    source_actor_sha256 = _actor_state_sha256(source_actor)
-    source_actor_parameter_count = _actor_parameter_count(source_actor)
-    active_fit = fit_synthetic_clone(
-        source_actor=source_actor,
-        train=train,
-        validation=validation,
-        input_label_field="true_skill",
-        codebook=codebook,
-        minibatches=minibatches,
-        config=config,
-        device=device,
-    )
-    sham_fit = fit_synthetic_clone(
-        source_actor=source_actor,
-        train=train,
-        validation=validation,
-        input_label_field="fake_skill",
-        codebook=codebook,
-        minibatches=minibatches,
-        config=config,
-        device=device,
-    )
-    active_train = score_synthetic_clone(
-        active_fit["model"],
-        train,
-        input_label_field="true_skill",
-        codebook=codebook,
-        device=device,
-    )
-    active_test = score_synthetic_clone(
-        active_fit["model"],
-        test,
-        input_label_field="true_skill",
-        codebook=codebook,
-        device=device,
-    )
-    sham_test = score_synthetic_clone(
-        sham_fit["model"],
-        test,
-        input_label_field="fake_skill",
-        codebook=codebook,
-        device=device,
-    )
-    interval = cluster_bootstrap_difference(
-        active_test.correct.astype(np.float64),
-        sham_test.correct.astype(np.float64),
-        active_test.reset_id,
-        reps=int(bootstrap_reps),
-        seed=int(seed) + 500,
-    )
+    source_actor_sha256_after_active = source_actor_sha256_before
+    source_actor_sha256_after = source_actor_sha256_before
+    try:
+        active_fit = fit_synthetic_clone(
+            source_actor=source_actor,
+            train=train,
+            validation=validation,
+            input_label_field="true_skill",
+            codebook=codebook_values,
+            minibatches=minibatches,
+            config=config,
+            device=device,
+        )
+        source_actor_sha256_after_active = _actor_state_sha256(source_actor)
+        sham_fit = fit_synthetic_clone(
+            source_actor=source_actor,
+            train=train,
+            validation=validation,
+            input_label_field="fake_skill",
+            codebook=codebook_values,
+            minibatches=minibatches,
+            config=config,
+            device=device,
+        )
+        source_actor_sha256_after = _actor_state_sha256(source_actor)
+        active_train = score_synthetic_clone(
+            active_fit["model"],
+            train,
+            input_label_field="true_skill",
+            codebook=codebook_values,
+            device=device,
+        )
+        active_test = score_synthetic_clone(
+            active_fit["model"],
+            test,
+            input_label_field="true_skill",
+            codebook=codebook_values,
+            device=device,
+        )
+        sham_test = score_synthetic_clone(
+            sham_fit["model"],
+            test,
+            input_label_field="fake_skill",
+            codebook=codebook_values,
+            device=device,
+        )
+        interval = cluster_bootstrap_difference(
+            active_test.correct.astype(np.float64),
+            sham_test.correct.astype(np.float64),
+            active_test.reset_id,
+            reps=int(bootstrap_reps),
+            seed=int(seed) + 500,
+        )
+    except FloatingPointError as error:
+        source_actor_sha256_after = _actor_state_sha256(source_actor)
+        return _terminal_synthetic_seed_report(
+            seed=seed,
+            status="INVALID",
+            reasons=[f"non-finite synthetic evidence: {error}"],
+            num_skills=num_skills,
+            source_actor_sha256_before=source_actor_sha256_before,
+            source_actor_sha256_after=source_actor_sha256_after,
+            source_actor_parameter_count=source_actor_parameter_count,
+            support=support,
+        )
+
     accuracy_difference = active_test.accuracy - sham_test.accuracy
     generalization_gap = active_train.accuracy - active_test.accuracy
+    source_immutable = bool(
+        source_actor_sha256_before
+        == source_actor_sha256_after_active
+        == source_actor_sha256_after
+    )
     initialization_equal = bool(
         active_fit["initial_actor_sha256"]
         == sham_fit["initial_actor_sha256"]
-        == source_actor_sha256
+        == source_actor_sha256_before
     )
     parameter_count_equal = bool(
         int(active_fit["actor_parameter_count"])
         == int(sham_fit["actor_parameter_count"])
         == source_actor_parameter_count
     )
-    control_contract_valid = bool(initialization_equal and parameter_count_equal)
-    passed = bool(
-        control_contract_valid
-        and active_test.accuracy >= 0.90
-        and active_test.macro_f1 >= 0.90
-        and accuracy_difference >= 0.50
-        and interval.lower > 0.0
-        and sham_test.accuracy <= 1.0 / num_skills + 0.10
-        and generalization_gap <= 0.20
+    schedule_equal = bool(
+        active_fit["minibatch_schedule_sha256"]
+        == sham_fit["minibatch_schedule_sha256"]
+        == schedule_sha256
     )
+    optimizer_equal = bool(
+        active_fit["optimizer_contract"] == sham_fit["optimizer_contract"]
+    )
+    train_rows_equal = bool(
+        active_fit["train_rows_sha256"] == sham_fit["train_rows_sha256"]
+    )
+    validation_rows_equal = bool(
+        active_fit["validation_rows_sha256"]
+        == sham_fit["validation_rows_sha256"]
+    )
+    train_targets_equal = bool(
+        active_fit["train_targets_sha256"]
+        == sham_fit["train_targets_sha256"]
+    )
+    validation_targets_equal = bool(
+        active_fit["validation_targets_sha256"]
+        == sham_fit["validation_targets_sha256"]
+    )
+    control_contract_valid = bool(
+        source_immutable
+        and initialization_equal
+        and parameter_count_equal
+        and schedule_equal
+        and optimizer_equal
+        and train_rows_equal
+        and validation_rows_equal
+        and train_targets_equal
+        and validation_targets_equal
+    )
+    evidence_values = np.asarray(
+        [
+            active_train.accuracy,
+            active_train.macro_f1,
+            active_train.target_mse,
+            active_test.accuracy,
+            active_test.macro_f1,
+            active_test.target_mse,
+            sham_test.accuracy,
+            sham_test.macro_f1,
+            sham_test.target_mse,
+            accuracy_difference,
+            generalization_gap,
+            interval.mean,
+            interval.lower,
+            interval.upper,
+        ],
+        dtype=np.float64,
+    )
+    evidence_finite = bool(
+        np.isfinite(evidence_values).all()
+        and _fit_evidence_is_finite(active_fit)
+        and _fit_evidence_is_finite(sham_fit)
+    )
+    status, passed, reasons = _decide_synthetic_seed_gate(
+        active_accuracy=active_test.accuracy,
+        active_macro_f1=active_test.macro_f1,
+        active_minus_sham_accuracy=accuracy_difference,
+        bootstrap_lower=interval.lower,
+        sham_accuracy=sham_test.accuracy,
+        generalization_gap=generalization_gap,
+        evidence_finite=evidence_finite,
+        control_contract_valid=control_contract_valid,
+        support_sufficient=support_sufficient,
+        num_skills=num_skills,
+    )
+    if not source_immutable:
+        reasons.insert(0, "source actor changed during disposable clone fitting")
+    if not initialization_equal:
+        reasons.append("active/sham initialization mismatch")
+    if not parameter_count_equal:
+        reasons.append("active/sham parameter-count mismatch")
+    if not schedule_equal:
+        reasons.append("active/sham minibatch-schedule mismatch")
+    if not optimizer_equal:
+        reasons.append("active/sham optimizer mismatch")
+    if not (train_rows_equal and validation_rows_equal):
+        reasons.append("active/sham row-set mismatch")
+    if not (train_targets_equal and validation_targets_equal):
+        reasons.append("active/sham target-row mismatch")
     return {
         "seed": int(seed),
-        "status": "PASS" if passed else ("INVALID" if not control_contract_valid else "FAIL"),
+        "status": status,
         "pass": passed,
+        "reasons": reasons,
+        "support": support,
+        "evidence_finite": evidence_finite,
+        "control_contract_valid": control_contract_valid,
         "synthetic_code_accuracy": active_test.accuracy,
         "synthetic_code_macro_f1": active_test.macro_f1,
         "synthetic_target_mse": active_test.target_mse,
@@ -1178,7 +1535,11 @@ def evaluate_synthetic_seed(
             "sham": int(sham_fit["validation_evaluations"]),
         },
         "test_evaluations": {"active": 1, "sham": 1},
-        "initial_actor_sha256": source_actor_sha256,
+        "initial_actor_sha256": source_actor_sha256_before,
+        "source_actor_sha256_before": source_actor_sha256_before,
+        "source_actor_sha256_after_active_fit": source_actor_sha256_after_active,
+        "source_actor_sha256_after": source_actor_sha256_after,
+        "source_actor_sha256_equal": source_immutable,
         "active_initial_actor_sha256": active_fit["initial_actor_sha256"],
         "sham_initial_actor_sha256": sham_fit["initial_actor_sha256"],
         "active_sham_initialization_equal": initialization_equal,
@@ -1187,15 +1548,32 @@ def evaluate_synthetic_seed(
         "sham_actor_parameter_count": int(sham_fit["actor_parameter_count"]),
         "active_sham_parameter_count_equal": parameter_count_equal,
         "minibatch_schedule_sha256": schedule_sha256,
-        "active_sham_shared_minibatch_schedule": True,
-        "thresholds": {
-            "active_accuracy_min": 0.90,
-            "active_macro_f1_min": 0.90,
-            "active_minus_sham_accuracy_min": 0.50,
-            "bootstrap_lower": "> 0.0",
-            "sham_accuracy_max": 1.0 / num_skills + 0.10,
-            "train_minus_test_accuracy_max": 0.20,
-        },
+        "active_minibatch_schedule_sha256": active_fit[
+            "minibatch_schedule_sha256"
+        ],
+        "sham_minibatch_schedule_sha256": sham_fit[
+            "minibatch_schedule_sha256"
+        ],
+        "active_sham_shared_minibatch_schedule": schedule_equal,
+        "active_optimizer_contract": active_fit["optimizer_contract"],
+        "sham_optimizer_contract": sham_fit["optimizer_contract"],
+        "active_train_rows_sha256": active_fit["train_rows_sha256"],
+        "sham_train_rows_sha256": sham_fit["train_rows_sha256"],
+        "active_validation_rows_sha256": active_fit[
+            "validation_rows_sha256"
+        ],
+        "sham_validation_rows_sha256": sham_fit[
+            "validation_rows_sha256"
+        ],
+        "active_train_targets_sha256": active_fit["train_targets_sha256"],
+        "sham_train_targets_sha256": sham_fit["train_targets_sha256"],
+        "active_validation_targets_sha256": active_fit[
+            "validation_targets_sha256"
+        ],
+        "sham_validation_targets_sha256": sham_fit[
+            "validation_targets_sha256"
+        ],
+        "thresholds": _synthetic_thresholds(num_skills),
     }
 
 
