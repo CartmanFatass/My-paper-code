@@ -1,15 +1,25 @@
 from __future__ import annotations
 
+import inspect
+
 import numpy as np
 import pytest
 import torch
 
 from ha_ctse_process.low_actor_capacity_audit import (
     CapacitySnapshotBatch,
+    SyntheticFitConfig,
+    _actor_raw_mean_for_training,
+    build_balanced_synthetic_rows,
+    build_orthogonal_codebook,
+    classify_capacity_autopsy,
     cluster_bootstrap_difference,
+    evaluate_synthetic_seed,
     evaluate_static_checkpoint,
+    fit_synthetic_clone,
     forward_actor_snapshot,
     gate_static_family,
+    gate_synthetic_family,
     grouped_reset_split,
     read_capacity_snapshot_shards,
     write_capacity_snapshot_shard,
@@ -173,3 +183,188 @@ def test_static_family_requires_two_of_three_agreement():
     assert family["zero_h_pass"] is True
     assert family["rollout_h_pass"] is True
     assert family["recurrent_washout"] is False
+
+
+def test_codebook_is_orthogonal_and_has_fixed_norm():
+    codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
+
+    np.testing.assert_allclose(
+        np.linalg.norm(codebook, axis=1), 0.5, atol=1e-6
+    )
+    np.testing.assert_allclose(
+        codebook @ codebook.T, np.eye(4) * 0.25, atol=1e-6
+    )
+
+
+def test_balanced_rows_have_exact_true_and_fake_marginals():
+    batch = make_snapshots(resets=10)
+
+    rows = build_balanced_synthetic_rows(
+        batch,
+        np.arange(batch.reset_id.size),
+        4,
+        seed=27031,
+    )
+
+    expected = np.full(4, batch.reset_id.size)
+    np.testing.assert_array_equal(
+        np.bincount(rows.true_skill, minlength=4), expected
+    )
+    np.testing.assert_array_equal(
+        np.bincount(rows.fake_skill, minlength=4), expected
+    )
+    assert np.any(rows.true_skill != rows.fake_skill)
+
+
+def test_training_forward_matches_detached_forward_before_optimization():
+    actor = make_continuous_actor()
+    obs = torch.randn(6, 6)
+    skills = torch.tensor([0, 1, 2, 3, 0, 1])
+    hidden = torch.randn(6, 8)
+
+    detached = forward_actor_snapshot(
+        actor, obs, skills, hidden, inactive_film=False
+    )
+    trainable = _actor_raw_mean_for_training(actor, obs, skills, hidden)
+
+    torch.testing.assert_close(trainable.detach(), detached.action_mean)
+    assert trainable.requires_grad
+
+
+def test_synthetic_fit_api_cannot_accept_test_rows():
+    parameters = inspect.signature(fit_synthetic_clone).parameters
+    assert "train" in parameters
+    assert "validation" in parameters
+    assert "test" not in parameters
+
+
+def test_active_clone_learns_better_than_fake_label_sham():
+    actor = make_continuous_actor()
+    source_before = {
+        name: value.detach().clone() for name, value in actor.state_dict().items()
+    }
+    batch = make_snapshots(resets=25, rows_per_reset=2)
+    split = grouped_reset_split(batch.reset_id, seed=27011)
+    codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
+
+    result = evaluate_synthetic_seed(
+        actor,
+        batch,
+        split,
+        codebook,
+        seed=17,
+        config=SyntheticFitConfig(
+            learning_rate=1e-2,
+            batch_size=64,
+            max_steps=240,
+            validation_interval=10,
+            patience=20,
+            min_delta=1e-5,
+        ),
+        device=torch.device("cpu"),
+        bootstrap_reps=100,
+    )
+
+    assert result["synthetic_code_accuracy"] >= 0.90
+    assert result["synthetic_code_macro_f1"] >= 0.90
+    assert result["synthetic_code_accuracy"] > result["sham_accuracy"]
+    assert result["test_evaluations"] == {"active": 1, "sham": 1}
+    for name, expected in source_before.items():
+        torch.testing.assert_close(actor.state_dict()[name], expected)
+
+
+def test_synthetic_family_requires_two_of_three_seed_agreement():
+    passing = {"status": "PASS", "pass": True}
+    failing = {"status": "FAIL", "pass": False}
+
+    passed = gate_synthetic_family([passing, passing, failing])
+    failed = gate_synthetic_family([passing, failing, failing])
+
+    assert passed == {
+        "status": "PASS",
+        "pass": True,
+        "passing_seeds": 2,
+        "failed_seeds": 1,
+        "valid_seeds": 3,
+    }
+    assert failed == {
+        "status": "FAIL",
+        "pass": False,
+        "passing_seeds": 1,
+        "failed_seeds": 2,
+        "valid_seeds": 3,
+    }
+
+
+@pytest.mark.parametrize(
+    ("static_family", "synthetic_family", "expected"),
+    [
+        (
+            {
+                "status": "PASS",
+                "zero_h_pass": True,
+                "rollout_h_pass": False,
+                "recurrent_washout": True,
+            },
+            {"status": "PASS", "pass": True, "failed_seeds": 0},
+            "RECURRENT_WASHOUT",
+        ),
+        (
+            {
+                "status": "FAIL",
+                "zero_h_pass": False,
+                "rollout_h_pass": False,
+                "recurrent_washout": False,
+            },
+            {"status": "PASS", "pass": True, "failed_seeds": 0},
+            "CAPACITY_PRESENT_OBJECTIVE_MISSING",
+        ),
+        (
+            {
+                "status": "FAIL",
+                "zero_h_pass": False,
+                "rollout_h_pass": False,
+                "recurrent_washout": False,
+            },
+            {"status": "FAIL", "pass": False, "failed_seeds": 2},
+            "STATIC_PATH_CAPACITY_WEAK",
+        ),
+        (
+            {
+                "status": "PASS",
+                "zero_h_pass": True,
+                "rollout_h_pass": True,
+                "recurrent_washout": False,
+            },
+            {"status": "PASS", "pass": True, "failed_seeds": 0},
+            "STATIC_USED_OBSERVATIONAL_MISS",
+        ),
+    ],
+)
+def test_every_primary_classification_branch_is_reachable(
+    static_family, synthetic_family, expected
+):
+    result = classify_capacity_autopsy(static_family, synthetic_family)
+    assert result["classification"] == expected
+
+
+def test_invalid_and_underpowered_take_precedence():
+    invalid = classify_capacity_autopsy(
+        {
+            "status": "INVALID",
+            "rollout_h_pass": True,
+            "recurrent_washout": False,
+        },
+        {"status": "PASS", "pass": True},
+    )
+    underpowered = classify_capacity_autopsy(
+        {
+            "status": "UNDERPOWERED",
+            "rollout_h_pass": False,
+            "recurrent_washout": False,
+        },
+        {"status": "PASS", "pass": True},
+    )
+
+    assert invalid["classification"] == "INVALID"
+    assert underpowered["classification"] == "UNDERPOWERED"
