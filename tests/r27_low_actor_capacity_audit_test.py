@@ -2,14 +2,19 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
+import torch
 
 from ha_ctse_process.low_actor_capacity_audit import (
     CapacitySnapshotBatch,
     cluster_bootstrap_difference,
+    evaluate_static_checkpoint,
+    forward_actor_snapshot,
+    gate_static_family,
     grouped_reset_split,
     read_capacity_snapshot_shards,
     write_capacity_snapshot_shard,
 )
+from ha_ctse_process.standalone_agent import StrictHMASDMAPPOLowLevelPolicy
 
 
 def make_snapshots(
@@ -86,3 +91,85 @@ def test_snapshot_rejects_nonfinite_hidden_state(tmp_path):
 
     with pytest.raises(ValueError, match="actor_hidden contains non-finite"):
         write_capacity_snapshot_shard(tmp_path / "bad.npz", batch)
+
+
+def make_continuous_actor() -> StrictHMASDMAPPOLowLevelPolicy:
+    torch.manual_seed(27020)
+    return StrictHMASDMAPPOLowLevelPolicy(
+        obs_dim=6,
+        state_dim=7,
+        n_skills=4,
+        num_team_codes=2,
+        action_dim=4,
+        hidden_dim=8,
+        action_space_type="continuous",
+        continuous_action_distribution="tanh_gaussian",
+        actor_condition_on_team_code=False,
+        device="cpu",
+    ).eval()
+
+
+def test_detached_forward_matches_live_actor_distribution():
+    actor = make_continuous_actor()
+    obs = torch.randn(5, 6)
+    skills = torch.tensor([0, 1, 2, 3, 0])
+    hidden = torch.randn(5, 8)
+
+    result = forward_actor_snapshot(
+        actor, obs, skills, hidden, inactive_film=False
+    )
+    with torch.no_grad():
+        actions, _, _, _, live_hidden, _ = actor.act(
+            obs,
+            skills,
+            hidden.clone(),
+            torch.zeros(5, 7),
+            torch.zeros(5, dtype=torch.long),
+            torch.zeros(5, 8),
+            deterministic=True,
+        )
+
+    torch.testing.assert_close(
+        result.deterministic_action, actions, atol=1e-6, rtol=1e-6
+    )
+    torch.testing.assert_close(
+        result.new_hidden, live_hidden, atol=1e-6, rtol=1e-6
+    )
+    assert not result.action_mean.requires_grad
+
+
+def test_identity_film_has_zero_skill_pair_separation():
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=10)
+
+    report = evaluate_static_checkpoint(
+        actor,
+        batch,
+        checkpoint_id="fixture",
+        bootstrap_reps=200,
+        bootstrap_seed=27021,
+    )
+
+    assert report["inactive_control"]["max_abs_symmetric_kl"] <= 1e-8
+    assert report["inactive_control"]["max_stdmean_distance"] <= 1e-8
+
+
+def test_static_family_requires_two_of_three_agreement():
+    passing = {
+        "status": "PASS",
+        "zero_h": {"pass": True, "mean_skl": 0.03},
+        "rollout_h": {"pass": True, "mean_skl": 0.03},
+        "hidden_retention_ratio": 0.8,
+    }
+    failing = {
+        "status": "FAIL",
+        "zero_h": {"pass": False, "mean_skl": 0.0},
+        "rollout_h": {"pass": False, "mean_skl": 0.0},
+        "hidden_retention_ratio": 0.0,
+    }
+
+    family = gate_static_family([passing, passing, failing])
+
+    assert family["zero_h_pass"] is True
+    assert family["rollout_h_pass"] is True
+    assert family["recurrent_washout"] is False
