@@ -48,13 +48,18 @@ function Invoke-PythonPhase {
         [string]$LogPath
     )
 
+    $previousErrorActionPreference = $ErrorActionPreference
+    $exitCode = 1
     try {
+        $ErrorActionPreference = "Continue"
         & $Python @Arguments 2>&1 | Tee-Object -FilePath $LogPath | Out-Host
-        return $LASTEXITCODE
+        $exitCode = $LASTEXITCODE
     } catch {
         $_ | Out-File -LiteralPath $LogPath -Append -Encoding UTF8
-        return 1
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
     }
+    return $exitCode
 }
 
 if ($Device -cne "cuda") {
@@ -182,13 +187,44 @@ foreach ($arm in $arms) {
             }
             $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
             if ($null -eq $manifest.checkpoint_metadata -or
+                $manifest.checkpoint_metadata.PSObject.Properties.Name -notcontains "n_skills" -or
                 $null -eq $manifest.checkpoint_metadata.n_skills) {
                 throw "collector manifest is missing checkpoint_metadata.n_skills"
             }
-            $manifestNumSkills = [int]$manifest.checkpoint_metadata.n_skills
-            if ($manifestNumSkills -ne $arm.NumSkills) {
-                throw "collector manifest n_skills=$manifestNumSkills, expected $($arm.NumSkills)"
+            $rawManifestNumSkills = $manifest.checkpoint_metadata.n_skills
+            $integralTypeCodes = @(
+                [System.TypeCode]::SByte,
+                [System.TypeCode]::Byte,
+                [System.TypeCode]::Int16,
+                [System.TypeCode]::UInt16,
+                [System.TypeCode]::Int32,
+                [System.TypeCode]::UInt32,
+                [System.TypeCode]::Int64,
+                [System.TypeCode]::UInt64
+            )
+            $manifestTypeCode = [System.Type]::GetTypeCode($rawManifestNumSkills.GetType())
+            if ($integralTypeCodes -notcontains $manifestTypeCode) {
+                throw "collector manifest checkpoint_metadata.n_skills must be an exact integer"
             }
+            if ($rawManifestNumSkills -le 0) {
+                throw "collector manifest checkpoint_metadata.n_skills must be positive"
+            }
+            if ([decimal]$rawManifestNumSkills -ne [decimal]$arm.NumSkills) {
+                throw "collector manifest n_skills=$rawManifestNumSkills, expected $($arm.NumSkills)"
+            }
+            $manifestNumSkills = [int]$rawManifestNumSkills
+            $analyzerArguments = @(
+                "scripts/analyze_r26_g1_behavior.py",
+                "--input_dir", $windowsPath,
+                "--output_dir", $analysisPath,
+                "--num_skills", "$manifestNumSkills",
+                "--device", $Device
+            )
+            $analyzerCommand = Format-CommandLine -Command (@($Python) + $analyzerArguments)
+            @(
+                "collector=$collectorCommand"
+                "analyzer=$analyzerCommand"
+            ) | Set-Content -LiteralPath $commandPath -Encoding UTF8
         } catch {
             $failure = "manifest validation failed: $($_.Exception.Message)"
         }
