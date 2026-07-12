@@ -186,6 +186,42 @@ class FakeParallelCollector:
             )
         return results
 
+    def close(self) -> None:
+        pass
+
+
+class ManifestParallelCollector(FakeParallelCollector):
+    def reset_all(self, seed: int):
+        observations = []
+        states = []
+        for env_id in range(self.num_envs):
+            observation = np.zeros((2, 6), dtype=np.float32)
+            observation[:, 0] = np.asarray(
+                [float(env_id), float(env_id) + 1.0]
+            )
+            state = np.full(7, float(seed + env_id), dtype=np.float32)
+            observations.append(observation)
+            states.append(state)
+        return observations, states, [{"state": state} for state in states]
+
+    def step_selected(self, indexed_actions):
+        pairs = list(indexed_actions)
+        env_ids = [int(env_id) for env_id, _action in pairs]
+        self.step_orders.append(env_ids)
+        results: dict[int, EnvStep] = {}
+        for env_id, _action in pairs:
+            env_id = int(env_id)
+            self.steps[env_id] += 1
+            step = int(self.steps[env_id])
+            results[env_id] = EnvStep(
+                obs=np.full((2, 6), float(step), dtype=np.float32),
+                reward=0.0,
+                terminated=False,
+                truncated=False,
+                info={"next_state": np.full(7, float(step), dtype=np.float32)},
+            )
+        return results
+
 
 class ManifestEnv(FakeEnv):
     def reset(self, *, seed: int):
@@ -206,10 +242,10 @@ class ManifestEnv(FakeEnv):
 
 
 class ManifestAgent(FakeAgent):
-    def __init__(self) -> None:
-        super().__init__()
-        self.low_actor_hxs = np.zeros((1, 2, 8), dtype=np.float32)
-        self.low_critic_hxs = np.zeros((1, 2, 8), dtype=np.float32)
+    def __init__(self, num_envs: int = 1) -> None:
+        super().__init__(num_envs=num_envs)
+        self.low_actor_hxs = np.zeros((num_envs, 2, 8), dtype=np.float32)
+        self.low_critic_hxs = np.zeros((num_envs, 2, 8), dtype=np.float32)
         self.low = StrictHMASDMAPPOLowLevelPolicy(
             obs_dim=6,
             state_dim=7,
@@ -410,6 +446,54 @@ def test_scientific_contract_rejects_collect_reset_override():
         collector.validate_scientific_args(args)
 
 
+def test_collect_parser_exposes_fixed_parallel_defaults():
+    args = collector.parse_args(
+        [
+            "collect-static",
+            "--checkpoint",
+            "fixture.pt",
+            "--output-dir",
+            "unused",
+        ]
+    )
+
+    assert args.num_envs == 64
+    assert args.collector_backend == "subproc"
+    assert args.collector_start_method == "spawn"
+
+
+@pytest.mark.parametrize(
+    ("name", "value", "message"),
+    [
+        ("num_envs", 32, "num_envs must equal 64"),
+        ("collector_backend", "sync", "collector_backend must equal"),
+        (
+            "collector_start_method",
+            "fork",
+            "collector_start_method must equal",
+        ),
+    ],
+)
+def test_scientific_parallel_contract_rejects_override(name, value, message):
+    args = collector.parse_args(
+        [
+            "collect-static",
+            "--checkpoint",
+            "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt",
+            "--output-dir",
+            "unused",
+            "--checkpoint-id",
+            "arm0_update25",
+            "--checkpoint-update",
+            "25",
+        ]
+    )
+    setattr(args, name, value)
+
+    with pytest.raises(ValueError, match=message):
+        collector.validate_scientific_args(args)
+
+
 def test_scientific_contract_rejects_synthetic_seed_and_budget_overrides():
     args = collector.parse_args(
         [
@@ -502,8 +586,26 @@ def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
         snapshot_dir = root / "capacity_snapshots"
         snapshot_dir.mkdir()
         for reset_id in range(64):
-            (snapshot_dir / f"reset_{reset_id:04d}.npz").write_bytes(
-                f"{checkpoint_id}:{reset_id}".encode("ascii")
+            collector.write_capacity_snapshot_shard(
+                snapshot_dir / f"reset_{reset_id:04d}.npz",
+                CapacitySnapshotBatch(
+                    observation=np.zeros((1, 6), dtype=np.float32),
+                    actor_hidden=np.zeros((1, 8), dtype=np.float32),
+                    natural_skill=np.zeros(1, dtype=np.int64),
+                    previous_skill=np.zeros(1, dtype=np.int64),
+                    duration_idx=np.zeros(1, dtype=np.int64),
+                    skill_age=np.zeros(1, dtype=np.int64),
+                    episode_done_mask=np.zeros(1, dtype=np.bool_),
+                    reset_id=np.asarray([reset_id], dtype=np.int64),
+                    reset_seed=np.asarray([reset_id + 1], dtype=np.int64),
+                    episode_id=np.asarray([reset_id], dtype=np.int64),
+                    env_id=np.asarray([reset_id], dtype=np.int64),
+                    agent_id=np.zeros(1, dtype=np.int64),
+                    checkpoint_id=np.asarray([checkpoint_id]),
+                    checkpoint_update=np.asarray(
+                        [registered["update_idx"]], dtype=np.int64
+                    ),
+                ),
             )
         snapshot_sha256 = collector._snapshot_shards_sha256(snapshot_dir)
         static = {
@@ -565,7 +667,23 @@ def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
             "policy_parameter_sha256_after": f"policy-{checkpoint_id}",
             "policy_parameter_sha256_equal": True,
             "n_resets": 64,
+            "num_envs": 64,
+            "collector_backend": "subproc",
+            "collector_start_method": "spawn",
+            "parallel_collection_schedule": "step_major_env_id_ascending",
             "reset_seeds": list(range(1, 65)),
+            "env_id_to_reset_id": {
+                str(env_id): env_id for env_id in range(64)
+            },
+            "env_id_to_reset_seed": {
+                str(env_id): env_id + 1 for env_id in range(64)
+            },
+            "active_steps_by_env": {
+                str(env_id): 500 for env_id in range(64)
+            },
+            "termination_reason_by_env": {
+                str(env_id): "step_limit" for env_id in range(64)
+            },
             "device": "cuda",
             "snapshot_shards_sha256": snapshot_sha256,
             "static_report_sha256": collector._file_sha256(static_path),
@@ -749,6 +867,54 @@ def test_aggregate_rejects_missing_or_altered_threshold_evidence(tmp_path):
     assert result["classification"] == "INVALID"
     assert "arm0_update25 threshold evidence mismatch" in reasons
     assert "seed 17 threshold evidence mismatch" in reasons
+
+
+def test_aggregate_rejects_cross_mapped_parallel_snapshot_rows(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    checkpoint_id = "arm0_update25"
+    snapshot_dir = tmp_path / checkpoint_id / "capacity_snapshots"
+    shard = snapshot_dir / "reset_0000.npz"
+    registered = collector.REGISTERED_CHECKPOINTS[checkpoint_id]
+    collector.write_capacity_snapshot_shard(
+        shard,
+        CapacitySnapshotBatch(
+            observation=np.zeros((1, 6), dtype=np.float32),
+            actor_hidden=np.zeros((1, 8), dtype=np.float32),
+            natural_skill=np.zeros(1, dtype=np.int64),
+            previous_skill=np.zeros(1, dtype=np.int64),
+            duration_idx=np.zeros(1, dtype=np.int64),
+            skill_age=np.zeros(1, dtype=np.int64),
+            episode_done_mask=np.zeros(1, dtype=np.bool_),
+            reset_id=np.zeros(1, dtype=np.int64),
+            reset_seed=np.ones(1, dtype=np.int64),
+            episode_id=np.zeros(1, dtype=np.int64),
+            env_id=np.ones(1, dtype=np.int64),
+            agent_id=np.zeros(1, dtype=np.int64),
+            checkpoint_id=np.asarray([checkpoint_id]),
+            checkpoint_update=np.asarray(
+                [registered["update_idx"]], dtype=np.int64
+            ),
+        ),
+    )
+    snapshot_hash = collector._snapshot_shards_sha256(snapshot_dir)
+    static_path = tmp_path / checkpoint_id / "static_capacity.json"
+    static = collector._read_json_strict(static_path)
+    static["snapshot_shards_sha256"] = snapshot_hash
+    collector._write_json(static_path, static)
+    manifest_path = tmp_path / checkpoint_id / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["snapshot_shards_sha256"] = snapshot_hash
+    manifest["static_report_sha256"] = collector._file_sha256(static_path)
+    collector._write_json(manifest_path, manifest)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "INVALID"
+    assert "reset_0000.npz env_id mapping mismatch" in " ".join(
+        result["reasons"]
+    )
 
 
 def test_generated_static_invalid_remains_artifact_valid_through_aggregate(
@@ -1171,8 +1337,8 @@ def test_synthetic_snapshot_binding_rejects_nonfinal_row_identity(tmp_path):
 def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp_path):
     checkpoint = tmp_path / "fixture.pt"
     checkpoint.write_bytes(b"immutable-checkpoint")
-    env = ManifestEnv()
-    agent = ManifestAgent()
+    env_collector = ManifestParallelCollector(5)
+    agent = ManifestAgent(num_envs=5)
     config = SimpleNamespace(scenario="energy")
     metadata = {"n_agents": 2, "n_skills": 4, "update_idx": 25}
     monkeypatch.setattr(
@@ -1180,8 +1346,8 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
     )
     monkeypatch.setattr(
         collector,
-        "_configure_agent",
-        lambda args: (config, metadata, env, agent, 25),
+        "_configure_parallel_agent",
+        lambda args: (config, metadata, env_collector, agent, 25),
     )
     output_dir = tmp_path / "out"
     args = collector.parse_args(
@@ -1196,6 +1362,8 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
             "--checkpoint-update",
             "25",
             "--n-resets",
+            "5",
+            "--num-envs",
             "5",
             "--episode-max-steps",
             "2",
@@ -1216,6 +1384,15 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
     assert manifest["scientific_contract"]["mode"] == "NON_SCIENTIFIC_FIXTURE"
     assert manifest["scientific_contract"]["eligible_for_aggregate"] is False
     assert manifest["checkpoint_identity"]["eligible_for_aggregate"] is False
+    assert manifest["num_envs"] == 5
+    assert manifest["collector_backend"] == "subproc"
+    assert manifest["collector_start_method"] == "spawn"
+    assert manifest["parallel_collection_schedule"] == (
+        "step_major_env_id_ascending"
+    )
+    assert manifest["env_id_to_reset_id"] == {
+        str(env_id): env_id for env_id in range(5)
+    }
     assert manifest["snapshot_shards_sha256"] == collector._snapshot_shards_sha256(
         output_dir / "capacity_snapshots"
     )

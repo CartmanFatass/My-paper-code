@@ -10,6 +10,7 @@ import sys
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any, Iterator, Sequence
 
 import numpy as np
@@ -85,6 +86,10 @@ SCIENTIFIC_CONTRACT: dict[str, object] = {
     "experiment_id": "EXP-20260711-r27-g1-low-actor-capacity-autopsy",
     "checkpoint_ids": list(REGISTERED_CHECKPOINTS),
     "n_resets": 64,
+    "num_envs": 64,
+    "collector_backend": "subproc",
+    "collector_start_method": "spawn",
+    "parallel_collection_schedule": "step_major_env_id_ascending",
     "seed": 1,
     "n_agents": 6,
     "scenario": "energy",
@@ -182,6 +187,9 @@ def validate_scientific_args(args: argparse.Namespace) -> dict[str, object]:
         for name, expected in (
             ("skill_interval", 10),
             ("n_resets", 64),
+            ("num_envs", 64),
+            ("collector_backend", "subproc"),
+            ("collector_start_method", "spawn"),
             ("episode_max_steps", 500),
             ("bootstrap_reps", 1000),
             ("bootstrap_seed", 27021),
@@ -371,14 +379,59 @@ def _snapshot_shards_sha256(snapshot_dir: Path) -> str:
 
 
 def _snapshot_shard_contract_errors(snapshot_dir: Path) -> list[str]:
-    actual = [path.name for path in sorted(Path(snapshot_dir).glob("*.npz"))]
+    paths = sorted(Path(snapshot_dir).glob("*.npz"))
+    actual = [path.name for path in paths]
     expected = [f"reset_{reset_id:04d}.npz" for reset_id in range(64)]
-    if actual == expected:
-        return []
-    return [
-        "snapshot shards must be exactly reset_0000.npz through "
-        f"reset_0063.npz; found {len(actual)} files"
-    ]
+    if actual != expected:
+        return [
+            "snapshot shards must be exactly reset_0000.npz through "
+            f"reset_0063.npz; found {len(actual)} files"
+        ]
+    errors: list[str] = []
+    for reset_id, path in enumerate(paths):
+        try:
+            with np.load(path, allow_pickle=False) as data:
+                expected_fields = {
+                    "env_id": reset_id,
+                    "reset_id": reset_id,
+                    "episode_id": reset_id,
+                    "reset_seed": reset_id + 1,
+                }
+                for field, expected_value in expected_fields.items():
+                    values = np.asarray(data[field], dtype=np.int64).reshape(-1)
+                    if values.size and not np.all(values == expected_value):
+                        errors.append(
+                            f"{path.name} {field} mapping mismatch"
+                        )
+        except (KeyError, OSError, ValueError) as error:
+            errors.append(f"{path.name} identity read failed: {error}")
+    return errors
+
+
+def _parallel_manifest_contract_valid(manifest: dict[str, object]) -> bool:
+    expected_ids = {str(env_id): env_id for env_id in range(64)}
+    expected_seeds = {str(env_id): env_id + 1 for env_id in range(64)}
+    active_steps = manifest.get("active_steps_by_env")
+    termination_reasons = manifest.get("termination_reason_by_env")
+    return bool(
+        manifest.get("num_envs") == 64
+        and manifest.get("collector_backend") == "subproc"
+        and manifest.get("collector_start_method") == "spawn"
+        and manifest.get("parallel_collection_schedule")
+        == "step_major_env_id_ascending"
+        and manifest.get("env_id_to_reset_id") == expected_ids
+        and manifest.get("env_id_to_reset_seed") == expected_seeds
+        and isinstance(active_steps, dict)
+        and set(active_steps) == set(expected_ids)
+        and all(
+            isinstance(value, int) and 1 <= value <= 500
+            for value in active_steps.values()
+        )
+        and isinstance(termination_reasons, dict)
+        and set(termination_reasons) == set(expected_ids)
+        and set(termination_reasons.values())
+        <= {"terminated", "truncated", "step_limit"}
+    )
 
 
 def _read_json_strict(path: Path) -> dict[str, object]:
@@ -455,6 +508,10 @@ def validate_synthetic_snapshot_source(
             manifest.get("n_resets") == 64
             and manifest.get("reset_seeds") == list(range(1, 65)),
             "collector manifest reset contract mismatch",
+        ),
+        (
+            _parallel_manifest_contract_valid(manifest),
+            "collector manifest parallel contract mismatch",
         ),
         (
             str(manifest.get("device", "")).lower().startswith("cuda"),
@@ -906,6 +963,45 @@ def _configure_agent(args: argparse.Namespace):
     return config, metadata, env, agent, int(loaded_update)
 
 
+def _configure_parallel_agent(args: argparse.Namespace):
+    from ha_ctse_process import train as train_mod
+
+    config = train_mod.load_config(args.config, args.preset or None)
+    config.scenario = train_mod.normalize_scenario(args.scenario)
+    metadata = train_mod.load_checkpoint_metadata(args.checkpoint)
+    train_mod.apply_checkpoint_structure(config, args, metadata)
+    if int(args.n_agents) > 0 and metadata.get("n_agents") is None:
+        config.n_agents = int(args.n_agents)
+        config.n_uavs = int(args.n_agents)
+        config.max_observed_uavs = max(
+            int(args.n_agents),
+            int(getattr(config, "max_observed_uavs", args.n_agents)),
+        )
+    env_collector = train_mod.create_collector(
+        config,
+        args,
+        scale_mode="eval",
+        num_envs=int(args.num_envs),
+    )
+    try:
+        env_spec = SimpleNamespace(**env_collector.spec)
+        agent = train_mod.create_agent(
+            config,
+            args,
+            env_spec,
+            num_envs=int(args.num_envs),
+            state_dim=int(env_collector.spec["state_dim"]),
+        )
+        _total_steps, loaded_update = train_mod.load_checkpoint(
+            args.checkpoint, agent, load_optimizers=False
+        )
+        _set_eval_mode(agent)
+    except Exception:
+        env_collector.close()
+        raise
+    return config, metadata, env_collector, agent, int(loaded_update)
+
+
 def _static_markdown(report: dict[str, object]) -> str:
     zero = report.get("zero_h", {})
     rollout = report.get("rollout_h", {})
@@ -952,7 +1048,9 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
     np.random.seed(int(args.seed))
     torch.manual_seed(int(args.seed))
     torch.cuda.manual_seed_all(int(args.seed))
-    config, metadata, env, agent, loaded_update = _configure_agent(args)
+    config, metadata, env_collector, agent, loaded_update = (
+        _configure_parallel_agent(args)
+    )
     checkpoint_id = str(args.checkpoint_id or checkpoint.stem)
     checkpoint_update = (
         int(args.checkpoint_update)
@@ -969,35 +1067,28 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
             scientific_contract=scientific_contract,
         )
     except Exception:
-        env.close()
+        env_collector.close()
         raise
     output_dir.mkdir(parents=True, exist_ok=True)
     snapshot_dir.mkdir(parents=True, exist_ok=True)
     parameter_hash_before = policy_parameter_sha256(agent)
-    reset_seeds: list[int] = []
-    totals = SnapshotCollectorStats(0, 0, 0)
+    reset_seeds = [
+        int(args.seed) + env_id for env_id in range(int(args.n_resets))
+    ]
     try:
-        for reset_id in range(int(args.n_resets)):
-            reset_seed = int(args.seed) + reset_id
-            reset_seeds.append(reset_seed)
-            batch, stats = collect_capacity_reset(
-                env,
+        batches, totals, parallel_evidence = collect_capacity_parallel(
+                env_collector,
                 agent,
-                reset_id=reset_id,
-                reset_seed=reset_seed,
-                episode_id=reset_id,
+                base_seed=int(args.seed),
+                n_resets=int(args.n_resets),
                 skill_interval=int(args.skill_interval),
                 episode_max_steps=int(args.episode_max_steps),
                 checkpoint_id=checkpoint_id,
                 checkpoint_update=checkpoint_update,
-            )
+        )
+        for reset_id, batch in batches.items():
             write_capacity_snapshot_shard(
                 snapshot_dir / f"reset_{reset_id:04d}.npz", batch
-            )
-            totals = SnapshotCollectorStats(
-                resets=totals.resets + stats.resets,
-                renewal_events=totals.renewal_events + stats.renewal_events,
-                snapshot_rows=totals.snapshot_rows + stats.snapshot_rows,
             )
         snapshots = read_capacity_snapshot_shards(snapshot_dir)
         static_report = evaluate_static_checkpoint(
@@ -1009,7 +1100,7 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
         )
         snapshot_shards_sha256 = _snapshot_shards_sha256(snapshot_dir)
     finally:
-        env.close()
+        env_collector.close()
 
     file_hash_after = _file_sha256(checkpoint)
     parameter_hash_after = policy_parameter_sha256(agent)
@@ -1050,7 +1141,12 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
         "parameter_counts": _jsonable(agent.parameter_counts()),
         "device": str(args.device),
         "n_resets": int(args.n_resets),
+        "num_envs": int(args.num_envs),
+        "collector_backend": str(args.collector_backend),
+        "collector_start_method": str(args.collector_start_method),
+        "parallel_collection_schedule": "step_major_env_id_ascending",
         "reset_seeds": reset_seeds,
+        **parallel_evidence,
         "stats": asdict(totals),
         "field_names": list(CapacitySnapshotBatch.__dataclass_fields__),
         "observation_dim": int(snapshots.observation.shape[1]),
@@ -1832,6 +1928,10 @@ def validate_aggregate_artifacts(
                 f"{checkpoint_id} n_resets mismatch",
             ),
             (
+                _parallel_manifest_contract_valid(manifest),
+                f"{checkpoint_id} parallel collector contract mismatch",
+            ),
+            (
                 manifest.get("reset_seeds") == list(range(1, 65)),
                 f"{checkpoint_id} reset seeds mismatch",
             ),
@@ -2066,6 +2166,15 @@ def build_parser() -> argparse.ArgumentParser:
     collect.add_argument("--checkpoint-update", type=int, default=None)
     collect.add_argument("--skill-interval", type=int, default=10)
     collect.add_argument("--n-resets", type=int, default=64)
+    collect.add_argument("--num-envs", type=int, default=64)
+    collect.add_argument(
+        "--collector-backend", choices=("subproc", "sync"), default="subproc"
+    )
+    collect.add_argument(
+        "--collector-start-method",
+        choices=("spawn", "fork", "forkserver"),
+        default="spawn",
+    )
     collect.add_argument("--episode-max-steps", type=int, default=500)
     collect.add_argument("--bootstrap-reps", type=int, default=1000)
     collect.add_argument("--bootstrap-seed", type=int, default=27021)
