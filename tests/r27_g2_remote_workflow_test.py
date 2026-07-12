@@ -252,6 +252,10 @@ def test_remote_terminal_watcher_is_valid_read_only_shell() -> None:
 def test_remote_workflow_defaults_to_prepare_and_keeps_launch_gated() -> None:
     source = WORKFLOW.read_text(encoding="utf-8")
     assert '[string]$Action = "prepare"' in source
+    assert (
+        '[string]$GitRemoteUrl = "git@github.com:CartmanFatass/My-paper-code.git"'
+        in source
+    )
     assert "Launch requires -LaunchAuthorization" in source
     assert "clean Git-managed HMASD worktree" in source
     assert "MAX_WORKERS>1 requires -ConcurrencyValidated" in source

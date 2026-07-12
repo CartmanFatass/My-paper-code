@@ -14,6 +14,11 @@ checkpoint staging, fast-forward update of a clean Git checkout on the data
 disk, and a zero-write runner dry-run. It does not launch an experiment.
 R27-G2 pilot and decision-grade launch remain separately gated.
 
+Source sync defaults to the GitHub SSH remote
+`git@github.com:CartmanFatass/My-paper-code.git`. The AutoDL host can reach this
+remote through its existing GitHub SSH credentials; HTTPS clone is not used
+because outbound GitHub HTTPS was unreliable on this host.
+
 Current operator gate (2026-07-13): the server is asleep. Before any SSH,
 `prepare`, status check, or launch action, notify the user and wait for explicit
 confirmation that the server has been awakened.

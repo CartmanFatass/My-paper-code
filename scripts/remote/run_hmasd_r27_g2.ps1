@@ -17,7 +17,7 @@ param(
     [string]$Action = "prepare",
     [string]$GitBranch = "",
     [string]$GitRemoteName = "My-paper-code",
-    [string]$GitRemoteUrl = "",
+    [string]$GitRemoteUrl = "git@github.com:CartmanFatass/My-paper-code.git",
     [ValidateRange(1, 64)]
     [int]$MaxWorkers = 1,
     [switch]$ConcurrencyValidated,
