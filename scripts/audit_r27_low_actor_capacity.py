@@ -698,6 +698,181 @@ def collect_capacity_reset(
     )
 
 
+def collect_capacity_parallel(
+    env_collector: Any,
+    agent: Any,
+    *,
+    base_seed: int,
+    n_resets: int,
+    skill_interval: int,
+    episode_max_steps: int,
+    checkpoint_id: str,
+    checkpoint_update: int,
+) -> tuple[
+    dict[int, CapacitySnapshotBatch],
+    SnapshotCollectorStats,
+    dict[str, object],
+]:
+    """Collect one frozen episode per environment in step-major order."""
+
+    if int(skill_interval) <= 0 or int(episode_max_steps) <= 0:
+        raise ValueError("skill_interval and episode_max_steps must be positive")
+    if int(n_resets) <= 0 or int(env_collector.num_envs) != int(n_resets):
+        raise ValueError("parallel collection requires one reset per environment")
+
+    rows_by_env: dict[int, list[dict[str, Any]]] = {
+        env_id: [] for env_id in range(int(n_resets))
+    }
+    renewals = 0
+    active_steps = {env_id: 0 for env_id in range(int(n_resets))}
+    termination_reasons = {
+        env_id: "step_limit" for env_id in range(int(n_resets))
+    }
+
+    with preserve_agent_runtime(agent):
+        observations, states, _infos = env_collector.reset_all(int(base_seed))
+        if len(observations) != int(n_resets) or len(states) != int(n_resets):
+            raise ValueError("parallel reset result count mismatch")
+        observations = [
+            np.asarray(observation, dtype=np.float32)
+            for observation in observations
+        ]
+        for env_id, observation in enumerate(observations):
+            if (
+                observation.ndim != 2
+                or int(observation.shape[0]) != int(agent.n_agents)
+            ):
+                raise ValueError(
+                    "environment observation must have one row per agent"
+                )
+            agent.reset_env_state(env_id)
+            if hasattr(agent.segments, "active"):
+                agent.segments.active[env_id] = [
+                    None for _ in range(int(agent.n_agents))
+                ]
+
+        observation_dim = int(observations[0].shape[1])
+        hidden_dim = int(np.asarray(agent.low_actor_hxs[0, 0]).size)
+        active = set(range(int(n_resets)))
+        for step in range(int(episode_max_steps)):
+            indexed_actions: list[tuple[int, Any]] = []
+            for env_id in sorted(active):
+                observation = observations[env_id]
+                previous_segments = list(agent.segments.active[env_id])
+                pre_assignment_hidden = np.asarray(
+                    agent.low_actor_hxs[env_id], dtype=np.float32
+                ).copy()
+                with torch.no_grad():
+                    agent.maybe_assign_skills(
+                        observation,
+                        state=states[env_id],
+                        step=int(step),
+                        k=int(skill_interval),
+                        env_id=env_id,
+                        deterministic=False,
+                    )
+                current_segments = list(agent.segments.active[env_id])
+                changed = [
+                    agent_id
+                    for agent_id, (before, after) in enumerate(
+                        zip(previous_segments, current_segments)
+                    )
+                    if after is not None and after is not before
+                ]
+                for agent_id in changed:
+                    renewals += 1
+                    segment = current_segments[agent_id]
+                    rows_by_env[env_id].append(
+                        {
+                            "observation": np.asarray(
+                                observation[agent_id], dtype=np.float32
+                            ).copy(),
+                            "actor_hidden": pre_assignment_hidden[
+                                agent_id
+                            ].copy(),
+                            "natural_skill": int(segment.skill),
+                            "previous_skill": int(
+                                getattr(segment, "prev_skill", 0)
+                            ),
+                            "duration_idx": int(segment.duration_idx),
+                            "skill_age": int(
+                                getattr(segment, "skill_age_prev", 0)
+                            ),
+                            "episode_done_mask": False,
+                            "reset_id": env_id,
+                            "reset_seed": int(base_seed) + env_id,
+                            "episode_id": env_id,
+                            "env_id": env_id,
+                            "agent_id": int(agent_id),
+                            "checkpoint_id": str(checkpoint_id),
+                            "checkpoint_update": int(checkpoint_update),
+                        }
+                    )
+                with torch.no_grad():
+                    actions, _, _ = agent.act_low(
+                        observation,
+                        env_id=env_id,
+                        deterministic=False,
+                        state=states[env_id],
+                    )
+                indexed_actions.append((env_id, actions))
+
+            results = env_collector.step_selected(indexed_actions)
+            for env_id in sorted(results):
+                result = results[env_id]
+                active_steps[env_id] += 1
+                observations[env_id] = np.asarray(
+                    result.obs, dtype=np.float32
+                )
+                states[env_id] = _state_from_info(
+                    result.info, previous=states[env_id]
+                )
+                if bool(result.terminated):
+                    termination_reasons[env_id] = "terminated"
+                    active.remove(env_id)
+                elif bool(result.truncated):
+                    termination_reasons[env_id] = "truncated"
+                    active.remove(env_id)
+            if not active:
+                break
+
+    batches = {
+        env_id: _rows_to_batch(
+            rows_by_env[env_id],
+            observation_dim=observation_dim,
+            hidden_dim=hidden_dim,
+        )
+        for env_id in range(int(n_resets))
+    }
+    total_rows = sum(len(rows) for rows in rows_by_env.values())
+    evidence: dict[str, object] = {
+        "env_id_to_reset_id": {
+            str(env_id): env_id for env_id in range(int(n_resets))
+        },
+        "env_id_to_reset_seed": {
+            str(env_id): int(base_seed) + env_id
+            for env_id in range(int(n_resets))
+        },
+        "active_steps_by_env": {
+            str(env_id): active_steps[env_id]
+            for env_id in range(int(n_resets))
+        },
+        "termination_reason_by_env": {
+            str(env_id): termination_reasons[env_id]
+            for env_id in range(int(n_resets))
+        },
+    }
+    return (
+        batches,
+        SnapshotCollectorStats(
+            resets=int(n_resets),
+            renewal_events=renewals,
+            snapshot_rows=total_rows,
+        ),
+        evidence,
+    )
+
+
 def _configure_agent(args: argparse.Namespace):
     from ha_ctse_process import train as train_mod
 

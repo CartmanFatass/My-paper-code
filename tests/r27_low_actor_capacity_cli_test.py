@@ -12,6 +12,7 @@ import torch
 
 import ha_ctse_process.low_actor_capacity_audit as capacity_audit
 from ha_ctse_process.low_actor_capacity_audit import CapacitySnapshotBatch
+from ha_ctse_process.collectors import EnvStep
 from ha_ctse_process.standalone_agent import StrictHMASDMAPPOLowLevelPolicy
 from scripts import audit_r27_low_actor_capacity as collector
 
@@ -58,24 +59,27 @@ class FakeEnv:
 
 
 class FakeAgent:
-    def __init__(self) -> None:
+    def __init__(self, num_envs: int = 1) -> None:
         self.n_agents = 2
         self.n_skills = 4
         self.duration_candidates = (3, 7, 13, 24)
-        self.active_skills = np.zeros((1, 2), dtype=np.int64)
-        self.active_duration_indices = np.zeros((1, 2), dtype=np.int64)
-        self.duration_remaining = np.zeros((1, 2), dtype=np.int64)
-        self.skill_age = np.zeros((1, 2), dtype=np.int64)
-        self.has_active_skill = np.zeros((1, 2), dtype=np.bool_)
-        self.active_team_codes = np.zeros(1, dtype=np.int64)
-        self.team_intent_remaining = np.zeros(1, dtype=np.int64)
-        self.team_intent_age = np.zeros(1, dtype=np.int64)
-        self.low_actor_hxs = np.zeros((1, 2, 4), dtype=np.float32)
-        self.low_critic_hxs = np.zeros((1, 2, 4), dtype=np.float32)
-        self.segments = SimpleNamespace(active=[[None, None]])
+        self.active_skills = np.zeros((num_envs, 2), dtype=np.int64)
+        self.active_duration_indices = np.zeros((num_envs, 2), dtype=np.int64)
+        self.duration_remaining = np.zeros((num_envs, 2), dtype=np.int64)
+        self.skill_age = np.zeros((num_envs, 2), dtype=np.int64)
+        self.has_active_skill = np.zeros((num_envs, 2), dtype=np.bool_)
+        self.active_team_codes = np.zeros(num_envs, dtype=np.int64)
+        self.team_intent_remaining = np.zeros(num_envs, dtype=np.int64)
+        self.team_intent_age = np.zeros(num_envs, dtype=np.int64)
+        self.low_actor_hxs = np.zeros((num_envs, 2, 4), dtype=np.float32)
+        self.low_critic_hxs = np.zeros((num_envs, 2, 4), dtype=np.float32)
+        self.segments = SimpleNamespace(
+            active=[[None, None] for _ in range(num_envs)]
+        )
         self.assignment_grad_enabled: list[bool] = []
         self.action_grad_enabled: list[bool] = []
         self.current_step = 0
+        self.current_steps = np.zeros(num_envs, dtype=np.int64)
 
     @staticmethod
     def _forbidden(*_args, **_kwargs):
@@ -110,6 +114,7 @@ class FakeAgent:
         del obs, state, k, deterministic
         self.assignment_grad_enabled.append(torch.is_grad_enabled())
         self.current_step = int(step)
+        self.current_steps[env_id] = int(step)
         if int(step) != 1:
             return
         self.segments.active[env_id][0] = FakeSegment(
@@ -125,7 +130,7 @@ class FakeAgent:
     def act_low(self, obs, *, env_id: int, deterministic: bool, state):
         del obs, deterministic, state
         self.action_grad_enabled.append(torch.is_grad_enabled())
-        if self.current_step == 0:
+        if int(self.current_steps[env_id]) == 0:
             self.low_actor_hxs[env_id, 0] = np.asarray(
                 [1.0, 2.0, 3.0, 4.0], dtype=np.float32
             )
@@ -134,6 +139,52 @@ class FakeAgent:
             np.zeros(2, dtype=np.float32),
             np.zeros(2, dtype=np.float32),
         )
+
+
+class FakeParallelCollector:
+    def __init__(self, num_envs: int = 4) -> None:
+        self.num_envs = int(num_envs)
+        self.step_orders: list[list[int]] = []
+        self.steps = np.zeros(num_envs, dtype=np.int64)
+
+    def reset_all(self, seed: int):
+        observations = [
+            np.asarray(
+                [[float(env_id), 0.5], [float(env_id) + 1.0, 1.5]],
+                dtype=np.float32,
+            )
+            for env_id in range(self.num_envs)
+        ]
+        states = [
+            np.asarray([float(seed + env_id)], dtype=np.float32)
+            for env_id in range(self.num_envs)
+        ]
+        infos = [{"state": state.copy()} for state in states]
+        return observations, states, infos
+
+    def step_selected(self, indexed_actions):
+        pairs = list(indexed_actions)
+        env_ids = [int(env_id) for env_id, _action in pairs]
+        self.step_orders.append(env_ids)
+        results: dict[int, EnvStep] = {}
+        for env_id, _action in pairs:
+            env_id = int(env_id)
+            self.steps[env_id] += 1
+            step = int(self.steps[env_id])
+            terminated = env_id == 1 and step == 1
+            truncated = env_id == 3 and step == 2
+            obs = np.asarray(
+                [[float(step), 0.5], [float(step) + 1.0, 1.5]],
+                dtype=np.float32,
+            )
+            results[env_id] = EnvStep(
+                obs=obs,
+                reward=0.0,
+                terminated=terminated,
+                truncated=truncated,
+                info={"next_state": np.asarray([float(step)], dtype=np.float32)},
+            )
+        return results
 
 
 class ManifestEnv(FakeEnv):
@@ -242,6 +293,63 @@ def test_collector_owns_no_grad_and_does_not_store_task_fields():
     }
     assert forbidden.isdisjoint(CapacitySnapshotBatch.__dataclass_fields__)
     assert batch.episode_done_mask.tolist() == [False]
+
+
+def test_parallel_collector_uses_one_reset_per_env_and_stops_finished_envs():
+    env_collector = FakeParallelCollector(4)
+    agent = FakeAgent(num_envs=4)
+
+    batches, stats, evidence = collector.collect_capacity_parallel(
+        env_collector,
+        agent,
+        base_seed=1,
+        n_resets=4,
+        skill_interval=10,
+        episode_max_steps=3,
+        checkpoint_id="fixture",
+        checkpoint_update=25,
+    )
+
+    assert sorted(batches) == [0, 1, 2, 3]
+    assert stats.resets == 4
+    assert evidence["env_id_to_reset_id"] == {"0": 0, "1": 1, "2": 2, "3": 3}
+    assert evidence["env_id_to_reset_seed"] == {"0": 1, "1": 2, "2": 3, "3": 4}
+    assert evidence["active_steps_by_env"] == {"0": 3, "1": 1, "2": 3, "3": 2}
+    assert evidence["termination_reason_by_env"] == {
+        "0": "step_limit",
+        "1": "terminated",
+        "2": "step_limit",
+        "3": "truncated",
+    }
+    assert env_collector.step_orders == [[0, 1, 2, 3], [0, 2, 3], [0, 2]]
+    for env_id, batch in batches.items():
+        assert set(batch.env_id.tolist()) <= {env_id}
+        assert set(batch.reset_id.tolist()) <= {env_id}
+        assert set(batch.episode_id.tolist()) <= {env_id}
+        assert set(batch.reset_seed.tolist()) <= {1 + env_id}
+
+
+def test_parallel_collector_repeated_fixture_has_identical_shard_hash(tmp_path):
+    hashes: list[str] = []
+    for run_id in range(2):
+        batches, _stats, _evidence = collector.collect_capacity_parallel(
+            FakeParallelCollector(4),
+            FakeAgent(num_envs=4),
+            base_seed=1,
+            n_resets=4,
+            skill_interval=10,
+            episode_max_steps=3,
+            checkpoint_id="fixture",
+            checkpoint_update=25,
+        )
+        snapshot_dir = tmp_path / f"run_{run_id}"
+        for env_id, batch in batches.items():
+            capacity_audit.write_capacity_snapshot_shard(
+                snapshot_dir / f"reset_{env_id:04d}.npz", batch
+            )
+        hashes.append(collector._snapshot_shards_sha256(snapshot_dir))
+
+    assert hashes[0] == hashes[1]
 
 
 def test_collect_static_rejects_cpu_before_checkpoint_loading(monkeypatch, tmp_path):
