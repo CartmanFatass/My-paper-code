@@ -146,6 +146,15 @@ elseif ($env:R27_MOCK_ACTION -eq "collect") {
         -Action collect `
         -DownloadRoot $env:R27_DOWNLOAD_ROOT
 }
+elseif ($env:R27_MOCK_ACTION -eq "all") {
+    & $env:R27_WORKFLOW `
+        -Action all `
+        -GitBranch aggressive `
+        -GitRemoteUrl https://example.invalid/hmasd.git `
+        -MaxWorkers 64 `
+        -ConcurrencyValidated `
+        -LaunchAuthorization $env:R27_LAUNCH_AUTHORIZATION
+}
 else {
     throw "Unsupported mock action: $env:R27_MOCK_ACTION"
 }
@@ -280,6 +289,8 @@ def test_remote_workflow_defaults_to_prepare_and_keeps_launch_gated() -> None:
     assert "clean Git-managed HMASD worktree" in source
     assert "Serial experiment launch is disabled" in source
     assert "Parallel launch requires -ConcurrencyValidated" in source
+    assert "Legacy R27-G2 launch is disabled" in source
+    assert "Legacy R27-G2 all-in-one launch is disabled" in source
     assert "AcceptSerialCost" not in source
     assert "R27_G2_CONCURRENCY_VALIDATED" in source
     assert '/root/autodl-tmp/HMASD/r27_g2_remote' in source
@@ -291,6 +302,12 @@ def test_remote_workflow_defaults_to_prepare_and_keeps_launch_gated() -> None:
     assert "git pull --ff-only" in source
     assert "git status --porcelain" in source
     assert "current_source.env" in source
+    watcher_source = WATCHER.read_text(encoding="utf-8")
+    assert "current_overnight.env" in watcher_source
+    assert "orchestration_status.env" in watcher_source
+    assert "topology_probe_8" in watcher_source
+    assert "wiring_pilot_8" in watcher_source
+    assert "decision_grade" in watcher_source
     assert source.count("printf '%s\\n'") >= 3
     assert 'printf "repo_dir=' not in source
     assert 'printf "REPO_DIR=' not in source
@@ -395,54 +412,11 @@ def test_runtime_manifest_tracks_remote_workflow_without_private_key() -> None:
     assert ".ssh/imod_autodl" not in source
 
 
-def test_launch_gates_precede_remote_start_and_rechecks_git_source(
+def test_legacy_launch_entries_are_disabled_before_any_remote_action(
     tmp_path: Path,
 ) -> None:
     harness = tmp_path / "mock_remote_harness.ps1"
     write_mock_remote_harness(harness)
-
-    wrong_auth_log = tmp_path / "wrong_auth.jsonl"
-    wrong_auth = run_mock_remote_action(
-        harness=harness,
-        log_path=wrong_auth_log,
-        home=tmp_path / "home_wrong_auth",
-        action="launch",
-        authorization="not-authorized",
-    )
-    assert wrong_auth.returncode != 0
-    assert "Launch requires -LaunchAuthorization" in (
-        wrong_auth.stdout + wrong_auth.stderr
-    )
-    assert read_mock_records(wrong_auth_log) == []
-
-    dirty_scope_log = tmp_path / "dirty_scope.jsonl"
-    dirty_scope = run_mock_remote_action(
-        harness=harness,
-        log_path=dirty_scope_log,
-        home=tmp_path / "home_dirty_scope",
-        action="launch",
-        dirty=True,
-        authorization=EXPERIMENT_ID,
-    )
-    assert dirty_scope.returncode != 0
-    assert "clean Git-managed HMASD worktree" in (
-        dirty_scope.stdout + dirty_scope.stderr
-    )
-    assert read_mock_records(dirty_scope_log) == []
-
-    serial_log = tmp_path / "serial.jsonl"
-    serial = run_mock_remote_action(
-        harness=harness,
-        log_path=serial_log,
-        home=tmp_path / "home_serial",
-        action="serial_launch",
-        authorization=EXPERIMENT_ID,
-    )
-    assert serial.returncode != 0
-    assert "Serial experiment launch is disabled" in (
-        serial.stdout + serial.stderr
-    )
-    assert read_mock_records(serial_log) == []
 
     launch_log = tmp_path / "launch.jsonl"
     launched = run_mock_remote_action(
@@ -452,21 +426,25 @@ def test_launch_gates_precede_remote_start_and_rechecks_git_source(
         action="launch",
         authorization=EXPERIMENT_ID,
     )
-    assert launched.returncode == 0, launched.stdout + launched.stderr
-    records = read_mock_records(launch_log)
-    assert [record["tool"] for record in records] == ["ssh", "ssh"]
-    assert "checkpoint_ready=" in str(records[0]["command"])
-    command = str(records[1]["command"])
-
-    source_index = command.index("git branch --show-current")
-    checkpoint_index = command.index(
-        "standalone_process_core_update_25.pt"
+    assert launched.returncode != 0
+    assert "Legacy R27-G2 launch is disabled" in (
+        launched.stdout + launched.stderr
     )
-    launch_index = command.index("screen -DmS")
-    assert source_index < checkpoint_index < launch_index
-    assert "git status --porcelain" in command[source_index:checkpoint_index]
-    assert "REPO_DIR" in command
-    assert "GIT_BRANCH" in command
+    assert read_mock_records(launch_log) == []
+
+    all_log = tmp_path / "all.jsonl"
+    all_action = run_mock_remote_action(
+        harness=harness,
+        log_path=all_log,
+        home=tmp_path / "home_all",
+        action="all",
+        authorization=EXPERIMENT_ID,
+    )
+    assert all_action.returncode != 0
+    assert "Legacy R27-G2 all-in-one launch is disabled" in (
+        all_action.stdout + all_action.stderr
+    )
+    assert read_mock_records(all_log) == []
 
 
 def test_collect_preserves_remote_relative_expansions_and_provenance(

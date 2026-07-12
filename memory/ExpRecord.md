@@ -37,7 +37,7 @@ experiment brief.
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260712-r27-g2-forced-z-trajectory-effect | planned — implementation, focused verification, and non-launching Git cloud prepare complete; pilot and launch not authorized | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | planned cloud CUDA; clean data-disk source at `60ac83e`; registered R25 arm0 update25/update30/final checkpoints; 64 reset groups; 55 branches/reset; no scientific run root exists | Controller | separately validate safe concurrency, then obtain an explicit pilot or decision-grade launch decision | `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`; raw review `docs/external-review/R27_G2_design_review_20260712_Claude.md` | Design disposition `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`; implementation and prepare do not change the scientific contract. Exact decision-grade Stage 1 is 2,124,000 env steps plus diagnostic forwards, estimated 12-20h cloud CUDA only with a validated flattened queue. No experiment has run. |
+| EXP-20260712-r27-g2-forced-z-trajectory-effect | launch authorized 2026-07-13 — overnight probe/pilot/conditional decision-grade chain being prepared; no scientific result yet | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | cloud CUDA RTX 4090 24 GB; final-checkpoint eight-reset pilot then three-checkpoint 64-reset decision grade only after gates | Controller | probe8 -> quarantined pilot -> `WIRING_PASS` -> probe64/32 -> conditional decision-grade | `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`; raw review `docs/external-review/R27_G2_design_review_20260712_Claude.md` | User explicitly authorized direct overnight execution and automatic handoff. Pilot is 83,600 steps and cannot enter the gate. Decision grade is 2,124,000 steps; 64-worker target 12-20h, 32-worker conditional estimate about 24-40h. No serial fallback. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — downloaded archive verified and controller disposition accepted 2026-07-12 | R27-G1 reward-off low-actor capacity autopsy | cloud CUDA, 64 parallel subprocess envs, exactly 64 total reset groups, exact R25 arm0 update25/update30/final checkpoints; run `logs/r27_g1_capacity_autopsy_cloud64_20260712_151313/` | Controller disposition complete | no rerun; standing evidence for R27-G2 only | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; `logs/r27_g1_result_read_20260712/reports/expmanager_intake.md`; `r27_capacity_autopsy.{json,md}` under the extracted run root | Controller accepts `STATIC_USED_OBSERVATIONAL_MISS`, narrowly immediate `z_i`-conditioned action-distribution sensitivity. Static and synthetic families PASS 3/3 with artifact identity PASS. Persistence, downstream effect, reward usefulness, and task improvement remain unverified. |
 | EXP-20260711-r26-g1a-individual-skill-screening | completed — six arms succeeded and controller result boundary accepted 2026-07-12 | R26-G1a reward-off screening | local CUDA (RTX 4070 Laptop 8 GB), six frozen R25 checkpoints | Controller disposition complete | no rerun; preserve as natural observational negative beside R27 forced-capacity evidence | `logs/r26_g1a_screening_20260711_105522/`; six per-arm `analysis/r26_g1_behavior.{json,md}` artifacts | Batch succeeded 6/6; all analyzers valid and adequately powered. arm0 final is FAIL, update25/update30 are MIXED, so no arm0 checkpoint passes and the primary arm0 family is FAIL. All arm2 checkpoints are MIXED and contextual only. Reward remains off. |
 | EXP-20260710-r25-qa-verification-1m | completed / read + dispositioned 2026-07-10; arm0/arm2 archives now standing-reference (DO NOT RE-RUN — user directive 2026-07-10) | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed single-seed gate analysis complete | `dist/logs_cloud_r25_qa_verification_1m/` (cloud archive); `gate_read_r25_seed1.md` (result analyst read); peer review Round 6 archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | arm0 arch-only beats arm2 q_A at 640k-960k (coverage 0.235→0.417 vs 0.052→0.113; throughput 13.76 vs 2.81 Mbps @960k); neither reaches HMASD milestones (0.7@480k, 0.9@800k); q_A reward demoted to default-off by Round 6 peer review (NOT VERIFIED at 1M verification gate under n=1 single-seed setup); parity OPEN (update-count confound: 32 updates vs HMASD ~2×/step). |
@@ -58,6 +58,17 @@ Factual record for the controller-frozen R27-G2 design. The user authorized
 implementation and focused verification on 2026-07-12; both are complete.
 No pilot, scientific run root, or scientific result exists yet.
 
+- Overnight execution authorization (2026-07-13 user decision): attempt the
+  server directly without a pre-wake confirmation. Run a bounded 8-worker CUDA
+  topology probe, then the final-checkpoint reset 0..7 wiring pilot (seeds 1..8,
+  prefix strata 50/150/250/50/150/250/50/150, exact 55-branch matrix, 83,600
+  environment steps). Pilot outputs are quarantined and may only classify
+  `WIRING_PASS`, `INCOMPLETE`, `INVALID`, or crash. Only `WIRING_PASS` permits a
+  64-worker probe; a resource failure may try 32 workers. Launch the frozen
+  decision-grade matrix automatically only on the highest validated topology
+  of at least 32 workers. Any other branch stops and preserves logs. The user
+  requested that useful server work continue during the 8-10 hour sleep window.
+
 - Project provenance/validation policy (2026-07-12 user decision): Git is the
   sole source-version manager. Active HMASD workflows do not add content
   digests for source, checkpoints, state, packages, shards, aggregates, or
@@ -68,8 +79,9 @@ No pilot, scientific run root, or scientific result exists yet.
   native readers and expected inventory. This policy change launched no
   experiment and changes no statistical threshold.
 
-- Status: `planned`; design disposition
-  `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`
+- Status: `launch authorized / awaiting guarded cloud start`; design disposition
+  `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`. The scientific state remains
+  `NOT_RUN` until the decision-grade collector starts.
 - Hypothesis: when one focal agent's label is held through the live recurrent
   executor, the frozen R25 arm0 actor produces temporally sustained and
   held-out label-consistent action-process differences that exceed a matched
@@ -135,10 +147,30 @@ No pilot, scientific run root, or scientific result exists yet.
   semantics.
 - Expected cost/device: exactly 708,000 environment steps per checkpoint and
   2,124,000 total, plus diagnostic forwards and decoder fitting. Conservative
-  decision-grade estimate 12-20 hours on cloud CUDA. An optional, separately
-  authorized eight-reset wiring pilot is under 90,000 environment steps and
-  may cost 30-60 minutes with a safe flat 64-job queue or about 3-5 hours
-  with only eight reset workers. No CPU fallback.
+  decision-grade estimate 12-20 hours on cloud CUDA at 64 validated workers or
+  24-40 hours at the permitted 32-worker fallback. The authorized exact
+  eight-reset wiring pilot is 83,600 environment steps and costs about 3-5
+  hours at its maximum/effective eight reset workers. No CPU fallback.
+- Registered launch command (PowerShell from the repository root):
+  `pwsh -File scripts/remote/run_hmasd_r27_g2_overnight.ps1 -Action launch
+  -LaunchAuthorization EXP-20260712-r27-g2-overnight-authorized`.
+  Device is the cloud RTX 4090 CUDA GPU. Probe/pilot environments are one per
+  worker; the pilot uses reset IDs 0..7 and seeds 1..8. Decision grade uses 64
+  reset groups per checkpoint across three checkpoint observations, with the
+  frozen reset seeds/prefix policy and a maximum of 64 or conditional 32
+  resident reset workers. Evaluation cadence is N/A: this is a frozen
+  reward-off diagnostic collector plus one final aggregate/decoder pass, not
+  policy training.
+- Expected artifacts/status: the pointer is
+  `/root/autodl-tmp/HMASD/r27_g2_remote/controller/current_overnight.env`.
+  Under its timestamped `ORCH_ROOT`, read
+  `status/orchestration_status.env`, per-phase `status/*.env`,
+  `logs/orchestrator.log`, and `runs/{probe8,pilot,probe64,probe32,
+  decision_grade}/`. Probe roots contain `topology_probe.json` and
+  `runner_status.txt`; the pilot contains `pilot_status.txt`,
+  `pilot_summary.json`, and eight reset manifests/artifacts; decision grade
+  contains 192 reset manifests/artifacts, `batch_status.txt`, and regenerated
+  final JSON/Markdown reports.
 - Remote automation (mechanical, no experiment run): HMASD now reuses the
   already-installed AutoDL key pair for the same `root` endpoint through the
   separate non-secret alias `hmasd-autodl`. On 2026-07-12, BatchMode SSH,
@@ -150,21 +182,21 @@ No pilot, scientific run root, or scientific result exists yet.
   requires at least 20 GiB free. On 2026-07-12 it staged
   the registered update25, update30, and final checkpoints under
   `/root/autodl-tmp/HMASD/checkpoint_dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/`.
-  The source files under `/root/HMASD/dist/` were not deleted. Authorized long
-  work runs in a recorded detached `screen` session; final wait/collection
-  revalidates all 192 reset artifacts and regenerates aggregate reports from
-  the current structured inputs. The default
-  `prepare` remains non-launching. No experiment was launched. `launch` and
-  `all` additionally require the exact experiment authorization, a clean
-  committed Git source scope, and a validated parallel worker topology.
-- Parallel execution policy (2026-07-13 user directive; mechanical, no run):
+  The source files under `/root/HMASD/dist/` were not deleted. The default
+  legacy `prepare` remains non-launching, and its `launch`/`all` entries are now
+  disabled so they cannot bypass the overnight gates. The overnight chain runs
+  in a recorded detached `screen`, keeps raw artifacts on the data disk, and
+  validates the decision-grade aggregate in place; legacy collection remains
+  available only for historical `current_run.env` runs.
+- Parallel execution policy (2026-07-13 user directive; registered pre-launch):
   compute-bearing experiments default to parallel cloud CUDA and never fall
   back to serial. R27-G2 now defaults to the 64-worker flattened queue, whose
   collector-only estimate is 9-15 hours and whose registered end-to-end target
   remains 12-20 hours. `MAX_WORKERS=1` is rejected at both the PowerShell and
   Bash launch boundaries. The 64-process CUDA topology is a target, not yet a
-  safety result; it must pass a separate bounded check on the selected GPU and
-  commit before either pilot or decision-grade launch.
+  safety result; the overnight orchestrator must pass the bounded checks on the
+  selected GPU and exact commit before pilot or decision-grade launch. Only a
+  structured 64-worker `RESOURCE_CAPACITY` failure may select 32 workers.
 - Git workflow update (2026-07-13, mechanical, no experiment run): source comes
   only from a named, clean data-disk Git checkout updated by
   `fetch`/`checkout`/`pull --ff-only`; prior ZIP/deployed copies are historical
@@ -191,13 +223,16 @@ No pilot, scientific run root, or scientific result exists yet.
 - UNDERPOWERED branch: increase support only with unchanged metrics and
   thresholds. INVALID/crash branch: repair the instrument/operation and repeat
   the unchanged gate; at most one genuine invalid-fix cycle before escalation.
-- Do not change yet: no R27-G2 pilot, launch, natural-renewal Stage 2, H100,
-  reward, actor/GRU/FiLM change, or long training. Implementation may only
-  encode and verify the frozen diagnostic contract.
+- Do not change yet: no R27-G2 execution outside the exact authorized
+  probe/pilot/conditional-decision chain, no bypass of its gates, and no
+  natural-renewal Stage 2, H100, reward, actor/GRU/FiLM change, or task-scale
+  training.
 - Status source: controller-frozen design
   `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`; raw
   user-supplied Claude response
-  `docs/external-review/R27_G2_design_review_20260712_Claude.md`.
+  `docs/external-review/R27_G2_design_review_20260712_Claude.md`; guarded
+  controller `scripts/remote/run_hmasd_r27_g2_overnight.ps1`; operational
+  pointers and artifacts listed above.
   The exact Claude model/version was not supplied.
 
 **Implemented diagnostic unit**: the strict-source focal-only live-stateful
@@ -205,10 +240,9 @@ hook applies active/neutral FiLM, advances actor and critic hidden exactly once,
 returns distribution/action/value/new-hidden evidence from the same transition,
 and leaves roster/clocks unchanged. Focused verification is complete.
 
-**Open gate**: non-launching cloud preparation is complete. A safe concurrent
-process/GPU topology must be validated before the registered 12–20 h estimate
-applies, and a separate user decision is still required for any pilot or
-decision-grade launch.
+**Open gate**: launch authorization is present for the exact overnight chain.
+The remaining gates are operational and automatic: probe8 PASS, pilot
+`WIRING_PASS`, then probe64 or probe32 PASS before decision-grade launch.
 
 ## Completed Experiment Detail
 

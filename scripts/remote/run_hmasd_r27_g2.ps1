@@ -606,19 +606,14 @@ switch ($Action) {
         Sync-RemoteSource
         Invoke-RemoteDryRun
     }
-    "launch" { Start-RemoteRun }
+    "launch" {
+        throw "Legacy R27-G2 launch is disabled; use run_hmasd_r27_g2_overnight.ps1 so topology and pilot gates cannot be bypassed"
+    }
     "status" { Get-RemoteStatus }
     "watch" { Watch-RemoteStatus }
     "wait" { Wait-RemoteRun }
     "collect" { Copy-RemoteResults | Out-Null }
     "all" {
-        Assert-LaunchAuthorization
-        Invoke-RemotePreflight
-        Sync-RemoteCheckpoints
-        Sync-RemoteSource
-        Invoke-RemoteDryRun
-        Start-RemoteRun
-        Wait-RemoteRun
-        Copy-RemoteResults | Out-Null
+        throw "Legacy R27-G2 all-in-one launch is disabled; use run_hmasd_r27_g2_overnight.ps1 so topology and pilot gates cannot be bypassed"
     }
 }

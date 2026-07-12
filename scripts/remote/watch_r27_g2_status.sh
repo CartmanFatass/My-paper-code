@@ -58,7 +58,98 @@ progress_bar() {
   printf ']'
 }
 
+render_overnight() {
+  local pointer="$CONTROLLER_ROOT/current_overnight.env"
+  local ORCH_ROOT="" STATUS_FILE="" ORCHESTRATOR_LOG="" SCREEN_SESSION=""
+  local status_root phase_file phase state exit_code run_root current_phase
+  # The controller writes only fixed, single-quoted absolute paths and names.
+  # shellcheck disable=SC1090
+  . "$pointer"
+
+  if [[ -t 1 ]]; then
+    printf '\033[2J\033[H'
+  fi
+  echo "R27-G2 overnight status — $(date -Is)"
+  echo "Status source: current_overnight.env / status/*.env / runner artifacts (read-only view)"
+  echo
+  echo "Orchestration root: $ORCH_ROOT"
+  if [[ -n "$SCREEN_SESSION" ]] && \
+    screen -ls 2>/dev/null | grep -Eq "[.]${SCREEN_SESSION}[[:space:]]"; then
+    echo "Process:            alive (screen=$SCREEN_SESSION)"
+  else
+    echo "Process:            not alive"
+  fi
+  if command -v nvidia-smi >/dev/null 2>&1; then
+    gpu_line="$(nvidia-smi --query-gpu=name,utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits 2>/dev/null | head -n 1)"
+    [[ -n "$gpu_line" ]] && echo "GPU:                $gpu_line (name, util%, used MiB, total MiB)"
+  fi
+  storage_line="$(df -hP "$ORCH_ROOT" 2>/dev/null | awk 'NR==2 {print $2 " total, " $3 " used, " $4 " free (" $5 ")"}')"
+  [[ -n "$storage_line" ]] && echo "Data disk:          $storage_line"
+
+  echo
+  echo "Overall: state=$(status_value "$STATUS_FILE" state) phase=$(status_value "$STATUS_FILE" phase)"
+  echo "Workers: $(status_value "$STATUS_FILE" selected_workers)  Expected: $(status_value "$STATUS_FILE" expected_wall_clock)"
+  echo "Message: $(status_value "$STATUS_FILE" message)"
+  echo
+  printf '%-24s %-12s %-8s %s\n' "phase" "state" "exit" "run root"
+  status_root="$ORCH_ROOT/status"
+  for phase_file in "$status_root"/*.env; do
+    [[ -f "$phase_file" ]] || continue
+    [[ "$(basename "$phase_file")" == "orchestration_status.env" ]] && continue
+    phase="$(status_value "$phase_file" phase)"
+    state="$(status_value "$phase_file" state)"
+    exit_code="$(status_value "$phase_file" exit_code)"
+    run_root="$(status_value "$phase_file" run_root)"
+    printf '%-24s %-12s %-8s %s\n' "$phase" "$state" "$exit_code" "$run_root"
+  done
+
+  current_phase="$(status_value "$STATUS_FILE" phase)"
+  case "$current_phase" in
+    topology_probe_8)
+      run_root="$ORCH_ROOT/runs/probe8"
+      echo
+      echo "Probe 8: state=$(status_value "$run_root/runner_status.txt" state) status=$(status_value "$run_root/runner_status.txt" probe_status) workers=$(status_value "$run_root/runner_status.txt" workers_passed)/8"
+      ;;
+    wiring_pilot_8)
+      run_root="$ORCH_ROOT/runs/pilot"
+      pilot_succeeded="$(find "$run_root/arm0_final/resets" -name runner_status.txt -type f -exec grep -lqx 'state=succeeded' {} + 2>/dev/null | wc -l | tr -d ' ')"
+      echo
+      echo "Pilot: state=$(status_value "$run_root/pilot_status.txt" state) completed_resets=${pilot_succeeded:-0}/8"
+      ;;
+    topology_probe_64)
+      run_root="$ORCH_ROOT/runs/probe64"
+      echo
+      echo "Probe 64: state=$(status_value "$run_root/runner_status.txt" state) status=$(status_value "$run_root/runner_status.txt" probe_status) workers=$(status_value "$run_root/runner_status.txt" workers_passed)/64"
+      ;;
+    topology_probe_32)
+      run_root="$ORCH_ROOT/runs/probe32"
+      echo
+      echo "Probe 32: state=$(status_value "$run_root/runner_status.txt" state) status=$(status_value "$run_root/runner_status.txt" probe_status) workers=$(status_value "$run_root/runner_status.txt" workers_passed)/32"
+      ;;
+    decision_grade|complete)
+      run_root="$ORCH_ROOT/runs/decision_grade"
+      echo
+      echo "Decision batch: state=$(status_value "$run_root/batch_status.txt" state) scientific=$(status_value "$run_root/batch_status.txt" scientific_status)"
+      for checkpoint_id in "${CHECKPOINT_IDS[@]}"; do
+        succeeded="$(RUN_ROOT="$run_root" count_status "$checkpoint_id" state succeeded)"
+        failed="$(RUN_ROOT="$run_root" count_status "$checkpoint_id" state failed)"
+        printf '  %-15s succeeded=%-3s failed=%-3s /64\n' "$checkpoint_id" "$succeeded" "$failed"
+      done
+      ;;
+  esac
+
+  if [[ -n "$ORCHESTRATOR_LOG" && -f "$ORCHESTRATOR_LOG" ]]; then
+    echo
+    echo "Current orchestrator tail:"
+    tail -n 12 "$ORCHESTRATOR_LOG"
+  fi
+}
+
 render() {
+  if [[ -z "$RUN_ROOT" && -f "$CONTROLLER_ROOT/current_overnight.env" ]]; then
+    render_overnight
+    return
+  fi
   local state_file="$CONTROLLER_ROOT/current_run.env"
   local package_dir="" launcher_log="" screen_session=""
   if [[ -z "$RUN_ROOT" && -f "$state_file" ]]; then

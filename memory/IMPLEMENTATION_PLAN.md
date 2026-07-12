@@ -70,8 +70,10 @@ actually-work intrinsic drive under asynchronous skill lifetimes.
 
 Status (2026-07-12): the pre-implementation design review is complete and the
 controller disposition is `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`. The
-user subsequently authorized implementation and focused verification only;
-pilot and decision-grade launch remain blocked. The
+user subsequently authorized implementation and focused verification, then on
+2026-07-13 explicitly authorized direct overnight execution with automatic
+handoff through the registered topology-probe, pilot, and conditional
+decision-grade branches. The
 frozen design is
 `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`. The raw
 user-supplied Claude review is
@@ -146,15 +148,22 @@ steps and cannot contribute outcomes to the final gate. CUDA is mandatory and
 there is no CPU fallback.
 
 Authorization boundary: R27-G2 code, analyzer, cloud runner/Git workflow, and
-focused verification are complete. Pilot and decision-grade
-launch each remain separate decisions. Reward, actor/GRU/FiLM changes, natural-renewal
+focused verification are complete. The 2026-07-13 overnight authorization is
+limited to: probe 8 workers; run the final-checkpoint eight-reset quarantined
+pilot; on `WIRING_PASS`, probe 64 then optionally 32 workers; and launch
+decision grade only on a validated topology of at least 32 workers. The 32
+probe is permitted only after the 64 probe records a structured
+`RESOURCE_CAPACITY` failure; every execution-class failure stops. Any failed
+gate stops rather than selecting serial mode. Reward, actor/GRU/FiLM changes, natural-renewal
 Stage 2, H100, and long task-scale training remain blocked. Even a B+C pass
 would require a separate task-generic reward-target design; Gate C's full
 Scenario-7 observation/communication fields cannot become reward. No
 `memory/ALGORITHM_PRINCIPLES.md` change is needed.
 
-Remote execution boundary (updated 2026-07-13): the reusable SSH lifecycle is
-implemented in `scripts/remote/run_hmasd_r27_g2.ps1`, using the same external
+Remote execution boundary (updated 2026-07-13): the reusable legacy SSH
+lifecycle is implemented in `scripts/remote/run_hmasd_r27_g2.ps1`, and the
+authorized automatic chain is implemented in
+`scripts/remote/run_hmasd_r27_g2_overnight.ps1`. Both use the same external
 private key already authorized for the identical AutoDL `root` endpoint and a
 separate repository alias. Its default `prepare` action performs remote CUDA,
 tool, separate-data-filesystem/free-space, `screen`, and registered non-empty
@@ -162,10 +171,10 @@ checkpoint-path preflight; it stages the three checkpoints under
 `/root/autodl-tmp/HMASD/checkpoint_dist`, obtains source through Git, and
 performs a zero-write runner dry-run. No application-layer content digest is
 part of the workflow. Source, checkpoints, logs, and results remain under the
-data disk. Authorized long commands run in a recorded detached GNU `screen`
-session. `launch`/`all` are fail-closed behind the exact
-experiment authorization, clean committed Git source, and explicit
-validation of the selected parallel topology. By user directive on 2026-07-13,
+data disk. The overnight command runs in a recorded detached GNU `screen`
+session and enforces the exact authorization, clean committed Git source, and
+selected-topology gates. Legacy `launch`/`all` are disabled so they cannot
+bypass that chain. By user directive on 2026-07-13,
 the default is the 64-worker flattened queue and serial launch/fallback is
 disabled. Final success and
 complete collection revalidate all 192 reset artifacts plus both aggregate

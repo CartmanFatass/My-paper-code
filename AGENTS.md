@@ -42,6 +42,21 @@ interpretation, user communication, and final decisions. It must:
 document, plan, progress ledger, status file, review package, or multi-stage
 review. Use those only when they materially reduce risk or preserve evidence.
 
+For documentation, SSH/remote operations, runner orchestration, dashboards,
+packaging, CI, repository hygiene, and other non-core-algorithm work, use a
+normal direct engineering flow: the controller implements it directly and runs
+one focused behavioral, parser, or dry-run check. Do not default to delegated
+audits, review matrices, extra plans/reports, redundant test passes, or
+speculative hardening. Add more process only after a real failure or a concrete
+direct risk, and stop when the requested behavior and its immediate failure
+path work.
+
+Retain hard gates only for a direct risk of launching the wrong experiment,
+using the wrong device/source/data path, duplicating compute, losing evidence,
+corrupting data, or changing a scientific conclusion. Core MARL algorithm,
+numerical, collector-semantic, reward, and causal-claim changes continue to use
+the research discipline below.
+
 Core algorithm and numerical code may be written directly, with explicit
 reasoning about tensor shapes, gradient flow, detach boundaries, clocks, masks,
 reward scale, advantage semantics, checkpoint compatibility, and collector
@@ -97,6 +112,10 @@ conventions; use timestamped roots under `logs/`; record commands, expected
 artifacts, device, env count, seed, timesteps, and eval cadence in
 `memory/ExpRecord.md`; commit and push before asking the user to pull and launch.
 The local GPU is for smokes and small diagnostics.
+
+Treat the remote server as available by default: attempt the scoped SSH action
+directly. Ask the user to wake the server only after the connection actually
+fails or the host is unreachable; do not require a pre-SSH wake confirmation.
 
 Preserve negative results as constraints. Do not rename, delete, reinterpret, or
 re-run a failed line until it looks favorable, and do not redesign metrics after

@@ -37,8 +37,10 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
   capacity".
 - **R27-G2** (forced-`z_i` trajectory/effect intervention) is design-frozen,
   implemented, and locally verified. The active remote workflow now uses a
-  clean Git checkout rather than a deployed ZIP. **Pilot and decision-grade
-  launch are not authorized** and each need a separate explicit decision.
+  clean Git checkout rather than a deployed ZIP. On 2026-07-13 the user
+  explicitly authorized direct overnight execution and automatic handoff:
+  bounded topology probe -> quarantined wiring pilot -> conditional
+  decision-grade launch, with fail-closed branches and no serial fallback.
 - Longer-term: reach HMASD-level S7-S1 behavior at ~1e6 steps before returning to
   S7-S3. Treat 160k/320k runs as mechanism gates, not HMASD-comparison verdicts.
 
@@ -77,19 +79,20 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
   parallel cloud CUDA. R27-G2 defaults to 64 reset workers; serial launch and
   serial fallback are disabled. The exact parallel topology still requires a
   bounded validation before launch.
-- `launch`/`all` remain fail-closed behind explicit experiment authorization.
+- Launch remains fail-closed outside the exact authorized overnight chain.
 
 Everything else on the dashboard is `completed` or `standing-reference`. R25
 arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Hold. R27-G2 implementation and non-launching cloud preparation are
-   complete. Before compute, separately validate a safe concurrent process/GPU
-   topology and obtain an explicit pilot or decision-grade launch decision. A
-   pilot is <90k steps and cannot contribute to the gate; decision grade is
-   2.124M steps and 12–20 h cloud CUDA only with the validated flattened queue.
-   Do not invoke guarded `launch`/`all` under the present authorization.
+1. Execute the authorized overnight R27-G2 chain on cloud CUDA: probe 8-worker
+   topology; run final-checkpoint reset 0..7 pilot (83,600 steps, metrics
+   quarantined); require `WIRING_PASS`; then probe 64 and, if needed, 32 workers;
+   launch decision grade only on the highest validated topology >=32. Only a
+   structured 64-worker `RESOURCE_CAPACITY` failure may try 32; any other probe
+   failure, pilot INVALID/INCOMPLETE/crash, or failed 32-worker probe stops the
+   chain. Never fall back to serial or an unregistered algorithm change.
 2. Preserve the R27-G1 qualification: immediate action sensitivity verified;
    persistence and downstream effect open. Preserve the R26 FAIL narrowly.
 3. Optional cheap diagnostics may reuse existing R25 artifacts (correlate q_A
@@ -107,7 +110,8 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 - Do not treat R27-G1 static separation or synthetic `1.0` accuracy as evidence of
   persistent trajectory modes, downstream effects, cooperation, credit, or task
   improvement.
-- Do not launch or pilot R27-G2 without separate explicit authorization.
+- Do not launch outside the 2026-07-13 authorized overnight chain or bypass its
+  topology/pilot gates.
 - Do not enable `q_A`, `q_d`, `q_D`, or any other intrinsic reward while the
   persistent-behavior edge is open. `q_d`/`q_D` are **BLOCKED** by R24-1
   (FAIL accepted 2026-07-09); no q_D/q_d coefficient sweeps or target engineering.
