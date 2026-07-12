@@ -41,6 +41,8 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
   explicitly authorized direct overnight execution and automatic handoff:
   bounded topology probe -> quarantined wiring pilot -> conditional
   decision-grade launch, with fail-closed branches and no serial fallback.
+  Run `r27_g2_overnight_20260713_031548` is active on cloud CUDA at commit
+  `9d98ecb`; probe8 passed and the eight-reset wiring pilot started at 03:21.
 - Longer-term: reach HMASD-level S7-S1 behavior at ~1e6 steps before returning to
   S7-S3. Treat 160k/320k runs as mechanism gates, not HMASD-comparison verdicts.
 
@@ -61,24 +63,25 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 
 ## Current Experiment Focus
 
-`EXP-20260712-r27-g2-forced-z-trajectory-effect` — **planned / design-frozen**.
+`EXP-20260712-r27-g2-forced-z-trajectory-effect` — **running wiring pilot**.
 
 - 55 branches per reset, 64 reset groups, 3 frozen temporal checkpoints.
 - Decision-grade Stage 1 is exactly **2,124,000 env steps** before diagnostic
-  overhead: **12–20 h on cloud CUDA**. Planning facts only — nothing launched.
+  overhead: **12–20 h on cloud CUDA** for the 64-worker decision phase.
 - The primary control is **hold vs a matched 10-step pulse**, not raw closed-loop
   divergence. Gated windows are steps 1-10, 11-20, 31-40 (native R25 durations
   are 10/20/30/40). H50 is descriptive stress, not native-duration evidence.
 - Targeted local verification is complete; the remote-workflow subset passes
   10/10, including Windows PowerShell 5.1 native-argument transport into Bash.
-- Non-launching Git-based cloud `prepare` passed on 2026-07-13. The clean
-  data-disk checkout is at commit `60ac83e`, its two-line source pointer is
-  Bash-readable, all three checkpoints are cached, and the 192-reset dry-run
-  wrote no run directory. No R27 `screen` or scientific run exists.
+- The clean data-disk checkout is at `9d98ecb`; all three checkpoints are
+  cached. Active root:
+  `/root/autodl-tmp/HMASD/r27_g2_remote/runs/r27_g2_overnight_20260713_031548`.
+  Probe8 passed; pilot artifacts remain quarantined and are not scientific
+  gate evidence.
 - User execution policy (2026-07-13): compute-bearing experiments default to
-  parallel cloud CUDA. R27-G2 defaults to 64 reset workers; serial launch and
-  serial fallback are disabled. The exact parallel topology still requires a
-  bounded validation before launch.
+  parallel cloud CUDA. R27-G2 targets 64 reset workers; serial launch and
+  serial fallback are disabled. Decision launch still requires the registered
+  pilot and 64/32 topology branches.
 - Launch remains fail-closed outside the exact authorized overnight chain.
 
 Everything else on the dashboard is `completed` or `standing-reference`. R25
@@ -86,10 +89,10 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Execute the authorized overnight R27-G2 chain on cloud CUDA: probe 8-worker
-   topology; run final-checkpoint reset 0..7 pilot (83,600 steps, metrics
-   quarantined); require `WIRING_PASS`; then probe 64 and, if needed, 32 workers;
-   launch decision grade only on the highest validated topology >=32. Only a
+1. Monitor the active final-checkpoint reset 0..7 pilot (83,600 steps, metrics
+   quarantined); require `WIRING_PASS`; then the controller probes 64 and, if
+   needed, 32 workers, and launches decision grade only on the highest
+   validated topology >=32. Only a
    structured 64-worker `RESOURCE_CAPACITY` failure may try 32; any other probe
    failure, pilot INVALID/INCOMPLETE/crash, or failed 32-worker probe stops the
    chain. Never fall back to serial or an unregistered algorithm change.

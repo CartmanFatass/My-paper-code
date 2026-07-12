@@ -37,7 +37,7 @@ experiment brief.
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260712-r27-g2-forced-z-trajectory-effect | launch authorized 2026-07-13 — overnight probe/pilot/conditional decision-grade chain being prepared; no scientific result yet | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | cloud CUDA RTX 4090 24 GB; final-checkpoint eight-reset pilot then three-checkpoint 64-reset decision grade only after gates | Controller | probe8 -> quarantined pilot -> `WIRING_PASS` -> probe64/32 -> conditional decision-grade | `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`; raw review `docs/external-review/R27_G2_design_review_20260712_Claude.md` | User explicitly authorized direct overnight execution and automatic handoff. Pilot is 83,600 steps and cannot enter the gate. Decision grade is 2,124,000 steps; 64-worker target 12-20h, 32-worker conditional estimate about 24-40h. No serial fallback. |
+| EXP-20260712-r27-g2-forced-z-trajectory-effect | running — probe8 PASS; quarantined eight-reset wiring pilot active since 2026-07-13 03:21 +08:00; no scientific result yet | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; commit `9d98ecb`; `r27_g2_overnight_20260713_031548`; pilot then conditional 64/32-worker decision grade | Controller | pilot `WIRING_PASS` -> probe64/32 -> conditional decision-grade | active `current_overnight.env`; timestamped status/log/run root; frozen design and raw Claude review | Pilot is 83,600 steps and cannot enter the gate. Decision grade is 2,124,000 steps; 64-worker target 12-20h, 32-worker conditional estimate 24-40h. No serial fallback. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — downloaded archive verified and controller disposition accepted 2026-07-12 | R27-G1 reward-off low-actor capacity autopsy | cloud CUDA, 64 parallel subprocess envs, exactly 64 total reset groups, exact R25 arm0 update25/update30/final checkpoints; run `logs/r27_g1_capacity_autopsy_cloud64_20260712_151313/` | Controller disposition complete | no rerun; standing evidence for R27-G2 only | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; `logs/r27_g1_result_read_20260712/reports/expmanager_intake.md`; `r27_capacity_autopsy.{json,md}` under the extracted run root | Controller accepts `STATIC_USED_OBSERVATIONAL_MISS`, narrowly immediate `z_i`-conditioned action-distribution sensitivity. Static and synthetic families PASS 3/3 with artifact identity PASS. Persistence, downstream effect, reward usefulness, and task improvement remain unverified. |
 | EXP-20260711-r26-g1a-individual-skill-screening | completed — six arms succeeded and controller result boundary accepted 2026-07-12 | R26-G1a reward-off screening | local CUDA (RTX 4070 Laptop 8 GB), six frozen R25 checkpoints | Controller disposition complete | no rerun; preserve as natural observational negative beside R27 forced-capacity evidence | `logs/r26_g1a_screening_20260711_105522/`; six per-arm `analysis/r26_g1_behavior.{json,md}` artifacts | Batch succeeded 6/6; all analyzers valid and adequately powered. arm0 final is FAIL, update25/update30 are MIXED, so no arm0 checkpoint passes and the primary arm0 family is FAIL. All arm2 checkpoints are MIXED and contextual only. Reward remains off. |
 | EXP-20260710-r25-qa-verification-1m | completed / read + dispositioned 2026-07-10; arm0/arm2 archives now standing-reference (DO NOT RE-RUN — user directive 2026-07-10) | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed single-seed gate analysis complete | `dist/logs_cloud_r25_qa_verification_1m/` (cloud archive); `gate_read_r25_seed1.md` (result analyst read); peer review Round 6 archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | arm0 arch-only beats arm2 q_A at 640k-960k (coverage 0.235→0.417 vs 0.052→0.113; throughput 13.76 vs 2.81 Mbps @960k); neither reaches HMASD milestones (0.7@480k, 0.9@800k); q_A reward demoted to default-off by Round 6 peer review (NOT VERIFIED at 1M verification gate under n=1 single-seed setup); parity OPEN (update-count confound: 32 updates vs HMASD ~2×/step). |
@@ -54,9 +54,10 @@ experiment brief.
 
 ### EXP-20260712-r27-g2-forced-z-trajectory-effect
 
-Factual record for the controller-frozen R27-G2 design. The user authorized
-implementation and focused verification on 2026-07-12; both are complete.
-No pilot, scientific run root, or scientific result exists yet.
+Factual record for the controller-frozen R27-G2 design. Implementation and
+focused verification are complete. Active root:
+`/root/autodl-tmp/HMASD/r27_g2_remote/runs/r27_g2_overnight_20260713_031548`.
+Probe8 passed and the quarantined pilot is running; no scientific result exists.
 
 - Overnight execution authorization (2026-07-13 user decision): attempt the
   server directly without a pre-wake confirmation. Run a bounded 8-worker CUDA
@@ -79,9 +80,9 @@ No pilot, scientific run root, or scientific result exists yet.
   native readers and expected inventory. This policy change launched no
   experiment and changes no statistical threshold.
 
-- Status: `launch authorized / awaiting guarded cloud start`; design disposition
-  `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`. The scientific state remains
-  `NOT_RUN` until the decision-grade collector starts.
+- Status: `wiring pilot running`; design disposition
+  `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`. The pilot is operational only;
+  scientific state remains `NOT_RUN` until decision-grade collection starts.
 - Hypothesis: when one focal agent's label is held through the live recurrent
   executor, the frozen R25 arm0 actor produces temporally sustained and
   held-out label-consistent action-process differences that exceed a matched
