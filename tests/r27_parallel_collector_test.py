@@ -6,14 +6,27 @@ from ha_ctse_process.collectors import EnvStep, SubprocEnvCollector
 
 
 class FakeRemote:
-    def __init__(self, env_id: int) -> None:
+    def __init__(
+        self,
+        env_id: int,
+        *,
+        fail_send: bool = False,
+        fail_recv: bool = False,
+    ) -> None:
         self.env_id = int(env_id)
+        self.fail_send = bool(fail_send)
+        self.fail_recv = bool(fail_recv)
         self.sent: list[tuple[str, object]] = []
+        self.closed = False
 
     def send(self, payload: tuple[str, object]) -> None:
+        if self.fail_send:
+            raise BrokenPipeError(f"worker {self.env_id} send failed")
         self.sent.append(payload)
 
     def recv(self):
+        if self.fail_recv:
+            raise RuntimeError(f"worker {self.env_id} failed")
         return (
             "ok",
             EnvStep(
@@ -24,6 +37,25 @@ class FakeRemote:
                 info={"env_id": self.env_id},
             ),
         )
+
+    def close(self) -> None:
+        self.closed = True
+
+
+class FakeProcess:
+    def __init__(self) -> None:
+        self.terminated = False
+        self.joined = False
+
+    def is_alive(self) -> bool:
+        return not self.terminated
+
+    def terminate(self) -> None:
+        self.terminated = True
+
+    def join(self, timeout: float) -> None:
+        del timeout
+        self.joined = True
 
 
 def make_fake_collector(num_envs: int) -> SubprocEnvCollector:
@@ -76,3 +108,43 @@ def test_existing_step_contract_remains_all_env_list():
         [("step", "a1")],
         [("step", "a2")],
     ]
+
+
+def test_partial_selected_receive_failure_breaks_and_terminates_collector():
+    collector = make_fake_collector(3)
+    collector.remotes = (
+        FakeRemote(0),
+        FakeRemote(1, fail_recv=True),
+        FakeRemote(2),
+    )
+    collector.processes = [FakeProcess() for _ in range(3)]
+
+    with pytest.raises(RuntimeError, match="worker 1 failed"):
+        collector.step_selected([(0, "a0"), (1, "a1"), (2, "a2")])
+
+    with pytest.raises(RuntimeError, match="broken"):
+        collector.step_selected([(0, "next")])
+    collector.close()
+    assert all(remote.closed for remote in collector.remotes)
+    assert all(process.terminated for process in collector.processes)
+    assert all(process.joined for process in collector.processes)
+
+
+def test_partial_selected_send_failure_breaks_collector_before_reuse():
+    collector = make_fake_collector(3)
+    collector.remotes = (
+        FakeRemote(0),
+        FakeRemote(1, fail_send=True),
+        FakeRemote(2),
+    )
+    collector.processes = [FakeProcess() for _ in range(3)]
+
+    with pytest.raises(BrokenPipeError, match="worker 1 send failed"):
+        collector.step_selected([(0, "a0"), (1, "a1"), (2, "a2")])
+
+    assert collector.remotes[0].sent == [("step", "a0")]
+    assert collector.remotes[2].sent == []
+    with pytest.raises(RuntimeError, match="broken"):
+        collector.step_selected([(2, "next")])
+    collector.close()
+    assert all(process.terminated for process in collector.processes)

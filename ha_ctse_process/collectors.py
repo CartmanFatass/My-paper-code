@@ -122,6 +122,7 @@ class SubprocEnvCollector:
         start_method: str = "spawn",
     ):
         self.num_envs = int(num_envs)
+        self._broken = False
         ctx = mp.get_context(start_method)
         self.remotes, self.work_remotes = zip(*[ctx.Pipe() for _ in range(self.num_envs)])
         self.processes = []
@@ -165,20 +166,37 @@ class SubprocEnvCollector:
         return [self._recv(remote) for remote in self.remotes]
 
     def step_selected(self, indexed_actions):
+        if bool(getattr(self, "_broken", False)):
+            raise RuntimeError("subprocess collector is broken and cannot be reused")
         pairs = [(int(env_id), action) for env_id, action in indexed_actions]
         env_ids = [env_id for env_id, _action in pairs]
         if len(env_ids) != len(set(env_ids)):
             raise ValueError("step_selected received duplicate env_id")
         if any(env_id < 0 or env_id >= self.num_envs for env_id in env_ids):
             raise ValueError("step_selected env_id out of range")
-        for env_id, action in pairs:
-            self.remotes[env_id].send(("step", action))
-        return {
-            env_id: self._recv(self.remotes[env_id])
-            for env_id, _action in pairs
-        }
+        try:
+            for env_id, action in pairs:
+                self.remotes[env_id].send(("step", action))
+            return {
+                env_id: self._recv(self.remotes[env_id])
+                for env_id, _action in pairs
+            }
+        except Exception:
+            self._broken = True
+            raise
 
     def close(self) -> None:
+        if bool(getattr(self, "_broken", False)):
+            for remote in self.remotes:
+                try:
+                    remote.close()
+                except (BrokenPipeError, EOFError, OSError):
+                    pass
+            for process in self.processes:
+                if process.is_alive():
+                    process.terminate()
+                process.join(timeout=1.0)
+            return
         for remote in self.remotes:
             try:
                 remote.send(("close", None))
@@ -187,9 +205,12 @@ class SubprocEnvCollector:
         for remote in self.remotes:
             try:
                 self._recv(remote)
-            except (BrokenPipeError, EOFError):
+            except (BrokenPipeError, EOFError, OSError, RuntimeError):
                 pass
-            remote.close()
+            try:
+                remote.close()
+            except OSError:
+                pass
         for process in self.processes:
             process.join(timeout=2.0)
             if process.is_alive():

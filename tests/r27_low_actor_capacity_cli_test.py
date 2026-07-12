@@ -925,6 +925,8 @@ def test_aggregate_rejects_cross_mapped_parallel_snapshot_rows(tmp_path):
 def test_parallel_manifest_contract_requires_stats_and_cross_field_consistency():
     manifest = {
         "num_envs": 64,
+        "n_resets": 64,
+        "reset_seeds": list(range(1, 65)),
         "collector_backend": "subproc",
         "collector_start_method": "spawn",
         "parallel_collection_schedule": "step_major_env_id_ascending",
@@ -959,6 +961,17 @@ def test_parallel_manifest_contract_requires_stats_and_cross_field_consistency()
     wrong_reset_count = dict(manifest)
     wrong_reset_count["stats"] = dict(manifest["stats"], resets=63)
     assert collector._parallel_manifest_contract_valid(wrong_reset_count) is False
+    float_reset_count = dict(manifest)
+    float_reset_count["stats"] = dict(manifest["stats"], resets=64.0)
+    assert collector._parallel_manifest_contract_valid(float_reset_count) is False
+    boolean_steps = dict(manifest)
+    boolean_steps["active_steps_by_env"] = {
+        str(env_id): True for env_id in range(64)
+    }
+    boolean_steps["termination_reason_by_env"] = {
+        str(env_id): "terminated" for env_id in range(64)
+    }
+    assert collector._parallel_manifest_contract_valid(boolean_steps) is False
 
 
 def test_aggregate_structures_corrupt_snapshot_archive_as_invalid(tmp_path):
@@ -987,6 +1000,37 @@ def test_aggregate_structures_corrupt_snapshot_archive_as_invalid(tmp_path):
     assert collector._read_json_strict(
         tmp_path / "r27_capacity_autopsy.json"
     )["classification"] == "INVALID"
+
+
+def test_aggregate_rejects_fractional_and_cross_arm_snapshot_identity(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    checkpoint_id = "arm0_update25"
+    snapshot_dir = tmp_path / checkpoint_id / "capacity_snapshots"
+    shard = snapshot_dir / "reset_0000.npz"
+    with np.load(shard, allow_pickle=False) as original:
+        fields = {name: original[name] for name in original.files}
+    fields["env_id"] = np.asarray([0.9], dtype=np.float64)
+    fields["checkpoint_id"] = np.asarray(["arm0_final"])
+    np.savez_compressed(shard, **fields)
+    snapshot_hash = collector._snapshot_shards_sha256(snapshot_dir)
+    static_path = tmp_path / checkpoint_id / "static_capacity.json"
+    static = collector._read_json_strict(static_path)
+    static["snapshot_shards_sha256"] = snapshot_hash
+    collector._write_json(static_path, static)
+    manifest_path = tmp_path / checkpoint_id / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["snapshot_shards_sha256"] = snapshot_hash
+    manifest["static_report_sha256"] = collector._file_sha256(static_path)
+    collector._write_json(manifest_path, manifest)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+    reasons = " ".join(result["reasons"])
+
+    assert result["classification"] == "INVALID"
+    assert "reset_0000.npz env_id dtype mismatch" in reasons
+    assert "reset_0000.npz checkpoint_id mapping mismatch" in reasons
 
 
 def test_generated_static_invalid_remains_artifact_valid_through_aggregate(

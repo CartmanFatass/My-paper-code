@@ -382,6 +382,9 @@ def _snapshot_shards_sha256(snapshot_dir: Path) -> str:
 def _snapshot_shard_contract_errors(
     snapshot_dir: Path,
     manifest: dict[str, object] | None = None,
+    *,
+    checkpoint_id: str | None = None,
+    checkpoint_update: int | None = None,
 ) -> list[str]:
     paths = sorted(Path(snapshot_dir).glob("*.npz"))
     actual = [path.name for path in paths]
@@ -407,13 +410,52 @@ def _snapshot_shard_contract_errors(
                     "reset_seed": reset_id + 1,
                 }
                 for field, expected_value in expected_fields.items():
-                    values = np.asarray(data[field], dtype=np.int64).reshape(-1)
+                    raw_values = np.asarray(data[field])
+                    if (
+                        raw_values.dtype.kind not in {"i", "u"}
+                        or raw_values.dtype.kind == "b"
+                    ):
+                        errors.append(f"{path.name} {field} dtype mismatch")
+                        continue
+                    values = raw_values.reshape(-1)
                     if values.size != row_count:
                         errors.append(f"{path.name} {field} row-count mismatch")
                     elif values.size and not np.all(values == expected_value):
                         errors.append(
                             f"{path.name} {field} mapping mismatch"
                         )
+                if checkpoint_id is not None:
+                    raw_ids = np.asarray(data["checkpoint_id"])
+                    if raw_ids.dtype.kind not in {"U", "S"}:
+                        errors.append(f"{path.name} checkpoint_id dtype mismatch")
+                    else:
+                        ids = raw_ids.astype(np.str_).reshape(-1)
+                        if ids.size != row_count:
+                            errors.append(
+                                f"{path.name} checkpoint_id row-count mismatch"
+                            )
+                        elif ids.size and not np.all(ids == checkpoint_id):
+                            errors.append(
+                                f"{path.name} checkpoint_id mapping mismatch"
+                            )
+                if checkpoint_update is not None:
+                    raw_updates = np.asarray(data["checkpoint_update"])
+                    if raw_updates.dtype.kind not in {"i", "u"}:
+                        errors.append(
+                            f"{path.name} checkpoint_update dtype mismatch"
+                        )
+                    else:
+                        updates = raw_updates.reshape(-1)
+                        if updates.size != row_count:
+                            errors.append(
+                                f"{path.name} checkpoint_update row-count mismatch"
+                            )
+                        elif updates.size and not np.all(
+                            updates == int(checkpoint_update)
+                        ):
+                            errors.append(
+                                f"{path.name} checkpoint_update mapping mismatch"
+                            )
         except (EOFError, KeyError, OSError, ValueError, zipfile.BadZipFile) as error:
             errors.append(f"{path.name} identity read failed: {error}")
     if manifest is not None:
@@ -434,6 +476,22 @@ def _parallel_manifest_contract_valid(manifest: dict[str, object]) -> bool:
     active_steps = manifest.get("active_steps_by_env")
     termination_reasons = manifest.get("termination_reason_by_env")
     stats = manifest.get("stats")
+    exact_id_map = bool(
+        isinstance(manifest.get("env_id_to_reset_id"), dict)
+        and set(manifest["env_id_to_reset_id"]) == set(expected_ids)
+        and all(
+            type(value) is int and value == expected_ids[key]
+            for key, value in manifest["env_id_to_reset_id"].items()
+        )
+    )
+    exact_seed_map = bool(
+        isinstance(manifest.get("env_id_to_reset_seed"), dict)
+        and set(manifest["env_id_to_reset_seed"]) == set(expected_seeds)
+        and all(
+            type(value) is int and value == expected_seeds[key]
+            for key, value in manifest["env_id_to_reset_seed"].items()
+        )
+    )
     dwell_consistent = bool(
         isinstance(active_steps, dict)
         and isinstance(termination_reasons, dict)
@@ -444,24 +502,30 @@ def _parallel_manifest_contract_valid(manifest: dict[str, object]) -> bool:
             )
             or (
                 termination_reasons.get(env_id) in {"terminated", "truncated"}
-                and isinstance(active_steps.get(env_id), int)
+                and type(active_steps.get(env_id)) is int
                 and 1 <= active_steps[env_id] <= 500
             )
             for env_id in expected_ids
         )
     )
     return bool(
-        manifest.get("num_envs") == 64
+        type(manifest.get("num_envs")) is int
+        and manifest.get("num_envs") == 64
+        and type(manifest.get("n_resets")) is int
+        and manifest.get("n_resets") == 64
+        and isinstance(manifest.get("reset_seeds"), list)
+        and manifest.get("reset_seeds") == list(range(1, 65))
+        and all(type(value) is int for value in manifest["reset_seeds"])
         and manifest.get("collector_backend") == "subproc"
         and manifest.get("collector_start_method") == "spawn"
         and manifest.get("parallel_collection_schedule")
         == "step_major_env_id_ascending"
-        and manifest.get("env_id_to_reset_id") == expected_ids
-        and manifest.get("env_id_to_reset_seed") == expected_seeds
+        and exact_id_map
+        and exact_seed_map
         and isinstance(active_steps, dict)
         and set(active_steps) == set(expected_ids)
         and all(
-            isinstance(value, int) and 1 <= value <= 500
+            type(value) is int and 1 <= value <= 500
             for value in active_steps.values()
         )
         and isinstance(termination_reasons, dict)
@@ -470,10 +534,11 @@ def _parallel_manifest_contract_valid(manifest: dict[str, object]) -> bool:
         <= {"terminated", "truncated", "step_limit"}
         and dwell_consistent
         and isinstance(stats, dict)
+        and type(stats.get("resets")) is int
         and stats.get("resets") == 64
-        and isinstance(stats.get("renewal_events"), int)
+        and type(stats.get("renewal_events")) is int
         and int(stats["renewal_events"]) >= 0
-        and isinstance(stats.get("snapshot_rows"), int)
+        and type(stats.get("snapshot_rows")) is int
         and int(stats["snapshot_rows"]) >= 0
         and stats.get("renewal_events") == stats.get("snapshot_rows")
     )
@@ -518,7 +583,14 @@ def validate_synthetic_snapshot_source(
         .tolist()
     )
     errors: list[str] = []
-    errors.extend(_snapshot_shard_contract_errors(snapshot_root, manifest))
+    errors.extend(
+        _snapshot_shard_contract_errors(
+            snapshot_root,
+            manifest,
+            checkpoint_id="arm0_final",
+            checkpoint_update=32,
+        )
+    )
     if checkpoint_ids != {"arm0_final"} or checkpoint_updates != {32}:
         errors.append(
             "snapshot rows are not arm0_final/update32: "
@@ -1896,7 +1968,12 @@ def validate_aggregate_artifacts(
         checkpoint_identity = manifest.get("checkpoint_identity", {})
         errors.extend(
             f"{checkpoint_id} {reason}"
-            for reason in _snapshot_shard_contract_errors(snapshot_dir, manifest)
+            for reason in _snapshot_shard_contract_errors(
+                snapshot_dir,
+                manifest,
+                checkpoint_id=checkpoint_id,
+                checkpoint_update=int(registered["update_idx"]),
+            )
         )
         try:
             actual_snapshot_sha256 = _snapshot_shards_sha256(snapshot_dir)
