@@ -66,36 +66,80 @@ hand-picked fixed duration in a short run.  The important question is whether
 HA-CTSE can reconstruct HMASD's skill-discovery, skill-differentiation, and
 actually-work intrinsic drive under asynchronous skill lifetimes.
 
-## Round 26 G1a Individual-Skill Behavior Screening (launch-ready gate)
+## Round 27 G1 Low-Actor Capacity Autopsy (implemented and launch-ready)
 
-Status (2026-07-11): the traditional HMASD R24/R25/R26 line continues here;
-IMOD is a separate migrated project/track and does not replace or redefine this
-line. The reward-off R26-G1a behavior-window dataset/analyzer, frozen-checkpoint
-collector, and exact six-checkpoint sequential CUDA runner are implemented.
-Task reviews and final verification are clean: 52 focused tests pass, along
-with compilation, runner dry-run/parser, CUDA/cardinality, diff, and output-
-hygiene checks.
+Status (2026-07-12): R27-G1 is the current traditional-line gate after the
+R26-G1a primary arm0 family failed with no checkpoint PASS at update 25,
+update 30, or final. R27 asks whether the existing strict-HMASD MAPPO low actor
+has unused `z_i`-conditioned action capacity, loses static sensitivity through
+recurrent carryover, has a weak static FiLM path, or was missed by the R26
+observational instrument.
 
-The scientific six-checkpoint experiment has **not** been launched. It is
-launch-ready and awaits explicit user approval for approximately 30--45 minutes
-of local CUDA work. The exact runner is
-`scripts/run_r26_g1_screening_local_cuda.ps1`; current experiment facts, run
-root, and launch command belong in `memory/ExpRecord.md`.
+Accepted sources:
 
-Gate read:
+- `docs/superpowers/specs/2026-07-11-r27-g1-low-actor-capacity-autopsy-design.md`
+- `docs/superpowers/plans/2026-07-11-r27-g1-low-actor-capacity-autopsy.md`
 
-- Evaluate arm0 update 25, update 30, and final independently against the full
-  pre-registered per-checkpoint gate in the accepted R26-G1a design.
-- The arm0 family passes only if at least 2 of 3 checkpoints pass in the same
-  direction. Arm2 is contextual contrast only and cannot rescue arm0.
-- PASS authorizes only a separately designed R26-G1b forced-`z_i` intervention,
-  with rewards still off.
-- FAIL redirects mechanism work to actor-conditioning/discoverer capacity;
-  MIXED or UNDERPOWERED follows the accepted instrument/support decision tree.
-  Do not tune the gate after observing results.
-- `q_A`, `q_d`, and `q_D` reward paths remain blocked/default-off. Neither
-  implementation verification nor a future G1a pass authorizes reward
-  injection, a reward sweep, or scale-up.
+Implementation and review receipt:
+
+- Commits `c6136e2`, `9df2e3e`, `bf55ad2`, `7cbc8de`, `72420ea`, `6ce55e3`,
+  `47399aa`, `5395331`, `aafaa8d`, `d6978bf`, and `10f4615` implement and
+  harden the immutable snapshots, static actor audit, synthetic active/sham
+  control, frozen CLI, exact runner, and artifact/gate identity contract.
+- Final `SolImplementationReviewerFrontier` verdicts are PASS for spec
+  compliance, code quality, runner/artifact contract, and launch readiness;
+  the raw report is `logs/r27_g1_capacity_build_20260711/review_final.md`.
+- The focused R27 plus R26 regression matrix passed `74 tests in 18.23s`.
+  PowerShell parser, Python AST, scoped diff hygiene, forbidden-core-file diff,
+  registered-checkpoint identity, and CUDA/64-reset/exact-3+1+1/no-write dry-run
+  checks passed.
+
+Scientific status and next gate:
+
+- Status remains **`ready_not_launched`**. The exact runner is
+  `scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1`; it requires a separate
+  explicit user launch instruction.
+- Expected cost is 2.5--3.5 hours on the local RTX 4070 Laptop GPU with
+  `NResets=64`; CPU fallback is forbidden.
+- The audit is reward-off and frozen. It does not modify the actor, recurrent
+  reset semantics, policy/critic architecture, PPO, optimizer/loss/advantage
+  logic, collector semantics, environment dynamics, source checkpoints, or
+  any reward path.
+- The only scientific outputs are the pre-registered classifications
+  `CAPACITY_PRESENT_OBJECTIVE_MISSING`, `RECURRENT_WASHOUT`,
+  `STATIC_PATH_CAPACITY_WEAK`, `STATIC_USED_OBSERVATIONAL_MISS`,
+  `UNDERPOWERED`, or `INVALID`. No classification exists before the audit runs
+  and its evidence is reviewed.
+- Actor redesign, post-GRU FiLM, action-head residuals, hidden-state reset,
+  q_A/q_d/q_D or other reward injection, and long training/scale-up remain
+  prohibited while this gate is open.
+
+Known unrelated baseline debt remains: the bounded standalone evaluation
+subset had `3 passed, 1 failed` because its legacy `make_args()` fixture omits
+`args.log_dir`, now required when `train.evaluate()` writes
+`metrics/eval_episodes.csv`. R27 did not modify that fixture, `train.py`, or the
+evaluation path.
+
+Principle status: no `memory/ALGORITHM_PRINCIPLES.md` change is required at this
+boundary. R27 implements the existing reward-off causal discipline for
+`individual skill z_i -> persistent executable behavior`; it does not promote a
+new algorithm principle.
+
+## Round 26 G1a Individual-Skill Behavior Screening (completed precursor gate)
+
+Status (2026-07-12): the reward-off six-checkpoint screen was run and read. The
+primary arm0 family failed because none of update 25, update 30, or final passed
+the pre-registered held-out behavior gate. Arm2 remained contextual contrast
+and could not rescue arm0.
+
+Disposition:
+
+- The failed observational screen authorizes R27-G1 capacity classification,
+  not R26-G1b, reward injection, or actor redesign.
+- `q_A`, `q_d`, and `q_D` reward paths remain blocked/default-off.
+- Do not retune the R26 gate after observing results; use the accepted R27
+  decision tree to separate capacity, recurrent washout, objective pressure,
+  and observational-instrument explanations.
 
 ## Round 24 Assignment-to-Behavior Bridge (completed gate)
 

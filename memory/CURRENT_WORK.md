@@ -1,21 +1,24 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-11
+Updated: 2026-07-12
 
 Purpose: compact first-read state for the current work only. Full historical
 context is archived under `memory/LTM/`.
 
 ## Controller Handoff
 
-- 2026-07-11: Codex is the active controller for the traditional HMASD
-  R24/R25/R26 line on branch `aggressive`. The reviewed R26-G1a work was
-  fast-forwarded from `codex/r26-g1a` at `1bc3456` while preserving the
-  pre-existing aggressive working tree through stash/apply conflict resolution.
-  R26-G1a implementation and verification are complete, but the scientific
-  six-checkpoint screen has not run. The current gate is explicit user approval
-  for an estimated 30--45 minutes of local CUDA work. IMOD remains a separate
-  migrated project/track and does not replace or redefine this line. The
-  binding handover protocol below remains in force.
+- 2026-07-12: Codex is the active controller for the traditional HMASD
+  R24/R25/R26/R27 line on branch `aggressive`. R26-G1a failed its primary arm0
+  family gate: none of update 25, update 30, or final passed the pre-registered
+  held-out behavior screen. The current gate is the reward-off R27-G1 frozen
+  low-actor capacity autopsy. Implementation commits through `10f4615` are
+  complete; the final Frontier review passed spec compliance, code quality,
+  runner/artifact contract, and launch readiness, and the focused matrix passed
+  `74 tests in 18.23s`. The scientific audit remains `ready_not_launched` and
+  requires a separate explicit user instruction for approximately 2.5--3.5
+  hours of local CUDA work with `NResets=64`. IMOD remains a separate migrated
+  project/track and does not replace or redefine this line. The binding
+  handover protocol below remains in force.
 - 2026-07-11 subagent cache policy update: project runtime capacity is now
   `max_threads = 12`. The controller must reuse compatible child threads by
   `(profile, model/reasoning, sandbox, workstream, ownership)` for sequential
@@ -63,22 +66,24 @@ context is archived under `memory/LTM/`.
 
 ## Current Objective
 
-- Current traditional-line gate: launch the reward-off R26-G1a frozen-policy
-  screen only after explicit user approval. It asks whether naturally assigned
-  individual `z_i` labels leave stable held-out local behavior signatures beyond
-  assignment context/history and matched nulls. The implementation includes
-  the behavior-window dataset, analyzer, frozen collector, and exact
-  six-checkpoint CUDA runner; the final focused verification is clean with
-  `52 passed`.
+- Current traditional-line gate: launch the reward-off R27-G1 frozen low-actor
+  capacity autopsy only after a separate explicit user instruction. It asks
+  whether the existing strict-HMASD MAPPO low actor has unused
+  `z_i`-conditioned action capacity, loses static sensitivity through recurrent
+  carryover, has a weak static FiLM path, or was missed by the R26 observational
+  instrument. The exact audit is implemented and fully reviewed, but no R27
+  scientific classification exists yet.
 - IMOD-Direct is a separate migrated project/track. Its design state must not
-  replace, redefine, or supply evidence for the traditional R24/R25/R26 line.
+  replace, redefine, or supply evidence for the traditional R24/R25/R26/R27
+  line.
 - Reach HMASD-level S7-S1 behavior at roughly 1e6 steps before returning to
   S7-S3.
 - Treat 160k/320k runs as mechanism gates, not final HMASD-comparison verdicts.
-- Current main line: R24 Assignment-to-Behavior Bridge. R23-next validated the
-  q_A residual path as high-level `Z -> xi` actionability; R25 verification
-  read complete (2026-07-10): q_A mechanism NOT VERIFIED at 1M scale, n=1 seed,
-  demoted to default-off per Round 6 peer review (D1 ACCEPTED).
+- Current main line: R27-G1 on the causal edge
+  `individual skill z_i -> persistent executable behavior`. R23-next validated
+  high-level `Z -> xi` actionability, R25 did not verify q_A reward at 1M, and
+  R26-G1a found no arm0 checkpoint PASS; R27 now separates low-actor capacity,
+  recurrent washout, missing specialization pressure, and observational miss.
 - Current state update: completion of R24 frozen q_d null-probe core Tasks 1-4 after
   full review chain:
   - Added `ha_ctse_process/r24_qd_dataset.py` with detached `q_d` window export
@@ -110,13 +115,16 @@ context is archived under `memory/LTM/`.
 - `memory/R22_TARGET_ENTROPY_DESIGN.md`: entropy design constraints.
 - `docs/superpowers/plans/2026-07-08-r24-frozen-qd-null-probes.md`: frozen
   same-capacity q_d null-probe diagnostics for cloud-gate continuation.
+- No `memory/ALGORITHM_PRINCIPLES.md` change is needed at the R27 implementation
+  boundary; the audit applies the existing reward-off causal-gate contract.
 
 ## Active Plan Pointers
 
-- `docs/superpowers/specs/2026-07-11-r26-g1a-individual-skill-behavior-screening-design.md`:
-  accepted reward-off G1a design and pre-registered gates.
-- `docs/superpowers/plans/2026-07-11-r26-g1a-individual-skill-behavior-screening.md`:
-  implemented R26-G1a plan; scientific launch remains a separate user decision.
+- `docs/superpowers/specs/2026-07-11-r27-g1-low-actor-capacity-autopsy-design.md`:
+  accepted reward-off R27-G1 design and fixed classification gates.
+- `docs/superpowers/plans/2026-07-11-r27-g1-low-actor-capacity-autopsy.md`:
+  implemented and reviewed R27-G1 plan; scientific launch remains a separate
+  explicit user decision.
 - `AGENTS.md`: project-level Codex entrypoint; read before relying on deeper
   docs or historical memory. It defines the main-controller protocol,
   controller communication contract (situation, meaning, next plan,
@@ -211,19 +219,25 @@ context is archived under `memory/LTM/`.
 
 ## Current Experiment Focus
 
-- R26-G1a individual-skill behavior-window screening is **launch-ready, not
-  launched**. Exact runner:
-  `scripts/run_r26_g1_screening_local_cuda.ps1`; experiment facts and the exact
-  run command/root are in `memory/ExpRecord.md`. Expected local CUDA wall time
-  is approximately 30--45 minutes, pending explicit user approval.
-- Read each checkpoint against the full pre-registered gate. The primary arm0
-  family passes only if at least 2 of update 25, update 30, and final pass in
-  the same direction. Arm2 is contextual contrast only and cannot rescue an
-  arm0 failure.
-- A G1a pass authorizes only R26-G1b forced-`z_i` design with rewards still off.
-  Fail/mixed/underpowered outcomes follow the accepted decision tree and do not
-  authorize reward injection. `q_A`/`q_d`/`q_D` reward paths remain
-  blocked/default-off while this gate is open.
+- `EXP-20260711-r27-g1-low-actor-capacity-autopsy` is
+  **`ready_not_launched`**. Exact runner:
+  `scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1`; expected cost is
+  2.5--3.5 hours on the local RTX 4070 Laptop GPU with `NResets=64` and no CPU
+  fallback. A separate explicit user launch instruction is still required.
+- Implementation commits `c6136e2`, `9df2e3e`, `bf55ad2`, `7cbc8de`,
+  `72420ea`, `6ce55e3`, `47399aa`, `5395331`, `aafaa8d`, `d6978bf`, and
+  `10f4615` are complete. Final Frontier verdicts are PASS for spec compliance,
+  code quality, runner/artifact contract, and launch readiness. The focused
+  verification result is `74 passed in 18.23s`; parser, AST, diff hygiene,
+  forbidden-core-file, exact-checkpoint, and CUDA 3+1+1 no-write dry-run checks
+  passed.
+- R27 is a reward-off frozen diagnostic only. It changes no reward, actor,
+  policy/critic architecture, optimizer/loss/advantage logic, collector
+  semantics, environment dynamics, or source checkpoint, and it authorizes no
+  actor redesign or q_A/q_d/q_D change before classification review.
+- Known unrelated baseline debt remains: the legacy standalone evaluation
+  fixture lacks `args.log_dir` (`3 passed, 1 failed` in that bounded baseline
+  subset). R27 did not modify the fixture, `train.py`, or the evaluation path.
 - `EXP-20260710-r25-qa-verification-1m` — completed 1M-step verification on 64env, 1 seed, 2 arms; external peer review Round 6 (GPT-5.6-sol max xhigh); disposition ACCEPTED 2026-07-10. q_A NOT VERIFIED at verification gate (demoted to default-off, D1); HMASD parity OPEN pending update-count deconfound (D2); R26 pivot to G1 individual-skill diagnostics approved (D3).
 - `EXP-20260709-r24-frozen-qd-null-probes` — completed 4/4 cloud runs with external peer review (Round 5, GPT-5.5 xhigh); disposition ACCEPTED 2026-07-09.
 - R24-1 verdict: **FAIL accepted** with wording condition: "fail under the tested policies and current diagnostic setup" (3 of 4 policies collapsed), NOT a categorical universal negative. q_d/q_D rewards remain BLOCKED on this evidence line.
@@ -256,12 +270,13 @@ context is archived under `memory/LTM/`.
 
 ## Next Actions
 
-1. Await explicit user approval before launching the exact R26-G1a
-   six-checkpoint local-CUDA runner (estimated 30--45 minutes). Do not infer a
-   scientific pass from implementation tests or smoke artifacts.
-2. After a launch completes, read the per-checkpoint gate and the arm0 2-of-3
-   family gate before choosing PASS/FAIL/MIXED/UNDERPOWERED. Arm2 remains
-   contextual; a pass advances only to G1b design with rewards off.
+1. Await a separate explicit user instruction before launching the exact R27-G1
+   local-CUDA runner (estimated 2.5--3.5 hours, `NResets=64`). Do not infer a
+   root-cause classification from implementation tests or review verdicts.
+2. After a launch completes, read the three arm0 static reports, three fixed-seed
+   synthetic active/sham reports, and aggregate two-of-three classification
+   before authorizing any next design. `INVALID`/`UNDERPOWERED` repeats the same
+   instrument without changing thresholds.
 3. Treat the completed R25 arm0/arm2 archives and HMASD baseline as standing
    references. Reuse their curves/checkpoints; do not rerun those controls.
 4. Optional cheap q_A interference diagnostics may use existing R25 artifacts:
@@ -275,16 +290,17 @@ context is archived under `memory/LTM/`.
    device class, and no reward unblocking from an unexpected pass.
 7. IMOD design and implementation continue only in the separate
    `C:\project\IMOD` workspace; do not use IMOD state as evidence for this
-   traditional R24/R25/R26 line.
+   traditional R24/R25/R26/R27 line.
 8. Do NOT proceed to q_d/q_D reward arms or a new intrinsic reward. q_d/q_D
-   remain BLOCKED by R24-1 and the R26-G1a/G1b sequence.
+   remain BLOCKED by R24-1 and the open R27 classification gate.
 
 ## Do Not Do Yet
 
-- Do not launch R26-G1a without explicit user approval. Do not treat `52 passed`,
-  dry-run checks, or implementation smokes as scientific checkpoint evidence.
-  Do not enable `q_A`, `q_d`, or `q_D` reward paths; even a G1a family pass
-  authorizes only G1b design.
+- Do not launch R27-G1 without a separate explicit user instruction. Do not
+  treat `74 passed in 18.23s`, dry-run checks, or four Frontier PASS verdicts as
+  a scientific capacity result. Do not redesign the actor, reset recurrent
+  hidden state, add post-GRU FiLM/action-head residuals, or enable `q_A`, `q_d`,
+  `q_D`, or another reward path before the R27 classification is reviewed.
 - Do not re-run the standing-reference runs (user directive 2026-07-10): the
   HMASD baseline (REF-20260617) and the completed R25 baseline/control arms
   (arm0_arch_only, arm2_qA_reward archives) are fixed comparison data. Future
