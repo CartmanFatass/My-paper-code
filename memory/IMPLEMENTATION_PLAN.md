@@ -169,16 +169,17 @@ serial-cost acceptance or validated concurrent topology. Final success and
 complete collection revalidate all 192 reset artifacts plus both aggregate
 reports rather than trusting status text. Aggregate reports are regenerated
 from the current 192 structured reset artifacts rather than using a stale-input
-identity layer. The remote preflight and checkpoint
-data-disk sync passed under the superseded package workflow on 2026-07-12. The
-new Git-source workflow passed all local simulations but has not contacted the
-server: it is asleep, and the user requires notification before it is awakened
-or used. The dirty-scope review bundle
-`r27_g2_runtime_20260712_223642_review_crc.zip` is retained only as a historical
-review artifact and is not source or launch authority. A new non-launching
-Git-based `prepare` remains pending server wake-up and committed/pushed source.
-No experiment launch has occurred. A local process audit found no live experiment to migrate;
-future compute-bearing work remains cloud CUDA by default.
+identity layer. On 2026-07-13 the GitHub SSH default and Windows OpenSSH state
+serialization were validated, then the non-launching `prepare` passed against
+the live server. It rechecked CUDA, the separate data filesystem, free space,
+`screen`, and all three cached checkpoints; fast-forwarded the clean data-disk
+checkout to commit `60ac83e`; and rendered all 192 reset commands plus the
+aggregate command in zero-write dry-run mode. Final read-only validation
+confirmed a two-line Bash-readable source pointer, no current-run pointer, no
+dry-run directory, and no R27 `screen` session. The old review ZIP is historical
+only and is not source or launch authority. No experiment launch has occurred.
+A local process audit found no live experiment to migrate; future
+compute-bearing work remains cloud CUDA by default.
 
 ## Round 27 G1 Low-Actor Capacity Autopsy (completed and accepted)
 

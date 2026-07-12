@@ -37,7 +37,7 @@ experiment brief.
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260712-r27-g2-forced-z-trajectory-effect | planned — implementation and focused verification complete; Git-based cloud prepare pending server wake-up; pilot and launch not authorized | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | planned cloud CUDA; registered user-provided R25 arm0 update25/update30/final checkpoint slots; 64 reset groups; 55 branches/reset; no scientific run root exists | Controller | notify user before server use; then separate pilot/launch and concurrency decision | `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`; raw review `docs/external-review/R27_G2_design_review_20260712_Claude.md` | Design disposition `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`; implementation does not change the scientific contract. Exact decision-grade Stage 1 is 2,124,000 env steps plus diagnostic forwards, estimated 12-20h cloud CUDA. No experiment has run. |
+| EXP-20260712-r27-g2-forced-z-trajectory-effect | planned — implementation, focused verification, and non-launching Git cloud prepare complete; pilot and launch not authorized | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | planned cloud CUDA; clean data-disk source at `60ac83e`; registered R25 arm0 update25/update30/final checkpoints; 64 reset groups; 55 branches/reset; no scientific run root exists | Controller | separately validate safe concurrency, then obtain an explicit pilot or decision-grade launch decision | `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`; raw review `docs/external-review/R27_G2_design_review_20260712_Claude.md` | Design disposition `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`; implementation and prepare do not change the scientific contract. Exact decision-grade Stage 1 is 2,124,000 env steps plus diagnostic forwards, estimated 12-20h cloud CUDA only with a validated flattened queue. No experiment has run. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — downloaded archive verified and controller disposition accepted 2026-07-12 | R27-G1 reward-off low-actor capacity autopsy | cloud CUDA, 64 parallel subprocess envs, exactly 64 total reset groups, exact R25 arm0 update25/update30/final checkpoints; run `logs/r27_g1_capacity_autopsy_cloud64_20260712_151313/` | Controller disposition complete | no rerun; standing evidence for R27-G2 only | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; `logs/r27_g1_result_read_20260712/reports/expmanager_intake.md`; `r27_capacity_autopsy.{json,md}` under the extracted run root | Controller accepts `STATIC_USED_OBSERVATIONAL_MISS`, narrowly immediate `z_i`-conditioned action-distribution sensitivity. Static and synthetic families PASS 3/3 with artifact identity PASS. Persistence, downstream effect, reward usefulness, and task improvement remain unverified. |
 | EXP-20260711-r26-g1a-individual-skill-screening | completed — six arms succeeded and controller result boundary accepted 2026-07-12 | R26-G1a reward-off screening | local CUDA (RTX 4070 Laptop 8 GB), six frozen R25 checkpoints | Controller disposition complete | no rerun; preserve as natural observational negative beside R27 forced-capacity evidence | `logs/r26_g1a_screening_20260711_105522/`; six per-arm `analysis/r26_g1_behavior.{json,md}` artifacts | Batch succeeded 6/6; all analyzers valid and adequately powered. arm0 final is FAIL, update25/update30 are MIXED, so no arm0 checkpoint passes and the primary arm0 family is FAIL. All arm2 checkpoints are MIXED and contextual only. Reward remains off. |
 | EXP-20260710-r25-qa-verification-1m | completed / read + dispositioned 2026-07-10; arm0/arm2 archives now standing-reference (DO NOT RE-RUN — user directive 2026-07-10) | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed single-seed gate analysis complete | `dist/logs_cloud_r25_qa_verification_1m/` (cloud archive); `gate_read_r25_seed1.md` (result analyst read); peer review Round 6 archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | arm0 arch-only beats arm2 q_A at 640k-960k (coverage 0.235→0.417 vs 0.052→0.113; throughput 13.76 vs 2.81 Mbps @960k); neither reaches HMASD milestones (0.7@480k, 0.9@800k); q_A reward demoted to default-off by Round 6 peer review (NOT VERIFIED at 1M verification gate under n=1 single-seed setup); parity OPEN (update-count confound: 32 updates vs HMASD ~2×/step). |
@@ -158,15 +158,18 @@ No pilot, scientific run root, or scientific result exists yet.
   `all` additionally require the exact experiment authorization, a clean
   committed Git source scope, and an explicitly accepted/validated worker-cost
   topology.
-- Git workflow update (2026-07-13, mechanical, no remote contact): source now
-  comes only from a named, clean data-disk Git checkout updated by
-  `fetch`/`checkout`/`pull --ff-only`; the former local ZIP and deployed copy are
-  historical review artifacts only. The runner always regenerates its aggregate
-  from the current 192 shards. All 154 targeted Python, PowerShell, runner, and
-  watcher tests are covered and pass; task-created pytest temporary directories
-  were removed. The server remained asleep as requested. A new non-launching
-  `prepare` requires committed/pushed source and prior user confirmation that
-  the server is awake. A dirty source tree cannot pass the launch gate.
+- Git workflow update (2026-07-13, mechanical, no experiment run): source comes
+  only from a named, clean data-disk Git checkout updated by
+  `fetch`/`checkout`/`pull --ff-only`; prior ZIP/deployed copies are historical
+  review artifacts only. GitHub SSH replaced the unreliable server-side HTTPS
+  path. Three controller-state writers use a Windows-OpenSSH-safe single-quoted
+  `printf` format; the focused remote workflow passes 10/10 including native
+  Windows PowerShell 5.1 argument transport. Live non-launching `prepare`
+  fast-forwarded the server checkout to `60ac83e`, confirmed the cached
+  checkpoints, and rendered the 192 resets plus aggregate without writes.
+  Read-only validation confirmed the two-line source pointer is sourceable and
+  that no run pointer, dry-run directory, or R27 `screen` exists. A dirty source
+  tree cannot pass the launch gate.
 - Local-compute audit after the user's migration request: PID 48760 was an
   `SB3`-environment regression process and had already exited. A full process
   check found no remaining local Python/HMASD/IMOD training or WSL experiment;
@@ -195,9 +198,10 @@ hook applies active/neutral FiLM, advances actor and critic hidden exactly once,
 returns distribution/action/value/new-hidden evidence from the same transition,
 and leaves roster/clocks unchanged. Focused verification is complete.
 
-**Open gate**: a separate user decision is required for a pilot or launch.
-Before even non-launching server `prepare`, commit/push the intended Git source,
-notify the user, and wait for confirmation that the sleeping server is awake.
+**Open gate**: non-launching cloud preparation is complete. A safe concurrent
+process/GPU topology must be validated before the registered 12–20 h estimate
+applies, and a separate user decision is still required for any pilot or
+decision-grade launch.
 
 ## Completed Experiment Detail
 

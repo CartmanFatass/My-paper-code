@@ -67,23 +67,25 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 - The primary control is **hold vs a matched 10-step pulse**, not raw closed-loop
   divergence. Gated windows are steps 1-10, 11-20, 31-40 (native R25 durations
   are 10/20/30/40). H50 is descriptive stress, not native-duration evidence.
-- Local verification covers all 154 targeted Python/PowerShell/Bash workflow
-  tests. The Git-based remote lifecycle is locally verified but has not run a
-  new `prepare`: the server is asleep by user instruction. Before any SSH or
-  server action, notify the user and wait for confirmation that it is awake.
-  `launch`/`all` remain fail-closed behind explicit experiment authorization.
+- Targeted local verification is complete; the remote-workflow subset passes
+  10/10, including Windows PowerShell 5.1 native-argument transport into Bash.
+- Non-launching Git-based cloud `prepare` passed on 2026-07-13. The clean
+  data-disk checkout is at commit `60ac83e`, its two-line source pointer is
+  Bash-readable, all three checkpoints are cached, and the 192-reset dry-run
+  wrote no run directory. No R27 `screen` or scientific run exists.
+- `launch`/`all` remain fail-closed behind explicit experiment authorization.
 
 Everything else on the dashboard is `completed` or `standing-reference`. R25
 arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Hold. R27-G2 is implemented and locally verified. Before cloud use, commit
-   and push only the intended source, notify the user to wake the server, then
-   run non-launching Git-based `prepare`. A pilot (<90k steps, cannot contribute
-   to the gate) or decision-grade run (2.124M steps, 12–20 h cloud CUDA) still
-   requires a separate user decision. Do not invoke guarded `launch`/`all`
-   under the present authorization.
+1. Hold. R27-G2 implementation and non-launching cloud preparation are
+   complete. Before compute, separately validate a safe concurrent process/GPU
+   topology and obtain an explicit pilot or decision-grade launch decision. A
+   pilot is <90k steps and cannot contribute to the gate; decision grade is
+   2.124M steps and 12–20 h cloud CUDA only with the validated flattened queue.
+   Do not invoke guarded `launch`/`all` under the present authorization.
 2. Preserve the R27-G1 qualification: immediate action sensitivity verified;
    persistence and downstream effect open. Preserve the R26 FAIL narrowly.
 3. Optional cheap diagnostics may reuse existing R25 artifacts (correlate q_A
