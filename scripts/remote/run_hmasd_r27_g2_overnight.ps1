@@ -131,7 +131,9 @@ write_overall() {
 
 write_phase() {
   local phase="$1" state="$2" exit_code="$3" log_path="$4" run_root="$5"
-  local target="$STATUS_ROOT/$phase.env" tmp="$target.tmp.$$"
+  local target tmp
+  target="$STATUS_ROOT/$phase.env"
+  tmp="$target.tmp.$$"
   printf '%s\n' \
     "phase=$phase" "state=$state" "exit_code=$exit_code" \
     "log_path=$log_path" "run_root=$run_root" "updated_at=$(date -Is)" > "$tmp"
