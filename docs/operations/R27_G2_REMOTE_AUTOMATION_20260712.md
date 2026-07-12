@@ -19,9 +19,9 @@ Source sync defaults to the GitHub SSH remote
 remote through its existing GitHub SSH credentials; HTTPS clone is not used
 because outbound GitHub HTTPS was unreliable on this host.
 
-Current operator gate (2026-07-13): the server is asleep. Before any SSH,
-`prepare`, status check, or launch action, notify the user and wait for explicit
-confirmation that the server has been awakened.
+Current operator state (2026-07-13): the user explicitly awakened the server
+for non-launching preparation and status checks. If the user later reports it
+as sleeping, notify them and wait for a new wake confirmation before SSH use.
 
 All large or persistent remote state is rooted under
 `/root/autodl-tmp/HMASD/`. The wrapper rejects a source/run/checkpoint root on
@@ -87,6 +87,11 @@ a foreground SSH child or bare `nohup` job. The session name and launch script
 are recorded in `controller/current_run.env`, and status/wait/collect all use
 that recorded session identity. SSH disconnection therefore does not terminate
 the runner.
+
+The controller `.env` files are emitted as newline-separated safe shell
+assignments with a single-quoted `printf` format. This is intentional: Windows
+OpenSSH may otherwise remove a double-quoted remote format before Bash parses
+its `\n` escapes.
 
 An old `batch_status.txt` is never sufficient proof of completion. Reissuing
 the guarded launch enters the Git-tracked runner's artifact-aware resume path.

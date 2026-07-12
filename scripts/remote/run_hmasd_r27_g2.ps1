@@ -267,8 +267,9 @@ test -z "`$(git status --porcelain --untracked-files=normal)"
 test -f scripts/run_r27_g2_forced_trajectory_effect_cloud_64env.sh
 test -f scripts/audit_r27_forced_trajectory_effect.py
 test -f ha_ctse_process/r27_g2_collector.py
-printf "repo_dir='%s'\ngit_branch='%s'\n" \
-  '$RemoteRepoRoot' '$script:ResolvedGitBranch' \
+printf '%s\n' \
+  'repo_dir=$RemoteRepoRoot' \
+  'git_branch=$script:ResolvedGitBranch' \
   > '$RemoteBase/controller/current_source.env'
 "@
     Invoke-Remote $command | Out-Null
@@ -336,10 +337,16 @@ else
   LAUNCH_SCRIPT='$RemoteBase/controller/remote_launcher_$runStamp.sh'
   RUN_MAX_WORKERS='$MaxWorkers'
   RUN_CONCURRENCY_VALIDATED='$validated'
-  printf "REPO_DIR='%s'\nGIT_BRANCH='%s'\nRUN_ROOT='%s'\nLAUNCHER_LOG='%s'\nSCREEN_SESSION='%s'\nLAUNCH_SCRIPT='%s'\nRUN_MAX_WORKERS='%s'\nRUN_CONCURRENCY_VALIDATED='%s'\n" \
-    "`$REPO_DIR" "`$GIT_BRANCH" "`$RUN_ROOT" \
-    "`$LAUNCHER_LOG" "`$SCREEN_SESSION" "`$LAUNCH_SCRIPT" "`$RUN_MAX_WORKERS" \
-    "`$RUN_CONCURRENCY_VALIDATED" > "`$state_file"
+  printf '%s\n' \
+    "REPO_DIR=`$REPO_DIR" \
+    "GIT_BRANCH=`$GIT_BRANCH" \
+    "RUN_ROOT=`$RUN_ROOT" \
+    "LAUNCHER_LOG=`$LAUNCHER_LOG" \
+    "SCREEN_SESSION=`$SCREEN_SESSION" \
+    "LAUNCH_SCRIPT=`$LAUNCH_SCRIPT" \
+    "RUN_MAX_WORKERS=`$RUN_MAX_WORKERS" \
+    "RUN_CONCURRENCY_VALIDATED=`$RUN_CONCURRENCY_VALIDATED" \
+    > "`$state_file"
 fi
 cd "`$REPO_DIR"
 test "`$(git branch --show-current)" = '$script:ResolvedGitBranch'
@@ -510,9 +517,14 @@ test "`$run_repo_dir" = '$RemoteRepoRoot'
 test "`$LAUNCHER_LOG" = '$RemoteBase/'"`$launcher_rel"
 test "`$LAUNCH_SCRIPT" = '$RemoteBase/'"`$launch_script_rel"
 metadata_rel="results/`$name.collection.env"
-printf "collection_mode='%s'\nbatch_state='%s'\nrepo_dir='%s'\ngit_branch='%s'\nrun_root='%s'\nscreen_session='%s'\nlaunch_script='%s'\n" \
-  "`$collection_mode" "`$batch_state" "`$run_repo_dir" "`$run_git_branch" \
-  "`$RUN_ROOT" "`$SCREEN_SESSION" "`$LAUNCH_SCRIPT" \
+printf '%s\n' \
+  "collection_mode=`$collection_mode" \
+  "batch_state=`$batch_state" \
+  "repo_dir=`$run_repo_dir" \
+  "git_branch=`$run_git_branch" \
+  "run_root=`$RUN_ROOT" \
+  "screen_session=`$SCREEN_SESSION" \
+  "launch_script=`$LAUNCH_SCRIPT" \
   > '$RemoteBase/'"`$metadata_rel"
 items=(
   "`$run_rel"

@@ -4,6 +4,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -40,6 +41,15 @@ def find_bash() -> str:
         if candidate and Path(candidate).is_file():
             return str(candidate)
     pytest.skip("Git Bash is required for the remote watcher syntax test")
+
+
+def find_windows_powershell() -> str:
+    candidate = Path(os.environ.get("WINDIR", r"C:\Windows")) / (
+        r"System32\WindowsPowerShell\v1.0\powershell.exe"
+    )
+    if candidate.is_file():
+        return str(candidate)
+    pytest.skip("Windows PowerShell 5.1 is required for native argv regression")
 
 
 def write_mock_remote_harness(path: Path) -> None:
@@ -270,6 +280,10 @@ def test_remote_workflow_defaults_to_prepare_and_keeps_launch_gated() -> None:
     assert "git pull --ff-only" in source
     assert "git status --porcelain" in source
     assert "current_source.env" in source
+    assert source.count("printf '%s\\n'") >= 3
+    assert 'printf "repo_dir=' not in source
+    assert 'printf "REPO_DIR=' not in source
+    assert 'printf "collection_mode=' not in source
     assert "REPO_DIR" in source
     assert "GIT_BRANCH" in source
     assert "validate-run --run-root" in source
@@ -278,6 +292,86 @@ def test_remote_workflow_defaults_to_prepare_and_keeps_launch_gated() -> None:
     assert "imod_autodl" not in source.lower().replace(
         'join-path $home ".ssh\\imod_autodl"', ""
     )
+
+
+def test_single_quoted_env_serialization_survives_windows_native_argv(
+    tmp_path: Path,
+) -> None:
+    capture_script = tmp_path / "capture_argv.py"
+    captured_command = tmp_path / "captured_remote_command.sh"
+    harness = tmp_path / "marshal_remote_command.ps1"
+    capture_script.write_text(
+        "from pathlib import Path\n"
+        "import sys\n"
+        "Path(sys.argv[1]).write_bytes(sys.argv[2].encode('utf-8'))\n",
+        encoding="utf-8",
+    )
+    harness.write_text(
+        r'''$ErrorActionPreference = "Stop"
+$command = @"
+set -euo pipefail
+REPO_DIR='/root/autodl-tmp/HMASD/source'
+GIT_BRANCH='aggressive'
+collection_mode='complete'
+printf '%s\n' \
+  'repo_dir=/root/autodl-tmp/HMASD/source' \
+  'git_branch=aggressive'
+printf '%s\n' \
+  "REPO_DIR=`$REPO_DIR" \
+  "GIT_BRANCH=`$GIT_BRANCH"
+printf '%s\n' \
+  "collection_mode=`$collection_mode"
+"@
+& $env:R27_NATIVE_PYTHON `
+  $env:R27_CAPTURE_SCRIPT `
+  $env:R27_CAPTURED_COMMAND `
+  $command
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+''',
+        encoding="utf-8",
+    )
+    env = os.environ.copy()
+    env.update(
+        {
+            "R27_NATIVE_PYTHON": os.fspath(Path(sys.executable)),
+            "R27_CAPTURE_SCRIPT": os.fspath(capture_script),
+            "R27_CAPTURED_COMMAND": os.fspath(captured_command),
+        }
+    )
+    marshalled = subprocess.run(
+        [
+            find_windows_powershell(),
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(harness),
+        ],
+        cwd=ROOT,
+        env=env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert marshalled.returncode == 0, marshalled.stdout + marshalled.stderr
+
+    remote_command = captured_command.read_text(encoding="utf-8")
+    assert remote_command.count("printf '%s\\n'") == 3
+    executed = subprocess.run(
+        [find_bash(), "-c", remote_command],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert executed.returncode == 0, executed.stdout + executed.stderr
+    assert executed.stdout.splitlines() == [
+        "repo_dir=/root/autodl-tmp/HMASD/source",
+        "git_branch=aggressive",
+        "REPO_DIR=/root/autodl-tmp/HMASD/source",
+        "GIT_BRANCH=aggressive",
+        "collection_mode=complete",
+    ]
 
 
 def test_runtime_manifest_tracks_remote_workflow_without_private_key() -> None:
