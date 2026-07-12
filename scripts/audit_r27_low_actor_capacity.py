@@ -22,11 +22,16 @@ if str(ROOT) not in sys.path:
 from ha_ctse_process.low_actor_capacity_audit import (  # noqa: E402
     CapacitySnapshotBatch,
     INACTIVE_TOLERANCE,
+    MIN_BOOTSTRAP_RESET_GROUPS,
     PARITY_TOLERANCE,
+    RECURRENT_RETENTION_MAX,
     STATIC_SKL_MIN,
     STATIC_STDMEAN_MIN,
     SyntheticFitConfig,
+    _actor_parameter_count,
+    _actor_state_sha256,
     _decide_synthetic_seed_gate,
+    _terminal_synthetic_seed_report,
     build_orthogonal_codebook,
     classify_capacity_autopsy,
     evaluate_static_checkpoint,
@@ -35,6 +40,8 @@ from ha_ctse_process.low_actor_capacity_audit import (  # noqa: E402
     gate_synthetic_family,
     grouped_reset_split,
     read_capacity_snapshot_shards,
+    static_capacity_thresholds,
+    synthetic_capacity_thresholds,
     write_capacity_snapshot_shard,
 )
 
@@ -60,6 +67,20 @@ REGISTERED_CHECKPOINTS: dict[str, dict[str, object]] = {
     },
 }
 SCIENTIFIC_SYNTHETIC_SEEDS = (17, 23, 41)
+SCIENTIFIC_DECISION_THRESHOLDS: dict[str, object] = {
+    "static_checkpoint": static_capacity_thresholds(),
+    "static_family": {
+        "agreeing_checkpoints_min": 2,
+        "recurrent_retention_max": RECURRENT_RETENTION_MAX,
+    },
+    "synthetic_seed": synthetic_capacity_thresholds(4),
+    "synthetic_family": {
+        "passing_seeds_min": 2,
+        "fixed_seed_count": len(SCIENTIFIC_SYNTHETIC_SEEDS),
+        "minimum_reset_groups": MIN_BOOTSTRAP_RESET_GROUPS,
+    },
+    "codebook_norm": 0.5,
+}
 SCIENTIFIC_CONTRACT: dict[str, object] = {
     "experiment_id": "EXP-20260711-r27-g1-low-actor-capacity-autopsy",
     "checkpoint_ids": list(REGISTERED_CHECKPOINTS),
@@ -81,6 +102,7 @@ SCIENTIFIC_CONTRACT: dict[str, object] = {
     "validation_interval": 25,
     "patience": 20,
     "min_delta": 1e-4,
+    "decision_thresholds": SCIENTIFIC_DECISION_THRESHOLDS,
 }
 
 
@@ -951,12 +973,11 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
     output_dir.mkdir(parents=True, exist_ok=True)
     parameter_hash_before = policy_parameter_sha256(agent)
     try:
-        split = grouped_reset_split(snapshots.reset_id, seed=int(args.split_seed))
         codebook = build_orthogonal_codebook(
             int(agent.low.n_skills),
             int(agent.low.action_dim),
             seed=int(args.codebook_seed),
-            norm=0.5,
+            norm=float(SCIENTIFIC_DECISION_THRESHOLDS["codebook_norm"]),
         )
         fit_config = SyntheticFitConfig(
             learning_rate=float(args.learning_rate),
@@ -966,19 +987,61 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
             patience=int(args.patience),
             min_delta=float(args.min_delta),
         )
-        seed_reports = [
-            evaluate_synthetic_seed(
-                agent.low,
-                snapshots,
-                split,
-                codebook,
-                seed=int(seed),
-                config=fit_config,
-                device=device,
-                bootstrap_reps=int(args.bootstrap_reps),
+        available_reset_groups = int(np.unique(snapshots.reset_id).size)
+        if available_reset_groups < MIN_BOOTSTRAP_RESET_GROUPS:
+            actor_hash = _actor_state_sha256(agent.low)
+            support = {
+                "available_rows": int(np.asarray(snapshots.reset_id).size),
+                "available_reset_groups": available_reset_groups,
+                "train_rows": 0,
+                "validation_rows": 0,
+                "test_rows": 0,
+                "train_reset_groups": 0,
+                "validation_reset_groups": 0,
+                "test_reset_groups": 0,
+            }
+            seed_reports = [
+                _terminal_synthetic_seed_report(
+                    seed=int(seed),
+                    status="UNDERPOWERED",
+                    reasons=[
+                        "at least five represented reset groups are required"
+                    ],
+                    num_skills=int(agent.low.n_skills),
+                    source_actor_sha256_before=actor_hash,
+                    source_actor_sha256_after=actor_hash,
+                    source_actor_parameter_count=_actor_parameter_count(agent.low),
+                    support=support,
+                )
+                for seed in args.synthetic_seeds
+            ]
+            split_report = {
+                "train_reset_ids": [],
+                "validation_reset_ids": [],
+                "test_reset_ids": [],
+            }
+        else:
+            split = grouped_reset_split(
+                snapshots.reset_id, seed=int(args.split_seed)
             )
-            for seed in args.synthetic_seeds
-        ]
+            seed_reports = [
+                evaluate_synthetic_seed(
+                    agent.low,
+                    snapshots,
+                    split,
+                    codebook,
+                    seed=int(seed),
+                    config=fit_config,
+                    device=device,
+                    bootstrap_reps=int(args.bootstrap_reps),
+                )
+                for seed in args.synthetic_seeds
+            ]
+            split_report = {
+                "train_reset_ids": list(split.train_reset_ids),
+                "validation_reset_ids": list(split.validation_reset_ids),
+                "test_reset_ids": list(split.test_reset_ids),
+            }
         family = gate_synthetic_family(seed_reports)
     finally:
         env.close()
@@ -1004,15 +1067,12 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
         "policy_parameter_sha256_equal": parameter_hash_before
         == parameter_hash_after,
         "device": str(args.device),
-        "split": {
-            "train_reset_ids": list(split.train_reset_ids),
-            "validation_reset_ids": list(split.validation_reset_ids),
-            "test_reset_ids": list(split.test_reset_ids),
-        },
+        "split": split_report,
         "codebook": codebook.tolist(),
-        "codebook_norm": 0.5,
+        "codebook_norm": SCIENTIFIC_DECISION_THRESHOLDS["codebook_norm"],
         "fit_config": asdict(fit_config),
         "seed_reports": seed_reports,
+        "thresholds": SCIENTIFIC_DECISION_THRESHOLDS["synthetic_seed"],
         "parameter_counts": _jsonable(agent.parameter_counts()),
         "checkpoint_identity": checkpoint_identity,
         **snapshot_binding,
@@ -1032,6 +1092,12 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
 
 def _aggregate_markdown(report: dict[str, object]) -> str:
     artifact_identity = report.get("artifact_identity", {})
+    static_thresholds = SCIENTIFIC_DECISION_THRESHOLDS["static_checkpoint"]
+    static_family_thresholds = SCIENTIFIC_DECISION_THRESHOLDS["static_family"]
+    synthetic_thresholds = SCIENTIFIC_DECISION_THRESHOLDS["synthetic_seed"]
+    synthetic_family_thresholds = SCIENTIFIC_DECISION_THRESHOLDS[
+        "synthetic_family"
+    ]
     lines = [
         "# R27-G1 Low-Actor Capacity Autopsy",
         "",
@@ -1044,14 +1110,22 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
         "",
         "## Fixed Thresholds",
         "",
-        "- symmetric KL >= 0.02 nats",
-        "- standardized action-mean distance >= 0.20",
-        "- active-minus-control reset-bootstrap lower bound > 0",
-        "- recurrent retention < 0.50 for washout",
-        "- synthetic active accuracy and macro-F1 >= 0.90",
-        "- synthetic active-minus-sham accuracy >= 0.50",
-        "- synthetic sham accuracy <= 0.35",
-        "- synthetic train-minus-test accuracy <= 0.20",
+        f"- symmetric KL >= {static_thresholds['symmetric_kl_min']} nats",
+        f"- standardized action-mean distance >= {static_thresholds['standardized_mean_distance_min']}",
+        "- active-minus-control reset-bootstrap lower bound > 0.0",
+        f"- inactive tolerance <= {static_thresholds['inactive_tolerance']}",
+        f"- parity tolerance <= {static_thresholds['parity_tolerance']}",
+        f"- agreeing checkpoints >= {static_family_thresholds['agreeing_checkpoints_min']}",
+        f"- recurrent retention < {static_family_thresholds['recurrent_retention_max']} for washout",
+        f"- synthetic active accuracy >= {synthetic_thresholds['active_accuracy_min']}",
+        f"- synthetic macro-F1 >= {synthetic_thresholds['active_macro_f1_min']}",
+        f"- synthetic active-minus-sham accuracy >= {synthetic_thresholds['active_minus_sham_accuracy_min']}",
+        "- synthetic active-minus-sham bootstrap lower bound > 0.0",
+        f"- synthetic sham accuracy <= {synthetic_thresholds['sham_accuracy_max']}",
+        f"- synthetic train-minus-test accuracy <= {synthetic_thresholds['train_minus_test_accuracy_max']}",
+        f"- passing synthetic seeds >= {synthetic_family_thresholds['passing_seeds_min']} of {synthetic_family_thresholds['fixed_seed_count']}",
+        f"- minimum represented reset groups = {synthetic_family_thresholds['minimum_reset_groups']}",
+        f"- codebook norm = {SCIENTIFIC_DECISION_THRESHOLDS['codebook_norm']}",
         "",
         "## Static Checkpoints",
         "",
@@ -1143,9 +1217,13 @@ def _recompute_static_leaf(
     report: dict[str, object], checkpoint_id: str
 ) -> tuple[dict[str, object], list[str]]:
     status = report.get("status")
-    if status in ("INVALID", "UNDERPOWERED"):
-        return copy.deepcopy(report), []
     errors: list[str] = []
+    if report.get("thresholds") != SCIENTIFIC_DECISION_THRESHOLDS[
+        "static_checkpoint"
+    ]:
+        errors.append(f"{checkpoint_id} threshold evidence mismatch")
+    if status in ("INVALID", "UNDERPOWERED"):
+        return copy.deepcopy(report), errors
     recomputed = copy.deepcopy(report)
     condition_passes: dict[str, bool] = {}
     condition_finite: dict[str, bool] = {}
@@ -1275,13 +1353,16 @@ def _recompute_synthetic_seed_leaf(
 ) -> tuple[dict[str, object], list[str]]:
     seed = report.get("seed")
     reported_status = report.get("status")
+    errors: list[str] = []
+    if report.get("thresholds") != SCIENTIFIC_DECISION_THRESHOLDS[
+        "synthetic_seed"
+    ]:
+        errors.append(f"seed {seed} threshold evidence mismatch")
     if reported_status in ("INVALID", "UNDERPOWERED"):
-        errors = []
         if report.get("pass") is not False:
             errors.append(f"seed {seed} terminal status must have pass=False")
         return {"seed": seed, "status": reported_status, "pass": False}, errors
 
-    errors: list[str] = []
     try:
         bootstrap = report["active_minus_sham_bootstrap"]
         numeric = np.asarray(
@@ -1662,10 +1743,16 @@ def validate_aggregate_artifacts(
             "synthetic report is not scientific-contract eligible",
         ),
         (
-            synthetic_report.get("codebook_norm") == 0.5
+            synthetic_report.get("codebook_norm")
+            == SCIENTIFIC_DECISION_THRESHOLDS["codebook_norm"]
             and synthetic_report.get("fit_config")
             == asdict(SyntheticFitConfig()),
             "synthetic fit contract mismatch",
+        ),
+        (
+            synthetic_report.get("thresholds")
+            == SCIENTIFIC_DECISION_THRESHOLDS["synthetic_seed"],
+            "synthetic top-level threshold evidence mismatch",
         ),
         (
             synthetic_report.get("source_collector_manifest_sha256")
@@ -1728,6 +1815,9 @@ def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
                 "errors": [str(error)],
                 "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
             },
+            "decision_thresholds": copy.deepcopy(
+                SCIENTIFIC_DECISION_THRESHOLDS
+            ),
             "prohibited_next_actions": [
                 "q_A/q_d/q_D or intrinsic reward",
                 "actor redesign or hidden reset",
@@ -1764,6 +1854,7 @@ def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
             "errors": identity_errors,
             "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
         },
+        "decision_thresholds": copy.deepcopy(SCIENTIFIC_DECISION_THRESHOLDS),
         "prohibited_next_actions": [
             "q_A/q_d/q_D or intrinsic reward",
             "actor redesign or hidden reset",

@@ -242,6 +242,42 @@ def test_static_family_requires_two_of_three_agreement():
     assert family["recurrent_washout"] is False
 
 
+def test_static_family_disagreement_with_underpowered_stays_underpowered():
+    passing = {
+        "status": "PASS",
+        "zero_h": {"pass": True, "mean_skl": 0.03},
+        "rollout_h": {"pass": True, "mean_skl": 0.03},
+        "hidden_retention_ratio": 1.0,
+    }
+    failing = {
+        "status": "FAIL",
+        "zero_h": {"pass": False, "mean_skl": 0.0},
+        "rollout_h": {"pass": False, "mean_skl": 0.0},
+        "hidden_retention_ratio": 0.0,
+    }
+    underpowered = {"status": "UNDERPOWERED"}
+
+    family = gate_static_family([passing, failing, underpowered])
+    classification = classify_capacity_autopsy(
+        family,
+        {
+            "status": "PASS",
+            "pass": True,
+            "passing_seeds": 2,
+            "failed_seeds": 1,
+        },
+    )
+
+    assert family["status"] == "UNDERPOWERED"
+    assert family["zero_h_status"] == "UNDERPOWERED"
+    assert family["rollout_h_status"] == "UNDERPOWERED"
+    assert family["zero_h_pass_count"] == 1
+    assert family["zero_h_fail_count"] == 1
+    assert family["rollout_h_pass_count"] == 1
+    assert family["rollout_h_fail_count"] == 1
+    assert classification["classification"] == "UNDERPOWERED"
+
+
 def test_codebook_is_orthogonal_and_has_fixed_norm():
     codebook = build_orthogonal_codebook(4, 4, seed=27030, norm=0.5)
 

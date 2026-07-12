@@ -27,6 +27,31 @@ SYNTHETIC_SHAM_MARGIN = 0.10
 MIN_BOOTSTRAP_RESET_GROUPS = 5
 
 
+def static_capacity_thresholds() -> dict[str, object]:
+    """Return the immutable per-checkpoint static decision thresholds."""
+
+    return {
+        "symmetric_kl_min": STATIC_SKL_MIN,
+        "standardized_mean_distance_min": STATIC_STDMEAN_MIN,
+        "bootstrap_lower": "> 0.0",
+        "inactive_tolerance": INACTIVE_TOLERANCE,
+        "parity_tolerance": PARITY_TOLERANCE,
+    }
+
+
+def synthetic_capacity_thresholds(num_skills: int) -> dict[str, object]:
+    """Return the immutable per-seed synthetic decision thresholds."""
+
+    return {
+        "active_accuracy_min": SYNTHETIC_ACCURACY_MIN,
+        "active_macro_f1_min": SYNTHETIC_MACRO_F1_MIN,
+        "active_minus_sham_accuracy_min": SYNTHETIC_ACTIVE_MINUS_SHAM_MIN,
+        "bootstrap_lower": "> 0.0",
+        "sham_accuracy_max": 1.0 / int(num_skills) + SYNTHETIC_SHAM_MARGIN,
+        "train_minus_test_accuracy_max": SYNTHETIC_GENERALIZATION_GAP_MAX,
+    }
+
+
 @dataclass(frozen=True)
 class CapacitySnapshotBatch:
     observation: np.ndarray
@@ -597,7 +622,9 @@ def evaluate_static_checkpoint(
         return {
             "checkpoint_id": str(checkpoint_id),
             "rows": rows,
+            "reset_groups": reset_count,
             "num_skills": int(actor.n_skills),
+            "thresholds": static_capacity_thresholds(),
             "status": "UNDERPOWERED",
             "reason": "at least five reset groups with snapshot rows are required",
         }
@@ -724,13 +751,7 @@ def evaluate_static_checkpoint(
             "max_stdmean_distance": inactive_max_distance,
         },
         "parity": parity,
-        "thresholds": {
-            "symmetric_kl_min": STATIC_SKL_MIN,
-            "standardized_mean_distance_min": STATIC_STDMEAN_MIN,
-            "bootstrap_lower": "> 0.0",
-            "inactive_tolerance": INACTIVE_TOLERANCE,
-            "parity_tolerance": PARITY_TOLERANCE,
-        },
+        "thresholds": static_capacity_thresholds(),
         "status": status,
     }
 
@@ -759,6 +780,8 @@ def gate_static_family(reports: list[dict[str, object]]) -> dict[str, object]:
         }
     zero_count = sum(bool(report["zero_h"]["pass"]) for report in valid)
     rollout_count = sum(bool(report["rollout_h"]["pass"]) for report in valid)
+    zero_fail_count = len(valid) - zero_count
+    rollout_fail_count = len(valid) - rollout_count
     washout_count = sum(
         bool(report["zero_h"]["pass"])
         and float(report["rollout_h"]["mean_skl"]) < STATIC_SKL_MIN
@@ -766,14 +789,32 @@ def gate_static_family(reports: list[dict[str, object]]) -> dict[str, object]:
         < RECURRENT_RETENTION_MAX
         for report in valid
     )
-    zero_pass = zero_count >= 2
-    rollout_pass = rollout_count >= 2
+    def condition_status(pass_count: int, fail_count: int) -> str:
+        if pass_count >= 2:
+            return "PASS"
+        if fail_count >= 2:
+            return "FAIL"
+        return "UNDERPOWERED"
+
+    zero_status = condition_status(zero_count, zero_fail_count)
+    rollout_status = condition_status(rollout_count, rollout_fail_count)
+    zero_pass = zero_status == "PASS"
+    rollout_pass = rollout_status == "PASS"
+    family_status = (
+        "UNDERPOWERED"
+        if "UNDERPOWERED" in (zero_status, rollout_status)
+        else ("PASS" if zero_pass or rollout_pass else "FAIL")
+    )
     return {
-        "status": "PASS" if zero_pass or rollout_pass else "FAIL",
+        "status": family_status,
         "valid_checkpoints": len(valid),
         "zero_h_pass_count": zero_count,
+        "zero_h_fail_count": zero_fail_count,
         "rollout_h_pass_count": rollout_count,
+        "rollout_h_fail_count": rollout_fail_count,
         "washout_count": washout_count,
+        "zero_h_status": zero_status,
+        "rollout_h_status": rollout_status,
         "zero_h_pass": zero_pass,
         "rollout_h_pass": rollout_pass,
         "recurrent_washout": washout_count >= 2,
@@ -989,14 +1030,7 @@ def _optimizer_contract(optimizer: torch.optim.Optimizer) -> dict[str, object]:
 
 
 def _synthetic_thresholds(num_skills: int) -> dict[str, object]:
-    return {
-        "active_accuracy_min": SYNTHETIC_ACCURACY_MIN,
-        "active_macro_f1_min": SYNTHETIC_MACRO_F1_MIN,
-        "active_minus_sham_accuracy_min": SYNTHETIC_ACTIVE_MINUS_SHAM_MIN,
-        "bootstrap_lower": "> 0.0",
-        "sham_accuracy_max": 1.0 / int(num_skills) + SYNTHETIC_SHAM_MARGIN,
-        "train_minus_test_accuracy_max": SYNTHETIC_GENERALIZATION_GAP_MAX,
-    }
+    return synthetic_capacity_thresholds(num_skills)
 
 
 def _decide_synthetic_seed_gate(

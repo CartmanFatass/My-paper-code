@@ -347,6 +347,37 @@ def test_explicit_fixture_mode_allows_reduced_contract_but_marks_non_scientific(
     assert contract["eligible_for_aggregate"] is False
 
 
+def test_scientific_contract_binds_every_decision_threshold():
+    assert collector.SCIENTIFIC_CONTRACT["decision_thresholds"] == (
+        collector.SCIENTIFIC_DECISION_THRESHOLDS
+    )
+    assert collector.SCIENTIFIC_DECISION_THRESHOLDS["static_checkpoint"] == {
+        "symmetric_kl_min": 0.02,
+        "standardized_mean_distance_min": 0.20,
+        "bootstrap_lower": "> 0.0",
+        "inactive_tolerance": 1e-8,
+        "parity_tolerance": 1e-6,
+    }
+    assert collector.SCIENTIFIC_DECISION_THRESHOLDS["static_family"] == {
+        "agreeing_checkpoints_min": 2,
+        "recurrent_retention_max": 0.50,
+    }
+    assert collector.SCIENTIFIC_DECISION_THRESHOLDS["synthetic_seed"] == {
+        "active_accuracy_min": 0.90,
+        "active_macro_f1_min": 0.90,
+        "active_minus_sham_accuracy_min": 0.50,
+        "bootstrap_lower": "> 0.0",
+        "sham_accuracy_max": 0.35,
+        "train_minus_test_accuracy_max": 0.20,
+    }
+    assert collector.SCIENTIFIC_DECISION_THRESHOLDS["synthetic_family"] == {
+        "passing_seeds_min": 2,
+        "fixed_seed_count": 3,
+        "minimum_reset_groups": 5,
+    }
+    assert collector.SCIENTIFIC_DECISION_THRESHOLDS["codebook_norm"] == 0.5
+
+
 def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
     checkpoint_ids = ["arm0_update25", "arm0_update30", "arm0_final"]
     scientific_contract = {
@@ -408,6 +439,9 @@ def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
                 "beta_by_skill": [[0.0]],
                 "consistency_max_abs_error": 0.0,
             },
+            "thresholds": collector.SCIENTIFIC_DECISION_THRESHOLDS[
+                "static_checkpoint"
+            ],
         }
         static_path = root / "static_capacity.json"
         collector._write_json(static_path, static)
@@ -504,6 +538,9 @@ def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
             "sham_train_targets_sha256": "train-targets",
             "active_validation_targets_sha256": "validation-targets",
             "sham_validation_targets_sha256": "validation-targets",
+            "thresholds": collector.SCIENTIFIC_DECISION_THRESHOLDS[
+                "synthetic_seed"
+            ],
         }
 
     seed_reports = [
@@ -551,6 +588,9 @@ def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
             "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
         },
         "parameter_counts": {"low_actor": 558344},
+        "thresholds": collector.SCIENTIFIC_DECISION_THRESHOLDS[
+            "synthetic_seed"
+        ],
     }
     collector._write_json(tmp_path / "synthetic_control.json", synthetic)
     return checkpoint_ids
@@ -572,6 +612,76 @@ def test_aggregate_recomputes_valid_leaf_evidence(tmp_path):
     markdown = (tmp_path / "r27_capacity_autopsy.md").read_text(encoding="utf-8")
     assert "Artifact identity: `True`" in markdown
     assert collector.SCIENTIFIC_CONTRACT_SHA256 in markdown
+    assert "inactive tolerance <= 1e-08" in markdown
+    assert "parity tolerance <= 1e-06" in markdown
+    assert "codebook norm = 0.5" in markdown
+
+
+def test_aggregate_rejects_missing_or_altered_threshold_evidence(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    static_path = tmp_path / "arm0_update25" / "static_capacity.json"
+    static = collector._read_json_strict(static_path)
+    static.pop("thresholds")
+    collector._write_json(static_path, static)
+    manifest_path = tmp_path / "arm0_update25" / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["static_report_sha256"] = collector._file_sha256(static_path)
+    collector._write_json(manifest_path, manifest)
+    synthetic_path = tmp_path / "synthetic_control.json"
+    synthetic = collector._read_json_strict(synthetic_path)
+    synthetic["seed_reports"][0]["thresholds"]["active_accuracy_min"] = 0.80
+    collector._write_json(synthetic_path, synthetic)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+    reasons = " ".join(result["reasons"])
+
+    assert result["classification"] == "INVALID"
+    assert "arm0_update25 threshold evidence mismatch" in reasons
+    assert "seed 17 threshold evidence mismatch" in reasons
+
+
+def test_aggregate_emits_underpowered_for_terminal_synthetic_seed_reports(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    synthetic_path = tmp_path / "synthetic_control.json"
+    synthetic = collector._read_json_strict(synthetic_path)
+    seed_reports = [
+        {
+            "seed": seed,
+            "status": "UNDERPOWERED",
+            "pass": False,
+            "reasons": ["fewer than five represented reset groups"],
+            "support": {
+                "available_rows": 4,
+                "available_reset_groups": 4,
+                "train_rows": 0,
+                "validation_rows": 0,
+                "test_rows": 0,
+                "train_reset_groups": 0,
+                "validation_reset_groups": 0,
+                "test_reset_groups": 0,
+            },
+            "source_actor_sha256_before": f"actor-{seed}",
+            "source_actor_sha256_after": f"actor-{seed}",
+            "source_actor_sha256_equal": True,
+            "source_actor_parameter_count": 558344,
+            "thresholds": collector.SCIENTIFIC_DECISION_THRESHOLDS[
+                "synthetic_seed"
+            ],
+        }
+        for seed in collector.SCIENTIFIC_SYNTHETIC_SEEDS
+    ]
+    synthetic.update(collector.gate_synthetic_family(seed_reports))
+    synthetic["seed_reports"] = seed_reports
+    collector._write_json(synthetic_path, synthetic)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "UNDERPOWERED"
+    assert result["artifact_identity"]["pass"] is True
 
 
 def test_aggregate_rejects_mislabeled_arm_and_update_hash_mismatch(tmp_path):
@@ -950,6 +1060,95 @@ def test_collect_static_writes_shards_manifest_and_immutability(monkeypatch, tmp
     }
     assert result["static"]["checkpoint_id"] == "fixture_update25"
     assert (output_dir / "static_capacity.md").is_file()
+
+
+def test_synthetic_fewer_than_five_reset_groups_writes_underpowered_artifacts(
+    monkeypatch, tmp_path
+):
+    checkpoint = tmp_path / "fixture.pt"
+    checkpoint.write_bytes(b"immutable-checkpoint")
+    snapshot_dir = tmp_path / "snapshots"
+    rows = 4
+    reset_ids = np.arange(rows, dtype=np.int64)
+    snapshots = CapacitySnapshotBatch(
+        observation=np.zeros((rows, 6), dtype=np.float32),
+        actor_hidden=np.zeros((rows, 8), dtype=np.float32),
+        natural_skill=np.arange(rows, dtype=np.int64) % 4,
+        previous_skill=np.zeros(rows, dtype=np.int64),
+        duration_idx=np.zeros(rows, dtype=np.int64),
+        skill_age=np.zeros(rows, dtype=np.int64),
+        episode_done_mask=np.zeros(rows, dtype=np.bool_),
+        reset_id=reset_ids,
+        reset_seed=27000 + reset_ids,
+        episode_id=reset_ids.copy(),
+        env_id=np.zeros(rows, dtype=np.int64),
+        agent_id=np.arange(rows, dtype=np.int64) % 2,
+        checkpoint_id=np.full(rows, "fixture_final"),
+        checkpoint_update=np.full(rows, 32, dtype=np.int64),
+    )
+    collector.write_capacity_snapshot_shard(snapshot_dir / "reset_0000.npz", snapshots)
+    env = ManifestEnv()
+    agent = ManifestAgent()
+    monkeypatch.setattr(
+        collector, "require_cuda_device", lambda _device: torch.device("cpu")
+    )
+    monkeypatch.setattr(
+        collector,
+        "_configure_agent",
+        lambda _args: (
+            SimpleNamespace(scenario="energy"),
+            {"update_idx": 32},
+            env,
+            agent,
+            32,
+        ),
+    )
+    monkeypatch.setattr(
+        collector,
+        "validate_registered_checkpoint_identity",
+        lambda *_args, **_kwargs: {"eligible_for_aggregate": False},
+    )
+    monkeypatch.setattr(
+        collector,
+        "validate_synthetic_snapshot_source",
+        lambda *_args, **_kwargs: {
+            "source_collector_manifest_sha256": "fixture-manifest",
+            "source_snapshot_shards_sha256": "fixture-snapshots",
+        },
+    )
+    monkeypatch.setattr(
+        collector,
+        "evaluate_synthetic_seed",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("underpowered snapshots must not enter fitting")
+        ),
+    )
+    output_dir = tmp_path / "out"
+    args = collector.parse_args(
+        [
+            "synthetic",
+            "--checkpoint",
+            str(checkpoint),
+            "--snapshot-dir",
+            str(snapshot_dir),
+            "--output-dir",
+            str(output_dir),
+            "--non-scientific-fixture",
+        ]
+    )
+
+    result = collector.run_synthetic(args)
+
+    assert result["status"] == "UNDERPOWERED"
+    assert [item["seed"] for item in result["seed_reports"]] == [17, 23, 41]
+    assert all(item["status"] == "UNDERPOWERED" for item in result["seed_reports"])
+    assert result["split"] == {
+        "train_reset_ids": [],
+        "validation_reset_ids": [],
+        "test_reset_ids": [],
+    }
+    assert (output_dir / "synthetic_control.json").is_file()
+    assert (output_dir / "synthetic_control.md").is_file()
 
 
 def test_runner_dry_run_has_exact_arm0_checkpoints_and_no_forbidden_flags(
