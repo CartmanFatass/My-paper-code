@@ -84,6 +84,13 @@ Every compute-bearing proposal states expected wall-clock cost before launch.
 Experiments default to CUDA; never silently fall back to CPU — if the GPU is
 occupied, present the options with their costs and let the user choose.
 
+Compute-bearing experiments also default to parallel execution sized for the
+registered wall-clock target. Serial execution is not an acceptable default or
+fallback. If the workload's process/GPU topology has not been validated, run a
+separate bounded topology check first; a failed validation stops the launch
+instead of degrading to serial execution. Single-process syntax checks, dry
+runs, and small diagnostics are not scientific experiment launches.
+
 Long training, multi-seed batches, and heavy analysis default to the user's cloud
 server: write a self-contained Bash runner under `scripts/` following existing
 conventions; use timestamped roots under `logs/`; record commands, expected

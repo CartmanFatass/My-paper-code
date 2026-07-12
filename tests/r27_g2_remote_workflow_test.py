@@ -132,6 +132,15 @@ if ($env:R27_MOCK_ACTION -eq "launch") {
         -ConcurrencyValidated `
         -LaunchAuthorization $env:R27_LAUNCH_AUTHORIZATION
 }
+elseif ($env:R27_MOCK_ACTION -eq "serial_launch") {
+    & $env:R27_WORKFLOW `
+        -Action launch `
+        -GitBranch aggressive `
+        -GitRemoteUrl https://example.invalid/hmasd.git `
+        -MaxWorkers 1 `
+        -ConcurrencyValidated `
+        -LaunchAuthorization $env:R27_LAUNCH_AUTHORIZATION
+}
 elseif ($env:R27_MOCK_ACTION -eq "collect") {
     & $env:R27_WORKFLOW `
         -Action collect `
@@ -266,10 +275,12 @@ def test_remote_workflow_defaults_to_prepare_and_keeps_launch_gated() -> None:
         '[string]$GitRemoteUrl = "git@github.com:CartmanFatass/My-paper-code.git"'
         in source
     )
+    assert "[int]$MaxWorkers = 64" in source
     assert "Launch requires -LaunchAuthorization" in source
     assert "clean Git-managed HMASD worktree" in source
-    assert "MAX_WORKERS>1 requires -ConcurrencyValidated" in source
-    assert "576-960 collector hours" in source
+    assert "Serial experiment launch is disabled" in source
+    assert "Parallel launch requires -ConcurrencyValidated" in source
+    assert "AcceptSerialCost" not in source
     assert "R27_G2_CONCURRENCY_VALIDATED" in source
     assert '/root/autodl-tmp/HMASD/r27_g2_remote' in source
     assert '/root/autodl-tmp/HMASD/source' in source
@@ -418,6 +429,20 @@ def test_launch_gates_precede_remote_start_and_rechecks_git_source(
         dirty_scope.stdout + dirty_scope.stderr
     )
     assert read_mock_records(dirty_scope_log) == []
+
+    serial_log = tmp_path / "serial.jsonl"
+    serial = run_mock_remote_action(
+        harness=harness,
+        log_path=serial_log,
+        home=tmp_path / "home_serial",
+        action="serial_launch",
+        authorization=EXPERIMENT_ID,
+    )
+    assert serial.returncode != 0
+    assert "Serial experiment launch is disabled" in (
+        serial.stdout + serial.stderr
+    )
+    assert read_mock_records(serial_log) == []
 
     launch_log = tmp_path / "launch.jsonl"
     launched = run_mock_remote_action(

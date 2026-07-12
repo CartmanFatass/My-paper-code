@@ -73,6 +73,10 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
   data-disk checkout is at commit `60ac83e`, its two-line source pointer is
   Bash-readable, all three checkpoints are cached, and the 192-reset dry-run
   wrote no run directory. No R27 `screen` or scientific run exists.
+- User execution policy (2026-07-13): compute-bearing experiments default to
+  parallel cloud CUDA. R27-G2 defaults to 64 reset workers; serial launch and
+  serial fallback are disabled. The exact parallel topology still requires a
+  bounded validation before launch.
 - `launch`/`all` remain fail-closed behind explicit experiment authorization.
 
 Everything else on the dashboard is `completed` or `standing-reference`. R25

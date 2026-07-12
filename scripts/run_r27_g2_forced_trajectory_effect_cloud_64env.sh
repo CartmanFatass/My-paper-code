@@ -12,7 +12,7 @@ cd "$ROOT"
 
 PYTHON_BIN="${PYTHON_BIN:-python}"
 REQUESTED_DEVICE="${DEVICE:-cuda}"
-MAX_WORKERS="${MAX_WORKERS:-1}"
+MAX_WORKERS="${MAX_WORKERS:-64}"
 CONTINUE_ON_ERROR="${CONTINUE_ON_ERROR:-0}"
 R27_G2_CONCURRENCY_VALIDATED="${R27_G2_CONCURRENCY_VALIDATED:-0}"
 CHECKPOINT_DIST_ROOT="${CHECKPOINT_DIST_ROOT:-$ROOT/dist}"
@@ -48,9 +48,14 @@ for binary_flag in DRY_RUN CONTINUE_ON_ERROR R27_G2_CONCURRENCY_VALIDATED; do
     exit 2
   fi
 done
-if [[ "$DRY_RUN" == "0" ]] && (( MAX_WORKERS > 1 )) && \
+if [[ "$DRY_RUN" == "0" ]] && (( MAX_WORKERS == 1 )); then
+  echo "Serial R27-G2 experiment launch is disabled; use a validated parallel topology with MAX_WORKERS from 2 through 64." >&2
+  echo "No R27-G2 work was started." >&2
+  exit 2
+fi
+if [[ "$DRY_RUN" == "0" ]] && \
   [[ "$R27_G2_CONCURRENCY_VALIDATED" != "1" ]]; then
-  echo "MAX_WORKERS>1 requires R27_G2_CONCURRENCY_VALIDATED=1 after a separate safe GPU/process topology check." >&2
+  echo "Parallel launch requires R27_G2_CONCURRENCY_VALIDATED=1 after a separate safe GPU/process topology check." >&2
   echo "No R27-G2 work was started." >&2
   exit 2
 fi

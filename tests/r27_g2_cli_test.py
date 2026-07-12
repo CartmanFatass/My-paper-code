@@ -51,6 +51,8 @@ def test_scientific_contract_binds_exact_checkpoints_and_budget():
     assert cli.SCIENTIFIC_CONTRACT["environment_steps_total"] == 2124000
     assert cli.SCIENTIFIC_CONTRACT["branches_per_reset"] == 55
     assert cli.SCIENTIFIC_CONTRACT["duration_candidates"] == [1, 2, 3, 4]
+    assert cli.SCIENTIFIC_CONTRACT["default_reset_worker_limit"] == 64
+    assert cli.SCIENTIFIC_CONTRACT["allowed_reset_worker_limit"] == [2, 64]
     assert cli.SCIENTIFIC_CONTRACT["checkpoint_slots"] == cli.REGISTERED_CHECKPOINTS
 
 

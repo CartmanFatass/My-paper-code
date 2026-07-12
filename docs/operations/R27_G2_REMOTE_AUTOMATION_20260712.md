@@ -110,11 +110,16 @@ The wrapper intentionally rejects launch unless all of these are true:
    `EXP-20260712-r27-g2-forced-z-trajectory-effect`;
 2. the local HMASD worktree is clean and the remote checkout is on the
    registered branch with a clean worktree;
-3. `MAX_WORKERS>1` is accompanied by `-ConcurrencyValidated` after a separate
-   safe GPU/process topology check;
-4. `MAX_WORKERS=1` is accompanied by `-AcceptSerialCost`, acknowledging the
-   rough 576-960 collector-hour estimate rather than the registered 12-20h
-   decision-grade target.
+3. the default parallel queue (`MAX_WORKERS=64`) or another parallel value from
+   2 through 64 is accompanied by `-ConcurrencyValidated` after a separate safe
+   GPU/process topology check;
+4. `MAX_WORKERS=1` is rejected. Serial experiment execution is neither a
+   default nor a fallback because its rough 576-960 collector-hour cost is
+   unacceptable.
+
+Concurrency validation applies only to the exact worker count, GPU model, and
+Git commit tested. A different value or machine requires a new bounded topology
+check; a failed check stops the launch rather than selecting serial mode.
 
 This file documents the interface; it does not grant any launch authorization.
 

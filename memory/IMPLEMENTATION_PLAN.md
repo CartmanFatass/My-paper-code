@@ -165,7 +165,9 @@ part of the workflow. Source, checkpoints, logs, and results remain under the
 data disk. Authorized long commands run in a recorded detached GNU `screen`
 session. `launch`/`all` are fail-closed behind the exact
 experiment authorization, clean committed Git source, and explicit
-serial-cost acceptance or validated concurrent topology. Final success and
+validation of the selected parallel topology. By user directive on 2026-07-13,
+the default is the 64-worker flattened queue and serial launch/fallback is
+disabled. Final success and
 complete collection revalidate all 192 reset artifacts plus both aggregate
 reports rather than trusting status text. Aggregate reports are regenerated
 from the current 192 structured reset artifacts rather than using a stale-input

@@ -161,7 +161,10 @@ file tests/r27_g2_remote_workflow_test.py
     assert (bundle_root / "PACKAGE_SOURCE_STATUS.txt").is_file()
     build_info = (bundle_root / "PACKAGE_BUILD_INFO.txt").read_text(encoding="utf-8")
     assert "<repo>" not in build_info
-    assert "default_serial_collect_cost_hours=576-960" in build_info
+    assert "default_parallel_reset_worker_limit=64" in build_info
+    assert "default_parallel_collect_cost_hours=9-15" in build_info
+    assert "serial_launch=disabled" in build_info
+    assert "parallel_launch_command=MAX_WORKERS=64" in build_info
     assert "launch_authorization=blocked" in build_info
     assert "optional structural review artifact only" in build_info
     assert "remote launch authority is the clean Git checkout" in build_info

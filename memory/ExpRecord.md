@@ -156,8 +156,15 @@ No pilot, scientific run root, or scientific result exists yet.
   the current structured inputs. The default
   `prepare` remains non-launching. No experiment was launched. `launch` and
   `all` additionally require the exact experiment authorization, a clean
-  committed Git source scope, and an explicitly accepted/validated worker-cost
-  topology.
+  committed Git source scope, and a validated parallel worker topology.
+- Parallel execution policy (2026-07-13 user directive; mechanical, no run):
+  compute-bearing experiments default to parallel cloud CUDA and never fall
+  back to serial. R27-G2 now defaults to the 64-worker flattened queue, whose
+  collector-only estimate is 9-15 hours and whose registered end-to-end target
+  remains 12-20 hours. `MAX_WORKERS=1` is rejected at both the PowerShell and
+  Bash launch boundaries. The 64-process CUDA topology is a target, not yet a
+  safety result; it must pass a separate bounded check on the selected GPU and
+  commit before either pilot or decision-grade launch.
 - Git workflow update (2026-07-13, mechanical, no experiment run): source comes
   only from a named, clean data-disk Git checkout updated by
   `fetch`/`checkout`/`pull --ff-only`; prior ZIP/deployed copies are historical

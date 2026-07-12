@@ -19,9 +19,8 @@ param(
     [string]$GitRemoteName = "My-paper-code",
     [string]$GitRemoteUrl = "git@github.com:CartmanFatass/My-paper-code.git",
     [ValidateRange(1, 64)]
-    [int]$MaxWorkers = 1,
+    [int]$MaxWorkers = 64,
     [switch]$ConcurrencyValidated,
-    [switch]$AcceptSerialCost,
     [string]$LaunchAuthorization = "",
     [ValidateRange(5, 3600)]
     [int]$PollSeconds = 60,
@@ -304,11 +303,11 @@ function Assert-LaunchAuthorization {
     if ($script:WorktreeDirty) {
         throw "Launch requires a clean Git-managed HMASD worktree"
     }
-    if ($MaxWorkers -eq 1 -and -not $AcceptSerialCost) {
-        throw "MAX_WORKERS=1 is roughly 576-960 collector hours; pass -AcceptSerialCost only if that cost is explicitly accepted"
+    if ($MaxWorkers -eq 1) {
+        throw "Serial experiment launch is disabled; choose MAX_WORKERS from 2 through 64 and validate that parallel topology"
     }
-    if ($MaxWorkers -gt 1 -and -not $ConcurrencyValidated) {
-        throw "MAX_WORKERS>1 requires -ConcurrencyValidated after a separate safe topology check"
+    if (-not $ConcurrencyValidated) {
+        throw "Parallel launch requires -ConcurrencyValidated after a separate safe GPU/process topology check"
     }
 }
 

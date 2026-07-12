@@ -42,7 +42,6 @@ def test_cloud_runner_dry_run_has_exact_contract_and_writes_nothing(tmp_path):
     env.update(
         {
             "DEVICE": "cuda",
-            "MAX_WORKERS": "11",
             "RUN_ROOT": to_msys_path(run_root),
             "CHECKPOINT_DIST_ROOT": to_msys_path(tmp_path / "missing-dist"),
         }
@@ -66,8 +65,9 @@ def test_cloud_runner_dry_run_has_exact_contract_and_writes_nothing(tmp_path):
     assert output.count("PHASE aggregate") == 1
     assert "--checkpoint-ids arm0_update25 arm0_update30 arm0_final" in output
     assert "cublas_workspace_config: :4096:8" in output
-    assert "reset_worker_limit:      11" in output
+    assert "reset_worker_limit:      64" in output
     assert "environments_per_worker: 1" in output
+    assert "configured_collect_cost: 9-15h rough queue estimate" in output
     assert "standalone_process_core_update_25.pt" in output
     assert "standalone_process_core_update_30.pt" in output
     assert "standalone_process_core_final.pt" in output
@@ -109,6 +109,47 @@ def test_cloud_runner_rejects_contract_changes_without_writing(
 
     assert result.returncode == 2
     assert expected_error in result.stderr
+    assert not run_root.exists()
+
+
+@pytest.mark.parametrize(
+    ("environment_update", "expected_error"),
+    [
+        (
+            {"MAX_WORKERS": "1", "R27_G2_CONCURRENCY_VALIDATED": "1"},
+            "Serial R27-G2 experiment launch is disabled",
+        ),
+        (
+            {"MAX_WORKERS": "64", "R27_G2_CONCURRENCY_VALIDATED": "0"},
+            "Parallel launch requires R27_G2_CONCURRENCY_VALIDATED=1",
+        ),
+    ],
+)
+def test_cloud_runner_rejects_serial_or_unvalidated_launch_without_writing(
+    tmp_path, environment_update, expected_error
+):
+    run_root = tmp_path / "must-not-exist"
+    env = os.environ.copy()
+    env.update(
+        {
+            "DEVICE": "cuda",
+            "RUN_ROOT": to_msys_path(run_root),
+        }
+    )
+    env.update(environment_update)
+
+    result = subprocess.run(
+        [find_bash(), str(RUNNER)],
+        cwd=ROOT,
+        env=env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    assert expected_error in result.stderr
+    assert "No R27-G2 work was started" in result.stderr
     assert not run_root.exists()
 
 
@@ -267,7 +308,8 @@ def test_cloud_runner_contains_no_training_or_reward_switches():
     assert "--reward" not in source
     assert "--device cpu" not in source
     assert "seq 0 63" in source
-    assert 'MAX_WORKERS="${MAX_WORKERS:-1}"' in source
+    assert 'MAX_WORKERS="${MAX_WORKERS:-64}"' in source
+    assert "Serial R27-G2 experiment launch is disabled" in source
     assert 'CONTINUE_ON_ERROR="${CONTINUE_ON_ERROR:-0}"' in source
     assert 'R27_G2_CONCURRENCY_VALIDATED="${R27_G2_CONCURRENCY_VALIDATED:-0}"' in source
     assert "validate-reset" in source
