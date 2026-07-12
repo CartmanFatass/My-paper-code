@@ -79,6 +79,8 @@ Accepted sources:
 
 - `docs/superpowers/specs/2026-07-11-r27-g1-low-actor-capacity-autopsy-design.md`
 - `docs/superpowers/plans/2026-07-11-r27-g1-low-actor-capacity-autopsy.md`
+- `docs/superpowers/specs/2026-07-12-r27-g1-cloud-64env-parallel-collector-design.md`
+- `docs/superpowers/plans/2026-07-12-r27-g1-cloud-64env-parallel-collector.md`
 
 Implementation and review receipt:
 
@@ -86,25 +88,27 @@ Implementation and review receipt:
   `47399aa`, `5395331`, `aafaa8d`, `d6978bf`, and `10f4615` implement and
   harden the immutable snapshots, static actor audit, synthetic active/sham
   control, frozen CLI, exact runner, and artifact/gate identity contract.
-- Final `SolImplementationReviewerFrontier` verdicts are PASS for spec
-  compliance, code quality, runner/artifact contract, and launch readiness;
-  the raw report is `logs/r27_g1_capacity_build_20260711/review_final.md`.
-- The focused R27 plus R26 regression matrix passed `74 tests in 18.23s`.
-  PowerShell parser, Python AST, scoped diff hygiene, forbidden-core-file diff,
-  registered-checkpoint identity, and CUDA/64-reset/exact-3+1+1/no-write dry-run
-  checks passed.
+- Cloud64 commits through `679ed0b` add the reviewed selected-worker collector,
+  strict parallel artifact identity, and Linux runner without changing core
+  MARL behavior. Final standard and Frontier re-reviews returned no findings
+  and all PASS verdicts; reports are under
+  `logs/r27_g1_cloud64_build_20260712/`.
+- The focused matrix passed 85 core tests plus 2 runner tests. Python compile,
+  Bash syntax, scoped diff hygiene, forbidden-core-file scope,
+  registered-checkpoint identity, strict shard/manifest typing, IPC failure
+  cleanup, and CUDA/64-env/64-reset/exact-3+1+1/no-write dry-run checks passed.
 
 Scientific status and next gate:
 
 - Status remains **`ready_not_launched`**. The exact runner is
-  `scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1`; it requires a separate
+  `scripts/run_r27_g1_capacity_autopsy_cloud_64env.sh`; it requires a separate
   explicit user launch instruction.
-- Expected cost is 2.5--3.5 hours on the local RTX 4070 Laptop GPU with
-  `NResets=64`; CPU fallback is forbidden.
+- Expected cost is initially 1--2 hours on cloud CUDA with `NUM_ENVS=64` and
+  exactly `N_RESETS=64` total reset groups; CPU fallback is forbidden.
 - The audit is reward-off and frozen. It does not modify the actor, recurrent
   reset semantics, policy/critic architecture, PPO, optimizer/loss/advantage
-  logic, collector semantics, environment dynamics, source checkpoints, or
-  any reward path.
+  logic, training collector success-path semantics, environment dynamics,
+  source checkpoints, or any reward path.
 - The only scientific outputs are the pre-registered classifications
   `CAPACITY_PRESENT_OBJECTIVE_MISSING`, `RECURRENT_WASHOUT`,
   `STATIC_PATH_CAPACITY_WEAK`, `STATIC_USED_OBSERVATIONAL_MISS`,

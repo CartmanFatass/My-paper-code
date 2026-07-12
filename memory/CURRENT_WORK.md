@@ -11,12 +11,12 @@ context is archived under `memory/LTM/`.
   R24/R25/R26/R27 line on branch `aggressive`. R26-G1a failed its primary arm0
   family gate: none of update 25, update 30, or final passed the pre-registered
   held-out behavior screen. The current gate is the reward-off R27-G1 frozen
-  low-actor capacity autopsy. Implementation commits through `10f4615` are
-  complete; the final Frontier review passed spec compliance, code quality,
-  runner/artifact contract, and launch readiness, and the focused matrix passed
-  `74 tests in 18.23s`. The scientific audit remains `ready_not_launched` and
-  requires a separate explicit user instruction for approximately 2.5--3.5
-  hours of local CUDA work with `NResets=64`. IMOD remains a separate migrated
+  low-actor capacity autopsy. The cloud64 execution amendment is complete
+  through `679ed0b`; standard and Frontier re-reviews returned no findings and
+  all PASS verdicts, with 85 core plus 2 runner tests passing. The scientific
+  audit remains `ready_not_launched` and requires a separate explicit user
+  cloud launch for an initial estimated 1--2 hours on CUDA, using 64 parallel
+  environments but exactly 64 total reset groups. IMOD remains a separate migrated
   project/track and does not replace or redefine this line. The binding
   handover protocol below remains in force.
 - 2026-07-11 subagent cache policy update: project runtime capacity is now
@@ -125,6 +125,11 @@ context is archived under `memory/LTM/`.
 - `docs/superpowers/plans/2026-07-11-r27-g1-low-actor-capacity-autopsy.md`:
   implemented and reviewed R27-G1 plan; scientific launch remains a separate
   explicit user decision.
+- `docs/superpowers/specs/2026-07-12-r27-g1-cloud-64env-parallel-collector-design.md`
+  and `docs/superpowers/plans/2026-07-12-r27-g1-cloud-64env-parallel-collector.md`:
+  accepted and implemented cloud execution amendment. It uses 64 parallel
+  environments for exactly 64 total reset groups and does not change the R27
+  scientific hypothesis, thresholds, or reward-off status.
 - `AGENTS.md`: project-level Codex entrypoint; read before relying on deeper
   docs or historical memory. It defines the main-controller protocol,
   controller communication contract (situation, meaning, next plan,
@@ -221,19 +226,23 @@ context is archived under `memory/LTM/`.
 
 - `EXP-20260711-r27-g1-low-actor-capacity-autopsy` is
   **`ready_not_launched`**. Exact runner:
-  `scripts/run_r27_g1_capacity_autopsy_local_cuda.ps1`; expected cost is
-  2.5--3.5 hours on the local RTX 4070 Laptop GPU with `NResets=64` and no CPU
-  fallback. A separate explicit user launch instruction is still required.
+  `scripts/run_r27_g1_capacity_autopsy_cloud_64env.sh`; expected cost is an
+  initial 1--2 hours on cloud CUDA with `NUM_ENVS=64`, `N_RESETS=64`, and no
+  CPU fallback. A separate explicit user launch instruction is still required.
 - Implementation commits `c6136e2`, `9df2e3e`, `bf55ad2`, `7cbc8de`,
   `72420ea`, `6ce55e3`, `47399aa`, `5395331`, `aafaa8d`, `d6978bf`, and
-  `10f4615` are complete. Final Frontier verdicts are PASS for spec compliance,
-  code quality, runner/artifact contract, and launch readiness. The focused
-  verification result is `74 passed in 18.23s`; parser, AST, diff hygiene,
-  forbidden-core-file, exact-checkpoint, and CUDA 3+1+1 no-write dry-run checks
-  passed.
+  `10f4615`, followed by cloud64 commits `7b9bdae`, `4f31885`, `55068b3`,
+  `a1e73ee`, `b61ae8e`, and `679ed0b`, are complete. Final standard and
+  Frontier verdicts are PASS for spec compliance, concurrency/shared state,
+  code quality, scientific/artifact identity, runner/cloud safety, and launch
+  readiness. Verification reached 85 core plus 2 runner tests; Python compile,
+  Bash syntax, diff hygiene, forbidden-core-file, exact-checkpoint, strict
+  artifact identity, IPC cleanup, and CUDA 64-env/64-reset 3+1+1 no-write
+  dry-run checks passed.
 - R27 is a reward-off frozen diagnostic only. It changes no reward, actor,
-  policy/critic architecture, optimizer/loss/advantage logic, collector
-  semantics, environment dynamics, or source checkpoint, and it authorizes no
+  policy/critic architecture, optimizer/loss/advantage logic, training
+  collector success-path semantics, environment dynamics, or source checkpoint,
+  and it authorizes no
   actor redesign or q_A/q_d/q_D change before classification review.
 - Known unrelated baseline debt remains: the legacy standalone evaluation
   fixture lacks `args.log_dir` (`3 passed, 1 failed` in that bounded baseline
@@ -271,7 +280,8 @@ context is archived under `memory/LTM/`.
 ## Next Actions
 
 1. Await a separate explicit user instruction before launching the exact R27-G1
-   local-CUDA runner (estimated 2.5--3.5 hours, `NResets=64`). Do not infer a
+   cloud-CUDA runner (initial estimate 1--2 hours, 64 envs and exactly 64 total
+   reset groups). Do not infer a
    root-cause classification from implementation tests or review verdicts.
 2. After a launch completes, read the three arm0 static reports, three fixed-seed
    synthetic active/sham reports, and aggregate two-of-three classification
@@ -297,7 +307,7 @@ context is archived under `memory/LTM/`.
 ## Do Not Do Yet
 
 - Do not launch R27-G1 without a separate explicit user instruction. Do not
-  treat `74 passed in 18.23s`, dry-run checks, or four Frontier PASS verdicts as
+  treat 85+2 passing tests, dry-run checks, or review PASS verdicts as
   a scientific capacity result. Do not redesign the actor, reset recurrent
   hidden state, add post-GRU FiLM/action-head residuals, or enable `q_A`, `q_d`,
   `q_D`, or another reward path before the R27 classification is reviewed.
