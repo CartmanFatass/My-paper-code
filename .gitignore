@@ -52,7 +52,18 @@ data/
 # (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
 !memory/*.md
 !docs/superpowers/plans/*.md
+# Exact R27-G2 design/review evidence is durable project state.
+!docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
+!docs/external-review/R27_G2_design_review_20260712_Claude.md
+!docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md
+# LTM holds the rotated long-form history the compact files point at. It is the
+# archive half of the compact-memory contract, so it must be tracked too.
+!memory/LTM/*.md
+!memory/LTM/external_reviews/INDEX.md
+!memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md
 *.txt
+!/requirements_server.txt
+!scripts/r27_g2_runtime_package_manifest.txt
 *.tar
 *.png
 

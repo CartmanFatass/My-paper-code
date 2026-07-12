@@ -1,85 +1,15 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
+# The delegated-subagent workflow is retired (see AGENTS.md). The controller
+# works directly, so no agent roster is registered here.
+#
+# The 14 role definitions still exist as inert files under `.codex/agents/*.toml`
+# and the previous `[agents."..."]` registry is in git history
+# (`git show a9673cf:.codex/config.toml`). Re-register only if the workflow is
+# deliberately revived — a registered roster that AGENTS.md forbids using is the
+# worst case: Codex either spawns agents it was told not to, or burns reasoning
+# deciding whether it may.
+
 [features]
-multi_agent = true
+multi_agent = false
 multi_agent_v2 = false
-
-[agents]
-max_threads = 6
-max_depth = 1
-job_max_runtime_seconds = 1800
-
-[agents."CodebaseScout"]
-description = "Read-only HMASD codebase scout for bounded mapping and evidence gathering."
-config_file = "./agents/codebase-scout.toml"
-nickname_candidates = ["Codebase Scout", "Repository Mapper", "Context Scout"]
-
-[agents."SimplePatcher"]
-description = "Patch worker for default trivial, single-file mechanical edits."
-config_file = "./agents/simple-patcher.toml"
-nickname_candidates = ["Simple Patcher", "Small Fixer", "Mechanical Patcher"]
-
-[agents."TestRunner"]
-description = "Focused test runner and failure triage worker for bounded simple checks."
-config_file = "./agents/test-runner.toml"
-nickname_candidates = ["Test Runner", "Focused Verifier", "Failure Triage"]
-
-[agents."FastReviewer"]
-description = "Fast reviewer for small isolated mechanical diffs."
-config_file = "./agents/fast-reviewer.toml"
-nickname_candidates = ["Fast Reviewer", "Mechanical Review", "Small Diff Review"]
-
-[agents."Implementer"]
-description = "Implementation worker for bounded medium-complexity, multi-file, non-core tasks."
-config_file = "./agents/implementer.toml"
-nickname_candidates = ["Implementer", "Non-Core Implementer", "Multi-File Worker"]
-
-[agents."PlanImplementer"]
-description = "Implementation worker for core bounded code tasks from accepted plans."
-config_file = "./agents/plan-implementer.toml"
-nickname_candidates = ["Plan Implementer", "Core Implementer", "SDD Implementer"]
-
-[agents."ImplementationReviewer"]
-description = "Standard reviewer for nontrivial task reviews with model-tiered cost control."
-config_file = "./agents/implementation-reviewer.toml"
-nickname_candidates = ["Implementation Reviewer", "Code Reviewer", "Quality Gate"]
-
-[agents."ExpManager"]
-description = "Experiment manager for scripts, packages, launch commands, progress checks, logs, metrics, and factual records."
-config_file = "./agents/exp-manager.toml"
-nickname_candidates = ["Experiment Manager", "Bundle Manager", "Experiment Steward"]
-
-[agents."ResultAnalyst"]
-description = "Bounded experiment metric extraction and gate-table analyst for existing run artifacts."
-config_file = "./agents/result-analyst.toml"
-nickname_candidates = ["Result Analyst", "Metric Analyst", "Gate Analyst"]
-
-[agents."ExternalReviewManager"]
-description = "External model review archive and handoff manager."
-config_file = "./agents/external-review-manager.toml"
-nickname_candidates = ["External Review Manager", "Cross Review Manager", "Review Archive"]
-
-[agents."LongTimeMemoryManager"]
-description = "Memory-only steward for compact current records, plan/principle sync, and LTM archives."
-config_file = "./agents/long-time-memory-manager.toml"
-nickname_candidates = ["Memory Manager", "LTM Manager", "Memory Steward"]
-
-[agents."WorkflowAuditor"]
-description = "Read-only auditor for Codex subagent config, controller protocol, and workflow-document consistency."
-config_file = "./agents/workflow-auditor.toml"
-nickname_candidates = ["Workflow Auditor", "Config Auditor", "Protocol Auditor"]
-
-[agents."PlanImplementerFrontier"]
-description = "Frontier implementation worker for rare bounded core-code tasks that require architecture or algorithm judgment during implementation."
-config_file = "./agents/plan-implementer-frontier.toml"
-nickname_candidates = ["Frontier Implementer", "Algorithm Implementer", "Max Implementer"]
-
-[agents."ImplementationReviewerFrontier"]
-description = "Frontier reviewer for architecture, high-risk, shared-state, API/data-contract, and final whole-branch reviews."
-config_file = "./agents/implementation-reviewer-frontier.toml"
-nickname_candidates = ["Frontier Reviewer", "Final Reviewer", "Architecture Reviewer"]
-
-[agents."SparkExplicitSimplePatcher"]
-description = "Explicit-only legacy Spark patcher for simple, single-file, non-core tasks."
-config_file = "./agents/spark-explicit-simple-patcher.toml"
-nickname_candidates = ["Spark Explicit Patcher", "Spark Legacy Patcher", "Spark Opt-In Patcher"]

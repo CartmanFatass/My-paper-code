@@ -35,32 +35,32 @@
 
 ```python
 EXPECTED_PROFILES = {
-    "LunaCodebaseScout": ("luna-codebase-scout.toml", "gpt-5.6-luna", "low"),
-    "LunaSimplePatcher": ("luna-simple-patcher.toml", "gpt-5.6-luna", "low"),
-    "LunaTestRunner": ("luna-test-runner.toml", "gpt-5.6-luna", "low"),
+    "LunaCodebaseScout": ("luna-codebase-scout.toml", "gpt-5.6-luna", "medium"),
+    "LunaSimplePatcher": ("luna-simple-patcher.toml", "gpt-5.6-luna", "medium"),
+    "LunaTestRunner": ("luna-test-runner.toml", "gpt-5.6-luna", "medium"),
     "SparkExplicitSimplePatcher": (
         "spark-explicit-simple-patcher.toml", "gpt-5.3-codex-spark", "low"
     ),
     "TerraImplementer": ("terra-implementer.toml", "gpt-5.6-terra", "high"),
-    "TerraFastReviewer": ("terra-fast-reviewer.toml", "gpt-5.6-terra", "medium"),
-    "TerraExpManager": ("terra-exp-manager.toml", "gpt-5.6-terra", "medium"),
+    "TerraFastReviewer": ("terra-fast-reviewer.toml", "gpt-5.6-terra", "high"),
+    "TerraExpManager": ("terra-exp-manager.toml", "gpt-5.6-terra", "high"),
     "TerraExternalReviewManager": (
-        "terra-external-review-manager.toml", "gpt-5.6-terra", "medium"
+        "terra-external-review-manager.toml", "gpt-5.6-terra", "high"
     ),
     "TerraLongTimeMemoryManager": (
         "terra-long-time-memory-manager.toml", "gpt-5.6-terra", "high"
     ),
     "TerraResultAnalyst": ("terra-result-analyst.toml", "gpt-5.6-terra", "high"),
-    "SolPlanImplementer": ("sol-plan-implementer.toml", "gpt-5.6-sol", "high"),
+    "SolPlanImplementer": ("sol-plan-implementer.toml", "gpt-5.6-sol", "xhigh"),
     "SolImplementationReviewer": (
-        "sol-implementation-reviewer.toml", "gpt-5.6-sol", "high"
+        "sol-implementation-reviewer.toml", "gpt-5.6-sol", "xhigh"
     ),
-    "SolWorkflowAuditor": ("sol-workflow-auditor.toml", "gpt-5.6-sol", "high"),
+    "SolWorkflowAuditor": ("sol-workflow-auditor.toml", "gpt-5.6-sol", "xhigh"),
     "SolPlanImplementerFrontier": (
-        "sol-plan-implementer-frontier.toml", "gpt-5.6-sol", "xhigh"
+        "sol-plan-implementer-frontier.toml", "gpt-5.6-sol", "max"
     ),
     "SolImplementationReviewerFrontier": (
-        "sol-implementation-reviewer-frontier.toml", "gpt-5.6-sol", "xhigh"
+        "sol-implementation-reviewer-frontier.toml", "gpt-5.6-sol", "max"
     ),
 }
 ```

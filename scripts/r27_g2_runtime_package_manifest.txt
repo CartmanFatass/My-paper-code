@@ -1,0 +1,45 @@
+# R27-G2 maintained runtime package manifest.
+# Syntax: "directory <relative-path>" or "file <relative-path>".
+# Directory entries are recursive; the packager applies its fixed generated-file
+# exclusion policy before copying. Add a line here whenever the runtime gains a
+# new root import, source directory, test boundary, or evidence document.
+# The runner filename keeps the historical `_64env` contract label, but it
+# schedules exactly 64 reset IDs as isolated one-environment processes. Its
+# conservative default is one resident reset worker. MAX_WORKERS>1 is blocked
+# unless the operator explicitly records that the GPU/process topology was
+# separately validated; this does not change the 64-reset scientific support.
+
+directory ha_ctse_process
+directory envs
+directory hmasd
+
+file scripts/audit_r27_forced_trajectory_effect.py
+file scripts/run_r27_g2_forced_trajectory_effect_cloud_64env.sh
+file scripts/package_r27_g2_runtime.ps1
+file scripts/r27_g2_runtime_package_manifest.txt
+file scripts/remote/hmasd_autodl_ssh_config
+file scripts/remote/run_hmasd_r27_g2.ps1
+file scripts/remote/watch_r27_g2_status.sh
+
+file memory/CURRENT_WORK.md
+file memory/ALGORITHM_PRINCIPLES.md
+file memory/IMPLEMENTATION_PLAN.md
+file memory/ExpRecord.md
+
+file tests/r27_g2_cloud_runner_test.py
+file tests/r27_g2_cli_test.py
+file tests/r27_g2_collector_test.py
+file tests/r27_g2_live_hook_test.py
+file tests/r27_g2_package_test.py
+file tests/r27_g2_runtime_test.py
+file tests/r27_g2_analysis_test.py
+file tests/r27_g2_remote_workflow_test.py
+
+file AGENTS.md
+file config_1.py
+file logger.py
+file requirements_server.txt
+file routing_protocols.py
+file docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
+file docs/external-review/R27_G2_design_review_20260712_Claude.md
+file docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md

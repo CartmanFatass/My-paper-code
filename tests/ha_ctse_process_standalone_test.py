@@ -76,6 +76,11 @@ def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
     args = make_args()
     agent = make_agent(cfg)
     expected = next(agent.high.parameters()).detach().clone()
+    agent.high_value_norm.load_state_dict({"mean": 3.0, "var": 5.0, "count": 7.0})
+    if agent.low_value_norm is not None:
+        agent.low_value_norm.load_state_dict(
+            {"mean": 11.0, "var": 13.0, "count": 17.0}
+        )
 
     ckpt_path = tmp_path / "standalone.pt"
     process_train.save_checkpoint(ckpt_path, agent, args, cfg, total_steps=12, update_idx=3)
@@ -83,11 +88,16 @@ def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
     restored = make_agent(cfg)
     with torch.no_grad():
         next(restored.high.parameters()).add_(1.0)
-    total_steps, update_idx = process_train.load_checkpoint(ckpt_path, restored)
+    total_steps, update_idx = process_train.load_checkpoint(
+        ckpt_path, restored, load_optimizers=False
+    )
 
     assert total_steps == 12
     assert update_idx == 3
     torch.testing.assert_close(next(restored.high.parameters()).detach(), expected)
+    assert restored.high_value_norm.state_dict() == agent.high_value_norm.state_dict()
+    if agent.low_value_norm is not None:
+        assert restored.low_value_norm.state_dict() == agent.low_value_norm.state_dict()
 
 
 def test_process_update_injects_reward_into_matching_rollout_agent():

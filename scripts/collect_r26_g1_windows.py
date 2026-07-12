@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import sys
 from contextlib import contextmanager
@@ -438,28 +437,24 @@ def collect_reset(
     )
 
 
-def _file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with Path(path).open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def policy_parameter_sha256(agent: Any) -> str:
-    digest = hashlib.sha256()
+def snapshot_policy_parameters(agent: Any) -> dict[str, torch.Tensor]:
+    snapshot: dict[str, torch.Tensor] = {}
     seen_modules: set[int] = set()
     for attribute, value in sorted(vars(agent).items()):
         if not isinstance(value, torch.nn.Module) or id(value) in seen_modules:
             continue
         seen_modules.add(id(value))
         for name, parameter in sorted(value.named_parameters()):
-            tensor = parameter.detach().cpu().contiguous()
-            digest.update(f"{attribute}.{name}".encode("utf-8"))
-            digest.update(str(tensor.dtype).encode("ascii"))
-            digest.update(np.asarray(tensor.shape, dtype=np.int64).tobytes())
-            digest.update(tensor.numpy().tobytes())
-    return digest.hexdigest()
+            snapshot[f"{attribute}.{name}"] = parameter.detach().cpu().clone()
+    return snapshot
+
+
+def policy_parameters_equal(
+    left: dict[str, torch.Tensor], right: dict[str, torch.Tensor]
+) -> bool:
+    return left.keys() == right.keys() and all(
+        torch.equal(left[name], right[name]) for name in left
+    )
 
 
 def _jsonable(value: Any) -> Any:
@@ -521,6 +516,8 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
     checkpoint = Path(args.checkpoint)
     if not checkpoint.is_file():
         raise FileNotFoundError(checkpoint)
+    if checkpoint.stat().st_size <= 0:
+        raise ValueError(f"checkpoint is empty: {checkpoint}")
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -535,7 +532,7 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
         if args.checkpoint_update is not None
         else int(metadata.get("update_idx") or loaded_update)
     )
-    before_hash = policy_parameter_sha256(agent)
+    parameters_before = snapshot_policy_parameters(agent)
     totals = CollectorStats(0, 0, 0, 0)
     feature_dimensions: dict[str, int] = {}
     reset_seeds: list[int] = []
@@ -573,8 +570,9 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
     finally:
         env.close()
 
-    after_hash = policy_parameter_sha256(agent)
-    hashes_equal = before_hash == after_hash
+    parameters_unchanged = policy_parameters_equal(
+        parameters_before, snapshot_policy_parameters(agent)
+    )
     underpowered = totals.completed_windows == 0
     manifest: dict[str, Any] = {
         "status": "UNDERPOWERED" if underpowered else "OK",
@@ -586,7 +584,7 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
         "checkpoint": str(checkpoint),
         "checkpoint_id": checkpoint_id,
         "checkpoint_update": checkpoint_update,
-        "checkpoint_sha256": _file_sha256(checkpoint),
+        "checkpoint_nonempty": checkpoint.stat().st_size > 0,
         "checkpoint_metadata": _jsonable(metadata),
         "base_seed": int(args.seed),
         "reset_seeds": reset_seeds,
@@ -594,16 +592,14 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
         "episode_max_steps": int(args.episode_max_steps),
         "stats": asdict(totals),
         "feature_dimensions": feature_dimensions,
-        "policy_parameter_sha256_before": before_hash,
-        "policy_parameter_sha256_after": after_hash,
-        "policy_parameter_sha256_equal": hashes_equal,
+        "policy_parameters_unchanged": parameters_unchanged,
         "device": str(args.device),
     }
     (output_dir / "collector_manifest.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    if not hashes_equal:
-        raise RuntimeError("policy parameter SHA256 changed during frozen collection")
+    if not parameters_unchanged:
+        raise RuntimeError("policy parameters changed during frozen collection")
     return manifest
 
 

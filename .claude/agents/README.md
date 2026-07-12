@@ -82,7 +82,7 @@ Intent notes carried over from the Codex config:
   review workflow: it runs one read-only round through the Codex plugin's
   companion runtime so Claude-made MARL design decisions are cross-validated by
   a non-Claude reviewer. The external reviewer is pinned explicitly to
-  `gpt-5.5` at `xhigh` effort — the same frontier tier the Codex workflow uses
+  `gpt-5.6-sol` at `max` effort — the same frontier tier the Codex workflow uses
   for architecture/final reviews — and does not rely on the user's Codex config
   defaults; the dispatch brief may override it for low-stakes sanity checks.
   The local agent is sonnet because its own work (prompt composition,

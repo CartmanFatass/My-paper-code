@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import copy
-import hashlib
 from dataclasses import dataclass
 from itertools import combinations
 from pathlib import Path
@@ -976,59 +975,62 @@ def _minibatch_schedule(
     )
 
 
-def _actor_state_sha256(actor: Any) -> str:
-    digest = hashlib.sha256()
-    for name, tensor in sorted(actor.state_dict().items()):
-        if not name.startswith("actor_"):
-            continue
-        value = tensor.detach().cpu().contiguous()
-        digest.update(name.encode("utf-8"))
-        digest.update(str(value.dtype).encode("ascii"))
-        digest.update(np.asarray(value.shape, dtype=np.int64).tobytes())
-        digest.update(value.numpy().tobytes())
-    return digest.hexdigest()
+def _actor_state_snapshot(actor: Any) -> dict[str, torch.Tensor]:
+    return {
+        name: tensor.detach().cpu().clone()
+        for name, tensor in sorted(actor.state_dict().items())
+        if name.startswith("actor_")
+    }
+
+
+def _actor_states_equal(
+    left: dict[str, torch.Tensor], right: dict[str, torch.Tensor]
+) -> bool:
+    return left.keys() == right.keys() and all(
+        torch.equal(left[name], right[name]) for name in left
+    )
 
 
 def _actor_parameter_count(actor: Any) -> int:
     return int(sum(parameter.numel() for parameter in actor.actor_update_parameters()))
 
 
-def _minibatch_schedule_sha256(schedule: tuple[np.ndarray, ...]) -> str:
-    digest = hashlib.sha256()
-    for indices in schedule:
-        values = np.asarray(indices, dtype=np.int64)
-        digest.update(np.asarray(values.shape, dtype=np.int64).tobytes())
-        digest.update(values.tobytes())
-    return digest.hexdigest()
+def _copy_minibatch_schedule(
+    schedule: tuple[np.ndarray, ...],
+) -> tuple[np.ndarray, ...]:
+    return tuple(np.asarray(indices, dtype=np.int64).copy() for indices in schedule)
 
 
-def _array_payload_sha256(named_arrays: dict[str, np.ndarray]) -> str:
-    digest = hashlib.sha256()
-    for name, array in sorted(named_arrays.items()):
-        value = np.ascontiguousarray(np.asarray(array))
-        digest.update(name.encode("utf-8"))
-        digest.update(str(value.dtype).encode("ascii"))
-        digest.update(np.asarray(value.shape, dtype=np.int64).tobytes())
-        digest.update(value.tobytes())
-    return digest.hexdigest()
+def _minibatch_schedules_equal(
+    left: tuple[np.ndarray, ...], right: tuple[np.ndarray, ...]
+) -> bool:
+    return len(left) == len(right) and all(
+        np.array_equal(np.asarray(a), np.asarray(b)) for a, b in zip(left, right)
+    )
 
 
-def _synthetic_rows_sha256(rows: SyntheticRows) -> str:
-    return _array_payload_sha256(
-        {
-            field: np.asarray(getattr(rows, field))
+def _copy_synthetic_rows(rows: SyntheticRows) -> SyntheticRows:
+    return SyntheticRows(
+        **{
+            field: np.asarray(getattr(rows, field)).copy()
             for field in SyntheticRows.__dataclass_fields__
         }
     )
 
 
-def _synthetic_targets_sha256(
+def _synthetic_rows_equal(left: SyntheticRows, right: SyntheticRows) -> bool:
+    return all(
+        np.array_equal(np.asarray(getattr(left, field)), np.asarray(getattr(right, field)))
+        for field in SyntheticRows.__dataclass_fields__
+    )
+
+
+def _synthetic_targets(
     codebook: np.ndarray, true_skill: np.ndarray
-) -> str:
-    targets = np.asarray(codebook, dtype=np.float32)[
+) -> np.ndarray:
+    return np.asarray(codebook, dtype=np.float32)[
         np.asarray(true_skill, dtype=np.int64)
-    ]
-    return _array_payload_sha256({"targets": targets})
+    ].copy()
 
 
 def _optimizer_contract(optimizer: torch.optim.Optimizer) -> dict[str, object]:
@@ -1149,22 +1151,18 @@ def fit_synthetic_clone(
     validation_rows = _validate_synthetic_rows(validation)
     clone = copy.deepcopy(source_actor).to(device)
     clone.device = torch.device(device)
-    initial_actor_sha256 = _actor_state_sha256(clone)
+    initial_actor_state = _actor_state_snapshot(clone)
     actor_parameter_count = _actor_parameter_count(clone)
     clone.train()
     optimizer = torch.optim.Adam(
         clone.actor_update_parameters(), lr=float(config.learning_rate)
     )
     optimizer_contract = _optimizer_contract(optimizer)
-    minibatch_schedule_sha256 = _minibatch_schedule_sha256(minibatches)
-    train_rows_sha256 = _synthetic_rows_sha256(train_rows)
-    validation_rows_sha256 = _synthetic_rows_sha256(validation_rows)
-    train_targets_sha256 = _synthetic_targets_sha256(
-        codebook, train_rows.true_skill
-    )
-    validation_targets_sha256 = _synthetic_targets_sha256(
-        codebook, validation_rows.true_skill
-    )
+    minibatch_schedule = _copy_minibatch_schedule(minibatches)
+    train_rows_snapshot = _copy_synthetic_rows(train_rows)
+    validation_rows_snapshot = _copy_synthetic_rows(validation_rows)
+    train_targets = _synthetic_targets(codebook, train_rows.true_skill)
+    validation_targets = _synthetic_targets(codebook, validation_rows.true_skill)
     best_validation_loss = float("inf")
     best_step = 0
     best_state: dict[str, torch.Tensor] | None = None
@@ -1230,14 +1228,14 @@ def fit_synthetic_clone(
         "train_losses": train_losses,
         "validation_losses": validation_losses,
         "validation_evaluations": int(validation_evaluations),
-        "initial_actor_sha256": initial_actor_sha256,
+        "initial_actor_state": initial_actor_state,
         "actor_parameter_count": actor_parameter_count,
         "optimizer_contract": optimizer_contract,
-        "minibatch_schedule_sha256": minibatch_schedule_sha256,
-        "train_rows_sha256": train_rows_sha256,
-        "validation_rows_sha256": validation_rows_sha256,
-        "train_targets_sha256": train_targets_sha256,
-        "validation_targets_sha256": validation_targets_sha256,
+        "minibatch_schedule": minibatch_schedule,
+        "train_rows": train_rows_snapshot,
+        "validation_rows": validation_rows_snapshot,
+        "train_targets": train_targets,
+        "validation_targets": validation_targets,
     }
 
 
@@ -1322,8 +1320,7 @@ def _terminal_synthetic_seed_report(
     status: str,
     reasons: list[str],
     num_skills: int,
-    source_actor_sha256_before: str,
-    source_actor_sha256_after: str,
+    source_actor_unchanged: bool,
     source_actor_parameter_count: int,
     support: dict[str, int],
 ) -> dict[str, object]:
@@ -1333,10 +1330,7 @@ def _terminal_synthetic_seed_report(
         "pass": False,
         "reasons": list(reasons),
         "support": dict(support),
-        "source_actor_sha256_before": source_actor_sha256_before,
-        "source_actor_sha256_after": source_actor_sha256_after,
-        "source_actor_sha256_equal": source_actor_sha256_before
-        == source_actor_sha256_after,
+        "source_actor_unchanged": bool(source_actor_unchanged),
         "source_actor_parameter_count": int(source_actor_parameter_count),
         "thresholds": _synthetic_thresholds(num_skills),
     }
@@ -1365,20 +1359,20 @@ def evaluate_synthetic_seed(
     """Run one paired active/fake-label capacity control seed."""
 
     num_skills = int(source_actor.n_skills)
-    source_actor_sha256_before = _actor_state_sha256(source_actor)
+    source_actor_state_before = _actor_state_snapshot(source_actor)
     source_actor_parameter_count = _actor_parameter_count(source_actor)
     try:
         validated_batch = validate_capacity_snapshots(batch)
         support = _synthetic_split_support(validated_batch, split)
     except (IndexError, ValueError) as error:
-        source_after = _actor_state_sha256(source_actor)
         return _terminal_synthetic_seed_report(
             seed=seed,
             status="INVALID",
             reasons=[f"invalid snapshot/split contract: {error}"],
             num_skills=num_skills,
-            source_actor_sha256_before=source_actor_sha256_before,
-            source_actor_sha256_after=source_after,
+            source_actor_unchanged=_actor_states_equal(
+                source_actor_state_before, _actor_state_snapshot(source_actor)
+            ),
             source_actor_parameter_count=source_actor_parameter_count,
             support={},
         )
@@ -1397,8 +1391,9 @@ def evaluate_synthetic_seed(
                 f"bootstrap requires at least {MIN_BOOTSTRAP_RESET_GROUPS} test reset groups"
             ],
             num_skills=num_skills,
-            source_actor_sha256_before=source_actor_sha256_before,
-            source_actor_sha256_after=_actor_state_sha256(source_actor),
+            source_actor_unchanged=_actor_states_equal(
+                source_actor_state_before, _actor_state_snapshot(source_actor)
+            ),
             source_actor_parameter_count=source_actor_parameter_count,
             support=support,
         )
@@ -1417,8 +1412,9 @@ def evaluate_synthetic_seed(
                 f"expected {expected_codebook_shape}, got {codebook_values.shape}"
             ],
             num_skills=num_skills,
-            source_actor_sha256_before=source_actor_sha256_before,
-            source_actor_sha256_after=_actor_state_sha256(source_actor),
+            source_actor_unchanged=_actor_states_equal(
+                source_actor_state_before, _actor_state_snapshot(source_actor)
+            ),
             source_actor_parameter_count=source_actor_parameter_count,
             support=support,
         )
@@ -1439,8 +1435,9 @@ def evaluate_synthetic_seed(
             status="INVALID",
             reasons=[f"invalid balanced synthetic rows: {error}"],
             num_skills=num_skills,
-            source_actor_sha256_before=source_actor_sha256_before,
-            source_actor_sha256_after=_actor_state_sha256(source_actor),
+            source_actor_unchanged=_actor_states_equal(
+                source_actor_state_before, _actor_state_snapshot(source_actor)
+            ),
             source_actor_parameter_count=source_actor_parameter_count,
             support=support,
         )
@@ -1448,9 +1445,8 @@ def evaluate_synthetic_seed(
     minibatches = _minibatch_schedule(
         train.true_skill.size, config, seed=int(seed) + 400
     )
-    schedule_sha256 = _minibatch_schedule_sha256(minibatches)
-    source_actor_sha256_after_active = source_actor_sha256_before
-    source_actor_sha256_after = source_actor_sha256_before
+    source_actor_unchanged_after_active = True
+    source_actor_unchanged = True
     try:
         active_fit = fit_synthetic_clone(
             source_actor=source_actor,
@@ -1462,7 +1458,9 @@ def evaluate_synthetic_seed(
             config=config,
             device=device,
         )
-        source_actor_sha256_after_active = _actor_state_sha256(source_actor)
+        source_actor_unchanged_after_active = _actor_states_equal(
+            source_actor_state_before, _actor_state_snapshot(source_actor)
+        )
         sham_fit = fit_synthetic_clone(
             source_actor=source_actor,
             train=train,
@@ -1473,7 +1471,9 @@ def evaluate_synthetic_seed(
             config=config,
             device=device,
         )
-        source_actor_sha256_after = _actor_state_sha256(source_actor)
+        source_actor_unchanged = _actor_states_equal(
+            source_actor_state_before, _actor_state_snapshot(source_actor)
+        )
         active_train = score_synthetic_clone(
             active_fit["model"],
             train,
@@ -1503,14 +1503,15 @@ def evaluate_synthetic_seed(
             seed=int(seed) + 500,
         )
     except FloatingPointError as error:
-        source_actor_sha256_after = _actor_state_sha256(source_actor)
+        source_actor_unchanged = _actor_states_equal(
+            source_actor_state_before, _actor_state_snapshot(source_actor)
+        )
         return _terminal_synthetic_seed_report(
             seed=seed,
             status="INVALID",
             reasons=[f"non-finite synthetic evidence: {error}"],
             num_skills=num_skills,
-            source_actor_sha256_before=source_actor_sha256_before,
-            source_actor_sha256_after=source_actor_sha256_after,
+            source_actor_unchanged=source_actor_unchanged,
             source_actor_parameter_count=source_actor_parameter_count,
             support=support,
         )
@@ -1518,14 +1519,15 @@ def evaluate_synthetic_seed(
     accuracy_difference = active_test.accuracy - sham_test.accuracy
     generalization_gap = active_train.accuracy - active_test.accuracy
     source_immutable = bool(
-        source_actor_sha256_before
-        == source_actor_sha256_after_active
-        == source_actor_sha256_after
+        source_actor_unchanged_after_active and source_actor_unchanged
     )
     initialization_equal = bool(
-        active_fit["initial_actor_sha256"]
-        == sham_fit["initial_actor_sha256"]
-        == source_actor_sha256_before
+        _actor_states_equal(
+            active_fit["initial_actor_state"], sham_fit["initial_actor_state"]
+        )
+        and _actor_states_equal(
+            active_fit["initial_actor_state"], source_actor_state_before
+        )
     )
     parameter_count_equal = bool(
         int(active_fit["actor_parameter_count"])
@@ -1533,27 +1535,31 @@ def evaluate_synthetic_seed(
         == source_actor_parameter_count
     )
     schedule_equal = bool(
-        active_fit["minibatch_schedule_sha256"]
-        == sham_fit["minibatch_schedule_sha256"]
-        == schedule_sha256
+        _minibatch_schedules_equal(
+            active_fit["minibatch_schedule"], sham_fit["minibatch_schedule"]
+        )
+        and _minibatch_schedules_equal(
+            active_fit["minibatch_schedule"], minibatches
+        )
     )
     optimizer_equal = bool(
         active_fit["optimizer_contract"] == sham_fit["optimizer_contract"]
     )
     train_rows_equal = bool(
-        active_fit["train_rows_sha256"] == sham_fit["train_rows_sha256"]
+        _synthetic_rows_equal(active_fit["train_rows"], sham_fit["train_rows"])
     )
     validation_rows_equal = bool(
-        active_fit["validation_rows_sha256"]
-        == sham_fit["validation_rows_sha256"]
+        _synthetic_rows_equal(
+            active_fit["validation_rows"], sham_fit["validation_rows"]
+        )
     )
     train_targets_equal = bool(
-        active_fit["train_targets_sha256"]
-        == sham_fit["train_targets_sha256"]
+        np.array_equal(active_fit["train_targets"], sham_fit["train_targets"])
     )
     validation_targets_equal = bool(
-        active_fit["validation_targets_sha256"]
-        == sham_fit["validation_targets_sha256"]
+        np.array_equal(
+            active_fit["validation_targets"], sham_fit["validation_targets"]
+        )
     )
     control_contract_valid = bool(
         source_immutable
@@ -1639,44 +1645,20 @@ def evaluate_synthetic_seed(
             "sham": int(sham_fit["validation_evaluations"]),
         },
         "test_evaluations": {"active": 1, "sham": 1},
-        "initial_actor_sha256": source_actor_sha256_before,
-        "source_actor_sha256_before": source_actor_sha256_before,
-        "source_actor_sha256_after_active_fit": source_actor_sha256_after_active,
-        "source_actor_sha256_after": source_actor_sha256_after,
-        "source_actor_sha256_equal": source_immutable,
-        "active_initial_actor_sha256": active_fit["initial_actor_sha256"],
-        "sham_initial_actor_sha256": sham_fit["initial_actor_sha256"],
+        "source_actor_unchanged": source_immutable,
+        "source_actor_unchanged_after_active_fit": source_actor_unchanged_after_active,
         "active_sham_initialization_equal": initialization_equal,
         "source_actor_parameter_count": source_actor_parameter_count,
         "active_actor_parameter_count": int(active_fit["actor_parameter_count"]),
         "sham_actor_parameter_count": int(sham_fit["actor_parameter_count"]),
         "active_sham_parameter_count_equal": parameter_count_equal,
-        "minibatch_schedule_sha256": schedule_sha256,
-        "active_minibatch_schedule_sha256": active_fit[
-            "minibatch_schedule_sha256"
-        ],
-        "sham_minibatch_schedule_sha256": sham_fit[
-            "minibatch_schedule_sha256"
-        ],
         "active_sham_shared_minibatch_schedule": schedule_equal,
         "active_optimizer_contract": active_fit["optimizer_contract"],
         "sham_optimizer_contract": sham_fit["optimizer_contract"],
-        "active_train_rows_sha256": active_fit["train_rows_sha256"],
-        "sham_train_rows_sha256": sham_fit["train_rows_sha256"],
-        "active_validation_rows_sha256": active_fit[
-            "validation_rows_sha256"
-        ],
-        "sham_validation_rows_sha256": sham_fit[
-            "validation_rows_sha256"
-        ],
-        "active_train_targets_sha256": active_fit["train_targets_sha256"],
-        "sham_train_targets_sha256": sham_fit["train_targets_sha256"],
-        "active_validation_targets_sha256": active_fit[
-            "validation_targets_sha256"
-        ],
-        "sham_validation_targets_sha256": sham_fit[
-            "validation_targets_sha256"
-        ],
+        "active_sham_train_rows_equal": train_rows_equal,
+        "active_sham_validation_rows_equal": validation_rows_equal,
+        "active_sham_train_targets_equal": train_targets_equal,
+        "active_sham_validation_targets_equal": validation_targets_equal,
         "thresholds": _synthetic_thresholds(num_skills),
     }
 

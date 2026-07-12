@@ -85,6 +85,11 @@ REQUIRED_TEXT = {
         "TerraImplementer",
         "SolPlanImplementer",
         "SparkExplicitSimplePatcher",
+        "Cache-Aware Subagent Lifetime",
+        "prompt_cache_key",
+        "max_threads = 12",
+        "retention capacity",
+        "send_input",
     ),
     README: (
         "Terminal Status Protocol",
@@ -107,6 +112,10 @@ REQUIRED_TEXT = {
         "TerraImplementer",
         "SolPlanImplementer",
         "SparkExplicitSimplePatcher",
+        "cache-aware policy",
+        "max_threads = 12",
+        "send_input",
+        "`DONE` is a task status",
     ),
     TEMPLATE: (
         "Shared Short Reply Contract",
@@ -229,7 +238,7 @@ def check_agent_identity_contract(toml_files: list[Path]) -> None:
     if not isinstance(raw_agents, dict):
         raise AssertionError(f"{CONFIG} missing [agents] table")
     for field, expected in (
-        ("max_threads", 6),
+        ("max_threads", 12),
         ("max_depth", 1),
         ("job_max_runtime_seconds", 1800),
     ):

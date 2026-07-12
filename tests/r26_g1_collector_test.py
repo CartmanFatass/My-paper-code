@@ -17,8 +17,9 @@ from scripts.collect_r26_g1_windows import (
     PendingWindow,
     collect_reset,
     pending_prior_context,
-    policy_parameter_sha256,
+    policy_parameters_equal,
     require_cuda_device,
+    snapshot_policy_parameters,
 )
 
 
@@ -475,13 +476,13 @@ def test_preserve_agent_runtime_restores_every_owned_attribute_by_identity():
     )
 
 
-def test_parameter_hash_is_stable_and_sensitive_to_parameter_changes():
+def test_parameter_snapshot_is_stable_and_sensitive_to_parameter_changes():
     agent = SimpleNamespace(policy=torch.nn.Linear(2, 1, bias=False))
-    stable = policy_parameter_sha256(agent)
-    assert policy_parameter_sha256(agent) == stable
+    stable = snapshot_policy_parameters(agent)
+    assert policy_parameters_equal(snapshot_policy_parameters(agent), stable)
     with torch.no_grad():
         agent.policy.weight.add_(1.0)
-    assert policy_parameter_sha256(agent) != stable
+    assert not policy_parameters_equal(snapshot_policy_parameters(agent), stable)
 
 
 def test_run_collection_writes_one_shard_per_reset_and_manifest_identity(
@@ -530,4 +531,5 @@ def test_run_collection_writes_one_shard_per_reset_and_manifest_identity(
     assert written["checkpoint_metadata"]["n_skills"] == 4
     assert written["reset_seeds"] == [7, 8, 9]
     assert written["stats"]["resets"] == 3
-    assert written["policy_parameter_sha256_equal"] is True
+    assert written["checkpoint_nonempty"] is True
+    assert written["policy_parameters_unchanged"] is True

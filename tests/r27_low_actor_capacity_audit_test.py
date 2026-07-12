@@ -387,27 +387,15 @@ def test_active_clone_learns_better_than_fake_label_sham():
     assert result["active_sham_initialization_equal"] is True
     assert result["active_sham_parameter_count_equal"] is True
     assert result["active_sham_shared_minibatch_schedule"] is True
-    assert result["source_actor_sha256_before"] == result["source_actor_sha256_after"]
-    assert result["active_minibatch_schedule_sha256"] == result[
-        "sham_minibatch_schedule_sha256"
-    ] == result["minibatch_schedule_sha256"]
+    assert result["source_actor_unchanged"] is True
+    assert result["source_actor_unchanged_after_active_fit"] is True
     assert result["active_optimizer_contract"] == result[
         "sham_optimizer_contract"
     ]
-    assert result["active_train_rows_sha256"] == result[
-        "sham_train_rows_sha256"
-    ]
-    assert result["active_validation_rows_sha256"] == result[
-        "sham_validation_rows_sha256"
-    ]
-    assert result["active_train_targets_sha256"] == result[
-        "sham_train_targets_sha256"
-    ]
-    assert result["active_validation_targets_sha256"] == result[
-        "sham_validation_targets_sha256"
-    ]
-    assert len(result["initial_actor_sha256"]) == 64
-    assert len(result["minibatch_schedule_sha256"]) == 64
+    assert result["active_sham_train_rows_equal"] is True
+    assert result["active_sham_validation_rows_equal"] is True
+    assert result["active_sham_train_targets_equal"] is True
+    assert result["active_sham_validation_targets_equal"] is True
     for name, expected in source_before.items():
         torch.testing.assert_close(actor.state_dict()[name], expected)
 
@@ -551,9 +539,7 @@ def test_source_actor_mutation_after_both_fits_is_structured_invalid(monkeypatch
 
     assert result["status"] == "INVALID"
     assert result["pass"] is False
-    assert result["source_actor_sha256_before"] != result[
-        "source_actor_sha256_after"
-    ]
+    assert result["source_actor_unchanged"] is False
     assert "source actor changed" in " ".join(result["reasons"])
 
 

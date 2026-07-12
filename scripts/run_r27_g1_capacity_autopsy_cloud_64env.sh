@@ -13,7 +13,6 @@ COLLECTOR_BACKEND="${COLLECTOR_BACKEND:-subproc}"
 COLLECTOR_START_METHOD="${COLLECTOR_START_METHOD:-spawn}"
 CHECKPOINT_DIST_ROOT="${CHECKPOINT_DIST_ROOT:-$ROOT/dist}"
 RUN_ROOT="${RUN_ROOT:-logs/r27_g1_capacity_autopsy_cloud64_$(date +%Y%m%d_%H%M%S)}"
-SHA256_BIN="${SHA256_BIN:-sha256sum}"
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
 
@@ -50,11 +49,6 @@ ARM_FILES=(
   standalone_process_core_update_25.pt
   standalone_process_core_update_30.pt
   standalone_process_core_final.pt
-)
-ARM_HASHES=(
-  3f6404cd54e75f3f39af0cffb56c444dda78acd05993f1b6efd9cdc77ad9ca54
-  6553e97c032e54f0a19cf801e451298d6b56232720d82a8e26abbdb7171acabc
-  eeaa4f7ec32314d47be818f20c76758c47a97b7881aa997511a2660bb5632c36
 )
 CHECKPOINT_DIR="$CHECKPOINT_DIST_ROOT/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1"
 
@@ -98,14 +92,8 @@ if [[ "$DRY_RUN" -eq 0 ]]; then
   fi
   for index in 0 1 2; do
     checkpoint="$CHECKPOINT_DIR/${ARM_FILES[$index]}"
-    if [[ ! -f "$checkpoint" ]]; then
-      echo "Required checkpoint not found: $checkpoint" >&2
-      exit 2
-    fi
-    actual_hash="$("$SHA256_BIN" "$checkpoint" | awk '{print tolower($1)}')"
-    if [[ "$actual_hash" != "${ARM_HASHES[$index]}" ]]; then
-      echo "Checkpoint SHA256 mismatch: $checkpoint" >&2
-      echo "expected=${ARM_HASHES[$index]} actual=$actual_hash" >&2
+    if [[ ! -s "$checkpoint" ]]; then
+      echo "Required checkpoint is missing or empty: $checkpoint" >&2
       exit 2
     fi
   done

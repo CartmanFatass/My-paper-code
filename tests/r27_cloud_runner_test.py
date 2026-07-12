@@ -82,27 +82,10 @@ def test_cloud_runner_marks_failed_collect_arm_terminal(tmp_path):
     ):
         (checkpoint_dir / filename).write_bytes(b"fixture")
 
-    fake_bin = tmp_path / "bin"
-    fake_bin.mkdir()
-    fake_sha = fake_bin / "sha256sum"
-    fake_sha.write_text(
-        """#!/usr/bin/env bash
-case "$1" in
-  *update_25.pt) hash=3f6404cd54e75f3f39af0cffb56c444dda78acd05993f1b6efd9cdc77ad9ca54 ;;
-  *update_30.pt) hash=6553e97c032e54f0a19cf801e451298d6b56232720d82a8e26abbdb7171acabc ;;
-  *final.pt) hash=eeaa4f7ec32314d47be818f20c76758c47a97b7881aa997511a2660bb5632c36 ;;
-esac
-printf '%s  %s\\n' "$hash" "$1"
-""",
-        encoding="utf-8",
-    )
-    fake_sha.chmod(0o755)
     run_root = tmp_path / "failed-run"
     env = os.environ.copy()
     env.update(
         {
-            "PATH": f"{to_msys_path(fake_bin)}:/usr/bin:/bin",
-            "SHA256_BIN": to_msys_path(fake_sha),
             "PYTHON_BIN": find_bash(),
             "DEVICE": "cuda",
             "NUM_ENVS": "64",

@@ -981,3 +981,119 @@ _Condensed 2026-07-06 (completed/superseded). Full text: `memory/backup_20260706
 - P3 is the variable-lifetime version of HMASD's closed intrinsic loop:
 - skill is sampled
 
+
+---
+
+# Research Causal Discipline
+
+_Moved verbatim from `AGENTS.md` on 2026-07-13. This is the research contract:
+it belongs with the principles, not in the always-injected instruction file.
+`AGENTS.md` now points here._
+
+## Falsifiable Causal Edges
+
+HA-CTSE research advances through falsifiable causal edges, not by accumulating
+round numbers, classifiers, modules, reward terms, or unreviewed experiments.
+
+```text
+individual skill z_i -> persistent executable behavior
+distinct z_i -> behaviorally differentiated skills
+team intent g/Z -> complementary joint assignment
+joint assignment -> complementary joint behavior/effect
+joint behavior/effect -> recoverable q_d/q_D residual
+intrinsic reward -> improved policy without collapse or shortcut dominance
+policy -> sparse-reward task improvement and HMASD parity
+```
+
+Do not promote a downstream edge while a required upstream edge is failed,
+invalid, mixed, or underpowered. Classifier accuracy, a positive residual, or
+high latent entropy does not by itself prove behavioral control, cooperation,
+credit assignment, reward usefulness, or task improvement.
+
+### Causal-Claim Record
+
+Before launching a meaningful experiment, register in the accepted plan and
+`memory/ExpRecord.md`:
+
+- the exact causal edge and hypothesis;
+- upstream evidence that authorizes testing it;
+- baseline level and exact comparator;
+- metrics, thresholds, nulls, seeds, timesteps, and optimizer-update exposure;
+- PASS, FAIL, MIXED, UNDERPOWERED, INVALID, and crash branches;
+- the only next action authorized by each branch;
+- changes prohibited while the gate remains open.
+
+Experiments are evidence for claims, not disposable module trials. Preserve
+negative results as constraints. Do not silently rename, delete, reinterpret,
+or rerun a failed line until it looks favorable.
+
+### Four-Level Baseline Hierarchy
+
+Use the lowest level that directly answers the question.
+
+1. **Diagnostic null.** Use context/prior-only, pre-window, shuffled,
+   fake-label or fake-marginal, agent-matched, duration-matched,
+   agent-duration-matched, and action/effect ablations as applicable. Match
+   held-out split, capacity, optimizer, stopping rule, and device. This proves
+   incremental signal only.
+2. **Mechanism-matched HA-CTSE control.** Match surrounding architecture,
+   capacity, parameter/update budget, training contract, commit, environment
+   count, rollout length, optimizer updates, seed, and evaluation protocol.
+   Change only the intended causal intervention. Added capacity requires a
+   capacity-matched inactive, sham, or ablated pathway.
+3. **Async temporal control.** Compare asynchronous per-agent variable
+   lifetimes with full-sync/fixed and shared-fixed controls under identical
+   mechanisms, rewards, network, environments, updates, seeds, and evaluation.
+   Run this only after the skill mechanism works.
+4. **HMASD parity reference.** Compare complete algorithms only after matching
+   scenario, agent count, network/parameter budget, environment count or
+   optimizer-update exposure, action mode, episode count, metrics, seeds, and
+   training budget as closely as practical.
+
+Historical runs are references, not exact causal controls after architecture or
+training contracts change. Equal environment steps do not imply equal
+optimization exposure. Always report environment steps and optimizer-update
+count. Label comparisons that change seed, environment count, updates, network
+size, evaluation, or multiple algorithm flags as `reference-only` or
+`confounded`.
+
+### Experiment Promotion Ladder
+
+Advance new latent, discriminator, assignment, reward, or credit mechanisms in
+this order:
+
+```text
+0. wiring and synthetic positive/negative controls
+1. reward-off held-out observational signal against diagnostic nulls
+2. reward-off causal intervention with persistent behavior/effect separation
+3. small clipped reward against a mechanism-matched HA-CTSE control
+4. long-run verification at the declared horizon with paired seeds
+5. async temporal ablation for a decoupled-lifetime claim
+6. matched HMASD parity for the complete algorithm
+```
+
+Failure at one level blocks later levels. Instrument repair may repeat the same
+gate only when the result is explicitly `INVALID` or `UNDERPOWERED` and the
+scientific thresholds remain unchanged. Do not redesign metrics after viewing
+results.
+
+### Failure Review Gate
+
+After `FAIL`, `MIXED`, `UNDERPOWERED`, or `INVALID`, complete a review before a
+new core algorithm change or reward experiment. Separate:
+
+- verified mechanism evidence;
+- instrumentation and data-quality failures;
+- optimization or capacity failures;
+- confounded or incomparable task evidence;
+- reusable negative conclusions;
+- unresolved hypotheses and the single next causal edge.
+
+If two related gates fail or the proposed action changes research direction,
+produce a cross-round failure matrix and baseline matrix from existing
+artifacts before new implementation.
+
+Blind exploration is prohibited. A new module, reward, target, sweep, or large
+run must name the failed causal edge it addresses, explain why prior evidence
+supports the repair, identify its exact comparator, and state what evidence
+would cause abandonment or revision.

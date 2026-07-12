@@ -32,6 +32,16 @@ if (Test-Path -LiteralPath $zipPath) {
     throw "Bundle archive already exists: $zipPath"
 }
 
+$sourceBranch = (& git -C $SourceRoot branch --show-current).Trim()
+if ([string]::IsNullOrWhiteSpace($sourceBranch)) {
+    throw "IMOD workspace bundles must be built from a named Git branch"
+}
+$sourceChanges = @(& git -C $SourceRoot status --porcelain)
+if ($sourceChanges.Count -gt 0) {
+    throw "IMOD workspace bundles must be built from a clean Git worktree"
+}
+$sourceStatus = & git -C $SourceRoot status --short --branch
+
 New-Item -ItemType Directory -Path $bundleRoot -Force | Out-Null
 
 $directoryIncludes = @(
@@ -186,10 +196,6 @@ foreach ($referencePattern in $referenceFilePatterns) {
     $copiedReferenceNames += $referenceName
 }
 
-$sourceHead = (& git -C $SourceRoot rev-parse HEAD).Trim()
-$sourceBranch = (& git -C $SourceRoot branch --show-current).Trim()
-$sourceStatus = & git -C $SourceRoot status --short --branch
-
 $readme = @"
 # IMOD Standalone Workspace
 
@@ -233,11 +239,11 @@ them.
 
 - Source repository: `$SourceRoot`
 - Source branch: `$sourceBranch`
-- Source HEAD: `$sourceHead`
 - Bundle: `$BundleName`
 
-See `MIGRATION_MANIFEST.md`, `SOURCE_GIT_STATUS.txt`, and
-`MIGRATION_CHECKSUMS.sha256` for the exact snapshot contract.
+See `MIGRATION_MANIFEST.md`, `SOURCE_GIT_BRANCH.txt`, and
+`SOURCE_GIT_STATUS.txt` for the Git-managed source boundary. The ZIP is
+verified by opening every entry and checking required paths.
 "@
 Set-Content -LiteralPath (Join-Path $bundleRoot "README.md") -Value $readme -Encoding UTF8
 
@@ -278,7 +284,7 @@ New-Item -ItemType Directory -Path $progressDirectory -Force | Out-Null
 $progress = @"
 # IMOD SDD Progress
 
-- 2026-07-10: standalone workspace migrated from source HEAD `$sourceHead`.
+- 2026-07-10: standalone workspace migrated from Git branch `$sourceBranch`.
 - Current gate: user review of the IMOD written spec, followed by independent
   Claude/Gemini MARL review.
 - No IMOD implementation task has been authorized or started.
@@ -291,9 +297,7 @@ $manifest = @"
 - Created: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss K")
 - Source: `$SourceRoot`
 - Branch: `$sourceBranch`
-- HEAD: `$sourceHead`
-- Snapshot mode: current working tree, including uncommitted `AGENTS.md` and
-  `.codex/` content
+- Snapshot mode: clean Git working tree on the named branch
 
 ## Included Directories
 
@@ -305,8 +309,7 @@ $(($rootFileIncludes + $copiedReferenceNames) | ForEach-Object { "- " + $_ } | O
 
 Generated migration files are `README.md`, `.gitignore`,
 `requirements_imod.txt`, `.superpowers/sdd/progress.md`,
-`SOURCE_HEAD.txt`, `SOURCE_GIT_STATUS.txt`, and
-`MIGRATION_CHECKSUMS.sha256`.
+`SOURCE_GIT_BRANCH.txt`, and `SOURCE_GIT_STATUS.txt`.
 
 ## Excluded
 
@@ -325,41 +328,8 @@ mechanisms into IMOD; every runtime dependency must have an environment,
 checkpoint-reader, diagnostic-reference, or independently reviewed IMOD role.
 "@
 Set-Content -LiteralPath (Join-Path $bundleRoot "MIGRATION_MANIFEST.md") -Value $manifest -Encoding UTF8
-Set-Content -LiteralPath (Join-Path $bundleRoot "SOURCE_HEAD.txt") -Value "$sourceBranch`n$sourceHead" -Encoding ASCII
+Set-Content -LiteralPath (Join-Path $bundleRoot "SOURCE_GIT_BRANCH.txt") -Value $sourceBranch -Encoding ASCII
 Set-Content -LiteralPath (Join-Path $bundleRoot "SOURCE_GIT_STATUS.txt") -Value $sourceStatus -Encoding UTF8
-
-$checksumPath = Join-Path $bundleRoot "MIGRATION_CHECKSUMS.sha256"
-$checksumLines = Get-ChildItem -LiteralPath $bundleRoot -Recurse -File -Force |
-    Where-Object { $_.FullName -ne $checksumPath } |
-    Sort-Object FullName |
-    ForEach-Object {
-        $relativePath = (Get-CompatibleRelativePath -BasePath $bundleRoot -FullPath $_.FullName).Replace("\", "/")
-        $hash = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-        "$hash *$relativePath"
-    }
-Set-Content -LiteralPath $checksumPath -Value $checksumLines -Encoding UTF8
-
-$checksumMismatches = @()
-foreach ($checksumLine in Get-Content -LiteralPath $checksumPath) {
-    if ($checksumLine -notmatch '^([0-9a-f]{64}) \*(.+)$') {
-        $checksumMismatches += "invalid checksum line: $checksumLine"
-        continue
-    }
-    $expectedHash = $matches[1]
-    $relativeChecksumPath = $matches[2].Replace("/", "\")
-    $checkedPath = Join-Path $bundleRoot $relativeChecksumPath
-    if (-not (Test-Path -LiteralPath $checkedPath -PathType Leaf)) {
-        $checksumMismatches += "missing checksum target: $relativeChecksumPath"
-        continue
-    }
-    $actualHash = (Get-FileHash -LiteralPath $checkedPath -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($actualHash -ne $expectedHash) {
-        $checksumMismatches += "checksum mismatch: $relativeChecksumPath"
-    }
-}
-if ($checksumMismatches.Count -gt 0) {
-    throw ($checksumMismatches -join [Environment]::NewLine)
-}
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [System.IO.Compression.ZipFile]::CreateFromDirectory(
@@ -391,12 +361,40 @@ $requiredPaths = @(
     "scripts\r24_forced_behavior_audit.py",
     "tests\r24_behavior_audit_test.py",
     "requirements_imod.txt",
-    "MIGRATION_CHECKSUMS.sha256"
+    "README.md",
+    "MIGRATION_MANIFEST.md",
+    "SOURCE_GIT_BRANCH.txt",
+    "SOURCE_GIT_STATUS.txt"
 )
 foreach ($requiredPath in $requiredPaths) {
     if (-not (Test-Path -LiteralPath (Join-Path $bundleRoot $requiredPath) -PathType Leaf)) {
         throw "Bundle verification failed; missing $requiredPath"
     }
+}
+
+$archive = [System.IO.Compression.ZipFile]::OpenRead($zipPath)
+try {
+    $archiveNames = @($archive.Entries | ForEach-Object { $_.FullName.Replace("/", "\") })
+    foreach ($requiredPath in $requiredPaths) {
+        if ($archiveNames -notcontains $requiredPath) {
+            throw "ZIP verification failed; missing $requiredPath"
+        }
+    }
+    foreach ($entry in $archive.Entries) {
+        if ([string]::IsNullOrEmpty($entry.Name)) {
+            continue
+        }
+        $entryStream = $entry.Open()
+        try {
+            $entryStream.CopyTo([System.IO.Stream]::Null)
+        }
+        finally {
+            $entryStream.Dispose()
+        }
+    }
+}
+finally {
+    $archive.Dispose()
 }
 
 $zipSize = (Get-Item -LiteralPath $zipPath).Length
@@ -406,5 +404,4 @@ $zipSize = (Get-Item -LiteralPath $zipPath).Length
     ZipBytes = $zipSize
     FileCount = (Get-ChildItem -LiteralPath $bundleRoot -Recurse -File -Force).Count
     SourceBranch = $sourceBranch
-    SourceHead = $sourceHead
 } | ConvertTo-Json -Depth 3

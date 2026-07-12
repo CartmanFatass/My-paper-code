@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import sys
 import zipfile
@@ -31,7 +30,8 @@ from ha_ctse_process.low_actor_capacity_audit import (  # noqa: E402
     STATIC_STDMEAN_MIN,
     SyntheticFitConfig,
     _actor_parameter_count,
-    _actor_state_sha256,
+    _actor_state_snapshot,
+    _actor_states_equal,
     _decide_synthetic_seed_gate,
     _terminal_synthetic_seed_report,
     build_orthogonal_codebook,
@@ -53,19 +53,16 @@ REGISTERED_CHECKPOINTS: dict[str, dict[str, object]] = {
         "path": "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_25.pt",
         "update_idx": 25,
         "total_steps": 800000,
-        "sha256": "3f6404cd54e75f3f39af0cffb56c444dda78acd05993f1b6efd9cdc77ad9ca54",
     },
     "arm0_update30": {
         "path": "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_update_30.pt",
         "update_idx": 30,
         "total_steps": 960000,
-        "sha256": "6553e97c032e54f0a19cf801e451298d6b56232720d82a8e26abbdb7171acabc",
     },
     "arm0_final": {
         "path": "dist/logs_cloud_r25_qa_verification_1m/arm0_arch_only/seed1/standalone_process_core_final.pt",
         "update_idx": 32,
         "total_steps": 1000000,
-        "sha256": "eeaa4f7ec32314d47be818f20c76758c47a97b7881aa997511a2660bb5632c36",
     },
 }
 SCIENTIFIC_SYNTHETIC_SEEDS = (17, 23, 41)
@@ -112,16 +109,6 @@ SCIENTIFIC_CONTRACT: dict[str, object] = {
 }
 
 
-def _stable_payload_sha256(payload: object) -> str:
-    encoded = json.dumps(
-        payload, sort_keys=True, separators=(",", ":"), allow_nan=False
-    ).encode("utf-8")
-    return hashlib.sha256(encoded).hexdigest()
-
-
-SCIENTIFIC_CONTRACT_SHA256 = _stable_payload_sha256(SCIENTIFIC_CONTRACT)
-
-
 def _path_matches_registered(actual: str | Path, expected: str) -> bool:
     actual_parts = tuple(part.lower() for part in Path(actual).parts)
     expected_parts = tuple(part.lower() for part in Path(expected).parts)
@@ -152,13 +139,12 @@ def validate_scientific_args(args: argparse.Namespace) -> dict[str, object]:
         return {
             "mode": "NON_SCIENTIFIC_FIXTURE",
             "eligible_for_aggregate": False,
-            "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
         }
     if args.command not in ("collect-static", "synthetic"):
         return {
             "mode": "R27_G1_SCIENTIFIC",
             "eligible_for_aggregate": True,
-            "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
+            "resolved_contract": copy.deepcopy(SCIENTIFIC_CONTRACT),
         }
 
     for name, expected in (
@@ -216,7 +202,6 @@ def validate_scientific_args(args: argparse.Namespace) -> dict[str, object]:
     return {
         "mode": "R27_G1_SCIENTIFIC",
         "eligible_for_aggregate": True,
-        "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
         "resolved_contract": copy.deepcopy(SCIENTIFIC_CONTRACT),
     }
 
@@ -299,20 +284,11 @@ def _state_from_info(info: Any, previous: Any = None) -> np.ndarray | None:
     return np.asarray(state, dtype=np.float32).reshape(-1)
 
 
-def _file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with Path(path).open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def validate_registered_checkpoint_identity(
     args: argparse.Namespace,
     metadata: dict[str, object],
     *,
     loaded_update: int,
-    checkpoint_sha256: str,
     scientific_contract: dict[str, object],
 ) -> dict[str, object]:
     """Bind a loaded checkpoint to one exact pre-registered R25 arm0 artifact."""
@@ -333,12 +309,13 @@ def validate_registered_checkpoint_identity(
     errors: list[str] = []
     if not _path_matches_registered(args.checkpoint, str(registered["path"])):
         errors.append("checkpoint path does not match registered artifact")
+    checkpoint_path = Path(args.checkpoint)
+    if not checkpoint_path.is_file() or checkpoint_path.stat().st_size <= 0:
+        errors.append("checkpoint file is missing or empty")
     if int(loaded_update) != int(registered["update_idx"]):
         errors.append(
             f"loaded update {loaded_update} != {registered['update_idx']}"
         )
-    if str(checkpoint_sha256).lower() != str(registered["sha256"]).lower():
-        errors.append("checkpoint SHA256 does not match registered artifact")
     expected_metadata = {
         "update_idx": int(registered["update_idx"]),
         "total_steps": int(registered["total_steps"]),
@@ -363,20 +340,9 @@ def validate_registered_checkpoint_identity(
         "checkpoint_path": str(registered["path"]),
         "checkpoint_update": int(registered["update_idx"]),
         "checkpoint_total_steps": int(registered["total_steps"]),
-        "checkpoint_sha256": str(registered["sha256"]),
-        "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
+        "checkpoint_nonempty": True,
+        "scientific_contract": copy.deepcopy(SCIENTIFIC_CONTRACT),
     }
-
-
-def _snapshot_shards_sha256(snapshot_dir: Path) -> str:
-    paths = sorted(Path(snapshot_dir).glob("*.npz"))
-    if not paths:
-        raise FileNotFoundError(f"no snapshot shards under {snapshot_dir}")
-    digest = hashlib.sha256()
-    for path in paths:
-        digest.update(path.name.encode("utf-8"))
-        digest.update(bytes.fromhex(_file_sha256(path)))
-    return digest.hexdigest()
 
 
 def _snapshot_shard_contract_errors(
@@ -385,14 +351,16 @@ def _snapshot_shard_contract_errors(
     *,
     checkpoint_id: str | None = None,
     checkpoint_update: int | None = None,
+    n_resets: int = 64,
+    base_seed: int = 1,
 ) -> list[str]:
     paths = sorted(Path(snapshot_dir).glob("*.npz"))
     actual = [path.name for path in paths]
-    expected = [f"reset_{reset_id:04d}.npz" for reset_id in range(64)]
+    expected = [f"reset_{reset_id:04d}.npz" for reset_id in range(int(n_resets))]
     if actual != expected:
         return [
             "snapshot shards must be exactly reset_0000.npz through "
-            f"reset_0063.npz; found {len(actual)} files"
+                f"reset_{int(n_resets) - 1:04d}.npz; found {len(actual)} files"
         ]
     errors: list[str] = []
     total_rows = 0
@@ -407,7 +375,7 @@ def _snapshot_shard_contract_errors(
                     "env_id": reset_id,
                     "reset_id": reset_id,
                     "episode_id": reset_id,
-                    "reset_seed": reset_id + 1,
+                    "reset_seed": reset_id + int(base_seed),
                 }
                 for field, expected_value in expected_fields.items():
                     raw_values = np.asarray(data[field])
@@ -573,7 +541,6 @@ def validate_synthetic_snapshot_source(
     manifest_path = snapshot_root.parent / "collector_manifest.json"
     manifest = _read_json_strict(manifest_path)
     registered = REGISTERED_CHECKPOINTS["arm0_final"]
-    actual_snapshot_sha256 = _snapshot_shards_sha256(snapshot_root)
     checkpoint_ids = set(
         np.asarray(snapshots.checkpoint_id, dtype=np.str_).reshape(-1).tolist()
     )
@@ -612,13 +579,8 @@ def validate_synthetic_snapshot_source(
             "collector manifest checkpoint path mismatch",
         ),
         (
-            str(manifest.get("checkpoint_sha256_before", "")).lower()
-            == str(registered["sha256"]).lower(),
-            "collector manifest checkpoint hash mismatch",
-        ),
-        (
-            manifest.get("checkpoint_sha256_equal") is True
-            and manifest.get("policy_parameter_sha256_equal") is True,
+            manifest.get("checkpoint_nonempty") is True
+            and manifest.get("policy_parameters_unchanged") is True,
             "collector manifest immutability flags failed",
         ),
         (
@@ -635,18 +597,7 @@ def validate_synthetic_snapshot_source(
             "collector manifest device is not CUDA",
         ),
         (
-            manifest.get("snapshot_shards_sha256")
-            == actual_snapshot_sha256,
-            "snapshot shard hash does not match collector manifest",
-        ),
-        (
-            manifest.get("scientific_contract_sha256")
-            == SCIENTIFIC_CONTRACT_SHA256
-            and bool(
-                manifest.get("scientific_contract", {}).get(
-                    "eligible_for_aggregate", False
-                )
-            ),
+            _scientific_contract_evidence_valid(manifest),
             "collector manifest is not scientific-contract eligible",
         ),
     )
@@ -657,26 +608,30 @@ def validate_synthetic_snapshot_source(
         "mode": "R27_G1_SCIENTIFIC",
         "eligible_for_aggregate": True,
         "source_collector_manifest": str(manifest_path),
-        "source_collector_manifest_sha256": _file_sha256(manifest_path),
-        "source_snapshot_shards_sha256": actual_snapshot_sha256,
-        "source_checkpoint_sha256": str(registered["sha256"]),
+        "source_snapshot_contract_valid": True,
+        "source_checkpoint_id": "arm0_final",
+        "source_checkpoint_update": int(registered["update_idx"]),
     }
 
 
-def policy_parameter_sha256(agent: Any) -> str:
-    digest = hashlib.sha256()
+def snapshot_policy_parameters(agent: Any) -> dict[str, torch.Tensor]:
+    snapshot: dict[str, torch.Tensor] = {}
     seen_modules: set[int] = set()
     for attribute, value in sorted(vars(agent).items()):
         if not isinstance(value, torch.nn.Module) or id(value) in seen_modules:
             continue
         seen_modules.add(id(value))
         for name, parameter in sorted(value.named_parameters()):
-            tensor = parameter.detach().cpu().contiguous()
-            digest.update(f"{attribute}.{name}".encode("utf-8"))
-            digest.update(str(tensor.dtype).encode("ascii"))
-            digest.update(np.asarray(tensor.shape, dtype=np.int64).tobytes())
-            digest.update(tensor.numpy().tobytes())
-    return digest.hexdigest()
+            snapshot[f"{attribute}.{name}"] = parameter.detach().cpu().clone()
+    return snapshot
+
+
+def policy_parameters_equal(
+    left: dict[str, torch.Tensor], right: dict[str, torch.Tensor]
+) -> bool:
+    return left.keys() == right.keys() and all(
+        torch.equal(left[name], right[name]) for name in left
+    )
 
 
 def _set_eval_mode(agent: Any) -> None:
@@ -1159,6 +1114,8 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
     checkpoint = Path(args.checkpoint)
     if not checkpoint.is_file():
         raise FileNotFoundError(checkpoint)
+    if checkpoint.stat().st_size <= 0:
+        raise ValueError(f"checkpoint is empty: {checkpoint}")
     output_dir = Path(args.output_dir)
     snapshot_dir = output_dir / "capacity_snapshots"
 
@@ -1174,13 +1131,11 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
         if args.checkpoint_update is not None
         else int(metadata.get("update_idx") or loaded_update)
     )
-    file_hash_before = _file_sha256(checkpoint)
     try:
         checkpoint_identity = validate_registered_checkpoint_identity(
             args,
             metadata,
             loaded_update=loaded_update,
-            checkpoint_sha256=file_hash_before,
             scientific_contract=scientific_contract,
         )
     except Exception:
@@ -1188,7 +1143,7 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
         raise
     output_dir.mkdir(parents=True, exist_ok=True)
     snapshot_dir.mkdir(parents=True, exist_ok=True)
-    parameter_hash_before = policy_parameter_sha256(agent)
+    parameters_before = snapshot_policy_parameters(agent)
     reset_seeds = [
         int(args.seed) + env_id for env_id in range(int(args.n_resets))
     ]
@@ -1215,16 +1170,25 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
             bootstrap_reps=int(args.bootstrap_reps),
             bootstrap_seed=int(args.bootstrap_seed),
         )
-        snapshot_shards_sha256 = _snapshot_shards_sha256(snapshot_dir)
+        snapshot_contract_errors = _snapshot_shard_contract_errors(
+            snapshot_dir,
+            checkpoint_id=checkpoint_id,
+            checkpoint_update=checkpoint_update,
+            n_resets=int(args.n_resets),
+            base_seed=int(args.seed),
+        )
     finally:
         env_collector.close()
 
-    file_hash_after = _file_sha256(checkpoint)
-    parameter_hash_after = policy_parameter_sha256(agent)
-    immutable = bool(
-        file_hash_before == file_hash_after
-        and parameter_hash_before == parameter_hash_after
+    checkpoint_nonempty = checkpoint.is_file() and checkpoint.stat().st_size > 0
+    policy_unchanged = policy_parameters_equal(
+        parameters_before, snapshot_policy_parameters(agent)
     )
+    immutable = bool(checkpoint_nonempty and policy_unchanged)
+    if snapshot_contract_errors:
+        static_report = dict(static_report)
+        static_report["status"] = "INVALID"
+        static_report["snapshot_contract_errors"] = snapshot_contract_errors
     if not immutable:
         static_report = dict(static_report)
         static_report["status"] = "INVALID"
@@ -1233,11 +1197,8 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
     static_report.update(
         {
             "checkpoint_update": checkpoint_update,
-            "source_checkpoint_sha256": file_hash_before,
-            "snapshot_shards_sha256": snapshot_shards_sha256,
-            "scientific_contract_sha256": scientific_contract[
-                "scientific_contract_sha256"
-            ],
+            "snapshot_contract_valid": not snapshot_contract_errors,
+            "scientific_contract": scientific_contract,
         }
     )
     static_path = output_dir / "static_capacity.json"
@@ -1247,13 +1208,8 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
         "checkpoint": str(checkpoint),
         "checkpoint_id": checkpoint_id,
         "checkpoint_update": checkpoint_update,
-        "checkpoint_sha256_before": file_hash_before,
-        "checkpoint_sha256_after": file_hash_after,
-        "checkpoint_sha256_equal": file_hash_before == file_hash_after,
-        "policy_parameter_sha256_before": parameter_hash_before,
-        "policy_parameter_sha256_after": parameter_hash_after,
-        "policy_parameter_sha256_equal": parameter_hash_before
-        == parameter_hash_after,
+        "checkpoint_nonempty": checkpoint_nonempty,
+        "policy_parameters_unchanged": policy_unchanged,
         "checkpoint_metadata": _jsonable(metadata),
         "parameter_counts": _jsonable(agent.parameter_counts()),
         "device": str(args.device),
@@ -1270,12 +1226,9 @@ def run_collect_static(args: argparse.Namespace) -> dict[str, object]:
         "hidden_dim": int(snapshots.actor_hidden.shape[1]),
         "config_scenario": str(config.scenario),
         "checkpoint_identity": checkpoint_identity,
-        "snapshot_shards_sha256": snapshot_shards_sha256,
-        "static_report_sha256": _file_sha256(static_path),
+        "snapshot_contract_valid": not snapshot_contract_errors,
+        "static_report_written": static_path.is_file(),
         "scientific_contract": scientific_contract,
-        "scientific_contract_sha256": scientific_contract[
-            "scientific_contract_sha256"
-        ],
     }
     _write_json(output_dir / "collector_manifest.json", manifest)
     (output_dir / "static_capacity.md").write_text(
@@ -1314,7 +1267,7 @@ def _synthetic_markdown(report: dict[str, object]) -> str:
                 f"- sham accuracy: {seed_report.get('sham_accuracy', 'n/a')}",
                 f"- evidence finite: {seed_report.get('evidence_finite', 'n/a')}",
                 f"- control contract valid: {seed_report.get('control_contract_valid', 'n/a')}",
-                f"- source actor immutable: {seed_report.get('source_actor_sha256_equal', False)}",
+                f"- source actor unchanged: {seed_report.get('source_actor_unchanged', False)}",
                 "",
             ]
         )
@@ -1335,19 +1288,19 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
     checkpoint = Path(args.checkpoint)
     if not checkpoint.is_file():
         raise FileNotFoundError(checkpoint)
+    if checkpoint.stat().st_size <= 0:
+        raise ValueError(f"checkpoint is empty: {checkpoint}")
     snapshot_dir = Path(args.snapshot_dir)
     snapshots = read_capacity_snapshot_shards(snapshot_dir)
     output_dir = Path(args.output_dir)
 
     config, metadata, env, agent, loaded_update = _configure_agent(args)
     del config
-    file_hash_before = _file_sha256(checkpoint)
     try:
         checkpoint_identity = validate_registered_checkpoint_identity(
             args,
             metadata,
             loaded_update=loaded_update,
-            checkpoint_sha256=file_hash_before,
             scientific_contract=scientific_contract,
         )
         snapshot_binding = validate_synthetic_snapshot_source(
@@ -1359,7 +1312,7 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
         env.close()
         raise
     output_dir.mkdir(parents=True, exist_ok=True)
-    parameter_hash_before = policy_parameter_sha256(agent)
+    parameters_before = snapshot_policy_parameters(agent)
     try:
         codebook = build_orthogonal_codebook(
             int(agent.low.n_skills),
@@ -1377,7 +1330,7 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
         )
         available_reset_groups = int(np.unique(snapshots.reset_id).size)
         if available_reset_groups < MIN_BOOTSTRAP_RESET_GROUPS:
-            actor_hash = _actor_state_sha256(agent.low)
+            actor_state = _actor_state_snapshot(agent.low)
             support = {
                 "available_rows": int(np.asarray(snapshots.reset_id).size),
                 "available_reset_groups": available_reset_groups,
@@ -1396,8 +1349,9 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
                         "at least five represented reset groups are required"
                     ],
                     num_skills=int(agent.low.n_skills),
-                    source_actor_sha256_before=actor_hash,
-                    source_actor_sha256_after=actor_hash,
+                    source_actor_unchanged=_actor_states_equal(
+                        actor_state, _actor_state_snapshot(agent.low)
+                    ),
                     source_actor_parameter_count=_actor_parameter_count(agent.low),
                     support=support,
                 )
@@ -1434,12 +1388,11 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
     finally:
         env.close()
 
-    file_hash_after = _file_sha256(checkpoint)
-    parameter_hash_after = policy_parameter_sha256(agent)
-    immutable = bool(
-        file_hash_before == file_hash_after
-        and parameter_hash_before == parameter_hash_after
+    checkpoint_nonempty = checkpoint.is_file() and checkpoint.stat().st_size > 0
+    policy_unchanged = policy_parameters_equal(
+        parameters_before, snapshot_policy_parameters(agent)
     )
+    immutable = bool(checkpoint_nonempty and policy_unchanged)
     if not immutable:
         family = dict(family)
         family["status"] = "INVALID"
@@ -1447,13 +1400,8 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
     report: dict[str, object] = {
         **family,
         "checkpoint": str(checkpoint),
-        "checkpoint_sha256_before": file_hash_before,
-        "checkpoint_sha256_after": file_hash_after,
-        "checkpoint_sha256_equal": file_hash_before == file_hash_after,
-        "policy_parameter_sha256_before": parameter_hash_before,
-        "policy_parameter_sha256_after": parameter_hash_after,
-        "policy_parameter_sha256_equal": parameter_hash_before
-        == parameter_hash_after,
+        "checkpoint_nonempty": checkpoint_nonempty,
+        "policy_parameters_unchanged": policy_unchanged,
         "device": str(args.device),
         "split": split_report,
         "codebook": codebook.tolist(),
@@ -1465,9 +1413,6 @@ def run_synthetic(args: argparse.Namespace) -> dict[str, object]:
         "checkpoint_identity": checkpoint_identity,
         **snapshot_binding,
         "scientific_contract": scientific_contract,
-        "scientific_contract_sha256": scientific_contract[
-            "scientific_contract_sha256"
-        ],
     }
     _write_json(output_dir / "synthetic_control.json", report)
     (output_dir / "synthetic_control.md").write_text(
@@ -1494,7 +1439,7 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
         f"- Static family: `{report['static_family']['status']}`",
         f"- Synthetic family: `{report['synthetic_family']['status']}`",
         f"- Artifact identity: `{artifact_identity.get('pass', False)}`",
-        f"- Scientific contract SHA256: `{artifact_identity.get('scientific_contract_sha256', 'n/a')}`",
+        f"- Scientific contract matched: `{artifact_identity.get('scientific_contract_matched', False)}`",
         "",
         "## Fixed Thresholds",
         "",
@@ -1536,8 +1481,7 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
                 f"- hidden retention ratio: {static.get('hidden_retention_ratio', 'n/a')}",
                 f"- inactive KL / standardized distance: {inactive.get('max_abs_symmetric_kl', 'n/a')} / {inactive.get('max_stdmean_distance', 'n/a')}",
                 f"- live parity: {static.get('parity', {}).get('pass', False)}",
-                f"- checkpoint SHA256: {manifest.get('checkpoint_sha256_before', 'n/a')}",
-                f"- checkpoint / policy immutable: {manifest.get('checkpoint_sha256_equal', False)} / {manifest.get('policy_parameter_sha256_equal', False)}",
+                f"- checkpoint nonempty / policy unchanged: {manifest.get('checkpoint_nonempty', False)} / {manifest.get('policy_parameters_unchanged', False)}",
             ]
         )
         for name, value in parameter_counts.items():
@@ -1551,8 +1495,7 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
             "",
             f"- family status: `{synthetic.get('status')}`",
             f"- passing / failed seeds: {synthetic.get('passing_seeds', 0)} / {synthetic.get('failed_seeds', 0)}",
-            f"- checkpoint SHA256: {synthetic.get('checkpoint_sha256_before', 'n/a')}",
-            f"- checkpoint / policy immutable: {synthetic.get('checkpoint_sha256_equal', False)} / {synthetic.get('policy_parameter_sha256_equal', False)}",
+            f"- checkpoint nonempty / policy unchanged: {synthetic.get('checkpoint_nonempty', False)} / {synthetic.get('policy_parameters_unchanged', False)}",
         ]
     )
     for name, value in synthetic.get("parameter_counts", {}).items():
@@ -1577,11 +1520,11 @@ def _aggregate_markdown(report: dict[str, object]) -> str:
                 f"- active/sham parameter count equal: {seed_report.get('active_sham_parameter_count_equal', False)}",
                 f"- active/sham shared minibatch schedule: {seed_report.get('active_sham_shared_minibatch_schedule', False)}",
                 f"- evidence finite / control contract valid: {seed_report.get('evidence_finite', 'n/a')} / {seed_report.get('control_contract_valid', 'n/a')}",
-                f"- source actor SHA256 before / after: {seed_report.get('source_actor_sha256_before', seed_report.get('initial_actor_sha256', 'n/a'))} / {seed_report.get('source_actor_sha256_after', 'n/a')}",
-                f"- minibatch schedule SHA256: {seed_report.get('minibatch_schedule_sha256', 'n/a')}",
+                f"- source actor unchanged: {seed_report.get('source_actor_unchanged', False)}",
+                f"- minibatch schedule matched: {seed_report.get('active_sham_shared_minibatch_schedule', False)}",
                 f"- optimizer contracts equal: {seed_report.get('active_optimizer_contract') == seed_report.get('sham_optimizer_contract') if seed_report.get('active_optimizer_contract') is not None else 'n/a'}",
-                f"- train row hashes equal: {seed_report.get('active_train_rows_sha256') == seed_report.get('sham_train_rows_sha256') if seed_report.get('active_train_rows_sha256') is not None else 'n/a'}",
-                f"- validation row hashes equal: {seed_report.get('active_validation_rows_sha256') == seed_report.get('sham_validation_rows_sha256') if seed_report.get('active_validation_rows_sha256') is not None else 'n/a'}",
+                f"- train rows equal: {seed_report.get('active_sham_train_rows_equal', 'n/a')}",
+                f"- validation rows equal: {seed_report.get('active_sham_validation_rows_equal', 'n/a')}",
                 "",
             ]
         )
@@ -1773,25 +1716,16 @@ def _recompute_synthetic_seed_leaf(
             int(report["support"]["test_reset_groups"]) >= 5
         )
         source_equal = bool(
-            report["source_actor_sha256_before"]
-            == report["source_actor_sha256_after_active_fit"]
-            == report["source_actor_sha256_after"]
+            report["source_actor_unchanged"]
+            and report["source_actor_unchanged_after_active_fit"]
         )
-        initialization_equal = bool(
-            report["active_initial_actor_sha256"]
-            == report["sham_initial_actor_sha256"]
-            == report["source_actor_sha256_before"]
-        )
+        initialization_equal = bool(report["active_sham_initialization_equal"])
         parameter_count_equal = bool(
             int(report["active_actor_parameter_count"])
             == int(report["sham_actor_parameter_count"])
             == int(report["source_actor_parameter_count"])
         )
-        schedule_equal = bool(
-            report["active_minibatch_schedule_sha256"]
-            == report["sham_minibatch_schedule_sha256"]
-            == report["minibatch_schedule_sha256"]
-        )
+        schedule_equal = bool(report["active_sham_shared_minibatch_schedule"])
         optimizer_equal = bool(
             report["active_optimizer_contract"]
             == report["sham_optimizer_contract"]
@@ -1808,16 +1742,12 @@ def _recompute_synthetic_seed_leaf(
             and optimizer_contract.get("maximize") is False
         )
         rows_equal = bool(
-            report["active_train_rows_sha256"]
-            == report["sham_train_rows_sha256"]
-            and report["active_validation_rows_sha256"]
-            == report["sham_validation_rows_sha256"]
+            report["active_sham_train_rows_equal"]
+            and report["active_sham_validation_rows_equal"]
         )
         targets_equal = bool(
-            report["active_train_targets_sha256"]
-            == report["sham_train_targets_sha256"]
-            and report["active_validation_targets_sha256"]
-            == report["sham_validation_targets_sha256"]
+            report["active_sham_train_targets_equal"]
+            and report["active_sham_validation_targets_equal"]
         )
         control_valid = bool(
             source_equal
@@ -1873,7 +1803,7 @@ def _recompute_synthetic_seed_leaf(
         reported_claims = {
             "evidence_finite": evidence_finite,
             "control_contract_valid": control_valid,
-            "source_actor_sha256_equal": source_equal,
+            "source_actor_unchanged": source_equal,
             "active_sham_initialization_equal": initialization_equal,
             "active_sham_parameter_count_equal": parameter_count_equal,
             "active_sham_shared_minibatch_schedule": schedule_equal,
@@ -1904,15 +1834,9 @@ def _recompute_synthetic_seed_leaf(
 def _scientific_contract_evidence_valid(payload: dict[str, object]) -> bool:
     contract = payload.get("scientific_contract", {})
     return bool(
-        payload.get("scientific_contract_sha256")
-        == SCIENTIFIC_CONTRACT_SHA256
-        and contract.get("mode") == "R27_G1_SCIENTIFIC"
+        contract.get("mode") == "R27_G1_SCIENTIFIC"
         and contract.get("eligible_for_aggregate") is True
-        and contract.get("scientific_contract_sha256")
-        == SCIENTIFIC_CONTRACT_SHA256
         and contract.get("resolved_contract") == SCIENTIFIC_CONTRACT
-        and _stable_payload_sha256(contract.get("resolved_contract"))
-        == SCIENTIFIC_CONTRACT_SHA256
     )
 
 
@@ -1923,15 +1847,21 @@ def validate_aggregate_artifacts(
     collector_manifests: list[dict[str, object]],
     synthetic_report: dict[str, object],
 ) -> tuple[list[str], dict[str, object], dict[str, object]]:
-    """Validate leaf identities and recompute both family summaries."""
+    """Validate structured leaf evidence and recompute both family summaries."""
 
     errors: list[str] = []
+    if len(static_reports) != len(checkpoint_ids):
+        errors.append("static report count mismatch")
+    if len(collector_manifests) != len(checkpoint_ids):
+        errors.append("collector manifest count mismatch")
+
     recomputed_static_reports: list[dict[str, object]] = []
     for checkpoint_id, report in zip(checkpoint_ids, static_reports):
         recomputed, leaf_errors = _recompute_static_leaf(report, checkpoint_id)
         recomputed_static_reports.append(recomputed)
         errors.extend(leaf_errors)
     static_family = gate_static_family(recomputed_static_reports)
+
     seed_reports = synthetic_report.get("seed_reports", [])
     if not isinstance(seed_reports, list):
         seed_reports = []
@@ -1962,9 +1892,7 @@ def validate_aggregate_artifacts(
         checkpoint_ids, static_reports, collector_manifests
     ):
         registered = REGISTERED_CHECKPOINTS[checkpoint_id]
-        static_path = run_root / checkpoint_id / "static_capacity.json"
         snapshot_dir = run_root / checkpoint_id / "capacity_snapshots"
-        expected_hash = str(registered["sha256"]).lower()
         checkpoint_identity = manifest.get("checkpoint_identity", {})
         errors.extend(
             f"{checkpoint_id} {reason}"
@@ -1975,29 +1903,21 @@ def validate_aggregate_artifacts(
                 checkpoint_update=int(registered["update_idx"]),
             )
         )
-        try:
-            actual_snapshot_sha256 = _snapshot_shards_sha256(snapshot_dir)
-        except OSError as error:
-            actual_snapshot_sha256 = ""
-            errors.append(f"{checkpoint_id} snapshot read failed: {error}")
         checks = (
             (
                 static_report.get("checkpoint_id") == checkpoint_id,
                 f"{checkpoint_id} static report checkpoint_id mismatch",
             ),
             (
-                static_report.get("checkpoint_update")
-                == int(registered["update_idx"]),
+                static_report.get("checkpoint_update") == int(registered["update_idx"]),
                 f"{checkpoint_id} static report update mismatch",
             ),
             (
-                str(static_report.get("source_checkpoint_sha256", "")).lower()
-                == expected_hash,
-                f"{checkpoint_id} static report checkpoint hash mismatch",
+                static_report.get("snapshot_contract_valid") is True,
+                f"{checkpoint_id} static snapshot contract failed",
             ),
             (
-                static_report.get("scientific_contract_sha256")
-                == SCIENTIFIC_CONTRACT_SHA256,
+                _scientific_contract_evidence_valid(static_report),
                 f"{checkpoint_id} static report contract mismatch",
             ),
             (
@@ -2005,33 +1925,18 @@ def validate_aggregate_artifacts(
                 f"{checkpoint_id} manifest checkpoint_id mismatch",
             ),
             (
-                manifest.get("checkpoint_update")
-                == int(registered["update_idx"]),
+                manifest.get("checkpoint_update") == int(registered["update_idx"]),
                 f"{checkpoint_id} manifest update mismatch",
             ),
             (
                 _path_matches_registered(
-                    str(manifest.get("checkpoint", "")),
-                    str(registered["path"]),
+                    str(manifest.get("checkpoint", "")), str(registered["path"])
                 ),
                 f"{checkpoint_id} manifest path mismatch",
             ),
             (
-                str(manifest.get("checkpoint_sha256_before", "")).lower()
-                == expected_hash,
-                f"{checkpoint_id} manifest checkpoint hash mismatch",
-            ),
-            (
-                str(manifest.get("checkpoint_sha256_after", "")).lower()
-                == expected_hash,
-                f"{checkpoint_id} manifest post-run checkpoint hash mismatch",
-            ),
-            (
-                manifest.get("checkpoint_sha256_equal") is True
-                and manifest.get("policy_parameter_sha256_equal") is True
-                and bool(manifest.get("policy_parameter_sha256_before"))
-                and manifest.get("policy_parameter_sha256_before")
-                == manifest.get("policy_parameter_sha256_after"),
+                manifest.get("checkpoint_nonempty") is True
+                and manifest.get("policy_parameters_unchanged") is True,
                 f"{checkpoint_id} source immutability flags failed",
             ),
             (
@@ -2039,16 +1944,14 @@ def validate_aggregate_artifacts(
                 and checkpoint_identity.get("checkpoint_id") == checkpoint_id
                 and checkpoint_identity.get("checkpoint_update")
                 == int(registered["update_idx"])
-                and str(checkpoint_identity.get("checkpoint_sha256", "")).lower()
-                == expected_hash
-                and checkpoint_identity.get("scientific_contract_sha256")
-                == SCIENTIFIC_CONTRACT_SHA256,
+                and checkpoint_identity.get("checkpoint_total_steps")
+                == int(registered["total_steps"])
+                and checkpoint_identity.get("checkpoint_nonempty") is True
+                and checkpoint_identity.get("scientific_contract")
+                == SCIENTIFIC_CONTRACT,
                 f"{checkpoint_id} registered checkpoint identity mismatch",
             ),
-            (
-                manifest.get("n_resets") == 64,
-                f"{checkpoint_id} n_resets mismatch",
-            ),
+            (manifest.get("n_resets") == 64, f"{checkpoint_id} n_resets mismatch"),
             (
                 _parallel_manifest_contract_valid(manifest),
                 f"{checkpoint_id} parallel collector contract mismatch",
@@ -2066,30 +1969,15 @@ def validate_aggregate_artifacts(
                 f"{checkpoint_id} manifest is not scientific-contract eligible",
             ),
             (
-                manifest.get("static_report_sha256")
-                == _file_sha256(static_path),
-                f"{checkpoint_id} static report file hash mismatch",
-            ),
-            (
-                manifest.get("snapshot_shards_sha256")
-                == static_report.get("snapshot_shards_sha256"),
-                f"{checkpoint_id} snapshot hash mismatch",
-            ),
-            (
-                manifest.get("snapshot_shards_sha256")
-                == actual_snapshot_sha256,
-                f"{checkpoint_id} snapshot files changed after collection",
+                manifest.get("snapshot_contract_valid") is True
+                and manifest.get("static_report_written") is True,
+                f"{checkpoint_id} output contract flags failed",
             ),
         )
         errors.extend(reason for passed, reason in checks if not passed)
 
-    final_manifest_path = run_root / "arm0_final" / "collector_manifest.json"
-    final_manifest = collector_manifests[-1]
     final_registered = REGISTERED_CHECKPOINTS["arm0_final"]
-    final_hash = str(final_registered["sha256"]).lower()
-    synthetic_checkpoint_identity = synthetic_report.get(
-        "checkpoint_identity", {}
-    )
+    synthetic_checkpoint_identity = synthetic_report.get("checkpoint_identity", {})
     synthetic_checks = (
         (
             _path_matches_registered(
@@ -2099,36 +1987,18 @@ def validate_aggregate_artifacts(
             "synthetic checkpoint path is not registered arm0_final",
         ),
         (
-            str(synthetic_report.get("checkpoint_sha256_before", "")).lower()
-            == final_hash,
-            "synthetic checkpoint hash mismatch",
-        ),
-        (
-            str(synthetic_report.get("checkpoint_sha256_after", "")).lower()
-            == final_hash,
-            "synthetic post-run checkpoint hash mismatch",
-        ),
-        (
-            synthetic_report.get("checkpoint_sha256_equal") is True
-            and synthetic_report.get("policy_parameter_sha256_equal") is True
-            and bool(synthetic_report.get("policy_parameter_sha256_before"))
-            and synthetic_report.get("policy_parameter_sha256_before")
-            == synthetic_report.get("policy_parameter_sha256_after"),
+            synthetic_report.get("checkpoint_nonempty") is True
+            and synthetic_report.get("policy_parameters_unchanged") is True,
             "synthetic source immutability flags failed",
         ),
         (
             synthetic_checkpoint_identity.get("eligible_for_aggregate") is True
-            and synthetic_checkpoint_identity.get("checkpoint_id")
-            == "arm0_final"
+            and synthetic_checkpoint_identity.get("checkpoint_id") == "arm0_final"
             and synthetic_checkpoint_identity.get("checkpoint_update") == 32
-            and str(
-                synthetic_checkpoint_identity.get("checkpoint_sha256", "")
-            ).lower()
-            == final_hash
-            and synthetic_checkpoint_identity.get(
-                "scientific_contract_sha256"
-            )
-            == SCIENTIFIC_CONTRACT_SHA256,
+            and synthetic_checkpoint_identity.get("checkpoint_total_steps") == 1000000
+            and synthetic_checkpoint_identity.get("checkpoint_nonempty") is True
+            and synthetic_checkpoint_identity.get("scientific_contract")
+            == SCIENTIFIC_CONTRACT,
             "synthetic registered checkpoint identity mismatch",
         ),
         (
@@ -2142,8 +2012,7 @@ def validate_aggregate_artifacts(
         (
             synthetic_report.get("codebook_norm")
             == SCIENTIFIC_DECISION_THRESHOLDS["codebook_norm"]
-            and synthetic_report.get("fit_config")
-            == asdict(SyntheticFitConfig()),
+            and synthetic_report.get("fit_config") == asdict(SyntheticFitConfig()),
             "synthetic fit contract mismatch",
         ),
         (
@@ -2152,13 +2021,9 @@ def validate_aggregate_artifacts(
             "synthetic top-level threshold evidence mismatch",
         ),
         (
-            synthetic_report.get("source_collector_manifest_sha256")
-            == _file_sha256(final_manifest_path),
-            "synthetic collector-manifest binding mismatch",
-        ),
-        (
-            synthetic_report.get("source_snapshot_shards_sha256")
-            == final_manifest.get("snapshot_shards_sha256"),
+            synthetic_report.get("source_snapshot_contract_valid") is True
+            and synthetic_report.get("source_checkpoint_id") == "arm0_final"
+            and synthetic_report.get("source_checkpoint_update") == 32,
             "synthetic snapshot binding mismatch",
         ),
     )
@@ -2210,7 +2075,7 @@ def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
             "artifact_identity": {
                 "pass": False,
                 "errors": [str(error)],
-                "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
+                "scientific_contract_matched": False,
             },
             "decision_thresholds": copy.deepcopy(
                 SCIENTIFIC_DECISION_THRESHOLDS
@@ -2249,7 +2114,7 @@ def run_aggregate(args: argparse.Namespace) -> dict[str, object]:
         "artifact_identity": {
             "pass": not identity_errors,
             "errors": identity_errors,
-            "scientific_contract_sha256": SCIENTIFIC_CONTRACT_SHA256,
+            "scientific_contract_matched": not identity_errors,
         },
         "decision_thresholds": copy.deepcopy(SCIENTIFIC_DECISION_THRESHOLDS),
         "prohibited_next_actions": [

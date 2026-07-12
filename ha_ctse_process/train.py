@@ -1507,6 +1507,13 @@ def load_checkpoint(
             fitted = np.ones_like(agent.team_intent_prior_counts, dtype=np.float64)
             fitted[: min(fitted.size, prior_counts.size)] = prior_counts[: min(fitted.size, prior_counts.size)]
             agent.team_intent_prior_counts = np.maximum(fitted, 1e-6)
+    # Value-normalization statistics are part of the frozen inference state,
+    # not optimizer state.  Evaluation-only checkpoint loads must restore them
+    # so critic values retain their source-checkpoint scale.
+    if checkpoint.get("high_value_norm") is not None and agent.high_value_norm is not None:
+        agent.high_value_norm.load_state_dict(checkpoint["high_value_norm"])
+    if checkpoint.get("low_value_norm") is not None and agent.low_value_norm is not None:
+        agent.low_value_norm.load_state_dict(checkpoint["low_value_norm"])
     if load_optimizers:
         if "high_opt" in checkpoint:
             try:
@@ -1527,10 +1534,6 @@ def load_checkpoint(
             and agent.low_critic_opt is not None
         ):
             agent.low_critic_opt.load_state_dict(checkpoint["low_critic_opt"])
-        if checkpoint.get("high_value_norm") is not None and agent.high_value_norm is not None:
-            agent.high_value_norm.load_state_dict(checkpoint["high_value_norm"])
-        if checkpoint.get("low_value_norm") is not None and agent.low_value_norm is not None:
-            agent.low_value_norm.load_state_dict(checkpoint["low_value_norm"])
         if "process_opt" in checkpoint:
             try:
                 agent.process_opt.load_state_dict(checkpoint["process_opt"])

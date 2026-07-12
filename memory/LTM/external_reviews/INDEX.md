@@ -1,0 +1,18 @@
+# External Review Index
+
+Order: newest first.
+
+Purpose: lightweight index for external review rounds. LongTimeMemoryManager
+should read this before opening the full dialogue archive, but memory decisions
+must be based on the referenced raw archive text rather than this index or a
+subagent summary.
+
+| Round | Updated | Topic | Models | Status | Archive Anchor | Memory Decision |
+| --- | --- | --- | --- | --- | --- | --- |
+| 7 | 2026-07-12 | R27-G2 pre-implementation forced-z trajectory/effect design | Claude (exact model/version not supplied) | raw prompt and response archived; controller disposition complete | Round 7 - R27-G2 forced-z trajectory/effect design (Claude, exact version not supplied) | `APPROVE_WITH_CHANGES` accepted with repository-grounded modifications as design only. Hold-vs-pulse, live recurrent forcing, stochastic-prefix exact replay, label consistency, and strict parity are load-bearing. Corrected native durations to 10/20/30/40, exact branch count to 55, decision-grade cost to 12-20h cloud CUDA, inactive-label semantics, H40 primary effect gate, and claim wording. Implementation/pilot/launch remain unauthorized. |
+| 6 | 2026-07-10 | R25 1M q_A verification disposition | GPT via Codex CLI (gpt-5.5, xhigh) | archived; controller disposition complete | Round 6 - R25 1M q_A verification disposition (GPT via Codex CLI) | Accepted 2026-07-10: D1 q_A reward NOT VERIFIED and default-off; D2 HMASD parity OPEN under update-count confound with any update-matched run requiring separate approval; D3 R26 individual-skill diagnostic pivot accepted. |
+| 5 | 2026-07-09 | R24-1 q_d gate disposition (D1/D2/D3) | GPT via Codex CLI (gpt-5.5, xhigh) | archived | Round 5 - R24-1 q_d gate disposition (D1/D2/D3) (GPT via Codex CLI) | D1 accepted FAIL with wording condition (tested policies only, not universal); D2 approved-deferred sensitivity re-run with 4 conditions; D3 pivot accepted pending deconfound. q_d/q_D rewards BLOCKED. |
+| 4 | 2026-07-08 | R24 q_d null-control diagnostics | GPT web | archived | Round 4 continuation - R24 q_d null-control diagnostics (GPT web) | Seed1/seed2 null-control update archived; q_d/q_D reward remains blocked pending matched-null, seed-consistent residual, and stability gates. |
+| 3 | 2026-07-07 | R24 behavior-window q_d/q_D probe design | source TBD | archived | Round 3 - R24 Assignment-to-Behavior Bridge and q_D Reward Gating (source TBD) | Supports reward-off behavior-window q_d probe first; q_d must exclude focal `z_i` from assignment context; q_D/q_d rewards remain blocked pending held-out residual, null, shortcut, and between/within gates. |
+| 2 | 2026-07-07 | R24 Assignment-to-Behavior Bridge / q_D Reward Gating | GPT | archived | Round 2 - R24 Assignment-to-Behavior Bridge and q_D Reward Gating (GPT) | R24 forced-audit and behavior-window q_d/q_D gating sequence; q_D reward remains blocked pending matched-null controls and behavior evidence. |
+| 1 | 2026-07-07 | R23 final read / R24 Assignment-to-Behavior Bridge | GPT-5.5 Pro (user-labeled GPT current opinion) | archived (continuation of prior Round 1 text) | Round 1 - R23 final read / R24 Assignment-to-Behavior Bridge (GPT continuation) | continued as continuation/update of Round 1: reinforces pending R24 sequencing, keeps q_D reward deferred, principles not rewritten yet |

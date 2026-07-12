@@ -20,7 +20,7 @@ path: `.codex/config.toml` enables `multi_agent` and sets
 files and are registered explicitly in `.codex/config.toml` with
 `[agents."<name>"].config_file` entries for current runtime compatibility. Do
 not restore the retired YAML manifest path. `.codex/config.toml` explicitly
-records the documented `[agents]` defaults: `max_threads = 6`, `max_depth = 1`,
+records the documented `[agents]` defaults: `max_threads = 12`, `max_depth = 1`,
 and `job_max_runtime_seconds = 1800`.
 
 For subagent/workflow-rule changes, consult
@@ -131,8 +131,10 @@ approval, service tier when supported, nicknames, and developer instructions in
 its TOML file.
 
 Runtime names state their model family directly: every `Luna*` profile uses
-`gpt-5.6-luna`, every `Terra*` profile uses `gpt-5.6-terra`, and every `Sol*`
-profile uses `gpt-5.6-sol`. `SparkExplicitSimplePatcher` is the sole legacy
+`gpt-5.6-luna` with medium reasoning, every `Terra*` profile uses
+`gpt-5.6-terra` with high reasoning, and every `Sol*` profile uses
+`gpt-5.6-sol` with xhigh/max reasoning according to role.
+`SparkExplicitSimplePatcher` is the sole legacy
 exception on `gpt-5.3-codex-spark`; it is opt-in only, never an automatic
 fallback.
 
@@ -157,27 +159,27 @@ Quick routing:
 
 For `SolPlanImplementer`, the official TOML uses `service_tier = "fast"` because
 the Codex config reference says `fast` maps to the priority request tier.
-SolPlanImplementer intentionally uses `model_reasoning_effort = "high"` for
+SolPlanImplementer intentionally uses `model_reasoning_effort = "xhigh"` for
 accepted-plan core implementation. Use `SolPlanImplementerFrontier`
-(`gpt-5.6-sol`, `model_reasoning_effort = "xhigh"`) only for rare bounded core
+(`gpt-5.6-sol`, `model_reasoning_effort = "max"`) only for rare bounded core
 tasks whose implementation brief explicitly requires architecture or algorithm
 judgment while editing.
 
 Reviewer cost control uses explicit model-tier roles instead of reducing review
-frequency. Use `TerraFastReviewer` (`gpt-5.6-terra`, medium) for small isolated
-mechanical diffs, `SolImplementationReviewer` (`gpt-5.6-sol`, high) for
+frequency. Use `TerraFastReviewer` (`gpt-5.6-terra`, high) for small isolated
+mechanical diffs, `SolImplementationReviewer` (`gpt-5.6-sol`, xhigh) for
 standard multi-file, judgment-heavy, or debugging-oriented task reviews, and
-`SolImplementationReviewerFrontier` (`gpt-5.6-sol`, xhigh) for architecture,
+`SolImplementationReviewerFrontier` (`gpt-5.6-sol`, max) for architecture,
 high-risk, concurrency, shared-state, API/data-contract, and final whole-branch
 reviews. Each reviewer role has an explicit `model` and
 `model_reasoning_effort`; do not depend on inherited runtime defaults.
 
-`TerraExpManager` uses `gpt-5.6-terra` with medium reasoning for factual
+`TerraExpManager` uses `gpt-5.6-terra` with high reasoning for factual
 process/log checks, bounded CSV extracts, package handoffs, and `ExpRecord.md`
 updates. `TerraResultAnalyst` uses `gpt-5.6-terra` with high reasoning for
 bounded metric/gate extraction from existing artifacts. `TerraLongTimeMemoryManager`
 uses `gpt-5.6-terra` with high reasoning for memory-only work.
-`SolWorkflowAuditor` uses `gpt-5.6-sol` with high reasoning and a read-only
+`SolWorkflowAuditor` uses `gpt-5.6-sol` with xhigh reasoning and a read-only
 sandbox for subagent/workflow consistency checks. These assignments do not
 relax file-based status or bounded-context requirements.
 
@@ -191,17 +193,31 @@ in some workflows. Do not fight that with high-frequency manual close/open
 cycles. Treat `close_agent` as a deliberate cleanup tool, not as a mandatory
 post-result reflex.
 
+The binding cache-aware policy is
+`docs/cache-aware-codex-subagent-lifetime-policy.md`. Before spawning, identify
+the logical compatibility key `(profile, model/reasoning tier, sandbox,
+workstream, ownership scope)` and search the controller ledger for an existing
+compatible child. If its context is still accurate and the work is sequential,
+continue it with a bounded delta brief. `DONE` is a task status, not a thread
+close condition.
+
+The runtime ceiling is `max_threads = 12`. The extra slots preserve useful
+completed children and support real parallel waves; they are not a target for
+speculative fan-out. Under pressure, reclaim the least reusable completed or
+stale child before disrupting an active owner.
+
 For every spawned project subagent:
 
-1. Spawn the official custom agent by name. If the name is unavailable, stop
+1. Spawn the official custom agent by name only when no compatible reusable
+   child exists or a fresh child is required. If the name is unavailable, stop
    delegation and surface the config-loading problem to the user.
 2. Record the returned agent id, nickname, profile, task, status, and lifetime
    decision in the working notes for the current turn.
 3. Wait only when the result is needed for the next controller step.
 4. Capture the final result or handoff and integrate any file changes.
-5. Leave completed agents open when a follow-up is plausible, when the wave is
-   still being integrated, or when concurrency pressure is low. Codex can
-   self-clean when the concurrency limit is reached.
+5. Leave completed agents open when a compatible follow-up is plausible, when
+   the wave is still being integrated, or when concurrency pressure is low;
+   reuse them with `send_input` rather than spawning a duplicate namespace.
 6. Call `close_agent` only for explicit cancellation, superseded work, stale or
    faulty state, scarce-concurrency cleanup, or a workflow boundary that needs a
    clean slate.
@@ -424,8 +440,8 @@ config flags that change algorithm behavior. Files such as
 modules under `ha_ctse_process/` are core unless the controller explicitly
 scopes a purely mechanical edit.
 
-Use `SolPlanImplementerFrontier` only when the controller has a concrete xhigh work
-package and can state why normal high-reasoning implementation is insufficient:
+Use `SolPlanImplementerFrontier` only when the controller has a concrete max work
+package and can state why normal xhigh-reasoning implementation is insufficient:
 unresolved architecture tradeoffs inside the implementation, risky algorithm
 semantics that must be reasoned through while editing, or a high-impact change
 where the implementation itself is part of the design proof. Open-ended

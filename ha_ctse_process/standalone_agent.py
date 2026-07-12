@@ -741,6 +741,88 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
             new_critic_hxs,
         )
 
+    def r27_g2_audit_step(
+        self,
+        obs: torch.Tensor,
+        skills: torch.Tensor,
+        actor_hxs: torch.Tensor,
+        states: torch.Tensor,
+        team_codes: torch.Tensor,
+        critic_hxs: torch.Tensor,
+        *,
+        focal_agent: int,
+        focal_inactive_film: bool = False,
+    ) -> dict[str, torch.Tensor]:
+        """Run one strict, RNG-free R27-G2 low-level transition.
+
+        This audit-only path mirrors the registered strict MAPPO actor and
+        critic while exposing the pre-tanh Gaussian parameters.  It never
+        mutates the supplied roster or hidden tensors.  A focal inactive-FiLM
+        branch replaces only that row's skill FiLM with the identity transform.
+        """
+
+        if self.action_space_type != "continuous":
+            raise TypeError("R27-G2 requires the registered continuous low actor")
+        if self.actor_condition_on_team_code or self.actor_team_film is not None:
+            raise TypeError("R27-G2 rejects actor team-code conditioning")
+        action_out = self.actor_act.action_out
+        if type(action_out).__name__ != "TanhDiagGaussian":
+            raise TypeError("R27-G2 requires the registered tanh-Gaussian action head")
+        if obs.ndim != 2 or obs.shape != (skills.shape[0], self.obs_dim):
+            raise ValueError("R27-G2 observation shape does not match the source actor")
+        batch = int(obs.shape[0])
+        if batch <= 0 or not 0 <= int(focal_agent) < batch:
+            raise ValueError("R27-G2 focal_agent is outside the actor batch")
+        expected_hidden = (batch, self.hidden_dim)
+        if tuple(actor_hxs.shape) != expected_hidden or tuple(critic_hxs.shape) != expected_hidden:
+            raise ValueError("R27-G2 recurrent hidden shape does not match the source actor")
+        if tuple(states.shape) != (batch, self.state_dim):
+            raise ValueError("R27-G2 state shape does not match the source critic")
+        if tuple(skills.shape) != (batch,) or tuple(team_codes.shape) != (batch,):
+            raise ValueError("R27-G2 roster/team-code shape mismatch")
+        if bool(torch.any(skills < 0)) or bool(torch.any(skills >= self.n_skills)):
+            raise ValueError("R27-G2 actor-visible skill is outside the source codebook")
+
+        actor_features = self.actor_base(
+            check(obs).to(dtype=torch.float32, device=self.device)
+        )
+        skill_onehot = F.one_hot(skills.long(), num_classes=self.n_skills).float()
+        film = self.actor_film(skill_onehot)
+        gamma, beta = torch.chunk(film, 2, dim=-1)
+        if focal_inactive_film:
+            gamma = gamma.clone()
+            beta = beta.clone()
+            gamma[int(focal_agent)] = 1.0
+            beta[int(focal_agent)] = 0.0
+        actor_features = gamma * actor_features + beta
+        masks = torch.ones(batch, 1, dtype=torch.float32, device=self.device)
+        actor_features, new_actor_hxs = self.actor_rnn(
+            actor_features, actor_hxs.float(), masks
+        )
+
+        distribution = action_out._distribution(actor_features)
+        pre_tanh_mean = distribution.mean
+        log_standard_deviation = torch.log(distribution.stddev)
+        deterministic_action = torch.tanh(pre_tanh_mean)
+        log_probability = action_out._squashed_log_probs(
+            distribution, pre_tanh_mean, deterministic_action
+        )
+
+        critic_features = self._critic_features(states, team_codes)
+        critic_features, new_critic_hxs = self.critic_rnn(
+            critic_features, critic_hxs.float(), masks
+        )
+        values = self.value_head(critic_features).squeeze(-1)
+        return {
+            "pre_tanh_mean": pre_tanh_mean,
+            "log_standard_deviation": log_standard_deviation,
+            "deterministic_action": deterministic_action,
+            "log_probability": self._squeeze_log_probs(log_probability),
+            "value": values,
+            "new_actor_hxs": new_actor_hxs,
+            "new_critic_hxs": new_critic_hxs,
+        }
+
     def value(
         self,
         states: torch.Tensor,
@@ -3227,6 +3309,161 @@ class StandaloneProcessAgent:
         return (
             *result,
         )
+
+    def r27_g2_audit_step(
+        self,
+        obs: np.ndarray,
+        *,
+        env_id: int,
+        state: np.ndarray,
+        focal_agent: int,
+        focal_skill: int | None,
+        focal_inactive_film: bool = False,
+    ) -> dict[str, Any]:
+        """Advance the registered R25 low actor/critic once for an audit branch.
+
+        The actor-visible roster is a copy.  Only the requested focal row can
+        differ from ``active_skills``; all skill clocks and assignment state are
+        left untouched.  The method is deterministic and exposes the exact
+        pre-tanh distribution used to construct the environment action.
+        """
+
+        if not self.use_recurrent_low_level or not isinstance(
+            self.low, StrictHMASDMAPPOLowLevelPolicy
+        ):
+            raise TypeError("R27-G2 requires StrictHMASDMAPPOLowLevelPolicy")
+        if (
+            self.n_agents != 6
+            or self.low.n_skills != 4
+            or self.low.action_dim != 4
+            or self.action_space_type != "continuous"
+        ):
+            raise ValueError("R27-G2 source dimensions do not match registered R25")
+        env_id = int(env_id)
+        focal_agent = int(focal_agent)
+        if not 0 <= env_id < int(self.num_envs):
+            raise ValueError("R27-G2 env_id is outside the policy runtime")
+        if not 0 <= focal_agent < self.n_agents:
+            raise ValueError("R27-G2 focal_agent is outside the source roster")
+
+        obs_arr = np.asarray(obs)
+        if obs_arr.dtype != np.float32 or obs_arr.shape != (
+            self.n_agents,
+            self.low.obs_dim,
+        ):
+            raise ValueError("R27-G2 observation must be registered float32 actor input")
+        state_arr = np.asarray(state)
+        if state_arr.dtype != np.float32:
+            raise ValueError("R27-G2 state must be float32")
+        state_arr = state_arr.reshape(-1)
+        if state_arr.shape != (self.low.state_dim,):
+            raise ValueError("R27-G2 state does not match the registered critic input")
+        if not np.isfinite(obs_arr).all() or not np.isfinite(state_arr).all():
+            raise FloatingPointError("R27-G2 observation/state contains non-finite values")
+
+        natural_roster = np.asarray(self.active_skills[env_id])
+        if natural_roster.shape != (self.n_agents,):
+            raise ValueError("R27-G2 active skill roster shape mismatch")
+        visible_roster = natural_roster.astype(np.int64, copy=True)
+        if focal_skill is not None:
+            focal_skill = int(focal_skill)
+            if not 0 <= focal_skill < self.low.n_skills:
+                raise ValueError("R27-G2 focal skill is outside the source codebook")
+            visible_roster[focal_agent] = focal_skill
+
+        actor_hxs_before = np.asarray(
+            self.low_actor_hxs[env_id], dtype=np.float32
+        ).copy()
+        critic_hxs_before = np.asarray(
+            self.low_critic_hxs[env_id], dtype=np.float32
+        ).copy()
+        if actor_hxs_before.shape != (self.n_agents, self.low.hidden_dim):
+            raise ValueError("R27-G2 actor hidden shape mismatch")
+        if critic_hxs_before.shape != (self.n_agents, self.low.hidden_dim):
+            raise ValueError("R27-G2 critic hidden shape mismatch")
+        state_batch = np.broadcast_to(
+            state_arr.reshape(1, -1), (self.n_agents, self.low.state_dim)
+        ).copy()
+        team_code = int(self.active_team_codes[env_id])
+
+        context = {
+            "state": state_arr.copy(),
+            "team_code": team_code,
+            "actor_hxs": actor_hxs_before.copy(),
+            "critic_hxs": critic_hxs_before.copy(),
+        }
+        with torch.no_grad():
+            result = self.low.r27_g2_audit_step(
+                torch.as_tensor(obs_arr, dtype=torch.float32, device=self.device),
+                torch.as_tensor(visible_roster, dtype=torch.long, device=self.device),
+                torch.as_tensor(actor_hxs_before, dtype=torch.float32, device=self.device),
+                torch.as_tensor(state_batch, dtype=torch.float32, device=self.device),
+                torch.full(
+                    (self.n_agents,),
+                    team_code,
+                    dtype=torch.long,
+                    device=self.device,
+                ),
+                torch.as_tensor(critic_hxs_before, dtype=torch.float32, device=self.device),
+                focal_agent=focal_agent,
+                focal_inactive_film=bool(focal_inactive_film),
+            )
+            values = result["value"]
+            if self.low_value_norm is not None:
+                values = self.low_value_norm.denormalize_tensor(values)
+
+        new_actor_hxs = (
+            result["new_actor_hxs"].detach().cpu().numpy().astype(np.float32)
+        )
+        new_critic_hxs = (
+            result["new_critic_hxs"].detach().cpu().numpy().astype(np.float32)
+        )
+        self.low_actor_hxs[env_id] = new_actor_hxs
+        self.low_critic_hxs[env_id] = new_critic_hxs
+        self._last_low_context[env_id] = context
+
+        output: dict[str, Any] = {
+            "pre_tanh_mean": result["pre_tanh_mean"].detach().cpu().numpy().astype(np.float32),
+            "log_standard_deviation": result["log_standard_deviation"]
+            .detach()
+            .cpu()
+            .numpy()
+            .astype(np.float32),
+            "deterministic_action": result["deterministic_action"]
+            .detach()
+            .cpu()
+            .numpy()
+            .astype(np.float32),
+            "log_probability": result["log_probability"]
+            .detach()
+            .cpu()
+            .numpy()
+            .astype(np.float32),
+            "value": values.detach().cpu().numpy().astype(np.float32),
+            "new_actor_hxs": new_actor_hxs.copy(),
+            "new_critic_hxs": new_critic_hxs.copy(),
+            "actor_hxs_before": actor_hxs_before,
+            "critic_hxs_before": critic_hxs_before,
+            "visible_skills": visible_roster,
+            "natural_skills": natural_roster.astype(np.int64, copy=True),
+            "team_code": team_code,
+            "focal_agent": focal_agent,
+            "focal_skill": int(visible_roster[focal_agent]),
+            "focal_inactive_film": bool(focal_inactive_film),
+            "context": context,
+        }
+        for name in (
+            "pre_tanh_mean",
+            "log_standard_deviation",
+            "deterministic_action",
+            "log_probability",
+            "value",
+            "new_actor_hxs",
+            "new_critic_hxs",
+        ):
+            if not np.isfinite(np.asarray(output[name])).all():
+                raise FloatingPointError(f"R27-G2 {name} contains non-finite values")
+        return output
 
     def _low_actor_forced_skill_outputs(
         self,
