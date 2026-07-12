@@ -164,6 +164,20 @@ class SubprocEnvCollector:
             remote.send(("step", action))
         return [self._recv(remote) for remote in self.remotes]
 
+    def step_selected(self, indexed_actions):
+        pairs = [(int(env_id), action) for env_id, action in indexed_actions]
+        env_ids = [env_id for env_id, _action in pairs]
+        if len(env_ids) != len(set(env_ids)):
+            raise ValueError("step_selected received duplicate env_id")
+        if any(env_id < 0 or env_id >= self.num_envs for env_id in env_ids):
+            raise ValueError("step_selected env_id out of range")
+        for env_id, action in pairs:
+            self.remotes[env_id].send(("step", action))
+        return {
+            env_id: self._recv(self.remotes[env_id])
+            for env_id, _action in pairs
+        }
+
     def close(self) -> None:
         for remote in self.remotes:
             try:
