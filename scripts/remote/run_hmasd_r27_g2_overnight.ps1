@@ -188,7 +188,9 @@ run_phase() {
 }
 
 validate_probe() {
-  local root="$1" workers="$2" status="$root/runner_status.txt" report="$root/topology_probe.json"
+  local root="$1" workers="$2" status report
+  status="$root/runner_status.txt"
+  report="$root/topology_probe.json"
   test -f "$status" && test -f "$report" || return 31
   grep -Fxq 'state=succeeded' "$status" || return 31
   grep -Fxq 'probe_status=PASS' "$status" || return 31
@@ -234,7 +236,9 @@ run_probe() {
 }
 
 probe_resource_failure() {
-  local root="$1" status="$root/runner_status.txt" report="$root/topology_probe.json"
+  local root="$1" status report
+  status="$root/runner_status.txt"
+  report="$root/topology_probe.json"
   test -f "$status" && test -f "$report" || return 1
   grep -Fxq 'state=failed' "$status" || return 1
   grep -Fxq 'probe_status=FAIL' "$status" || return 1
@@ -251,7 +255,9 @@ PY
 }
 
 run_pilot() {
-  local root="$1" status="$root/pilot_status.txt" summary="$root/pilot_summary.json" rc
+  local root="$1" status summary rc
+  status="$root/pilot_status.txt"
+  summary="$root/pilot_summary.json"
   assert_gpu_idle || return $?
   env MAX_WORKERS=8 RUN_ROOT="$root" PYTHON_BIN="$PYTHON_BIN" \
     CHECKPOINT_DIST_ROOT="$CHECKPOINT_ROOT" R27_G2_CONCURRENCY_VALIDATED=1 \

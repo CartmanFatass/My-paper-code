@@ -287,6 +287,8 @@ def test_mock_launch_uploads_exact_fail_closed_chain_then_starts_screen(
     assert "PROBE_MIN_FREE_HOST_MIB=8192" in launcher
     assert 'local target tmp\n  target="$STATUS_ROOT/$phase.env"' in launcher
     assert 'tmp="$target.tmp.$$"' in launcher
+    assert 'local root="$1" workers="$2" status="$root/' not in launcher
+    assert 'local root="$1" status="$root/' not in launcher
     assert "validate-run --run-root" in launcher
 
     start = str(records[2]["arguments"][-1])
