@@ -605,6 +605,26 @@ def _parity_metrics(
     }
 
 
+def _terminal_static_report(
+    *,
+    checkpoint_id: str,
+    rows: int,
+    reset_groups: int,
+    num_skills: int,
+    status: str,
+    reason: str,
+) -> dict[str, object]:
+    return {
+        "checkpoint_id": str(checkpoint_id),
+        "rows": int(rows),
+        "reset_groups": int(reset_groups),
+        "num_skills": int(num_skills),
+        "thresholds": static_capacity_thresholds(),
+        "status": str(status),
+        "reason": str(reason),
+    }
+
+
 def evaluate_static_checkpoint(
     actor: Any,
     batch: CapacitySnapshotBatch,
@@ -619,15 +639,14 @@ def evaluate_static_checkpoint(
     rows = int(snapshots.natural_skill.size)
     reset_count = int(np.unique(snapshots.reset_id).size)
     if rows == 0 or reset_count < 5:
-        return {
-            "checkpoint_id": str(checkpoint_id),
-            "rows": rows,
-            "reset_groups": reset_count,
-            "num_skills": int(actor.n_skills),
-            "thresholds": static_capacity_thresholds(),
-            "status": "UNDERPOWERED",
-            "reason": "at least five reset groups with snapshot rows are required",
-        }
+        return _terminal_static_report(
+            checkpoint_id=checkpoint_id,
+            rows=rows,
+            reset_groups=reset_count,
+            num_skills=int(actor.n_skills),
+            status="UNDERPOWERED",
+            reason="at least five reset groups with snapshot rows are required",
+        )
     if snapshots.observation.shape[1] != actor.obs_dim:
         raise ValueError("snapshot observation dimension does not match actor")
     if snapshots.actor_hidden.shape[1] != actor.hidden_dim:
@@ -667,14 +686,14 @@ def evaluate_static_checkpoint(
                 bootstrap_seed=int(bootstrap_seed) + offset,
             )
         except FloatingPointError as error:
-            return {
-                "checkpoint_id": str(checkpoint_id),
-                "rows": rows,
-                "reset_groups": reset_count,
-                "num_skills": num_skills,
-                "status": "INVALID",
-                "reason": str(error),
-            }
+            return _terminal_static_report(
+                checkpoint_id=checkpoint_id,
+                rows=rows,
+                reset_groups=reset_count,
+                num_skills=num_skills,
+                status="INVALID",
+                reason=str(error),
+            )
 
     try:
         parity = _parity_metrics(
@@ -685,14 +704,14 @@ def evaluate_static_checkpoint(
             active_outputs["rollout_h"],
         )
     except FloatingPointError as error:
-        return {
-            "checkpoint_id": str(checkpoint_id),
-            "rows": rows,
-            "reset_groups": reset_count,
-            "num_skills": num_skills,
-            "status": "INVALID",
-            "reason": str(error),
-        }
+        return _terminal_static_report(
+            checkpoint_id=checkpoint_id,
+            rows=rows,
+            reset_groups=reset_count,
+            num_skills=num_skills,
+            status="INVALID",
+            reason=str(error),
+        )
     inactive_max_skl = max(
         float(condition_reports[name]["inactive_max_abs_skl"])
         for name in condition_reports

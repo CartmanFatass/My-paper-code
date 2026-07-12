@@ -10,6 +10,7 @@ import numpy as np
 import pytest
 import torch
 
+import ha_ctse_process.low_actor_capacity_audit as capacity_audit
 from ha_ctse_process.low_actor_capacity_audit import CapacitySnapshotBatch
 from ha_ctse_process.standalone_agent import StrictHMASDMAPPOLowLevelPolicy
 from scripts import audit_r27_low_actor_capacity as collector
@@ -640,6 +641,66 @@ def test_aggregate_rejects_missing_or_altered_threshold_evidence(tmp_path):
     assert result["classification"] == "INVALID"
     assert "arm0_update25 threshold evidence mismatch" in reasons
     assert "seed 17 threshold evidence mismatch" in reasons
+
+
+def test_generated_static_invalid_remains_artifact_valid_through_aggregate(
+    monkeypatch, tmp_path
+):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    rows = 10
+    reset_ids = np.arange(rows, dtype=np.int64)
+    snapshots = CapacitySnapshotBatch(
+        observation=np.zeros((rows, 6), dtype=np.float32),
+        actor_hidden=np.zeros((rows, 8), dtype=np.float32),
+        natural_skill=np.arange(rows, dtype=np.int64) % 4,
+        previous_skill=np.zeros(rows, dtype=np.int64),
+        duration_idx=np.zeros(rows, dtype=np.int64),
+        skill_age=np.zeros(rows, dtype=np.int64),
+        episode_done_mask=np.zeros(rows, dtype=np.bool_),
+        reset_id=reset_ids,
+        reset_seed=27000 + reset_ids,
+        episode_id=reset_ids.copy(),
+        env_id=np.zeros(rows, dtype=np.int64),
+        agent_id=np.arange(rows, dtype=np.int64) % 6,
+        checkpoint_id=np.full(rows, "arm0_update25"),
+        checkpoint_update=np.full(rows, 25, dtype=np.int64),
+    )
+
+    def nonfinite_parity(*_args, **_kwargs):
+        raise FloatingPointError("non-finite live parity evidence")
+
+    monkeypatch.setattr(capacity_audit, "_parity_metrics", nonfinite_parity)
+    report = capacity_audit.evaluate_static_checkpoint(
+        ManifestAgent().low,
+        snapshots,
+        checkpoint_id="arm0_update25",
+        bootstrap_reps=20,
+        bootstrap_seed=27021,
+    )
+    static_path = tmp_path / "arm0_update25" / "static_capacity.json"
+    previous = collector._read_json_strict(static_path)
+    registered = collector.REGISTERED_CHECKPOINTS["arm0_update25"]
+    report.update(
+        {
+            "checkpoint_update": registered["update_idx"],
+            "source_checkpoint_sha256": registered["sha256"],
+            "snapshot_shards_sha256": previous["snapshot_shards_sha256"],
+            "scientific_contract_sha256": collector.SCIENTIFIC_CONTRACT_SHA256,
+        }
+    )
+    collector._write_json(static_path, report)
+    manifest_path = tmp_path / "arm0_update25" / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["static_report_sha256"] = collector._file_sha256(static_path)
+    collector._write_json(manifest_path, manifest)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "INVALID"
+    assert result["artifact_identity"]["pass"] is True
+    assert "threshold evidence mismatch" not in " ".join(result["reasons"])
 
 
 def test_aggregate_emits_underpowered_for_terminal_synthetic_seed_reports(tmp_path):

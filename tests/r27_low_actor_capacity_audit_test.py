@@ -219,6 +219,28 @@ def test_static_nonfinite_feature_evidence_is_structured_invalid(monkeypatch):
 
     assert report["status"] == "INVALID"
     assert "non-finite" in report["reason"]
+    assert report["thresholds"] == capacity_audit.static_capacity_thresholds()
+
+
+def test_static_nonfinite_parity_evidence_preserves_threshold_contract(monkeypatch):
+    actor = make_continuous_actor()
+    batch = make_snapshots(resets=10)
+
+    def nonfinite_parity(*_args, **_kwargs):
+        raise FloatingPointError("non-finite live parity evidence")
+
+    monkeypatch.setattr(capacity_audit, "_parity_metrics", nonfinite_parity)
+    report = evaluate_static_checkpoint(
+        actor,
+        batch,
+        checkpoint_id="fixture",
+        bootstrap_reps=20,
+        bootstrap_seed=27021,
+    )
+
+    assert report["status"] == "INVALID"
+    assert report["reason"] == "non-finite live parity evidence"
+    assert report["thresholds"] == capacity_audit.static_capacity_thresholds()
 
 
 def test_static_family_requires_two_of_three_agreement():
