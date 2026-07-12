@@ -684,6 +684,11 @@ def _write_valid_scientific_aggregate_fixture(tmp_path: Path) -> list[str]:
             "termination_reason_by_env": {
                 str(env_id): "step_limit" for env_id in range(64)
             },
+            "stats": {
+                "resets": 64,
+                "renewal_events": 64,
+                "snapshot_rows": 64,
+            },
             "device": "cuda",
             "snapshot_shards_sha256": snapshot_sha256,
             "static_report_sha256": collector._file_sha256(static_path),
@@ -915,6 +920,73 @@ def test_aggregate_rejects_cross_mapped_parallel_snapshot_rows(tmp_path):
     assert "reset_0000.npz env_id mapping mismatch" in " ".join(
         result["reasons"]
     )
+
+
+def test_parallel_manifest_contract_requires_stats_and_cross_field_consistency():
+    manifest = {
+        "num_envs": 64,
+        "collector_backend": "subproc",
+        "collector_start_method": "spawn",
+        "parallel_collection_schedule": "step_major_env_id_ascending",
+        "env_id_to_reset_id": {
+            str(env_id): env_id for env_id in range(64)
+        },
+        "env_id_to_reset_seed": {
+            str(env_id): env_id + 1 for env_id in range(64)
+        },
+        "active_steps_by_env": {
+            str(env_id): 500 for env_id in range(64)
+        },
+        "termination_reason_by_env": {
+            str(env_id): "step_limit" for env_id in range(64)
+        },
+        "stats": {
+            "resets": 64,
+            "renewal_events": 128,
+            "snapshot_rows": 128,
+        },
+    }
+
+    assert collector._parallel_manifest_contract_valid(manifest) is True
+    missing_stats = dict(manifest)
+    missing_stats.pop("stats")
+    assert collector._parallel_manifest_contract_valid(missing_stats) is False
+    impossible_dwell = dict(manifest)
+    impossible_dwell["active_steps_by_env"] = {
+        str(env_id): 1 for env_id in range(64)
+    }
+    assert collector._parallel_manifest_contract_valid(impossible_dwell) is False
+    wrong_reset_count = dict(manifest)
+    wrong_reset_count["stats"] = dict(manifest["stats"], resets=63)
+    assert collector._parallel_manifest_contract_valid(wrong_reset_count) is False
+
+
+def test_aggregate_structures_corrupt_snapshot_archive_as_invalid(tmp_path):
+    checkpoint_ids = _write_valid_scientific_aggregate_fixture(tmp_path)
+    checkpoint_id = "arm0_update25"
+    snapshot_dir = tmp_path / checkpoint_id / "capacity_snapshots"
+    shard = snapshot_dir / "reset_0000.npz"
+    shard.write_bytes(b"PK\x03\x04truncated")
+    snapshot_hash = collector._snapshot_shards_sha256(snapshot_dir)
+    static_path = tmp_path / checkpoint_id / "static_capacity.json"
+    static = collector._read_json_strict(static_path)
+    static["snapshot_shards_sha256"] = snapshot_hash
+    collector._write_json(static_path, static)
+    manifest_path = tmp_path / checkpoint_id / "collector_manifest.json"
+    manifest = collector._read_json_strict(manifest_path)
+    manifest["snapshot_shards_sha256"] = snapshot_hash
+    manifest["static_report_sha256"] = collector._file_sha256(static_path)
+    collector._write_json(manifest_path, manifest)
+
+    result = collector.run_aggregate(
+        SimpleNamespace(run_root=str(tmp_path), checkpoint_ids=checkpoint_ids)
+    )
+
+    assert result["classification"] == "INVALID"
+    assert "reset_0000.npz identity read failed" in " ".join(result["reasons"])
+    assert collector._read_json_strict(
+        tmp_path / "r27_capacity_autopsy.json"
+    )["classification"] == "INVALID"
 
 
 def test_generated_static_invalid_remains_artifact_valid_through_aggregate(

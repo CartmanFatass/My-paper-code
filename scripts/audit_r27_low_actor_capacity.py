@@ -7,6 +7,7 @@ import copy
 import hashlib
 import json
 import sys
+import zipfile
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -378,7 +379,10 @@ def _snapshot_shards_sha256(snapshot_dir: Path) -> str:
     return digest.hexdigest()
 
 
-def _snapshot_shard_contract_errors(snapshot_dir: Path) -> list[str]:
+def _snapshot_shard_contract_errors(
+    snapshot_dir: Path,
+    manifest: dict[str, object] | None = None,
+) -> list[str]:
     paths = sorted(Path(snapshot_dir).glob("*.npz"))
     actual = [path.name for path in paths]
     expected = [f"reset_{reset_id:04d}.npz" for reset_id in range(64)]
@@ -388,9 +392,14 @@ def _snapshot_shard_contract_errors(snapshot_dir: Path) -> list[str]:
             f"reset_0063.npz; found {len(actual)} files"
         ]
     errors: list[str] = []
+    total_rows = 0
     for reset_id, path in enumerate(paths):
         try:
             with np.load(path, allow_pickle=False) as data:
+                row_count = int(
+                    np.asarray(data["natural_skill"]).reshape(-1).size
+                )
+                total_rows += row_count
                 expected_fields = {
                     "env_id": reset_id,
                     "reset_id": reset_id,
@@ -399,12 +408,23 @@ def _snapshot_shard_contract_errors(snapshot_dir: Path) -> list[str]:
                 }
                 for field, expected_value in expected_fields.items():
                     values = np.asarray(data[field], dtype=np.int64).reshape(-1)
-                    if values.size and not np.all(values == expected_value):
+                    if values.size != row_count:
+                        errors.append(f"{path.name} {field} row-count mismatch")
+                    elif values.size and not np.all(values == expected_value):
                         errors.append(
                             f"{path.name} {field} mapping mismatch"
                         )
-        except (KeyError, OSError, ValueError) as error:
+        except (EOFError, KeyError, OSError, ValueError, zipfile.BadZipFile) as error:
             errors.append(f"{path.name} identity read failed: {error}")
+    if manifest is not None:
+        stats = manifest.get("stats")
+        if not isinstance(stats, dict):
+            errors.append("collector manifest stats missing")
+        elif (
+            stats.get("snapshot_rows") != total_rows
+            or stats.get("renewal_events") != total_rows
+        ):
+            errors.append("collector manifest snapshot-row stats mismatch")
     return errors
 
 
@@ -413,6 +433,23 @@ def _parallel_manifest_contract_valid(manifest: dict[str, object]) -> bool:
     expected_seeds = {str(env_id): env_id + 1 for env_id in range(64)}
     active_steps = manifest.get("active_steps_by_env")
     termination_reasons = manifest.get("termination_reason_by_env")
+    stats = manifest.get("stats")
+    dwell_consistent = bool(
+        isinstance(active_steps, dict)
+        and isinstance(termination_reasons, dict)
+        and all(
+            (
+                termination_reasons.get(env_id) == "step_limit"
+                and active_steps.get(env_id) == 500
+            )
+            or (
+                termination_reasons.get(env_id) in {"terminated", "truncated"}
+                and isinstance(active_steps.get(env_id), int)
+                and 1 <= active_steps[env_id] <= 500
+            )
+            for env_id in expected_ids
+        )
+    )
     return bool(
         manifest.get("num_envs") == 64
         and manifest.get("collector_backend") == "subproc"
@@ -431,6 +468,14 @@ def _parallel_manifest_contract_valid(manifest: dict[str, object]) -> bool:
         and set(termination_reasons) == set(expected_ids)
         and set(termination_reasons.values())
         <= {"terminated", "truncated", "step_limit"}
+        and dwell_consistent
+        and isinstance(stats, dict)
+        and stats.get("resets") == 64
+        and isinstance(stats.get("renewal_events"), int)
+        and int(stats["renewal_events"]) >= 0
+        and isinstance(stats.get("snapshot_rows"), int)
+        and int(stats["snapshot_rows"]) >= 0
+        and stats.get("renewal_events") == stats.get("snapshot_rows")
     )
 
 
@@ -473,7 +518,7 @@ def validate_synthetic_snapshot_source(
         .tolist()
     )
     errors: list[str] = []
-    errors.extend(_snapshot_shard_contract_errors(snapshot_root))
+    errors.extend(_snapshot_shard_contract_errors(snapshot_root, manifest))
     if checkpoint_ids != {"arm0_final"} or checkpoint_updates != {32}:
         errors.append(
             "snapshot rows are not arm0_final/update32: "
@@ -1851,7 +1896,7 @@ def validate_aggregate_artifacts(
         checkpoint_identity = manifest.get("checkpoint_identity", {})
         errors.extend(
             f"{checkpoint_id} {reason}"
-            for reason in _snapshot_shard_contract_errors(snapshot_dir)
+            for reason in _snapshot_shard_contract_errors(snapshot_dir, manifest)
         )
         try:
             actual_snapshot_sha256 = _snapshot_shards_sha256(snapshot_dir)

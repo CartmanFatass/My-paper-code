@@ -13,6 +13,7 @@ COLLECTOR_BACKEND="${COLLECTOR_BACKEND:-subproc}"
 COLLECTOR_START_METHOD="${COLLECTOR_START_METHOD:-spawn}"
 CHECKPOINT_DIST_ROOT="${CHECKPOINT_DIST_ROOT:-$ROOT/dist}"
 RUN_ROOT="${RUN_ROOT:-logs/r27_g1_capacity_autopsy_cloud64_$(date +%Y%m%d_%H%M%S)}"
+SHA256_BIN="${SHA256_BIN:-sha256sum}"
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
 
@@ -101,7 +102,7 @@ if [[ "$DRY_RUN" -eq 0 ]]; then
       echo "Required checkpoint not found: $checkpoint" >&2
       exit 2
     fi
-    actual_hash="$(sha256sum "$checkpoint" | awk '{print tolower($1)}')"
+    actual_hash="$("$SHA256_BIN" "$checkpoint" | awk '{print tolower($1)}')"
     if [[ "$actual_hash" != "${ARM_HASHES[$index]}" ]]; then
       echo "Checkpoint SHA256 mismatch: $checkpoint" >&2
       echo "expected=${ARM_HASHES[$index]} actual=$actual_hash" >&2
@@ -160,11 +161,17 @@ for index in 0 1 2; do
     else
       failures+=("$arm")
       results+=("$arm=failed: required artifact missing")
+      write_status "$arm_root/runner_status.txt" \
+        "finished=$(date -Is)" "state=failed" "phase=collect-static" \
+        "arm=$arm" "error=required artifact missing"
     fi
   else
     exit_code=$?
     failures+=("$arm")
     results+=("$arm=failed: exit_code=$exit_code")
+    write_status "$arm_root/runner_status.txt" \
+      "finished=$(date -Is)" "state=failed" "phase=collect-static" \
+      "arm=$arm" "exit_code=$exit_code"
   fi
   if [[ ${#failures[@]} -gt 0 && "$CONTINUE_ON_ERROR" -eq 0 ]]; then
     break
