@@ -22,37 +22,45 @@ and history live in their owning files.
 
 ## Current Objective
 
-Resolve the causal edge `distinct z_i -> naturally expressed, behaviorally
-differentiated skills`.
+Resolve the transport sub-edge needed before natural skill reward:
+
+```text
+R27-proven forced skill regime
+-> support-compatible action process under on-policy state visitation
+```
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
   natural selection, reward usefulness, cooperation, credit, or task gain.
 - R28-G0 `PASS_TARGET_NULLS` froze the only accepted scorer.
-- R28-G1 implementation smoke completed with `FAIL_SUPPORT_OOD`: the exact
-  update/checkpoint path worked, but the frozen support guard stopped R28 reward
-  injection before scoring.
+- Two exact R28-G1 one-update engineering smokes reproduced
+  `FAIL_SUPPORT_OOD`: OOD `0.950617` and `0.9375`, one support kill each, and
+  zero R28 reward-applied steps. The formal three-arm reward experiment never
+  ran and has no scientific outcome.
+- Feature/order/action/duration/distance parity is confirmed. The dominant
+  residuals are all four temporal action standard deviations, consistent with
+  a real forced-deterministic to natural-on-policy trajectory-domain shift.
+- The frozen G1 launch package is therefore `BLOCKED_SUPPORT_OOD`; the completed
+  cross-round review is
+  `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
+- The new paired transport implementation passed its local reset-0 smoke:
+  deterministic OOD `0.0625` versus stochastic OOD `1.0` on 16 paired windows.
+  This is engineering evidence; the 64-reset decision read is the next compute.
 
 ## Next Actions
 
-1. Diagnose the completed run at
-   `logs/r28_g1_engineering_smoke_20260713_212008/real_reward`: 81 structural
-   rows, four in support, OOD fraction 0.9506, one support kill, and zero R28
-   reward-applied steps.
-2. Add only the minimum support-distance diagnostic needed to identify the
-   dominant standardized feature residuals. Do not change the frozen scorer,
-   features, variance floor, thresholds, reward scale, or guard.
-3. If the diagnostic identifies a feature-construction mismatch, repair that
-   bug and repeat the exact smoke once. If the feature construction is correct,
-   block G1 as a natural-support mismatch and take the registered failure-review
-   branch before proposing another target.
+1. Run the registered 64-reset paired transport diagnostic on CUDA with eight
+   reset workers (111,100 environment steps, zero updates/reward, expected
+   1-3h).
+2. If stochastic transport passes, compare forced hold with natural renewal
+   under matched stochastic execution. If it fails, retire this forced-domain
+   scorer family from online reward use.
 
 ## Immediate Constraints
 
 - Do not refit, retune, or sweep the frozen R28-G0 scorer.
-- Do not execute the R28 cloud runner's `topology`, `run`, `evidence`, `analyze`,
-  or `all` modes without separate formal authorization and matching topology
-  validation through the shared scheduler.
+- Do not launch the blocked R28-G1 cloud package or repeat the identical local
+  smoke.
 - Do not rerun the fixed HMASD baseline or R25 arm0/arm2 references without
   explicit user approval.
 - Keep the old `q_d/q_D` reward paths and default-off `q_A` disabled. Do not add
@@ -63,7 +71,7 @@ differentiated skills`.
 ## Pointers
 
 - `memory/ALGORITHM_PRINCIPLES.md` — binding research contract.
-- `memory/IMPLEMENTATION_PLAN.md` — active R28 implementation boundary.
+- `memory/IMPLEMENTATION_PLAN.md` — active transport implementation boundary.
 - `memory/ExpRecord.md` — formal experiment contracts, evidence, and decisions.
 - `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — frozen
   R28-G0/G1 design.

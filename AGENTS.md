@@ -26,6 +26,37 @@ Codex and Claude Code alternate as controller; only one may modify the repo at a
 time. Update the `Controller Handoff` block in `memory/CURRENT_WORK.md` when
 ownership changes.
 
+## Primary Mode: Algorithm Exploration
+
+HMASD is an active algorithm-research project. The default work cycle is:
+
+```text
+one falsifiable causal question
+-> smallest implementation or diagnostic that can answer it
+-> focused smoke
+-> parallel decision-grade experiment when needed
+-> scientific interpretation
+-> one next causal edge
+```
+
+Project progress means at least one of the following: new algorithm code that
+enables the next causal test, new experiment evidence, or a decision that
+eliminates a research branch and selects the next one. Status prose, process
+documents, audit packages, artifact inventories, repeated consistency checks,
+and workflow discussion are not algorithm progress.
+
+The majority of active work time must go to algorithm implementation,
+experiment execution, or interpretation of newly produced evidence. Process is
+strictly subordinate: record only the minimum contract needed to avoid an
+invalid experiment, update it inline at the evidence boundary, and return to
+code or compute. Never make documentation, review, repository inspection,
+resource polling, or artifact completeness checking the primary next action
+when the next causal implementation or experiment is already known.
+
+Do not re-prove accepted facts before moving forward. Reopen evidence only when
+a concrete contradiction blocks the current causal test. A hard gate prevents
+wrong or uninterpretable compute; it must not become a separate workstream.
+
 ## Lean Project Loop
 
 The controller works directly. For each step, use the lightest applicable lane;
@@ -153,6 +184,10 @@ artifacts and null controls read. A docs-only change does not need the full
 algorithm suite. Existing manifests, metrics, logs, and checkpoints should be
 read directly instead of duplicated into wrapper reports. Do not claim
 completion from stale or partial evidence.
+
+Do not perform broad or repeated local experiment-artifact completeness scans.
+Use the registered status source for accepted results, and inspect only the
+specific artifact needed for a new result claim or a concrete failure diagnosis.
 
 ## External Review
 

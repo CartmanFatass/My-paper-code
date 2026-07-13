@@ -4,8 +4,12 @@ Date: 2026-07-13
 
 Status: G0 complete and accepted as `PASS_TARGET_NULLS`. The focused G1
 implementation freeze in Section 6.1 was accepted on 2026-07-13, and the scoped
-code/test/runner package is implemented. No topology check or training run has
-been executed; those remain separate user decisions.
+code/test/runner package is implemented. Two later one-update local engineering
+smokes were blocked by genuine natural-domain support OOD before reward
+application; no formal topology or three-arm training run was executed. The
+current disposition lives in `memory/ExpRecord.md` and
+`memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`; the frozen contract below
+is retained as evidence and is not launch authority.
 
 ## 1. Decision
 

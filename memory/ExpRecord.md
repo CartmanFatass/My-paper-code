@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260713-r28-g1-causal-skill-forcing-reward | planned — implementation complete; formal training not authorized | level-3 mechanism-matched three-arm continuation | no formal run root opened | none until a formal launch is authorized | zero G1 formal steps; former remote topology job superseded unqueued | Formal launch remains blocked on a separately authorized matching topology check. |
+| EXP-20260713-r28-forced-execution-support-transport | launch-ready | reward-off matched-domain causal diagnostic | no formal run root yet; local smoke `logs/r28_support_transport_smoke_20260713_221514` | after all 64 reset pairs aggregate | reset-0: deterministic OOD `0.0625`, stochastic OOD `1.0`, 16 paired windows | Run the fixed 64-reset contract; result selects trajectory transport failure versus natural-renewal diagnosis. |
+| EXP-20260713-r28-g1-causal-skill-forcing-reward | blocked — `BLOCKED_SUPPORT_OOD`; formal experiment not run | prelaunch engineering for promotion stage 3; planned formal comparator was baseline hierarchy L2 | local smokes `logs/r28_g1_engineering_smoke_20260713_212008` and `logs/r28_g1_engineering_smoke_20260713_213746`; no formal run root | none; cross-round failure review complete | same-config one-update OOD `0.950617`/`0.9375`; support kill in both; zero R28 reward applied; no mapping defect found | Retire the frozen G1 launch package. Do not refit/relax/repeat or infer reward efficacy; next action is a reward-off matched-domain transport diagnostic. |
 | EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
 | EXP-20260712-r27-g2-forced-z-trajectory-effect | completed — accepted `PASS_BEHAVIOR_EFFECT` 2026-07-13 | level-2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; run `r27_g2_overnight_20260713_095408`; commit `6c06cde` | none; preserve beside R26 natural negative | 192/192 `OK` shards; aggregate validation `valid=true`, `scientific_status=PASS`; A/B1/B2/B3/C PASS at update25/update30/final | Accept forced persistent conditional behavior and local effect through native H40 only. Record `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`; do not infer natural selection, reward usefulness, cooperation, task gain, or async-lifetime benefit. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — accepted 2026-07-12 | reward-off immediate-capacity autopsy | cloud CUDA; 64 reset groups; R25 arm0 update25/update30/final | none | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; result read under `logs/r27_g1_result_read_20260712/` | `STATIC_USED_OBSERVATIONAL_MISS`: immediate `z_i`-conditioned action-distribution sensitivity exists; persistence/effect were not established by this gate. |
@@ -38,43 +39,53 @@ explicitly approves the exception.
 
 ## Current Gate Detail
 
+### EXP-20260713-r28-forced-execution-support-transport
+
+- Edge/comparator: under the final R25 forced hold, compare deterministic and
+  six-agent stochastic environment execution from the same reset/prefix using
+  common policy noise; both modes score only their same-forward deterministic
+  action means with the frozen G0 support envelope. This is hierarchy-L1,
+  reward-off evidence.
+- Exposure: final checkpoint only; resets `0..63`, focal agent `reset_id % 6`,
+  four labels and four native duration windows per mode; 111,100 environment
+  steps, zero optimizer updates and zero reward; CUDA with eight reset workers,
+  expected 1-3h.
+- Gate: at least 48 paired rows per label-duration cell. Deterministic source
+  replication and stochastic transport each require overall and every cell OOD
+  `<=0.20`.
+- Branches: stochastic PASS -> test forced versus natural renewal under matched
+  stochastic execution; stochastic FAIL after deterministic PASS -> retire the
+  forced-deterministic scorer family from online reward; deterministic failure
+  -> `INVALID` source/evidence repair only; insufficient paired cells -> add
+  support only under the unchanged contract; crash -> operational repair.
+- Fixed while open: checkpoint, prefix/reset seeds, forced roster, feature
+  function, scorer/support, thresholds, common noise, zero reward, and zero
+  optimizer updates.
+- Runner: `scripts/run_r28_support_transport_cloud.sh`; status source is this
+  dashboard until a timestamped aggregate exists.
+
 ### EXP-20260713-r28-g1-causal-skill-forcing-reward
 
-- Causal edge/hypothesis: given the R27-proven forced executor capacity, a
-  bounded residual for `distinct z_i -> naturally expressed, behaviorally
-  differentiated skills` makes natural real-label behavior exceed matched
-  probe-only and sham-reward continuations without task collapse.
-- Comparator/baseline level: level-3 mechanism experiment with paired
-  `probe_only`, marginal-preserving `sham_reward`, and `real_reward` arms. R25
-  arm0/HMASD are fixed references and are not rerun.
-- Frozen source/nulls: exact R25 arm0 final at 1,000,000 steps/update 32; sole G0
-  final scorer; capacity-matched context and pre-window heads; same-row sham
-  labels; common real-label support. No communication/task field enters the
-  intrinsic score.
-- Exposure/topology: seeds 28031/28032/28033; +160,000 steps (updates 33..52),
-  16 envs, rollout 500, low PPO epochs 15; three arms concurrent per seed;
-  deterministic 20-episode evaluations at +80k/+160k. Expected end-to-end cost
-  is 6-10h only after a separate three-worker topology PASS; serial/CPU fallback
-  is forbidden.
-- `HMASD-R28-G1-TOPOLOGY-20260713-195737` was never queued or executed and is
-  superseded. Formal training remains unauthorized.
-- Metrics/thresholds: real R26 PASS at least 2/3 while each control is below 2/3;
-  clustered `real - max(probe,sham)` full-minus-prior gain estimate >=0.05 and
-  95% lower bound >0; pooled held-out `s_real` and `s_real-s_sham` lower bounds
-  >0; entropy >=0.80; OOD <=0.20; per-rollout reward/env ratio <=0.05; zero
-  kill-switch events; every seed return regression <=10% and zero-throughput
-  worsening <=0.10 versus its better matched control. Bootstrap seeds are
-  28034/28035/28036 with 10,000 reset-cluster repetitions.
-- Outcome branches/single actions: PASS -> design one separate long-run
-  verification; FAIL -> retire this target and complete the R26/R27/R28 failure
-  review; MIXED -> review one causal disagreement only; UNDERPOWERED -> repeat
-  support collection only; INVALID -> repair the evidence path/instrument and
-  repeat the unchanged gate once; crash -> operational repair only.
-- While open: do not refit the scorer, change thresholds/seeds/exposure,
-  actor/critic/PPO/GAE/collector semantics, other rewards, task fields, standing
-  references, or reinterpret the edge as cooperation/team complementarity.
-- Status source: this dashboard. No G1 formal compute evidence or topology
-  marker exists yet.
+- Scientific status: the planned hierarchy-L2 matched three-arm comparator at
+  promotion stage 3 was never opened, so R28-G1 has no reward-efficacy result.
+- Engineering evidence: seed 28030, CUDA, one environment, +500 steps, and one
+  low PPO epoch/update in each exact local smoke. The runs produced 81/80
+  structurally eligible rows, OOD `0.950617`/`0.9375`, one support kill each,
+  and zero R28 reward-applied steps.
+- Diagnosis: G0/G1 feature order, deterministic-action evidence, duration
+  indexing, source identity, and support-distance formula match. The second
+  run's distance/threshold mean was `94.9766`; all four temporal action-standard-
+  deviation residuals were `12.64-20.39` sigma while means/slopes were much
+  smaller. This is a genuine forced-to-natural trajectory support mismatch,
+  not an `INVALID_MAPPING` repair branch.
+- Decision: block and retire this frozen G1 launch package. Preserve the scorer
+  and thresholds; do not refit, relax, rerun the same smoke, or launch formal
+  training. This does not imply that a support-compatible reward would fail.
+- Next causal action: the reward-off matched-domain transport diagnostic in
+  `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
+- Frozen unexecuted contract: retained in
+  `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`.
+- Status sources: this dashboard and the two local smoke roots above.
 
 ## Completed Evidence and Archive Pointers
 

@@ -13,8 +13,10 @@ from ha_ctse_process.r28_g1_reward import (
     FINAL_CHECKPOINT_PATH,
     FrozenR28G1Reward,
     R28G1ContractError,
+    R28G1SupportEvaluation,
     fixed_point_free_derangement,
 )
+from ha_ctse_process.r27_g2_analysis import late_action_features
 from ha_ctse_process.standalone_agent import Rollout, Segment, SegmentManager
 from ha_ctse_process.train import enforce_r28_g1_contract, load_checkpoint_metadata
 
@@ -222,6 +224,56 @@ def test_support_and_ratio_kill_switches_zero_the_whole_rollout(tmp_path):
     assert len(support_abs_z) == 12
     assert all(np.isfinite(value) and value > 0.0 for value in support_abs_z)
     np.testing.assert_array_equal(np.asarray(rollout.rewards), before)
+
+
+def test_evaluate_support_is_pure_and_apply_reuses_its_values(tmp_path):
+    scorer_path = tmp_path / "support_probe.pt"
+    _write_scorer(scorer_path, support_mean=100.0, threshold=0.01)
+    reward = FrozenR28G1Reward(
+        arm="real_reward",
+        scorer_path=scorer_path,
+        actor_base=_actor_base(),
+        device="cpu",
+    )
+    segments, rollout = _rows_and_rollout()
+    post = np.asarray(
+        [late_action_features(np.asarray(segment.deterministic_actions)) for segment in segments],
+        dtype=np.float32,
+    )
+    labels = np.asarray([segment.skill for segment in segments], dtype=np.int64)
+    durations = np.asarray([segment.duration_idx for segment in segments], dtype=np.int64)
+    post_before = post.copy()
+    labels_before = labels.copy()
+    durations_before = durations.copy()
+
+    support = reward.evaluate_support(post, labels, durations)
+
+    assert isinstance(support, R28G1SupportEvaluation)
+    np.testing.assert_array_equal(post, post_before)
+    np.testing.assert_array_equal(labels, labels_before)
+    np.testing.assert_array_equal(durations, durations_before)
+    assert support.support.shape == (4,)
+    assert support.distances.shape == (4,)
+    assert support.thresholds.shape == (4,)
+    assert support.distance_ratio.shape == (4,)
+    assert support.abs_z.shape == (4, 12)
+    assert support.ood_fraction == 1.0
+
+    metrics = reward.apply(segments, rollout, policy_update=33)
+    assert metrics["r28_g1_support_distance_ratio_mean"] == pytest.approx(
+        np.mean(support.distance_ratio)
+    )
+    assert metrics["r28_g1_support_distance_ratio_p95"] == pytest.approx(
+        np.quantile(support.distance_ratio, 0.95, method="linear")
+    )
+    for index, name in enumerate(
+        f"action{action}_{statistic}"
+        for action in range(4)
+        for statistic in ("mean", "std", "slope")
+    ):
+        assert metrics[f"r28_g1_support_abs_z_{name}"] == pytest.approx(
+            np.mean(support.abs_z[:, index])
+        )
 
 
 def test_nonfinite_environment_reward_fails_before_ppo(tmp_path):

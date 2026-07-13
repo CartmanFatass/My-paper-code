@@ -51,6 +51,18 @@ class R28G1ContractError(RuntimeError):
     """The frozen implementation contract was violated before PPO."""
 
 
+@dataclass(frozen=True)
+class R28G1SupportEvaluation:
+    """Pure support-envelope evaluation for frozen action-process features."""
+
+    support: np.ndarray
+    distances: np.ndarray
+    thresholds: np.ndarray
+    distance_ratio: np.ndarray
+    abs_z: np.ndarray
+    ood_fraction: float
+
+
 def _array(name: str, value: Any, shape: tuple[int, ...]) -> np.ndarray:
     result = np.asarray(value, dtype=np.float32)
     if result.shape != shape:
@@ -429,6 +441,59 @@ class FrozenR28G1Reward:
             raise R28G1ContractError("R28 frozen head produced a non-finite score")
         return arrays
 
+    def evaluate_support(
+        self,
+        post: np.ndarray,
+        labels: np.ndarray,
+        durations: np.ndarray,
+    ) -> R28G1SupportEvaluation:
+        """Evaluate frozen support without scoring or mutating rollout state."""
+
+        features = np.asarray(post, dtype=np.float32)
+        label_ids = np.asarray(labels, dtype=np.int64).reshape(-1)
+        duration_ids = np.asarray(durations, dtype=np.int64).reshape(-1)
+        if features.ndim != 2 or features.shape[1] != STREAM_WIDTH:
+            raise R28G1ContractError(
+                f"R28 support feature shape {features.shape} != (rows, {STREAM_WIDTH})"
+            )
+        row_count = int(features.shape[0])
+        if row_count == 0:
+            raise R28G1ContractError("R28 support evaluation requires at least one row")
+        if label_ids.shape != (row_count,) or duration_ids.shape != (row_count,):
+            raise R28G1ContractError("R28 support label or duration shape mismatch")
+        if np.any((label_ids < 0) | (label_ids >= N_SKILLS)):
+            raise R28G1ContractError("R28 label is outside the frozen codebook")
+        if np.any((duration_ids < 0) | (duration_ids >= len(DURATION_STEPS))):
+            raise R28G1ContractError("R28 duration is outside the frozen contract")
+        if not np.isfinite(features).all():
+            raise R28G1ContractError("R28 support features contain non-finite values")
+
+        support = np.zeros(row_count, dtype=np.bool_)
+        support_distances = np.zeros(row_count, dtype=np.float64)
+        support_limits = np.zeros(row_count, dtype=np.float64)
+        support_abs_z = np.zeros((row_count, STREAM_WIDTH), dtype=np.float64)
+        for index in range(row_count):
+            mean = self.support_means[duration_ids[index], label_ids[index]]
+            variance = self.support_variances[duration_ids[index], label_ids[index]]
+            threshold = self.support_thresholds[duration_ids[index], label_ids[index]]
+            contribution = np.square(features[index] - mean) / variance
+            distance = float(np.sum(contribution))
+            if not np.isfinite(distance):
+                raise R28G1ContractError("R28 support distance is non-finite")
+            support_distances[index] = distance
+            support_limits[index] = float(threshold)
+            support_abs_z[index] = np.sqrt(contribution)
+            support[index] = distance <= float(threshold)
+        distance_ratio = support_distances / np.maximum(support_limits, 1e-12)
+        return R28G1SupportEvaluation(
+            support=support,
+            distances=support_distances,
+            thresholds=support_limits,
+            distance_ratio=distance_ratio,
+            abs_z=support_abs_z,
+            ood_fraction=float(np.mean(~support)),
+        )
+
     def apply(
         self,
         segments: Sequence[Any],
@@ -477,23 +542,9 @@ class FrozenR28G1Reward:
         if not (np.isfinite(post).all() and np.isfinite(pre).all() and np.isfinite(context).all()):
             raise R28G1ContractError("R28 feature construction produced non-finite values")
 
-        support = np.zeros(len(rows), dtype=np.bool_)
-        support_distances = np.zeros(len(rows), dtype=np.float64)
-        support_limits = np.zeros(len(rows), dtype=np.float64)
-        support_abs_z = np.zeros((len(rows), STREAM_WIDTH), dtype=np.float64)
-        for index in range(len(rows)):
-            mean = self.support_means[durations[index], labels[index]]
-            variance = self.support_variances[durations[index], labels[index]]
-            threshold = self.support_thresholds[durations[index], labels[index]]
-            contribution = np.square(post[index] - mean) / variance
-            distance = float(np.sum(contribution))
-            if not np.isfinite(distance):
-                raise R28G1ContractError("R28 support distance is non-finite")
-            support_distances[index] = distance
-            support_limits[index] = float(threshold)
-            support_abs_z[index] = np.sqrt(contribution)
-            support[index] = distance <= float(threshold)
-        distance_ratio = support_distances / np.maximum(support_limits, 1e-12)
+        support_evaluation = self.evaluate_support(post, labels, durations)
+        support = support_evaluation.support
+        distance_ratio = support_evaluation.distance_ratio
         metrics["r28_g1_support_distance_ratio_mean"] = float(
             np.mean(distance_ratio)
         )
@@ -502,9 +553,9 @@ class FrozenR28G1Reward:
         )
         for feature_index, name in enumerate(SUPPORT_FEATURE_NAMES):
             metrics[f"r28_g1_support_abs_z_{name}"] = float(
-                np.mean(support_abs_z[:, feature_index])
+                np.mean(support_evaluation.abs_z[:, feature_index])
             )
-        ood_fraction = float(np.mean(~support))
+        ood_fraction = support_evaluation.ood_fraction
         metrics["r28_g1_ood_fraction"] = ood_fraction
         metrics["r28_g1_in_support_rows"] = float(np.sum(support))
         if ood_fraction > OOD_KILL_FRACTION:

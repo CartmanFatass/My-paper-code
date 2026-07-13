@@ -4,17 +4,20 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Round 28 Action-Process Target And Future G1 Reward
+## Post-R28 Natural-Expression Transport Gate
 
-Active causal edge: `distinct z_i -> naturally expressed, behaviorally
-differentiated skills`.
+Active transport edge:
 
-The frozen design and scientific contract live in
-`docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` and the
-single active block in `memory/ExpRecord.md`. G1 consumes the immutable scorer
-referenced there.
+```text
+R27-proven forced skill regime
+-> support-compatible action process under on-policy state visitation
+```
 
-Implemented boundary:
+The R28-G1 frozen reward design remains evidence, but its launch package is
+blocked before formal execution. The disposition and cross-round baseline
+matrix live in `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
+
+Completed boundary:
 
 - a separate default-off low-level reward module using frozen scorer/source
   continuity, exact same-forward deterministic-action evidence, natural clocks,
@@ -23,19 +26,31 @@ Implemented boundary:
 - checkpoint and CLI integration, R26 sidecar/export, family analyzer, focused
   tests, and a reusable parallel cloud runner;
 - explicit non-resumable tagging for engineering-smoke checkpoints.
+- two exact one-update engineering smokes plus support-distance diagnostics;
+  both support kills occurred before any R28 reward application;
+- a feature-construction audit confirming shared feature code, action transform,
+  duration mapping, source identity, and support-distance semantics.
+- a separate paired transport sidecar that holds checkpoint, prefix, forced
+  skill, scorer, and features fixed while changing only deterministic versus
+  six-agent stochastic environment execution; no R27 artifact semantics were
+  changed;
+- reset-0 local CUDA smoke: 16 paired windows, deterministic OOD `0.0625`,
+  stochastic OOD `1.0`, with the same temporal-standard-deviation shift.
 
-Stage order:
+Next stage order:
 
-1. The local implementation smoke recorded in `CURRENT_WORK.md` reached one PPO
-   update but failed the frozen support guard before R28 reward injection.
-2. Diagnose feature construction versus genuine natural-distribution shift
-   without changing any frozen scorer or support rule.
-3. A confirmed construction bug permits one exact smoke repetition. A genuine
-   support mismatch blocks this G1 target and enters its failure-review branch.
+1. Execute the 64-reset paired diagnostic through the parallel cloud runner;
+   reuse the frozen scorer only as a diagnostic ruler.
+2. If stochastic forced trajectories remain supported, isolate forced hold
+   versus natural assignment/renewal under identical stochastic execution.
+3. Only a passed transport/activation edge may authorize design of a new
+   stage-3 reward test. A transport failure instead returns to observational
+   target design without changing the actor.
 
-Core MARL impact: when `r28_g1_arm=off`, reward, actor/critic/FiLM/GRU,
-optimizer/loss/GAE/PPO, collector semantics, environment dynamics, credit
-assignment, team intent, and latent-lifetime semantics remain unchanged.
+Core MARL impact: none from the completed diagnostics or review. Reward,
+actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics, environment
+dynamics, credit assignment, team intent, and latent-lifetime semantics remain
+unchanged.
 
 ## Legacy Compatibility Boundary
 
