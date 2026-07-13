@@ -49,9 +49,9 @@ R27-proven forced skill regime
 
 ## Next Actions
 
-1. Run the registered 64-reset paired transport diagnostic on CUDA with eight
-   reset workers (111,100 environment steps, zero updates/reward, expected
-   1-3h).
+1. Run the registered 64-reset paired transport diagnostic on the local CUDA
+   GPU with four reset workers (111,100 environment steps, zero updates/reward,
+   expected 15-30 minutes).
 2. If stochastic transport passes, compare forced hold with natural renewal
    under matched stochastic execution. If it fails, retire this forced-domain
    scorer family from online reward use.

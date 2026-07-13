@@ -23,8 +23,8 @@ Completed boundary:
   continuity, exact same-forward deterministic-action evidence, natural clocks,
   common support, sham derangement, terminal-ten-step attribution, and
   fail-closed OOD/reward-ratio guards;
-- checkpoint and CLI integration, R26 sidecar/export, family analyzer, focused
-  tests, and a reusable parallel cloud runner;
+- checkpoint and CLI integration, R26 sidecar/export, family analyzer, and
+  focused tests;
 - explicit non-resumable tagging for engineering-smoke checkpoints.
 - two exact one-update engineering smokes plus support-distance diagnostics;
   both support kills occurred before any R28 reward application;
@@ -39,8 +39,8 @@ Completed boundary:
 
 Next stage order:
 
-1. Execute the 64-reset paired diagnostic through the parallel cloud runner;
-   reuse the frozen scorer only as a diagnostic ruler.
+1. Execute the 64-reset paired diagnostic through the four-worker local CUDA
+   runner; reuse the frozen scorer only as a diagnostic ruler.
 2. If stochastic forced trajectories remain supported, isolate forced hold
    versus natural assignment/renewal under identical stochastic execution.
 3. Only a passed transport/activation edge may authorize design of a new

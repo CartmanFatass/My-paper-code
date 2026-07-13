@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260713-r28-forced-execution-support-transport | launch-ready | reward-off matched-domain causal diagnostic | no formal run root yet; local smoke `logs/r28_support_transport_smoke_20260713_221514` | after all 64 reset pairs aggregate | reset-0: deterministic OOD `0.0625`, stochastic OOD `1.0`, 16 paired windows | Run the fixed 64-reset contract; result selects trajectory transport failure versus natural-renewal diagnosis. |
+| EXP-20260713-r28-forced-execution-support-transport | launch-ready | reward-off matched-domain causal diagnostic | local CUDA; no decision run root yet; smoke `logs/r28_support_transport_smoke_20260713_221514` | after all 64 reset pairs aggregate | reset-0: deterministic OOD `0.0625`, stochastic OOD `1.0`, 16 paired windows | Run the fixed 64-reset contract; result selects trajectory transport failure versus natural-renewal diagnosis. |
 | EXP-20260713-r28-g1-causal-skill-forcing-reward | blocked — `BLOCKED_SUPPORT_OOD`; formal experiment not run | prelaunch engineering for promotion stage 3; planned formal comparator was baseline hierarchy L2 | local smokes `logs/r28_g1_engineering_smoke_20260713_212008` and `logs/r28_g1_engineering_smoke_20260713_213746`; no formal run root | none; cross-round failure review complete | same-config one-update OOD `0.950617`/`0.9375`; support kill in both; zero R28 reward applied; no mapping defect found | Retire the frozen G1 launch package. Do not refit/relax/repeat or infer reward efficacy; next action is a reward-off matched-domain transport diagnostic. |
 | EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
 | EXP-20260712-r27-g2-forced-z-trajectory-effect | completed — accepted `PASS_BEHAVIOR_EFFECT` 2026-07-13 | level-2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; run `r27_g2_overnight_20260713_095408`; commit `6c06cde` | none; preserve beside R26 natural negative | 192/192 `OK` shards; aggregate validation `valid=true`, `scientific_status=PASS`; A/B1/B2/B3/C PASS at update25/update30/final | Accept forced persistent conditional behavior and local effect through native H40 only. Record `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`; do not infer natural selection, reward usefulness, cooperation, task gain, or async-lifetime benefit. |
@@ -48,8 +48,8 @@ explicitly approves the exception.
   reward-off evidence.
 - Exposure: final checkpoint only; resets `0..63`, focal agent `reset_id % 6`,
   four labels and four native duration windows per mode; 111,100 environment
-  steps, zero optimizer updates and zero reward; CUDA with eight reset workers,
-  expected 1-3h.
+  steps, zero optimizer updates and zero reward; local CUDA with four reset
+  workers, expected 15-30 minutes.
 - Gate: at least 48 paired rows per label-duration cell. Deterministic source
   replication and stochastic transport each require overall and every cell OOD
   `<=0.20`.
@@ -61,7 +61,7 @@ explicitly approves the exception.
 - Fixed while open: checkpoint, prefix/reset seeds, forced roster, feature
   function, scorer/support, thresholds, common noise, zero reward, and zero
   optimizer updates.
-- Runner: `scripts/run_r28_support_transport_cloud.sh`; status source is this
+- Runner: `scripts/run_r28_support_transport_local.ps1`; status source is this
   dashboard until a timestamped aggregate exists.
 
 ### EXP-20260713-r28-g1-causal-skill-forcing-reward
