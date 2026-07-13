@@ -26,107 +26,88 @@ Codex and Claude Code alternate as controller; only one may modify the repo at a
 time. Update the `Controller Handoff` block in `memory/CURRENT_WORK.md` when
 ownership changes.
 
-## Controller Role
+## Lean Project Loop
 
-The controller owns task understanding, execution, verification, scientific
-interpretation, user communication, and final decisions. It must:
+The controller works directly. For each step, use the lightest applicable lane;
+move to a heavier lane only when the next action actually requires it:
 
-- clarify ambiguous scope, assumptions, success criteria, and scientific claims;
-- inspect the codebase before non-trivial implementation decisions;
-- implement the work directly and carry it through verification;
-- separate factual evidence from interpretation and recommendation;
-- preserve unrelated user changes in a dirty worktree;
-- explain changed files, checks run, unresolved risk, and next actions.
+1. **Ordinary engineering:** inspect, implement, run the smallest focused checks
+   that support the completion claim, and commit. This includes docs, SSH,
+   packaging, CI, repository hygiene, dashboards, and runner maintenance. Do not
+   create a design, plan, ledger, review package, or extra report.
+2. **Engineering smoke:** run a small local command through the existing CLI
+   (CUDA when it updates a model), read the existing manifest/metrics/checkpoint
+   once, report engineering PASS/FAIL, and stop. It needs no ExpRecord
+   transition, scheduler entry, custom runner, duplicate status file, or
+   standalone validator.
+3. **Formal experiment:** use the research contract and the hard gates below.
+   Long, multi-seed, or conclusion-bearing compute belongs here.
+4. **Status/result read:** inspect existing artifacts and answer directly. Do
+   not edit code or memory unless the experiment's state or interpretation
+   actually changes.
 
-**Process must be proportional to risk.** Ordinary bounded work needs no design
-document, plan, progress ledger, status file, review package, or multi-stage
-review. Use those only when they materially reduce risk or preserve evidence.
+Do not silently promote work into a heavier lane. Add reusable orchestration
+only for repeated matrices, remote/long jobs, or after a concrete failure proves
+it is needed. Stop when the requested behavior and its immediate failure path
+work.
 
-For documentation, SSH/remote operations, runner orchestration, dashboards,
-packaging, CI, repository hygiene, and other non-core-algorithm work, use a
-normal direct engineering flow: the controller implements it directly and runs
-one focused behavioral, parser, or dry-run check. Do not default to delegated
-audits, review matrices, extra plans/reports, redundant test passes, or
-speculative hardening. Add more process only after a real failure or a concrete
-direct risk, and stop when the requested behavior and its immediate failure
-path work.
+Operational failure and scientific failure are different. Diagnose an
+operational crash directly and run one focused confirmation. Apply the research
+failure-review gate only to a non-PASS scientific result; keep that review in the
+same experiment record unless two related gates fail or the research direction
+changes.
 
-Retain hard gates only for a direct risk of launching the wrong experiment,
-using the wrong device/source/data path, duplicating compute, losing evidence,
-corrupting data, or changing a scientific conclusion. Core MARL algorithm,
-numerical, collector-semantic, reward, and causal-claim changes continue to use
-the research discipline below.
+## One Source Per Fact
 
-Core algorithm and numerical code may be written directly, with explicit
-reasoning about tensor shapes, gradient flow, detach boundaries, clocks, masks,
-reward scale, advantage semantics, checkpoint compatibility, and collector
-behavior as applicable.
+- Git-tracked code is the implementation and version source.
+- `logs/<run-id>/` is the runtime-evidence source.
+- `memory/CURRENT_WORK.md` holds controller ownership, the current objective,
+  next actions, immediate constraints, and pointers.
+- `memory/IMPLEMENTATION_PLAN.md` holds only staged core-algorithm work.
+- `memory/ExpRecord.md` holds only formal experiment contracts and decisions.
 
-Git is the sole source-version manager. Do not add application-layer hashes or
-checksums to active workflows. Experiment identity uses registered
-experiment/checkpoint names, paths, seeds, and run directories.
+Record each fact in detail once. Other files may contain only a short pointer,
+not a second copy of the command, thresholds, status, or result. Update the
+owning source only at a meaningful boundary. Git is the sole version manager;
+do not add application-layer hashes or checksums.
+
+## Formal Experiment Hard Gates
+
+Before a meaningful formal launch, read `memory/ALGORITHM_PRINCIPLES.md` and
+ensure that experiment's single contract block in `memory/ExpRecord.md` records
+the causal edge, upstream authorization, comparator/baseline level, metrics and
+thresholds,
+nulls, seeds, environment steps and optimizer updates, outcome branches with one
+next action each, prohibited changes, expected wall clock, and status source.
+Do not manufacture this record for a smoke, status check, or mechanical command.
+
+Formal experiments default to CUDA and parallel execution sized for the wall
+clock target. Never silently use CPU or serial fallback. Validate a matching
+process/GPU topology once before a new workload shape; a failure stops launch.
+
+Long training, multi-seed batches, and heavy analysis default to the cloud.
+Reuse a compatible self-contained Bash runner under `scripts/`; create or
+modify one only for a new workload shape. Write outputs under a timestamped
+`logs/` root on the data disk, commit and push, then register the exact committed
+job with the shared scheduler. The local GPU is for smokes and small
+diagnostics. Treat the server as available by default and ask the user to wake
+it only after a real SSH failure.
+
+Preserve negative results as constraints. Do not rename, delete, reinterpret,
+retune, or rerun a failed line until it looks favorable; do not redesign metrics
+after reading results.
 
 ## Controller Communication
 
-When experiment evidence, plan state, or implementation results change what the
-user should understand, give a compact handoff — never make the user ask what a
-result means:
+For ordinary work, report only outcome, changed files, focused check, remaining
+risk, and next action. For a core experiment transition or interpretation, add a
+compact five-part handoff: situation, evidence/meaning, next recommendation,
+core MARL impact, and open gate. Keep factual evidence separate from inference.
 
-- **Situation:** what is running, complete, blocked, or waiting.
-- **Meaning:** what the facts imply, evidence separated from inference.
-- **Next plan / recommendation:** the next permitted action and the branch for
-  likely outcomes. Waiting is a valid recommendation — if so, name exactly what
-  is being waited on and what must not change meanwhile.
-- **Core MARL impact:** whether reward, policy/critic architecture,
-  optimizer/loss/advantage, collector semantics, environment dynamics, credit
-  assignment, team intent, or latent-skill semantics are affected.
-- **Open gates:** the metric, null, review, or user decision still required.
-
-## Experiments
-
-**When an experiment's state or interpretation actually changes** — launching,
-stopping, accepting, rejecting, or reinterpreting one — additionally state:
-hypothesis and causal edge; comparator and baseline level; metrics, thresholds,
-nulls, seeds, and update exposure; PASS/FAIL/MIXED/UNDERPOWERED/INVALID branches
-and the single next action each authorizes; what must not change while the gate
-is open; and the status source.
-
-Register that same content in `memory/ExpRecord.md` before a meaningful launch.
-A status check, a progress read, or a mechanical command is **not** an experiment
-transition — answer it plainly and do not manufacture a scientific read.
-
-An engineering smoke is also not a scientific experiment transition. Run a
-small smoke directly with the existing CLI and existing trainer outputs; it
-needs no design document, ExpRecord entry, package, scheduler registration,
-custom runner, duplicate status files, or standalone validator. One focused
-post-run check is enough. Add reusable orchestration only for repeated matrices,
-long jobs, remote execution, or after a concrete failure shows it is needed.
-
-Every compute-bearing proposal states expected wall-clock cost before launch.
-Experiments default to CUDA; never silently fall back to CPU — if the GPU is
-occupied, present the options with their costs and let the user choose.
-
-Compute-bearing experiments also default to parallel execution sized for the
-registered wall-clock target. Serial execution is not an acceptable default or
-fallback. If the workload's process/GPU topology has not been validated, run a
-separate bounded topology check first; a failed validation stops the launch
-instead of degrading to serial execution. Single-process syntax checks, dry
-runs, and small diagnostics are not scientific experiment launches.
-
-Long training, multi-seed batches, and heavy analysis default to the user's cloud
-server: write a self-contained Bash runner under `scripts/` following existing
-conventions; use timestamped roots under `logs/`; record commands, expected
-artifacts, device, env count, seed, timesteps, and eval cadence in
-`memory/ExpRecord.md`; commit and push before asking the user to pull and launch.
-The local GPU is for smokes and small diagnostics.
-
-Treat the remote server as available by default: attempt the scoped SSH action
-directly. Ask the user to wake the server only after the connection actually
-fails or the host is unreachable; do not require a pre-SSH wake confirmation.
-
-Preserve negative results as constraints. Do not rename, delete, reinterpret, or
-re-run a failed line until it looks favorable, and do not redesign metrics after
-viewing results.
+Core MARL changes require explicit reasoning about applicable tensor shapes,
+gradient flow, detach boundaries, clocks, masks, reward scale, advantage
+semantics, checkpoint compatibility, and collector behavior. Preserve unrelated
+user changes in a dirty worktree.
 
 ## Engineering Discipline
 
@@ -170,10 +151,11 @@ incomplete. Record source model, date, related claim, and disposition.
 
 ## Memory Shape
 
-Keep root `memory/` compact and current — `CURRENT_WORK.md` (objective, active
-causal edge, next actions, pointers), `ALGORITHM_PRINCIPLES.md` (research
-contract), `IMPLEMENTATION_PLAN.md` (staged ledger), `ExpRecord.md` (factual
-dashboard). Target: each stays small enough to read in full without cost.
+Keep root `memory/` compact and current — `CURRENT_WORK.md` (controller,
+objective, actions, constraints, pointers), `ALGORITHM_PRINCIPLES.md` (research
+contract), `IMPLEMENTATION_PLAN.md` (current core stage), and `ExpRecord.md`
+(formal dashboard). Target: each stays small enough to read in full without
+cost.
 
 **Rotate, don't accumulate.** When a round completes or is superseded, move its
 long-form detail to `memory/LTM/` and leave a pointer. Update compact memory only
