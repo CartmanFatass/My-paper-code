@@ -8,6 +8,7 @@ import pytest
 import torch
 
 from ha_ctse_process.r28_g0_target import EXPERIMENT_ID, HEAD_INPUT_WIDTH
+from ha_ctse_process.plotting import R28_G1_METRIC_FIELDS
 from ha_ctse_process.r28_g1_reward import (
     FINAL_CHECKPOINT_PATH,
     FrozenR28G1Reward,
@@ -209,7 +210,17 @@ def test_support_and_ratio_kill_switches_zero_the_whole_rollout(tmp_path):
     segments, rollout = _rows_and_rollout()
     before = np.asarray(rollout.rewards).copy()
     support_metrics = support_reward.apply(segments, rollout, policy_update=33)
+    assert set(support_metrics) == set(R28_G1_METRIC_FIELDS)
     assert support_metrics["r28_g1_support_kill_switch_event"] == 1.0
+    assert support_metrics["r28_g1_support_distance_ratio_mean"] > 1.0
+    assert support_metrics["r28_g1_support_distance_ratio_p95"] > 1.0
+    support_abs_z = [
+        value
+        for name, value in support_metrics.items()
+        if name.startswith("r28_g1_support_abs_z_")
+    ]
+    assert len(support_abs_z) == 12
+    assert all(np.isfinite(value) and value > 0.0 for value in support_abs_z)
     np.testing.assert_array_equal(np.asarray(rollout.rewards), before)
 
 

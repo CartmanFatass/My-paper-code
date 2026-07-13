@@ -40,6 +40,11 @@ REWARD_CLIP = 0.05
 OOD_KILL_FRACTION = 0.20
 RATIO_KILL_FRACTION = 0.05
 FINAL_WINDOW = 10
+SUPPORT_FEATURE_NAMES = tuple(
+    f"action{action}_{statistic}"
+    for action in range(4)
+    for statistic in ("mean", "std", "slope")
+)
 
 
 class R28G1ContractError(RuntimeError):
@@ -113,7 +118,7 @@ class FrozenHead:
 
 
 def empty_r28_g1_metrics(arm: str = "probe_only") -> dict[str, float]:
-    return {
+    metrics = {
         "r28_g1_active": 0.0,
         "r28_g1_arm_code": float(ARMS.index(arm)) if arm in ARMS else -1.0,
         "r28_g1_segments_seen": 0.0,
@@ -125,6 +130,8 @@ def empty_r28_g1_metrics(arm: str = "probe_only") -> dict[str, float]:
         "r28_g1_pre_window_rows_rejected": 0.0,
         "r28_g1_ood_fraction": 0.0,
         "r28_g1_in_support_rows": 0.0,
+        "r28_g1_support_distance_ratio_mean": 0.0,
+        "r28_g1_support_distance_ratio_p95": 0.0,
         "r28_g1_support_kill_switch_event": 0.0,
         "r28_g1_rewardable_groups": 0.0,
         "r28_g1_rewardable_rows": 0.0,
@@ -140,6 +147,13 @@ def empty_r28_g1_metrics(arm: str = "probe_only") -> dict[str, float]:
         "r28_g1_reward_env_ratio": 0.0,
         "r28_g1_ratio_kill_switch_event": 0.0,
     }
+    metrics.update(
+        {
+            f"r28_g1_support_abs_z_{name}": 0.0
+            for name in SUPPORT_FEATURE_NAMES
+        }
+    )
+    return metrics
 
 
 def fixed_point_free_derangement(
@@ -464,14 +478,32 @@ class FrozenR28G1Reward:
             raise R28G1ContractError("R28 feature construction produced non-finite values")
 
         support = np.zeros(len(rows), dtype=np.bool_)
+        support_distances = np.zeros(len(rows), dtype=np.float64)
+        support_limits = np.zeros(len(rows), dtype=np.float64)
+        support_abs_z = np.zeros((len(rows), STREAM_WIDTH), dtype=np.float64)
         for index in range(len(rows)):
             mean = self.support_means[durations[index], labels[index]]
             variance = self.support_variances[durations[index], labels[index]]
             threshold = self.support_thresholds[durations[index], labels[index]]
-            distance = float(np.sum(np.square(post[index] - mean) / variance))
+            contribution = np.square(post[index] - mean) / variance
+            distance = float(np.sum(contribution))
             if not np.isfinite(distance):
                 raise R28G1ContractError("R28 support distance is non-finite")
+            support_distances[index] = distance
+            support_limits[index] = float(threshold)
+            support_abs_z[index] = np.sqrt(contribution)
             support[index] = distance <= float(threshold)
+        distance_ratio = support_distances / np.maximum(support_limits, 1e-12)
+        metrics["r28_g1_support_distance_ratio_mean"] = float(
+            np.mean(distance_ratio)
+        )
+        metrics["r28_g1_support_distance_ratio_p95"] = float(
+            np.quantile(distance_ratio, 0.95, method="linear")
+        )
+        for feature_index, name in enumerate(SUPPORT_FEATURE_NAMES):
+            metrics[f"r28_g1_support_abs_z_{name}"] = float(
+                np.mean(support_abs_z[:, feature_index])
+            )
         ood_fraction = float(np.mean(~support))
         metrics["r28_g1_ood_fraction"] = ood_fraction
         metrics["r28_g1_in_support_rows"] = float(np.sum(support))
