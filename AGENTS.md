@@ -101,10 +101,20 @@ after reading results.
 
 ## Controller Communication
 
-For ordinary work, report only outcome, changed files, focused check, remaining
-risk, and next action. For a core experiment transition or interpretation, add a
-compact five-part handoff: situation, evidence/meaning, next recommendation,
-core MARL impact, and open gate. Keep factual evidence separate from inference.
+Scope every report to the domain that actually changed:
+
+- algorithm/code changes report only the affected algorithm semantics,
+  implementation, focused verification, and remaining algorithm risk;
+- experiment transitions or result reads report only the experiment contract,
+  execution state, evidence, interpretation, and next gate;
+- infrastructure, Git, packaging, or artifact-transfer work reports only its
+  operational outcome and immediate failure path.
+
+Do not append generic unchanged-state disclaimers such as "no compute was
+launched", "the server need not be started", "formal training is not
+authorized", or "core MARL is unchanged". Mention such a fact only when it
+changed, directly blocks the requested next action, or the user asks about it.
+Keep factual evidence separate from inference.
 
 Core MARL changes require explicit reasoning about applicable tensor shapes,
 gradient flow, detach boundaries, clocks, masks, reward scale, advantage
