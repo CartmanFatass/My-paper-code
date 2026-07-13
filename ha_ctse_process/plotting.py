@@ -172,11 +172,40 @@ SITUATION_STAGE1_FIELDS = (
     "situation_hazard_guard_recent_force_rate",
 )
 
+R28_G1_METRIC_FIELDS = (
+    "r28_g1_active",
+    "r28_g1_arm_code",
+    "r28_g1_segments_seen",
+    "r28_g1_structural_rows",
+    "r28_g1_initial_rows_rejected",
+    "r28_g1_episode_truncated_rows_rejected",
+    "r28_g1_update_truncated_rows_rejected",
+    "r28_g1_length_rows_rejected",
+    "r28_g1_pre_window_rows_rejected",
+    "r28_g1_ood_fraction",
+    "r28_g1_in_support_rows",
+    "r28_g1_support_kill_switch_event",
+    "r28_g1_rewardable_groups",
+    "r28_g1_rewardable_rows",
+    "r28_g1_unbalanced_groups",
+    "r28_g1_real_score_mean",
+    "r28_g1_sham_score_mean",
+    "r28_g1_real_minus_sham_score_mean",
+    "r28_g1_real_centered_abs_mean",
+    "r28_g1_sham_centered_abs_mean",
+    "r28_g1_selected_segment_reward_abs_mean",
+    "r28_g1_selected_distributed_reward_abs_mean",
+    "r28_g1_reward_applied_steps",
+    "r28_g1_reward_env_ratio",
+    "r28_g1_ratio_kill_switch_event",
+)
+
 
 UPDATE_FIELDS = (
     "update",
     "total_steps",
     "env_reward_mean",
+    *R28_G1_METRIC_FIELDS,
     "process_segments",
     "process_loss",
     "process_outcome_loss",

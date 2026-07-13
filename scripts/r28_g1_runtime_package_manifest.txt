@@ -1,0 +1,27 @@
+# R28-G1 maintained runtime manifest.
+# Git is the transport and sole source-version manager; this list documents the
+# files required by the cloud runner and intentionally carries no hash layer.
+
+directory ha_ctse_process
+directory envs
+directory hmasd
+
+file scripts/run_r28_g1_causal_skill_forcing_cloud.sh
+file scripts/collect_r26_g1_windows.py
+file scripts/analyze_r26_g1_behavior.py
+file scripts/analyze_r28_g1_family.py
+file scripts/r28_g1_runtime_package_manifest.txt
+
+file requirements_server.txt
+file docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md
+file memory/CURRENT_WORK.md
+file memory/ALGORITHM_PRINCIPLES.md
+file memory/IMPLEMENTATION_PLAN.md
+file memory/ExpRecord.md
+
+file tests/r28_g1_reward_test.py
+file tests/r28_g1_family_test.py
+file tests/r28_g1_runner_test.py
+file tests/r26_g1_collector_test.py
+file tests/r26_g1_behavior_test.py
+file tests/r27_g2_live_hook_test.py

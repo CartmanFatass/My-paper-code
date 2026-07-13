@@ -20,6 +20,7 @@ from scripts.collect_r26_g1_windows import (
     policy_parameters_equal,
     require_cuda_device,
     snapshot_policy_parameters,
+    write_r28_sidecar_shard,
 )
 
 
@@ -177,6 +178,100 @@ class FakeAgent:
             dtype=np.float32,
         )
         return actions, np.zeros(2, dtype=np.float32), np.zeros(2, dtype=np.float32)
+
+
+class FakeR28Env:
+    def __init__(self) -> None:
+        self.steps = 0
+
+    def _obs(self) -> np.ndarray:
+        return np.asarray(
+            [[float(self.steps), float(agent_id)] for agent_id in range(6)],
+            dtype=np.float32,
+        )
+
+    def reset(self, *, seed: int):
+        self.steps = 0
+        return self._obs(), {"state": np.asarray([float(seed)], dtype=np.float32)}
+
+    def step(self, actions):
+        assert np.asarray(actions).shape == (6, 4)
+        self.steps += 1
+        return self._obs(), 0.0, False, False, {
+            "next_state": np.asarray([float(self.steps)], dtype=np.float32)
+        }
+
+
+class FakeR28Agent:
+    def __init__(self) -> None:
+        self.n_agents = 6
+        self.n_skills = 4
+        self.num_team_codes = 1
+        self.duration_candidates = (1, 2, 3, 4)
+        self.active_skills = np.zeros((1, 6), dtype=np.int64)
+        self.active_duration_indices = np.zeros((1, 6), dtype=np.int64)
+        self.duration_remaining = np.zeros((1, 6), dtype=np.int64)
+        self.skill_age = np.zeros((1, 6), dtype=np.int64)
+        self.has_active_skill = np.zeros((1, 6), dtype=np.bool_)
+        self.active_team_codes = np.zeros(1, dtype=np.int64)
+        self.segments = SimpleNamespace(active=[[None for _ in range(6)]])
+        self.current_step = 0
+
+    def reset_env_state(self, env_id: int) -> None:
+        self.active_skills[env_id] = 0
+        self.active_duration_indices[env_id] = 0
+        self.duration_remaining[env_id] = 0
+        self.skill_age[env_id] = 0
+        self.has_active_skill[env_id] = False
+        self.segments.active[env_id] = [None for _ in range(6)]
+
+    def maybe_assign_skills(self, obs, *, step: int, env_id: int, **_kwargs) -> None:
+        self.current_step = int(step)
+        if step not in (0, 10, 20):
+            return
+        label = {0: 0, 10: 1, 20: 2}[int(step)]
+        self.active_skills[env_id, 0] = label
+        self.active_duration_indices[env_id, 0] = 0
+        self.has_active_skill[env_id, 0] = True
+        self.segments.active[env_id][0] = SimpleNamespace(
+            skill=label,
+            duration_idx=0,
+            prev_skill=max(label - 1, 0),
+            skill_age_prev=10 if step else 0,
+            team_code=0,
+            high_obs=np.asarray(obs[0], dtype=np.float32).copy(),
+            omega_start=np.asarray([1.0], dtype=np.float32),
+            roster_active_skills_start=self.active_skills[env_id].copy(),
+        )
+
+    def act_low(
+        self,
+        obs,
+        *,
+        env_id: int,
+        return_context: bool = False,
+        capture_deterministic_action: bool = False,
+        **_kwargs,
+    ):
+        del obs
+        deterministic = np.zeros((6, 4), dtype=np.float32)
+        for agent_id in range(6):
+            deterministic[agent_id] = np.asarray(
+                [self.current_step, self.active_skills[env_id, agent_id], agent_id, 1.0],
+                dtype=np.float32,
+            )
+        result = (
+            deterministic.copy(),
+            np.zeros(6, dtype=np.float32),
+            np.zeros(6, dtype=np.float32),
+        )
+        if return_context:
+            assert capture_deterministic_action
+            return (*result, {"deterministic_actions": deterministic})
+        return result
+
+    def record_environment_step(self, env_id: int) -> None:
+        del env_id
 
 
 def _collect(
@@ -533,3 +628,45 @@ def test_run_collection_writes_one_shard_per_reset_and_manifest_identity(
     assert written["stats"]["resets"] == 3
     assert written["checkpoint_nonempty"] is True
     assert written["policy_parameters_unchanged"] is True
+
+
+def test_r28_sidecar_records_only_naturally_completed_terminal_windows(tmp_path):
+    torch.manual_seed(4)
+    phi0 = torch.nn.Linear(2, 256)
+    rows: list[dict[str, object]] = []
+    r28_stats: dict[str, int] = {"completed": 0, "discarded": 0}
+    collect_reset(
+        FakeR28Env(),
+        FakeR28Agent(),
+        reset_id=3,
+        reset_seed=28034,
+        episode_id=3,
+        skill_interval=10,
+        episode_max_steps=21,
+        checkpoint_id="r28_g1_probe_only_seed28031_final",
+        checkpoint_update=52,
+        r28_phi0=phi0,
+        r28_sidecar_rows=rows,
+        r28_stats=r28_stats,
+    )
+
+    assert [row["label"] for row in rows] == [0, 1]
+    assert [row["pre_valid"] for row in rows] == [False, True]
+    assert r28_stats == {"completed": 2, "discarded": 1}
+    expected_first = np.asarray(
+        [[step, 0, 0, 1.0] for step in range(10)], dtype=np.float32
+    )
+    expected_second = np.asarray(
+        [[step, 1, 0, 1.0] for step in range(10, 20)], dtype=np.float32
+    )
+    np.testing.assert_array_equal(rows[0]["post_actions"], expected_first)
+    np.testing.assert_array_equal(rows[1]["pre_actions"], expected_first)
+    np.testing.assert_array_equal(rows[1]["post_actions"], expected_second)
+
+    path = tmp_path / "reset_0003.npz"
+    write_r28_sidecar_shard(path, rows)
+    with np.load(path, allow_pickle=False) as shard:
+        assert str(np.asarray(shard["schema"]).item()) == "r28-g1-natural-sidecar-v1"
+        assert shard["phi0"].shape == (2, 256)
+        assert shard["pre_actions"].shape == (2, 10, 4)
+        assert shard["post_actions"].shape == (2, 10, 4)

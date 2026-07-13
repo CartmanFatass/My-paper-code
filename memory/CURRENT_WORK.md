@@ -20,6 +20,12 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
   compare typed values; derived reports are rebuilt from current inputs.
 - **IMOD** is a separate project at `C:\project\IMOD` (own Git history). Its
   design state is **not** evidence for this line and does not block it.
+- **Shared GPU scheduling (2026-07-13):** Codex task
+  `019f5aca-bde7-70b3-8c94-24584136c2c9` and automation `hmasd-r27-g2` are the
+  sole IMOD/HMASD GPU lease controller. This research task packages and
+  interprets HMASD work, but does not reuse an old SSH snapshot to claim
+  occupancy or launch compute. A future authorized job must be registered in
+  the scheduler with its exact committed contract before it becomes `READY`.
 
 ## Current Objective
 
@@ -52,9 +58,9 @@ differentiated skills`.**
 - `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — the
   frozen R27-G2 design and outcome branches.
 - `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — the
-  frozen R28-G0 target/null contract and focused future-G1 implementation
-  review. R28-G0 is complete; the Section 6.1 G1 freeze awaits user acceptance,
-  and reward implementation/topology execution/launch are not authorized.
+  frozen R28-G0 target/null contract and accepted G1 implementation freeze.
+  The code/test/runner package is complete; topology execution and launch remain
+  unauthorized.
 - `docs/external-review/R27_G2_design_review_20260712_Claude.md` — raw external
   review. Exact Claude model/version was not supplied, so provenance is
   incomplete and recorded as such.
@@ -63,42 +69,36 @@ differentiated skills`.**
 
 ## Current Experiment Focus
 
-`EXP-20260713-r28-g0-action-process-target-calibration` — **completed and
-accepted as `PASS_TARGET_NULLS` on 2026-07-13**.
+`EXP-20260713-r28-g1-causal-skill-forcing-reward` — **implementation complete;
+topology and launch not authorized**.
 
 - Candidate target: fixed 10-step deterministic-action process residual over
   capacity-matched context, pre-window, and sham-label nulls. No communication
   field, environment reward, Gate-C observation effect, `q_A`, `q_d`, or `q_D`
   enters the intrinsic score.
-- First gate is offline CUDA calibration on the existing R27 shards. It adds
-  zero environment steps and cannot tune thresholds after outcomes are read.
-  Implemented in `ha_ctse_process/r28_g0_target.py` with CLI
-  `scripts/analyze_r28_g0_action_process_target.py` and runner
-  `scripts/run_r28_g0_action_process_target_cloud.sh`.
-- Cloud run `logs/r28_g0_action_process_target_20260713_175600` completed
-  with `valid=true`, `scientific_status=PASS`,
-  `classification=PASS_TARGET_NULLS`, and frozen scorer
-  `r28_g0_scorer_final.pt`. Final and update30 passed; update25 failed only the
-  train-test-gap gate.
-- The focused G1 implementation review is complete. It found that the old
-  P3-4 same-rollout forcing path cannot implement the frozen target and defined
-  a separate scorer/clock/window/guard integration. Its freeze awaits user
-  acceptance; implementation, topology execution, and reward launch remain
-  separate gates.
-- No HMASD compute is currently active. The shared server is running a separate
-  IMOD Async-HMASD pilot; its state is not HMASD evidence and must not be
-  disturbed by this design work.
+- G0 remains accepted `PASS_TARGET_NULLS`; its scorer at
+  `logs/r28_g0_action_process_target_20260713_175600/r28_g0_scorer_final.pt`
+  is the sole frozen target/null input.
+- G1 now has exact same-forward deterministic-action capture, frozen scorer and
+  actor-base checkpoint continuity, natural episode/update clocks, common
+  support and sham grouping, final-ten-step low-only reward attribution,
+  fail-closed guards, unchanged R26 evidence plus sidecar, family analyzer, and
+  a parallel data-disk Bash runner.
+- No topology check or G1 training has run. Resource occupancy is deliberately
+  not cached here: the earlier IMOD-occupied claim was withdrawn as stale, and
+  the shared scheduler must obtain fresh lease evidence before any action.
 
-Everything else on the dashboard is `completed` or `standing-reference`. R25
-arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
+Other than the planned, execution-closed G1 row, the dashboard is `completed`
+or `standing-reference`. R25 arm0/arm2 and the HMASD baseline (REF-20260617)
+are **fixed comparison data**.
 
 ## Next Actions
 
-1. Obtain user acceptance of the R28-G1 Section 6.1 implementation freeze and
-   separate authorization before writing the reward package.
-2. If accepted, implement the frozen scorer integration, focused tests, family
-   analyzer, and dry-run-capable parallel Bash runner only. Do not execute the
-   topology check or launch reward training without another explicit approval.
+1. Preserve the implemented package unchanged while topology/launch are closed.
+2. On separate approval, register the exact committed topology job with the
+   shared GPU scheduler. That scheduler must establish the live lease and run
+   only the three-concurrent-arm CUDA topology check. A failure stops; no
+   serial/CPU fallback and no automatic transition into training.
 3. Preserve the R28-G0 scorer/result as the only target/null input; do not
    refit, retune, or sweep the classifier.
 4. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
@@ -115,9 +115,8 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
   `q_A` remains default-off after the R25 task regression.
 - Do not turn Gate C, raw communication/service/topology fields, or environment
   reward into the R28 intrinsic target.
-- Do not implement R28-G1 until the focused Section 6.1 freeze is accepted and
-  implementation is separately authorized. Implementation approval would not
-  authorize topology execution or experiment launch.
+- Do not execute the R28-G1 topology check or experiment launch without the
+  separate user decision. Idle resources do not broaden that authorization.
 - Do not re-run standing references (user directive 2026-07-10): the HMASD
   baseline (REF-20260617) and the R25 arm0/arm2 arms. Reuse the archived
   curves/checkpoints. Exceptions need explicit user approval.

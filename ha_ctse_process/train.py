@@ -37,6 +37,11 @@ from ha_ctse_process.standalone_agent import (
     SegmentManager,
     StandaloneProcessAgent,
 )
+from ha_ctse_process.r28_g1_reward import (
+    ARMS as R28_G1_ARMS,
+    FINAL_CHECKPOINT_ID as R28_G1_SOURCE_CHECKPOINT_ID,
+    FINAL_CHECKPOINT_PATH as R28_G1_SOURCE_CHECKPOINT_PATH,
+)
 from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
 from ha_ctse_process.topology_viz import capture_topology_frame, save_topology_artifacts
 
@@ -94,6 +99,8 @@ ALGORITHM_MANIFEST_FIELDS = (
     "team_conditioned_qd_hidden_dim",
     "team_conditioned_qd_lr",
     "team_conditioned_qd_min_samples",
+    "enable_assignment_actionability_reward",
+    "assignment_actionability_coef",
     "r24_qd_export_windows",
     "r24_qd_export_dir",
     "r24_qd_export_max_rows_per_update",
@@ -151,6 +158,8 @@ ALGORITHM_MANIFEST_FIELDS = (
     "topology_potential_warmup_steps",
     "topology_potential_discount_mode",
     "topology_potential_positive_only",
+    "p2_recovery_credit_reward_on",
+    "p2_recovery_reward_coef",
     "skill_effect_discovery_on",
     "skill_effect_reward_on",
     "skill_effect_reward_injection",
@@ -169,6 +178,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "skill_effect_min_positive_frac",
     "skill_force_probe_on",
     "enable_skill_forcing_reward",
+    "skill_forcing_reward_on",
     "skill_force_reward_injection",
     "skill_force_disc_coef",
     "skill_force_effect_coef",
@@ -271,6 +281,8 @@ TRAINING_MANIFEST_FIELDS = (
     "rollout_length",
     "total_timesteps",
     "eval_interval",
+    "r28_g1_arm",
+    "r28_g1_scorer_path",
 )
 
 MODEL_MANIFEST_FIELDS = (
@@ -470,6 +482,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--save_interval", type=int, default=10)
     parser.add_argument("--checkpoint_keep_last", type=int, default=3)
     parser.add_argument("--resume_from", default="")
+    parser.add_argument(
+        "--r28_g1_arm",
+        choices=("off", *R28_G1_ARMS),
+        default="off",
+    )
+    parser.add_argument("--r28_g1_scorer_path", default="")
     parser.add_argument("--eval_interval", type=int, default=0)
     parser.add_argument("--eval_episodes", type=int, default=3)
     parser.add_argument("--eval_max_steps", type=int, default=0)
@@ -760,6 +778,8 @@ def parse_int_tuple(text: str) -> tuple[int, ...]:
 
 
 def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
+    config.r28_g1_arm = str(getattr(args, "r28_g1_arm", "off"))
+    config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
     if int(args.n_agents) > 0:
         config.n_agents = int(args.n_agents)
         config.n_uavs = int(args.n_agents)
@@ -1295,6 +1315,7 @@ def checkpoint_payload(
             if getattr(agent, "enable_team_intent", False)
             else None
         ),
+        "r28_g1": agent.r28_g1_checkpoint_state(),
         "high_opt": agent.high_opt.state_dict(),
         "low_opt": agent.low_opt.state_dict() if agent.low_opt is not None else None,
         "low_actor_opt": agent.low_actor_opt.state_dict() if agent.low_actor_opt is not None else None,
@@ -1333,6 +1354,9 @@ def checkpoint_payload(
         "n_agents": agent.n_agents,
         "n_skills": agent.n_skills,
         "duration_candidates": agent.duration_candidates,
+        "skill_interval": int(args.skill_interval),
+        "r28_g1_arm": str(getattr(agent, "r28_g1_arm", "off")),
+        "r28_g1_scorer_path": str(getattr(agent, "r28_g1_scorer_path", "")),
         "opt_num_prototypes": int(getattr(agent, "opt_num_prototypes", getattr(config, "opt_num_prototypes", 0))),
         "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
         "low_level_architecture": str(agent.low_level_architecture),
@@ -1575,6 +1599,21 @@ def load_checkpoint(
                 agent.team_disc_opt.load_state_dict(checkpoint["team_disc_opt"])
             except ValueError:
                 pass
+    if getattr(agent, "r28_g1_enabled", False):
+        continuation = checkpoint.get("r28_g1")
+        frozen_actor_base = None
+        if continuation is not None:
+            if not isinstance(continuation, dict):
+                raise ValueError("R28-G1 checkpoint state is malformed")
+            if str(continuation.get("arm")) != str(agent.r28_g1_arm):
+                raise ValueError("R28-G1 checkpoint arm mismatch")
+            frozen_actor_base = continuation.get("frozen_actor_base")
+            if not isinstance(frozen_actor_base, dict):
+                raise ValueError("R28-G1 checkpoint is missing frozen actor-base state")
+        agent.attach_r28_g1_reward(
+            scorer_path=agent.r28_g1_scorer_path,
+            frozen_actor_base_state=frozen_actor_base,
+        )
     return int(checkpoint.get("total_steps", 0)), int(checkpoint.get("update_idx", 0))
 
 
@@ -1611,6 +1650,22 @@ def _manifest_lookup(manifest: dict[str, Any], name: str) -> Any:
 def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
     checkpoint = torch.load(Path(path), map_location="cpu")
     manifest = _load_adjacent_run_manifest(path)
+    raw_r28_g1 = checkpoint.get("r28_g1")
+    r28_g1_metadata = None
+    if isinstance(raw_r28_g1, dict):
+        r28_g1_metadata = {
+            name: raw_r28_g1.get(name)
+            for name in (
+                "arm",
+                "scorer_path",
+                "source_total_steps",
+                "source_update_idx",
+                "source_checkpoint_id",
+            )
+        }
+        r28_g1_metadata["has_frozen_actor_base"] = isinstance(
+            raw_r28_g1.get("frozen_actor_base"), dict
+        )
 
     def meta(name: str) -> Any:
         return checkpoint.get(name) if name in checkpoint else _manifest_lookup(manifest, name)
@@ -1622,6 +1677,11 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "opt_num_prototypes": checkpoint.get("opt_num_prototypes"),
         "preset": checkpoint.get("preset"),
         "scenario": checkpoint.get("scenario"),
+        "action_space_type": checkpoint.get("action_space_type"),
+        "action_dim": checkpoint.get("action_dim"),
+        "use_recurrent_low_level": checkpoint.get("use_recurrent_low_level"),
+        "low_level_architecture": checkpoint.get("low_level_architecture"),
+        "skill_interval": meta("skill_interval"),
         "team_bridge_type": checkpoint.get("team_bridge_type"),
         "total_steps": checkpoint.get("total_steps"),
         "update_idx": checkpoint.get("update_idx"),
@@ -1661,6 +1721,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "assignment_actionability_clip": meta("assignment_actionability_clip"),
         "assignment_actionability_warmup_steps": meta("assignment_actionability_warmup_steps"),
         "assignment_actionability_include_soft": meta("assignment_actionability_include_soft"),
+        "r28_g1": r28_g1_metadata,
     }
 
 
@@ -1762,6 +1823,164 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         config.low_actor_condition_on_team_code = False
 
 
+def enforce_r28_g1_contract(
+    config,
+    args: argparse.Namespace,
+    metadata: dict[str, Any] | None,
+) -> None:
+    """Apply the frozen G1 arm contract after checkpoint metadata restoration."""
+
+    arm = str(getattr(args, "r28_g1_arm", "off"))
+    config.r28_g1_arm = arm
+    config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
+    if arm == "off":
+        return
+    if arm not in R28_G1_ARMS:
+        raise ValueError(f"unsupported R28-G1 arm {arm!r}")
+    if not str(getattr(args, "resume_from", "")):
+        raise ValueError("R28-G1 requires --resume_from")
+    if not config.r28_g1_scorer_path:
+        raise ValueError("R28-G1 requires --r28_g1_scorer_path")
+    if metadata is None:
+        raise ValueError("R28-G1 source checkpoint metadata was not loaded")
+    if str(getattr(args, "device", "")) != "cuda":
+        raise ValueError("R28-G1 is CUDA-only; CPU fallback is forbidden")
+    if str(getattr(args, "eval_action_mode", "deterministic")) != "deterministic":
+        raise ValueError("R28-G1 requires deterministic evaluation actions")
+    if not torch.cuda.is_available():
+        raise RuntimeError("R28-G1 requested CUDA but torch.cuda.is_available() is false")
+    if int(getattr(args, "num_envs", 0)) != 16:
+        raise ValueError("R28-G1 requires exactly 16 vector environments")
+    if int(getattr(args, "skill_interval", 0)) != 10:
+        raise ValueError("R28-G1 requires skill_interval=10")
+    if int(getattr(args, "rollout_length", 0)) != 500:
+        raise ValueError("R28-G1 requires rollout_length=500")
+    if str(getattr(args, "preset", "")) != "S7-S1":
+        raise ValueError("R28-G1 requires preset S7-S1")
+    if normalize_scenario(str(getattr(args, "scenario", ""))) != "energy":
+        raise ValueError("R28-G1 requires the registered energy scenario")
+    if str(getattr(args, "collector_backend", "")) != "subproc":
+        raise ValueError("R28-G1 requires the validated subproc collector")
+    if int(getattr(args, "low_ppo_epochs", 0)) != 15:
+        raise ValueError("R28-G1 requires low_ppo_epochs=15")
+    target_steps = int(getattr(args, "total_timesteps", 0))
+    if target_steps not in {1_008_000, 1_160_000}:
+        raise ValueError("R28-G1 permits only the topology or registered +160k exposure")
+    if target_steps == 1_008_000:
+        if int(getattr(args, "seed", -1)) != 28030:
+            raise ValueError("R28-G1 topology check requires seed 28030")
+        if int(getattr(args, "eval_interval", -1)) != 0:
+            raise ValueError("R28-G1 topology check must not run evaluation")
+    else:
+        if int(getattr(args, "seed", -1)) not in {28031, 28032, 28033}:
+            raise ValueError("R28-G1 family run requires seed 28031, 28032, or 28033")
+        if int(getattr(args, "eval_interval", 0)) != 80_000:
+            raise ValueError("R28-G1 family run requires eval_interval=80000")
+        if int(getattr(args, "eval_episodes", 0)) != 20:
+            raise ValueError("R28-G1 family run requires eval_episodes=20")
+
+    expected = {
+        "n_agents": 6,
+        "n_skills": 4,
+        "action_space_type": "continuous",
+        "use_recurrent_low_level": True,
+        "low_level_architecture": "strict_hmasd_mappo",
+    }
+    for name, value in expected.items():
+        if metadata.get(name) != value:
+            raise ValueError(
+                f"R28-G1 source {name} mismatch: {metadata.get(name)!r} != {value!r}"
+            )
+    if tuple(int(item) for item in metadata.get("duration_candidates") or ()) != (1, 2, 3, 4):
+        raise ValueError("R28-G1 source duration candidates must be (1,2,3,4)")
+    source_interval = metadata.get("skill_interval")
+    if source_interval is not None and int(source_interval) != 10:
+        raise ValueError("R28-G1 source checkpoint skill_interval is not 10")
+    if bool(metadata.get("low_actor_condition_on_team_code")):
+        raise ValueError("R28-G1 source low actor must remain blind to team code")
+
+    continuation = metadata.get("r28_g1")
+    if continuation is None:
+        source_path = str(Path(args.resume_from)).replace("\\", "/")
+        if not (
+            source_path == R28_G1_SOURCE_CHECKPOINT_PATH
+            or source_path.endswith(f"/{R28_G1_SOURCE_CHECKPOINT_PATH}")
+        ):
+            raise ValueError(
+                "R28-G1 fresh start requires the registered R25 arm0 final path: "
+                f"{R28_G1_SOURCE_CHECKPOINT_PATH}"
+            )
+        if int(metadata.get("total_steps", -1)) != 1_000_000:
+            raise ValueError("R28-G1 must start from the R25 arm0 final 1,000,000-step source")
+        if int(metadata.get("update_idx", -1)) != 32:
+            raise ValueError("R28-G1 must start from source update_idx=32")
+    else:
+        if not isinstance(continuation, dict):
+            raise ValueError("R28-G1 continuation state is malformed")
+        if str(continuation.get("arm")) != arm:
+            raise ValueError("R28-G1 continuation arm does not match --r28_g1_arm")
+        if int(continuation.get("source_total_steps", -1)) != 1_000_000:
+            raise ValueError("R28-G1 continuation source total_steps drifted")
+        if int(continuation.get("source_update_idx", -1)) != 32:
+            raise ValueError("R28-G1 continuation source update_idx drifted")
+        if str(continuation.get("source_checkpoint_id")) != R28_G1_SOURCE_CHECKPOINT_ID:
+            raise ValueError("R28-G1 continuation source checkpoint identity drifted")
+        saved_scorer = str(continuation.get("scorer_path") or "")
+        if Path(saved_scorer).resolve() != Path(config.r28_g1_scorer_path).resolve():
+            raise ValueError("R28-G1 continuation scorer path does not match the frozen run")
+        if continuation.get("has_frozen_actor_base") is not True:
+            raise ValueError("R28-G1 continuation is missing frozen actor-base state")
+
+    disabled_false = (
+        "enable_prototype_disc_reward",
+        "enable_team_disc_reward",
+        "enable_team_transition_reward",
+        "enable_assignment_actionability_reward",
+        "enable_g_info_objective",
+        "enable_skill_forcing_reward",
+        "skill_forcing_reward_on",
+        "skill_effect_reward_on",
+        "use_topology_potential_shaping",
+        "p2_recovery_credit_reward_on",
+        "duration_entropy_floor_enabled",
+        "z_entropy_floor_enabled",
+    )
+    for name in disabled_false:
+        setattr(config, name, False)
+    disabled_zero = (
+        "prototype_disc_reward_coef",
+        "team_disc_coef",
+        "team_transition_coef",
+        "transition_skill_reward_coef",
+        "outcome_residual_reward_coef",
+        "topology_role_reward_coef",
+        "topology_potential_coef",
+        "p2_recovery_reward_coef",
+        "skill_effect_ctrl_coef",
+        "skill_effect_use_coef",
+        "skill_force_disc_coef",
+        "skill_force_effect_coef",
+        "skill_force_duration_entropy_coef",
+        "assignment_actionability_coef",
+        "g_info_coef_skill",
+        "g_info_coef_duration",
+        "g_info_coef_edit",
+        "situation_hazard_reward_coef",
+        "duration_entropy_floor_coef",
+        "z_entropy_floor_coef",
+    )
+    for name in disabled_zero:
+        setattr(config, name, 0.0)
+    config.use_process_reward_for_discoverer = False
+    config.process_reward_mode = "none"
+    config.process_reward_injection = "none"
+    config.outcome_residual_injection = "none"
+    config.topology_role_injection = "none"
+    config.topology_potential_injection = "none"
+    config.skill_effect_reward_injection = "none"
+    config.skill_force_reward_injection = "none"
+
+
 def run_env_dry_check(config, args: argparse.Namespace) -> None:
     """Check the standalone env path without touching HMASD training code."""
 
@@ -1844,6 +2063,8 @@ def evaluate(
         team_intent_age_backup = team_intent_age_backup.copy()
     low_actor_hxs_backup = agent.low_actor_hxs.copy()
     low_critic_hxs_backup = agent.low_critic_hxs.copy()
+    episode_steps_backup = agent.episode_steps.copy()
+    episode_ids_backup = agent.episode_ids.copy()
     segments_backup = agent.segments
     agent.segments = SegmentManager(agent.num_envs, agent.n_agents)
 
@@ -1970,7 +2191,12 @@ def evaluate(
                 **episode_metrics,
             }
             eval_records.append(eval_record)
-            append_csv(Path(args.log_dir) / "metrics" / "eval_episodes.csv", eval_record, EVAL_FIELDS)
+            if getattr(args, "log_dir", None):
+                append_csv(
+                    Path(args.log_dir) / "metrics" / "eval_episodes.csv",
+                    eval_record,
+                    EVAL_FIELDS,
+                )
             for key, value in episode_metrics.items():
                 if value is None or not np.isfinite(float(value)):
                     continue
@@ -2012,6 +2238,8 @@ def evaluate(
             agent.team_intent_age = team_intent_age_backup
         agent.low_actor_hxs = low_actor_hxs_backup
         agent.low_critic_hxs = low_critic_hxs_backup
+        agent.episode_steps = episode_steps_backup
+        agent.episode_ids = episode_ids_backup
 
     metrics = {
         "reward_mean": float(np.mean(rewards)) if rewards else 0.0,
@@ -2029,8 +2257,11 @@ def evaluate(
         metrics["zero_throughput_episode_fraction"] = float(metrics["zero_throughput_episode_flag"])
     if "throughput_gt5_episode_flag" in metrics:
         metrics["throughput_gt5_episode_fraction"] = float(metrics["throughput_gt5_episode_flag"])
-    if eval_records:
-        save_eval_plots(args.log_dir, window=max(1, int(getattr(args, "eval_episodes", 1))))
+    if eval_records and getattr(args, "log_dir", None):
+        save_eval_plots(
+            args.log_dir,
+            window=max(1, int(getattr(args, "eval_episodes", 1))),
+        )
 
     emit(
         args,
@@ -2863,6 +3094,9 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         process_metrics.get("p2_credit_by_partial_recovery_event", 0.0),
         total_steps,
     )
+    for key, value in process_metrics.items():
+        if key.startswith("r28_g1_"):
+            writer.add_scalar(f"R28G1/{key.removeprefix('r28_g1_')}", value, total_steps)
     writer.flush()
 
 
@@ -3113,6 +3347,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         step=rollout_idx,
                         k=int(args.skill_interval),
                         env_id=env_id,
+                        policy_update=int(update_idx + 1),
                     )
                     actions, logp, values, low_context = agent.act_low(
                         obs,
@@ -3165,6 +3400,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         done=done,
                         pre_state_info=prev_state_info[env_id],
                         pre_reward_info=prev_reward_info[env_id],
+                        deterministic_actions=low_context.get("deterministic_actions"),
                     )
                     # This step's post-step state is the next step's pre-step state.
                     prev_state_info[env_id] = info.get("state_info", {}) or {}
@@ -3176,6 +3412,10 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     rollout.skills.append(agent.active_skills[env_id].copy())
                     rollout.team_codes.append(int(low_context["team_code"]))
                     rollout.actions.append(actions.copy())
+                    if "deterministic_actions" in low_context:
+                        rollout.deterministic_actions.append(
+                            np.asarray(low_context["deterministic_actions"], dtype=np.float32).copy()
+                        )
                     rollout.logp.append(logp.copy())
                     rollout.values.append(values.copy())
                     rollout.low_actor_hxs.append(np.asarray(low_context["actor_hxs"], dtype=np.float32))
@@ -3185,10 +3425,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     episode_rewards.append(float(np.mean(individual_rewards)))
 
                     total_steps += 1
+                    agent.record_environment_step(env_id)
                     observations[env_id] = next_obs
                     states[env_id] = info.get("next_state", states[env_id])
                     if done:
-                        agent.segments.flush(env_id)
+                        agent.segments.flush(env_id, reason="episode")
                         observations[env_id], info = collector.reset_one(env_id)
                         states[env_id] = info.get("state")
                         # Re-seed pre-step info from the reset state for the next segment.
@@ -3198,7 +3439,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 if total_steps >= int(args.total_timesteps):
                     break
 
-            agent.segments.flush()
+            agent.segments.flush(reason="update")
             rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
             process_metrics = agent.process_update(
                 rollout,
@@ -3685,9 +3926,11 @@ def main() -> None:
     config = load_config(args.config, args.preset or None)
     config.scenario = normalize_scenario(args.scenario)
     apply_standalone_overrides(config, args)
+    metadata = None
     if args.resume_from:
         metadata = load_checkpoint_metadata(args.resume_from)
         apply_checkpoint_structure(config, args, metadata)
+    enforce_r28_g1_contract(config, args, metadata)
 
     try:
         if args.dry_run_env_steps > 0:

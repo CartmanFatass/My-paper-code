@@ -74,6 +74,35 @@ def test_reference_audit_step_matches_live_act_low_on_duplicate_runtime():
     np.testing.assert_allclose(agent.low_critic_hxs, duplicate.low_critic_hxs, atol=1e-6)
 
 
+def test_r28_evidence_comes_from_the_same_recurrent_actor_forward():
+    reference = make_agent()
+    live = copy.deepcopy(reference)
+    live.r28_g1_enabled = True
+    obs = np.arange(42, dtype=np.float32).reshape(6, 7) / 45.0
+    state = np.arange(11, dtype=np.float32) / 17.0
+
+    audit = reference.r27_g2_audit_step(
+        obs,
+        env_id=0,
+        state=state,
+        focal_agent=0,
+        focal_skill=None,
+    )
+    _action, _logp, _value, context = live.act_low(
+        obs,
+        env_id=0,
+        deterministic=False,
+        state=state,
+        return_context=True,
+    )
+
+    np.testing.assert_array_equal(
+        context["deterministic_actions"], audit["deterministic_action"]
+    )
+    np.testing.assert_allclose(live.low_actor_hxs[0], audit["new_actor_hxs"], atol=1e-6)
+    np.testing.assert_allclose(live.low_critic_hxs[0], audit["new_critic_hxs"], atol=1e-6)
+
+
 def test_focal_override_does_not_mutate_roster_or_clocks_and_matches_preview():
     agent = make_agent()
     obs = np.arange(42, dtype=np.float32).reshape(6, 7) / 40.0

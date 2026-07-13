@@ -105,6 +105,11 @@ from ha_ctse_process.prototype_response_discriminator import (
     PrototypeResponseDiscriminator,
     empty_prototype_disc_metrics,
 )
+from ha_ctse_process.r28_g1_reward import (
+    ARMS as R28_G1_ARMS,
+    FrozenR28G1Reward,
+    empty_r28_g1_metrics,
+)
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
 
 
@@ -720,6 +725,7 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
         critic_hxs: torch.Tensor,
         agent_ids: torch.Tensor | None = None,
         deterministic: bool = False,
+        return_deterministic_action: bool = False,
     ):
         masks = torch.ones(obs.shape[0], 1, dtype=torch.float32, device=self.device)
         actor_features = self._actor_features(obs, skills, team_codes)
@@ -732,7 +738,7 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
 
         if self.action_space_type == "discrete":
             actions = actions.squeeze(-1)
-        return (
+        result = (
             actions,
             self._squeeze_log_probs(log_probs),
             torch.zeros_like(values),
@@ -740,6 +746,14 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
             new_actor_hxs,
             new_critic_hxs,
         )
+        if not return_deterministic_action:
+            return result
+        action_out = self.actor_act.action_out
+        if type(action_out).__name__ != "TanhDiagGaussian":
+            raise TypeError("R28-G1 requires the registered tanh-Gaussian action head")
+        distribution = action_out._distribution(actor_features)
+        deterministic_action = torch.tanh(distribution.mean)
+        return (*result, deterministic_action)
 
     def r27_g2_audit_step(
         self,
@@ -1200,11 +1214,19 @@ class Segment:
     switched: bool = False
     duration_target: int = 1
     renewal_penalty: float = 0.0
+    episode_step_start: int = 0
+    episode_id: int = 0
+    policy_update: int = 0
+    pre_assignment_episode_id: int = -1
+    pre_assignment_policy_update: int = -1
+    completion_reason: str = "active"
     obs: list[np.ndarray] = field(default_factory=list)
     actions: list[np.ndarray] = field(default_factory=list)
+    deterministic_actions: list[np.ndarray] = field(default_factory=list)
     pre_assignment_high_obs: np.ndarray | None = None
     pre_assignment_obs: list[np.ndarray] = field(default_factory=list)
     pre_assignment_actions: list[np.ndarray] = field(default_factory=list)
+    pre_assignment_deterministic_actions: list[np.ndarray] = field(default_factory=list)
     pre_assignment_end_obs: np.ndarray | None = None
     rewards: list[float] = field(default_factory=list)
     rollout_indices: list[int] = field(default_factory=list)
@@ -1243,6 +1265,7 @@ class Segment:
         done: bool = False,
         pre_state_info=None,
         pre_reward_info=None,
+        deterministic_action=None,
     ):
         # On the segment's first step, record the pre-step (segment-start) state so
         # P2 shaping telescopes over the true window, not the post-first-step state.
@@ -1252,6 +1275,9 @@ class Segment:
         self.obs.append(np.asarray(obs, dtype=np.float32))
         action_arr = np.asarray(action, dtype=np.float32)
         self.actions.append(action_arr.reshape(-1))
+        if deterministic_action is not None:
+            deterministic_arr = np.asarray(deterministic_action, dtype=np.float32).reshape(-1)
+            self.deterministic_actions.append(deterministic_arr)
         self.rewards.append(float(reward))
         self.rollout_indices.append(int(rollout_idx))
         self.reward_info_seq.append(dict(reward_info or {}))
@@ -1315,13 +1341,20 @@ class SegmentManager:
         raw_agent_kappa_start: int = -1,
         omega_start=None,
         agent_relevance_start=None,
+        episode_step_start: int = 0,
+        episode_id: int = 0,
+        policy_update: int = 0,
     ):
         old = self.active[env_id][agent_id]
         pre_assignment_high_obs = None
         pre_assignment_obs: list[np.ndarray] = []
         pre_assignment_actions: list[np.ndarray] = []
+        pre_assignment_deterministic_actions: list[np.ndarray] = []
         pre_assignment_end_obs = None
+        pre_assignment_episode_id = -1
+        pre_assignment_policy_update = -1
         if old is not None and old.length > 0:
+            old.completion_reason = "renewal"
             pre_assignment_high_obs = np.asarray(old.high_obs, dtype=np.float32).copy()
             pre_assignment_obs = [
                 np.asarray(row, dtype=np.float32).copy()
@@ -1331,6 +1364,16 @@ class SegmentManager:
                 np.asarray(row, dtype=np.float32).reshape(-1).copy()
                 for row in old.actions[-R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS:]
             ]
+            if (
+                int(old.episode_id) == int(episode_id)
+                and int(old.policy_update) == int(policy_update)
+            ):
+                pre_assignment_deterministic_actions = [
+                    np.asarray(row, dtype=np.float32).reshape(-1).copy()
+                    for row in old.deterministic_actions[-10:]
+                ]
+                pre_assignment_episode_id = int(old.episode_id)
+                pre_assignment_policy_update = int(old.policy_update)
             pre_assignment_end_obs = (
                 None if old.end_obs is None else np.asarray(old.end_obs, dtype=np.float32).copy()
             )
@@ -1391,6 +1434,11 @@ class SegmentManager:
             switched=bool(switched),
             duration_target=int(duration_target),
             renewal_penalty=float(renewal_penalty),
+            episode_step_start=int(episode_step_start),
+            episode_id=int(episode_id),
+            policy_update=int(policy_update),
+            pre_assignment_episode_id=int(pre_assignment_episode_id),
+            pre_assignment_policy_update=int(pre_assignment_policy_update),
             kappa_start=int(kappa_start),
             kappa_end=int(kappa_start),
             raw_kappa_start=int(raw_kappa_start),
@@ -1404,6 +1452,7 @@ class SegmentManager:
             pre_assignment_high_obs=pre_assignment_high_obs,
             pre_assignment_obs=pre_assignment_obs,
             pre_assignment_actions=pre_assignment_actions,
+            pre_assignment_deterministic_actions=pre_assignment_deterministic_actions,
             pre_assignment_end_obs=pre_assignment_end_obs,
         )
 
@@ -1421,6 +1470,7 @@ class SegmentManager:
         done: bool = False,
         pre_state_info=None,
         pre_reward_info=None,
+        deterministic_actions=None,
     ):
         for agent_id, segment in enumerate(self.active[env_id]):
             if segment is None:
@@ -1438,13 +1488,21 @@ class SegmentManager:
                 done=done,
                 pre_state_info=pre_state_info,
                 pre_reward_info=pre_reward_info,
+                deterministic_action=(
+                    None
+                    if deterministic_actions is None
+                    else deterministic_actions[agent_id]
+                ),
             )
 
-    def flush(self, env_id: int | None = None):
+    def flush(self, env_id: int | None = None, reason: str = "update"):
+        if reason not in {"episode", "update"}:
+            raise ValueError("segment flush reason must be episode or update")
         env_ids = range(self.n_envs) if env_id is None else [int(env_id)]
         for current_env in env_ids:
             for agent_id, segment in enumerate(self.active[current_env]):
                 if segment is not None and segment.length > 0:
+                    segment.completion_reason = reason
                     self.completed.append(segment)
                 self.active[current_env][agent_id] = None
 
@@ -1463,6 +1521,7 @@ class Rollout:
     skills: list[np.ndarray] = field(default_factory=list)
     team_codes: list[int] = field(default_factory=list)
     actions: list[np.ndarray] = field(default_factory=list)
+    deterministic_actions: list[np.ndarray] = field(default_factory=list)
     logp: list[np.ndarray] = field(default_factory=list)
     values: list[np.ndarray] = field(default_factory=list)
     low_actor_hxs: list[np.ndarray] = field(default_factory=list)
@@ -1491,6 +1550,12 @@ class StandaloneProcessAgent:
         self.n_agents = int(n_agents)
         self.obs_dim = int(obs_dim)
         self.state_dim = int(state_dim or getattr(config, "state_dim", 0) or (self.obs_dim * self.n_agents))
+        self.r28_g1_arm = str(getattr(config, "r28_g1_arm", "off")).lower()
+        if self.r28_g1_arm not in {"off", *R28_G1_ARMS}:
+            raise ValueError(f"unsupported r28_g1_arm={self.r28_g1_arm!r}")
+        self.r28_g1_scorer_path = str(getattr(config, "r28_g1_scorer_path", "") or "")
+        self.r28_g1_enabled = self.r28_g1_arm != "off"
+        self.r28_g1_reward: FrozenR28G1Reward | None = None
         self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
         self.enable_team_intent = bool(getattr(config, "enable_team_intent", False))
         self.prototype_skill_extra_codes = int(max(getattr(config, "prototype_skill_extra_codes", 0), 0))
@@ -2177,6 +2242,8 @@ class StandaloneProcessAgent:
         self.skill_age = np.zeros((self.num_envs, self.n_agents), dtype=np.int64)
         self.has_active_skill = np.zeros((self.num_envs, self.n_agents), dtype=np.bool_)
         self.active_team_codes = np.zeros(self.num_envs, dtype=np.int64)
+        self.episode_steps = np.zeros(self.num_envs, dtype=np.int64)
+        self.episode_ids = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_remaining = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_age = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_prior_counts = np.ones(self.num_team_codes, dtype=np.float64)
@@ -2197,6 +2264,39 @@ class StandaloneProcessAgent:
         self._team_transition_open: list[TeamTransitionInterval | None] = [None for _ in range(self.num_envs)]
         self._team_transition_closed: list[TeamTransitionInterval] = []
         self._team_transition_env_steps = np.zeros(self.num_envs, dtype=np.int64)
+
+    def attach_r28_g1_reward(
+        self,
+        *,
+        scorer_path: str | Path | None = None,
+        frozen_actor_base_state: dict[str, torch.Tensor] | None = None,
+    ) -> None:
+        if not self.r28_g1_enabled:
+            return
+        if not self.use_recurrent_low_level or not isinstance(
+            self.low, StrictHMASDMAPPOLowLevelPolicy
+        ):
+            raise TypeError("R28-G1 requires the strict recurrent HMASD low actor")
+        if self.action_space_type != "continuous":
+            raise TypeError("R28-G1 requires continuous actions")
+        path = str(scorer_path or self.r28_g1_scorer_path)
+        if not path:
+            raise ValueError("R28-G1 requires --r28_g1_scorer_path")
+        self.r28_g1_reward = FrozenR28G1Reward(
+            arm=self.r28_g1_arm,
+            scorer_path=path,
+            actor_base=self.low.actor_base,
+            device=self.device,
+            frozen_actor_base_state=frozen_actor_base_state,
+        )
+
+    def r28_g1_checkpoint_state(self) -> dict[str, Any] | None:
+        if self.r28_g1_reward is None:
+            return None
+        return self.r28_g1_reward.checkpoint_state()
+
+    def record_environment_step(self, env_id: int) -> None:
+        self.episode_steps[int(env_id)] += 1
 
     @staticmethod
     def _count_parameters(module: nn.Module | None) -> int:
@@ -2472,6 +2572,8 @@ class StandaloneProcessAgent:
 
     def reset_env_state(self, env_id: int):
         env_id = int(env_id)
+        self.episode_steps[env_id] = 0
+        self.episode_ids[env_id] += 1
         self.duration_remaining[env_id, :] = 0
         self.active_skills[env_id, :] = 0
         self.active_duration_indices[env_id, :] = 0
@@ -2743,6 +2845,7 @@ class StandaloneProcessAgent:
         k: int = 1,
         env_id: int = 0,
         deterministic: bool = False,
+        policy_update: int = 0,
     ):
         env_id = int(env_id)
         joint_obs = self._joint_obs_array(obs)
@@ -3118,6 +3221,9 @@ class StandaloneProcessAgent:
                     raw_agent_kappa_start=int(getattr(agent_state, "raw_kappa", -1)),
                     omega_start=weights.detach().cpu().numpy().reshape(-1),
                     agent_relevance_start=agent_relevance[0, int(agent_id)].detach().cpu().numpy(),
+                    episode_step_start=int(self.episode_steps[env_id]),
+                    episode_id=int(self.episode_ids[env_id]),
+                    policy_update=int(policy_update),
                 )
 
         if (
@@ -3244,6 +3350,7 @@ class StandaloneProcessAgent:
         deterministic: bool = False,
         state=None,
         return_context: bool = False,
+        capture_deterministic_action: bool = False,
     ):
         env_id = int(env_id)
         obs_t = torch.as_tensor(obs, dtype=torch.float32, device=self.device)
@@ -3255,6 +3362,7 @@ class StandaloneProcessAgent:
             "actor_hxs": self.low_actor_hxs[env_id].copy(),
             "critic_hxs": self.low_critic_hxs[env_id].copy(),
         }
+        deterministic_actions_np = None
         with torch.no_grad():
             if self.use_recurrent_low_level:
                 state_t = torch.as_tensor(state_arr, dtype=torch.float32, device=self.device).reshape(1, -1).expand(
@@ -3278,7 +3386,16 @@ class StandaloneProcessAgent:
                     dtype=torch.float32,
                     device=self.device,
                 )
-                actions, logp, _, values, new_actor_hxs, new_critic_hxs = self.low.act(
+                r28_g1_enabled = bool(
+                    getattr(self, "r28_g1_enabled", False)
+                    or capture_deterministic_action
+                )
+                low_kwargs = (
+                    {"return_deterministic_action": True}
+                    if r28_g1_enabled
+                    else {}
+                )
+                low_result = self.low.act(
                     obs_t,
                     skills_t,
                     actor_hxs_t,
@@ -3287,7 +3404,23 @@ class StandaloneProcessAgent:
                     critic_hxs_t,
                     agent_ids_t,
                     deterministic=deterministic,
+                    **low_kwargs,
                 )
+                if r28_g1_enabled:
+                    (
+                        actions,
+                        logp,
+                        _,
+                        values,
+                        new_actor_hxs,
+                        new_critic_hxs,
+                        deterministic_actions,
+                    ) = low_result
+                    deterministic_actions_np = (
+                        deterministic_actions.detach().cpu().numpy().astype(np.float32)
+                    )
+                else:
+                    actions, logp, _, values, new_actor_hxs, new_critic_hxs = low_result
                 self.low_actor_hxs[env_id] = new_actor_hxs.detach().cpu().numpy().astype(np.float32)
                 self.low_critic_hxs[env_id] = new_critic_hxs.detach().cpu().numpy().astype(np.float32)
                 if self.low_value_norm is not None:
@@ -3298,6 +3431,8 @@ class StandaloneProcessAgent:
                     skills_t,
                     deterministic=deterministic,
                 )
+        if deterministic_actions_np is not None:
+            context["deterministic_actions"] = deterministic_actions_np
         self._last_low_context[env_id] = context
         result = (
             actions.cpu().numpy().astype(np.int64 if self.action_space_type == "discrete" else np.float32),
@@ -4658,6 +4793,16 @@ class StandaloneProcessAgent:
     ) -> dict[str, float]:
         segments = self.segments.pop_completed()
         valid = [s for s in segments if s.length > 0]
+        if bool(getattr(self, "r28_g1_enabled", False)):
+            if self.r28_g1_reward is None:
+                raise RuntimeError("R28-G1 scorer was not attached after checkpoint load")
+            r28_g1_metrics = self.r28_g1_reward.apply(
+                valid,
+                rollout,
+                policy_update=int(update_idx),
+            )
+        else:
+            r28_g1_metrics = empty_r28_g1_metrics()
         team_intent_metrics = self._team_intent_rollout_update(rollout, total_steps=total_steps)
         team_effect_metrics = self._team_effect_target_audit(rollout, total_steps=total_steps)
         if not valid:
@@ -4807,6 +4952,7 @@ class StandaloneProcessAgent:
                 **team_effect_metrics,
                 **empty_team_conditioned_qd_metrics(),
                 **empty_skill_effect_metrics(),
+                **r28_g1_metrics,
                 **self._situation_diagnostics([]),
             }
 
@@ -5841,6 +5987,7 @@ class StandaloneProcessAgent:
             **lifetime_metrics,
             **g_intervention_metrics,
             **cooperation_credit_metrics,
+            **r28_g1_metrics,
             **self._situation_diagnostics(valid),
             **high_metrics,
         }

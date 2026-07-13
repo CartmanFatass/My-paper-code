@@ -3,9 +3,9 @@
 Date: 2026-07-13
 
 Status: G0 complete and accepted as `PASS_TARGET_NULLS`. The focused G1
-implementation review was completed on 2026-07-13 and its recommended freeze is
-recorded in Section 6.1. This does not authorize R28-G1 reward implementation,
-topology execution, or training launch; those remain separate user decisions.
+implementation freeze in Section 6.1 was accepted on 2026-07-13, and the scoped
+code/test/runner package is implemented. No topology check or training run has
+been executed; those remain separate user decisions.
 
 ## 1. Decision
 
@@ -23,8 +23,8 @@ The offline calibration on the existing R27 shards is complete. Final and
 update30 passed unchanged, update25 failed only its train-test-gap guard, and
 the family classification is `PASS_TARGET_NULLS`. The frozen final scorer is
 the only allowed target/null input to G1. It may not be refit, retuned, or
-swept. Reward-on training remains blocked pending implementation acceptance,
-topology validation, and explicit launch approval.
+swept. Reward-on training remains blocked pending topology validation and
+explicit launch approval.
 
 ## 2. Causal claim and boundary
 
@@ -330,7 +330,7 @@ Provisional fixed exposure for later review:
 The final runner must state its measured topology and revised wall-clock estimate
 before launch. A failed topology check stops rather than reducing to serial.
 
-### 6.1 Focused implementation review freeze (pending user acceptance)
+### 6.1 Focused implementation review freeze (accepted 2026-07-13)
 
 The live trainer can support this experiment without changing actor/critic,
 PPO, GAE, optimizer, environment, or high-level-return semantics, but the old
@@ -440,12 +440,12 @@ Evaluation and family-decision evidence:
   its zero-throughput episode fraction may worsen by at most `0.10` absolute.
   Report all seed-level values; do not average away a failed safety seed.
 
-Packaging remains blocked until this freeze is accepted. Once accepted,
-implementation may add the scorer module, typed checkpoint/CLI integration,
-focused synthetic tests, a frozen-result family analyzer, and a Bash runner.
-The runner must place large outputs under `/root/autodl-tmp`, validate at least
-three concurrent CUDA arm workers, and stop on a failed topology check. Neither
-implementation nor topology validation constitutes reward-launch approval.
+The accepted package adds the separate scorer module, typed checkpoint/CLI
+integration, focused synthetic tests, a frozen-result family analyzer, and a
+Bash runner. The runner places large outputs under `/root/autodl-tmp`, requires
+three concurrent CUDA arm workers, and stops on a failed topology check. Neither
+the completed implementation nor a future topology validation constitutes
+reward-launch approval.
 
 Primary independent read: run the frozen R26 natural-window analyzer on each
 arm's +160k checkpoint without changing its thresholds. Family PASS requires:

@@ -769,6 +769,39 @@ def _variant_split_summary(batches: VariantSplitBatches) -> dict[str, object]:
     }
 
 
+def heldout_correctness_evidence(
+    batch: G1WindowBatch,
+    *,
+    full: Score,
+    prior: Score,
+) -> list[dict[str, object]]:
+    rows = int(np.asarray(batch.label).size)
+    if full.correct.shape != (rows,) or prior.correct.shape != (rows,):
+        raise AnalysisInvalidError(
+            "held-out correctness evidence is misaligned",
+            stage="heldout_correctness_export",
+        )
+    evidence: list[dict[str, object]] = []
+    for index in range(rows):
+        evidence.append(
+            {
+                "test_row": int(index),
+                "reset_id": int(batch.reset_id[index]),
+                "reset_seed": int(batch.reset_seed[index]),
+                "episode_id": int(batch.episode_id[index]),
+                "env_id": int(batch.env_id[index]),
+                "agent_id": int(batch.agent_id[index]),
+                "duration_idx": int(batch.duration_idx[index]),
+                "label": int(batch.label[index]),
+                "checkpoint_id": str(batch.checkpoint_id[index]),
+                "checkpoint_update": int(batch.checkpoint_update[index]),
+                "full_correct": bool(full.correct[index]),
+                "prior_correct": bool(prior.correct[index]),
+            }
+        )
+    return evidence
+
+
 def analyze_checkpoint(
     batch: G1WindowBatch,
     *,
@@ -952,6 +985,11 @@ def analyze_checkpoint(
                 "bootstrap": int(bootstrap_seed),
             },
             "fit_config": asdict(config),
+            "heldout_row_correctness": heldout_correctness_evidence(
+                real_splits.test,
+                full=full,
+                prior=prior,
+            ),
         }
     )
     decision = gate_checkpoint(result)
@@ -1035,6 +1073,22 @@ def _write_reports(output_dir: Path, result: Mapping[str, object]) -> None:
     json_path.write_text(
         json.dumps(result, indent=2, sort_keys=True), encoding="utf-8"
     )
+    heldout_rows = result.get("heldout_row_correctness")
+    if isinstance(heldout_rows, list):
+        (output_dir / "r26_g1_heldout_row_correctness.json").write_text(
+            json.dumps(
+                {
+                    "schema": "r26-g1-heldout-row-correctness-v1",
+                    "checkpoint_id": result.get("checkpoint_id"),
+                    "checkpoint_update": result.get("checkpoint_update"),
+                    "rows": heldout_rows,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
     gate = result.get("gate", {})
     variants = result.get("variants", {})
     lines = [

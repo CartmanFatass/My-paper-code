@@ -549,6 +549,11 @@ def test_markdown_contains_complete_gate_evidence(
         bootstrap_seed=26014,
     )
     behavior_analyzer._write_reports(tmp_path, result)
+    heldout = json.loads(
+        (tmp_path / "r26_g1_heldout_row_correctness.json").read_text()
+    )
+    assert heldout["schema"] == "r26-g1-heldout-row-correctness-v1"
+    assert heldout["rows"] == result["heldout_row_correctness"]
     markdown = (tmp_path / "r26_g1_behavior.md").read_text()
     for required in (
         "## Split",

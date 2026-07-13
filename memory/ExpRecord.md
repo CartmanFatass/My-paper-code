@@ -26,6 +26,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260713-r28-g1-causal-skill-forcing-reward | planned — implementation verified; topology/launch not authorized | level-3 mechanism-matched three-arm continuation | code on `aggressive`; future output `/root/autodl-tmp/HMASD/logs/r28_g1_*`; runner `scripts/run_r28_g1_causal_skill_forcing_cloud.sh` | only a separately approved three-arm topology check | default-off package tests and commands-only dry run pass; zero topology/training steps so far | Hold the frozen package. Idle GPU does not authorize execution. |
 | EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
 | EXP-20260712-r27-g2-forced-z-trajectory-effect | completed — accepted `PASS_BEHAVIOR_EFFECT` 2026-07-13 | level-2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; run `r27_g2_overnight_20260713_095408`; commit `6c06cde` | none; preserve beside R26 natural negative | 192/192 `OK` shards; aggregate validation `valid=true`, `scientific_status=PASS`; A/B1/B2/B3/C PASS at update25/update30/final | Accept forced persistent conditional behavior and local effect through native H40 only. Record `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`; do not infer natural selection, reward usefulness, cooperation, task gain, or async-lifetime benefit. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — accepted 2026-07-12 | reward-off immediate-capacity autopsy | cloud CUDA; 64 reset groups; R25 arm0 update25/update30/final | none | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; result read under `logs/r27_g1_result_read_20260712/` | `STATIC_USED_OBSERVATIONAL_MISS`: immediate `z_i`-conditioned action-distribution sensitivity exists; persistence/effect were not established by this gate. |
@@ -35,6 +36,44 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260713-r28-g1-causal-skill-forcing-reward
+
+- Causal edge/hypothesis: given the R27-proven forced executor capacity, a
+  bounded residual for `distinct z_i -> naturally expressed, behaviorally
+  differentiated skills` makes natural real-label behavior exceed matched
+  probe-only and sham-reward continuations without task collapse.
+- Comparator/baseline level: level-3 mechanism experiment with paired
+  `probe_only`, marginal-preserving `sham_reward`, and `real_reward` arms. R25
+  arm0/HMASD are fixed references and are not rerun.
+- Frozen source/nulls: exact R25 arm0 final at 1,000,000 steps/update 32; sole G0
+  final scorer; capacity-matched context and pre-window heads; same-row sham
+  labels; common real-label support. No communication/task field enters the
+  intrinsic score.
+- Exposure/topology: seeds 28031/28032/28033; +160,000 steps (updates 33..52),
+  16 envs, rollout 500, low PPO epochs 15; three arms concurrent per seed;
+  deterministic 20-episode evaluations at +80k/+160k. Expected end-to-end cost
+  is 6-10h only after a separate three-worker topology PASS; serial/CPU fallback
+  is forbidden.
+- Metrics/thresholds: real R26 PASS at least 2/3 while each control is below 2/3;
+  clustered `real - max(probe,sham)` full-minus-prior gain estimate >=0.05 and
+  95% lower bound >0; pooled held-out `s_real` and `s_real-s_sham` lower bounds
+  >0; entropy >=0.80; OOD <=0.20; per-rollout reward/env ratio <=0.05; zero
+  kill-switch events; every seed return regression <=10% and zero-throughput
+  worsening <=0.10 versus its better matched control. Bootstrap seeds are
+  28034/28035/28036 with 10,000 reset-cluster repetitions.
+- Outcome branches/single actions: PASS -> design one separate long-run
+  verification; FAIL -> retire this target and complete the R26/R27/R28 failure
+  review; MIXED -> review one causal disagreement only; UNDERPOWERED -> repeat
+  support collection only; INVALID -> repair the evidence path/instrument and
+  repeat the unchanged gate once; crash -> operational repair only.
+- While open: do not refit the scorer, change thresholds/seeds/exposure,
+  actor/critic/PPO/GAE/collector semantics, other rewards, task fields, standing
+  references, or reinterpret the edge as cooperation/team complementarity.
+- Status source: this dashboard plus runner `runner_status.txt`, topology JSON,
+  per-arm status files, R26 reports, and `family_analysis/r28_g1_family.json`.
+  At this record boundary only implementation/tests exist; no compute evidence
+  or topology marker exists.
 
 ### EXP-20260713-r28-g0-action-process-target-calibration
 
@@ -74,8 +113,9 @@ explicitly approves the exception.
   semantics, use Gate-C or communication/task fields as intrinsic targets,
   revive old `q_d/q_D`, or rerun standing references.
 
-No HMASD compute is currently active. The server's separate IMOD workload and
-its automation are outside this record and must not be modified from HMASD.
+Shared GPU occupancy is not cached in this experiment dashboard. Codex task
+`019f5aca-bde7-70b3-8c94-24584136c2c9` is the live IMOD/HMASD scheduler and
+must establish fresh lease evidence before any topology or launch action.
 
 ## Completed Evidence and Archive Pointers
 

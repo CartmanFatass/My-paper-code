@@ -44,6 +44,19 @@ class PendingWindow:
     observations: list[np.ndarray]
 
 
+@dataclass
+class PendingR28Window:
+    agent_id: int
+    label: int
+    duration_idx: int
+    episode_step_start: int
+    expected_length: int
+    phi0: np.ndarray
+    pre_actions: np.ndarray
+    pre_valid: bool
+    actions: list[np.ndarray]
+
+
 @dataclass(frozen=True)
 class CollectorStats:
     resets: int
@@ -59,6 +72,8 @@ _RUNTIME_ATTRIBUTES = (
     "skill_age",
     "has_active_skill",
     "active_team_codes",
+    "episode_steps",
+    "episode_ids",
     "team_intent_remaining",
     "team_intent_age",
     "low_actor_hxs",
@@ -274,6 +289,9 @@ def collect_reset(
     episode_max_steps: int,
     checkpoint_id: str,
     checkpoint_update: int,
+    r28_phi0: torch.nn.Module | None = None,
+    r28_sidecar_rows: list[dict[str, Any]] | None = None,
+    r28_stats: dict[str, int] | None = None,
 ) -> tuple[G1WindowBatch, CollectorStats]:
     """Collect one reset without retaining any mutation of agent rollout state."""
 
@@ -282,6 +300,16 @@ def collect_reset(
         raise ValueError("skill_interval must be positive")
     if int(episode_max_steps) <= 0:
         raise ValueError("episode_max_steps must be positive")
+    r28_enabled = r28_phi0 is not None or r28_sidecar_rows is not None
+    if (r28_phi0 is None) != (r28_sidecar_rows is None):
+        raise ValueError("R28 sidecar requires both frozen phi0 and an output row list")
+    if r28_enabled:
+        if interval != 10:
+            raise ValueError("R28 sidecar requires skill_interval=10")
+        if int(agent.n_agents) != 6 or int(agent.n_skills) != 4:
+            raise ValueError("R28 sidecar requires six agents and four skills")
+        if tuple(int(item) for item in agent.duration_candidates) != (1, 2, 3, 4):
+            raise ValueError("R28 sidecar requires duration candidates (1,2,3,4)")
 
     completed_rows: list[dict[str, Any]] = []
     discarded = 0
@@ -301,7 +329,11 @@ def collect_reset(
         observation_dim = int(np.asarray(obs[0]).reshape(-1).size)
         action_dim = 0
         pending: dict[int, PendingWindow] = {}
+        r28_pending: dict[int, PendingR28Window] = {}
         action_history: list[list[np.ndarray]] = [
+            [] for _ in range(int(agent.n_agents))
+        ]
+        deterministic_action_history: list[list[np.ndarray]] = [
             [] for _ in range(int(agent.n_agents))
         ]
         observation_history: list[list[np.ndarray]] = [
@@ -329,6 +361,36 @@ def collect_reset(
             ]
             for agent_id in changed:
                 renewals += 1
+                if r28_phi0 is not None and r28_sidecar_rows is not None:
+                    previous_r28 = r28_pending.pop(agent_id, None)
+                    if previous_r28 is not None:
+                        if len(previous_r28.actions) == int(previous_r28.expected_length):
+                            r28_sidecar_rows.append(
+                                {
+                                    "label": int(previous_r28.label),
+                                    "duration_idx": int(previous_r28.duration_idx),
+                                    "agent_id": int(previous_r28.agent_id),
+                                    "episode_step_start": int(
+                                        previous_r28.episode_step_start
+                                    ),
+                                    "phi0": previous_r28.phi0.copy(),
+                                    "pre_actions": previous_r28.pre_actions.copy(),
+                                    "post_actions": np.asarray(
+                                        previous_r28.actions[-interval:],
+                                        dtype=np.float32,
+                                    ),
+                                    "pre_valid": bool(previous_r28.pre_valid),
+                                    "reset_id": int(reset_id),
+                                    "reset_seed": int(reset_seed),
+                                    "episode_id": int(episode_id),
+                                    "checkpoint_id": str(checkpoint_id),
+                                    "checkpoint_update": int(checkpoint_update),
+                                }
+                            )
+                            if r28_stats is not None:
+                                r28_stats["completed"] = r28_stats.get("completed", 0) + 1
+                        elif r28_stats is not None:
+                            r28_stats["discarded"] = r28_stats.get("discarded", 0) + 1
                 if agent_id in pending:
                     discarded += 1
                 summary_action_dim = max(action_dim, 1)
@@ -341,6 +403,45 @@ def collect_reset(
                 )
                 segment = current_segments[agent_id]
                 assignment_obs = getattr(segment, "high_obs", obs[agent_id])
+                if r28_phi0 is not None and r28_sidecar_rows is not None:
+                    pre_rows = deterministic_action_history[agent_id][-interval:]
+                    r28_pre_valid = len(pre_rows) == interval
+                    pre_deterministic = (
+                        np.asarray(pre_rows, dtype=np.float32)
+                        if r28_pre_valid
+                        else np.zeros((interval, 4), dtype=np.float32)
+                    )
+                    with torch.no_grad():
+                        phi0 = (
+                            r28_phi0(
+                                torch.as_tensor(
+                                    np.asarray(assignment_obs, dtype=np.float32).reshape(1, -1),
+                                    dtype=torch.float32,
+                                    device=next(r28_phi0.parameters()).device,
+                                )
+                            )
+                            .detach()
+                            .cpu()
+                            .numpy()
+                            .reshape(-1)
+                        )
+                    if phi0.shape != (256,) or not np.isfinite(phi0).all():
+                        raise RuntimeError("R28 sidecar frozen phi0 context is invalid")
+                    duration_idx = int(segment.duration_idx)
+                    expected_length = int(agent.duration_candidates[duration_idx]) * interval
+                    if expected_length not in (10, 20, 30, 40):
+                        raise RuntimeError("R28 sidecar natural duration drifted")
+                    r28_pending[agent_id] = PendingR28Window(
+                        agent_id=int(agent_id),
+                        label=int(segment.skill),
+                        duration_idx=duration_idx,
+                        episode_step_start=int(step),
+                        expected_length=expected_length,
+                        phi0=phi0.astype(np.float32),
+                        pre_actions=pre_deterministic,
+                        pre_valid=bool(r28_pre_valid),
+                        actions=[],
+                    )
                 opened = _pending_from_segment(
                     agent,
                     segment,
@@ -356,12 +457,32 @@ def collect_reset(
                 )
 
             with torch.no_grad():
-                actions, _logp, _values = agent.act_low(
-                    obs,
-                    env_id=0,
-                    deterministic=False,
-                    state=state,
-                )
+                if r28_phi0 is not None:
+                    actions, _logp, _values, low_context = agent.act_low(
+                        obs,
+                        env_id=0,
+                        deterministic=False,
+                        state=state,
+                        return_context=True,
+                        capture_deterministic_action=True,
+                    )
+                    deterministic_actions = np.asarray(
+                        low_context["deterministic_actions"], dtype=np.float32
+                    )
+                    if deterministic_actions.shape != (int(agent.n_agents), 4):
+                        raise RuntimeError(
+                            "R28 sidecar deterministic actions must have shape (6,4)"
+                        )
+                    if not np.isfinite(deterministic_actions).all():
+                        raise RuntimeError("R28 sidecar deterministic actions are non-finite")
+                else:
+                    actions, _logp, _values = agent.act_low(
+                        obs,
+                        env_id=0,
+                        deterministic=False,
+                        state=state,
+                    )
+                    deterministic_actions = None
             actions = np.asarray(actions)
             if int(actions.shape[0]) != int(agent.n_agents):
                 raise ValueError("agent actions must have one row per agent")
@@ -378,6 +499,16 @@ def collect_reset(
                 observation_row = _copy_vector(next_obs[agent_id])
                 action_history[agent_id].append(action_row)
                 observation_history[agent_id].append(observation_row)
+                if deterministic_actions is not None:
+                    deterministic_row = _copy_vector(deterministic_actions[agent_id])
+                    deterministic_action_history[agent_id].append(deterministic_row)
+                    if len(deterministic_action_history[agent_id]) > interval:
+                        del deterministic_action_history[agent_id][:-interval]
+                    r28_window = r28_pending.get(agent_id)
+                    if r28_window is not None:
+                        r28_window.actions.append(deterministic_row)
+                        if len(r28_window.actions) > int(r28_window.expected_length):
+                            raise RuntimeError("R28 sidecar window exceeded its natural duration")
                 if len(action_history[agent_id]) > interval:
                     del action_history[agent_id][:-interval]
                 if len(observation_history[agent_id]) > interval + 1:
@@ -417,10 +548,14 @@ def collect_reset(
 
             obs = next_obs
             state = _state_from_info(next_info, previous=state)
+            if hasattr(agent, "record_environment_step"):
+                agent.record_environment_step(0)
             if bool(terminated or truncated):
                 break
 
         discarded += len(pending)
+        if r28_stats is not None:
+            r28_stats["discarded"] = r28_stats.get("discarded", 0) + len(r28_pending)
 
     action_dim = max(int(action_dim), 1)
     batch = _rows_to_batch(
@@ -455,6 +590,51 @@ def policy_parameters_equal(
     return left.keys() == right.keys() and all(
         torch.equal(left[name], right[name]) for name in left
     )
+
+
+def write_r28_sidecar_shard(path: Path, rows: list[dict[str, Any]]) -> None:
+    """Write deterministic-action evidence without altering the R26 batch."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    count = len(rows)
+    payload = {
+        "schema": np.asarray("r28-g1-natural-sidecar-v1"),
+        "label": np.asarray([row["label"] for row in rows], dtype=np.int64),
+        "duration_idx": np.asarray(
+            [row["duration_idx"] for row in rows], dtype=np.int64
+        ),
+        "agent_id": np.asarray([row["agent_id"] for row in rows], dtype=np.int64),
+        "episode_step_start": np.asarray(
+            [row["episode_step_start"] for row in rows], dtype=np.int64
+        ),
+        "phi0": np.asarray(
+            [row["phi0"] for row in rows], dtype=np.float32
+        ).reshape(count, 256),
+        "pre_actions": np.asarray(
+            [row["pre_actions"] for row in rows], dtype=np.float32
+        ).reshape(count, 10, 4),
+        "post_actions": np.asarray(
+            [row["post_actions"] for row in rows], dtype=np.float32
+        ).reshape(count, 10, 4),
+        "pre_valid": np.asarray(
+            [row["pre_valid"] for row in rows], dtype=np.bool_
+        ),
+        "reset_id": np.asarray([row["reset_id"] for row in rows], dtype=np.int64),
+        "reset_seed": np.asarray(
+            [row["reset_seed"] for row in rows], dtype=np.int64
+        ),
+        "episode_id": np.asarray(
+            [row["episode_id"] for row in rows], dtype=np.int64
+        ),
+        "env_id": np.zeros(count, dtype=np.int64),
+        "checkpoint_id": np.asarray(
+            [row["checkpoint_id"] for row in rows], dtype=np.str_
+        ),
+        "checkpoint_update": np.asarray(
+            [row["checkpoint_update"] for row in rows], dtype=np.int64
+        ),
+    }
+    np.savez_compressed(path, **payload)
 
 
 def _jsonable(value: Any) -> Any:
@@ -526,6 +706,75 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
     torch.cuda.manual_seed_all(int(args.seed))
 
     _config, metadata, env, agent, loaded_update = _configure_agent(args)
+    r28_phi0 = None
+    r28_stats: dict[str, int] = {"completed": 0, "discarded": 0}
+    if bool(getattr(args, "r28_sidecar", False)):
+        expected_metadata = {
+            "total_steps": 1_160_000,
+            "update_idx": 52,
+            "n_agents": 6,
+            "n_skills": 4,
+            "action_space_type": "continuous",
+            "action_dim": 4,
+            "use_recurrent_low_level": True,
+            "low_level_architecture": "strict_hmasd_mappo",
+            "skill_interval": 10,
+        }
+        for name, expected in expected_metadata.items():
+            if metadata.get(name) != expected:
+                raise ValueError(
+                    f"--r28_sidecar checkpoint {name}={metadata.get(name)!r}, "
+                    f"expected {expected!r}"
+                )
+        if tuple(int(item) for item in metadata.get("duration_candidates") or ()) != (
+            1,
+            2,
+            3,
+            4,
+        ):
+            raise ValueError("--r28_sidecar checkpoint duration candidates drifted")
+        if bool(metadata.get("low_actor_condition_on_team_code")):
+            raise ValueError("--r28_sidecar low actor must remain blind to team code")
+        continuation = metadata.get("r28_g1")
+        if not isinstance(continuation, dict):
+            raise ValueError("--r28_sidecar requires an R28-G1 continuation checkpoint")
+        if continuation.get("arm") not in {"probe_only", "sham_reward", "real_reward"}:
+            raise ValueError("--r28_sidecar checkpoint arm identity is invalid")
+        if (
+            int(continuation.get("source_total_steps", -1)) != 1_000_000
+            or int(continuation.get("source_update_idx", -1)) != 32
+            or continuation.get("source_checkpoint_id") != "arm0_final"
+            or continuation.get("has_frozen_actor_base") is not True
+        ):
+            raise ValueError("--r28_sidecar checkpoint source identity drifted")
+        if Path(str(continuation.get("scorer_path") or "")).name != "r28_g0_scorer_final.pt":
+            raise ValueError("--r28_sidecar checkpoint scorer identity drifted")
+        if int(loaded_update) != 52:
+            raise ValueError("--r28_sidecar loaded checkpoint update is not 52")
+        if args.checkpoint_update is not None and int(args.checkpoint_update) != 52:
+            raise ValueError("--r28_sidecar cannot relabel the checkpoint update")
+        if int(args.skill_interval) != 10:
+            raise ValueError("--r28_sidecar requires --skill_interval 10")
+        if int(agent.n_agents) != 6 or int(agent.n_skills) != 4 or int(agent.action_dim) != 4:
+            raise ValueError("--r28_sidecar live agent shape drifted")
+        try:
+            checkpoint_payload = torch.load(
+                checkpoint, map_location="cpu", weights_only=True
+            )
+        except TypeError:
+            checkpoint_payload = torch.load(checkpoint, map_location="cpu")
+        r28_state = checkpoint_payload.get("r28_g1")
+        if not isinstance(r28_state, dict) or not isinstance(
+            r28_state.get("frozen_actor_base"), dict
+        ):
+            raise ValueError("--r28_sidecar requires a G1 checkpoint with frozen actor_base")
+        if not hasattr(agent.low, "actor_base"):
+            raise TypeError("--r28_sidecar requires the strict recurrent low actor")
+        r28_phi0 = copy.deepcopy(agent.low.actor_base).to(torch.device(args.device))
+        r28_phi0.load_state_dict(r28_state["frozen_actor_base"], strict=True)
+        r28_phi0.eval()
+        for parameter in r28_phi0.parameters():
+            parameter.requires_grad_(False)
     checkpoint_id = str(args.checkpoint_id or checkpoint.stem)
     checkpoint_update = (
         int(args.checkpoint_update)
@@ -540,6 +789,7 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
         for reset_id in range(int(args.n_resets)):
             reset_seed = int(args.seed) + int(reset_id)
             reset_seeds.append(reset_seed)
+            sidecar_rows: list[dict[str, Any]] = []
             batch, stats = collect_reset(
                 env,
                 agent,
@@ -550,8 +800,16 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
                 episode_max_steps=int(args.episode_max_steps),
                 checkpoint_id=checkpoint_id,
                 checkpoint_update=checkpoint_update,
+                r28_phi0=r28_phi0,
+                r28_sidecar_rows=sidecar_rows if r28_phi0 is not None else None,
+                r28_stats=r28_stats if r28_phi0 is not None else None,
             )
             write_g1_window_shard(output_dir / f"reset_{reset_id:04d}.npz", batch)
+            if r28_phi0 is not None:
+                write_r28_sidecar_shard(
+                    output_dir / "r28_sidecar" / f"reset_{reset_id:04d}.npz",
+                    sidecar_rows,
+                )
             totals = CollectorStats(
                 resets=totals.resets + stats.resets,
                 completed_windows=totals.completed_windows + stats.completed_windows,
@@ -594,6 +852,12 @@ def run_collection(args: argparse.Namespace) -> dict[str, Any]:
         "feature_dimensions": feature_dimensions,
         "policy_parameters_unchanged": parameters_unchanged,
         "device": str(args.device),
+        "r28_sidecar": {
+            "enabled": r28_phi0 is not None,
+            "schema": "r28-g1-natural-sidecar-v1" if r28_phi0 is not None else None,
+            "directory": str(output_dir / "r28_sidecar") if r28_phi0 is not None else None,
+            **r28_stats,
+        },
     }
     (output_dir / "collector_manifest.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -620,6 +884,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--episode_max_steps", type=int, default=500)
     parser.add_argument("--checkpoint_id", default="")
     parser.add_argument("--checkpoint_update", type=int, default=None)
+    parser.add_argument("--r28_sidecar", action="store_true")
     return parser.parse_args()
 
 

@@ -73,10 +73,12 @@ Cloud run `logs/r28_g0_action_process_target_20260713_175600` validated the
 frozen final scorer; final and update30 passed, while update25 failed only the
 train-test-gap guard. The scorer may not be refit, retuned, or swept.
 
-The focused G1 implementation review is complete and recorded in Section 6.1
-of `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`. Its
-recommended freeze is pending user acceptance. No R28-G1 reward code, topology
-execution, or training launch is authorized by the G0 result or this review.
+The focused G1 implementation freeze in Section 6.1 of
+`docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` was
+accepted on 2026-07-13. The separate reward module, checkpoint/CLI integration,
+exact deterministic-action evidence, R26 sidecar/export, family analyzer,
+focused tests, and parallel cloud runner are implemented. No topology execution
+or training launch has been authorized or performed.
 
 Active causal edge:
 
@@ -100,16 +102,21 @@ terminal-ten-step low-only attribution, and explicit OOD/reward-ratio guards.
 It also forces the inherited R25 prototype-discriminator reward and every other
 non-R28 policy reward path off after checkpoint metadata is restored.
 
-If the review freeze is accepted, the next permitted action is implementation
-and focused synthetic/dry-run verification only. A later level-3 launch still
-requires a separate user approval and a successful minimum-three-worker CUDA
+The completed package is now held unchanged. A later level-3 launch still
+requires separate user approval and a successful three-concurrent-arm CUDA
 topology check. The planned arms remain probe-only, sham reward, and real
 reward; standing R25/HMASD references are not rerun.
 
-Core MARL impact at this boundary: documentation/review only. Reward,
-actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics, environment
-dynamics, credit assignment, team intent, and latent-lifetime semantics are
-unchanged in the live code.
+Remote execution belongs exclusively to shared scheduler task
+`019f5aca-bde7-70b3-8c94-24584136c2c9`. R28-G1 remains `WAITING_AUTH`, not
+`READY`; this research task does not cache resource occupancy or launch it.
+
+Core MARL impact at this boundary: a default-off low-level R28 reward path and
+detached same-forward evidence capture now exist, with frozen source/scorer
+continuity and fail-closed clocks/guards. When `r28_g1_arm=off`, reward,
+actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, environment dynamics, credit
+assignment, team intent, and latent-lifetime semantics remain unchanged. No
+scientific evidence changed because the path has not been executed.
 
 ## Round 27 G2 Forced-z Trajectory/Effect Intervention (completed and accepted)
 
