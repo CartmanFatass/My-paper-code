@@ -138,3 +138,9 @@ def test_runner_dry_run_contract_is_static_and_hash_free():
     assert "sha256" not in text.lower()
     assert "sha1" not in text.lower()
     assert "hash" not in text.lower()
+
+
+def test_pulse_hold_alignment_includes_agent_identity():
+    text = Path("ha_ctse_process/r28_g0_target.py").read_text(encoding="utf-8")
+    assert "pulse_agents" in text
+    assert "& (dataset.agents == int(agent))" in text

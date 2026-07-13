@@ -156,6 +156,7 @@ class CheckpointDataset:
     f_post: np.ndarray
     f_pre: np.ndarray
     pulse_reset_ids: np.ndarray
+    pulse_agents: np.ndarray
     pulse_labels: np.ndarray
     pulse_duration_steps: np.ndarray
     pulse_context: np.ndarray
@@ -431,6 +432,7 @@ def build_dataset(
     pre_rows: list[np.ndarray] = []
     context_rows: list[np.ndarray] = []
     pulse_reset_ids: list[int] = []
+    pulse_agents: list[int] = []
     pulse_labels: list[int] = []
     pulse_duration_steps: list[int] = []
     pulse_context_rows: list[np.ndarray] = []
@@ -508,6 +510,7 @@ def build_dataset(
                                 )
                             )
                             pulse_reset_ids.append(reset_id)
+                            pulse_agents.append(agent_id)
                             pulse_labels.append(label)
                             pulse_duration_steps.append(duration)
                             pulse_context_rows.append(context.copy())
@@ -529,6 +532,7 @@ def build_dataset(
         f_post=np.asarray(post_rows, dtype=np.float32),
         f_pre=np.asarray(pre_rows, dtype=np.float32),
         pulse_reset_ids=np.asarray(pulse_reset_ids, dtype=np.int64),
+        pulse_agents=np.asarray(pulse_agents, dtype=np.int64),
         pulse_labels=np.asarray(pulse_labels, dtype=np.int64),
         pulse_duration_steps=np.asarray(pulse_duration_steps, dtype=np.int64),
         pulse_context=np.asarray(pulse_context_rows, dtype=np.float32).reshape(-1, CONTEXT_WIDTH),
@@ -948,8 +952,9 @@ def analyze_dataset(
             device=device,
         )
         pulse_test = dataset.pulse_reset_ids <= 11
-        for reset_id, label, duration, pulse_value in zip(
+        for reset_id, agent, label, duration, pulse_value in zip(
             dataset.pulse_reset_ids[pulse_test],
+            dataset.pulse_agents[pulse_test],
             dataset.pulse_labels[pulse_test],
             dataset.pulse_duration_steps[pulse_test],
             pulse_full.log_prob_true[pulse_test]
@@ -960,6 +965,7 @@ def analyze_dataset(
         ):
             hold_matches = np.flatnonzero(
                 (dataset.reset_ids == int(reset_id))
+                & (dataset.agents == int(agent))
                 & (dataset.labels == int(label))
                 & (dataset.duration_steps == int(duration))
             )
