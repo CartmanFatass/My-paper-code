@@ -26,7 +26,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260713-r28-g1-causal-skill-forcing-reward | launch-ready — parallel preflight authorized; formal training not authorized | level-3 mechanism-matched three-arm continuation | preflight job `HMASD-R28-G1-TOPOLOGY-20260713-195737`; `/root/autodl-tmp/HMASD/logs/r28_g1_topology_20260713_195737`; runner mode `topology` | scheduler preflight marker/status only | default-off package tests and commands-only dry run pass; zero remote steps at registration | Scheduler may execute only the exact short preflight. PASS/FAIL both stop; neither authorizes formal training. |
+| EXP-20260713-r28-g1-causal-skill-forcing-reward | implementation complete — local smoke next; formal training not authorized | level-3 mechanism-matched three-arm continuation | local smoke under `logs/r28_g1_engineering_smoke_*`; formal location not opened | existing `metadata/run_manifest.json`, `metrics/train_updates.csv`, final checkpoint | zero G1 steps; former remote topology job superseded unqueued | Run one direct local update smoke, report, and stop. It neither validates topology nor authorizes formal training. |
 | EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
 | EXP-20260712-r27-g2-forced-z-trajectory-effect | completed — accepted `PASS_BEHAVIOR_EFFECT` 2026-07-13 | level-2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; run `r27_g2_overnight_20260713_095408`; commit `6c06cde` | none; preserve beside R26 natural negative | 192/192 `OK` shards; aggregate validation `valid=true`, `scientific_status=PASS`; A/B1/B2/B3/C PASS at update25/update30/final | Accept forced persistent conditional behavior and local effect through native H40 only. Record `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`; do not infer natural selection, reward usefulness, cooperation, task gain, or async-lifetime benefit. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — accepted 2026-07-12 | reward-off immediate-capacity autopsy | cloud CUDA; 64 reset groups; R25 arm0 update25/update30/final | none | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; result read under `logs/r27_g1_result_read_20260712/` | `STATIC_USED_OBSERVATIONAL_MISS`: immediate `z_i`-conditioned action-distribution sensitivity exists; persistence/effect were not established by this gate. |
@@ -55,20 +55,14 @@ explicitly approves the exception.
   deterministic 20-episode evaluations at +80k/+160k. Expected end-to-end cost
   is 6-10h only after a separate three-worker topology PASS; serial/CPU fallback
   is forbidden.
-- Parallel-preflight transition (user-approved 2026-07-13; runner mode
-  `topology`): job
-  `HMASD-R28-G1-TOPOLOGY-20260713-195737`, seed 28030, three concurrent arms,
-  16 envs/arm, rollout 500, exactly one +8k update/arm (24k aggregate), CUDA,
-  no evaluation. This is a real-trainer load test quarantined from scientific
-  evidence. Expected wall clock is 5-20 minutes. Source, scorer, state,
-  and outputs remain on `/root/autodl-tmp`; the shared GPU scheduler must pin
-  the exact release commit before launch.
-- Preflight status branches: PASS -> preserve marker, report measured batch and
-  revised 6-10h projection, then wait for separate formal-launch authorization;
-  FAIL/resource conflict -> `BLOCKED`, no retry; crash -> operational diagnosis
-  only. `UNDERPOWERED`, `MIXED`, and scientific PASS/FAIL do not apply to this
-  mechanical topology check. It cannot invoke `run`, `evidence`, `analyze`, or
-  `all`.
+- Engineering smoke: direct local `real_reward`, seed 28030, one sync CUDA env,
+  rollout/+steps 500, one PPO update, low PPO epochs 1, no evaluation, expected
+  2-5 minutes. Check the existing manifest/CSV/checkpoint once for exact
+  exposure, active reward path, no kill event, and an actual optimizer update;
+  report engineering PASS/FAIL and stop. The checkpoint is non-resumable.
+- `HMASD-R28-G1-TOPOLOGY-20260713-195737` was never queued or executed and is
+  superseded. The smoke does not validate future cloud topology or authorize
+  formal training.
 - Metrics/thresholds: real R26 PASS at least 2/3 while each control is below 2/3;
   clustered `real - max(probe,sham)` full-minus-prior gain estimate >=0.05 and
   95% lower bound >0; pooled held-out `s_real` and `s_real-s_sham` lower bounds
@@ -84,10 +78,8 @@ explicitly approves the exception.
 - While open: do not refit the scorer, change thresholds/seeds/exposure,
   actor/critic/PPO/GAE/collector semantics, other rewards, task fields, standing
   references, or reinterpret the edge as cooperation/team complementarity.
-- Status source: this dashboard plus runner `runner_status.txt`, topology JSON,
-  per-arm status files, R26 reports, and `family_analysis/r28_g1_family.json`.
-  At this registration boundary only implementation/tests and topology
-  authorization exist; no compute evidence or topology marker exists yet.
+- Status source: this dashboard and the trainer's existing run artifacts. No G1
+  compute evidence or topology marker exists yet.
 
 ### EXP-20260713-r28-g0-action-process-target-calibration
 

@@ -95,6 +95,13 @@ Register that same content in `memory/ExpRecord.md` before a meaningful launch.
 A status check, a progress read, or a mechanical command is **not** an experiment
 transition — answer it plainly and do not manufacture a scientific read.
 
+An engineering smoke is also not a scientific experiment transition. Run a
+small smoke directly with the existing CLI and existing trainer outputs; it
+needs no design document, ExpRecord entry, package, scheduler registration,
+custom runner, duplicate status files, or standalone validator. One focused
+post-run check is enough. Add reusable orchestration only for repeated matrices,
+long jobs, remote execution, or after a concrete failure shows it is needed.
+
 Every compute-bearing proposal states expected wall-clock cost before launch.
 Experiments default to CUDA; never silently fall back to CPU — if the GPU is
 occupied, present the options with their costs and let the user choose.
@@ -150,7 +157,9 @@ Verification must support the completion claim: changed code needs a focused tes
 for the changed path; config/syntax changes need the relevant check; experiment
 packages need dry-run/path/dependency checks; result claims need the registered
 artifacts and null controls read. A docs-only change does not need the full
-algorithm suite. Do not claim completion from stale or partial evidence.
+algorithm suite. Existing manifests, metrics, logs, and checkpoints should be
+read directly instead of duplicated into wrapper reports. Do not claim
+completion from stale or partial evidence.
 
 ## External Review
 

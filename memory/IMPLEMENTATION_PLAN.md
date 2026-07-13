@@ -77,8 +77,8 @@ The focused G1 implementation freeze in Section 6.1 of
 `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` was
 accepted on 2026-07-13. The separate reward module, checkpoint/CLI integration,
 exact deterministic-action evidence, R26 sidecar/export, family analyzer,
-focused tests, and parallel cloud runner are implemented. No topology execution
-or training launch has been authorized or performed.
+focused tests, and parallel cloud runner are implemented. No topology or formal
+training execution has been authorized or performed.
 
 Active causal edge:
 
@@ -102,21 +102,20 @@ terminal-ten-step low-only attribution, and explicit OOD/reward-ratio guards.
 It also forces the inherited R25 prototype-discriminator reward and every other
 non-R28 policy reward path off after checkpoint metadata is restored.
 
-The completed package is held unchanged. The user authorized only parallel
-preflight job `HMASD-R28-G1-TOPOLOGY-20260713-195737` (runner mode `topology`):
-three concurrent CUDA arms, 16 envs per arm, one +8k update per arm, expected
-5-20 minutes. It uses the real trainer only as a quarantined load test. The
-result must stop and report; a later level-3 formal training launch still
-requires separate user approval. Standing R25/HMASD references are not rerun.
+IMOD is only an operational standard reference. The earlier remote preflight
+job was superseded before queueing. The only current execution is a direct local
+`real_reward` smoke (seed 28030, CUDA, one sync env, 500 steps/one PPO update,
+no evaluation, expected 2-5 minutes), read from the trainer's existing outputs.
+Its checkpoint is non-resumable and it does not validate cloud topology.
 
-Remote execution belongs exclusively to shared scheduler task
-`019f5aca-bde7-70b3-8c94-24584136c2c9`. The topology-only job may become
-`READY` after its exact release commit is pinned there; formal training remains
-`WAITING_AUTH`. This research task does not cache resource occupancy or launch.
+Formal training remains unauthorized and topology-blocked. If later authorized,
+the matching three-arm/16-env topology belongs to the shared scheduler. Standing
+R25/HMASD references are not rerun.
 
-Core MARL impact at this boundary: a default-off low-level R28 reward path and
-detached same-forward evidence capture now exist, with frozen source/scorer
-continuity and fail-closed clocks/guards. When `r28_g1_arm=off`, reward,
+Core MARL impact at this boundary: a default-off low-level R28 reward path,
+detached same-forward evidence capture, and a fail-closed engineering-smoke
+contract now exist, with frozen source/scorer continuity and guards. When
+`r28_g1_arm=off`, reward,
 actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, environment dynamics, credit
 assignment, team intent, and latent-lifetime semantics remain unchanged. No
 scientific evidence changed because the path has not been executed.

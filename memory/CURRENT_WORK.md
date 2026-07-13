@@ -59,9 +59,9 @@ differentiated skills`.**
   frozen R27-G2 design and outcome branches.
 - `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — the
   frozen R28-G0 target/null contract and accepted G1 implementation freeze.
-  The code/test/runner package is complete. The exact parallel-preflight job
-  (`topology` runner mode) is authorized; formal reward training remains
-  unauthorized.
+  The code/test/runner package is complete. The current authorization is one
+  bounded local engineering smoke; formal reward training and remote topology
+  execution remain unauthorized.
 - `docs/external-review/R27_G2_design_review_20260712_Claude.md` — raw external
   review. Exact Claude model/version was not supplied, so provenance is
   incomplete and recorded as such.
@@ -71,7 +71,7 @@ differentiated skills`.**
 ## Current Experiment Focus
 
 `EXP-20260713-r28-g1-causal-skill-forcing-reward` — **implementation complete;
-parallel preflight authorized; formal training not authorized**.
+local engineering smoke authorized; formal training not authorized**.
 
 - Candidate target: fixed 10-step deterministic-action process residual over
   capacity-matched context, pre-window, and sham-label nulls. No communication
@@ -85,14 +85,13 @@ parallel preflight authorized; formal training not authorized**.
   support and sham grouping, final-ten-step low-only reward attribution,
   fail-closed guards, unchanged R26 evidence plus sidecar, family analyzer, and
   a parallel data-disk Bash runner.
-- No topology check or G1 training has run. Resource occupancy is deliberately
-  not cached here: the earlier IMOD-occupied claim was withdrawn as stale, and
-  the shared scheduler must obtain fresh lease evidence before any action.
-- Authorized parallel preflight: `HMASD-R28-G1-TOPOLOGY-20260713-195737`, three
-  CUDA arms concurrently, 16 envs each, one +8k update per arm, expected
-  5-20 min, output
-  `/root/autodl-tmp/HMASD/logs/r28_g1_topology_20260713_195737`. It uses the
-  real trainer as a load test but is quarantined from scientific evidence.
+- No topology check or formal G1 training has run. The earlier remote job
+  `HMASD-R28-G1-TOPOLOGY-20260713-195737` was superseded before scheduler
+  registration or execution; it remains at zero steps and may not launch.
+- The next action is one direct local `real_reward` engineering smoke: seed
+  28030, one sync CUDA environment, 500 steps/one PPO update, no evaluation,
+  expected 2-5 minutes. Existing trainer manifest/CSV/checkpoint are sufficient;
+  its checkpoint is non-resumable and it creates no scientific/topology claim.
 
 Other than the planned, execution-closed G1 row, the dashboard is `completed`
 or `standing-reference`. R25 arm0/arm2 and the HMASD baseline (REF-20260617)
@@ -100,19 +99,16 @@ are **fixed comparison data**.
 
 ## Next Actions
 
-1. Register the exact release commit and parallel-preflight contract with the shared
-   GPU scheduler. That scheduler must establish the live lease and run only
-   `HMASD-R28-G1-TOPOLOGY-20260713-195737`.
-2. On preflight PASS, stop and report measured wall clock/projection; wait for a
-   separate formal-launch decision. On failure, block without retry, topology
-   reduction, serial/CPU fallback, or transition into training.
+1. Retrieve the accepted frozen G0 scorer when the server is reachable, then
+   run the direct local one-update smoke and read its existing manifest, update
+   CSV, and final checkpoint once.
+2. Treat the smoke only as implementation evidence. A later formal launch still
+   requires separate user authorization and a matching remote three-worker
+   topology validation through the shared scheduler.
 3. Preserve the R28-G0 scorer/result as the only target/null input; do not
    refit, retune, or sweep the classifier.
 4. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
    negative. Do not merge the claims.
-5. D2 stays approved-deferred: archival sensitivity analysis only, separate
-   validation split, identical stopping rules, all outcomes reported, one all-GPU
-   device class, and **no reward unblocking even on an unexpected pass**.
 
 ## Do Not Do Yet
 
@@ -122,8 +118,8 @@ are **fixed comparison data**.
   `q_A` remains default-off after the R25 task regression.
 - Do not turn Gate C, raw communication/service/topology fields, or environment
   reward into the R28 intrinsic target.
-- Do not execute R28-G1 `run`, `evidence`, `analyze`, or `all`; only the exact
-  authorized topology job may run. Idle resources do not authorize training.
+- Do not execute the cloud runner's `topology`, `run`, `evidence`, `analyze`, or
+  `all` modes. The local smoke does not authorize formal training.
 - Do not re-run standing references (user directive 2026-07-10): the HMASD
   baseline (REF-20260617) and the R25 arm0/arm2 arms. Reuse the archived
   curves/checkpoints. Exceptions need explicit user approval.

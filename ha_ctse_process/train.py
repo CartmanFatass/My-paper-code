@@ -488,6 +488,14 @@ def parse_args() -> argparse.Namespace:
         default="off",
     )
     parser.add_argument("--r28_g1_scorer_path", default="")
+    parser.add_argument(
+        "--r28_g1_engineering_smoke",
+        action="store_true",
+        help=(
+            "Permit only the registered local one-environment, one-update "
+            "R28-G1 integration smoke. This never authorizes a scientific run."
+        ),
+    )
     parser.add_argument("--eval_interval", type=int, default=0)
     parser.add_argument("--eval_episodes", type=int, default=3)
     parser.add_argument("--eval_max_steps", type=int, default=0)
@@ -780,6 +788,9 @@ def parse_int_tuple(text: str) -> tuple[int, ...]:
 def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     config.r28_g1_arm = str(getattr(args, "r28_g1_arm", "off"))
     config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
+    config.r28_g1_engineering_smoke = bool(
+        getattr(args, "r28_g1_engineering_smoke", False)
+    )
     if int(args.n_agents) > 0:
         config.n_agents = int(args.n_agents)
         config.n_uavs = int(args.n_agents)
@@ -1661,6 +1672,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
                 "source_total_steps",
                 "source_update_idx",
                 "source_checkpoint_id",
+                "engineering_smoke",
             )
         }
         r28_g1_metadata["has_frozen_actor_base"] = isinstance(
@@ -1831,9 +1843,12 @@ def enforce_r28_g1_contract(
     """Apply the frozen G1 arm contract after checkpoint metadata restoration."""
 
     arm = str(getattr(args, "r28_g1_arm", "off"))
+    engineering_smoke = bool(getattr(args, "r28_g1_engineering_smoke", False))
     config.r28_g1_arm = arm
     config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
     if arm == "off":
+        if engineering_smoke:
+            raise ValueError("R28-G1 engineering smoke requires r28_g1_arm=real_reward")
         return
     if arm not in R28_G1_ARMS:
         raise ValueError(f"unsupported R28-G1 arm {arm!r}")
@@ -1849,8 +1864,6 @@ def enforce_r28_g1_contract(
         raise ValueError("R28-G1 requires deterministic evaluation actions")
     if not torch.cuda.is_available():
         raise RuntimeError("R28-G1 requested CUDA but torch.cuda.is_available() is false")
-    if int(getattr(args, "num_envs", 0)) != 16:
-        raise ValueError("R28-G1 requires exactly 16 vector environments")
     if int(getattr(args, "skill_interval", 0)) != 10:
         raise ValueError("R28-G1 requires skill_interval=10")
     if int(getattr(args, "rollout_length", 0)) != 500:
@@ -1859,25 +1872,43 @@ def enforce_r28_g1_contract(
         raise ValueError("R28-G1 requires preset S7-S1")
     if normalize_scenario(str(getattr(args, "scenario", ""))) != "energy":
         raise ValueError("R28-G1 requires the registered energy scenario")
-    if str(getattr(args, "collector_backend", "")) != "subproc":
-        raise ValueError("R28-G1 requires the validated subproc collector")
-    if int(getattr(args, "low_ppo_epochs", 0)) != 15:
-        raise ValueError("R28-G1 requires low_ppo_epochs=15")
     target_steps = int(getattr(args, "total_timesteps", 0))
-    if target_steps not in {1_008_000, 1_160_000}:
-        raise ValueError("R28-G1 permits only the topology or registered +160k exposure")
-    if target_steps == 1_008_000:
+    if engineering_smoke:
+        if arm != "real_reward":
+            raise ValueError("R28-G1 engineering smoke requires r28_g1_arm=real_reward")
+        if int(getattr(args, "num_envs", 0)) != 1:
+            raise ValueError("R28-G1 engineering smoke requires exactly one environment")
+        if str(getattr(args, "collector_backend", "")) != "sync":
+            raise ValueError("R28-G1 engineering smoke requires the single-process sync collector")
+        if int(getattr(args, "low_ppo_epochs", 0)) != 1:
+            raise ValueError("R28-G1 engineering smoke requires low_ppo_epochs=1")
+        if target_steps != 1_000_500:
+            raise ValueError("R28-G1 engineering smoke permits exactly one +500-step update")
         if int(getattr(args, "seed", -1)) != 28030:
-            raise ValueError("R28-G1 topology check requires seed 28030")
+            raise ValueError("R28-G1 engineering smoke requires seed 28030")
         if int(getattr(args, "eval_interval", -1)) != 0:
-            raise ValueError("R28-G1 topology check must not run evaluation")
+            raise ValueError("R28-G1 engineering smoke must not run evaluation")
     else:
-        if int(getattr(args, "seed", -1)) not in {28031, 28032, 28033}:
-            raise ValueError("R28-G1 family run requires seed 28031, 28032, or 28033")
-        if int(getattr(args, "eval_interval", 0)) != 80_000:
-            raise ValueError("R28-G1 family run requires eval_interval=80000")
-        if int(getattr(args, "eval_episodes", 0)) != 20:
-            raise ValueError("R28-G1 family run requires eval_episodes=20")
+        if int(getattr(args, "num_envs", 0)) != 16:
+            raise ValueError("R28-G1 requires exactly 16 vector environments")
+        if str(getattr(args, "collector_backend", "")) != "subproc":
+            raise ValueError("R28-G1 requires the validated subproc collector")
+        if int(getattr(args, "low_ppo_epochs", 0)) != 15:
+            raise ValueError("R28-G1 requires low_ppo_epochs=15")
+        if target_steps not in {1_008_000, 1_160_000}:
+            raise ValueError("R28-G1 permits only the topology or registered +160k exposure")
+        if target_steps == 1_008_000:
+            if int(getattr(args, "seed", -1)) != 28030:
+                raise ValueError("R28-G1 topology check requires seed 28030")
+            if int(getattr(args, "eval_interval", -1)) != 0:
+                raise ValueError("R28-G1 topology check must not run evaluation")
+        else:
+            if int(getattr(args, "seed", -1)) not in {28031, 28032, 28033}:
+                raise ValueError("R28-G1 family run requires seed 28031, 28032, or 28033")
+            if int(getattr(args, "eval_interval", 0)) != 80_000:
+                raise ValueError("R28-G1 family run requires eval_interval=80000")
+            if int(getattr(args, "eval_episodes", 0)) != 20:
+                raise ValueError("R28-G1 family run requires eval_episodes=20")
 
     expected = {
         "n_agents": 6,
@@ -1917,6 +1948,8 @@ def enforce_r28_g1_contract(
     else:
         if not isinstance(continuation, dict):
             raise ValueError("R28-G1 continuation state is malformed")
+        if bool(continuation.get("engineering_smoke", False)):
+            raise ValueError("R28-G1 engineering-smoke checkpoints are non-resumable")
         if str(continuation.get("arm")) != arm:
             raise ValueError("R28-G1 continuation arm does not match --r28_g1_arm")
         if int(continuation.get("source_total_steps", -1)) != 1_000_000:

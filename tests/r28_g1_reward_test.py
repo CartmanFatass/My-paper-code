@@ -15,7 +15,7 @@ from ha_ctse_process.r28_g1_reward import (
     fixed_point_free_derangement,
 )
 from ha_ctse_process.standalone_agent import Rollout, Segment, SegmentManager
-from ha_ctse_process.train import enforce_r28_g1_contract
+from ha_ctse_process.train import enforce_r28_g1_contract, load_checkpoint_metadata
 
 
 def _head(name: str, *, full: bool) -> dict:
@@ -379,6 +379,98 @@ def test_contract_is_applied_after_checkpoint_metadata(monkeypatch):
     assert config.process_reward_injection == "none"
     assert config.skill_force_reward_injection == "none"
     assert config.duration_entropy_floor_enabled is False
+
+
+def test_contract_allows_only_the_exact_local_engineering_smoke(monkeypatch):
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    args = SimpleNamespace(
+        r28_g1_arm="real_reward",
+        r28_g1_scorer_path="scorer.pt",
+        r28_g1_engineering_smoke=True,
+        resume_from=FINAL_CHECKPOINT_PATH,
+        device="cuda",
+        eval_action_mode="deterministic",
+        num_envs=1,
+        skill_interval=10,
+        rollout_length=500,
+        preset="S7-S1",
+        scenario="energy",
+        collector_backend="sync",
+        low_ppo_epochs=1,
+        total_timesteps=1_000_500,
+        seed=28030,
+        eval_interval=0,
+        eval_episodes=1,
+    )
+    metadata = {
+        "n_agents": 6,
+        "n_skills": 4,
+        "action_space_type": "continuous",
+        "use_recurrent_low_level": True,
+        "low_level_architecture": "strict_hmasd_mappo",
+        "duration_candidates": (1, 2, 3, 4),
+        "skill_interval": 10,
+        "low_actor_condition_on_team_code": False,
+        "total_steps": 1_000_000,
+        "update_idx": 32,
+        "r28_g1": None,
+    }
+
+    config = SimpleNamespace()
+    enforce_r28_g1_contract(config, args, metadata)
+    assert config.r28_g1_arm == "real_reward"
+
+
+def test_engineering_smoke_checkpoint_cannot_resume_into_training(monkeypatch, tmp_path):
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    scorer_path = tmp_path / "scorer.pt"
+    args = SimpleNamespace(
+        r28_g1_arm="real_reward",
+        r28_g1_scorer_path=str(scorer_path),
+        r28_g1_engineering_smoke=False,
+        resume_from=str(tmp_path / "smoke_checkpoint.pt"),
+        device="cuda",
+        eval_action_mode="deterministic",
+        num_envs=16,
+        skill_interval=10,
+        rollout_length=500,
+        preset="S7-S1",
+        scenario="energy",
+        collector_backend="subproc",
+        low_ppo_epochs=15,
+        total_timesteps=1_160_000,
+        seed=28031,
+        eval_interval=80_000,
+        eval_episodes=20,
+    )
+    torch.save(
+        {
+            "n_agents": 6,
+            "n_skills": 4,
+            "action_space_type": "continuous",
+            "use_recurrent_low_level": True,
+            "low_level_architecture": "strict_hmasd_mappo",
+            "duration_candidates": (1, 2, 3, 4),
+            "skill_interval": 10,
+            "low_actor_condition_on_team_code": False,
+            "total_steps": 1_000_500,
+            "update_idx": 33,
+            "r28_g1": {
+                "arm": "real_reward",
+                "scorer_path": str(scorer_path),
+                "source_total_steps": 1_000_000,
+                "source_update_idx": 32,
+                "source_checkpoint_id": "arm0_final",
+                "frozen_actor_base": {"weight": torch.ones(1)},
+                "engineering_smoke": True,
+            },
+        },
+        args.resume_from,
+    )
+    metadata = load_checkpoint_metadata(args.resume_from)
+    assert metadata["r28_g1"]["engineering_smoke"] is True
+    with pytest.raises(ValueError, match="engineering-smoke checkpoints are non-resumable"):
+        enforce_r28_g1_contract(SimpleNamespace(), args, metadata)
 
 
 def test_contract_rejects_metadata_compatible_nonregistered_source(monkeypatch):

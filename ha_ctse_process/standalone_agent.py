@@ -1554,6 +1554,9 @@ class StandaloneProcessAgent:
         if self.r28_g1_arm not in {"off", *R28_G1_ARMS}:
             raise ValueError(f"unsupported r28_g1_arm={self.r28_g1_arm!r}")
         self.r28_g1_scorer_path = str(getattr(config, "r28_g1_scorer_path", "") or "")
+        self.r28_g1_engineering_smoke = bool(
+            getattr(config, "r28_g1_engineering_smoke", False)
+        )
         self.r28_g1_enabled = self.r28_g1_arm != "off"
         self.r28_g1_reward: FrozenR28G1Reward | None = None
         self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
@@ -2293,7 +2296,9 @@ class StandaloneProcessAgent:
     def r28_g1_checkpoint_state(self) -> dict[str, Any] | None:
         if self.r28_g1_reward is None:
             return None
-        return self.r28_g1_reward.checkpoint_state()
+        state = self.r28_g1_reward.checkpoint_state()
+        state["engineering_smoke"] = bool(self.r28_g1_engineering_smoke)
+        return state
 
     def record_environment_step(self, env_id: int) -> None:
         self.episode_steps[int(env_id)] += 1
