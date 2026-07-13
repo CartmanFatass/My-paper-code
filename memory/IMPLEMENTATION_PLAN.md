@@ -102,14 +102,17 @@ terminal-ten-step low-only attribution, and explicit OOD/reward-ratio guards.
 It also forces the inherited R25 prototype-discriminator reward and every other
 non-R28 policy reward path off after checkpoint metadata is restored.
 
-The completed package is now held unchanged. A later level-3 launch still
-requires separate user approval and a successful three-concurrent-arm CUDA
-topology check. The planned arms remain probe-only, sham reward, and real
-reward; standing R25/HMASD references are not rerun.
+The completed package is held unchanged. The user authorized only parallel
+preflight job `HMASD-R28-G1-TOPOLOGY-20260713-195737` (runner mode `topology`):
+three concurrent CUDA arms, 16 envs per arm, one +8k update per arm, expected
+5-20 minutes. It uses the real trainer only as a quarantined load test. The
+result must stop and report; a later level-3 formal training launch still
+requires separate user approval. Standing R25/HMASD references are not rerun.
 
 Remote execution belongs exclusively to shared scheduler task
-`019f5aca-bde7-70b3-8c94-24584136c2c9`. R28-G1 remains `WAITING_AUTH`, not
-`READY`; this research task does not cache resource occupancy or launch it.
+`019f5aca-bde7-70b3-8c94-24584136c2c9`. The topology-only job may become
+`READY` after its exact release commit is pinned there; formal training remains
+`WAITING_AUTH`. This research task does not cache resource occupancy or launch.
 
 Core MARL impact at this boundary: a default-off low-level R28 reward path and
 detached same-forward evidence capture now exist, with frozen source/scorer
