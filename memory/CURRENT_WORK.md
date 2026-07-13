@@ -29,23 +29,23 @@ differentiated skills`.
   R26 remains the natural observational negative. This does not establish
   natural selection, reward usefulness, cooperation, credit, or task gain.
 - R28-G0 `PASS_TARGET_NULLS` froze the only accepted scorer.
-- R28-G1 implementation is complete. Only one local engineering smoke is
-  authorized; formal training and remote topology execution are not.
+- R28-G1 implementation smoke completed with `FAIL_SUPPORT_OOD`: the exact
+  update/checkpoint path worked, but the frozen support guard stopped R28 reward
+  injection before scoring.
 
 ## Next Actions
 
-1. Resolve the local artifact prerequisite: the frozen scorer
-   `logs/r28_g0_action_process_target_20260713_175600/r28_g0_scorer_final.pt`
-   is currently absent from the workstation. Report the missing file and stop;
-   retrieve it from the server only when the user explicitly requests that
-   one-time transfer. This is not part of the smoke.
-2. Once the scorer is local, run one direct local `real_reward` smoke through
-   the existing CLI: seed
-   28030, CUDA, one sync environment, rollout 500, +500 environment steps, one
-   PPO update, low PPO epochs 1, no evaluation; expected wall clock 2-5 minutes.
-3. Read the existing manifest, update CSV, and final checkpoint once; report
-   engineering PASS/FAIL and stop. The smoke checkpoint is non-resumable and
-   cannot satisfy the formal topology gate.
+1. Diagnose the completed run at
+   `logs/r28_g1_engineering_smoke_20260713_212008/real_reward`: 81 structural
+   rows, four in support, OOD fraction 0.9506, one support kill, and zero R28
+   reward-applied steps.
+2. Add only the minimum support-distance diagnostic needed to identify the
+   dominant standardized feature residuals. Do not change the frozen scorer,
+   features, variance floor, thresholds, reward scale, or guard.
+3. If the diagnostic identifies a feature-construction mismatch, repair that
+   bug and repeat the exact smoke once. If the feature construction is correct,
+   block G1 as a natural-support mismatch and take the registered failure-review
+   branch before proposing another target.
 
 ## Immediate Constraints
 

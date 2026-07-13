@@ -26,9 +26,12 @@ Implemented boundary:
 
 Stage order:
 
-1. Complete the local implementation smoke recorded in `CURRENT_WORK.md`.
-2. Stop and report. Formal topology or training is a separate authorization and
-   is governed only by `memory/ExpRecord.md` and the shared scheduler.
+1. The local implementation smoke recorded in `CURRENT_WORK.md` reached one PPO
+   update but failed the frozen support guard before R28 reward injection.
+2. Diagnose feature construction versus genuine natural-distribution shift
+   without changing any frozen scorer or support rule.
+3. A confirmed construction bug permits one exact smoke repetition. A genuine
+   support mismatch blocks this G1 target and enters its failure-review branch.
 
 Core MARL impact: when `r28_g1_arm=off`, reward, actor/critic/FiLM/GRU,
 optimizer/loss/GAE/PPO, collector semantics, environment dynamics, credit
