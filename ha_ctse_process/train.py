@@ -42,6 +42,11 @@ from ha_ctse_process.r28_g1_reward import (
     FINAL_CHECKPOINT_ID as R28_G1_SOURCE_CHECKPOINT_ID,
     FINAL_CHECKPOINT_PATH as R28_G1_SOURCE_CHECKPOINT_PATH,
 )
+from ha_ctse_process.r29_action_information_reward import (
+    MODES as R29_ACTION_INFO_MODES,
+    REWARD_CLIP as R29_ACTION_INFO_REWARD_CLIP,
+    REWARD_COEF as R29_ACTION_INFO_REWARD_COEF,
+)
 from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
 from ha_ctse_process.topology_viz import capture_topology_frame, save_topology_artifacts
 
@@ -283,6 +288,9 @@ TRAINING_MANIFEST_FIELDS = (
     "eval_interval",
     "r28_g1_arm",
     "r28_g1_scorer_path",
+    "r29_action_info_mode",
+    "r29_action_info_coef",
+    "r29_action_info_clip",
 )
 
 MODEL_MANIFEST_FIELDS = (
@@ -495,6 +503,17 @@ def parse_args() -> argparse.Namespace:
             "Permit only the registered local one-environment, one-update "
             "R28-G1 integration smoke. This never authorizes a scientific run."
         ),
+    )
+    parser.add_argument(
+        "--r29_action_info_mode",
+        choices=("off", *R29_ACTION_INFO_MODES),
+        default="off",
+    )
+    parser.add_argument(
+        "--r29_action_info_coef", type=float, default=R29_ACTION_INFO_REWARD_COEF
+    )
+    parser.add_argument(
+        "--r29_action_info_clip", type=float, default=R29_ACTION_INFO_REWARD_CLIP
     )
     parser.add_argument("--eval_interval", type=int, default=0)
     parser.add_argument("--eval_episodes", type=int, default=3)
@@ -790,6 +809,15 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
     config.r28_g1_engineering_smoke = bool(
         getattr(args, "r28_g1_engineering_smoke", False)
+    )
+    config.r29_action_info_mode = str(
+        getattr(args, "r29_action_info_mode", "off")
+    )
+    config.r29_action_info_coef = float(
+        getattr(args, "r29_action_info_coef", R29_ACTION_INFO_REWARD_COEF)
+    )
+    config.r29_action_info_clip = float(
+        getattr(args, "r29_action_info_clip", R29_ACTION_INFO_REWARD_CLIP)
     )
     if int(args.n_agents) > 0:
         config.n_agents = int(args.n_agents)
@@ -1327,6 +1355,7 @@ def checkpoint_payload(
             else None
         ),
         "r28_g1": agent.r28_g1_checkpoint_state(),
+        "r29_action_information": agent.r29_action_info_checkpoint_state(),
         "high_opt": agent.high_opt.state_dict(),
         "low_opt": agent.low_opt.state_dict() if agent.low_opt is not None else None,
         "low_actor_opt": agent.low_actor_opt.state_dict() if agent.low_actor_opt is not None else None,
@@ -1368,6 +1397,15 @@ def checkpoint_payload(
         "skill_interval": int(args.skill_interval),
         "r28_g1_arm": str(getattr(agent, "r28_g1_arm", "off")),
         "r28_g1_scorer_path": str(getattr(agent, "r28_g1_scorer_path", "")),
+        "r29_action_info_mode": str(
+            getattr(agent, "r29_action_info_mode", "off")
+        ),
+        "r29_action_info_coef": float(
+            getattr(agent, "r29_action_info_coef", R29_ACTION_INFO_REWARD_COEF)
+        ),
+        "r29_action_info_clip": float(
+            getattr(agent, "r29_action_info_clip", R29_ACTION_INFO_REWARD_CLIP)
+        ),
         "opt_num_prototypes": int(getattr(agent, "opt_num_prototypes", getattr(config, "opt_num_prototypes", 0))),
         "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
         "low_level_architecture": str(agent.low_level_architecture),
@@ -1678,6 +1716,17 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         r28_g1_metadata["has_frozen_actor_base"] = isinstance(
             raw_r28_g1.get("frozen_actor_base"), dict
         )
+    raw_r29 = checkpoint.get("r29_action_information")
+    r29_metadata = None
+    if isinstance(raw_r29, dict):
+        r29_metadata = {
+            name: raw_r29.get(name)
+            for name in (
+                "mode",
+                "coefficient",
+                "clip",
+            )
+        }
 
     def meta(name: str) -> Any:
         return checkpoint.get(name) if name in checkpoint else _manifest_lookup(manifest, name)
@@ -1734,6 +1783,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "assignment_actionability_warmup_steps": meta("assignment_actionability_warmup_steps"),
         "assignment_actionability_include_soft": meta("assignment_actionability_include_soft"),
         "r28_g1": r28_g1_metadata,
+        "r29_action_information": r29_metadata,
     }
 
 
@@ -2012,6 +2062,32 @@ def enforce_r28_g1_contract(
     config.topology_potential_injection = "none"
     config.skill_effect_reward_injection = "none"
     config.skill_force_reward_injection = "none"
+
+
+def enforce_r29_action_info_contract(
+    config,
+    args: argparse.Namespace,
+) -> None:
+    """Apply the lean, default-off R29 reward configuration."""
+
+    mode = str(getattr(args, "r29_action_info_mode", "off"))
+    coefficient = float(
+        getattr(args, "r29_action_info_coef", R29_ACTION_INFO_REWARD_COEF)
+    )
+    clip = float(getattr(args, "r29_action_info_clip", R29_ACTION_INFO_REWARD_CLIP))
+    config.r29_action_info_mode = mode
+    config.r29_action_info_coef = coefficient
+    config.r29_action_info_clip = clip
+    if mode == "off":
+        return
+    if mode not in R29_ACTION_INFO_MODES:
+        raise ValueError(f"unsupported R29 action-information mode {mode!r}")
+    if str(getattr(args, "r28_g1_arm", "off")) != "off":
+        raise ValueError("R29 and R28 rewards cannot be enabled together")
+    if not np.isfinite(coefficient) or coefficient <= 0.0:
+        raise ValueError("R29 coefficient must be finite and positive")
+    if not np.isfinite(clip) or clip <= 0.0:
+        raise ValueError("R29 clip must be finite and positive")
 
 
 def run_env_dry_check(config, args: argparse.Namespace) -> None:
@@ -3130,6 +3206,12 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
     for key, value in process_metrics.items():
         if key.startswith("r28_g1_"):
             writer.add_scalar(f"R28G1/{key.removeprefix('r28_g1_')}", value, total_steps)
+        elif key.startswith("r29_action_info_"):
+            writer.add_scalar(
+                f"R29ActionInfo/{key.removeprefix('r29_action_info_')}",
+                value,
+                total_steps,
+            )
     writer.flush()
 
 
@@ -3964,6 +4046,7 @@ def main() -> None:
         metadata = load_checkpoint_metadata(args.resume_from)
         apply_checkpoint_structure(config, args, metadata)
     enforce_r28_g1_contract(config, args, metadata)
+    enforce_r29_action_info_contract(config, args)
 
     try:
         if args.dry_run_env_steps > 0:

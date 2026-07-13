@@ -50,18 +50,21 @@ on-policy state visitation
   execution alone reproduces the action-std domain shift.
 - The forced-deterministic R28-G0 scorer family is retired from online reward
   use. It must not be refit, widened, or carried into another reward package.
-- R29-G0 now tests a support-native alternative: on natural on-policy states
-  and rollout hidden states, score each sampled action by its current-skill
-  likelihood against the uniform mixture of all four counterfactual skill
-  policies. The tanh Jacobian cancels in this same-action density ratio.
+- R29-G0 passed at update25, update30, and final. Active action-information
+  means are `0.017050`, `0.017990`, and `0.019208` nats; the inactive control is
+  numerical zero and every active skill clears its floor. A support-native
+  individual action-information target therefore exists on natural on-policy
+  states; this does not yet establish reward usefulness or task gain.
+- R29-G1 integrates that density ratio as a default-off, fixed collection-policy
+  reward into low-level GAE only. The separate engineering-smoke workflow was
+  cancelled; the next run is a direct mechanism-matched reward comparator.
 
 ## Next Actions
 
-1. Run the registered R29-G0 reward-off target gate over R25 arm0 update25,
-   update30, and final snapshots in parallel on the local GPU (expected 2-5
-   minutes; zero environment steps and zero updates).
-2. A family PASS authorizes only a bounded PPO integration smoke design; a FAIL
-   retires this individual action-information target.
+1. Finish the lean R29-G1 reward integration without a dedicated smoke contract,
+   validator, expanded regression suite, or hardcoded source/exposure gate.
+2. Design and run the smallest mechanism-matched `probe_only` versus
+   `real_reward` comparator that can show whether the signal changes learning.
 
 ## Immediate Constraints
 
@@ -74,6 +77,8 @@ on-policy state visitation
   team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS while
   the individual-differentiation gate is open.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
+- Keep R29 default-off and compare `probe_only` versus `real_reward` with the
+  same source, seed, exposure, optimizer settings, and other rewards.
 
 ## Pointers
 

@@ -53,7 +53,6 @@ if ($LASTEXITCODE -ne 0) {
 
 New-Item -ItemType Directory -Path (Join-Path $RunRoot "resets") | Out-Null
 $active = [System.Collections.Generic.List[object]]::new()
-$failed = [System.Collections.Generic.List[string]]::new()
 
 function Receive-Finished([switch]$WaitForOne) {
     do {
@@ -64,11 +63,6 @@ function Receive-Finished([switch]$WaitForOne) {
     } while ($finished.Count -eq 0 -and $WaitForOne)
     foreach ($job in $finished) {
         $job.Process.WaitForExit()
-        $job.Process.Refresh()
-        $exitCode = $job.Process.ExitCode
-        if ($exitCode -ne 0) {
-            $failed.Add("reset=$($job.ResetId) exit=$exitCode")
-        }
         [void]$active.Remove($job)
         $job.Process.Dispose()
     }
@@ -94,6 +88,23 @@ foreach ($resetId in 0..63) {
 }
 while ($active.Count -gt 0) {
     Receive-Finished -WaitForOne
+}
+$failed = [System.Collections.Generic.List[string]]::new()
+foreach ($resetId in 0..63) {
+    $manifestPath = Join-Path $RunRoot ("resets\reset_{0:D2}\reset_manifest.json" -f $resetId)
+    if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
+        $failed.Add("reset=$resetId manifest_missing")
+        continue
+    }
+    try {
+        $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+        if ($manifest.experiment_id -ne "EXP-20260713-r28-forced-execution-support-transport" -or $manifest.reset_id -ne $resetId -or $manifest.status -ne "OK") {
+            $failed.Add("reset=$resetId manifest_invalid")
+        }
+    }
+    catch {
+        $failed.Add("reset=$resetId manifest_parse")
+    }
 }
 if ($failed.Count -gt 0) {
     throw "Reset workers failed: $($failed -join ', ')"

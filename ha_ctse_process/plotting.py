@@ -214,12 +214,34 @@ R28_G1_METRIC_FIELDS = (
     "r28_g1_ratio_kill_switch_event",
 )
 
+R29_ACTION_INFO_METRIC_FIELDS = (
+    "r29_action_info_active",
+    "r29_action_info_mode_code",
+    "r29_action_info_rows",
+    "r29_action_info_raw_mean",
+    "r29_action_info_raw_abs_mean",
+    "r29_action_info_raw_positive_frac",
+    "r29_action_info_raw_q01",
+    "r29_action_info_raw_q99",
+    "r29_action_info_scaled_mean",
+    "r29_action_info_scaled_abs_mean",
+    "r29_action_info_clip_fraction",
+    "r29_action_info_reward_applied_steps",
+    "r29_action_info_reward_env_ratio",
+    "r29_action_info_likelihood_max_abs_error",
+    "r29_action_info_skill_0_mean",
+    "r29_action_info_skill_1_mean",
+    "r29_action_info_skill_2_mean",
+    "r29_action_info_skill_3_mean",
+)
+
 
 UPDATE_FIELDS = (
     "update",
     "total_steps",
     "env_reward_mean",
     *R28_G1_METRIC_FIELDS,
+    *R29_ACTION_INFO_METRIC_FIELDS,
     "process_segments",
     "process_loss",
     "process_outcome_loss",

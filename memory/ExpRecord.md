@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260713-r29-g0-counterfactual-action-information | launch-ready | hierarchy-L1 reward-off target gate | local CUDA; no run root yet | three-checkpoint family aggregate | R27 natural snapshots provide actual on-policy observation/rollout-hidden support; target and null implementation tests pass | Run the fixed parallel gate. PASS permits only a bounded PPO integration smoke design; FAIL retires this target family. |
+| EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
 | EXP-20260713-r28-forced-execution-support-transport | completed — `FAIL_STOCHASTIC_SUPPORT_TRANSPORT` | reward-off matched-domain causal diagnostic | local CUDA; `logs/r28_support_transport_20260713_222807` | none | 1,024 paired rows/mode; deterministic OOD `0.068359`, stochastic OOD `0.823242`; 64 rows/cell | Random action execution alone breaks frozen support. Retire the forced-deterministic scorer family from online reward use. |
 | EXP-20260713-r28-g1-causal-skill-forcing-reward | blocked — `BLOCKED_SUPPORT_OOD`; formal experiment not run | prelaunch engineering for promotion stage 3; planned formal comparator was baseline hierarchy L2 | local smokes `logs/r28_g1_engineering_smoke_20260713_212008` and `logs/r28_g1_engineering_smoke_20260713_213746`; no formal run root | none; cross-round failure review complete | same-config one-update OOD `0.950617`/`0.9375`; support kill in both; zero R28 reward applied; no mapping defect found | Retire the frozen G1 launch package. Do not refit/relax/repeat or infer reward efficacy; next action is a reward-off matched-domain transport diagnostic. |
 | EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
@@ -59,14 +59,18 @@ explicitly approves the exception.
   entropy `>=0.8`; active mean `>=0.01` nats; every skill mean `>=0.005` nats;
   active-minus-sham reset-bootstrap lower bound `>0`; inactive maximum absolute
   reward `<=1e-6`. Family PASS requires final PASS and at least 2/3 checkpoints.
-- Branches: PASS -> design one bounded PPO integration smoke; FAIL -> retire the
+- Result: all three checkpoints PASS. Active means are `0.017050`, `0.017990`,
+  and `0.019208` nats; minimum skill means are `0.008170`, `0.013948`, and
+  `0.015080`; real-minus-sham lower bounds are `0.043887`, `0.043184`, and
+  `0.048487`; inactive maximum absolute reward is `5.96e-8`.
+- Branches: PASS -> run one bounded mechanism-matched reward comparator; FAIL -> retire the
   individual action-information target; INVALID -> repair evidence code only;
   UNDERPOWERED -> add snapshot support under the unchanged contract only.
 - Fixed while open: source checkpoints/snapshots, rollout hidden state, uniform
   four-skill mixture, cyclic sham, inactive control, common noise, seeds,
   thresholds, zero reward, and zero updates.
-- Runner: `scripts/run_r29_action_information_local.ps1`; status source is this
-  dashboard until the timestamped aggregate exists.
+- Runner: `scripts/run_r29_action_information_local.ps1`; status source is
+  `logs/r29_action_information_20260713_230631/r29_action_information.json`.
 
 ### EXP-20260713-r28-forced-execution-support-transport
 

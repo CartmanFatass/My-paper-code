@@ -28,6 +28,13 @@ class ActionInformationEvaluation:
     active_by_skill: np.ndarray
 
 
+@dataclass(frozen=True)
+class ExecutedActionInformation:
+    reward: torch.Tensor
+    squashed_actual_log_prob: torch.Tensor
+    candidate_raw_log_prob: torch.Tensor
+
+
 def normalized_label_entropy(labels: np.ndarray, num_skills: int) -> float:
     values = np.asarray(labels, dtype=np.int64).reshape(-1)
     if int(num_skills) < 2 or values.size == 0:
@@ -102,6 +109,56 @@ def evaluate_action_information(
         active_by_row=active.mean(dim=(0, 2)).detach().cpu().numpy(),
         sham_by_row=sham.mean(dim=(0, 2)).detach().cpu().numpy(),
         active_by_skill=active.mean(dim=(0, 1)).detach().cpu().numpy(),
+    )
+
+
+def evaluate_executed_action_information(
+    means: torch.Tensor,
+    log_stds: torch.Tensor,
+    actions: torch.Tensor,
+    skills: torch.Tensor,
+    *,
+    epsilon: float = 1e-6,
+) -> ExecutedActionInformation:
+    """Score collected tanh actions under every counterfactual skill policy."""
+
+    mean = torch.as_tensor(means, dtype=torch.float32)
+    log_std = torch.as_tensor(log_stds, dtype=torch.float32, device=mean.device)
+    bounded = torch.as_tensor(actions, dtype=torch.float32, device=mean.device)
+    labels = torch.as_tensor(skills, dtype=torch.long, device=mean.device)
+    if mean.ndim != 3 or log_std.shape != mean.shape:
+        raise ValueError("means and log_stds must share [rows, skills, action] shape")
+    rows, num_skills, action_dim = mean.shape
+    if bounded.shape != (rows, action_dim) or labels.shape != (rows,):
+        raise ValueError("actions or skills do not align with actor parameters")
+    if torch.any(labels < 0) or torch.any(labels >= num_skills):
+        raise ValueError("skills fall outside the counterfactual policy set")
+    if not (
+        torch.isfinite(mean).all()
+        and torch.isfinite(log_std).all()
+        and torch.isfinite(bounded).all()
+    ):
+        raise ValueError("executed-action inputs must be finite")
+
+    clipped = torch.clamp(bounded, -1.0 + float(epsilon), 1.0 - float(epsilon))
+    raw_action = torch.atanh(clipped)
+    residual = (raw_action.unsqueeze(1) - mean) / torch.exp(log_std)
+    candidate_log_prob = -0.5 * (
+        residual.square() + 2.0 * log_std + log(2.0 * np.pi)
+    ).sum(dim=-1)
+    actual_log_prob = candidate_log_prob.gather(1, labels[:, None]).squeeze(1)
+    log_mixture = torch.logsumexp(candidate_log_prob, dim=1) - log(num_skills)
+    jacobian = torch.log(1.0 - clipped.square() + float(epsilon)).sum(dim=-1)
+    reward = actual_log_prob - log_mixture
+    squashed_actual = actual_log_prob - jacobian
+    if not (
+        torch.isfinite(reward).all() and torch.isfinite(squashed_actual).all()
+    ):
+        raise ValueError("executed-action score is non-finite")
+    return ExecutedActionInformation(
+        reward=reward,
+        squashed_actual_log_prob=squashed_actual,
+        candidate_raw_log_prob=candidate_log_prob,
     )
 
 

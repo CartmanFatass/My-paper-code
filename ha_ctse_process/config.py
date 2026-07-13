@@ -143,6 +143,11 @@ class Config(EnvConfig):
     r24_qd_export_max_rows_per_update = 4096
     r24_qd_export_seed = 17
 
+    # R29 support-native low-level action-information reward. Default-off.
+    r29_action_info_mode = "off"  # off, probe_only, real_reward
+    r29_action_info_coef = 0.05
+    r29_action_info_clip = 0.05
+
     # PPO and entropy.
     high_entropy_coef = 0.01
     low_entropy_coef = 0.01

@@ -79,7 +79,6 @@ if ($LASTEXITCODE -ne 0) {
 
 New-Item -ItemType Directory -Path $RunRoot | Out-Null
 $active = [System.Collections.Generic.List[object]]::new()
-$failed = [System.Collections.Generic.List[string]]::new()
 
 function Receive-Finished([switch]$WaitForOne) {
     do {
@@ -90,11 +89,6 @@ function Receive-Finished([switch]$WaitForOne) {
     } while ($finished.Count -eq 0 -and $WaitForOne)
     foreach ($job in $finished) {
         $job.Process.WaitForExit()
-        $job.Process.Refresh()
-        $exitCode = $job.Process.ExitCode
-        if ($exitCode -ne 0) {
-            $failed.Add("checkpoint=$($job.Id) exit=$exitCode")
-        }
         [void]$active.Remove($job)
         $job.Process.Dispose()
     }
@@ -118,6 +112,23 @@ foreach ($source in $Sources) {
 }
 while ($active.Count -gt 0) {
     Receive-Finished -WaitForOne
+}
+$failed = [System.Collections.Generic.List[string]]::new()
+foreach ($source in $Sources) {
+    $reportPath = Join-Path $RunRoot "$($source.Id)\r29_action_information.json"
+    if (-not (Test-Path -LiteralPath $reportPath -PathType Leaf)) {
+        $failed.Add("checkpoint=$($source.Id) report_missing")
+        continue
+    }
+    try {
+        $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
+        if ($report.experiment_id -ne "EXP-20260713-r29-g0-counterfactual-action-information" -or $report.checkpoint_id -ne $source.Id) {
+            $failed.Add("checkpoint=$($source.Id) report_identity")
+        }
+    }
+    catch {
+        $failed.Add("checkpoint=$($source.Id) report_parse")
+    }
 }
 if ($failed.Count -gt 0) {
     throw "Checkpoint workers failed: $($failed -join ', ')"

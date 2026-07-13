@@ -33,8 +33,7 @@ HMASD is an active algorithm-research project. The default work cycle is:
 ```text
 one falsifiable causal question
 -> smallest implementation or diagnostic that can answer it
--> focused smoke
--> parallel decision-grade experiment when needed
+-> smallest evidence-bearing controlled run
 -> scientific interpretation
 -> one next causal edge
 ```
@@ -57,27 +56,27 @@ Do not re-prove accepted facts before moving forward. Reopen evidence only when
 a concrete contradiction blocks the current causal test. A hard gate prevents
 wrong or uninterpretable compute; it must not become a separate workstream.
 
+Algorithm exploration has no separate verification stage. Complete one coherent
+implementation boundary, then let the next evidence-bearing diagnostic or
+controlled experiment exercise it. Do not create or run unit/regression suites,
+custom smoke validators, dry-run gates, or artifact audits by default. Use a
+focused check only after a concrete operational failure, or when a reusable
+component has a direct corruption or wrong-experiment risk that the run itself
+cannot expose cheaply.
+
 ## Lean Project Loop
 
-The controller works directly. For each step, use the lightest applicable lane;
-move to a heavier lane only when the next action actually requires it:
+The controller works directly:
 
-1. **Ordinary engineering:** inspect, implement, run the smallest focused checks
-   that support the completion claim, and commit. This includes docs, SSH,
-   packaging, CI, repository hygiene, dashboards, and runner maintenance. Do not
-   create a design, plan, ledger, review package, or extra report.
-2. **Engineering smoke:** run a small local command through the existing CLI
-   (CUDA when it updates a model), read the existing manifest/metrics/checkpoint
-   once, report engineering PASS/FAIL, and stop. It needs no ExpRecord
-   transition, scheduler entry, custom runner, duplicate status file, or
-   standalone validator. A missing frozen input is a separate artifact
-   prerequisite: report it and stop rather than silently turning the local
-   smoke into an SSH or remote-compute workflow.
-3. **Formal experiment:** use the research contract and the hard gates below.
-   Long, multi-seed, or conclusion-bearing compute belongs here.
-4. **Status/result read:** inspect existing artifacts and answer directly. Do
-   not edit code or memory unless the experiment's state or interpretation
-   actually changes.
+1. **Algorithm exploration:** inspect only the relevant code, implement one
+   causal idea, and run the smallest controlled experiment that can change the
+   decision. The experiment is also the implementation check.
+2. **Ordinary engineering:** implement directly and exercise the changed
+   behavior once only when use itself does not demonstrate it. Do not create a
+   design, plan, ledger, review package, or extra report.
+3. **Long/formal experiment:** use the research contract for conclusion-bearing
+   compute, while keeping orchestration minimal and reusing known runners.
+4. **Status/result read:** read the named status source and answer directly.
 
 Do not silently promote work into a heavier lane. Add reusable orchestration
 only for repeated matrices, remote/long jobs, or after a concrete failure proves
@@ -85,7 +84,7 @@ it is needed. Stop when the requested behavior and its immediate failure path
 work.
 
 Operational failure and scientific failure are different. Diagnose an
-operational crash directly and run one focused confirmation. Apply the research
+operational crash directly and retry only the failed path. Apply the research
 failure-review gate only to a non-PASS scientific result; keep that review in the
 same experiment record unless two related gates fail or the research direction
 changes.
@@ -115,8 +114,9 @@ next action each, prohibited changes, expected wall clock, and status source.
 Do not manufacture this record for a smoke, status check, or mechanical command.
 
 Formal experiments default to CUDA and parallel execution sized for the wall
-clock target. Never silently use CPU or serial fallback. Validate a matching
-process/GPU topology once before a new workload shape; a failure stops launch.
+clock target. Never silently use CPU or serial fallback. Reuse a known parallel
+topology directly; do not insert a separate topology-validation stage. Diagnose
+topology only after a real launch failure or for a genuinely new workload shape.
 
 Long training, multi-seed batches, and heavy analysis default to the cloud.
 Reuse a compatible self-contained Bash runner under `scripts/`; create or
@@ -157,7 +157,8 @@ user changes in a dirty worktree.
 - Prefer existing repository patterns; keep changes scoped to the request.
 - Use structured parsers and APIs, not ad hoc string manipulation.
 - Add abstractions only when they remove real complexity.
-- Scale tests with behavioral risk and blast radius.
+- Do not add tests during algorithm exploration unless a concrete failure shows
+  that the experiment cannot localize the defect.
 - Use `rg` / `rg --files` for search; `apply_patch` for manual edits.
 - Default to ASCII unless the file already uses otherwise.
 - Comment only to clarify non-obvious logic.
@@ -177,13 +178,12 @@ Persistent tests go under `tests/`. Do not create root-level `test_*.py`,
 `*_test.py`, or `.pytest_tmp*` scratch paths; put pytest temp output under
 `tests/.pytest_tmp/<task-id>` and remove it when passing.
 
-Verification must support the completion claim: changed code needs a focused test
-for the changed path; config/syntax changes need the relevant check; experiment
-packages need dry-run/path/dependency checks; result claims need the registered
-artifacts and null controls read. A docs-only change does not need the full
-algorithm suite. Existing manifests, metrics, logs, and checkpoints should be
-read directly instead of duplicated into wrapper reports. Do not claim
-completion from stale or partial evidence.
+There is no standalone verification workflow. For algorithm changes, the next
+evidence-bearing run is the check. Do not add dry-runs, wrapper reports, path
+scans, dependency probes, or broad tests before it. Read the result artifact
+needed for the scientific decision once; investigate other artifacts only after
+a concrete failure. Ordinary non-algorithm changes may use one direct behavioral
+check when necessary.
 
 Do not perform broad or repeated local experiment-artifact completeness scans.
 Use the registered status source for accepted results, and inspect only the

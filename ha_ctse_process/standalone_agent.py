@@ -110,6 +110,11 @@ from ha_ctse_process.r28_g1_reward import (
     FrozenR28G1Reward,
     empty_r28_g1_metrics,
 )
+from ha_ctse_process.r29_action_information_reward import (
+    MODES as R29_ACTION_INFO_MODES,
+    OnPolicyActionInformationReward,
+    empty_r29_action_information_metrics,
+)
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
 
 
@@ -1559,6 +1564,21 @@ class StandaloneProcessAgent:
         )
         self.r28_g1_enabled = self.r28_g1_arm != "off"
         self.r28_g1_reward: FrozenR28G1Reward | None = None
+        self.r29_action_info_mode = str(
+            getattr(config, "r29_action_info_mode", "off")
+        ).lower()
+        if self.r29_action_info_mode not in {"off", *R29_ACTION_INFO_MODES}:
+            raise ValueError(
+                f"unsupported r29_action_info_mode={self.r29_action_info_mode!r}"
+            )
+        self.r29_action_info_coef = float(
+            getattr(config, "r29_action_info_coef", 0.05)
+        )
+        self.r29_action_info_clip = float(
+            getattr(config, "r29_action_info_clip", 0.05)
+        )
+        self.r29_action_info_enabled = self.r29_action_info_mode != "off"
+        self.r29_action_info_reward: OnPolicyActionInformationReward | None = None
         self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
         self.enable_team_intent = bool(getattr(config, "enable_team_intent", False))
         self.prototype_skill_extra_codes = int(max(getattr(config, "prototype_skill_extra_codes", 0), 0))
@@ -1976,6 +1996,17 @@ class StandaloneProcessAgent:
                 action_low=action_low,
                 action_high=action_high,
             ).to(self.device)
+        if self.r29_action_info_enabled:
+            if not self.use_recurrent_low_level or not isinstance(
+                self.low, StrictHMASDMAPPOLowLevelPolicy
+            ):
+                raise TypeError("R29 requires the strict recurrent HMASD low actor")
+            self.r29_action_info_reward = OnPolicyActionInformationReward(
+                mode=self.r29_action_info_mode,
+                actor=self.low,
+                coefficient=self.r29_action_info_coef,
+                clip=self.r29_action_info_clip,
+            )
         self.process = ProcessEncoder(
             self.obs_dim,
             1 if self.action_space_type == "discrete" else self.action_dim,
@@ -2299,6 +2330,15 @@ class StandaloneProcessAgent:
         state = self.r28_g1_reward.checkpoint_state()
         state["engineering_smoke"] = bool(self.r28_g1_engineering_smoke)
         return state
+
+    def r29_action_info_checkpoint_state(self) -> dict[str, Any] | None:
+        if not self.r29_action_info_enabled:
+            return None
+        return {
+            "mode": self.r29_action_info_mode,
+            "coefficient": self.r29_action_info_coef,
+            "clip": self.r29_action_info_clip,
+        }
 
     def record_environment_step(self, env_id: int) -> None:
         self.episode_steps[int(env_id)] += 1
@@ -4808,6 +4848,12 @@ class StandaloneProcessAgent:
             )
         else:
             r28_g1_metrics = empty_r28_g1_metrics()
+        if bool(getattr(self, "r29_action_info_enabled", False)):
+            if self.r29_action_info_reward is None:
+                raise RuntimeError("R29 action-information reward is not initialized")
+            r29_action_info_metrics = self.r29_action_info_reward.apply(rollout)
+        else:
+            r29_action_info_metrics = empty_r29_action_information_metrics()
         team_intent_metrics = self._team_intent_rollout_update(rollout, total_steps=total_steps)
         team_effect_metrics = self._team_effect_target_audit(rollout, total_steps=total_steps)
         if not valid:
@@ -4958,6 +5004,7 @@ class StandaloneProcessAgent:
                 **empty_team_conditioned_qd_metrics(),
                 **empty_skill_effect_metrics(),
                 **r28_g1_metrics,
+                **r29_action_info_metrics,
                 **self._situation_diagnostics([]),
             }
 
@@ -5993,6 +6040,7 @@ class StandaloneProcessAgent:
             **g_intervention_metrics,
             **cooperation_credit_metrics,
             **r28_g1_metrics,
+            **r29_action_info_metrics,
             **self._situation_diagnostics(valid),
             **high_metrics,
         }

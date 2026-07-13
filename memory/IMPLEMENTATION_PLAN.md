@@ -40,21 +40,23 @@ Completed boundary:
   `0.068359`, stochastic OOD `0.823242`, and 64 rows in every label-duration
   cell. Random action execution is sufficient to break the frozen support.
 
-Next stage order:
+Current boundary:
 
-1. Retire the forced-deterministic scorer family from online reward use.
-2. Evaluate a uniform-prior counterfactual action-information density ratio on
-   R27's natural on-policy observation/rollout-hidden snapshots. Compare the
-   true source-skill likelihood with a cyclic-label sham and an inactive-FiLM
-   identity control using common action noise.
-3. Only a passed three-checkpoint reward-off target may authorize a bounded PPO
-   integration smoke design; otherwise stop this individual-skill target
-   family.
+1. R29-G0 passed the three-checkpoint reward-off gate. The natural on-policy
+   action-information target is positive against the cyclic sham and the
+   inactive-FiLM control is numerical zero.
+2. R29-G1 adds a default-off, fixed collection-policy density-ratio reward to
+   low-level rollout rewards before GAE. It recomputes all four skill policies
+   from the stored observation and pre-step actor hidden state and fails closed
+   if its actual-skill likelihood differs from PPO's stored likelihood.
+3. Do not add a separate engineering-smoke stage. Run the smallest
+   mechanism-matched `probe_only` versus `real_reward` comparator directly; use
+   that evidence to keep, revise, or retire the reward.
 
-Core MARL impact: none from the completed diagnostics or review. Reward,
-actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics, environment
-dynamics, credit assignment, team intent, and latent-lifetime semantics remain
-unchanged.
+Core MARL impact: when R29-G1 is enabled, only the low-level reward, GAE/returns,
+and low actor/critic optimizer updates change. High-level returns/policy,
+collector semantics, environment dynamics, team intent, credit assignment, and
+skill lifetime remain unchanged.
 
 ## Legacy Compatibility Boundary
 
