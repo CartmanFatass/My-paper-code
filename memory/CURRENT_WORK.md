@@ -52,8 +52,9 @@ differentiated skills`.**
 - `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — the
   frozen R27-G2 design and outcome branches.
 - `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — the
-  frozen R28-G0 target/null contract and future G1 design boundary. R28-G0 is
-  complete; R28-G1 reward implementation or launch is still not authorized.
+  frozen R28-G0 target/null contract and focused future-G1 implementation
+  review. R28-G0 is complete; the Section 6.1 G1 freeze awaits user acceptance,
+  and reward implementation/topology execution/launch are not authorized.
 - `docs/external-review/R27_G2_design_review_20260712_Claude.md` — raw external
   review. Exact Claude model/version was not supplied, so provenance is
   incomplete and recorded as such.
@@ -79,8 +80,11 @@ accepted as `PASS_TARGET_NULLS` on 2026-07-13**.
   `classification=PASS_TARGET_NULLS`, and frozen scorer
   `r28_g0_scorer_final.pt`. Final and update30 passed; update25 failed only the
   train-test-gap gate.
-- A later reward-on test requires this target/null gate, focused implementation
-  review, explicit launch approval, and a validated parallel cloud topology.
+- The focused G1 implementation review is complete. It found that the old
+  P3-4 same-rollout forcing path cannot implement the frozen target and defined
+  a separate scorer/clock/window/guard integration. Its freeze awaits user
+  acceptance; implementation, topology execution, and reward launch remain
+  separate gates.
 - No HMASD compute is currently active. The shared server is running a separate
   IMOD Async-HMASD pilot; its state is not HMASD evidence and must not be
   disturbed by this design work.
@@ -90,14 +94,16 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Perform focused implementation review for the future R28-G1 small clipped
-   level-3 package using the frozen final scorer. Do not launch reward training
-   without separate approval.
-2. Preserve the R28-G0 scorer/result as the only allowed target/null input for
-   that review; do not refit, retune, or sweep the classifier.
-3. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
+1. Obtain user acceptance of the R28-G1 Section 6.1 implementation freeze and
+   separate authorization before writing the reward package.
+2. If accepted, implement the frozen scorer integration, focused tests, family
+   analyzer, and dry-run-capable parallel Bash runner only. Do not execute the
+   topology check or launch reward training without another explicit approval.
+3. Preserve the R28-G0 scorer/result as the only target/null input; do not
+   refit, retune, or sweep the classifier.
+4. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
    negative. Do not merge the claims.
-4. D2 stays approved-deferred: archival sensitivity analysis only, separate
+5. D2 stays approved-deferred: archival sensitivity analysis only, separate
    validation split, identical stopping rules, all outcomes reported, one all-GPU
    device class, and **no reward unblocking even on an unexpected pass**.
 
@@ -109,8 +115,9 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
   `q_A` remains default-off after the R25 task regression.
 - Do not turn Gate C, raw communication/service/topology fields, or environment
   reward into the R28 intrinsic target.
-- Do not implement or launch R28-G1 before its target/null design is accepted;
-  design approval alone is not experiment authorization.
+- Do not implement R28-G1 until the focused Section 6.1 freeze is accepted and
+  implementation is separately authorized. Implementation approval would not
+  authorize topology execution or experiment launch.
 - Do not re-run standing references (user directive 2026-07-10): the HMASD
   baseline (REF-20260617) and the R25 arm0/arm2 arms. Reuse the archived
   curves/checkpoints. Exceptions need explicit user approval.

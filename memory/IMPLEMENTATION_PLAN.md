@@ -66,13 +66,17 @@ hand-picked fixed duration in a short run.  The important question is whether
 HA-CTSE can reconstruct HMASD's skill-discovery, skill-differentiation, and
 actually-work intrinsic drive under asynchronous skill lifetimes.
 
-## Round 28 G0 Action-Process Target Calibration (design only)
+## Round 28 Action-Process Target And Future G1 Reward
 
-Status (2026-07-13): design work is approved following the accepted R27-G2
-result. The current draft is
-`docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`.
-Approval covers design and project-memory closure only; it does not authorize
-implementation, CUDA execution, or reward-on training.
+Status (2026-07-13): G0 is complete and accepted as `PASS_TARGET_NULLS`.
+Cloud run `logs/r28_g0_action_process_target_20260713_175600` validated the
+frozen final scorer; final and update30 passed, while update25 failed only the
+train-test-gap guard. The scorer may not be refit, retuned, or swept.
+
+The focused G1 implementation review is complete and recorded in Section 6.1
+of `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`. Its
+recommended freeze is pending user acceptance. No R28-G1 reward code, topology
+execution, or training launch is authorized by the G0 result or this review.
 
 Active causal edge:
 
@@ -87,24 +91,25 @@ capacity-matched context, pre-intervention, and sham-label diagnostic nulls.
 Gate-C observation/communication effects, environment reward, `q_A`, and the
 blocked old `q_d/q_D` line are excluded from the target.
 
-The first executable gate, if separately approved, is level-1 offline
-calibration on exactly the 192 valid R27 decision shards. It uses the registered
-R25 checkpoints only for fixed, label-independent feature construction, adds
-zero environment steps and no policy update, requires CUDA with no CPU
-fallback, and is expected to take under 30 minutes. Its frozen split, seeds,
-metrics, thresholds, nulls, and PASS/FAIL/MIXED/UNDERPOWERED/INVALID/crash
-branches are specified in the design and must not be tuned after results.
+The review found the old P3-4 forcing implementation unusable for G1 because it
+fits same-rollout heads from sampled actions/effect fields. The recommended
+implementation instead uses a separate frozen scorer, exact recurrent
+deterministic-action capture, an episode-step phase clock, common real-label
+support for all arms, label-marginal-preserving per-update sham derangement,
+terminal-ten-step low-only attribution, and explicit OOD/reward-ratio guards.
+It also forces the inherited R25 prototype-discriminator reward and every other
+non-R28 policy reward path off after checkpoint metadata is restored.
 
-A future level-3 reward test remains provisional. It requires a G0
-`PASS_TARGET_NULLS`, focused implementation review, explicit launch approval,
-and a validated parallel cloud topology. Its mechanism-matched controls are
-probe-only, sham reward, and real reward; standing R25/HMASD references are not
-rerun. No branch of the current design authorizes reward activation.
+If the review freeze is accepted, the next permitted action is implementation
+and focused synthetic/dry-run verification only. A later level-3 launch still
+requires a separate user approval and a successful minimum-three-worker CUDA
+topology check. The planned arms remain probe-only, sham reward, and real
+reward; standing R25/HMASD references are not rerun.
 
-Core MARL impact at this boundary: documentation and experiment design only.
-Reward, actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics,
-environment dynamics, credit assignment, team intent, and latent-lifetime
-semantics are unchanged.
+Core MARL impact at this boundary: documentation/review only. Reward,
+actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics, environment
+dynamics, credit assignment, team intent, and latent-lifetime semantics are
+unchanged in the live code.
 
 ## Round 27 G2 Forced-z Trajectory/Effect Intervention (completed and accepted)
 

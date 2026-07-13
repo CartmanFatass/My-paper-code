@@ -2,9 +2,10 @@
 
 Date: 2026-07-13
 
-Status: controller-frozen G0 implementation contract. On 2026-07-13 the user
-accepted the design and authorized implementation plus the bounded G0 CUDA
-calibration. This does not authorize R28-G1 reward implementation or launch.
+Status: G0 complete and accepted as `PASS_TARGET_NULLS`. The focused G1
+implementation review was completed on 2026-07-13 and its recommended freeze is
+recorded in Section 6.1. This does not authorize R28-G1 reward implementation,
+topology execution, or training launch; those remain separate user decisions.
 
 ## 1. Decision
 
@@ -18,9 +19,12 @@ reward. R28-G1 designs a low-level forcing signal from fixed-length deterministi
 action-process features, residualized against capacity-matched context,
 pre-window, and sham-label nulls.
 
-The first executable gate, if separately authorized, is an offline calibration
-on the existing R27 shards. It adds zero environment steps. Reward-on training is
-blocked until that target and its nulls pass unchanged.
+The offline calibration on the existing R27 shards is complete. Final and
+update30 passed unchanged, update25 failed only its train-test-gap guard, and
+the family classification is `PASS_TARGET_NULLS`. The frozen final scorer is
+the only allowed target/null input to G1. It may not be refit, retuned, or
+swept. Reward-on training remains blocked pending implementation acceptance,
+topology validation, and explicit launch approval.
 
 ## 2. Causal claim and boundary
 
@@ -200,6 +204,11 @@ diagnostic-only legacy path and cannot inject reward.
 
 ## 5. R28-G0 offline target calibration
 
+Result (2026-07-13): accepted `PASS_TARGET_NULLS` from cloud run
+`logs/r28_g0_action_process_target_20260713_175600`. The validated artifact is
+`r28_g0_scorer_final.pt`; it authorizes G1 package review only and carries no
+reward-launch authorization.
+
 Inputs: exactly the 192 R27-G2 decision-grade `r27-g2-reset-v2` shards from
 run `095408` and the three registered frozen R25 checkpoints. The checkpoints
 are forward-only context encoders; there is no environment replay. The stopped
@@ -320,6 +329,123 @@ Provisional fixed exposure for later review:
 
 The final runner must state its measured topology and revised wall-clock estimate
 before launch. A failed topology check stops rather than reducing to serial.
+
+### 6.1 Focused implementation review freeze (pending user acceptance)
+
+The live trainer can support this experiment without changing actor/critic,
+PPO, GAE, optimizer, environment, or high-level-return semantics, but the old
+P3-4 forcing path cannot be reused. It fits a same-rollout head from sampled
+actions/effect fields and therefore violates the frozen deterministic-action
+target. Implement G1 as a separate `r28_g1_reward` module.
+
+Frozen lifecycle and source validation:
+
+- Require the R25 arm0 final source at `total_steps=1,000,000`, `update_idx=32`,
+  six agents, four skills, continuous strict-HMASD MAPPO low actor,
+  `skill_interval=10`, and duration candidates `(1,2,3,4)`.
+- Load all source policy, critic, optimizer, and ValueNorm state first. Then
+  attach the G0 heads/support envelope and deep-copy the loaded source
+  `low.actor_base` as frozen `phi_0`. Never read the subsequently updated actor
+  base for scorer context.
+- Save that frozen actor-base state in every G1 continuation checkpoint so a
+  crash resume cannot accidentally freeze the already-updated actor. The
+  scorer and encoder have no optimizer and all tensors remain detached.
+- Validate typed scorer fields, dimensions, finiteness, experiment/checkpoint
+  names, and registered paths. Do not add a hash or checksum identity layer.
+
+Window and clock contract:
+
+- Capture `tanh(mu_theta)` from the exact recurrent actor forward that produced
+  each rollout action; do not reconstruct it from sampled actions and do not
+  advance the GRU a second time. Store it as detached rollout evidence.
+- Add a separate per-environment episode-step counter. The scorer phase is
+  `min(floor(episode_step_at_assignment / 100), 2)`; the existing interleaved
+  rollout index is not an episode step and may not be substituted.
+- A row is structurally eligible only when its natural segment length is
+  exactly `10 * duration_candidate`, its terminal ten deterministic actions
+  are present, and its preceding ten deterministic actions come from the same
+  episode and PPO policy version. Initial, episode-truncated, and
+  update-truncated assignments receive zero.
+- Reward attribution uses only the row's final ten rollout indices. Divide one
+  segment reward equally over those ten low-level rewards. Never add it to
+  segment/high-level returns.
+
+Support, grouping, and sham contract:
+
+- Evaluate the support envelope against the executed real label. This common
+  real-label support mask is used by all three arms and by both real and sham
+  scoring; the sham label must not create a different OOD population.
+- Compute rollout OOD fraction over structurally eligible rows before group
+  filtering. If it is above `0.20`, inject zero R28 reward for the entire
+  rollout and record a support kill-switch event. A future PASS permits no such
+  event.
+- On in-support rows, group by `(policy_update, agent_id, duration_id)`. A group
+  is rewardable only when all four real labels occur and a label-marginal-
+  preserving fixed-point-free row derangement exists, equivalently the largest
+  label count is at most half the group size. There is no additional arbitrary
+  row-count threshold.
+- Seed sham construction with `numpy.random.SeedSequence([28022,
+  policy_update, agent_id, duration_id])`. Randomize row order and label-block
+  order, enumerate valid circular shifts of the label multiset, and choose one
+  with that RNG. This preserves the exact group marginal, changes with the
+  update, has no fixed label, and introduces no stable real-to-sham map.
+- Score real and sham labels through all three frozen heads on the same rows.
+  Center `s_real` and `s_sham` separately within the same rewardable group, then
+  apply the fixed `0.02` scale and `[-0.05,+0.05]` clip.
+
+Arm and guard contract:
+
+- Use one explicit arm selector: `probe_only`, `sham_reward`, or
+  `real_reward`. Every arm computes and logs both scores, both centered rewards,
+  common support, and common group eligibility. Only the selected scalar is
+  eligible for low-level injection; `probe_only` always injects zero.
+- Force all non-R28 policy reward paths off after checkpoint metadata is
+  applied, including the source checkpoint's inherited prototype-discriminator
+  reward, q_A, q_d/q_D, team/team-transition rewards, old skill forcing,
+  process/outcome/effect/topology/P2 rewards, g-info objective, and duration/Z
+  entropy forcing. Diagnostic-only heads may remain only when their optimizer
+  cannot update policy modules and their compute is identical across arms.
+- Define the per-rollout ratio as:
+
+  ```text
+  mean(abs(selected distributed R28 reward)) /
+  max(mean(abs(original individual environment reward)), 1e-8)
+  ```
+
+  If it exceeds
+  `0.05`, inject zero for that rollout and record a ratio kill-switch event.
+  Non-finite scores/rewards, index crossing, or recurrent-evidence mismatch
+  fail before PPO rather than being silently zeroed.
+
+Evaluation and family-decision evidence:
+
+- Keep the existing 20-episode matched task evaluation at +80k and +160k. At
+  +160k, run the unchanged frozen R26 natural-window analysis for every arm and
+  seed. Extend its collection pass only with a separate R28 deterministic-action
+  sidecar; do not change R26 features, splits, fits, thresholds, or reports.
+- Export R26 held-out row correctness for the already-fitted full/prior models
+  as decision evidence. For common `(seed, test_reset)` clusters define
+  `g_arm = mean(1[full correct] - 1[prior correct])` and
+  `delta = g_real - max(g_probe_only, g_sham_reward)`. Use 10,000 cluster
+  bootstrap repetitions with seed `28034`; require mean delta at least `0.05`
+  and its 95% lower bound above zero.
+- On the R28 deterministic-action sidecar, require pooled held-out mean
+  `s_real` and mean `s_real-s_sham` to have reset-cluster 95% lower bounds above
+  zero, using 10,000 repetitions and seeds `28035` and `28036`. Also require OOD
+  fraction at most `0.20` and zero support/ratio kill-switch events.
+- For task safety, select the higher-return matched control separately within
+  each continuation seed (ties choose `probe_only`). At +160k, every paired seed
+  must satisfy
+  `(control_return - real_return) / max(abs(control_return),1e-8) <= 0.10`, and
+  its zero-throughput episode fraction may worsen by at most `0.10` absolute.
+  Report all seed-level values; do not average away a failed safety seed.
+
+Packaging remains blocked until this freeze is accepted. Once accepted,
+implementation may add the scorer module, typed checkpoint/CLI integration,
+focused synthetic tests, a frozen-result family analyzer, and a Bash runner.
+The runner must place large outputs under `/root/autodl-tmp`, validate at least
+three concurrent CUDA arm workers, and stop on a failed topology check. Neither
+implementation nor topology validation constitutes reward-launch approval.
 
 Primary independent read: run the frozen R26 natural-window analyzer on each
 arm's +160k checkpoint without changing its thresholds. Family PASS requires:
