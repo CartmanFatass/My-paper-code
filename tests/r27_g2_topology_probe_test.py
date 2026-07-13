@@ -132,6 +132,39 @@ def test_fixture_resource_failure_is_explicitly_machine_readable(tmp_path: Path)
     assert report["workers_passed"] < report["workers_requested"]
 
 
+def test_explicit_oom_owns_following_broken_barrier_cascade():
+    module = _load_probe_module()
+    records = [
+        {
+            "worker_id": 23,
+            "error_type": "RuntimeError",
+            "error": "CUDA error: out of memory",
+            "exit_code": -15,
+        },
+        {
+            "worker_id": 7,
+            "error_type": "BrokenBarrierError",
+            "error": "",
+            "exit_code": -15,
+        },
+        {"worker_id": 0, "exit_code": -15},
+    ]
+    failures = [
+        "worker 23 RuntimeError: CUDA error: out of memory",
+        "worker 7 BrokenBarrierError: ",
+        "worker 0 exit_code=-15",
+    ]
+
+    assert module._classify_probe_failure(
+        passed=False, records=records, failures=failures
+    ) == "RESOURCE_CAPACITY"
+    assert module._classify_probe_failure(
+        passed=False,
+        records=[records[1]],
+        failures=["worker 7 BrokenBarrierError: "],
+    ) == "EXECUTION"
+
+
 def test_cloud_runner_exposes_fail_closed_status_contract():
     text = RUNNER.read_text(encoding="utf-8")
 

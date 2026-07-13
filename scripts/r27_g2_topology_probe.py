@@ -433,6 +433,79 @@ def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
     os.replace(temporary, path)
 
 
+def _classify_probe_failure(
+    *,
+    passed: bool,
+    records: Sequence[dict[str, Any]],
+    failures: Sequence[str],
+) -> str:
+    """Classify the root failure without promoting barrier-abort cascades."""
+
+    resource_markers = (
+        "probe exceeded max-wall-seconds",
+        "simultaneous residency before startup timeout",
+        "GPU free memory",
+        "host available memory",
+        "host available fraction",
+    )
+
+    def worker_reports_resource_failure(item: dict[str, Any]) -> bool:
+        error_text = (
+            f"{item.get('error_type', '')} {item.get('error', '')}"
+        ).lower()
+        return any(
+            marker in error_text
+            for marker in (
+                "outofmemory",
+                "out of memory",
+                "memoryerror",
+                "cublas_status_alloc_failed",
+                "cannot allocate memory",
+                "std::bad_alloc",
+                "resource temporarily unavailable",
+                "not enough memory",
+                "cannot start new thread",
+                "can't start new thread",
+                "errno 11",
+                "errno 12",
+            )
+        )
+
+    def worker_reports_barrier_cascade(item: dict[str, Any]) -> bool:
+        return str(item.get("error_type", "")) == "BrokenBarrierError"
+
+    if passed:
+        return "NONE"
+    worker_error_records = [item for item in records if item.get("error_type")]
+    resource_controller_condition = any(
+        any(marker in failure for marker in resource_markers)
+        for failure in failures
+    )
+    resource_worker_condition = any(
+        worker_reports_resource_failure(item) for item in worker_error_records
+    )
+    known_resource_condition = bool(
+        resource_controller_condition or resource_worker_condition
+    )
+    non_resource_worker_error = any(
+        not worker_reports_resource_failure(item)
+        and not (
+            resource_worker_condition and worker_reports_barrier_cascade(item)
+        )
+        for item in worker_error_records
+    )
+    unknown_bad_exit = bool(
+        not known_resource_condition
+        and any(
+            item.get("exit_code") not in (0, None) and not item.get("error_type")
+            for item in records
+        )
+    )
+    if known_resource_condition and not non_resource_worker_error and not unknown_bad_exit:
+        return "RESOURCE_CAPACITY"
+    return "EXECUTION"
+
+
 def run_probe(args: argparse.Namespace) -> dict[str, Any]:
     _validate_args(args)
     started = time.monotonic()
@@ -630,63 +703,11 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
     # Preserve unique failure reasons without hiding their first occurrence.
     failures = list(dict.fromkeys(failures))
     passed = not failures
-    resource_markers = (
-        "probe exceeded max-wall-seconds",
-        "simultaneous residency before startup timeout",
-        "GPU free memory",
-        "host available memory",
-        "host available fraction",
+    failure_class = _classify_probe_failure(
+        passed=passed,
+        records=records,
+        failures=failures,
     )
-
-    def worker_reports_resource_failure(item: dict[str, Any]) -> bool:
-        error_text = (
-            f"{item.get('error_type', '')} {item.get('error', '')}"
-        ).lower()
-        return any(
-            marker in error_text
-            for marker in (
-                "outofmemory",
-                "out of memory",
-                "memoryerror",
-                "cublas_status_alloc_failed",
-                "cannot allocate memory",
-                "std::bad_alloc",
-                "resource temporarily unavailable",
-                "not enough memory",
-                "cannot start new thread",
-                "can't start new thread",
-                "errno 11",
-                "errno 12",
-            )
-        )
-
-    worker_error_records = [item for item in records if item.get("error_type")]
-    resource_controller_condition = any(
-        any(marker in failure for marker in resource_markers)
-        for failure in failures
-    )
-    resource_worker_condition = any(
-        worker_reports_resource_failure(item) for item in worker_error_records
-    )
-    non_resource_worker_error = any(
-        not worker_reports_resource_failure(item) for item in worker_error_records
-    )
-    known_resource_condition = bool(
-        resource_controller_condition or resource_worker_condition
-    )
-    unknown_bad_exit = bool(
-        not known_resource_condition
-        and any(
-            item.get("exit_code") not in (0, None) and not item.get("error_type")
-            for item in records
-        )
-    )
-    if passed:
-        failure_class = "NONE"
-    elif known_resource_condition and not non_resource_worker_error and not unknown_bad_exit:
-        failure_class = "RESOURCE_CAPACITY"
-    else:
-        failure_class = "EXECUTION"
     resource_failure = failure_class == "RESOURCE_CAPACITY"
     operational_gate = "PASS" if passed else "FAIL"
     status = (
