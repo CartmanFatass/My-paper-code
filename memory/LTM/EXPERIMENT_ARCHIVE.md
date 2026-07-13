@@ -39,6 +39,50 @@ Verbatim per-experiment detail moved out of `memory/ExpRecord.md` on 2026-07-13.
 The one-line dashboard rows and decisions remain in `memory/ExpRecord.md`;
 this file holds the long-form detail for completed runs.
 
+### EXP-20260712-r27-g2-forced-z-trajectory-effect
+
+Archived: 2026-07-13
+
+- Status: `completed`; controller accepted `PASS_BEHAVIOR_EFFECT`.
+- Source: cloud RTX 4090 CUDA run
+  `r27_g2_overnight_20260713_095408`, source commit `6c06cde`, completed
+  2026-07-13 16:04:38 +08:00.
+- Exposure: reward-off frozen inference, 64 independent reset groups at each of
+  R25 arm0 update25 (800k), update30 (960k), and final (1M/update32);
+  2,124,000 environment steps and zero policy-optimization updates.
+- Artifact validity: 192/192 registered reset manifests and shards parsed,
+  192/192 status `OK`, orchestration `succeeded`, aggregate validation
+  `valid=true`, `scientific_status=PASS`. The stopped `085445` run's 11 partial
+  shards and the quarantined pilot were excluded.
+- Per-checkpoint result: update25, update30, and final each classified
+  `PERSISTENT_BEHAVIOR_AND_EFFECT`; Gates A, B1, B2, B3, and C passed at all
+  three checkpoints.
+- Metric ranges across checkpoints: immediate SKL 0.04166-0.04740;
+  standardized mean distance 0.2701-0.2884; late SKL 0.03631-0.04122;
+  late action distance 0.5938-0.6875; persistence rho 0.9670-0.9821; hold
+  distance 0.6174-0.7878; hold-minus-pulse lower bound 0.4644-0.5931 and ratio
+  4.70-4.95; B3 accuracy/macro-F1 0.9583-0.9757, accuracy lower bound
+  0.9132-0.9444, fake-label accuracy 0.21875-0.22917; Gate-C effect-delta lower
+  bound 0.05504-0.06436 and ratio 2.81-3.08.
+- Interpretation: accept persistent forced label-conditioned action processes
+  and a separate local effect through native H40 in the frozen R25 executor.
+  Beside R26's natural-window negative, record
+  `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`.
+- Claim boundary: no evidence here for natural selection/duration, reward
+  usefulness, cooperation, credit assignment, team complementarity,
+  asynchronous lifetime validity, task improvement, or HMASD parity. Gate C is
+  evaluation-only and cannot become reward.
+- Decision: the only next branch authorized by the frozen PASS result is a
+  separate task-generic reward-target/null design. It does not authorize reward
+  implementation or launch.
+- Status source: remote
+  `r27_g2_remote/controller/current_overnight.env`, orchestration status under
+  the run root, and decision-grade
+  `r27_g2_forced_trajectory_effect.{json,md}` plus
+  `aggregate_validation_output.log`.
+- Linked design:
+  `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`.
+
 ### EXP-20260711-r27-g1-low-actor-capacity-autopsy
 
 Completed factual record for the approved and implemented R27-G1 frozen

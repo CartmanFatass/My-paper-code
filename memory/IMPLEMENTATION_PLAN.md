@@ -66,140 +66,86 @@ hand-picked fixed duration in a short run.  The important question is whether
 HA-CTSE can reconstruct HMASD's skill-discovery, skill-differentiation, and
 actually-work intrinsic drive under asynchronous skill lifetimes.
 
-## Round 27 G2 Forced-z Trajectory/Effect Intervention (implementation authorized; in progress)
+## Round 28 G0 Action-Process Target Calibration (design only)
 
-Status (2026-07-12): the pre-implementation design review is complete and the
-controller disposition is `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`. The
-user subsequently authorized implementation and focused verification, then on
-2026-07-13 explicitly authorized direct overnight execution with automatic
-handoff through the registered topology-probe, pilot, and conditional
-decision-grade branches. The
-frozen design is
-`docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`. The raw
-user-supplied Claude review is
-`docs/external-review/R27_G2_design_review_20260712_Claude.md`; its response is
-complete, while exact Claude model/version provenance was not supplied.
+Status (2026-07-13): design work is approved following the accepted R27-G2
+result. The current draft is
+`docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`.
+Approval covers design and project-memory closure only; it does not authorize
+implementation, CUDA execution, or reward-on training.
 
-The load-bearing review objection is accepted: nonzero deterministic closed-
-loop divergence cannot distinguish persistent conditional control from a
-one-step action nudge amplified by dynamics. R27-G2 therefore gates on a
-matched hold-versus-10-step-pulse contrast, sustained instantaneous label-swap
-controllability on hold-induced states, and held-out late-window executed-
-action label consistency. Raw trajectory, state, pre-tanh separation, or
-local-observation divergence cannot pass the behavior gate alone.
+Active causal edge:
 
-Frozen protocol:
+```text
+distinct z_i -> naturally expressed, behaviorally differentiated skills
+```
 
-- Three R25 arm0 temporal checkpoints only: update25, update30, and final.
-- Exactly 64 reset groups and one stochastic-natural context per reset, with
-  prefix lengths 50/150/250 assigned 22/21/21 by `reset_id mod 3`.
-- Every branch constructs a fresh environment, replays exact recorded
-  `float32` prefix actions, restores the complete policy runtime, and asserts
-  observation/state/RNG/hidden/checkpoint parity before intervention.
-- Natural stochastic prefixes use isolated per-reset RNG jobs (or sequential
-  reseeding); a shared asynchronously interleaved Torch RNG is not valid.
-- Stage 1 freezes team code, non-focal skills, clocks, and all high-level
-  assignment/renewal calls. A focal-only audit overlay supplies the label to
-  the live stateful recurrent low actor; the legacy zero-hidden and all-agent
-  forced paths are prohibited. Each branch restores actor/critic hidden once,
-  then advances both exactly once per step. The repository does not yet have
-  this unified actor-distribution/live-runtime hook, so it is a required
-  implementation unit rather than an existing interface.
-- Exactly 55 branches per reset: one unforced reference, 24 holds, 18
-  non-natural 10-step pulses, and 12 paired inactive-label branches.
-- The actual R25 native individual durations are 10/20/30/40 primitive steps,
-  not the external review's assumed 30/70/130/240. Gated windows are steps
-  1-10, 11-20, and 31-40; H40 is the single primary effect endpoint and H50 is
-  descriptive stress only.
-- Gate A rechecks the R27 immediate-capacity anchors. Gate B requires all of
-  sustained controllability on every hold branch, hold-over-pulse late
-  deterministic action (`tanh(mu)`) behavior with an absolute magnitude floor,
-  and held-out four-label consistency from fixed 12-feature executed-action
-  summaries. Gate C separately requires a benchmark-local hold-over-pulse full
-  focal-observation effect at H40. All inferential resampling is by reset
-  cluster; pair support counts distinct reset groups, never agent rows, and
-  checkpoints are temporal observations, not seeds.
-- Same-label or inactive-label leakage, fresh-replay mismatch,
-  live/diagnostic mismatch, per-step matched environment-RNG divergence, RNG
-  consumption, checkpoint-file or full-`state_dict` mutation, non-finite
-  evidence, nondeterministic CUDA, or CPU fallback makes a checkpoint
-  `INVALID`. Support loss is `UNDERPOWERED`, not `FAIL`.
-- A family behavior pass requires Gate B at at least two of three checkpoints.
-  A stable effect pass requires B+C at at least two of three. Partial patterns
-  are explicitly `MIXED`. `TRANSIENT_ACTION_NUDGE` requires the exact decay,
-  no-hold-advantage, chance-decoding, and effect-fail pattern; other all-
-  negative patterns are `NO_PERSISTENT_SEPARATION`. Any invalid or underpowered
-  checkpoint makes the family invalid or underpowered before the two-of-three
-  rule is considered.
+R27 proves that the frozen executor has persistent forced capacity through H40,
+while R26 remains negative on natural windows. R28 therefore tests a
+task-generic ten-step deterministic-action process target against
+capacity-matched context, pre-intervention, and sham-label diagnostic nulls.
+Gate-C observation/communication effects, environment reward, `q_A`, and the
+blocked old `q_d/q_D` line are excluded from the target.
 
-Claim boundary: a pass establishes only persistent conditional control under
-forced hold in the frozen R25 executor, for up to the native 40-step maximum.
-It does not establish natural skill selection/duration, asynchronous
-semi-Markov validity, team complementarity, reward usefulness, or task
-improvement. Beside the R26 natural observational negative, a pass is recorded
-as `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`, not automatically as
-observational-instrument failure.
+The first executable gate, if separately approved, is level-1 offline
+calibration on exactly the 192 valid R27 decision shards. It uses the registered
+R25 checkpoints only for fixed, label-independent feature construction, adds
+zero environment steps and no policy update, requires CUDA with no CPU
+fallback, and is expected to take under 30 minutes. Its frozen split, seeds,
+metrics, thresholds, nulls, and PASS/FAIL/MIXED/UNDERPOWERED/INVALID/crash
+branches are specified in the design and must not be tuned after results.
 
-Compute boundary: the exact decision-grade Stage-1 workload is 708,000
-environment steps per checkpoint and 2,124,000 across all three, plus
-diagnostic forwards/decoder fitting. Register 12-20 hours on cloud CUDA. A
-separately authorized eight-reset wiring pilot is under 90,000 environment
-steps and cannot contribute outcomes to the final gate. CUDA is mandatory and
-there is no CPU fallback.
+A future level-3 reward test remains provisional. It requires a G0
+`PASS_TARGET_NULLS`, focused implementation review, explicit launch approval,
+and a validated parallel cloud topology. Its mechanism-matched controls are
+probe-only, sham reward, and real reward; standing R25/HMASD references are not
+rerun. No branch of the current design authorizes reward activation.
 
-Performance boundary (2026-07-13): next-run code may reuse deterministic link
-capacities only within one unchanged widest-path computation and may reuse the
-stored SINR matrix only when UAV positions, user positions, and availability
-are exactly unchanged. The user stopped the partial `5595eee` run and launched
-a fresh isolated run on `6c06cde`; its old 11 shards are excluded. The local
-S7-S1 20-step profile improved from 3.638 s to 1.755 s with exact cached-versus-
-uncached outputs and RNG state verified. This is execution engineering only;
-it does not alter the registered branch matrix or gates.
+Core MARL impact at this boundary: documentation and experiment design only.
+Reward, actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics,
+environment dynamics, credit assignment, team intent, and latent-lifetime
+semantics are unchanged.
 
-Authorization boundary: R27-G2 code, analyzer, cloud runner/Git workflow, and
-focused verification are complete. The 2026-07-13 overnight authorization is
-limited to: probe 8 workers; run the final-checkpoint eight-reset quarantined
-pilot; on `WIRING_PASS`, probe 64 then optionally 32 workers; and launch
-decision grade only on a validated topology of at least 32 workers. The 32
-probe is permitted only after the 64 probe records a structured
-`RESOURCE_CAPACITY` failure; every execution-class failure stops. Any failed
-gate stops rather than selecting serial mode. Reward, actor/GRU/FiLM changes, natural-renewal
-Stage 2, H100, and long task-scale training remain blocked. Even a B+C pass
-would require a separate task-generic reward-target design; Gate C's full
-Scenario-7 observation/communication fields cannot become reward. No
-`memory/ALGORITHM_PRINCIPLES.md` change is needed.
+## Round 27 G2 Forced-z Trajectory/Effect Intervention (completed and accepted)
 
-Remote execution boundary (updated 2026-07-13): the reusable legacy SSH
-lifecycle is implemented in `scripts/remote/run_hmasd_r27_g2.ps1`, and the
-authorized automatic chain is implemented in
-`scripts/remote/run_hmasd_r27_g2_overnight.ps1`. Both use the same external
-private key already authorized for the identical AutoDL `root` endpoint and a
-separate repository alias. Its default `prepare` action performs remote CUDA,
-tool, separate-data-filesystem/free-space, `screen`, and registered non-empty
-checkpoint-path preflight; it stages the three checkpoints under
-`/root/autodl-tmp/HMASD/checkpoint_dist`, obtains source through Git, and
-performs a zero-write runner dry-run. No application-layer content digest is
-part of the workflow. Source, checkpoints, logs, and results remain under the
-data disk. The overnight command runs in a recorded detached GNU `screen`
-session and enforces the exact authorization, clean committed Git source, and
-selected-topology gates. Legacy `launch`/`all` are disabled so they cannot
-bypass that chain. By user directive on 2026-07-13,
-the default is the 64-worker flattened queue and serial launch/fallback is
-disabled. Final success and
-complete collection revalidate all 192 reset artifacts plus both aggregate
-reports rather than trusting status text. Aggregate reports are regenerated
-from the current 192 structured reset artifacts rather than using a stale-input
-identity layer. On 2026-07-13 the GitHub SSH default and Windows OpenSSH state
-serialization were validated, then the non-launching `prepare` passed against
-the live server. It rechecked CUDA, the separate data filesystem, free space,
-`screen`, and all three cached checkpoints; fast-forwarded the clean data-disk
-checkout to commit `60ac83e`; and rendered all 192 reset commands plus the
-aggregate command in zero-write dry-run mode. Final read-only validation
-confirmed a two-line Bash-readable source pointer, no current-run pointer, no
-dry-run directory, and no R27 `screen` session. The old review ZIP is historical
-only and is not source or launch authority. No experiment launch has occurred.
-A local process audit found no live experiment to migrate; future
-compute-bearing work remains cloud CUDA by default.
+Status (2026-07-13): **completed**, controller classification
+`PASS_BEHAVIOR_EFFECT` accepted. The optimized cloud run
+`r27_g2_overnight_20260713_095408` at commit `6c06cde` ended successfully at
+16:04:38 +08:00. All 192 registered reset artifacts parsed, all were `OK`, and
+the aggregate report validated as `valid=true` / `scientific_status=PASS`.
+
+At each of update25, update30, and final, the analyzer classified
+`PERSISTENT_BEHAVIOR_AND_EFFECT`; Gates A, B1, B2, B3, and C all passed. Across
+the three checkpoints:
+
+- immediate SKL was 0.04166-0.04740 and standardized mean distance
+  0.2701-0.2884, with positive reset-cluster lower bounds;
+- late-window SKL was 0.03631-0.04122, deterministic-action distance
+  0.5938-0.6875, and hold persistence rho 0.9670-0.9821;
+- hold distance was 0.6174-0.7878, hold-minus-pulse lower bound
+  0.4644-0.5931, and hold/pulse ratio 4.70-4.95;
+- held-out four-label accuracy/macro-F1 was 0.9583-0.9757, with accuracy lower
+  bound 0.9132-0.9444 and fake-label accuracy 0.21875-0.22917;
+- the separate local-effect hold-minus-pulse lower bound was 0.05504-0.06436
+  and ratio 2.81-3.08.
+
+Accepted interpretation: the frozen R25 arm0 low actor supports persistent,
+label-conditioned action processes and a separate local effect when the focal
+label is forcibly held through the native H40 horizon. Beside R26's natural
+observational negative, this is
+`FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`.
+
+Not established: natural high-level skill selection or duration, reward
+usefulness, cooperation, credit assignment, team complementarity, asynchronous
+semi-Markov validity, task improvement, long-run verification, or HMASD parity.
+Gate C remains evaluation-only and cannot become intrinsic reward.
+
+The stopped `085445`/commit `5595eee` run's 11 partial shards and the
+quarantined pilot are excluded. The accepted decision used exactly 64 reset
+groups for each of three checkpoints and 2,124,000 environment steps, with no
+policy optimization. Full protocol, thresholds, and status paths remain in
+`docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` and
+`memory/LTM/EXPERIMENT_ARCHIVE.md`.
 
 ## Round 27 G1 Low-Actor Capacity Autopsy (completed and accepted)
 

@@ -9,9 +9,7 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 ## Controller Handoff
 
 - **Active controller:** Codex, branch `aggressive`, traditional HMASD
-  R24/R25/R26/R27 line. One controller may modify the repo at a time.
-- **Binding protocol:** `docs/subagents/claude-codex-handover-spec.md`. Read it
-  at every switch and update this block when ownership changes.
+  R24/R25/R26/R27/R28 line. One controller may modify the repo at a time.
 - **Workflow status (2026-07-13):** the delegated-subagent workflow is retired.
   The controller works directly. Do not reconstruct the old dispatch-gate,
   model-tier-routing, review-package, or agent-lifetime rules from historical
@@ -25,21 +23,22 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 
 ## Current Objective
 
-**Open causal edge: `individual skill z_i -> persistent executable behavior`.**
+**Open causal edge: `distinct z_i -> naturally expressed, behaviorally
+differentiated skills`.**
 
-- **R27-G1 complete, accepted** as `STATIC_USED_OBSERVATIONAL_MISS`, qualified
-  narrowly: the frozen low actor has *immediate* `z_i`-conditioned
-  action-distribution separation (static PASS 3/3 checkpoints, synthetic PASS 3/3
-  seeds). This does **not** establish persistent trajectory modes or downstream
-  effects.
-- **R26-G1a** remains a valid negative for its tested observational windows, but
-  after R27 it can no longer be read as "the actor lacks immediate `z_i`
-  capacity".
-- **R27-G2** is design-frozen, implemented, and locally verified. At user
-  request, run `085445`/`5595eee` stopped at 09:51 with 11 partial shards and
-  is excluded. Active run `095408` uses optimized commit `6c06cde`: probe8
-  passed 8/8 and the fresh wiring pilot began at 09:59 on cloud CUDA. It keeps
-  the exact registered matrix/gates and has no serial or CPU fallback.
+- **R27-G2 complete, accepted** as `PASS_BEHAVIOR_EFFECT` on 2026-07-13.
+  Run `095408`/`6c06cde` completed at 16:04 +08:00 with 192/192 `OK`
+  decision shards, 64 resets at each of update25/update30/final, successful
+  aggregate validation, and A/B1/B2/B3/C PASS at all three checkpoints.
+- The accepted claim is narrow: the frozen R25 arm0 low actor supports
+  persistent label-conditioned action processes and a separate local effect
+  under forced hold through native H40. Record this beside the R26 natural
+  observational negative as `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`.
+- **R26-G1a remains negative** for its tested natural windows. R27 does not
+  retroactively convert it into instrument failure or establish natural skill
+  selection, reward usefulness, cooperation, credit, or task improvement.
+- The stopped `085445` run's 11 partial shards and the quarantined pilot remain
+  excluded from decision evidence.
 - Longer-term: reach HMASD-level S7-S1 behavior at ~1e6 steps before returning to
   S7-S3. Treat 160k/320k runs as mechanism gates, not HMASD-comparison verdicts.
 
@@ -51,7 +50,9 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 - `memory/IMPLEMENTATION_PLAN.md` — staged plan and current gates.
 - `memory/ExpRecord.md` — experiment dashboard and artifact locations.
 - `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — the
-  controller-frozen R27-G2 design (design evidence only; authorizes nothing).
+  frozen R27-G2 design and outcome branches.
+- `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — the
+  active design draft; no implementation or launch authorization.
 - `docs/external-review/R27_G2_design_review_20260712_Claude.md` — raw external
   review. Exact Claude model/version was not supplied, so provenance is
   incomplete and recorded as such.
@@ -60,67 +61,52 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 
 ## Current Experiment Focus
 
-`EXP-20260712-r27-g2-forced-z-trajectory-effect` — **wiring pilot running**.
+`EXP-20260713-r28-g0-action-process-target-calibration` — **design only; not
+implemented or launched**.
 
-- 55 branches per reset, 64 reset groups, 3 frozen temporal checkpoints.
-- Decision-grade Stage 1 remains exactly **2,124,000 env steps** before
-  diagnostic overhead. Topology is not yet selected; retain 12–20 h at 64
-  workers or 24–40 h at the permitted 32-worker capacity fallback.
-- The primary control is **hold vs a matched 10-step pulse**, not raw closed-loop
-  divergence. Gated windows are steps 1-10, 11-20, 31-40 (native R25 durations
-  are 10/20/30/40). H50 is descriptive stress, not native-duration evidence.
-- Targeted local verification is complete; the remote-workflow subset passes
-  10/10, including Windows PowerShell 5.1 native-argument transport into Bash.
-- The clean data-disk checkout is at `6c06cde`; all checkpoints are cached.
-  Active root is `.../r27_g2_overnight_20260713_095408`. Probe8 passed; the
-  fresh pilot is quarantined and cannot become scientific gate evidence.
-- User execution policy (2026-07-13): compute-bearing experiments default to
-  parallel cloud CUDA. R27-G2 targeted 64 reset workers, then selected the
-  registered 32-worker capacity fallback. Serial launch/fallback remains
-  disabled.
-- Launch remains fail-closed outside the exact authorized overnight chain.
+- Candidate target: fixed 10-step deterministic-action process residual over
+  capacity-matched context, pre-window, and sham-label nulls. No communication
+  field, environment reward, Gate-C observation effect, `q_A`, `q_d`, or `q_D`
+  enters the intrinsic score.
+- First gate is offline CUDA calibration on the existing R27 shards. It adds
+  zero environment steps and cannot tune thresholds after outcomes are read.
+- A later reward-on test requires this target/null gate, focused implementation
+  review, explicit launch approval, and a validated parallel cloud topology.
+- No HMASD compute is currently active. The shared server is running a separate
+  IMOD Async-HMASD pilot; its state is not HMASD evidence and must not be
+  disturbed by this design work.
 
 Everything else on the dashboard is `completed` or `standing-reference`. R25
 arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Monitor the active fresh pilot, then the guarded 64/32 topology branch and
-   decision collector. Only after 192 new shards, `validate-run`, and the
-   regenerated aggregate may Gate A/B/C be interpreted. Never mix the 11 old
-   partial shards or quarantined pilot into the scientific result.
-2. Preserve the R27-G1 qualification: immediate action sensitivity verified;
-   persistence and downstream effect open. Preserve the R26 FAIL narrowly.
-3. Optional cheap diagnostics may reuse existing R25 artifacts (correlate q_A
-   reward share / residual gain with task metrics; offline-score arm0 vs arm2
-   with the frozen q_A discriminator). No new run needed.
-4. The update-matched parity question may later use a 1M/32env cloud run via the
-   cloud-handoff protocol. Needs its own approval; must not duplicate a
-   standing-reference control.
-5. D2 stays approved-deferred: archival sensitivity analysis only, separate
+1. Complete and review the R28-G1 reward-target/null design. Do not implement or
+   launch from design approval alone.
+2. If separately approved, implement only the offline R27-shard target
+   calibration and run its focused CUDA check. PASS permits design of the
+   small clipped level-3 reward test; every other branch stops or reviews.
+3. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
+   negative. Do not merge the claims.
+4. D2 stays approved-deferred: archival sensitivity analysis only, separate
    validation split, identical stopping rules, all outcomes reported, one all-GPU
    device class, and **no reward unblocking even on an unexpected pass**.
 
 ## Do Not Do Yet
 
-- Do not treat R27-G1 static separation or synthetic `1.0` accuracy as evidence of
-  persistent trajectory modes, downstream effects, cooperation, credit, or task
-  improvement.
-- Do not launch outside the 2026-07-13 authorized overnight chain or bypass its
-  topology/pilot gates.
-- Do not enable `q_A`, `q_d`, `q_D`, or any other intrinsic reward while the
-  persistent-behavior edge is open. `q_d`/`q_D` are **BLOCKED** by R24-1
-  (FAIL accepted 2026-07-09); no q_D/q_d coefficient sweeps or target engineering.
-- Do not redesign the actor, reset recurrent hidden state, or add post-GRU
-  FiLM / action-head residuals.
+- Do not reinterpret R27-G2 as natural skill usage, team complementarity,
+  reward usefulness, task improvement, or decoupled-lifetime evidence.
+- Do not enable or tune the old `q_d/q_D` reward paths; R24-1 still blocks them.
+  `q_A` remains default-off after the R25 task regression.
+- Do not turn Gate C, raw communication/service/topology fields, or environment
+  reward into the R28 intrinsic target.
+- Do not implement or launch R28-G1 before its target/null design is accepted;
+  design approval alone is not experiment authorization.
 - Do not re-run standing references (user directive 2026-07-10): the HMASD
   baseline (REF-20260617) and the R25 arm0/arm2 arms. Reuse the archived
   curves/checkpoints. Exceptions need explicit user approval.
-- Do not launch a long task-scale or update-matched parity run as a response to
-  R27-G1 — it does not resolve whether immediate sensitivity becomes persistent
-  behavior.
-- Do not add new kappa/hazard/DADS/communication-intrinsic mechanisms while this
-  edge is open.
+- Do not add kappa/hazard/DADS, team reward, or communication-intrinsic
+  mechanisms while the individual differentiation gate is open.
 - Do not execute the superseded CSOG roadmap or Phase-A/G0 plan.
 
 ## LTM Archive Pointers
@@ -128,7 +114,7 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 - `memory/LTM/IMPLEMENTATION_PLAN_ARCHIVE_20260713.md` — completed/superseded
   plan rounds (Decoupled-K, R12, R19, R20, R21, R22 receipts, June-2026 passes).
 - `memory/LTM/EXPERIMENT_ARCHIVE.md` — long-form detail for completed experiments
-  (R27-G1, R26-G1a, R25, R24, R23).
+  (R27-G2/G1, R26-G1a, R25, R24, R23).
 - `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` — raw external-review text
   (the evidence; summaries are only indexes). `INDEX.md` is the round index.
 - `memory/LTM/PROJECT_HISTORY_20260707_full_import.md`,
