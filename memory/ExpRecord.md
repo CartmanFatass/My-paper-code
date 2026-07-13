@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-13
+Updated: 2026-07-14
 
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260714-r29-t10-paired-320k | launch-ready | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; timestamped `logs/r29_t10_paired_320k_*` | `runner_status.txt`, then `result/r29_t10_pair.json` | pending | Run one paired seed only; package the completed evidence for GPT-5.6 Pro before any expansion. |
 | EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
 | EXP-20260713-r28-forced-execution-support-transport | completed — `FAIL_STOCHASTIC_SUPPORT_TRANSPORT` | reward-off matched-domain causal diagnostic | local CUDA; `logs/r28_support_transport_20260713_222807` | none | 1,024 paired rows/mode; deterministic OOD `0.068359`, stochastic OOD `0.823242`; 64 rows/cell | Random action execution alone breaks frozen support. Retire the forced-deterministic scorer family from online reward use. |
 | EXP-20260713-r28-g1-causal-skill-forcing-reward | blocked — `BLOCKED_SUPPORT_OOD`; formal experiment not run | prelaunch engineering for promotion stage 3; planned formal comparator was baseline hierarchy L2 | local smokes `logs/r28_g1_engineering_smoke_20260713_212008` and `logs/r28_g1_engineering_smoke_20260713_213746`; no formal run root | none; cross-round failure review complete | same-config one-update OOD `0.950617`/`0.9375`; support kill in both; zero R28 reward applied; no mapping defect found | Retire the frozen G1 launch package. Do not refit/relax/repeat or infer reward efficacy; next action is a reward-off matched-domain transport diagnostic. |
@@ -39,6 +40,46 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260714-r29-t10-paired-320k
+
+- Causal edge: a detached recurrent terminal-block density ratio added to the
+  low reward should make persistent natural skill-conditioned behavior more
+  distinguishable than computing the same ratio without reward injection.
+- Upstream authorization: R29-G0 established a support-native action signal;
+  GPT-5.6 Pro recommended R29-T10; the user authorized one local 320K run per
+  arm. This does not authorize a three-seed conclusion.
+- Comparator/null: `probe_only` and `real_reward` start from the same R25 arm0
+  1M checkpoint and seed `29031`. Both replay every fixed candidate skill over
+  the same complete natural lifetime and compute the same final-10-step score;
+  only `real_reward` adds the detached clipped scalar to the terminal low reward.
+- Exposure: two arms run concurrently on local CUDA, each with 16 subproc envs,
+  rollout 500, skill interval 10, lifetimes `(1,2,3,4)`, and +320K environment
+  steps. This is 40 policy-update cycles and 15,000 recurrent low-PPO minibatch
+  optimizer steps per arm (`15` epochs, `800` sequence chunks, batch `32`).
+  Final task evaluation uses 20 deterministic episodes; final natural-process
+  evidence uses 64 reset groups and the unchanged R26 analyzer. Expected total
+  wall clock is 5-10 hours.
+- Preliminary decision metrics: actual-skill replay likelihood error must stay
+  `<=2e-5`; complete segments and all four skills must be represented. Over the
+  final 10 policy updates, `real_reward - probe_only` R29-T10 mean must be
+  `>=0.05` with a positive paired-update bootstrap lower bound and no negative
+  per-skill mean difference. R26 transfer requires real PASS while probe is not
+  PASS and a `>=0.05` real-minus-probe full-minus-prior accuracy gain.
+- Safety: real normalized skill entropy `>=0.8`, full-rollout intrinsic/env
+  mean-absolute ratio `<=0.05`, deterministic task reward degradation `<=10%`
+  relative to probe, and zero-throughput step-fraction worsening `<=0.10`.
+- Branches: preliminary PASS -> external GPT-5.6 Pro review before deciding on
+  the remaining paired seeds; MIXED -> external review of the frozen evidence
+  with no retuning; FAIL -> run the research failure review and retire or select
+  one externally justified revision; INVALID/crash -> repair only the failed
+  operational path and resume the same contract.
+- Prohibited while open: coefficient/clip/terminal-window changes, learned
+  priors, high-level reward, task-reward changes, extra arms, extra seeds, and
+  conclusions about cooperation, task improvement, or exact mutual information.
+- Status sources: `<run-root>/runner_status.txt`, each arm's
+  `metrics/train_updates.csv` and `metrics/eval_episodes.csv`, final R26 JSON,
+  and `<run-root>/result/r29_t10_pair.json`.
 
 ### EXP-20260713-r29-g0-counterfactual-action-information
 

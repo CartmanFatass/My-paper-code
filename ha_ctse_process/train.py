@@ -805,6 +805,7 @@ def parse_int_tuple(text: str) -> tuple[int, ...]:
 
 
 def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
+    config.skill_interval = int(args.skill_interval)
     config.r28_g1_arm = str(getattr(args, "r28_g1_arm", "off"))
     config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
     config.r28_g1_engineering_smoke = bool(
@@ -1722,9 +1723,12 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         r29_metadata = {
             name: raw_r29.get(name)
             for name in (
+                "variant",
                 "mode",
                 "coefficient",
                 "clip",
+                "skill_interval",
+                "terminal_window",
             )
         }
 
@@ -2088,6 +2092,10 @@ def enforce_r29_action_info_contract(
         raise ValueError("R29 coefficient must be finite and positive")
     if not np.isfinite(clip) or clip <= 0.0:
         raise ValueError("R29 clip must be finite and positive")
+    if int(getattr(args, "skill_interval", 0)) != 10:
+        raise ValueError("R29-T10 requires skill_interval=10")
+    if tuple(int(value) for value in config.skill_lifetime_candidates) != (1, 2, 3, 4):
+        raise ValueError("R29-T10 requires skill lifetimes (1,2,3,4)")
 
 
 def run_env_dry_check(config, args: argparse.Namespace) -> None:

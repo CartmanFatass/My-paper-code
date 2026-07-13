@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-13
+Updated: 2026-07-14
 
 Purpose: the single mandatory first read. Keep only controller ownership, the
 current objective, next actions, immediate constraints, and pointers. Evidence
@@ -55,16 +55,16 @@ on-policy state visitation
   numerical zero and every active skill clears its floor. A support-native
   individual action-information target therefore exists on natural on-policy
   states; this does not yet establish reward usefulness or task gain.
-- R29-G1 integrates that density ratio as a default-off, fixed collection-policy
-  reward into low-level GAE only. The separate engineering-smoke workflow was
-  cancelled; the next run is a direct mechanism-matched reward comparator.
+- GPT-5.6 Pro modified the pointwise reward into R29-T10: fixed-skill recurrent
+  replay over each complete natural lifetime, final-10-step density ratio, one
+  endpoint reward, low GAE only. The pointwise online reward is retired.
 
 ## Next Actions
 
-1. Finish the lean R29-G1 reward integration without a dedicated smoke contract,
-   validator, expanded regression suite, or hardcoded source/exposure gate.
-2. Design and run the smallest mechanism-matched `probe_only` versus
-   `real_reward` comparator that can show whether the signal changes learning.
+1. Complete the R29-T10 implementation and launch the authorized local paired
+   run: one seed, two concurrent 16-env CUDA arms, +320K steps per arm.
+2. Collect final task/R26 evidence and prepare the raw result/question ZIP for
+   manual GPT-5.6 Pro review before choosing the next research route.
 
 ## Immediate Constraints
 

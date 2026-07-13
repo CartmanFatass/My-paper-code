@@ -45,15 +45,16 @@ Current boundary:
 1. R29-G0 passed the three-checkpoint reward-off gate. The natural on-policy
    action-information target is positive against the cyclic sham and the
    inactive-FiLM control is numerical zero.
-2. R29-G1 adds a default-off, fixed collection-policy density-ratio reward to
-   low-level rollout rewards before GAE. It recomputes all four skill policies
-   from the stored observation and pre-step actor hidden state and fails closed
-   if its actual-skill likelihood differs from PPO's stored likelihood.
-3. Do not add a separate engineering-smoke stage. Run the smallest
-   mechanism-matched `probe_only` versus `real_reward` comparator directly; use
-   that evidence to keep, revise, or retire the reward.
+2. External review modified R29-G1 into R29-T10. For each complete natural skill
+   lifetime, the collection actor is replayed from the stored pre-step hidden
+   state under each fixed candidate skill. The uniform density ratio uses the
+   final 10 action likelihoods, then adds one detached clipped reward at the
+   lifetime endpoint. Length-batched replay keeps this tractable on GPU.
+3. Run the authorized single-seed `probe_only` versus `real_reward` pair at
+   +320K steps per arm. The run itself is the implementation check; after final
+   R26/task evidence, prepare the raw result package for GPT-5.6 Pro.
 
-Core MARL impact: when R29-G1 is enabled, only the low-level reward, GAE/returns,
+Core MARL impact: when R29-T10 is enabled, only the low-level reward, GAE/returns,
 and low actor/critic optimizer updates change. High-level returns/policy,
 collector semantics, environment dynamics, team intent, credit assignment, and
 skill lifetime remain unchanged.

@@ -1577,6 +1577,7 @@ class StandaloneProcessAgent:
         self.r29_action_info_clip = float(
             getattr(config, "r29_action_info_clip", 0.05)
         )
+        self.skill_interval = int(getattr(config, "skill_interval", 10))
         self.r29_action_info_enabled = self.r29_action_info_mode != "off"
         self.r29_action_info_reward: OnPolicyActionInformationReward | None = None
         self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
@@ -2004,6 +2005,7 @@ class StandaloneProcessAgent:
             self.r29_action_info_reward = OnPolicyActionInformationReward(
                 mode=self.r29_action_info_mode,
                 actor=self.low,
+                skill_interval=self.skill_interval,
                 coefficient=self.r29_action_info_coef,
                 clip=self.r29_action_info_clip,
             )
@@ -2335,9 +2337,12 @@ class StandaloneProcessAgent:
         if not self.r29_action_info_enabled:
             return None
         return {
+            "variant": "terminal_block_t10",
             "mode": self.r29_action_info_mode,
             "coefficient": self.r29_action_info_coef,
             "clip": self.r29_action_info_clip,
+            "skill_interval": self.skill_interval,
+            "terminal_window": 10,
         }
 
     def record_environment_step(self, env_id: int) -> None:
@@ -4851,7 +4856,7 @@ class StandaloneProcessAgent:
         if bool(getattr(self, "r29_action_info_enabled", False)):
             if self.r29_action_info_reward is None:
                 raise RuntimeError("R29 action-information reward is not initialized")
-            r29_action_info_metrics = self.r29_action_info_reward.apply(rollout)
+            r29_action_info_metrics = self.r29_action_info_reward.apply(valid, rollout)
         else:
             r29_action_info_metrics = empty_r29_action_information_metrics()
         team_intent_metrics = self._team_intent_rollout_update(rollout, total_steps=total_steps)
