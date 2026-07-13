@@ -8,7 +8,6 @@ branch point, and records one typed shard per independent reset group.
 
 from __future__ import annotations
 
-import copy
 import json
 import random
 from collections.abc import Mapping
@@ -1020,17 +1019,17 @@ def collect_reset_evidence(
                         "R27-G2 fresh replay consumed global RNG state"
                     )
 
-                restore_runtime_snapshot(agent, copy.deepcopy(canonical_runtime))
+                restore_runtime_snapshot(agent, canonical_runtime)
+                restored_runtime = capture_runtime_snapshot(agent)
                 artifact.runtime_restored_equal[branch_id] = bool(
                     not runtime_snapshot_differences(
-                        capture_runtime_snapshot(agent), canonical_runtime
+                        restored_runtime, canonical_runtime
                     )
                 )
                 if not artifact.runtime_restored_equal[branch_id]:
                     raise R27G2ContractError(
                         "R27-G2 restored runtime mismatch before branch"
                     )
-                assert_runtime_matches_snapshot(agent, canonical_runtime)
                 artifact.local_observation[branch_id, 0] = replay_obs
                 artifact.global_state[branch_id, 0] = replay_state
                 branch_environment_rng = [branchpoint_environment_rng]
@@ -1118,7 +1117,11 @@ def collect_reset_evidence(
                         if branch.kind == "reference"
                         else branch.executed_skill(step)
                     )
-                    pre_audit_runtime = capture_runtime_snapshot(agent)
+                    pre_audit_runtime = (
+                        capture_runtime_snapshot(agent)
+                        if branch.kind == "reference"
+                        else None
+                    )
                     live = agent.r27_g2_audit_step(
                         replay_obs,
                         env_id=0,
@@ -1150,8 +1153,8 @@ def collect_reset_evidence(
                         raise R27G2ContractError(
                             "R27-G2 live action shape/dtype mismatch"
                         )
-                    post_audit_runtime = capture_runtime_snapshot(agent)
                     if branch.kind == "reference":
+                        post_audit_runtime = capture_runtime_snapshot(agent)
                         restore_runtime_snapshot(agent, pre_audit_runtime)
                         source_action, source_logp, source_value = agent.act_low(
                             replay_obs,
@@ -1190,11 +1193,10 @@ def collect_reset_evidence(
                         )
                         restore_runtime_snapshot(agent, post_audit_runtime)
                         assert_runtime_matches_snapshot(agent, post_audit_runtime)
-                    current_runtime = capture_runtime_snapshot(agent)
                     artifact.frozen_runtime_unchanged[branch_id, step] = bool(
                         typed_evidence_equal(
                             {
-                                name: current_runtime[name]
+                                name: getattr(agent, name)
                                 for name in frozen_runtime_keys
                             },
                             canonical_frozen_runtime,

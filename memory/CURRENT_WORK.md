@@ -45,6 +45,9 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
   83,600 steps). Active run `r27_g2_overnight_20260713_085445` uses commit
   `5595eee`: probe64 recorded `RESOURCE_CAPACITY`, probe32 passed, and the
   32-worker decision-grade collector started at 09:06 on cloud CUDA.
+- A next-run-only local performance patch leaves that active `5595eee` run
+  untouched. Exact S7-S1 20-step profiling improved from 3.638 s to 1.755 s by
+  scoping deterministic link/SINR reuse and removing unused audit snapshots.
 - Longer-term: reach HMASD-level S7-S1 behavior at ~1e6 steps before returning to
   S7-S3. Treat 160k/320k runs as mechanism gates, not HMASD-comparison verdicts.
 
@@ -97,6 +100,7 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
    shards finish, require the registered `validate-run` and regenerated
    aggregate before interpreting Gate A/B/C. Do not treat running/reset counts
    or the quarantined pilot as a scientific result.
+   Do not deploy the local performance patch into this frozen active checkout.
 2. Preserve the R27-G1 qualification: immediate action sensitivity verified;
    persistence and downstream effect open. Preserve the R26 FAIL narrowly.
 3. Optional cheap diagnostics may reuse existing R25 artifacts (correlate q_A

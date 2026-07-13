@@ -411,6 +411,14 @@ def test_completed_artifact_enforces_every_identity_equality(field_name, message
 def test_full_fake_reset_collection_executes_exact_matrix_without_rng_leak(
     monkeypatch, tmp_path
 ):
+    runtime_capture_count = 0
+    capture_runtime_snapshot = runtime.capture_runtime_snapshot
+
+    def counted_runtime_snapshot(agent):
+        nonlocal runtime_capture_count
+        runtime_capture_count += 1
+        return capture_runtime_snapshot(agent)
+
     monkeypatch.setattr(
         collector,
         "capture_global_rng_state",
@@ -419,6 +427,12 @@ def test_full_fake_reset_collection_executes_exact_matrix_without_rng_leak(
         ),
     )
     monkeypatch.setattr(collector, "validate_agent_source_contract", lambda _agent: None)
+    monkeypatch.setattr(
+        collector, "capture_runtime_snapshot", counted_runtime_snapshot
+    )
+    monkeypatch.setattr(
+        runtime, "capture_runtime_snapshot", counted_runtime_snapshot
+    )
     checkpoint = tmp_path / "fixture.pt"
     checkpoint.write_bytes(b"r27-g2-fixture")
     agent = FakeAgent()
@@ -454,3 +468,4 @@ def test_full_fake_reset_collection_executes_exact_matrix_without_rng_leak(
     assert result.artifact.identity_environment_equal[identity].all()
     assert float(result.artifact.reference_act_low_parity_abs_error.max()) <= 1e-6
     assert float(result.artifact.live_diagnostic_abs_error.max()) <= 1e-6
+    assert runtime_capture_count == 256

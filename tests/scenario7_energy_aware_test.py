@@ -3,6 +3,7 @@ import pytest
 import sys
 from types import SimpleNamespace
 from pathlib import Path
+from unittest.mock import Mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 pytest.importorskip("gymnasium")
@@ -10,6 +11,11 @@ pytest.importorskip("gymnasium")
 from config_1 import Config
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from ha_ctse_process.r27_g2_runtime import (
+    capture_environment_rng_state,
+    capture_structured_evidence,
+    rng_states_equal,
+)
 from train_multiproc_config_1 import validate_scenario7_configuration
 
 
@@ -277,6 +283,73 @@ def test_startup_validation_accepts_parallel_array_adapter():
         validate_scenario7_configuration(config, args, env=adapter)
     finally:
         adapter.close()
+
+
+def test_widest_path_capacity_cache_is_exactly_equivalent():
+    config_cached = Config("S7-S1")
+    config_cached.max_steps = 8
+    config_uncached = Config("S7-S1")
+    config_uncached.max_steps = 8
+    cached = ParallelToArrayAdapter(
+        UAVEnergyAwareRelayEnv(config=config_cached, seed=47), seed=47
+    )
+    uncached = ParallelToArrayAdapter(
+        UAVEnergyAwareRelayEnv(config=config_uncached, seed=47), seed=47
+    )
+    uncached.env._disable_routing_link_capacity_cache = True
+    uncached.env._disable_sinr_matrix_reuse = True
+    try:
+        cached_reset = cached.reset(seed=47)
+        uncached_reset = uncached.reset(seed=47)
+        assert capture_structured_evidence(cached_reset) == capture_structured_evidence(
+            uncached_reset
+        )
+        cached.env.uav_positions[0, 0] += 1.0
+        uncached.env.uav_positions[0, 0] += 1.0
+        assert cached.env._access_capacity_bps(
+            0, 0, cached.env.bandwidth, relaxed=True
+        ) == uncached.env._access_capacity_bps(
+            0, 0, uncached.env.bandwidth, relaxed=True
+        )
+        action_template = np.linspace(
+            -0.8, 0.8, num=int(np.prod(cached.action_space.shape)), dtype=np.float32
+        ).reshape(cached.action_space.shape)
+        cached.env._compute_link_sinr = Mock(wraps=cached.env._compute_link_sinr)
+        uncached.env._compute_link_sinr = Mock(wraps=uncached.env._compute_link_sinr)
+        cached.env._compute_uav_to_user_sinr = Mock(
+            wraps=cached.env._compute_uav_to_user_sinr
+        )
+        uncached.env._compute_uav_to_user_sinr = Mock(
+            wraps=uncached.env._compute_uav_to_user_sinr
+        )
+        for step in range(5):
+            actions = np.roll(action_template, step, axis=0)
+            cached_step = cached.step(actions)
+            uncached_step = uncached.step(actions)
+            assert capture_structured_evidence(
+                cached_step
+            ) == capture_structured_evidence(uncached_step)
+            np.testing.assert_array_equal(
+                cached.env._get_state(), uncached.env._get_state()
+            )
+            assert capture_structured_evidence(
+                cached.env.routing_paths
+            ) == capture_structured_evidence(uncached.env.routing_paths)
+            assert rng_states_equal(
+                capture_environment_rng_state(cached),
+                capture_environment_rng_state(uncached),
+            )
+        assert (
+            cached.env._compute_link_sinr.call_count
+            < uncached.env._compute_link_sinr.call_count
+        )
+        assert (
+            cached.env._compute_uav_to_user_sinr.call_count
+            < uncached.env._compute_uav_to_user_sinr.call_count
+        )
+    finally:
+        cached.close()
+        uncached.close()
 
 
 def test_constrained_safety_reward_metrics_are_exposed():

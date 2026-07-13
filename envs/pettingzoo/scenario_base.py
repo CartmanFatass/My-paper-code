@@ -4083,6 +4083,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         返回:
             capacity: 链路容量 (bps)，如果无法建立连接则返回0
         """
+        cache = getattr(self, "_routing_link_capacity_cache", None)
+        cache_key = (node1_type, int(node1_idx), node2_type, int(node2_idx))
+        if cache is not None and cache_key in cache:
+            return cache[cache_key]
+
         # 获取节点位置
         if node1_type == "uav":
             pos1 = self.uav_positions[node1_idx]
@@ -4126,7 +4131,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 检查SINR是否满足最小阈值
         if sinr_db < self.min_sinr:
-            return 0
+            capacity = 0
+            if cache is not None:
+                cache[cache_key] = capacity
+            return capacity
         
         # 确定用于计算容量的带宽
         if self.use_fdma:
@@ -4140,7 +4148,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 使用AMC模型计算容量
         spectral_efficiency = self._get_spectral_efficiency_from_sinr(sinr_db)
         capacity = link_bandwidth * spectral_efficiency
-        
+
+        if cache is not None:
+            cache[cache_key] = capacity
         return capacity
     
     def _compute_air_to_ground_path_loss(self, uav_pos, ground_pos):
@@ -4518,10 +4528,19 @@ class UAVForcedRelayEnv(ParallelEnv):
         为每一个UAV独立计算其到任何一个基站的最宽路径。
         """
         self.routing_paths = {}
-        for uav_idx in range(self.n_uavs):
-            path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
-            if path and capacity > 0 and len(path) - 1 <= self.max_hops:
-                self.routing_paths[uav_idx] = (path, capacity)
+        use_cache = not bool(
+            getattr(self, "_disable_routing_link_capacity_cache", False)
+        )
+        if use_cache:
+            self._routing_link_capacity_cache = {}
+        try:
+            for uav_idx in range(self.n_uavs):
+                path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
+                if path and capacity > 0 and len(path) - 1 <= self.max_hops:
+                    self.routing_paths[uav_idx] = (path, capacity)
+        finally:
+            if use_cache:
+                del self._routing_link_capacity_cache
 
     def _kmeans_clustering(self, data, n_clusters, max_iters=100, tol=1e-4):
         """

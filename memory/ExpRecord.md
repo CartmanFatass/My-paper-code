@@ -217,6 +217,14 @@ is running with 32 workers. No scientific result exists yet.
   check found no remaining local Python/HMASD/IMOD training or WSL experiment;
   no live experiment state existed to migrate or stop. Future compute-bearing
   HMASD work remains cloud CUDA by default.
+- Next-run performance engineering (2026-07-13; local-only, not deployed into
+  the active frozen checkout): a same-config S7-S1 20-step cProfile improved
+  from 3.638 s to 1.755 s (4,454,053 to 2,709,413 calls). Widest-path link
+  capacities are reused only inside one unchanged routing computation; the
+  Scenario-7 SINR matrix is reused only under exact geometry/availability
+  equality; unused non-reference audit runtime snapshots were removed. Exact
+  cached/uncached step outputs, state, routing, and RNG comparisons pass. This
+  changes no experiment result, threshold, seed, branch, reward, or model.
 - PASS branch: a Gate-B family pass supports persistent conditional control
   under forced hold only. B+C permits only separate design/review of a task-
   generic reward target and its own nulls; Gate C cannot become reward, and no

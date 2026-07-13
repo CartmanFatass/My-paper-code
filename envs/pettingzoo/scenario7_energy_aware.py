@@ -945,11 +945,25 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
     def _access_capacity_bps(self, uav_idx, user_idx, bandwidth_hz, relaxed):
         if self._is_uav_unavailable(uav_idx) or bandwidth_hz <= 0.0:
             return 0.0
-        uav_pos = self.uav_positions[uav_idx]
-        user_pos = self.user_positions[user_idx]
-        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos)
-        rx_power = self.tx_power - path_loss
-        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+        current_unavailable = np.asarray(
+            [self._is_uav_unavailable(index) for index in range(self.n_uavs)],
+            dtype=bool,
+        )
+        can_reuse_sinr = (
+            not bool(getattr(self, "_disable_sinr_matrix_reuse", False))
+            and hasattr(self, "_sinr_uav_positions")
+            and np.array_equal(self.uav_positions, self._sinr_uav_positions)
+            and np.array_equal(self.user_positions, self._sinr_user_positions)
+            and np.array_equal(current_unavailable, self._sinr_unavailable)
+        )
+        if can_reuse_sinr:
+            sinr_db = float(self.sinr_matrix[uav_idx, user_idx])
+        else:
+            uav_pos = self.uav_positions[uav_idx]
+            user_pos = self.user_positions[user_idx]
+            path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos)
+            rx_power = self.tx_power - path_loss
+            sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
         if not relaxed and sinr_db < self.min_sinr:
             return 0.0
         spectral_efficiency = self._spectral_efficiency(sinr_db, relaxed=relaxed)
@@ -2022,6 +2036,15 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             if np.dot(np.asarray(velocity, dtype=float), target_vector) >= 0.0:
                 return velocity
         return super()._apply_backhaul_action_guard(uav_idx, velocity)
+
+    def _update_channel_state(self):
+        super()._update_channel_state()
+        self._sinr_uav_positions = self.uav_positions.copy()
+        self._sinr_user_positions = self.user_positions.copy()
+        self._sinr_unavailable = np.asarray(
+            [self._is_uav_unavailable(index) for index in range(self.n_uavs)],
+            dtype=bool,
+        )
 
     def _compute_sinr(self, uav_idx, user_idx):
         if self._is_uav_unavailable(uav_idx):

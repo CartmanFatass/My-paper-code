@@ -147,6 +147,14 @@ separately authorized eight-reset wiring pilot is under 90,000 environment
 steps and cannot contribute outcomes to the final gate. CUDA is mandatory and
 there is no CPU fallback.
 
+Performance boundary (2026-07-13): next-run code may reuse deterministic link
+capacities only within one unchanged widest-path computation and may reuse the
+stored SINR matrix only when UAV positions, user positions, and availability
+are exactly unchanged. The active `5595eee` decision run remains untouched.
+The local S7-S1 20-step profile improved from 3.638 s to 1.755 s with exact
+cached-versus-uncached outputs and RNG state verified. This is execution
+engineering only; it does not alter the registered branch matrix or gates.
+
 Authorization boundary: R27-G2 code, analyzer, cloud runner/Git workflow, and
 focused verification are complete. The 2026-07-13 overnight authorization is
 limited to: probe 8 workers; run the final-checkpoint eight-reset quarantined
