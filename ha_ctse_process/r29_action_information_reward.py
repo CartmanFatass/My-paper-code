@@ -42,6 +42,7 @@ def empty_r29_action_information_metrics(mode: str = "probe_only") -> dict[str, 
         "r29_action_info_reward_applied_steps": 0.0,
         "r29_action_info_reward_env_ratio": 0.0,
         "r29_action_info_likelihood_max_abs_error": 0.0,
+        "r29_action_info_recurrent_source_max_abs_error": 0.0,
         "r29_action_info_symmetric_kl_mean": 0.0,
         "r29_action_info_symmetric_kl_mean_component": 0.0,
         "r29_action_info_symmetric_kl_variance_component": 0.0,
@@ -166,7 +167,7 @@ class OnPolicyActionInformationReward:
         actions: np.ndarray,
         old_logp: np.ndarray,
         team_codes: np.ndarray,
-    ) -> tuple[np.ndarray, float, float, float, int]:
+    ) -> tuple[np.ndarray, float, float, float, float, int]:
         device = self.actor.device
         batch_size = len(segments)
         num_skills = int(self.actor.n_skills)
@@ -197,6 +198,7 @@ class OnPolicyActionInformationReward:
             batch_size, num_skills, dtype=torch.float32, device=device
         )
         likelihood_max_error = 0.0
+        recurrent_source_max_error = 0.0
         kl_mean_sum = torch.zeros((), dtype=torch.float64, device=device)
         kl_variance_sum = torch.zeros((), dtype=torch.float64, device=device)
         kl_pair_rows = 0
@@ -247,6 +249,35 @@ class OnPolicyActionInformationReward:
                     step_actions,
                     actual_skills,
                 )
+                source_hidden = torch.as_tensor(
+                    hidden[step_indices, agent_ids],
+                    dtype=torch.float32,
+                    device=device,
+                )
+                source_features = self.actor._actor_features(
+                    step_observations,
+                    actual_skills,
+                    step_team_codes,
+                )
+                source_post_gru, _ = self.actor.actor_rnn(
+                    source_features,
+                    source_hidden,
+                    torch.ones(batch_size, 1, dtype=torch.float32, device=device),
+                )
+                source_distribution = action_out._distribution(source_post_gru)
+                anchored_means = means.clone()
+                anchored_log_stds = log_stds.clone()
+                batch_indices = torch.arange(batch_size, device=device)
+                anchored_means[batch_indices, actual_skills] = source_distribution.mean
+                anchored_log_stds[batch_indices, actual_skills] = torch.log(
+                    source_distribution.stddev
+                )
+                anchored_evaluation = evaluate_executed_action_information(
+                    anchored_means,
+                    anchored_log_stds,
+                    step_actions,
+                    actual_skills,
+                )
                 stored_logp = torch.as_tensor(
                     old_logp[step_indices, agent_ids],
                     dtype=torch.float32,
@@ -254,14 +285,24 @@ class OnPolicyActionInformationReward:
                 )
                 step_error = float(
                     torch.max(
-                        torch.abs(evaluation.squashed_actual_log_prob - stored_logp)
+                        torch.abs(
+                            anchored_evaluation.squashed_actual_log_prob - stored_logp
+                        )
                     ).item()
                 )
                 likelihood_max_error = max(likelihood_max_error, step_error)
+                recurrent_step_error = float(
+                    torch.max(
+                        torch.abs(evaluation.squashed_actual_log_prob - stored_logp)
+                    ).item()
+                )
+                recurrent_source_max_error = max(
+                    recurrent_source_max_error, recurrent_step_error
+                )
                 if offset >= segment_length - self.terminal_window:
-                    block_log_likelihood += evaluation.candidate_raw_log_prob
+                    block_log_likelihood += anchored_evaluation.candidate_raw_log_prob
                     mean_sum, variance_sum, pair_rows = self._symmetric_kl_components(
-                        means, log_stds
+                        anchored_means, anchored_log_stds
                     )
                     kl_mean_sum += mean_sum
                     kl_variance_sum += variance_sum
@@ -280,6 +321,7 @@ class OnPolicyActionInformationReward:
         return (
             raw.detach().cpu().numpy().astype(np.float64),
             likelihood_max_error,
+            recurrent_source_max_error,
             float(kl_mean_sum.item()),
             float(kl_variance_sum.item()),
             kl_pair_rows,
@@ -346,13 +388,21 @@ class OnPolicyActionInformationReward:
         skill_parts: list[np.ndarray] = []
         terminal_targets: list[tuple[int, int]] = []
         likelihood_max_error = 0.0
+        recurrent_source_max_error = 0.0
         kl_mean_sum = 0.0
         kl_variance_sum = 0.0
         kl_pair_rows = 0
         replay_rows = 0
         for length in sorted(by_length):
             bucket = by_length[length]
-            raw, error, mean_sum, variance_sum, pair_rows = self._score_length_bucket(
+            (
+                raw,
+                error,
+                recurrent_error,
+                mean_sum,
+                variance_sum,
+                pair_rows,
+            ) = self._score_length_bucket(
                 bucket,
                 observations=observations_np,
                 hidden=hidden_np,
@@ -369,6 +419,9 @@ class OnPolicyActionInformationReward:
                 for segment in bucket
             )
             likelihood_max_error = max(likelihood_max_error, error)
+            recurrent_source_max_error = max(
+                recurrent_source_max_error, recurrent_error
+            )
             kl_mean_sum += mean_sum
             kl_variance_sum += variance_sum
             kl_pair_rows += pair_rows
@@ -424,6 +477,9 @@ class OnPolicyActionInformationReward:
                     full_rollout_intrinsic_abs_mean / max(env_abs_mean, 1e-8)
                 ),
                 "r29_action_info_likelihood_max_abs_error": likelihood_max_error,
+                "r29_action_info_recurrent_source_max_abs_error": (
+                    recurrent_source_max_error
+                ),
                 "r29_action_info_symmetric_kl_mean": mean_kl + variance_kl,
                 "r29_action_info_symmetric_kl_mean_component": mean_kl,
                 "r29_action_info_symmetric_kl_variance_component": variance_kl,

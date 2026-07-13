@@ -49,7 +49,9 @@ Current boundary:
    lifetime, the collection actor is replayed from the stored pre-step hidden
    state under each fixed candidate skill. The uniform density ratio uses the
    final 10 action likelihoods, then adds one detached clipped reward at the
-   lifetime endpoint. Length-batched replay keeps this tractable on GPU.
+   lifetime endpoint. Length-batched replay keeps this tractable on GPU; the
+   actual-skill column is anchored to each stored pre-step hidden forward to
+   preserve exact PPO likelihood while cross-skill columns follow full replay.
 3. Run the authorized single-seed `probe_only` versus `real_reward` pair at
    +320K steps per arm. The run itself is the implementation check; after final
    R26/task evidence, prepare the raw result package for GPT-5.6 Pro.

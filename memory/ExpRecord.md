@@ -66,6 +66,10 @@ explicitly approves the exception.
   `>=0.05` with a positive paired-update bootstrap lower bound and no negative
   per-skill mean difference. R26 transfer requires real PASS while probe is not
   PASS and a `>=0.05` real-minus-probe full-minus-prior accuracy gain.
+- Operational note: the first launch failed before any optimizer update because
+  length-batched GRU replay accumulated `2.6e-3` numerical drift on the natural
+  candidate. The repaired scorer anchors that column to the exact stored-hidden
+  actor forward, keeps the `2e-5` gate, and reports unanchored drift separately.
 - Safety: real normalized skill entropy `>=0.8`, full-rollout intrinsic/env
   mean-absolute ratio `<=0.05`, deterministic task reward degradation `<=10%`
   relative to probe, and zero-throughput step-fraction worsening `<=0.10`.

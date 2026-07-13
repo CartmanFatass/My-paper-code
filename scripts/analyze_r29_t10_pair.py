@@ -169,6 +169,14 @@ def main() -> None:
             "max_likelihood_error": float(
                 np.nanmax(metric(all_rows, "r29_action_info_likelihood_max_abs_error"))
             ),
+            "max_recurrent_source_error": float(
+                np.nanmax(
+                    metric(
+                        all_rows,
+                        "r29_action_info_recurrent_source_max_abs_error",
+                    )
+                )
+            ),
             "total_complete_segments": float(
                 np.nansum(metric(all_rows, "r29_action_info_segments"))
             ),
@@ -316,6 +324,9 @@ The machine summary classified the pair as **{status}**. Important numbers:
 - likelihood parity maximum probe/real
   `{training_summary['probe_only']['max_likelihood_error']:.3e}` /
   `{training_summary['real_reward']['max_likelihood_error']:.3e}`;
+- unanchored recurrent-source numerical drift maximum probe/real
+  `{training_summary['probe_only']['max_recurrent_source_error']:.3e}` /
+  `{training_summary['real_reward']['max_recurrent_source_error']:.3e}`;
 - late symmetric KL mean/variance components in the real arm
   `{training_summary['real_reward']['late_symmetric_kl_mean_component']:.6f}` /
   `{training_summary['real_reward']['late_symmetric_kl_variance_component']:.6f}`.

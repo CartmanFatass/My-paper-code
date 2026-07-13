@@ -29,6 +29,11 @@ Modified:
   rollout row is complete even when the segment manager labels the flush
   `update`; shorter update flushes, episode endings, and early renewals remain
   excluded;
+- the actual-skill candidate is anchored to the actor forward from each stored
+  pre-step hidden state. This is the exact natural recurrent path and preserves
+  `2e-5` PPO likelihood parity; the unanchored length-batched replay drift is
+  retained as a separate numerical diagnostic. Other candidate skills remain
+  fixed through the full counterfactual recurrent replay;
 - the user authorized an initial local paired test at 320K additional steps per
   arm. This is single-seed preliminary evidence, not the review's full
   three-seed family conclusion. Remaining seeds are promoted only if the pair

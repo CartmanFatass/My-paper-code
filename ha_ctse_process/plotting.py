@@ -232,6 +232,7 @@ R29_ACTION_INFO_METRIC_FIELDS = (
     "r29_action_info_reward_applied_steps",
     "r29_action_info_reward_env_ratio",
     "r29_action_info_likelihood_max_abs_error",
+    "r29_action_info_recurrent_source_max_abs_error",
     "r29_action_info_symmetric_kl_mean",
     "r29_action_info_symmetric_kl_mean_component",
     "r29_action_info_symmetric_kl_variance_component",
