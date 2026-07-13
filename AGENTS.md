@@ -196,6 +196,10 @@ pointer, not evidence. Read the raw text and disposition the advice
 (accept/reject/modify/defer). If raw text is missing, mark the evidence
 incomplete. Record source model, date, related claim, and disposition.
 
+GPT-5.6 Pro / ChatGPT web exchange is manual. Codex prepares the local question
+and upload package but does not automate the ChatGPT website. The user uploads
+the files and returns the raw response for archival and disposition.
+
 ## Memory Shape
 
 Keep root `memory/` compact and current — `CURRENT_WORK.md` (controller,
