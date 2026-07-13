@@ -35,19 +35,11 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 - **R26-G1a** remains a valid negative for its tested observational windows, but
   after R27 it can no longer be read as "the actor lacks immediate `z_i`
   capacity".
-- **R27-G2** (forced-`z_i` trajectory/effect intervention) is design-frozen,
-  implemented, and locally verified. The active remote workflow now uses a
-  clean Git checkout rather than a deployed ZIP. On 2026-07-13 the user
-  explicitly authorized direct overnight execution and automatic handoff:
-  bounded topology probe -> quarantined wiring pilot -> conditional
-  decision-grade launch, with fail-closed branches and no serial fallback.
-  Pilot `r27_g2_overnight_20260713_031548` completed `WIRING_PASS` (8/8,
-  83,600 steps). Active run `r27_g2_overnight_20260713_085445` uses commit
-  `5595eee`: probe64 recorded `RESOURCE_CAPACITY`, probe32 passed, and the
-  32-worker decision-grade collector started at 09:06 on cloud CUDA.
-- A next-run-only local performance patch leaves that active `5595eee` run
-  untouched. Exact S7-S1 20-step profiling improved from 3.638 s to 1.755 s by
-  scoping deterministic link/SINR reuse and removing unused audit snapshots.
+- **R27-G2** is design-frozen, implemented, and locally verified. At user
+  request, run `085445`/`5595eee` stopped at 09:51 with 11 partial shards and
+  is excluded. Active run `095408` uses optimized commit `6c06cde`: probe8
+  passed 8/8 and the fresh wiring pilot began at 09:59 on cloud CUDA. It keeps
+  the exact registered matrix/gates and has no serial or CPU fallback.
 - Longer-term: reach HMASD-level S7-S1 behavior at ~1e6 steps before returning to
   S7-S3. Treat 160k/320k runs as mechanism gates, not HMASD-comparison verdicts.
 
@@ -68,23 +60,20 @@ facts live in `memory/ExpRecord.md`. Keep this file under ~150 lines.
 
 ## Current Experiment Focus
 
-`EXP-20260712-r27-g2-forced-z-trajectory-effect` — **decision grade running**.
+`EXP-20260712-r27-g2-forced-z-trajectory-effect` — **wiring pilot running**.
 
 - 55 branches per reset, 64 reset groups, 3 frozen temporal checkpoints.
-- Decision-grade Stage 1 is exactly **2,124,000 env steps** before diagnostic
-  overhead. The selected validated topology is 32 workers with a conservative
-  **24–40 h cloud-CUDA** estimate.
+- Decision-grade Stage 1 remains exactly **2,124,000 env steps** before
+  diagnostic overhead. Topology is not yet selected; retain 12–20 h at 64
+  workers or 24–40 h at the permitted 32-worker capacity fallback.
 - The primary control is **hold vs a matched 10-step pulse**, not raw closed-loop
   divergence. Gated windows are steps 1-10, 11-20, 31-40 (native R25 durations
   are 10/20/30/40). H50 is descriptive stress, not native-duration evidence.
 - Targeted local verification is complete; the remote-workflow subset passes
   10/10, including Windows PowerShell 5.1 native-argument transport into Bash.
-- The clean data-disk checkout is at `5595eee`; all three checkpoints are
-  cached. Active root:
-  `/root/autodl-tmp/HMASD/r27_g2_remote/runs/r27_g2_overnight_20260713_085445`.
-  The original pilot artifacts were copied, natively revalidated, and skipped;
-  they remain quarantined and are not scientific gate evidence. Probe64 OOM is
-  capacity evidence; probe32 passed and decision collection is live.
+- The clean data-disk checkout is at `6c06cde`; all checkpoints are cached.
+  Active root is `.../r27_g2_overnight_20260713_095408`. Probe8 passed; the
+  fresh pilot is quarantined and cannot become scientific gate evidence.
 - User execution policy (2026-07-13): compute-bearing experiments default to
   parallel cloud CUDA. R27-G2 targeted 64 reset workers, then selected the
   registered 32-worker capacity fallback. Serial launch/fallback remains
@@ -96,11 +85,10 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Monitor the active 32-worker decision-grade collector. After all 192 reset
-   shards finish, require the registered `validate-run` and regenerated
-   aggregate before interpreting Gate A/B/C. Do not treat running/reset counts
-   or the quarantined pilot as a scientific result.
-   Do not deploy the local performance patch into this frozen active checkout.
+1. Monitor the active fresh pilot, then the guarded 64/32 topology branch and
+   decision collector. Only after 192 new shards, `validate-run`, and the
+   regenerated aggregate may Gate A/B/C be interpreted. Never mix the 11 old
+   partial shards or quarantined pilot into the scientific result.
 2. Preserve the R27-G1 qualification: immediate action sensitivity verified;
    persistence and downstream effect open. Preserve the R26 FAIL narrowly.
 3. Optional cheap diagnostics may reuse existing R25 artifacts (correlate q_A

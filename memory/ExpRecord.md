@@ -37,7 +37,7 @@ experiment brief.
 
 | ID | Status | Stage | Location | Owner Agent | Next Read | Key Logs / Package | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260712-r27-g2-forced-z-trajectory-effect | running — pilot `WIRING_PASS`; probe64 `RESOURCE_CAPACITY`; probe32 PASS; 32-worker decision grade active since 2026-07-13 09:06 +08:00; no scientific result yet | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | RTX 4090 CUDA; commit `5595eee`; `r27_g2_overnight_20260713_085445/runs/decision_grade` | Controller | wait for 192 shards, `validate-run`, and regenerated aggregate | active `current_overnight.env`; phase status/logs; frozen design and raw review | Pilot 8/8 and 83,600 steps is quarantined. A classifier repair correctly treated CUDA OOM plus BrokenBarrier cascade as capacity; probe32 passed. Decision grade is 2,124,000 steps, expected 24-40h. No serial fallback. |
+| EXP-20260712-r27-g2-forced-z-trajectory-effect | running — optimized restart probe8 PASS; fresh wiring pilot active since 2026-07-13 09:59 +08:00; no scientific result yet | R27-G2 reward-off forced-`z_i` trajectory/effect intervention | RTX 4090 CUDA; commit `6c06cde`; `r27_g2_overnight_20260713_095408/runs/pilot` | Controller | wait for fresh pilot, guarded topology selection, 192 new shards, `validate-run`, and aggregate | active `current_overnight.env`; phase status/logs; frozen design and raw review | Prior `085445`/`5595eee` run stopped by user with 11 partial shards and is excluded. New run keeps exact gates; probe8 passed 8/8. No serial/CPU fallback. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — downloaded archive verified and controller disposition accepted 2026-07-12 | R27-G1 reward-off low-actor capacity autopsy | cloud CUDA, 64 parallel subprocess envs, exactly 64 total reset groups, exact R25 arm0 update25/update30/final checkpoints; run `logs/r27_g1_capacity_autopsy_cloud64_20260712_151313/` | Controller disposition complete | no rerun; standing evidence for R27-G2 only | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; `logs/r27_g1_result_read_20260712/reports/expmanager_intake.md`; `r27_capacity_autopsy.{json,md}` under the extracted run root | Controller accepts `STATIC_USED_OBSERVATIONAL_MISS`, narrowly immediate `z_i`-conditioned action-distribution sensitivity. Static and synthetic families PASS 3/3 with artifact identity PASS. Persistence, downstream effect, reward usefulness, and task improvement remain unverified. |
 | EXP-20260711-r26-g1a-individual-skill-screening | completed — six arms succeeded and controller result boundary accepted 2026-07-12 | R26-G1a reward-off screening | local CUDA (RTX 4070 Laptop 8 GB), six frozen R25 checkpoints | Controller disposition complete | no rerun; preserve as natural observational negative beside R27 forced-capacity evidence | `logs/r26_g1a_screening_20260711_105522/`; six per-arm `analysis/r26_g1_behavior.{json,md}` artifacts | Batch succeeded 6/6; all analyzers valid and adequately powered. arm0 final is FAIL, update25/update30 are MIXED, so no arm0 checkpoint passes and the primary arm0 family is FAIL. All arm2 checkpoints are MIXED and contextual only. Reward remains off. |
 | EXP-20260710-r25-qa-verification-1m | completed / read + dispositioned 2026-07-10; arm0/arm2 archives now standing-reference (DO NOT RE-RUN — user directive 2026-07-10) | R25 verification tier | cloud CUDA / 64env / 1M steps / two arms (arm0 control, arm2 q_A) | ExpManager + ResultAnalyst + marl-peer-reviewer | all variants read; cross-seed single-seed gate analysis complete | `dist/logs_cloud_r25_qa_verification_1m/` (cloud archive); `gate_read_r25_seed1.md` (result analyst read); peer review Round 6 archived in `memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md` | arm0 arch-only beats arm2 q_A at 640k-960k (coverage 0.235→0.417 vs 0.052→0.113; throughput 13.76 vs 2.81 Mbps @960k); neither reaches HMASD milestones (0.7@480k, 0.9@800k); q_A reward demoted to default-off by Round 6 peer review (NOT VERIFIED at 1M verification gate under n=1 single-seed setup); parity OPEN (update-count confound: 32 updates vs HMASD ~2×/step). |
@@ -56,10 +56,9 @@ experiment brief.
 
 Factual record for the controller-frozen R27-G2 design. Implementation and
 focused verification are complete. Active root:
-`/root/autodl-tmp/HMASD/r27_g2_remote/runs/r27_g2_overnight_20260713_085445`.
-The quarantined pilot completed `WIRING_PASS`; probe64 reached a corrected
-`RESOURCE_CAPACITY` disposition, probe32 passed, and decision-grade collection
-is running with 32 workers. No scientific result exists yet.
+`/root/autodl-tmp/HMASD/r27_g2_remote/runs/r27_g2_overnight_20260713_095408`.
+It uses commit `6c06cde`; probe8 passed 8/8 and the fresh wiring pilot is
+running. No scientific result exists yet.
 
 - Overnight execution authorization (2026-07-13 user decision): attempt the
   server directly without a pre-wake confirmation. Run a bounded 8-worker CUDA
@@ -82,7 +81,7 @@ is running with 32 workers. No scientific result exists yet.
   native readers and expected inventory. This policy change launched no
   experiment and changes no statistical threshold.
 
-- Status: `decision-grade collection running`; design disposition
+- Status: `fresh optimized wiring pilot running`; design disposition
   `ACCEPTED_WITH_MODIFICATIONS_AS_DESIGN_ONLY`. Scientific state remains
   `NOT_EVALUATED` until all 192 shards and the final aggregate validate.
 - Hypothesis: when one focal agent's label is held through the live recurrent
@@ -217,14 +216,19 @@ is running with 32 workers. No scientific result exists yet.
   check found no remaining local Python/HMASD/IMOD training or WSL experiment;
   no live experiment state existed to migrate or stop. Future compute-bearing
   HMASD work remains cloud CUDA by default.
-- Next-run performance engineering (2026-07-13; local-only, not deployed into
-  the active frozen checkout): a same-config S7-S1 20-step cProfile improved
-  from 3.638 s to 1.755 s (4,454,053 to 2,709,413 calls). Widest-path link
+- Performance engineering (2026-07-13; deployed only through a fresh isolated
+  `6c06cde` run): a same-config S7-S1 20-step cProfile improved from 3.638 s to
+  1.755 s (4,454,053 to 2,709,413 calls). Widest-path link
   capacities are reused only inside one unchanged routing computation; the
   Scenario-7 SINR matrix is reused only under exact geometry/availability
   equality; unused non-reference audit runtime snapshots were removed. Exact
   cached/uncached step outputs, state, routing, and RNG comparisons pass. This
   changes no experiment result, threshold, seed, branch, reward, or model.
+- Restart fact (2026-07-13 user decision): run `085445` received TERM at 09:51,
+  stopped cleanly with no remaining collector/GPU process, and retained 11
+  manifests/artifacts under its old root. They are operational remnants only
+  and must not enter analysis. The server clean checkout fast-forwarded to
+  `6c06cde`; new run `095408` passed probe8 8/8 and entered a fresh pilot.
 - PASS branch: a Gate-B family pass supports persistent conditional control
   under forced hold only. B+C permits only separate design/review of a task-
   generic reward target and its own nulls; Gate C cannot become reward, and no
