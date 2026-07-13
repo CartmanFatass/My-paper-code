@@ -66,6 +66,9 @@ on-policy state visitation
 2. Collect final task/R26 evidence and prepare the raw result/question ZIP for
    manual GPT-5.6 Pro review before choosing the next research route.
 
+Active run: `logs/r29_t10_paired_320k_20260714_004754`; the background runner
+owns paired training, R26 collection/analysis, result synthesis, and review ZIP.
+
 ## Immediate Constraints
 
 - Do not refit, retune, or sweep the frozen R28-G0 scorer.
