@@ -43,11 +43,13 @@ Completed boundary:
 Next stage order:
 
 1. Retire the forced-deterministic scorer family from online reward use.
-2. Isolate the support-native signal already present in R26's natural on-policy
-   data: action-distribution evidence versus downstream-effect evidence, each
-   against matched context and pre-window nulls.
-3. Only a passed reward-off observational target may authorize a new stage-3
-   reward design; otherwise stop this individual-skill target family.
+2. Evaluate a uniform-prior counterfactual action-information density ratio on
+   R27's natural on-policy observation/rollout-hidden snapshots. Compare the
+   true source-skill likelihood with a cyclic-label sham and an inactive-FiLM
+   identity control using common action noise.
+3. Only a passed three-checkpoint reward-off target may authorize a bounded PPO
+   integration smoke design; otherwise stop this individual-skill target
+   family.
 
 Core MARL impact: none from the completed diagnostics or review. Reward,
 actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics, environment

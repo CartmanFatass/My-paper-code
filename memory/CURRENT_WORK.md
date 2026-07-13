@@ -50,13 +50,18 @@ on-policy state visitation
   execution alone reproduces the action-std domain shift.
 - The forced-deterministic R28-G0 scorer family is retired from online reward
   use. It must not be refit, widened, or carried into another reward package.
+- R29-G0 now tests a support-native alternative: on natural on-policy states
+  and rollout hidden states, score each sampled action by its current-skill
+  likelihood against the uniform mixture of all four counterfactual skill
+  policies. The tanh Jacobian cancels in this same-action density ratio.
 
 ## Next Actions
 
-1. Decompose the accepted R26 natural negative into action-distribution versus
-   downstream-effect evidence on actual on-policy states.
-2. Select one support-native reward-off target only if it beats matched context
-   and pre-window nulls; otherwise retire this individual-skill target family.
+1. Run the registered R29-G0 reward-off target gate over R25 arm0 update25,
+   update30, and final snapshots in parallel on the local GPU (expected 2-5
+   minutes; zero environment steps and zero updates).
+2. A family PASS authorizes only a bounded PPO integration smoke design; a FAIL
+   retires this individual action-information target.
 
 ## Immediate Constraints
 

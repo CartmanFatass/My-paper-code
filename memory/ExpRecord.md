@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260713-r29-g0-counterfactual-action-information | launch-ready | hierarchy-L1 reward-off target gate | local CUDA; no run root yet | three-checkpoint family aggregate | R27 natural snapshots provide actual on-policy observation/rollout-hidden support; target and null implementation tests pass | Run the fixed parallel gate. PASS permits only a bounded PPO integration smoke design; FAIL retires this target family. |
 | EXP-20260713-r28-forced-execution-support-transport | completed — `FAIL_STOCHASTIC_SUPPORT_TRANSPORT` | reward-off matched-domain causal diagnostic | local CUDA; `logs/r28_support_transport_20260713_222807` | none | 1,024 paired rows/mode; deterministic OOD `0.068359`, stochastic OOD `0.823242`; 64 rows/cell | Random action execution alone breaks frozen support. Retire the forced-deterministic scorer family from online reward use. |
 | EXP-20260713-r28-g1-causal-skill-forcing-reward | blocked — `BLOCKED_SUPPORT_OOD`; formal experiment not run | prelaunch engineering for promotion stage 3; planned formal comparator was baseline hierarchy L2 | local smokes `logs/r28_g1_engineering_smoke_20260713_212008` and `logs/r28_g1_engineering_smoke_20260713_213746`; no formal run root | none; cross-round failure review complete | same-config one-update OOD `0.950617`/`0.9375`; support kill in both; zero R28 reward applied; no mapping defect found | Retire the frozen G1 launch package. Do not refit/relax/repeat or infer reward efficacy; next action is a reward-off matched-domain transport diagnostic. |
 | EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
@@ -38,6 +39,34 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260713-r29-g0-counterfactual-action-information
+
+- Hypothesis/edge: on natural on-policy observation and rollout-hidden states,
+  the skill-conditioned low actor carries a support-native action signal:
+  `z_i -> sampled action likelihood relative to the uniform counterfactual-skill
+  mixture`. The density ratio uses the same raw action under all candidates, so
+  the tanh Jacobian cancels.
+- Comparator/baseline: hierarchy-L1 reward-off diagnostic. Active source-skill
+  likelihood is paired with a cyclic-label sham and inactive-FiLM identity
+  control under identical states and Gaussian noise.
+- Sources/exposure: fixed R25 arm0 update25/update30/final checkpoints and their
+  64-reset R27 natural snapshots; 8 Monte Carlo samples per row/skill, seed
+  `29001`; reset bootstrap 2,000 reps, seed `29002`; local CUDA with three
+  checkpoint workers, expected 2-5 minutes; zero environment steps, optimizer
+  updates, and reward-applied steps.
+- Checkpoint gate: at least 5,000 rows and 48 resets; natural-label normalized
+  entropy `>=0.8`; active mean `>=0.01` nats; every skill mean `>=0.005` nats;
+  active-minus-sham reset-bootstrap lower bound `>0`; inactive maximum absolute
+  reward `<=1e-6`. Family PASS requires final PASS and at least 2/3 checkpoints.
+- Branches: PASS -> design one bounded PPO integration smoke; FAIL -> retire the
+  individual action-information target; INVALID -> repair evidence code only;
+  UNDERPOWERED -> add snapshot support under the unchanged contract only.
+- Fixed while open: source checkpoints/snapshots, rollout hidden state, uniform
+  four-skill mixture, cyclic sham, inactive control, common noise, seeds,
+  thresholds, zero reward, and zero updates.
+- Runner: `scripts/run_r29_action_information_local.ps1`; status source is this
+  dashboard until the timestamped aggregate exists.
 
 ### EXP-20260713-r28-forced-execution-support-transport
 
