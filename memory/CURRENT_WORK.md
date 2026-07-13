@@ -34,11 +34,13 @@ differentiated skills`.
 
 ## Next Actions
 
-1. Attempt scoped SSH directly and retrieve the frozen scorer
-   `logs/r28_g0_action_process_target_20260713_175600/r28_g0_scorer_final.pt`.
-   If the connection fails, ask the user to wake the server; never infer live
-   availability or GPU occupancy from a cached snapshot.
-2. Run one direct local `real_reward` smoke through the existing CLI: seed
+1. Resolve the local artifact prerequisite: the frozen scorer
+   `logs/r28_g0_action_process_target_20260713_175600/r28_g0_scorer_final.pt`
+   is currently absent from the workstation. Report the missing file and stop;
+   retrieve it from the server only when the user explicitly requests that
+   one-time transfer. This is not part of the smoke.
+2. Once the scorer is local, run one direct local `real_reward` smoke through
+   the existing CLI: seed
    28030, CUDA, one sync environment, rollout 500, +500 environment steps, one
    PPO update, low PPO epochs 1, no evaluation; expected wall clock 2-5 minutes.
 3. Read the existing manifest, update CSV, and final checkpoint once; report

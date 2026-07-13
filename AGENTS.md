@@ -39,7 +39,9 @@ move to a heavier lane only when the next action actually requires it:
    (CUDA when it updates a model), read the existing manifest/metrics/checkpoint
    once, report engineering PASS/FAIL, and stop. It needs no ExpRecord
    transition, scheduler entry, custom runner, duplicate status file, or
-   standalone validator.
+   standalone validator. A missing frozen input is a separate artifact
+   prerequisite: report it and stop rather than silently turning the local
+   smoke into an SSH or remote-compute workflow.
 3. **Formal experiment:** use the research contract and the hard gates below.
    Long, multi-seed, or conclusion-bearing compute belongs here.
 4. **Status/result read:** inspect existing artifacts and answer directly. Do
