@@ -22,11 +22,12 @@ and history live in their owning files.
 
 ## Current Objective
 
-Resolve the transport sub-edge needed before natural skill reward:
+Find an individual-skill target that is defined inside the natural on-policy
+trajectory domain:
 
 ```text
-R27-proven forced skill regime
--> support-compatible action process under on-policy state visitation
+on-policy state visitation
+-> support-compatible, non-shortcut individual differentiation signal
 ```
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
@@ -43,18 +44,19 @@ R27-proven forced skill regime
 - The frozen G1 launch package is therefore `BLOCKED_SUPPORT_OOD`; the completed
   cross-round review is
   `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
-- The new paired transport implementation passed its local reset-0 smoke:
-  deterministic OOD `0.0625` versus stochastic OOD `1.0` on 16 paired windows.
-  This is engineering evidence; the 64-reset decision read is the next compute.
+- The 64-reset paired transport diagnostic returned
+  `FAIL_STOCHASTIC_SUPPORT_TRANSPORT`: deterministic OOD `0.068359` versus
+  stochastic OOD `0.823242` across 1,024 paired windows per mode. Random action
+  execution alone reproduces the action-std domain shift.
+- The forced-deterministic R28-G0 scorer family is retired from online reward
+  use. It must not be refit, widened, or carried into another reward package.
 
 ## Next Actions
 
-1. Run the registered 64-reset paired transport diagnostic on the local CUDA
-   GPU with four reset workers (111,100 environment steps, zero updates/reward,
-   expected 15-30 minutes).
-2. If stochastic transport passes, compare forced hold with natural renewal
-   under matched stochastic execution. If it fails, retire this forced-domain
-   scorer family from online reward use.
+1. Decompose the accepted R26 natural negative into action-distribution versus
+   downstream-effect evidence on actual on-policy states.
+2. Select one support-native reward-off target only if it beats matched context
+   and pre-window nulls; otherwise retire this individual-skill target family.
 
 ## Immediate Constraints
 

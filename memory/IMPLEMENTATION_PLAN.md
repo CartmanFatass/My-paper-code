@@ -4,13 +4,13 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Post-R28 Natural-Expression Transport Gate
+## Post-R28 On-Policy Target Gate
 
-Active transport edge:
+Active causal edge:
 
 ```text
-R27-proven forced skill regime
--> support-compatible action process under on-policy state visitation
+on-policy state visitation
+-> support-compatible, non-shortcut individual differentiation signal
 ```
 
 The R28-G1 frozen reward design remains evidence, but its launch package is
@@ -36,16 +36,18 @@ Completed boundary:
   changed;
 - reset-0 local CUDA smoke: 16 paired windows, deterministic OOD `0.0625`,
   stochastic OOD `1.0`, with the same temporal-standard-deviation shift.
+- 64-reset decision: `FAIL_STOCHASTIC_SUPPORT_TRANSPORT`; deterministic OOD
+  `0.068359`, stochastic OOD `0.823242`, and 64 rows in every label-duration
+  cell. Random action execution is sufficient to break the frozen support.
 
 Next stage order:
 
-1. Execute the 64-reset paired diagnostic through the four-worker local CUDA
-   runner; reuse the frozen scorer only as a diagnostic ruler.
-2. If stochastic forced trajectories remain supported, isolate forced hold
-   versus natural assignment/renewal under identical stochastic execution.
-3. Only a passed transport/activation edge may authorize design of a new
-   stage-3 reward test. A transport failure instead returns to observational
-   target design without changing the actor.
+1. Retire the forced-deterministic scorer family from online reward use.
+2. Isolate the support-native signal already present in R26's natural on-policy
+   data: action-distribution evidence versus downstream-effect evidence, each
+   against matched context and pre-window nulls.
+3. Only a passed reward-off observational target may authorize a new stage-3
+   reward design; otherwise stop this individual-skill target family.
 
 Core MARL impact: none from the completed diagnostics or review. Reward,
 actor/critic/FiLM/GRU, optimizer/loss/GAE/PPO, collector semantics, environment

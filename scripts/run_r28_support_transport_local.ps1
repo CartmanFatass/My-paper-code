@@ -63,10 +63,14 @@ function Receive-Finished([switch]$WaitForOne) {
         }
     } while ($finished.Count -eq 0 -and $WaitForOne)
     foreach ($job in $finished) {
-        if ($job.Process.ExitCode -ne 0) {
-            $failed.Add("reset=$($job.ResetId) exit=$($job.Process.ExitCode)")
+        $job.Process.WaitForExit()
+        $job.Process.Refresh()
+        $exitCode = $job.Process.ExitCode
+        if ($exitCode -ne 0) {
+            $failed.Add("reset=$($job.ResetId) exit=$exitCode")
         }
         [void]$active.Remove($job)
+        $job.Process.Dispose()
     }
 }
 
