@@ -58,16 +58,22 @@ on-policy state visitation
 - GPT-5.6 Pro modified the pointwise reward into R29-T10: fixed-skill recurrent
   replay over each complete natural lifetime, final-10-step density ratio, one
   endpoint reward, low GAE only. The pointwise online reward is retired.
+- The authorized single-seed R29-T10 pair completed as `PRELIMINARY_FAIL`.
+  Implementation validity passed, but the reward arm did not preserve the
+  probe-only R26 signal and failed both the score and task-safety gates. This
+  blocks promotion, retuning, or seed expansion on the current reward line.
 
 ## Next Actions
 
-1. Complete the R29-T10 implementation and launch the authorized local paired
-   run: one seed, two concurrent 16-env CUDA arms, +320K steps per arm.
-2. Collect final task/R26 evidence and prepare the raw result/question ZIP for
-   manual GPT-5.6 Pro review before choosing the next research route.
+1. Manually submit the completed R29-T10 question and ZIP to GPT-5.6 Pro, then
+   archive its raw response before interpretation.
+2. Disposition the external review and complete the failure review before
+   selecting one next causal edge. Do not launch another reward experiment in
+   the meantime.
 
-Active run: `logs/r29_t10_paired_320k_20260714_010026`; the background runner
-owns paired training, R26 collection/analysis, result synthesis, and review ZIP.
+Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
+is in `memory/ExpRecord.md`. The manual review package is under
+`docs/external-review/gpt5_6_pro/20260714_r29_t10_result/`.
 
 ## Immediate Constraints
 
@@ -82,6 +88,8 @@ owns paired training, R26 collection/analysis, result synthesis, and review ZIP.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
 - Keep R29 default-off and compare `probe_only` versus `real_reward` with the
   same source, seed, exposure, optimizer settings, and other rewards.
+- Do not retune or expand R29-T10 before the frozen evidence is externally
+  reviewed and the failure-review gate selects a justified next causal edge.
 
 ## Pointers
 

@@ -1,0 +1,144 @@
+{
+  "additional_steps_per_arm": 320000,
+  "experiment_id": "EXP-20260714-r29-t10-paired-320k",
+  "gates": {
+    "implementation_valid": true,
+    "r26_transfer_pass": false,
+    "safety_pass": false,
+    "score_pass": false
+  },
+  "late_update_steps": [
+    1248000,
+    1256000,
+    1264000,
+    1272000,
+    1280000,
+    1288000,
+    1296000,
+    1304000,
+    1312000,
+    1320000
+  ],
+  "r26": {
+    "probe_only": {
+      "behavior_post_minus_pre_accuracy": 0.061090225563909806,
+      "full_minus_prior_accuracy": 0.07306338028169013,
+      "normalized_label_entropy": 0.9982232109710174,
+      "primary_bootstrap": {
+        "behavior_post_minus_pre_accuracy": {
+          "lower": 0.028263666065375753,
+          "mean": 0.06109022556390977,
+          "upper": 0.09405049086079849
+        },
+        "full_minus_prior_accuracy": {
+          "lower": 0.04444397876501816,
+          "mean": 0.07306338028169014,
+          "upper": 0.10879326836077861
+        }
+      },
+      "reasons": [
+        "all five pre-registered checkpoint gates pass"
+      ],
+      "rows": 6086,
+      "status": "PASS"
+    },
+    "real_reward": {
+      "behavior_post_minus_pre_accuracy": -0.0028169014084507005,
+      "full_minus_prior_accuracy": 0.014951627088830244,
+      "normalized_label_entropy": 0.9979109070583158,
+      "primary_bootstrap": {
+        "behavior_post_minus_pre_accuracy": {
+          "lower": -0.010700910566515728,
+          "mean": -0.0028169014084507044,
+          "upper": 0.005319860052338146
+        },
+        "full_minus_prior_accuracy": {
+          "lower": -0.0034456035501240624,
+          "mean": 0.014951627088830254,
+          "upper": 0.03485500112908234
+        }
+      },
+      "reasons": [
+        "full-minus-prior accuracy 0.014952 is below 0.05",
+        "post-minus-pre accuracy -0.002817 is below 0.05",
+        "strongest matched-null bootstrap lower bound -0.012965 is not above zero"
+      ],
+      "rows": 6103,
+      "status": "MIXED"
+    }
+  },
+  "r26_real_minus_probe_full_minus_prior_accuracy": -0.05811175319285988,
+  "r29_t10_real_minus_probe": {
+    "paired_late_update_bootstrap": {
+      "lower": -0.005330908789085625,
+      "mean": 0.03126452563399357,
+      "upper": 0.06445247156444912
+    },
+    "per_skill_late_means": {
+      "0": 0.0407883484354832,
+      "1": 0.08656550445281996,
+      "2": 0.0297151450966745,
+      "3": -0.025269767229889873
+    }
+  },
+  "scope": "single paired seed; not a three-seed scientific conclusion",
+  "seed": 29031,
+  "source_steps": 1000000,
+  "status": "PRELIMINARY_FAIL",
+  "task_evaluation": {
+    "probe_only": {
+      "backhaul_connected_step_fraction": 0.7776,
+      "coverage": NaN,
+      "episodes": 20.0,
+      "qos": NaN,
+      "reward": 130.45193263180832,
+      "throughput": NaN,
+      "zero_throughput_episode_flag": 0.15,
+      "zero_throughput_step_fraction": 0.22240000000000001
+    },
+    "real_reward": {
+      "backhaul_connected_step_fraction": 0.6823,
+      "coverage": NaN,
+      "episodes": 20.0,
+      "qos": NaN,
+      "reward": 89.27824831243794,
+      "throughput": NaN,
+      "zero_throughput_episode_flag": 0.25,
+      "zero_throughput_step_fraction": 0.3177
+    }
+  },
+  "task_relative_reward_degradation": 0.3156234138407155,
+  "training": {
+    "probe_only": {
+      "final_total_steps": 1320000,
+      "first_total_steps": 1008000,
+      "late_r29_t10_abs_mean": 1.0456292753252898,
+      "late_r29_t10_mean": 0.8054215354674568,
+      "late_skill_entropy": 0.9977339078216302,
+      "late_symmetric_kl": 0.37972397293231247,
+      "late_symmetric_kl_mean_component": 0.37972397293231247,
+      "late_symmetric_kl_variance_component": 0.0,
+      "max_likelihood_error": 0.0,
+      "max_recurrent_source_error": 0.0072460174560546875,
+      "max_reward_env_ratio": 0.026835710962615934,
+      "total_complete_segments": 49652.0,
+      "updates": 40
+    },
+    "real_reward": {
+      "final_total_steps": 1320000,
+      "first_total_steps": 1008000,
+      "late_r29_t10_abs_mean": 1.0451778611334213,
+      "late_r29_t10_mean": 0.8366860611014504,
+      "late_skill_entropy": 0.9969800437257892,
+      "late_symmetric_kl": 0.4326758067685777,
+      "late_symmetric_kl_mean_component": 0.4326758067685777,
+      "late_symmetric_kl_variance_component": 0.0,
+      "max_likelihood_error": 0.0,
+      "max_recurrent_source_error": 0.007068634033203125,
+      "max_reward_env_ratio": 0.04467208176041541,
+      "total_complete_segments": 49816.0,
+      "updates": 40
+    }
+  },
+  "zero_throughput_step_fraction_worsening": 0.09529999999999997
+}

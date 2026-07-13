@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r29-t10-paired-320k | running | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; active root `logs/r29_t10_paired_320k_20260714_010026` | `runner_status.txt`, then `result/r29_t10_pair.json` | source-anchor commit `2dc3c27`; paired PIDs `31812`/`38604`; runner `13920` | Run one paired seed only; package the completed evidence for GPT-5.6 Pro before any expansion. |
+| EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL` | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | manual GPT-5.6 Pro response | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%` | Do not promote, retune, or expand seeds. External-review the frozen package, then complete the failure review and select one next causal edge. |
 | EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
 | EXP-20260713-r28-forced-execution-support-transport | completed — `FAIL_STOCHASTIC_SUPPORT_TRANSPORT` | reward-off matched-domain causal diagnostic | local CUDA; `logs/r28_support_transport_20260713_222807` | none | 1,024 paired rows/mode; deterministic OOD `0.068359`, stochastic OOD `0.823242`; 64 rows/cell | Random action execution alone breaks frozen support. Retire the forced-deterministic scorer family from online reward use. |
 | EXP-20260713-r28-g1-causal-skill-forcing-reward | blocked — `BLOCKED_SUPPORT_OOD`; formal experiment not run | prelaunch engineering for promotion stage 3; planned formal comparator was baseline hierarchy L2 | local smokes `logs/r28_g1_engineering_smoke_20260713_212008` and `logs/r28_g1_engineering_smoke_20260713_213746`; no formal run root | none; cross-round failure review complete | same-config one-update OOD `0.950617`/`0.9375`; support kill in both; zero R28 reward applied; no mapping defect found | Retire the frozen G1 launch package. Do not refit/relax/repeat or infer reward efficacy; next action is a reward-off matched-domain transport diagnostic. |
@@ -85,6 +85,26 @@ explicitly approves the exception.
 - Status sources: `<run-root>/runner_status.txt`, each arm's
   `metrics/train_updates.csv` and `metrics/eval_episodes.csv`, final R26 JSON,
   and `<run-root>/result/r29_t10_pair.json`.
+- Result: completed `PRELIMINARY_FAIL` on the authorized single seed `29031`;
+  `implementation_valid=true`, `r26_transfer_pass=false`,
+  `score_pass=false`, and `safety_pass=false`.
+- Mechanism evidence: probe-only retained an R26 `PASS` with post-minus-pre
+  `0.061090`, full-minus-prior `0.073063`, and label entropy `0.998223`.
+  The reward arm was `MIXED`, with post-minus-pre `-0.002817`,
+  full-minus-prior `0.014952`, and label entropy `0.997911`. The reward therefore
+  did not transfer the accepted natural differentiation signal.
+- Paired score evidence: the final-window real-minus-probe mean was `0.031265`
+  with bootstrap 95% interval `[-0.005331, 0.064452]`, below the registered
+  mean threshold and without a positive lower bound.
+- Safety evidence: deterministic task reward was `130.452` for probe versus
+  `89.278` for reward, a relative degradation of `0.315623`; backhaul connected
+  fraction also fell from `0.7776` to `0.6823`. Healthy label entropy does not
+  override the failed task-safety gate.
+- Decision: preserve this as a single-seed preliminary negative, not a
+  three-seed scientific conclusion. Do not retune or expand it. The frozen
+  question and ZIP under
+  `docs/external-review/gpt5_6_pro/20260714_r29_t10_result/` are the next read;
+  complete the failure review after the raw external response is archived.
 
 ### EXP-20260713-r29-g0-counterfactual-action-information
 
