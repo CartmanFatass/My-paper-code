@@ -2,9 +2,9 @@
 
 Date: 2026-07-13
 
-Status: controller design draft for review. The user approved design work after the
-R27-G2 result. This file does not authorize implementation, a CUDA analysis, or
-an experiment launch.
+Status: controller-frozen G0 implementation contract. On 2026-07-13 the user
+accepted the design and authorized implementation plus the bounded G0 CUDA
+calibration. This does not authorize R28-G1 reward implementation or launch.
 
 ## 1. Decision
 
@@ -96,6 +96,23 @@ reference branch's initial `local_observation` provides the common assignment
 context. The registered frozen R25 checkpoint is needed only to compute
 `phi_0`; no environment replay is required.
 
+The frozen encoding is exact:
+
+```text
+phi_0 width       256  # two source actor-base Linear+ReLU layers
+agent one-hot       6
+duration one-hot    4  # native 10/20/30/40
+phase one-hot       3  # min(floor(episode_step / 100), 2)
+C width            269
+stream width        12  # F_post, F_zero, or F_pre
+head input width   281
+```
+
+For R27, prefix lengths 50/150/250 map to phase bins 0/1/2. Each head has one
+linear four-class softmax layer. It receives its own train-only column mean and
+population standard deviation with a `1e-6` floor; the head architecture,
+parameter count, optimizer, stopping rule, and device remain identical.
+
 No selected communication, coverage, service, topology, backhaul, reward-sum,
 or Gate-C effect field may enter `F_post` or `F_pre`. `phi_0` is a frozen
 generic observation encoder and appears only in null heads; it is never a
@@ -111,8 +128,10 @@ q_context(z_i | F_zero, C)
 q_pre(z_i | F_pre, C)
 ```
 
-The train split fits the heads, the validation split selects the common stopping
-rule and one temperature per head, and the test split is read once. The exact
+The train split fits the heads, the validation split applies the common stopping
+rule and selects one temperature per head from the fixed 401-point log-spaced
+CUDA grid `[0.05, 10.0]`, choosing the lowest-temperature first minimizer. The
+test split is read once. The exact
 scaler, temperatures, and head weights from the passing final-checkpoint gate
 become an immutable scorer artifact; R28-G1 does not refit them online.
 
@@ -162,6 +181,10 @@ there is no gradient through `a_det` or the frozen scorer.
   never random window-row splits.
 - The G0 artifact freezes feature normalization and a shrinkage
   class-conditional `F_post` support envelope from train/validation evidence.
+  For each `(duration, label)`, use diagonal train variance shrunk as
+  `0.90 * class_variance + 0.10 * pooled_duration_variance`, floor every
+  component at `1e-6`, and set the squared standardized-distance boundary to
+  the validation-set 95th percentile using linear quantile interpolation.
   A future window outside that envelope receives zero intrinsic reward. The
   rollout OOD fraction is logged and an excessive fraction disables the reward
   for that rollout rather than extrapolating classifier confidence.
@@ -214,13 +237,13 @@ bootstrap seed    28023
 bootstrap reps    10,000 reset clusters
 ```
 
-The proposed linear-softmax head contract reuses R27-B3's optimizer scale:
+The frozen linear-softmax head contract reuses R27-B3's optimizer scale:
 train-only standardization with a `1e-6` floor, Adam learning rate `3e-3`,
 weight decay `1e-4`, at most 1,000 steps, validation every five steps,
 patience 20 validations, and minimum validation improvement `1e-4`. The
-focused implementation review must freeze the categorical encoding,
-temperature-fitting routine, and exact support-envelope estimator before any
-execution; changing any of them after a read makes the run `INVALID`.
+The categorical encoding, temperature grid, and support-envelope estimator are
+now frozen above; changing any of them after execution starts makes the run
+`INVALID`.
 
 Calibration metrics and thresholds, all computed on held-out reset groups:
 

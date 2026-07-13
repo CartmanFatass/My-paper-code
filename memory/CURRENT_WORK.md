@@ -52,7 +52,8 @@ differentiated skills`.**
 - `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — the
   frozen R27-G2 design and outcome branches.
 - `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — the
-  active design draft; no implementation or launch authorization.
+  frozen R28-G0 target/null contract; user authorized bounded G0 implementation
+  and CUDA calibration, but not R28-G1 reward implementation or launch.
 - `docs/external-review/R27_G2_design_review_20260712_Claude.md` — raw external
   review. Exact Claude model/version was not supplied, so provenance is
   incomplete and recorded as such.
@@ -61,8 +62,8 @@ differentiated skills`.**
 
 ## Current Experiment Focus
 
-`EXP-20260713-r28-g0-action-process-target-calibration` — **design only; not
-implemented or launched**.
+`EXP-20260713-r28-g0-action-process-target-calibration` — **implementation
+complete locally; launch-ready after commit/push and remote dry-run**.
 
 - Candidate target: fixed 10-step deterministic-action process residual over
   capacity-matched context, pre-window, and sham-label nulls. No communication
@@ -70,6 +71,9 @@ implemented or launched**.
   enters the intrinsic score.
 - First gate is offline CUDA calibration on the existing R27 shards. It adds
   zero environment steps and cannot tune thresholds after outcomes are read.
+  Implemented in `ha_ctse_process/r28_g0_target.py` with CLI
+  `scripts/analyze_r28_g0_action_process_target.py` and runner
+  `scripts/run_r28_g0_action_process_target_cloud.sh`.
 - A later reward-on test requires this target/null gate, focused implementation
   review, explicit launch approval, and a validated parallel cloud topology.
 - No HMASD compute is currently active. The shared server is running a separate
@@ -81,11 +85,11 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Complete and review the R28-G1 reward-target/null design. Do not implement or
-   launch from design approval alone.
-2. If separately approved, implement only the offline R27-shard target
-   calibration and run its focused CUDA check. PASS permits design of the
-   small clipped level-3 reward test; every other branch stops or reviews.
+1. Commit and push the R28-G0 offline calibration implementation; run the
+   remote Linux dry-run, then launch the bounded CUDA analysis if the GPU is
+   available.
+2. Read the R28-G0 result. PASS permits focused implementation review of the
+   small clipped level-3 package only; every other branch stops or reviews.
 3. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
    negative. Do not merge the claims.
 4. D2 stays approved-deferred: archival sensitivity analysis only, separate

@@ -26,7 +26,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260713-r28-g0-action-process-target-calibration | planned — design draft only; no implementation or execution authorization | diagnostic-null calibration before any level-3 reward | existing R27-G2 decision shards plus registered frozen R25 checkpoints; CUDA, zero env steps, expected <30 min if later authorized | freeze the target/null contract, then seek separate implementation approval | `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` | PASS would permit focused online-scorer implementation review only. Every other branch stops, reviews, or repairs the unchanged instrument; none permits reward launch. |
+| EXP-20260713-r28-g0-action-process-target-calibration | launch-ready — implementation complete locally; CUDA execution authorized | diagnostic-null calibration before any level-3 reward | existing R27-G2 decision shards plus registered frozen R25 checkpoints; `scripts/run_r28_g0_action_process_target_cloud.sh`; CUDA, zero env steps, expected <30 min | commit/push, remote Linux dry-run, then run on cloud if GPU is available | `ha_ctse_process/r28_g0_target.py`; `scripts/analyze_r28_g0_action_process_target.py`; `tests/r28_g0_action_process_target_test.py` | PASS would freeze the final scorer and permit focused online-scorer implementation review only. Every other branch stops, reviews, or repairs the unchanged instrument; none permits reward launch. |
 | EXP-20260712-r27-g2-forced-z-trajectory-effect | completed — accepted `PASS_BEHAVIOR_EFFECT` 2026-07-13 | level-2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; run `r27_g2_overnight_20260713_095408`; commit `6c06cde` | none; preserve beside R26 natural negative | 192/192 `OK` shards; aggregate validation `valid=true`, `scientific_status=PASS`; A/B1/B2/B3/C PASS at update25/update30/final | Accept forced persistent conditional behavior and local effect through native H40 only. Record `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`; do not infer natural selection, reward usefulness, cooperation, task gain, or async-lifetime benefit. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — accepted 2026-07-12 | reward-off immediate-capacity autopsy | cloud CUDA; 64 reset groups; R25 arm0 update25/update30/final | none | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; result read under `logs/r27_g1_result_read_20260712/` | `STATIC_USED_OBSERVATIONAL_MISS`: immediate `z_i`-conditioned action-distribution sensitivity exists; persistence/effect were not established by this gate. |
 | EXP-20260711-r26-g1a-individual-skill-screening | completed — accepted natural observational negative 2026-07-12 | reward-off natural behavior-window screen | local CUDA; six frozen R25 checkpoints | none | `logs/r26_g1a_screening_20260711_105522/` | Primary arm0 family FAIL: final FAIL and update25/update30 MIXED. Arm2 is contextual only. Preserve this result unchanged beside R27 forced evidence. |
@@ -49,10 +49,17 @@ explicitly approves the exception.
   pre-intervention heads plus a sham-label control on frozen R27 evidence.
 - Inputs/exposure: exactly the 192 decision-grade R27 shards; exclude the 11
   stopped-run partials and pilot; zero environment steps; no policy update.
+- Implementation: offline actor-base context encoder, three equal linear heads
+  (`q_full`, `q_context`, `q_pre`), fixed temperature grid, sham derangement,
+  support envelope, pulse persistence null, JSON/Markdown report, and PASS-only
+  final scorer artifact. No hashes/checksums.
+- Runner: `R27_RUN_ROOT=<...> CHECKPOINT_ROOT=<...> RUN_ROOT=<...>
+  bash scripts/run_r28_g0_action_process_target_cloud.sh`; use `--dry-run`
+  before launch. Output stays under `logs/r28_g0_action_process_target_<ts>/`.
 - Registered metrics, thresholds, reset splits, seeds, and full outcome branches
   are in the R28 design. They must be frozen before implementation/execution.
-- Expected cost if separately authorized: CUDA, under 30 minutes, no CPU
-  fallback. This is not a scientific launch authorization.
+- Expected cost: CUDA, under 30 minutes, no CPU fallback. This is an offline
+  diagnostic execution authorization only, not reward implementation or launch.
 - PASS authorizes only focused implementation review for a later level-3
   mechanism-matched reward experiment. FAIL retires the score; MIXED triggers
   one causal-disagreement review; UNDERPOWERED permits support-only work;
