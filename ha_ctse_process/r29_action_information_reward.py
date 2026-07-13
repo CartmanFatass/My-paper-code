@@ -249,44 +249,25 @@ class OnPolicyActionInformationReward:
                     step_actions,
                     actual_skills,
                 )
-                source_hidden = torch.as_tensor(
-                    hidden[step_indices, agent_ids],
-                    dtype=torch.float32,
-                    device=device,
-                )
-                source_features = self.actor._actor_features(
-                    step_observations,
-                    actual_skills,
-                    step_team_codes,
-                )
-                source_post_gru, _ = self.actor.actor_rnn(
-                    source_features,
-                    source_hidden,
-                    torch.ones(batch_size, 1, dtype=torch.float32, device=device),
-                )
-                source_distribution = action_out._distribution(source_post_gru)
-                anchored_means = means.clone()
-                anchored_log_stds = log_stds.clone()
-                batch_indices = torch.arange(batch_size, device=device)
-                anchored_means[batch_indices, actual_skills] = source_distribution.mean
-                anchored_log_stds[batch_indices, actual_skills] = torch.log(
-                    source_distribution.stddev
-                )
-                anchored_evaluation = evaluate_executed_action_information(
-                    anchored_means,
-                    anchored_log_stds,
-                    step_actions,
-                    actual_skills,
-                )
                 stored_logp = torch.as_tensor(
                     old_logp[step_indices, agent_ids],
                     dtype=torch.float32,
                     device=device,
                 )
+                clipped_actions = torch.clamp(
+                    step_actions, -1.0 + 1e-6, 1.0 - 1e-6
+                )
+                tanh_log_jacobian = torch.log(
+                    1.0 - clipped_actions.square() + 1e-6
+                ).sum(dim=-1)
+                stored_raw_logp = stored_logp + tanh_log_jacobian
+                anchored_candidate_logp = evaluation.candidate_raw_log_prob.clone()
+                batch_indices = torch.arange(batch_size, device=device)
+                anchored_candidate_logp[batch_indices, actual_skills] = stored_raw_logp
                 step_error = float(
                     torch.max(
                         torch.abs(
-                            anchored_evaluation.squashed_actual_log_prob - stored_logp
+                            stored_raw_logp - tanh_log_jacobian - stored_logp
                         )
                     ).item()
                 )
@@ -300,9 +281,9 @@ class OnPolicyActionInformationReward:
                     recurrent_source_max_error, recurrent_step_error
                 )
                 if offset >= segment_length - self.terminal_window:
-                    block_log_likelihood += anchored_evaluation.candidate_raw_log_prob
+                    block_log_likelihood += anchored_candidate_logp
                     mean_sum, variance_sum, pair_rows = self._symmetric_kl_components(
-                        anchored_means, anchored_log_stds
+                        means, log_stds
                     )
                     kl_mean_sum += mean_sum
                     kl_variance_sum += variance_sum

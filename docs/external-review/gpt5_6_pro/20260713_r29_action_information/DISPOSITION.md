@@ -29,11 +29,12 @@ Modified:
   rollout row is complete even when the segment manager labels the flush
   `update`; shorter update flushes, episode endings, and early renewals remain
   excluded;
-- the actual-skill candidate is anchored to the actor forward from each stored
-  pre-step hidden state. This is the exact natural recurrent path and preserves
-  `2e-5` PPO likelihood parity; the unanchored length-batched replay drift is
-  retained as a separate numerical diagnostic. Other candidate skills remain
-  fixed through the full counterfactual recurrent replay;
+- the actual-skill candidate uses PPO's stored old-policy squashed log
+  likelihood with the common tanh Jacobian removed. Two real launches showed
+  that CUDA GRU output changes by `1e-3` when the replay batch shape differs,
+  even from the same stored hidden state. The stored likelihood is the exact
+  natural collection-policy source; unanchored recurrent drift is reported
+  separately. Other candidates remain fixed through full recurrent replay;
 - the user authorized an initial local paired test at 320K additional steps per
   arm. This is single-seed preliminary evidence, not the review's full
   three-seed family conclusion. Remaining seeds are promoted only if the pair

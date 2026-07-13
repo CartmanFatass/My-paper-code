@@ -2337,7 +2337,7 @@ class StandaloneProcessAgent:
         if not self.r29_action_info_enabled:
             return None
         return {
-            "variant": "terminal_block_t10",
+            "variant": "terminal_block_t10_stored_source_anchor",
             "mode": self.r29_action_info_mode,
             "coefficient": self.r29_action_info_coef,
             "clip": self.r29_action_info_clip,

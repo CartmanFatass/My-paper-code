@@ -302,6 +302,12 @@ recurrent replay over each complete natural skill lifetime, a uniform four-code
 mixture, final-10-action block likelihood, detached coefficient 0.05, clip 0.05,
 and one low-level endpoint reward.
 
+Implementation note: the actual-skill raw likelihood is reconstructed from
+PPO's stored old-policy squashed log likelihood by restoring the common tanh
+Jacobian. Other candidates use full recurrent replay. This avoids measured CUDA
+GRU batch-shape drift (`1e-3` scale), which is reported separately rather than
+being absorbed into the source likelihood.
+
 We implemented that exact core change and ran the user-authorized preliminary
 pair from the same R25 arm0 1M checkpoint: `probe_only` versus `real_reward`,
 seed {args.seed}, 16 environments per arm, CUDA, 40 rollout/PPO updates, 320K
