@@ -52,8 +52,8 @@ differentiated skills`.**
 - `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — the
   frozen R27-G2 design and outcome branches.
 - `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — the
-  frozen R28-G0 target/null contract; user authorized bounded G0 implementation
-  and CUDA calibration, but not R28-G1 reward implementation or launch.
+  frozen R28-G0 target/null contract and future G1 design boundary. R28-G0 is
+  complete; R28-G1 reward implementation or launch is still not authorized.
 - `docs/external-review/R27_G2_design_review_20260712_Claude.md` — raw external
   review. Exact Claude model/version was not supplied, so provenance is
   incomplete and recorded as such.
@@ -62,8 +62,8 @@ differentiated skills`.**
 
 ## Current Experiment Focus
 
-`EXP-20260713-r28-g0-action-process-target-calibration` — **implementation
-complete locally; launch-ready after commit/push and remote dry-run**.
+`EXP-20260713-r28-g0-action-process-target-calibration` — **completed and
+accepted as `PASS_TARGET_NULLS` on 2026-07-13**.
 
 - Candidate target: fixed 10-step deterministic-action process residual over
   capacity-matched context, pre-window, and sham-label nulls. No communication
@@ -74,6 +74,11 @@ complete locally; launch-ready after commit/push and remote dry-run**.
   Implemented in `ha_ctse_process/r28_g0_target.py` with CLI
   `scripts/analyze_r28_g0_action_process_target.py` and runner
   `scripts/run_r28_g0_action_process_target_cloud.sh`.
+- Cloud run `logs/r28_g0_action_process_target_20260713_175600` completed
+  with `valid=true`, `scientific_status=PASS`,
+  `classification=PASS_TARGET_NULLS`, and frozen scorer
+  `r28_g0_scorer_final.pt`. Final and update30 passed; update25 failed only the
+  train-test-gap gate.
 - A later reward-on test requires this target/null gate, focused implementation
   review, explicit launch approval, and a validated parallel cloud topology.
 - No HMASD compute is currently active. The shared server is running a separate
@@ -85,11 +90,11 @@ arm0/arm2 and the HMASD baseline (REF-20260617) are **fixed comparison data**.
 
 ## Next Actions
 
-1. Commit and push the R28-G0 offline calibration implementation; run the
-   remote Linux dry-run, then launch the bounded CUDA analysis if the GPU is
-   available.
-2. Read the R28-G0 result. PASS permits focused implementation review of the
-   small clipped level-3 package only; every other branch stops or reviews.
+1. Perform focused implementation review for the future R28-G1 small clipped
+   level-3 package using the frozen final scorer. Do not launch reward training
+   without separate approval.
+2. Preserve the R28-G0 scorer/result as the only allowed target/null input for
+   that review; do not refit, retune, or sweep the classifier.
 3. Preserve R27-G2 as forced causal capacity and R26 as a natural observational
    negative. Do not merge the claims.
 4. D2 stays approved-deferred: archival sensitivity analysis only, separate

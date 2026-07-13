@@ -26,7 +26,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260713-r28-g0-action-process-target-calibration | launch-ready — implementation complete locally; CUDA execution authorized | diagnostic-null calibration before any level-3 reward | existing R27-G2 decision shards plus registered frozen R25 checkpoints; `scripts/run_r28_g0_action_process_target_cloud.sh`; CUDA, zero env steps, expected <30 min | commit/push, remote Linux dry-run, then run on cloud if GPU is available | `ha_ctse_process/r28_g0_target.py`; `scripts/analyze_r28_g0_action_process_target.py`; `tests/r28_g0_action_process_target_test.py` | PASS would freeze the final scorer and permit focused online-scorer implementation review only. Every other branch stops, reviews, or repairs the unchanged instrument; none permits reward launch. |
+| EXP-20260713-r28-g0-action-process-target-calibration | completed — accepted `PASS_TARGET_NULLS` 2026-07-13 | diagnostic-null calibration before any level-3 reward | cloud RTX 4090 CUDA; run `logs/r28_g0_action_process_target_20260713_175600`; commit `3eb22d5` | none; preserve scorer as frozen input to later review | final and update30 PASS; update25 FAIL only on train-test gap; validated scorer `r28_g0_scorer_final.pt`; zero env steps/policy updates | Accept the offline target/null gate only. This freezes the final scorer and permits focused G1 package implementation review; it does **not** authorize reward implementation launch or any team/cooperation claim. |
 | EXP-20260712-r27-g2-forced-z-trajectory-effect | completed — accepted `PASS_BEHAVIOR_EFFECT` 2026-07-13 | level-2 reward-off forced-`z_i` trajectory/effect intervention | cloud RTX 4090 CUDA; run `r27_g2_overnight_20260713_095408`; commit `6c06cde` | none; preserve beside R26 natural negative | 192/192 `OK` shards; aggregate validation `valid=true`, `scientific_status=PASS`; A/B1/B2/B3/C PASS at update25/update30/final | Accept forced persistent conditional behavior and local effect through native H40 only. Record `FORCED_CAUSAL_CAPACITY_WITH_OBSERVATIONAL_NEGATIVE`; do not infer natural selection, reward usefulness, cooperation, task gain, or async-lifetime benefit. |
 | EXP-20260711-r27-g1-low-actor-capacity-autopsy | completed — accepted 2026-07-12 | reward-off immediate-capacity autopsy | cloud CUDA; 64 reset groups; R25 arm0 update25/update30/final | none | `dist/r27_g1_capacity_autopsy_cloud64_20260712_151313_extracted/`; result read under `logs/r27_g1_result_read_20260712/` | `STATIC_USED_OBSERVATIONAL_MISS`: immediate `z_i`-conditioned action-distribution sensitivity exists; persistence/effect were not established by this gate. |
 | EXP-20260711-r26-g1a-individual-skill-screening | completed — accepted natural observational negative 2026-07-12 | reward-off natural behavior-window screen | local CUDA; six frozen R25 checkpoints | none | `logs/r26_g1a_screening_20260711_105522/` | Primary arm0 family FAIL: final FAIL and update25/update30 MIXED. Arm2 is contextual only. Preserve this result unchanged beside R27 forced evidence. |
@@ -56,6 +56,11 @@ explicitly approves the exception.
 - Runner: `R27_RUN_ROOT=<...> CHECKPOINT_ROOT=<...> RUN_ROOT=<...>
   bash scripts/run_r28_g0_action_process_target_cloud.sh`; use `--dry-run`
   before launch. Output stays under `logs/r28_g0_action_process_target_<ts>/`.
+- Result: cloud run `logs/r28_g0_action_process_target_20260713_175600`
+  completed operationally with `valid=true`, `scientific_status=PASS`,
+  `classification=PASS_TARGET_NULLS`, and scorer
+  `r28_g0_scorer_final.pt`. Family rule passed because `arm0_final` and
+  `arm0_update30` passed; `arm0_update25` failed only the train-test-gap gate.
 - Registered metrics, thresholds, reset splits, seeds, and full outcome branches
   are in the R28 design. They must be frozen before implementation/execution.
 - Expected cost: CUDA, under 30 minutes, no CPU fallback. This is an offline
