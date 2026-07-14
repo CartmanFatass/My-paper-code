@@ -33,7 +33,18 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
     ) + $Details
     $temporary = "$StatusPath.tmp.$PID"
     [System.IO.File]::WriteAllLines($temporary, $lines)
-    Move-Item -LiteralPath $temporary -Destination $StatusPath -Force
+    $lastError = $null
+    for ($attempt = 0; $attempt -lt 50; $attempt++) {
+        try {
+            [System.IO.File]::Move($temporary, $StatusPath, $true)
+            return
+        }
+        catch {
+            $lastError = $_.Exception
+            Start-Sleep -Milliseconds 100
+        }
+    }
+    throw "Could not replace runner status: $($lastError.Message)"
 }
 
 function Start-Worker(
