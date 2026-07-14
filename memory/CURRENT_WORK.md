@@ -116,9 +116,10 @@ critic/GAE/entropy loss, or high-policy update.
 
 ## Next Actions
 
-1. Complete the R32 FiLM-only replay/update boundary and paired gate runner.
-2. Register and run the single local CUDA Alice--Bob gate at seed `32031`.
-3. Read its result JSON once and follow its precommitted PASS/retire branch.
+1. Relaunch the unchanged R32 gate after the scoped cuDNN focal-RNN mode repair;
+   the first root ending `192508` failed before any real optimizer step.
+2. Read the replacement's single result JSON once and follow its precommitted
+   PASS/retire branch; repair only if M0 is implementation-invalid.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under

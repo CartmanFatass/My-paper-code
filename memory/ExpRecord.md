@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r32-ifepg-paired-gate | launch-ready | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; next root `logs/r32_ifepg_paired_gate_<timestamp>` | `<run-root>/result/r32_ifepg_pair.json` once | paired seed `32031`; `probe_only` versus FiLM-only `real_update`; 20 auxiliary updates and about 66K steps/arm | Launch the single paired mechanism gate; PASS alone permits later sparse-source integration, while any valid M1--M3 miss retires direct IFEPG. |
+| EXP-20260714-r32-ifepg-paired-gate | replacement launch-ready after operational pre-update failure | hierarchy-L1 intervention-to-effect creation and natural-transport gate | failed root `logs/r32_ifepg_paired_gate_20260714_192508`; commit `2535992` | replacement `result/r32_ifepg_pair.json` once | probe completed; first real backward failed because cuDNN GRU remained in eval mode; zero FiLM optimizer steps | Apply the focal-RNN mode repair and rerun the unchanged paired contract; no scientific interpretation exists for the failed root. |
 | EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
 | EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL`; online family retired | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | none | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%`; GPT-5.6 Pro verdict `RETIRE` | Keep R29 diagnostic-only. Do not promote, retune, or expand seeds; move to the reward-off stochastic realized-effect edge. |
@@ -119,8 +119,15 @@ explicitly approves the exception.
   window, replica, threshold, arm, or seed changes; and conclusions about task
   gain, cooperation, semantic roles, lifetime superiority, HMASD parity, or S7
   transfer.
+- Operational transition: the first root ending `192508` completed the probe
+  shadow collection, then failed at the first real backward because cuDNN does
+  not permit RNN backward while the GRU module is in eval mode. No real
+  optimizer step occurred. The scoped repair places only the focal actor RNN
+  in training mode for auxiliary backward while its parameters remain frozen,
+  then restores eval before heldout/natural evaluation. The replacement keeps
+  every scientific parameter, seed, branch schedule, and threshold unchanged.
 - Status source: the single decision artifact is
-  `logs/r32_ifepg_paired_gate_<timestamp>/result/r32_ifepg_pair.json`.
+  the replacement root's `result/r32_ifepg_pair.json`.
 
 ### EXP-20260714-r31-cfei-reward-off-gate
 

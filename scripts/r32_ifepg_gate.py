@@ -556,6 +556,9 @@ def _train_arm(
         film_ids = {id(parameter) for parameter in film_parameters}
         for parameter in all_parameters:
             parameter.requires_grad_(id(parameter) in film_ids)
+        # cuDNN requires the GRU module itself to be in training mode for
+        # backward, even though every recurrent parameter remains frozen.
+        agent.low.actor_rnn.train()
     optimizer = (
         torch.optim.Adam(film_parameters, lr=FILM_LR)
         if arm == "real_update"
@@ -681,6 +684,7 @@ def _train_arm(
         )
     for parameter in all_parameters:
         parameter.requires_grad_(original_requires_grad[id(parameter)])
+    agent.low.eval()
     final_behavior_low = copy.deepcopy(agent.low).to(device)
     final_behavior_low.eval()
     for parameter in final_behavior_low.parameters():
