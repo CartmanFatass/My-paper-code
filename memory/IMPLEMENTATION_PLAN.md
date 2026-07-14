@@ -36,7 +36,8 @@ One coherent implementation/evidence boundary:
    are the implementation check. Do not add a smoke, coefficient sweep,
    threshold rescue, or automatic budget/seed expansion.
 
-Implementation status: active.
+Implementation status: complete at `b0a5300`; the registered paired run is the
+single evidence boundary.
 
 ## R30 Fixed-Clock Autoregressive Edit Gate
 

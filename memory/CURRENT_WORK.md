@@ -180,11 +180,9 @@ direct intervention-scored roster-complementarity selection are retired.
 
 ## Next Actions
 
-1. Implement the single registered R36 novelty reward in the constant-code
-   path and its paired result analyzer/runner.
-2. Commit and push the exact implementation, then launch the 320K parallel
-   local CUDA pair without a separate smoke.
-3. Interpret only the single result JSON; do not rerun or expand R35/R36.
+1. Monitor the registered R36 pair through its single status source at
+   `logs/r36_aem_access_320k_20260715_034611/runner_status.txt`.
+2. Interpret only the single result JSON; do not rerun or expand R35/R36.
 
 Active gate: `EXP-20260715-r36-aem-access`. Its exact contract is in
 `memory/ExpRecord.md`; R35's completed result remains the upstream evidence.
