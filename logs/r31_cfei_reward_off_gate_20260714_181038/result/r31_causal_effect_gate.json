@@ -1,0 +1,143 @@
+{
+  "authorized_next_action": "retire R31-CFEI; do not enable online reward",
+  "contract": {
+    "bootstrap_repetitions": 10000,
+    "causal_contexts": 128,
+    "device": "cuda",
+    "episode_steps": 80,
+    "forced_primitive_steps": 10240,
+    "forced_skills_per_context": 4,
+    "forced_windows": 1024,
+    "forced_windows_used_for_posterior_training": 0,
+    "gate_passed_checkpoint_written": 0,
+    "heldout_natural_windows": 256,
+    "heldout_reset_groups": 16,
+    "natural_reset_groups": 64,
+    "natural_windows": 1024,
+    "policy_updates": 0,
+    "posterior_batch_size": 128,
+    "posterior_epochs": 200,
+    "posterior_hidden_dim": 64,
+    "posterior_lr": 0.001,
+    "posterior_train_reset_groups": 48,
+    "posterior_train_windows": 768,
+    "source_policy_state_modified": false,
+    "stochastic_replicas_per_skill": 2,
+    "window": 10
+  },
+  "experiment": "R31-CFEI reward-off causal gate",
+  "metrics": {
+    "M1_natural_effect_information": {
+      "ci95": [
+        0.31998379833967194,
+        0.6389537383627613
+      ],
+      "mean_nats": 0.4878658226225525,
+      "per_skill": {
+        "0": {
+          "count": 68,
+          "mean_nats": 0.15158890078172965
+        },
+        "1": {
+          "count": 76,
+          "mean_nats": 0.5066749292768931
+        },
+        "2": {
+          "count": 68,
+          "mean_nats": 0.47091807753724213
+        },
+        "3": {
+          "count": 44,
+          "mean_nats": 1.0012700327418067
+        }
+      },
+      "posterior_train_final_losses": {
+        "context_loss": 1.0828186770280201,
+        "full_loss": 0.48837728798389435,
+        "loss": 1.5711959600448608
+      }
+    },
+    "M2_causal_persistence": {
+      "ci95": [
+        0.7632269081557091,
+        1.078315247307631
+      ],
+      "forced_posterior_residual_by_skill": {
+        "0": 0.38817802269477397,
+        "1": 0.44581922807265073,
+        "2": 0.5877469637198374,
+        "3": 1.3193130068830214
+      },
+      "forced_posterior_residual_mean": 0.6852643053425709,
+      "mean_between": 0.11253135439800681,
+      "mean_within": 0.10373359775874764,
+      "median_ratio": 0.889612917753295,
+      "pooled_ratio_by_skill": {
+        "0": 0.5515206543918447,
+        "1": 0.8419281408309021,
+        "2": 1.1606767346537492,
+        "3": 1.7898189822011554
+      },
+      "skill_pairs": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    "matched_shuffle": {
+      "mean_nats": -2.067999248921871,
+      "self_donors": 0,
+      "total_rows": 256,
+      "valid_fraction": 0.9765625,
+      "valid_rows": 250
+    }
+  },
+  "reasons": [
+    "causal_ratio_not_above_execution_noise",
+    "matched_shuffle_exceeds_half_natural_signal"
+  ],
+  "schema_version": 1,
+  "source": {
+    "checkpoint": "C:\\project\\HMASD\\logs\\r30_alice_bob_paired_64k_20260714_163908\\runs\\adaptive_keep_set\\seed30031\\standalone_process_core_final.pt",
+    "checkpoint_total_steps": 64000,
+    "checkpoint_update": 50,
+    "environment": "alice_bob_asymmetric_cycles",
+    "external_reward": "collection_only",
+    "gate_passed_checkpoint": null,
+    "high_controller": "r30_fixed_clock_ar_edit"
+  },
+  "status": "FAIL",
+  "thresholds": {
+    "causal_ratio_ci_lower": 1.0,
+    "causal_ratio_median": 1.5,
+    "hard_fail_shuffle_fraction_of_natural": 0.5,
+    "natural_effect_information_ci_lower": 0.0,
+    "natural_effect_information_mean_nats": 0.02,
+    "per_skill_effect_information_mean_nats": 0.005,
+    "per_skill_heldout_windows": 64,
+    "per_skill_pooled_causal_ratio": 1.0,
+    "shuffle_absolute_max": 0.005,
+    "shuffle_fraction_of_natural": 0.25
+  }
+}

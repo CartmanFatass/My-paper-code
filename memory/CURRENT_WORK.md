@@ -22,18 +22,17 @@ and history live in their owning files.
 
 ## Current Objective
 
-Test whether natural adaptive-R30 skills have persistent task-agnostic effects
-that survive a context-only null and exceed same-skill stochastic variability:
+Select one post-R31 causal edge that can create persistent task-agnostic skill
+effects rather than classify natural correlations:
 
 ```text
-natural stochastic W=k0 windows train effect/context posteriors
--> heldout conditional effect information
--> common-random-number forced-skill persistence audit
+R29 action-pattern reward failed
+-> R31 observational effect scorer failed causal persistence
+-> one intervention-anchored effect-creation route
 ```
 
-This R31 reward-off gate alone decides whether the fixed-window effect target is
-retired, receives one identical data append, or permits the matched 160K
-`probe_only`/`real_reward` comparison.
+No R32 implementation or reward run is authorized until the manual GPT-5.6 Pro
+review selects that single route and its smallest abandonment gate.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -100,16 +99,21 @@ retired, receives one identical data append, or permits the matched 160K
   progress shaping have been removed from reward and advantage.
 - GPT-5.6 Pro returned `ACCEPT R31`, archived raw on 2026-07-14. The unique
   route is natural-window CFEI with forced stochastic branches used only for a
-  reward-off causal audit. Implementation and the registered local gate are
-  ready at commit boundary; online reward remains contingent on gate PASS.
+  reward-off causal audit. It was implemented at commit `a7b985b` and evaluated
+  by the registered local gate below.
+- The registered R31 gate completed `FAIL`: natural heldout information was
+  `0.487866` nats, but forced-skill median between/within ratio was `0.889613`
+  and matched shuffle was `-2.068` nats. The implementation/comparator was
+  valid; no policy update or gate checkpoint occurred. R31 and its 160K reward
+  pair are retired.
 
 ## Next Actions
 
-1. Run `EXP-20260714-r31-cfei-reward-off-gate` locally from the frozen adaptive
-   R30 Alice--Bob checkpoint and read its single result JSON.
-2. Follow exactly one result branch: PASS -> prepare only the matched 160K
-   pair; UNDERPOWERED -> append one identical 64-reset batch; FAIL -> retire
-   R31-CFEI without reward launch or target tuning.
+1. Manually submit
+   `docs/external-review/gpt5_6_pro/20260714_r31_cfei_gate_result/GPT5_6_PRO_QUESTION.md`
+   to GPT-5.6 Pro using the private GitHub repository.
+2. Archive and disposition the raw response, then implement only its one
+   accepted intervention-anchored causal edge and smallest Alice--Bob gate.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -141,6 +145,8 @@ is in `memory/ExpRecord.md`. The manual review package is under
 - Do not inject another individual-skill reward before a reward-off diagnostic
   establishes the selected realized-effect target under policy-matched
   stochastic execution.
+- Do not launch R31 reward, its 160K pair, an identical-batch append, or any
+  R31 coefficient/window/prior/posterior/null/threshold variant.
 
 ## Pointers
 

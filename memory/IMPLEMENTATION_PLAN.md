@@ -109,7 +109,7 @@ R29 completed boundary:
 4. GPT-5.6 Pro returned `RETIRE`; the disposition and failure review accepted
    R29 as diagnostic-only and retired the online actor-density-ratio family.
 
-Active R31 boundary:
+Completed R31 boundary:
 
 1. Keep R30 unchanged. Each genuine post-edit check opens one complete natural
    stochastic window per agent with fixed `W=k0`; incomplete terminal/update
@@ -140,6 +140,16 @@ Core MARL impact: R31 reconstructs only the individual persistent-effect half
 of HMASD's intrinsic exploration loop. It does not establish team composition,
 delayed cooperative credit, sparse-task improvement, asynchronous-lifetime
 benefit, or HMASD parity.
+
+Gate result: `FAIL`. Natural heldout information was positive, but the
+forced-skill between/within ratio was below one and matched shuffle dominated
+the natural score. R31-CFEI and its conditional 160K reward pair are retired;
+do not tune its coefficient, window, prior, posterior, null, or thresholds.
+
+Next boundary: no R32 implementation is authorized yet. External review must
+select exactly one intervention-anchored effect-creation edge using
+`memory/LTM/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md`; then implement
+only its smallest falsifiable Alice--Bob mechanism gate.
 
 ## Legacy Compatibility Boundary
 

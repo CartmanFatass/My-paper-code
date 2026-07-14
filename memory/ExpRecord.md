@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r31-cfei-reward-off-gate | registered | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038` | `result/r31_causal_effect_gate.json` | pending | M1+M2 PASS alone authorizes the matched 160K reward pair; FAIL retires R31; UNDERPOWERED appends one identical batch. |
+| EXP-20260714-r31-cfei-reward-off-gate | completed — `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but M2 causal ratio `0.889613` and shuffle `-2.068`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
 | EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL`; online family retired | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | none | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%`; GPT-5.6 Pro verdict `RETIRE` | Keep R29 diagnostic-only. Do not promote, retune, or expand seeds; move to the reward-off stochastic realized-effect edge. |
 | EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
@@ -73,6 +73,20 @@ explicitly approves the exception.
   posterior fitting, fixed teammate action tapes, coefficient/target/null
   changes, extra arms/seeds, or claims about cooperation/task efficacy.
 - Status source: `logs/r31_cfei_reward_off_gate_20260714_181038/result/r31_causal_effect_gate.json`.
+- Result: `FAIL`. Natural heldout effect information was `0.487866` nats
+  (cluster CI `[0.319984, 0.638954]`), but the forced-skill between/within
+  median ratio was `0.889613` (CI `[0.763227, 1.078315]`), pooled ratios for
+  skills 0/1 were `0.551521`/`0.841928`, and matched shuffle was `-2.068` nats.
+  The posterior learned natural association but the causal intervention did not
+  exceed stochastic execution noise.
+- Failure review: execution and comparator counts were valid; posterior
+  capacity was adequate; the skill-3 heldout count of 44 is non-decisive because
+  both registered hard-FAIL conditions already fired. Reusable negative and the
+  single next causal edge are in
+  `memory/LTM/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md`.
+- Decision: no online R31 reward, gate checkpoint, 160K pair, identical-batch
+  append, threshold change, or R31 retuning. Seek one intervention-anchored
+  effect-creation route before any further reward implementation.
 
 ### EXP-20260714-r30-fixed-clock-paired-320k
 
