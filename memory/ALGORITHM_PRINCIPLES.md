@@ -209,7 +209,7 @@ Required controls:
 A. HMASD original baseline
 B. HA-CTSE full-sync fixed-k / T_i = 1 check interval, reward-pure
 C. HA-CTSE shared fixed duration, reward-pure
-D. HA-CTSE per-agent discrete lifetime, reward-pure
+D. HA-CTSE fixed-clock per-agent KEEP/SET lifetime, reward-pure
 E. best fixed/shared + P2-lite H0/H1
 F. best decoupled + P2-lite H0/H1
 ```
@@ -231,16 +231,15 @@ Mechanism gates:
 ```text
 lifetime_heterogeneity up
 renewal_full_sync_rate not near 1
-duration_usage_entropy not collapsed
-duration_agent_mi / agent-wise lifetime distribution nontrivial
+survival beyond the retired duration cap is nonzero
+agent-wise lifetime distribution nontrivial
 renewal_pairwise_corr_mean not full-sync
-duration_return_range has signal
-duration_full_disconnect_range / duration_recovery_range has explanatory value
-skill_duration_mi not dominated by duration-only shortcut semantics
+KEEP does not collapse to always-keep or always-switch
+switch-time skill usage is non-degenerate
 ```
 
-If reward improves but the policy uses one duration for all agents, renews all
-agents together, or merely learns a new fixed-k schedule, the decoupled-K
+If reward improves but the policy uses one survival pattern for all agents,
+renews all agents together, or merely learns a new fixed-k schedule, the decoupled-K
 mechanism has not been demonstrated.
 
 User clarification 2026-07-01: collapse to a fixed/shared lifetime is not an
@@ -647,9 +646,11 @@ controllable latent that can shape skill selection and process-level behavior.
 
 ## Horizon-Aware Skill Windows
 
-HMASD refreshes all agent skills synchronously every `k` primitive steps.
-HA-CTSE keeps the global synchronization interval but lets each agent decide
-whether to keep or edit its active skill at each high-level interval.
+2026-07-14 amendment: the active core uses a fixed global check clock and
+all-agent autoregressive editing. Discrete duration selection is retired from
+the core. HMASD refreshes all agent skills synchronously every `k0` primitive
+steps; HA-CTSE checks every agent at the same `k0` clock but lets each agent
+independently keep or edit its active skill.
 
 Each agent keeps:
 
@@ -659,36 +660,53 @@ skill_age age_i
 optional window_state w_i
 ```
 
-At high-level interval `tau`:
+At every high-level interval `tau`, all agents participate in one stored order.
+The effective token set for an active agent is:
 
 ```text
-m_i ~ pi_term(m | c_tau, g_tau, o_i, z_prev_i, age_i)
+E_i(z_prev_i) = {KEEP} union {SET(z): z != z_prev_i}
 ```
 
-`m_i = 0` means keep the current skill:
+With `K` skills this is `K` effective choices, not `K*D`. Initial assignment
+masks `KEEP`; normal checks mask `SET(current_skill)`.
+
+`KEEP` means:
 
 ```text
 z_i = z_prev_i
-age_i = age_i + 1
+age_i continues
 ```
 
-`m_i = 1` means edit:
+`SET(z)` means:
 
 ```text
-z_tilde_i ~ pi_z(z | c_tau, g_tau, o_i, z_prev_i, age_i)
-z_i = z_tilde_i
+z_i = z
 age_i = 0
 ```
 
-The bounded window constraints are:
+After each token, apply it immediately to a working roster. Later agents are
+conditioned on earlier applied edits plus the still-active skills of agents not
+yet processed. Thus checking is synchronous while realized skill renewal and
+lifetime remain asynchronous.
+
+The active core has no forced `H_max`, no duration candidate set, and no
+default minimum-age mask beyond the one-block check interval. A minimum-age
+mask is allowed only as a later explicit churn-control ablation after evidence
+of pathological rapid switching. Any mask must be applied before sampling so
+stored and executed PPO log-probabilities match.
+
+The keep and switch-skill probabilities are factorized:
 
 ```text
-if age_i < H_min: mask edit before sampling
-if age_i >= H_max: force or strongly bias termination
+P(KEEP)   = p_keep
+P(SET(z)) = (1 - p_keep) * pi_z(z | SWITCH), z != current
 ```
 
-Masking must happen before sampling so PPO log-probabilities match executed
-actions.
+There is no entropy bonus on `KEEP/SWITCH`. Conditional switch-skill entropy
+may preserve skill supply, but for this regularizer its switch-probability
+weight and shared feature input must be detached so only the switch-skill branch
+receives the entropy gradient. It must not pay the keep path to switch more
+often, directly or through the shared trunk.
 
 ## Skill Process View
 
@@ -696,47 +714,24 @@ _Condensed 2026-07-06 (completed/superseded). Full text: `memory/backup_20260706
 - After HA-CTSE separates the high-level check interval from individual skill
 - renewal, `k` and the actual skill lifetime are different objects:
 
-## Discrete Lifetime Sets
+## Retired Discrete Lifetime Sets
 
-A useful simplification is to let the high-level policy choose skill lifetimes
-from a discrete set:
+Discrete lifetime selection `(z_i, d_i)` is retired from the active core. It
+expanded each agent's effective choice from `K` to `K*D`, trained short
+durations more frequently because high samples were completed segments, and
+allowed duration to substitute for skill semantics. Frozen discrete-duration
+runs remain historical comparators only; do not enlarge, retune, or restore the
+duration head or its entropy floor.
 
-```text
-D = {d_1, d_2, ..., d_M}
-T_i = d_i * k
-```
-
-where `d_i` is measured in high-level check intervals, not necessarily primitive
-steps. On initial assignment or executed edit, the high-level policy samples:
-
-```text
-d_i ~ pi_duration(d | c_tau, g_tau, o_i, z_i, age_i)
-```
-
-The skill then persists until its countdown expires, unless an explicit
-early-termination ablation is enabled.
-
-This can simplify training because:
-
-- termination credit assignment becomes a discrete duration-choice problem;
-- segment lengths come from a small known set, which simplifies process buffer
-  batching and masking;
-- high-frequency keep/edit noise is reduced;
-- process rewards can be assigned to completed duration buckets more reliably.
-
-This is not free. Duration can become a shortcut for skill identity. Any
-discrete-duration implementation must track:
+Actual lifetime is now the run length of consecutive `KEEP` decisions. The
+initial keep bias is derived once from the retired source distribution:
 
 ```text
-duration_only_accuracy
-skill_usage_by_duration
-return_by_duration
-early_expiry_or_forced_renewal_rate
+p_keep_init = 1 - 1 / mean(duration_blocks)
 ```
 
-The duration set is therefore a research hypothesis, not a hard requirement.
-It may become the preferred core if it stabilizes process learning; otherwise it
-should remain an ablation against learned termination.
+For the active `{1,2,3,4}`-block source this is `0.6`. It is an initialization,
+not a sweep parameter or a lifetime reward.
 
 ## On-Policy Update Boundary
 
@@ -760,23 +755,31 @@ running, but the learning data contract must not silently mix policy versions.
 
 ## High-Level Log Probability
 
-For stochastic bridge:
+For each all-agent autoregressive edit sequence:
 
 ```text
-log_pi_high =
-    log pi_g(g_tau | c_tau)
-  + sum_i log pi_term(m_i | x_i)
-  + sum_{i: m_i = 1} log pi_z(z_tilde_i | x_i)
+log pi(e_i) =
+    log p_keep_i                                      if KEEP
+    log(1 - p_keep_i) + log pi_z(z_i | SWITCH, prefix) if SET(z_i)
 ```
 
-where:
+The sequence log-probability is the sum of the token log-probabilities, plus
+`log pi_g(g_tau | c_tau)` once if a stochastic bridge is active at that check.
+The stored teacher-forcing prefix is the applied working roster, not merely a
+count of prior tokens.
+
+High PPO is owned by fixed check transitions, not variable process segments:
 
 ```text
-x_i = (c_tau, g_tau, o_i, z_prev_i, age_i)
+R_tau^H = sum_{r=0}^{L_tau-1} gamma^r r_env[tau*k0+r]
+Gamma_tau = gamma^L_tau
 ```
 
-For deterministic bridge, the first term is zero and has no policy-gradient
-path.
+Normally `L_tau=k0`; an episode-terminal block may be shorter. Compute GAE on
+each environment's check sequence. One check advantage is shared across its
+agent tokens, and the token dimension is averaged so gradient scale does not
+grow with agent count. This is MAT-style autoregressive PPO, not a claim of the
+full MAT monotonic-improvement theorem.
 
 Hard skill replacement is not differentiable:
 
@@ -798,17 +801,17 @@ Do not expect gradients through the hard mask itself.
 
 ## High-Level Reward
 
-The high-level interval reward is:
+The active R30 high-level interval reward is only the discounted environment
+reward over the fixed check block:
 
 ```text
-R_high =
-    sum_env_reward_over_interval
-  - alpha * num_executed_edits
-  - beta * num_skill_switches
-  - eta * sum_i executed_edit_i / (age_i + 1)^p
+R_high = sum_env_reward_over_check_block
 ```
 
-Forced initial skill assignment must not receive edit or switch penalty.
+No edit penalty, switch penalty, positive lifetime reward, or semantic
+intrinsic reward enters the active `KEEP/SET` return. Such terms would hard-code
+persistence or let long skills earn more merely by surviving. A later accepted
+fixed-window semantic target may enter low-level GAE only.
 
 ## Process-Centric Exploration
 

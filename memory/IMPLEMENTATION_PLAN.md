@@ -4,7 +4,45 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Post-R29 Realized-Effect Target Gate
+## R30 Fixed-Clock Autoregressive Edit Gate
+
+Active causal edge:
+
+```text
+fixed global check clock k0
+-> complete all-agent autoregressive KEEP/SET action
+-> lifetime learned by KEEP survival without duration shortcut
+```
+
+Accepted design:
+`docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`.
+
+One coherent implementation boundary:
+
+1. Replace the active duration head with separate keep and conditional
+   switch-skill heads. Mask initial `KEEP` and normal `SET(current_skill)`.
+2. At every `k0` check, give every agent one token in a stored order. Apply each
+   token immediately to the working roster before evaluating the next agent.
+3. Move high PPO from completed variable segments to a fixed-check buffer with
+   per-environment check-sequence GAE and one shared block advantage. Re-evaluate
+   stored token sequences with teacher forcing.
+4. Keep process segments independent of the high buffer: `KEEP` continues the
+   active segment; `SET` closes and opens it; episode and policy-update
+   boundaries still flush it.
+5. Remove duration candidates, duration entropy floors, edit/switch penalties,
+   forced maximum age, and lifetime rewards from the active mode. Initialize
+   `p_keep=0.6` for the current `{1,2,3,4}`-block source.
+6. Preserve `pi_l(a_i | o_i, z_i)`. Do not add a semantic reward in this
+   implementation; retain only the fixed, duration-blind `W=k0` interface for
+   the later realized-effect target.
+
+The evidence-bearing check after implementation is one reward-pure,
+mechanism-matched short comparison. It reads only: all-agent token coverage,
+lifetime survival without always-keep collapse, switch-time skill usage plus
+edit synchrony, and immediate task safety. It does not add a duration sweep,
+team mechanism, or semantic reward.
+
+## Deferred Post-R29 Realized-Effect Target Gate
 
 Active causal edge:
 
@@ -60,7 +98,7 @@ R29 completed boundary:
 4. GPT-5.6 Pro returned `RETIRE`; the disposition and failure review accepted
    R29 as diagnostic-only and retired the online actor-density-ratio family.
 
-Current boundary:
+Deferred boundary after R30 temporal restructuring:
 
 1. Do not implement another reward yet. Ask GPT-5.6 Pro for exactly one
    task-generic target that couples skill-conditioned action to realized
@@ -70,9 +108,10 @@ Current boundary:
 3. Failure at that diagnostic retires or revises the target before any reward
    comparator.
 
-Core MARL impact: the R29 online reward path is retired. The next gate changes
-no PPO reward, return, optimizer, high-level policy, team mechanism, or lifetime
-semantics until a reward-off realized-effect target passes.
+Core MARL impact: the R29 online reward path remains retired. R30 changes the
+high-level temporal controller but adds no intrinsic reward. After the fixed
+clock removes duration as a semantic shortcut, resume only the smallest
+reward-off realized-effect diagnostic selected for the fixed `W=k0` interface.
 
 ## Legacy Compatibility Boundary
 

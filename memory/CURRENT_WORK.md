@@ -22,15 +22,19 @@ and history live in their owning files.
 
 ## Current Objective
 
-Find an individual-skill target that connects policy-matched stochastic action
-to a task-generic realized environment effect inside the natural on-policy
-trajectory domain:
+Replace discrete skill-duration selection with a fixed-clock, complete
+all-agent autoregressive edit decision so variable lifetime is learned without
+duration shortcuts or short-segment sampling bias:
 
 ```text
-natural on-policy prefix
--> persistent skill-conditioned stochastic execution
--> realized environment-effect differentiation
+fixed global check clock k0
+-> all-agent KEEP/SET(skill) sequence over an applied working roster
+-> lifetime as learned KEEP survival
 ```
+
+The post-R29 realized-effect target remains the next semantic edge, but it is
+deferred until duration is removed from the active temporal controller. R30
+does not add a new intrinsic reward.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -68,13 +72,20 @@ natural on-policy prefix
   only change prior/window/aggregation/scale/clip are retired as online reward;
   R29 remains diagnostic-only. The reusable failure is that state-conditional
   action-mean separation need not produce stable natural effects.
+- GPT-5.6 Pro identified the current `(skill,duration)` / expired-agent update
+  as a structural conflict with complete MAT-style sequential editing. The
+  accepted R30 correction retires duration selection from the core: every agent
+  emits `KEEP` or `SET(other_skill)` every `k0`, high PPO moves to fixed check
+  blocks, and variable process segments remain low-level records only.
 
 ## Next Actions
 
-1. Give GPT-5.6 Pro the fixed Git commit and the post-R29
-   `20260714_post_r29_effect_target/REVIEW_ENTRY.md`.
-2. Archive and disposition its one-target response, then implement only the
-   smallest reward-off diagnostic selected for the realized-effect edge.
+1. Implement the accepted R30 policy, all-agent collector, fixed-check high
+   buffer/GAE, and process-segment decoupling as one coherent boundary.
+2. Run one reward-pure, mechanism-matched short comparison of frozen duration
+   editing versus fixed-clock `KEEP/SET`.
+3. Resume the post-R29 fixed-window realized-effect target only after the R30
+   temporal controller is operationally and scientifically interpretable.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -94,6 +105,12 @@ is in `memory/ExpRecord.md`. The manual review package is under
 - Keep R29 diagnostic-only. Its online `real_reward` path and variants that
   alter only prior, window, aggregation, coefficient, normalization, or clip
   are retired.
+- Do not tune or enlarge duration candidates, restore a duration head or
+  duration entropy floor, or use duration as a skill-semantic input in the
+  active core.
+- R30 uses no keep entropy, edit/switch penalty, forced maximum lifetime, or
+  positive lifetime reward. Long survival must be learned from delayed task
+  advantage rather than paid for directly.
 - Do not inject another individual-skill reward before a reward-off diagnostic
   establishes the selected realized-effect target under policy-matched
   stochastic execution.
@@ -111,4 +128,8 @@ is in `memory/ExpRecord.md`. The manual review package is under
   `memory/LTM/EXPERIMENT_ARCHIVE.md` — superseded/completed detail.
 - `memory/LTM/R29_ACTOR_DENSITY_RATIO_FAILURE_REVIEW_20260714.md` — accepted
   R29 retirement and next causal edge.
+- `docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md` — accepted temporal
+  controller and implementation boundary.
+- `docs/external-review/gpt5_6_pro/20260714_fixed_clock_keep_set/` — raw external
+  response and controller disposition.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
