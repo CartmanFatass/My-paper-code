@@ -395,6 +395,14 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         """获取当前环境状态用于绘图和分析"""
         try:
             state_info = {}
+
+            # Non-UAV environments may expose their own compact diagnostic
+            # state.  Merge it before the legacy UAV-specific fields below.
+            state_provider = getattr(self.env, "get_current_state", None)
+            if callable(state_provider):
+                provided_state = state_provider()
+                if isinstance(provided_state, dict):
+                    state_info.update(provided_state)
             
             # 获取UAV位置
             if hasattr(self.env, 'uav_positions'):

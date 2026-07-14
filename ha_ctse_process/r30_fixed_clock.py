@@ -45,6 +45,7 @@ class FixedClockAREditPolicy(nn.Module):
         agent_relevance_dim: int = 0,
         keep_init: float = 0.6,
         age_reference_steps: int = 500,
+        force_refresh_every_check: bool = False,
     ) -> None:
         super().__init__()
         self.obs_dim = int(obs_dim)
@@ -52,6 +53,7 @@ class FixedClockAREditPolicy(nn.Module):
         self.n_skills = int(n_skills)
         self.omega_dim = int(max(omega_dim, 0))
         self.agent_relevance_dim = int(max(agent_relevance_dim, 0))
+        self.force_refresh_every_check = bool(force_refresh_every_check)
         self.ar_prefix_dim = self.n_skills * (1 + 2 * self.n_agents)
         self.age_reference_steps = int(max(age_reference_steps, 1))
         input_dim = (
@@ -148,7 +150,7 @@ class FixedClockAREditPolicy(nn.Module):
         detached_hidden: bool = False,
     ) -> torch.Tensor:
         logits = self.skill_head(hidden.detach() if detached_hidden else hidden)
-        if current_active:
+        if current_active and not self.force_refresh_every_check:
             logits = logits.clone()
             logits[:, int(current_skill)] = torch.finfo(logits.dtype).min
         return logits
@@ -230,6 +232,15 @@ class FixedClockAREditPolicy(nn.Module):
             skill_dist = Categorical(logits=skill_logits)
             if not active:
                 skill = torch.argmax(skill_logits, dim=-1) if deterministic else skill_dist.sample()
+                kind = torch.ones_like(skill, dtype=torch.long) * SET_TOKEN
+                logp = skill_dist.log_prob(skill)
+                entropy_weight = torch.ones_like(logp)
+            elif self.force_refresh_every_check:
+                skill = (
+                    torch.argmax(skill_logits, dim=-1)
+                    if deterministic
+                    else skill_dist.sample()
+                )
                 kind = torch.ones_like(skill, dtype=torch.long) * SET_TOKEN
                 logp = skill_dist.log_prob(skill)
                 entropy_weight = torch.ones_like(logp)
@@ -320,11 +331,17 @@ class FixedClockAREditPolicy(nn.Module):
                 raise ValueError("initial R30 token must be SET")
             skill_dist = Categorical(logits=skill_logits)
             if kind == KEEP_TOKEN:
+                if self.force_refresh_every_check:
+                    raise ValueError("shared fixed-k control cannot replay KEEP")
                 logp = F.logsigmoid(keep_logit)
             elif kind == SET_TOKEN:
                 skill = set_skill[position].long().reshape(1)
                 skill_logp = skill_dist.log_prob(skill)
-                logp = skill_logp if not active else F.logsigmoid(-keep_logit) + skill_logp
+                logp = (
+                    skill_logp
+                    if not active or self.force_refresh_every_check
+                    else F.logsigmoid(-keep_logit) + skill_logp
+                )
                 working_skills[agent_id] = int(skill.item())
                 working_ages[agent_id] = 0
                 working_active[agent_id] = True
@@ -332,7 +349,7 @@ class FixedClockAREditPolicy(nn.Module):
                 raise ValueError(f"invalid R30 token kind {kind}")
             weight = (
                 torch.ones_like(logp)
-                if not active
+                if not active or self.force_refresh_every_check
                 else (1.0 - torch.sigmoid(keep_logit)).detach()
             )
             entropy = Categorical(logits=entropy_logits).entropy() * weight

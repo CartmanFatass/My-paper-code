@@ -1617,6 +1617,13 @@ class StandaloneProcessAgent:
         self.n_agents = int(n_agents)
         self.obs_dim = int(obs_dim)
         self.state_dim = int(state_dim or getattr(config, "state_dim", 0) or (self.obs_dim * self.n_agents))
+        self.scenario = str(getattr(config, "scenario", "")).lower()
+        self.alice_bob_state_holder_slice = tuple(
+            getattr(config, "alice_bob_state_holder_slice", (4, 6))
+        )
+        self.alice_bob_state_long_phase_index = int(
+            getattr(config, "alice_bob_state_long_phase_index", 11)
+        )
         self.r28_g1_arm = str(getattr(config, "r28_g1_arm", "off")).lower()
         if self.r28_g1_arm not in {"off", *R28_G1_ARMS}:
             raise ValueError(f"unsupported r28_g1_arm={self.r28_g1_arm!r}")
@@ -1651,6 +1658,9 @@ class StandaloneProcessAgent:
             raise ValueError(f"unsupported high_controller={self.high_controller!r}")
         self.r30_enabled = self.high_controller == "r30_fixed_clock_ar_edit"
         self.r30_keep_init = float(getattr(config, "r30_keep_init", 0.6))
+        self.r30_force_refresh_every_check = bool(
+            getattr(config, "r30_force_refresh_every_check", False)
+        )
         self.r30_high_buffer_version = int(
             getattr(config, "r30_high_buffer_version", HIGH_BUFFER_VERSION)
         )
@@ -2017,6 +2027,7 @@ class StandaloneProcessAgent:
                 agent_relevance_dim=high_agent_relevance_dim,
                 keep_init=self.r30_keep_init,
                 age_reference_steps=self.intrinsic_phase_reference_steps,
+                force_refresh_every_check=self.r30_force_refresh_every_check,
             ).to(self.device)
             self.high_value = HighCheckValue(
                 state_dim=self.state_dim,
@@ -6857,6 +6868,11 @@ class StandaloneProcessAgent:
                 "r30_spell_le_4k0_count": 0.0,
                 "r30_spell_gt_4k0_frac": 0.0,
                 "r30_spell_le_4k0_frac": 0.0,
+                "alice_bob_r30_stable_holder_keep_rate": 0.0,
+                "alice_bob_r30_stable_runner_set_rate": 0.0,
+                "alice_bob_r30_role_boundary_both_set_rate": 0.0,
+                "alice_bob_r30_cycle_action_match_rate": 0.0,
+                "alice_bob_r30_cycle_metric_rows": 0.0,
             }
 
         row_count = len(rows)
@@ -7069,6 +7085,62 @@ class StandaloneProcessAgent:
             if switch_array.size
             else np.zeros(self.n_skills, dtype=np.float64)
         )
+        alice_bob_role_metrics = {
+            "alice_bob_r30_stable_holder_keep_rate": 0.0,
+            "alice_bob_r30_stable_runner_set_rate": 0.0,
+            "alice_bob_r30_role_boundary_both_set_rate": 0.0,
+            "alice_bob_r30_cycle_action_match_rate": 0.0,
+            "alice_bob_r30_cycle_metric_rows": 0.0,
+        }
+        if self.scenario == "alice_bob_asymmetric_cycles" and self.n_agents == 2:
+            holder_keep: list[float] = []
+            runner_set: list[float] = []
+            boundary_both_set: list[float] = []
+            cycle_match: list[float] = []
+            holder_start, holder_stop = self.alice_bob_state_holder_slice
+            for row in normal_decisions:
+                state = np.asarray(row.state, dtype=np.float32).reshape(-1)
+                if state.size <= self.alice_bob_state_long_phase_index:
+                    continue
+                holder_logits = state[int(holder_start) : int(holder_stop)]
+                if holder_logits.size != 2:
+                    continue
+                holder = int(np.argmax(holder_logits))
+                runner = 1 - holder
+                tokens_by_agent = np.full(self.n_agents, -1, dtype=np.int64)
+                for position, agent_id in enumerate(
+                    np.asarray(row.agent_order, dtype=np.int64)
+                ):
+                    tokens_by_agent[int(agent_id)] = int(row.token_kind[position])
+                long_phase = float(state[self.alice_bob_state_long_phase_index])
+                role_boundary = bool(abs(long_phase) <= 1e-6)
+                if role_boundary:
+                    matched = bool(np.all(tokens_by_agent == SET_TOKEN))
+                    boundary_both_set.append(float(matched))
+                else:
+                    holder_matched = tokens_by_agent[holder] == KEEP_TOKEN
+                    runner_matched = tokens_by_agent[runner] == SET_TOKEN
+                    holder_keep.append(float(holder_matched))
+                    runner_set.append(float(runner_matched))
+                    matched = bool(holder_matched and runner_matched)
+                cycle_match.append(float(matched))
+            alice_bob_role_metrics = {
+                "alice_bob_r30_stable_holder_keep_rate": (
+                    float(np.mean(holder_keep)) if holder_keep else 0.0
+                ),
+                "alice_bob_r30_stable_runner_set_rate": (
+                    float(np.mean(runner_set)) if runner_set else 0.0
+                ),
+                "alice_bob_r30_role_boundary_both_set_rate": (
+                    float(np.mean(boundary_both_set))
+                    if boundary_both_set
+                    else 0.0
+                ),
+                "alice_bob_r30_cycle_action_match_rate": (
+                    float(np.mean(cycle_match)) if cycle_match else 0.0
+                ),
+                "alice_bob_r30_cycle_metric_rows": float(len(cycle_match)),
+            }
         return {
             "high_loss": float(loss.detach().cpu().item()),
             "high_policy_loss": float(policy_loss.detach().cpu().item()),
@@ -7116,6 +7188,7 @@ class StandaloneProcessAgent:
                 if lifetime_events
                 else 0.0
             ),
+            **alice_bob_role_metrics,
         }
 
     def update_high_from_segments(

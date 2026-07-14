@@ -85,6 +85,11 @@ does not add a new intrinsic reward.
   actions are absent in R30 mode, high PPO is isolated in `HighCheckBuffer`,
   legacy checkpoint migration is explicit, and the registered reward-pure
   paired runner/analyzer are ready.
+- `alice_bob_asymmetric_cycles` is now the fast mechanism sandbox: one agent
+  holds a button for four `k0` blocks while the other changes target every
+  block, then roles swap. Its separate semantic lane retains the existing
+  low-only transition-skill pressure; it does not alter the registered
+  reward-pure energy comparison.
 
 ## Next Actions
 
@@ -92,6 +97,10 @@ does not add a new intrinsic reward.
    under `logs/r30_fixed_clock_paired_320k_20260714_115559`; retain the already
    completed legacy arm, then read the single result JSON and follow the
    predeclared M1-M4 branch in `memory/ExpRecord.md`.
+2. After the local GPU is released, run one parallel 16-env, single-seed
+   Alice--Bob mechanism screen: adaptive KEEP/SET versus the matched shared-`k`
+   forced-refresh control. Read cycle success plus role-conditioned
+   holder-KEEP/runner-SET alignment; do not promote this toy result to S7.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under

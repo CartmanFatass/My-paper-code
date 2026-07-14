@@ -63,6 +63,8 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_keep_init",
     "r30_bridge_context_mode",
     "r30_high_buffer_version",
+    "r30_force_refresh_every_check",
+    "alice_bob_semantic_reward_enabled",
     "r30_high_gae_lambda",
     "n_z",
     "skill_lifetime_candidates",
@@ -2282,7 +2284,7 @@ def enforce_r29_action_info_contract(
 
 
 def enforce_r30_contract(config, args: argparse.Namespace) -> None:
-    """Fail closed around the reward-pure fixed-clock R30 controller."""
+    """Fail closed around R30 and its explicit Alice--Bob toy lane."""
 
     mode = str(getattr(config, "high_controller", "legacy_duration"))
     if mode == "legacy_duration":
@@ -2316,6 +2318,16 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         "enable_topology_potential_shaping",
     )
     enabled_rewards = [name for name in explicit_reward_args if bool(getattr(args, name, False))]
+    transition_reward_coef = float(
+        getattr(config, "transition_skill_reward_coef", 0.0)
+    )
+    alice_bob_semantic_lane = bool(
+        normalize_scenario(str(getattr(args, "scenario", "")))
+        == "alice_bob_asymmetric_cycles"
+        and getattr(config, "alice_bob_semantic_reward_enabled", False)
+    )
+    if transition_reward_coef != 0.0 and not alice_bob_semantic_lane:
+        enabled_rewards.append("transition_skill_reward_coef")
     injection_switches = (
         "process_reward_injection",
         "outcome_residual_injection",
@@ -2329,7 +2341,8 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
     ]
     if enabled_rewards or enabled_injections:
         raise ValueError(
-            "R30 is reward-pure; disable intrinsic reward paths: "
+            "R30 is reward-pure outside the explicit Alice--Bob semantic lane; "
+            "disable intrinsic reward paths: "
             + ",".join(enabled_rewards + enabled_injections)
         )
 

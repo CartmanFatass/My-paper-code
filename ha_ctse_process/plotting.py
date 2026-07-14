@@ -132,6 +132,19 @@ COMM_METRIC_FIELDS = (
     "routing_overhead",
 )
 
+ALICE_BOB_METRIC_FIELDS = (
+    "alice_bob_targets_completed",
+    "alice_bob_cycle_success_rate",
+    "alice_bob_holder_occupancy_fraction",
+    "alice_bob_runner_target_fraction",
+    "alice_bob_role_switch_count",
+    "alice_bob_active_holder",
+    "alice_bob_active_plate",
+    "alice_bob_active_target",
+    "alice_bob_window_index",
+    "alice_bob_collection_event",
+)
+
 DERIVED_EVAL_FIELDS = (
     "backhaul_connected_flag",
     "backhaul_connected_step_fraction",
@@ -265,6 +278,11 @@ R30_METRIC_FIELDS = (
     "r30_spell_le_4k0_count",
     "r30_spell_gt_4k0_frac",
     "r30_spell_le_4k0_frac",
+    "alice_bob_r30_stable_holder_keep_rate",
+    "alice_bob_r30_stable_runner_set_rate",
+    "alice_bob_r30_role_boundary_both_set_rate",
+    "alice_bob_r30_cycle_action_match_rate",
+    "alice_bob_r30_cycle_metric_rows",
 )
 
 
@@ -681,6 +699,7 @@ EVAL_FIELDS = (
     "length",
     *UAV_METRIC_FIELDS,
     *COMM_METRIC_FIELDS,
+    *ALICE_BOB_METRIC_FIELDS,
     *DERIVED_EVAL_FIELDS,
 )
 
@@ -737,7 +756,7 @@ def extract_uav_metrics(info: dict[str, Any] | None) -> dict[str, float]:
         "connected_uavs": ("connected_uavs", "uavs_with_backhaul"),
     }
     metrics = {}
-    for key in (*UAV_METRIC_FIELDS, *COMM_METRIC_FIELDS):
+    for key in (*UAV_METRIC_FIELDS, *COMM_METRIC_FIELDS, *ALICE_BOB_METRIC_FIELDS):
         scalar = numeric_scalar(source.get(key))
         if scalar is not None:
             metrics[key] = scalar

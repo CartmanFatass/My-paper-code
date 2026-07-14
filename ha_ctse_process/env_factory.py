@@ -5,6 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable
 
+from envs.pettingzoo.alice_bob_asymmetric_cycles import (
+    AliceBobAsymmetricCyclesEnv,
+)
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
@@ -29,6 +32,10 @@ SCENARIO_ALIASES = {
     "7": "energy",
     "s7": "energy",
     "scenario7": "energy",
+    "alice_bob_asymmetric_cycles": "alice_bob_asymmetric_cycles",
+    "alice-bob-asymmetric-cycles": "alice_bob_asymmetric_cycles",
+    "alice_bob_multiscale": "alice_bob_asymmetric_cycles",
+    "alice-bob-multiscale": "alice_bob_asymmetric_cycles",
 }
 
 
@@ -78,10 +85,11 @@ def make_env(config, spec: EnvSpec) -> Callable[[], ParallelToArrayAdapter]:
                 **kwargs,
                 scale_mode=spec.scale_mode or "train",
             )
+        elif scenario == "alice_bob_asymmetric_cycles":
+            raw_env = AliceBobAsymmetricCyclesEnv(**kwargs)
         else:
             raise AssertionError(f"Unhandled normalized scenario: {scenario}")
 
         return ParallelToArrayAdapter(raw_env, seed=env_seed)
 
     return _init
-
