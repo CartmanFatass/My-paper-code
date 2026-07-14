@@ -196,9 +196,14 @@ pointer, not evidence. Read the raw text and disposition the advice
 (accept/reject/modify/defer). If raw text is missing, mark the evidence
 incomplete. Record source model, date, related claim, and disposition.
 
-GPT-5.6 Pro / ChatGPT web exchange is manual. Codex prepares the local question
-and upload package but does not automate the ChatGPT website. The user uploads
-the files and returns the raw response for archival and disposition.
+GPT-5.6 Pro / ChatGPT web exchange is manual outside overnight work. For an
+overnight task, the user has standing authorization for Codex to use the
+in-app browser to submit the exact tracked handoff prompt in the existing
+`HMASD Algorithm Consultation` conversation with the `Pro` model, wait for the
+response, archive it raw, disposition it, and continue only the accepted
+registered branch. Reuse that single conversation; do not create duplicate
+review chats or submit parallel prompts. Stop for authentication, CAPTCHA,
+permission, or ambiguous-model issues instead of switching accounts or models.
 
 Every GPT-5.6 Pro handoff must also end with one directly copyable prompt in the
 controller's user-facing response. Do not provide only file paths or describe

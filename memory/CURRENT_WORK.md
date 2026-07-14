@@ -22,6 +22,10 @@ and history live in their owning files.
 - **Local overnight authorization:** the user permits a longer local CUDA run
   overnight when the next causal gate is registered and requires it. This does
   not authorize speculative runs before the R35 edge and comparator are fixed.
+- **Overnight review handoff:** Codex may automatically submit the tracked
+  question in the existing `HMASD Algorithm Consultation` browser conversation
+  with the `Pro` model, archive the raw response, and continue only the accepted
+  registered branch. Do not create duplicate review conversations.
 
 ## Current Objective
 
@@ -149,12 +153,12 @@ direct intervention-scored roster-complementarity selection are retired.
 
 ## Next Actions
 
-1. Archive and disposition the valid R34 result with its frozen-source
-   interpretation.
-2. Submit the tracked post-R34 question to GPT-5.6 Pro manually through the
-   GitHub-backed review workflow.
-3. Accept, modify, or reject exactly one returned R35 causal edge before any
-   new implementation or experiment contract.
+1. Await the automatically submitted GPT-5.6 Pro review of the tracked R34
+   result at commit `d2148522e629050bce3a262865d954e7d4619cb9`.
+2. Archive its raw response and accept, modify, or reject exactly one returned
+   R35 causal edge.
+3. Implement and register only that accepted edge; a longer registered local
+   gate may run overnight under the standing authorization.
 
 Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
 `memory/ExpRecord.md`.
