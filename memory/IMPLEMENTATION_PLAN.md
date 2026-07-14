@@ -4,20 +4,21 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Post-R28 On-Policy Target Gate
+## Post-R29 Realized-Effect Target Gate
 
 Active causal edge:
 
 ```text
-on-policy state visitation
--> support-compatible, non-shortcut individual differentiation signal
+natural on-policy prefix
+-> persistent skill intervention under policy-matched stochastic execution
+-> task-generic realized environment-effect separation
 ```
 
 The R28-G1 frozen reward design remains evidence, but its launch package is
 blocked before formal execution. The disposition and cross-round baseline
 matrix live in `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
 
-Completed boundary:
+R28 completed boundary:
 
 - a separate default-off low-level reward module using frozen scorer/source
   continuity, exact same-forward deterministic-action evidence, natural clocks,
@@ -40,7 +41,7 @@ Completed boundary:
   `0.068359`, stochastic OOD `0.823242`, and 64 rows in every label-duration
   cell. Random action execution is sufficient to break the frozen support.
 
-Current boundary:
+R29 completed boundary:
 
 1. R29-G0 passed the three-checkpoint reward-off gate. The natural on-policy
    action-information target is positive against the cyclic sham and the
@@ -53,14 +54,25 @@ Current boundary:
    actual-skill column is anchored to PPO's stored old likelihood after removing
    the common tanh Jacobian, while cross-skill columns follow full replay. This
    avoids CUDA GRU batch-shape drift without weakening the source likelihood.
-3. Run the authorized single-seed `probe_only` versus `real_reward` pair at
-   +320K steps per arm. The run itself is the implementation check; after final
-   R26/task evidence, prepare the raw result package for GPT-5.6 Pro.
+3. The authorized single-seed `probe_only` versus `real_reward` pair completed
+   at +320K steps per arm. Implementation was valid, but the score, R26
+   transfer, and task-safety gates failed.
+4. GPT-5.6 Pro returned `RETIRE`; the disposition and failure review accepted
+   R29 as diagnostic-only and retired the online actor-density-ratio family.
 
-Core MARL impact: when R29-T10 is enabled, only the low-level reward, GAE/returns,
-and low actor/critic optimizer updates change. High-level returns/policy,
-collector semantics, environment dynamics, team intent, credit assignment, and
-skill lifetime remain unchanged.
+Current boundary:
+
+1. Do not implement another reward yet. Ask GPT-5.6 Pro for exactly one
+   task-generic target that couples skill-conditioned action to realized
+   environmental effect.
+2. The next implementation is only the smallest reward-off diagnostic for that
+   target under policy-matched stochastic execution and a matched null.
+3. Failure at that diagnostic retires or revises the target before any reward
+   comparator.
+
+Core MARL impact: the R29 online reward path is retired. The next gate changes
+no PPO reward, return, optimizer, high-level policy, team mechanism, or lifetime
+semantics until a reward-off realized-effect target passes.
 
 ## Legacy Compatibility Boundary
 
@@ -88,6 +100,9 @@ skill lifetime remain unchanged.
 - Process reward with magnitude far below environment reward remains
   diagnostic-only unless explicitly changed to a centered/advantage-style
   shaping mode.
+- Detached same-action actor-density ratios are diagnostic-only. Do not create
+  online variants by changing their prior, window, aggregation, coefficient,
+  normalization, or clip.
 
 
 ## Archived Plan History

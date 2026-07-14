@@ -2086,6 +2086,10 @@ def enforce_r29_action_info_contract(
         return
     if mode not in R29_ACTION_INFO_MODES:
         raise ValueError(f"unsupported R29 action-information mode {mode!r}")
+    if mode == "real_reward":
+        raise ValueError(
+            "R29 online reward is retired; use probe_only for diagnostics"
+        )
     if str(getattr(args, "r28_g1_arm", "off")) != "off":
         raise ValueError("R29 and R28 rewards cannot be enabled together")
     if not np.isfinite(coefficient) or coefficient <= 0.0:

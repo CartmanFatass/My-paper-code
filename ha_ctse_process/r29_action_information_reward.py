@@ -1,4 +1,4 @@
-"""On-policy recurrent terminal-block density-ratio reward for R29-T10."""
+"""Diagnostic-only recurrent terminal-block density ratio for retired R29."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from .r29_action_information import evaluate_executed_action_information
 
 
 MODES = ("probe_only", "real_reward")
+ONLINE_REWARD_RETIRED = True
 REWARD_COEF = 0.05
 REWARD_CLIP = 0.05
 TERMINAL_WINDOW = 10
@@ -68,6 +69,11 @@ class OnPolicyActionInformationReward:
     ) -> None:
         if mode not in MODES:
             raise R29ActionInformationContractError(f"unsupported R29 mode {mode!r}")
+        if mode == "real_reward":
+            raise R29ActionInformationContractError(
+                "R29 online reward was retired after EXP-20260714-r29-t10-paired-320k; "
+                "use probe_only for historical diagnostics"
+            )
         if not np.isfinite(coefficient) or float(coefficient) <= 0.0:
             raise R29ActionInformationContractError("R29 coefficient must be positive")
         if not np.isfinite(clip) or float(clip) <= 0.0:

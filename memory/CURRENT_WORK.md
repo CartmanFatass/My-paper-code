@@ -22,12 +22,14 @@ and history live in their owning files.
 
 ## Current Objective
 
-Find an individual-skill target that is defined inside the natural on-policy
+Find an individual-skill target that connects policy-matched stochastic action
+to a task-generic realized environment effect inside the natural on-policy
 trajectory domain:
 
 ```text
-on-policy state visitation
--> support-compatible, non-shortcut individual differentiation signal
+natural on-policy prefix
+-> persistent skill-conditioned stochastic execution
+-> realized environment-effect differentiation
 ```
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
@@ -62,14 +64,17 @@ on-policy state visitation
   Implementation validity passed, but the reward arm did not preserve the
   probe-only R26 signal and failed both the score and task-safety gates. This
   blocks promotion, retuning, or seed expansion on the current reward line.
+- GPT-5.6 Pro returned `RETIRE`, accepted on 2026-07-14. R29 and variants that
+  only change prior/window/aggregation/scale/clip are retired as online reward;
+  R29 remains diagnostic-only. The reusable failure is that state-conditional
+  action-mean separation need not produce stable natural effects.
 
 ## Next Actions
 
-1. Give GPT-5.6 Pro the fixed Git commit and the R29-T10 `REVIEW_ENTRY.md`, then
-   archive its raw response before interpretation. The ZIP is fallback only.
-2. Disposition the external review and complete the failure review before
-   selecting one next causal edge. Do not launch another reward experiment in
-   the meantime.
+1. Give GPT-5.6 Pro the fixed Git commit and the post-R29
+   `20260714_post_r29_effect_target/REVIEW_ENTRY.md`.
+2. Archive and disposition its one-target response, then implement only the
+   smallest reward-off diagnostic selected for the realized-effect edge.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -86,10 +91,12 @@ is in `memory/ExpRecord.md`. The manual review package is under
   team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS while
   the individual-differentiation gate is open.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
-- Keep R29 default-off and compare `probe_only` versus `real_reward` with the
-  same source, seed, exposure, optimizer settings, and other rewards.
-- Do not retune or expand R29-T10 before the frozen evidence is externally
-  reviewed and the failure-review gate selects a justified next causal edge.
+- Keep R29 diagnostic-only. Its online `real_reward` path and variants that
+  alter only prior, window, aggregation, coefficient, normalization, or clip
+  are retired.
+- Do not inject another individual-skill reward before a reward-off diagnostic
+  establishes the selected realized-effect target under policy-matched
+  stochastic execution.
 
 ## Pointers
 
@@ -102,4 +109,6 @@ is in `memory/ExpRecord.md`. The manual review package is under
   R27-G2 design.
 - `memory/LTM/IMPLEMENTATION_PLAN_ARCHIVE_20260713.md` and
   `memory/LTM/EXPERIMENT_ARCHIVE.md` — superseded/completed detail.
+- `memory/LTM/R29_ACTOR_DENSITY_RATIO_FAILURE_REVIEW_20260714.md` — accepted
+  R29 retirement and next causal edge.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
