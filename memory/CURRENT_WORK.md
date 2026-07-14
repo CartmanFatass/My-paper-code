@@ -89,20 +89,19 @@ does not add a new intrinsic reward.
   the button subtask persists for four `k0` blocks while the target subtask
   changes every block. The environment never assigns either task to an agent;
   complementary skill allocation is inferred from behavior. Its separate
-  semantic lane retains the existing low-only transition-skill pressure and
-  does not alter the registered reward-pure energy comparison.
+  semantic lane now learns from R30 low-level transition fragments and applies
+  the existing low-only transition-skill pressure; the fixed-clock high buffer
+  continues to receive raw task reward only.
 
 ## Next Actions
 
-1. Await terminal status for treatment retry `r30_fixed_clock_ar_edit_retry1`
-   under `logs/r30_fixed_clock_paired_320k_20260714_115559`; retain the already
-   completed legacy arm, then read the single result JSON and follow the
-   predeclared M1-M4 branch in `memory/ExpRecord.md`.
-2. After the local GPU is released, run one parallel 16-env, single-seed
-   Alice--Bob mechanism screen: adaptive KEEP/SET versus the matched shared-`k`
-   forced-refresh control. Read cycle success plus behavior-inferred
-   button-executor KEEP / target-executor SET alignment; do not promote this
-   toy result to S7.
+1. Run the approved parallel 16-env, 64K-per-arm Alice--Bob mechanism screen at
+   `logs/r30_alice_bob_paired_64k_20260714_163637`: adaptive KEEP/SET versus the
+   matched shared-`k` forced-refresh control.
+2. At terminal status, read `result/alice_bob_pair.json` once and interpret
+   cycle success, behavior-inferred button KEEP / target SET alignment, lifetime
+   breadth, and transition-skill differentiation. Do not promote this toy result
+   to S7.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under

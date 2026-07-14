@@ -1669,6 +1669,9 @@ class StandaloneProcessAgent:
         }:
             raise ValueError(f"unsupported high_controller={self.high_controller!r}")
         self.r30_enabled = self.high_controller == "r30_fixed_clock_ar_edit"
+        self.alice_bob_semantic_reward_enabled = bool(
+            getattr(config, "alice_bob_semantic_reward_enabled", False)
+        )
         self.r30_keep_init = float(getattr(config, "r30_keep_init", 0.6))
         self.r30_force_refresh_every_check = bool(
             getattr(config, "r30_force_refresh_every_check", False)
@@ -4811,6 +4814,116 @@ class StandaloneProcessAgent:
             "available_count": np.asarray([sample_count], dtype=np.int64),
         }
 
+    def _r30_transition_skill_update(
+        self,
+        segments: list[Segment],
+        rollout: Rollout,
+        *,
+        total_steps: int,
+    ) -> dict[str, float]:
+        """Keep Alice--Bob's low-only semantic pressure off the R30 high path."""
+
+        batch = self._transition_discriminator_batch(segments)
+        if batch is None or self.transition_discriminator is None:
+            return {}
+
+        obs_t = torch.as_tensor(batch["obs"], dtype=torch.float32, device=self.device)
+        actions_t = torch.as_tensor(batch["actions"], dtype=torch.float32, device=self.device)
+        delta_t = torch.as_tensor(batch["delta_obs"], dtype=torch.float32, device=self.device)
+        rewards_t = torch.as_tensor(batch["rewards"], dtype=torch.float32, device=self.device)
+        labels_t = torch.as_tensor(batch["labels"], dtype=torch.long, device=self.device)
+        team_t = torch.as_tensor(batch["team_codes"], dtype=torch.long, device=self.device)
+        start_obs_t = torch.as_tensor(batch["start_obs"], dtype=torch.float32, device=self.device)
+        agent_ids_t = torch.as_tensor(batch["agent_ids"], dtype=torch.long, device=self.device)
+        phase_bins_t = torch.as_tensor(batch["phase_bins"], dtype=torch.long, device=self.device)
+
+        posterior_logits, prior_logits = self.transition_discriminator(
+            obs_t,
+            actions_t,
+            delta_t,
+            rewards_t,
+            team_t,
+        )
+        terms = self.transition_discriminator.losses(
+            posterior_logits,
+            prior_logits,
+            labels_t,
+        )
+        context_loss = torch.zeros((), device=self.device)
+        context_acc = torch.zeros((), device=self.device)
+        context_logits = None
+        if self.use_context_skill_shortcut and self.transition_discriminator.use_context_shortcut:
+            context_logits = self.transition_discriminator.context_shortcut_logits(
+                start_obs_t,
+                team_t,
+                agent_ids_t,
+                phase_bins_t,
+            )
+            context_loss = F.cross_entropy(context_logits, labels_t)
+            context_acc = (context_logits.argmax(dim=-1) == labels_t).float().mean()
+
+        reward_posterior_logits = posterior_logits.detach()
+        reward_prior_logits = prior_logits.detach()
+        reward_context_logits = None if context_logits is None else context_logits.detach()
+        loss = (
+            self.transition_skill_coef * terms["posterior_loss"]
+            + self.transition_skill_prior_coef * terms["prior_loss"]
+            + self.transition_context_shortcut_coef * context_loss
+        )
+        self.process_opt.zero_grad()
+        loss.backward()
+        self.process_opt.step()
+
+        with torch.no_grad():
+            row_indices = torch.arange(labels_t.shape[0], device=self.device)
+            log_q = F.log_softmax(reward_posterior_logits, dim=-1)[row_indices, labels_t]
+            log_p = F.log_softmax(reward_prior_logits, dim=-1)[row_indices, labels_t]
+            log_context = (
+                log_p
+                if reward_context_logits is None
+                else F.log_softmax(reward_context_logits, dim=-1)[row_indices, labels_t]
+            )
+            mi = log_q - log_p
+            residual_mi = log_q - torch.maximum(log_p, log_context)
+            warmup_active = int(total_steps) < int(self.transition_skill_reward_warmup_steps)
+            transition_reward, reward_metrics = self.intrinsic_rewards.transition_rewards(
+                residual_mi,
+                coef=self.transition_skill_reward_coef,
+                clip=self.transition_skill_reward_clip,
+                warmup_active=warmup_active,
+                enabled=self.use_process_reward,
+            )
+
+        reward_np = transition_reward.cpu().numpy().astype(np.float32)
+        rollout_indices = np.asarray(batch["rollout_indices"], dtype=np.int64)
+        agent_ids = np.asarray(batch["agent_ids"], dtype=np.int64)
+        for rollout_idx, agent_id, reward_value in zip(rollout_indices, agent_ids, reward_np):
+            if 0 <= int(rollout_idx) < len(rollout.rewards) and 0 <= int(agent_id) < self.n_agents:
+                rollout.rewards[int(rollout_idx)][int(agent_id)] += float(reward_value)
+
+        return {
+            "transition_skill_samples": float(batch["sample_count"][0]),
+            "transition_skill_available_samples": float(batch["available_count"][0]),
+            "transition_skill_loss": float(terms["posterior_loss"].detach().cpu().item()),
+            "transition_skill_prior_loss": float(terms["prior_loss"].detach().cpu().item()),
+            "transition_skill_context_loss": float(context_loss.detach().cpu().item()),
+            "transition_skill_acc": float(terms["posterior_acc"].detach().cpu().item()),
+            "transition_skill_context_acc": float(context_acc.detach().cpu().item()),
+            "transition_skill_mi_mean": float(mi.mean().cpu().item()),
+            "transition_skill_mi_positive_frac": float((mi > 0.0).float().mean().cpu().item()),
+            "transition_skill_residual_mi_mean": float(residual_mi.mean().cpu().item()),
+            "transition_skill_residual_mi_positive_frac": float(
+                (residual_mi > 0.0).float().mean().cpu().item()
+            ),
+            "transition_skill_reward_mean": float(np.mean(reward_np)),
+            "transition_skill_reward_active": float(reward_metrics["active"]),
+            "transition_skill_log_q_mean": float(log_q.mean().cpu().item()),
+            "transition_skill_log_p_mean": float(log_p.mean().cpu().item()),
+            "transition_skill_log_context_mean": float(log_context.mean().cpu().item()),
+            "transition_skill_reward_unclipped_mean": float(reward_metrics["unclipped_mean"]),
+            "transition_skill_reward_warmup_active": float(reward_metrics["warmup_active"]),
+        }
+
     def _prototype_disc_condition(self, batch: dict[str, np.ndarray], device: torch.device) -> torch.Tensor:
         pieces: list[torch.Tensor] = []
         sample_count = int(batch["labels"].shape[0])
@@ -5349,7 +5462,17 @@ class StandaloneProcessAgent:
         update_idx: int = 0,
     ) -> dict[str, float]:
         segments = self.segments.pop_completed()
-        valid = [] if self.r30_enabled else [s for s in segments if s.length > 0]
+        transition_segments = [s for s in segments if s.length > 0]
+        r30_transition_metrics = (
+            self._r30_transition_skill_update(
+                transition_segments,
+                rollout,
+                total_steps=total_steps,
+            )
+            if self.r30_enabled and self.alice_bob_semantic_reward_enabled
+            else {}
+        )
+        valid = [] if self.r30_enabled else transition_segments
         if bool(getattr(self, "r28_g1_enabled", False)):
             if self.r28_g1_reward is None:
                 raise RuntimeError("R28-G1 scorer was not attached after checkpoint load")
@@ -5370,7 +5493,7 @@ class StandaloneProcessAgent:
         team_effect_metrics = self._team_effect_target_audit(rollout, total_steps=total_steps)
         if not valid:
             self._team_transition_clear_rollout_buffers()
-            return {
+            metrics = {
                 "process_segments": 0.0,
                 "process_loss": 0.0,
                 "process_outcome_loss": 0.0,
@@ -5519,6 +5642,8 @@ class StandaloneProcessAgent:
                 **r29_action_info_metrics,
                 **self._situation_diagnostics([]),
             }
+            metrics.update(r30_transition_metrics)
+            return metrics
 
         team_conditioned_qd_metrics = self._team_conditioned_qd_update(
             valid,
