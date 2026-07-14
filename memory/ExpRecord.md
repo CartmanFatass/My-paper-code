@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r36-aem-access | planned | baseline-L0 non-skill sparse-access gate | local CUDA; run root assigned at launch | result JSON | R35 validly had zero collection access in both trained arms; Pro selected state novelty as the single next edge | Implement the direct-cell episodic novelty treatment and run one matched 320K pair; no smoke or expansion. |
 | EXP-20260715-r35-sparse-mappo-reset | completed -- valid `NO_ACCESS_R35_UNRESOLVED` | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4`; runner commit `030d0cd`, implementation `b372000` | none | M0 PASS; both arms completed 320K/250 low updates, but 0/64 paired indices had a collection and both cycle means were 0 | Do not interpret noninferiority or replace a baseline; do not rerun/expand R35; seek one non-skill access-first edge. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
@@ -46,6 +47,62 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260715-r36-aem-access
+
+- Causal edge and authorization: R35 validly established that matched trained
+  constant-code MAPPO and reward-pure R30 both failed the positive-access floor.
+  GPT-5.6 Pro selected one non-skill access-first route: task-generic
+  joint-position novelty should expand reachable visitation and thereby create
+  first sparse collection access. The controller accepts that edge with the
+  exact modifications in `DISPOSITION_CORRECTION_1.md`.
+- Baseline hierarchy and arms: both arms are Level-0 constant-code recurrent
+  MAPPO with identical low actor/centralized critic shapes and no high rows or
+  updates. `aem_joint_novelty` adds one detached shared episodic joint-cell
+  novelty bonus; `constant_code_mappo` receives sparse external reward only.
+- Novelty contract: for each vector environment, map the two normalized agent
+  positions by direct arithmetic into a fixed `5 x 5 x 5 x 5 = 625` table.
+  With the pre-increment per-episode count `N_e,t(c)`, use
+  `b_e,t = 1 / (80 * sqrt(N_e,t(c) + 1))` and
+  `r_train_e,t = r_env_e,t + b_e,t` for both agents. Reset the table only when
+  that environment resets. Counts/bonus are detached collector scalars, never
+  actor/critic inputs. No hash, potential, learned predictor, coefficient, or
+  task field is used.
+- Initialization/exposure: seed `37031`; one common neutral zero-step
+  constant-code checkpoint; CUDA; both arms concurrently use 16 subprocess
+  environments, rollout 80, 320,000 environment steps, 250 low updates, five
+  low PPO epochs, recurrent sequence length 10/batch 64, existing Adam rates
+  and clipping. Expected local wall clock is 30--60 minutes.
+- Evaluation/inference: 64 paired stochastic 80-step episodes per arm with the
+  same reset seeds; record collection indicator, normalized cycle success,
+  zero-cycle flag, and 625-cell joint coverage. Use 10,000 paired episode
+  bootstraps with seed `40037031`.
+- M0 validity: exact shared initialization/shapes/exposure/evaluation; constant
+  skill/team code zero and zero high rows in both arms; treatment bonus equals
+  the registered pre-increment per-environment episodic count formula and uses
+  position cells only; control has zero bonus; both retain exact sparse external
+  reward; no other intrinsic/shaping path is active. Any concrete miss is
+  `INVALID_R36_AEM_IMPLEMENTATION` and authorizes only its repair.
+- M1 access: treatment cycle-success mean `>=0.05`, at least 10/64 treatment
+  episodes with a collection, and paired treatment-minus-control collection
+  indicator mean `>=0.10` with 95% CI lower bound above zero.
+- M2 visitation carrier/safety: treatment/control mean joint-coverage ratio
+  `>=1.50` with paired difference 95% CI lower bound above zero, and treatment
+  zero-cycle fraction `<0.90`.
+- Branches: M0+M1+M2 gives `PASS_R36_AEM_ACCESS`, authorizing one ordinary
+  sparse-training comparison but no hierarchy/efficacy claim. A valid M1 miss
+  gives `FAIL_M1_RETIRE_R36_AEM`; retire this exact episodic joint-count bonus.
+  M1 pass with M2 miss gives `FAIL_M2_ACCESS_WITHOUT_CARRIER`; do not promote
+  the claimed novelty mechanism. An operational crash retries only its failed
+  path. There is no UNDERPOWERED, tuning, threshold, seed, or budget branch.
+- Prohibited: task reward shaping or task fields; global cross-episode count;
+  learned novelty models; skill/latent/posterior/effect/roster inputs; R30 high
+  training; alternate cell grids, bonus functions/scales, sweeps, automatic
+  expansion, or claims about general exploration, cooperation, HMASD/S7 parity,
+  hierarchy value, or paper efficacy.
+- Status source: after launch, the runner owns `runner_status.txt`; the only
+  scientific decision source is its single
+  `result/r36_aem_access.json`.
 
 ### EXP-20260715-r35-sparse-mappo-reset
 

@@ -38,7 +38,8 @@ R29--R34 skill identification, effect creation, composition, and relabeling fail
 -> close the current intrinsic skill-formation program
 -> compare observation/history-only recurrent MAPPO with reward-pure R30
 -> both arms fail the registered positive-access floor
--> do not replace either baseline; select one non-skill access-first R36 edge
+-> R36-AEM episodic joint-position novelty versus constant-code MAPPO
+-> decide whether task-generic state visitation pressure restores first access
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -171,18 +172,22 @@ direct intervention-scored roster-complementarity selection are retired.
   The resulting constant-code recurrent MAPPO versus reward-pure R30 gate is a
   valid `NO_ACCESS_R35_UNRESOLVED`: both 320K arms completed, but neither had a
   collection in 64 final episodes, so noninferiority is not interpretable.
+- The first Pro response to R35 was stale and rejected. Its focused correction
+  accepted the valid no-access verdict and selected R36-AEM. The controller
+  accepts the state-novelty edge while replacing hash with direct 625-cell
+  indexing, fixing the bonus scale, restoring the exact R35 budget, and adding
+  a paired causal access requirement.
 
 ## Next Actions
 
-1. Commit and push the tracked R35 result plus its single GPT-5.6 Pro question.
-2. Submit the fixed result-review prompt in the existing Pro conversation and
-   archive the response raw before interpreting it.
-3. Continue only one accepted non-skill access-first branch; do not rerun or
-   expand R35.
+1. Implement the single registered R36 novelty reward in the constant-code
+   path and its paired result analyzer/runner.
+2. Commit and push the exact implementation, then launch the 320K parallel
+   local CUDA pair without a separate smoke.
+3. Interpret only the single result JSON; do not rerun or expand R35/R36.
 
-Completed result: `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4` at
-runner commit `030d0cd` (algorithm/runner implementation `b372000`). Formal
-contract and result are in `memory/ExpRecord.md`.
+Active gate: `EXP-20260715-r36-aem-access`. Its exact contract is in
+`memory/ExpRecord.md`; R35's completed result remains the upstream evidence.
 
 ## Immediate Constraints
 

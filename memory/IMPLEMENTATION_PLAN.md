@@ -4,6 +4,40 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R36 Access-First Episodic Joint Novelty
+
+Active causal edge:
+
+```text
+task-generic joint-position novelty
+-> broader reachable-state visitation
+-> first sparse collection access
+```
+
+Accepted from GPT-5.6 Pro after the R35 valid no-access result, with controller
+corrections recorded in
+`docs/external-review/gpt5_6_pro/20260715_r35_sparse_mappo_reset_result/DISPOSITION_CORRECTION_1.md`.
+
+One coherent implementation/evidence boundary:
+
+1. Reuse the R35 constant-code recurrent MAPPO path. Add no skill, high policy,
+   latent, classifier, predictor, task feature, or new network.
+2. Map both agents' normalized positions directly to one of 625 arithmetic
+   joint cells. Keep one 625-entry count table per vector environment and reset
+   it at that environment's episode boundary; do not use hashing.
+3. Before incrementing the current cell, add the detached shared bonus
+   `1 / (80 * sqrt(count + 1))` to the sparse external reward for both agents.
+   The count and bonus are not policy/value inputs and enter low GAE once.
+4. Compare trained `aem_joint_novelty` with trained `constant_code_mappo` from
+   one shared neutral zero-step initialization. Match the R35 CUDA topology,
+   steps, low updates, PPO exposure, recurrent batching, and stochastic paired
+   evaluation exactly.
+5. The registered access and coverage-carrier gates in `memory/ExpRecord.md`
+   are the implementation check. Do not add a smoke, coefficient sweep,
+   threshold rescue, or automatic budget/seed expansion.
+
+Implementation status: active.
+
 ## R30 Fixed-Clock Autoregressive Edit Gate
 
 Active causal edge:
