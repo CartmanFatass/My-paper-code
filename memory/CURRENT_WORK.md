@@ -19,6 +19,9 @@ and history live in their owning files.
 - **Shared GPU scheduling:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9` is the IMOD/HMASD lease controller.
   Formal cloud jobs must be registered there from an exact committed contract.
+- **Local overnight authorization:** the user permits a longer local CUDA run
+  overnight when the next causal gate is registered and requires it. This does
+  not authorize speculative runs before the R35 edge and comparator are fixed.
 
 ## Current Objective
 
