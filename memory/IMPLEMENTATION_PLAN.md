@@ -309,6 +309,39 @@ reset statistic. R30 safety passed. Retire fixed balanced hindsight mode
 distillation and do not tune or integrate it; the next implementation boundary
 must come from one structurally different post-R34 causal edge.
 
+## R35 Sparse MAPPO Reset Baseline
+
+Active causal question:
+
+```text
+matched sparse-reward low-level optimization
+-> observation/history-only recurrent MAPPO versus active R30 skill editing
+-> Alice--Bob task access and paired noninferiority
+-> decide the optimization baseline, not a new paper contribution
+```
+
+The final GPT-5.6 Pro response correctly closes R35-OCSF, CBF, and TMPF and
+selects a no-skill reset. Its trained-versus-frozen comparison is invalid, so
+the controller accepts one modified pair:
+
+1. Construct one neutral zero-step R30 checkpoint and load it into both arms.
+2. `constant_code_mappo` keeps the existing four-column low FiLM and recurrent
+   centralized critic shapes, but supplies dummy skill/team code zero at every
+   step. It never executes or updates the high editor. Constant conditioning
+   makes its behavior observation/history-only while preserving low capacity.
+3. `reward_pure_r30` trains the same low stack and its KEEP/SET high editor.
+   Both arms receive only the sparse Alice--Bob collection reward.
+4. Match low rollout, recurrent minibatch, PPO epoch, actor/critic optimizer,
+   environment-step, reset, and evaluation exposure. Report R30's additional
+   high optimizer steps as the treatment rather than calling total optimizer
+   exposure matched.
+5. Add only the episode-level 625-cell joint-position coverage and zero-cycle
+   flag required by the gate. Do not add a classifier, intrinsic reward, OPT
+   actor input, new scheduler, or trained-checkpoint migration.
+
+The exact budget, access floor, noninferiority margins, outcome branches, and
+single result source are owned by `memory/ExpRecord.md`.
+
 ## Legacy Compatibility Boundary
 
 - This branch is for constructing the new HA-CTSE/process algorithm, not for

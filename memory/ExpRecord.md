@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-14
+Updated: 2026-07-15
 
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r35-sparse-mappo-reset | launch-ready | baseline-L0 sparse optimization reset | local CUDA; run root assigned at launch | `runner_status.txt` after launch | common neutral init; constant-code recurrent MAPPO versus reward-pure R30; 320K/arm | Commit and launch the registered pair once. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
 | EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
@@ -45,6 +46,72 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260715-r35-sparse-mappo-reset
+
+- Causal question and authorization: R29--R34 failed to identify, amplify,
+  compose, or relabel a useful persistent skill codebook. GPT-5.6 Pro accepted
+  closure of the current intrinsic skill-formation program and selected a
+  sparse recurrent MAPPO reset. The controller rejects its trained-versus-
+  frozen comparison and authorizes this single trained-versus-trained baseline
+  gate: under matched low optimization, is an observation/history-only policy
+  noninferior to reward-pure R30 on sparse Alice--Bob?
+- Baseline hierarchy and arms: `constant_code_mappo` is the Level-0 baseline.
+  It retains the same four-column low MLP/FiLM/RNN/action head and centralized
+  recurrent critic tensors as R30, but every agent and step receives dummy
+  skill `0` and team code `0`; no high decision, row, gradient, or optimizer
+  step occurs. Constant conditioning makes the executed policy
+  `pi(a_i | o_i, h_i)`. `reward_pure_r30` is the Level-2 mechanism comparator
+  with active autoregressive KEEP/SET and the same low policy. Only the sparse
+  external collection reward enters either policy or value update.
+- Initialization and exposure: create one zero-environment-step R30 checkpoint
+  at seed `36031` and strictly load it into both arms. This is a shared neutral
+  random initialization, not the trained adaptive-R30 checkpoint. Each arm
+  uses CUDA, 16 sub-process environments, rollout length 80, 320,000
+  environment steps, 250 rollout/low updates, low PPO epochs 5, recurrent
+  sequence length 10, sequence batch 64, and the existing actor/critic Adam
+  learning rates and clipping. Both arms run concurrently. R30's additional
+  high updates are an intended treatment difference and must be reported
+  separately. Expected local wall clock is 4--8 hours.
+- Evaluation and inference: after training, run 64 stochastic 80-step episodes
+  per arm using identical reset seeds `seed+100000+episode`; resets are paired,
+  but action random numbers are not claimed common because R30 also samples
+  high tokens. Per episode record normalized cycle success
+  `targets_completed/8`, 625-cell joint-position coverage, and a zero-cycle
+  flag. Bootstrap 10,000 paired episodes with seed `40036031`.
+- M0 validity: both arms load the same zero-step checkpoint; each reaches
+  exactly 320,000 steps, 250 low updates, and 64 evaluation episodes; the
+  constant arm executes only skill/team code zero and has zero high decision
+  and high optimizer rows; both use identical low shapes and finite
+  checkpoints; every evaluation episode satisfies sparse reward equals target
+  collections and all intrinsic/shaping reward-applied counts are zero. A
+  concrete miss is `INVALID_R35_IMPLEMENTATION`; repair only that defect.
+- M1 positive access: before noninferiority is interpreted, at least one arm's
+  mean normalized cycle success must be `>=0.05`, and at least 10 of the 64
+  paired reset indices must contain one or more collections in either arm.
+  Otherwise the result is `NO_ACCESS_R35_UNRESOLVED`: do not replace the
+  baseline, expand this run, or infer a hierarchy result.
+- M2 noninferiority: with `D = constant_code_mappo - reward_pure_r30`, require
+  the paired 95% CI lower bound for cycle success to exceed `-0.10`, the paired
+  CI lower bound for normalized joint-position coverage to exceed `-0.05`, and
+  the paired CI upper bound for zero-cycle fraction to be below `+0.10`.
+  Passing M0, M1, and all three margins is
+  `PASS_R35_MAPPO_NONINFERIOR`, authorizing constant-code recurrent MAPPO only
+  as the Alice--Bob optimization baseline for the next research question.
+- Other branches: if the cycle-success CI upper bound is below `-0.10`, the
+  coverage CI upper bound below `-0.05`, or the zero-cycle CI lower bound above
+  `+0.10`, return `FAIL_R35_MAPPO_INFERIOR`; R30 has a toy/budget-specific
+  advantage, but no retired skill objective reopens. Any remaining valid
+  partial pattern is `MIXED_R35_NO_REPLACEMENT`; retain both as references and
+  request the next non-skill research question without an automatic rerun.
+- Prohibited: trained-R30 initialization, trained versus frozen causal claims,
+  `n_z=1` capacity changes, intrinsic/semantic/effect/team rewards, shaping,
+  classifiers, OPT actor input, communication, another scheduler, sweeps,
+  threshold revision, automatic seed/budget expansion, and claims about
+  general hierarchy value, HMASD/S7 parity, cooperation, or paper efficacy.
+- Status source: after launch, the runner owns `runner_status.txt`; the only
+  scientific decision source is
+  `logs/<r35-run-id>/result/r35_sparse_mappo_reset.json`.
 
 ### EXP-20260714-r34-bhmd-gate
 

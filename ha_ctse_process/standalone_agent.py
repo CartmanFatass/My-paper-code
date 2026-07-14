@@ -1779,6 +1779,13 @@ class StandaloneProcessAgent:
         }:
             raise ValueError(f"unsupported high_controller={self.high_controller!r}")
         self.r30_enabled = self.high_controller == "r30_fixed_clock_ar_edit"
+        self.constant_skill_no_high = bool(
+            getattr(config, "constant_skill_no_high", False)
+        )
+        if self.constant_skill_no_high and not self.r30_enabled:
+            raise ValueError(
+                "constant_skill_no_high requires the R30 fixed-clock module stack"
+            )
         self.alice_bob_semantic_reward_enabled = bool(
             getattr(config, "alice_bob_semantic_reward_enabled", False)
         )
@@ -2897,6 +2904,9 @@ class StandaloneProcessAgent:
     ) -> None:
         env_id = int(env_id)
         self.episode_steps[env_id] += 1
+        if self.constant_skill_no_high:
+            self.skill_age[env_id, self.has_active_skill[env_id]] += 1
+            return
         if not self.r30_enabled:
             return
         if reward is None or self.high_check_buffer is None:
@@ -2924,7 +2934,7 @@ class StandaloneProcessAgent:
             )
 
     def truncate_high_rows_for_update(self, observations, states) -> None:
-        if not self.r30_enabled:
+        if not self.r30_enabled or self.constant_skill_no_high:
             return
         if self.r31_effect_windows is not None:
             self.r31_effect_windows.invalidate_all(
@@ -2956,7 +2966,7 @@ class StandaloneProcessAgent:
         *,
         policy_update: int,
     ) -> None:
-        if not self.r30_enabled:
+        if not self.r30_enabled or self.constant_skill_no_high:
             return
         for env_id in range(self.num_envs):
             if int(self.steps_to_check[env_id]) > 0:
@@ -3842,6 +3852,14 @@ class StandaloneProcessAgent:
         collect_r31: bool = True,
     ):
         env_id = int(env_id)
+        if self.constant_skill_no_high:
+            self.active_skills[env_id, :] = 0
+            self.active_duration_indices[env_id, :] = 0
+            self.duration_remaining[env_id, :] = 0
+            self.has_active_skill[env_id, :] = True
+            self.active_team_codes[env_id] = 0
+            self.steps_to_check[env_id] = 0
+            return
         if self.r30_enabled:
             return self._r30_maybe_assign_skills(
                 obs,

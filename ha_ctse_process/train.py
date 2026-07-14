@@ -64,6 +64,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_bridge_context_mode",
     "r30_high_buffer_version",
     "r30_force_refresh_every_check",
+    "constant_skill_no_high",
     "alice_bob_semantic_reward_enabled",
     "r30_high_gae_lambda",
     "r31_effect_mode",
@@ -454,6 +455,9 @@ def export_run_manifest(
             "r30_keep_init": float(getattr(agent, "r30_keep_init", 0.6)),
             "r30_high_buffer_version": int(
                 getattr(agent, "r30_high_buffer_version", 1)
+            ),
+            "constant_skill_no_high": bool(
+                getattr(agent, "constant_skill_no_high", False)
             ),
             "action_space_type": str(agent.action_space_type),
             "device": str(agent.device),
@@ -2769,6 +2773,20 @@ def evaluate(
     topology_interval = max(1, int(getattr(args, "topology_interval", 25)))
     topology_episodes = max(0, int(getattr(args, "topology_episodes", 1)))
     topology_max_frames = max(1, int(getattr(args, "topology_max_frames", 160)))
+    is_alice_bob = normalize_scenario(config.scenario) == "alice_bob_asymmetric_cycles"
+
+    def alice_bob_joint_cell(state_value) -> tuple[int, int, int, int] | None:
+        if state_value is None:
+            return None
+        positions = np.asarray(state_value, dtype=np.float32).reshape(-1)[:4]
+        if positions.size != 4 or not np.all(np.isfinite(positions)):
+            return None
+        return tuple(
+            np.clip(np.floor(positions * 5.0), 0, 4)
+            .astype(np.int64)
+            .tolist()
+        )
+
     try:
         for episode_idx in range(max(int(episodes), 1)):
             obs, info = env.reset(seed=int(args.seed) + 100000 + episode_idx)
@@ -2781,6 +2799,10 @@ def evaluate(
             throughput_when_backhaul_connected_steps: list[float] = []
             coverage_eq1_steps: list[float] = []
             coverage_positive_steps: list[float] = []
+            joint_position_cells: set[tuple[int, int, int, int]] = set()
+            initial_joint_cell = alice_bob_joint_cell(state) if is_alice_bob else None
+            if initial_joint_cell is not None:
+                joint_position_cells.add(initial_joint_cell)
             zero_throughput_steps: list[float] = []
             throughput_gt5_steps: list[float] = []
             capture_topology = save_topology and episode_idx < topology_episodes
@@ -2810,6 +2832,9 @@ def evaluate(
                 actions, _, _ = agent.act_low(obs, env_id=0, deterministic=deterministic_eval, state=state)
                 obs, reward, terminated, truncated, last_info = env.step(actions)
                 state = last_info.get("next_state", state)
+                joint_cell = alice_bob_joint_cell(state) if is_alice_bob else None
+                if joint_cell is not None:
+                    joint_position_cells.add(joint_cell)
                 episode_reward += float(reward)
                 episode_length += 1
                 step_metrics = extract_eval_metrics(last_info)
@@ -2860,6 +2885,13 @@ def evaluate(
             rewards.append(episode_reward)
             lengths.append(episode_length)
             episode_metrics = extract_eval_metrics(last_info)
+            if is_alice_bob:
+                episode_metrics["alice_bob_joint_position_coverage_ratio"] = float(
+                    len(joint_position_cells) / 625.0
+                )
+                episode_metrics["alice_bob_zero_cycle_episode_flag"] = float(
+                    episode_metrics.get("alice_bob_targets_completed", 0.0) <= 0.0
+                )
             if backhaul_connected_steps:
                 episode_metrics["backhaul_connected_step_fraction"] = float(np.mean(backhaul_connected_steps))
             if coverage_eq1_steps:
@@ -4211,12 +4243,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             process_metrics.update(r31_score_metrics)
             low_metrics = agent.update_low(rollout)
             process_metrics.update(agent.r31_update_effect_posterior())
-            if bool(getattr(agent, "r30_enabled", False)):
+            if bool(getattr(agent, "r30_enabled", False)) and not bool(
+                getattr(agent, "constant_skill_no_high", False)
+            ):
                 process_metrics.update(
                     agent.update_high_from_checks(total_steps=total_steps)
                 )
             update_idx += 1
-            if bool(getattr(agent, "r30_enabled", False)):
+            if bool(getattr(agent, "r30_enabled", False)) and not bool(
+                getattr(agent, "constant_skill_no_high", False)
+            ):
                 agent.start_high_continuations_after_update(
                     observations,
                     states,

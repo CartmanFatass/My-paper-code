@@ -143,6 +143,8 @@ ALICE_BOB_METRIC_FIELDS = (
     "alice_bob_active_target",
     "alice_bob_window_index",
     "alice_bob_collection_event",
+    "alice_bob_joint_position_coverage_ratio",
+    "alice_bob_zero_cycle_episode_flag",
 )
 
 DERIVED_EVAL_FIELDS = (

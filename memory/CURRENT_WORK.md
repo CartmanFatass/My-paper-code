@@ -29,17 +29,15 @@ and history live in their owning files.
 
 ## Current Objective
 
-Close the valid R34 codebook-construction failure and obtain exactly one
-structurally different post-R34 causal edge before further implementation:
+Close the failed intrinsic skill-formation program with one capacity-matched
+sparse-reward reset gate:
 
 ```text
-R32 individual effect creation: positive but immaterial
--> R33 non-additive role-swap selection: positive but immaterial
--> no natural joint or nonredundant coverage transport
--> existing skill labels are not demonstrated persistent primitives
--> R34 balanced hindsight modes fail the frozen-source creation anchor
--> post-hoc relabel-and-clone is retired
--> select one online mechanism that can create semantics stronger than source
+R29--R34 skill identification, effect creation, composition, and relabeling fail
+-> R35 skill proposals OCSF/CBF/TMPF are prohibited or invalid
+-> close the current intrinsic skill-formation program
+-> compare observation/history-only recurrent MAPPO with reward-pure R30
+-> decide whether no-skill MAPPO becomes the Alice--Bob optimization baseline
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -166,14 +164,20 @@ direct intervention-scored roster-complementarity selection are retired.
   on detached rollout data. The frozen categorical R30 head also cannot emit
   continuous `u`. TMPF is invalid as an algorithm contract; the final review
   must take program abandonment and choose one non-skill reset direction.
+- Correction 3 accepted that invalidity and closed the current skill-formation
+  program. Its Sparse MAPPO direction is accepted only after one comparator
+  correction: both arms train from a shared neutral zero-step initialization.
+  The active gate is constant-code recurrent MAPPO versus reward-pure R30,
+  320K sparse Alice--Bob steps per arm, with matched low optimization and a
+  positive-access requirement before noninferiority can pass.
 
 ## Next Actions
 
-1. Submit `GPT5_6_PRO_CORRECTION_3.md` automatically in the existing Pro review
-   conversation after committing TMPF and its disposition.
-2. Archive and disposition the single non-skill reset direction.
-3. Implement and register only an accepted compliant edge; a longer registered
-   local gate may run overnight under the standing authorization.
+1. Complete the constant-code arm, paired runner, and exact R35 reset contract.
+2. Commit and push the implementation boundary, then launch the parallel local
+   CUDA gate under the overnight authorization.
+3. Read the single result artifact once and automatically submit the fixed
+   result-review prompt in the existing GPT-5.6 Pro conversation.
 
 Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
 `memory/ExpRecord.md`.
@@ -223,6 +227,10 @@ Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
 - R34 did not pass M1. Do not rerun or rescue it with another label balance,
   clustering family, replay epoch count, recurrent/FiLM scope, source seed,
   threshold, normal-trainer objective, or sham comparison.
+- R35 is a baseline reset, not a new skill algorithm. Do not compare a trained
+  arm with a frozen arm, initialize from the trained R30 checkpoint, inject an
+  auxiliary reward, or treat two zero-access arms as noninferiority. A single
+  320K seed cannot establish general hierarchy value or HMASD/S7 parity.
 
 ## Pointers
 
