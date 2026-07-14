@@ -22,19 +22,19 @@ and history live in their owning files.
 
 ## Current Objective
 
-Implement and evaluate the selected post-R31 causal edge that directly creates
-persistent task-agnostic skill effects rather than classifying correlations:
+Select one structurally different post-R32 causal edge that can convert skill
+conditioning into natural sparse exploration:
 
 ```text
 R29 action-pattern reward failed
 -> R31 observational effect scorer failed causal persistence
--> R32 interventional fixed-window effect policy gradient
+-> R32 direct FiLM effect policy gradient made only a small forced shift
+-> no sufficient causal separation or natural coverage transport
 ```
 
-GPT-5.6 Pro selected R32-IFEPG and authorized only its paired Alice--Bob
-mechanism gate. The update uses randomized fixed-window intervention effects to
-train only low actor skill-FiLM; it uses no scorer, intrinsic reward, task PPO,
-critic/GAE/entropy loss, or high-policy update.
+The next review must decide whether the project should move from individual
+effect maximization to team-complementarity, or select another genuinely new
+mechanism. Direct IFEPG and parameter/metric variants are retired.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -113,17 +113,24 @@ critic/GAE/entropy loss, or high-policy update.
   frozen R30 checkpoint/context bank, with 20 FiLM-only auxiliary updates and
   heldout causal/transport evaluation. Any valid M1--M3 failure retires direct
   IFEPG; only an M0 implementation defect permits repair.
+- The replacement R32 gate completed validly at commit `ddbdab9`. M0 passed,
+  but real median causal ratio was only `1.015540` and paired gain `0.028746`;
+  between-effect growth was `1.029965x` and natural coverage growth
+  `1.012821x`. Skills 0/1 remained below pooled ratio one. R30 lifetime/switch
+  safety stayed healthy, so the failure is insufficient individual effect
+  creation and transport rather than implementation, noise inflation, or
+  temporal-controller collapse. Direct IFEPG is retired.
 
 ## Next Actions
 
-1. Relaunch the unchanged R32 gate after the scoped cuDNN focal-RNN mode repair;
-   the first root ending `192508` failed before any real optimizer step.
-2. Read the replacement's single result JSON once and follow its precommitted
-   PASS/retire branch; repair only if M0 is implementation-invalid.
+1. Submit the tracked R32 result question to GPT-5.6 Pro through the private
+   GitHub repository.
+2. Archive and disposition the raw response, then implement only its one
+   structurally different R33 causal edge and smallest Alice--Bob gate.
 
-Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
-is in `memory/ExpRecord.md`. The manual review package is under
-`docs/external-review/gpt5_6_pro/20260714_r29_t10_result/`.
+Completed run: `logs/r32_ifepg_paired_gate_20260714_193304`; formal result
+detail is in `memory/ExpRecord.md`. The manual review entry is under
+`docs/external-review/gpt5_6_pro/20260714_r32_ifepg_gate_result/`.
 
 ## Immediate Constraints
 
@@ -133,8 +140,8 @@ is in `memory/ExpRecord.md`. The manual review package is under
 - Do not rerun the fixed HMASD baseline or R25 arm0/arm2 references without
   explicit user approval.
 - Keep the old `q_d/q_D` reward paths and default-off `q_A` disabled. Do not add
-  team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS while
-  the individual-differentiation gate is open.
+  team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS before
+  the single R33 causal edge is externally selected and registered.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
 - Keep R29 diagnostic-only. Its online `real_reward` path and variants that
   alter only prior, window, aggregation, coefficient, normalization, or clip
@@ -148,13 +155,13 @@ is in `memory/ExpRecord.md`. The manual review package is under
 - Do not use environment potential/progress shaping in Alice--Bob sparse
   exploration claims, and do not count shaped progress as algorithmic intrinsic
   reward. The completed 64K shaped pair remains mechanism-only evidence.
-- Do not inject another individual-skill reward before a reward-off diagnostic
-  establishes the selected realized-effect target under policy-matched
-  stochastic execution.
+- Do not inject another individual-skill reward; the R29/R31/R32 individual
+  action/effect lines are retired.
 - Do not launch R31 reward, its 160K pair, an identical-batch append, or any
   R31 coefficient/window/prior/posterior/null/threshold variant.
-- Do not integrate R32 into normal training, update non-FiLM parameters, add a
-  reward/scorer/value objective, or expand seeds before the paired gate passes.
+- Do not integrate R32 into normal training. Permanently prohibit direct IFEPG
+  rescue by learning-rate, update-count, window, replica, effect, threshold,
+  seed, reward/scorer/value objective, or parameter-scope changes.
 
 ## Pointers
 
@@ -179,4 +186,6 @@ is in `memory/ExpRecord.md`. The manual review package is under
   current result boundary and manual review entry for the next intrinsic route.
 - `docs/external-review/gpt5_6_pro/20260714_r31_cfei_gate_result/` — raw R31
   result review, corrected failure interpretation, and accepted R32 gate.
+- `docs/external-review/gpt5_6_pro/20260714_r32_ifepg_gate_result/` — manual
+  review entry for the valid R32 failure and the single next causal edge.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

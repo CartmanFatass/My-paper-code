@@ -197,6 +197,22 @@ is current focal log-probability -> frozen actor stack -> skill FiLM. Natural
 R30 clocks, masks, skill rosters, high returns, collectors, and checkpoint
 format remain unchanged.
 
+Gate result: valid `FAIL_M1_RETIRE_R32_IFEPG`. M0 passed, including exact
+branch counts, maximum replay error `4.77e-6`, positive finite FiLM drift, zero
+non-FiLM drift/gradient escape, and zero forbidden updates. The real causal
+ratio reached only `1.015540` (CI `[0.877865, 1.207808]`), paired gain was
+`0.028746` rather than `0.40`, and skills 0/1 remained below pooled ratio one.
+Between-effect growth was `1.029965x` with unchanged within noise; natural
+coverage grew only `1.012821x` with a paired CI crossing zero. R30 lifetime and
+switch-skill safety passed. Retire direct IFEPG and all learning-rate,
+update-count, window, replica, effect, threshold, seed, or scope variants.
+
+Next boundary: external review must choose exactly one structurally different
+R33 edge and its smallest Alice--Bob abandonment gate. It must explicitly
+decide whether the individual-effect line is exhausted and complementary team
+composition is now the missing causal level. Do not implement another R32
+rescue or normal-trainer path.
+
 ## Legacy Compatibility Boundary
 
 - This branch is for constructing the new HA-CTSE/process algorithm, not for

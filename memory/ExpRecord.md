@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r32-ifepg-paired-gate | replacement launch-ready after operational pre-update failure | hierarchy-L1 intervention-to-effect creation and natural-transport gate | failed root `logs/r32_ifepg_paired_gate_20260714_192508`; commit `2535992` | replacement `result/r32_ifepg_pair.json` once | probe completed; first real backward failed because cuDNN GRU remained in eval mode; zero FiLM optimizer steps | Apply the focal-RNN mode repair and rerun the unchanged paired contract; no scientific interpretation exists for the failed root. |
+| EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
 | EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
 | EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL`; online family retired | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | none | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%`; GPT-5.6 Pro verdict `RETIRE` | Keep R29 diagnostic-only. Do not promote, retune, or expand seeds; move to the reward-off stochastic realized-effect edge. |
@@ -127,7 +127,29 @@ explicitly approves the exception.
   then restores eval before heldout/natural evaluation. The replacement keeps
   every scientific parameter, seed, branch schedule, and threshold unchanged.
 - Status source: the single decision artifact is
-  the replacement root's `result/r32_ifepg_pair.json`.
+  `logs/r32_ifepg_paired_gate_20260714_193304/result/r32_ifepg_pair.json`.
+- Result: valid `FAIL_M1_RETIRE_R32_IFEPG`. M0 passed every check: both arms
+  collected exactly 5,120 train branches and 1,024 heldout branches, maximum
+  replay error was `4.77e-6`, probe parameters were static, real FiLM changed,
+  and non-FiLM drift/gradient escape and all forbidden updates were zero.
+- M1: real heldout median between/within ratio was `1.015540` (95% CI
+  `[0.877865, 1.207808]`) versus the `1.50`/lower-`>1` gate. Paired median gain
+  was positive but only `0.028746` (CI `[0.024775, 0.033320]`) versus `0.40`.
+  Skills 0/1 remained below the required pooled ratio (`0.658951`/`0.998809`),
+  while skills 2/3 were `1.374737`/`2.150302`.
+- M2: between-skill mean increased only `1.029965x` versus the required
+  `1.50x`; its paired gain CI was positive, while within-skill noise stayed
+  flat at `0.998550x`. The update produced a small genuine separation shift,
+  not the required effect-creation magnitude and not noise inflation.
+- M3: natural union coverage was 553 versus 546 cells (`1.012821x`, required
+  `1.10x`) and the paired-reset gain CI `[-0.000125, 0.000725]` crossed zero.
+  R30 safety itself remained healthy: real full-sync SET `0.158482`, switch
+  entropy `0.995952`, and lifetime breadth `0.110169`.
+- Decision: the precommitted M1 branch retires direct interventional
+  FiLM-effect policy gradient. Do not change learning rate, update count,
+  window, replicas, effect, threshold, or seed, and do not integrate R32 into
+  normal training. The next review must choose one structurally different
+  causal edge rather than rescue this line.
 
 ### EXP-20260714-r31-cfei-reward-off-gate
 
