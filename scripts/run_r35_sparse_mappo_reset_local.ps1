@@ -72,20 +72,7 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
         "bootstrap_repetitions=10000",
         "bootstrap_seed=40036031"
     ) + $Details
-    $temporary = "$StatusPath.tmp.$PID"
-    [System.IO.File]::WriteAllLines($temporary, $lines)
-    $lastError = $null
-    for ($attempt = 0; $attempt -lt 50; $attempt++) {
-        try {
-            [System.IO.File]::Move($temporary, $StatusPath, $true)
-            return
-        }
-        catch {
-            $lastError = $_.Exception
-            Start-Sleep -Milliseconds 100
-        }
-    }
-    throw "Could not replace runner status: $($lastError.Message)"
+    [System.IO.File]::WriteAllLines($StatusPath, $lines)
 }
 
 function Init-Arguments() {
