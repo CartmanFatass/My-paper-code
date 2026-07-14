@@ -88,9 +88,10 @@ does not add a new intrinsic reward.
 
 ## Next Actions
 
-1. Await terminal status for the running registered R30 pair at
-   `logs/r30_fixed_clock_paired_320k_20260714_115559`, then read its single
-   result JSON and follow the predeclared M1-M4 branch in `memory/ExpRecord.md`.
+1. Await terminal status for treatment retry `r30_fixed_clock_ar_edit_retry1`
+   under `logs/r30_fixed_clock_paired_320k_20260714_115559`; retain the already
+   completed legacy arm, then read the single result JSON and follow the
+   predeclared M1-M4 branch in `memory/ExpRecord.md`.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
