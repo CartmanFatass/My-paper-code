@@ -179,8 +179,9 @@ direct intervention-scored roster-complementarity selection are retired.
    result-review prompt in the existing GPT-5.6 Pro conversation.
 3. Continue only the accepted post-result branch; do not auto-expand this gate.
 
-Active run: `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry3` at commit
-`b372000`. Formal contract and result source are in `memory/ExpRecord.md`.
+Active run: `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4` at runner
+commit `030d0cd` (algorithm/runner implementation `b372000`). Formal contract
+and result source are in `memory/ExpRecord.md`.
 
 ## Immediate Constraints
 
