@@ -65,8 +65,8 @@ on-policy state visitation
 
 ## Next Actions
 
-1. Manually submit the completed R29-T10 question and ZIP to GPT-5.6 Pro, then
-   archive its raw response before interpretation.
+1. Give GPT-5.6 Pro the fixed Git commit and the R29-T10 `REVIEW_ENTRY.md`, then
+   archive its raw response before interpretation. The ZIP is fallback only.
 2. Disposition the external review and complete the failure review before
    selecting one next causal edge. Do not launch another reward experiment in
    the meantime.
