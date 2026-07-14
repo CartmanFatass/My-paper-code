@@ -150,15 +150,19 @@ direct intervention-scored roster-complementarity selection are retired.
   Natural mode agreement gained only `0.0488` over source and coverage did not
   transport. R30 safety passed. Fixed balanced hindsight mode distillation and
   its registered clustering/epoch/scope variants are retired.
+- The automatically returned GPT-5.6 Pro response independently accepted the
+  R34 valid failure, but its R35-OCSF proposal is rejected: supervised
+  `q(z|trajectory)` plus `log q(z|trajectory)-log q(z)` low-PPO reward is the
+  explicitly prohibited old-label process-classifier family, not a new causal
+  edge. A tracked correction request is the only authorized next action.
 
 ## Next Actions
 
-1. Await the automatically submitted GPT-5.6 Pro review of the tracked R34
-   result at commit `d2148522e629050bce3a262865d954e7d4619cb9`.
-2. Archive its raw response and accept, modify, or reject exactly one returned
-   R35 causal edge.
-3. Implement and register only that accepted edge; a longer registered local
-   gate may run overnight under the standing authorization.
+1. Submit `GPT5_6_PRO_CORRECTION_1.md` automatically in the existing Pro review
+   conversation after committing its raw-response disposition.
+2. Archive and disposition the corrected single R35 edge.
+3. Implement and register only an accepted compliant edge; a longer registered
+   local gate may run overnight under the standing authorization.
 
 Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
 `memory/ExpRecord.md`.
@@ -239,5 +243,5 @@ Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
 - `docs/external-review/gpt5_6_pro/20260714_r33_irsc_gate_result/` — tracked
   result-review question for the single post-R33 causal edge.
 - `docs/external-review/gpt5_6_pro/20260715_r34_bhmd_gate_result/` — tracked
-  R34 result audit and single-route R35 review entry.
+  R34 result audit, rejected first R35 route, and correction entry.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
