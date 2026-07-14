@@ -12,7 +12,7 @@ class Config(ProcessConfig):
     n_agents = 2
     n_uavs = 2
     max_observed_uavs = 2
-    state_dim = 14
+    state_dim = 19
     obs_dim = 12
     action_dim = 2
     episode_length = 80
@@ -32,8 +32,12 @@ class Config(ProcessConfig):
     alice_bob_action_scale = 0.75
     alice_bob_contact_radius = 0.70
     alice_bob_progress_reward_coef = 0.20
-    alice_bob_state_holder_slice = (4, 6)
-    alice_bob_state_long_phase_index = 11
+    alice_bob_state_long_phase_index = 9
+    alice_bob_state_last_button_slice = (15, 17)
+    alice_bob_state_last_target_slice = (17, 19)
+    alice_bob_assignment_min_button_fraction = 0.30
+    alice_bob_assignment_min_target_fraction = 0.10
+    alice_bob_assignment_margin = 0.05
 
     # Keep the current algorithmic interfaces, but remove S7-sized capacity and
     # UAV-only diagnostics so this environment remains a fast iteration lane.

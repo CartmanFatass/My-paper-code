@@ -135,10 +135,10 @@ COMM_METRIC_FIELDS = (
 ALICE_BOB_METRIC_FIELDS = (
     "alice_bob_targets_completed",
     "alice_bob_cycle_success_rate",
-    "alice_bob_holder_occupancy_fraction",
-    "alice_bob_runner_target_fraction",
-    "alice_bob_role_switch_count",
-    "alice_bob_active_holder",
+    "alice_bob_button_occupancy_fraction",
+    "alice_bob_target_contact_fraction",
+    "alice_bob_joint_coordination_fraction",
+    "alice_bob_button_switch_count",
     "alice_bob_active_plate",
     "alice_bob_active_target",
     "alice_bob_window_index",
@@ -278,11 +278,10 @@ R30_METRIC_FIELDS = (
     "r30_spell_le_4k0_count",
     "r30_spell_gt_4k0_frac",
     "r30_spell_le_4k0_frac",
-    "alice_bob_r30_stable_holder_keep_rate",
-    "alice_bob_r30_stable_runner_set_rate",
-    "alice_bob_r30_role_boundary_both_set_rate",
-    "alice_bob_r30_cycle_action_match_rate",
-    "alice_bob_r30_cycle_metric_rows",
+    "alice_bob_r30_observed_button_keep_rate",
+    "alice_bob_r30_observed_target_set_rate",
+    "alice_bob_r30_observed_cycle_action_match_rate",
+    "alice_bob_r30_observed_cycle_metric_rows",
 )
 
 

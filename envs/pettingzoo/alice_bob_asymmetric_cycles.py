@@ -1,9 +1,8 @@
-"""Alice--Bob surrogate with deliberately asymmetric task time scales.
+"""Role-free Alice--Bob surrogate with asymmetric subtask time scales.
 
-The geometry keeps the original button/diamond complementarity, while the
-task clock makes one agent hold a button across several high-level checks and
-the other visit a different target at every check.  Role assignment is visible
-only in the centralized state; the low actor must receive it through its skill.
+The active button persists across several high-level checks while the active
+target changes every check.  The environment never assigns either subtask to
+an agent; complementary skill allocation must emerge from the controller.
 """
 
 from __future__ import annotations
@@ -36,7 +35,7 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
             raise ValueError("Alice--Bob periods must be positive")
         if self.num_short_periods < 2 * self.long_periods:
             raise ValueError(
-                "Alice--Bob episode must contain at least two long-role phases"
+                "Alice--Bob episode must contain at least two long-task phases"
             )
 
         self.long_period = self.short_period * self.long_periods
@@ -57,7 +56,7 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
             for agent in self.possible_agents
         }
         # own position (2), other relative position (2), two button offsets (4),
-        # two target offsets (4).  Active role/side is intentionally omitted.
+        # two target offsets (4). Active subtask state is intentionally omitted.
         self._observation_spaces = {
             agent: gym.spaces.Box(-1.0, 1.0, shape=(12,), dtype=np.float32)
             for agent in self.possible_agents
@@ -74,9 +73,10 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         return 12
 
     def get_state_dim(self) -> int:
-        # positions (4), holder/plate/target one-hot (6), two clock phases (2),
-        # current-window collected and holder-contact flags (2).
-        return 14
+        # positions (4), active plate/target one-hot (4), two clock phases (2),
+        # collected flag (1), current contacts (4), and previous-window
+        # per-agent button/target occupancy fractions (4).
+        return 19
 
     def reset(self, seed=None, options=None):
         del options
@@ -85,15 +85,19 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         self.agents = self.possible_agents.copy()
         self.steps = 0
         self.agent_pos = self._sample_initial_positions()
-        self.active_holder = int(self.np_random.integers(0, 2))
         self.active_plate = int(self.np_random.integers(0, 2))
         self.active_target = int(self.np_random.integers(0, 2))
         self.window_target_collected = False
         self.targets_completed = 0
         self.windows_completed = 0
-        self.holder_contact_steps = 0
-        self.runner_target_steps = 0
-        self.role_switch_count = 0
+        self.button_contact_steps = 0
+        self.target_contact_steps = 0
+        self.joint_coordination_steps = 0
+        self.button_switch_count = 0
+        self.window_button_contacts = np.zeros(2, dtype=np.int64)
+        self.window_target_contacts = np.zeros(2, dtype=np.int64)
+        self.last_window_button_fraction = np.zeros(2, dtype=np.float32)
+        self.last_window_target_fraction = np.zeros(2, dtype=np.float32)
         observations = self._get_obs()
         infos = self._get_infos(
             step_reward=0.0,
@@ -114,27 +118,45 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
     def _touches(self, position: np.ndarray, target: np.ndarray) -> bool:
         return bool(np.linalg.norm(position - target) <= self.contact_radius)
 
-    def _holder_on_plate(self) -> bool:
-        return self._touches(
-            self.agent_pos[self.active_holder], self.button_pos[self.active_plate]
+    def _button_contacts(self) -> np.ndarray:
+        return np.asarray(
+            [
+                self._touches(position, self.button_pos[self.active_plate])
+                for position in self.agent_pos
+            ],
+            dtype=np.bool_,
         )
 
-    def _runner_on_target(self) -> bool:
-        runner = 1 - self.active_holder
-        return self._touches(
-            self.agent_pos[runner], self.target_pos[self.active_target]
+    def _target_contacts(self) -> np.ndarray:
+        return np.asarray(
+            [
+                self._touches(position, self.target_pos[self.active_target])
+                for position in self.agent_pos
+            ],
+            dtype=np.bool_,
+        )
+
+    @staticmethod
+    def _jointly_satisfied(
+        button_contacts: np.ndarray,
+        target_contacts: np.ndarray,
+    ) -> bool:
+        return bool(
+            (button_contacts[0] and target_contacts[1])
+            or (button_contacts[1] and target_contacts[0])
         )
 
     def _task_potential(self) -> float:
-        runner = 1 - self.active_holder
-        holder_distance = np.linalg.norm(
-            self.agent_pos[self.active_holder] - self.button_pos[self.active_plate]
-        )
-        runner_distance = np.linalg.norm(
-            self.agent_pos[runner] - self.target_pos[self.active_target]
+        plate = self.button_pos[self.active_plate]
+        target = self.target_pos[self.active_target]
+        assignment_costs = (
+            np.linalg.norm(self.agent_pos[0] - plate)
+            + np.linalg.norm(self.agent_pos[1] - target),
+            np.linalg.norm(self.agent_pos[1] - plate)
+            + np.linalg.norm(self.agent_pos[0] - target),
         )
         normalizer = 2.0 * np.sqrt(2.0) * self.world_size
-        return -float((holder_distance + runner_distance) / normalizer)
+        return -float(min(assignment_costs) / normalizer)
 
     def _get_obs(self) -> dict[str, np.ndarray]:
         observations = {}
@@ -154,15 +176,15 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         return observations
 
     def _get_state(self) -> np.ndarray:
-        holder_onehot = np.eye(2, dtype=np.float32)[self.active_holder]
         plate_onehot = np.eye(2, dtype=np.float32)[self.active_plate]
         target_onehot = np.eye(2, dtype=np.float32)[self.active_target]
         short_phase = (self.steps % self.short_period) / float(self.short_period)
         long_phase = (self.steps % self.long_period) / float(self.long_period)
+        button_contacts = self._button_contacts().astype(np.float32)
+        target_contacts = self._target_contacts().astype(np.float32)
         return np.concatenate(
             [
                 (self.agent_pos / self.world_size).reshape(-1),
-                holder_onehot,
                 plate_onehot,
                 target_onehot,
                 np.asarray(
@@ -170,10 +192,13 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
                         short_phase,
                         long_phase,
                         float(self.window_target_collected),
-                        float(self._holder_on_plate()),
                     ],
                     dtype=np.float32,
                 ),
+                button_contacts,
+                target_contacts,
+                self.last_window_button_fraction,
+                self.last_window_target_fraction,
             ]
         ).astype(np.float32)
 
@@ -188,14 +213,16 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
             "alice_bob_cycle_success_rate": float(
                 self.targets_completed / elapsed_windows
             ),
-            "alice_bob_holder_occupancy_fraction": float(
-                self.holder_contact_steps / elapsed
+            "alice_bob_button_occupancy_fraction": float(
+                self.button_contact_steps / elapsed
             ),
-            "alice_bob_runner_target_fraction": float(
-                self.runner_target_steps / elapsed
+            "alice_bob_target_contact_fraction": float(
+                self.target_contact_steps / elapsed
             ),
-            "alice_bob_role_switch_count": float(self.role_switch_count),
-            "alice_bob_active_holder": float(self.active_holder),
+            "alice_bob_joint_coordination_fraction": float(
+                self.joint_coordination_steps / elapsed
+            ),
+            "alice_bob_button_switch_count": float(self.button_switch_count),
             "alice_bob_active_plate": float(self.active_plate),
             "alice_bob_active_target": float(self.active_target),
             "alice_bob_window_index": float(self.steps // self.short_period),
@@ -247,13 +274,20 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
                 self.agent_pos[idx] + delta, 0.0, self.world_size
             )
 
-        holder_on_plate = self._holder_on_plate()
-        runner_on_target = self._runner_on_target()
-        self.holder_contact_steps += int(holder_on_plate)
-        self.runner_target_steps += int(runner_on_target)
+        button_contacts = self._button_contacts()
+        target_contacts = self._target_contacts()
+        jointly_satisfied = self._jointly_satisfied(
+            button_contacts,
+            target_contacts,
+        )
+        self.button_contact_steps += int(np.any(button_contacts))
+        self.target_contact_steps += int(np.any(target_contacts))
+        self.joint_coordination_steps += int(jointly_satisfied)
+        self.window_button_contacts += button_contacts.astype(np.int64)
+        self.window_target_contacts += target_contacts.astype(np.int64)
 
         collection_event = bool(
-            holder_on_plate and runner_on_target and not self.window_target_collected
+            jointly_satisfied and not self.window_target_collected
         )
         progress_reward = self.progress_reward_coef * (
             self._task_potential() - potential_before
@@ -266,12 +300,21 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         self.steps += 1
         if self.steps % self.short_period == 0:
             self.windows_completed += 1
+            self.last_window_button_fraction = (
+                self.window_button_contacts.astype(np.float32)
+                / float(self.short_period)
+            )
+            self.last_window_target_fraction = (
+                self.window_target_contacts.astype(np.float32)
+                / float(self.short_period)
+            )
+            self.window_button_contacts.fill(0)
+            self.window_target_contacts.fill(0)
             self.active_target = 1 - self.active_target
             self.window_target_collected = False
             if self.steps % self.long_period == 0 and self.steps < self.max_steps:
-                self.active_holder = 1 - self.active_holder
                 self.active_plate = 1 - self.active_plate
-                self.role_switch_count += 1
+                self.button_switch_count += 1
 
         truncated = self.steps >= self.max_steps
         observations = self._get_obs()

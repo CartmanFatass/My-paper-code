@@ -1618,11 +1618,23 @@ class StandaloneProcessAgent:
         self.obs_dim = int(obs_dim)
         self.state_dim = int(state_dim or getattr(config, "state_dim", 0) or (self.obs_dim * self.n_agents))
         self.scenario = str(getattr(config, "scenario", "")).lower()
-        self.alice_bob_state_holder_slice = tuple(
-            getattr(config, "alice_bob_state_holder_slice", (4, 6))
-        )
         self.alice_bob_state_long_phase_index = int(
-            getattr(config, "alice_bob_state_long_phase_index", 11)
+            getattr(config, "alice_bob_state_long_phase_index", 9)
+        )
+        self.alice_bob_state_last_button_slice = tuple(
+            getattr(config, "alice_bob_state_last_button_slice", (15, 17))
+        )
+        self.alice_bob_state_last_target_slice = tuple(
+            getattr(config, "alice_bob_state_last_target_slice", (17, 19))
+        )
+        self.alice_bob_assignment_min_button_fraction = float(
+            getattr(config, "alice_bob_assignment_min_button_fraction", 0.30)
+        )
+        self.alice_bob_assignment_min_target_fraction = float(
+            getattr(config, "alice_bob_assignment_min_target_fraction", 0.10)
+        )
+        self.alice_bob_assignment_margin = float(
+            getattr(config, "alice_bob_assignment_margin", 0.05)
         )
         self.r28_g1_arm = str(getattr(config, "r28_g1_arm", "off")).lower()
         if self.r28_g1_arm not in {"off", *R28_G1_ARMS}:
@@ -6868,11 +6880,10 @@ class StandaloneProcessAgent:
                 "r30_spell_le_4k0_count": 0.0,
                 "r30_spell_gt_4k0_frac": 0.0,
                 "r30_spell_le_4k0_frac": 0.0,
-                "alice_bob_r30_stable_holder_keep_rate": 0.0,
-                "alice_bob_r30_stable_runner_set_rate": 0.0,
-                "alice_bob_r30_role_boundary_both_set_rate": 0.0,
-                "alice_bob_r30_cycle_action_match_rate": 0.0,
-                "alice_bob_r30_cycle_metric_rows": 0.0,
+                "alice_bob_r30_observed_button_keep_rate": 0.0,
+                "alice_bob_r30_observed_target_set_rate": 0.0,
+                "alice_bob_r30_observed_cycle_action_match_rate": 0.0,
+                "alice_bob_r30_observed_cycle_metric_rows": 0.0,
             }
 
         row_count = len(rows)
@@ -7085,61 +7096,73 @@ class StandaloneProcessAgent:
             if switch_array.size
             else np.zeros(self.n_skills, dtype=np.float64)
         )
-        alice_bob_role_metrics = {
-            "alice_bob_r30_stable_holder_keep_rate": 0.0,
-            "alice_bob_r30_stable_runner_set_rate": 0.0,
-            "alice_bob_r30_role_boundary_both_set_rate": 0.0,
-            "alice_bob_r30_cycle_action_match_rate": 0.0,
-            "alice_bob_r30_cycle_metric_rows": 0.0,
+        alice_bob_task_metrics = {
+            "alice_bob_r30_observed_button_keep_rate": 0.0,
+            "alice_bob_r30_observed_target_set_rate": 0.0,
+            "alice_bob_r30_observed_cycle_action_match_rate": 0.0,
+            "alice_bob_r30_observed_cycle_metric_rows": 0.0,
         }
         if self.scenario == "alice_bob_asymmetric_cycles" and self.n_agents == 2:
-            holder_keep: list[float] = []
-            runner_set: list[float] = []
-            boundary_both_set: list[float] = []
+            button_keep: list[float] = []
+            target_set: list[float] = []
             cycle_match: list[float] = []
-            holder_start, holder_stop = self.alice_bob_state_holder_slice
+            button_start, button_stop = self.alice_bob_state_last_button_slice
+            target_start, target_stop = self.alice_bob_state_last_target_slice
             for row in normal_decisions:
                 state = np.asarray(row.state, dtype=np.float32).reshape(-1)
                 if state.size <= self.alice_bob_state_long_phase_index:
                     continue
-                holder_logits = state[int(holder_start) : int(holder_stop)]
-                if holder_logits.size != 2:
+                previous_button = state[int(button_start) : int(button_stop)]
+                previous_target = state[int(target_start) : int(target_stop)]
+                if previous_button.size != 2 or previous_target.size != 2:
                     continue
-                holder = int(np.argmax(holder_logits))
-                runner = 1 - holder
+                button_executor = int(np.argmax(previous_button))
+                target_executor = int(np.argmax(previous_target))
+                button_confident = bool(
+                    previous_button[button_executor]
+                    >= self.alice_bob_assignment_min_button_fraction
+                    and abs(float(previous_button[0] - previous_button[1]))
+                    >= self.alice_bob_assignment_margin
+                )
+                target_confident = bool(
+                    previous_target[target_executor]
+                    >= self.alice_bob_assignment_min_target_fraction
+                    and abs(float(previous_target[0] - previous_target[1]))
+                    >= self.alice_bob_assignment_margin
+                )
+                if (
+                    not button_confident
+                    or not target_confident
+                    or button_executor == target_executor
+                ):
+                    continue
                 tokens_by_agent = np.full(self.n_agents, -1, dtype=np.int64)
                 for position, agent_id in enumerate(
                     np.asarray(row.agent_order, dtype=np.int64)
                 ):
                     tokens_by_agent[int(agent_id)] = int(row.token_kind[position])
                 long_phase = float(state[self.alice_bob_state_long_phase_index])
-                role_boundary = bool(abs(long_phase) <= 1e-6)
-                if role_boundary:
-                    matched = bool(np.all(tokens_by_agent == SET_TOKEN))
-                    boundary_both_set.append(float(matched))
-                else:
-                    holder_matched = tokens_by_agent[holder] == KEEP_TOKEN
-                    runner_matched = tokens_by_agent[runner] == SET_TOKEN
-                    holder_keep.append(float(holder_matched))
-                    runner_set.append(float(runner_matched))
-                    matched = bool(holder_matched and runner_matched)
+                if abs(long_phase) <= 1e-6:
+                    continue
+                button_matched = tokens_by_agent[button_executor] == KEEP_TOKEN
+                target_matched = tokens_by_agent[target_executor] == SET_TOKEN
+                button_keep.append(float(button_matched))
+                target_set.append(float(target_matched))
+                matched = bool(button_matched and target_matched)
                 cycle_match.append(float(matched))
-            alice_bob_role_metrics = {
-                "alice_bob_r30_stable_holder_keep_rate": (
-                    float(np.mean(holder_keep)) if holder_keep else 0.0
+            alice_bob_task_metrics = {
+                "alice_bob_r30_observed_button_keep_rate": (
+                    float(np.mean(button_keep)) if button_keep else 0.0
                 ),
-                "alice_bob_r30_stable_runner_set_rate": (
-                    float(np.mean(runner_set)) if runner_set else 0.0
+                "alice_bob_r30_observed_target_set_rate": (
+                    float(np.mean(target_set)) if target_set else 0.0
                 ),
-                "alice_bob_r30_role_boundary_both_set_rate": (
-                    float(np.mean(boundary_both_set))
-                    if boundary_both_set
-                    else 0.0
-                ),
-                "alice_bob_r30_cycle_action_match_rate": (
+                "alice_bob_r30_observed_cycle_action_match_rate": (
                     float(np.mean(cycle_match)) if cycle_match else 0.0
                 ),
-                "alice_bob_r30_cycle_metric_rows": float(len(cycle_match)),
+                "alice_bob_r30_observed_cycle_metric_rows": float(
+                    len(cycle_match)
+                ),
             }
         return {
             "high_loss": float(loss.detach().cpu().item()),
@@ -7188,7 +7211,7 @@ class StandaloneProcessAgent:
                 if lifetime_events
                 else 0.0
             ),
-            **alice_bob_role_metrics,
+            **alice_bob_task_metrics,
         }
 
     def update_high_from_segments(

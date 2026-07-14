@@ -85,11 +85,12 @@ does not add a new intrinsic reward.
   actions are absent in R30 mode, high PPO is isolated in `HighCheckBuffer`,
   legacy checkpoint migration is explicit, and the registered reward-pure
   paired runner/analyzer are ready.
-- `alice_bob_asymmetric_cycles` is now the fast mechanism sandbox: one agent
-  holds a button for four `k0` blocks while the other changes target every
-  block, then roles swap. Its separate semantic lane retains the existing
-  low-only transition-skill pressure; it does not alter the registered
-  reward-pure energy comparison.
+- `alice_bob_asymmetric_cycles` is now the role-free fast mechanism sandbox:
+  the button subtask persists for four `k0` blocks while the target subtask
+  changes every block. The environment never assigns either task to an agent;
+  complementary skill allocation is inferred from behavior. Its separate
+  semantic lane retains the existing low-only transition-skill pressure and
+  does not alter the registered reward-pure energy comparison.
 
 ## Next Actions
 
@@ -99,8 +100,9 @@ does not add a new intrinsic reward.
    predeclared M1-M4 branch in `memory/ExpRecord.md`.
 2. After the local GPU is released, run one parallel 16-env, single-seed
    Alice--Bob mechanism screen: adaptive KEEP/SET versus the matched shared-`k`
-   forced-refresh control. Read cycle success plus role-conditioned
-   holder-KEEP/runner-SET alignment; do not promote this toy result to S7.
+   forced-refresh control. Read cycle success plus behavior-inferred
+   button-executor KEEP / target-executor SET alignment; do not promote this
+   toy result to S7.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
