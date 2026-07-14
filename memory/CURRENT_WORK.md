@@ -39,7 +39,9 @@ R29--R34 skill identification, effect creation, composition, and relabeling fail
 -> compare observation/history-only recurrent MAPPO with reward-pure R30
 -> both arms fail the registered positive-access floor
 -> R36-AEM episodic joint-position novelty versus constant-code MAPPO
--> decide whether task-generic state visitation pressure restores first access
+-> joint coverage rises 3.855x but collection access remains exactly zero
+-> audit whether Alice--Bob's hidden active-task identity invalidates it as an
+   access-first algorithm substrate
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -177,15 +179,20 @@ direct intervention-scored roster-complementarity selection are retired.
   accepts the state-novelty edge while replacing hash with direct 625-cell
   indexing, fixing the bonus scale, restoring the exact R35 budget, and adding
   a paired causal access requirement.
+- R36 completed validly as `FAIL_M1_RETIRE_R36_AEM`. AEM changed natural joint
+  coverage from `0.016575` to `0.063900` (`3.8552x`, paired CI wholly positive)
+  but produced zero collections and zero cycle success in all 64 treatment
+  evaluations. Retire the exact joint-count bonus: undirected coarse state
+  breadth is not a sufficient carrier for first coordinated access.
 
 ## Next Actions
 
-1. Monitor the registered R36 pair through its single status source at
-   `logs/r36_aem_access_320k_20260715_034611/runner_status.txt`.
-2. Interpret only the single result JSON; do not rerun or expand R35/R36.
+1. Submit the tracked R36 result question for one audit of the Alice--Bob
+   observation/access contract and one decisive next boundary.
+2. Do not implement R37 until that review is archived and dispositioned.
 
-Active gate: `EXP-20260715-r36-aem-access`. Its exact contract is in
-`memory/ExpRecord.md`; R35's completed result remains the upstream evidence.
+Active decision boundary: the valid R35--R36 sparse-access failure review at
+`memory/LTM/R35_R36_SPARSE_ACCESS_FAILURE_REVIEW_20260715.md`.
 
 ## Immediate Constraints
 
@@ -236,6 +243,9 @@ Active gate: `EXP-20260715-r36-aem-access`. Its exact contract is in
   arm with a frozen arm, initialize from the trained R30 checkpoint, inject an
   auxiliary reward, or treat two zero-access arms as noninferiority. A single
   320K seed cannot establish general hierarchy value or HMASD/S7 parity.
+- R36's exact direct-cell episodic novelty is retired. Do not rescue it with a
+  different grid, count window, formula, coefficient, seed, budget, RND/ICM
+  relabeling, or a lower access gate. Coverage is not collection access.
 
 ## Pointers
 
@@ -268,4 +278,6 @@ Active gate: `EXP-20260715-r36-aem-access`. Its exact contract is in
   result-review question for the single post-R33 causal edge.
 - `docs/external-review/gpt5_6_pro/20260715_r34_bhmd_gate_result/` — tracked
   R34 result audit, rejected first R35 route, and correction entry.
+- `docs/external-review/gpt5_6_pro/20260715_r36_aem_access_result/` — tracked
+  R36 valid-failure and Alice--Bob access-instrument review entry.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

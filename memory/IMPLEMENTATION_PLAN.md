@@ -36,8 +36,12 @@ One coherent implementation/evidence boundary:
    are the implementation check. Do not add a smoke, coefficient sweep,
    threshold rescue, or automatic budget/seed expansion.
 
-Implementation status: complete at `b0a5300`; the registered paired run is the
-single evidence boundary.
+Gate result: valid `FAIL_M1_RETIRE_R36_AEM`. The treatment increased mean joint
+coverage from `0.016575` to `0.063900` (`3.8552x`, paired CI `[0.0454,
+0.049175]`) but both arms retained zero collections and zero cycle success.
+Retire the exact episodic joint-count bonus. No R37 implementation is active;
+the next boundary is an external audit of the Alice--Bob observation/access
+contract.
 
 ## R30 Fixed-Clock Autoregressive Edit Gate
 

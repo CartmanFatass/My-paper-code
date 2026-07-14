@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r36-aem-access | running | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | `runner_status.txt`, then result JSON | Direct 625-cell episodic novelty is isolated to low GAE with pure sparse evaluation and a matched constant-code control | Read the single terminal result; no tuning or expansion. |
+| EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; audit the Alice--Bob observation/access instrument before another algorithm. |
 | EXP-20260715-r35-sparse-mappo-reset | completed -- valid `NO_ACCESS_R35_UNRESOLVED` | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4`; runner commit `030d0cd`, implementation `b372000` | none | M0 PASS; both arms completed 320K/250 low updates, but 0/64 paired indices had a collection and both cycle means were 0 | Do not interpret noninferiority or replace a baseline; do not rerun/expand R35; seek one non-skill access-first edge. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
@@ -103,6 +103,12 @@ explicitly approves the exception.
 - Status source: after launch, the runner owns `runner_status.txt`; the only
   scientific decision source is its single
   `result/r36_aem_access.json`.
+- Result: valid `FAIL_M1_RETIRE_R36_AEM`. Both arms completed 320K steps, 250
+  low updates, and 64 stochastic evaluations. Treatment/control coverage ratio
+  was `3.855204`; paired difference CI was `[0.0454, 0.049175]`. Treatment and
+  control each had zero collection episodes, zero cycle success, and zero-cycle
+  fraction one. The novelty mechanism changed visitation but failed its access
+  carrier; no tuning, rerun, or expansion is authorized.
 
 ### EXP-20260715-r35-sparse-mappo-reset
 

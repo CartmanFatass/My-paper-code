@@ -1,0 +1,217 @@
+{
+  "arms": {
+    "aem_joint_novelty": {
+      "aem_maxima": {
+        "aem_active": 1.0,
+        "aem_bonus_applied_steps": 1280.0,
+        "aem_bonus_max": 0.0125,
+        "aem_bonus_mean": 0.010306282657423473,
+        "aem_bonus_min": 0.00472455591261534,
+        "aem_bonus_sum": 13.192041801502047,
+        "aem_count_resets": 16.0,
+        "aem_forbidden_field_reads": 0.0,
+        "aem_formula_max_abs_error": 0.0,
+        "aem_preincrement_count_max": 52.0
+      },
+      "aem_minima": {
+        "aem_active": 1.0,
+        "aem_bonus_applied_steps": 1280.0,
+        "aem_bonus_max": 0.0125,
+        "aem_bonus_mean": 0.006548848986011465,
+        "aem_bonus_min": 0.0017170070493586127,
+        "aem_bonus_sum": 8.382526702094674,
+        "aem_count_resets": 16.0,
+        "aem_forbidden_field_reads": 0.0,
+        "aem_formula_max_abs_error": 0.0,
+        "aem_preincrement_count_max": 6.0
+      },
+      "aem_totals": {
+        "aem_active": 250.0,
+        "aem_bonus_applied_steps": 320000.0,
+        "aem_bonus_max": 3.1250000000000107,
+        "aem_bonus_mean": 1.9592904054730778,
+        "aem_bonus_min": 0.6697355459215629,
+        "aem_bonus_sum": 2507.89171900554,
+        "aem_count_resets": 4000.0,
+        "aem_forbidden_field_reads": 0.0,
+        "aem_formula_max_abs_error": 0.0,
+        "aem_preincrement_count_max": 6124.0
+      },
+      "arm_root": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\runs\\aem_joint_novelty\\seed37031",
+      "config": "ha_ctse_process.config_alice_bob_aem",
+      "coverage_field": "alice_bob_joint_position_coverage_ratio",
+      "cycle_success_mean": 0.0,
+      "episodes_with_collection": 0,
+      "final_checkpoint": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\runs\\aem_joint_novelty\\seed37031\\standalone_process_core_final.pt",
+      "final_eval_episodes": 64,
+      "final_eval_steps": 320000,
+      "final_train_steps": 320000,
+      "high_decision_rows": 0.0,
+      "high_update_rows": 0.0,
+      "invalid_reasons": [],
+      "joint_position_coverage_mean": 0.0639,
+      "low_updates": 250,
+      "periodic_checkpoint_count": 0,
+      "resume_from": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\init\\neutral_constant_seed37031\\standalone_process_core_final.pt",
+      "shape_signature": {
+        "action_dim": 2,
+        "hidden_size": 64,
+        "low_actor_condition_on_team_code": false,
+        "low_level_architecture": "strict_hmasd_mappo",
+        "low_rnn_hidden_size": 64,
+        "low_sequence_batch_size": 64,
+        "low_sequence_length": 10,
+        "n_agents": 2,
+        "n_skills": 4,
+        "obs_dim": 12,
+        "state_dim": 19,
+        "use_centralized_low_value": true,
+        "use_recurrent_low_level": true
+      },
+      "sparse_reward_exact": true,
+      "train_updates": 250,
+      "valid": true,
+      "zero_cycle_fraction": 1.0
+    },
+    "constant_code_mappo": {
+      "aem_maxima": {
+        "aem_active": 0.0,
+        "aem_bonus_applied_steps": 0.0,
+        "aem_bonus_max": 0.0,
+        "aem_bonus_mean": 0.0,
+        "aem_bonus_min": 0.0,
+        "aem_bonus_sum": 0.0,
+        "aem_count_resets": 0.0,
+        "aem_forbidden_field_reads": 0.0,
+        "aem_formula_max_abs_error": 0.0,
+        "aem_preincrement_count_max": 0.0
+      },
+      "aem_minima": {
+        "aem_active": 0.0,
+        "aem_bonus_applied_steps": 0.0,
+        "aem_bonus_max": 0.0,
+        "aem_bonus_mean": 0.0,
+        "aem_bonus_min": 0.0,
+        "aem_bonus_sum": 0.0,
+        "aem_count_resets": 0.0,
+        "aem_forbidden_field_reads": 0.0,
+        "aem_formula_max_abs_error": 0.0,
+        "aem_preincrement_count_max": 0.0
+      },
+      "aem_totals": {
+        "aem_active": 0.0,
+        "aem_bonus_applied_steps": 0.0,
+        "aem_bonus_max": 0.0,
+        "aem_bonus_mean": 0.0,
+        "aem_bonus_min": 0.0,
+        "aem_bonus_sum": 0.0,
+        "aem_count_resets": 0.0,
+        "aem_forbidden_field_reads": 0.0,
+        "aem_formula_max_abs_error": 0.0,
+        "aem_preincrement_count_max": 0.0
+      },
+      "arm_root": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\runs\\constant_code_mappo\\seed37031",
+      "config": "ha_ctse_process.config_alice_bob_sparse_mappo",
+      "coverage_field": "alice_bob_joint_position_coverage_ratio",
+      "cycle_success_mean": 0.0,
+      "episodes_with_collection": 0,
+      "final_checkpoint": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\runs\\constant_code_mappo\\seed37031\\standalone_process_core_final.pt",
+      "final_eval_episodes": 64,
+      "final_eval_steps": 320000,
+      "final_train_steps": 320000,
+      "high_decision_rows": 0.0,
+      "high_update_rows": 0.0,
+      "invalid_reasons": [],
+      "joint_position_coverage_mean": 0.016575,
+      "low_updates": 250,
+      "periodic_checkpoint_count": 0,
+      "resume_from": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\init\\neutral_constant_seed37031\\standalone_process_core_final.pt",
+      "shape_signature": {
+        "action_dim": 2,
+        "hidden_size": 64,
+        "low_actor_condition_on_team_code": false,
+        "low_level_architecture": "strict_hmasd_mappo",
+        "low_rnn_hidden_size": 64,
+        "low_sequence_batch_size": 64,
+        "low_sequence_length": 10,
+        "n_agents": 2,
+        "n_skills": 4,
+        "obs_dim": 12,
+        "state_dim": 19,
+        "use_centralized_low_value": true,
+        "use_recurrent_low_level": true
+      },
+      "sparse_reward_exact": true,
+      "train_updates": 250,
+      "valid": true,
+      "zero_cycle_fraction": 1.0
+    }
+  },
+  "common_init_checkpoint": "C:\\project\\HMASD\\logs\\r36_aem_access_320k_20260715_034611\\init\\neutral_constant_seed37031\\standalone_process_core_final.pt",
+  "experiment_id": "EXP-20260715-r36-aem-access",
+  "gates": {
+    "m0_implementation": {
+      "invalid_reasons": [],
+      "passed": true
+    },
+    "m1_access": {
+      "paired_collection_indicator": {
+        "lower": 0.0,
+        "mean": 0.0,
+        "upper": 0.0
+      },
+      "paired_collection_indicator_ci_lower_strict": 0.0,
+      "paired_collection_indicator_gain_floor": 0.1,
+      "passed": false,
+      "treatment_collection_episode_floor": 10,
+      "treatment_cycle_success_floor": 0.05,
+      "treatment_cycle_success_mean": 0.0,
+      "treatment_episodes_with_collection": 0
+    },
+    "m2_visitation_carrier_safety": {
+      "joint_position_coverage_ratio_floor": 1.5,
+      "paired_coverage_difference": {
+        "lower": 0.0454,
+        "mean": 0.047325000000000006,
+        "upper": 0.049175
+      },
+      "paired_coverage_difference_ci_lower_strict": 0.0,
+      "passed": false,
+      "treatment_control_mean_coverage_ratio": 3.8552036199095023,
+      "treatment_zero_cycle_fraction": 1.0,
+      "treatment_zero_cycle_fraction_ceiling_strict": 0.9
+    }
+  },
+  "implementation_valid": true,
+  "invalid_reasons": [],
+  "paired_comparison": {
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 40037031,
+    "cycle_success": {
+      "lower": 0.0,
+      "mean": 0.0,
+      "upper": 0.0
+    },
+    "direction": "aem_joint_novelty_minus_constant_code_mappo",
+    "joint_position_coverage": {
+      "lower": 0.0454,
+      "mean": 0.047325000000000006,
+      "upper": 0.049175
+    },
+    "paired_collection_indicator": {
+      "lower": 0.0,
+      "mean": 0.0,
+      "upper": 0.0
+    },
+    "treatment_control_mean_coverage_ratio": 3.8552036199095023,
+    "zero_cycle_fraction": {
+      "lower": 0.0,
+      "mean": 0.0,
+      "upper": 0.0
+    }
+  },
+  "scope": "single-seed sparse Alice--Bob task-generic access gate",
+  "seed": 37031,
+  "status": "FAIL_M1_RETIRE_R36_AEM",
+  "total_timesteps_per_arm": 320000
+}
