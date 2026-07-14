@@ -201,6 +201,45 @@ exact non-additive roster-complementarity fitting
 -/-> natural joint or nonredundant coverage
 ```
 
+## Cross-project constraints from IMOD (constraints, not evidence)
+
+A separate IMOD project established a useful execution boundary but did not
+establish an effective Async-HMASD learning algorithm. Its reusable positive
+content is an exact fixed-path fallback, explicit per-agent event state,
+deterministic bounded service, atomic partial-roster commit, and an exact
+probability ledger. Its mixed-age mechanics, teacher-KL safety pipe, and local
+lifetime observations do **not** establish convergence, task performance, skill
+semantics, or useful credit. IMOD also retired completion-value `J`,
+value-of-revision/request-value, value-ranked candidates, and the production
+ROSTER scheduler/controller line.
+
+Treat this only as prior constraints on the post-R33 proposal:
+
+1. Do not choose a scheduler, queue, hazard, service rule, atomic commit, or
+   mixed-age access by itself as the new learning contribution. The proposed
+   edge must explain how a learnable signal repairs the demonstrated absence of
+   material individual causal effects and selectable non-additive interaction.
+2. Preserve R30's exact fixed-clock KEEP/SET probability and replay spine as
+   the comparator and fallback. Do not reopen the separate legacy `hmasd/`
+   stored-prefix issue as an explanation of this R33 result; active R30/R33
+   teacher-forced replay passed M0 exactly.
+3. Treat teacher/student mixing, event-state bookkeeping, bounded service, and
+   atomic commit as safety/execution infrastructure only. They may support a
+   later mechanism if logically required, but they cannot supply its causal
+   claim.
+4. If the selected mechanism eventually requires asynchronous execution, its
+   gate must isolate learning from scheduling with a realized-rate-matched
+   random control and, where relevant, force/suppress, oracle-allocation, or
+   immediate/sequential/delayed execution probes.
+5. Do not revive `J`, value-of-revision, request-value, value-ranked pruning,
+   the ROSTER production controller, or present prefix credit/value-free
+   pruning as already validated. Any such structurally new estimator would
+   require its own upstream abandonment gate rather than inheriting legitimacy
+   from IMOD mechanics.
+
+These constraints are not an invitation to migrate IMOD code or parameters and
+do not change the registered R33 failure.
+
 ## Requested decision
 
 1. Audit whether the corrected R33 estimand, shared randomization, exact roster
