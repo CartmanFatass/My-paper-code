@@ -161,12 +161,17 @@ direct intervention-scored roster-complementarity selection are retired.
   R32 direct-IFEPG estimand; CBF is also rejected without implementation. One
   final correction must replace the discrete skill object or explicitly
   abandon the current skill-formation program.
+- Correction 2 properly retired CBF and proposed continuous TMPF, but its world
+  model likelihood has zero gradient to the low actor or random `u` generator
+  on detached rollout data. The frozen categorical R30 head also cannot emit
+  continuous `u`. TMPF is invalid as an algorithm contract; the final review
+  must take program abandonment and choose one non-skill reset direction.
 
 ## Next Actions
 
-1. Submit `GPT5_6_PRO_CORRECTION_2.md` automatically in the existing Pro review
-   conversation after committing correction 1 and its disposition.
-2. Archive and disposition the returned replacement-or-abandonment decision.
+1. Submit `GPT5_6_PRO_CORRECTION_3.md` automatically in the existing Pro review
+   conversation after committing TMPF and its disposition.
+2. Archive and disposition the single non-skill reset direction.
 3. Implement and register only an accepted compliant edge; a longer registered
    local gate may run overnight under the standing authorization.
 
