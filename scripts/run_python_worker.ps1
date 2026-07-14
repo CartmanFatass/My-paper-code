@@ -28,9 +28,7 @@ catch {
 }
 finally {
     $exitCodePath = [string]$spec.exit_code_path
-    $temporary = "$exitCodePath.tmp.$PID"
-    [System.IO.File]::WriteAllText($temporary, [string]$exitCode)
-    Move-Item -LiteralPath $temporary -Destination $exitCodePath -Force
+    [System.IO.File]::WriteAllText($exitCodePath, [string]$exitCode)
 }
 
 exit $exitCode
