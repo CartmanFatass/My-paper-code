@@ -1,13 +1,17 @@
 param(
     [string]$PythonBin = "C:\Users\wu\.conda\envs\SB3\python.exe",
     [string]$RunRoot = "",
-    [int]$Seed = 30031
+    [int]$Seed = 30031,
+    [switch]$RetryR30Only,
+    [string]$RetryTag = "retry1"
 )
 
 $ErrorActionPreference = "Stop"
 $RepoDir = Split-Path -Parent $PSScriptRoot
 $SourceCheckpoint = Join-Path $RepoDir "dist\logs_cloud_r25_qa_verification_1m\arm0_arch_only\seed1\standalone_process_core_final.pt"
 $PairAnalyzer = Join-Path $PSScriptRoot "analyze_r30_fixed_clock_pair.py"
+$WorkerWrapper = Join-Path $PSScriptRoot "run_python_worker.ps1"
+$PowerShellBin = (Get-Process -Id $PID).Path
 if (-not $RunRoot) {
     $RunRoot = Join-Path $RepoDir ("logs\r30_fixed_clock_paired_320k_" + (Get-Date -Format "yyyyMMdd_HHmmss"))
 }
@@ -42,37 +46,77 @@ function Start-Worker(
         (Join-Path $LogRoot "command.txt"),
         "$PythonBin $($Arguments -join ' ')"
     )
+    $exitCodePath = Join-Path $LogRoot "worker_exit_code.txt"
+    $specPath = Join-Path $LogRoot "worker_spec.json"
+    $spec = [ordered]@{
+        python_bin = $PythonBin
+        working_directory = $RepoDir
+        stdout_path = (Join-Path $LogRoot "runner_stdout.log")
+        stderr_path = (Join-Path $LogRoot "runner_stderr.log")
+        exit_code_path = $exitCodePath
+        arguments = $Arguments
+    }
+    [System.IO.File]::WriteAllText(
+        $specPath,
+        ($spec | ConvertTo-Json -Depth 4),
+        [System.Text.UTF8Encoding]::new($false)
+    )
     $process = Start-Process `
-        -FilePath $PythonBin `
-        -ArgumentList $Arguments `
+        -FilePath $PowerShellBin `
+        -ArgumentList @(
+            "-NoProfile",
+            "-ExecutionPolicy", "Bypass",
+            "-File", $WorkerWrapper,
+            "-SpecPath", $specPath
+        ) `
         -WorkingDirectory $RepoDir `
-        -RedirectStandardOutput (Join-Path $LogRoot "runner_stdout.log") `
-        -RedirectStandardError (Join-Path $LogRoot "runner_stderr.log") `
+        -RedirectStandardOutput (Join-Path $LogRoot "worker_wrapper_stdout.log") `
+        -RedirectStandardError (Join-Path $LogRoot "worker_wrapper_stderr.log") `
         -WindowStyle Hidden `
         -PassThru
-    return [pscustomobject]@{ Id = $Id; Process = $process }
+    return [pscustomobject]@{
+        Id = $Id
+        Process = $process
+        ExitCodePath = $exitCodePath
+        Completed = $false
+    }
 }
 
 function Wait-Workers([object[]]$Workers) {
+    $failed = @()
     while ($true) {
-        $failed = @()
         $running = @()
         foreach ($worker in $Workers) {
+            if ($worker.Completed) {
+                continue
+            }
             if ($worker.Process.HasExited) {
                 $worker.Process.WaitForExit()
-                if ($worker.Process.ExitCode -ne 0) {
-                    $failed += "$($worker.Id):$($worker.Process.ExitCode)"
+                $exitCode = $null
+                for ($attempt = 0; $attempt -lt 50; $attempt++) {
+                    if (Test-Path -LiteralPath $worker.ExitCodePath) {
+                        $rawExitCode = (
+                            Get-Content -Raw -LiteralPath $worker.ExitCodePath
+                        ).Trim()
+                        $parsedExitCode = 0
+                        if ([int]::TryParse($rawExitCode, [ref]$parsedExitCode)) {
+                            $exitCode = $parsedExitCode
+                        }
+                        break
+                    }
+                    Start-Sleep -Milliseconds 100
                 }
+                if ($null -eq $exitCode) {
+                    $failed += "$($worker.Id):missing-exit-status"
+                }
+                elseif ($exitCode -ne 0) {
+                    $failed += "$($worker.Id):$exitCode"
+                }
+                $worker.Completed = $true
             }
             else {
                 $running += $worker
             }
-        }
-        if ($failed.Count -gt 0) {
-            foreach ($worker in $running) {
-                Stop-Process -Id $worker.Process.Id -Force -ErrorAction SilentlyContinue
-            }
-            throw "training worker failure: $($failed -join ', ')"
         }
         if ($running.Count -eq 0) {
             break
@@ -82,6 +126,29 @@ function Wait-Workers([object[]]$Workers) {
     foreach ($worker in $Workers) {
         $worker.Process.Dispose()
     }
+    if ($failed.Count -gt 0) {
+        throw "training worker failure: $($failed -join ', ')"
+    }
+}
+
+function Analyze-Pair([string]$R30ArmRoot = "") {
+    Write-Status "running" "pair_analysis"
+    $arguments = @("--run-root", $RunRoot, "--seed", [string]$Seed)
+    if ($R30ArmRoot) {
+        $arguments += @("--r30-arm-root", $R30ArmRoot)
+    }
+    & $PythonBin $PairAnalyzer @arguments
+    if ($LASTEXITCODE -ne 0) {
+        throw "R30 pair analysis failed with exit code $LASTEXITCODE"
+    }
+    $resultPath = Join-Path $RunRoot "result\r30_fixed_clock_pair.json"
+    $result = Get-Content -Raw $resultPath | ConvertFrom-Json
+    Write-Status "completed" "result" @(
+        "result_status=$($result.status)",
+        "result_json=$resultPath"
+    )
+    Write-Output "RUN_ROOT=$RunRoot"
+    Write-Output "RESULT_STATUS=$($result.status)"
 }
 
 function Training-Arguments([string]$Arm, [string]$LogDir) {
@@ -120,11 +187,41 @@ function Training-Arguments([string]$Arm, [string]$LogDir) {
 }
 
 try {
-    if (Test-Path -LiteralPath $RunRoot) {
-        throw "RunRoot already exists: $RunRoot"
-    }
     if (-not (Test-Path -LiteralPath $SourceCheckpoint)) {
         throw "Source checkpoint is missing: $SourceCheckpoint"
+    }
+    if ($RetryR30Only) {
+        if (-not (Test-Path -LiteralPath $RunRoot)) {
+            throw "Retry RunRoot is missing: $RunRoot"
+        }
+        $legacyRoot = Join-Path $RunRoot "runs\legacy_duration\seed$Seed"
+        $legacyCheckpoint = Join-Path $legacyRoot "standalone_process_core_final.pt"
+        if (-not (Test-Path -LiteralPath $legacyCheckpoint)) {
+            throw "Completed legacy arm is missing: $legacyCheckpoint"
+        }
+        $retryRoot = Join-Path $RunRoot "runs\r30_fixed_clock_ar_edit_$RetryTag\seed$Seed"
+        if (Test-Path -LiteralPath $retryRoot) {
+            throw "R30 retry root already exists: $retryRoot"
+        }
+        Write-Status "running" "r30_retry_training" @(
+            "retry_tag=$RetryTag",
+            "r30_log_root=$retryRoot"
+        )
+        $worker = Start-Worker `
+            -Id "r30_fixed_clock_ar_edit_$RetryTag" `
+            -Arguments (Training-Arguments "r30_fixed_clock_ar_edit" $retryRoot) `
+            -LogRoot $retryRoot
+        Write-Status "running" "r30_retry_training" @(
+            "retry_tag=$RetryTag",
+            "r30_pid=$($worker.Process.Id)",
+            "r30_log_root=$retryRoot"
+        )
+        Wait-Workers @($worker)
+        Analyze-Pair -R30ArmRoot $retryRoot
+        return
+    }
+    if (Test-Path -LiteralPath $RunRoot) {
+        throw "RunRoot already exists: $RunRoot"
     }
     New-Item -ItemType Directory -Path $RunRoot | Out-Null
     Write-Status "running" "training"
@@ -142,20 +239,7 @@ try {
         "r30_pid=$($workers[1].Process.Id)"
     )
     Wait-Workers $workers
-
-    Write-Status "running" "pair_analysis"
-    & $PythonBin $PairAnalyzer --run-root $RunRoot --seed $Seed
-    if ($LASTEXITCODE -ne 0) {
-        throw "R30 pair analysis failed with exit code $LASTEXITCODE"
-    }
-    $resultPath = Join-Path $RunRoot "result\r30_fixed_clock_pair.json"
-    $result = Get-Content -Raw $resultPath | ConvertFrom-Json
-    Write-Status "completed" "result" @(
-        "result_status=$($result.status)",
-        "result_json=$resultPath"
-    )
-    Write-Output "RUN_ROOT=$RunRoot"
-    Write-Output "RESULT_STATUS=$($result.status)"
+    Analyze-Pair
 }
 catch {
     $message = [string]$_.Exception.Message

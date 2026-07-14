@@ -62,6 +62,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--seed", type=int, default=30031)
+    parser.add_argument("--r30-arm-root")
     args = parser.parse_args()
 
     run_root = Path(args.run_root).resolve()
@@ -69,8 +70,13 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     train: dict[str, list[dict[str, float]]] = {}
     evaluation: dict[str, dict[str, float]] = {}
+    arm_roots: dict[str, Path] = {}
     for arm in ARMS:
-        arm_root = run_root / "runs" / arm / f"seed{args.seed}"
+        if arm == "r30_fixed_clock_ar_edit" and args.r30_arm_root:
+            arm_root = Path(args.r30_arm_root).resolve()
+        else:
+            arm_root = run_root / "runs" / arm / f"seed{args.seed}"
+        arm_roots[arm] = arm_root
         arm_rows = [
             row
             for row in load_csv(arm_root / "metrics" / "train_updates.csv")
@@ -178,6 +184,7 @@ def main() -> None:
         "seed": args.seed,
         "source_steps": SOURCE_STEPS,
         "additional_steps_per_arm": FINAL_STEPS - SOURCE_STEPS,
+        "arm_roots": {arm: str(path) for arm, path in arm_roots.items()},
         "updates_per_arm": {arm: len(train[arm]) for arm in ARMS},
         "gates": {"M1": m1, "M2": m2, "M3": m3, "M4": m4},
         "M1_token_contract": {
