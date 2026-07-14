@@ -1643,6 +1643,7 @@ class StandaloneProcessAgent:
         self.high_controller = str(
             getattr(config, "high_controller", "legacy_duration")
         ).lower()
+        self.r30_pair_gate = bool(getattr(config, "r30_pair_gate", False))
         if self.high_controller not in {
             "legacy_duration",
             "r30_fixed_clock_ar_edit",

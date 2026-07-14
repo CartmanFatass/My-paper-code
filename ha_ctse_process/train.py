@@ -1447,6 +1447,9 @@ def checkpoint_payload(
             "migrated_high_keys": tuple(
                 getattr(agent, "checkpoint_migrated_high_keys", ())
             ),
+            "dropped_high_keys": tuple(
+                getattr(agent, "checkpoint_dropped_high_keys", ())
+            ),
         },
         "team_bridge_type": str(getattr(config, "team_bridge_type", "stochastic")),
         "n_agents": agent.n_agents,
@@ -1576,6 +1579,34 @@ def migrate_legacy_high_to_r30(
     return migrated
 
 
+def load_reward_pure_legacy_high(
+    agent: StandaloneProcessAgent,
+    source_state: dict[str, torch.Tensor],
+) -> list[str]:
+    """Drop only the retired sampled-team residual heads for the pair comparator."""
+
+    retired = {
+        "z_skill_residual.weight",
+        "z_skill_residual.bias",
+        "z_duration_residual.weight",
+        "z_duration_residual.bias",
+    }
+    dropped = set(source_state).intersection(retired)
+    unknown = {
+        name
+        for name in source_state
+        if name not in agent.high.state_dict() and name not in retired
+    }
+    if unknown:
+        raise ValueError(
+            "reward-pure legacy migration found unsupported high keys: "
+            + ",".join(sorted(unknown))
+        )
+    filtered = {name: value for name, value in source_state.items() if name not in retired}
+    agent.high.load_state_dict(filtered, strict=True)
+    return sorted(dropped)
+
+
 def load_checkpoint(
     path: str | Path,
     agent: StandaloneProcessAgent,
@@ -1603,9 +1634,17 @@ def load_checkpoint(
             raise ValueError(
                 "legacy duration controller cannot load an R30 checkpoint"
             )
-        agent.high.load_state_dict(checkpoint["high"], strict=True)
-        agent.checkpoint_migration_mode = "strict_legacy_resume"
-        agent.checkpoint_migrated_high_keys = tuple(agent.high.state_dict().keys())
+        if bool(getattr(agent, "r30_pair_gate", False)):
+            dropped = load_reward_pure_legacy_high(agent, checkpoint["high"])
+            agent.checkpoint_migration_mode = "reward_pure_legacy_v1"
+            agent.checkpoint_migrated_high_keys = tuple(
+                name for name in agent.high.state_dict().keys()
+            )
+            agent.checkpoint_dropped_high_keys = tuple(dropped)
+        else:
+            agent.high.load_state_dict(checkpoint["high"], strict=True)
+            agent.checkpoint_migration_mode = "strict_legacy_resume"
+            agent.checkpoint_migrated_high_keys = tuple(agent.high.state_dict().keys())
     if "compact" in checkpoint:
         agent.compact.load_state_dict(checkpoint["compact"])
     if "bridge" in checkpoint:
@@ -1696,6 +1735,9 @@ def load_checkpoint(
         bool(getattr(agent, "r30_enabled", False))
         and source_controller == "legacy_duration"
     )
+    restore_high_optimizer = restore_high_state and not bool(
+        getattr(agent, "r30_pair_gate", False)
+    )
     if (
         restore_high_state
         and checkpoint.get("high_value_norm") is not None
@@ -1705,7 +1747,7 @@ def load_checkpoint(
     if checkpoint.get("low_value_norm") is not None and agent.low_value_norm is not None:
         agent.low_value_norm.load_state_dict(checkpoint["low_value_norm"])
     if load_optimizers:
-        if "high_opt" in checkpoint and restore_high_state:
+        if "high_opt" in checkpoint and restore_high_optimizer:
             if bool(getattr(agent, "r30_enabled", False)):
                 agent.high_opt.load_state_dict(checkpoint["high_opt"])
             else:
