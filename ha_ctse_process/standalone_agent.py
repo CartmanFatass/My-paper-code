@@ -750,6 +750,11 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
             params += list(self.actor_team_film.parameters())
         return params
 
+    def film_update_parameters(self):
+        """Return the only low-actor parameters admitted by R32-IFEPG."""
+
+        return list(self.actor_film.parameters())
+
     def critic_update_parameters(self):
         return (
             list(self.critic_base.parameters())
@@ -794,6 +799,98 @@ class StrictHMASDMAPPOLowLevelPolicy(nn.Module):
     @staticmethod
     def _squeeze_log_probs(log_probs: torch.Tensor) -> torch.Tensor:
         return log_probs.squeeze(-1) if log_probs.dim() > 1 and log_probs.shape[-1] == 1 else log_probs
+
+    def evaluate_focal_sequence_log_probs(
+        self,
+        obs_seq: torch.Tensor,
+        skills_seq: torch.Tensor,
+        actions_seq: torch.Tensor,
+        initial_actor_hxs: torch.Tensor,
+        team_codes_seq: torch.Tensor | None = None,
+        masks_seq: torch.Tensor | None = None,
+    ) -> torch.Tensor:
+        """Replay one focal trajectory through the current low actor.
+
+        R32 uses this actor-only path to compare stored behavior likelihoods
+        with likelihoods under the current skill FiLM.  It intentionally does
+        not evaluate the critic or sample an entropy estimate.
+        """
+
+        if self.action_space_type != "continuous":
+            raise TypeError("R32 focal replay requires a continuous low actor")
+        action_out = self.actor_act.action_out
+        if type(action_out).__name__ != "TanhDiagGaussian":
+            raise TypeError("R32 focal replay requires the tanh-Gaussian action head")
+
+        obs = check(obs_seq).to(dtype=torch.float32, device=self.device)
+        skills = check(skills_seq).to(dtype=torch.long, device=self.device).reshape(-1)
+        actions = check(actions_seq).to(dtype=torch.float32, device=self.device)
+        if obs.ndim != 2 or obs.shape[1] != self.obs_dim:
+            raise ValueError("R32 focal observations must have shape [T, obs_dim]")
+        time_steps = int(obs.shape[0])
+        if skills.shape != (time_steps,):
+            raise ValueError("R32 focal skills must have shape [T]")
+        if actions.shape != (time_steps, self.action_dim):
+            raise ValueError("R32 focal actions must have shape [T, action_dim]")
+
+        actor_hxs = check(initial_actor_hxs).to(
+            dtype=torch.float32,
+            device=self.device,
+        )
+        if actor_hxs.ndim == 1:
+            actor_hxs = actor_hxs.unsqueeze(0)
+        if actor_hxs.shape != (1, self.hidden_dim):
+            raise ValueError("R32 focal initial hidden state must have shape [hidden_dim]")
+
+        if team_codes_seq is None:
+            team_codes = torch.zeros(time_steps, dtype=torch.long, device=self.device)
+        else:
+            team_codes = check(team_codes_seq).to(
+                dtype=torch.long,
+                device=self.device,
+            ).reshape(-1)
+            if team_codes.shape != (time_steps,):
+                raise ValueError("R32 focal team codes must have shape [T]")
+
+        if masks_seq is None:
+            masks = torch.ones(time_steps, 1, 1, dtype=torch.float32, device=self.device)
+        else:
+            masks = check(masks_seq).to(dtype=torch.float32, device=self.device)
+            if masks.numel() != time_steps:
+                raise ValueError("R32 focal masks must contain one value per step")
+            masks = masks.reshape(time_steps, 1, 1)
+
+        bounded_actions = torch.clamp(
+            actions,
+            -1.0 + action_out.epsilon,
+            1.0 - action_out.epsilon,
+        )
+        log_probabilities: list[torch.Tensor] = []
+        recurrent_state = actor_hxs
+        for step in range(time_steps):
+            actor_features = self._actor_features(
+                obs[step : step + 1],
+                skills[step : step + 1],
+                team_codes[step : step + 1],
+            )
+            actor_features, recurrent_state = self.actor_rnn(
+                actor_features,
+                recurrent_state,
+                masks[step].reshape(1, 1),
+            )
+            distribution = action_out._distribution(actor_features)
+            bounded_action = bounded_actions[step : step + 1]
+            raw_action = torch.atanh(bounded_action)
+            log_probabilities.append(
+                self._squeeze_log_probs(
+                    action_out._squashed_log_probs(
+                        distribution,
+                        raw_action,
+                        bounded_action,
+                    )
+                )[0]
+            )
+        return torch.stack(log_probabilities)
 
     def act(
         self,

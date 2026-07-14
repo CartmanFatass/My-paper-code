@@ -141,15 +141,61 @@ of HMASD's intrinsic exploration loop. It does not establish team composition,
 delayed cooperative credit, sparse-task improvement, asynchronous-lifetime
 benefit, or HMASD parity.
 
-Gate result: `FAIL`. Natural heldout information was positive, but the
-forced-skill between/within ratio was below one and matched shuffle dominated
-the natural score. R31-CFEI and its conditional 160K reward pair are retired;
-do not tune its coefficient, window, prior, posterior, null, or thresholds.
+Gate result: valid `FAIL`. Natural heldout information was positive, but the
+direct forced-skill between/within ratio was below one. The old absolute
+near-zero matched-shuffle null was invalid and is no longer a failure reason;
+the direct M2 independently retires R31-CFEI and its conditional reward pair.
 
-Next boundary: no R32 implementation is authorized yet. External review must
-select exactly one intervention-anchored effect-creation edge using
-`memory/LTM/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md`; then implement
-only its smallest falsifiable Alice--Bob mechanism gate.
+## R32 Interventional Fixed-Window Effect Policy Gradient
+
+Active causal edge:
+
+```text
+randomized focal-skill intervention
+-> noise-corrected persistent effect separation
+-> skill-FiLM-only actor change
+-> natural joint-state coverage
+```
+
+Accepted design source: the raw `VALID FAIL / R32-IFEPG` response under
+`docs/external-review/gpt5_6_pro/20260714_r31_cfei_gate_result/`.
+
+One coherent implementation and evidence boundary:
+
+1. From natural adaptive-R30 decision snapshots, force every focal skill for
+   two independent stochastic `W=k0=10` replicas. Freeze the teammate behavior
+   actor at each auxiliary round and keep teammate skills fixed.
+2. Compute the signed cross-replica U-statistic over the existing eight-value
+   normalized-position effect and average across six skill pairs and eight
+   effect dimensions. Do not rectify negative scores.
+3. Standardize each context score against a leave-one-context baseline and use
+   it in one focal-action PPO-clipped surrogate epoch (`clip=0.10`, gradient
+   clip `0.5`). Use the existing low actor learning rate `3e-4`, because the
+   external contract introduced no separate auxiliary learning rate.
+4. Train only `low.actor_film`; freeze actor base/RNN/action head/log standard
+   deviation, critic, R30 high controller, OPT/bridge, and all posterior paths.
+   No reward, value loss, GAE, entropy objective, task return, or high update
+   enters the auxiliary step.
+5. Keep R32 out of the normal trainer. The paired gate compares no-step
+   `probe_only` with `real_update` from the same frozen R30 checkpoint and
+   source context bank: 20 x 32 training contexts, 128 heldout contexts, four
+   skills, two replicas, and one seed `32031`.
+6. M0 checks exact branch counts, focal replay likelihood, FiLM/non-FiLM drift,
+   and forbidden updates. M1 requires heldout causal SNR improvement; M2
+   requires increased between-skill effect without within-skill noise growth;
+   M3 requires natural 625-cell coverage transport while preserving R30
+   lifetime and switch-skill supply.
+7. M0 failure is implementation-invalid and permits only repair. Any valid
+   M1--M3 failure retires direct IFEPG with no tuning or UNDERPOWERED branch.
+   PASS authorizes only later production integration from a genuinely sparse,
+   unshaped R30 source.
+
+Core MARL impact: effect tensors are `[context, skill, replica, 8]`; actor
+likelihood replay is `[context, skill, replica, W]`. Old behavior likelihoods,
+effect scores, and standardized advantages are detached. The only gradient path
+is current focal log-probability -> frozen actor stack -> skill FiLM. Natural
+R30 clocks, masks, skill rosters, high returns, collectors, and checkpoint
+format remain unchanged.
 
 ## Legacy Compatibility Boundary
 

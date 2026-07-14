@@ -22,17 +22,19 @@ and history live in their owning files.
 
 ## Current Objective
 
-Select one post-R31 causal edge that can create persistent task-agnostic skill
-effects rather than classify natural correlations:
+Implement and evaluate the selected post-R31 causal edge that directly creates
+persistent task-agnostic skill effects rather than classifying correlations:
 
 ```text
 R29 action-pattern reward failed
 -> R31 observational effect scorer failed causal persistence
--> one intervention-anchored effect-creation route
+-> R32 interventional fixed-window effect policy gradient
 ```
 
-No R32 implementation or reward run is authorized until the manual GPT-5.6 Pro
-review selects that single route and its smallest abandonment gate.
+GPT-5.6 Pro selected R32-IFEPG and authorized only its paired Alice--Bob
+mechanism gate. The update uses randomized fixed-window intervention effects to
+train only low actor skill-FiLM; it uses no scorer, intrinsic reward, task PPO,
+critic/GAE/entropy loss, or high-policy update.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -101,19 +103,22 @@ review selects that single route and its smallest abandonment gate.
   route is natural-window CFEI with forced stochastic branches used only for a
   reward-off causal audit. It was implemented at commit `a7b985b` and evaluated
   by the registered local gate below.
-- The registered R31 gate completed `FAIL`: natural heldout information was
-  `0.487866` nats, but forced-skill median between/within ratio was `0.889613`
-  and matched shuffle was `-2.068` nats. The implementation/comparator was
-  valid; no policy update or gate checkpoint occurred. R31 and its 160K reward
-  pair are retired.
+- The registered R31 gate completed a valid `FAIL`: natural heldout information
+  was `0.487866` nats, but forced-skill median between/within ratio was
+  `0.889613`. GPT-5.6 Pro corrected the old matched-shuffle near-zero null;
+  `-2.068` is disruption evidence, not an independent failure. The direct M2
+  still retires R31 and its 160K reward pair without a rerun.
+- The raw `VALID FAIL / R32-IFEPG` review is archived beside the R31 question.
+  R32 is restricted to a `probe_only` versus `real_update` gate from the same
+  frozen R30 checkpoint/context bank, with 20 FiLM-only auxiliary updates and
+  heldout causal/transport evaluation. Any valid M1--M3 failure retires direct
+  IFEPG; only an M0 implementation defect permits repair.
 
 ## Next Actions
 
-1. Manually submit
-   `docs/external-review/gpt5_6_pro/20260714_r31_cfei_gate_result/GPT5_6_PRO_QUESTION.md`
-   to GPT-5.6 Pro using the private GitHub repository.
-2. Archive and disposition the raw response, then implement only its one
-   accepted intervention-anchored causal edge and smallest Alice--Bob gate.
+1. Complete the R32 FiLM-only replay/update boundary and paired gate runner.
+2. Register and run the single local CUDA Alice--Bob gate at seed `32031`.
+3. Read its result JSON once and follow its precommitted PASS/retire branch.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -147,6 +152,8 @@ is in `memory/ExpRecord.md`. The manual review package is under
   stochastic execution.
 - Do not launch R31 reward, its 160K pair, an identical-batch append, or any
   R31 coefficient/window/prior/posterior/null/threshold variant.
+- Do not integrate R32 into normal training, update non-FiLM parameters, add a
+  reward/scorer/value objective, or expand seeds before the paired gate passes.
 
 ## Pointers
 
@@ -169,4 +176,6 @@ is in `memory/ExpRecord.md`. The manual review package is under
   `MODIFY R30` review and accepted controller disposition.
 - `docs/external-review/gpt5_6_pro/20260714_r30_sparse_exploration_review/` —
   current result boundary and manual review entry for the next intrinsic route.
+- `docs/external-review/gpt5_6_pro/20260714_r31_cfei_gate_result/` — raw R31
+  result review, corrected failure interpretation, and accepted R32 gate.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

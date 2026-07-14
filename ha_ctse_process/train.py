@@ -2489,6 +2489,11 @@ def enforce_r31_contract(
         return
     if mode not in {"probe_only", "real_reward"}:
         raise ValueError(f"unsupported r31_effect_mode={mode!r}")
+    if mode == "real_reward":
+        raise ValueError(
+            "R31-CFEI real_reward is retired after a valid causal gate failure; "
+            "R31 remains diagnostic-only via probe_only"
+        )
     if normalize_scenario(str(getattr(args, "scenario", ""))) != "alice_bob_asymmetric_cycles":
         raise ValueError("R31 is restricted to the sparse Alice--Bob environment")
     if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
@@ -2522,20 +2527,6 @@ def enforce_r31_contract(
     config.r31_effect_gate_status = str(
         (metadata or {}).get("effect_gate_status") or "UNTESTED"
     ).upper()
-
-    if mode == "real_reward":
-        if metadata is None or not str(getattr(args, "resume_from", "")):
-            raise ValueError("R31 real_reward requires a gate-passed checkpoint")
-        if str(metadata.get("effect_gate_status", "")).upper() != "PASS":
-            raise ValueError("R31 real_reward requires effect_gate_status=PASS")
-        if not bool(metadata.get("has_effect_posterior", False)):
-            raise ValueError("R31 real_reward checkpoint is missing its posterior")
-        if int(metadata.get("r31_effect_schema_version", -1)) != int(
-            getattr(config, "r31_effect_schema_version", 1)
-        ):
-            raise ValueError("R31 real_reward checkpoint schema mismatch")
-        if str(metadata.get("effect_view_name", "")) != view_name:
-            raise ValueError("R31 real_reward checkpoint effect view mismatch")
 
 
 def enforce_r30_pair_gate(

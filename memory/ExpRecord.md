@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r31-cfei-reward-off-gate | completed — `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but M2 causal ratio `0.889613` and shuffle `-2.068`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
+| EXP-20260714-r32-ifepg-paired-gate | launch-ready | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; next root `logs/r32_ifepg_paired_gate_<timestamp>` | `<run-root>/result/r32_ifepg_pair.json` once | paired seed `32031`; `probe_only` versus FiLM-only `real_update`; 20 auxiliary updates and about 66K steps/arm | Launch the single paired mechanism gate; PASS alone permits later sparse-source integration, while any valid M1--M3 miss retires direct IFEPG. |
+| EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
 | EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL`; online family retired | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | none | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%`; GPT-5.6 Pro verdict `RETIRE` | Keep R29 diagnostic-only. Do not promote, retune, or expand seeds; move to the reward-off stochastic realized-effect edge. |
 | EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
@@ -42,6 +43,84 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260714-r32-ifepg-paired-gate
+
+- Causal edge and upstream authorization: randomized focal-skill intervention
+  at a natural R30 decision context should create noise-corrected persistent
+  position effects through a skill-FiLM-only policy gradient and transport them
+  to broader natural joint-state visitation. R31's direct M2 failure and the
+  archived GPT-5.6 Pro `VALID FAIL / R32-IFEPG` review authorize this one paired
+  Alice--Bob mechanism gate only.
+- Source and context banks: both arms start from
+  `logs/r30_alice_bob_paired_64k_20260714_163908/runs/adaptive_keep_set/seed30031/standalone_process_core_final.pt`
+  and the same immutable natural-R30 snapshots under the current collection-only
+  sparse environment. Paired seed `32031` collects 256 source contexts and 128
+  disjoint heldout contexts, balanced across the two focal agents. The fixed
+  collection schedule is 24 stochastic 80-step episodes, or 1,920 shared
+  primitive environment steps and exactly 384 focal-agent contexts; no update
+  occurs while building either bank.
+- Comparator and nulls: `probe_only` and `real_update` use the same context
+  order and branch-seed schedule. Both calculate the same signed eight-dimensional
+  position-effect U-statistic; probe performs no optimizer step, while real
+  updates only `low.actor_film`. Two independent within-arm replicas estimate
+  same-skill execution noise; the paired probe arm is the update null, and
+  paired natural reset coverage is the transport null. R31 posteriors and
+  environment/task reward do not enter the objective.
+- Training contract: 20 updates x 32 contexts x 4 skills x 2 independent
+  replicas x `W=10` gives exactly 5,120 branch windows and 51,200 shadow steps
+  per arm. Contexts are reused only by the fixed seed-`32031` schedule, with no
+  repeats inside an update. Each context score is the mean of the six cross-skill
+  replica dot products divided by effect dimension 8; it remains signed. A
+  leave-one-context standardized advantage drives one PPO-clipped epoch
+  (`clip=0.10`, gradient clip `0.5`) per update. The real arm therefore has
+  exactly 20 FiLM optimizer steps and probe has zero. The external review did
+  not specify auxiliary learning rate, so the gate minimally reuses the low
+  actor rate `3e-4` and freezes it in this contract.
+- Evaluation exposure: heldout intervention evaluation is 128 contexts x 4
+  skills x 2 cross-skill-common-random-number replicas x 10 steps = 1,024
+  windows and 10,240 steps per arm. Natural transport uses 64 paired stochastic
+  resets x 80 steps = 5,120 steps per arm. Thus each arm has exactly 66,560
+  post-bank shadow/natural steps; the pair has 133,120, plus the one-time shared
+  1,920-step bank collection. All confidence intervals use 10,000 paired
+  context/reset cluster-bootstrap draws from a seed derived from `32031`.
+  Expected local-CUDA wall clock is 1--3 hours.
+- M0 implementation validity: replay-versus-stored focal per-step log-probability
+  maximum error `<=1e-5`; all context/window/skill/replica counts above are
+  exact; probe FiLM drift `<=1e-8`; real FiLM relative L2 drift is finite and
+  `>1e-6`; every real non-FiLM parameter drift `<=1e-8`; and no optimizer
+  update reaches the low critic, high policy, OPT/bridge, or any posterior.
+  Neither task nor environment reward enters an update. Any miss is `INVALID`
+  and permits repair of that path only.
+- M1 direct causal SNR: on 128 heldout contexts, real median between/within
+  ratio is `>=1.50` with 95% context-cluster-bootstrap lower bound `>1.0`;
+  median paired-context `(real - probe)` is `>=0.40` with lower bound `>0`;
+  and every skill's pooled ratio is `>1.0`.
+- M2 stochastic-noise null: mean between-skill effect satisfies
+  `mean(B_real)/mean(B_probe) >=1.50`, with paired-context difference 95% lower
+  bound `>0`, while same-skill variability satisfies
+  `mean(W_real)/mean(W_probe) <=1.25`.
+- M3 natural transport and R30 safety: fixed 625-cell joint-position coverage
+  satisfies `coverage_real/coverage_probe >=1.10`, with paired-reset coverage
+  difference 95% lower bound `>0`; natural `full_sync_SET_rate <=0.50`,
+  `H(Z|SET)/log(4) >=0.80`, and
+  `min(P(T>4*k0), P(T<=4*k0)) >=0.05`. Collection, button/target contact, and
+  sparse task reward are diagnostic only.
+- Outcome branches: M0 miss -> `INVALID`, repair only and rerun this contract.
+  Valid M1 miss -> retire direct interventional FiLM-effect policy gradient;
+  valid M2 miss -> retire it as stochastic/noise exploitation; valid M3 miss ->
+  retire it as forced-only capacity, failed natural transport, or lifetime
+  collapse. M0 plus all M1--M3 thresholds -> `PASS`, authorizing only a later
+  sparse-source R30 integration with one FiLM-only IFEPG auxiliary step. There
+  is no `UNDERPOWERED` branch and no automatic seed or budget expansion.
+- Prohibited: actor base/RNN/action head/log-std, critic, high controller,
+  OPT/bridge, posterior, task-PPO, GAE, entropy, reward, or environment updates;
+  shaping; normal-trainer R32 integration before PASS; coefficient, effect,
+  window, replica, threshold, arm, or seed changes; and conclusions about task
+  gain, cooperation, semantic roles, lifetime superiority, HMASD parity, or S7
+  transfer.
+- Status source: the single decision artifact is
+  `logs/r32_ifepg_paired_gate_<timestamp>/result/r32_ifepg_pair.json`.
 
 ### EXP-20260714-r31-cfei-reward-off-gate
 
@@ -62,13 +141,13 @@ explicitly approves the exception.
 - Metrics/thresholds: M1 requires heldout mean `>=0.02` nats, CI lower `>0`,
   every skill mean `>=0.005`, and at least 64 heldout rows per skill. M2 requires
   median between/within effect ratio `>=1.5`, CI lower `>1`, every skill pooled
-  ratio `>=1`, and matched-shuffle absolute mean
-  `<=min(0.005, 0.25*M1)`.
-- Outcome branches: all thresholds PASS -> only the matched 160K
-  `probe_only`/`real_reward` pair; nonpositive M1, causal ratio `<=1`, or shuffle
-  above half the signal -> FAIL and retire R31; threshold-directed point
-  estimates with insufficient rows/CI -> UNDERPOWERED and append one identical
-  64-reset batch.
+  ratio `>=1`. The original contract also imposed a near-zero matched-shuffle
+  threshold; GPT-5.6 Pro later established that null was mathematically invalid.
+- Outcome branches: all valid thresholds PASS -> only the matched 160K
+  `probe_only`/`real_reward` pair; nonpositive M1 or causal ratio `<=1` -> FAIL
+  and retire R31; threshold-directed point estimates with insufficient rows/CI
+  -> UNDERPOWERED and append one identical 64-reset batch. The obsolete shuffle
+  branch is not reused.
 - Prohibited: environment shaping, online reward, policy updates, forced-row
   posterior fitting, fixed teammate action tapes, coefficient/target/null
   changes, extra arms/seeds, or claims about cooperation/task efficacy.
@@ -78,11 +157,11 @@ explicitly approves the exception.
   median ratio was `0.889613` (CI `[0.763227, 1.078315]`), pooled ratios for
   skills 0/1 were `0.551521`/`0.841928`, and matched shuffle was `-2.068` nats.
   The posterior learned natural association but the causal intervention did not
-  exceed stochastic execution noise.
+  exceed stochastic execution noise. The shuffle value is retained only as a
+  disruption diagnostic and is not an independent failure reason.
 - Failure review: execution and comparator counts were valid; posterior
   capacity was adequate; the skill-3 heldout count of 44 is non-decisive because
-  both registered hard-FAIL conditions already fired. Reusable negative and the
-  single next causal edge are in
+  direct M2 already fired. Reusable negative and the single next causal edge are in
   `memory/LTM/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md`.
 - Decision: no online R31 reward, gate checkpoint, 160K pair, identical-batch
   append, threshold change, or R31 retuning. Seek one intervention-anchored
