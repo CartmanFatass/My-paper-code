@@ -20,8 +20,8 @@ and history live in their owning files.
   `019f5aca-bde7-70b3-8c94-24584136c2c9` is the IMOD/HMASD lease controller.
   Formal cloud jobs must be registered there from an exact committed contract.
 - **Local overnight authorization:** the user permits a longer local CUDA run
-  overnight when the next causal gate is registered and requires it. This does
-  not authorize speculative runs before the R35 edge and comparator are fixed.
+  overnight when the next causal gate is registered and requires it. The
+  registered R35 reset pair is now the active use of that authorization.
 - **Overnight review handoff:** Codex may automatically submit the tracked
   question in the existing `HMASD Algorithm Consultation` browser conversation
   with the `Pro` model, archive the raw response, and continue only the accepted
@@ -173,14 +173,14 @@ direct intervention-scored roster-complementarity selection are retired.
 
 ## Next Actions
 
-1. Complete the constant-code arm, paired runner, and exact R35 reset contract.
-2. Commit and push the implementation boundary, then launch the parallel local
-   CUDA gate under the overnight authorization.
-3. Read the single result artifact once and automatically submit the fixed
+1. Monitor only the registered R35 runner status; running progress stays in the
+   dedicated monitor conversation.
+2. Read the single result artifact once and automatically submit the fixed
    result-review prompt in the existing GPT-5.6 Pro conversation.
+3. Continue only the accepted post-result branch; do not auto-expand this gate.
 
-Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
-`memory/ExpRecord.md`.
+Active run: `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry3` at commit
+`b372000`. Formal contract and result source are in `memory/ExpRecord.md`.
 
 ## Immediate Constraints
 

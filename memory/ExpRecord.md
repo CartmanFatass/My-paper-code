@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r35-sparse-mappo-reset | launch-ready | baseline-L0 sparse optimization reset | local CUDA; run root assigned at launch | `runner_status.txt` after launch | common neutral init; constant-code recurrent MAPPO versus reward-pure R30; 320K/arm | Commit and launch the registered pair once. |
+| EXP-20260715-r35-sparse-mappo-reset | running | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry3`; commit `b372000` | `runner_status.txt` | common neutral init complete; both 320K arms running in parallel | Wait for the registered runner result; do not alter or expand the pair. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
 | EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
@@ -111,7 +111,12 @@ explicitly approves the exception.
   general hierarchy value, HMASD/S7 parity, cooperation, or paper efficacy.
 - Status source: after launch, the runner owns `runner_status.txt`; the only
   scientific decision source is
-  `logs/<r35-run-id>/result/r35_sparse_mappo_reset.json`.
+  `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry3/result/r35_sparse_mappo_reset.json`.
+- Operational transition: two pre-training attempts failed while atomically
+  renaming the status and worker-exit files on this Windows host. Commits
+  `30774ed` and `b372000` changed only those writes to direct replacement. The
+  registered pair then started from a fresh root without changing any
+  scientific parameter.
 
 ### EXP-20260714-r34-bhmd-gate
 
