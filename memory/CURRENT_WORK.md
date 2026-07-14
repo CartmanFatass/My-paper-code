@@ -155,12 +155,18 @@ direct intervention-scored roster-complementarity selection are retired.
   `q(z|trajectory)` plus `log q(z|trajectory)-log q(z)` low-PPO reward is the
   explicitly prohibited old-label process-classifier family, not a new causal
   edge. A tracked correction request is the only authorized next action.
+- Correction 1 properly retracted OCSF but proposed R35-CBF, which directly
+  optimizes the same between/within persistent-effect score through
+  `-log pi(a|o,z)*A_effect`. Randomly renaming the K=4 slots does not change the
+  R32 direct-IFEPG estimand; CBF is also rejected without implementation. One
+  final correction must replace the discrete skill object or explicitly
+  abandon the current skill-formation program.
 
 ## Next Actions
 
-1. Submit `GPT5_6_PRO_CORRECTION_1.md` automatically in the existing Pro review
-   conversation after committing its raw-response disposition.
-2. Archive and disposition the corrected single R35 edge.
+1. Submit `GPT5_6_PRO_CORRECTION_2.md` automatically in the existing Pro review
+   conversation after committing correction 1 and its disposition.
+2. Archive and disposition the returned replacement-or-abandonment decision.
 3. Implement and register only an accepted compliant edge; a longer registered
    local gate may run overnight under the standing authorization.
 
