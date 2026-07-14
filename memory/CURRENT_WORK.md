@@ -80,12 +80,12 @@ does not add a new intrinsic reward.
 
 ## Next Actions
 
-1. Implement the accepted R30 policy, all-agent collector, fixed-check high
-   buffer/GAE, and process-segment decoupling as one coherent boundary.
-2. Run one reward-pure, mechanism-matched short comparison of frozen duration
-   editing versus fixed-clock `KEEP/SET`.
-3. Resume the post-R29 fixed-window realized-effect target only after the R30
-   temporal controller is operationally and scientifically interpretable.
+1. User gives GPT-5.6 Pro the repository review entry or ZIP under
+   `20260714_r30_algorithm_code_review/` and returns its response verbatim.
+2. Archive and disposition the response, selecting one corrected R30 PPO,
+   critic, clock, buffer, and migration contract.
+3. Implement that accepted R30 boundary, then run one reward-pure,
+   mechanism-matched short comparison against frozen duration editing.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -132,4 +132,6 @@ is in `memory/ExpRecord.md`. The manual review package is under
   controller and implementation boundary.
 - `docs/external-review/gpt5_6_pro/20260714_fixed_clock_keep_set/` — raw external
   response and controller disposition.
+- `docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/` — pending
+  pre-implementation algorithm and code review entry plus ZIP fallback.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
