@@ -22,10 +22,11 @@ and history live in their owning files.
 - **Local overnight authorization:** the user permits a longer local CUDA run
   overnight when the next causal gate is registered and requires it. R35 used
   that authorization and has reached its registered terminal result.
-- **Overnight review handoff:** Codex may automatically submit the tracked
-  question in the existing `HMASD Algorithm Consultation` browser conversation
-  with the `Pro` model, archive the raw response, and continue only the accepted
-  registered branch. Do not create duplicate review conversations.
+- **Default review handoff:** once a tracked question is committed and pushed,
+  Codex automatically submits it in the existing `HMASD Algorithm Consultation`
+  browser conversation with the `Pro` model, archives the raw response, and
+  continues only the accepted registered branch. Do not create duplicate review
+  conversations.
 
 ## Current Objective
 
