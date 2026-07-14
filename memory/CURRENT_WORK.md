@@ -96,7 +96,7 @@ does not add a new intrinsic reward.
 ## Next Actions
 
 1. Run the approved parallel 16-env, 64K-per-arm Alice--Bob mechanism screen at
-   `logs/r30_alice_bob_paired_64k_20260714_163637`: adaptive KEEP/SET versus the
+   `logs/r30_alice_bob_paired_64k_20260714_163908`: adaptive KEEP/SET versus the
    matched shared-`k` forced-refresh control.
 2. At terminal status, read `result/alice_bob_pair.json` once and interpret
    cycle success, behavior-inferred button KEEP / target SET alignment, lifetime
