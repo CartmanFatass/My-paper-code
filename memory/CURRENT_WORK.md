@@ -20,8 +20,8 @@ and history live in their owning files.
   `019f5aca-bde7-70b3-8c94-24584136c2c9` is the IMOD/HMASD lease controller.
   Formal cloud jobs must be registered there from an exact committed contract.
 - **Local overnight authorization:** the user permits a longer local CUDA run
-  overnight when the next causal gate is registered and requires it. The
-  registered R35 reset pair is now the active use of that authorization.
+  overnight when the next causal gate is registered and requires it. R35 used
+  that authorization and has reached its registered terminal result.
 - **Overnight review handoff:** Codex may automatically submit the tracked
   question in the existing `HMASD Algorithm Consultation` browser conversation
   with the `Pro` model, archive the raw response, and continue only the accepted
@@ -29,15 +29,16 @@ and history live in their owning files.
 
 ## Current Objective
 
-Close the failed intrinsic skill-formation program with one capacity-matched
-sparse-reward reset gate:
+Close the failed intrinsic skill-formation program and resolve the upstream
+sparse-access bottleneck exposed by its capacity-matched reset gate:
 
 ```text
 R29--R34 skill identification, effect creation, composition, and relabeling fail
 -> R35 skill proposals OCSF/CBF/TMPF are prohibited or invalid
 -> close the current intrinsic skill-formation program
 -> compare observation/history-only recurrent MAPPO with reward-pure R30
--> decide whether no-skill MAPPO becomes the Alice--Bob optimization baseline
+-> both arms fail the registered positive-access floor
+-> do not replace either baseline; select one non-skill access-first R36 edge
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -167,21 +168,21 @@ direct intervention-scored roster-complementarity selection are retired.
 - Correction 3 accepted that invalidity and closed the current skill-formation
   program. Its Sparse MAPPO direction is accepted only after one comparator
   correction: both arms train from a shared neutral zero-step initialization.
-  The active gate is constant-code recurrent MAPPO versus reward-pure R30,
-  320K sparse Alice--Bob steps per arm, with matched low optimization and a
-  positive-access requirement before noninferiority can pass.
+  The resulting constant-code recurrent MAPPO versus reward-pure R30 gate is a
+  valid `NO_ACCESS_R35_UNRESOLVED`: both 320K arms completed, but neither had a
+  collection in 64 final episodes, so noninferiority is not interpretable.
 
 ## Next Actions
 
-1. Monitor only the registered R35 runner status; running progress stays in the
-   dedicated monitor conversation.
-2. Read the single result artifact once and automatically submit the fixed
-   result-review prompt in the existing GPT-5.6 Pro conversation.
-3. Continue only the accepted post-result branch; do not auto-expand this gate.
+1. Commit and push the tracked R35 result plus its single GPT-5.6 Pro question.
+2. Submit the fixed result-review prompt in the existing Pro conversation and
+   archive the response raw before interpreting it.
+3. Continue only one accepted non-skill access-first branch; do not rerun or
+   expand R35.
 
-Active run: `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4` at runner
-commit `030d0cd` (algorithm/runner implementation `b372000`). Formal contract
-and result source are in `memory/ExpRecord.md`.
+Completed result: `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4` at
+runner commit `030d0cd` (algorithm/runner implementation `b372000`). Formal
+contract and result are in `memory/ExpRecord.md`.
 
 ## Immediate Constraints
 

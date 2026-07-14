@@ -1,0 +1,112 @@
+{
+  "access_floor": {
+    "collection_episode_floor": 10,
+    "cycle_success_floor": 0.05,
+    "max_arm_cycle_success_mean": 0.0,
+    "paired_episode_indices_with_collection_in_either_arm": 0,
+    "passed": false
+  },
+  "arms": {
+    "constant_code_mappo": {
+      "arm_root": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\runs\\constant_code_mappo\\seed36031",
+      "config": "ha_ctse_process.config_alice_bob_sparse_mappo",
+      "constant_skill_no_high": true,
+      "coverage_field": "alice_bob_joint_position_coverage_ratio",
+      "cycle_success_mean": 0.0,
+      "episodes_with_collection": 0,
+      "final_checkpoint": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\runs\\constant_code_mappo\\seed36031\\standalone_process_core_final.pt",
+      "final_eval_episodes": 64,
+      "final_eval_steps": 320000,
+      "final_train_steps": 320000,
+      "high_decision_rows": 0.0,
+      "high_update_rows": 0.0,
+      "intrinsic_reward_fields_checked": [
+        "effect_reward_applied_steps",
+        "force_reward_applied_steps",
+        "proto_disc_reward_applied_steps",
+        "q_a_reward_applied_steps",
+        "r28_g1_reward_applied_steps",
+        "r29_action_info_reward_applied_steps",
+        "team_disc_reward_applied_steps",
+        "team_transition_reward_applied_steps"
+      ],
+      "invalid_reasons": [],
+      "joint_position_coverage_mean": 0.015,
+      "low_updates": 250,
+      "nonzero_intrinsic_fields": [],
+      "periodic_checkpoint_count": 0,
+      "resume_from": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\init\\neutral_r30_seed36031\\standalone_process_core_final.pt",
+      "sparse_reward_exact": true,
+      "train_updates": 250,
+      "valid": true,
+      "zero_cycle_fraction": 1.0
+    },
+    "reward_pure_r30": {
+      "arm_root": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\runs\\reward_pure_r30\\seed36031",
+      "config": "ha_ctse_process.config_alice_bob_asymmetric",
+      "constant_skill_no_high": false,
+      "coverage_field": "alice_bob_joint_position_coverage_ratio",
+      "cycle_success_mean": 0.0,
+      "episodes_with_collection": 0,
+      "final_checkpoint": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\runs\\reward_pure_r30\\seed36031\\standalone_process_core_final.pt",
+      "final_eval_episodes": 64,
+      "final_eval_steps": 320000,
+      "final_train_steps": 320000,
+      "high_decision_rows": 32000.0,
+      "high_update_rows": 32000.0,
+      "intrinsic_reward_fields_checked": [
+        "effect_reward_applied_steps",
+        "force_reward_applied_steps",
+        "proto_disc_reward_applied_steps",
+        "q_a_reward_applied_steps",
+        "r28_g1_reward_applied_steps",
+        "r29_action_info_reward_applied_steps",
+        "team_disc_reward_applied_steps",
+        "team_transition_reward_applied_steps"
+      ],
+      "invalid_reasons": [],
+      "joint_position_coverage_mean": 0.013625,
+      "low_updates": 250,
+      "nonzero_intrinsic_fields": [],
+      "periodic_checkpoint_count": 0,
+      "resume_from": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\init\\neutral_r30_seed36031\\standalone_process_core_final.pt",
+      "sparse_reward_exact": true,
+      "train_updates": 250,
+      "valid": true,
+      "zero_cycle_fraction": 1.0
+    }
+  },
+  "common_init_checkpoint": "C:\\project\\HMASD\\logs\\r35_sparse_mappo_reset_320k_20260715_013000_retry4\\init\\neutral_r30_seed36031\\standalone_process_core_final.pt",
+  "decision_thresholds": {
+    "cycle_success_lower": -0.1,
+    "joint_position_coverage_lower": -0.05,
+    "zero_cycle_fraction_upper": 0.1
+  },
+  "experiment_id": "EXP-20260715-r35-sparse-mappo-reset",
+  "implementation_valid": true,
+  "invalid_reasons": [],
+  "paired_comparison": {
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 40036031,
+    "cycle_success": {
+      "lower": 0.0,
+      "mean": 0.0,
+      "upper": 0.0
+    },
+    "direction": "constant_code_mappo_minus_reward_pure_r30",
+    "joint_position_coverage": {
+      "lower": 0.0005500000000000004,
+      "mean": 0.0013750000000000004,
+      "upper": 0.0022
+    },
+    "zero_cycle_fraction": {
+      "lower": 0.0,
+      "mean": 0.0,
+      "upper": 0.0
+    }
+  },
+  "scope": "single-seed sparse Alice--Bob baseline reset gate",
+  "seed": 36031,
+  "status": "NO_ACCESS_R35_UNRESOLVED",
+  "total_timesteps_per_arm": 320000
+}
