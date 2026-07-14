@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r33-irsc-gate | launch-ready | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411` | single `logs/r33_irsc_gate_20260714_214411/result/r33_irsc_gate.json` | GPT-5.6 Pro selected complete-roster composition; controller corrected the estimand to exclude additive individual effects and one-sided orientation effects | Run only the seed-33031 Alice--Bob abandonment gate; no production integration or expansion. |
+| EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
 | EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
 | EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
@@ -140,8 +140,32 @@ explicitly approves the exception.
   reward, shaping, normal high PPO, temperature/update/budget/score clipping
   changes, and claims about task improvement, cooperation, HMASD parity, or S7
   transfer.
-- Status source: the single decision artifact will be
+- Status source: the single decision artifact is
   `logs/r33_irsc_gate_20260714_214411/result/r33_irsc_gate.json`.
+- Result: valid `FAIL_M1_RETIRE_R33_IRSC`. Every M0 check passed. Natural
+  high-token replay error was zero, maximum 16-roster probability-sum error was
+  `2.38e-7`, and true/sham score-multiset error was `6.66e-16`. Both arms made
+  eight finite head-only updates; selected-head relative drift was
+  `0.027634` real and `0.026423` sham, with zero non-head drift/gradient and
+  zero forbidden update.
+- M1: real-minus-sham heldout exact expected-score gain was positive but only
+  `0.001955` (source-episode cluster CI
+  `[0.000744,0.003105]`), versus `0.20`. Correct-top-two-pair probability-mass
+  gain was `0.001250` (CI `[0.000520,0.001908]`), versus `0.10`. The high head
+  could follow the residualized complementarity table only at a negligible
+  effect size.
+- M2: natural joint-position union coverage was `427` real versus `429` sham,
+  ratio `0.995338`, with paired-reset CI `[-0.000300,0]`. Role-free
+  nonredundant coverage was `0.367500` versus `0.373125`, ratio `0.984925`,
+  CI `[-0.021875,0.005000]`. There was no natural transport.
+- M3 passed independently: real full-sync SET `0.185268`, SET-skill entropy
+  `0.997333`, minimum skill share `0.216000`, and lifetime breadth
+  `0.081841`. Failure is not controller, skill-supply, or lifetime collapse.
+- Decision: enter the registered M1 branch. Permanently retire direct
+  intervention-scored roster-complementarity selection and do not rescue it
+  with temperature, more updates, score clipping, another pair permutation,
+  new team latent, `q_D`, or team reward. No normal-trainer integration, seed
+  expansion, or repeat is authorized.
 
 ### EXP-20260714-r32-ifepg-paired-gate
 

@@ -254,6 +254,15 @@ One implementation/evidence boundary:
 The exact budget, thresholds, null, validity rules, and abandonment branches
 are owned by `memory/ExpRecord.md`.
 
+Gate result: valid `FAIL_M1_RETIRE_R33_IRSC`. M0 passed with exact roster
+probabilities, score-multiset parity, finite head-only gradients and zero
+non-head drift. Real mapping produced only `0.001955` heldout expected-score
+gain and `0.001250` correct-top-two-pair mass gain; both were positive but two
+orders of magnitude below their gates. Natural joint and nonredundant coverage
+were slightly below pair-sham while R30 lifetime and skill supply remained
+healthy. Retire direct intervention-scored roster-complementarity selection;
+do not tune or integrate it.
+
 ## Legacy Compatibility Boundary
 
 - This branch is for constructing the new HA-CTSE/process algorithm, not for

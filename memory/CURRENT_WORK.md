@@ -22,23 +22,21 @@ and history live in their owning files.
 
 ## Current Objective
 
-Implement and run the R33 interventional roster-complementarity abandonment
-gate:
+Disposition the valid R33 failure and obtain exactly one structurally different
+post-R33 causal edge:
 
 ```text
-natural R30 check context
--> complete-roster intervention
--> additive-main-effect-residualized stable role swap
--> exact high-level complementary-roster selection
--> natural joint and role-free coverage
+R32 individual effect creation: positive but immaterial
+-> R33 non-additive role-swap selection: positive but immaterial
+-> no natural joint or nonredundant coverage transport
+-> existing skill codebook has no demonstrated selectable team complementarity
 ```
 
-GPT-5.6 Pro confirmed the R32 valid failure and selected team composition as
-the single next causal level. Controller disposition is `MODIFY`: the original
-role-swap score did not exclude independent individual-skill effects or
-one-sided orientation effects, so R33 removes additive roster-axis main effects
-and subtracts the symmetric orientation component before optimization. Direct
-IFEPG and parameter/metric variants remain retired.
+R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
+score excluded additive individual effects and one-sided orientation effects;
+the high skill head moved substantially, but correct heldout pair alignment was
+two orders of magnitude below gate and did not transport. Direct IFEPG and
+direct intervention-scored roster-complementarity selection are retired.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -124,16 +122,20 @@ IFEPG and parameter/metric variants remain retired.
   safety stayed healthy, so the failure is insufficient individual effect
   creation and transport rather than implementation, noise inflation, or
   temporal-controller collapse. Direct IFEPG is retired.
+- R33 completed at implementation commit `465ee3c` with every M0 check passing.
+  Heldout exact expected-score gain was `0.001955` versus `0.20`, top-two-pair
+  mass gain was `0.001250` versus `0.10`, and natural coverage/nonredundancy
+  were slightly worse than pair-sham. R30 safety passed. The registered M1
+  branch permanently retires direct roster-complementarity fitting.
 
 ## Next Actions
 
-1. Implement only the two registered R33 files.
-2. Run the seed-`33031` local Alice--Bob abandonment gate.
-3. Read its single result JSON once and enter the pre-registered outcome branch.
+1. Preserve the R33 result and compact R29--R33 failure matrix in Git.
+2. Submit the tracked R33 validity/route question to GPT-5.6 Pro manually.
+3. Archive and disposition its raw response before implementing one new edge.
 
-Completed run: `logs/r32_ifepg_paired_gate_20260714_193304`; formal result
-detail is in `memory/ExpRecord.md`. The manual review entry is under
-`docs/external-review/gpt5_6_pro/20260714_r32_ifepg_gate_result/`.
+Completed run: `logs/r33_irsc_gate_20260714_214411`; formal result detail is
+in `memory/ExpRecord.md`.
 
 ## Immediate Constraints
 
@@ -144,7 +146,7 @@ detail is in `memory/ExpRecord.md`. The manual review entry is under
   explicit user approval.
 - Keep the old `q_d/q_D` reward paths and default-off `q_A` disabled. Do not add
   team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS before
-  the single R33 causal edge is externally selected and registered.
+  the post-R33 failure review selects and registers one new causal edge.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
 - Keep R29 diagnostic-only. Its online `real_reward` path and variants that
   alter only prior, window, aggregation, coefficient, normalization, or clip
@@ -168,6 +170,9 @@ detail is in `memory/ExpRecord.md`. The manual review entry is under
 - R33 may update only `FixedClockAREditPolicy.skill_head`. Keep the low policy,
   keep head/shared high trunk, critics, OPT/bridge, posteriors, team latents,
   `q_d/q_D`, task reward, and environment shaping outside its objective.
+- Do not rescue R33 with temperature, more updates, score clipping, another
+  pair permutation, new team latent, `q_D`, team reward, seed expansion, or
+  normal-trainer integration.
 
 ## Pointers
 
@@ -194,4 +199,8 @@ detail is in `memory/ExpRecord.md`. The manual review entry is under
   result review, corrected failure interpretation, and accepted R32 gate.
 - `docs/external-review/gpt5_6_pro/20260714_r32_ifepg_gate_result/` — manual
   review entry, raw response, and controller disposition for R32/R33.
+- `memory/LTM/R29_R33_EFFECT_COMPOSITION_FAILURE_REVIEW_20260714.md` —
+  cross-round failure and baseline matrix after the valid R33 failure.
+- `docs/external-review/gpt5_6_pro/20260714_r33_irsc_gate_result/` — tracked
+  result-review question for the single post-R33 causal edge.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
