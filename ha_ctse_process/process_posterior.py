@@ -259,6 +259,101 @@ class SegmentSkillPosterior(nn.Module):
         }
 
 
+class FixedWindowEffectPosterior(nn.Module):
+    """R31 posterior pair for task-agnostic fixed-window effects.
+
+    The full head estimates ``q(z_i | E_i, C_i)`` and the context head estimates
+    the natural-usage null ``q(z_i | C_i)``.  Its interface accepts only the
+    prebuilt effect and context vectors; actions, rewards, agent identity, age,
+    duration, phase, and OPT features are intentionally absent.  Inputs are
+    detached here as a second boundary against posterior gradients entering the
+    policy or representation paths.
+    """
+
+    def __init__(
+        self,
+        effect_dim: int,
+        context_dim: int,
+        n_skills: int,
+        hidden_dim: int,
+    ):
+        super().__init__()
+        self.effect_dim = int(effect_dim)
+        self.context_dim = int(context_dim)
+        self.n_skills = int(n_skills)
+        if self.effect_dim <= 0 or self.context_dim <= 0 or self.n_skills <= 1:
+            raise ValueError(
+                "FixedWindowEffectPosterior requires positive effect/context "
+                "dimensions and at least two skills"
+            )
+        self.full_head = mlp(
+            self.effect_dim + self.context_dim,
+            int(hidden_dim),
+            self.n_skills,
+        )
+        self.context_head = mlp(
+            self.context_dim,
+            int(hidden_dim),
+            self.n_skills,
+        )
+
+    def full_logits(
+        self,
+        effect: torch.Tensor,
+        context: torch.Tensor,
+    ) -> torch.Tensor:
+        features = torch.cat(
+            [effect.detach().float(), context.detach().float()],
+            dim=-1,
+        )
+        return self.full_head(features)
+
+    def context_logits(self, context: torch.Tensor) -> torch.Tensor:
+        return self.context_head(context.detach().float())
+
+    def forward(
+        self,
+        effect: torch.Tensor,
+        context: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        return self.full_logits(effect, context), self.context_logits(context)
+
+    @staticmethod
+    def log_prob_for_labels(
+        logits: torch.Tensor,
+        labels: torch.Tensor,
+    ) -> torch.Tensor:
+        labels = labels.long()
+        row_indices = torch.arange(labels.shape[0], device=labels.device)
+        return F.log_softmax(logits, dim=-1)[row_indices, labels]
+
+    def losses(
+        self,
+        full_logits: torch.Tensor,
+        context_logits: torch.Tensor,
+        labels: torch.Tensor,
+    ) -> dict[str, torch.Tensor]:
+        labels = labels.long()
+        full_loss = F.cross_entropy(full_logits, labels)
+        context_loss = F.cross_entropy(context_logits, labels)
+        with torch.no_grad():
+            log_q_full = self.log_prob_for_labels(full_logits, labels)
+            log_q_context = self.log_prob_for_labels(context_logits, labels)
+            effect_information = log_q_full - log_q_context
+            full_acc = (full_logits.argmax(dim=-1) == labels).float().mean()
+            context_acc = (context_logits.argmax(dim=-1) == labels).float().mean()
+        return {
+            "loss": full_loss + context_loss,
+            "full_loss": full_loss,
+            "context_loss": context_loss,
+            "log_q_full": log_q_full,
+            "log_q_context": log_q_context,
+            "effect_information": effect_information,
+            "full_acc": full_acc,
+            "context_acc": context_acc,
+        }
+
+
 class TransitionSkillDiscriminator(nn.Module):
     """Dense semantic pressure q(z | o_t, a_t, delta_o_t, r_t, g).
 

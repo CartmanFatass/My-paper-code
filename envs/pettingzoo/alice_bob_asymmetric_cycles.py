@@ -10,6 +10,8 @@ reward shaping.
 
 from __future__ import annotations
 
+import copy
+
 import gymnasium as gym
 import numpy as np
 from pettingzoo.utils.env import ParallelEnv
@@ -77,6 +79,65 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         # collected flag (1), current contacts (4), and previous-window
         # per-agent button/target occupancy fractions (4).
         return 19
+
+    def intrinsic_effect_view(self) -> np.ndarray:
+        """Return the task-agnostic interaction state used by R31.
+
+        Only normalized agent positions are exposed.  Active tasks, contacts,
+        clocks, collection state, and reward-derived fields remain private to
+        the environment and cannot leak into the effect posterior.
+        """
+        return (self.agent_pos / self.world_size).astype(np.float32, copy=True)
+
+    def get_probe_snapshot(self) -> dict[str, object]:
+        """Capture the complete mutable simulator state for shadow rollouts."""
+        return {
+            "agents": list(self.agents),
+            "steps": int(self.steps),
+            "agent_pos": self.agent_pos.copy(),
+            "active_plate": int(self.active_plate),
+            "active_target": int(self.active_target),
+            "window_target_collected": bool(self.window_target_collected),
+            "targets_completed": int(self.targets_completed),
+            "windows_completed": int(self.windows_completed),
+            "button_contact_steps": int(self.button_contact_steps),
+            "target_contact_steps": int(self.target_contact_steps),
+            "joint_coordination_steps": int(self.joint_coordination_steps),
+            "button_switch_count": int(self.button_switch_count),
+            "window_button_contacts": self.window_button_contacts.copy(),
+            "window_target_contacts": self.window_target_contacts.copy(),
+            "last_window_button_fraction": self.last_window_button_fraction.copy(),
+            "last_window_target_fraction": self.last_window_target_fraction.copy(),
+            "rng_state": copy.deepcopy(self.np_random.bit_generator.state),
+        }
+
+    def set_probe_snapshot(self, snapshot: dict[str, object]) -> None:
+        """Restore a snapshot produced by :meth:`get_probe_snapshot`."""
+        self.agents = list(snapshot["agents"])
+        self.steps = int(snapshot["steps"])
+        self.agent_pos = np.asarray(snapshot["agent_pos"], dtype=np.float32).copy()
+        self.active_plate = int(snapshot["active_plate"])
+        self.active_target = int(snapshot["active_target"])
+        self.window_target_collected = bool(snapshot["window_target_collected"])
+        self.targets_completed = int(snapshot["targets_completed"])
+        self.windows_completed = int(snapshot["windows_completed"])
+        self.button_contact_steps = int(snapshot["button_contact_steps"])
+        self.target_contact_steps = int(snapshot["target_contact_steps"])
+        self.joint_coordination_steps = int(snapshot["joint_coordination_steps"])
+        self.button_switch_count = int(snapshot["button_switch_count"])
+        self.window_button_contacts = np.asarray(
+            snapshot["window_button_contacts"], dtype=np.int64
+        ).copy()
+        self.window_target_contacts = np.asarray(
+            snapshot["window_target_contacts"], dtype=np.int64
+        ).copy()
+        self.last_window_button_fraction = np.asarray(
+            snapshot["last_window_button_fraction"], dtype=np.float32
+        ).copy()
+        self.last_window_target_fraction = np.asarray(
+            snapshot["last_window_target_fraction"], dtype=np.float32
+        ).copy()
+        self.np_random.bit_generator.state = copy.deepcopy(snapshot["rng_state"])
 
     def reset(self, seed=None, options=None):
         del options

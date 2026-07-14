@@ -22,19 +22,18 @@ and history live in their owning files.
 
 ## Current Objective
 
-Replace discrete skill-duration selection with a fixed-clock, complete
-all-agent autoregressive edit decision so variable lifetime is learned without
-duration shortcuts or short-segment sampling bias:
+Test whether natural adaptive-R30 skills have persistent task-agnostic effects
+that survive a context-only null and exceed same-skill stochastic variability:
 
 ```text
-fixed global check clock k0
--> all-agent KEEP/SET(skill) sequence over an applied working roster
--> lifetime as learned KEEP survival
+natural stochastic W=k0 windows train effect/context posteriors
+-> heldout conditional effect information
+-> common-random-number forced-skill persistence audit
 ```
 
-The post-R29 realized-effect target remains the next semantic edge, but it is
-deferred until duration is removed from the active temporal controller. R30
-does not add a new intrinsic reward.
+This R31 reward-off gate alone decides whether the fixed-window effect target is
+retired, receives one identical data append, or permits the matched 160K
+`probe_only`/`real_reward` comparison.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -88,10 +87,10 @@ does not add a new intrinsic reward.
 - `alice_bob_asymmetric_cycles` is now the role-free fast mechanism sandbox:
   the button subtask persists for four `k0` blocks while the target subtask
   changes every block. The environment never assigns either task to an agent;
-  complementary skill allocation is inferred from behavior. Its separate
-  semantic lane now learns from R30 low-level transition fragments and applies
-  the existing low-only transition-skill pressure; the fixed-clock high buffer
-  continues to receive raw task reward only.
+  complementary skill allocation is inferred from behavior. The legacy
+  one-step transition reward is now disabled; R31 uses only complete natural
+  fixed-window joint-position effects, and the fixed-clock high buffer continues
+  to receive raw sparse task reward only.
 - The paired 64K Alice--Bob screen completed with valid R30 replay and
   non-degenerate lifetime use, but neither arm contacted the target or completed
   a cycle and natural context-residual skill differentiation was not established.
@@ -99,15 +98,18 @@ does not add a new intrinsic reward.
   so it is mechanism evidence only, not a sparse-exploration result. The active
   Alice--Bob environment is now collection-only sparse reward; distance and
   progress shaping have been removed from reward and advantage.
+- GPT-5.6 Pro returned `ACCEPT R31`, archived raw on 2026-07-14. The unique
+  route is natural-window CFEI with forced stochastic branches used only for a
+  reward-off causal audit. Implementation and the registered local gate are
+  ready at commit boundary; online reward remains contingent on gate PASS.
 
 ## Next Actions
 
-1. Obtain the manual GPT-5.6 Pro algorithm/code review through
-   `docs/external-review/gpt5_6_pro/20260714_r30_sparse_exploration_review/REVIEW_ENTRY.md`.
-   Archive the returned response raw before disposition.
-2. Select one task-generic process-level intrinsic-exploration route for the
-   sparse Alice--Bob environment. Do not launch a reward-on run until its
-   reward-off persistent-effect causal gate is specified and accepted.
+1. Run `EXP-20260714-r31-cfei-reward-off-gate` locally from the frozen adaptive
+   R30 Alice--Bob checkpoint and read its single result JSON.
+2. Follow exactly one result branch: PASS -> prepare only the matched 160K
+   pair; UNDERPOWERED -> append one identical 64-reset batch; FAIL -> retire
+   R31-CFEI without reward launch or target tuning.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under

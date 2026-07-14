@@ -66,6 +66,14 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_force_refresh_every_check",
     "alice_bob_semantic_reward_enabled",
     "r30_high_gae_lambda",
+    "r31_effect_mode",
+    "r31_effect_window",
+    "r31_effect_coef",
+    "r31_effect_clip",
+    "r31_effect_hidden_dim",
+    "r31_effect_schema_version",
+    "r31_effect_view_name",
+    "r31_effect_gate_status",
     "n_z",
     "skill_lifetime_candidates",
     "process_segment_mode",
@@ -542,6 +550,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--r29_action_info_clip", type=float, default=R29_ACTION_INFO_REWARD_CLIP
     )
+    parser.add_argument(
+        "--r31_effect_mode",
+        choices=("", "off", "probe_only", "real_reward"),
+        default="",
+    )
     parser.add_argument("--eval_interval", type=int, default=0)
     parser.add_argument("--eval_episodes", type=int, default=3)
     parser.add_argument("--eval_max_steps", type=int, default=0)
@@ -853,6 +866,8 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     config.r29_action_info_clip = float(
         getattr(args, "r29_action_info_clip", R29_ACTION_INFO_REWARD_CLIP)
     )
+    if str(getattr(args, "r31_effect_mode", "")):
+        config.r31_effect_mode = str(args.r31_effect_mode)
     if int(args.n_agents) > 0:
         config.n_agents = int(args.n_agents)
         config.n_uavs = int(args.n_agents)
@@ -1351,6 +1366,29 @@ def checkpoint_payload(
             if getattr(agent, "transition_discriminator", None) is not None
             else None
         ),
+        "effect_posterior": (
+            agent.r31_effect_posterior.full_head.state_dict()
+            if getattr(agent, "r31_effect_posterior", None) is not None
+            else None
+        ),
+        "effect_context_posterior": (
+            agent.r31_effect_posterior.context_head.state_dict()
+            if getattr(agent, "r31_effect_posterior", None) is not None
+            else None
+        ),
+        "effect_optimizer": (
+            agent.r31_effect_opt.state_dict()
+            if getattr(agent, "r31_effect_opt", None) is not None
+            else None
+        ),
+        "r31_effect_mode": str(getattr(agent, "r31_effect_mode", "off")),
+        "r31_effect_schema_version": int(
+            getattr(agent, "r31_effect_schema_version", 0)
+        ),
+        "effect_gate_status": str(
+            getattr(agent, "r31_effect_gate_status", "UNTESTED")
+        ),
+        "effect_view_name": str(getattr(agent, "r31_effect_view_name", "")),
         "prototype_discriminator": (
             agent.prototype_discriminator.state_dict()
             if getattr(agent, "prototype_discriminator", None) is not None
@@ -1681,6 +1719,36 @@ def load_checkpoint(
         and getattr(agent, "transition_discriminator", None) is not None
     ):
         agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=False)
+    if bool(getattr(agent, "r31_enabled", False)):
+        effect_state = checkpoint.get("effect_posterior")
+        context_state = checkpoint.get("effect_context_posterior")
+        if (effect_state is None) != (context_state is None):
+            raise ValueError("R31 checkpoint contains only one posterior head")
+        if effect_state is not None:
+            if agent.r31_effect_posterior is None:
+                raise RuntimeError("R31 posterior was not initialized")
+            schema = int(checkpoint.get("r31_effect_schema_version", -1))
+            if schema != int(agent.r31_effect_schema_version):
+                raise ValueError(
+                    f"R31 effect schema mismatch: checkpoint={schema}, "
+                    f"requested={agent.r31_effect_schema_version}"
+                )
+            view_name = str(checkpoint.get("effect_view_name", ""))
+            if view_name != str(agent.r31_effect_view_name):
+                raise ValueError("R31 checkpoint effect view does not match")
+            agent.r31_effect_posterior.full_head.load_state_dict(
+                effect_state,
+                strict=True,
+            )
+            agent.r31_effect_posterior.context_head.load_state_dict(
+                context_state,
+                strict=True,
+            )
+            agent.r31_effect_gate_status = str(
+                checkpoint.get("effect_gate_status", "UNTESTED")
+            ).upper()
+        elif bool(getattr(agent, "r31_reward_enabled", False)):
+            raise ValueError("R31 real_reward requires a gate-passed posterior")
     if (
         "prototype_discriminator" in checkpoint
         and checkpoint.get("prototype_discriminator") is not None
@@ -1771,11 +1839,18 @@ def load_checkpoint(
             and agent.low_critic_opt is not None
         ):
             agent.low_critic_opt.load_state_dict(checkpoint["low_critic_opt"])
-        if "process_opt" in checkpoint:
+        if "process_opt" in checkpoint and not bool(
+            getattr(agent, "r31_enabled", False)
+        ):
             try:
                 agent.process_opt.load_state_dict(checkpoint["process_opt"])
             except ValueError:
                 pass
+        if (
+            checkpoint.get("effect_optimizer") is not None
+            and getattr(agent, "r31_effect_opt", None) is not None
+        ):
+            agent.r31_effect_opt.load_state_dict(checkpoint["effect_optimizer"])
         if (
             "prototype_disc_opt" in checkpoint
             and checkpoint.get("prototype_disc_opt") is not None
@@ -1955,6 +2030,16 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "assignment_actionability_include_soft": meta("assignment_actionability_include_soft"),
         "r28_g1": r28_g1_metadata,
         "r29_action_information": r29_metadata,
+        "r31_effect_mode": checkpoint.get("r31_effect_mode"),
+        "r31_effect_schema_version": checkpoint.get(
+            "r31_effect_schema_version"
+        ),
+        "effect_gate_status": checkpoint.get("effect_gate_status"),
+        "effect_view_name": checkpoint.get("effect_view_name"),
+        "has_effect_posterior": (
+            checkpoint.get("effect_posterior") is not None
+            and checkpoint.get("effect_context_posterior") is not None
+        ),
     }
 
 
@@ -2392,6 +2477,67 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
     config.r29_action_info_mode = "off"
 
 
+def enforce_r31_contract(
+    config,
+    args: argparse.Namespace,
+    metadata: dict[str, Any] | None,
+) -> None:
+    """Fail closed around the single accepted R31-CFEI route."""
+
+    mode = str(getattr(config, "r31_effect_mode", "off")).lower()
+    if mode == "off":
+        return
+    if mode not in {"probe_only", "real_reward"}:
+        raise ValueError(f"unsupported r31_effect_mode={mode!r}")
+    if normalize_scenario(str(getattr(args, "scenario", ""))) != "alice_bob_asymmetric_cycles":
+        raise ValueError("R31 is restricted to the sparse Alice--Bob environment")
+    if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
+        raise ValueError("R31 requires the adaptive R30 fixed-clock controller")
+    if bool(getattr(args, "r30_pair_gate", False)):
+        raise ValueError("R31 is not part of the legacy/shared-k R30 pair gate")
+    window = int(getattr(config, "r31_effect_window", 0))
+    if window != 10 or window != int(getattr(args, "skill_interval", 0)):
+        raise ValueError("R31 requires W=skill_interval=k0=10")
+    if bool(getattr(config, "alice_bob_semantic_reward_enabled", False)):
+        raise ValueError("R31 forbids the legacy one-step semantic reward")
+    if float(getattr(config, "transition_skill_reward_coef", 0.0)) != 0.0:
+        raise ValueError("R31 requires transition_skill_reward_coef=0")
+    if float(getattr(config, "alice_bob_progress_reward_coef", 0.0)) != 0.0:
+        raise ValueError("R31 requires the sparse unshaped Alice--Bob reward")
+    if str(getattr(args, "r28_g1_arm", "off")) != "off":
+        raise ValueError("R31 requires r28_g1_arm=off")
+    if str(getattr(args, "r29_action_info_mode", "off")) != "off":
+        raise ValueError("R31 requires r29_action_info_mode=off")
+    coefficient = float(getattr(config, "r31_effect_coef", 0.02))
+    clip = float(getattr(config, "r31_effect_clip", 0.05))
+    if not np.isfinite(coefficient) or coefficient <= 0.0:
+        raise ValueError("R31 effect coefficient must be finite and positive")
+    if not np.isfinite(clip) or clip <= 0.0:
+        raise ValueError("R31 effect clip must be finite and positive")
+    view_name = "alice_bob_normalized_joint_positions_v1"
+    configured_view = str(getattr(config, "r31_effect_view_name", view_name))
+    if configured_view != view_name:
+        raise ValueError("R31 admits only normalized joint agent positions v1")
+    config.r31_effect_view_name = view_name
+    config.r31_effect_gate_status = str(
+        (metadata or {}).get("effect_gate_status") or "UNTESTED"
+    ).upper()
+
+    if mode == "real_reward":
+        if metadata is None or not str(getattr(args, "resume_from", "")):
+            raise ValueError("R31 real_reward requires a gate-passed checkpoint")
+        if str(metadata.get("effect_gate_status", "")).upper() != "PASS":
+            raise ValueError("R31 real_reward requires effect_gate_status=PASS")
+        if not bool(metadata.get("has_effect_posterior", False)):
+            raise ValueError("R31 real_reward checkpoint is missing its posterior")
+        if int(metadata.get("r31_effect_schema_version", -1)) != int(
+            getattr(config, "r31_effect_schema_version", 1)
+        ):
+            raise ValueError("R31 real_reward checkpoint schema mismatch")
+        if str(metadata.get("effect_view_name", "")) != view_name:
+            raise ValueError("R31 real_reward checkpoint effect view mismatch")
+
+
 def enforce_r30_pair_gate(
     config,
     args: argparse.Namespace,
@@ -2668,6 +2814,7 @@ def evaluate(
                     k=int(args.skill_interval),
                     env_id=0,
                     deterministic=deterministic_eval,
+                    collect_r31=False,
                 )
                 actions, _, _ = agent.act_low(obs, env_id=0, deterministic=deterministic_eval, state=state)
                 obs, reward, terminated, truncated, last_info = env.step(actions)
@@ -2697,6 +2844,7 @@ def evaluate(
                     next_obs=obs,
                     next_state=state,
                     done=bool(done or hit_step_cap),
+                    collect_r31=False,
                 )
                 if capture_topology and len(topology_frames) < topology_max_frames:
                     should_capture = (
@@ -3670,6 +3818,12 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
                 value,
                 total_steps,
             )
+        elif key.startswith("r31_effect_"):
+            writer.add_scalar(
+                f"R31Effect/{key.removeprefix('r31_effect_')}",
+                value,
+                total_steps,
+            )
     writer.flush()
 
 
@@ -3719,6 +3873,14 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
 
         prev_state_info = _seed_info(_infos, "state_info")
         prev_reward_info = _seed_info(_infos, "reward_info")
+        effect_views = [
+            (
+                np.asarray(info.get("intrinsic_effect_view"), dtype=np.float32).copy()
+                if isinstance(info, dict) and info.get("intrinsic_effect_view") is not None
+                else None
+            )
+            for info in _infos
+        ]
         env = SimpleNamespace(**collector.spec)
         action_space_type, _, _ = action_space_details(env)
         state_dim = int(collector.spec.get("state_dim") or 0) or (
@@ -3727,6 +3889,10 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             else None
         )
         agent = create_agent(config, args, env, num_envs=num_envs, state_dim=state_dim)
+        if bool(getattr(agent, "r31_enabled", False)) and any(
+            view is None for view in effect_views
+        ):
+            raise RuntimeError("R31 environment did not expose intrinsic_effect_view")
 
         total_steps = 0
         update_idx = 0
@@ -3921,6 +4087,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         k=int(args.skill_interval),
                         env_id=env_id,
                         policy_update=int(update_idx + 1),
+                        effect_view=effect_views[env_id],
                     )
                     actions, logp, values, low_context = agent.act_low(
                         obs,
@@ -3949,6 +4116,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     truncated = result.truncated
                     info = result.info
                     done = bool(terminated or truncated)
+                    next_effect_view = info.get("intrinsic_effect_view")
+                    if bool(getattr(agent, "r31_enabled", False)):
+                        if next_effect_view is None:
+                            raise RuntimeError(
+                                "R31 step did not expose intrinsic_effect_view"
+                            )
+                        next_effect_view = np.asarray(
+                            next_effect_view,
+                            dtype=np.float32,
+                        ).copy()
                     reward_components = info.get("reward_components", {})
                     individual_rewards = np.asarray(
                         reward_components.get(
@@ -4004,9 +4181,12 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         next_obs=next_obs,
                         next_state=info.get("next_state", states[env_id]),
                         done=done,
+                        effect_view=next_effect_view,
+                        rollout_index=rollout_idx,
                     )
                     observations[env_id] = next_obs
                     states[env_id] = info.get("next_state", states[env_id])
+                    effect_views[env_id] = next_effect_view
                     if done:
                         agent.segments.flush(env_id, reason="episode")
                         observations[env_id], info = collector.reset_one(env_id)
@@ -4014,6 +4194,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         # Re-seed pre-step info from the reset state for the next segment.
                         prev_state_info[env_id] = info.get("state_info", {}) or {}
                         prev_reward_info[env_id] = info.get("reward_info", {}) or {}
+                        reset_effect_view = info.get("intrinsic_effect_view")
+                        effect_views[env_id] = (
+                            np.asarray(reset_effect_view, dtype=np.float32).copy()
+                            if reset_effect_view is not None
+                            else None
+                        )
+                        if bool(getattr(agent, "r31_enabled", False)) and effect_views[env_id] is None:
+                            raise RuntimeError(
+                                "R31 reset did not expose intrinsic_effect_view"
+                            )
                         agent.reset_env_state(env_id)
                 if total_steps >= int(args.total_timesteps):
                     break
@@ -4021,12 +4211,15 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             agent.truncate_high_rows_for_update(observations, states)
             agent.segments.flush(reason="update")
             rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
+            r31_score_metrics = agent.r31_score_complete_windows(rollout)
             process_metrics = agent.process_update(
                 rollout,
                 total_steps=total_steps,
                 update_idx=update_idx + 1,
             )
+            process_metrics.update(r31_score_metrics)
             low_metrics = agent.update_low(rollout)
+            process_metrics.update(agent.r31_update_effect_posterior())
             if bool(getattr(agent, "r30_enabled", False)):
                 process_metrics.update(
                     agent.update_high_from_checks(total_steps=total_steps)
@@ -4178,6 +4371,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"trans_resid_mi={process_metrics.get('transition_skill_residual_mi_mean', 0.0):.6f} "
                 f"trans_reward={process_metrics.get('transition_skill_reward_mean', 0.0):.6f} "
                 f"trans_active={process_metrics.get('transition_skill_reward_active', 0.0):.0f} "
+                f"r31_windows={process_metrics.get('r31_effect_windows', 0.0):.0f} "
+                f"r31_info={process_metrics.get('r31_effect_information_mean', 0.0):.6f} "
+                f"r31_full_acc={process_metrics.get('r31_effect_full_acc', 0.0):.3f} "
+                f"r31_ctx_acc={process_metrics.get('r31_effect_context_acc', 0.0):.3f} "
+                f"r31_reward={process_metrics.get('r31_effect_reward_mean', 0.0):.6f} "
                 f"team_t_samples={process_metrics.get('team_transition_samples', 0.0):.0f} "
                 f"team_t_mi={process_metrics.get('team_transition_mi_mean', 0.0):.6f} "
                 f"team_t_self={process_metrics.get('team_transition_self_frac', 0.0):.3f} "
@@ -4530,6 +4728,7 @@ def main() -> None:
     enforce_r29_action_info_contract(config, args)
     enforce_r30_pair_gate(config, args, metadata)
     enforce_r30_contract(config, args)
+    enforce_r31_contract(config, args, metadata)
 
     try:
         if args.dry_run_env_steps > 0:

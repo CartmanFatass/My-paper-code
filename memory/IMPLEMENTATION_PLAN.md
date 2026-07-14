@@ -53,7 +53,7 @@ Implementation status: complete. The next boundary is the registered paired
 run in `memory/ExpRecord.md`; implementation and experiment are not separated
 by another validation stage.
 
-## Deferred Post-R29 Realized-Effect Target Gate
+## R31 Natural-Window Causal Fixed-Window Effect Information
 
 Active causal edge:
 
@@ -63,9 +63,9 @@ natural on-policy prefix
 -> task-generic realized environment-effect separation
 ```
 
-The R28-G1 frozen reward design remains evidence, but its launch package is
-blocked before formal execution. The disposition and cross-round baseline
-matrix live in `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
+Accepted design source:
+`docs/external-review/gpt5_6_pro/20260714_r30_sparse_exploration_review/RESPONSE_RAW.md`.
+Controller disposition: `DISPOSITION.md` in the same directory.
 
 R28 completed boundary:
 
@@ -109,20 +109,37 @@ R29 completed boundary:
 4. GPT-5.6 Pro returned `RETIRE`; the disposition and failure review accepted
    R29 as diagnostic-only and retired the online actor-density-ratio family.
 
-Deferred boundary after R30 temporal restructuring:
+Active R31 boundary:
 
-1. Do not implement another reward yet. Ask GPT-5.6 Pro for exactly one
-   task-generic target that couples skill-conditioned action to realized
-   environmental effect.
-2. The next implementation is only the smallest reward-off diagnostic for that
-   target under policy-matched stochastic execution and a matched null.
-3. Failure at that diagnostic retires or revises the target before any reward
-   comparator.
+1. Keep R30 unchanged. Each genuine post-edit check opens one complete natural
+   stochastic window per agent with fixed `W=k0`; incomplete terminal/update
+   windows are invalid.
+2. Alice--Bob effect input is normalized joint agent positions only. Build a
+   focal/teammate endpoint and late-half displacement effect, conditioned on
+   start positions and teammate skills. Exclude action, task reward, task
+   identity, button/target/contact/phase, age, length, agent ID, and OPT compact.
+3. Train a full effect posterior and context-only posterior on natural windows.
+   Use signed `log q_full - log q_context`; matched shuffle is gate-only.
+4. Score a rollout with the posterior frozen after the previous rollout, inject
+   no reward in `probe_only`, run low PPO, then update the posterior from the
+   detached natural windows. A later `real_reward` mode may inject one detached
+   signed clipped endpoint reward per fixed block; it never enters R30 high
+   return.
+5. Keep the one-step transition discriminator as legacy diagnostic-only and
+   fail closed if its reward, R28/R29 reward, environment shaping, wrong window
+   length, forbidden input, incomplete-window reward, or high reward injection
+   is active in R31 mode.
+6. Implement a reward-off forced stochastic audit from matched simulator/RNG/
+   recurrent-state contexts. Teammates resample their policy under common random
+   numbers rather than replaying an action tape. Forced windows never train the
+   natural scorer.
+7. Only a reward-off PASS authorizes the registered 160K paired R31 reward
+   comparison. FAIL retires CFEI; UNDERPOWERED adds only the same reset batch.
 
-Core MARL impact: the R29 online reward path remains retired. R30 changes the
-high-level temporal controller but adds no intrinsic reward. After the fixed
-clock removes duration as a semantic shortcut, resume only the smallest
-reward-off realized-effect diagnostic selected for the fixed `W=k0` interface.
+Core MARL impact: R31 reconstructs only the individual persistent-effect half
+of HMASD's intrinsic exploration loop. It does not establish team composition,
+delayed cooperative credit, sparse-task improvement, asynchronous-lifetime
+benefit, or HMASD parity.
 
 ## Legacy Compatibility Boundary
 

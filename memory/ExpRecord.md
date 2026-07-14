@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260714-r31-cfei-reward-off-gate | registered | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038` | `result/r31_causal_effect_gate.json` | pending | M1+M2 PASS alone authorizes the matched 160K reward pair; FAIL retires R31; UNDERPOWERED appends one identical batch. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
 | EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL`; online family retired | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | none | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%`; GPT-5.6 Pro verdict `RETIRE` | Keep R29 diagnostic-only. Do not promote, retune, or expand seeds; move to the reward-off stochastic realized-effect edge. |
 | EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
@@ -41,6 +42,37 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260714-r31-cfei-reward-off-gate
+
+- Causal edge and authorization: in natural stochastic adaptive-R30 checks,
+  changing focal persistent skill should create a task-agnostic joint-position
+  effect beyond context recovery and same-skill stochastic variability. GPT-5.6
+  Pro accepted R31 and authorized this reward-off gate only.
+- Source/nulls: frozen Alice--Bob adaptive-R30 final checkpoint, seed `31031`,
+  sparse collection reward, `W=k0=10`; context-only posterior and matched
+  context shuffle are observational nulls, while two common-random-number
+  stochastic replicas per forced skill estimate execution noise. Forced rows
+  never train the posterior and no policy optimizer runs.
+- Exposure: 64 reset groups x 80 steps yield up to 1,024 natural agent-windows;
+  48 groups train the posterior and 16 are held out. The audit uses 128 heldout
+  decision contexts x 4 focal skills x 2 replicas x 10 steps = 10,240 forced
+  primitive steps. Cluster bootstrap uses 10,000 draws. Expected wall clock is
+  under 30 minutes on local CUDA.
+- Metrics/thresholds: M1 requires heldout mean `>=0.02` nats, CI lower `>0`,
+  every skill mean `>=0.005`, and at least 64 heldout rows per skill. M2 requires
+  median between/within effect ratio `>=1.5`, CI lower `>1`, every skill pooled
+  ratio `>=1`, and matched-shuffle absolute mean
+  `<=min(0.005, 0.25*M1)`.
+- Outcome branches: all thresholds PASS -> only the matched 160K
+  `probe_only`/`real_reward` pair; nonpositive M1, causal ratio `<=1`, or shuffle
+  above half the signal -> FAIL and retire R31; threshold-directed point
+  estimates with insufficient rows/CI -> UNDERPOWERED and append one identical
+  64-reset batch.
+- Prohibited: environment shaping, online reward, policy updates, forced-row
+  posterior fitting, fixed teammate action tapes, coefficient/target/null
+  changes, extra arms/seeds, or claims about cooperation/task efficacy.
+- Status source: `logs/r31_cfei_reward_off_gate_20260714_181038/result/r31_causal_effect_gate.json`.
 
 ### EXP-20260714-r30-fixed-clock-paired-320k
 

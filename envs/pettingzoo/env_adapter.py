@@ -132,6 +132,29 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             )
         return estimator()
 
+    def get_probe_snapshot(self):
+        snapshotter = getattr(self.env, "get_probe_snapshot", None)
+        if not callable(snapshotter):
+            raise AttributeError(
+                f"Environment {type(self.env).__name__} does not support probe snapshots"
+            )
+        return snapshotter()
+
+    def set_probe_snapshot(self, snapshot):
+        restorer = getattr(self.env, "set_probe_snapshot", None)
+        if not callable(restorer):
+            raise AttributeError(
+                f"Environment {type(self.env).__name__} does not support probe snapshots"
+            )
+        return restorer(snapshot)
+
+    def _add_intrinsic_effect_view(self, info):
+        provider = getattr(self.env, "intrinsic_effect_view", None)
+        if callable(provider):
+            info["intrinsic_effect_view"] = np.asarray(
+                provider(), dtype=np.float32
+            ).copy()
+
     def reset(self, seed=None, options=None):
         """
         重置环境 (符合Gymnasium API)
@@ -165,6 +188,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             "state_info": self.get_current_state(),
             "infos_dict": infos_dict # Original PettingZoo infos
         }
+        self._add_intrinsic_effect_view(info)
 
         return observations_array.astype(np.float32), info
 
@@ -277,6 +301,8 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
             info["discovered_users_this_episode"] = len(self.env.discovered_users_this_episode)
             info["total_users"] = getattr(self.env, 'n_users', 0)
             info["discovery_progress"] = len(self.env.discovered_users_this_episode) / max(getattr(self.env, 'n_users', 1), 1)
+
+        self._add_intrinsic_effect_view(info)
 
         return next_observations_array.astype(np.float32), float(scalar_reward), terminated, truncated, info
 

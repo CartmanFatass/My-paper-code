@@ -33,14 +33,27 @@ from ha_ctse_process.cooperation_credit import (
     aggregate_cooperation_credit,
     empty_cooperation_credit_metrics,
 )
-from ha_ctse_process.intrinsic_rewards import IntrinsicRewardComposer
+from ha_ctse_process.intrinsic_rewards import (
+    IntrinsicRewardComposer,
+    effect_information_reward,
+)
 from ha_ctse_process.outcome_residual import (
     FUTURE_COOPERATION_OUTCOME_FIELDS,
     FutureCooperationOutcomeExtractor,
     OutcomeResidualProbe,
 )
 from ha_ctse_process.process_outcomes import ProcessOutcomeExtractor
-from ha_ctse_process.process_posterior import SegmentSkillPosterior, TransitionSkillDiscriminator
+from ha_ctse_process.process_posterior import (
+    FixedWindowEffectPosterior,
+    SegmentSkillPosterior,
+    TransitionSkillDiscriminator,
+)
+from ha_ctse_process.r31_effect_information import (
+    EffectWindowBuffer,
+    EffectWindowRow,
+    build_effect_and_context,
+    matched_context_shuffle,
+)
 from ha_ctse_process.topology_role import (
     TOPOLOGY_ROLE_FIELDS,
     TOPOLOGY_ROLE_NAMES,
@@ -1695,6 +1708,31 @@ class StandaloneProcessAgent:
             self.n_skills = int(getattr(config, "legacy_n_skills_override"))
         if self.r30_enabled and self.n_skills < 2:
             raise ValueError("R30 requires at least two skills")
+        self.r31_effect_mode = str(
+            getattr(config, "r31_effect_mode", "off")
+        ).lower()
+        if self.r31_effect_mode not in {"off", "probe_only", "real_reward"}:
+            raise ValueError(
+                f"unsupported r31_effect_mode={self.r31_effect_mode!r}"
+            )
+        self.r31_enabled = self.r31_effect_mode != "off"
+        self.r31_reward_enabled = self.r31_effect_mode == "real_reward"
+        self.r31_effect_window = int(getattr(config, "r31_effect_window", 10))
+        self.r31_effect_coef = float(getattr(config, "r31_effect_coef", 0.02))
+        self.r31_effect_clip = float(getattr(config, "r31_effect_clip", 0.05))
+        self.r31_effect_schema_version = int(
+            getattr(config, "r31_effect_schema_version", 1)
+        )
+        self.r31_effect_view_name = str(
+            getattr(
+                config,
+                "r31_effect_view_name",
+                "alice_bob_normalized_joint_positions_v1",
+            )
+        )
+        self.r31_effect_gate_status = str(
+            getattr(config, "r31_effect_gate_status", "UNTESTED")
+        ).upper()
         self.use_autoregressive_selection = bool(
             (self.r30_enabled or self.use_prototype_response_skills or self.enable_team_intent)
             and getattr(config, "use_autoregressive_selection", True)
@@ -2219,6 +2257,16 @@ class StandaloneProcessAgent:
             if self.use_transition_skill_discriminator
             else None
         )
+        self.r31_effect_posterior = (
+            FixedWindowEffectPosterior(
+                effect_dim=8,
+                context_dim=4 + (self.n_agents - 1) * self.n_skills,
+                n_skills=self.n_skills,
+                hidden_dim=int(getattr(config, "r31_effect_hidden_dim", hidden)),
+            ).to(self.device)
+            if self.r31_enabled
+            else None
+        )
         proto_condition_dim = 0
         if self.prototype_disc_condition == "kappa":
             proto_condition_dim += self.situation_num_kappa
@@ -2376,6 +2424,14 @@ class StandaloneProcessAgent:
             + (list(self.transition_discriminator.parameters()) if self.transition_discriminator is not None else []),
             lr=process_lr,
         )
+        self.r31_effect_opt = (
+            torch.optim.Adam(
+                self.r31_effect_posterior.parameters(),
+                lr=float(getattr(config, "r31_effect_lr", process_lr)),
+            )
+            if self.r31_effect_posterior is not None
+            else None
+        )
         self.prototype_disc_opt = (
             torch.optim.Adam(
                 self.prototype_discriminator.parameters(),
@@ -2423,6 +2479,17 @@ class StandaloneProcessAgent:
             if self.r30_enabled
             else None
         )
+        self.r31_effect_windows = (
+            EffectWindowBuffer(
+                self.num_envs,
+                self.n_agents,
+                self.r31_effect_window,
+            )
+            if self.r31_enabled
+            else None
+        )
+        self._r31_scored_rows: list[EffectWindowRow] = []
+        self._r31_scored_batch: tuple[np.ndarray, np.ndarray, np.ndarray] | None = None
         self.team_intent_remaining = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_age = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_prior_counts = np.ones(self.num_team_codes, dtype=np.float64)
@@ -2488,6 +2555,238 @@ class StandaloneProcessAgent:
             "terminal_window": 10,
         }
 
+    def _empty_r31_metrics(self) -> dict[str, float]:
+        metrics = {
+            "r31_effect_windows": 0.0,
+            "r31_effect_invalid_windows": 0.0,
+            "r31_effect_information_mean": 0.0,
+            "r31_effect_information_positive_frac": 0.0,
+            "r31_effect_full_acc": 0.0,
+            "r31_effect_context_acc": 0.0,
+            "r31_effect_shuffle_mean": 0.0,
+            "r31_effect_shuffle_abs_mean": 0.0,
+            "r31_effect_shuffle_valid_frac": 0.0,
+            "r31_effect_reward_mean": 0.0,
+            "r31_effect_reward_applied_endpoints": 0.0,
+            "r31_effect_posterior_samples": 0.0,
+            "r31_effect_posterior_loss": 0.0,
+            "r31_effect_full_loss": 0.0,
+            "r31_effect_context_loss": 0.0,
+        }
+        for skill in range(self.n_skills):
+            metrics[f"r31_effect_skill_{skill}_mean"] = 0.0
+            metrics[f"r31_effect_skill_{skill}_samples"] = 0.0
+        return metrics
+
+    def r31_score_complete_windows(self, rollout: Rollout) -> dict[str, float]:
+        """Score complete natural windows with the previous frozen posterior."""
+
+        metrics = self._empty_r31_metrics()
+        if not self.r31_enabled:
+            return metrics
+        if self.r31_effect_windows is None or self.r31_effect_posterior is None:
+            raise RuntimeError("R31 is enabled without its window buffer/posterior")
+        if self._r31_scored_batch is not None or self._r31_scored_rows:
+            raise RuntimeError("R31 previous scored batch was not consumed")
+
+        rows = self.r31_effect_windows.pop_completed()
+        invalid_rows = self.r31_effect_windows.pop_invalidated()
+        metrics["r31_effect_invalid_windows"] = float(len(invalid_rows))
+        if not rows:
+            return metrics
+
+        effects: list[np.ndarray] = []
+        contexts: list[np.ndarray] = []
+        labels: list[int] = []
+        for row in rows:
+            if not row.ready or row.transition_count != self.r31_effect_window:
+                raise RuntimeError("R31 attempted to score an incomplete natural window")
+            endpoint = int(row.endpoint_rollout_index)
+            if not 0 <= endpoint < len(rollout.rewards):
+                raise IndexError(
+                    f"R31 endpoint index {endpoint} is outside the current rollout"
+                )
+            if int(rollout.env_ids[endpoint]) != int(row.env_id):
+                raise RuntimeError("R31 endpoint env does not match the natural window")
+            effect, context = build_effect_and_context(
+                row.effect_view_sequence,
+                row.active_skills,
+                row.focal_agent,
+                self.n_skills,
+            )
+            effects.append(effect)
+            contexts.append(context)
+            labels.append(int(row.active_skills[row.focal_agent]))
+
+        effect_np = np.asarray(effects, dtype=np.float32)
+        context_np = np.asarray(contexts, dtype=np.float32)
+        label_np = np.asarray(labels, dtype=np.int64)
+        effect_t = torch.as_tensor(effect_np, dtype=torch.float32, device=self.device)
+        context_t = torch.as_tensor(context_np, dtype=torch.float32, device=self.device)
+        label_t = torch.as_tensor(label_np, dtype=torch.long, device=self.device)
+        self.r31_effect_posterior.eval()
+        with torch.no_grad():
+            full_logits, context_logits = self.r31_effect_posterior(
+                effect_t,
+                context_t,
+            )
+            log_full = self.r31_effect_posterior.log_prob_for_labels(
+                full_logits,
+                label_t,
+            )
+            log_context = self.r31_effect_posterior.log_prob_for_labels(
+                context_logits,
+                label_t,
+            )
+            delta = log_full - log_context
+            reward = effect_information_reward(
+                delta,
+                coef=self.r31_effect_coef,
+                clip=self.r31_effect_clip,
+                enabled=self.r31_reward_enabled,
+            )
+            full_acc = (full_logits.argmax(dim=-1) == label_t).float().mean()
+            context_acc = (context_logits.argmax(dim=-1) == label_t).float().mean()
+
+        delta_np = delta.detach().cpu().numpy().astype(np.float32)
+        reward_np = reward.detach().cpu().numpy().astype(np.float32)
+        for sample, row in enumerate(rows):
+            if self.r31_reward_enabled:
+                rollout.rewards[row.endpoint_rollout_index][row.focal_agent] += float(
+                    reward_np[sample]
+                )
+
+        starts = np.asarray(
+            [row.effect_view_sequence[0] for row in rows],
+            dtype=np.float32,
+        )
+        active_skills = np.asarray(
+            [row.active_skills for row in rows],
+            dtype=np.int64,
+        )
+        focal_agents = np.asarray(
+            [row.focal_agent for row in rows],
+            dtype=np.int64,
+        )
+        shuffled_effects, _donors, shuffle_valid = matched_context_shuffle(
+            effect_np,
+            starts,
+            active_skills,
+            focal_agents,
+            rng=31031 + int(rows[0].policy_update),
+        )
+        shuffle_delta_np = np.zeros(len(rows), dtype=np.float32)
+        if bool(np.any(shuffle_valid)):
+            shuffled_t = torch.as_tensor(
+                shuffled_effects,
+                dtype=torch.float32,
+                device=self.device,
+            )
+            with torch.no_grad():
+                shuffled_logits = self.r31_effect_posterior.full_logits(
+                    shuffled_t,
+                    context_t,
+                )
+                shuffle_delta = self.r31_effect_posterior.log_prob_for_labels(
+                    shuffled_logits,
+                    label_t,
+                ) - log_context
+            shuffle_delta_np = (
+                shuffle_delta.detach().cpu().numpy().astype(np.float32)
+            )
+
+        metrics.update(
+            {
+                "r31_effect_windows": float(len(rows)),
+                "r31_effect_information_mean": float(np.mean(delta_np)),
+                "r31_effect_information_positive_frac": float(
+                    np.mean(delta_np > 0.0)
+                ),
+                "r31_effect_full_acc": float(full_acc.detach().cpu().item()),
+                "r31_effect_context_acc": float(
+                    context_acc.detach().cpu().item()
+                ),
+                "r31_effect_shuffle_mean": float(
+                    np.mean(shuffle_delta_np[shuffle_valid])
+                )
+                if bool(np.any(shuffle_valid))
+                else 0.0,
+                "r31_effect_shuffle_abs_mean": float(
+                    np.mean(np.abs(shuffle_delta_np[shuffle_valid]))
+                )
+                if bool(np.any(shuffle_valid))
+                else 0.0,
+                "r31_effect_shuffle_valid_frac": float(np.mean(shuffle_valid)),
+                "r31_effect_reward_mean": float(np.mean(reward_np)),
+                "r31_effect_reward_applied_endpoints": float(
+                    len(rows) if self.r31_reward_enabled else 0
+                ),
+            }
+        )
+        for skill in range(self.n_skills):
+            skill_mask = label_np == skill
+            metrics[f"r31_effect_skill_{skill}_samples"] = float(
+                np.sum(skill_mask)
+            )
+            metrics[f"r31_effect_skill_{skill}_mean"] = (
+                float(np.mean(delta_np[skill_mask]))
+                if bool(np.any(skill_mask))
+                else 0.0
+            )
+
+        self._r31_scored_rows = rows
+        self._r31_scored_batch = (effect_np, context_np, label_np)
+        return metrics
+
+    def r31_update_effect_posterior(self) -> dict[str, float]:
+        """Fit R31 after low PPO, using only this rollout's natural windows."""
+
+        metrics = {
+            "r31_effect_posterior_samples": 0.0,
+            "r31_effect_posterior_loss": 0.0,
+            "r31_effect_full_loss": 0.0,
+            "r31_effect_context_loss": 0.0,
+        }
+        if not self.r31_enabled or self._r31_scored_batch is None:
+            return metrics
+        if self.r31_effect_posterior is None or self.r31_effect_opt is None:
+            raise RuntimeError("R31 is enabled without its posterior optimizer")
+        effect_np, context_np, label_np = self._r31_scored_batch
+        effect_t = torch.as_tensor(effect_np, dtype=torch.float32, device=self.device)
+        context_t = torch.as_tensor(context_np, dtype=torch.float32, device=self.device)
+        label_t = torch.as_tensor(label_np, dtype=torch.long, device=self.device)
+        self.r31_effect_posterior.train()
+        full_logits, context_logits = self.r31_effect_posterior(
+            effect_t,
+            context_t,
+        )
+        terms = self.r31_effect_posterior.losses(
+            full_logits,
+            context_logits,
+            label_t,
+        )
+        self.r31_effect_opt.zero_grad()
+        terms["loss"].backward()
+        torch.nn.utils.clip_grad_norm_(self.r31_effect_posterior.parameters(), 10.0)
+        self.r31_effect_opt.step()
+        metrics.update(
+            {
+                "r31_effect_posterior_samples": float(label_np.size),
+                "r31_effect_posterior_loss": float(
+                    terms["loss"].detach().cpu().item()
+                ),
+                "r31_effect_full_loss": float(
+                    terms["full_loss"].detach().cpu().item()
+                ),
+                "r31_effect_context_loss": float(
+                    terms["context_loss"].detach().cpu().item()
+                ),
+            }
+        )
+        self._r31_scored_rows = []
+        self._r31_scored_batch = None
+        return metrics
+
     def record_environment_step(
         self,
         env_id: int,
@@ -2495,6 +2794,9 @@ class StandaloneProcessAgent:
         next_obs=None,
         next_state=None,
         done: bool = False,
+        effect_view=None,
+        rollout_index: int = -1,
+        collect_r31: bool = True,
     ) -> None:
         env_id = int(env_id)
         self.episode_steps[env_id] += 1
@@ -2503,6 +2805,16 @@ class StandaloneProcessAgent:
         if reward is None or self.high_check_buffer is None:
             raise ValueError("R30 environment step requires raw scalar reward")
         self.high_check_buffer.accumulate(env_id, float(reward))
+        if self.r31_enabled and collect_r31:
+            if self.r31_effect_windows is None or effect_view is None:
+                raise ValueError("R31 environment step requires an effect view")
+            self.r31_effect_windows.append_effect_view(
+                env_id=env_id,
+                effect_view=effect_view,
+                rollout_index=int(rollout_index),
+                episode_id=int(self.episode_ids[env_id]),
+                terminal=bool(done),
+            )
         active = self.has_active_skill[env_id]
         self.skill_age[env_id, active] += 1
         self.steps_to_check[env_id] = max(int(self.steps_to_check[env_id]) - 1, 0)
@@ -2517,6 +2829,10 @@ class StandaloneProcessAgent:
     def truncate_high_rows_for_update(self, observations, states) -> None:
         if not self.r30_enabled:
             return
+        if self.r31_effect_windows is not None:
+            self.r31_effect_windows.invalidate_all(
+                reason="policy_update_before_endpoint"
+            )
         if self.high_check_buffer is None:
             raise RuntimeError("R30 high-check buffer is not initialized")
         with torch.no_grad():
@@ -2553,6 +2869,9 @@ class StandaloneProcessAgent:
                     env_id,
                     False,
                     policy_update,
+                    rollout_index=-1,
+                    effect_view=None,
+                    collect_r31=False,
                 )
             for agent_id in range(self.n_agents):
                 if not bool(self.has_active_skill[env_id, agent_id]):
@@ -2606,6 +2925,7 @@ class StandaloneProcessAgent:
             "outcome_residual_probe": self._count_parameters(self.outcome_residual_probe),
             "topology_role_probe": self._count_parameters(self.topology_role_probe),
             "transition_discriminator": self._count_parameters(self.transition_discriminator),
+            "r31_effect_posterior": self._count_parameters(self.r31_effect_posterior),
             "prototype_discriminator": self._count_parameters(self.prototype_discriminator),
             "team_discriminator": self._count_parameters(self.team_discriminator),
             "team_conditioned_qd_probe": self._count_parameters(self.team_conditioned_qd_probe),
@@ -2633,6 +2953,7 @@ class StandaloneProcessAgent:
             + counts["outcome_residual_probe"]
             + counts["topology_role_probe"]
             + counts["transition_discriminator"]
+            + counts["r31_effect_posterior"]
             + counts["prototype_discriminator"]
             + counts["team_discriminator"]
             + counts["team_conditioned_qd_probe"]
@@ -2652,6 +2973,7 @@ class StandaloneProcessAgent:
                     "outcome_residual_probe",
                     "topology_role_probe",
                     "transition_discriminator",
+                    "r31_effect_posterior",
                     "prototype_discriminator",
                     "team_discriminator",
                     "compact_return_head",
@@ -2949,6 +3271,12 @@ class StandaloneProcessAgent:
 
     def reset_env_state(self, env_id: int):
         env_id = int(env_id)
+        if self.r31_effect_windows is not None:
+            self.r31_effect_windows.invalidate(
+                env_id,
+                terminal=True,
+                reason="environment_reset_before_endpoint",
+            )
         self.episode_steps[env_id] = 0
         self.episode_ids[env_id] += 1
         self.steps_to_check[env_id] = 0
@@ -3228,6 +3556,9 @@ class StandaloneProcessAgent:
         env_id: int,
         deterministic: bool,
         policy_update: int,
+        rollout_index: int,
+        effect_view,
+        collect_r31: bool,
     ) -> None:
         if self.high_check_buffer is None or not isinstance(
             self.high, FixedClockAREditPolicy
@@ -3353,6 +3684,18 @@ class StandaloneProcessAgent:
             self.duration_remaining[env_id, :] = 0
             self.active_duration_indices[env_id, :] = 0
             self.steps_to_check[env_id] = int(self.skill_interval)
+            if self.r31_enabled and collect_r31 and int(policy_update) > 0:
+                if self.r31_effect_windows is None or effect_view is None:
+                    raise ValueError("R31 decision requires the current effect view")
+                self.r31_effect_windows.open_after_check(
+                    env_id=env_id,
+                    episode_id=int(self.episode_ids[env_id]),
+                    policy_update=int(policy_update),
+                    start_rollout_index=int(rollout_index),
+                    effect_view=effect_view,
+                    active_skills=self.active_skills[env_id],
+                    decision_mask=True,
+                )
 
             token_kind_np = sample.token_kind.detach().cpu().numpy()
             set_skill_np = sample.set_skill.detach().cpu().numpy()
@@ -3398,6 +3741,8 @@ class StandaloneProcessAgent:
         env_id: int = 0,
         deterministic: bool = False,
         policy_update: int = 0,
+        effect_view=None,
+        collect_r31: bool = True,
     ):
         env_id = int(env_id)
         if self.r30_enabled:
@@ -3407,6 +3752,9 @@ class StandaloneProcessAgent:
                 env_id,
                 deterministic,
                 policy_update,
+                rollout_index=int(step),
+                effect_view=effect_view,
+                collect_r31=bool(collect_r31),
             )
         joint_obs = self._joint_obs_array(obs)
         state_arr = self._state_array(state, joint_obs)
@@ -5469,7 +5817,11 @@ class StandaloneProcessAgent:
                 rollout,
                 total_steps=total_steps,
             )
-            if self.r30_enabled and self.alice_bob_semantic_reward_enabled
+            if (
+                self.r30_enabled
+                and self.alice_bob_semantic_reward_enabled
+                and not self.r31_enabled
+            )
             else {}
         )
         valid = [] if self.r30_enabled else transition_segments

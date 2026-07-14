@@ -70,6 +70,25 @@ class RunningRewardNormalizer:
         return torch.clamp(normalized, -self.clip, self.clip)
 
 
+def effect_information_reward(
+    delta: torch.Tensor,
+    coef: float,
+    clip: float,
+    enabled: bool,
+) -> torch.Tensor:
+    """Build the signed, detached R31 fixed-window endpoint reward.
+
+    Unlike the legacy transition reward, negative conditional-effect evidence
+    remains negative; no ReLU or non-negative clipping is applied.
+    """
+    raw = float(coef) * delta.detach()
+    if not enabled:
+        return torch.zeros_like(raw)
+    if float(clip) > 0.0:
+        return torch.clamp(raw, -float(clip), float(clip))
+    return raw
+
+
 class IntrinsicRewardComposer:
     """Compose low/high intrinsic rewards and gate noisy high-level signals."""
 

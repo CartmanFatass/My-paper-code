@@ -284,6 +284,32 @@ R30_METRIC_FIELDS = (
     "alice_bob_r30_observed_cycle_metric_rows",
 )
 
+R31_EFFECT_METRIC_FIELDS = (
+    "r31_effect_windows",
+    "r31_effect_invalid_windows",
+    "r31_effect_information_mean",
+    "r31_effect_information_positive_frac",
+    "r31_effect_full_acc",
+    "r31_effect_context_acc",
+    "r31_effect_shuffle_mean",
+    "r31_effect_shuffle_abs_mean",
+    "r31_effect_shuffle_valid_frac",
+    "r31_effect_reward_mean",
+    "r31_effect_reward_applied_endpoints",
+    "r31_effect_posterior_samples",
+    "r31_effect_posterior_loss",
+    "r31_effect_full_loss",
+    "r31_effect_context_loss",
+    "r31_effect_skill_0_mean",
+    "r31_effect_skill_0_samples",
+    "r31_effect_skill_1_mean",
+    "r31_effect_skill_1_samples",
+    "r31_effect_skill_2_mean",
+    "r31_effect_skill_2_samples",
+    "r31_effect_skill_3_mean",
+    "r31_effect_skill_3_samples",
+)
+
 
 UPDATE_FIELDS = (
     "update",
@@ -292,6 +318,7 @@ UPDATE_FIELDS = (
     *R28_G1_METRIC_FIELDS,
     *R29_ACTION_INFO_METRIC_FIELDS,
     *R30_METRIC_FIELDS,
+    *R31_EFFECT_METRIC_FIELDS,
     "process_segments",
     "process_loss",
     "process_outcome_loss",
