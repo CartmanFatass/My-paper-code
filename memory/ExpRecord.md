@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260714-r34-bhmd-gate | launch-ready | hierarchy-L2 codebook-construction and transport gate | local CUDA; source is the frozen adaptive-R30 Alice--Bob checkpoint | single result JSON after launch | GPT-5.6 Pro responses A/B agree on BHMD; controller added a frozen-source anchor and split mode formation from selector use and coverage | Run the frozen modified gate once; no normal-trainer integration. |
+| EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
 | EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
 | EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
@@ -130,9 +130,30 @@ explicitly approves the exception.
   training, another classifier/effect/reward target, scheduler/hazard/queue or
   IMOD migration, K/descriptor/clustering/epoch/scope/lr/window/seed/threshold
   changes after the result, and task/cooperation/HMASD/S7 claims from this gate.
-- Planned status source: one JSON at
-  `logs/r34_bhmd_gate_<timestamp>/result/r34_bhmd_gate.json`; replace this
-  pointer with the exact run path at launch.
+- Result and status source:
+  `logs/r34_bhmd_gate_20260715_001706/result/r34_bhmd_gate.json`. The run
+  completed as valid `FAIL_M1_RETIRE_R34_BHMD`; every M0 implementation check
+  passed, including source recurrent replay error `2.86e-6`, matched random
+  streams, allowed-only gradients, and zero forbidden drift. The whole-episode
+  sham retained only `0.0208` label agreement, so null degeneration did not
+  explain the result.
+- M1 evidence: real forced fidelity was `0.5752` versus source `0.5098` and
+  sham `0.1836`. Although real beat sham by `0.3916`, it missed both the
+  absolute `0.60` gate and the source-relative gate: gain `0.0654`, 95% CI
+  `[0.0479, 0.0840]`, versus required `0.15`. Real persistent SNR was `1.5235`
+  versus source `1.7608` and sham `0.1591`; the real-minus-source median gain
+  was `-0.2962`, 95% CI `[-0.3518, -0.2165]`.
+- Downstream evidence: natural skill/prototype agreement improved only
+  `0.0488` over source versus required `0.10`. Joint coverage was `403` cells
+  versus source `396` and sham `297`, but the real/source ratio was only
+  `1.0177` and its paired-reset difference CI was wholly negative. M3 R30
+  lifetime and skill-supply safety passed.
+- Decision: the real arm mostly preserved source behavior while the sham
+  damaged it; balanced post-hoc relabeling plus recurrent behavior cloning did
+  not create intervention modes stronger than the frozen source or transport
+  them to natural exploration. Permanently retire this fixed BHMD line without
+  retuning, seed expansion, normal-trainer integration, or replacement of the
+  registered label/cluster/distillation scope.
 
 ### EXP-20260714-r33-irsc-gate
 

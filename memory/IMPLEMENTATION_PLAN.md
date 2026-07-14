@@ -299,6 +299,16 @@ One implementation/evidence boundary:
    OPT/bridge, and posteriors unchanged. The exact budget and decision contract
    are owned by `memory/ExpRecord.md`.
 
+Gate result: valid `FAIL_M1_RETIRE_R34_BHMD`. All M0 checks passed and the
+maximum-Hamming sham was strongly disrupted. Real distillation raised forced
+fidelity only `0.0654` over the frozen source, below the registered `0.15`
+gain, while persistent-mode SNR fell from `1.7608` to `1.5235`
+(`real-source=-0.2962`, wholly negative CI). Natural mode agreement improved
+only `0.0488`, and joint coverage did not improve over source under the paired
+reset statistic. R30 safety passed. Retire fixed balanced hindsight mode
+distillation and do not tune or integrate it; the next implementation boundary
+must come from one structurally different post-R34 causal edge.
+
 ## Legacy Compatibility Boundary
 
 - This branch is for constructing the new HA-CTSE/process algorithm, not for

@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-14
+Updated: 2026-07-15
 
 Purpose: the single mandatory first read. Keep only controller ownership, the
 current objective, next actions, immediate constraints, and pointers. Evidence
@@ -22,16 +22,17 @@ and history live in their owning files.
 
 ## Current Objective
 
-Test the single post-R33 codebook-construction edge selected after the valid
-R33 failure:
+Close the valid R34 codebook-construction failure and obtain exactly one
+structurally different post-R34 causal edge before further implementation:
 
 ```text
 R32 individual effect creation: positive but immaterial
 -> R33 non-additive role-swap selection: positive but immaterial
 -> no natural joint or nonredundant coverage transport
 -> existing skill labels are not demonstrated persistent primitives
--> R34 balanced hindsight modes rewrite the low-level codebook
--> forced mode reproduction -> frozen-R30 natural use -> coverage transport
+-> R34 balanced hindsight modes fail the frozen-source creation anchor
+-> post-hoc relabel-and-clone is retired
+-> select one online mechanism that can create semantics stronger than source
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -135,15 +136,25 @@ direct intervention-scored roster-complementarity selection are retired.
   `MODIFY`: use full-episode recurrent replay, add an unchanged source anchor,
   use focal-only controllable mode labels, strengthen the sham, and split
   codebook formation from frozen-selector use and coverage.
+- R34 completed at implementation commit `d0d80ac` as valid
+  `FAIL_M1_RETIRE_R34_BHMD`; all M0 checks passed. Real forced fidelity was
+  `0.5752`, only `0.0654` above source, while persistent-mode SNR decreased
+  from source `1.7608` to real `1.5235` with a wholly negative paired interval.
+  Natural mode agreement gained only `0.0488` over source and coverage did not
+  transport. R30 safety passed. Fixed balanced hindsight mode distillation and
+  its registered clustering/epoch/scope variants are retired.
 
 ## Next Actions
 
-1. Complete the two-file R34-BHMD implementation boundary.
-2. Run the registered 48,640-step local CUDA gate once.
-3. Read its single result JSON and take only the registered branch.
+1. Archive and disposition the valid R34 result with its frozen-source
+   interpretation.
+2. Submit the tracked post-R34 question to GPT-5.6 Pro manually through the
+   GitHub-backed review workflow.
+3. Accept, modify, or reject exactly one returned R35 causal edge before any
+   new implementation or experiment contract.
 
-Completed run: `logs/r33_irsc_gate_20260714_214411`; formal result detail is
-in `memory/ExpRecord.md`.
+Completed run: `logs/r34_bhmd_gate_20260715_001706`; formal result detail is in
+`memory/ExpRecord.md`.
 
 ## Immediate Constraints
 
@@ -187,6 +198,9 @@ in `memory/ExpRecord.md`.
 - Do not change R34 K, descriptor, clustering, optimizer exposure, parameter
   scope, window, seed, or thresholds after its result. A downstream
   frozen-selector or coverage failure does not erase an M1 codebook pass.
+- R34 did not pass M1. Do not rerun or rescue it with another label balance,
+  clustering family, replay epoch count, recurrent/FiLM scope, source seed,
+  threshold, normal-trainer objective, or sham comparison.
 
 ## Pointers
 
@@ -217,4 +231,6 @@ in `memory/ExpRecord.md`.
   cross-round failure and baseline matrix after the valid R33 failure.
 - `docs/external-review/gpt5_6_pro/20260714_r33_irsc_gate_result/` — tracked
   result-review question for the single post-R33 causal edge.
+- `docs/external-review/gpt5_6_pro/20260715_r34_bhmd_gate_result/` — tracked
+  R34 result audit and single-route R35 review entry.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
