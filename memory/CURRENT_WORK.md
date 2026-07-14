@@ -22,19 +22,23 @@ and history live in their owning files.
 
 ## Current Objective
 
-Select one structurally different post-R32 causal edge that can convert skill
-conditioning into natural sparse exploration:
+Implement and run the R33 interventional roster-complementarity abandonment
+gate:
 
 ```text
-R29 action-pattern reward failed
--> R31 observational effect scorer failed causal persistence
--> R32 direct FiLM effect policy gradient made only a small forced shift
--> no sufficient causal separation or natural coverage transport
+natural R30 check context
+-> complete-roster intervention
+-> additive-main-effect-residualized stable role swap
+-> exact high-level complementary-roster selection
+-> natural joint and role-free coverage
 ```
 
-The next review must decide whether the project should move from individual
-effect maximization to team-complementarity, or select another genuinely new
-mechanism. Direct IFEPG and parameter/metric variants are retired.
+GPT-5.6 Pro confirmed the R32 valid failure and selected team composition as
+the single next causal level. Controller disposition is `MODIFY`: the original
+role-swap score did not exclude independent individual-skill effects or
+one-sided orientation effects, so R33 removes additive roster-axis main effects
+and subtracts the symmetric orientation component before optimization. Direct
+IFEPG and parameter/metric variants remain retired.
 
 - R27-G2 established forced persistent conditional capacity and a local effect;
   R26 remains the natural observational negative. This does not establish
@@ -123,10 +127,9 @@ mechanism. Direct IFEPG and parameter/metric variants are retired.
 
 ## Next Actions
 
-1. Submit the tracked R32 result question to GPT-5.6 Pro through the private
-   GitHub repository.
-2. Archive and disposition the raw response, then implement only its one
-   structurally different R33 causal edge and smallest Alice--Bob gate.
+1. Implement only the two registered R33 files.
+2. Run the seed-`33031` local Alice--Bob abandonment gate.
+3. Read its single result JSON once and enter the pre-registered outcome branch.
 
 Completed run: `logs/r32_ifepg_paired_gate_20260714_193304`; formal result
 detail is in `memory/ExpRecord.md`. The manual review entry is under
@@ -162,6 +165,9 @@ detail is in `memory/ExpRecord.md`. The manual review entry is under
 - Do not integrate R32 into normal training. Permanently prohibit direct IFEPG
   rescue by learning-rate, update-count, window, replica, effect, threshold,
   seed, reward/scorer/value objective, or parameter-scope changes.
+- R33 may update only `FixedClockAREditPolicy.skill_head`. Keep the low policy,
+  keep head/shared high trunk, critics, OPT/bridge, posteriors, team latents,
+  `q_d/q_D`, task reward, and environment shaping outside its objective.
 
 ## Pointers
 
@@ -187,5 +193,5 @@ detail is in `memory/ExpRecord.md`. The manual review entry is under
 - `docs/external-review/gpt5_6_pro/20260714_r31_cfei_gate_result/` — raw R31
   result review, corrected failure interpretation, and accepted R32 gate.
 - `docs/external-review/gpt5_6_pro/20260714_r32_ifepg_gate_result/` — manual
-  review entry for the valid R32 failure and the single next causal edge.
+  review entry, raw response, and controller disposition for R32/R33.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

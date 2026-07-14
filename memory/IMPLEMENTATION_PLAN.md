@@ -213,6 +213,47 @@ decide whether the individual-effect line is exhausted and complementary team
 composition is now the missing causal level. Do not implement another R32
 rescue or normal-trainer path.
 
+## R33 Interventional Role-Swap Complementarity
+
+Active causal edge:
+
+```text
+natural R30 context
+-> randomized complete-roster effects
+-> non-additive stable role-swap complementarity
+-> exact high-level complementary-roster selection
+-> natural joint and role-free coverage
+```
+
+The raw GPT-5.6 Pro review selected complete-roster composition. Controller
+disposition is `MODIFY` because its original contrast was also large for
+independently executed skills. For each agent and replica, R33 double-centers
+the complete `4 x 4` effect table over both roster axes, then scores the
+antisymmetric role-swap component minus the symmetric orientation component.
+This removes agent/skill additive main effects and rejects one-sided pair
+effects.
+
+One implementation/evidence boundary:
+
+1. Collect 16 complete final rosters, two independent replicas, and `W=10`
+   stochastic steps from each natural R30 context. The branch-effect tensor is
+   `[context,4,4,2,2,4]`; intervention trajectories are shared by both arms.
+2. Compare `real_complementarity` with the fixed pair-permutation `pair_sham`.
+   Their per-context roster-score multisets are identical.
+3. Teacher-force all 16 KEEP/SET sequences through the existing R30
+   `evaluate_sequence` and minimize the exact expectation of the detached
+   standardized score. The roster-probability tensor is `[context,16]`.
+4. Gradient enters only `FixedClockAREditPolicy.skill_head`. Keep the low
+   actor, KEEP head/shared trunk, critics, OPT/bridge, posteriors, environment,
+   reward, GAE, and normal high PPO frozen/outside the objective.
+5. Add only
+   `ha_ctse_process/r33_interventional_roster_complementarity.py` and
+   `scripts/r33_roster_complementarity_gate.py` before the mechanism result.
+   Do not modify the normal controller, trainer, or Alice--Bob environment.
+
+The exact budget, thresholds, null, validity rules, and abandonment branches
+are owned by `memory/ExpRecord.md`.
+
 ## Legacy Compatibility Boundary
 
 - This branch is for constructing the new HA-CTSE/process algorithm, not for

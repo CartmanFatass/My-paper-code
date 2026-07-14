@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260714-r33-irsc-gate | launch-ready | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411` | single `logs/r33_irsc_gate_20260714_214411/result/r33_irsc_gate.json` | GPT-5.6 Pro selected complete-roster composition; controller corrected the estimand to exclude additive individual effects and one-sided orientation effects | Run only the seed-33031 Alice--Bob abandonment gate; no production integration or expansion. |
 | EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
 | EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
 | EXP-20260714-r30-fixed-clock-paired-320k | stopped — superseded before completion | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; `logs/r30_fixed_clock_paired_320k_20260714_115559`; commit `b670eb6` | none | legacy arm completed; treatment retry was stopped when the user selected the faster Alice--Bob mechanism screen | Preserve the incomplete logs; no M1-M4 scientific outcome exists. |
@@ -43,6 +44,104 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260714-r33-irsc-gate
+
+- Causal edge and upstream authorization: complete-roster intervention at a
+  natural R30 check should identify stable non-additive role swaps; an exact
+  update of the R30 joint skill distribution should select those pairs and
+  transport them to broader, nonredundant natural visitation. R32 established
+  that direct individual-effect maximization makes only a small forced shift
+  and does not transport. GPT-5.6 Pro confirmed that valid failure and selected
+  team composition as the one structurally different next level.
+- Estimand correction: for every replica and agent, double-center the complete
+  `4 x 4` roster-effect table over both skill axes. From the residual agent
+  contrasts for `(a,b)` and `(b,a)`, form the antisymmetric role-swap component
+  `h` and symmetric component `k`. The signed pair score is
+  `0.25 * (<h1,h2> - <k1,k2>)`. It is zero for additive independent-skill
+  effects and one-sided orientation effects, and positive only for a stable
+  non-additive sign reversal. This modifies the external raw score while
+  retaining its fixed budget and standardized thresholds.
+- Source and split: both arms start from the same frozen adaptive-R30
+  Alice--Bob checkpoint used by R32,
+  `logs/r30_alice_bob_paired_64k_20260714_163908/runs/adaptive_keep_set/seed30031/standalone_process_core_final.pt`.
+  Seed `33031` collects 24 stochastic 80-step episodes, exactly 192 natural
+  pre-check contexts and 1,920 shared primitive steps. The first 16 episodes
+  provide 128 train contexts; the last eight provide 64 heldout contexts.
+- Shared intervention table: enumerate all 16 final rosters at every context.
+  Each branch restores the environment and recurrent snapshot, forces the
+  roster for `W=k0=10`, and runs the frozen low policy. Replica 0/1 use
+  independent random streams; all 16 rosters within one context/replica use
+  common random numbers. Train exposure is
+  `128 x 16 x 2 x 10 = 40,960` shared steps; heldout exposure is
+  `64 x 16 x 2 x 10 = 20,480` shared steps. Position-only per-agent effects are
+  endpoint displacement plus late-half mean displacement, shape `[2,4]`.
+- Comparator and optimization: `real_complementarity` uses the true six
+  unordered-pair scores. `pair_sham` uses the fixed source-index permutation
+  `[5,4,3,2,1,0]`, corresponding to
+  `01<->23, 02<->13, 03<->12`. Every mapped pair shares no skill with its
+  source. It preserves each context's 16-score multiset and changes only pair
+  attribution; it does not claim equal parameter-gradient norm. Scores use
+  population standard deviation plus `1e-8`; a zero-variance context therefore
+  contributes an all-zero target. Both arms make
+  eight Adam updates (`lr=3e-4`), 16 distinct contexts per update, one epoch,
+  gradient clip `0.5`. All 128 train contexts are used exactly once.
+  Teacher-forced probabilities over all 16 final rosters drive the exact loss
+  `-mean_c sum_r pi(r|c) stopgrad(A_c(r))`. Only
+  `FixedClockAREditPolicy.skill_head` may receive gradient.
+- Total exposure and uncertainty: natural transport is 64 paired stochastic
+  episodes per arm, 5,120 steps per arm. Total including the shared source and
+  intervention table is exactly 73,600 environment steps. Confidence
+  intervals use 10,000 bootstrap draws with seed `40033031`; M1 clusters by
+  heldout source episode and M2 by paired natural reset. Expected local-CUDA
+  wall clock is 1--3 hours.
+- M0 implementation validity: exact counts `192/128/64`; every context has
+  `16 x 2` branches of exactly 10 steps; replica independence and within-replica
+  roster CRN hold; maximum enumerated probability-sum error `<=1e-6`; pre-update
+  natural token teacher-forcing error `<=1e-5`; paired initial parameters are
+  equal; maximum sorted true/sham score-multiset difference `<=1e-8`; each arm
+  makes exactly eight finite optimizer calls with finite loss/gradient values;
+  gradients are confined to `high.skill_head`; all non-head parameter drift
+  `<=1e-8`; stored-prefix stochastic KEEP probabilities drift `<=1e-8`; and
+  task reward has zero objective/gradient reads with no low, critic, posterior,
+  or normal-high-PPO update. Head gradient/drift is recorded but has no
+  unconditional lower bound: a zero mathematical causal gradient is valid M1
+  failure evidence, not an implementation defect.
+- M1 heldout causal alignment: with true standardized roster scores,
+  `mean[V(real)-V(sham)] >=0.20` and its source-episode-cluster 95% CI lower
+  bound `>0`. For the two highest-scoring unordered pairs in each context,
+  with lexicographic order breaking exact ties, the two-orientation
+  probability-mass gain must be `>=0.10` with CI lower bound `>0`.
+- M2 natural transport: 625-cell joint-position union coverage requires
+  `coverage_real/coverage_sham >=1.10` and the mean paired-reset
+  per-episode-coverage difference CI lower bound `>0`. Per episode,
+  `D=|A1 symmetric_difference A2|/25` requires
+  `mean(D_real)/mean(D_sham) >=1.15` and paired-reset difference CI lower
+  bound `>0`. Button, target, contact, coordination, and external reward are
+  diagnostics only.
+- M3 R30 safety on the real arm: normal-check full-sync SET rate `<=0.50`;
+  conditional SET-skill entropy divided by `log(4)` `>=0.80`; minimum SET-skill
+  share `>=0.05`; and
+  `min(P(T>4*k0), P(T<=4*k0)) >=0.05`.
+- Outcome branches: any M0 miss -> `INVALID_R33_IMPLEMENTATION` and repair only
+  the concrete implementation defect. Valid M1 miss ->
+  `FAIL_M1_RETIRE_R33_IRSC` and permanently retire direct
+  intervention-scored roster-complementarity selection. M1 pass/M2 miss ->
+  `FAIL_M2_COUNTERFACTUAL_ONLY` and retire counterfactual-only roster fitting.
+  M1/M2 pass/M3 miss -> `FAIL_M3_R30_COLLAPSE` and retire the route as
+  synchronous/skill-supply/lifetime collapse. All gates pass ->
+  `PASS_R33_IRSC`, authorizing only preparation of a sparse-source,
+  mechanism-matched `real_complementarity` versus `pair_sham` comparison.
+  There is no UNDERPOWERED, automatic rerun, seed expansion, or threshold
+  revision branch.
+- Prohibited: low actor/critic/action log standard deviation, KEEP head, high
+  shared trunk/value, OPT/bridge, posteriors, R29/R31/R32 objectives, transition
+  classifier, sampled team latent, `q_d/q_D`, team reward/classifier, task
+  reward, shaping, normal high PPO, temperature/update/budget/score clipping
+  changes, and claims about task improvement, cooperation, HMASD parity, or S7
+  transfer.
+- Status source: the single decision artifact will be
+  `logs/r33_irsc_gate_20260714_214411/result/r33_irsc_gate.json`.
 
 ### EXP-20260714-r32-ifepg-paired-gate
 
