@@ -26,6 +26,7 @@ except ModuleNotFoundError:
 from ha_ctse_process.env_factory import EnvSpec, make_env, normalize_scenario
 from ha_ctse_process.collectors import SubprocEnvCollector, SyncEnvCollector
 from ha_ctse_process.plotting import (
+    AEM_METRIC_FIELDS,
     EVAL_FIELDS,
     UPDATE_FIELDS,
     append_csv,
@@ -65,6 +66,12 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_high_buffer_version",
     "r30_force_refresh_every_check",
     "constant_skill_no_high",
+    "aem_joint_novelty_enabled",
+    "aem_joint_position_grid_size",
+    "aem_joint_position_table_size",
+    "aem_episode_horizon",
+    "aem_position_view_name",
+    "aem_bonus_formula",
     "alice_bob_semantic_reward_enabled",
     "r30_high_gae_lambda",
     "r31_effect_mode",
@@ -395,6 +402,79 @@ def pick_attrs(obj: Any, names: tuple[str, ...]) -> dict[str, Any]:
         if hasattr(obj, name):
             result[name] = jsonable(getattr(obj, name))
     return result
+
+
+def empty_aem_metrics(active: bool = False) -> dict[str, float]:
+    metrics = {field: 0.0 for field in AEM_METRIC_FIELDS}
+    metrics["aem_active"] = float(bool(active))
+    return metrics
+
+
+class EpisodicJointPositionNovelty:
+    """Per-vector-env direct-table counts for the registered R36 bonus."""
+
+    def __init__(self, num_envs: int, grid_size: int, episode_horizon: int):
+        self.num_envs = int(num_envs)
+        self.grid_size = int(grid_size)
+        self.episode_horizon = int(episode_horizon)
+        self.table_size = int(self.grid_size**4)
+        self.counts = np.zeros((self.num_envs, self.table_size), dtype=np.int32)
+        self._metrics = empty_aem_metrics(active=True)
+        self._bonus_min = float("inf")
+
+    def _cell_index(self, normalized_positions: np.ndarray) -> int:
+        positions = np.asarray(normalized_positions, dtype=np.float32).reshape(-1)
+        if positions.shape != (4,) or not np.all(np.isfinite(positions)):
+            raise ValueError("R36 AEM requires exactly four finite normalized position values")
+        bins = np.floor(np.clip(positions, 0.0, 1.0) * self.grid_size).astype(
+            np.int64
+        )
+        bins = np.minimum(bins, self.grid_size - 1)
+        cell = int(bins[0])
+        for value in bins[1:]:
+            cell = cell * self.grid_size + int(value)
+        if not 0 <= cell < self.table_size:
+            raise RuntimeError("R36 AEM direct joint-position index is out of range")
+        return cell
+
+    def observe(self, env_id: int, normalized_positions: np.ndarray) -> float:
+        env_id = int(env_id)
+        cell = self._cell_index(normalized_positions)
+        count_before = int(self.counts[env_id, cell])
+        expected = 1.0 / (
+            float(self.episode_horizon) * float(np.sqrt(count_before + 1.0))
+        )
+        bonus = float(expected)
+        self.counts[env_id, cell] = count_before + 1
+
+        self._metrics["aem_bonus_applied_steps"] += 1.0
+        self._metrics["aem_bonus_sum"] += bonus
+        self._metrics["aem_bonus_max"] = max(
+            self._metrics["aem_bonus_max"], bonus
+        )
+        self._bonus_min = min(self._bonus_min, bonus)
+        self._metrics["aem_preincrement_count_max"] = max(
+            self._metrics["aem_preincrement_count_max"], float(count_before)
+        )
+        self._metrics["aem_formula_max_abs_error"] = max(
+            self._metrics["aem_formula_max_abs_error"], abs(bonus - expected)
+        )
+        return bonus
+
+    def reset_env(self, env_id: int) -> None:
+        self.counts[int(env_id)].fill(0)
+        self._metrics["aem_count_resets"] += 1.0
+
+    def pop_update_metrics(self) -> dict[str, float]:
+        metrics = dict(self._metrics)
+        steps = metrics["aem_bonus_applied_steps"]
+        metrics["aem_bonus_mean"] = (
+            metrics["aem_bonus_sum"] / steps if steps > 0.0 else 0.0
+        )
+        metrics["aem_bonus_min"] = self._bonus_min if steps > 0.0 else 0.0
+        self._metrics = empty_aem_metrics(active=True)
+        self._bonus_min = float("inf")
+        return metrics
 
 
 def export_run_manifest(
@@ -2533,6 +2613,85 @@ def enforce_r31_contract(
     ).upper()
 
 
+def enforce_aem_contract(
+    config,
+    args: argparse.Namespace,
+    metadata: dict[str, Any] | None,
+) -> None:
+    """Fail closed around the single registered R36-AEM treatment."""
+
+    if not bool(getattr(config, "aem_joint_novelty_enabled", False)):
+        return
+    if normalize_scenario(str(getattr(args, "scenario", ""))) != "alice_bob_asymmetric_cycles":
+        raise ValueError("R36 AEM is restricted to the sparse Alice--Bob environment")
+    if not bool(getattr(config, "constant_skill_no_high", False)):
+        raise ValueError("R36 AEM requires the constant-code no-high MAPPO path")
+    if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
+        raise ValueError("R36 AEM requires the architecture-matched R30 module layout")
+    if int(getattr(config, "n_agents", 0)) != 2:
+        raise ValueError("R36 AEM requires exactly two agents")
+
+    exact_config = {
+        "aem_joint_position_grid_size": 5,
+        "aem_joint_position_table_size": 625,
+        "aem_episode_horizon": 80,
+        "episode_length": 80,
+        "low_ppo_epochs": 5,
+        "low_sequence_length": 10,
+        "low_sequence_batch_size": 64,
+    }
+    for name, expected in exact_config.items():
+        actual = int(getattr(config, name, -1))
+        if actual != expected:
+            raise ValueError(f"R36 AEM requires {name}={expected}, got {actual}")
+    if str(getattr(config, "aem_position_view_name", "")) != (
+        "alice_bob_normalized_joint_positions_v1"
+    ):
+        raise ValueError("R36 AEM admits only normalized joint agent positions v1")
+    if str(getattr(config, "aem_bonus_formula", "")) != (
+        "inverse_horizon_sqrt_preincrement_v1"
+    ):
+        raise ValueError("R36 AEM bonus formula does not match the registered contract")
+    if bool(getattr(config, "alice_bob_semantic_reward_enabled", False)):
+        raise ValueError("R36 AEM forbids the Alice--Bob semantic reward")
+    if float(getattr(config, "transition_skill_reward_coef", 0.0)) != 0.0:
+        raise ValueError("R36 AEM forbids transition-skill reward")
+    if str(getattr(config, "r31_effect_mode", "off")).lower() != "off":
+        raise ValueError("R36 AEM forbids R31 effect reward or diagnostics")
+
+    if str(getattr(args, "mode", "train")) != "train":
+        return
+    if not str(getattr(args, "resume_from", "")) or metadata is None:
+        raise ValueError("R36 AEM requires the shared neutral zero-step checkpoint")
+    if int(metadata.get("total_steps", -1)) != 0 or int(
+        metadata.get("update_idx", -1)
+    ) != 0:
+        raise ValueError("R36 AEM source checkpoint must have zero environment steps")
+    exact_args = {
+        "seed": 37031,
+        "n_agents": 2,
+        "num_envs": 16,
+        "rollout_length": 80,
+        "skill_interval": 10,
+        "total_timesteps": 320_000,
+        "eval_interval": 320_000,
+        "eval_episodes": 64,
+        "eval_max_steps": 80,
+    }
+    for name, expected in exact_args.items():
+        actual = int(getattr(args, name, -1))
+        if actual != expected:
+            raise ValueError(f"R36 AEM requires {name}={expected}, got {actual}")
+    if str(getattr(args, "collector_backend", "")) != "subproc":
+        raise ValueError("R36 AEM requires the subproc collector")
+    if str(getattr(args, "collector_start_method", "")) != "spawn":
+        raise ValueError("R36 AEM requires spawn workers")
+    if str(getattr(args, "device", "")).lower() != "cuda":
+        raise ValueError("R36 AEM requires explicit CUDA")
+    if str(getattr(args, "eval_action_mode", "")) != "stochastic":
+        raise ValueError("R36 AEM requires stochastic final evaluation")
+
+
 def enforce_r30_pair_gate(
     config,
     args: argparse.Namespace,
@@ -3847,6 +4006,12 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
                 value,
                 total_steps,
             )
+        elif key.startswith("aem_"):
+            writer.add_scalar(
+                f"AEM/{key.removeprefix('aem_')}",
+                value,
+                total_steps,
+            )
     writer.flush()
 
 
@@ -3912,10 +4077,22 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             else None
         )
         agent = create_agent(config, args, env, num_envs=num_envs, state_dim=state_dim)
-        if bool(getattr(agent, "r31_enabled", False)) and any(
+        aem_enabled = bool(getattr(config, "aem_joint_novelty_enabled", False))
+        if (bool(getattr(agent, "r31_enabled", False)) or aem_enabled) and any(
             view is None for view in effect_views
         ):
-            raise RuntimeError("R31 environment did not expose intrinsic_effect_view")
+            raise RuntimeError(
+                "active position-only objective requires intrinsic_effect_view"
+            )
+        aem_novelty = (
+            EpisodicJointPositionNovelty(
+                num_envs=num_envs,
+                grid_size=int(getattr(config, "aem_joint_position_grid_size", 5)),
+                episode_horizon=int(getattr(config, "aem_episode_horizon", 80)),
+            )
+            if aem_enabled
+            else None
+        )
 
         total_steps = 0
         update_idx = 0
@@ -4140,10 +4317,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     info = result.info
                     done = bool(terminated or truncated)
                     next_effect_view = info.get("intrinsic_effect_view")
-                    if bool(getattr(agent, "r31_enabled", False)):
+                    if bool(getattr(agent, "r31_enabled", False)) or aem_enabled:
                         if next_effect_view is None:
                             raise RuntimeError(
-                                "R31 step did not expose intrinsic_effect_view"
+                                "active position-only objective step did not expose "
+                                "intrinsic_effect_view"
                             )
                         next_effect_view = np.asarray(
                             next_effect_view,
@@ -4159,6 +4337,10 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     )
                     if individual_rewards.shape[0] != int(env.n_uavs):
                         individual_rewards = np.full(int(env.n_uavs), float(reward), dtype=np.float32)
+                    low_training_rewards = individual_rewards.copy()
+                    if aem_novelty is not None:
+                        bonus = aem_novelty.observe(env_id, next_effect_view)
+                        low_training_rewards += np.float32(bonus)
 
                     agent.segments.append(
                         env_id,
@@ -4193,7 +4375,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     rollout.values.append(values.copy())
                     rollout.low_actor_hxs.append(np.asarray(low_context["actor_hxs"], dtype=np.float32))
                     rollout.low_critic_hxs.append(np.asarray(low_context["critic_hxs"], dtype=np.float32))
-                    rollout.rewards.append(individual_rewards.copy())
+                    rollout.rewards.append(low_training_rewards)
                     rollout.dones.append(done)
                     episode_rewards.append(float(np.mean(individual_rewards)))
 
@@ -4213,6 +4395,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     if done:
                         agent.segments.flush(env_id, reason="episode")
                         observations[env_id], info = collector.reset_one(env_id)
+                        if aem_novelty is not None:
+                            aem_novelty.reset_env(env_id)
                         states[env_id] = info.get("state")
                         # Re-seed pre-step info from the reset state for the next segment.
                         prev_state_info[env_id] = info.get("state_info", {}) or {}
@@ -4239,6 +4423,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 rollout,
                 total_steps=total_steps,
                 update_idx=update_idx + 1,
+            )
+            process_metrics.update(
+                aem_novelty.pop_update_metrics()
+                if aem_novelty is not None
+                else empty_aem_metrics(active=False)
             )
             process_metrics.update(r31_score_metrics)
             low_metrics = agent.update_low(rollout)
@@ -4384,6 +4573,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 "standalone_update "
                 f"update={update_idx} total_steps={total_steps} "
                 f"env_reward_mean={env_reward_mean:.6f} "
+                f"aem_active={process_metrics.get('aem_active', 0.0):.0f} "
+                f"aem_bonus_applied_steps={process_metrics.get('aem_bonus_applied_steps', 0.0):.0f} "
+                f"aem_bonus_sum={process_metrics.get('aem_bonus_sum', 0.0):.6f} "
+                f"aem_bonus_max={process_metrics.get('aem_bonus_max', 0.0):.6f} "
+                f"aem_count_resets={process_metrics.get('aem_count_resets', 0.0):.0f} "
                 f"process_segments={process_metrics['process_segments']:.0f} "
                 f"process_loss={process_metrics['process_loss']:.6f} "
                 f"process_mi={process_metrics.get('process_mi_estimate_mean', 0.0):.6f} "
@@ -4756,6 +4950,7 @@ def main() -> None:
     enforce_r30_pair_gate(config, args, metadata)
     enforce_r30_contract(config, args)
     enforce_r31_contract(config, args, metadata)
+    enforce_aem_contract(config, args, metadata)
 
     try:
         if args.dry_run_env_steps > 0:

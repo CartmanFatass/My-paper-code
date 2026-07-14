@@ -313,6 +313,20 @@ R31_EFFECT_METRIC_FIELDS = (
 )
 
 
+AEM_METRIC_FIELDS = (
+    "aem_active",
+    "aem_bonus_applied_steps",
+    "aem_bonus_sum",
+    "aem_bonus_mean",
+    "aem_bonus_min",
+    "aem_bonus_max",
+    "aem_count_resets",
+    "aem_preincrement_count_max",
+    "aem_formula_max_abs_error",
+    "aem_forbidden_field_reads",
+)
+
+
 UPDATE_FIELDS = (
     "update",
     "total_steps",
@@ -321,6 +335,7 @@ UPDATE_FIELDS = (
     *R29_ACTION_INFO_METRIC_FIELDS,
     *R30_METRIC_FIELDS,
     *R31_EFFECT_METRIC_FIELDS,
+    *AEM_METRIC_FIELDS,
     "process_segments",
     "process_loss",
     "process_outcome_loss",
