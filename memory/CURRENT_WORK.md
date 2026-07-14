@@ -41,8 +41,10 @@ R29--R34 skill identification, effect creation, composition, and relabeling fail
 -> both arms fail the registered positive-access floor
 -> R36-AEM episodic joint-position novelty versus constant-code MAPPO
 -> joint coverage rises 3.855x but collection access remains exactly zero
--> audit whether Alice--Bob's hidden active-task identity invalidates it as an
-   access-first algorithm substrate
+-> GPT-5.6 Pro confirms the valid failure and hidden active-task-identity
+   bottleneck
+-> R37 capacity-matched actor-visible-identity gate tests whether the repaired
+   Alice--Bob substrate has any positive sparse-access floor
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -185,15 +187,21 @@ direct intervention-scored roster-complementarity selection are retired.
   but produced zero collections and zero cycle success in all 64 treatment
   evaluations. Retire the exact joint-count bonus: undirected coarse state
   breadth is not a sufficient carrier for first coordinated access.
+- GPT-5.6 Pro accepted the R36 verdict and selected one observation-substrate
+  repair. Controller disposition accepts R37 with a capacity-matched control:
+  both arms use the same 16-value actor input, with true active plate/target
+  one-hots in treatment and zeroed identity slots in control. This is a
+  benchmark-validity gate, not an algorithm contribution.
 
 ## Next Actions
 
-1. Submit the tracked R36 result question for one audit of the Alice--Bob
-   observation/access contract and one decisive next boundary.
-2. Do not implement R37 until that review is archived and dispositioned.
+1. Implement only the registered R37 actor-observation switch, matched
+   constant-code configurations, paired runner, and result analyzer.
+2. Run the single registered local parallel CUDA gate and interpret only its
+   access-instrument branches.
 
-Active decision boundary: the valid R35--R36 sparse-access failure review at
-`memory/LTM/R35_R36_SPARSE_ACCESS_FAILURE_REVIEW_20260715.md`.
+Active decision boundary: `EXP-20260715-r37-actor-visible-identity-access` in
+`memory/ExpRecord.md`, authorized by the archived R36 review disposition.
 
 ## Immediate Constraints
 
@@ -247,6 +255,11 @@ Active decision boundary: the valid R35--R36 sparse-access failure review at
 - R36's exact direct-cell episodic novelty is retired. Do not rescue it with a
   different grid, count window, formula, coefficient, seed, budget, RND/ICM
   relabeling, or a lower access gate. Coverage is not collection access.
+- R37 may expose only current active plate/target identity to the treatment
+  actor. Do not add clocks, contacts, collection/progress state, reward fields,
+  shaping, oracle actions, skills, hierarchy, intrinsic reward, or a second
+  algorithm route. A valid R37 failure retires this sparse Alice--Bob access
+  gate rather than authorizing retuning or expansion.
 
 ## Pointers
 

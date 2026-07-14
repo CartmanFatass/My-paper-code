@@ -4,44 +4,46 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R36 Access-First Episodic Joint Novelty
+## R37 Actor-Visible Task-Identity Access Gate
 
 Active causal edge:
 
 ```text
-task-generic joint-position novelty
--> broader reachable-state visitation
--> first sparse collection access
+actor-visible current task identity
+-> removal of the hidden-information bottleneck
+-> positive sparse collection access under constant-code recurrent MAPPO
 ```
 
-Accepted from GPT-5.6 Pro after the R35 valid no-access result, with controller
-corrections recorded in
-`docs/external-review/gpt5_6_pro/20260715_r35_sparse_mappo_reset_result/DISPOSITION_CORRECTION_1.md`.
+Authorized by the valid R35--R36 access failures and accepted from GPT-5.6 Pro
+with the capacity-matched control clarification in
+`docs/external-review/gpt5_6_pro/20260715_r36_aem_access_result/DISPOSITION.md`.
+R36 itself is retired: it expanded coarse joint-position coverage `3.8552x`
+without one collection or successful cycle.
 
 One coherent implementation/evidence boundary:
 
-1. Reuse the R35 constant-code recurrent MAPPO path. Add no skill, high policy,
-   latent, classifier, predictor, task feature, or new network.
-2. Map both agents' normalized positions directly to one of 625 arithmetic
-   joint cells. Keep one 625-entry count table per vector environment and reset
-   it at that environment's episode boundary; do not use hashing.
-3. Before incrementing the current cell, add the detached shared bonus
-   `1 / (80 * sqrt(count + 1))` to the sparse external reward for both agents.
-   The count and bonus are not policy/value inputs and enter low GAE once.
-4. Compare trained `aem_joint_novelty` with trained `constant_code_mappo` from
-   one shared neutral zero-step initialization. Match the R35 CUDA topology,
-   steps, low updates, PPO exposure, recurrent batching, and stochastic paired
-   evaluation exactly.
-5. The registered access and coverage-carrier gates in `memory/ExpRecord.md`
-   are the implementation check. Do not add a smoke, coefficient sweep,
-   threshold rescue, or automatic budget/seed expansion.
+1. Reuse the R35 constant-code recurrent MAPPO actor and centralized critic.
+   Add no skill, high policy, latent, classifier, intrinsic reward, shaping, or
+   new optimization path.
+2. Give both arms one identical 16-value actor layout: the original 12 values
+   followed by two active-plate and two active-target slots. Treatment fills
+   the slots with current true one-hots; control fills them with zeros. The
+   existing 19-value centralized critic state is unchanged.
+3. Keep the external reward collection-only. Do not expose clocks, contacts,
+   collection/progress state, reward-derived fields, future state, distance, or
+   oracle actions to either actor.
+4. Compare the two trained arms from one common neutral zero-step
+   initialization using seed `38031`, concurrent local CUDA, 16 environments
+   per arm, rollout 80, 320,000 steps, 250 low updates, five PPO epochs,
+   recurrent sequence length 10/batch 64, and 64 paired stochastic episodes.
+5. The registered M0--M3 access gate in `memory/ExpRecord.md` is also the
+   implementation check. Do not insert a smoke, identity ablation menu,
+   threshold change, retuning, seed expansion, or longer budget.
 
-Gate result: valid `FAIL_M1_RETIRE_R36_AEM`. The treatment increased mean joint
-coverage from `0.016575` to `0.063900` (`3.8552x`, paired CI `[0.0454,
-0.049175]`) but both arms retained zero collections and zero cycle success.
-Retire the exact episodic joint-count bonus. No R37 implementation is active;
-the next boundary is an external audit of the Alice--Bob observation/access
-contract.
+This is an environment/access-instrument repair, not an algorithm contribution.
+PASS establishes only a positive access floor under the repaired observation
+contract. FAIL retires sparse Alice--Bob as the current algorithm-comparison
+gate.
 
 ## R30 Fixed-Clock Autoregressive Edit Gate
 

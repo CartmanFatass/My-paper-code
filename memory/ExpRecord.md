@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; audit the Alice--Bob observation/access instrument before another algorithm. |
+| EXP-20260715-r37-actor-visible-identity-access | planned -- review accepted; implementation not started | baseline-L0 observation-substrate validity gate | planned local parallel CUDA; seed `38031` | paired 320K/arm result | R35/R36 established zero access while the actor hides randomly initialized active identities | Compare true versus zeroed identity slots at matched capacity; PASS supports access viability only, valid FAIL retires this sparse Alice--Bob gate. |
+| EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; GPT-5.6 Pro accepted the failure and selected the R37 observation-substrate gate. |
 | EXP-20260715-r35-sparse-mappo-reset | completed -- valid `NO_ACCESS_R35_UNRESOLVED` | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4`; runner commit `030d0cd`, implementation `b372000` | none | M0 PASS; both arms completed 320K/250 low updates, but 0/64 paired indices had a collection and both cycle means were 0 | Do not interpret noninferiority or replace a baseline; do not rerun/expand R35; seek one non-skill access-first edge. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
@@ -47,6 +48,78 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260715-r37-actor-visible-identity-access
+
+- Causal edge and authorization: R35 found zero sparse access under both
+  constant-code recurrent MAPPO and reward-pure R30. R36 then expanded natural
+  coarse joint-position coverage `3.8552x` without one collection, proving that
+  undirected state breadth is not the missing access carrier. GPT-5.6 Pro
+  audited both the valid R36 failure and the environment information contract,
+  then selected one upstream instrument gate:
+  `actor-visible current task identity -> removal of hidden-information
+  bottleneck -> positive sparse collection access`. The accepted controller
+  disposition is under
+  `docs/external-review/gpt5_6_pro/20260715_r36_aem_access_result/`.
+- Baseline level and arms: both arms are Level-0 constant-code recurrent MAPPO
+  with identical actor/critic shapes, optimizer exposure, and no high rows or
+  updates. `identity_visible` receives the current true task identities;
+  `identity_masked` is the original actor-information control.
+- Observation/information boundary: both actors receive an identical 16-value
+  vector: the original 12 Alice--Bob observation values followed by two
+  active-plate and two active-target slots. Treatment fills those slots with
+  the current true one-hots; control fills all four slots with zeros. This
+  matches input width and parameter count while changing only current identity
+  information. The existing 19-value centralized critic state is bitwise the
+  same in both arms. Neither actor receives clocks, contacts, collection or
+  progress state, rewards, future state, distance, or oracle actions.
+- Reward/gradient boundary: environment reward remains the exact
+  collection-only sparse reward. There is no intrinsic bonus, potential,
+  shaping, skill, high controller, KEEP/SET, posterior, classifier, or latent
+  path. Only the existing constant-code low actor and centralized critic
+  update through their normal recurrent PPO/value losses.
+- Initialization and exposure: seed `38031`; one common neutral zero-step
+  16-input checkpoint; local CUDA; both arms run concurrently with 16
+  subprocess environments, rollout 80, 320,000 environment steps, 250 low
+  updates, five PPO epochs, recurrent sequence length 10/batch 64, and the
+  existing Adam rates and clipping. Final evaluation uses 64 paired stochastic
+  80-step episodes with identical reset seeds. Use 10,000 paired episode
+  bootstraps with seed `40038031`. Expected wall clock is 1--2 hours.
+- M0 validity: exact shared initialization, parameter shapes, environment
+  transitions, optimizer/update exposure, evaluation seeds, and recurrent
+  state contract; treatment identity slots equal the environment's active
+  plate/target at every actor step; control identity slots are always zero;
+  critic inputs are unchanged and equal across arms; external rewards are
+  exactly sparse and equal before policy-dependent transitions; no shaping,
+  intrinsic reward, skill/high update, or forbidden actor field is active. Any
+  concrete miss is `INVALID_R37_IMPLEMENTATION` and authorizes only repair of
+  that defect under this unchanged contract.
+- M1 access floor: treatment has at least 10/64 evaluation episodes with a
+  collection, cycle-success mean `>=0.05`, and a treatment-minus-control paired
+  collection-indicator bootstrap 95% CI lower bound above zero.
+- M2 sparse task evidence: treatment mean collection-only evaluation reward is
+  strictly positive and at least one cycle is completed. These remain access
+  checks, not algorithm-efficacy metrics.
+- M3 stability: treatment zero-cycle fraction is `<0.90`.
+- Branches: M0 plus M1--M3 gives `PASS_R37_ACCESS`, establishing only that the
+  repaired Alice--Bob observation contract has a positive access floor and
+  authorizing design/registration of one ordinary algorithm comparison there.
+  Any valid M1--M3 miss gives `FAIL_R37_ACCESS`; retire sparse Alice--Bob as the
+  current algorithm-comparison gate and specify a replacement benchmark's
+  observation, horizon, and ordinary-policy access floor before more algorithm
+  work. `INVALID_R37_IMPLEMENTATION` repairs only the concrete implementation
+  defect. An operational crash retries only its failed path. There is no
+  `MIXED`, `UNDERPOWERED`, threshold, seed, step, or budget-expansion branch.
+- Prohibited while open: task reward or distance/progress/contact shaping;
+  clocks, contacts, collection/progress state, reward fields, future state, or
+  oracle actions in the actor; task-identity information beyond the current
+  active plate/target one-hots; skills, options, latents, hierarchy, intrinsic
+  reward, R29--R36 mechanisms, identity/noise menus, coefficient or optimizer
+  sweeps, extra seeds/steps, lower thresholds, or claims about algorithm
+  improvement, cooperation, hierarchy, HMASD/S7 parity, or paper efficacy.
+- Status sources after launch: `<run-root>/runner_status.txt` and the single
+  scientific decision file
+  `<run-root>/result/r37_actor_visible_identity_access.json`.
 
 ### EXP-20260715-r36-aem-access
 
@@ -109,6 +182,10 @@ explicitly approves the exception.
   control each had zero collection episodes, zero cycle success, and zero-cycle
   fraction one. The novelty mechanism changed visitation but failed its access
   carrier; no tuning, rerun, or expansion is authorized.
+- External audit: GPT-5.6 Pro found no estimand-changing defect, accepted the
+  valid failure, and selected the separately registered R37 actor-visible
+  task-identity access gate. Raw response and disposition are in
+  `docs/external-review/gpt5_6_pro/20260715_r36_aem_access_result/`.
 
 ### EXP-20260715-r35-sparse-mappo-reset
 
