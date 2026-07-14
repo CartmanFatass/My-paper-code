@@ -18,6 +18,17 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions import Categorical
 
+from ha_ctse_process.r30_fixed_clock import (
+    HIGH_BUFFER_VERSION,
+    INVALID_SKILL,
+    KEEP_TOKEN,
+    SET_TOKEN,
+    FixedClockAREditPolicy,
+    HighCheckBuffer,
+    HighCheckRow,
+    HighCheckValue,
+)
+
 from ha_ctse_process.cooperation_credit import (
     aggregate_cooperation_credit,
     empty_cooperation_credit_metrics,
@@ -251,6 +262,24 @@ class CompactTeamBridge(nn.Module):
         self.code_head = nn.Linear(self.team_code_dim, self.num_team_codes)
         self.code_embedding = nn.Embedding(self.num_team_codes, self.team_code_dim)
 
+    def expected_context(self, compact: torch.Tensor):
+        """R30 deterministic bridge context; never a sampled policy action."""
+
+        batch_size = compact.shape[0]
+        device = compact.device
+        if self.bridge_type == "none":
+            logits = torch.zeros(batch_size, self.num_team_codes, device=device)
+            probs = torch.full_like(logits, 1.0 / float(self.num_team_codes))
+            vector = torch.zeros(batch_size, self.team_code_dim, device=device)
+            code = torch.zeros(batch_size, dtype=torch.long, device=device)
+            return code, vector, probs, logits
+        base_vector = self.vector_bridge(compact)
+        logits = torch.clamp(self.code_head(base_vector), -50.0, 50.0)
+        probs = F.softmax(logits, dim=-1)
+        vector = probs @ self.code_embedding.weight
+        code = torch.argmax(probs, dim=-1)
+        return code, vector, probs, logits
+
     def forward(
         self,
         compact: torch.Tensor,
@@ -268,6 +297,12 @@ class CompactTeamBridge(nn.Module):
 
         base_vector = self.vector_bridge(compact)
         logits = torch.clamp(self.code_head(base_vector), -50.0, 50.0)
+        if self.bridge_type == "deterministic_expected":
+            probs = F.softmax(logits, dim=-1)
+            team_vector = probs @ self.code_embedding.weight
+            team_code = torch.argmax(probs, dim=-1)
+            zeros = torch.zeros(batch_size, device=device)
+            return team_code, team_vector, zeros, zeros, logits
         if self.bridge_type == "stochastic":
             dist = Categorical(logits=logits)
             if forced_team_code is not None:
@@ -303,6 +338,33 @@ class LowLevelPolicy(nn.Module):
         super().__init__()
         self.n_skills = int(n_skills)
         self.action_dim = int(action_dim)
+        if self.r30_enabled:
+            violations: list[str] = []
+            if self.r28_g1_enabled:
+                violations.append("r28_g1")
+            if self.r29_action_info_enabled:
+                violations.append("r29_action_information")
+            if self.enable_team_intent:
+                violations.append("sampled_team_intent")
+            if self.low_actor_condition_on_team_code:
+                violations.append("low_actor_team_code")
+            if self.process_reward_injection != "none":
+                violations.append("process_reward_injection")
+            if self.outcome_residual_injection != "none":
+                violations.append("outcome_residual_injection")
+            if self.topology_role_injection != "none":
+                violations.append("topology_role_injection")
+            if self.topology_potential_injection != "none":
+                violations.append("topology_potential_injection")
+            if self.edit_penalty_alpha != 0.0 or self.switch_penalty_beta != 0.0:
+                violations.append("edit_or_switch_penalty")
+            if self.duration_entropy_floor_enabled:
+                violations.append("duration_entropy_floor")
+            if bool(getattr(config, "use_compact_return_head", False)):
+                violations.append("compact_return_head")
+            if violations:
+                raise ValueError("invalid R30 configuration: " + ",".join(violations))
+
         self.action_space_type = str(action_space_type)
         input_dim = int(obs_dim) + int(n_skills)
         self.actor = mlp(input_dim, hidden_dim, action_dim)
@@ -1578,6 +1640,22 @@ class StandaloneProcessAgent:
             getattr(config, "r29_action_info_clip", 0.05)
         )
         self.skill_interval = int(getattr(config, "skill_interval", 10))
+        self.high_controller = str(
+            getattr(config, "high_controller", "legacy_duration")
+        ).lower()
+        if self.high_controller not in {
+            "legacy_duration",
+            "r30_fixed_clock_ar_edit",
+        }:
+            raise ValueError(f"unsupported high_controller={self.high_controller!r}")
+        self.r30_enabled = self.high_controller == "r30_fixed_clock_ar_edit"
+        self.r30_keep_init = float(getattr(config, "r30_keep_init", 0.6))
+        self.r30_high_buffer_version = int(
+            getattr(config, "r30_high_buffer_version", HIGH_BUFFER_VERSION)
+        )
+        self.high_gae_lambda = float(
+            getattr(config, "r30_high_gae_lambda", getattr(config, "gae_lambda", 0.95))
+        )
         self.r29_action_info_enabled = self.r29_action_info_mode != "off"
         self.r29_action_info_reward: OnPolicyActionInformationReward | None = None
         self.use_prototype_response_skills = bool(getattr(config, "use_prototype_response_skills", False))
@@ -1589,8 +1667,10 @@ class StandaloneProcessAgent:
             self.n_skills = int(self.opt_num_prototypes + self.prototype_skill_extra_codes)
         elif int(getattr(config, "legacy_n_skills_override", 0) or 0) > 0:
             self.n_skills = int(getattr(config, "legacy_n_skills_override"))
+        if self.r30_enabled and self.n_skills < 2:
+            raise ValueError("R30 requires at least two skills")
         self.use_autoregressive_selection = bool(
-            (self.use_prototype_response_skills or self.enable_team_intent)
+            (self.r30_enabled or self.use_prototype_response_skills or self.enable_team_intent)
             and getattr(config, "use_autoregressive_selection", True)
         )
         self.parallel_selection = bool(getattr(config, "parallel_selection", False)) and not self.enable_team_intent
@@ -1600,6 +1680,8 @@ class StandaloneProcessAgent:
         if self.use_autoregressive_selection and requested_ar_prefix_mode == "none":
             requested_ar_prefix_mode = "same_check"
         self.ar_prefix_mode = requested_ar_prefix_mode if self.use_autoregressive_selection else "none"
+        if self.r30_enabled:
+            self.ar_prefix_mode = "roster"
         if self.enable_team_intent and self.use_autoregressive_selection and self.ar_prefix_mode == "same_check":
             self.ar_prefix_mode = "roster"
         self.team_intent_k = int(max(getattr(config, "team_intent_k", 48), 1))
@@ -1922,18 +2004,44 @@ class StandaloneProcessAgent:
                 if self.ar_prefix_mode == "roster"
                 else self.n_skills
             )
-        self.high = SkillDurationPolicy(
-            self.obs_dim,
-            self.n_skills,
-            len(self.duration_candidates),
-            hidden,
-            compact_dim,
-            team_code_dim,
-            omega_dim=high_omega_dim,
-            agent_relevance_dim=high_agent_relevance_dim,
-            ar_prefix_dim=high_ar_prefix_dim,
-            z_action_gain=float(getattr(config, "z_assignment_residual_gain", 0.0) or 0.0),
-        ).to(self.device)
+        if self.r30_enabled:
+            self.high = FixedClockAREditPolicy(
+                obs_dim=self.obs_dim,
+                n_agents=self.n_agents,
+                n_skills=self.n_skills,
+                hidden_dim=hidden,
+                compact_dim=compact_dim,
+                team_code_dim=team_code_dim,
+                omega_dim=high_omega_dim,
+                agent_relevance_dim=high_agent_relevance_dim,
+                keep_init=self.r30_keep_init,
+                age_reference_steps=self.intrinsic_phase_reference_steps,
+            ).to(self.device)
+            self.high_value = HighCheckValue(
+                state_dim=self.state_dim,
+                obs_dim=self.obs_dim,
+                n_agents=self.n_agents,
+                n_skills=self.n_skills,
+                compact_dim=compact_dim,
+                team_code_dim=team_code_dim,
+                hidden_dim=hidden,
+                age_reference_steps=self.intrinsic_phase_reference_steps,
+                k0=self.skill_interval,
+            ).to(self.device)
+        else:
+            self.high = SkillDurationPolicy(
+                self.obs_dim,
+                self.n_skills,
+                len(self.duration_candidates),
+                hidden,
+                compact_dim,
+                team_code_dim,
+                omega_dim=high_omega_dim,
+                agent_relevance_dim=high_agent_relevance_dim,
+                ar_prefix_dim=high_ar_prefix_dim,
+                z_action_gain=float(getattr(config, "z_assignment_residual_gain", 0.0) or 0.0),
+            ).to(self.device)
+            self.high_value = None
         self.use_compact_return_head = bool(getattr(config, "use_compact_return_head", False))
         self.compact_return_coef = float(getattr(config, "compact_return_coef", 0.1))
         self.compact_return_head = (
@@ -2223,6 +2331,8 @@ class StandaloneProcessAgent:
             self.low_value_norm = None
         self.high_value_norm = ScalarRunningMeanStd() if self.use_high_value_norm else None
         high_params = list(self.compact.parameters()) + list(self.bridge.parameters()) + list(self.high.parameters())
+        if self.high_value is not None:
+            high_params += list(self.high_value.parameters())
         if self.compact_return_head is not None:
             high_params += list(self.compact_return_head.parameters())
         # Stage 1 Task 5 learned_beta has no PPO buffer/update yet; it is
@@ -2280,6 +2390,12 @@ class StandaloneProcessAgent:
         self.active_team_codes = np.zeros(self.num_envs, dtype=np.int64)
         self.episode_steps = np.zeros(self.num_envs, dtype=np.int64)
         self.episode_ids = np.zeros(self.num_envs, dtype=np.int64)
+        self.steps_to_check = np.zeros(self.num_envs, dtype=np.int64)
+        self.high_check_buffer = (
+            HighCheckBuffer(self.num_envs, self.n_agents, self.gamma)
+            if self.r30_enabled
+            else None
+        )
         self.team_intent_remaining = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_age = np.zeros(self.num_envs, dtype=np.int64)
         self.team_intent_prior_counts = np.ones(self.num_team_codes, dtype=np.float64)
@@ -2345,8 +2461,105 @@ class StandaloneProcessAgent:
             "terminal_window": 10,
         }
 
-    def record_environment_step(self, env_id: int) -> None:
-        self.episode_steps[int(env_id)] += 1
+    def record_environment_step(
+        self,
+        env_id: int,
+        reward: float | None = None,
+        next_obs=None,
+        next_state=None,
+        done: bool = False,
+    ) -> None:
+        env_id = int(env_id)
+        self.episode_steps[env_id] += 1
+        if not self.r30_enabled:
+            return
+        if reward is None or self.high_check_buffer is None:
+            raise ValueError("R30 environment step requires raw scalar reward")
+        self.high_check_buffer.accumulate(env_id, float(reward))
+        active = self.has_active_skill[env_id]
+        self.skill_age[env_id, active] += 1
+        self.steps_to_check[env_id] = max(int(self.steps_to_check[env_id]) - 1, 0)
+        if done:
+            self.high_check_buffer.close(
+                env_id,
+                old_next_value=0.0,
+                terminal=True,
+                policy_truncated=False,
+            )
+
+    def truncate_high_rows_for_update(self, observations, states) -> None:
+        if not self.r30_enabled:
+            return
+        if self.high_check_buffer is None:
+            raise RuntimeError("R30 high-check buffer is not initialized")
+        with torch.no_grad():
+            for env_id in range(self.num_envs):
+                if self.high_check_buffer.pending[env_id] is None:
+                    continue
+                next_value = self._r30_value_for_arrays(
+                    env_id,
+                    states[env_id],
+                    observations[env_id],
+                    steps_to_check=int(self.steps_to_check[env_id]),
+                )
+                self.high_check_buffer.close(
+                    env_id,
+                    old_next_value=next_value,
+                    terminal=False,
+                    policy_truncated=True,
+                )
+
+    def start_high_continuations_after_update(
+        self,
+        observations,
+        states,
+        *,
+        policy_update: int,
+    ) -> None:
+        if not self.r30_enabled:
+            return
+        for env_id in range(self.num_envs):
+            if int(self.steps_to_check[env_id]) > 0:
+                self._r30_maybe_assign_skills(
+                    observations[env_id],
+                    states[env_id],
+                    env_id,
+                    False,
+                    policy_update,
+                )
+            for agent_id in range(self.n_agents):
+                if not bool(self.has_active_skill[env_id, agent_id]):
+                    continue
+                if self.segments.active[env_id][agent_id] is not None:
+                    continue
+                joint_obs = self._joint_obs_array(observations[env_id])
+                state_arr = self._state_array(states[env_id], joint_obs)
+                self.segments.renew(
+                    env_id,
+                    agent_id,
+                    int(self.active_skills[env_id, agent_id]),
+                    0,
+                    int(self.episode_steps[env_id]),
+                    joint_obs[agent_id],
+                    0.0,
+                    0.0,
+                    0.0,
+                    high_state=state_arr,
+                    high_joint_obs=joint_obs,
+                    prev_skill=int(self.active_skills[env_id, agent_id]),
+                    skill_age_prev=int(self.skill_age[env_id, agent_id]),
+                    team_code=int(self.active_team_codes[env_id]),
+                    team_logp_weight=0.0,
+                    initial_assignment=False,
+                    switched=False,
+                    duration_target=0,
+                    roster_active_skills_start=self.active_skills[env_id],
+                    roster_active_ages_start=self.skill_age[env_id],
+                    roster_active_mask_start=self.has_active_skill[env_id],
+                    episode_step_start=int(self.episode_steps[env_id]),
+                    episode_id=int(self.episode_ids[env_id]),
+                    policy_update=int(policy_update),
+                )
 
     @staticmethod
     def _count_parameters(module: nn.Module | None) -> int:
@@ -2359,6 +2572,7 @@ class StandaloneProcessAgent:
             "compact": self._count_parameters(self.compact),
             "bridge": self._count_parameters(self.bridge),
             "high": self._count_parameters(self.high),
+            "high_value": self._count_parameters(self.high_value),
             "low": self._count_parameters(self.low),
             "process": self._count_parameters(self.process),
             "process_posterior": self._count_parameters(self.process_posterior),
@@ -2379,7 +2593,13 @@ class StandaloneProcessAgent:
         else:
             counts["low_actor"] = counts["low"]
             counts["low_critic"] = 0
-        counts["high_stack"] = counts["compact"] + counts["bridge"] + counts["high"] + counts["compact_return_head"]
+        counts["high_stack"] = (
+            counts["compact"]
+            + counts["bridge"]
+            + counts["high"]
+            + counts["high_value"]
+            + counts["compact_return_head"]
+        )
         counts["process_stack"] = (
             counts["process"]
             + counts["process_posterior"]
@@ -2514,6 +2734,86 @@ class StandaloneProcessAgent:
             agent_relevance,
         )
 
+    def _r30_context_tensors(self, state: np.ndarray, joint_obs: np.ndarray):
+        if not self.r30_enabled:
+            raise RuntimeError("R30 context requested in legacy controller mode")
+        state_t = torch.as_tensor(
+            state, dtype=torch.float32, device=self.device
+        ).reshape(1, -1)
+        joint_t = torch.as_tensor(
+            joint_obs, dtype=torch.float32, device=self.device
+        ).reshape(1, self.n_agents, self.obs_dim)
+        compact, cd_loss, cmi_loss, weights, aggregation_entropy, agent_relevance = self.compact(
+            state_t, joint_t
+        )
+        team_code, team_vector, team_probs, team_logits = self.bridge.expected_context(compact)
+        return (
+            state_t,
+            joint_t,
+            compact,
+            team_code,
+            team_vector,
+            team_probs,
+            team_logits,
+            cd_loss,
+            cmi_loss,
+            aggregation_entropy,
+            weights,
+            agent_relevance,
+        )
+
+    def _r30_value_from_context(
+        self,
+        *,
+        state_t: torch.Tensor,
+        joint_t: torch.Tensor,
+        compact: torch.Tensor,
+        team_vector: torch.Tensor,
+        skills,
+        active,
+        ages,
+        steps_to_check: int,
+        denormalize: bool = True,
+    ) -> torch.Tensor:
+        if self.high_value is None:
+            raise RuntimeError("R30 high critic is not initialized")
+        value = self.high_value(
+            state_t,
+            joint_t,
+            torch.as_tensor(skills, dtype=torch.long, device=self.device).reshape(1, -1),
+            torch.as_tensor(active, dtype=torch.bool, device=self.device).reshape(1, -1),
+            torch.as_tensor(ages, dtype=torch.float32, device=self.device).reshape(1, -1),
+            compact.detach(),
+            team_vector.detach(),
+            torch.as_tensor([steps_to_check], dtype=torch.float32, device=self.device),
+        )
+        if denormalize and self.high_value_norm is not None:
+            value = self.high_value_norm.denormalize_tensor(value)
+        return value
+
+    def _r30_value_for_arrays(
+        self,
+        env_id: int,
+        state,
+        joint_obs,
+        *,
+        steps_to_check: int,
+    ) -> float:
+        state_arr = self._state_array(state, joint_obs)
+        joint_arr = self._joint_obs_array(joint_obs)
+        context = self._r30_context_tensors(state_arr, joint_arr)
+        value = self._r30_value_from_context(
+            state_t=context[0],
+            joint_t=context[1],
+            compact=context[2],
+            team_vector=context[4],
+            skills=self.active_skills[int(env_id)],
+            active=self.has_active_skill[int(env_id)],
+            ages=self.skill_age[int(env_id)],
+            steps_to_check=steps_to_check,
+        )
+        return float(value.detach().cpu().item())
+
     def _team_intent_forced_tensor(self, env_id: int) -> torch.Tensor | None:
         if not self.enable_team_intent:
             return None
@@ -2624,6 +2924,9 @@ class StandaloneProcessAgent:
         env_id = int(env_id)
         self.episode_steps[env_id] = 0
         self.episode_ids[env_id] += 1
+        self.steps_to_check[env_id] = 0
+        if self.high_check_buffer is not None:
+            self.high_check_buffer.clear_env(env_id)
         self.duration_remaining[env_id, :] = 0
         self.active_skills[env_id, :] = 0
         self.active_duration_indices[env_id, :] = 0
@@ -2646,6 +2949,10 @@ class StandaloneProcessAgent:
             self._team_transition_env_steps[env_id] = 0
 
     def reset_all_policy_state(self):
+        if self.r30_enabled:
+            raise RuntimeError(
+                "R30 policy state cannot be reset at a PPO update boundary"
+            )
         self.duration_remaining[:, :] = 0
         self.active_skills[:, :] = 0
         self.active_duration_indices[:, :] = 0
@@ -2887,6 +3194,174 @@ class StandaloneProcessAgent:
         p = torch.exp(log_p)
         return torch.sum(p * (log_p - log_q), dim=-1)
 
+    def _r30_maybe_assign_skills(
+        self,
+        obs: np.ndarray,
+        state,
+        env_id: int,
+        deterministic: bool,
+        policy_update: int,
+    ) -> None:
+        if self.high_check_buffer is None or not isinstance(
+            self.high, FixedClockAREditPolicy
+        ):
+            raise RuntimeError("R30 controller is not initialized")
+        env_id = int(env_id)
+        joint_obs = self._joint_obs_array(obs)
+        state_arr = self._state_array(state, joint_obs)
+        due = bool(
+            not np.all(self.has_active_skill[env_id])
+            or int(self.steps_to_check[env_id]) <= 0
+        )
+
+        with torch.no_grad():
+            context = self._r30_context_tensors(state_arr, joint_obs)
+            (
+                state_t,
+                joint_t,
+                compact,
+                team_code,
+                team_vector,
+                _team_probs,
+                _team_logits,
+                _cd_loss,
+                _cmi_loss,
+                _aggregation_entropy,
+                weights,
+                agent_relevance,
+            ) = context
+
+            if not due:
+                if self.high_check_buffer.pending[env_id] is None:
+                    old_value = self._r30_value_from_context(
+                        state_t=state_t,
+                        joint_t=joint_t,
+                        compact=compact,
+                        team_vector=team_vector,
+                        skills=self.active_skills[env_id],
+                        active=self.has_active_skill[env_id],
+                        ages=self.skill_age[env_id],
+                        steps_to_check=int(self.steps_to_check[env_id]),
+                    )
+                    self.high_check_buffer.start_continuation(
+                        env_id=env_id,
+                        episode_id=int(self.episode_ids[env_id]),
+                        state=state_arr,
+                        joint_obs=joint_obs,
+                        prev_skills=np.where(
+                            self.has_active_skill[env_id],
+                            self.active_skills[env_id],
+                            INVALID_SKILL,
+                        ),
+                        prev_active=self.has_active_skill[env_id],
+                        prev_ages=self.skill_age[env_id],
+                        steps_to_check=int(self.steps_to_check[env_id]),
+                        old_value=float(old_value.item()),
+                    )
+                return
+
+            old_value = self._r30_value_from_context(
+                state_t=state_t,
+                joint_t=joint_t,
+                compact=compact,
+                team_vector=team_vector,
+                skills=self.active_skills[env_id],
+                active=self.has_active_skill[env_id],
+                ages=self.skill_age[env_id],
+                steps_to_check=0,
+            )
+            if self.high_check_buffer.pending[env_id] is not None:
+                self.high_check_buffer.close(
+                    env_id,
+                    old_next_value=float(old_value.item()),
+                    terminal=False,
+                    policy_truncated=False,
+                )
+
+            prev_skills = self.active_skills[env_id].copy()
+            prev_active = self.has_active_skill[env_id].copy()
+            prev_ages = self.skill_age[env_id].copy()
+            order = torch.arange(self.n_agents, dtype=torch.long, device=self.device)
+            omega = weights if self.high_condition_on_omega else None
+            relevance = agent_relevance if self.use_agent_prototype_relevance else None
+            sample = self.high.act_sequence(
+                joint_obs=joint_t.squeeze(0),
+                compact=compact,
+                team_vector=team_vector,
+                prev_skills=torch.as_tensor(
+                    prev_skills, dtype=torch.long, device=self.device
+                ),
+                prev_ages=torch.as_tensor(
+                    prev_ages, dtype=torch.long, device=self.device
+                ),
+                prev_active=torch.as_tensor(
+                    prev_active, dtype=torch.bool, device=self.device
+                ),
+                agent_order=order,
+                omega=omega,
+                agent_relevance=relevance,
+                deterministic=deterministic,
+            )
+            self.high_check_buffer.start_decision(
+                env_id=env_id,
+                episode_id=int(self.episode_ids[env_id]),
+                state=state_arr,
+                joint_obs=joint_obs,
+                prev_skills=np.where(prev_active, prev_skills, INVALID_SKILL),
+                prev_active=prev_active,
+                prev_ages=prev_ages,
+                steps_to_check=0,
+                old_value=float(old_value.item()),
+                agent_order=order.detach().cpu().numpy(),
+                token_kind=sample.token_kind.detach().cpu().numpy(),
+                set_skill=sample.set_skill.detach().cpu().numpy(),
+                token_valid=sample.token_valid.detach().cpu().numpy(),
+                old_token_logp=sample.token_logp.detach().cpu().numpy(),
+            )
+
+            self.active_skills[env_id] = sample.final_skills.detach().cpu().numpy()
+            self.skill_age[env_id] = sample.final_ages.detach().cpu().numpy()
+            self.has_active_skill[env_id] = sample.final_active.detach().cpu().numpy()
+            self.active_team_codes[env_id] = int(team_code.item())
+            self.duration_remaining[env_id, :] = 0
+            self.active_duration_indices[env_id, :] = 0
+            self.steps_to_check[env_id] = int(self.skill_interval)
+
+            token_kind_np = sample.token_kind.detach().cpu().numpy()
+            set_skill_np = sample.set_skill.detach().cpu().numpy()
+            token_logp_np = sample.token_logp.detach().cpu().numpy()
+            token_entropy_np = sample.skill_entropy.detach().cpu().numpy()
+            for position, agent_id in enumerate(order.detach().cpu().numpy()):
+                agent_id = int(agent_id)
+                if int(token_kind_np[position]) != SET_TOKEN:
+                    continue
+                self.segments.renew(
+                    env_id,
+                    agent_id,
+                    int(set_skill_np[position]),
+                    0,
+                    int(self.episode_steps[env_id]),
+                    joint_obs[agent_id],
+                    float(token_logp_np[position]),
+                    float(old_value.item()),
+                    float(token_entropy_np[position]),
+                    high_state=state_arr,
+                    high_joint_obs=joint_obs,
+                    prev_skill=int(prev_skills[agent_id]),
+                    skill_age_prev=int(prev_ages[agent_id]),
+                    team_code=int(team_code.item()),
+                    team_logp_weight=0.0,
+                    initial_assignment=not bool(prev_active[agent_id]),
+                    switched=bool(prev_active[agent_id]),
+                    duration_target=0,
+                    roster_active_skills_start=prev_skills,
+                    roster_active_ages_start=prev_ages,
+                    roster_active_mask_start=prev_active,
+                    episode_step_start=int(self.episode_steps[env_id]),
+                    episode_id=int(self.episode_ids[env_id]),
+                    policy_update=int(policy_update),
+                )
+
     def maybe_assign_skills(
         self,
         obs: np.ndarray,
@@ -2898,6 +3373,14 @@ class StandaloneProcessAgent:
         policy_update: int = 0,
     ):
         env_id = int(env_id)
+        if self.r30_enabled:
+            return self._r30_maybe_assign_skills(
+                obs,
+                state,
+                env_id,
+                deterministic,
+                policy_update,
+            )
         joint_obs = self._joint_obs_array(obs)
         state_arr = self._state_array(state, joint_obs)
         expired = (~self.has_active_skill[env_id]) | (self.duration_remaining[env_id] <= 0)
@@ -4842,7 +5325,7 @@ class StandaloneProcessAgent:
         update_idx: int = 0,
     ) -> dict[str, float]:
         segments = self.segments.pop_completed()
-        valid = [s for s in segments if s.length > 0]
+        valid = [] if self.r30_enabled else [s for s in segments if s.length > 0]
         if bool(getattr(self, "r28_g1_enabled", False)):
             if self.r28_g1_reward is None:
                 raise RuntimeError("R28-G1 scorer was not attached after checkpoint load")
@@ -6330,12 +6813,318 @@ class StandaloneProcessAgent:
         metrics["proto_bank_drift_cos"] = float(self.compact.prototype_bank_drift_cos().detach().cpu().item())
         return metrics
 
+    def update_high_from_checks(self, total_steps: int = 0) -> dict[str, float]:
+        if not self.r30_enabled or self.high_check_buffer is None:
+            raise RuntimeError("high-check PPO requested outside R30 mode")
+        if self.high_value is None or not isinstance(self.high, FixedClockAREditPolicy):
+            raise RuntimeError("R30 actor/critic is not initialized")
+        rows = self.high_check_buffer.pop_completed()
+        if not rows:
+            return {
+                "high_loss": 0.0,
+                "high_policy_loss": 0.0,
+                "high_value_loss": 0.0,
+                "high_entropy_loss": 0.0,
+                "high_aux_loss": 0.0,
+                "high_entropy": 0.0,
+                "high_return_mean": 0.0,
+                "high_env_return_mean": 0.0,
+                "high_bootstrap_value_mean": 0.0,
+                "high_bootstrap_contribution_mean": 0.0,
+                "high_smdp_discount_mean": 0.0,
+                "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm else 0.0,
+                "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm else 0.0,
+                "high_grad_norm": 0.0,
+                "r30_high_rows": 0.0,
+                "r30_decision_rows": 0.0,
+                "r30_continuation_rows": 0.0,
+                "r30_tokens_per_decision": 0.0,
+                "r30_continuation_actor_tokens": 0.0,
+                "r30_replay_logp_max_error": 0.0,
+                "r30_full_sync_set_rate": 0.0,
+                "r30_normal_decision_rows": 0.0,
+                "r30_full_sync_set_rows": 0.0,
+                "r30_switch_skill_entropy_norm": 0.0,
+                "r30_switch_skill_share_min": 0.0,
+                "r30_switch_count": 0.0,
+                "r30_switch_skill_0_count": 0.0,
+                "r30_switch_skill_1_count": 0.0,
+                "r30_switch_skill_2_count": 0.0,
+                "r30_switch_skill_3_count": 0.0,
+                "r30_completed_spell_count": 0.0,
+                "r30_spell_gt_4k0_count": 0.0,
+                "r30_spell_le_4k0_count": 0.0,
+                "r30_spell_gt_4k0_frac": 0.0,
+                "r30_spell_le_4k0_frac": 0.0,
+            }
+
+        row_count = len(rows)
+        old_values = np.asarray([row.old_value for row in rows], dtype=np.float32)
+        next_values = np.asarray([row.old_next_value for row in rows], dtype=np.float32)
+        rewards = np.asarray([row.block_reward for row in rows], dtype=np.float32)
+        block_lens = np.asarray([row.block_len for row in rows], dtype=np.int64)
+        terminals = np.asarray([row.terminal for row in rows], dtype=np.bool_)
+        truncated = np.asarray([row.policy_truncated for row in rows], dtype=np.bool_)
+        discounts = np.power(float(self.gamma), block_lens, dtype=np.float64).astype(np.float32)
+        advantages = np.zeros(row_count, dtype=np.float32)
+        groups: dict[tuple[int, int], list[int]] = {}
+        for idx, row in enumerate(rows):
+            groups.setdefault((int(row.env_id), int(row.episode_id)), []).append(idx)
+        for indices in groups.values():
+            indices.sort(key=lambda idx: int(rows[idx].sequence_index))
+            next_advantage = 0.0
+            for idx in reversed(indices):
+                nonterminal = 0.0 if terminals[idx] else 1.0
+                delta = (
+                    rewards[idx]
+                    + discounts[idx] * nonterminal * next_values[idx]
+                    - old_values[idx]
+                )
+                advantages[idx] = float(
+                    delta
+                    + discounts[idx]
+                    * float(self.high_gae_lambda)
+                    * nonterminal
+                    * (0.0 if truncated[idx] else 1.0)
+                    * next_advantage
+                )
+                next_advantage = float(advantages[idx])
+        value_targets_np = advantages + old_values
+
+        states = torch.as_tensor(
+            np.asarray([row.state for row in rows], dtype=np.float32),
+            device=self.device,
+        )
+        joint_obs = torch.as_tensor(
+            np.asarray([row.joint_obs for row in rows], dtype=np.float32),
+            device=self.device,
+        )
+        prev_skills = torch.as_tensor(
+            np.asarray([row.prev_skills for row in rows], dtype=np.int64),
+            dtype=torch.long,
+            device=self.device,
+        )
+        prev_active = torch.as_tensor(
+            np.asarray([row.prev_active for row in rows], dtype=np.bool_),
+            dtype=torch.bool,
+            device=self.device,
+        )
+        prev_ages = torch.as_tensor(
+            np.asarray([row.prev_ages for row in rows], dtype=np.float32),
+            device=self.device,
+        )
+        clocks = torch.as_tensor(
+            [row.steps_to_check for row in rows], dtype=torch.float32, device=self.device
+        )
+        compact, cd_loss, cmi_loss, weights, _aggregation_entropy, relevance = self.compact(
+            states, joint_obs
+        )
+        _team_codes, team_vectors, _team_probs, _team_logits = self.bridge.expected_context(compact)
+        value_predictions = self.high_value(
+            states,
+            joint_obs,
+            prev_skills,
+            prev_active,
+            prev_ages,
+            compact.detach(),
+            team_vectors.detach(),
+            clocks,
+        )
+        if self.high_value_norm is not None:
+            self.high_value_norm.update(value_targets_np)
+            value_targets = self.high_value_norm.normalize_tensor(
+                torch.as_tensor(value_targets_np, dtype=torch.float32, device=self.device)
+            )
+        else:
+            value_targets = torch.as_tensor(
+                value_targets_np, dtype=torch.float32, device=self.device
+            )
+        value_loss = F.mse_loss(value_predictions, value_targets)
+
+        decision_indices = [idx for idx, row in enumerate(rows) if row.decision_mask]
+        decision_adv_np = advantages[decision_indices].copy()
+        if decision_adv_np.size > 1:
+            decision_adv_np = (
+                decision_adv_np - float(np.mean(decision_adv_np))
+            ) / (float(np.std(decision_adv_np)) + 1e-8)
+        new_logps: list[torch.Tensor] = []
+        old_logps: list[torch.Tensor] = []
+        token_advantages: list[torch.Tensor] = []
+        entropy_terms: list[torch.Tensor] = []
+        valid_terms: list[torch.Tensor] = []
+        for local_idx, row_idx in enumerate(decision_indices):
+            row = rows[row_idx]
+            omega = weights[row_idx : row_idx + 1] if self.high_condition_on_omega else None
+            rel = relevance[row_idx : row_idx + 1] if self.use_agent_prototype_relevance else None
+            row_logp, row_entropy = self.high.evaluate_sequence(
+                joint_obs=joint_obs[row_idx],
+                compact=compact[row_idx : row_idx + 1],
+                team_vector=team_vectors[row_idx : row_idx + 1],
+                prev_skills=prev_skills[row_idx],
+                prev_ages=prev_ages[row_idx],
+                prev_active=prev_active[row_idx],
+                agent_order=torch.as_tensor(row.agent_order, dtype=torch.long, device=self.device),
+                token_kind=torch.as_tensor(row.token_kind, dtype=torch.long, device=self.device),
+                set_skill=torch.as_tensor(row.set_skill, dtype=torch.long, device=self.device),
+                omega=omega,
+                agent_relevance=rel,
+            )
+            valid = torch.as_tensor(row.token_valid, dtype=torch.bool, device=self.device)
+            new_logps.append(row_logp)
+            old_logps.append(
+                torch.as_tensor(row.old_token_logp, dtype=torch.float32, device=self.device)
+            )
+            token_advantages.append(
+                torch.full_like(row_logp, float(decision_adv_np[local_idx]))
+            )
+            entropy_terms.append(row_entropy)
+            valid_terms.append(valid)
+
+        if new_logps:
+            new_logp = torch.stack(new_logps)
+            old_logp = torch.stack(old_logps)
+            token_advantage = torch.stack(token_advantages)
+            token_valid = torch.stack(valid_terms)
+            entropy_matrix = torch.stack(entropy_terms)
+            ratio = torch.exp(new_logp - old_logp)
+            unclipped = ratio * token_advantage
+            clipped = torch.clamp(
+                ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
+            ) * token_advantage
+            policy_loss = -torch.min(unclipped, clipped)[token_valid].mean()
+            skill_entropy = entropy_matrix[token_valid].mean()
+            entropy_loss = -float(self.high_entropy_coef) * skill_entropy
+            replay_error = float(
+                torch.max(torch.abs(new_logp[token_valid] - old_logp[token_valid]))
+                .detach()
+                .cpu()
+                .item()
+            )
+        else:
+            policy_loss = torch.zeros((), device=self.device)
+            skill_entropy = torch.zeros((), device=self.device)
+            entropy_loss = torch.zeros((), device=self.device)
+            replay_error = 0.0
+
+        aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
+        loss = policy_loss + 0.5 * value_loss + entropy_loss + aux_loss
+        self.high_opt.zero_grad()
+        loss.backward()
+        high_grad_norm = torch.zeros((), device=self.device)
+        if self.high_max_grad_norm > 0.0:
+            high_params = [
+                param
+                for group in self.high_opt.param_groups
+                for param in group["params"]
+                if param.grad is not None
+            ]
+            if high_params:
+                high_grad_norm = torch.nn.utils.clip_grad_norm_(
+                    high_params, self.high_max_grad_norm
+                )
+        self.high_opt.step()
+        self.compact.update_prototype_bank_ema(self.prototype_bank_ema_tau)
+
+        normal_decisions = [
+            row for row in rows if row.decision_mask and bool(np.all(row.prev_active))
+        ]
+        full_sync = [
+            float(np.all(np.asarray(row.token_kind) == SET_TOKEN))
+            for row in normal_decisions
+        ]
+        switch_skills: list[int] = []
+        spell_gt_4k0 = 0
+        spell_le_4k0 = 0
+        for row in normal_decisions:
+            for position, agent_id in enumerate(np.asarray(row.agent_order, dtype=np.int64)):
+                age = int(row.prev_ages[int(agent_id)])
+                token = int(row.token_kind[position])
+                if token == SET_TOKEN:
+                    switch_skills.append(int(row.set_skill[position]))
+                    if age <= 4 * self.skill_interval:
+                        spell_le_4k0 += 1
+                elif token == KEEP_TOKEN and age == 4 * self.skill_interval:
+                    spell_gt_4k0 += 1
+        switch_array = np.asarray(switch_skills, dtype=np.int64)
+        if switch_array.size > 0:
+            counts = np.bincount(switch_array, minlength=self.n_skills).astype(np.float64)
+            shares = counts / float(np.sum(counts))
+            switch_share_min = float(np.min(shares))
+            positive = shares[shares > 0.0]
+            switch_entropy_norm = float(
+                -np.sum(positive * np.log(positive)) / np.log(self.n_skills)
+            )
+        else:
+            switch_share_min = 0.0
+            switch_entropy_norm = 0.0
+        continuation_rows = [row for row in rows if not row.decision_mask]
+        continuation_tokens = int(
+            sum(np.count_nonzero(row.token_valid) for row in continuation_rows)
+        )
+        full_sync_rows = int(np.sum(full_sync)) if full_sync else 0
+        lifetime_events = int(spell_gt_4k0 + spell_le_4k0)
+        switch_counts = (
+            np.bincount(switch_array, minlength=self.n_skills).astype(np.float64)
+            if switch_array.size
+            else np.zeros(self.n_skills, dtype=np.float64)
+        )
+        return {
+            "high_loss": float(loss.detach().cpu().item()),
+            "high_policy_loss": float(policy_loss.detach().cpu().item()),
+            "high_value_loss": float(value_loss.detach().cpu().item()),
+            "high_entropy_loss": float(entropy_loss.detach().cpu().item()),
+            "high_aux_loss": float(aux_loss.detach().cpu().item()),
+            "high_entropy": float(skill_entropy.detach().cpu().item()),
+            "high_return_mean": float(np.mean(value_targets_np)),
+            "high_env_return_mean": float(np.mean(rewards)),
+            "high_bootstrap_value_mean": float(np.mean(next_values)),
+            "high_bootstrap_contribution_mean": float(np.mean(discounts * next_values * (~terminals))),
+            "high_smdp_discount_mean": float(np.mean(discounts)),
+            "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm else 0.0,
+            "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm else 0.0,
+            "high_grad_norm": float(high_grad_norm.detach().cpu().item()),
+            "r30_high_rows": float(row_count),
+            "r30_decision_rows": float(len(decision_indices)),
+            "r30_continuation_rows": float(len(continuation_rows)),
+            "r30_tokens_per_decision": (
+                float(sum(np.count_nonzero(row.token_valid) for row in rows if row.decision_mask))
+                / float(max(len(decision_indices), 1))
+            ),
+            "r30_continuation_actor_tokens": float(continuation_tokens),
+            "r30_replay_logp_max_error": replay_error,
+            "r30_full_sync_set_rate": float(np.mean(full_sync)) if full_sync else 0.0,
+            "r30_normal_decision_rows": float(len(normal_decisions)),
+            "r30_full_sync_set_rows": float(full_sync_rows),
+            "r30_switch_skill_entropy_norm": switch_entropy_norm,
+            "r30_switch_skill_share_min": switch_share_min,
+            "r30_switch_count": float(switch_array.size),
+            "r30_switch_skill_0_count": float(switch_counts[0]) if self.n_skills > 0 else 0.0,
+            "r30_switch_skill_1_count": float(switch_counts[1]) if self.n_skills > 1 else 0.0,
+            "r30_switch_skill_2_count": float(switch_counts[2]) if self.n_skills > 2 else 0.0,
+            "r30_switch_skill_3_count": float(switch_counts[3]) if self.n_skills > 3 else 0.0,
+            "r30_completed_spell_count": float(lifetime_events),
+            "r30_spell_gt_4k0_count": float(spell_gt_4k0),
+            "r30_spell_le_4k0_count": float(spell_le_4k0),
+            "r30_spell_gt_4k0_frac": (
+                float(spell_gt_4k0 / lifetime_events)
+                if lifetime_events
+                else 0.0
+            ),
+            "r30_spell_le_4k0_frac": (
+                float(spell_le_4k0 / lifetime_events)
+                if lifetime_events
+                else 0.0
+            ),
+        }
+
     def update_high_from_segments(
         self,
         segments: list[Segment],
         process_rewards: np.ndarray,
         total_steps: int = 0,
     ) -> dict[str, float]:
+        if self.r30_enabled:
+            raise RuntimeError("R30 high PPO is owned by HighCheckBuffer, not Segment")
         if not segments:
             return {
                 "high_loss": 0.0,

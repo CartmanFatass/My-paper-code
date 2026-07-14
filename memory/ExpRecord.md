@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260714-r30-fixed-clock-paired-320k | launch-ready | hierarchy-L2 reward-pure temporal-controller mechanism gate | local CUDA; run root assigned at launch | paired result JSON | corrected R30 implementation and explicit legacy-to-R30 migration are ready | Run one matched seed; use M1-M4 only to accept, retire, or repair the implementation. |
 | EXP-20260714-r29-t10-paired-320k | completed — `PRELIMINARY_FAIL`; online family retired | preliminary hierarchy-L2 mechanism-matched reward comparator | local CUDA; `logs/r29_t10_paired_320k_20260714_010026` | none | implementation valid; R26 probe `PASS` versus reward `MIXED`; paired score CI crosses zero; task reward degraded `31.56%`; GPT-5.6 Pro verdict `RETIRE` | Keep R29 diagnostic-only. Do not promote, retune, or expand seeds; move to the reward-off stochastic realized-effect edge. |
 | EXP-20260713-r29-g0-counterfactual-action-information | completed — `PASS_COUNTERFACTUAL_ACTION_INFORMATION_TARGET` | hierarchy-L1 reward-off target gate | local CUDA; `logs/r29_action_information_20260713_230631` | none | 3/3 checkpoints PASS; active means `0.017050`/`0.017990`/`0.019208`; inactive max `5.96e-8` | Accept the support-native target only. Next test is a direct mechanism-matched reward comparator, not a separate smoke. |
 | EXP-20260713-r28-forced-execution-support-transport | completed — `FAIL_STOCHASTIC_SUPPORT_TRANSPORT` | reward-off matched-domain causal diagnostic | local CUDA; `logs/r28_support_transport_20260713_222807` | none | 1,024 paired rows/mode; deterministic OOD `0.068359`, stochastic OOD `0.823242`; 64 rows/cell | Random action execution alone breaks frozen support. Retire the forced-deterministic scorer family from online reward use. |
@@ -40,6 +41,58 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260714-r30-fixed-clock-paired-320k
+
+- Causal edge: removing the active duration action and replacing expired-only
+  edits with a fixed `k0=10` all-agent autoregressive `KEEP/SET(skill)` check
+  should permit lifetimes beyond the old four-block cap without short-segment
+  high-sample bias, while retaining asynchronous edits and switch-skill supply.
+- Upstream authorization: GPT-5.6 Pro returned `MODIFY R30`; its four algorithm
+  corrections are accepted. The user authorized a local CUDA short run of up
+  to 320K transitions per experiment with 16 environments. This is one
+  mechanism seed, not parity, long-run efficacy, or a semantic-skill claim.
+- Comparator/null: `legacy_duration` and `r30_fixed_clock_ar_edit` both start
+  from the registered R25 arm0 1M/update32 checkpoint, seed `30031`, matched
+  environment streams, deterministic expected bridge context, the unchanged
+  low policy, and raw environment reward only. The legacy arm retains frozen
+  duration choices `(1,2,3,4)`; the treatment changes only the temporal high
+  controller, critic/buffer grain, and required checkpoint migration.
+- Exposure: arms run concurrently on local CUDA with 16 spawned subproc envs,
+  S7-S1, six agents, rollout `501`, and +320,000 transitions per arm to
+  1,320,000 total steps/update72. The non-check-aligned rollout makes the
+  critic-only continuation observable. Each arm receives 40 rollout/high-PPO
+  updates, 15,570 recurrent low-actor and 15,570 low-critic minibatch updates
+  (`15` epochs), followed by 20 deterministic evaluation episodes. Expected
+  wall clock is 5-10 hours.
+- M1 implementation gate: every real decision row has exactly six valid edit
+  tokens, maximum teacher-forced replay log-probability error is `<=1e-5`, at
+  least one continuation row is observed, and all continuation rows have zero
+  actor tokens. Any failure is implementation-invalid and permits only repair
+  of the failed path under this same contract.
+- M2 lifetime breadth: over the final 10 updates, eligible spell events must
+  satisfy `min(P(T>4*k0), P(T<=4*k0)) >= 0.05`. Episode-terminal right-censored
+  spells are excluded; a short spell is counted when `SET` ends it at or before
+  four blocks, and a long spell once when `KEEP` carries it beyond four blocks.
+- M3 asynchronous supply: over the final 10 updates, full-synchronous `SET`
+  rows are `<=0.50`, empirical `H(Z|SET)/log(4) >=0.80`, and every skill has at
+  least `0.05` of switch selections.
+- M4 task safety: relative deterministic reward degradation versus legacy is
+  `<=0.10`, and absolute worsening of zero-throughput step fraction is
+  `<=0.10`.
+- Outcome branches: M1 fail -> repair only and resume the same gate; M1 pass
+  but M2 or M3 fail -> retire the current R30 formulation without keep entropy,
+  semantic reward, or coefficient sweep; M4 fail -> block promotion for task
+  safety; all pass -> accept R30 only as the next core temporal controller and
+  move to the separate reward-off realized-effect diagnostic.
+- Prohibited while open: extra seeds or arms, duration/keep/switch sweeps,
+  sampled team intent, intrinsic/team/process/topology reward, edit/switch or
+  lifetime payment, metric redesign, and claims of MAT/HAPPO theorem, reduced
+  joint action space, HMASD parity, semantic differentiation, task improvement,
+  long-run stability, or cross-environment generalization.
+- Status sources: `<run-root>/runner_status.txt`, both arms' single
+  `metrics/train_updates.csv` and `metrics/eval_episodes.csv`, and
+  `<run-root>/result/r30_fixed_clock_pair.json`.
 
 ### EXP-20260714-r29-t10-paired-320k
 

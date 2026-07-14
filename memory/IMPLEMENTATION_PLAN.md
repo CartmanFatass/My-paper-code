@@ -24,23 +24,34 @@ One coherent implementation boundary:
 2. At every `k0` check, give every agent one token in a stored order. Apply each
    token immediately to the working roster before evaluating the next agent.
 3. Move high PPO from completed variable segments to a fixed-check buffer with
-   per-environment check-sequence GAE and one shared block advantage. Re-evaluate
-   stored token sequences with teacher forcing.
+   per-environment check-sequence GAE, one prefix-independent scalar critic,
+   and one shared block advantage. Re-evaluate stored token sequences with
+   applied-roster teacher forcing and one combined ratio per executed token.
 4. Keep process segments independent of the high buffer: `KEEP` continues the
-   active segment; `SET` closes and opens it; episode and policy-update
-   boundaries still flush it.
+   active segment; `SET` closes and opens it; process records never train the
+   high controller.
 5. Remove duration candidates, duration entropy floors, edit/switch penalties,
    forced maximum age, and lifetime rewards from the active mode. Initialize
    `p_keep=0.6` for the current `{1,2,3,4}`-block source.
 6. Preserve `pi_l(a_i | o_i, z_i)`. Do not add a semantic reward in this
    implementation; retain only the fixed, duration-blind `W=k0` interface for
    the later realized-effect target.
+7. Use deterministic expected bridge context, a per-environment
+   `steps_to_check` clock, and actor-invalid continuation rows across PPO update
+   boundaries. Preserve skills, ages, clock, and low recurrent state.
+8. Load R30 checkpoints through an explicit versioned migration: reuse only
+   compatible representation/low-policy/high-actor parameters and reinitialize
+   keep head, high critic, high ValueNorm, high optimizer, clocks, and buffers.
 
 The evidence-bearing check after implementation is one reward-pure,
-mechanism-matched short comparison. It reads only: all-agent token coverage,
-lifetime survival without always-keep collapse, switch-time skill usage plus
-edit synchrony, and immediate task safety. It does not add a duration sweep,
-team mechanism, or semantic reward.
+mechanism-matched short comparison at approximately 320K transitions per arm,
+16 environments, CUDA, seed 30031. It reads only: token/replay validity,
+lifetime breadth, asynchronous switch-skill supply, and immediate task safety.
+It does not add a duration sweep, team mechanism, or semantic reward.
+
+Implementation status: complete. The next boundary is the registered paired
+run in `memory/ExpRecord.md`; implementation and experiment are not separated
+by another validation stage.
 
 ## Deferred Post-R29 Realized-Effect Target Gate
 

@@ -243,12 +243,38 @@ R29_ACTION_INFO_METRIC_FIELDS = (
 )
 
 
+R30_METRIC_FIELDS = (
+    "r30_high_rows",
+    "r30_decision_rows",
+    "r30_continuation_rows",
+    "r30_tokens_per_decision",
+    "r30_continuation_actor_tokens",
+    "r30_replay_logp_max_error",
+    "r30_full_sync_set_rate",
+    "r30_normal_decision_rows",
+    "r30_full_sync_set_rows",
+    "r30_switch_skill_entropy_norm",
+    "r30_switch_skill_share_min",
+    "r30_switch_count",
+    "r30_switch_skill_0_count",
+    "r30_switch_skill_1_count",
+    "r30_switch_skill_2_count",
+    "r30_switch_skill_3_count",
+    "r30_completed_spell_count",
+    "r30_spell_gt_4k0_count",
+    "r30_spell_le_4k0_count",
+    "r30_spell_gt_4k0_frac",
+    "r30_spell_le_4k0_frac",
+)
+
+
 UPDATE_FIELDS = (
     "update",
     "total_steps",
     "env_reward_mean",
     *R28_G1_METRIC_FIELDS,
     *R29_ACTION_INFO_METRIC_FIELDS,
+    *R30_METRIC_FIELDS,
     "process_segments",
     "process_loss",
     "process_outcome_loss",

@@ -20,6 +20,15 @@ class Config(EnvConfig):
     allow_off_policy_policy_updates = False
     process_segment_replay_enabled = False
 
+    # High-controller selection. Legacy duration editing remains available only
+    # as the frozen comparator; R30 must be selected explicitly.
+    high_controller = "legacy_duration"  # legacy_duration, r30_fixed_clock_ar_edit
+    r30_keep_init = 0.6
+    r30_bridge_context_mode = "deterministic_expected"
+    r30_high_buffer_version = 1
+    r30_high_gae_lambda = 0.95
+    high_keep_entropy_coef = 0.0
+
     # Skill and temporal process.
     # Match the Scenario-7 HMASD skill cardinality for fair comparisons.
     n_Z = 6

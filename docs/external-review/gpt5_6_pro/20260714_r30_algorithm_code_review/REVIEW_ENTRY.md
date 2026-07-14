@@ -30,5 +30,9 @@ If the GitHub connector cannot read the private `aggressive` branch, upload:
 The ZIP contains the same question, background, design, research constraints,
 and relevant source files. No checksum is required; Git is the version source.
 
-Return GPT's answer verbatim. Codex will archive the raw response before
-interpreting it.
+## Returned Review
+
+The response is archived verbatim as `RESPONSE_RAW.md`.
+
+GPT-5.6 Pro returned `MODIFY R30`. The controller accepted the corrected R30
+route with the local 320K-per-arm exposure adjustment in `DISPOSITION.md`.

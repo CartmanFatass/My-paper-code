@@ -2,7 +2,9 @@
 
 Date: 2026-07-14
 
-Status: accepted design; implementation is the next core boundary.
+Status: accepted after GPT-5.6 Pro `MODIFY R30`; implementation is the active
+core boundary. The raw review and disposition are under
+`docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/`.
 
 ## Causal Question
 
@@ -19,6 +21,18 @@ fixed global check clock k0
 
 This is upstream of the post-R29 semantic-reward question. R30 changes the
 temporal controller only; it does not add a new intrinsic reward.
+
+R30 also removes the sampled team code from the joint high action. The existing
+bridge is retained only as deterministic representation:
+
+```text
+g_bar(c) = sum_q softmax(code_logits(c))[q] * code_embedding[q]
+```
+
+There is no sampled `g`, bridge action log-probability, or bridge entropy in
+R30. The pre-action high state contains the global state, joint observation,
+OPT compact, deterministic bridge embedding, pre-check roster, primitive-step
+ages, active mask, and normalized per-environment check countdown.
 
 ## Why The Current Core Is Structurally Misaligned
 
@@ -103,22 +117,48 @@ actual skill changes synchronous: every agent decides at the same check, but a
 The first implementation uses one canonical agent order and stores it with the
 transition. Order randomization is not part of R30.
 
+The integer pre-check roster, ages, active mask, order, and executed tokens are
+the replay truth. Training rebuilds the working roster token by token; a cached
+float prefix is not an authoritative action record.
+
 ## Fixed-Clock High PPO
 
 Variable skill segments remain useful low-level process records, but they are
 no longer high-policy samples. A separate high-check buffer owns the PPO data.
 
-For check `tau`:
+For high row `tau`:
 
 ```text
 R_tau = sum_{r=0}^{L_tau-1} gamma**r * r_env[tau*k0+r]
 Gamma_tau = gamma**L_tau
 ```
 
-`L_tau=k0` normally and may be shorter only at an episode terminal. High GAE is
-computed along each environment's check sequence. The high critic predicts one
-team value `V_H(x_tau)` from the check context, roster, and ages. One resulting
-block advantage `A_tau` is shared by the `N` stored edit tokens.
+`L_tau=k0` normally and may be shorter at an episode terminal or PPO update
+boundary. High GAE is computed along each environment's ordered high-row
+sequence. The high critic predicts exactly one pre-action scalar
+`V_H(x_tau, steps_to_check/k0)`. It is independent of the autoregressive prefix,
+tokens, edit decisions, and process segments. One resulting row advantage
+`A_tau` is shared by the `N` stored edit tokens on a real decision row.
+
+Each environment owns `steps_to_check`; an interleaved collector index is never
+the clock. Episode reset sets it to zero, performs the initial all-skill
+assignment with `KEEP` invalid, then resets it to `k0`. Primitive steps
+accumulate discounted raw scalar environment reward, increment active ages, and
+decrement the clock.
+
+At a PPO update boundary, the open row is closed with
+`policy_truncated=True` and bootstrapped from the old high critic. The active
+skills, ages, clock, environment state, and low recurrent state remain live.
+The next rollout opens an actor-invalid critic-only continuation row until the
+next real check. This continuation contributes reward and value learning but no
+actor tokens or log-probabilities. Update truncation bootstraps the value target
+while breaking the GAE trace:
+
+```text
+delta_tau = R_tau + Gamma_tau*(1-terminal_tau)*V_next - V_tau
+A_tau = delta_tau + Gamma_tau*lambda*(1-terminal_tau)
+        *(1-policy_truncated_tau)*A_next
+```
 
 Training uses the stored action sequence and prefixes as teacher forcing:
 
@@ -131,20 +171,38 @@ The agent dimension is averaged, not summed, so changing `N` does not silently
 multiply the gradient scale. This is a practical MAT-style PPO surrogate, not
 the exact conditional-advantage construction required for a monotonic theorem.
 
+Each executed token has one ratio. In particular, `SET(z)` uses the combined
+log-probability `log(1-p_keep)+log pi_z(z|SWITCH)` and is clipped once; its keep
+and skill factors are never clipped separately. Initial assignment has no keep
+gradient because `KEEP` is invalid.
+
 Required transition shapes are:
 
 ```text
 state              [B, state_dim]
 joint_obs          [B, N, obs_dim]
 prev_skills        [B, N]
+prev_active        [B, N]
 prev_ages          [B, N]
+steps_to_check     [B]
+decision_mask      [B]
 agent_order        [B, N]
-edit_tokens        [B, N]
+token_kind         [B, N]
+set_skill          [B, N]
+token_valid        [B, N]
 old_token_logp     [B, N]
-old_joint_value    [B]
+old_value          [B]
+old_next_value     [B]
 block_reward       [B]
+block_len          [B]
 terminal           [B]
+policy_truncated   [B]
 ```
+
+The buffer is independent of `Segment`. `KEEP` leaves the active process
+segment open; `SET` closes and opens it; episode terminal closes it. A PPO
+update may cut process diagnostics for version hygiene, but segments never
+produce high rewards, advantages, or policy samples.
 
 The low-level actor remains exactly `pi_l(a_i | o_i, z_i)`; neither the edit
 token nor the global context bypasses the skill bottleneck.
@@ -210,17 +268,24 @@ inside R30.
 
 One coherent implementation changes:
 
-1. replace the active duration head with `keep_head + switch_skill_head`;
+1. add an explicit `r30_fixed_clock_ar_edit` mode with
+   `keep_head + switch_skill_head`; keep the duration controller only as a
+   frozen comparator;
 2. run all-agent autoregressive editing every `k0` steps using the applied
    working roster;
-3. add a fixed-check high buffer and check-sequence GAE/PPO path;
-4. decouple process-segment renewal from high sampling: `KEEP` continues the
+3. make the bridge deterministic expected context and add a prefix-independent
+   scalar `HighCheckValue`;
+4. add a fixed-check high buffer, per-environment countdown, continuation rows,
+   and check-sequence GAE/PPO path;
+5. decouple process-segment renewal from high sampling: `KEEP` continues the
    segment, `SET` closes/opens it, and update/episode boundaries still flush it;
-5. retire duration entropy, duration penalties, and duration-dependent metrics
+6. retire duration entropy, duration penalties, and duration-dependent metrics
    from the active mode;
-6. load compatible low actor/critic, compact encoder, shared high trunk, skill
-   head, and value parameters from an old source checkpoint; drop the duration
-   head and high optimizer state, then initialize the keep bias as above.
+7. migrate compatible low actor/critic/ValueNorm, compact/OPT/bridge
+   representation, shared high actor trunk, and compatible skill head through a
+   versioned loader. Reinitialize the keep head, high critic, high ValueNorm,
+   high optimizer, clocks, and buffers; never silently load them with
+   `strict=False`.
 
 Legacy duration code may remain loadable only as the frozen comparator. It is
 not an active tuning branch.
@@ -228,16 +293,21 @@ not an active tuning branch.
 ## First Evidence-Bearing Run
 
 After implementation, use one reward-pure, mechanism-matched short comparison
-between the frozen discrete-duration controller and fixed-clock editing. Keep
-the low policy, source checkpoint, seed, environment/update exposure, and
-evaluation identical. The read needs only four facts:
+between the frozen discrete-duration controller and fixed-clock editing. Use
+seed `30031`, 16 environments, CUDA, and approximately 320K environment
+transitions per arm. Keep the low policy, source checkpoint, optimizer-update
+exposure, and evaluation identical. Choose a rollout boundary that exercises a
+non-check-aligned update continuation. The read needs only four facts:
 
-1. exactly `N` high tokens are produced per check;
-2. lifetime survival extends beyond the retired four-block cap without
-   collapsing to `always KEEP`;
-3. switch-time skill usage remains non-degenerate and edits are not fully
-   synchronized;
-4. task reward/coverage does not show an immediate safety regression.
+1. exactly `N` high tokens are produced per real check, replay log-probability
+   max error is at most `1e-5`, and continuation rows have zero actor tokens;
+2. over late eligible skill spells,
+   `min(P(T>4*k0), P(T<=4*k0)) >= 0.05`;
+3. full-synchronous `SET` rate is at most `0.50`, conditional switch-skill
+   entropy divided by `log(K)` is at least `0.80`, and every skill's switch
+   share is at least `0.05`;
+4. relative task-reward degradation is at most `0.10` and absolute worsening
+   in zero-service-step fraction is at most `0.10`.
 
 No semantic reward, team mechanism, duration sweep, or long-run claim is mixed
 into this gate.

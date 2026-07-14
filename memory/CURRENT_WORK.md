@@ -77,15 +77,20 @@ does not add a new intrinsic reward.
   accepted R30 correction retires duration selection from the core: every agent
   emits `KEEP` or `SET(other_skill)` every `k0`, high PPO moves to fixed check
   blocks, and variable process segments remain low-level records only.
+- GPT-5.6 Pro returned `MODIFY R30`, accepted on 2026-07-14. R30 now uses a
+  deterministic expected bridge, one prefix-independent critic value per high
+  row, per-environment clocks with critic-only update continuation, a dedicated
+  high-check buffer, and one combined PPO ratio per `SET` token.
+- The corrected R30 implementation boundary is complete: active duration
+  actions are absent in R30 mode, high PPO is isolated in `HighCheckBuffer`,
+  legacy checkpoint migration is explicit, and the registered reward-pure
+  paired runner/analyzer are ready.
 
 ## Next Actions
 
-1. User gives GPT-5.6 Pro the repository review entry or ZIP under
-   `20260714_r30_algorithm_code_review/` and returns its response verbatim.
-2. Archive and disposition the response, selecting one corrected R30 PPO,
-   critic, clock, buffer, and migration contract.
-3. Implement that accepted R30 boundary, then run one reward-pure,
-   mechanism-matched short comparison against frozen duration editing.
+1. Run the registered reward-pure 320K-per-arm R30 comparison against frozen
+   duration editing with 16 environments, CUDA, seed `30031`, and the
+   non-check-aligned rollout recorded in `memory/ExpRecord.md`.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -132,6 +137,6 @@ is in `memory/ExpRecord.md`. The manual review package is under
   controller and implementation boundary.
 - `docs/external-review/gpt5_6_pro/20260714_fixed_clock_keep_set/` — raw external
   response and controller disposition.
-- `docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/` — pending
-  pre-implementation algorithm and code review entry plus ZIP fallback.
+- `docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/` — raw
+  `MODIFY R30` review and accepted controller disposition.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

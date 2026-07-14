@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import random
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -58,6 +59,11 @@ ALGORITHM_MANIFEST_FIELDS = (
     "policy_update_mode",
     "allow_off_policy_policy_updates",
     "process_segment_replay_enabled",
+    "high_controller",
+    "r30_keep_init",
+    "r30_bridge_context_mode",
+    "r30_high_buffer_version",
+    "r30_high_gae_lambda",
     "n_z",
     "skill_lifetime_candidates",
     "process_segment_mode",
@@ -433,6 +439,12 @@ def export_run_manifest(
             "n_agents": int(agent.n_agents),
             "n_skills": int(agent.n_skills),
             "duration_candidates": jsonable(agent.duration_candidates),
+            "high_controller": str(getattr(agent, "high_controller", "legacy_duration")),
+            "k0": int(getattr(agent, "skill_interval", 10)),
+            "r30_keep_init": float(getattr(agent, "r30_keep_init", 0.6)),
+            "r30_high_buffer_version": int(
+                getattr(agent, "r30_high_buffer_version", 1)
+            ),
             "action_space_type": str(agent.action_space_type),
             "device": str(agent.device),
             "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
@@ -482,6 +494,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--total_timesteps", type=int, default=320000)
     parser.add_argument("--rollout_length", type=int, default=500)
     parser.add_argument("--skill_interval", type=int, default=10)
+    parser.add_argument(
+        "--high_controller",
+        choices=("legacy_duration", "r30_fixed_clock_ar_edit"),
+        default="",
+    )
+    parser.add_argument(
+        "--r30_pair_gate",
+        action="store_true",
+        help=(
+            "Apply the registered reward-pure R30 mechanism-pair contract to "
+            "either the legacy-duration or fixed-clock controller."
+        ),
+    )
     parser.add_argument("--num_envs", type=int, default=1)
     parser.add_argument("--n_agents", type=int, default=0)
     parser.add_argument("--collector_backend", choices=("sync", "subproc"), default="sync")
@@ -529,7 +554,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--topology_max_frames", type=int, default=160)
     parser.add_argument("--plot_interval", type=int, default=1)
     parser.add_argument("--skill_lifetime_candidates", default="")
-    parser.add_argument("--team_bridge_type", choices=("none", "deterministic", "stochastic"), default="")
+    parser.add_argument(
+        "--team_bridge_type",
+        choices=("none", "deterministic", "stochastic", "deterministic_expected"),
+        default="",
+    )
     parser.add_argument(
         "--low_level_architecture",
         choices=("strict_hmasd_mappo", "gru_ctde", "feedforward"),
@@ -806,6 +835,8 @@ def parse_int_tuple(text: str) -> tuple[int, ...]:
 
 def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     config.skill_interval = int(args.skill_interval)
+    if str(getattr(args, "high_controller", "")):
+        config.high_controller = str(args.high_controller)
     config.r28_g1_arm = str(getattr(args, "r28_g1_arm", "off"))
     config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
     config.r28_g1_engineering_smoke = bool(
@@ -1296,6 +1327,7 @@ def checkpoint_payload(
     update_idx: int,
 ) -> dict[str, Any]:
     return {
+        "checkpoint_schema_version": 2,
         "high": agent.high.state_dict(),
         "compact": agent.compact.state_dict(),
         "bridge": agent.bridge.state_dict(),
@@ -1357,6 +1389,11 @@ def checkpoint_payload(
         ),
         "r28_g1": agent.r28_g1_checkpoint_state(),
         "r29_action_information": agent.r29_action_info_checkpoint_state(),
+        "r30_high_value": (
+            agent.high_value.state_dict()
+            if getattr(agent, "high_value", None) is not None
+            else None
+        ),
         "high_opt": agent.high_opt.state_dict(),
         "low_opt": agent.low_opt.state_dict() if agent.low_opt is not None else None,
         "low_actor_opt": agent.low_actor_opt.state_dict() if agent.low_actor_opt is not None else None,
@@ -1391,6 +1428,26 @@ def checkpoint_payload(
         "scenario": config.scenario,
         "action_space_type": agent.action_space_type,
         "action_dim": agent.action_dim,
+        "high_controller": str(getattr(agent, "high_controller", "legacy_duration")),
+        "r30_contract": (
+            {
+                "k0": int(getattr(agent, "skill_interval", 10)),
+                "keep_init": float(getattr(agent, "r30_keep_init", 0.6)),
+                "bridge_context_mode": "deterministic_expected",
+                "high_buffer_version": int(getattr(agent, "r30_high_buffer_version", 1)),
+            }
+            if bool(getattr(agent, "r30_enabled", False))
+            else None
+        ),
+        "checkpoint_migration": {
+            "mode": str(getattr(agent, "checkpoint_migration_mode", "fresh")),
+            "source_controller": str(
+                getattr(agent, "checkpoint_source_controller", "none")
+            ),
+            "migrated_high_keys": tuple(
+                getattr(agent, "checkpoint_migrated_high_keys", ())
+            ),
+        },
         "team_bridge_type": str(getattr(config, "team_bridge_type", "stochastic")),
         "n_agents": agent.n_agents,
         "n_skills": agent.n_skills,
@@ -1491,13 +1548,64 @@ def prune_periodic_checkpoints(log_dir: str | Path, keep_last: int) -> None:
             pass
 
 
+def migrate_legacy_high_to_r30(
+    agent: StandaloneProcessAgent,
+    source_state: dict[str, torch.Tensor],
+) -> list[str]:
+    """Explicit v1 whitelist migration; unmatched R30 parameters stay initialized."""
+
+    target_state = agent.high.state_dict()
+    migrated: list[str] = []
+    allowed_prefixes = ("input.", "skill_head.")
+    for name, target in target_state.items():
+        if not name.startswith(allowed_prefixes):
+            continue
+        source = source_state.get(name)
+        if not isinstance(source, torch.Tensor) or tuple(source.shape) != tuple(target.shape):
+            continue
+        target_state[name] = source.detach().to(device=target.device, dtype=target.dtype).clone()
+        migrated.append(name)
+    required = {"input.3.weight", "input.3.bias", "skill_head.weight", "skill_head.bias"}
+    missing_required = sorted(required.difference(migrated))
+    if missing_required:
+        raise ValueError(
+            "legacy_to_r30_v1 migration cannot reuse required actor parameters: "
+            + ",".join(missing_required)
+        )
+    agent.high.load_state_dict(target_state, strict=True)
+    return migrated
+
+
 def load_checkpoint(
     path: str | Path,
     agent: StandaloneProcessAgent,
     load_optimizers: bool = True,
 ) -> tuple[int, int]:
     checkpoint = torch.load(Path(path), map_location=agent.device)
-    agent.high.load_state_dict(checkpoint["high"])
+    source_controller = str(checkpoint.get("high_controller") or "legacy_duration")
+    agent.checkpoint_source_controller = source_controller
+    if bool(getattr(agent, "r30_enabled", False)):
+        if source_controller == "r30_fixed_clock_ar_edit":
+            agent.high.load_state_dict(checkpoint["high"], strict=True)
+            if checkpoint.get("r30_high_value") is None or agent.high_value is None:
+                raise ValueError("R30 checkpoint is missing its high critic")
+            agent.high_value.load_state_dict(checkpoint["r30_high_value"], strict=True)
+            agent.checkpoint_migration_mode = "strict_r30_resume"
+            agent.checkpoint_migrated_high_keys = tuple(agent.high.state_dict().keys())
+        elif source_controller == "legacy_duration":
+            migrated = migrate_legacy_high_to_r30(agent, checkpoint["high"])
+            agent.checkpoint_migration_mode = "legacy_to_r30_v1"
+            agent.checkpoint_migrated_high_keys = tuple(migrated)
+        else:
+            raise ValueError(f"unsupported R30 migration source {source_controller!r}")
+    else:
+        if source_controller != "legacy_duration":
+            raise ValueError(
+                "legacy duration controller cannot load an R30 checkpoint"
+            )
+        agent.high.load_state_dict(checkpoint["high"], strict=True)
+        agent.checkpoint_migration_mode = "strict_legacy_resume"
+        agent.checkpoint_migrated_high_keys = tuple(agent.high.state_dict().keys())
     if "compact" in checkpoint:
         agent.compact.load_state_dict(checkpoint["compact"])
     if "bridge" in checkpoint:
@@ -1584,16 +1692,27 @@ def load_checkpoint(
     # Value-normalization statistics are part of the frozen inference state,
     # not optimizer state.  Evaluation-only checkpoint loads must restore them
     # so critic values retain their source-checkpoint scale.
-    if checkpoint.get("high_value_norm") is not None and agent.high_value_norm is not None:
+    restore_high_state = not (
+        bool(getattr(agent, "r30_enabled", False))
+        and source_controller == "legacy_duration"
+    )
+    if (
+        restore_high_state
+        and checkpoint.get("high_value_norm") is not None
+        and agent.high_value_norm is not None
+    ):
         agent.high_value_norm.load_state_dict(checkpoint["high_value_norm"])
     if checkpoint.get("low_value_norm") is not None and agent.low_value_norm is not None:
         agent.low_value_norm.load_state_dict(checkpoint["low_value_norm"])
     if load_optimizers:
-        if "high_opt" in checkpoint:
-            try:
+        if "high_opt" in checkpoint and restore_high_state:
+            if bool(getattr(agent, "r30_enabled", False)):
                 agent.high_opt.load_state_dict(checkpoint["high_opt"])
-            except ValueError:
-                pass
+            else:
+                try:
+                    agent.high_opt.load_state_dict(checkpoint["high_opt"])
+                except ValueError:
+                    pass
         if "low_opt" in checkpoint and checkpoint.get("low_opt") is not None and agent.low_opt is not None:
             agent.low_opt.load_state_dict(checkpoint["low_opt"])
         if (
@@ -1736,6 +1855,10 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         return checkpoint.get(name) if name in checkpoint else _manifest_lookup(manifest, name)
 
     return {
+        "checkpoint_schema_version": checkpoint.get("checkpoint_schema_version", 1),
+        "high_controller": checkpoint.get("high_controller"),
+        "r30_contract": checkpoint.get("r30_contract"),
+        "checkpoint_migration": checkpoint.get("checkpoint_migration"),
         "duration_candidates": checkpoint.get("duration_candidates"),
         "n_agents": checkpoint.get("n_agents"),
         "n_skills": checkpoint.get("n_skills"),
@@ -1792,6 +1915,20 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
 
 
 def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[str, Any]) -> None:
+    requested_controller = str(getattr(args, "high_controller", "") or "")
+    source_controller = str(metadata.get("high_controller") or "legacy_duration")
+    if not requested_controller:
+        config.high_controller = source_controller
+    elif requested_controller != source_controller:
+        if not (
+            requested_controller == "r30_fixed_clock_ar_edit"
+            and source_controller == "legacy_duration"
+        ):
+            raise ValueError(
+                "checkpoint high_controller mismatch: "
+                f"requested={requested_controller}, source={source_controller}"
+            )
+
     duration_candidates = metadata.get("duration_candidates")
     if duration_candidates:
         config.skill_lifetime_candidates = tuple(int(v) for v in duration_candidates)
@@ -2102,6 +2239,241 @@ def enforce_r29_action_info_contract(
         raise ValueError("R29-T10 requires skill lifetimes (1,2,3,4)")
 
 
+def enforce_r30_contract(config, args: argparse.Namespace) -> None:
+    """Fail closed around the reward-pure fixed-clock R30 controller."""
+
+    mode = str(getattr(config, "high_controller", "legacy_duration"))
+    if mode == "legacy_duration":
+        return
+    if mode != "r30_fixed_clock_ar_edit":
+        raise ValueError(f"unsupported high_controller={mode!r}")
+
+    if str(getattr(args, "r28_g1_arm", "off")) != "off":
+        raise ValueError("R30 requires r28_g1_arm=off")
+    if str(getattr(args, "r29_action_info_mode", "off")) != "off":
+        raise ValueError("R30 requires r29_action_info_mode=off")
+    if int(getattr(args, "skill_interval", 0)) != 10:
+        raise ValueError("R30 requires skill_interval=10")
+    if str(getattr(args, "device", "cuda")).lower() != "cuda":
+        raise ValueError("R30 requires explicit CUDA")
+    if not torch.cuda.is_available():
+        raise RuntimeError("R30 requested CUDA but CUDA is unavailable")
+    if bool(getattr(args, "enable_team_intent", False)):
+        raise ValueError("R30 does not admit sampled team intent")
+    if bool(getattr(args, "enable_low_actor_team_code", False)):
+        raise ValueError("R30 preserves the low actor skill bottleneck")
+
+    explicit_reward_args = (
+        "enable_prototype_disc_reward",
+        "enable_team_transition_reward",
+        "enable_team_disc_reward",
+        "enable_assignment_actionability_reward",
+        "enable_skill_effect_reward",
+        "enable_skill_forcing_reward",
+        "p2_recovery_credit_reward_on",
+        "enable_topology_potential_shaping",
+    )
+    enabled_rewards = [name for name in explicit_reward_args if bool(getattr(args, name, False))]
+    injection_switches = (
+        "process_reward_injection",
+        "outcome_residual_injection",
+        "topology_role_injection",
+        "topology_potential_injection",
+    )
+    enabled_injections = [
+        name
+        for name in injection_switches
+        if str(getattr(args, name, "")).lower() not in {"", "none"}
+    ]
+    if enabled_rewards or enabled_injections:
+        raise ValueError(
+            "R30 is reward-pure; disable intrinsic reward paths: "
+            + ",".join(enabled_rewards + enabled_injections)
+        )
+
+    explicit_edit = getattr(args, "edit_penalty_alpha", None)
+    explicit_switch = getattr(args, "switch_penalty_beta", None)
+    if explicit_edit not in {None, 0, 0.0} or explicit_switch not in {None, 0, 0.0}:
+        raise ValueError("R30 forbids edit and switch penalties")
+    if bool(getattr(args, "enable_duration_entropy_floor", False)):
+        raise ValueError("R30 forbids the duration entropy floor")
+
+    config.team_bridge_type = "deterministic_expected"
+    config.r30_bridge_context_mode = "deterministic_expected"
+    config.r30_keep_init = 0.6
+    config.r30_high_buffer_version = 1
+    config.high_keep_entropy_coef = 0.0
+    config.edit_penalty_alpha = 0.0
+    config.switch_penalty_beta = 0.0
+    config.duration_entropy_floor_enabled = False
+    config.z_entropy_floor_enabled = False
+    config.enable_team_intent = False
+    config.enable_team_disc_probe = False
+    config.enable_assignment_actionability_probe = False
+    config.enable_g_info_objective = False
+    config.use_compact_return_head = False
+    config.z_assignment_residual_gain = 0.0
+    config.low_actor_condition_on_team_code = False
+    for name in (
+        "enable_prototype_disc_reward",
+        "enable_team_transition_reward",
+        "enable_team_disc_reward",
+        "enable_assignment_actionability_reward",
+        "skill_effect_reward_on",
+        "enable_skill_forcing_reward",
+        "p2_recovery_credit_reward_on",
+        "use_topology_potential_shaping",
+    ):
+        setattr(config, name, False)
+    config.process_reward_injection = "none"
+    config.outcome_residual_injection = "none"
+    config.topology_role_injection = "none"
+    config.topology_potential_injection = "none"
+    config.skill_effect_reward_injection = "none"
+    config.skill_force_reward_injection = "none"
+    config.parallel_selection = False
+    config.use_autoregressive_selection = True
+    config.ar_prefix_mode = "roster"
+    config.r29_action_info_mode = "off"
+
+
+def enforce_r30_pair_gate(
+    config,
+    args: argparse.Namespace,
+    metadata: dict[str, Any] | None,
+) -> None:
+    """Apply controls shared by both arms of the registered R30 pair."""
+
+    if not bool(getattr(args, "r30_pair_gate", False)):
+        return
+    controller = str(getattr(config, "high_controller", "legacy_duration"))
+    if controller not in {"legacy_duration", "r30_fixed_clock_ar_edit"}:
+        raise ValueError(f"R30 pair does not admit high_controller={controller!r}")
+    if metadata is None or not str(getattr(args, "resume_from", "")):
+        raise ValueError("R30 pair requires the registered pre-R30 checkpoint")
+    source_path = str(Path(args.resume_from)).replace("\\", "/")
+    if not (
+        source_path == R28_G1_SOURCE_CHECKPOINT_PATH
+        or source_path.endswith(f"/{R28_G1_SOURCE_CHECKPOINT_PATH}")
+    ):
+        raise ValueError(
+            "R30 pair requires the registered R25 arm0 source: "
+            f"{R28_G1_SOURCE_CHECKPOINT_PATH}"
+        )
+    if int(metadata.get("total_steps", -1)) != 1_000_000:
+        raise ValueError("R30 pair source must be the 1,000,000-step R25 checkpoint")
+    if int(metadata.get("update_idx", -1)) != 32:
+        raise ValueError("R30 pair source must be checkpoint update 32")
+    if str(metadata.get("high_controller") or "legacy_duration") != "legacy_duration":
+        raise ValueError("R30 pair source must use the legacy-duration controller")
+    if int(metadata.get("n_agents", -1)) != 6 or int(metadata.get("n_skills", -1)) != 4:
+        raise ValueError("R30 pair source must have six agents and four skills")
+    if tuple(int(item) for item in metadata.get("duration_candidates") or ()) != (1, 2, 3, 4):
+        raise ValueError("R30 pair source must have duration candidates (1,2,3,4)")
+
+    exact = {
+        "seed": 30031,
+        "num_envs": 16,
+        "rollout_length": 501,
+        "skill_interval": 10,
+        "total_timesteps": 1_320_000,
+        "low_ppo_epochs": 15,
+        "eval_interval": 320_000,
+        "eval_episodes": 20,
+    }
+    for name, expected in exact.items():
+        actual = int(getattr(args, name, -1))
+        if actual != expected:
+            raise ValueError(f"R30 pair requires {name}={expected}, got {actual}")
+    if str(getattr(args, "preset", "")) != "S7-S1":
+        raise ValueError("R30 pair requires preset S7-S1")
+    if normalize_scenario(str(getattr(args, "scenario", ""))) != "energy":
+        raise ValueError("R30 pair requires the energy scenario")
+    if str(getattr(args, "collector_backend", "")) != "subproc":
+        raise ValueError("R30 pair requires the subproc collector")
+    if str(getattr(args, "collector_start_method", "")) != "spawn":
+        raise ValueError("R30 pair requires spawn workers")
+    if str(getattr(args, "device", "")).lower() != "cuda":
+        raise ValueError("R30 pair requires explicit CUDA")
+    if str(getattr(args, "eval_action_mode", "")) != "deterministic":
+        raise ValueError("R30 pair requires deterministic evaluation")
+    if not torch.cuda.is_available():
+        raise RuntimeError("R30 pair requested CUDA but CUDA is unavailable")
+    if str(getattr(args, "r28_g1_arm", "off")) != "off":
+        raise ValueError("R30 pair requires r28_g1_arm=off")
+    if str(getattr(args, "r29_action_info_mode", "off")) != "off":
+        raise ValueError("R30 pair requires r29_action_info_mode=off")
+
+    disabled_false = (
+        "enable_prototype_disc_probe",
+        "enable_prototype_disc_reward",
+        "enable_team_transition_probe",
+        "enable_team_transition_reward",
+        "enable_team_intent",
+        "enable_team_disc_probe",
+        "enable_team_disc_reward",
+        "enable_assignment_actionability_probe",
+        "enable_assignment_actionability_reward",
+        "enable_g_info_objective",
+        "skill_effect_discovery_on",
+        "skill_effect_intervention_probe_on",
+        "skill_effect_reward_on",
+        "skill_force_probe_on",
+        "enable_skill_forcing_probe",
+        "enable_skill_forcing_reward",
+        "skill_forcing_reward_on",
+        "use_topology_potential_shaping",
+        "p2_recovery_credit_reward_on",
+        "duration_entropy_floor_enabled",
+        "z_entropy_floor_enabled",
+        "use_compact_return_head",
+    )
+    for name in disabled_false:
+        setattr(config, name, False)
+    disabled_zero = (
+        "prototype_disc_reward_coef",
+        "team_transition_coef",
+        "team_disc_coef",
+        "assignment_actionability_coef",
+        "transition_skill_reward_coef",
+        "outcome_residual_reward_coef",
+        "topology_role_reward_coef",
+        "topology_potential_coef",
+        "p2_recovery_reward_coef",
+        "skill_effect_ctrl_coef",
+        "skill_effect_use_coef",
+        "skill_force_disc_coef",
+        "skill_force_effect_coef",
+        "skill_force_duration_entropy_coef",
+        "g_info_coef_skill",
+        "g_info_coef_duration",
+        "g_info_coef_edit",
+        "situation_hazard_reward_coef",
+        "duration_entropy_floor_coef",
+        "z_entropy_floor_coef",
+        "edit_penalty_alpha",
+        "switch_penalty_beta",
+        "z_assignment_residual_gain",
+    )
+    for name in disabled_zero:
+        setattr(config, name, 0.0)
+    config.use_process_reward_for_discoverer = False
+    config.process_reward_mode = "none"
+    config.process_reward_injection = "none"
+    config.outcome_residual_injection = "none"
+    config.topology_role_injection = "none"
+    config.topology_potential_injection = "none"
+    config.skill_effect_reward_injection = "none"
+    config.skill_force_reward_injection = "none"
+    config.team_bridge_type = "deterministic_expected"
+    config.low_actor_condition_on_team_code = False
+    config.parallel_selection = False
+    config.use_autoregressive_selection = True
+    config.ar_prefix_mode = "roster"
+    config.r29_action_info_mode = "off"
+    config.r30_pair_gate = True
+
+
 def run_env_dry_check(config, args: argparse.Namespace) -> None:
     """Check the standalone env path without touching HMASD training code."""
 
@@ -2172,6 +2544,7 @@ def evaluate(
     env = create_env(config, config.scenario, int(args.seed) + 100000, rank=0, scale_mode="eval")
     deterministic_eval = str(getattr(args, "eval_action_mode", "deterministic")) == "deterministic"
     active_backup = agent.active_skills.copy()
+    active_duration_indices_backup = agent.active_duration_indices.copy()
     duration_backup = agent.duration_remaining.copy()
     age_backup = agent.skill_age.copy()
     has_active_backup = agent.has_active_skill.copy()
@@ -2186,6 +2559,13 @@ def evaluate(
     low_critic_hxs_backup = agent.low_critic_hxs.copy()
     episode_steps_backup = agent.episode_steps.copy()
     episode_ids_backup = agent.episode_ids.copy()
+    steps_to_check_backup = agent.steps_to_check.copy()
+    high_check_buffer_backup = agent.high_check_buffer
+    if bool(getattr(agent, "r30_enabled", False)):
+        agent.high_check_buffer = type(high_check_buffer_backup)(
+            agent.num_envs, agent.n_agents, agent.gamma
+        )
+    last_low_context_backup = list(agent._last_low_context)
     segments_backup = agent.segments
     agent.segments = SegmentManager(agent.num_envs, agent.n_agents)
 
@@ -2256,6 +2636,13 @@ def evaluate(
                     throughput_when_backhaul_connected_steps.append(float(step_throughput))
                 done = bool(terminated or truncated)
                 hit_step_cap = int(args.eval_max_steps) > 0 and episode_length >= int(args.eval_max_steps)
+                agent.record_environment_step(
+                    0,
+                    reward=float(reward),
+                    next_obs=obs,
+                    next_state=state,
+                    done=bool(done or hit_step_cap),
+                )
                 if capture_topology and len(topology_frames) < topology_max_frames:
                     should_capture = (
                         episode_length % topology_interval == 0
@@ -2349,6 +2736,7 @@ def evaluate(
         env.close()
         agent.segments = segments_backup
         agent.active_skills = active_backup
+        agent.active_duration_indices = active_duration_indices_backup
         agent.duration_remaining = duration_backup
         agent.skill_age = age_backup
         agent.has_active_skill = has_active_backup
@@ -2361,6 +2749,9 @@ def evaluate(
         agent.low_critic_hxs = low_critic_hxs_backup
         agent.episode_steps = episode_steps_backup
         agent.episode_ids = episode_ids_backup
+        agent.steps_to_check = steps_to_check_backup
+        agent.high_check_buffer = high_check_buffer_backup
+        agent._last_low_context = last_low_context_backup
 
     metrics = {
         "reward_mean": float(np.mean(rewards)) if rewards else 0.0,
@@ -3552,7 +3943,13 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     episode_rewards.append(float(np.mean(individual_rewards)))
 
                     total_steps += 1
-                    agent.record_environment_step(env_id)
+                    agent.record_environment_step(
+                        env_id,
+                        reward=float(reward),
+                        next_obs=next_obs,
+                        next_state=info.get("next_state", states[env_id]),
+                        done=done,
+                    )
                     observations[env_id] = next_obs
                     states[env_id] = info.get("next_state", states[env_id])
                     if done:
@@ -3566,6 +3963,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 if total_steps >= int(args.total_timesteps):
                     break
 
+            agent.truncate_high_rows_for_update(observations, states)
             agent.segments.flush(reason="update")
             rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
             process_metrics = agent.process_update(
@@ -3574,7 +3972,17 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 update_idx=update_idx + 1,
             )
             low_metrics = agent.update_low(rollout)
+            if bool(getattr(agent, "r30_enabled", False)):
+                process_metrics.update(
+                    agent.update_high_from_checks(total_steps=total_steps)
+                )
             update_idx += 1
+            if bool(getattr(agent, "r30_enabled", False)):
+                agent.start_high_continuations_after_update(
+                    observations,
+                    states,
+                    policy_update=update_idx + 1,
+                )
             env_reward_mean = float(np.mean(episode_rewards)) if episode_rewards else 0.0
             proto_ratio = float(process_metrics.get("proto_disc_reward_env_ratio", 0.0))
             proto_reward_steps = float(process_metrics.get("proto_disc_reward_applied_steps", 0.0))
@@ -3962,7 +4370,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 else:
                     emit(args, f"standalone_runtime_guard mode=kill {combined_intrinsic_kill_message}")
                     raise RuntimeError(combined_intrinsic_kill_message)
-            agent.reset_all_policy_state()
+            if not bool(getattr(agent, "r30_enabled", False)):
+                agent.reset_all_policy_state()
 
             if int(args.save_interval) > 0 and update_idx % int(args.save_interval) == 0:
                 save_checkpoint(
@@ -4048,6 +4457,11 @@ def eval_loop(config, args: argparse.Namespace, writer) -> None:
 
 def main() -> None:
     args = parse_args()
+    random.seed(int(args.seed))
+    np.random.seed(int(args.seed))
+    torch.manual_seed(int(args.seed))
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(int(args.seed))
     Path(args.log_dir).mkdir(parents=True, exist_ok=True)
     writer = SummaryWriter(args.log_dir) if SummaryWriter is not None else None
     config = load_config(args.config, args.preset or None)
@@ -4059,6 +4473,8 @@ def main() -> None:
         apply_checkpoint_structure(config, args, metadata)
     enforce_r28_g1_contract(config, args, metadata)
     enforce_r29_action_info_contract(config, args)
+    enforce_r30_pair_gate(config, args, metadata)
+    enforce_r30_contract(config, args)
 
     try:
         if args.dry_run_env_steps > 0:
