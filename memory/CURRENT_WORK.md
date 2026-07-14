@@ -92,16 +92,22 @@ does not add a new intrinsic reward.
   semantic lane now learns from R30 low-level transition fragments and applies
   the existing low-only transition-skill pressure; the fixed-clock high buffer
   continues to receive raw task reward only.
+- The paired 64K Alice--Bob screen completed with valid R30 replay and
+  non-degenerate lifetime use, but neither arm contacted the target or completed
+  a cycle and natural context-residual skill differentiation was not established.
+  The historical run also used a `0.20 * Delta potential` environment reward,
+  so it is mechanism evidence only, not a sparse-exploration result. The active
+  Alice--Bob environment is now collection-only sparse reward; distance and
+  progress shaping have been removed from reward and advantage.
 
 ## Next Actions
 
-1. Run the approved parallel 16-env, 64K-per-arm Alice--Bob mechanism screen at
-   `logs/r30_alice_bob_paired_64k_20260714_163908`: adaptive KEEP/SET versus the
-   matched shared-`k` forced-refresh control.
-2. At terminal status, read `result/alice_bob_pair.json` once and interpret
-   cycle success, behavior-inferred button KEEP / target SET alignment, lifetime
-   breadth, and transition-skill differentiation. Do not promote this toy result
-   to S7.
+1. Obtain the manual GPT-5.6 Pro algorithm/code review through
+   `docs/external-review/gpt5_6_pro/20260714_r30_sparse_exploration_review/REVIEW_ENTRY.md`.
+   Archive the returned response raw before disposition.
+2. Select one task-generic process-level intrinsic-exploration route for the
+   sparse Alice--Bob environment. Do not launch a reward-on run until its
+   reward-off persistent-effect causal gate is specified and accepted.
 
 Completed run: `logs/r29_t10_paired_320k_20260714_010026`; formal result detail
 is in `memory/ExpRecord.md`. The manual review package is under
@@ -127,6 +133,9 @@ is in `memory/ExpRecord.md`. The manual review package is under
 - R30 uses no keep entropy, edit/switch penalty, forced maximum lifetime, or
   positive lifetime reward. Long survival must be learned from delayed task
   advantage rather than paid for directly.
+- Do not use environment potential/progress shaping in Alice--Bob sparse
+  exploration claims, and do not count shaped progress as algorithmic intrinsic
+  reward. The completed 64K shaped pair remains mechanism-only evidence.
 - Do not inject another individual-skill reward before a reward-off diagnostic
   establishes the selected realized-effect target under policy-matched
   stochastic execution.
@@ -150,4 +159,6 @@ is in `memory/ExpRecord.md`. The manual review package is under
   response and controller disposition.
 - `docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/` — raw
   `MODIFY R30` review and accepted controller disposition.
+- `docs/external-review/gpt5_6_pro/20260714_r30_sparse_exploration_review/` —
+  current result boundary and manual review entry for the next intrinsic route.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

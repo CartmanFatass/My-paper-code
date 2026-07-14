@@ -31,7 +31,6 @@ class Config(ProcessConfig):
     alice_bob_num_short_periods = 8
     alice_bob_action_scale = 0.75
     alice_bob_contact_radius = 0.70
-    alice_bob_progress_reward_coef = 0.20
     alice_bob_state_long_phase_index = 9
     alice_bob_state_last_button_slice = (15, 17)
     alice_bob_state_last_target_slice = (17, 19)
@@ -58,6 +57,8 @@ class Config(ProcessConfig):
     use_g_info_diagnostic = False
     enable_situation_diagnostics = False
 
+    # The environment reward is sparse collection-only.  Exploration and skill
+    # differentiation must come from the algorithm, not distance shaping.
     # Preserve HMASD's pressure for behaviorally distinguishable individual
     # skills.  The context residual prevents agent identity and clock phase from
     # being sufficient shortcuts; this reward affects only the low policy.

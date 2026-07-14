@@ -329,6 +329,14 @@ targets may still include cumulative environment reward over the skill lifetime
 plus separately defined intrinsic terms, but the intrinsic terms themselves
 should not be direct functions of communication reward or raw task reward.
 
+User clarification 2026-07-14: the original HMASD sparse-exploration claim was
+not obtained by adding task-distance potential shaping to the environment.
+Any HA-CTSE experiment used to support sparse exploration or HMASD parity must
+therefore keep the benchmark's external reward sparse and treat distance,
+contact, progress, coverage, or other environment-derived shaping as a separate
+task-specific ablation.  Environment shaping is neither algorithmic intrinsic
+reward nor evidence that the algorithm reconstructed HMASD's exploration loop.
+
 ## HMASD As Inspiration
 
 HMASD contributes useful structural ideas and cooperation priors, not a block to

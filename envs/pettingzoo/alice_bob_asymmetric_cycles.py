@@ -2,7 +2,10 @@
 
 The active button persists across several high-level checks while the active
 target changes every check.  The environment never assigns either subtask to
-an agent; complementary skill allocation must emerge from the controller.
+an agent; complementary skill allocation must emerge from the controller.  Its
+shared external reward is sparse: one collection event when different agents
+jointly occupy the active button and target.  There is no distance or progress
+reward shaping.
 """
 
 from __future__ import annotations
@@ -27,9 +30,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         self.action_scale = float(getattr(config, "alice_bob_action_scale", 0.75))
         self.contact_radius = float(
             getattr(config, "alice_bob_contact_radius", 0.70)
-        )
-        self.progress_reward_coef = float(
-            getattr(config, "alice_bob_progress_reward_coef", 0.20)
         )
         if self.short_period <= 0 or self.long_periods <= 0:
             raise ValueError("Alice--Bob periods must be positive")
@@ -102,7 +102,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         infos = self._get_infos(
             step_reward=0.0,
             collection_event=False,
-            progress_reward=0.0,
         )
         return observations, infos
 
@@ -145,18 +144,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
             (button_contacts[0] and target_contacts[1])
             or (button_contacts[1] and target_contacts[0])
         )
-
-    def _task_potential(self) -> float:
-        plate = self.button_pos[self.active_plate]
-        target = self.target_pos[self.active_target]
-        assignment_costs = (
-            np.linalg.norm(self.agent_pos[0] - plate)
-            + np.linalg.norm(self.agent_pos[1] - target),
-            np.linalg.norm(self.agent_pos[1] - plate)
-            + np.linalg.norm(self.agent_pos[0] - target),
-        )
-        normalizer = 2.0 * np.sqrt(2.0) * self.world_size
-        return -float(min(assignment_costs) / normalizer)
 
     def _get_obs(self) -> dict[str, np.ndarray]:
         observations = {}
@@ -242,13 +229,14 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         self,
         step_reward: float,
         collection_event: bool,
-        progress_reward: float,
     ):
         metrics = self._task_metrics()
         reward_info = {
             **metrics,
             "task_reward": float(step_reward),
-            "alice_bob_progress_reward": float(progress_reward),
+            # Retained as an explicit zero-valued compatibility metric so run
+            # evidence can prove that environment shaping was absent.
+            "alice_bob_progress_reward": 0.0,
             "alice_bob_collection_reward": float(collection_event),
             "alice_bob_collection_event": float(collection_event),
         }
@@ -265,7 +253,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         if not self.agents:
             raise RuntimeError("step() called after the Alice--Bob episode ended")
 
-        potential_before = self._task_potential()
         for agent, action in actions.items():
             idx = self.agent_ids[agent]
             delta = np.asarray(action, dtype=np.float32).reshape(2)
@@ -289,10 +276,7 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         collection_event = bool(
             jointly_satisfied and not self.window_target_collected
         )
-        progress_reward = self.progress_reward_coef * (
-            self._task_potential() - potential_before
-        )
-        reward = float(collection_event) + float(progress_reward)
+        reward = float(collection_event)
         if collection_event:
             self.window_target_collected = True
             self.targets_completed += 1
@@ -321,7 +305,7 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         rewards = {agent: reward for agent in self.agents}
         terminations = {agent: False for agent in self.agents}
         truncations = {agent: truncated for agent in self.agents}
-        infos = self._get_infos(reward, collection_event, progress_reward)
+        infos = self._get_infos(reward, collection_event)
         return observations, rewards, terminations, truncations, infos
 
     def close(self):

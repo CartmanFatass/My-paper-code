@@ -1,0 +1,195 @@
+{
+  "adaptive_minus_shared": {
+    "alice_bob_button_occupancy_fraction": 0.04375,
+    "alice_bob_button_switch_count": 0.0,
+    "alice_bob_cycle_success_rate": 0.0,
+    "alice_bob_joint_coordination_fraction": 0.0,
+    "alice_bob_r30_observed_button_keep_rate": 0.75,
+    "alice_bob_r30_observed_cycle_action_match_rate": 0.0,
+    "alice_bob_r30_observed_target_set_rate": -1.0,
+    "alice_bob_target_contact_fraction": 0.0,
+    "alice_bob_targets_completed": 0.0,
+    "length": 0.0,
+    "reward": -0.02208954678819744
+  },
+  "arm_validity": {
+    "adaptive_keep_set": true,
+    "shared_k_refresh": true
+  },
+  "arms": {
+    "adaptive_keep_set": {
+      "arm_root": "C:\\project\\HMASD\\logs\\r30_alice_bob_paired_64k_20260714_163908\\runs\\adaptive_keep_set\\seed30031",
+      "evaluation": {
+        "alice_bob_button_occupancy_fraction": {
+          "mean": 0.04375,
+          "std": 0.06440836513994125
+        },
+        "alice_bob_button_switch_count": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "alice_bob_cycle_success_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_joint_coordination_fraction": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_target_contact_fraction": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_targets_completed": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "length": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "reward": {
+          "mean": -0.02542587382537768,
+          "std": 0.02390028593730056
+        }
+      },
+      "final_eval_episodes": 40,
+      "final_eval_steps": 64000,
+      "final_train_steps": 64000,
+      "late_quarter": {
+        "full_sync_set_rate": 0.16895604395604397,
+        "full_sync_set_rows": 246.0,
+        "low_skill_usage_entropy": 0.99059864265243,
+        "normal_decision_rows": 1456.0,
+        "observed_behavior": {
+          "alice_bob_r30_observed_button_keep_rate": 0.75,
+          "alice_bob_r30_observed_cycle_action_match_rate": 0.0,
+          "alice_bob_r30_observed_target_set_rate": 0.0
+        },
+        "observed_cycle_rows": 4.0,
+        "semantic_shortcut_hard_stop_triggered": 0.0,
+        "spell_counts": {
+          "gt_4k0": 125.0,
+          "le_4k0": 1104.0
+        },
+        "switch_skill_counts": [
+          312.0,
+          300.0,
+          299.0,
+          251.0
+        ],
+        "switch_skill_entropy_norm": 0.9975977653164372,
+        "switch_skill_min_share": 0.21600688468158347,
+        "transition_skill": {
+          "transition_skill_acc": 0.3560697138309479,
+          "transition_skill_context_acc": 0.26111778846153844,
+          "transition_skill_residual_mi_mean": -0.007931432953158107,
+          "transition_skill_residual_mi_positive_frac": 0.47539063141896176,
+          "transition_skill_reward_active": 1.0,
+          "transition_skill_reward_mean": 0.0007136676756020349
+        },
+        "transition_skill_available_samples": 33280.0,
+        "transition_skill_samples": 33280.0,
+        "updates": 13
+      },
+      "train_updates": 50,
+      "wiring": {
+        "continuation_actor_tokens": 0.0,
+        "continuation_rows": 0.0,
+        "decision_rows": 6400.0,
+        "replay_logp_max_error": 4.76837158203125e-07,
+        "tokens_per_decision_exact": true
+      }
+    },
+    "shared_k_refresh": {
+      "arm_root": "C:\\project\\HMASD\\logs\\r30_alice_bob_paired_64k_20260714_163908\\runs\\shared_k_refresh\\seed30031",
+      "evaluation": {
+        "alice_bob_button_occupancy_fraction": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_button_switch_count": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "alice_bob_cycle_success_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_joint_coordination_fraction": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_target_contact_fraction": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "alice_bob_targets_completed": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "length": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "reward": {
+          "mean": -0.0033363270371802416,
+          "std": 0.0023437258883927813
+        }
+      },
+      "final_eval_episodes": 40,
+      "final_eval_steps": 64000,
+      "final_train_steps": 64000,
+      "late_quarter": {
+        "full_sync_set_rate": 1.0,
+        "full_sync_set_rows": 1456.0,
+        "low_skill_usage_entropy": 0.9872639963006085,
+        "normal_decision_rows": 1456.0,
+        "observed_behavior": {
+          "alice_bob_r30_observed_button_keep_rate": 0.0,
+          "alice_bob_r30_observed_cycle_action_match_rate": 0.0,
+          "alice_bob_r30_observed_target_set_rate": 1.0
+        },
+        "observed_cycle_rows": 1.0,
+        "semantic_shortcut_hard_stop_triggered": 0.0,
+        "spell_counts": {
+          "gt_4k0": 0.0,
+          "le_4k0": 2912.0
+        },
+        "switch_skill_counts": [
+          812.0,
+          823.0,
+          737.0,
+          540.0
+        ],
+        "switch_skill_entropy_norm": 0.9907465408974464,
+        "switch_skill_min_share": 0.18543956043956045,
+        "transition_skill": {
+          "transition_skill_acc": 0.298407453757066,
+          "transition_skill_context_acc": 0.2815504807692308,
+          "transition_skill_residual_mi_mean": -0.031477768977101035,
+          "transition_skill_residual_mi_positive_frac": 0.39609375366797817,
+          "transition_skill_reward_active": 1.0,
+          "transition_skill_reward_mean": 0.00045821813490385044
+        },
+        "transition_skill_available_samples": 33280.0,
+        "transition_skill_samples": 33280.0,
+        "updates": 13
+      },
+      "train_updates": 50,
+      "wiring": {
+        "continuation_actor_tokens": 0.0,
+        "continuation_rows": 0.0,
+        "decision_rows": 6400.0,
+        "replay_logp_max_error": 3.5762786865234375e-07,
+        "tokens_per_decision_exact": true
+      }
+    }
+  },
+  "experiment_id": "EXP-20260714-r30-alice-bob-paired-64k",
+  "implementation_valid": true,
+  "scope": "single paired Alice--Bob mechanism seed; not S7 or efficacy evidence",
+  "seed": 30031,
+  "status": "COMPLETE",
+  "total_timesteps_per_arm": 64000
+}
