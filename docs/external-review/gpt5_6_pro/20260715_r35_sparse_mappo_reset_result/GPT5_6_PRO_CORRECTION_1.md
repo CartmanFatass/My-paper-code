@@ -46,7 +46,7 @@ question is no longer whether to run Sparse MAPPO reset. The question is what
 to conclude from its valid no-access outcome and which single upstream access
 mechanism should be tested next.
 
-## Required answer structure
+## Requested decision
 
 1. Return exactly one audit verdict:
    - `VALID_NO_ACCESS_R35_UNRESOLVED`; or
