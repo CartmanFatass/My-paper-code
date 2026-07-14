@@ -22,14 +22,16 @@ and history live in their owning files.
 
 ## Current Objective
 
-Disposition the valid R33 failure and obtain exactly one structurally different
-post-R33 causal edge:
+Test the single post-R33 codebook-construction edge selected after the valid
+R33 failure:
 
 ```text
 R32 individual effect creation: positive but immaterial
 -> R33 non-additive role-swap selection: positive but immaterial
 -> no natural joint or nonredundant coverage transport
--> existing skill codebook has no demonstrated selectable team complementarity
+-> existing skill labels are not demonstrated persistent primitives
+-> R34 balanced hindsight modes rewrite the low-level codebook
+-> forced mode reproduction -> frozen-R30 natural use -> coverage transport
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -127,12 +129,18 @@ direct intervention-scored roster-complementarity selection are retired.
   mass gain was `0.001250` versus `0.10`, and natural coverage/nonredundancy
   were slightly worse than pair-sham. R30 safety passed. The registered M1
   branch permanently retires direct roster-complementarity fitting.
+- Two GPT-5.6 Pro submissions selected R34-BHMD after accepting the R33 valid
+  failure. They are archived separately but are repeated samples from one
+  model, not independent scientific evidence. Controller disposition is
+  `MODIFY`: use full-episode recurrent replay, add an unchanged source anchor,
+  use focal-only controllable mode labels, strengthen the sham, and split
+  codebook formation from frozen-selector use and coverage.
 
 ## Next Actions
 
-1. Preserve the R33 result and compact R29--R33 failure matrix in Git.
-2. Submit the tracked R33 validity/route question to GPT-5.6 Pro manually.
-3. Archive and disposition its raw response before implementing one new edge.
+1. Complete the two-file R34-BHMD implementation boundary.
+2. Run the registered 48,640-step local CUDA gate once.
+3. Read its single result JSON and take only the registered branch.
 
 Completed run: `logs/r33_irsc_gate_20260714_214411`; formal result detail is
 in `memory/ExpRecord.md`.
@@ -173,6 +181,12 @@ in `memory/ExpRecord.md`.
 - Do not rescue R33 with temperature, more updates, score clipping, another
   pair permutation, new team latent, `q_D`, team reward, seed expansion, or
   normal-trainer integration.
+- Do not let `real_modes > sham` alone count as R34 mode creation; the real arm
+  must also clear the frozen-source anchor. Do not use teammate motion, reward,
+  action, age, agent ID, or task fields to define focal mode labels.
+- Do not change R34 K, descriptor, clustering, optimizer exposure, parameter
+  scope, window, seed, or thresholds after its result. A downstream
+  frozen-selector or coverage failure does not erase an M1 codebook pass.
 
 ## Pointers
 

@@ -263,6 +263,42 @@ were slightly below pair-sham while R30 lifetime and skill supply remained
 healthy. Retire direct intervention-scored roster-complementarity selection;
 do not tune or integrate it.
 
+## R34 Balanced Hindsight Mode Distillation
+
+Active causal edge:
+
+```text
+unlabeled natural focal trajectories
+-> balanced hindsight mode labels
+-> full-episode recurrent low-actor distillation
+-> intervention-reproducible numerical skills
+-> frozen-R30 natural use
+-> joint-state coverage transport
+```
+
+The two GPT-5.6 Pro responses selected the same route. Controller disposition
+is `MODIFY`: response B's full-episode replay supersedes stale block-start
+hidden replay; a frozen-source anchor prevents sham damage from masquerading as
+mode creation; focal-only displacement labels keep the target controllable by
+the focal skill; and mode formation, zero-shot selector use, and coverage are
+separate result branches.
+
+One implementation/evidence boundary:
+
+1. Add only `ha_ctse_process/r34_balanced_hindsight_mode_distillation.py` and
+   `scripts/r34_bhmd_gate.py` before the gate result.
+2. Fit exact-balanced four-mode prototypes on train-only focal displacement
+   sequences, then align their names to old numerical skills only for R30
+   interface compatibility.
+3. Compare `real_modes` and a maximum-Hamming episode-sequence sham from paired
+   initial actors, with the unchanged source as a no-update anchor.
+4. Replay complete 80-step source episodes from zero hidden and update only
+   low actor FiLM, recurrent layers, and action mean. Recompute current prefix
+   hidden for every heldout forced block.
+5. Keep the normal trainer, R30 controller, environment, rewards, critics,
+   OPT/bridge, and posteriors unchanged. The exact budget and decision contract
+   are owned by `memory/ExpRecord.md`.
+
 ## Legacy Compatibility Boundary
 
 - This branch is for constructing the new HA-CTSE/process algorithm, not for

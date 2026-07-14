@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260714-r34-bhmd-gate | launch-ready | hierarchy-L2 codebook-construction and transport gate | local CUDA; source is the frozen adaptive-R30 Alice--Bob checkpoint | single result JSON after launch | GPT-5.6 Pro responses A/B agree on BHMD; controller added a frozen-source anchor and split mode formation from selector use and coverage | Run the frozen modified gate once; no normal-trainer integration. |
 | EXP-20260714-r33-irsc-gate | completed — valid `FAIL_M1_RETIRE_R33_IRSC` | hierarchy-L2 mechanism-matched intervention/composition gate | local CUDA; `logs/r33_irsc_gate_20260714_214411`; implementation commit `465ee3c` | none | M0 PASS; heldout expected alignment gain `0.001955` and top-2 mass gain `0.001250`; coverage `427/429`, nonredundant ratio `0.984925`; R30 safety PASS | Permanently retire direct intervention-scored roster-complementarity selection; obtain failure review before one structurally different edge. |
 | EXP-20260714-r32-ifepg-paired-gate | completed — valid `FAIL_M1_RETIRE_R32_IFEPG` | hierarchy-L1 intervention-to-effect creation and natural-transport gate | local CUDA; `logs/r32_ifepg_paired_gate_20260714_193304`; commit `ddbdab9` | none | M0 PASS; causal ratio `1.01554`, gain `0.02875`; between ratio `1.02997`; coverage ratio `1.01282` | Retire direct IFEPG without tuning or expansion; seek one structurally different post-R32 causal edge. |
 | EXP-20260714-r31-cfei-reward-off-gate | completed — valid `FAIL`; R31 retired | hierarchy-L1 reward-off natural/forced causal gate | local CUDA; `logs/r31_cfei_reward_off_gate_20260714_181038`; commit `a7b985b` | none | M1 natural `0.487866`, but direct forced-skill M2 ratio `0.889613`; no gate checkpoint written | Retire R31-CFEI and do not launch the 160K reward pair or retune this target. |
@@ -44,6 +45,94 @@ explicitly approves the exception.
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
 ## Current Gate Detail
+
+### EXP-20260714-r34-bhmd-gate
+
+- Causal edge and authorization: R29--R33 show that distinguishing, directly
+  amplifying, or reselecting the existing labels does not create material
+  persistent primitives. R34 asks whether unlabeled focal trajectories can be
+  partitioned into balanced hindsight modes and distilled into the low actor so
+  that numerical skills causally reproduce those modes. This changes codebook
+  construction rather than adding another scorer for the old codebook.
+- Source: the frozen adaptive-R30 Alice--Bob checkpoint used by R32/R33. Seed
+  `34031` collects 32 stochastic 80-step episodes: 24 train and eight heldout.
+  Each of the 384 train block-agent rows contributes the focal agent's ten-step
+  normalized displacement sequence, shape `[20]`. Train-only normalization is
+  frozen; deterministic exact-balanced `K=4` clustering assigns 96 rows per
+  mode. A train-only Hungarian permutation aligns prototype names to old
+  numerical skills; old-z overlap/NMI is diagnostic only.
+- Arms and null: `frozen_source` receives no update; `real_modes` distills the
+  true hindsight sequence; `episode_sequence_sham` uses a deterministic
+  per-agent maximum-Hamming no-self permutation of whole eight-block label
+  sequences. The latter preserves label counts, sequence multiset, block
+  positions, and run lengths while breaking trajectory-to-label attribution.
+  Maximum-Hamming agreement above `0.50` is a valid degenerate-label M1 failure,
+  not an implementation repair branch.
+- Offline optimization: real and sham each replay all 48 train agent-episodes
+  from zero actor hidden state for ten epochs, batch size eight, six batches per
+  epoch and exactly 60 Adam calls (`lr=3e-4`, gradient clip `0.5`). The loss is
+  detached-action recurrent behavior NLL under the hindsight skill sequence.
+  Only `low.actor_film`, `low.actor_rnn`, and
+  `low.actor_act.action_out.fc_mean` receive gradient. Actor base/log-std,
+  critic, full R30 high policy/value, OPT/bridge, all posteriors, reward, GAE,
+  and normal PPO remain outside the objective.
+- Heldout intervention: 64 heldout block contexts x two focal agents x four
+  forced skills x two independent replicas x ten steps = 10,240 steps per arm.
+  The three arms share branch seeds; skills share CRN within each
+  context/replica. The modified focal hidden is recomputed from episode start
+  over the stored source observation/skill prefix; the teammate uses the
+  frozen source actor. All descriptor and SNR reads use the frozen standardized
+  train space with epsilon `1e-8`.
+- Natural transport: 64 paired stochastic 80-step episodes per arm = 5,120
+  steps per arm. High parameters and the R30 check clock are identical, but
+  realized KEEP/SET paths may diverge through changed state visitation. Total
+  environment exposure is `2,560 + 3*10,240 + 3*5,120 = 48,640` steps. Only
+  real/sham receive optimizer exposure. Bootstrap uses 10,000 draws, seed
+  `40034031`; M1 clusters by the eight heldout source episodes and natural
+  metrics by the 64 paired resets. Expected local-CUDA wall clock is 1--3 hours.
+- M0 validity: exact episode/row/branch counts, train-only fits, 96 rows per
+  mode, bijective alignment, no-self sham, source actor replay error `<=1e-5`,
+  60 finite optimizer calls per trained arm with at least one nonzero allowed
+  gradient, no forbidden gradient/drift above `1e-8`, finite parameters, and
+  matched cross-arm random streams. Runtime reward/value computation is allowed
+  only as detached infrastructure/diagnostic; it cannot enter this objective or
+  any update.
+- M1 causal codebook formation: forced nearest-prototype fidelity requires
+  `F_real>=0.60`, every `F_real,z>=0.45`, `F_real-F_sham>=0.20`, and
+  `F_real-F_source>=0.15`; both paired gains require source-episode-cluster CI
+  lower bound `>0`. Persistent-mode SNR requires median `R_real>=1.50`, its CI
+  lower bound `>1.0`, median `R_real-R_sham>=0.30`, and median
+  `R_real-R_source>=0.20`, with both gain CI lower bounds `>0`.
+- M2a zero-shot frozen-selector use: natural skill/prototype agreement requires
+  `A_real>=0.45`, `A_real-A_sham>=0.15`, and `A_real-A_source>=0.10`, with both
+  paired-reset CI lower bounds `>0`.
+- M2b exploration transport: 625-cell joint-position union coverage requires
+  `coverage_real/coverage_sham>=1.10` and
+  `coverage_real/coverage_source>=1.05`; both paired per-reset coverage-gain CI
+  lower bounds must be `>0`. Sparse reward, button, target, contact, and
+  coordination remain diagnostics only.
+- M3 R30 safety on real: full-sync SET rate `<=0.50`, conditional SET-skill
+  entropy/log(4) `>=0.80`, minimum SET-skill share `>=0.05`, and
+  `min(P(T>4*k0),P(T<=4*k0))>=0.05`.
+- Branches: concrete M0 miss -> `INVALID_R34_IMPLEMENTATION` and repair only
+  that defect. Degenerate sham or M1 miss -> retire the fixed R34-BHMD
+  codebook-construction line without retuning. M1 pass/M2a miss ->
+  `PASS_CODEBOOK_FAIL_ZERO_SHOT_SELECTOR`, preserving codebook evidence while
+  retiring only zero-shot compatibility with the old high selector. M2a
+  pass/M2b miss -> `PASS_MODE_USE_FAIL_EXPLORATION_TRANSPORT`, preserving mode
+  formation and natural use without an exploration claim. M1--M2b pass/M3 miss
+  -> `FAIL_M3_R30_COLLAPSE`. All pass -> `PASS_R34_BHMD`, authorizing only a
+  separately registered sparse-source real-versus-sham mechanism comparison.
+  There is no UNDERPOWERED, automatic seed expansion, threshold revision, or
+  post-result retuning branch.
+- Prohibited: task/reward/action/age/agent-ID fields in the mode label, teammate
+  trajectory as a focal label target, normal-trainer integration, high-policy
+  training, another classifier/effect/reward target, scheduler/hazard/queue or
+  IMOD migration, K/descriptor/clustering/epoch/scope/lr/window/seed/threshold
+  changes after the result, and task/cooperation/HMASD/S7 claims from this gate.
+- Planned status source: one JSON at
+  `logs/r34_bhmd_gate_<timestamp>/result/r34_bhmd_gate.json`; replace this
+  pointer with the exact run path at launch.
 
 ### EXP-20260714-r33-irsc-gate
 
