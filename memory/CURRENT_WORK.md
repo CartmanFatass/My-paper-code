@@ -18,21 +18,22 @@ Updated: 2026-07-16
 
 ## Objective
 
-Run the accepted R41B full-source access reproduction, then use its exact result
-for automated GPT-5.6 Pro round 2 of 3. Round 1 accepted R41A as a valid reduced-
-exposure no-access result and selected one 32-environment, 2,998,400-transition,
-seed-1 original-source reproduction as the only next edge.
+Disposition the valid `PASS_R41B_SOURCE_ACCESS` result through automated
+GPT-5.6 Pro round 2 of 3 and select one first native temporal gate. R41B
+establishes a positive original-source Alice--Bob checkpoint at the complete
+32-environment exposure.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the archived round-1 response, accepted disposition, and
-   exact R41B contract.
-2. Run R41B locally on CUDA and read its single registered result JSON.
-3. Package that result as round 2; round 3 must depend on the archived and
-   dispositioned round-2 answer.
+1. Commit and push the R41B result package and its clock-contract conflict
+   question.
+2. Submit automated GPT-5.6 Pro round 2, archive the complete raw answer, and
+   disposition it before implementation.
+3. Implement and run only the selected smallest gate; use its result for the
+   dependent final round 3.
 
 ## Immediate Constraints
 

@@ -53,6 +53,14 @@ paths. Exact zero-step and final win rates were both zero; the paired interval
 was `[0, 0]`. R41B is the accepted full-source closure, not a rescue or tuned
 variant.
 
+R41B result boundary: `logs/r41b_hmasd_full_source_20260716_035300_retry2`
+completed valid `PASS_R41B_SOURCE_ACCESS` at commit `e36f7df`. M0 passed with
+zero replay error and exactly 14,055 updates on all five optimizer paths. Exact
+final deterministic win/key0/key1 rates were `0.89/0.97/0.92`, versus zero-step
+win `0`; the paired win-gain interval was `[0.82975, 0.95]`. The active step is
+automated Pro round 2 resolving the incompatible prior `k0=10` residual versus
+`k0=50` pure-categorical temporal contracts before any implementation.
+
 ## R39 S7 Compatibility Boundary
 
 R38 completed as a valid `FAIL_R38_CTS_ACCESS`; its replacement environment and
