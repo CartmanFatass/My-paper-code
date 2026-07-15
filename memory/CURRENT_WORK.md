@@ -30,16 +30,18 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: isolate native-categorical high-level timing on the toy
-  after the repaired 32-wide joint learner produced valid
-  `NO_ACCESS_R39_TOY_32`. The next positive control supplies four fixed,
-  zero-parameter action primitives and trains only the high stack. R39A is
-  preserved and deferred; native HMASD R39B remains blocked.
+- Active objective: diagnose the high-level context/credit path on the toy.
+  The fixed, zero-parameter primitive positive control produced valid
+  `FAIL_R39_TOY_HIGH_ACCESS`: the high controller stayed at random-like dense
+  task access even though the temporal execution path reached mixed ages. R39A
+  is preserved and deferred; native HMASD R39B remains blocked.
 
 ## Next Actions
 
-- Immediate next action: launch the registered fixed-primitive paired toy gate;
-  use its result to locate failure in the high controller versus skill learning.
+- Immediate next action: use the fixed-primitive result to separate whether the
+  high policy cannot read the slow/fast context or whether its sampled
+  block-return credit cannot learn the available roster mapping. Do not enlarge
+  the toy network or enter S7 before this is resolved.
 
 ## Immediate Constraints
 

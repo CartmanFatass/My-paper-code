@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-fixed-primitives | launch-ready | stage-0 high-controller positive control; hierarchy-L2 matched control | local CUDA | result JSON | zero-parameter four-skill carrier isolates high selection/retention from skill learning | Run the 12.8K pair; do not enter S7 before a toy temporal PASS. |
+| EXP-20260715-r39-toy-fixed-primitives | completed -- valid `FAIL_R39_TOY_HIGH_ACCESS` | stage-0 high-controller positive control; hierarchy-L2 matched control | `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`; commit `19e7f5c` | high context/credit diagnosis | M0 PASS with zero low parameters/updates and zero intrinsic; adaptive/control match both `0.4375`, slow `0.40625`, fast `0.46875` | Failure is upstream of temporal efficacy: diagnose the high context/credit path on the toy; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-native-categorical | completed -- valid `NO_ACCESS_R39_TOY_32` | stage-0 joint-learning access gate; hierarchy-L2 matched control | `logs/r39_toy_native_categorical_12k8_20260715_180156`; commit `cafec51` | fixed-primitive positive control | M0 PASS; low replay `<=1.91e-6`, 16-env GAE, 3 PPO epochs, zero intrinsic; both arms match about `0.446` | Do not interpret temporal efficacy or enlarge the learner. Isolate the high controller with supplied primitives. |
 | EXP-20260715-r39a-current-fixed-hmasd-anchor | planned -- package prepared and deferred | baseline-L1 current-interface source-anchor gate | cloud CUDA package; no launch during toy gate | toy result | GPT-5.6 Pro accepted a serial R39A anchor then R39B route; user selected a cheap toy mechanism gate before S7 compute | Preserve the exact package. Launch only after toy PASS; native-HMASD R39B still requires R39A PASS. |
 | EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
@@ -201,6 +201,14 @@ explicitly approves the exception.
   and block S7. M1 pass/M2 miss -> `FAIL_R39_TOY_NATIVE_CATEGORICAL`, revise or
   retire timing semantics. M0-M2 pass -> `PASS_R39_TOY_FIXED_PRIMITIVES`, return
   to the deferred R39A anchor; this is not skill-discovery or S7 evidence.
+- Result: valid `FAIL_R39_TOY_HIGH_ACCESS` at
+  `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`. M0 passed with
+  high replay error `2.38e-7`, zero low parameters/optimizer steps/losses, and
+  all intrinsic fields zero. Adaptive and control produced identical match
+  `0.4375`, slow `0.40625`, and fast `0.46875`, below M1. Adaptive did access
+  mixed-age execution (`0.34464`) while control remained full-sync (`1.0`),
+  but M1 blocks temporal interpretation. The registered next action is a
+  focused high-context/high-credit diagnosis, not more capacity or S7 compute.
 - Prohibited: intrinsic reward, task fields in the actor, learned low updates,
   role labels, threshold changes, model/budget expansion, or UAV launch.
 - Status source: `<run-root>/runner_status.txt`; result source:
