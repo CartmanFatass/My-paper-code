@@ -180,7 +180,6 @@ SITUATION_STAGE1_FIELDS = (
     "situation_agent_kappa_median_dwell",
     "situation_agent_kappa_global_mi",
     "situation_agent_unique_kappa_mean",
-    "situation_agent_unique_kappa_mean",
     "situation_hazard_control_enabled",
     "situation_hazard_forced_renewal_rate",
     "situation_hazard_mode_code",

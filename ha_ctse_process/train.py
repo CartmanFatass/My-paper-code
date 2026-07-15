@@ -4017,7 +4017,6 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         "situation_agent_kappa_median_dwell",
         "situation_agent_kappa_global_mi",
         "situation_agent_unique_kappa_mean",
-        "situation_agent_unique_kappa_mean",
     ):
         writer.add_scalar(f"Situation/{key}", process_metrics.get(key, 0.0), total_steps)
     writer.add_scalar(

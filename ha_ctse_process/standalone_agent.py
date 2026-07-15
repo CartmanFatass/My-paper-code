@@ -403,7 +403,17 @@ class LowLevelPolicy(nn.Module):
         unit_action = torch.tanh(raw_action)
         scale, bias = self._action_scale_bias()
         action = bias + scale * unit_action
-        log_prob = self._squashed_log_prob(dist, raw_action, unit_action)
+        # Record the likelihood of the float32 action that is actually handed
+        # to the environment.  Reconstructing it here uses the same numerical
+        # path as PPO replay, including near-boundary clamping.
+        replay_unit_action = ((action - bias) / scale).clamp(
+            -1.0 + self.action_epsilon,
+            1.0 - self.action_epsilon,
+        )
+        replay_raw_action = torch.atanh(replay_unit_action)
+        log_prob = self._squashed_log_prob(
+            dist, replay_raw_action, replay_unit_action
+        )
         return action, log_prob, -log_prob
 
     def _evaluate_continuous(self, actor_out: torch.Tensor, actions: torch.Tensor):
