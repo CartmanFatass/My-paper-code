@@ -20,6 +20,8 @@ $InitRoot = Join-Path $RunRoot "init\neutral_cts_seed39031"
 $NeutralCheckpoint = Join-Path $InitRoot "standalone_process_core_final.pt"
 $MappoRoot = Join-Path $RunRoot "runs\constant_code_mappo\seed39031"
 $ResultPath = Join-Path $RunRoot "result\r38_cts_access.json"
+$AnalyzerStdoutPath = Join-Path $RunRoot "result\analyzer_stdout.log"
+$AnalyzerStderrPath = Join-Path $RunRoot "result\analyzer_stderr.log"
 $GitCommit = (& git -C $RepoDir rev-parse HEAD).Trim()
 $StatusOwned = $false
 
@@ -167,9 +169,49 @@ function Invoke-PythonWorker(
     }
 }
 
+function Remove-AnalyzerResult {
+    if (Test-Path -LiteralPath $ResultPath -PathType Leaf) {
+        Remove-Item -LiteralPath $ResultPath -Force
+    }
+}
+
+function Get-AnalyzerFailureText {
+    if (Test-Path -LiteralPath $AnalyzerStderrPath -PathType Leaf) {
+        $stderrText = (Get-Content -Raw -LiteralPath $AnalyzerStderrPath).Trim()
+        if ($stderrText) {
+            return $stderrText
+        }
+    }
+    if (Test-Path -LiteralPath $AnalyzerStdoutPath -PathType Leaf) {
+        $stdoutText = (Get-Content -Raw -LiteralPath $AnalyzerStdoutPath).Trim()
+        if ($stdoutText) {
+            return "stderr was empty; stdout: $stdoutText"
+        }
+    }
+    return "analyzer stdout and stderr were empty"
+}
+
 try {
     if (Test-Path -LiteralPath $StatusPath) {
         throw "RunRoot already contains runner_status.txt: $RunRoot"
+    }
+    if ($Device -cne "cuda") {
+        throw "R38 requires Device exactly 'cuda', got '$Device'"
+    }
+    $cudaProbeOutput = & $PythonExe -c (
+        "import sys, torch; " +
+        "available = torch.cuda.is_available(); " +
+        "print(f'torch.cuda.is_available()={available}'); " +
+        "sys.exit(0 if available == True else 1)"
+    ) 2>&1
+    $cudaProbeExitCode = $LASTEXITCODE
+    if ($cudaProbeExitCode -ne 0) {
+        $cudaProbeText = ($cudaProbeOutput | Out-String).Trim()
+        throw (
+            "R38 CUDA preflight failed for ${PythonExe}: " +
+            "torch.cuda.is_available() != True " +
+            "(exit_code=$cudaProbeExitCode; output=$cudaProbeText)"
+        )
     }
     New-Item -ItemType Directory -Path $RunRoot -Force | Out-Null
     $StatusOwned = $true
@@ -184,12 +226,42 @@ try {
     Invoke-PythonWorker "constant_code_mappo" $MappoRoot $trainArgs
 
     Write-Status "running" "uniform_random_and_analysis"
-    & $PythonExe $Analyzer --run-root $RunRoot
-    if ($LASTEXITCODE -ne 0) {
-        throw "R38 analyzer failed with exit code $LASTEXITCODE"
+    New-Item -ItemType Directory -Path (Split-Path -Parent $ResultPath) -Force |
+        Out-Null
+    try {
+        & $PythonExe $Analyzer --run-root $RunRoot `
+            1> $AnalyzerStdoutPath `
+            2> $AnalyzerStderrPath
+        $analyzerExitCode = $LASTEXITCODE
+    }
+    catch {
+        $analyzerProcessError = [string]$_.Exception.Message
+        $analyzerFailureText = Get-AnalyzerFailureText
+        Remove-AnalyzerResult
+        throw (
+            "R38 analyzer process exception; " +
+            "stdout_path=$AnalyzerStdoutPath; " +
+            "stderr_path=$AnalyzerStderrPath; " +
+            "error=$analyzerProcessError; " +
+            "output=$analyzerFailureText"
+        )
+    }
+    if ($analyzerExitCode -ne 0) {
+        $analyzerFailureText = Get-AnalyzerFailureText
+        Remove-AnalyzerResult
+        throw (
+            "R38 analyzer failed with exit code $analyzerExitCode; " +
+            "stdout_path=$AnalyzerStdoutPath; " +
+            "stderr_path=$AnalyzerStderrPath; " +
+            "output=$analyzerFailureText"
+        )
     }
     if (-not (Test-Path -LiteralPath $ResultPath -PathType Leaf)) {
-        throw "R38 analyzer did not produce $ResultPath"
+        throw (
+            "R38 analyzer did not produce $ResultPath; " +
+            "stdout_path=$AnalyzerStdoutPath; " +
+            "stderr_path=$AnalyzerStderrPath"
+        )
     }
     $result = Get-Content -Raw -LiteralPath $ResultPath | ConvertFrom-Json
     Write-Status "completed" "result" @(
@@ -198,7 +270,9 @@ try {
         "m0_passed=$($result.gates.M0.passed)",
         "m1_passed=$($result.gates.M1.passed)",
         "m2_passed=$($result.gates.M2.passed)",
-        "result_path=$ResultPath"
+        "result_path=$ResultPath",
+        "analyzer_stdout_path=$AnalyzerStdoutPath",
+        "analyzer_stderr_path=$AnalyzerStderrPath"
     )
 }
 catch {

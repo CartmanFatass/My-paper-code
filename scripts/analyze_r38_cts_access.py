@@ -69,6 +69,62 @@ def add_reason(reasons: list[str], message: str) -> None:
         reasons.append(message)
 
 
+def require_nonnegative_integer(value: object, *, field: str) -> int:
+    try:
+        number = float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(
+            f"{field} must be a finite nonnegative integer, got {value!r}"
+        ) from exc
+    if not math.isfinite(number) or number < 0.0 or not number.is_integer():
+        raise ValueError(
+            f"{field} must be a finite nonnegative integer, got {value!r}"
+        )
+    return int(number)
+
+
+def validated_integer_column(
+    rows: list[dict[str, float]],
+    field: str,
+    *,
+    label: str,
+    reasons: list[str],
+) -> list[int | None]:
+    values: list[int | None] = []
+    for row_index, row in enumerate(rows):
+        context = f"{label} row {row_index} {field}"
+        try:
+            values.append(
+                require_nonnegative_integer(row.get(field), field=context)
+            )
+        except ValueError as exc:
+            add_reason(reasons, str(exc))
+            values.append(None)
+    return values
+
+
+def validate_zero_count_fields(
+    rows: list[dict[str, float]],
+    fields: tuple[str, ...],
+    *,
+    label: str,
+    reasons: list[str],
+) -> dict[str, int]:
+    totals = {field: 0 for field in fields}
+    for row_index, row in enumerate(rows):
+        for field in fields:
+            context = f"{label} row {row_index} {field}"
+            try:
+                count = require_nonnegative_integer(row.get(field), field=context)
+            except ValueError as exc:
+                add_reason(reasons, str(exc))
+                continue
+            totals[field] += count
+            if count != 0:
+                add_reason(reasons, f"{context}={count} != 0")
+    return totals
+
+
 def load_json(path: Path) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(path)
@@ -165,6 +221,20 @@ def check_expected(
         return {}
     for field, expected_value in expected.items():
         actual = payload.get(field)
+        if isinstance(expected_value, int) and not isinstance(expected_value, bool):
+            try:
+                actual_integer = require_nonnegative_integer(
+                    actual, field=f"{label} {field}"
+                )
+            except ValueError as exc:
+                add_reason(reasons, str(exc))
+                continue
+            if actual_integer != expected_value:
+                add_reason(
+                    reasons,
+                    f"{label} {field}={actual_integer!r} != {expected_value!r}",
+                )
+            continue
         if not values_match(actual, expected_value):
             add_reason(
                 reasons,
@@ -344,7 +414,7 @@ def evaluate_uniform_random() -> tuple[list[dict[str, float]], dict[str, Any], l
             final_metrics = {field: float("nan") for field in R38_CTS_METRIC_FIELDS}
             while not (terminated or truncated):
                 actions = action_rng.uniform(-1.0, 1.0, size=(2, 2)).astype(np.float32)
-                action_count += int(actions.size)
+                action_count += actions.size
                 if not np.all(np.isfinite(actions)):
                     all_actions_finite = False
                     add_reason(reasons, "uniform-random evaluator produced a non-finite action")
@@ -432,16 +502,24 @@ def validate_policy_rows(
     require_fields(rows, fieldnames, required, label, reasons)
     if len(rows) != 256:
         add_reason(reasons, f"{label} has {len(rows)} rows instead of 256")
-    episodes = [int(row.get("episode", -1)) for row in rows]
-    reset_order = [int(row.get("reset_seed", -1)) for row in rows]
+    episodes = validated_integer_column(
+        rows, "episode", label=label, reasons=reasons
+    )
+    reset_order = validated_integer_column(
+        rows, "reset_seed", label=label, reasons=reasons
+    )
     if episodes != list(range(256)):
         add_reason(reasons, f"{label} episode order is not exactly 0..255")
     if reset_order != list(RESET_SEEDS):
         add_reason(reasons, f"{label} reset order is not exactly registered")
-    if len(set(reset_order)) != 256 or set(reset_order) != set(RESET_SEEDS):
+    valid_reset_seeds = [value for value in reset_order if value is not None]
+    if len(set(valid_reset_seeds)) != 256 or set(valid_reset_seeds) != set(RESET_SEEDS):
         add_reason(reasons, f"{label} does not have 256 unique registered reset seeds")
     if mappo:
-        if any(int(row.get("total_steps", -1)) != TOTAL_TIMESTEPS for row in rows):
+        total_steps = validated_integer_column(
+            rows, "total_steps", label=label, reasons=reasons
+        )
+        if any(value != TOTAL_TIMESTEPS for value in total_steps):
             add_reason(reasons, "MAPPO evaluation is not entirely at 320000 steps")
         if any(abs(row.get("action_mode_code", -1.0) - 1.0) > 1e-12 for row in rows):
             add_reason(reasons, "MAPPO evaluation is not entirely stochastic")
@@ -488,7 +566,7 @@ def validate_policy_rows(
         add_reason(reasons, f"{label} CTS metric ranges or implications are invalid")
     return {
         "row_count": len(rows),
-        "unique_reset_seed_count": len(set(reset_order)),
+        "unique_reset_seed_count": len(set(valid_reset_seeds)),
         "reset_order_registered": reset_order == list(RESET_SEEDS),
         "reward_semantics_valid": reward_semantics_valid,
         "terminal_semantics_valid": terminal_semantics_valid,
@@ -521,18 +599,66 @@ def summarize_policy(rows: list[dict[str, float]]) -> dict[str, Any]:
     terminated_sum = finite_sum(rows, "terminated_flag")
     truncated_sum = finite_sum(rows, "truncated_flag")
     full_success_sum = finite_sum(rows, "r38_full_cycle_success")
+    try:
+        first_reset_seed = (
+            require_nonnegative_integer(
+                rows[0].get("reset_seed"), field="summary first reset seed"
+            )
+            if rows
+            else None
+        )
+    except ValueError:
+        first_reset_seed = None
+    try:
+        last_reset_seed = (
+            require_nonnegative_integer(
+                rows[-1].get("reset_seed"), field="summary last reset seed"
+            )
+            if rows
+            else None
+        )
+    except ValueError:
+        last_reset_seed = None
+    try:
+        terminated_count = (
+            require_nonnegative_integer(
+                terminated_sum, field="summary terminated count"
+            )
+            if terminated_sum is not None
+            else None
+        )
+    except ValueError:
+        terminated_count = None
+    try:
+        truncated_count = (
+            require_nonnegative_integer(
+                truncated_sum, field="summary truncated count"
+            )
+            if truncated_sum is not None
+            else None
+        )
+    except ValueError:
+        truncated_count = None
+    try:
+        full_success_count = (
+            require_nonnegative_integer(
+                full_success_sum, field="summary full success count"
+            )
+            if full_success_sum is not None
+            else None
+        )
+    except ValueError:
+        full_success_count = None
     return {
         "evaluation_episodes": len(rows),
-        "reset_seed_first": int(rows[0]["reset_seed"]) if rows and "reset_seed" in rows[0] else None,
-        "reset_seed_last": int(rows[-1]["reset_seed"]) if rows and "reset_seed" in rows[-1] else None,
+        "reset_seed_first": first_reset_seed,
+        "reset_seed_last": last_reset_seed,
         "mean_reward": finite_mean(rows, "reward"),
         "mean_length": finite_mean(rows, "length"),
-        "terminated_count": int(terminated_sum) if terminated_sum is not None else None,
-        "truncated_count": int(truncated_sum) if truncated_sum is not None else None,
+        "terminated_count": terminated_count,
+        "truncated_count": truncated_count,
         "rates": {field: finite_mean(rows, field) for field in INDICATOR_FIELDS},
-        "full_success_count": (
-            int(full_success_sum) if full_success_sum is not None else None
-        ),
+        "full_success_count": full_success_count,
         "anchor_streak_max": finite_max(rows, "r38_anchor_streak_max"),
         "shuttle_stage_max": finite_max(rows, "r38_shuttle_stage_max"),
     }
@@ -769,34 +895,45 @@ def main() -> None:
             invalid_reasons,
             f"training has {len(train_rows)} outer updates instead of {EXPECTED_UPDATES}",
         )
-    update_ids = [int(row.get("update", -1)) for row in train_rows]
+    update_ids = validated_integer_column(
+        train_rows, "update", label="training updates", reasons=invalid_reasons
+    )
     if update_ids != list(range(1, EXPECTED_UPDATES + 1)):
         add_reason(invalid_reasons, "outer update indices are not exactly 1..100")
     expected_steps = list(range(3_200, TOTAL_TIMESTEPS + 1, 3_200))
-    actual_steps = [int(row.get("total_steps", -1)) for row in train_rows]
+    actual_steps = validated_integer_column(
+        train_rows,
+        "total_steps",
+        label="training updates",
+        reasons=invalid_reasons,
+    )
     if actual_steps != expected_steps:
         add_reason(invalid_reasons, "outer update environment-step sequence is not exact")
+    low_sequence_chunks = validated_integer_column(
+        train_rows,
+        "low_sequence_chunks",
+        label="training updates",
+        reasons=invalid_reasons,
+    )
     low_update_count = sum(
-        float(row.get("low_sequence_chunks", 0.0)) > 0.0 for row in train_rows
+        value is not None and value > 0 for value in low_sequence_chunks
     )
     if low_update_count != EXPECTED_UPDATES:
         add_reason(
             invalid_reasons,
             f"low update count {low_update_count} != {EXPECTED_UPDATES}",
         )
-    high_update_count = float(
-        sum(
-            row.get("r30_high_rows", 0.0) + row.get("r30_decision_rows", 0.0)
-            for row in train_rows
-        )
+    zero_count_totals = validate_zero_count_fields(
+        train_rows,
+        ("r30_high_rows", "r30_decision_rows", "process_segments"),
+        label="training updates",
+        reasons=invalid_reasons,
     )
-    if abs(high_update_count) > 1e-12:
-        add_reason(invalid_reasons, "high-policy update/decision count is nonzero")
-    process_update_count = float(
-        sum(row.get("process_segments", 0.0) for row in train_rows)
+    high_update_count = (
+        zero_count_totals["r30_high_rows"]
+        + zero_count_totals["r30_decision_rows"]
     )
-    if abs(process_update_count) > 1e-12:
-        add_reason(invalid_reasons, "process update count is nonzero")
+    process_update_count = zero_count_totals["process_segments"]
     if any(
         abs(row.get("low_skill_usage_entropy", math.inf)) > 1e-12
         for row in train_rows
@@ -847,8 +984,18 @@ def main() -> None:
         invalid_reasons,
         mappo=False,
     )
-    mappo_reset_order = [int(row.get("reset_seed", -1)) for row in mappo_rows]
-    random_reset_order = [int(row.get("reset_seed", -1)) for row in random_rows]
+    mappo_reset_order = validated_integer_column(
+        mappo_rows,
+        "reset_seed",
+        label="MAPPO evaluation",
+        reasons=invalid_reasons,
+    )
+    random_reset_order = validated_integer_column(
+        random_rows,
+        "reset_seed",
+        label="uniform-random evaluation",
+        reasons=invalid_reasons,
+    )
     reset_order_matches = mappo_reset_order == random_reset_order == list(RESET_SEEDS)
     if not reset_order_matches:
         add_reason(invalid_reasons, "MAPPO and random reset order does not match")
@@ -871,7 +1018,9 @@ def main() -> None:
         }
         rates = {field: float(values.mean()) for field, values in mappo_arrays.items()}
         mappo_full = mappo_arrays["r38_full_cycle_success"]
-        full_success_count = int(mappo_full.sum())
+        full_success_count = require_nonnegative_integer(
+            mappo_full.sum(), field="MAPPO full success count"
+        )
         paired_cis = {
             field: paired_bootstrap_ci(
                 mappo_arrays[field],
@@ -889,7 +1038,10 @@ def main() -> None:
             and all(ci[1] > 0.0 for ci in paired_cis.values())
         )
         block_successes = [
-            int(mappo_full[start : start + 64].sum())
+            require_nonnegative_integer(
+                mappo_full[start : start + 64].sum(),
+                field=f"MAPPO full success block {start // 64} count",
+            )
             for start in range(0, 256, 64)
         ]
         m2 = sum(count >= 1 for count in block_successes) >= 3
@@ -912,9 +1064,10 @@ def main() -> None:
         "passed": bool(m0),
         "invalid_reasons": invalid_reasons,
         "outer_update_count": len(train_rows),
-        "low_update_count": int(low_update_count),
+        "low_update_count": low_update_count,
         "high_update_count": high_update_count,
         "process_update_count": process_update_count,
+        "high_process_count_totals": zero_count_totals,
         "intrinsic_fields_checked": intrinsic_fields,
         "nonzero_intrinsic_fields": nonzero_intrinsic_fields,
         "mappo_evaluation": mappo_audit,
