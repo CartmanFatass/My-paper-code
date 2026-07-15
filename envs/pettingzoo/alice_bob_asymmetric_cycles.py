@@ -33,6 +33,13 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         self.contact_radius = float(
             getattr(config, "alice_bob_contact_radius", 0.70)
         )
+        self.actor_identity_mode = str(
+            getattr(config, "alice_bob_actor_identity_mode", "hidden")
+        ).lower()
+        if self.actor_identity_mode not in {"hidden", "masked", "visible"}:
+            raise ValueError(
+                "alice_bob_actor_identity_mode must be hidden, masked, or visible"
+            )
         if self.short_period <= 0 or self.long_periods <= 0:
             raise ValueError("Alice--Bob periods must be positive")
         if self.num_short_periods < 2 * self.long_periods:
@@ -57,10 +64,14 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
             agent: gym.spaces.Box(-1.0, 1.0, shape=(2,), dtype=np.float32)
             for agent in self.possible_agents
         }
-        # own position (2), other relative position (2), two button offsets (4),
-        # two target offsets (4). Active subtask state is intentionally omitted.
+        # The historical environment remains 12-D. R37 uses a capacity-matched
+        # 16-D layout whose last four slots are either zero or the two active
+        # landmark one-hots.
+        self._obs_dim = 12 if self.actor_identity_mode == "hidden" else 16
         self._observation_spaces = {
-            agent: gym.spaces.Box(-1.0, 1.0, shape=(12,), dtype=np.float32)
+            agent: gym.spaces.Box(
+                -1.0, 1.0, shape=(self._obs_dim,), dtype=np.float32
+            )
             for agent in self.possible_agents
         }
         self.np_random = np.random.default_rng(seed)
@@ -72,7 +83,7 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         return self._observation_spaces[agent]
 
     def get_obs_dim(self) -> int:
-        return 12
+        return self._obs_dim
 
     def get_state_dim(self) -> int:
         # positions (4), active plate/target one-hot (4), two clock phases (2),
@@ -209,17 +220,28 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
     def _get_obs(self) -> dict[str, np.ndarray]:
         observations = {}
         scale = max(self.world_size, 1.0)
+        identity = None
+        if self.actor_identity_mode == "visible":
+            identity = np.concatenate(
+                [
+                    np.eye(2, dtype=np.float32)[self.active_plate],
+                    np.eye(2, dtype=np.float32)[self.active_target],
+                ]
+            )
+        elif self.actor_identity_mode == "masked":
+            identity = np.zeros(4, dtype=np.float32)
         for agent, idx in self.agent_ids.items():
             own = self.agent_pos[idx]
             other = self.agent_pos[1 - idx]
-            vector = np.concatenate(
-                [
-                    2.0 * own / scale - 1.0,
-                    (other - own) / scale,
-                    ((self.button_pos - own) / scale).reshape(-1),
-                    ((self.target_pos - own) / scale).reshape(-1),
-                ]
-            )
+            fields = [
+                2.0 * own / scale - 1.0,
+                (other - own) / scale,
+                ((self.button_pos - own) / scale).reshape(-1),
+                ((self.target_pos - own) / scale).reshape(-1),
+            ]
+            if identity is not None:
+                fields.append(identity)
+            vector = np.concatenate(fields)
             observations[agent] = np.clip(vector, -1.0, 1.0).astype(np.float32)
         return observations
 

@@ -195,10 +195,9 @@ direct intervention-scored roster-complementarity selection are retired.
 
 ## Next Actions
 
-1. Implement only the registered R37 actor-observation switch, matched
-   constant-code configurations, paired runner, and result analyzer.
-2. Run the single registered local parallel CUDA gate and interpret only its
-   access-instrument branches.
+1. Run the completed R37 actor-observation implementation with the registered
+   paired local CUDA runner.
+2. Read the single result JSON and interpret only its access-instrument branch.
 
 Active decision boundary: `EXP-20260715-r37-actor-visible-identity-access` in
 `memory/ExpRecord.md`, authorized by the archived R36 review disposition.

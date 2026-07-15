@@ -28,6 +28,7 @@ from ha_ctse_process.collectors import SubprocEnvCollector, SyncEnvCollector
 from ha_ctse_process.plotting import (
     AEM_METRIC_FIELDS,
     EVAL_FIELDS,
+    R37_IDENTITY_METRIC_FIELDS,
     UPDATE_FIELDS,
     append_csv,
     extract_uav_metrics,
@@ -72,6 +73,10 @@ ALGORITHM_MANIFEST_FIELDS = (
     "aem_episode_horizon",
     "aem_position_view_name",
     "aem_bonus_formula",
+    "r37_identity_gate_enabled",
+    "alice_bob_actor_identity_mode",
+    "alice_bob_actor_identity_slots",
+    "alice_bob_actor_identity_schema",
     "alice_bob_semantic_reward_enabled",
     "r30_high_gae_lambda",
     "r31_effect_mode",
@@ -407,6 +412,49 @@ def pick_attrs(obj: Any, names: tuple[str, ...]) -> dict[str, Any]:
 def empty_aem_metrics(active: bool = False) -> dict[str, float]:
     metrics = {field: 0.0 for field in AEM_METRIC_FIELDS}
     metrics["aem_active"] = float(bool(active))
+    return metrics
+
+
+def empty_r37_identity_metrics(config) -> dict[str, float]:
+    enabled = bool(getattr(config, "r37_identity_gate_enabled", False))
+    mode = str(getattr(config, "alice_bob_actor_identity_mode", "hidden")).lower()
+    metrics = {field: 0.0 for field in R37_IDENTITY_METRIC_FIELDS}
+    metrics["r37_identity_audit_active"] = float(enabled)
+    metrics["r37_identity_mode_code"] = (
+        1.0 if mode == "visible" else 0.0 if mode == "masked" else -1.0
+    )
+    return metrics
+
+
+def audit_r37_identity_observation(config, observations, state) -> dict[str, float]:
+    """Validate the R37 actor slots against the simultaneous critic identity."""
+
+    metrics = empty_r37_identity_metrics(config)
+    if metrics["r37_identity_audit_active"] == 0.0:
+        return metrics
+    obs = np.asarray(observations, dtype=np.float32)
+    critic_state = np.asarray(state, dtype=np.float32).reshape(-1)
+    if obs.shape != (2, 16):
+        raise RuntimeError(f"R37 actor observation shape {obs.shape} != (2, 16)")
+    if critic_state.shape != (19,):
+        raise RuntimeError(f"R37 critic state shape {critic_state.shape} != (19,)")
+    identity = critic_state[4:8]
+    critic_error = max(
+        abs(float(identity[:2].sum()) - 1.0),
+        abs(float(identity[2:].sum()) - 1.0),
+        float(np.max(np.minimum(np.abs(identity), np.abs(identity - 1.0)))),
+    )
+    mode = str(getattr(config, "alice_bob_actor_identity_mode", "")).lower()
+    expected = identity if mode == "visible" else np.zeros(4, dtype=np.float32)
+    slot_error = float(np.max(np.abs(obs[:, 12:16] - expected[None, :])))
+    metrics["r37_identity_audit_rows"] = float(obs.shape[0])
+    metrics["r37_identity_slot_max_abs_error"] = slot_error
+    metrics["r37_critic_identity_max_abs_error"] = critic_error
+    if slot_error > 1e-7 or critic_error > 1e-7:
+        raise RuntimeError(
+            "R37 identity audit failed: "
+            f"slot_error={slot_error:.9g}, critic_error={critic_error:.9g}"
+        )
     return metrics
 
 
@@ -2692,6 +2740,120 @@ def enforce_aem_contract(
         raise ValueError("R36 AEM requires stochastic final evaluation")
 
 
+def enforce_r37_identity_contract(
+    config,
+    args: argparse.Namespace,
+    metadata: dict[str, Any] | None,
+) -> None:
+    """Fail closed around the registered R37 observation-substrate gate."""
+
+    if not bool(getattr(config, "r37_identity_gate_enabled", False)):
+        return
+    identity_mode = str(
+        getattr(config, "alice_bob_actor_identity_mode", "")
+    ).lower()
+    if identity_mode not in {"masked", "visible"}:
+        raise ValueError("R37 requires masked or visible identity slots")
+    if normalize_scenario(str(getattr(args, "scenario", ""))) != (
+        "alice_bob_asymmetric_cycles"
+    ):
+        raise ValueError("R37 is restricted to the sparse Alice--Bob environment")
+    if not bool(getattr(config, "constant_skill_no_high", False)):
+        raise ValueError("R37 requires the constant-code no-high MAPPO path")
+    if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
+        raise ValueError("R37 requires the architecture-matched R30 module layout")
+
+    exact_config = {
+        "n_agents": 2,
+        "obs_dim": 16,
+        "state_dim": 19,
+        "alice_bob_actor_identity_slots": 4,
+        "episode_length": 80,
+        "low_ppo_epochs": 5,
+        "low_sequence_length": 10,
+        "low_sequence_batch_size": 64,
+    }
+    for name, expected in exact_config.items():
+        actual = int(getattr(config, name, -1))
+        if actual != expected:
+            raise ValueError(f"R37 requires {name}={expected}, got {actual}")
+    if str(getattr(config, "alice_bob_actor_identity_schema", "")) != (
+        "active_plate_target_onehot_v1"
+    ):
+        raise ValueError("R37 identity schema does not match the registered contract")
+    if bool(getattr(config, "aem_joint_novelty_enabled", False)):
+        raise ValueError("R37 forbids the retired R36 novelty bonus")
+    if bool(getattr(config, "alice_bob_semantic_reward_enabled", False)):
+        raise ValueError("R37 forbids Alice--Bob semantic reward")
+    if float(getattr(config, "transition_skill_reward_coef", 0.0)) != 0.0:
+        raise ValueError("R37 forbids transition-skill reward")
+    if str(getattr(config, "r31_effect_mode", "off")).lower() != "off":
+        raise ValueError("R37 forbids R31 effect reward or diagnostics")
+
+    if str(getattr(args, "mode", "train")) != "train":
+        return
+    exact_common = {
+        "seed": 38031,
+        "n_agents": 2,
+        "rollout_length": 80,
+        "skill_interval": 10,
+        "eval_max_steps": 80,
+    }
+    for name, expected in exact_common.items():
+        actual = int(getattr(args, name, -1))
+        if actual != expected:
+            raise ValueError(f"R37 requires {name}={expected}, got {actual}")
+    if str(getattr(args, "device", "")).lower() != "cuda":
+        raise ValueError("R37 requires explicit CUDA")
+    if str(getattr(args, "eval_action_mode", "")) != "stochastic":
+        raise ValueError("R37 requires stochastic evaluation")
+
+    total_timesteps = int(getattr(args, "total_timesteps", -1))
+    if total_timesteps == 0 and not str(getattr(args, "resume_from", "")):
+        if identity_mode != "masked":
+            raise ValueError("R37 neutral initialization must use masked identity slots")
+        if int(getattr(args, "num_envs", -1)) != 1:
+            raise ValueError("R37 neutral initialization requires one sync environment")
+        if str(getattr(args, "collector_backend", "")) != "sync":
+            raise ValueError("R37 neutral initialization requires the sync collector")
+        if int(getattr(args, "eval_interval", -1)) != 0:
+            raise ValueError("R37 neutral initialization requires eval_interval=0")
+        return
+
+    if not str(getattr(args, "resume_from", "")) or metadata is None:
+        raise ValueError("R37 training requires the shared neutral zero-step checkpoint")
+    if int(metadata.get("total_steps", -1)) != 0 or int(
+        metadata.get("update_idx", -1)
+    ) != 0:
+        raise ValueError("R37 source checkpoint must have zero environment steps")
+    source_manifest = _load_adjacent_run_manifest(args.resume_from)
+    source_algorithm = source_manifest.get("algorithm_config", {})
+    source_model = source_manifest.get("model_config", {})
+    if not isinstance(source_algorithm, dict):
+        source_algorithm = {}
+    if not isinstance(source_model, dict):
+        source_model = {}
+    if str(source_algorithm.get("alice_bob_actor_identity_mode", "")) != "masked":
+        raise ValueError("R37 source checkpoint must use masked identity slots")
+    if int(source_model.get("obs_dim", -1)) != 16:
+        raise ValueError("R37 source checkpoint must have obs_dim=16")
+
+    exact_training = {
+        "num_envs": 16,
+        "total_timesteps": 320_000,
+        "eval_interval": 320_000,
+        "eval_episodes": 64,
+    }
+    for name, expected in exact_training.items():
+        actual = int(getattr(args, name, -1))
+        if actual != expected:
+            raise ValueError(f"R37 requires {name}={expected}, got {actual}")
+    if str(getattr(args, "collector_backend", "")) != "subproc":
+        raise ValueError("R37 requires the subproc collector")
+    if str(getattr(args, "collector_start_method", "")) != "spawn":
+        raise ValueError("R37 requires spawn workers")
+
+
 def enforce_r30_pair_gate(
     config,
     args: argparse.Namespace,
@@ -2948,7 +3110,8 @@ def evaluate(
 
     try:
         for episode_idx in range(max(int(episodes), 1)):
-            obs, info = env.reset(seed=int(args.seed) + 100000 + episode_idx)
+            reset_seed = int(args.seed) + 100000 + episode_idx
+            obs, info = env.reset(seed=reset_seed)
             state = info.get("state")
             agent.reset_env_state(0)
             episode_reward = 0.0
@@ -2959,6 +3122,7 @@ def evaluate(
             coverage_eq1_steps: list[float] = []
             coverage_positive_steps: list[float] = []
             joint_position_cells: set[tuple[int, int, int, int]] = set()
+            r37_eval_metrics = empty_r37_identity_metrics(config)
             initial_joint_cell = alice_bob_joint_cell(state) if is_alice_bob else None
             if initial_joint_cell is not None:
                 joint_position_cells.add(initial_joint_cell)
@@ -2979,6 +3143,17 @@ def evaluate(
                     )
                 )
             while True:
+                identity_audit = audit_r37_identity_observation(config, obs, state)
+                r37_eval_metrics["r37_identity_audit_rows"] += identity_audit[
+                    "r37_identity_audit_rows"
+                ]
+                for field in (
+                    "r37_identity_slot_max_abs_error",
+                    "r37_critic_identity_max_abs_error",
+                ):
+                    r37_eval_metrics[field] = max(
+                        r37_eval_metrics[field], identity_audit[field]
+                    )
                 agent.maybe_assign_skills(
                     obs,
                     state=state,
@@ -3078,9 +3253,11 @@ def evaluate(
                 "checkpoint": str(getattr(args, "eval_checkpoint_name", "")),
                 "total_steps": int(total_steps),
                 "episode": episode_idx,
+                "reset_seed": reset_seed,
                 "action_mode_code": 0.0 if deterministic_eval else 1.0,
                 "reward": episode_reward,
                 "length": episode_length,
+                **r37_eval_metrics,
                 **episode_metrics,
             }
             eval_records.append(eval_record)
@@ -4270,6 +4447,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
         while total_steps < int(args.total_timesteps):
             rollout = Rollout()
             episode_rewards = []
+            r37_update_metrics = empty_r37_identity_metrics(config)
             for _local_step in range(int(args.rollout_length)):
                 pre_obs = []
                 pre_actions = []
@@ -4279,6 +4457,19 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 pre_rollout_indices = []
                 for env_id in range(num_envs):
                     obs = observations[env_id]
+                    identity_audit = audit_r37_identity_observation(
+                        config, obs, states[env_id]
+                    )
+                    r37_update_metrics["r37_identity_audit_rows"] += identity_audit[
+                        "r37_identity_audit_rows"
+                    ]
+                    for field in (
+                        "r37_identity_slot_max_abs_error",
+                        "r37_critic_identity_max_abs_error",
+                    ):
+                        r37_update_metrics[field] = max(
+                            r37_update_metrics[field], identity_audit[field]
+                        )
                     rollout_idx = len(rollout.rewards) + len(pre_rollout_indices)
                     agent.maybe_assign_skills(
                         obs,
@@ -4429,6 +4620,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 if aem_novelty is not None
                 else empty_aem_metrics(active=False)
             )
+            process_metrics.update(r37_update_metrics)
             process_metrics.update(r31_score_metrics)
             low_metrics = agent.update_low(rollout)
             process_metrics.update(agent.r31_update_effect_posterior())
@@ -4951,6 +5143,7 @@ def main() -> None:
     enforce_r30_contract(config, args)
     enforce_r31_contract(config, args, metadata)
     enforce_aem_contract(config, args, metadata)
+    enforce_r37_identity_contract(config, args, metadata)
 
     try:
         if args.dry_run_env_steps > 0:

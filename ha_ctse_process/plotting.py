@@ -326,6 +326,14 @@ AEM_METRIC_FIELDS = (
     "aem_forbidden_field_reads",
 )
 
+R37_IDENTITY_METRIC_FIELDS = (
+    "r37_identity_audit_active",
+    "r37_identity_mode_code",
+    "r37_identity_audit_rows",
+    "r37_identity_slot_max_abs_error",
+    "r37_critic_identity_max_abs_error",
+)
+
 
 UPDATE_FIELDS = (
     "update",
@@ -336,6 +344,7 @@ UPDATE_FIELDS = (
     *R30_METRIC_FIELDS,
     *R31_EFFECT_METRIC_FIELDS,
     *AEM_METRIC_FIELDS,
+    *R37_IDENTITY_METRIC_FIELDS,
     "process_segments",
     "process_loss",
     "process_outcome_loss",
@@ -737,9 +746,11 @@ EVAL_FIELDS = (
     "checkpoint",
     "total_steps",
     "episode",
+    "reset_seed",
     "action_mode_code",
     "reward",
     "length",
+    *R37_IDENTITY_METRIC_FIELDS,
     *UAV_METRIC_FIELDS,
     *COMM_METRIC_FIELDS,
     *ALICE_BOB_METRIC_FIELDS,
