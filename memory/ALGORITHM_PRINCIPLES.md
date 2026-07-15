@@ -337,6 +337,14 @@ contact, progress, coverage, or other environment-derived shaping as a separate
 task-specific ablation.  Environment shaping is neither algorithmic intrinsic
 reward nor evidence that the algorithm reconstructed HMASD's exploration loop.
 
+User clarification 2026-07-15: intrinsic reward is environment-agnostic by
+contract. It may not read, encode, or be redesigned around benchmark-specific
+goals, objects, identities, contacts, phases, distances, success predicates, or
+external reward. Its mathematical form and input contract must remain the same
+across environments. Benchmark access failures are handled through observation,
+dynamics, and an ordinary-policy access gate; intrinsic reward must not be used
+to conceal or repair them.
+
 ## HMASD As Inspiration
 
 HMASD contributes useful structural ideas and cooperation priors, not a block to

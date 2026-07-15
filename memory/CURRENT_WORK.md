@@ -233,6 +233,10 @@ authorized by the valid R37 branch in `memory/ExpRecord.md`.
 - Do not use environment potential/progress shaping in Alice--Bob sparse
   exploration claims, and do not count shaped progress as algorithmic intrinsic
   reward. The completed 64K shaped pair remains mechanism-only evidence.
+- Do not customize intrinsic reward to a benchmark. Any future intrinsic term
+  must keep one environment-agnostic mathematical form and input contract and
+  must not consume task identities, goals, contacts, phases, success predicates,
+  distances, or external reward.
 - Do not inject another individual-skill reward; the R29/R31/R32 individual
   action/effect lines are retired.
 - Do not launch R31 reward, its 160K pair, an identical-batch append, or any
