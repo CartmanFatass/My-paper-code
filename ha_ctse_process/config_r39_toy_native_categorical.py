@@ -121,5 +121,5 @@ class Config(ProcessConfig):
     p2_recovery_credit_reward_on = False
     exact_cf_compute_on = False
     exact_cf_reward_on = False
-
+    aem_joint_novelty_enabled = False
 

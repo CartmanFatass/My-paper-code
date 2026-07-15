@@ -183,15 +183,29 @@ def validate_manifest(
         "topology_potential_injection": "none",
         "opt_cd_coef": 0.0,
         "opt_cmi_coef": 0.0,
-        "aem_joint_novelty_enabled": False,
         "alice_bob_semantic_reward_enabled": False,
-        "r29_action_info_mode": "off",
         "r31_effect_mode": "off",
     }
     for field, expected in expected_algorithm.items():
         require_equal(
             algorithm.get(field), expected, f"{arm} algorithm_config.{field}", reasons
         )
+    require_equal(
+        algorithm.get("aem_joint_novelty_enabled", False),
+        False,
+        f"{arm} algorithm_config.aem_joint_novelty_enabled",
+        reasons,
+    )
+    training = manifest.get("training_config")
+    if not isinstance(training, dict):
+        add_reason(reasons, f"{arm} training_config missing")
+        training = {}
+    require_equal(
+        training.get("r29_action_info_mode"),
+        "off",
+        f"{arm} training_config.r29_action_info_mode",
+        reasons,
+    )
     model = manifest.get("model_config")
     if not isinstance(model, dict):
         add_reason(reasons, f"{arm} model_config missing")
