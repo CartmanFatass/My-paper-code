@@ -44,10 +44,10 @@ and history live in their owning files.
 
 ## Next Actions
 
-- Immediate next action: implement the registered R40 environment/config,
-  runner, and single result analyzer, then launch the 200,000-step local CUDA
-  access gate. The run itself is the implementation check; do not add a
-  separate smoke or test suite.
+- R40 is running at
+  `logs/r40_simple_spread_access_200k_20260715_225517_retry3` from commit
+  `4c633fd`. The existing dedicated monitor owns progress and terminal
+  notification; read the single result JSON only at terminal state.
 - On a valid PASS, register only native fixed-`k` HMASD on the exact same
   substrate. On a valid FAIL, retire `simple_spread` under this MAPPO contract.
 
