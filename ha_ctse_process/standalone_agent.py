@@ -351,33 +351,6 @@ class LowLevelPolicy(nn.Module):
         super().__init__()
         self.n_skills = int(n_skills)
         self.action_dim = int(action_dim)
-        if self.r30_enabled:
-            violations: list[str] = []
-            if self.r28_g1_enabled:
-                violations.append("r28_g1")
-            if self.r29_action_info_enabled:
-                violations.append("r29_action_information")
-            if self.enable_team_intent:
-                violations.append("sampled_team_intent")
-            if self.low_actor_condition_on_team_code:
-                violations.append("low_actor_team_code")
-            if self.process_reward_injection != "none":
-                violations.append("process_reward_injection")
-            if self.outcome_residual_injection != "none":
-                violations.append("outcome_residual_injection")
-            if self.topology_role_injection != "none":
-                violations.append("topology_role_injection")
-            if self.topology_potential_injection != "none":
-                violations.append("topology_potential_injection")
-            if self.edit_penalty_alpha != 0.0 or self.switch_penalty_beta != 0.0:
-                violations.append("edit_or_switch_penalty")
-            if self.duration_entropy_floor_enabled:
-                violations.append("duration_entropy_floor")
-            if bool(getattr(config, "use_compact_return_head", False)):
-                violations.append("compact_return_head")
-            if violations:
-                raise ValueError("invalid R30 configuration: " + ",".join(violations))
-
         self.action_space_type = str(action_space_type)
         input_dim = int(obs_dim) + int(n_skills)
         self.actor = mlp(input_dim, hidden_dim, action_dim)
@@ -1793,6 +1766,9 @@ class StandaloneProcessAgent:
         self.r30_force_refresh_every_check = bool(
             getattr(config, "r30_force_refresh_every_check", False)
         )
+        self.r39_native_categorical_edit = bool(
+            getattr(config, "r39_native_categorical_edit", False)
+        )
         self.r30_high_buffer_version = int(
             getattr(config, "r30_high_buffer_version", HIGH_BUFFER_VERSION)
         )
@@ -2185,6 +2161,7 @@ class StandaloneProcessAgent:
                 keep_init=self.r30_keep_init,
                 age_reference_steps=self.intrinsic_phase_reference_steps,
                 force_refresh_every_check=self.r30_force_refresh_every_check,
+                native_categorical_edit=self.r39_native_categorical_edit,
             ).to(self.device)
             self.high_value = HighCheckValue(
                 state_dim=self.state_dim,
@@ -2235,6 +2212,33 @@ class StandaloneProcessAgent:
             if self.enable_situation_hazard_control and self.situation_hazard_mode == "learned_beta"
             else None
         )
+        if self.r30_enabled:
+            violations: list[str] = []
+            if self.r28_g1_enabled:
+                violations.append("r28_g1")
+            if self.r29_action_info_enabled:
+                violations.append("r29_action_information")
+            if self.enable_team_intent:
+                violations.append("sampled_team_intent")
+            if self.low_actor_condition_on_team_code:
+                violations.append("low_actor_team_code")
+            if self.process_reward_injection != "none":
+                violations.append("process_reward_injection")
+            if self.outcome_residual_injection != "none":
+                violations.append("outcome_residual_injection")
+            if self.topology_role_injection != "none":
+                violations.append("topology_role_injection")
+            if self.topology_potential_injection != "none":
+                violations.append("topology_potential_injection")
+            if self.edit_penalty_alpha != 0.0 or self.switch_penalty_beta != 0.0:
+                violations.append("edit_or_switch_penalty")
+            if self.duration_entropy_floor_enabled:
+                violations.append("duration_entropy_floor")
+            if bool(getattr(config, "use_compact_return_head", False)):
+                violations.append("compact_return_head")
+            if violations:
+                raise ValueError("invalid R30 configuration: " + ",".join(violations))
+
         if self.use_recurrent_low_level and self.low_level_architecture == "strict_hmasd_mappo":
             self.low = StrictHMASDMAPPOLowLevelPolicy(
                 self.obs_dim,
@@ -7458,6 +7462,7 @@ class StandaloneProcessAgent:
                 "r30_continuation_actor_tokens": 0.0,
                 "r30_replay_logp_max_error": 0.0,
                 "r30_full_sync_set_rate": 0.0,
+                "r30_mixed_age_fraction": 0.0,
                 "r30_normal_decision_rows": 0.0,
                 "r30_full_sync_set_rows": 0.0,
                 "r30_switch_skill_entropy_norm": 0.0,
@@ -7652,6 +7657,10 @@ class StandaloneProcessAgent:
             float(np.all(np.asarray(row.token_kind) == SET_TOKEN))
             for row in normal_decisions
         ]
+        mixed_age = [
+            float(np.ptp(np.asarray(row.prev_ages, dtype=np.float32)) > 0.0)
+            for row in normal_decisions
+        ]
         switch_skills: list[int] = []
         spell_gt_4k0 = 0
         spell_le_4k0 = 0
@@ -7781,6 +7790,9 @@ class StandaloneProcessAgent:
             "r30_continuation_actor_tokens": float(continuation_tokens),
             "r30_replay_logp_max_error": replay_error,
             "r30_full_sync_set_rate": float(np.mean(full_sync)) if full_sync else 0.0,
+            "r30_mixed_age_fraction": (
+                float(np.mean(mixed_age)) if mixed_age else 0.0
+            ),
             "r30_normal_decision_rows": float(len(normal_decisions)),
             "r30_full_sync_set_rows": float(full_sync_rows),
             "r30_switch_skill_entropy_norm": switch_entropy_norm,

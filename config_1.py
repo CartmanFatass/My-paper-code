@@ -139,6 +139,9 @@ class Config:
     n_encoder_layers = 2
     n_decoder_layers = 2
     n_heads = 8
+    # PPO replays stored categorical actions; the high policy must therefore be
+    # deterministic conditional on its inputs (sampling remains stochastic).
+    coordinator_dropout = 0.0
     gru_hidden_size = 256
     lr_coordinator = 1e-4
     lr_discoverer_actor  = 1e-4     # 技能发现器学习率 (离散动作空间下提高学习率以确保有效更新)

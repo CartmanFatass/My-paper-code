@@ -532,7 +532,7 @@ class StateEncoder(nn.Module):
 
 class SkillDecoder(nn.Module):
     """技能解码器"""
-    def __init__(self, embedding_dim, n_layers, n_heads, n_Z, n_z):
+    def __init__(self, embedding_dim, n_layers, n_heads, n_Z, n_z, dropout=0.0):
         super(SkillDecoder, self).__init__()
         
         self.embedding_dim = embedding_dim
@@ -545,6 +545,7 @@ class SkillDecoder(nn.Module):
             d_model=embedding_dim,
             nhead=n_heads,
             dim_feedforward=embedding_dim * 4,
+            dropout=float(dropout),
             batch_first=True
         )
         self.transformer_decoder = nn.TransformerDecoder(decoder_layer, n_layers)
@@ -716,6 +717,7 @@ class SkillCoordinator(nn.Module):
             d_model=config.embedding_dim,
             nhead=config.n_heads,
             dim_feedforward=config.embedding_dim * 4,
+            dropout=float(getattr(config, 'coordinator_dropout', 0.0)),
             batch_first=True
         )
         self.encoder = nn.TransformerEncoder(encoder_layer, config.n_encoder_layers)
@@ -725,7 +727,8 @@ class SkillCoordinator(nn.Module):
             config.n_decoder_layers,
             config.n_heads,
             config.n_Z,
-            config.n_z
+            config.n_z,
+            dropout=float(getattr(config, 'coordinator_dropout', 0.0)),
         )
         
         self.value_head_state = nn.Linear(config.embedding_dim, 1)

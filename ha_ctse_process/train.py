@@ -66,6 +66,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_bridge_context_mode",
     "r30_high_buffer_version",
     "r30_force_refresh_every_check",
+    "r39_native_categorical_edit",
     "constant_skill_no_high",
     "aem_joint_novelty_enabled",
     "aem_joint_position_grid_size",

@@ -27,6 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r39-toy-native-categorical | launch-ready | stage-0 synthetic mechanism gate; hierarchy-L2 matched control | local CUDA, concurrent 16-env arms | single result JSON | dense role-free two-timescale external task; 32-wide feedforward skill executor; no intrinsic reward | PASS returns to deferred R39A; access miss invalidates this toy instrument; temporal miss blocks native-HMASD R39B. |
+| EXP-20260715-r39a-current-fixed-hmasd-anchor | planned -- package prepared and deferred | baseline-L1 current-interface source-anchor gate | cloud CUDA package; no launch during toy gate | toy result | GPT-5.6 Pro accepted a serial R39A anchor then R39B route; user selected a cheap toy mechanism gate before S7 compute | Preserve the exact package. Launch only after toy PASS; native-HMASD R39B still requires R39A PASS. |
 | EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
 | EXP-20260715-r38-cts-access | completed -- valid `FAIL_R38_CTS_ACCESS` | baseline-L1 environment-access gate | local CUDA; `logs/r38_cts_access_320k_20260715_140641_retry2`; commit `db3502e` | post-R38 cross-round failure review | M0 PASS; 100 low updates and zero high/process/intrinsic updates; MAPPO short `0/256`, long `2/256`, full `0/256`; all four 64-reset blocks had zero full success | Retire CTS without shaping, intrinsic reward, learner, budget, seed, or threshold rescue; the lifetime-controller gate is not authorized. |
 | EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; GPT-5.6 Pro accepted the failure and selected the R37 observation-substrate gate. |
@@ -99,6 +101,117 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260715-r39-toy-native-categorical
+
+- Causal edge: centralized two-timescale context -> one categorical final-skill
+  action per agent -> incumbent equality realizes `KEEP` -> mixed per-agent
+  skill ages while a learned skill-only low policy remains task-accessible.
+- Comparator: mechanism-matched full-refresh control. Both arms have identical
+  environment, categorical skill distribution, model shape, reward, seed,
+  optimizer exposure, and final-skill support. The only intervention is that
+  the adaptive arm interprets a sampled incumbent as `KEEP`; the control records
+  every sample as `SET`, including `SET(current)`.
+- Environment/information: two agents; constant identical four-value local
+  observations; centralized six-value state contains slow and fast action
+  targets plus their clocks; episode 40; `k0=5`; fast target changes each block
+  and slow target each four blocks. Reward is the maximum over the two possible
+  agent-to-target assignments of a bounded dense action-match objective. It is
+  external task reward, not shaping or intrinsic reward, and defines no agent
+  identity or fixed role.
+- Model: hidden width 32, compact/team dimensions 16, process embedding 8,
+  feedforward low actor, four skills, one deterministic representation code,
+  three high/low PPO epochs. OPT losses, process/posterior losses, transition
+  discriminator, topology/outcome probes, R29/R31, and every intrinsic reward
+  path are off.
+- Exposure: seed 39041; local CUDA; two arms concurrently; 16 environments per
+  arm; rollout 40; exactly 12,800 environment steps and 20 outer updates per
+  arm; 32 final stochastic evaluation episodes per arm. Expected wall clock is
+  2-5 minutes.
+- M0 validity: exact scenario/config/seed/budget and 20 updates; finite metrics;
+  native categorical flag true in both arms; adaptive force-refresh false and
+  control true; high replay maximum error `<=1e-5`; hidden width 32 and
+  feedforward low policy; zero task-specific or generic intrinsic reward and no
+  process/diagnostic optimizer objective.
+- M1 access: both arms have final mean match score `>=0.70`, mean slow match
+  `>=0.65`, and mean fast match `>=0.65`. Failure is
+  `NO_ACCESS_R39_TOY_32`; it is an instrument/capacity result and has no
+  temporal-algorithm meaning.
+- M2 temporal mechanism: control full-sync `SET` rate is exactly 1 within
+  `1e-6`; adaptive full-sync `SET` rate `<=0.75`; adaptive mixed-age fraction
+  `>=0.25`; adaptive late data contain both a completed spell `<=4k0` and a
+  spell surviving `>4k0`; and adaptive mean match is no more than `0.05` below
+  control. These are lifetime/mechanism criteria, not an efficacy claim.
+- Branches: M0 miss -> `INVALID_R39_TOY_IMPLEMENTATION`, repair only the
+  concrete defect. M0 pass/M1 miss -> `NO_ACCESS_R39_TOY_32`, stop and redesign
+  only the cheap positive-control instrument. M0/M1 pass/M2 miss ->
+  `FAIL_R39_TOY_NATIVE_CATEGORICAL`, block S7 temporal integration and review
+  this mechanism. M0/M1/M2 pass -> `PASS_R39_TOY_NATIVE_CATEGORICAL`, freeze
+  the toy evidence and return to the already registered R39A source anchor.
+- Prohibited: environment-specific intrinsic reward; task fields in the low
+  actor; role labels; sparse success/contact logic; UAV/S7 launch before this
+  result; threshold changes after reading outcomes; or claims about HMASD
+  parity, sparse exploration, cooperation performance, or S7 efficacy.
+- Status source: `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r39_toy_native_categorical.json`.
+
+### EXP-20260715-r39a-current-fixed-hmasd-anchor
+
+- Causal edge: current-interface native fixed-`k` HMASD -> stable positive
+  S7-S1 service access. This is a Level-1 source-anchor gate, not an async
+  algorithm test. The null is failure to clear the registered service floors;
+  there is no treatment arm or causal-comparison claim.
+- Upstream authorization: GPT-5.6 Pro returned `MODIFY R39-S7` and selected a
+  strict serial route: R39A positive anchor before any R39B implementation.
+  The raw response and accepted controller disposition are under
+  `docs/external-review/gpt5_6_pro/20260715_r38_cts_access_result/`. Package
+  preparation is authorized; the formal launch still requires the user's
+  explicit approval.
+- Algorithm/environment: native `hmasd_original`, S7-S1 interface v3, eight
+  agents, four-dimensional tanh-Gaussian actions, `n_Z=n_z=6`, fixed `k=10`,
+  episode and rollout length 500, strict HMASD alignment, and the current
+  native recurrent discoverer, ValueNorm, high/low/discriminator losses and
+  update order. Horizon, process exploration, OPT, team bridge, HA-CTSE, and
+  R30 are disabled.
+- Reward/information boundary: external arm C is reapplied before final
+  `qos_fixed_safety`; `use_graph_pbrs=false` and all other shaping is zero.
+  Existing native `q_D/q_d` rewards remain unchanged. No new intrinsic reward,
+  classifier, latent, scheduler, process scorer, task identity, or
+  environment-specific signal is added.
+- Probability correction: stored `Z,z_{<i}` are teacher-forced during PPO
+  replay and high-policy Transformer dropout is zero. Categorical skill
+  sampling remains stochastic. This closes the registered joint-likelihood
+  contract rather than changing its objective.
+- Exposure: train seed 39039, CUDA, 32 parallel environments, 100 outer
+  updates, exactly 1,600,000 environment steps, and the exact final checkpoint;
+  no best checkpoint, early stop, append, or extra seed. Final evaluation uses
+  100 stochastic 500-step episodes with reset seeds 139039..139138 and policy
+  RNG seed 239039. Whole-episode percentile bootstrap uses 10,000 repetitions
+  and seed 40039039. Expected cloud wall clock is 8-18 hours including final
+  evaluation.
+- M0 implementation validity: exact interface/reward/algorithm/exposure;
+  exactly 100 successful updates; CUDA with no silent fallback; stored team
+  and agent joint-action maximum replay log-probability error `<=1e-6`;
+  complete current policy/training interfaces, native modules, optimizers and
+  normalizer state; finite parameters/actions/values/losses; zero numerical
+  repairs; and no HA-CTSE/R30 path.
+- M1 positive anchor: using per-step native `coverage_ratio`, episode-bootstrap
+  `LCB95(C_mean)>=0.90`, `LCB95(C_full)>=0.50`, and
+  `UCB95(F_zero)<=0.10`, where full means coverage `>=1-1e-6` and a zero
+  episode has maximum coverage `<=1e-6`.
+- Branches: M0 miss -> `INVALID_R39A_IMPLEMENTATION`, repair only the concrete
+  wiring defect and repeat this exact contract. M0 pass plus M1 pass ->
+  `PASS_R39A_CURRENT_FIXED_HMASD_ANCHOR`, freeze the exact checkpoint/manifest
+  and only then register R39B. M0 pass plus any M1 miss ->
+  `VALID_FAIL_R39A_NO_CURRENT_HMASD_ANCHOR`, retire R39 temporal treatment on
+  this substrate.
+- Prohibited: R39B implementation before PASS; old-checkpoint partial loading;
+  standalone R30; intrinsic/shaping rescue; tuning, seed or budget expansion;
+  best-checkpoint substitution; threshold changes; and interpreting a valid
+  failure as evidence against asynchronous lifetime learning or HA-CTSE.
+- Status source: `<run-root>/runner_status.txt`; training exposure source:
+  `<run-root>/train/final_training_summary.json` and exact final checkpoint;
+  decision source: `<run-root>/result/r39a_fixed_hmasd_anchor.json`.
 
 ### EXP-20260715-r37-actor-visible-identity-access
 

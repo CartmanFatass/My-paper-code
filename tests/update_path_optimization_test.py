@@ -98,6 +98,33 @@ def test_coordinator_training_batch_backward_has_gradients():
     assert any(torch.isfinite(grad).all() and grad.abs().sum() > 0 for grad in grads)
 
 
+def test_coordinator_training_mode_replays_sampled_joint_likelihood_exactly():
+    config = make_small_config()
+    config.coordinator_dropout = 0.0
+    coordinator = SkillCoordinator(config)
+    coordinator.train()
+
+    states = torch.randn(5, config.state_dim)
+    observations = torch.randn(5, config.n_agents, config.obs_dim)
+
+    with torch.no_grad():
+        sampled = coordinator.assign_and_value_batch(states, observations, deterministic=False)
+        torch.rand(128)
+        replay = coordinator.evaluate_training_batch(
+            states,
+            observations,
+            sampled["team_skills"],
+            sampled["agent_skills"],
+        )
+
+    torch.testing.assert_close(
+        replay["team_log_probs"], sampled["team_log_probs"], atol=1e-6, rtol=0.0
+    )
+    torch.testing.assert_close(
+        replay["agent_log_probs"], sampled["agent_log_probs"], atol=1e-6, rtol=0.0
+    )
+
+
 def test_coordinator_assign_and_value_batch_matches_legacy_deterministic_path():
     config = make_small_config()
     coordinator = SkillCoordinator(config)

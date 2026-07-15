@@ -266,6 +266,113 @@ def validate_scenario7_configuration(config, args, env=None):
         raise ValueError("Scenario 7 configuration validation failed:\n- " + "\n- ".join(errors))
 
 
+def validate_r39a_contract(config, args):
+    """Fail closed on the registered current-interface fixed-k anchor."""
+    if not bool(getattr(args, "r39a_strict_contract", False)):
+        return
+
+    errors = []
+    expected_args = {
+        "algorithm": "hmasd_original",
+        "seed": 39039,
+        "preset": "S7-S1",
+        "scenario": "energy",
+        "config": "config_1",
+        "collector_backend": "sharded",
+        "num_workers": 8,
+        "envs_per_worker": 4,
+        "device": "cuda",
+        "disable_eval": True,
+        "resume_from": "",
+        "use_opt": False,
+        "use_reward_annealing": False,
+        "use_lr_decay": False,
+        "update_amp": False,
+        "discriminator_update_mode": "fused",
+    }
+    for name, wanted in expected_args.items():
+        actual = getattr(args, name, None)
+        if actual != wanted:
+            errors.append(f"argument {name}={actual!r}, expected {wanted!r}")
+
+    expected = {
+        "n_agents": 8,
+        "action_dim": 4,
+        "scenario7_interface_version": 3,
+        "continuous_action_distribution": "tanh_gaussian",
+        "scenario7_experiment_arm": "C",
+        "scenario7_reward_variant": "qos_fixed_safety",
+        "use_graph_pbrs": False,
+        "n_Z": 6,
+        "n_z": 6,
+        "k": 10,
+        "coordinator_dropout": 0.0,
+        "episode_length": 500,
+        "rollout_length": 500,
+        "num_envs": 32,
+        "total_timesteps": 1_600_000,
+        "strict_hmasd_alignment": True,
+        "use_horizon_window": False,
+        "use_process_exploration": False,
+        "use_opt": False,
+        "use_team_bridge": False,
+        "use_obsnorm": False,
+        "use_statenorm": False,
+        "lambda_e": 1.0,
+        "lambda_D": 0.05,
+        "lambda_d": 0.02,
+        "lambda_h": 0.07,
+        "lambda_l": 0.005,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "clip_epsilon": 0.20,
+        "ppo_epochs": 15,
+        "num_mini_batch": 4,
+        "lr_coordinator": 1e-4,
+        "lr_discoverer_actor": 1e-4,
+        "lr_discoverer_critic": 1e-4,
+        "lr_discriminator": 1e-4,
+    }
+    for name, wanted in expected.items():
+        actual = getattr(config, name, None)
+        if actual != wanted:
+            errors.append(f"{name}={actual!r}, expected {wanted!r}")
+
+    if str(getattr(config, "algorithm", "")) != "hmasd_original":
+        errors.append(
+            f"algorithm={getattr(config, 'algorithm', None)!r}, expected 'hmasd_original'"
+        )
+    if bool(getattr(config, "disable_high_level_training", False)):
+        errors.append("disable_high_level_training must be false")
+    if bool(getattr(config, "disable_discriminator_training", False)):
+        errors.append("disable_discriminator_training must be false")
+    if bool(getattr(config, "disable_discriminator_rewards", False)):
+        errors.append("disable_discriminator_rewards must be false")
+    if bool(getattr(config, "scenario7_comparison_gate_enabled", True)):
+        errors.append("scenario7_comparison_gate_enabled must be false")
+
+    shaping_fields = (
+        "w_first_contact",
+        "w_energy_backhaul_potential",
+        "w_energy_motion",
+        "w_energy_efficiency",
+        "w_low_battery",
+        "w_depleted_battery",
+        "w_charge_progress",
+        "w_charging_queue",
+        "w_station_approach",
+        "w_charging_arrival",
+        "w_energy_failure",
+        "w_energy_failure_event",
+    )
+    for name in shaping_fields:
+        if float(getattr(config, name, 0.0)) != 0.0:
+            errors.append(f"{name} must be zero")
+
+    if errors:
+        raise ValueError("R39A contract validation failed:\n- " + "\n- ".join(errors))
+
+
 def run_scenario7_physical_feasibility_check(config, seed_count=None):
     """Run the 20-seed static-layout and rotation-charging certificate."""
     seed_count = max(
@@ -3810,6 +3917,11 @@ def parse_args():
     )
     parser.add_argument('--strict_hmasd_alignment', action=argparse.BooleanOptionalAction, default=None,
                         help='严格按HMASD论文对齐高层样本语义（默认使用配置文件）')
+    parser.add_argument(
+        '--r39a_strict_contract',
+        action='store_true',
+        help='启用R39A current-interface fixed-k anchor的fail-closed合同和likelihood replay审计',
+    )
     parser.add_argument('--stability_check_interval', type=int, default=10,
                         help='数值稳定性检查间隔（按vector step计；1=每步，0=禁用）')
     parser.add_argument('--memory_monitor_interval', type=int, default=16,
@@ -4029,6 +4141,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     scenario7_episode_summaries = []
     reward_plot_interval = max(100, num_envs * 10)
     update_times = 0
+    successful_update_times = 0
     best_reward = float('-inf')
     last_eval_step = 0  # 跟踪上次评估的步数
     
@@ -4571,6 +4684,18 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 last_state=last_states_batch,
                 last_observations=last_observations_batch
             )
+            if args.r39a_strict_contract:
+                nonfinite_fields = [
+                    name
+                    for name, value in update_info.items()
+                    if isinstance(value, (int, float, np.integer, np.floating))
+                    and not np.isfinite(float(value))
+                ]
+                if nonfinite_fields:
+                    raise FloatingPointError(
+                        "R39A update produced non-finite metrics: "
+                        + ", ".join(sorted(nonfinite_fields))
+                    )
             policy_update_succeeded = True
             update_info['policy_diagnostics'] = agent.get_policy_diagnostics()
             if training_profiler.enabled:
@@ -4578,6 +4703,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     torch.cuda.synchronize(agent.device)
                 training_profiler.add('update', time.perf_counter() - phase_start)
             update_times += 1
+            successful_update_times += 1
             elapsed = time.time() - start_time
 
             main_logger.info(f"Rollout更新 {update_times} (收集了 {steps_in_rollout} 步), 总步数 {total_steps}, "
@@ -4625,6 +4751,8 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
             
         except ValueError as e:
             main_logger.error(f"更新错误: {e}")
+            if args.r39a_strict_contract:
+                raise
             update_times += 1
 
         if scenario7_safety_controller is not None and policy_update_succeeded:
@@ -4955,12 +5083,63 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     main_logger.info(f"训练完成! 总步数: {total_steps}, 总episodes: {n_episodes}")
     main_logger.info(f"最佳奖励: {best_reward:.2f}")
 
+    final_stability_stats = (
+        numerical_stabilizer.get_statistics()
+        if hasattr(numerical_stabilizer, 'get_statistics')
+        else {}
+    )
+    if args.r39a_strict_contract:
+        expected_updates = int(config.total_timesteps // (config.num_envs * config.rollout_length))
+        if total_steps != int(config.total_timesteps):
+            raise RuntimeError(
+                f"R39A ended at {total_steps} steps, expected {config.total_timesteps}"
+            )
+        if successful_update_times != expected_updates or update_times != expected_updates:
+            raise RuntimeError(
+                "R39A update exposure mismatch: "
+                f"successful={successful_update_times}, attempted={update_times}, "
+                f"expected={expected_updates}"
+            )
+        if int(final_stability_stats.get('total_repairs', 0)) != 0:
+            raise FloatingPointError(
+                f"R39A numerical repairs are nonzero: {final_stability_stats}"
+            )
+
     # 最终数据导出和统计
     main_logger.info("生成最终训练统计报告...")
     reward_tracker.export_training_data(total_steps, tb_manager.writer, args=args)
 
     # 获取并打印训练摘要统计
     summary_stats = reward_tracker.get_summary_statistics()
+    final_model_path = os.path.join(
+        model_dir,
+        f'{getattr(config, "algorithm", args.algorithm)}_multiproc_final.pt',
+    )
+    summary_stats.update({
+        'contract_total_steps': int(total_steps),
+        'outer_updates': int(update_times),
+        'successful_outer_updates': int(successful_update_times),
+        'failed_outer_updates': int(update_times - successful_update_times),
+        'final_checkpoint_path': final_model_path,
+        'numerical_stability': final_stability_stats,
+        'r39a_strict_contract': bool(args.r39a_strict_contract),
+    })
+    if args.r39a_strict_contract:
+        summary_stats['r39a_contract'] = {
+            'seed': int(args.seed),
+            'algorithm': str(getattr(config, 'algorithm', args.algorithm)),
+            'preset': str(getattr(config, 'experiment_preset', '')),
+            'n_agents': int(config.n_agents),
+            'action_dim': int(config.action_dim),
+            'scenario7_interface_version': int(config.scenario7_interface_version),
+            'scenario7_experiment_arm': str(config.scenario7_experiment_arm),
+            'scenario7_reward_variant': str(config.scenario7_reward_variant),
+            'use_graph_pbrs': bool(config.use_graph_pbrs),
+            'num_envs': int(config.num_envs),
+            'rollout_length': int(config.rollout_length),
+            'skill_interval': int(config.k),
+            'total_timesteps': int(config.total_timesteps),
+        }
     main_logger.info("\n===== 训练摘要统计 =====")
     main_logger.info(f"总训练步数: {summary_stats['total_steps']}")
     main_logger.info(f"总完成episodes: {summary_stats['total_episodes']}")
@@ -4983,7 +5162,6 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     main_logger.info(f"最终训练摘要已保存到: {final_summary_path}")
 
     # 保存最终模型
-    final_model_path = os.path.join(model_dir, f'{getattr(config, "algorithm", args.algorithm)}_multiproc_final.pt')
     agent.save_model(final_model_path)
     main_logger.info(f"最终模型已保存到 {final_model_path}")
 
@@ -6309,9 +6487,13 @@ def main():
     config.update_amp = bool(args.update_amp)
     if args.strict_hmasd_alignment is not None:
         config.strict_hmasd_alignment = bool(args.strict_hmasd_alignment)
+    config.r39a_strict_contract = bool(args.r39a_strict_contract)
+    config.audit_high_replay_likelihood = bool(args.r39a_strict_contract)
     
     # 获取计算设备
     device = get_device(args.device)
+    if args.r39a_strict_contract and device.type != 'cuda':
+        raise RuntimeError('R39A requires CUDA; CPU fallback is forbidden')
     
     # 确定并行环境数量，并同步写回config，确保buffer/batch尺寸与实际collector一致。
     requested_backend = args.collector_backend
@@ -6564,6 +6746,7 @@ def main():
                 f"{physical_feasibility['mean_rotation_qos_satisfaction_ratio']:.3f}"
             )
     apply_algorithm_config(config, args.algorithm)
+    validate_r39a_contract(config, args)
     
     main_logger.info(f"从环境获取维度信息: state_dim={state_dim}, obs_dim={obs_dim}, action_dim={config.action_dim}")
     main_logger.info(f"确认无人机数量: n_agents={config.n_agents}")

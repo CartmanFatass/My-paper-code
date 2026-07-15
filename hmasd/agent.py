@@ -671,6 +671,16 @@ class HMASDAgent:
             'process_segments_trained': 0.0,
         }
         self.last_action_entropy = 0.0
+        self.high_replay_likelihood_metrics = {
+            'latest_team_max_abs_error': 0.0,
+            'latest_agent_max_abs_error': 0.0,
+            'latest_max_abs_error': 0.0,
+            'latest_sample_count': 0,
+            'global_team_max_abs_error': 0.0,
+            'global_agent_max_abs_error': 0.0,
+            'global_max_abs_error': 0.0,
+            'global_sample_count': 0,
+        }
         
         # 用于减少高层缓冲区警告日志的计数器
         self.high_level_buffer_warning_counter = 0
@@ -4289,6 +4299,144 @@ class HMASDAgent:
         )
         return metrics
 
+    def _audit_high_replay_likelihood(self, rollout_data, num_steps):
+        """Replay stored native-HMASD high actions without changing RNG or policy state."""
+        if not bool(getattr(self.config, 'audit_high_replay_likelihood', False)):
+            return
+
+        valid_time_steps, valid_env_indices = np.where(
+            rollout_data['high_level_valid_mask'][:num_steps]
+        )
+        sample_count = int(valid_time_steps.size)
+        if sample_count == 0:
+            self.high_replay_likelihood_metrics.update({
+                'latest_team_max_abs_error': 0.0,
+                'latest_agent_max_abs_error': 0.0,
+                'latest_max_abs_error': 0.0,
+                'latest_sample_count': 0,
+            })
+            return
+
+        batch_size = max(1, int(getattr(self.config, 'coordinator_batch_size', 128)))
+        team_max_abs_error = 0.0
+        agent_max_abs_error = 0.0
+        torch_cpu_rng_state = torch.random.get_rng_state()
+        torch_cuda_rng_states = (
+            torch.cuda.get_rng_state_all()
+            if torch.cuda.is_available()
+            else None
+        )
+        numpy_rng_state = np.random.get_state()
+        python_rng_state = random.getstate()
+
+        try:
+            with torch.no_grad():
+                for start in range(0, sample_count, batch_size):
+                    end = min(start + batch_size, sample_count)
+                    time_batch = valid_time_steps[start:end]
+                    env_batch = valid_env_indices[start:end]
+
+                    states = torch.as_tensor(
+                        rollout_data['states'][time_batch, env_batch],
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    observations = torch.as_tensor(
+                        rollout_data['obs'][time_batch, env_batch],
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    if getattr(self.config, 'use_obsnorm', False) and self.obs_norm is not None:
+                        obs_mean = torch.as_tensor(
+                            self.obs_norm.mean, dtype=torch.float32, device=self.device
+                        )
+                        obs_var = torch.as_tensor(
+                            self.obs_norm.var, dtype=torch.float32, device=self.device
+                        )
+                        observations = torch.clamp(
+                            (observations - obs_mean) / torch.sqrt(obs_var + 1e-8),
+                            -10.0,
+                            10.0,
+                        )
+                    if getattr(self.config, 'use_statenorm', True) and self.state_norm is not None:
+                        state_mean = torch.as_tensor(
+                            self.state_norm.mean, dtype=torch.float32, device=self.device
+                        )
+                        state_var = torch.as_tensor(
+                            self.state_norm.var, dtype=torch.float32, device=self.device
+                        )
+                        states = torch.clamp(
+                            (states - state_mean) / torch.sqrt(state_var + 1e-8),
+                            -10.0,
+                            10.0,
+                        )
+
+                    team_skills = torch.as_tensor(
+                        rollout_data['team_skills'][time_batch, env_batch],
+                        dtype=torch.long,
+                        device=self.device,
+                    )
+                    agent_skills = torch.as_tensor(
+                        rollout_data['agent_skills'][time_batch, env_batch],
+                        dtype=torch.long,
+                        device=self.device,
+                    )
+                    replay = self.skill_coordinator.evaluate_training_batch(
+                        states,
+                        observations,
+                        team_skills,
+                        agent_skills,
+                    )
+                    old_team_log_probs = torch.as_tensor(
+                        rollout_data['high_level_team_log_probs'][time_batch, env_batch],
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    old_agent_log_probs = torch.as_tensor(
+                        rollout_data['high_level_agent_log_probs'][time_batch, env_batch],
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    team_errors = torch.abs(replay['team_log_probs'] - old_team_log_probs)
+                    agent_errors = torch.abs(replay['agent_log_probs'] - old_agent_log_probs)
+                    batch_team_max = (
+                        float(team_errors.max().item())
+                        if torch.isfinite(team_errors).all()
+                        else float('inf')
+                    )
+                    batch_agent_max = (
+                        float(agent_errors.max().item())
+                        if torch.isfinite(agent_errors).all()
+                        else float('inf')
+                    )
+                    team_max_abs_error = max(team_max_abs_error, batch_team_max)
+                    agent_max_abs_error = max(agent_max_abs_error, batch_agent_max)
+        finally:
+            torch.random.set_rng_state(torch_cpu_rng_state)
+            if torch_cuda_rng_states is not None:
+                torch.cuda.set_rng_state_all(torch_cuda_rng_states)
+            np.random.set_state(numpy_rng_state)
+            random.setstate(python_rng_state)
+
+        latest_max_abs_error = max(team_max_abs_error, agent_max_abs_error)
+        metrics = self.high_replay_likelihood_metrics
+        metrics.update({
+            'latest_team_max_abs_error': team_max_abs_error,
+            'latest_agent_max_abs_error': agent_max_abs_error,
+            'latest_max_abs_error': latest_max_abs_error,
+            'latest_sample_count': sample_count,
+            'global_team_max_abs_error': max(
+                float(metrics['global_team_max_abs_error']), team_max_abs_error
+            ),
+            'global_agent_max_abs_error': max(
+                float(metrics['global_agent_max_abs_error']), agent_max_abs_error
+            ),
+            'global_max_abs_error': max(
+                float(metrics['global_max_abs_error']), latest_max_abs_error
+            ),
+            'global_sample_count': int(metrics['global_sample_count']) + sample_count,
+        })
+
     def update_coordinator(self, num_steps, bootstrap_values=None):
         """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
         if self.use_ha_ctse:
@@ -4305,6 +4453,20 @@ class HMASDAgent:
         # 检查是否有有效的高层数据
         high_level_valid_mask = rollout_data["high_level_valid_mask"]
         high_level_data_count = np.sum(high_level_valid_mask[:num_steps])
+        self._audit_high_replay_likelihood(rollout_data, num_steps)
+        if (
+            bool(getattr(self.config, 'r39a_strict_contract', False))
+            and int(self.high_replay_likelihood_metrics['latest_sample_count']) <= 0
+        ):
+            raise ValueError("R39A collected no replayable high-policy samples")
+        if (
+            bool(getattr(self.config, 'r39a_strict_contract', False))
+            and float(self.high_replay_likelihood_metrics['latest_max_abs_error']) > 1e-6
+        ):
+            raise ValueError(
+                "R39A high-policy replay likelihood mismatch: "
+                f"{self.high_replay_likelihood_metrics['latest_max_abs_error']:.9g} > 1e-6"
+            )
         if high_level_data_count == 0:
             main_logger.warning("没有有效的高层策略数据，跳过Coordinator更新")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -5626,6 +5788,11 @@ class HMASDAgent:
         }
         update_result.update(learning_rates)
         update_result.update(process_metrics)
+        if bool(getattr(self.config, 'audit_high_replay_likelihood', False)):
+            update_result.update({
+                f'high_replay_likelihood_{key}': value
+                for key, value in self.high_replay_likelihood_metrics.items()
+            })
         if self.use_ha_ctse and hasattr(self, 'last_ha_ctse_metrics'):
             update_result.update(self.last_ha_ctse_metrics)
             update_result['entropy_coef_low_level'] = float(
@@ -5715,6 +5882,10 @@ class HMASDAgent:
             ),
             # 注意：不再保存discriminator_buffer，因为Discriminator现在是On-Policy模式
         }
+        if bool(getattr(self.config, 'audit_high_replay_likelihood', False)):
+            checkpoint['training_diagnostics']['high_replay_likelihood'] = dict(
+                self.high_replay_likelihood_metrics
+            )
         
         # 保存SB3 RunningMeanStd状态（如果启用）
         if self.config.use_valuenorm:
@@ -5899,6 +6070,11 @@ class HMASDAgent:
                 self.last_action_entropy = float(
                     saved_diagnostics.get('last_action_entropy', self.last_action_entropy)
                 )
+                saved_high_replay = saved_diagnostics.get('high_replay_likelihood', {})
+                if isinstance(saved_high_replay, dict):
+                    for key in self.high_replay_likelihood_metrics:
+                        if key in saved_high_replay:
+                            self.high_replay_likelihood_metrics[key] = saved_high_replay[key]
             self.scenario7_safety_dual_state = dict(
                 checkpoint.get('scenario7_safety_dual_state', {})
             )

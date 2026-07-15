@@ -147,6 +147,13 @@ ALICE_BOB_METRIC_FIELDS = (
     "alice_bob_zero_cycle_episode_flag",
 )
 
+R39_TOY_METRIC_FIELDS = (
+    "r39_toy_task_reward",
+    "r39_toy_match_score",
+    "r39_toy_slow_match",
+    "r39_toy_fast_match",
+)
+
 DERIVED_EVAL_FIELDS = (
     "backhaul_connected_flag",
     "backhaul_connected_step_fraction",
@@ -266,6 +273,7 @@ R30_METRIC_FIELDS = (
     "r30_continuation_actor_tokens",
     "r30_replay_logp_max_error",
     "r30_full_sync_set_rate",
+    "r30_mixed_age_fraction",
     "r30_normal_decision_rows",
     "r30_full_sync_set_rows",
     "r30_switch_skill_entropy_norm",
@@ -766,6 +774,7 @@ EVAL_FIELDS = (
     *UAV_METRIC_FIELDS,
     *COMM_METRIC_FIELDS,
     *ALICE_BOB_METRIC_FIELDS,
+    *R39_TOY_METRIC_FIELDS,
     *DERIVED_EVAL_FIELDS,
 )
 
@@ -827,6 +836,7 @@ def extract_uav_metrics(info: dict[str, Any] | None) -> dict[str, float]:
         *COMM_METRIC_FIELDS,
         *ALICE_BOB_METRIC_FIELDS,
         *R38_CTS_METRIC_FIELDS,
+        *R39_TOY_METRIC_FIELDS,
     ):
         scalar = numeric_scalar(source.get(key))
         if scalar is not None:

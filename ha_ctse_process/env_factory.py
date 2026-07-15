@@ -16,6 +16,9 @@ from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
 from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.two_timescale_role_free_actions import (
+    TwoTimescaleRoleFreeActionsEnv,
+)
 
 
 SCENARIO_ALIASES = {
@@ -39,6 +42,12 @@ SCENARIO_ALIASES = {
     "alice-bob-asymmetric-cycles": "alice_bob_asymmetric_cycles",
     "alice_bob_multiscale": "alice_bob_asymmetric_cycles",
     "alice-bob-multiscale": "alice_bob_asymmetric_cycles",
+    "two_timescale_role_free_actions": "two_timescale_role_free_actions",
+    "two-timescale-role-free-actions": "two_timescale_role_free_actions",
+    "role_free_two_timescale_actions": "two_timescale_role_free_actions",
+    "role-free-two-timescale-actions": "two_timescale_role_free_actions",
+    "r39_toy": "two_timescale_role_free_actions",
+    "r39-toy": "two_timescale_role_free_actions",
 }
 
 SCENARIO_ALIASES.update(
@@ -101,6 +110,8 @@ def make_env(config, spec: EnvSpec) -> Callable[[], ParallelToArrayAdapter]:
             raw_env = AliceBobAsymmetricCyclesEnv(**kwargs)
         elif scenario == "cooperative_two_timescale_sparse":
             raw_env = CooperativeTwoTimescaleSparseEnv(**kwargs)
+        elif scenario == "two_timescale_role_free_actions":
+            raw_env = TwoTimescaleRoleFreeActionsEnv(**kwargs)
         else:
             raise AssertionError(f"Unhandled normalized scenario: {scenario}")
 

@@ -12,22 +12,41 @@ to return to S7 and compare current fixed-`k` HMASD with a same-substrate
 per-agent KEEP/SET treatment. Environment-specific intrinsic reward remains
 prohibited.
 
-The direct experiment is not yet executable. The only positive historical
-checkpoint was saved at 1.760M on the former six-agent, three-action S7 stack;
-current S7 uses the eight-agent, four-action interface-v3 contract. No exact
-checkpoint migration or current-interface positive fixed-`k` checkpoint exists,
-and standalone R30 is not the HMASD coordinator/trainer.
+The GPT-5.6 Pro follow-up is accepted with controller closures in
+`docs/external-review/gpt5_6_pro/20260715_r38_cts_access_result/`.
+The only positive historical checkpoint was saved at 1.760M on the former
+six-agent, three-action S7 stack; it remains reference-only. Current S7 uses the
+eight-agent, four-action interface-v3 contract, and standalone R30 is not the
+HMASD coordinator/trainer.
 
-One prerequisite algorithm correction is complete: commit `aaba845` makes
-standard HMASD PPO teacher-force stored `Z,z_{<i}` during joint-skill likelihood
-recomputation. The remaining order is strict:
+The user selected a lightweight synthetic mechanism gate before paying the S7
+compute cost. This does not alter the accepted serial S7 route or implement
+native-HMASD R39B. The active boundary is now a standalone stage-0 instrument:
 
-1. obtain the manual disposition of the tracked R39 compatibility follow-up;
-2. with explicit user approval, produce a current-interface positive fixed-`k`
-   HMASD anchor under the accepted access contract;
-3. implement the accepted partial-roster policy inside the original `hmasd`
-   trainer, with exact full-refresh bypass and shared low/discriminator paths;
-4. only then register the 320K matched temporal mechanism gate.
+1. two agents receive identical constant local observations while centralized
+   high context exposes one slow and one fast action target;
+2. the shared dense external reward is invariant to swapping agent roles;
+3. a single categorical final-skill action maps the incumbent to `KEEP` in the
+   adaptive arm and maps every draw to `SET`, including the incumbent, in the
+   full-refresh control;
+4. both arms use the same 32-wide feedforward low policy and 16-dimensional
+   compact/team representations, with every intrinsic and process auxiliary
+   objective disabled;
+5. the paired 12.8K-step run is the implementation and mechanism check.
+
+The preserved R39A package boundary is:
+
+1. native HMASD PPO teacher-forces stored `Z,z_{<i}`;
+2. coordinator encoder/decoder dropout is zero so the stored joint action has
+   one replayable conditional likelihood while categorical sampling remains
+   stochastic;
+3. one strict 1.6M-step/100-update CUDA runner trains from scratch and one
+   independent stochastic evaluator owns the registered 100-episode decision;
+4. launch is deferred until the toy gate reaches its registered result.
+
+R39B remains unimplemented in native HMASD. Only a toy mechanism PASS followed
+by `PASS_R39A_CURRENT_FIXED_HMASD_ANCHOR` may authorize its S7 implementation
+and 320K matched temporal gate.
 
 Do not partially load the old checkpoint, cross into the standalone R30 trainer,
 or invent an experiment result before the source anchor and team-`Z` semantics
