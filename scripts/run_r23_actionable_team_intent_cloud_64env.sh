@@ -3,7 +3,7 @@ set -euo pipefail
 
 # HA-CTSE R23 "Actionable Team Intent" cloud runner (Linux / CUDA / 64 env).
 #
-# Staged, actionability-first (see memory/R23_ACTIONABLE_TEAM_INTENT.md):
+# Staged, actionability-first (see docs/research/designs/R23_ACTIONABLE_TEAM_INTENT.md):
 #   r23_arch_only : Z gets the R23-0 residual capacity path, NO actionability
 #                   objective, NO q_D reward. Isolates "does capacity alone matter?".
 #   r23_1_action  : + g-info actionability objective I(Z;skill|c,w). q_D probe only,

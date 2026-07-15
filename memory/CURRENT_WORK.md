@@ -39,19 +39,21 @@ must not renew surviving agents' skills.
   external reward.
 - Do not begin open-roster or variable-`N` implementation before the fixed-`N`
   positive anchor.
-- Completed branch decisions in `memory/ExpRecord.md` and the cited LTM reviews
-  are binding. Reopen one only through a new registered causal edge, not by
-  retuning budgets, seeds, thresholds, rewards, or model size.
+- Completed branch decisions in `memory/ExpRecord.md` and the cited research
+  decision files are binding. Reopen one only through a new registered causal
+  edge, not by retuning budgets, seeds, thresholds, rewards, or model size.
 
 ## Pointers
 
 - `memory/ALGORITHM_PRINCIPLES.md` — research contract.
 - `memory/IMPLEMENTATION_PLAN.md` — active staged core work.
 - `memory/ExpRecord.md` — formal contracts and decisions.
-- `memory/LTM/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md` — R39 boundary.
-- `memory/LTM/R35_R40_SUBSTRATE_FAILURE_REVIEW_20260715.md` — R40/R41 boundary.
+- `docs/research/decisions/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md` —
+  R39 boundary.
+- `docs/research/decisions/R35_R40_SUBSTRATE_FAILURE_REVIEW_20260715.md` —
+  R40/R41 boundary.
 - `docs/external-review/gpt5_6_pro/20260715_open_roster_variable_team_review/`
   — variable-team disposition.
 - `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/`
   — current external-review entry.
-- `memory/LTM/external_reviews/` — external-review archive and index.
+- `docs/external-review/legacy/` — legacy external-review evidence.

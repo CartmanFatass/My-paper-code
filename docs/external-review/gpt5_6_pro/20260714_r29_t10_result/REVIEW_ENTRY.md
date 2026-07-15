@@ -24,7 +24,7 @@ R29, and the rationale that produced R29-T10:
 - `docs/external-review/gpt5_6_pro/20260713_r29_action_information/DISPOSITION.md`
 - `memory/ALGORITHM_KNOWLEDGE_BASE.md`
 - `memory/ALGORITHM_PRINCIPLES.md`
-- `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`
+- `docs/research/designs/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`
 
 ## Current contract and result
 

@@ -50,6 +50,6 @@ file config_1.py
 file logger.py
 file requirements_server.txt
 file routing_protocols.py
-file docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
+file docs/research/designs/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
 file docs/external-review/R27_G2_design_review_20260712_Claude.md
 file docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md

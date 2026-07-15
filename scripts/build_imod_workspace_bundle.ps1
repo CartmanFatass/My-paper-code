@@ -211,7 +211,7 @@ Read in this order:
 3. `memory/ALGORITHM_PRINCIPLES.md`
 4. `memory/IMPLEMENTATION_PLAN.md`
 5. `memory/ExpRecord.md`
-6. `docs/superpowers/specs/2026-07-10-imod-direct-design.md`
+6. `docs/archive/legacy-memory/IMOD_DIRECT_DESIGN_20260710.md`
 
 The written IMOD spec is awaiting user review and independent cross-family
 MARL review. No replacement implementation plan is authorized yet.

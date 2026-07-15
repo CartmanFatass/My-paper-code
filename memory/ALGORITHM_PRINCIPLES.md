@@ -9,7 +9,8 @@ target.
 ## Active R22 Contract: Two-Clock R21/v6 Mainline
 
 > 2026-07-06 R21 AUTOPSY-CONFIRMED AMENDMENT (accepted from data; CC autopsy +
-> GPT concurrence, see `memory/R21_AUTOPSY_REPORT.md`, `cross_validation.md`
+> GPT concurrence, see `docs/research/decisions/R21_AUTOPSY_REPORT.md` and
+> `docs/archive/legacy-memory/CROSS_VALIDATION_ARCHIVE.md`
 > "2026-07-06 R21 autopsy" and "2026-07-06 GPT post-autopsy advice").
 > R21 sampled team-intent Z is **mechanism-NEGATIVE, primary cause
 > `true-objective-failure` / no actionability** — now autopsied, no longer a
@@ -51,7 +52,7 @@ target.
 >    separate.
 >
 > Forward line (2026-07-06, ACCEPTED as active): **R23 Actionable Team Intent**,
-> spec `memory/R23_ACTIONABLE_TEAM_INTENT.md`. Order: Z → ξ (actionability) →
+> spec `docs/research/designs/R23_ACTIONABLE_TEAM_INTENT.md`. Order: Z → ξ (actionability) →
 > effect → only then q_D. R23-0 static capacity gate is DONE and the §3
 > architecture correction is IMPLEMENTED default-off (`z_assignment_residual_gain`;
 > flag-on random-init PASSES the gate at skill KL 0.12, flag-off keeps S-base
@@ -433,7 +434,7 @@ tasks:
 ### 2026-07-01 Cooperative-half correction (Round 10, user-confirmed)
 
 Reframing after the HMASD-paper-grounded review
-(`memory/HMASD_HACTSE_research_review_20260701_Claude.md`, digested as cross_validation
+(`docs/external-review/legacy/HMASD_HACTSE_research_review_20260701_Claude.md`, digested as cross_validation
 Round 10). The program has been over-translating the **cooperation problem** into
 the **individual-skill-semantics problem**. P3/P3-4 implements only:
 
@@ -527,7 +528,7 @@ G3 FRACTAL-DURATION TRIGGER: the discrete duration<->skill co-selection shortcut
 Usefulness gates must use the DEBIASED high-level advantage (raw SMDP advantage
 favors long T via γ^T); comm fields never enter default P3/P4 reward. The full
 staged plan (Stages A-E, diagnostics-first) and metric definitions live in
-`memory/HMASD_HACTSE_research_review_20260701_gpt.md` and the cross_validation Round 9
+`docs/external-review/legacy/HMASD_HACTSE_research_review_20260701_gpt.md` and the cross_validation Round 9
 cross-validation entries.
 
 2026-07-01 g-revival precision update:

@@ -1,7 +1,7 @@
 <#
 HA-CTSE R23-next mechanism matrix local runner (Windows / CUDA mirror of the cloud .sh).
 
-Four arms (see memory/R23_ACTIONABLE_TEAM_INTENT.md section 11):
+Four arms (see docs/research/designs/R23_ACTIONABLE_TEAM_INTENT.md section 11):
   arm0_arch_only : Z residual capacity path only (known-pass control).
   arm1_qA_probe  : + q_A residual actionability PROBE (reward off).
   arm2_qA_reward : + small q_A residual REWARD (high-level only, gated on residual_gain>0).

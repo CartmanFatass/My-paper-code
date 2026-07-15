@@ -15,7 +15,7 @@ file scripts/r28_g1_runtime_package_manifest.txt
 file requirements_server.txt
 file config_1.py
 file routing_protocols.py
-file docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md
+file docs/research/designs/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md
 file memory/CURRENT_WORK.md
 file memory/ALGORITHM_PRINCIPLES.md
 file memory/IMPLEMENTATION_PLAN.md

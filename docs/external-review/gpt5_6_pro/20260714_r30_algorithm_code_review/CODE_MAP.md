@@ -99,7 +99,7 @@ issues. The implementation target remains `ha_ctse_process`.
 
 ## Algorithm And Evidence Contracts
 
-- `docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`: proposed R30.
+- `docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`: proposed R30.
 - `memory/ALGORITHM_PRINCIPLES.md`: binding causal and algorithm constraints.
 - `memory/IMPLEMENTATION_PLAN.md`: accepted implementation boundary.
 - `memory/LTM/R29_ACTOR_DENSITY_RATIO_FAILURE_REVIEW_20260714.md`: why the

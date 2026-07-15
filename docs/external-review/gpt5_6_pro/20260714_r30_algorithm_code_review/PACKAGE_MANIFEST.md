@@ -16,7 +16,7 @@ autoregressive `KEEP/SET(skill)` editing against the current pre-R30 code.
 
 ## Algorithm And Memory Files
 
-- `docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`
+- `docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`
 - `memory/CURRENT_WORK.md`
 - `memory/ALGORITHM_PRINCIPLES.md`
 - `memory/IMPLEMENTATION_PLAN.md`

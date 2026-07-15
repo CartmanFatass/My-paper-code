@@ -14,7 +14,8 @@ Read other sources only when needed:
 - The active section of `memory/IMPLEMENTATION_PLAN.md` before staged core work.
 - The relevant row of `memory/ExpRecord.md` before a formal experiment or
   scientific result decision.
-- `memory/LTM/` only through a current pointer or explicit user request.
+- `docs/research/`, `docs/external-review/`, and `docs/archive/` only through a
+  current pointer or explicit user request.
 
 One controller owns project decisions and repository writes at a time. The
 active controller works directly in `C:\project\HMASD` and owns implementation,
@@ -149,6 +150,8 @@ Keep the four root memory files compact and current:
 - `IMPLEMENTATION_PLAN.md`: current staged core work;
 - `ExpRecord.md`: formal experiment dashboard.
 
-At each meaningful plan, implementation, experiment, result, or review
-boundary, rotate superseded detail to `memory/LTM/` and leave one short pointer.
-Do not duplicate commands, thresholds, status, or results across files.
+At each meaningful boundary, update the one owning file. Durable designs and
+decisions belong in `docs/research/`; raw reviews in `docs/external-review/`;
+unique legacy imports in `docs/archive/`. Git history preserves removed
+material. Do not create memory archives or duplicate commands, thresholds,
+status, or results.

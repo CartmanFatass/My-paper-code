@@ -315,7 +315,7 @@ $requiredPaths = @(
     "scripts\remote\hmasd_autodl_ssh_config",
     "scripts\remote\run_hmasd_r27_g2.ps1",
     "scripts\remote\watch_r27_g2_status.sh",
-    "docs\research\R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md",
+    "docs\research\designs\R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md",
     "docs\external-review\R27_G2_design_review_20260712_Claude.md",
     "docs\operations\R27_G2_REMOTE_AUTOMATION_20260712.md",
     "memory\CURRENT_WORK.md",

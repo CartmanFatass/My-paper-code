@@ -173,7 +173,7 @@ fixed global check clock k0
 ```
 
 Accepted design:
-`docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`.
+`docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`.
 
 One coherent implementation boundary:
 
@@ -534,7 +534,5 @@ single result source are owned by `memory/ExpRecord.md`.
 ## Archived Plan History
 
 Completed R22/R24/R26/R27 implementation detail is preserved by the frozen
-designs, `memory/LTM/IMPLEMENTATION_PLAN_ARCHIVE_20260713.md`, and
-`memory/LTM/EXPERIMENT_ARCHIVE.md`. Older completed/superseded rounds are in the
-same plan archive. Read them only when this plan points there or the user asks
-for history.
+designs and `docs/archive/legacy-memory/`. Read historical imports only when
+this plan points there or the user asks for history.

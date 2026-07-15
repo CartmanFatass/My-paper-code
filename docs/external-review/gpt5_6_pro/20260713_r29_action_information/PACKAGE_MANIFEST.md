@@ -17,9 +17,9 @@ The ZIP contains only the material needed for the R29 algorithm decision:
 - `memory/ExpRecord.md` — accepted experiment evidence.
 - `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md` — failure synthesis that
   motivated the support-native target.
-- `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — forced
+- `docs/research/designs/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md` — forced
   causal-capacity design and interpretation boundary.
-- `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — retired
+- `docs/research/designs/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md` — retired
   scorer/reward design and its frozen assumptions.
 - `ha_ctse_process/r29_action_information.py` — R29-G0 density-ratio target.
 - `ha_ctse_process/r29_action_information_reward.py` — lean online reward.

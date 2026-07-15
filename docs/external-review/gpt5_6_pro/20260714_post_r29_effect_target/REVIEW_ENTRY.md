@@ -13,7 +13,7 @@ Read in this order:
 6. `memory/ALGORITHM_PRINCIPLES.md`
 7. `memory/CURRENT_WORK.md`
 8. `memory/ExpRecord.md`
-9. `docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`
+9. `docs/research/designs/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md`
 
 Return one self-contained answer satisfying `QUESTION.md`. If any path is
 unreadable, name it explicitly rather than inferring its contents.

@@ -13,7 +13,7 @@ order:
 
 1. `QUESTION.md` in this directory;
 2. `RESEARCH_BACKGROUND.md` and `CODE_MAP.md` in this directory;
-3. `docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`;
+3. `docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`;
 4. the exact code paths named in `CODE_MAP.md` at the target commit;
 5. `memory/ALGORITHM_PRINCIPLES.md` only for disputed research constraints.
 

@@ -92,8 +92,8 @@ Read all of the following before answering:
 - `AGENTS.md`
 - `memory/CURRENT_WORK.md`
 - `memory/ALGORITHM_PRINCIPLES.md` (especially Research Causal Discipline)
-- `memory/LTM/R35_R40_SUBSTRATE_FAILURE_REVIEW_20260715.md`
-- `memory/LTM/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md`
+- `docs/research/decisions/R35_R40_SUBSTRATE_FAILURE_REVIEW_20260715.md`
+- `docs/research/decisions/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md`
 - `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/r40_simple_spread_access.json`
 - `ha_ctse_process/config_r40_simple_spread.py`
 - `ha_ctse_process/standalone_agent.py` (`_update_low_recurrent` and recurrent likelihood)
@@ -104,7 +104,7 @@ Read all of the following before answering:
 - `hmasd/networks.py` (`SkillCoordinator` and stored-prefix evaluation)
 - `config_r39_native_hmasd_toy.py`
 - `train_multiproc_config_1.py` (native HMASD collector/update entry)
-- `docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`
+- `docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`
 - `docs/external-review/gpt5_6_pro/20260715_open_roster_variable_team_review/DISPOSITION.md`
 
 Primary HMASD paper:

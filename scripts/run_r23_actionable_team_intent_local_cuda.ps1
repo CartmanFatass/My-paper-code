@@ -4,7 +4,7 @@
   Small-scale mirror of scripts/run_r23_actionable_team_intent_cloud_64env.sh for
   local sanity/smoke before the cloud overnight run.
 
-  Arms (actionability-first; see memory/R23_ACTIONABLE_TEAM_INTENT.md):
+  Arms (actionability-first; see docs/research/designs/R23_ACTIONABLE_TEAM_INTENT.md):
     r23_arch_only : R23-0 residual capacity path only (no objective, no q_D reward).
     r23_1_action  : + g-info actionability objective I(Z;skill). q_D probe, no reward.
     r23_3_reward  : + q_D reward HARD-GATED behind the forced-Z KL floor.

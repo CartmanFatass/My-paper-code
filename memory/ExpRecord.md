@@ -5,7 +5,7 @@ Updated: 2026-07-15
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
 completed detail stays in frozen designs, raw run artifacts, or
-`memory/LTM/EXPERIMENT_ARCHIVE.md`.
+`docs/archive/legacy-memory/EXPERIMENT_ARCHIVE.md`.
 
 ## Protocol
 
@@ -1223,7 +1223,7 @@ explicitly approves the exception.
 - Failure review: execution and comparator counts were valid; posterior
   capacity was adequate; the skill-3 heldout count of 44 is non-decisive because
   direct M2 already fired. Reusable negative and the single next causal edge are in
-  `memory/LTM/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md`.
+  `docs/research/decisions/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md`.
 - Decision: no online R31 reward, gate checkpoint, 160K pair, identical-batch
   append, threshold change, or R31 retuning. Seek one intervention-anchored
   effect-creation route before any further reward implementation.
@@ -1352,7 +1352,7 @@ explicitly approves the exception.
   `docs/external-review/gpt5_6_pro/20260714_r29_t10_result/`. Retire the online
   same-action density-ratio family, keep R29 diagnostic-only, and move to the
   reward-off stochastic realized-effect edge recorded in
-  `memory/LTM/R29_ACTOR_DENSITY_RATIO_FAILURE_REVIEW_20260714.md`.
+  `docs/research/decisions/R29_ACTOR_DENSITY_RATIO_FAILURE_REVIEW_20260714.md`.
 
 ### EXP-20260713-r29-g0-counterfactual-action-information
 
@@ -1437,14 +1437,14 @@ explicitly approves the exception.
   and thresholds; do not refit, relax, rerun the same smoke, or launch formal
   training. This does not imply that a support-compatible reward would fail.
 - Next causal action: the reward-off matched-domain transport diagnostic in
-  `memory/LTM/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
+  `docs/research/decisions/R26_R27_R28_FAILURE_REVIEW_20260713.md`.
 - Frozen unexecuted contract: retained in
-  `docs/research/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`.
+  `docs/research/designs/R28_G1_CAUSAL_SKILL_FORCING_REWARD_DESIGN_20260713.md`.
 - Status sources: this dashboard and the two local smoke roots above.
 
 ## Completed Evidence and Archive Pointers
 
 The completed G0 protocol is frozen in the R28 design and its row points to the
 raw run artifacts. R27-G2 and prior completed detail are in
-`memory/LTM/EXPERIMENT_ARCHIVE.md`; earlier imported records remain in
-`memory/LTM/EXPERIMENT_RECORD_20260707_full_import.md`.
+`docs/archive/legacy-memory/EXPERIMENT_ARCHIVE.md`; earlier imported records
+remain in `docs/archive/legacy-memory/EXPERIMENT_RECORD_20260707_full_import.md`.

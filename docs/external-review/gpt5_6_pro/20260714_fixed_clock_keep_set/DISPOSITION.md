@@ -60,4 +60,4 @@ Rejected/deferred:
   the semantic term.
 
 The accepted implementation contract is
-`docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`.
+`docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`.

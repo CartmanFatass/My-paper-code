@@ -3,7 +3,7 @@ set -euo pipefail
 
 # HA-CTSE R23-next mechanism matrix cloud runner (Linux / CUDA / 64 env, 320k).
 #
-# Follows the 2026-07-06 GPT post-R23-read plan (memory/R23_ACTIONABLE_TEAM_INTENT.md
+# Follows the 2026-07-06 GPT post-R23-read plan (docs/research/designs/R23_ACTIONABLE_TEAM_INTENT.md
 # section 11; cross_validation "2026-07-06 GPT R23-result advice"). The g-info gradient
 # audit (scripts/r23_ginfo_grad_audit.py) showed g-info's grad into the Z path is <2%
 # of PPO and self-stalling, so the actionability main line switches to the q_A residual

@@ -18,7 +18,7 @@ Historical Alice--Bob run commit:
    - `docs/external-review/gpt5_6_pro/20260713_r29_action_information/RESEARCH_BACKGROUND.md`
    - `docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/RESEARCH_BACKGROUND.md`
    - `docs/external-review/gpt5_6_pro/20260714_r30_algorithm_code_review/DISPOSITION.md`
-   - `docs/research/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`
+   - `docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`
    - `memory/ALGORITHM_PRINCIPLES.md`
    - `memory/CURRENT_WORK.md`
 4. Inspect the current implementation at the review-target commit:

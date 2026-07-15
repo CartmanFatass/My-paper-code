@@ -54,7 +54,7 @@ REGISTERED_CHECKPOINTS: dict[str, dict[str, Any]] = {
     },
 }
 CHECKPOINT_IDS = tuple(REGISTERED_CHECKPOINTS)
-DESIGN_PATH = "docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md"
+DESIGN_PATH = "docs/research/designs/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md"
 SCIENTIFIC_CONTRACT: dict[str, Any] = {
     "experiment_id": "EXP-20260712-r27-g2-forced-z-trajectory-effect",
     "checkpoint_ids": list(CHECKPOINT_IDS),
