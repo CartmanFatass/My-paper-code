@@ -65,12 +65,7 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
     $lastError = $null
     for ($attempt = 0; $attempt -lt 50; $attempt++) {
         try {
-            if ([System.IO.File]::Exists($StatusPath)) {
-                [System.IO.File]::Replace($temporary, $StatusPath, $null)
-            }
-            else {
-                [System.IO.File]::Move($temporary, $StatusPath)
-            }
+            Move-Item -LiteralPath $temporary -Destination $StatusPath -Force
             return
         }
         catch {

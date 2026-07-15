@@ -366,7 +366,9 @@ class FixedClockAREditPolicy(nn.Module):
                         raise ValueError(
                             "native categorical KEEP requires an active incumbent"
                         )
-                    skill = working_skills[agent_id].long().reshape(1)
+                    # Categorical.log_prob retains the index tensor for
+                    # backward; detach it from the mutable working roster.
+                    skill = working_skills[agent_id].long().reshape(1).clone()
                 elif kind == SET_TOKEN:
                     skill = set_skill[position].long().reshape(1)
                     if (
