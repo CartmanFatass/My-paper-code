@@ -42,10 +42,11 @@ and history live in their owning files.
 
 ## Next Actions
 
-- Immediate next action: obtain GPT-5.6 Pro's single-route decision on the
-  tracked R39 failure-review question. The controller recommends an official
-  fixed-`N` MPE `simple_spread` ordinary-MAPPO access gate; no implementation or
-  compute begins before the review fixes its exact contract.
+- Immediate next action: obtain GPT-5.6 Pro's focused correction of the accepted
+  R40 `simple_spread` route. The first response incorrectly used
+  `local_ratio=1.0` and a nonexistent native `success` metric; no implementation
+  or compute begins until the reward, action-probability, and access estimand
+  are valid and fixed.
 
 ## Immediate Constraints
 
