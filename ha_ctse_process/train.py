@@ -2569,6 +2569,7 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         raise ValueError("R30 requires r29_action_info_mode=off")
     skill_interval = int(getattr(args, "skill_interval", 0))
     native_toy = bool(getattr(config, "r39_native_categorical_edit", False))
+    constant_skill_no_high = bool(getattr(config, "constant_skill_no_high", False))
     if native_toy:
         if normalize_scenario(str(getattr(args, "scenario", ""))) != (
             "two_timescale_role_free_actions"
@@ -2576,7 +2577,7 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
             raise ValueError("R39 native categorical mode is restricted to its toy gate")
         if skill_interval != int(getattr(config, "r39_toy_k0", 0)):
             raise ValueError("R39 toy requires skill_interval=r39_toy_k0")
-    elif skill_interval != 10:
+    elif not constant_skill_no_high and skill_interval != 10:
         raise ValueError("R30 requires skill_interval=10")
     if str(getattr(args, "device", "cuda")).lower() != "cuda":
         raise ValueError("R30 requires explicit CUDA")
