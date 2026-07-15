@@ -4,6 +4,52 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R42-IRR Native Incumbent-Roster Residual
+
+Active causal edge:
+
+```text
+positive R41B checkpoint + incumbent roster at the native k0=50 check
+-> zero-initialized task-blind residual on MAT individual logits
+-> learned per-agent retention/replacement probabilities
+-> nontrivial renewal without losing Alice--Bob service
+```
+
+The three authorized GPT-5.6 Pro rounds are complete. The final proposed pure
+categorical KEEP/SET interpretation is rejected after source audit: for every
+sampled label `y_i`, retaining the incumbent when `y_i` equals it and otherwise
+setting `y_i` always produces the same effective skill `y_i` as the original
+full refresh. The source resets low recurrent state only on episode termination,
+and no event label or age enters the policy, buffers, or nonrecurrent
+discriminators. A paired run would therefore compare identical trajectory and
+gradient distributions while manufacturing different renewal labels.
+
+R42-IRR is the smallest non-decorative successor:
+
+1. Keep the original team-token sampling and native `k0=50` clock unchanged.
+2. At the sole ordinary check (`t=50`), add a shared residual to each existing
+   MAT individual-token logit. Its input is only the pre-check/working roster,
+   focal position, and active-agent mask; it reads no task field, reward,
+   success, contact, distance, or age.
+3. Zero-initialize the residual output so sampling, teacher-forced replay, low
+   trajectories, and existing gradients exactly match R41B before learning.
+4. Store the incumbent/working roster used at collection and use the same
+   autoregressive prefixes during PPO replay. The residual trains through the
+   existing per-agent high advantage; original low reward and all source
+   optimizer paths remain unchanged.
+5. Compare a fixed continuation arm with the same residual disabled against a
+   treatment arm with it trainable. Do not add a duration action, separate KEEP
+   head, new critic/latent, lifetime reward, switch reward, or new intrinsic.
+6. The first evidence boundary must show exact zero-residual parity, replay
+   error `<=1e-6`, a nonzero treatment residual update, retained fixed-arm
+   source access, service noninferiority, and nondegenerate effective
+   per-agent skill changes at `t=50`.
+
+Implementation remains in external wrappers around a fresh `ref/hmasd.tar`
+extraction. Do not edit the source archive or port it into the standalone
+HA-CTSE trainer. Register the exact paired budget and thresholds in
+`memory/ExpRecord.md` before launch.
+
 ## R41B Full-Source HMASD Alice-and-Bob Access Reproduction
 
 Active causal edge:
@@ -57,9 +103,9 @@ R41B result boundary: `logs/r41b_hmasd_full_source_20260716_035300_retry2`
 completed valid `PASS_R41B_SOURCE_ACCESS` at commit `e36f7df`. M0 passed with
 zero replay error and exactly 14,055 updates on all five optimizer paths. Exact
 final deterministic win/key0/key1 rates were `0.89/0.97/0.92`, versus zero-step
-win `0`; the paired win-gain interval was `[0.82975, 0.95]`. The active step is
-automated Pro round 2 resolving the incompatible prior `k0=10` residual versus
-`k0=50` pure-categorical temporal contracts before any implementation.
+win `0`; the paired win-gain interval was `[0.82975, 0.95]`. All three automated
+Pro rounds are archived. Their final pure-categorical route is source-equivalent
+and retired without compute; R42-IRR is the next registered causal edge.
 
 ## R39 S7 Compatibility Boundary
 

@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | GPT-5.6 Pro round 2 temporal-gate disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; select exactly one same-checkpoint renewal-only gate before implementation |
+| EXP-20260716-r42-irr-native-roster-residual | planned -- contract pending | hierarchy-L2 same-checkpoint temporal mechanism gate | fresh `ref/hmasd.tar` runtime; R41B final checkpoint | source-native sampling/replay implementation boundary | Pure categorical reinterpretation is algebraically identical to original refresh; a zero-output roster residual is the smallest route that can change retention probability | Register one paired local gate; no pure-categorical run, new reward, duration action, open roster, or variable `N` |
+| EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
 | EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
 | EXP-20260715-r39-native-hmasd-toy-credit | completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` | stage-0 native-HMASD fixed-N credit anchor | `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219`; result owner `result/r39_native_hmasd_toy_credit.json` | post-R39 positive-substrate review | M0 valid; 12,800 steps, 20 outer updates, 60 high optimizer updates, replay max `4.768e-7`, zero low/discriminator updates; match/slow/fast `0.455078/0.464844/0.445313` | Retire this native fixed-N toy credit route under the registered valid-fail branch; no rescue or expansion |
@@ -113,6 +114,41 @@ explicitly approves the exception.
 
 ## Current Gate Detail
 
+### EXP-20260716-r42-irr-native-roster-residual
+
+- Causal edge: incumbent roster at the original HMASD check -> a zero-output,
+  task-blind residual on the existing MAT individual logits -> learned
+  per-agent retain/replace probabilities -> service-preserving temporal
+  decoupling.
+- Upstream authorization: R41B is a valid positive source anchor. Three
+  sequential GPT-5.6 Pro rounds are complete. The final pure categorical
+  reinterpretation is retired without training because its effective skill,
+  policy inputs, trajectory distribution, likelihoods, and gradients are
+  identical to the fixed-refresh arm.
+- Fixed boundaries: fresh `ref/hmasd.tar`, native `k0=50`, team `Z` resampled
+  at every native check, complete checkpoint/optimizer/value-normalizer restore,
+  and unchanged original environment reward plus original `q_D/q_d` intrinsic
+  terms. No age input is used in this 100-step one-renewal gate.
+- Treatment boundary: a shared residual sees only incumbent/working roster,
+  focal position, and active-agent mask. Its output layer is zero-initialized;
+  sampling and teacher-forced PPO replay use the same stored roster and
+  autoregressive prefixes. The fixed arm instantiates the same module with its
+  output and gradient disabled.
+- M0 before scientific interpretation: zero-residual actions, log-probabilities,
+  values, low trajectories, and existing gradients match the original path;
+  stored/replayed global/high/low likelihood errors are `<=1e-6`; both arms
+  start from identical parameters; only the treatment residual receives a new
+  gradient path.
+- Decision metrics: fixed-arm source access, paired service noninferiority, and
+  effective `t=50` per-agent skill-change rates and discordance. Exact exposure,
+  thresholds, bootstrap seed, and mutually exclusive branches must be frozen
+  here before launch.
+- Prohibited: pure event relabeling, environment-specific intrinsic reward,
+  task fields in the residual, duration or independent KEEP actions, new
+  critic/team latent, threshold rescue, open roster, or variable `N`.
+- Status source: to be registered with the paired runner; no experiment has
+  been launched.
+
 ### EXP-20260716-r41b-hmasd-alice-bob-full-source
 
 - Causal edge: exact original HMASD source exposure -> positive Alice--Bob
@@ -146,8 +182,9 @@ explicitly approves the exception.
   `PASS_R41B_SOURCE_ACCESS`. M0 passed with replay errors all `0`, complete
   checkpoints, and 14,055 updates on every optimizer path. Final deterministic
   win/key0/key1 were `0.89/0.97/0.92`, zero-step win was `0`, and the paired
-  final-minus-zero 95% interval was `[0.82975, 0.95]`. The next action is the
-  tracked automated Pro round-2 review; no temporal code is yet authorized.
+  final-minus-zero 95% interval was `[0.82975, 0.95]`. Three Pro rounds are
+  complete. Source audit retired the final pure-categorical proposal as
+  behaviorally identical; the next edge is R42-IRR.
 
 ### EXP-20260716-r41a-hmasd-alice-bob-local-pilot
 
