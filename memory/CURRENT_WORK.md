@@ -43,8 +43,9 @@ R29--R34 skill identification, effect creation, composition, and relabeling fail
 -> joint coverage rises 3.855x but collection access remains exactly zero
 -> GPT-5.6 Pro confirms the valid failure and hidden active-task-identity
    bottleneck
--> R37 capacity-matched actor-visible-identity gate tests whether the repaired
-   Alice--Bob substrate has any positive sparse-access floor
+-> R37 confirms a strong identity-to-access effect but misses the robust cycle
+   floor
+-> retire this sparse Alice--Bob gate and select one replacement benchmark
 ```
 
 R33 completed validly as `FAIL_M1_RETIRE_R33_IRSC`. Its stricter residualized
@@ -192,15 +193,22 @@ direct intervention-scored roster-complementarity selection are retired.
   both arms use the same 16-value actor input, with true active plate/target
   one-hots in treatment and zeroed identity slots in control. This is a
   benchmark-validity gate, not an algorithm contribution.
+- R37 completed validly as `FAIL_R37_ACCESS`. The capacity-matched visible arm
+  produced 10/64 collection episodes, cycle mean `0.01953125`, sparse reward
+  `0.15625`, and a wholly positive paired collection interval; the masked arm
+  remained at zero access. M2 and M3 passed, but M1 failed because cycle success
+  stayed below `0.05`. Current task identity is a real access carrier, yet the
+  current 80-step sparse Alice--Bob environment is retired as an algorithm gate.
 
 ## Next Actions
 
-1. Run the completed R37 actor-observation implementation with the registered
-   paired local CUDA runner.
-2. Read the single result JSON and interpret only its access-instrument branch.
+1. Commit and submit the tracked R37 valid-failure review to GPT-5.6 Pro.
+2. Accept exactly one replacement benchmark/access gate before any further
+   R30 or skill-mechanism implementation.
 
-Active decision boundary: `EXP-20260715-r37-actor-visible-identity-access` in
-`memory/ExpRecord.md`, authorized by the archived R36 review disposition.
+Active decision boundary: the replacement-benchmark request in
+`docs/external-review/gpt5_6_pro/20260715_r37_actor_visible_identity_access_result/`,
+authorized by the valid R37 branch in `memory/ExpRecord.md`.
 
 ## Immediate Constraints
 
@@ -259,6 +267,9 @@ Active decision boundary: `EXP-20260715-r37-actor-visible-identity-access` in
   shaping, oracle actions, skills, hierarchy, intrinsic reward, or a second
   algorithm route. A valid R37 failure retires this sparse Alice--Bob access
   gate rather than authorizing retuning or expansion.
+- R37 is now retired by that valid-FAIL branch. Do not rerun it, lower its cycle
+  floor, expand its budget/seeds, change its horizon/contact geometry, or treat
+  passed M2/M3 as an overall PASS.
 
 ## Pointers
 
@@ -287,10 +298,14 @@ Active decision boundary: `EXP-20260715-r37-actor-visible-identity-access` in
   review entry, raw response, and controller disposition for R32/R33.
 - `memory/LTM/R29_R33_EFFECT_COMPOSITION_FAILURE_REVIEW_20260714.md` —
   cross-round failure and baseline matrix after the valid R33 failure.
+- `memory/LTM/R35_R37_SPARSE_ACCESS_FAILURE_REVIEW_20260715.md` — current
+  cross-round access failure and replacement-benchmark boundary.
 - `docs/external-review/gpt5_6_pro/20260714_r33_irsc_gate_result/` — tracked
   result-review question for the single post-R33 causal edge.
 - `docs/external-review/gpt5_6_pro/20260715_r34_bhmd_gate_result/` — tracked
   R34 result audit, rejected first R35 route, and correction entry.
 - `docs/external-review/gpt5_6_pro/20260715_r36_aem_access_result/` — tracked
   R36 valid-failure and Alice--Bob access-instrument review entry.
+- `docs/external-review/gpt5_6_pro/20260715_r37_actor_visible_identity_access_result/`
+  — tracked R37 result audit and replacement-benchmark request.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

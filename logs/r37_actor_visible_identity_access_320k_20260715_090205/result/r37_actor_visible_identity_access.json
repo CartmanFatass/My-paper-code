@@ -1,0 +1,211 @@
+{
+  "arms": {
+    "identity_masked": {
+      "arm_root": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\runs\\identity_masked\\seed38031",
+      "config": "ha_ctse_process.config_alice_bob_identity_masked",
+      "coverage_field": "alice_bob_joint_position_coverage_ratio",
+      "cycle_success_mean": 0.0,
+      "episodes_with_collection": 0,
+      "episodes_with_cycle": 0,
+      "final_checkpoint": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\runs\\identity_masked\\seed38031\\standalone_process_core_final.pt",
+      "final_eval_episodes": 64,
+      "final_eval_steps": 320000,
+      "final_train_steps": 320000,
+      "high_decision_rows": 0.0,
+      "high_update_rows": 0.0,
+      "identity_mode": "masked",
+      "invalid_reasons": [],
+      "joint_position_coverage_mean": 0.021974999999999998,
+      "low_updates": 250,
+      "mean_sparse_reward": 0.0,
+      "periodic_checkpoint_count": 0,
+      "resume_from": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\init\\neutral_identity_masked_seed38031\\standalone_process_core_final.pt",
+      "shape_signature": {
+        "env_obs_dim": 16,
+        "env_state_dim": 19,
+        "low_level_architecture": "strict_hmasd_mappo",
+        "low_rnn_hidden_size": 64,
+        "low_sequence_batch_size": 64,
+        "low_sequence_length": 10,
+        "model_action_dim": 2,
+        "model_hidden_size": 64,
+        "model_n_agents": 2,
+        "model_obs_dim": 16,
+        "model_state_dim": 19,
+        "parameter_counts": {
+          "bridge": 1250,
+          "compact": 7882,
+          "compact_return_head": 0,
+          "high": 11479,
+          "high_stack": 33348,
+          "high_value": 12737,
+          "low": 62085,
+          "low_actor": 31108,
+          "low_critic": 30977,
+          "outcome_residual_probe": 0,
+          "process": 14704,
+          "process_posterior": 33500,
+          "process_stack": 62222,
+          "prototype_discriminator": 0,
+          "r31_effect_posterior": 0,
+          "situation_hazard": 0,
+          "skill_effect_discovery": 0,
+          "team_conditioned_qd_probe": 0,
+          "team_discriminator": 0,
+          "team_transition": 0,
+          "topology_role_probe": 0,
+          "total_trainable": 144918,
+          "transition_discriminator": 14018
+        },
+        "runtime_action_dim": 2,
+        "runtime_n_agents": 2,
+        "runtime_obs_dim": 16,
+        "use_centralized_low_value": true,
+        "use_recurrent_low_level": true
+      },
+      "sparse_reward_exact": true,
+      "train_updates": 250,
+      "training_identity_audit_rows": 640000.0,
+      "valid": true,
+      "zero_cycle_fraction": 1.0
+    },
+    "identity_visible": {
+      "arm_root": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\runs\\identity_visible\\seed38031",
+      "config": "ha_ctse_process.config_alice_bob_identity_visible",
+      "coverage_field": "alice_bob_joint_position_coverage_ratio",
+      "cycle_success_mean": 0.01953125,
+      "episodes_with_collection": 10,
+      "episodes_with_cycle": 10,
+      "final_checkpoint": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\runs\\identity_visible\\seed38031\\standalone_process_core_final.pt",
+      "final_eval_episodes": 64,
+      "final_eval_steps": 320000,
+      "final_train_steps": 320000,
+      "high_decision_rows": 0.0,
+      "high_update_rows": 0.0,
+      "identity_mode": "visible",
+      "invalid_reasons": [],
+      "joint_position_coverage_mean": 0.035275,
+      "low_updates": 250,
+      "mean_sparse_reward": 0.15625,
+      "periodic_checkpoint_count": 0,
+      "resume_from": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\init\\neutral_identity_masked_seed38031\\standalone_process_core_final.pt",
+      "shape_signature": {
+        "env_obs_dim": 16,
+        "env_state_dim": 19,
+        "low_level_architecture": "strict_hmasd_mappo",
+        "low_rnn_hidden_size": 64,
+        "low_sequence_batch_size": 64,
+        "low_sequence_length": 10,
+        "model_action_dim": 2,
+        "model_hidden_size": 64,
+        "model_n_agents": 2,
+        "model_obs_dim": 16,
+        "model_state_dim": 19,
+        "parameter_counts": {
+          "bridge": 1250,
+          "compact": 7882,
+          "compact_return_head": 0,
+          "high": 11479,
+          "high_stack": 33348,
+          "high_value": 12737,
+          "low": 62085,
+          "low_actor": 31108,
+          "low_critic": 30977,
+          "outcome_residual_probe": 0,
+          "process": 14704,
+          "process_posterior": 33500,
+          "process_stack": 62222,
+          "prototype_discriminator": 0,
+          "r31_effect_posterior": 0,
+          "situation_hazard": 0,
+          "skill_effect_discovery": 0,
+          "team_conditioned_qd_probe": 0,
+          "team_discriminator": 0,
+          "team_transition": 0,
+          "topology_role_probe": 0,
+          "total_trainable": 144918,
+          "transition_discriminator": 14018
+        },
+        "runtime_action_dim": 2,
+        "runtime_n_agents": 2,
+        "runtime_obs_dim": 16,
+        "use_centralized_low_value": true,
+        "use_recurrent_low_level": true
+      },
+      "sparse_reward_exact": true,
+      "train_updates": 250,
+      "training_identity_audit_rows": 640000.0,
+      "valid": true,
+      "zero_cycle_fraction": 0.84375
+    }
+  },
+  "common_init_checkpoint": "C:\\project\\HMASD\\logs\\r37_actor_visible_identity_access_320k_20260715_090205\\init\\neutral_identity_masked_seed38031\\standalone_process_core_final.pt",
+  "experiment_id": "EXP-20260715-r37-actor-visible-identity-access",
+  "gates": {
+    "m0_implementation": {
+      "invalid_reasons": [],
+      "passed": true
+    },
+    "m1_access": {
+      "paired_collection_indicator": {
+        "lower": 0.078125,
+        "mean": 0.15625,
+        "upper": 0.25
+      },
+      "paired_collection_indicator_ci_lower_strict": 0.0,
+      "passed": false,
+      "treatment_collection_episode_floor": 10,
+      "treatment_cycle_success_floor": 0.05,
+      "treatment_cycle_success_mean": 0.01953125,
+      "treatment_episodes_with_collection": 10
+    },
+    "m2_sparse_task_evidence": {
+      "passed": true,
+      "treatment_cycle_episode_floor": 1,
+      "treatment_episodes_with_cycle": 10,
+      "treatment_mean_sparse_reward": 0.15625,
+      "treatment_mean_sparse_reward_strict": 0.0
+    },
+    "m3_stability": {
+      "passed": true,
+      "treatment_zero_cycle_fraction": 0.84375,
+      "treatment_zero_cycle_fraction_ceiling_strict": 0.9
+    }
+  },
+  "implementation_valid": true,
+  "invalid_reasons": [],
+  "paired_comparison": {
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 40038031,
+    "collection_indicator": {
+      "lower": 0.078125,
+      "mean": 0.15625,
+      "upper": 0.25
+    },
+    "cycle_success": {
+      "lower": 0.009765625,
+      "mean": 0.01953125,
+      "upper": 0.03125
+    },
+    "direction": "identity_visible_minus_identity_masked",
+    "joint_position_coverage": {
+      "lower": 0.01175,
+      "mean": 0.0133,
+      "upper": 0.014775
+    },
+    "sparse_reward": {
+      "lower": 0.078125,
+      "mean": 0.15625,
+      "upper": 0.25
+    },
+    "zero_cycle_fraction": {
+      "lower": -0.25,
+      "mean": -0.15625,
+      "upper": -0.078125
+    }
+  },
+  "scope": "single-seed Alice--Bob observation-substrate access gate",
+  "seed": 38031,
+  "status": "FAIL_R37_ACCESS",
+  "total_timesteps_per_arm": 320000
+}

@@ -45,9 +45,11 @@ PASS establishes only a positive access floor under the repaired observation
 contract. FAIL retires sparse Alice--Bob as the current algorithm-comparison
 gate.
 
-Implementation boundary complete: the environment switch, capacity-matched
-configs, per-step identity contract, paired runner, and single-result analyzer
-are ready for the registered run.
+Result boundary complete: R37 is a valid `FAIL_R37_ACCESS`. Current-task
+identity caused nonzero access but cycle success `0.01953125` remained below the
+registered `0.05` floor. Retire this environment as an algorithm gate. No new
+core implementation begins until one replacement benchmark/access contract is
+selected and registered.
 
 ## R30 Fixed-Clock Autoregressive Edit Gate
 

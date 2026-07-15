@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r37-actor-visible-identity-access | launch-ready -- implementation complete | baseline-L0 observation-substrate validity gate | `scripts/run_r37_actor_visible_identity_access_local.ps1`; local parallel CUDA; seed `38031` | `result/r37_actor_visible_identity_access.json` | Capacity-matched 16-value actor layouts, per-step identity audit, common zero-step initialization, paired runner, and registered analyzer are implemented | Run the single registered pair; PASS supports access viability only, valid FAIL retires this sparse Alice--Bob gate. |
+| EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
 | EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; GPT-5.6 Pro accepted the failure and selected the R37 observation-substrate gate. |
 | EXP-20260715-r35-sparse-mappo-reset | completed -- valid `NO_ACCESS_R35_UNRESOLVED` | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4`; runner commit `030d0cd`, implementation `b372000` | none | M0 PASS; both arms completed 320K/250 low updates, but 0/64 paired indices had a collection and both cycle means were 0 | Do not interpret noninferiority or replace a baseline; do not rerun/expand R35; seek one non-skill access-first edge. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
@@ -120,6 +120,16 @@ explicitly approves the exception.
 - Status sources after launch: `<run-root>/runner_status.txt` and the single
   scientific decision file
   `<run-root>/result/r37_actor_visible_identity_access.json`.
+- Result and decision: completed at commit `67cadc8` as valid
+  `FAIL_R37_ACCESS`. M0 passed. `identity_visible` had 10/64 collection/cycle
+  episodes, cycle mean `0.01953125`, sparse reward `0.15625`, zero-cycle
+  fraction `0.84375`, and coverage `0.035275`; `identity_masked` had zero access,
+  zero reward, zero-cycle fraction `1.0`, and coverage `0.021975`. The paired
+  collection interval was `[0.078125, 0.25]`; the collection-count and CI
+  requirements, M2, and M3 passed. M1 failed only because cycle success stayed
+  below `0.05`. Per the registered branch, this environment is retired as the
+  current algorithm-comparison gate; no rerun, threshold/budget expansion, or
+  algorithm promotion is authorized.
 
 ### EXP-20260715-r36-aem-access
 
