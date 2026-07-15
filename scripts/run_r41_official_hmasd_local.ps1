@@ -113,17 +113,15 @@ function Invoke-LoggedProcess {
         [string]$StdoutPath,
         [string]$StderrPath
     )
-    $process = Start-Process `
-        -FilePath $Executable `
-        -ArgumentList $Arguments `
-        -WorkingDirectory $ProjectRoot `
-        -NoNewWindow `
-        -Wait `
-        -PassThru `
-        -RedirectStandardOutput $StdoutPath `
-        -RedirectStandardError $StderrPath
-    if ($process.ExitCode -ne 0) {
-        throw "process exited with code $($process.ExitCode): $(Format-Command $Executable $Arguments)"
+    Push-Location $ProjectRoot
+    try {
+        & $Executable @Arguments 1> $StdoutPath 2> $StderrPath
+        $exitCode = $LASTEXITCODE
+    } finally {
+        Pop-Location
+    }
+    if ($exitCode -ne 0) {
+        throw "process exited with code $exitCode`: $(Format-Command $Executable $Arguments)"
     }
 }
 
