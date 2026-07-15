@@ -1,0 +1,62 @@
+{
+  "artifacts": {
+    "final_checkpoint": "C:\\project\\HMASD\\logs\\r40_simple_spread_access_200k_20260715_235500_retry4\\runs\\mappo\\seed40041\\standalone_process_core_final.pt",
+    "manifest": "C:\\project\\HMASD\\logs\\r40_simple_spread_access_200k_20260715_235500_retry4\\runs\\mappo\\seed40041\\metadata\\run_manifest.json",
+    "mappo_eval": "C:\\project\\HMASD\\logs\\r40_simple_spread_access_200k_20260715_235500_retry4\\runs\\mappo\\seed40041\\metrics\\eval_episodes.csv",
+    "random_eval": "C:\\project\\HMASD\\logs\\r40_simple_spread_access_200k_20260715_235500_retry4\\result\\uniform_random_eval.csv",
+    "train_updates": "C:\\project\\HMASD\\logs\\r40_simple_spread_access_200k_20260715_235500_retry4\\runs\\mappo\\seed40041\\metrics\\train_updates.csv"
+  },
+  "contract": {
+    "action_space": "Discrete(5)",
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 60041,
+    "continuous_actions": false,
+    "episodes_per_block": 64,
+    "eval_seed_blocks": [40042, 40043, 40044, 40045],
+    "horizon": 25,
+    "local_ratio": 0.0,
+    "n_agents": 3,
+    "num_envs": 16,
+    "outer_updates": 500,
+    "pettingzoo_version": "1.24.3",
+    "ppo_epochs": 5,
+    "random_action_rng_seed": 50041,
+    "rollout_length": 25,
+    "scenario": "simple_spread_v3",
+    "total_timesteps": 200000,
+    "train_seed": 40041
+  },
+  "experiment_id": "EXP-20260715-r40-simple-spread-access",
+  "gates": {
+    "M0": {"passed": true, "reasons": []},
+    "M1": {
+      "mappo_mean_return": -52.3922376052832,
+      "paired_difference_ci": {
+        "lower_95": -1.4483549564617006,
+        "mean": 0.19503030341666416,
+        "upper_95": 1.9033563269248668
+      },
+      "paired_lower_floor": 5.0,
+      "passed": false,
+      "random_mean_return": -52.587267908699864,
+      "return_floor": -35.0
+    },
+    "M2": {
+      "block_means": [-54.37378086404515, -48.87894038905817, -52.27497575587074, -54.04125341215872],
+      "blocks_above_floor": 0,
+      "passed": false,
+      "required_blocks": 3
+    }
+  },
+  "implementation_valid": true,
+  "next_action": "retire simple_spread under this MAPPO contract without rescue",
+  "status": "VALID_FAIL_R40_ACCESS",
+  "training": {
+    "final_total_steps": 200000,
+    "final_update_idx": 500,
+    "high_optimizer_steps_total": 0.0,
+    "low_optimizer_steps_total": 2500.0,
+    "low_replay_logp_max_error": 2.384185791015625e-07,
+    "update_rows": 500
+  }
+}

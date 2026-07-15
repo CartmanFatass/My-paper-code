@@ -167,6 +167,11 @@ explicitly approves the exception.
   use the existing dedicated training monitor. Status source:
   `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r40_simple_spread_access.json`.
+- Terminal result: valid `VALID_FAIL_R40_ACCESS` at
+  `logs/r40_simple_spread_access_200k_20260715_235500_retry4`. M0 passed;
+  MAPPO/random means were `-52.392238/-52.587268`, paired difference `0.195030`
+  with 95% interval `[-1.448355, 1.903356]`, and `0/4` blocks crossed `-35`.
+  Decision: retire this substrate under the registered contract without rescue.
 
 ### EXP-20260715-r39-native-hmasd-toy-credit
 

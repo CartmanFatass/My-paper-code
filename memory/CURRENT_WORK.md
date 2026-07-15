@@ -22,21 +22,24 @@ and history live in their owning files.
 - **Local overnight authorization:** the user permits a longer local CUDA run
   overnight when the next causal gate is registered and requires it. R35 used
   that authorization and has reached its registered terminal result.
-- **Default review handoff:** automatic. Once an exact tracked question is
-  committed and pushed, Codex reuses the existing `HMASD Algorithm Consultation`
-  Pro conversation, archives the raw response, dispositions it, and continues
-  only the accepted branch. The handoff remains idle when no tracked question
-  exists.
+- **Default external review handoff:** manual under `AGENTS.md`. Once an exact
+  tracked question is committed and pushed, Codex gives the user one copyable
+  prompt and waits for the raw Pro response; it does not invoke the web
+  conversation unless the user explicitly authorizes that specific round.
+- **Dedicated role conversations:** automated sends are paused after the user
+  observed an invocation changing a conversation model. Resume only after the
+  user restores and explicitly reconfirms that conversation's model and speed;
+  never send a model/thinking override.
 
 ## Current Objective
 
-- Active objective: establish one public fixed-`N` cooperative-access substrate
-  after valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`. R39 is permanently
-  retired; its completed native GAE/PPO credit route is not being rescued.
-- GPT-5.6 Pro accepted R40 `simple_spread` ordinary recurrent MAPPO after the
-  reward/metric correction. The controller accepts the contract with native
-  `Discrete(5)` actions, which reuse the repository's exact Categorical
-  sampling/replay path instead of adding a sigmoid-Gaussian distribution.
+- Active objective: select one evidence-backed fixed-`N` positive anchor after
+  valid failures of both R39 native-toy credit and R40 public-substrate access.
+  R39 and R40 are permanently retired under their frozen contracts.
+- The controller's single route for external review is exact reproduction of
+  the HMASD paper's Alice--Bob environment with unchanged standard fixed-`k`
+  HMASD. Only a positive reproduction may authorize R30 per-agent `KEEP/SET` on
+  the same task and checkpoint.
 - The variable-team review is accepted as a future, separate open-roster axis:
   membership transitions must not renew surviving agents' skills. It does not
   replace the fixed-`N` native-toy credit anchor. See the disposition pointer
@@ -44,16 +47,13 @@ and history live in their owning files.
 
 ## Next Actions
 
-- R40 retry3 completed the full 200,000-step training exposure but its first
-  valid analysis returned `INVALID_R40_IMPLEMENTATION`: the recurrent trainer
-  omitted the registered replay/optimizer telemetry, so its M1/M2 values have
-  no scientific meaning. The scoped repair is commit `c69a25e`.
-- The unchanged R40 contract is running at
-  `logs/r40_simple_spread_access_200k_20260715_235500_retry4` from commit
-  `c69a25e`. The existing dedicated monitor owns progress and terminal
-  notification; read the single result JSON only at terminal state.
-- On a valid PASS, register only native fixed-`k` HMASD on the exact same
-  substrate. On a valid FAIL, retire `simple_spread` under this MAPPO contract.
+- R40 retry4 is complete with valid `VALID_FAIL_R40_ACCESS`: M0 passed, MAPPO
+  return was statistically indistinguishable from uniform random, and zero of
+  four evaluation blocks crossed the registered access floor. Retire
+  `simple_spread` under this MAPPO contract without rescue.
+- Use the tracked R40 failure review and single R41 HMASD-paper Alice--Bob
+  reproduction question for the next manual external review. Archive and
+  disposition the returned raw response before any implementation.
 
 ## Immediate Constraints
 
@@ -127,6 +127,10 @@ and history live in their owning files.
   thresholds, role labels, high-policy updates, or skill/process rewards. Its
   failure is benchmark-access evidence only and says nothing about lifetime or
   intrinsic-mechanism efficacy.
+- R40 is retired by valid `VALID_FAIL_R40_ACCESS`. Do not rescue it with more
+  steps/seeds, continuous actions, another network or optimizer, altered
+  thresholds, reward/observation shaping, intrinsic reward, or checkpoint
+  selection. Do not respond by selecting another convenient toy substrate.
 
 ## Pointers
 
@@ -174,7 +178,12 @@ and history live in their owning files.
   disposition.
 - `memory/LTM/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md` — terminal R39
   failure review and the proposed public positive-credit substrate.
+- `memory/LTM/R35_R40_SUBSTRATE_FAILURE_REVIEW_20260715.md` — combined terminal
+  substrate/credit failure matrix and the single post-R40 controller route.
 - `docs/external-review/gpt5_6_pro/20260715_r39_native_toy_credit_result/` —
   tracked R39 result evidence, both Pro responses, and the accepted R40
   controller disposition.
+- `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/` —
+  tracked R40 result and the manual Pro question for the exact HMASD-paper
+  Alice--Bob reproduction decision.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
