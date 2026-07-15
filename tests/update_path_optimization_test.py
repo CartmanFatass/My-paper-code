@@ -27,7 +27,7 @@ def make_small_config():
     return config
 
 
-def test_coordinator_training_batch_matches_old_eval_path():
+def test_coordinator_training_batch_teacher_forces_stored_joint_action():
     config = make_small_config()
     coordinator = SkillCoordinator(config)
     coordinator.eval()
@@ -37,13 +37,25 @@ def test_coordinator_training_batch_matches_old_eval_path():
     team_skills = torch.tensor([0, 1, 2, 1], dtype=torch.long)
     agent_skills = torch.tensor([[0, 1], [1, 2], [2, 0], [1, 1]], dtype=torch.long)
 
-    torch.manual_seed(123)
-    _, _, z_logits, agent_logits, _, _ = coordinator(states, observations)
+    entity_features = coordinator._build_entity_sequence(states, observations)
+    processed_features = coordinator.encoder(entity_features)
+    encoded_state = processed_features[:, 0:1, :]
+    encoded_observations = processed_features[:, 1:, :]
+
+    z_logits = coordinator.skill_decoder(encoded_state, encoded_observations)
     expected_team_log_probs = Categorical(logits=z_logits).log_prob(team_skills)
     expected_team_entropy = Categorical(logits=z_logits).entropy()
     expected_agent_log_probs = []
     expected_agent_entropies = []
-    for agent_idx, logits in enumerate(agent_logits):
+    for agent_idx in range(config.n_agents):
+        logits = coordinator.skill_decoder(
+            encoded_state,
+            encoded_observations,
+            team_skills,
+            agent_skills[:, :agent_idx] if agent_idx > 0 else None,
+            step=agent_idx + 1,
+            agent_specific_query=encoded_observations[:, agent_idx:agent_idx + 1, :],
+        )
         dist = Categorical(logits=logits)
         expected_agent_log_probs.append(dist.log_prob(agent_skills[:, agent_idx]))
         expected_agent_entropies.append(dist.entropy())
@@ -52,7 +64,6 @@ def test_coordinator_training_batch_matches_old_eval_path():
     expected_state_values, expected_agent_values, _ = coordinator.get_value(states, observations)
     expected_agent_values = torch.stack(expected_agent_values, dim=1).squeeze(-1)
 
-    torch.manual_seed(123)
     actual = coordinator.evaluate_training_batch(states, observations, team_skills, agent_skills)
 
     torch.testing.assert_close(actual["team_log_probs"], expected_team_log_probs)

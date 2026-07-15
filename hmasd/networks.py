@@ -877,9 +877,10 @@ class SkillCoordinator(nn.Module):
         PPO update hot path: evaluate policy log-probs/entropy and value heads
         from one shared Transformer encoding.
 
-        This preserves the current update semantics where individual skill
-        logits are generated from the coordinator's sampled skill chain, while
-        avoiding a second encoder pass for get_value().
+        The autoregressive policy is replayed with teacher forcing: the team
+        skill and every preceding individual skill are the actions stored in
+        the rollout.  PPO must evaluate the probability of one executed joint
+        action, not a newly sampled conditioning chain.
         """
         profile = {}
 
@@ -912,11 +913,9 @@ class SkillCoordinator(nn.Module):
         Z_logits = self.skill_decoder(encoded_state, encoded_observations)
         Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
         Z_dist = Categorical(logits=Z_logits)
-        sampled_Z = Z_dist.sample()
         team_log_probs = Z_dist.log_prob(team_skills)
         team_entropy = Z_dist.entropy()
 
-        sampled_z = torch.zeros(batch_size, n_agents, dtype=torch.long, device=device)
         agent_log_probs = []
         agent_entropies = []
         for i in range(n_agents):
@@ -924,8 +923,8 @@ class SkillCoordinator(nn.Module):
             zi_logits = self.skill_decoder(
                 encoded_state,
                 encoded_observations,
-                sampled_Z,
-                sampled_z[:, :i] if i > 0 else None,
+                team_skills,
+                agent_skills[:, :i] if i > 0 else None,
                 step=i + 1,
                 agent_specific_query=agent_i_encoded_obs,
             )
@@ -933,10 +932,6 @@ class SkillCoordinator(nn.Module):
             zi_dist = Categorical(logits=zi_logits)
             agent_log_probs.append(zi_dist.log_prob(agent_skills[:, i]))
             agent_entropies.append(zi_dist.entropy())
-
-            next_sampled_z = sampled_z.clone()
-            next_sampled_z[:, i] = zi_dist.sample()
-            sampled_z = next_sampled_z
 
         _record('coord_encode_policy', profile_start)
 
