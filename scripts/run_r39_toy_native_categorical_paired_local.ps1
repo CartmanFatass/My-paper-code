@@ -14,7 +14,8 @@ param(
     [string]$ResultName = "r39_toy_native_categorical.json",
     [switch]$FixedPrimitives,
     [switch]$DirectStateContext,
-    [switch]$HighExposurePair
+    [switch]$HighExposurePair,
+    [switch]$BlockCreditPair
 )
 
 $ErrorActionPreference = "Stop"
@@ -31,6 +32,9 @@ $RunRoot = [System.IO.Path]::GetFullPath($RunRoot)
 $StatusPath = Join-Path $RunRoot "runner_status.txt"
 $ExpectedUpdates = [int]($TotalTimesteps / ($NumEnvs * $RolloutLength))
 $GitCommit = (& git -C $RepoDir rev-parse HEAD).Trim()
+if ($HighExposurePair -and $BlockCreditPair) {
+    throw "HighExposurePair and BlockCreditPair are mutually exclusive"
+}
 if ($HighExposurePair) {
     $Arms = @(
         [pscustomobject]@{
@@ -39,6 +43,18 @@ if ($HighExposurePair) {
         },
         [pscustomobject]@{
             Id = "high_epoch3"
+            Config = $ControlConfig
+        }
+    )
+}
+elseif ($BlockCreditPair) {
+    $Arms = @(
+        [pscustomobject]@{
+            Id = "smdp_gae"
+            Config = $AdaptiveConfig
+        },
+        [pscustomobject]@{
+            Id = "block_return"
             Config = $ControlConfig
         }
     )
@@ -78,6 +94,7 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
         "rollout_length=$RolloutLength",
         "expected_outer_updates=$ExpectedUpdates",
         "high_exposure_pair=$([bool]$HighExposurePair)",
+        "block_credit_pair=$([bool]$BlockCreditPair)",
         "skill_interval=5",
         "eval_episodes=$EvalEpisodes",
         "eval_action_mode=stochastic",
@@ -273,6 +290,9 @@ try {
     }
     if ($HighExposurePair) {
         $analyzerArgs += "--high-exposure-pair"
+    }
+    if ($BlockCreditPair) {
+        $analyzerArgs += "--block-credit-pair"
     }
     & $PythonBin @analyzerArgs
     if ($LASTEXITCODE -ne 0) {

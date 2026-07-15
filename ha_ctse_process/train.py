@@ -66,6 +66,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_bridge_context_mode",
     "r30_high_buffer_version",
     "r30_high_ppo_epochs",
+    "r30_high_actor_advantage_mode",
     "r30_force_refresh_every_check",
     "r39_native_categorical_edit",
     "r39_toy_fixed_skill_primitives",
@@ -611,6 +612,9 @@ def export_run_manifest(
             ),
             "r30_high_ppo_epochs": int(
                 getattr(agent, "high_ppo_epochs", 1)
+            ),
+            "r30_high_actor_advantage_mode": str(
+                getattr(agent, "high_actor_advantage_mode", "smdp_gae")
             ),
             "constant_skill_no_high": bool(
                 getattr(agent, "constant_skill_no_high", False)

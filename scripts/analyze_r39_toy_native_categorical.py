@@ -21,8 +21,13 @@ CONFIGS = {
 FIXED_PRIMITIVES = False
 DIRECT_STATE_CONTEXT = False
 HIGH_EXPOSURE_PAIR = False
+BLOCK_CREDIT_PAIR = False
 EXPECTED_FORCE_REFRESH = {"adaptive_retention": False, "force_refresh": True}
 EXPECTED_HIGH_PPO_EPOCHS = {"adaptive_retention": 1, "force_refresh": 1}
+EXPECTED_ACTOR_ADVANTAGE = {
+    "adaptive_retention": "smdp_gae",
+    "force_refresh": "smdp_gae",
+}
 EVAL_METRICS = (
     "r39_toy_task_reward",
     "r39_toy_match_score",
@@ -48,6 +53,7 @@ TRAIN_REQUIRED = (
     "high_clip_fraction_last",
     "high_approx_kl_last",
     "high_value_norm_updates",
+    "high_actor_advantage_block_return",
     "high_decision_gae_raw_std",
     "high_decision_block_return_raw_std",
     "high_block_return_actor_grad_norm",
@@ -189,6 +195,7 @@ def validate_manifest(
         "r39_toy_direct_state_context": DIRECT_STATE_CONTEXT,
         "r30_force_refresh_every_check": EXPECTED_FORCE_REFRESH[arm],
         "r30_high_ppo_epochs": EXPECTED_HIGH_PPO_EPOCHS[arm],
+        "r30_high_actor_advantage_mode": EXPECTED_ACTOR_ADVANTAGE[arm],
         "use_recurrent_low_level": False,
         "low_level_architecture": "feedforward",
         "n_z": 4,
@@ -327,6 +334,13 @@ def summarize_arm(
         )
     if any(abs(row.get("high_value_norm_updates", -1.0) - 1.0) > 1e-9 for row in train):
         add_reason(reasons, f"{arm} did not update high ValueNorm exactly once per batch")
+    expected_block_credit = float(EXPECTED_ACTOR_ADVANTAGE[arm] == "block_return")
+    if any(
+        abs(row.get("high_actor_advantage_block_return", -1.0) - expected_block_credit)
+        > 1e-9
+        for row in train
+    ):
+        add_reason(reasons, f"{arm} used the wrong high actor advantage source")
     low_replay_error = max(values(train, "low_replay_logp_max_error"), default=math.inf)
     if any(abs(row.get("low_return_env_count", -1.0) - 16.0) > 1e-9 for row in train):
         add_reason(reasons, f"{arm} low returns were not grouped over exactly 16 environments")
@@ -435,6 +449,9 @@ def summarize_arm(
             "high_value_norm_updates_per_update": mean(
                 train, "high_value_norm_updates"
             ),
+            "high_actor_advantage_block_return": mean(
+                train, "high_actor_advantage_block_return"
+            ),
             "policy_skill_head_grad_norm_mean": mean(
                 train, "high_policy_skill_head_grad_norm"
             ),
@@ -534,6 +551,7 @@ def decide(m0: bool, m1: bool, m2: bool) -> str:
 def main() -> None:
     global ARMS, CONFIGS, DIRECT_STATE_CONTEXT, EXPERIMENT_ID, FIXED_PRIMITIVES
     global EXPECTED_FORCE_REFRESH, EXPECTED_HIGH_PPO_EPOCHS, HIGH_EXPOSURE_PAIR
+    global BLOCK_CREDIT_PAIR, EXPECTED_ACTOR_ADVANTAGE
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--seed", type=int, default=39041)
@@ -546,6 +564,7 @@ def main() -> None:
     parser.add_argument("--fixed-primitives", action="store_true")
     parser.add_argument("--direct-state-context", action="store_true")
     parser.add_argument("--high-exposure-pair", action="store_true")
+    parser.add_argument("--block-credit-pair", action="store_true")
     parser.add_argument("--result-name", default="r39_toy_native_categorical.json")
     args = parser.parse_args()
 
@@ -557,6 +576,9 @@ def main() -> None:
     FIXED_PRIMITIVES = bool(args.fixed_primitives)
     DIRECT_STATE_CONTEXT = bool(args.direct_state_context)
     HIGH_EXPOSURE_PAIR = bool(args.high_exposure_pair)
+    BLOCK_CREDIT_PAIR = bool(args.block_credit_pair)
+    if HIGH_EXPOSURE_PAIR and BLOCK_CREDIT_PAIR:
+        raise ValueError("high-exposure-pair and block-credit-pair are exclusive")
     if HIGH_EXPOSURE_PAIR:
         ARMS = ("high_epoch1", "high_epoch3")
         CONFIGS = {
@@ -565,8 +587,25 @@ def main() -> None:
         }
         EXPECTED_FORCE_REFRESH = {"high_epoch1": True, "high_epoch3": True}
         EXPECTED_HIGH_PPO_EPOCHS = {"high_epoch1": 1, "high_epoch3": 3}
+        EXPECTED_ACTOR_ADVANTAGE = {
+            "high_epoch1": "smdp_gae",
+            "high_epoch3": "smdp_gae",
+        }
+    elif BLOCK_CREDIT_PAIR:
+        ARMS = ("smdp_gae", "block_return")
+        CONFIGS = {
+            "smdp_gae": str(args.adaptive_config),
+            "block_return": str(args.control_config),
+        }
+        EXPECTED_FORCE_REFRESH = {"smdp_gae": True, "block_return": True}
+        EXPECTED_HIGH_PPO_EPOCHS = {"smdp_gae": 3, "block_return": 3}
+        EXPECTED_ACTOR_ADVANTAGE = {
+            "smdp_gae": "smdp_gae",
+            "block_return": "block_return",
+        }
     else:
         EXPECTED_HIGH_PPO_EPOCHS = {arm: 1 for arm in ARMS}
+        EXPECTED_ACTOR_ADVANTAGE = {arm: "smdp_gae" for arm in ARMS}
 
     run_root = Path(args.run_root).resolve()
     summaries: dict[str, dict[str, Any]] = {}
@@ -602,7 +641,7 @@ def main() -> None:
         adaptive_eval.get("r39_toy_match_score") is not None
         and control_eval.get("r39_toy_match_score") is not None
     ):
-        if HIGH_EXPOSURE_PAIR:
+        if HIGH_EXPOSURE_PAIR or BLOCK_CREDIT_PAIR:
             match_difference = (
                 control_eval["r39_toy_match_score"]
                 - adaptive_eval["r39_toy_match_score"]
@@ -635,6 +674,29 @@ def main() -> None:
                 else "FAIL_R39_TOY_HIGH_EXPOSURE_3"
             )
         )
+    elif BLOCK_CREDIT_PAIR:
+        exposure_gain_threshold = 0.10
+        m1 = bool(
+            m0
+            and control_eval.get("r39_toy_match_score") is not None
+            and control_eval["r39_toy_match_score"] >= access_threshold
+            and control_eval.get("r39_toy_slow_match") is not None
+            and control_eval["r39_toy_slow_match"] >= component_access_threshold
+            and control_eval.get("r39_toy_fast_match") is not None
+            and control_eval["r39_toy_fast_match"] >= component_access_threshold
+            and match_difference is not None
+            and match_difference >= exposure_gain_threshold
+        )
+        m2 = False
+        status = (
+            "INVALID_R39_TOY_IMPLEMENTATION"
+            if not m0
+            else (
+                "PASS_R39_TOY_BLOCK_CREDIT"
+                if m1
+                else "FAIL_R39_TOY_BLOCK_CREDIT"
+            )
+        )
     else:
         exposure_gain_threshold = None
         m1 = bool(
@@ -664,7 +726,17 @@ def main() -> None:
         )
         status = decide(m0, m1, m2)
 
-    if status == "PASS_R39_TOY_HIGH_EXPOSURE":
+    if status == "PASS_R39_TOY_BLOCK_CREDIT":
+        decision = {
+            "conclusion": "direct block-return actor credit accessed the fixed-primitive toy while SMDP-GAE did not",
+            "next_action": "localize the SMDP-GAE noise source without promoting block-only credit to the long-horizon algorithm",
+        }
+    elif status == "FAIL_R39_TOY_BLOCK_CREDIT":
+        decision = {
+            "conclusion": "even direct block-return actor credit did not access the fixed-primitive toy",
+            "next_action": "retire high-credit estimation as the immediate cause and inspect joint-roster policy factorization; do not enlarge the model or enter S7",
+        }
+    elif status == "PASS_R39_TOY_HIGH_EXPOSURE":
         decision = {
             "conclusion": "three high PPO epochs supplied the missing optimizer exposure on the fixed-primitive toy",
             "next_action": "test adaptive categorical retention with the same high exposure before any S7 run",
@@ -719,6 +791,7 @@ def main() -> None:
         "evaluation_episodes_per_arm": args.eval_episodes,
         "direct_state_context": DIRECT_STATE_CONTEXT,
         "high_exposure_pair": HIGH_EXPOSURE_PAIR,
+        "block_credit_pair": BLOCK_CREDIT_PAIR,
         "implementation_valid": m0,
         "invalid_reasons": invalid_reasons,
         "arms": summaries,
@@ -732,14 +805,22 @@ def main() -> None:
                 "passed": m1,
                 "final_match_score_min": access_threshold,
                 "final_slow_and_fast_match_min": component_access_threshold,
-                "high3_minus_high1_match_score_min": exposure_gain_threshold,
+                "treatment_minus_comparator_match_score_min": exposure_gain_threshold,
+                "treatment_minus_comparator_match_score": (
+                    match_difference
+                    if (HIGH_EXPOSURE_PAIR or BLOCK_CREDIT_PAIR)
+                    else None
+                ),
+                "high3_minus_high1_match_score_min": (
+                    exposure_gain_threshold if HIGH_EXPOSURE_PAIR else None
+                ),
                 "high3_minus_high1_match_score": (
                     match_difference if HIGH_EXPOSURE_PAIR else None
                 ),
             },
             "M2_temporal_semantics": {
                 "passed": m2,
-                "not_applicable": HIGH_EXPOSURE_PAIR,
+                "not_applicable": HIGH_EXPOSURE_PAIR or BLOCK_CREDIT_PAIR,
                 "thresholds": {
                     "control_full_sync_set_rate_target": 1.0,
                     "control_full_sync_set_rate_tolerance": 1e-6,
@@ -749,7 +830,9 @@ def main() -> None:
                     "adaptive_minus_control_match_score_min": -0.05,
                 },
                 "adaptive_minus_control_match_score": (
-                    None if HIGH_EXPOSURE_PAIR else match_difference
+                    None
+                    if (HIGH_EXPOSURE_PAIR or BLOCK_CREDIT_PAIR)
+                    else match_difference
                 ),
             },
         },

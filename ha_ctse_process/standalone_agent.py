@@ -1861,6 +1861,13 @@ class StandaloneProcessAgent:
         self.high_ppo_epochs = int(
             max(getattr(config, "r30_high_ppo_epochs", 1), 1)
         )
+        self.high_actor_advantage_mode = str(
+            getattr(config, "r30_high_actor_advantage_mode", "smdp_gae")
+        ).lower()
+        if self.high_actor_advantage_mode not in {"smdp_gae", "block_return"}:
+            raise ValueError(
+                "r30_high_actor_advantage_mode must be smdp_gae or block_return"
+            )
         self.r39_toy_fixed_skill_action_schema = str(
             getattr(config, "r39_toy_fixed_skill_action_schema", "none")
         )
@@ -1913,6 +1920,14 @@ class StandaloneProcessAgent:
             raise ValueError(
                 "multiple R30 high PPO epochs are currently restricted to the "
                 "R39 direct-state fixed-primitive toy"
+            )
+        if (
+            self.high_actor_advantage_mode != "smdp_gae"
+            and not self.r39_toy_direct_state_context
+        ):
+            raise ValueError(
+                "block-return high actor credit is restricted to the R39 "
+                "direct-state fixed-primitive toy"
             )
         self.r31_effect_mode = str(
             getattr(config, "r31_effect_mode", "off")
@@ -7681,6 +7696,7 @@ class StandaloneProcessAgent:
                 "high_clip_fraction_last": 0.0,
                 "high_approx_kl_last": 0.0,
                 "high_value_norm_updates": 0.0,
+                "high_actor_advantage_block_return": 0.0,
                 "high_policy_actor_grad_norm": 0.0,
                 "high_policy_skill_head_grad_norm": 0.0,
                 "high_decision_gae_raw_std": 0.0,
@@ -7804,6 +7820,11 @@ class StandaloneProcessAgent:
             decision_block_np = (
                 decision_block_np - float(np.mean(decision_block_np))
             ) / (float(np.std(decision_block_np)) + 1e-8)
+        actor_adv_np = (
+            decision_block_np
+            if self.high_actor_advantage_mode == "block_return"
+            else decision_adv_np
+        )
         policy_actor_grad_norm = 0.0
         policy_skill_head_grad_norm = 0.0
         block_actor_grad_norm = 0.0
@@ -7925,7 +7946,7 @@ class StandaloneProcessAgent:
                     )
                 )
                 token_advantages.append(
-                    torch.full_like(row_logp, float(decision_adv_np[local_idx]))
+                    torch.full_like(row_logp, float(actor_adv_np[local_idx]))
                 )
                 block_token_advantages.append(
                     torch.full_like(
@@ -8235,6 +8256,9 @@ class StandaloneProcessAgent:
             "high_clip_fraction_last": high_clip_fraction_last,
             "high_approx_kl_last": high_approx_kl_last,
             "high_value_norm_updates": high_value_norm_updates,
+            "high_actor_advantage_block_return": float(
+                self.high_actor_advantage_mode == "block_return"
+            ),
             "high_policy_actor_grad_norm": policy_actor_grad_norm,
             "high_policy_skill_head_grad_norm": policy_skill_head_grad_norm,
             "high_decision_gae_raw_std": decision_gae_raw_std,

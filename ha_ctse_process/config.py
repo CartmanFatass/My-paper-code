@@ -28,6 +28,7 @@ class Config(EnvConfig):
     r30_high_buffer_version = 1
     r30_high_gae_lambda = 0.95
     r30_high_ppo_epochs = 1
+    r30_high_actor_advantage_mode = "smdp_gae"
     high_keep_entropy_coef = 0.0
 
     # Skill and temporal process.

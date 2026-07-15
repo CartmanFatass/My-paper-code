@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r39-toy-block-credit | launch-ready | stage-0 high actor-credit positive control | local CUDA | paired result JSON | three high epochs were valid and unsaturated but insufficient; the actor's block-return gradient is larger and only moderately aligned with SMDP-GAE | Compare SMDP-GAE against discounted block-return actor weighting with identical full-refresh high3 controllers. This diagnoses credit; it is not a long-horizon algorithm promotion. |
 | EXP-20260715-r39-toy-high-exposure | completed -- valid `FAIL_R39_TOY_HIGH_EXPOSURE_3` | stage-0 high optimizer-exposure gate | `logs/r39_toy_high_exposure_12k8_20260715_191019`; commit `b805abc` | high actor-objective positive control | M0 PASS; 3 epochs improved match `0.421875 -> 0.46875` (`+0.046875`), below access/effect gates; clip fraction `0`, mean last-epoch KL `6.12e-6` | Retire optimizer underexposure as the immediate cause. Compare SMDP-GAE with diagnostic block-return actor credit on the unchanged tiny model. |
 | EXP-20260715-r39-toy-high-credit-diagnostic | completed -- credit directions aligned | stage-0 high-credit localization | `logs/r39_toy_high_credit_diag_1920_20260715_185721`; commit `ef9a34d` | high optimizer-exposure gate | M0 PASS; both arms had nonzero comparable GAE/block gradients and all six skill-head cosines were positive (`0.392-0.594`) | GAE does not extinguish or reverse immediate block credit. Test explicit three-epoch high PPO exposure on the same tiny model. |
 | EXP-20260715-r39-toy-direct-state | completed -- valid `FAIL_R39_TOY_HIGH_CREDIT` | stage-0 high-context localization; hierarchy-L2 temporal control | `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`; commit `1200bdf` | actor-only GAE/block-return gradient diagnostic | M0 PASS; direct state and zero team context replay exactly, low has zero parameters/updates, and actor/skill-head policy gradients are nonzero; both arms match `0.421875` | Context compression and a disconnected actor gradient do not explain the failure. Diagnose credit direction versus optimizer exposure on a smaller toy collection; do not enter S7 or enlarge the model. |
@@ -340,6 +341,36 @@ explicitly approves the exception.
   treatment missed all access floors. Exact optimizer steps were `1/3`, replay
   error was zero, ValueNorm updated once, and the epoch-3 arm had zero clipping
   with mean last-epoch KL `6.12e-6`. More epochs are not authorized.
+
+### EXP-20260715-r39-toy-block-credit
+
+- Causal edge: use the immediately attributable discounted external block
+  return as the actor's score-function weight -> learn the correct supplied
+  joint roster -> dense toy access. This asks whether SMDP-GAE noise, rather
+  than policy factorization, blocks learning.
+- Comparator/treatment: both are full-refresh, direct-state, fixed-primitives,
+  high hidden 32, and `r30_high_ppo_epochs=3`. The comparator uses standardized
+  SMDP-GAE; the treatment uses the same batch's standardized discounted
+  `block_reward`. Both critics retain the original SMDP value target.
+- Reward boundary: only the existing external reward is used. No intrinsic
+  reward, task field, oracle label, shaping term, environment-specific formula,
+  or low update is introduced. Block credit is a positive-control estimator,
+  not authorization to replace long-horizon credit.
+- Budget: seed 39041; local CUDA; arms parallel; 16 env/arm, rollout 40, 12,800
+  steps and 20 outer updates/arm; 32 paired stochastic evaluation episodes.
+- M0: exact `smdp_gae/block_return` actor modes; three high optimizer steps and
+  one ValueNorm update per batch; epoch-0 replay `<=1e-5`; finite last-epoch
+  ratio/clip/KL; identical model sizes; low parameters/updates/losses and all
+  intrinsic fields zero.
+- M1: block-return match `>=0.70`, slow and fast match each `>=0.65`, and
+  block-return minus SMDP-GAE match `>=0.10`.
+- Branches: PASS localizes the obstruction to high credit estimation but does
+  not promote myopic block credit to the temporal algorithm. FAIL retires
+  high-credit estimation as the immediate explanation and selects joint-roster
+  policy factorization for inspection. Neither branch authorizes more epochs,
+  larger models, intrinsic reward, or S7/UAV compute.
+- Status source: `<run-root>/runner_status.txt`; result source:
+  `<run-root>/result/r39_toy_block_credit.json`.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

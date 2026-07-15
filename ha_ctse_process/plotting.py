@@ -700,6 +700,7 @@ UPDATE_FIELDS = (
     "high_clip_fraction_last",
     "high_approx_kl_last",
     "high_value_norm_updates",
+    "high_actor_advantage_block_return",
     "high_policy_actor_grad_norm",
     "high_policy_skill_head_grad_norm",
     "high_decision_gae_raw_std",
