@@ -270,30 +270,42 @@ def main() -> None:
         except ValueError as exc:
             reasons.append(str(exc))
 
-    if numeric_updates:
-        replay_max = max(numeric_updates["low_replay_logp_max_error"], default=math.inf)
+    replay_values = numeric_updates.get("low_replay_logp_max_error")
+    if replay_values is not None:
+        replay_max = max(replay_values, default=math.inf)
         if replay_max > 1e-6:
             reasons.append(f"low replay max error={replay_max} exceeds 1e-6")
-        if sum(numeric_updates["low_optimizer_steps"]) != 2_500:
+
+    optimizer_values = numeric_updates.get("low_optimizer_steps")
+    if optimizer_values is not None:
+        if sum(optimizer_values) != 2_500:
             reasons.append("low optimizer exposure is not exactly 2500 steps")
-        if max(numeric_updates["low_actor_grad_norm"], default=0.0) <= 0.0:
+
+    actor_grad_values = numeric_updates.get("low_actor_grad_norm")
+    if actor_grad_values is not None:
+        if max(actor_grad_values, default=0.0) <= 0.0:
             reasons.append("low actor never received a positive finite gradient")
-        if max(numeric_updates["low_critic_grad_norm"], default=0.0) <= 0.0:
+
+    critic_grad_values = numeric_updates.get("low_critic_grad_norm")
+    if critic_grad_values is not None:
+        if max(critic_grad_values, default=0.0) <= 0.0:
             reasons.append("low critic never received a positive finite gradient")
-        zero_fields = (
-            "high_optimizer_steps",
-            "process_segments",
-            "r31_effect_windows",
-            "aem_active",
-            "r28_g1_active",
-            "r29_action_info_active",
-            "team_disc_active",
-            "proto_disc_active",
-            "effect_windows",
-        )
-        for field in zero_fields:
-            if any(abs(value) > 1e-12 for value in numeric_updates[field]):
-                reasons.append(f"forbidden field {field} was nonzero")
+
+    zero_fields = (
+        "high_optimizer_steps",
+        "process_segments",
+        "r31_effect_windows",
+        "aem_active",
+        "r28_g1_active",
+        "r29_action_info_active",
+        "team_disc_active",
+        "proto_disc_active",
+        "effect_windows",
+    )
+    for field in zero_fields:
+        values = numeric_updates.get(field)
+        if values is not None and any(abs(value) > 1e-12 for value in values):
+            reasons.append(f"forbidden field {field} was nonzero")
 
     expected_seeds = expected_reset_seeds()
     if len(eval_rows) != TOTAL_EPISODES:
