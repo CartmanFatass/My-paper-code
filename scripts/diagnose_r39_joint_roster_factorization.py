@@ -230,11 +230,13 @@ def main() -> None:
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_suffix(".json.tmp")
-    temporary.write_text(
-        json.dumps(result, indent=2, sort_keys=True, allow_nan=False),
-        encoding="utf-8",
-    )
-    temporary.replace(args.output)
+    payload = json.dumps(result, indent=2, sort_keys=True, allow_nan=False)
+    temporary.write_text(payload, encoding="utf-8")
+    try:
+        temporary.replace(args.output)
+    except PermissionError:
+        # Some managed Windows runs allow file creation but deny rename.
+        args.output.write_text(payload, encoding="utf-8")
     print(args.output.resolve())
 
 

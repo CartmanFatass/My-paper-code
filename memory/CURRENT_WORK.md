@@ -30,21 +30,22 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: inspect joint-roster policy factorization on the toy. The
-  valid block-credit positive control produced exactly the same
-  match/slow/fast `0.46875` as SMDP-GAE despite correct actor-mode separation,
-  three high epochs, zero clipping, and exact replay. Actor advantage source
-  and optimizer exposure are not the immediate cause. R39A is preserved and
-  deferred; native HMASD R39B remains blocked.
+- Active objective: localize sampled joint-roster credit on the toy. The exact
+  high-32 factorization diagnostic passed: minimum correct unordered-roster
+  mass reached `0.999487` across eight contexts, with probability-sum error
+  `3.58e-7`. The small autoregressive policy is expressive and optimizable;
+  enlarging it is not justified. R39A is preserved and deferred; native HMASD
+  R39B remains blocked.
 
 ## Next Actions
 
-- Immediate next action: run a no-environment-step exact factorization
-  diagnostic on the same high-32 policy. For the four target-sign contexts,
-  enumerate all 16 final rosters and optimize only the exact likelihood mass of
-  the two correct role-free orientations. This oracle label is diagnostic-only;
-  it does not enter training reward or the algorithm. PASS localizes the
-  failure to sampled joint credit; FAIL exposes a policy representation defect.
+- Immediate next action: add one diagnostic-only conditional readout to the
+  existing tiny full-refresh/high3 block-return run: sampled correct-roster
+  frequency and raw block-return/actor-weight separation between correct and
+  incorrect rosters. This uses toy labels only to audit stored credit and never
+  as reward or policy input. Positive separation selects an environment-agnostic
+  joint-credit variance reduction edge; absent separation exposes a clock or
+  reward-assignment defect.
 
 ## Immediate Constraints
 

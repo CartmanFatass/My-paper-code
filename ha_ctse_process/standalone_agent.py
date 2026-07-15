@@ -7712,6 +7712,12 @@ class StandaloneProcessAgent:
                 "high_block_return_skill_head_grad_norm": 0.0,
                 "high_gae_block_actor_grad_cosine": 0.0,
                 "high_gae_block_skill_head_grad_cosine": 0.0,
+                "r39_joint_credit_correct_rows": 0.0,
+                "r39_joint_credit_incorrect_rows": 0.0,
+                "r39_joint_credit_correct_block_return_mean": 0.0,
+                "r39_joint_credit_incorrect_block_return_mean": 0.0,
+                "r39_joint_credit_correct_actor_weight_mean": 0.0,
+                "r39_joint_credit_incorrect_actor_weight_mean": 0.0,
                 "r30_high_rows": 0.0,
                 "r30_decision_rows": 0.0,
                 "r30_continuation_rows": 0.0,
@@ -7832,6 +7838,71 @@ class StandaloneProcessAgent:
             if self.high_actor_advantage_mode == "block_return"
             else decision_adv_np
         )
+        joint_credit_metrics = {
+            "r39_joint_credit_correct_rows": 0.0,
+            "r39_joint_credit_incorrect_rows": 0.0,
+            "r39_joint_credit_correct_block_return_mean": 0.0,
+            "r39_joint_credit_incorrect_block_return_mean": 0.0,
+            "r39_joint_credit_correct_actor_weight_mean": 0.0,
+            "r39_joint_credit_incorrect_actor_weight_mean": 0.0,
+        }
+        if (
+            self.r39_toy_direct_state_context
+            and self.r39_toy_fixed_skill_primitives
+            and self.scenario == "two_timescale_role_free_actions"
+            and self.n_agents == 2
+            and self.n_skills == 4
+        ):
+            correct_mask = []
+            for row_idx in decision_indices:
+                row = rows[row_idx]
+                final_skills = np.asarray(row.prev_skills, dtype=np.int64).copy()
+                for position, agent_id in enumerate(
+                    np.asarray(row.agent_order, dtype=np.int64)
+                ):
+                    if not bool(np.asarray(row.token_valid)[position]):
+                        continue
+                    if int(np.asarray(row.token_kind)[position]) == SET_TOKEN:
+                        final_skills[int(agent_id)] = int(
+                            np.asarray(row.set_skill)[position]
+                        )
+                state = np.asarray(row.state, dtype=np.float32).reshape(-1)
+                if state.size < 4:
+                    raise RuntimeError("R39 direct-state row is missing target signs")
+                target_skills = np.asarray(
+                    [0 if state[0] > 0.0 else 1, 2 if state[3] > 0.0 else 3],
+                    dtype=np.int64,
+                )
+                correct_mask.append(
+                    bool(np.array_equal(np.sort(final_skills), np.sort(target_skills)))
+                )
+            correct_mask_np = np.asarray(correct_mask, dtype=np.bool_)
+            decision_rewards = rewards[decision_indices]
+            incorrect_mask_np = ~correct_mask_np
+            joint_credit_metrics = {
+                "r39_joint_credit_correct_rows": float(np.sum(correct_mask_np)),
+                "r39_joint_credit_incorrect_rows": float(np.sum(incorrect_mask_np)),
+                "r39_joint_credit_correct_block_return_mean": (
+                    float(np.mean(decision_rewards[correct_mask_np]))
+                    if np.any(correct_mask_np)
+                    else 0.0
+                ),
+                "r39_joint_credit_incorrect_block_return_mean": (
+                    float(np.mean(decision_rewards[incorrect_mask_np]))
+                    if np.any(incorrect_mask_np)
+                    else 0.0
+                ),
+                "r39_joint_credit_correct_actor_weight_mean": (
+                    float(np.mean(actor_adv_np[correct_mask_np]))
+                    if np.any(correct_mask_np)
+                    else 0.0
+                ),
+                "r39_joint_credit_incorrect_actor_weight_mean": (
+                    float(np.mean(actor_adv_np[incorrect_mask_np]))
+                    if np.any(incorrect_mask_np)
+                    else 0.0
+                ),
+            }
         policy_actor_grad_norm = 0.0
         policy_skill_head_grad_norm = 0.0
         block_actor_grad_norm = 0.0
@@ -8280,6 +8351,7 @@ class StandaloneProcessAgent:
             "high_block_return_skill_head_grad_norm": block_skill_head_grad_norm,
             "high_gae_block_actor_grad_cosine": gae_block_actor_grad_cosine,
             "high_gae_block_skill_head_grad_cosine": gae_block_skill_head_grad_cosine,
+            **joint_credit_metrics,
             "r30_high_rows": float(row_count),
             "r30_decision_rows": float(len(decision_indices)),
             "r30_continuation_rows": float(len(continuation_rows)),

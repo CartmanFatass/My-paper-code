@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-joint-factorization | launch-ready | stage-0 exact joint-policy capacity diagnostic | local CPU; zero environment steps | result JSON | high3 and direct block-return credit produced identical chance-like access, leaving autoregressive roster representation versus sampled joint credit unresolved | Optimize exact correct unordered-pair likelihood in eight contexts on the same high-32 policy. PASS localizes failure to sampled credit; FAIL localizes it to factorization. |
+| EXP-20260715-r39-toy-joint-credit-alignment | launch-ready | stage-0 sampled-credit alignment diagnostic | local CUDA; tiny full-refresh high3 block-return run | three update rows | exact supervision proves high-32 factorization capacity, while sampled SMDP and direct block-return credit both fail | Measure sampled correct-roster frequency and raw block-return/actor-weight separation. Do not change the reward, model, or update. |
+| EXP-20260715-r39-toy-joint-factorization | completed -- valid `PASS_R39_JOINT_FACTORIZATION_CAPACITY` | stage-0 exact joint-policy capacity diagnostic | `logs/r39_toy_joint_factorization_20260715_193034`; commit `fd29e3e` | sampled joint-credit alignment | minimum correct unordered-pair mass `0.999487`, mean `0.999670`, probability-sum error `3.58e-7`, high policy 2,512 parameters | The small policy is expressive and exactly optimizable on the eight registered contexts. Do not enlarge it; localize sampled credit. |
 | EXP-20260715-r39-toy-block-credit | completed -- valid `FAIL_R39_TOY_BLOCK_CREDIT` | stage-0 high actor-credit positive control | `logs/r39_toy_block_credit_12k8_20260715_192020`; commit `22a3162` | exact joint-roster factorization diagnostic | M0 PASS; SMDP-GAE and block-return both scored match/slow/fast `0.46875`, gain `0`, with exact replay, high3, and zero intrinsic | Retire actor-advantage source as the immediate cause. Test whether the tiny autoregressive joint policy can learn the four contextual roster mappings under exact supervision. |
 | EXP-20260715-r39-toy-high-exposure | completed -- valid `FAIL_R39_TOY_HIGH_EXPOSURE_3` | stage-0 high optimizer-exposure gate | `logs/r39_toy_high_exposure_12k8_20260715_191019`; commit `b805abc` | high actor-objective positive control | M0 PASS; 3 epochs improved match `0.421875 -> 0.46875` (`+0.046875`), below access/effect gates; clip fraction `0`, mean last-epoch KL `6.12e-6` | Retire optimizer underexposure as the immediate cause. Compare SMDP-GAE with diagnostic block-return actor credit on the unchanged tiny model. |
 | EXP-20260715-r39-toy-high-credit-diagnostic | completed -- credit directions aligned | stage-0 high-credit localization | `logs/r39_toy_high_credit_diag_1920_20260715_185721`; commit `ef9a34d` | high optimizer-exposure gate | M0 PASS; both arms had nonzero comparable GAE/block gradients and all six skill-head cosines were positive (`0.392-0.594`) | GAE does not extinguish or reverse immediate block credit. Test explicit three-epoch high PPO exposure on the same tiny model. |
@@ -401,6 +402,37 @@ explicitly approves the exception.
   edge. FAIL requires repairing the factorization before another RL run. No
   branch authorizes oracle labels, intrinsic reward, a larger model, or S7.
 - Result source: `logs/r39_toy_joint_factorization_*/result/`.
+- Result: valid `PASS_R39_JOINT_FACTORIZATION_CAPACITY` at
+  `logs/r39_toy_joint_factorization_20260715_193034`, commit `fd29e3e`.
+  Minimum/mean correct unordered-roster mass was `0.999487/0.999670`, final
+  loss `0.000330`, and maximum probability-sum error `3.58e-7`. The initial
+  gradient norm was `0.5240`; the model had exactly 2,512 parameters. This
+  establishes capacity only for the eight registered contexts and selects
+  sampled-credit alignment; it does not authorize oracle supervision.
+
+### EXP-20260715-r39-toy-joint-credit-alignment
+
+- Question: does the sampled high-level action receive a correctly aligned raw
+  external block return before PPO estimation and normalization?
+- Instrument: unchanged direct-state, fixed-primitives, full-refresh, high3
+  block-return toy. At each decision row, reconstruct the final roster and use
+  the stored direct-state target signs only to classify it as correct or
+  incorrect. Classification is diagnostic-only and cannot affect reward,
+  advantage, gradient, or sampling.
+- Budget: seed 39041, 16 environments, 1,920 environment steps (three outer
+  updates), CUDA. The model remains high-32/2,512 parameters with zero trainable
+  low-policy parameters and no intrinsic term.
+- M0: exact high replay, three high optimizer steps per update, block-return
+  actor mode, correct and incorrect sampled rows both observed, finite metrics.
+- M1: pooled raw discounted block return for correct rosters exceeds incorrect
+  rosters, and the same ordering remains after the registered actor-weight
+  standardization. This is a direction check, not an efficacy threshold.
+- Branches: positive separation confirms action-to-reward alignment and selects
+  a lower-variance, environment-agnostic joint-credit estimator. No separation
+  requires fixing the clock/reward assignment before another training change.
+  Neither branch authorizes toy-label reward, intrinsic shaping, a larger model,
+  or S7/UAV compute.
+- Result source: the three `train_updates.csv` rows from the single run.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 
