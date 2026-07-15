@@ -724,6 +724,7 @@ UPDATE_FIELDS = (
     "low_return_env_count",
     "low_replay_logp_max_error",
     "low_squashed_action_policy",
+    "low_fixed_primitive_policy",
     "low_actor_h_norm_mean",
     "low_critic_h_norm_mean",
     "low_skill_usage_entropy",

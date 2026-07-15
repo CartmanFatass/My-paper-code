@@ -18,6 +18,7 @@ CONFIGS = {
     "adaptive_retention": "ha_ctse_process.config_r39_toy_native_categorical",
     "force_refresh": "ha_ctse_process.config_r39_toy_shared_refresh",
 }
+FIXED_PRIMITIVES = False
 EXPECTED_FORCE_REFRESH = {"adaptive_retention": False, "force_refresh": True}
 EVAL_METRICS = (
     "r39_toy_task_reward",
@@ -41,6 +42,7 @@ TRAIN_REQUIRED = (
     "low_return_env_count",
     "low_replay_logp_max_error",
     "low_squashed_action_policy",
+    "low_fixed_primitive_policy",
     "combined_intrinsic_env_ratio",
 )
 
@@ -167,6 +169,7 @@ def validate_manifest(
         algorithm = {}
     expected_algorithm = {
         "r39_native_categorical_edit": True,
+        "r39_toy_fixed_skill_primitives": FIXED_PRIMITIVES,
         "r30_force_refresh_every_check": EXPECTED_FORCE_REFRESH[arm],
         "use_recurrent_low_level": False,
         "low_level_architecture": "feedforward",
@@ -193,6 +196,13 @@ def validate_manifest(
     for field, expected in expected_algorithm.items():
         require_equal(
             algorithm.get(field), expected, f"{arm} algorithm_config.{field}", reasons
+        )
+    if FIXED_PRIMITIVES:
+        require_equal(
+            algorithm.get("r39_toy_fixed_skill_action_schema"),
+            "axis4_xy_v1",
+            f"{arm} algorithm_config.r39_toy_fixed_skill_action_schema",
+            reasons,
         )
     require_equal(
         algorithm.get("aem_joint_novelty_enabled", False),
@@ -274,14 +284,42 @@ def summarize_arm(
     if replay_error > 1e-5:
         add_reason(reasons, f"{arm} replay log-probability error {replay_error} > 1e-5")
     low_replay_error = max(values(train, "low_replay_logp_max_error"), default=math.inf)
-    if low_replay_error > 1e-5:
-        add_reason(reasons, f"{arm} low replay log-probability error {low_replay_error} > 1e-5")
-    if any(abs(row.get("low_optimizer_steps", -1.0) - 3.0) > 1e-9 for row in train):
-        add_reason(reasons, f"{arm} did not execute exactly three low PPO epochs per update")
     if any(abs(row.get("low_return_env_count", -1.0) - 16.0) > 1e-9 for row in train):
         add_reason(reasons, f"{arm} low returns were not grouped over exactly 16 environments")
-    if any(abs(row.get("low_squashed_action_policy", 0.0) - 1.0) > 1e-9 for row in train):
-        add_reason(reasons, f"{arm} did not use the registered squashed continuous policy")
+    if FIXED_PRIMITIVES:
+        if any(abs(row.get("low_optimizer_steps", -1.0)) > 1e-9 for row in train):
+            add_reason(reasons, f"{arm} fixed primitives executed a low optimizer step")
+        if any(abs(row.get("low_fixed_primitive_policy", 0.0) - 1.0) > 1e-9 for row in train):
+            add_reason(reasons, f"{arm} did not execute the fixed primitive carrier")
+        if int(manifest.get("agent_runtime_spec", {}).get("parameter_counts", {}).get("low", -1)) != 0:
+            add_reason(reasons, f"{arm} fixed primitive carrier had trainable low parameters")
+        runtime = manifest.get("agent_runtime_spec", {})
+        require_equal(
+            runtime.get("fixed_skill_action_schema"),
+            "axis4_xy_v1",
+            f"{arm} runtime fixed_skill_action_schema",
+            reasons,
+        )
+        require_equal(
+            runtime.get("fixed_skill_action_table"),
+            [[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0], [0.0, -1.0]],
+            f"{arm} runtime fixed_skill_action_table",
+            reasons,
+        )
+        for field in ("low_loss", "low_actor_grad_norm", "low_critic_grad_norm"):
+            if any(abs(row.get(field, 0.0)) > 1e-12 for row in train):
+                add_reason(reasons, f"{arm} fixed primitives had nonzero {field}")
+        if not any(row.get("high_grad_norm", 0.0) > 1e-8 for row in train):
+            add_reason(reasons, f"{arm} high controller had no nonzero gradient")
+    else:
+        if low_replay_error > 1e-5:
+            add_reason(reasons, f"{arm} low replay log-probability error {low_replay_error} > 1e-5")
+        if any(abs(row.get("low_optimizer_steps", -1.0) - 3.0) > 1e-9 for row in train):
+            add_reason(reasons, f"{arm} did not execute exactly three low PPO epochs per update")
+        if any(abs(row.get("low_squashed_action_policy", 0.0) - 1.0) > 1e-9 for row in train):
+            add_reason(reasons, f"{arm} did not use the registered squashed continuous policy")
+        if any(abs(row.get("low_fixed_primitive_policy", 0.0)) > 1e-9 for row in train):
+            add_reason(reasons, f"{arm} unexpectedly used fixed primitives")
     if total(train, "r30_continuation_actor_tokens") != 0.0:
         add_reason(reasons, f"{arm} continuation rows contained actor tokens")
 
@@ -324,6 +362,7 @@ def summarize_arm(
             "low_optimizer_steps_per_update": mean(train, "low_optimizer_steps"),
             "low_return_env_count": mean(train, "low_return_env_count"),
             "low_squashed_action_policy": mean(train, "low_squashed_action_policy"),
+            "low_fixed_primitive_policy": mean(train, "low_fixed_primitive_policy"),
             "continuation_actor_tokens": total(train, "r30_continuation_actor_tokens"),
             "intrinsic_fields_checked": intrinsic_fields,
             "nonzero_intrinsic_fields": nonzero_intrinsic,
@@ -352,20 +391,37 @@ def decide(m0: bool, m1: bool, m2: bool) -> str:
     if not m0:
         return "INVALID_R39_TOY_IMPLEMENTATION"
     if not m1:
-        return "NO_ACCESS_R39_TOY_32"
+        return "FAIL_R39_TOY_HIGH_ACCESS" if FIXED_PRIMITIVES else "NO_ACCESS_R39_TOY_32"
     if not m2:
         return "FAIL_R39_TOY_NATIVE_CATEGORICAL"
-    return "PASS_R39_TOY_NATIVE_CATEGORICAL"
+    return (
+        "PASS_R39_TOY_FIXED_PRIMITIVES"
+        if FIXED_PRIMITIVES
+        else "PASS_R39_TOY_NATIVE_CATEGORICAL"
+    )
 
 
 def main() -> None:
+    global CONFIGS, EXPERIMENT_ID, FIXED_PRIMITIVES
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--seed", type=int, default=39041)
     parser.add_argument("--total-timesteps", type=int, default=12_800)
     parser.add_argument("--expected-updates", type=int, default=20)
     parser.add_argument("--eval-episodes", type=int, default=32)
+    parser.add_argument("--experiment-id", default=EXPERIMENT_ID)
+    parser.add_argument("--adaptive-config", default=CONFIGS["adaptive_retention"])
+    parser.add_argument("--control-config", default=CONFIGS["force_refresh"])
+    parser.add_argument("--fixed-primitives", action="store_true")
+    parser.add_argument("--result-name", default="r39_toy_native_categorical.json")
     args = parser.parse_args()
+
+    EXPERIMENT_ID = str(args.experiment_id)
+    CONFIGS = {
+        "adaptive_retention": str(args.adaptive_config),
+        "force_refresh": str(args.control_config),
+    }
+    FIXED_PRIMITIVES = bool(args.fixed_primitives)
 
     run_root = Path(args.run_root).resolve()
     summaries: dict[str, dict[str, Any]] = {}
@@ -432,10 +488,15 @@ def main() -> None:
     )
     status = decide(m0, m1, m2)
 
-    if status == "PASS_R39_TOY_NATIVE_CATEGORICAL":
+    if status in {"PASS_R39_TOY_NATIVE_CATEGORICAL", "PASS_R39_TOY_FIXED_PRIMITIVES"}:
         decision = {
             "conclusion": "native categorical retention is usable on the lightweight two-timescale positive control",
             "next_action": "return to the registered current-interface fixed-k anchor before any UAV temporal comparison",
+        }
+    elif status == "FAIL_R39_TOY_HIGH_ACCESS":
+        decision = {
+            "conclusion": "the high controller did not access the dense task even with exact fixed skill primitives",
+            "next_action": "diagnose high-level context or credit on the toy; do not enter S7",
         }
     elif status == "NO_ACCESS_R39_TOY_32":
         decision = {
@@ -490,7 +551,7 @@ def main() -> None:
         },
         "decision": {"status": status, **decision},
     }
-    output = run_root / "result" / "r39_toy_native_categorical.json"
+    output = run_root / "result" / str(args.result_name)
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(".json.tmp")
     temporary.write_text(

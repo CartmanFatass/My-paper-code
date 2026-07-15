@@ -337,6 +337,31 @@ class CompactTeamBridge(nn.Module):
         return team_code.clamp(0, self.num_team_codes - 1), base_vector, zeros, zeros, logits
 
 
+class FixedSkillPrimitivePolicy(nn.Module):
+    """Zero-parameter four-skill action carrier for the R39 toy positive control."""
+
+    def __init__(self, n_skills: int, action_dim: int, action_space_type: str):
+        super().__init__()
+        if int(n_skills) != 4 or int(action_dim) != 2 or action_space_type != "continuous":
+            raise ValueError("R39 fixed primitives require four skills and 2D continuous actions")
+        self.n_skills = 4
+        self.action_dim = 2
+        self.action_space_type = "continuous"
+        self.register_buffer(
+            "action_table",
+            torch.tensor(
+                [[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0], [0.0, -1.0]],
+                dtype=torch.float32,
+            ),
+        )
+
+    def act(self, obs: torch.Tensor, skills: torch.Tensor, deterministic: bool = False):
+        del obs, deterministic
+        actions = self.action_table[skills.long().clamp(0, self.n_skills - 1)]
+        zeros = torch.zeros(skills.shape, dtype=torch.float32, device=skills.device)
+        return actions, zeros, zeros, zeros
+
+
 class LowLevelPolicy(nn.Module):
     def __init__(
         self,
@@ -1825,6 +1850,12 @@ class StandaloneProcessAgent:
         self.r39_native_categorical_edit = bool(
             getattr(config, "r39_native_categorical_edit", False)
         )
+        self.r39_toy_fixed_skill_primitives = bool(
+            getattr(config, "r39_toy_fixed_skill_primitives", False)
+        )
+        self.r39_toy_fixed_skill_action_schema = str(
+            getattr(config, "r39_toy_fixed_skill_action_schema", "none")
+        )
         self.r30_high_buffer_version = int(
             getattr(config, "r30_high_buffer_version", HIGH_BUFFER_VERSION)
         )
@@ -1844,6 +1875,20 @@ class StandaloneProcessAgent:
             self.n_skills = int(getattr(config, "legacy_n_skills_override"))
         if self.r30_enabled and self.n_skills < 2:
             raise ValueError("R30 requires at least two skills")
+        if self.r39_toy_fixed_skill_primitives:
+            if (
+                str(getattr(config, "scenario", "")) != "two_timescale_role_free_actions"
+                or not self.r39_native_categorical_edit
+                or self.n_skills != 4
+                or self.action_space_type != "continuous"
+                or self.action_dim != 2
+            ):
+                raise ValueError(
+                    "R39 fixed primitives are restricted to the native-categorical "
+                    "two-timescale 4-skill toy"
+                )
+            if self.r39_toy_fixed_skill_action_schema != "axis4_xy_v1":
+                raise ValueError("unsupported R39 fixed primitive schema")
         self.r31_effect_mode = str(
             getattr(config, "r31_effect_mode", "off")
         ).lower()
@@ -2295,7 +2340,13 @@ class StandaloneProcessAgent:
             if violations:
                 raise ValueError("invalid R30 configuration: " + ",".join(violations))
 
-        if self.use_recurrent_low_level and self.low_level_architecture == "strict_hmasd_mappo":
+        if self.r39_toy_fixed_skill_primitives:
+            self.low = FixedSkillPrimitivePolicy(
+                self.n_skills,
+                action_dim,
+                self.action_space_type,
+            ).to(self.device)
+        elif self.use_recurrent_low_level and self.low_level_architecture == "strict_hmasd_mappo":
             self.low = StrictHMASDMAPPOLowLevelPolicy(
                 self.obs_dim,
                 self.state_dim,
@@ -2558,7 +2609,12 @@ class StandaloneProcessAgent:
         high_lr = float(getattr(config, "lr_coordinator", lr))
         process_lr = float(getattr(config, "lr_process_encoder", 1e-4))
         low_critic_lr = float(getattr(config, "lr_discoverer_critic", lr))
-        if self.use_recurrent_low_level:
+        if self.r39_toy_fixed_skill_primitives:
+            self.low_opt = None
+            self.low_actor_opt = None
+            self.low_critic_opt = None
+            self.low_value_norm = None
+        elif self.use_recurrent_low_level:
             self.low_opt = None
             self.low_actor_opt = torch.optim.Adam(self.low.actor_update_parameters(), lr=lr)
             self.low_critic_opt = torch.optim.Adam(self.low.critic_update_parameters(), lr=low_critic_lr)
@@ -8293,6 +8349,7 @@ class StandaloneProcessAgent:
             "low_return_env_count": 0.0,
             "low_replay_logp_max_error": 0.0,
             "low_squashed_action_policy": 0.0,
+            "low_fixed_primitive_policy": 0.0,
             "low_actor_h_norm_mean": 0.0,
             "low_critic_h_norm_mean": 0.0,
             "low_skill_usage_entropy": 0.0,
@@ -8927,6 +8984,16 @@ class StandaloneProcessAgent:
     def update_low(self, rollout: Rollout) -> dict[str, float]:
         if not rollout.rewards:
             return self._empty_low_metrics()
+        if self.r39_toy_fixed_skill_primitives:
+            env_ids = np.asarray(
+                rollout.env_ids if rollout.env_ids else [0 for _ in rollout.rewards],
+                dtype=np.int64,
+            )
+            return {
+                **self._empty_low_metrics(),
+                "low_return_env_count": float(np.unique(env_ids).size),
+                "low_fixed_primitive_policy": 1.0,
+            }
         if self.use_recurrent_low_level:
             return self._update_low_recurrent(rollout)
         returns, advantages, old_values_np, env_ids = self._low_returns(rollout)

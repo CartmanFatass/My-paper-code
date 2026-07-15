@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-native-categorical | rerun pending -- first run invalid `INVALID_R39_TOY_LOW_PPO` | stage-0 synthetic mechanism gate; hierarchy-L2 matched control | invalid local run `logs/r39_toy_native_categorical_12k8_20260715_173547` | unchanged repaired rerun | post-result audit found cross-environment return leakage, one update instead of three PPO epochs, and incorrect clipped-Normal likelihood | Repair only those defects, keep the 32-wide model/budget/seed/thresholds fixed, and rerun the same gate. |
+| EXP-20260715-r39-toy-fixed-primitives | launch-ready | stage-0 high-controller positive control; hierarchy-L2 matched control | local CUDA | result JSON | zero-parameter four-skill carrier isolates high selection/retention from skill learning | Run the 12.8K pair; do not enter S7 before a toy temporal PASS. |
+| EXP-20260715-r39-toy-native-categorical | completed -- valid `NO_ACCESS_R39_TOY_32` | stage-0 joint-learning access gate; hierarchy-L2 matched control | `logs/r39_toy_native_categorical_12k8_20260715_180156`; commit `cafec51` | fixed-primitive positive control | M0 PASS; low replay `<=1.91e-6`, 16-env GAE, 3 PPO epochs, zero intrinsic; both arms match about `0.446` | Do not interpret temporal efficacy or enlarge the learner. Isolate the high controller with supplied primitives. |
 | EXP-20260715-r39a-current-fixed-hmasd-anchor | planned -- package prepared and deferred | baseline-L1 current-interface source-anchor gate | cloud CUDA package; no launch during toy gate | toy result | GPT-5.6 Pro accepted a serial R39A anchor then R39B route; user selected a cheap toy mechanism gate before S7 compute | Preserve the exact package. Launch only after toy PASS; native-HMASD R39B still requires R39A PASS. |
 | EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
 | EXP-20260715-r38-cts-access | completed -- valid `FAIL_R38_CTS_ACCESS` | baseline-L1 environment-access gate | local CUDA; `logs/r38_cts_access_320k_20260715_140641_retry2`; commit `db3502e` | post-R38 cross-round failure review | M0 PASS; 100 low updates and zero high/process/intrinsic updates; MAPPO short `0/256`, long `2/256`, full `0/256`; all four 64-reset blocks had zero full success | Retire CTS without shaping, intrinsic reward, learner, budget, seed, or threshold rescue; the lifetime-controller gate is not authorized. |
@@ -165,6 +166,45 @@ explicitly approves the exception.
   12,800-step budget, seed, and decision thresholds unchanged. The slow clock
   is corrected from `4k0` to `6k0` so an optimal slow skill can satisfy the
   registered `>4k0` lifetime condition before its target changes.
+- Repaired result: valid `NO_ACCESS_R39_TOY_32` at
+  `logs/r39_toy_native_categorical_12k8_20260715_180156`. M0 passed with high
+  replay `<=3.58e-7`, low replay `<=1.91e-6`, exactly three low PPO steps per
+  update, all 16 return streams separated, and all intrinsic fields zero. Both
+  arms remained below the access floor: adaptive/control match
+  `0.445716/0.445838`, slow `0.439227/0.439260`, fast
+  `0.452205/0.452415`. The result localizes the next question to high-level
+  timing versus joint skill learning; it is not a temporal efficacy result.
+
+### EXP-20260715-r39-toy-fixed-primitives
+
+- Causal edge: centralized slow/fast context -> native categorical high policy
+  selects and retains supplied executable skills -> mixed lifetimes preserve
+  dense task access.
+- Authorization/null: the valid learned-low access failure authorizes one
+  high-controller positive control. Null: even exact primitives do not make the
+  high controller task-accessible.
+- Comparator: adaptive incumbent-as-`KEEP` versus mechanism-matched
+  full-refresh `SET(current)`; identical high model, seed, reward, and action
+  table `[(+x),(-x),(+y),(-y)]`.
+- Budget: seed 39041; local CUDA; two concurrent arms; 16 env/arm; rollout 40;
+  12,800 steps and 20 high updates/arm; 32 paired stochastic evaluations;
+  expected wall clock 2-5 minutes.
+- M0: exact config/budget; high replay `<=1e-5`; fixed schema `axis4_xy_v1` and
+  exact shared table; zero low parameters, optimizer steps, losses, and grads;
+  nonzero finite high gradients; all intrinsic fields zero.
+- M1: both arms match `>=0.70`, slow `>=0.65`, and fast `>=0.65`.
+- M2: control full-sync rate 1; adaptive full-sync `<=0.75`, mixed-age
+  `>=0.25`, both `<=4k0` and `>4k0` spells, and adaptive match no more than
+  `0.05` below control.
+- Branches: M0 miss -> `INVALID_R39_TOY_IMPLEMENTATION`, repair only the direct
+  defect. M1 miss -> `FAIL_R39_TOY_HIGH_ACCESS`, diagnose high context/credit
+  and block S7. M1 pass/M2 miss -> `FAIL_R39_TOY_NATIVE_CATEGORICAL`, revise or
+  retire timing semantics. M0-M2 pass -> `PASS_R39_TOY_FIXED_PRIMITIVES`, return
+  to the deferred R39A anchor; this is not skill-discovery or S7 evidence.
+- Prohibited: intrinsic reward, task fields in the actor, learned low updates,
+  role labels, threshold changes, model/budget expansion, or UAV launch.
+- Status source: `<run-root>/runner_status.txt`; result source:
+  `<run-root>/result/r39_toy_fixed_primitives.json`.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

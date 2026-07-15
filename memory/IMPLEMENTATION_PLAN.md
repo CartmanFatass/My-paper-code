@@ -40,7 +40,11 @@ registered three PPO epochs, and used a clipped-Normal likelihood that did not
 describe executed actions. Its match and lifetime outcomes are not evidence.
 The repair uses env-grouped bootstrapped GAE, three PPO epochs, and a
 tanh-squashed Gaussian while retaining the 32-wide model and original compute
-budget. The same paired run is the next evidence boundary.
+budget. Its valid rerun still failed dense access: adaptive/control match was
+`0.445716/0.445838`, with all slow/fast components below `0.46`. The next toy
+boundary therefore removes low learning entirely: four fixed axis primitives,
+zero low parameters or optimizer steps, and the same 32-wide high stack. This
+is only a high-controller positive control; it cannot establish skill discovery.
 
 The preserved R39A package boundary is:
 

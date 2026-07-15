@@ -30,16 +30,16 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: rerun the lightweight toy gate after invalidating its first
-  result for a concrete feedforward PPO defect. Returns crossed parallel
-  environments, registered PPO epochs were skipped, and clipped actions used an
-  incorrect likelihood. R39A is preserved and deferred; native HMASD R39B
-  remains blocked.
+- Active objective: isolate native-categorical high-level timing on the toy
+  after the repaired 32-wide joint learner produced valid
+  `NO_ACCESS_R39_TOY_32`. The next positive control supplies four fixed,
+  zero-parameter action primitives and trains only the high stack. R39A is
+  preserved and deferred; native HMASD R39B remains blocked.
 
 ## Next Actions
 
-- Immediate next action: keep the 32-wide model, seed, 12.8K budget, reward, and
-  thresholds fixed; rerun the same paired gate after the feedforward PPO repair.
+- Immediate next action: launch the registered fixed-primitive paired toy gate;
+  use its result to locate failure in the high controller versus skill learning.
 
 ## Immediate Constraints
 

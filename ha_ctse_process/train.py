@@ -67,6 +67,8 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_high_buffer_version",
     "r30_force_refresh_every_check",
     "r39_native_categorical_edit",
+    "r39_toy_fixed_skill_primitives",
+    "r39_toy_fixed_skill_action_schema",
     "constant_skill_no_high",
     "aem_joint_novelty_enabled",
     "aem_joint_position_grid_size",
@@ -621,6 +623,14 @@ def export_run_manifest(
                 getattr(agent, "prototype_disc_use_learned_prior", False)
             ),
             "low_rnn_hidden_size": int(agent.low_rnn_hidden_size),
+            "fixed_skill_action_schema": str(
+                getattr(agent, "r39_toy_fixed_skill_action_schema", "none")
+            ),
+            "fixed_skill_action_table": (
+                agent.low.action_table.detach().cpu().tolist()
+                if bool(getattr(agent, "r39_toy_fixed_skill_primitives", False))
+                else None
+            ),
             "parameter_counts": jsonable(agent.parameter_counts()),
         }
     with (metadata_dir / "run_manifest.json").open("w", encoding="utf-8") as handle:

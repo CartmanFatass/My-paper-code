@@ -6,7 +6,13 @@ param(
     [int]$NumEnvs = 16,
     [int]$RolloutLength = 40,
     [int]$EvalEpisodes = 32,
-    [string]$Device = "cuda"
+    [string]$Device = "cuda",
+    [string]$ExperimentId = "EXP-20260715-r39-toy-native-categorical",
+    [string]$AdaptiveConfig = "ha_ctse_process.config_r39_toy_native_categorical",
+    [string]$ControlConfig = "ha_ctse_process.config_r39_toy_shared_refresh",
+    [string]$RunLabel = "r39_toy_native_categorical_12k8",
+    [string]$ResultName = "r39_toy_native_categorical.json",
+    [switch]$FixedPrimitives
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,7 +22,7 @@ $WorkerWrapper = Join-Path $PSScriptRoot "run_python_worker.ps1"
 $PowerShellBin = (Get-Process -Id $PID).Path
 if (-not $RunRoot) {
     $RunRoot = Join-Path $RepoDir (
-        "logs\r39_toy_native_categorical_12k8_" + (Get-Date -Format "yyyyMMdd_HHmmss")
+        "logs\$RunLabel`_" + (Get-Date -Format "yyyyMMdd_HHmmss")
     )
 }
 $RunRoot = [System.IO.Path]::GetFullPath($RunRoot)
@@ -26,11 +32,11 @@ $GitCommit = (& git -C $RepoDir rev-parse HEAD).Trim()
 $Arms = @(
     [pscustomobject]@{
         Id = "adaptive_retention"
-        Config = "ha_ctse_process.config_r39_toy_native_categorical"
+        Config = $AdaptiveConfig
     },
     [pscustomobject]@{
         Id = "force_refresh"
-        Config = "ha_ctse_process.config_r39_toy_shared_refresh"
+        Config = $ControlConfig
     }
 )
 
@@ -44,7 +50,7 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
         "updated=$([DateTimeOffset]::Now.ToString('o'))",
         "state=$State",
         "phase=$Phase",
-        "experiment=EXP-20260715-r39-toy-native-categorical",
+        "experiment=$ExperimentId",
         "git_commit=$GitCommit",
         "seed=$Seed",
         "run_root=$RunRoot",
@@ -230,16 +236,26 @@ try {
     Wait-Workers $workers
 
     Write-Status "running" "pair_analysis"
-    & $PythonBin $Analyzer `
-        --run-root $RunRoot `
-        --seed $Seed `
-        --total-timesteps $TotalTimesteps `
-        --expected-updates $ExpectedUpdates `
-        --eval-episodes $EvalEpisodes
+    $analyzerArgs = @(
+        $Analyzer,
+        "--run-root", $RunRoot,
+        "--seed", [string]$Seed,
+        "--total-timesteps", [string]$TotalTimesteps,
+        "--expected-updates", [string]$ExpectedUpdates,
+        "--eval-episodes", [string]$EvalEpisodes,
+        "--experiment-id", $ExperimentId,
+        "--adaptive-config", $AdaptiveConfig,
+        "--control-config", $ControlConfig,
+        "--result-name", $ResultName
+    )
+    if ($FixedPrimitives) {
+        $analyzerArgs += "--fixed-primitives"
+    }
+    & $PythonBin @analyzerArgs
     if ($LASTEXITCODE -ne 0) {
         throw "R39 toy pair analysis failed with exit code $LASTEXITCODE"
     }
-    $resultPath = Join-Path $RunRoot "result\r39_toy_native_categorical.json"
+    $resultPath = Join-Path $RunRoot "result\$ResultName"
     $result = Get-Content -Raw -LiteralPath $resultPath | ConvertFrom-Json
     Write-Status "completed" "result" @(
         "result_status=$($result.status)",
