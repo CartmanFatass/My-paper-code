@@ -42,9 +42,10 @@ and history live in their owning files.
 
 ## Next Actions
 
-- Immediate next action: use the valid result and existing fixed-`N` evidence to
-  select one structurally different joint-credit causal edge. Do not launch new
-  compute until that edge and its minimum abandonment gate are registered.
+- Immediate next action: obtain GPT-5.6 Pro's single-route decision on the
+  tracked R39 failure-review question. The controller recommends an official
+  fixed-`N` MPE `simple_spread` ordinary-MAPPO access gate; no implementation or
+  compute begins before the review fixes its exact contract.
 
 ## Immediate Constraints
 
@@ -163,4 +164,8 @@ and history live in their owning files.
 - `docs/external-review/gpt5_6_pro/20260715_open_roster_variable_team_review/`
   — two raw variable-team responses and the accepted-but-deferred open-roster
   disposition.
+- `memory/LTM/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md` — terminal R39
+  failure review and the proposed public positive-credit substrate.
+- `docs/external-review/gpt5_6_pro/20260715_r39_native_toy_credit_result/` —
+  tracked R39 result evidence and the single next-substrate review question.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.
