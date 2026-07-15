@@ -54,6 +54,7 @@ class Config(ProcessConfig):
 
     high_controller = "r30_fixed_clock_ar_edit"
     r39_native_categorical_edit = True
+    r39_toy_direct_state_context = False
     r30_force_refresh_every_check = False
     r30_keep_init = 0.6  # Ignored by the native single-categorical policy.
     r30_high_buffer_version = 1

@@ -30,18 +30,18 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: diagnose the high-level context/credit path on the toy.
-  The fixed, zero-parameter primitive positive control produced valid
-  `FAIL_R39_TOY_HIGH_ACCESS`: the high controller stayed at random-like dense
-  task access even though the temporal execution path reached mixed ages. R39A
-  is preserved and deferred; native HMASD R39B remains blocked.
+- Active objective: run the direct-state high-context localization gate on the
+  toy. The fixed-primitive checkpoint remained nearly uniform and barely
+  changed its joint-roster distribution when slow/fast target signs flipped.
+  The next gate removes the learned compact/constant-bridge bottleneck while
+  retaining zero low parameters and the same high credit path. R39A is
+  preserved and deferred; native HMASD R39B remains blocked.
 
 ## Next Actions
 
-- Immediate next action: use the fixed-primitive result to separate whether the
-  high policy cannot read the slow/fast context or whether its sampled
-  block-return credit cannot learn the available roster mapping. Do not enlarge
-  the toy network or enter S7 before this is resolved.
+- Immediate next action: launch the registered 12.8K direct-state paired toy
+  gate. Its actor-only policy gradients distinguish a real high-policy signal
+  from the previous critic-contaminated aggregate gradient metric.
 
 ## Immediate Constraints
 

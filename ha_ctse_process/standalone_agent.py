@@ -1855,6 +1855,9 @@ class StandaloneProcessAgent:
         self.r39_toy_fixed_skill_primitives = bool(
             getattr(config, "r39_toy_fixed_skill_primitives", False)
         )
+        self.r39_toy_direct_state_context = bool(
+            getattr(config, "r39_toy_direct_state_context", False)
+        )
         self.r39_toy_fixed_skill_action_schema = str(
             getattr(config, "r39_toy_fixed_skill_action_schema", "none")
         )
@@ -1891,6 +1894,18 @@ class StandaloneProcessAgent:
                 )
             if self.r39_toy_fixed_skill_action_schema != "axis4_xy_v1":
                 raise ValueError("unsupported R39 fixed primitive schema")
+        if self.r39_toy_direct_state_context:
+            if (
+                not self.r39_toy_fixed_skill_primitives
+                or not self.r39_native_categorical_edit
+                or not self.r30_enabled
+                or str(getattr(config, "scenario", ""))
+                != "two_timescale_role_free_actions"
+            ):
+                raise ValueError(
+                    "R39 direct-state high context is restricted to the fixed-primitive "
+                    "native-categorical two-timescale toy"
+                )
         self.r31_effect_mode = str(
             getattr(config, "r31_effect_mode", "off")
         ).lower()
@@ -2240,6 +2255,14 @@ class StandaloneProcessAgent:
             use_sparsemax=bool(getattr(config, "opt_use_sparsemax", True)),
         ).to(self.device)
         self.bridge = CompactTeamBridge(compact_dim, team_code_dim, num_team_codes, bridge_type).to(self.device)
+        if self.r39_toy_direct_state_context:
+            if compact_dim < self.state_dim:
+                raise ValueError(
+                    "R39 direct-state compact dimension must be at least state_dim "
+                    f"({compact_dim} < {self.state_dim})"
+                )
+            self.compact.requires_grad_(False)
+            self.bridge.requires_grad_(False)
         high_omega_dim = self.opt_num_prototypes if self.high_condition_on_omega else 0
         high_agent_relevance_dim = self.opt_num_prototypes if self.use_agent_prototype_relevance else 0
         high_ar_prefix_dim = 0
@@ -2625,7 +2648,13 @@ class StandaloneProcessAgent:
             self.low_critic_opt = None
             self.low_value_norm = None
         self.high_value_norm = ScalarRunningMeanStd() if self.use_high_value_norm else None
-        high_params = list(self.compact.parameters()) + list(self.bridge.parameters()) + list(self.high.parameters())
+        high_params = list(self.high.parameters())
+        if not self.r39_toy_direct_state_context:
+            high_params = (
+                list(self.compact.parameters())
+                + list(self.bridge.parameters())
+                + high_params
+            )
         if self.high_value is not None:
             high_params += list(self.high_value.parameters())
         if self.compact_return_head is not None:
@@ -3306,6 +3335,70 @@ class StandaloneProcessAgent:
             agent_relevance,
         )
 
+    def _high_context_batch(
+        self,
+        states: torch.Tensor,
+        joint_obs: torch.Tensor,
+    ):
+        """Build the single context used by R30 sampling, value, and replay."""
+
+        if self.r39_toy_direct_state_context:
+            state_features = states.float()[..., : self.state_dim]
+            compact = F.pad(
+                state_features,
+                (0, int(self.compact.compact_dim) - self.state_dim),
+            )
+            batch_size = int(compact.shape[0])
+            num_prototypes = int(self.compact.num_prototypes)
+            cd_loss = compact.new_zeros(())
+            cmi_loss = compact.new_zeros(())
+            weights = compact.new_full(
+                (batch_size, num_prototypes),
+                1.0 / float(num_prototypes),
+            )
+            aggregation_entropy = compact.new_full(
+                (batch_size,),
+                float(np.log(float(num_prototypes))),
+            )
+            agent_relevance = compact.new_full(
+                (batch_size, self.n_agents, num_prototypes),
+                1.0 / float(num_prototypes),
+            )
+            team_code = torch.zeros(
+                batch_size, dtype=torch.long, device=compact.device
+            )
+            team_vector = compact.new_zeros(
+                (batch_size, int(self.bridge.team_code_dim))
+            )
+            team_logits = compact.new_zeros(
+                (batch_size, int(self.bridge.num_team_codes))
+            )
+            team_probs = torch.softmax(team_logits, dim=-1)
+        else:
+            (
+                compact,
+                cd_loss,
+                cmi_loss,
+                weights,
+                aggregation_entropy,
+                agent_relevance,
+            ) = self.compact(states, joint_obs)
+            team_code, team_vector, team_probs, team_logits = (
+                self.bridge.expected_context(compact)
+            )
+        return (
+            compact,
+            cd_loss,
+            cmi_loss,
+            weights,
+            aggregation_entropy,
+            agent_relevance,
+            team_code,
+            team_vector,
+            team_probs,
+            team_logits,
+        )
+
     def _r30_context_tensors(self, state: np.ndarray, joint_obs: np.ndarray):
         if not self.r30_enabled:
             raise RuntimeError("R30 context requested in legacy controller mode")
@@ -3315,10 +3408,18 @@ class StandaloneProcessAgent:
         joint_t = torch.as_tensor(
             joint_obs, dtype=torch.float32, device=self.device
         ).reshape(1, self.n_agents, self.obs_dim)
-        compact, cd_loss, cmi_loss, weights, aggregation_entropy, agent_relevance = self.compact(
-            state_t, joint_t
-        )
-        team_code, team_vector, team_probs, team_logits = self.bridge.expected_context(compact)
+        (
+            compact,
+            cd_loss,
+            cmi_loss,
+            weights,
+            aggregation_entropy,
+            agent_relevance,
+            team_code,
+            team_vector,
+            team_probs,
+            team_logits,
+        ) = self._high_context_batch(state_t, joint_t)
         return (
             state_t,
             joint_t,
@@ -7567,6 +7668,8 @@ class StandaloneProcessAgent:
                 "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm else 0.0,
                 "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm else 0.0,
                 "high_grad_norm": 0.0,
+                "high_policy_actor_grad_norm": 0.0,
+                "high_policy_skill_head_grad_norm": 0.0,
                 "r30_high_rows": 0.0,
                 "r30_decision_rows": 0.0,
                 "r30_continuation_rows": 0.0,
@@ -7653,10 +7756,18 @@ class StandaloneProcessAgent:
         clocks = torch.as_tensor(
             [row.steps_to_check for row in rows], dtype=torch.float32, device=self.device
         )
-        compact, cd_loss, cmi_loss, weights, _aggregation_entropy, relevance = self.compact(
-            states, joint_obs
-        )
-        _team_codes, team_vectors, _team_probs, _team_logits = self.bridge.expected_context(compact)
+        (
+            compact,
+            cd_loss,
+            cmi_loss,
+            weights,
+            _aggregation_entropy,
+            relevance,
+            _team_codes,
+            team_vectors,
+            _team_probs,
+            _team_logits,
+        ) = self._high_context_batch(states, joint_obs)
         value_predictions = self.high_value(
             states,
             joint_obs,
@@ -7745,6 +7856,35 @@ class StandaloneProcessAgent:
 
         aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
         loss = policy_loss + 0.5 * value_loss + entropy_loss + aux_loss
+        policy_actor_grad_norm = 0.0
+        policy_skill_head_grad_norm = 0.0
+        actor_params = [param for param in self.high.parameters() if param.requires_grad]
+        if policy_loss.requires_grad and actor_params:
+            policy_grads = torch.autograd.grad(
+                policy_loss,
+                actor_params,
+                retain_graph=True,
+                allow_unused=True,
+            )
+            actor_grad_terms = [
+                torch.sum(grad.detach() ** 2)
+                for grad in policy_grads
+                if grad is not None
+            ]
+            if actor_grad_terms:
+                policy_actor_grad_norm = float(
+                    torch.sqrt(sum(actor_grad_terms)).cpu().item()
+                )
+            skill_head_ids = {id(param) for param in self.high.skill_head.parameters()}
+            skill_head_terms = [
+                torch.sum(grad.detach() ** 2)
+                for param, grad in zip(actor_params, policy_grads)
+                if id(param) in skill_head_ids and grad is not None
+            ]
+            if skill_head_terms:
+                policy_skill_head_grad_norm = float(
+                    torch.sqrt(sum(skill_head_terms)).cpu().item()
+                )
         self.high_opt.zero_grad()
         loss.backward()
         high_grad_norm = torch.zeros((), device=self.device)
@@ -7760,7 +7900,8 @@ class StandaloneProcessAgent:
                     high_params, self.high_max_grad_norm
                 )
         self.high_opt.step()
-        self.compact.update_prototype_bank_ema(self.prototype_bank_ema_tau)
+        if not self.r39_toy_direct_state_context:
+            self.compact.update_prototype_bank_ema(self.prototype_bank_ema_tau)
 
         normal_decisions = [
             row for row in rows if row.decision_mask and bool(np.all(row.prev_active))
@@ -7892,6 +8033,8 @@ class StandaloneProcessAgent:
             "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm else 0.0,
             "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm else 0.0,
             "high_grad_norm": float(high_grad_norm.detach().cpu().item()),
+            "high_policy_actor_grad_norm": policy_actor_grad_norm,
+            "high_policy_skill_head_grad_norm": policy_skill_head_grad_norm,
             "r30_high_rows": float(row_count),
             "r30_decision_rows": float(len(decision_indices)),
             "r30_continuation_rows": float(len(continuation_rows)),

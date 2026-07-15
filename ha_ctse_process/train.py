@@ -68,6 +68,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_force_refresh_every_check",
     "r39_native_categorical_edit",
     "r39_toy_fixed_skill_primitives",
+    "r39_toy_direct_state_context",
     "r39_toy_fixed_skill_action_schema",
     "constant_skill_no_high",
     "aem_joint_novelty_enabled",
@@ -625,6 +626,9 @@ def export_run_manifest(
             "low_rnn_hidden_size": int(agent.low_rnn_hidden_size),
             "fixed_skill_action_schema": str(
                 getattr(agent, "r39_toy_fixed_skill_action_schema", "none")
+            ),
+            "direct_state_high_context": bool(
+                getattr(agent, "r39_toy_direct_state_context", False)
             ),
             "fixed_skill_action_table": (
                 agent.low.action_table.detach().cpu().tolist()

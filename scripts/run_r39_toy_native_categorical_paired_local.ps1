@@ -12,7 +12,8 @@ param(
     [string]$ControlConfig = "ha_ctse_process.config_r39_toy_shared_refresh",
     [string]$RunLabel = "r39_toy_native_categorical_12k8",
     [string]$ResultName = "r39_toy_native_categorical.json",
-    [switch]$FixedPrimitives
+    [switch]$FixedPrimitives,
+    [switch]$DirectStateContext
 )
 
 $ErrorActionPreference = "Stop"
@@ -250,6 +251,9 @@ try {
     )
     if ($FixedPrimitives) {
         $analyzerArgs += "--fixed-primitives"
+    }
+    if ($DirectStateContext) {
+        $analyzerArgs += "--direct-state-context"
     }
     & $PythonBin @analyzerArgs
     if ($LASTEXITCODE -ne 0) {

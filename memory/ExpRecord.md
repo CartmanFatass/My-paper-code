@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r39-toy-direct-state | launch-ready | stage-0 high-context localization; hierarchy-L2 temporal control | local CUDA | result JSON | completed fixed-primitive checkpoint is nearly context-insensitive; direct raw-state context removes the learned compact/constant-bridge bottleneck without adding low parameters | Run the unchanged 12.8K pair; PASS localizes the prior failure to context encoding, FAIL localizes next work to high credit/optimizer exposure. |
 | EXP-20260715-r39-toy-fixed-primitives | completed -- valid `FAIL_R39_TOY_HIGH_ACCESS` | stage-0 high-controller positive control; hierarchy-L2 matched control | `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`; commit `19e7f5c` | high context/credit diagnosis | M0 PASS with zero low parameters/updates and zero intrinsic; adaptive/control match both `0.4375`, slow `0.40625`, fast `0.46875` | Failure is upstream of temporal efficacy: diagnose the high context/credit path on the toy; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-native-categorical | completed -- valid `NO_ACCESS_R39_TOY_32` | stage-0 joint-learning access gate; hierarchy-L2 matched control | `logs/r39_toy_native_categorical_12k8_20260715_180156`; commit `cafec51` | fixed-primitive positive control | M0 PASS; low replay `<=1.91e-6`, 16-env GAE, 3 PPO epochs, zero intrinsic; both arms match about `0.446` | Do not interpret temporal efficacy or enlarge the learner. Isolate the high controller with supplied primitives. |
 | EXP-20260715-r39a-current-fixed-hmasd-anchor | planned -- package prepared and deferred | baseline-L1 current-interface source-anchor gate | cloud CUDA package; no launch during toy gate | toy result | GPT-5.6 Pro accepted a serial R39A anchor then R39B route; user selected a cheap toy mechanism gate before S7 compute | Preserve the exact package. Launch only after toy PASS; native-HMASD R39B still requires R39A PASS. |
@@ -213,6 +214,44 @@ explicitly approves the exception.
   role labels, threshold changes, model/budget expansion, or UAV launch.
 - Status source: `<run-root>/runner_status.txt`; result source:
   `<run-root>/result/r39_toy_fixed_primitives.json`.
+
+### EXP-20260715-r39-toy-direct-state
+
+- Causal edge: explicit generic centralized state -> native categorical high
+  actor selects the correct supplied skill roster -> dense toy access. This
+  isolates high context encoding from the unchanged block-return credit path.
+- Authorization/null: the completed fixed-primitive checkpoints have near
+  chance correct-pair mass (`0.109-0.148`, chance `0.125`), joint-roster entropy
+  `2.763-2.766` near `log(16)`, slow-sign TV `0.0158-0.0175`, and fast-sign TV
+  `0.0046-0.0064`. Null: direct state remains unable to learn, locating the
+  failure to high credit/optimizer exposure rather than compact encoding.
+- Comparator: adaptive incumbent-as-`KEEP` versus mechanism-matched
+  full-refresh, with the accepted compact-context run retained as the fixed
+  diagnostic reference rather than rerun. Both arms use the same raw-state
+  projection, zero team vector, fixed four-skill action table, and reward.
+- Budget: seed 39041; local CUDA; two concurrent arms; 16 env/arm; rollout 40;
+  12,800 steps and 20 outer high updates/arm; 32 paired stochastic evaluations;
+  expected wall clock 2-5 minutes.
+- M0: direct-state flag and dimensions `6 -> 8`, zero team context; high replay
+  `<=1e-5`; nonzero actor-only policy and skill-head gradients; zero low
+  parameters/updates/losses; exact fixed action table; all intrinsic fields
+  zero.
+- M1: both arms match `>=0.70`, slow `>=0.65`, and fast `>=0.65`.
+- M2: control full-sync rate 1; adaptive full-sync `<=0.75`, mixed-age
+  `>=0.25`, both short and `>4k0` spells, and adaptive match no more than `0.05`
+  below control.
+- Branches: M0 miss -> `INVALID_R39_TOY_IMPLEMENTATION`, repair only the direct
+  defect. M1 miss -> `FAIL_R39_TOY_HIGH_CREDIT`, compare actor-only GAE and
+  block-return gradients without enlarging the model or entering S7. M1 pass
+  but M2 miss -> `FAIL_R39_TOY_NATIVE_CATEGORICAL`, revise/retire temporal
+  semantics. M0-M2 pass -> `PASS_R39_TOY_DIRECT_STATE`, accept context
+  localization only and decide the smallest generic context repair before the
+  deferred R39A anchor.
+- Prohibited: environment-specific intrinsic reward, task-field shaping, low
+  learning, model enlargement, threshold changes, or S7/UAV launch before the
+  result.
+- Status source: `<run-root>/runner_status.txt`; result source:
+  `<run-root>/result/r39_toy_direct_state.json`.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

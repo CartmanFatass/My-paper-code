@@ -695,6 +695,8 @@ UPDATE_FIELDS = (
     "high_value_norm_mean",
     "high_value_norm_std",
     "high_grad_norm",
+    "high_policy_actor_grad_norm",
+    "high_policy_skill_head_grad_norm",
     "compact_return_loss",
     "compact_return_active",
     "team_code_entropy",

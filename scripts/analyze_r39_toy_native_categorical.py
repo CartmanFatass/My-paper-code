@@ -19,6 +19,7 @@ CONFIGS = {
     "force_refresh": "ha_ctse_process.config_r39_toy_shared_refresh",
 }
 FIXED_PRIMITIVES = False
+DIRECT_STATE_CONTEXT = False
 EXPECTED_FORCE_REFRESH = {"adaptive_retention": False, "force_refresh": True}
 EVAL_METRICS = (
     "r39_toy_task_reward",
@@ -38,6 +39,8 @@ TRAIN_REQUIRED = (
     "r30_mixed_age_fraction",
     "r30_spell_gt_4k0_count",
     "r30_spell_le_4k0_count",
+    "high_policy_actor_grad_norm",
+    "high_policy_skill_head_grad_norm",
     "low_optimizer_steps",
     "low_return_env_count",
     "low_replay_logp_max_error",
@@ -170,6 +173,7 @@ def validate_manifest(
     expected_algorithm = {
         "r39_native_categorical_edit": True,
         "r39_toy_fixed_skill_primitives": FIXED_PRIMITIVES,
+        "r39_toy_direct_state_context": DIRECT_STATE_CONTEXT,
         "r30_force_refresh_every_check": EXPECTED_FORCE_REFRESH[arm],
         "use_recurrent_low_level": False,
         "low_level_architecture": "feedforward",
@@ -197,6 +201,18 @@ def validate_manifest(
         require_equal(
             algorithm.get(field), expected, f"{arm} algorithm_config.{field}", reasons
         )
+    if DIRECT_STATE_CONTEXT:
+        for field, expected in {
+            "opt_compact_dim": 8,
+            "team_code_dim": 1,
+            "team_bridge_type": "none",
+        }.items():
+            require_equal(
+                algorithm.get(field),
+                expected,
+                f"{arm} algorithm_config.{field}",
+                reasons,
+            )
     if FIXED_PRIMITIVES:
         require_equal(
             algorithm.get("r39_toy_fixed_skill_action_schema"),
@@ -295,6 +311,12 @@ def summarize_arm(
             add_reason(reasons, f"{arm} fixed primitive carrier had trainable low parameters")
         runtime = manifest.get("agent_runtime_spec", {})
         require_equal(
+            runtime.get("direct_state_high_context", False),
+            DIRECT_STATE_CONTEXT,
+            f"{arm} runtime direct_state_high_context",
+            reasons,
+        )
+        require_equal(
             runtime.get("fixed_skill_action_schema"),
             "axis4_xy_v1",
             f"{arm} runtime fixed_skill_action_schema",
@@ -311,6 +333,15 @@ def summarize_arm(
                 add_reason(reasons, f"{arm} fixed primitives had nonzero {field}")
         if not any(row.get("high_grad_norm", 0.0) > 1e-8 for row in train):
             add_reason(reasons, f"{arm} high controller had no nonzero gradient")
+        if not any(
+            row.get("high_policy_actor_grad_norm", 0.0) > 1e-8 for row in train
+        ):
+            add_reason(reasons, f"{arm} high actor received no policy gradient")
+        if not any(
+            row.get("high_policy_skill_head_grad_norm", 0.0) > 1e-8
+            for row in train
+        ):
+            add_reason(reasons, f"{arm} high skill head received no policy gradient")
     else:
         if low_replay_error > 1e-5:
             add_reason(reasons, f"{arm} low replay log-probability error {low_replay_error} > 1e-5")
@@ -358,6 +389,12 @@ def summarize_arm(
         "parameter_counts": manifest.get("agent_runtime_spec", {}).get("parameter_counts", {}),
         "implementation": {
             "replay_logp_max_error": replay_error,
+            "policy_actor_grad_norm_mean": mean(
+                train, "high_policy_actor_grad_norm"
+            ),
+            "policy_skill_head_grad_norm_mean": mean(
+                train, "high_policy_skill_head_grad_norm"
+            ),
             "low_replay_logp_max_error": low_replay_error,
             "low_optimizer_steps_per_update": mean(train, "low_optimizer_steps"),
             "low_return_env_count": mean(train, "low_return_env_count"),
@@ -391,9 +428,13 @@ def decide(m0: bool, m1: bool, m2: bool) -> str:
     if not m0:
         return "INVALID_R39_TOY_IMPLEMENTATION"
     if not m1:
+        if FIXED_PRIMITIVES and DIRECT_STATE_CONTEXT:
+            return "FAIL_R39_TOY_HIGH_CREDIT"
         return "FAIL_R39_TOY_HIGH_ACCESS" if FIXED_PRIMITIVES else "NO_ACCESS_R39_TOY_32"
     if not m2:
         return "FAIL_R39_TOY_NATIVE_CATEGORICAL"
+    if FIXED_PRIMITIVES and DIRECT_STATE_CONTEXT:
+        return "PASS_R39_TOY_DIRECT_STATE"
     return (
         "PASS_R39_TOY_FIXED_PRIMITIVES"
         if FIXED_PRIMITIVES
@@ -402,7 +443,7 @@ def decide(m0: bool, m1: bool, m2: bool) -> str:
 
 
 def main() -> None:
-    global CONFIGS, EXPERIMENT_ID, FIXED_PRIMITIVES
+    global CONFIGS, DIRECT_STATE_CONTEXT, EXPERIMENT_ID, FIXED_PRIMITIVES
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--seed", type=int, default=39041)
@@ -413,6 +454,7 @@ def main() -> None:
     parser.add_argument("--adaptive-config", default=CONFIGS["adaptive_retention"])
     parser.add_argument("--control-config", default=CONFIGS["force_refresh"])
     parser.add_argument("--fixed-primitives", action="store_true")
+    parser.add_argument("--direct-state-context", action="store_true")
     parser.add_argument("--result-name", default="r39_toy_native_categorical.json")
     args = parser.parse_args()
 
@@ -422,6 +464,7 @@ def main() -> None:
         "force_refresh": str(args.control_config),
     }
     FIXED_PRIMITIVES = bool(args.fixed_primitives)
+    DIRECT_STATE_CONTEXT = bool(args.direct_state_context)
 
     run_root = Path(args.run_root).resolve()
     summaries: dict[str, dict[str, Any]] = {}
@@ -488,7 +531,11 @@ def main() -> None:
     )
     status = decide(m0, m1, m2)
 
-    if status in {"PASS_R39_TOY_NATIVE_CATEGORICAL", "PASS_R39_TOY_FIXED_PRIMITIVES"}:
+    if status in {
+        "PASS_R39_TOY_NATIVE_CATEGORICAL",
+        "PASS_R39_TOY_FIXED_PRIMITIVES",
+        "PASS_R39_TOY_DIRECT_STATE",
+    }:
         decision = {
             "conclusion": "native categorical retention is usable on the lightweight two-timescale positive control",
             "next_action": "return to the registered current-interface fixed-k anchor before any UAV temporal comparison",
@@ -497,6 +544,11 @@ def main() -> None:
         decision = {
             "conclusion": "the high controller did not access the dense task even with exact fixed skill primitives",
             "next_action": "diagnose high-level context or credit on the toy; do not enter S7",
+        }
+    elif status == "FAIL_R39_TOY_HIGH_CREDIT":
+        decision = {
+            "conclusion": "the high controller failed even with direct centralized state and exact fixed primitives",
+            "next_action": "diagnose actor-only high credit and optimizer exposure; do not enter S7",
         }
     elif status == "NO_ACCESS_R39_TOY_32":
         decision = {
@@ -522,6 +574,7 @@ def main() -> None:
         "total_timesteps_per_arm": args.total_timesteps,
         "expected_outer_updates_per_arm": args.expected_updates,
         "evaluation_episodes_per_arm": args.eval_episodes,
+        "direct_state_context": DIRECT_STATE_CONTEXT,
         "implementation_valid": m0,
         "invalid_reasons": invalid_reasons,
         "arms": summaries,
