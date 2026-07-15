@@ -30,18 +30,22 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: run the direct-state high-context localization gate on the
-  toy. The fixed-primitive checkpoint remained nearly uniform and barely
-  changed its joint-roster distribution when slow/fast target signs flipped.
-  The next gate removes the learned compact/constant-bridge bottleneck while
-  retaining zero low parameters and the same high credit path. R39A is
-  preserved and deferred; native HMASD R39B remains blocked.
+- Active objective: localize the high-controller credit failure on the toy.
+  The direct-state fixed-primitive gate was a valid
+  `FAIL_R39_TOY_HIGH_CREDIT`: the actor and skill-head policy gradients were
+  nonzero, but both arms remained at match `0.421875`. Context encoding, low
+  capacity, intrinsic reward, and a disconnected actor gradient are no longer
+  sufficient explanations. R39A is preserved and deferred; native HMASD R39B
+  remains blocked.
 
 ## Next Actions
 
-- Immediate next action: launch the registered 12.8K direct-state paired toy
-  gate. Its actor-only policy gradients distinguish a real high-policy signal
-  from the previous critic-contaminated aggregate gradient metric.
+- Immediate next action: on one small direct-state toy collection, compare the
+  actor-only high gradient produced by SMDP-GAE with the gradient produced by
+  centered immediate block returns. Use their norms and cosine to distinguish
+  a GAE/critic-credit defect from insufficient high optimizer exposure. This
+  diagnostic does not update from the block-return gradient and does not
+  enlarge either model.
 
 ## Immediate Constraints
 

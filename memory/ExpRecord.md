@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-direct-state | launch-ready | stage-0 high-context localization; hierarchy-L2 temporal control | local CUDA | result JSON | completed fixed-primitive checkpoint is nearly context-insensitive; direct raw-state context removes the learned compact/constant-bridge bottleneck without adding low parameters | Run the unchanged 12.8K pair; PASS localizes the prior failure to context encoding, FAIL localizes next work to high credit/optimizer exposure. |
+| EXP-20260715-r39-toy-direct-state | completed -- valid `FAIL_R39_TOY_HIGH_CREDIT` | stage-0 high-context localization; hierarchy-L2 temporal control | `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`; commit `1200bdf` | actor-only GAE/block-return gradient diagnostic | M0 PASS; direct state and zero team context replay exactly, low has zero parameters/updates, and actor/skill-head policy gradients are nonzero; both arms match `0.421875` | Context compression and a disconnected actor gradient do not explain the failure. Diagnose credit direction versus optimizer exposure on a smaller toy collection; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-fixed-primitives | completed -- valid `FAIL_R39_TOY_HIGH_ACCESS` | stage-0 high-controller positive control; hierarchy-L2 matched control | `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`; commit `19e7f5c` | high context/credit diagnosis | M0 PASS with zero low parameters/updates and zero intrinsic; adaptive/control match both `0.4375`, slow `0.40625`, fast `0.46875` | Failure is upstream of temporal efficacy: diagnose the high context/credit path on the toy; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-native-categorical | completed -- valid `NO_ACCESS_R39_TOY_32` | stage-0 joint-learning access gate; hierarchy-L2 matched control | `logs/r39_toy_native_categorical_12k8_20260715_180156`; commit `cafec51` | fixed-primitive positive control | M0 PASS; low replay `<=1.91e-6`, 16-env GAE, 3 PPO epochs, zero intrinsic; both arms match about `0.446` | Do not interpret temporal efficacy or enlarge the learner. Isolate the high controller with supplied primitives. |
 | EXP-20260715-r39a-current-fixed-hmasd-anchor | planned -- package prepared and deferred | baseline-L1 current-interface source-anchor gate | cloud CUDA package; no launch during toy gate | toy result | GPT-5.6 Pro accepted a serial R39A anchor then R39B route; user selected a cheap toy mechanism gate before S7 compute | Preserve the exact package. Launch only after toy PASS; native-HMASD R39B still requires R39A PASS. |
@@ -259,6 +259,15 @@ explicitly approves the exception.
   manifest mismatch. Retry keeps the seed, budget, thresholds, and algorithm
   unchanged and only preserves `team_bridge_type=none` for this fail-closed
   direct-state lane.
+- Valid retry result: `FAIL_R39_TOY_HIGH_CREDIT` at
+  `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`, commit `1200bdf`.
+  M0 passed with replay error `0`, zero low parameters/updates/losses, and all
+  intrinsic fields zero. Adaptive/control match were both `0.421875` (slow
+  `0.40625`, fast `0.4375`). Mean actor-only policy gradient norms were
+  `0.09242/0.09267`; skill-head-only norms were `0.06422/0.06451`. Adaptive
+  reached mixed-age fraction `0.34196` while control remained full-sync, but M1
+  blocks temporal interpretation. The next diagnostic compares SMDP-GAE and
+  centered block-return actor gradients without applying the latter.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 
