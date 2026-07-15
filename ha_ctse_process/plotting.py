@@ -334,6 +334,15 @@ R37_IDENTITY_METRIC_FIELDS = (
     "r37_critic_identity_max_abs_error",
 )
 
+R38_CTS_METRIC_FIELDS = (
+    "r38_short_duty_complete",
+    "r38_long_duty_complete",
+    "r38_full_cycle_success",
+    "r38_anchor_streak_max",
+    "r38_shuttle_stage_max",
+    "r38_sparse_reward",
+)
+
 
 UPDATE_FIELDS = (
     "update",
@@ -750,6 +759,9 @@ EVAL_FIELDS = (
     "action_mode_code",
     "reward",
     "length",
+    "terminated_flag",
+    "truncated_flag",
+    *R38_CTS_METRIC_FIELDS,
     *R37_IDENTITY_METRIC_FIELDS,
     *UAV_METRIC_FIELDS,
     *COMM_METRIC_FIELDS,
@@ -810,7 +822,12 @@ def extract_uav_metrics(info: dict[str, Any] | None) -> dict[str, float]:
         "connected_uavs": ("connected_uavs", "uavs_with_backhaul"),
     }
     metrics = {}
-    for key in (*UAV_METRIC_FIELDS, *COMM_METRIC_FIELDS, *ALICE_BOB_METRIC_FIELDS):
+    for key in (
+        *UAV_METRIC_FIELDS,
+        *COMM_METRIC_FIELDS,
+        *ALICE_BOB_METRIC_FIELDS,
+        *R38_CTS_METRIC_FIELDS,
+    ):
         scalar = numeric_scalar(source.get(key))
         if scalar is not None:
             metrics[key] = scalar

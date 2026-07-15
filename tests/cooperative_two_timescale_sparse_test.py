@@ -140,5 +140,14 @@ def test_factory_adapter_preserves_sparse_shared_reward_and_shapes():
     assert reward == 0.0
     assert not terminated and not truncated
     reward_info = step_info["reward_info"]
+    for field in (
+        "r38_short_duty_complete",
+        "r38_long_duty_complete",
+        "r38_full_cycle_success",
+        "r38_anchor_streak_max",
+        "r38_shuttle_stage_max",
+        "r38_sparse_reward",
+    ):
+        assert field in reward_info
     assert reward_info["r38_sparse_reward"] == 0.0
     assert reward_info["intrinsic_reward"] == 0.0
