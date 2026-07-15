@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+from pathlib import Path
 
 from scripts.analyze_r38_cts_access import (
     decide_result,
@@ -81,3 +82,46 @@ def test_policy_validation_rejects_fractional_success_length():
         "length must be a finite nonnegative integer" in reason
         for reason in reasons
     )
+
+
+def test_runner_invokes_analyzer_module_through_worker_wrapper():
+    repo_root = Path(__file__).resolve().parents[1]
+    runner = (repo_root / "scripts" / "run_r38_cts_access_local.ps1").read_text(
+        encoding="utf-8"
+    )
+
+    assert '"-m", "scripts.analyze_r38_cts_access"' in runner
+    assert 'Invoke-PythonWorker "analyzer" $ResultRoot $analyzerArgs' in runner
+    assert "$AnalyzerStdoutPath $AnalyzerStderrPath" in runner
+
+
+def test_runner_handles_empty_analyzer_logs_without_null_method_call():
+    repo_root = Path(__file__).resolve().parents[1]
+    runner = (repo_root / "scripts" / "run_r38_cts_access_local.ps1").read_text(
+        encoding="utf-8"
+    )
+
+    assert (
+        "$stderrText = [string](Get-Content -Raw -LiteralPath $AnalyzerStderrPath)"
+        in runner
+    )
+    assert (
+        "$stdoutText = [string](Get-Content -Raw -LiteralPath $AnalyzerStdoutPath)"
+        in runner
+    )
+
+
+def test_constant_no_high_metrics_record_explicit_zero_counts():
+    from ha_ctse_process.train import empty_r30_no_high_metrics
+
+    assert empty_r30_no_high_metrics() == {
+        "r30_high_rows": 0.0,
+        "r30_decision_rows": 0.0,
+    }
+
+
+def test_constant_label_entropy_is_exactly_zero():
+    from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+
+    labels = np.zeros(128, dtype=np.int64)
+    assert StandaloneProcessAgent._label_entropy_np(labels, num_classes=4) == 0.0

@@ -8245,7 +8245,7 @@ class StandaloneProcessAgent:
             return 0.0
         counts = np.bincount(labels, minlength=int(num_classes)).astype(np.float64)
         probs = counts[counts > 0.0] / max(float(counts.sum()), 1.0)
-        entropy = -float(np.sum(probs * np.log(probs + 1e-12)))
+        entropy = -float(np.sum(probs * np.log(probs)))
         return entropy / float(np.log(max(int(num_classes), 2)))
 
     @staticmethod

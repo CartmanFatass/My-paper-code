@@ -428,6 +428,13 @@ def empty_aem_metrics(active: bool = False) -> dict[str, float]:
     return metrics
 
 
+def empty_r30_no_high_metrics() -> dict[str, float]:
+    return {
+        "r30_high_rows": 0.0,
+        "r30_decision_rows": 0.0,
+    }
+
+
 def empty_r37_identity_metrics(config) -> dict[str, float]:
     enabled = bool(getattr(config, "r37_identity_gate_enabled", False))
     mode = str(getattr(config, "alice_bob_actor_identity_mode", "hidden")).lower()
@@ -4639,6 +4646,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             process_metrics.update(r31_score_metrics)
             low_metrics = agent.update_low(rollout)
             process_metrics.update(agent.r31_update_effect_posterior())
+            if bool(getattr(agent, "constant_skill_no_high", False)):
+                process_metrics.update(empty_r30_no_high_metrics())
             if bool(getattr(agent, "r30_enabled", False)) and not bool(
                 getattr(agent, "constant_skill_no_high", False)
             ):

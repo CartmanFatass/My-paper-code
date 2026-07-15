@@ -6,7 +6,6 @@ param(
 
 $ErrorActionPreference = "Stop"
 $RepoDir = Split-Path -Parent $PSScriptRoot
-$Analyzer = Join-Path $PSScriptRoot "analyze_r38_cts_access.py"
 $WorkerWrapper = Join-Path $PSScriptRoot "run_python_worker.ps1"
 $PowerShellExe = (Get-Process -Id $PID).Path
 if (-not $RunRoot) {
@@ -19,9 +18,10 @@ $StatusPath = Join-Path $RunRoot "runner_status.txt"
 $InitRoot = Join-Path $RunRoot "init\neutral_cts_seed39031"
 $NeutralCheckpoint = Join-Path $InitRoot "standalone_process_core_final.pt"
 $MappoRoot = Join-Path $RunRoot "runs\constant_code_mappo\seed39031"
-$ResultPath = Join-Path $RunRoot "result\r38_cts_access.json"
-$AnalyzerStdoutPath = Join-Path $RunRoot "result\analyzer_stdout.log"
-$AnalyzerStderrPath = Join-Path $RunRoot "result\analyzer_stderr.log"
+$ResultRoot = Join-Path $RunRoot "result"
+$ResultPath = Join-Path $ResultRoot "r38_cts_access.json"
+$AnalyzerStdoutPath = Join-Path $ResultRoot "analyzer_stdout.log"
+$AnalyzerStderrPath = Join-Path $ResultRoot "analyzer_stderr.log"
 $GitCommit = (& git -C $RepoDir rev-parse HEAD).Trim()
 $StatusOwned = $false
 
@@ -77,6 +77,11 @@ $trainArgs = @(
     "--log_dir", $MappoRoot
 )
 
+$analyzerArgs = @(
+    "-m", "scripts.analyze_r38_cts_access",
+    "--run-root", $RunRoot
+)
+
 function Write-Status(
     [string]$State,
     [string]$Phase,
@@ -115,9 +120,17 @@ function Write-Status(
 function Invoke-PythonWorker(
     [string]$Id,
     [string]$LogRoot,
-    [object[]]$Arguments
+    [object[]]$Arguments,
+    [string]$StdoutPath = "",
+    [string]$StderrPath = ""
 ) {
     New-Item -ItemType Directory -Path $LogRoot -Force | Out-Null
+    if (-not $StdoutPath) {
+        $StdoutPath = Join-Path $LogRoot "runner_stdout.log"
+    }
+    if (-not $StderrPath) {
+        $StderrPath = Join-Path $LogRoot "runner_stderr.log"
+    }
     [System.IO.File]::WriteAllText(
         (Join-Path $LogRoot "command.txt"),
         "$PythonExe $($Arguments -join ' ')"
@@ -127,8 +140,8 @@ function Invoke-PythonWorker(
     $spec = [ordered]@{
         python_bin = $PythonExe
         working_directory = $RepoDir
-        stdout_path = (Join-Path $LogRoot "runner_stdout.log")
-        stderr_path = (Join-Path $LogRoot "runner_stderr.log")
+        stdout_path = $StdoutPath
+        stderr_path = $StderrPath
         exit_code_path = $exitCodePath
         arguments = $Arguments
     }
@@ -177,13 +190,15 @@ function Remove-AnalyzerResult {
 
 function Get-AnalyzerFailureText {
     if (Test-Path -LiteralPath $AnalyzerStderrPath -PathType Leaf) {
-        $stderrText = (Get-Content -Raw -LiteralPath $AnalyzerStderrPath).Trim()
+        $stderrText = [string](Get-Content -Raw -LiteralPath $AnalyzerStderrPath)
+        $stderrText = $stderrText.Trim()
         if ($stderrText) {
             return $stderrText
         }
     }
     if (Test-Path -LiteralPath $AnalyzerStdoutPath -PathType Leaf) {
-        $stdoutText = (Get-Content -Raw -LiteralPath $AnalyzerStdoutPath).Trim()
+        $stdoutText = [string](Get-Content -Raw -LiteralPath $AnalyzerStdoutPath)
+        $stdoutText = $stdoutText.Trim()
         if ($stdoutText) {
             return "stderr was empty; stdout: $stdoutText"
         }
@@ -227,13 +242,10 @@ try {
     Invoke-PythonWorker "constant_code_mappo" $MappoRoot $trainArgs
 
     Write-Status "running" "uniform_random_and_analysis"
-    New-Item -ItemType Directory -Path (Split-Path -Parent $ResultPath) -Force |
-        Out-Null
+    New-Item -ItemType Directory -Path $ResultRoot -Force | Out-Null
     try {
-        & $PythonExe $Analyzer --run-root $RunRoot `
-            1> $AnalyzerStdoutPath `
-            2> $AnalyzerStderrPath
-        $analyzerExitCode = $LASTEXITCODE
+        Invoke-PythonWorker "analyzer" $ResultRoot $analyzerArgs `
+            $AnalyzerStdoutPath $AnalyzerStderrPath
     }
     catch {
         $analyzerProcessError = [string]$_.Exception.Message
@@ -243,15 +255,6 @@ try {
             "stdout_path=$AnalyzerStdoutPath; " +
             "stderr_path=$AnalyzerStderrPath; " +
             "error=$analyzerProcessError; " +
-            "output=$analyzerFailureText"
-        )
-    }
-    if ($analyzerExitCode -ne 0) {
-        $analyzerFailureText = Get-AnalyzerFailureText
-        throw (
-            "R38 analyzer failed with exit code $analyzerExitCode; " +
-            "stdout_path=$AnalyzerStdoutPath; " +
-            "stderr_path=$AnalyzerStderrPath; " +
             "output=$analyzerFailureText"
         )
     }
