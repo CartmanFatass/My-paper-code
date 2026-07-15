@@ -6,8 +6,9 @@ lives in `memory/ALGORITHM_PRINCIPLES.md`.
 The previous delegated-agent and Superpowers process rules are retired. Do not
 infer routing, review, lifecycle, or process rules from historical files
 (`.codex/agents/`, `docs/superpowers/`, `docs/subagents/` are provenance, not
-authority). The four-conversation protocol below is the only active delegation
-and review workflow.
+authority). Automated role-conversation delegation is temporarily retired after
+an invocation changed a target conversation's model. The controller works
+directly until the user explicitly reinstates another workflow.
 
 ## First Read
 
@@ -24,75 +25,28 @@ Then read on demand, not by default:
 - `memory/LTM/` — only when a compact file points there or the user asks.
 
 Codex and Claude Code alternate as controller; only one owns project decisions
-at a time. During a dispatched implementation plan, the dedicated implementer
-is the sole repository writer and the controller stays read-only until the
-implementation returns. Update the `Controller Handoff` block in
+at a time. The active controller owns implementation, review, Git, experiment
+decisions, and user communication. Update the `Controller Handoff` block in
 `memory/CURRENT_WORK.md` when controller ownership changes.
 
-## Four-Conversation Collaboration
+## Direct Controller Workflow
 
-Use four reusable project-local Codex conversations for multi-step algorithm
-implementation and evidence-bearing experiment changes:
+The main controller performs implementation, focused review, experiment
+orchestration, result interpretation, and Git operations directly in
+`C:\project\HMASD`.
 
-1. **Main controller:** the user-facing HMASD conversation. It owns causal and
-   algorithm decisions, the ordered modification plan, final integration
-   review, Git commits/pushes, user communication, and external-review
-   disposition.
-2. **Implementer:** Luna Max with fast speed. It is the only writer while a
-   plan is active, works directly in `C:\project\HMASD` without a worktree,
-   implements one numbered item at a time, and never commits or pushes.
-3. **Reviewer:** GPT-5.6 Sol with high reasoning and fast speed. It is read-only,
-   reviews the actual diff and relevant code after every item, and must return
-   either `APPROVED STEP N` or `CHANGES_REQUIRED STEP N`.
-4. **Monitor:** Luna Medium in the saved project directory. It is read-only and
-   active only for a running experiment/job; one ETA-adaptive heartbeat reuses
-   this conversation for dashboards and terminal/error notification.
+Do not send messages to the former Implementer, Reviewer, or Monitor
+conversations; do not create replacement role conversations, subthreads, or
+worktrees for this workflow; and do not target those conversations with an
+automation. Their prior turns are provenance only. Do not attempt to restore or
+verify their models programmatically. Reinstatement requires a new explicit user
+instruction after a model-preserving invocation mechanism is available.
 
-GPT-5.6 Pro external algorithm consultation is separate and is not one of these
-four conversations. Follow the `External Review` section for that exchange.
-
-Reuse the existing role conversations. Search by role/title and verify their
-project directory before sending work; retitle or repair a suitable existing
-conversation instead of creating duplicates. Model and speed settings are
-user-owned persistent conversation settings: never pass `model`, `thinking`,
-reasoning, or speed overrides when invoking an existing role conversation.
-Titles and prompt text are not model verification. If the app cannot expose a
-read-only model value, rely only on the user's latest explicit confirmation. If
-the user observes any model change after invocation, stop all further sends to
-that conversation until the user restores and reconfirms it; do not attempt to
-repair the model by sending another override. Do not substitute a different
-model silently. None of the four conversations may create a worktree, extra
-role conversation, subthread, or parallel monitor for this workflow.
-
-The message flow is mandatory:
-
-1. The main controller sends the implementer a numbered plan with the causal
-   objective, owned and forbidden files, exact behavior boundary, direct
-   evidence check, and stop condition for each item.
-2. After one item, the implementer sends `REVIEW_REQUEST STEP N` to the reviewer
-   through `send_message_to_thread`, including changed files, semantics, and
-   relevant evidence, then stops. Silence is never approval.
-3. The reviewer inspects the actual diff and relevant implementation. On
-   `CHANGES_REQUIRED STEP N`, it lists only blocking defects; the implementer
-   fixes that same item and resubmits it. Only `APPROVED STEP N` authorizes the
-   next item.
-4. After the last approved item, the implementer sends
-   `FINAL_IMPLEMENTATION_COMPLETE`. The reviewer performs a cumulative read-only
-   review and sends `FINAL_REVIEW_READY` to the main controller with approved
-   files, evidence, and remaining risk.
-5. The main controller inspects the final diff and evidence itself. It sends one
-   batched correction back through the same implementer/reviewer loop if needed;
-   otherwise it alone commits, pushes, interprets the result, and chooses the
-   next causal edge.
-6. When the plan launches a long run, the monitor owns progress presentation
-   and terminal notification under `create-single-thread-monitor`. It does not
-   implement, review code, restart a run, or decide the scientific branch.
-
-Conversation messages are the handoff mechanism. Reference repository paths and
-runtime artifacts instead of cloning the main conversation or creating routine
-handoff documents. A trivial single-file mechanical/operational fix, a direct
-status read, or a terminal-result read may remain in the main controller so the
-four-conversation workflow does not reintroduce process overhead.
+For a long run, keep any bounded status wakeup in the main controller rather
+than a separate monitoring conversation. The controller reads only the
+registered status source and reports terminal evidence or a concrete failure.
+GPT-5.6 Pro external algorithm consultation remains separate and follows the
+`External Review` section.
 
 ## Primary Mode: Algorithm Exploration
 
@@ -134,9 +88,8 @@ cannot expose cheaply.
 
 ## Lean Project Loop
 
-The main controller selects the leanest valid lane. Multi-step algorithm or
-experiment implementation uses the four-conversation protocol; trivial
-mechanical work and direct evidence reads stay with the controller:
+The main controller selects the leanest valid lane and performs the work
+directly:
 
 1. **Algorithm exploration:** inspect only the relevant code, implement one
    causal idea, and run the smallest controlled experiment that can change the
@@ -246,9 +199,11 @@ request; stage and commit only the intended files.
   boundary. Use `apply_patch` for text files; for other exact paths under the
   project or OS temp directory, resolve and verify the target before requesting
   scoped deletion. Never delete unrelated or user-created files.
-- Experiment monitors must use `create-single-thread-monitor` and its
-  ETA-adaptive recurrence. Reuse one heartbeat and one project-local thread;
-  change only that heartbeat's recurrence when the ETA bucket changes.
+- While role conversations are suspended, do not use
+  `create-single-thread-monitor` or target another conversation with a monitor.
+  If a long run needs scheduled observation, use one bounded heartbeat in the
+  main controller and change only that heartbeat's recurrence when its ETA
+  bucket changes.
 
 ## Runtime Output And Test Hygiene
 

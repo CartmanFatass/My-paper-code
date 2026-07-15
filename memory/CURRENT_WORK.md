@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-15
+Updated: 2026-07-16
 
 Purpose: the single mandatory first read. Keep only controller ownership, the
 current objective, next actions, immediate constraints, and pointers. Evidence
@@ -26,10 +26,11 @@ and history live in their owning files.
   tracked question is committed and pushed, Codex gives the user one copyable
   prompt and waits for the raw Pro response; it does not invoke the web
   conversation unless the user explicitly authorizes that specific round.
-- **Dedicated role conversations:** automated sends are paused after the user
-  observed an invocation changing a conversation model. Resume only after the
-  user restores and explicitly reconfirms that conversation's model and speed;
-  never send a model/thinking override.
+- **Workflow mode:** the four-conversation workflow is temporarily cancelled
+  after a model-preservation failure. Do not send to the former Implementer,
+  Reviewer, or Monitor conversations or target them with automations. The R40
+  monitor heartbeat remains paused. The main controller works directly until
+  the user explicitly reinstates another workflow.
 
 ## Current Objective
 
