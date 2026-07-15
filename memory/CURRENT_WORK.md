@@ -44,9 +44,13 @@ and history live in their owning files.
 
 ## Next Actions
 
-- R40 is running at
-  `logs/r40_simple_spread_access_200k_20260715_225517_retry3` from commit
-  `4c633fd`. The existing dedicated monitor owns progress and terminal
+- R40 retry3 completed the full 200,000-step training exposure but its first
+  valid analysis returned `INVALID_R40_IMPLEMENTATION`: the recurrent trainer
+  omitted the registered replay/optimizer telemetry, so its M1/M2 values have
+  no scientific meaning. The scoped repair is commit `c69a25e`.
+- The unchanged R40 contract is running at
+  `logs/r40_simple_spread_access_200k_20260715_235500_retry4` from commit
+  `c69a25e`. The existing dedicated monitor owns progress and terminal
   notification; read the single result JSON only at terminal state.
 - On a valid PASS, register only native fixed-`k` HMASD on the exact same
   substrate. On a valid FAIL, retire `simple_spread` under this MAPPO contract.
