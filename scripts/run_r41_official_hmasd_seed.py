@@ -25,13 +25,25 @@ from typing import Any
 import numpy as np
 
 
-EXPERIMENT_ID = "EXP-20260716-r41a-hmasd-alice-bob-local-pilot"
 SOURCE_ARCHIVE = "ref/hmasd.tar"
 SOURCE_TREE_LAYOUT = "hmasd/"
-EXPECTED_OUTER_UPDATES = 937
-EXPECTED_ENV_STEPS = 1_499_200
 EXPECTED_OPTIMIZER_STEPS = 14_055
 EVAL_EPISODES = 100
+
+CONTRACTS: dict[str, dict[str, Any]] = {
+    "r41a": {
+        "experiment_id": "EXP-20260716-r41a-hmasd-alice-bob-local-pilot",
+        "rollout_envs": 16,
+        "env_steps": 1_499_200,
+        "outer_updates": 937,
+    },
+    "r41b": {
+        "experiment_id": "EXP-20260716-r41b-hmasd-alice-bob-full-source",
+        "rollout_envs": 32,
+        "env_steps": 2_998_400,
+        "outer_updates": 937,
+    },
+}
 
 
 class ExternalSummaryWriter:
@@ -467,15 +479,16 @@ def runtime_manifest(torch_module: Any) -> dict[str, Any]:
     }
 
 
-def official_argument_vector(seed: int) -> list[str]:
+def official_argument_vector(seed: int, contract_key: str = "r41a") -> list[str]:
+    contract = CONTRACTS[contract_key]
     return [
         "--game_version", "0",
         "--env_name", "alice_and_bob",
         "--algorithm_name", "hmasd",
         "--seed", str(seed),
-        "--num_env_steps", "1499200",
+        "--num_env_steps", str(contract["env_steps"]),
         "--episode_length", "100",
-        "--n_rollout_threads", "16",
+        "--n_rollout_threads", str(contract["rollout_envs"]),
         "--skill_type", "Discrete",
         "--skill_interval", "50",
         "--team_skill_dim", "2",
@@ -521,7 +534,9 @@ def run_seed(
     source_root: Path,
     output_root: Path,
     seed: int,
+    contract_key: str = "r41a",
 ) -> dict[str, Any]:
+    contract = CONTRACTS[contract_key]
     identity_before = source_identity(source_archive, source_root)
     if not identity_before["archive_present"]:
         raise RuntimeError(f"official HMASD source archive is missing: {source_archive}")
@@ -552,7 +567,7 @@ def run_seed(
     torch.backends.cudnn.deterministic = True
 
     parser = get_config()
-    all_args = parse_args(official_argument_vector(seed), parser)
+    all_args = parse_args(official_argument_vector(seed, contract_key), parser)
     if all_args.model_dir is not None:
         raise RuntimeError("R41 must start from fresh initialization")
 
@@ -622,9 +637,9 @@ def run_seed(
                 "state": "training",
                 "seed": seed,
                 "outer_updates": telemetry["outer_updates"],
-                "expected_outer_updates": EXPECTED_OUTER_UPDATES,
+                "expected_outer_updates": contract["outer_updates"],
                 "actual_env_steps": telemetry["actual_env_steps"],
-                "expected_env_steps": EXPECTED_ENV_STEPS,
+                "expected_env_steps": contract["env_steps"],
                 "optimizer_steps": {
                     name: stats["steps"] for name, stats in optimizer_stats.items()
                 },
@@ -675,7 +690,8 @@ def run_seed(
         runner.writter.close()
 
     result = {
-        "experiment_id": EXPERIMENT_ID,
+        "experiment_id": contract["experiment_id"],
+        "contract_key": contract_key,
         "seed": seed,
         "state": "completed",
         "source": {
@@ -687,7 +703,7 @@ def run_seed(
         },
         "runtime": runtime_manifest(torch),
         "official_arguments": selected_arguments(all_args),
-        "official_argument_vector": official_argument_vector(seed),
+        "official_argument_vector": official_argument_vector(seed, contract_key),
         "environment": env_contract,
         "algorithm_boundary": {
             "source_algorithm": "official_fixed_k_hmasd",
@@ -717,9 +733,9 @@ def run_seed(
             "state": "completed",
             "seed": seed,
             "outer_updates": telemetry["outer_updates"],
-            "expected_outer_updates": EXPECTED_OUTER_UPDATES,
+            "expected_outer_updates": contract["outer_updates"],
             "actual_env_steps": telemetry["actual_env_steps"],
-            "expected_env_steps": EXPECTED_ENV_STEPS,
+            "expected_env_steps": contract["env_steps"],
             "zero_win_rate": zero_eval["win_rate"],
             "final_win_rate": final_eval["win_rate"],
             "updated_unix": time.time(),
@@ -734,6 +750,7 @@ def main() -> None:
     parser.add_argument("--source-root", required=True)
     parser.add_argument("--output-root", required=True)
     parser.add_argument("--seed", required=True, type=int, choices=range(1, 6))
+    parser.add_argument("--contract", choices=tuple(CONTRACTS), default="r41a")
     args = parser.parse_args()
     output_root = Path(args.output_root).resolve()
     output_root.mkdir(parents=True, exist_ok=True)
@@ -753,6 +770,7 @@ def main() -> None:
             Path(args.source_root).resolve(),
             output_root,
             args.seed,
+            args.contract,
         )
     except Exception as exc:
         atomic_json(

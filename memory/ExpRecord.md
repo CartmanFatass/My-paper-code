@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | GPT-5.6 Pro original-source trace review | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Review the learning trace; this reduced-batch seed cannot retire the paper route or authorize R30 |
+| EXP-20260716-r41b-hmasd-alice-bob-full-source | launch-ready | baseline-L0 exact original-source access reproduction | local CUDA; tracked source and wrapper | registered result JSON, then GPT-5.6 Pro round 2/3 | seed 1; 32 envs; 937 outer updates; 2,998,400 transitions; exact zero/final evaluation | PASS may authorize only a same-checkpoint native KEEP/SET gate; valid no-access retires this positive anchor without algorithm rescue |
+| EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
 | EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
 | EXP-20260715-r39-native-hmasd-toy-credit | completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` | stage-0 native-HMASD fixed-N credit anchor | `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219`; result owner `result/r39_native_hmasd_toy_credit.json` | post-R39 positive-substrate review | M0 valid; 12,800 steps, 20 outer updates, 60 high optimizer updates, replay max `4.768e-7`, zero low/discriminator updates; match/slow/fast `0.455078/0.464844/0.445313` | Retire this native fixed-N toy credit route under the registered valid-fail branch; no rescue or expansion |
 | EXP-20260715-r39-toy-joint-credit-alignment | completed -- valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` | stage-0 sampled-credit alignment diagnostic | `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`; commit `c6d02e3` | native-HMASD toy design | 32 correct versus 352 incorrect rows; pooled raw block return `4.9010` versus `1.8170`; actor weight `+2.1207` versus `-0.1928`; replay zero | Reward timing and storage are correct. Stop patching standalone shared credit; preserve the small model and move the toy to native HMASD team/agent credit. |
@@ -111,6 +112,36 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260716-r41b-hmasd-alice-bob-full-source
+
+- Causal edge: exact original HMASD source exposure -> positive Alice--Bob
+  access -> a meaningful fixed-`k` checkpoint anchor for a later renewal-only
+  temporal comparison.
+- Boundary: freshly extract `ref/hmasd.tar`; preserve the original environment,
+  reward, observations, horizon, network, `k=50`, `n_Z=2`, `n_z=4`, optimizer
+  coefficients, PPO/discriminator epochs, evaluator, and fresh initialization.
+- Exposure: seed 1, local CUDA, 32 rollout environments, 100-step episodes, 937
+  outer updates, 2,998,400 environment transitions, and exactly 14,055 updates
+  for each of high policy, low actor, low critic, `q_D`, and `q_d`.
+- Comparator/evaluation: exact zero-step versus exact-final checkpoints on the
+  same 100 deterministic reset streams. Final win, key0, and key1 rates must
+  each be at least `0.50`; win entails completion of both key stages. The paired
+  final-minus-zero win bootstrap uses 10,000 repetitions, seed `61041`, and a
+  strict positive lower 95% bound.
+- M0: exact source/argument/exposure boundary, CUDA, finite nonzero gradients,
+  complete checkpoints, and stored/replayed high/low/global log-probability
+  error `<=1e-6`.
+- Branches: M0 failure -> repair only the concrete wrapper/evaluator defect;
+  M0 plus access gates -> `PASS_R41B_SOURCE_ACCESS`; valid access failure ->
+  `VALID_NO_ACCESS_R41B_FULL_SOURCE` and retire Alice--Bob as the current
+  positive anchor without algorithm rescue. Either valid branch is submitted
+  as automated GPT-5.6 Pro round 2/3 before further implementation.
+- Prohibited: reward/intrinsic/environment/model/optimizer/entropy/threshold
+  changes, favorable checkpoint selection, extra seeds, R29--R40 resurrection,
+  R30, variable `N`, open roster, or a new team latent before this result.
+- Status: `<run>/runner_status.txt`; result:
+  `<run>/result/r41b_hmasd_alice_bob_full_source.json`.
 
 ### EXP-20260716-r41a-hmasd-alice-bob-local-pilot
 

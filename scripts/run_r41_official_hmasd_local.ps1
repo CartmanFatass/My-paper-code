@@ -8,15 +8,38 @@ param(
         }
     ),
     [string]$RunRoot = '',
+    [ValidateSet('r41a', 'r41b')]
+    [string]$Contract = 'r41a',
     [switch]$DryRun
 )
 
 $ErrorActionPreference = 'Stop'
 $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $LogsRoot = [IO.Path]::GetFullPath((Join-Path $ProjectRoot 'logs'))
+$ContractSpec = if ($Contract -eq 'r41b') {
+    @{
+        Prefix = 'r41b_hmasd_full_source'
+        Experiment = 'EXP-20260716-r41b-hmasd-alice-bob-full-source'
+        ResultName = 'r41b_hmasd_alice_bob_full_source.json'
+        RolloutEnvs = 32
+        EnvSteps = 2998400
+    }
+} else {
+    @{
+        Prefix = 'r41a_hmasd_local_pilot'
+        Experiment = 'EXP-20260716-r41a-hmasd-alice-bob-local-pilot'
+        ResultName = 'r41a_hmasd_alice_bob_local_pilot.json'
+        RolloutEnvs = 16
+        EnvSteps = 1499200
+    }
+}
 if (-not $RunRoot) {
-    $stamp = Get-Date -Format 'yyyyMMdd_HHmmss'
-    $RunRoot = Join-Path $LogsRoot "r41a_hmasd_local_pilot_$stamp"
+    if ($DryRun) {
+        $RunRoot = Join-Path $LogsRoot "$($ContractSpec.Prefix)_DRY_RUN"
+    } else {
+        $stamp = Get-Date -Format 'yyyyMMdd_HHmmss'
+        $RunRoot = Join-Path $LogsRoot "$($ContractSpec.Prefix)_$stamp"
+    }
 }
 $RunRoot = [IO.Path]::GetFullPath($RunRoot)
 $logsPrefix = $LogsRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -27,7 +50,7 @@ if (-not $RunRoot.StartsWith($logsPrefix, [StringComparison]::OrdinalIgnoreCase)
 $SourceArchive = Join-Path $ProjectRoot 'ref\hmasd.tar'
 $SourceRoot = Join-Path $RunRoot 'source'
 $StatusPath = Join-Path $RunRoot 'runner_status.txt'
-$ResultPath = Join-Path $RunRoot 'result\r41a_hmasd_alice_bob_local_pilot.json'
+$ResultPath = Join-Path $RunRoot "result\$($ContractSpec.ResultName)"
 $Seeds = @(1)
 
 if (-not (Test-Path -LiteralPath $PythonPath -PathType Leaf)) {
@@ -60,17 +83,17 @@ function Write-Status {
         "updated=$((Get-Date).ToString('o'))"
         "state=$State"
         "phase=$Phase"
-        'experiment=EXP-20260716-r41a-hmasd-alice-bob-local-pilot'
+        "experiment=$($ContractSpec.Experiment)"
         "run_root=$RunRoot"
         'execution_target=local'
         'device=cuda'
         'source_archive=ref/hmasd.tar'
         'seeds=1'
         'parallel_seed_workers=1'
-        'rollout_envs_per_seed=16'
-        'concurrent_rollout_envs=16'
-        'declared_env_steps_per_seed=1499200'
-        'actual_env_steps_per_seed=1499200'
+        "rollout_envs_per_seed=$($ContractSpec.RolloutEnvs)"
+        "concurrent_rollout_envs=$($ContractSpec.RolloutEnvs)"
+        "declared_env_steps_per_seed=$($ContractSpec.EnvSteps)"
+        "actual_env_steps_per_seed=$($ContractSpec.EnvSteps)"
         'outer_updates_per_seed=937'
         'optimizer_steps_per_path_per_seed=14055'
         "active_seed=$ActiveSeed"
@@ -112,17 +135,19 @@ $seedCommands = foreach ($seed in $Seeds) {
         '--source-root', $SourceRoot
         '--output-root', $seedRoot
         '--seed', [string]$seed
+        '--contract', $Contract
     )
     Format-Command $PythonPath $arguments
 }
 $analysisArguments = @(
     'scripts/analyze_r41_official_hmasd_anchor.py'
     '--run-root', $RunRoot
+    '--contract', $Contract
 )
 $analysisCommand = Format-Command $PythonPath $analysisArguments
 
 if ($DryRun) {
-    Write-Output 'R41A local pilot topology: seed 1 x 16 rollout envs.'
+    Write-Output "$($Contract.ToUpperInvariant()) topology: seed 1 x $($ContractSpec.RolloutEnvs) rollout envs."
     Write-Output "Source: $SourceArchive"
     $seedCommands | ForEach-Object { Write-Output $_ }
     Write-Output $analysisCommand
@@ -161,6 +186,7 @@ try {
             '--source-root', $SourceRoot
             '--output-root', $seedRoot
             '--seed', [string]$seed
+            '--contract', $Contract
         )
         [IO.File]::WriteAllText(
             (Join-Path $seedRoot 'command.txt'),
@@ -190,7 +216,7 @@ try {
     }
     $result = Get-Content -Raw -LiteralPath $ResultPath | ConvertFrom-Json
     Write-Status -State 'completed' -Phase 'result'
-    Write-Output "R41A completed: status=$($result.status); result=$ResultPath"
+    Write-Output "$($Contract.ToUpperInvariant()) completed: status=$($result.status); result=$ResultPath"
 } catch {
     if (Test-Path -LiteralPath $RunRoot) {
         Write-Status -State 'failed' -Phase 'runner' -ErrorMessage $_.Exception.Message

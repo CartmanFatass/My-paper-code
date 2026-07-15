@@ -18,22 +18,21 @@ Updated: 2026-07-16
 
 ## Objective
 
-Disposition the valid no-access R41A original-HMASD pilot and select the single
-next fixed-`N` source-anchor edge through the authorized three-round sequential
-GPT-5.6 Pro consultation. R41A cannot retire the paper-task route by itself.
+Run the accepted R41B full-source access reproduction, then use its exact result
+for automated GPT-5.6 Pro round 2 of 3. Round 1 accepted R41A as a valid reduced-
+exposure no-access result and selected one 32-environment, 2,998,400-transition,
+seed-1 original-source reproduction as the only next edge.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Submit the tracked R41A result and learning-trace review as automated
-   GPT-5.6 Pro round 1.
-2. Archive and disposition the full raw response before changing code or
-   launching the next source-anchor experiment.
-3. Rounds 2 and 3
-   must each depend on the archived and dispositioned answer from the prior
-   round.
+1. Commit and push the archived round-1 response, accepted disposition, and
+   exact R41B contract.
+2. Run R41B locally on CUDA and read its single registered result JSON.
+3. Package that result as round 2; round 3 must depend on the archived and
+   dispositioned round-2 answer.
 
 ## Immediate Constraints
 
@@ -42,9 +41,9 @@ must not renew surviving agents' skills.
   original HMASD `q_D/q_d` source-algorithm terms.
 - Track the source archive in this repository and use the enclosing project Git
   commit as its version identity; do not add hashes or checksums.
-- Alice--Bob is a toy environment and runs locally. The pilot uses 16 envs and
-  one seed while preserving the original 937 outer updates and 14,055 optimizer
-  steps per path. A PASS does not replace the full original-budget reproduction.
+- Alice--Bob is a toy environment and runs locally. R41B uses 32 envs, seed 1,
+  the original 937 outer updates, 2,998,400 transitions, and 14,055 optimizer
+  steps per path. It is the full-source access gate, not an algorithm variant.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.

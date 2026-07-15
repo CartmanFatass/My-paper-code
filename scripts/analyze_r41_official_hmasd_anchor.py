@@ -1,4 +1,4 @@
-"""Apply the R41A local HMASD Alice--Bob access-pilot decision gate."""
+"""Apply the registered R41 original-source Alice--Bob access gate."""
 
 from __future__ import annotations
 
@@ -11,15 +11,35 @@ from typing import Any
 import numpy as np
 
 
-EXPERIMENT_ID = "EXP-20260716-r41a-hmasd-alice-bob-local-pilot"
 SOURCE_ARCHIVE = "ref/hmasd.tar"
 SOURCE_TREE_LAYOUT = "hmasd/"
 SEEDS = (1,)
-EXPECTED_OUTER_UPDATES = 937
-EXPECTED_ENV_STEPS = 1_499_200
 EXPECTED_OPTIMIZER_STEPS = 14_055
 BOOTSTRAP_REPETITIONS = 10_000
 BOOTSTRAP_SEED = 61_041
+
+CONTRACTS: dict[str, dict[str, Any]] = {
+    "r41a": {
+        "experiment_id": "EXP-20260716-r41a-hmasd-alice-bob-local-pilot",
+        "rollout_envs": 16,
+        "env_steps": 1_499_200,
+        "outer_updates": 937,
+        "output_name": "r41a_hmasd_alice_bob_local_pilot.json",
+        "invalid_status": "INVALID_R41A_HMASD_ALICE_BOB_LOCAL_PILOT",
+        "pass_status": "PASS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT",
+        "fail_status": "NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT",
+    },
+    "r41b": {
+        "experiment_id": "EXP-20260716-r41b-hmasd-alice-bob-full-source",
+        "rollout_envs": 32,
+        "env_steps": 2_998_400,
+        "outer_updates": 937,
+        "output_name": "r41b_hmasd_alice_bob_full_source.json",
+        "invalid_status": "INVALID_R41B_SOURCE_REPRODUCTION",
+        "pass_status": "PASS_R41B_SOURCE_ACCESS",
+        "fail_status": "VALID_NO_ACCESS_R41B_FULL_SOURCE",
+    },
+}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -36,11 +56,16 @@ def close_float(actual: Any, expected: float) -> bool:
         return False
 
 
-def validate_seed(result: dict[str, Any], seed: int) -> list[str]:
+def validate_seed(
+    result: dict[str, Any], seed: int, contract_key: str
+) -> list[str]:
+    contract = CONTRACTS[contract_key]
     reasons: list[str] = []
     prefix = f"seed {seed}: "
-    if result.get("experiment_id") != EXPERIMENT_ID:
+    if result.get("experiment_id") != contract["experiment_id"]:
         reasons.append(prefix + "experiment id mismatch")
+    if result.get("contract_key", "r41a") != contract_key:
+        reasons.append(prefix + "contract key mismatch")
     if result.get("seed") != seed or result.get("state") != "completed":
         reasons.append(prefix + "seed result is not completed for the expected seed")
 
@@ -89,9 +114,9 @@ def validate_seed(result: dict[str, Any], seed: int) -> list[str]:
         "algorithm_name": "hmasd",
         "experiment_name": "check",
         "seed": seed,
-        "num_env_steps": 1_499_200,
+        "num_env_steps": contract["env_steps"],
         "episode_length": 100,
-        "n_rollout_threads": 16,
+        "n_rollout_threads": contract["rollout_envs"],
         "n_eval_rollout_threads": 1,
         "n_training_threads": 16,
         "skill_type": "Discrete",
@@ -158,9 +183,9 @@ def validate_seed(result: dict[str, Any], seed: int) -> list[str]:
             reasons.append(prefix + f"algorithm boundary {field} mismatch")
 
     telemetry = result.get("telemetry", {})
-    if telemetry.get("outer_updates") != EXPECTED_OUTER_UPDATES:
+    if telemetry.get("outer_updates") != contract["outer_updates"]:
         reasons.append(prefix + "outer update count mismatch")
-    if telemetry.get("actual_env_steps") != EXPECTED_ENV_STEPS:
+    if telemetry.get("actual_env_steps") != contract["env_steps"]:
         reasons.append(prefix + "actual environment-step count mismatch")
     optimizer_stats = telemetry.get("optimizers", {})
     for name in (
@@ -213,7 +238,7 @@ def validate_seed(result: dict[str, Any], seed: int) -> list[str]:
     )
     for stage, expected_selection, expected_updates in (
         ("zero_step", "zero_step", 0),
-        ("exact_final", "exact_final", EXPECTED_OUTER_UPDATES),
+        ("exact_final", "exact_final", contract["outer_updates"]),
     ):
         checkpoint = checkpoints.get(stage, {})
         if checkpoint.get("selection") != expected_selection:
@@ -254,7 +279,9 @@ def validate_seed(result: dict[str, Any], seed: int) -> list[str]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", required=True)
+    parser.add_argument("--contract", choices=tuple(CONTRACTS), default="r41a")
     args = parser.parse_args()
+    contract = CONTRACTS[args.contract]
     run_root = Path(args.run_root).resolve()
     result_root = run_root / "result"
     result_root.mkdir(parents=True, exist_ok=True)
@@ -268,7 +295,7 @@ def main() -> None:
             continue
         result = load_json(path)
         seed_results[seed] = result
-        invalid_reasons.extend(validate_seed(result, seed))
+        invalid_reasons.extend(validate_seed(result, seed, args.contract))
 
     complete = len(seed_results) == 1
     if complete:
@@ -277,6 +304,8 @@ def main() -> None:
         final_eval = seed_result["evaluations"]["exact_final"]
         zero_rate = float(zero_eval["win_rate"])
         final_rate = float(final_eval["win_rate"])
+        final_key0_rate = float(final_eval["key0_rate"])
+        final_key1_rate = float(final_eval["key1_rate"])
         paired_delta = np.asarray(final_eval["episode_wins"], dtype=np.float64) - np.asarray(
             zero_eval["episode_wins"], dtype=np.float64
         )
@@ -295,37 +324,56 @@ def main() -> None:
     else:
         zero_rate = None
         final_rate = None
+        final_key0_rate = None
+        final_key1_rate = None
         delta_ci = {"mean": None, "lower_95": None, "upper_95": None}
 
     m0 = complete and not invalid_reasons
-    m1 = bool(m0 and final_rate is not None and final_rate >= 0.50)
+    m1 = bool(
+        m0
+        and final_rate is not None
+        and final_key0_rate is not None
+        and final_key1_rate is not None
+        and final_rate >= 0.50
+        and final_key0_rate >= 0.50
+        and final_key1_rate >= 0.50
+    )
     m2 = bool(
         m0
         and delta_ci["lower_95"] is not None
         and delta_ci["lower_95"] > 0.0
     )
     if not m0:
-        status = "INVALID_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
+        status = contract["invalid_status"]
         next_action = "repair only the concrete source, wrapper, counter, checkpoint, or evaluator defect and rerun unchanged"
     elif m1 and m2:
-        status = "PASS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
-        next_action = "use this access evidence to decide whether the full original-budget reproduction is still needed before the same-checkpoint R30 comparison"
+        status = contract["pass_status"]
+        next_action = (
+            "submit the exact source-access result for the next authorized Pro round"
+            if args.contract == "r41b"
+            else "use this access evidence to decide whether the full original-budget reproduction is still needed before the same-checkpoint R30 comparison"
+        )
     else:
-        status = "NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
-        next_action = "review the original-source learning trace; this single-seed half-step pilot cannot retire the paper-task route"
+        status = contract["fail_status"]
+        next_action = (
+            "submit the valid full-source no-access result for the next authorized Pro round; do not rescue by algorithm modification"
+            if args.contract == "r41b"
+            else "review the original-source learning trace; this single-seed half-step pilot cannot retire the paper-task route"
+        )
 
     result = {
-        "experiment_id": EXPERIMENT_ID,
+        "experiment_id": contract["experiment_id"],
+        "contract_key": args.contract,
         "status": status,
         "implementation_valid": m0,
         "source_archive": SOURCE_ARCHIVE,
         "contract": {
             "seeds": list(SEEDS),
-            "declared_env_steps_per_seed": 1_499_200,
-            "actual_env_steps_per_seed": EXPECTED_ENV_STEPS,
-            "outer_updates_per_seed": EXPECTED_OUTER_UPDATES,
+            "declared_env_steps_per_seed": contract["env_steps"],
+            "actual_env_steps_per_seed": contract["env_steps"],
+            "outer_updates_per_seed": contract["outer_updates"],
             "optimizer_steps_per_path_per_seed": EXPECTED_OPTIMIZER_STEPS,
-            "rollout_envs": 16,
+            "rollout_envs": contract["rollout_envs"],
             "eval_episodes_per_checkpoint": 100,
             "bootstrap_repetitions": BOOTSTRAP_REPETITIONS,
             "bootstrap_seed": BOOTSTRAP_SEED,
@@ -339,6 +387,9 @@ def main() -> None:
                 "passed": m1,
                 "seed1_final_win_rate": final_rate,
                 "final_win_rate_floor": 0.50,
+                "seed1_final_key0_rate": final_key0_rate,
+                "seed1_final_key1_rate": final_key1_rate,
+                "key_rate_floor": 0.50,
             },
             "M2": {
                 "passed": m2,
@@ -354,7 +405,7 @@ def main() -> None:
         },
         "next_action": next_action,
     }
-    output_path = result_root / "r41a_hmasd_alice_bob_local_pilot.json"
+    output_path = result_root / contract["output_name"]
     output_path.write_text(
         json.dumps(result, indent=2, sort_keys=True),
         encoding="utf-8",
