@@ -30,22 +30,21 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: localize the high-controller credit failure on the toy.
-  The direct-state fixed-primitive gate was a valid
-  `FAIL_R39_TOY_HIGH_CREDIT`: the actor and skill-head policy gradients were
-  nonzero, but both arms remained at match `0.421875`. Context encoding, low
-  capacity, intrinsic reward, and a disconnected actor gradient are no longer
+- Active objective: test high optimizer exposure on the toy. The focused
+  credit diagnostic found nonzero, comparable GAE and block-return gradients,
+  with positive skill-head cosine on all three updates in both arms
+  (`0.392-0.594`). Context encoding, low capacity, intrinsic reward, a
+  disconnected actor gradient, and conflicting GAE direction are no longer
   sufficient explanations. R39A is preserved and deferred; native HMASD R39B
   remains blocked.
 
 ## Next Actions
 
-- Immediate next action: on one small direct-state toy collection, compare the
-  actor-only high gradient produced by SMDP-GAE with the gradient produced by
-  centered immediate block returns. Use their norms and cosine to distinguish
-  a GAE/critic-credit defect from insufficient high optimizer exposure. This
-  diagnostic does not update from the block-return gradient and does not
-  enlarge either model.
+- Immediate next action: add an explicit high PPO epoch count, defaulting to
+  the current value `1`, and run the direct-state fixed-primitive toy with
+  `high_ppo_epochs=3`. Reuse each collected high batch three times while
+  preserving stored old likelihoods, advantages, clocks, and the zero-parameter
+  low carrier. Do not enlarge the model or change the reward.
 
 ## Immediate Constraints
 
