@@ -87,6 +87,30 @@ except ImportError as e:
     SB3_INTEGRATION_AVAILABLE = False
 
 
+class NativeToyFixedPrimitiveExecutor(nn.Module):
+    def __init__(self, n_skills, action_dim, action_space_type):
+        super().__init__()
+        if int(n_skills) != 4 or int(action_dim) != 2 or action_space_type != 'continuous':
+            raise ValueError('native toy fixed primitives require four skills and 2D continuous actions')
+        self.register_buffer(
+            'action_table',
+            torch.tensor(
+                [[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0], [0.0, -1.0]],
+                dtype=torch.float32,
+            ),
+        )
+
+    def forward(self, skills):
+        if skills.ndim != 2 or skills.shape[-1] != 2:
+            raise ValueError(f'native toy skills must have shape [num_envs, 2], got {tuple(skills.shape)}')
+        skills = skills.to(dtype=torch.long)
+        if torch.any((skills < 0) | (skills >= 4)):
+            raise ValueError('native toy skill index is outside [0, 3]')
+        actions = self.action_table[skills]
+        zeros = torch.zeros(skills.shape, dtype=torch.float32, device=skills.device)
+        return actions, zeros, zeros
+
+
 class EnvironmentStateManager:
     """环境状态管理器，防止内存泄漏和提供线程安全访问"""
     def __init__(self, max_envs=64):
@@ -260,6 +284,10 @@ class HMASDAgent:
         main_logger.info(f"使用设备: {self.device}")
         self.uses_learned_value_function = True
         self.collects_high_level_samples = not getattr(config, 'disable_high_level_training', False)
+        self.r39_native_hmasd_toy = bool(getattr(config, 'r39_native_hmasd_toy', False))
+        self.r39_native_toy_fixed_primitives = bool(
+            getattr(config, 'r39_native_toy_fixed_primitives', False)
+        )
         
         # 确保环境维度已设置
         assert config.state_dim is not None, "必须先设置state_dim"
@@ -342,6 +370,27 @@ class HMASDAgent:
         self.use_discrete_skill_lifetimes = bool(
             self.use_process_exploration and getattr(config, 'use_discrete_skill_lifetimes', False)
         )
+        if self.r39_native_toy_fixed_primitives:
+            if (
+                not self.r39_native_hmasd_toy
+                or self.use_ha_ctse
+                or getattr(config, 'scenario', '') != 'two_timescale_role_free_actions'
+                or int(getattr(config, 'n_agents', 0)) != 2
+                or int(getattr(config, 'n_Z', 0)) != 4
+                or int(getattr(config, 'n_z', 0)) != 4
+                or int(getattr(config, 'action_dim', 0)) != 2
+                or getattr(config, 'action_space_type', 'continuous') != 'continuous'
+                or not bool(getattr(config, 'disable_discriminator_training', False))
+                or not bool(getattr(config, 'disable_discriminator_rewards', False))
+                or float(getattr(config, 'lambda_D', 0.0)) != 0.0
+                or float(getattr(config, 'lambda_d', 0.0)) != 0.0
+                or bool(getattr(config, 'use_process_exploration', False))
+                or bool(getattr(config, 'use_process_reward_for_discoverer', False))
+                or bool(getattr(config, 'use_reward_annealing', False))
+            ):
+                raise ValueError('native toy fixed primitives require the isolated fixed-N external-reward profile')
+            if getattr(config, 'r39_native_toy_fixed_skill_action_schema', '') != 'axis4_xy_v1':
+                raise ValueError('unsupported native toy fixed primitive schema')
         self.use_discriminator_path = not (
             bool(getattr(config, 'disable_discriminator_training', False))
             and bool(getattr(config, 'disable_discriminator_rewards', False))
@@ -407,6 +456,21 @@ class HMASDAgent:
         )
         
         self.skill_discoverer = SkillDiscoverer(config, logger=main_logger, device=self.device).to(self.device) # Pass logger
+        self.native_toy_fixed_primitive_executor = (
+            NativeToyFixedPrimitiveExecutor(
+                config.n_z,
+                config.action_dim,
+                getattr(config, 'action_space_type', 'continuous'),
+            ).to(self.device)
+            if self.r39_native_toy_fixed_primitives
+            else None
+        )
+        if self.r39_native_toy_fixed_primitives:
+            for parameter in self.skill_discoverer.parameters():
+                parameter.requires_grad_(False)
+            if self.low_level_compact_extractor is not None:
+                for parameter in self.low_level_compact_extractor.parameters():
+                    parameter.requires_grad_(False)
         if self.use_discriminator_path:
             self.team_discriminator = (
                 CompactTeamDiscriminator(config).to(self.device)
@@ -680,6 +744,12 @@ class HMASDAgent:
             'global_agent_max_abs_error': 0.0,
             'global_max_abs_error': 0.0,
             'global_sample_count': 0,
+        }
+        self.native_toy_optimizer_updates = {
+            'high': 0,
+            'low_actor': 0,
+            'low_critic': 0,
+            'discriminator': 0,
         }
         
         # 用于减少高层缓冲区警告日志的计数器
@@ -2010,6 +2080,33 @@ class HMASDAgent:
         input_start = time.perf_counter() if profile_enabled else 0.0
         num_envs, n_agents, _ = observations_batch.shape
         dones_mask = np.asarray(dones_batch, dtype=np.bool_).reshape(num_envs)
+
+        if self.r39_native_toy_fixed_primitives:
+            self._sync_legacy_hidden_to_arrays(num_envs)
+            self.actor_hidden_np[:num_envs].fill(0.0)
+            self.critic_hidden_np[:num_envs].fill(0.0)
+            self.prev_actor_hidden_np[:num_envs].fill(0.0)
+            self.prev_critic_hidden_np[:num_envs].fill(0.0)
+            self._hidden_state_array_valid[:num_envs] = True
+            skills_tensor = torch.as_tensor(
+                agent_skills_batch,
+                dtype=torch.long,
+                device=self.device,
+            )
+            if skills_tensor.shape != (num_envs, n_agents):
+                raise ValueError(
+                    f'native toy skills must have shape {(num_envs, n_agents)}, got {tuple(skills_tensor.shape)}'
+                )
+            with torch.no_grad():
+                actions_tensor, logprobs_tensor, values_tensor = self.native_toy_fixed_primitive_executor(
+                    skills_tensor
+                )
+            self._step_profile['calls'] += 1
+            return (
+                actions_tensor.detach().cpu().numpy(),
+                logprobs_tensor.detach().cpu().numpy(),
+                values_tensor.detach().cpu().numpy(),
+            )
         
         # === 1. 管理 Actor 和 Critic 的隐藏状态 ===
         hidden_extract_start = time.perf_counter() if profile_enabled else 0.0
@@ -4751,6 +4848,9 @@ class HMASDAgent:
                 self._sync_cuda_for_profile()
                 self._add_update_profile('coord_forward_backward', time.perf_counter() - batch_profile_start)
         
+        if self.r39_native_hmasd_toy:
+            self.native_toy_optimizer_updates['high'] += int(update_count)
+
         # 计算平均损失
         avg_policy_loss = (total_policy_loss / update_count).item() if update_count > 0 else 0.0
         avg_value_loss = (total_value_loss / update_count).item() if update_count > 0 else 0.0
@@ -4809,6 +4909,8 @@ class HMASDAgent:
         """
         使用重构后的RolloutBuffer更新低层技能发现器网络。
         """
+        if self.r39_native_toy_fixed_primitives:
+            return 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
         main_logger.info("开始使用重构后的RolloutBuffer更新Discoverer...")
         
         # 1. 计算GAE
@@ -5065,6 +5167,9 @@ class HMASDAgent:
             else:
                 self.discoverer_actor_optimizer.step()
                 self.discoverer_critic_optimizer.step()
+            if self.r39_native_hmasd_toy:
+                self.native_toy_optimizer_updates['low_actor'] += 1
+                self.native_toy_optimizer_updates['low_critic'] += 1
             if self.enable_runtime_profiling:
                 self._sync_cuda_for_profile()
                 self._add_update_profile('discoverer_optimizer', time.perf_counter() - profile_start)
@@ -5189,6 +5294,8 @@ class HMASDAgent:
                     self.config.max_grad_norm
                 )
                 self.discriminator_optimizer.step()
+                if self.r39_native_hmasd_toy:
+                    self.native_toy_optimizer_updates['discriminator'] += 1
 
         if self.enable_runtime_profiling:
             self._add_update_profile('disc_train', time.perf_counter() - profile_start)
@@ -5339,6 +5446,8 @@ class HMASDAgent:
                     team_disc_loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.team_discriminator.parameters(), self.config.max_grad_norm)
                     self.discriminator_optimizer.step()
+                    if self.r39_native_hmasd_toy:
+                        self.native_toy_optimizer_updates['discriminator'] += 1
                     
                     team_loss_accumulated += team_disc_loss.item()
                     team_update_count += 1
@@ -5374,6 +5483,8 @@ class HMASDAgent:
                     agent_disc_loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.individual_discriminator.parameters(), self.config.max_grad_norm)
                     self.discriminator_optimizer.step()
+                    if self.r39_native_hmasd_toy:
+                        self.native_toy_optimizer_updates['discriminator'] += 1
                     
                     ind_loss_accumulated += agent_disc_loss.item()
                     ind_update_count += 1
@@ -5877,6 +5988,7 @@ class HMASDAgent:
                 'last_process_metrics': dict(getattr(self, 'last_process_metrics', {})),
                 'last_action_entropy': float(self.last_action_entropy),
             },
+            'training_progress': dict(getattr(self, 'training_progress', {})),
             'scenario7_safety_dual_state': dict(
                 getattr(self, 'scenario7_safety_dual_state', {})
             ),
@@ -5985,6 +6097,20 @@ class HMASDAgent:
         torch.serialization.add_safe_globals([Config, numpy.core.multiarray._reconstruct])
         
         checkpoint = torch.load(path, map_location=self.device, weights_only=False)
+        saved_training_progress = checkpoint.get('training_progress', {})
+        if isinstance(saved_training_progress, dict):
+            self.training_progress = dict(saved_training_progress)
+            saved_optimizer_updates = saved_training_progress.get(
+                'native_toy_optimizer_updates', {}
+            )
+            if isinstance(saved_optimizer_updates, dict):
+                self.native_toy_optimizer_updates.update(
+                    {
+                        key: int(value)
+                        for key, value in saved_optimizer_updates.items()
+                        if key in self.native_toy_optimizer_updates
+                    }
+                )
 
         is_scenario7 = (
             getattr(self.config, 'scenario', None) == 7

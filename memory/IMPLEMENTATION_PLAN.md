@@ -47,8 +47,8 @@ zero low parameters or optimizer steps, and the same 32-wide high stack. This
 is only a high-controller positive control; it cannot establish skill discovery.
 
 GPT-5.6 Pro subsequently accepted the controller's sequencing disposition. The
-active boundary is now a native-HMASD fixed-`N` positive credit anchor on the
-same `two_timescale_role_free_actions` substrate. It freezes two agents,
+native-HMASD fixed-`N` positive credit anchor on the same
+`two_timescale_role_free_actions` substrate froze two agents,
 `n_Z=n_z=4`, `k0=5`, episode/rollout 40, high hidden 32, 16 environments, 12,800
 steps, 20 outer updates, three high PPO epochs, seed 39041, 32 stochastic final
 evaluations, zero trainable low parameters, and zero intrinsic reward. Sampling
@@ -56,11 +56,13 @@ and replay use the stored `Z,z_{<i}` chain and native team/agent values,
 advantages, and ratios. The result owner is one
 `result/r39_native_hmasd_toy_credit.json`.
 
-PASS requires implementation validity plus match `>=0.70`, slow match `>=0.65`,
-and fast match `>=0.65`, and authorizes only a same-toy exogenous active-mask
-set-roster edge. A valid access failure retires open-roster work on this toy
-substrate and selects one fixed-`N` joint-credit failure review. Only a concrete
-implementation invalidity may repeat the unchanged gate.
+The gate completed as valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`: M0 passed
+with 20/20 outer updates, 60 high optimizer updates, replay error
+`4.76837158203125e-7`, and zero low/discriminator updates, while
+match/slow/fast were `0.455078125/0.46484375/0.4453125`. Retire this native
+GAE/PPO credit route without rescue. The active boundary is now one fixed-`N`
+joint-credit failure review that must select a structurally different causal
+edge before any open-roster implementation or new compute.
 
 The preserved R39A package boundary is:
 

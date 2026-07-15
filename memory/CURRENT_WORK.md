@@ -22,19 +22,19 @@ and history live in their owning files.
 - **Local overnight authorization:** the user permits a longer local CUDA run
   overnight when the next causal gate is registered and requires it. R35 used
   that authorization and has reached its registered terminal result.
-- **Default review handoff:** manual. Once a tracked question is committed and
-  pushed, Codex gives the user one directly copyable prompt and waits. The user
-  submits it in the existing `HMASD Algorithm Consultation` Pro conversation
-  and returns the raw response; Codex then archives and dispositions it. Browser
-  automation requires explicit authorization for that specific round.
+- **Default review handoff:** automatic. Once an exact tracked question is
+  committed and pushed, Codex reuses the existing `HMASD Algorithm Consultation`
+  Pro conversation, archives the raw response, dispositions it, and continues
+  only the accepted branch. The handoff remains idle when no tracked question
+  exists.
 
 ## Current Objective
 
-- Active objective: establish the fixed-`N` native-HMASD positive credit anchor
-  on the existing `two_timescale_role_free_actions` toy. GPT-5.6 Pro accepted
-  the sequencing disposition: model capacity and reward timing are closed, but
-  sampled factor-level learning is not. The test must preserve the native
-  stored-prefix coordinator likelihood and native team/agent advantages.
+- Active objective: close the fixed-`N` joint-credit failure review selected by
+  valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`. M0 passed, but
+  match/slow/fast were `0.455078/0.464844/0.445313`, below all registered
+  thresholds. The completed native GAE/PPO credit route is retired rather than
+  rescued.
 - The variable-team review is accepted as a future, separate open-roster axis:
   membership transitions must not renew surviving agents' skills. It does not
   replace the fixed-`N` native-toy credit anchor. See the disposition pointer
@@ -42,12 +42,9 @@ and history live in their owning files.
 
 ## Next Actions
 
-- Immediate next action: implement and review one two-agent native-HMASD toy
-  entry with fixed axis primitives, `n_Z=n_z=4`, high hidden 32, `k0=5`, and no
-  low/intrinsic learning. Register the exact 12,800-step, 20-update, three-high-
-  epoch, seed-39041 contract before its single local CUDA run. Toy labels remain
-  evaluation-only. PASS alone authorizes the same-toy exogenous active-mask
-  edge; valid FAIL retires open-roster work on this substrate.
+- Immediate next action: use the valid result and existing fixed-`N` evidence to
+  select one structurally different joint-credit causal edge. Do not launch new
+  compute until that edge and its minimum abandonment gate are registered.
 
 ## Immediate Constraints
 
@@ -60,9 +57,9 @@ and history live in their owning files.
   team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS before
   the post-R33 failure review selects and registers one new causal edge.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
-- The first R39 toy run is invalid implementation evidence, not a capacity or
-  access result. Do not replace its learned low policy or enlarge the model
-  before the unchanged repaired rerun.
+- The native fixed-`N` toy anchor is a valid scientific failure. Do not rescue it
+  by changing thresholds, budget, seed, optimizer, reward, labels, roster,
+  checkpoint semantics, low policy, model size, or evaluation protocol.
 - Keep R29 diagnostic-only. Its online `real_reward` path and variants that
   alter only prior, window, aggregation, coefficient, normalization, or clip
   are retired.

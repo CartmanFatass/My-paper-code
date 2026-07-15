@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r39-native-hmasd-toy-credit | completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` | stage-0 native-HMASD fixed-N credit anchor | `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219`; result owner `result/r39_native_hmasd_toy_credit.json` | Step 4 reviewer approval | M0 valid; 12,800 steps, 20 outer updates, 60 high optimizer updates, replay max `4.768e-7`, zero low/discriminator updates; match/slow/fast `0.455078/0.464844/0.445313` | Retire this native fixed-N toy credit route under the registered valid-fail branch; no rescue or expansion |
 | EXP-20260715-r39-toy-joint-credit-alignment | completed -- valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` | stage-0 sampled-credit alignment diagnostic | `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`; commit `c6d02e3` | native-HMASD toy design | 32 correct versus 352 incorrect rows; pooled raw block return `4.9010` versus `1.8170`; actor weight `+2.1207` versus `-0.1928`; replay zero | Reward timing and storage are correct. Stop patching standalone shared credit; preserve the small model and move the toy to native HMASD team/agent credit. |
 | EXP-20260715-r39-toy-joint-factorization | completed -- valid `PASS_R39_JOINT_FACTORIZATION_CAPACITY` | stage-0 exact joint-policy capacity diagnostic | `logs/r39_toy_joint_factorization_20260715_193034`; commit `fd29e3e` | sampled joint-credit alignment | minimum correct unordered-pair mass `0.999487`, mean `0.999670`, probability-sum error `3.58e-7`, high policy 2,512 parameters | The small policy is expressive and exactly optimizable on the eight registered contexts. Do not enlarge it; localize sampled credit. |
 | EXP-20260715-r39-toy-block-credit | completed -- valid `FAIL_R39_TOY_BLOCK_CREDIT` | stage-0 high actor-credit positive control | `logs/r39_toy_block_credit_12k8_20260715_192020`; commit `22a3162` | exact joint-roster factorization diagnostic | M0 PASS; SMDP-GAE and block-return both scored match/slow/fast `0.46875`, gain `0`, with exact replay, high3, and zero intrinsic | Retire actor-advantage source as the immediate cause. Test whether the tiny autoregressive joint policy can learn the four contextual roster mappings under exact supervision. |
@@ -108,6 +109,58 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260715-r39-native-hmasd-toy-credit
+
+- Causal edge: native HMASD's stored categorical team/agent chain can learn the
+  four contextual role-free rosters when fixed primitives expose only the
+  sampled individual skills to the environment.
+- Upstream authorization: GPT-5.6 Pro accepted the fixed-N native toy route;
+  use `two_timescale_role_free_actions` only, with two agents, identical
+  constant local observations, centralized six-value slow/fast target state
+  and clocks, and swap-invariant dense external reward.
+- Profile: `n_Z=4`, `n_z=4`, hidden/embedding 32, coordinator dropout 0,
+  `k0=5` full refresh, episode/rollout 40, three high PPO epochs, seed 39041,
+  CUDA, sharded 4 workers x 4 environments, exactly 16 environments and
+  12,800 environment steps (20 outer updates), 32 final episodes.
+- Probability: native autoregressive factorization
+  `pi_H(Z|x) pi_1(z1|x,Z) pi_2(z2|x,Z,z1)`; categorical sampling remains
+  stochastic, and replay teacher-forces stored `Z,z1,z2` in canonical order.
+- Credit: preserve native team/agent GAE, returns, values, ratios, and unified
+  advantage normalization without formula changes. Old log probabilities are
+  detached only at the PPO ratio boundary; replay team/agent max absolute
+  error must be `<=1e-6`.
+- Clock and execution: high action occurs only at every `k0=5` full-refresh
+  block; no `KEEP`/`SET` or target-triggered checks. Fixed `z_i` primitives
+  execute the four 2-D axes with zero low parameters, low credit, low updates,
+  discriminator updates, intrinsic reward, or shaping.
+- Metrics: evaluator-only mean `match`, `slow`, and `fast`; labels and match
+  values never enter observations, rewards, advantages, sampling, gradients,
+  or checkpoint selection. Thresholds are match `>=0.70`, slow `>=0.65`, and
+  fast `>=0.65`.
+- Checkpoint: fresh neutral initialization, no resume or best-checkpoint
+  selection, and exact final checkpoint only. Result source is
+  `result/r39_native_hmasd_toy_credit.json`.
+- M0: exact contract, 20 successful outer updates, 60 high optimizer updates,
+  replay error `<=1e-6`, finite metrics with zero numerical repairs, zero low
+  trainable parameters and low/discriminator optimizer updates, and 32
+  stochastic final episodes.
+- Branches: M0 miss -> `INVALID_R39_NATIVE_TOY_CREDIT`; M0 pass with all three
+  thresholds -> `PASS_R39_NATIVE_TOY_CREDIT_ANCHOR`; otherwise ->
+  `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`. No `MIXED` or `UNDERPOWERED`.
+- Result: valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` at
+  `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219/result/r39_native_hmasd_toy_credit.json`.
+  M0 passed with 12,800 steps, 20 successful outer updates, 60 high optimizer
+  updates, replay max `4.76837158203125e-7`, zero low/discriminator updates,
+  zero numerical repairs, and 32 stochastic episodes. Mean match/slow/fast were
+  `0.455078125/0.46484375/0.4453125`, below all three thresholds.
+- Status: completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`.
+  Retire this fixed-N native-HMASD toy credit route; do not rescue it with
+  threshold, budget, seed, optimizer, reward, label, roster, or checkpoint
+  changes.
+- Prohibited: open-roster/variable-N, `KEEP`/`SET`, R30/standalone policy,
+  S7/UAV, new orchestration, checkpoint loading, intrinsic reward, environment
+  shaping, label leakage, rerun, sweep, or budget expansion.
 
 ### EXP-20260715-r39-toy-native-categorical
 

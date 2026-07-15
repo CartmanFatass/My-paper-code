@@ -49,6 +49,10 @@ def normalize_scenario(scenario):
         "energy": "energy",
         "energy_aware": "energy",
         "energy-aware": "energy",
+        "two_timescale_role_free_actions": "two_timescale_role_free_actions",
+        "two-timescale-role-free-actions": "two_timescale_role_free_actions",
+        "r39_native_hmasd_toy": "two_timescale_role_free_actions",
+        "r39-native-hmasd-toy": "two_timescale_role_free_actions",
     }
     if scenario_key not in aliases:
         raise ValueError(
@@ -266,8 +270,113 @@ def validate_scenario7_configuration(config, args, env=None):
         raise ValueError("Scenario 7 configuration validation failed:\n- " + "\n- ".join(errors))
 
 
+def validate_r39_native_toy_contract(config, args):
+    """Fail closed on the exact fixed-N native-HMASD toy evidence contract."""
+    if not bool(getattr(args, "r39a_strict_contract", False)):
+        return
+
+    errors = []
+    expected_args = {
+        "algorithm": "hmasd_original",
+        "seed": 39041,
+        "config": "config_r39_native_hmasd_toy",
+        "scenario": "two_timescale_role_free_actions",
+        "collector_backend": "sharded",
+        "num_workers": 4,
+        "envs_per_worker": 4,
+        "num_envs": 16,
+        "rollout_length": 40,
+        "total_timesteps": 12_800,
+        "eval_episodes": 32,
+        "device": "cuda",
+        "disable_eval": False,
+        "resume_from": "",
+        "use_opt": False,
+        "use_reward_annealing": False,
+        "use_lr_decay": False,
+        "update_amp": False,
+        "metrics_mode": "light",
+        "training_metrics_level": "light",
+    }
+    for name, wanted in expected_args.items():
+        actual = getattr(args, name, None)
+        if actual != wanted:
+            errors.append(f"argument {name}={actual!r}, expected {wanted!r}")
+
+    expected = {
+        "algorithm": "hmasd_original",
+        "scenario": "two_timescale_role_free_actions",
+        "scenario_label": "r39_native_hmasd_toy",
+        "n_agents": 2,
+        "n_Z": 4,
+        "n_z": 4,
+        "state_dim": 6,
+        "obs_dim": 4,
+        "action_dim": 2,
+        "action_space_type": "continuous",
+        "episode_length": 40,
+        "max_steps": 40,
+        "k": 5,
+        "r39_toy_k0": 5,
+        "n_encoder_layers": 1,
+        "n_decoder_layers": 1,
+        "hidden_size": 32,
+        "embedding_dim": 32,
+        "coordinator_dropout": 0.0,
+        "ppo_epochs": 3,
+        "coordinator_batch_size": 128,
+        "num_envs": 16,
+        "rollout_length": 40,
+        "total_timesteps": 12_800,
+        "eval_episodes": 32,
+        "eval_rollout_threads": 16,
+        "eval_interval": 12_800,
+        "strict_hmasd_alignment": True,
+        "use_valuenorm": True,
+        "use_obsnorm": False,
+        "use_statenorm": False,
+        "use_opt": False,
+        "use_opt_coordinator": False,
+        "use_team_bridge": False,
+        "use_horizon_window": False,
+        "use_process_exploration": False,
+        "use_process_reward_for_discoverer": False,
+        "use_discrete_skill_lifetimes": False,
+        "disable_discriminator_training": True,
+        "disable_discriminator_rewards": True,
+        "lambda_D": 0.0,
+        "lambda_d": 0.0,
+        "use_team_code_discriminator": False,
+        "use_individual_skill_discriminator": False,
+        "r39_native_hmasd_toy": True,
+        "r39_native_toy_full_refresh": True,
+        "r39_native_toy_fixed_primitives": True,
+        "r39_native_toy_fixed_skill_action_schema": "axis4_xy_v1",
+    }
+    for name, wanted in expected.items():
+        actual = getattr(config, name, None)
+        if actual != wanted:
+            errors.append(f"{name}={actual!r}, expected {wanted!r}")
+
+    if bool(getattr(config, "use_entropy_annealing", False)):
+        errors.append("use_entropy_annealing must be false")
+    if bool(getattr(config, "use_reward_annealing", False)):
+        errors.append("use_reward_annealing must be false")
+    if bool(getattr(config, "use_lr_decay", False)):
+        errors.append("use_lr_decay must be false")
+    if bool(getattr(config, "scenario7_comparison_gate_enabled", True)):
+        errors.append("scenario7_comparison_gate_enabled must be false")
+
+    if errors:
+        raise ValueError(
+            "R39 native toy contract validation failed:\n- " + "\n- ".join(errors)
+        )
+
+
 def validate_r39a_contract(config, args):
     """Fail closed on the registered current-interface fixed-k anchor."""
+    if bool(getattr(config, "r39_native_hmasd_toy", False)):
+        return validate_r39_native_toy_contract(config, args)
     if not bool(getattr(args, "r39a_strict_contract", False)):
         return
 
@@ -813,6 +922,219 @@ def convert_numpy_types(obj):
         return obj
 
 
+def write_r39_native_toy_result(
+    log_dir,
+    config,
+    args,
+    total_steps,
+    attempted_updates,
+    successful_updates,
+    agent,
+    final_model_path,
+    evaluation_diagnostics,
+    final_stability_stats,
+):
+    """Write the single native-toy result and apply its registered branches."""
+    expected_outer_updates = int(
+        config.total_timesteps // (config.num_envs * config.rollout_length)
+    )
+    expected_high_optimizer_updates = expected_outer_updates * int(config.ppo_epochs)
+    optimizer_updates = getattr(agent, "native_toy_optimizer_updates", {})
+    high_optimizer_updates = int(optimizer_updates.get("high", 0))
+    low_optimizer_updates = int(optimizer_updates.get("low_actor", 0))
+    low_critic_updates = int(optimizer_updates.get("low_critic", 0))
+    discriminator_optimizer_updates = int(optimizer_updates.get("discriminator", 0))
+    low_trainable_parameter_count = sum(
+        int(parameter.numel())
+        for module in (
+            getattr(agent, "skill_discoverer", None),
+            getattr(agent, "low_level_compact_extractor", None),
+        )
+        if module is not None
+        for parameter in module.parameters()
+        if parameter.requires_grad
+    )
+    replay_metrics = getattr(agent, "high_replay_likelihood_metrics", {})
+    replay_team_max_abs_error = float(
+        replay_metrics.get("global_team_max_abs_error", float("inf"))
+    )
+    replay_agent_max_abs_error = float(
+        replay_metrics.get("global_agent_max_abs_error", float("inf"))
+    )
+    replay_max_abs_error = float(
+        replay_metrics.get("global_max_abs_error", float("inf"))
+    )
+    replay_sample_count = int(replay_metrics.get("global_sample_count", 0))
+    numeric_repairs = int(final_stability_stats.get("total_repairs", 0))
+    diagnostics = evaluation_diagnostics if isinstance(evaluation_diagnostics, dict) else {}
+    match = diagnostics.get("r39_toy_match_score")
+    slow = diagnostics.get("r39_toy_slow_match")
+    fast = diagnostics.get("r39_toy_fast_match")
+    checkpoint_exists = bool(os.path.exists(final_model_path))
+    checkpoint_progress = getattr(agent, "training_progress", {})
+
+    m0_failures = []
+    if int(total_steps) != int(config.total_timesteps):
+        m0_failures.append("total_steps")
+    if int(attempted_updates) != expected_outer_updates:
+        m0_failures.append("outer_updates")
+    if int(successful_updates) != expected_outer_updates:
+        m0_failures.append("successful_outer_updates")
+    if high_optimizer_updates != expected_high_optimizer_updates:
+        m0_failures.append("high_optimizer_updates")
+    if low_trainable_parameter_count != 0:
+        m0_failures.append("low_trainable_parameter_count")
+    if low_optimizer_updates != 0:
+        m0_failures.append("low_optimizer_updates")
+    if low_critic_updates != 0:
+        m0_failures.append("low_critic_updates")
+    if discriminator_optimizer_updates != 0:
+        m0_failures.append("discriminator_optimizer_updates")
+    if replay_sample_count <= 0:
+        m0_failures.append("high_replay_sample_count")
+    if (
+        not np.isfinite(replay_team_max_abs_error)
+        or not np.isfinite(replay_agent_max_abs_error)
+        or not np.isfinite(replay_max_abs_error)
+        or replay_team_max_abs_error > 1e-6
+        or replay_agent_max_abs_error > 1e-6
+        or replay_max_abs_error > 1e-6
+    ):
+        m0_failures.append("replay_likelihood")
+    if numeric_repairs != 0:
+        m0_failures.append("numeric_repairs")
+    if not diagnostics or int(diagnostics.get("episode_count", 0)) != int(config.eval_episodes):
+        m0_failures.append("final_eval_episode_count")
+    expected_eval_metric_steps = int(config.eval_episodes) * int(config.episode_length)
+    if int(diagnostics.get("r39_toy_eval_metric_step_count", 0)) != expected_eval_metric_steps:
+        m0_failures.append("final_eval_metric_steps")
+    if int(diagnostics.get("numerical_failure_count", 0)) != 0:
+        m0_failures.append("evaluation_numerical_failures")
+    if diagnostics.get("r39_toy_eval_stochastic") is not True:
+        m0_failures.append("stochastic_final_eval")
+    for metric_name, metric_value in (
+        ("match_metric", match),
+        ("slow_metric", slow),
+        ("fast_metric", fast),
+    ):
+        if metric_value is None or not np.isfinite(float(metric_value)):
+            m0_failures.append(metric_name)
+    if not checkpoint_exists:
+        m0_failures.append("exact_final_checkpoint")
+    if getattr(args, "resume_from", ""):
+        m0_failures.append("fresh_initialization")
+    if not isinstance(checkpoint_progress, dict):
+        m0_failures.append("checkpoint_progress")
+    else:
+        if int(checkpoint_progress.get("total_env_steps", -1)) != int(total_steps):
+            m0_failures.append("checkpoint_total_env_steps")
+        if int(checkpoint_progress.get("outer_updates", -1)) != int(attempted_updates):
+            m0_failures.append("checkpoint_outer_updates")
+        if int(checkpoint_progress.get("successful_outer_updates", -1)) != int(successful_updates):
+            m0_failures.append("checkpoint_successful_outer_updates")
+        if checkpoint_progress.get("checkpoint_role") != "exact_final":
+            m0_failures.append("checkpoint_role")
+
+    m0_valid = not m0_failures
+    thresholds = {"match": 0.70, "slow": 0.65, "fast": 0.65}
+    if not m0_valid:
+        status = "INVALID_R39_NATIVE_TOY_CREDIT"
+    elif (
+        float(match) >= thresholds["match"]
+        and float(slow) >= thresholds["slow"]
+        and float(fast) >= thresholds["fast"]
+    ):
+        status = "PASS_R39_NATIVE_TOY_CREDIT_ANCHOR"
+    else:
+        status = "VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR"
+
+    result = {
+        "experiment_id": "EXP-20260715-r39-native-hmasd-toy-credit",
+        "status": status,
+        "branch": status,
+        "contract": {
+            "algorithm": "hmasd_original",
+            "scenario": "two_timescale_role_free_actions",
+            "n_agents": 2,
+            "n_Z": 4,
+            "n_z": 4,
+            "hidden_size": 32,
+            "embedding_dim": 32,
+            "coordinator_dropout": 0.0,
+            "k0": 5,
+            "episode_length": 40,
+            "rollout_length": 40,
+            "ppo_epochs": 3,
+            "seed": 39041,
+            "num_envs": 16,
+            "num_workers": 4,
+            "envs_per_worker": 4,
+            "total_timesteps": 12_800,
+            "outer_updates": expected_outer_updates,
+            "final_eval_episodes": 32,
+            "final_eval_stochastic": True,
+            "probability": "pi_H(Z|x) pi_1(z1|x,Z) pi_2(z2|x,Z,z1)",
+            "credit": "native_team_agent_gae_returns_values_ratios_unified_advantage_normalization",
+            "clock": "high_action_full_refresh_every_k0",
+            "detach": "stored_old_log_probs_detached; stored_Z_z1_z2_teacher_forced_replay",
+            "metric": "evaluator_only_mean_match_slow_fast",
+            "labels": "evaluator_only",
+            "fresh_neutral_initialization": True,
+            "checkpoint_semantics": "exact_final_only",
+            "resume_from": "",
+        },
+        "implementation_validity": {
+            "m0_valid": bool(m0_valid),
+            "m0_failures": m0_failures,
+            "total_steps": int(total_steps),
+            "outer_updates": int(attempted_updates),
+            "successful_outer_updates": int(successful_updates),
+            "high_optimizer_updates": high_optimizer_updates,
+            "expected_high_optimizer_updates": expected_high_optimizer_updates,
+            "low_trainable_parameter_count": low_trainable_parameter_count,
+            "low_optimizer_updates": low_optimizer_updates,
+            "low_critic_updates": low_critic_updates,
+            "low_discoverer_updates": low_optimizer_updates + low_critic_updates,
+            "discriminator_optimizer_updates": discriminator_optimizer_updates,
+            "intrinsic_reward_mode": "external_only",
+            "discriminator_training_disabled": True,
+            "discriminator_rewards_disabled": True,
+            "team_disc_reward_abs_max": 0.0,
+            "individual_disc_reward_abs_max": 0.0,
+            "replay_team_max_abs_error": replay_team_max_abs_error,
+            "replay_agent_max_abs_error": replay_agent_max_abs_error,
+            "replay_max_abs_error": replay_max_abs_error,
+            "high_replay_sample_count": replay_sample_count,
+            "numeric_repairs": numeric_repairs,
+            "evaluator_only_labels": True,
+            "high_full_refresh_every_k": True,
+        },
+        "metrics": {
+            "episodes": int(diagnostics.get("episode_count", 0)),
+            "match": match,
+            "slow": slow,
+            "fast": fast,
+        },
+        "thresholds": thresholds,
+        "checkpoint": {
+            "path": final_model_path,
+            "exists": checkpoint_exists,
+            "exact_final": True,
+            "evaluated_checkpoint_path": final_model_path,
+            "reloaded_for_evaluation": True,
+            "best_checkpoint_selected": False,
+        },
+        "result_source": "result/r39_native_hmasd_toy_credit.json",
+    }
+    result_dir = os.path.join(log_dir, "result")
+    os.makedirs(result_dir, exist_ok=True)
+    result_path = os.path.join(result_dir, "r39_native_hmasd_toy_credit.json")
+    with open(result_path, "w", encoding="utf-8") as result_file:
+        json.dump(convert_numpy_types(result), result_file, ensure_ascii=False, indent=2)
+    main_logger.info(f"R39 native toy result written to: {result_path}")
+    return result_path, result
+
+
 def save_scenario7_training_plots(
     log_dir,
     episode_rewards,
@@ -1113,6 +1435,9 @@ from envs.pettingzoo.scenario_base import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
 from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.two_timescale_role_free_actions import (
+    TwoTimescaleRoleFreeActionsEnv,
+)
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
 from visualization import VisualizationManager
@@ -3809,6 +4134,12 @@ def make_env(rank, seed, config, scenario, render_mode=None, scale_mode=None):
                 seed=env_seed,
                 scale_mode=scale_mode or "train",
             )
+        elif scenario == "two_timescale_role_free_actions":
+            raw_env = TwoTimescaleRoleFreeActionsEnv(
+                config=config,
+                render_mode=render_mode,
+                seed=env_seed,
+            )
         else:
             raise ValueError(f"未知的场景: {scenario}")
 
@@ -4149,6 +4480,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     eval_steps_history = []
     eval_mean_rewards_history = []
     eval_std_rewards_history = []
+    last_eval_diagnostics = None
     created_eval_vec_env = False
     
     # 高层样本累积检测变量
@@ -4597,7 +4929,10 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
 
         # 1. 获取最后一步的价值 (Critic的直接输出)。非学习基线没有critic，使用零值bootstrap。
         last_values_predicted = np.zeros((num_envs, config.n_agents), dtype=np.float32)
-        if getattr(agent, 'uses_learned_value_function', True):
+        if (
+            getattr(agent, 'uses_learned_value_function', True)
+            and not getattr(agent, 'r39_native_toy_fixed_primitives', False)
+        ):
             phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             with torch.no_grad():
                 next_team_skills = np.zeros(num_envs, dtype=np.int64)
@@ -4905,7 +5240,11 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
             training_profiler.add('post_rollout', time.perf_counter() - phase_start)
         
         # 评估 (基于总步数和上次评估的时间)
-        if (not args.disable_eval) and total_steps >= last_eval_step + config.eval_interval:
+        if (
+            (not args.disable_eval)
+            and total_steps >= last_eval_step + config.eval_interval
+            and not bool(getattr(config, "r39_native_hmasd_toy", False))
+        ):
             phase_start = time.perf_counter() if training_profiler.enabled else 0.0
             if eval_vec_env is None:
                 if eval_env_fns is None:
@@ -4955,6 +5294,7 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                 eval_step=total_steps,
             )
             eval_diagnostics["training_steps"] = int(total_steps)
+            last_eval_diagnostics = eval_diagnostics
             main_logger.info(f"评估完成 ({eval_episode_count} 个episodes): 平均奖励 {eval_reward:.2f} ± {eval_std:.2f}, 最大/最小: {eval_max:.2f}/{eval_min:.2f}")
 
             gate_decision = evaluate_scenario7_comparison_gate(config, eval_diagnostics)
@@ -5008,7 +5348,9 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
                     raise optuna.TrialPruned()
 
             # 保存最佳模型
-            if eval_reward > best_reward:
+            if bool(getattr(config, "r39_native_hmasd_toy", False)):
+                best_reward = eval_reward
+            elif eval_reward > best_reward:
                 best_reward = eval_reward
                 agent.save_model(args.model_path)
                 main_logger.info(f"保存最佳模型，奖励: {best_reward:.2f}")
@@ -5125,21 +5467,38 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         'r39a_strict_contract': bool(args.r39a_strict_contract),
     })
     if args.r39a_strict_contract:
-        summary_stats['r39a_contract'] = {
-            'seed': int(args.seed),
-            'algorithm': str(getattr(config, 'algorithm', args.algorithm)),
-            'preset': str(getattr(config, 'experiment_preset', '')),
-            'n_agents': int(config.n_agents),
-            'action_dim': int(config.action_dim),
-            'scenario7_interface_version': int(config.scenario7_interface_version),
-            'scenario7_experiment_arm': str(config.scenario7_experiment_arm),
-            'scenario7_reward_variant': str(config.scenario7_reward_variant),
-            'use_graph_pbrs': bool(config.use_graph_pbrs),
-            'num_envs': int(config.num_envs),
-            'rollout_length': int(config.rollout_length),
-            'skill_interval': int(config.k),
-            'total_timesteps': int(config.total_timesteps),
-        }
+        if bool(getattr(config, "r39_native_hmasd_toy", False)):
+            summary_stats['r39_native_toy_contract'] = {
+                'seed': int(args.seed),
+                'algorithm': str(getattr(config, 'algorithm', args.algorithm)),
+                'scenario': str(getattr(config, 'scenario', '')),
+                'n_agents': int(config.n_agents),
+                'n_Z': int(config.n_Z),
+                'n_z': int(config.n_z),
+                'hidden_size': int(config.hidden_size),
+                'embedding_dim': int(config.embedding_dim),
+                'num_envs': int(config.num_envs),
+                'rollout_length': int(config.rollout_length),
+                'skill_interval': int(config.k),
+                'ppo_epochs': int(config.ppo_epochs),
+                'total_timesteps': int(config.total_timesteps),
+            }
+        else:
+            summary_stats['r39a_contract'] = {
+                'seed': int(args.seed),
+                'algorithm': str(getattr(config, 'algorithm', args.algorithm)),
+                'preset': str(getattr(config, 'experiment_preset', '')),
+                'n_agents': int(config.n_agents),
+                'action_dim': int(config.action_dim),
+                'scenario7_interface_version': int(config.scenario7_interface_version),
+                'scenario7_experiment_arm': str(config.scenario7_experiment_arm),
+                'scenario7_reward_variant': str(config.scenario7_reward_variant),
+                'use_graph_pbrs': bool(config.use_graph_pbrs),
+                'num_envs': int(config.num_envs),
+                'rollout_length': int(config.rollout_length),
+                'skill_interval': int(config.k),
+                'total_timesteps': int(config.total_timesteps),
+            }
     main_logger.info("\n===== 训练摘要统计 =====")
     main_logger.info(f"总训练步数: {summary_stats['total_steps']}")
     main_logger.info(f"总完成episodes: {summary_stats['total_episodes']}")
@@ -5161,9 +5520,62 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
         json.dump(json_compatible_stats, f, indent=2)
     main_logger.info(f"最终训练摘要已保存到: {final_summary_path}")
 
+    if bool(getattr(config, "r39_native_hmasd_toy", False)):
+        agent.training_progress = {
+            "total_env_steps": int(total_steps),
+            "outer_updates": int(update_times),
+            "successful_outer_updates": int(successful_update_times),
+            "native_toy_optimizer_updates": dict(
+                getattr(agent, "native_toy_optimizer_updates", {})
+            ),
+            "checkpoint_role": "exact_final",
+        }
+
     # 保存最终模型
     agent.save_model(final_model_path)
     main_logger.info(f"最终模型已保存到 {final_model_path}")
+
+    if bool(getattr(config, "r39_native_hmasd_toy", False)):
+        if eval_vec_env is None:
+            if eval_env_fns is None:
+                raise RuntimeError("exact final native toy evaluation requires eval_env_fns")
+            main_logger.info("延迟创建评估 SubprocVecEnv 以读取 exact final checkpoint...")
+            eval_vec_env = SubprocVecEnv(eval_env_fns, start_method='spawn')
+            created_eval_vec_env = True
+        agent.load_model(final_model_path)
+        (
+            final_eval_reward,
+            final_eval_std,
+            final_eval_min,
+            final_eval_max,
+            last_eval_diagnostics,
+        ) = evaluate(
+            eval_vec_env,
+            agent,
+            int(config.eval_episodes),
+            render=args.render,
+            record_video=args.record_video,
+            eval_step=total_steps,
+        )
+        last_eval_diagnostics["training_steps"] = int(total_steps)
+        main_logger.info(
+            "exact final checkpoint stochastic evaluation complete "
+            f"({config.eval_episodes} episodes): "
+            f"mean_reward={final_eval_reward:.4f} +/- {final_eval_std:.4f}, "
+            f"min={final_eval_min:.4f}, max={final_eval_max:.4f}"
+        )
+        write_r39_native_toy_result(
+            log_dir=log_dir,
+            config=config,
+            args=args,
+            total_steps=total_steps,
+            attempted_updates=update_times,
+            successful_updates=successful_update_times,
+            agent=agent,
+            final_model_path=final_model_path,
+            evaluation_diagnostics=last_eval_diagnostics,
+            final_stability_stats=final_stability_stats,
+        )
 
     # 调用 on_training_end 回调
     for callback in callbacks:
@@ -5294,6 +5706,7 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
     total_served_users = []  # 记录每个episode的服务用户数
     total_coverage_ratios = []  # 记录每个episode的覆盖率
     episode_eval_records = []
+    native_toy_metrics = []
     
     # 奖励统计
     high_level_rewards = []  # 高层奖励 (环境奖励)
@@ -5302,6 +5715,10 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         'team_disc_component': [],  # 团队判别器部分
         'ind_disc_component': []    # 个体判别器部分
     }
+
+    eval_deterministic = not bool(
+        getattr(agent.config, "r39_native_hmasd_toy", False)
+    )
 
     # 设置确定性评估模式
     with torch.no_grad():
@@ -5322,7 +5739,11 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                 
                 # 批量调用agent.step - 【关键修复】评估时使用确定性模式
                 active_actions_batch, active_infos_batch = agent.step(
-                    active_states, active_observations, active_env_steps, active_dones, deterministic=True
+                    active_states,
+                    active_observations,
+                    active_env_steps,
+                    active_dones,
+                    deterministic=eval_deterministic,
                 )
                 
                 # 重新组装为完整的actions数组
@@ -5416,6 +5837,18 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
                             agent_info_dict = infos[i][first_agent_key]
                             if 'reward_info' in agent_info_dict:
                                 reward_info = agent_info_dict['reward_info']
+
+                    if bool(getattr(agent.config, "r39_native_hmasd_toy", False)):
+                        toy_values = np.asarray(
+                            [
+                                reward_info.get("r39_toy_match_score", np.nan),
+                                reward_info.get("r39_toy_slow_match", np.nan),
+                                reward_info.get("r39_toy_fast_match", np.nan),
+                            ],
+                            dtype=float,
+                        )
+                        if np.all(np.isfinite(toy_values)):
+                            native_toy_metrics.append(toy_values)
                     
                     # 【新增】记录每步的覆盖率数据到评估追踪器
                     if reward_info:
@@ -5898,6 +6331,9 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
             else 0.0
         )
     )
+    native_toy_metric_array = np.asarray(native_toy_metrics, dtype=float)
+    if native_toy_metric_array.ndim != 2 or native_toy_metric_array.shape[1] != 3:
+        native_toy_metric_array = np.empty((0, 3), dtype=float)
     evaluation_diagnostics = {
         'training_steps': int(eval_step),
         'skill_interval': int(getattr(agent.config, 'k', 0)),
@@ -5987,6 +6423,23 @@ def evaluate(vec_env, agent, n_episodes=10, render=False, record_video=False, ev
         'numerical_failure_count': int(numerical_failure_count),
         **agent.get_policy_diagnostics(),
     }
+    if bool(getattr(agent.config, "r39_native_hmasd_toy", False)):
+        evaluation_diagnostics.update({
+            "r39_toy_match_score": (
+                float(np.mean(native_toy_metric_array[:, 0]))
+                if native_toy_metric_array.size else None
+            ),
+            "r39_toy_slow_match": (
+                float(np.mean(native_toy_metric_array[:, 1]))
+                if native_toy_metric_array.size else None
+            ),
+            "r39_toy_fast_match": (
+                float(np.mean(native_toy_metric_array[:, 2]))
+                if native_toy_metric_array.size else None
+            ),
+            "r39_toy_eval_metric_step_count": int(native_toy_metric_array.shape[0]),
+            "r39_toy_eval_stochastic": bool(not eval_deterministic),
+        })
 
     # 记录评估统计信息 (评估函数中暂时跳过，因为没有传入writer)
     # 在实际使用中，应该通过参数传入TensorBoard writer
