@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r41-official-hmasd-alice-bob-anchor | planned -- source correction | baseline-L4 original fixed-k HMASD positive anchor | tracked package `ref/hmasd.tar`; external wrapper pending | archive extraction and wrapper boundary | five seeds, 2,998,400 steps/seed, exact zero/final evaluation | PASS alone authorizes same-checkpoint native-categorical R30; valid FAIL retires the paper-task route |
+| EXP-20260716-r41-official-hmasd-alice-bob-anchor | ready -- local sequential launch | baseline-L4 original fixed-k HMASD positive anchor | local CUDA; `scripts/run_r41_official_hmasd_local.ps1`; tracked package `ref/hmasd.tar` | `runner_status.txt` and per-seed `progress.json` | five sequential seeds, 32 envs/seed, 2,998,400 steps/seed, exact zero/final evaluation | PASS alone authorizes same-checkpoint native-categorical R30; valid FAIL retires the paper-task route |
 | EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
 | EXP-20260715-r39-native-hmasd-toy-credit | completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` | stage-0 native-HMASD fixed-N credit anchor | `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219`; result owner `result/r39_native_hmasd_toy_credit.json` | post-R39 positive-substrate review | M0 valid; 12,800 steps, 20 outer updates, 60 high optimizer updates, replay max `4.768e-7`, zero low/discriminator updates; match/slow/fast `0.455078/0.464844/0.445313` | Retire this native fixed-N toy credit route under the registered valid-fail branch; no rescue or expansion |
 | EXP-20260715-r39-toy-joint-credit-alignment | completed -- valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` | stage-0 sampled-credit alignment diagnostic | `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`; commit `c6d02e3` | native-HMASD toy design | 32 correct versus 352 incorrect rows; pooled raw block return `4.9010` versus `1.8170`; actor weight `+2.1207` versus `-0.1928`; replay zero | Reward timing and storage are correct. Stop patching standalone shared credit; preserve the small model and move the toy to native HMASD team/agent credit. |
@@ -144,6 +144,10 @@ explicitly approves the exception.
   `5e-4`; gamma `0.99`; GAE lambda `0.95`; ValueNorm; 15 high PPO epochs,
   15 low PPO epochs, 15 discriminator epochs, one minibatch; high/low entropy
   coefficients `0.1/0.01`; no checkpoint resume or early stop.
+- Execution topology: local RTX 4070 Laptop GPU; one seed worker at a time;
+  32 concurrent rollout environments; seeds `1..5` run sequentially. This
+  changes only scheduling from the rejected cloud draft and preserves the
+  original per-seed batch, outer-update count, and optimizer exposure.
 - Exposure: exactly 937 outer updates and 2,998,400 environment steps per
   seed. Each seed must record 14,055 optimizer steps separately for high,
   low actor, low critic, `q_D`, and `q_d` (70,275 total per seed; 351,375 over
@@ -178,10 +182,9 @@ explicitly approves the exception.
   new intrinsic reward, current-repository learner, R30 implementation before
   PASS, S7, open roster, or variable `N`. There is no `MIXED`, `UNDERPOWERED`,
   or automatic rescue branch.
-- Expected wall clock: provisionally 8--12 hours when the five seeds are
-  launched concurrently on the cloud; the wrapper records observed startup
-  throughput before reporting a firmer ETA. Never fall back silently to CPU or
-  serial execution. Status source:
+- Expected wall clock: provisional overnight-to-next-day local execution; use
+  the first seed's observed progress for the ETA without changing topology.
+  Never fall back silently to CPU. Status source:
   `logs/<r41-run-id>/runner_status.txt`; decision source:
   `logs/<r41-run-id>/result/r41_official_hmasd_alice_bob.json`.
 

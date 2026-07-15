@@ -35,8 +35,10 @@ One implementation/evidence boundary:
 4. Record zero-step and exact-final deterministic 100-episode evaluations,
    actual optimizer-step counts, finite nonzero gradient evidence, source and
    runtime versions, and the pre-update stored/replayed likelihood error.
-5. Run the five seeds as one parallel cloud contract and emit one result JSON
-   implementing the registered M0--M2 branches in `memory/ExpRecord.md`.
+5. Run seeds `1..5` sequentially on local CUDA. Each seed retains the original
+   32 rollout environments, so concurrent environment count is 32 rather than
+   the cloud draft's 160. Emit one result JSON implementing the registered
+   M0--M2 branches in `memory/ExpRecord.md`.
 6. Do not implement the PASS-only R30 treatment, port the task into the current
    trainer, add shaping/intrinsic reward, or change the source, seed, budget,
    threshold, network, action, observation, map, or checkpoint-selection rule.

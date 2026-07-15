@@ -25,12 +25,10 @@ must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Inspect `ref/hmasd.tar`, its `Alice_and_Bob0` environment, launch script,
-   runner, checkpoint, and dependency boundary.
-2. Implement only external R41 launch, optimizer/replay telemetry,
-   zero-step/final deterministic evaluation, and result analysis.
-3. Package and launch the five-seed official reproduction in parallel on the
-   cloud under the registered M0--M2 contract.
+1. Launch `scripts/run_r41_official_hmasd_local.ps1` on local CUDA.
+2. Run one seed worker with 32 rollout environments; seeds `1..5` execute
+   sequentially under the registered M0--M2 contract.
+3. Read the final analyzer result and select only its registered branch.
 
 ## Immediate Constraints
 
@@ -39,6 +37,9 @@ must not renew surviving agents' skills.
   original HMASD `q_D/q_d` source-algorithm terms.
 - Track the source archive in this repository and use the enclosing project Git
   commit as its version identity; do not add hashes or checksums.
+- Alice--Bob is a toy environment and runs locally. Preserve the original
+  32-environment per-seed batch; limit aggregate load by using one seed worker,
+  not by changing optimizer exposure.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.
