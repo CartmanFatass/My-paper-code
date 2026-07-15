@@ -8,6 +8,9 @@ from typing import Callable
 from envs.pettingzoo.alice_bob_asymmetric_cycles import (
     AliceBobAsymmetricCyclesEnv,
 )
+from envs.pettingzoo.cooperative_two_timescale_sparse import (
+    CooperativeTwoTimescaleSparseEnv,
+)
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
@@ -37,6 +40,15 @@ SCENARIO_ALIASES = {
     "alice_bob_multiscale": "alice_bob_asymmetric_cycles",
     "alice-bob-multiscale": "alice_bob_asymmetric_cycles",
 }
+
+SCENARIO_ALIASES.update(
+    {
+        "cooperative_two_timescale_sparse": "cooperative_two_timescale_sparse",
+        "cooperative-two-timescale-sparse": "cooperative_two_timescale_sparse",
+        "r38_cts": "cooperative_two_timescale_sparse",
+        "cts": "cooperative_two_timescale_sparse",
+    }
+)
 
 
 def normalize_scenario(scenario: str) -> str:
@@ -87,6 +99,8 @@ def make_env(config, spec: EnvSpec) -> Callable[[], ParallelToArrayAdapter]:
             )
         elif scenario == "alice_bob_asymmetric_cycles":
             raw_env = AliceBobAsymmetricCyclesEnv(**kwargs)
+        elif scenario == "cooperative_two_timescale_sparse":
+            raw_env = CooperativeTwoTimescaleSparseEnv(**kwargs)
         else:
             raise AssertionError(f"Unhandled normalized scenario: {scenario}")
 

@@ -5,6 +5,8 @@ import numpy as np
 from envs.pettingzoo.cooperative_two_timescale_sparse import (
     CooperativeTwoTimescaleSparseEnv,
 )
+from ha_ctse_process.config_r38_two_timescale_sparse import Config
+from ha_ctse_process.env_factory import EnvSpec, make_env, normalize_scenario
 
 
 def config():
@@ -120,3 +122,23 @@ def test_agent_swap_is_transition_and_reward_equivariant():
         out_a[4]["agent_0"]["reward_info"]["r38_shuttle_stage_max"]
         == out_b[4]["agent_1"]["reward_info"]["r38_shuttle_stage_max"]
     )
+
+
+def test_factory_adapter_preserves_sparse_shared_reward_and_shapes():
+    assert normalize_scenario("cts") == "cooperative_two_timescale_sparse"
+    env = make_env(
+        Config,
+        EnvSpec(scenario="cooperative_two_timescale_sparse", seed=11),
+    )()
+    obs, info = env.reset(seed=11)
+    assert obs.shape == (2, 10)
+    assert info["state"].shape == (10,)
+    next_obs, reward, terminated, truncated, step_info = env.step(
+        np.zeros((2, 2), dtype=np.float32)
+    )
+    assert next_obs.shape == (2, 10)
+    assert reward == 0.0
+    assert not terminated and not truncated
+    reward_info = step_info["reward_info"]
+    assert reward_info["r38_sparse_reward"] == 0.0
+    assert reward_info["intrinsic_reward"] == 0.0
