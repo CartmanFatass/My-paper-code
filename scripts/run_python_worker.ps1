@@ -10,13 +10,31 @@ $exitCode = 1
 try {
     Set-Location -LiteralPath ([string]$spec.working_directory)
     $pythonArguments = @($spec.arguments | ForEach-Object { [string]$_ })
-    & ([string]$spec.python_bin) @pythonArguments `
-        1> ([string]$spec.stdout_path) `
-        2> ([string]$spec.stderr_path)
-    if ($null -eq $LASTEXITCODE) {
+    $oldErrorActionPreference = $ErrorActionPreference
+    $hasNativePreference = Test-Path Variable:\PSNativeCommandUseErrorActionPreference
+    if ($hasNativePreference) {
+        $oldNativePreference = $PSNativeCommandUseErrorActionPreference
+    }
+    try {
+        if ($hasNativePreference) {
+            $PSNativeCommandUseErrorActionPreference = $false
+        }
+        $ErrorActionPreference = "Continue"
+        & ([string]$spec.python_bin) @pythonArguments `
+            1> ([string]$spec.stdout_path) `
+            2> ([string]$spec.stderr_path)
+        $nativeExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $oldErrorActionPreference
+        if ($hasNativePreference) {
+            $PSNativeCommandUseErrorActionPreference = $oldNativePreference
+        }
+    }
+    if ($null -eq $nativeExitCode) {
         throw "Python worker returned no exit code"
     }
-    $exitCode = [int]$LASTEXITCODE
+    $exitCode = [int]$nativeExitCode
 }
 catch {
     $message = [string]$_.Exception.Message
