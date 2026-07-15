@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-native-categorical | launch-ready | stage-0 synthetic mechanism gate; hierarchy-L2 matched control | local CUDA, concurrent 16-env arms | single result JSON | dense role-free two-timescale external task; 32-wide feedforward skill executor; no intrinsic reward | PASS returns to deferred R39A; access miss invalidates this toy instrument; temporal miss blocks native-HMASD R39B. |
+| EXP-20260715-r39-toy-native-categorical | rerun pending -- first run invalid `INVALID_R39_TOY_LOW_PPO` | stage-0 synthetic mechanism gate; hierarchy-L2 matched control | invalid local run `logs/r39_toy_native_categorical_12k8_20260715_173547` | unchanged repaired rerun | post-result audit found cross-environment return leakage, one update instead of three PPO epochs, and incorrect clipped-Normal likelihood | Repair only those defects, keep the 32-wide model/budget/seed/thresholds fixed, and rerun the same gate. |
 | EXP-20260715-r39a-current-fixed-hmasd-anchor | planned -- package prepared and deferred | baseline-L1 current-interface source-anchor gate | cloud CUDA package; no launch during toy gate | toy result | GPT-5.6 Pro accepted a serial R39A anchor then R39B route; user selected a cheap toy mechanism gate before S7 compute | Preserve the exact package. Launch only after toy PASS; native-HMASD R39B still requires R39A PASS. |
 | EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
 | EXP-20260715-r38-cts-access | completed -- valid `FAIL_R38_CTS_ACCESS` | baseline-L1 environment-access gate | local CUDA; `logs/r38_cts_access_320k_20260715_140641_retry2`; commit `db3502e` | post-R38 cross-round failure review | M0 PASS; 100 low updates and zero high/process/intrinsic updates; MAPPO short `0/256`, long `2/256`, full `0/256`; all four 64-reset blocks had zero full success | Retire CTS without shaping, intrinsic reward, learner, budget, seed, or threshold rescue; the lifetime-controller gate is not authorized. |
@@ -115,7 +115,7 @@ explicitly approves the exception.
 - Environment/information: two agents; constant identical four-value local
   observations; centralized six-value state contains slow and fast action
   targets plus their clocks; episode 40; `k0=5`; fast target changes each block
-  and slow target each four blocks. Reward is the maximum over the two possible
+  and slow target each six blocks. Reward is the maximum over the two possible
   agent-to-target assignments of a bounded dense action-match objective. It is
   external task reward, not shaping or intrinsic reward, and defines no agent
   identity or fixed role.
@@ -130,9 +130,11 @@ explicitly approves the exception.
   2-5 minutes.
 - M0 validity: exact scenario/config/seed/budget and 20 updates; finite metrics;
   native categorical flag true in both arms; adaptive force-refresh false and
-  control true; high replay maximum error `<=1e-5`; hidden width 32 and
-  feedforward low policy; zero task-specific or generic intrinsic reward and no
-  process/diagnostic optimizer objective.
+  control true; high and low replay maximum errors `<=1e-5`; exactly three low
+  PPO steps per update; returns grouped over all 16 environments; tanh-squashed
+  continuous actions; hidden width 32 and feedforward low policy; zero
+  task-specific or generic intrinsic reward and no process/diagnostic optimizer
+  objective.
 - M1 access: both arms have final mean match score `>=0.70`, mean slow match
   `>=0.65`, and mean fast match `>=0.65`. Failure is
   `NO_ACCESS_R39_TOY_32`; it is an instrument/capacity result and has no
@@ -154,6 +156,15 @@ explicitly approves the exception.
   parity, sparse exploration, cooperation performance, or S7 efficacy.
 - Status source: `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r39_toy_native_categorical.json`.
+- First-run disposition: `INVALID_R39_TOY_LOW_PPO` at
+  `logs/r39_toy_native_categorical_12k8_20260715_173547`. A post-result audit
+  showed feedforward returns crossing the 16 interleaved environments,
+  `low_ppo_epochs=3` executing only once, and hard-clipped Normal actions being
+  scored under the wrong density. Its match and lifetime metrics have no
+  scientific meaning. The repaired rerun keeps the learned 32-wide model,
+  12,800-step budget, seed, and decision thresholds unchanged. The slow clock
+  is corrected from `4k0` to `6k0` so an optimal slow skill can satisfy the
+  registered `>4k0` lifetime condition before its target changes.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

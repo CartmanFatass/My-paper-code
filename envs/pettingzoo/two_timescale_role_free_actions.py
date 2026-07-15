@@ -25,7 +25,7 @@ class TwoTimescaleRoleFreeActionsEnv(ParallelEnv):
         self.render_mode = render_mode
         self.k0 = int(getattr(config, "r39_toy_k0", 5))
         self.slow_period_blocks = int(
-            getattr(config, "r39_toy_slow_period_blocks", 4)
+            getattr(config, "r39_toy_slow_period_blocks", 6)
         )
         self.max_steps = int(getattr(config, "max_steps", 40))
         if self.k0 <= 0 or self.slow_period_blocks <= 0 or self.max_steps <= 0:

@@ -34,6 +34,14 @@ native-HMASD R39B. The active boundary is now a standalone stage-0 instrument:
    objective disabled;
 5. the paired 12.8K-step run is the implementation and mechanism check.
 
+First-run disposition: invalid `INVALID_R39_TOY_LOW_PPO`. The feedforward
+learner crossed interleaved environments when computing returns, ignored the
+registered three PPO epochs, and used a clipped-Normal likelihood that did not
+describe executed actions. Its match and lifetime outcomes are not evidence.
+The repair uses env-grouped bootstrapped GAE, three PPO epochs, and a
+tanh-squashed Gaussian while retaining the 32-wide model and original compute
+budget. The same paired run is the next evidence boundary.
+
 The preserved R39A package boundary is:
 
 1. native HMASD PPO teacher-forces stored `Z,z_{<i}`;

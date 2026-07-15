@@ -30,19 +30,16 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: run one lightweight stage-0 toy gate for the native
-  categorical incumbent-or-new-skill temporal mechanism before returning to
-  S7. The toy uses a role-free dense external objective, a 32-wide feedforward
-  low policy, and no intrinsic reward. R39A's current-interface S7 package is
-  preserved but deferred; native HMASD R39B integration remains blocked until
-  both the toy mechanism gate and R39A source anchor pass.
+- Active objective: rerun the lightweight toy gate after invalidating its first
+  result for a concrete feedforward PPO defect. Returns crossed parallel
+  environments, registered PPO epochs were skipped, and clipped actions used an
+  incorrect likelihood. R39A is preserved and deferred; native HMASD R39B
+  remains blocked.
 
 ## Next Actions
 
-- Immediate next action: complete the paired local toy runner, then execute the
-  registered 12.8K-step-per-arm adaptive-versus-full-refresh gate. Read its
-  single result JSON once. A toy PASS returns the controller to the deferred
-  R39A S7 source-anchor launch; it does not itself authorize native HMASD R39B.
+- Immediate next action: keep the 32-wide model, seed, 12.8K budget, reward, and
+  thresholds fixed; rerun the same paired gate after the feedforward PPO repair.
 
 ## Immediate Constraints
 
@@ -55,6 +52,9 @@ and history live in their owning files.
   team reward, communication-intrinsic mechanisms, kappa/hazard, or DADS before
   the post-R33 failure review selects and registers one new causal edge.
 - Do not reinterpret forced R27 capacity as natural use or a team-level claim.
+- The first R39 toy run is invalid implementation evidence, not a capacity or
+  access result. Do not replace its learned low policy or enlarge the model
+  before the unchanged repaired rerun.
 - Keep R29 diagnostic-only. Its online `real_reward` path and variants that
   alter only prior, window, aggregation, coefficient, normalization, or clip
   are retired.

@@ -361,21 +361,70 @@ class LowLevelPolicy(nn.Module):
             high = torch.as_tensor(action_high if action_high is not None else 1.0, dtype=torch.float32)
             self.register_buffer("action_low", low.reshape(1, -1))
             self.register_buffer("action_high", high.reshape(1, -1))
+            self.action_epsilon = 1e-6
 
     def _features(self, obs: torch.Tensor, skills: torch.Tensor) -> torch.Tensor:
         skill_onehot = F.one_hot(skills.long(), num_classes=self.n_skills).float()
         return torch.cat([obs.float(), skill_onehot], dim=-1)
 
+    def actor_update_parameters(self):
+        params = list(self.actor.parameters())
+        if self.action_space_type == "continuous":
+            params.append(self.log_std)
+        return params
+
+    def critic_update_parameters(self):
+        return list(self.critic.parameters())
+
+    def _continuous_distribution(self, actor_out: torch.Tensor):
+        std = torch.exp(self.log_std).expand_as(actor_out)
+        return torch.distributions.Normal(actor_out, std)
+
+    def _action_scale_bias(self) -> tuple[torch.Tensor, torch.Tensor]:
+        scale = ((self.action_high - self.action_low) * 0.5).clamp_min(self.action_epsilon)
+        bias = (self.action_high + self.action_low) * 0.5
+        return scale, bias
+
+    def _squashed_log_prob(
+        self,
+        dist: torch.distributions.Normal,
+        raw_action: torch.Tensor,
+        unit_action: torch.Tensor,
+    ) -> torch.Tensor:
+        scale, _bias = self._action_scale_bias()
+        log_jacobian = torch.log(scale) + torch.log(
+            1.0 - unit_action.square() + self.action_epsilon
+        )
+        return (dist.log_prob(raw_action) - log_jacobian).sum(dim=-1)
+
+    def _sample_continuous(self, actor_out: torch.Tensor, deterministic: bool):
+        dist = self._continuous_distribution(actor_out)
+        raw_action = actor_out if deterministic else dist.rsample()
+        unit_action = torch.tanh(raw_action)
+        scale, bias = self._action_scale_bias()
+        action = bias + scale * unit_action
+        log_prob = self._squashed_log_prob(dist, raw_action, unit_action)
+        return action, log_prob, -log_prob
+
+    def _evaluate_continuous(self, actor_out: torch.Tensor, actions: torch.Tensor):
+        dist = self._continuous_distribution(actor_out)
+        scale, bias = self._action_scale_bias()
+        unit_action = ((actions.float() - bias) / scale).clamp(
+            -1.0 + self.action_epsilon,
+            1.0 - self.action_epsilon,
+        )
+        raw_action = torch.atanh(unit_action)
+        log_prob = self._squashed_log_prob(dist, raw_action, unit_action)
+        entropy_raw = dist.rsample()
+        entropy_unit = torch.tanh(entropy_raw)
+        entropy = -self._squashed_log_prob(dist, entropy_raw, entropy_unit)
+        return log_prob, entropy
+
     def act(self, obs: torch.Tensor, skills: torch.Tensor, deterministic: bool = False):
         features = self._features(obs, skills)
         actor_out = self.actor(features)
         if self.action_space_type == "continuous":
-            std = torch.exp(self.log_std).expand_as(actor_out)
-            dist = torch.distributions.Normal(actor_out, std)
-            raw_actions = actor_out if deterministic else dist.sample()
-            actions = torch.max(torch.min(raw_actions, self.action_high), self.action_low)
-            log_prob = dist.log_prob(actions).sum(dim=-1)
-            entropy = dist.entropy().sum(dim=-1)
+            actions, log_prob, entropy = self._sample_continuous(actor_out, deterministic)
         else:
             dist = Categorical(logits=actor_out)
             actions = torch.argmax(actor_out, dim=-1) if deterministic else dist.sample()
@@ -387,10 +436,7 @@ class LowLevelPolicy(nn.Module):
         features = self._features(obs, skills)
         actor_out = self.actor(features)
         if self.action_space_type == "continuous":
-            std = torch.exp(self.log_std).expand_as(actor_out)
-            dist = torch.distributions.Normal(actor_out, std)
-            log_prob = dist.log_prob(actions.float()).sum(dim=-1)
-            entropy = dist.entropy().sum(dim=-1)
+            log_prob, entropy = self._evaluate_continuous(actor_out, actions)
         else:
             dist = Categorical(logits=actor_out)
             log_prob = dist.log_prob(actions.long())
@@ -8233,6 +8279,10 @@ class StandaloneProcessAgent:
             "low_approx_kl": 0.0,
             "low_actor_grad_norm": 0.0,
             "low_critic_grad_norm": 0.0,
+            "low_optimizer_steps": 0.0,
+            "low_return_env_count": 0.0,
+            "low_replay_logp_max_error": 0.0,
+            "low_squashed_action_policy": 0.0,
             "low_actor_h_norm_mean": 0.0,
             "low_critic_h_norm_mean": 0.0,
             "low_skill_usage_entropy": 0.0,
@@ -8869,15 +8919,10 @@ class StandaloneProcessAgent:
             return self._empty_low_metrics()
         if self.use_recurrent_low_level:
             return self._update_low_recurrent(rollout)
-        rewards = np.asarray(rollout.rewards, dtype=np.float32)
-        values = np.asarray(rollout.values, dtype=np.float32)
-        returns = np.zeros_like(rewards)
-        running = np.zeros(self.n_agents, dtype=np.float32)
-        for t in reversed(range(len(rewards))):
-            running = rewards[t] + self.gamma * running * (1.0 - float(rollout.dones[t]))
-            returns[t] = running
-        advantages = returns - values
-        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        returns, advantages, old_values_np, env_ids = self._low_returns(rollout)
+        rollout_diagnostics = self._low_rollout_diagnostics(
+            rollout, returns, advantages, old_values_np
+        )
 
         obs_t = torch.as_tensor(np.asarray(rollout.obs), dtype=torch.float32, device=self.device).reshape(-1, rollout.obs[0].shape[-1])
         skills_t = torch.as_tensor(np.asarray(rollout.skills), dtype=torch.long, device=self.device).reshape(-1)
@@ -8896,32 +8941,137 @@ class StandaloneProcessAgent:
         old_logp_t = torch.as_tensor(np.asarray(rollout.logp), dtype=torch.float32, device=self.device).reshape(-1)
         returns_t = torch.as_tensor(returns, dtype=torch.float32, device=self.device).reshape(-1)
         adv_t = torch.as_tensor(advantages, dtype=torch.float32, device=self.device).reshape(-1)
+        old_values_t = torch.as_tensor(old_values_np, dtype=torch.float32, device=self.device).reshape(-1)
 
-        logp, entropy, new_values = self.low.evaluate(obs_t, skills_t, actions_t)
-        ratio = torch.exp(logp - old_logp_t)
-        policy_loss = -torch.min(
-            ratio * adv_t,
-            torch.clamp(ratio, 1.0 - self.low_clip, 1.0 + self.low_clip) * adv_t,
-        ).mean()
-        value_loss = F.mse_loss(new_values, returns_t)
-        entropy_loss = -self.low_entropy_coef * entropy.mean()
-        critic_loss = self.low_value_loss_coef * value_loss
-        loss = policy_loss + critic_loss + entropy_loss
+        with torch.no_grad():
+            replay_logp, _replay_entropy, _replay_values = self.low.evaluate(
+                obs_t, skills_t, actions_t
+            )
+            replay_error = float(
+                torch.max(torch.abs(replay_logp - old_logp_t)).detach().cpu().item()
+            )
 
-        self.low_opt.zero_grad()
-        loss.backward()
-        self.low_opt.step()
+        totals = {
+            "loss": 0.0,
+            "policy": 0.0,
+            "value": 0.0,
+            "entropy_loss": 0.0,
+            "entropy": 0.0,
+            "ratio": 0.0,
+            "clip": 0.0,
+            "kl": 0.0,
+            "actor_grad": 0.0,
+            "critic_grad": 0.0,
+        }
+        skill_entropy_sums = np.zeros(self.n_skills, dtype=np.float64)
+        skill_entropy_counts = np.zeros(self.n_skills, dtype=np.float64)
+        update_count = 0
+        for _epoch in range(self.low_ppo_epochs):
+            logp, entropy, new_values = self.low.evaluate(obs_t, skills_t, actions_t)
+            ratio = torch.exp(logp - old_logp_t.detach())
+            policy_loss = -torch.min(
+                ratio * adv_t,
+                torch.clamp(ratio, 1.0 - self.low_clip, 1.0 + self.low_clip) * adv_t,
+            ).mean()
+            target_returns = returns_t.detach()
+            previous_values = old_values_t.detach()
+            if self.low_value_clip > 0.0:
+                clipped_values = previous_values + (new_values - previous_values).clamp(
+                    -self.low_value_clip, self.low_value_clip
+                )
+                value_loss = 0.5 * torch.max(
+                    (new_values - target_returns).pow(2),
+                    (clipped_values - target_returns).pow(2),
+                ).mean()
+            else:
+                value_loss = 0.5 * F.mse_loss(new_values, target_returns)
+            entropy_mean = entropy.mean()
+            entropy_loss = -self.low_entropy_coef * entropy_mean
+            critic_loss = self.low_value_loss_coef * value_loss
+            loss = policy_loss + critic_loss + entropy_loss
+
+            self.low_opt.zero_grad()
+            loss.backward()
+            actor_params = list(self.low.actor_update_parameters())
+            critic_params = list(self.low.critic_update_parameters())
+            if self.low_max_grad_norm > 0.0:
+                actor_grad_norm = float(
+                    torch.nn.utils.clip_grad_norm_(
+                        actor_params, self.low_max_grad_norm
+                    ).detach().cpu().item()
+                )
+                critic_grad_norm = float(
+                    torch.nn.utils.clip_grad_norm_(
+                        critic_params, self.low_max_grad_norm
+                    ).detach().cpu().item()
+                )
+            else:
+                actor_grad_norm = self._grad_norm(actor_params)
+                critic_grad_norm = self._grad_norm(critic_params)
+            self.low_opt.step()
+
+            old_logp_detached = old_logp_t.detach()
+            totals["loss"] += float(loss.detach().cpu().item())
+            totals["policy"] += float(policy_loss.detach().cpu().item())
+            totals["value"] += float(value_loss.detach().cpu().item())
+            totals["entropy_loss"] += float(entropy_loss.detach().cpu().item())
+            totals["entropy"] += float(entropy_mean.detach().cpu().item())
+            totals["ratio"] += float(ratio.detach().mean().cpu().item())
+            totals["clip"] += float(
+                (torch.abs(ratio.detach() - 1.0) > self.low_clip)
+                .float()
+                .mean()
+                .cpu()
+                .item()
+            )
+            totals["kl"] += float(
+                (old_logp_detached - logp.detach()).mean().cpu().item()
+            )
+            totals["actor_grad"] += actor_grad_norm
+            totals["critic_grad"] += critic_grad_norm
+            skills_np = skills_t.detach().cpu().numpy().astype(np.int64)
+            entropy_np = entropy.detach().cpu().numpy().astype(np.float64)
+            for skill_id in range(self.n_skills):
+                mask = skills_np == skill_id
+                if np.any(mask):
+                    skill_entropy_sums[skill_id] += float(np.sum(entropy_np[mask]))
+                    skill_entropy_counts[skill_id] += float(np.sum(mask))
+            update_count += 1
+
+        denom = max(update_count, 1)
+        active_skill_entropy = skill_entropy_counts > 0.0
+        low_skill_entropy_std = (
+            float(
+                np.std(
+                    skill_entropy_sums[active_skill_entropy]
+                    / skill_entropy_counts[active_skill_entropy]
+                )
+            )
+            if np.any(active_skill_entropy)
+            else 0.0
+        )
         return {
             **self._empty_low_metrics(),
-            "low_loss": float(loss.detach().cpu().item()),
-            "low_policy_loss": float(policy_loss.detach().cpu().item()),
-            "low_value_loss": float(value_loss.detach().cpu().item()),
-            "low_entropy_loss": float(entropy_loss.detach().cpu().item()),
-            "low_actor_loss": float((policy_loss + entropy_loss).detach().cpu().item()),
-            "low_critic_loss": float(critic_loss.detach().cpu().item()),
-            "low_entropy": float(entropy.detach().mean().cpu().item()),
+            "low_loss": totals["loss"] / denom,
+            "low_policy_loss": totals["policy"] / denom,
+            "low_value_loss": totals["value"] / denom,
+            "low_entropy_loss": totals["entropy_loss"] / denom,
+            "low_actor_loss": (totals["policy"] + totals["entropy_loss"]) / denom,
+            "low_critic_loss": self.low_value_loss_coef * totals["value"] / denom,
+            "low_entropy": totals["entropy"] / denom,
             "low_sequence_chunks": 0.0,
             "low_value_norm_mean": 0.0,
             "low_value_norm_std": 0.0,
+            "low_ratio_mean": totals["ratio"] / denom,
+            "low_clip_frac": totals["clip"] / denom,
+            "low_approx_kl": totals["kl"] / denom,
+            "low_actor_grad_norm": totals["actor_grad"] / denom,
+            "low_critic_grad_norm": totals["critic_grad"] / denom,
+            "low_optimizer_steps": float(update_count),
+            "low_return_env_count": float(np.unique(env_ids).size),
+            "low_replay_logp_max_error": replay_error,
+            "low_squashed_action_policy": float(self.action_space_type == "continuous"),
+            "low_skill_entropy_std": low_skill_entropy_std,
             "return_mean": float(returns.mean()),
+            **rollout_diagnostics,
         }

@@ -37,6 +37,10 @@ TRAIN_REQUIRED = (
     "r30_mixed_age_fraction",
     "r30_spell_gt_4k0_count",
     "r30_spell_le_4k0_count",
+    "low_optimizer_steps",
+    "low_return_env_count",
+    "low_replay_logp_max_error",
+    "low_squashed_action_policy",
     "combined_intrinsic_env_ratio",
 )
 
@@ -269,6 +273,15 @@ def summarize_arm(
         add_reason(reasons, f"{arm} did not execute exactly two tokens per high decision")
     if replay_error > 1e-5:
         add_reason(reasons, f"{arm} replay log-probability error {replay_error} > 1e-5")
+    low_replay_error = max(values(train, "low_replay_logp_max_error"), default=math.inf)
+    if low_replay_error > 1e-5:
+        add_reason(reasons, f"{arm} low replay log-probability error {low_replay_error} > 1e-5")
+    if any(abs(row.get("low_optimizer_steps", -1.0) - 3.0) > 1e-9 for row in train):
+        add_reason(reasons, f"{arm} did not execute exactly three low PPO epochs per update")
+    if any(abs(row.get("low_return_env_count", -1.0) - 16.0) > 1e-9 for row in train):
+        add_reason(reasons, f"{arm} low returns were not grouped over exactly 16 environments")
+    if any(abs(row.get("low_squashed_action_policy", 0.0) - 1.0) > 1e-9 for row in train):
+        add_reason(reasons, f"{arm} did not use the registered squashed continuous policy")
     if total(train, "r30_continuation_actor_tokens") != 0.0:
         add_reason(reasons, f"{arm} continuation rows contained actor tokens")
 
@@ -307,6 +320,10 @@ def summarize_arm(
         "parameter_counts": manifest.get("agent_runtime_spec", {}).get("parameter_counts", {}),
         "implementation": {
             "replay_logp_max_error": replay_error,
+            "low_replay_logp_max_error": low_replay_error,
+            "low_optimizer_steps_per_update": mean(train, "low_optimizer_steps"),
+            "low_return_env_count": mean(train, "low_return_env_count"),
+            "low_squashed_action_policy": mean(train, "low_squashed_action_policy"),
             "continuation_actor_tokens": total(train, "r30_continuation_actor_tokens"),
             "intrinsic_fields_checked": intrinsic_fields,
             "nonzero_intrinsic_fields": nonzero_intrinsic,

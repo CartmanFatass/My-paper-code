@@ -21,7 +21,9 @@ class Config(ProcessConfig):
     skill_interval = 5
     k = 5
     r39_toy_k0 = 5
-    r39_toy_slow_period_blocks = 4
+    # Six blocks allow an optimal slow skill to survive beyond the registered
+    # 4*k0 lifetime boundary before its target changes.
+    r39_toy_slow_period_blocks = 6
 
     n_Z = 1
     n_z = 4
@@ -122,4 +124,3 @@ class Config(ProcessConfig):
     exact_cf_compute_on = False
     exact_cf_reward_on = False
     aem_joint_novelty_enabled = False
-
