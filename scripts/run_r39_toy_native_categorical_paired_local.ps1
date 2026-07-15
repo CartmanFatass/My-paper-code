@@ -60,20 +60,7 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
         "eval_action_mode=stochastic",
         "eval_max_steps=40"
     ) + $Details
-    $temporary = "$StatusPath.tmp.$PID"
-    [System.IO.File]::WriteAllLines($temporary, $lines)
-    $lastError = $null
-    for ($attempt = 0; $attempt -lt 50; $attempt++) {
-        try {
-            Move-Item -LiteralPath $temporary -Destination $StatusPath -Force
-            return
-        }
-        catch {
-            $lastError = $_.Exception
-            Start-Sleep -Milliseconds 100
-        }
-    }
-    throw "Could not replace runner status: $($lastError.Message)"
+    [System.IO.File]::WriteAllLines($StatusPath, $lines)
 }
 
 function Training-Arguments([string]$Config, [string]$LogDir) {
