@@ -4,14 +4,34 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Post-R38 Boundary
+## R39 S7 Compatibility Boundary
 
-There is no active core implementation stage. R38 completed as a valid
-`FAIL_R38_CTS_ACCESS`: ordinary constant-code recurrent MAPPO did not establish
-short-duty or full-cycle access, so the PASS-only lifetime comparison is
-blocked. Complete the R35--R38 failure review and obtain one externally audited
-causal edge before adding another environment, skill, lifetime, or intrinsic
-mechanism. Environment-specific intrinsic reward remains prohibited.
+R38 completed as a valid `FAIL_R38_CTS_ACCESS`; its replacement environment and
+ordinary-MAPPO access route are retired. The accepted structural direction is
+to return to S7 and compare current fixed-`k` HMASD with a same-substrate
+per-agent KEEP/SET treatment. Environment-specific intrinsic reward remains
+prohibited.
+
+The direct experiment is not yet executable. The only positive historical
+checkpoint was saved at 1.760M on the former six-agent, three-action S7 stack;
+current S7 uses the eight-agent, four-action interface-v3 contract. No exact
+checkpoint migration or current-interface positive fixed-`k` checkpoint exists,
+and standalone R30 is not the HMASD coordinator/trainer.
+
+One prerequisite algorithm correction is complete: commit `aaba845` makes
+standard HMASD PPO teacher-force stored `Z,z_{<i}` during joint-skill likelihood
+recomputation. The remaining order is strict:
+
+1. obtain the manual disposition of the tracked R39 compatibility follow-up;
+2. with explicit user approval, produce a current-interface positive fixed-`k`
+   HMASD anchor under the accepted access contract;
+3. implement the accepted partial-roster policy inside the original `hmasd`
+   trainer, with exact full-refresh bypass and shared low/discriminator paths;
+4. only then register the 320K matched temporal mechanism gate.
+
+Do not partially load the old checkpoint, cross into the standalone R30 trainer,
+or invent an experiment result before the source anchor and team-`Z` semantics
+are closed.
 
 ## R37 Actor-Visible Task-Identity Access Gate
 

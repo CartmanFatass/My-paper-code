@@ -30,17 +30,18 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: close the valid `FAIL_R38_CTS_ACCESS`, archive and
-  disposition the manually returned corrected GPT-5.6 Pro response, and reduce
-  its proposed R39 S7 fixed-k versus per-agent KEEP/SET route to one executable
-  compatibility-first gate. R37 and R38 remain retired.
+- Active objective: repair the proposed R39 S7 compatibility boundary. The
+  stored-prefix PPO defect is fixed at `aaba845`; the next design must obtain a
+  current-interface fixed-`k` HMASD positive anchor and define a native HMASD
+  partial-roster KEEP/SET policy. R37 and R38 remain retired.
 
 ## Next Actions
 
-- Immediate next action: archive the manually returned corrected R38 review,
-  disposition its HMASD-compatible R39 route against the repository's actual S7
-  checkpoint and migration support, and register only the smallest executable
-  compatibility-first experiment boundary. No browser handoff is pending.
+- Immediate next action: obtain the manual GPT-5.6 Pro correction to the tracked
+  R39 compatibility follow-up, then register only its accepted executable
+  boundary. The historical 1.760M three-action checkpoint is reference-only;
+  no compatible current-interface positive checkpoint exists. Training a new
+  fixed-`k` baseline still requires the user's explicit approval.
 
 ## Immediate Constraints
 
