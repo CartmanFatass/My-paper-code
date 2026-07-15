@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-high-exposure | launch-ready | stage-0 high optimizer-exposure gate | local CUDA | paired result JSON | GAE/block-return skill-head gradients were nonzero, comparable, and positively aligned on all diagnostic updates; current R30 performs one high step per batch | Compare one versus three high PPO epochs under the same full-refresh direct-state fixed-primitive controller. PASS returns to adaptive toy; FAIL retires optimizer underexposure as the immediate explanation. |
+| EXP-20260715-r39-toy-high-exposure | completed -- valid `FAIL_R39_TOY_HIGH_EXPOSURE_3` | stage-0 high optimizer-exposure gate | `logs/r39_toy_high_exposure_12k8_20260715_191019`; commit `b805abc` | high actor-objective positive control | M0 PASS; 3 epochs improved match `0.421875 -> 0.46875` (`+0.046875`), below access/effect gates; clip fraction `0`, mean last-epoch KL `6.12e-6` | Retire optimizer underexposure as the immediate cause. Compare SMDP-GAE with diagnostic block-return actor credit on the unchanged tiny model. |
 | EXP-20260715-r39-toy-high-credit-diagnostic | completed -- credit directions aligned | stage-0 high-credit localization | `logs/r39_toy_high_credit_diag_1920_20260715_185721`; commit `ef9a34d` | high optimizer-exposure gate | M0 PASS; both arms had nonzero comparable GAE/block gradients and all six skill-head cosines were positive (`0.392-0.594`) | GAE does not extinguish or reverse immediate block credit. Test explicit three-epoch high PPO exposure on the same tiny model. |
 | EXP-20260715-r39-toy-direct-state | completed -- valid `FAIL_R39_TOY_HIGH_CREDIT` | stage-0 high-context localization; hierarchy-L2 temporal control | `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`; commit `1200bdf` | actor-only GAE/block-return gradient diagnostic | M0 PASS; direct state and zero team context replay exactly, low has zero parameters/updates, and actor/skill-head policy gradients are nonzero; both arms match `0.421875` | Context compression and a disconnected actor gradient do not explain the failure. Diagnose credit direction versus optimizer exposure on a smaller toy collection; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-fixed-primitives | completed -- valid `FAIL_R39_TOY_HIGH_ACCESS` | stage-0 high-controller positive control; hierarchy-L2 matched control | `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`; commit `19e7f5c` | high context/credit diagnosis | M0 PASS with zero low parameters/updates and zero intrinsic; adaptive/control match both `0.4375`, slow `0.40625`, fast `0.46875` | Failure is upstream of temporal efficacy: diagnose the high context/credit path on the toy; do not enter S7 or enlarge the model. |
@@ -333,6 +333,13 @@ explicitly approves the exception.
   compute.
 - Status source: `<run-root>/runner_status.txt`; result source:
   `<run-root>/result/r39_toy_high_exposure.json`.
+- Result: valid `FAIL_R39_TOY_HIGH_EXPOSURE_3` at
+  `logs/r39_toy_high_exposure_12k8_20260715_191019`, commit `b805abc`. The
+  epoch-1 arm scored match/slow/fast `0.421875/0.40625/0.4375`; epoch 3 scored
+  `0.46875/0.46875/0.46875`. The match gain `0.046875` missed `0.10`, and the
+  treatment missed all access floors. Exact optimizer steps were `1/3`, replay
+  error was zero, ValueNorm updated once, and the epoch-3 arm had zero clipping
+  with mean last-epoch KL `6.12e-6`. More epochs are not authorized.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

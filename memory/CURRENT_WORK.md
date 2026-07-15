@@ -30,21 +30,22 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: test high optimizer exposure on the toy. The focused
-  credit diagnostic found nonzero, comparable GAE and block-return gradients,
-  with positive skill-head cosine on all three updates in both arms
-  (`0.392-0.594`). Context encoding, low capacity, intrinsic reward, a
-  disconnected actor gradient, and conflicting GAE direction are no longer
-  sufficient explanations. R39A is preserved and deferred; native HMASD R39B
-  remains blocked.
+- Active objective: isolate the high actor objective on the toy. The valid
+  three-epoch exposure gate improved match only from `0.421875` to `0.46875`,
+  with no PPO clipping and last-epoch KL about `6.1e-6`; optimizer
+  underexposure is not the immediate cause. Context encoding, low capacity,
+  intrinsic reward, a disconnected actor gradient, and conflicting GAE
+  direction are also closed as sufficient explanations. R39A is preserved and
+  deferred; native HMASD R39B remains blocked.
 
 ## Next Actions
 
-- Immediate next action: add an explicit high PPO epoch count, defaulting to
-  the current value `1`, and run the direct-state fixed-primitive toy with
-  `high_ppo_epochs=3`. Reuse each collected high batch three times while
-  preserving stored old likelihoods, advantages, clocks, and the zero-parameter
-  low carrier. Do not enlarge the model or change the reward.
+- Immediate next action: run one mechanism-matched actor-credit positive
+  control on the same full-refresh fixed-primitive toy. Both arms use three
+  high PPO epochs; the treatment replaces only the actor's standardized
+  SMDP-GAE weight with the standardized discounted block return already stored
+  for that action. The critic still learns the original SMDP return. This is
+  external-reward credit, not intrinsic reward or benchmark shaping.
 
 ## Immediate Constraints
 
