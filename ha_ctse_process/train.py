@@ -2614,8 +2614,12 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
     if bool(getattr(args, "enable_duration_entropy_floor", False)):
         raise ValueError("R30 forbids the duration entropy floor")
 
-    config.team_bridge_type = "deterministic_expected"
-    config.r30_bridge_context_mode = "deterministic_expected"
+    if bool(getattr(config, "r39_toy_direct_state_context", False)):
+        config.team_bridge_type = "none"
+        config.r30_bridge_context_mode = "direct_state_zero_team"
+    else:
+        config.team_bridge_type = "deterministic_expected"
+        config.r30_bridge_context_mode = "deterministic_expected"
     config.r30_keep_init = 0.6
     config.r30_high_buffer_version = 1
     config.high_keep_entropy_coef = 0.0

@@ -252,6 +252,13 @@ explicitly approves the exception.
   result.
 - Status source: `<run-root>/runner_status.txt`; result source:
   `<run-root>/result/r39_toy_direct_state.json`.
+- First launch disposition: `INVALID_R39_TOY_IMPLEMENTATION` at
+  `logs/r39_toy_direct_state_12k8_20260715_184224`. R30 contract normalization
+  rewrote the declared zero bridge to `deterministic_expected`; the direct
+  helper still supplied a zero team vector, but M0 correctly rejected the
+  manifest mismatch. Retry keeps the seed, budget, thresholds, and algorithm
+  unchanged and only preserves `team_bridge_type=none` for this fail-closed
+  direct-state lane.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 
