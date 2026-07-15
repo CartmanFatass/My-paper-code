@@ -1929,6 +1929,13 @@ class StandaloneProcessAgent:
                 "block-return high actor credit is restricted to the R39 "
                 "direct-state fixed-primitive toy"
             )
+        if self.high_actor_advantage_mode == "block_return" and (
+            not self.r30_force_refresh_every_check or self.high_ppo_epochs != 3
+        ):
+            raise ValueError(
+                "block-return high actor credit requires the R39 full-refresh "
+                "three-epoch positive-control lane"
+            )
         self.r31_effect_mode = str(
             getattr(config, "r31_effect_mode", "off")
         ).lower()
@@ -8048,7 +8055,10 @@ class StandaloneProcessAgent:
                     policy_skill_head_grad_norm = grad_norm(
                         policy_grads, skill_head_ids
                     )
-                    if self.r39_toy_direct_state_context:
+                    if (
+                        self.r39_toy_direct_state_context
+                        and self.high_actor_advantage_mode == "smdp_gae"
+                    ):
                         block_grads = torch.autograd.grad(
                             block_policy_loss,
                             actor_params,
@@ -8065,6 +8075,9 @@ class StandaloneProcessAgent:
                         gae_block_skill_head_grad_cosine = grad_cosine(
                             policy_grads, block_grads, skill_head_ids
                         )
+                    elif self.r39_toy_direct_state_context:
+                        block_actor_grad_norm = policy_actor_grad_norm
+                        block_skill_head_grad_norm = policy_skill_head_grad_norm
             self.high_opt.zero_grad()
             loss = epoch["loss"]
             loss.backward()

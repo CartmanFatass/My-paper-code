@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-block-credit | launch-ready | stage-0 high actor-credit positive control | local CUDA | paired result JSON | three high epochs were valid and unsaturated but insufficient; the actor's block-return gradient is larger and only moderately aligned with SMDP-GAE | Compare SMDP-GAE against discounted block-return actor weighting with identical full-refresh high3 controllers. This diagnoses credit; it is not a long-horizon algorithm promotion. |
+| EXP-20260715-r39-toy-joint-factorization | launch-ready | stage-0 exact joint-policy capacity diagnostic | local CPU; zero environment steps | result JSON | high3 and direct block-return credit produced identical chance-like access, leaving autoregressive roster representation versus sampled joint credit unresolved | Optimize exact correct unordered-pair likelihood in eight contexts on the same high-32 policy. PASS localizes failure to sampled credit; FAIL localizes it to factorization. |
+| EXP-20260715-r39-toy-block-credit | completed -- valid `FAIL_R39_TOY_BLOCK_CREDIT` | stage-0 high actor-credit positive control | `logs/r39_toy_block_credit_12k8_20260715_192020`; commit `22a3162` | exact joint-roster factorization diagnostic | M0 PASS; SMDP-GAE and block-return both scored match/slow/fast `0.46875`, gain `0`, with exact replay, high3, and zero intrinsic | Retire actor-advantage source as the immediate cause. Test whether the tiny autoregressive joint policy can learn the four contextual roster mappings under exact supervision. |
 | EXP-20260715-r39-toy-high-exposure | completed -- valid `FAIL_R39_TOY_HIGH_EXPOSURE_3` | stage-0 high optimizer-exposure gate | `logs/r39_toy_high_exposure_12k8_20260715_191019`; commit `b805abc` | high actor-objective positive control | M0 PASS; 3 epochs improved match `0.421875 -> 0.46875` (`+0.046875`), below access/effect gates; clip fraction `0`, mean last-epoch KL `6.12e-6` | Retire optimizer underexposure as the immediate cause. Compare SMDP-GAE with diagnostic block-return actor credit on the unchanged tiny model. |
 | EXP-20260715-r39-toy-high-credit-diagnostic | completed -- credit directions aligned | stage-0 high-credit localization | `logs/r39_toy_high_credit_diag_1920_20260715_185721`; commit `ef9a34d` | high optimizer-exposure gate | M0 PASS; both arms had nonzero comparable GAE/block gradients and all six skill-head cosines were positive (`0.392-0.594`) | GAE does not extinguish or reverse immediate block credit. Test explicit three-epoch high PPO exposure on the same tiny model. |
 | EXP-20260715-r39-toy-direct-state | completed -- valid `FAIL_R39_TOY_HIGH_CREDIT` | stage-0 high-context localization; hierarchy-L2 temporal control | `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`; commit `1200bdf` | actor-only GAE/block-return gradient diagnostic | M0 PASS; direct state and zero team context replay exactly, low has zero parameters/updates, and actor/skill-head policy gradients are nonzero; both arms match `0.421875` | Context compression and a disconnected actor gradient do not explain the failure. Diagnose credit direction versus optimizer exposure on a smaller toy collection; do not enter S7 or enlarge the model. |
@@ -371,6 +372,35 @@ explicitly approves the exception.
   larger models, intrinsic reward, or S7/UAV compute.
 - Status source: `<run-root>/runner_status.txt`; result source:
   `<run-root>/result/r39_toy_block_credit.json`.
+- Result: valid `FAIL_R39_TOY_BLOCK_CREDIT` at
+  `logs/r39_toy_block_credit_12k8_20260715_192020`, commit `22a3162`. Both arms
+  scored match/slow/fast `0.46875`, so treatment gain was exactly zero. M0
+  confirmed actor modes `smdp_gae/block_return`, three high steps, one
+  ValueNorm update, replay error zero, zero clipping, and no intrinsic fields.
+  This retires actor-advantage source as the immediate explanation and selects
+  an exact factorization-capacity diagnostic before any new learning mechanism.
+
+### EXP-20260715-r39-toy-joint-factorization
+
+- Question: can the exact R39 native categorical autoregressive policy
+  represent and learn the role-free contextual mapping when joint-roster credit
+  is supplied without sampling noise?
+- Instrument: the same high hidden 32 policy, direct 8D compact context, zero
+  team vector, canonical two-token factorization, and all 16 final rosters.
+  Eight contexts cover four slow/fast target-sign combinations under two active
+  previous rosters. No environment step, reward, critic, low policy, or
+  intrinsic mechanism is used.
+- Optimization: seed 39041, Adam `3e-4`, 2,000 exact likelihood steps. Objective
+  is negative log probability mass on the two correct unordered orientations.
+  Oracle labels are diagnostic-only and cannot enter the training algorithm.
+- M0: joint probabilities sum to one within `1e-6`, initial gradient norm
+  `>1e-8`, finite loss, same 2,512-parameter high policy shape.
+- M1: minimum correct unordered-pair mass across eight contexts `>=0.90`.
+- Branches: PASS closes policy expressivity/factorization as the immediate
+  defect and selects sampled joint-credit variance for the next algorithmic
+  edge. FAIL requires repairing the factorization before another RL run. No
+  branch authorizes oracle labels, intrinsic reward, a larger model, or S7.
+- Result source: `logs/r39_toy_joint_factorization_*/result/`.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

@@ -30,22 +30,21 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: isolate the high actor objective on the toy. The valid
-  three-epoch exposure gate improved match only from `0.421875` to `0.46875`,
-  with no PPO clipping and last-epoch KL about `6.1e-6`; optimizer
-  underexposure is not the immediate cause. Context encoding, low capacity,
-  intrinsic reward, a disconnected actor gradient, and conflicting GAE
-  direction are also closed as sufficient explanations. R39A is preserved and
+- Active objective: inspect joint-roster policy factorization on the toy. The
+  valid block-credit positive control produced exactly the same
+  match/slow/fast `0.46875` as SMDP-GAE despite correct actor-mode separation,
+  three high epochs, zero clipping, and exact replay. Actor advantage source
+  and optimizer exposure are not the immediate cause. R39A is preserved and
   deferred; native HMASD R39B remains blocked.
 
 ## Next Actions
 
-- Immediate next action: run one mechanism-matched actor-credit positive
-  control on the same full-refresh fixed-primitive toy. Both arms use three
-  high PPO epochs; the treatment replaces only the actor's standardized
-  SMDP-GAE weight with the standardized discounted block return already stored
-  for that action. The critic still learns the original SMDP return. This is
-  external-reward credit, not intrinsic reward or benchmark shaping.
+- Immediate next action: run a no-environment-step exact factorization
+  diagnostic on the same high-32 policy. For the four target-sign contexts,
+  enumerate all 16 final rosters and optimize only the exact likelihood mass of
+  the two correct role-free orientations. This oracle label is diagnostic-only;
+  it does not enter training reward or the algorithm. PASS localizes the
+  failure to sampled joint credit; FAIL exposes a policy representation defect.
 
 ## Immediate Constraints
 
