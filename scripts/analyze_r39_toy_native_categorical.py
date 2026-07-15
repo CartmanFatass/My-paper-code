@@ -41,6 +41,12 @@ TRAIN_REQUIRED = (
     "r30_spell_le_4k0_count",
     "high_policy_actor_grad_norm",
     "high_policy_skill_head_grad_norm",
+    "high_decision_gae_raw_std",
+    "high_decision_block_return_raw_std",
+    "high_block_return_actor_grad_norm",
+    "high_block_return_skill_head_grad_norm",
+    "high_gae_block_actor_grad_cosine",
+    "high_gae_block_skill_head_grad_cosine",
     "low_optimizer_steps",
     "low_return_env_count",
     "low_replay_logp_max_error",
@@ -395,6 +401,52 @@ def summarize_arm(
             "policy_skill_head_grad_norm_mean": mean(
                 train, "high_policy_skill_head_grad_norm"
             ),
+            "decision_gae_raw_std_mean": mean(
+                train, "high_decision_gae_raw_std"
+            ),
+            "decision_block_return_raw_std_mean": mean(
+                train, "high_decision_block_return_raw_std"
+            ),
+            "block_return_actor_grad_norm_mean": mean(
+                train, "high_block_return_actor_grad_norm"
+            ),
+            "block_return_skill_head_grad_norm_mean": mean(
+                train, "high_block_return_skill_head_grad_norm"
+            ),
+            "gae_block_actor_grad_cosine_mean": mean(
+                train, "high_gae_block_actor_grad_cosine"
+            ),
+            "gae_block_skill_head_grad_cosine_mean": mean(
+                train, "high_gae_block_skill_head_grad_cosine"
+            ),
+            "credit_diagnostic_updates": [
+                {
+                    "update": int(row.get("update", -1.0)),
+                    "gae_raw_std": row.get("high_decision_gae_raw_std"),
+                    "block_return_raw_std": row.get(
+                        "high_decision_block_return_raw_std"
+                    ),
+                    "gae_actor_grad_norm": row.get(
+                        "high_policy_actor_grad_norm"
+                    ),
+                    "block_actor_grad_norm": row.get(
+                        "high_block_return_actor_grad_norm"
+                    ),
+                    "actor_grad_cosine": row.get(
+                        "high_gae_block_actor_grad_cosine"
+                    ),
+                    "gae_skill_head_grad_norm": row.get(
+                        "high_policy_skill_head_grad_norm"
+                    ),
+                    "block_skill_head_grad_norm": row.get(
+                        "high_block_return_skill_head_grad_norm"
+                    ),
+                    "skill_head_grad_cosine": row.get(
+                        "high_gae_block_skill_head_grad_cosine"
+                    ),
+                }
+                for row in train
+            ],
             "low_replay_logp_max_error": low_replay_error,
             "low_optimizer_steps_per_update": mean(train, "low_optimizer_steps"),
             "low_return_env_count": mean(train, "low_return_env_count"),

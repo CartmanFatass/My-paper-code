@@ -7670,6 +7670,12 @@ class StandaloneProcessAgent:
                 "high_grad_norm": 0.0,
                 "high_policy_actor_grad_norm": 0.0,
                 "high_policy_skill_head_grad_norm": 0.0,
+                "high_decision_gae_raw_std": 0.0,
+                "high_decision_block_return_raw_std": 0.0,
+                "high_block_return_actor_grad_norm": 0.0,
+                "high_block_return_skill_head_grad_norm": 0.0,
+                "high_gae_block_actor_grad_cosine": 0.0,
+                "high_gae_block_skill_head_grad_cosine": 0.0,
                 "r30_high_rows": 0.0,
                 "r30_decision_rows": 0.0,
                 "r30_continuation_rows": 0.0,
@@ -7791,13 +7797,25 @@ class StandaloneProcessAgent:
 
         decision_indices = [idx for idx, row in enumerate(rows) if row.decision_mask]
         decision_adv_np = advantages[decision_indices].copy()
+        decision_gae_raw_std = (
+            float(np.std(decision_adv_np)) if decision_adv_np.size > 1 else 0.0
+        )
         if decision_adv_np.size > 1:
             decision_adv_np = (
                 decision_adv_np - float(np.mean(decision_adv_np))
             ) / (float(np.std(decision_adv_np)) + 1e-8)
+        decision_block_np = rewards[decision_indices].copy()
+        decision_block_return_raw_std = (
+            float(np.std(decision_block_np)) if decision_block_np.size > 1 else 0.0
+        )
+        if decision_block_np.size > 1:
+            decision_block_np = (
+                decision_block_np - float(np.mean(decision_block_np))
+            ) / (float(np.std(decision_block_np)) + 1e-8)
         new_logps: list[torch.Tensor] = []
         old_logps: list[torch.Tensor] = []
         token_advantages: list[torch.Tensor] = []
+        block_token_advantages: list[torch.Tensor] = []
         entropy_terms: list[torch.Tensor] = []
         valid_terms: list[torch.Tensor] = []
         for local_idx, row_idx in enumerate(decision_indices):
@@ -7825,6 +7843,9 @@ class StandaloneProcessAgent:
             token_advantages.append(
                 torch.full_like(row_logp, float(decision_adv_np[local_idx]))
             )
+            block_token_advantages.append(
+                torch.full_like(row_logp, float(decision_block_np[local_idx]))
+            )
             entropy_terms.append(row_entropy)
             valid_terms.append(valid)
 
@@ -7832,6 +7853,7 @@ class StandaloneProcessAgent:
             new_logp = torch.stack(new_logps)
             old_logp = torch.stack(old_logps)
             token_advantage = torch.stack(token_advantages)
+            block_token_advantage = torch.stack(block_token_advantages)
             token_valid = torch.stack(valid_terms)
             entropy_matrix = torch.stack(entropy_terms)
             ratio = torch.exp(new_logp - old_logp)
@@ -7840,6 +7862,13 @@ class StandaloneProcessAgent:
                 ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
             ) * token_advantage
             policy_loss = -torch.min(unclipped, clipped)[token_valid].mean()
+            block_unclipped = ratio * block_token_advantage
+            block_clipped = torch.clamp(
+                ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
+            ) * block_token_advantage
+            block_policy_loss = -torch.min(
+                block_unclipped, block_clipped
+            )[token_valid].mean()
             skill_entropy = entropy_matrix[token_valid].mean()
             entropy_loss = -float(self.high_entropy_coef) * skill_entropy
             replay_error = float(
@@ -7850,6 +7879,7 @@ class StandaloneProcessAgent:
             )
         else:
             policy_loss = torch.zeros((), device=self.device)
+            block_policy_loss = torch.zeros((), device=self.device)
             skill_entropy = torch.zeros((), device=self.device)
             entropy_loss = torch.zeros((), device=self.device)
             replay_error = 0.0
@@ -7858,6 +7888,10 @@ class StandaloneProcessAgent:
         loss = policy_loss + 0.5 * value_loss + entropy_loss + aux_loss
         policy_actor_grad_norm = 0.0
         policy_skill_head_grad_norm = 0.0
+        block_actor_grad_norm = 0.0
+        block_skill_head_grad_norm = 0.0
+        gae_block_actor_grad_cosine = 0.0
+        gae_block_skill_head_grad_cosine = 0.0
         actor_params = [param for param in self.high.parameters() if param.requires_grad]
         if policy_loss.requires_grad and actor_params:
             policy_grads = torch.autograd.grad(
@@ -7866,24 +7900,68 @@ class StandaloneProcessAgent:
                 retain_graph=True,
                 allow_unused=True,
             )
-            actor_grad_terms = [
-                torch.sum(grad.detach() ** 2)
-                for grad in policy_grads
-                if grad is not None
-            ]
-            if actor_grad_terms:
-                policy_actor_grad_norm = float(
-                    torch.sqrt(sum(actor_grad_terms)).cpu().item()
-                )
             skill_head_ids = {id(param) for param in self.high.skill_head.parameters()}
-            skill_head_terms = [
-                torch.sum(grad.detach() ** 2)
-                for param, grad in zip(actor_params, policy_grads)
-                if id(param) in skill_head_ids and grad is not None
-            ]
-            if skill_head_terms:
-                policy_skill_head_grad_norm = float(
-                    torch.sqrt(sum(skill_head_terms)).cpu().item()
+            def grad_norm(
+                grads: tuple[torch.Tensor | None, ...],
+                selected_ids: set[int] | None = None,
+            ) -> float:
+                squared = 0.0
+                for param, grad in zip(actor_params, grads):
+                    if grad is None or (
+                        selected_ids is not None and id(param) not in selected_ids
+                    ):
+                        continue
+                    squared += float(torch.sum(grad.detach() ** 2).cpu().item())
+                return float(np.sqrt(squared))
+
+            def grad_cosine(
+                left: tuple[torch.Tensor | None, ...],
+                right: tuple[torch.Tensor | None, ...],
+                selected_ids: set[int] | None = None,
+            ) -> float:
+                dot = 0.0
+                for param, left_grad, right_grad in zip(
+                    actor_params, left, right
+                ):
+                    if (
+                        left_grad is None
+                        or right_grad is None
+                        or (
+                            selected_ids is not None
+                            and id(param) not in selected_ids
+                        )
+                    ):
+                        continue
+                    dot += float(
+                        torch.sum(left_grad.detach() * right_grad.detach())
+                        .cpu()
+                        .item()
+                    )
+                denominator = grad_norm(left, selected_ids) * grad_norm(
+                    right, selected_ids
+                )
+                return float(dot / denominator) if denominator > 0.0 else 0.0
+
+            policy_actor_grad_norm = grad_norm(policy_grads)
+            policy_skill_head_grad_norm = grad_norm(
+                policy_grads, skill_head_ids
+            )
+            if self.r39_toy_direct_state_context:
+                block_grads = torch.autograd.grad(
+                    block_policy_loss,
+                    actor_params,
+                    retain_graph=True,
+                    allow_unused=True,
+                )
+                block_actor_grad_norm = grad_norm(block_grads)
+                block_skill_head_grad_norm = grad_norm(
+                    block_grads, skill_head_ids
+                )
+                gae_block_actor_grad_cosine = grad_cosine(
+                    policy_grads, block_grads
+                )
+                gae_block_skill_head_grad_cosine = grad_cosine(
+                    policy_grads, block_grads, skill_head_ids
                 )
         self.high_opt.zero_grad()
         loss.backward()
@@ -8035,6 +8113,12 @@ class StandaloneProcessAgent:
             "high_grad_norm": float(high_grad_norm.detach().cpu().item()),
             "high_policy_actor_grad_norm": policy_actor_grad_norm,
             "high_policy_skill_head_grad_norm": policy_skill_head_grad_norm,
+            "high_decision_gae_raw_std": decision_gae_raw_std,
+            "high_decision_block_return_raw_std": decision_block_return_raw_std,
+            "high_block_return_actor_grad_norm": block_actor_grad_norm,
+            "high_block_return_skill_head_grad_norm": block_skill_head_grad_norm,
+            "high_gae_block_actor_grad_cosine": gae_block_actor_grad_cosine,
+            "high_gae_block_skill_head_grad_cosine": gae_block_skill_head_grad_cosine,
             "r30_high_rows": float(row_count),
             "r30_decision_rows": float(len(decision_indices)),
             "r30_continuation_rows": float(len(continuation_rows)),

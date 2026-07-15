@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r39-toy-high-credit-diagnostic | launch-ready | stage-0 high-credit localization | local CUDA | gradient diagnostic fields in result JSON | direct state, fixed primitives, and nonzero actor gradients did not yield access; the remaining ambiguity is GAE credit direction versus high optimizer exposure | Collect three paired outer updates and compare GAE with centered block-return actor gradients; the block-return gradient is diagnostic-only. |
 | EXP-20260715-r39-toy-direct-state | completed -- valid `FAIL_R39_TOY_HIGH_CREDIT` | stage-0 high-context localization; hierarchy-L2 temporal control | `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`; commit `1200bdf` | actor-only GAE/block-return gradient diagnostic | M0 PASS; direct state and zero team context replay exactly, low has zero parameters/updates, and actor/skill-head policy gradients are nonzero; both arms match `0.421875` | Context compression and a disconnected actor gradient do not explain the failure. Diagnose credit direction versus optimizer exposure on a smaller toy collection; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-fixed-primitives | completed -- valid `FAIL_R39_TOY_HIGH_ACCESS` | stage-0 high-controller positive control; hierarchy-L2 matched control | `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`; commit `19e7f5c` | high context/credit diagnosis | M0 PASS with zero low parameters/updates and zero intrinsic; adaptive/control match both `0.4375`, slow `0.40625`, fast `0.46875` | Failure is upstream of temporal efficacy: diagnose the high context/credit path on the toy; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-native-categorical | completed -- valid `NO_ACCESS_R39_TOY_32` | stage-0 joint-learning access gate; hierarchy-L2 matched control | `logs/r39_toy_native_categorical_12k8_20260715_180156`; commit `cafec51` | fixed-primitive positive control | M0 PASS; low replay `<=1.91e-6`, 16-env GAE, 3 PPO epochs, zero intrinsic; both arms match about `0.446` | Do not interpret temporal efficacy or enlarge the learner. Isolate the high controller with supplied primitives. |
@@ -268,6 +269,31 @@ explicitly approves the exception.
   reached mixed-age fraction `0.34196` while control remained full-sync, but M1
   blocks temporal interpretation. The next diagnostic compares SMDP-GAE and
   centered block-return actor gradients without applying the latter.
+
+### EXP-20260715-r39-toy-high-credit-diagnostic
+
+- Question: does the actor gradient used by R30 SMDP-GAE point in the same
+  direction as the immediately attributable discounted block-return gradient,
+  or is the high controller receiving conflicting/unstable credit?
+- Scope: the same direct-state, zero-team-context, four fixed primitive toy;
+  no model, reward, buffer, or optimizer change. The centered and standardized
+  block return is used only with `autograd.grad` and is never applied to model
+  parameters.
+- Budget: seed 39041; local CUDA; adaptive and full-refresh arms in parallel;
+  16 env/arm, rollout 40, 1,920 steps and three high optimizer steps/arm; one
+  paired stochastic evaluation episode. Task score is not interpreted.
+- Read: per update, raw GAE/block-return standard deviations, total actor and
+  skill-head gradient norms, and GAE-vs-block gradient cosines. Skill-head
+  direction is primary. Replay must remain `<=1e-5`, low parameters/updates
+  remain zero, and intrinsic fields remain zero.
+- Branches: absent block-return variance/gradient means the immediate block
+  carrier cannot diagnose optimizer exposure. Nonpositive or mixed skill-head
+  cosine means high credit is conflicting/unstable. Three positive cosines in
+  both arms with nonzero, comparable norms localize the next causal test to the
+  single high optimizer step per outer update. None of these branches
+  authorizes model enlargement, intrinsic reward, or S7/UAV compute.
+- Status source: `<run-root>/runner_status.txt`; result source:
+  `<run-root>/result/r39_toy_high_credit_diagnostic.json`.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 
