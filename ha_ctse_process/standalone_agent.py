@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+import random
 import numpy as np
 import torch
 import torch.nn as nn
@@ -9305,6 +9306,43 @@ class StandaloneProcessAgent:
         if not chunks:
             return self._empty_low_metrics()
 
+        low_replay_logp_max_error = 0.0
+        numpy_rng_state = np.random.get_state()
+        python_rng_state = random.getstate()
+        torch_rng_state = torch.random.get_rng_state()
+        cuda_rng_state = torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None
+        try:
+            with torch.no_grad():
+                for start in range(0, len(chunks), self.low_sequence_batch_size):
+                    batch_chunks = chunks[start:start + self.low_sequence_batch_size]
+                    batch = self._low_batch_from_chunks(data, batch_chunks)
+                    logp, _entropy, _values = self.low.evaluate_sequence(
+                        batch["obs"],
+                        batch["skills"],
+                        batch["actions"],
+                        batch["states"],
+                        batch["team_codes"],
+                        batch["agent_ids"],
+                        batch["initial_actor_hxs"],
+                        batch["initial_critic_hxs"],
+                        batch["masks"],
+                        batch["reset_masks"],
+                    )
+                    valid = batch["masks"] > 0.0
+                    if torch.any(valid):
+                        replay_error = torch.abs(logp[valid] - batch["old_logp"][valid])
+                        if replay_error.numel() > 0:
+                            low_replay_logp_max_error = max(
+                                low_replay_logp_max_error,
+                                float(replay_error.max().cpu().item()),
+                            )
+        finally:
+            np.random.set_state(numpy_rng_state)
+            random.setstate(python_rng_state)
+            torch.random.set_rng_state(torch_rng_state)
+            if cuda_rng_state is not None:
+                torch.cuda.set_rng_state_all(cuda_rng_state)
+
         total_loss = 0.0
         total_policy_loss = 0.0
         total_value_loss = 0.0
@@ -9436,6 +9474,8 @@ class StandaloneProcessAgent:
             "low_approx_kl": total_approx_kl / denom,
             "low_actor_grad_norm": total_actor_grad_norm / denom,
             "low_critic_grad_norm": total_critic_grad_norm / denom,
+            "low_optimizer_steps": float(update_count),
+            "low_replay_logp_max_error": low_replay_logp_max_error,
             "low_skill_entropy_std": low_skill_entropy_std,
             "return_mean": float(np.mean(returns)),
             **rollout_diagnostics,

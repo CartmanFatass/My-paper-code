@@ -438,6 +438,7 @@ def empty_r30_no_high_metrics() -> dict[str, float]:
     return {
         "r30_high_rows": 0.0,
         "r30_decision_rows": 0.0,
+        "high_optimizer_steps": 0.0,
     }
 
 
