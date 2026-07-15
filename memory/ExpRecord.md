@@ -28,6 +28,7 @@ explicitly approves the exception.
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
 | EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
+| EXP-20260715-r38-cts-access | planned -- `REGISTERED` | baseline-L1 environment-access gate | detailed contract below; implementation pending | implement the CTS environment and runner | formal gate registered; no result yet | Run the single registered access gate; only PASS permits one later lifetime-controller gate. |
 | EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; GPT-5.6 Pro accepted the failure and selected the R37 observation-substrate gate. |
 | EXP-20260715-r35-sparse-mappo-reset | completed -- valid `NO_ACCESS_R35_UNRESOLVED` | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4`; runner commit `030d0cd`, implementation `b372000` | none | M0 PASS; both arms completed 320K/250 low updates, but 0/64 paired indices had a collection and both cycle means were 0 | Do not interpret noninferiority or replace a baseline; do not rerun/expand R35; seek one non-skill access-first edge. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
@@ -46,6 +47,48 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260715-r38-cts-access — Cooperative Two-Timescale Sparse Access
+
+- Question: can functionally ordinary constant-code recurrent MAPPO access a
+  swap-equivariant task that structurally requires one simultaneous long-lived
+  anchor duty and one short shuttle duty?
+- Causal edge: simultaneous anchor/shuttle duties -> recurrent MAPPO accesses
+  both duties and joint sparse success -> one later lifetime-controller gate is
+  eligible.
+- Baselines: Level 1 trained constant-code recurrent MAPPO versus paired
+  uniform-random actions on identical reset seeds. This is an environment
+  access gate, not an algorithm comparison.
+- Reward: shared +1 only on full success; otherwise zero. Intrinsic reward is
+  identically zero and no environment-specific auxiliary signal is allowed.
+- Budget: train seed 39031; CUDA; 16 parallel environments; rollout 200;
+  320,000 environment steps; 100 outer low PPO updates; final stochastic eval
+  seeds 139031..139286. Random action RNG seed 49031. Paired bootstrap 10,000
+  repetitions with seed 59031.
+- M0 implementation: exact scenario/config/seed/budget; 256 unique paired
+  reset rows per policy; finite actions and metrics; MAPPO success rows end by
+  termination and failures at step 200 by truncation; task reward equals the
+  full-success indicator; all non-full rewards and all intrinsic rewards are
+  zero.
+- M1 access: MAPPO short-duty rate >= 0.10, long-duty rate >= 0.05, full-success
+  rate > 0.10 (at least 26/256), and the paired MAPPO-minus-random bootstrap
+  lower bound is > 0 for all three indicators.
+- M2 repeatability: at least three of the four contiguous 64-reset MAPPO blocks
+  contain at least one full success.
+- PASS_R38_CTS_ACCESS: M0, M1, and M2 pass; authorize only registration of one
+  shared-fixed-k versus per-agent-lifetime mechanism gate.
+- INVALID_R38_IMPLEMENTATION: M0 fails; fix only the concrete wiring defect and
+  rerun the unchanged contract.
+- FAIL_R38_CTS_ACCESS: M0 passes and M1 or M2 fails; retire the benchmark with
+  no shaping, intrinsic reward, budget, seed, threshold, or learner rescue.
+- Prohibited: old Alice-Bob logic, identity cues, role labels, low-learner
+  changes, high-policy updates, process/skill rewards, threshold changes after
+  results, and environment-specific intrinsic reward.
+- Expected wall clock: one local 320K CUDA training job plus 512 total final
+  evaluation episodes; use the existing dedicated training monitor.
+- Status source: `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r38_cts_access.json`.
+- Status: REGISTERED.
 
 ## Current Gate Detail
 
