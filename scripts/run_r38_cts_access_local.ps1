@@ -215,6 +215,7 @@ try {
     }
     New-Item -ItemType Directory -Path $RunRoot -Force | Out-Null
     $StatusOwned = $true
+    Remove-AnalyzerResult
 
     Write-Status "running" "neutral_init"
     Invoke-PythonWorker "neutral_init" $InitRoot $initArgs
@@ -237,7 +238,6 @@ try {
     catch {
         $analyzerProcessError = [string]$_.Exception.Message
         $analyzerFailureText = Get-AnalyzerFailureText
-        Remove-AnalyzerResult
         throw (
             "R38 analyzer process exception; " +
             "stdout_path=$AnalyzerStdoutPath; " +
@@ -248,7 +248,6 @@ try {
     }
     if ($analyzerExitCode -ne 0) {
         $analyzerFailureText = Get-AnalyzerFailureText
-        Remove-AnalyzerResult
         throw (
             "R38 analyzer failed with exit code $analyzerExitCode; " +
             "stdout_path=$AnalyzerStdoutPath; " +
@@ -279,7 +278,15 @@ catch {
     $message = [string]$_.Exception.Message
     $message = $message.Replace("`r", " ").Replace("`n", " ")
     if ($StatusOwned) {
-        Write-Status "failed" "runner" @("error=$message")
+        $failureDetails = @("error=$message")
+        if (Test-Path -LiteralPath $AnalyzerStdoutPath -PathType Leaf) {
+            $failureDetails += "analyzer_stdout_path=$AnalyzerStdoutPath"
+        }
+        if (Test-Path -LiteralPath $AnalyzerStderrPath -PathType Leaf) {
+            $failureDetails += "analyzer_stderr_path=$AnalyzerStderrPath"
+        }
+        Remove-AnalyzerResult
+        Write-Status "failed" "runner" $failureDetails
     }
     throw
 }

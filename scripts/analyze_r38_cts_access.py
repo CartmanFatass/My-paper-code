@@ -531,7 +531,14 @@ def validate_policy_rows(
         if any(field not in row for field in required):
             continue
         reward = row["reward"]
-        length = row["length"]
+        try:
+            length = require_nonnegative_integer(
+                row["length"], field=f"{label} row {episode} length"
+            )
+        except ValueError as exc:
+            add_reason(reasons, str(exc))
+            length = None
+            terminal_semantics_valid = False
         terminated = row["terminated_flag"]
         truncated = row["truncated_flag"]
         short = row["r38_short_duty_complete"]
@@ -549,10 +556,15 @@ def validate_policy_rows(
         if abs(reward - full) > 1e-12 or abs(sparse - full) > 1e-12:
             reward_semantics_valid = False
         if full == 1.0:
-            if terminated != 1.0 or truncated != 0.0 or not (1.0 <= length <= 200.0):
+            if (
+                terminated != 1.0
+                or truncated != 0.0
+                or length is None
+                or not (1 <= length <= 200)
+            ):
                 terminal_semantics_valid = False
         else:
-            if terminated != 0.0 or truncated != 1.0 or length != 200.0:
+            if terminated != 0.0 or truncated != 1.0 or length != 200:
                 terminal_semantics_valid = False
         if full == 1.0 and (short != 1.0 or long != 1.0):
             metric_ranges_valid = False

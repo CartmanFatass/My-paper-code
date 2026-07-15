@@ -5,6 +5,7 @@ from scripts.analyze_r38_cts_access import (
     decide_result,
     paired_bootstrap_ci,
     require_nonnegative_integer,
+    validate_policy_rows,
     validate_zero_count_fields,
 )
 
@@ -52,3 +53,31 @@ def test_zero_count_validator_rejects_each_field_without_cancellation():
     assert any("r30_high_rows" in reason and "finite nonnegative integer" in reason for reason in reasons)
     assert any("r30_decision_rows" in reason and "finite nonnegative integer" in reason for reason in reasons)
     assert any("process_segments=2 != 0" in reason for reason in reasons)
+
+
+def test_policy_validation_rejects_fractional_success_length():
+    row = {
+        "episode": 0.0,
+        "reset_seed": 139_031.0,
+        "reward": 1.0,
+        "length": 3.5,
+        "terminated_flag": 1.0,
+        "truncated_flag": 0.0,
+        "r38_short_duty_complete": 1.0,
+        "r38_long_duty_complete": 1.0,
+        "r38_full_cycle_success": 1.0,
+        "r38_anchor_streak_max": 40.0,
+        "r38_shuttle_stage_max": 4.0,
+        "r38_sparse_reward": 1.0,
+    }
+    reasons = []
+
+    audit = validate_policy_rows(
+        [row], tuple(row), "MAPPO evaluation", reasons, mappo=False
+    )
+
+    assert audit["terminal_semantics_valid"] is False
+    assert any(
+        "length must be a finite nonnegative integer" in reason
+        for reason in reasons
+    )
