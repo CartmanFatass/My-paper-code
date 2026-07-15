@@ -1780,6 +1780,8 @@ class StandaloneProcessAgent:
         self.num_envs = int(num_envs)
         self.n_agents = int(n_agents)
         self.obs_dim = int(obs_dim)
+        self.action_space_type = str(action_space_type)
+        self.action_dim = int(action_dim)
         self.state_dim = int(state_dim or getattr(config, "state_dim", 0) or (self.obs_dim * self.n_agents))
         self.scenario = str(getattr(config, "scenario", "")).lower()
         self.alice_bob_state_long_phase_index = int(
@@ -2219,8 +2221,6 @@ class StandaloneProcessAgent:
         self.p2_cfg = RecoveryPotentialConfig.from_config(config)
         self.p2_computer = RecoveryPotentialComputer(self.n_agents, self.p2_cfg)
 
-        self.action_space_type = str(action_space_type)
-        self.action_dim = int(action_dim)
         compact_dim = int(getattr(config, "opt_compact_dim", getattr(config, "embedding_dim", 64) or 64))
         team_code_dim = int(getattr(config, "team_code_dim", compact_dim))
         num_team_codes = int(getattr(config, "num_team_codes", getattr(config, "n_Z", 1) or 1))
