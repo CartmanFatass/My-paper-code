@@ -30,13 +30,11 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: move the R39 preflight to a small native-HMASD toy path.
-  The toy has not passed its learning gate, so S7 is not authorized. The
-  high-32 policy passed exact factorization capacity, and sampled correct
-  rosters received raw block return `4.9010` versus `1.8170` for incorrect
-  rosters with correctly signed actor weights. Model capacity and reward
-  alignment are closed; standalone shared joint credit is the remaining failed
-  boundary. R39A is preserved and deferred; native HMASD R39B remains blocked.
+- Active objective: establish the fixed-`N` native-HMASD positive credit anchor
+  on the existing `two_timescale_role_free_actions` toy. GPT-5.6 Pro accepted
+  the sequencing disposition: model capacity and reward timing are closed, but
+  sampled factor-level learning is not. The test must preserve the native
+  stored-prefix coordinator likelihood and native team/agent advantages.
 - The variable-team review is accepted as a future, separate open-roster axis:
   membership transitions must not renew surviving agents' skills. It does not
   replace the fixed-`N` native-toy credit anchor. See the disposition pointer
@@ -44,11 +42,12 @@ and history live in their owning files.
 
 ## Next Actions
 
-- Immediate next action: implement the minimum two-agent native-HMASD toy
-  entry with high hidden 32 and fixed axis skill primitives, preserving the
-  original SkillCoordinator teacher-forced joint likelihood and native
-  team/agent high advantages. Toy labels remain evaluation-only. First prove a
-  fixed-k native toy anchor; only then expose native KEEP/SET on the same path.
+- Immediate next action: implement and review one two-agent native-HMASD toy
+  entry with fixed axis primitives, `n_Z=n_z=4`, high hidden 32, `k0=5`, and no
+  low/intrinsic learning. Register the exact 12,800-step, 20-update, three-high-
+  epoch, seed-39041 contract before its single local CUDA run. Toy labels remain
+  evaluation-only. PASS alone authorizes the same-toy exogenous active-mask
+  edge; valid FAIL retires open-roster work on this substrate.
 
 ## Immediate Constraints
 
