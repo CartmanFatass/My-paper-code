@@ -4,14 +4,14 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R41 Official HMASD Alice-and-Bob Source Anchor
+## R41A Local HMASD Alice-and-Bob Access Pilot
 
 Active causal edge:
 
 ```text
-official HMASD source and official Alice_and_Bob task
--> standard fixed-k HMASD reproduces a reliable learned positive anchor
--> one later same-checkpoint native-categorical R30 comparison becomes eligible
+original HMASD source and Alice_and_Bob task
+-> resource-bounded local training shows clear positive access
+-> decide whether the full five-seed source reproduction is worth its compute
 ```
 
 R40 is a valid access failure and its `simple_spread_v3` contract is retired.
@@ -22,24 +22,27 @@ remaining algorithm and budget contract was independently checked against that
 archive. The raw response and controller disposition live under
 `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/`.
 
+The first 32-env launch was stopped before any optimizer update: its spawned
+workers used roughly 11 GB on a 20-logical-processor laptop. The corrected
+pilot is not a scientific replacement for the accepted five-seed R41 contract.
+
 One implementation/evidence boundary:
 
-1. Track `ref/hmasd.tar` in this repository and freshly extract it for each R41
+1. Track `ref/hmasd.tar` in this repository and freshly extract it for R41A
    run. The enclosing project commit is the version identity; do not add an
    application checksum layer.
 2. Keep the extracted `hmasd/` source and `Alice_and_Bob0` implementation
    unchanged. Add only external wrappers and telemetry in this repository.
-3. Preserve the official seeds `1..5`, 32 rollout environments, 100-step
-   episodes, 937 outer updates, `k=50`, `n_Z=2`, `n_z=4`, hidden size 64,
-   official optimizers, and `lambda_e/D/d = 0/0.1/0.2`.
+3. Use seed 1, 16 rollout environments, 100-step episodes, 937 outer updates,
+   1,499,200 environment steps, `k=50`, `n_Z=2`, `n_z=4`, hidden size 64,
+   original optimizers, and `lambda_e/D/d = 0/0.1/0.2`.
 4. Record zero-step and exact-final deterministic 100-episode evaluations,
    actual optimizer-step counts, finite nonzero gradient evidence, source and
    runtime versions, and the pre-update stored/replayed likelihood error.
-5. Run seeds `1..5` sequentially on local CUDA. Each seed retains the original
-   32 rollout environments, so concurrent environment count is 32 rather than
-   the cloud draft's 160. Emit one result JSON implementing the registered
-   M0--M2 branches in `memory/ExpRecord.md`.
-6. Do not implement the PASS-only R30 treatment, port the task into the current
+5. Run the single pilot locally on CUDA and emit one result JSON implementing
+   the registered M0--M2 branches in `memory/ExpRecord.md`.
+6. Do not interpret pilot failure as a valid R41 reproduction failure. Do not
+   implement R30, port the task into the current
    trainer, add shaping/intrinsic reward, or change the source, seed, budget,
    threshold, network, action, observation, map, or checkpoint-selection rule.
 

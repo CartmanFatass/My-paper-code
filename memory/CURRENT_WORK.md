@@ -14,11 +14,10 @@ Updated: 2026-07-16
 
 ## Objective
 
-Establish the fixed-`N` positive anchor by running the original HMASD package
-stored at `ref/hmasd.tar` and its `Alice_and_Bob` environment. The current
-repository may provide only external launch, telemetry, evaluation, and result
-analysis. Only a registered R41 PASS may authorize native-categorical R30 on
-the same task and seed-1 final checkpoint.
+Run a resource-bounded local access pilot using the original HMASD package in
+`ref/hmasd.tar` and its `Alice_and_Bob` environment. This pilot asks whether the
+source learner produces a clear positive signal before committing to the full
+five-seed reproduction; it cannot retire the paper-task route by itself.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
@@ -26,20 +25,20 @@ must not renew surviving agents' skills.
 ## Next Actions
 
 1. Launch `scripts/run_r41_official_hmasd_local.ps1` on local CUDA.
-2. Run one seed worker with 32 rollout environments; seeds `1..5` execute
-   sequentially under the registered M0--M2 contract.
+2. Run seed 1 with 16 rollout environments for 937 outer updates and
+   1,499,200 environment steps.
 3. Read the final analyzer result and select only its registered branch.
 
 ## Immediate Constraints
 
-- R41 must freshly extract and execute `ref/hmasd.tar` without porting it into
+- R41A must freshly extract and execute `ref/hmasd.tar` without porting it into
   the current trainer. Do not add `KEEP/SET`, shaping, or any reward beyond the
   original HMASD `q_D/q_d` source-algorithm terms.
 - Track the source archive in this repository and use the enclosing project Git
   commit as its version identity; do not add hashes or checksums.
-- Alice--Bob is a toy environment and runs locally. Preserve the original
-  32-environment per-seed batch; limit aggregate load by using one seed worker,
-  not by changing optimizer exposure.
+- Alice--Bob is a toy environment and runs locally. The pilot uses 16 envs and
+  one seed while preserving the original 937 outer updates and 14,055 optimizer
+  steps per path. A PASS does not replace the full original-budget reproduction.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.

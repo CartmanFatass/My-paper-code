@@ -16,7 +16,7 @@ $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $LogsRoot = [IO.Path]::GetFullPath((Join-Path $ProjectRoot 'logs'))
 if (-not $RunRoot) {
     $stamp = Get-Date -Format 'yyyyMMdd_HHmmss'
-    $RunRoot = Join-Path $LogsRoot "r41_official_hmasd_$stamp"
+    $RunRoot = Join-Path $LogsRoot "r41a_hmasd_local_pilot_$stamp"
 }
 $RunRoot = [IO.Path]::GetFullPath($RunRoot)
 $logsPrefix = $LogsRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -27,8 +27,8 @@ if (-not $RunRoot.StartsWith($logsPrefix, [StringComparison]::OrdinalIgnoreCase)
 $SourceArchive = Join-Path $ProjectRoot 'ref\hmasd.tar'
 $SourceRoot = Join-Path $RunRoot 'source'
 $StatusPath = Join-Path $RunRoot 'runner_status.txt'
-$ResultPath = Join-Path $RunRoot 'result\r41_official_hmasd_alice_bob.json'
-$Seeds = @(1, 2, 3, 4, 5)
+$ResultPath = Join-Path $RunRoot 'result\r41a_hmasd_alice_bob_local_pilot.json'
+$Seeds = @(1)
 
 if (-not (Test-Path -LiteralPath $PythonPath -PathType Leaf)) {
     throw "R41 Python is missing: $PythonPath"
@@ -60,17 +60,17 @@ function Write-Status {
         "updated=$((Get-Date).ToString('o'))"
         "state=$State"
         "phase=$Phase"
-        'experiment=EXP-20260716-r41-official-hmasd-alice-bob-anchor'
+        'experiment=EXP-20260716-r41a-hmasd-alice-bob-local-pilot'
         "run_root=$RunRoot"
         'execution_target=local'
         'device=cuda'
         'source_archive=ref/hmasd.tar'
-        'seeds=1,2,3,4,5'
+        'seeds=1'
         'parallel_seed_workers=1'
-        'rollout_envs_per_seed=32'
-        'concurrent_rollout_envs=32'
-        'declared_env_steps_per_seed=3000000'
-        'actual_env_steps_per_seed=2998400'
+        'rollout_envs_per_seed=16'
+        'concurrent_rollout_envs=16'
+        'declared_env_steps_per_seed=1499200'
+        'actual_env_steps_per_seed=1499200'
         'outer_updates_per_seed=937'
         'optimizer_steps_per_path_per_seed=14055'
         "active_seed=$ActiveSeed"
@@ -122,7 +122,7 @@ $analysisArguments = @(
 $analysisCommand = Format-Command $PythonPath $analysisArguments
 
 if ($DryRun) {
-    Write-Output 'R41 local topology: 1 seed worker x 32 rollout envs; seeds 1..5 sequential.'
+    Write-Output 'R41A local pilot topology: seed 1 x 16 rollout envs.'
     Write-Output "Source: $SourceArchive"
     $seedCommands | ForEach-Object { Write-Output $_ }
     Write-Output $analysisCommand
@@ -190,7 +190,7 @@ try {
     }
     $result = Get-Content -Raw -LiteralPath $ResultPath | ConvertFrom-Json
     Write-Status -State 'completed' -Phase 'result'
-    Write-Output "R41 completed: status=$($result.status); result=$ResultPath"
+    Write-Output "R41A completed: status=$($result.status); result=$ResultPath"
 } catch {
     if (Test-Path -LiteralPath $RunRoot) {
         Write-Status -State 'failed' -Phase 'runner' -ErrorMessage $_.Exception.Message

@@ -1,4 +1,4 @@
-"""Run one seed of the pinned official HMASD Alice-and-Bob source anchor.
+"""Run the original-source HMASD Alice-and-Bob local access pilot.
 
 This module is deliberately an external wrapper.  It imports the untouched
 official source tree, records optimizer/replay evidence, saves complete exact
@@ -25,11 +25,11 @@ from typing import Any
 import numpy as np
 
 
-EXPERIMENT_ID = "EXP-20260716-r41-official-hmasd-alice-bob-anchor"
+EXPERIMENT_ID = "EXP-20260716-r41a-hmasd-alice-bob-local-pilot"
 SOURCE_ARCHIVE = "ref/hmasd.tar"
 SOURCE_TREE_LAYOUT = "hmasd/"
 EXPECTED_OUTER_UPDATES = 937
-EXPECTED_ENV_STEPS = 2_998_400
+EXPECTED_ENV_STEPS = 1_499_200
 EXPECTED_OPTIMIZER_STEPS = 14_055
 EVAL_EPISODES = 100
 
@@ -507,8 +507,9 @@ def official_argument_vector(seed: int) -> list[str]:
         "--env_name", "alice_and_bob",
         "--algorithm_name", "hmasd",
         "--seed", str(seed),
-        "--num_env_steps", "3000000",
+        "--num_env_steps", "1499200",
         "--episode_length", "100",
+        "--n_rollout_threads", "16",
         "--skill_type", "Discrete",
         "--skill_interval", "50",
         "--team_skill_dim", "2",

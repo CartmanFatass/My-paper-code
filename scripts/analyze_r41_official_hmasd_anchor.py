@@ -1,4 +1,4 @@
-"""Apply the preregistered R41 official-source reproduction decision gate."""
+"""Apply the R41A local HMASD Alice--Bob access-pilot decision gate."""
 
 from __future__ import annotations
 
@@ -11,12 +11,12 @@ from typing import Any
 import numpy as np
 
 
-EXPERIMENT_ID = "EXP-20260716-r41-official-hmasd-alice-bob-anchor"
+EXPERIMENT_ID = "EXP-20260716-r41a-hmasd-alice-bob-local-pilot"
 SOURCE_ARCHIVE = "ref/hmasd.tar"
 SOURCE_TREE_LAYOUT = "hmasd/"
-SEEDS = (1, 2, 3, 4, 5)
+SEEDS = (1,)
 EXPECTED_OUTER_UPDATES = 937
-EXPECTED_ENV_STEPS = 2_998_400
+EXPECTED_ENV_STEPS = 1_499_200
 EXPECTED_OPTIMIZER_STEPS = 14_055
 BOOTSTRAP_REPETITIONS = 10_000
 BOOTSTRAP_SEED = 61_041
@@ -89,9 +89,9 @@ def validate_seed(result: dict[str, Any], seed: int) -> list[str]:
         "algorithm_name": "hmasd",
         "experiment_name": "check",
         "seed": seed,
-        "num_env_steps": 3_000_000,
+        "num_env_steps": 1_499_200,
         "episode_length": 100,
-        "n_rollout_threads": 32,
+        "n_rollout_threads": 16,
         "n_eval_rollout_threads": 1,
         "n_training_threads": 16,
         "skill_type": "Discrete",
@@ -270,48 +270,49 @@ def main() -> None:
         seed_results[seed] = result
         invalid_reasons.extend(validate_seed(result, seed))
 
-    complete = len(seed_results) == len(SEEDS)
-    zero_rates = np.asarray(
-        [seed_results[seed]["evaluations"]["zero_step"]["win_rate"] for seed in SEEDS],
-        dtype=np.float64,
-    ) if complete else np.full(5, np.nan)
-    final_rates = np.asarray(
-        [seed_results[seed]["evaluations"]["exact_final"]["win_rate"] for seed in SEEDS],
-        dtype=np.float64,
-    ) if complete else np.full(5, np.nan)
-    deltas = final_rates - zero_rates
-    if complete and np.all(np.isfinite(deltas)):
+    complete = len(seed_results) == 1
+    if complete:
+        seed_result = seed_results[1]
+        zero_eval = seed_result["evaluations"]["zero_step"]
+        final_eval = seed_result["evaluations"]["exact_final"]
+        zero_rate = float(zero_eval["win_rate"])
+        final_rate = float(final_eval["win_rate"])
+        paired_delta = np.asarray(final_eval["episode_wins"], dtype=np.float64) - np.asarray(
+            zero_eval["episode_wins"], dtype=np.float64
+        )
         rng = np.random.default_rng(BOOTSTRAP_SEED)
-        draws = rng.integers(0, len(SEEDS), size=(BOOTSTRAP_REPETITIONS, len(SEEDS)))
-        bootstrap_means = deltas[draws].mean(axis=1)
+        draws = rng.integers(
+            0,
+            paired_delta.size,
+            size=(BOOTSTRAP_REPETITIONS, paired_delta.size),
+        )
+        bootstrap_means = paired_delta[draws].mean(axis=1)
         delta_ci = {
-            "mean": float(deltas.mean()),
+            "mean": float(paired_delta.mean()),
             "lower_95": float(np.quantile(bootstrap_means, 0.025)),
             "upper_95": float(np.quantile(bootstrap_means, 0.975)),
         }
     else:
+        zero_rate = None
+        final_rate = None
         delta_ci = {"mean": None, "lower_95": None, "upper_95": None}
 
     m0 = complete and not invalid_reasons
-    mean_final = float(final_rates.mean()) if complete else None
-    seed1_final = float(final_rates[0]) if complete else None
-    seeds_above_070 = int(np.sum(final_rates >= 0.70)) if complete else 0
-    m1 = bool(m0 and mean_final >= 0.80 and seed1_final >= 0.80)
+    m1 = bool(m0 and final_rate is not None and final_rate >= 0.50)
     m2 = bool(
         m0
-        and seeds_above_070 >= 3
         and delta_ci["lower_95"] is not None
-        and delta_ci["lower_95"] > 0.50
+        and delta_ci["lower_95"] > 0.0
     )
     if not m0:
-        status = "INVALID_R41_HMASD_ALICE_BOB_REPRODUCTION"
+        status = "INVALID_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
         next_action = "repair only the concrete source, wrapper, counter, checkpoint, or evaluator defect and rerun unchanged"
     elif m1 and m2:
-        status = "PASS_R41_HMASD_ALICE_BOB_REPRODUCTION"
-        next_action = "freeze seed-1 exact-final checkpoint and register only the same-checkpoint fixed-refresh versus native-categorical KEEP/SET comparison"
+        status = "PASS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
+        next_action = "use this access evidence to decide whether the full original-budget reproduction is still needed before the same-checkpoint R30 comparison"
     else:
-        status = "VALID_FAIL_R41_HMASD_ALICE_BOB_REPRODUCTION"
-        next_action = "retire the R41 paper-task route and its PASS-only R30 treatment without rescue"
+        status = "NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
+        next_action = "review the original-source learning trace; this single-seed half-step pilot cannot retire the paper-task route"
 
     result = {
         "experiment_id": EXPERIMENT_ID,
@@ -320,10 +321,11 @@ def main() -> None:
         "source_archive": SOURCE_ARCHIVE,
         "contract": {
             "seeds": list(SEEDS),
-            "declared_env_steps_per_seed": 3_000_000,
+            "declared_env_steps_per_seed": 1_499_200,
             "actual_env_steps_per_seed": EXPECTED_ENV_STEPS,
             "outer_updates_per_seed": EXPECTED_OUTER_UPDATES,
             "optimizer_steps_per_path_per_seed": EXPECTED_OPTIMIZER_STEPS,
+            "rollout_envs": 16,
             "eval_episodes_per_checkpoint": 100,
             "bootstrap_repetitions": BOOTSTRAP_REPETITIONS,
             "bootstrap_seed": BOOTSTRAP_SEED,
@@ -335,31 +337,24 @@ def main() -> None:
             },
             "M1": {
                 "passed": m1,
-                "mean_final_win_rate": mean_final,
-                "seed1_final_win_rate": seed1_final,
-                "mean_final_floor": 0.80,
-                "seed1_final_floor": 0.80,
+                "seed1_final_win_rate": final_rate,
+                "final_win_rate_floor": 0.50,
             },
             "M2": {
                 "passed": m2,
-                "seeds_with_final_win_rate_at_least_0_70": seeds_above_070,
-                "required_seed_count": 3,
-                "final_minus_zero_bootstrap_ci": delta_ci,
-                "strict_lower_bound_floor": 0.50,
+                "paired_reset_final_minus_zero_bootstrap_ci": delta_ci,
+                "strict_lower_bound_floor": 0.0,
             },
         },
-        "per_seed": {
-            str(seed): {
-                "zero_step_win_rate": float(zero_rates[index]) if complete else None,
-                "final_win_rate": float(final_rates[index]) if complete else None,
-                "final_minus_zero": float(deltas[index]) if complete else None,
-                "elapsed_seconds": seed_results.get(seed, {}).get("elapsed_seconds"),
-            }
-            for index, seed in enumerate(SEEDS)
+        "seed1": {
+            "zero_step_win_rate": zero_rate,
+            "final_win_rate": final_rate,
+            "paired_final_minus_zero": delta_ci["mean"],
+            "elapsed_seconds": seed_results.get(1, {}).get("elapsed_seconds"),
         },
         "next_action": next_action,
     }
-    output_path = result_root / "r41_official_hmasd_alice_bob.json"
+    output_path = result_root / "r41a_hmasd_alice_bob_local_pilot.json"
     output_path.write_text(
         json.dumps(result, indent=2, sort_keys=True),
         encoding="utf-8",
