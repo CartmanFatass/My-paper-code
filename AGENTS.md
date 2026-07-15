@@ -196,15 +196,15 @@ pointer, not evidence. Read the raw text and disposition the advice
 (accept/reject/modify/defer). If raw text is missing, mark the evidence
 incomplete. Record source model, date, related claim, and disposition.
 
-GPT-5.6 Pro / ChatGPT web exchange is automatic by default once the exact
-tracked question is committed and pushed. Codex has standing authorization to
-use the in-app browser, submit that question in the existing
-`HMASD Algorithm Consultation` conversation with the `Pro` model, wait for the
-response, archive it raw, disposition it, and continue only the accepted
-registered branch. The user may explicitly request manual handoff for a round.
-Reuse the single conversation; do not create duplicate review chats or submit
-parallel prompts. Stop for authentication, CAPTCHA, permission, or
-ambiguous-model issues instead of switching accounts or models.
+GPT-5.6 Pro / ChatGPT web exchange is manual by default. Once the exact tracked
+question is committed and pushed, Codex outputs the directly copyable prompt
+below and stops the external-review step. The user submits it in the existing
+`HMASD Algorithm Consultation` conversation with the `Pro` model and returns
+the raw response. Codex then archives that response, dispositions it, and
+continues only the accepted registered branch. Do not use browser or Computer
+Use to submit, wait for, or read a Pro response unless the user explicitly
+authorizes automation for that specific round. Reuse the single conversation;
+do not create duplicate review chats or submit parallel prompts.
 
 Every GPT-5.6 Pro handoff must also end with one directly copyable prompt in the
 controller's user-facing response. Do not provide only file paths or describe

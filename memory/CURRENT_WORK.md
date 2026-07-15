@@ -22,27 +22,25 @@ and history live in their owning files.
 - **Local overnight authorization:** the user permits a longer local CUDA run
   overnight when the next causal gate is registered and requires it. R35 used
   that authorization and has reached its registered terminal result.
-- **Default review handoff:** once a tracked question is committed and pushed,
-  Codex automatically submits it in the existing `HMASD Algorithm Consultation`
-  browser conversation with the `Pro` model, archives the raw response, and
-  continues only the accepted registered branch. Do not create duplicate review
-  conversations.
+- **Default review handoff:** manual. Once a tracked question is committed and
+  pushed, Codex gives the user one directly copyable prompt and waits. The user
+  submits it in the existing `HMASD Algorithm Consultation` Pro conversation
+  and returns the raw response; Codex then archives and dispositions it. Browser
+  automation requires explicit authorization for that specific round.
 
 ## Current Objective
 
-- Active objective: close the valid `FAIL_R38_CTS_ACCESS`, complete the
-  R35--R38 cross-round access failure review, and obtain one externally audited
-  next causal edge. R37 and R38 are retired; no lifetime, skill, or intrinsic
-  mechanism experiment is authorized by the failed access gate.
+- Active objective: close the valid `FAIL_R38_CTS_ACCESS`, archive and
+  disposition the manually returned corrected GPT-5.6 Pro response, and reduce
+  its proposed R39 S7 fixed-k versus per-agent KEEP/SET route to one executable
+  compatibility-first gate. R37 and R38 remain retired.
 
 ## Next Actions
 
-- Immediate next action: archive the R35--R38 failure/baseline matrix and one
-  tracked GPT-5.6 Pro question that decides whether to return to a known
-  accessible benchmark, use a positive-control mechanism substrate, or take a
-  different upstream route. The question must prohibit another unsupported toy
-  benchmark and any environment-specific intrinsic reward. Commit and push the
-  exact entry before the default automatic Pro handoff.
+- Immediate next action: archive the manually returned corrected R38 review,
+  disposition its HMASD-compatible R39 route against the repository's actual S7
+  checkpoint and migration support, and register only the smallest executable
+  compatibility-first experiment boundary. No browser handoff is pending.
 
 ## Immediate Constraints
 
