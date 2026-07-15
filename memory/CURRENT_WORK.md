@@ -10,23 +10,30 @@ Updated: 2026-07-16
 - **Project boundary:** IMOD is operational reference only, not HMASD evidence.
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
-- **External review:** manual GPT-5.6 Pro handoff under `AGENTS.md`.
+- **External review:** three sequential automated GPT-5.6 Pro rounds are
+  authorized for the post-R41A boundary. Reuse the existing `HMASD Algorithm
+  Consultation` conversation, archive each full response before disposition,
+  and do not submit rounds in parallel. After these three rounds, return to the
+  manual default in `AGENTS.md`.
 
 ## Objective
 
-Run a resource-bounded local access pilot using the original HMASD package in
-`ref/hmasd.tar` and its `Alice_and_Bob` environment. This pilot asks whether the
-source learner produces a clear positive signal before committing to the full
-five-seed reproduction; it cannot retire the paper-task route by itself.
+Disposition the valid no-access R41A original-HMASD pilot and select the single
+next fixed-`N` source-anchor edge through the authorized three-round sequential
+GPT-5.6 Pro consultation. R41A cannot retire the paper-task route by itself.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Follow `logs/r41a_hmasd_local_pilot_20260716_014529/runner_status.txt` and
-   seed-1 `progress.json` while the local run is active.
-2. Read the final analyzer result once and select only its registered branch.
+1. Submit the tracked R41A result and learning-trace review as automated
+   GPT-5.6 Pro round 1.
+2. Archive and disposition the full raw response before changing code or
+   launching the next source-anchor experiment.
+3. Rounds 2 and 3
+   must each depend on the archived and dispositioned answer from the prior
+   round.
 
 ## Immediate Constraints
 

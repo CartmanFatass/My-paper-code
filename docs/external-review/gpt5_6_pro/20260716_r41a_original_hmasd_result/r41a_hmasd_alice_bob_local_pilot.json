@@ -1,0 +1,46 @@
+{
+  "contract": {
+    "actual_env_steps_per_seed": 1499200,
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 61041,
+    "declared_env_steps_per_seed": 1499200,
+    "eval_episodes_per_checkpoint": 100,
+    "optimizer_steps_per_path_per_seed": 14055,
+    "outer_updates_per_seed": 937,
+    "rollout_envs": 16,
+    "seeds": [
+      1
+    ]
+  },
+  "experiment_id": "EXP-20260716-r41a-hmasd-alice-bob-local-pilot",
+  "gates": {
+    "M0": {
+      "invalid_reasons": [],
+      "passed": true
+    },
+    "M1": {
+      "final_win_rate_floor": 0.5,
+      "passed": false,
+      "seed1_final_win_rate": 0.0
+    },
+    "M2": {
+      "paired_reset_final_minus_zero_bootstrap_ci": {
+        "lower_95": 0.0,
+        "mean": 0.0,
+        "upper_95": 0.0
+      },
+      "passed": false,
+      "strict_lower_bound_floor": 0.0
+    }
+  },
+  "implementation_valid": true,
+  "next_action": "review the original-source learning trace; this single-seed half-step pilot cannot retire the paper-task route",
+  "seed1": {
+    "elapsed_seconds": 1769.5072922706604,
+    "final_win_rate": 0.0,
+    "paired_final_minus_zero": 0.0,
+    "zero_step_win_rate": 0.0
+  },
+  "source_archive": "ref/hmasd.tar",
+  "status": "NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT"
+}

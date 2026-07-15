@@ -46,6 +46,14 @@ One implementation/evidence boundary:
    trainer, add shaping/intrinsic reward, or change the source, seed, budget,
    threshold, network, action, observation, map, or checkpoint-selection rule.
 
+Result boundary: the corrected run
+`logs/r41a_hmasd_local_pilot_20260716_030013` at commit `a1ea76b` completed as
+valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT`. M0 passed with zero high,
+low, and global replay error and exactly 14,055 updates on all five optimizer
+paths. Exact zero-step and final win rates were both zero; the paired interval
+was `[0, 0]`. This does not authorize R30 or retire the source route. The active
+step is the registered original-source trace review.
+
 ## R39 S7 Compatibility Boundary
 
 R38 completed as a valid `FAIL_R38_CTS_ACCESS`; its replacement environment and

@@ -1,0 +1,24 @@
+{
+  "source": "R41A_SEED1_TRAINING_TRACE_RAW.txt",
+  "train_log_points": 188,
+  "first_logged_update": 0,
+  "last_logged_update": 935,
+  "train_max_win_rate": 0.0125,
+  "train_max_key0_rate": 0.4875,
+  "train_max_key1_rate": 0.15,
+  "train_mean_key0_rate": 0.03856382978723409,
+  "train_mean_key1_rate": 0.02473404255319149,
+  "first_nonzero_key0_update": 5,
+  "first_nonzero_key1_update": 0,
+  "intermediate_deterministic_eval_points": 38,
+  "intermediate_eval_max_win_rate": 0.0,
+  "intermediate_eval_max_key0_rate": 0.09,
+  "intermediate_eval_max_key1_rate": 0.01,
+  "late_eval_updates_700_through_925": {
+    "win_rate": 0.0,
+    "key0_rate": 0.0,
+    "key1_rate": 0.0
+  },
+  "exact_zero_step_win_rate": 0.0,
+  "exact_final_win_rate": 0.0
+}

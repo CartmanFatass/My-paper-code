@@ -1,0 +1,793 @@
+obs_space:  [[11], [11]]
+share_obs_space:  [[100], [100]]
+act_space:  [Discrete(5), Discrete(5)]
+
+ Env alice_and_bob Algo hmasd Exp check updates 0/937 episodes, total num timesteps 1600/1499200, FPS 1010.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.292145 ave_train_episode_indi_intri_rewards -138.67683 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.01.
+
+ Env alice_and_bob Algo hmasd Exp check updates 5/937 episodes, total num timesteps 9600/1499200, FPS 368.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.58061 ave_train_episode_indi_intri_rewards -140.12077 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 10/937 episodes, total num timesteps 17600/1499200, FPS 552.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.22371 ave_train_episode_indi_intri_rewards -139.31677 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 15/937 episodes, total num timesteps 25600/1499200, FPS 672.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.928116 ave_train_episode_indi_intri_rewards -136.58725 ave_train_win_rate 0.0 ave_train_key0 0.1 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 20/937 episodes, total num timesteps 33600/1499200, FPS 768.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -74.78144 ave_train_episode_indi_intri_rewards -136.39935 ave_train_win_rate 0.0 ave_train_key0 0.15 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 25/937 episodes, total num timesteps 41600/1499200, FPS 839.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -75.05187 ave_train_episode_indi_intri_rewards -139.85876 ave_train_win_rate 0.0 ave_train_key0 0.1 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 30/937 episodes, total num timesteps 49600/1499200, FPS 671.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.58971 ave_train_episode_indi_intri_rewards -139.02792 ave_train_win_rate 0.0 ave_train_key0 0.2375 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 35/937 episodes, total num timesteps 57600/1499200, FPS 719.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.03292 ave_train_episode_indi_intri_rewards -139.46294 ave_train_win_rate 0.0 ave_train_key0 0.45 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 40/937 episodes, total num timesteps 65600/1499200, FPS 764.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.22799 ave_train_episode_indi_intri_rewards -140.89453 ave_train_win_rate 0.0 ave_train_key0 0.4875 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 45/937 episodes, total num timesteps 73600/1499200, FPS 804.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.442215 ave_train_episode_indi_intri_rewards -139.26462 ave_train_win_rate 0.0 ave_train_key0 0.375 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 50/937 episodes, total num timesteps 81600/1499200, FPS 837.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.22295 ave_train_episode_indi_intri_rewards -134.72112 ave_train_win_rate 0.0 ave_train_key0 0.2125 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 55/937 episodes, total num timesteps 89600/1499200, FPS 726.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.76079 ave_train_episode_indi_intri_rewards -141.93091 ave_train_win_rate 0.0 ave_train_key0 0.3 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 60/937 episodes, total num timesteps 97600/1499200, FPS 753.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.640335 ave_train_episode_indi_intri_rewards -137.82417 ave_train_win_rate 0.0 ave_train_key0 0.125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 65/937 episodes, total num timesteps 105600/1499200, FPS 780.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.2765 ave_train_episode_indi_intri_rewards -140.11035 ave_train_win_rate 0.0 ave_train_key0 0.15 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 70/937 episodes, total num timesteps 113600/1499200, FPS 802.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.625656 ave_train_episode_indi_intri_rewards -138.1764 ave_train_win_rate 0.0 ave_train_key0 0.15 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 75/937 episodes, total num timesteps 121600/1499200, FPS 824.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.98377 ave_train_episode_indi_intri_rewards -139.94211 ave_train_win_rate 0.0 ave_train_key0 0.1625 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.01. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 80/937 episodes, total num timesteps 129600/1499200, FPS 748.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.53972 ave_train_episode_indi_intri_rewards -140.20201 ave_train_win_rate 0.0 ave_train_key0 0.2625 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 85/937 episodes, total num timesteps 137600/1499200, FPS 768.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.03401 ave_train_episode_indi_intri_rewards -138.99057 ave_train_win_rate 0.0 ave_train_key0 0.2 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 90/937 episodes, total num timesteps 145600/1499200, FPS 784.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.75127 ave_train_episode_indi_intri_rewards -139.93604 ave_train_win_rate 0.0 ave_train_key0 0.2 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 95/937 episodes, total num timesteps 153600/1499200, FPS 801.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -63.86283 ave_train_episode_indi_intri_rewards -138.54196 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 100/937 episodes, total num timesteps 161600/1499200, FPS 818.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.6797 ave_train_episode_indi_intri_rewards -138.38489 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.06. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 105/937 episodes, total num timesteps 169600/1499200, FPS 760.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.29205 ave_train_episode_indi_intri_rewards -140.11076 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 110/937 episodes, total num timesteps 177600/1499200, FPS 776.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.69361 ave_train_episode_indi_intri_rewards -139.44446 ave_train_win_rate 0.0 ave_train_key0 0.0875 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 115/937 episodes, total num timesteps 185600/1499200, FPS 790.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.03295 ave_train_episode_indi_intri_rewards -139.72774 ave_train_win_rate 0.0 ave_train_key0 0.0375 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 120/937 episodes, total num timesteps 193600/1499200, FPS 805.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.54198 ave_train_episode_indi_intri_rewards -138.9777 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 125/937 episodes, total num timesteps 201600/1499200, FPS 816.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.0361 ave_train_episode_indi_intri_rewards -138.40816 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.05. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 130/937 episodes, total num timesteps 209600/1499200, FPS 766.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.009415 ave_train_episode_indi_intri_rewards -139.62349 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 135/937 episodes, total num timesteps 217600/1499200, FPS 778.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.66725 ave_train_episode_indi_intri_rewards -138.61288 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 140/937 episodes, total num timesteps 225600/1499200, FPS 791.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.69109 ave_train_episode_indi_intri_rewards -138.38309 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 145/937 episodes, total num timesteps 233600/1499200, FPS 800.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.03163 ave_train_episode_indi_intri_rewards -138.1049 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 150/937 episodes, total num timesteps 241600/1499200, FPS 811.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.30703 ave_train_episode_indi_intri_rewards -136.23299 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 155/937 episodes, total num timesteps 249600/1499200, FPS 771.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.10659 ave_train_episode_indi_intri_rewards -139.3295 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 160/937 episodes, total num timesteps 257600/1499200, FPS 781.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -61.28474 ave_train_episode_indi_intri_rewards -139.26303 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 165/937 episodes, total num timesteps 265600/1499200, FPS 789.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.86831 ave_train_episode_indi_intri_rewards -138.3071 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 170/937 episodes, total num timesteps 273600/1499200, FPS 799.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.88123 ave_train_episode_indi_intri_rewards -138.92847 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 175/937 episodes, total num timesteps 281600/1499200, FPS 808.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.20979 ave_train_episode_indi_intri_rewards -139.23111 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 180/937 episodes, total num timesteps 289600/1499200, FPS 771.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.86993 ave_train_episode_indi_intri_rewards -138.76608 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 185/937 episodes, total num timesteps 297600/1499200, FPS 780.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.16307 ave_train_episode_indi_intri_rewards -138.497 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 190/937 episodes, total num timesteps 305600/1499200, FPS 788.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.84996 ave_train_episode_indi_intri_rewards -138.01642 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 195/937 episodes, total num timesteps 313600/1499200, FPS 796.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.67613 ave_train_episode_indi_intri_rewards -135.69516 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 200/937 episodes, total num timesteps 321600/1499200, FPS 804.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.26861 ave_train_episode_indi_intri_rewards -133.5802 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 205/937 episodes, total num timesteps 329600/1499200, FPS 777.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.399315 ave_train_episode_indi_intri_rewards -126.52678 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 210/937 episodes, total num timesteps 337600/1499200, FPS 785.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.65798 ave_train_episode_indi_intri_rewards -118.93052 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 215/937 episodes, total num timesteps 345600/1499200, FPS 792.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.01754 ave_train_episode_indi_intri_rewards -111.34265 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 220/937 episodes, total num timesteps 353600/1499200, FPS 800.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -72.0713 ave_train_episode_indi_intri_rewards -114.38998 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 225/937 episodes, total num timesteps 361600/1499200, FPS 805.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.88514 ave_train_episode_indi_intri_rewards -110.72649 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.01.
+
+ Env alice_and_bob Algo hmasd Exp check updates 230/937 episodes, total num timesteps 369600/1499200, FPS 778.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.436966 ave_train_episode_indi_intri_rewards -108.70317 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 235/937 episodes, total num timesteps 377600/1499200, FPS 785.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.51415 ave_train_episode_indi_intri_rewards -105.49501 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 240/937 episodes, total num timesteps 385600/1499200, FPS 790.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.780495 ave_train_episode_indi_intri_rewards -103.82766 ave_train_win_rate 0.0 ave_train_key0 0.05 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 245/937 episodes, total num timesteps 393600/1499200, FPS 797.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.879616 ave_train_episode_indi_intri_rewards -100.84731 ave_train_win_rate 0.0 ave_train_key0 0.0625 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 250/937 episodes, total num timesteps 401600/1499200, FPS 804.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.75462 ave_train_episode_indi_intri_rewards -105.33533 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 255/937 episodes, total num timesteps 409600/1499200, FPS 782.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.72306 ave_train_episode_indi_intri_rewards -107.05177 ave_train_win_rate 0.0 ave_train_key0 0.0875 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 260/937 episodes, total num timesteps 417600/1499200, FPS 788.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.501686 ave_train_episode_indi_intri_rewards -103.80867 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 265/937 episodes, total num timesteps 425600/1499200, FPS 795.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.5012 ave_train_episode_indi_intri_rewards -103.981125 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 270/937 episodes, total num timesteps 433600/1499200, FPS 801.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.94646 ave_train_episode_indi_intri_rewards -96.849266 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 275/937 episodes, total num timesteps 441600/1499200, FPS 807.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.666466 ave_train_episode_indi_intri_rewards -92.8781 ave_train_win_rate 0.0 ave_train_key0 0.0375 ave_train_key1 0.0125 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 280/937 episodes, total num timesteps 449600/1499200, FPS 788.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.20352 ave_train_episode_indi_intri_rewards -104.06035 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 285/937 episodes, total num timesteps 457600/1499200, FPS 794.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.75709 ave_train_episode_indi_intri_rewards -93.19145 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 290/937 episodes, total num timesteps 465600/1499200, FPS 800.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.51047 ave_train_episode_indi_intri_rewards -91.46926 ave_train_win_rate 0.0 ave_train_key0 0.0625 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 295/937 episodes, total num timesteps 473600/1499200, FPS 807.
+
+ave_train_episode_env_rewards 0.0125 ave_train_episode_team_intri_rewards -67.66658 ave_train_episode_indi_intri_rewards -87.76565 ave_train_win_rate 0.0125 ave_train_key0 0.05 ave_train_key1 0.025 ave_train_episode_step 99.8125
+
+ Env alice_and_bob Algo hmasd Exp check updates 300/937 episodes, total num timesteps 481600/1499200, FPS 813.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.2687 ave_train_episode_indi_intri_rewards -84.25382 ave_train_win_rate 0.0 ave_train_key0 0.075 ave_train_key1 0.0125 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 305/937 episodes, total num timesteps 489600/1499200, FPS 798.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.275604 ave_train_episode_indi_intri_rewards -73.99375 ave_train_win_rate 0.0 ave_train_key0 0.125 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 310/937 episodes, total num timesteps 497600/1499200, FPS 804.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -56.718803 ave_train_episode_indi_intri_rewards -76.99997 ave_train_win_rate 0.0 ave_train_key0 0.1 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 315/937 episodes, total num timesteps 505600/1499200, FPS 811.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.4258 ave_train_episode_indi_intri_rewards -85.19521 ave_train_win_rate 0.0 ave_train_key0 0.1125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 320/937 episodes, total num timesteps 513600/1499200, FPS 817.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -64.1427 ave_train_episode_indi_intri_rewards -77.460526 ave_train_win_rate 0.0 ave_train_key0 0.075 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 325/937 episodes, total num timesteps 521600/1499200, FPS 822.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -72.77627 ave_train_episode_indi_intri_rewards -68.12517 ave_train_win_rate 0.0 ave_train_key0 0.1125 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.09. eval key1 rate is 0.01.
+
+ Env alice_and_bob Algo hmasd Exp check updates 330/937 episodes, total num timesteps 529600/1499200, FPS 805.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.03535 ave_train_episode_indi_intri_rewards -67.4168 ave_train_win_rate 0.0 ave_train_key0 0.1125 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 335/937 episodes, total num timesteps 537600/1499200, FPS 810.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.79578 ave_train_episode_indi_intri_rewards -62.72001 ave_train_win_rate 0.0 ave_train_key0 0.1375 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 340/937 episodes, total num timesteps 545600/1499200, FPS 816.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.70812 ave_train_episode_indi_intri_rewards -60.47804 ave_train_win_rate 0.0 ave_train_key0 0.175 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 345/937 episodes, total num timesteps 553600/1499200, FPS 822.
+
+ave_train_episode_env_rewards 0.0125 ave_train_episode_team_intri_rewards -69.188705 ave_train_episode_indi_intri_rewards -56.67684 ave_train_win_rate 0.0125 ave_train_key0 0.15 ave_train_key1 0.05 ave_train_episode_step 99.825
+
+ Env alice_and_bob Algo hmasd Exp check updates 350/937 episodes, total num timesteps 561600/1499200, FPS 827.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.0605 ave_train_episode_indi_intri_rewards -65.459404 ave_train_win_rate 0.0 ave_train_key0 0.1 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 355/937 episodes, total num timesteps 569600/1499200, FPS 813.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.158035 ave_train_episode_indi_intri_rewards -58.81908 ave_train_win_rate 0.0 ave_train_key0 0.125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 360/937 episodes, total num timesteps 577600/1499200, FPS 819.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.88095 ave_train_episode_indi_intri_rewards -60.71958 ave_train_win_rate 0.0 ave_train_key0 0.1375 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 365/937 episodes, total num timesteps 585600/1499200, FPS 824.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.38646 ave_train_episode_indi_intri_rewards -52.591022 ave_train_win_rate 0.0 ave_train_key0 0.125 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 370/937 episodes, total num timesteps 593600/1499200, FPS 829.
+
+ave_train_episode_env_rewards 0.0125 ave_train_episode_team_intri_rewards -67.77313 ave_train_episode_indi_intri_rewards -55.212494 ave_train_win_rate 0.0125 ave_train_key0 0.1625 ave_train_key1 0.0125 ave_train_episode_step 99.7375
+
+ Env alice_and_bob Algo hmasd Exp check updates 375/937 episodes, total num timesteps 601600/1499200, FPS 834.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -63.898396 ave_train_episode_indi_intri_rewards -52.76122 ave_train_win_rate 0.0 ave_train_key0 0.125 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.02. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 380/937 episodes, total num timesteps 609600/1499200, FPS 821.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.20274 ave_train_episode_indi_intri_rewards -51.93923 ave_train_win_rate 0.0 ave_train_key0 0.05 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 385/937 episodes, total num timesteps 617600/1499200, FPS 826.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -72.60945 ave_train_episode_indi_intri_rewards -47.942047 ave_train_win_rate 0.0 ave_train_key0 0.075 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 390/937 episodes, total num timesteps 625600/1499200, FPS 830.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.86096 ave_train_episode_indi_intri_rewards -46.5552 ave_train_win_rate 0.0 ave_train_key0 0.0375 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 395/937 episodes, total num timesteps 633600/1499200, FPS 835.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.084305 ave_train_episode_indi_intri_rewards -44.102802 ave_train_win_rate 0.0 ave_train_key0 0.05 ave_train_key1 0.075 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 400/937 episodes, total num timesteps 641600/1499200, FPS 839.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.260025 ave_train_episode_indi_intri_rewards -38.181297 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0625 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 405/937 episodes, total num timesteps 649600/1499200, FPS 823.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.64779 ave_train_episode_indi_intri_rewards -42.40916 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.075 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 410/937 episodes, total num timesteps 657600/1499200, FPS 828.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -61.457214 ave_train_episode_indi_intri_rewards -41.579784 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 415/937 episodes, total num timesteps 665600/1499200, FPS 832.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -77.90893 ave_train_episode_indi_intri_rewards -37.356747 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0875 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 420/937 episodes, total num timesteps 673600/1499200, FPS 837.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.662186 ave_train_episode_indi_intri_rewards -36.82972 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 425/937 episodes, total num timesteps 681600/1499200, FPS 841.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.797745 ave_train_episode_indi_intri_rewards -39.206802 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 430/937 episodes, total num timesteps 689600/1499200, FPS 827.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -61.459015 ave_train_episode_indi_intri_rewards -31.748285 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.075 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 435/937 episodes, total num timesteps 697600/1499200, FPS 831.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -62.846893 ave_train_episode_indi_intri_rewards -32.575916 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 440/937 episodes, total num timesteps 705600/1499200, FPS 835.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -61.91573 ave_train_episode_indi_intri_rewards -34.7175 ave_train_win_rate 0.0 ave_train_key0 0.05 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 445/937 episodes, total num timesteps 713600/1499200, FPS 839.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.09535 ave_train_episode_indi_intri_rewards -34.12584 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 450/937 episodes, total num timesteps 721600/1499200, FPS 844.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.64967 ave_train_episode_indi_intri_rewards -31.651876 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 455/937 episodes, total num timesteps 729600/1499200, FPS 832.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.2292 ave_train_episode_indi_intri_rewards -30.215967 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 460/937 episodes, total num timesteps 737600/1499200, FPS 836.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.06578 ave_train_episode_indi_intri_rewards -31.258575 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 465/937 episodes, total num timesteps 745600/1499200, FPS 840.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.56969 ave_train_episode_indi_intri_rewards -30.737865 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 470/937 episodes, total num timesteps 753600/1499200, FPS 844.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.9886 ave_train_episode_indi_intri_rewards -30.201574 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 475/937 episodes, total num timesteps 761600/1499200, FPS 848.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -61.45414 ave_train_episode_indi_intri_rewards -30.55753 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 480/937 episodes, total num timesteps 769600/1499200, FPS 837.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.64581 ave_train_episode_indi_intri_rewards -26.89972 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 485/937 episodes, total num timesteps 777600/1499200, FPS 841.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.81596 ave_train_episode_indi_intri_rewards -29.007177 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 490/937 episodes, total num timesteps 785600/1499200, FPS 845.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.88395 ave_train_episode_indi_intri_rewards -28.423962 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 495/937 episodes, total num timesteps 793600/1499200, FPS 849.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.019104 ave_train_episode_indi_intri_rewards -28.06278 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 500/937 episodes, total num timesteps 801600/1499200, FPS 853.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -64.65454 ave_train_episode_indi_intri_rewards -26.411808 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 505/937 episodes, total num timesteps 809600/1499200, FPS 842.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.98338 ave_train_episode_indi_intri_rewards -27.790253 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 510/937 episodes, total num timesteps 817600/1499200, FPS 846.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.55528 ave_train_episode_indi_intri_rewards -27.37832 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 515/937 episodes, total num timesteps 825600/1499200, FPS 849.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.058334 ave_train_episode_indi_intri_rewards -25.146875 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 520/937 episodes, total num timesteps 833600/1499200, FPS 853.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -72.87898 ave_train_episode_indi_intri_rewards -19.241543 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 525/937 episodes, total num timesteps 841600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.36824 ave_train_episode_indi_intri_rewards -15.619092 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 530/937 episodes, total num timesteps 849600/1499200, FPS 844.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.26304 ave_train_episode_indi_intri_rewards -22.174856 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 535/937 episodes, total num timesteps 857600/1499200, FPS 846.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.71532 ave_train_episode_indi_intri_rewards -26.29267 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 540/937 episodes, total num timesteps 865600/1499200, FPS 849.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -62.043324 ave_train_episode_indi_intri_rewards -24.283213 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 545/937 episodes, total num timesteps 873600/1499200, FPS 852.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.27206 ave_train_episode_indi_intri_rewards -24.346233 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 550/937 episodes, total num timesteps 881600/1499200, FPS 854.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -64.49486 ave_train_episode_indi_intri_rewards -27.762287 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 555/937 episodes, total num timesteps 889600/1499200, FPS 842.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -63.241627 ave_train_episode_indi_intri_rewards -20.876324 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 560/937 episodes, total num timesteps 897600/1499200, FPS 845.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -58.046265 ave_train_episode_indi_intri_rewards -22.224583 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 565/937 episodes, total num timesteps 905600/1499200, FPS 848.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.671715 ave_train_episode_indi_intri_rewards -25.349857 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 570/937 episodes, total num timesteps 913600/1499200, FPS 851.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.019775 ave_train_episode_indi_intri_rewards -25.21154 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 575/937 episodes, total num timesteps 921600/1499200, FPS 854.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.43784 ave_train_episode_indi_intri_rewards -25.097887 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 580/937 episodes, total num timesteps 929600/1499200, FPS 844.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.56387 ave_train_episode_indi_intri_rewards -23.01936 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 585/937 episodes, total num timesteps 937600/1499200, FPS 847.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.998245 ave_train_episode_indi_intri_rewards -22.14101 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 590/937 episodes, total num timesteps 945600/1499200, FPS 850.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.71405 ave_train_episode_indi_intri_rewards -21.881119 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 595/937 episodes, total num timesteps 953600/1499200, FPS 853.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.54409 ave_train_episode_indi_intri_rewards -23.129898 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 600/937 episodes, total num timesteps 961600/1499200, FPS 856.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.55638 ave_train_episode_indi_intri_rewards -21.617962 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 605/937 episodes, total num timesteps 969600/1499200, FPS 846.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.48474 ave_train_episode_indi_intri_rewards -23.729534 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 610/937 episodes, total num timesteps 977600/1499200, FPS 849.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.27033 ave_train_episode_indi_intri_rewards -22.061346 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 615/937 episodes, total num timesteps 985600/1499200, FPS 852.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.392075 ave_train_episode_indi_intri_rewards -21.849834 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 620/937 episodes, total num timesteps 993600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.71214 ave_train_episode_indi_intri_rewards -21.528818 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 625/937 episodes, total num timesteps 1001600/1499200, FPS 858.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.07164 ave_train_episode_indi_intri_rewards -20.365088 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 630/937 episodes, total num timesteps 1009600/1499200, FPS 850.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.023735 ave_train_episode_indi_intri_rewards -25.323486 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 635/937 episodes, total num timesteps 1017600/1499200, FPS 853.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.63688 ave_train_episode_indi_intri_rewards -23.776094 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 640/937 episodes, total num timesteps 1025600/1499200, FPS 856.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.28574 ave_train_episode_indi_intri_rewards -21.869463 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 645/937 episodes, total num timesteps 1033600/1499200, FPS 858.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -60.046215 ave_train_episode_indi_intri_rewards -24.536047 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 650/937 episodes, total num timesteps 1041600/1499200, FPS 861.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -64.34173 ave_train_episode_indi_intri_rewards -25.855005 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.025 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 655/937 episodes, total num timesteps 1049600/1499200, FPS 853.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -60.633984 ave_train_episode_indi_intri_rewards -23.306717 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 660/937 episodes, total num timesteps 1057600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -72.842964 ave_train_episode_indi_intri_rewards -24.653484 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 665/937 episodes, total num timesteps 1065600/1499200, FPS 858.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.178345 ave_train_episode_indi_intri_rewards -23.445538 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 670/937 episodes, total num timesteps 1073600/1499200, FPS 860.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -63.992676 ave_train_episode_indi_intri_rewards -23.872177 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0875 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 675/937 episodes, total num timesteps 1081600/1499200, FPS 863.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.66077 ave_train_episode_indi_intri_rewards -24.575565 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0375 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 680/937 episodes, total num timesteps 1089600/1499200, FPS 854.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.505394 ave_train_episode_indi_intri_rewards -23.617874 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 685/937 episodes, total num timesteps 1097600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.09926 ave_train_episode_indi_intri_rewards -23.00583 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 690/937 episodes, total num timesteps 1105600/1499200, FPS 860.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.449295 ave_train_episode_indi_intri_rewards -24.752316 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 695/937 episodes, total num timesteps 1113600/1499200, FPS 862.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.89878 ave_train_episode_indi_intri_rewards -21.718044 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 700/937 episodes, total num timesteps 1121600/1499200, FPS 865.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.181564 ave_train_episode_indi_intri_rewards -26.307583 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 705/937 episodes, total num timesteps 1129600/1499200, FPS 853.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.772255 ave_train_episode_indi_intri_rewards -25.243656 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 710/937 episodes, total num timesteps 1137600/1499200, FPS 856.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.94457 ave_train_episode_indi_intri_rewards -22.427326 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.1 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 715/937 episodes, total num timesteps 1145600/1499200, FPS 859.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -62.56018 ave_train_episode_indi_intri_rewards -22.338608 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 720/937 episodes, total num timesteps 1153600/1499200, FPS 861.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -64.92616 ave_train_episode_indi_intri_rewards -22.890734 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0875 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 725/937 episodes, total num timesteps 1161600/1499200, FPS 864.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.18898 ave_train_episode_indi_intri_rewards -21.477882 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.1125 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 730/937 episodes, total num timesteps 1169600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -63.72451 ave_train_episode_indi_intri_rewards -20.539623 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0875 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 735/937 episodes, total num timesteps 1177600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -71.31026 ave_train_episode_indi_intri_rewards -21.344938 ave_train_win_rate 0.0 ave_train_key0 0.025 ave_train_key1 0.125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 740/937 episodes, total num timesteps 1185600/1499200, FPS 859.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.305115 ave_train_episode_indi_intri_rewards -23.278124 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 745/937 episodes, total num timesteps 1193600/1499200, FPS 861.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.15456 ave_train_episode_indi_intri_rewards -23.068975 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0875 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 750/937 episodes, total num timesteps 1201600/1499200, FPS 863.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.47545 ave_train_episode_indi_intri_rewards -20.782116 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 755/937 episodes, total num timesteps 1209600/1499200, FPS 854.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.36296 ave_train_episode_indi_intri_rewards -19.624416 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 760/937 episodes, total num timesteps 1217600/1499200, FPS 856.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.553 ave_train_episode_indi_intri_rewards -20.483032 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.15 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 765/937 episodes, total num timesteps 1225600/1499200, FPS 858.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.664925 ave_train_episode_indi_intri_rewards -22.006462 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.1 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 770/937 episodes, total num timesteps 1233600/1499200, FPS 860.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.555664 ave_train_episode_indi_intri_rewards -19.83067 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.1125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 775/937 episodes, total num timesteps 1241600/1499200, FPS 862.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.07719 ave_train_episode_indi_intri_rewards -18.735893 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 780/937 episodes, total num timesteps 1249600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.951904 ave_train_episode_indi_intri_rewards -17.36456 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 785/937 episodes, total num timesteps 1257600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.92645 ave_train_episode_indi_intri_rewards -17.808208 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0625 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 790/937 episodes, total num timesteps 1265600/1499200, FPS 860.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.36237 ave_train_episode_indi_intri_rewards -23.109735 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.075 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 795/937 episodes, total num timesteps 1273600/1499200, FPS 862.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.01863 ave_train_episode_indi_intri_rewards -22.393055 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 800/937 episodes, total num timesteps 1281600/1499200, FPS 864.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.77925 ave_train_episode_indi_intri_rewards -18.872437 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.05 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 805/937 episodes, total num timesteps 1289600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.8703 ave_train_episode_indi_intri_rewards -23.095495 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 810/937 episodes, total num timesteps 1297600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.28668 ave_train_episode_indi_intri_rewards -19.691349 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 815/937 episodes, total num timesteps 1305600/1499200, FPS 859.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.24498 ave_train_episode_indi_intri_rewards -20.246414 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 820/937 episodes, total num timesteps 1313600/1499200, FPS 861.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -66.730415 ave_train_episode_indi_intri_rewards -21.010426 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 825/937 episodes, total num timesteps 1321600/1499200, FPS 863.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.3477 ave_train_episode_indi_intri_rewards -19.86101 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 830/937 episodes, total num timesteps 1329600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.84489 ave_train_episode_indi_intri_rewards -19.515043 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 835/937 episodes, total num timesteps 1337600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.922775 ave_train_episode_indi_intri_rewards -20.629848 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 840/937 episodes, total num timesteps 1345600/1499200, FPS 859.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.65422 ave_train_episode_indi_intri_rewards -21.065567 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0375 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 845/937 episodes, total num timesteps 1353600/1499200, FPS 861.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.17346 ave_train_episode_indi_intri_rewards -17.525715 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.05 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 850/937 episodes, total num timesteps 1361600/1499200, FPS 863.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.377365 ave_train_episode_indi_intri_rewards -17.582027 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 855/937 episodes, total num timesteps 1369600/1499200, FPS 855.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.158775 ave_train_episode_indi_intri_rewards -19.962664 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 860/937 episodes, total num timesteps 1377600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -65.96687 ave_train_episode_indi_intri_rewards -19.218601 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 865/937 episodes, total num timesteps 1385600/1499200, FPS 859.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.77448 ave_train_episode_indi_intri_rewards -20.757542 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 870/937 episodes, total num timesteps 1393600/1499200, FPS 862.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.022545 ave_train_episode_indi_intri_rewards -19.892588 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 875/937 episodes, total num timesteps 1401600/1499200, FPS 864.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.623245 ave_train_episode_indi_intri_rewards -20.368937 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.05 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 880/937 episodes, total num timesteps 1409600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.93934 ave_train_episode_indi_intri_rewards -20.666199 ave_train_win_rate 0.0 ave_train_key0 0.0125 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 885/937 episodes, total num timesteps 1417600/1499200, FPS 859.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.485756 ave_train_episode_indi_intri_rewards -20.748463 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 890/937 episodes, total num timesteps 1425600/1499200, FPS 861.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.348076 ave_train_episode_indi_intri_rewards -20.201689 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 895/937 episodes, total num timesteps 1433600/1499200, FPS 863.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.07963 ave_train_episode_indi_intri_rewards -22.010447 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 900/937 episodes, total num timesteps 1441600/1499200, FPS 865.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.64906 ave_train_episode_indi_intri_rewards -21.372887 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 905/937 episodes, total num timesteps 1449600/1499200, FPS 857.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.637184 ave_train_episode_indi_intri_rewards -20.84275 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 910/937 episodes, total num timesteps 1457600/1499200, FPS 858.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.698 ave_train_episode_indi_intri_rewards -20.087976 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.025 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 915/937 episodes, total num timesteps 1465600/1499200, FPS 860.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -67.904594 ave_train_episode_indi_intri_rewards -21.546432 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 920/937 episodes, total num timesteps 1473600/1499200, FPS 862.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.90387 ave_train_episode_indi_intri_rewards -21.0285 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 925/937 episodes, total num timesteps 1481600/1499200, FPS 863.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -68.071884 ave_train_episode_indi_intri_rewards -18.843613 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+eval win rate is 0.0. eval ave step is 100.0. eval key0 rate is 0.0. eval key1 rate is 0.0.
+
+ Env alice_and_bob Algo hmasd Exp check updates 930/937 episodes, total num timesteps 1489600/1499200, FPS 856.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -70.03129 ave_train_episode_indi_intri_rewards -21.246784 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0 ave_train_episode_step 100.0
+
+ Env alice_and_bob Algo hmasd Exp check updates 935/937 episodes, total num timesteps 1497600/1499200, FPS 858.
+
+ave_train_episode_env_rewards 0.0 ave_train_episode_team_intri_rewards -69.66597 ave_train_episode_indi_intri_rewards -20.57501 ave_train_win_rate 0.0 ave_train_key0 0.0 ave_train_key1 0.0125 ave_train_episode_step 100.0
