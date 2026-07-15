@@ -52,10 +52,17 @@ GPT-5.6 Pro external algorithm consultation is separate and is not one of these
 four conversations. Follow the `External Review` section for that exchange.
 
 Reuse the existing role conversations. Search by role/title and verify their
-project directory and model before sending work; retitle or repair a suitable
-existing conversation instead of creating duplicates. Do not substitute a
-different model silently. None of the four conversations may create a worktree,
-extra role conversation, subthread, or parallel monitor for this workflow.
+project directory before sending work; retitle or repair a suitable existing
+conversation instead of creating duplicates. Model and speed settings are
+user-owned persistent conversation settings: never pass `model`, `thinking`,
+reasoning, or speed overrides when invoking an existing role conversation.
+Titles and prompt text are not model verification. If the app cannot expose a
+read-only model value, rely only on the user's latest explicit confirmation. If
+the user observes any model change after invocation, stop all further sends to
+that conversation until the user restores and reconfirms it; do not attempt to
+repair the model by sending another override. Do not substitute a different
+model silently. None of the four conversations may create a worktree, extra
+role conversation, subthread, or parallel monitor for this workflow.
 
 The message flow is mandatory:
 
