@@ -1858,6 +1858,9 @@ class StandaloneProcessAgent:
         self.r39_toy_direct_state_context = bool(
             getattr(config, "r39_toy_direct_state_context", False)
         )
+        self.high_ppo_epochs = int(
+            max(getattr(config, "r30_high_ppo_epochs", 1), 1)
+        )
         self.r39_toy_fixed_skill_action_schema = str(
             getattr(config, "r39_toy_fixed_skill_action_schema", "none")
         )
@@ -1906,6 +1909,11 @@ class StandaloneProcessAgent:
                     "R39 direct-state high context is restricted to the fixed-primitive "
                     "native-categorical two-timescale toy"
                 )
+        if self.high_ppo_epochs != 1 and not self.r39_toy_direct_state_context:
+            raise ValueError(
+                "multiple R30 high PPO epochs are currently restricted to the "
+                "R39 direct-state fixed-primitive toy"
+            )
         self.r31_effect_mode = str(
             getattr(config, "r31_effect_mode", "off")
         ).lower()
@@ -7668,6 +7676,11 @@ class StandaloneProcessAgent:
                 "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm else 0.0,
                 "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm else 0.0,
                 "high_grad_norm": 0.0,
+                "high_optimizer_steps": 0.0,
+                "high_ratio_mean_last": 0.0,
+                "high_clip_fraction_last": 0.0,
+                "high_approx_kl_last": 0.0,
+                "high_value_norm_updates": 0.0,
                 "high_policy_actor_grad_norm": 0.0,
                 "high_policy_skill_head_grad_norm": 0.0,
                 "high_decision_gae_raw_std": 0.0,
@@ -7762,38 +7775,17 @@ class StandaloneProcessAgent:
         clocks = torch.as_tensor(
             [row.steps_to_check for row in rows], dtype=torch.float32, device=self.device
         )
-        (
-            compact,
-            cd_loss,
-            cmi_loss,
-            weights,
-            _aggregation_entropy,
-            relevance,
-            _team_codes,
-            team_vectors,
-            _team_probs,
-            _team_logits,
-        ) = self._high_context_batch(states, joint_obs)
-        value_predictions = self.high_value(
-            states,
-            joint_obs,
-            prev_skills,
-            prev_active,
-            prev_ages,
-            compact.detach(),
-            team_vectors.detach(),
-            clocks,
-        )
         if self.high_value_norm is not None:
             self.high_value_norm.update(value_targets_np)
+            high_value_norm_updates = 1.0
             value_targets = self.high_value_norm.normalize_tensor(
                 torch.as_tensor(value_targets_np, dtype=torch.float32, device=self.device)
             )
         else:
+            high_value_norm_updates = 0.0
             value_targets = torch.as_tensor(
                 value_targets_np, dtype=torch.float32, device=self.device
             )
-        value_loss = F.mse_loss(value_predictions, value_targets)
 
         decision_indices = [idx for idx, row in enumerate(rows) if row.decision_mask]
         decision_adv_np = advantages[decision_indices].copy()
@@ -7812,80 +7804,6 @@ class StandaloneProcessAgent:
             decision_block_np = (
                 decision_block_np - float(np.mean(decision_block_np))
             ) / (float(np.std(decision_block_np)) + 1e-8)
-        new_logps: list[torch.Tensor] = []
-        old_logps: list[torch.Tensor] = []
-        token_advantages: list[torch.Tensor] = []
-        block_token_advantages: list[torch.Tensor] = []
-        entropy_terms: list[torch.Tensor] = []
-        valid_terms: list[torch.Tensor] = []
-        for local_idx, row_idx in enumerate(decision_indices):
-            row = rows[row_idx]
-            omega = weights[row_idx : row_idx + 1] if self.high_condition_on_omega else None
-            rel = relevance[row_idx : row_idx + 1] if self.use_agent_prototype_relevance else None
-            row_logp, row_entropy = self.high.evaluate_sequence(
-                joint_obs=joint_obs[row_idx],
-                compact=compact[row_idx : row_idx + 1],
-                team_vector=team_vectors[row_idx : row_idx + 1],
-                prev_skills=prev_skills[row_idx],
-                prev_ages=prev_ages[row_idx],
-                prev_active=prev_active[row_idx],
-                agent_order=torch.as_tensor(row.agent_order, dtype=torch.long, device=self.device),
-                token_kind=torch.as_tensor(row.token_kind, dtype=torch.long, device=self.device),
-                set_skill=torch.as_tensor(row.set_skill, dtype=torch.long, device=self.device),
-                omega=omega,
-                agent_relevance=rel,
-            )
-            valid = torch.as_tensor(row.token_valid, dtype=torch.bool, device=self.device)
-            new_logps.append(row_logp)
-            old_logps.append(
-                torch.as_tensor(row.old_token_logp, dtype=torch.float32, device=self.device)
-            )
-            token_advantages.append(
-                torch.full_like(row_logp, float(decision_adv_np[local_idx]))
-            )
-            block_token_advantages.append(
-                torch.full_like(row_logp, float(decision_block_np[local_idx]))
-            )
-            entropy_terms.append(row_entropy)
-            valid_terms.append(valid)
-
-        if new_logps:
-            new_logp = torch.stack(new_logps)
-            old_logp = torch.stack(old_logps)
-            token_advantage = torch.stack(token_advantages)
-            block_token_advantage = torch.stack(block_token_advantages)
-            token_valid = torch.stack(valid_terms)
-            entropy_matrix = torch.stack(entropy_terms)
-            ratio = torch.exp(new_logp - old_logp)
-            unclipped = ratio * token_advantage
-            clipped = torch.clamp(
-                ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
-            ) * token_advantage
-            policy_loss = -torch.min(unclipped, clipped)[token_valid].mean()
-            block_unclipped = ratio * block_token_advantage
-            block_clipped = torch.clamp(
-                ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
-            ) * block_token_advantage
-            block_policy_loss = -torch.min(
-                block_unclipped, block_clipped
-            )[token_valid].mean()
-            skill_entropy = entropy_matrix[token_valid].mean()
-            entropy_loss = -float(self.high_entropy_coef) * skill_entropy
-            replay_error = float(
-                torch.max(torch.abs(new_logp[token_valid] - old_logp[token_valid]))
-                .detach()
-                .cpu()
-                .item()
-            )
-        else:
-            policy_loss = torch.zeros((), device=self.device)
-            block_policy_loss = torch.zeros((), device=self.device)
-            skill_entropy = torch.zeros((), device=self.device)
-            entropy_loss = torch.zeros((), device=self.device)
-            replay_error = 0.0
-
-        aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
-        loss = policy_loss + 0.5 * value_loss + entropy_loss + aux_loss
         policy_actor_grad_norm = 0.0
         policy_skill_head_grad_norm = 0.0
         block_actor_grad_norm = 0.0
@@ -7893,93 +7811,294 @@ class StandaloneProcessAgent:
         gae_block_actor_grad_cosine = 0.0
         gae_block_skill_head_grad_cosine = 0.0
         actor_params = [param for param in self.high.parameters() if param.requires_grad]
-        if policy_loss.requires_grad and actor_params:
-            policy_grads = torch.autograd.grad(
-                policy_loss,
-                actor_params,
-                retain_graph=True,
-                allow_unused=True,
-            )
-            skill_head_ids = {id(param) for param in self.high.skill_head.parameters()}
-            def grad_norm(
-                grads: tuple[torch.Tensor | None, ...],
-                selected_ids: set[int] | None = None,
-            ) -> float:
-                squared = 0.0
-                for param, grad in zip(actor_params, grads):
-                    if grad is None or (
-                        selected_ids is not None and id(param) not in selected_ids
-                    ):
-                        continue
-                    squared += float(torch.sum(grad.detach() ** 2).cpu().item())
-                return float(np.sqrt(squared))
+        skill_head_ids = {id(param) for param in self.high.skill_head.parameters()}
 
-            def grad_cosine(
-                left: tuple[torch.Tensor | None, ...],
-                right: tuple[torch.Tensor | None, ...],
-                selected_ids: set[int] | None = None,
-            ) -> float:
-                dot = 0.0
-                for param, left_grad, right_grad in zip(
-                    actor_params, left, right
+        def grad_norm(
+            grads: tuple[torch.Tensor | None, ...],
+            selected_ids: set[int] | None = None,
+        ) -> float:
+            squared = 0.0
+            for param, grad in zip(actor_params, grads):
+                if grad is None or (
+                    selected_ids is not None and id(param) not in selected_ids
                 ):
-                    if (
-                        left_grad is None
-                        or right_grad is None
-                        or (
-                            selected_ids is not None
-                            and id(param) not in selected_ids
-                        )
-                    ):
-                        continue
-                    dot += float(
-                        torch.sum(left_grad.detach() * right_grad.detach())
-                        .cpu()
-                        .item()
-                    )
-                denominator = grad_norm(left, selected_ids) * grad_norm(
-                    right, selected_ids
-                )
-                return float(dot / denominator) if denominator > 0.0 else 0.0
+                    continue
+                squared += float(torch.sum(grad.detach() ** 2).cpu().item())
+            return float(np.sqrt(squared))
 
-            policy_actor_grad_norm = grad_norm(policy_grads)
-            policy_skill_head_grad_norm = grad_norm(
-                policy_grads, skill_head_ids
+        def grad_cosine(
+            left: tuple[torch.Tensor | None, ...],
+            right: tuple[torch.Tensor | None, ...],
+            selected_ids: set[int] | None = None,
+        ) -> float:
+            dot = 0.0
+            for param, left_grad, right_grad in zip(actor_params, left, right):
+                if (
+                    left_grad is None
+                    or right_grad is None
+                    or (
+                        selected_ids is not None
+                        and id(param) not in selected_ids
+                    )
+                ):
+                    continue
+                dot += float(
+                    torch.sum(left_grad.detach() * right_grad.detach())
+                    .cpu()
+                    .item()
+                )
+            denominator = grad_norm(left, selected_ids) * grad_norm(
+                right, selected_ids
             )
-            if self.r39_toy_direct_state_context:
-                block_grads = torch.autograd.grad(
-                    block_policy_loss,
-                    actor_params,
-                    retain_graph=True,
-                    allow_unused=True,
+            return float(dot / denominator) if denominator > 0.0 else 0.0
+
+        def evaluate_high_epoch() -> dict[str, torch.Tensor | float]:
+            (
+                compact,
+                cd_loss,
+                cmi_loss,
+                weights,
+                _aggregation_entropy,
+                relevance,
+                _team_codes,
+                team_vectors,
+                _team_probs,
+                _team_logits,
+            ) = self._high_context_batch(states, joint_obs)
+            value_predictions = self.high_value(
+                states,
+                joint_obs,
+                prev_skills,
+                prev_active,
+                prev_ages,
+                compact.detach(),
+                team_vectors.detach(),
+                clocks,
+            )
+            value_loss = F.mse_loss(value_predictions, value_targets)
+            new_logps: list[torch.Tensor] = []
+            old_logps: list[torch.Tensor] = []
+            token_advantages: list[torch.Tensor] = []
+            block_token_advantages: list[torch.Tensor] = []
+            entropy_terms: list[torch.Tensor] = []
+            valid_terms: list[torch.Tensor] = []
+            for local_idx, row_idx in enumerate(decision_indices):
+                row = rows[row_idx]
+                omega = (
+                    weights[row_idx : row_idx + 1]
+                    if self.high_condition_on_omega
+                    else None
                 )
-                block_actor_grad_norm = grad_norm(block_grads)
-                block_skill_head_grad_norm = grad_norm(
-                    block_grads, skill_head_ids
+                rel = (
+                    relevance[row_idx : row_idx + 1]
+                    if self.use_agent_prototype_relevance
+                    else None
                 )
-                gae_block_actor_grad_cosine = grad_cosine(
-                    policy_grads, block_grads
+                row_logp, row_entropy = self.high.evaluate_sequence(
+                    joint_obs=joint_obs[row_idx],
+                    compact=compact[row_idx : row_idx + 1],
+                    team_vector=team_vectors[row_idx : row_idx + 1],
+                    prev_skills=prev_skills[row_idx],
+                    prev_ages=prev_ages[row_idx],
+                    prev_active=prev_active[row_idx],
+                    agent_order=torch.as_tensor(
+                        row.agent_order, dtype=torch.long, device=self.device
+                    ),
+                    token_kind=torch.as_tensor(
+                        row.token_kind, dtype=torch.long, device=self.device
+                    ),
+                    set_skill=torch.as_tensor(
+                        row.set_skill, dtype=torch.long, device=self.device
+                    ),
+                    omega=omega,
+                    agent_relevance=rel,
                 )
-                gae_block_skill_head_grad_cosine = grad_cosine(
-                    policy_grads, block_grads, skill_head_ids
+                valid = torch.as_tensor(
+                    row.token_valid, dtype=torch.bool, device=self.device
                 )
-        self.high_opt.zero_grad()
-        loss.backward()
-        high_grad_norm = torch.zeros((), device=self.device)
-        if self.high_max_grad_norm > 0.0:
-            high_params = [
-                param
-                for group in self.high_opt.param_groups
-                for param in group["params"]
-                if param.grad is not None
-            ]
-            if high_params:
-                high_grad_norm = torch.nn.utils.clip_grad_norm_(
-                    high_params, self.high_max_grad_norm
+                new_logps.append(row_logp)
+                old_logps.append(
+                    torch.as_tensor(
+                        row.old_token_logp,
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
                 )
-        self.high_opt.step()
+                token_advantages.append(
+                    torch.full_like(row_logp, float(decision_adv_np[local_idx]))
+                )
+                block_token_advantages.append(
+                    torch.full_like(
+                        row_logp, float(decision_block_np[local_idx])
+                    )
+                )
+                entropy_terms.append(row_entropy)
+                valid_terms.append(valid)
+
+            if new_logps:
+                new_logp = torch.stack(new_logps)
+                old_logp = torch.stack(old_logps)
+                token_advantage = torch.stack(token_advantages)
+                block_token_advantage = torch.stack(block_token_advantages)
+                token_valid = torch.stack(valid_terms)
+                entropy_matrix = torch.stack(entropy_terms)
+                log_ratio = new_logp - old_logp
+                ratio = torch.exp(log_ratio)
+                unclipped = ratio * token_advantage
+                clipped = torch.clamp(
+                    ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
+                ) * token_advantage
+                policy_loss = -torch.min(unclipped, clipped)[token_valid].mean()
+                block_unclipped = ratio * block_token_advantage
+                block_clipped = torch.clamp(
+                    ratio, 1.0 - self.high_clip, 1.0 + self.high_clip
+                ) * block_token_advantage
+                block_policy_loss = -torch.min(
+                    block_unclipped, block_clipped
+                )[token_valid].mean()
+                skill_entropy = entropy_matrix[token_valid].mean()
+                entropy_loss = -float(self.high_entropy_coef) * skill_entropy
+                replay_error = float(
+                    torch.max(
+                        torch.abs(new_logp[token_valid] - old_logp[token_valid])
+                    )
+                    .detach()
+                    .cpu()
+                    .item()
+                )
+                ratio_mean = ratio[token_valid].mean()
+                clip_fraction = (
+                    torch.abs(ratio[token_valid] - 1.0) > self.high_clip
+                ).float().mean()
+                approx_kl = (
+                    ratio[token_valid] - 1.0 - log_ratio[token_valid]
+                ).mean()
+            else:
+                policy_loss = torch.zeros((), device=self.device)
+                block_policy_loss = torch.zeros((), device=self.device)
+                skill_entropy = torch.zeros((), device=self.device)
+                entropy_loss = torch.zeros((), device=self.device)
+                replay_error = 0.0
+                ratio_mean = torch.ones((), device=self.device)
+                clip_fraction = torch.zeros((), device=self.device)
+                approx_kl = torch.zeros((), device=self.device)
+            aux_loss = self.opt_cd_coef * cd_loss + self.opt_cmi_coef * cmi_loss
+            loss = policy_loss + 0.5 * value_loss + entropy_loss + aux_loss
+            return {
+                "loss": loss,
+                "policy_loss": policy_loss,
+                "block_policy_loss": block_policy_loss,
+                "value_loss": value_loss,
+                "entropy_loss": entropy_loss,
+                "aux_loss": aux_loss,
+                "skill_entropy": skill_entropy,
+                "replay_error": replay_error,
+                "ratio_mean": ratio_mean,
+                "clip_fraction": clip_fraction,
+                "approx_kl": approx_kl,
+            }
+
+        epoch_loss_values: list[float] = []
+        epoch_policy_loss_values: list[float] = []
+        epoch_value_loss_values: list[float] = []
+        epoch_entropy_loss_values: list[float] = []
+        epoch_aux_loss_values: list[float] = []
+        epoch_entropy_values: list[float] = []
+        epoch_grad_norm_values: list[float] = []
+        replay_error = 0.0
+        high_ratio_mean_last = 1.0
+        high_clip_fraction_last = 0.0
+        high_approx_kl_last = 0.0
+        high_optimizer_steps = 0
+        for epoch_index in range(self.high_ppo_epochs):
+            epoch = evaluate_high_epoch()
+            policy_loss = epoch["policy_loss"]
+            block_policy_loss = epoch["block_policy_loss"]
+            if epoch_index == 0:
+                replay_error = float(epoch["replay_error"])
+                if policy_loss.requires_grad and actor_params:
+                    policy_grads = torch.autograd.grad(
+                        policy_loss,
+                        actor_params,
+                        retain_graph=True,
+                        allow_unused=True,
+                    )
+                    policy_actor_grad_norm = grad_norm(policy_grads)
+                    policy_skill_head_grad_norm = grad_norm(
+                        policy_grads, skill_head_ids
+                    )
+                    if self.r39_toy_direct_state_context:
+                        block_grads = torch.autograd.grad(
+                            block_policy_loss,
+                            actor_params,
+                            retain_graph=True,
+                            allow_unused=True,
+                        )
+                        block_actor_grad_norm = grad_norm(block_grads)
+                        block_skill_head_grad_norm = grad_norm(
+                            block_grads, skill_head_ids
+                        )
+                        gae_block_actor_grad_cosine = grad_cosine(
+                            policy_grads, block_grads
+                        )
+                        gae_block_skill_head_grad_cosine = grad_cosine(
+                            policy_grads, block_grads, skill_head_ids
+                        )
+            self.high_opt.zero_grad()
+            loss = epoch["loss"]
+            loss.backward()
+            high_grad_norm = torch.zeros((), device=self.device)
+            if self.high_max_grad_norm > 0.0:
+                high_params = [
+                    param
+                    for group in self.high_opt.param_groups
+                    for param in group["params"]
+                    if param.grad is not None
+                ]
+                if high_params:
+                    high_grad_norm = torch.nn.utils.clip_grad_norm_(
+                        high_params, self.high_max_grad_norm
+                    )
+            self.high_opt.step()
+            high_optimizer_steps += 1
+            epoch_loss_values.append(float(loss.detach().cpu().item()))
+            epoch_policy_loss_values.append(
+                float(policy_loss.detach().cpu().item())
+            )
+            epoch_value_loss_values.append(
+                float(epoch["value_loss"].detach().cpu().item())
+            )
+            epoch_entropy_loss_values.append(
+                float(epoch["entropy_loss"].detach().cpu().item())
+            )
+            epoch_aux_loss_values.append(
+                float(epoch["aux_loss"].detach().cpu().item())
+            )
+            epoch_entropy_values.append(
+                float(epoch["skill_entropy"].detach().cpu().item())
+            )
+            epoch_grad_norm_values.append(
+                float(high_grad_norm.detach().cpu().item())
+            )
+            high_ratio_mean_last = float(
+                epoch["ratio_mean"].detach().cpu().item()
+            )
+            high_clip_fraction_last = float(
+                epoch["clip_fraction"].detach().cpu().item()
+            )
+            high_approx_kl_last = float(
+                epoch["approx_kl"].detach().cpu().item()
+            )
         if not self.r39_toy_direct_state_context:
             self.compact.update_prototype_bank_ema(self.prototype_bank_ema_tau)
+
+        high_loss_value = float(np.mean(epoch_loss_values))
+        high_policy_loss_value = float(np.mean(epoch_policy_loss_values))
+        high_value_loss_value = float(np.mean(epoch_value_loss_values))
+        high_entropy_loss_value = float(np.mean(epoch_entropy_loss_values))
+        high_aux_loss_value = float(np.mean(epoch_aux_loss_values))
+        high_entropy_value = float(np.mean(epoch_entropy_values))
+        high_grad_norm_value = float(np.mean(epoch_grad_norm_values))
 
         normal_decisions = [
             row for row in rows if row.decision_mask and bool(np.all(row.prev_active))
@@ -8097,12 +8216,12 @@ class StandaloneProcessAgent:
                 ),
             }
         return {
-            "high_loss": float(loss.detach().cpu().item()),
-            "high_policy_loss": float(policy_loss.detach().cpu().item()),
-            "high_value_loss": float(value_loss.detach().cpu().item()),
-            "high_entropy_loss": float(entropy_loss.detach().cpu().item()),
-            "high_aux_loss": float(aux_loss.detach().cpu().item()),
-            "high_entropy": float(skill_entropy.detach().cpu().item()),
+            "high_loss": high_loss_value,
+            "high_policy_loss": high_policy_loss_value,
+            "high_value_loss": high_value_loss_value,
+            "high_entropy_loss": high_entropy_loss_value,
+            "high_aux_loss": high_aux_loss_value,
+            "high_entropy": high_entropy_value,
             "high_return_mean": float(np.mean(value_targets_np)),
             "high_env_return_mean": float(np.mean(rewards)),
             "high_bootstrap_value_mean": float(np.mean(next_values)),
@@ -8110,7 +8229,12 @@ class StandaloneProcessAgent:
             "high_smdp_discount_mean": float(np.mean(discounts)),
             "high_value_norm_mean": float(self.high_value_norm.mean) if self.high_value_norm else 0.0,
             "high_value_norm_std": float(np.sqrt(self.high_value_norm.var)) if self.high_value_norm else 0.0,
-            "high_grad_norm": float(high_grad_norm.detach().cpu().item()),
+            "high_grad_norm": high_grad_norm_value,
+            "high_optimizer_steps": float(high_optimizer_steps),
+            "high_ratio_mean_last": high_ratio_mean_last,
+            "high_clip_fraction_last": high_clip_fraction_last,
+            "high_approx_kl_last": high_approx_kl_last,
+            "high_value_norm_updates": high_value_norm_updates,
             "high_policy_actor_grad_norm": policy_actor_grad_norm,
             "high_policy_skill_head_grad_norm": policy_skill_head_grad_norm,
             "high_decision_gae_raw_std": decision_gae_raw_std,

@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r39-toy-high-exposure | launch-ready | stage-0 high optimizer-exposure gate | local CUDA | paired result JSON | GAE/block-return skill-head gradients were nonzero, comparable, and positively aligned on all diagnostic updates; current R30 performs one high step per batch | Compare one versus three high PPO epochs under the same full-refresh direct-state fixed-primitive controller. PASS returns to adaptive toy; FAIL retires optimizer underexposure as the immediate explanation. |
 | EXP-20260715-r39-toy-high-credit-diagnostic | completed -- credit directions aligned | stage-0 high-credit localization | `logs/r39_toy_high_credit_diag_1920_20260715_185721`; commit `ef9a34d` | high optimizer-exposure gate | M0 PASS; both arms had nonzero comparable GAE/block gradients and all six skill-head cosines were positive (`0.392-0.594`) | GAE does not extinguish or reverse immediate block credit. Test explicit three-epoch high PPO exposure on the same tiny model. |
 | EXP-20260715-r39-toy-direct-state | completed -- valid `FAIL_R39_TOY_HIGH_CREDIT` | stage-0 high-context localization; hierarchy-L2 temporal control | `logs/r39_toy_direct_state_12k8_retry2_20260715_184646`; commit `1200bdf` | actor-only GAE/block-return gradient diagnostic | M0 PASS; direct state and zero team context replay exactly, low has zero parameters/updates, and actor/skill-head policy gradients are nonzero; both arms match `0.421875` | Context compression and a disconnected actor gradient do not explain the failure. Diagnose credit direction versus optimizer exposure on a smaller toy collection; do not enter S7 or enlarge the model. |
 | EXP-20260715-r39-toy-fixed-primitives | completed -- valid `FAIL_R39_TOY_HIGH_ACCESS` | stage-0 high-controller positive control; hierarchy-L2 matched control | `logs/r39_toy_fixed_primitives_12k8_retry2_20260715_181752`; commit `19e7f5c` | high context/credit diagnosis | M0 PASS with zero low parameters/updates and zero intrinsic; adaptive/control match both `0.4375`, slow `0.40625`, fast `0.46875` | Failure is upstream of temporal efficacy: diagnose the high context/credit path on the toy; do not enter S7 or enlarge the model. |
@@ -302,6 +303,36 @@ explicitly approves the exception.
   Every per-update skill-head cosine was positive (`0.392-0.594`). This closes
   conflicting GAE direction as the immediate explanation and selects explicit
   high optimizer exposure as the next toy causal edge.
+
+### EXP-20260715-r39-toy-high-exposure
+
+- Causal edge: reusing the same valid on-policy high batch for three PPO epochs
+  -> enough high optimization to learn the correct supplied roster -> dense toy
+  access. Comparator is one epoch; both arms are full-refresh and differ only
+  in `r30_high_ppo_epochs`.
+- Model/reward: direct 6D centralized state padded to 8D, high hidden 32, four
+  fixed axis primitives, zero low parameters and updates, zero intrinsic
+  reward. No environment or model change.
+- Update contract: SMDP-GAE, old likelihoods, masks, clocks, and value targets
+  are fixed once per collected batch. ValueNorm updates once. Every PPO epoch
+  recomputes current context, value, token likelihood, ratio, entropy, and loss.
+  Replay parity is measured only before epoch 1; prototype/state clocks advance
+  once per outer update.
+- Budget: seed 39041; local CUDA; epoch-1 and epoch-3 arms in parallel; 16
+  env/arm, rollout 40, 12,800 steps and 20 outer updates/arm; 32 paired
+  stochastic evaluation episodes.
+- M0: exact epoch counts `1/3`; epoch-0 replay `<=1e-5`; one ValueNorm update
+  per batch; finite last-epoch ratio/clip/KL; identical parameter counts; low
+  parameters/updates/losses and intrinsic fields all zero.
+- M1: epoch-3 match `>=0.70`, slow and fast match each `>=0.65`, and epoch-3
+  minus epoch-1 match `>=0.10`.
+- Branches: M0 miss -> repair the concrete implementation only. M1 pass ->
+  test adaptive categorical retention with three high epochs on the toy. M1
+  miss -> retire optimizer underexposure as the immediate cause and inspect the
+  high action objective; do not add epochs, capacity, intrinsic reward, or S7
+  compute.
+- Status source: `<run-root>/runner_status.txt`; result source:
+  `<run-root>/result/r39_toy_high_exposure.json`.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 

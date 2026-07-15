@@ -20,7 +20,9 @@ CONFIGS = {
 }
 FIXED_PRIMITIVES = False
 DIRECT_STATE_CONTEXT = False
+HIGH_EXPOSURE_PAIR = False
 EXPECTED_FORCE_REFRESH = {"adaptive_retention": False, "force_refresh": True}
+EXPECTED_HIGH_PPO_EPOCHS = {"adaptive_retention": 1, "force_refresh": 1}
 EVAL_METRICS = (
     "r39_toy_task_reward",
     "r39_toy_match_score",
@@ -41,6 +43,11 @@ TRAIN_REQUIRED = (
     "r30_spell_le_4k0_count",
     "high_policy_actor_grad_norm",
     "high_policy_skill_head_grad_norm",
+    "high_optimizer_steps",
+    "high_ratio_mean_last",
+    "high_clip_fraction_last",
+    "high_approx_kl_last",
+    "high_value_norm_updates",
     "high_decision_gae_raw_std",
     "high_decision_block_return_raw_std",
     "high_block_return_actor_grad_norm",
@@ -181,6 +188,7 @@ def validate_manifest(
         "r39_toy_fixed_skill_primitives": FIXED_PRIMITIVES,
         "r39_toy_direct_state_context": DIRECT_STATE_CONTEXT,
         "r30_force_refresh_every_check": EXPECTED_FORCE_REFRESH[arm],
+        "r30_high_ppo_epochs": EXPECTED_HIGH_PPO_EPOCHS[arm],
         "use_recurrent_low_level": False,
         "low_level_architecture": "feedforward",
         "n_z": 4,
@@ -305,6 +313,20 @@ def summarize_arm(
         add_reason(reasons, f"{arm} did not execute exactly two tokens per high decision")
     if replay_error > 1e-5:
         add_reason(reasons, f"{arm} replay log-probability error {replay_error} > 1e-5")
+    if any(
+        abs(
+            row.get("high_optimizer_steps", -1.0)
+            - float(EXPECTED_HIGH_PPO_EPOCHS[arm])
+        )
+        > 1e-9
+        for row in train
+    ):
+        add_reason(
+            reasons,
+            f"{arm} did not execute exactly {EXPECTED_HIGH_PPO_EPOCHS[arm]} high PPO epochs",
+        )
+    if any(abs(row.get("high_value_norm_updates", -1.0) - 1.0) > 1e-9 for row in train):
+        add_reason(reasons, f"{arm} did not update high ValueNorm exactly once per batch")
     low_replay_error = max(values(train, "low_replay_logp_max_error"), default=math.inf)
     if any(abs(row.get("low_return_env_count", -1.0) - 16.0) > 1e-9 for row in train):
         add_reason(reasons, f"{arm} low returns were not grouped over exactly 16 environments")
@@ -397,6 +419,21 @@ def summarize_arm(
             "replay_logp_max_error": replay_error,
             "policy_actor_grad_norm_mean": mean(
                 train, "high_policy_actor_grad_norm"
+            ),
+            "high_optimizer_steps_per_update": mean(
+                train, "high_optimizer_steps"
+            ),
+            "high_ratio_mean_last_mean": mean(
+                train, "high_ratio_mean_last"
+            ),
+            "high_clip_fraction_last_mean": mean(
+                train, "high_clip_fraction_last"
+            ),
+            "high_approx_kl_last_mean": mean(
+                train, "high_approx_kl_last"
+            ),
+            "high_value_norm_updates_per_update": mean(
+                train, "high_value_norm_updates"
             ),
             "policy_skill_head_grad_norm_mean": mean(
                 train, "high_policy_skill_head_grad_norm"
@@ -495,7 +532,8 @@ def decide(m0: bool, m1: bool, m2: bool) -> str:
 
 
 def main() -> None:
-    global CONFIGS, DIRECT_STATE_CONTEXT, EXPERIMENT_ID, FIXED_PRIMITIVES
+    global ARMS, CONFIGS, DIRECT_STATE_CONTEXT, EXPERIMENT_ID, FIXED_PRIMITIVES
+    global EXPECTED_FORCE_REFRESH, EXPECTED_HIGH_PPO_EPOCHS, HIGH_EXPOSURE_PAIR
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--seed", type=int, default=39041)
@@ -507,6 +545,7 @@ def main() -> None:
     parser.add_argument("--control-config", default=CONFIGS["force_refresh"])
     parser.add_argument("--fixed-primitives", action="store_true")
     parser.add_argument("--direct-state-context", action="store_true")
+    parser.add_argument("--high-exposure-pair", action="store_true")
     parser.add_argument("--result-name", default="r39_toy_native_categorical.json")
     args = parser.parse_args()
 
@@ -517,6 +556,17 @@ def main() -> None:
     }
     FIXED_PRIMITIVES = bool(args.fixed_primitives)
     DIRECT_STATE_CONTEXT = bool(args.direct_state_context)
+    HIGH_EXPOSURE_PAIR = bool(args.high_exposure_pair)
+    if HIGH_EXPOSURE_PAIR:
+        ARMS = ("high_epoch1", "high_epoch3")
+        CONFIGS = {
+            "high_epoch1": str(args.adaptive_config),
+            "high_epoch3": str(args.control_config),
+        }
+        EXPECTED_FORCE_REFRESH = {"high_epoch1": True, "high_epoch3": True}
+        EXPECTED_HIGH_PPO_EPOCHS = {"high_epoch1": 1, "high_epoch3": 3}
+    else:
+        EXPECTED_HIGH_PPO_EPOCHS = {arm: 1 for arm in ARMS}
 
     run_root = Path(args.run_root).resolve()
     summaries: dict[str, dict[str, Any]] = {}
@@ -533,10 +583,10 @@ def main() -> None:
         summaries[arm] = summary
         invalid_reasons.extend(reasons)
 
-    adaptive_eval = summaries.get("adaptive_retention", {}).get("evaluation", {})
-    control_eval = summaries.get("force_refresh", {}).get("evaluation", {})
-    adaptive_temporal = summaries.get("adaptive_retention", {}).get("late_half_temporal", {})
-    control_temporal = summaries.get("force_refresh", {}).get("late_half_temporal", {})
+    adaptive_eval = summaries.get(ARMS[0], {}).get("evaluation", {})
+    control_eval = summaries.get(ARMS[1], {}).get("evaluation", {})
+    adaptive_temporal = summaries.get(ARMS[0], {}).get("late_half_temporal", {})
+    control_temporal = summaries.get(ARMS[1], {}).get("late_half_temporal", {})
     paired_reset_match = (
         adaptive_eval.get("reset_seeds") == control_eval.get("reset_seeds")
         and len(adaptive_eval.get("reset_seeds", [])) == args.eval_episodes
@@ -547,43 +597,84 @@ def main() -> None:
     m0 = not invalid_reasons
     access_threshold = 0.70
     component_access_threshold = 0.65
-    m1 = bool(
-        m0
-        and all(
-            evaluation.get("r39_toy_match_score") is not None
-            and evaluation["r39_toy_match_score"] >= access_threshold
-            and evaluation.get("r39_toy_slow_match") is not None
-            and evaluation["r39_toy_slow_match"] >= component_access_threshold
-            and evaluation.get("r39_toy_fast_match") is not None
-            and evaluation["r39_toy_fast_match"] >= component_access_threshold
-            for evaluation in (adaptive_eval, control_eval)
-        )
-    )
     match_difference = None
     if (
         adaptive_eval.get("r39_toy_match_score") is not None
         and control_eval.get("r39_toy_match_score") is not None
     ):
-        match_difference = (
-            adaptive_eval["r39_toy_match_score"]
-            - control_eval["r39_toy_match_score"]
+        if HIGH_EXPOSURE_PAIR:
+            match_difference = (
+                control_eval["r39_toy_match_score"]
+                - adaptive_eval["r39_toy_match_score"]
+            )
+        else:
+            match_difference = (
+                adaptive_eval["r39_toy_match_score"]
+                - control_eval["r39_toy_match_score"]
+            )
+    if HIGH_EXPOSURE_PAIR:
+        exposure_gain_threshold = 0.10
+        m1 = bool(
+            m0
+            and control_eval.get("r39_toy_match_score") is not None
+            and control_eval["r39_toy_match_score"] >= access_threshold
+            and control_eval.get("r39_toy_slow_match") is not None
+            and control_eval["r39_toy_slow_match"] >= component_access_threshold
+            and control_eval.get("r39_toy_fast_match") is not None
+            and control_eval["r39_toy_fast_match"] >= component_access_threshold
+            and match_difference is not None
+            and match_difference >= exposure_gain_threshold
         )
-    m2 = bool(
-        m1
-        and control_temporal.get("full_sync_set_rate") is not None
-        and abs(control_temporal["full_sync_set_rate"] - 1.0) <= 1e-6
-        and adaptive_temporal.get("full_sync_set_rate") is not None
-        and adaptive_temporal["full_sync_set_rate"] <= 0.75
-        and adaptive_temporal.get("mixed_age_fraction") is not None
-        and adaptive_temporal["mixed_age_fraction"] >= 0.25
-        and adaptive_temporal.get("long_spell_count", 0.0) > 0.0
-        and adaptive_temporal.get("short_spell_count", 0.0) > 0.0
-        and match_difference is not None
-        and match_difference >= -0.05
-    )
-    status = decide(m0, m1, m2)
+        m2 = False
+        status = (
+            "INVALID_R39_TOY_IMPLEMENTATION"
+            if not m0
+            else (
+                "PASS_R39_TOY_HIGH_EXPOSURE"
+                if m1
+                else "FAIL_R39_TOY_HIGH_EXPOSURE_3"
+            )
+        )
+    else:
+        exposure_gain_threshold = None
+        m1 = bool(
+            m0
+            and all(
+                evaluation.get("r39_toy_match_score") is not None
+                and evaluation["r39_toy_match_score"] >= access_threshold
+                and evaluation.get("r39_toy_slow_match") is not None
+                and evaluation["r39_toy_slow_match"] >= component_access_threshold
+                and evaluation.get("r39_toy_fast_match") is not None
+                and evaluation["r39_toy_fast_match"] >= component_access_threshold
+                for evaluation in (adaptive_eval, control_eval)
+            )
+        )
+        m2 = bool(
+            m1
+            and control_temporal.get("full_sync_set_rate") is not None
+            and abs(control_temporal["full_sync_set_rate"] - 1.0) <= 1e-6
+            and adaptive_temporal.get("full_sync_set_rate") is not None
+            and adaptive_temporal["full_sync_set_rate"] <= 0.75
+            and adaptive_temporal.get("mixed_age_fraction") is not None
+            and adaptive_temporal["mixed_age_fraction"] >= 0.25
+            and adaptive_temporal.get("long_spell_count", 0.0) > 0.0
+            and adaptive_temporal.get("short_spell_count", 0.0) > 0.0
+            and match_difference is not None
+            and match_difference >= -0.05
+        )
+        status = decide(m0, m1, m2)
 
-    if status in {
+    if status == "PASS_R39_TOY_HIGH_EXPOSURE":
+        decision = {
+            "conclusion": "three high PPO epochs supplied the missing optimizer exposure on the fixed-primitive toy",
+            "next_action": "test adaptive categorical retention with the same high exposure before any S7 run",
+        }
+    elif status == "FAIL_R39_TOY_HIGH_EXPOSURE_3":
+        decision = {
+            "conclusion": "tripling high PPO exposure did not produce dense toy access",
+            "next_action": "retire optimizer underexposure as the immediate explanation and inspect the high action objective; do not enlarge the model or enter S7",
+        }
+    elif status in {
         "PASS_R39_TOY_NATIVE_CATEGORICAL",
         "PASS_R39_TOY_FIXED_PRIMITIVES",
         "PASS_R39_TOY_DIRECT_STATE",
@@ -627,6 +718,7 @@ def main() -> None:
         "expected_outer_updates_per_arm": args.expected_updates,
         "evaluation_episodes_per_arm": args.eval_episodes,
         "direct_state_context": DIRECT_STATE_CONTEXT,
+        "high_exposure_pair": HIGH_EXPOSURE_PAIR,
         "implementation_valid": m0,
         "invalid_reasons": invalid_reasons,
         "arms": summaries,
@@ -640,9 +732,14 @@ def main() -> None:
                 "passed": m1,
                 "final_match_score_min": access_threshold,
                 "final_slow_and_fast_match_min": component_access_threshold,
+                "high3_minus_high1_match_score_min": exposure_gain_threshold,
+                "high3_minus_high1_match_score": (
+                    match_difference if HIGH_EXPOSURE_PAIR else None
+                ),
             },
             "M2_temporal_semantics": {
                 "passed": m2,
+                "not_applicable": HIGH_EXPOSURE_PAIR,
                 "thresholds": {
                     "control_full_sync_set_rate_target": 1.0,
                     "control_full_sync_set_rate_tolerance": 1e-6,
@@ -651,7 +748,9 @@ def main() -> None:
                     "adaptive_short_and_long_spell_count_strict_min": 0,
                     "adaptive_minus_control_match_score_min": -0.05,
                 },
-                "adaptive_minus_control_match_score": match_difference,
+                "adaptive_minus_control_match_score": (
+                    None if HIGH_EXPOSURE_PAIR else match_difference
+                ),
             },
         },
         "decision": {"status": status, **decision},

@@ -65,6 +65,7 @@ ALGORITHM_MANIFEST_FIELDS = (
     "r30_keep_init",
     "r30_bridge_context_mode",
     "r30_high_buffer_version",
+    "r30_high_ppo_epochs",
     "r30_force_refresh_every_check",
     "r39_native_categorical_edit",
     "r39_toy_fixed_skill_primitives",
@@ -607,6 +608,9 @@ def export_run_manifest(
             "r30_keep_init": float(getattr(agent, "r30_keep_init", 0.6)),
             "r30_high_buffer_version": int(
                 getattr(agent, "r30_high_buffer_version", 1)
+            ),
+            "r30_high_ppo_epochs": int(
+                getattr(agent, "high_ppo_epochs", 1)
             ),
             "constant_skill_no_high": bool(
                 getattr(agent, "constant_skill_no_high", False)

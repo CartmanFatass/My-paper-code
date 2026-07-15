@@ -13,7 +13,8 @@ param(
     [string]$RunLabel = "r39_toy_native_categorical_12k8",
     [string]$ResultName = "r39_toy_native_categorical.json",
     [switch]$FixedPrimitives,
-    [switch]$DirectStateContext
+    [switch]$DirectStateContext,
+    [switch]$HighExposurePair
 )
 
 $ErrorActionPreference = "Stop"
@@ -30,16 +31,30 @@ $RunRoot = [System.IO.Path]::GetFullPath($RunRoot)
 $StatusPath = Join-Path $RunRoot "runner_status.txt"
 $ExpectedUpdates = [int]($TotalTimesteps / ($NumEnvs * $RolloutLength))
 $GitCommit = (& git -C $RepoDir rev-parse HEAD).Trim()
-$Arms = @(
-    [pscustomobject]@{
-        Id = "adaptive_retention"
-        Config = $AdaptiveConfig
-    },
-    [pscustomobject]@{
-        Id = "force_refresh"
-        Config = $ControlConfig
-    }
-)
+if ($HighExposurePair) {
+    $Arms = @(
+        [pscustomobject]@{
+            Id = "high_epoch1"
+            Config = $AdaptiveConfig
+        },
+        [pscustomobject]@{
+            Id = "high_epoch3"
+            Config = $ControlConfig
+        }
+    )
+}
+else {
+    $Arms = @(
+        [pscustomobject]@{
+            Id = "adaptive_retention"
+            Config = $AdaptiveConfig
+        },
+        [pscustomobject]@{
+            Id = "force_refresh"
+            Config = $ControlConfig
+        }
+    )
+}
 
 $env:CUBLAS_WORKSPACE_CONFIG = ":4096:8"
 $env:OMP_NUM_THREADS = "1"
@@ -55,13 +70,14 @@ function Write-Status([string]$State, [string]$Phase, [string[]]$Details = @()) 
         "git_commit=$GitCommit",
         "seed=$Seed",
         "run_root=$RunRoot",
-        "arms=adaptive_retention,force_refresh",
+        "arms=$((@($Arms | ForEach-Object { $_.Id })) -join ',')",
         "scenario=two_timescale_role_free_actions",
         "device=$Device",
         "num_envs_per_arm=$NumEnvs",
         "total_timesteps_per_arm=$TotalTimesteps",
         "rollout_length=$RolloutLength",
         "expected_outer_updates=$ExpectedUpdates",
+        "high_exposure_pair=$([bool]$HighExposurePair)",
         "skill_interval=5",
         "eval_episodes=$EvalEpisodes",
         "eval_action_mode=stochastic",
@@ -254,6 +270,9 @@ try {
     }
     if ($DirectStateContext) {
         $analyzerArgs += "--direct-state-context"
+    }
+    if ($HighExposurePair) {
+        $analyzerArgs += "--high-exposure-pair"
     }
     & $PythonBin @analyzerArgs
     if ($LASTEXITCODE -ne 0) {
