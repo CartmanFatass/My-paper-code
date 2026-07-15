@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable
 
+from pettingzoo.mpe import simple_spread_v3
+
 from envs.pettingzoo.alice_bob_asymmetric_cycles import (
     AliceBobAsymmetricCyclesEnv,
 )
@@ -48,6 +50,10 @@ SCENARIO_ALIASES = {
     "role-free-two-timescale-actions": "two_timescale_role_free_actions",
     "r39_toy": "two_timescale_role_free_actions",
     "r39-toy": "two_timescale_role_free_actions",
+    "simple_spread": "simple_spread",
+    "simple-spread": "simple_spread",
+    "simple_spread_v3": "simple_spread",
+    "r40_simple_spread": "simple_spread",
 }
 
 SCENARIO_ALIASES.update(
@@ -112,6 +118,16 @@ def make_env(config, spec: EnvSpec) -> Callable[[], ParallelToArrayAdapter]:
             raw_env = CooperativeTwoTimescaleSparseEnv(**kwargs)
         elif scenario == "two_timescale_role_free_actions":
             raw_env = TwoTimescaleRoleFreeActionsEnv(**kwargs)
+        elif scenario == "simple_spread":
+            raw_env = simple_spread_v3.parallel_env(
+                N=int(getattr(config, "n_agents", 3)),
+                local_ratio=float(getattr(config, "simple_spread_local_ratio", 0.0)),
+                max_cycles=int(getattr(config, "episode_length", 25)),
+                continuous_actions=bool(
+                    getattr(config, "simple_spread_continuous_actions", False)
+                ),
+                render_mode=spec.render_mode,
+            )
         else:
             raise AssertionError(f"Unhandled normalized scenario: {scenario}")
 

@@ -4,6 +4,39 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R40 Public Fixed-N Cooperative Access Gate
+
+Active causal edge:
+
+```text
+public fixed-N cooperative environment
+-> ordinary recurrent MAPPO learns native team reward
+-> reliable positive-credit substrate for one later native fixed-k HMASD gate
+```
+
+R39 native-toy credit is a valid scientific failure and is permanently
+retired. GPT-5.6 Pro selected PettingZoo 1.24.3 `simple_spread_v3`; the raw
+follow-up and controller disposition live under
+`docs/external-review/gpt5_6_pro/20260715_r39_native_toy_credit_result/`.
+
+One implementation/evidence boundary:
+
+1. Add `simple_spread_v3` to the existing PettingZoo adapter/factory with fixed
+   `N=3`, horizon 25, and `local_ratio=0.0`.
+2. Use native `Discrete(5)` actions and the existing Categorical recurrent
+   MAPPO likelihood. Actor input remains the 18-value local observation;
+   centralized critic input is the native 54-value state.
+3. Use the already M0-valid constant-code/no-high recurrent MAPPO path. Disable
+   every skill, high, discriminator, process, and intrinsic update/reward.
+4. Train seed 40041 on local CUDA with 16 environments, rollout and recurrent
+   sequence 25, 200,000 steps/500 outer updates, five PPO epochs, sequence batch
+   64, and the registered optimizer coefficients.
+5. Evaluate 64 stochastic episodes in each of four fixed reset blocks, pair
+   them with native uniform-random discrete actions, and write one result JSON.
+6. The registered M0--M2 gate in `memory/ExpRecord.md` is the implementation
+   check. Do not insert a smoke, continuous-action adapter, reward shaping,
+   intrinsic reward, skill route, threshold change, or seed/budget expansion.
+
 ## R39 S7 Compatibility Boundary
 
 R38 completed as a valid `FAIL_R38_CTS_ACCESS`; its replacement environment and

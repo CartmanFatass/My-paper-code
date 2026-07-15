@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260715-r40-simple-spread-access | launch-ready | baseline-L1 public cooperative-access gate | local CUDA; runner pending implementation | one result JSON | PettingZoo 1.24.3 `simple_spread_v3`, fixed N=3, native reward, discrete recurrent MAPPO, 200K/500 updates, 256 paired stochastic episodes | PASS authorizes only native fixed-k HMASD on the same substrate; valid FAIL retires the substrate |
 | EXP-20260715-r39-native-hmasd-toy-credit | completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` | stage-0 native-HMASD fixed-N credit anchor | `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219`; result owner `result/r39_native_hmasd_toy_credit.json` | post-R39 positive-substrate review | M0 valid; 12,800 steps, 20 outer updates, 60 high optimizer updates, replay max `4.768e-7`, zero low/discriminator updates; match/slow/fast `0.455078/0.464844/0.445313` | Retire this native fixed-N toy credit route under the registered valid-fail branch; no rescue or expansion |
 | EXP-20260715-r39-toy-joint-credit-alignment | completed -- valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` | stage-0 sampled-credit alignment diagnostic | `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`; commit `c6d02e3` | native-HMASD toy design | 32 correct versus 352 incorrect rows; pooled raw block return `4.9010` versus `1.8170`; actor weight `+2.1207` versus `-0.1928`; replay zero | Reward timing and storage are correct. Stop patching standalone shared credit; preserve the small model and move the toy to native HMASD team/agent credit. |
 | EXP-20260715-r39-toy-joint-factorization | completed -- valid `PASS_R39_JOINT_FACTORIZATION_CAPACITY` | stage-0 exact joint-policy capacity diagnostic | `logs/r39_toy_joint_factorization_20260715_193034`; commit `fd29e3e` | sampled joint-credit alignment | minimum correct unordered-pair mass `0.999487`, mean `0.999670`, probability-sum error `3.58e-7`, high policy 2,512 parameters | The small policy is expressive and exactly optimizable on the eight registered contexts. Do not enlarge it; localize sampled credit. |
@@ -109,6 +110,63 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260715-r40-simple-spread-access
+
+- Causal edge: public fixed-N cooperative task -> native-reward recurrent MAPPO
+  access -> one credible substrate for a later fixed-k HMASD source gate. This
+  is a Level-1 environment/access gate, not a skill or lifetime experiment.
+- Upstream authorization: GPT-5.6 Pro accepted R40 after correcting the reward
+  and outcome contract. The controller uses the question-authorized native
+  discrete mode because the repository already provides exact Categorical
+  sampling and replay; see `FOLLOWUP_DISPOSITION.md` in the R39 review folder.
+- Environment: PettingZoo 1.24.3 `simple_spread_v3`, `N=3`, horizon 25,
+  `local_ratio=0.0`, `continuous_actions=False`. Reward is the unmodified shared
+  native negative closest-agent landmark-distance sum. No collision term,
+  shaping, success bonus, intrinsic reward, or potential is added.
+- Information/probability: actor receives only native 18-value local
+  observations; centralized critic receives native 54-value state. Each agent
+  samples one `Discrete(5)` action; rollout stores that integer and old
+  Categorical log probability, and PPO teacher-forces the same action.
+- Learner: ordinary constant-code/no-high recurrent MAPPO; no trainable skill or
+  team code path and zero high, discriminator, process, posterior, or intrinsic
+  updates/rewards. Low hidden size 64; recurrent sequence 25; sequence batch 64;
+  five PPO epochs; Adam actor/critic learning rates `3e-4`; gamma `0.99`; GAE
+  lambda `0.95`; clip `0.2`; value coefficient `0.5`; entropy coefficient
+  `0.01`; max gradient norm `0.5`; ValueNorm enabled.
+- Exposure: training seed 40041; local CUDA; 16 parallel environments; rollout
+  25; exactly 200,000 environment steps and 500 outer updates. No checkpoint
+  selection: evaluate the exact final checkpoint.
+- Evaluation: four stochastic 64-episode blocks. Block `s` in
+  `{40042,40043,40044,40045}` uses reset seeds `1000*s + episode`, episode
+  `0..63`. Pair each reset with a uniform random `Discrete(5)` policy using
+  independent action RNG seed 50041. Paired episode bootstrap uses 10,000
+  repetitions and seed 60041.
+- Primary estimand: `G_e=sum_{t=0}^{24} r_{e,t}`. M1 requires final MAPPO mean
+  return `>=-35` and paired MAPPO-minus-random bootstrap lower 95% bound `>5`.
+  M2 requires at least three of four MAPPO block means to be `>-35`.
+- Gate calibration: before any R40 training outcome was observed, 256 random
+  discrete episodes gave mean `-52.5873`, standard deviation `14.8004`, and
+  90th percentile `-35.6879`; therefore the absolute and paired floors require
+  a material departure from random behavior.
+- M0: exact package/version/scenario/action/reward/information/seed/exposure;
+  500 successful outer updates; finite losses/actions/returns; low behavior
+  replay max error `<=1e-6`; nonzero finite low actor and critic optimizer
+  updates; zero high/discriminator/process/posterior/intrinsic updates and zero
+  numerical repairs; exact final checkpoint; 256 unique paired reset rows.
+- Branches: M0 miss -> `INVALID_R40_IMPLEMENTATION`, repair only the concrete
+  defect and rerun the unchanged contract. M0 pass plus M1/M2 pass ->
+  `PASS_R40_SIMPLE_SPREAD_ACCESS`, register only native fixed-k HMASD on this
+  exact substrate. M0 pass with M1 or M2 miss -> `VALID_FAIL_R40_ACCESS`, retire
+  this substrate without rescue. No `MIXED` or `UNDERPOWERED` branch.
+- Prohibited: continuous-action distribution work, reward or observation
+  shaping, task-specific or generic intrinsic reward, skills, high controller,
+  HMASD, KEEP/SET, lifetime, variable N/open roster, post-result threshold
+  changes, tuning, seed/budget expansion, or best-checkpoint substitution.
+- Expected wall clock: one local 200K CUDA run plus paired final evaluation;
+  use the existing dedicated training monitor. Status source:
+  `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r40_simple_spread_access.json`.
 
 ### EXP-20260715-r39-native-hmasd-toy-credit
 

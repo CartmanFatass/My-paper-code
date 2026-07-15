@@ -30,11 +30,13 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: close the fixed-`N` joint-credit failure review selected by
-  valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`. M0 passed, but
-  match/slow/fast were `0.455078/0.464844/0.445313`, below all registered
-  thresholds. The completed native GAE/PPO credit route is retired rather than
-  rescued.
+- Active objective: establish one public fixed-`N` cooperative-access substrate
+  after valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR`. R39 is permanently
+  retired; its completed native GAE/PPO credit route is not being rescued.
+- GPT-5.6 Pro accepted R40 `simple_spread` ordinary recurrent MAPPO after the
+  reward/metric correction. The controller accepts the contract with native
+  `Discrete(5)` actions, which reuse the repository's exact Categorical
+  sampling/replay path instead of adding a sigmoid-Gaussian distribution.
 - The variable-team review is accepted as a future, separate open-roster axis:
   membership transitions must not renew surviving agents' skills. It does not
   replace the fixed-`N` native-toy credit anchor. See the disposition pointer
@@ -42,11 +44,12 @@ and history live in their owning files.
 
 ## Next Actions
 
-- Immediate next action: obtain GPT-5.6 Pro's focused correction of the accepted
-  R40 `simple_spread` route. The first response incorrectly used
-  `local_ratio=1.0` and a nonexistent native `success` metric; no implementation
-  or compute begins until the reward, action-probability, and access estimand
-  are valid and fixed.
+- Immediate next action: implement the registered R40 environment/config,
+  runner, and single result analyzer, then launch the 200,000-step local CUDA
+  access gate. The run itself is the implementation check; do not add a
+  separate smoke or test suite.
+- On a valid PASS, register only native fixed-`k` HMASD on the exact same
+  substrate. On a valid FAIL, retire `simple_spread` under this MAPPO contract.
 
 ## Immediate Constraints
 
@@ -168,5 +171,6 @@ and history live in their owning files.
 - `memory/LTM/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md` — terminal R39
   failure review and the proposed public positive-credit substrate.
 - `docs/external-review/gpt5_6_pro/20260715_r39_native_toy_credit_result/` —
-  tracked R39 result evidence and the single next-substrate review question.
+  tracked R39 result evidence, both Pro responses, and the accepted R40
+  controller disposition.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

@@ -738,6 +738,17 @@ def parse_args() -> argparse.Namespace:
         choices=("deterministic", "stochastic"),
         default="deterministic",
     )
+    parser.add_argument(
+        "--eval_seed_blocks",
+        default="",
+        help="Comma-separated environment seed blocks for fixed final evaluation.",
+    )
+    parser.add_argument(
+        "--eval_episodes_per_seed",
+        type=int,
+        default=0,
+        help="Episodes per eval seed block; reset seed is block*1000+episode.",
+    )
     parser.add_argument("--save_topology", action="store_true")
     parser.add_argument("--topology_interval", type=int, default=25)
     parser.add_argument("--topology_episodes", type=int, default=1)
@@ -3151,6 +3162,20 @@ def evaluate(
     topology_episodes = max(0, int(getattr(args, "topology_episodes", 1)))
     topology_max_frames = max(1, int(getattr(args, "topology_max_frames", 160)))
     is_alice_bob = normalize_scenario(config.scenario) == "alice_bob_asymmetric_cycles"
+    eval_seed_blocks = tuple(
+        int(token.strip())
+        for token in str(getattr(args, "eval_seed_blocks", "")).split(",")
+        if token.strip()
+    )
+    episodes_per_seed = int(getattr(args, "eval_episodes_per_seed", 0))
+    if eval_seed_blocks:
+        if episodes_per_seed <= 0:
+            raise ValueError("eval_seed_blocks requires eval_episodes_per_seed > 0")
+        expected_episodes = len(eval_seed_blocks) * episodes_per_seed
+        if int(episodes) != expected_episodes:
+            raise ValueError(
+                f"fixed eval seed blocks require {expected_episodes} episodes, got {episodes}"
+            )
 
     def alice_bob_joint_cell(state_value) -> tuple[int, int, int, int] | None:
         if state_value is None:
@@ -3166,7 +3191,19 @@ def evaluate(
 
     try:
         for episode_idx in range(max(int(episodes), 1)):
-            reset_seed = int(args.seed) + 100000 + episode_idx
+            if eval_seed_blocks:
+                block_index = episode_idx // episodes_per_seed
+                within_block = episode_idx % episodes_per_seed
+                block_seed = eval_seed_blocks[block_index]
+                reset_seed = block_seed * 1000 + within_block
+                if within_block == 0:
+                    random.seed(block_seed)
+                    np.random.seed(block_seed)
+                    torch.manual_seed(block_seed)
+                    if torch.cuda.is_available():
+                        torch.cuda.manual_seed_all(block_seed)
+            else:
+                reset_seed = int(args.seed) + 100000 + episode_idx
             obs, info = env.reset(seed=reset_seed)
             state = info.get("state")
             agent.reset_env_state(0)

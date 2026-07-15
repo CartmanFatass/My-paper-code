@@ -36,8 +36,28 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         self.agents = self.env.possible_agents # Use possible_agents for consistency
         self.possible_agents = list(self.env.possible_agents)
         self.n_uavs = len(self.agents)
-        self.state_dim = self.env.get_state_dim() # Use getter methods
-        self.obs_dim = self.env.get_obs_dim() # Use getter methods
+        state_dim_provider = getattr(self.env, "get_state_dim", None)
+        if callable(state_dim_provider):
+            self.state_dim = int(state_dim_provider())
+        else:
+            state_space = getattr(self.env, "state_space", None)
+            if state_space is None or not getattr(state_space, "shape", None):
+                raise AttributeError(
+                    f"Environment {type(self.env).__name__} exposes neither "
+                    "get_state_dim() nor a shaped state_space"
+                )
+            self.state_dim = int(np.prod(state_space.shape))
+        obs_dim_provider = getattr(self.env, "get_obs_dim", None)
+        if callable(obs_dim_provider):
+            self.obs_dim = int(obs_dim_provider())
+        else:
+            obs_space = self.env.observation_space(self.agents[0])
+            if not getattr(obs_space, "shape", None):
+                raise AttributeError(
+                    f"Environment {type(self.env).__name__} exposes neither "
+                    "get_obs_dim() nor a shaped observation space"
+                )
+            self.obs_dim = int(np.prod(obs_space.shape))
         
         # Handle both Discrete and Box action spaces
         action_space = self.env.action_space(self.agents[0])
@@ -171,13 +191,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # Ensure the underlying env's reset uses the seed if provided
         observations_dict, infos_dict = self.env.reset(seed=seed, options=options)
 
-        # 获取全局状态 - 直接调用环境的_get_state方法
-        # 移除不稳定的hasattr检查，在多进程环境中可能失败
-        try:
-            state = self.env._get_state()
-        except AttributeError:
-            # 如果环境没有_get_state方法，抛出明确错误而不是静默失败
-            raise AttributeError(f"Environment {type(self.env).__name__} does not have a '_get_state' method")
+        state = self._state_array()
 
         # 将字典格式的观测转换为数组格式
         observations_array = self._dict_to_array(observations_dict)
@@ -217,13 +231,7 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         # 调用环境的step方法，获取字典格式的结果
         observations_dict, rewards_dict, terminations_dict, truncations_dict, infos_dict = self.env.step(actions_dict)
 
-        # 获取全局状态 - 直接调用环境的_get_state方法
-        # 移除不稳定的hasattr检查，在多进程环境中可能失败
-        try:
-            next_state = self.env._get_state()
-        except AttributeError:
-            # 如果环境没有_get_state方法，抛出明确错误而不是静默失败
-            raise AttributeError(f"Environment {type(self.env).__name__} does not have a '_get_state' method")
+        next_state = self._state_array()
 
         # 将字典格式的观测转换为数组格式
         next_observations_array = self._dict_to_array(observations_dict)
@@ -512,11 +520,18 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
 
     def _get_state(self):
         """获取全局状态"""
-        try:
-            return self.env._get_state()
-        except AttributeError:
-            # 如果底层环境没有_get_state方法，抛出明确错误
-            raise AttributeError(f"Environment {type(self.env).__name__} does not have a '_get_state' method")
+        return self._state_array()
+
+    def _state_array(self):
+        state_provider = getattr(self.env, "_get_state", None)
+        if not callable(state_provider):
+            state_provider = getattr(self.env, "state", None)
+        if not callable(state_provider):
+            raise AttributeError(
+                f"Environment {type(self.env).__name__} exposes neither "
+                "_get_state() nor state()"
+            )
+        return np.asarray(state_provider(), dtype=np.float32).reshape(-1)
 
     def close(self):
         """Closes the environment."""
