@@ -24,10 +24,9 @@ must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Launch `scripts/run_r41_official_hmasd_local.ps1` on local CUDA.
-2. Run seed 1 with 16 rollout environments for 937 outer updates and
-   1,499,200 environment steps.
-3. Read the final analyzer result and select only its registered branch.
+1. Follow `logs/r41a_hmasd_local_pilot_20260716_014529/runner_status.txt` and
+   seed-1 `progress.json` while the local run is active.
+2. Read the final analyzer result once and select only its registered branch.
 
 ## Immediate Constraints
 
