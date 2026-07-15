@@ -1050,7 +1050,7 @@ Run:
 
 ```powershell
 git status --short
-git push origin aggressive
+git push My-paper-code aggressive
 git rev-parse HEAD
 ```
 
@@ -1094,7 +1094,7 @@ Expected: one of `PASS_R38_CTS_ACCESS`, `FAIL_R38_CTS_ACCESS`, or `INVALID_R38_I
 ```powershell
 git add memory/ExpRecord.md memory/CURRENT_WORK.md
 git commit -m "docs: record R38 CTS access decision"
-git push origin aggressive
+git push My-paper-code aggressive
 ```
 
 Expected: the result remains owned by the timestamped `logs/` JSON; compact memory contains only the status, interpretation, pointer, and sole next action.
