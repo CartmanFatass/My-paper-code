@@ -30,22 +30,25 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: localize sampled joint-roster credit on the toy. The exact
-  high-32 factorization diagnostic passed: minimum correct unordered-roster
-  mass reached `0.999487` across eight contexts, with probability-sum error
-  `3.58e-7`. The small autoregressive policy is expressive and optimizable;
-  enlarging it is not justified. R39A is preserved and deferred; native HMASD
-  R39B remains blocked.
+- Active objective: move the R39 preflight to a small native-HMASD toy path.
+  The toy has not passed its learning gate, so S7 is not authorized. The
+  high-32 policy passed exact factorization capacity, and sampled correct
+  rosters received raw block return `4.9010` versus `1.8170` for incorrect
+  rosters with correctly signed actor weights. Model capacity and reward
+  alignment are closed; standalone shared joint credit is the remaining failed
+  boundary. R39A is preserved and deferred; native HMASD R39B remains blocked.
+- The variable-team review is accepted as a future, separate open-roster axis:
+  membership transitions must not renew surviving agents' skills. It does not
+  replace the fixed-`N` native-toy credit anchor. See the disposition pointer
+  below.
 
 ## Next Actions
 
-- Immediate next action: add one diagnostic-only conditional readout to the
-  existing tiny full-refresh/high3 block-return run: sampled correct-roster
-  frequency and raw block-return/actor-weight separation between correct and
-  incorrect rosters. This uses toy labels only to audit stored credit and never
-  as reward or policy input. Positive separation selects an environment-agnostic
-  joint-credit variance reduction edge; absent separation exposes a clock or
-  reward-assignment defect.
+- Immediate next action: implement the minimum two-agent native-HMASD toy
+  entry with high hidden 32 and fixed axis skill primitives, preserving the
+  original SkillCoordinator teacher-forced joint likelihood and native
+  team/agent high advantages. Toy labels remain evaluation-only. First prove a
+  fixed-k native toy anchor; only then expose native KEEP/SET on the same path.
 
 ## Immediate Constraints
 
@@ -161,4 +164,7 @@ and history live in their owning files.
   — tracked R37 result audit and replacement-benchmark request.
 - `docs/external-review/gpt5_6_pro/20260715_r38_cts_access_result/` — tracked
   R38 result audit and single post-R38 causal-route request.
+- `docs/external-review/gpt5_6_pro/20260715_open_roster_variable_team_review/`
+  — two raw variable-team responses and the accepted-but-deferred open-roster
+  disposition.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

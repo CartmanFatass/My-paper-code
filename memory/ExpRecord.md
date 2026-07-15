@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r39-toy-joint-credit-alignment | launch-ready | stage-0 sampled-credit alignment diagnostic | local CUDA; tiny full-refresh high3 block-return run | three update rows | exact supervision proves high-32 factorization capacity, while sampled SMDP and direct block-return credit both fail | Measure sampled correct-roster frequency and raw block-return/actor-weight separation. Do not change the reward, model, or update. |
+| EXP-20260715-r39-toy-joint-credit-alignment | completed -- valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` | stage-0 sampled-credit alignment diagnostic | `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`; commit `c6d02e3` | native-HMASD toy design | 32 correct versus 352 incorrect rows; pooled raw block return `4.9010` versus `1.8170`; actor weight `+2.1207` versus `-0.1928`; replay zero | Reward timing and storage are correct. Stop patching standalone shared credit; preserve the small model and move the toy to native HMASD team/agent credit. |
 | EXP-20260715-r39-toy-joint-factorization | completed -- valid `PASS_R39_JOINT_FACTORIZATION_CAPACITY` | stage-0 exact joint-policy capacity diagnostic | `logs/r39_toy_joint_factorization_20260715_193034`; commit `fd29e3e` | sampled joint-credit alignment | minimum correct unordered-pair mass `0.999487`, mean `0.999670`, probability-sum error `3.58e-7`, high policy 2,512 parameters | The small policy is expressive and exactly optimizable on the eight registered contexts. Do not enlarge it; localize sampled credit. |
 | EXP-20260715-r39-toy-block-credit | completed -- valid `FAIL_R39_TOY_BLOCK_CREDIT` | stage-0 high actor-credit positive control | `logs/r39_toy_block_credit_12k8_20260715_192020`; commit `22a3162` | exact joint-roster factorization diagnostic | M0 PASS; SMDP-GAE and block-return both scored match/slow/fast `0.46875`, gain `0`, with exact replay, high3, and zero intrinsic | Retire actor-advantage source as the immediate cause. Test whether the tiny autoregressive joint policy can learn the four contextual roster mappings under exact supervision. |
 | EXP-20260715-r39-toy-high-exposure | completed -- valid `FAIL_R39_TOY_HIGH_EXPOSURE_3` | stage-0 high optimizer-exposure gate | `logs/r39_toy_high_exposure_12k8_20260715_191019`; commit `b805abc` | high actor-objective positive control | M0 PASS; 3 epochs improved match `0.421875 -> 0.46875` (`+0.046875`), below access/effect gates; clip fraction `0`, mean last-epoch KL `6.12e-6` | Retire optimizer underexposure as the immediate cause. Compare SMDP-GAE with diagnostic block-return actor credit on the unchanged tiny model. |
@@ -433,6 +433,15 @@ explicitly approves the exception.
   Neither branch authorizes toy-label reward, intrinsic shaping, a larger model,
   or S7/UAV compute.
 - Result source: the three `train_updates.csv` rows from the single run.
+- Result: valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` at
+  `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`, commit
+  `c6d02e3`. Three updates contained 32 correct and 352 incorrect sampled
+  rosters. Pooled correct/incorrect raw discounted block returns were
+  `4.900994/1.816988`; corresponding standardized actor weights were
+  `+2.120720/-0.192793`. Every update used block-return actor mode, exactly
+  three high optimizer steps, and zero replay error. Reward timing and storage
+  are aligned; the remaining failure is the standalone shared joint-credit
+  learner, not model capacity, context, low primitives, or intrinsic reward.
 
 ### EXP-20260715-r39a-current-fixed-hmasd-anchor
 
