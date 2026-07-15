@@ -168,6 +168,18 @@ write; work with overlapping edits; ignore unrelated dirty files; never
 `git reset --hard`, destructive checkout, or force-push without an explicit
 request; stage and commit only the intended files.
 
+- While controller ownership remains on `aggressive`, use the authorized exact
+  push `git push My-paper-code aggressive`. If sandboxed Git/MSYS fails with a
+  Win32 pipe or permission error, retry that same command with scoped
+  escalation; do not switch to an alternate synchronization mechanism.
+- Remove controller-created transient probe/test files at their evidence
+  boundary. Use `apply_patch` for text files; for other exact paths under the
+  project or OS temp directory, resolve and verify the target before requesting
+  scoped deletion. Never delete unrelated or user-created files.
+- Experiment monitors must use `create-single-thread-monitor` and its
+  ETA-adaptive recurrence. Reuse one heartbeat and one project-local thread;
+  change only that heartbeat's recurrence when the ETA bucket changes.
+
 ## Runtime Output And Test Hygiene
 
 New experiment outputs go under `logs/<experiment-id-or-run-id>/...` unless a
