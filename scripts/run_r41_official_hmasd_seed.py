@@ -251,92 +251,58 @@ def replay_audit(torch_module: Any, runner: Any) -> dict[str, float]:
     rng = capture_rng(torch_module)
     try:
         runner.h_trainer.prep_rollout()
-        high_advantages = runner.h_buffer.advantages.copy()
-        high_advantages = (
-            high_advantages - np.nanmean(high_advantages)
-        ) / (np.nanstd(high_advantages) + 1e-5)
-        high_sample = next(
-            runner.h_buffer.feed_forward_generator_transformer(
-                high_advantages,
-                runner.h_trainer.num_mini_batch,
-            )
-        )
-        (
-            high_share_obs,
-            high_obs,
-            high_actions,
-            _,
-            _,
-            high_old_logp,
-            _,
-        ) = high_sample
+        high_error = 0.0
+        # Preserve the collection batch geometry; PPO minibatch repacking changes
+        # the floating-point kernel and is not a replay of the behavior call.
         with torch_module.no_grad():
-            _, high_replayed_logp, _ = runner.h_policy.evaluate_actions(
-                high_share_obs,
-                high_obs,
-                high_actions,
-            )
-        high_old = torch_module.as_tensor(
-            high_old_logp,
-            dtype=high_replayed_logp.dtype,
-            device=high_replayed_logp.device,
-        )
-        high_error = float((high_replayed_logp - high_old).abs().max().item())
+            for step in range(runner.h_buffer.episode_length):
+                _, high_replayed_logp, _ = runner.h_policy.evaluate_actions(
+                    np.concatenate(runner.h_buffer.share_obs[step]),
+                    np.concatenate(runner.h_buffer.obs[step]),
+                    np.concatenate(runner.h_buffer.actions[step]),
+                )
+                high_old = torch_module.as_tensor(
+                    np.concatenate(runner.h_buffer.action_log_probs[step]),
+                    dtype=high_replayed_logp.dtype,
+                    device=high_replayed_logp.device,
+                )
+                high_error = max(
+                    high_error,
+                    float((high_replayed_logp - high_old).abs().max().item()),
+                )
 
         runner.l_trainer.prep_rollout()
-        if runner.l_trainer._use_popart or runner.l_trainer._use_valuenorm:
-            low_advantages = runner.l_buffer.returns[:-1] - runner.l_trainer.value_normalizer.denormalize(
-                runner.l_buffer.value_preds[:-1]
-            )
-        else:
-            low_advantages = runner.l_buffer.returns[:-1] - runner.l_buffer.value_preds[:-1]
-        low_copy = low_advantages.copy()
-        low_copy[runner.l_buffer.active_masks[:-1] == 0.0] = np.nan
-        low_advantages = (
-            low_advantages - np.nanmean(low_copy)
-        ) / (np.nanstd(low_copy) + 1e-5)
-        low_sample = next(
-            runner.l_buffer.recurrent_generator(
-                low_advantages,
-                runner.l_trainer.num_mini_batch,
-                runner.l_trainer.data_chunk_length,
-            )
-        )
-        (
-            low_share_obs,
-            low_obs,
-            team_skill,
-            individual_skill,
-            actor_state,
-            critic_state,
-            low_actions,
-            _,
-            _,
-            masks,
-            active_masks,
-            low_old_logp,
-            _,
-            available_actions,
-        ) = low_sample
+        low_error = 0.0
+        # Each step reuses the exact env-agent order and recurrent state used by
+        # l_collect, so this measures stored-likelihood parity rather than chunking.
         with torch_module.no_grad():
-            _, low_replayed_logp, _ = runner.l_policy.evaluate_actions(
-                low_share_obs,
-                low_obs,
-                team_skill,
-                individual_skill,
-                actor_state,
-                critic_state,
-                low_actions,
-                masks,
-                available_actions,
-                active_masks,
-            )
-        low_old = torch_module.as_tensor(
-            low_old_logp,
-            dtype=low_replayed_logp.dtype,
-            device=low_replayed_logp.device,
-        )
-        low_error = float((low_replayed_logp - low_old).abs().max().item())
+            for step in range(runner.l_buffer.episode_length):
+                available_actions = None
+                if runner.l_buffer.available_actions is not None:
+                    available_actions = np.concatenate(
+                        runner.l_buffer.available_actions[step]
+                    )
+                _, low_replayed_logp, _ = runner.l_policy.evaluate_actions(
+                    np.concatenate(runner.l_buffer.share_obs[step]),
+                    np.concatenate(runner.l_buffer.obs[step]),
+                    np.concatenate(runner.l_buffer.team_skill[step]),
+                    np.concatenate(runner.l_buffer.indi_skill[step]),
+                    np.concatenate(runner.l_buffer.rnn_states[step]),
+                    np.concatenate(runner.l_buffer.rnn_states_critic[step]),
+                    np.concatenate(runner.l_buffer.actions[step]),
+                    np.concatenate(runner.l_buffer.masks[step]),
+                    available_actions,
+                    np.concatenate(runner.l_buffer.active_masks[step]),
+                )
+                low_old = torch_module.as_tensor(
+                    np.concatenate(runner.l_buffer.action_log_probs[step]),
+                    dtype=low_replayed_logp.dtype,
+                    device=low_replayed_logp.device,
+                )
+                low_error = max(
+                    low_error,
+                    float((low_replayed_logp - low_old).abs().max().item()),
+                )
         return {
             "high_max_abs_logp_error": high_error,
             "low_max_abs_logp_error": low_error,
