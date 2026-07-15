@@ -14,26 +14,31 @@ Updated: 2026-07-16
 
 ## Objective
 
-Obtain an evidence-backed fixed-`N` positive anchor by reproducing the HMASD
-paper's Alice--Bob environment with unchanged standard fixed-`k` HMASD. Only a
-positive reproduction may authorize testing R30 per-agent `KEEP/SET` on the same
-task and checkpoint.
+Establish the fixed-`N` positive anchor by running the original HMASD package
+stored at `ref/hmasd.tar` and its `Alice_and_Bob` environment. The current
+repository may provide only external launch, telemetry, evaluation, and result
+analysis. Only a registered R41 PASS may authorize native-categorical R30 on
+the same task and seed-1 final checkpoint.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Submit the tracked R41 reproduction question for manual GPT-5.6 Pro review:
-   `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/GPT5_6_PRO_QUESTION.md`.
-2. Archive the raw response and record its disposition.
-3. Implement only the accepted registered branch.
+1. Inspect `ref/hmasd.tar`, its `Alice_and_Bob0` environment, launch script,
+   runner, checkpoint, and dependency boundary.
+2. Implement only external R41 launch, optimizer/replay telemetry,
+   zero-step/final deterministic evaluation, and result analysis.
+3. Package and launch the five-seed official reproduction in parallel on the
+   cloud under the registered M0--M2 contract.
 
 ## Immediate Constraints
 
-- R41 must reproduce the paper environment and standard fixed-`k` HMASD; do not
-  substitute another toy substrate, add `KEEP/SET`, alter the learner, or add
-  shaping or intrinsic reward.
+- R41 must freshly extract and execute `ref/hmasd.tar` without porting it into
+  the current trainer. Do not add `KEEP/SET`, shaping, or any reward beyond the
+  original HMASD `q_D/q_d` source-algorithm terms.
+- Track the source archive in this repository and use the enclosing project Git
+  commit as its version identity; do not add hashes or checksums.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.
@@ -55,5 +60,5 @@ must not renew surviving agents' skills.
 - `docs/external-review/gpt5_6_pro/20260715_open_roster_variable_team_review/`
   — variable-team disposition.
 - `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/`
-  — current external-review entry.
+  — raw R40/R41 review and accepted disposition.
 - `docs/external-review/legacy/` — legacy external-review evidence.

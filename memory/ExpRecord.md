@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-15
+Updated: 2026-07-16
 
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260715-r40-simple-spread-access | running | baseline-L1 public cooperative-access gate | local CUDA; `logs/r40_simple_spread_access_200k_20260715_225517_retry3`; commit `4c633fd` | `result/r40_simple_spread_access.json` | PettingZoo 1.24.3 `simple_spread_v3`, fixed N=3, native reward, discrete recurrent MAPPO, 200K/500 updates, 256 paired stochastic episodes | PASS authorizes only native fixed-k HMASD on the same substrate; valid FAIL retires the substrate |
+| EXP-20260716-r41-official-hmasd-alice-bob-anchor | planned -- source correction | baseline-L4 original fixed-k HMASD positive anchor | tracked package `ref/hmasd.tar`; external wrapper pending | archive extraction and wrapper boundary | five seeds, 2,998,400 steps/seed, exact zero/final evaluation | PASS alone authorizes same-checkpoint native-categorical R30; valid FAIL retires the paper-task route |
+| EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
 | EXP-20260715-r39-native-hmasd-toy-credit | completed -- valid `VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` | stage-0 native-HMASD fixed-N credit anchor | `logs/hmasd_original/two_timescale_role_free_actions-r39_native_hmasd_toy/mode-train_cfg-config_r39_native_hmasd_toy_seed-39041_envs-16_rollout-40_k-5_steps-12800_backend-sharded_metrics-light_workers-4x4_mmode-light/20260715_221219`; result owner `result/r39_native_hmasd_toy_credit.json` | post-R39 positive-substrate review | M0 valid; 12,800 steps, 20 outer updates, 60 high optimizer updates, replay max `4.768e-7`, zero low/discriminator updates; match/slow/fast `0.455078/0.464844/0.445313` | Retire this native fixed-N toy credit route under the registered valid-fail branch; no rescue or expansion |
 | EXP-20260715-r39-toy-joint-credit-alignment | completed -- valid `PASS_R39_JOINT_CREDIT_ALIGNMENT` | stage-0 sampled-credit alignment diagnostic | `logs/r39_toy_joint_credit_alignment_1920_20260715_194904_retry3`; commit `c6d02e3` | native-HMASD toy design | 32 correct versus 352 incorrect rows; pooled raw block return `4.9010` versus `1.8170`; actor weight `+2.1207` versus `-0.1928`; replay zero | Reward timing and storage are correct. Stop patching standalone shared credit; preserve the small model and move the toy to native HMASD team/agent credit. |
 | EXP-20260715-r39-toy-joint-factorization | completed -- valid `PASS_R39_JOINT_FACTORIZATION_CAPACITY` | stage-0 exact joint-policy capacity diagnostic | `logs/r39_toy_joint_factorization_20260715_193034`; commit `fd29e3e` | sampled joint-credit alignment | minimum correct unordered-pair mass `0.999487`, mean `0.999670`, probability-sum error `3.58e-7`, high policy 2,512 parameters | The small policy is expressive and exactly optimizable on the eight registered contexts. Do not enlarge it; localize sampled credit. |
@@ -110,6 +111,79 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260716-r41-official-hmasd-alice-bob-anchor
+
+- Question: can the original HMASD implementation in `ref/hmasd.tar` reproduce
+  a strong, repeatable fixed-`k` learned anchor on its `Alice_and_Bob0` task?
+- Causal edge: official source and task -> learned fixed-`k` HMASD access ->
+  eligibility for one same-source native-categorical R30 temporal comparison.
+- Upstream authorization: R40 ended as valid `VALID_FAIL_R40_ACCESS`. GPT-5.6
+  Pro maintained that failure, closed further substrate search, and modified
+  R41 to a source-level reproduction. Raw evidence and disposition are in
+  `docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/`.
+- Source boundary: the user-provided original package `ref/hmasd.tar`, extracted
+  into an ephemeral `hmasd/` tree for execution. The archive is tracked by this
+  repository; the enclosing project commit is its version identity. The source
+  remains unmodified and this repository owns only external wrappers,
+  telemetry, evaluation, and analysis. No hashes or checksums are added.
+- Environment: official two-agent `Alice_and_Bob0`; `Discrete(5)` actions;
+  local observation 11; centralized state 100; 10x10 stored grid with 8x8
+  traversable interior; horizon 100; official reset distribution; shared
+  reward one only after both diamonds are collected. No shaping, curriculum,
+  alternative reset, task phase, role label, contact, distance, or progress
+  signal.
+- Algorithm: official autoregressive
+  `pi(Z|s,o) pi(z1|s,o,Z) pi(z2|s,o,Z,z1)` with `k=50`, `n_Z=2`, `n_z=4`;
+  low actor `pi(a_i|o_i,z_i)` and centralized low critic `V(s,Z)`. Preserve
+  official `lambda_e=0`, `lambda_D=0.1`, `lambda_d=0.2`; these `q_D/q_d` terms
+  are source-algorithm components only and do not reopen any retired reward
+  route.
+- Training contract: fresh independent seeds `1..5`; CUDA; 32 rollout
+  environments per seed; episode length 100; hidden size 64; learning rate
+  `5e-4`; gamma `0.99`; GAE lambda `0.95`; ValueNorm; 15 high PPO epochs,
+  15 low PPO epochs, 15 discriminator epochs, one minibatch; high/low entropy
+  coefficients `0.1/0.01`; no checkpoint resume or early stop.
+- Exposure: exactly 937 outer updates and 2,998,400 environment steps per
+  seed. Each seed must record 14,055 optimizer steps separately for high,
+  low actor, low critic, `q_D`, and `q_d` (70,275 total per seed; 351,375 over
+  the five-seed contract).
+- Comparator/evaluation: same-seed zero-step official checkpoint versus exact
+  final checkpoint. Each uses the same 100 reset streams and the official
+  deterministic one-thread evaluator. Record win rate, key0 rate, key1 rate,
+  and mean episode steps. Seed 1 is the preregistered later warm-start seed;
+  no post-result seed selection.
+- M0 implementation: tracked source archive, fresh extraction, environment
+  shapes and paper/script parameters; seeds and exposure exactly match; finite nonzero
+  gradient evidence for high, low, `q_D`, and `q_d`; official reward
+  coefficients and high reward; no current-repo process/reward path; exact
+  zero/final evaluator; complete finite final checkpoint including optimizer
+  states; pre-update maximum stored/replayed log-probability error `<=1e-6`.
+- M1 absolute anchor: mean final win rate across five seeds `>=0.80` and
+  preregistered seed-1 final win rate `>=0.80`.
+- M2 learning/repeatability: at least three seeds have final win rate `>=0.70`;
+  seed-cluster bootstrap with 10,000 repetitions and seed `61041` must give a
+  lower 95% bound `>0.50` for mean `(final - zero-step)` win rate.
+- `PASS_R41_HMASD_ALICE_BOB_REPRODUCTION`: M0, M1, and M2 pass. Freeze the
+  seed-1 final checkpoint, manifest, and evaluator; authorize only registration
+  of fixed refresh versus native-categorical R30 on that checkpoint.
+- `VALID_FAIL_R41_HMASD_ALICE_BOB_REPRODUCTION`: M0 passes and M1 or M2 fails.
+  Permanently retire this paper-task route and its PASS-only R30 treatment;
+  complete a source-reproduction failure review without rescue.
+- `INVALID_R41_HMASD_ALICE_BOB_REPRODUCTION`: any M0 item fails. Repair only
+  the identified source synchronization, wrapper, telemetry, checkpoint, or
+  evaluator defect and rerun the unchanged contract.
+- Prohibited: sixth seed, more steps, best checkpoint, hyperparameter/network
+  changes, altered observation/action/map/reward, alternative Alice--Bob task,
+  new intrinsic reward, current-repository learner, R30 implementation before
+  PASS, S7, open roster, or variable `N`. There is no `MIXED`, `UNDERPOWERED`,
+  or automatic rescue branch.
+- Expected wall clock: provisionally 8--12 hours when the five seeds are
+  launched concurrently on the cloud; the wrapper records observed startup
+  throughput before reporting a firmer ETA. Never fall back silently to CPU or
+  serial execution. Status source:
+  `logs/<r41-run-id>/runner_status.txt`; decision source:
+  `logs/<r41-run-id>/result/r41_official_hmasd_alice_bob.json`.
 
 ### EXP-20260715-r40-simple-spread-access
 

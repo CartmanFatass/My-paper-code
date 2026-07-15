@@ -65,6 +65,9 @@ data/
 !/requirements_server.txt
 !scripts/r27_g2_runtime_package_manifest.txt
 *.tar
+!ref/hmasd.tar
+ref/hmasd/
+ref/OPT-main/
 *.png
 
 # 生成的模型和结果

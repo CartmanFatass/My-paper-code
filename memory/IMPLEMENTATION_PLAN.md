@@ -4,38 +4,42 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R40 Public Fixed-N Cooperative Access Gate
+## R41 Official HMASD Alice-and-Bob Source Anchor
 
 Active causal edge:
 
 ```text
-public fixed-N cooperative environment
--> ordinary recurrent MAPPO learns native team reward
--> reliable positive-credit substrate for one later native fixed-k HMASD gate
+official HMASD source and official Alice_and_Bob task
+-> standard fixed-k HMASD reproduces a reliable learned positive anchor
+-> one later same-checkpoint native-categorical R30 comparison becomes eligible
 ```
 
-R39 native-toy credit is a valid scientific failure and is permanently
-retired. GPT-5.6 Pro selected PettingZoo 1.24.3 `simple_spread_v3`; the raw
-follow-up and controller disposition live under
-`docs/external-review/gpt5_6_pro/20260715_r39_native_toy_credit_result/`.
+R40 is a valid access failure and its `simple_spread_v3` contract is retired.
+GPT-5.6 Pro modified R41 from a paper-guided reconstruction to an exact source
+reproduction. Its `VOMASD` repository locator was factually rejected after the
+user identified the authoritative local HMASD package at `ref/hmasd.tar`; the
+remaining algorithm and budget contract was independently checked against that
+archive. The raw response and controller disposition live under
+`docs/external-review/gpt5_6_pro/20260715_r40_simple_spread_access_result/`.
 
 One implementation/evidence boundary:
 
-1. Add `simple_spread_v3` to the existing PettingZoo adapter/factory with fixed
-   `N=3`, horizon 25, and `local_ratio=0.0`.
-2. Use native `Discrete(5)` actions and the existing Categorical recurrent
-   MAPPO likelihood. Actor input remains the 18-value local observation;
-   centralized critic input is the native 54-value state.
-3. Use the already M0-valid constant-code/no-high recurrent MAPPO path. Disable
-   every skill, high, discriminator, process, and intrinsic update/reward.
-4. Train seed 40041 on local CUDA with 16 environments, rollout and recurrent
-   sequence 25, 200,000 steps/500 outer updates, five PPO epochs, sequence batch
-   64, and the registered optimizer coefficients.
-5. Evaluate 64 stochastic episodes in each of four fixed reset blocks, pair
-   them with native uniform-random discrete actions, and write one result JSON.
-6. The registered M0--M2 gate in `memory/ExpRecord.md` is the implementation
-   check. Do not insert a smoke, continuous-action adapter, reward shaping,
-   intrinsic reward, skill route, threshold change, or seed/budget expansion.
+1. Track `ref/hmasd.tar` in this repository and freshly extract it for each R41
+   run. The enclosing project commit is the version identity; do not add an
+   application checksum layer.
+2. Keep the extracted `hmasd/` source and `Alice_and_Bob0` implementation
+   unchanged. Add only external wrappers and telemetry in this repository.
+3. Preserve the official seeds `1..5`, 32 rollout environments, 100-step
+   episodes, 937 outer updates, `k=50`, `n_Z=2`, `n_z=4`, hidden size 64,
+   official optimizers, and `lambda_e/D/d = 0/0.1/0.2`.
+4. Record zero-step and exact-final deterministic 100-episode evaluations,
+   actual optimizer-step counts, finite nonzero gradient evidence, source and
+   runtime versions, and the pre-update stored/replayed likelihood error.
+5. Run the five seeds as one parallel cloud contract and emit one result JSON
+   implementing the registered M0--M2 branches in `memory/ExpRecord.md`.
+6. Do not implement the PASS-only R30 treatment, port the task into the current
+   trainer, add shaping/intrinsic reward, or change the source, seed, budget,
+   threshold, network, action, observation, map, or checkpoint-selection rule.
 
 ## R39 S7 Compatibility Boundary
 
