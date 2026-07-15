@@ -4,6 +4,15 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## Post-R38 Boundary
+
+There is no active core implementation stage. R38 completed as a valid
+`FAIL_R38_CTS_ACCESS`: ordinary constant-code recurrent MAPPO did not establish
+short-duty or full-cycle access, so the PASS-only lifetime comparison is
+blocked. Complete the R35--R38 failure review and obtain one externally audited
+causal edge before adding another environment, skill, lifetime, or intrinsic
+mechanism. Environment-specific intrinsic reward remains prohibited.
+
 ## R37 Actor-Visible Task-Identity Access Gate
 
 Active causal edge:

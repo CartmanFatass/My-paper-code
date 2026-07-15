@@ -30,15 +30,19 @@ and history live in their owning files.
 
 ## Current Objective
 
-- Active objective: implement and run `EXP-20260715-r38-cts-access` from the
-  single contract in `memory/ExpRecord.md`. R37 is retired; do not return to the
-  Alice-Bob access family.
+- Active objective: close the valid `FAIL_R38_CTS_ACCESS`, complete the
+  R35--R38 cross-round access failure review, and obtain one externally audited
+  next causal edge. R37 and R38 are retired; no lifetime, skill, or intrinsic
+  mechanism experiment is authorized by the failed access gate.
 
 ## Next Actions
 
-- Immediate next action: implement the CTS environment, ordinary constant-code
-  recurrent MAPPO configuration, and the single local runner/analyzer described
-  in `docs/superpowers/plans/2026-07-15-r38-cts-access-gate.md`.
+- Immediate next action: archive the R35--R38 failure/baseline matrix and one
+  tracked GPT-5.6 Pro question that decides whether to return to a known
+  accessible benchmark, use a positive-control mechanism substrate, or take a
+  different upstream route. The question must prohibit another unsupported toy
+  benchmark and any environment-specific intrinsic reward. Commit and push the
+  exact entry before the default automatic Pro handoff.
 
 ## Immediate Constraints
 
@@ -104,6 +108,11 @@ and history live in their owning files.
 - R37 is now retired by that valid-FAIL branch. Do not rerun it, lower its cycle
   floor, expand its budget/seeds, change its horizon/contact geometry, or treat
   passed M2/M3 as an overall PASS.
+- R38 is retired by valid `FAIL_R38_CTS_ACCESS`. Do not rescue it with shaping,
+  intrinsic reward, learner or observation changes, more steps/seeds, different
+  thresholds, role labels, high-policy updates, or skill/process rewards. Its
+  failure is benchmark-access evidence only and says nothing about lifetime or
+  intrinsic-mechanism efficacy.
 
 ## Pointers
 
@@ -134,6 +143,8 @@ and history live in their owning files.
   cross-round failure and baseline matrix after the valid R33 failure.
 - `memory/LTM/R35_R37_SPARSE_ACCESS_FAILURE_REVIEW_20260715.md` — current
   cross-round access failure and replacement-benchmark boundary.
+- `memory/LTM/R35_R38_SPARSE_ACCESS_FAILURE_REVIEW_20260715.md` — R38 terminal
+  extension and post-access baseline matrix.
 - `docs/external-review/gpt5_6_pro/20260714_r33_irsc_gate_result/` — tracked
   result-review question for the single post-R33 causal edge.
 - `docs/external-review/gpt5_6_pro/20260715_r34_bhmd_gate_result/` — tracked
@@ -142,4 +153,6 @@ and history live in their owning files.
   R36 valid-failure and Alice--Bob access-instrument review entry.
 - `docs/external-review/gpt5_6_pro/20260715_r37_actor_visible_identity_access_result/`
   — tracked R37 result audit and replacement-benchmark request.
+- `docs/external-review/gpt5_6_pro/20260715_r38_cts_access_result/` — tracked
+  R38 result audit and single post-R38 causal-route request.
 - `memory/LTM/external_reviews/` — raw external-review evidence and index.

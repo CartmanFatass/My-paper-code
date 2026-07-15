@@ -28,7 +28,7 @@ explicitly approves the exception.
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
 | EXP-20260715-r37-actor-visible-identity-access | completed -- valid `FAIL_R37_ACCESS` | baseline-L0 observation-substrate validity gate | local CUDA; `logs/r37_actor_visible_identity_access_320k_20260715_090205`; commit `67cadc8` | GPT-5.6 Pro replacement-benchmark review | M0 PASS; visible identity caused 10/64 collections and a positive paired effect, but cycle mean `0.01953125` missed the `0.05` floor; M2/M3 PASS | Retire this sparse Alice--Bob algorithm gate; select and validate one replacement benchmark before more algorithm work. |
-| EXP-20260715-r38-cts-access | planned -- `REGISTERED` | baseline-L1 environment-access gate | detailed contract below; implementation pending | implement the CTS environment and runner | formal gate registered; no result yet | Run the single registered access gate; only PASS permits one later lifetime-controller gate. |
+| EXP-20260715-r38-cts-access | completed -- valid `FAIL_R38_CTS_ACCESS` | baseline-L1 environment-access gate | local CUDA; `logs/r38_cts_access_320k_20260715_140641_retry2`; commit `db3502e` | post-R38 cross-round failure review | M0 PASS; 100 low updates and zero high/process/intrinsic updates; MAPPO short `0/256`, long `2/256`, full `0/256`; all four 64-reset blocks had zero full success | Retire CTS without shaping, intrinsic reward, learner, budget, seed, or threshold rescue; the lifetime-controller gate is not authorized. |
 | EXP-20260715-r36-aem-access | completed -- valid `FAIL_M1_RETIRE_R36_AEM` | baseline-L0 non-skill sparse-access gate | local CUDA; `logs/r36_aem_access_320k_20260715_034611`; implementation `b0a5300` | none | M0 PASS; AEM coverage `0.0639` vs control `0.016575` (`3.8552x`), yet both had 0/64 collection episodes and zero cycle success | Retire exact episodic joint-count novelty; GPT-5.6 Pro accepted the failure and selected the R37 observation-substrate gate. |
 | EXP-20260715-r35-sparse-mappo-reset | completed -- valid `NO_ACCESS_R35_UNRESOLVED` | baseline-L0 sparse optimization reset | local CUDA; `logs/r35_sparse_mappo_reset_320k_20260715_013000_retry4`; runner commit `030d0cd`, implementation `b372000` | none | M0 PASS; both arms completed 320K/250 low updates, but 0/64 paired indices had a collection and both cycle means were 0 | Do not interpret noninferiority or replace a baseline; do not rerun/expand R35; seek one non-skill access-first edge. |
 | EXP-20260714-r34-bhmd-gate | completed -- valid `FAIL_M1_RETIRE_R34_BHMD` | hierarchy-L2 codebook-construction and transport gate | local CUDA; `logs/r34_bhmd_gate_20260715_001706`; implementation commit `d0d80ac` | none | M0 PASS; real forced fidelity `0.5752`, source-relative gain `0.0654`; real persistent SNR `1.5235`, source-relative gain `-0.2962`; no natural coverage transport | Permanently retire fixed balanced hindsight mode distillation and its registered clustering/epoch/scope variants; request one structurally different post-R34 edge. |
@@ -88,7 +88,15 @@ explicitly approves the exception.
   evaluation episodes; use the existing dedicated training monitor.
 - Status source: `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r38_cts_access.json`.
-- Status: REGISTERED.
+- Result: valid `FAIL_R38_CTS_ACCESS` at
+  `logs/r38_cts_access_320k_20260715_140641_retry2/result/r38_cts_access.json`.
+  M0 passed. MAPPO completed 320,000 steps and 100 low updates with zero
+  high/process updates and zero intrinsic reward. In 256 paired evaluations it
+  achieved short duty `0`, long duty `2` (`0.0078125`), and full success `0`;
+  uniform random achieved zero for all three. Every 64-reset MAPPO block had
+  zero full success, and every paired confidence-interval lower bound was zero.
+- Status: completed -- valid `FAIL_R38_CTS_ACCESS`. Retire this benchmark under
+  the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
 
