@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | failure review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire the direct native-k50 incumbent-roster residual; no rescue |
+| EXP-20260716-r43-nrc-k50 | design correction pending; not launched | hierarchy-L2 true-renewal temporal mechanism gate | R41B checkpoint; GPT-5.6 Pro `MODIFY R43-NRC` | source-clock correction response | Source auto-reset occurs between global high checks, conflicting with forced initial RENEW on every reset | Select one exact reset/segment/credit contract before implementation |
+| EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
 | EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
@@ -113,6 +114,23 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260716-r43-nrc-k50
+
+- GPT-5.6 Pro verdict: `MODIFY R43-NRC`. The retained edge is a source-exact
+  explicit renewal factor, conditional non-incumbent skill sampling only on
+  RENEW, renewal/check credit, and skill/segment-event credit. R42 residual
+  rescues remain retired.
+- Concrete source conflict: Alice--Bob success terminates early; the vector
+  wrapper auto-resets the environment, while the original runner samples high
+  actions only at global rollout steps `0/50`. Forced initial RENEW on every
+  environment reset would add variable per-environment high events and break the
+  claimed source-exact fixed comparator and fixed two-row high buffer.
+- Status: no implementation or run is authorized until
+  `GPT5_6_PRO_R43_SOURCE_CLOCK_CORRECTION.md` receives one exact
+  reset/segment/credit resolution. Preserve seed `43041`, 16 envs per concurrent
+  arm, 320K steps per arm, and the registered safety/mechanism thresholds unless
+  the correction proves a quantity undefined.
 
 ### EXP-20260716-r42-irr-native-roster-residual
 

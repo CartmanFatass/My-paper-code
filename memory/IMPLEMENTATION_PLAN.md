@@ -4,6 +4,17 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R43-NRC True Renewal — Source-Clock Correction Pending
+
+GPT-5.6 Pro selected an explicit renewal factor, conditional non-incumbent skill
+assignment, and separated renewal/check versus skill/segment-event credit. No
+R43 code is active yet. The source vector collector auto-resets successful
+Alice--Bob environments between its global `t=0/50` high checks, whereas the
+review contract also requires forced initial RENEW on every episode reset.
+Those choices imply different event counts, likelihoods, segment boundaries,
+comparators, and credit. Implement only after the focused correction selects one
+source-consistent interpretation.
+
 ## R42-IRR Native Incumbent-Roster Residual — Completed and Retired
 
 Terminal result: valid `VALID_FAIL_R42_IRR_SERVICE` at
