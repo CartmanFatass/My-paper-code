@@ -1,0 +1,235 @@
+{
+  "M0": {
+    "algorithm_boundary": {
+      "action_field_in_process_view": false,
+      "environment_reward_field_in_evidence": false,
+      "external_reward_discarded": true,
+      "external_reward_stored": false,
+      "forced_data_used_for_basis_fit": false,
+      "high_controller_suppressed_in_forced_branch": true,
+      "normal_trainer_modified": false,
+      "policy_or_critic_update": false,
+      "skill_field_in_process_view": false,
+      "standalone_reward_off_gate": true,
+      "task_field_in_process_view": false
+    },
+    "invalid_reasons": [],
+    "parameter_drift": {
+      "all_exact": true,
+      "inventory_equal": true,
+      "max_abs": 0.0
+    },
+    "view": {
+      "covariance_last_three_max_abs": 0.0,
+      "field_order": [
+        "delta_focal_x",
+        "delta_focal_y",
+        "delta_mean_relative_x",
+        "delta_mean_relative_y",
+        "delta_covariance_xx",
+        "delta_covariance_xy",
+        "delta_covariance_yy"
+      ],
+      "name": "task_blind_relative_moment_delta_v1",
+      "shape": [
+        512,
+        10,
+        7
+      ],
+      "world_size": 8.0
+    },
+    "worker_telemetry": {
+      "branch_count": 512,
+      "causal_contexts": 64,
+      "complete_contexts": 64,
+      "completed_branch_steps": 20480,
+      "critic_optimizer_steps": 0,
+      "crn_seed_equal_across_skills": true,
+      "early_branch_reset_contexts": 0,
+      "early_natural_resets": 0,
+      "expected_causal_contexts": 64,
+      "expected_forced_branches": 512,
+      "expected_forced_steps": 20480,
+      "expected_groups": 64,
+      "expected_natural_windows": 512,
+      "high_optimizer_steps": 0,
+      "incomplete_natural_windows": 0,
+      "intrinsic_optimizer_steps": 0,
+      "literal_zero_clock_steps": 5120,
+      "natural_groups": 64,
+      "natural_windows": 512,
+      "policy_optimizer_steps": 0,
+      "replica_seed_independent": true,
+      "snapshot_restore_max_error": 0.0
+    }
+  },
+  "M1_natural_modes": {
+    "model_nontrivial_mode_counts": {
+      "half_a": 14,
+      "half_b": 14,
+      "primary": 14
+    },
+    "nuisance_audit": {
+      "maximum_r2": -0.0712784809257867,
+      "per_mode_r2": [
+        -0.1744198159431012,
+        -0.0712784809257867,
+        -0.33416311282878897,
+        -0.1357654527080152
+      ],
+      "pooled_r2": -0.17017370954708744,
+      "test_windows": 128,
+      "train_windows": 128
+    },
+    "passed": false,
+    "primary_gram_floor": 2.849546671848842e-07,
+    "primary_retained_c00_rank": 14,
+    "primary_retained_c11_rank": 14,
+    "temporal_and_stability": {
+      "coherence_intervals": [
+        {
+          "lower_95": 0.004331084037745918,
+          "mean": 0.024053848939957722,
+          "upper_95": 0.044246610603357404
+        },
+        {
+          "lower_95": -0.044753485066887796,
+          "mean": -0.01867932124723557,
+          "upper_95": 0.0075384972066242385
+        }
+      ],
+      "eigenvalue_pass": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "null_q95": [
+        0.28319663956192315,
+        0.2607804576128323,
+        0.22240520198314317,
+        0.1986785695545945
+      ],
+      "permutation_a_to_primary": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "permutation_b_to_primary": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "primary_match_a": [
+        0.9779245654730307,
+        0.9833336107991466,
+        0.9650795042913215,
+        0.9568050161220796
+      ],
+      "primary_match_b": [
+        0.9660124325753758,
+        0.9933221109339734,
+        0.9666423440723045,
+        0.9862987403330858
+      ],
+      "real_eigenvalues": [
+        0.2849546671848842,
+        0.24214049227115475,
+        0.21096560730626515,
+        0.18613896698410815
+      ],
+      "stability": [
+        0.8977806150898734,
+        0.9609594974807861,
+        0.87586096802688,
+        0.9040449939079853
+      ]
+    }
+  },
+  "M2_forced_skill_occupancy": {
+    "candidate_intrinsic_score_applied_to_reward": false,
+    "candidate_intrinsic_score_logged_only": true,
+    "h10": {
+      "assigned_interval": {
+        "lower_95": -0.0006517165354137533,
+        "mean": 0.0019366482979747426,
+        "upper_95": 0.004596645523486709
+      },
+      "assigned_mean": 0.0019366482979747426,
+      "assigned_mean_by_skill": [
+        0.002843532807655218,
+        0.011279089697726143,
+        -0.006071745468231866,
+        -0.0003042838452505338
+      ],
+      "endpoint_s_mean": 0.0014524862234810546,
+      "rho_interval": {
+        "lower_95": 0.021092994356645436,
+        "mean": 0.03431472949246056,
+        "upper_95": 0.054027156689479335
+      },
+      "support_ratio": 0.71875
+    },
+    "h10_complete_support_contexts": 46,
+    "h40_complete_support_contexts": 53,
+    "h40_late": {
+      "assigned_interval": {
+        "lower_95": 0.007086161877122711,
+        "mean": 0.012248370698379885,
+        "upper_95": 0.017413674541556463
+      },
+      "assigned_mean": 0.012248370698379885,
+      "assigned_mean_by_skill": [
+        -0.01542385694490989,
+        0.012923701446604182,
+        0.013298559511573072,
+        0.03819507878025217
+      ],
+      "endpoint_s_mean": 0.009186278023784912,
+      "rho_interval": {
+        "lower_95": 0.14886221767279595,
+        "mean": 0.1992049214569667,
+        "upper_95": 0.26575278062988295
+      },
+      "support_ratio": 0.828125
+    },
+    "intersection_contexts": 38,
+    "passed": false,
+    "persistence_intersection_d10": 0.00261475638298407,
+    "persistence_intersection_d40": 0.009665270297074082,
+    "persistence_ratio": 3.6964182957116467,
+    "support_threshold_d2": 52.626063751292165
+  },
+  "authorized_next_action": "permanently retire the exact R47 view, spectral basis, score, and reward-on pair without rescue",
+  "contract": {
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 62047,
+    "external_reward_used": false,
+    "feature_dim": 35,
+    "forced_branches": 512,
+    "forced_contexts": 64,
+    "forced_steps": 20480,
+    "lags": [
+      1,
+      5
+    ],
+    "natural_groups": 64,
+    "natural_windows": 512,
+    "optimizer_steps": 0,
+    "temporal_null_replicates": 256,
+    "temporal_null_seed": 57041,
+    "view_dim": 7
+  },
+  "experiment_id": "EXP-20260716-r47-nsopm-g0",
+  "gates": {
+    "M0": true,
+    "M1": false,
+    "M2": false
+  },
+  "implementation_valid": true,
+  "schema_version": 1,
+  "scope": "fixed-N=2 reward-off identifiability only; no task efficacy, S7, open-roster, or variable-N claim",
+  "status": "VALID_FAIL_R47_NSOPM"
+}

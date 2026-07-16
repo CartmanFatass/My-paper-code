@@ -16,25 +16,24 @@ Updated: 2026-07-16
 
 ## Objective
 
-Implement and run the launch-exact `R47-NSOPM-G0` local CUDA reward-off gate.
-GPT-5.6 Pro accepted the exact seven-dimensional task-blind view, natural-only
-whitened spectral estimator, temporal nulls, nuisance audit, frozen-basis
-forced-skill branches, and M0--M2 abandonment contract. Timing-only substrate
-search remains closed; the active causal edge is natural task-blind process
-support to stable process modes to skill-conditioned causal mode occupancy.
+Complete the automatic GPT-5.6 Pro result review of the valid
+`VALID_FAIL_R47_NSOPM` gate and accept exactly one resulting disposition. R47
+found stable half-fit natural structure but failed four-mode temporal-null
+significance, lag-5 coherence, H10 support, assigned-mode occupancy, and
+between/within causal SNR. Its exact view/basis/score/reward pair is retired;
+reward-on training is not authorized.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Finish the four-file standalone R47 implementation and its one focused CUDA
-   dry run; do not change the environment, trainer, controller, reward, or low
-   actor.
-2. Commit and push the stable launch boundary once, then run the registered
-   512-window / 20,480-branch-step local CUDA gate.
-3. Archive the terminal result and use automatic Pro submission `4/5` for the
-   result review before selecting any reward-on or successor route.
+1. Commit and push the R47 terminal result, controller disposition, and one
+   tracked result-review question.
+2. Use automatic Pro submission `4/5` in the existing consultation conversation
+   and archive the raw response before interpretation.
+3. Continue only the single structurally different edge explicitly authorized
+   by that review; do not rescue R47 or launch its reward-on pair.
 
 ## Immediate Constraints
 
@@ -115,6 +114,13 @@ must not renew surviving agents' skills.
   reward-off gate with zero optimizer steps; its process modes are fit only on
   natural task-blind position/relative-moment transitions and frozen before
   any forced-skill audit.
+- Formal R47 run `logs/r47_nsopm_20260716_172711` completed valid
+  `VALID_FAIL_R47_NSOPM`. M0 passed with exact counts, snapshot restore,
+  covariance-zero view fields, frozen parameters, and zero optimizers. Only
+  eigen-rank 0 cleared its temporal null; lag-5 coherence failed. H10 support
+  was `0.71875`, both causal-SNR reads were far below one, and H40 skill 0
+  assigned contrast was negative. The exact line is retired pending only the
+  registered result-validity review.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

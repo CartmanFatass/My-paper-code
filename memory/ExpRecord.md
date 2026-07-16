@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r47-nsopm-g0 | launch-ready -- implementation in progress | hierarchy-L1 reward-off natural process-mode identifiability | local CUDA standalone gate; raw launch-exact response under the R46 external-review entry | one focused dry run, then formal result JSON | `ACCEPT_R47_NSOPM_G0_LAUNCH_EXACT`: fixed `N=2`, 512 natural windows, 64 causal contexts, 20,480 forced steps, 256 temporal nulls, zero optimizer steps and no reward use | Run unchanged contract; PASS authorizes only the registered reward-on pair, valid FAIL permanently retires the exact mode/score line |
+| EXP-20260716-r47-nsopm-g0 | completed -- valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; tracked result under R47 external review | GPT-5.6 Pro result-validity review | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; do not launch reward-on arm |
 | EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d`, `cfc0ba4` | completed GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; learned pooled and both role-stratum sign discordance exactly `0`; direct enumeration oracle discordance near `0.5675` | Retire the exact dynamics/estimand/context/critic/read combination without rescue; interpret as learned sign-transport failure and proceed only to R47-NSOPM-G0 |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
@@ -149,6 +149,15 @@ explicitly approves the exception.
   and transient output removed after success.
 - Authoritative status: `<run-root>/runner_status.txt`; result:
   `<run-root>/result/r47_nsopm.json`.
+- Terminal evidence: focused dry run passed and was removed. Formal run
+  `logs/r47_nsopm_20260716_172711` completed `VALID_FAIL_R47_NSOPM` with M0
+  pass and M1/M2 fail. Primary/half models each had 14 nontrivial modes and
+  stability `0.8759--0.9610`; nuisance maximum R2 was `-0.0713`. Only rank 0
+  beat the temporal-null q95 and lag-5 coherence lower bound was `-0.04475`.
+  H10/H40 support was `0.71875/0.828125`; H10 assigned contrast lower bound was
+  `-0.000652`; H40 skill 0 contrast was `-0.01542`; causal-SNR means were
+  `0.0343/0.1992`. The registered valid-fail retirement is binding unless the
+  result review finds a concrete result-changing M0 defect.
 
 ## EXP-20260716-r46-hmrv-g0 — Heterogeneous Maintenance Renewal Value
 

@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Implementation
+## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Valid Fail
 
 GPT-5.6 Pro confirmed R46 as a valid learned Q/DR sign-transport failure and
 selected one upstream reward-off successor:
@@ -43,6 +43,16 @@ Before the formal run, execute exactly one two-group CUDA dry run covering 16
 natural windows, one context, eight 40-step branches, two temporal nulls,
 finite spectral/score tensors, snapshot restore, zero drift, and absence of a
 reward field. It has no scientific status and its transient output is removed.
+
+The focused dry run passed and its transient output was removed. Pre-launch
+commit `078845b` was pushed before the formal local CUDA run. Run
+`logs/r47_nsopm_20260716_172711` completed as valid
+`VALID_FAIL_R47_NSOPM`: M0 passed; M1 and M2 failed. Only spectral rank 0 beat
+its temporal null, lag-5 coherence crossed zero, H10 support was `0.71875`,
+H10 assigned contrast crossed zero, H40 skill 0 contrast was negative, and
+both causal-SNR lower bounds were below one. Permanently retire this exact
+view/map/lag/basis/score/reward pair and do not launch reward-on training. The
+only active work is its registered GPT-5.6 Pro result review.
 
 ## R46-HMRV-G0 Heterogeneous-Maintenance Positive Control — Completed and Retired
 
