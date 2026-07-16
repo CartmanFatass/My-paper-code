@@ -16,19 +16,18 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close one launch-critical exposure clarification for the accepted
-`R51-AMDT-G0` Anonymous Maintenance--Dispatch Task. The environment, model,
-reward, comparator, gates, and branches are accepted; only the inconsistent
-320K-transition versus 3,125-optimizer-step arithmetic remains open.
+Implement and run the launch-exact `R51-AMDT-G0` Anonymous
+Maintenance--Dispatch Task. Test one shared anonymous variable-`N` set-pointer
+policy against five capacity-matched fixed-`N` specialists under sparse
+terminal reward and the corrected 625-step exposure contract.
 
 ## Next Actions
 
-1. Commit/push the archived raw R51 design response, controller disposition,
-   and launch clarification question.
-2. Give the user the fixed manual GPT-5.6 Pro prompt for the single exposure
-   clarification; archive the returned raw response before interpretation.
-3. Do not implement AMDT or register a formal launch until the corrected
-   optimizer/exposure table is confirmed.
+1. Commit/push the frozen R51 prelaunch implementation and contract boundary.
+2. Run the unchanged 320K-per-arm local experiment and record only the
+   registered INVALID, specialist-NO_ACCESS, shared-variable-N-FAIL, or PASS.
+3. Interpret the terminal branch, update the owning experiment record, and
+   make the single result/disposition commit/push.
 
 ## Immediate Constraints
 
@@ -61,6 +60,19 @@ reward, comparator, gates, and branches are accepted; only the inconsistent
   rollouts and PPO epoch 1, which yields 125 N-specific batches per N and 625
   shared steps. Its simultaneous 3,125 shared / 625-per-specialist counts imply
   five data passes or 1.6M transitions. This is the only open question.
+- GPT-5.6 Pro confirmed the corrected launch table: 125 balanced cycles, 625
+  N-specific batches, 625 shared optimizer steps, 125 steps per specialist,
+  625 aggregate specialist steps, 320K transitions per arm, 64K per N, PPO
+  epoch 1, and no data reuse. All environment, model, seed, metric, threshold,
+  branch, and no-rescue clauses remain unchanged.
+- The isolated R51 implementation now contains the AMDT state machine, 24,833
+  parameter anonymous recurrent set-pointer actor-critic, paired reset/order/
+  categorical ledger, one-epoch token PPO, exact-final evaluator/analyzer, and
+  local CUDA runner. The focused smoke passed all M0 checks: 1,280 transitions
+  per arm, 10 shared and 10 aggregate specialist steps, zero sample/replay and
+  prefix error, zero masked probability mass, finite gradients/drift in every
+  registered module, and exact checkpoint reload. Its transient output was
+  removed; it is wiring evidence only.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

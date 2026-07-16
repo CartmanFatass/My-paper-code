@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260716-r51-amdt-g0 | prelaunch ready -- focused M0 smoke passed | genuine task-dynamic cross-episode variable-N learning | contract below; implementation in `ha_ctse_process/r51_amdt.py` and R51 scripts | freeze Git boundary, then one local formal run | 24,833 parameters; smoke replay/prefix/masked mass all zero; formal remains 320K transitions and 625 aggregate steps/arm | Decide environment access first, then shared cross-N learnability; no skill/lifetime/intrinsic/UAV claim |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
 | EXP-20260716-r48-sbrs-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; result commit `985ab94`; R48 external-review entry | complete | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Permanently retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue; only independent R49 architecture gate remains |
@@ -69,6 +70,78 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260716-r51-amdt-g0 — Anonymous Maintenance--Dispatch Task
+
+- Status: user-returned GPT-5.6 Pro design and launch clarification accepted;
+  authorized for isolated implementation, one engineering smoke, local CUDA
+  formal execution, Git commit, and push.
+- Causal edge: a real task and resource constraint that scale with `N` plus one
+  cross-episode shared anonymous policy plus sparse terminal reward -> useful
+  cooperative behavior across stable team sizes.
+- Environment: `N in {2,3,4,5,6}` fixed within each 32-step episode;
+  `P_N=floor(N/2)` persistent stations, `D_N=N-P_N` short dispatch jobs;
+  waves start at steps `4,12,20`, job deadline `6`, station health max `4`.
+  Switching consumes the current service opportunity. Duplicate service has no
+  additional value. Reward is zero except final reward `1` iff no station/job
+  failure and all `3*D_N` jobs completed. No early termination.
+- Information: anonymous 6-field self vector and unordered 7-field entity set;
+  actor receives no agent ID, slot, role, future wave, failure predicate,
+  reward history, or oracle assignment. Critic alone may read time, wave,
+  failed flag, and completed-job count.
+- Treatment/comparator: one shared variable-N recurrent set-pointer policy
+  versus five architecture-identical fixed-N specialists. Initial parameters,
+  per-N transition and optimizer exposure, reset schedules, permutations, AR
+  order, and categorical uniform streams are paired.
+- Model: member `6->32->32`, entity `7->32->32`, GRU hidden `32`, query
+  `128->64->32`, entity key `33->32`, pooled critic `->64->1`; fewer than 35K
+  parameters and N-independent state-dict shapes. No `K^N` enumeration or
+  mandatory agent-agent `N x N` tensor.
+- PPO: token ratios use one centralized step advantage and average over active
+  agents; `gamma=0.99`, GAE lambda `0.95`, learning rate `3e-4`, PPO epoch `1`,
+  entropy `0.01`, value coefficient `0.5`, clip `0.2`, gradient clip `0.5`;
+  per-N advantage normalization; terminal external reward only.
+- Exposure: 125 balanced cycles, five sequential N-specific batches/cycle,
+  16 episodes/batch, rollout/episode `32`, 64K transitions/N/arm, 320K
+  transitions/arm, 2,000 episodes/N/arm, 1.28M agent-token decisions/arm.
+  Shared steps `625`; each specialist `125`, aggregate `625`; no data reuse.
+- Seeds: initialization `51051`, training reset `61051`, order/action `71051`,
+  evaluation reset `81051`, bootstrap `91051`.
+- Evaluation: zero-step and exact-final checkpoints, 128 deterministic paired
+  episodes/N/arm. Macro metrics are computed within N and then equally averaged
+  over the five sizes. Expected local wall clock: 15--25 minutes.
+- M0: exact environment formulas/reward, no shaping/intrinsic/ID, paired
+  initialization and ledgers, exact transitions/batches/steps/epochs, active
+  masks and token counts, stored order/actions/prefix replay, log-probability
+  error `<=1e-6`, episode-only hidden reset, finite nonzero gradients/drift,
+  finite exact-final checkpoint and no best selection.
+- M1 specialist access: every `S_N>=0.60`, macro `>=0.70`, every per-N paired
+  final-minus-zero 95% LCB `>0.20`, and at least three of four contiguous
+  32-episode final blocks/N have success `>=0.50`.
+- M2 shared learning: every `S_N>=0.50`, macro `>=0.65`, minimum within-N
+  shared/specialist ratio `>=0.75`, macro ratio `>=0.85`, paired equal-N macro
+  difference 95% LCB `>-0.10`, and shared macro final-minus-zero LCB `>0.25`.
+- `INVALID_R51_AMDT_WIRING`: repair only the named transition, reward, mask,
+  replay, count, pairing, checkpoint, or extra-update defect and rerun unchanged.
+- `NO_ACCESS_R51_AMDT_SPECIALISTS`: M0 pass/M1 fail; quarantine shared and
+  permanently retire exact AMDT dynamics, horizon, and reset contract.
+- `VALID_FAIL_R51_SHARED_VARIABLE_N`: M0/M1 pass/M2 fail; retire the exact
+  shared set-pointer MAPPO contract and stop this variable-N learning line for
+  one architecture/optimization failure review.
+- `PASS_R51_AMDT_VARIABLE_N`: M0/M1/M2 pass; authorize only a same-task,
+  same-policy, same-reward within-episode exogenous join/leave and membership
+  censoring gate.
+- Prohibited: post-result changes to steps, epochs, data reuse, seeds, model,
+  thresholds, reward, task; intrinsic reward; skill latent; KEEP/SET; variable
+  lifetime; learned membership/order; S7/UAV; novelty claim.
+- Authoritative status: `<run-root>/runner_status.txt`; result:
+  `<run-root>/result/r51_amdt.json`.
+- Focused implementation evidence: the fixed dry-run contract completed valid
+  M0 with 1,280 transitions/arm, 256/N, 5,120 agent tokens/arm, 10 shared
+  steps, two steps/specialist, zero sample/replay and prefix error, zero masked
+  probability mass, all registered module gradients/drifts nonzero and finite,
+  and exact-final checkpoint reload. The transient dry-run directory was
+  removed; no scientific M1/M2 conclusion was drawn.
 
 ## EXP-20260716-r50-vnsl-g0 — Variable-N Shared Learnability
 

@@ -4,6 +4,35 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R51-AMDT-G0 Task-Dynamic Variable-N Learning — Launch Exact
+
+Implement one isolated 32-step assignment-graph environment with stable
+cross-episode `N={2,3,4,5,6}`. Each N has `floor(N/2)` persistent stations and
+the remaining number of short dispatch jobs. The environment emits only a
+terminal full-success reward. Agents are anonymous and act through a recurrent
+set-pointer policy; no identity, role, shaping, intrinsic, skill, or lifetime
+mechanism enters this gate.
+
+The formal comparison is one shared N-independent model against five
+architecture-identical fixed-N specialists. Use 125 balanced cycles, five
+N-specific batches per cycle, 16 complete 32-step episodes per batch, 64K
+transitions per N per arm, and 320K per arm. PPO uses one full-batch epoch:
+shared optimizer steps are 625, specialist steps are 125/model and 625
+aggregate. Pair reset, permutation, external AR-order, and categorical-uniform
+ledgers. Evaluate zero-step and exact-final models on 128 deterministic paired
+episodes per N.
+
+Specialists must first establish ordinary task access. Only then may the
+shared arm decide cross-N learning. A PASS authorizes only the same-task
+exogenous within-episode membership gate; it does not authorize skill,
+variable lifetime, intrinsic reward, S7/UAV, or novelty claims.
+
+Implementation boundary complete: the isolated environment/model/gate/runner
+are present, and the focused CUDA M0 smoke passed with exact counts, zero
+sample/replay and prefix error, zero masked probability mass, finite nonzero
+gradient/drift support, and exact checkpoint reload. The next action is the
+single unchanged formal run; no further implementation expansion is planned.
+
 ## R50-VNSL-G0 Variable-N Shared Learnability — Completed No-Access
 
 R49 removed mask, padding, replay, membership, and parameter-shape ambiguity.
