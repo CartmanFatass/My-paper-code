@@ -16,19 +16,21 @@ Updated: 2026-07-16
 
 ## Objective
 
-Execute the user-authorized `R49-ORSE-G0` architecture gate for a variable
-active set and set-equivariant active-only autoregressive roster interface.
-Fixed-`N` skill/lifetime work remains stopped. R49 carries no skill, lifetime,
-task, intrinsic-reward, or cooperation claim.
+Close the valid `PASS_R49_ORSE_ARCHITECTURE` boundary. The variable-active-set,
+set-equivariant active-only autoregressive interface passed its standalone
+architecture contract. Fixed-`N` skill/lifetime work remains stopped, and R49
+does not establish skill, lifetime, task, intrinsic-reward, or cooperation
+efficacy.
 
 ## Next Actions
 
-1. Commit and push the isolated R49 module and local CPU runner after the
-   successful focused dry-run.
-2. Run the unchanged full deterministic CPU gate and interpret only its
-   registered PASS, VALID_FAIL, or INVALID branch.
-3. Commit and push the terminal result. Do not perform automatic Pro review;
-   the prior five-round quota is exhausted.
+1. Commit and push the R49 terminal result and accepted interface-only
+   disposition.
+2. Preserve as the sole next edge a default-off, exogenous cross-episode
+   variable-`N` compatibility gate. Do not implement or launch it without new
+   user authorization.
+3. Do not perform automatic Pro review; the prior five-round quota is
+   exhausted.
 
 ## Immediate Constraints
 
@@ -43,8 +45,8 @@ task, intrinsic-reward, or cooperation claim.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.
-- `R49-ORSE-G0` is authorized for local CPU implementation, execution, and Git
-  push. Environment training and automatic external review are not authorized.
+- R49 authorization is complete. No environment training or subsequent
+  variable-`N` compatibility run is currently authorized.
 - R43 run
   `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` completed
   `INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, but fixed final win/key0/key1 was
@@ -132,7 +134,15 @@ task, intrinsic-reward, or cooperation claim.
   stochastic within-skill variability was not reduced. GPT-5.6 Pro confirmed
   the valid-fail result, the no-rescue recurrent-boundary retirement, and the
   binding fixed-`N` stop. It selected only the independent architecture gate
-  `R49-ORSE-G0`; that gate is planned but not launch-authorized.
+  `R49-ORSE-G0`, which has now completed as an interface-only PASS.
+- Formal R49 run `logs/r49_orse_20260716_191959` completed
+  `PASS_R49_ORSE_ARCHITECTURE`. M0/M1 passed with all registered counts:
+  1,024 base cases, 8,192 permutation reads, 1,024 padding variants, 1,024
+  sample/replay sequences, and 256 membership pairs. Maximum permutation and
+  incremental/full logit errors were `2.98e-8`; padding and replay errors were
+  zero; prefix-gradient support was `1.0` with median `0.19933`; membership
+  semantics all passed; parameter drift, environment steps, reward reads, and
+  optimizer steps were zero. This supports interface correctness only.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

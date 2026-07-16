@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Authorized
+## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Completed PASS
 
 R48 closed fixed-`N` skill/lifetime exploration. R49 is a separate,
 architecture-only question: can a variable active set support a
@@ -47,7 +47,17 @@ The isolated implementation uses `scripts/r49_orse.py`,
 permutation-logit error `2.98e-8`, padding error `0`, incremental/full-logit
 error `2.98e-8`, replay error `0`, prefix-actionability support `1.0` with
 median norm `0.19955`, and zero complexity violations. Its transient output
-was removed. This authorizes only the unchanged full CPU gate.
+was removed and served as the prelaunch evidence for the unchanged full gate.
+
+Formal run `logs/r49_orse_20260716_191959` completed
+`PASS_R49_ORSE_ARCHITECTURE`. M0/M1 passed at the exact 1,024-case contract.
+Permutation-logit and incremental/full-logit errors were `2.98e-8`, padding
+and replay errors were zero, prefix-actionability support was `1.0` with
+median norm `0.19933`, every joiner/leaver/survivor rule passed, and complexity
+violations were zero. Parameters remained bit-exact with zero environment,
+reward, optimizer, or checkpoint exposure. The only permitted next design is
+a default-off, exogenous cross-episode variable-`N` compatibility gate; R49
+itself makes no algorithm-efficacy claim.
 
 ## R48-SBRS-G0 Skill-Boundary Recurrent State — Pro-Confirmed Valid Fail
 

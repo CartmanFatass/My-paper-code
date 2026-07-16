@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r49-orse-g0 | implementation ready -- launch authorized | architecture-only open-roster interface gate | isolated scripts; contract below; Pro source in R48 external-review entry | full local CPU gate | 16-case dry-run passed M0/M1; permutation/incremental errors `2.98e-8`, replay/padding `0`, prefix support `1.0`, zero complexity violations | Run the unchanged full gate; no inherited skill/lifetime/task/cooperation claim |
+| EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
 | EXP-20260716-r48-sbrs-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; result commit `985ab94`; R48 external-review entry | complete | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Permanently retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue; only independent R49 architecture gate remains |
 | EXP-20260716-r47-nsopm-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; result commit `b758d8c` | complete | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; proceed only to R48-SBRS-G0 |
 | EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d`, `cfc0ba4` | completed GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; learned pooled and both role-stratum sign discordance exactly `0`; direct enumeration oracle discordance near `0.5675` | Retire the exact dynamics/estimand/context/critic/read combination without rescue; interpret as learned sign-transport failure and proceed only to R47-NSOPM-G0 |
@@ -71,9 +71,8 @@ explicitly approves the exception.
 
 ## EXP-20260716-r49-orse-g0 — Open-Roster Set-Equivariant Interface
 
-- Status: implementation ready; user authorized the local CPU gate and its Git
-  pushes. Automatic GPT-5.6 Pro review is not authorized; the prior quota is
-  exhausted.
+- Status: completed as valid `PASS_R49_ORSE_ARCHITECTURE`. Automatic GPT-5.6
+  Pro review is not authorized; the prior quota is exhausted.
 - Causal edge: variable active set -> set-equivariant roster state -> exact
   active-only variable-length autoregressive probability/membership semantics.
 - Scope: architecture-only. The four categorical codes are opaque protocol
@@ -136,9 +135,24 @@ explicitly approves the exception.
   permutation-logit and incremental/full-logit errors were `2.98e-8`, padding
   and replay errors were `0`, prefix support was `1.0` with median `0.19955`,
   and complexity violations were zero. The transient output was removed.
-- Formal expected wall clock: under 15 minutes on local one-thread CPU, based
-  on the focused run. Authoritative status: `<run-root>/runner_status.txt`;
-  result: `<run-root>/result/r49_orse.json`.
+- Formal wall clock was about 70 seconds on local one-thread CPU.
+  Authoritative status: `logs/r49_orse_20260716_191959/runner_status.txt`;
+  result: `logs/r49_orse_20260716_191959/result/r49_orse.json`.
+- Terminal evidence: run `logs/r49_orse_20260716_191959` completed M0/M1 with
+  1,024 base cases, 8,192 permutation reads, 1,024 padding variants, 1,024
+  sample/replay sequences, and 256 membership pairs. Permutation-logit/value
+  maxima were `2.98e-8/1.86e-8`; padding maxima were zero;
+  incremental/full-logit and roster maxima were both `2.98e-8`; replay error
+  was zero. Prefix-gradient support was `1.0`, median `0.19933`, and minimum
+  `0.17259`. All membership checks passed; complexity violations, parameter
+  drift, environment steps, reward reads, optimizer steps, and checkpoint
+  exposure were zero.
+- Accepted conclusion: the exact R49 interface is architecturally correct.
+  The only authorized inference is set-equivariant, active-only probability
+  and membership compatibility across the registered sizes. Any skill,
+  variable-lifetime, intrinsic, task, cooperation, within-episode membership,
+  S7, or paper contribution claim remains unsupported. The next possible gate
+  is default-off and exogenous across episodes and requires new authorization.
 
 ## EXP-20260716-r48-sbrs-g0 — Skill-Boundary Recurrent State
 
