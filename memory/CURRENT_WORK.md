@@ -16,18 +16,19 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close the valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` result without treating
-the synthetic roster bandit as task-level variable-`N` evidence. The next
-design question is a lightweight toy environment whose dynamics and
-cooperation actually change with active team size. Existing Alice--Bob is
-fixed `N=2` and cannot answer that question without redesign.
+Obtain one GPT-5.6 Pro design for a lightweight toy environment whose dynamics
+and cooperation genuinely change with active team size while remaining usable
+for a later variable-skill-lifetime test. Existing Alice--Bob is fixed `N=2`;
+R50 was a synthetic roster bandit and is not task-level evidence.
 
 ## Next Actions
 
-1. Commit/push the R50 terminal result and substrate-only disposition.
-2. Prepare one minimal variable-team toy-environment proposal for user review;
-   do not rerun or rescue R50 and do not integrate its shared policy into the
-   real controller.
+1. Commit/push the tracked variable-team toy design question and R50 result
+   evidence.
+2. Give the user the fixed manual GPT-5.6 Pro handoff prompt. Archive the raw
+   response before interpretation.
+3. Do not implement an environment or launch another experiment until the
+   returned design is dispositioned.
 
 ## Immediate Constraints
 
@@ -45,6 +46,11 @@ fixed `N=2` and cannot answer that question without redesign.
 - R50 is authorized for local toy learning and Git push. It uses only a generic
   external roster reward; intrinsic reward, low-level policy, UAV fields, and
   environment-specific shaping are absent.
+- The current external-review request is design-only. It requires one genuine
+  task-dynamic variable-N toy, two natural task time scales, anonymous agents,
+  sparse shared external reward, no shaping or environment-specific intrinsic,
+  local fast iteration, and one evidence-bearing gate that separates
+  environment no-access from shared-variable-N failure.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
@@ -191,4 +197,6 @@ fixed `N=2` and cannot answer that question without redesign.
   result, controller disposition, and next-edge review question.
 - `docs/external-review/gpt5_6_pro/20260716_r46_hmrv_result/` — valid R46
   result, corrected disposition, raw Pro response, and R47 launch clarification.
+- `docs/external-review/gpt5_6_pro/20260716_variable_team_toy_design/` — current
+  manual Pro design question and Git-visible R50 evidence.
 - `docs/external-review/legacy/` — legacy external-review evidence.

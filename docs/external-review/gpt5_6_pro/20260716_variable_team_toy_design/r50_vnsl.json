@@ -1,0 +1,303 @@
+{
+  "contract": {
+    "action_uniform_seed": 80050,
+    "active_sizes": [
+      2,
+      3,
+      4,
+      6,
+      8,
+      12,
+      16
+    ],
+    "batch_per_size": 64,
+    "checkpoint_exposure": 0,
+    "entropy_start": 0.01,
+    "environment_steps": 0,
+    "eval_cases_per_size": 512,
+    "eval_data_seed": 70050,
+    "gradient_clip": 1.0,
+    "intrinsic_reward_reads": 0,
+    "learning_rate": 0.001,
+    "low_level_policy_calls": 0,
+    "member_identity_fields": 0,
+    "model_seed": 50050,
+    "replay_audit_interval": 32,
+    "replay_tolerance": 1e-06,
+    "slot_index_fields": 0,
+    "task_specific_fields": 0,
+    "train_data_seed": 60050,
+    "updates": 512,
+    "value_coefficient": 0.5
+  },
+  "counts": {
+    "paired_batch_checks": 3584,
+    "paired_order_checks": 3584,
+    "paired_uniform_checks": 3584,
+    "replay_audits": 224,
+    "shared_optimizer_steps": 512,
+    "specialist_optimizer_steps_by_size": {
+      "12": 512,
+      "16": 512,
+      "2": 512,
+      "3": 512,
+      "4": 512,
+      "6": 512,
+      "8": 512
+    },
+    "specialist_optimizer_steps_total": 3584,
+    "train_cases_per_arm": 229376,
+    "train_tokens_per_arm": 1671168
+  },
+  "dry_run": false,
+  "dry_run_valid": false,
+  "elapsed_seconds": 287.01872330000333,
+  "evaluation": {
+    "shared": {
+      "by_size": {
+        "12": {
+          "exact_roster_success": 0.583984375,
+          "token_accuracy": 0.95263671875
+        },
+        "16": {
+          "exact_roster_success": 0.443359375,
+          "token_accuracy": 0.9493408203125
+        },
+        "2": {
+          "exact_roster_success": 0.921875,
+          "token_accuracy": 0.9599609375
+        },
+        "3": {
+          "exact_roster_success": 0.845703125,
+          "token_accuracy": 0.947265625
+        },
+        "4": {
+          "exact_roster_success": 0.79296875,
+          "token_accuracy": 0.943359375
+        },
+        "6": {
+          "exact_roster_success": 0.74609375,
+          "token_accuracy": 0.9508464336395264
+        },
+        "8": {
+          "exact_roster_success": 0.642578125,
+          "token_accuracy": 0.947265625
+        }
+      },
+      "macro_exact_roster_success": 0.7109375,
+      "macro_token_accuracy": 0.9500965050288609,
+      "minimum_token_accuracy": 0.943359375,
+      "n16_exact_roster_success": 0.443359375
+    },
+    "shared_specialist_macro_exact_ratio": 1.2374939290917921,
+    "shared_specialist_macro_token_ratio": 1.0422985187380318,
+    "specialists": {
+      "by_size": {
+        "12": {
+          "exact_roster_success": 0.453125,
+          "token_accuracy": 0.9290364980697632
+        },
+        "16": {
+          "exact_roster_success": 0.26953125,
+          "token_accuracy": 0.9189453125
+        },
+        "2": {
+          "exact_roster_success": 0.861328125,
+          "token_accuracy": 0.9189453125
+        },
+        "3": {
+          "exact_roster_success": 0.78125,
+          "token_accuracy": 0.919921875
+        },
+        "4": {
+          "exact_roster_success": 0.578125,
+          "token_accuracy": 0.86962890625
+        },
+        "6": {
+          "exact_roster_success": 0.521484375,
+          "token_accuracy": 0.8987630605697632
+        },
+        "8": {
+          "exact_roster_success": 0.556640625,
+          "token_accuracy": 0.925537109375
+        }
+      },
+      "macro_exact_roster_success": 0.5744977678571429,
+      "macro_token_accuracy": 0.9115397248949323,
+      "minimum_token_accuracy": 0.86962890625,
+      "n16_exact_roster_success": 0.26953125
+    }
+  },
+  "experiment_id": "EXP-20260716-r50-vnsl-g0",
+  "implementation_valid": true,
+  "m0": true,
+  "m0_checks": {
+    "active_sizes_exact": true,
+    "all_parameters_finite": true,
+    "finite_training_metrics": true,
+    "paired_batches_exact": true,
+    "paired_initial_state_exact": true,
+    "paired_orders_exact": true,
+    "paired_uniforms_exact": true,
+    "replay_audits_exact": true,
+    "replay_log_probability": true,
+    "scope_absence_exact": true,
+    "shared_gradients_nonzero": true,
+    "shared_optimizer_steps_exact": true,
+    "shared_relevant_modules_changed": true,
+    "specialist_gradients_nonzero": true,
+    "specialist_optimizer_steps_exact": true,
+    "specialist_relevant_modules_changed": true,
+    "train_cases_per_arm_exact": true,
+    "train_tokens_per_arm_exact": true,
+    "unused_keep_parameters_exact": true
+  },
+  "m1_checks": {
+    "specialist_macro_exact_roster_success": true,
+    "specialist_macro_token_accuracy": true,
+    "specialist_minimum_token_accuracy": true,
+    "specialist_n16_exact_roster_success": false
+  },
+  "m1_specialist_access": false,
+  "m2_checks": {
+    "shared_macro_exact_roster_success": true,
+    "shared_macro_token_accuracy": true,
+    "shared_minimum_token_accuracy": true,
+    "shared_n16_exact_roster_success": true,
+    "shared_specialist_macro_exact_ratio": true,
+    "shared_specialist_macro_token_ratio": true
+  },
+  "m2_shared_learnability": true,
+  "next_action": "do not judge variable-N sharing",
+  "optimization": {
+    "shared_drift": {
+      "all_parameters_finite": true,
+      "keep_head_max_abs": 0.0,
+      "minimum_relevant_module_max_abs": 0.06434687972068787,
+      "module_max_abs": {
+        "decoder_hidden": 0.15873372554779053,
+        "keep_head": 0.0,
+        "member_encoder": 0.279793918132782,
+        "roster_encoder": 0.13509437441825867,
+        "set_head": 0.2056364268064499,
+        "value_head": 0.06434687972068787,
+        "value_hidden": 0.10068810731172562
+      }
+    },
+    "shared_nonzero_gradient_steps": 512,
+    "specialist_drift_by_size": {
+      "12": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.04759639501571655,
+        "module_max_abs": {
+          "decoder_hidden": 0.17098677158355713,
+          "keep_head": 0.0,
+          "member_encoder": 0.28271403908729553,
+          "roster_encoder": 0.15653271973133087,
+          "set_head": 0.18482978641986847,
+          "value_head": 0.04759639501571655,
+          "value_hidden": 0.0730423778295517
+        }
+      },
+      "16": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.05676409974694252,
+        "module_max_abs": {
+          "decoder_hidden": 0.16136756539344788,
+          "keep_head": 0.0,
+          "member_encoder": 0.25411438941955566,
+          "roster_encoder": 0.13618481159210205,
+          "set_head": 0.1960909366607666,
+          "value_head": 0.05676409974694252,
+          "value_hidden": 0.08936240524053574
+        }
+      },
+      "2": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.07714530825614929,
+        "module_max_abs": {
+          "decoder_hidden": 0.18719102442264557,
+          "keep_head": 0.0,
+          "member_encoder": 0.2578723430633545,
+          "roster_encoder": 0.25983381271362305,
+          "set_head": 0.21421779692173004,
+          "value_head": 0.07727876305580139,
+          "value_hidden": 0.07714530825614929
+        }
+      },
+      "3": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.0618334598839283,
+        "module_max_abs": {
+          "decoder_hidden": 0.16046784818172455,
+          "keep_head": 0.0,
+          "member_encoder": 0.27855199575424194,
+          "roster_encoder": 0.134028360247612,
+          "set_head": 0.17739395797252655,
+          "value_head": 0.0618334598839283,
+          "value_hidden": 0.07758007198572159
+        }
+      },
+      "4": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.059438709169626236,
+        "module_max_abs": {
+          "decoder_hidden": 0.16599342226982117,
+          "keep_head": 0.0,
+          "member_encoder": 0.2539525628089905,
+          "roster_encoder": 0.10990390926599503,
+          "set_head": 0.1802881956100464,
+          "value_head": 0.059438709169626236,
+          "value_hidden": 0.07119859755039215
+        }
+      },
+      "6": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.05948834866285324,
+        "module_max_abs": {
+          "decoder_hidden": 0.14745718240737915,
+          "keep_head": 0.0,
+          "member_encoder": 0.25547271966934204,
+          "roster_encoder": 0.11200235038995743,
+          "set_head": 0.1738784909248352,
+          "value_head": 0.05948834866285324,
+          "value_hidden": 0.07972289621829987
+        }
+      },
+      "8": {
+        "all_parameters_finite": true,
+        "keep_head_max_abs": 0.0,
+        "minimum_relevant_module_max_abs": 0.05821771174669266,
+        "module_max_abs": {
+          "decoder_hidden": 0.14534465968608856,
+          "keep_head": 0.0,
+          "member_encoder": 0.23950059711933136,
+          "roster_encoder": 0.12182244658470154,
+          "set_head": 0.17595721781253815,
+          "value_head": 0.05821771174669266,
+          "value_hidden": 0.06754355877637863
+        }
+      }
+    },
+    "specialist_nonzero_gradient_steps_by_size": {
+      "12": 512,
+      "16": 512,
+      "2": 512,
+      "3": 512,
+      "4": 512,
+      "6": 512,
+      "8": 512
+    }
+  },
+  "probability": {
+    "sample_replay_logp_max_error": 0.0
+  },
+  "schema_version": 1,
+  "status": "NO_ACCESS_R50_SPECIALIST_SUBSTRATE"
+}
