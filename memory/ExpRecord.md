@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | pending GPT-5.6 Pro fixed-anchor review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Quarantine treatment result; no rerun until one comparator/causal edge is selected |
+| EXP-20260716-r44-fsnrc-k50 | launch-ready -- awaiting user approval | hierarchy-L2 frozen-source renewal timing gate | local CUDA package in `scripts/run_r44_frozen_source_nrc_local.ps1` | formal paired result | Two-update checks: source state drift `0`, replay/conditional ratio error `0`, control zero/final traces exact, treatment actor and both critics nonzero on all factor steps | Launch only the registered 320K pair; no source update, entropy, reward, seed, budget, or threshold change |
+| EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | completed GPT-5.6 Pro review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Fixed wrapper accepted source-equivalent; keep treatment diagnostic-only and proceed only to R44-FS-NRC |
 | EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
@@ -114,6 +115,69 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260716-r44-fsnrc-k50
+
+- Causal edge: freeze the service-capable R41B coordinator, skills, low
+  executor, discriminators, and normalizers; retain the source-exact native
+  KEEP/RENEW factorization; train only a renewal residual actor and renewal
+  critic; test whether asynchronous lifetime can emerge without forgetting
+  service.
+- Authorization: GPT-5.6 Pro selected `R44-FS-NRC` as the only successor to
+  invalid R43. The implementation and contract are prepared, but the formal
+  run requires explicit user launch approval.
+- Comparator: hierarchy-L2 mechanism-matched concurrent
+  `frozen_source_nrc0` and `frozen_source_nrc` load the same R41B seed-1
+  exact-final checkpoint. Both instantiate the same modules, factor optimizer,
+  frozen source distributions, collector, clock, and renewal critic. Only the
+  treatment renewal actor receives gradients; the control actor remains
+  exactly zero and frozen.
+- Probability/update boundary: source team `Z` and non-incumbent conditional
+  skill distributions remain frozen. The effective zero-residual post-skill
+  distribution exactly equals source HMASD. Conditional skill likelihood is
+  stored and replayed with ratio one but never optimized. The five source
+  optimizer paths execute zero steps. A separate Adam with original high-policy
+  hyperparameters updates only renewal actor/critic for 15 epochs per outer
+  update; no renewal entropy is used.
+- Credit: renewal return is the next 50 external-reward primitive steps. Auto-
+  reset censors the execution fragment but not the controller return; the
+  update boundary uses old-renewal-critic bootstrap and cuts GAE. Original
+  `q_D/q_d` may be evaluated read-only but neither update nor enter renewal
+  return. No shaping, new intrinsic, or task-specific input is allowed.
+- Fixed budget: seed `43041`; two arms concurrent on local CUDA; 16 rollout
+  envs/arm; 100-step rollout; global `k0=50`; 320,000 environment steps and
+  200 outer updates/arm; 6,400 env-check rows/arm; 3,000 factor optimizer
+  steps/arm; zero source optimizer steps; 100 paired deterministic evaluations;
+  10,000 bootstrap repetitions, seed `62043`. Expected local wall clock is
+  8--15 minutes for both concurrent arms and analysis.
+- M0 implementation/freeze: source-exact joint and decomposed probability,
+  team/factor/conditional/low replay errors `<=1e-6`; prefix mismatch zero;
+  all source modules, five optimizer states, and high/low ValueNorm drift
+  `<=1e-12`; factor steps exactly 3,000; control actor drift `<=1e-12`;
+  treatment actor has 3,000 finite nonzero gradient exposures and relative
+  drift `>1e-6`; both critics have finite nonzero gradients; 16 structural
+  assignments, 6,400 check rows, no reset high action, no same-label RENEW;
+  control zero/final wins, keys, lengths, high traces, and low traces are exact.
+- M1 frozen anchor: control final win `>=0.80`, key0/key1 each `>=0.85`.
+- M2 service safety: paired treatment-minus-control win 95% lower bound must be
+  strictly greater than `-0.10`.
+- M3 temporal decoupling, excluding structural rows: treatment discordance
+  `>=0.20`; paired discordance lower bound `>0`; full-sync RENEW `<0.50`;
+  each agent KEEP and RENEW marginal `>=0.05`; actual RENEW-target entropy
+  divided by `log(4)` `>0.80`; same-label RENEW zero.
+- Branches: M0 failure -> `INVALID_R44_FSNRC_IMPLEMENTATION`, repair only the
+  explicit defect and rerun unchanged. M1 failure ->
+  `INVALID_R44_FROZEN_ANCHOR`, repair checkpoint/factorization/evaluation only
+  and do not interpret treatment. Valid M0/M1 with M2 or M3 failure ->
+  `VALID_FAIL_R44_FSNRC`, permanently retire this frozen-source K50 timing
+  route without rescue. All pass -> `PASS_R44_FSNRC_K50`, authorizing only one
+  unchanged paired multi-seed Alice--Bob verification.
+- Prohibited: source unfreezing, seed/budget/threshold changes, best-checkpoint
+  selection, renewal/lifetime/KEEP reward, switch penalty, renewal entropy,
+  full-refresh escape, task fields, task-specific intrinsic reward, S7,
+  open-roster, or variable team membership.
+- Status source: `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r44_frozen_source_nrc.json`.
 
 ### EXP-20260716-r43-nrc-k50
 

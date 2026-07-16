@@ -4,7 +4,39 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R43-NRC True Renewal — Invalid Fixed Anchor, Review Pending
+## R44-FS-NRC Frozen-Source Renewal — Launch Candidate
+
+GPT-5.6 Pro confirmed R43 as invalid, accepted the fixed wrapper as
+source-equivalent, and selected one successor: freeze the complete service-
+capable R41B skill system and train only a native renewal actor and renewal
+critic. This isolates renewal timing from the destructive source-continuation
+drift observed in R43.
+
+Implementation boundary:
+
+- `scripts/r44_frozen_source_nrc.py`
+- `scripts/run_r44_frozen_source_nrc_arm.py`
+- `scripts/analyze_r44_frozen_source_nrc.py`
+- `scripts/run_r44_frozen_source_nrc_local.ps1`
+
+Both arms use the same source-exact KEEP/RENEW decomposition, frozen source
+team and conditional-skill distributions, frozen low actor/critic, frozen
+`q_D/q_d`, frozen ValueNorms, and a separate Adam optimizer over only the
+renewal actor and critic. The control actor is frozen at zero while its critic
+trains; the treatment enables the actor. Renewal credit is the next 50
+external-reward steps with reset-censored execution and update-boundary old-
+critic bootstrap. No renewal entropy, shaping, new intrinsic reward, or task
+field is present.
+
+Focused two-update CUDA evidence is complete for both arms. Across 30 factor
+steps per arm, every source module, source optimizer state, and ValueNorm was
+exactly unchanged; high/factor/low replay and conditional-skill ratio error
+were zero. The control actor had zero drift and zero actor gradients, its
+zero/final deterministic high and low traces were identical, and the treatment
+actor plus both critics had nonzero gradients on every factor step. The
+formal 320K paired launch remains unstarted pending user approval.
+
+## R43-NRC True Renewal — Invalid and Closed
 
 GPT-5.6 Pro confirmed the source clock contradiction and selected
 `PRESERVE SOURCE-GLOBAL CLOCK`. R43 now decomposes each native individual
@@ -52,8 +84,9 @@ two streams. Untouched source continuation and the R43 fixed wrapper remained
 parameter-exact across two updates (`max_abs=0` for high, low actor, low critic,
 `q_D`, and `q_d`). Thus the evaluator and fixed wrapper are not the observed
 failure carrier; continued optimization of the solved source checkpoint is
-unstable under this registered continuation. No rerun or successor is active
-until external review selects a new causal edge.
+unstable under this registered continuation. GPT-5.6 Pro accepted this
+localization, kept the treatment diagnostic-only, and selected R44-FS-NRC as
+the sole next edge. R43 receives no rerun, seed substitution, or rescue.
 
 ## R42-IRR Native Incumbent-Roster Residual — Completed and Retired
 

@@ -34,3 +34,22 @@ The treatment's zero final win, deterministic all-RENEW behavior, and temporal
 metrics are quarantined because M1 failed. No R43 rerun, seed substitution,
 budget or threshold change, reward change, or successor experiment is
 authorized before the external review selects one exact next causal edge.
+
+## GPT-5.6 Pro review disposition
+
+Source: GPT-5.6 Pro raw response, 2026-07-16,
+`GPT5_6_PRO_RESPONSE_RAW.md`.
+
+Accepted:
+
+- confirm `INVALID_R43_FIXED_ANCHOR_LOST`;
+- accept the fixed wrapper as source-equivalent without another wrapper audit;
+- retain the R43 factorization, replay, clock, and gradient results as
+  diagnostic-only evidence;
+- select only `R44-FS-NRC`, which freezes the complete R41B source skill system
+  and compares an inactive zero renewal actor with the same actor trained by a
+  separate renewal-only optimizer.
+
+R43 is not rerun and its treatment is not retired or interpreted. R44 does not
+change the low policy, source coordinator, discriminators, ValueNorms,
+intrinsic reward, task reward, seed, budget, clock, or registered thresholds.

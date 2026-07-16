@@ -15,21 +15,23 @@ Updated: 2026-07-16
 
 ## Objective
 
-Resolve the invalid R43-NRC fixed-anchor boundary before any further algorithm
-run. The paired gate completed with a valid implementation contract, but the
-fixed source-continuation arm lost the registered R41B service anchor. The NRC
-arm therefore has no interpretable scientific verdict.
+Run the single R44-FS-NRC frozen-source timing gate after explicit user launch
+approval. R43 is closed as implementation-valid but scientifically invalid;
+its fixed wrapper is source-equivalent and its treatment remains diagnostic-
+only. R44 freezes the complete service-capable R41B skill system and changes
+only whether the source-exact renewal residual actor can learn.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the R43 result, fixed-anchor diagnostics, and one tracked
-   GPT-5.6 Pro question.
-2. Give the user the standard manual handoff prompt and wait for the raw reply.
-3. Do not rerun R43 or start a successor until the review selects one exact
-   causal edge and minimum evidence boundary.
+1. Commit and push the R44 implementation, formal contract, R43 raw response,
+   and accepted disposition as one pre-launch boundary.
+2. Report the exact R44 local paired parameters and obtain explicit approval
+   before starting the 320K formal run.
+3. After launch, interpret only the single analyzer result under the registered
+   M0--M3 branches; do not retune or expand.
 
 ## Immediate Constraints
 
@@ -57,7 +59,15 @@ must not renew surviving agents' skills.
   untouched source continuation and the R43 fixed wrapper produced exactly
   zero parameter difference across all five trained modules. This localizes
   the invalidity to source-continuation instability rather than the R43 fixed
-  wrapper or evaluation stream; the exact next comparator is under review.
+  wrapper or evaluation stream. GPT-5.6 Pro confirmed this conclusion and
+  selected R44-FS-NRC without another wrapper audit or R43 rerun.
+- R44 uses `frozen_source_nrc0` versus `frozen_source_nrc`, seed `43041`, two
+  concurrent 16-env local CUDA arms, 320K steps and 200 updates per arm, 3,000
+  factor-only optimizer steps, zero source optimizer steps, and 100 paired
+  deterministic evaluations. A focused two-update check passed with exact
+  source-state freeze, zero replay/conditional-ratio error, control actor zero
+  drift and exact zero/final traces, plus nonzero treatment actor and critic
+  gradients on every factor step. Formal compute has not started.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
@@ -88,5 +98,6 @@ must not renew surviving agents' skills.
 - `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/` — R42 result,
   accepted R43 route, source-clock correction, raw responses, and disposition.
 - `docs/external-review/gpt5_6_pro/20260716_r43_nrc_result/` — invalid R43
-  result, fixed-anchor diagnostics, and the pending decision question.
+  result, fixed-anchor diagnostics, raw R44 selection response, and accepted
+  disposition.
 - `docs/external-review/legacy/` — legacy external-review evidence.
