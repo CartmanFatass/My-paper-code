@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260716-r50-vnsl-g0 | authorized -- implementation ready; focused smoke PASS | variable-N learnability decision gate | contract below | prelaunch commit/push, then unchanged local CUDA run | shared set policy versus matched fixed-N specialists; smoke M0 pass with replay error `0` | Decide whether cross-N sharing needs algorithmic optimization; no skill/lifetime/UAV claim |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
 | EXP-20260716-r48-sbrs-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; result commit `985ab94`; R48 external-review entry | complete | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Permanently retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue; only independent R49 architecture gate remains |
 | EXP-20260716-r47-nsopm-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; result commit `b758d8c` | complete | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; proceed only to R48-SBRS-G0 |
@@ -68,6 +69,62 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260716-r50-vnsl-g0 — Variable-N Shared Learnability
+
+- Status: user-authorized for isolated implementation, local CUDA execution,
+  and Git push. Automatic external review is not authorized.
+- Causal edge: mixed-`N` set policy plus ordinary team return -> one shared
+  parameterization learns a set-dependent roster rule -> approaches matched
+  fixed-`N` specialists.
+- Comparator: one shared `OpenRosterSetPolicy` versus one identical specialist
+  per `N`. All models start from the same state and receive the same synthetic
+  member batches, external AR orders, and action-sampling uniforms. The shared
+  model averages the seven size losses into one step; each specialist takes one
+  matched step for its size.
+- Generic bandit: `N in {2,3,4,6,8,12,16}`; 12 continuous member features;
+  an episode-level Gaussian offset is added to the first two features. Target
+  code is `2*1[x_i>=mean(x)]+1*1[y_i>=mean(y)]`. Every member is a joiner and
+  must SET one of four opaque codes. Reward is the team fraction correct.
+- Boundary: external generic reward is used. Environment steps, intrinsic
+  reward, low-level policy, task identity, UAV fields, shaping, checkpoint
+  migration, KEEP learning, within-episode membership, and fixed-`N`
+  skill/lifetime mechanisms are absent.
+- Seeds: model `50050`, training data `60050`, evaluation data `70050`, action
+  uniforms `80050`.
+- Training: 512 updates; 64 cases per size/update; Adam learning rate `1e-3`;
+  actor-critic with normalized per-size advantage, value coefficient `0.5`,
+  gradient clip `1.0`, and entropy coefficient linearly annealed from `0.01`
+  to zero. Replay parity is audited every 32 updates.
+- Exposure per arm: 229,376 training cases and 1,671,168 active token
+  decisions. Shared optimizer steps `512`; each of seven specialists `512`,
+  specialist total `3,584`. Evaluation uses 512 fresh deterministic cases per
+  size. Expected local CUDA wall clock is under 10 minutes.
+- M0: exact sizes/cases/tokens/optimizer counts; exact paired initial state,
+  batches, AR orders, and uniforms; sampling/replay error `<=1e-6`; finite
+  losses, gradients, parameters, and metrics; shared and specialist trainable
+  modules change while unused KEEP parameters remain exact; no ID/slot input,
+  intrinsic reward, low-level policy, environment step, checkpoint, or task
+  field.
+- M1 specialist access: macro token accuracy `>=0.90`, minimum per-size token
+  accuracy `>=0.82`, macro exact-roster success `>=0.55`, and N=16 exact
+  success `>=0.30`.
+- M2 shared learnability: macro token accuracy `>=0.87`, minimum per-size token
+  accuracy `>=0.78`, shared/specialist macro-token ratio `>=0.93`, macro exact
+  success `>=0.45`, N=16 exact success `>=0.20`, and shared/specialist
+  macro-exact ratio `>=0.75`.
+- `INVALID_R50_VNSL_WIRING`: repair only the named count, pairing, replay,
+  gradient, or scope defect and rerun unchanged.
+- `NO_ACCESS_R50_SPECIALIST_SUBSTRATE`: specialists fail M1; do not judge
+  variable-`N` sharing or tune the shared policy.
+- `VALID_FAIL_R50_SHARED_VARIABLE_N_LEARNING`: M0/M1 pass but M2 fails; accept
+  cross-`N` shared representation/optimization as the next causal problem.
+- `PASS_R50_VARIABLE_N_LEARNABILITY`: M0/M1/M2 pass; conclude only that one
+  shared set policy can learn this generic mixed-`N` roster rule and proceed to
+  default-off real-controller integration. No added seed, update, model,
+  threshold, reward, or task rescue branch exists.
+- Authoritative status: `<run-root>/runner_status.txt`; result:
+  `<run-root>/result/r50_vnsl.json`.
 
 ## EXP-20260716-r49-orse-g0 — Open-Roster Set-Equivariant Interface
 

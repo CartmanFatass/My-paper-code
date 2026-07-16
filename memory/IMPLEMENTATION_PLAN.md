@@ -4,6 +4,44 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R50-VNSL-G0 Variable-N Shared Learnability — Authorized
+
+R49 removed mask, padding, replay, membership, and parameter-shape ambiguity.
+R50 therefore folds controller compatibility into the first evidence-bearing
+learning run rather than opening another wiring-only stage. Its causal edge is:
+
+```text
+mixed-N set policy + ordinary team return
+-> one shared parameterization learns a set-dependent roster rule
+-> performance approaches matched fixed-N specialists
+```
+
+Every synthetic episode samples `N` from `{2,3,4,6,8,12,16}` and 12 generic
+member features. A random episode offset prevents absolute local features from
+solving the task. The opaque target code is the quadrant of the member's first
+two features relative to the active-set mean. All members are new at the
+episode boundary, so the active-only AR policy emits one of four SET codes per
+member. External reward is the fraction of correct codes; there is no
+intrinsic reward, low-level policy, environment, task identity, or UAV field.
+
+One shared R49 policy and seven fixed-`N` specialists start from identical
+parameters and receive the same batches, AR orders, and sampling uniforms.
+Training uses 512 updates, 64 cases per size/update, Adam `1e-3`, value weight
+`0.5`, gradient clip `1.0`, and entropy linearly annealed from `0.01` to zero.
+Each arm receives 229,376 training cases and 1,671,168 token decisions; shared
+optimizer steps are 512 and every specialist also receives 512. Evaluation is
+deterministic on 512 fresh cases per size.
+
+Specialist access requires macro/min token accuracy `>=0.90/0.82`, macro exact
+roster success `>=0.55`, and N=16 exact success `>=0.30`. Shared learnability
+requires macro/min token accuracy `>=0.87/0.78`, shared/specialist token ratio
+`>=0.93`, macro exact success `>=0.45`, N=16 exact success `>=0.20`, and
+shared/specialist exact ratio `>=0.75`. Specialist failure is a substrate
+no-access result. Specialist PASS with shared failure isolates cross-N sharing
+as the optimization problem. Joint PASS authorizes integration with the real
+default-off controller, not a skill, lifetime, intrinsic, UAV, or cooperation
+claim.
+
 ## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Completed PASS
 
 R48 closed fixed-`N` skill/lifetime exploration. R49 is a separate,

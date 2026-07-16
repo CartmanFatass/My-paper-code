@@ -16,21 +16,18 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close the valid `PASS_R49_ORSE_ARCHITECTURE` boundary. The variable-active-set,
-set-equivariant active-only autoregressive interface passed its standalone
-architecture contract. Fixed-`N` skill/lifetime work remains stopped, and R49
-does not establish skill, lifetime, task, intrinsic-reward, or cooperation
-efficacy.
+Implement and run the user-authorized `R50-VNSL-G0` mixed-team-size
+learnability gate. Compare one shared set-equivariant policy with matched
+fixed-`N` specialists on a generic roster bandit to decide whether variable-`N`
+sharing itself creates an optimization gap. Fixed-`N` skill/lifetime work
+remains stopped.
 
 ## Next Actions
 
-1. Commit and push the R49 terminal result and accepted interface-only
-   disposition.
-2. Preserve as the sole next edge a default-off, exogenous cross-episode
-   variable-`N` compatibility gate. Do not implement or launch it without new
-   user authorization.
-3. Do not perform automatic Pro review; the prior five-round quota is
-   exhausted.
+1. Commit/push the smoke-valid R50 implementation, then run the unchanged
+   local CUDA experiment.
+2. Record only the registered substrate-fail, shared-learning-fail, PASS, or
+   INVALID branch. Do not perform automatic Pro review.
 
 ## Immediate Constraints
 
@@ -45,8 +42,12 @@ efficacy.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.
-- R49 authorization is complete. No environment training or subsequent
-  variable-`N` compatibility run is currently authorized.
+- R50 is authorized for local toy learning and Git push. It uses only a generic
+  external roster reward; intrinsic reward, low-level policy, UAV fields, and
+  environment-specific shaping are absent.
+- The focused R50 CUDA smoke passed all M0 checks with four shared updates,
+  28 aggregate specialist updates, zero replay error, nonzero relevant-module
+  drift, and exact zero KEEP-head drift. This is wiring evidence only.
 - R43 run
   `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` completed
   `INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, but fixed final win/key0/key1 was
