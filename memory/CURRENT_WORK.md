@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 
 ## Controller
 
@@ -22,10 +22,12 @@ queues retain unit residual capacity and all registered scientific thresholds.
 
 ## Next Actions
 
-1. Commit/push the exact corrected launch boundary once.
-2. Run the registered 128K-transition local CUDA gate without expansion.
-3. Archive the terminal result and use automatic Pro exchange 3/8 only for the
-   registered result review.
+1. Finish the running registered 128K-transition local CUDA gate without
+   expansion.
+2. Commit/push the curated `N/k/many-agent` literature package and its dedicated
+   architecture-review question, then use one automatic Pro exchange.
+3. Archive and disposition the terminal R53 result separately; do not merge
+   literature advice with the registered R53 estimand.
 
 ## Immediate Constraints
 

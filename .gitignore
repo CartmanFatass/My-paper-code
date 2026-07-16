@@ -70,6 +70,11 @@ ref/hmasd/
 ref/OPT-main/
 *.png
 
+# Keep the curated N/k/many-agent literature analyses trackable while leaving
+# downloaded papers and third-party source trees local-only.
+!docs/research/literature/n_k_many_agent_deep_dive/**/*.md
+docs/research/literature/n_k_many_agent_deep_dive/code/
+
 # 生成的模型和结果
 models/
 results/
