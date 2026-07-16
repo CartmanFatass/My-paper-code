@@ -29,7 +29,9 @@ credit.
 ## Accepted R43 boundary
 
 - Keep the source team `Z` sampling and native `k0=50` inspection clock.
-- At initial assignment, force structural RENEW without a renewal likelihood.
+- At the first collector initialization only, perform a structural assignment
+  without a renewal likelihood. Environment auto-reset never creates a high
+  action.
 - At an ordinary check, sample a real `KEEP/RENEW` factor for each active agent
   in canonical MAT order.
 - KEEP preserves the incumbent and opens no skill factor. RENEW masks the
@@ -38,8 +40,13 @@ credit.
   see only the atomically committed final roster.
 - Zero initialization must reproduce the complete source post-skill
   distribution and decomposed log probability to `1e-6`.
-- Renewal PPO uses next-check block external return. Conditional skill PPO uses
-  the external return from assignment until that agent's next RENEW or terminal.
+- Incumbent roster, team `Z`, assignment spell, and commitment age cross
+  environment auto-reset and outer-update boundaries. Auto-reset closes only a
+  low-level execution fragment and resets the source low recurrent state.
+- Renewal PPO uses the next 50-step controller block return. Conditional-skill
+  credit ends at the next RENEW or the on-policy update boundary, not at an
+  environment reset. Update boundaries bootstrap with the old critic and never
+  reuse an old actor likelihood.
 - Low policy and original environment-agnostic `q_D/q_d` objective remain
   unchanged. They do not read renewal, age, segment length, or task fields.
 - No lifetime reward, renewal entropy, switch penalty, duration action, forced
@@ -57,11 +64,11 @@ validity: `PASS_R43_NRC_K50`, `VALID_FAIL_R43_NRC`, or a concrete invalid
 implementation/anchor branch. There is no rescue or underpowered branch. A PASS
 authorizes only one unchanged paired multi-seed Alice--Bob verification.
 
-Raw response: `GPT5_6_PRO_RESPONSE_RAW.md`.
+Raw responses: `GPT5_6_PRO_RESPONSE_RAW.md` and
+`GPT5_6_PRO_R43_SOURCE_CLOCK_CORRECTION_RESPONSE_RAW.md`.
 
-Implementation is temporarily held at the source clock boundary. The accepted
-response requires forced initial RENEW on every episode reset, while the source
-collector auto-resets successful environments between its two global high
-checks without sampling a new high action. The focused correction request is
-`GPT5_6_PRO_R43_SOURCE_CLOCK_CORRECTION.md`; no R43 code or run proceeds until
-one comparator/segment/credit interpretation is selected.
+The focused correction confirmed the source contradiction and selected
+`PRESERVE SOURCE-GLOBAL CLOCK`. The accepted implementation is therefore
+`R43-NRC with reset-censored controller time`: exactly two high rows per
+environment and outer update, one structural assignment per training
+environment for the entire run, and zero reset-triggered high actions.

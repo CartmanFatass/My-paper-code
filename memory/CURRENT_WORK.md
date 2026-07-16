@@ -15,24 +15,23 @@ Updated: 2026-07-16
 
 ## Objective
 
-Resolve one source-clock contradiction before implementing the accepted
-`MODIFY R43-NRC` route. GPT-5.6 Pro confirmed R42 as a valid failure and selected
-a true renewal factor, conditional non-incumbent skill assignment, and separated
-renewal/skill credit. The source collector, however, auto-resets successful
-Alice--Bob environments between global high checks without a new high action;
-this conflicts with the response's forced initial RENEW on every episode reset.
+Run the single registered R43-NRC mechanism gate after user approval. GPT-5.6
+Pro confirmed the source contradiction and selected reset-censored controller
+time. The implementation now supplies a true renewal factor, a conditional
+non-incumbent skill factor, and separate renewal/skill-event credit while
+preserving the original global `k0=50` clock and source HMASD low/intrinsic path.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the raw R42/R43 response, accepted disposition, source vector
-   wrapper, and focused source-clock correction question.
-2. Give the user the fixed manual GPT-5.6 Pro correction prompt and archive the
-   returned raw response before interpretation.
-3. Implement only the resulting single reset/segment/credit contract; do not
-   guess between source-global and per-reset high actions.
+1. Complete one scoped diff review of the R43 implementation and formal
+   contract; do not add another test layer.
+2. Commit and push the pre-launch boundary, including the raw correction
+   response and accepted disposition.
+3. Report the exact local paired-run parameters and rationale; launch only
+   after explicit user approval.
 
 ## Immediate Constraints
 
@@ -49,10 +48,10 @@ must not renew surviving agents' skills.
   external reward.
 - Do not begin open-roster or variable-`N` implementation before the fixed-`N`
   temporal gate.
-- The R42 preflight against the real R41B checkpoint passed with zero action,
-  likelihood, value, entropy, replay, and base-gradient error; the residual
-  direct policy-gradient norm was `0.2221746`. Do not add another smoke or test
-  stage before the paired run.
+- R43 focused preflight passed on the real R41B checkpoint. The 32-outcome
+  probability decomposition error is below `1e-6`; a two-update CUDA check had
+  zero replay/prefix error and exact clock/optimizer counts. Do not add another
+  smoke or test stage before the paired run.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
@@ -80,6 +79,6 @@ must not renew surviving agents' skills.
   — raw R40/R41 review and accepted disposition.
 - `docs/external-review/gpt5_6_pro/20260716_r41b_source_access_result/` — R41B
   evidence, all three Pro rounds, and the final source-level disposition.
-- `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/` — R42 raw results,
-  accepted R43 response, disposition, and pending source-clock correction.
+- `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/` — R42 result,
+  accepted R43 route, source-clock correction, raw responses, and disposition.
 - `docs/external-review/legacy/` — legacy external-review evidence.

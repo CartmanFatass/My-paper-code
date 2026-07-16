@@ -4,16 +4,40 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R43-NRC True Renewal — Source-Clock Correction Pending
+## R43-NRC True Renewal — Implemented, Formal Gate Pending
 
-GPT-5.6 Pro selected an explicit renewal factor, conditional non-incumbent skill
-assignment, and separated renewal/check versus skill/segment-event credit. No
-R43 code is active yet. The source vector collector auto-resets successful
-Alice--Bob environments between its global `t=0/50` high checks, whereas the
-review contract also requires forced initial RENEW on every episode reset.
-Those choices imply different event counts, likelihoods, segment boundaries,
-comparators, and credit. Implement only after the focused correction selects one
-source-consistent interpretation.
+GPT-5.6 Pro confirmed the source clock contradiction and selected
+`PRESERVE SOURCE-GLOBAL CLOCK`. R43 now decomposes each native individual
+categorical factor into an explicit KEEP/RENEW factor and a non-incumbent
+conditional skill factor opened only on RENEW. The source team token, low actor,
+`q_D/q_d`, global `k0=50` checks, and five optimizer exposures remain intact.
+
+The controller state persists across source auto-reset and outer updates:
+
+- the whole training run has one structural assignment per environment;
+- later rollout steps 0 and 50 are ordinary KEEP/RENEW checks;
+- auto-reset creates no high action or row, preserves roster/age/spell, and
+  censors only the low execution fragment;
+- update boundaries bootstrap and truncate actor-valid event credit while a
+  critic-only continuation carries the active spell;
+- renewal/check credit spans the next 50 primitive steps and conditional-skill
+  credit ends at the next RENEW or update boundary.
+
+Implementation boundary:
+
+- `scripts/r43_native_renewal.py`
+- `scripts/run_r43_native_renewal_arm.py`
+- `scripts/analyze_r43_native_renewal.py`
+- `scripts/run_r43_native_renewal_local.ps1`
+
+Focused real-checkpoint evidence is complete. Joint enumeration over all 32
+`(Z,z1,z2)` outcomes had maximum decomposed log-probability error
+`9.536743e-7`; the renewal actor, renewal critic, skill-event critic, and source
+conditional decoder all had nonzero direct gradients. A two-update real CUDA
+check preserved four global rows, one structural assignment, three normal
+checks, cross-update carry, two reset-censored fragments, 30 combined high
+optimizer steps, and zero high/low/factor replay or prefix error. No further
+test layer is planned before the registered paired gate.
 
 ## R42-IRR Native Incumbent-Roster Residual — Completed and Retired
 

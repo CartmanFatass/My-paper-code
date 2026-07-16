@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r43-nrc-k50 | design correction pending; not launched | hierarchy-L2 true-renewal temporal mechanism gate | R41B checkpoint; GPT-5.6 Pro `MODIFY R43-NRC` | source-clock correction response | Source auto-reset occurs between global high checks, conflicting with forced initial RENEW on every reset | Select one exact reset/segment/credit contract before implementation |
+| EXP-20260716-r43-nrc-k50 | implementation/preflight complete; launch approval pending | hierarchy-L2 reset-censored true-renewal mechanism gate | R41B checkpoint; GPT-5.6 Pro `PRESERVE SOURCE-GLOBAL CLOCK` | focused preflight passed | 32-outcome logp error `9.54e-7`; two-update replay/prefix error `0`; exact cross-update carry | Commit/push pre-launch boundary, report exact run, request approval |
 | EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
@@ -117,20 +117,55 @@ explicitly approves the exception.
 
 ### EXP-20260716-r43-nrc-k50
 
-- GPT-5.6 Pro verdict: `MODIFY R43-NRC`. The retained edge is a source-exact
-  explicit renewal factor, conditional non-incumbent skill sampling only on
-  RENEW, renewal/check credit, and skill/segment-event credit. R42 residual
-  rescues remain retired.
-- Concrete source conflict: Alice--Bob success terminates early; the vector
-  wrapper auto-resets the environment, while the original runner samples high
-  actions only at global rollout steps `0/50`. Forced initial RENEW on every
-  environment reset would add variable per-environment high events and break the
-  claimed source-exact fixed comparator and fixed two-row high buffer.
-- Status: no implementation or run is authorized until
-  `GPT5_6_PRO_R43_SOURCE_CLOCK_CORRECTION.md` receives one exact
-  reset/segment/credit resolution. Preserve seed `43041`, 16 envs per concurrent
-  arm, 320K steps per arm, and the registered safety/mechanism thresholds unless
-  the correction proves a quantity undefined.
+- Causal edge: source categorical individual skill -> exact KEEP/RENEW
+  decomposition plus conditional non-incumbent skill -> separate controller-time
+  renewal and skill-event credit -> service-preserving temporal decoupling.
+- Authorization: GPT-5.6 Pro confirmed the source contradiction and selected
+  `R43-NRC with reset-censored controller time`. Implementation and focused
+  preflight are complete; the conclusion-bearing run requires user approval.
+- Comparator: concurrent `fixed_refresh` is the unchanged R41B continuation;
+  `r43_nrc` starts from the same checkpoint and adds zero-output renewal actor,
+  renewal critic, and skill-event critic to the existing high optimizer.
+- Clock/segment: global checks remain at primitive `50n`; each training env has
+  one structural assignment for the whole run; auto-reset adds no high action or
+  row, preserves team/roster/age/spell, resets source low hidden state, and marks
+  an `env_reset_censored` execution fragment. Update boundaries bootstrap and
+  truncate actor-valid events; continuation is critic-only.
+- Probability/credit: KEEP opens no skill factor; RENEW masks the incumbent.
+  Working prefixes are teacher-forced in canonical order. Renewal return covers
+  the next 50 external-reward steps across reset. Skill-event return ends at the
+  next RENEW or update boundary. Source team value/PPO and original
+  environment-agnostic `q_D/q_d` low reward remain unchanged.
+- Fixed budget: seed `43041`; two arms concurrent; CUDA; 16 rollout envs/arm;
+  `320,000` environment steps/arm; 200 outer updates; exactly 6,400 env-check
+  rows and 3,000 steps on each of high, low actor, low critic, `q_D`, and `q_d`;
+  100 paired deterministic final episodes; 10,000 paired bootstraps, seed
+  `62043`. Expected local wall clock is 8--12 minutes; the matched R42 paired
+  run completed both arms in about 5.8 minutes and R43 adds per-update high
+  factor replay plus two small critics.
+- M0: exact source/checkpoint/config; 32-outcome zero-init probability and
+  decomposed logp error `<=1e-6`; high/factor/low replay `<=1e-6`; exactly one
+  structural assignment/env, two high rows/env/update, zero reset high actions,
+  6,400 update-boundary event truncations, preserved carry, finite/nonzero
+  optimizer paths, new-module treatment drift and zero fixed drift. At least one
+  early reset block must show success reward and post-reset steps in the same
+  controller return. Failure -> `INVALID_R43_NRC_CLOCK_OR_IMPLEMENTATION` and
+  repair only the located defect.
+- M1 fixed anchor: win `>=0.80`, key0/key1 each `>=0.85`. Failure ->
+  `INVALID_R43_FIXED_ANCHOR_LOST` and restore only source continuation.
+- M2 service: paired 95% lower bound of treatment-minus-fixed win must be
+  strictly greater than `-0.10`.
+- M3 explicit renewal, excluding structural rows: treatment discordance
+  `>=0.20`; paired discordance lower bound `>0`; full-sync renewal `<0.50`;
+  every agent KEEP and RENEW marginal `>=0.05`; actual renewal-target entropy
+  divided by `log(4)` `>0.80`; same-label renewal `=0`.
+- Branches: M0/M1 valid but M2 or M3 failure -> `VALID_FAIL_R43_NRC`, permanently
+  retire this reset-censored Alice--Bob K50 route without rescue. All gates pass
+  -> `PASS_R43_NRC_K50`, authorizing only the unchanged paired multi-seed
+  Alice--Bob verification. No underpowered, retuning, extra-step, extra-seed,
+  reward, entropy, refresh, age-capacity, S7, or variable-`N` branch exists.
+- Status source: `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r43_native_renewal.json`.
 
 ### EXP-20260716-r42-irr-native-roster-residual
 
