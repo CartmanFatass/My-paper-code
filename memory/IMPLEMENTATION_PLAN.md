@@ -27,11 +27,13 @@ shared arm decide cross-N learning. A PASS authorizes only the same-task
 exogenous within-episode membership gate; it does not authorize skill,
 variable lifetime, intrinsic reward, S7/UAV, or novelty claims.
 
-Implementation boundary complete: the isolated environment/model/gate/runner
-are present, and the focused CUDA M0 smoke passed with exact counts, zero
-sample/replay and prefix error, zero masked probability mass, finite nonzero
-gradient/drift support, and exact checkpoint reload. The next action is the
-single unchanged formal run; no further implementation expansion is planned.
+Implementation and formal execution are complete. Run
+`logs/r51_amdt_20260716_211616` passed M0 but produced
+`NO_ACCESS_R51_AMDT_SPECIALISTS`: every fixed-N final success and every block
+mean was zero, with no positive training batch. The exact AMDT
+dynamics/horizon/reset/reward contract is retired and shared results are
+quarantined. No further R51 implementation or run is planned; the next core
+plan must describe a newly accepted environment rather than an R51 rescue.
 
 ## R50-VNSL-G0 Variable-N Shared Learnability — Completed No-Access
 

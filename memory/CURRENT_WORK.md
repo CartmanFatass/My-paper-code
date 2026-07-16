@@ -16,18 +16,17 @@ Updated: 2026-07-16
 
 ## Objective
 
-Implement and run the launch-exact `R51-AMDT-G0` Anonymous
-Maintenance--Dispatch Task. Test one shared anonymous variable-`N` set-pointer
-policy against five capacity-matched fixed-`N` specialists under sparse
-terminal reward and the corrected 625-step exposure contract.
+Close the valid `NO_ACCESS_R51_AMDT_SPECIALISTS` result and obtain one manual
+GPT-5.6 Pro environment-design failure review. R51 cannot decide shared
+variable-`N` learning because its fixed-N ordinary-policy prerequisite failed.
 
 ## Next Actions
 
-1. Commit/push the frozen R51 prelaunch implementation and contract boundary.
-2. Run the unchanged 320K-per-arm local experiment and record only the
-   registered INVALID, specialist-NO_ACCESS, shared-variable-N-FAIL, or PASS.
-3. Interpret the terminal branch, update the owning experiment record, and
-   make the single result/disposition commit/push.
+1. Commit/push the R51 result, raw evidence, disposition, and single next-edge
+   review question.
+2. Give the user the fixed manual GPT-5.6 Pro handoff prompt and await the raw
+   response.
+3. Do not implement or launch R52 until that response is archived and accepted.
 
 ## Immediate Constraints
 
@@ -73,6 +72,14 @@ terminal reward and the corrected 625-step exposure contract.
   prefix error, zero masked probability mass, finite gradients/drift in every
   registered module, and exact checkpoint reload. Its transient output was
   removed; it is wiring evidence only.
+- Formal R51 run `logs/r51_amdt_20260716_211616` completed valid
+  `NO_ACCESS_R51_AMDT_SPECIALISTS`. All M0 checks passed with 320K transitions
+  and 1.28M tokens/arm, 625 shared and 625 aggregate specialist steps, 64K
+  transitions/N, and zero replay/prefix/masked-mass error. Every specialist's
+  exact-final success, final-minus-zero interval, and four block means were
+  zero. No training batch in either arm ever produced terminal success, and
+  every exact-final specialist had station-failure rate 1.0. Retire the exact
+  AMDT dynamics/horizon/reset/reward contract; quarantine all shared results.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
@@ -221,4 +228,7 @@ terminal reward and the corrected 625-step exposure contract.
   result, corrected disposition, raw Pro response, and R47 launch clarification.
 - `docs/external-review/gpt5_6_pro/20260716_variable_team_toy_design/` — current
   manual Pro design question and Git-visible R50 evidence.
+- `docs/external-review/gpt5_6_pro/20260716_r51_amdt_result/` — raw R51 result,
+  training trace, controller disposition, and the single environment-design
+  failure-review question.
 - `docs/external-review/legacy/` — legacy external-review evidence.

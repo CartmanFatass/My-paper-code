@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r51-amdt-g0 | prelaunch ready -- focused M0 smoke passed | genuine task-dynamic cross-episode variable-N learning | contract below; implementation in `ha_ctse_process/r51_amdt.py` and R51 scripts | freeze Git boundary, then one local formal run | 24,833 parameters; smoke replay/prefix/masked mass all zero; formal remains 320K transitions and 625 aggregate steps/arm | Decide environment access first, then shared cross-N learnability; no skill/lifetime/intrinsic/UAV claim |
+| EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
 | EXP-20260716-r48-sbrs-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; result commit `985ab94`; R48 external-review entry | complete | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Permanently retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue; only independent R49 architecture gate remains |
@@ -142,6 +142,17 @@ explicitly approves the exception.
   probability mass, all registered module gradients/drifts nonzero and finite,
   and exact-final checkpoint reload. The transient dry-run directory was
   removed; no scientific M1/M2 conclusion was drawn.
+- Formal outcome: run `logs/r51_amdt_20260716_211616` completed valid
+  `NO_ACCESS_R51_AMDT_SPECIALISTS` in 1,434.57 seconds. M0 passed every check:
+  125 cycles, 625 N-specific batches, 320K transitions and 1.28M tokens/arm,
+  64K transitions/N, 625 shared steps, 125 steps/specialist, PPO epoch one,
+  and zero sample/replay, prefix, or masked-mass error. Specialist exact-final
+  success was zero for every N; every per-N final-minus-zero interval and all
+  four block means were zero. All 625 training rows had zero terminal success
+  in both arms, and exact-final station-failure rate was 1.0 for every
+  specialist. M1 therefore fails and all shared M2 values are quarantined.
+  Binding action: retire this exact environment contract without rescue and
+  obtain one review that selects a newly registered task-level carrier.
 
 ## EXP-20260716-r50-vnsl-g0 — Variable-N Shared Learnability
 
