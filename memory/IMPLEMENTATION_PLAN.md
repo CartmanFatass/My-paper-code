@@ -4,6 +4,26 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R46-HMRV-G0 Heterogeneous-Maintenance Positive Control — Active
+
+GPT-5.6 Pro confirmed R45 and selected one new substrate-level causal edge:
+before another renewal actor or joint skill mechanism, test whether a fixed
+`N=2` process with native heterogeneous degradation yields identifiable
+sign-changing KEEP/RENEW value under balanced natural support.
+
+The gate is standalone and reward-off with respect to learning: fixed
+Bernoulli-0.5 behavior generates 64,000 local CUDA steps; no policy, skill,
+intrinsic, or source module exists or updates. Only four cross-fitted
+`6 -> 32 GELU -> 2` true-Q/action-blind-sham critics train. The accepted
+environment, budgets, M0--M3 thresholds, and terminal branches may not change.
+
+Implementation is paused only for one tracked launch-exact clarification of
+the omitted `gamma`, first-prefix sentinel, critic optimizer/seeds, bootstrap
+cluster, evaluation RNG, and role-stratum definition. After that response, the
+final contract is registered once in `memory/ExpRecord.md`, followed directly
+by the coherent implementation and 64K formal run; there is no separate
+algorithm-verification stage.
+
 ## R45-SDRA Reward-Off Identifiability — Completed and Retired
 
 GPT-5.6 Pro confirmed R44 and selected one upstream question before any new

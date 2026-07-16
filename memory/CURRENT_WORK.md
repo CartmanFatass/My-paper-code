@@ -10,13 +10,14 @@ Updated: 2026-07-16
 - **Project boundary:** IMOD is operational reference only, not HMASD evidence.
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
-- **External review:** the three authorized automated GPT-5.6 Pro rounds are
-  complete. Further exchange uses the manual default in `AGENTS.md`.
+- **External review:** the user authorized up to five automated GPT-5.6 Pro
+  follow-ups after the manually submitted R45 review. Automatic submissions
+  used: `0/5`; reuse the existing `算法探索与交接摘要` conversation only.
 
 ## Objective
 
-Close the valid R45 natural-support identifiability failure and select one new
-causal edge outside the retired Alice--Bob K50 temporal substrate. R45 found
+Make the accepted `R46-HMRV-G0` heterogeneous-maintenance positive control
+launch-exact, then implement and run its single local CUDA gate. R45 found
 strong action-conditioned predictive information, but natural KEEP support was
 insufficient and renewal value was almost universally common-mode positive,
 not agent-specific sign-changing timing value.
@@ -26,11 +27,12 @@ must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the R45 result, terminal disposition, memory decision, and
-   one tracked GPT-5.6 Pro failure-review question.
-2. Give the user the standard manual handoff prompt and wait for the raw reply.
-3. Do not implement a new substrate or algorithm until the review selects one
-   exact causal edge and abandonment gate.
+1. Commit and push the archived R45 Pro response, accepted disposition, and
+   tracked R46 launch-contract clarification.
+2. Use automatic Pro submission `1/5` to close only the missing discount,
+   prefix, optimizer/seed, bootstrap, evaluation, and role-stratum values.
+3. Archive that response, register the exact R46 contract, implement the
+   minimal standalone gate, and run the authorized 64,000-step local CUDA job.
 
 ## Immediate Constraints
 
@@ -94,6 +96,12 @@ must not renew surviving agents' skills.
   failed because both agents' bottom-quartile DR scores remained positive and
   same-check sign discordance was only `0.000314`. Retire Alice--Bob K50
   natural-support renewal credit and this temporal substrate without rescue.
+- GPT-5.6 Pro confirmed the R45 validity/M2/retirement boundary and selected
+  only `R46-HMRV-G0`: fixed `N=2`, `k0=5`, `H=40`, heterogeneous health
+  degradation `{1,2}`, fixed Bernoulli-0.5 natural KEEP/RENEW behavior, zero
+  policy/intrinsic updates, and four cross-fitted six-input Q/sham critics.
+  Implementation waits only for the tracked launch-exact clarification; no
+  R42--R45 rescue, S7, open-roster, or variable-`N` work is authorized.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

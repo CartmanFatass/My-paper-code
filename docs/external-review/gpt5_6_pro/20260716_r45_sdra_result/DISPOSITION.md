@@ -51,3 +51,17 @@ It does not retire general asynchronous skill learning, joint co-adaptation,
 other benchmarks with genuine heterogeneous timing demand, S7 hypotheses,
 open rosters, or variable team membership. No successor is implemented before
 one new causal edge and abandonment gate are selected.
+
+## GPT-5.6 Pro review disposition
+
+- Source: GPT-5.6 Pro, 2026-07-16; raw response archived as
+  `GPT5_6_PRO_RESPONSE_RAW.md`.
+- Accepted: R45 validity, the pre-result M2 clarification, the retirement
+  boundary above, and the single successor `R46-HMRV-G0`.
+- R46 is a reward-off fixed-`N=2` heterogeneous-maintenance positive control,
+  not skill learning or a benchmark-performance claim. It trains no policy or
+  intrinsic module.
+- Launch is deferred only until the omitted discount, prefix sentinel, critic
+  seeds/optimizer, bootstrap unit, evaluation seed, and role-stratum semantics
+  are fixed in the tracked clarification question. This does not reopen R45 or
+  authorize another route.
