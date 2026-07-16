@@ -16,15 +16,18 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close the valid `NO_ACCESS_R52_ARFA_SPECIALISTS` result and obtain one manual
-GPT-5.6 Pro failure review. R52 cannot support a shared variable-`N` conclusion
-because its registered fixed-N specialist prerequisite failed.
+Close the launch-exact definition of the sole selected successor
+`R53-RCMA-G0` through one manual GPT-5.6 Pro clarification. R52 is now a
+Pro-confirmed deterministic specialist-access failure and remains retired.
 
 ## Next Actions
 
-1. Archive the exact R52 result/CSV and a single failure-review question.
-2. Commit/push the result boundary and give the user the manual Pro prompt.
-3. Do not implement or launch a successor before the raw response is returned.
+1. Give the user the fixed-template manual Pro prompt for the tracked R53
+   launch clarification.
+2. Archive the returned raw answer and accept or reject only its launch-exact
+   definitions.
+3. Do not implement or launch R53 until the four missing definitions are
+   closed in that response.
 
 ## Immediate Constraints
 
@@ -100,6 +103,15 @@ because its registered fixed-N specialist prerequisite failed.
   `M=1,J=0,U=0`, every final-minus-zero CI is `[0,0]`, and all four blocks/N are
   zero. Shared exact-final is `M=J=U=1` for every N, but is quarantined by the
   failed M1 prerequisite. The exact R52 contract is retired without rescue.
+- GPT-5.6 Pro confirmed the R52 branch and found no branch-changing wiring
+  defect. The narrow reusable result is that a strong stochastic return carrier
+  does not guarantee a stable greedy-executable joint mode. Pro selected only
+  `R53-RCMA-G0`: anonymous multi-rate queues with residual capacity encoded in
+  the autoregressive support, fixed-N specialists as the access prerequisite,
+  and an equal-exposure shared variable-N arm. The route is not launch-exact
+  until Pro defines the two member inputs, centralized critic fields, reset
+  semantics for the focal previous-queue relation, and exact arrival/service/
+  deadline step order. No R53 code or run is authorized before that closure.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
@@ -251,4 +263,6 @@ because its registered fixed-N specialist prerequisite failed.
 - `docs/external-review/gpt5_6_pro/20260716_r51_amdt_result/` — raw R51 result,
   training trace, controller disposition, and the single environment-design
   failure-review question.
+- `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` — raw R52 result,
+  Pro-confirmed disposition, selected R53 route, and launch clarification.
 - `docs/external-review/legacy/` — legacy external-review evidence.

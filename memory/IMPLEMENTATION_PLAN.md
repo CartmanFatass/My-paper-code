@@ -4,6 +4,24 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R53-RCMA-G0 Variable-N Queue Allocation — Pending Clarification
+
+The sole selected next edge is residual-capacity masked autoregression in an
+anonymous multi-rate queue task. Each autoregressive token sees the remaining
+unit capacity of every queue, and a queue selected by an earlier token is
+removed from later support. The comparison remains one shared N-independent
+policy against five architecture-identical fixed-N specialists with equal
+aggregate exposure and specialists as the binding access prerequisite.
+
+Do not implement yet. The returned design omitted the two member inputs, the
+centralized critic fields, reset semantics for the focal previous-queue
+relation, and exact within-step arrival/service/deadline order. These are not
+ordinary coding choices: they change the information boundary, parameter
+count, transition kernel, or estimand. One manual Pro clarification must close
+them before the isolated implementation stage begins. No field-slot, mean-field,
+skill, lifetime, intrinsic, shaping, beam-search, joint-MAP, or R52 rescue work
+may enter this stage.
+
 ## R52-ARFA-G0 Task-Dynamic Variable-N Learning — Launch Exact
 
 Implement an isolated successor to R51 with recoverable station health,
@@ -22,8 +40,9 @@ skill, lifetime, membership-change, S7/UAV, or novelty work enters this stage.
 
 Implementation status: complete. The focused M0 dry-run passed and the formal
 gate ended in valid `NO_ACCESS_R52_ARFA_SPECIALISTS`. Retire the exact R52
-contract, quarantine its shared result, and make no rescue change. The only
-next action is one result failure review before selecting a successor edge.
+contract, quarantine its shared result, and make no rescue change. GPT-5.6 Pro
+confirmed this disposition and selected only R53-RCMA-G0; R52 requires no
+further review or implementation.
 
 ## R51-AMDT-G0 Task-Dynamic Variable-N Learning — Launch Exact
 

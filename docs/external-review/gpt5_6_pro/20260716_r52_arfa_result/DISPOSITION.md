@@ -28,3 +28,21 @@ aggregation. Do not claim variable-N learning from the quarantined shared arm.
 Request one failure review to validate the scientific branch, explain the
 stochastic-carrier/deterministic-final contradiction, and choose one genuinely
 new falsifiable successor edge.
+
+## GPT-5.6 Pro final disposition
+
+GPT-5.6 Pro confirmed `NO_ACCESS_R52_ARFA_SPECIALISTS` and found no
+branch-changing implementation defect. The failure is specifically the
+registered deterministic specialist-access gate, not absence of stochastic
+task-return carrier. The reusable conclusion is that positive stochastic
+expected return under valid PPO does not guarantee transport to a stable
+greedy-executable joint mode.
+
+The exact R52 contract remains permanently retired and the shared perfect result
+remains diagnostic-only. The sole selected successor is `R53-RCMA-G0`, which
+places observable residual queue capacity in the autoregressive action support.
+Implementation is not yet authorized because the returned design leaves four
+estimand-bearing definitions incomplete: the two member inputs, the centralized
+critic fields, the initial previous-queue relation, and the within-step
+arrival/service/deadline order. One launch clarification will close only those
+items without changing the selected route or its registered exposure.

@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r52-arfa-g0 | completed -- valid `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | one failure review; no R52 rescue | M0 pass; training carrier passes every N; all final specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52 task/comparator contract; do not judge shared variable-N learning |
+| EXP-20260716-r53-rcma-g0 | planned -- launch clarification required | residual-capacity masked variable-N queue allocation | R52 external-review folder | one manual Pro launch clarification | sole successor selected; exposure/gates fixed; four estimand-bearing definitions omitted | No implementation or launch until exact inputs, state reset, step order, and evaluation statistics are closed |
+| EXP-20260716-r52-arfa-g0 | completed -- Pro-confirmed `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | complete | M0 pass; stochastic carrier passes every N; all deterministic specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52; reuse only the conclusion that stochastic return does not guarantee greedy joint-mode transport |
 | EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
@@ -71,6 +72,46 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260716-r53-rcma-g0 — Residual-Capacity Masked Autoregression
+
+- Status: sole successor selected by GPT-5.6 Pro; design clarification pending;
+  implementation and launch are not authorized.
+- Causal edge: observable residual queue capacity -> capacity-feasible
+  autoregressive support -> high-value stochastic mass -> stable deterministic
+  joint mode -> valid shared variable-N comparison.
+- Environment: anonymous multi-rate queue allocation with episode-stable
+  `N={2,3,4,5,6}`, `P=floor(N/2)` persistent queues, `B=N+1-P` burst queues,
+  `K=N+1`, horizon 16, persistent arrivals at even steps, burst waves at 3/9,
+  and a three-step burst deadline. Each selected nonempty queue serves one;
+  residual capacity makes duplicate same-step selection impossible.
+- Reward: zero at all intermediate steps; terminal
+  `F_P=1-final_persistent_backlog/(8P)`,
+  `F_B=timely_burst_completions/(2B)`, and `U=sqrt(F_P*F_B)`. No shaping,
+  intrinsic reward, type/role label, identity, duplicate penalty, switch reward,
+  or team-size reward.
+- Model: N-independent anonymous recurrent set-pointer RCMA, stated exact count
+  24,737. Shared and five fixed-N specialists use the same architecture and
+  dynamic support.
+- Exposure: 100 balanced cycles, 16 complete 16-step episodes per N batch,
+  25,600 transitions/N/arm, 128K/arm, 512K tokens/arm, 500 shared steps,
+  100/model and 500 aggregate specialist steps, PPO epoch 1. Zero, final
+  stochastic, and final deterministic evaluation each use 128 episodes/N/arm;
+  bootstrap 10K. Seeds `53053/63053/73053/83053/93053`.
+- Branches: M0 invalidity -> `INVALID_R53_RCMA_WIRING`; M1 specialist failure ->
+  `NO_ACCESS_R53_RCMA_SPECIALISTS`; M0/M1 pass and shared failure ->
+  `VALID_FAIL_R53_SHARED_VARIABLE_N`; full pass ->
+  `PASS_R53_RCMA_VARIABLE_N`, authorizing only same-task exogenous join/leave
+  and membership censoring.
+- Pending launch definitions: exact two member fields and centralized critic
+  fields; zero-denominator/queue-active conventions; initial and update
+  semantics of `previous_queue`; exact arrival-observation-service-expiration
+  order; exact paired evaluation/bootstrap units. These can change the
+  transition kernel or information contract and must not be guessed locally.
+- Prohibited: any R52 rescue; extra budgets/epochs/seeds; changed thresholds,
+  reward, width, capacity, temperature, beam or joint-MAP evaluation; field
+  slots, mean field, skills, variable lifetime, intrinsic reward, shaping,
+  learned admission/order, identity, or parallel routes.
 
 ## EXP-20260716-r52-arfa-g0 — Reliability--Fulfillment Allocation
 
@@ -131,7 +172,9 @@ explicitly approves the exception.
   five deterministic final specialists have `M=1,J=0,U=0`; every block and
   final-minus-zero CI is zero. Shared final `M=J=U=1` for all N is quarantined
   because M1 failed. Retire the exact contract without budget/model/reward/
-  threshold rescue and request one failure review.
+  threshold rescue. GPT-5.6 Pro confirmed the branch, found no wiring defect,
+  and narrowed the reusable conclusion to stochastic-return versus deterministic
+  joint-mode transport. R52 review is complete.
 
 ## EXP-20260716-r51-amdt-g0 — Anonymous Maintenance--Dispatch Task
 
