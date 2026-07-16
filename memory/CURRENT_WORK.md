@@ -13,27 +13,29 @@ Updated: 2026-07-17
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
   exchanges in the existing consultation conversation. Used: `5/8`; remaining:
   `3/8`. Use one only at a real review or launch-clarification boundary.
-- **Divergent review:** one persistent HMASD-rooted Antigravity CLI conversation
-  with `Gemini 3.1 Pro (High)`; every turn uses a tracked question, a local-file
-  manifest and raw-response archival.
+- **Divergent review:** Gemini 3.1 Pro (High) in one live HMASD-rooted local CLI
+  process plus a separate blind GPT-5.6 Pro open-review conversation. They have
+  equal standing. The existing Pro consultation conversation performs only the
+  final convergent audit.
 
 ## Objective
 
-Use the accepted multi-hypothesis/single-experiment workflow to synthesize
-existing R41--R54 evidence before any new implementation. The live portfolio is
-H0 ordinary masked/padded MARL, H1 autoregressive event tokens, H2 anonymous
-dynamic relations and H3 decentralized termination with invariant skill
-context. R55 is paused.
+Run the blind dual-divergent architecture review in
+`docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`, then
+perform one controller synthesis and one convergent Pro audit. Gemini reads the
+eight local papers and HMASD/OPT reference archives; the open Pro reads the
+shared Git-visible pack. R55 remains paused.
 
 ## Next Actions
 
-1. Build one cross-round matrix from existing R41--R54 evidence, original
-   HMASD/OPT material and the curated variable-`N`/variable-time literature.
-2. Identify the smallest existing or shared-testbed observation that separates
-   H0 from at least one of H1--H3 and changes a real integration/stop decision.
-3. Use GPT-5.6 Pro only if a convergent evidence audit remains necessary after
-   that synthesis; do not ask either reviewer to invent an automatic R56.
-4. Keep the uncommitted R55 draft paused; do not test, run or integrate it.
+1. Keep one live Gemini CLI process while it reads the allowlisted local papers
+   and develops its independent divergent review; archive one final clean turn.
+2. Commit/push the shared pack and obtain a blind independent open review in a
+   new GPT-5.6 Pro conversation.
+3. Write the Codex comparison without model-priority weighting, then submit both
+   raw reviews and the synthesis to the existing convergent Pro conversation.
+4. Record one final portfolio and at most one active evidence source or stop.
+   Keep the uncommitted R55 draft paused throughout.
 
 ## Immediate Constraints
 
@@ -340,4 +342,6 @@ context. R55 is paused.
   Pro-confirmed disposition, selected R53 route, and launch clarification.
 - `docs/external-review/gemini_3_1_pro/` — persistent divergent-review workflow,
   source manifests and raw Gemini responses.
+- `docs/external-review/rounds/20260717_variable_n_lifetime_architecture/` —
+  active blind dual-divergent review and final convergence round.
 - `docs/external-review/legacy/` — legacy external-review evidence.

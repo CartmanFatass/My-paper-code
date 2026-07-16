@@ -170,8 +170,9 @@ conversation and returns the raw response. Use browser or Computer Use only
 when the user explicitly authorizes automation for that specific round. Reuse
 the existing consultation conversation and never submit parallel prompts.
 
-Use Pro as a sparse convergent adversarial reviewer, not as the controller that
-automatically invents the next experiment after every FAIL. A Pro exchange is
+Use the dedicated open GPT-5.6 Pro conversation as an independent divergent
+reviewer and the existing `HMASD Algorithm Consultation` conversation as the
+convergent adversarial reviewer. A Pro exchange is
 appropriate only at one of these boundaries:
 
 1. a cross-round architecture audit after several terminal branches or a
@@ -181,29 +182,27 @@ appropriate only at one of these boundaries:
 3. a critical result whose validity or promotion decision cannot be settled
    from the registered contract.
 
-The controller must first supply repository evidence and a concrete Requested
-decision. The review must separate facts from inference, compare the live causal
-hypotheses, inspect the replacement ledger and final-capability map, and may
-decide to stop. A valid FAIL never obliges Pro to produce a successor. Pro may
-revise or rank the portfolio; if work continues it selects at most one active
-evidence source, not one permanently privileged research route. Do not request
-parallel executions.
+The open Pro and Gemini first passes are blind and have equal standing; compare
+their claims by evidence and reasoning, not model identity. The controller then
+archives both raw responses and writes a synthesis. Only the convergent Pro sees
+both outputs, and it may decide to stop or select at most one active evidence
+source. A valid FAIL never obliges either reviewer to produce a successor. Do
+not request parallel executions.
 
 For every handoff, read
 `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md`, replace only its commit
 and question-path placeholders, and include the resulting prompt verbatim in
 the user-facing response.
 
-Use the persistent Antigravity CLI conversation for Gemini 3.1 Pro (High) as a
-divergent architecture reviewer. Its workflow is owned by
-`docs/external-review/gemini_3_1_pro/README.md` and
-`scripts/invoke_gemini_reviewer.ps1`. Every round must contain a tracked
-question and `SOURCE_MANIFEST.md`; the manifest is the complete local-file
-allowlist for that turn. Run in plan and sandbox mode, reuse the HMASD-rooted
-conversation, never use `--dangerously-skip-permissions`, and archive the raw
-response before interpretation. Gemini proposes or challenges hypotheses; it
-does not authorize repository edits, experiments or promotion. Do not run the
-scripted and interactive clients concurrently against the same conversation.
+Use the persistent Antigravity CLI conversation for Gemini 3.1 Pro (High) as
+the other independent divergent reviewer. The round-centric workflow is owned
+by `docs/external-review/README.md`. Gemini may read only the tracked manifest's
+allowlisted local papers and files. Keep one live process for the research
+phase, then one clean non-interactive turn for raw archival; use conversation
+recovery only after failure or restart. Run in plan and sandbox mode, never use
+`--dangerously-skip-permissions`, and never run live and archival clients
+concurrently. No reviewer authorizes repository edits, experiments or
+promotion.
 
 ## State and Memory
 

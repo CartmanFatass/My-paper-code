@@ -21,13 +21,17 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..')).TrimEnd('\')
-$reviewRoot = [System.IO.Path]::GetFullPath(
+$geminiRoot = [System.IO.Path]::GetFullPath(
     (Join-Path $repoRoot 'docs\external-review\gemini_3_1_pro')
 ).TrimEnd('\')
+$roundsRoot = [System.IO.Path]::GetFullPath(
+    (Join-Path $repoRoot 'docs\external-review\rounds')
+).TrimEnd('\')
+$allowedReviewRoots = @($geminiRoot, $roundsRoot)
 $model = 'Gemini 3.1 Pro (High)'
 $agyPath = Join-Path $env:LOCALAPPDATA 'agy\bin\agy.exe'
 $cachePath = Join-Path $HOME '.gemini\antigravity-cli\cache\last_conversations.json'
-$briefPath = Join-Path $reviewRoot 'REVIEWER_BRIEF.md'
+$briefPath = Join-Path $geminiRoot 'REVIEWER_BRIEF.md'
 
 function Resolve-ExistingFile {
     param(
@@ -45,22 +49,22 @@ function Resolve-ExistingFile {
     return [System.IO.Path]::GetFullPath($resolved)
 }
 
-function Assert-UnderDirectory {
+function Assert-UnderAllowedReviewRoot {
     param(
         [Parameter(Mandatory = $true)]
         [string]$Path,
 
         [Parameter(Mandatory = $true)]
-        [string]$Directory,
-
-        [Parameter(Mandatory = $true)]
         [string]$Label
     )
 
-    $prefix = $Directory.TrimEnd('\') + '\'
-    if (-not $Path.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-        throw "$Label must stay under ${Directory}: $Path"
+    foreach ($root in $allowedReviewRoots) {
+        $prefix = $root.TrimEnd('\') + '\'
+        if ($Path.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            return
+        }
     }
+    throw "$Label must stay under an approved external-review root: $Path"
 }
 
 function Get-ConversationId {
@@ -138,13 +142,13 @@ if (-not (Test-Path -LiteralPath $agyPath -PathType Leaf)) {
 }
 
 $questionFullPath = Resolve-ExistingFile -Path $QuestionPath -Label 'QuestionPath'
-Assert-UnderDirectory -Path $questionFullPath -Directory $reviewRoot -Label 'QuestionPath'
+Assert-UnderAllowedReviewRoot -Path $questionFullPath -Label 'QuestionPath'
 
 if ([string]::IsNullOrWhiteSpace($SourceManifestPath)) {
     $SourceManifestPath = Join-Path (Split-Path -Parent $questionFullPath) 'SOURCE_MANIFEST.md'
 }
 $manifestFullPath = Resolve-ExistingFile -Path $SourceManifestPath -Label 'SourceManifestPath'
-Assert-UnderDirectory -Path $manifestFullPath -Directory $reviewRoot -Label 'SourceManifestPath'
+Assert-UnderAllowedReviewRoot -Path $manifestFullPath -Label 'SourceManifestPath'
 
 if ([string]::IsNullOrWhiteSpace($ResponsePath)) {
     $ResponsePath = Join-Path (Split-Path -Parent $questionFullPath) 'GEMINI_3_1_PRO_RESPONSE_RAW.md'
@@ -156,7 +160,7 @@ if ([System.IO.Path]::IsPathRooted($ResponsePath)) {
         (Join-Path (Get-Location).Path $ResponsePath)
     )
 }
-Assert-UnderDirectory -Path $responseFullPath -Directory $reviewRoot -Label 'ResponsePath'
+Assert-UnderAllowedReviewRoot -Path $responseFullPath -Label 'ResponsePath'
 
 $question = Get-Content -Raw -LiteralPath $questionFullPath
 $manifest = Get-Content -Raw -LiteralPath $manifestFullPath
