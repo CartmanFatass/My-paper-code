@@ -16,19 +16,19 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close the Pro-confirmed `VALID_FAIL_R48_SBRS` boundary. Fixed-`N`
-skill/lifetime algorithm exploration is stopped without rescue. The only
-remaining research question is the independent `R49-ORSE-G0` architecture
-gate for a variable active set and set-equivariant active-only autoregressive
-roster interface; it carries no skill, lifetime, task, or cooperation claim.
+Execute the user-authorized `R49-ORSE-G0` architecture gate for a variable
+active set and set-equivariant active-only autoregressive roster interface.
+Fixed-`N` skill/lifetime work remains stopped. R49 carries no skill, lifetime,
+task, intrinsic-reward, or cooperation claim.
 
 ## Next Actions
 
-1. Archive the final R48 Pro response and push the accepted disposition.
-2. Preserve `R49-ORSE-G0` as planned only. Do not implement or launch it until
-   the user authorizes the new stage; the five-round automatic-review quota is
-   exhausted.
-3. Do not resume fixed-`N` skill/lifetime work.
+1. Commit and push the isolated R49 module and local CPU runner after the
+   successful focused dry-run.
+2. Run the unchanged full deterministic CPU gate and interpret only its
+   registered PASS, VALID_FAIL, or INVALID branch.
+3. Commit and push the terminal result. Do not perform automatic Pro review;
+   the prior five-round quota is exhausted.
 
 ## Immediate Constraints
 
@@ -43,7 +43,8 @@ roster interface; it carries no skill, lifetime, task, or cooperation claim.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.
-- `R49-ORSE-G0` is a new architecture-only stage and is not launch-authorized.
+- `R49-ORSE-G0` is authorized for local CPU implementation, execution, and Git
+  push. Environment training and automatic external review are not authorized.
 - R43 run
   `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` completed
   `INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, but fixed final win/key0/key1 was

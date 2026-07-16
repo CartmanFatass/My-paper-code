@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Planned, Not Authorized
+## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Authorized
 
 R48 closed fixed-`N` skill/lifetime exploration. R49 is a separate,
 architecture-only question: can a variable active set support a
@@ -39,8 +39,15 @@ tensor. `PASS_R49_ORSE_ARCHITECTURE` authorizes only a default-off,
 cross-episode exogenous variable-`N` compatibility step. A valid fail retires
 this exact Deep-Sets/open-roster interface without graph, Transformer, model,
 budget, or threshold rescue and stops the current project line. An invalid
-result permits repair only of the named wiring defect. No implementation or
-launch is authorized yet.
+result permits repair only of the named wiring defect.
+
+The isolated implementation uses `scripts/r49_orse.py`,
+`scripts/run_r49_orse_gate.py`, and `scripts/run_r49_orse_local.ps1`. A
+16-case dry-run covered every registered active size. M0 and M1 passed:
+permutation-logit error `2.98e-8`, padding error `0`, incremental/full-logit
+error `2.98e-8`, replay error `0`, prefix-actionability support `1.0` with
+median norm `0.19955`, and zero complexity violations. Its transient output
+was removed. This authorizes only the unchanged full CPU gate.
 
 ## R48-SBRS-G0 Skill-Boundary Recurrent State — Pro-Confirmed Valid Fail
 
