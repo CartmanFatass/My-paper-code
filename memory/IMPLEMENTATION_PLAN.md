@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## ARES-SMDP / R54-HFSR-G0 — Active Representation Gate
+## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 
 GPT-5.6 Pro selected `ARES-SMDP` as the only literature-informed architecture
 sequence. The first candidate gate is a Level-0 supervised representation test:
@@ -38,9 +38,9 @@ only its serial research and probability/event contracts; HFSR, fixed slots,
 reconstruction residual selection and full-set attention are not active
 architecture candidates.
 
-## R55-ABRP-G0 — Direct Relational Replacement
+## R55-ABRP-G0 — Paused Direct Relational Candidate
 
-The sole active design replaces global member-set representation with a shared
+The drafted design replaces global member-set representation with a shared
 focal-member/candidate-entity edge scorer. Its anonymous typed-backlog toy uses
 stable `N={4,8,12,16}`, four balanced capability/requirement types, horizon 8,
 N productive unit-capacity queues plus anonymous idle, one arrival per queue per
@@ -55,6 +55,13 @@ PPO epoch, 100 shared steps and 100 steps per specialist. The archived R54 Pro
 response owns the complete M0/M1/M2 thresholds and no-rescue branches. Add only
 an isolated toy/model/gate/local runner, then one focused M0 check; do not touch
 the existing controller.
+
+R55 is paused before testing or launch. The first persistent Gemini review and
+controller disposition found that it does not currently distinguish the live
+H0--H3 hypotheses for the joint target. Cross-round evidence synthesis now
+precedes any implementation. R55 can proceed only if that synthesis establishes
+new discriminating value; otherwise repurpose or retire the uncommitted draft.
+No result may automatically authorize R56 or another toy.
 
 ## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 

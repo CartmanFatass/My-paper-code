@@ -13,20 +13,27 @@ Updated: 2026-07-17
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
   exchanges in the existing consultation conversation. Used: `5/8`; remaining:
   `3/8`. Use one only at a real review or launch-clarification boundary.
+- **Divergent review:** one persistent HMASD-rooted Antigravity CLI conversation
+  with `Gemini 3.1 Pro (High)`; every turn uses a tracked question, a local-file
+  manifest and raw-response archival.
 
 ## Objective
 
-Prepare the isolated `R55-ABRP-G0` ordinary variable-N gate selected by Pro.
-It replaces global set representation with direct anonymous member-entity edge
-scoring; it does not add a module to the current controller.
+Use the accepted multi-hypothesis/single-experiment workflow to synthesize
+existing R41--R54 evidence before any new implementation. The live portfolio is
+H0 ordinary masked/padded MARL, H1 autoregressive event tokens, H2 anonymous
+dynamic relations and H3 decentralized termination with invariant skill
+context. R55 is paused.
 
 ## Next Actions
 
-1. Commit/push the complete R54 Pro response and exact disposition.
-2. Implement only the isolated 3,906-parameter R55 direct-edge toy gate and one
-   focused M0 check.
-3. Do not integrate it into the controller or add slots, GNN, mean-field,
-   membership change, variable time, skills or intrinsic reward.
+1. Build one cross-round matrix from existing R41--R54 evidence, original
+   HMASD/OPT material and the curated variable-`N`/variable-time literature.
+2. Identify the smallest existing or shared-testbed observation that separates
+   H0 from at least one of H1--H3 and changes a real integration/stop decision.
+3. Use GPT-5.6 Pro only if a convergent evidence audit remains necessary after
+   that synthesis; do not ask either reviewer to invent an automatic R56.
+4. Keep the uncommitted R55 draft paused; do not test, run or integrate it.
 
 ## Immediate Constraints
 
@@ -175,6 +182,9 @@ scoring; it does not add a module to the current controller.
   the HFSR branch is closed. The only successor is `R55-ABRP-G0`, which replaces
   global set context with direct member-entity edge scoring on an anonymous
   typed-backlog toy before any dynamic-membership or time work.
+- Gemini's first persistent review confirmed harmful unique-successor drift and
+  returned `PAUSE` for R55. The controller accepted this with modification:
+  R55 has an untested, uncommitted draft only and is not the active experiment.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
@@ -328,4 +338,6 @@ scoring; it does not add a module to the current controller.
   failure-review question.
 - `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` — raw R52 result,
   Pro-confirmed disposition, selected R53 route, and launch clarification.
+- `docs/external-review/gemini_3_1_pro/` — persistent divergent-review workflow,
+  source manifests and raw Gemini responses.
 - `docs/external-review/legacy/` — legacy external-review evidence.

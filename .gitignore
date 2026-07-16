@@ -55,6 +55,7 @@ data/
 # Exact R27-G2 design/review evidence is durable project state.
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
 !docs/external-review/R27_G2_design_review_20260712_Claude.md
+!docs/external-review/gemini_3_1_pro/**/*.md
 !docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md
 # LTM holds the rotated long-form history the compact files point at. It is the
 # archive half of the compact-memory contract, so it must be tracked too.

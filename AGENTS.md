@@ -27,18 +27,23 @@ heartbeat in the main conversation. Record controller changes in
 
 ## Research Loop
 
-HMASD is an algorithm-exploration project. Use this cycle:
+HMASD is an algorithm-exploration project. At architecture or research-direction
+boundaries, keep two to four competing causal hypotheses while serializing
+execution to one evidence source at a time:
 
 ```text
-one falsifiable causal question
--> smallest implementation or diagnostic that can answer it
+live hypothesis portfolio
+-> one falsifiable question that separates at least two hypotheses
+-> smallest implementation, reanalysis or diagnostic that can answer it
 -> smallest evidence-bearing controlled run
 -> scientific interpretation
--> one next causal edge
+-> update, retire or merge hypotheses; integrate one edge or stop
 ```
 
 Progress means new algorithm capability, new experimental evidence, or a
-decision that eliminates a branch and selects the next edge. Documentation,
+decision that materially changes the hypothesis portfolio. Multiple hypotheses
+do not authorize parallel implementation or training; choose the active
+experiment by information gain and relevance to the final target. Documentation,
 status prose, audits, artifact inventories, repeated state checks, and workflow
 discussion are support work, not the primary objective.
 
@@ -56,6 +61,22 @@ demonstrative.
 Diagnose an operational crash and retry only the failed path. Apply the research
 failure-review gate only to a valid non-PASS scientific result. Preserve its
 registered estimand, thresholds, and outcome branches.
+
+Do not turn terminal toy results into an automatic sequence of new toys. Every
+toy must test a capability that is necessary for the final target: one shared
+algorithm with variable team membership and variable skill lifetime. Before a
+new route is implemented, record in its review question:
+
+- the final capability it unlocks and what later integration would consume it;
+- a replacement ledger: what is deleted, retained, and added;
+- at least two competing causal explanations for the current evidence and the
+  smallest observation that separates them;
+- the strongest ordinary baseline or standard-MARL objection;
+- the one active evidence source, its outcome-dependent portfolio updates and
+  abandonment condition, or an explicit stop.
+
+Prefer architectural replacement and simplification over module accumulation.
+Passing an isolated mechanism gate does not by itself authorize integration.
 
 ## Repository and Runtime
 
@@ -149,10 +170,40 @@ conversation and returns the raw response. Use browser or Computer Use only
 when the user explicitly authorizes automation for that specific round. Reuse
 the existing consultation conversation and never submit parallel prompts.
 
+Use Pro as a sparse convergent adversarial reviewer, not as the controller that
+automatically invents the next experiment after every FAIL. A Pro exchange is
+appropriate only at one of these boundaries:
+
+1. a cross-round architecture audit after several terminal branches or a
+   contradiction in the current causal model;
+2. design review of a coherent route that could connect to the final
+   variable-`N` plus variable-lifetime algorithm;
+3. a critical result whose validity or promotion decision cannot be settled
+   from the registered contract.
+
+The controller must first supply repository evidence and a concrete Requested
+decision. The review must separate facts from inference, compare the live causal
+hypotheses, inspect the replacement ledger and final-capability map, and may
+decide to stop. A valid FAIL never obliges Pro to produce a successor. Pro may
+revise or rank the portfolio; if work continues it selects at most one active
+evidence source, not one permanently privileged research route. Do not request
+parallel executions.
+
 For every handoff, read
 `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md`, replace only its commit
 and question-path placeholders, and include the resulting prompt verbatim in
 the user-facing response.
+
+Use the persistent Antigravity CLI conversation for Gemini 3.1 Pro (High) as a
+divergent architecture reviewer. Its workflow is owned by
+`docs/external-review/gemini_3_1_pro/README.md` and
+`scripts/invoke_gemini_reviewer.ps1`. Every round must contain a tracked
+question and `SOURCE_MANIFEST.md`; the manifest is the complete local-file
+allowlist for that turn. Run in plan and sandbox mode, reuse the HMASD-rooted
+conversation, never use `--dangerously-skip-permissions`, and archive the raw
+response before interpretation. Gemini proposes or challenges hypotheses; it
+does not authorize repository edits, experiments or promotion. Do not run the
+scripted and interactive clients concurrently against the same conversation.
 
 ## State and Memory
 

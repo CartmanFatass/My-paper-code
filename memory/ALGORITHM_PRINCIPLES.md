@@ -1056,11 +1056,28 @@ Before launching a meaningful experiment, register in the accepted plan and
 - metrics, thresholds, nulls, seeds, timesteps, and optimizer-update exposure;
 - PASS, FAIL, MIXED, UNDERPOWERED, INVALID, and crash branches;
 - the only next action authorized by each branch;
+- which live hypotheses each scientific outcome strengthens, weakens, retires
+  or leaves unidentified;
 - changes prohibited while the gate remains open.
 
 Experiments are evidence for claims, not disposable module trials. Preserve
 negative results as constraints. Do not silently rename, delete, reinterpret,
 or rerun a failed line until it looks favorable.
+
+### Hypothesis Portfolio and Serialized Execution
+
+At architecture or research-direction boundaries, maintain two to four
+structurally distinct explanations for the current evidence. A hypothesis must
+state what it replaces, retains and adds, how it reaches the final variable-team
+plus variable-skill-lifetime capability, and the strongest ordinary-MARL
+reduction of its claim.
+
+The portfolio is epistemic; execution is serial. Select at most one reanalysis,
+diagnostic or experiment by expected information gain and final-target
+relevance. It is admissible only when at least two possible outcomes would
+change relative support or cause a real stop/integration decision. A PASS on an
+isolated toy does not authorize integration, and a FAIL does not create an
+obligation to invent a successor gate.
 
 ### Four-Level Baseline Hierarchy
 
@@ -1122,7 +1139,8 @@ new core algorithm change or reward experiment. Separate:
 - optimization or capacity failures;
 - confounded or incomparable task evidence;
 - reusable negative conclusions;
-- unresolved hypotheses and the single next causal edge.
+- the revised hypothesis portfolio and, if needed, one active discriminating
+  evidence source.
 
 If two related gates fail or the proposed action changes research direction,
 produce a cross-round failure matrix and baseline matrix from existing
