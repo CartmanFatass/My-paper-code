@@ -4,6 +4,32 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Clarification Pending
+
+GPT-5.6 Pro confirmed R46 as a valid learned Q/DR sign-transport failure and
+selected one upstream reward-off successor:
+
+```text
+natural task-blind process support
+-> stable persistent process modes
+-> skill-conditioned causal mode occupancy
+```
+
+The accepted fixed boundary is local CUDA, `N=2`, `K=4`, `k0=W=10`, 64 natural
+reset groups, 512 natural windows, 64 forced-skill contexts, two replicas per
+skill, `H=40`, and 20,480 causal branch steps. Forced branches never fit or
+align the mode basis. Policy, high, critic, and intrinsic optimizer exposure is
+zero, and external reward is never read.
+
+Implementation is paused at a single launch-exact clarification. The current
+repository exposes only a position-only `[agent,2]` `intrinsic_effect_view`; it
+does not define the proposed seven-dimensional relative-moment view, spectral
+operator, natural-window sampling, nuisance statistic, OOD rule, or forced
+branch aggregation. These choices alter the estimand and must be fixed before
+code or a formal contract is written. After clarification, use only a standalone
+gate plus analyzer/runner boundary; do not modify the source environment,
+normal trainer, reward, or low actor.
+
 ## R46-HMRV-G0 Heterogeneous-Maintenance Positive Control — Completed and Retired
 
 GPT-5.6 Pro confirmed R45 and selected one new substrate-level causal edge:
@@ -29,8 +55,11 @@ The formal local CUDA run completed at
 were exact, agent/action ESS exceeded `4,700`, and true-Q beat its action-blind
 sham with a positive ratio-gain lower bound. M3 failed because agent 0's top
 quartile remained renewal-negative and pooled plus both ordered-role-stratum
-predicted-sign discordance were exactly zero. The exact HMRV dynamics,
-three-block estimand, and substrate are retired without rescue. No renewal
+predicted-sign discordance were exactly zero. Direct enumeration then showed
+that the finite dynamics contain oracle sign heterogeneity; the valid failure is
+therefore the registered learned Q/DR sign-transport line, not the transition
+kernel itself. The exact dynamics/estimand/context/critic/read combination is
+retired without rescue. No renewal
 actor, S7, open-roster, or variable-`N` implementation is authorized before
 the result review selects one structurally different edge.
 

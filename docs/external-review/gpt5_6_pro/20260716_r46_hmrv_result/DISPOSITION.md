@@ -7,9 +7,9 @@ Date: 2026-07-16
 `VALID_FAIL_R46_HMRV_SUBSTRATE`
 
 The registered local CUDA gate is implementation-valid. Balanced Bernoulli
-support and the true-Q comparator exposed action-specific delayed value, but the
-exact heterogeneous-maintenance dynamics did not produce the registered
-same-check agent/context-specific sign heterogeneity.
+support and the true-Q comparator exposed a small action-conditioned prediction
+gain, but the registered learned `6 -> 32` Q/DR pipeline did not recover the
+required same-check agent/context-specific sign heterogeneity.
 
 ## Direct evidence
 
@@ -31,12 +31,18 @@ same-check agent/context-specific sign heterogeneity.
 
 ## Binding conclusion
 
-The positive-control support and prediction path work, but the registered
-process does not create the required simultaneous KEEP-versus-RENEW sign split.
-Under the pre-registered branch, the exact HMRV dynamics, three-block estimand,
-and positive-control substrate are retired without seed, data, capacity,
-threshold, clipping, reward, or environment rescue.
+The support contract works, but the registered learned Q/DR sign-transport path
+does not recover the required simultaneous KEEP-versus-RENEW sign split. Direct
+enumeration of the registered finite process shows that the transition kernel
+itself does contain oracle sign heterogeneity; this run therefore must not be
+interpreted as evidence that heterogeneous renewal value is absent. Under the
+pre-registered branch, the exact combination of HMRV dynamics, three-block
+estimand, six-field context, `6 -> 32` true-Q/action-blind-sham estimator, and
+M2/M3 read is retired without seed, data, capacity, threshold, clipping, reward,
+or environment rescue.
 
-This result does not authorize S7, open-roster, variable-N, a renewal actor, or
-task/environment-specific intrinsic reward. A successor requires one
-structurally different causal edge selected through the result review.
+GPT-5.6 Pro selected one structurally different successor:
+`R47-NSOPM-G0`, a reward-off gate from natural task-blind process support to
+stable process modes and then skill-conditioned causal mode occupancy. It does
+not authorize S7, open-roster, variable-N, a renewal actor, or
+task/environment-specific intrinsic reward.

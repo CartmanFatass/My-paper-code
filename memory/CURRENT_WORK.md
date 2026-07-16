@@ -12,27 +12,29 @@ Updated: 2026-07-16
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized up to five automated GPT-5.6 Pro
   follow-ups after the manually submitted R45 review. Automatic submissions
-  used: `1/5`; reuse the existing `算法探索与交接摘要` conversation only.
+  used: `2/5`; reuse the existing `算法探索与交接摘要` conversation only.
 
 ## Objective
 
-Review the valid `R46-HMRV-G0` heterogeneous-maintenance substrate failure and
-select at most one structurally different fixed-`N` causal edge. R45 found
-strong action-conditioned predictive information, but natural KEEP support was
-insufficient and renewal value was almost universally common-mode positive,
-not agent-specific sign-changing timing value.
+Close the launch-exact contract for `R47-NSOPM-G0`, then run its smallest local
+CUDA reward-off gate. R46 is a valid learned Q/DR sign-transport failure, but
+direct finite-state enumeration shows that its transition kernel itself does
+contain oracle sign heterogeneity. Timing-only substrate search is closed; the
+new causal edge is natural task-blind process support to stable process modes to
+skill-conditioned causal mode occupancy.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the R46 result JSON, disposition, and tracked review
-   question.
-2. Use automatic Pro submission `2/5` for the registered result review in the
-   existing consultation conversation.
-3. Archive the response and implement only its single accepted next edge, if
-   one remains justified under the bounded automatic workflow.
+1. Commit and push the corrected R46 disposition and the R47 launch-exact
+   clarification question.
+2. Use automatic Pro submission `3/5` in the existing consultation conversation
+   because the repository has no exact seven-dimensional view or spectral
+   estimator definition.
+3. Archive the response, register its single exact contract, implement the
+   standalone gate, and run only the bounded local CUDA experiment it authorizes.
 
 ## Immediate Constraints
 
@@ -103,10 +105,13 @@ must not renew surviving agents' skills.
   authorized.
 - Formal R46 run `logs/r46_hmrv_64k_20260716_154508` completed valid
   `VALID_FAIL_R46_HMRV_SUBSTRATE`. M0/M1/M2 passed, but agent 0's top quartile
-  remained renewal-negative and pooled plus both ordered-role-stratum sign
-  discordance were exactly zero. The exact HMRV dynamics, three-block
-  estimand, and substrate are retired without seed, data, capacity, threshold,
-  clipping, reward, or environment rescue.
+  remained renewal-negative and pooled plus both ordered-role-stratum learned
+  sign discordance were exactly zero. Direct enumeration found oracle sign
+  discordance near `0.5675`, so the binding failure is learned Q/DR sign
+  transport, not absence of heterogeneous value in the transition kernel. The
+  exact dynamics/estimand/context/critic/read combination is retired without
+  rescue. GPT-5.6 Pro selected only `R47-NSOPM-G0`; its launch-exact process
+  view and spectral definitions are pending one clarification round.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
@@ -143,4 +148,6 @@ must not renew surviving agents' skills.
   failure, raw R45 selection response, and accepted disposition.
 - `docs/external-review/gpt5_6_pro/20260716_r45_sdra_result/` — valid R45
   result, controller disposition, and next-edge review question.
+- `docs/external-review/gpt5_6_pro/20260716_r46_hmrv_result/` — valid R46
+  result, corrected disposition, raw Pro response, and R47 launch clarification.
 - `docs/external-review/legacy/` — legacy external-review evidence.
