@@ -16,19 +16,19 @@ Updated: 2026-07-16
 
 ## Objective
 
-Obtain one GPT-5.6 Pro design for a lightweight toy environment whose dynamics
-and cooperation genuinely change with active team size while remaining usable
-for a later variable-skill-lifetime test. Existing Alice--Bob is fixed `N=2`;
-R50 was a synthetic roster bandit and is not task-level evidence.
+Close one launch-critical exposure clarification for the accepted
+`R51-AMDT-G0` Anonymous Maintenance--Dispatch Task. The environment, model,
+reward, comparator, gates, and branches are accepted; only the inconsistent
+320K-transition versus 3,125-optimizer-step arithmetic remains open.
 
 ## Next Actions
 
-1. Commit/push the tracked variable-team toy design question and R50 result
-   evidence.
-2. Give the user the fixed manual GPT-5.6 Pro handoff prompt. Archive the raw
-   response before interpretation.
-3. Do not implement an environment or launch another experiment until the
-   returned design is dispositioned.
+1. Commit/push the archived raw R51 design response, controller disposition,
+   and launch clarification question.
+2. Give the user the fixed manual GPT-5.6 Pro prompt for the single exposure
+   clarification; archive the returned raw response before interpretation.
+3. Do not implement AMDT or register a formal launch until the corrected
+   optimizer/exposure table is confirmed.
 
 ## Immediate Constraints
 
@@ -51,6 +51,16 @@ R50 was a synthetic roster bandit and is not task-level evidence.
   sparse shared external reward, no shaping or environment-specific intrinsic,
   local fast iteration, and one evidence-bearing gate that separates
   environment no-access from shared-variable-N failure.
+- GPT-5.6 Pro accepted those requirements and selected only `R51-AMDT-G0`:
+  a 32-step anonymous maintenance--dispatch assignment graph with stable
+  cross-episode `N in {2,3,4,5,6}`, persistent stations, short jobs, terminal
+  success reward, a shared set-pointer policy, and fixed-N specialists as the
+  ordinary-access prerequisite. The route is accepted pending exposure
+  clarification.
+- The raw R51 table states 320K transitions, 64K per N, 16 envs, 32-step
+  rollouts and PPO epoch 1, which yields 125 N-specific batches per N and 625
+  shared steps. Its simultaneous 3,125 shared / 625-per-specialist counts imply
+  five data passes or 1.6M transitions. This is the only open question.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
