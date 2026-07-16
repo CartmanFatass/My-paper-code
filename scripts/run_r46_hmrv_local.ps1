@@ -97,9 +97,12 @@ function Invoke-LoggedProcess {
     )
     Push-Location $ProjectRoot
     try {
+        $savedErrorActionPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
         & $Executable @Arguments 1> $StdoutPath 2> $StderrPath
         $exitCode = $LASTEXITCODE
     } finally {
+        $ErrorActionPreference = $savedErrorActionPreference
         Pop-Location
     }
     if ($exitCode -ne 0) {

@@ -5,8 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import os
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -51,21 +49,10 @@ def load_json(path: Path) -> dict[str, Any]:
         return json.load(stream)
 
 
-def atomic_json(path: Path, payload: dict[str, Any]) -> None:
+def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(
-        prefix=path.name + ".", suffix=".tmp", dir=path.parent
-    )
-    os.close(descriptor)
-    temporary_path = Path(temporary)
-    try:
-        with temporary_path.open("w", encoding="utf-8") as stream:
-            json.dump(payload, stream, indent=2, sort_keys=True, allow_nan=False)
-            stream.write("\n")
-        temporary_path.replace(path)
-    finally:
-        if temporary_path.exists():
-            temporary_path.unlink()
+    serialized = json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    path.write_text(serialized, encoding="utf-8")
 
 
 def interval(replicates: np.ndarray, point: float) -> dict[str, float]:
@@ -687,7 +674,7 @@ def main() -> None:
             "no S7, open-roster, or variable-N promotion without the registered PASS",
         ],
     }
-    atomic_json(result_path, payload)
+    write_json(result_path, payload)
     print(f"R46 analysis complete: status={status}; result={result_path}")
 
 
