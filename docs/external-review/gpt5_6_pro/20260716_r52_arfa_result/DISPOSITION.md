@@ -71,3 +71,23 @@ both queue classes, so the registered persistent-only and burst-only `U=0`
 controls are not executable for all N. No smoke or training was launched and
 the temporary implementation was removed. R53 launch authorization is
 suspended pending one action-contract correction.
+
+## R53 feasibility correction result
+
+Automatic exchange 2/8 returned
+`CORRECT_R53_RCMA_G0_ACTION_CONTRACT`. The minimum correction is one explicit
+anonymous idle/abstain entity with raw capacity N. Source: GPT-5.6 Pro,
+2026-07-16; disposition: accept as the binding R53 action contract. The N+1
+productive queues retain unit capacity. Idle participates in the same
+seven-dimensional entity
+encoder, mean pool, episode permutation, pointer key, replay ledger, and focal
+previous-action relation; it creates no arrival, service, deadline, completion,
+or reward contribution. Full pointer support is therefore N+2 while the model
+remains exactly 24,737 parameters.
+
+This resolves the contradiction without weakening a negative control:
+constructive, persistent-only, and burst-only schedules now yield
+`(F_P,F_B,U)=(1,1,1),(1,0,0),(0,1,0)` for every registered N. The reward,
+128K-transition exposure, optimizer counts, M1/M2 thresholds, statistics, and
+no-rescue boundary are unchanged. R53 implementation, one focused M0 smoke,
+and the registered local CUDA gate are authorized again.

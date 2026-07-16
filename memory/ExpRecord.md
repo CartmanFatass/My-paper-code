@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r53-rcma-g0 | blocked -- action contract internally inconsistent | residual-capacity masked variable-N queue allocation | R52 external-review folder | automatic Pro correction 2/8 | mandatory injective actions force both service classes; registered one-class U=0 controls are infeasible | No implementation or launch until action set and negative controls are corrected for every N |
+| EXP-20260716-r53-rcma-g0 | launch-ready -- focused CUDA M0 pass | residual-capacity masked variable-N queue allocation | isolated R53 module/runner; R52 external-review folder | prelaunch commit/push | all M0 checks pass; idle capacity N makes all three schedules executable; probability and checkpoint contracts exact | Commit/push once, then run the registered 128K local gate |
 | EXP-20260716-r52-arfa-g0 | completed -- Pro-confirmed `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | complete | M0 pass; stochastic carrier passes every N; all deterministic specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52; reuse only the conclusion that stochastic return does not guarantee greedy joint-mode transport |
 | EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
@@ -75,22 +75,23 @@ explicitly approves the exception.
 
 ## EXP-20260716-r53-rcma-g0 — Residual-Capacity Masked Autoregression
 
-- Status: GPT-5.6 Pro returned `CONFIRM_R53_RCMA_G0_LAUNCH_EXACT` in automatic
-  exchange 1/8; isolated implementation, one focused M0 smoke, and the
-  unchanged local gate are authorized.
-- Correction: implementation was stopped before any run because mandatory
-  injective selection forces at least `B-1` burst services at each burst wave
-  and at least `P-1` persistent services at each persistent-arrival step. The
-  registered persistent-only/burst-only `U=0` schedules are therefore not
-  executable for all N. Launch authorization is suspended pending exchange 2/8.
+- Status: automatic exchange 2/8 returned
+  `CORRECT_R53_RCMA_G0_ACTION_CONTRACT`; the corrected isolated implementation
+  and focused CUDA M0 smoke are complete. The registered formal local gate is
+  launch-ready after one prelaunch commit/push.
+- Correction: the complete action set is N+1 productive queues plus one
+  anonymous idle entity. Productive capacity is one and idle capacity is N.
+  This preserves productive injectivity while making all three registered M0
+  schedules executable.
 - Causal edge: observable residual queue capacity -> capacity-feasible
   autoregressive support -> high-value stochastic mass -> stable deterministic
   joint mode -> valid shared variable-N comparison.
 - Environment: anonymous multi-rate queue allocation with episode-stable
   `N={2,3,4,5,6}`, `P=floor(N/2)` persistent queues, `B=N+1-P` burst queues,
-  `K=N+1`, horizon 16, persistent arrivals at even steps, burst waves at 3/9,
-  and a three-step burst deadline. Each selected nonempty queue serves one;
-  residual capacity makes duplicate same-step selection impossible.
+  `Q=N+1` productive queues, full pointer support `K=N+2`, horizon 16,
+  persistent arrivals at even steps, burst waves at 3/9, and a three-step burst
+  deadline. Each selected nonempty productive queue serves one; idle has no
+  transition or reward effect.
 - Reward: zero at all intermediate steps; terminal
   `F_P=1-final_persistent_backlog/(8P)`,
   `F_B=timely_burst_completions/(2B)`, and `U=sqrt(F_P*F_B)`. No shaping,
@@ -110,13 +111,16 @@ explicitly approves the exception.
   `PASS_R53_RCMA_VARIABLE_N`, authorizing only same-task exogenous join/leave
   and membership censoring.
 - Launch-exact closure: actor member fields are `has_previous_queue` and
-  `served_previous_step`; all K queues remain active; zero denominators map to
-  zero; previous queue starts absent and updates even after empty selection;
+  `served_previous_step`; all K action entities remain structurally active;
+  zero denominators map to zero; previous action starts absent and updates even
+  after idle or empty productive selection;
   arrivals precede observation, service precedes deadline decrement, and burst
   service windows are `{3,4,5}` and `{9,10,11}`. The critic sees only pooled
   embeddings plus `[t/16, persistent_backlog/(8P), persistent_served/(8P),
   timely_burst/(2B)]`. Evaluation uses one paired 128-episode ledger/N and
-  paired episode-cluster bootstrap.
+  paired episode-cluster bootstrap. Idle shares the entity encoder, pool,
+  presentation, pointer key, replay, and previous-action relation; raw residual
+  capacity is the only dynamic mask. The exact model count remains 24,737.
 - Prohibited: any R52 rescue; extra budgets/epochs/seeds; changed thresholds,
   reward, width, capacity, temperature, beam or joint-MAP evaluation; field
   slots, mean field, skills, variable lifetime, intrinsic reward, shaping,

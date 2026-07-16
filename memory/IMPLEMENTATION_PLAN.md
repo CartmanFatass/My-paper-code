@@ -4,35 +4,38 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R53-RCMA-G0 Variable-N Queue Allocation — Action Correction Required
+## R53-RCMA-G0 Variable-N Queue Allocation — Corrected Launch Exact
 
-The sole selected next edge is residual-capacity masked autoregression in an
+The sole selected edge is residual-capacity masked autoregression in an
 anonymous multi-rate queue task. Each autoregressive token sees the remaining
-unit capacity of every queue, and a queue selected by an earlier token is
-removed from later support. The comparison remains one shared N-independent
-policy against five architecture-identical fixed-N specialists with equal
-aggregate exposure and specialists as the binding access prerequisite.
+capacity of every action entity. Productive queues have unit capacity; one
+anonymous idle/abstain entity has capacity N. The comparison remains one shared
+N-independent policy against five architecture-identical fixed-N specialists
+with equal aggregate exposure and specialists as the binding access
+prerequisite.
 
-Implement only the accepted launch-exact contract. The actor member fields are
-`has_previous_queue` and `served_previous_step`; the critic has four task-state
-scalars but the actor cannot read them. All queues remain action-active, and
-residual capacity is the sole feasibility mask. Arrivals occur before the
-observation, service before deadline decrement, and previous-queue state updates
-after service even when the selected queue was empty. The model must contain
-exactly 24,737 parameters.
+Implement only the corrected launch-exact contract. The actor member fields are
+`has_previous_queue` and `served_previous_step`; the critic has four
+task-state scalars but the actor cannot read them. The N+1 productive queues and
+one idle entity are always structurally active, and raw residual capacity is the
+sole feasibility mask. Idle enters the same seven-dimensional entity encoder,
+mean pool, presentation permutation, pointer key, replay ledger, and
+previous-action relation. It has no arrival, service, deadline, or reward
+effect. The model remains exactly 24,737 parameters.
 
-Use the registered 100 balanced cycles, 16 envs, horizon/rollout 16, 128K
-transitions and 500 optimizer steps per arm, with 100 steps per fixed-N
-specialist. Run one focused M0 smoke, then the unchanged local CUDA gate. No
-field-slot, mean-field, skill, lifetime, intrinsic, shaping, beam-search,
-joint-MAP, extra exposure, or R52 rescue work may enter this stage.
+Use 100 balanced cycles, 16 environments, horizon/rollout 16, 128K transitions
+and 500 optimizer steps per arm, with 100 steps per fixed-N specialist.
+Constructive, persistent-only, and burst-only schedules must produce
+`(F_P,F_B,U)=(1,1,1),(1,0,0),(0,1,0)` for every N. Run one focused M0 smoke,
+then the unchanged local CUDA gate. No field-slot, mean-field, skill, lifetime,
+intrinsic, shaping, beam-search, joint-MAP, extra exposure, or R52 rescue work
+may enter this stage.
 
-Implementation is paused before smoke. With N mandatory distinct choices among
-N+1 productive queues, at least `B-1` burst queues must be served at each burst
-wave, while at least `P-1` persistent queues must be served at each persistent
-arrival. The registered one-class `U=0` controls cannot be constructed. Remove
-temporary code and obtain one minimal launch correction; do not silently drop
-the controls or invent an idle action locally.
+Implementation status: the isolated module, gate, and local runner are complete.
+The focused CUDA M0 smoke passed the three scripted schedules, exact model and
+exposure contract, sample-to-teacher-forced replay, heterogeneous-capacity
+support, gradients, drift, and checkpoint reload. The implementation boundary
+is frozen for the registered formal gate.
 
 ## R52-ARFA-G0 Task-Dynamic Variable-N Learning — Launch Exact
 

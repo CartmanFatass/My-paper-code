@@ -11,23 +11,21 @@ Updated: 2026-07-16
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
-  exchanges in the existing consultation conversation. Used: `1/8`; remaining:
-  `7/8`. Use one only at a real review or launch-clarification boundary.
+  exchanges in the existing consultation conversation. Used: `2/8`; remaining:
+  `6/8`. Use one only at a real review or launch-clarification boundary.
 
 ## Objective
 
-Close a pre-training action-feasibility contradiction in `R53-RCMA-G0` through
-automatic Pro exchange 2/8. Mandatory injective assignment currently forces
-service in both queue classes, so the registered one-class `U=0` M0 controls
-cannot be executed.
+Run the corrected `R53-RCMA-G0` access and shared-variable-N gate. The minimal
+action correction adds one anonymous idle entity with capacity `N`; productive
+queues retain unit residual capacity and all registered scientific thresholds.
 
 ## Next Actions
 
-1. Commit/push the single R53 action-contract correction question.
-2. Submit it in the existing Pro conversation as automatic exchange 2/8 and
-   archive the full response.
-3. Resume isolated implementation only if the corrected action set and all
-   three M0 schedules are executable for every N.
+1. Commit/push the exact corrected launch boundary once.
+2. Run the registered 128K-transition local CUDA gate without expansion.
+3. Archive the terminal result and use automatic Pro exchange 3/8 only for the
+   registered result review.
 
 ## Immediate Constraints
 
@@ -124,8 +122,22 @@ cannot be executed.
   at least `P-1` persistent services at each persistent arrival. Therefore the
   registered persistent-only `F_B=0` control is impossible for every N and the
   burst-only `F_P=0` control is impossible for `P>=2`. No R53 run occurred;
-  temporary code was removed. Launch is suspended for one minimal Pro
-  action-contract correction, not an algorithm redesign.
+  temporary code was removed, and exchange `2/8` closed the contradiction
+  before implementation resumed.
+- Automatic exchange `2/8` returned
+  `CORRECT_R53_RCMA_G0_ACTION_CONTRACT`. R53 now has `N+1` productive queues
+  plus one anonymous idle entity, so pointer support size is `N+2`.
+  Productive capacities remain one; idle capacity is exactly `N`. Idle shares
+  the seven-dimensional entity encoder, pointer key, presentation permutation,
+  replay ledger, and previous-action relation, so model parameters remain
+  exactly `24,737`. The three scripted schedules now produce `(F_P,F_B,U)` of
+  `(1,1,1)`, `(1,0,0)`, and `(0,1,0)` for every registered N. Budget, reward,
+  M1/M2 thresholds, and no-rescue clauses are unchanged.
+- The corrected R53 focused CUDA smoke passed every registered M0 check across
+  ten N-specific updates. Sample/replay log-probability, prefix, heterogeneous
+  residual capacity, dynamic mask, previous-action relation, and hidden replay
+  errors were zero; all relevant modules received gradients and drifted, the
+  exact checkpoint reload passed, and transient smoke output was removed.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
