@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r53-rcma-g0 | planned -- launch clarification required | residual-capacity masked variable-N queue allocation | R52 external-review folder | one manual Pro launch clarification | sole successor selected; exposure/gates fixed; four estimand-bearing definitions omitted | No implementation or launch until exact inputs, state reset, step order, and evaluation statistics are closed |
+| EXP-20260716-r53-rcma-g0 | planned -- launch exact; implementation authorized | residual-capacity masked variable-N queue allocation | R52 external-review folder | isolated implementation and one focused M0 smoke | Pro `CONFIRM_R53_RCMA_G0_LAUNCH_EXACT`; exact inputs, state, clocks, ledgers, exposure, and gates closed | Implement, smoke once, then launch unchanged local 128K/arm gate |
 | EXP-20260716-r52-arfa-g0 | completed -- Pro-confirmed `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | complete | M0 pass; stochastic carrier passes every N; all deterministic specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52; reuse only the conclusion that stochastic return does not guarantee greedy joint-mode transport |
 | EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
@@ -75,8 +75,9 @@ explicitly approves the exception.
 
 ## EXP-20260716-r53-rcma-g0 — Residual-Capacity Masked Autoregression
 
-- Status: sole successor selected by GPT-5.6 Pro; design clarification pending;
-  implementation and launch are not authorized.
+- Status: GPT-5.6 Pro returned `CONFIRM_R53_RCMA_G0_LAUNCH_EXACT` in automatic
+  exchange 1/8; isolated implementation, one focused M0 smoke, and the
+  unchanged local gate are authorized.
 - Causal edge: observable residual queue capacity -> capacity-feasible
   autoregressive support -> high-value stochastic mass -> stable deterministic
   joint mode -> valid shared variable-N comparison.
@@ -103,11 +104,14 @@ explicitly approves the exception.
   `VALID_FAIL_R53_SHARED_VARIABLE_N`; full pass ->
   `PASS_R53_RCMA_VARIABLE_N`, authorizing only same-task exogenous join/leave
   and membership censoring.
-- Pending launch definitions: exact two member fields and centralized critic
-  fields; zero-denominator/queue-active conventions; initial and update
-  semantics of `previous_queue`; exact arrival-observation-service-expiration
-  order; exact paired evaluation/bootstrap units. These can change the
-  transition kernel or information contract and must not be guessed locally.
+- Launch-exact closure: actor member fields are `has_previous_queue` and
+  `served_previous_step`; all K queues remain active; zero denominators map to
+  zero; previous queue starts absent and updates even after empty selection;
+  arrivals precede observation, service precedes deadline decrement, and burst
+  service windows are `{3,4,5}` and `{9,10,11}`. The critic sees only pooled
+  embeddings plus `[t/16, persistent_backlog/(8P), persistent_served/(8P),
+  timely_burst/(2B)]`. Evaluation uses one paired 128-episode ledger/N and
+  paired episode-cluster bootstrap.
 - Prohibited: any R52 rescue; extra budgets/epochs/seeds; changed thresholds,
   reward, width, capacity, temperature, beam or joint-MAP evaluation; field
   slots, mean field, skills, variable lifetime, intrinsic reward, shaping,

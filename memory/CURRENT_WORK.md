@@ -10,24 +10,25 @@ Updated: 2026-07-16
 - **Project boundary:** IMOD is operational reference only, not HMASD evidence.
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
-- **External review:** the user authorized up to five automated GPT-5.6 Pro
-  follow-ups after the manually submitted R45 review. Automatic submissions
-  used: `5/5`; the authorized automatic exchange is complete.
+- **External review:** the user authorized eight new automated GPT-5.6 Pro
+  exchanges in the existing consultation conversation. Used: `1/8`; remaining:
+  `7/8`. Use one only at a real review or launch-clarification boundary.
 
 ## Objective
 
-Close the launch-exact definition of the sole selected successor
-`R53-RCMA-G0` through one manual GPT-5.6 Pro clarification. R52 is now a
-Pro-confirmed deterministic specialist-access failure and remains retired.
+Implement and run the launch-exact `R53-RCMA-G0` toy gate. Its causal question
+is whether residual-capacity masked autoregression transports stochastic queue
+return into a deterministic executable joint mode before comparing shared
+variable-N learning.
 
 ## Next Actions
 
-1. Give the user the fixed-template manual Pro prompt for the tracked R53
-   launch clarification.
-2. Archive the returned raw answer and accept or reject only its launch-exact
-   definitions.
-3. Do not implement or launch R53 until the four missing definitions are
-   closed in that response.
+1. Implement the isolated R53 environment, policy gate, analyzer, and local
+   runner without modifying R52 or the ordinary trainer.
+2. Run one focused local CUDA M0 smoke; repair only a concrete wiring failure.
+3. Commit/push the stable package, run the unchanged 128K-transition-per-arm
+   local gate, then submit its terminal result through the next authorized Pro
+   exchange.
 
 ## Immediate Constraints
 
@@ -112,6 +113,13 @@ Pro-confirmed deterministic specialist-access failure and remains retired.
   until Pro defines the two member inputs, centralized critic fields, reset
   semantics for the focal previous-queue relation, and exact arrival/service/
   deadline step order. No R53 code or run is authorized before that closure.
+- Automatic exchange `1/8` returned
+  `CONFIRM_R53_RCMA_G0_LAUNCH_EXACT` after 11m56s of Pro processing. It defines
+  actor fields `has_previous_queue/served_previous_step`, four critic-only
+  scalars, all queue zero conventions, reset/update semantics, arrivals before
+  observation, service before deadline decrement, exact burst windows, and
+  episode-cluster paired statistics. R53 implementation and its unchanged local
+  toy gate are now authorized; no extra mechanism or rescue is authorized.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

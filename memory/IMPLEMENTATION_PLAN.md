@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R53-RCMA-G0 Variable-N Queue Allocation — Pending Clarification
+## R53-RCMA-G0 Variable-N Queue Allocation — Launch Exact
 
 The sole selected next edge is residual-capacity masked autoregression in an
 anonymous multi-rate queue task. Each autoregressive token sees the remaining
@@ -13,14 +13,19 @@ removed from later support. The comparison remains one shared N-independent
 policy against five architecture-identical fixed-N specialists with equal
 aggregate exposure and specialists as the binding access prerequisite.
 
-Do not implement yet. The returned design omitted the two member inputs, the
-centralized critic fields, reset semantics for the focal previous-queue
-relation, and exact within-step arrival/service/deadline order. These are not
-ordinary coding choices: they change the information boundary, parameter
-count, transition kernel, or estimand. One manual Pro clarification must close
-them before the isolated implementation stage begins. No field-slot, mean-field,
-skill, lifetime, intrinsic, shaping, beam-search, joint-MAP, or R52 rescue work
-may enter this stage.
+Implement only the accepted launch-exact contract. The actor member fields are
+`has_previous_queue` and `served_previous_step`; the critic has four task-state
+scalars but the actor cannot read them. All queues remain action-active, and
+residual capacity is the sole feasibility mask. Arrivals occur before the
+observation, service before deadline decrement, and previous-queue state updates
+after service even when the selected queue was empty. The model must contain
+exactly 24,737 parameters.
+
+Use the registered 100 balanced cycles, 16 envs, horizon/rollout 16, 128K
+transitions and 500 optimizer steps per arm, with 100 steps per fixed-N
+specialist. Run one focused M0 smoke, then the unchanged local CUDA gate. No
+field-slot, mean-field, skill, lifetime, intrinsic, shaping, beam-search,
+joint-MAP, extra exposure, or R52 rescue work may enter this stage.
 
 ## R52-ARFA-G0 Task-Dynamic Variable-N Learning — Launch Exact
 

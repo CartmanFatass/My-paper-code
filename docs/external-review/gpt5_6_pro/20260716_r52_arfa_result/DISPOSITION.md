@@ -46,3 +46,21 @@ estimand-bearing definitions incomplete: the two member inputs, the centralized
 critic fields, the initial previous-queue relation, and the within-step
 arrival/service/deadline order. One launch clarification will close only those
 items without changing the selected route or its registered exposure.
+
+## R53 launch clarification result
+
+GPT-5.6 Pro returned `CONFIRM_R53_RCMA_G0_LAUNCH_EXACT`. The response closes
+all four missing definitions without changing the causal edge, exposure,
+thresholds, reward, comparator, or no-rescue boundary. The accepted contract
+defines:
+
+- actor member fields `has_previous_queue` and `served_previous_step`;
+- the seven queue fields and their zero/active conventions;
+- four critic-only scalars and the exact 24,737-parameter model;
+- reset and update semantics for the focal previous-queue relation;
+- arrivals before observation, service before deadline decrement, and burst
+  service windows `{3,4,5}` and `{9,10,11}`;
+- one paired 128-episode ledger per N and episode-cluster bootstrap.
+
+R53 is now authorized for isolated implementation, one focused M0 smoke, and
+the unchanged local toy gate. No other route or mechanism is authorized.
