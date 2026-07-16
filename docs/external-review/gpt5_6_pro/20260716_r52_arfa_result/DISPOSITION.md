@@ -64,3 +64,10 @@ defines:
 
 R53 is now authorized for isolated implementation, one focused M0 smoke, and
 the unchanged local toy gate. No other route or mechanism is authorized.
+
+Implementation immediately exposed a pre-training contradiction: mandatory
+injective assignment of N agents to N+1 productive queues forces service in
+both queue classes, so the registered persistent-only and burst-only `U=0`
+controls are not executable for all N. No smoke or training was launched and
+the temporary implementation was removed. R53 launch authorization is
+suspended pending one action-contract correction.

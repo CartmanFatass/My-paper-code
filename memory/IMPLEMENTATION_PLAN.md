@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R53-RCMA-G0 Variable-N Queue Allocation — Launch Exact
+## R53-RCMA-G0 Variable-N Queue Allocation — Action Correction Required
 
 The sole selected next edge is residual-capacity masked autoregression in an
 anonymous multi-rate queue task. Each autoregressive token sees the remaining
@@ -26,6 +26,13 @@ transitions and 500 optimizer steps per arm, with 100 steps per fixed-N
 specialist. Run one focused M0 smoke, then the unchanged local CUDA gate. No
 field-slot, mean-field, skill, lifetime, intrinsic, shaping, beam-search,
 joint-MAP, extra exposure, or R52 rescue work may enter this stage.
+
+Implementation is paused before smoke. With N mandatory distinct choices among
+N+1 productive queues, at least `B-1` burst queues must be served at each burst
+wave, while at least `P-1` persistent queues must be served at each persistent
+arrival. The registered one-class `U=0` controls cannot be constructed. Remove
+temporary code and obtain one minimal launch correction; do not silently drop
+the controls or invent an idle action locally.
 
 ## R52-ARFA-G0 Task-Dynamic Variable-N Learning — Launch Exact
 

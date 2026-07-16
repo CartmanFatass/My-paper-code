@@ -16,19 +16,18 @@ Updated: 2026-07-16
 
 ## Objective
 
-Implement and run the launch-exact `R53-RCMA-G0` toy gate. Its causal question
-is whether residual-capacity masked autoregression transports stochastic queue
-return into a deterministic executable joint mode before comparing shared
-variable-N learning.
+Close a pre-training action-feasibility contradiction in `R53-RCMA-G0` through
+automatic Pro exchange 2/8. Mandatory injective assignment currently forces
+service in both queue classes, so the registered one-class `U=0` M0 controls
+cannot be executed.
 
 ## Next Actions
 
-1. Implement the isolated R53 environment, policy gate, analyzer, and local
-   runner without modifying R52 or the ordinary trainer.
-2. Run one focused local CUDA M0 smoke; repair only a concrete wiring failure.
-3. Commit/push the stable package, run the unchanged 128K-transition-per-arm
-   local gate, then submit its terminal result through the next authorized Pro
-   exchange.
+1. Commit/push the single R53 action-contract correction question.
+2. Submit it in the existing Pro conversation as automatic exchange 2/8 and
+   archive the full response.
+3. Resume isolated implementation only if the corrected action set and all
+   three M0 schedules are executable for every N.
 
 ## Immediate Constraints
 
@@ -120,6 +119,13 @@ variable-N learning.
   observation, service before deadline decrement, exact burst windows, and
   episode-cluster paired statistics. R53 implementation and its unchanged local
   toy gate are now authorized; no extra mechanism or rescue is authorized.
+- Direct implementation found that N mandatory distinct selections among N+1
+  productive queues force at least `B-1` burst services at each burst wave and
+  at least `P-1` persistent services at each persistent arrival. Therefore the
+  registered persistent-only `F_B=0` control is impossible for every N and the
+  burst-only `F_P=0` control is impossible for `P>=2`. No R53 run occurred;
+  temporary code was removed. Launch is suspended for one minimal Pro
+  action-contract correction, not an algorithm redesign.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
