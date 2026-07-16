@@ -1,0 +1,477 @@
+{
+  "contract": {
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 62045,
+    "critic_optimizer_steps_per_model": 195,
+    "critic_optimizer_steps_total": 780,
+    "env_check_rows": 3200,
+    "environment_steps": 160000,
+    "evaluation_episodes": 100,
+    "m2_executable_threshold": "LCB95(WMSE_sham/WMSE_true - 1) > 0",
+    "normal_factor_rows": 6368,
+    "outer_updates": 100,
+    "renewal_actor_optimizer_steps": 0,
+    "rollout_envs": 16,
+    "seed": 43041,
+    "source_checkpoint": "R41B_seed1_exact_final",
+    "source_optimizer_steps": 0
+  },
+  "experiment_id": "EXP-20260716-r45-sdra-g0",
+  "gates": {
+    "M0_implementation_and_data": true,
+    "M1_service_and_overlap": false,
+    "M2_action_specific_informativeness": true,
+    "M3_sign_heterogeneity": false
+  },
+  "implementation": {
+    "algorithm_boundary": {
+      "behavior_policy": "source_exact_zero_renewal_residual",
+      "controller_clock": "source_global_k50_reset_censored",
+      "critic_only": true,
+      "crossfit": "env_0_7_vs_8_15",
+      "extra_intrinsic": false,
+      "extra_shaping": false,
+      "forced_branch": false,
+      "outcome": "discounted_next_50_external_reward_steps",
+      "renewal_actor_updates": false,
+      "sham_prediction": "behavior_propensity_mixture",
+      "simulator_clone": false,
+      "source_algorithm": "frozen_r41b_hmasd_skill_system",
+      "source_optimizer_updates": false,
+      "task_fields_in_context": false,
+      "true_prediction": "q_observed_action"
+    },
+    "collection": {
+      "action_counts": {
+        "agent_0": {
+          "KEEP": 149,
+          "RENEW": 3035
+        },
+        "agent_1": {
+          "KEEP": 146,
+          "RENEW": 3038
+        }
+      },
+      "binary_replay_logp_max_error": 0.0,
+      "context_shape": [
+        6368,
+        148
+      ],
+      "env_check_rows": 3200,
+      "event_count": 3184,
+      "factor_rows": 6368,
+      "normal_rows": 3184,
+      "outcome_max": 0.9702990055084229,
+      "outcome_min": 0.0,
+      "propensity_renew_max": 0.9998866319656372,
+      "propensity_renew_min": 0.0034711214248090982,
+      "row_count": 6368,
+      "rows_path": "C:\\project\\HMASD\\logs\\r45_sdra_160k_20260716_144312\\seed\\r45_sdra_rows.npz",
+      "source_probability_max_error": 9.5367431640625e-07,
+      "structural_rows": 16,
+      "suppressed_source_saves": 2,
+      "working_prefix_mismatch": 0
+    },
+    "critic_training": {
+      "all_gradients_finite": true,
+      "folds": {
+        "A": {
+          "architecture": "148->32_GELU->2",
+          "drop_last": false,
+          "epochs": 15,
+          "eps": 1e-05,
+          "heldout_env_ranks": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "heldout_rows": 3184,
+          "initial_true_sham_max_difference": 0.0,
+          "learning_rate": 0.0005,
+          "minibatch": 256,
+          "normalization_fit_rows": 3184,
+          "normalization_zero_variance_features": 6,
+          "optimizer": "Adam",
+          "parameter_count": 4834,
+          "sham_all_gradients_finite": true,
+          "sham_gradient_checks": 195,
+          "sham_max_gradient_norm": 5.7066589716381895,
+          "sham_nonzero_gradient_steps": 195,
+          "sham_steps": 195,
+          "train_env_ranks": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "train_rows": 3184,
+          "true_all_gradients_finite": true,
+          "true_gradient_checks": 195,
+          "true_max_gradient_norm": 5.744625675743206,
+          "true_nonzero_gradient_steps": 195,
+          "true_steps": 195
+        },
+        "B": {
+          "architecture": "148->32_GELU->2",
+          "drop_last": false,
+          "epochs": 15,
+          "eps": 1e-05,
+          "heldout_env_ranks": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "heldout_rows": 3184,
+          "initial_true_sham_max_difference": 0.0,
+          "learning_rate": 0.0005,
+          "minibatch": 256,
+          "normalization_fit_rows": 3184,
+          "normalization_zero_variance_features": 6,
+          "optimizer": "Adam",
+          "parameter_count": 4834,
+          "sham_all_gradients_finite": true,
+          "sham_gradient_checks": 195,
+          "sham_max_gradient_norm": 5.456300495795978,
+          "sham_nonzero_gradient_steps": 195,
+          "sham_steps": 195,
+          "train_env_ranks": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "train_rows": 3184,
+          "true_all_gradients_finite": true,
+          "true_gradient_checks": 195,
+          "true_max_gradient_norm": 5.510381981870124,
+          "true_nonzero_gradient_steps": 195,
+          "true_steps": 195
+        }
+      },
+      "total_optimizer_steps": 780
+    },
+    "renewal_actor_drift": {
+      "absolute_l2": 0.0,
+      "max_abs": 0.0,
+      "relative_l2": 0.0
+    },
+    "source_frozen_drift": {
+      "exact": true,
+      "global_max_abs": 0.0,
+      "global_unequal_leaves": 0,
+      "modules": {
+        "high_policy": {
+          "compared_leaves": 71,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "individual_discriminator": {
+          "compared_leaves": 16,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "low_actor": {
+          "compared_leaves": 22,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "low_critic": {
+          "compared_leaves": 22,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "team_discriminator": {
+          "compared_leaves": 16,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        }
+      },
+      "optimizers": {
+        "high": {
+          "compared_leaves": 284,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "individual_discriminator": {
+          "compared_leaves": 64,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "low_actor": {
+          "compared_leaves": 88,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "low_critic": {
+          "compared_leaves": 88,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "team_discriminator": {
+          "compared_leaves": 64,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        }
+      },
+      "value_norms": {
+        "high": {
+          "compared_leaves": 0,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        },
+        "low": {
+          "compared_leaves": 0,
+          "exact": true,
+          "max_abs": 0.0,
+          "unequal_leaves": 0
+        }
+      }
+    },
+    "telemetry": {
+      "actual_env_steps": 160000,
+      "outer_updates": 100,
+      "renewal_actor_optimizer_steps": 0,
+      "source_optimizer_steps": {
+        "high": 0,
+        "individual_discriminator": 0,
+        "low_actor": 0,
+        "low_critic": 0,
+        "team_discriminator": 0
+      },
+      "source_optimizers": {
+        "high": {
+          "all_checked_gradients_finite": true,
+          "ever_nonzero_gradient": false,
+          "first_nonzero_gradient_norm": null,
+          "gradient_checks": 0,
+          "name": "high",
+          "steps": 0
+        },
+        "individual_discriminator": {
+          "all_checked_gradients_finite": true,
+          "ever_nonzero_gradient": false,
+          "first_nonzero_gradient_norm": null,
+          "gradient_checks": 0,
+          "name": "individual_discriminator",
+          "steps": 0
+        },
+        "low_actor": {
+          "all_checked_gradients_finite": true,
+          "ever_nonzero_gradient": false,
+          "first_nonzero_gradient_norm": null,
+          "gradient_checks": 0,
+          "name": "low_actor",
+          "steps": 0
+        },
+        "low_critic": {
+          "all_checked_gradients_finite": true,
+          "ever_nonzero_gradient": false,
+          "first_nonzero_gradient_norm": null,
+          "gradient_checks": 0,
+          "name": "low_critic",
+          "steps": 0
+        },
+        "team_discriminator": {
+          "all_checked_gradients_finite": true,
+          "ever_nonzero_gradient": false,
+          "first_nonzero_gradient_norm": null,
+          "gradient_checks": 0,
+          "name": "team_discriminator",
+          "steps": 0
+        }
+      }
+    },
+    "training_clock": {
+      "agent_keep": [
+        149,
+        146
+      ],
+      "agent_renew": [
+        3035,
+        3038
+      ],
+      "assignment_spell_reset_closures": 0,
+      "auto_reset_age_violations": 0,
+      "auto_reset_high_actions": 0,
+      "auto_reset_roster_violations": 0,
+      "auto_reset_team_violations": 0,
+      "auto_resets": 2888,
+      "continuation_actor_valid_count": 0,
+      "continuation_critic_only_states": 0,
+      "discordant": 67,
+      "early_reset_blocks": 0,
+      "early_reset_reward_blocks": 0,
+      "env_check_rows": 3200,
+      "events": 3184,
+      "execution_fragments_env_reset_censored": 2888,
+      "full_sync_renew": 3003,
+      "global_check_calls": 200,
+      "low_actor_hidden_reset_violations": 0,
+      "low_critic_hidden_reset_violations": 0,
+      "normal_env_checks": 3184,
+      "post_reset_steps_in_same_block": 0,
+      "renew_skill_counts": [
+        1563,
+        1570,
+        1481,
+        1459
+      ],
+      "same_label_renew": 0,
+      "structural_env_assignments": 16,
+      "update_policy_truncations": 0,
+      "zero_init_source_equivalence_max": 4.76837158203125e-07
+    }
+  },
+  "implementation_valid": true,
+  "invalid_reasons": [],
+  "next_action": "retire Alice-Bob K50 natural-support renewal credit and this temporal-mechanism substrate without rescue",
+  "overlap": {
+    "groups": {
+      "agent_0_KEEP": {
+        "ess": 33.58584004470644,
+        "maximum_environment_weight_share": 0.14745665554988968,
+        "pass": false,
+        "rows": 149
+      },
+      "agent_0_RENEW": {
+        "ess": 1668.9513872855223,
+        "maximum_environment_weight_share": 0.07139355262602433,
+        "pass": true,
+        "rows": 3035
+      },
+      "agent_1_KEEP": {
+        "ess": 3.2982378155553365,
+        "maximum_environment_weight_share": 0.615592372925962,
+        "pass": false,
+        "rows": 146
+      },
+      "agent_1_RENEW": {
+        "ess": 154.41338032052116,
+        "maximum_environment_weight_share": 0.1352736204107204,
+        "pass": false,
+        "rows": 3038
+      }
+    },
+    "pass": false
+  },
+  "prohibitions": [
+    "no R42-R44 rescue",
+    "no extra seeds or data",
+    "no propensity clipping",
+    "no critic-capacity or threshold changes",
+    "no renewal actor update in G0",
+    "no task-specific intrinsic reward or shaping",
+    "no forced renewal branch or simulator clone",
+    "no S7, open-roster, or variable-N promotion"
+  ],
+  "scientific": {
+    "diagnostics": {
+      "dr_score_mean": 0.7720044300034328,
+      "dr_score_std": 1.8465569734616996,
+      "predicted_delta_mean": 0.798904010357368,
+      "predicted_delta_std": 0.17855652652714044
+    },
+    "m2": {
+      "action_blind_weighted_mse": 0.37666948663706395,
+      "pass": true,
+      "pooled_predicted_delta_q25": 0.7708846628665924,
+      "pooled_predicted_delta_q75": 0.8889284729957581,
+      "registered_text_ambiguity": "Pro wrote LCB(WMSE_sham/WMSE_true)>0, which is tautological for finite positive losses; the executable nontrivial reading is LCB(WMSE_sham/WMSE_true-1)>0.",
+      "top_minus_bottom_dr_score": {
+        "lower_95": 0.40825630011562203,
+        "mean": 0.5279394315041098,
+        "upper_95": 0.7058686568656779
+      },
+      "true_q_weighted_mse": 0.0382988107509356,
+      "wmse_ratio_gain": {
+        "lower_95": 3.362304980469332,
+        "mean": 8.835017830882968,
+        "upper_95": 18.42462176355461
+      },
+      "wmse_sham_over_true": {
+        "lower_95": 4.362304980469332,
+        "mean": 9.835017830882968,
+        "upper_95": 19.42462176355461
+      }
+    },
+    "m3": {
+      "agent_sign_heterogeneity": {
+        "agent_0": {
+          "bottom_psi": {
+            "lower_95": 0.4753469165946937,
+            "mean": 0.5305240565443639,
+            "upper_95": 0.5779485881306036
+          },
+          "pass": false,
+          "predicted_delta_q25": 0.7860655784606934,
+          "predicted_delta_q75": 0.8921087356284261,
+          "top_psi": {
+            "lower_95": 0.88024866594571,
+            "mean": 0.8982563253627711,
+            "upper_95": 0.914657055933718
+          }
+        },
+        "agent_1": {
+          "bottom_psi": {
+            "lower_95": 0.04945526602939109,
+            "mean": 0.3680364779707305,
+            "upper_95": 0.5402812484454639
+          },
+          "pass": false,
+          "predicted_delta_q25": 0.7486707363277674,
+          "predicted_delta_q75": 0.8889284729957581,
+          "top_psi": {
+            "lower_95": 0.8896202614261297,
+            "mean": 0.9699730865938934,
+            "upper_95": 1.1452574113441367
+          }
+        }
+      },
+      "pass": false,
+      "same_check_sign_discordance": {
+        "lower_95": 0.0,
+        "mean": 0.000314070351758794,
+        "upper_95": 0.0009422110552763819
+      },
+      "same_check_sign_discordance_lcb_floor": 0.1,
+      "same_check_sign_discordance_point_floor": 0.2
+    }
+  },
+  "source_service": {
+    "key0_rate": 1.0,
+    "key1_rate": 0.93,
+    "pass": true,
+    "win_rate": 0.93,
+    "zero_final_exact_trace": true
+  },
+  "status": "VALID_FAIL_R45_SDRA_IDENTIFIABILITY"
+}

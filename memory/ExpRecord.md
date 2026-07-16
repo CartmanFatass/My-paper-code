@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r45-sdra-g0 | launch-ready -- awaiting M2 clarification and user approval | hierarchy-L1 reward-off natural-support renewal-credit identifiability | local CUDA package `scripts/run_r45_sdra_local.ps1` | formal single result | Two-update wiring: 96 paired rows, context 148, source error `4.768e-7`, replay/prefix `0`, exact source/actor freeze and traces, four critics finite/nonzero | Launch only after accepting `LCB95(WMSE_sham/WMSE_true - 1)>0`; no actor update or data expansion |
+| EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
 | EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | completed GPT-5.6 Pro review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Fixed wrapper accepted source-equivalent; keep treatment diagnostic-only and proceed only to R44-FS-NRC |
 | EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
@@ -177,6 +177,24 @@ explicitly approves the exception.
 - Expected local wall clock: about 4--7 minutes on the current 16-env CUDA
   topology. Status source: `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r45_sdra_identifiability.json`.
+- Terminal result: valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` at
+  `logs/r45_sdra_160k_20260716_144312`. M0 passed with exact source and actor
+  freeze, zero source/actor optimizer steps, source probability error
+  `4.768e-7`, binary replay and prefix mismatch zero, 780 exact critic steps,
+  and exact zero/final traces. Source win/key0/key1 remained
+  `0.93/1.00/0.93`.
+- M1 failed: agent-0/1 KEEP ESS was `33.586/3.298`; their maximum environment
+  weight shares were `0.1475/0.6156`; agent-1 RENEW cluster share was `0.1353`.
+  M2 passed: true-Q/sham weighted MSE was `0.038299/0.376669`, ratio-gain CI
+  `[3.3623,18.4246]`, and top-minus-bottom DR-score CI
+  `[0.4083,0.7059]`. M3 failed: both agents' bottom DR intervals stayed
+  positive and same-check sign discordance was `0.000314`, CI
+  `[0,0.000942]`.
+- Decision: action-specific prediction is learnable, but the natural source
+  support does not establish heterogeneous renewal value. Permanently retire
+  Alice--Bob K50 natural-support renewal credit and this temporal substrate;
+  no data, seed, capacity, clipping, threshold, forced-action, or actor-update
+  rescue. Request one structurally different next edge.
 
 ### EXP-20260716-r44-fsnrc-k50
 

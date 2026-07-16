@@ -15,23 +15,22 @@ Updated: 2026-07-16
 
 ## Objective
 
-Prepare the single R45-SDRA reward-off natural-support identifiability gate.
-R44 is closed as a valid scientific failure: service was preserved and the
-renewal actor moved, but deterministic temporal behavior did not. GPT-5.6 Pro
-confirmed the result and selected R45 to test whether action-specific,
-sign-changing KEEP/RENEW value is identifiable before any further actor update.
+Close the valid R45 natural-support identifiability failure and select one new
+causal edge outside the retired Alice--Bob K50 temporal substrate. R45 found
+strong action-conditioned predictive information, but natural KEEP support was
+insufficient and renewal value was almost universally common-mode positive,
+not agent-specific sign-changing timing value.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the archived Pro response, accepted disposition, R45 code,
-   formal contract, and focused wiring evidence boundary.
-2. Obtain explicit user approval of the nontrivial M2 interpretation
-   `LCB95(WMSE_sham/WMSE_true - 1) > 0` and the registered 160K local launch.
-3. After approval, launch only `scripts/run_r45_sdra_local.ps1` and interpret
-   its single result under the registered PASS/VALID_FAIL/INVALID branches.
+1. Commit and push the R45 result, terminal disposition, memory decision, and
+   one tracked GPT-5.6 Pro failure-review question.
+2. Give the user the standard manual handoff prompt and wait for the raw reply.
+3. Do not implement a new substrate or algorithm until the review selects one
+   exact causal edge and abandonment gate.
 
 ## Immediate Constraints
 
@@ -87,6 +86,14 @@ must not renew surviving agents' skills.
   runner and analyzer explicitly use the intended positive improvement form
   `LCB95(WMSE_sham/WMSE_true - 1) > 0`; launch awaits user confirmation of this
   pre-result clarification.
+- Formal R45 run `logs/r45_sdra_160k_20260716_144312` completed valid
+  `VALID_FAIL_R45_SDRA_IDENTIFIABILITY`. M0 passed; source service remained
+  `0.93/1.00/0.93`; M2 passed with true/sham weighted MSE
+  `0.03830/0.37667` and ratio-gain lower bound `3.3623`. M1 failed because
+  KEEP ESS was `33.59/3.30` and cluster concentration exceeded `0.10`. M3
+  failed because both agents' bottom-quartile DR scores remained positive and
+  same-check sign discordance was only `0.000314`. Retire Alice--Bob K50
+  natural-support renewal credit and this temporal substrate without rescue.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
@@ -121,4 +128,6 @@ must not renew surviving agents' skills.
   disposition.
 - `docs/external-review/gpt5_6_pro/20260716_r44_fsnrc_result/` — valid R44
   failure, raw R45 selection response, and accepted disposition.
+- `docs/external-review/gpt5_6_pro/20260716_r45_sdra_result/` — valid R45
+  result, controller disposition, and next-edge review question.
 - `docs/external-review/legacy/` — legacy external-review evidence.

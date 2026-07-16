@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R45-SDRA Reward-Off Identifiability — Launch Candidate
+## R45-SDRA Reward-Off Identifiability — Completed and Retired
 
 GPT-5.6 Pro confirmed R44 and selected one upstream question before any new
 renewal-actor update: does the frozen source-exact natural policy provide
@@ -38,11 +38,21 @@ mismatch were zero. All source state and the renewal actor stayed exact, zero
 and final deterministic traces matched, and each of the four critics received
 one finite nonzero gradient step. The smoke output was removed after the check.
 
-The formal gate remains unlaunched. Pro's written
-`LCB95(WMSE_sham/WMSE_true)>0` is tautological for positive losses; the
-executable gate reports that literal ratio but requires the intended
-nontrivial `LCB95(WMSE_sham/WMSE_true - 1)>0`. User confirmation of this
-pre-result interpretation and of the 160K launch is required.
+The user approved the nontrivial M2 interpretation before launch. The formal
+run completed at `logs/r45_sdra_160k_20260716_144312` as valid
+`VALID_FAIL_R45_SDRA_IDENTIFIABILITY`. M0 passed with exact freeze, replay,
+prefix, count, optimizer, trace, and critic contracts. Frozen source service
+remained `0.93/1.00/0.93`.
+
+M2 passed: true-Q versus action-blind weighted MSE was
+`0.03830/0.37667`; ratio-gain lower bound was `3.3623`, and top-minus-bottom
+DR-score lower bound was `0.4083`. M1 failed because natural KEEP ESS was only
+`33.59` and `3.30`, with excessive environment-cluster weight concentration.
+M3 failed because both agents' bottom-quartile DR scores stayed positive and
+same-check predicted-sign discordance was `0.000314` rather than `>=0.20`.
+Alice--Bob K50 natural-support renewal credit and this temporal-mechanism
+substrate are therefore retired without more data, capacity, clipping, seed,
+threshold, forced-action, or actor-training rescue.
 
 ## R44-FS-NRC Frozen-Source Renewal — Completed and Retired
 
