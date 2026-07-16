@@ -466,6 +466,23 @@ class HFSRPointerModel(nn.Module):
         tokens: torch.Tensor,
         token_mask: torch.Tensor,
     ) -> torch.Tensor:
+        # R54 batches have one active N.  Compact masked padding before the
+        # linear algebra so appending arbitrary junk cannot change GEMM shape
+        # or floating-point reduction order for the active set.
+        if not bool(token_mask.all()):
+            active_counts = token_mask.sum(dim=1)
+            if not bool(torch.all(active_counts == active_counts[0])):
+                raise ValueError("R54 context batches must share one active-set size")
+            width = int(active_counts[0].item())
+            active_indices = torch.stack(
+                [torch.nonzero(row, as_tuple=False).squeeze(-1) for row in token_mask],
+                dim=0,
+            )
+            gather = active_indices.unsqueeze(-1).expand(-1, -1, HIDDEN_DIM)
+            tokens = torch.gather(tokens, 1, gather)
+            token_mask = torch.ones(
+                (tokens.shape[0], width), dtype=torch.bool, device=tokens.device
+            )
         query = self.context_q(focal).unsqueeze(1)
         key = self.context_k(tokens)
         value = self.context_v(tokens)
