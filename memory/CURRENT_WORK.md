@@ -16,16 +16,15 @@ Updated: 2026-07-16
 
 ## Objective
 
-Implement and run launch-exact `R52-ARFA-G0` Anonymous
-Reliability--Fulfillment Allocation. Test whether a terminal graded, nonadditive
-task utility supplies fixed-N ordinary-policy access before judging one shared
-anonymous policy across `N={2,3,4,5,6}`.
+Close the valid `NO_ACCESS_R52_ARFA_SPECIALISTS` result and obtain one manual
+GPT-5.6 Pro failure review. R52 cannot support a shared variable-`N` conclusion
+because its registered fixed-N specialist prerequisite failed.
 
 ## Next Actions
 
-1. Commit/push the frozen R52 implementation and registered prelaunch boundary.
-2. Run the unchanged 320K-per-arm formal gate.
-3. Record and interpret only its registered terminal branch.
+1. Archive the exact R52 result/CSV and a single failure-review question.
+2. Commit/push the result boundary and give the user the manual Pro prompt.
+3. Do not implement or launch a successor before the raw response is returned.
 
 ## Immediate Constraints
 
@@ -94,6 +93,13 @@ anonymous policy across `N={2,3,4,5,6}`.
   constructive/no-job/partial, recoverable-health, switching, expiration,
   focal-relation, probability replay, prefix/hidden replay, gradient, drift,
   and checkpoint contracts all passed.
+- Formal R52 completed in `logs/r52_arfa_20260716_222657` with valid M0 and
+  `NO_ACCESS_R52_ARFA_SPECIALISTS`. All probability errors are exactly zero and
+  exact exposure is 320K transitions/arm. Specialist training positive-utility
+  rates are 0.9575--0.9985, but every deterministic final specialist has
+  `M=1,J=0,U=0`, every final-minus-zero CI is `[0,0]`, and all four blocks/N are
+  zero. Shared exact-final is `M=J=U=1` for every N, but is quarantined by the
+  failed M1 prerequisite. The exact R52 contract is retired without rescue.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

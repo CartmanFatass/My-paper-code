@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r52-arfa-g0 | prelaunch -- focused CUDA M0 smoke passed | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | contract below; implementation/runner frozen for commit | unchanged formal 625-batch gate | shared variable-N versus five specialists; 320K transitions/arm, terminal `min(M,J)`, focal current-entity relation | Establish specialist carrier/access first; only then judge shared cross-N learning |
+| EXP-20260716-r52-arfa-g0 | completed -- valid `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | one failure review; no R52 rescue | M0 pass; training carrier passes every N; all final specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52 task/comparator contract; do not judge shared variable-N learning |
 | EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
@@ -123,6 +123,15 @@ explicitly approves the exception.
 - Focused implementation evidence: local CUDA dry-run passed all M0 checks over
   10 N-specific updates (1,280 transitions/arm) and its transient output was
   removed. This authorizes only the unchanged formal launch.
+- Formal result: valid `NO_ACCESS_R52_ARFA_SPECIALISTS` at
+  `logs/r52_arfa_20260716_222657`. Exact counts are 320K transitions and 1.28M
+  token decisions/arm, 625 shared updates, and 125 updates/specialist. All
+  replay, prefix, hidden, focal-relation, and mask errors are zero. Training
+  positive-utility rates pass for all specialists (0.9575--0.9985), but all
+  five deterministic final specialists have `M=1,J=0,U=0`; every block and
+  final-minus-zero CI is zero. Shared final `M=J=U=1` for all N is quarantined
+  because M1 failed. Retire the exact contract without budget/model/reward/
+  threshold rescue and request one failure review.
 
 ## EXP-20260716-r51-amdt-g0 — Anonymous Maintenance--Dispatch Task
 

@@ -20,9 +20,10 @@ training return carrier and final task access. Shared results remain
 quarantined unless every M1 gate passes. No R51 rescue, shaping, intrinsic,
 skill, lifetime, membership-change, S7/UAV, or novelty work enters this stage.
 
-Implementation status: the three isolated R52 files are complete and the one
-focused CUDA M0 dry-run passed. Freeze this boundary, commit/push it once, and
-launch the unchanged formal gate; do not add more prelaunch checks.
+Implementation status: complete. The focused M0 dry-run passed and the formal
+gate ended in valid `NO_ACCESS_R52_ARFA_SPECIALISTS`. Retire the exact R52
+contract, quarantine its shared result, and make no rescue change. The only
+next action is one result failure review before selecting a successor edge.
 
 ## R51-AMDT-G0 Task-Dynamic Variable-N Learning — Launch Exact
 
