@@ -4,9 +4,15 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R42-IRR Native Incumbent-Roster Residual
+## R42-IRR Native Incumbent-Roster Residual — Completed and Retired
 
-Active causal edge:
+Terminal result: valid `VALID_FAIL_R42_IRR_SERVICE` at
+`logs/r42_irr_native_roster_residual_320k_20260716_100824`. M0 and the fixed
+anchor passed, but treatment service was inferior and the registered temporal
+decoupling gates failed. No R42 rescue implementation is active; the next
+staged change must wait for failure review and select a structurally new edge.
+
+Completed causal edge:
 
 ```text
 positive R41B checkpoint + incumbent roster at the native k0=50 check

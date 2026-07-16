@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r42-irr-native-roster-residual | launch-ready | hierarchy-L2 same-checkpoint temporal mechanism gate | local CUDA; fresh `ref/hmasd.tar`; R41B final checkpoint | paired terminal result JSON | Real-checkpoint preflight: all parity errors `0`, residual gradient norm `0.222175`, 548 added parameters | Run one concurrent 320K/arm fixed-versus-residual gate; no rescue or extra test stage |
+| EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | failure review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire the direct native-k50 incumbent-roster residual; no rescue |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
 | EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
@@ -175,6 +175,16 @@ explicitly approves the exception.
 - Status source: `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r42_irr_native_roster_residual.json`. Runner:
   `scripts/run_r42_native_roster_residual_local.ps1`.
+- Result: `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
+  valid `VALID_FAIL_R42_IRR_SERVICE`. M0 passed with no invalid reasons and the
+  registered `320,000` steps, `200` outer updates, and `3,000` updates on every
+  original optimizer path per arm. M1 passed: fixed win/key0/key1 were
+  `0.98/1.00/0.98`. M2 failed: treatment win was `0.88`, and the paired
+  treatment-minus-fixed win interval was `[-0.17,-0.03]`, below the strict
+  `-0.10` noninferiority margin. M3 also failed: treatment discordance was
+  `0.10`, full-synchronous SET was `0.90`, one agent had zero KEEP mass, and
+  actual SET-target entropy was `0.6514`. Retire this direct residual without
+  changing budget, seed, thresholds, reward, or model capacity.
 
 ### EXP-20260716-r41b-hmasd-alice-bob-full-source
 

@@ -192,9 +192,32 @@ try {
     foreach ($entry in $processes) {
         $entry.Process.WaitForExit()
     }
-    $failed = @($processes | Where-Object { $_.Process.ExitCode -ne 0 })
+    # Windows PowerShell can expose a null ExitCode after Start-Process with
+    # redirected streams even though WaitForExit() has returned.  The arm
+    # writes seed_status.json only after its complete result is durable, so use
+    # that state when the process object cannot report an exit code.  A real
+    # non-zero exit code still wins and is never masked by the status file.
+    $failed = @()
+    foreach ($entry in $processes) {
+        $entry.Process.Refresh()
+        $exitCode = $entry.Process.ExitCode
+        $seedStatusPath = Join-Path $RunRoot "arms\$($entry.Mode)\seed_status.json"
+        $workerState = ''
+        if (Test-Path -LiteralPath $seedStatusPath -PathType Leaf) {
+            $workerState = (Get-Content -Raw -LiteralPath $seedStatusPath | ConvertFrom-Json).state
+        }
+        if (($null -ne $exitCode -and $exitCode -ne 0) -or $workerState -ne 'completed') {
+            $failed += [pscustomobject]@{
+                Mode = $entry.Mode
+                ExitCode = $exitCode
+                WorkerState = $workerState
+            }
+        }
+    }
     if ($failed.Count -gt 0) {
-        $failureRows = ($failed | ForEach-Object { "$($_.Mode):$($_.Process.ExitCode)" }) -join ','
+        $failureRows = ($failed | ForEach-Object {
+            "$($_.Mode):exit=$($_.ExitCode):state=$($_.WorkerState)"
+        }) -join ','
         throw "training arm failure: $failureRows"
     }
 

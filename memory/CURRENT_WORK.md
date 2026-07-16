@@ -15,28 +15,23 @@ Updated: 2026-07-16
 
 ## Objective
 
-Use the valid `PASS_R41B_SOURCE_ACCESS` checkpoint to test one real native
-temporal mechanism. The pure categorical KEEP/SET reinterpretation selected in
-Pro round 3 is retired without training because source audit proves it is
-behaviorally identical to the original full refresh.
-
-The active candidate is R42-IRR: a zero-output, task-blind
-incumbent-roster-conditioned residual on the existing MAT individual logits at
-the original `k0=50` clock. It must preserve the exact R41B policy at
-initialization and use the existing high-level advantage; it adds no reward,
-duration action, independent KEEP head, team latent, or age input.
+Obtain the manual failure review for valid R42-IRR and select one structurally
+new causal edge. R42 tested a zero-output, task-blind incumbent-roster residual on the
+existing MAT individual logits at native `k0=50`. Its implementation and fixed
+anchor were valid, but it failed service noninferiority and did not produce the
+registered temporal decoupling. The direct native-k50 residual is retired
+without rescue.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the completed R42-IRR external overlay, paired runner,
-   analyzer, and frozen experiment contract as one pre-launch boundary.
-2. Run the registered local paired gate after reporting its exact parameters to
-   the user: two concurrent 16-env arms, 320K steps per arm, seed `42041`.
-3. Read the single result JSON once, disposition its M0--M3 branch, and record
-   only the terminal result boundary.
+1. Give the user the fixed manual GPT-5.6 Pro handoff prompt for the pushed R42
+   result boundary.
+2. Archive the returned raw response before interpreting it.
+3. Select one next causal edge only after that failure review; do not rescue
+   R42 through thresholds, budget, seed, or architecture tuning.
 
 ## Immediate Constraints
 
@@ -57,6 +52,10 @@ must not renew surviving agents' skills.
   likelihood, value, entropy, replay, and base-gradient error; the residual
   direct policy-gradient norm was `0.2221746`. Do not add another smoke or test
   stage before the paired run.
+- R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
+  valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
+  treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
+  `0.10`, full-sync SET was `0.90`, and SET-target entropy was `0.6514`.
 - Completed branch decisions in `memory/ExpRecord.md` and the cited research
   decision files are binding. Reopen one only through a new registered causal
   edge, not by retuning budgets, seeds, thresholds, rewards, or model size.
@@ -64,7 +63,7 @@ must not renew surviving agents' skills.
 ## Pointers
 
 - `memory/ALGORITHM_PRINCIPLES.md` — research contract.
-- `memory/IMPLEMENTATION_PLAN.md` — active staged core work.
+- `memory/IMPLEMENTATION_PLAN.md` — latest staged core work and terminal state.
 - `memory/ExpRecord.md` — formal contracts and decisions.
 - `docs/research/decisions/R39_NATIVE_TOY_CREDIT_FAILURE_REVIEW_20260715.md` —
   R39 boundary.
@@ -76,4 +75,6 @@ must not renew surviving agents' skills.
   — raw R40/R41 review and accepted disposition.
 - `docs/external-review/gpt5_6_pro/20260716_r41b_source_access_result/` — R41B
   evidence, all three Pro rounds, and the final source-level disposition.
+- `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/` — R42 raw results
+  and the pending manual failure-review question.
 - `docs/external-review/legacy/` — legacy external-review evidence.
