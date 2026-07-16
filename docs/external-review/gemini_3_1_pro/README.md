@@ -49,11 +49,26 @@ For a multi-turn research phase, keep one process alive:
 pwsh -NoProfile -File `
   .\scripts\start_gemini_reviewer_live.ps1 `
   -QuestionPath .\docs\external-review\rounds\YYYYMMDD_topic\09_GEMINI_LIVE_RESEARCH_PROMPT.md `
-  -SourceManifestPath .\docs\external-review\rounds\YYYYMMDD_topic\02_GEMINI_LOCAL_SOURCE_MANIFEST.md
+  -SourceManifestPath .\docs\external-review\rounds\YYYYMMDD_topic\02_GEMINI_LOCAL_SOURCE_MANIFEST.md `
+  -ResponsePath .\docs\external-review\rounds\YYYYMMDD_topic\11_GEMINI_DIVERGENT_RAW.md
 ```
 
-Use `invoke_gemini_reviewer.ps1` once at the final archive boundary. Do not run
-the live and non-interactive clients concurrently on the same conversation.
+Keep this process alive through source inspection, follow-up questions and the
+final divergent answer. Once that answer is visible, press Ctrl+C twice. The
+launcher exports the last completed Gemini response from the local full
+transcript; it does not send an extra prompt or resume turn. To archive
+manually, use:
+
+```powershell
+pwsh -NoProfile -File `
+  .\scripts\export_gemini_live_response.ps1 `
+  -ConversationId <UUID printed by the live launcher> `
+  -ResponsePath .\docs\external-review\rounds\YYYYMMDD_topic\11_GEMINI_DIVERGENT_RAW.md
+```
+
+Use `invoke_gemini_reviewer.ps1` only for a single-turn non-interactive review
+or recovery. Do not run the live and non-interactive clients concurrently on
+the same conversation.
 
 The shared round layout and blind-review ordering are defined by
 `docs/external-review/README.md`.

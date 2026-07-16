@@ -58,10 +58,13 @@ Keep one live `agy` process for the Gemini research phase of a review round.
 Send follow-up questions to that process rather than repeatedly resuming the
 conversation. Before closing it, verify that every mandatory local source was
 actually inspected; repair a missing-source finding inside the same live
-process. At the archive boundary, exit the live process and make one clean
-non-interactive call with `10_GEMINI_DIVERGENT_QUESTION.md`; archive that output
-as `11_GEMINI_DIVERGENT_RAW.md`. Conversation-ID recovery is only a crash,
-application-restart or concrete source-completeness repair fallback.
+process. After the final answer is visible, exit the process and export that
+exact completed response from Antigravity's local `transcript_full.jsonl` as
+`11_GEMINI_DIVERGENT_RAW.md`. Do not send another prompt merely to obtain an
+archivable answer. Conversation-ID recovery is only a crash,
+application-restart or concrete source-completeness repair fallback; the
+non-interactive invocation remains a one-turn fallback, not the normal end of
+a live research phase.
 
 This removes repeated CLI startup and local conversation reload, but it does
 not promise provider-side KV-cache persistence. Long-context cost still grows
