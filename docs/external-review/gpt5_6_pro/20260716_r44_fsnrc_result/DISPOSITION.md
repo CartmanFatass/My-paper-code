@@ -55,3 +55,26 @@ It does not test or retire new skill discovery, joint low-level adaptation,
 general asynchronous skill learning, S7 transfer, open rosters, or variable
 team membership. No successor is implemented or launched before one
 structurally different causal edge and its abandonment gate are selected.
+
+## GPT-5.6 Pro review disposition
+
+Source: GPT-5.6 Pro raw response, 2026-07-16,
+`GPT5_6_PRO_RESPONSE_RAW.md`.
+
+Accepted:
+
+- confirm `VALID_FAIL_R44_FSNRC` and the analyzer correction;
+- retire exactly the R44 shared-next-check-return/state-value estimator, not
+  renewal or asynchronous skill learning in general;
+- retain actor connectivity and stochastic distribution movement as
+  diagnostics, while rejecting deterministic transport or task-gain claims;
+- select only `R45-SDRA-G0`, a reward-off natural-support renewal-credit
+  identifiability gate with the renewal actor frozen.
+
+The Pro response writes M2 as
+`LCB95(WMSE_sham / WMSE_true) > 0`, which is tautological for finite positive
+losses and cannot establish that true-Q beats the action-blind sham. The
+implementation reports both the literal ratio and the nontrivial ratio gain;
+formal launch requires explicit acceptance of the intended executable gate
+`LCB95(WMSE_sham / WMSE_true - 1) > 0`. This is a pre-result mathematical
+clarification, not a threshold change after observing R45 data.

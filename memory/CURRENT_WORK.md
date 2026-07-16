@@ -15,22 +15,23 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close the valid R44 frozen-source timing failure and select one structurally
-different causal edge. R43 remains scientifically invalid and diagnostic-only.
-R44 preserved service exactly but failed to produce any deterministic temporal
-decoupling despite a strongly updated renewal actor, so the frozen-source K50
-renewal route is permanently retired.
+Prepare the single R45-SDRA reward-off natural-support identifiability gate.
+R44 is closed as a valid scientific failure: service was preserved and the
+renewal actor moved, but deterministic temporal behavior did not. GPT-5.6 Pro
+confirmed the result and selected R45 to test whether action-specific,
+sign-changing KEEP/RENEW value is identifiable before any further actor update.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the analyzer correction, R44 terminal disposition, compact
-   evidence, and one tracked GPT-5.6 Pro failure-review question.
-2. Give the user the standard manual handoff prompt and wait for the raw reply.
-3. Do not implement or launch a successor until the review selects one exact
-   structurally different causal edge and abandonment gate.
+1. Commit and push the archived Pro response, accepted disposition, R45 code,
+   formal contract, and focused wiring evidence boundary.
+2. Obtain explicit user approval of the nontrivial M2 interpretation
+   `LCB95(WMSE_sham/WMSE_true - 1) > 0` and the registered 160K local launch.
+3. After approval, launch only `scripts/run_r45_sdra_local.ps1` and interpret
+   its single result under the registered PASS/VALID_FAIL/INVALID branches.
 
 ## Immediate Constraints
 
@@ -72,6 +73,20 @@ must not renew surviving agents' skills.
   Treatment actor relative drift was `0.353245` with 3,000 nonzero gradient
   steps, so actor connectivity does not explain the failed temporal transport.
   The frozen-source timing route is retired without rescue.
+- GPT-5.6 Pro confirmed R44 and selected only R45-SDRA-G0. R45 keeps the R41B
+  source system and zero renewal residual frozen, collects 160K natural
+  source-exact steps in 16 envs, then trains fold-A/B true-Q and action-blind
+  sham critics offline. Source and renewal actor optimizer steps remain zero;
+  no task field, forced branch, shaping, or new intrinsic reward is present.
+  A two-update CUDA wiring check passed: 96 normal factor rows with 148-D
+  contexts, source probability error `4.768e-7`, binary replay error `0`,
+  prefix mismatch `0`, exact source/actor freeze and zero/final traces, and
+  finite nonzero gradients in all four critics. The transient smoke output was
+  removed. This is implementation evidence only, not R45 scientific data.
+- Pro's literal M2 ratio threshold is mathematically non-discriminating. The
+  runner and analyzer explicitly use the intended positive improvement form
+  `LCB95(WMSE_sham/WMSE_true - 1) > 0`; launch awaits user confirmation of this
+  pre-result clarification.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
@@ -104,4 +119,6 @@ must not renew surviving agents' skills.
 - `docs/external-review/gpt5_6_pro/20260716_r43_nrc_result/` — invalid R43
   result, fixed-anchor diagnostics, raw R44 selection response, and accepted
   disposition.
+- `docs/external-review/gpt5_6_pro/20260716_r44_fsnrc_result/` — valid R44
+  failure, raw R45 selection response, and accepted disposition.
 - `docs/external-review/legacy/` — legacy external-review evidence.

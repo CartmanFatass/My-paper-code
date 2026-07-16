@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260716-r45-sdra-g0 | launch-ready -- awaiting M2 clarification and user approval | hierarchy-L1 reward-off natural-support renewal-credit identifiability | local CUDA package `scripts/run_r45_sdra_local.ps1` | formal single result | Two-update wiring: 96 paired rows, context 148, source error `4.768e-7`, replay/prefix `0`, exact source/actor freeze and traces, four critics finite/nonzero | Launch only after accepting `LCB95(WMSE_sham/WMSE_true - 1)>0`; no actor update or data expansion |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
 | EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | completed GPT-5.6 Pro review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Fixed wrapper accepted source-equivalent; keep treatment diagnostic-only and proceed only to R44-FS-NRC |
 | EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
@@ -115,6 +116,67 @@ explicitly approves the exception.
   the registered branch; do not enter the PASS-only lifetime-controller gate.
 
 ## Current Gate Detail
+
+### EXP-20260716-r45-sdra-g0
+
+- Causal edge: frozen source-exact natural KEEP/RENEW randomization ->
+  cross-fitted action-conditional `Q_i(c,KEEP/RENEW)` -> doubly robust heldout
+  score -> identifiable value signs that differ by agent/context. This repairs
+  R44's unestablished shared-return/state-value credit edge without retraining
+  or rescuing R44.
+- Authorization: GPT-5.6 Pro selected R45-SDRA-G0 as the only successor. The
+  code and focused wiring check are complete. Formal launch requires explicit
+  user approval of the M2 mathematical clarification and the fixed run.
+- Frozen boundary: R41B seed-1 exact-final source MAT, team `Z`, conditional
+  skill policy, high value, low actor/critic, `q_D/q_d`, all source optimizers,
+  ValueNorms, and the zero renewal residual. Source optimizer and renewal-actor
+  optimizer steps are exactly zero.
+- Data/clock: seed `43041`; 16 envs; global `k0=50`; reset-censored R43/R44
+  clock; one structural assignment per env; 160,000 steps; 100 outer updates;
+  3,200 env-check rows, 16 structural rows, 3,184 normal rows, and 6,368 normal
+  agent-factor rows. Each row stores the exact natural binary propensity,
+  148-D task-agnostic canonical-prefix context, sampled action, and discounted
+  next-50 external return.
+- Critics: fixed folds env 0--7 versus 8--15; per fold one true action-Q and
+  one action-blind propensity-mixture sham; identical
+  `148 -> 32 GELU -> 2` architecture and paired initialization; fold-only input
+  normalization; Adam `lr=5e-4`, `eps=1e-5`; 15 epochs; minibatch 256 without
+  drop-last; 195 steps/model, 780 total. No actor update, early stopping, model
+  selection, propensity clipping, forced action, or simulator clone.
+- Evaluation/bootstrap: frozen source zero/final exact trace comparison and
+  100 deterministic final episodes; 10,000 environment-cluster bootstraps,
+  seed `62045`.
+- M0: exact source/config/clock/counts; source probability and binary replay
+  errors `<=1e-6`; prefix mismatch zero; source and renewal actor drift zero;
+  all source/actor optimizer steps zero; four critic models have identical
+  contract/exposure and finite predictions/gradients; no task field, shaping,
+  intrinsic addition, or forced branch; frozen zero/final outcomes and complete
+  high/low traces exact.
+- M1: frozen source win `>=0.80`, key0/key1 each `>=0.85`; for each agent and
+  action inverse-propensity ESS `>=64`; no environment contributes more than
+  10% of the corresponding action's normalized weight.
+- M2: heldout action-specific informativeness requires both
+  `LCB95(WMSE_sham/WMSE_true - 1)>0` and the cluster-bootstrap lower bound of
+  top-quartile minus bottom-quartile doubly robust score `>0`. The analyzer also
+  reports Pro's literal ratio; subtracting one is the only nontrivial reading
+  consistent with its stated purpose that true-Q beat the sham.
+- M3: for each agent, top-quartile DR score lower bound `>0` and bottom-quartile
+  upper bound `<0`; same-check predicted-sign discordance point `>=0.20` and
+  95% lower bound `>0.10`.
+- Branches: M0 failure -> `INVALID_R45_SDRA_WIRING`, repair only the concrete
+  implementation and rerun unchanged. M0--M3 all pass ->
+  `PASS_R45_SDRA_IDENTIFIABILITY`, authorizing only one later mechanism-matched
+  detached-SDRA actor pair. Valid M0 with any M1--M3 failure ->
+  `VALID_FAIL_R45_SDRA_IDENTIFIABILITY`, permanently retire Alice--Bob K50
+  natural-support renewal credit and this temporal substrate without more data,
+  capacity, clipping, threshold, or seed rescue. No UNDERPOWERED branch.
+- Prohibited: R42--R44 rescue, extra seed/data, propensity clipping, critic
+  capacity or threshold changes, renewal actor update during G0, task-specific
+  intrinsic reward or shaping, forced renewal/simulator clone, S7, open roster,
+  and variable `N`.
+- Expected local wall clock: about 4--7 minutes on the current 16-env CUDA
+  topology. Status source: `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r45_sdra_identifiability.json`.
 
 ### EXP-20260716-r44-fsnrc-k50
 

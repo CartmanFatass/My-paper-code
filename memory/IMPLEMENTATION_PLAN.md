@@ -4,6 +4,46 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R45-SDRA Reward-Off Identifiability — Launch Candidate
+
+GPT-5.6 Pro confirmed R44 and selected one upstream question before any new
+renewal-actor update: does the frozen source-exact natural policy provide
+enough overlap to identify agent/context-specific KEEP versus RENEW value?
+
+Implementation boundary:
+
+- `scripts/r45_sdra.py`
+- `scripts/run_r45_sdra_gate.py`
+- `scripts/analyze_r45_sdra.py`
+- `scripts/run_r45_sdra_local.ps1`
+
+The R41B source MAT, low policy, `q_D/q_d`, optimizers, ValueNorms, and the
+zero-output renewal residual are frozen. Collection preserves the validated
+R43/R44 global `k0=50` reset-censored clock and stores each natural binary
+action's exact propensity, 148-D task-agnostic canonical-prefix context, and
+discounted next-50 external return. No forced branch, simulator clone, actor
+update, shaping, task field, or new intrinsic reward is used.
+
+Environment ranks 0--7 and 8--15 form fixed cross-fit folds. Each fold trains
+one `148 -> 32 GELU -> 2` true action-Q model and one initialization-, data-,
+capacity-, optimizer-, and exposure-matched action-blind propensity-mixture
+sham. All four models train offline for 15 epochs, 195 Adam steps each; their
+held-out predictions produce the doubly robust score and sign-heterogeneity
+read.
+
+One two-update CUDA wiring check passed. It produced exactly 64 environment
+checks, 16 structural rows, 48 normal checks, 96 paired factor rows, and 148-D
+contexts. Source probability error was `4.768e-7`; binary replay and prefix
+mismatch were zero. All source state and the renewal actor stayed exact, zero
+and final deterministic traces matched, and each of the four critics received
+one finite nonzero gradient step. The smoke output was removed after the check.
+
+The formal gate remains unlaunched. Pro's written
+`LCB95(WMSE_sham/WMSE_true)>0` is tautological for positive losses; the
+executable gate reports that literal ratio but requires the intended
+nontrivial `LCB95(WMSE_sham/WMSE_true - 1)>0`. User confirmation of this
+pre-result interpretation and of the 160K launch is required.
+
 ## R44-FS-NRC Frozen-Source Renewal — Completed and Retired
 
 GPT-5.6 Pro confirmed R43 as invalid, accepted the fixed wrapper as
