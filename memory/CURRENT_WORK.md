@@ -12,27 +12,23 @@ Updated: 2026-07-16
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized up to five automated GPT-5.6 Pro
   follow-ups after the manually submitted R45 review. Automatic submissions
-  used: `4/5`; reuse the existing `算法探索与交接摘要` conversation only.
+  used: `5/5`; the authorized automatic exchange is complete.
 
 ## Objective
 
-Complete the final automatic GPT-5.6 Pro result review of the valid
-`VALID_FAIL_R48_SBRS` gate. R48 preserved between-target process difference but
-did not lower within-skill stochastic variability at either H10 or H40-late.
-The registered branch stops fixed-`N` skill/lifetime algorithm exploration;
-only a concrete result-changing M0 defect could alter that decision.
-
-Variable team membership remains a separate later axis. Membership transitions
-must not renew surviving agents' skills.
+Close the Pro-confirmed `VALID_FAIL_R48_SBRS` boundary. Fixed-`N`
+skill/lifetime algorithm exploration is stopped without rescue. The only
+remaining research question is the independent `R49-ORSE-G0` architecture
+gate for a variable active set and set-equivariant active-only autoregressive
+roster interface; it carries no skill, lifetime, task, or cooperation claim.
 
 ## Next Actions
 
-1. Commit and push the R48 terminal result, controller disposition, and one
-   tracked result-review question.
-2. Use automatic Pro submission `5/5` in the existing consultation conversation
-   and archive the raw response before interpretation.
-3. Accept only the single final disposition. Do not resume fixed-`N` work or
-   begin open-roster/variable-`N` implementation before that review.
+1. Archive the final R48 Pro response and push the accepted disposition.
+2. Preserve `R49-ORSE-G0` as planned only. Do not implement or launch it until
+   the user authorizes the new stage; the five-round automatic-review quota is
+   exhausted.
+3. Do not resume fixed-`N` skill/lifetime work.
 
 ## Immediate Constraints
 
@@ -47,8 +43,7 @@ must not renew surviving agents' skills.
 - Intrinsic reward must remain environment-agnostic and may not consume task
   identities, goals, contacts, phases, success predicates, distances, or
   external reward.
-- Do not begin open-roster or variable-`N` implementation before the fixed-`N`
-  temporal gate.
+- `R49-ORSE-G0` is a new architecture-only stage and is not launch-authorized.
 - R43 run
   `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` completed
   `INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, but fixed final win/key0/key1 was
@@ -133,8 +128,10 @@ must not renew surviving agents' skills.
   within-ratio upper bound `1.01877`. H40-late reset rho and all target-skill
   rhos passed, but reset/carry rho-ratio lower bound was only `1.00223` and
   within-ratio upper bound `1.00874`. Between-target difference was preserved;
-  stochastic within-skill variability was not reduced. The registered fixed-`N`
-  stop decision is pending only the final result-validity review.
+  stochastic within-skill variability was not reduced. GPT-5.6 Pro confirmed
+  the valid-fail result, the no-rescue recurrent-boundary retirement, and the
+  binding fixed-`N` stop. It selected only the independent architecture gate
+  `R49-ORSE-G0`; that gate is planned but not launch-authorized.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r48-sbrs-g0 | completed -- valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; tracked result under R48 external review | GPT-5.6 Pro result-validity review | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue, pending only validity review |
+| EXP-20260716-r49-orse-g0 | planned -- not launch-authorized | architecture-only open-roster interface gate | contract below; Pro source in R48 external-review entry | user authorization for new stage | deterministic CPU wiring gate only; zero environment, reward, optimizer, skill training, or checkpoint migration | Test the exact set-equivariant active-only AR interface; no inherited skill/lifetime/task/cooperation claim |
+| EXP-20260716-r48-sbrs-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; result commit `985ab94`; R48 external-review entry | complete | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Permanently retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue; only independent R49 architecture gate remains |
 | EXP-20260716-r47-nsopm-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; result commit `b758d8c` | complete | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; proceed only to R48-SBRS-G0 |
 | EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d`, `cfc0ba4` | completed GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; learned pooled and both role-stratum sign discordance exactly `0`; direct enumeration oracle discordance near `0.5675` | Retire the exact dynamics/estimand/context/critic/read combination without rescue; interpret as learned sign-transport failure and proceed only to R47-NSOPM-G0 |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
@@ -68,10 +69,74 @@ explicitly approves the exception.
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
+## EXP-20260716-r49-orse-g0 — Open-Roster Set-Equivariant Interface
+
+- Status: planned; not implementation- or launch-authorized. The five-round
+  automatic GPT-5.6 Pro quota is exhausted.
+- Causal edge: variable active set -> set-equivariant roster state -> exact
+  active-only variable-length autoregressive probability/membership semantics.
+- Scope: architecture-only. The four categorical codes are opaque protocol
+  states, not semantic skills. There is no environment, reward, intrinsic,
+  PPO, skill training, checkpoint migration, S7, task-performance, or
+  cooperation claim.
+- Model: shared Deep Sets member encoder `19 -> 64 -> 64` with GELU. Inputs are
+  12 generic member features, one-hot opaque code of size four,
+  `log(1+age)/log(501)`, joined, and processed. There is no persistent ID,
+  padded slot, membership epoch, task, or reward input.
+- Set state: static summary is mean active-member embedding plus `log(1+N)`.
+  The working-roster summary is a mean and after each token updates as
+  `r_new=r_old+(u_new-u_old)/N`. The shared decoder consumes the current member,
+  static summary, and working-roster summary and emits KEEP plus conditional
+  SET-code logits. The scalar high value reads only the pooled active set and
+  `log(1+N)`. Parameter shapes are independent of `N`.
+- Data: local deterministic one-thread CPU; model/data/sampling seeds
+  `49041/59041/69041`; active sizes `{1,2,3,4,6,8,12,16}`; 128 cases per size,
+  1,024 base cases; eight permutations per case, 8,192 equivariance reads;
+  1,024 random nonzero junk-padding variants; 1,024 sampling/replay sequences;
+  256 join/leave event pairs. Environment steps and optimizer updates are zero.
+- Ledger: active keys, membership epochs, masks, opaque codes, ages, external
+  AR order, sampled tokens, actual applied prefixes, and old token
+  log-probabilities are stored for every case.
+- Comparator/nulls: original versus active-set permutation, junk padding,
+  incremental versus full working-roster recomputation, and stored sampling
+  versus replay. Join/leave pairs audit membership rather than efficacy.
+- M0: exact counts; no ID/slot embedding; `N`-independent state-dict shapes and
+  parameter count; no masked-slot token; complete order/active-set/epoch/prefix
+  ledger; identical sampling/replay support; finite logits, values,
+  log-probabilities, and gradients; zero environment/reward/optimizer/checkpoint
+  activity; complete joiner/leaver/survivor records; both incremental and full
+  recomputation logged.
+- M1 invariance/parity: maximum token-logit and scalar-value permutation error,
+  padding error, incremental/full-recompute error, and sampling/replay
+  log-probability error are each `<=1e-6`.
+- M1 membership: a joiner has no KEEP support; a leaver emits zero tokens;
+  every survivor retains opaque code, age, low-hidden placeholder, and
+  membership epoch; active token count equals active-member count.
+- M1 actionability/complexity: for `N>=2`, prefix-probability gradient
+  Frobenius norm is `>1e-8` in at least `0.99` of cases and its median is
+  `>1e-4`; state-dict shapes are equal for all `N`; each check performs one
+  active-set encode, exactly `N` incremental updates and decoder calls, and
+  creates no pairwise `N x N` tensor.
+- `INVALID_R49_ORSE_WIRING`: repair only the named wiring defect and rerun the
+  unchanged gate.
+- `PASS_R49_ORSE_ARCHITECTURE`: conclude only that the interface is correct;
+  authorize next only a default-off, exogenous cross-episode variable-`N`
+  compatibility step. Do not infer semantics, lifetime, intrinsic efficacy,
+  within-episode join/leave, S7, task performance, or cooperation.
+- `VALID_FAIL_R49_ORSE_ARCHITECTURE`: retire this exact Deep-Sets mean plus
+  log-count, incremental-roster, shared active-only AR, pooled-scalar-value
+  interface without graph, Transformer, model, budget, seed, or threshold
+  rescue; stop the open-roster and current project line. There is no
+  underpowered branch.
+- Prohibited changes: graph/attention/ISAB, pairwise tensors, persistent ID or
+  padded-slot embedding, semantic code interpretation, environment/reward,
+  optimizer, skill training, checkpoint migration, or fixed-`N` rescue.
+- Authoritative status source and expected wall clock will be fixed only if the
+  user authorizes implementation and launch; no run exists now.
+
 ## EXP-20260716-r48-sbrs-g0 — Skill-Boundary Recurrent State
 
-- Status: completed as valid `VALID_FAIL_R48_SBRS`; pending final GPT-5.6 Pro
-  result-validity review.
+- Status: completed as Pro-confirmed valid `VALID_FAIL_R48_SBRS`.
 - Causal edge: skill SET -> focal recurrent-state boundary -> lower same-skill
   stochastic variability -> codebook-wide persistent process separation.
 - Authorization: user approved the Pro-selected R48 route, its local gate, Git
@@ -139,8 +204,12 @@ explicitly approves the exception.
   `1.11816`, and within-ratio upper bound `1.01877`. H40-late reset rho and all
   four target-skill rhos exceeded one, but reset/carry rho-ratio lower bound was
   `1.00223` and within-ratio upper bound `1.00874`. The valid-fail retirement
-  and fixed-`N` stop branch are binding unless final review finds a concrete
-  result-changing M0 defect.
+  and fixed-`N` stop branch are binding. GPT-5.6 Pro found no result-changing
+  M0 defect, confirmed both retirements, and selected only the independent
+  architecture-only `R49-ORSE-G0` interface gate.
+- External review: GPT-5.6 Pro, 2026-07-16; raw response and accepted
+  disposition are under
+  `docs/external-review/gpt5_6_pro/20260716_r48_sbrs_result/`.
 
 ## EXP-20260716-r47-nsopm-g0 — Natural-Support Orthogonal Process Modes
 

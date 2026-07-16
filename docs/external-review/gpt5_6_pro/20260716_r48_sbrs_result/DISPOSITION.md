@@ -38,3 +38,14 @@ fixed-`N` skill/lifetime algorithm exploration stops without additional seed,
 context, budget, threshold, model, reward, environment, or best-checkpoint
 rescue. Open-roster or variable-`N` work, if separately justified, cannot
 inherit a claim that the fixed-`N` skill mechanism or skill semantics work.
+
+## External review
+
+- Source: GPT-5.6 Pro, 2026-07-16.
+- Raw response: `GPT5_6_PRO_RESPONSE_RAW.md`.
+- Disposition: accept `CONFIRM VALID_FAIL_R48_SBRS`, the no-rescue retirement
+  of the recurrent-boundary line, and the binding stop of fixed-`N`
+  skill/lifetime algorithm exploration.
+- Sole remaining question: `R49-ORSE-G0`, an independent open-roster
+  set-equivariant interface gate. It is architecture-only and inherits no
+  fixed-`N` skill, semantic, lifetime, task, or cooperation claim.

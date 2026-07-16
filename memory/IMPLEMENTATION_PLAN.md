@@ -4,7 +4,45 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R48-SBRS-G0 Skill-Boundary Recurrent State — Valid Fail
+## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Planned, Not Authorized
+
+R48 closed fixed-`N` skill/lifetime exploration. R49 is a separate,
+architecture-only question: can a variable active set support a
+set-equivariant roster representation and variable-length, active-only
+autoregressive sampling/replay while preserving exact probability and
+membership semantics? Its four categorical codes are opaque protocol states,
+not learned or semantic skills.
+
+The registered interface is a minimal Deep Sets model: a shared
+`19 -> 64 -> 64` member encoder over 12 generic features, a four-way opaque
+code, normalized age, joined, and processed flags; mean-pooled member and
+working-roster summaries; `log(1+N)`; a shared KEEP/conditional-SET decoder;
+and one pooled scalar value. External active keys and membership epochs are
+ledger fields only. Persistent ID, padded-slot index, pairwise `N x N`
+tensors, graph/attention blocks, task fields, reward, environment execution,
+optimizer steps, checkpoint migration, and current trainer changes are absent.
+
+The deterministic CPU gate uses model/data/sampling seeds
+`49041/59041/69041`, active sizes `{1,2,3,4,6,8,12,16}`, 128 base cases per
+size, eight permutations per case, 1,024 junk-padding variants, 1,024
+sample/replay sequences, and 256 join/leave event pairs. M0 checks exact
+counts, active-only token support, complete order/epoch/prefix ledgers,
+finite values and gradients, zero environment/reward/optimizer/checkpoint
+activity, and complete membership records.
+
+M1 requires maximum permutation, padding, incremental/full-recompute, and
+sampling/replay errors `<=1e-6`; exact joiner/leaver/survivor membership
+semantics; prefix-actionability gradient support at least `0.99` with median
+norm `>1e-4`; identical parameter shapes for every `N`; one active-set encode,
+exactly `N` incremental roster updates and decoder calls, and no pairwise
+tensor. `PASS_R49_ORSE_ARCHITECTURE` authorizes only a default-off,
+cross-episode exogenous variable-`N` compatibility step. A valid fail retires
+this exact Deep-Sets/open-roster interface without graph, Transformer, model,
+budget, or threshold rescue and stops the current project line. An invalid
+result permits repair only of the named wiring defect. No implementation or
+launch is authorized yet.
+
+## R48-SBRS-G0 Skill-Boundary Recurrent State — Pro-Confirmed Valid Fail
 
 GPT-5.6 Pro confirmed `VALID_FAIL_R47_NSOPM`, found no result-changing M0
 defect, and permanently retired the exact R47 view/basis/score/reward line. The
@@ -60,8 +98,8 @@ Run `logs/r48_sbrs_20260716_181833` completed valid
 gates; H40-late passed absolute and per-skill reset rho plus between preservation
 but failed rho-gain and within-noise gates. Within reset/carry means were
 `1.00794` at H10 and `1.00156` at H40-late, so focal hidden reset did not reduce
-the registered stochastic variability. Apply the binding no-rescue retirement
-and fixed-`N` stop branch, pending only the final Pro result-validity review.
+the registered stochastic variability. GPT-5.6 Pro confirmed the valid-fail,
+the no-rescue recurrent-boundary retirement, and the binding fixed-`N` stop.
 
 ## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Valid Fail and Retired
 
