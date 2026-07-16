@@ -11,23 +11,22 @@ Updated: 2026-07-17
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
-  exchanges in the existing consultation conversation. Used: `4/8`; remaining:
-  `4/8`. Use one only at a real review or launch-clarification boundary.
+  exchanges in the existing consultation conversation. Used: `5/8`; remaining:
+  `3/8`. Use one only at a real review or launch-clarification boundary.
 
 ## Objective
 
-Close the valid `NO_ACCESS_R54_FULL_SET_REFERENCE` result and obtain one exact
-post-R54 causal route. The uncompressed prerequisite failed, so hybrid results
-are quarantined and no field-slot module may enter the main controller.
+Prepare the isolated `R55-ABRP-G0` ordinary variable-N gate selected by Pro.
+It replaces global set representation with direct anonymous member-entity edge
+scoring; it does not add a module to the current controller.
 
 ## Next Actions
 
-1. Commit/push the exact R54 terminal JSON, question and provisional
-   disposition.
-2. Use one authorized GPT-5.6 Pro exchange to audit validity, retirement scope
-   and the unique next causal edge.
-3. Accept only a replacement/simplification route; do not stack literature
-   modules or enter dynamic membership/time from this failed prerequisite.
+1. Commit/push the complete R54 Pro response and exact disposition.
+2. Implement only the isolated 3,906-parameter R55 direct-edge toy gate and one
+   focused M0 check.
+3. Do not integrate it into the controller or add slots, GNN, mean-field,
+   membership change, variable time, skills or intrinsic reward.
 
 ## Immediate Constraints
 
@@ -169,6 +168,13 @@ are quarantined and no field-slot module may enter the main controller.
   critical accuracy falls from `0.6934` to `0.1152`; exact-roster success is
   `0.6328/0.1367/0/0`. All M1 checks fail. The hybrid arm is quarantined and
   no compression conclusion or module integration is authorized.
+- Automatic result exchange `5/8` confirmed
+  `NO_ACCESS_R54_FULL_SET_REFERENCE`, retired the complete exact R54 contract
+  and kept hybrid compression quality `UNIDENTIFIED`. ARES-SMDP is retained
+  only as serial research order and probability/event-ownership discipline;
+  the HFSR branch is closed. The only successor is `R55-ABRP-G0`, which replaces
+  global set context with direct member-entity edge scoring on an anonymous
+  typed-backlog toy before any dynamic-membership or time work.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

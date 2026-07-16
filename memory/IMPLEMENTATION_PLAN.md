@@ -32,6 +32,30 @@ is not reached. Retire the exact R54 contract without rescue and select no
 successor until the result review closes. Any successor must absorb a principle
 by replacing or simplifying a bottleneck, not by stacking literature modules.
 
+GPT-5.6 Pro confirmed the result and closed R54 permanently. Compression quality
+is unidentified because the full-set prerequisite failed. ARES-SMDP retains
+only its serial research and probability/event contracts; HFSR, fixed slots,
+reconstruction residual selection and full-set attention are not active
+architecture candidates.
+
+## R55-ABRP-G0 — Direct Relational Replacement
+
+The sole active design replaces global member-set representation with a shared
+focal-member/candidate-entity edge scorer. Its anonymous typed-backlog toy uses
+stable `N={4,8,12,16}`, four balanced capability/requirement types, horizon 8,
+N productive unit-capacity queues plus anonymous idle, one arrival per queue per
+step and terminal completed-work fraction only. Capability mismatch remains in
+the action support and must be learned.
+
+The exact actor/critic has 3,906 parameters and no member encoder, pooling,
+attention, GNN, slots, residual selector, recurrence or identity. Four fixed-N
+specialists are the access prerequisite for one shared variable-N policy. Use
+100 balanced cycles, 32 episodes per N batch, 102,400 transitions per arm, one
+PPO epoch, 100 shared steps and 100 steps per specialist. The archived R54 Pro
+response owns the complete M0/M1/M2 thresholds and no-rescue branches. Add only
+an isolated toy/model/gate/local runner, then one focused M0 check; do not touch
+the existing controller.
+
 ## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 
 The sole selected edge is residual-capacity masked autoregression in an
