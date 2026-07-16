@@ -22,12 +22,12 @@ variable-`N` / variable-`T_i` architecture sequence.
 
 ## Next Actions
 
-1. Archive the in-progress literature-review response from automatic exchange
-   3/8 and record its disposition.
-2. Commit/push the terminal R53 result package without rescue or reinterpretive
-   threshold changes.
-3. After the consultation is idle, submit the separate R53 result audit; do not
-   merge literature advice with the registered R53 estimand.
+1. Commit/push the archived literature-review response and accepted
+   `ARES-SMDP` disposition.
+2. Submit the already tracked separate R53 terminal-result audit as automatic
+   exchange 4/8.
+3. Disposition R53 without rescue; only then decide whether the review-selected
+   R54 representation gate becomes active.
 
 ## Immediate Constraints
 
@@ -148,6 +148,14 @@ variable-`N` / variable-`T_i` architecture sequence.
   `0.1746 < 0.20`. The result therefore rejects the registered learning-gain
   gate, not executable support or final-policy competence. No rescue is
   authorized pending the exact result review.
+- Automatic literature exchange `3/8` returned
+  `ACCEPT_WITH_MODIFICATION: ARES-SMDP`. It selects a serial route:
+  deterministic variable-N representation sufficiency -> ordinary learning ->
+  exogenous dynamic membership -> fixed-roster exogenous heterogeneous `T_i`
+  with duration-correct SMDP credit -> joint exogenous `N_t + T_i`. The sole
+  post-R53 candidate is the supervised `R54-HFSR-G0` full-set versus
+  `hybrid_m8_l2` representation gate. Implementation remains deferred until
+  the separate R53 result audit closes.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

@@ -4,6 +4,20 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## ARES-SMDP / R54-HFSR-G0 — Review-Selected, Launch Deferred
+
+GPT-5.6 Pro selected `ARES-SMDP` as the only literature-informed architecture
+sequence. The first candidate gate is a Level-0 supervised representation test:
+`full_active_set_reference` versus deterministic `hybrid_m8_l2` on the
+multimodal capacitated-assignment toy. Slots, masses and exact residuals are
+representations, not sampled MAT actions or PPO factors. Dynamic membership,
+heterogeneous time, skills and intrinsic reward are excluded.
+
+The exact 49,576-parameter, 600-update, held-out `N={8,16,32,64}` contract and
+M0/M1/M2 thresholds live in the archived literature response. This section is
+not an implementation or launch authorization. R54 remains deferred until the
+separate R53 terminal-result review is archived and dispositioned.
+
 ## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 
 The sole selected edge is residual-capacity masked autoregression in an
