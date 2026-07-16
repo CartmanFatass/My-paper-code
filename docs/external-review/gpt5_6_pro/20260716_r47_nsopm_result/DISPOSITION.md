@@ -44,3 +44,15 @@ than stochastic replica variation. The exact 7-D view, initial-centering,
 35-D quadratic map, lags `{1,5}`, whitened Gram estimator, four spectral-rank
 identities, candidate score, and reward-on pair are retired without rescue.
 No reward-on experiment is authorized by this result.
+
+## GPT-5.6 Pro disposition
+
+- Source: GPT-5.6 Pro, 2026-07-16.
+- Raw response: `GPT5_6_PRO_RESPONSE_RAW.md`.
+- Disposition: **accept** `CONFIRM VALID_FAIL_R47_NSOPM`, the no-rescue
+  retirement of the exact R47 line, and the single selected successor
+  `R48-SBRS-G0`.
+- Boundary: R48 changes only the focal low-actor recurrent hidden state at a
+  forced nonincumbent skill SET. It adds no reward, classifier, mode estimator,
+  scorer, optimizer, model capacity, task field, or R47 rescue. A valid R48
+  failure permanently stops fixed-`N` skill/lifetime algorithm exploration.

@@ -4,7 +4,58 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Valid Fail
+## R48-SBRS-G0 Skill-Boundary Recurrent State — Launch Ready
+
+GPT-5.6 Pro confirmed `VALID_FAIL_R47_NSOPM`, found no result-changing M0
+defect, and permanently retired the exact R47 view/basis/score/reward line. The
+only remaining fixed-`N` edge is whether skill SET needs an explicit focal
+low-actor recurrent-state boundary.
+
+R48 uses the same frozen adaptive-R30 checkpoint, `N=2`, `K=4`, `k0=10`, and
+64 natural source reset groups. One context is captured per group after high
+commit and before the first low action at check
+`1 + floor(group/2) mod 4`, so every focal hidden contains at least one full
+natural skill block. Each context forces all three nonincumbent targets for two
+independent replicas and two matched arms:
+
+- `carry_hidden`: target skill with the snapshot focal actor hidden;
+- `reset_on_set`: the same target with only that focal actor hidden zeroed.
+
+Both arms share the exact environment snapshot, observation, roster, team code,
+critic hidden, teammate actor hidden, and explicit Gaussian innovation tape.
+All parameters and normalizers are frozen; high checks are suppressed; every
+branch holds its roster for 40 stochastic low-policy steps. No external return,
+task field, intrinsic signal, optimizer, or normal-trainer modification enters.
+
+The task-blind process is the four-dimensional normalized focal displacement
+and teammate-relative displacement. H10 uses steps `1..10`; H40-late uses
+`31..40`. For each arm/context, `B` averages same-replica distances across the
+three target pairs and `W` averages the two-replica distance within each
+target. `rho=E[B]/(E[W]+1e-8)`. A single 10,000-repetition paired context
+bootstrap with seed `62048` keeps both arms, every target, both replicas, and
+all trajectory coordinates together.
+
+M1 requires at both horizons: reset-rho lower bound `>1`, reset/carry rho-ratio
+lower bound `>1.25`, reset/carry within-ratio upper bound `<0.80`, and
+reset/carry between-ratio lower bound `>0.90`. Every target skill must also
+have H40-late reset rho `>1`. `PASS_R48_SBRS_G0` authorizes only a reward-pure
+R30 `carry_on_SET` versus `reset_on_SET` pair. `VALID_FAIL_R48_SBRS` retires
+the recurrent-boundary explanation and permanently stops fixed-`N`
+skill/lifetime algorithm exploration. There is no underpowered or rescue
+branch.
+
+Implementation is isolated to:
+
+- `scripts/r48_sbrs.py`
+- `scripts/run_r48_sbrs_gate.py`
+- `scripts/run_r48_sbrs_local.ps1`
+
+One two-context CUDA check covered 24 branches and 960 forced steps. Snapshot,
+hidden-boundary, explicit CRN, counts, parameter/normalizer freeze, and finite
+statistics passed; the transient output was removed. The next boundary is one
+pre-launch commit/push followed by the unchanged formal local CUDA gate.
+
+## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Valid Fail and Retired
 
 GPT-5.6 Pro confirmed R46 as a valid learned Q/DR sign-transport failure and
 selected one upstream reward-off successor:
@@ -50,9 +101,10 @@ commit `078845b` was pushed before the formal local CUDA run. Run
 `VALID_FAIL_R47_NSOPM`: M0 passed; M1 and M2 failed. Only spectral rank 0 beat
 its temporal null, lag-5 coherence crossed zero, H10 support was `0.71875`,
 H10 assigned contrast crossed zero, H40 skill 0 contrast was negative, and
-both causal-SNR lower bounds were below one. Permanently retire this exact
-view/map/lag/basis/score/reward pair and do not launch reward-on training. The
-only active work is its registered GPT-5.6 Pro result review.
+both causal-SNR lower bounds were below one. GPT-5.6 Pro confirmed validity,
+found no result-changing M0 defect, and permanently retired this exact
+view/map/lag/basis/score/reward pair. Reward-on training is closed; only the
+structurally distinct R48 recurrent-state-boundary gate remains.
 
 ## R46-HMRV-G0 Heterogeneous-Maintenance Positive Control — Completed and Retired
 

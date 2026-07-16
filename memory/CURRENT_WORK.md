@@ -12,28 +12,27 @@ Updated: 2026-07-16
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized up to five automated GPT-5.6 Pro
   follow-ups after the manually submitted R45 review. Automatic submissions
-  used: `3/5`; reuse the existing `算法探索与交接摘要` conversation only.
+  used: `4/5`; reuse the existing `算法探索与交接摘要` conversation only.
 
 ## Objective
 
-Complete the automatic GPT-5.6 Pro result review of the valid
-`VALID_FAIL_R47_NSOPM` gate and accept exactly one resulting disposition. R47
-found stable half-fit natural structure but failed four-mode temporal-null
-significance, lag-5 coherence, H10 support, assigned-mode occupancy, and
-between/within causal SNR. Its exact view/basis/score/reward pair is retired;
-reward-on training is not authorized.
+Run the single Pro-authorized `R48-SBRS-G0` fixed-`N` abandonment gate. It asks
+whether resetting only the focal low-actor recurrent hidden state when a skill
+is SET lowers same-skill stochastic variability and restores codebook-wide
+persistent process separation. It is standalone, task-blind, reward-off, and
+has zero optimizer steps.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the R47 terminal result, controller disposition, and one
-   tracked result-review question.
-2. Use automatic Pro submission `4/5` in the existing consultation conversation
-   and archive the raw response before interpretation.
-3. Continue only the single structurally different edge explicitly authorized
-   by that review; do not rescue R47 or launch its reward-on pair.
+1. Commit and push the exact R48 implementation, runner, and registered
+   contract after the completed focused CUDA check.
+2. Run the unchanged local CUDA R48 gate and interpret only its registered
+   `INVALID`, `PASS`, or valid-fail branch.
+3. Archive the terminal result and use automatic Pro submission `5/5` for its
+   result-validity review in the existing consultation conversation.
 
 ## Immediate Constraints
 
@@ -119,8 +118,14 @@ must not renew surviving agents' skills.
   covariance-zero view fields, frozen parameters, and zero optimizers. Only
   eigen-rank 0 cleared its temporal null; lag-5 coherence failed. H10 support
   was `0.71875`, both causal-SNR reads were far below one, and H40 skill 0
-  assigned contrast was negative. The exact line is retired pending only the
-  registered result-validity review.
+  assigned contrast was negative. GPT-5.6 Pro confirmed the valid-fail result,
+  found no branch-changing M0 defect, and permanently retired the exact line.
+  It selected only `R48-SBRS-G0`: 64 source contexts at natural checks
+  `{1,2,3,4}`, three nonincumbent targets, two replicas, carry/reset arms,
+  40-step branches, explicit Gaussian CRN seed `68041`, 30,720 forced steps,
+  no reward read or optimizer, and paired context bootstrap seed `62048`.
+  A two-context CUDA check passed exact snapshot, hidden-boundary, CRN, count,
+  freeze, and finite-statistic checks; its transient output was removed.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

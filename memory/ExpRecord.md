@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r47-nsopm-g0 | completed -- valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; tracked result under R47 external review | GPT-5.6 Pro result-validity review | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; do not launch reward-on arm |
+| EXP-20260716-r48-sbrs-g0 | launch-ready; focused CUDA check passed | hierarchy-L1 reward-off recurrent-boundary abandonment gate | local CUDA; implementation and contract pending pre-launch commit | terminal R48 JSON | 64 contexts; carry/reset arms; 3 nonincumbent targets; 2 replicas; H40; 30,720 forced steps; zero optimizers and no reward | Run unchanged gate; PASS authorizes only reward-pure carry/reset pair, valid FAIL stops fixed-N skill/lifetime exploration |
+| EXP-20260716-r47-nsopm-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; result commit `b758d8c` | complete | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; proceed only to R48-SBRS-G0 |
 | EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d`, `cfc0ba4` | completed GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; learned pooled and both role-stratum sign discordance exactly `0`; direct enumeration oracle discordance near `0.5675` | Retire the exact dynamics/estimand/context/critic/read combination without rescue; interpret as learned sign-transport failure and proceed only to R47-NSOPM-G0 |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
@@ -67,9 +68,75 @@ explicitly approves the exception.
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
 
+## EXP-20260716-r48-sbrs-g0 — Skill-Boundary Recurrent State
+
+- Status: launch-ready; one focused real-checkpoint CUDA check passed and its
+  transient output was removed.
+- Causal edge: skill SET -> focal recurrent-state boundary -> lower same-skill
+  stochastic variability -> codebook-wide persistent process separation.
+- Authorization: user approved the Pro-selected R48 route, its local gate, Git
+  push, and the remaining automatic Pro result exchange.
+- Source: exact frozen adaptive-R30 checkpoint
+  `logs/r30_alice_bob_paired_64k_20260714_163908/runs/adaptive_keep_set/seed30031/standalone_process_core_final.pt`;
+  total steps `64,000`, update `50`, `N=2`, `K=4`, `k0=10`, episode `80`,
+  recurrent hidden `64`, stochastic high and tanh-Gaussian low policy. Load no
+  optimizers; freeze every parameter and normalizer.
+- Natural contexts: source seed `47041`; 64 independent 80-step reset groups,
+  focal `group mod 2`, context check `1 + floor(group/2) mod 4`, primitive time
+  `{10,20,30,40}`. Capture after natural high commit and before that block's
+  first low action. Natural source exposure is exactly 5,120 steps.
+- Targets and arms: incumbent is the natural post-check focal skill; enumerate
+  its three nonincumbent targets. For each target and two replicas,
+  `carry_hidden` preserves the focal actor hidden while `reset_on_set` zeros
+  only that hidden. Teammate actor hidden, all critic hidden, environment
+  snapshot, observation, roster, team code, and network state match at the
+  boundary. High checks remain suppressed and the forced roster is held 40
+  steps.
+- CRN and budget: pre-generated Gaussian innovation tape seed `68041`, shared
+  across both arms and all three targets within a context/replica; replicas are
+  independent. There are 384 branches per arm, 768 total, 30,720 branch steps,
+  zero policy/high/critic/intrinsic optimizer steps, and no external-return or
+  intrinsic read. Expected wall clock is under 20 minutes on local CUDA.
+- Process read: `pbar=p/8`, `r_i=pbar_-i-pbar_i`, and
+  `y_t=[pbar_i,t-pbar_i,0, r_i,t-r_i,0]` in four position-only dimensions.
+  H10 is `t=1..10`; H40-late is `t=31..40`. Distance is the mean timewise
+  squared Euclidean trajectory difference. No R47 view/basis/mode, action,
+  reward, task object, contact, phase, success, or skill label enters the read.
+- Statistics: per arm/context, `B` averages the same-replica distances over the
+  three target pairs and two replicas; `W` averages replica distance over the
+  three targets; `rho=E[B]/(E[W]+1e-8)`. Target-conditional rho compares each
+  target with the other two. Bootstrap 10,000 times with seed `62048` using the
+  complete source context as cluster and jointly resampling both arms, all
+  targets, replicas, and trajectory coordinates.
+- M0: exact source/config, schedule, 64 contexts, three nonincumbent targets,
+  384 branches/arm, 30,720 branch steps, no early reset, exact snapshot restore,
+  exact matched arm starts and innovation tape, only focal actor-hidden reset,
+  exact parameter/normalizer freeze, zero optimizers, no task/reward evidence
+  field, every target skill in at least 32 contexts, and finite trajectories,
+  distances, B, W, and rho.
+- M1: at both H10 and H40-late require reset-rho lower 95% bound `>1`,
+  reset/carry rho-ratio lower bound `>1.25`, reset/carry within-ratio upper bound
+  `<0.80`, and reset/carry between-ratio lower bound `>0.90`. H40-late also
+  requires reset target-conditional rho `>1` for all four skills.
+- `INVALID_R48_SBRS_WIRING`: repair only the named snapshot, hidden, CRN,
+  count, or metric defect and rerun unchanged.
+- `PASS_R48_SBRS_G0`: authorize only a mechanism-matched reward-pure R30
+  `carry_on_SET` versus `reset_on_SET` pair with identical networks and external
+  reward, no intrinsic, and external-only high return.
+- `VALID_FAIL_R48_SBRS`: permanently retire SET-time focal zero-reset, the
+  shared-parameter skill-boundary-reset line, this raw-trajectory gate, and the
+  recurrent-contamination explanation; permanently stop fixed-N skill/lifetime
+  algorithm exploration. No underpowered, added-seed/context, threshold, budget,
+  model, reward, or environment rescue branch exists.
+- Focused check: two contexts, 24 total branches, 960 forced steps; exact
+  snapshot/hidden/CRN/count/freeze checks and finite H10/H40 statistics passed.
+- Authoritative status: `<run-root>/runner_status.txt`; result:
+  `<run-root>/result/r48_sbrs.json`.
+
 ## EXP-20260716-r47-nsopm-g0 — Natural-Support Orthogonal Process Modes
 
-- Status: launch-ready under `ACCEPT_R47_NSOPM_G0_LAUNCH_EXACT`.
+- Status: completed and GPT-5.6 Pro-confirmed valid
+  `VALID_FAIL_R47_NSOPM`; exact line retired without rescue.
 - Causal edge: natural task-blind process support -> stable orthogonal
   persistent modes -> skill-conditioned causal mode occupancy.
 - Scope: fixed-`N=2`, reward-off G0 only. No policy/high/critic/intrinsic
@@ -156,8 +223,9 @@ explicitly approves the exception.
   beat the temporal-null q95 and lag-5 coherence lower bound was `-0.04475`.
   H10/H40 support was `0.71875/0.828125`; H10 assigned contrast lower bound was
   `-0.000652`; H40 skill 0 contrast was `-0.01542`; causal-SNR means were
-  `0.0343/0.1992`. The registered valid-fail retirement is binding unless the
-  result review finds a concrete result-changing M0 defect.
+  `0.0343/0.1992`. GPT-5.6 Pro found no result-changing M0 defect, confirmed
+  the valid-fail retirement, and selected only the structurally distinct R48
+  recurrent-state-boundary gate.
 
 ## EXP-20260716-r46-hmrv-g0 — Heterogeneous Maintenance Renewal Value
 
