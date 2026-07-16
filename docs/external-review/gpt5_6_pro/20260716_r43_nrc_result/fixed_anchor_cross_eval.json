@@ -1,0 +1,30 @@
+{
+  "r43_fixed_final_checkpoint": {
+    "seed_1": {
+      "average_episode_steps": 73.77,
+      "key0_rate": 0.62,
+      "key1_rate": 0.88,
+      "win_rate": 0.61
+    },
+    "seed_43041": {
+      "average_episode_steps": 77.65,
+      "key0_rate": 0.54,
+      "key1_rate": 0.81,
+      "win_rate": 0.52
+    }
+  },
+  "source_checkpoint": {
+    "seed_1": {
+      "average_episode_steps": 62.14,
+      "key0_rate": 0.97,
+      "key1_rate": 0.92,
+      "win_rate": 0.89
+    },
+    "seed_43041": {
+      "average_episode_steps": 60.11,
+      "key0_rate": 1.0,
+      "key1_rate": 0.93,
+      "win_rate": 0.93
+    }
+  }
+}

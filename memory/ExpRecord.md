@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r43-nrc-k50 | implementation/preflight complete; launch approval pending | hierarchy-L2 reset-censored true-renewal mechanism gate | R41B checkpoint; GPT-5.6 Pro `PRESERVE SOURCE-GLOBAL CLOCK` | focused preflight passed | 32-outcome logp error `9.54e-7`; two-update replay/prefix error `0`; exact cross-update carry | Commit/push pre-launch boundary, report exact run, request approval |
+| EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | pending GPT-5.6 Pro fixed-anchor review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Quarantine treatment result; no rerun until one comparator/causal edge is selected |
 | EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
@@ -121,8 +121,8 @@ explicitly approves the exception.
   decomposition plus conditional non-incumbent skill -> separate controller-time
   renewal and skill-event credit -> service-preserving temporal decoupling.
 - Authorization: GPT-5.6 Pro confirmed the source contradiction and selected
-  `R43-NRC with reset-censored controller time`. Implementation and focused
-  preflight are complete; the conclusion-bearing run requires user approval.
+  `R43-NRC with reset-censored controller time`; the user approved the exact
+  conclusion-bearing run.
 - Comparator: concurrent `fixed_refresh` is the unchanged R41B continuation;
   `r43_nrc` starts from the same checkpoint and adds zero-output renewal actor,
   renewal critic, and skill-event critic to the existing high optimizer.
@@ -166,6 +166,16 @@ explicitly approves the exception.
   reward, entropy, refresh, age-capacity, S7, or variable-`N` branch exists.
 - Status source: `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r43_native_renewal.json`.
+- Terminal result: `INVALID_R43_FIXED_ANCHOR_LOST`, with M0 valid but M1 fixed
+  anchor failed at win/key0/key1 `0.52/0.54/0.81`. M2 and M3 treatment numbers
+  have no scientific interpretation under this branch.
+- Fixed-anchor localization: the unmodified R41B checkpoint scored win
+  `0.89/0.93` on seed-1/seed-43041 evaluation streams; the fixed final
+  checkpoint scored `0.61/0.52`. Untouched source continuation and the R43
+  fixed wrapper had zero parameter difference after two same-seed updates over
+  every trained module. The pending review must decide how to define a stable,
+  mechanism-matched source comparator without rescuing R43 by seed, budget,
+  threshold, reward, or treatment tuning.
 
 ### EXP-20260716-r42-irr-native-roster-residual
 

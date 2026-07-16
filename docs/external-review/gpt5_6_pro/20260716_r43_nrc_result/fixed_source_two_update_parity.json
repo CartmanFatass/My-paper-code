@@ -1,0 +1,23 @@
+{
+  "env_steps": 3200,
+  "global_max_abs_parameter_difference": 0.0,
+  "modules": {
+    "high_policy": {
+      "max_abs_parameter_difference": 0.0
+    },
+    "individual_discriminator": {
+      "max_abs_parameter_difference": 0.0
+    },
+    "low_actor": {
+      "max_abs_parameter_difference": 0.0
+    },
+    "low_critic": {
+      "max_abs_parameter_difference": 0.0
+    },
+    "team_discriminator": {
+      "max_abs_parameter_difference": 0.0
+    }
+  },
+  "seed": 43041,
+  "updates": 2
+}

@@ -15,28 +15,26 @@ Updated: 2026-07-16
 
 ## Objective
 
-Run the single registered R43-NRC mechanism gate after user approval. GPT-5.6
-Pro confirmed the source contradiction and selected reset-censored controller
-time. The implementation now supplies a true renewal factor, a conditional
-non-incumbent skill factor, and separate renewal/skill-event credit while
-preserving the original global `k0=50` clock and source HMASD low/intrinsic path.
+Resolve the invalid R43-NRC fixed-anchor boundary before any further algorithm
+run. The paired gate completed with a valid implementation contract, but the
+fixed source-continuation arm lost the registered R41B service anchor. The NRC
+arm therefore has no interpretable scientific verdict.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Complete one scoped diff review of the R43 implementation and formal
-   contract; do not add another test layer.
-2. Commit and push the pre-launch boundary, including the raw correction
-   response and accepted disposition.
-3. Report the exact local paired-run parameters and rationale; launch only
-   after explicit user approval.
+1. Commit and push the R43 result, fixed-anchor diagnostics, and one tracked
+   GPT-5.6 Pro question.
+2. Give the user the standard manual handoff prompt and wait for the raw reply.
+3. Do not rerun R43 or start a successor until the review selects one exact
+   causal edge and minimum evidence boundary.
 
 ## Immediate Constraints
 
-- R42 must freshly extract and execute `ref/hmasd.tar` without porting it into
-  the current trainer. Preserve the original HMASD `q_D/q_d` source-algorithm
+- R41-derived gates execute a fresh `ref/hmasd.tar` extraction rather than
+  porting it into the current trainer. Preserve the original HMASD `q_D/q_d`
   terms and do not add shaping or a new intrinsic reward.
 - Track the source archive in this repository and use the enclosing project Git
   commit as its version identity; do not add hashes or checksums.
@@ -48,10 +46,18 @@ must not renew surviving agents' skills.
   external reward.
 - Do not begin open-roster or variable-`N` implementation before the fixed-`N`
   temporal gate.
-- R43 focused preflight passed on the real R41B checkpoint. The 32-outcome
-  probability decomposition error is below `1e-6`; a two-update CUDA check had
-  zero replay/prefix error and exact clock/optimizer counts. Do not add another
-  smoke or test stage before the paired run.
+- R43 run
+  `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` completed
+  `INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, but fixed final win/key0/key1 was
+  `0.52/0.54/0.81`, below the registered `0.80/0.85/0.85` anchor. Treatment
+  outcomes are quarantined and do not retire NRC.
+- The source R41B checkpoint evaluates at win `0.89` on seed 1 and `0.93` on
+  the R43 seed-43041 reset stream. The R43 fixed final checkpoint evaluates at
+  `0.61` and `0.52` on those streams. A same-seed two-update comparison between
+  untouched source continuation and the R43 fixed wrapper produced exactly
+  zero parameter difference across all five trained modules. This localizes
+  the invalidity to source-continuation instability rather than the R43 fixed
+  wrapper or evaluation stream; the exact next comparator is under review.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
@@ -81,4 +87,6 @@ must not renew surviving agents' skills.
   evidence, all three Pro rounds, and the final source-level disposition.
 - `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/` — R42 result,
   accepted R43 route, source-clock correction, raw responses, and disposition.
+- `docs/external-review/gpt5_6_pro/20260716_r43_nrc_result/` — invalid R43
+  result, fixed-anchor diagnostics, and the pending decision question.
 - `docs/external-review/legacy/` — legacy external-review evidence.

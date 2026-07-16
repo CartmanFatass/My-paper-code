@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R43-NRC True Renewal — Implemented, Formal Gate Pending
+## R43-NRC True Renewal — Invalid Fixed Anchor, Review Pending
 
 GPT-5.6 Pro confirmed the source clock contradiction and selected
 `PRESERVE SOURCE-GLOBAL CLOCK`. R43 now decomposes each native individual
@@ -37,7 +37,23 @@ conditional decoder all had nonzero direct gradients. A two-update real CUDA
 check preserved four global rows, one structural assignment, three normal
 checks, cross-update carry, two reset-censored fragments, 30 combined high
 optimizer steps, and zero high/low/factor replay or prefix error. No further
-test layer is planned before the registered paired gate.
+test layer was added before the registered paired gate.
+
+The formal paired run completed at
+`logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` with status
+`INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, including exact replay, clock,
+optimizer, and carry checks, but the fixed arm ended at win/key0/key1
+`0.52/0.54/0.81`. The treatment result is not scientific evidence.
+
+Two bounded diagnostics closed the immediate ambiguity. The R41B source
+checkpoint scored win `0.89` on its original reset stream and `0.93` on the
+R43 stream, while the fixed final checkpoint scored `0.61/0.52` on the same
+two streams. Untouched source continuation and the R43 fixed wrapper remained
+parameter-exact across two updates (`max_abs=0` for high, low actor, low critic,
+`q_D`, and `q_d`). Thus the evaluator and fixed wrapper are not the observed
+failure carrier; continued optimization of the solved source checkpoint is
+unstable under this registered continuation. No rerun or successor is active
+until external review selects a new causal edge.
 
 ## R42-IRR Native Incumbent-Roster Residual — Completed and Retired
 
