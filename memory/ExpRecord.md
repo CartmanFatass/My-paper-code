@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r53-rcma-g0 | launch-ready -- focused CUDA M0 pass | residual-capacity masked variable-N queue allocation | isolated R53 module/runner; R52 external-review folder | prelaunch commit/push | all M0 checks pass; idle capacity N makes all three schedules executable; probability and checkpoint contracts exact | Commit/push once, then run the registered 128K local gate |
+| EXP-20260716-r53-rcma-g0 | completed -- `NO_ACCESS_R53_RCMA_SPECIALISTS` | residual-capacity masked variable-N queue allocation | `logs/r53_rcma_20260717_010744`; tracked R53 result-review folder | exact result review | M0 pass; all final deterministic specialist/shared utilities `1.0`; only specialist N5/N6 and shared macro final-minus-zero LCB gates fail | Keep the terminal status binding, prohibit rescue, and review whether `NO_ACCESS` overstates a learning-gain failure |
 | EXP-20260716-r52-arfa-g0 | completed -- Pro-confirmed `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | complete | M0 pass; stochastic carrier passes every N; all deterministic specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52; reuse only the conclusion that stochastic return does not guarantee greedy joint-mode transport |
 | EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
@@ -75,10 +75,8 @@ explicitly approves the exception.
 
 ## EXP-20260716-r53-rcma-g0 — Residual-Capacity Masked Autoregression
 
-- Status: automatic exchange 2/8 returned
-  `CORRECT_R53_RCMA_G0_ACTION_CONTRACT`; the corrected isolated implementation
-  and focused CUDA M0 smoke are complete. The registered formal local gate is
-  launch-ready after one prelaunch commit/push.
+- Status: completed `NO_ACCESS_R53_RCMA_SPECIALISTS` at
+  `logs/r53_rcma_20260717_010744`; implementation valid and all M0 checks pass.
 - Correction: the complete action set is N+1 productive queues plus one
   anonymous idle entity. Productive capacity is one and idle capacity is N.
   This preserves productive injectivity while making all three registered M0
@@ -110,6 +108,13 @@ explicitly approves the exception.
   `VALID_FAIL_R53_SHARED_VARIABLE_N`; full pass ->
   `PASS_R53_RCMA_VARIABLE_N`, authorizing only same-task exogenous join/leave
   and membership censoring.
+- Result: specialist training positive-return rate is `1.0` for every N;
+  stochastic utilities are `0.9218/0.9604/0.9488/0.9627/0.9720`, and every
+  deterministic specialist/shared utility and component fraction is `1.0`.
+  M1 fails only because final-minus-zero LCB is `0.1139/0.1193` for N5/N6
+  versus `>0.15`; M2 fails only because shared macro LCB is `0.1746` versus
+  `>0.20`. All other M1/M2 checks pass. This valid terminal branch cannot be
+  rescued, but its broader interpretation requires the registered result audit.
 - Launch-exact closure: actor member fields are `has_previous_queue` and
   `served_previous_step`; all K action entities remain structurally active;
   zero denominators map to zero; previous action starts absent and updates even

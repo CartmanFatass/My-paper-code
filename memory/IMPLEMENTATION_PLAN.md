@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R53-RCMA-G0 Variable-N Queue Allocation — Corrected Launch Exact
+## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 
 The sole selected edge is residual-capacity masked autoregression in an
 anonymous multi-rate queue task. Each autoregressive token sees the remaining
@@ -31,11 +31,13 @@ then the unchanged local CUDA gate. No field-slot, mean-field, skill, lifetime,
 intrinsic, shaping, beam-search, joint-MAP, extra exposure, or R52 rescue work
 may enter this stage.
 
-Implementation status: the isolated module, gate, and local runner are complete.
-The focused CUDA M0 smoke passed the three scripted schedules, exact model and
-exposure contract, sample-to-teacher-forced replay, heterogeneous-capacity
-support, gradients, drift, and checkpoint reload. The implementation boundary
-is frozen for the registered formal gate.
+Implementation status: terminal. The isolated module, gate and local runner
+completed the exact 128K-per-arm contract. M0 passed, including zero replay and
+checkpoint error. All final deterministic specialist and shared policies reach
+utility `1.0`, but the registered causal learning-gain lower bounds fail at
+specialist `N=5,6` and for the shared macro. The emitted status is
+`NO_ACCESS_R53_RCMA_SPECIALISTS`; no implementation change, rerun or rescue is
+authorized. The remaining work is result interpretation only.
 
 ## R52-ARFA-G0 Task-Dynamic Variable-N Learning — Launch Exact
 

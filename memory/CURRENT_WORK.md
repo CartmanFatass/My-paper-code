@@ -11,23 +11,23 @@ Updated: 2026-07-17
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
-  exchanges in the existing consultation conversation. Used: `2/8`; remaining:
-  `6/8`. Use one only at a real review or launch-clarification boundary.
+  exchanges in the existing consultation conversation. Used: `3/8`; remaining:
+  `5/8`. Use one only at a real review or launch-clarification boundary.
 
 ## Objective
 
-Run the corrected `R53-RCMA-G0` access and shared-variable-N gate. The minimal
-action correction adds one anonymous idle entity with capacity `N`; productive
-queues retain unit residual capacity and all registered scientific thresholds.
+Disposition the completed `R53-RCMA-G0` result at its exact learning-gain
+boundary, while the independent literature review selects a broader
+variable-`N` / variable-`T_i` architecture sequence.
 
 ## Next Actions
 
-1. Finish the running registered 128K-transition local CUDA gate without
-   expansion.
-2. Commit/push the curated `N/k/many-agent` literature package and its dedicated
-   architecture-review question, then use one automatic Pro exchange.
-3. Archive and disposition the terminal R53 result separately; do not merge
-   literature advice with the registered R53 estimand.
+1. Archive the in-progress literature-review response from automatic exchange
+   3/8 and record its disposition.
+2. Commit/push the terminal R53 result package without rescue or reinterpretive
+   threshold changes.
+3. After the consultation is idle, submit the separate R53 result audit; do not
+   merge literature advice with the registered R53 estimand.
 
 ## Immediate Constraints
 
@@ -140,6 +140,14 @@ queues retain unit residual capacity and all registered scientific thresholds.
   residual capacity, dynamic mask, previous-action relation, and hidden replay
   errors were zero; all relevant modules received gradients and drifted, the
   exact checkpoint reload passed, and transient smoke output was removed.
+- Formal R53 run `logs/r53_rcma_20260717_010744` completed
+  `NO_ACCESS_R53_RCMA_SPECIALISTS` with every M0 check true. All specialist and
+  shared final deterministic utilities and both component fractions were
+  `1.0`; M1 failed only because final-minus-zero LCBs for `N=5,6` were
+  `0.1139/0.1193 < 0.15`, and M2 failed only because the shared macro LCB was
+  `0.1746 < 0.20`. The result therefore rejects the registered learning-gain
+  gate, not executable support or final-policy competence. No rescue is
+  authorized pending the exact result review.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
