@@ -23,10 +23,14 @@ held-out twins test transport rather than an unseen label rule. These choices
 are frozen before the formal launch.
 
 The isolated generator, paired models and local runner are implemented. The
-focused CUDA wiring check passed and removed its transient output. The next
-boundary is one pre-launch commit/push followed by the unchanged supervised
-gate. No environment reward, critic, PPO, low actor, skill, membership event or
-duration enters this stage.
+focused CUDA wiring check passed. A first formal attempt isolated a padding
+invariance defect; compacting masked active tokens fixed it without affecting
+unmasked training. The fresh formal retry passed every M0 check but ended
+`NO_ACCESS_R54_FULL_SET_REFERENCE`: the uncompressed prerequisite fails all M1
+categories and degrades strongly with N. The hybrid arm is quarantined and M2
+is not reached. Retire the exact R54 contract without rescue and select no
+successor until the result review closes. Any successor must absorb a principle
+by replacing or simplifying a bottleneck, not by stacking literature modules.
 
 ## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 

@@ -16,17 +16,18 @@ Updated: 2026-07-17
 
 ## Objective
 
-Implement and run the isolated supervised `R54-HFSR-G0` representation-
-sufficiency gate selected by both completed Pro reviews. It compares a full
-active-set reference with deterministic `M=8,L=2` field-slot compression only.
+Close the valid `NO_ACCESS_R54_FULL_SET_REFERENCE` result and obtain one exact
+post-R54 causal route. The uncompressed prerequisite failed, so hybrid results
+are quarantined and no field-slot module may enter the main controller.
 
 ## Next Actions
 
-1. Commit/push the launch-ready R54 implementation and frozen auxiliary-loss
-   definitions.
-2. Run the exact 600-update supervised gate locally on CUDA.
-3. Archive and review its terminal M0/M1/M2 branch before selecting any
-   ordinary-learning transport work.
+1. Commit/push the exact R54 terminal JSON, question and provisional
+   disposition.
+2. Use one authorized GPT-5.6 Pro exchange to audit validity, retirement scope
+   and the unique next causal edge.
+3. Accept only a replacement/simplification route; do not stack literature
+   modules or enter dynamic membership/time from this failed prerequisite.
 
 ## Immediate Constraints
 
@@ -161,6 +162,13 @@ active-set reference with deterministic `M=8,L=2` field-slot compression only.
   competence pass; learning gain fails; shared-versus-specialist transport is
   unidentified. The exact R53 combination is retired without rescue. This
   closes the deferral and activates only `R54-HFSR-G0`.
+- Formal R54 retry `logs/r54_hfsr_20260717_022452` completed valid
+  `NO_ACCESS_R54_FULL_SET_REFERENCE`. Every M0 check passes, including zero
+  replay/checkpoint/padding/collision error and exact 600 updates per arm.
+  Full-set token accuracy falls from `0.9021` at N8 to `0.2762` at N64;
+  critical accuracy falls from `0.6934` to `0.1152`; exact-roster success is
+  `0.6328/0.1367/0/0`. All M1 checks fail. The hybrid arm is quarantined and
+  no compression conclusion or module integration is authorized.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

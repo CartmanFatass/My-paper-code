@@ -1,0 +1,260 @@
+{
+  "contract": {
+    "batch_size": 64,
+    "bootstrap_repetitions": 10000,
+    "case_exposures_per_arm": 38400,
+    "checkpoint_selection": "exact_final",
+    "dropout": 0.0,
+    "exact_residual_count": 2,
+    "heldout_cases_per_n": 512,
+    "heldout_team_sizes": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "learning_rate": 0.0003,
+    "loss": "oracle_pointer + 0.1*slot_reconstruction_mse + 0.01*KL(slot_mass||uniform)",
+    "mean_alias_cases_per_n": 256,
+    "optimizer": "Adam",
+    "parameters_per_arm": 49576,
+    "prohibited_paths": {
+      "agent_id_input": 0,
+      "critic": 0,
+      "duration": 0,
+      "environment_reward": 0,
+      "human_role_input": 0,
+      "intrinsic_reward": 0,
+      "low_actor": 0,
+      "membership_events": 0,
+      "ppo": 0,
+      "skills": 0,
+      "slot_id_input": 0,
+      "task_success_predicate_input": 0
+    },
+    "seeds": {
+      "bootstrap": 84054,
+      "data": 54054,
+      "minibatch_order": 74054,
+      "model": 64054
+    },
+    "slot_count": 8,
+    "train_team_sizes": [
+      8,
+      16,
+      32
+    ],
+    "unique_training_cases_per_n": 1024,
+    "updates_per_arm": 600
+  },
+  "device": "cuda",
+  "dry_run": false,
+  "dry_run_valid": false,
+  "experiment_id": "EXP-20260717-r54-hfsr-g0",
+  "implementation_valid": true,
+  "m0": {
+    "checks": {
+      "capacity_one_collision_count_zero": true,
+      "critical_task_exactly_one_qualified_member": true,
+      "deterministic_slots_masses_residuals": true,
+      "exact_feature_dimensions": true,
+      "exact_final_checkpoint_reload": true,
+      "finite_gradients_losses_parameters": true,
+      "hybrid_no_member_member_nxn_tensor": true,
+      "hybrid_representation_token_count_exact": true,
+      "masked_junk_padding_invariance": true,
+      "mean_alias_population_means_exact": true,
+      "optimizer_steps_exact": true,
+      "paired_external_order_and_oracle_prefixes": true,
+      "paired_initial_parameters": true,
+      "paired_minibatches": true,
+      "parameter_count_exact": true,
+      "prohibited_training_paths_zero": true,
+      "simultaneous_permutation_equivariance": true,
+      "slot_policy_log_probability_count_zero": true,
+      "teacher_forced_pointer_replay": true,
+      "unique_feasible_hungarian_oracle": true
+    },
+    "diagnostics": {
+      "collision_count": 0,
+      "critical_qualification_errors": 0,
+      "full_padding_max_error": 0.0,
+      "full_permutation_max_error": 8.344650268554688e-07,
+      "full_reload_output_error": 0.0,
+      "full_reload_parameter_error": 0.0,
+      "full_replay_max_error": 0.0,
+      "hybrid_member_member_tensor_count": 0,
+      "hybrid_padding_max_error": 0.0,
+      "hybrid_permutation_max_error": 7.748603820800781e-07,
+      "hybrid_reload_output_error": 0.0,
+      "hybrid_reload_parameter_error": 0.0,
+      "hybrid_replay_max_error": 0.0,
+      "hybrid_representation_tokens": 10,
+      "mean_alias_population_mean_max_error": 0.0,
+      "min_unique_oracle_margin": 0.0001346118050850072,
+      "parameter_count_full": 49576,
+      "parameter_count_hybrid": 49576,
+      "slot_determinism_max_error": 0.0,
+      "training": {
+        "case_exposures_per_arm": 38400,
+        "elapsed_seconds": 125.78908896446228,
+        "finite_gradients_losses_parameters": true,
+        "full_optimizer_steps": 600,
+        "full_relative_drift": 0.7788271748029301,
+        "hybrid_optimizer_steps": 600,
+        "hybrid_relative_drift": 0.7943852793091054,
+        "initial_parameter_max_difference": 0.0,
+        "paired_minibatch_mismatch_count": 0,
+        "paired_oracle_prefix_mismatch_count": 0
+      }
+    },
+    "passed": true
+  },
+  "m1_full_active_set_reference": {
+    "by_n": {
+      "16": {
+        "collision_count": 0,
+        "context_width": 16,
+        "critical_assignment_accuracy": 0.45703125,
+        "critical_residual_inclusion": 0.17578125,
+        "effective_slot_count_median": 7.475122451782227,
+        "exact_roster_success": 0.13671875,
+        "mean_alias_critical_accuracy": 0.34765625,
+        "normalized_regret": 495.98702399654206,
+        "token_accuracy": 0.7939453125
+      },
+      "32": {
+        "collision_count": 0,
+        "context_width": 32,
+        "critical_assignment_accuracy": 0.220703125,
+        "critical_residual_inclusion": 0.185546875,
+        "effective_slot_count_median": 7.463242530822754,
+        "exact_roster_success": 0.0,
+        "mean_alias_critical_accuracy": 0.1875,
+        "normalized_regret": 799.3332586025288,
+        "token_accuracy": 0.4998779296875
+      },
+      "64": {
+        "collision_count": 0,
+        "context_width": 64,
+        "critical_assignment_accuracy": 0.115234375,
+        "critical_residual_inclusion": 0.146484375,
+        "effective_slot_count_median": 7.458911895751953,
+        "exact_roster_success": 0.0,
+        "mean_alias_critical_accuracy": 0.08203125,
+        "normalized_regret": 767.1053734865087,
+        "token_accuracy": 0.2762451171875
+      },
+      "8": {
+        "collision_count": 0,
+        "context_width": 8,
+        "critical_assignment_accuracy": 0.693359375,
+        "critical_residual_inclusion": 0.337890625,
+        "effective_slot_count_median": 7.482434272766113,
+        "exact_roster_success": 0.6328125,
+        "mean_alias_critical_accuracy": 0.48046875,
+        "normalized_regret": 142.94760066304667,
+        "token_accuracy": 0.902099609375
+      }
+    },
+    "checks": {
+      "critical_accuracy_every_n": false,
+      "macro_exact_roster_success": false,
+      "n64_exact_roster_success": false,
+      "normalized_regret_every_n": false,
+      "token_accuracy_every_n": false
+    },
+    "macro_exact_roster_success": 0.1923828125,
+    "passed": false
+  },
+  "m2_hybrid_m8_l2": {
+    "by_n": {
+      "16": {
+        "collision_count": 0,
+        "context_width": 10,
+        "critical_assignment_accuracy": 0.42578125,
+        "critical_residual_inclusion": 0.0625,
+        "effective_slot_count_median": 7.412322521209717,
+        "exact_roster_success": 0.109375,
+        "mean_alias_critical_accuracy": 0.28515625,
+        "normalized_regret": 534.5345192498803,
+        "token_accuracy": 0.79345703125
+      },
+      "32": {
+        "collision_count": 0,
+        "context_width": 10,
+        "critical_assignment_accuracy": 0.244140625,
+        "critical_residual_inclusion": 0.05078125,
+        "effective_slot_count_median": 7.392489433288574,
+        "exact_roster_success": 0.0,
+        "mean_alias_critical_accuracy": 0.171875,
+        "normalized_regret": 778.056548437243,
+        "token_accuracy": 0.51702880859375
+      },
+      "64": {
+        "collision_count": 0,
+        "context_width": 10,
+        "critical_assignment_accuracy": 0.119140625,
+        "critical_residual_inclusion": 0.015625,
+        "effective_slot_count_median": 7.381133079528809,
+        "exact_roster_success": 0.0,
+        "mean_alias_critical_accuracy": 0.0703125,
+        "normalized_regret": 786.005885595867,
+        "token_accuracy": 0.2872314453125
+      },
+      "8": {
+        "collision_count": 0,
+        "context_width": 10,
+        "critical_assignment_accuracy": 0.703125,
+        "critical_residual_inclusion": 0.275390625,
+        "effective_slot_count_median": 7.435030937194824,
+        "exact_roster_success": 0.642578125,
+        "mean_alias_critical_accuracy": 0.4921875,
+        "normalized_regret": 129.63014057397436,
+        "token_accuracy": 0.905517578125
+      }
+    },
+    "checks": {
+      "critical_accuracy_every_n": false,
+      "critical_member_residual_inclusion": false,
+      "effective_slot_count_median": true,
+      "macro_exact_roster_ratio": true,
+      "mean_alias_critical_accuracy_every_n": false,
+      "n64_exact_roster_ratio": false,
+      "normalized_regret_every_n": false,
+      "regret_difference_ucb_every_n": false,
+      "token_accuracy_every_n": false
+    },
+    "global_critical_residual_inclusion": 0.10107421875,
+    "global_effective_slot_count_median": 7.400920867919922,
+    "macro_exact_roster_ratio": 0.977157309613752,
+    "macro_exact_roster_success": 0.18798828125,
+    "n64_exact_roster_ratio": 0.0,
+    "passed": false,
+    "regret_difference_bootstrap": {
+      "16": {
+        "lower_95": -4.464293292097524,
+        "mean": 38.54749525333824,
+        "upper_95": 80.94482515579496
+      },
+      "32": {
+        "lower_95": -61.57008638644572,
+        "mean": -21.276710165285714,
+        "upper_95": 20.25047206075773
+      },
+      "64": {
+        "lower_95": -12.331098245960312,
+        "mean": 18.90051210935829,
+        "upper_95": 49.51877397508893
+      },
+      "8": {
+        "lower_95": -36.438743198648815,
+        "mean": -13.317460089072283,
+        "upper_95": 9.571980545563015
+      }
+    }
+  },
+  "next_action": "retire the exact toy, generator, model, and gate without data or network rescue",
+  "schema_version": 1,
+  "status": "NO_ACCESS_R54_FULL_SET_REFERENCE"
+}
