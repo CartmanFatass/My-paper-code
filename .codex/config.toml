@@ -1,15 +1,9 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# The delegated-subagent workflow is retired (see AGENTS.md). The controller
-# works directly, so no agent roster is registered here.
-#
-# The 14 role definitions still exist as inert files under `.codex/agents/*.toml`
-# and the previous `[agents."..."]` registry is in git history
-# (`git show a9673cf:.codex/config.toml`). Re-register only if the workflow is
-# deliberately revived — a registered roster that AGENTS.md forbids using is the
-# worst case: Codex either spawns agents it was told not to, or burns reasoning
-# deciding whether it may.
+# Use the stable built-in multi-agent feature rather than multi_agent_v2.
+# No custom agent roster is registered here; AGENTS.md still governs when
+# collaboration is allowed.
 
 [features]
-multi_agent = false
+multi_agent = true
 multi_agent_v2 = false

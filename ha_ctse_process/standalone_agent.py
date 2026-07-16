@@ -3269,39 +3269,76 @@ class StandaloneProcessAgent:
         return counts
 
     def low_bootstrap_values(self, observations, states) -> dict[int, np.ndarray]:
-        bootstrap: dict[int, np.ndarray] = {}
-        if not self.use_recurrent_low_level:
-            for env_id in range(self.num_envs):
-                obs = np.asarray(observations[env_id], dtype=np.float32)
-                obs_t = torch.as_tensor(obs, dtype=torch.float32, device=self.device)
-                skills_t = torch.as_tensor(self.active_skills[env_id], dtype=torch.long, device=self.device)
-                with torch.no_grad():
-                    _actions, _logp, _entropy, values = self.low.act(obs_t, skills_t, deterministic=True)
-                bootstrap[env_id] = values.detach().cpu().numpy().astype(np.float32)
-            return bootstrap
+        if len(observations) != self.num_envs or len(states) != self.num_envs:
+            raise ValueError("low bootstrap inputs must match num_envs")
+        obs_rows = [self._joint_obs_array(obs) for obs in observations]
+        obs_np = np.asarray(obs_rows, dtype=np.float32)
+        skills_np = self.active_skills.astype(np.int64, copy=True)
+        flat_rows = self.num_envs * self.n_agents
+        obs_t = torch.as_tensor(
+            obs_np, dtype=torch.float32, device=self.device
+        ).reshape(flat_rows, self.obs_dim)
+        skills_t = torch.as_tensor(
+            skills_np, dtype=torch.long, device=self.device
+        ).reshape(flat_rows)
 
-        for env_id in range(self.num_envs):
-            joint_obs = self._joint_obs_array(observations[env_id])
-            state_arr = self._state_array(states[env_id], joint_obs)
-            state_t = torch.as_tensor(state_arr, dtype=torch.float32, device=self.device).reshape(1, -1).expand(
-                self.n_agents,
-                -1,
-            )
-            skills_t = torch.as_tensor(self.active_skills[env_id], dtype=torch.long, device=self.device)
-            team_code_t = torch.full(
-                (self.n_agents,),
-                int(self.active_team_codes[env_id]),
-                dtype=torch.long,
-                device=self.device,
-            )
-            critic_hxs_t = torch.as_tensor(self.low_critic_hxs[env_id], dtype=torch.float32, device=self.device)
-            agent_ids_t = torch.arange(self.n_agents, dtype=torch.long, device=self.device)
+        if not self.use_recurrent_low_level:
             with torch.no_grad():
-                values = self.low.value(state_t, skills_t, team_code_t, critic_hxs_t, agent_ids_t)
-                if self.low_value_norm is not None:
-                    values = self.low_value_norm.denormalize_tensor(values)
-            bootstrap[env_id] = values.detach().cpu().numpy().astype(np.float32)
-        return bootstrap
+                _actions, _logp, _entropy, values = self.low.act(
+                    obs_t, skills_t, deterministic=True
+                )
+            values_np = (
+                values.detach()
+                .cpu()
+                .numpy()
+                .reshape(self.num_envs, self.n_agents)
+                .astype(np.float32, copy=False)
+            )
+            return {
+                env_id: values_np[env_id].copy()
+                for env_id in range(self.num_envs)
+            }
+
+        state_np = np.stack(
+            [
+                self._state_array(states[env_id], obs_rows[env_id])
+                for env_id in range(self.num_envs)
+            ],
+            axis=0,
+        ).astype(np.float32, copy=False)
+        state_t = torch.as_tensor(
+            state_np, dtype=torch.float32, device=self.device
+        ).unsqueeze(1).expand(
+            self.num_envs, self.n_agents, self.state_dim
+        ).reshape(flat_rows, self.state_dim)
+        team_code_t = torch.as_tensor(
+            self.active_team_codes, dtype=torch.long, device=self.device
+        ).unsqueeze(1).expand(
+            self.num_envs, self.n_agents
+        ).reshape(flat_rows)
+        critic_hxs_t = torch.as_tensor(
+            self.low_critic_hxs, dtype=torch.float32, device=self.device
+        ).reshape(flat_rows, self.low_rnn_hidden_size)
+        agent_ids_t = torch.arange(
+            self.n_agents, dtype=torch.long, device=self.device
+        ).repeat(self.num_envs)
+        with torch.no_grad():
+            values = self.low.value(
+                state_t, skills_t, team_code_t, critic_hxs_t, agent_ids_t
+            )
+            if self.low_value_norm is not None:
+                values = self.low_value_norm.denormalize_tensor(values)
+        values_np = (
+            values.detach()
+            .cpu()
+            .numpy()
+            .reshape(self.num_envs, self.n_agents)
+            .astype(np.float32, copy=False)
+        )
+        return {
+            env_id: values_np[env_id].copy()
+            for env_id in range(self.num_envs)
+        }
 
     def _fit_vector(self, value, dim: int) -> np.ndarray:
         arr = np.asarray(value, dtype=np.float32).reshape(-1)
@@ -3920,12 +3957,15 @@ class StandaloneProcessAgent:
         ):
             raise RuntimeError("R30 controller is not initialized")
         env_id = int(env_id)
-        joint_obs = self._joint_obs_array(obs)
-        state_arr = self._state_array(state, joint_obs)
         due = bool(
             not np.all(self.has_active_skill[env_id])
             or int(self.steps_to_check[env_id]) <= 0
         )
+        if not due and self.high_check_buffer.pending[env_id] is not None:
+            return
+
+        joint_obs = self._joint_obs_array(obs)
+        state_arr = self._state_array(state, joint_obs)
 
         with torch.no_grad():
             context = self._r30_context_tensors(state_arr, joint_obs)
@@ -4614,56 +4654,89 @@ class StandaloneProcessAgent:
         self._situation_hazard_events = 0
         return metrics
 
-    def act_low(
+    def act_low_batch(
         self,
-        obs: np.ndarray,
-        env_id: int = 0,
+        observations,
+        *,
+        env_ids=None,
         deterministic: bool = False,
-        state=None,
+        states=None,
         return_context: bool = False,
         capture_deterministic_action: bool = False,
     ):
-        env_id = int(env_id)
-        obs_t = torch.as_tensor(obs, dtype=torch.float32, device=self.device)
-        skills_t = torch.as_tensor(self.active_skills[env_id], dtype=torch.long, device=self.device)
-        state_arr = self._state_array(state, self._joint_obs_array(obs))
-        context = {
-            "state": state_arr.copy(),
-            "team_code": int(self.active_team_codes[env_id]),
-            "actor_hxs": self.low_actor_hxs[env_id].copy(),
-            "critic_hxs": self.low_critic_hxs[env_id].copy(),
-        }
-        deterministic_actions_np = None
+        obs_rows = [self._joint_obs_array(obs) for obs in observations]
+        batch_size = len(obs_rows)
+        if batch_size <= 0:
+            raise ValueError("act_low_batch requires at least one environment")
+        if env_ids is None:
+            env_ids_np = np.arange(batch_size, dtype=np.int64)
+        else:
+            env_ids_np = np.asarray(tuple(env_ids), dtype=np.int64).reshape(-1)
+        if env_ids_np.shape != (batch_size,):
+            raise ValueError("act_low_batch env_ids must match observations")
+        if np.any(env_ids_np < 0) or np.any(env_ids_np >= self.num_envs):
+            raise ValueError("act_low_batch env_id is outside the policy runtime")
+        if np.unique(env_ids_np).size != batch_size:
+            raise ValueError("act_low_batch env_ids must be unique")
+
+        if states is None:
+            state_rows = [None for _ in range(batch_size)]
+        else:
+            state_rows = list(states)
+            if len(state_rows) != batch_size:
+                raise ValueError("act_low_batch states must match observations")
+
+        obs_np = np.asarray(obs_rows, dtype=np.float32)
+        state_np = np.stack(
+            [
+                self._state_array(state_rows[row], obs_rows[row])
+                for row in range(batch_size)
+            ],
+            axis=0,
+        ).astype(np.float32, copy=False)
+        skills_np = self.active_skills[env_ids_np].astype(np.int64, copy=True)
+        team_codes_np = self.active_team_codes[env_ids_np].astype(np.int64, copy=True)
+        actor_hxs_before = self.low_actor_hxs[env_ids_np].astype(np.float32, copy=True)
+        critic_hxs_before = self.low_critic_hxs[env_ids_np].astype(np.float32, copy=True)
+
+        flat_rows = batch_size * self.n_agents
+        obs_t = torch.as_tensor(obs_np, dtype=torch.float32, device=self.device).reshape(
+            flat_rows, self.obs_dim
+        )
+        skills_t = torch.as_tensor(
+            skills_np, dtype=torch.long, device=self.device
+        ).reshape(flat_rows)
+        deterministic_actions = None
         with torch.no_grad():
             if self.use_recurrent_low_level:
-                state_t = torch.as_tensor(state_arr, dtype=torch.float32, device=self.device).reshape(1, -1).expand(
-                    self.n_agents,
-                    -1,
+                state_t = torch.as_tensor(
+                    state_np, dtype=torch.float32, device=self.device
+                ).unsqueeze(1).expand(
+                    batch_size, self.n_agents, self.state_dim
+                ).reshape(
+                    flat_rows, self.state_dim
                 )
-                team_code_t = torch.full(
-                    (self.n_agents,),
-                    int(self.active_team_codes[env_id]),
-                    dtype=torch.long,
-                    device=self.device,
-                )
-                agent_ids_t = torch.arange(self.n_agents, dtype=torch.long, device=self.device)
+                team_code_t = torch.as_tensor(
+                    team_codes_np, dtype=torch.long, device=self.device
+                ).unsqueeze(1).expand(
+                    batch_size, self.n_agents
+                ).reshape(flat_rows)
+                agent_ids_t = torch.arange(
+                    self.n_agents, dtype=torch.long, device=self.device
+                ).repeat(batch_size)
                 actor_hxs_t = torch.as_tensor(
-                    self.low_actor_hxs[env_id],
-                    dtype=torch.float32,
-                    device=self.device,
-                )
+                    actor_hxs_before, dtype=torch.float32, device=self.device
+                ).reshape(flat_rows, self.low_rnn_hidden_size)
                 critic_hxs_t = torch.as_tensor(
-                    self.low_critic_hxs[env_id],
-                    dtype=torch.float32,
-                    device=self.device,
-                )
-                r28_g1_enabled = bool(
+                    critic_hxs_before, dtype=torch.float32, device=self.device
+                ).reshape(flat_rows, self.low_rnn_hidden_size)
+                capture_deterministic = bool(
                     getattr(self, "r28_g1_enabled", False)
                     or capture_deterministic_action
                 )
                 low_kwargs = (
                     {"return_deterministic_action": True}
-                    if r28_g1_enabled
+                    if capture_deterministic
                     else {}
                 )
                 low_result = self.low.act(
@@ -4677,7 +4750,7 @@ class StandaloneProcessAgent:
                     deterministic=deterministic,
                     **low_kwargs,
                 )
-                if r28_g1_enabled:
+                if capture_deterministic:
                     (
                         actions,
                         logp,
@@ -4687,13 +4760,8 @@ class StandaloneProcessAgent:
                         new_critic_hxs,
                         deterministic_actions,
                     ) = low_result
-                    deterministic_actions_np = (
-                        deterministic_actions.detach().cpu().numpy().astype(np.float32)
-                    )
                 else:
                     actions, logp, _, values, new_actor_hxs, new_critic_hxs = low_result
-                self.low_actor_hxs[env_id] = new_actor_hxs.detach().cpu().numpy().astype(np.float32)
-                self.low_critic_hxs[env_id] = new_critic_hxs.detach().cpu().numpy().astype(np.float32)
                 if self.low_value_norm is not None:
                     values = self.low_value_norm.denormalize_tensor(values)
             else:
@@ -4702,19 +4770,91 @@ class StandaloneProcessAgent:
                     skills_t,
                     deterministic=deterministic,
                 )
-        if deterministic_actions_np is not None:
-            context["deterministic_actions"] = deterministic_actions_np
-        self._last_low_context[env_id] = context
-        result = (
-            actions.cpu().numpy().astype(np.int64 if self.action_space_type == "discrete" else np.float32),
-            logp.cpu().numpy().astype(np.float32),
-            values.cpu().numpy().astype(np.float32),
+                new_actor_hxs = None
+                new_critic_hxs = None
+
+        action_shape = (
+            (batch_size, self.n_agents, self.action_dim)
+            if self.action_space_type == "continuous"
+            else (batch_size, self.n_agents)
+        )
+        actions_np = actions.detach().cpu().numpy().reshape(action_shape).astype(
+            np.int64 if self.action_space_type == "discrete" else np.float32,
+            copy=False,
+        )
+        logp_np = logp.detach().cpu().numpy().reshape(batch_size, self.n_agents).astype(
+            np.float32, copy=False
+        )
+        values_np = values.detach().cpu().numpy().reshape(batch_size, self.n_agents).astype(
+            np.float32, copy=False
+        )
+        deterministic_actions_np = None
+        if deterministic_actions is not None:
+            deterministic_actions_np = (
+                deterministic_actions.detach()
+                .cpu()
+                .numpy()
+                .reshape(batch_size, self.n_agents, self.action_dim)
+                .astype(np.float32, copy=False)
+            )
+        if new_actor_hxs is not None and new_critic_hxs is not None:
+            actor_hxs_after = (
+                new_actor_hxs.detach()
+                .cpu()
+                .numpy()
+                .reshape(batch_size, self.n_agents, self.low_rnn_hidden_size)
+                .astype(np.float32, copy=False)
+            )
+            critic_hxs_after = (
+                new_critic_hxs.detach()
+                .cpu()
+                .numpy()
+                .reshape(batch_size, self.n_agents, self.low_rnn_hidden_size)
+                .astype(np.float32, copy=False)
+            )
+            self.low_actor_hxs[env_ids_np] = actor_hxs_after
+            self.low_critic_hxs[env_ids_np] = critic_hxs_after
+
+        contexts = []
+        for row, env_id in enumerate(env_ids_np):
+            context = {
+                "state": state_np[row].copy(),
+                "team_code": int(team_codes_np[row]),
+                "actor_hxs": actor_hxs_before[row].copy(),
+                "critic_hxs": critic_hxs_before[row].copy(),
+            }
+            if deterministic_actions_np is not None:
+                context["deterministic_actions"] = deterministic_actions_np[row].copy()
+            self._last_low_context[int(env_id)] = context
+            contexts.append(context)
+
+        result = (actions_np, logp_np, values_np)
+        if return_context:
+            return (*result, contexts)
+        return result
+
+    def act_low(
+        self,
+        obs: np.ndarray,
+        env_id: int = 0,
+        deterministic: bool = False,
+        state=None,
+        return_context: bool = False,
+        capture_deterministic_action: bool = False,
+    ):
+        result = self.act_low_batch(
+            [obs],
+            env_ids=[int(env_id)],
+            deterministic=deterministic,
+            states=[state],
+            return_context=return_context,
+            capture_deterministic_action=capture_deterministic_action,
         )
         if return_context:
-            return (*result, context)
-        return (
-            *result,
-        )
+            actions, logp, values, contexts = result
+            return actions[0], logp[0], values[0], contexts[0]
+        actions, logp, values = result
+        return actions[0], logp[0], values[0]
 
     def r27_g2_audit_step(
         self,
@@ -9192,7 +9332,13 @@ class StandaloneProcessAgent:
             advantages = (advantages - mean) / (std + 1e-8)
         return returns, advantages.astype(np.float32), values, env_ids
 
-    def _low_sequence_chunks(self, rollout: Rollout, returns: np.ndarray, advantages: np.ndarray, env_ids: np.ndarray):
+    def _low_sequence_chunks(
+        self,
+        rollout: Rollout,
+        returns: np.ndarray,
+        advantages: np.ndarray,
+        env_ids: np.ndarray,
+    ):
         obs_arr = np.asarray(rollout.obs, dtype=np.float32)
         states_arr = np.asarray(rollout.states, dtype=np.float32)
         skills_arr = np.asarray(rollout.skills, dtype=np.int64)
@@ -9203,8 +9349,8 @@ class StandaloneProcessAgent:
         actor_hxs_arr = np.asarray(rollout.low_actor_hxs, dtype=np.float32)
         critic_hxs_arr = np.asarray(rollout.low_critic_hxs, dtype=np.float32)
         values_arr = np.asarray(rollout.values, dtype=np.float32)
-        chunks = []
         seq_len = int(max(self.low_sequence_length, 1))
+        chunks = []
         for env_id in np.unique(env_ids):
             indices = np.flatnonzero(env_ids == int(env_id))
             for start in range(0, len(indices), seq_len):
@@ -9219,82 +9365,161 @@ class StandaloneProcessAgent:
                         "initial_critic_hxs": critic_hxs_arr[first],
                     }
                 )
-        return {
-            "obs": obs_arr,
-            "states": states_arr,
-            "skills": skills_arr,
-            "team_codes": team_codes_arr,
-            "actions": actions_arr,
-            "old_logp": old_logp_arr,
-            "old_values": values_arr,
-            "returns": returns,
-            "advantages": advantages,
-            "dones": dones_arr,
-            "chunks": chunks,
-        }
+        if not chunks:
+            return {
+                "num_chunks": 0,
+                "lengths": np.zeros(0, dtype=np.int64),
+            }
 
-    def _low_batch_from_chunks(self, data: dict[str, Any], chunk_batch: list[dict[str, Any]]):
-        batch_size = len(chunk_batch)
-        time_steps = max(int(chunk["indices"].size) for chunk in chunk_batch)
-        obs = np.zeros((time_steps, batch_size, self.n_agents, self.obs_dim), dtype=np.float32)
-        states = np.zeros((time_steps, batch_size, self.state_dim), dtype=np.float32)
-        skills = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.int64)
-        team_codes = np.zeros((time_steps, batch_size), dtype=np.int64)
-        old_logp = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.float32)
-        old_values = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.float32)
-        returns = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.float32)
-        advantages = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.float32)
-        masks = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.float32)
-        reset_masks = np.ones((time_steps, batch_size, self.n_agents), dtype=np.float32)
+        num_chunks = len(chunks)
+        lengths = np.asarray(
+            [int(chunk["indices"].size) for chunk in chunks], dtype=np.int64
+        )
+        time_steps = int(np.max(lengths))
+        obs = np.zeros(
+            (time_steps, num_chunks, self.n_agents, self.obs_dim), dtype=np.float32
+        )
+        states = np.zeros(
+            (time_steps, num_chunks, self.state_dim), dtype=np.float32
+        )
+        skills = np.zeros(
+            (time_steps, num_chunks, self.n_agents), dtype=np.int64
+        )
+        team_codes = np.zeros((time_steps, num_chunks), dtype=np.int64)
+        old_logp = np.zeros(
+            (time_steps, num_chunks, self.n_agents), dtype=np.float32
+        )
+        old_values = np.zeros_like(old_logp, dtype=np.float32)
+        packed_returns = np.zeros_like(old_logp, dtype=np.float32)
+        packed_advantages = np.zeros_like(old_logp, dtype=np.float32)
+        masks = np.zeros_like(old_logp, dtype=np.float32)
+        reset_masks = np.ones_like(old_logp, dtype=np.float32)
         if self.action_space_type == "continuous":
-            actions = np.zeros((time_steps, batch_size, self.n_agents, self.action_dim), dtype=np.float32)
+            actions = np.zeros(
+                (
+                    time_steps,
+                    num_chunks,
+                    self.n_agents,
+                    self.action_dim,
+                ),
+                dtype=np.float32,
+            )
         else:
-            actions = np.zeros((time_steps, batch_size, self.n_agents), dtype=np.int64)
-        initial_actor_hxs = np.zeros((batch_size, self.n_agents, self.low_rnn_hidden_size), dtype=np.float32)
+            actions = np.zeros(
+                (time_steps, num_chunks, self.n_agents), dtype=np.int64
+            )
+        initial_actor_hxs = np.zeros(
+            (num_chunks, self.n_agents, self.low_rnn_hidden_size),
+            dtype=np.float32,
+        )
         initial_critic_hxs = np.zeros_like(initial_actor_hxs, dtype=np.float32)
 
-        for batch_idx, chunk in enumerate(chunk_batch):
+        for chunk_id, chunk in enumerate(chunks):
             chunk_indices = chunk["indices"]
-            initial_actor_hxs[batch_idx] = chunk["initial_actor_hxs"]
-            initial_critic_hxs[batch_idx] = chunk["initial_critic_hxs"]
-            for t, idx in enumerate(chunk_indices):
-                obs[t, batch_idx] = data["obs"][idx]
-                states[t, batch_idx] = data["states"][idx]
-                skills[t, batch_idx] = data["skills"][idx]
-                team_codes[t, batch_idx] = data["team_codes"][idx]
-                actions[t, batch_idx] = data["actions"][idx]
-                old_logp[t, batch_idx] = data["old_logp"][idx]
-                old_values[t, batch_idx] = data["old_values"][idx]
-                returns[t, batch_idx] = data["returns"][idx]
-                advantages[t, batch_idx] = data["advantages"][idx]
-                masks[t, batch_idx, :] = 1.0
-                if bool(data["dones"][idx]):
-                    reset_masks[t, batch_idx, :] = 0.0
+            length = int(chunk_indices.size)
+            row_slice = slice(0, length)
+            obs[row_slice, chunk_id] = obs_arr[chunk_indices]
+            states[row_slice, chunk_id] = states_arr[chunk_indices]
+            skills[row_slice, chunk_id] = skills_arr[chunk_indices]
+            team_codes[row_slice, chunk_id] = team_codes_arr[chunk_indices]
+            actions[row_slice, chunk_id] = actions_arr[chunk_indices]
+            old_logp[row_slice, chunk_id] = old_logp_arr[chunk_indices]
+            old_values[row_slice, chunk_id] = values_arr[chunk_indices]
+            packed_returns[row_slice, chunk_id] = returns[chunk_indices]
+            packed_advantages[row_slice, chunk_id] = advantages[chunk_indices]
+            masks[row_slice, chunk_id, :] = 1.0
+            reset_masks[row_slice, chunk_id, :] = (
+                ~dones_arr[chunk_indices]
+            ).astype(np.float32)[:, None]
+            initial_actor_hxs[chunk_id] = chunk["initial_actor_hxs"]
+            initial_critic_hxs[chunk_id] = chunk["initial_critic_hxs"]
 
-        agent_ids = np.broadcast_to(
-            np.arange(self.n_agents, dtype=np.int64).reshape(1, 1, self.n_agents),
-            (time_steps, batch_size, self.n_agents),
-        )
         return {
+            "num_chunks": num_chunks,
+            "lengths": lengths,
             "obs": torch.as_tensor(obs, dtype=torch.float32, device=self.device),
             "states": torch.as_tensor(states, dtype=torch.float32, device=self.device),
             "skills": torch.as_tensor(skills, dtype=torch.long, device=self.device),
-            "team_codes": torch.as_tensor(team_codes, dtype=torch.long, device=self.device),
+            "team_codes": torch.as_tensor(
+                team_codes, dtype=torch.long, device=self.device
+            ),
             "actions": torch.as_tensor(
                 actions,
-                dtype=torch.float32 if self.action_space_type == "continuous" else torch.long,
+                dtype=(
+                    torch.float32
+                    if self.action_space_type == "continuous"
+                    else torch.long
+                ),
                 device=self.device,
             ),
-            "old_logp": torch.as_tensor(old_logp, dtype=torch.float32, device=self.device),
-            "old_values": torch.as_tensor(old_values, dtype=torch.float32, device=self.device),
-            "returns": torch.as_tensor(returns, dtype=torch.float32, device=self.device),
-            "advantages": torch.as_tensor(advantages, dtype=torch.float32, device=self.device),
-            "masks": torch.as_tensor(masks, dtype=torch.float32, device=self.device),
-            "reset_masks": torch.as_tensor(reset_masks, dtype=torch.float32, device=self.device),
-            "agent_ids": torch.as_tensor(agent_ids.copy(), dtype=torch.long, device=self.device),
-            "initial_actor_hxs": torch.as_tensor(initial_actor_hxs, dtype=torch.float32, device=self.device),
-            "initial_critic_hxs": torch.as_tensor(initial_critic_hxs, dtype=torch.float32, device=self.device),
+            "old_logp": torch.as_tensor(
+                old_logp, dtype=torch.float32, device=self.device
+            ),
+            "old_values": torch.as_tensor(
+                old_values, dtype=torch.float32, device=self.device
+            ),
+            "returns": torch.as_tensor(
+                packed_returns, dtype=torch.float32, device=self.device
+            ),
+            "advantages": torch.as_tensor(
+                packed_advantages, dtype=torch.float32, device=self.device
+            ),
+            "masks": torch.as_tensor(
+                masks, dtype=torch.float32, device=self.device
+            ),
+            "reset_masks": torch.as_tensor(
+                reset_masks, dtype=torch.float32, device=self.device
+            ),
+            "initial_actor_hxs": torch.as_tensor(
+                initial_actor_hxs, dtype=torch.float32, device=self.device
+            ),
+            "initial_critic_hxs": torch.as_tensor(
+                initial_critic_hxs, dtype=torch.float32, device=self.device
+            ),
         }
+
+    def _low_batch_from_chunk_ids(
+        self,
+        data: dict[str, Any],
+        chunk_ids,
+    ):
+        chunk_ids_np = np.asarray(chunk_ids, dtype=np.int64).reshape(-1)
+        if chunk_ids_np.size <= 0:
+            raise ValueError("low recurrent batch requires at least one chunk")
+        time_steps = int(np.max(data["lengths"][chunk_ids_np]))
+        chunk_ids_t = torch.as_tensor(
+            chunk_ids_np, dtype=torch.long, device=self.device
+        )
+        batch_size = int(chunk_ids_np.size)
+        time_major_names = (
+            "obs",
+            "states",
+            "skills",
+            "team_codes",
+            "actions",
+            "old_logp",
+            "old_values",
+            "returns",
+            "advantages",
+            "masks",
+            "reset_masks",
+        )
+        batch = {
+            name: data[name][:time_steps].index_select(1, chunk_ids_t)
+            for name in time_major_names
+        }
+        batch["agent_ids"] = torch.arange(
+            self.n_agents, dtype=torch.long, device=self.device
+        ).reshape(1, 1, self.n_agents).expand(
+            time_steps, batch_size, self.n_agents
+        )
+        batch["initial_actor_hxs"] = data["initial_actor_hxs"].index_select(
+            0, chunk_ids_t
+        )
+        batch["initial_critic_hxs"] = data["initial_critic_hxs"].index_select(
+            0, chunk_ids_t
+        )
+        return batch
 
     def _update_low_recurrent(self, rollout: Rollout) -> dict[str, float]:
         returns, advantages, old_values_np, env_ids = self._low_returns(rollout)
@@ -9302,20 +9527,26 @@ class StandaloneProcessAgent:
         if self.low_value_norm is not None:
             self.low_value_norm.update(returns.reshape(-1))
         data = self._low_sequence_chunks(rollout, returns, advantages, env_ids)
-        chunks = data["chunks"]
-        if not chunks:
+        num_chunks = int(data["num_chunks"])
+        if num_chunks <= 0:
             return self._empty_low_metrics()
 
-        low_replay_logp_max_error = 0.0
+        low_replay_logp_max_error_t = torch.zeros(
+            (), dtype=torch.float32, device=self.device
+        )
         numpy_rng_state = np.random.get_state()
         python_rng_state = random.getstate()
         torch_rng_state = torch.random.get_rng_state()
         cuda_rng_state = torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None
         try:
             with torch.no_grad():
-                for start in range(0, len(chunks), self.low_sequence_batch_size):
-                    batch_chunks = chunks[start:start + self.low_sequence_batch_size]
-                    batch = self._low_batch_from_chunks(data, batch_chunks)
+                for start in range(0, num_chunks, self.low_sequence_batch_size):
+                    batch_ids = np.arange(
+                        start,
+                        min(start + self.low_sequence_batch_size, num_chunks),
+                        dtype=np.int64,
+                    )
+                    batch = self._low_batch_from_chunk_ids(data, batch_ids)
                     logp, _entropy, _values = self.low.evaluate_sequence(
                         batch["obs"],
                         batch["skills"],
@@ -9329,13 +9560,13 @@ class StandaloneProcessAgent:
                         batch["reset_masks"],
                     )
                     valid = batch["masks"] > 0.0
-                    if torch.any(valid):
-                        replay_error = torch.abs(logp[valid] - batch["old_logp"][valid])
-                        if replay_error.numel() > 0:
-                            low_replay_logp_max_error = max(
-                                low_replay_logp_max_error,
-                                float(replay_error.max().cpu().item()),
-                            )
+                    replay_error = torch.abs(
+                        logp[valid] - batch["old_logp"][valid]
+                    )
+                    low_replay_logp_max_error_t = torch.maximum(
+                        low_replay_logp_max_error_t,
+                        replay_error.max(),
+                    )
         finally:
             np.random.set_state(numpy_rng_state)
             random.setstate(python_rng_state)
@@ -9343,27 +9574,20 @@ class StandaloneProcessAgent:
             if cuda_rng_state is not None:
                 torch.cuda.set_rng_state_all(cuda_rng_state)
 
-        total_loss = 0.0
-        total_policy_loss = 0.0
-        total_value_loss = 0.0
-        total_entropy_loss = 0.0
-        total_entropy = 0.0
-        total_ratio_mean = 0.0
-        total_clip_frac = 0.0
-        total_approx_kl = 0.0
-        total_actor_grad_norm = 0.0
-        total_critic_grad_norm = 0.0
-        skill_entropy_sums = np.zeros(self.n_skills, dtype=np.float64)
-        skill_entropy_counts = np.zeros(self.n_skills, dtype=np.float64)
+        metric_sums = torch.zeros(10, dtype=torch.float64, device=self.device)
+        skill_entropy_sums_t = torch.zeros(
+            self.n_skills, dtype=torch.float64, device=self.device
+        )
+        skill_entropy_counts_t = torch.zeros_like(skill_entropy_sums_t)
+        actor_params = list(self.low.actor_update_parameters())
+        critic_params = list(self.low.critic_update_parameters())
         update_count = 0
         rng = np.random.default_rng()
         for _epoch in range(self.low_ppo_epochs):
-            order = rng.permutation(len(chunks))
+            order = rng.permutation(num_chunks)
             for start in range(0, len(order), self.low_sequence_batch_size):
-                batch_chunks = [chunks[int(i)] for i in order[start:start + self.low_sequence_batch_size]]
-                if not batch_chunks:
-                    continue
-                batch = self._low_batch_from_chunks(data, batch_chunks)
+                batch_ids = order[start : start + self.low_sequence_batch_size]
+                batch = self._low_batch_from_chunk_ids(data, batch_ids)
                 logp, entropy, values = self.low.evaluate_sequence(
                     batch["obs"],
                     batch["skills"],
@@ -9377,8 +9601,6 @@ class StandaloneProcessAgent:
                     batch["reset_masks"],
                 )
                 valid = batch["masks"] > 0.0
-                if not torch.any(valid):
-                    continue
                 ratio = torch.exp(logp[valid] - batch["old_logp"][valid].detach())
                 adv = batch["advantages"][valid]
                 old_logp_valid = batch["old_logp"][valid].detach()
@@ -9417,41 +9639,85 @@ class StandaloneProcessAgent:
                 self.low_actor_opt.zero_grad()
                 self.low_critic_opt.zero_grad()
                 loss.backward()
-                actor_params = list(self.low.actor_update_parameters())
-                critic_params = list(self.low.critic_update_parameters())
                 if self.low_max_grad_norm > 0.0:
-                    actor_grad_norm = float(
-                        torch.nn.utils.clip_grad_norm_(actor_params, self.low_max_grad_norm).detach().cpu().item()
+                    actor_grad_norm = torch.nn.utils.clip_grad_norm_(
+                        actor_params, self.low_max_grad_norm
                     )
-                    critic_grad_norm = float(
-                        torch.nn.utils.clip_grad_norm_(critic_params, self.low_max_grad_norm).detach().cpu().item()
+                    critic_grad_norm = torch.nn.utils.clip_grad_norm_(
+                        critic_params, self.low_max_grad_norm
                     )
                 else:
-                    actor_grad_norm = self._grad_norm(actor_params)
-                    critic_grad_norm = self._grad_norm(critic_params)
+                    actor_grad_norm = torch.as_tensor(
+                        self._grad_norm(actor_params),
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
+                    critic_grad_norm = torch.as_tensor(
+                        self._grad_norm(critic_params),
+                        dtype=torch.float32,
+                        device=self.device,
+                    )
                 self.low_actor_opt.step()
                 self.low_critic_opt.step()
 
-                total_loss += float(loss.detach().cpu().item())
-                total_policy_loss += float(policy_loss.detach().cpu().item())
-                total_value_loss += float(value_loss.detach().cpu().item())
-                total_entropy_loss += float(entropy_loss.detach().cpu().item())
-                total_entropy += float(entropy_mean.detach().cpu().item())
-                total_ratio_mean += float(ratio.detach().mean().cpu().item())
-                total_clip_frac += float((torch.abs(ratio.detach() - 1.0) > self.low_clip).float().mean().cpu().item())
-                total_approx_kl += float((old_logp_valid - logp[valid].detach()).mean().cpu().item())
-                total_actor_grad_norm += actor_grad_norm
-                total_critic_grad_norm += critic_grad_norm
-                skills_np = batch["skills"][valid].detach().cpu().numpy().astype(np.int64)
-                entropy_np = entropy[valid].detach().cpu().numpy().astype(np.float64)
-                for skill_id in range(self.n_skills):
-                    mask = skills_np == skill_id
-                    if np.any(mask):
-                        skill_entropy_sums[skill_id] += float(np.sum(entropy_np[mask]))
-                        skill_entropy_counts[skill_id] += float(np.sum(mask))
+                with torch.no_grad():
+                    metric_sums += torch.stack(
+                        (
+                            loss.detach(),
+                            policy_loss.detach(),
+                            value_loss.detach(),
+                            entropy_loss.detach(),
+                            entropy_mean.detach(),
+                            ratio.detach().mean(),
+                            (
+                                torch.abs(ratio.detach() - 1.0) > self.low_clip
+                            ).float().mean(),
+                            (
+                                old_logp_valid - logp[valid].detach()
+                            ).mean(),
+                            actor_grad_norm.detach(),
+                            critic_grad_norm.detach(),
+                        )
+                    ).to(dtype=torch.float64)
+                    skills_valid = batch["skills"][valid].long()
+                    entropy_valid = entropy[valid].detach().to(dtype=torch.float64)
+                    skill_entropy_sums_t.scatter_add_(
+                        0, skills_valid, entropy_valid
+                    )
+                    skill_entropy_counts_t.scatter_add_(
+                        0, skills_valid, torch.ones_like(entropy_valid)
+                    )
                 update_count += 1
 
         denom = max(update_count, 1)
+        summary = torch.cat(
+            (
+                metric_sums,
+                low_replay_logp_max_error_t.reshape(1).to(dtype=torch.float64),
+                skill_entropy_sums_t,
+                skill_entropy_counts_t,
+            )
+        ).detach().cpu().numpy()
+        (
+            total_loss,
+            total_policy_loss,
+            total_value_loss,
+            total_entropy_loss,
+            total_entropy,
+            total_ratio_mean,
+            total_clip_frac,
+            total_approx_kl,
+            total_actor_grad_norm,
+            total_critic_grad_norm,
+        ) = summary[:10]
+        low_replay_logp_max_error = float(summary[10])
+        skill_start = 11
+        skill_entropy_sums = summary[
+            skill_start : skill_start + self.n_skills
+        ]
+        skill_entropy_counts = summary[
+            skill_start + self.n_skills : skill_start + 2 * self.n_skills
+        ]
         active_skill_entropy = skill_entropy_counts > 0.0
         if np.any(active_skill_entropy):
             skill_entropy_means = skill_entropy_sums[active_skill_entropy] / skill_entropy_counts[active_skill_entropy]
@@ -9466,7 +9732,7 @@ class StandaloneProcessAgent:
             "low_actor_loss": (total_policy_loss + total_entropy_loss) / denom,
             "low_critic_loss": self.low_value_loss_coef * total_value_loss / denom,
             "low_entropy": total_entropy / denom,
-            "low_sequence_chunks": float(len(chunks)),
+            "low_sequence_chunks": float(num_chunks),
             "low_value_norm_mean": float(self.low_value_norm.mean) if self.low_value_norm is not None else 0.0,
             "low_value_norm_std": float(np.sqrt(self.low_value_norm.var)) if self.low_value_norm is not None else 0.0,
             "low_ratio_mean": total_ratio_mean / denom,

@@ -11,12 +11,45 @@ pytest.importorskip("gymnasium")
 from config_1 import Config
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
-from ha_ctse_process.r27_g2_runtime import (
-    capture_environment_rng_state,
-    capture_structured_evidence,
-    rng_states_equal,
-)
 from train_multiproc_config_1 import validate_scenario7_configuration
+
+
+def capture_structured_evidence(value):
+    """Canonicalize the small set of structured values used by this test."""
+
+    if isinstance(value, np.ndarray):
+        array = np.ascontiguousarray(value)
+        return ("ndarray", array.dtype.str, array.shape, array.tobytes())
+    if isinstance(value, np.generic):
+        scalar = np.asarray(value)
+        return ("numpy-scalar", scalar.dtype.str, scalar.tobytes())
+    if isinstance(value, dict):
+        return (
+            "dict",
+            tuple(
+                (capture_structured_evidence(key), capture_structured_evidence(item))
+                for key, item in value.items()
+            ),
+        )
+    if isinstance(value, (list, tuple)):
+        return (
+            type(value).__name__,
+            tuple(capture_structured_evidence(item) for item in value),
+        )
+    return (type(value).__name__, value)
+
+
+def capture_environment_rng_state(adapter):
+    scenario_rng = adapter.env.np_random
+    adapter_rng = adapter.np_random
+    return (
+        capture_structured_evidence(scenario_rng.get_state()),
+        capture_structured_evidence(adapter_rng.bit_generator.state),
+    )
+
+
+def rng_states_equal(left, right):
+    return left == right
 
 
 def make_env(preset="S7-S3", seed=123):

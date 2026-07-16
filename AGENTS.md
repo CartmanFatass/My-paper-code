@@ -73,6 +73,19 @@ controller owns `aggressive`, push with `git push My-paper-code aggressive`. If
 Git/MSYS fails with a Win32 pipe or permission error, retry that exact command
 with scoped escalation.
 
+Batch repository and run boundaries:
+
+- Make one pre-launch commit/push after code, runner, and contract are stable,
+  then one result/disposition commit/push after the terminal outcome.
+- Do not commit or push a launch pointer, progress-only memory update, dry-run,
+  or status wording by itself. Runtime state belongs in `logs/` until the result
+  boundary; an operational repair gets a commit only when tracked code changes.
+- Batch related documentation edits after the implementation boundary settles.
+  If one edit or deletion method is rejected, switch once to a verified exact
+  fallback instead of retrying and restaging the same change repeatedly.
+- Generate a timestamp exactly once when a real run starts. Dry-runs use a
+  stable `DRY_RUN` placeholder and neither reserve nor report a real run ID.
+
 Preserve unrelated user changes in a dirty worktree and stage only intended
 files. Core MARL changes must explicitly account for tensor shapes, gradient
 and detach boundaries, clocks, masks, reward scale, advantage semantics,

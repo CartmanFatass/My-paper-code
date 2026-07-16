@@ -4545,12 +4545,11 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             episode_rewards = []
             r37_update_metrics = empty_r37_identity_metrics(config)
             for _local_step in range(int(args.rollout_length)):
-                pre_obs = []
-                pre_actions = []
-                pre_logp = []
-                pre_values = []
-                pre_low_context = []
-                pre_rollout_indices = []
+                pre_obs = list(observations)
+                rollout_base = len(rollout.rewards)
+                pre_rollout_indices = [
+                    rollout_base + env_id for env_id in range(num_envs)
+                ]
                 for env_id in range(num_envs):
                     obs = observations[env_id]
                     identity_audit = audit_r37_identity_observation(
@@ -4566,7 +4565,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         r37_update_metrics[field] = max(
                             r37_update_metrics[field], identity_audit[field]
                         )
-                    rollout_idx = len(rollout.rewards) + len(pre_rollout_indices)
+                    rollout_idx = pre_rollout_indices[env_id]
                     agent.maybe_assign_skills(
                         obs,
                         state=states[env_id],
@@ -4576,18 +4575,21 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         policy_update=int(update_idx + 1),
                         effect_view=effect_views[env_id],
                     )
-                    actions, logp, values, low_context = agent.act_low(
-                        obs,
-                        env_id=env_id,
-                        state=states[env_id],
-                        return_context=True,
-                    )
-                    pre_obs.append(obs)
-                    pre_actions.append(actions)
-                    pre_logp.append(logp)
-                    pre_values.append(values)
-                    pre_low_context.append(low_context)
-                    pre_rollout_indices.append(rollout_idx)
+
+                (
+                    pre_actions_batch,
+                    pre_logp_batch,
+                    pre_values_batch,
+                    pre_low_context,
+                ) = agent.act_low_batch(
+                    pre_obs,
+                    env_ids=range(num_envs),
+                    states=states,
+                    return_context=True,
+                )
+                pre_actions = [pre_actions_batch[env_id] for env_id in range(num_envs)]
+                pre_logp = [pre_logp_batch[env_id] for env_id in range(num_envs)]
+                pre_values = [pre_values_batch[env_id] for env_id in range(num_envs)]
 
                 step_results = collector.step(pre_actions)
                 for env_id, result in enumerate(step_results):

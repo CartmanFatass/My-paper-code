@@ -4,7 +4,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process import train as process_train
-from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
+from ha_ctse_process.standalone_agent import Rollout, Segment, StandaloneProcessAgent
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
 
@@ -59,16 +59,252 @@ def make_args(**overrides):
     return args
 
 
-def make_agent(config=None, num_envs=1):
+def make_agent(config=None, num_envs=1, action_space_type="discrete"):
     return StandaloneProcessAgent(
         obs_dim=4,
         action_dim=3,
         n_agents=2,
         config=config or make_process_config(),
         device="cpu",
-        action_space_type="discrete",
+        action_space_type=action_space_type,
         num_envs=num_envs,
     )
+
+
+def test_batched_low_deterministic_inference_matches_scalar_path():
+    rng = np.random.default_rng(17)
+    scalar_agent = make_agent(num_envs=2)
+    batched_agent = make_agent(num_envs=2)
+    batched_agent.low.load_state_dict(scalar_agent.low.state_dict())
+
+    skills = np.array([[0, 2], [1, 0]], dtype=np.int64)
+    team_codes = np.array([0, 1], dtype=np.int64)
+    actor_hxs = rng.normal(
+        size=(2, 2, scalar_agent.low_rnn_hidden_size)
+    ).astype(np.float32)
+    critic_hxs = rng.normal(
+        size=(2, 2, scalar_agent.low_rnn_hidden_size)
+    ).astype(np.float32)
+    observations = [
+        rng.normal(size=(2, 4)).astype(np.float32),
+        rng.normal(size=(2, 4)).astype(np.float32),
+    ]
+    states = [
+        rng.normal(size=8).astype(np.float32),
+        rng.normal(size=8).astype(np.float32),
+    ]
+    for agent in (scalar_agent, batched_agent):
+        agent.active_skills[:] = skills
+        agent.active_team_codes[:] = team_codes
+        agent.has_active_skill[:] = True
+        agent.low_actor_hxs[:] = actor_hxs
+        agent.low_critic_hxs[:] = critic_hxs
+
+    scalar_rows = [
+        scalar_agent.act_low(
+            observations[env_id],
+            env_id=env_id,
+            state=states[env_id],
+            deterministic=True,
+            return_context=True,
+        )
+        for env_id in range(2)
+    ]
+    batch_actions, batch_logp, batch_values, batch_contexts = (
+        batched_agent.act_low_batch(
+            observations,
+            states=states,
+            deterministic=True,
+            return_context=True,
+        )
+    )
+
+    np.testing.assert_array_equal(
+        batch_actions, np.stack([row[0] for row in scalar_rows])
+    )
+    np.testing.assert_allclose(
+        batch_logp, np.stack([row[1] for row in scalar_rows]), rtol=0.0, atol=1e-6
+    )
+    np.testing.assert_allclose(
+        batch_values,
+        np.stack([row[2] for row in scalar_rows]),
+        rtol=0.0,
+        atol=1e-6,
+    )
+    np.testing.assert_allclose(
+        batched_agent.low_actor_hxs,
+        scalar_agent.low_actor_hxs,
+        rtol=0.0,
+        atol=1e-6,
+    )
+    np.testing.assert_allclose(
+        batched_agent.low_critic_hxs,
+        scalar_agent.low_critic_hxs,
+        rtol=0.0,
+        atol=1e-6,
+    )
+    for batch_context, scalar_row in zip(batch_contexts, scalar_rows):
+        scalar_context = scalar_row[3]
+        assert batch_context["team_code"] == scalar_context["team_code"]
+        for field in ("state", "actor_hxs", "critic_hxs"):
+            np.testing.assert_allclose(
+                batch_context[field], scalar_context[field], rtol=0.0, atol=1e-6
+            )
+
+
+def test_batched_stochastic_actions_replay_with_exact_log_probability():
+    rng = np.random.default_rng(23)
+    agent = make_agent(num_envs=2, action_space_type="continuous")
+    agent.active_skills[:] = np.array([[0, 1], [2, 0]], dtype=np.int64)
+    agent.active_team_codes[:] = np.array([1, 0], dtype=np.int64)
+    agent.has_active_skill[:] = True
+    agent.low_actor_hxs[:] = rng.normal(
+        size=agent.low_actor_hxs.shape
+    ).astype(np.float32)
+    agent.low_critic_hxs[:] = rng.normal(
+        size=agent.low_critic_hxs.shape
+    ).astype(np.float32)
+    observations = [
+        rng.normal(size=(2, 4)).astype(np.float32),
+        rng.normal(size=(2, 4)).astype(np.float32),
+    ]
+    states = [
+        rng.normal(size=8).astype(np.float32),
+        rng.normal(size=8).astype(np.float32),
+    ]
+
+    torch.manual_seed(2301)
+    actions, stored_logp, _values, contexts = agent.act_low_batch(
+        observations,
+        states=states,
+        return_context=True,
+    )
+    obs_t = torch.as_tensor(np.stack(observations)[None], dtype=torch.float32)
+    skills_t = torch.as_tensor(agent.active_skills[None], dtype=torch.long)
+    actions_t = torch.as_tensor(actions[None], dtype=torch.float32)
+    states_t = torch.as_tensor(np.stack(states)[None], dtype=torch.float32)
+    team_codes_t = torch.as_tensor(agent.active_team_codes[None], dtype=torch.long)
+    agent_ids_t = torch.arange(agent.n_agents, dtype=torch.long).reshape(1, 1, -1)
+    actor_hxs_t = torch.as_tensor(
+        np.stack([context["actor_hxs"] for context in contexts]),
+        dtype=torch.float32,
+    )
+    critic_hxs_t = torch.as_tensor(
+        np.stack([context["critic_hxs"] for context in contexts]),
+        dtype=torch.float32,
+    )
+    masks_t = torch.ones((1, 2, agent.n_agents), dtype=torch.float32)
+
+    with torch.no_grad():
+        replay_logp, _entropy, _replay_values = agent.low.evaluate_sequence(
+            obs_t,
+            skills_t,
+            actions_t,
+            states_t,
+            team_codes_t,
+            agent_ids_t,
+            actor_hxs_t,
+            critic_hxs_t,
+            masks_t,
+            masks_t,
+        )
+
+    max_error = np.max(
+        np.abs(replay_logp.cpu().numpy()[0] - stored_logp)
+    )
+    assert max_error <= 1e-6
+
+
+def test_packed_recurrent_batches_match_reference_construction():
+    agent = make_agent(num_envs=2)
+    agent.low_sequence_length = 2
+    row_count = 5
+    hidden = agent.low_rnn_hidden_size
+    env_ids = np.array([0, 1, 0, 1, 0], dtype=np.int64)
+    rollout = Rollout(
+        env_ids=env_ids.tolist(),
+        obs=[np.full((2, 4), row + 0.1, dtype=np.float32) for row in range(row_count)],
+        states=[np.full(8, row + 10.0, dtype=np.float32) for row in range(row_count)],
+        skills=[
+            np.array([row % 3, (row + 1) % 3], dtype=np.int64)
+            for row in range(row_count)
+        ],
+        team_codes=[row % 2 for row in range(row_count)],
+        actions=[
+            np.array([(row + 1) % 3, (row + 2) % 3], dtype=np.int64)
+            for row in range(row_count)
+        ],
+        logp=[np.array([row + 0.2, row + 0.3], dtype=np.float32) for row in range(row_count)],
+        values=[np.array([row + 0.4, row + 0.5], dtype=np.float32) for row in range(row_count)],
+        low_actor_hxs=[
+            np.full((2, hidden), row + 0.6, dtype=np.float32)
+            for row in range(row_count)
+        ],
+        low_critic_hxs=[
+            np.full((2, hidden), row + 0.7, dtype=np.float32)
+            for row in range(row_count)
+        ],
+        dones=[False, False, True, False, False],
+    )
+    returns = np.arange(row_count * 2, dtype=np.float32).reshape(row_count, 2)
+    advantages = returns + 20.0
+    packed = agent._low_sequence_chunks(rollout, returns, advantages, env_ids)
+
+    chunk_indices = (
+        np.array([0, 2], dtype=np.int64),
+        np.array([4], dtype=np.int64),
+        np.array([1, 3], dtype=np.int64),
+    )
+    reference = {
+        "obs": np.zeros((2, 3, 2, 4), dtype=np.float32),
+        "states": np.zeros((2, 3, 8), dtype=np.float32),
+        "skills": np.zeros((2, 3, 2), dtype=np.int64),
+        "team_codes": np.zeros((2, 3), dtype=np.int64),
+        "actions": np.zeros((2, 3, 2), dtype=np.int64),
+        "old_logp": np.zeros((2, 3, 2), dtype=np.float32),
+        "old_values": np.zeros((2, 3, 2), dtype=np.float32),
+        "returns": np.zeros((2, 3, 2), dtype=np.float32),
+        "advantages": np.zeros((2, 3, 2), dtype=np.float32),
+        "masks": np.zeros((2, 3, 2), dtype=np.float32),
+        "reset_masks": np.ones((2, 3, 2), dtype=np.float32),
+    }
+    raw = {
+        "obs": np.asarray(rollout.obs),
+        "states": np.asarray(rollout.states),
+        "skills": np.asarray(rollout.skills),
+        "team_codes": np.asarray(rollout.team_codes),
+        "actions": np.asarray(rollout.actions),
+        "old_logp": np.asarray(rollout.logp),
+        "old_values": np.asarray(rollout.values),
+        "returns": returns,
+        "advantages": advantages,
+    }
+    dones = np.asarray(rollout.dones, dtype=np.bool_)
+    for chunk_id, indices in enumerate(chunk_indices):
+        length = len(indices)
+        for field in raw:
+            reference[field][:length, chunk_id] = raw[field][indices]
+        reference["masks"][:length, chunk_id] = 1.0
+        reference["reset_masks"][:length, chunk_id] = (~dones[indices])[:, None]
+
+    assert packed["num_chunks"] == 3
+    np.testing.assert_array_equal(packed["lengths"], np.array([2, 1, 2]))
+    for field, expected in reference.items():
+        np.testing.assert_array_equal(packed[field].cpu().numpy(), expected)
+    np.testing.assert_array_equal(
+        packed["initial_actor_hxs"].cpu().numpy(),
+        np.stack([rollout.low_actor_hxs[int(indices[0])] for indices in chunk_indices]),
+    )
+    np.testing.assert_array_equal(
+        packed["initial_critic_hxs"].cpu().numpy(),
+        np.stack([rollout.low_critic_hxs[int(indices[0])] for indices in chunk_indices]),
+    )
+
+    selected = agent._low_batch_from_chunk_ids(packed, [2, 1])
+    for field, expected in reference.items():
+        np.testing.assert_array_equal(
+            selected[field].cpu().numpy(), expected[:, [2, 1]]
+        )
 
 
 def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
