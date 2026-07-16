@@ -16,23 +16,23 @@ Updated: 2026-07-16
 
 ## Objective
 
-Run the single Pro-authorized `R48-SBRS-G0` fixed-`N` abandonment gate. It asks
-whether resetting only the focal low-actor recurrent hidden state when a skill
-is SET lowers same-skill stochastic variability and restores codebook-wide
-persistent process separation. It is standalone, task-blind, reward-off, and
-has zero optimizer steps.
+Complete the final automatic GPT-5.6 Pro result review of the valid
+`VALID_FAIL_R48_SBRS` gate. R48 preserved between-target process difference but
+did not lower within-skill stochastic variability at either H10 or H40-late.
+The registered branch stops fixed-`N` skill/lifetime algorithm exploration;
+only a concrete result-changing M0 defect could alter that decision.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the exact R48 implementation, runner, and registered
-   contract after the completed focused CUDA check.
-2. Run the unchanged local CUDA R48 gate and interpret only its registered
-   `INVALID`, `PASS`, or valid-fail branch.
-3. Archive the terminal result and use automatic Pro submission `5/5` for its
-   result-validity review in the existing consultation conversation.
+1. Commit and push the R48 terminal result, controller disposition, and one
+   tracked result-review question.
+2. Use automatic Pro submission `5/5` in the existing consultation conversation
+   and archive the raw response before interpretation.
+3. Accept only the single final disposition. Do not resume fixed-`N` work or
+   begin open-roster/variable-`N` implementation before that review.
 
 ## Immediate Constraints
 
@@ -126,6 +126,15 @@ must not renew surviving agents' skills.
   no reward read or optimizer, and paired context bootstrap seed `62048`.
   A two-context CUDA check passed exact snapshot, hidden-boundary, CRN, count,
   freeze, and finite-statistic checks; its transient output was removed.
+- Formal R48 run `logs/r48_sbrs_20260716_181833` completed valid
+  `VALID_FAIL_R48_SBRS`. M0 passed all exact source, context, branch, hidden,
+  CRN, freeze, no-reward, support, and finite-statistic checks. H10 reset rho
+  lower bound was `0.98468`, reset/carry rho-ratio lower bound `1.11816`, and
+  within-ratio upper bound `1.01877`. H40-late reset rho and all target-skill
+  rhos passed, but reset/carry rho-ratio lower bound was only `1.00223` and
+  within-ratio upper bound `1.00874`. Between-target difference was preserved;
+  stochastic within-skill variability was not reduced. The registered fixed-`N`
+  stop decision is pending only the final result-validity review.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

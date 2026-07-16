@@ -1,0 +1,271 @@
+{
+  "algorithm_boundary": {
+    "external_return_discarded": true,
+    "external_return_stored": false,
+    "high_controller_suppressed_in_forced_branch": true,
+    "normal_trainer_modified": false,
+    "only_intervention_is_focal_actor_hidden_reset": true,
+    "policy_or_critic_update": false,
+    "standalone_reward_off_gate": true,
+    "task_field_in_evidence": false
+  },
+  "artifacts": {
+    "evidence": "C:\\project\\HMASD\\logs\\r48_sbrs_20260716_181833\\seed\\r48_sbrs_evidence.npz"
+  },
+  "contract": {
+    "arms": [
+      "carry_hidden",
+      "reset_on_set"
+    ],
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 62048,
+    "branch_horizon": 40,
+    "contexts": 64,
+    "forced_branch_steps": 30720,
+    "horizons": {
+      "h10": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "h40_late": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    "innovation_seed": 68041,
+    "natural_source_steps": 5120,
+    "replicas_per_target": 2,
+    "source_seed": 47041,
+    "targets_per_context": 3
+  },
+  "decision": {
+    "next_action": "retire skill-boundary reset and stop fixed-N skill/lifetime algorithm exploration",
+    "no_rescue_by_seed_budget_model_threshold_reward_or_environment": true,
+    "no_underpowered_branch": true
+  },
+  "experiment_id": "EXP-20260716-r48-sbrs-g0",
+  "implementation_valid": true,
+  "m0": {
+    "checks": {
+      "all_distances_between_within_and_rho_finite": true,
+      "all_evidence_finite": true,
+      "all_optimizer_steps_zero": true,
+      "arm_start_environment_equal": true,
+      "arm_start_observation_equal": true,
+      "arm_start_roster_equal": true,
+      "arm_start_team_code_equal": true,
+      "branches_per_arm_exact": true,
+      "carry_actor_hidden_is_snapshot": true,
+      "common_innovation_tape_exact": true,
+      "context_count_exact": true,
+      "context_schedule_exact": true,
+      "critic_hidden_equal_at_boundary": true,
+      "evidence_has_no_task_or_reward_field": true,
+      "exact_source_checkpoint_and_config": true,
+      "natural_source_steps_exact": true,
+      "no_early_reset_or_truncation": true,
+      "normalizer_freeze_exact": true,
+      "parameter_freeze_exact": true,
+      "reset_only_focal_actor_hidden": true,
+      "snapshot_restore_exact": true,
+      "target_support_floor": true,
+      "three_nonincumbent_targets_each": true,
+      "total_branch_steps_exact": true
+    },
+    "diagnostics": {
+      "arm_start_environment_max_error": 0.0,
+      "arm_start_observation_max_error": 0.0,
+      "arm_start_roster_max_error": 0.0,
+      "arm_start_team_code_max_error": 0.0,
+      "carry_actor_hidden_snapshot_max_error": 0.0,
+      "common_innovation_max_error": 0.0,
+      "critic_hidden_boundary_max_error": 0.0,
+      "focal_snapshot_hidden_min_l2": 1.4011279344558716,
+      "reset_actor_hidden_contract_max_error": 0.0,
+      "target_support": {
+        "0": 47,
+        "1": 48,
+        "2": 50,
+        "3": 47
+      }
+    },
+    "invalid_reasons": [],
+    "passed": true
+  },
+  "m1": {
+    "checks": {
+      "all_registered_metrics_finite": true,
+      "h10_between_ratio_lcb_gt_0_90": true,
+      "h10_rho_ratio_lcb_gt_1_25": false,
+      "h10_rho_reset_lcb_gt_1": false,
+      "h10_within_ratio_ucb_lt_0_80": false,
+      "h40_late_between_ratio_lcb_gt_0_90": true,
+      "h40_late_every_target_skill_rho_gt_1": true,
+      "h40_late_rho_ratio_lcb_gt_1_25": false,
+      "h40_late_rho_reset_lcb_gt_1": true,
+      "h40_late_within_ratio_ucb_lt_0_80": false
+    },
+    "horizons": {
+      "h10": {
+        "between_mean": {
+          "carry_hidden": 0.05465946871851787,
+          "reset_on_set": 0.06255225677548742
+        },
+        "between_reset_over_carry": {
+          "lower_95": 1.1296128177249067,
+          "mean": 1.144399072988151,
+          "upper_95": 1.1615705443959818
+        },
+        "rho": {
+          "carry_hidden": {
+            "lower_95": 0.8660077802872014,
+            "mean": 1.0540095314092237,
+            "upper_95": 1.2841527193379738
+          },
+          "reset_on_set": {
+            "lower_95": 0.9846810785363709,
+            "mean": 1.1967017755903044,
+            "upper_95": 1.456253671978985
+          }
+        },
+        "rho_reset_by_target_skill": {
+          "0": 0.5395856233400381,
+          "1": 0.9263516449876215,
+          "2": 1.3285675050079624,
+          "3": 2.028493531299805
+        },
+        "rho_reset_over_carry": {
+          "lower_95": 1.1181561226949042,
+          "mean": 1.1353804115891621,
+          "upper_95": 1.1529228359588555
+        },
+        "within_mean": {
+          "carry_hidden": 0.0518585995188698,
+          "reset_on_set": 0.05227053730877447
+        },
+        "within_reset_over_carry": {
+          "lower_95": 0.9973140102829016,
+          "mean": 1.0079432864422402,
+          "upper_95": 1.0187747413854495
+        }
+      },
+      "h40_late": {
+        "between_mean": {
+          "carry_hidden": 0.9262925763973345,
+          "reset_on_set": 0.9370263791495056
+        },
+        "between_reset_over_carry": {
+          "lower_95": 1.0077560741120415,
+          "mean": 1.0115879074385323,
+          "upper_95": 1.0156989244502104
+        },
+        "rho": {
+          "carry_hidden": {
+            "lower_95": 4.46514787754923,
+            "mean": 5.281379256906002,
+            "upper_95": 6.346545973531478
+          },
+          "reset_on_set": {
+            "lower_95": 4.504430536955944,
+            "mean": 5.3342356633022,
+            "upper_95": 6.399167757626465
+          }
+        },
+        "rho_reset_by_target_skill": {
+          "0": 2.395625508608167,
+          "1": 4.370264315698764,
+          "2": 6.880321529943745,
+          "3": 9.138284388783163
+        },
+        "rho_reset_over_carry": {
+          "lower_95": 1.0022270030915257,
+          "mean": 1.0100080686928672,
+          "upper_95": 1.01686246778333
+        },
+        "within_mean": {
+          "carry_hidden": 0.17538837461299708,
+          "reset_on_set": 0.17566271626384716
+        },
+        "within_reset_over_carry": {
+          "lower_95": 0.9953790826647089,
+          "mean": 1.0015641380782165,
+          "upper_95": 1.0087445619102837
+        }
+      }
+    },
+    "passed": false
+  },
+  "normalizer_drift": {
+    "all_exact": true,
+    "inventory_equal": true,
+    "max_abs": 0.0
+  },
+  "optimizer_steps": {
+    "critic": 0,
+    "high": 0,
+    "intrinsic": 0,
+    "policy": 0
+  },
+  "parameter_drift": {
+    "all_exact": true,
+    "inventory_equal": true,
+    "max_abs": 0.0
+  },
+  "schema_version": 1,
+  "source": {
+    "checkpoint": "C:\\project\\HMASD\\logs\\r30_alice_bob_paired_64k_20260714_163908\\runs\\adaptive_keep_set\\seed30031\\standalone_process_core_final.pt",
+    "checkpoint_total_steps": 64000,
+    "checkpoint_update": 50,
+    "high_controller": "r30_fixed_clock_ar_edit",
+    "scenario": "alice_bob_asymmetric_cycles",
+    "source_checks": {
+      "action_dimension": true,
+      "adaptive_r30_source": true,
+      "checkpoint_total_steps": true,
+      "checkpoint_update": true,
+      "continuous_action": true,
+      "episode_length": true,
+      "high_controller": true,
+      "k0": true,
+      "low_actor_team_code_absent": true,
+      "n_agents": true,
+      "n_skills": true,
+      "observation_dimension": true,
+      "r31_reward_off": true,
+      "recurrent_low": true,
+      "scenario": true,
+      "state_dimension": true,
+      "transition_reward_off": true
+    }
+  },
+  "status": "VALID_FAIL_R48_SBRS",
+  "telemetry": {
+    "branches_per_arm": 384,
+    "complete_branches": 768,
+    "completed_branch_steps": 30720,
+    "contexts": 64,
+    "early_branches": 0,
+    "early_source_resets": 0,
+    "literal_zero_clock_steps": 5120,
+    "natural_source_groups": 64,
+    "natural_source_steps": 5120,
+    "snapshot_restore_max_error": 0.0,
+    "total_branches": 768
+  }
+}

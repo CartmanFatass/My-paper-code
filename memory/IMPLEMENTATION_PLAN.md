@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R48-SBRS-G0 Skill-Boundary Recurrent State — Launch Ready
+## R48-SBRS-G0 Skill-Boundary Recurrent State — Valid Fail
 
 GPT-5.6 Pro confirmed `VALID_FAIL_R47_NSOPM`, found no result-changing M0
 defect, and permanently retired the exact R47 view/basis/score/reward line. The
@@ -52,8 +52,16 @@ Implementation is isolated to:
 
 One two-context CUDA check covered 24 branches and 960 forced steps. Snapshot,
 hidden-boundary, explicit CRN, counts, parameter/normalizer freeze, and finite
-statistics passed; the transient output was removed. The next boundary is one
-pre-launch commit/push followed by the unchanged formal local CUDA gate.
+statistics passed; the transient output was removed. Pre-launch commit
+`eb6b9e6` was pushed before the formal run.
+
+Run `logs/r48_sbrs_20260716_181833` completed valid
+`VALID_FAIL_R48_SBRS`. M0 passed. H10 failed reset-rho, rho-gain, and within-noise
+gates; H40-late passed absolute and per-skill reset rho plus between preservation
+but failed rho-gain and within-noise gates. Within reset/carry means were
+`1.00794` at H10 and `1.00156` at H40-late, so focal hidden reset did not reduce
+the registered stochastic variability. Apply the binding no-rescue retirement
+and fixed-`N` stop branch, pending only the final Pro result-validity review.
 
 ## R47-NSOPM-G0 Natural-Support Orthogonal Process Modes — Valid Fail and Retired
 

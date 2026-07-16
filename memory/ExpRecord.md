@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r48-sbrs-g0 | launch-ready; focused CUDA check passed | hierarchy-L1 reward-off recurrent-boundary abandonment gate | local CUDA; implementation and contract pending pre-launch commit | terminal R48 JSON | 64 contexts; carry/reset arms; 3 nonincumbent targets; 2 replicas; H40; 30,720 forced steps; zero optimizers and no reward | Run unchanged gate; PASS authorizes only reward-pure carry/reset pair, valid FAIL stops fixed-N skill/lifetime exploration |
+| EXP-20260716-r48-sbrs-g0 | completed -- valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; tracked result under R48 external review | GPT-5.6 Pro result-validity review | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue, pending only validity review |
 | EXP-20260716-r47-nsopm-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; result commit `b758d8c` | complete | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; proceed only to R48-SBRS-G0 |
 | EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d`, `cfc0ba4` | completed GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; learned pooled and both role-stratum sign discordance exactly `0`; direct enumeration oracle discordance near `0.5675` | Retire the exact dynamics/estimand/context/critic/read combination without rescue; interpret as learned sign-transport failure and proceed only to R47-NSOPM-G0 |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
@@ -70,8 +70,8 @@ explicitly approves the exception.
 
 ## EXP-20260716-r48-sbrs-g0 — Skill-Boundary Recurrent State
 
-- Status: launch-ready; one focused real-checkpoint CUDA check passed and its
-  transient output was removed.
+- Status: completed as valid `VALID_FAIL_R48_SBRS`; pending final GPT-5.6 Pro
+  result-validity review.
 - Causal edge: skill SET -> focal recurrent-state boundary -> lower same-skill
   stochastic variability -> codebook-wide persistent process separation.
 - Authorization: user approved the Pro-selected R48 route, its local gate, Git
@@ -132,6 +132,15 @@ explicitly approves the exception.
   snapshot/hidden/CRN/count/freeze checks and finite H10/H40 statistics passed.
 - Authoritative status: `<run-root>/runner_status.txt`; result:
   `<run-root>/result/r48_sbrs.json`.
+- Terminal evidence: formal run `logs/r48_sbrs_20260716_181833` passed every M0
+  check with 64 contexts, 768 complete branches, 30,720 forced steps, exact
+  snapshot/hidden/CRN/freeze contracts, and no task/reward evidence field. H10
+  reset rho lower bound was `0.98468`, reset/carry rho-ratio lower bound
+  `1.11816`, and within-ratio upper bound `1.01877`. H40-late reset rho and all
+  four target-skill rhos exceeded one, but reset/carry rho-ratio lower bound was
+  `1.00223` and within-ratio upper bound `1.00874`. The valid-fail retirement
+  and fixed-`N` stop branch are binding unless final review finds a concrete
+  result-changing M0 defect.
 
 ## EXP-20260716-r47-nsopm-g0 — Natural-Support Orthogonal Process Modes
 
