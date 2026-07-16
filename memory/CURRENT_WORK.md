@@ -10,47 +10,46 @@ Updated: 2026-07-17
 - **Project boundary:** IMOD is operational reference only, not HMASD evidence.
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
-- **External review:** the user explicitly requested completion of two rounds
-  of the new blind dual-divergent workflow. Round 1 is closed; round 2 is the
-  active implementation-plan review. Do not start a third automated round
-  without new authorization.
-- **Divergent review:** the blind Gemini 3.1 Pro (High) live-CLI review and the
-  separate GPT-5.6 Pro open review are complete. The existing
-  `HMASD Algorithm Consultation` conversation completed the convergent audit.
-  A future Gemini round reuses one live `agy --prompt-interactive` process for
-  that round; conversation recovery is only for process loss or a concrete
-  source-completeness repair.
+- **External review:** the two user-authorized blind dual-divergent rounds are
+  complete. Do not start a third automated round without new authorization.
+- **Review workflow:** Gemini research uses one live
+  `agy --prompt-interactive` process per bounded round and exports the final
+  local transcript without another prompt. Conversation recovery is only for
+  process loss or a concrete source-completeness repair. The independent/open
+  and existing/convergent Pro conversations remain separate.
 
 ## Objective
 
-Complete round 2 of the blind dual-divergent workflow by reviewing the single
-shared F0/F1 implementation plan against the production code. F1 remains the
-leading skill-based hypothesis and F0 the undefeated ordinary-MARL reduction;
-their sole difference is initial-set versus applied-prefix conditioning of the
-same commitment model.
+Await the next user-selected implementation boundary for the corrected F0/F1
+plan. F1 remains the leading skill-based hypothesis and F0 the undefeated
+ordinary-MARL reduction; their sole difference is initial-set versus
+applied-prefix conditioning of the same commitment model. No implementation or
+training is currently running.
 
 ## Next Actions
 
-1. Run the blind Gemini and open-Pro implementation-plan reviews under
-   `docs/external-review/rounds/20260717_variable_n_lifetime_implementation/`.
-2. Compare both raw reviews, then obtain one convergent plan disposition in the
-   existing Pro consultation conversation.
-3. Update the implementation plan only where the convergent disposition
-   requires it; do not implement or train automatically.
-4. Remove the uncommitted R55 draft only at its separately verified cleanup
+1. Await user authorization before production implementation. If authorized,
+   implement only through the single deterministic transaction trace and stop
+   before any real environment or training.
+2. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; do not execute or replace its gate.
 
 ## Immediate Constraints
 
-- The blind dual-divergent round is terminal. Final convergent verdict is
-  `ACCEPT_WITH_CORRECTIONS`; raw reviews, synthesis and disposition live under
-  `docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`.
+- Both blind dual-divergent rounds are terminal. Architecture verdict is
+  `ACCEPT_WITH_CORRECTIONS`; implementation-plan verdict is `MODIFY_PLAN`.
+  Their raw reviews, syntheses and dispositions live under their respective
+  `docs/external-review/rounds/20260717_variable_n_lifetime_*` directories.
 - Portfolio: retain strengthened F0; retain corrected F1 as the sole leading
   family; merge/retire F2; defer learned event time. R55 is repurposed before
   execution. Retained R53 artifacts cannot support a no-training prefix audit.
-- The architecture contract reached Outcome A. Round 2 is authorized only to
-  review and correct its implementation plan; it authorizes no code, testbed,
-  training or reward change.
+- The corrected plan has one event-runtime lifecycle store, a two-snapshot
+  typed membership transaction, a dedicated trainable event low actor, shared
+  active-set critics, normative ragged ledgers, per-token pre-working-set
+  values and simulator-aware schema-3 resume. A later user-approved
+  implementation may reach one deterministic production transaction trace;
+  real environment use, training, testbed construction and reward changes are
+  unauthorized.
 
 - R41-derived gates execute a fresh `ref/hmasd.tar` extraction rather than
   porting it into the current trainer. Preserve the original HMASD `q_D/q_d`

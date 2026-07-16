@@ -4,12 +4,15 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Variable-N + Variable-Lifetime Event Architecture — Planned
+## Variable-N + Variable-Lifetime Event Architecture — Corrected Plan
 
-The blind Gemini/open-Pro review, Codex synthesis and convergent Pro audit are
-complete under
-`docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`.
-Final verdict is `ACCEPT_WITH_CORRECTIONS`.
+The architecture and implementation-plan rounds are complete under:
+
+- `docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`;
+- `docs/external-review/rounds/20260717_variable_n_lifetime_implementation/`.
+
+The architecture verdict is `ACCEPT_WITH_CORRECTIONS`; the implementation-plan
+verdict is `MODIFY_PLAN`, and its binding corrections are now applied.
 
 The portfolio now contains only:
 
@@ -26,22 +29,28 @@ final weights or per-decision contexts.
 
 The active artifact is
 `docs/research/designs/VARIABLE_N_LIFETIME_EVENT_ARCHITECTURE_CONTRACT.md`.
-It freezes shared F0/F1 lifecycle state, membership semantics, exogenous
+It now freezes one event-runtime lifecycle store, worker/collector/runtime
+ownership, the pre-removal/atomic-delta/post-membership transaction, exogenous
 opportunity ownership, exact random-order probability, teacher-forced replay,
 member-event `gamma^Delta` credit, the reference sum/count encoder, F1-to-F0
-reduction, capability/replacement maps and fail-closed collector/checkpoint
-boundaries.
+reduction and snapshot-aware fail-closed resume.
 
 The focused review reached Outcome A. The shared implementation plan is:
 
 `docs/research/designs/VARIABLE_N_LIFETIME_EVENT_IMPLEMENTATION_PLAN.md`.
 
 It freezes an exchangeable bounded renewal schedule with mean active gap 10,
-active-only ragged tensors, one shared F0/F1 model and parameter graph, member-
-event credit, strict schema-3 resume and focused checks. F0 reads the initial
-set summary; F1 reads the applied working-set summary. No other intervention is
-allowed. The next boundary is user approval or modification of that plan; code,
-testbed and training remain unauthorized.
+active-only ragged tensors, normative high/low ledgers, a dedicated trainable
+event low actor, shared active-set critics, per-token pre-working-set values,
+member-event credit, simulator-aware strict schema-3 resume and one deterministic
+transaction trace. F0 reads the initial set summary; F1 reads the applied
+working-set summary. No other intervention is allowed.
+
+The next boundary is user approval to implement only through that one focused
+trace. Stop before a real environment, subprocess collector, environment-data
+optimizer step, benchmark or training. A trace showing only mask changes,
+common additive shifts or unchanged normalized common-support probabilities
+retires F1 and selects `STOP_AT_F0`.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 

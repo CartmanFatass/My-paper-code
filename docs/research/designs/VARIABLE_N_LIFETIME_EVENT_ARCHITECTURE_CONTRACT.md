@@ -27,6 +27,10 @@ Both must eventually support:
 F0 and F1 share every lifecycle, representation, low-policy, reward, credit,
 collector and checkpoint contract. Their only algorithmic difference is whether
 earlier applied edits alter later learned scores on the common legal support.
+They share the same data-generation contract, external-randomness contract and
+exposure budget. Their realized on-policy trajectories may diverge after the
+mode switch changes a sampled action; that treatment-induced divergence is not
+an infrastructure mismatch.
 
 ## 2. Non-goals
 
@@ -67,9 +71,22 @@ occur at the same primitive time.
 
 ## 4. Lifecycle state and visibility
 
-### 4.1 Collector-owned table
+### 4.1 Single authoritative policy lifecycle store
 
-The collector owns a table indexed by `kappa_i`:
+Ownership is split by domain, without a duplicated table:
+
+```text
+environment worker:
+  physical simulator state, physical membership facts, environment RNG
+
+collector:
+  typed transport transaction only; no policy lifecycle state
+
+event runtime:
+  the sole policy-runtime LifecycleStore
+```
+
+The event runtime's store is indexed by `kappa_i`:
 
 ```text
 LifecycleRecord_i = {
@@ -95,6 +112,10 @@ ACTIVE | TEMPORARILY_ABSENT | TERMINAL
 `kappa_i` and `membership_epoch` exist only to route exact state and reject
 stale rows. They are stored in the ledger but never embedded, pooled, compared
 or otherwise exposed to the policy.
+
+The worker and collector may carry physical facts and transient transport
+records, but neither may shadow the policy skill, age, hidden, opportunity or
+open-trace fields. `StandaloneProcessAgent` also owns no event lifecycle copy.
 
 ### 4.2 Policy-visible member token
 
@@ -137,6 +158,26 @@ Thus external membership changes are fully applied before any policy token at
 the same time, while a leaver's credit boundary is not evaluated from an
 undefined post-removal member token.
 
+Every membership boundary is transported as one atomic transaction:
+
+```text
+pre_membership_boundary_snapshot
+  = post-transition, pre-removal active lifecycles and exact critic inputs
+
+atomic_membership_delta
+  = JOIN | TEMPORARY_LEAVE | TERMINAL_LEAVE | REJOIN
+    plus lifecycle key and expected membership epoch
+
+post_membership_pre_policy_snapshot
+  = post-delta active set, event flags, new frontier and C_t^(0)
+```
+
+The event runtime validates the transaction against its sole `LifecycleStore`
+and applies the delta exactly once. A temporary leaver's old-policy bootstrap
+comes only from the first snapshot. The new frontier and initial commitment set
+come only from the third. A stale epoch, missing snapshot or duplicated delta
+fails before a policy token or primitive action is issued.
+
 ### 5.1 Genuine JOIN
 
 ```text
@@ -161,11 +202,13 @@ ACTIVE -> TEMPORARILY_ABSENT
 - The membership transition is external and has no actor log-probability.
 - The open member event trace closes with a critic-only truncation at the leave
   boundary.
+- The current low recurrent chunk also closes with a critic-only truncation.
 - Its bootstrap value is read from the last active, post-primitive/pre-removal
   centralized context with an external-boundary flag. That value belongs to the
   old policy version and is stored before the member is removed.
 - Recurrent state, active skill and skill age are frozen.
-- Skill age does not advance while absent.
+- Skill age and opportunity gap do not advance while absent, and inactive
+  reward is not assigned to this lifecycle.
 - Every other survivor's recurrent state, skill, age and event trace remain
   unchanged.
 
@@ -181,7 +224,9 @@ restore h, z and tau
 Rejoin is an external structural event with no actor likelihood. The restored
 member also receives a policy opportunity in `F_t`, with normal `KEEP/SET`
 support. The policy sees the restored semantic state and `is_rejoin=1`, never
-the routing key.
+the routing key. Rejoin opens a new low recurrent chunk and a new policy event
+from the frozen hidden, skill and age state; its applied token samples and logs
+a fresh opportunity gap.
 
 ### 5.4 Terminal LEAVE
 
@@ -367,6 +412,22 @@ passes `g(C_t^(0))` through the same decoder input where F1 passes the current
 `g(C_t^(j-1))`; no F1-only prefix adapter or extra hidden layer is allowed in
 the first comparison.
 
+For token `j`, both modes store and use the same centralized old value from the
+exact pre-token working context:
+
+```text
+V_i_j = V_phi(u_i_j,
+              h_i_j^pre,
+              g(C_t^(j-1)),
+              critic_global_features,
+              boundary_kind)
+```
+
+The critic may see the applied working set in both modes. It may not read the
+sampled current action, post-token set or future opportunity gap. Collection
+and replay use the stored pre-token source tensors rather than reconstructing
+them from a later roster.
+
 ## 12. Exact event ledger
 
 Each policy token stores the actual structured data required to replay it. No
@@ -385,10 +446,12 @@ external_membership_events_at_time
 exact_active_lifecycle_list
 exact_frontier_lifecycle_list
 sampled_frontier_order
+sampled_replacement_gap_for_each_served_owner
 token_position
 pre_event_member_tokens
 pre_event_skills_and_ages
 pre_token_working_skills_and_ages
+pre_token_critic_member_and_global_source_tensors
 exact_legal_mask
 sampled_combined_action
 post_token_working_skills_and_ages
@@ -522,8 +585,10 @@ Therefore F1 has irreducible algorithmic content only if earlier applied edits
 change later **relative learned scores on the common legal support**.
 
 The eventual behavioral claim must additionally show that this dependence
-improves cooperative utility relative to capacity-, data-, collector- and
-credit-matched F0. Prefix-gradient existence alone, as in R49, is insufficient.
+improves cooperative utility relative to a capacity-, collector-, credit- and
+data-generation-contract-matched F0 with the same exposure budget. Identical
+realized on-policy trajectories are not required after the treatment changes an
+action. Prefix-gradient existence alone, as in R49, is insufficient.
 
 ## 17. Permutation-compatibility statement
 
@@ -591,6 +656,7 @@ schema must name:
 ```text
 architecture_mode: F0 | F1
 schema_version
+snapshot_capability_name_and_version
 encoder_state
 policy_state
 critic_state
@@ -601,12 +667,27 @@ opportunity_generator_state
 frontier_order_rng_state
 open_event_trace_schema
 policy_version
+current_observation_and_state_boundary
+collector_active_presentation
+pending_membership_transaction
+collector_pending_command_response_state
+worker_environment_snapshot
+environment_rng_state
 ```
 
-Resume is allowed only when all mode-specific modules and every live lifecycle
-record can be restored exactly. Missing opportunity RNG state, order ledger,
-membership epoch, open trace, optimizer/normalizer state or policy version is a
-hard load error. Do not use permissive partial loading as compatibility proof.
+Live resume is allowed only when all mode-specific modules, every live
+lifecycle record, the collector boundary and the physical simulator can be
+restored exactly. Missing opportunity/environment RNG state, order ledger,
+membership epoch, open trace, pending transaction, simulator snapshot,
+optimizer/normalizer state or policy version is a hard load error. A collector
+or environment without the declared snapshot round trip cannot use event-mode
+live resume; reset-and-continue is not a fallback.
+
+Fresh-reset evaluation is a separate model/normalizer-only load and must
+declare `runtime_state_absent_for_fresh_eval=true`. The mode and checkpoint
+header are read before collector construction, environment reset or any
+fixed-N agent construction. Schema 1/2 and permissive legacy migration never
+enter the event loader.
 
 At collection time, fail closed on:
 
@@ -668,5 +749,11 @@ representation stack. The exact implementation boundary is now owned by:
 
 That plan freezes the external opportunity schedule, ragged tensor/storage
 shapes, single F0/F1 mode dispatch, strict checkpoint boundary and focused
-engineering checks. Its creation does not itself authorize implementation,
-testbed construction, training or another external exchange.
+engineering checks. The second blind implementation-plan review returned
+`MODIFY_PLAN` and authorized the finite document corrections now incorporated
+here. Production implementation is conditionally permitted only after the
+implementation plan contains the same ownership, transaction, critic,
+live-resume and common-support evidence contracts. Its scope ends at one
+hand-authored, deterministic production transaction trace. It does not
+authorize a real environment, training, a testbed, scientific PASS/FAIL or
+another automatic review round.
