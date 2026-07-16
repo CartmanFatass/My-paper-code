@@ -198,8 +198,9 @@ Use the persistent Antigravity CLI conversation for Gemini 3.1 Pro (High) as
 the other independent divergent reviewer. The round-centric workflow is owned
 by `docs/external-review/README.md`. Gemini may read only the tracked manifest's
 allowlisted local papers and files. Keep one live process for the research
-phase, then one clean non-interactive turn for raw archival; use conversation
-recovery only after failure or restart. Run in plan and sandbox mode, never use
+phase, verify its mandatory-source inspection before closing it, then use one
+clean non-interactive turn for raw archival; use conversation recovery only
+after failure, restart or a concrete source-completeness miss. Run in plan and sandbox mode, never use
 `--dangerously-skip-permissions`, and never run live and archival clients
 concurrently. No reviewer authorizes repository edits, experiments or
 promotion.

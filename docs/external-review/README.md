@@ -56,10 +56,12 @@ are not reorganized retroactively.
 
 Keep one live `agy` process for the Gemini research phase of a review round.
 Send follow-up questions to that process rather than repeatedly resuming the
-conversation. At the archive boundary, exit the live process and make one clean
+conversation. Before closing it, verify that every mandatory local source was
+actually inspected; repair a missing-source finding inside the same live
+process. At the archive boundary, exit the live process and make one clean
 non-interactive call with `10_GEMINI_DIVERGENT_QUESTION.md`; archive that output
-as `11_GEMINI_DIVERGENT_RAW.md`. Conversation-ID recovery is only a crash or
-application-restart fallback.
+as `11_GEMINI_DIVERGENT_RAW.md`. Conversation-ID recovery is only a crash,
+application-restart or concrete source-completeness repair fallback.
 
 This removes repeated CLI startup and local conversation reload, but it does
 not promise provider-side KV-cache persistence. Long-context cost still grows
