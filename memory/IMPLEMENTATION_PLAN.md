@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R50-VNSL-G0 Variable-N Shared Learnability — Authorized
+## R50-VNSL-G0 Variable-N Shared Learnability — Completed No-Access
 
 R49 removed mask, padding, replay, membership, and parameter-shape ambiguity.
 R50 therefore folds controller compatibility into the first evidence-bearing
@@ -41,6 +41,14 @@ no-access result. Specialist PASS with shared failure isolates cross-N sharing
 as the optimization problem. Joint PASS authorizes integration with the real
 default-off controller, not a skill, lifetime, intrinsic, UAV, or cooperation
 claim.
+
+Formal run `logs/r50_vnsl_20260716_195649` passed M0 but ended
+`NO_ACCESS_R50_SPECIALIST_SUBSTRATE`: the fixed-N specialists missed only the
+registered N=16 exact-roster floor (`0.26953 < 0.30`). Although the shared arm
+passed every numerical M2 threshold, M1 is a prerequisite, so those values do
+not establish cross-N learnability. R50 is closed without rescue or controller
+integration. Its synthetic set-relative label did not model task dynamics;
+the next design must make team size change the toy task itself.
 
 ## R49-ORSE-G0 Open-Roster Set-Equivariant Interface — Completed PASS
 

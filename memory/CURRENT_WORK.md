@@ -16,18 +16,18 @@ Updated: 2026-07-16
 
 ## Objective
 
-Implement and run the user-authorized `R50-VNSL-G0` mixed-team-size
-learnability gate. Compare one shared set-equivariant policy with matched
-fixed-`N` specialists on a generic roster bandit to decide whether variable-`N`
-sharing itself creates an optimization gap. Fixed-`N` skill/lifetime work
-remains stopped.
+Close the valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` result without treating
+the synthetic roster bandit as task-level variable-`N` evidence. The next
+design question is a lightweight toy environment whose dynamics and
+cooperation actually change with active team size. Existing Alice--Bob is
+fixed `N=2` and cannot answer that question without redesign.
 
 ## Next Actions
 
-1. Commit/push the smoke-valid R50 implementation, then run the unchanged
-   local CUDA experiment.
-2. Record only the registered substrate-fail, shared-learning-fail, PASS, or
-   INVALID branch. Do not perform automatic Pro review.
+1. Commit/push the R50 terminal result and substrate-only disposition.
+2. Prepare one minimal variable-team toy-environment proposal for user review;
+   do not rerun or rescue R50 and do not integrate its shared policy into the
+   real controller.
 
 ## Immediate Constraints
 
@@ -48,6 +48,15 @@ remains stopped.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
+- Formal R50 run `logs/r50_vnsl_20260716_195649` completed valid
+  `NO_ACCESS_R50_SPECIALIST_SUBSTRATE`. M0 passed with 229,376 cases per arm,
+  1,671,168 token decisions, 512 shared and 3,584 aggregate specialist
+  optimizer steps, and zero replay error. Specialists passed macro/min token
+  and macro exact gates but missed only N=16 exact-roster access
+  (`0.26953 < 0.30`). Shared numerical M2 metrics all passed
+  (`0.95010` macro token, `0.71094` macro exact, `0.44336` N=16 exact), but the
+  registered M1 prerequisite quarantines them. R50 therefore does not decide
+  cross-N sharing and says nothing about task-dynamic variable teams.
 - R43 run
   `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` completed
   `INVALID_R43_FIXED_ANCHOR_LOST`. M0 passed, but fixed final win/key0/key1 was

@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r50-vnsl-g0 | authorized -- implementation ready; focused smoke PASS | variable-N learnability decision gate | contract below | prelaunch commit/push, then unchanged local CUDA run | shared set policy versus matched fixed-N specialists; smoke M0 pass with replay error `0` | Decide whether cross-N sharing needs algorithmic optimization; no skill/lifetime/UAV claim |
+| EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
 | EXP-20260716-r48-sbrs-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R48_SBRS` | hierarchy-L1 reward-off recurrent-boundary abandonment gate | `logs/r48_sbrs_20260716_181833`; implementation `eb6b9e6`; result commit `985ab94`; R48 external-review entry | complete | M0 pass; H10 reset rho LCB `0.98468`, rho-ratio LCB `1.11816`, within UCB `1.01877`; H40 rho-ratio LCB `1.00223`, within UCB `1.00874` | Permanently retire recurrent-boundary line and stop fixed-N skill/lifetime exploration without rescue; only independent R49 architecture gate remains |
 | EXP-20260716-r47-nsopm-g0 | completed -- Pro-confirmed valid `VALID_FAIL_R47_NSOPM` | hierarchy-L1 reward-off natural process-mode identifiability | `logs/r47_nsopm_20260716_172711`; implementation `078845b`; result commit `b758d8c` | complete | M0 pass; only eigen-rank 0 beats temporal null; lag-5 fails; H10 support `0.71875`; H10 D crosses zero; H40 skill 0 negative; causal SNR `0.0343/0.1992` | Permanently retire exact view/map/lag/basis/score/reward pair without rescue; proceed only to R48-SBRS-G0 |
@@ -125,6 +125,22 @@ explicitly approves the exception.
   threshold, reward, or task rescue branch exists.
 - Authoritative status: `<run-root>/runner_status.txt`; result:
   `<run-root>/result/r50_vnsl.json`.
+- Terminal result: run `logs/r50_vnsl_20260716_195649` completed valid
+  `NO_ACCESS_R50_SPECIALIST_SUBSTRATE`. M0 passed with exact registered counts,
+  zero replay error, nonzero relevant-module drift, exact zero KEEP-head drift,
+  and finite parameters and metrics. Specialist macro/min token accuracy was
+  `0.91154/0.86963`; macro exact success was `0.57450`; N=16 exact success was
+  `0.26953`, failing its `0.30` prerequisite. Shared macro/min token accuracy
+  was `0.95010/0.94336`; macro and N=16 exact success were
+  `0.71094/0.44336`; every numerical M2 gate passed, but these reads are
+  quarantined because M1 failed. The registered outcome does not decide
+  variable-N sharing and cannot be upgraded by noting that shared outperformed
+  the specialists.
+- Disposition: no R50 rerun, threshold change, budget increase, or controller
+  integration. The bandit changed roster cardinality and a set-relative label
+  rule, not environment dynamics or cooperation. A future variable-N claim
+  requires a lightweight task whose workload and interaction structure really
+  change with active team size; fixed-two-agent Alice--Bob is not that test.
 
 ## EXP-20260716-r49-orse-g0 — Open-Roster Set-Equivariant Interface
 
