@@ -31,12 +31,12 @@ must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Archive and push the complete round-3 response and source-level disposition.
-2. Specify the smallest source-native R42-IRR sampling/replay path, including
-   stored incumbent-roster teacher forcing and exact zero-residual parity.
-3. Implement the residual in an external source wrapper and run the smallest
-   paired Alice--Bob gate that can distinguish learned retention from the R41B
-   fixed-refresh continuation.
+1. Commit and push the completed R42-IRR external overlay, paired runner,
+   analyzer, and frozen experiment contract as one pre-launch boundary.
+2. Run the registered local paired gate after reporting its exact parameters to
+   the user: two concurrent 16-env arms, 320K steps per arm, seed `42041`.
+3. Read the single result JSON once, disposition its M0--M3 branch, and record
+   only the terminal result boundary.
 
 ## Immediate Constraints
 
@@ -53,6 +53,10 @@ must not renew surviving agents' skills.
   external reward.
 - Do not begin open-roster or variable-`N` implementation before the fixed-`N`
   temporal gate.
+- The R42 preflight against the real R41B checkpoint passed with zero action,
+  likelihood, value, entropy, replay, and base-gradient error; the residual
+  direct policy-gradient norm was `0.2221746`. Do not add another smoke or test
+  stage before the paired run.
 - Completed branch decisions in `memory/ExpRecord.md` and the cited research
   decision files are binding. Reopen one only through a new registered causal
   edge, not by retuning budgets, seeds, thresholds, rewards, or model size.

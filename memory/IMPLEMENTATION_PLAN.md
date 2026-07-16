@@ -50,6 +50,25 @@ extraction. Do not edit the source archive or port it into the standalone
 HA-CTSE trainer. Register the exact paired budget and thresholds in
 `memory/ExpRecord.md` before launch.
 
+Implementation boundary completed in:
+
+- `scripts/r42_native_roster_residual.py`
+- `scripts/run_r42_native_roster_residual_arm.py`
+- `scripts/run_r42_native_roster_residual_local.ps1`
+- `scripts/analyze_r42_native_roster_residual.py`
+
+The overlay adds 548 parameters and stores `[high_step, env, agent]` incumbent
+labels beside the unchanged high buffer. Sampling builds the working roster in
+canonical agent order; replay reconstructs the same prefixes from stored high
+actions. Gradients enter the residual and original MAT logits through the same
+categorical PPO ratio. The low actor, critics, discriminators, rewards, clocks,
+episode masks, and collector shapes are unchanged.
+
+One real-checkpoint preflight with a one-env runner completed without training:
+all sampled-action, log-probability, value, entropy, teacher-forced replay, and
+base-MAT gradient errors were exactly zero; the treatment residual gradient
+norm was `0.2221745794`. The next and only check is the registered paired run.
+
 ## R41B Full-Source HMASD Alice-and-Bob Access Reproduction
 
 Active causal edge:

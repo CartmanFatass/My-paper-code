@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r42-irr-native-roster-residual | planned -- contract pending | hierarchy-L2 same-checkpoint temporal mechanism gate | fresh `ref/hmasd.tar` runtime; R41B final checkpoint | source-native sampling/replay implementation boundary | Pure categorical reinterpretation is algebraically identical to original refresh; a zero-output roster residual is the smallest route that can change retention probability | Register one paired local gate; no pure-categorical run, new reward, duration action, open roster, or variable `N` |
+| EXP-20260716-r42-irr-native-roster-residual | launch-ready | hierarchy-L2 same-checkpoint temporal mechanism gate | local CUDA; fresh `ref/hmasd.tar`; R41B final checkpoint | paired terminal result JSON | Real-checkpoint preflight: all parity errors `0`, residual gradient norm `0.222175`, 548 added parameters | Run one concurrent 320K/arm fixed-versus-residual gate; no rescue or extra test stage |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
 | EXP-20260716-r41a-hmasd-alice-bob-local-pilot | completed -- valid `NO_ACCESS_R41A_HMASD_ALICE_BOB_LOCAL_PILOT` | baseline-L0 original-source access pilot | local CUDA; `logs/r41a_hmasd_local_pilot_20260716_030013`; commit `a1ea76b` | completed GPT-5.6 Pro round 1 | M0 PASS with replay `0`; all five paths 14,055 updates; zero/final win `0/0`; paired CI `[0,0]` | Accepted as reduced-exposure no-access; run one exact 32-env full-source seed |
 | EXP-20260715-r40-simple-spread-access | completed -- valid `VALID_FAIL_R40_ACCESS` | baseline-L1 public cooperative-access gate | `logs/r40_simple_spread_access_200k_20260715_235500_retry4`; result copied to external-review entry | GPT-5.6 Pro R40/R41 disposition | M0 PASS; MAPPO/random `-52.392238/-52.587268`; paired CI crosses zero; `0/4` blocks pass | Retire this exact substrate without rescue; proceed only to official-source R41 |
@@ -134,20 +134,47 @@ explicitly approves the exception.
   sampling and teacher-forced PPO replay use the same stored roster and
   autoregressive prefixes. The fixed arm instantiates the same module with its
   output and gradient disabled.
-- M0 before scientific interpretation: zero-residual actions, log-probabilities,
-  values, low trajectories, and existing gradients match the original path;
-  stored/replayed global/high/low likelihood errors are `<=1e-6`; both arms
-  start from identical parameters; only the treatment residual receives a new
-  gradient path.
-- Decision metrics: fixed-arm source access, paired service noninferiority, and
-  effective `t=50` per-agent skill-change rates and discordance. Exact exposure,
-  thresholds, bootstrap seed, and mutually exclusive branches must be frozen
-  here before launch.
+- Comparator and exposure: hierarchy-L2 mechanism-matched
+  `fixed_refresh` versus `incumbent_roster_residual`, both restored from the
+  exact R41B seed-1 final checkpoint. Seed `42041`; arms run concurrently on
+  local CUDA with 16 rollout environments each, 100-step rollouts, 200 outer
+  updates, 320,000 environment steps, and 3,000 updates for each original high,
+  low-actor, low-critic, team-discriminator, and individual-discriminator path.
+  The treatment additionally updates its residual through the existing high
+  loss. Final evaluation uses 100 deterministic paired reset streams per arm.
+- M0 implementation: fresh source extraction; exact checkpoint schema and full
+  optimizer/ValueNorm restore; zero-output action, log-probability, value,
+  entropy, replay, and base-gradient errors all `<=1e-6`; residual direct
+  gradient finite and nonzero; exactly 548 new parameters; high/low/global
+  stored-replayed error `<=1e-6`; exact step/update counts; all five original
+  paths expose finite nonzero gradients; fixed residual drift `<=1e-12` and
+  treatment relative drift `>1e-6`; one `t=50` renewal row per evaluation.
+- M1 fixed anchor: fixed final win rate `>=0.80` and both key0/key1 rates
+  `>=0.85`.
+- M2 service: 10,000 paired-reset bootstrap repetitions, seed `62042`; the
+  strict lower 95% bound of treatment-minus-fixed win must exceed `-0.10`.
+- M3 temporal mechanism: define effective SET only when the post-check skill
+  differs from its incumbent. Treatment discordant-agent SET rate must be
+  `>=0.20`, and the paired treatment-minus-fixed discordance lower 95% bound
+  must be `>0`; treatment full-synchronous SET must be `<0.50`; every agent must
+  have both KEEP and SET marginal at least `0.05`; normalized entropy of actual
+  SET targets must be `>0.80`.
+- Branches: M0 failure -> `INVALID_R42_IRR_IMPLEMENTATION`, repair only the
+  concrete implementation defect. M1 failure ->
+  `INVALID_R42_FIXED_ANCHOR_LOST`, restore the continuation contract. M2
+  failure -> `VALID_FAIL_R42_IRR_SERVICE`, retire the direct native-k50
+  residual. M2 pass/M3 failure -> `VALID_FAIL_R42_IRR_NO_DECOUPLING`, retire it
+  as a temporal mechanism. M0--M3 pass -> `PASS_R42_IRR_K50`, authorize only
+  one paired multi-seed verification before S7 or variable-`N` promotion. There
+  is no UNDERPOWERED branch or post-result threshold change.
+- Expected wall clock: 15--30 minutes on the local CUDA device with 32 total
+  concurrent environment workers.
 - Prohibited: pure event relabeling, environment-specific intrinsic reward,
   task fields in the residual, duration or independent KEEP actions, new
   critic/team latent, threshold rescue, open roster, or variable `N`.
-- Status source: to be registered with the paired runner; no experiment has
-  been launched.
+- Status source: `<run-root>/runner_status.txt`; decision source:
+  `<run-root>/result/r42_irr_native_roster_residual.json`. Runner:
+  `scripts/run_r42_native_roster_residual_local.ps1`.
 
 ### EXP-20260716-r41b-hmasd-alice-bob-full-source
 
