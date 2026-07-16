@@ -12,12 +12,12 @@ Updated: 2026-07-16
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized up to five automated GPT-5.6 Pro
   follow-ups after the manually submitted R45 review. Automatic submissions
-  used: `0/5`; reuse the existing `算法探索与交接摘要` conversation only.
+  used: `1/5`; reuse the existing `算法探索与交接摘要` conversation only.
 
 ## Objective
 
-Make the accepted `R46-HMRV-G0` heterogeneous-maintenance positive control
-launch-exact, then implement and run its single local CUDA gate. R45 found
+Implement and run the launch-exact `R46-HMRV-G0` heterogeneous-maintenance
+positive control as a single local CUDA gate. R45 found
 strong action-conditioned predictive information, but natural KEEP support was
 insufficient and renewal value was almost universally common-mode positive,
 not agent-specific sign-changing timing value.
@@ -27,12 +27,12 @@ must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the archived R45 Pro response, accepted disposition, and
-   tracked R46 launch-contract clarification.
-2. Use automatic Pro submission `1/5` to close only the missing discount,
-   prefix, optimizer/seed, bootstrap, evaluation, and role-stratum values.
-3. Archive that response, register the exact R46 contract, implement the
-   minimal standalone gate, and run the authorized 64,000-step local CUDA job.
+1. Finish the minimal standalone R46 worker, analyzer, and local runner under
+   the clarified fixed contract.
+2. Commit and push the launch-ready package, then run the authorized 64,000-
+   step local CUDA gate.
+3. Archive the result, commit and push the evidence boundary, and use automatic
+   Pro submission `2/5` for the registered result review.
 
 ## Immediate Constraints
 
@@ -84,10 +84,6 @@ must not renew surviving agents' skills.
   prefix mismatch `0`, exact source/actor freeze and zero/final traces, and
   finite nonzero gradients in all four critics. The transient smoke output was
   removed. This is implementation evidence only, not R45 scientific data.
-- Pro's literal M2 ratio threshold is mathematically non-discriminating. The
-  runner and analyzer explicitly use the intended positive improvement form
-  `LCB95(WMSE_sham/WMSE_true - 1) > 0`; launch awaits user confirmation of this
-  pre-result clarification.
 - Formal R45 run `logs/r45_sdra_160k_20260716_144312` completed valid
   `VALID_FAIL_R45_SDRA_IDENTIFIABILITY`. M0 passed; source service remained
   `0.93/1.00/0.93`; M2 passed with true/sham weighted MSE
@@ -100,8 +96,11 @@ must not renew surviving agents' skills.
   only `R46-HMRV-G0`: fixed `N=2`, `k0=5`, `H=40`, heterogeneous health
   degradation `{1,2}`, fixed Bernoulli-0.5 natural KEEP/RENEW behavior, zero
   policy/intrinsic updates, and four cross-fitted six-input Q/sham critics.
-  Implementation waits only for the tracked launch-exact clarification; no
-  R42--R45 rescue, S7, open-roster, or variable-`N` work is authorized.
+  The launch-exact clarification fixed `gamma=0.99`, prefix sentinels, Adam
+  settings, fold seeds, episode-cluster bootstrap, evaluation seed, and both
+  ordered role strata without changing the route, budget, threshold, or
+  branches. No R42--R45 rescue, S7, open-roster, or variable-`N` work is
+  authorized.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

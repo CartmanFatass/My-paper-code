@@ -17,12 +17,14 @@ intrinsic, or source module exists or updates. Only four cross-fitted
 `6 -> 32 GELU -> 2` true-Q/action-blind-sham critics train. The accepted
 environment, budgets, M0--M3 thresholds, and terminal branches may not change.
 
-Implementation is paused only for one tracked launch-exact clarification of
-the omitted `gamma`, first-prefix sentinel, critic optimizer/seeds, bootstrap
-cluster, evaluation RNG, and role-stratum definition. After that response, the
-final contract is registered once in `memory/ExpRecord.md`, followed directly
-by the coherent implementation and 64K formal run; there is no separate
-algorithm-verification stage.
+The launch-exact clarification is accepted: `gamma=0.99`; agent-0 prefix is
+`[0,0]`, agent-1 prefix is `[1,actual_b0]`; critic Adam and fold seeds match the
+R45 contract; scientific bootstrap clusters independent `(env,episode)` rows;
+evaluation replays seed `56041`; and ordered degradation strata `(1,2)` and
+`(2,1)` must each clear the discordance lower-bound gate. The standalone worker,
+analyzer, and local runner now implement that frozen contract. The next
+evidence-bearing action is the 64K formal run; there is no separate algorithm-
+verification stage.
 
 ## R45-SDRA Reward-Off Identifiability — Completed and Retired
 

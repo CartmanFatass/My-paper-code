@@ -61,7 +61,9 @@ one new causal edge and abandonment gate are selected.
 - R46 is a reward-off fixed-`N=2` heterogeneous-maintenance positive control,
   not skill learning or a benchmark-performance claim. It trains no policy or
   intrinsic module.
-- Launch is deferred only until the omitted discount, prefix sentinel, critic
-  seeds/optimizer, bootstrap unit, evaluation seed, and role-stratum semantics
-  are fixed in the tracked clarification question. This does not reopen R45 or
+- Source: GPT-5.6 Pro, 2026-07-16; the launch-exact response is archived as
+  `GPT5_6_PRO_R46_CONTRACT_CLARIFICATION_RESPONSE_RAW.md`.
+- Accepted clarification: `gamma=0.99`; exact prefix sentinels; Adam and fold
+  seeds; episode-cluster bootstrap; evaluation seed `56041`; and separate
+  `(1,2)`/`(2,1)` role-stratum lower-bound gates. This does not reopen R45 or
   authorize another route.

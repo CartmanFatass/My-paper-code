@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260716-r46-hmrv-g0 | launch-ready | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | local CUDA; 16 envs, 64K steps | terminal result JSON | balanced Bernoulli-0.5 support; four cross-fitted `6->32->2` critics; exact launch contract clarified by Pro | Run one fixed contract; PASS authorizes only same-substrate renewal actor vs shared-sync control; valid FAIL retires substrate without rescue |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
 | EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | completed GPT-5.6 Pro review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Fixed wrapper accepted source-equivalent; keep treatment diagnostic-only and proceed only to R44-FS-NRC |
@@ -64,6 +65,78 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260716-r46-hmrv-g0 — Heterogeneous Maintenance Renewal Value
+
+- Status: launch-ready after the accepted R46 launch-exact clarification.
+- Causal edge: native heterogeneous process degradation -> balanced natural
+  KEEP/RENEW support -> action-specific delayed renewal value -> same-check
+  agent/context-specific sign heterogeneity.
+- Scope: reward-off fixed-`N=2` temporal-substrate positive control. It is not
+  skill learning, intrinsic-reward training, benchmark performance, S7,
+  open-roster, or variable-`N` evidence.
+- Authorization: the user authorized the local gate and Git pushes within the
+  bounded automatic Pro workflow.
+- Execution: local CUDA only; cloud prohibited. Environment and behavior-action
+  seeds `46041`; `N=2`; `k0=5`; horizon `40`; eight checks per episode; 16
+  environments; 100 episodes per environment; 64,000 primitive steps. The
+  behavior policy samples independent Bernoulli-0.5 `KEEP=0`/`RENEW=1` actions
+  for both agents at every check. Even episode indices use degradation `(1,2)`
+  and odd indices use `(2,1)`. Expected wall clock is under 30 minutes.
+- Transition and reward: health starts at `(4,4)`. KEEP emits `u_i=h_i/4` and
+  sets `h'_i=max(0,h_i-d_i)`; RENEW emits `u_i=0` and sets `h'_i=4`. Each
+  primitive step in the block receives shared external reward
+  `min(1,u_0+u_1)`. The reward consumes service output, not the token. There is
+  no shaping, intrinsic, lifetime, or asynchrony reward.
+- Outcome: `gamma=0.99` and
+  `G_tau^(3)=sum_{r=0}^{14} 0.99^r r_env[tau*k0+r]`, covering the action's
+  current block and the following two blocks without a discount restart. Only
+  the first six checks enter the estimand: 9,600 usable checks and 19,200 focal
+  rows.
+- Context: exactly
+  `[h_i/4,h_other/4,d_i/2,d_other/2,prefix_valid,b_<i]`. Agent 0 uses sentinel
+  `[prefix_valid,b_<i>]=[0,0]`; agent 1 uses `[1,actual_b0]`. No identity,
+  reward history, future, oracle, task, goal, contact, or success field enters.
+- Critics: fixed folds A train env ranks `0..7` and hold out `8..15`; B reverses
+  them. Each fold trains one true-Q and one action-blind propensity-mixture
+  sham with identical initialization, normalization, minibatch schedule,
+  capacity, and exposure. Architecture `6->32 GELU->2`; Adam `lr=5e-4`,
+  `eps=1e-5`, betas `(0.9,0.999)`, zero weight decay, no AMSGrad; 15 epochs;
+  minibatch 256; no drop-last. Fold A model/shuffle seeds `46041/1046044`;
+  fold B `56041/1056044`. Each model takes 570 steps, 2,280 total. Policy,
+  low, skill, and intrinsic optimizer steps are all zero.
+- Evaluation: 100 episodes with action seed `56041`. Pre-generate the balanced
+  role assignments and Bernoulli action tensor, then replay them exactly before
+  and after critic fitting. Pairing is only an M0 trace-equality audit; no
+  trained-policy arm exists.
+- Bootstrap: 10,000 repetitions, seed `62046`. The scientific cluster is the
+  independent source episode `(env_rank,episode_index)`, containing all six
+  usable checks and both focal rows. M1 maximum-weight share remains grouped by
+  persistent environment rank.
+- M0: exact registered transitions/reward, propensity `0.5`, action replay,
+  counts, zero noncritic optimizer steps, four critics with 570 steps each,
+  nonoverlapping folds, finite gradients/predictions/weights/DR scores, exact
+  six-field context and pre/post traces, plus at least one zero-reward and one
+  full-service block.
+- M1: every agent/action ESS `>=64` and persistent-environment maximum
+  normalized weight share `<=0.10`.
+- M2: lower 95% bound of `WMSE_sham/WMSE_true-1` is positive and the lower 95%
+  bound of top-minus-bottom doubly robust score is positive.
+- M3: for each agent, top-quartile DR lower bound is positive and bottom-
+  quartile DR upper bound is negative. Pooled same-check predicted-sign
+  discordance is at least `0.20` with lower bound above `0.10`; ordered role
+  strata `(1,2)` and `(2,1)` each separately require a lower bound above
+  `0.10`.
+- `INVALID_R46_HMRV_WIRING`: M0 failure; repair only the explicit defect and
+  rerun the unchanged contract.
+- `PASS_R46_HMRV_IDENTIFIABILITY`: M0--M3 pass; authorize only a same-substrate
+  per-agent renewal actor versus shared-sync control.
+- `VALID_FAIL_R46_HMRV_SUBSTRATE`: M0 valid and any M1--M3 failure; permanently
+  retire the exact dynamics, three-block estimand, and positive-control
+  substrate without seed, data, capacity, threshold, clipping, reward, or
+  environment rescue.
+- Authoritative status: `<run-root>/runner_status.txt`; result:
+  `<run-root>/result/r46_hmrv_identifiability.json`.
 
 ## EXP-20260715-r38-cts-access — Cooperative Two-Timescale Sparse Access
 
