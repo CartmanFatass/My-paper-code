@@ -16,8 +16,8 @@ Updated: 2026-07-16
 
 ## Objective
 
-Implement and run the launch-exact `R46-HMRV-G0` heterogeneous-maintenance
-positive control as a single local CUDA gate. R45 found
+Review the valid `R46-HMRV-G0` heterogeneous-maintenance substrate failure and
+select at most one structurally different fixed-`N` causal edge. R45 found
 strong action-conditioned predictive information, but natural KEEP support was
 insufficient and renewal value was almost universally common-mode positive,
 not agent-specific sign-changing timing value.
@@ -27,12 +27,12 @@ must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Finish the minimal standalone R46 worker, analyzer, and local runner under
-   the clarified fixed contract.
-2. Commit and push the launch-ready package, then run the authorized 64,000-
-   step local CUDA gate.
-3. Archive the result, commit and push the evidence boundary, and use automatic
-   Pro submission `2/5` for the registered result review.
+1. Commit and push the R46 result JSON, disposition, and tracked review
+   question.
+2. Use automatic Pro submission `2/5` for the registered result review in the
+   existing consultation conversation.
+3. Archive the response and implement only its single accepted next edge, if
+   one remains justified under the bounded automatic workflow.
 
 ## Immediate Constraints
 
@@ -101,6 +101,12 @@ must not renew surviving agents' skills.
   ordered role strata without changing the route, budget, threshold, or
   branches. No R42--R45 rescue, S7, open-roster, or variable-`N` work is
   authorized.
+- Formal R46 run `logs/r46_hmrv_64k_20260716_154508` completed valid
+  `VALID_FAIL_R46_HMRV_SUBSTRATE`. M0/M1/M2 passed, but agent 0's top quartile
+  remained renewal-negative and pooled plus both ordered-role-stratum sign
+  discordance were exactly zero. The exact HMRV dynamics, three-block
+  estimand, and substrate are retired without seed, data, capacity, threshold,
+  clipping, reward, or environment rescue.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

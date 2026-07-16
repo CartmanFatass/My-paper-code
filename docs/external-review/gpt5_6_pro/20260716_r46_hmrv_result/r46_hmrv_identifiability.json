@@ -1,0 +1,315 @@
+{
+  "contract": {
+    "behavior_action_seed": 46041,
+    "bootstrap_cluster": "(env_rank,episode_index)",
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 62046,
+    "checks_per_episode": 8,
+    "critic_epochs": 15,
+    "critic_minibatch": 256,
+    "critic_optimizer_steps_total": 2280,
+    "critic_steps_per_model": 570,
+    "environment_seed": 46041,
+    "environment_steps": 64000,
+    "episodes_per_env": 100,
+    "evaluation_action_seed": 56041,
+    "evaluation_episodes": 100,
+    "execution_target": "local_cuda",
+    "gamma": 0.99,
+    "k0": 5,
+    "rollout_envs": 16,
+    "usable_checks_per_episode": 6
+  },
+  "experiment_id": "EXP-20260716-r46-hmrv-g0",
+  "gates": {
+    "M0_implementation": true,
+    "M1_overlap": true,
+    "M2_action_specific_informativeness": true,
+    "M3_sign_heterogeneity": false
+  },
+  "implementation": {
+    "algorithm_boundary": {
+      "behavior_policy_fixed_bernoulli_half": true,
+      "critic_only_learning": true,
+      "early_stopping": false,
+      "intrinsic_reward_exists": false,
+      "low_module_exists": false,
+      "model_selection": false,
+      "policy_module_exists": false,
+      "reward_shaping": false,
+      "skill_module_exists": false,
+      "standalone_synthetic_substrate": true,
+      "task_specific_intrinsic_reward": false
+    },
+    "collection": {
+      "behavior_action_replay_mismatch": 0,
+      "context_shape": [
+        19200,
+        6
+      ],
+      "full_service_blocks": 6412,
+      "propensity_max": 0.5,
+      "propensity_min": 0.5,
+      "zero_reward_blocks": 3962
+    },
+    "critic_training": {
+      "all_gradients_finite": true,
+      "folds": {
+        "A": {
+          "amsgrad": false,
+          "architecture": "6->32_GELU->2",
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "drop_last": false,
+          "epochs": 15,
+          "eps": 1e-05,
+          "heldout_env_ranks": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "heldout_rows": 9600,
+          "initial_true_sham_max_difference": 0.0,
+          "learning_rate": 0.0005,
+          "minibatch": 256,
+          "model_init_seed": 46041,
+          "normalization_fit_rows": 9600,
+          "optimizer": "Adam",
+          "parameter_count": 290,
+          "sham_all_gradients_finite": true,
+          "sham_max_gradient_norm": 26.91246955044198,
+          "sham_nonzero_gradient_steps": 570,
+          "sham_steps": 570,
+          "shuffle_seed": 1046044,
+          "train_env_ranks": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "train_rows": 9600,
+          "true_all_gradients_finite": true,
+          "true_max_gradient_norm": 27.549388024375027,
+          "true_nonzero_gradient_steps": 570,
+          "true_steps": 570,
+          "weight_decay": 0.0
+        },
+        "B": {
+          "amsgrad": false,
+          "architecture": "6->32_GELU->2",
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "drop_last": false,
+          "epochs": 15,
+          "eps": 1e-05,
+          "heldout_env_ranks": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "heldout_rows": 9600,
+          "initial_true_sham_max_difference": 0.0,
+          "learning_rate": 0.0005,
+          "minibatch": 256,
+          "model_init_seed": 56041,
+          "normalization_fit_rows": 9600,
+          "optimizer": "Adam",
+          "parameter_count": 290,
+          "sham_all_gradients_finite": true,
+          "sham_max_gradient_norm": 27.09430459058801,
+          "sham_nonzero_gradient_steps": 570,
+          "sham_steps": 570,
+          "shuffle_seed": 1056044,
+          "train_env_ranks": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "train_rows": 9600,
+          "true_all_gradients_finite": true,
+          "true_max_gradient_norm": 27.721806543665828,
+          "true_nonzero_gradient_steps": 570,
+          "true_steps": 570,
+          "weight_decay": 0.0
+        }
+      },
+      "total_optimizer_steps": 2280
+    },
+    "evaluation": {
+      "all_exact": true,
+      "checks_per_episode": 8,
+      "episodes": 100,
+      "exact_trace_equality": {
+        "actions": true,
+        "block_reward": true,
+        "post_health": true,
+        "pre_health": true,
+        "role_assignments": true,
+        "service_output": true
+      }
+    },
+    "telemetry": {
+      "critic_optimizer_steps": 2280,
+      "environment_steps": 64000,
+      "episodes_per_env": 100,
+      "focal_rows": 19200,
+      "intrinsic_optimizer_steps": 0,
+      "low_optimizer_steps": 0,
+      "policy_optimizer_steps": 0,
+      "rollout_envs": 16,
+      "skill_optimizer_steps": 0,
+      "total_check_rows": 12800,
+      "usable_event_rows": 9600
+    }
+  },
+  "implementation_valid": true,
+  "invalid_reasons": [],
+  "next_action": "permanently retire the exact HMRV dynamics, three-block estimand, and positive-control substrate without rescue",
+  "overlap": {
+    "groups": {
+      "agent_0_KEEP": {
+        "ess": 4730.0,
+        "maximum_environment_weight_share": 0.0678646934460888,
+        "pass": true,
+        "rows": 4730
+      },
+      "agent_0_RENEW": {
+        "ess": 4870.0,
+        "maximum_environment_weight_share": 0.06570841889117043,
+        "pass": true,
+        "rows": 4870
+      },
+      "agent_1_KEEP": {
+        "ess": 4708.0,
+        "maximum_environment_weight_share": 0.06584536958368734,
+        "pass": true,
+        "rows": 4708
+      },
+      "agent_1_RENEW": {
+        "ess": 4892.0,
+        "maximum_environment_weight_share": 0.06561733442354865,
+        "pass": true,
+        "rows": 4892
+      }
+    },
+    "pass": true
+  },
+  "prohibitions": [
+    "no seed, data, capacity, threshold, clipping, reward, or environment rescue",
+    "no task-specific intrinsic reward or reward shaping",
+    "no policy, low-level, skill, or intrinsic update in G0",
+    "no S7, open-roster, or variable-N promotion without the registered PASS"
+  ],
+  "scientific": {
+    "diagnostics": {
+      "dr_score_mean": -1.281716971643809,
+      "dr_score_std": 6.519858131179283,
+      "predicted_delta_mean": -0.5486882436523834,
+      "predicted_delta_std": 0.3176836912218651
+    },
+    "m2": {
+      "action_blind_weighted_mse": 10.918636329477659,
+      "pass": true,
+      "pooled_predicted_delta_q25": -0.7668027877807617,
+      "pooled_predicted_delta_q75": -0.22922372817993164,
+      "top_minus_bottom_dr_score": {
+        "lower_95": 2.5504156615692644,
+        "mean": 2.7943716783534494,
+        "upper_95": 3.0374302898916805
+      },
+      "true_q_weighted_mse": 10.607934344407655,
+      "wmse_ratio_gain": {
+        "lower_95": 0.02669357850625022,
+        "mean": 0.02928958409643645,
+        "upper_95": 0.03189123519427954
+      },
+      "wmse_sham_over_true": {
+        "lower_95": 1.0266935785062503,
+        "mean": 1.0292895840964364,
+        "upper_95": 1.0318912351942795
+      }
+    },
+    "m3": {
+      "agent_sign_heterogeneity": {
+        "agent_0": {
+          "bottom_psi": {
+            "lower_95": -2.9038920100692454,
+            "mean": -2.668695526347211,
+            "upper_95": -2.4333424696875867
+          },
+          "pass": false,
+          "predicted_delta_q25": -0.7160539627075195,
+          "predicted_delta_q75": -0.22922372817993164,
+          "top_psi": {
+            "lower_95": -0.6721037191886414,
+            "mean": -0.4568807559650625,
+            "upper_95": -0.24798385147611232
+          }
+        },
+        "agent_1": {
+          "bottom_psi": {
+            "lower_95": -3.394419179023432,
+            "mean": -3.160862657086042,
+            "upper_95": -2.9319024469522494
+          },
+          "pass": true,
+          "predicted_delta_q25": -0.9037947654724121,
+          "predicted_delta_q75": -0.404266357421875,
+          "top_psi": {
+            "lower_95": 0.3525402720459799,
+            "mean": 0.6023512842119525,
+            "upper_95": 0.85148859005085
+          }
+        }
+      },
+      "pass": false,
+      "role_stratified_sign_discordance": {
+        "d0_1_d1_2": {
+          "lower_95": 0.0,
+          "mean": 0.0,
+          "pass": false,
+          "upper_95": 0.0
+        },
+        "d0_2_d1_1": {
+          "lower_95": 0.0,
+          "mean": 0.0,
+          "pass": false,
+          "upper_95": 0.0
+        }
+      },
+      "role_stratum_lcb_floor": 0.1,
+      "same_check_sign_discordance": {
+        "lower_95": 0.0,
+        "mean": 0.0,
+        "upper_95": 0.0
+      },
+      "same_check_sign_discordance_lcb_floor": 0.1,
+      "same_check_sign_discordance_point_floor": 0.2
+    }
+  },
+  "status": "VALID_FAIL_R46_HMRV_SUBSTRATE"
+}
+

@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r46-hmrv-g0 | launch-ready | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | local CUDA; 16 envs, 64K steps | terminal result JSON | balanced Bernoulli-0.5 support; four cross-fitted `6->32->2` critics; exact launch contract clarified by Pro | Run one fixed contract; PASS authorizes only same-substrate renewal actor vs shared-sync control; valid FAIL retires substrate without rescue |
+| EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d` | GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; pooled and both role-stratum sign discordance exactly `0` | Retire exact HMRV dynamics, three-block estimand, and substrate without rescue; request one structurally different edge |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
 | EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | completed GPT-5.6 Pro review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Fixed wrapper accepted source-equivalent; keep treatment diagnostic-only and proceed only to R44-FS-NRC |
@@ -68,7 +68,8 @@ explicitly approves the exception.
 
 ## EXP-20260716-r46-hmrv-g0 — Heterogeneous Maintenance Renewal Value
 
-- Status: launch-ready after the accepted R46 launch-exact clarification.
+- Status: completed as valid `VALID_FAIL_R46_HMRV_SUBSTRATE`; pending external
+  result review.
 - Causal edge: native heterogeneous process degradation -> balanced natural
   KEEP/RENEW support -> action-specific delayed renewal value -> same-check
   agent/context-specific sign heterogeneity.
@@ -137,6 +138,12 @@ explicitly approves the exception.
   environment rescue.
 - Authoritative status: `<run-root>/runner_status.txt`; result:
   `<run-root>/result/r46_hmrv_identifiability.json`.
+- Terminal evidence: run `logs/r46_hmrv_64k_20260716_154508` passed M0, M1,
+  and M2. True/sham weighted MSE was `10.6079/10.9186`; ratio-gain interval
+  `[0.02669,0.03189]`; top-minus-bottom DR interval
+  `[2.5504,3.0374]`. M3 failed: pooled and both ordered-role-stratum sign
+  discordance were exactly zero. The registered valid-fail retirement is
+  binding unless review identifies a concrete result-changing M0 defect.
 
 ## EXP-20260715-r38-cts-access — Cooperative Two-Timescale Sparse Access
 

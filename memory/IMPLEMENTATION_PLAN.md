@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R46-HMRV-G0 Heterogeneous-Maintenance Positive Control — Active
+## R46-HMRV-G0 Heterogeneous-Maintenance Positive Control — Completed and Retired
 
 GPT-5.6 Pro confirmed R45 and selected one new substrate-level causal edge:
 before another renewal actor or joint skill mechanism, test whether a fixed
@@ -21,10 +21,18 @@ The launch-exact clarification is accepted: `gamma=0.99`; agent-0 prefix is
 `[0,0]`, agent-1 prefix is `[1,actual_b0]`; critic Adam and fold seeds match the
 R45 contract; scientific bootstrap clusters independent `(env,episode)` rows;
 evaluation replays seed `56041`; and ordered degradation strata `(1,2)` and
-`(2,1)` must each clear the discordance lower-bound gate. The standalone worker,
-analyzer, and local runner now implement that frozen contract. The next
-evidence-bearing action is the 64K formal run; there is no separate algorithm-
-verification stage.
+`(2,1)` must each clear the discordance lower-bound gate.
+
+The formal local CUDA run completed at
+`logs/r46_hmrv_64k_20260716_154508` as valid
+`VALID_FAIL_R46_HMRV_SUBSTRATE`. M0, M1, and M2 passed: all traces and counts
+were exact, agent/action ESS exceeded `4,700`, and true-Q beat its action-blind
+sham with a positive ratio-gain lower bound. M3 failed because agent 0's top
+quartile remained renewal-negative and pooled plus both ordered-role-stratum
+predicted-sign discordance were exactly zero. The exact HMRV dynamics,
+three-block estimand, and substrate are retired without rescue. No renewal
+actor, S7, open-roster, or variable-`N` implementation is authorized before
+the result review selects one structurally different edge.
 
 ## R45-SDRA Reward-Off Identifiability — Completed and Retired
 
