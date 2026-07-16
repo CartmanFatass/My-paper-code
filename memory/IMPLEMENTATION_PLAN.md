@@ -4,6 +4,26 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## R52-ARFA-G0 Task-Dynamic Variable-N Learning — Launch Exact
+
+Implement an isolated successor to R51 with recoverable station health,
+irrecoverably expiring jobs, cumulative weakest-station reliability, and only
+the terminal native utility `U=min(M,J)`. Add one anonymous focal-current-entity
+relation to the pointer key so stay versus switch is observable. Preserve the
+small recurrent set-pointer structure, paired shared/specialist comparison,
+single PPO epoch, 125 balanced cycles, 320K transitions/arm, and exact-final
+evaluation.
+
+M0 must include constructive, no-job, and partial schedules in addition to the
+probability/replay/count/checkpoint contract. Specialists must first show both
+training return carrier and final task access. Shared results remain
+quarantined unless every M1 gate passes. No R51 rescue, shaping, intrinsic,
+skill, lifetime, membership-change, S7/UAV, or novelty work enters this stage.
+
+Implementation status: the three isolated R52 files are complete and the one
+focused CUDA M0 dry-run passed. Freeze this boundary, commit/push it once, and
+launch the unchanged formal gate; do not add more prelaunch checks.
+
 ## R51-AMDT-G0 Task-Dynamic Variable-N Learning — Launch Exact
 
 Implement one isolated 32-step assignment-graph environment with stable

@@ -16,17 +16,16 @@ Updated: 2026-07-16
 
 ## Objective
 
-Close the valid `NO_ACCESS_R51_AMDT_SPECIALISTS` result and obtain one manual
-GPT-5.6 Pro environment-design failure review. R51 cannot decide shared
-variable-`N` learning because its fixed-N ordinary-policy prerequisite failed.
+Implement and run launch-exact `R52-ARFA-G0` Anonymous
+Reliability--Fulfillment Allocation. Test whether a terminal graded, nonadditive
+task utility supplies fixed-N ordinary-policy access before judging one shared
+anonymous policy across `N={2,3,4,5,6}`.
 
 ## Next Actions
 
-1. Commit/push the R51 result, raw evidence, disposition, and single next-edge
-   review question.
-2. Give the user the fixed manual GPT-5.6 Pro handoff prompt and await the raw
-   response.
-3. Do not implement or launch R52 until that response is archived and accepted.
+1. Commit/push the frozen R52 implementation and registered prelaunch boundary.
+2. Run the unchanged 320K-per-arm formal gate.
+3. Record and interpret only its registered terminal branch.
 
 ## Immediate Constraints
 
@@ -80,6 +79,21 @@ variable-`N` learning because its fixed-N ordinary-policy prerequisite failed.
   zero. No training batch in either arm ever produced terminal success, and
   every exact-final specialist had station-failure rate 1.0. Retire the exact
   AMDT dynamics/horizon/reset/reward contract; quarantine all shared results.
+- GPT-5.6 Pro confirmed `NO_ACCESS_R51_AMDT_SPECIALISTS`, found no
+  branch-changing wiring defect, and permanently retired the complete R51
+  environment/information/reward contract. It selected only `R52-ARFA-G0`.
+  R52 keeps stable cross-episode N, workload scaling, anonymous recurrent
+  set-pointer control, specialists, terminal-only reward, and the corrected
+  625-step exposure. It changes the task to terminal `U=min(M,J)` with
+  recoverable station health, expiring jobs, cumulative weakest-station
+  reliability, and a focal `is_current_entity` relation. No shaping or
+  intrinsic reward is present.
+- The isolated R52 implementation and runner are complete. One focused local
+  CUDA dry-run passed every M0 check across 10 N-specific updates and removed
+  its transient output. The model has exactly 24,897 parameters; the scripted
+  constructive/no-job/partial, recoverable-health, switching, expiration,
+  focal-relation, probability replay, prefix/hidden replay, gradient, drift,
+  and checkpoint contracts all passed.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.

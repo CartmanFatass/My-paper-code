@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260716-r52-arfa-g0 | prelaunch -- focused CUDA M0 smoke passed | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | contract below; implementation/runner frozen for commit | unchanged formal 625-batch gate | shared variable-N versus five specialists; 320K transitions/arm, terminal `min(M,J)`, focal current-entity relation | Establish specialist carrier/access first; only then judge shared cross-N learning |
 | EXP-20260716-r51-amdt-g0 | completed -- valid `NO_ACCESS_R51_AMDT_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning | `logs/r51_amdt_20260716_211616`; tracked result-review folder | one environment-design failure review; no R51 rescue | M0 pass; exact counts/replay; every specialist N final success and all blocks zero; no positive training batch | Retire exact AMDT dynamics/horizon/reset/reward; quarantine shared; select a new environment rather than judge sharing |
 | EXP-20260716-r50-vnsl-g0 | completed -- valid `NO_ACCESS_R50_SPECIALIST_SUBSTRATE` | synthetic variable-roster substrate gate | `logs/r50_vnsl_20260716_195649`; implementation `3493640` | genuine task-dynamic variable-team toy design | M0 pass; specialists miss only N16 exact `0.26953 < 0.30`; shared numerical M2 pass is quarantined | Do not judge cross-N sharing, rescue R50, or claim task-level variable-N learning |
 | EXP-20260716-r49-orse-g0 | completed -- valid `PASS_R49_ORSE_ARCHITECTURE` | architecture-only open-roster interface gate | `logs/r49_orse_20260716_191959`; implementation `ace4b13` | default-off exogenous cross-episode variable-N compatibility design | M0/M1 pass; permutation/incremental `2.98e-8`, replay/padding `0`, prefix support `1.0`, all membership rules pass, zero exposure | Accept interface correctness only; no inherited skill/lifetime/task/cooperation claim |
@@ -70,6 +71,58 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260716-r52-arfa-g0 — Reliability--Fulfillment Allocation
+
+- Status: GPT-5.6 Pro selected a launch-exact successor to valid R51 no-access;
+  authorized for isolated implementation, one focused M0 smoke, local CUDA
+  formal execution, Git commit, and push.
+- Causal edge: genuine N-scaled anonymous allocation dynamics plus a terminal,
+  graded, nonadditive native task utility plus an observable focal stay/switch
+  relation -> fixed-N external-return access -> a valid shared cross-N test.
+- Environment: stable episode-level `N={2,3,4,5,6}`, horizon 32,
+  `P=floor(N/2)` recoverable reliability stations, `D=N-P` expiring jobs per
+  wave, waves `{4,12,20}`, deadline 6, health 0..4, one-hop pointer actions,
+  switching consumes service, no early termination.
+- Terminal utility only: `M=min_p A_p/32`, where post-transition health/4 is
+  accumulated every step; `J=timely_completed/(3D)` and expired jobs cannot be
+  recovered; `U=min(M,J)`. Intermediate, shaping, role, size, switch, skill,
+  KEEP/SET, and intrinsic rewards are zero/absent.
+- Information/model: self 6, base entity 8 including cumulative health,
+  anonymous focal `is_current_entity` relation 1, critic fields 4; member
+  `6->32->32`, entity `8->32->32`, GRU 32, query `128->64->32`, entity key
+  `34->32`, pooled critic `->64->1`; exact 24,897 parameters, N-independent.
+- PPO: centralized step advantage averaged over active tokens; gamma .99,
+  lambda .95, lr `3e-4`, epoch 1, entropy .01, value .5, clip .2, grad clip .5;
+  per-N standardization; no data reuse.
+- Exposure/seeds: 125 balanced cycles, 16 full 32-step episodes per N batch,
+  64K transitions/N/arm, 320K/arm, 1.28M tokens/arm, 625 shared steps,
+  125/model and 625 aggregate specialist steps. Seeds init/reset/order/eval/
+  bootstrap are `52052/62052/72052/82052/92052`.
+- Evaluation: zero and exact-final, 128 paired deterministic episodes/N/arm,
+  10K paired bootstrap, equal-N macro, no best checkpoint.
+- M0: exact dynamics/reward/relation/counts/replay/masks/hidden/gradients/
+  checkpoint; constructive schedule must give `M=J=U=1`, no-job `U=0`, and
+  partial schedule `0<U<1`; expired jobs must never later count complete.
+- M1 specialists: training `P(U>0)>=.10` per N; final each N
+  `U>=.60,M>=.65,J>=.65`; macro U `>=.70`; every final-zero LCB `>.20`; at
+  least 3/4 contiguous 32-episode blocks/N have U `>=.50`.
+- M2 shared: each N `U>=.50,M>=.55,J>=.55`; macro U `>=.65`; minimum within-N
+  shared/spec U ratio `>=.75`; macro ratio `>=.85`; paired macro difference
+  LCB `>-.10`; shared macro final-zero LCB `>.25`.
+- Branches: `INVALID_R52_ARFA_WIRING` repairs only named M0 defects;
+  `NO_ACCESS_R52_ARFA_SPECIALISTS` retires the exact task and quarantines
+  shared; `VALID_FAIL_R52_SHARED_VARIABLE_N` retires the exact shared contract;
+  `PASS_R52_ARFA_VARIABLE_N` authorizes only same-task exogenous join/leave and
+  membership censoring.
+- Prohibited: any post-result budget, epoch, seed, model, reward, aggregation,
+  or threshold rescue; R51 rerun; skills, lifetime, intrinsic, unseen-N,
+  S7/UAV, or novelty claim.
+- Authoritative status: `<run-root>/runner_status.txt`; result:
+  `<run-root>/result/r52_arfa.json`.
+- Focused implementation evidence: local CUDA dry-run passed all M0 checks over
+  10 N-specific updates (1,280 transitions/arm) and its transient output was
+  removed. This authorizes only the unchanged formal launch.
 
 ## EXP-20260716-r51-amdt-g0 — Anonymous Maintenance--Dispatch Task
 
