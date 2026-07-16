@@ -4,6 +4,45 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## Variable-N + Variable-Lifetime Event Architecture — Planned
+
+The blind Gemini/open-Pro review, Codex synthesis and convergent Pro audit are
+complete under
+`docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`.
+Final verdict is `ACCEPT_WITH_CORRECTIONS`.
+
+The portfolio now contains only:
+
+- `F0`: active-set scheduled recurrent MARL, the mandatory ordinary baseline;
+- `F1`: exchangeable exogenous-opportunity event-frontier commitment editor,
+  the sole leading skill-based family;
+- learned event-time point process, deferred.
+
+F2 is merged and retired as a separate name. R55's environment/gate is
+repurposed out of execution; only its question about common-support prefix
+dependence survives as F1's irreducibility condition. The proposed R53
+zero-training reanalysis is unavailable because retained artifacts contain no
+final weights or per-decision contexts.
+
+The active artifact is
+`docs/research/designs/VARIABLE_N_LIFETIME_EVENT_ARCHITECTURE_CONTRACT.md`.
+It freezes shared F0/F1 lifecycle state, membership semantics, exogenous
+opportunity ownership, exact random-order probability, teacher-forced replay,
+member-event `gamma^Delta` credit, the reference sum/count encoder, F1-to-F0
+reduction, capability/replacement maps and fail-closed collector/checkpoint
+boundaries.
+
+The focused review reached Outcome A. The shared implementation plan is:
+
+`docs/research/designs/VARIABLE_N_LIFETIME_EVENT_IMPLEMENTATION_PLAN.md`.
+
+It freezes an exchangeable bounded renewal schedule with mean active gap 10,
+active-only ragged tensors, one shared F0/F1 model and parameter graph, member-
+event credit, strict schema-3 resume and focused checks. F0 reads the initial
+set summary; F1 reads the applied working-set summary. No other intervention is
+allowed. The next boundary is user approval or modification of that plan; code,
+testbed and training remain unauthorized.
+
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 
 GPT-5.6 Pro selected `ARES-SMDP` as the only literature-informed architecture
@@ -38,7 +77,7 @@ only its serial research and probability/event contracts; HFSR, fixed slots,
 reconstruction residual selection and full-set attention are not active
 architecture candidates.
 
-## R55-ABRP-G0 — Paused Direct Relational Candidate
+## R55-ABRP-G0 — Repurposed Before Execution
 
 The drafted design replaces global member-set representation with a shared
 focal-member/candidate-entity edge scorer. Its anonymous typed-backlog toy uses
@@ -56,12 +95,11 @@ response owns the complete M0/M1/M2 thresholds and no-rescue branches. Add only
 an isolated toy/model/gate/local runner, then one focused M0 check; do not touch
 the existing controller.
 
-R55 is paused before testing or launch. The first persistent Gemini review and
-controller disposition found that it does not currently distinguish the live
-H0--H3 hypotheses for the joint target. Cross-round evidence synthesis now
-precedes any implementation. R55 can proceed only if that synthesis establishes
-new discriminating value; otherwise repurpose or retire the uncommitted draft.
-No result may automatically authorize R56 or another toy.
+R55 is retired as an environment and numbered experiment before testing or
+launch. Its only retained question is whether earlier applied edits change later
+learned scores on the common legal support. That question now defines F1's
+algebraic/behavioral distinction from F0 in the active architecture contract;
+it does not authorize the R55 draft, a replacement toy or R56.
 
 ## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 

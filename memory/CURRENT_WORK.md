@@ -11,33 +11,43 @@ Updated: 2026-07-17
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
-  exchanges in the existing consultation conversation. Used: `5/8`; remaining:
-  `3/8`. Use one only at a real review or launch-clarification boundary.
-- **Divergent review:** Gemini 3.1 Pro (High) in one live HMASD-rooted local CLI
-  process plus a separate blind GPT-5.6 Pro open-review conversation. They have
-  equal standing. The existing Pro consultation conversation performs only the
-  final convergent audit.
+  exchanges. Used: `7/8`; remaining: `1/8`. Use the remaining exchange only at
+  a real review or launch-clarification boundary.
+- **Divergent review:** the blind Gemini 3.1 Pro (High) live-CLI review and the
+  separate GPT-5.6 Pro open review are complete. The existing
+  `HMASD Algorithm Consultation` conversation completed the convergent audit.
+  A future Gemini round reuses one live `agy --prompt-interactive` process for
+  that round; conversation recovery is only for process loss or a concrete
+  source-completeness repair.
 
 ## Objective
 
-Run the blind dual-divergent architecture review in
-`docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`, then
-perform one controller synthesis and one convergent Pro audit. Gemini reads the
-eight local papers and HMASD/OPT reference archives; the open Pro reads the
-shared Git-visible pack. R55 remains paused.
+Review the single shared F0/F1 implementation plan for the closed variable-`N`
+plus variable-lifetime architecture. F1 remains the leading skill-based
+hypothesis and F0 the undefeated ordinary-MARL reduction; their sole difference
+is initial-set versus applied-prefix conditioning of the same commitment model.
 
 ## Next Actions
 
-1. Keep one live Gemini CLI process while it reads the allowlisted local papers
-   and develops its independent divergent review; archive one final clean turn.
-2. Commit/push the shared pack and obtain a blind independent open review in a
-   new GPT-5.6 Pro conversation.
-3. Write the Codex comparison without model-priority weighting, then submit both
-   raw reviews and the synthesis to the existing convergent Pro conversation.
-4. Record one final portfolio and at most one active evidence source or stop.
-   Keep the uncommitted R55 draft paused throughout.
+1. Present or revise
+   `docs/research/designs/VARIABLE_N_LIFETIME_EVENT_IMPLEMENTATION_PLAN.md`;
+   do not implement or train without a separate approval.
+2. If approved, implement the shared default-off path in four stages and stop
+   after focused engineering checks; do not create a testbed automatically.
+3. Remove the uncommitted R55 draft only at its separately verified cleanup
+   boundary; do not execute or replace its gate.
 
 ## Immediate Constraints
+
+- The blind dual-divergent round is terminal. Final convergent verdict is
+  `ACCEPT_WITH_CORRECTIONS`; raw reviews, synthesis and disposition live under
+  `docs/external-review/rounds/20260717_variable_n_lifetime_architecture/`.
+- Portfolio: retain strengthened F0; retain corrected F1 as the sole leading
+  family; merge/retire F2; defer learned event time. R55 is repurposed before
+  execution. Retained R53 artifacts cannot support a no-training prefix audit.
+- The architecture contract reached Outcome A and the implementation plan is
+  complete. The current boundary is plan review; it authorizes no code,
+  testbed, training, reward change or external review.
 
 - R41-derived gates execute a fresh `ref/hmasd.tar` extraction rather than
   porting it into the current trainer. Preserve the original HMASD `q_D/q_d`
