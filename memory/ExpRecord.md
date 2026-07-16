@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r44-fsnrc-k50 | launch-ready -- awaiting user approval | hierarchy-L2 frozen-source renewal timing gate | local CUDA package in `scripts/run_r44_frozen_source_nrc_local.ps1` | formal paired result | Two-update checks: source state drift `0`, replay/conditional ratio error `0`, control zero/final traces exact, treatment actor and both critics nonzero on all factor steps | Launch only the registered 320K pair; no source update, entropy, reward, seed, budget, or threshold change |
+| EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
 | EXP-20260716-r43-nrc-k50 | completed -- invalid `INVALID_R43_FIXED_ANCHOR_LOST` | hierarchy-L2 reset-censored true-renewal mechanism gate | `logs/r43_nrc_reset_censored_320k_20260716_121756_retry2` | completed GPT-5.6 Pro review | M0 pass; fixed final win/key0/key1 `0.52/0.54/0.81`; source checkpoint cross-eval `0.89/0.93`; two-update source-vs-wrapper parameter diff `0` | Fixed wrapper accepted source-equivalent; keep treatment diagnostic-only and proceed only to R44-FS-NRC |
 | EXP-20260716-r42-irr-native-roster-residual | completed -- valid `VALID_FAIL_R42_IRR_SERVICE` | hierarchy-L2 same-checkpoint temporal mechanism gate | `logs/r42_irr_native_roster_residual_320k_20260716_100824` | completed GPT-5.6 Pro validity review | M0/M1 pass; fixed/treatment win `0.98/0.88`; delta CI `[-0.17,-0.03]`; treatment discordance `0.10` | Permanently retire R42; Pro selected modified R43 true renewal, pending clock correction |
 | EXP-20260716-r41b-hmasd-alice-bob-full-source | completed -- valid `PASS_R41B_SOURCE_ACCESS` | baseline-L0 exact original-source access reproduction | `logs/r41b_hmasd_full_source_20260716_035300_retry2`; commit `e36f7df` | complete three-round Pro disposition | M0 PASS, replay `0`; final win/key0/key1 `0.89/0.97/0.92`; paired win CI `[0.82975,0.95]` | Positive source anchor established; pure categorical R42 retired as decorative after source audit; proceed to R42-IRR |
@@ -178,6 +178,25 @@ explicitly approves the exception.
   open-roster, or variable team membership.
 - Status source: `<run-root>/runner_status.txt`; decision source:
   `<run-root>/result/r44_frozen_source_nrc.json`.
+- Terminal result: valid `VALID_FAIL_R44_FSNRC` at
+  `logs/r44_fsnrc_320k_20260716_132349`. M0 passed with exact frozen-source
+  state, zero source optimizer steps, 3,000 factor steps, replay and
+  conditional-ratio error zero, and exact control zero/final traces. M1 and M2
+  passed: control and treatment both scored win/key0/key1
+  `0.93/1.00/0.93`, and treatment-minus-control win CI was `[0,0]`.
+- M3 failed. Both deterministic arms had discordance `0`, full-sync RENEW
+  `1.0`, minimum KEEP/RENEW marginal `0`, and paired discordance CI `[0,0]`.
+  Treatment actor relative drift was `0.353245` with 3,000/3,000 finite
+  nonzero actor-gradient exposures, so the failure is not a disconnected actor
+  path. Its critic had 2,992 nonzero-gradient steps and all 3,000 checks were
+  finite; the first analyzer incorrectly required every critic step to be
+  nonzero although M0 requires finite gradients plus nonzero exposure. The
+  corrected analyzer reused the completed arms and did not retrain.
+- Decision: permanently retire this frozen-source K50 renewal adapter and its
+  registered next-check credit. Do not rescue it through entropy, temperature,
+  source unfreezing, seed/budget/threshold changes, or stochastic-only metric
+  substitution. The result does not retire a structurally new joint co-
+  adaptive asynchronous-skill route.
 
 ### EXP-20260716-r43-nrc-k50
 

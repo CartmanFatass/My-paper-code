@@ -15,23 +15,22 @@ Updated: 2026-07-16
 
 ## Objective
 
-Run the single R44-FS-NRC frozen-source timing gate after explicit user launch
-approval. R43 is closed as implementation-valid but scientifically invalid;
-its fixed wrapper is source-equivalent and its treatment remains diagnostic-
-only. R44 freezes the complete service-capable R41B skill system and changes
-only whether the source-exact renewal residual actor can learn.
+Close the valid R44 frozen-source timing failure and select one structurally
+different causal edge. R43 remains scientifically invalid and diagnostic-only.
+R44 preserved service exactly but failed to produce any deterministic temporal
+decoupling despite a strongly updated renewal actor, so the frozen-source K50
+renewal route is permanently retired.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the R44 implementation, formal contract, R43 raw response,
-   and accepted disposition as one pre-launch boundary.
-2. Report the exact R44 local paired parameters and obtain explicit approval
-   before starting the 320K formal run.
-3. After launch, interpret only the single analyzer result under the registered
-   M0--M3 branches; do not retune or expand.
+1. Commit and push the analyzer correction, R44 terminal disposition, compact
+   evidence, and one tracked GPT-5.6 Pro failure-review question.
+2. Give the user the standard manual handoff prompt and wait for the raw reply.
+3. Do not implement or launch a successor until the review selects one exact
+   structurally different causal edge and abandonment gate.
 
 ## Immediate Constraints
 
@@ -67,7 +66,12 @@ must not renew surviving agents' skills.
   deterministic evaluations. A focused two-update check passed with exact
   source-state freeze, zero replay/conditional-ratio error, control actor zero
   drift and exact zero/final traces, plus nonzero treatment actor and critic
-  gradients on every factor step. Formal compute has not started.
+  gradients on every factor step. The formal run completed valid
+  `VALID_FAIL_R44_FSNRC`: both arms retained win `0.93`, but both had zero
+  discordance, full-sync RENEW `1.0`, and zero minimum KEEP/RENEW marginal.
+  Treatment actor relative drift was `0.353245` with 3,000 nonzero gradient
+  steps, so actor connectivity does not explain the failed temporal transport.
+  The frozen-source timing route is retired without rescue.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was

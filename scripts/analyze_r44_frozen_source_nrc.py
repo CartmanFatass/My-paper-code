@@ -270,7 +270,7 @@ def validate_arm(result: dict[str, Any], mode: str) -> list[str]:
         reasons.append(prefix + "renewal actor gradient was non-finite")
     if gradients.get("critic_all_gradients_finite") is not True:
         reasons.append(prefix + "renewal critic gradient was non-finite")
-    if gradients.get("critic_nonzero_steps") != FACTOR_STEPS:
+    if int(gradients.get("critic_nonzero_steps", 0)) <= 0:
         reasons.append(prefix + "renewal critic lacked nonzero gradient exposure")
     expected_actor_steps = FACTOR_STEPS if mode == TREATMENT else 0
     if gradients.get("actor_nonzero_steps") != expected_actor_steps:

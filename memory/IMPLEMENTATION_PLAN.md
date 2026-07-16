@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## R44-FS-NRC Frozen-Source Renewal — Launch Candidate
+## R44-FS-NRC Frozen-Source Renewal — Completed and Retired
 
 GPT-5.6 Pro confirmed R43 as invalid, accepted the fixed wrapper as
 source-equivalent, and selected one successor: freeze the complete service-
@@ -28,13 +28,22 @@ external-reward steps with reset-censored execution and update-boundary old-
 critic bootstrap. No renewal entropy, shaping, new intrinsic reward, or task
 field is present.
 
-Focused two-update CUDA evidence is complete for both arms. Across 30 factor
+Focused two-update CUDA evidence completed for both arms. Across 30 factor
 steps per arm, every source module, source optimizer state, and ValueNorm was
 exactly unchanged; high/factor/low replay and conditional-skill ratio error
 were zero. The control actor had zero drift and zero actor gradients, its
 zero/final deterministic high and low traces were identical, and the treatment
 actor plus both critics had nonzero gradients on every factor step. The
-formal 320K paired launch remains unstarted pending user approval.
+formal run then completed at
+`logs/r44_fsnrc_320k_20260716_132349` as valid
+`VALID_FAIL_R44_FSNRC`. M0, the frozen service anchor, and service safety
+passed: both arms retained win/key0/key1 `0.93/1.00/0.93`, all source state
+drift was zero, and treatment-minus-control win CI was `[0,0]`. M3 failed:
+both arms had zero discordant renewal, full-sync RENEW `1.0`, and minimum
+KEEP/RENEW marginal `0`, despite treatment actor relative drift `0.353245` and
+3,000 nonzero actor-gradient exposures. This permanently retires the frozen-
+source K50 renewal timing route; no entropy, seed, budget, threshold, or source-
+unfreezing rescue is active.
 
 ## R43-NRC True Renewal — Invalid and Closed
 
