@@ -11,23 +11,22 @@ Updated: 2026-07-17
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized eight new automated GPT-5.6 Pro
-  exchanges in the existing consultation conversation. Used: `3/8`; remaining:
-  `5/8`. Use one only at a real review or launch-clarification boundary.
+  exchanges in the existing consultation conversation. Used: `4/8`; remaining:
+  `4/8`. Use one only at a real review or launch-clarification boundary.
 
 ## Objective
 
-Disposition the completed `R53-RCMA-G0` result at its exact learning-gain
-boundary, while the independent literature review selects a broader
-variable-`N` / variable-`T_i` architecture sequence.
+Implement and run the isolated supervised `R54-HFSR-G0` representation-
+sufficiency gate selected by both completed Pro reviews. It compares a full
+active-set reference with deterministic `M=8,L=2` field-slot compression only.
 
 ## Next Actions
 
-1. Commit/push the archived literature-review response and accepted
-   `ARES-SMDP` disposition.
-2. Submit the already tracked separate R53 terminal-result audit as automatic
-   exchange 4/8.
-3. Disposition R53 without rescue; only then decide whether the review-selected
-   R54 representation gate becomes active.
+1. Commit/push the archived R53 result review and exact disposition.
+2. Implement the isolated R54 generator, paired models and analyzer; run one
+   focused deterministic/CUDA wiring check.
+3. If M0 passes, commit/push once and run the frozen supervised gate locally;
+   no dynamic membership, timing, skills, intrinsic reward or PPO work.
 
 ## Immediate Constraints
 
@@ -156,6 +155,12 @@ variable-`N` / variable-`T_i` architecture sequence.
   post-R53 candidate is the supervised `R54-HFSR-G0` full-set versus
   `hybrid_m8_l2` representation gate. Implementation remains deferred until
   the separate R53 result audit closes.
+- Automatic R53 result exchange `4/8` confirmed the immutable runner status
+  while narrowing its scientific meaning to
+  `VALID_FAIL_R53_CAUSAL_LEARNING_GAIN`. Action support and final-policy
+  competence pass; learning gain fails; shared-versus-specialist transport is
+  unidentified. The exact R53 combination is retired without rescue. This
+  closes the deferral and activates only `R54-HFSR-G0`.
 - The focused R50 CUDA smoke passed all M0 checks with four shared updates,
   28 aggregate specialist updates, zero replay error, nonzero relevant-module
   drift, and exact zero KEEP-head drift. This is wiring evidence only.
