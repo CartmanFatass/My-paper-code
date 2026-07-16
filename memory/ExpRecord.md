@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260716-r47-nsopm-g0 | planned -- launch-exact clarification pending | hierarchy-L1 reward-off natural process-mode identifiability | R47 clarification under the R46 external-review entry | GPT-5.6 Pro launch-exact response | Accepted boundary: fixed `N=2`, `K=4`, `k0=10`, 512 natural windows, 64 causal contexts, 20,480 forced-branch steps, zero optimizer steps and no reward read | Do not implement until the seven-dimensional view, spectral estimator, natural schedule, nuisance/OOD rules, and branch aggregation are fixed |
+| EXP-20260716-r47-nsopm-g0 | launch-ready -- implementation in progress | hierarchy-L1 reward-off natural process-mode identifiability | local CUDA standalone gate; raw launch-exact response under the R46 external-review entry | one focused dry run, then formal result JSON | `ACCEPT_R47_NSOPM_G0_LAUNCH_EXACT`: fixed `N=2`, 512 natural windows, 64 causal contexts, 20,480 forced steps, 256 temporal nulls, zero optimizer steps and no reward use | Run unchanged contract; PASS authorizes only the registered reward-on pair, valid FAIL permanently retires the exact mode/score line |
 | EXP-20260716-r46-hmrv-g0 | completed -- valid `VALID_FAIL_R46_HMRV_SUBSTRATE` | hierarchy-L1 reward-off heterogeneous-maintenance identifiability | `logs/r46_hmrv_64k_20260716_154508`; commits `67cfe72`, `45eb49d`, `cfc0ba4` | completed GPT-5.6 Pro result review | M0/M1/M2 pass; true/sham WMSE `10.6079/10.9186`; learned pooled and both role-stratum sign discordance exactly `0`; direct enumeration oracle discordance near `0.5675` | Retire the exact dynamics/estimand/context/critic/read combination without rescue; interpret as learned sign-transport failure and proceed only to R47-NSOPM-G0 |
 | EXP-20260716-r45-sdra-g0 | completed -- valid `VALID_FAIL_R45_SDRA_IDENTIFIABILITY` | hierarchy-L1 reward-off natural-support renewal-credit identifiability | `logs/r45_sdra_160k_20260716_144312` | post-R45 causal-edge review | M0/M2 pass; true/sham WMSE `0.03830/0.37667`; M1 overlap fails; M3 sign discordance `0.000314` | Retire Alice--Bob K50 natural-support renewal credit and this temporal substrate without rescue |
 | EXP-20260716-r44-fsnrc-k50 | completed -- valid `VALID_FAIL_R44_FSNRC` | hierarchy-L2 frozen-source renewal timing gate | `logs/r44_fsnrc_320k_20260716_132349` | post-R44 causal-edge review | M0/M1/M2 pass; both win/key0/key1 `0.93/1.00/0.93`; treatment actor drift `0.353245`, but both discordance `0`, full-sync RENEW `1`, min marginal `0` | Permanently retire frozen-source K50 renewal timing route without rescue; select one structurally different edge |
@@ -66,6 +66,89 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260716-r47-nsopm-g0 — Natural-Support Orthogonal Process Modes
+
+- Status: launch-ready under `ACCEPT_R47_NSOPM_G0_LAUNCH_EXACT`.
+- Causal edge: natural task-blind process support -> stable orthogonal
+  persistent modes -> skill-conditioned causal mode occupancy.
+- Scope: fixed-`N=2`, reward-off G0 only. No policy/high/critic/intrinsic
+  update, task-performance claim, S7, open-roster, or variable-`N` claim.
+- Source: frozen adaptive-R30 checkpoint
+  `logs/r30_alice_bob_paired_64k_20260714_163908/runs/adaptive_keep_set/seed30031/standalone_process_core_final.pt`;
+  total steps `64,000`, update `50`, `K=4`, `k0=10`, episode `80`, recurrent
+  low hidden `64`, stochastic high and stochastic tanh-Gaussian low execution.
+  Load optimizers false; all modules eval/frozen; low actor sees only `(o_i,z_i)`.
+- Natural schedule: seed `47041`; 64 independent 80-step reset groups. Even
+  groups use check indices `{0,2,4,6}`, odd groups `{1,3,5,7}`; both focal
+  agents yield eight `[10,7]` windows/group and 512 total. Fit groups `0..31`,
+  half A `0..15`, half B `16..31`, heldout `32..63`, nuisance train/test
+  `32..47`/`48..63`. Environment reward is discarded; literal `0.0` advances
+  the R30 clock.
+- View: `pbar=p/8`; relative vectors `r_ij=pbar_j-pbar_i`; population mean and
+  covariance over teammates. Transition order is
+  `[delta pbar_x,delta pbar_y,delta mean_rel_x,delta mean_rel_y,
+  delta covariance_xx,delta covariance_xy,delta covariance_yy]`. For `N=2`
+  the covariance fields are exactly zero. No action, skill, age, ID, reward,
+  task, contact, clock, success, or critic field enters mode fitting.
+- Features: population mean/std from the owning fit split, with scale `1` when
+  std `<1e-6`; initial-center every window; concatenate seven centered fields
+  with the fixed row-major upper-triangular quadratic terms for 35 dimensions.
+- Spectral estimator: within-window lags `{1,5}`; pooled source/target means and
+  population `C00/C11`, lag-specific `C01`; covariance rank floor
+  `max(1e-8,1e-6*lambda_max)`, whitening ridge `1e-4`; unsymmetrized
+  `T_l=W0*C01(l)*W1`; `G=(T1*T1^T+T5*T5^T)/2`; mode floor
+  `max(1e-10,1e-6*nu0)`. Four descending spectral-rank modes are frozen; no
+  skill or forced-outcome alignment.
+- M1 temporal/null/stability: 256 independent within-window nonidentity
+  permutations, seed `57041`, refit the full estimator and require each real
+  eigenvalue above its rank-matched null q95. Independently fit half A/B,
+  exhaustively align each to primary on heldout activations, and require minimum
+  A/B correlation `>=0.70`. For lag 1 and 5, heldout reset-group bootstrap of
+  real minus mean frozen-basis temporal-null coherence must have lower 95%
+  bound `>0`.
+- M1 nuisance audit: target `g_q=C_q*X_q`; ten fields are focal/teammate start
+  positions, focal indicator, clipped focal age, and focal/teammate action
+  variances. Analytic multi-output ridge `1e-3`, nuisance-train standardization,
+  unregularized intercept; maximum pooled/per-mode test R2 must be `<0.10`.
+- Forced audit: one context per reset group with focal `g mod 2` and check
+  `floor(g/2) mod 4` at time `{0,10,20,30}`. Snapshot after the natural high
+  commit and before the first low action. Override only focal actor-visible
+  skill, hold both skills for 40 steps, suppress high checks, continue both
+  recurrent low states, and keep the teammate stochastic and policy-responsive.
+  Four skills, two replicas, CRN seed `67041+2*c+r`, 20,480 total steps; any
+  early reset invalidates the context and M0 requires none.
+- M2 support: primary-fit Mahalanobis-whitened distance threshold is the
+  heldout-natural pointwise q95. H10 and H40-late windows require at least 9/10
+  supported points; a context is usable only when all eight branches pass, and
+  each horizon requires support ratio `>=0.80`.
+- M2 scores: `E_q=mean(m_q^2)`, `X_q=E_q/(sum E+1e-8)`,
+  `C_q=(corr_lag1+corr_lag5)/2`, `g_q=C_q*X_q`. Candidate
+  `S(w,z)=g_z-mean_q g_q` is detached and logged only. Assigned-mode contrast
+  requires lower 95% bounds of pooled H10 and H40-late means `>0`, every
+  H40-late per-skill point mean `>0`, between/within causal-SNR lower bounds
+  `>1`, and intersection persistence `D40/(D10+1e-8)>=0.50`.
+- Bootstrap: 10,000 repetitions, seed `62047`; natural cluster is reset group,
+  causal cluster is matched context with all skills, replicas, and modes kept
+  together.
+- M0: exact source/config/counts/schema and fit splits; finite estimator/scores;
+  512 complete natural windows; 64 contexts and 20,480 forced steps; frozen
+  basis; no forced fit leakage, reward field/read, optimizer step, parameter
+  drift, snapshot mismatch, or early branch reset.
+- `INVALID_R47_NSOPM_WIRING`: repair only the identified wiring defect and rerun
+  unchanged.
+- `PASS_R47_NSOPM_IDENTIFIABILITY`: M0/M1/M2 pass; authorize only matched
+  `probe_only` versus `real_reward` with the same formula, natural basis,
+  collector, and low PPO; detached endpoint `S` enters low GAE only in the real
+  arm while high return remains external-only.
+- `VALID_FAIL_R47_NSOPM`: M0 valid and M1 or M2 fails; permanently retire this
+  exact 7-D view, 35-D map, lags, four-mode basis, score and reward pair without
+  window/lag/mode/encoder/kernel/seed/data/threshold or post-hoc alignment rescue.
+- Focused dry run: two natural groups, 16 windows, one context, eight branches,
+  320 branch steps, two temporal nulls, zero optimizers; no scientific status
+  and transient output removed after success.
+- Authoritative status: `<run-root>/runner_status.txt`; result:
+  `<run-root>/result/r47_nsopm.json`.
 
 ## EXP-20260716-r46-hmrv-g0 — Heterogeneous Maintenance Renewal Value
 

@@ -12,29 +12,29 @@ Updated: 2026-07-16
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
 - **External review:** the user authorized up to five automated GPT-5.6 Pro
   follow-ups after the manually submitted R45 review. Automatic submissions
-  used: `2/5`; reuse the existing `算法探索与交接摘要` conversation only.
+  used: `3/5`; reuse the existing `算法探索与交接摘要` conversation only.
 
 ## Objective
 
-Close the launch-exact contract for `R47-NSOPM-G0`, then run its smallest local
-CUDA reward-off gate. R46 is a valid learned Q/DR sign-transport failure, but
-direct finite-state enumeration shows that its transition kernel itself does
-contain oracle sign heterogeneity. Timing-only substrate search is closed; the
-new causal edge is natural task-blind process support to stable process modes to
-skill-conditioned causal mode occupancy.
+Implement and run the launch-exact `R47-NSOPM-G0` local CUDA reward-off gate.
+GPT-5.6 Pro accepted the exact seven-dimensional task-blind view, natural-only
+whitened spectral estimator, temporal nulls, nuisance audit, frozen-basis
+forced-skill branches, and M0--M2 abandonment contract. Timing-only substrate
+search remains closed; the active causal edge is natural task-blind process
+support to stable process modes to skill-conditioned causal mode occupancy.
 
 Variable team membership remains a separate later axis. Membership transitions
 must not renew surviving agents' skills.
 
 ## Next Actions
 
-1. Commit and push the corrected R46 disposition and the R47 launch-exact
-   clarification question.
-2. Use automatic Pro submission `3/5` in the existing consultation conversation
-   because the repository has no exact seven-dimensional view or spectral
-   estimator definition.
-3. Archive the response, register its single exact contract, implement the
-   standalone gate, and run only the bounded local CUDA experiment it authorizes.
+1. Finish the four-file standalone R47 implementation and its one focused CUDA
+   dry run; do not change the environment, trainer, controller, reward, or low
+   actor.
+2. Commit and push the stable launch boundary once, then run the registered
+   512-window / 20,480-branch-step local CUDA gate.
+3. Archive the terminal result and use automatic Pro submission `4/5` for the
+   result review before selecting any reward-on or successor route.
 
 ## Immediate Constraints
 
@@ -110,8 +110,11 @@ must not renew surviving agents' skills.
   discordance near `0.5675`, so the binding failure is learned Q/DR sign
   transport, not absence of heterogeneous value in the transition kernel. The
   exact dynamics/estimand/context/critic/read combination is retired without
-  rescue. GPT-5.6 Pro selected only `R47-NSOPM-G0`; its launch-exact process
-  view and spectral definitions are pending one clarification round.
+  rescue. GPT-5.6 Pro then issued
+  `ACCEPT_R47_NSOPM_G0_LAUNCH_EXACT`. R47 is a standalone fixed-`N=2`,
+  reward-off gate with zero optimizer steps; its process modes are fit only on
+  natural task-blind position/relative-moment transitions and frozen before
+  any forced-skill audit.
 - R42 run `logs/r42_irr_native_roster_residual_320k_20260716_100824` completed
   valid `VALID_FAIL_R42_IRR_SERVICE`. Fixed/treatment wins were `0.98/0.88`;
   treatment-minus-fixed win CI was `[-0.17,-0.03]`. Treatment discordance was
