@@ -22,11 +22,11 @@ active-set reference with deterministic `M=8,L=2` field-slot compression only.
 
 ## Next Actions
 
-1. Commit/push the archived R53 result review and exact disposition.
-2. Implement the isolated R54 generator, paired models and analyzer; run one
-   focused deterministic/CUDA wiring check.
-3. If M0 passes, commit/push once and run the frozen supervised gate locally;
-   no dynamic membership, timing, skills, intrinsic reward or PPO work.
+1. Commit/push the launch-ready R54 implementation and frozen auxiliary-loss
+   definitions.
+2. Run the exact 600-update supervised gate locally on CUDA.
+3. Archive and review its terminal M0/M1/M2 branch before selecting any
+   ordinary-learning transport work.
 
 ## Immediate Constraints
 

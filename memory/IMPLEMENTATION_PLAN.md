@@ -14,11 +14,19 @@ representations, not sampled MAT actions or PPO factors. Dynamic membership,
 heterogeneous time, skills and intrinsic reward are excluded.
 
 The exact 49,576-parameter, 600-update, held-out `N={8,16,32,64}` contract and
-M0/M1/M2 thresholds live in the archived literature and R53 responses. The R53
-review is complete, so this isolated Level-0 implementation is active. Add only
-the generator, paired models, local runner and one result JSON. Run one focused
-wiring check, then the unchanged supervised gate. No environment reward,
-critic, PPO, low actor, skill, membership event or duration enters this stage.
+M0/M1/M2 thresholds live in the archived literature and R53 responses. Slot
+reconstruction is active-member embedding MSE against the alpha-weighted slot
+reconstruction; slot-mass KL is `KL(nu || Uniform(8))`, with
+`nu_m=sum_i(alpha_im)/N`. The registered 256 mean-alias cases per N are paired
+capability relocations; the same construction is represented in training so
+held-out twins test transport rather than an unseen label rule. These choices
+are frozen before the formal launch.
+
+The isolated generator, paired models and local runner are implemented. The
+focused CUDA wiring check passed and removed its transient output. The next
+boundary is one pre-launch commit/push followed by the unchanged supervised
+gate. No environment reward, critic, PPO, low actor, skill, membership event or
+duration enters this stage.
 
 ## R53-RCMA-G0 Variable-N Queue Allocation — Terminal
 
