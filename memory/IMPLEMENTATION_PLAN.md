@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Variable-N + Variable-Lifetime Event Architecture — Focused Trace Complete
+## Variable-N + Variable-Lifetime Event Architecture — Stage A Launch Ready
 
 The architecture and implementation-plan rounds are complete under:
 
@@ -63,6 +63,14 @@ is structurally distinct from F0. The next boundary is a separately authorized
 architecture-matched testbed and experiment contract. Stop before a real
 environment, subprocess collector, environment-data optimizer step, benchmark
 or training.
+
+The user subsequently authorized the next minimal boundary. The isolated
+`dynamic_roster_testbed.py` now implements only the accepted generic-`SHORT`
+environment and its Stage A no-learning carrier. Its runner has no policy
+network, optimizer, intrinsic reward, shaping term or event-runtime training
+integration. One focused constructive trace passed the exact membership,
+terminal-reward and `P=S=U=1` checks. The next action is the registered 256-ledger
+Stage A read; direct primitive-AR and F0/F1 remain outside this boundary.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 

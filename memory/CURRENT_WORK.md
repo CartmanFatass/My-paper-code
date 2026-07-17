@@ -23,8 +23,9 @@ executable skills are established, does conditioning later skill commitments on
 earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
-No environment implementation, training integration or experiment is currently
-authorized.
+The generic-`SHORT` environment and Stage A no-learning carrier are now the only
+authorized implementation/evidence boundary. Direct primitive-AR, F0/F1
+training and algorithm promotion remain unauthorized.
 
 ## Causal Portfolio
 
@@ -46,10 +47,10 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Await an explicit implementation authorization. If granted, implement only
-   the generic-short environment and Stage A no-learning carrier boundary first.
-2. Do not implement the direct primitive-AR access instrument until Stage A is
-   valid, and do not integrate or run F0/F1 until direct access is valid.
+1. Commit and push the isolated environment and Stage A runner, then execute the
+   exact 256-ledger no-learning carrier once.
+2. If Stage A passes, stop and request separate authorization for the direct
+   primitive-AR instrument. If it fails, retire this exact testbed.
 3. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; never execute or repurpose its gate.
 
@@ -60,6 +61,8 @@ F1 -> working_summary
   horizon 80 and one terminal external utility.
 - Evidence is serialized:
   `carrier -> direct primitive-AR -> paired F0/F1 -> conditional timing read`.
+- `ha_ctse_process/dynamic_roster_testbed.py` is an isolated environment state
+  machine; it is not wired into `train.py`, collectors or the event controller.
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.

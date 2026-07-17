@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
@@ -27,7 +27,8 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260717-r55-abrp-g0 | selected -- implementation pending | direct anonymous bipartite ordinary variable-N learning | archived R54 Pro result review | isolated implementation and focused M0 | direct member-entity edge scorer replaces all global member-set modules; fixed-N specialists bind access | Implement isolated exact gate; no controller integration or literature-module stack |
+| EXP-20260717-f0f1-dynamic-roster-stage-a | launch-ready | no-learning dynamic-roster carrier | local CPU; `scripts/run_dynamic_roster_stage_a.py`; accepted design contract | exact 256-ledger Stage A result | generic `SHORT`, `4->2->6->4`, terminal `U=(P+S)/2`; focused constructive trace gives `P=S=U=1` | Run only Stage A; pass requests separate direct-instrument authorization, carrier failure retires the exact testbed |
+| EXP-20260717-r55-abrp-g0 | superseded before execution | retired anonymous bipartite draft | untracked draft only | none | external architecture review identified harmful unique-successor drift; no scientific run exists | Do not execute, repurpose or treat as an active numbered route |
 | EXP-20260717-r54-hfsr-g0 | completed -- Pro-confirmed `NO_ACCESS_R54_FULL_SET_REFERENCE` | supervised hybrid field-slot representation sufficiency | `logs/r54_hfsr_20260717_022452`; tracked result-review folder | complete | M0 pass; full-set token `0.9021/0.7939/0.4999/0.2762`, exact `0.6328/0.1367/0/0`; all M1 checks fail; compression unidentified | Retire exact R54 without rescue; close HFSR/full-set path and proceed only to direct-edge R55 |
 | EXP-20260716-r53-rcma-g0 | completed -- Pro-confirmed `VALID_FAIL_R53_CAUSAL_LEARNING_GAIN` | residual-capacity masked variable-N queue allocation | `logs/r53_rcma_20260717_010744`; tracked R53 result-review folder | complete | M0/action support/final competence pass; only specialist N5/N6 and shared macro final-minus-zero gain gates fail; cross-N transport unidentified | Permanently retire the exact R53 task/comparator/gain gate; proceed only to R54 representation sufficiency |
 | EXP-20260716-r52-arfa-g0 | completed -- Pro-confirmed `NO_ACCESS_R52_ARFA_SPECIALISTS` | genuine task-dynamic cross-episode variable-N learning with terminal graded utility | `logs/r52_arfa_20260716_222657`; `docs/external-review/gpt5_6_pro/20260716_r52_arfa_result/` | complete | M0 pass; stochastic carrier passes every N; all deterministic specialists `M=1,J=0,U=0`; shared perfect but quarantined | Retire exact R52; reuse only the conclusion that stochastic return does not guarantee greedy joint-mode transport |
