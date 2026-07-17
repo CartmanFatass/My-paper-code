@@ -41,6 +41,32 @@ same commit. Run `scripts/verify_pro_review_boundary.ps1`; if it fails, return
 `BLOCKED` before browser transport and do not ask the reviewer to discover
 missing evidence.
 
+## Mandatory Pro Dispatch State Machine
+
+The active controller must not operate the browser for a Pro submission, send
+the review prompt directly to another Codex thread, or pass a `model` or
+`thinking` field during review transport. The only valid Pro route is:
+
+1. Read `REVIEWER_CONVERSATIONS.json` and select exactly one role.
+2. Confirm that role's raw artifact is absent and run the remote evidence
+   preflight on the immutable commit.
+3. Update only that role's registered heartbeat prompt with a route token,
+   round path, commit, question path and raw destination; set it `ACTIVE`.
+4. The one-to-one exchange conversation first verifies and reports its local
+   thread ID, external conversation ID, role heartbeat and visible `Pro` label.
+5. Only after that ACK may the exchange conversation use the browser and submit
+   the neutral handoff to its registered external conversation.
+6. It archives the exact completed response before interpretation. A plugin,
+   authentication, identity or completeness failure is recorded as a transport
+   blocker, not as the role's scientific raw response.
+7. It pauses its own heartbeat after either raw archival or a blocker. The
+   controller verifies `PAUSED`, reads the exchange thread and then resumes the
+   review round from the first missing artifact.
+
+The route token is `<round>:<role>:<commit>:<raw-path>`. Reusing a closed token
+is a no-op. The Open exchange never opens the Convergent external thread, and
+the Convergent exchange never opens the Open external thread.
+
 ## Preserve Transport and Authority
 
 Use the exact registered conversation for each Pro role. `OPEN_DIVERGENT` and
@@ -52,14 +78,20 @@ changing the model selector, and the history contains the exact registered
 role ACK. A mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`; do not submit, create
 a fallback conversation, or alter any model.
 
-If browser transport is delegated across Codex conversations, do not send the
-review prompt directly to that conversation and do not pass `model` or
-`thinking` overrides. Wake the already-bound transport conversation through
-its own heartbeat. The heartbeat carries only the reviewer role, registry path,
-round path and first missing artifact. The target must return its own thread ID,
-the external reviewer conversation ID and role ACK before any browser side
-effect. Missing or mismatched ACK stops transport. This prevents a cross-thread
-message from rebinding either conversation's model or role.
+Each Pro role has its own one-to-one local Codex exchange conversation recorded
+under `codex_exchange` in the registry. The controller does not submit Pro
+prompts in its own browser and does not use one exchange conversation for both
+roles. Create each exchange conversation as `Luna High`, then freeze its model;
+an existing manually configured exchange is never changed. Activate only the
+matching exchange conversation's heartbeat; do not
+send the review prompt with a cross-thread message and do not pass `model` or
+`thinking` overrides. The heartbeat carries only the reviewer role, registry
+path, round path, immutable commit and first missing artifact. The target must
+return its own Codex thread ID, the external reviewer conversation ID and role
+ACK before any browser side effect. Missing or mismatched ACK stops transport.
+After a complete raw archive or a transport blocker, pause that role's
+heartbeat. This prevents a cross-thread message from rebinding either
+conversation's model or role.
 
 Never create a duplicate because a reviewer is busy, never run parallel
 submissions, and never change an existing conversation's model.

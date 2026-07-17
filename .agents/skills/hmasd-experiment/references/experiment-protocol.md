@@ -17,8 +17,10 @@ Resolve the monitor conversation and active controller from the local
 conversation registry once when the run is activated. Embed the exact monitor
 thread id, controller thread id, automation id and run id in the schedule
 prompt; do not rediscover or replace them on later wakes. Reuse one monitor
-conversation and one heartbeat schedule targeting it. Never change either
-conversation's model.
+conversation created as `Luna High` and one heartbeat schedule targeting it.
+The model selection is made only at conversation creation. Never change either
+conversation's model afterward, and never include model or thinking settings in
+heartbeat create/update/retarget operations.
 
 Do not use `send_message_to_thread` or any equivalent cross-thread steering for
 monitor relay. In the observed desktop runtime, steering a Luna monitor from a

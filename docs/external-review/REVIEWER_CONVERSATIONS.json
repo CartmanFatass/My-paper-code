@@ -7,14 +7,28 @@
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
-      "heartbeat_ack": "HEARTBEAT_ACK role=OPEN_DIVERGENT"
+      "heartbeat_ack": "HEARTBEAT_ACK role=OPEN_DIVERGENT",
+      "codex_exchange": {
+        "title": "External Review Exchange — Open Pro",
+        "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
+        "heartbeat_automation_id": "hmasd-review-exchange-open-pro",
+        "expected_model": "Luna High",
+        "model_frozen": true
+      }
     },
     "convergent": {
       "role": "CONVERGENT",
       "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
-      "heartbeat_ack": "HEARTBEAT_ACK role=CONVERGENT"
+      "heartbeat_ack": "HEARTBEAT_ACK role=CONVERGENT",
+      "codex_exchange": {
+        "title": "External Review Exchange — Convergent Pro",
+        "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
+        "heartbeat_automation_id": "hmasd-review-exchange-convergent-pro",
+        "expected_model": "Luna High",
+        "model_frozen": true
+      }
     }
   }
 }

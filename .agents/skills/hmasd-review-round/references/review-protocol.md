@@ -34,6 +34,25 @@ after a failure, restart, or concrete source-completeness miss.
 
 ## GPT-5.6 Pro Reviewers
 
+### Required 1:1 transport
+
+The active controller never submits a Pro prompt itself. There are exactly two
+local/external pairs:
+
+```text
+External Review Exchange — Open Pro
+  -> OPEN_DIVERGENT external Pro
+
+External Review Exchange — Convergent Pro
+  -> CONVERGENT external Pro
+```
+
+The controller activates the matching registered heartbeat with routing
+metadata; it does not call the browser or send the review prompt across Codex
+threads. Each local exchange is created once as `Luna High`; after creation its
+model is immutable. No transport or heartbeat call may contain a model or
+thinking override.
+
 Use the Codex built-in browser. Reuse the dedicated open reviewer conversation
 and the dedicated convergent reviewer conversation registered in
 `docs/external-review/REVIEWER_CONVERSATIONS.json`. The two roles must have
@@ -50,11 +69,25 @@ exact ACK. On later submissions, passively verify that ACK and the current
 thread/model identity; do not add repeated heartbeat turns unless the page or
 identity is ambiguous. Any mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`.
 
-When a dedicated Codex transport conversation is used, it is awakened by its
-own heartbeat rather than a direct cross-thread review prompt. The wake payload
-contains no model selection and no review content, only routing metadata. It
-must acknowledge its Codex thread ID, target Pro conversation ID and role before
-opening the browser. The controller rejects a stale, missing or cross-role ACK.
+Every Pro role has a separate one-to-one local Codex exchange conversation in
+the registry. `External Review Exchange — Open Pro` may access only the
+`OPEN_DIVERGENT` external thread and `21_PRO_OPEN_RAW.md`; `External Review
+Exchange — Convergent Pro` may access only the `CONVERGENT` external thread and
+`41_PRO_CONVERGENT_RAW.md`. The controller never performs these browser sends
+itself.
+
+Each exchange conversation is awakened by its own registered heartbeat rather
+than a direct cross-thread review prompt. The wake payload contains no model
+selection and no review content, only routing metadata, immutable commit and
+the first missing artifact. It must acknowledge its Codex thread ID, target Pro
+conversation ID and role before opening the browser. The controller rejects a
+stale, missing or cross-role ACK. The exchange pauses its heartbeat after raw
+archival or a transport blocker; it never sends a prompt to the other role.
+
+Use route token `<round>:<role>:<commit>:<raw-path>` for idempotence. A nonempty
+scientific raw closes the token. A GitHub-plugin, authentication, model, thread
+identity or incomplete-response failure closes only the transport attempt and
+must not be written as `21_PRO_OPEN_RAW.md` or `41_PRO_CONVERGENT_RAW.md`.
 
 Before submission, resolve the proposed commit to exactly 40 hexadecimal
 characters, confirm it is reachable from `My-paper-code/aggressive`, and check

@@ -33,8 +33,11 @@ Implementation completion alone never launches a run.
 
 ## Monitor One Run
 
-Reuse one persistent project-local monitor conversation and one heartbeat
-schedule targeting it. At activation, freeze the exact controller thread,
+Create the persistent project-local monitor conversation as `Luna High`, then
+freeze that model for its lifetime. Reuse that one monitor conversation and one
+heartbeat schedule targeting it; never change the model of an existing monitor
+and never attach model/thinking overrides to heartbeat updates. At activation,
+freeze the exact controller thread,
 monitor thread, automation id and run id in the prompt. Each wake performs one
 bounded read of the authoritative status. The monitor is read-only with respect
 to the repository and run: it never edits, tests, restarts, or interprets

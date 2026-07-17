@@ -31,9 +31,11 @@ one scheduled experiment into a claim that only one research direction exists.
 ## Execution default
 
 Reviewer communication is automatic by default. The controller may run Gemini
-and submit the open and convergent GPT-5.6 Pro prompts after each tracked
-question boundary is committed and pushed; it does not request separate user
-approval for each exchange. The automatic sequence remains bounded to one
+after each tracked question boundary is committed and pushed. Pro submissions
+are performed only by the role-specific one-to-one Codex exchange conversations
+through their registered heartbeats; the controller never submits them in its
+own browser. No separate user approval is required for each exchange. The
+automatic sequence remains bounded to one
 blind divergent response per reviewer, one controller synthesis and one
 convergent response. A follow-up is allowed only to repair a concrete missing
 source or ambiguous response, not to keep searching until a preferred answer
@@ -47,25 +49,48 @@ explicitly and contain that exact section. The controller runs
 `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`;
 any failed remote boundary check stops the submission before browser transport.
 
-The machine-readable Pro role registry is
+The machine-readable Pro role and exchange registry is
 `docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each role to one
-conversation ID, URL, visible model label and heartbeat ACK. Open and convergent
-roles must use different conversation IDs. Before every submission, verify the
-exact URL, visible model label and existing role ACK without changing the model.
-Any mismatch stops as `BLOCKED_REVIEW_THREAD_IDENTITY`; never route to the other
-role or a mixed-purpose conversation as fallback.
+external conversation ID, URL, visible model label and heartbeat ACK, plus one
+local Codex exchange thread and its heartbeat automation. Open and convergent
+roles must use different external and local conversation IDs. Before every
+submission, verify the exact URL, visible model label and existing role ACK
+without changing the model. Any mismatch stops as
+`BLOCKED_REVIEW_THREAD_IDENTITY`; never route to the other role or a
+mixed-purpose conversation as fallback.
 
 Reuse the two registered Pro conversations and the one live Gemini process.
 Do not create duplicate conversations, alter a conversation's model or run the
 open and convergent prompts in the same conversation. Automatic exchange does
 not authorize reviewer-proposed edits, experiments or promotion.
 
-If a separate Codex conversation performs browser transport, wake it through a
-heartbeat bound to that conversation. The wake payload contains only routing
-metadata and omits model/thinking overrides. It must acknowledge its own Codex
-thread ID plus the registered Pro role and conversation ID before sending the
-real prompt. A direct cross-thread review prompt or an unverified ACK is not a
-valid handoff.
+The controller does not perform Pro browser transport. `External Review
+Exchange — Open Pro` and `External Review Exchange — Convergent Pro` are
+separate one-to-one local Codex conversations created as `Luna High`. Their
+models are frozen after creation. Wake only the matching one
+through its registered heartbeat. The wake payload contains only routing
+metadata, immutable commit and the first missing artifact, and omits
+model/thinking overrides. It must acknowledge its own Codex thread ID plus the
+registered Pro role and external conversation ID before sending the real
+prompt. A direct cross-thread review prompt, cross-role fallback or unverified
+ACK is not a valid handoff. The role heartbeat is paused after completion or a
+transport blocker.
+
+The exact dispatch sequence is:
+
+```text
+controller preflight
+-> activate one registered heartbeat
+-> exchange thread/role/target/model ACK
+-> exchange browser submission
+-> exact raw archive or transport blocker
+-> exchange heartbeat PAUSED
+-> controller resumes from the first missing artifact
+```
+
+The idempotence token is `<round>:<role>:<commit>:<raw-path>`. A plugin or
+authentication failure is not a scientific reviewer response and is never
+stored in the role raw path.
 
 All GPT-5.6 Pro submissions use the Codex built-in browser. Reuse a registered
 usable conversation; if it is busy, wait or recover it. Create one and register

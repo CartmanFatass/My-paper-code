@@ -237,14 +237,21 @@ evidence source, but it does not define a unique legal research direction.
 
 Reuse the role-specific persistent reviewer conversations registered in
 `docs/external-review/REVIEWER_CONVERSATIONS.json`; open and convergent Pro use
-different conversation IDs and are never mutual fallbacks. GPT-5.6 Pro uses the
-Codex built-in browser; Gemini uses the persistent Antigravity CLI conversation
-in plan and sandbox mode with the tracked local-source allowlist. Before a Pro
-submission, verify the exact registered URL, visible model and role heartbeat.
-Never change an existing conversation's model or submit reviewers in parallel.
-If browser transport crosses Codex conversations, wake the bound transport
-conversation through its own heartbeat with no model/thinking override and
-require a matching thread/role/target ACK before any external send.
+different external conversation IDs and are never mutual fallbacks. Each Pro
+role also has a separate one-to-one local Codex exchange conversation and
+heartbeat in that registry; the active controller does not perform Pro browser
+transport or send Pro prompts directly across Codex threads. Wake only the
+matching exchange heartbeat with no model/thinking override and require a
+matching local-thread/role/external-thread/model ACK before any send. The
+exchange pauses its heartbeat after exact raw archival or a transport blocker.
+Dedicated experiment monitors and Pro exchange conversations are created as
+`Luna High`; their models are frozen after creation and are never altered by a
+heartbeat or later controller action.
+GPT-5.6 Pro uses the Codex built-in browser; Gemini uses the persistent
+Antigravity CLI conversation in plan and sandbox mode with the tracked
+local-source allowlist. Before a Pro submission, verify the exact registered
+URL, visible model and role heartbeat. Never change an existing conversation's
+model or submit reviewers in parallel.
 
 Archive every response raw before interpretation. Missing raw text is incomplete
 evidence. Automatic exchange covers transport and archival only; no reviewer
