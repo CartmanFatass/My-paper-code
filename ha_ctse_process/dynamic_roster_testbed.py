@@ -8,10 +8,24 @@ are exposed to controller adapters only; actor observations are anonymous.
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import Any, Mapping
 
 import numpy as np
+
+from ha_ctse_process.variable_roster_event import (
+    BoundaryMember,
+    BoundarySnapshot,
+    JOIN,
+    MembershipDelta,
+    MembershipTransaction,
+    REJOIN,
+    SNAPSHOT_CAPABILITY_NAME,
+    SNAPSHOT_CAPABILITY_VERSION,
+    TEMPORARY_LEAVE,
+    TERMINAL_LEAVE,
+)
 
 
 IDLE = 0
@@ -39,6 +53,7 @@ EXPECTED_SHORT_REQUIREMENT = 24
 
 EVALUATION_LEDGER_SEED = 97_057
 ACTION_SAMPLING_SEED = 87_057
+TRAIN_LEDGER_SEED = 67_057
 
 NOT_JOINED = "not_joined"
 ACTIVE = "active"
@@ -151,6 +166,7 @@ class LifecycleState:
     active_steps: int = 0
     short_streak: int = 0
     contributed_current_wave: bool = False
+    membership_epoch: int = 0
 
 
 @dataclass
@@ -218,6 +234,7 @@ class GenericShortDynamicRosterEnv:
         self.observation_shapes_valid = True
         self._prepared_time: int | None = None
         self._current_membership_change = MembershipChange()
+        self._pending_event_transaction: MembershipTransaction | None = None
         self._terminated = False
 
     @property
@@ -276,6 +293,7 @@ class GenericShortDynamicRosterEnv:
                 if state.status != TEMPORARILY_ABSENT:
                     raise RuntimeError("rejoin selected a non-absent lifecycle")
                 state.status = ACTIVE
+                state.membership_epoch += 1
             for key in joined:
                 state = self.lifecycles[key]
                 if state.status != NOT_JOINED:
@@ -324,14 +342,107 @@ class GenericShortDynamicRosterEnv:
         self.short_required_total += wave.required_work
         self._reset_wave_member_state()
 
+    def _critic_global_features(self) -> np.ndarray:
+        wave = self.current_wave
+        required_arrived = self.short_required_total
+        return np.asarray(
+            [
+                float(self.time) / float(HORIZON),
+                np.log1p(len(self.active_keys)) / np.log(7.0),
+                float(self.persistent_units) / float(PERSISTENT_TARGET),
+                float(self.persistent_owner is not None),
+                float(wave is not None),
+                (
+                    float(wave.steps_remaining(self.time)) / float(SHORT_WINDOW)
+                    if wave is not None
+                    else 0.0
+                ),
+                (
+                    float(wave.required_work - wave.completed_work)
+                    / float(max(wave.required_work, 1))
+                    if wave is not None
+                    else 0.0
+                ),
+                (
+                    float(self.short_completed_total) / float(required_arrived)
+                    if required_arrived > 0
+                    else 0.0
+                ),
+            ],
+            dtype=np.float32,
+        )
+
+    def _event_snapshot(self, *, frontier: tuple[int, ...] = ()) -> BoundarySnapshot:
+        members = tuple(
+            BoundaryMember.make(
+                str(key),
+                self.lifecycles[key].membership_epoch,
+                self._observation_for(key),
+                self._observation_for(key),
+                obs_dim=OBSERVATION_DIM,
+                critic_member_dim=OBSERVATION_DIM,
+            )
+            for key in self.active_keys
+        )
+        return BoundarySnapshot.make(
+            self.time,
+            members,
+            self._critic_global_features(),
+            critic_global_dim=8,
+            frontier=tuple(str(key) for key in frontier),
+        )
+
     def _prepare(self) -> None:
         if self._terminated:
             raise RuntimeError("the episode is already terminal")
         if self._prepared_time == self.time:
             return
+        pre = self._event_snapshot()
         self._current_membership_change = self._apply_membership()
         self._open_wave_if_due()
+        change = self._current_membership_change
+        deltas = tuple(
+            [
+                MembershipDelta(JOIN, str(key), 0)
+                for key in change.joined
+            ]
+            + [
+                MembershipDelta(
+                    TEMPORARY_LEAVE,
+                    str(key),
+                    self.lifecycles[key].membership_epoch,
+                )
+                for key in change.temporarily_left
+            ]
+            + [
+                MembershipDelta(
+                    REJOIN,
+                    str(key),
+                    self.lifecycles[key].membership_epoch - 1,
+                )
+                for key in change.rejoined
+            ]
+            + [
+                MembershipDelta(
+                    TERMINAL_LEAVE,
+                    str(key),
+                    self.lifecycles[key].membership_epoch,
+                )
+                for key in change.terminally_left
+            ]
+        )
+        # Structural arrivals are immediate opportunities.  The event runtime
+        # binds the remaining due frontier from its private opportunity clocks.
+        structural_frontier = tuple(change.rejoined + change.joined)
+        post = self._event_snapshot(frontier=structural_frontier)
+        self._pending_event_transaction = MembershipTransaction(pre, deltas, post)
         self._prepared_time = self.time
+
+    def event_transaction(self) -> MembershipTransaction:
+        self._prepare()
+        if self._pending_event_transaction is None:
+            raise RuntimeError("event boundary was not prepared")
+        return deepcopy(self._pending_event_transaction)
 
     def _observation_for(self, key: int) -> np.ndarray:
         state = self.lifecycles[key]
@@ -487,9 +598,62 @@ class GenericShortDynamicRosterEnv:
         }
         self.time += 1
         self._prepared_time = None
+        self._pending_event_transaction = None
         if terminal:
             self._terminated = True
         return float(reward), terminal, info
+
+    def snapshot_state(self) -> dict[str, Any]:
+        return {
+            "schema_version": 1,
+            "ledger": deepcopy(self.ledger),
+            "lifecycles": deepcopy(self.lifecycles),
+            "time": int(self.time),
+            "persistent_owner": self.persistent_owner,
+            "persistent_units": int(self.persistent_units),
+            "current_wave": deepcopy(self.current_wave),
+            "wave_records": deepcopy(self.wave_records),
+            "short_required_total": int(self.short_required_total),
+            "short_completed_total": int(self.short_completed_total),
+            "roster_sizes": list(self.roster_sizes),
+            "reward_trace": list(self.reward_trace),
+            "observation_shapes_valid": bool(self.observation_shapes_valid),
+            "prepared_time": self._prepared_time,
+            "current_membership_change": deepcopy(self._current_membership_change),
+            "pending_event_transaction": deepcopy(self._pending_event_transaction),
+            "terminated": bool(self._terminated),
+        }
+
+    @classmethod
+    def from_snapshot_state(cls, state: Mapping[str, Any]) -> "GenericShortDynamicRosterEnv":
+        required = {
+            "schema_version", "ledger", "lifecycles", "time",
+            "persistent_owner", "persistent_units", "current_wave",
+            "wave_records", "short_required_total", "short_completed_total",
+            "roster_sizes", "reward_trace", "observation_shapes_valid",
+            "prepared_time", "current_membership_change",
+            "pending_event_transaction", "terminated",
+        }
+        value = dict(state)
+        if set(value) != required or int(value["schema_version"]) != 1:
+            raise ValueError("dynamic-roster environment snapshot schema mismatch")
+        env = cls(deepcopy(value["ledger"]))
+        env.lifecycles = deepcopy(value["lifecycles"])
+        env.time = int(value["time"])
+        env.persistent_owner = value["persistent_owner"]
+        env.persistent_units = int(value["persistent_units"])
+        env.current_wave = deepcopy(value["current_wave"])
+        env.wave_records = deepcopy(value["wave_records"])
+        env.short_required_total = int(value["short_required_total"])
+        env.short_completed_total = int(value["short_completed_total"])
+        env.roster_sizes = list(value["roster_sizes"])
+        env.reward_trace = list(value["reward_trace"])
+        env.observation_shapes_valid = bool(value["observation_shapes_valid"])
+        env._prepared_time = value["prepared_time"]
+        env._current_membership_change = deepcopy(value["current_membership_change"])
+        env._pending_event_transaction = deepcopy(value["pending_event_transaction"])
+        env._terminated = bool(value["terminated"])
+        return env
 
     def outcome(self) -> EpisodeOutcome:
         if not self._terminated or self.time != HORIZON:
@@ -517,6 +681,156 @@ class GenericShortDynamicRosterEnv:
             reward_trace=tuple(self.reward_trace),
             observation_shapes_valid=bool(self.observation_shapes_valid),
         )
+
+
+@dataclass(frozen=True)
+class EventEnvironmentStep:
+    reward: float
+    terminated: bool
+    truncated: bool
+    info: dict[str, Any]
+    next_transaction: MembershipTransaction | None
+
+
+class _DiscreteActionSpace:
+    def __init__(self, n: int) -> None:
+        self.n = int(n)
+
+
+class DynamicRosterEventEnv:
+    """Snapshot-capable collector adapter for the exact generic-SHORT testbed."""
+
+    obs_dim = OBSERVATION_DIM
+    state_dim = 8
+    action_dim = ACTION_COUNT
+    n_uavs = MAX_LIFECYCLES
+    action_space = _DiscreteActionSpace(ACTION_COUNT)
+
+    def __init__(self, *, task_master_seed: int = TRAIN_LEDGER_SEED) -> None:
+        self.task_master_seed = int(task_master_seed)
+        self.episode_id: int | None = None
+        self.environment: GenericShortDynamicRosterEnv | None = None
+
+    def event_runtime_snapshot_capability(self) -> dict[str, Any]:
+        return {"name": SNAPSHOT_CAPABILITY_NAME, "version": SNAPSHOT_CAPABILITY_VERSION}
+
+    def reset_event_runtime(self, episode_id: int) -> MembershipTransaction:
+        self.episode_id = int(episode_id)
+        self.environment = GenericShortDynamicRosterEnv(
+            make_dynamic_roster_ledger(
+                self.episode_id,
+                master_seed=self.task_master_seed,
+            )
+        )
+        return self.environment.event_transaction()
+
+    def step_event_runtime(self, actions: Mapping[str, int]) -> EventEnvironmentStep:
+        if self.environment is None:
+            raise RuntimeError("event environment must be reset before stepping")
+        normalized = {int(key): int(value) for key, value in actions.items()}
+        reward, terminal, info = self.environment.step(normalized)
+        next_transaction = (
+            None if terminal else self.environment.event_transaction()
+        )
+        event_info = dict(info)
+        event_info.update(
+            {
+                "episode_id": int(self.episode_id),
+                "physical_time": int(self.environment.time),
+                "intrinsic_reward": 0.0,
+                "intrinsic_reward_applied_count": 0,
+            }
+        )
+        return EventEnvironmentStep(
+            reward=float(reward),
+            terminated=bool(terminal),
+            truncated=False,
+            info=event_info,
+            next_transaction=next_transaction,
+        )
+
+    def snapshot_event_runtime(self) -> dict[str, Any]:
+        if self.environment is None or self.episode_id is None:
+            raise RuntimeError("cannot snapshot an uninitialized event environment")
+        transaction = deepcopy(self.environment._pending_event_transaction)
+        return {
+            "snapshot_capability_name": SNAPSHOT_CAPABILITY_NAME,
+            "snapshot_capability_version": SNAPSHOT_CAPABILITY_VERSION,
+            "active_presentation": (
+                []
+                if transaction is None
+                else list(transaction.post_membership_pre_policy_snapshot.keys)
+            ),
+            "pending_membership_transaction": transaction,
+            "pending_command_response_state": "boundary_ready",
+            "worker_environment_snapshot": self.environment.snapshot_state(),
+            "environment_rng_state": {
+                "task_master_seed": int(self.task_master_seed),
+                "episode_id": int(self.episode_id),
+                "ledger_is_pre_sampled": True,
+            },
+        }
+
+    def restore_event_runtime(self, snapshot: Mapping[str, Any]) -> None:
+        required = {
+            "snapshot_capability_name", "snapshot_capability_version",
+            "active_presentation", "pending_membership_transaction",
+            "pending_command_response_state", "worker_environment_snapshot",
+            "environment_rng_state",
+        }
+        value = dict(snapshot)
+        if set(value) != required:
+            raise ValueError("event environment snapshot field mismatch")
+        if value["snapshot_capability_name"] != SNAPSHOT_CAPABILITY_NAME or int(
+            value["snapshot_capability_version"]
+        ) != SNAPSHOT_CAPABILITY_VERSION:
+            raise ValueError("event environment snapshot capability mismatch")
+        rng_state = dict(value["environment_rng_state"])
+        if set(rng_state) != {"task_master_seed", "episode_id", "ledger_is_pre_sampled"}:
+            raise ValueError("event environment RNG state mismatch")
+        if not bool(rng_state["ledger_is_pre_sampled"]):
+            raise ValueError("dynamic-roster randomness must be fully ledgered")
+        self.task_master_seed = int(rng_state["task_master_seed"])
+        self.episode_id = int(rng_state["episode_id"])
+        self.environment = GenericShortDynamicRosterEnv.from_snapshot_state(
+            value["worker_environment_snapshot"]
+        )
+        expected = self.environment._pending_event_transaction
+        actual = value["pending_membership_transaction"]
+        if (actual is None) != (expected is None):
+            raise ValueError("pending membership transaction does not round-trip exactly")
+        if actual is not None and expected is not None:
+            for left, right in (
+                (actual.pre_membership_boundary_snapshot, expected.pre_membership_boundary_snapshot),
+                (actual.post_membership_pre_policy_snapshot, expected.post_membership_pre_policy_snapshot),
+            ):
+                if (
+                    left.physical_time != right.physical_time
+                    or left.keys != right.keys
+                    or left.frontier != right.frontier
+                    or not np.array_equal(
+                        left.critic_global_features, right.critic_global_features
+                    )
+                    or any(
+                        l.membership_epoch != r.membership_epoch
+                        or not np.array_equal(l.observation, r.observation)
+                        or not np.array_equal(
+                            l.critic_member_features, r.critic_member_features
+                        )
+                        for l, r in zip(left.members, right.members)
+                    )
+                ):
+                    raise ValueError("pending membership transaction does not round-trip exactly")
+            if actual.atomic_membership_delta != expected.atomic_membership_delta:
+                raise ValueError("pending membership transaction does not round-trip exactly")
+        expected_presentation = [] if expected is None else list(
+            expected.post_membership_pre_policy_snapshot.keys
+        )
+        if list(value["active_presentation"]) != expected_presentation:
+            raise ValueError("active presentation does not match restored environment")
+
+    def close(self) -> None:
+        return None
 
 
 def constructive_actions(

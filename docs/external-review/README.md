@@ -10,9 +10,10 @@ the HMASD contract rather than by model identity.
    conversation using Gemini 3.1 Pro (High). It reads the shared evidence pack
    plus explicitly allowlisted local papers and may propose, replace or reject
    architecture hypotheses.
-2. **GPT-5.6 Pro open reviewer.** A separate fresh conversation. It receives
-   the shared Git-visible evidence pack but not Gemini's response. It performs
-   an independent open architecture review and has equal standing with Gemini.
+2. **GPT-5.6 Pro open reviewer.** A dedicated persistent conversation,
+   separate from the convergent reviewer. It receives the shared Git-visible
+   evidence pack but not Gemini's response. It performs an independent open
+   architecture review and has equal standing with Gemini.
 3. **Codex controller.** It compares the two raw reviews, checks them against
    repository evidence and writes a synthesis without selecting by model name.
 4. **GPT-5.6 Pro convergent reviewer.** The existing `HMASD Algorithm
@@ -41,6 +42,11 @@ open and convergent prompts in the same conversation. If the existing Pro
 conversation is not already GPT-5.6 Pro, or its identity cannot be verified,
 stop that submission and emit the manual handoff prompt. Automatic exchange
 does not authorize reviewer-proposed edits, experiments or promotion.
+
+All GPT-5.6 Pro submissions use the Codex built-in browser. Reuse a registered
+usable conversation; if it is busy, wait or recover it. Create one and register
+it only when no usable corresponding conversation exists. Never use Chrome,
+Computer Use or a generic web request as a substitute.
 
 ## Round ownership
 

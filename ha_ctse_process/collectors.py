@@ -85,6 +85,15 @@ class EnvStep:
     info: dict
 
 
+@dataclass
+class EventEnvStep:
+    reward: float
+    terminated: bool
+    truncated: bool
+    info: dict
+    next_transaction: Any | None
+
+
 def _worker(remote, parent_remote, config, scenario: str, seed: int, rank: int, scale_mode: str) -> None:
     parent_remote.close()
     env = None
@@ -120,6 +129,13 @@ def _worker(remote, parent_remote, config, scenario: str, seed: int, rank: int, 
                 )
             elif command == "event_capability":
                 remote.send(("ok", _event_capability(env)))
+            elif command == "event_reset":
+                _event_capability(env)
+                remote.send(("ok", env.reset_event_runtime(int(payload))))
+            elif command == "event_step":
+                _event_capability(env)
+                result = env.step_event_runtime(payload)
+                remote.send(("ok", EventEnvStep(**result.__dict__)))
             elif command == "event_snapshot":
                 _event_capability(env)
                 remote.send(("ok", env.snapshot_event_runtime()))
@@ -179,6 +195,26 @@ class SyncEnvCollector:
         if any(value != values[0] for value in values[1:]):
             raise RuntimeError("event-runtime collector workers disagree on capability")
         return dict(values[0])
+
+    def reset_event_runtime(self, episode_ids) -> list[Any]:
+        self.event_runtime_capability()
+        ids = tuple(int(value) for value in episode_ids)
+        if len(ids) != self.num_envs:
+            raise ValueError("event reset episode-id count mismatch")
+        return [
+            env.reset_event_runtime(episode_id)
+            for env, episode_id in zip(self.envs, ids)
+        ]
+
+    def step_event_runtime(self, routed_actions) -> list[EventEnvStep]:
+        self.event_runtime_capability()
+        rows = tuple(routed_actions)
+        if len(rows) != self.num_envs:
+            raise ValueError("event action batch count mismatch")
+        return [
+            EventEnvStep(**env.step_event_runtime(actions).__dict__)
+            for env, actions in zip(self.envs, rows)
+        ]
 
     def snapshot_event_runtime(self) -> dict[str, Any]:
         self.event_runtime_capability()
@@ -279,6 +315,24 @@ class SubprocEnvCollector:
         if any(value != values[0] for value in values[1:]):
             raise RuntimeError("event-runtime collector workers disagree on capability")
         return dict(values[0])
+
+    def reset_event_runtime(self, episode_ids) -> list[Any]:
+        self.event_runtime_capability()
+        ids = tuple(int(value) for value in episode_ids)
+        if len(ids) != self.num_envs:
+            raise ValueError("event reset episode-id count mismatch")
+        for remote, episode_id in zip(self.remotes, ids):
+            remote.send(("event_reset", episode_id))
+        return [self._recv(remote) for remote in self.remotes]
+
+    def step_event_runtime(self, routed_actions) -> list[EventEnvStep]:
+        self.event_runtime_capability()
+        rows = tuple(routed_actions)
+        if len(rows) != self.num_envs:
+            raise ValueError("event action batch count mismatch")
+        for remote, actions in zip(self.remotes, rows):
+            remote.send(("event_step", actions))
+        return [self._recv(remote) for remote in self.remotes]
 
     def snapshot_event_runtime(self) -> dict[str, Any]:
         self.event_runtime_capability()

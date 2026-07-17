@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Work"
+  short_description: "Plan, implement, review, and verify HMASD work"
+  default_prompt: "Use $hmasd-work to execute this HMASD task through one canonical brief."

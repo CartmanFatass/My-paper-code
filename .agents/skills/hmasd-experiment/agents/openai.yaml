@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Experiment"
+  short_description: "Run and monitor authorized HMASD experiments"
+  default_prompt: "Use $hmasd-experiment to prepare, run, monitor, or diagnose this authorized HMASD experiment."

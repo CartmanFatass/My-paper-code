@@ -89,6 +89,49 @@ run `logs/f0f1_dynamic_roster_stage_b_20260717_160956` is valid
 prerequisite. Stop before F0/F1; it remains unimplemented and requires its
 separate implementation authorization.
 
+### Stage C F0/F1 Implementation — Stable, No Training Launch
+
+The bounded implementation reuses `VariableRosterEventCore` as the sole
+lifecycle, probability, credit and checkpoint owner and exposes the frozen
+generic-`SHORT` testbed through the existing event collector/dispatch path.
+F0 and F1 share every model, tensor, optimizer, ledger, RNG, mask and update
+contract; the only non-parameter selector is:
+
+```text
+F0 -> immutable initial active-set summary
+F1 -> current applied working-set summary
+```
+
+Implemented boundary:
+
+1. `ha_ctse_process/dynamic_roster_testbed.py` now has a typed event adapter
+   that emits pre-membership and post-membership snapshots, exact membership
+   deltas, anonymous actor/critic fields and strict snapshot/restore state;
+2. `ha_ctse_process/collectors.py` has default-off event transport;
+3. `ha_ctse_process/variable_roster_event.py` has the common execution,
+   differentiable replay, high/low PPO packing, terminal closure and resume
+   plumbing required by the frozen Stage C contract;
+4. `ha_ctse_process/train.py` has one event-mode branch while leaving the legacy
+   fixed-N path unchanged; vector live resume remains explicitly fail-closed;
+5. one focused Stage C integration test covers the adapter, RNG, replay and
+   fail-closed boundaries. The environment-factory change is
+   limited to exposing this exact testbed to the existing collector.
+
+The shared reward contract is frozen to sparse terminal external utility only.
+No intrinsic reward is enabled because the reviewed Stage C contract registers
+no new environment-agnostic intrinsic formula. Intrinsic-applied counts are
+zero in both arms; task state, progress, owner, wave and success fields cannot
+enter an intrinsic path.
+
+The single repair/re-review loop closed five concrete defects in shared-core
+construction, join-prefix application, exact PCG64 ledgers, resume handling and
+low-critic active-set replay. The independent reviewer approved the repaired
+diff and the controller's focused non-training run passed all 9 relevant tests;
+the test hard-blocked `Adam.step`. The 16-environment, 250-update, 320K-per-arm experiment,
+forced-skill audit, natural-prefix analysis and terminal branch analyzer remain
+outside this authorization and require a registered `ExpRecord.md` row plus a
+separate experiment launch decision.
+
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 
 GPT-5.6 Pro selected `ARES-SMDP` as the only literature-informed architecture

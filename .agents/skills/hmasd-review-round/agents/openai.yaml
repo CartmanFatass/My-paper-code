@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Review Round"
+  short_description: "Coordinate the bounded HMASD reviewer round"
+  default_prompt: "Use $hmasd-review-round to run this tracked HMASD external-review exchange and archive its evidence."

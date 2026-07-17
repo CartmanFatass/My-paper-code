@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
+from typing import Any, Callable
 
 from pettingzoo.mpe import simple_spread_v3
 
@@ -21,6 +21,7 @@ from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
 from envs.pettingzoo.two_timescale_role_free_actions import (
     TwoTimescaleRoleFreeActionsEnv,
 )
+from ha_ctse_process.dynamic_roster_testbed import DynamicRosterEventEnv, TRAIN_LEDGER_SEED
 
 
 SCENARIO_ALIASES = {
@@ -54,6 +55,9 @@ SCENARIO_ALIASES = {
     "simple-spread": "simple_spread",
     "simple_spread_v3": "simple_spread",
     "r40_simple_spread": "simple_spread",
+    "generic_short_dynamic_roster": "generic_short_dynamic_roster",
+    "generic-short-dynamic-roster": "generic_short_dynamic_roster",
+    "dynamic_roster_generic_short": "generic_short_dynamic_roster",
 }
 
 SCENARIO_ALIASES.update(
@@ -85,12 +89,12 @@ class EnvSpec:
     scale_mode: str | None = None
 
 
-def make_env(config, spec: EnvSpec) -> Callable[[], ParallelToArrayAdapter]:
+def make_env(config, spec: EnvSpec) -> Callable[[], Any]:
     """Return a thunk compatible with SB3-style vector env constructors."""
 
     scenario = normalize_scenario(spec.scenario)
 
-    def _init() -> ParallelToArrayAdapter:
+    def _init() -> Any:
         env_seed = int(spec.seed) + int(spec.rank)
         kwargs = {
             "config": config,
@@ -98,6 +102,12 @@ def make_env(config, spec: EnvSpec) -> Callable[[], ParallelToArrayAdapter]:
             "seed": env_seed,
         }
 
+        if scenario == "generic_short_dynamic_roster":
+            return DynamicRosterEventEnv(
+                task_master_seed=int(
+                    getattr(config, "dynamic_roster_task_ledger_seed", TRAIN_LEDGER_SEED)
+                )
+            )
         if scenario == "base":
             raw_env = UAVForcedRelayEnv(**kwargs)
         elif scenario == "belief_map":

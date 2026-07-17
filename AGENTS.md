@@ -1,29 +1,71 @@
 # HMASD Codex Project Instructions
 
-Active operational instructions for HMASD. The research contract lives in
-`memory/ALGORITHM_PRINCIPLES.md`.
+The durable research contract lives in `memory/ALGORITHM_PRINCIPLES.md`.
 
-## First Read and Ownership
+## Project Entry and Controller
 
-Read `memory/CURRENT_WORK.md` first. It is the only mandatory default read.
-
-Read other sources only when needed:
+Read `memory/CURRENT_WORK.md` first. It is the only mandatory default read. Read
+additional sources only when the task crosses their boundary:
 
 - `memory/ALGORITHM_PRINCIPLES.md` before algorithm, reward, or experiment
-  design.
-- The active section of `memory/IMPLEMENTATION_PLAN.md` before staged core work.
-- The relevant row of `memory/ExpRecord.md` before a formal experiment or
-  scientific result decision.
-- `docs/research/`, `docs/external-review/`, and `docs/archive/` only through a
-  current pointer or explicit user request.
+  design;
+- the active `memory/IMPLEMENTATION_PLAN.md` section before staged core work;
+- the relevant `memory/ExpRecord.md` row before a formal experiment or
+  scientific result decision;
+- `docs/research/`, `docs/external-review/`, or `docs/archive/` only through a
+  current pointer or explicit request.
 
-One controller owns project decisions and repository writes at a time. The
-active controller works directly in `C:\project\HMASD` and owns implementation,
-focused review, experiments, Git, and user communication. Do not create or
-message auxiliary role conversations, subthreads, or worktrees unless the user
-explicitly requests them. Scheduled status checks, when needed, use one bounded
-heartbeat in the main conversation. Record controller changes in
-`memory/CURRENT_WORK.md`.
+One active controller works directly in `C:\project\HMASD` and owns project
+decisions, root memory, Git integration, scientific interpretation, experiment
+authorization, and user communication. `memory/CURRENT_WORK.md` names that task
+and is writable only by it. A new controller may write only after an explicit
+handoff recorded there.
+
+Implementers read root memory but do not edit it. Reviewers, monitors, and side
+conversations are read-only unless the controller gives an exact non-root-memory
+write scope.
+
+## Unified Collaboration Workflow
+
+Only three repository workflows are user-facing:
+
+- `$hmasd-work`: research design, implementation, diagnosis, focused evidence,
+  bounded delegation, combined review, and collaboration setup;
+- `$hmasd-experiment`: experiment contract, package, launch, persistent
+  monitoring, failure diagnosis, and terminal result boundary;
+- `$hmasd-review-round`: Gemini, open Pro, controller synthesis, convergent Pro,
+  and review evidence archival.
+
+Use the smallest useful workflow. A non-trivial task creates exactly one
+temporary collaboration artifact:
+
+```text
+.codex/collaboration/active/<task-id>/BRIEF.md
+```
+
+It contains authority, objective, necessary history, contracts, dependencies,
+exact write scopes, dirty-worktree boundary, invariants, non-goals, focused
+evidence, and stop conditions. Information priority is current user instruction,
+then `BRIEF.md`, current repository contracts, and inherited relevant context.
+Return `BLOCKED` on a real conflict.
+
+For coupled work, use one implementer. For independent work, use at most three
+implementers with disjoint files and a frozen interface. Each file has one
+writer. Implementers inherit three to five relevant turns; the combined
+reviewer inherits one to three and reads the same brief. Use a mapper only when
+an unknown or cross-repository boundary cannot be located cheaply, and put its
+findings directly in the existing brief.
+
+Use one fresh combined read-only reviewer after the complete diff is stable.
+Route concrete findings to the original file owner, permit one repair/re-review
+loop, and let the controller adjudicate anything unresolved. Task messages use
+only `BLOCKED`, `PACKAGE_READY`, `REVIEW_READY`, and `COMPLETE`; do not send
+heartbeat or unchanged-state messages.
+
+Respect the configured eight-thread ceiling and spawn depth one. Choose a model
+only while creating a subagent and only from the live runtime catalog. Never
+change an existing task or reviewer conversation's model automatically. Detailed
+mechanics live in the three project skills.
 
 ## Research Loop
 
@@ -159,63 +201,25 @@ unless the fact changed, blocks the next action, or the user asked.
 
 ## External Review
 
-Archive an external response raw before interpreting it. Record the source
-model, date, related claim, and accept/reject/modify/defer disposition. Missing
-raw text means incomplete evidence.
+Use `$hmasd-review-round` only for a cross-round architecture contradiction, a
+coherent route connected to the final variable-team plus variable-lifetime
+algorithm, or a critical result boundary. Gemini and the open GPT-5.6 Pro are
+blind divergent reviewers with equal standing. The controller archives both
+raw responses, synthesizes them against repository evidence, and then submits
+both plus the synthesis to the convergent GPT-5.6 Pro.
 
-External-review exchange is automatic by default. Once the controller opens a
-qualifying review round, it may run the local Gemini phase and submit the
-tracked open/convergent GPT-5.6 Pro prompts without requesting per-round user
-authorization. Reuse the dedicated open Pro conversation and the existing
-`HMASD Algorithm Consultation` conversation; never create duplicate reviewer
-conversations or submit parallel prompts. Verify that the target conversation
-already uses GPT-5.6 Pro and never change any conversation's model
-automatically. If authentication, model identity or page state is ambiguous,
-fall back to the directly copyable manual prompt instead of guessing.
+Reuse the persistent reviewer conversations and never create duplicates because
+one is busy. GPT-5.6 Pro uses the Codex built-in browser and an existing verified
+Pro conversation; Gemini uses the persistent Antigravity CLI conversation in
+plan and sandbox mode with the tracked local-source allowlist. Never change an
+existing conversation's model or submit reviewers in parallel.
 
-Automatic review permission covers reviewer communication and raw-response
-archival only. It does not authorize repository changes proposed by a reviewer,
-an experiment launch, promotion or a scientific disposition. The controller
-still synthesizes the evidence and applies the normal implementation/experiment
-authorization boundary. The user may explicitly pause a round or request
-manual exchange at any time.
-
-Use the dedicated open GPT-5.6 Pro conversation as an independent divergent
-reviewer and the existing `HMASD Algorithm Consultation` conversation as the
-convergent adversarial reviewer. A Pro exchange is
-appropriate only at one of these boundaries:
-
-1. a cross-round architecture audit after several terminal branches or a
-   contradiction in the current causal model;
-2. design review of a coherent route that could connect to the final
-   variable-`N` plus variable-lifetime algorithm;
-3. a critical result whose validity or promotion decision cannot be settled
-   from the registered contract.
-
-The open Pro and Gemini first passes are blind and have equal standing; compare
-their claims by evidence and reasoning, not model identity. The controller then
-archives both raw responses and writes a synthesis. Only the convergent Pro sees
-both outputs, and it may decide to stop or select at most one active evidence
-source. A valid FAIL never obliges either reviewer to produce a successor. Do
-not request parallel executions.
-
-For every handoff, read
-`docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md`, replace only its commit
-and question-path placeholders, and submit the resulting prompt verbatim. Store
-the exact prompt boundary in the tracked question/round evidence. If automatic
-submission is unavailable, include it verbatim in the user-facing response as
-the manual fallback.
-
-Use the persistent Antigravity CLI conversation for Gemini 3.1 Pro (High) as
-the other independent divergent reviewer. The round-centric workflow is owned
-by `docs/external-review/README.md`. Gemini may read only the tracked manifest's
-allowlisted local papers and files. Keep one live process for the research
-phase, verify its mandatory-source inspection before closing it, then use one
-clean non-interactive turn for raw archival; use conversation recovery only
-after failure, restart or a concrete source-completeness miss. Run in plan and sandbox mode, never use
-`--dangerously-skip-permissions`, and never run live and archival clients
-concurrently. No reviewer authorizes repository edits, experiments or
-promotion.
+Archive every response raw before interpretation. Missing raw text is incomplete
+evidence. Automatic exchange covers transport and archival only; no reviewer
+authorizes code, experiments, promotion, or a scientific disposition. Use the
+exact manual prompt when identity, authentication, page state, sources, or
+response completeness is ambiguous. Detailed round mechanics live in
+`docs/external-review/README.md` and `$hmasd-review-round`.
 
 ## State and Memory
 

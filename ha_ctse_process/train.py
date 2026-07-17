@@ -4429,9 +4429,206 @@ def log_eval_metrics(writer, total_steps: int, metrics: dict[str, float]) -> Non
     writer.flush()
 
 
+def enforce_variable_roster_event_resume_boundary(config, args: argparse.Namespace) -> None:
+    if is_variable_roster_event(config) and str(
+        getattr(args, "resume_from", "") or ""
+    ):
+        raise ValueError(
+            "Stage C vector live resume is not implemented; --resume_from fails closed"
+        )
+
+
+def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
+    """The event-mode branch of the existing outer train loop."""
+
+    from ha_ctse_process.dynamic_roster_testbed import (
+        ACTION_COUNT,
+        HORIZON,
+        OBSERVATION_DIM,
+        TRAIN_LEDGER_SEED,
+    )
+    from ha_ctse_process.variable_roster_event import (
+        EVENT_ARCHITECTURE_SCHEMA_VERSION,
+        VariableRosterEventCore,
+        apply_event_ppo_update,
+    )
+
+    enforce_variable_roster_event_resume_boundary(config, args)
+    if normalize_scenario(str(getattr(config, "scenario", ""))) != (
+        "generic_short_dynamic_roster"
+    ):
+        raise ValueError("variable_roster_event is restricted to generic-SHORT Stage C")
+    num_envs = int(args.num_envs)
+    rollout_length = int(args.rollout_length)
+    total_timesteps = int(args.total_timesteps)
+    if (num_envs, rollout_length, total_timesteps) != (16, HORIZON, 320_000):
+        raise ValueError(
+            "Stage C requires num_envs=16, rollout_length=80, total_timesteps=320000"
+        )
+    if int(getattr(config, "event_architecture_schema_version", -1)) != (
+        EVENT_ARCHITECTURE_SCHEMA_VERSION
+    ):
+        raise ValueError("Stage C requires event architecture schema version 1")
+    requested_device = str(getattr(args, "device", "cuda")).lower()
+    if requested_device != "cuda" or not torch.cuda.is_available():
+        raise RuntimeError("Stage C training requires available CUDA; CPU fallback is forbidden")
+    device = torch.device("cuda")
+    config.dynamic_roster_task_ledger_seed = TRAIN_LEDGER_SEED
+
+    model_seed = 57_057
+    event_master_seed = 77_057
+    action_master_seed = 87_057
+    with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
+        torch.manual_seed(model_seed)
+        torch.cuda.manual_seed_all(model_seed)
+        model_owner = VariableRosterEventCore(
+            architecture_mode=str(config.event_architecture_mode),
+            obs_dim=OBSERVATION_DIM,
+            critic_member_dim=OBSERVATION_DIM,
+            critic_global_dim=8,
+            n_skills=3,
+            action_dim=ACTION_COUNT,
+            member_hidden_dim=int(getattr(config, "event_member_hidden_dim", 64)),
+            high_hidden_dim=int(getattr(config, "event_high_hidden_dim", 64)),
+            low_hidden_dim=int(getattr(config, "event_low_hidden_dim", 64)),
+            skill_embedding_dim=int(getattr(config, "event_skill_embedding_dim", 16)),
+            gamma=0.99,
+            gae_lambda=0.95,
+            environment_index=-1,
+            device=device,
+        )
+    high_optimizer = torch.optim.Adam(
+        tuple(model_owner.commitment_model.parameters())
+        + tuple(model_owner.event_critic.parameters()),
+        lr=3e-4,
+    )
+    low_optimizer = torch.optim.Adam(
+        tuple(model_owner.low_actor.parameters())
+        + tuple(model_owner.low_critic.parameters()),
+        lr=3e-4,
+    )
+    collector = create_collector(config, args, scale_mode="train", num_envs=num_envs)
+    collector.event_runtime_capability()
+    total_steps = 0
+    update_idx = 0
+    high_optimizer_steps = 0
+    low_optimizer_steps = 0
+    intrinsic_applied_count = 0
+    next_episode_id = 0
+    try:
+        for update_idx in range(1, 251):
+            episode_ids = tuple(range(next_episode_id, next_episode_id + num_envs))
+            next_episode_id += num_envs
+            transactions = collector.reset_event_runtime(episode_ids)
+            cores = []
+            snapshots = []
+            for env_index, (episode_id, transaction) in enumerate(
+                zip(episode_ids, transactions)
+            ):
+                core = VariableRosterEventCore(
+                    architecture_mode=str(config.event_architecture_mode),
+                    obs_dim=OBSERVATION_DIM,
+                    critic_member_dim=OBSERVATION_DIM,
+                    critic_global_dim=8,
+                    n_skills=3,
+                    action_dim=ACTION_COUNT,
+                    member_hidden_dim=model_owner.member_hidden_dim,
+                    high_hidden_dim=model_owner.high_hidden_dim,
+                    low_hidden_dim=model_owner.low_hidden_dim,
+                    skill_embedding_dim=model_owner.skill_embedding_dim,
+                    gamma=0.99,
+                    gae_lambda=0.95,
+                    environment_index=env_index,
+                    opportunity_seed=event_master_seed,
+                    frontier_seed=event_master_seed,
+                    action_seed=action_master_seed,
+                    rng_episode_id=episode_id,
+                    opportunity_stream_id=0,
+                    frontier_stream_id=1,
+                    action_stream_id=0,
+                    device=device,
+                    shared_models_from=model_owner,
+                )
+                bound = core.bind_due_frontier(transaction)
+                core.apply_transaction(bound)
+                cores.append(core)
+                snapshots.append(bound.post_membership_pre_policy_snapshot)
+
+            for primitive_time in range(HORIZON):
+                routed_actions = []
+                for core, snapshot in zip(cores, snapshots):
+                    actions, _logp, _values = core.low_step(snapshot)
+                    routed_actions.append(
+                        {
+                            key: int(actions[index].detach().cpu())
+                            for index, key in enumerate(snapshot.keys)
+                        }
+                    )
+                steps = collector.step_event_runtime(routed_actions)
+                next_snapshots = []
+                for core, step in zip(cores, steps):
+                    if bool(step.truncated):
+                        raise RuntimeError("generic-SHORT Stage C does not admit truncation")
+                    intrinsic_applied_count += int(
+                        step.info.get("intrinsic_reward_applied_count", -1)
+                    )
+                    if float(step.info.get("intrinsic_reward", float("nan"))) != 0.0:
+                        raise RuntimeError("Stage C intrinsic reward must remain exactly zero")
+                    core.complete_primitive_transition(float(step.reward))
+                    if bool(step.terminated):
+                        if primitive_time != HORIZON - 1 or step.next_transaction is not None:
+                            raise RuntimeError("generic-SHORT terminal boundary is inconsistent")
+                        core.close_terminal()
+                        next_snapshots.append(None)
+                    else:
+                        if step.next_transaction is None:
+                            raise RuntimeError("nonterminal event step is missing its next transaction")
+                        bound = core.bind_due_frontier(step.next_transaction)
+                        core.apply_transaction(bound)
+                        next_snapshots.append(bound.post_membership_pre_policy_snapshot)
+                snapshots = next_snapshots
+                total_steps += num_envs
+
+            if intrinsic_applied_count != 0:
+                raise RuntimeError("Stage C intrinsic-applied count must be zero")
+            for _ppo_pass in range(4):
+                metrics = apply_event_ppo_update(
+                    cores,
+                    high_optimizer=high_optimizer,
+                    low_optimizer=low_optimizer,
+                )
+                high_optimizer_steps += 1
+                low_optimizer_steps += 1
+            if writer is not None:
+                for name, value in metrics.items():
+                    writer.add_scalar(f"Event/{name}", value, total_steps)
+                writer.add_scalar("Event/IntrinsicAppliedCount", 0.0, total_steps)
+                writer.flush()
+            emit(
+                args,
+                "event_update "
+                f"mode={config.event_architecture_mode} update={update_idx}/250 "
+                f"steps={total_steps} high_optimizer_steps={high_optimizer_steps} "
+                f"low_optimizer_steps={low_optimizer_steps} intrinsic_applied_count=0",
+            )
+        if (
+            total_steps != 320_000
+            or high_optimizer_steps != 1_000
+            or low_optimizer_steps != 1_000
+            or next_episode_id != 4_000
+        ):
+            raise RuntimeError("Stage C exposure ledger is not exact")
+        return model_owner, total_steps, update_idx
+    finally:
+        collector.close()
+
+
 def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProcessAgent, int, int]:
     if is_variable_roster_event(config):
-        dispatch_variable_roster_event_boundary(config)
+        enforce_variable_roster_event_resume_boundary(config, args)
+        if not hasattr(config, "scenario") or not hasattr(args, "rollout_length"):
+            dispatch_variable_roster_event_boundary(config)
+        return _run_variable_roster_event_branch(config, args, writer)
     num_envs = max(int(args.num_envs), 1)
     collector = create_collector(config, args, scale_mode="train", num_envs=num_envs)
     try:
@@ -5350,6 +5547,7 @@ def main() -> None:
     config = load_config(args.config, args.preset or None)
     config.scenario = normalize_scenario(args.scenario)
     apply_standalone_overrides(config, args)
+    enforce_variable_roster_event_resume_boundary(config, args)
     metadata = None
     if args.resume_from:
         metadata = load_checkpoint_metadata(args.resume_from)
@@ -5357,7 +5555,11 @@ def main() -> None:
     if is_variable_roster_event(config):
         enforce_variable_roster_event_contract(config, args, metadata)
         try:
-            dispatch_variable_roster_event_boundary(config)
+            if args.dry_run_env_steps > 0:
+                raise ValueError("event mode has no environment dry-run path")
+            if args.mode != "train":
+                raise ValueError("Stage C evaluation remains runner/analyzer-owned")
+            train_loop(config, args, writer)
         finally:
             if writer is not None:
                 writer.close()
