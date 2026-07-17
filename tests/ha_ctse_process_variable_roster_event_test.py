@@ -32,7 +32,10 @@ from ha_ctse_process.variable_roster_event import (
     MembershipTransaction,
     PackedActiveBatch,
     VariableRosterEventCore,
+    apply_event_ppo_update,
+    batched_low_step,
     centered_logits,
+    pack_event_ppo_data,
 )
 
 
@@ -51,7 +54,17 @@ FEATURES = {
 }
 
 
-def make_core(mode="f1", *, model_seed=17, opportunity_seed=142):
+def make_core(
+    mode="f1",
+    *,
+    model_seed=17,
+    opportunity_seed=142,
+    action_seed=61,
+    rng_episode_id=0,
+    environment_index=0,
+    shared_models_from=None,
+    device="cpu",
+):
     torch.manual_seed(int(model_seed))
     return VariableRosterEventCore(
         architecture_mode=mode,
@@ -66,10 +79,13 @@ def make_core(mode="f1", *, model_seed=17, opportunity_seed=142):
         skill_embedding_dim=5,
         gamma=0.9,
         gae_lambda=0.8,
+        environment_index=environment_index,
         opportunity_seed=opportunity_seed,
         frontier_seed=51,
-        action_seed=61,
-        device="cpu",
+        action_seed=action_seed,
+        rng_episode_id=rng_episode_id,
+        device=device,
+        shared_models_from=shared_models_from,
     )
 
 
@@ -444,27 +460,34 @@ def test_f0_f1_capacity_match_reduction_and_constructive_common_support_control(
 
 
 def _replay_low_chunk(core, rows):
+    device = core.device
     observations = torch.tensor(
-        np.stack([row.observation for row in rows]), dtype=torch.float32
+        np.stack([row.observation for row in rows]),
+        dtype=torch.float32,
+        device=device,
     ).unsqueeze(1)
-    skills = torch.tensor([row.skill for row in rows], dtype=torch.long).unsqueeze(1)
+    skills = torch.tensor(
+        [row.skill for row in rows], dtype=torch.long, device=device
+    ).unsqueeze(1)
     actions = torch.tensor(
-        np.stack([row.action for row in rows]), dtype=torch.long
+        np.stack([row.action for row in rows]), dtype=torch.long, device=device
     ).reshape(len(rows), 1)
-    valid = torch.ones(len(rows), 1)
-    reset = torch.ones(len(rows), 1)
+    valid = torch.ones(len(rows), 1, device=device)
+    reset = torch.ones(len(rows), 1, device=device)
     actor_logp, _ = core.low_actor.actor_replay(
         observations,
         skills,
         actions,
-        torch.tensor(rows[0].actor_hidden_before).reshape(1, -1),
+        torch.tensor(rows[0].actor_hidden_before, device=device).reshape(1, -1),
         valid,
         reset,
     )
     assert torch.max(
         torch.abs(
             actor_logp[:, 0]
-            - torch.tensor([row.old_log_probability for row in rows])
+            - torch.tensor(
+                [row.old_log_probability for row in rows], device=device
+            )
         )
     ).item() <= 1.0e-6
 
@@ -472,19 +495,22 @@ def _replay_low_chunk(core, rows):
         torch.tensor(
             np.stack([row.critic_member_features for row in rows]),
             dtype=torch.float32,
+            device=device,
         ).unsqueeze(1),
         skills,
         torch.tensor(
             np.stack([row.critic_source_summary for row in rows]),
             dtype=torch.float32,
+            device=device,
         ).unsqueeze(1),
-        torch.tensor(rows[0].critic_hidden_before).reshape(1, -1),
+        torch.tensor(rows[0].critic_hidden_before, device=device).reshape(1, -1),
         valid,
         reset,
     )
     assert torch.max(
         torch.abs(
-            critic_values[:, 0] - torch.tensor([row.old_value for row in rows])
+            critic_values[:, 0]
+            - torch.tensor([row.old_value for row in rows], device=device)
         )
     ).item() <= 1.0e-6
 
@@ -683,3 +709,287 @@ def test_event_dispatch_is_early_fail_closed_and_legacy_signature_is_unchanged(m
     assert signature_before == {
         name: tuple(value.shape) for name, value in legacy_after.state_dict().items()
     }
+
+
+def _low_equivalence_groups(device="cpu"):
+    scalar = [
+        make_core(
+            "f1",
+            model_seed=811,
+            action_seed=901,
+            rng_episode_id=11,
+            environment_index=0,
+            device=device,
+        ),
+        make_core(
+            "f1",
+            model_seed=811,
+            action_seed=902,
+            rng_episode_id=12,
+            environment_index=1,
+            device=device,
+        ),
+    ]
+    batched_owner = make_core(
+        "f1",
+        model_seed=811,
+        action_seed=901,
+        rng_episode_id=11,
+        environment_index=0,
+        device=device,
+    )
+    batched = [
+        batched_owner,
+        make_core(
+            "f1",
+            model_seed=999,
+            action_seed=902,
+            rng_episode_id=12,
+            environment_index=1,
+            shared_models_from=batched_owner,
+            device=device,
+        ),
+    ]
+    for group in (scalar, batched):
+        initial_join(group[0], keys=("a",), actions={"a": 0})
+        initial_join(
+            group[1],
+            keys=("a", "b", "c"),
+            actions={"a": 0, "b": 1, "c": 2},
+        )
+    keys = (("a",), ("a", "b", "c"))
+    return scalar, batched, keys
+
+
+def _assert_low_row_equal(left, right):
+    for item in fields(type(left)):
+        lhs = getattr(left, item.name)
+        rhs = getattr(right, item.name)
+        if isinstance(lhs, np.ndarray):
+            assert np.allclose(lhs, rhs, atol=1.0e-6, rtol=0.0), item.name
+        elif isinstance(lhs, float):
+            assert lhs == pytest.approx(rhs, abs=1.0e-6), item.name
+        else:
+            assert lhs == rhs, item.name
+
+
+@pytest.mark.parametrize("device", ("cpu", "cuda"))
+def test_cross_environment_ragged_low_batch_matches_scalar_deterministic(device):
+    if device == "cuda" and not torch.cuda.is_available():
+        pytest.skip("CUDA is unavailable")
+    scalar, batched, keys = _low_equivalence_groups(device)
+    scalar_results = [
+        core.low_step(boundary(core, active), deterministic=True)
+        for core, active in zip(scalar, keys)
+    ]
+    snapshots = [boundary(core, active) for core, active in zip(batched, keys)]
+    batch_result = batched_low_step(batched, snapshots, deterministic=True)
+    for core_index, (scalar_result, packed_result) in enumerate(
+        zip(scalar_results, batch_result.per_core)
+    ):
+        assert torch.equal(scalar_result[0], packed_result[0])
+        assert torch.allclose(
+            scalar_result[1], packed_result[1], atol=1.0e-6, rtol=0.0
+        )
+        assert torch.allclose(
+            scalar_result[2], packed_result[2], atol=1.0e-6, rtol=0.0
+        )
+        expected_routed = {
+            key: int(scalar_result[0][index])
+            for index, key in enumerate(keys[core_index])
+        }
+        assert batch_result.routed_actions[core_index] == expected_routed
+        assert tuple(batch_result.routed_actions[core_index]) == keys[core_index]
+        assert len(scalar[core_index].low_ledger) == len(
+            batched[core_index].low_ledger
+        )
+        for left, right in zip(
+            scalar[core_index].low_ledger, batched[core_index].low_ledger
+        ):
+            _assert_low_row_equal(left, right)
+            assert np.allclose(
+                scalar[core_index].records[left.lifecycle_key].low_actor_hidden,
+                batched[core_index].records[right.lifecycle_key].low_actor_hidden,
+                atol=1.0e-6,
+                rtol=0.0,
+            )
+            assert np.allclose(
+                scalar[core_index].records[left.lifecycle_key].low_critic_hidden,
+                batched[core_index].records[right.lifecycle_key].low_critic_hidden,
+                atol=1.0e-6,
+                rtol=0.0,
+            )
+
+
+@pytest.mark.parametrize("device", ("cpu", "cuda"))
+def test_cross_environment_stochastic_uniforms_preserve_rng_and_replay(device):
+    if device == "cuda" and not torch.cuda.is_available():
+        pytest.skip("CUDA is unavailable")
+    scalar, batched, keys = _low_equivalence_groups(device)
+    scalar_results = [
+        core.low_step(boundary(core, active), deterministic=False)
+        for core, active in zip(scalar, keys)
+    ]
+    snapshots = [boundary(core, active) for core, active in zip(batched, keys)]
+    batch_result = batched_low_step(batched, snapshots, deterministic=False)
+    for core_index, (scalar_result, packed_result) in enumerate(
+        zip(scalar_results, batch_result.per_core)
+    ):
+        assert torch.equal(scalar_result[0], packed_result[0])
+        assert torch.allclose(
+            scalar_result[1], packed_result[1], atol=1.0e-6, rtol=0.0
+        )
+        assert np.array_equal(
+            scalar[core_index].action_rng.random(8),
+            batched[core_index].action_rng.random(8),
+        )
+        for left, right in zip(
+            scalar[core_index].low_ledger, batched[core_index].low_ledger
+        ):
+            assert left.policy_action_uniform == right.policy_action_uniform
+            _assert_low_row_equal(left, right)
+        for row in batched[core_index].low_ledger:
+            _replay_low_chunk(batched[core_index], [row])
+
+
+def _make_closed_ppo_group(model_seed, device="cpu"):
+    owner = make_core(
+        "f1",
+        model_seed=model_seed,
+        action_seed=1001,
+        rng_episode_id=21,
+        device=device,
+    )
+    other = make_core(
+        "f1",
+        model_seed=model_seed + 1,
+        action_seed=1002,
+        rng_episode_id=22,
+        environment_index=1,
+        shared_models_from=owner,
+        device=device,
+    )
+    cores = [owner, other]
+    keys = (("a", "b"), ("a", "b", "c"))
+    initial_join(owner, keys=keys[0], actions={"a": 0, "b": 1})
+    initial_join(
+        other,
+        keys=keys[1],
+        actions={"a": 0, "b": 1, "c": 2},
+    )
+    for step, reward in enumerate((0.0, 0.25, -0.1, 1.0, 0.5)):
+        for core_index, (core, active) in enumerate(zip(cores, keys)):
+            if core_index == 1 and step >= 2:
+                continue
+            core.low_step(boundary(core, active), deterministic=True)
+            core.complete_primitive_transition(reward)
+    for core in cores:
+        core.close_terminal()
+    return cores
+
+
+def _event_optimizers(cores):
+    owner = cores[0]
+    high = torch.optim.Adam(
+        tuple(owner.commitment_model.parameters())
+        + tuple(owner.event_critic.parameters()),
+        lr=3.0e-4,
+    )
+    low = torch.optim.Adam(
+        tuple(owner.low_actor.parameters()) + tuple(owner.low_critic.parameters()),
+        lr=3.0e-4,
+    )
+    return high, low
+
+
+def _event_parameter_state(cores):
+    owner = cores[0]
+    return {
+        f"{prefix}.{name}": tensor.detach().clone()
+        for prefix, module in (
+            ("commitment", owner.commitment_model),
+            ("event_critic", owner.event_critic),
+            ("low_actor", owner.low_actor),
+            ("low_critic", owner.low_critic),
+        )
+        for name, tensor in module.state_dict().items()
+    }
+
+
+@pytest.mark.parametrize("device", ("cpu", "cuda"))
+def test_one_time_packed_ppo_matches_reference_and_reuses_for_ppo4(device):
+    if device == "cuda" and not torch.cuda.is_available():
+        pytest.skip("CUDA is unavailable")
+    reference = _make_closed_ppo_group(1201, device)
+    packed_cores = _make_closed_ppo_group(1201, device)
+    reference_high, reference_low = _event_optimizers(reference)
+    packed_high, packed_low = _event_optimizers(packed_cores)
+    reference_initial = _event_parameter_state(reference)
+    packed_initial = _event_parameter_state(packed_cores)
+    assert all(
+        torch.equal(reference_initial[name], packed_initial[name])
+        for name in reference_initial
+    )
+    packed_data = pack_event_ppo_data(packed_cores)
+    assert packed_data.low.observations.ndim == 3
+    assert packed_data.low.observations.shape[1] > 1
+    chunk_lengths = packed_data.low.valid_masks.sum(dim=0)
+    assert torch.unique(chunk_lengths).numel() > 1
+    reference_metrics = apply_event_ppo_update(
+        reference,
+        high_optimizer=reference_high,
+        low_optimizer=reference_low,
+    )
+    packed_metrics = apply_event_ppo_update(
+        packed_data,
+        high_optimizer=packed_high,
+        low_optimizer=packed_low,
+    )
+    for name in (
+        "high_loss",
+        "low_loss",
+        "high_policy_loss",
+        "high_value_loss",
+        "low_policy_loss",
+        "low_value_loss",
+        "high_entropy",
+        "low_entropy",
+        "high_logp_max_error",
+        "high_value_max_error",
+        "low_logp_max_error",
+        "low_value_max_error",
+    ):
+        assert packed_metrics[name] == pytest.approx(
+            reference_metrics[name], abs=1.0e-6
+        ), name
+    assert max(
+        packed_metrics[name]
+        for name in (
+            "high_logp_max_error",
+            "high_value_max_error",
+            "low_logp_max_error",
+            "low_value_max_error",
+        )
+    ) <= 1.0e-6
+    reference_final = _event_parameter_state(reference)
+    packed_final = _event_parameter_state(packed_cores)
+    for name in reference_initial:
+        reference_delta = reference_final[name] - reference_initial[name]
+        packed_delta = packed_final[name] - packed_initial[name]
+        assert torch.allclose(
+            reference_delta, packed_delta, atol=1.0e-6, rtol=0.0
+        ), name
+
+    for _pass in range(3):
+        apply_event_ppo_update(
+            packed_data,
+            high_optimizer=packed_high,
+            low_optimizer=packed_low,
+        )
+    for optimizer in (packed_high, packed_low):
+        steps = {
+            int(state["step"].item())
+            for state in optimizer.state.values()
+            if "step" in state
+        }
+        assert steps == {4}

@@ -411,6 +411,67 @@ class EventPPOLosses:
     low_value_max_error: float
 
 
+@dataclass(frozen=True)
+class BatchedLowStepResult:
+    """Cross-environment low-policy outputs plus already-routed CPU actions."""
+
+    per_core: tuple[tuple[torch.Tensor, torch.Tensor, torch.Tensor], ...]
+    routed_actions: tuple[dict[str, int], ...]
+
+
+@dataclass(frozen=True)
+class PackedEventHighReplay:
+    core: "VariableRosterEventCore"
+    observations: torch.Tensor
+    flags: torch.Tensor
+    initial_skills: torch.Tensor
+    initial_ages: torch.Tensor
+    working_skills: torch.Tensor
+    working_ages: torch.Tensor
+    pre_hidden: torch.Tensor
+    legal_mask: torch.Tensor
+    active_high_hidden: torch.Tensor
+    critic_member_features: torch.Tensor
+    critic_global_features: torch.Tensor
+    owner_index: int
+    action: int
+    old_logp: torch.Tensor
+    old_value: torch.Tensor
+    target: torch.Tensor
+    advantage: torch.Tensor
+
+
+@dataclass(frozen=True)
+class PackedEventLowReplay:
+    core: "VariableRosterEventCore"
+    observations: torch.Tensor
+    skills: torch.Tensor
+    actions: torch.Tensor
+    actor_initial_hidden: torch.Tensor
+    valid_masks: torch.Tensor
+    reset_masks: torch.Tensor
+    active_member_features: torch.Tensor
+    active_skills: torch.Tensor
+    active_masks: torch.Tensor
+    focal_indices: torch.Tensor
+    global_features: torch.Tensor
+    critic_initial_hidden: torch.Tensor
+    old_logp: torch.Tensor
+    old_value: torch.Tensor
+    advantages: torch.Tensor
+    targets: torch.Tensor
+    row_count: int
+
+
+@dataclass(frozen=True)
+class PackedEventPPOData:
+    """Immutable rollout tensors reused by every PPO pass."""
+
+    cores: tuple["VariableRosterEventCore", ...]
+    high: tuple[PackedEventHighReplay, ...]
+    low: PackedEventLowReplay
+
+
 class EventCommitmentPolicy(nn.Module):
     """One parameter graph used by both F0 and F1."""
 
@@ -780,6 +841,8 @@ class EventLowActor(nn.Module):
         initial_hidden: torch.Tensor,
         valid_masks: torch.Tensor,
         reset_masks: torch.Tensor,
+        *,
+        return_entropy_rows: bool = False,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         observations = observations.to(dtype=torch.float32, device=self.device)
         skills = skills.to(dtype=torch.long, device=self.device)
@@ -804,11 +867,19 @@ class EventLowActor(nn.Module):
             if self.action_space_type == "discrete"
             else actions.reshape(-1, self.action_dim)
         )
-        logp, entropy = self.actor_act.evaluate_actions(
-            features.reshape(-1, self.hidden_dim),
-            flat_actions,
-            active_masks=valid_masks.reshape(-1, 1),
-        )
+        flat_features = features.reshape(-1, self.hidden_dim)
+        if return_entropy_rows:
+            if self.action_space_type != "discrete":
+                raise ValueError("row-wise event entropy is restricted to discrete actions")
+            distribution = self.actor_act.action_out(flat_features)
+            logp = distribution.log_probs(flat_actions)
+            entropy = distribution.entropy().reshape(observations.shape[:2])
+        else:
+            logp, entropy = self.actor_act.evaluate_actions(
+                flat_features,
+                flat_actions,
+                active_masks=valid_masks.reshape(-1, 1),
+            )
         logp = self._squeeze_logp(logp).reshape(observations.shape[:2])
         return logp, entropy, final_hidden
 
@@ -866,20 +937,30 @@ class EventActiveSetLowCritic(nn.Module):
         encoded = self._member_encoded(member_features, skills)
         env_ptr = env_ptr.to(dtype=torch.long, device=self.device)
         global_features = global_features.to(dtype=torch.float32, device=self.device)
-        source = torch.empty(
-            encoded.shape[0], self.source_dim, dtype=encoded.dtype, device=self.device
+        env_count = int(env_ptr.numel()) - 1
+        if env_count <= 0 or global_features.shape[0] != env_count:
+            raise ValueError("event low critic environment pointers are malformed")
+        counts = env_ptr[1:] - env_ptr[:-1]
+        if bool(torch.any(counts <= 0).item()):
+            raise ValueError("event low critic does not admit an empty active set")
+        segment_ids = torch.repeat_interleave(
+            torch.arange(env_count, dtype=torch.long, device=self.device),
+            counts,
+            output_size=encoded.shape[0],
         )
-        for env_id in range(int(env_ptr.numel()) - 1):
-            start = int(env_ptr[env_id].item())
-            end = int(env_ptr[env_id + 1].item())
-            if end <= start:
-                raise ValueError("event low critic does not admit an empty active set")
-            set_sum = encoded[start:end].sum(dim=0)
-            count = torch.log1p(
-                torch.tensor(float(end - start), dtype=encoded.dtype, device=self.device)
-            ).reshape(1)
-            row = torch.cat((set_sum, count, global_features[env_id]), dim=0)
-            source[start:end] = row.unsqueeze(0).expand(end - start, -1)
+        if segment_ids.shape[0] != encoded.shape[0]:
+            raise ValueError("event low critic pointers do not cover active members")
+        set_sums = torch.zeros(
+            env_count,
+            self.hidden_dim,
+            dtype=encoded.dtype,
+            device=self.device,
+        ).index_add(0, segment_ids, encoded)
+        log_counts = torch.log1p(counts.to(dtype=encoded.dtype)).unsqueeze(-1)
+        per_environment_source = torch.cat(
+            (set_sums, log_counts, global_features), dim=-1
+        )
+        source = per_environment_source.index_select(0, segment_ids)
         features = self.critic_input(torch.cat((encoded, source), dim=-1))
         new_hidden = self.critic_rnn(features, hidden.to(self.device).float())
         return self.value_head(new_hidden).squeeze(-1), new_hidden, source
@@ -1827,24 +1908,26 @@ class VariableRosterEventCore:
             record for record in self.records.values() if record.status == ACTIVE
         ]
         pending_rows: dict[str, LowTransitionRow] = {}
+        for row in reversed(self.low_ledger):
+            if row.physical_time != self.physical_time:
+                break
+            if row.reward is not None:
+                continue
+            if row.lifecycle_key in pending_rows:
+                raise RuntimeError("duplicate pending low transition")
+            pending_rows[row.lifecycle_key] = row
         for record in active_records:
             if record.active_skill is None:
                 raise RuntimeError("an active lifecycle reached a primitive step without a skill")
             if record.active_gap_remaining is None:
                 raise RuntimeError("active lifecycle is missing its opportunity gap")
-            transition_rows = [
-                row
-                for row in self.low_ledger
-                if row.lifecycle_key == record.lifecycle_key
-                and row.membership_epoch == record.membership_epoch
-                and row.physical_time == self.physical_time
-                and row.reward is None
-            ]
-            if len(transition_rows) != 1:
+            row = pending_rows.get(record.lifecycle_key)
+            if row is None or row.membership_epoch != record.membership_epoch:
                 raise RuntimeError(
                     "each active lifecycle requires exactly one pending low transition"
                 )
-            pending_rows[record.lifecycle_key] = transition_rows[0]
+        if len(pending_rows) != len(active_records):
+            raise RuntimeError("pending low transitions do not match the active set")
         for record in active_records:
             pending_rows[record.lifecycle_key].reward = float(team_reward)
             record.skill_active_age += 1
@@ -1889,6 +1972,115 @@ class VariableRosterEventCore:
             )
         )
 
+    @staticmethod
+    def _low_cpu_cache(
+        *,
+        packed: PackedActiveBatch,
+        actor_hidden_before: torch.Tensor,
+        critic_hidden_before: torch.Tensor,
+        actions: torch.Tensor,
+        logp: torch.Tensor,
+        values: torch.Tensor,
+        actor_hidden: torch.Tensor,
+        critic_hidden: torch.Tensor,
+        critic_source: torch.Tensor,
+    ) -> dict[str, np.ndarray]:
+        """Transfer each low-step tensor once instead of once per active row."""
+
+        return {
+            "member_obs": packed.member_obs.detach().cpu().numpy(),
+            "skills": packed.skills.detach().cpu().numpy(),
+            "critic_member_features": packed.critic_member_features.detach()
+            .cpu()
+            .numpy(),
+            "critic_global_features": packed.critic_global_features.detach()
+            .cpu()
+            .numpy(),
+            "actor_hidden_before": actor_hidden_before.detach().cpu().numpy(),
+            "critic_hidden_before": critic_hidden_before.detach().cpu().numpy(),
+            "actions": actions.detach().cpu().numpy(),
+            "logp": logp.detach().cpu().numpy(),
+            "values": values.detach().cpu().numpy(),
+            "actor_hidden": actor_hidden.detach().cpu().numpy(),
+            "critic_hidden": critic_hidden.detach().cpu().numpy(),
+            "critic_source": critic_source.detach().cpu().numpy(),
+        }
+
+    def _record_low_step(
+        self,
+        *,
+        packed: PackedActiveBatch,
+        routing: ActiveRoutingView,
+        actions: torch.Tensor,
+        logp: torch.Tensor,
+        values: torch.Tensor,
+        actor_hidden: torch.Tensor,
+        critic_hidden: torch.Tensor,
+        critic_source: torch.Tensor,
+        actor_hidden_before: torch.Tensor,
+        critic_hidden_before: torch.Tensor,
+        sampling_uniforms: np.ndarray | None,
+        cpu: Mapping[str, np.ndarray],
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        pending_keys: set[tuple[str, int]] = set()
+        for existing in reversed(self.low_ledger):
+            if existing.physical_time != self.physical_time:
+                break
+            if existing.reward is None:
+                pending_keys.add(
+                    (existing.lifecycle_key, existing.membership_epoch)
+                )
+        for index, key in enumerate(routing.lifecycle_keys):
+            record = self.records[key]
+            pending_key = (key, record.membership_epoch)
+            if pending_key in pending_keys:
+                raise RuntimeError("duplicate low transition at one physical step")
+            chunk_pointer = sum(
+                1
+                for boundary in self.low_chunk_boundaries
+                if boundary["lifecycle_key"] == key
+                and boundary["membership_epoch"] == record.membership_epoch
+            )
+            record.low_actor_hidden = (
+                cpu["actor_hidden"][index].astype(np.float32, copy=True)
+            )
+            record.low_critic_hidden = (
+                cpu["critic_hidden"][index].astype(np.float32, copy=True)
+            )
+            action_array = np.asarray(cpu["actions"][index]).reshape(-1).copy()
+            self.low_ledger.append(
+                LowTransitionRow(
+                    lifecycle_key=key,
+                    membership_epoch=record.membership_epoch,
+                    policy_version=self.policy_version,
+                    physical_time=self.physical_time,
+                    observation=cpu["member_obs"][index].copy(),
+                    skill=int(cpu["skills"][index]),
+                    action=action_array,
+                    old_log_probability=float(cpu["logp"][index]),
+                    old_value=float(cpu["values"][index]),
+                    actor_hidden_before=cpu["actor_hidden_before"][index].copy(),
+                    critic_hidden_before=cpu["critic_hidden_before"][index].copy(),
+                    critic_member_features=cpu["critic_member_features"][index].copy(),
+                    active_critic_member_features=cpu[
+                        "critic_member_features"
+                    ].copy(),
+                    active_skills=cpu["skills"].copy(),
+                    critic_global_features=cpu["critic_global_features"][0].copy(),
+                    focal_active_index=index,
+                    critic_source_summary=cpu["critic_source"][index].copy(),
+                    policy_action_uniform=(
+                        None
+                        if sampling_uniforms is None
+                        else float(sampling_uniforms[index])
+                    ),
+                    environment_step_pointer=self.physical_time,
+                    lifecycle_chunk_pointer=chunk_pointer,
+                )
+            )
+            pending_keys.add(pending_key)
+        return actions, logp, values
+
     def low_step(
         self,
         snapshot: BoundarySnapshot,
@@ -1921,82 +2113,31 @@ class VariableRosterEventCore:
             packed.critic_global_features,
             packed.low_critic_hidden,
         )
-        for index, key in enumerate(routing.lifecycle_keys):
-            record = self.records[key]
-            if any(
-                row.lifecycle_key == key
-                and row.membership_epoch == record.membership_epoch
-                and row.physical_time == self.physical_time
-                and row.reward is None
-                for row in self.low_ledger
-            ):
-                raise RuntimeError("duplicate low transition at one physical step")
-            chunk_pointer = sum(
-                1
-                for boundary in self.low_chunk_boundaries
-                if boundary["lifecycle_key"] == key
-                and boundary["membership_epoch"] == record.membership_epoch
-            )
-            record.low_actor_hidden = (
-                actor_hidden[index].detach().cpu().numpy().astype(np.float32)
-            )
-            record.low_critic_hidden = (
-                critic_hidden[index].detach().cpu().numpy().astype(np.float32)
-            )
-            action_array = actions[index].detach().cpu().numpy().reshape(-1).copy()
-            self.low_ledger.append(
-                LowTransitionRow(
-                    lifecycle_key=key,
-                    membership_epoch=record.membership_epoch,
-                    policy_version=self.policy_version,
-                    physical_time=self.physical_time,
-                    observation=packed.member_obs[index].detach().cpu().numpy().copy(),
-                    skill=int(packed.skills[index].item()),
-                    action=action_array,
-                    old_log_probability=float(logp[index].detach().cpu()),
-                    old_value=float(values[index].detach().cpu()),
-                    actor_hidden_before=actor_hidden_before[index]
-                    .detach()
-                    .cpu()
-                    .numpy()
-                    .copy(),
-                    critic_hidden_before=critic_hidden_before[index]
-                    .detach()
-                    .cpu()
-                    .numpy()
-                    .copy(),
-                    critic_member_features=packed.critic_member_features[index]
-                    .detach()
-                    .cpu()
-                    .numpy()
-                    .copy(),
-                    active_critic_member_features=packed.critic_member_features
-                    .detach()
-                    .cpu()
-                    .numpy()
-                    .copy(),
-                    active_skills=packed.skills.detach().cpu().numpy().copy(),
-                    critic_global_features=packed.critic_global_features[0]
-                    .detach()
-                    .cpu()
-                    .numpy()
-                    .copy(),
-                    focal_active_index=index,
-                    critic_source_summary=critic_source[index]
-                    .detach()
-                    .cpu()
-                    .numpy()
-                    .copy(),
-                    policy_action_uniform=(
-                        None
-                        if sampling_uniforms is None
-                        else float(sampling_uniforms[index])
-                    ),
-                    environment_step_pointer=self.physical_time,
-                    lifecycle_chunk_pointer=chunk_pointer,
-                )
-            )
-        return actions, logp, values
+        cpu = self._low_cpu_cache(
+            packed=packed,
+            actor_hidden_before=actor_hidden_before,
+            critic_hidden_before=critic_hidden_before,
+            actions=actions,
+            logp=logp,
+            values=values,
+            actor_hidden=actor_hidden,
+            critic_hidden=critic_hidden,
+            critic_source=critic_source,
+        )
+        return self._record_low_step(
+            packed=packed,
+            routing=routing,
+            actions=actions,
+            logp=logp,
+            values=values,
+            actor_hidden=actor_hidden,
+            critic_hidden=critic_hidden,
+            critic_source=critic_source,
+            actor_hidden_before=actor_hidden_before,
+            critic_hidden_before=critic_hidden_before,
+            sampling_uniforms=sampling_uniforms,
+            cpu=cpu,
+        )
 
     def truncate_policy_version(self, snapshot: BoundarySnapshot) -> None:
         values, routing = self._critic_values(snapshot, ROLLOUT_TRUNCATION)
@@ -2374,6 +2515,154 @@ class VariableRosterEventCore:
         )
 
 
+def batched_low_step(
+    cores: Sequence[VariableRosterEventCore],
+    snapshots: Sequence[BoundarySnapshot],
+    *,
+    deterministic: bool = False,
+) -> BatchedLowStepResult:
+    """Run one ragged active-only low step across all environments.
+
+    RNG draws are still made one core at a time in input order, exactly as in
+    the scalar loop.  Model calls and device-to-host ledger transfers are
+    combined across the ragged active rows.
+    """
+
+    core_rows = tuple(cores)
+    snapshot_rows = tuple(snapshots)
+    if not core_rows or len(core_rows) != len(snapshot_rows):
+        raise ValueError("batched low step requires one snapshot per core")
+    owner = core_rows[0]
+    if any(
+        core.low_actor is not owner.low_actor or core.low_critic is not owner.low_critic
+        for core in core_rows
+    ):
+        raise ValueError("batched low step requires one shared low parameter graph")
+    if any(core.device != owner.device for core in core_rows):
+        raise ValueError("batched low step requires one shared device")
+    if any(core.action_space_type != owner.action_space_type for core in core_rows):
+        raise ValueError("batched low step requires one action-space type")
+
+    packed_rows: list[PackedActiveBatch] = []
+    routing_rows: list[ActiveRoutingView] = []
+    actor_hidden_before_rows: list[torch.Tensor] = []
+    critic_hidden_before_rows: list[torch.Tensor] = []
+    uniform_rows: list[np.ndarray] = []
+    offsets = [0]
+    for core, snapshot in zip(core_rows, snapshot_rows):
+        packed, routing = core.pack_active(snapshot)
+        if bool(torch.any(packed.skills < 0).item()):
+            raise RuntimeError("low actor cannot run before genuine joins receive SET")
+        packed_rows.append(packed)
+        routing_rows.append(routing)
+        actor_hidden_before_rows.append(packed.low_actor_hidden.clone())
+        critic_hidden_before_rows.append(packed.low_critic_hidden.clone())
+        if not deterministic and owner.action_space_type == "discrete":
+            uniform_rows.append(
+                np.asarray(
+                    core.action_rng.random(len(routing.lifecycle_keys)),
+                    dtype=np.float64,
+                )
+            )
+        offsets.append(offsets[-1] + len(routing.lifecycle_keys))
+
+    member_obs = torch.cat([packed.member_obs for packed in packed_rows], dim=0)
+    critic_member_features = torch.cat(
+        [packed.critic_member_features for packed in packed_rows], dim=0
+    )
+    skills = torch.cat([packed.skills for packed in packed_rows], dim=0)
+    actor_hidden_before = torch.cat(actor_hidden_before_rows, dim=0)
+    critic_hidden_before = torch.cat(critic_hidden_before_rows, dim=0)
+    global_features = torch.cat(
+        [packed.critic_global_features for packed in packed_rows], dim=0
+    )
+    env_ptr = torch.as_tensor(offsets, dtype=torch.long, device=owner.device)
+    sampling_uniforms = (
+        np.concatenate(uniform_rows, axis=0) if uniform_rows else None
+    )
+    with torch.no_grad():
+        actions, logp, actor_hidden = owner.low_actor.actor_step(
+            member_obs,
+            skills,
+            actor_hidden_before,
+            deterministic=deterministic,
+            sampling_uniforms=sampling_uniforms,
+        )
+        values, critic_hidden, critic_source = owner.low_critic.critic_step(
+            critic_member_features,
+            skills,
+            env_ptr,
+            global_features,
+            critic_hidden_before,
+        )
+
+    bulk_cpu = {
+        "member_obs": member_obs.detach().cpu().numpy(),
+        "skills": skills.detach().cpu().numpy(),
+        "critic_member_features": critic_member_features.detach().cpu().numpy(),
+        "critic_global_features": global_features.detach().cpu().numpy(),
+        "actor_hidden_before": actor_hidden_before.detach().cpu().numpy(),
+        "critic_hidden_before": critic_hidden_before.detach().cpu().numpy(),
+        "actions": actions.detach().cpu().numpy(),
+        "logp": logp.detach().cpu().numpy(),
+        "values": values.detach().cpu().numpy(),
+        "actor_hidden": actor_hidden.detach().cpu().numpy(),
+        "critic_hidden": critic_hidden.detach().cpu().numpy(),
+        "critic_source": critic_source.detach().cpu().numpy(),
+    }
+    per_core: list[tuple[torch.Tensor, torch.Tensor, torch.Tensor]] = []
+    routed_actions: list[dict[str, int]] = []
+    for core_index, (core, packed, routing) in enumerate(
+        zip(core_rows, packed_rows, routing_rows)
+    ):
+        start, end = offsets[core_index], offsets[core_index + 1]
+        core_uniforms = (
+            None
+            if sampling_uniforms is None
+            else sampling_uniforms[start:end]
+        )
+        cpu = {
+            "member_obs": bulk_cpu["member_obs"][start:end],
+            "skills": bulk_cpu["skills"][start:end],
+            "critic_member_features": bulk_cpu["critic_member_features"][start:end],
+            "critic_global_features": bulk_cpu["critic_global_features"][
+                core_index : core_index + 1
+            ],
+            "actor_hidden_before": bulk_cpu["actor_hidden_before"][start:end],
+            "critic_hidden_before": bulk_cpu["critic_hidden_before"][start:end],
+            "actions": bulk_cpu["actions"][start:end],
+            "logp": bulk_cpu["logp"][start:end],
+            "values": bulk_cpu["values"][start:end],
+            "actor_hidden": bulk_cpu["actor_hidden"][start:end],
+            "critic_hidden": bulk_cpu["critic_hidden"][start:end],
+            "critic_source": bulk_cpu["critic_source"][start:end],
+        }
+        result = core._record_low_step(
+            packed=packed,
+            routing=routing,
+            actions=actions[start:end],
+            logp=logp[start:end],
+            values=values[start:end],
+            actor_hidden=actor_hidden[start:end],
+            critic_hidden=critic_hidden[start:end],
+            critic_source=critic_source[start:end],
+            actor_hidden_before=actor_hidden_before[start:end],
+            critic_hidden_before=critic_hidden_before[start:end],
+            sampling_uniforms=core_uniforms,
+            cpu=cpu,
+        )
+        per_core.append(result)
+        if owner.action_space_type != "discrete":
+            raise ValueError("Stage C routed actions require a discrete low policy")
+        routed_actions.append(
+            {
+                key: int(np.asarray(cpu["actions"][index]).reshape(-1)[0])
+                for index, key in enumerate(routing.lifecycle_keys)
+            }
+        )
+    return BatchedLowStepResult(tuple(per_core), tuple(routed_actions))
+
+
 def _event_checkpoint_header(core: VariableRosterEventCore) -> dict[str, Any]:
     return {
         "architecture_mode": core.architecture_mode,
@@ -2693,6 +2982,267 @@ def _normalize_advantages(values: np.ndarray) -> np.ndarray:
     return (values - values.mean()) / (values.std() + 1e-8)
 
 
+def _pack_event_high_replay(
+    core: VariableRosterEventCore,
+    closed: ClosedEventRow,
+    token: EventTokenRow,
+    *,
+    normalized_advantage: float,
+    raw_advantage: float,
+) -> PackedEventHighReplay:
+    device = core.device
+    tensor = lambda value, dtype: torch.as_tensor(value, dtype=dtype, device=device)
+    return PackedEventHighReplay(
+        core=core,
+        observations=tensor(token.active_observations, torch.float32),
+        flags=tensor(token.event_flags, torch.bool),
+        initial_skills=tensor(token.initial_skills, torch.long),
+        initial_ages=tensor(token.initial_ages, torch.long),
+        working_skills=tensor(token.pre_token_working_skills, torch.long),
+        working_ages=tensor(token.pre_token_working_ages, torch.long),
+        pre_hidden=tensor(token.pre_token_high_hidden, torch.float32),
+        legal_mask=tensor(token.exact_legal_mask, torch.bool),
+        active_high_hidden=tensor(token.active_high_hidden, torch.float32),
+        critic_member_features=tensor(
+            token.active_critic_member_features, torch.float32
+        ),
+        critic_global_features=tensor(token.critic_global_features, torch.float32),
+        owner_index=token.active_lifecycle_keys.index(token.owner_lifecycle_key),
+        action=int(token.combined_action),
+        old_logp=torch.tensor(
+            float(token.old_token_log_probability), dtype=torch.float32, device=device
+        ),
+        old_value=torch.tensor(
+            float(closed.old_value), dtype=torch.float32, device=device
+        ),
+        target=torch.tensor(
+            float(closed.old_value + raw_advantage),
+            dtype=torch.float32,
+            device=device,
+        ),
+        advantage=torch.tensor(
+            float(normalized_advantage), dtype=torch.float32, device=device
+        ),
+    )
+
+
+def _replay_packed_event_token(
+    row: PackedEventHighReplay,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    core = row.core
+    initial_embeddings = core.commitment_model.encode_members(
+        row.observations, row.initial_skills, row.initial_ages, row.flags
+    )
+    working_embeddings = core.commitment_model.encode_members(
+        row.observations, row.working_skills, row.working_ages, row.flags
+    )
+    initial_summary = core.commitment_model.set_summary(initial_embeddings)
+    working_summary = core.commitment_model.set_summary(working_embeddings)
+    summary = initial_summary if core.architecture_mode == "f0" else working_summary
+    logits, _new_hidden = core.commitment_model.logits(
+        working_embeddings[row.owner_index], summary, row.pre_hidden
+    )
+    masked_logits = logits.masked_fill(~row.legal_mask, -torch.inf)
+    logp = F.log_softmax(masked_logits, dim=-1)
+    probability = torch.softmax(masked_logits, dim=-1)
+    entropy = -(probability[row.legal_mask] * logp[row.legal_mask]).sum()
+    values = core.event_critic.values(
+        row.critic_member_features,
+        row.working_skills,
+        row.working_ages,
+        row.flags,
+        row.active_high_hidden,
+        row.critic_global_features,
+        ORDINARY_BOUNDARY,
+    )
+    return logp[row.action], values[row.owner_index], entropy
+
+
+def _pack_event_low_replay(
+    core_rows: tuple[VariableRosterEventCore, ...],
+) -> PackedEventLowReplay:
+    owner = core_rows[0]
+    advantages_by_row: dict[tuple[int, int], float] = {}
+    returns_by_row: dict[tuple[int, int], float] = {}
+    flat_advantages: list[float] = []
+    chunks: list[tuple[int, VariableRosterEventCore, tuple[int, ...]]] = []
+    for core_index, core in enumerate(core_rows):
+        advantages, returns = core.low_gae()
+        for row_index, (advantage, target) in enumerate(zip(advantages, returns)):
+            flat_advantages.append(float(advantage))
+            returns_by_row[(core_index, row_index)] = float(target)
+        chunks.extend(
+            (core_index, core, chunk) for chunk in core.low_recurrent_chunks()
+        )
+    if not flat_advantages or not chunks:
+        raise RuntimeError("event PPO has no low transitions")
+    normalized = _normalize_advantages(
+        np.asarray(flat_advantages, dtype=np.float64)
+    )
+    cursor = 0
+    for core_index, core in enumerate(core_rows):
+        for row_index in range(len(core.low_ledger)):
+            advantages_by_row[(core_index, row_index)] = float(normalized[cursor])
+            cursor += 1
+
+    time_steps = max(len(chunk) for _index, _core, chunk in chunks)
+    batch_size = len(chunks)
+    max_active = max(
+        len(core.low_ledger[row_index].active_skills)
+        for _core_index, core, chunk in chunks
+        for row_index in chunk
+    )
+    observations = np.zeros(
+        (time_steps, batch_size, owner.obs_dim), dtype=np.float32
+    )
+    skills = np.zeros((time_steps, batch_size), dtype=np.int64)
+    actions = (
+        np.zeros((time_steps, batch_size), dtype=np.int64)
+        if owner.action_space_type == "discrete"
+        else np.zeros(
+            (time_steps, batch_size, owner.action_dim), dtype=np.float32
+        )
+    )
+    valid = np.zeros((time_steps, batch_size), dtype=np.float32)
+    reset = np.ones((time_steps, batch_size), dtype=np.float32)
+    actor_initial_hidden = np.zeros(
+        (batch_size, owner.low_hidden_dim), dtype=np.float32
+    )
+    critic_initial_hidden = np.zeros_like(actor_initial_hidden)
+    active_members = np.zeros(
+        (time_steps, batch_size, max_active, owner.critic_member_dim),
+        dtype=np.float32,
+    )
+    active_skills = np.zeros(
+        (time_steps, batch_size, max_active), dtype=np.int64
+    )
+    active_masks = np.zeros(
+        (time_steps, batch_size, max_active), dtype=np.bool_
+    )
+    # Padded timesteps use a masked-out dummy member; valid rows overwrite it.
+    active_masks[:, :, 0] = True
+    focal_indices = np.zeros((time_steps, batch_size), dtype=np.int64)
+    globals_ = np.zeros(
+        (time_steps, batch_size, owner.critic_global_dim), dtype=np.float32
+    )
+    old_logp = np.zeros((time_steps, batch_size), dtype=np.float32)
+    old_value = np.zeros((time_steps, batch_size), dtype=np.float32)
+    normalized_advantages = np.zeros_like(old_logp)
+    targets = np.zeros_like(old_logp)
+    for batch_index, (core_index, core, chunk) in enumerate(chunks):
+        rows = [core.low_ledger[row_index] for row_index in chunk]
+        actor_initial_hidden[batch_index] = rows[0].actor_hidden_before
+        critic_initial_hidden[batch_index] = rows[0].critic_hidden_before
+        for step_index, (row_index, row) in enumerate(zip(chunk, rows)):
+            active_count = len(row.active_skills)
+            if row.active_critic_member_features.shape != (
+                active_count,
+                core.critic_member_dim,
+            ):
+                raise RuntimeError("stored raw active critic rows have the wrong shape")
+            observations[step_index, batch_index] = row.observation
+            skills[step_index, batch_index] = int(row.skill)
+            if owner.action_space_type == "discrete":
+                actions[step_index, batch_index] = int(
+                    np.asarray(row.action).reshape(-1)[0]
+                )
+            else:
+                actions[step_index, batch_index] = row.action
+            valid[step_index, batch_index] = 1.0
+            active_members[
+                step_index, batch_index, :active_count
+            ] = row.active_critic_member_features
+            active_skills[
+                step_index, batch_index, :active_count
+            ] = row.active_skills
+            active_masks[step_index, batch_index, :active_count] = True
+            focal_indices[step_index, batch_index] = int(row.focal_active_index)
+            globals_[step_index, batch_index] = row.critic_global_features
+            old_logp[step_index, batch_index] = float(row.old_log_probability)
+            old_value[step_index, batch_index] = float(row.old_value)
+            normalized_advantages[step_index, batch_index] = advantages_by_row[
+                (core_index, row_index)
+            ]
+            targets[step_index, batch_index] = returns_by_row[
+                (core_index, row_index)
+            ]
+
+    device = owner.device
+    return PackedEventLowReplay(
+        core=owner,
+        observations=torch.as_tensor(observations, device=device),
+        skills=torch.as_tensor(skills, dtype=torch.long, device=device),
+        actions=torch.as_tensor(actions, device=device),
+        actor_initial_hidden=torch.as_tensor(actor_initial_hidden, device=device),
+        valid_masks=torch.as_tensor(valid, device=device),
+        reset_masks=torch.as_tensor(reset, device=device),
+        active_member_features=torch.as_tensor(active_members, device=device),
+        active_skills=torch.as_tensor(active_skills, dtype=torch.long, device=device),
+        active_masks=torch.as_tensor(active_masks, dtype=torch.bool, device=device),
+        focal_indices=torch.as_tensor(focal_indices, dtype=torch.long, device=device),
+        global_features=torch.as_tensor(globals_, device=device),
+        critic_initial_hidden=torch.as_tensor(
+            critic_initial_hidden, device=device
+        ),
+        old_logp=torch.as_tensor(old_logp, device=device),
+        old_value=torch.as_tensor(old_value, device=device),
+        advantages=torch.as_tensor(normalized_advantages, device=device),
+        targets=torch.as_tensor(targets, device=device),
+        row_count=len(flat_advantages),
+    )
+
+
+def pack_event_ppo_data(
+    cores: Iterable[VariableRosterEventCore],
+) -> PackedEventPPOData:
+    """Pack GAE, immutable replay tensors and all recurrent chunks once."""
+
+    core_rows = tuple(cores)
+    if not core_rows:
+        raise ValueError("event PPO requires at least one runtime core")
+    owner = core_rows[0]
+    if any(
+        core.commitment_model is not owner.commitment_model
+        or core.event_critic is not owner.event_critic
+        or core.low_actor is not owner.low_actor
+        or core.low_critic is not owner.low_critic
+        for core in core_rows
+    ):
+        raise ValueError("vector event runtimes must share one parameter graph")
+    entries: list[
+        tuple[VariableRosterEventCore, ClosedEventRow, EventTokenRow, float]
+    ] = []
+    for core in core_rows:
+        advantages = core.owner_gae()
+        for index, closed in enumerate(core.closed_event_rows):
+            if not closed.actor_valid:
+                continue
+            if closed.token_ledger_index is None:
+                raise RuntimeError("actor-valid owner row is missing its event token")
+            token = core.high_ledger[int(closed.token_ledger_index)]
+            entries.append((core, closed, token, float(advantages[index])))
+    if not entries:
+        raise RuntimeError("event PPO has no actor-valid high rows")
+    normalized = _normalize_advantages(
+        np.asarray([entry[3] for entry in entries], dtype=np.float64)
+    )
+    high = tuple(
+        _pack_event_high_replay(
+            core,
+            closed,
+            token,
+            normalized_advantage=float(normalized[index]),
+            raw_advantage=raw_advantage,
+        )
+        for index, (core, closed, token, raw_advantage) in enumerate(entries)
+    )
+    return PackedEventPPOData(
+        cores=core_rows,
+        high=high,
+        low=_pack_event_low_replay(core_rows),
+    )
+
+
 def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses:
     """Differentiably replay one shared F0/F1 high+low on-policy update."""
 
@@ -2904,16 +3454,132 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
     )
 
 
+def event_ppo_losses_from_packed(data: PackedEventPPOData) -> EventPPOLosses:
+    """Recompute only differentiable forwards from one frozen rollout pack."""
+
+    high_policy_terms: list[torch.Tensor] = []
+    high_value_terms: list[torch.Tensor] = []
+    high_entropies: list[torch.Tensor] = []
+    high_logp_errors: list[torch.Tensor] = []
+    high_value_errors: list[torch.Tensor] = []
+    for row in data.high:
+        logp, value, entropy = _replay_packed_event_token(row)
+        high_logp_errors.append(torch.abs(logp.detach() - row.old_logp))
+        high_value_errors.append(torch.abs(value.detach() - row.old_value))
+        ratio = torch.exp(logp - row.old_logp)
+        high_policy_terms.append(
+            -torch.minimum(
+                ratio * row.advantage,
+                torch.clamp(ratio, 1.0 - PPO_CLIP, 1.0 + PPO_CLIP)
+                * row.advantage,
+            )
+        )
+        clipped_value = row.old_value + torch.clamp(
+            value - row.old_value, -VALUE_CLIP, VALUE_CLIP
+        )
+        high_value_terms.append(
+            torch.maximum(
+                torch.square(value - row.target),
+                torch.square(clipped_value - row.target),
+            )
+        )
+        high_entropies.append(entropy)
+
+    low = data.low
+    actor_logp, low_entropy_rows, _actor_hidden = (
+        low.core.low_actor.actor_replay_with_entropy(
+            low.observations,
+            low.skills,
+            low.actions,
+            low.actor_initial_hidden,
+            low.valid_masks,
+            low.reset_masks,
+            return_entropy_rows=True,
+        )
+    )
+    values, _critic_hidden, _source = (
+        low.core.low_critic.critic_replay_from_active_sets(
+            low.active_member_features,
+            low.active_skills,
+            low.active_masks,
+            low.focal_indices,
+            low.global_features,
+            low.critic_initial_hidden,
+            low.valid_masks,
+            low.reset_masks,
+        )
+    )
+    valid = low.valid_masks > 0.0
+    current_logp = actor_logp[valid]
+    current_value = values[valid]
+    old_logp = low.old_logp[valid]
+    old_value = low.old_value[valid]
+    advantages = low.advantages[valid]
+    targets = low.targets[valid]
+    chunk_lengths = low.valid_masks.sum(dim=0)
+    chunk_entropy_sums = (low_entropy_rows * low.valid_masks).sum(dim=0)
+    low_entropy = (
+        chunk_entropy_sums * chunk_lengths
+    ).sum() / chunk_lengths.sum().clamp_min(1.0)
+    ratio = torch.exp(current_logp - old_logp)
+    low_policy = -torch.minimum(
+        ratio * advantages,
+        torch.clamp(ratio, 1.0 - PPO_CLIP, 1.0 + PPO_CLIP) * advantages,
+    ).mean()
+    clipped_value = old_value + torch.clamp(
+        current_value - old_value, -VALUE_CLIP, VALUE_CLIP
+    )
+    low_value = torch.maximum(
+        torch.square(current_value - targets),
+        torch.square(clipped_value - targets),
+    ).mean()
+    high_policy = torch.stack(high_policy_terms).mean()
+    high_value = torch.stack(high_value_terms).mean()
+    high_entropy = torch.stack(high_entropies).mean()
+    return EventPPOLosses(
+        high_loss=high_policy
+        + VALUE_COEFFICIENT * high_value
+        - ENTROPY_COEFFICIENT * high_entropy,
+        low_loss=low_policy
+        + VALUE_COEFFICIENT * low_value
+        - ENTROPY_COEFFICIENT * low_entropy,
+        high_policy_loss=high_policy,
+        high_value_loss=high_value,
+        low_policy_loss=low_policy,
+        low_value_loss=low_value,
+        high_entropy=high_entropy,
+        low_entropy=low_entropy,
+        high_rows=len(data.high),
+        low_rows=low.row_count,
+        high_logp_max_error=float(
+            torch.stack(high_logp_errors).max().detach().cpu()
+        ),
+        high_value_max_error=float(
+            torch.stack(high_value_errors).max().detach().cpu()
+        ),
+        low_logp_max_error=float(
+            torch.max(torch.abs(current_logp.detach() - old_logp)).cpu()
+        ),
+        low_value_max_error=float(
+            torch.max(torch.abs(current_value.detach() - old_value)).cpu()
+        ),
+    )
+
+
 def apply_event_ppo_update(
-    cores: Iterable[VariableRosterEventCore],
+    cores: Iterable[VariableRosterEventCore] | PackedEventPPOData,
     *,
     high_optimizer: torch.optim.Optimizer,
     low_optimizer: torch.optim.Optimizer,
 ) -> dict[str, float]:
     """Apply one shared high/low PPO pass; callers own the exposure schedule."""
 
-    core_rows = tuple(cores)
-    losses = event_ppo_losses(core_rows)
+    if isinstance(cores, PackedEventPPOData):
+        core_rows = cores.cores
+        losses = event_ppo_losses_from_packed(cores)
+    else:
+        core_rows = tuple(cores)
+        losses = event_ppo_losses(core_rows)
     owner = core_rows[0]
     high_parameters = tuple(owner.commitment_model.parameters()) + tuple(
         owner.event_critic.parameters()

@@ -24,13 +24,12 @@ earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
 The generic-`SHORT` environment passed Stage A and the Stage B direct primitive-
-AR access result is `PASS_STAGE_B_DIRECT_ACCESS`. Stage C F0/F1 is now
-launch-ready under explicit authorization: strict vector live resume,
-zero/final evaluation, forced audit, natural-prefix analysis, concurrent runner
-and terminal analyzer are implemented; the single repair/re-review loop is
-approved and all 15 focused event checks pass. The formal contract is registered
-in `memory/ExpRecord.md`; the next boundary is one exact concurrent local-CUDA
-run, not an algorithm redesign.
+AR access result is `PASS_STAGE_B_DIRECT_ACCESS`. The first authorized Stage C
+F0/F1 attempt from commit `d56bf5d` was intentionally stopped at update 31 per
+arm after a performance-only diagnosis found scalar CUDA execution and repeated
+PPO data construction. It is not scientific evidence. The contract-preserving
+throughput refactor is now reviewed and verified; the next formal attempt must
+start at update 0 under one new source commit.
 
 ## Causal Portfolio
 
@@ -52,11 +51,9 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Create and push the single Stage C pre-launch Git boundary.
-2. Start F0 and F1 concurrently on local CUDA at 320,000 transitions per arm,
-   then assign the real run root to the existing persistent monitor.
-3. On terminal state, read the result once and apply its registered branch
-   without rescue, expansion or automatic successor implementation.
+1. Create and push the reviewed performance-equivalent pre-launch Git boundary.
+2. Restart the unchanged Stage C pair from update 0; then monitor and apply its
+   registered terminal branch without rescue or automatic successor work.
 
 ## Immediate Constraints
 
@@ -84,6 +81,17 @@ F1 -> working_summary
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.
+- Retry2 stopped cleanly at 39,680/320,000 transitions and 124/1,000 high/low
+  optimizer steps per arm. Its monitor is paused and its status is
+  `stopped/performance_refactor`; it must not be resumed across source commits.
+- Batched ragged low inference and one-time PPO4 rollout packing pass all 20
+  focused CPU/CUDA checks and combined review. Concurrent 16-env steady-state
+  throughput improved from 138--161 to 44--45 seconds/update (3.1--3.6x), while
+  real-scale replay errors remained at most `4.77e-7`.
+- The first launch root without a retry suffix failed before training because
+  the restricted desktop process could not atomically replace status files.
+  The same write succeeded with full permission; `_retry2` therefore changes
+  only the launch permission boundary and preserves the frozen experiment.
 - Stage C introduces no intrinsic reward. Intrinsic-applied counts remain zero;
   the only learning reward is the registered sparse terminal external utility.
   No task field may be relabeled as intrinsic reward or shaping.

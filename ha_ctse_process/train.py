@@ -5137,7 +5137,9 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
     from ha_ctse_process.variable_roster_event import (
         EVENT_ARCHITECTURE_SCHEMA_VERSION,
         apply_event_ppo_update,
+        batched_low_step,
         event_model_only_checkpoint_payload,
+        pack_event_ppo_data,
         restore_event_model_only_checkpoint,
         restore_vector_event_checkpoint,
         vector_event_checkpoint_payload,
@@ -5443,16 +5445,8 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                     cores, snapshots = prepare_episode_batch(episode_ids)
 
                 for primitive_time in range(HORIZON):
-                    routed_actions = []
-                    for core, snapshot in zip(cores, snapshots):
-                        actions, _logp, _values = core.low_step(snapshot)
-                        routed_actions.append(
-                            {
-                                key: int(actions[index].detach().cpu())
-                                for index, key in enumerate(snapshot.keys)
-                            }
-                        )
-                    steps = collector.step_event_runtime(routed_actions)
+                    low_batch = batched_low_step(cores, snapshots)
+                    steps = collector.step_event_runtime(low_batch.routed_actions)
                     next_snapshots = []
                     for core, step in zip(cores, steps):
                         if bool(step.truncated):
@@ -5489,9 +5483,10 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                 if intrinsic_applied_count != 0:
                     raise RuntimeError("Stage C intrinsic-applied count must be zero")
                 first_pass_replay = None
+                packed_ppo = pack_event_ppo_data(cores)
                 for ppo_pass in range(4):
                     metrics = apply_event_ppo_update(
-                        cores,
+                        packed_ppo,
                         high_optimizer=high_optimizer,
                         low_optimizer=low_optimizer,
                     )

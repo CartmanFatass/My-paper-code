@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260717-f0f1-dynamic-roster-stage-c | authorized -- launch-ready | paired F0/F1 applied-prefix test | `scripts/run_dynamic_roster_stage_c.py`; timestamped run root assigned only at launch | root `runner_status.txt`, then one terminal result JSON | reviewed strict vector resume/evaluation/audit/analyzer package; 15 focused event checks pass; dry preflight reports zero environment and optimizer steps | Run the frozen concurrent local-CUDA pair once; apply the registered terminal branch without rescue or automatic successor |
+| EXP-20260717-f0f1-dynamic-roster-stage-c | launch-ready -- performance refactor verified | paired F0/F1 applied-prefix test | `scripts/run_dynamic_roster_stage_c.py`; fresh timestamped root assigned only at launch | root `runner_status.txt`, then one terminal result JSON | retry2 stopped without scientific read at update 31; reviewed batching passes 20 CPU/CUDA checks, improves concurrent throughput 3.1--3.6x, and keeps replay error `<=4.77e-7` | Start the frozen concurrent pair from update 0 under one new commit; apply the registered terminal branch without rescue or automatic successor |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
 | EXP-20260717-f0f1-dynamic-roster-stage-a | completed -- valid `PASS_STAGE_A_CARRIER` | no-learning dynamic-roster carrier | `logs/f0f1_dynamic_roster_stage_a_20260717_143552/result/stage_a_carrier.json`; implementation `044c8df` | Stage B direct-access result | all M0 true; constructive `P/S/U=1/1/1`; random positive fraction `1.0`, mean `U=0.331217`; 20,480 steps/controller, zero optimizers/intrinsic | Accept carrier only; do not infer learnability or F1 value; Stage B is now separately authorized |
 | EXP-20260717-r55-abrp-g0 | superseded before execution | retired anonymous bipartite draft | untracked draft only | none | external architecture review identified harmful unique-successor drift; no scientific run exists | Do not execute, repurpose or treat as an active numbered route |
@@ -125,10 +125,18 @@ explicitly approves the exception.
   `VALID_MIXED_UNCATEGORIZED`; the already-passed Stage A/B carrier branches
   cannot be reopened by Stage C. A concrete M0 defect authorizes only that
   operational repair. Every valid branch stops at its registered disposition.
+- Operational repair: retry2 was intentionally stopped at update 31 per arm
+  because scalar per-environment CUDA execution and four repeated PPO data
+  builds violated the expected wall-clock boundary. It is not a scientific
+  result and cannot resume across commits. The reviewed replacement batches
+  ragged low inference and reuses one immutable rollout pack across PPO4;
+  concurrent steady-state time fell from 138--161 to 44--45 seconds/update with
+  real-scale replay maxima `<=4.77e-7`.
 - Prohibited: seed/budget/model/PPO/reward/threshold rescue, extra arms or
   seeds, graph/attention/slots/team latent, task-specific intrinsic reward,
   learned ordering/timing, post-sampling repair, or automatic UAV/integration
-  promotion. Expected local-CUDA wall clock is 1--3 hours.
+  promotion. Revised expected local-CUDA wall clock is 3--5 hours including
+  zero/final evaluation and forced audit.
 - Runner/status: `scripts/run_dynamic_roster_stage_c.py`; authoritative status
   is `<run-root>/runner_status.txt`; terminal evidence is
   `<run-root>/result/stage_c_f0_f1.json`, which records the full source commit

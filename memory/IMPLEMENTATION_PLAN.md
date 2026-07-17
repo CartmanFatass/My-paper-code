@@ -119,7 +119,11 @@ Implemented boundary:
    concurrently and owns one authoritative root status and terminal result;
 6. one focused Stage C integration test covers vector resume, exact fresh
    evaluation, audit/analyzer wiring, replay evidence and zero-step dry
-   validation.
+   validation;
+7. the event branch batches ragged active members across environments and packs
+   recurrent PPO rollout tensors once for reuse across PPO4. Per-core RNG draw
+   order, old likelihoods, chunk weighting, optimizer exposure and checkpoint
+   schemas remain unchanged.
 
 The shared reward contract is frozen to sparse terminal external utility only.
 No intrinsic reward is enabled because the reviewed Stage C contract registers
@@ -133,6 +137,12 @@ optimizer steps while confirming the frozen package. The registered Stage C
 contract now authorizes one concurrent local-CUDA F0/F1 run at 320K transitions
 per arm. This authorization does not extend to reward/model/threshold changes,
 additional seeds, automatic integration or a successor route.
+
+The first formal attempt was intentionally stopped at update 31 for a
+performance-only repair and has no scientific interpretation. The reviewed
+refactor passes all 20 focused CPU/CUDA tests; a concurrent 16-env resume
+benchmark improved steady-state throughput by 3.1--3.6x with maximum replay
+error `4.77e-7`. The formal pair must restart from update 0 under one new commit.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 
