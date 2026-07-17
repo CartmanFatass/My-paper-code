@@ -88,6 +88,17 @@ controller preflight
 -> controller resumes from the first missing artifact
 ```
 
+The registered heartbeat is currently a temporary compatibility transport.
+Codex Desktop 26.715.2305.0 / codex-cli 0.145.0-alpha.18 has been observed to
+attach the sender turn's model and reasoning settings to a direct
+`send_message_to_thread` delivery even when the optional overrides are absent.
+Two opposite deliveries can therefore look like the conversations exchanged
+models. Project prompts cannot repair this product-level settings contamination.
+Until a newer runtime passes the disposable bidirectional isolation regression
+defined by `$hmasd-review-round`, use the heartbeat plus tracked artifact as the
+only automatic mailbox. Do not pass an explicit target model, edit persisted
+thread settings, auto-restore a model, or test the defect on a real reviewer.
+
 The idempotence token is `<round>:<role>:<commit>:<raw-path>`. A plugin or
 authentication failure is not a scientific reviewer response and is never
 stored in the role raw path.

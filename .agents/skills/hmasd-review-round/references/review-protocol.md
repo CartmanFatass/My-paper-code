@@ -84,6 +84,23 @@ conversation ID and role before opening the browser. The controller rejects a
 stale, missing or cross-role ACK. The exchange pauses its heartbeat after raw
 archival or a transport blocker; it never sends a prompt to the other role.
 
+This heartbeat is a compatibility boundary around a confirmed direct-message
+transport defect, not a permanent architectural preference. In the affected
+Codex Desktop/runtime version, an omitted `model`/`thinking` argument still
+allows the sender turn's settings to enter the target `UserInput`, and a reverse
+message can produce the appearance of a model swap. Therefore neither the
+controller nor an exchange thread sends a direct return message. The raw file
+and route token are the mailbox; the controller observes the artifact and the
+heartbeat state. Explicit target-model overrides, database edits and automatic
+post-send restoration are forbidden because they mutate rather than preserve
+thread identity.
+
+Direct thread messaging may replace this compatibility route only after an
+updated product passes a disposable A/B regression: different source and target
+models, omitted overrides, A-to-B and B-to-A delivery, idle and busy targets,
+exactly one delivery, unchanged effective turn settings and unchanged persisted
+thread settings. A production review round is never the regression fixture.
+
 Use route token `<round>:<role>:<commit>:<raw-path>` for idempotence. A nonempty
 scientific raw closes the token. A GitHub-plugin, authentication, model, thread
 identity or incomplete-response failure closes only the transport attempt and

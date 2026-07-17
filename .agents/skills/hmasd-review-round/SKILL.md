@@ -63,6 +63,15 @@ the review prompt directly to another Codex thread, or pass a `model` or
    controller verifies `PAUSED`, reads the exchange thread and then resumes the
    review round from the first missing artifact.
 
+The heartbeat route is a temporary compatibility transport, not the intended
+long-term messaging design. Codex Desktop 26.715.2305.0 / codex-cli
+0.145.0-alpha.18 is known to copy the sender turn's model and reasoning settings
+through `send_message_to_thread` even when its optional overrides are omitted.
+Until that product path is requalified, direct cross-thread delivery is disabled
+in both directions. Do not compensate by explicitly supplying the target model,
+editing the thread database, or restoring a model after delivery. Route content
+through the tracked artifact and wake the target from its own heartbeat.
+
 The route token is `<round>:<role>:<commit>:<raw-path>`. Reusing a closed token
 is a no-op. The Open exchange never opens the Convergent external thread, and
 the Convergent exchange never opens the Open external thread.
@@ -92,6 +101,12 @@ ACK before any browser side effect. Missing or mismatched ACK stops transport.
 After a complete raw archive or a transport blocker, pause that role's
 heartbeat. This prevents a cross-thread message from rebinding either
 conversation's model or role.
+
+Retire the heartbeat compatibility route only after a disposable two-thread
+regression demonstrates once-only bidirectional delivery between different
+models, with omitted overrides, while both the effective target turn settings
+and persisted target settings remain unchanged in idle and busy cases. Never
+run that regression on a production reviewer, monitor or controller thread.
 
 Never create a duplicate because a reviewer is busy, never run parallel
 submissions, and never change an existing conversation's model.
