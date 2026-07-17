@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260717-f0f1-dynamic-roster-stage-b | rerun-ready -- concrete M0 replay-layout repair | direct primitive-action AR access | invalid attempt `logs/f0f1_dynamic_roster_stage_b_20260717_152738`; interrupted diagnosis `logs/f0f1_dynamic_roster_stage_b_20260717_154503` | fresh exact 320K local result | merged chunks gave joint replay `1.77e-6`; original-batch replay alone still reached `1.37e-6`; contiguous original-batch slices give all five errors exactly zero on the retained 16-env checkpoint/ledger diagnostic | Commit/push the isolated layout repair, then rerun unchanged from zero; no F0/F1 inference from either invalid attempt |
+| EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
 | EXP-20260717-f0f1-dynamic-roster-stage-a | completed -- valid `PASS_STAGE_A_CARRIER` | no-learning dynamic-roster carrier | `logs/f0f1_dynamic_roster_stage_a_20260717_143552/result/stage_a_carrier.json`; implementation `044c8df` | Stage B direct-access result | all M0 true; constructive `P/S/U=1/1/1`; random positive fraction `1.0`, mean `U=0.331217`; 20,480 steps/controller, zero optimizers/intrinsic | Accept carrier only; do not infer learnability or F1 value; Stage B is now separately authorized |
 | EXP-20260717-r55-abrp-g0 | superseded before execution | retired anonymous bipartite draft | untracked draft only | none | external architecture review identified harmful unique-successor drift; no scientific run exists | Do not execute, repurpose or treat as an active numbered route |
 | EXP-20260717-r54-hfsr-g0 | completed -- Pro-confirmed `NO_ACCESS_R54_FULL_SET_REFERENCE` | supervised hybrid field-slot representation sufficiency | `logs/r54_hfsr_20260717_022452`; tracked result-review folder | complete | M0 pass; full-set token `0.9021/0.7939/0.4999/0.2762`, exact `0.6328/0.1367/0/0`; all M1 checks fail; compression unidentified | Retire exact R54 without rescue; close HFSR/full-set path and proceed only to direct-edge R55 |
@@ -122,6 +122,16 @@ explicitly approves the exception.
   otherwise identical replay slice contiguous gives exact zero for token,
   joint, value, hidden and prefix replay on its retained 16-environment
   checkpoint/ledger diagnostic.
+- Valid result: fresh run `logs/f0f1_dynamic_roster_stage_b_20260717_160956`
+  completed 320,000 transitions, 1,280,000 active rows and 1,000 optimizer
+  steps. All M0 checks pass and token, joint, value, hidden and prefix replay
+  errors are exactly zero. Final deterministic `P/S/U` is
+  `1.0/0.998210/0.999105`; final stochastic `U=0.986654`; paired deterministic
+  final-minus-zero utility CI95 is `[0.498535,0.499105,0.499593]`.
+- Interpretation: ordinary anonymous recurrent primitive control can learn the
+  frozen membership-changing testbed. This closes only the upstream access
+  prerequisite; it does not establish skill execution, F1 prefix value,
+  variable lifetime, task transfer or algorithm promotion.
 
 ## EXP-20260716-r53-rcma-g0 — Residual-Capacity Masked Autoregression
 

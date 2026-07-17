@@ -24,12 +24,11 @@ earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
 The generic-`SHORT` environment has passed the Stage A no-learning carrier.
-Stage B direct primitive-AR access remains authorized. Its first formal attempt
-was scientifically invalid because merged recurrent chunks changed CUDA batch
-geometry; an original-batch retry was stopped after strided replay slices still
-made joint log-probability error exceed `1e-6`. Contiguous original-batch replay
-now gives exact zero on the retained 16-environment checkpoint/ledger
-diagnostic; a fresh unchanged rerun is required. F0/F1 remains unauthorized.
+Stage B direct primitive-AR access is terminal valid
+`PASS_STAGE_B_DIRECT_ACCESS`. Ordinary anonymous recurrent primitive control
+learns the frozen membership-changing testbed, so direct environment access is
+no longer the blocking explanation. F0/F1 implementation and training remain
+unauthorized until the separately required implementation decision.
 
 ## Causal Portfolio
 
@@ -51,10 +50,9 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Commit and push the isolated Stage B replay-geometry repair, then rerun its
-   unchanged local 16-environment, 320,000-transition CUDA gate from zero.
-2. Interpret only the terminal Stage B result; do not implement or run F0/F1
-   unless direct access is valid.
+1. Commit and push the terminal Stage B result/disposition boundary.
+2. Stop before F0/F1 and obtain the separate implementation authorization
+   required by the accepted testbed contract.
 3. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; never execute or repurpose its gate.
 
@@ -75,10 +73,11 @@ F1 -> working_summary
   action-count prefixes and strict standalone schema-3 checkpoints. Its
   focused test passed; a CUDA fresh-to-resume smoke preserved exact ledger and
   cumulative counters, and replay maxima are below `5e-7`.
-- The first 320K attempt met every access threshold but is not scientific
-  evidence: joint replay reached `1.77e-6`. An original-batch retry was stopped
-  at update 181 when strided slices still reached `1.37e-6`; contiguous slices
-  make the retained diagnostic exact zero. Only the fresh rerun counts.
+- The valid Stage B run is
+  `logs/f0f1_dynamic_roster_stage_b_20260717_160956`: all M0 checks and replay
+  errors pass, final deterministic `P/S/U=1/0.998210/0.999105`, final
+  stochastic `U=0.986654`, and paired utility-gain CI95 is
+  `[0.498535,0.499105,0.499593]`.
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.
