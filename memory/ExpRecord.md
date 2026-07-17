@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260717-f0f1-dynamic-roster-stage-c | authorized -- launch-ready | paired F0/F1 applied-prefix test | `scripts/run_dynamic_roster_stage_c.py`; timestamped run root assigned only at launch | root `runner_status.txt`, then one terminal result JSON | reviewed strict vector resume/evaluation/audit/analyzer package; 15 focused event checks pass; dry preflight reports zero environment and optimizer steps | Run the frozen concurrent local-CUDA pair once; apply the registered terminal branch without rescue or automatic successor |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
 | EXP-20260717-f0f1-dynamic-roster-stage-a | completed -- valid `PASS_STAGE_A_CARRIER` | no-learning dynamic-roster carrier | `logs/f0f1_dynamic_roster_stage_a_20260717_143552/result/stage_a_carrier.json`; implementation `044c8df` | Stage B direct-access result | all M0 true; constructive `P/S/U=1/1/1`; random positive fraction `1.0`, mean `U=0.331217`; 20,480 steps/controller, zero optimizers/intrinsic | Accept carrier only; do not infer learnability or F1 value; Stage B is now separately authorized |
 | EXP-20260717-r55-abrp-g0 | superseded before execution | retired anonymous bipartite draft | untracked draft only | none | external architecture review identified harmful unique-successor drift; no scientific run exists | Do not execute, repurpose or treat as an active numbered route |
@@ -76,6 +77,62 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260717-f0f1-dynamic-roster-stage-c — Paired Applied-Prefix Test
+
+- Authorization: the user's 2026-07-17 instruction explicitly authorizes
+  completing launch readiness and running one local-CUDA concurrent F0/F1
+  comparison at 320,000 transitions per arm. It does not authorize algorithm,
+  reward, budget, threshold or successor-route changes.
+- Causal edge: natural earlier applied commitments -> the conditional
+  distribution of later skill commitments -> useful roster composition ->
+  terminal external utility. F0 is the strongest ordinary-MARL null and reads
+  the immutable initial summary; F1 reads the applied working summary. This
+  selector is the sole treatment difference.
+- Environment/reward: the frozen anonymous `4 -> 2 -> 6 -> 4` generic-`SHORT`
+  dynamic roster, horizon 80, persistent and reactive workloads, and terminal
+  external utility only. Intrinsic reward, shaping and task-field reward reads
+  are disabled and their applied count must remain zero.
+- Per-arm exposure: CUDA, 16 subprocess environments, rollout 80, 250 outer
+  updates, 320,000 transitions, PPO4, 1,000 high and 1,000 low optimizer steps,
+  three skills, Adam `3e-4`, gamma/lambda `0.99/0.95`, policy/value clips
+  `0.20`, value coefficient `0.50`, entropy `0.01`, and gradient clip `0.50`.
+  The two arms run concurrently; no CPU or serial fallback is allowed.
+- Seeds/ledgers: paired initialization `57057`, training task ledger `67057`,
+  opportunity/order `77057`, policy actions `87057`, evaluation `97057`, and
+  10,000 paired bootstrap resamples with seed `107057`. Training episode IDs
+  are `0..3999`; evaluation IDs are `0..255`.
+- Evaluation/nulls: exact update 0 and 250 checkpoints; 256 deterministic and
+  256 stochastic matched episodes per arm. The primary null is F0 sufficiency.
+  H2 skill-execution failure and conditional H3 exogenous timing limitation
+  remain competing explanations; H3 is read only after its upstream
+  prerequisites and cannot authorize learned timing.
+- Attribution: each final arm receives the registered 128-snapshot,
+  three-skill, two-replica, 12-step forced audit. Natural F1 rows require at
+  least 1,024 eligible later-token contexts. H1 requires prefix-TV and
+  directional-shift LCB95 both `>0.02`, max F0 TV `<=1e-6`, F1-minus-F0
+  utility-gain LCB95 `>0.03`, final `U>=0.60`, `P/S>=0.55`, and executable
+  naturally used skills. F0 sufficiency requires final `U>=0.60`,
+  `P/S>=0.55`, and final-minus-zero utility LCB95 `>0.10`.
+- M0: exact state machine and counts, no identity/future/reward leakage,
+  active-only support, finite/exact optimizer exposure, sampling/replay
+  probability/value/hidden/prefix agreement `<=1e-6`, byte-equal paired
+  initialization and graph, selector-only reduction, max F0 TV `<=1e-6`,
+  strict vector schema-3 live resume, and model-only fresh evaluation.
+- Mutually exclusive priority branches are exactly `INVALID_IMPLEMENTATION`,
+  `SUPPORT_H1_ON_TESTBED`, `SUPPORT_H0_STOP_AT_F0`,
+  `SUPPORT_H2_SKILL_LIMIT`, `CONDITIONAL_H3_TIMING_LIMIT`, or
+  `VALID_MIXED_UNCATEGORIZED`; the already-passed Stage A/B carrier branches
+  cannot be reopened by Stage C. A concrete M0 defect authorizes only that
+  operational repair. Every valid branch stops at its registered disposition.
+- Prohibited: seed/budget/model/PPO/reward/threshold rescue, extra arms or
+  seeds, graph/attention/slots/team latent, task-specific intrinsic reward,
+  learned ordering/timing, post-sampling repair, or automatic UAV/integration
+  promotion. Expected local-CUDA wall clock is 1--3 hours.
+- Runner/status: `scripts/run_dynamic_roster_stage_c.py`; authoritative status
+  is `<run-root>/runner_status.txt`; terminal evidence is
+  `<run-root>/result/stage_c_f0_f1.json`, which records the full source commit
+  and run ID.
 
 ## EXP-20260717-f0f1-dynamic-roster-stage-b — Direct Primitive-AR Access
 

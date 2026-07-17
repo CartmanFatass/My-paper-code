@@ -89,7 +89,7 @@ run `logs/f0f1_dynamic_roster_stage_b_20260717_160956` is valid
 prerequisite. Stop before F0/F1; it remains unimplemented and requires its
 separate implementation authorization.
 
-### Stage C F0/F1 Implementation — Stable, No Training Launch
+### Stage C F0/F1 Implementation — Launch-Ready, Formal Pair Authorized
 
 The bounded implementation reuses `VariableRosterEventCore` as the sole
 lifecycle, probability, credit and checkpoint owner and exposes the frozen
@@ -112,10 +112,14 @@ Implemented boundary:
    differentiable replay, high/low PPO packing, terminal closure and resume
    plumbing required by the frozen Stage C contract;
 4. `ha_ctse_process/train.py` has one event-mode branch while leaving the legacy
-   fixed-N path unchanged; vector live resume remains explicitly fail-closed;
-5. one focused Stage C integration test covers the adapter, RNG, replay and
-   fail-closed boundaries. The environment-factory change is
-   limited to exposing this exact testbed to the existing collector.
+   fixed-N path unchanged; strict 16-environment schema-3 live resume preserves
+   shared models, optimizers/normalizers, per-environment runtime/RNG/ledger
+   state, simulator snapshots and counters;
+5. `scripts/run_dynamic_roster_stage_c.py` launches the two frozen arms
+   concurrently and owns one authoritative root status and terminal result;
+6. one focused Stage C integration test covers vector resume, exact fresh
+   evaluation, audit/analyzer wiring, replay evidence and zero-step dry
+   validation.
 
 The shared reward contract is frozen to sparse terminal external utility only.
 No intrinsic reward is enabled because the reviewed Stage C contract registers
@@ -123,14 +127,12 @@ no new environment-agnostic intrinsic formula. Intrinsic-applied counts are
 zero in both arms; task state, progress, owner, wave and success fields cannot
 enter an intrinsic path.
 
-The single repair/re-review loop closed five concrete defects in shared-core
-construction, join-prefix application, exact PCG64 ledgers, resume handling and
-low-critic active-set replay. The independent reviewer approved the repaired
-diff and the controller's focused non-training run passed all 9 relevant tests;
-the test hard-blocked `Adam.step`. The 16-environment, 250-update, 320K-per-arm experiment,
-forced-skill audit, natural-prefix analysis and terminal branch analyzer remain
-outside this authorization and require a registered `ExpRecord.md` row plus a
-separate experiment launch decision.
+The launch-readiness repair/re-review loop is approved. All 15 focused event
+checks pass, and dry validation hard-blocks training, collector construction and
+optimizer steps while confirming the frozen package. The registered Stage C
+contract now authorizes one concurrent local-CUDA F0/F1 run at 320K transitions
+per arm. This authorization does not extend to reward/model/threshold changes,
+additional seeds, automatic integration or a successor route.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 

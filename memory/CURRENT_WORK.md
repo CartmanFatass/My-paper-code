@@ -24,11 +24,13 @@ earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
 The generic-`SHORT` environment passed Stage A and the Stage B direct primitive-
-AR access result is `PASS_STAGE_B_DIRECT_ACCESS`. The bounded Stage C F0/F1
-implementation is now stable at its non-training boundary: its single repair
-and re-review loop is approved and the controller's focused event checks pass.
-This is implementation evidence only; it does not authorize a smoke run, the
-paired 320K comparison, scientific interpretation, or promotion.
+AR access result is `PASS_STAGE_B_DIRECT_ACCESS`. Stage C F0/F1 is now
+launch-ready under explicit authorization: strict vector live resume,
+zero/final evaluation, forced audit, natural-prefix analysis, concurrent runner
+and terminal analyzer are implemented; the single repair/re-review loop is
+approved and all 15 focused event checks pass. The formal contract is registered
+in `memory/ExpRecord.md`; the next boundary is one exact concurrent local-CUDA
+run, not an algorithm redesign.
 
 ## Causal Portfolio
 
@@ -50,13 +52,11 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Route subsequent work through the three project skills and one canonical
-   task brief when delegation or role separation materially helps.
-2. Keep Stage C at the non-training boundary. Before any later launch, register
-   the exact experiment row and close the intentionally fail-closed vector
-   resume/output-evidence boundary under explicit experiment authority.
-3. Remove the uncommitted R55 draft only at its separately verified cleanup
-   boundary; never execute or repurpose its gate.
+1. Create and push the single Stage C pre-launch Git boundary.
+2. Start F0 and F1 concurrently on local CUDA at 320,000 transitions per arm,
+   then assign the real run root to the existing persistent monitor.
+3. On terminal state, read the result once and apply its registered branch
+   without rescue, expansion or automatic successor implementation.
 
 ## Immediate Constraints
 
@@ -65,9 +65,9 @@ F1 -> working_summary
   horizon 80 and one terminal external utility.
 - Evidence is serialized:
   `carrier -> direct primitive-AR -> paired F0/F1 -> conditional timing read`.
-- The generic-`SHORT` environment now has a typed event adapter, collector
-  transport and a shared F0/F1 execution/update branch. Focused non-training
-  evidence does not establish CUDA/subprocess training behavior.
+- The generic-`SHORT` environment has a typed event adapter, collector
+  transport and one shared F0/F1 execution/update branch. Focused evidence does
+  not pre-judge the formal CUDA/subprocess result.
 - Stage A result `logs/f0f1_dynamic_roster_stage_a_20260717_143552` is valid:
   all M0 checks pass; constructive `P=S=U=1.0`; random positive-utility fraction
   `1.0` with mean utility `0.331217`; optimizer and intrinsic reads are zero.
@@ -87,16 +87,15 @@ F1 -> working_summary
 - Stage C introduces no intrinsic reward. Intrinsic-applied counts remain zero;
   the only learning reward is the registered sparse terminal external utility.
   No task field may be relabeled as intrinsic reward or shaping.
-- The implementation allowlist is the existing event runtime, dynamic-roster
-  environment adapter, collector/event dispatch and one focused Stage C test.
-  Do not create a second policy graph or an alternative standalone trainer.
+- Strict schema-3 vector live resume now saves and restores shared models,
+  optimizers/normalizers, every environment runtime/ledger/RNG, simulator
+  snapshots and counters. Fresh evaluation is explicitly model-only.
 - Intrinsic reward remains environment-agnostic. Task fields, identities,
   roles, success predicates, progress and external reward cannot enter it.
-- The Stage C implementation is wiring and replay evidence only. Vector live
-  resume deliberately fails closed; no skill learning, F1 usefulness or UAV
-  transfer claim exists.
-- R41B remains the positive fixed-`N` source anchor. R51--R54 exact contracts
-  are retired; R55 remains an unexecuted, uncommitted draft and is not active.
+- The Stage C implementation is launch-ready but establishes no skill learning,
+  F1 usefulness or UAV-transfer claim before the registered terminal result.
+- R41B remains the positive fixed-`N` source anchor. R51--R55 exact contracts
+  are retired and inactive.
 - Do not add graph, attention, slots, critical residuals, team latent, a new
   discriminator, learned ordering, learned event time, task-specific intrinsic
   reward or reward shaping to this route.

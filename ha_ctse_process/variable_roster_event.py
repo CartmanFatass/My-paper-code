@@ -34,6 +34,25 @@ OPPORTUNITY_GAP_HIGH = 19
 AGE_REFERENCE_STEPS = 500
 SNAPSHOT_CAPABILITY_NAME = "variable_roster_event_snapshot"
 SNAPSHOT_CAPABILITY_VERSION = 1
+VECTOR_CHECKPOINT_SCHEMA_VERSION = 1
+VECTOR_RUNTIME_FIELDS = {
+    "environment_index",
+    "rng_ledger",
+    "lifecycle_table_schema",
+    "lifecycle_records",
+    "opportunity_rng_state",
+    "frontier_order_rng_state",
+    "policy_action_rng_state",
+    "open_event_trace_schema",
+    "high_ledger",
+    "closed_event_rows",
+    "low_ledger",
+    "low_chunk_boundaries",
+    "policy_version",
+    "physical_time",
+    "current_observation_state_boundary",
+    "pending_membership_transaction",
+}
 PPO_CLIP = 0.20
 VALUE_CLIP = 0.20
 VALUE_COEFFICIENT = 0.50
@@ -386,6 +405,10 @@ class EventPPOLosses:
     low_entropy: torch.Tensor
     high_rows: int
     low_rows: int
+    high_logp_max_error: float
+    high_value_max_error: float
+    low_logp_max_error: float
+    low_value_max_error: float
 
 
 class EventCommitmentPolicy(nn.Module):
@@ -1418,6 +1441,7 @@ class VariableRosterEventCore:
         *,
         teacher_order: Sequence[str] | None = None,
         teacher_actions: Mapping[str, int] | None = None,
+        deterministic_policy: bool = False,
     ) -> EventTransactionResult:
         pre = transaction.pre_membership_boundary_snapshot
         post = transaction.post_membership_pre_policy_snapshot
@@ -1477,6 +1501,7 @@ class VariableRosterEventCore:
             post,
             teacher_order=teacher_order,
             teacher_actions=teacher_actions,
+            deterministic_policy=deterministic_policy,
         )
         for key in post.keys:
             self.records[key].is_genuine_join = False
@@ -1489,6 +1514,7 @@ class VariableRosterEventCore:
         *,
         teacher_order: Sequence[str] | None,
         teacher_actions: Mapping[str, int] | None,
+        deterministic_policy: bool,
     ) -> EventTransactionResult:
         frontier = tuple(snapshot.frontier)
         if not frontier:
@@ -1569,6 +1595,8 @@ class VariableRosterEventCore:
                 if key not in teacher_actions:
                     raise ValueError("teacher actions omit a frontier owner")
                 action = int(teacher_actions[key])
+            elif deterministic_policy:
+                action = int(torch.argmax(masked_logits).item())
             else:
                 policy_action_uniform = float(self.action_rng.random())
                 action = inverse_cdf_action(
@@ -1668,6 +1696,61 @@ class VariableRosterEventCore:
     def replay_token_log_probability(self, row: EventTokenRow) -> float:
         logp, _value, _entropy = self.replay_event_token(row)
         return float(logp.detach().cpu())
+
+    def replay_token_distribution(
+        self,
+        row: EventTokenRow,
+        *,
+        summary_source: str,
+    ) -> np.ndarray:
+        """Read one stored token under an explicit initial/working summary.
+
+        This is an audit-only probability read.  It teacher-forces the stored
+        observation, support, hidden state, skills and ages and never samples
+        or mutates runtime state.
+        """
+
+        source = str(summary_source)
+        if source not in {"initial", "working"}:
+            raise ValueError("summary_source must be initial or working")
+        observations = torch.as_tensor(
+            row.active_observations, dtype=torch.float32, device=self.device
+        )
+        flags = torch.as_tensor(row.event_flags, dtype=torch.bool, device=self.device)
+        initial_skills = torch.as_tensor(
+            row.initial_skills, dtype=torch.long, device=self.device
+        )
+        initial_ages = torch.as_tensor(
+            row.initial_ages, dtype=torch.long, device=self.device
+        )
+        working_skills = torch.as_tensor(
+            row.pre_token_working_skills, dtype=torch.long, device=self.device
+        )
+        working_ages = torch.as_tensor(
+            row.pre_token_working_ages, dtype=torch.long, device=self.device
+        )
+        initial_embeddings = self.commitment_model.encode_members(
+            observations, initial_skills, initial_ages, flags
+        )
+        working_embeddings = self.commitment_model.encode_members(
+            observations, working_skills, working_ages, flags
+        )
+        owner_index = row.active_lifecycle_keys.index(row.owner_lifecycle_key)
+        summary = self.commitment_model.set_summary(
+            initial_embeddings if source == "initial" else working_embeddings
+        )
+        logits, _ = self.commitment_model.logits(
+            working_embeddings[owner_index],
+            summary,
+            torch.as_tensor(
+                row.pre_token_high_hidden,
+                dtype=torch.float32,
+                device=self.device,
+            ),
+        )
+        mask = torch.as_tensor(row.exact_legal_mask, dtype=torch.bool, device=self.device)
+        probabilities = torch.softmax(logits.masked_fill(~mask, -torch.inf), dim=-1)
+        return probabilities.detach().cpu().numpy().astype(np.float64, copy=True)
 
     def replay_event_token(
         self, row: EventTokenRow
@@ -2291,6 +2374,318 @@ class VariableRosterEventCore:
         )
 
 
+def _event_checkpoint_header(core: VariableRosterEventCore) -> dict[str, Any]:
+    return {
+        "architecture_mode": core.architecture_mode,
+        "event_architecture_schema_version": EVENT_ARCHITECTURE_SCHEMA_VERSION,
+        "opportunity_schedule_name": OPPORTUNITY_SCHEDULE_NAME,
+        "k0": OPPORTUNITY_K0,
+        "snapshot_capability_name": SNAPSHOT_CAPABILITY_NAME,
+        "snapshot_capability_version": SNAPSHOT_CAPABILITY_VERSION,
+        "architecture_state": core.architecture_state(),
+    }
+
+
+def _validate_shared_vector_cores(
+    model_owner: VariableRosterEventCore,
+    cores: Sequence[VariableRosterEventCore],
+) -> tuple[VariableRosterEventCore, ...]:
+    rows = tuple(cores)
+    if not rows:
+        raise ValueError("vector event checkpoint requires at least one runtime")
+    if any(core.architecture_state() != model_owner.architecture_state() for core in rows):
+        raise ValueError("vector event checkpoint architecture mismatch")
+    if any(core.architecture_mode != model_owner.architecture_mode for core in rows):
+        raise ValueError("vector event checkpoint mode mismatch")
+    if tuple(core.environment_index for core in rows) != tuple(range(len(rows))):
+        raise ValueError("vector event checkpoint environment indices are not canonical")
+    for core in rows:
+        if (
+            core.commitment_model is not model_owner.commitment_model
+            or core.event_critic is not model_owner.event_critic
+            or core.low_actor is not model_owner.low_actor
+            or core.low_critic is not model_owner.low_critic
+        ):
+            raise ValueError("vector event runtimes do not share one parameter graph")
+    return rows
+
+
+def vector_event_checkpoint_payload(
+    *,
+    model_owner: VariableRosterEventCore,
+    cores: Sequence[VariableRosterEventCore],
+    collector_snapshot: Mapping[str, Any],
+    current_boundaries: Sequence[Mapping[str, Any]],
+    optimizer_states: Mapping[str, Any],
+    normalizer_states: Mapping[str, Any],
+    counters: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Build one strict schema-3 checkpoint for a complete vector boundary."""
+
+    rows = _validate_shared_vector_cores(model_owner, cores)
+    boundaries = tuple(deepcopy(dict(value)) for value in current_boundaries)
+    if len(boundaries) != len(rows):
+        raise ValueError("vector event checkpoint boundary count mismatch")
+    optimizer_value = deepcopy(dict(optimizer_states))
+    normalizer_value = deepcopy(dict(normalizer_states))
+    if set(optimizer_value) != {"high", "low"}:
+        raise ValueError("vector event checkpoint requires high/low optimizers")
+    if set(normalizer_value) != {"high", "low"}:
+        raise ValueError("vector event checkpoint requires high/low normalizers")
+    counter_value = deepcopy(dict(counters))
+    required_counters = {
+        "total_steps",
+        "update_idx",
+        "high_optimizer_steps",
+        "low_optimizer_steps",
+        "next_episode_id",
+        "intrinsic_applied_count",
+    }
+    if set(counter_value) != required_counters:
+        raise ValueError("vector event checkpoint counter schema mismatch")
+    snapshot_value = deepcopy(dict(collector_snapshot))
+    if snapshot_value.get("snapshot_capability_name") != SNAPSHOT_CAPABILITY_NAME or int(
+        snapshot_value.get("snapshot_capability_version", -1)
+    ) != SNAPSHOT_CAPABILITY_VERSION:
+        raise ValueError("vector collector snapshot capability mismatch")
+    runtime_payloads = []
+    for core, boundary in zip(rows, boundaries):
+        full_bundle = core.checkpoint_payload(
+            collector_snapshot=snapshot_value,
+            current_observation_state_boundary=boundary,
+            optimizer_states=optimizer_value,
+            normalizer_states=normalizer_value,
+            pending_membership_transaction=core.pending_membership_transaction,
+        )["event_architecture"]
+        runtime_payloads.append(
+            {name: deepcopy(full_bundle[name]) for name in VECTOR_RUNTIME_FIELDS}
+        )
+    bundle = {
+        **_event_checkpoint_header(model_owner),
+        "vector_checkpoint_schema_version": VECTOR_CHECKPOINT_SCHEMA_VERSION,
+        "num_envs": len(rows),
+        "runtime_state_absent_for_fresh_eval": False,
+        "commitment_model_state": deepcopy(model_owner.commitment_model.state_dict()),
+        "event_critic_state": deepcopy(model_owner.event_critic.state_dict()),
+        "low_actor_state": deepcopy(model_owner.low_actor.state_dict()),
+        "low_critic_state": deepcopy(model_owner.low_critic.state_dict()),
+        "runtime_payloads": runtime_payloads,
+        "collector_snapshot": snapshot_value,
+        "optimizer_states": optimizer_value,
+        "normalizer_states": normalizer_value,
+        "counters": counter_value,
+    }
+    return {
+        "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+        "high_controller": EVENT_CONTROLLER,
+        "event_architecture": bundle,
+    }
+
+
+class _ValidatedNoOpCollector:
+    def restore_event_runtime(self, snapshot: Mapping[str, Any]) -> None:
+        value = dict(snapshot)
+        if value.get("snapshot_capability_name") != SNAPSHOT_CAPABILITY_NAME or int(
+            value.get("snapshot_capability_version", -1)
+        ) != SNAPSHOT_CAPABILITY_VERSION:
+            raise ValueError("runtime payload collector capability mismatch")
+
+
+def restore_vector_event_checkpoint(
+    payload: Mapping[str, Any],
+    *,
+    model_owner: VariableRosterEventCore,
+    cores: Sequence[VariableRosterEventCore],
+    collector: Any,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Strictly restore one complete vector event checkpoint."""
+
+    value = dict(payload)
+    if int(value.get("checkpoint_schema_version", -1)) != CHECKPOINT_SCHEMA_VERSION:
+        raise ValueError("vector event resume requires checkpoint schema 3")
+    if value.get("high_controller") != EVENT_CONTROLLER:
+        raise ValueError("vector event checkpoint controller mismatch")
+    bundle = value.get("event_architecture")
+    if not isinstance(bundle, Mapping):
+        raise ValueError("vector event checkpoint is missing event_architecture")
+    required = {
+        *set(_event_checkpoint_header(model_owner)),
+        "vector_checkpoint_schema_version",
+        "num_envs",
+        "runtime_state_absent_for_fresh_eval",
+        "commitment_model_state",
+        "event_critic_state",
+        "low_actor_state",
+        "low_critic_state",
+        "runtime_payloads",
+        "collector_snapshot",
+        "optimizer_states",
+        "normalizer_states",
+        "counters",
+    }
+    missing = sorted(required - set(bundle))
+    if missing:
+        raise ValueError(f"vector event checkpoint is missing mandatory fields: {missing}")
+    if bool(bundle["runtime_state_absent_for_fresh_eval"]):
+        raise ValueError("model-only fresh-evaluation checkpoint cannot resume live state")
+    header = _event_checkpoint_header(model_owner)
+    for name, expected in header.items():
+        actual = bundle[name]
+        mismatch = (
+            dict(actual) != dict(expected)
+            if isinstance(expected, Mapping)
+            else actual != expected
+        )
+        if mismatch:
+            raise ValueError(f"vector event checkpoint header mismatch: {name}")
+    rows = _validate_shared_vector_cores(model_owner, cores)
+    if int(bundle["vector_checkpoint_schema_version"]) != VECTOR_CHECKPOINT_SCHEMA_VERSION:
+        raise ValueError("vector event checkpoint schema mismatch")
+    if int(bundle["num_envs"]) != len(rows):
+        raise ValueError("vector event checkpoint environment count mismatch")
+    runtime_payloads = list(bundle["runtime_payloads"])
+    if len(runtime_payloads) != len(rows):
+        raise ValueError("vector event runtime payload count mismatch")
+    collector_snapshot = deepcopy(dict(bundle["collector_snapshot"]))
+    if collector_snapshot.get("snapshot_capability_name") != SNAPSHOT_CAPABILITY_NAME or int(
+        collector_snapshot.get("snapshot_capability_version", -1)
+    ) != SNAPSHOT_CAPABILITY_VERSION:
+        raise ValueError("vector collector snapshot capability mismatch")
+    first_optimizer: dict[str, Any] | None = None
+    first_normalizer: dict[str, Any] | None = None
+    for index, (core, runtime_payload) in enumerate(zip(rows, runtime_payloads)):
+        if not isinstance(runtime_payload, Mapping) or set(runtime_payload) != VECTOR_RUNTIME_FIELDS:
+            raise ValueError("vector event runtime field schema mismatch")
+        runtime_bundle = {
+            **header,
+            "commitment_model_state": bundle["commitment_model_state"],
+            "event_critic_state": bundle["event_critic_state"],
+            "low_actor_state": bundle["low_actor_state"],
+            "low_critic_state": bundle["low_critic_state"],
+            "optimizer_states": bundle["optimizer_states"],
+            "normalizer_states": bundle["normalizer_states"],
+            **deepcopy(dict(runtime_payload)),
+            "collector_active_presentation": deepcopy(
+                collector_snapshot.get("collector_active_presentation")
+            ),
+            "collector_pending_command_response_state": deepcopy(
+                collector_snapshot.get("collector_pending_command_response_state")
+            ),
+            "worker_environment_snapshot": deepcopy(
+                collector_snapshot.get("worker_environment_snapshot")
+            ),
+            "environment_rng_state": deepcopy(
+                collector_snapshot.get("environment_rng_state")
+            ),
+            "collector_snapshot": collector_snapshot,
+        }
+        optimizers, normalizers = core.restore_checkpoint_payload(
+            {
+                "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+                "high_controller": EVENT_CONTROLLER,
+                "event_architecture": runtime_bundle,
+            },
+            collector=collector if index == 0 else _ValidatedNoOpCollector(),
+        )
+        if first_optimizer is None:
+            first_optimizer = optimizers
+            first_normalizer = normalizers
+    assert first_optimizer is not None and first_normalizer is not None
+    if set(first_optimizer) != {"high", "low"} or set(first_normalizer) != {
+        "high",
+        "low",
+    }:
+        raise ValueError("vector event restored optimizer/normalizer schema mismatch")
+    counters = deepcopy(dict(bundle["counters"]))
+    if set(counters) != {
+        "total_steps",
+        "update_idx",
+        "high_optimizer_steps",
+        "low_optimizer_steps",
+        "next_episode_id",
+        "intrinsic_applied_count",
+    }:
+        raise ValueError("vector event restored counter schema mismatch")
+    return first_optimizer, first_normalizer, counters
+
+
+def event_model_only_checkpoint_payload(
+    *,
+    model_owner: VariableRosterEventCore,
+    normalizer_states: Mapping[str, Any],
+    total_steps: int,
+    update_idx: int,
+) -> dict[str, Any]:
+    normalizers = deepcopy(dict(normalizer_states))
+    if set(normalizers) != {"high", "low"}:
+        raise ValueError("fresh evaluation requires exact high/low normalizers")
+    bundle = {
+        **_event_checkpoint_header(model_owner),
+        "runtime_state_absent_for_fresh_eval": True,
+        "commitment_model_state": deepcopy(model_owner.commitment_model.state_dict()),
+        "event_critic_state": deepcopy(model_owner.event_critic.state_dict()),
+        "low_actor_state": deepcopy(model_owner.low_actor.state_dict()),
+        "low_critic_state": deepcopy(model_owner.low_critic.state_dict()),
+        "normalizer_states": normalizers,
+        "total_steps": int(total_steps),
+        "update_idx": int(update_idx),
+    }
+    return {
+        "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+        "high_controller": EVENT_CONTROLLER,
+        "event_architecture": bundle,
+    }
+
+
+def restore_event_model_only_checkpoint(
+    payload: Mapping[str, Any],
+    *,
+    model_owner: VariableRosterEventCore,
+) -> tuple[dict[str, Any], int, int]:
+    value = dict(payload)
+    if int(value.get("checkpoint_schema_version", -1)) != CHECKPOINT_SCHEMA_VERSION or value.get(
+        "high_controller"
+    ) != EVENT_CONTROLLER:
+        raise ValueError("fresh evaluation requires an event schema-3 checkpoint")
+    bundle = value.get("event_architecture")
+    if not isinstance(bundle, Mapping):
+        raise ValueError("fresh evaluation checkpoint is missing event_architecture")
+    required = {
+        *set(_event_checkpoint_header(model_owner)),
+        "runtime_state_absent_for_fresh_eval",
+        "commitment_model_state",
+        "event_critic_state",
+        "low_actor_state",
+        "low_critic_state",
+        "normalizer_states",
+        "total_steps",
+        "update_idx",
+    }
+    missing = sorted(required - set(bundle))
+    if missing:
+        raise ValueError(f"fresh evaluation checkpoint is missing fields: {missing}")
+    if not bool(bundle["runtime_state_absent_for_fresh_eval"]):
+        raise ValueError("fresh evaluation checkpoint must explicitly omit runtime state")
+    header = _event_checkpoint_header(model_owner)
+    for name, expected in header.items():
+        actual = bundle[name]
+        mismatch = (
+            dict(actual) != dict(expected)
+            if isinstance(expected, Mapping)
+            else actual != expected
+        )
+        if mismatch:
+            raise ValueError(f"fresh evaluation checkpoint header mismatch: {name}")
+    model_owner.commitment_model.load_state_dict(bundle["commitment_model_state"], strict=True)
+    model_owner.event_critic.load_state_dict(bundle["event_critic_state"], strict=True)
+    model_owner.low_actor.load_state_dict(bundle["low_actor_state"], strict=True)
+    model_owner.low_critic.load_state_dict(bundle["low_critic_state"], strict=True)
+    normalizers = deepcopy(dict(bundle["normalizer_states"]))
+    if set(normalizers) != {"high", "low"}:
+        raise ValueError("fresh evaluation normalizer schema mismatch")
+    return normalizers, int(bundle["total_steps"]), int(bundle["update_idx"])
+
+
 def _normalize_advantages(values: np.ndarray) -> np.ndarray:
     values = np.asarray(values, dtype=np.float64)
     if values.size == 0:
@@ -2326,6 +2721,8 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
     high_policy_terms: list[torch.Tensor] = []
     high_value_terms: list[torch.Tensor] = []
     high_entropies: list[torch.Tensor] = []
+    high_logp_max_error = 0.0
+    high_value_max_error = 0.0
     for normalized_advantage, (core, closed, token, raw_advantage) in zip(
         high_norm, high_entries
     ):
@@ -2334,6 +2731,14 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
             float(token.old_token_log_probability), dtype=logp.dtype, device=logp.device
         )
         old_value = torch.tensor(float(closed.old_value), dtype=value.dtype, device=value.device)
+        high_logp_max_error = max(
+            high_logp_max_error,
+            float(torch.abs(logp.detach() - old_logp).cpu()),
+        )
+        high_value_max_error = max(
+            high_value_max_error,
+            float(torch.abs(value.detach() - old_value).cpu()),
+        )
         target = torch.tensor(
             float(closed.old_value + raw_advantage), dtype=value.dtype, device=value.device
         )
@@ -2375,6 +2780,8 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
     low_policy_terms: list[torch.Tensor] = []
     low_value_terms: list[torch.Tensor] = []
     low_entropy_terms: list[torch.Tensor] = []
+    low_logp_max_error = 0.0
+    low_value_max_error = 0.0
     core_index_by_id = {id(core): index for index, core in enumerate(core_rows)}
     for core, chunk in low_chunks:
         rows = [core.low_ledger[index] for index in chunk]
@@ -2443,6 +2850,14 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
             row = rows[position]
             old_logp = torch.tensor(row.old_log_probability, device=core.device)
             old_value = torch.tensor(row.old_value, device=core.device)
+            low_logp_max_error = max(
+                low_logp_max_error,
+                float(torch.abs(current_logp.detach() - old_logp).cpu()),
+            )
+            low_value_max_error = max(
+                low_value_max_error,
+                float(torch.abs(current_value.detach() - old_value).cpu()),
+            )
             advantage = torch.tensor(
                 normalized_by_row[(core_index, row_index)], device=core.device
             )
@@ -2482,6 +2897,10 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
         low_entropy=low_entropy,
         high_rows=len(high_entries),
         low_rows=len(low_advantages),
+        high_logp_max_error=high_logp_max_error,
+        high_value_max_error=high_value_max_error,
+        low_logp_max_error=low_logp_max_error,
+        low_value_max_error=low_value_max_error,
     )
 
 
@@ -2523,6 +2942,10 @@ def apply_event_ppo_update(
         "low_gradient_norm": float(torch.as_tensor(low_gradient).detach().cpu()),
         "high_rows": float(losses.high_rows),
         "low_rows": float(losses.low_rows),
+        "high_logp_max_error": float(losses.high_logp_max_error),
+        "high_value_max_error": float(losses.high_value_max_error),
+        "low_logp_max_error": float(losses.low_logp_max_error),
+        "low_value_max_error": float(losses.low_value_max_error),
     }
 
 

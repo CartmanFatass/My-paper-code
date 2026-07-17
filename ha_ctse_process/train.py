@@ -8,12 +8,18 @@ only reuses the shared environment/config infrastructure.
 from __future__ import annotations
 
 import argparse
+import csv
+from copy import deepcopy
+from dataclasses import fields, is_dataclass
+from datetime import datetime
 import importlib
 import json
 import random
 from pathlib import Path
+import time
+import traceback
 from types import SimpleNamespace
-from typing import Any
+from typing import Any, Mapping, Sequence
 
 import numpy as np
 import torch
@@ -4430,27 +4436,711 @@ def log_eval_metrics(writer, total_steps: int, metrics: dict[str, float]) -> Non
 
 
 def enforce_variable_roster_event_resume_boundary(config, args: argparse.Namespace) -> None:
-    if is_variable_roster_event(config) and str(
-        getattr(args, "resume_from", "") or ""
-    ):
+    if not is_variable_roster_event(config):
+        return
+    path = str(getattr(args, "resume_from", "") or "")
+    if path and not Path(path).is_file():
         raise ValueError(
-            "Stage C vector live resume is not implemented; --resume_from fails closed"
+            "Stage C --resume_from fails closed because the checkpoint does not "
+            f"exist: {path}"
         )
 
 
-def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
-    """The event-mode branch of the existing outer train loop."""
+def _write_event_json(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(jsonable(dict(payload)), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    temporary.replace(path)
 
+
+def _write_event_arm_status(args: argparse.Namespace, **fields: Any) -> None:
+    _write_event_json(
+        Path(args.log_dir) / "arm_status.json",
+        {
+            **fields,
+            "updated": datetime.now().astimezone().isoformat(timespec="seconds"),
+        },
+    )
+
+
+def _write_event_csv_rows(
+    path: Path,
+    *,
+    fieldnames: Sequence[str],
+    rows: Sequence[Mapping[str, Any]],
+) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with temporary.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(fieldnames))
+        writer.writeheader()
+        writer.writerows([dict(row) for row in rows])
+    temporary.replace(path)
+
+
+def _event_live_checkpoint_paths(
+    checkpoint_dir: Path,
+    *,
+    update_idx: int,
+    save_interval: int,
+) -> tuple[Path, ...]:
+    index = int(update_idx)
+    interval = max(int(save_interval), 1)
+    paths = [checkpoint_dir / "latest.pt"]
+    if index == 0 or index % interval == 0 or index == 250:
+        paths.append(checkpoint_dir / f"update_{index:03d}_live.pt")
+    return tuple(paths)
+
+
+def _event_identity_normalizers() -> dict[str, Any]:
+    state = {"schema_version": 1, "enabled": False, "kind": "identity"}
+    return {"high": deepcopy(state), "low": deepcopy(state)}
+
+
+def _nested_state_maximum_difference(left: Any, right: Any) -> float:
+    if isinstance(left, (torch.Tensor, np.ndarray)) or isinstance(
+        right, (torch.Tensor, np.ndarray)
+    ):
+        lhs = torch.as_tensor(left).detach().cpu()
+        rhs = torch.as_tensor(right).detach().cpu()
+        if lhs.shape != rhs.shape:
+            return float("inf")
+        if lhs.numel() == 0:
+            return 0.0
+        return float(torch.max(torch.abs(lhs.float() - rhs.float())).item())
+    if is_dataclass(left) or is_dataclass(right):
+        if not (is_dataclass(left) and is_dataclass(right)) or type(left) is not type(
+            right
+        ):
+            return float("inf")
+        return _nested_state_maximum_difference(
+            {field.name: getattr(left, field.name) for field in fields(left)},
+            {field.name: getattr(right, field.name) for field in fields(right)},
+        )
+    if isinstance(left, Mapping) and isinstance(right, Mapping):
+        if set(left) != set(right):
+            return float("inf")
+        return max(
+            (_nested_state_maximum_difference(left[key], right[key]) for key in left),
+            default=0.0,
+        )
+    if isinstance(left, (list, tuple)) and isinstance(right, (list, tuple)):
+        if len(left) != len(right):
+            return float("inf")
+        return max(
+            (_nested_state_maximum_difference(a, b) for a, b in zip(left, right)),
+            default=0.0,
+        )
+    return 0.0 if left == right else float("inf")
+
+
+def _event_state_dict_finite(core) -> bool:
+    return all(
+        bool(torch.isfinite(tensor).all().item())
+        for module in (
+            core.commitment_model,
+            core.event_critic,
+            core.low_actor,
+            core.low_critic,
+        )
+        for tensor in module.state_dict().values()
+    )
+
+
+def _make_event_model_owner(config, device: torch.device):
+    from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT, OBSERVATION_DIM
+    from ha_ctse_process.variable_roster_event import VariableRosterEventCore
+
+    return VariableRosterEventCore(
+        architecture_mode=str(config.event_architecture_mode),
+        obs_dim=OBSERVATION_DIM,
+        critic_member_dim=OBSERVATION_DIM,
+        critic_global_dim=8,
+        n_skills=3,
+        action_dim=ACTION_COUNT,
+        member_hidden_dim=int(getattr(config, "event_member_hidden_dim", 64)),
+        high_hidden_dim=int(getattr(config, "event_high_hidden_dim", 64)),
+        low_hidden_dim=int(getattr(config, "event_low_hidden_dim", 64)),
+        skill_embedding_dim=int(getattr(config, "event_skill_embedding_dim", 16)),
+        gamma=0.99,
+        gae_lambda=0.95,
+        environment_index=-1,
+        device=device,
+    )
+
+
+def _make_event_runtime(
+    model_owner,
+    *,
+    environment_index: int,
+    episode_id: int,
+    event_master_seed: int,
+    action_master_seed: int,
+):
+    from ha_ctse_process.variable_roster_event import VariableRosterEventCore
+
+    return VariableRosterEventCore(
+        architecture_mode=model_owner.architecture_mode,
+        obs_dim=model_owner.obs_dim,
+        critic_member_dim=model_owner.critic_member_dim,
+        critic_global_dim=model_owner.critic_global_dim,
+        n_skills=model_owner.n_skills,
+        action_dim=model_owner.action_dim,
+        member_hidden_dim=model_owner.member_hidden_dim,
+        high_hidden_dim=model_owner.high_hidden_dim,
+        low_hidden_dim=model_owner.low_hidden_dim,
+        skill_embedding_dim=model_owner.skill_embedding_dim,
+        gamma=model_owner.gamma,
+        gae_lambda=model_owner.gae_lambda,
+        environment_index=int(environment_index),
+        opportunity_seed=int(event_master_seed),
+        frontier_seed=int(event_master_seed),
+        action_seed=int(action_master_seed),
+        rng_episode_id=int(episode_id),
+        opportunity_stream_id=0,
+        frontier_stream_id=1,
+        action_stream_id=0,
+        device=model_owner.device,
+        shared_models_from=model_owner,
+    )
+
+
+def _paired_mean_ci(
+    values: Sequence[float],
+    *,
+    seed: int,
+    repetitions: int = 10_000,
+) -> list[float]:
+    array = np.asarray(values, dtype=np.float64).reshape(-1)
+    if array.size <= 0 or not np.isfinite(array).all():
+        raise ValueError("bootstrap values must be finite and non-empty")
+    rng = np.random.Generator(np.random.PCG64(np.random.SeedSequence([int(seed)])))
+    draws = np.empty(int(repetitions), dtype=np.float64)
+    for index in range(int(repetitions)):
+        draws[index] = float(np.mean(array[rng.integers(0, array.size, array.size)]))
+    return [
+        float(np.quantile(draws, 0.025)),
+        float(np.mean(array)),
+        float(np.quantile(draws, 0.975)),
+    ]
+
+
+def _event_prefix_rows(core, rows, *, episode_id: int) -> list[dict[str, Any]]:
+    output: list[dict[str, Any]] = []
+    for row in rows:
+        if (
+            int(row.physical_event_time) <= 0
+            or len(row.frontier) < 2
+            or int(row.token_position) <= 0
+        ):
+            continue
+        initial = core.replay_token_distribution(row, summary_source="initial")
+        working = core.replay_token_distribution(row, summary_source="working")
+        actual_source = "initial" if core.architecture_mode == "f0" else "working"
+        replayed_actual = core.replay_token_distribution(
+            row, summary_source=actual_source
+        )
+        action = int(row.combined_action)
+        replayed_action_probability = float(replayed_actual[action])
+        replayed_action_log_probability = float(
+            np.log(max(replayed_action_probability, np.finfo(np.float64).tiny))
+        )
+        stored_action_log_probability = float(row.old_token_log_probability)
+        stored_action_probability = float(np.exp(stored_action_log_probability))
+        owner_index = row.active_lifecycle_keys.index(row.owner_lifecycle_key)
+        output.append(
+            {
+                "episode_id": int(episode_id),
+                "physical_time": int(row.physical_event_time),
+                "token_position": int(row.token_position),
+                "owner_index": int(owner_index),
+                "owner_incumbent_skill": int(
+                    row.pre_token_working_skills[owner_index]
+                ),
+                "combined_action": action,
+                "initial_skills": row.initial_skills.tolist(),
+                "working_skills": row.pre_token_working_skills.tolist(),
+                "legal_mask": row.exact_legal_mask.tolist(),
+                "p_initial": initial.tolist(),
+                "p_working": working.tolist(),
+                "p_actual_replay": replayed_actual.tolist(),
+                "stored_action_log_probability": stored_action_log_probability,
+                "replayed_action_log_probability": replayed_action_log_probability,
+                "stored_action_probability": stored_action_probability,
+                "replayed_action_probability": replayed_action_probability,
+                "actual_replay_logp_error": float(
+                    abs(replayed_action_log_probability - stored_action_log_probability)
+                ),
+                "actual_replay_probability_error": float(
+                    abs(replayed_action_probability - stored_action_probability)
+                ),
+                "working_initial_tv": float(0.5 * np.abs(working - initial).sum()),
+                "common_support_applied_vs_initial_tv": float(
+                    0.5 * np.abs(replayed_actual - initial).sum()
+                ),
+            }
+        )
+    return output
+
+
+def _summarize_event_prefix_rows(
+    prefix_rows: Sequence[Mapping[str, Any]],
+    *,
+    persistent_skill: int,
+    architecture_mode: str,
+) -> dict[str, Any]:
+    replay_logp_max = max(
+        (float(row["actual_replay_logp_error"]) for row in prefix_rows),
+        default=0.0,
+    )
+    replay_probability_max = max(
+        (float(row["actual_replay_probability_error"]) for row in prefix_rows),
+        default=0.0,
+    )
+    tv_by_episode: dict[int, list[float]] = {}
+    direction_by_episode: dict[int, list[float]] = {}
+    direction_cases = {
+        "no_persistent_in_roster": 0,
+        "other_persistent_in_roster": 0,
+        "excluded_focal_persistent": 0,
+    }
+    for row in prefix_rows:
+        episode_id = int(row["episode_id"])
+        tv_by_episode.setdefault(episode_id, []).append(
+            float(row["common_support_applied_vs_initial_tv"])
+        )
+        working_skills = [int(value) for value in row["working_skills"]]
+        owner_index = int(row["owner_index"])
+        incumbent = int(row["owner_incumbent_skill"])
+        if incumbent == int(persistent_skill):
+            direction_cases["excluded_focal_persistent"] += 1
+            continue
+        p_initial = np.asarray(row["p_initial"], dtype=np.float64)
+        p_working = np.asarray(row["p_working"], dtype=np.float64)
+        other_skills = [
+            skill for index, skill in enumerate(working_skills) if index != owner_index
+        ]
+        if int(persistent_skill) not in working_skills:
+            direction = float(
+                p_working[int(persistent_skill)] - p_initial[int(persistent_skill)]
+            )
+            direction_cases["no_persistent_in_roster"] += 1
+        elif int(persistent_skill) in other_skills:
+            direction = float(
+                p_initial[int(persistent_skill)] - p_working[int(persistent_skill)]
+            )
+            direction_cases["other_persistent_in_roster"] += 1
+        else:
+            continue
+        direction_by_episode.setdefault(episode_id, []).append(direction)
+    tv_episode_means = [
+        float(np.mean(tv_by_episode[key])) for key in sorted(tv_by_episode)
+    ]
+    direction_episode_means = [
+        float(np.mean(direction_by_episode[key]))
+        for key in sorted(direction_by_episode)
+    ]
+    return {
+        "eligible_natural_rows": len(prefix_rows),
+        "actual_replay_logp_max_error": replay_logp_max,
+        "actual_replay_probability_max_error": replay_probability_max,
+        "directional_eligible_rows": sum(
+            len(values) for values in direction_by_episode.values()
+        ),
+        "directional_case_counts": direction_cases,
+        "working_initial_tv_ci95": (
+            _paired_mean_ci(tv_episode_means, seed=107_057)
+            if tv_episode_means
+            else [0.0, 0.0, 0.0]
+        ),
+        "directional_composition_shift_ci95": (
+            _paired_mean_ci(direction_episode_means, seed=107_058)
+            if direction_episode_means
+            else [0.0, 0.0, 0.0]
+        ),
+        "f0_common_support_tv_max": (
+            max(
+                (
+                    float(row["common_support_applied_vs_initial_tv"])
+                    for row in prefix_rows
+                ),
+                default=0.0,
+            )
+            if str(architecture_mode) == "f0"
+            else None
+        ),
+        "rows": list(prefix_rows),
+    }
+
+
+@torch.no_grad()
+def _forced_event_snapshot_effects(
+    *,
+    model_owner,
+    core,
+    environment,
+    snapshot,
+    episode_id: int,
+    audit_index: int,
+) -> list[list[list[float]]]:
+    from ha_ctse_process.collectors import SyncEnvCollector
     from ha_ctse_process.dynamic_roster_testbed import (
-        ACTION_COUNT,
+        DynamicRosterEventEnv,
+        PERSIST,
+        SHORT,
+    )
+    from ha_ctse_process.variable_roster_event import make_pcg64_rng
+
+    if int(core.physical_time) <= 0 or int(core.physical_time) > 68:
+        raise ValueError("forced audit snapshot must allow exactly 12 future steps")
+    source_collector = SyncEnvCollector([environment])
+    collector_snapshot = source_collector.snapshot_event_runtime()
+    checkpoint = core.checkpoint_payload(
+        collector_snapshot=collector_snapshot,
+        current_observation_state_boundary={
+            "physical_time": int(core.physical_time),
+            "episode_id": int(episode_id),
+            "fresh_eval": True,
+        },
+        optimizer_states={"high": {}, "low": {}},
+        normalizer_states=_event_identity_normalizers(),
+        pending_membership_transaction=core.pending_membership_transaction,
+    )
+    focal_key = snapshot.keys[int(audit_index) % len(snapshot.keys)]
+    skill_results: list[list[list[float]]] = []
+    for skill in range(model_owner.n_skills):
+        replica_results: list[list[float]] = []
+        for replica in range(2):
+            branch_environment = DynamicRosterEventEnv(task_master_seed=97_057)
+            branch_collector = SyncEnvCollector([branch_environment])
+            branch_core = _make_event_runtime(
+                model_owner,
+                environment_index=0,
+                episode_id=episode_id,
+                event_master_seed=77_057,
+                action_master_seed=87_057,
+            )
+            branch_core.restore_checkpoint_payload(checkpoint, collector=branch_collector)
+            branch_core.action_rng = make_pcg64_rng(
+                87_057, int(audit_index), 100 + int(replica)
+            )
+            branch_snapshot = deepcopy(snapshot)
+            if branch_environment.environment is None:
+                raise RuntimeError("forced audit environment restore failed")
+            start_persistent = int(branch_environment.environment.persistent_units)
+            start_short = int(branch_environment.environment.short_completed_total)
+            wave = branch_environment.environment.current_wave
+            short_denominator = 1 if wave is None else max(int(wave.required_work), 1)
+            persist_actions = 0
+            short_actions = 0
+            for _step in range(12):
+                if focal_key not in branch_core.records or (
+                    branch_core.records[focal_key].status != "ACTIVE"
+                ):
+                    raise RuntimeError("forced focal lifecycle left before audit window closed")
+                branch_core.records[focal_key].active_skill = int(skill)
+                actions, _logp, _values = branch_core.low_step(
+                    branch_snapshot, deterministic=False
+                )
+                routed = {
+                    key: int(actions[index].detach().cpu())
+                    for index, key in enumerate(branch_snapshot.keys)
+                }
+                focal_action = int(routed[focal_key])
+                persist_actions += int(focal_action == PERSIST)
+                short_actions += int(focal_action == SHORT)
+                event_step = branch_environment.step_event_runtime(routed)
+                branch_core.complete_primitive_transition(float(event_step.reward))
+                if event_step.terminated or event_step.next_transaction is None:
+                    raise RuntimeError("forced audit branch ended before 12 steps")
+                bound = branch_core.bind_due_frontier(event_step.next_transaction)
+                branch_core.apply_transaction(bound, deterministic_policy=False)
+                branch_snapshot = bound.post_membership_pre_policy_snapshot
+            assert branch_environment.environment is not None
+            replica_results.append(
+                [
+                    float(persist_actions) / 12.0,
+                    float(short_actions) / 12.0,
+                    float(
+                        branch_environment.environment.persistent_units
+                        - start_persistent
+                    )
+                    / 12.0,
+                    float(
+                        branch_environment.environment.short_completed_total
+                        - start_short
+                    )
+                    / float(short_denominator),
+                ]
+            )
+        skill_results.append(replica_results)
+    return skill_results
+
+
+def _summarize_forced_audit(
+    effects: Sequence[Any],
+    *,
+    natural_skill_counts: Sequence[int],
+) -> dict[str, Any]:
+    values = np.asarray(effects, dtype=np.float64)
+    if values.shape != (128, 3, 2, 4):
+        raise ValueError(f"forced audit effect shape mismatch: {values.shape}")
+    skill_means = values.mean(axis=(0, 2))
+    persistent_order = np.argsort(skill_means[:, 0])
+    reactive_order = np.argsort(skill_means[:, 1])
+    persistent_skill = int(persistent_order[-1])
+    reactive_skill = int(reactive_order[-1])
+    persistent_margin = float(
+        skill_means[persistent_order[-1], 0]
+        - skill_means[persistent_order[-2], 0]
+    )
+    reactive_margin = float(
+        skill_means[reactive_order[-1], 1]
+        - skill_means[reactive_order[-2], 1]
+    )
+
+    def rho_for(sample: np.ndarray) -> float:
+        means = sample.mean(axis=2)
+        between = []
+        for left in range(3):
+            for right in range(left + 1, 3):
+                between.extend(np.linalg.norm(means[:, left] - means[:, right], axis=-1))
+        within = np.linalg.norm(sample[:, :, 0] - sample[:, :, 1], axis=-1).reshape(-1)
+        return float(np.median(between) / (np.median(within) + 1e-8))
+
+    rho = rho_for(values)
+    rng = np.random.Generator(np.random.PCG64(np.random.SeedSequence([107_057, 1])))
+    bootstrap = np.empty(10_000, dtype=np.float64)
+    for index in range(10_000):
+        selected = rng.integers(0, values.shape[0], values.shape[0])
+        bootstrap[index] = rho_for(values[selected])
+    counts = np.asarray(natural_skill_counts, dtype=np.float64)
+    shares = counts / max(float(counts.sum()), 1.0)
+    executable = bool(
+        float(np.quantile(bootstrap, 0.025)) > 1.0
+        and persistent_skill != reactive_skill
+        and persistent_margin > 0.15
+        and reactive_margin > 0.15
+        and bool(np.all(shares >= 0.10))
+    )
+    return {
+        "snapshot_count": 128,
+        "skills_per_snapshot": 3,
+        "replicas_per_skill": 2,
+        "steps_per_replica": 12,
+        "forced_environment_steps": 128 * 3 * 2 * 12,
+        "effect_shape": list(values.shape),
+        "rho": rho,
+        "rho_ci95": [
+            float(np.quantile(bootstrap, 0.025)),
+            rho,
+            float(np.quantile(bootstrap, 0.975)),
+        ],
+        "skill_signature_means": skill_means.tolist(),
+        "persistent_like_skill": persistent_skill,
+        "reactive_like_skill": reactive_skill,
+        "persistent_occupancy_margin": persistent_margin,
+        "reactive_occupancy_margin": reactive_margin,
+        "natural_skill_step_counts": counts.astype(np.int64).tolist(),
+        "natural_skill_step_shares": shares.tolist(),
+        "executable_naturally_used_skills": executable,
+        "effects": values.tolist(),
+    }
+
+
+@torch.no_grad()
+def _evaluate_event_model(
+    model_owner,
+    *,
+    deterministic: bool,
+    capture_prefix: bool,
+    capture_forced_audit: bool,
+) -> dict[str, Any]:
+    from ha_ctse_process.dynamic_roster_testbed import DynamicRosterEventEnv, HORIZON
+
+    modules = (
+        model_owner.commitment_model,
+        model_owner.event_critic,
+        model_owner.low_actor,
+        model_owner.low_critic,
+    )
+    previous_training = [module.training for module in modules]
+    for module in modules:
+        module.eval()
+    episode_ids = tuple(range(256))
+    persistent: list[float] = []
+    short: list[float] = []
+    utility: list[float] = []
+    prefix_rows: list[dict[str, Any]] = []
+    timing_rows: list[dict[str, Any]] = []
+    natural_skill_counts = np.zeros(model_owner.n_skills, dtype=np.int64)
+    forced_effects: list[Any] = []
+    try:
+        for episode_id in episode_ids:
+            environment = DynamicRosterEventEnv(task_master_seed=97_057)
+            core = _make_event_runtime(
+                model_owner,
+                environment_index=0,
+                episode_id=episode_id,
+                event_master_seed=77_057,
+                action_master_seed=87_057,
+            )
+            transaction = environment.reset_event_runtime(episode_id)
+            bound = core.bind_due_frontier(transaction)
+            result = core.apply_transaction(
+                bound, deterministic_policy=bool(deterministic)
+            )
+            snapshot = bound.post_membership_pre_policy_snapshot
+            if capture_prefix:
+                prefix_rows.extend(
+                    _event_prefix_rows(core, result.token_rows, episode_id=episode_id)
+                )
+            selected_times = set()
+            if capture_forced_audit and episode_id < 32:
+                selected_times = {
+                    1 + episode_id % 8,
+                    20 + episode_id % 9,
+                    40 + episode_id % 9,
+                    60 + episode_id % 8,
+                }
+            for primitive_time in range(HORIZON):
+                if primitive_time in selected_times:
+                    forced_effects.append(
+                        _forced_event_snapshot_effects(
+                            model_owner=model_owner,
+                            core=core,
+                            environment=environment,
+                            snapshot=snapshot,
+                            episode_id=episode_id,
+                            audit_index=len(forced_effects),
+                        )
+                    )
+                skills_now = core.active_skills()
+                for skill in skills_now.values():
+                    natural_skill_counts[int(skill)] += 1
+                environment_state = environment.environment
+                if environment_state is None:
+                    raise RuntimeError("evaluation environment is missing state")
+                current_wave = environment_state.current_wave
+                opportunity_keys = sorted(
+                    {row.owner_lifecycle_key for row in result.token_rows}
+                )
+                short_completed_before = int(environment_state.short_completed_total)
+                timing_row = {
+                    "episode_id": episode_id,
+                    "physical_time": primitive_time,
+                    "active_keys": list(snapshot.keys),
+                    "active_skills": [int(skills_now[key]) for key in snapshot.keys],
+                    "opportunity_keys_at_time": opportunity_keys,
+                    "wave_index": (
+                        None if current_wave is None else int(current_wave.index)
+                    ),
+                    "wave_arrival_time": (
+                        None
+                        if current_wave is None
+                        else int(current_wave.arrival_time)
+                    ),
+                    "wave_required": (
+                        0 if current_wave is None else int(current_wave.required_work)
+                    ),
+                    "wave_completed_before_action": (
+                        0 if current_wave is None else int(current_wave.completed_work)
+                    ),
+                    "persistent_owner_exists": bool(
+                        environment_state.persistent_owner is not None
+                    ),
+                }
+                actions, _logp, _values = core.low_step(
+                    snapshot, deterministic=bool(deterministic)
+                )
+                routed = {
+                    key: int(actions[index].detach().cpu())
+                    for index, key in enumerate(snapshot.keys)
+                }
+                step = environment.step_event_runtime(routed)
+                completed_this_action = max(
+                    int(step.info["short_completed_total"]) - short_completed_before,
+                    0,
+                )
+                timing_row["wave_completed_after_action"] = (
+                    0
+                    if current_wave is None
+                    else min(
+                        int(current_wave.required_work),
+                        int(timing_row["wave_completed_before_action"])
+                        + completed_this_action,
+                    )
+                )
+                timing_row["persistent_owner_exists_after_action"] = bool(
+                    environment.environment is not None
+                    and environment.environment.persistent_owner is not None
+                )
+                timing_rows.append(timing_row)
+                core.complete_primitive_transition(float(step.reward))
+                if step.terminated:
+                    core.close_terminal()
+                    persistent.append(float(step.info["persistent_score"]))
+                    short.append(float(step.info["short_score"]))
+                    utility.append(float(step.info["utility"]))
+                    break
+                if step.next_transaction is None:
+                    raise RuntimeError("evaluation nonterminal step lacks transaction")
+                bound = core.bind_due_frontier(step.next_transaction)
+                result = core.apply_transaction(
+                    bound, deterministic_policy=bool(deterministic)
+                )
+                snapshot = bound.post_membership_pre_policy_snapshot
+                if capture_prefix:
+                    prefix_rows.extend(
+                        _event_prefix_rows(
+                            core, result.token_rows, episode_id=episode_id
+                        )
+                    )
+        if len(persistent) != 256 or len(short) != 256 or len(utility) != 256:
+            raise RuntimeError("Stage C evaluation episode count is not exact")
+        payload: dict[str, Any] = {
+            "episode_ids": list(episode_ids),
+            "deterministic": bool(deterministic),
+            "persistent": persistent,
+            "short": short,
+            "utility": utility,
+            "persistent_mean": float(np.mean(persistent)),
+            "short_mean": float(np.mean(short)),
+            "utility_mean": float(np.mean(utility)),
+            "environment_steps": 256 * HORIZON,
+            "natural_skill_step_counts": natural_skill_counts.tolist(),
+            "prefix_rows": prefix_rows,
+            "timing_rows": timing_rows if capture_prefix else [],
+        }
+        if capture_forced_audit:
+            payload["forced_audit"] = _summarize_forced_audit(
+                forced_effects,
+                natural_skill_counts=natural_skill_counts,
+            )
+        return payload
+    finally:
+        for module, was_training in zip(modules, previous_training):
+            module.train(was_training)
+
+
+def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
+    """Run one exact Stage-C arm, including fresh zero/final evidence."""
+
+    from ha_ctse_process.collectors import SyncEnvCollector
+    from ha_ctse_process.dynamic_roster_testbed import (
+        DynamicRosterEventEnv,
         HORIZON,
-        OBSERVATION_DIM,
         TRAIN_LEDGER_SEED,
     )
     from ha_ctse_process.variable_roster_event import (
         EVENT_ARCHITECTURE_SCHEMA_VERSION,
-        VariableRosterEventCore,
         apply_event_ppo_update,
+        event_model_only_checkpoint_payload,
+        restore_event_model_only_checkpoint,
+        restore_vector_event_checkpoint,
+        vector_event_checkpoint_payload,
     )
 
     enforce_variable_roster_event_resume_boundary(config, args)
@@ -4459,9 +5149,11 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
     ):
         raise ValueError("variable_roster_event is restricted to generic-SHORT Stage C")
     num_envs = int(args.num_envs)
-    rollout_length = int(args.rollout_length)
-    total_timesteps = int(args.total_timesteps)
-    if (num_envs, rollout_length, total_timesteps) != (16, HORIZON, 320_000):
+    if (num_envs, int(args.rollout_length), int(args.total_timesteps)) != (
+        16,
+        HORIZON,
+        320_000,
+    ):
         raise ValueError(
             "Stage C requires num_envs=16, rollout_length=80, total_timesteps=320000"
         )
@@ -4469,34 +5161,21 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
         EVENT_ARCHITECTURE_SCHEMA_VERSION
     ):
         raise ValueError("Stage C requires event architecture schema version 1")
-    requested_device = str(getattr(args, "device", "cuda")).lower()
-    if requested_device != "cuda" or not torch.cuda.is_available():
+    if str(getattr(args, "device", "cuda")).lower() != "cuda" or not torch.cuda.is_available():
         raise RuntimeError("Stage C training requires available CUDA; CPU fallback is forbidden")
     device = torch.device("cuda")
     config.dynamic_roster_task_ledger_seed = TRAIN_LEDGER_SEED
+    output_root = Path(args.log_dir)
+    checkpoint_dir = output_root / "checkpoints"
+    evaluation_dir = output_root / "evaluation"
+    result_dir = output_root / "result"
+    for directory in (checkpoint_dir, evaluation_dir, result_dir):
+        directory.mkdir(parents=True, exist_ok=True)
 
-    model_seed = 57_057
-    event_master_seed = 77_057
-    action_master_seed = 87_057
     with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
-        torch.manual_seed(model_seed)
-        torch.cuda.manual_seed_all(model_seed)
-        model_owner = VariableRosterEventCore(
-            architecture_mode=str(config.event_architecture_mode),
-            obs_dim=OBSERVATION_DIM,
-            critic_member_dim=OBSERVATION_DIM,
-            critic_global_dim=8,
-            n_skills=3,
-            action_dim=ACTION_COUNT,
-            member_hidden_dim=int(getattr(config, "event_member_hidden_dim", 64)),
-            high_hidden_dim=int(getattr(config, "event_high_hidden_dim", 64)),
-            low_hidden_dim=int(getattr(config, "event_low_hidden_dim", 64)),
-            skill_embedding_dim=int(getattr(config, "event_skill_embedding_dim", 16)),
-            gamma=0.99,
-            gae_lambda=0.95,
-            environment_index=-1,
-            device=device,
-        )
+        torch.manual_seed(57_057)
+        torch.cuda.manual_seed_all(57_057)
+        model_owner = _make_event_model_owner(config, device)
     high_optimizer = torch.optim.Adam(
         tuple(model_owner.commitment_model.parameters())
         + tuple(model_owner.event_critic.parameters()),
@@ -4507,6 +5186,75 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
         + tuple(model_owner.low_critic.parameters()),
         lr=3e-4,
     )
+    normalizer_states = _event_identity_normalizers()
+
+    def model_state(core) -> dict[str, Any]:
+        return {
+            "commitment_model": deepcopy(core.commitment_model.state_dict()),
+            "event_critic": deepcopy(core.event_critic.state_dict()),
+            "low_actor": deepcopy(core.low_actor.state_dict()),
+            "low_critic": deepcopy(core.low_critic.state_dict()),
+        }
+
+    zero_checkpoint_path = checkpoint_dir / "update_000_eval.pt"
+    zero_evaluation_path = evaluation_dir / "update_000.json"
+    if not str(getattr(args, "resume_from", "") or ""):
+        torch.save(
+            event_model_only_checkpoint_payload(
+                model_owner=model_owner,
+                normalizer_states=normalizer_states,
+                total_steps=0,
+                update_idx=0,
+            ),
+            zero_checkpoint_path,
+        )
+        zero_owner = _make_event_model_owner(config, device)
+        restore_event_model_only_checkpoint(
+            torch.load(zero_checkpoint_path, map_location=device, weights_only=False),
+            model_owner=zero_owner,
+        )
+        initial_state = model_state(zero_owner)
+        _write_event_arm_status(
+            args,
+            state="running",
+            phase="zero_evaluation",
+            mode=config.event_architecture_mode,
+            update=0,
+            updates_total=250,
+            steps=0,
+            steps_total=320_000,
+            high_optimizer_steps=0,
+            low_optimizer_steps=0,
+            optimizer_steps_total=1_000,
+        )
+        zero_evaluation = {
+            "deterministic": _evaluate_event_model(
+                zero_owner,
+                deterministic=True,
+                capture_prefix=False,
+                capture_forced_audit=False,
+            ),
+            "stochastic": _evaluate_event_model(
+                zero_owner,
+                deterministic=False,
+                capture_prefix=False,
+                capture_forced_audit=False,
+            ),
+        }
+        _write_event_json(zero_evaluation_path, zero_evaluation)
+    else:
+        if not zero_checkpoint_path.is_file() or not zero_evaluation_path.is_file():
+            raise FileNotFoundError(
+                "Stage C resume requires the original zero checkpoint and evaluation"
+            )
+        zero_payload = torch.load(
+            zero_checkpoint_path, map_location=device, weights_only=False
+        )
+        zero_owner = _make_event_model_owner(config, device)
+        restore_event_model_only_checkpoint(zero_payload, model_owner=zero_owner)
+        initial_state = model_state(zero_owner)
+        zero_evaluation = json.loads(zero_evaluation_path.read_text(encoding="utf-8"))
+
     collector = create_collector(config, args, scale_mode="train", num_envs=num_envs)
     collector.event_runtime_capability()
     total_steps = 0
@@ -4515,109 +5263,630 @@ def _run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
     low_optimizer_steps = 0
     intrinsic_applied_count = 0
     next_episode_id = 0
-    try:
-        for update_idx in range(1, 251):
-            episode_ids = tuple(range(next_episode_id, next_episode_id + num_envs))
-            next_episode_id += num_envs
-            transactions = collector.reset_event_runtime(episode_ids)
-            cores = []
-            snapshots = []
-            for env_index, (episode_id, transaction) in enumerate(
-                zip(episode_ids, transactions)
-            ):
-                core = VariableRosterEventCore(
-                    architecture_mode=str(config.event_architecture_mode),
-                    obs_dim=OBSERVATION_DIM,
-                    critic_member_dim=OBSERVATION_DIM,
-                    critic_global_dim=8,
-                    n_skills=3,
-                    action_dim=ACTION_COUNT,
-                    member_hidden_dim=model_owner.member_hidden_dim,
-                    high_hidden_dim=model_owner.high_hidden_dim,
-                    low_hidden_dim=model_owner.low_hidden_dim,
-                    skill_embedding_dim=model_owner.skill_embedding_dim,
-                    gamma=0.99,
-                    gae_lambda=0.95,
-                    environment_index=env_index,
-                    opportunity_seed=event_master_seed,
-                    frontier_seed=event_master_seed,
-                    action_seed=action_master_seed,
-                    rng_episode_id=episode_id,
-                    opportunity_stream_id=0,
-                    frontier_stream_id=1,
-                    action_stream_id=0,
-                    device=device,
-                    shared_models_from=model_owner,
-                )
-                bound = core.bind_due_frontier(transaction)
-                core.apply_transaction(bound)
-                cores.append(core)
-                snapshots.append(bound.post_membership_pre_policy_snapshot)
+    resumed_from = None
+    maximum_replay_errors = {
+        "high_logp_max_error": 0.0,
+        "high_value_max_error": 0.0,
+        "low_logp_max_error": 0.0,
+        "low_value_max_error": 0.0,
+    }
+    finite_updates = True
+    last_metrics: dict[str, float] = {}
+    update_path = output_root / "train_updates.csv"
+    latest_checkpoint_path = checkpoint_dir / "latest.pt"
+    update_fields = [
+        "update",
+        "steps",
+        "high_optimizer_steps",
+        "low_optimizer_steps",
+        *maximum_replay_errors,
+        "high_loss",
+        "low_loss",
+        "finite_update",
+    ]
 
-            for primitive_time in range(HORIZON):
-                routed_actions = []
-                for core, snapshot in zip(cores, snapshots):
-                    actions, _logp, _values = core.low_step(snapshot)
-                    routed_actions.append(
-                        {
-                            key: int(actions[index].detach().cpu())
-                            for index, key in enumerate(snapshot.keys)
-                        }
-                    )
-                steps = collector.step_event_runtime(routed_actions)
-                next_snapshots = []
-                for core, step in zip(cores, steps):
-                    if bool(step.truncated):
-                        raise RuntimeError("generic-SHORT Stage C does not admit truncation")
-                    intrinsic_applied_count += int(
-                        step.info.get("intrinsic_reward_applied_count", -1)
-                    )
-                    if float(step.info.get("intrinsic_reward", float("nan"))) != 0.0:
-                        raise RuntimeError("Stage C intrinsic reward must remain exactly zero")
-                    core.complete_primitive_transition(float(step.reward))
-                    if bool(step.terminated):
-                        if primitive_time != HORIZON - 1 or step.next_transaction is not None:
-                            raise RuntimeError("generic-SHORT terminal boundary is inconsistent")
-                        core.close_terminal()
-                        next_snapshots.append(None)
-                    else:
-                        if step.next_transaction is None:
-                            raise RuntimeError("nonterminal event step is missing its next transaction")
-                        bound = core.bind_due_frontier(step.next_transaction)
-                        core.apply_transaction(bound)
-                        next_snapshots.append(bound.post_membership_pre_policy_snapshot)
-                snapshots = next_snapshots
-                total_steps += num_envs
-
-            if intrinsic_applied_count != 0:
-                raise RuntimeError("Stage C intrinsic-applied count must be zero")
-            for _ppo_pass in range(4):
-                metrics = apply_event_ppo_update(
-                    cores,
-                    high_optimizer=high_optimizer,
-                    low_optimizer=low_optimizer,
-                )
-                high_optimizer_steps += 1
-                low_optimizer_steps += 1
-            if writer is not None:
-                for name, value in metrics.items():
-                    writer.add_scalar(f"Event/{name}", value, total_steps)
-                writer.add_scalar("Event/IntrinsicAppliedCount", 0.0, total_steps)
-                writer.flush()
-            emit(
-                args,
-                "event_update "
-                f"mode={config.event_architecture_mode} update={update_idx}/250 "
-                f"steps={total_steps} high_optimizer_steps={high_optimizer_steps} "
-                f"low_optimizer_steps={low_optimizer_steps} intrinsic_applied_count=0",
+    def prepare_episode_batch(episode_ids: Sequence[int]):
+        transactions = collector.reset_event_runtime(episode_ids)
+        prepared_cores = []
+        prepared_snapshots = []
+        for env_index, (episode_id, transaction) in enumerate(
+            zip(episode_ids, transactions)
+        ):
+            core = _make_event_runtime(
+                model_owner,
+                environment_index=env_index,
+                episode_id=int(episode_id),
+                event_master_seed=77_057,
+                action_master_seed=87_057,
             )
+            bound = core.bind_due_frontier(transaction)
+            core.apply_transaction(bound, deterministic_policy=False)
+            prepared_cores.append(core)
+            prepared_snapshots.append(bound.post_membership_pre_policy_snapshot)
+        return prepared_cores, prepared_snapshots
+
+    def save_live_checkpoint(path: Path, payload: Mapping[str, Any]) -> None:
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        torch.save(dict(payload), temporary)
+        temporary.replace(path)
+
+    pending_cores = None
+    pending_snapshots = None
+    if str(getattr(args, "resume_from", "") or ""):
+        resume_path = Path(args.resume_from).resolve()
+        if resume_path.parent != checkpoint_dir.resolve():
+            raise ValueError("Stage C resume checkpoint must belong to this arm root")
+        resume_payload = torch.load(resume_path, map_location=device, weights_only=False)
+        runtime_payloads = list(
+            resume_payload["event_architecture"]["runtime_payloads"]
+        )
+        restore_cores = []
+        for env_index, runtime_payload in enumerate(runtime_payloads):
+            rng = runtime_payload["rng_ledger"]
+            restore_cores.append(
+                _make_event_runtime(
+                    model_owner,
+                    environment_index=env_index,
+                    episode_id=int(rng["episode_id"]),
+                    event_master_seed=int(rng["opportunity"]["master_seed"]),
+                    action_master_seed=int(rng["policy_action"]["master_seed"]),
+                )
+            )
+        optimizer_states, restored_normalizers, counters = (
+            restore_vector_event_checkpoint(
+                resume_payload,
+                model_owner=model_owner,
+                cores=restore_cores,
+                collector=collector,
+            )
+        )
+        high_optimizer.load_state_dict(optimizer_states["high"])
+        low_optimizer.load_state_dict(optimizer_states["low"])
+        normalizer_states = restored_normalizers
+        total_steps = int(counters["total_steps"])
+        update_idx = int(counters["update_idx"])
+        high_optimizer_steps = int(counters["high_optimizer_steps"])
+        low_optimizer_steps = int(counters["low_optimizer_steps"])
+        next_episode_id = int(counters["next_episode_id"])
+        intrinsic_applied_count = int(counters["intrinsic_applied_count"])
+        if not 0 <= update_idx < 250:
+            raise ValueError("Stage C resume update lies outside the active run")
+        expected_next_episode_id = num_envs if update_idx == 0 else update_idx * num_envs
+        if (
+            total_steps != update_idx * num_envs * HORIZON
+            or high_optimizer_steps != update_idx * 4
+            or low_optimizer_steps != update_idx * 4
+            or next_episode_id != expected_next_episode_id
+            or intrinsic_applied_count != 0
+        ):
+            raise ValueError("Stage C resume counter ledger mismatch")
+        if not update_path.is_file():
+            raise FileNotFoundError("Stage C resume requires train_updates.csv")
+        with update_path.open("r", encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        if len(rows) < update_idx:
+            raise ValueError("Stage C resume training ledger trails its checkpoint")
+        if len(rows) > update_idx:
+            rows = rows[:update_idx]
+            _write_event_csv_rows(
+                update_path, fieldnames=update_fields, rows=rows
+            )
+        for name in maximum_replay_errors:
+            maximum_replay_errors[name] = max(
+                (float(row[name]) for row in rows), default=0.0
+            )
+        finite_updates = all(bool(int(float(row["finite_update"]))) for row in rows)
+        if update_idx == 0:
+            pending_cores = restore_cores
+            pending_snapshots = [
+                runtime_payload["current_observation_state_boundary"]["snapshot"]
+                for runtime_payload in runtime_payloads
+            ]
+        resumed_from = str(resume_path)
+    else:
+        if update_path.exists():
+            raise FileExistsError("fresh Stage C arm root already has train_updates.csv")
+        _write_event_csv_rows(update_path, fieldnames=update_fields, rows=[])
+        initial_episode_ids = tuple(range(num_envs))
+        pending_cores, pending_snapshots = prepare_episode_batch(initial_episode_ids)
+        next_episode_id = num_envs
+        initial_boundaries = [
+            {
+                "physical_time": int(core.physical_time),
+                "episode_id": int(core.rng_episode_id),
+                "terminal": False,
+                "snapshot": snapshot,
+            }
+            for core, snapshot in zip(pending_cores, pending_snapshots)
+        ]
+        update_zero_checkpoint = vector_event_checkpoint_payload(
+            model_owner=model_owner,
+            cores=pending_cores,
+            collector_snapshot=collector.snapshot_event_runtime(),
+            current_boundaries=initial_boundaries,
+            optimizer_states={
+                "high": high_optimizer.state_dict(),
+                "low": low_optimizer.state_dict(),
+            },
+            normalizer_states=normalizer_states,
+            counters={
+                "total_steps": 0,
+                "update_idx": 0,
+                "high_optimizer_steps": 0,
+                "low_optimizer_steps": 0,
+                "next_episode_id": next_episode_id,
+                "intrinsic_applied_count": 0,
+            },
+        )
+        for path in _event_live_checkpoint_paths(
+            checkpoint_dir, update_idx=0, save_interval=int(args.save_interval)
+        ):
+            save_live_checkpoint(path, update_zero_checkpoint)
+
+    start_time = time.perf_counter()
+    final_cores = None
+    final_boundaries = None
+    try:
+        with update_path.open("a", encoding="utf-8", newline="") as handle:
+            csv_writer = csv.DictWriter(handle, fieldnames=update_fields)
+            for update_idx in range(update_idx + 1, 251):
+                if pending_cores is not None and pending_snapshots is not None:
+                    cores = pending_cores
+                    snapshots = pending_snapshots
+                    pending_cores = None
+                    pending_snapshots = None
+                else:
+                    episode_ids = tuple(
+                        range(next_episode_id, next_episode_id + num_envs)
+                    )
+                    next_episode_id += num_envs
+                    cores, snapshots = prepare_episode_batch(episode_ids)
+
+                for primitive_time in range(HORIZON):
+                    routed_actions = []
+                    for core, snapshot in zip(cores, snapshots):
+                        actions, _logp, _values = core.low_step(snapshot)
+                        routed_actions.append(
+                            {
+                                key: int(actions[index].detach().cpu())
+                                for index, key in enumerate(snapshot.keys)
+                            }
+                        )
+                    steps = collector.step_event_runtime(routed_actions)
+                    next_snapshots = []
+                    for core, step in zip(cores, steps):
+                        if bool(step.truncated):
+                            raise RuntimeError(
+                                "generic-SHORT Stage C does not admit truncation"
+                            )
+                        intrinsic_applied_count += int(
+                            step.info.get("intrinsic_reward_applied_count", -1)
+                        )
+                        if float(step.info.get("intrinsic_reward", float("nan"))) != 0.0:
+                            raise RuntimeError(
+                                "Stage C intrinsic reward must remain exactly zero"
+                            )
+                        core.complete_primitive_transition(float(step.reward))
+                        if bool(step.terminated):
+                            if primitive_time != HORIZON - 1 or step.next_transaction is not None:
+                                raise RuntimeError(
+                                    "generic-SHORT terminal boundary is inconsistent"
+                                )
+                            core.close_terminal()
+                            next_snapshots.append(None)
+                        else:
+                            if step.next_transaction is None:
+                                raise RuntimeError(
+                                    "nonterminal event step is missing its next transaction"
+                                )
+                            bound = core.bind_due_frontier(step.next_transaction)
+                            core.apply_transaction(bound, deterministic_policy=False)
+                            next_snapshots.append(
+                                bound.post_membership_pre_policy_snapshot
+                            )
+                    snapshots = next_snapshots
+                    total_steps += num_envs
+                if intrinsic_applied_count != 0:
+                    raise RuntimeError("Stage C intrinsic-applied count must be zero")
+                first_pass_replay = None
+                for ppo_pass in range(4):
+                    metrics = apply_event_ppo_update(
+                        cores,
+                        high_optimizer=high_optimizer,
+                        low_optimizer=low_optimizer,
+                    )
+                    if ppo_pass == 0:
+                        first_pass_replay = {
+                            name: float(metrics[name])
+                            for name in maximum_replay_errors
+                        }
+                    high_optimizer_steps += 1
+                    low_optimizer_steps += 1
+                assert first_pass_replay is not None
+                for name, value in first_pass_replay.items():
+                    maximum_replay_errors[name] = max(
+                        maximum_replay_errors[name], value
+                    )
+                last_metrics = {name: float(value) for name, value in metrics.items()}
+                finite_update = bool(
+                    all(np.isfinite(value) for value in last_metrics.values())
+                    and _event_state_dict_finite(model_owner)
+                )
+                finite_updates = finite_updates and finite_update
+                update_row = {
+                    "update": update_idx,
+                    "steps": total_steps,
+                    "high_optimizer_steps": high_optimizer_steps,
+                    "low_optimizer_steps": low_optimizer_steps,
+                    **maximum_replay_errors,
+                    "high_loss": last_metrics["high_loss"],
+                    "low_loss": last_metrics["low_loss"],
+                    "finite_update": int(finite_update),
+                }
+                csv_writer.writerow(update_row)
+                handle.flush()
+                final_cores = cores
+                final_boundaries = [
+                    {
+                        "physical_time": int(core.physical_time),
+                        "episode_id": int(core.rng_episode_id),
+                        "terminal": True,
+                    }
+                    for core in cores
+                ]
+                checkpoint = vector_event_checkpoint_payload(
+                    model_owner=model_owner,
+                    cores=cores,
+                    collector_snapshot=collector.snapshot_event_runtime(),
+                    current_boundaries=final_boundaries,
+                    optimizer_states={
+                        "high": high_optimizer.state_dict(),
+                        "low": low_optimizer.state_dict(),
+                    },
+                    normalizer_states=normalizer_states,
+                    counters={
+                        "total_steps": total_steps,
+                        "update_idx": update_idx,
+                        "high_optimizer_steps": high_optimizer_steps,
+                        "low_optimizer_steps": low_optimizer_steps,
+                        "next_episode_id": next_episode_id,
+                        "intrinsic_applied_count": intrinsic_applied_count,
+                    },
+                )
+                for path in _event_live_checkpoint_paths(
+                    checkpoint_dir,
+                    update_idx=update_idx,
+                    save_interval=int(args.save_interval),
+                ):
+                    save_live_checkpoint(path, checkpoint)
+                _write_event_arm_status(
+                    args,
+                    state="running",
+                    phase="training",
+                    mode=config.event_architecture_mode,
+                    update=update_idx,
+                    updates_total=250,
+                    steps=total_steps,
+                    steps_total=320_000,
+                    high_optimizer_steps=high_optimizer_steps,
+                    low_optimizer_steps=low_optimizer_steps,
+                    optimizer_steps_total=1_000,
+                    checkpoint_path=str(latest_checkpoint_path),
+                )
+                if writer is not None:
+                    for name, value in last_metrics.items():
+                        writer.add_scalar(f"Event/{name}", value, total_steps)
+                    writer.flush()
+                emit(
+                    args,
+                    "event_update "
+                    f"mode={config.event_architecture_mode} update={update_idx}/250 "
+                    f"steps={total_steps} high_optimizer_steps={high_optimizer_steps} "
+                    f"low_optimizer_steps={low_optimizer_steps}",
+                )
+
+        if final_cores is None or final_boundaries is None:
+            raise RuntimeError("Stage C produced no final vector boundary")
         if (
             total_steps != 320_000
             or high_optimizer_steps != 1_000
             or low_optimizer_steps != 1_000
             or next_episode_id != 4_000
+            or intrinsic_applied_count != 0
         ):
             raise RuntimeError("Stage C exposure ledger is not exact")
+
+        final_eval_checkpoint = checkpoint_dir / "update_250_eval.pt"
+        torch.save(
+            event_model_only_checkpoint_payload(
+                model_owner=model_owner,
+                normalizer_states=normalizer_states,
+                total_steps=total_steps,
+                update_idx=update_idx,
+            ),
+            final_eval_checkpoint,
+        )
+        final_owner = _make_event_model_owner(config, device)
+        restore_event_model_only_checkpoint(
+            torch.load(final_eval_checkpoint, map_location=device, weights_only=False),
+            model_owner=final_owner,
+        )
+        _write_event_arm_status(
+            args,
+            state="running",
+            phase="final_evaluation",
+            mode=config.event_architecture_mode,
+            update=250,
+            updates_total=250,
+            steps=320_000,
+            steps_total=320_000,
+            high_optimizer_steps=1_000,
+            low_optimizer_steps=1_000,
+            optimizer_steps_total=1_000,
+        )
+        final_deterministic = _evaluate_event_model(
+            final_owner,
+            deterministic=True,
+            capture_prefix=False,
+            capture_forced_audit=False,
+        )
+        _write_event_arm_status(
+            args,
+            state="running",
+            phase="forced_audit_and_stochastic_evaluation",
+            mode=config.event_architecture_mode,
+            update=250,
+            updates_total=250,
+            steps=320_000,
+            steps_total=320_000,
+            high_optimizer_steps=1_000,
+            low_optimizer_steps=1_000,
+            optimizer_steps_total=1_000,
+        )
+        final_stochastic = _evaluate_event_model(
+            final_owner,
+            deterministic=False,
+            capture_prefix=True,
+            capture_forced_audit=True,
+        )
+
+        live_payload = torch.load(
+            latest_checkpoint_path, map_location=device, weights_only=False
+        )
+        verification_owner = _make_event_model_owner(config, device)
+        verification_envs = [
+            DynamicRosterEventEnv(task_master_seed=TRAIN_LEDGER_SEED)
+            for _ in range(num_envs)
+        ]
+        verification_collector = SyncEnvCollector(verification_envs)
+        runtime_payloads = live_payload["event_architecture"]["runtime_payloads"]
+        verification_cores = []
+        for env_index, runtime_payload in enumerate(runtime_payloads):
+            rng = runtime_payload["rng_ledger"]
+            verification_cores.append(
+                _make_event_runtime(
+                    verification_owner,
+                    environment_index=env_index,
+                    episode_id=int(rng["episode_id"]),
+                    event_master_seed=int(rng["opportunity"]["master_seed"]),
+                    action_master_seed=int(rng["policy_action"]["master_seed"]),
+                )
+            )
+        restored_optimizers, restored_normalizers, restored_counters = (
+            restore_vector_event_checkpoint(
+                live_payload,
+                model_owner=verification_owner,
+                cores=verification_cores,
+                collector=verification_collector,
+            )
+        )
+        restored_collector_snapshot = verification_collector.snapshot_event_runtime()
+        roundtrip_payload = vector_event_checkpoint_payload(
+            model_owner=verification_owner,
+            cores=verification_cores,
+            collector_snapshot=restored_collector_snapshot,
+            current_boundaries=[
+                runtime_payload["current_observation_state_boundary"]
+                for runtime_payload in runtime_payloads
+            ],
+            optimizer_states=restored_optimizers,
+            normalizer_states=restored_normalizers,
+            counters=restored_counters,
+        )
+        checkpoint_state_error = _nested_state_maximum_difference(
+            model_state(model_owner), model_state(verification_owner)
+        )
+        checkpoint_runtime_error = _nested_state_maximum_difference(
+            runtime_payloads,
+            roundtrip_payload["event_architecture"]["runtime_payloads"],
+        )
+        checkpoint_collector_error = _nested_state_maximum_difference(
+            live_payload["event_architecture"]["collector_snapshot"],
+            restored_collector_snapshot,
+        )
+        checkpoint_optimizer_error = max(
+            _nested_state_maximum_difference(
+                high_optimizer.state_dict(), restored_optimizers["high"]
+            ),
+            _nested_state_maximum_difference(
+                low_optimizer.state_dict(), restored_optimizers["low"]
+            ),
+        )
+        checkpoint_normalizer_error = _nested_state_maximum_difference(
+            normalizer_states, restored_normalizers
+        )
+        checkpoint_counter_error = _nested_state_maximum_difference(
+            {
+                "total_steps": total_steps,
+                "update_idx": update_idx,
+                "high_optimizer_steps": high_optimizer_steps,
+                "low_optimizer_steps": low_optimizer_steps,
+                "next_episode_id": next_episode_id,
+                "intrinsic_applied_count": intrinsic_applied_count,
+            },
+            restored_counters,
+        )
+        verification_collector.close()
+
+        final_state = model_state(model_owner)
+        parameter_drift = _nested_state_maximum_difference(initial_state, final_state)
+        forced_audit = final_stochastic["forced_audit"]
+        prefix_rows = final_stochastic["prefix_rows"]
+        persistent_skill = int(forced_audit["persistent_like_skill"])
+        prefix_summary = _summarize_event_prefix_rows(
+            prefix_rows,
+            persistent_skill=persistent_skill,
+            architecture_mode=model_owner.architecture_mode,
+        )
+        prefix_actual_replay_logp_max = float(
+            prefix_summary["actual_replay_logp_max_error"]
+        )
+        prefix_actual_replay_probability_max = float(
+            prefix_summary["actual_replay_probability_max_error"]
+        )
+        zero_det = zero_evaluation["deterministic"]
+        final_det = final_deterministic
+        improvement_ci = _paired_mean_ci(
+            np.asarray(final_det["utility"], dtype=np.float64)
+            - np.asarray(zero_det["utility"], dtype=np.float64),
+            seed=107_057,
+        )
+        m0 = {
+            "formal_contract_exact": True,
+            "environment_steps_exact": total_steps == 320_000,
+            "high_optimizer_steps_exact": high_optimizer_steps == 1_000,
+            "low_optimizer_steps_exact": low_optimizer_steps == 1_000,
+            "training_ledger_ids_exact": next_episode_id == 4_000,
+            "zero_evaluation_exact": all(
+                len(zero_evaluation[name]["utility"]) == 256
+                for name in ("deterministic", "stochastic")
+            ),
+            "final_evaluation_exact": len(final_deterministic["utility"]) == 256
+            and len(final_stochastic["utility"]) == 256,
+            "forced_audit_exact": forced_audit["effect_shape"] == [128, 3, 2, 4]
+            and forced_audit["forced_environment_steps"] == 9_216,
+            "intrinsic_reward_and_count_zero": intrinsic_applied_count == 0,
+            "sampling_replay_probability": max(
+                maximum_replay_errors["high_logp_max_error"],
+                maximum_replay_errors["low_logp_max_error"],
+            )
+            <= 1e-6,
+            "sampling_replay_value": max(
+                maximum_replay_errors["high_value_max_error"],
+                maximum_replay_errors["low_value_max_error"],
+            )
+            <= 1e-6,
+            "natural_probability_read_replay": max(
+                prefix_actual_replay_logp_max,
+                prefix_actual_replay_probability_max,
+            )
+            <= 1e-6,
+            "all_updates_finite": bool(finite_updates),
+            "final_parameters_finite": _event_state_dict_finite(model_owner),
+            "parameter_update_nonzero": parameter_drift > 1e-8,
+            "strict_vector_schema3_resume": checkpoint_state_error == 0.0
+            and checkpoint_runtime_error == 0.0
+            and checkpoint_collector_error == 0.0
+            and checkpoint_optimizer_error == 0.0
+            and checkpoint_normalizer_error == 0.0
+            and checkpoint_counter_error == 0.0,
+            "f0_common_support_reduction": model_owner.architecture_mode != "f0"
+            or float(prefix_summary["f0_common_support_tv_max"] or 0.0) <= 1e-6,
+        }
+        implementation_valid = all(bool(value) for value in m0.values())
+        final_deterministic_result = {
+            key: value
+            for key, value in final_deterministic.items()
+            if key not in {"prefix_rows", "timing_rows", "forced_audit"}
+        }
+        final_stochastic_result = {
+            key: value
+            for key, value in final_stochastic.items()
+            if key not in {"prefix_rows", "timing_rows", "forced_audit"}
+        }
+        arm_result = {
+            "schema_version": 1,
+            "stage": "stage_c_paired_f0_f1",
+            "arm": model_owner.architecture_mode,
+            "implementation_valid": implementation_valid,
+            "m0": m0,
+            "contract": {
+                "num_envs": 16,
+                "horizon": 80,
+                "rollout_length": 80,
+                "outer_updates": 250,
+                "environment_transitions": 320_000,
+                "ppo_passes_per_update": 4,
+                "high_optimizer_steps": 1_000,
+                "low_optimizer_steps": 1_000,
+                "latent_skills": 3,
+                "optimizer": "Adam",
+                "learning_rate": 3e-4,
+                "gamma": 0.99,
+                "gae_lambda": 0.95,
+                "policy_clip": 0.20,
+                "value_clip": 0.20,
+                "value_coefficient": 0.50,
+                "entropy_coefficient": 0.01,
+                "gradient_clip": 0.50,
+                "evaluation_episodes_per_mode": 256,
+                "bootstrap_repetitions": 10_000,
+                "bootstrap_seed": 107_057,
+                "selector": (
+                    "initial_summary"
+                    if model_owner.architecture_mode == "f0"
+                    else "working_summary"
+                ),
+            },
+            "counts": {
+                "environment_steps": total_steps,
+                "high_optimizer_steps": high_optimizer_steps,
+                "low_optimizer_steps": low_optimizer_steps,
+                "training_ledger_ids": next_episode_id,
+                "intrinsic_applied_count": intrinsic_applied_count,
+            },
+            "resume": {
+                "resumed_from": resumed_from,
+                "strict_resume_verified": bool(m0["strict_vector_schema3_resume"]),
+            },
+            "replay": maximum_replay_errors,
+            "parameter_drift_max_abs": parameter_drift,
+            "checkpoint_state_max_error": checkpoint_state_error,
+            "checkpoint_runtime_max_error": checkpoint_runtime_error,
+            "checkpoint_collector_max_error": checkpoint_collector_error,
+            "checkpoint_optimizer_max_error": checkpoint_optimizer_error,
+            "checkpoint_normalizer_max_error": checkpoint_normalizer_error,
+            "checkpoint_counter_max_error": checkpoint_counter_error,
+            "zero": zero_evaluation,
+            "final": {
+                "deterministic": final_deterministic_result,
+                "stochastic": final_stochastic_result,
+            },
+            "paired_final_minus_zero_deterministic_utility_ci95": improvement_ci,
+            "prefix": prefix_summary,
+            "forced_audit": forced_audit,
+            "timing_rows": final_stochastic["timing_rows"],
+            "last_update_metrics": last_metrics,
+            "wall_seconds": time.perf_counter() - start_time,
+        }
+        arm_result_path = result_dir / "stage_c_arm.json"
+        _write_event_json(arm_result_path, arm_result)
+        _write_event_arm_status(
+            args,
+            state="complete",
+            phase="terminal",
+            mode=config.event_architecture_mode,
+            update=250,
+            updates_total=250,
+            steps=320_000,
+            steps_total=320_000,
+            high_optimizer_steps=1_000,
+            low_optimizer_steps=1_000,
+            optimizer_steps_total=1_000,
+            implementation_valid=implementation_valid,
+            result_path=str(arm_result_path),
+            checkpoint_path=str(latest_checkpoint_path),
+        )
         return model_owner, total_steps, update_idx
     finally:
         collector.close()
@@ -5560,6 +6829,20 @@ def main() -> None:
             if args.mode != "train":
                 raise ValueError("Stage C evaluation remains runner/analyzer-owned")
             train_loop(config, args, writer)
+        except Exception as exc:
+            Path(args.log_dir).mkdir(parents=True, exist_ok=True)
+            (Path(args.log_dir) / "runner_stderr.log").write_text(
+                traceback.format_exc(), encoding="utf-8"
+            )
+            _write_event_arm_status(
+                args,
+                state="failed",
+                phase="runner",
+                mode=str(getattr(config, "event_architecture_mode", "unknown")),
+                error=f"{type(exc).__name__}: {exc}",
+                error_path=str(Path(args.log_dir) / "runner_stderr.log"),
+            )
+            raise
         finally:
             if writer is not None:
                 writer.close()
