@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Variable-N + Variable-Lifetime Event Architecture — Stage A Launch Ready
+## Variable-N + Variable-Lifetime Event Architecture — Stage A Passed
 
 The architecture and implementation-plan rounds are complete under:
 
@@ -64,13 +64,15 @@ architecture-matched testbed and experiment contract. Stop before a real
 environment, subprocess collector, environment-data optimizer step, benchmark
 or training.
 
-The user subsequently authorized the next minimal boundary. The isolated
-`dynamic_roster_testbed.py` now implements only the accepted generic-`SHORT`
-environment and its Stage A no-learning carrier. Its runner has no policy
-network, optimizer, intrinsic reward, shaping term or event-runtime training
-integration. One focused constructive trace passed the exact membership,
-terminal-reward and `P=S=U=1` checks. The next action is the registered 256-ledger
-Stage A read; direct primitive-AR and F0/F1 remain outside this boundary.
+The isolated `dynamic_roster_testbed.py` implements only the accepted
+generic-`SHORT` environment and Stage A no-learning carrier. Run
+`logs/f0f1_dynamic_roster_stage_a_20260717_143552` completed valid
+`PASS_STAGE_A_CARRIER`: all M0 checks pass, the constructive controller has
+`P=S=U=1.0`, and uniform random has positive-utility fraction `1.0` with mean
+utility `0.331217 < 0.55`. The environment therefore has a nonzero but
+nontrivial carrier. No policy network, optimizer, intrinsic reward, shaping or
+event training was used. Direct primitive-AR now requires a separate
+authorization; F0/F1 remains further downstream.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 

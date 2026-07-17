@@ -23,9 +23,9 @@ executable skills are established, does conditioning later skill commitments on
 earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
-The generic-`SHORT` environment and Stage A no-learning carrier are now the only
-authorized implementation/evidence boundary. Direct primitive-AR, F0/F1
-training and algorithm promotion remain unauthorized.
+The generic-`SHORT` environment has passed the Stage A no-learning carrier.
+Direct primitive-AR, F0/F1 training and algorithm promotion remain
+unauthorized.
 
 ## Causal Portfolio
 
@@ -47,10 +47,9 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Commit and push the isolated environment and Stage A runner, then execute the
-   exact 256-ledger no-learning carrier once.
-2. If Stage A passes, stop and request separate authorization for the direct
-   primitive-AR instrument. If it fails, retire this exact testbed.
+1. Await separate authorization for the Stage B direct primitive-AR access
+   instrument and its frozen 320,000-transition contract.
+2. Do not implement or run F0/F1 until direct access is valid.
 3. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; never execute or repurpose its gate.
 
@@ -63,6 +62,9 @@ F1 -> working_summary
   `carrier -> direct primitive-AR -> paired F0/F1 -> conditional timing read`.
 - `ha_ctse_process/dynamic_roster_testbed.py` is an isolated environment state
   machine; it is not wired into `train.py`, collectors or the event controller.
+- Stage A result `logs/f0f1_dynamic_roster_stage_a_20260717_143552` is valid:
+  all M0 checks pass; constructive `P=S=U=1.0`; random positive-utility fraction
+  `1.0` with mean utility `0.331217`; optimizer and intrinsic reads are zero.
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.
