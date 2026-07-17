@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Work"
-  short_description: "Plan, implement, review, and verify HMASD work"
-  default_prompt: "Use $hmasd-work to execute this HMASD task through one canonical brief."
+  short_description: "Orchestrate a complex HMASD core change"
+  default_prompt: "Use $hmasd-work for this collaboration-dependent multi-file HMASD core change."

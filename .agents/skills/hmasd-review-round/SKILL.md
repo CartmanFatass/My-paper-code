@@ -30,15 +30,23 @@ FAIL does not require a successor.
 
 Before either Pro submission, resolve a full 40-character commit and verify
 that it is reachable from the remote `aggressive` branch. Verify that the
-question path and every path under its `Repository files to inspect` exist in
-that same commit. If any check fails, return `BLOCKED` before browser transport;
-do not ask the reviewer to discover missing evidence.
+question contains an explicit divergent or convergent role, an exact
+`Repository files to inspect` section, and that every listed path exists in the
+same commit. Run `scripts/verify_pro_review_boundary.ps1`; if it fails, return
+`BLOCKED` before browser transport and do not ask the reviewer to discover
+missing evidence.
 
 ## Preserve Transport and Authority
 
 Reuse the registered persistent conversation for each reviewer role. Never
 create a duplicate because a reviewer is busy, never run parallel submissions,
 and never change an existing conversation's model.
+
+Resume a round from its first missing artifact. A nonempty raw response is
+immutable and proves that submission is already complete; archive or interpret
+it, but never resubmit that reviewer prompt. An incomplete or ambiguous raw
+response is `BLOCKED` for exact manual recovery, not authority to create another
+reviewer conversation or silently submit again.
 
 Automatic permission covers reviewer communication and raw archival only. It
 does not authorize code, experiments, promotion, or scientific disposition. If

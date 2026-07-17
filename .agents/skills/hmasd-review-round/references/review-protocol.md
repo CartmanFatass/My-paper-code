@@ -13,6 +13,8 @@ manifest. Only Gemini additionally uses `02_GEMINI_LOCAL_SOURCE_MANIFEST.md`
 and its allowlisted local papers. Reviewer-specific role and output contracts
 live in `10_GEMINI_DIVERGENT_QUESTION.md`, `20_PRO_OPEN_QUESTION.md`, and
 `40_PRO_CONVERGENT_QUESTION.md`; the Pro handoff template is transport-neutral.
+Both Pro question files must state their role explicitly and contain an exact
+`Repository files to inspect` section.
 
 ## Gemini Divergent Reviewer
 
@@ -36,9 +38,10 @@ roles come only from their respective question files.
 Before submission, resolve the proposed commit to exactly 40 hexadecimal
 characters, confirm it is reachable from `My-paper-code/aggressive`, and check
 the question path plus every listed repository path against that commit tree.
-Use the same immutable commit for the entire submission. A missing commit or
-path is `BLOCKED_REMOTE_EVIDENCE`, not a reviewer task and not a scientific
-result.
+Run `scripts/verify_pro_review_boundary.ps1` from the Skill directory and use
+the same immutable commit for the entire submission. A missing commit, role,
+section or path is `BLOCKED_REMOTE_EVIDENCE`, not a reviewer task and not a
+scientific result.
 
 ## Evidence and Disposition
 
@@ -46,3 +49,8 @@ Store the exact prompt boundary, raw response, source model, date and related
 claim in the tracked round. Raw absence means incomplete evidence. The
 controller evaluates claims by evidence and reasoning rather than model
 identity and owns every disposition and next authorization.
+
+Before transport, inspect the ordered artifact list and resume at the first
+missing artifact. Treat every nonempty raw file as immutable completed evidence;
+never resubmit its prompt. If the stored raw is partial or its identity cannot
+be verified, stop for exact manual recovery rather than generating a duplicate.

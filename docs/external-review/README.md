@@ -40,8 +40,10 @@ appears.
 Before either Pro submission, the controller must resolve the exact full
 40-character commit, confirm that it is reachable from the remote `aggressive`
 branch, and verify that the question plus every `Repository files to inspect`
-path exists in that same commit. Any failed remote boundary check stops the
-submission before browser transport.
+path exists in that same commit. Each Pro question must also identify its role
+explicitly and contain that exact section. The controller runs
+`.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`;
+any failed remote boundary check stops the submission before browser transport.
 
 Reuse the two established Pro conversations and the one live Gemini process.
 Do not create duplicate conversations, alter a conversation's model or run the
@@ -79,6 +81,11 @@ The brief and shared manifest are written once. Reviewer-specific questions
 contain only role and requested-output differences. Raw responses are archived
 before synthesis. Accepted algorithm design moves to `docs/research/`; current
 ownership stays in `memory/CURRENT_WORK.md`; runtime evidence stays in `logs/`.
+
+Resume an interrupted round from the first missing artifact. A nonempty raw
+response is immutable completed evidence and its reviewer prompt is never
+submitted again. Partial or identity-ambiguous raw text stops for exact manual
+recovery instead of creating a duplicate response or conversation.
 
 Existing model-specific directories remain historical/operational stores and
 are not reorganized retroactively.

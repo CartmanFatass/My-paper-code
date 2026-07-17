@@ -191,11 +191,14 @@ target. Do not silently fall back to CPU or serial execution. Reuse a known
 parallel topology; diagnose topology only after an actual launch failure or for
 a genuinely new workload shape.
 
-Long training, multi-seed batches, and heavy analysis run on the cloud. Reuse a
-compatible Bash runner under `scripts/`, write outputs to a timestamped `logs/`
-root on the data disk, commit and push the exact job, then register it with the
-shared scheduler. Use the local GPU for small diagnostics. Treat the server as
-available and ask the user to wake it only after a real SSH failure.
+By default, long training, multi-seed batches, and heavy analysis run on the
+cloud. Reuse a compatible Bash runner under `scripts/`, write outputs to a
+timestamped `logs/` root on the data disk, commit and push the exact job, then
+register it with the shared scheduler. An explicit user authorization and the
+owning `ExpRecord.md` contract may instead place a bounded toy or formal run on
+local CUDA. Follow that recorded placement and never migrate a run silently
+between local and cloud. Treat the server as available and ask the user to wake
+it only after a real SSH failure.
 
 Negative results are binding constraints. Do not retune, rename, reinterpret,
 or rerun a failed line without a newly registered causal reason.
@@ -216,8 +219,10 @@ unless the fact changed, blocks the next action, or the user asked.
 
 Use `$hmasd-review-round` only for a cross-round architecture contradiction, a
 coherent route connected to the final variable-team plus variable-lifetime
-algorithm, or a critical result boundary. Gemini and the open GPT-5.6 Pro are
-blind divergent reviewers with equal standing. The controller archives both
+algorithm, or a critical promotion or retirement boundary that the registered
+contract cannot settle. A routine registered PASS or FAIL does not trigger a
+full round. Gemini and the open GPT-5.6 Pro are blind divergent reviewers with
+equal standing. The controller archives both
 raw responses, synthesizes them against repository evidence, and then submits
 both plus the synthesis to the convergent GPT-5.6 Pro.
 

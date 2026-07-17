@@ -14,8 +14,11 @@ data disk and use a background shell session for long commands.
 ## Persistent Monitor
 
 Resolve the monitor conversation and active controller from the local
-conversation registry. Reuse one monitor conversation and one heartbeat
-schedule targeting it. Never change either conversation's model.
+conversation registry once when the run is activated. Embed the exact monitor
+thread id, controller thread id, automation id and run id in the schedule
+prompt; do not rediscover or replace them on later wakes. Reuse one monitor
+conversation and one heartbeat schedule targeting it. Never change either
+conversation's model.
 
 Do not use `send_message_to_thread` or any equivalent cross-thread steering for
 monitor relay. In the observed desktop runtime, steering a Luna monitor from a
@@ -33,15 +36,22 @@ completed -> retarget the same heartbeat to the controller
 missing   -> retarget the same heartbeat with monitor_error
 ```
 
-At a terminal boundary the monitor reads no result or stderr. It updates the
-existing automation in place, preserving id, kind and name while setting:
+At a terminal boundary the monitor reads no result or stderr. It derives one
+stable identifier:
+
+```text
+handoff_id = <run-id>:<state>:<status-updated-at>
+```
+
+It updates the existing automation in place, preserving id, kind and name
+while setting:
 
 ```text
 targetThreadId = active controller
 status         = ACTIVE
 next cadence   = 1 minute
-prompt         = terminal handoff containing automation id, run id, state,
-                 phase, status path, and result or direct-error path
+prompt         = terminal handoff containing handoff id, automation id, run id,
+                 state, phase, status path, and result or direct-error path
 ```
 
 The monitor then verifies that the stored automation has the controller target
@@ -49,14 +59,21 @@ and remains active. It may report `handoff_confirmed=true` only after that
 confirmation. If retargeting fails, return native `NOTIFY` with
 `monitor_handoff_error`; do not claim delivery, pause, or experiment failure.
 
-The controller's terminal-handoff wake first updates that same automation to
-`PAUSED` and verifies the stored state. Only then does it read the registered
-result or direct error once, interpret the outcome, and return native `NOTIFY`.
-If pause fails or cannot be confirmed, report `monitor_pause_error` without
-classifying the experiment as failed. A future run retargets the paused
-automation back to the unchanged monitor conversation. This preserves a
-dedicated dashboard, provides automatic controller handoff, and never steers a
-conversation or supplies a model override.
+The controller's terminal-handoff wake is idempotent. It first checks the owning
+result boundary. If the same `handoff_id` was already closed, it performs no
+result read and returns a no-op. Otherwise it reads the stored automation: when
+active it updates that automation to `PAUSED`, and when already paused it leaves
+it unchanged. In both cases it must verify the stored `PAUSED` state before it
+reads the registered result or direct error once, interprets the outcome,
+records the closed `handoff_id` in the owning result boundary, and returns
+native `NOTIFY`. If pause fails or cannot be confirmed, report
+`monitor_pause_error` without classifying the experiment as failed. A queued
+duplicate wake may therefore do nothing safely, while a controller that paused
+early can still close an unrecorded result. A future run retargets the paused
+automation back to the unchanged monitor conversation with a new run id and
+handoff namespace. This preserves a dedicated dashboard, provides automatic
+controller handoff, and never steers a conversation or supplies a model
+override.
 
 Show registered parameters, progress, primary live metric, observed ETA and
 next check in the monitor. Adapt the same schedule to observed ETA:
