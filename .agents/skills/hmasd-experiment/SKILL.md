@@ -1,6 +1,6 @@
 ---
 name: hmasd-experiment
-description: Prepare, launch, monitor, diagnose, or close an authorized HMASD smoke test, formal experiment, scale run, or analysis-only rerun. Use when an experiment contract and launch authority exist, or when a running job needs one persistent monitor, bounded failure diagnosis, or terminal result handling. Do not infer training authority from completed code.
+description: Prepare, launch, create or change persistent monitoring for, repair, or formally close an authorized HMASD smoke test, formal experiment, scale run, or analysis-only rerun. Use for real experiment lifecycle operations, not for a one-time status/result read, result interpretation, simple monitor diagnosis, or ordinary failure-location check. Do not infer training authority from completed code.
 ---
 
 # HMASD Experiment
@@ -36,6 +36,14 @@ targeting it. Each wake performs one bounded read of the authoritative status.
 The monitor remains read-only and never edits, tests, restarts, or interprets
 science. Routine dashboards remain in the monitor conversation; notify the
 controller only on completion, explicit failure, or monitor error.
+
+At a terminal boundary the monitor sends exactly one structured terminal
+envelope to the active controller with the real cross-thread messaging tool.
+It does not read or interpret the result and does not own terminal schedule
+mutation. The controller first pauses the named schedule and verifies
+`PAUSED`, then reads the result or direct error once and applies the registered
+branch. Text claiming that notification or pause was requested, including a
+`heartbeat` directive, is never success evidence.
 
 ## Diagnose and Close
 
