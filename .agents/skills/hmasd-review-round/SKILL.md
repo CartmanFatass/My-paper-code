@@ -9,7 +9,8 @@ Read `docs/external-review/README.md`, the round's `00_REVIEW_BRIEF.md` and
 `01_SHARED_SOURCE_MANIFEST.md`, then read `references/review-protocol.md`.
 Gemini additionally reads `02_GEMINI_LOCAL_SOURCE_MANIFEST.md`. Read the neutral
 `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md` only before a Pro
-submission. Do not reload every workflow document at every stage.
+submission. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` before any
+Pro browser transport. Do not reload every workflow document at every stage.
 
 ## Run the Round
 
@@ -42,9 +43,26 @@ missing evidence.
 
 ## Preserve Transport and Authority
 
-Reuse the registered persistent conversation for each reviewer role. Never
-create a duplicate because a reviewer is busy, never run parallel submissions,
-and never change an existing conversation's model.
+Use the exact registered conversation for each Pro role. `OPEN_DIVERGENT` and
+`CONVERGENT` are separate persistent conversations and are never substitutes
+for one another. Before every submission, open the registered URL directly and
+pass the thread heartbeat check: the current URL contains the registered
+conversation ID, the page shows the registered model label without opening or
+changing the model selector, and the history contains the exact registered
+role ACK. A mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`; do not submit, create
+a fallback conversation, or alter any model.
+
+If browser transport is delegated across Codex conversations, do not send the
+review prompt directly to that conversation and do not pass `model` or
+`thinking` overrides. Wake the already-bound transport conversation through
+its own heartbeat. The heartbeat carries only the reviewer role, registry path,
+round path and first missing artifact. The target must return its own thread ID,
+the external reviewer conversation ID and role ACK before any browser side
+effect. Missing or mismatched ACK stops transport. This prevents a cross-thread
+message from rebinding either conversation's model or role.
+
+Never create a duplicate because a reviewer is busy, never run parallel
+submissions, and never change an existing conversation's model.
 
 Resume a round from its first missing artifact. A nonempty raw response is
 immutable and proves that submission is already complete; archive or interpret

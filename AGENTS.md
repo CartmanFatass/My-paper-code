@@ -235,11 +235,16 @@ both plus the synthesis to the convergent GPT-5.6 Pro. The convergent review
 ranks and stress-tests a plural portfolio; it may recommend the next serialized
 evidence source, but it does not define a unique legal research direction.
 
-Reuse the persistent reviewer conversations and never create duplicates because
-one is busy. GPT-5.6 Pro uses the Codex built-in browser and an existing verified
-Pro conversation; Gemini uses the persistent Antigravity CLI conversation in
-plan and sandbox mode with the tracked local-source allowlist. Never change an
-existing conversation's model or submit reviewers in parallel.
+Reuse the role-specific persistent reviewer conversations registered in
+`docs/external-review/REVIEWER_CONVERSATIONS.json`; open and convergent Pro use
+different conversation IDs and are never mutual fallbacks. GPT-5.6 Pro uses the
+Codex built-in browser; Gemini uses the persistent Antigravity CLI conversation
+in plan and sandbox mode with the tracked local-source allowlist. Before a Pro
+submission, verify the exact registered URL, visible model and role heartbeat.
+Never change an existing conversation's model or submit reviewers in parallel.
+If browser transport crosses Codex conversations, wake the bound transport
+conversation through its own heartbeat with no model/thinking override and
+require a matching thread/role/target ACK before any external send.
 
 Archive every response raw before interpretation. Missing raw text is incomplete
 evidence. Automatic exchange covers transport and archival only; no reviewer

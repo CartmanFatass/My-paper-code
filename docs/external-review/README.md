@@ -17,10 +17,11 @@ the HMASD contract rather than by model identity.
 3. **Codex controller.** It compares the two raw reviews, checks them against
    repository evidence and writes a synthesis without selecting by model name.
 4. **GPT-5.6 Pro convergent reviewer.** The existing `HMASD Algorithm
-   Consultation` conversation. It receives the evidence pack, both raw reviews
-   and the Codex synthesis, then ranks and stress-tests a portfolio of two to
-   four live candidates and recommends the next serialized evidence source or
-   an explicit stop. Only the controller adopts or rejects that recommendation.
+   consultation role in its own registered persistent conversation. It receives
+   the evidence pack, both raw reviews and the Codex synthesis, then ranks and
+   stress-tests a portfolio of two to four live candidates and recommends the
+   next serialized evidence source or an explicit stop. Only the controller
+   adopts or rejects that recommendation.
 
 The two divergent reviews are blind on their first pass. Neither output is an
 experiment authorization. The convergent reviewer may add an omitted candidate
@@ -46,12 +47,25 @@ explicitly and contain that exact section. The controller runs
 `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`;
 any failed remote boundary check stops the submission before browser transport.
 
-Reuse the two established Pro conversations and the one live Gemini process.
+The machine-readable Pro role registry is
+`docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each role to one
+conversation ID, URL, visible model label and heartbeat ACK. Open and convergent
+roles must use different conversation IDs. Before every submission, verify the
+exact URL, visible model label and existing role ACK without changing the model.
+Any mismatch stops as `BLOCKED_REVIEW_THREAD_IDENTITY`; never route to the other
+role or a mixed-purpose conversation as fallback.
+
+Reuse the two registered Pro conversations and the one live Gemini process.
 Do not create duplicate conversations, alter a conversation's model or run the
-open and convergent prompts in the same conversation. If the existing Pro
-conversation is not already GPT-5.6 Pro, or its identity cannot be verified,
-stop that submission and emit the manual handoff prompt. Automatic exchange
-does not authorize reviewer-proposed edits, experiments or promotion.
+open and convergent prompts in the same conversation. Automatic exchange does
+not authorize reviewer-proposed edits, experiments or promotion.
+
+If a separate Codex conversation performs browser transport, wake it through a
+heartbeat bound to that conversation. The wake payload contains only routing
+metadata and omits model/thinking overrides. It must acknowledge its own Codex
+thread ID plus the registered Pro role and conversation ID before sending the
+real prompt. A direct cross-thread review prompt or an unverified ACK is not a
+valid handoff.
 
 All GPT-5.6 Pro submissions use the Codex built-in browser. Reuse a registered
 usable conversation; if it is busy, wait or recover it. Create one and register

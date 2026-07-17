@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-18",
+  "reviewers": {
+    "open_divergent": {
+      "role": "OPEN_DIVERGENT",
+      "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
+      "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
+      "expected_model_ui": "Pro",
+      "heartbeat_ack": "HEARTBEAT_ACK role=OPEN_DIVERGENT"
+    },
+    "convergent": {
+      "role": "CONVERGENT",
+      "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
+      "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
+      "expected_model_ui": "Pro",
+      "heartbeat_ack": "HEARTBEAT_ACK role=CONVERGENT"
+    }
+  }
+}

@@ -35,11 +35,26 @@ after a failure, restart, or concrete source-completeness miss.
 ## GPT-5.6 Pro Reviewers
 
 Use the Codex built-in browser. Reuse the dedicated open reviewer conversation
-and the existing `HMASD Algorithm Consultation` convergent conversation. Verify
-that each already uses GPT-5.6 Pro; never change the model. Replace only the
-commit and question-path placeholders in the neutral handoff template, submit
-it verbatim, and copy the completed response exactly. The open and convergent
-roles come only from their respective question files.
+and the dedicated convergent reviewer conversation registered in
+`docs/external-review/REVIEWER_CONVERSATIONS.json`. The two roles must have
+different conversation IDs. Verify the exact URL, visible `Pro` model label and
+stored role heartbeat before each submission; never open the model selector or
+change the model of a registered conversation. Replace only the commit and
+question-path placeholders in the neutral handoff template, submit it verbatim,
+and copy the completed response exactly. The open and convergent roles come
+only from their respective question files.
+
+The role heartbeat is an identity handshake, not a review request. A reviewer
+conversation becomes usable only after its history contains the registry's
+exact ACK. On later submissions, passively verify that ACK and the current
+thread/model identity; do not add repeated heartbeat turns unless the page or
+identity is ambiguous. Any mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`.
+
+When a dedicated Codex transport conversation is used, it is awakened by its
+own heartbeat rather than a direct cross-thread review prompt. The wake payload
+contains no model selection and no review content, only routing metadata. It
+must acknowledge its Codex thread ID, target Pro conversation ID and role before
+opening the browser. The controller rejects a stale, missing or cross-role ACK.
 
 Before submission, resolve the proposed commit to exactly 40 hexadecimal
 characters, confirm it is reachable from `My-paper-code/aggressive`, and check
