@@ -41,19 +41,24 @@ freeze the exact controller thread,
 monitor thread, automation id and run id in the prompt. Each wake performs one
 bounded read of the authoritative status. The monitor is read-only with respect
 to the repository and run: it never edits, tests, restarts, or interprets
-science. Its only allowed mutation is the registered heartbeat's target,
-cadence, prompt and status. Routine dashboards remain in that conversation.
+science. Its only allowed mutation is the registered heartbeat's cadence,
+prompt and status. Routine dashboards remain in that conversation.
 
-Never use cross-thread messaging for terminal relay: the desktop runtime has
-been observed applying each sender's model settings to the receiver. Instead,
-on completion, explicit failure, or monitor error, the monitor retargets the
-same heartbeat to the frozen controller thread with a one-minute terminal-
-handoff prompt, a stable `handoff_id`, and verifies the new target. It does not
-read the result or alter either conversation's model. On the next wake the
-controller idempotently pauses the same schedule and verifies `PAUSED`, then
-reads the result or direct error once and applies the registered branch. A
-duplicate wake for an already closed `handoff_id` is a no-op. Text describing
-either automation mutation is never success evidence.
+Never use unguarded cross-thread messaging for terminal relay: the desktop
+runtime has been observed applying sender settings when target settings are
+omitted. On completion, explicit failure, or monitor error, use the guarded
+direct format in
+`references/experiment-protocol.md`: resolve the controller's live model and
+effort, supply them explicitly with host and thread ID, then verify they remain
+unchanged. After confirmed delivery, pause the monitor heartbeat and verify
+`PAUSED`. A stable `handoff_id` makes duplicate delivery a no-op. Never use a
+message to repair a settings mismatch, and never read or interpret the result in
+the monitor.
+
+The required call shape is
+`send_message_to_thread({hostId, threadId, model: target_model, thinking:
+target_effort, prompt})`; none of the four routing/settings fields may be
+omitted.
 
 ## Diagnose and Close
 

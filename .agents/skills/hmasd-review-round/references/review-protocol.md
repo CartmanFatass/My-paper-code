@@ -47,27 +47,24 @@ External Review Exchange — Convergent Pro
   -> CONVERGENT external Pro
 ```
 
-The controller activates the matching registered heartbeat with routing
-metadata; it does not call the browser or send the review prompt across Codex
-threads. Each local exchange is created once as `Luna High`; after creation its
-model is immutable. No transport or heartbeat call may contain a model or
-thinking override.
+The controller does not call the browser. It sends routing metadata to the
+matching local exchange with all target settings explicit. Each exchange is
+created once as `Luna High`; after creation its model is immutable.
 
 Use the Codex built-in browser. Reuse the dedicated open reviewer conversation
 and the dedicated convergent reviewer conversation registered in
 `docs/external-review/REVIEWER_CONVERSATIONS.json`. The two roles must have
 different conversation IDs. Verify the exact URL, visible `Pro` model label and
-stored role heartbeat before each submission; never open the model selector or
+stored role ACK before each submission; never open the model selector or
 change the model of a registered conversation. Replace only the commit and
 question-path placeholders in the neutral handoff template, submit it verbatim,
 and copy the completed response exactly. The open and convergent roles come
 only from their respective question files.
 
-The role heartbeat is an identity handshake, not a review request. A reviewer
-conversation becomes usable only after its history contains the registry's
-exact ACK. On later submissions, passively verify that ACK and the current
-thread/model identity; do not add repeated heartbeat turns unless the page or
-identity is ambiguous. Any mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`.
+The role ACK is an identity handshake, not a review request. An exchange becomes
+usable only after its history contains the registry's exact ACK. On later
+submissions, verify that ACK and the current thread/model identity without
+adding identity-only turns. Any mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`.
 
 Every Pro role has a separate one-to-one local Codex exchange conversation in
 the registry. `External Review Exchange — Open Pro` may access only the
@@ -76,30 +73,16 @@ Exchange — Convergent Pro` may access only the `CONVERGENT` external thread an
 `41_PRO_CONVERGENT_RAW.md`. The controller never performs these browser sends
 itself.
 
-Each exchange conversation is awakened by its own registered heartbeat rather
-than a direct cross-thread review prompt. The wake payload contains no model
-selection and no review content, only routing metadata, immutable commit and
-the first missing artifact. It must acknowledge its Codex thread ID, target Pro
-conversation ID and role before opening the browser. The controller rejects a
-stale, missing or cross-role ACK. The exchange pauses its heartbeat after raw
-archival or a transport blocker; it never sends a prompt to the other role.
-
-This heartbeat is a compatibility boundary around a confirmed direct-message
-transport defect, not a permanent architectural preference. In the affected
-Codex Desktop/runtime version, an omitted `model`/`thinking` argument still
-allows the sender turn's settings to enter the target `UserInput`, and a reverse
-message can produce the appearance of a model swap. Therefore neither the
-controller nor an exchange thread sends a direct return message. The raw file
-and route token are the mailbox; the controller observes the artifact and the
-heartbeat state. Explicit target-model overrides, database edits and automatic
-post-send restoration are forbidden because they mutate rather than preserve
-thread identity.
-
-Direct thread messaging may replace this compatibility route only after an
-updated product passes a disposable A/B regression: different source and target
-models, omitted overrides, A-to-B and B-to-A delivery, idle and busy targets,
-exactly one delivery, unchanged effective turn settings and unchanged persisted
-thread settings. A production review round is never the regression fixture.
+Use the exact guarded command in `SKILL.md` for every controller/exchange
+message. Resolve the target's current model and effort before the call and compare them
+with the registry. Check them again after delivery. Never omit either field:
+Codex Desktop 26.715.2305.0 / codex-cli 0.145.0-alpha.18 otherwise copies the
+sender turn's settings into the target. The explicit values preserve the already
+matching target; they must never be used to repair a mismatch. `hostId` and a
+stable route token are mandatory to prevent ambiguous or duplicate routing.
+The exchange acknowledges its Codex thread ID, target Pro conversation ID and
+role before opening the browser, then returns a terminal payload through the
+same guarded format. It never messages the other role.
 
 Use route token `<round>:<role>:<commit>:<raw-path>` for idempotence. A nonempty
 scientific raw closes the token. A GitHub-plugin, authentication, model, thread

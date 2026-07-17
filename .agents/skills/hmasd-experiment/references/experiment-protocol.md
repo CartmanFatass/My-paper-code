@@ -22,20 +22,34 @@ The model selection is made only at conversation creation. Never change either
 conversation's model afterward, and never include model or thinking settings in
 heartbeat create/update/retarget operations.
 
-Do not use `send_message_to_thread` or any equivalent cross-thread steering for
-monitor relay. In the observed desktop runtime, steering a Luna monitor from a
-Sol controller applied Sol settings to the monitor, and the return relay then
-applied Luna settings to the controller. Omitting model and reasoning fields did
-not preserve the target. Host binding reduced duplicate delivery but did not
-make model inheritance safe.
+Never omit target settings from a monitor relay. In the observed desktop
+runtime, omitted settings inherit the sender turn and can make Luna/Sol threads
+appear to exchange models. Use exactly:
+
+```javascript
+await tools.codex_app__send_message_to_thread({
+  hostId: "<target host_id>",
+  threadId: "<target thread_id>",
+  model: "<target live model_id>",
+  thinking: "<target live reasoning_effort>",
+  prompt: "<stable handoff_id and terminal payload>"
+})
+```
+
+Immediately before the call, resolve the frozen target thread and its current
+model/effort from the local thread state. Immediately afterward, require the
+same values. `hostId`, `threadId`, `model`, and `thinking` are all mandatory.
+Explicit values preserve an already matching target; they must never repair a
+mismatch. Use the stable handoff ID for idempotence and never edit or restore
+thread settings after delivery.
 
 Each scheduled wake reads the authoritative status once:
 
 ```text
 running   -> update the dedicated monitor dashboard
-failed    -> retarget the same heartbeat to the controller
-completed -> retarget the same heartbeat to the controller
-missing   -> retarget the same heartbeat with monitor_error
+failed    -> guarded direct terminal relay
+completed -> guarded direct terminal relay
+missing   -> guarded direct monitor_error relay
 ```
 
 At a terminal boundary the monitor reads no result or stderr. It derives one
@@ -45,37 +59,18 @@ stable identifier:
 handoff_id = <run-id>:<state>:<status-updated-at>
 ```
 
-It updates the existing automation in place, preserving id, kind and name
-while setting:
+The terminal payload contains only the handoff ID, automation ID, run ID, state,
+phase, status path, and result or direct-error path. The monitor reads no result
+or stderr. After the guarded send returns and the controller settings remain
+unchanged, pause the existing monitor heartbeat and verify `PAUSED`. Only then
+report `handoff_confirmed=true`. If send or settings verification fails, leave
+the heartbeat active for a bounded retry and report `monitor_handoff_error`. If
+pause fails, report `monitor_pause_error`; neither error is an experiment FAIL.
 
-```text
-targetThreadId = active controller
-status         = ACTIVE
-next cadence   = 1 minute
-prompt         = terminal handoff containing handoff id, automation id, run id,
-                 state, phase, status path, and result or direct-error path
-```
-
-The monitor then verifies that the stored automation has the controller target
-and remains active. It may report `handoff_confirmed=true` only after that
-confirmation. If retargeting fails, return native `NOTIFY` with
-`monitor_handoff_error`; do not claim delivery, pause, or experiment failure.
-
-The controller's terminal-handoff wake is idempotent. It first checks the owning
-result boundary. If the same `handoff_id` was already closed, it performs no
-result read and returns a no-op. Otherwise it reads the stored automation: when
-active it updates that automation to `PAUSED`, and when already paused it leaves
-it unchanged. In both cases it must verify the stored `PAUSED` state before it
-reads the registered result or direct error once, interprets the outcome,
-records the closed `handoff_id` in the owning result boundary, and returns
-native `NOTIFY`. If pause fails or cannot be confirmed, report
-`monitor_pause_error` without classifying the experiment as failed. A queued
-duplicate wake may therefore do nothing safely, while a controller that paused
-early can still close an unrecorded result. A future run retargets the paused
-automation back to the unchanged monitor conversation with a new run id and
-handoff namespace. This preserves a dedicated dashboard, provides automatic
-controller handoff, and never steers a conversation or supplies a model
-override.
+The controller treats `handoff_id` idempotently, reads the registered result or
+direct error once, applies the existing branch, and records closure. A duplicate
+message for a closed handoff is a no-op. A future run reactivates the same
+heartbeat on the unchanged monitor conversation with a new run namespace.
 
 Show registered parameters, progress, primary live metric, observed ETA and
 next check in the monitor. Adapt the same schedule to observed ETA:

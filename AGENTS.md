@@ -27,58 +27,26 @@ write scope.
 
 ## Unified Collaboration Workflow
 
-Only three repository workflows are user-facing:
+Direct controller work is the default. Explanations, status, bounded inspection
+or diagnosis, small edits, simple bugs, ordinary Git/docs, prompt generation,
+and routine continuation use no Skill, brief, subagent, or reviewer.
 
-- `$hmasd-work`: explicit or genuinely necessary collaboration for a non-trivial
-  multi-file core algorithm, trainer, or runtime change;
-- `$hmasd-experiment`: experiment contract, package, launch, persistent
-  monitoring, failure diagnosis, and terminal result boundary;
-- `$hmasd-review-round`: Gemini, open Pro, controller synthesis, convergent Pro,
-  and review evidence archival.
+Use one matching project Skill only when its full lifecycle is required:
 
-Direct controller work is the default. Questions, explanations, status reports,
-read-only inspection, bounded diagnosis, single-file edits, simple bugs,
-ordinary Git or documentation, prompt generation, experiment-need decisions,
-and routine continuation use no Skill, brief, subagent, reviewer, or plan
-artifact. Even complex work stays direct when collaboration would not improve
-it materially.
+- `$hmasd-work`: collaboration-dependent multi-file core implementation;
+- `$hmasd-experiment`: real experiment launch, monitoring, repair, or closure;
+- `$hmasd-review-round`: a complete tracked Gemini/Pro review round.
 
-The active controller uses the strongest available model and exclusively
-decides core algorithms, training architecture, causal hypotheses,
-reuse/replacement/deletion, data and gradient flow, probability and clock
-semantics, checkpoint invariants, and stability goals. Implementers execute a
-frozen controller design and do not choose or redesign the route.
+The active controller uses the strongest available model and alone decides the
+algorithm, architecture, causal route, reuse/replacement, data and gradient
+flow, invariants, and stability goals. Implementers execute that frozen design;
+reviewers inspect it. Detailed mechanics live only in the matching Skill and its
+protocol. Never reconstruct them in an ad hoc prompt.
 
-Invoke `$hmasd-work` only when the user explicitly names it or a non-trivial
-multi-file core algorithm, trainer, or runtime change genuinely needs
-collaboration. Such a task creates exactly one temporary artifact:
-
-```text
-.codex/collaboration/active/<task-id>/BRIEF.md
-```
-
-It contains authority, objective, necessary history, contracts, dependencies,
-exact write scopes, dirty-worktree boundary, invariants, non-goals, focused
-evidence, and stop conditions. Information priority is current user instruction,
-then `BRIEF.md`, current repository contracts, and inherited relevant context.
-Return `BLOCKED` on a real conflict.
-
-Use one implementer for a coherent core implementation. Use bounded
-implementers only for genuinely independent work packages with disjoint files
-and a frozen interface; each file has one writer. Implementers inherit three to
-five relevant turns, and the combined reviewer inherits one to three and reads
-the same brief.
-
-Use one fresh combined read-only reviewer after the complete diff is stable.
-Route concrete findings to the original file owner, permit one repair/re-review
-loop, and let the controller adjudicate anything unresolved. Task messages use
-only `BLOCKED`, `PACKAGE_READY`, `REVIEW_READY`, and `COMPLETE`; do not send
-heartbeat or unchanged-state messages.
-
-Respect the configured eight-thread ceiling and spawn depth one. Choose a model
-only while creating a subagent and only from the live runtime catalog. Never
-change an existing task or reviewer conversation's model automatically. Detailed
-mechanics live in the three project skills.
+Respect the configured eight-thread ceiling and spawn depth one. Select a model
+only when creating a new subagent; never change an existing conversation's
+model. Return `BLOCKED` on missing authority, a contract conflict, or required
+scope expansion.
 
 ## Research Loop
 
@@ -156,18 +124,11 @@ controller owns `aggressive`, push with `git push My-paper-code aggressive`. If
 Git/MSYS fails with a Win32 pipe or permission error, retry that exact command
 with scoped escalation.
 
-Batch repository and run boundaries:
-
-- Make one pre-launch commit/push after code, runner, and contract are stable,
-  then one result/disposition commit/push after the terminal outcome.
-- Do not commit or push a launch pointer, progress-only memory update, dry-run,
-  or status wording by itself. Runtime state belongs in `logs/` until the result
-  boundary; an operational repair gets a commit only when tracked code changes.
-- Batch related documentation edits after the implementation boundary settles.
-  If one edit or deletion method is rejected, switch once to a verified exact
-  fallback instead of retrying and restaging the same change repeatedly.
-- Generate a timestamp exactly once when a real run starts. Dry-runs use a
-  stable `DRY_RUN` placeholder and neither reserve nor report a real run ID.
+Use one stable pre-launch commit/push and one terminal result/disposition
+boundary. Do not commit progress pointers, dry runs, or wording alone; runtime
+state stays in `logs/`. Batch related docs, and switch once to an exact fallback
+if an edit method is rejected. Generate a timestamp once at real launch; dry
+runs use `DRY_RUN`.
 
 Preserve unrelated user changes in a dirty worktree and stage only intended
 files. Core MARL changes must explicitly account for tensor shapes, gradient
@@ -187,25 +148,20 @@ and only the artifact needed for a result claim or concrete failure.
 
 ## Formal Experiments
 
-Before a conclusion-bearing launch, read `memory/ALGORITHM_PRINCIPLES.md` and
-the experiment's single `memory/ExpRecord.md` contract. That contract must name
-the causal edge, authorization, comparator level, metrics and thresholds,
-nulls, seeds, environment steps, optimizer updates, outcome branches,
-prohibited changes, expected wall clock, and authoritative status source.
+Use `$hmasd-experiment` for every real experiment lifecycle. Before launch, read
+`ALGORITHM_PRINCIPLES.md` and the owning `ExpRecord.md` contract; it fixes the
+causal edge, authority, comparator, metrics, budgets, branches, prohibitions,
+expected wall clock, placement, and status authority.
 
 Formal experiments use CUDA and parallel execution sized for the wall-clock
 target. Do not silently fall back to CPU or serial execution. Reuse a known
 parallel topology; diagnose topology only after an actual launch failure or for
 a genuinely new workload shape.
 
-By default, long training, multi-seed batches, and heavy analysis run on the
-cloud. Reuse a compatible Bash runner under `scripts/`, write outputs to a
-timestamped `logs/` root on the data disk, commit and push the exact job, then
-register it with the shared scheduler. An explicit user authorization and the
-owning `ExpRecord.md` contract may instead place a bounded toy or formal run on
-local CUDA. Follow that recorded placement and never migrate a run silently
-between local and cloud. Treat the server as available and ask the user to wake
-it only after a real SSH failure.
+Long, multi-seed, or heavy work defaults to cloud data storage and a background
+runner. An explicit authorization and contract may place bounded work on local
+CUDA. Never migrate placement silently; request server wake-up only after a real
+connection failure.
 
 Negative results are binding constraints. Do not retune, rename, reinterpret,
 or rerun a failed line without a newly registered causal reason.
@@ -227,38 +183,19 @@ unless the fact changed, blocks the next action, or the user asked.
 Use `$hmasd-review-round` only for a cross-round architecture contradiction, a
 coherent route connected to the final variable-team plus variable-lifetime
 algorithm, or a critical promotion or retirement boundary that the registered
-contract cannot settle. A routine registered PASS or FAIL does not trigger a
-full round. Gemini and the open GPT-5.6 Pro are blind divergent reviewers with
-equal standing. The controller archives both
-raw responses, synthesizes them against repository evidence, and then submits
-both plus the synthesis to the convergent GPT-5.6 Pro. The convergent review
-ranks and stress-tests a plural portfolio; it may recommend the next serialized
-evidence source, but it does not define a unique legal research direction.
+contract cannot settle; routine prompts and registered PASS/FAIL interpretation
+stay direct. Gemini and open Pro are blind divergent reviewers with equal
+standing; controller synthesis precedes convergent Pro. Reviewers recommend but
+never authorize code, experiments, promotion, disposition, or a unique legal
+research direction.
 
-Reuse the role-specific persistent reviewer conversations registered in
-`docs/external-review/REVIEWER_CONVERSATIONS.json`; open and convergent Pro use
-different external conversation IDs and are never mutual fallbacks. Each Pro
-role also has a separate one-to-one local Codex exchange conversation and
-heartbeat in that registry; the active controller does not perform Pro browser
-transport or send Pro prompts directly across Codex threads. Wake only the
-matching exchange heartbeat with no model/thinking override and require a
-matching local-thread/role/external-thread/model ACK before any send. The
-exchange pauses its heartbeat after exact raw archival or a transport blocker.
-Dedicated experiment monitors and Pro exchange conversations are created as
-`Luna High`; their models are frozen after creation and are never altered by a
-heartbeat or later controller action.
-GPT-5.6 Pro uses the Codex built-in browser; Gemini uses the persistent
-Antigravity CLI conversation in plan and sandbox mode with the tracked
-local-source allowlist. Before a Pro submission, verify the exact registered
-URL, visible model and role heartbeat. Never change an existing conversation's
-model or submit reviewers in parallel.
-
-Archive every response raw before interpretation. Missing raw text is incomplete
-evidence. Automatic exchange covers transport and archival only; no reviewer
-authorizes code, experiments, promotion, or a scientific disposition. Use the
-exact manual prompt when identity, authentication, page state, sources, or
-response completeness is ambiguous. Detailed round mechanics live in
-`docs/external-review/README.md` and `$hmasd-review-round`.
+Reuse the registered persistent, role-specific conversations and never create
+duplicates, mix open/convergent roles, change an existing model, or submit them
+in parallel. Pro transport uses the Skill's guarded direct format with explicit
+target host/thread/model/effort and pre/post identity checks. Archive every raw
+before interpretation; missing or ambiguous raw is incomplete evidence. All
+other transport and recovery mechanics live only in `$hmasd-review-round` and
+`docs/external-review/README.md`.
 
 ## State and Memory
 

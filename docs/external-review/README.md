@@ -33,7 +33,7 @@ one scheduled experiment into a claim that only one research direction exists.
 Reviewer communication is automatic by default. The controller may run Gemini
 after each tracked question boundary is committed and pushed. Pro submissions
 are performed only by the role-specific one-to-one Codex exchange conversations
-through their registered heartbeats; the controller never submits them in its
+through guarded direct delivery; the controller never submits them in its
 own browser. No separate user approval is required for each exchange. The
 automatic sequence remains bounded to one
 blind divergent response per reviewer, one controller synthesis and one
@@ -51,8 +51,9 @@ any failed remote boundary check stops the submission before browser transport.
 
 The machine-readable Pro role and exchange registry is
 `docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each role to one
-external conversation ID, URL, visible model label and heartbeat ACK, plus one
-local Codex exchange thread and its heartbeat automation. Open and convergent
+external conversation ID, URL, visible model label and role ACK, plus one local
+Codex exchange thread and its frozen host/model/effort settings. Open and
+convergent
 roles must use different external and local conversation IDs. Before every
 submission, verify the exact URL, visible model label and existing role ACK
 without changing the model. Any mismatch stops as
@@ -67,37 +68,35 @@ not authorize reviewer-proposed edits, experiments or promotion.
 The controller does not perform Pro browser transport. `External Review
 Exchange — Open Pro` and `External Review Exchange — Convergent Pro` are
 separate one-to-one local Codex conversations created as `Luna High`. Their
-models are frozen after creation. Wake only the matching one
-through its registered heartbeat. The wake payload contains only routing
-metadata, immutable commit and the first missing artifact, and omits
-model/thinking overrides. It must acknowledge its own Codex thread ID plus the
-registered Pro role and external conversation ID before sending the real
-prompt. A direct cross-thread review prompt, cross-role fallback or unverified
-ACK is not a valid handoff. The role heartbeat is paused after completion or a
-transport blocker.
+models are frozen after creation. Send only to the matching exchange, using the
+registry's host, thread, model and effort explicitly. The payload contains only
+routing metadata, immutable commit and the first missing artifact. The exchange
+must acknowledge its own Codex thread ID plus the registered Pro role and
+external conversation ID before sending the real prompt. A settings mismatch,
+cross-role fallback or unverified ACK is not a valid handoff.
 
 The exact dispatch sequence is:
 
 ```text
 controller preflight
--> activate one registered heartbeat
+-> verify target host/thread/model/effort
+-> guarded direct route message
 -> exchange thread/role/target/model ACK
 -> exchange browser submission
 -> exact raw archive or transport blocker
--> exchange heartbeat PAUSED
+-> guarded direct terminal message
 -> controller resumes from the first missing artifact
 ```
 
-The registered heartbeat is currently a temporary compatibility transport.
 Codex Desktop 26.715.2305.0 / codex-cli 0.145.0-alpha.18 has been observed to
 attach the sender turn's model and reasoning settings to a direct
 `send_message_to_thread` delivery even when the optional overrides are absent.
 Two opposite deliveries can therefore look like the conversations exchanged
-models. Project prompts cannot repair this product-level settings contamination.
-Until a newer runtime passes the disposable bidirectional isolation regression
-defined by `$hmasd-review-round`, use the heartbeat plus tracked artifact as the
-only automatic mailbox. Do not pass an explicit target model, edit persisted
-thread settings, auto-restore a model, or test the defect on a real reviewer.
+models. The verified compatibility format therefore supplies the target's
+already-matching `hostId`, `threadId`, `model` and `thinking` on every send and
+checks the target before and after delivery. It never uses a message to repair a
+mismatch, edits persisted settings, or restores a model afterward. The exact
+command is authoritative in `$hmasd-review-round`.
 
 The idempotence token is `<round>:<role>:<commit>:<raw-path>`. A plugin or
 authentication failure is not a scientific reviewer response and is never
