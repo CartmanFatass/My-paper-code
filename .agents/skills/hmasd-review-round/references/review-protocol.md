@@ -74,8 +74,8 @@ Exchange — Convergent Pro` may access only the `CONVERGENT` external thread an
 itself.
 
 Use the exact guarded command in `SKILL.md` for every controller/exchange
-message. Resolve the target's current model and effort before the call and compare them
-with the registry. Check them again after delivery. Never omit either field:
+message. Require an idle target, then resolve its current model and effort and
+compare them with the registry. Check them again after delivery. Never omit either field:
 Codex Desktop 26.715.2305.0 / codex-cli 0.145.0-alpha.18 otherwise copies the
 sender turn's settings into the target. The explicit values preserve the already
 matching target; they must never be used to repair a mismatch. `hostId` and a

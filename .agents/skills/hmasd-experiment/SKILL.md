@@ -49,8 +49,9 @@ runtime has been observed applying sender settings when target settings are
 omitted. On completion, explicit failure, or monitor error, use the guarded
 direct format in
 `references/experiment-protocol.md`: resolve the controller's live model and
-effort, supply them explicitly with host and thread ID, then verify they remain
-unchanged. After confirmed delivery, pause the monitor heartbeat and verify
+effort while it is idle, supply them explicitly with host and thread ID, then
+verify they remain unchanged. If the controller is active, leave the heartbeat
+active for the next bounded attempt. After confirmed delivery, pause it and verify
 `PAUSED`. A stable `handoff_id` makes duplicate delivery a no-op. Never use a
 message to repair a settings mismatch, and never read or interpret the result in
 the monitor.

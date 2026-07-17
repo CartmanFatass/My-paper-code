@@ -50,9 +50,9 @@ is its registered one-to-one local exchange using guarded direct delivery:
 1. Read `REVIEWER_CONVERSATIONS.json` and select exactly one role.
 2. Confirm that role's raw artifact is absent and run the remote evidence
    preflight on the immutable commit.
-3. Read the target thread's live model and effort. They must exactly match the
-   registry; a mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`, never an invitation
-   to change the target.
+3. Require the target to be idle, then read its live model and effort. They must
+   exactly match the registry; an active target waits, while an identity mismatch
+   is `BLOCKED_REVIEW_THREAD_IDENTITY`, never an invitation to change it.
 4. Send only the route token, round path, commit, question path and raw path by
    the exact guarded command below. All routing and target-setting fields are
    mandatory:

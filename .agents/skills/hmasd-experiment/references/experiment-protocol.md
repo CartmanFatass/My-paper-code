@@ -36,9 +36,11 @@ await tools.codex_app__send_message_to_thread({
 })
 ```
 
-Immediately before the call, resolve the frozen target thread and its current
-model/effort from the local thread state. Immediately afterward, require the
-same values. `hostId`, `threadId`, `model`, and `thinking` are all mandatory.
+Immediately before the call, require the frozen target thread to be idle and
+resolve its current model/effort from the local thread state. Immediately
+afterward, require the same values. If the target is active, keep the monitor
+heartbeat active and retry at the next bounded wake. `hostId`, `threadId`,
+`model`, and `thinking` are all mandatory.
 Explicit values preserve an already matching target; they must never repair a
 mismatch. Use the stable handoff ID for idempotence and never edit or restore
 thread settings after delivery.
