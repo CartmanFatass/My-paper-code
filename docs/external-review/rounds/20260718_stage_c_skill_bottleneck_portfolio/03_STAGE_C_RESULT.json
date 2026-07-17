@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "stage": "stage_c_paired_f0_f1",
+  "contract": {
+    "stage": "stage_c_paired_f0_f1",
+    "contract_version": 1,
+    "source_commit": "bf933a3c2b2af4a805f4f9485390ee578934aacd",
+    "run_id": "f0f1_dynamic_roster_stage_c_20260717_221247",
+    "sole_treatment_selector": {
+      "f0": "initial_summary",
+      "f1": "working_summary"
+    },
+    "frozen_environment_and_training_config": {
+      "scenario": "generic_short_dynamic_roster",
+      "membership_schedule": [
+        4,
+        2,
+        6,
+        4
+      ],
+      "reward": "terminal_external_utility_only",
+      "num_envs": 16,
+      "horizon": 80,
+      "rollout_length": 80,
+      "outer_updates": 250,
+      "environment_transitions": 320000,
+      "ppo_passes_per_update": 4,
+      "high_optimizer_steps": 1000,
+      "low_optimizer_steps": 1000,
+      "latent_skills": 3,
+      "optimizer": "Adam",
+      "learning_rate": 0.0003,
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "policy_clip": 0.2,
+      "value_clip": 0.2,
+      "value_coefficient": 0.5,
+      "entropy_coefficient": 0.01,
+      "gradient_clip": 0.5,
+      "evaluation_episodes_per_mode": 256,
+      "bootstrap_repetitions": 10000,
+      "bootstrap_seed": 107057
+    },
+    "seed_and_ledger_map": {
+      "paired_model_initialization": 57057,
+      "training_task_ledger": 67057,
+      "event_opportunity_and_order": 77057,
+      "policy_action_sampling": 87057,
+      "evaluation_ledger": 97057,
+      "bootstrap": 107057,
+      "training_episode_ids": [
+        0,
+        3999
+      ],
+      "evaluation_episode_ids": [
+        0,
+        255
+      ]
+    }
+  },
+  "status": "SUPPORT_H2_SKILL_LIMIT",
+  "implementation_valid": true,
+  "environment_steps": 640000,
+  "optimizer_steps": 4000,
+  "m0": {
+    "both_arms_implementation_valid": true,
+    "paired_initialization_byte_equal": true,
+    "selector_only_contract_difference": true,
+    "paired_zero_ledgers_exact": true,
+    "paired_final_ledgers_exact": true,
+    "f0_common_support_tv": true
+  },
+  "hypotheses": {
+    "f0_task_sufficiency": false,
+    "f1_task_access": false,
+    "f0_executable_skills": false,
+    "f1_executable_skills": false,
+    "h1_components": {
+      "eligible_natural_rows": true,
+      "natural_prefix_tv": true,
+      "f0_reduction": true,
+      "directional_composition": false,
+      "f1_minus_f0_utility": false,
+      "f1_utility": false,
+      "f1_persistent": false,
+      "f1_short": true,
+      "f1_executable_skills": false
+    },
+    "h1_supported": false,
+    "timing_prerequisites": false,
+    "timing": {
+      "read_permitted": false,
+      "conditional_h3_supported": false
+    }
+  },
+  "paired_f1_minus_f0_final_deterministic_utility_ci95": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "arm_summary": {
+    "f0": {
+      "utility": 0.5,
+      "persistent": 0.0,
+      "short": 1.0,
+      "prefix": {
+        "eligible_natural_rows": 1932,
+        "actual_replay_logp_max_error": 2.0259869404348763e-07,
+        "actual_replay_probability_max_error": 7.232466991968778e-08,
+        "directional_eligible_rows": 1770,
+        "directional_case_counts": {
+          "no_persistent_in_roster": 1171,
+          "other_persistent_in_roster": 599,
+          "excluded_focal_persistent": 162
+        },
+        "working_initial_tv_ci95": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "directional_composition_shift_ci95": [
+          -0.0021107797306854597,
+          0.0008337890452803037,
+          0.003761836981862506
+        ],
+        "f0_common_support_tv_max": 0.0
+      },
+      "forced_audit": {
+        "snapshot_count": 128,
+        "skills_per_snapshot": 3,
+        "replicas_per_skill": 2,
+        "steps_per_replica": 12,
+        "forced_environment_steps": 9216,
+        "effect_shape": [
+          128,
+          3,
+          2,
+          4
+        ],
+        "rho": 0.0,
+        "rho_ci95": [
+          0.0,
+          0.0,
+          0.06911206789255277
+        ],
+        "skill_signature_means": [
+          [
+            0.35709635416666674,
+            0.3636067708333332,
+            0.2936197916666666,
+            1.2380208333333336
+          ],
+          [
+            0.3509114583333333,
+            0.37207031249999994,
+            0.2897135416666666,
+            1.2520833333333337
+          ],
+          [
+            0.3193359375,
+            0.388671875,
+            0.2832031249999999,
+            1.2794270833333337
+          ]
+        ],
+        "persistent_like_skill": 0,
+        "reactive_like_skill": 2,
+        "persistent_occupancy_margin": 0.006184895833333426,
+        "reactive_occupancy_margin": 0.016601562500000056,
+        "natural_skill_step_counts": [
+          9028,
+          24982,
+          47910
+        ],
+        "natural_skill_step_shares": [
+          0.110205078125,
+          0.3049560546875,
+          0.5848388671875
+        ],
+        "executable_naturally_used_skills": false
+      },
+      "result_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f0\\result\\stage_c_arm.json"
+    },
+    "f1": {
+      "utility": 0.5,
+      "persistent": 0.0,
+      "short": 1.0,
+      "prefix": {
+        "eligible_natural_rows": 1932,
+        "actual_replay_logp_max_error": 3.704805560111879e-07,
+        "actual_replay_probability_max_error": 1.289055282516216e-07,
+        "directional_eligible_rows": 1524,
+        "directional_case_counts": {
+          "no_persistent_in_roster": 346,
+          "other_persistent_in_roster": 1178,
+          "excluded_focal_persistent": 408
+        },
+        "working_initial_tv_ci95": [
+          0.04756169585676782,
+          0.05002254263703145,
+          0.05257748011919971
+        ],
+        "directional_composition_shift_ci95": [
+          0.008269469470551419,
+          0.010545338806813829,
+          0.012861774929157091
+        ],
+        "f0_common_support_tv_max": null
+      },
+      "forced_audit": {
+        "snapshot_count": 128,
+        "skills_per_snapshot": 3,
+        "replicas_per_skill": 2,
+        "steps_per_replica": 12,
+        "forced_environment_steps": 9216,
+        "effect_shape": [
+          128,
+          3,
+          2,
+          4
+        ],
+        "rho": 0.07030408926280159,
+        "rho_ci95": [
+          0.058321183774750436,
+          0.07030408926280159,
+          0.11116411958574053
+        ],
+        "skill_signature_means": [
+          [
+            0.3391927083333333,
+            0.36588541666666646,
+            0.2848307291666666,
+            1.2760416666666667
+          ],
+          [
+            0.3597005208333335,
+            0.3466796874999999,
+            0.2893880208333333,
+            1.2705729166666668
+          ],
+          [
+            0.2942708333333334,
+            0.4124348958333334,
+            0.27180989583333326,
+            1.34453125
+          ]
+        ],
+        "persistent_like_skill": 1,
+        "reactive_like_skill": 2,
+        "persistent_occupancy_margin": 0.020507812500000167,
+        "reactive_occupancy_margin": 0.04654947916666696,
+        "natural_skill_step_counts": [
+          18165,
+          22864,
+          40891
+        ],
+        "natural_skill_step_shares": [
+          0.22174072265625,
+          0.2791015625,
+          0.49915771484375
+        ],
+        "executable_naturally_used_skills": false
+      },
+      "result_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f1\\result\\stage_c_arm.json"
+    }
+  },
+  "thresholds": {
+    "f0_utility_min": 0.6,
+    "f0_persistent_min": 0.55,
+    "f0_short_min": 0.55,
+    "f0_improvement_lcb_exclusive": 0.1,
+    "eligible_prefix_rows_min": 1024,
+    "prefix_tv_lcb_exclusive": 0.02,
+    "direction_lcb_exclusive": 0.02,
+    "f1_minus_f0_utility_lcb_exclusive": 0.03,
+    "f0_tv_max": 1e-06
+  },
+  "authoritative_status_source": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\runner_status.txt",
+  "next_action": "record the skill bottleneck and stop without adding a module",
+  "wall_seconds": 10027.51168190001
+}
