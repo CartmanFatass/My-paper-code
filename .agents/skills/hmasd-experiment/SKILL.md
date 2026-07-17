@@ -31,19 +31,20 @@ Implementation completion alone never launches a run.
 
 ## Monitor One Run
 
-Reuse one persistent project-local monitor conversation and one schedule
-targeting it. Each wake performs one bounded read of the authoritative status.
-The monitor remains read-only and never edits, tests, restarts, or interprets
-science. Routine dashboards remain in the monitor conversation; notify the
-controller only on completion, explicit failure, or monitor error.
+Reuse one persistent project-local monitor conversation and one heartbeat
+schedule targeting it. Each wake performs one bounded read of the authoritative
+status. The monitor remains read-only and never edits, tests, restarts, or
+interprets science. Routine dashboards remain in that conversation.
 
-At a terminal boundary the monitor sends exactly one structured terminal
-envelope to the active controller with the real cross-thread messaging tool.
-It does not read or interpret the result and does not own terminal schedule
-mutation. The controller first pauses the named schedule and verifies
-`PAUSED`, then reads the result or direct error once and applies the registered
-branch. Text claiming that notification or pause was requested, including a
-`heartbeat` directive, is never success evidence.
+Never use cross-thread messaging for terminal relay: the desktop runtime has
+been observed applying each sender's model settings to the receiver. Instead,
+on completion, explicit failure, or monitor error, the monitor retargets the
+same heartbeat to the active controller with a one-minute terminal-handoff
+prompt and verifies the new target. It does not read the result or alter either
+conversation's model. On the next wake the controller first pauses the same
+schedule and verifies `PAUSED`, then reads the result or direct error once and
+applies the registered branch. Text describing either automation mutation is
+never success evidence.
 
 ## Diagnose and Close
 
