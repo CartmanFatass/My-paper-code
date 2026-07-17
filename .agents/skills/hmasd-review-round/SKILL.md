@@ -22,9 +22,13 @@ submission. Do not reload every workflow document at every stage.
 5. Archive its raw response, then let the controller accept, reject, modify, or
    defer each proposal and update the owning project document.
 
-The convergent reviewer may recommend stopping or at most one active evidence
-source; only the controller may adopt that recommendation. A valid scientific
-FAIL does not require a successor.
+The convergent reviewer must rank and stress-test a portfolio of two to four
+live hypotheses or architectures when defensible. It may recommend stopping or
+the next serialized evidence source, but must not turn compute serialization
+into a unique permitted research direction. Only the controller may adopt its
+recommendation. A valid scientific FAIL does not require a successor for its
+failed branch, but it retires other branches only when the evidence reaches
+them.
 
 ## Verify Pro Evidence Boundary
 

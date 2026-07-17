@@ -47,12 +47,13 @@ F1 -> working_summary
 ## Next Actions
 
 1. Count the closed Stage C disposition as overnight iteration 1 of 5.
-2. For iteration 2, use the frozen Stage C evidence to distinguish coordinator
-   skill supply, low-level skill-conditioned execution, and natural-context
-   transport as competing causes of H2. Prefer analysis-only evidence; do not
-   add a module or retrain Stage C.
-3. Continue only if that attribution leaves a defensible falsifiable successor;
-   otherwise stop before consuming the remaining iteration allowance.
+2. Iteration 2 is a portfolio refresh around H2, not a single attribution gate.
+   Use the two divergent reviewers, repository evidence and controller
+   synthesis to retain two to four candidate explanations or architectural
+   replacements, including the strongest ordinary direct-policy objection.
+3. The convergent reviewer ranks the portfolio and suggests the next serialized
+   evidence source. It does not select a unique legal route. No Stage C rescue,
+   new module or training starts merely from reviewer advice.
 
 ## Overnight Autonomous Boundary
 
@@ -60,13 +61,16 @@ F1 -> working_summary
   iterations, with the terminal Stage C result counted as iteration 1.
 - One iteration closes only on terminal evidence plus a controller disposition;
   an operational retry does not consume an iteration.
-- Each later iteration must name one falsifiable question, one strongest matched
-  comparator, one exact implementation/experiment contract and one active
-  evidence source. No parallel training, parameter rescue or arbitrary gate
-  sequence is authorized.
-- Stop before five if a binding result has no defensible successor, the next
-  action would violate a retired/prohibited branch, or safe progress requires
-  user authority outside this five-iteration research boundary.
+- Each later iteration updates a live portfolio of two to four causal or
+  architectural candidates. An iteration may be divergent design, reanalysis,
+  a bounded prototype or a controlled run; it need not force a single question
+  or unique successor.
+- Only one mutating implementation or compute evidence source is active at a
+  time. This scheduling constraint does not narrow the research portfolio. No
+  parallel training, parameter rescue or arbitrary gate sequence is authorized.
+- Stop before five only if the whole portfolio is exhausted by binding evidence,
+  every next action violates a retired/prohibited branch, or safe progress
+  requires user authority outside this five-iteration research boundary.
 
 ## Immediate Constraints
 

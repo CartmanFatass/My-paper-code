@@ -5,6 +5,12 @@ a coherent route connected to variable team membership plus variable skill
 lifetime, or a critical result whose validity or promotion cannot be settled
 from its registered contract.
 
+The round is portfolio-based. Divergent reviewers may propose competing
+replacements; the controller synthesis retains two to four live candidates
+when evidence permits. The convergent reviewer ranks, attacks and distinguishes
+that portfolio and recommends a next serialized evidence source or a stop. It
+does not convert resource serialization into a unique legal route.
+
 ## Round Sources
 
 The controller starts with `00_REVIEW_BRIEF.md` and

@@ -83,24 +83,31 @@ mechanics live in the three project skills.
 ## Research Loop
 
 HMASD is an algorithm-exploration project. At architecture or research-direction
-boundaries, keep two to four competing causal hypotheses while serializing
-execution to one evidence source at a time:
+boundaries, keep two to four competing causal hypotheses and, when useful, two
+to four candidate architectures. Separate intellectual exploration from compute
+scheduling: ideas may be generated and compared in parallel, while mutating
+implementation and experiment execution remain serialized to one evidence
+source at a time.
 
 ```text
-live hypothesis portfolio
--> one falsifiable question that separates at least two hypotheses
--> smallest implementation, reanalysis or diagnostic that can answer it
--> smallest evidence-bearing controlled run
--> scientific interpretation
--> update, retire or merge hypotheses; integrate one edge or stop
+divergent candidate generation
+-> live hypothesis and architecture portfolio
+-> choose the next evidence source by expected information gain
+-> smallest coherent implementation, reanalysis, prototype or controlled run
+-> interpret the evidence against the whole portfolio
+-> reweight, merge or retire only evidence-resolved branches; repeat or stop
 ```
 
 Progress means new algorithm capability, new experimental evidence, or a
-decision that materially changes the hypothesis portfolio. Multiple hypotheses
-do not authorize parallel implementation or training; choose the active
-experiment by information gain and relevance to the final target. Documentation,
-status prose, audits, artifact inventories, repeated state checks, and workflow
-discussion are support work, not the primary objective.
+decision that materially changes the hypothesis portfolio. One active evidence
+source does not mean one permitted research direction. A focused run may target
+one discriminating observable, but neither the controller nor a reviewer may
+declare a unique route merely because compute is serialized. Multiple
+hypotheses do not authorize parallel competing implementations or training;
+choose the active evidence source by information gain and relevance to the final
+target. Documentation, status prose, audits, artifact inventories, repeated
+state checks, and workflow discussion are support work, not the primary
+objective.
 
 Keep process subordinate to code and evidence. Record only the minimum contract
 needed to prevent an invalid experiment. Do not re-prove accepted facts unless a
@@ -127,8 +134,8 @@ new route is implemented, record in its review question:
 - at least two competing causal explanations for the current evidence and the
   smallest observation that separates them;
 - the strongest ordinary baseline or standard-MARL objection;
-- the one active evidence source, its outcome-dependent portfolio updates and
-  abandonment condition, or an explicit stop.
+- the next serialized evidence source, the outcome-dependent updates for every
+  live candidate and the conditions that would exhaust the whole portfolio.
 
 Prefer architectural replacement and simplification over module accumulation.
 Passing an isolated mechanism gate does not by itself authorize integration.
@@ -224,7 +231,9 @@ contract cannot settle. A routine registered PASS or FAIL does not trigger a
 full round. Gemini and the open GPT-5.6 Pro are blind divergent reviewers with
 equal standing. The controller archives both
 raw responses, synthesizes them against repository evidence, and then submits
-both plus the synthesis to the convergent GPT-5.6 Pro.
+both plus the synthesis to the convergent GPT-5.6 Pro. The convergent review
+ranks and stress-tests a plural portfolio; it may recommend the next serialized
+evidence source, but it does not define a unique legal research direction.
 
 Reuse the persistent reviewer conversations and never create duplicates because
 one is busy. GPT-5.6 Pro uses the Codex built-in browser and an existing verified

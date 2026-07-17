@@ -18,13 +18,14 @@ the HMASD contract rather than by model identity.
    repository evidence and writes a synthesis without selecting by model name.
 4. **GPT-5.6 Pro convergent reviewer.** The existing `HMASD Algorithm
    Consultation` conversation. It receives the evidence pack, both raw reviews
-   and the Codex synthesis, then audits the portfolio and recommends at most one
-   active evidence source or an explicit stop. Only the controller adopts or
-   rejects that recommendation.
+   and the Codex synthesis, then ranks and stress-tests a portfolio of two to
+   four live candidates and recommends the next serialized evidence source or
+   an explicit stop. Only the controller adopts or rejects that recommendation.
 
 The two divergent reviews are blind on their first pass. Neither output is an
-experiment authorization. The convergent reviewer may not invent a fifth route
-without identifying a concrete omission in the evidence pack.
+experiment authorization. The convergent reviewer may add an omitted candidate
+only by identifying a concrete omission in the evidence pack. It must not turn
+one scheduled experiment into a claim that only one research direction exists.
 
 ## Execution default
 
