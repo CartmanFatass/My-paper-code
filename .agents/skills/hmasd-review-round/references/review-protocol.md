@@ -26,6 +26,8 @@ Both Pro question files must state their role explicitly and contain an exact
 
 Reuse the persistent Antigravity CLI conversation with Gemini 3.1 Pro (High).
 Run in plan and sandbox mode with the tracked local-file and paper allowlist.
+Obtain explicit informed user approval for that allowlist before transmitting
+private repository content, logs, or local papers to the external service.
 Keep one live client for research, then export its exact completed response from
 the local `transcript_full.jsonl`; do not send another archival prompt. Use a
 non-interactive invocation only as a failure fallback, never concurrently with

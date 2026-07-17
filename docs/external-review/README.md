@@ -34,7 +34,10 @@ Reviewer communication is automatic by default. The controller may run Gemini
 after each tracked question boundary is committed and pushed. Pro submissions
 are performed only by the role-specific one-to-one Codex exchange conversations
 through guarded direct delivery; the controller never submits them in its
-own browser. No separate user approval is required for each exchange. The
+own browser. A tracked Git-visible Pro exchange needs no repeated approval after
+the round is authorized. Transmitting private repository material, logs or local
+papers to Gemini/Antigravity requires explicit informed approval for the named
+allowlist; automatic review authority does not imply external-data consent. The
 automatic sequence remains bounded to one
 blind divergent response per reviewer, one controller synthesis and one
 convergent response. A follow-up is allowed only to repair a concrete missing

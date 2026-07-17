@@ -42,20 +42,12 @@ same commit. Run `scripts/verify_pro_review_boundary.ps1`; if it fails, return
 `BLOCKED` before browser transport and do not ask the reviewer to discover
 missing evidence.
 
-## Mandatory Pro Dispatch State Machine
+## Mandatory Pro Transport
 
-The active controller never operates the Pro browser. The only valid Pro route
-is its registered one-to-one local exchange using guarded direct delivery:
-
-1. Read `REVIEWER_CONVERSATIONS.json` and select exactly one role.
-2. Confirm that role's raw artifact is absent and run the remote evidence
-   preflight on the immutable commit.
-3. Require the target to be idle, then read its live model and effort. They must
-   exactly match the registry; an active target waits, while an identity mismatch
-   is `BLOCKED_REVIEW_THREAD_IDENTITY`, never an invitation to change it.
-4. Send only the route token, round path, commit, question path and raw path by
-   the exact guarded command below. All routing and target-setting fields are
-   mandatory:
+The controller never operates the Pro browser. For each missing raw artifact,
+select its exact registered local/external pair, pass the remote evidence
+preflight, and require the idle target's live model and effort to match the
+registry. Send only the route token and tracked paths with this exact shape:
 
 ```javascript
 await tools.codex_app__send_message_to_thread({
@@ -67,49 +59,17 @@ await tools.codex_app__send_message_to_thread({
 })
 ```
 
-5. Re-read the target settings after delivery and require the same model and
-   effort. The one-to-one exchange verifies its local thread ID, external
-   conversation ID, role ACK and visible `Pro` label.
-6. Only after that ACK may the exchange conversation use the browser and submit
-   the neutral handoff to its registered external conversation.
-7. It archives the exact completed response before interpretation. A plugin,
-   authentication, identity or completeness failure is recorded as a transport
-   blocker, not as the role's scientific raw response.
-8. It returns only `COMPLETE` or `BLOCKED`, raw path, identity and anomaly by the
-   same guarded command resolved against the controller's live settings. The
-   controller resumes from the first missing artifact.
+Re-read the target settings after delivery. The exchange must verify its local
+thread, external conversation, role ACK and visible `Pro` label before browser
+use, archive the exact response, then return `COMPLETE` or `BLOCKED` through the
+same guarded format resolved against the controller. Never omit `model` or
+`thinking`, repair a mismatch, change a model, edit thread state, mix roles,
+create a duplicate, or submit roles in parallel. A mismatch is
+`BLOCKED_REVIEW_THREAD_IDENTITY`.
 
-Never omit `model` or `thinking`: the affected desktop runtime otherwise
-inherits the sender turn's settings. Never use a guarded send to repair a
-mismatch, and never edit the thread database or restore a model after delivery.
-
-The route token is `<round>:<role>:<commit>:<raw-path>`. Reusing a closed token
-is a no-op. The Open exchange never opens the Convergent external thread, and
-the Convergent exchange never opens the Open external thread.
-
-## Preserve Transport and Authority
-
-Use the exact registered conversation for each Pro role. `OPEN_DIVERGENT` and
-`CONVERGENT` are separate persistent conversations and are never substitutes
-for one another. Before every submission, open the registered URL directly and
-pass the role identity check: the current URL contains the registered
-conversation ID, the page shows the registered model label without opening or
-changing the model selector, and the history contains the exact registered
-role ACK. A mismatch is `BLOCKED_REVIEW_THREAD_IDENTITY`; do not submit, create
-a fallback conversation, or alter any model.
-
-Each Pro role has its own one-to-one local Codex exchange conversation recorded
-under `codex_exchange` in the registry. The controller does not submit Pro
-prompts in its own browser and does not use one exchange conversation for both
-roles. Create each exchange conversation as `Luna High`, then freeze its model;
-an existing manually configured exchange is never changed. A guarded direct
-message always names the target's registered host, thread, model and effort and
-is checked before and after delivery. The target must return its own Codex
-thread ID, external conversation ID and role ACK before any browser side effect.
-Missing or mismatched identity stops transport.
-
-Never create a duplicate because a reviewer is busy, never run parallel
-submissions, and never change an existing conversation's model.
+The route token is `<round>:<role>:<commit>:<raw-path>`; a closed token is a
+no-op. Browser, plugin, authentication, identity, or completeness failures are
+transport blockers, never scientific raw responses.
 
 Resume a round from its first missing artifact. A nonempty raw response is
 immutable and proves that submission is already complete; archive or interpret
@@ -117,7 +77,10 @@ it, but never resubmit that reviewer prompt. An incomplete or ambiguous raw
 response is `BLOCKED` for exact manual recovery, not authority to create another
 reviewer conversation or silently submit again.
 
-Automatic permission covers reviewer communication and raw archival only. It
-does not authorize code, experiments, promotion, or scientific disposition. If
+Automatic permission covers Git-visible Pro transport and raw archival only.
+Sending private repository content, logs, or local papers to Gemini or another
+external service requires explicit informed user approval naming the allowlist;
+workflow automation never implies that consent. Reviewer advice does not
+authorize code, experiments, promotion, or scientific disposition. If
 authentication, model identity, page state, source completeness, or response
 completeness is ambiguous, return `BLOCKED` with the exact manual prompt.

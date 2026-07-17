@@ -10,18 +10,11 @@ first and do not change another task's controller ownership.
 
 ## Activation Boundary
 
-Direct controller work without a Skill announcement, brief, subagent, reviewer,
-or plan artifact is the default. Do not activate this Skill for questions,
-explanations, status or progress reports, one read-only inspection, reading one
-file or result, bounded diagnosis, an explicit single-file edit, a simple bug,
-ordinary Git, one documentation update, prompt generation, an experiment-need
-decision, or routine continuation.
-
-Activate it only when the user explicitly names `$hmasd-work`, or when a
-non-trivial multi-file core algorithm, trainer, or runtime change genuinely
-needs a canonical brief and implementer/reviewer separation. Even a complex
-task remains direct when the controller can complete it efficiently without
-collaboration.
+Direct controller work is the default. Do not activate for explanation, status,
+bounded inspection or diagnosis, one-file work, simple bugs, ordinary Git/docs,
+prompt generation, experiment-need decisions, or routine continuation. Activate
+only when the user names `$hmasd-work` or a multi-file core change genuinely
+benefits from a brief plus implementer/reviewer separation.
 
 Never parallelize competing algorithms or formal experiments. Never change the
 controller or another conversation's model.
@@ -71,35 +64,22 @@ Return `BLOCKED` on a real conflict or missing authority.
 
 Read `references/collaboration-protocol.md` before delegating.
 
-1. Give every file one writer and every reviewer read-only access.
-2. Use one implementer for one coherent core implementation. Use bounded
-   implementers only for genuinely independent work packages with disjoint
-   scopes and a controller-frozen interface.
-3. Let implementers inherit three to five relevant turns and read the brief.
-4. Use one fresh combined reviewer after the complete diff is stable. The
-   reviewer inherits one to three relevant turns, reads the same brief, and
-   checks fidelity without redesigning the route.
-5. Accept only `BLOCKED`, `PACKAGE_READY`, `REVIEW_READY`, or `COMPLETE` as task
-   states.
-6. Route concrete review findings to the original file owner. Permit one repair
-   and re-review pass, then let the controller adjudicate.
+Use one writer per file, one implementer for a coherent change, and bounded
+implementers only for independent disjoint packages. After the stable combined
+diff, use one fresh read-only reviewer and at most one repair/re-review pass.
+Task states are only `BLOCKED`, `PACKAGE_READY`, `REVIEW_READY`, and `COMPLETE`.
 
 The controller alone edits root memory, integrates Git, authorizes experiments,
 interprets scientific evidence, and reports to the user.
 
 ## Preserve the Research Boundary
 
-Before algorithm, reward, or experiment design, read the sources named by
-`AGENTS.md`. Preserve tensor shapes, probability support, likelihood replay,
-gradient and detach semantics, clocks, masks, reward scale, advantage meaning,
-checkpoint compatibility, and collector behavior.
-
-Ordinary implementation receives one necessary direct behavioral check. For an
-operational failure, locate and repair only the failed boundary. Do not turn a
-valid scientific failure into a code defect or parameter rescue. Performance is
-ordinary code quality: a reviewer reports obvious scalar CUDA, repeated packing,
-unnecessary synchronization, or module duplication directly to the controller.
-Do not create an independent performance gate, threshold, smoke, or reviewer.
+Apply the research and runtime invariants from `AGENTS.md`. Do not copy generic
+rules into the brief; record only the task-specific invariants needed to prevent
+semantic drift. Ordinary implementation gets one necessary direct behavioral
+check. Repair only a concrete failed boundary and never reinterpret a valid
+scientific failure as an engineering rescue. Performance remains ordinary code
+quality, not a separate gate or reviewer.
 
 An implementation ending at `COMPLETE` does not authorize smoke training,
 formal experiments, external handoff, staging, or promotion unless that

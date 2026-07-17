@@ -50,52 +50,36 @@ scope expansion.
 
 ## Research Loop
 
-HMASD is an algorithm-exploration project. At architecture or research-direction
-boundaries, keep two to four competing causal hypotheses and, when useful, two
-to four candidate architectures. Separate intellectual exploration from compute
-scheduling: ideas may be generated and compared in parallel, while mutating
-implementation and experiment execution remain serialized to one evidence
-source at a time.
+HMASD is an algorithm-exploration project. At architecture or direction
+boundaries, keep two to four causal hypotheses and, when useful, two to four
+candidate architectures. Generate and compare ideas in parallel, but serialize
+mutating implementation and compute through one active evidence source. One
+evidence source does not imply one permitted research direction.
 
 ```text
-divergent candidate generation
--> live hypothesis and architecture portfolio
--> choose the next evidence source by expected information gain
+live hypothesis and architecture portfolio
+-> choose a discriminating observation by information gain and final relevance
 -> smallest coherent implementation, reanalysis, prototype or controlled run
 -> interpret the evidence against the whole portfolio
 -> reweight, merge or retire only evidence-resolved branches; repeat or stop
 ```
 
 Progress means new algorithm capability, new experimental evidence, or a
-decision that materially changes the hypothesis portfolio. One active evidence
-source does not mean one permitted research direction. A focused run may target
-one discriminating observable, but neither the controller nor a reviewer may
-declare a unique route merely because compute is serialized. Multiple
-hypotheses do not authorize parallel competing implementations or training;
-choose the active evidence source by information gain and relevance to the final
-target. Documentation, status prose, audits, artifact inventories, repeated
-state checks, and workflow discussion are support work, not the primary
-objective.
-
-Keep process subordinate to code and evidence. Record only the minimum contract
-needed to prevent an invalid experiment. Do not re-prove accepted facts unless a
-concrete contradiction blocks the current test.
+decision that changes the portfolio. Documentation, audits, inventories,
+repeated state checks, and workflow prose are support work. Keep contracts to
+the minimum needed to prevent an invalid experiment, and do not re-prove an
+accepted fact without a concrete contradiction.
 
 There is no separate algorithm-verification stage. Let the next
-evidence-bearing diagnostic or controlled run exercise a coherent change. Add a
-focused check only after a concrete operational failure, or when the run cannot
-cheaply expose a direct corruption or wrong-experiment risk. Ordinary
-engineering receives at most one direct behavioral check when use itself is not
-demonstrative.
+evidence-bearing diagnostic or run exercise a coherent change. Add at most one
+focused check for a concrete operational failure or a corruption risk the run
+cannot cheaply expose. Retry only the failed operational path. Apply scientific
+failure review only to a valid non-PASS result and preserve its estimand,
+thresholds, and outcome branches.
 
-Diagnose an operational crash and retry only the failed path. Apply the research
-failure-review gate only to a valid non-PASS scientific result. Preserve its
-registered estimand, thresholds, and outcome branches.
-
-Do not turn terminal toy results into an automatic sequence of new toys. Every
-toy must test a capability that is necessary for the final target: one shared
-algorithm with variable team membership and variable skill lifetime. Before a
-new route is implemented, record in its review question:
+Every toy must test a capability needed by the final target: one shared algorithm
+with variable team membership and variable skill lifetime. Before implementing
+a new route, its review question must record:
 
 - the final capability it unlocks and what later integration would consume it;
 - a replacement ledger: what is deleted, retained, and added;
@@ -105,8 +89,8 @@ new route is implemented, record in its review question:
 - the next serialized evidence source, the outcome-dependent updates for every
   live candidate and the conditions that would exhaust the whole portfolio.
 
-Prefer architectural replacement and simplification over module accumulation.
-Passing an isolated mechanism gate does not by itself authorize integration.
+Do not chain toys automatically. Prefer replacement and simplification over
+module accumulation; an isolated mechanism pass does not authorize integration.
 
 ## Repository and Runtime
 
@@ -193,9 +177,10 @@ Reuse the registered persistent, role-specific conversations and never create
 duplicates, mix open/convergent roles, change an existing model, or submit them
 in parallel. Pro transport uses the Skill's guarded direct format with explicit
 target host/thread/model/effort and pre/post identity checks. Archive every raw
-before interpretation; missing or ambiguous raw is incomplete evidence. All
-other transport and recovery mechanics live only in `$hmasd-review-round` and
-`docs/external-review/README.md`.
+before interpretation; missing or ambiguous raw is incomplete evidence. Private
+local-source transfer to an external reviewer requires explicit informed
+approval for its allowlist. Other transport and recovery mechanics live only in
+`$hmasd-review-round` and its protocol.
 
 ## State and Memory
 
