@@ -6,6 +6,12 @@ Use one active root controller in the project directory. The controller owns
 root memory, Git, scientific interpretation, experiment authority, and the
 user-facing result.
 
+Direct controller work is the default. When collaboration is justified, the
+controller uses the strongest available model and retains all decisions about
+the algorithm, architecture, causal route, reuse/replacement/deletion, data and
+gradient flow, invariants, stability targets, and evidence boundary. These
+decisions are frozen in the brief before implementation.
+
 - Implementer context: three to five recent relevant turns plus `BRIEF.md`.
 - Reviewer context: one to three relevant turns plus the same `BRIEF.md`.
 - Exclude retired routes, unrelated experiments, and old workflow discussion.
@@ -15,13 +21,14 @@ user-facing result.
 
 ## Work Shapes
 
-For coupled work, use one implementer. For parallel work, limit the first phase
-to two or three disjoint writers, lock their shared interface in the brief, and
-give integration files to one later owner. One file never has two writers.
+Use one implementer for a coherent core implementation. The implementer has
+engineering judgment inside the frozen design, but does not select the route,
+add mechanisms, reinterpret the experiment, or expand scope. A real mismatch
+between design and code returns `BLOCKED` to the controller.
 
-A mapper is exceptional: cross-repository work, unknown entry points, or a large
-independent interface inventory. Its stable output is an edit to the existing
-brief, not a new artifact or a message relay chain.
+Use bounded implementers only for genuinely independent work packages with
+disjoint files and a controller-frozen interface. One file never has two
+writers. Do not create a mapper or automatic delegation stage.
 
 ## Reviewer
 
@@ -30,8 +37,12 @@ brief, and necessary contract. The reviewer is read-only and returns either
 `APPROVED` or findings tied to paths and contract clauses. Send accepted
 findings directly to the owning implementer. Allow one repair/re-review loop.
 
-Use multiple reviewers only when two independent high-risk cores genuinely
-require separate expertise.
+The reviewer checks fidelity, probability, gradient, RNG, replay, clock,
+checkpoint, stability risks, scope, and obvious code-quality regressions. It
+does not redesign the algorithm or start another process. Obvious scalar CUDA,
+repeated packing, unnecessary synchronization, or module duplication is
+reported directly to the controller; it does not create a performance gate or
+additional reviewer.
 
 ## States
 

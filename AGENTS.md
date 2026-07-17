@@ -29,15 +29,29 @@ write scope.
 
 Only three repository workflows are user-facing:
 
-- `$hmasd-work`: research design, implementation, diagnosis, focused evidence,
-  bounded delegation, combined review, and collaboration setup;
+- `$hmasd-work`: explicit or genuinely necessary collaboration for a non-trivial
+  multi-file core algorithm, trainer, or runtime change;
 - `$hmasd-experiment`: experiment contract, package, launch, persistent
   monitoring, failure diagnosis, and terminal result boundary;
 - `$hmasd-review-round`: Gemini, open Pro, controller synthesis, convergent Pro,
   and review evidence archival.
 
-Use the smallest useful workflow. A non-trivial task creates exactly one
-temporary collaboration artifact:
+Direct controller work is the default. Questions, explanations, status reports,
+read-only inspection, bounded diagnosis, single-file edits, simple bugs,
+ordinary Git or documentation, prompt generation, experiment-need decisions,
+and routine continuation use no Skill, brief, subagent, reviewer, or plan
+artifact. Even complex work stays direct when collaboration would not improve
+it materially.
+
+The active controller uses the strongest available model and exclusively
+decides core algorithms, training architecture, causal hypotheses,
+reuse/replacement/deletion, data and gradient flow, probability and clock
+semantics, checkpoint invariants, and stability goals. Implementers execute a
+frozen controller design and do not choose or redesign the route.
+
+Invoke `$hmasd-work` only when the user explicitly names it or a non-trivial
+multi-file core algorithm, trainer, or runtime change genuinely needs
+collaboration. Such a task creates exactly one temporary artifact:
 
 ```text
 .codex/collaboration/active/<task-id>/BRIEF.md
@@ -49,12 +63,11 @@ evidence, and stop conditions. Information priority is current user instruction,
 then `BRIEF.md`, current repository contracts, and inherited relevant context.
 Return `BLOCKED` on a real conflict.
 
-For coupled work, use one implementer. For independent work, use at most three
-implementers with disjoint files and a frozen interface. Each file has one
-writer. Implementers inherit three to five relevant turns; the combined
-reviewer inherits one to three and reads the same brief. Use a mapper only when
-an unknown or cross-repository boundary cannot be located cheaply, and put its
-findings directly in the existing brief.
+Use one implementer for a coherent core implementation. Use bounded
+implementers only for genuinely independent work packages with disjoint files
+and a frozen interface; each file has one writer. Implementers inherit three to
+five relevant turns, and the combined reviewer inherits one to three and reads
+the same brief.
 
 Use one fresh combined read-only reviewer after the complete diff is stable.
 Route concrete findings to the original file owner, permit one repair/re-review

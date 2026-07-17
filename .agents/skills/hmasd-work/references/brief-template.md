@@ -12,6 +12,15 @@ short enough for every implementer and reviewer to read completely.
 - Observable completion:
 - Explicitly unauthorized:
 
+## Controller Design
+- Core algorithm decision:
+- Existing implementation to reuse:
+- Components replaced or deleted:
+- Data and gradient flow:
+- Probability, clock, RNG and checkpoint invariants:
+- Expected algorithm behavior and stability:
+- Implementer write scope:
+
 ## Causal Question and Relevant History
 - Active question or engineering objective:
 - Necessary accepted facts:

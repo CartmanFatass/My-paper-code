@@ -43,6 +43,12 @@ Classify a terminal problem before changing anything. Fix and rerun only the
 failed launcher, collector, training, analyzer, packaging, or monitor stage.
 Never retrain when analysis-only repair suffices.
 
+Experiments primarily judge algorithm capability and stability. If observed
+wall time becomes grossly inconsistent with the expected range, the controller
+may stop the run and repair the engineering path directly. This is runtime
+judgment, not a performance gate, new threshold, extra smoke, or authorization
+to change the registered algorithm or experiment contract.
+
 On a valid terminal result, read the registered result once, apply the existing
 outcome branch without rescue, update the owning experiment record, and create
 one result/disposition Git boundary. A negative scientific result remains
