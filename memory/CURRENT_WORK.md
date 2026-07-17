@@ -24,8 +24,9 @@ earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
 The generic-`SHORT` environment has passed the Stage A no-learning carrier.
-Direct primitive-AR, F0/F1 training and algorithm promotion remain
-unauthorized.
+Stage B direct primitive-AR access is now authorized and launch-ready after an
+isolated implementation, one focused behavior check and a valid CUDA smoke.
+F0/F1 training and algorithm promotion remain unauthorized.
 
 ## Causal Portfolio
 
@@ -47,9 +48,10 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Await separate authorization for the Stage B direct primitive-AR access
-   instrument and its frozen 320,000-transition contract.
-2. Do not implement or run F0/F1 until direct access is valid.
+1. Commit and push the stable Stage B code/contract boundary, then run its
+   unchanged local 16-environment, 320,000-transition CUDA gate once.
+2. Interpret only the terminal Stage B result; do not implement or run F0/F1
+   unless direct access is valid.
 3. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; never execute or repurpose its gate.
 
@@ -65,6 +67,11 @@ F1 -> working_summary
 - Stage A result `logs/f0f1_dynamic_roster_stage_a_20260717_143552` is valid:
   all M0 checks pass; constructive `P=S=U=1.0`; random positive-utility fraction
   `1.0` with mean utility `0.331217`; optimizer and intrinsic reads are zero.
+- Stage B uses a 14,980-parameter anonymous recurrent primitive actor-critic,
+  token-factor PPO with one shared team advantage/value, raw current-step
+  action-count prefixes and strict standalone schema-3 checkpoints. Its
+  focused test passed; a CUDA fresh-to-resume smoke preserved exact ledger and
+  cumulative counters, and replay maxima are below `5e-7`.
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.

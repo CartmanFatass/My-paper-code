@@ -64,15 +64,23 @@ architecture-matched testbed and experiment contract. Stop before a real
 environment, subprocess collector, environment-data optimizer step, benchmark
 or training.
 
-The isolated `dynamic_roster_testbed.py` implements only the accepted
-generic-`SHORT` environment and Stage A no-learning carrier. Run
+The isolated `dynamic_roster_testbed.py` implements the accepted generic-`SHORT`
+environment and Stage A no-learning carrier. Run
 `logs/f0f1_dynamic_roster_stage_a_20260717_143552` completed valid
 `PASS_STAGE_A_CARRIER`: all M0 checks pass, the constructive controller has
 `P=S=U=1.0`, and uniform random has positive-utility fraction `1.0` with mean
-utility `0.331217 < 0.55`. The environment therefore has a nonzero but
-nontrivial carrier. No policy network, optimizer, intrinsic reward, shaping or
-event training was used. Direct primitive-AR now requires a separate
-authorization; F0/F1 remains further downstream.
+utility `0.331217 < 0.55`.
+
+The separately authorized Stage B instrument is isolated in
+`ha_ctse_process/dynamic_roster_direct.py` and
+`scripts/run_dynamic_roster_stage_b.py`. It adds only a 32-wide anonymous
+per-lifecycle recurrent primitive actor, active-set sum/count context, raw
+earlier-action counts, one centralized team critic, token-factor PPO with a
+shared team advantage, exact replay and standalone schema-3 checkpointing. One
+focused behavior test and a small CUDA fresh-to-resume smoke pass, including
+exact continuation from the next unconsumed ledger ID. The next boundary is
+the unchanged local 16-environment, 320,000-transition formal gate. F0/F1
+remains further downstream and is not implemented or authorized.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 
