@@ -468,32 +468,48 @@ def replay_direct_trajectory(
         -1, MAX_LIFECYCLES, model.hidden_dim
     ).to(device)
 
-    hidden = initial_hidden
-    logp_rows: list[torch.Tensor] = []
-    entropy_rows: list[torch.Tensor] = []
-    value_rows: list[torch.Tensor] = []
-    hidden_rows: list[torch.Tensor] = []
-    prefix_rows: list[torch.Tensor] = []
-    for offset in range(MAX_RECURRENT_CHUNK):
-        output = model.forward_step(
-            observations=observations[:, offset],
-            active_mask=active_mask[:, offset],
-            order=orders[:, offset],
-            hidden=hidden,
-            teacher_actions=actions[:, offset],
+    env_count = trajectory.observations.shape[1]
+    chunk_count = HORIZON // MAX_RECURRENT_CHUNK
+    chunk_log_probs: list[torch.Tensor] = []
+    chunk_entropies: list[torch.Tensor] = []
+    chunk_values: list[torch.Tensor] = []
+    chunk_hidden_after: list[torch.Tensor] = []
+    chunk_prefix_counts: list[torch.Tensor] = []
+    for chunk_index in range(chunk_count):
+        chunk_slice = slice(
+            chunk_index * env_count, (chunk_index + 1) * env_count
         )
-        logp_rows.append(output.token_log_probs)
-        entropy_rows.append(output.token_entropies)
-        value_rows.append(output.value)
-        hidden_rows.append(output.next_hidden)
-        prefix_rows.append(output.prefix_counts)
-        hidden = output.next_hidden
+        hidden = initial_hidden[chunk_slice]
+        logp_rows: list[torch.Tensor] = []
+        entropy_rows: list[torch.Tensor] = []
+        value_rows: list[torch.Tensor] = []
+        hidden_rows: list[torch.Tensor] = []
+        prefix_rows: list[torch.Tensor] = []
+        for offset in range(MAX_RECURRENT_CHUNK):
+            output = model.forward_step(
+                observations=observations[chunk_slice, offset],
+                active_mask=active_mask[chunk_slice, offset],
+                order=orders[chunk_slice, offset],
+                hidden=hidden,
+                teacher_actions=actions[chunk_slice, offset],
+            )
+            logp_rows.append(output.token_log_probs)
+            entropy_rows.append(output.token_entropies)
+            value_rows.append(output.value)
+            hidden_rows.append(output.next_hidden)
+            prefix_rows.append(output.prefix_counts)
+            hidden = output.next_hidden
+        chunk_log_probs.append(torch.stack(logp_rows, dim=1))
+        chunk_entropies.append(torch.stack(entropy_rows, dim=1))
+        chunk_values.append(torch.stack(value_rows, dim=1))
+        chunk_hidden_after.append(torch.stack(hidden_rows, dim=1))
+        chunk_prefix_counts.append(torch.stack(prefix_rows, dim=1))
     return DirectReplay(
-        log_probs=torch.stack(logp_rows, dim=1),
-        entropies=torch.stack(entropy_rows, dim=1),
-        values=torch.stack(value_rows, dim=1),
-        hidden_after=torch.stack(hidden_rows, dim=1),
-        prefix_counts=torch.stack(prefix_rows, dim=1),
+        log_probs=torch.cat(chunk_log_probs, dim=0),
+        entropies=torch.cat(chunk_entropies, dim=0),
+        values=torch.cat(chunk_values, dim=0),
+        hidden_after=torch.cat(chunk_hidden_after, dim=0),
+        prefix_counts=torch.cat(chunk_prefix_counts, dim=0),
         active_mask=active_mask,
     )
 

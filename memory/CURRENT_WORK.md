@@ -24,9 +24,12 @@ earlier applied commitments improve natural roster composition and terminal
 external utility beyond the matched F0 controller?
 
 The generic-`SHORT` environment has passed the Stage A no-learning carrier.
-Stage B direct primitive-AR access is now authorized and launch-ready after an
-isolated implementation, one focused behavior check and a valid CUDA smoke.
-F0/F1 training and algorithm promotion remain unauthorized.
+Stage B direct primitive-AR access remains authorized. Its first formal attempt
+was scientifically invalid only because merged recurrent-chunk replay changed
+CUDA batch geometry and made joint log-probability error exceed `1e-6`. The
+isolated original-batch replay repair passes the worst retained ledger; a fresh
+unchanged rerun is now required. F0/F1 training and algorithm promotion remain
+unauthorized.
 
 ## Causal Portfolio
 
@@ -48,8 +51,8 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Commit and push the stable Stage B code/contract boundary, then run its
-   unchanged local 16-environment, 320,000-transition CUDA gate once.
+1. Commit and push the isolated Stage B replay-geometry repair, then rerun its
+   unchanged local 16-environment, 320,000-transition CUDA gate from zero.
 2. Interpret only the terminal Stage B result; do not implement or run F0/F1
    unless direct access is valid.
 3. Remove the uncommitted R55 draft only at its separately verified cleanup
@@ -72,6 +75,9 @@ F1 -> working_summary
   action-count prefixes and strict standalone schema-3 checkpoints. Its
   focused test passed; a CUDA fresh-to-resume smoke preserved exact ledger and
   cumulative counters, and replay maxima are below `5e-7`.
+- The first 320K attempt met every access threshold but is not scientific
+  evidence: joint replay alone reached `1.77e-6`. Original-batch chunk replay
+  reduced the same worst-ledger check to `9.54e-7`; only the fresh rerun counts.
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.
