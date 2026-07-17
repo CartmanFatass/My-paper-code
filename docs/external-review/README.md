@@ -24,6 +24,24 @@ The two divergent reviews are blind on their first pass. Neither output is an
 experiment authorization. The convergent reviewer may not invent a fifth route
 without identifying a concrete omission in the evidence pack.
 
+## Execution default
+
+Reviewer communication is automatic by default. The controller may run Gemini
+and submit the open and convergent GPT-5.6 Pro prompts after each tracked
+question boundary is committed and pushed; it does not request separate user
+approval for each exchange. The automatic sequence remains bounded to one
+blind divergent response per reviewer, one controller synthesis and one
+convergent response. A follow-up is allowed only to repair a concrete missing
+source or ambiguous response, not to keep searching until a preferred answer
+appears.
+
+Reuse the two established Pro conversations and the one live Gemini process.
+Do not create duplicate conversations, alter a conversation's model or run the
+open and convergent prompts in the same conversation. If the existing Pro
+conversation is not already GPT-5.6 Pro, or its identity cannot be verified,
+stop that submission and emit the manual handoff prompt. Automatic exchange
+does not authorize reviewer-proposed edits, experiments or promotion.
+
 ## Round ownership
 
 New multi-review work lives under one round directory:

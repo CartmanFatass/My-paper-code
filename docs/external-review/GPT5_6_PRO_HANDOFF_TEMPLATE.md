@@ -1,7 +1,8 @@
-# GPT-5.6 Pro Manual Handoff Template
+# GPT-5.6 Pro Handoff Template
 
-Replace only `<commit>` and `<question-path>`, then give the complete text to the
-user as a directly copyable prompt.
+Replace only `<commit>` and `<question-path>`, then submit the complete text
+verbatim to the designated GPT-5.6 Pro conversation. If automatic submission
+is unavailable, give the same complete text to the user as the manual fallback.
 
 ```text
 请通过 GitHub 插件读取私有仓库 CartmanFatass/My-paper-code 的 aggressive 分支，

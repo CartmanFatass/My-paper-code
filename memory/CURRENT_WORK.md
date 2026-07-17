@@ -10,8 +10,9 @@ Updated: 2026-07-17
 - **Project boundary:** IMOD is operational reference only, not HMASD evidence.
 - **Shared GPU scheduler:** Codex task
   `019f5aca-bde7-70b3-8c94-24584136c2c9`.
-- **External review:** the two user-authorized blind dual-divergent rounds are
-  complete. Do not start a third automated round without new authorization.
+- **External review:** reviewer communication is automatic by default. The
+  user authorized the next blind dual-divergent design round; reviewer output
+  still cannot authorize implementation or experiments.
 - **Review workflow:** Gemini research uses one live
   `agy --prompt-interactive` process per bounded round and exports the final
   local transcript without another prompt. Conversation recovery is only for
@@ -20,19 +21,21 @@ Updated: 2026-07-17
 
 ## Objective
 
-The authorized F1 deterministic-transaction implementation boundary is
-complete. F1 remains the leading skill-based hypothesis and F0 the undefeated
-ordinary-MARL reduction; their sole difference is initial-set versus
-applied-prefix conditioning of the same commitment model. Await a separately
-authorized architecture-matched testbed/experiment contract; no training is
-running.
+Complete the automatic blind dual-divergent and convergent design round for one
+architecture-matched F0/F1 dynamic-roster toy testbed. F1 remains the leading
+skill-based hypothesis and F0 the undefeated ordinary-MARL reduction; their
+sole difference is initial-set versus applied-prefix conditioning of the same
+commitment model. This round designs the environment and evidence contract;
+it does not authorize implementation or training.
 
 ## Next Actions
 
-1. Await user direction on whether to design the separate F0/F1 testbed and
-   experiment contract. Do not infer authorization to construct an environment
-   or train from the engineering trace.
-2. Remove the uncommitted R55 draft only at its separately verified cleanup
+1. Run one blind Gemini divergent review and one blind open GPT-5.6 Pro review
+   from the tracked testbed-design brief, archive both raw responses, synthesize
+   them, then obtain one convergent Pro disposition.
+2. Move only the accepted design into `docs/research/`; do not construct the
+   environment or launch training from reviewer advice alone.
+3. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; do not execute or replace its gate.
 
 ## Immediate Constraints

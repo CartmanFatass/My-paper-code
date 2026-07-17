@@ -163,12 +163,22 @@ Archive an external response raw before interpreting it. Record the source
 model, date, related claim, and accept/reject/modify/defer disposition. Missing
 raw text means incomplete evidence.
 
-GPT-5.6 Pro exchange is manual by default. After committing and pushing the
-tracked question, give the user one directly copyable prompt and stop that
-review step. The user submits it in the existing `HMASD Algorithm Consultation`
-conversation and returns the raw response. Use browser or Computer Use only
-when the user explicitly authorizes automation for that specific round. Reuse
-the existing consultation conversation and never submit parallel prompts.
+External-review exchange is automatic by default. Once the controller opens a
+qualifying review round, it may run the local Gemini phase and submit the
+tracked open/convergent GPT-5.6 Pro prompts without requesting per-round user
+authorization. Reuse the dedicated open Pro conversation and the existing
+`HMASD Algorithm Consultation` conversation; never create duplicate reviewer
+conversations or submit parallel prompts. Verify that the target conversation
+already uses GPT-5.6 Pro and never change any conversation's model
+automatically. If authentication, model identity or page state is ambiguous,
+fall back to the directly copyable manual prompt instead of guessing.
+
+Automatic review permission covers reviewer communication and raw-response
+archival only. It does not authorize repository changes proposed by a reviewer,
+an experiment launch, promotion or a scientific disposition. The controller
+still synthesizes the evidence and applies the normal implementation/experiment
+authorization boundary. The user may explicitly pause a round or request
+manual exchange at any time.
 
 Use the dedicated open GPT-5.6 Pro conversation as an independent divergent
 reviewer and the existing `HMASD Algorithm Consultation` conversation as the
@@ -191,8 +201,10 @@ not request parallel executions.
 
 For every handoff, read
 `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md`, replace only its commit
-and question-path placeholders, and include the resulting prompt verbatim in
-the user-facing response.
+and question-path placeholders, and submit the resulting prompt verbatim. Store
+the exact prompt boundary in the tracked question/round evidence. If automatic
+submission is unavailable, include it verbatim in the user-facing response as
+the manual fallback.
 
 Use the persistent Antigravity CLI conversation for Gemini 3.1 Pro (High) as
 the other independent divergent reviewer. The round-centric workflow is owned
