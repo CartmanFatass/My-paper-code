@@ -1,8 +1,7 @@
 # Variable-N + Variable-Lifetime Event Architecture Implementation Plan
 
-Status: convergent-review corrected; implementation may proceed only to the
-focused deterministic transaction trace after user approval; training is not
-authorized
+Status: focused deterministic transaction trace implemented and passed;
+training is not authorized
 Date: 2026-07-17
 Owning contract:
 `docs/research/designs/VARIABLE_N_LIFETIME_EVENT_ARCHITECTURE_CONTRACT.md`
@@ -605,3 +604,24 @@ a subprocess environment, run an optimizer on environment data, benchmark,
 emit a scientific PASS/FAIL or infer that F1 is useful or integrated. If all
 correctness checks pass but F1 changes only masks, a common additive shift or
 no normalized common-support distribution, retire H1 and adopt `STOP_AT_F0`.
+
+## 15. Implemented boundary
+
+The user selected F1 and authorized the focused implementation boundary. The
+shared F0/F1 event runtime, typed collector capability, early fail-closed
+dispatch and one deterministic production trace are implemented in the four
+files registered in Sections 2 and 12.
+
+The focused test file reports `8 passed`. Its trace covers genuine join,
+concurrent KEEP/SET, survivor continuity, temporary leave/rejoin, terminal
+leave, policy-version truncation, actor-invalid continuation, exact token
+replay, duration credit, ragged low replay, schema-3 resume, permutation
+compatibility, legacy isolation and equal F0/F1 capacity. The constructive
+common-support control changes centered F1 logits and leaves F0 unchanged, so
+the wiring-level `STOP_AT_F0` condition did not trigger.
+
+This result does not establish learnability, cooperation, variable-N benefit,
+variable-lifetime benefit or F1 superiority. No real environment, subprocess
+collector, environment-data optimizer, benchmark or training was used. The
+next boundary remains a separately authorized architecture-matched testbed and
+experiment contract.

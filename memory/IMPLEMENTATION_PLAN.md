@@ -4,7 +4,7 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
-## Variable-N + Variable-Lifetime Event Architecture — Corrected Plan
+## Variable-N + Variable-Lifetime Event Architecture — Focused Trace Complete
 
 The architecture and implementation-plan rounds are complete under:
 
@@ -46,11 +46,23 @@ member-event credit, simulator-aware strict schema-3 resume and one deterministi
 transaction trace. F0 reads the initial set summary; F1 reads the applied
 working-set summary. No other intervention is allowed.
 
-The next boundary is user approval to implement only through that one focused
-trace. Stop before a real environment, subprocess collector, environment-data
-optimizer step, benchmark or training. A trace showing only mask changes,
-common additive shifts or unchanged normalized common-support probabilities
-retires F1 and selects `STOP_AT_F0`.
+The authorized implementation now ends at that one focused trace:
+
+- `ha_ctse_process/variable_roster_event.py` owns the event runtime and shared
+  F0/F1 production graph;
+- `ha_ctse_process/collectors.py` transports default-off snapshot-capable typed
+  transactions without policy lifecycle state;
+- `ha_ctse_process/train.py` reads the event header and fails closed before
+  collector or fixed-N agent construction;
+- `tests/ha_ctse_process_variable_roster_event_test.py` passed all eight focused
+  checks on CPU.
+
+The common-support constructive control changes relative normalized F1 logits,
+so the `STOP_AT_F0` wiring condition did not trigger. This proves only that F1
+is structurally distinct from F0. The next boundary is a separately authorized
+architecture-matched testbed and experiment contract. Stop before a real
+environment, subprocess collector, environment-data optimizer step, benchmark
+or training.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 

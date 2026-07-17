@@ -682,7 +682,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--skill_interval", type=int, default=10)
     parser.add_argument(
         "--high_controller",
-        choices=("legacy_duration", "r30_fixed_clock_ar_edit"),
+        choices=(
+            "legacy_duration",
+            "r30_fixed_clock_ar_edit",
+            "variable_roster_event",
+        ),
+        default="",
+    )
+    parser.add_argument(
+        "--event_architecture_mode",
+        choices=("f0", "f1"),
         default="",
     )
     parser.add_argument(
@@ -1039,6 +1048,11 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     config.skill_interval = int(args.skill_interval)
     if str(getattr(args, "high_controller", "")):
         config.high_controller = str(args.high_controller)
+    if str(getattr(args, "event_architecture_mode", "")):
+        config.event_architecture_mode = str(args.event_architecture_mode)
+    if str(getattr(config, "high_controller", "")) == "variable_roster_event":
+        config.event_architecture_schema_version = 1
+        config.event_opportunity_schedule = "uniform_active_gap_v1"
     config.r28_g1_arm = str(getattr(args, "r28_g1_arm", "off"))
     config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
     config.r28_g1_engineering_smoke = bool(
@@ -2123,7 +2137,40 @@ def _manifest_lookup(manifest: dict[str, Any], name: str) -> Any:
 
 
 def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
-    checkpoint = torch.load(Path(path), map_location="cpu")
+    # Checkpoints are project-owned local artifacts.  PyTorch 2.6 changed the
+    # default to weights_only=True, which cannot decode the registered runtime
+    # ledger and NumPy RNG state.  Explicit False preserves the historical
+    # loader contract while keeping the trust boundary at the caller-selected
+    # local path.
+    checkpoint = torch.load(Path(path), map_location="cpu", weights_only=False)
+    checkpoint_schema = int(checkpoint.get("checkpoint_schema_version", 1))
+    if checkpoint_schema == 3:
+        event = checkpoint.get("event_architecture")
+        if checkpoint.get("high_controller") != "variable_roster_event":
+            raise ValueError("schema-3 checkpoint has the wrong high controller")
+        if not isinstance(event, dict):
+            raise ValueError("schema-3 checkpoint is missing event_architecture")
+        required_header = {
+            "architecture_mode",
+            "event_architecture_schema_version",
+            "opportunity_schedule_name",
+            "snapshot_capability_name",
+            "snapshot_capability_version",
+        }
+        missing = sorted(required_header - set(event))
+        if missing:
+            raise ValueError(f"schema-3 event header is missing fields: {missing}")
+        return {
+            "checkpoint_schema_version": checkpoint_schema,
+            "high_controller": "variable_roster_event",
+            "event_architecture_mode": str(event["architecture_mode"]),
+            "event_architecture_schema_version": int(
+                event["event_architecture_schema_version"]
+            ),
+            "event_opportunity_schedule": str(event["opportunity_schedule_name"]),
+            "snapshot_capability_name": str(event["snapshot_capability_name"]),
+            "snapshot_capability_version": int(event["snapshot_capability_version"]),
+        }
     manifest = _load_adjacent_run_manifest(path)
     raw_r28_g1 = checkpoint.get("r28_g1")
     r28_g1_metadata = None
@@ -2233,6 +2280,30 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
 def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[str, Any]) -> None:
     requested_controller = str(getattr(args, "high_controller", "") or "")
     source_controller = str(metadata.get("high_controller") or "legacy_duration")
+    if int(metadata.get("checkpoint_schema_version", 1)) == 3:
+        if source_controller != "variable_roster_event":
+            raise ValueError("schema-3 checkpoint is not an event checkpoint")
+        if requested_controller and requested_controller != source_controller:
+            raise ValueError(
+                "checkpoint high_controller mismatch: "
+                f"requested={requested_controller}, source={source_controller}"
+            )
+        requested_mode = str(getattr(args, "event_architecture_mode", "") or "")
+        source_mode = str(metadata.get("event_architecture_mode", ""))
+        if requested_mode and requested_mode != source_mode:
+            raise ValueError(
+                "checkpoint event_architecture_mode mismatch: "
+                f"requested={requested_mode}, source={source_mode}"
+            )
+        config.high_controller = source_controller
+        config.event_architecture_mode = source_mode
+        config.event_architecture_schema_version = int(
+            metadata.get("event_architecture_schema_version", -1)
+        )
+        config.event_opportunity_schedule = str(
+            metadata.get("event_opportunity_schedule", "")
+        )
+        return
     if not requested_controller:
         config.high_controller = source_controller
     elif requested_controller != source_controller:
@@ -2553,6 +2624,48 @@ def enforce_r29_action_info_contract(
         raise ValueError("R29-T10 requires skill_interval=10")
     if tuple(int(value) for value in config.skill_lifetime_candidates) != (1, 2, 3, 4):
         raise ValueError("R29-T10 requires skill lifetimes (1,2,3,4)")
+
+
+def is_variable_roster_event(config) -> bool:
+    return str(getattr(config, "high_controller", "")) == "variable_roster_event"
+
+
+def enforce_variable_roster_event_contract(
+    config,
+    args: argparse.Namespace,
+    metadata: dict[str, Any] | None,
+) -> None:
+    """Validate the event header without importing or constructing the runtime."""
+
+    if not is_variable_roster_event(config):
+        return
+    mode = str(getattr(config, "event_architecture_mode", "")).lower()
+    if mode not in {"f0", "f1"}:
+        raise ValueError("variable_roster_event requires event_architecture_mode=f0|f1")
+    if int(getattr(config, "event_architecture_schema_version", -1)) != 1:
+        raise ValueError("variable_roster_event requires architecture schema version 1")
+    if str(getattr(config, "event_opportunity_schedule", "")) != (
+        "uniform_active_gap_v1"
+    ):
+        raise ValueError("variable_roster_event requires uniform_active_gap_v1")
+    if metadata is not None and int(metadata.get("checkpoint_schema_version", -1)) != 3:
+        raise ValueError("event resume rejects legacy/schema-1/schema-2 checkpoints")
+    if str(getattr(args, "r28_g1_arm", "off")) != "off":
+        raise ValueError("variable_roster_event rejects R28-G1")
+    if str(getattr(args, "r29_action_info_mode", "off")) != "off":
+        raise ValueError("variable_roster_event rejects R29 action information")
+    if str(getattr(args, "r31_effect_mode", "off") or "off") != "off":
+        raise ValueError("variable_roster_event rejects R31 effect objectives")
+
+
+def dispatch_variable_roster_event_boundary(config) -> None:
+    """Lazy event import and fail-closed stop before collector construction."""
+
+    from ha_ctse_process.variable_roster_event import (
+        assert_deterministic_trace_boundary,
+    )
+
+    assert_deterministic_trace_boundary(config)
 
 
 def enforce_r30_contract(config, args: argparse.Namespace) -> None:
@@ -4317,6 +4430,8 @@ def log_eval_metrics(writer, total_steps: int, metrics: dict[str, float]) -> Non
 
 
 def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProcessAgent, int, int]:
+    if is_variable_roster_event(config):
+        dispatch_variable_roster_event_boundary(config)
     num_envs = max(int(args.num_envs), 1)
     collector = create_collector(config, args, scale_mode="train", num_envs=num_envs)
     try:
@@ -5184,6 +5299,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
 
 
 def eval_loop(config, args: argparse.Namespace, writer) -> None:
+    if is_variable_roster_event(config):
+        dispatch_variable_roster_event_boundary(config)
     if not args.resume_from:
         raise ValueError("--mode eval requires --resume_from pointing to a standalone checkpoint")
     env = create_env(config, config.scenario, args.seed, rank=0, scale_mode="eval")
@@ -5237,6 +5354,14 @@ def main() -> None:
     if args.resume_from:
         metadata = load_checkpoint_metadata(args.resume_from)
         apply_checkpoint_structure(config, args, metadata)
+    if is_variable_roster_event(config):
+        enforce_variable_roster_event_contract(config, args, metadata)
+        try:
+            dispatch_variable_roster_event_boundary(config)
+        finally:
+            if writer is not None:
+                writer.close()
+        return
     enforce_r28_g1_contract(config, args, metadata)
     enforce_r29_action_info_contract(config, args)
     enforce_r30_pair_gate(config, args, metadata)

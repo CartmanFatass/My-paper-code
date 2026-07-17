@@ -1,6 +1,6 @@
 # Variable-N + Variable-Lifetime Event Architecture Contract
 
-Status: design contract; implementation and training are not authorized
+Status: focused deterministic implementation complete; training is not authorized
 Date: 2026-07-17
 Owning disposition:
 `docs/external-review/rounds/20260717_variable_n_lifetime_architecture/50_DISPOSITION.md`
@@ -751,9 +751,10 @@ That plan freezes the external opportunity schedule, ragged tensor/storage
 shapes, single F0/F1 mode dispatch, strict checkpoint boundary and focused
 engineering checks. The second blind implementation-plan review returned
 `MODIFY_PLAN` and authorized the finite document corrections now incorporated
-here. Production implementation is conditionally permitted only after the
-implementation plan contains the same ownership, transaction, critic,
-live-resume and common-support evidence contracts. Its scope ends at one
-hand-authored, deterministic production transaction trace. It does not
-authorize a real environment, training, a testbed, scientific PASS/FAIL or
-another automatic review round.
+here. The implementation plan now contains those ownership, transaction,
+critic, live-resume and common-support contracts. Its one hand-authored
+deterministic production transaction trace passed the focused engineering
+checks, including a constructive common-support control in which F1 changes
+relative normalized logits while F0 does not. This is implementation evidence
+only. It does not authorize a real environment, training, a testbed,
+scientific PASS/FAIL or another automatic review round.

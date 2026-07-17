@@ -15,6 +15,67 @@ from typing import Any
 from ha_ctse_process.env_factory import EnvSpec, make_env
 
 
+EVENT_SNAPSHOT_CAPABILITY_NAME = "variable_roster_event_snapshot"
+EVENT_SNAPSHOT_CAPABILITY_VERSION = 1
+
+
+def _event_capability(env) -> dict[str, Any]:
+    capability = getattr(env, "event_runtime_snapshot_capability", None)
+    snapshot = getattr(env, "snapshot_event_runtime", None)
+    restore = getattr(env, "restore_event_runtime", None)
+    if not callable(capability) or not callable(snapshot) or not callable(restore):
+        raise RuntimeError("environment does not expose event-runtime snapshot capability")
+    value = dict(capability())
+    if value.get("name") != EVENT_SNAPSHOT_CAPABILITY_NAME or int(
+        value.get("version", -1)
+    ) != EVENT_SNAPSHOT_CAPABILITY_VERSION:
+        raise RuntimeError("environment event-runtime snapshot capability is unsupported")
+    return value
+
+
+def _collector_snapshot(worker_snapshots: list[dict[str, Any]]) -> dict[str, Any]:
+    if not worker_snapshots:
+        raise RuntimeError("event-runtime snapshot requires at least one worker")
+    return {
+        "snapshot_capability_name": EVENT_SNAPSHOT_CAPABILITY_NAME,
+        "snapshot_capability_version": EVENT_SNAPSHOT_CAPABILITY_VERSION,
+        "collector_active_presentation": [
+            snapshot.get("active_presentation") for snapshot in worker_snapshots
+        ],
+        "pending_membership_transaction": [
+            snapshot.get("pending_membership_transaction")
+            for snapshot in worker_snapshots
+        ],
+        "collector_pending_command_response_state": [
+            snapshot.get("pending_command_response_state")
+            for snapshot in worker_snapshots
+        ],
+        "worker_environment_snapshot": [
+            snapshot.get("worker_environment_snapshot")
+            for snapshot in worker_snapshots
+        ],
+        "environment_rng_state": [
+            snapshot.get("environment_rng_state") for snapshot in worker_snapshots
+        ],
+        "workers": worker_snapshots,
+    }
+
+
+def _validate_collector_snapshot(snapshot: Any, num_envs: int) -> dict[str, Any]:
+    if not isinstance(snapshot, dict):
+        raise ValueError("collector event snapshot must be a dictionary")
+    if snapshot.get("snapshot_capability_name") != EVENT_SNAPSHOT_CAPABILITY_NAME:
+        raise ValueError("collector event snapshot capability name mismatch")
+    if int(snapshot.get("snapshot_capability_version", -1)) != (
+        EVENT_SNAPSHOT_CAPABILITY_VERSION
+    ):
+        raise ValueError("collector event snapshot capability version mismatch")
+    workers = snapshot.get("workers")
+    if not isinstance(workers, list) or len(workers) != int(num_envs):
+        raise ValueError("collector event snapshot worker count mismatch")
+    return snapshot
+
+
 @dataclass
 class EnvStep:
     obs: Any
@@ -57,6 +118,15 @@ def _worker(remote, parent_remote, config, scenario: str, seed: int, rank: int, 
                         },
                     )
                 )
+            elif command == "event_capability":
+                remote.send(("ok", _event_capability(env)))
+            elif command == "event_snapshot":
+                _event_capability(env)
+                remote.send(("ok", env.snapshot_event_runtime()))
+            elif command == "event_restore":
+                _event_capability(env)
+                env.restore_event_runtime(payload)
+                remote.send(("ok", None))
             elif command == "close":
                 remote.send(("ok", None))
                 break
@@ -103,6 +173,23 @@ class SyncEnvCollector:
 
     def step(self, actions):
         return [EnvStep(*env.step(action)) for env, action in zip(self.envs, actions)]
+
+    def event_runtime_capability(self) -> dict[str, Any]:
+        values = [_event_capability(env) for env in self.envs]
+        if any(value != values[0] for value in values[1:]):
+            raise RuntimeError("event-runtime collector workers disagree on capability")
+        return dict(values[0])
+
+    def snapshot_event_runtime(self) -> dict[str, Any]:
+        self.event_runtime_capability()
+        worker_snapshots = [dict(env.snapshot_event_runtime()) for env in self.envs]
+        return _collector_snapshot(worker_snapshots)
+
+    def restore_event_runtime(self, snapshot: dict[str, Any]) -> None:
+        value = _validate_collector_snapshot(snapshot, self.num_envs)
+        self.event_runtime_capability()
+        for env, worker_snapshot in zip(self.envs, value["workers"]):
+            env.restore_event_runtime(worker_snapshot)
 
     def close(self) -> None:
         for env in self.envs:
@@ -184,6 +271,29 @@ class SubprocEnvCollector:
         except Exception:
             self._broken = True
             raise
+
+    def event_runtime_capability(self) -> dict[str, Any]:
+        for remote in self.remotes:
+            remote.send(("event_capability", None))
+        values = [dict(self._recv(remote)) for remote in self.remotes]
+        if any(value != values[0] for value in values[1:]):
+            raise RuntimeError("event-runtime collector workers disagree on capability")
+        return dict(values[0])
+
+    def snapshot_event_runtime(self) -> dict[str, Any]:
+        self.event_runtime_capability()
+        for remote in self.remotes:
+            remote.send(("event_snapshot", None))
+        worker_snapshots = [dict(self._recv(remote)) for remote in self.remotes]
+        return _collector_snapshot(worker_snapshots)
+
+    def restore_event_runtime(self, snapshot: dict[str, Any]) -> None:
+        value = _validate_collector_snapshot(snapshot, self.num_envs)
+        self.event_runtime_capability()
+        for remote, worker_snapshot in zip(self.remotes, value["workers"]):
+            remote.send(("event_restore", worker_snapshot))
+        for remote in self.remotes:
+            self._recv(remote)
 
     def close(self) -> None:
         if bool(getattr(self, "_broken", False)):

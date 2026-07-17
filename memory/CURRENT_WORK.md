@@ -20,17 +20,18 @@ Updated: 2026-07-17
 
 ## Objective
 
-Await the next user-selected implementation boundary for the corrected F0/F1
-plan. F1 remains the leading skill-based hypothesis and F0 the undefeated
+The authorized F1 deterministic-transaction implementation boundary is
+complete. F1 remains the leading skill-based hypothesis and F0 the undefeated
 ordinary-MARL reduction; their sole difference is initial-set versus
-applied-prefix conditioning of the same commitment model. No implementation or
-training is currently running.
+applied-prefix conditioning of the same commitment model. Await a separately
+authorized architecture-matched testbed/experiment contract; no training is
+running.
 
 ## Next Actions
 
-1. Await user authorization before production implementation. If authorized,
-   implement only through the single deterministic transaction trace and stop
-   before any real environment or training.
+1. Await user direction on whether to design the separate F0/F1 testbed and
+   experiment contract. Do not infer authorization to construct an environment
+   or train from the engineering trace.
 2. Remove the uncommitted R55 draft only at its separately verified cleanup
    boundary; do not execute or replace its gate.
 
@@ -43,13 +44,14 @@ training is currently running.
 - Portfolio: retain strengthened F0; retain corrected F1 as the sole leading
   family; merge/retire F2; defer learned event time. R55 is repurposed before
   execution. Retained R53 artifacts cannot support a no-training prefix audit.
-- The corrected plan has one event-runtime lifecycle store, a two-snapshot
-  typed membership transaction, a dedicated trainable event low actor, shared
-  active-set critics, normative ragged ledgers, per-token pre-working-set
-  values and simulator-aware schema-3 resume. A later user-approved
-  implementation may reach one deterministic production transaction trace;
-  real environment use, training, testbed construction and reward changes are
-  unauthorized.
+- The corrected production skeleton now has one event-runtime lifecycle store,
+  a two-snapshot typed membership transaction, a dedicated trainable event low
+  actor, shared active-set critics, normative ragged ledgers, per-token
+  pre-working-set values and simulator-aware schema-3 resume. Its single
+  hand-authored trace passed all eight focused test functions, including the
+  common-support F1 constructive control. This is wiring/correctness evidence,
+  not evidence of usefulness. Real environment use, training, testbed
+  construction and reward changes remain unauthorized.
 
 - R41-derived gates execute a fresh `ref/hmasd.tar` extraction rather than
   porting it into the current trainer. Preserve the original HMASD `q_D/q_d`
