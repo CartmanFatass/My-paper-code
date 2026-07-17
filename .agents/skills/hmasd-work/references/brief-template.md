@@ -19,7 +19,7 @@ short enough for every implementer and reviewer to read completely.
 - Data and gradient flow:
 - Probability, clock, RNG and checkpoint invariants:
 - Expected algorithm behavior and stability:
-- Implementer write scope:
+- Implementer write scope, exact symbols and frozen interfaces:
 
 ## Causal Question and Relevant History
 - Active question or engineering objective:
