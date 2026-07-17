@@ -18,8 +18,9 @@ the HMASD contract rather than by model identity.
    repository evidence and writes a synthesis without selecting by model name.
 4. **GPT-5.6 Pro convergent reviewer.** The existing `HMASD Algorithm
    Consultation` conversation. It receives the evidence pack, both raw reviews
-   and the Codex synthesis, then audits the portfolio and selects at most one
-   active evidence source or an explicit stop.
+   and the Codex synthesis, then audits the portfolio and recommends at most one
+   active evidence source or an explicit stop. Only the controller adopts or
+   rejects that recommendation.
 
 The two divergent reviews are blind on their first pass. Neither output is an
 experiment authorization. The convergent reviewer may not invent a fifth route
@@ -35,6 +36,12 @@ blind divergent response per reviewer, one controller synthesis and one
 convergent response. A follow-up is allowed only to repair a concrete missing
 source or ambiguous response, not to keep searching until a preferred answer
 appears.
+
+Before either Pro submission, the controller must resolve the exact full
+40-character commit, confirm that it is reachable from the remote `aggressive`
+branch, and verify that the question plus every `Repository files to inspect`
+path exists in that same commit. Any failed remote boundary check stops the
+submission before browser transport.
 
 Reuse the two established Pro conversations and the one live Gemini process.
 Do not create duplicate conversations, alter a conversation's model or run the
