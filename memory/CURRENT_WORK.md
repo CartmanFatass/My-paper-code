@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 
 ## Controller Ownership
 
@@ -14,32 +14,27 @@ Updated: 2026-07-17
 
 ## Objective
 
-The blind dual-divergent and convergent design round for an
-architecture-matched F0/F1 dynamic-roster testbed is terminal. Its verdict is
-`MODIFY_TESTBED_CONTRACT`.
+The generic-`SHORT` environment passed Stage A and the direct primitive-AR
+carrier passed Stage B. The fresh paired Stage C run from commit `bf933a3` is a
+valid terminal `SUPPORT_H2_SKILL_LIMIT` result at
+`logs/f0f1_dynamic_roster_stage_c_20260717_221247`.
 
-The accepted design asks one question: after ordinary dynamic-roster access and
-executable skills are established, does conditioning later skill commitments on
-earlier applied commitments improve natural roster composition and terminal
-external utility beyond the matched F0 controller?
-
-The generic-`SHORT` environment passed Stage A and the Stage B direct primitive-
-AR access result is `PASS_STAGE_B_DIRECT_ACCESS`. The first authorized Stage C
-F0/F1 attempt from commit `d56bf5d` was intentionally stopped at update 31 per
-arm after a performance-only diagnosis found scalar CUDA execution and repeated
-PPO data construction. It is not scientific evidence. The contract-preserving
-throughput refactor is now reviewed and verified; the next formal attempt must
-start at update 0 under one new source commit.
+F1 changed its natural later-token distribution and showed a small forced
+skill effect, but neither arm transported skill conditioning into executable
+natural behavior or task access. Both final arms have `P/S/U=0/1/0.5`; the
+paired F1-minus-F0 utility CI95 is `[0,0,0]`. The current F0/F1 route therefore
+stops at an upstream skill-execution bottleneck. It cannot be rescued by
+retuning F1, adding a module, or reading the timing branch.
 
 ## Causal Portfolio
 
-- **H0 / F0 sufficiency:** strongest undefeated ordinary-MARL null.
-- **H1 / F1 applied-prefix value:** leading conditional hypothesis, still
-  untested.
-- **H2 / skill execution failure:** active upstream alternative if direct
-  primitive control succeeds but both skill arms fail.
-- **H3 / exogenous timing limitation:** conditional diagnostic only; learned
-  event time remains deferred.
+- **H0 / F0 sufficiency:** rejected on this testbed; F0 has no task access.
+- **H1 / F1 applied-prefix value:** conditional distribution response exists,
+  but task transport is rejected under the frozen Stage C contract.
+- **H2 / skill execution failure:** supported; both arms lack executable
+  naturally used skills despite the Stage B carrier.
+- **H3 / exogenous timing limitation:** unread because its registered upstream
+  prerequisites failed; learned event time remains deferred.
 
 F0 and F1 must share the complete runtime, model, optimization, ledgers and
 exposure. Their sole treatment difference is:
@@ -51,9 +46,27 @@ F1 -> working_summary
 
 ## Next Actions
 
-1. Create and push the reviewed performance-equivalent pre-launch Git boundary.
-2. Restart the unchanged Stage C pair from update 0; then monitor and apply its
-   registered terminal branch without rescue or automatic successor work.
+1. Count the closed Stage C disposition as overnight iteration 1 of 5.
+2. For iteration 2, use the frozen Stage C evidence to distinguish coordinator
+   skill supply, low-level skill-conditioned execution, and natural-context
+   transport as competing causes of H2. Prefer analysis-only evidence; do not
+   add a module or retrain Stage C.
+3. Continue only if that attribution leaves a defensible falsifiable successor;
+   otherwise stop before consuming the remaining iteration allowance.
+
+## Overnight Autonomous Boundary
+
+- User authorization on 2026-07-18 covers five total serialized causal research
+  iterations, with the terminal Stage C result counted as iteration 1.
+- One iteration closes only on terminal evidence plus a controller disposition;
+  an operational retry does not consume an iteration.
+- Each later iteration must name one falsifiable question, one strongest matched
+  comparator, one exact implementation/experiment contract and one active
+  evidence source. No parallel training, parameter rescue or arbitrary gate
+  sequence is authorized.
+- Stop before five if a binding result has no defensible successor, the next
+  action would violate a retired/prohibited branch, or safe progress requires
+  user authority outside this five-iteration research boundary.
 
 ## Immediate Constraints
 
@@ -100,8 +113,10 @@ F1 -> working_summary
   snapshots and counters. Fresh evaluation is explicitly model-only.
 - Intrinsic reward remains environment-agnostic. Task fields, identities,
   roles, success predicates, progress and external reward cannot enter it.
-- The Stage C implementation is launch-ready but establishes no skill learning,
-  F1 usefulness or UAV-transfer claim before the registered terminal result.
+- Stage C is terminal `SUPPORT_H2_SKILL_LIMIT`: M0 passes; F0/F1 have 1,932
+  eligible natural prefix rows each, replay maxima below `3.71e-7`, final
+  `P/S/U=0/1/0.5`, and no executable naturally used skills. F1 forced
+  `rho=0.070304` does not establish natural task transport.
 - R41B remains the positive fixed-`N` source anchor. R51--R55 exact contracts
   are retired and inactive.
 - Do not add graph, attention, slots, critical residuals, team latent, a new

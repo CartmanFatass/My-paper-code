@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260717-f0f1-dynamic-roster-stage-c | launch-ready -- performance refactor verified | paired F0/F1 applied-prefix test | `scripts/run_dynamic_roster_stage_c.py`; fresh timestamped root assigned only at launch | root `runner_status.txt`, then one terminal result JSON | retry2 stopped without scientific read at update 31; reviewed batching passes 20 CPU/CUDA checks, improves concurrent throughput 3.1--3.6x, and keeps replay error `<=4.77e-7` | Start the frozen concurrent pair from update 0 under one new commit; apply the registered terminal branch without rescue or automatic successor |
+| EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | H2 attribution from frozen evidence only | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
 | EXP-20260717-f0f1-dynamic-roster-stage-a | completed -- valid `PASS_STAGE_A_CARRIER` | no-learning dynamic-roster carrier | `logs/f0f1_dynamic_roster_stage_a_20260717_143552/result/stage_a_carrier.json`; implementation `044c8df` | Stage B direct-access result | all M0 true; constructive `P/S/U=1/1/1`; random positive fraction `1.0`, mean `U=0.331217`; 20,480 steps/controller, zero optimizers/intrinsic | Accept carrier only; do not infer learnability or F1 value; Stage B is now separately authorized |
 | EXP-20260717-r55-abrp-g0 | superseded before execution | retired anonymous bipartite draft | untracked draft only | none | external architecture review identified harmful unique-successor drift; no scientific run exists | Do not execute, repurpose or treat as an active numbered route |
@@ -141,6 +141,18 @@ explicitly approves the exception.
   is `<run-root>/runner_status.txt`; terminal evidence is
   `<run-root>/result/stage_c_f0_f1.json`, which records the full source commit
   and run ID.
+- Terminal result (2026-07-18): run
+  `logs/f0f1_dynamic_roster_stage_c_20260717_221247` is valid
+  `SUPPORT_H2_SKILL_LIMIT`; M0 passes and the closed monitor handoff is
+  `f0f1_dynamic_roster_stage_c_20260717_221247:complete:2026-07-18T01:00:01+08:00`.
+  F0 and F1 both finish at `P/S/U=0/1/0.5`, with paired F1-minus-F0 utility
+  CI95 `[0,0,0]`. Each arm has 1,932 eligible natural prefix rows and replay
+  errors below `3.71e-7`. F1 changes the natural prefix distribution
+  (TV CI95 `[0.047562,0.050023,0.052577]`) and has forced-audit
+  `rho=0.070304` (CI95 `[0.058321,0.070304,0.111164]`), but neither arm has
+  executable naturally used skills. H1 task transport and H0 sufficiency are
+  not supported; H2 is supported; H3 is not readable. Record the skill
+  bottleneck and stop this route without F1 rescue or a new module.
 
 ## EXP-20260717-f0f1-dynamic-roster-stage-b — Direct Primitive-AR Access
 

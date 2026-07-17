@@ -89,7 +89,7 @@ run `logs/f0f1_dynamic_roster_stage_b_20260717_160956` is valid
 prerequisite. Stop before F0/F1; it remains unimplemented and requires its
 separate implementation authorization.
 
-### Stage C F0/F1 Implementation — Launch-Ready, Formal Pair Authorized
+### Stage C F0/F1 Implementation — Terminal `SUPPORT_H2_SKILL_LIMIT`
 
 The bounded implementation reuses `VariableRosterEventCore` as the sole
 lifecycle, probability, credit and checkpoint owner and exposes the frozen
@@ -142,7 +142,15 @@ The first formal attempt was intentionally stopped at update 31 for a
 performance-only repair and has no scientific interpretation. The reviewed
 refactor passes all 20 focused CPU/CUDA tests; a concurrent 16-env resume
 benchmark improved steady-state throughput by 3.1--3.6x with maximum replay
-error `4.77e-7`. The formal pair must restart from update 0 under one new commit.
+error `4.77e-7`.
+
+The update-0 formal pair at
+`logs/f0f1_dynamic_roster_stage_c_20260717_221247` completed validly as
+`SUPPORT_H2_SKILL_LIMIT`. Both arms finish at `P/S/U=0/1/0.5` and neither has
+executable naturally used skills. F1 changes its later-token distribution and
+has a small forced skill effect, but it produces no utility transport over F0.
+The Stage C implementation is complete and frozen; do not rescue it by changing
+the selector, reward, model, budget, threshold or timing.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 
