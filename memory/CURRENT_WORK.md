@@ -25,11 +25,11 @@ external utility beyond the matched F0 controller?
 
 The generic-`SHORT` environment has passed the Stage A no-learning carrier.
 Stage B direct primitive-AR access remains authorized. Its first formal attempt
-was scientifically invalid only because merged recurrent-chunk replay changed
-CUDA batch geometry and made joint log-probability error exceed `1e-6`. The
-isolated original-batch replay repair passes the worst retained ledger; a fresh
-unchanged rerun is now required. F0/F1 training and algorithm promotion remain
-unauthorized.
+was scientifically invalid because merged recurrent chunks changed CUDA batch
+geometry; an original-batch retry was stopped after strided replay slices still
+made joint log-probability error exceed `1e-6`. Contiguous original-batch replay
+now gives exact zero on the retained 16-environment checkpoint/ledger
+diagnostic; a fresh unchanged rerun is required. F0/F1 remains unauthorized.
 
 ## Causal Portfolio
 
@@ -76,8 +76,9 @@ F1 -> working_summary
   focused test passed; a CUDA fresh-to-resume smoke preserved exact ledger and
   cumulative counters, and replay maxima are below `5e-7`.
 - The first 320K attempt met every access threshold but is not scientific
-  evidence: joint replay alone reached `1.77e-6`. Original-batch chunk replay
-  reduced the same worst-ledger check to `9.54e-7`; only the fresh rerun counts.
+  evidence: joint replay reached `1.77e-6`. An original-batch retry was stopped
+  at update 181 when strided slices still reached `1.37e-6`; contiguous slices
+  make the retained diagnostic exact zero. Only the fresh rerun counts.
 - Each learned arm is frozen at 320,000 transitions, 16 environments, rollout
   80, 250 updates and PPO4. Failure cannot trigger a budget, seed, threshold,
   reward or model rescue.

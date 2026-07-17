@@ -80,11 +80,12 @@ shared team advantage, exact replay and standalone schema-3 checkpointing. One
 focused behavior test and a small CUDA fresh-to-resume smoke pass, including
 exact continuation from the next unconsumed ledger ID. The next boundary is
 the unchanged local 16-environment, 320,000-transition formal gate. Its first
-attempt was invalid solely because merging four recurrent chunks into one CUDA
-batch made joint replay error `1.77e-6`; replay now processes each chunk at the
-original collection batch size and gives `9.54e-7` on the worst retained
-ledger. A fresh unchanged rerun is required. F0/F1 remains further downstream
-and is not implemented or authorized.
+attempt was invalid because merging four recurrent chunks changed CUDA batch
+geometry and made joint replay error `1.77e-6`. An original-batch retry was
+stopped when strided fixed-time slices still reached `1.37e-6`; each replay
+slice is now contiguous like collection and gives exact zero on the retained
+16-environment diagnostic. A fresh unchanged rerun is required. F0/F1 remains
+further downstream and is not implemented or authorized.
 
 ## ARES-SMDP / R54-HFSR-G0 — Terminal Representation Gate
 

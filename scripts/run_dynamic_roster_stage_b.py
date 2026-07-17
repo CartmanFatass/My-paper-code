@@ -600,6 +600,15 @@ def main() -> int:
             "result": str(args.output_root / "result" / "stage_b_direct.json"),
         }, ensure_ascii=False))
         return 0
+    except KeyboardInterrupt:
+        args.output_root.mkdir(parents=True, exist_ok=True)
+        _write_status(
+            status_path,
+            state="failed",
+            phase="interrupted",
+            error="KeyboardInterrupt",
+        )
+        raise
     except Exception as exc:
         args.output_root.mkdir(parents=True, exist_ok=True)
         (args.output_root / "runner_stderr.log").write_text(

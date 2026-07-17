@@ -487,11 +487,11 @@ def replay_direct_trajectory(
         prefix_rows: list[torch.Tensor] = []
         for offset in range(MAX_RECURRENT_CHUNK):
             output = model.forward_step(
-                observations=observations[chunk_slice, offset],
-                active_mask=active_mask[chunk_slice, offset],
-                order=orders[chunk_slice, offset],
+                observations=observations[chunk_slice, offset].contiguous(),
+                active_mask=active_mask[chunk_slice, offset].contiguous(),
+                order=orders[chunk_slice, offset].contiguous(),
                 hidden=hidden,
-                teacher_actions=actions[chunk_slice, offset],
+                teacher_actions=actions[chunk_slice, offset].contiguous(),
             )
             logp_rows.append(output.token_log_probs)
             entropy_rows.append(output.token_entropies)
