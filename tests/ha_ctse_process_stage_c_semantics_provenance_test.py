@@ -428,21 +428,66 @@ def _runner():
     return _RUNNER
 
 
+STAGE_C_SOURCE_COMMIT = "bf933a3c2b2af4a805f4f9485390ee578934aacd"
+STAGE_C_RUN_ID = "f0f1_dynamic_roster_stage_c_20260717_221247"
+STAGE_C_ARM_CONTRACT = {
+    "num_envs": 16,
+    "horizon": 80,
+    "rollout_length": 80,
+    "outer_updates": 250,
+    "environment_transitions": 320_000,
+    "ppo_passes_per_update": 4,
+    "high_optimizer_steps": 1_000,
+    "low_optimizer_steps": 1_000,
+    "latent_skills": 3,
+    "optimizer": "Adam",
+    "learning_rate": 3.0e-4,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "policy_clip": 0.2,
+    "value_clip": 0.2,
+    "value_coefficient": 0.5,
+    "entropy_coefficient": 0.01,
+    "gradient_clip": 0.5,
+    "evaluation_episodes_per_mode": 256,
+    "bootstrap_repetitions": 10_000,
+    "bootstrap_seed": 107_057,
+}
+STAGE_C_PARENT_CONFIG = {
+    "scenario": "generic_short_dynamic_roster",
+    "membership_schedule": [4, 2, 6, 4],
+    "reward": "terminal_external_utility_only",
+    **STAGE_C_ARM_CONTRACT,
+}
+STAGE_C_SEED_AND_LEDGER_MAP = {
+    "paired_model_initialization": 57_057,
+    "training_task_ledger": 67_057,
+    "event_opportunity_and_order": 77_057,
+    "policy_action_sampling": 87_057,
+    "evaluation_ledger": 97_057,
+    "bootstrap": 107_057,
+    "training_episode_ids": [0, 3_999],
+    "evaluation_episode_ids": [0, 255],
+}
+
+
 def _source_bundle(arm):
+    selector = {"f0": "initial_summary", "f1": "working_summary"}[arm]
+    parent_root = str(Path("C:/synthetic") / STAGE_C_RUN_ID)
+    arm_root = str(Path(parent_root) / arm)
+    parent_manifest_path = str(Path(parent_root) / "runner_status.txt")
+    parent_result_path = str(
+        Path(parent_root) / "result" / "stage_c_f0_f1.json"
+    )
+    result_path = str(Path(arm_root) / "result" / "stage_c_arm.json")
+    checkpoint_path = str(Path(arm_root) / "checkpoints" / "update_250_eval.pt")
     result = {
         "schema_version": 1,
         "stage": "stage_c_paired_f0_f1",
         "arm": arm,
         "implementation_valid": True,
         "m0": {name: True for name in _runner().REQUIRED_SOURCE_M0},
-        "contract": {
-            "num_envs": 16,
-            "horizon": 80,
-            "outer_updates": 250,
-            "environment_transitions": 320_000,
-            "latent_skills": 3,
-            "evaluation_episodes_per_mode": 256,
-        },
+        "contract": {**deepcopy(STAGE_C_ARM_CONTRACT), "selector": selector},
         "counts": {
             "environment_steps": 320_000,
             "high_optimizer_steps": 1_000,
@@ -491,9 +536,70 @@ def _source_bundle(arm):
         "steps_total": 320_000,
         "high_optimizer_steps": 1_000,
         "low_optimizer_steps": 1_000,
+        "optimizer_steps_total": 1_000,
         "implementation_valid": True,
+        "result_path": result_path,
+        "checkpoint_path": checkpoint_path,
     }
-    return {"result": result, "checkpoint": checkpoint, "arm_status": status}
+    parent_status = {
+        "state": "complete",
+        "phase": "terminal",
+        "run_id": STAGE_C_RUN_ID,
+        "source_commit": STAGE_C_SOURCE_COMMIT,
+        "status": "SUPPORT_H2_SKILL_LIMIT",
+        "f0_phase": "terminal",
+        "f0_update": "250",
+        "f0_steps": "320000",
+        "f0_high_optimizer_steps": "1000",
+        "f0_low_optimizer_steps": "1000",
+        "f1_phase": "terminal",
+        "f1_update": "250",
+        "f1_steps": "320000",
+        "f1_high_optimizer_steps": "1000",
+        "f1_low_optimizer_steps": "1000",
+        "result_path": parent_result_path,
+        "error_path": str(Path(parent_root) / "runner_stderr.log"),
+        "updated": "2026-07-18T01:00:01+08:00",
+    }
+    parent_result = {
+        "schema_version": 1,
+        "stage": "stage_c_paired_f0_f1",
+        "contract": {
+            "stage": "stage_c_paired_f0_f1",
+            "contract_version": 1,
+            "source_commit": STAGE_C_SOURCE_COMMIT,
+            "run_id": STAGE_C_RUN_ID,
+            "sole_treatment_selector": {
+                "f0": "initial_summary",
+                "f1": "working_summary",
+            },
+            "frozen_environment_and_training_config": deepcopy(
+                STAGE_C_PARENT_CONFIG
+            ),
+            "seed_and_ledger_map": deepcopy(STAGE_C_SEED_AND_LEDGER_MAP),
+        },
+        "status": "SUPPORT_H2_SKILL_LIMIT",
+        "implementation_valid": True,
+        "authoritative_status_source": parent_manifest_path,
+    }
+    return {
+        "result": result,
+        "checkpoint": checkpoint,
+        "arm_status": status,
+        "parent_status": parent_status,
+        "parent_result": parent_result,
+        "source_identity": {
+            "root": arm_root,
+            "result_path": result_path,
+            "arm_status_path": str(Path(arm_root) / "arm_status.json"),
+            "checkpoint_path": checkpoint_path,
+            "parent_root": parent_root,
+            "parent_manifest_path": parent_manifest_path,
+            "parent_result_path": parent_result_path,
+            "run_id": STAGE_C_RUN_ID,
+            "source_commit": STAGE_C_SOURCE_COMMIT,
+        },
+    }
 
 
 def _registered_evaluation():
@@ -631,6 +737,61 @@ def test_source_identity_requires_registered_headers_arm_update_and_terminal_man
     assert runner.validate_source_identity(nonterminal, "f0")["valid"] is False
 
 
+def test_source_identity_requires_full_registered_contract_selector_and_parent_authority():
+    runner = _runner()
+    source = _source_bundle("f0")
+    report = runner.validate_source_identity(source, "f0")
+    assert report["valid"] is True
+
+    wrong_selector = deepcopy(source)
+    wrong_selector["result"]["contract"]["selector"] = "working_summary"
+    selector_report = runner.validate_source_identity(wrong_selector, "f0")
+    assert selector_report["valid"] is False
+    assert selector_report["checks"]["registered_contract_exact"] is False
+
+    wrong_learning_rate = deepcopy(source)
+    wrong_learning_rate["result"]["contract"]["learning_rate"] = 1.0e-3
+    contract_report = runner.validate_source_identity(wrong_learning_rate, "f0")
+    assert contract_report["valid"] is False
+    assert contract_report["checks"]["registered_contract_exact"] is False
+
+    wrong_source_commit = deepcopy(source)
+    wrong_source_commit["parent_status"]["source_commit"] = "0" * 40
+    commit_report = runner.validate_source_identity(wrong_source_commit, "f0")
+    assert commit_report["valid"] is False
+    assert commit_report["checks"]["parent_terminal_manifest_exact"] is False
+
+
+def test_paired_source_binding_rejects_different_parent_run_or_commit():
+    runner = _runner()
+    sources = {arm: _source_bundle(arm) for arm in ("f0", "f1")}
+    exact = runner.validate_paired_source_binding(sources)
+    assert exact["valid"] is True
+    assert all(exact["checks"].values())
+
+    wrong_run = deepcopy(sources)
+    for container in (
+        wrong_run["f1"]["parent_status"],
+        wrong_run["f1"]["source_identity"],
+        wrong_run["f1"]["parent_result"]["contract"],
+    ):
+        container["run_id"] = "f0f1_dynamic_roster_stage_c_other"
+    run_report = runner.validate_paired_source_binding(wrong_run)
+    assert run_report["valid"] is False
+    assert run_report["checks"]["same_parent_run"] is False
+
+    wrong_commit = deepcopy(sources)
+    for container in (
+        wrong_commit["f1"]["parent_status"],
+        wrong_commit["f1"]["source_identity"],
+        wrong_commit["f1"]["parent_result"]["contract"],
+    ):
+        container["source_commit"] = "1" * 40
+    commit_report = runner.validate_paired_source_binding(wrong_commit)
+    assert commit_report["valid"] is False
+    assert commit_report["checks"]["same_full_source_commit"] is False
+
+
 def test_registered_parity_is_exact_and_any_mismatch_invalidates():
     runner = _runner()
     registered, evaluation = _registered_evaluation()
@@ -717,6 +878,51 @@ def test_synthetic_analysis_derives_finite_metrics_and_fails_closed_on_support(
     assert analysis["metrics"]["support_ok"] is False
     assert len(analysis["metrics"]["stability_stratum_cis"]) == 24
     assert runner._finite_json_values(analysis)
+
+
+def test_supported_synthetic_analysis_exercises_full_natural_and_stratified_path(
+    monkeypatch,
+):
+    runner = _runner()
+    actor, provenance = _supported_semantics_provenance()
+    expected_effects = [
+        row["forced_effects"] for row in provenance["forced_sources"]
+    ]
+    provenance_report = runner.validate_provenance(
+        provenance,
+        "f1",
+        expected_forced_effects=expected_effects,
+    )
+    assert provenance_report["valid"] is True
+    monkeypatch.setattr(runner, "BOOTSTRAP_REPETITIONS", 128)
+
+    analysis = runner.analyze_semantics(provenance, actor)
+
+    assert analysis["reference_selection"]["pair"] == [0, 1]
+    assert analysis["reference_selection"]["ambiguous"] is False
+    assert analysis["support_ok"] is True
+    assert analysis["stability"]["pooled_supported"] is True
+    assert all(
+        details["supported"]
+        for details in analysis["stability"]["strata"].values()
+    )
+    assert analysis["natural_overlap"]["selected_segments"] == 64
+    assert analysis["natural_overlap"]["segments_per_skill"] == {
+        "0": 32,
+        "1": 32,
+    }
+    assert set(analysis["natural_overlap"]["shuffle_nulls"]) == {
+        "global",
+        *runner.FROZEN_STRATA,
+    }
+    assert analysis["natural_overlap"]["balanced_accuracy"] == 1.0
+    assert analysis["natural_overlap"]["context_only_balanced_accuracy"] < 1.0
+    assert analysis["metrics"]["natural_nuisance_ci"][0] > 0.0
+    assert analysis["metrics"]["natural_matched_margin_ci"][0] > 0.0
+    assert (
+        runner.frozen_outcome(analysis["metrics"])
+        == "D_STABLE_LOCAL_NATURAL_OVERLAP"
+    )
 
 
 @pytest.mark.parametrize(
@@ -873,6 +1079,137 @@ def _distinct_forced_effects():
     effects[:, 1, :, 0] = 0.1
     effects[:, 2, :, 1] = 0.4
     return effects
+
+
+class _SyntheticCategoricalHead:
+    def __call__(self, features):
+        return torch.distributions.Categorical(logits=features)
+
+
+class _SyntheticIdentityRNN:
+    def __call__(self, features, hidden, _masks):
+        return features, hidden
+
+
+class _SupportedSemanticActor:
+    def __init__(self):
+        self.device = torch.device("cpu")
+        self.obs_dim = 2
+        self.hidden_dim = 3
+        self.actor_rnn = _SyntheticIdentityRNN()
+        self.actor_act = SimpleNamespace(action_out=_SyntheticCategoricalHead())
+
+    def _features(self, observations, skills):
+        del observations
+        return 5.0 * torch.nn.functional.one_hot(
+            skills.to(dtype=torch.long), num_classes=3
+        ).to(dtype=torch.float32)
+
+    def actor_replay(
+        self,
+        observations,
+        skills,
+        actions,
+        initial_hidden,
+        _valid_masks,
+        _reset_masks,
+    ):
+        logits = self._features(observations, skills)
+        log_probability = torch.distributions.Categorical(logits=logits).log_prob(
+            actions
+        )
+        return log_probability, initial_hidden
+
+
+def _supported_semantics_provenance(arm="f1"):
+    actor = _SupportedSemanticActor()
+    natural_rows = []
+    forced_sources = []
+    slot_specs = (
+        (0, 0, 2),
+        (1, 0, 4),
+        (0, 10, 6),
+        (0, 20, None),
+    )
+    action_probabilities = torch.softmax(5.0 * torch.eye(3), dim=-1).numpy()
+    effects = np.zeros((3, 2, 4), dtype=np.float64)
+    effects[0, :, :2] = [0.8, 0.1]
+    effects[1, :, :2] = [0.1, 0.8]
+    effects[2, :, :2] = [0.45, 0.45]
+
+    for episode in range(32):
+        for slot, (membership_epoch, forced_time, fixed_active_n) in enumerate(
+            slot_specs
+        ):
+            skill = (episode + slot) % 2
+            active_n = (
+                fixed_active_n
+                if fixed_active_n is not None
+                else (2, 4, 6)[episode % 3]
+            )
+            lifecycle_key = f"supported-{episode:02d}-{slot}"
+            probabilities = action_probabilities[skill].tolist()
+            selected_natural = None
+            for physical_time in range(max(12, forced_time + 1)):
+                natural = {
+                    "arm": arm,
+                    "task_master_seed": 97_057,
+                    "episode_id": episode,
+                    "physical_time": physical_time,
+                    "lifecycle_key": lifecycle_key,
+                    "membership_epoch": membership_epoch,
+                    "observation": [float(slot), float(episode % 2)],
+                    "actor_hidden_before": [0.0, 0.0, 0.0],
+                    "natural_skill": skill,
+                    "natural_action": skill,
+                    "natural_action_log_probability": float(
+                        math.log(probabilities[skill])
+                    ),
+                    "primitive_legal_support": [0, 1, 2],
+                    "primitive_probabilities": probabilities,
+                    "active_set_size": active_n,
+                }
+                natural_rows.append(natural)
+                if physical_time == forced_time:
+                    selected_natural = natural
+            assert selected_natural is not None
+            peer_keys = [
+                f"peer-{episode}-{slot}-{index}" for index in range(active_n - 1)
+            ]
+            forced_sources.append(
+                {
+                    **deepcopy(selected_natural),
+                    "focal_index": 0,
+                    "active_keys": [lifecycle_key, *peer_keys],
+                    "active_membership_epochs": [membership_epoch] * active_n,
+                    "active_skills": [skill] * active_n,
+                    "frontier": [],
+                    "membership_deltas": [],
+                    "source_rng_ledger": {
+                        "episode_id": episode,
+                        "opportunity": {"master_seed": 77_057, "stream_id": slot},
+                        "frontier_order": {
+                            "master_seed": 77_057,
+                            "stream_id": slot + 4,
+                        },
+                        "policy_action": {
+                            "master_seed": 87_057,
+                            "stream_id": slot + 8,
+                        },
+                    },
+                    "source_rng_states": {
+                        "opportunity": {"state": episode * 100 + slot},
+                        "frontier_order": {"state": episode * 100 + slot + 1},
+                        "policy_action": {"state": episode * 100 + slot + 2},
+                    },
+                    "forced_effects": effects.tolist(),
+                }
+            )
+    return actor, {
+        "schema": 1,
+        "natural_rows": natural_rows,
+        "forced_sources": forced_sources,
+    }
 
 
 def test_policy_lineage_replays_stored_actions_through_the_restored_actor():
@@ -1052,3 +1389,129 @@ def test_synthetic_orchestration_joins_collection_validation_analysis_and_output
         "result/iteration4_provenance_audit.json",
         "runner_status.txt",
     ]
+
+
+def _patch_synthetic_run_audit_boundaries(monkeypatch, runner):
+    monkeypatch.setattr(runner.torch.cuda, "is_available", lambda: True)
+    monkeypatch.setattr(runner, "_global_rng_snapshot", lambda: {"synthetic": 1})
+    monkeypatch.setattr(runner, "_restore_global_rng", lambda _state: None)
+    monkeypatch.setattr(runner, "_global_rng_equal", lambda _left, _right: True)
+    monkeypatch.setattr(
+        runner,
+        "load_source_bundle",
+        lambda _root, expected_arm, _device: deepcopy(_source_bundle(expected_arm)),
+    )
+
+
+def _valid_synthetic_collection():
+    owner = SimpleNamespace(
+        commitment_model=torch.nn.Linear(2, 2),
+        event_critic=torch.nn.Linear(2, 1),
+        low_actor=torch.nn.Linear(2, 3),
+        low_critic=torch.nn.Linear(2, 1),
+    )
+    return {
+        "valid": True,
+        "identity": {"valid": True, "checks": {}, "reasons": []},
+        "parity": {"valid": True, "checks": {}, "reasons": []},
+        "provenance": {
+            "valid": True,
+            "checks": {},
+            "reasons": [],
+            "support_counts": {},
+        },
+        "guard_checks": {},
+        "source_tensors_unchanged": True,
+        "raw_provenance": {},
+        "model_owner": owner,
+        "source_tensor_records": [],
+    }
+
+
+def test_run_audit_writes_only_terminal_failed_status_on_parity_failure(
+    monkeypatch,
+    tmp_path,
+):
+    runner = _runner()
+    _patch_synthetic_run_audit_boundaries(monkeypatch, runner)
+
+    def parity_failure(_source, _arm, _device):
+        collection = _valid_synthetic_collection()
+        collection["valid"] = False
+        collection["parity"] = {
+            "valid": False,
+            "checks": {"forced_effects_exact": False},
+            "reasons": ["forced_effects_exact"],
+        }
+        return collection
+
+    monkeypatch.setattr(runner, "collect_arm", parity_failure)
+    output_root = tmp_path / "parity-failure"
+
+    with pytest.raises(RuntimeError, match="parity"):
+        runner.run_audit(
+            tmp_path / "f0-source",
+            tmp_path / "f1-source",
+            output_root=output_root,
+            device="cuda",
+        )
+
+    assert [
+        path.relative_to(output_root).as_posix()
+        for path in output_root.rglob("*")
+        if path.is_file()
+    ] == ["runner_status.txt"]
+    status = runner._read_runner_manifest(output_root / "runner_status.txt")
+    assert status["state"] == "failed"
+    assert status["phase"] == "terminal"
+    assert status["status"] == "INVALID_ITERATION4_PROVENANCE_AUDIT"
+    assert "parity" in status["error"]
+    original_status = (output_root / "runner_status.txt").read_bytes()
+    with pytest.raises(FileExistsError, match="output root already exists"):
+        runner.run_audit(
+            tmp_path / "f0-source",
+            tmp_path / "f1-source",
+            output_root=output_root,
+            device="cuda",
+        )
+    assert (output_root / "runner_status.txt").read_bytes() == original_status
+
+
+def test_run_audit_writes_only_terminal_failed_status_on_analysis_exception(
+    monkeypatch,
+    tmp_path,
+):
+    runner = _runner()
+    _patch_synthetic_run_audit_boundaries(monkeypatch, runner)
+    monkeypatch.setattr(
+        runner,
+        "collect_arm",
+        lambda _source, _arm, _device: _valid_synthetic_collection(),
+    )
+    monkeypatch.setattr(
+        runner,
+        "analyze_semantics",
+        lambda _provenance, _actor: (_ for _ in ()).throw(
+            RuntimeError("synthetic analysis failure")
+        ),
+    )
+    output_root = tmp_path / "analysis-failure"
+
+    with pytest.raises(RuntimeError, match="synthetic analysis failure"):
+        runner.run_audit(
+            tmp_path / "f0-source",
+            tmp_path / "f1-source",
+            output_root=output_root,
+            device="cuda",
+        )
+
+    assert [
+        path.relative_to(output_root).as_posix()
+        for path in output_root.rglob("*")
+        if path.is_file()
+    ] == ["runner_status.txt"]
+    status = runner._read_runner_manifest(output_root / "runner_status.txt")
+    assert status["state"] == "failed"
+    assert status["phase"] == "terminal"
+    assert status["status"] == "INVALID_ITERATION4_PROVENANCE_AUDIT"
+    assert status["error"] == "synthetic analysis failure"

@@ -15,6 +15,7 @@ import io
 import json
 import math
 from pathlib import Path
+import re
 import sys
 from typing import Any, Callable, Mapping, Sequence
 
@@ -59,6 +60,50 @@ MIN_STRATUM_EPISODES = 8
 MIN_FORCED_SNAPSHOTS_PER_STRATUM = 8
 MIN_EXACT_ROWS_PER_STRATUM = 32
 MIN_NATURAL_WINDOWS_PER_SKILL = 24
+
+REGISTERED_STAGE_C_SELECTORS = {
+    "f0": "initial_summary",
+    "f1": "working_summary",
+}
+REGISTERED_STAGE_C_ARM_CONTRACT = {
+    "num_envs": 16,
+    "horizon": 80,
+    "rollout_length": 80,
+    "outer_updates": 250,
+    "environment_transitions": 320_000,
+    "ppo_passes_per_update": 4,
+    "high_optimizer_steps": 1_000,
+    "low_optimizer_steps": 1_000,
+    "latent_skills": 3,
+    "optimizer": "Adam",
+    "learning_rate": 3.0e-4,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "policy_clip": 0.2,
+    "value_clip": 0.2,
+    "value_coefficient": 0.5,
+    "entropy_coefficient": 0.01,
+    "gradient_clip": 0.5,
+    "evaluation_episodes_per_mode": 256,
+    "bootstrap_repetitions": 10_000,
+    "bootstrap_seed": 107_057,
+}
+REGISTERED_STAGE_C_PARENT_CONFIG = {
+    "scenario": "generic_short_dynamic_roster",
+    "membership_schedule": [4, 2, 6, 4],
+    "reward": "terminal_external_utility_only",
+    **REGISTERED_STAGE_C_ARM_CONTRACT,
+}
+REGISTERED_STAGE_C_SEED_AND_LEDGER_MAP = {
+    "paired_model_initialization": 57_057,
+    "training_task_ledger": 67_057,
+    "event_opportunity_and_order": 77_057,
+    "policy_action_sampling": 87_057,
+    "evaluation_ledger": 97_057,
+    "bootstrap": 107_057,
+    "training_episode_ids": [0, 3_999],
+    "evaluation_episode_ids": [0, 255],
+}
 
 NATURAL_FIELDS = frozenset(
     {
@@ -188,9 +233,17 @@ def validate_source_identity(
     result = source.get("result")
     checkpoint = source.get("checkpoint")
     status = source.get("arm_status")
+    parent_status = source.get("parent_status")
+    parent_result = source.get("parent_result")
+    source_identity = source.get("source_identity")
     result = result if isinstance(result, Mapping) else {}
     checkpoint = checkpoint if isinstance(checkpoint, Mapping) else {}
     status = status if isinstance(status, Mapping) else {}
+    parent_status = parent_status if isinstance(parent_status, Mapping) else {}
+    parent_result = parent_result if isinstance(parent_result, Mapping) else {}
+    source_identity = (
+        source_identity if isinstance(source_identity, Mapping) else {}
+    )
     bundle = checkpoint.get("event_architecture")
     bundle = bundle if isinstance(bundle, Mapping) else {}
     contract = result.get("contract")
@@ -201,6 +254,21 @@ def validate_source_identity(
     source_m0 = source_m0 if isinstance(source_m0, Mapping) else {}
     architecture = bundle.get("architecture_state")
     architecture = architecture if isinstance(architecture, Mapping) else {}
+    parent_contract = parent_result.get("contract")
+    parent_contract = parent_contract if isinstance(parent_contract, Mapping) else {}
+    expected_selector = REGISTERED_STAGE_C_SELECTORS.get(expected_arm)
+    expected_arm_contract = {
+        **REGISTERED_STAGE_C_ARM_CONTRACT,
+        "selector": expected_selector,
+    }
+    run_id = parent_status.get("run_id")
+    source_commit = parent_status.get("source_commit")
+    parent_root = source_identity.get("parent_root")
+    arm_root = source_identity.get("root")
+    full_source_sha = bool(
+        isinstance(source_commit, str)
+        and re.fullmatch(r"[0-9a-f]{40}", source_commit)
+    )
 
     checks = {
         "registered_result_header": result.get("schema_version") == 1
@@ -210,15 +278,7 @@ def validate_source_identity(
         is True,
         "registered_source_m0": REQUIRED_SOURCE_M0.issubset(source_m0)
         and all(value is True for value in source_m0.values()),
-        "registered_contract": (
-            contract.get("num_envs"),
-            contract.get("horizon"),
-            contract.get("outer_updates"),
-            contract.get("environment_transitions"),
-            contract.get("latent_skills"),
-            contract.get("evaluation_episodes_per_mode"),
-        )
-        == (16, 80, 250, 320_000, 3, 256),
+        "registered_contract_exact": dict(contract) == expected_arm_contract,
         "registered_counts": (
             counts.get("environment_steps"),
             counts.get("high_optimizer_steps"),
@@ -250,6 +310,84 @@ def validate_source_identity(
             1_000,
             1_000,
             True,
+        ),
+        "terminal_arm_paths_exact": status.get("result_path")
+        == source_identity.get("result_path"),
+        "parent_terminal_manifest_exact": bool(
+            full_source_sha
+            and isinstance(run_id, str)
+            and run_id
+            and (
+                parent_status.get("state"),
+                parent_status.get("phase"),
+                parent_status.get("status"),
+                parent_status.get("f0_phase"),
+                parent_status.get("f0_update"),
+                parent_status.get("f0_steps"),
+                parent_status.get("f0_high_optimizer_steps"),
+                parent_status.get("f0_low_optimizer_steps"),
+                parent_status.get("f1_phase"),
+                parent_status.get("f1_update"),
+                parent_status.get("f1_steps"),
+                parent_status.get("f1_high_optimizer_steps"),
+                parent_status.get("f1_low_optimizer_steps"),
+            )
+            == (
+                "complete",
+                "terminal",
+                "SUPPORT_H2_SKILL_LIMIT",
+                "terminal",
+                "250",
+                "320000",
+                "1000",
+                "1000",
+                "terminal",
+                "250",
+                "320000",
+                "1000",
+                "1000",
+            )
+            and parent_status.get("result_path")
+            == source_identity.get("parent_result_path")
+            and source_identity.get("run_id") == run_id
+            and source_identity.get("source_commit") == source_commit
+        ),
+        "parent_result_header_and_authority_exact": bool(
+            parent_result.get("schema_version") == 1
+            and parent_result.get("stage") == "stage_c_paired_f0_f1"
+            and parent_result.get("status") == "SUPPORT_H2_SKILL_LIMIT"
+            and parent_result.get("implementation_valid") is True
+            and parent_result.get("authoritative_status_source")
+            == source_identity.get("parent_manifest_path")
+        ),
+        "parent_contract_exact": bool(
+            parent_contract.get("stage") == "stage_c_paired_f0_f1"
+            and parent_contract.get("contract_version") == 1
+            and parent_contract.get("source_commit") == source_commit
+            and parent_contract.get("run_id") == run_id
+            and parent_contract.get("sole_treatment_selector")
+            == REGISTERED_STAGE_C_SELECTORS
+            and parent_contract.get("frozen_environment_and_training_config")
+            == REGISTERED_STAGE_C_PARENT_CONFIG
+            and parent_contract.get("seed_and_ledger_map")
+            == REGISTERED_STAGE_C_SEED_AND_LEDGER_MAP
+            and set(parent_contract)
+            == {
+                "stage",
+                "contract_version",
+                "source_commit",
+                "run_id",
+                "sole_treatment_selector",
+                "frozen_environment_and_training_config",
+                "seed_and_ledger_map",
+            }
+        ),
+        "source_root_bound_to_parent_run": bool(
+            isinstance(parent_root, str)
+            and isinstance(arm_root, str)
+            and Path(parent_root).name == run_id
+            and Path(arm_root).name == expected_arm
+            and Path(arm_root).parent == Path(parent_root)
         ),
         "model_only_schema3_header": checkpoint.get("checkpoint_schema_version")
         == 3
@@ -295,6 +433,56 @@ def validate_source_identity(
             )
         ),
     }
+    return {
+        "valid": all(checks.values()),
+        "checks": checks,
+        "reasons": [name for name, valid in checks.items() if not valid],
+    }
+
+
+def validate_paired_source_binding(
+    sources: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Bind both selectors to one exact registered paired terminal source."""
+
+    exact_arms = set(sources) == {"f0", "f1"}
+    if not exact_arms:
+        checks = {
+            "exact_f0_f1_arms": False,
+            "individual_source_identity_valid": False,
+            "same_parent_root": False,
+            "same_parent_run": False,
+            "same_full_source_commit": False,
+            "same_parent_contract": False,
+        }
+    else:
+        reports = {
+            arm: validate_source_identity(sources[arm], arm)
+            for arm in ("f0", "f1")
+        }
+        identities = [sources[arm].get("source_identity", {}) for arm in ("f0", "f1")]
+        parent_statuses = [sources[arm].get("parent_status", {}) for arm in ("f0", "f1")]
+        parent_contracts = [
+            sources[arm].get("parent_result", {}).get("contract", {})
+            for arm in ("f0", "f1")
+        ]
+        run_ids = [status.get("run_id") for status in parent_statuses]
+        source_commits = [status.get("source_commit") for status in parent_statuses]
+        checks = {
+            "exact_f0_f1_arms": True,
+            "individual_source_identity_valid": all(
+                report["valid"] for report in reports.values()
+            ),
+            "same_parent_root": identities[0].get("parent_root")
+            == identities[1].get("parent_root"),
+            "same_parent_run": bool(run_ids[0]) and run_ids[0] == run_ids[1],
+            "same_full_source_commit": bool(
+                isinstance(source_commits[0], str)
+                and re.fullmatch(r"[0-9a-f]{40}", source_commits[0])
+                and source_commits[0] == source_commits[1]
+            ),
+            "same_parent_contract": parent_contracts[0] == parent_contracts[1],
+        }
     return {
         "valid": all(checks.values()),
         "checks": checks,
@@ -1373,9 +1561,18 @@ def load_source_bundle(
     result_path = arm_root / "result" / "stage_c_arm.json"
     checkpoint_path = arm_root / "checkpoints" / "update_250_eval.pt"
     status_path = arm_root / "arm_status.json"
-    if not result_path.is_file() or not checkpoint_path.is_file() or not status_path.is_file():
+    parent_root = arm_root.parent
+    parent_manifest_path = parent_root / "runner_status.txt"
+    parent_result_path = parent_root / "result" / "stage_c_f0_f1.json"
+    if (
+        not result_path.is_file()
+        or not checkpoint_path.is_file()
+        or not status_path.is_file()
+        or not parent_manifest_path.is_file()
+        or not parent_result_path.is_file()
+    ):
         raise FileNotFoundError(
-            f"Stage C {expected_arm} root lacks its exact result/status/update_250_eval.pt"
+            f"Stage C {expected_arm} root lacks its exact arm and parent authority files"
         )
     result_candidates = list(result_path.parent.glob("stage_c_arm*.json"))
     checkpoint_candidates = list(checkpoint_path.parent.glob("update_250_eval*.pt"))
@@ -1383,18 +1580,25 @@ def load_source_bundle(
         raise ValueError(f"Stage C {expected_arm} root is ambiguous")
     result = json.loads(result_path.read_text(encoding="utf-8"))
     status = json.loads(status_path.read_text(encoding="utf-8"))
+    parent_status = _read_runner_manifest(parent_manifest_path)
+    parent_result = json.loads(parent_result_path.read_text(encoding="utf-8"))
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
-    parent_manifest = _read_runner_manifest(arm_root.parent / "runner_status.txt")
     return {
         "result": result,
         "checkpoint": checkpoint,
         "arm_status": status,
+        "parent_status": parent_status,
+        "parent_result": parent_result,
         "source_identity": {
             "root": str(arm_root),
             "result_path": str(result_path),
             "arm_status_path": str(status_path),
             "checkpoint_path": str(checkpoint_path),
-            "source_commit": parent_manifest.get("source_commit"),
+            "parent_root": str(parent_root),
+            "parent_manifest_path": str(parent_manifest_path),
+            "parent_result_path": str(parent_result_path),
+            "run_id": parent_status.get("run_id"),
+            "source_commit": parent_status.get("source_commit"),
         },
     }
 
@@ -1579,6 +1783,28 @@ def write_audit_outputs(
         handle.write(status_text)
 
 
+def write_failed_status(output_root: str | Path, error: BaseException) -> None:
+    """Create only the terminal operational-failure authority."""
+
+    destination = Path(output_root)
+    if destination.exists():
+        raise FileExistsError("output root already exists")
+    error_text = " ".join(str(error).split())
+    status_text = "\n".join(
+        (
+            "state=failed",
+            "phase=terminal",
+            "status=INVALID_ITERATION4_PROVENANCE_AUDIT",
+            f"error_type={type(error).__name__}",
+            f"error={error_text}",
+            "",
+        )
+    )
+    destination.mkdir(parents=True, exist_ok=False)
+    with (destination / "runner_status.txt").open("x", encoding="utf-8") as handle:
+        handle.write(status_text)
+
+
 def run_audit(
     f0_root: str | Path,
     f1_root: str | Path,
@@ -1606,6 +1832,12 @@ def run_audit(
             "f0": load_source_bundle(f0_root, "f0", target_device),
             "f1": load_source_bundle(f1_root, "f1", target_device),
         }
+        paired_source_binding = validate_paired_source_binding(sources)
+        if not paired_source_binding["valid"]:
+            raise RuntimeError(
+                "INVALID_ITERATION4_PROVENANCE_AUDIT: paired Stage C source "
+                f"binding failed: {paired_source_binding['reasons']}"
+            )
         collections = {
             arm: collect_arm(sources[arm], arm, target_device)
             for arm in ("f0", "f1")
@@ -1681,6 +1913,7 @@ def run_audit(
                 "m0": {
                     "valid": True,
                     "global_rng_unchanged": global_rng_unchanged,
+                    "paired_source_binding": paired_source_binding,
                     "arms": {
                         arm: {
                             "source_identity": collections[arm]["identity"],
@@ -1731,6 +1964,10 @@ def run_audit(
             result,
         )
         return result
+    except Exception as error:
+        if not destination.exists():
+            write_failed_status(destination, error)
+        raise
     finally:
         _restore_global_rng(rng_before)
 
