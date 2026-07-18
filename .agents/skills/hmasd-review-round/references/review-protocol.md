@@ -101,14 +101,18 @@ scientific result.
 
 ## Evidence and Disposition
 
+Use the round's tracked `05_REVIEW_STATE.json` as the sole progress authority.
+Create and validate it only with `scripts/review_state.ps1`; artifact presence,
+conversation prose or an intended tool call cannot advance a stage. Commit each
+`COMPLETE` transition with its confirmed raw, synthesis or disposition artifact.
+
 Store the exact prompt boundary, raw response, source model, date and related
 claim in the tracked round. Raw absence means incomplete evidence. The
 controller evaluates claims by evidence and reasoning rather than model
 identity and owns every disposition and next authorization.
 
-Before transport, inspect the ordered artifact list and resume at the first
-stage without an identity-confirmed raw. Treat that raw as immutable completed
-evidence and never resubmit its prompt. A nonempty raw without a matching
-Exchange receipt or explicitly identified manual source is
-`BLOCKED_UNVERIFIED_RAW`; preserve it for exact recovery rather than generating
-a duplicate.
+Before transport, validate and show the state file, then resume its first
+non-`COMPLETE` stage. Treat an identity-confirmed raw as immutable and never
+resubmit its prompt. Record a nonempty raw without a matching Exchange receipt
+or explicitly identified manual source as `BLOCKED_UNVERIFIED_RAW`; preserve it
+for exact recovery rather than generating a duplicate.

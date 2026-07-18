@@ -15,10 +15,12 @@ mandatory runtime read. Do not reload workflow documents at every stage.
 
 ## Establish and Resume Round State
 
-At activation and before ending the turn, inspect the ordered artifacts in the
-round brief. The standard order is Gemini raw, Open Pro raw, controller
-synthesis, Convergent Pro raw, then controller disposition. Resume from the
-first stage that is not confirmed `COMPLETE`.
+Initialize the tracked `05_REVIEW_STATE.json` at the question boundary with
+`scripts/review_state.ps1 -Mode init`. It is the sole progress authority for the
+round. Update it only through that script and commit a `COMPLETE` transition with
+the artifact it confirms. At activation and before ending the turn, run
+`-Mode validate`, then `-Mode show` and resume the first non-`COMPLETE` stage.
+Do not infer progress from directory contents or conversation prose.
 
 Use these transport states precisely:
 
@@ -26,14 +28,20 @@ Use these transport states precisely:
 - `DISPATCHED`: the guarded send returned, but no verified terminal exchange
   response has returned;
 - `COMPLETE`: the Exchange identity and role ACK match, its terminal payload is
-  confirmed, and the exact raw response is archived;
+  confirmed, the exact raw response is archived, and the receipt identifies an
+  `exchange:`, `gemini:`, or explicitly confirmed `manual:` source;
 - `BLOCKED`: consent, identity, remote evidence, authentication, completeness,
   or transport prevents progress.
 
 A prompt file, intended send, browser page, or nonempty raw file alone does not
 prove handoff. A pre-existing raw without a matching Exchange receipt or an
 explicitly identified manual source is `BLOCKED_UNVERIFIED_RAW`; preserve it and
-request exact recovery rather than resubmitting or calling it complete.
+record the blocker through the script rather than resubmitting or calling it
+complete.
+
+`COMPLETE` is immutable. Never edit the JSON directly or move a `DISPATCHED`
+stage back to `NOT_STARTED`; transition a failed attempt to `BLOCKED` and retain
+its route token.
 
 Workflow maintenance does not close or satisfy a suspended round. After such
 maintenance, return to the first incomplete stage before the final user response

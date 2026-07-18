@@ -119,6 +119,7 @@ rounds/YYYYMMDD_topic/
   00_REVIEW_BRIEF.md
   01_SHARED_SOURCE_MANIFEST.md
   02_GEMINI_LOCAL_SOURCE_MANIFEST.md
+  05_REVIEW_STATE.json
   09_GEMINI_LIVE_RESEARCH_PROMPT.md
   10_GEMINI_DIVERGENT_QUESTION.md
   11_GEMINI_DIVERGENT_RAW.md
@@ -130,16 +131,17 @@ rounds/YYYYMMDD_topic/
   50_DISPOSITION.md
 ```
 
-The brief and shared manifest are written once. Reviewer-specific questions
+The brief, manifests and initial review state are written once. Reviewer-specific questions
 contain only role and requested-output differences. Raw responses are archived
 before synthesis. Accepted algorithm design moves to `docs/research/`; current
 ownership stays in `memory/CURRENT_WORK.md`; runtime evidence stays in `logs/`.
 
-Resume an interrupted round from the first stage without an identity-confirmed
-raw. A confirmed raw is immutable and its prompt is never submitted again. A
-nonempty raw without a matching Exchange receipt or explicitly identified
-manual source is preserved as `BLOCKED_UNVERIFIED_RAW` for exact recovery; it is
-neither completion evidence nor permission to create a duplicate.
+`05_REVIEW_STATE.json`, maintained by the Skill's state script, is the sole
+progress authority. Resume its first non-`COMPLETE` stage. A confirmed raw is
+immutable and its prompt is never submitted again. Preserve a nonempty raw
+without a matching Exchange receipt or explicitly identified manual source as
+`BLOCKED_UNVERIFIED_RAW`; it is neither completion evidence nor permission to
+create a duplicate.
 
 Existing model-specific directories remain historical/operational stores and
 are not reorganized retroactively.
