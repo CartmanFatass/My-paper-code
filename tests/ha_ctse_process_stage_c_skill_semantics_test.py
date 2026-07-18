@@ -5,8 +5,11 @@ from __future__ import annotations
 import copy
 from dataclasses import replace
 import importlib.util
+import json
 import math
+import os
 import random
+import subprocess
 import sys
 from pathlib import Path
 
@@ -504,3 +507,68 @@ def test_run_audit_selects_f1_fails_closed_and_writes_one_json_safe_artifact(tmp
     with pytest.raises(FileExistsError, match="already exists"):
         run_audit(f0, f1, output_path=output_path)
     assert list(tmp_path.iterdir()) == [output_path]
+
+
+def test_direct_script_execution_bootstraps_repo_root_for_checkpoint_dataclass_unpickling(
+    tmp_path,
+):
+    from ha_ctse_process.variable_roster_event import LowTransitionRow
+
+    arm_root = tmp_path / "arm"
+    result_dir = arm_root / "result"
+    checkpoint_dir = arm_root / "checkpoints"
+    result_dir.mkdir(parents=True)
+    checkpoint_dir.mkdir(parents=True)
+    (result_dir / "stage_c_arm.json").write_text("{}\n", encoding="utf-8")
+    row = LowTransitionRow(
+        lifecycle_key="synthetic",
+        membership_epoch=0,
+        policy_version=0,
+        physical_time=0,
+        observation=np.zeros(1, dtype=np.float32),
+        skill=0,
+        action=np.zeros(1, dtype=np.int64),
+        old_log_probability=0.0,
+        old_value=0.0,
+        actor_hidden_before=np.zeros(1, dtype=np.float32),
+        critic_hidden_before=np.zeros(1, dtype=np.float32),
+        critic_member_features=np.zeros(1, dtype=np.float32),
+        active_critic_member_features=np.zeros((1, 1), dtype=np.float32),
+        active_skills=np.zeros(1, dtype=np.int64),
+        critic_global_features=np.zeros(1, dtype=np.float32),
+        focal_active_index=0,
+        critic_source_summary=np.zeros(1, dtype=np.float32),
+    )
+    torch.save(
+        {"checkpoint_schema_version": 3, "event_architecture": {"probe": row}},
+        checkpoint_dir / "update_250_live.pt",
+    )
+    empty_pythonpath = tmp_path / "empty_pythonpath"
+    empty_pythonpath.mkdir()
+    environment = os.environ.copy()
+    environment["PYTHONPATH"] = str(empty_pythonpath)
+    output_path = tmp_path / "audit.json"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(_ROOT / "scripts" / "analyze_stage_c_skill_semantics.py"),
+            "--f0",
+            str(arm_root),
+            "--f1",
+            str(arm_root),
+            "--output",
+            str(output_path),
+        ],
+        cwd=_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert "ModuleNotFoundError" not in completed.stderr
+    assert json.loads(output_path.read_text(encoding="utf-8"))["f1_outcome"] == (
+        "INVALID_ITERATION3_AUDIT"
+    )
