@@ -82,14 +82,26 @@ Exchange — Convergent Pro` may access only the `CONVERGENT` external thread an
 `41_PRO_CONVERGENT_RAW.md`. The controller never performs these browser sends
 itself.
 
-Use the exact guarded command in `SKILL.md` for every controller/exchange
-message. `codex_app__list_threads` is authoritative for target host, thread and
-status. Accept only the registered host/thread with status `notLoaded`,
-`completed`, or `idle`; `running`, absent or unknown is not idle. The thread API
-does not expose authoritative live model/effort, so use the frozen registry
-values and never claim a live re-read. Never omit either field. Explicit values
-must not be used to repair a reported mismatch. `hostId` and a stable route
-token are mandatory to prevent ambiguous or duplicate routing.
+Cross-task communication is directional. Controller-to-Exchange dispatch uses
+the first exact command in `SKILL.md`: `codex_app__list_threads` is authoritative
+for target host, thread and status; accept only the registered host/thread with
+status `notLoaded`, `completed`, or `idle`. The thread API does not expose
+authoritative live model/effort, so use the frozen Exchange registry values and
+never claim a live re-read. The dispatch must include `model`, `thinking`,
+`hostId`, the route token, and the active controller's
+host/thread/model/effort in its prompt. Explicit values must not be used to
+repair a reported mismatch.
+
+Exchange-to-controller delivery uses the second exact command in `SKILL.md`.
+It must target the controller host/thread supplied by the current dispatch and
+must explicitly pass that controller's supplied `model` and `thinking`.
+Omitting them, inferring them, or reusing the Exchange model is a target-model
+mutation risk and invalidates the relay. A final answer visible only inside the
+Exchange task does not notify the controller. Before ending a `COMPLETE`,
+`BLOCKED`, or `WAIT_PRO_THINKING` turn, the Exchange sends one `REVIEW_RELAY`
+payload and requires a successful tool result for the exact controller thread.
+It never sends to the other role and never writes `05_REVIEW_STATE.json`.
+
 After delivery, `codex_app__read_thread` must expose the completed Exchange turn;
 its UUID is the `turn:<uuid>` completion reference. When the received dispatch
 message and completed answer are two items in that same turn, identify them as
@@ -107,9 +119,11 @@ response. Never submit the question again. If a forbidden control is used, the
 transport is invalid, no raw is admissible, and recovery requires an explicit
 controller decision.
 
-The exchange acknowledges its Codex thread ID, target Pro conversation ID and
-role before opening the browser, then returns a terminal payload through the
-same guarded format. It never messages the other role.
+The Exchange acknowledges its Codex thread ID, target Pro conversation ID and
+role before opening the browser, then sends its terminal payload to the active
+controller through the required return relay. It may answer locally only after
+that call succeeds. `BLOCKED_CONTROLLER_RELAY` means the controller was not
+notified even if a local final answer exists.
 
 Use route token `<round>:<role>:<commit>:<raw-path>` for idempotence. Only a
 state-script `COMPLETE` transition with the matching route, structured receipt

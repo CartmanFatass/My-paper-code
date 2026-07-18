@@ -18,8 +18,10 @@ additional sources only when the task crosses their boundary:
 One active controller works directly in `C:\project\HMASD` and owns project
 decisions, root memory, Git integration, scientific interpretation, experiment
 authorization, and user communication. `memory/CURRENT_WORK.md` names that task
-and is writable only by it. A new controller may write only after an explicit
-handoff recorded there.
+and its exact model ID/reasoning effort for safe cross-task relays, and is
+writable only by it. A new controller may write only after an explicit handoff
+recorded there. If the controller model or effort changes, update those fields
+before any further cross-task send.
 
 Implementers read root memory but do not edit it. Reviewers, monitors, and side
 conversations are read-only unless the controller gives an exact non-root-memory
@@ -190,8 +192,12 @@ research direction.
 
 Reuse the registered persistent, role-specific conversations and never create
 duplicates, mix open/convergent roles, change an existing model, or submit them
-in parallel. Pro transport uses the Skill's guarded direct format with explicit
-target host/thread/model/effort and pre/post identity checks. Archive every raw
+in parallel. Pro dispatch to an Exchange uses explicit target
+host/thread/model/effort and pre/post identity checks. Every Exchange terminal
+state must be actively sent back to the current controller; a local final answer
+does not count. The return relay targets the exact controller
+host/thread/model/effort recorded in `CURRENT_WORK.md`; it never omits those
+fields or reuses the sender's settings. Archive every raw
 before interpretation; missing or ambiguous raw is incomplete evidence. Pro
 responses must finish naturally; never use page controls that shorten, stop,
 regenerate, retry or continue a response. A browser timeout permits only

@@ -116,8 +116,13 @@ select its exact registered local/external pair and pass the remote evidence
 preflight. Invoke `codex_app__list_threads`; require exactly the registered
 host/thread and an idle status of `notLoaded`, `completed`, or `idle`. Model and
 effort are frozen registry fields because the thread API exposes no authoritative
-live settings; never claim they were re-read. Send only the route token and
-tracked paths with this exact shape:
+live settings; never claim they were re-read. This is the exact
+**controller-to-Exchange dispatch** shape; include the active controller's exact
+host/thread/model/effort in the prompt so the Exchange can relay back:
+
+Resolve those controller values from `memory/CURRENT_WORK.md`. Missing or
+uncertain values are `BLOCKED_RELAY_TARGET_IDENTITY`; do not infer them from the
+sender, the Exchange registry, or the thread API.
 
 ```javascript
 await tools.codex_app__send_message_to_thread({
@@ -125,19 +130,42 @@ await tools.codex_app__send_message_to_thread({
   threadId: "<registered thread_id>",
   model: "<registered model_id>",
   thinking: "<registered reasoning_effort>",
-  prompt: "<route token and tracked paths only>"
+  prompt: "<route token, tracked paths, controller_host_id, controller_thread_id, controller_model_id and controller_reasoning_effort>"
 })
 ```
 
 After delivery, require the same host/thread identity. Confirm the delivered
 Exchange request through `codex_app__read_thread` and use its turn UUID for the
 `DISPATCHED` receipt. Confirm the completed Exchange turn through another
-bounded read and use that turn UUID in the completion receipt. The exchange must verify its local thread, external
-conversation, role ACK and visible `Pro` label before browser use, archive the
-exact response, then return `COMPLETE` or `BLOCKED` through the same guarded
-format resolved against the controller. Never omit `model` or
-`thinking`, repair a mismatch, change a model, edit thread state, mix roles,
-create a duplicate, or submit roles in parallel. A mismatch is
+bounded read and use that turn UUID in the completion receipt. The Exchange must
+verify its local thread, external conversation, role ACK and visible `Pro` label
+before browser use and archive the exact response.
+
+Before the Exchange ends any `COMPLETE`, `BLOCKED`, or `WAIT_PRO_THINKING` turn,
+it must actively relay the result to the supplied controller target exactly
+once. Its local final answer is not a relay. The return direction must use the
+controller's supplied model and effort, never the Exchange's values; omitting
+them or using the sender's values can change the target task's model:
+
+```javascript
+await tools.codex_app__send_message_to_thread({
+  hostId: "<controller_host_id from this dispatch>",
+  threadId: "<controller_thread_id from this dispatch>",
+  model: "<controller_model_id from this dispatch>",
+  thinking: "<controller_reasoning_effort from this dispatch>",
+  prompt: "REVIEW_RELAY\nroute=<exact route>\nterminal=<COMPLETE|BLOCKED|WAIT_PRO_THINKING>\nraw=<registered raw path>\nreason=<single line or none>"
+})
+```
+
+The tool call must succeed and return the exact controller thread before the
+Exchange may answer `RELAY_SENT`. A failed or ambiguous relay is
+`BLOCKED_CONTROLLER_RELAY`; keep the raw if already archived, but do not claim
+controller delivery. Missing controller model/effort is
+`BLOCKED_RELAY_TARGET_IDENTITY`, not permission to infer or omit it. The
+Exchange never edits review state and never messages the other reviewer role.
+For either direction, use the receiving task's frozen `model` and `thinking`;
+never repair a mismatch, change a model, edit thread state, mix roles, create a
+duplicate, or submit roles in parallel. A mismatch is
 `BLOCKED_REVIEW_THREAD_IDENTITY`.
 
 Full Pro thinking is part of the evidence contract. Never click `立即回答`,

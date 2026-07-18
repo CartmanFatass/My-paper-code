@@ -1,6 +1,18 @@
 {
   "schema_version": 3,
   "updated": "2026-07-18",
+  "controller_relay": {
+    "target_source": "current dispatch payload from memory/CURRENT_WORK.md",
+    "transport": "codex_app__send_message_to_thread",
+    "host_and_thread_required": true,
+    "target_model_and_thinking_required": true,
+    "use_receiving_controller_settings": true,
+    "required_terminals": [
+      "COMPLETE",
+      "BLOCKED",
+      "WAIT_PRO_THINKING"
+    ]
+  },
   "reviewers": {
     "gemini_divergent": {
       "role": "GEMINI_DIVERGENT",
