@@ -4,9 +4,10 @@ This file is the durable scientific contract for HMASD algorithm exploration.
 It contains cross-experiment principles, not the active route, implementation
 specification, experiment dashboard, or research history.
 
-Current ownership and the live portfolio belong in `memory/CURRENT_WORK.md`.
-Executable design belongs in `memory/IMPLEMENTATION_PLAN.md`. Formal experiment
-contracts and dispositions belong in `memory/ExpRecord.md`. Git history preserves
+Current ownership and the live portfolio belong in
+`docs/project/CURRENT_WORK.md`. Executable design belongs in
+`docs/project/IMPLEMENTATION_PLAN.md`. Formal experiment contracts and
+dispositions belong in `docs/project/ExpRecord.md`. Git history preserves
 removed research history.
 
 ## 1. Research Mission

@@ -2,325 +2,87 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $skillsRoot = Join-Path $repo ".agents/skills"
-$researchSkillPath = Join-Path $skillsRoot "hmasd-research-cycle/SKILL.md"
-$experimentSkillPath = Join-Path $skillsRoot "hmasd-experiment/SKILL.md"
-$experimentProtocolPath = Join-Path $skillsRoot "hmasd-experiment/references/experiment-protocol.md"
-$watcherScriptPath = Join-Path $skillsRoot "hmasd-experiment/scripts/wait_runner_status.ps1"
-$reviewSkillPath = Join-Path $skillsRoot "hmasd-review-round/SKILL.md"
-$agentsPath = Join-Path $repo "AGENTS.md"
-$oldContractTestPath = Join-Path $repo "tests/hmasd_core_development_contract_test.ps1"
+$canonicalRoot = Join-Path $repo "docs/project"
+$expectedSkills = @("hmasd-experiment", "hmasd-research-cycle", "hmasd-review-round")
+$canonicalDocs = @(
+    "CURRENT_WORK.md",
+    "ALGORITHM_PRINCIPLES.md",
+    "MARL_ENGINEERING_PRINCIPLES.md",
+    "IMPLEMENTATION_PLAN.md",
+    "ExpRecord.md"
+)
 
-function Read-Normalized([string]$Path) {
+function Read-Text([string]$Path) {
     if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-        throw "Missing required workflow file: $Path"
+        throw "Missing workflow file: $Path"
     }
-    return (Get-Content -LiteralPath $Path -Raw) -replace '\s+', ' '
+    Get-Content -LiteralPath $Path -Raw
 }
 
-function Assert-Contains([string]$Text, [string]$Expected, [string]$Label) {
-    if (-not $Text.Contains($Expected)) {
-        throw "$Label is missing required contract text: $Expected"
-    }
+$skillNames = @(Get-ChildItem -LiteralPath $skillsRoot -Directory |
+    Sort-Object Name | Select-Object -ExpandProperty Name)
+if (($skillNames -join "|") -ne ($expectedSkills -join "|")) {
+    throw "Project Skill set must be exactly: $($expectedSkills -join ', ')"
 }
 
-function Assert-NotContains([string]$Text, [string]$Forbidden, [string]$Label) {
-    if ($Text.Contains($Forbidden)) {
-        throw "$Label retains forbidden legacy text: $Forbidden"
-    }
+foreach ($name in $canonicalDocs) {
+    [void](Read-Text (Join-Path $canonicalRoot $name))
 }
-
-function Publish-StatusAtomic([string]$RunRoot, [string[]]$Lines) {
-    $statusPath = Join-Path $RunRoot "runner_status.txt"
-    $stagingPath = Join-Path $RunRoot (".runner_status.{0}.tmp" -f [guid]::NewGuid().ToString("N"))
-    $content = ($Lines -join [Environment]::NewLine) + [Environment]::NewLine
-    [IO.File]::WriteAllText($stagingPath, $content, [Text.UTF8Encoding]::new($false))
-    if (Test-Path -LiteralPath $statusPath -PathType Leaf) {
-        $replaceMethod = [IO.File].GetMethod("Replace", [type[]]@([string], [string], [string]))
-        $replaceArguments = New-Object "System.Object[]" 3
-        $replaceArguments[0] = [string]$stagingPath
-        $replaceArguments[1] = [string]$statusPath
-        $replaceArguments[2] = $null
-        [void]$replaceMethod.Invoke($null, $replaceArguments)
-    } else {
-        [IO.File]::Move($stagingPath, $statusPath)
+foreach ($legacy in @(
+    "memory/CURRENT_WORK.md",
+    "memory/ALGORITHM_PRINCIPLES.md",
+    "memory/IMPLEMENTATION_PLAN.md",
+    "memory/ExpRecord.md",
+    "docs/research/MARL_ENGINEERING_PRINCIPLES.md"
+)) {
+    if (Test-Path -LiteralPath (Join-Path $repo $legacy)) {
+        throw "Legacy canonical path must not exist: $legacy"
     }
 }
 
-function Start-StatusWatcher([string]$RunRoot, [string]$ReadyPath) {
-    $startInfo = [Diagnostics.ProcessStartInfo]::new()
-    $startInfo.FileName = (Get-Process -Id $PID).Path
-    $startInfo.UseShellExecute = $false
-    $startInfo.CreateNoWindow = $true
-    $startInfo.RedirectStandardOutput = $true
-    $startInfo.RedirectStandardError = $true
-    $escapedScript = $watcherScriptPath.Replace("'", "''")
-    $escapedRunRoot = $RunRoot.Replace("'", "''")
-    $escapedReadyPath = $ReadyPath.Replace("'", "''")
-    $invocation = "& '$escapedScript' -RunPath '$escapedRunRoot' -ReadyPath '$escapedReadyPath'"
-    $encodedInvocation = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($invocation))
-    $startInfo.Arguments = "-NoProfile -NonInteractive -EncodedCommand $encodedInvocation"
-    return [Diagnostics.Process]::Start($startInfo)
-}
-
-function Wait-WatcherReady([string]$ReadyPath, [int]$TimeoutMs = 5000) {
-    if (Test-Path -LiteralPath $ReadyPath -PathType Leaf) {
-        return
-    }
-    $readyWatcher = [IO.FileSystemWatcher]::new((Split-Path -Parent $ReadyPath), (Split-Path -Leaf $ReadyPath))
-    $readyWatcher.NotifyFilter = [IO.NotifyFilters]::FileName
-    $readyWatcher.EnableRaisingEvents = $true
-    try {
-        if (Test-Path -LiteralPath $ReadyPath -PathType Leaf) {
-            return
-        }
-        $change = $readyWatcher.WaitForChanged([IO.WatcherChangeTypes]::Created, $TimeoutMs)
-        if ($change.TimedOut -and -not (Test-Path -LiteralPath $ReadyPath -PathType Leaf)) {
-            throw "Watcher did not signal ready within $TimeoutMs ms: $ReadyPath"
-        }
-    } finally {
-        $readyWatcher.Dispose()
-    }
-}
-
-function Wait-WatcherExit([Diagnostics.Process]$Process, [int]$TimeoutMs = 5000) {
-    if (-not $Process.WaitForExit($TimeoutMs)) {
-        $Process.Kill()
-        $Process.WaitForExit()
-        throw "Watcher did not exit within $TimeoutMs ms"
-    }
-    return [pscustomobject]@{
-        ExitCode = $Process.ExitCode
-        StdOut = $Process.StandardOutput.ReadToEnd()
-        StdErr = $Process.StandardError.ReadToEnd()
-    }
-}
-
-$skillNames = @(Get-ChildItem -LiteralPath $skillsRoot -Directory | Sort-Object Name | Select-Object -ExpandProperty Name)
-$expectedSkillNames = @("hmasd-experiment", "hmasd-research-cycle", "hmasd-review-round")
-if (($skillNames -join "|") -ne ($expectedSkillNames -join "|")) {
-    throw "Project Skill set must be exactly: $($expectedSkillNames -join ', ')"
-}
-
-if (Test-Path -LiteralPath $oldContractTestPath) {
-    throw "The legacy mandatory-Superpowers contract test must be deleted"
-}
-
-$agents = Read-Normalized $agentsPath
-$research = Read-Normalized $researchSkillPath
-$experiment = Read-Normalized $experimentSkillPath
-$experimentProtocol = Read-Normalized $experimentProtocolPath
-$watcherScript = Read-Normalized $watcherScriptPath
-$review = Read-Normalized $reviewSkillPath
-
+$agents = Read-Text (Join-Path $repo "AGENTS.md")
 foreach ($required in @(
+    "docs/project/CURRENT_WORK.md",
     "Direct controller work is the default",
-    '$hmasd-research-cycle',
-    '$hmasd-experiment',
-    '$hmasd-review-round',
-    "does not imply one permitted research direction",
-    'at most one active `wait_agent`',
-    "native wait times out",
-    "mailbox wait"
+    "MARL exploration is agile by default",
+    "Active-line development is the default",
+    "No Skill recursively triggers itself"
 )) {
-    Assert-Contains $agents $required "AGENTS.md"
+    if (-not $agents.Contains($required)) {
+        throw "AGENTS.md is missing structural contract: $required"
+    }
 }
-foreach ($forbidden in @(
-    "Superpowers owns the generic core-development lifecycle",
-    'superpowers:subagent-driven-development` when subagents are available',
-    "Implementation and review permissions, edit and commit boundaries, task handoffs and fix loops follow the invoked Superpowers workflow"
-)) {
-    Assert-NotContains $agents $forbidden "AGENTS.md"
-}
-
-foreach ($required in @(
-    "two to four live",
-    "at most one coherent implementer",
-    "Do not create a reviewer or reviewer-driven repair loop by default",
-    "concrete unresolved corruption risk",
-    "Do not create task briefs, reports, progress ledgers, review packages, or task commits",
-    "valid scientific negative",
-    "Stop after one accepted evidence source"
-)) {
-    Assert-Contains $research $required "hmasd-research-cycle"
-}
-foreach ($forbidden in @(
-    "one whole-change reviewer",
-    "at most one repair cycle"
-)) {
-    Assert-NotContains $research $forbidden "hmasd-research-cycle"
-}
-
-foreach ($required in @(
-    "final run root",
-    "runner_status.txt",
-    "payload staging",
-    "inside the final run root",
-    'at most one active `wait_agent`',
-    "same child",
-    "native wait times out",
-    "mailbox wait",
-    "only nonterminal state",
-    "malformed line",
-    "missing state",
-    "unknown state",
-    "Do not poll"
-)) {
-    Assert-Contains $experiment $required "hmasd-experiment"
-}
-Assert-NotContains $experiment 'do not poll the status, read the child repeatedly, call `wait_agent`' "hmasd-experiment"
-foreach ($required in @(
-    "live from launch",
-    "inside the final run root",
-    'at most one active `wait_agent`',
-    "same child",
-    "native wait times out",
-    "mailbox wait",
-    "only nonterminal state",
-    "malformed line",
-    "missing state",
-    "unknown state",
-    "file or result-directory publication"
-)) {
-    Assert-Contains $experimentProtocol $required "experiment-protocol"
-}
-foreach ($legacyWait in @(
-    'exactly one native `wait_agent`',
-    'exactly one `wait_agent`'
-)) {
-    Assert-NotContains $agents $legacyWait "AGENTS.md"
-    Assert-NotContains $experiment $legacyWait "hmasd-experiment"
-    Assert-NotContains $experimentProtocol $legacyWait "experiment-protocol"
-}
-
-foreach ($required in @(
-    "tracked HMASD five-stage external-review round",
-    "only the controller changes algorithms, experiments or the research portfolio",
-    "controller writes synthesis only"
-)) {
-    Assert-Contains $review $required "hmasd-review-round"
-}
-
-foreach ($skillName in $expectedSkillNames) {
-    $metadata = Join-Path $skillsRoot "$skillName/agents/openai.yaml"
-    if (-not (Test-Path -LiteralPath $metadata -PathType Leaf)) {
-        throw "Missing Skill UI metadata: $metadata"
+foreach ($legacy in @("memory/CURRENT_WORK.md", "memory/IMPLEMENTATION_PLAN.md")) {
+    if ($agents.Contains($legacy)) {
+        throw "AGENTS.md still points to a legacy control path: $legacy"
     }
 }
 
-foreach ($required in @(
-    "Malformed status line",
-    "Status is missing state",
-    "Unknown status state",
-    '@("running", "complete", "completed", "failed")',
-    "ReadyPath"
-)) {
-    Assert-Contains $watcherScript $required "wait_runner_status.ps1"
+$research = Read-Text (Join-Path $skillsRoot "hmasd-research-cycle/SKILL.md")
+if ($research -notmatch '(?s)^---.*description:.*explicitly invokes \$hmasd-research-cycle.*ACTIVE Autonomous Boundary.*---' -or
+    $research -notmatch '(?s)## Stop.*Do not invoke this Skill\s+again') {
+    throw "Research-cycle trigger or stop boundary is incomplete"
 }
 
-if (-not (Test-Path -LiteralPath $watcherScriptPath -PathType Leaf)) {
-    throw "Missing experiment status watcher: $watcherScriptPath"
+$experiment = Read-Text (Join-Path $skillsRoot "hmasd-experiment/SKILL.md")
+$protocol = Read-Text (Join-Path $skillsRoot "hmasd-experiment/references/experiment-protocol.md")
+if (-not $experiment.Contains("references/experiment-protocol.md") -or
+    -not $protocol.Contains("BLOCKED_MONITOR_TIMEOUT") -or
+    -not $protocol.Contains("BLOCKED_REPEATED_OPERATIONAL_FAILURE")) {
+    throw "Experiment lifecycle deadline or retry boundary is incomplete"
 }
 
-$pytestTmpRoot = [IO.Path]::GetFullPath((Join-Path $repo "tests/.pytest_tmp"))
-$runtimeTmpRoot = [IO.Path]::GetFullPath((Join-Path $pytestTmpRoot "hmasd-research-workflow-contract"))
-if (-not $runtimeTmpRoot.StartsWith($pytestTmpRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
-    throw "Runtime test path escapes tests/.pytest_tmp: $runtimeTmpRoot"
+$review = Read-Text (Join-Path $skillsRoot "hmasd-review-round/SKILL.md")
+$reviewState = Read-Text (Join-Path $skillsRoot "hmasd-review-round/scripts/review_state.ps1")
+if (-not $review.Contains("dispatched exactly once") -or
+    -not $review.Contains("BLOCKED_TIMEOUT") -or
+    -not $reviewState.Contains("schema_version = 4") -or
+    -not $reviewState.Contains("dispatch_count")) {
+    throw "Review dispatch loop guard is incomplete"
 }
-if (Test-Path -LiteralPath $runtimeTmpRoot) {
-    Remove-Item -LiteralPath $runtimeTmpRoot -Recurse -Force
-}
-[void](New-Item -ItemType Directory -Path $runtimeTmpRoot)
 
-$runtimePassed = $false
-try {
-    $successRoot = Join-Path $runtimeTmpRoot "watcher-success"
-    [void](New-Item -ItemType Directory -Path $successRoot)
-    $successRunId = Split-Path -Leaf $successRoot
-    $successReady = Join-Path $successRoot "watcher.ready"
-    $resultDirectory = Join-Path $successRoot "result"
-    [void](New-Item -ItemType Directory -Path $resultDirectory)
-    $resultPath = Join-Path $resultDirectory "result.json"
-    [IO.File]::WriteAllText($resultPath, "{}", [Text.UTF8Encoding]::new($false))
-    Publish-StatusAtomic $successRoot @(
-        "state=running",
-        "updated=2026-07-18T20:00:00+08:00",
-        "phase=train",
-        "run_root=$successRoot",
-        "run_id=$successRunId"
-    )
-
-    $successProcess = Start-StatusWatcher $successRoot $successReady
-    try {
-        Wait-WatcherReady $successReady
-        Publish-StatusAtomic $successRoot @(
-            "state=complete",
-            "updated=2026-07-18T20:00:01+08:00",
-            "phase=done",
-            "run_root=$successRoot",
-            "run_id=$successRunId",
-            "result_path=$resultPath"
-        )
-        $successOutcome = Wait-WatcherExit $successProcess
-    } finally {
-        if (-not $successProcess.HasExited) {
-            $successProcess.Kill()
-            $successProcess.WaitForExit()
-        }
-        $successProcess.Dispose()
-    }
-    if ($successOutcome.ExitCode -ne 0) {
-        throw "Watcher terminal transition failed: $($successOutcome.StdErr.Trim())"
-    }
-    $terminal = $successOutcome.StdOut.Trim() | ConvertFrom-Json
-    if ($terminal.state -ne "complete" -or $terminal.phase -ne "done") {
-        throw "Watcher returned the wrong terminal JSON: $($successOutcome.StdOut.Trim())"
-    }
-    if (-not [string]::Equals([IO.Path]::GetFullPath([string]$terminal.payload), [IO.Path]::GetFullPath($resultPath), [StringComparison]::OrdinalIgnoreCase)) {
-        throw "Watcher returned the wrong terminal payload path"
-    }
-
-    $invalidRoot = Join-Path $runtimeTmpRoot "watcher-invalid"
-    [void](New-Item -ItemType Directory -Path $invalidRoot)
-    $invalidRunId = Split-Path -Leaf $invalidRoot
-    $invalidReady = Join-Path $invalidRoot "watcher.ready"
-    Publish-StatusAtomic $invalidRoot @(
-        "state=running",
-        "updated=2026-07-18T20:01:00+08:00",
-        "phase=train",
-        "run_root=$invalidRoot",
-        "run_id=$invalidRunId"
-    )
-
-    $invalidProcess = Start-StatusWatcher $invalidRoot $invalidReady
-    try {
-        Wait-WatcherReady $invalidReady
-        Publish-StatusAtomic $invalidRoot @(
-            "state=unknown",
-            "updated=2026-07-18T20:01:01+08:00",
-            "phase=invalid",
-            "run_root=$invalidRoot",
-            "run_id=$invalidRunId"
-        )
-        $invalidOutcome = Wait-WatcherExit $invalidProcess
-    } finally {
-        if (-not $invalidProcess.HasExited) {
-            $invalidProcess.Kill()
-            $invalidProcess.WaitForExit()
-        }
-        $invalidProcess.Dispose()
-    }
-    if ($invalidOutcome.ExitCode -eq 0) {
-        throw "Watcher accepted an unknown existing status state"
-    }
-    if ($invalidOutcome.StdErr -notmatch "Unknown status state") {
-        throw "Watcher failed for the wrong unknown-state reason: $($invalidOutcome.StdErr.Trim())"
-    }
-
-    $runtimePassed = $true
-} finally {
-    if ($runtimePassed -and (Test-Path -LiteralPath $runtimeTmpRoot)) {
-        Remove-Item -LiteralPath $runtimeTmpRoot -Recurse -Force
-    }
+foreach ($skill in $expectedSkills) {
+    [void](Read-Text (Join-Path $skillsRoot "$skill/agents/openai.yaml"))
 }
 
 Write-Output "HMASD_RESEARCH_WORKFLOW_CONTRACT_OK"

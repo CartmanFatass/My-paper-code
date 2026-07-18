@@ -2,7 +2,7 @@
 
 Status: preliminary backup idea only. This directory does not authorize an
 implementation, experiment, route change, or claim. The active project remains
-the R52 failure review recorded in `memory/CURRENT_WORK.md`.
+the R52 failure review recorded in `docs/project/CURRENT_WORK.md`.
 
 ## 1. Motivation
 

@@ -1,60 +1,44 @@
 ---
 name: hmasd-research-cycle
-description: Use only for an explicit autonomous HMASD research iteration, an unresolved architecture boundary, selection of a discriminating evidence source, or a valid result that must reweight the live portfolio.
+description: Use only when the user explicitly invokes $hmasd-research-cycle or docs/project/CURRENT_WORK.md records an ACTIVE Autonomous Boundary for one authorized autonomous HMASD iteration. Do not trigger for routine continuation, status or result reporting, interpretation of an already registered result, a valid result alone, or ordinary implementation work.
 ---
 
 # HMASD Research Cycle
 
-Read `memory/CURRENT_WORK.md`, `memory/ALGORITHM_PRINCIPLES.md`, and the active
-`memory/IMPLEMENTATION_PLAN.md` contract. Enter for one bounded iteration only.
-If the iteration changes executable MARL training, runtime, collector, replay,
-evaluation, audit, analyzer, or runner code, also read
-`docs/research/MARL_ENGINEERING_PRINCIPLES.md`. Pure design, result
-interpretation, and reanalysis do not load the engineering contract.
+Confirm the entry condition before doing work. If neither an explicit invocation
+nor an `ACTIVE` autonomous boundary exists, return control without starting a
+cycle.
 
-## Freeze the Evidence Question
+Read `docs/project/CURRENT_WORK.md`,
+`docs/project/ALGORITHM_PRINCIPLES.md`, and the current contract in
+`docs/project/IMPLEMENTATION_PLAN.md`. Read
+`docs/project/MARL_ENGINEERING_PRINCIPLES.md` only if this iteration changes or
+reviews executable MARL code.
 
-Keep two to four live causal explanations or candidate architectures when the
-evidence permits. The controller freezes the causal question, final capability,
-replacement ledger, data and gradient flow, invariants, strongest ordinary
-baseline, outcome-dependent updates for every live candidate, and the condition
-that exhausts the portfolio. One serialized evidence source does not make its
-candidate the only permitted successor.
+## Run One Evidence-Bearing Iteration
 
-Select the smallest coherent implementation, reanalysis, prototype, diagnostic,
-or controlled run that best separates the live candidates and remains relevant
-to the final variable-team, variable-skill-lifetime algorithm.
+1. Reconstruct the live portfolio from `CURRENT_WORK.md`.
+2. Freeze the causal question, final capability, replacement ledger, strongest
+   ordinary baseline, outcome-dependent portfolio updates, and portfolio-
+   exhaustion condition in the single active implementation plan.
+3. Choose the smallest coherent observation, reanalysis, prototype, or
+   controlled run that best separates the live candidates and remains relevant
+   to variable team membership plus variable skill lifetime.
+4. Implement under the collaboration rules in `AGENTS.md`. Do not create a
+   second brief, an internal reviewer, a task report, or a task commit.
+5. Let the controller inspect the integrated path once. If a real experiment
+   lifecycle is required, enter `$hmasd-experiment`; implementation completion
+   itself is not launch authority.
+6. Interpret one accepted evidence source against every live candidate. Update
+   only evidence-resolved weights, retirements, or promotions.
 
-## Execute One Coherent Iteration
+Retry only a concrete operational failure under the same contract and within
+the experiment protocol's retry limit. A valid scientific negative closes its
+line without rescue.
 
-Work directly by default. Delegate only when it has clear net benefit. Use one
-implementer for a coupled change; use two or three implementers in parallel only
-for packages with frozen interfaces and disjoint write scopes. One file has one
-writer, and the controller or one designated integration implementer owns every
-shared or strongly coupled integration file. The controller inspects the
-integrated change and owns every fix; an implementer failure returns directly
-to the controller.
-Do not create an internal reviewer subagent or reviewer-driven repair loop. The
-controller personally verifies the integrated diff, the one focused check and
-the resulting evidence. If a concrete probability, gradient/detach, RNG/replay,
-mask/clock or checkpoint risk remains unresolved, the controller fixes it or
-blocks the iteration. Tracked Gemini/Pro scientific review remains a separate
-`$hmasd-review-round` workflow and is not an internal implementation review.
+## Stop
 
-Do not create task briefs, reports, progress ledgers, review packages, or task
-commits. Add at most one focused corruption check unless a newly observed
-operational failure requires a regression reproduction. Retry only the failed
-operational path. A valid scientific negative closes the evidence source without
-rescue, retuning, renaming, or reinterpretation.
-
-For a launchable code boundary, the controller applies the engineering contract
-once to the integrated end-to-end path, fixes actionable findings once, and
-re-inspects only the changed paths. Do not create a separate performance gate or
-repeat the review for unchanged frozen code.
-
-## Update the Portfolio and Stop
-
-Interpret the accepted evidence against every live candidate, then reweight,
-merge, or retire only evidence-resolved branches. Stop after one accepted
-evidence source updates the whole portfolio. A later iteration requires a new
-explicit request or standing autonomous-iteration boundary.
+Stop after one accepted evidence source and return to the controller. Record the
+result and autonomy state once in their owning files. Do not invoke this Skill
+again from its own result. Another iteration requires a still-`ACTIVE` standing
+boundary with remaining scope or a new explicit user instruction.

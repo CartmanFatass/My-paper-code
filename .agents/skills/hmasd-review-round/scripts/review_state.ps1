@@ -20,6 +20,7 @@ param(
     [string]$State,
 
     [string]$RouteToken,
+    [string]$DeadlineAt,
     [string]$Blocker
 )
 
@@ -77,6 +78,17 @@ function Assert-Route([string]$StageName, [object]$Entry) {
     }
 }
 
+function Parse-Time([string]$Value, [string]$Label) {
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        throw "$Label is required"
+    }
+    try {
+        return [DateTimeOffset]::Parse($Value, [Globalization.CultureInfo]::InvariantCulture)
+    } catch {
+        throw "Invalid $Label timestamp: $Value"
+    }
+}
+
 function Get-Next([object]$Document) {
     if ($Document.round_status -eq "CLOSED") {
         return "CLOSED"
@@ -85,38 +97,35 @@ function Get-Next([object]$Document) {
     if ($running.Count -gt 0) {
         return "WAIT:$($running[0])"
     }
+    $blocked = @($stageOrder | Where-Object { $Document.stages.$_.state -eq "BLOCKED" })
+    if ($blocked.Count -gt 0) {
+        return "BLOCKED:$($blocked -join ',')"
+    }
     foreach ($name in @("gemini_divergent", "open_pro")) {
         if ($Document.stages.$name.state -eq "NOT_STARTED") {
             return "NEXT:$name"
         }
     }
-    if ($Document.stages.gemini_divergent.state -eq "COMPLETE" -and
-        $Document.stages.open_pro.state -eq "COMPLETE" -and
-        $Document.stages.controller_synthesis.state -eq "NOT_STARTED") {
+    if ($Document.stages.controller_synthesis.state -eq "NOT_STARTED") {
         return "NEXT:controller_synthesis"
     }
-    if ($Document.stages.controller_synthesis.state -eq "COMPLETE" -and
-        $Document.stages.convergent_pro.state -eq "NOT_STARTED") {
+    if ($Document.stages.convergent_pro.state -eq "NOT_STARTED") {
         return "NEXT:convergent_pro"
     }
-    if ($Document.stages.convergent_pro.state -eq "COMPLETE" -and
-        $Document.stages.controller_disposition.state -eq "NOT_STARTED") {
+    if ($Document.stages.controller_disposition.state -eq "NOT_STARTED") {
         return "NEXT:controller_disposition"
-    }
-    $blocked = @($stageOrder | Where-Object { $Document.stages.$_.state -eq "BLOCKED" })
-    if ($blocked.Count -gt 0) {
-        return "BLOCKED:$($blocked -join ',')"
     }
     "NO_ELIGIBLE_STAGE"
 }
 
 function Assert-State([object]$Document) {
-    if ($Document.schema_version -ne 3 -or $Document.round_id -ne (Split-Path -Leaf $round)) {
+    if ($Document.schema_version -ne 4 -or $Document.round_id -ne (Split-Path -Leaf $round)) {
         throw "Review state identity or schema mismatch"
     }
     if ($Document.round_status -notin @("ACTIVE", "CLOSED")) {
         throw "Invalid round status: $($Document.round_status)"
     }
+
     foreach ($name in $stageOrder) {
         $entry = $Document.stages.$name
         if ($null -eq $entry -or $entry.state -notin @("NOT_STARTED", "DISPATCHED", "COMPLETE", "BLOCKED")) {
@@ -125,12 +134,39 @@ function Assert-State([object]$Document) {
         if ($entry.artifact_path -ne $artifacts[$name]) {
             throw "Artifact path changed for $name"
         }
+        if ($entry.dispatch_count -notin @(0, 1)) {
+            throw "dispatch_count must be 0 or 1: $name"
+        }
         if ($entry.state -eq "BLOCKED" -and [string]::IsNullOrWhiteSpace($entry.blocker)) {
             throw "BLOCKED requires a reason: $name"
         }
-        if ($name -in $externalStages -and $entry.state -in @("DISPATCHED", "COMPLETE")) {
-            Assert-Route $name $entry
+
+        if ($name -in $externalStages) {
+            if ($entry.dispatch_count -eq 0) {
+                if ($entry.state -in @("DISPATCHED", "COMPLETE") -or
+                    -not [string]::IsNullOrWhiteSpace($entry.route_token) -or
+                    -not [string]::IsNullOrWhiteSpace($entry.dispatched_at) -or
+                    -not [string]::IsNullOrWhiteSpace($entry.deadline_at)) {
+                    throw "Undispatched external stage has dispatch evidence: $name"
+                }
+            } else {
+                if ($entry.state -eq "NOT_STARTED") {
+                    throw "Dispatched external stage cannot return to NOT_STARTED: $name"
+                }
+                Assert-Route $name $entry
+                $dispatched = Parse-Time ([string]$entry.dispatched_at) "$name dispatched_at"
+                $deadline = Parse-Time ([string]$entry.deadline_at) "$name deadline_at"
+                if ($deadline -le $dispatched) {
+                    throw "deadline_at must follow dispatched_at: $name"
+                }
+            }
+        } elseif ($entry.dispatch_count -ne 0 -or
+                  -not [string]::IsNullOrWhiteSpace($entry.route_token) -or
+                  -not [string]::IsNullOrWhiteSpace($entry.dispatched_at) -or
+                  -not [string]::IsNullOrWhiteSpace($entry.deadline_at)) {
+            throw "Internal stage cannot contain dispatch evidence: $name"
         }
+
         if ($entry.state -eq "COMPLETE") {
             $artifact = Resolve-Artifact $entry.artifact_path
             if (-not (Test-Path -LiteralPath $artifact -PathType Leaf) -or
@@ -144,7 +180,11 @@ function Assert-State([object]$Document) {
     if ($running.Count -gt 1) {
         throw "External transport must remain serialized"
     }
-    if ($Document.stages.controller_synthesis.state -eq "COMPLETE" -and
+    if ($Document.stages.open_pro.state -ne "NOT_STARTED" -and
+        $Document.stages.gemini_divergent.state -ne "COMPLETE") {
+        throw "Open Pro requires completed Gemini raw"
+    }
+    if ($Document.stages.controller_synthesis.state -ne "NOT_STARTED" -and
         ($Document.stages.gemini_divergent.state -ne "COMPLETE" -or
          $Document.stages.open_pro.state -ne "COMPLETE")) {
         throw "Controller synthesis requires both divergent raws"
@@ -171,13 +211,16 @@ if ($Mode -eq "init") {
     foreach ($name in $stageOrder) {
         $stages[$name] = [ordered]@{
             state = "NOT_STARTED"
+            dispatch_count = 0
             route_token = $null
+            dispatched_at = $null
+            deadline_at = $null
             artifact_path = $artifacts[$name]
             blocker = $null
         }
     }
     $document = [ordered]@{
-        schema_version = 3
+        schema_version = 4
         round_id = Split-Path -Leaf $round
         round_status = "ACTIVE"
         updated_at = [DateTimeOffset]::Now.ToString("o")
@@ -197,6 +240,7 @@ if ($Mode -eq "transition") {
     if ($document.round_status -ne "ACTIVE") {
         throw "Closed review rounds are immutable"
     }
+
     $entry = $document.stages.$Stage
     if ($entry.state -eq "COMPLETE") {
         throw "COMPLETE is immutable: $Stage"
@@ -206,12 +250,14 @@ if ($Mode -eq "transition") {
         switch ($entry.state) {
             "NOT_STARTED" { @("DISPATCHED", "BLOCKED") }
             "DISPATCHED" { @("COMPLETE", "BLOCKED") }
-            "BLOCKED" { @("DISPATCHED", "BLOCKED") }
+            "BLOCKED" {
+                if ($entry.dispatch_count -eq 0) { @("DISPATCHED") } else { @() }
+            }
         }
     } else {
         switch ($entry.state) {
             "NOT_STARTED" { @("COMPLETE", "BLOCKED") }
-            "BLOCKED" { @("COMPLETE", "BLOCKED") }
+            "BLOCKED" { @("COMPLETE") }
         }
     }
     if ($State -notin $allowed) {
@@ -219,15 +265,26 @@ if ($Mode -eq "transition") {
     }
 
     if ($State -eq "DISPATCHED") {
-        if ([string]::IsNullOrWhiteSpace($RouteToken)) {
-            throw "DISPATCHED requires -RouteToken"
+        if ([string]::IsNullOrWhiteSpace($RouteToken) -or [string]::IsNullOrWhiteSpace($DeadlineAt)) {
+            throw "DISPATCHED requires -RouteToken and -DeadlineAt"
         }
+        if ($entry.dispatch_count -ne 0) {
+            throw "External stage may be dispatched only once: $Stage"
+        }
+        $now = [DateTimeOffset]::Now
+        $deadline = Parse-Time $DeadlineAt "DeadlineAt"
+        if ($deadline -le $now) {
+            throw "DeadlineAt must be in the future"
+        }
+        $entry.dispatch_count = 1
         $entry.route_token = $RouteToken
+        $entry.dispatched_at = $now.ToString("o")
+        $entry.deadline_at = $deadline.ToString("o")
         $entry.blocker = $null
     } elseif ($State -eq "COMPLETE") {
         if ($external) {
-            if ([string]::IsNullOrWhiteSpace($entry.route_token)) {
-                throw "External COMPLETE requires a prior DISPATCHED route"
+            if ($entry.dispatch_count -ne 1 -or [string]::IsNullOrWhiteSpace($entry.route_token)) {
+                throw "External COMPLETE requires the one prior dispatch"
             }
             if (-not [string]::IsNullOrWhiteSpace($RouteToken) -and $RouteToken -ne $entry.route_token) {
                 throw "COMPLETE cannot change the route"
@@ -256,7 +313,9 @@ if ($Mode -eq "show") {
         [pscustomobject]@{
             stage = $name
             state = $document.stages.$name.state
+            dispatch_count = $document.stages.$name.dispatch_count
             artifact = $document.stages.$name.artifact_path
+            deadline = $document.stages.$name.deadline_at
             blocker = $document.stages.$name.blocker
         }
     }
