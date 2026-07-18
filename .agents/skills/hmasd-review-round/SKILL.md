@@ -8,149 +8,140 @@ description: "Use when creating or resuming a tracked HMASD five-stage external-
 Read the round's `00_REVIEW_BRIEF.md`, `01_SHARED_SOURCE_MANIFEST.md`, and
 `references/review-protocol.md`. Gemini additionally reads
 `02_GEMINI_LOCAL_SOURCE_MANIFEST.md`. Read
-`docs/external-review/REVIEWER_CONVERSATIONS.json` before external transport and
-the neutral `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md` only for a Pro
+`docs/external-review/REVIEWER_CONVERSATIONS.json` before transport and the
+neutral `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md` before a Pro
 submission.
 
 ## State Authority
 
 Create and update `05_REVIEW_STATE.json` only through
-`scripts/review_state.ps1`. Run `validate`, `show`, and `next` once when the
-round is activated and after an actual state transition. Do not repeat them
-while an external stage remains `DISPATCHED`.
+`scripts/review_state.ps1`. Run `validate`, `show`, and `next` once on
+activation and after an actual transition. Do not repeat them while an external
+stage remains `DISPATCHED`.
 
-States mean:
-
-- `NOT_STARTED`: no guarded Exchange dispatch was delivered;
-- `DISPATCHED`: the exact route was delivered to the registered Exchange task;
-- `COMPLETE`: the exact raw is archived and a completion receipt is accepted;
+- `NOT_STARTED`: no verified submission;
+- `DISPATCHED`: one prompt was submitted to the registered external session;
+- `COMPLETE`: the naturally completed raw is archived and verified;
 - `BLOCKED`: an actionable authority, identity, source, authentication, or
   transport problem prevents progress.
 
-`COMPLETE` is immutable. Never infer progress from artifact presence or prose,
-move `DISPATCHED` back to `NOT_STARTED`, or resubmit an identity-confirmed raw.
+`COMPLETE` is immutable. Never infer progress from artifact presence, move
+`DISPATCHED` back to `NOT_STARTED`, or resubmit an identity-confirmed prompt.
 Leaving `BLOCKED` requires the script's typed resolution receipt.
 
-External receipts retain exactly these fields:
+Receipts contain exactly:
 
 ```text
 source;session;conversation;role;model;route;terminal;reference
 ```
 
-A new transport uses `source=exchange`, the registered Codex Exchange task ID
-as `session`, the registered external conversation as `conversation`, and an
-exact `turn:<uuid>#item-<id>` from `read_thread` as `reference`. Dispatch and
-completion references must differ and must come from the same Exchange task.
-Existing `source=gemini` transcript receipts and manual user-message receipts
-remain valid history and are never rewritten.
-
 ## Round Order
 
-1. Freeze one shared evidence boundary and exact source allowlists.
-2. Run Gemini and open Pro as blind, independent divergent reviewers with equal
-   standing. Serialize external transport; do not run two browser/CLI stages at
-   once.
-3. Archive both raws before the controller writes synthesis.
+1. Freeze one shared Git-visible evidence boundary and exact source allowlists.
+2. Run Gemini and open Pro as blind independent divergent reviewers with equal
+   standing; serialize external transport.
+3. Archive both raws before controller synthesis.
 4. Give both raws and synthesis to convergent Pro.
-5. Archive its raw, then let only the controller write disposition and update
-   the owning project document.
+5. Archive its raw; only the controller writes disposition and updates project
+   memory.
 
-The convergent reviewer ranks and attacks two to four live candidates when the
-evidence supports them. It may recommend a stop or one serialized evidence
-source, but it cannot authorize code, experiments, promotion, retirement, or a
-unique legal research direction.
+The convergent reviewer recommends; it never authorizes code, experiments,
+promotion, retirement, or a unique legal research direction.
 
-## Verify the Pro Evidence Boundary
+## Evidence Boundary
 
 Before a Pro stage, resolve one full 40-character commit reachable from remote
-`aggressive`. Require an explicit reviewer role, an exact `Repository files to
-inspect` section, and every listed path at that commit. Run
-`scripts/verify_pro_review_boundary.ps1`. A failed check is
-`BLOCKED_REMOTE_EVIDENCE`; do not send the reviewer to discover missing inputs.
+`aggressive`. Require an explicit role, exact `Repository files to inspect`, and
+every listed path at that commit. Run `scripts/verify_pro_review_boundary.ps1`.
+A failure is `BLOCKED_REMOTE_EVIDENCE`; do not send the reviewer to discover
+missing inputs.
 
-## One-to-One Codex Exchanges
+## Gemini Transport
 
-Gemini, Open Pro and Convergent Pro each have one persistent local Codex
-Exchange task bound one-to-one to one external reviewer session. Reuse the
-registered task; never create a replacement, mix roles, hand off the task,
-rename it, open its model selector or modify its model. The task API does not
-expose authoritative live model settings, so never claim a live model check or
-attempt a model repair. A user- or UI-reported mismatch is
-`BLOCKED_REVIEW_THREAD_IDENTITY`.
+Gemini alone retains the registered one-to-one Codex Exchange and Antigravity
+session. Follow `references/review-protocol.md`; the Exchange may write only
+`11_GEMINI_DIVERGENT_RAW.md`. Its cross-task message uses only `hostId`,
+`threadId`, and `prompt`; never supply model or thinking overrides.
 
-Before dispatch, call `codex_app__read_thread` and require the registry's exact
-`host_id`, `thread_id`, title, `C:\project\HMASD` cwd and a non-running status.
-Then use the only legal controller-to-Exchange call shape:
+## Direct Pro Transport
+
+**REQUIRED SUB-SKILL:** Use `chatgpt-delegate` from the installed
+`codex-chatgpt-control` plugin.
+
+The active controller talks directly to the two registered visible ChatGPT
+sessions. Do not create, dispatch, resume, or relay through a Pro Codex Exchange.
+Use the role-specific URL in `REVIEWER_CONVERSATIONS.json`; open Pro and
+convergent Pro never share a conversation.
+
+Load the plugin-bundled runtime, create the redacted-reporting client, then:
+
+1. call `experience.open({ experience: "chat" })`;
+2. inspect Chat configuration and require `verified: true` with active
+   intelligence `Pro`;
+3. expand the neutral handoff by replacing only `<commit>` and
+   `<question-path>`;
+4. submit once to the registered URL:
 
 ```javascript
-await tools.codex_app__send_message_to_thread({
-  hostId: "<registered exchange host_id>",
-  threadId: "<registered exchange thread_id>",
-  prompt: "<internal route payload>"
-})
+const submitted = await chatgpt.runner.run(reviewer, {
+  input: handoff,
+  thread: { type: "url", url: registered.url },
+  experience: "chat",
+  configuration: { intelligence: "Pro" },
+  wait: false,
+  read: false,
+  report: { enabled: true, includeContent: false }
+});
 ```
 
-Do not add `model` or `thinking`. Under the current tool contract, omission
-keeps the target task's current settings; supplying either field is a model
-override. Read the same Exchange task once after delivery and require the exact
-route message before recording `DISPATCHED`.
-
-The internal payload contains exactly:
+Require successful thread selection, `submissionState: "submitted"`, and a
+verified configuration step before recording `DISPATCHED`. The receipt is:
 
 ```text
-ACTIVE_DISPATCH
-route=<route token>
-round=<round path>
-commit=<40-character commit>
-question=<registered question path>
-raw=<registered raw path>
-controller_host_id=<current controller host>
-controller_thread_id=<current controller task>
+source=chatgpt_control;session=<registry pro_transport.session_id>;conversation=<registered conversation_id>;role=<registered role>;model=Pro;route=<exact route>;terminal=DISPATCHED;reference=plugin:submitted
 ```
 
-Models, reasoning settings and external prompt text are not routing fields.
-Internal route data never enters ChatGPT or Antigravity.
+The visible `Pro` setting is the verified fact; do not claim an unexposed
+underlying model identifier.
 
-## Required Terminal Relay
+## Completion and Recovery
 
-An Exchange local final answer is not controller notification. Before ending a
-`COMPLETE`, actionable `BLOCKED`, or unavoidable `WAIT_PRO_THINKING` turn, the
-Exchange reads the exact controller task from the current dispatch and calls
-exactly once:
+After submission, use bounded reads on the same visible thread:
 
 ```javascript
-await tools.codex_app__send_message_to_thread({
-  hostId: "<controller_host_id from current dispatch>",
-  threadId: "<controller_thread_id from current dispatch>",
-  prompt: "REVIEW_RELAY\nroute=<exact route>\nterminal=<COMPLETE|BLOCKED|WAIT_PRO_THINKING>\nraw=<registered raw or none>\nreason=<single line or none>"
-})
+const read = await chatgpt.messages.waitAndRead({
+  timeoutMs: 25_000,
+  stableMs: 1_500,
+  pollMs: 750,
+  role: "assistant",
+  format: "markdown"
+});
 ```
 
-Again, omit `model` and `thinking`. Read the controller task once to confirm the
-relay arrived, then answer locally `RELAY_SENT route=<exact route>`. A missing
-or ambiguous delivery is `BLOCKED_CONTROLLER_RELAY`; never send a duplicate or
-message the other Exchange.
+`partial`, `completionState: "generating"`, or `generationActive: true` means
+the original request remains in progress. Keep the stage `DISPATCHED` and use
+another bounded status/read call on the same thread; never submit, continue,
+retry, regenerate, or shorten it. No Codex task notification, heartbeat,
+automation, shell sleep, controller-to-controller message, or page response
+control is part of Pro transport.
 
-Do not use review transport subagents, `collaboration.send_message`, heartbeat,
-automation, shell sleep or controller polling. The Exchange normally remains
-active through external thinking. If the platform forces its turn to end, send
-one `WAIT_PRO_THINKING`; the controller may reactivate only the same Exchange
-for read-only recovery of the same response. Never resubmit the prompt.
+Only `complete: true` with generation inactive is admissible. Write
+`responseText` exactly to the registered raw path and compare the in-memory text
+with the file before interpretation. Then record:
 
-## External Transport Boundaries
+```text
+source=chatgpt_control;session=<registry pro_transport.session_id>;conversation=<registered conversation_id>;role=<registered role>;model=Pro;route=<exact route>;terminal=COMPLETE;reference=plugin:completed
+```
 
-The Gemini Exchange uses only the registered Antigravity session and approved
-per-round local-source manifest and may write only
-`11_GEMINI_DIVERGENT_RAW.md`.
+Stop on the plugin's structured `browser_bridge_unavailable`, `login_required`,
+`captcha`, `rate_limit`, `permission`, `needs_confirmation`, or
+`selector_drift` blocker. A timeout after submission authorizes only same-thread
+status/read recovery.
 
-Each Pro Exchange verifies its registered URL, visible `Pro` label and role ACK.
-It expands the neutral handoff template by replacing only `<commit>` and
-`<question-path>`, submits that complete prompt, and may write only its role's
-registered raw file. Never click `立即回答`, `停止回答`, `重新生成`, `重试`,
-continuation, or an equivalent response-control. A browser timeout authorizes
-only a bounded read of the same page; only a naturally completed response is
-admissible raw.
+## Historical Compatibility
 
-Exchanges never edit `05_REVIEW_STATE.json`, root memory, synthesis,
-disposition, code or Git. The controller records receipts and owns all
-interpretation and scientific decisions.
+Existing `source=exchange`, `source=gemini`, and manual receipts remain valid
+history and are never rewritten. New Pro dispatches use
+`source=chatgpt_control`. Reviewers never edit `05_REVIEW_STATE.json`, root
+memory, synthesis, disposition, code, or Git; the controller owns all state
+transitions and scientific interpretation.

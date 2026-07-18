@@ -1,8 +1,8 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "updated": "2026-07-18",
-  "exchange_transport": {
-    "kind": "role_specific_one_to_one_codex_exchange",
+  "gemini_exchange_transport": {
+    "kind": "one_to_one_codex_exchange",
     "send_tool": "codex_app__send_message_to_thread",
     "required_arguments": [
       "hostId",
@@ -18,6 +18,18 @@
       "BLOCKED",
       "WAIT_PRO_THINKING"
     ]
+  },
+  "pro_transport": {
+    "kind": "codex_chatgpt_control_visible_ui",
+    "plugin": "codex-chatgpt-control@codex-chatgpt-control",
+    "version": "0.5.1-alpha.1+codex.20260717041128",
+    "source_commit": "73c5737f222709e324a1c7ba1637cef9966000ce",
+    "skill": "chatgpt-delegate",
+    "experience": "chat",
+    "intelligence": "Pro",
+    "session_id": "codex-chatgpt-control@0.5.1-alpha.1+codex.20260717041128",
+    "submission_reference": "plugin:submitted",
+    "completion_reference": "plugin:completed"
   },
   "reviewers": {
     "gemini_divergent": {
@@ -49,6 +61,7 @@
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
+      "transport": "codex_chatgpt_control",
       "role_ack": "HEARTBEAT_ACK role=OPEN_DIVERGENT",
       "full_thinking_required": true,
       "forbidden_page_controls": [
@@ -57,7 +70,7 @@
         "重新生成",
         "重试"
       ],
-      "codex_exchange": {
+      "legacy_codex_exchange": {
         "title": "External Review Exchange — Open Pro",
         "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
         "host_id": "local",
@@ -71,6 +84,7 @@
       "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
+      "transport": "codex_chatgpt_control",
       "role_ack": "HEARTBEAT_ACK role=CONVERGENT",
       "full_thinking_required": true,
       "forbidden_page_controls": [
@@ -79,7 +93,7 @@
         "重新生成",
         "重试"
       ],
-      "codex_exchange": {
+      "legacy_codex_exchange": {
         "title": "External Review Exchange — Convergent Pro",
         "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
         "host_id": "local",

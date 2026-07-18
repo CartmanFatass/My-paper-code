@@ -212,20 +212,18 @@ standing; controller synthesis precedes convergent Pro. Reviewers recommend but
 never authorize code, experiments, promotion, disposition, or a unique legal
 research direction.
 
-Reuse the three registered one-to-one Codex Exchanges and their persistent
-external reviewer sessions. Never create substitutes, mix roles, change a
-model, or submit roles in parallel. Both controller dispatch and Exchange
-terminal relay use `send_message_to_thread` with only `hostId`, `threadId` and
-`prompt`; never pass `model` or `thinking`. Verify the exact task before and
-after delivery. An Exchange must actively relay `COMPLETE`, actionable
-`BLOCKED`, or unavoidable `WAIT_PRO_THINKING` to the controller; its local final
-answer is not notification. Do not use review transport subagents,
-`collaboration.send_message`, heartbeat, automation, shell sleep or controller
-polling. Archive every raw before interpretation; missing or ambiguous raw is
-incomplete evidence. Pro responses must finish naturally; never use page
-controls that shorten, stop, regenerate, retry or continue a response. A
-browser timeout permits only read-only recovery by the same Exchange on the
-same page. Private
+Reuse the registered Gemini Codex Exchange and the two persistent role-specific
+ChatGPT Pro sessions. Gemini alone uses guarded `send_message_to_thread` calls
+with only `hostId`, `threadId` and `prompt`; never pass `model` or `thinking`.
+The active controller accesses both Pro sessions directly through the pinned
+`codex-chatgpt-control` plugin and the `chatgpt-delegate` workflow. Never create
+or resume a Pro Codex Exchange, substitute a reviewer session, mix roles, or
+submit roles in parallel. Submit once, verify the visible `Pro` setting, and
+use bounded status/read calls on the same registered URL until natural
+completion. Do not use review transport subagents, cross-task Pro relays,
+heartbeat, automation, shell sleep or page controls that shorten, stop,
+regenerate, retry or continue a response. Archive every raw before
+interpretation; missing or ambiguous raw is incomplete evidence. Private
 local-source transfer to an external reviewer requires explicit informed
 approval recorded against the exact allowlist path, Git commit, destination and
 user-message reference. The registered Gemini reviewer has standing user

@@ -179,7 +179,7 @@ function Assert-TransportReceipt(
     if ($null -eq $receipt) {
         throw "External $ExpectedTerminal requires a transport receipt: $StageName"
     }
-    if ($receipt.source -notin @("exchange", "gemini", "manual") -or
+    if ($receipt.source -notin @("chatgpt_control", "exchange", "gemini", "manual") -or
         $receipt.role -ne $expectedRoles[$StageName] -or
         $receipt.route -ne $Entry.route_token -or
         $receipt.terminal -ne $ExpectedTerminal) {
@@ -191,8 +191,9 @@ function Assert-TransportReceipt(
     if ($StageName -eq "gemini_divergent" -and $receipt.source -notin @("exchange", "gemini", "manual")) {
         throw "Gemini stage requires exchange, gemini, or manual receipt"
     }
-    if ($StageName -in @("open_pro", "convergent_pro") -and $receipt.source -notin @("exchange", "manual")) {
-        throw "Pro stage requires exchange or manual receipt"
+    if ($StageName -in @("open_pro", "convergent_pro") -and
+        $receipt.source -notin @("chatgpt_control", "exchange", "manual")) {
+        throw "Pro stage requires ChatGPT-control, legacy exchange, or manual receipt"
     }
     if ($receipt.source -eq "manual") {
         if ($receipt.session -ne "manual" -or $receipt.conversation -ne "manual" -or
@@ -214,6 +215,29 @@ function Assert-TransportReceipt(
             throw "Gemini receipt requires transcript:<id> reference"
         }
         return $receipt
+    } elseif ($receipt.source -eq "chatgpt_control") {
+        if ($StageName -notin @("open_pro", "convergent_pro")) {
+            throw "ChatGPT-control receipts are valid only for Pro stages"
+        }
+        $registry = Get-Content -LiteralPath $reviewerRegistryPath -Raw | ConvertFrom-Json
+        $registered = if ($StageName -eq "open_pro") {
+            $registry.reviewers.open_divergent
+        } else {
+            $registry.reviewers.convergent
+        }
+        $expectedReference = if ($ExpectedTerminal -eq "DISPATCHED") {
+            [string]$registry.pro_transport.submission_reference
+        } else {
+            [string]$registry.pro_transport.completion_reference
+        }
+        if ($receipt.session -ne $registry.pro_transport.session_id -or
+            $receipt.conversation -ne $registered.conversation_id -or
+            $receipt.role -ne $registered.role -or
+            $receipt.model -ne $registered.expected_model_ui -or
+            $receipt.reference -ne $expectedReference) {
+            throw "ChatGPT-control receipt does not match reviewer registry: $StageName"
+        }
+        return $receipt
     } else {
         $registry = Get-Content -LiteralPath $reviewerRegistryPath -Raw | ConvertFrom-Json
         $registered = switch ($StageName) {
@@ -226,7 +250,12 @@ function Assert-TransportReceipt(
         } else {
             [string]$registered.expected_model_ui
         }
-        if ($receipt.session -ne $registered.codex_exchange.thread_id -or
+        $legacyExchange = if ($StageName -eq "gemini_divergent") {
+            $registered.codex_exchange
+        } else {
+            $registered.legacy_codex_exchange
+        }
+        if ($receipt.session -ne $legacyExchange.thread_id -or
             $receipt.conversation -ne $registered.conversation_id -or
             $receipt.role -ne $registered.role -or
             $receipt.model -ne $expectedModel) {

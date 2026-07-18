@@ -30,17 +30,17 @@ one scheduled experiment into a claim that only one research direction exists.
 
 ## Execution default
 
-Reviewer communication is automatic by default through three persistent
-one-to-one local Codex Exchanges: Gemini, Open Pro and Convergent Pro. The
-controller never performs their browser or Antigravity transport directly. A
-tracked Git-visible Pro exchange needs no repeated approval after the round is
-authorized. Transmitting private repository material, logs or local papers to
-Gemini/Antigravity requires explicit informed approval for the named allowlist;
-automatic review authority does not imply external-data consent. The automatic
-sequence remains bounded to one blind divergent response per reviewer, one
-controller synthesis and one convergent response. A follow-up may repair a
-concrete missing source or ambiguous response, not search until a preferred
-answer appears.
+Reviewer communication is automatic by default. Gemini retains one persistent
+local Codex Exchange bound to its Antigravity session. The active controller
+accesses the two persistent role-specific Pro conversations directly through
+the pinned `codex-chatgpt-control` plugin. A tracked Git-visible Pro review needs
+no repeated approval after the round is authorized. Transmitting private
+repository material, logs or local papers to Gemini/Antigravity requires
+explicit informed approval for the named allowlist; automatic review authority
+does not imply external-data consent. The sequence remains bounded to one blind
+divergent response per reviewer, one controller synthesis and one convergent
+response. A follow-up may repair a concrete missing source or ambiguous
+response, not search until a preferred answer appears.
 
 Before either Pro submission, the controller must resolve the exact full
 40-character commit, confirm that it is reachable from the remote `aggressive`
@@ -51,47 +51,38 @@ explicitly and contain that exact section. The controller runs
 any failed remote boundary check stops the submission before browser transport.
 
 The machine-readable registry is
-`docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each reviewer to
-one external session and one local Exchange task. Open and convergent roles use
-different external and local conversations. Before every submission, verify
-the exact local host/thread/title/cwd and external URL/model label/role ACK.
-Neither thread API exposes authoritative live model settings; do not claim a
-live model read or repair a mismatch. Any reported mismatch is
-`BLOCKED_REVIEW_THREAD_IDENTITY`.
+`docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds Gemini to its one
+Exchange and binds each Pro role to a distinct external URL. Reuse these exact
+sessions; do not create substitutes, mix roles, or run two external transports
+at once. Automatic review does not authorize reviewer-proposed edits,
+experiments or promotion.
 
-Reuse the three registered Exchanges and their external sessions. Do not create,
-fork, hand off, rename, duplicate or alter their models. Automatic exchange
-does not authorize reviewer-proposed edits, experiments or promotion.
-
-The exact dispatch sequence is:
+The Pro sequence is:
 
 ```text
-controller read_thread identity preflight
--> send hostId/threadId/prompt to the matching Exchange
--> read_thread delivery confirmation and DISPATCHED receipt
--> Exchange external identity check and submission
--> exact raw archive or transport blocker
--> Exchange sends one terminal REVIEW_RELAY to the controller
--> controller confirms the Exchange terminal turn/item
+controller verifies remote commit/question boundary
+-> plugin opens Chat and the exact registered URL
+-> plugin verifies visible Pro intelligence
+-> one prompt submission and chatgpt_control DISPATCHED receipt
+-> bounded same-thread wait/read until natural completion
+-> exact raw archive and chatgpt_control COMPLETE receipt
 -> controller resumes from the first missing artifact
 ```
 
-Both directions call `codex_app__send_message_to_thread` with only `hostId`,
-`threadId` and `prompt`. Do not add `model` or `thinking`: current tool semantics
-preserve the target settings when they are omitted, while supplying either is
-an override. Confirm both deliveries with `read_thread`. A local Exchange final
-without the active terminal relay is not notification. Do not use a review
-transport subagent, `collaboration.send_message`, heartbeat, automation, shell
-sleep or a replacement conversation.
+The Gemini Exchange alone uses `codex_app__send_message_to_thread`, with only
+`hostId`, `threadId` and `prompt`; do not add `model` or `thinking`. Pro transport
+uses no Codex task, cross-task relay, heartbeat, automation, shell sleep or
+replacement conversation. While Pro is generating, status/read calls reuse the
+same visible thread and never resubmit the prompt.
 
 The idempotence token is `<round>:<role>:<commit>:<raw-path>`. A plugin or
 authentication failure is not a scientific reviewer response and is never
 stored in the role raw path.
 
-All GPT-5.6 Pro submissions use the Codex built-in browser inside the matching
-Exchange. If a registered task or external conversation is missing or busy,
-recover that same pair or return `BLOCKED`; never create a substitute or use
-Chrome, Computer Use or a generic web request.
+All Pro submissions use the visible Chat surface exposed by the pinned plugin.
+If the browser bridge, login, role-specific conversation or verified `Pro`
+setting is unavailable, return the plugin's structured blocker; never create a
+substitute or bypass the product UI.
 
 ## Round ownership
 
