@@ -16,7 +16,9 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import sys
+import tempfile
 from typing import Any, Callable, Mapping, Sequence
 
 
@@ -1767,20 +1769,50 @@ def write_audit_outputs(
             "",
         )
     )
-    destination.mkdir(parents=True, exist_ok=False)
-    raw_root = destination / "raw"
-    result_root = destination / "result"
-    raw_root.mkdir(exist_ok=False)
-    result_root.mkdir(exist_ok=False)
-    for arm in ("f0", "f1"):
-        with (raw_root / f"{arm}_provenance.pt").open("xb") as handle:
-            handle.write(raw_buffers[arm])
-    with (result_root / "iteration4_provenance_audit.json").open(
-        "x", encoding="utf-8"
-    ) as handle:
-        handle.write(result_text)
-    with (destination / "runner_status.txt").open("x", encoding="utf-8") as handle:
-        handle.write(status_text)
+    def build_success_tree(staging_root: Path) -> None:
+        raw_root = staging_root / "raw"
+        result_root = staging_root / "result"
+        raw_root.mkdir(exist_ok=False)
+        result_root.mkdir(exist_ok=False)
+        for arm in ("f0", "f1"):
+            with (raw_root / f"{arm}_provenance.pt").open("xb") as handle:
+                handle.write(raw_buffers[arm])
+        with (result_root / "iteration4_provenance_audit.json").open(
+            "x", encoding="utf-8"
+        ) as handle:
+            handle.write(result_text)
+        with (staging_root / "runner_status.txt").open(
+            "x", encoding="utf-8"
+        ) as handle:
+            handle.write(status_text)
+
+    _publish_new_directory(destination, build_success_tree)
+
+
+def _publish_new_directory(
+    destination: Path,
+    build_tree: Callable[[Path], None],
+) -> None:
+    """Build beside the destination and publish the complete tree atomically."""
+
+    if destination.exists():
+        raise FileExistsError("output root already exists")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    staging_root = Path(
+        tempfile.mkdtemp(
+            prefix=f".{destination.name}.staging-",
+            dir=str(destination.parent),
+        )
+    )
+    try:
+        build_tree(staging_root)
+        if destination.exists():
+            raise FileExistsError("output root already exists")
+        staging_root.rename(destination)
+    except BaseException:
+        if staging_root.exists():
+            shutil.rmtree(staging_root)
+        raise
 
 
 def write_failed_status(output_root: str | Path, error: BaseException) -> None:
@@ -1800,9 +1832,13 @@ def write_failed_status(output_root: str | Path, error: BaseException) -> None:
             "",
         )
     )
-    destination.mkdir(parents=True, exist_ok=False)
-    with (destination / "runner_status.txt").open("x", encoding="utf-8") as handle:
-        handle.write(status_text)
+    def build_failed_tree(staging_root: Path) -> None:
+        with (staging_root / "runner_status.txt").open(
+            "x", encoding="utf-8"
+        ) as handle:
+            handle.write(status_text)
+
+    _publish_new_directory(destination, build_failed_tree)
 
 
 def run_audit(
@@ -1817,17 +1853,22 @@ def run_audit(
     destination = Path(output_root).resolve()
     if destination.exists():
         raise FileExistsError("output root already exists")
-    if str(device).lower() != "cuda" or not torch.cuda.is_available():
-        raise RuntimeError("the registered provenance audit requires available CUDA")
-    source_roots = {Path(f0_root).resolve(), Path(f1_root).resolve()}
-    if len(source_roots) != 2:
-        raise ValueError("f0 and f1 must be distinct registered arm roots")
-    if any(destination == root or root in destination.parents for root in source_roots):
-        raise ValueError("output root must be separate from both registered source roots")
-
-    target_device = torch.device("cuda")
-    rng_before = _global_rng_snapshot()
+    rng_before = None
     try:
+        rng_before = _global_rng_snapshot()
+        if str(device).lower() != "cuda" or not torch.cuda.is_available():
+            raise RuntimeError("the registered provenance audit requires available CUDA")
+        source_roots = {Path(f0_root).resolve(), Path(f1_root).resolve()}
+        if len(source_roots) != 2:
+            raise ValueError("f0 and f1 must be distinct registered arm roots")
+        if any(
+            destination == root or root in destination.parents for root in source_roots
+        ):
+            raise ValueError(
+                "output root must be separate from both registered source roots"
+            )
+
+        target_device = torch.device("cuda")
         sources = {
             "f0": load_source_bundle(f0_root, "f0", target_device),
             "f1": load_source_bundle(f1_root, "f1", target_device),
@@ -1969,7 +2010,8 @@ def run_audit(
             write_failed_status(destination, error)
         raise
     finally:
-        _restore_global_rng(rng_before)
+        if rng_before is not None:
+            _restore_global_rng(rng_before)
 
 
 def main(argv: Sequence[str] | None = None) -> int:

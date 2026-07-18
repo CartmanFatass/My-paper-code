@@ -1515,3 +1515,87 @@ def test_run_audit_writes_only_terminal_failed_status_on_analysis_exception(
     assert status["phase"] == "terminal"
     assert status["status"] == "INVALID_ITERATION4_PROVENANCE_AUDIT"
     assert status["error"] == "synthetic analysis failure"
+
+
+def test_run_audit_writes_terminal_failed_status_when_cuda_is_unavailable(
+    monkeypatch,
+    tmp_path,
+):
+    runner = _runner()
+    monkeypatch.setattr(runner.torch.cuda, "is_available", lambda: False)
+    monkeypatch.setattr(runner, "_global_rng_snapshot", lambda: {"synthetic": 1})
+    monkeypatch.setattr(runner, "_restore_global_rng", lambda _state: None)
+    output_root = tmp_path / "cuda-unavailable"
+
+    with pytest.raises(RuntimeError, match="requires available CUDA"):
+        runner.run_audit(
+            tmp_path / "f0-source",
+            tmp_path / "f1-source",
+            output_root=output_root,
+            device="cuda",
+        )
+
+    assert [
+        path.relative_to(output_root).as_posix()
+        for path in output_root.rglob("*")
+        if path.is_file()
+    ] == ["runner_status.txt"]
+    status = runner._read_runner_manifest(output_root / "runner_status.txt")
+    assert status["state"] == "failed"
+    assert status["phase"] == "terminal"
+    assert status["status"] == "INVALID_ITERATION4_PROVENANCE_AUDIT"
+    assert "requires available CUDA" in status["error"]
+
+
+def test_run_audit_output_write_failure_publishes_only_terminal_failed_status(
+    monkeypatch,
+    tmp_path,
+):
+    runner = _runner()
+    _patch_synthetic_run_audit_boundaries(monkeypatch, runner)
+    monkeypatch.setattr(
+        runner,
+        "collect_arm",
+        lambda _source, _arm, _device: _valid_synthetic_collection(),
+    )
+    monkeypatch.setattr(
+        runner,
+        "analyze_semantics",
+        lambda _provenance, _actor: {"metrics": {}},
+    )
+    monkeypatch.setattr(
+        runner,
+        "frozen_outcome",
+        lambda _metrics: "D_STABLE_LOCAL_NATURAL_OVERLAP",
+    )
+    monkeypatch.setattr(runner, "_registered_metrics", lambda _result: {})
+
+    original_open = Path.open
+
+    def fail_second_raw_write(path, *args, **kwargs):
+        if path.name == "f1_provenance.pt":
+            raise OSError("synthetic output write failure")
+        return original_open(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "open", fail_second_raw_write)
+    output_root = tmp_path / "output-write-failure"
+
+    with pytest.raises(OSError, match="synthetic output write failure"):
+        runner.run_audit(
+            tmp_path / "f0-source",
+            tmp_path / "f1-source",
+            output_root=output_root,
+            device="cuda",
+        )
+
+    assert [
+        path.relative_to(output_root).as_posix()
+        for path in output_root.rglob("*")
+        if path.is_file()
+    ] == ["runner_status.txt"]
+    status = runner._read_runner_manifest(output_root / "runner_status.txt")
+    assert status["state"] == "failed"
+    assert status["phase"] == "terminal"
+    assert status["status"] == "INVALID_ITERATION4_PROVENANCE_AUDIT"
+    assert status["error"] == "synthetic output write failure"
+    assert not list(tmp_path.glob(".output-write-failure.staging-*"))
