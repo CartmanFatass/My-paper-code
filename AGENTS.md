@@ -49,6 +49,11 @@ gradient and detach boundaries, reward and advantage semantics, probability,
 RNG, replay, masks, clocks, checkpoints, preserved interfaces and non-goals.
 Do not create a parallel collaboration brief or duplicate plan.
 
+One active implementation plan or serialized evidence source does not imply one
+research hypothesis, architecture or permitted successor. Research keeps a
+live competing portfolio; implementation and compute are serialized only to
+preserve attribution and workspace integrity.
+
 The active controller alone decides the algorithm, architecture, causal route,
 reuse/replacement, data and gradient flow, invariants and stability goals.
 Implementers execute that frozen design and return `BLOCKED` rather than invent

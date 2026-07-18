@@ -20,6 +20,7 @@ $requiredAgentsText = @(
     "superpowers:subagent-driven-development",
     "superpowers:verification-before-completion",
     "HMASD Contract",
+    "does not imply one research hypothesis, architecture or permitted successor",
     "gpt-5.6-terra` medium",
     "gpt-5.6-terra` high",
     "gpt-5.6-sol` high"
