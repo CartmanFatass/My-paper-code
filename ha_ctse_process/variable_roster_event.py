@@ -394,6 +394,90 @@ class EventTransactionResult:
 
 
 @dataclass(frozen=True)
+class EventActionHook:
+    """Stable read-only semantic hook for one executed KEEP/SET token."""
+
+    lifecycle_key: str
+    membership_epoch: int
+    policy_version: int
+    physical_time: int
+    action_kind: str
+    previous_skill: int | None
+    next_skill: int
+
+
+@dataclass(frozen=True)
+class LifecycleBoundaryHook:
+    lifecycle_key: str
+    expected_membership_epoch: int
+    boundary_kind: str
+    physical_time: int
+
+
+@dataclass(frozen=True)
+class LowRowIndexHook:
+    low_row_index: int
+    lifecycle_key: str
+    membership_epoch: int
+    policy_version: int
+    physical_time: int
+    skill: int
+
+
+def event_action_hooks(result: EventTransactionResult) -> tuple[EventActionHook, ...]:
+    hooks: list[EventActionHook] = []
+    for row in result.token_rows:
+        owner_index = row.active_lifecycle_keys.index(row.owner_lifecycle_key)
+        previous = int(row.pre_token_working_skills[owner_index])
+        hooks.append(
+            EventActionHook(
+                lifecycle_key=row.owner_lifecycle_key,
+                membership_epoch=int(row.membership_epoch),
+                policy_version=int(row.policy_version),
+                physical_time=int(row.physical_event_time),
+                action_kind=str(row.action_kind),
+                previous_skill=None if previous < 0 else previous,
+                next_skill=int(row.combined_action),
+            )
+        )
+    return tuple(hooks)
+
+
+def lifecycle_boundary_hooks(
+    transaction: MembershipTransaction,
+) -> tuple[LifecycleBoundaryHook, ...]:
+    physical_time = int(transaction.post_membership_pre_policy_snapshot.physical_time)
+    return tuple(
+        LifecycleBoundaryHook(
+            lifecycle_key=delta.lifecycle_key,
+            expected_membership_epoch=int(delta.expected_membership_epoch),
+            boundary_kind=str(delta.kind),
+            physical_time=physical_time,
+        )
+        for delta in transaction.atomic_membership_delta
+    )
+
+
+def low_row_index_hooks(
+    core: "VariableRosterEventCore", start_index: int
+) -> tuple[LowRowIndexHook, ...]:
+    start = int(start_index)
+    if not 0 <= start <= len(core.low_ledger):
+        raise ValueError("low-row hook start index is outside the ledger")
+    return tuple(
+        LowRowIndexHook(
+            low_row_index=index,
+            lifecycle_key=row.lifecycle_key,
+            membership_epoch=int(row.membership_epoch),
+            policy_version=int(row.policy_version),
+            physical_time=int(row.physical_time),
+            skill=int(row.skill),
+        )
+        for index, row in enumerate(core.low_ledger[start:], start=start)
+    )
+
+
+@dataclass(frozen=True)
 class EventPPOLosses:
     high_loss: torch.Tensor
     low_loss: torch.Tensor
@@ -2797,6 +2881,8 @@ def restore_vector_event_checkpoint(
     bundle = value.get("event_architecture")
     if not isinstance(bundle, Mapping):
         raise ValueError("vector event checkpoint is missing event_architecture")
+    if "event_semantic" in bundle:
+        raise ValueError("non-Iteration-5 vector checkpoint rejects semantic bundle")
     required = {
         *set(_event_checkpoint_header(model_owner)),
         "vector_checkpoint_schema_version",
@@ -2939,6 +3025,8 @@ def restore_event_model_only_checkpoint(
     bundle = value.get("event_architecture")
     if not isinstance(bundle, Mapping):
         raise ValueError("fresh evaluation checkpoint is missing event_architecture")
+    if "event_semantic" in bundle:
+        raise ValueError("non-Iteration-5 fresh checkpoint rejects semantic bundle")
     required = {
         *set(_event_checkpoint_header(model_owner)),
         "runtime_state_absent_for_fresh_eval",

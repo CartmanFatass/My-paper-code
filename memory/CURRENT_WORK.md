@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 ## Controller Ownership
 
@@ -33,11 +33,11 @@ audit passed M0, but F1's strongest skill pair has same-input action-TV CI95
 `[0.046582,0.051259]` and 12-step forced-effect CI95
 `[0.027817,0.069094]`; both upper bounds remain below `1/12`.
 
-The registered Convergent Pro follow-up is accepted with controller
-modification: its causal update and C3/C1 ranking stand, but its exact
-`[action, raw observation delta]` C1 training view is blocked because the
-current carrier has no clean task-neutral process channel. No C1 code or
-experiment is authorized until that input boundary is replaced.
+Iteration 5 is launch-ready. It replaces the blocked raw-delta view with a
+separate route-only 1-D position process, compares conditional process
+semantics on/off inside the same F0 hierarchy, and retains the unchanged C3
+direct active-set controller on the same carrier. The focused checks and final
+`2 env x 1 update` three-arm CUDA smoke pass; no formal result exists yet.
 
 ## Causal Portfolio
 
@@ -54,22 +54,16 @@ experiment is authorized until that input boundary is replaced.
 
 ## Next Actions
 
-1. Count Stage C, the closed portfolio review and the valid underpowered audit
-   as overnight iterations 1--3 of 5.
-2. Preserve the portfolio ranking: C3 remains the empirical leader, C1 remains
-   the strongest live hierarchical explanation, C2 is not promoted and credit
-   stays dormant.
-3. Preserve iteration 4 as a binding material-dependence negative. Do not
-   reanalyze these checkpoints, append episodes, merge strata or reinterpret
-   natural classification as semantic success.
-4. Before iteration 5 implementation, compare at least C3 and a genuinely
-   semantic-creation C1 architecture. First freeze a clean local process view:
-   primitive actions, raw Generic-SHORT observation deltas, recurrent hidden
-   state and hard-coded task-coordinate slices are not valid positive targets.
-   If real task-neutral action consequences require a new spatial carrier, C3
-   must be evaluated on that same carrier. The next evidence must test creation
-   of a material environment-agnostic `z -> behavior` effect; C2 and credit
-   remain unavailable as rescue routes.
+1. Commit and push the accepted Iteration-5 implementation and frozen formal
+   contract as one pre-launch boundary.
+2. Launch the single local-CUDA three-arm evidence source at exactly
+   `16 env x 250 updates x 80 steps` per arm and attach one Terra Medium
+   status-only monitor.
+3. Apply the registered five-way result priority without seed, budget, beta,
+   threshold, task, model or audit rescue.
+4. Interpret the terminal result against C3, C1, C1-null and carrier mismatch,
+   update the portfolio once, and stop the standing five-iteration autonomous
+   boundary.
 
 ## Overnight Autonomous Boundary
 
@@ -148,6 +142,11 @@ experiment is authorized until that input boundary is replaced.
   `1--2` action/effect UCBs remain below `1/12`. This retires further
   checkpoint-local context/credit reads, not all possible semantic-creation
   architectures.
+- Iteration 5 pre-launch M0 is operationally valid: the final exact-runner smoke
+  completed all three CUDA arms; both hierarchy arms have replay error at most
+  `1.20e-7`, zero checkpoint round-trip error, isolated posterior gradients and
+  unchanged high returns. The preceding failed smoke exposed only an invalid
+  M0 field read and was repaired without changing training or evidence.
 - R41B remains the positive fixed-`N` source anchor. R51--R55 exact contracts
   are retired and inactive.
 - Do not add graph, attention, slots, critical residuals, team latent, a new

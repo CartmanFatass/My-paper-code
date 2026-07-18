@@ -12,7 +12,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import math
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable, TypeVar, cast
 
 import numpy as np
 import torch
@@ -50,6 +50,36 @@ POLICY_ACTION_SEED = 87_057
 EVAL_LEDGER_SEED = 97_057
 BOOTSTRAP_SEED = 107_057
 REPLAY_TOLERANCE = 1e-6
+
+
+_LedgerT = TypeVar("_LedgerT", bound=DynamicRosterLedger)
+
+
+def _make_direct_environments(
+    episode_ids: tuple[int, ...],
+    *,
+    master_seed: int,
+    ledger_factory: Callable[..., _LedgerT] | None,
+    environment_factory: Callable[[_LedgerT], GenericShortDynamicRosterEnv] | None,
+) -> tuple[tuple[_LedgerT, ...], list[GenericShortDynamicRosterEnv]]:
+    make_ledger = (
+        cast(Callable[..., _LedgerT], make_dynamic_roster_ledger)
+        if ledger_factory is None
+        else ledger_factory
+    )
+    make_environment = (
+        cast(
+            Callable[[_LedgerT], GenericShortDynamicRosterEnv],
+            GenericShortDynamicRosterEnv,
+        )
+        if environment_factory is None
+        else environment_factory
+    )
+    ledgers = tuple(
+        make_ledger(episode_id, master_seed=master_seed)
+        for episode_id in episode_ids
+    )
+    return ledgers, [make_environment(ledger) for ledger in ledgers]
 
 
 @dataclass
@@ -291,14 +321,20 @@ def collect_direct_trajectory(
     ledger_ids: Iterable[int],
     ledger_seed: int,
     device: torch.device,
+    ledger_factory: Callable[..., _LedgerT] | None = None,
+    environment_factory: Callable[
+        [_LedgerT], GenericShortDynamicRosterEnv
+    ] | None = None,
 ) -> DirectTrajectory:
     ids = tuple(int(value) for value in ledger_ids)
     if not ids:
         raise ValueError("direct collection requires at least one environment")
-    ledgers = tuple(
-        make_dynamic_roster_ledger(value, master_seed=ledger_seed) for value in ids
+    ledgers, environments = _make_direct_environments(
+        ids,
+        master_seed=ledger_seed,
+        ledger_factory=ledger_factory,
+        environment_factory=environment_factory,
     )
-    environments = [GenericShortDynamicRosterEnv(ledger) for ledger in ledgers]
     action_uniforms = make_action_uniforms(ids)
     env_count = len(environments)
     hidden = torch.zeros(
@@ -673,13 +709,18 @@ def evaluate_direct_policy(
     deterministic: bool,
     device: torch.device,
     uniforms: np.ndarray | None = None,
+    ledger_factory: Callable[..., _LedgerT] | None = None,
+    environment_factory: Callable[
+        [_LedgerT], GenericShortDynamicRosterEnv
+    ] | None = None,
 ) -> dict[str, Any]:
     ids = tuple(int(value) for value in episode_ids)
-    ledgers = tuple(
-        make_dynamic_roster_ledger(value, master_seed=EVAL_LEDGER_SEED)
-        for value in ids
+    ledgers, environments = _make_direct_environments(
+        ids,
+        master_seed=EVAL_LEDGER_SEED,
+        ledger_factory=ledger_factory,
+        environment_factory=environment_factory,
     )
-    environments = [GenericShortDynamicRosterEnv(ledger) for ledger in ledgers]
     env_count = len(environments)
     if not deterministic:
         if uniforms is None:

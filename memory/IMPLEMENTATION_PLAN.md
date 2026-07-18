@@ -433,6 +433,366 @@ materiality floor. Keep SMDP/assignment credit closed. Do not reanalyze these
 checkpoints, append episodes, rescue thresholds or promote natural
 classification to semantic success.
 
+## Task 5: Iteration 5 Spatial Process-Semantics Comparison
+
+Status: launch-ready; integrated controller review, focused checks and the
+reduced three-arm CUDA smoke pass. The formal evidence source is not yet
+launched.
+
+### HMASD Contract
+
+Final capability:
+
+```text
+one shared anonymous algorithm
++ runtime-variable team membership
++ survivor/rejoin continuity
++ variable realized skill lifetime
++ task-independent process semantics
+```
+
+Causal question:
+
+```text
+clean local motion process
+-> conditional process-posterior intrinsic pressure
+-> material and persistent z -> behavior control
+-> natural skill use
+-> sparse terminal-task access beyond semantic-off hierarchy
+```
+
+Live explanations remain a portfolio:
+
+1. **C3 / direct active-set control:** recurrence and primitive-time
+   autoregression are sufficient; explicit skills add no load-bearing value.
+2. **C1 / missing semantic pressure:** the Stage C executor is capable, but
+   sparse external reward never trained its skill-FiLM path into distinct
+   process modes.
+3. **C1-null / arbitrary diversity:** a posterior can create distinguishable
+   motion but the modes do not help the sparse cooperative task.
+4. **Carrier mismatch:** a carrier without a clean physical process view cannot
+   test environment-agnostic semantics. This is why Generic-SHORT is not reused
+   for the positive posterior.
+
+C2 event-context execution remains dormant and conditional SMDP/assignment
+credit remains closed. Neither is a failure rescue.
+
+Strongest ordinary-MARL objection: the unchanged C3 recurrent direct controller
+can learn all required persistent/reactive behavior internally, so an explicit
+skill system must show material process semantics and a gain over an
+architecture-matched semantic-off hierarchy; semantic decodability alone is
+insufficient.
+
+### Replacement Ledger
+
+Retain:
+
+- the exact anonymous `4 -> 2 -> 6 -> 4` membership schedule, temporary-leave
+  freeze, genuine join, rejoin, terminal leave and survivor recurrent
+  continuity;
+- the schema-3 event runtime semantics, F0 initial-summary event selector,
+  exogenous opportunity gaps, combined categorical KEEP/SET likelihood,
+  owner-event `gamma^Delta` return and low physical-time PPO;
+- the optimized batched low inference and one-time recurrent PPO packing;
+- the Stage B direct active-set actor/critic architecture as C3;
+- sparse terminal external utility and the existing 16-env CUDA exposure.
+
+Delete from this evidence source:
+
+- F1 applied-working-prefix treatment;
+- raw Generic-SHORT action or observation deltas as semantic input;
+- all old process, transition, R28/R29/R31/R32/R33, team-latent, `q_D`,
+  learned-timing, scheduler, graph/field/slot and task-shaped reward paths.
+
+Add only:
+
+- a minimal 1-D spatial dynamic-roster carrier with a separate task-neutral
+  local process state;
+- one conditional process posterior with an online estimator and frozen
+  rollout scorer;
+- one per-environment lifecycle/window ledger;
+- one paired `semantic_on` / `semantic_off` treatment and one same-carrier
+  C3 arm in a single result.
+
+### Spatial Carrier
+
+Create `ha_ctse_process/dynamic_roster_spatial_testbed.py`. It owns the task
+and exposes the same event-runtime adapter interface as
+`DynamicRosterEventEnv`; it must not modify
+`ha_ctse_process/dynamic_roster_testbed.py`.
+
+Frozen episode contract:
+
+- horizon and rollout: `80`;
+- active roster: `4` at `t=0`, two temporary leaves at `t=20`, those two
+  plus two genuine joins at `t=40`, two terminal leaves at `t=60`;
+- lifecycle keys are routing-only and never enter a network;
+- positions are anonymous cells `{0,1,2}`; at `t=0` lifecycle `0` starts at
+  cell `0` and lifecycles `1,2,3` at cell `1`; genuine joins `4,5` start at
+  cell `1`; temporary leave freezes position and rejoin restores it;
+- primitive actions are `LEFT=0`, `STAY=1`, `RIGHT=2`, clipped at the line
+  boundary; initial and genuine-join previous action is `STAY`; movement is
+  applied before duty accounting;
+- persistent duty is cell `0`: one active owner accumulates one unit for each
+  post-action step it remains at cell `0`; a missing/leaving owner is replaced
+  deterministically from active occupants of cell `0`; duplicate occupants
+  add no work; target is `64` units;
+- the eight short-wave arrival candidate sets and four-step deadline are copied
+  exactly from Generic-SHORT; each wave independently chooses target cell
+  `1` or `2`; each of `N_t-1` distinct contributors must occupy that cell
+  for two consecutive post-action steps; future arrivals and targets are hidden;
+- the only external reward is terminal
+  `U = 0.5 * (persistent_score + short_score)`;
+- task RNG streams remain pre-sampled and separate from model, event-order,
+  opportunity, action and semantic-sampler RNG.
+
+Actor observation keeps `OBSERVATION_DIM=15` so the unchanged C3 policy can be
+reused. Slots `0..6` retain the Generic-SHORT public clock/roster/current-wave
+meanings; slot `7` is current `target_cell/2` (`0` with no wave, `0.5` for cell
+`1`, `1.0` for cell `2`); slots `8..10` retain focal
+owner/streak/contribution; slot `11` is focal `position/2`; and slots `12..14`
+remain previous-action one-hot. The 8-D critic global view likewise keeps
+slots `0..6` and uses slot `7` for `target_cell/2`. Cumulative short completion
+is result-only, not a model input. Future targets remain hidden. The semantic
+estimator never slices or receives the actor/critic task views directly as its
+positive process input.
+
+The environment additionally reports a route-only mapping from active lifecycle
+key to one scalar `process_state = position / 2` for both pre-action and
+post-action boundaries. This mapping is stored only in the semantic ledger.
+It contains no target, distance-to-target, reward, progress, owner/contact flag,
+identity, roster slot, clock, age, duration or action.
+
+A deterministic constructive controller and uniform-random control are part of
+the one result. Constructive `P/S/U` must each be at least `0.95`; uniform
+random must have positive-utility fraction at least `0.20` and mean utility
+below `0.55`. Carrier failure stops all learning interpretation.
+
+### Conditional Process Posterior
+
+Create `ha_ctse_process/process_semantics.py` with these exact interfaces:
+
+- `ProcessWindow`: lifecycle key, membership epoch, policy version, skill,
+  linked low-row indices, detached start observation, detached start actor
+  hidden, process-state sequence and valid length;
+- `ProcessWindowLedger.observe_transition(...)`, `apply_event_boundary(...)`,
+  `close_rollout(...)`, `state_dict()` and `load_state_dict(...)`;
+- `ConditionalProcessPosterior`: shared context tower, masked process GRU and
+  shared skill classifier;
+- `ProcessSemanticTrainer.score_closed_windows(...)`,
+  `apply_low_rewards(...)`, `update_posterior(...)`,
+  `state_dict()` and `load_state_dict(...)`.
+
+For a closed window `w`, maximum `W=12` active transitions:
+
+```text
+C_w = stopgrad(start actor observation, start low-actor hidden, valid mask)
+X_w = stopgrad([x_t - x_start, x_t - x_(t-1)] for active t)
+Z_w = current individual skill
+```
+
+The full posterior and context null are:
+
+```text
+q_phi(z | X, C, M) = softmax(W * (context(C,M) + process_GRU(X,M)))
+b_phi(z | C, M)    = softmax(W * context(C,M))
+L_phi              = CE(q_phi, Z) + CE(b_phi, Z)
+```
+
+The classifier `W` and context tower are shared. Inputs are detached.
+Minibatches are balanced by skill and valid window length. No reward, return,
+task diagnostic, target, distance, identity, roster slot, age, duration,
+primitive action, previous-action echo, team code or centralized critic state
+enters `X`.
+
+A frozen scorer copy `phi_bar` is constant for one rollout. The first rollout
+has `semantic_ready=false` and exactly zero intrinsic reward. After posterior
+updates, hard-copy online `phi` to `phi_bar` for the next rollout.
+
+For each closed window:
+
+```text
+s_w = clip((log q_phi_bar(Z|X,C,M) - log b_phi_bar(Z|C,M)) / log(3), -1, 1)
+r_int(t in w) = beta * s_w / |w|
+beta_on  = 0.05
+beta_off = 0.00
+```
+
+The signed detached intrinsic reward is added only to linked low transition
+rewards before low GAE. It never enters high/event rows, event critic targets,
+KEEP/SET advantages or lifetime selection. There is no warmup menu, positive
+rectification, coefficient sweep or post-failure scale change.
+
+Window ownership:
+
+- KEEP continues the open window;
+- SET closes the incumbent window before the next primitive action;
+- another member's event does not close a survivor window;
+- temporary leave closes a partial window and freezes skill/low hidden/position;
+- rejoin opens a new window with the restored skill and hidden state;
+- terminal leave and episode terminal close the current partial window;
+- PPO truncation closes every window and no row crosses policy version;
+- every low transition belongs to exactly one window.
+
+### Runtime, Probability and Checkpoint Boundaries
+
+Modify `ha_ctse_process/variable_roster_event.py` only to expose stable hooks
+for event action kind, lifecycle boundaries and low-row indices; existing F0/F1
+behavior with semantic mode off must be unchanged.
+
+Modify `ha_ctse_process/train.py` to add a separate
+`_run_iteration5_process_semantics_branch`; do not relax or overload the
+terminal Stage C guard. The new branch owns the semantic ledgers and posterior
+optimizer and reuses `batched_low_step`, `pack_event_ppo_data` and
+`apply_event_ppo_update`.
+
+The new runner calls this Iteration-5 branch explicitly; it does not widen
+`is_variable_roster_event`, `enforce_variable_roster_event_contract` or the
+Generic-SHORT Stage-C dispatch. The hierarchical arms keep F0 policy semantics
+inside their separate spatial branch.
+
+Parameterize only `collect_direct_trajectory` and `evaluate_direct_policy` in
+`ha_ctse_process/dynamic_roster_direct.py` with optional ledger/environment
+factories whose defaults preserve the existing Stage-B path exactly. The
+same-carrier C3 arm must reuse these functions and `DirectPrimitiveARPolicy`;
+the new runner must not duplicate the direct recurrent PPO implementation.
+
+Behavior probabilities remain exactly two existing factors:
+
+- high combined categorical KEEP/SET token probability;
+- low primitive-action probability.
+
+Process windows, posterior outputs and intrinsic rewards add no policy factor.
+Sampling and replay use the existing stored likelihoods. High clock remains
+owner-event time; low GAE and process windows advance only on focal active
+physical steps.
+
+Keep global `checkpoint_schema_version=3` so F0/F1 loading remains unchanged.
+Iteration-5 checkpoints additionally require one nested
+`event_semantic_schema_version=1` bundle containing online/frozen posterior
+states, posterior optimizer, semantic-ready flag, semantic sampler RNG,
+per-environment window-ledger state and intrinsic counters. Iteration-5 mode
+rejects a missing, extra or non-v1 semantic bundle; every non-Iteration-5 mode
+rejects a semantic bundle. All existing vector-event state remains owned by
+the schema-3 payload and is restored through its current strict path.
+
+### Single Evidence Source
+
+Create `scripts/run_iteration5_process_semantics.py`. It launches three arms
+in parallel on local CUDA and writes one terminal JSON:
+
+- `c1_semantic_on`: F0 shell, corrected posterior, `beta=0.05`;
+- `c1_semantic_off`: byte-equal F0/policy initialization, identical posterior
+  architecture/update exposure and semantic RNG, `beta=0`;
+- `c3_direct`: unchanged Stage B direct architecture on the same spatial
+  carrier.
+
+Frozen learned-arm exposure:
+
+```text
+seed family              57057 / registered independent ledgers
+num_envs                 16 per arm
+horizon / rollout        80 / 80
+outer updates            250
+environment transitions  320,000 per arm
+PPO passes               4
+high/low steps           1,000 each hierarchical arm
+posterior steps          1,000 each hierarchical arm
+direct optimizer steps   1,000
+Adam learning rate       3e-4
+gamma / GAE lambda       0.99 / 0.95
+policy/value clip        0.20 / 0.20
+entropy coefficient      0.01
+gradient clip            0.50
+evaluation               exact update 0 and 250 only
+```
+
+No best-checkpoint selection. C1 arms share policy initialization, external
+ledgers, opportunity/order streams and action-uniform streams until treatment
+causes trajectory divergence. Posterior RNG is isolated from policy and
+environment RNG. C3 has its registered independent model stream.
+
+### Result Contract
+
+M0 requires exact carrier ledger/state/snapshot behavior, constructive/random
+bounds, finite updates, exact exposure and optimizer counts, no prohibited
+semantic fields, zero posterior-to-policy/high gradients, high intrinsic count
+zero, exact high/low replay, semantic-on/off initial equality, semantic-off
+policy/RNG reduction when rewards are zero, and strict fresh/save/resume parity.
+
+Material semantic evidence uses the frozen Iteration-4 split/audit logic on the
+spatial process view. On held-out sources, at least one pair must satisfy both:
+
+```text
+LCB95(same-input primitive-action TV) > 1/12
+LCB95(12-active-step forced process-effect distance) > 1/12
+each selected skill natural active-step share >= 0.10
+held-out natural-to-forced process overlap margin LCB95 > 0
+context/mask matched-shuffle residual LCB95 > 0
+```
+
+Task access for `c1_semantic_on` requires deterministic
+`U>=0.60, P>=0.55, S>=0.55`, final-minus-zero utility LCB95 `>0.10`, and
+paired semantic-on-minus-off utility LCB95 `>0.03`. C3 must independently
+satisfy the existing direct-access thresholds
+`U_det>=0.70, P_det>=0.65, S_det>=0.65, U_stoch>=0.60` and
+final-minus-zero utility LCB95 `>0.15`.
+
+Mutually exclusive priority:
+
+1. `INVALID_ITERATION5_IMPLEMENTATION`: repair only the concrete operational
+   defect under the same contract.
+2. `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`: constructive or C3 access fails;
+   retire this exact carrier, make no C1 claim and do not rescue the environment.
+3. `FAIL_C1_NO_MATERIAL_SEMANTICS`: C1-on fails material/persistence/natural
+   use; retire this exact posterior/reward/view at `beta=0.05`; strengthen C3;
+   C2 and credit stay closed.
+4. `FAIL_C1_SEMANTICS_WITHOUT_TASK_VALUE`: material stable natural semantics
+   pass but C1-on task access or on-minus-off gain fails; record arbitrary
+   diversity, do not integrate; C3 remains leader and credit may re-enter only
+   as an unimplemented portfolio hypothesis.
+5. `PASS_C1_PROCESS_SEMANTICS`: material stable natural semantics and task
+   access/gain all pass; promote C1 only at this spatial-testbed level, retain C3
+   as mandatory null and move next to a load-bearing transfer/commitment
+   comparison rather than another toy optimization.
+
+Any valid result closes this exact evidence source. No budget, seed, beta,
+window, threshold, reward, model, task or skill-count rescue is permitted.
+
+### Files and Focused Check
+
+Exact write scope:
+
+- create `ha_ctse_process/dynamic_roster_spatial_testbed.py`;
+- create `ha_ctse_process/process_semantics.py`;
+- modify `ha_ctse_process/dynamic_roster_direct.py` only for the optional
+  ledger/environment factories described above;
+- modify `ha_ctse_process/variable_roster_event.py`;
+- modify `ha_ctse_process/train.py`;
+- create `scripts/run_iteration5_process_semantics.py`;
+- create `tests/ha_ctse_process_iteration5_process_semantics_test.py`.
+
+Do not modify Generic-SHORT, Stage B/Stage C result artifacts, original HMASD,
+Alice-Bob environments or retired mechanism files.
+
+The one focused test file covers carrier membership/snapshot/process-view
+exclusion, window ownership, score/reward assignment, gradient isolation,
+semantic-off reduction, replay parity and checkpoint round-trip. Then run one
+small local CUDA operational smoke through the exact runner with reduced
+updates and no scientific status; remove its transient output after success.
+
+Implementation proceeds directly through the controller or through disjoint
+Sol-xhigh work packages. The spatial carrier and process-semantics module may
+use separate implementers because they own separate new files; trainer/runtime,
+runner and focused-test integration remain one writer after those interfaces
+stabilize. The controller performs the integrated diff/test review; there is no
+internal reviewer subagent or reviewer-driven repair cycle. Any unresolved
+probability, gradient/detach, RNG/replay, mask/clock or checkpoint risk returns
+to the controller for repair or a blocked decision. There are no task commits.
+The controller creates one accepted-core implementation boundary, then
+registers and launches the single formal experiment under `$hmasd-experiment`.
+
+
 ## Variable-N + Variable-Lifetime Event Architecture — Stage A Passed
 
 The architecture and implementation-plan rounds are complete under:
@@ -1796,8 +2156,12 @@ iteration boundaries while generic techniques remain optional.
    gradient flow, invariants, strongest ordinary baseline, outcome-dependent
    portfolio updates and stop condition in this plan.
 4. Work directly by default. If delegation has clear net benefit, use one
-   coherent implementer and one whole-change reviewer, with at most one repair
-   cycle. Do not create task briefs, reports, ledgers or task commits.
+   implementer for coupled work or two to three parallel implementers for
+   frozen, disjoint write scopes. One file has one writer; one controller or
+   integration implementer owns shared integration files. The controller
+   personally reviews the integrated change and owns any repair; do not create
+   an internal reviewer subagent. Do not create task briefs, reports, ledgers
+   or task commits.
 5. Add at most one focused corruption check unless a newly observed operational
    failure requires its own regression reproduction. A valid scientific
    negative closes the evidence source without rescue.

@@ -1,6 +1,6 @@
 # HA-CTSE Experiment Dashboard
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 Purpose: compact factual state for current experiments and standing evidence.
 The controller records a meaningful launch/result transition here before acting;
@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260719-iteration5-spatial-process-semantics | launch-ready | iteration-5 spatial process-semantics comparison | local CUDA; final `logs/<launch-run-id>` assigned once at launch | terminal `runner_status.txt`, then the single registered result JSON | focused checks pass; final reduced three-arm smoke is `SMOKE_COMPLETE`, hierarchy replay max `1.20e-7`, strict checkpoint round-trip `0` | Launch exactly one frozen C1-on/C1-off/C3 evidence source; apply the five-way result priority without rescue |
 | EXP-20260718-stage-c-semantics-provenance-audit | completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE` | iteration-4 frozen-checkpoint provenance audit | `logs/stage_c_semantics_provenance_audit_20260718_190948/result/iteration4_provenance_audit.json`; implementation `05b40eb` | iteration-5 portfolio design, not checkpoint rescue | M0 pass; F1 pair 1--2 action-TV CI `[0.046582,0.051259]`, forced-effect CI `[0.027817,0.069094]`, both UCB `<1/12`; 128/10,240 paired forced/natural rows per arm | Strengthen C3 and the C1 missing-semantic-pressure diagnosis; weaken C2; keep credit closed; no reanalysis/threshold/support rescue |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
@@ -78,6 +79,54 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260719-iteration5-spatial-process-semantics — Launch Contract
+
+- Authorization/class: iteration 5 of the standing five-iteration autonomous
+  research boundary; one conclusion-bearing formal experiment, not a smoke,
+  parameter search or scale run.
+- Causal edge: route-only local motion process -> conditional process-posterior
+  intrinsic pressure -> material persistent skill control -> natural skill use
+  -> sparse terminal-task access beyond an architecture-matched semantic-off
+  hierarchy.
+- Arms/comparators: `c1_semantic_on` is F0 plus the frozen posterior with
+  `beta=0.05`; `c1_semantic_off` has identical policy/posterior exposure and
+  isolated RNG with `beta=0`; `c3_direct` is the unchanged Stage-B recurrent
+  direct controller on the same spatial carrier. The three arms overlap in one
+  runner and produce one terminal result.
+- Runtime: local CUDA, 16 environments per arm, horizon/rollout 80, 250 outer
+  updates, 320,000 environment transitions per arm, PPO4, exactly 1,000
+  high/low/posterior optimizer steps per hierarchy arm and 1,000 direct steps,
+  Adam `3e-4`, gamma/lambda `0.99/0.95`, clip `0.20`, entropy `0.01`, gradient
+  clip `0.50`; update-0 and update-250 evaluation only.
+- Semantic audit: 32 frozen final-policy source episodes; episodes 0--15 select
+  the reference pair and episodes 16--31 are inference only; three skills, two
+  CRN replicas, 12 active steps, 10,000 episode-cluster/bootstrap or matched
+  shuffle repetitions. Required material thresholds are action-TV and forced
+  effect LCB95 both `>1/12`, both natural shares `>=0.10`, natural-to-forced
+  overlap LCB95 `>0`, and context/mask matched-shuffle residual LCB95 `>0`.
+- Task thresholds: C1-on deterministic `U>=0.60`, `P>=0.55`, `S>=0.55`,
+  final-minus-zero utility LCB95 `>0.10`, and on-minus-off utility LCB95
+  `>0.03`. C3 requires deterministic `U/P/S>=0.70/0.65/0.65`, stochastic
+  `U>=0.60`, and final-minus-zero utility LCB95 `>0.15`.
+- Validity/nulls: strict carrier controls, exact counts, finite updates,
+  replay `<=1e-6`, no prohibited semantic fields, no posterior gradient into
+  policy/high, unchanged high returns, semantic-on/off initial equality,
+  semantic-off zero-reward reduction, isolated RNG, and strict schema-3 plus
+  nested semantic-v1 save/restore. C3 is the ordinary-MARL null; C1-off is the
+  mechanism-matched hierarchy null.
+- Priority branches: `INVALID_ITERATION5_IMPLEMENTATION`,
+  `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`,
+  `FAIL_C1_NO_MATERIAL_SEMANTICS`,
+  `FAIL_C1_SEMANTICS_WITHOUT_TASK_VALUE`, or
+  `PASS_C1_PROCESS_SEMANTICS`.
+- Prohibitions: no change to seed, beta, process window, task, skill count,
+  reward, budget, model, threshold or audit; no C2, credit, graph, slot, team
+  latent, task-shaped intrinsic or post-failure rescue.
+- Placement/status: one timestamped `logs/iteration5_spatial_process_semantics_<timestamp>`
+  root on local CUDA; expected wall clock 2--5 hours; its
+  `runner_status.txt` is authoritative and names the contained terminal result
+  or direct error. One depth-one Terra Medium monitor observes only that file.
 
 ## EXP-20260718-stage-c-semantics-provenance-audit — Frozen Evaluation Repair
 
