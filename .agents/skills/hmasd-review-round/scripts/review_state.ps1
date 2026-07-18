@@ -54,6 +54,7 @@ $expectedRoles = @{
     open_pro = "OPEN_DIVERGENT"
     convergent_pro = "CONVERGENT"
 }
+$exchangeTurnReferencePattern = '^turn:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(#item-[A-Za-z0-9._-]+)?$'
 $repoRoot = (git -C $round rev-parse --show-toplevel).Trim()
 $reviewerRegistryPath = Join-Path $repoRoot "docs/external-review/REVIEWER_CONVERSATIONS.json"
 $defaultArtifacts = [ordered]@{
@@ -226,8 +227,8 @@ function Assert-TransportReceipt(
             $receipt.model -ne $registered.expected_model_ui) {
             throw "Exchange receipt does not match reviewer registry: $StageName"
         }
-        if ($receipt.reference -notmatch '^turn:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') {
-            throw "Exchange receipt requires the exact Exchange turn id from read_thread"
+        if ($receipt.reference -notmatch $exchangeTurnReferencePattern) {
+            throw "Exchange receipt requires an exact Exchange turn id, optionally qualified by a read_thread item id"
         }
         return $receipt
     }
@@ -247,7 +248,7 @@ function Assert-CompletionReceipt([string]$StageName, [object]$Entry) {
         Assert-DispatchReceipt $StageName $Entry
         $dispatch = Parse-Receipt ([string]$Entry.dispatch_receipt)
         if ($dispatch.reference -eq $receipt.reference) {
-            throw "COMPLETE requires a later receipt distinct from DISPATCHED: $StageName"
+            throw "COMPLETE requires a distinct destination-side receipt from DISPATCHED: $StageName"
         }
     }
 }

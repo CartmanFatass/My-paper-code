@@ -30,7 +30,7 @@ Use these transport states precisely:
 
 - `NOT_STARTED`: no successful transport call exists;
 - `DISPATCHED`: the guarded send is visible in the destination Exchange task as
-  `turn:<uuid>`, or in the Gemini transcript as `transcript:<id>`, but no
+  `turn:<uuid>` or `turn:<uuid>#item-<id>`, or in the Gemini transcript as `transcript:<id>`, but no
   verified terminal response has returned;
 - `COMPLETE`: the exact raw is archived and the script accepts a receipt
   containing exactly `source`, `session`, `conversation`, `role`, `model`,
@@ -54,13 +54,17 @@ The receipt syntax is:
 ```text
 source=<exchange|gemini|manual>;session=<id>;conversation=<id>;
 role=<registered role>;model=<registered label>;route=<exact route token>;
-terminal=<DISPATCHED|COMPLETE>;reference=<turn UUID, transcript id, or user:<thread-id>:<message-ref>>
+terminal=<DISPATCHED|COMPLETE>;reference=<turn UUID with optional #item-id, transcript id, or user:<thread-id>:<message-ref>>
 ```
 
 `DISPATCHED` forbids `source=manual` and binds the registered reviewer identity,
 exact route and destination-side turn/transcript reference. A non-manual
 `COMPLETE` must keep that route and add a second structured receipt with
-`terminal=COMPLETE` and a different destination-side reference. Manual completion uses `session=manual`,
+`terminal=COMPLETE` and a different destination-side reference. If one Exchange
+turn contains both the received controller message and the terminal answer,
+use the item-qualified references exposed by `read_thread` (for example,
+`turn:<uuid>#item-3` and `turn:<uuid>#item-9`); never invent a second turn or
+reuse one reference for both events. Manual completion uses `session=manual`,
 `conversation=manual`, `model=manual`, and a `user:` reference.
 
 `COMPLETE` is immutable. Never edit the JSON directly or move a `DISPATCHED`

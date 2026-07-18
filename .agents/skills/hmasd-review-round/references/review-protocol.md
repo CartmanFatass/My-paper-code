@@ -88,7 +88,11 @@ values and never claim a live re-read. Never omit either field. Explicit values
 must not be used to repair a reported mismatch. `hostId` and a stable route
 token are mandatory to prevent ambiguous or duplicate routing.
 After delivery, `codex_app__read_thread` must expose the completed Exchange turn;
-its UUID is the `turn:<uuid>` completion reference.
+its UUID is the `turn:<uuid>` completion reference. When the received dispatch
+message and completed answer are two items in that same turn, identify them as
+`turn:<uuid>#item-<id>` using the exact item IDs returned by `read_thread`.
+Those two item-qualified references are distinct receipts; do not fabricate a
+second turn.
 The exchange acknowledges its Codex thread ID, target Pro conversation ID and
 role before opening the browser, then returns a terminal payload through the
 same guarded format. It never messages the other role.
@@ -110,10 +114,11 @@ scientific result.
 `DISPATCHED` is not a claim that a send was intended. The state transition must
 include a structured `-DispatchReceipt` with the registered session,
 conversation, role and model, the exact route, `terminal=DISPATCHED`, and a
-`turn:<uuid>` reference from the target Exchange task exposed by
+`turn:<uuid>` or `turn:<uuid>#item-<id>` reference from the target Exchange task exposed by
 `codex_app__read_thread` or `transcript:<id>` for the submitted Gemini prompt
 event. A non-manual completion cannot replace that route and requires a second
-structured receipt with `terminal=COMPLETE`. The stage artifact is fixed by
+structured receipt with `terminal=COMPLETE` and a distinct destination-side
+reference. The stage artifact is fixed by
 stage name; `-ArtifactPath` may only repeat that exact path and cannot redirect
 evidence to another file in the round.
 
