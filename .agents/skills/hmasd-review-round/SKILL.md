@@ -84,10 +84,19 @@ and `CONVERGENT` each have one fixed Codex task and one fixed ChatGPT Pro URL;
 never substitute, merge, or create a replacement role session.
 
 The controller dispatches one route to the matching Exchange with
-`codex_app__send_message_to_thread` using only the registered `hostId`,
-`threadId`, and `prompt`. Do not pass `model` or `thinking`; the manually
-configured Exchange model is authoritative and must not be mutated. The prompt
-contains only the route token, commit, question path, raw path, and deadline.
+`codex_app__send_message_to_thread` using the registered `hostId`, `threadId`,
+`model`, `thinking`, and `prompt`. All five fields are mandatory. `model` and
+`thinking` must equal the target task's registry values exactly; omitting them
+can replace the target routing with the sender's model, while changing them is
+also forbidden. The prompt contains only the route token, commit, question
+path, raw path, and deadline.
+
+The Exchange's terminal message back to the controller follows the same rule:
+it uses the registry's exact controller `hostId`, `threadId`, `model`, and
+`thinking` plus the terminal payload. Before either direction is used, compare
+both registered routes with live local task metadata. The registry mirrors the
+user-selected controller setting; it never chooses it. A mismatch blocks before
+dispatch until the mirror is refreshed.
 
 The Exchange alone operates the Codex in-app browser. It opens the registered
 role-specific URL, verifies the visible `Pro` setting, expands the neutral
@@ -99,8 +108,9 @@ button.
 The Exchange performs bounded same-page reads until natural completion or the
 deadline. It writes the completed response exactly to the registered raw,
 compares file content byte-for-byte, transitions the stage, and sends one
-terminal payload back to the controller. The controller does not poll the
-Exchange. Missing, partial, or ambiguous raw is incomplete evidence.
+terminal payload back with the registered controller route. The controller does
+not poll the Exchange. Missing, partial, or ambiguous raw is incomplete
+evidence.
 
 ## Finish
 

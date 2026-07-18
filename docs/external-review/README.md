@@ -52,10 +52,15 @@ verify remote evidence boundary
 
 Gemini receives one single-line document pointer in its interactive Antigravity
 PTY. Pro routes are sent to the matching Luna Exchange using only `hostId`,
-`threadId` and `prompt`; never pass model or thinking fields. The Exchange uses
-no Chrome, Computer Use, external browser, plugin, MCP, heartbeat, automation,
-shell sleep, response-control button or replacement conversation. A transport
-error is a blocker, not reviewer evidence.
+`threadId`, `model`, `thinking`, and `prompt`. The registered target `model` and
+`thinking` are mandatory and exact; omission can overwrite the Exchange's
+routing with the sender's model. The terminal return likewise includes the
+controller's exact registered model and thinking. Both directions are checked
+against live task metadata before dispatch; the registry mirrors but never
+selects the user-configured controller model. The Exchange uses no Chrome,
+Computer Use, external browser, plugin, MCP, heartbeat, automation, shell
+sleep, response-control button or replacement conversation. A transport error
+is a blocker, not reviewer evidence.
 
 Before Gemini dispatch, verify write access only for its registered conversation
 database, `agentapi.bat`, `cache/last_conversations.json`, and the auxiliary

@@ -86,6 +86,15 @@ implementers and implementation fixers use `gpt-5.6-sol` with `xhigh`
 reasoning. Never change an existing task's model; create a correctly routed
 replacement instead.
 
+When a project workflow sends to an existing Codex task, the call must include
+that task's registered `model` and `thinking` values exactly. Omitting either is
+forbidden because it can replace the target task's routing with the sender's;
+matching the registered pair preserves the model and is not a model change.
+For an external-review Exchange, the registry also mirrors the active
+controller's current model and thinking for the return message. This mirror
+does not select the controller model and must be refreshed from live task
+metadata whenever the user changes it.
+
 Use one implementer for a coupled change. Use two or three only when interfaces
 are frozen and write scopes are disjoint. One file has one writer; the
 controller or one integration implementer owns shared integration files. The

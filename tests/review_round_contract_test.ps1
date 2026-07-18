@@ -10,7 +10,7 @@ $stateScript = Join-Path $repo ".agents/skills/hmasd-review-round/scripts/review
 
 $registryText = Get-Content -LiteralPath $registryPath -Raw
 $registry = $registryText | ConvertFrom-Json
-if ($registry.schema_version -ne 9 -or
+if ($registry.schema_version -ne 10 -or
     $registry.gemini_transport.kind -ne "one_shot_subagent_antigravity_cli" -or
     $registry.gemini_transport.subagent_model -ne "gpt-5.6-terra" -or
     $registry.gemini_transport.reasoning_effort -ne "medium" -or
@@ -18,16 +18,23 @@ if ($registry.schema_version -ne 9 -or
     -not $registry.gemini_transport.state_write_scope.Contains("last_conversations.json") -or
     $registry.pro_transport.kind -ne "role_specific_luna_exchange_in_app_browser" -or
     $registry.pro_transport.dispatch_tool -ne "codex_app__send_message_to_thread" -or
-    $registry.pro_transport.model_override_fields -ne "FORBIDDEN" -or
+    $registry.pro_transport.target_route_fields -ne "REQUIRED_EXACT_REGISTERED_VALUES" -or
     $registry.reviewers.open_divergent.transport -ne "luna_exchange_in_app_browser" -or
     $registry.reviewers.open_divergent.codex_exchange.thread_id -ne "019f716c-3c8a-7891-8c89-c94dc94fab4c" -or
+    $registry.reviewers.open_divergent.codex_exchange.model -ne "gpt-5.6-luna" -or
+    $registry.reviewers.open_divergent.codex_exchange.thinking -ne "high" -or
     $registry.reviewers.convergent.transport -ne "luna_exchange_in_app_browser" -or
-    $registry.reviewers.convergent.codex_exchange.thread_id -ne "019f716c-676f-7673-9782-f37b72f200d2") {
+    $registry.reviewers.convergent.codex_exchange.thread_id -ne "019f716c-676f-7673-9782-f37b72f200d2" -or
+    $registry.reviewers.convergent.codex_exchange.model -ne "gpt-5.6-luna" -or
+    $registry.reviewers.convergent.codex_exchange.thinking -ne "high" -or
+    $registry.pro_transport.controller_return_route.thread_id -ne "019f5c78-0c91-7612-adb4-c1fcfe4484c8" -or
+    $registry.pro_transport.controller_return_route.model -ne "gpt-5.6-sol" -or
+    $registry.pro_transport.controller_return_route.thinking -ne "ultra") {
     throw "Registry is not the current review transport contract"
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("role-specific Luna Exchange", "Codex in-app browser", "schema 4", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json")) {
+foreach ($required in @("role-specific Luna Exchange", "Codex in-app browser", "schema 4", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "All five fields are mandatory", "registered controller route")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }

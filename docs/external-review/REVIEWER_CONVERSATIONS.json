@@ -1,5 +1,5 @@
 {
-  "schema_version": 9,
+  "schema_version": 10,
   "updated": "2026-07-19",
   "gemini_transport": {
     "kind": "one_shot_subagent_antigravity_cli",
@@ -17,11 +17,20 @@
     "required_arguments": [
       "hostId",
       "threadId",
+      "model",
+      "thinking",
       "prompt"
     ],
-    "model_override_fields": "FORBIDDEN",
+    "target_route_fields": "REQUIRED_EXACT_REGISTERED_VALUES",
     "browser_surface": "codex_in_app_browser",
-    "intelligence": "Pro"
+    "intelligence": "Pro",
+    "controller_return_route": {
+      "host_id": "local",
+      "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
+      "model": "gpt-5.6-sol",
+      "thinking": "ultra",
+      "source": "live_task_metadata_mirror"
+    }
   },
   "reviewers": {
     "gemini_divergent": {
@@ -49,6 +58,8 @@
         "title": "External Review Exchange — Open Pro",
         "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
         "host_id": "local",
+        "model": "gpt-5.6-luna",
+        "thinking": "high",
         "expected_model": "Luna High"
       }
     },
@@ -63,6 +74,8 @@
         "title": "External Review Exchange — Convergent Pro",
         "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
         "host_id": "local",
+        "model": "gpt-5.6-luna",
+        "thinking": "high",
         "expected_model": "Luna High"
       }
     }
