@@ -134,14 +134,20 @@ foreach ($forbidden in @(
 
 foreach ($required in @(
     "two to four live",
-    "one coherent implementer",
-    "one whole-change reviewer",
-    "at most one repair cycle",
+    "at most one coherent implementer",
+    "Do not create a reviewer or reviewer-driven repair loop by default",
+    "concrete unresolved corruption risk",
     "Do not create task briefs, reports, progress ledgers, review packages, or task commits",
     "valid scientific negative",
     "Stop after one accepted evidence source"
 )) {
     Assert-Contains $research $required "hmasd-research-cycle"
+}
+foreach ($forbidden in @(
+    "one whole-change reviewer",
+    "at most one repair cycle"
+)) {
+    Assert-NotContains $research $forbidden "hmasd-research-cycle"
 }
 
 foreach ($required in @(
@@ -188,8 +194,8 @@ foreach ($legacyWait in @(
 
 foreach ($required in @(
     "tracked HMASD five-stage external-review round",
-    "controller write disposition",
-    "cannot authorize code, experiments, promotion, retirement"
+    "only the controller changes algorithms, experiments or the research portfolio",
+    "controller writes synthesis only"
 )) {
     Assert-Contains $review $required "hmasd-review-round"
 }

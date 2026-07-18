@@ -23,10 +23,14 @@ to the final variable-team, variable-skill-lifetime algorithm.
 
 ## Execute One Coherent Iteration
 
-Work directly by default. Delegate only when it has clear net benefit, using one
-coherent implementer and one whole-change reviewer, with at most one repair
-cycle. The controller retains algorithm, architecture, evidence, Git, memory,
-experiment, disposition, and integration authority.
+Work directly by default. Delegate only when it has clear net benefit, using at
+most one coherent implementer. The controller inspects the integrated change
+and owns every fix; an implementer failure returns directly to the controller.
+Do not create a reviewer or reviewer-driven repair loop by default. One
+read-only reviewer is allowed only when controller inspection leaves a concrete
+unresolved corruption risk in probability, gradients or detach boundaries,
+RNG or replay, masks or clocks, or checkpoint state. That reviewer reports once
+and the controller resolves the issue or blocks the iteration.
 
 Do not create task briefs, reports, progress ledgers, review packages, or task
 commits. Add at most one focused corruption check unless a newly observed
