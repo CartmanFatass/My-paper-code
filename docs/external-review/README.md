@@ -32,13 +32,12 @@ one scheduled experiment into a claim that only one research direction exists.
 
 Reviewer communication is automatic by default. The controller may run Gemini
 after each tracked question boundary is committed and pushed. Pro submissions
-are performed only by the role-specific one-to-one Codex exchange conversations
-through guarded direct delivery; the controller never submits them in its
-own browser. A tracked Git-visible Pro exchange needs no repeated approval after
-the round is authorized. Transmitting private repository material, logs or local
-papers to Gemini/Antigravity requires explicit informed approval for the named
-allowlist; automatic review authority does not imply external-data consent. The
-automatic sequence remains bounded to one
+are performed only by role-specific Terra Medium transport subagents; the
+controller never submits them in its own browser. A tracked Git-visible Pro
+exchange needs no repeated approval after the round is authorized. Transmitting
+private repository material, logs or local papers to Gemini/Antigravity requires
+explicit informed approval for the named allowlist; automatic review authority
+does not imply external-data consent. The automatic sequence remains bounded to one
 blind divergent response per reviewer, one controller synthesis and one
 convergent response. A follow-up is allowed only to repair a concrete missing
 source or ambiguous response, not to keep searching until a preferred answer
@@ -54,52 +53,43 @@ any failed remote boundary check stops the submission before browser transport.
 
 The machine-readable Pro role and exchange registry is
 `docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each role to one
-external conversation ID, URL, visible model label and role ACK, plus one local
-Codex exchange thread and its frozen host/model/effort settings. Open and
-convergent
-roles must use different external and local conversation IDs. Before every
-submission, verify the exact URL, visible model label and existing role ACK
-without changing the model. Any mismatch stops as
-`BLOCKED_REVIEW_THREAD_IDENTITY`; never route to the other role or a
-mixed-purpose conversation as fallback.
+external conversation ID, URL, visible model label and role ACK. Open and
+convergent roles use different external conversations and different
+role-specific Terra Medium transport subagents. Before every submission, verify
+the exact URL, visible model label and existing role ACK without changing the
+external model. Any mismatch stops as `BLOCKED_REVIEW_THREAD_IDENTITY`; never
+route to the other role or a mixed-purpose conversation as fallback.
 
 Reuse the two registered Pro conversations and the one live Gemini process.
 Do not create duplicate conversations, alter a conversation's model or run the
 open and convergent prompts in the same conversation. Automatic exchange does
 not authorize reviewer-proposed edits, experiments or promotion.
 
-The controller does not perform Pro browser transport. `External Review
-Exchange — Open Pro` and `External Review Exchange — Convergent Pro` are
-separate one-to-one local Codex conversations created as `Luna High`. Their
-models are frozen after creation. Send only to the matching exchange, using the
-registry's host, thread, model and effort explicitly. The payload contains only
-routing metadata, immutable commit and the first missing artifact. The exchange
-must acknowledge its own Codex thread ID plus the registered Pro role and
-external conversation ID before sending the real prompt. A settings mismatch,
-cross-role fallback or unverified ACK is not a valid handoff.
+The controller does not perform Pro browser transport. It creates one
+depth-one `gpt-5.6-terra` medium subagent for the reached reviewer role. The
+child is fixed at creation, accesses only its matching external conversation,
+stays active through natural Pro completion, archives the exact raw and returns
+one final payload that the subagent runtime delivers to `/root`. It never sends
+a second collaboration message or receives model settings in a message.
 
 The exact dispatch sequence is:
 
 ```text
 controller preflight
--> verify target host/thread/model/effort
--> guarded direct route message
--> exchange thread/role/target/model ACK
--> exchange browser submission
+-> spawn the role-specific Terra Medium subagent
+-> verify external role/conversation/model ACK
+-> child browser submission and internal wait
 -> exact raw archive or transport blocker
--> guarded direct terminal message
+-> automatic subagent final delivery
 -> controller resumes from the first missing artifact
 ```
 
-Codex Desktop 26.715.2305.0 / codex-cli 0.145.0-alpha.18 has been observed to
-attach the sender turn's model and reasoning settings to a direct
-`send_message_to_thread` delivery even when the optional overrides are absent.
-Two opposite deliveries can therefore look like the conversations exchanged
-models. The verified compatibility format therefore supplies the target's
-already-matching `hostId`, `threadId`, `model` and `thinking` on every send and
-checks the target before and after delivery. It never uses a message to repair a
-mismatch, edits persisted settings, or restores a model afterward. The exact
-command is authoritative in `$hmasd-review-round`.
+Do not create local Exchange conversations or use `send_message_to_thread`,
+`list_threads`, `read_thread`, heartbeat or automation. Those paths combine
+transport with conversation identity and previously allowed sender/receiver
+model settings to cross. Subagent collaboration messages contain no model or
+reasoning fields; the child uses only its automatic final delivery and the
+controller remains idle until `COMPLETE` or actionable `BLOCKED`.
 
 The idempotence token is `<round>:<role>:<commit>:<raw-path>`. A plugin or
 authentication failure is not a scientific reviewer response and is never

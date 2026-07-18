@@ -1,17 +1,27 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "updated": "2026-07-18",
-  "controller_relay": {
-    "target_source": "current dispatch payload from memory/CURRENT_WORK.md",
-    "transport": "codex_app__send_message_to_thread",
-    "host_and_thread_required": true,
-    "target_model_and_thinking_required": true,
-    "use_receiving_controller_settings": true,
-    "required_terminals": [
+  "subagent_transport": {
+    "kind": "role_specific_depth_one_subagent",
+    "model_id": "gpt-5.6-terra",
+    "reasoning_effort": "medium",
+    "fork_turns": "none",
+    "controller_to_worker": "collaboration.spawn_agent_or_followup_task",
+    "worker_to_controller": "automatic_subagent_final_delivery",
+    "terminal_messages": [
       "COMPLETE",
-      "BLOCKED",
-      "WAIT_PRO_THINKING"
+      "BLOCKED"
     ]
+  },
+  "receipt_compatibility": {
+    "exchange_sessions": {
+      "OPEN_DIVERGENT": [
+        "019f716c-3c8a-7891-8c89-c94dc94fab4c"
+      ],
+      "CONVERGENT": [
+        "019f716c-676f-7673-9782-f37b72f200d2"
+      ]
+    }
   },
   "reviewers": {
     "gemini_divergent": {
@@ -36,23 +46,13 @@
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
       "role_ack": "HEARTBEAT_ACK role=OPEN_DIVERGENT",
-      "codex_exchange": {
-        "title": "External Review Exchange — Open Pro",
-        "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
-        "host_id": "local",
-        "expected_model": "Luna High",
-        "model_id": "gpt-5.6-luna",
-        "reasoning_effort": "high",
-        "transport": "guarded_direct",
-        "model_frozen": true,
-        "full_thinking_required": true,
-        "forbidden_page_controls": [
-          "立即回答",
-          "停止回答",
-          "重新生成",
-          "重试"
-        ]
-      }
+      "full_thinking_required": true,
+      "forbidden_page_controls": [
+        "立即回答",
+        "停止回答",
+        "重新生成",
+        "重试"
+      ]
     },
     "convergent": {
       "role": "CONVERGENT",
@@ -60,23 +60,13 @@
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
       "role_ack": "HEARTBEAT_ACK role=CONVERGENT",
-      "codex_exchange": {
-        "title": "External Review Exchange — Convergent Pro",
-        "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-        "host_id": "local",
-        "expected_model": "Luna High",
-        "model_id": "gpt-5.6-luna",
-        "reasoning_effort": "high",
-        "transport": "guarded_direct",
-        "model_frozen": true,
-        "full_thinking_required": true,
-        "forbidden_page_controls": [
-          "立即回答",
-          "停止回答",
-          "重新生成",
-          "重试"
-        ]
-      }
+      "full_thinking_required": true,
+      "forbidden_page_controls": [
+        "立即回答",
+        "停止回答",
+        "重新生成",
+        "重试"
+      ]
     }
   }
 }

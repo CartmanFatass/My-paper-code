@@ -113,6 +113,17 @@ function Assert-RouteToken([string]$StageName, [object]$Entry) {
     }
 }
 
+function Get-ExpectedSubagentSession([string]$StageName) {
+    $normalizedRound = ((Split-Path -Leaf $round).ToLowerInvariant() -replace '[^a-z0-9]+', '_').Trim('_')
+    $suffix = switch ($StageName) {
+        "gemini_divergent" { "gemini" }
+        "open_pro" { "open" }
+        "convergent_pro" { "convergent" }
+        default { throw "No transport subagent for stage: $StageName" }
+    }
+    return "/root/review_${normalizedRound}_${suffix}"
+}
+
 function Parse-Receipt([string]$Receipt) {
     if ([string]::IsNullOrWhiteSpace($Receipt)) {
         return $null
@@ -179,7 +190,7 @@ function Assert-TransportReceipt(
     if ($null -eq $receipt) {
         throw "External $ExpectedTerminal requires a transport receipt: $StageName"
     }
-    if ($receipt.source -notin @("exchange", "gemini", "manual") -or
+    if ($receipt.source -notin @("subagent", "exchange", "gemini", "manual") -or
         $receipt.role -ne $expectedRoles[$StageName] -or
         $receipt.route -ne $Entry.route_token -or
         $receipt.terminal -ne $ExpectedTerminal) {
@@ -188,17 +199,41 @@ function Assert-TransportReceipt(
     if ($receipt.source -eq "manual" -and -not $AllowManual) {
         throw "DISPATCHED cannot use a manual receipt"
     }
-    if ($StageName -eq "gemini_divergent" -and $receipt.source -notin @("gemini", "manual")) {
-        throw "Gemini stage requires gemini or manual receipt"
+    if ($StageName -eq "gemini_divergent" -and $receipt.source -notin @("subagent", "gemini", "manual")) {
+        throw "Gemini stage requires subagent, gemini, or manual receipt"
     }
-    if ($StageName -in @("open_pro", "convergent_pro") -and $receipt.source -notin @("exchange", "manual")) {
-        throw "Pro stage requires exchange or manual receipt"
+    if ($StageName -in @("open_pro", "convergent_pro") -and $receipt.source -notin @("subagent", "exchange", "manual")) {
+        throw "Pro stage requires subagent, exchange, or manual receipt"
     }
     if ($receipt.source -eq "manual") {
         if ($receipt.session -ne "manual" -or $receipt.conversation -ne "manual" -or
             $receipt.model -ne "manual" -or
             $receipt.reference -notmatch '^user:[^:;]+:[^:;]+$') {
             throw "Manual receipt requires manual identities and a user message reference"
+        }
+        return $receipt
+    } elseif ($receipt.source -eq "subagent") {
+        $registry = Get-Content -LiteralPath $reviewerRegistryPath -Raw | ConvertFrom-Json
+        $registered = switch ($StageName) {
+            "gemini_divergent" { $registry.reviewers.gemini_divergent }
+            "open_pro" { $registry.reviewers.open_divergent }
+            "convergent_pro" { $registry.reviewers.convergent }
+        }
+        $expectedModel = if ($StageName -eq "gemini_divergent") {
+            [string]$registered.expected_model
+        } else {
+            [string]$registered.expected_model_ui
+        }
+        $expectedSession = Get-ExpectedSubagentSession $StageName
+        $expectedReference = "agent:$($receipt.session):$(if ($ExpectedTerminal -eq 'DISPATCHED') { 'spawn' } else { 'complete' })"
+        if ($registry.subagent_transport.model_id -ne "gpt-5.6-terra" -or
+            $registry.subagent_transport.reasoning_effort -ne "medium" -or
+            $receipt.session -ne $expectedSession -or
+            $receipt.conversation -ne $registered.conversation_id -or
+            $receipt.role -ne $registered.role -or
+            $receipt.model -ne $expectedModel -or
+            $receipt.reference -ne $expectedReference) {
+            throw "Subagent receipt does not match the registered worker or reviewer: $StageName"
         }
         return $receipt
     } elseif ($receipt.source -eq "gemini") {
@@ -221,7 +256,9 @@ function Assert-TransportReceipt(
         } else {
             $registry.reviewers.convergent
         }
-        if ($receipt.session -ne $registered.codex_exchange.thread_id -or
+        $roleName = [string]$registered.role
+        $compatibleSessions = @($registry.receipt_compatibility.exchange_sessions.$roleName)
+        if ($receipt.session -notin $compatibleSessions -or
             $receipt.conversation -ne $registered.conversation_id -or
             $receipt.role -ne $registered.role -or
             $receipt.model -ne $registered.expected_model_ui) {
@@ -249,6 +286,10 @@ function Assert-CompletionReceipt([string]$StageName, [object]$Entry) {
         $dispatch = Parse-Receipt ([string]$Entry.dispatch_receipt)
         if ($dispatch.reference -eq $receipt.reference) {
             throw "COMPLETE requires a distinct destination-side receipt from DISPATCHED: $StageName"
+        }
+        if ($dispatch.source -eq "subagent" -and
+            ($receipt.source -ne "subagent" -or $dispatch.session -ne $receipt.session)) {
+            throw "Subagent COMPLETE must come from the worker that produced DISPATCHED: $StageName"
         }
     }
 }
@@ -562,7 +603,7 @@ if ($Mode -eq "transition") {
         if ($candidateReceipt.source -ne "manual" -and
             ([string]::IsNullOrWhiteSpace($entry.dispatched_at) -or
              [string]::IsNullOrWhiteSpace($entry.dispatch_receipt))) {
-            throw "Exchange/Gemini COMPLETE requires a prior DISPATCHED state for the same route"
+            throw "External COMPLETE requires a prior DISPATCHED state for the same route"
         }
     }
     if ($from -eq "BLOCKED" -and $State -ne "BLOCKED") {
