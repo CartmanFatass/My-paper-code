@@ -21,9 +21,9 @@ $requiredAgentsText = @(
     "superpowers:verification-before-completion",
     "HMASD Contract",
     "does not imply one research hypothesis, architecture or permitted successor",
-    "gpt-5.6-terra` medium",
-    "gpt-5.6-terra` high",
-    "gpt-5.6-sol` high"
+    "gpt-5.6-sol` xhigh",
+    "fails twice on the same task",
+    "controller takes over the research implementation"
 )
 foreach ($text in $requiredAgentsText) {
     if (-not $agents.Contains($text)) {
@@ -35,7 +35,10 @@ $forbiddenRepositoryText = @(
     '$hmasd-work',
     'strongest available model',
     'Controller model:',
-    'Controller reasoning:'
+    'Controller reasoning:',
+    'gpt-5.6-terra medium for a mechanical',
+    'gpt-5.6-terra high for integration',
+    'gpt-5.6-sol high for algorithm'
 )
 foreach ($text in $forbiddenRepositoryText) {
     if ($agents.Contains($text) -or $currentWork.Contains($text)) {

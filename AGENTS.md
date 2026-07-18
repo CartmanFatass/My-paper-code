@@ -59,12 +59,13 @@ reuse/replacement, data and gradient flow, invariants and stability goals.
 Implementers execute that frozen design and return `BLOCKED` rather than invent
 missing semantics; reviewers inspect fidelity and do not redesign the route.
 
-Project files do not select or record the controller model. For a newly spawned
-development subagent, specify the route explicitly: gpt-5.6-terra medium for a
-mechanical one-to-two-file implementation, gpt-5.6-terra high for integration or
-ordinary engineering review, and gpt-5.6-sol high for algorithm, probability,
-credit, recurrent-state or scientific-semantics review. Never change an existing
-conversation's model.
+Project files do not select or record the controller model. Every newly spawned
+HMASD implementer, implementation fixer, task reviewer and whole-change reviewer
+uses gpt-5.6-sol xhigh. Never change an existing conversation's model; stop it
+and create a correctly routed replacement when a route must change. If the
+Sol-xhigh implementation/review loop fails twice on the same task, stop
+delegating and the active controller takes over the research implementation
+under the same frozen contract and evidence boundary.
 
 Use `$hmasd-experiment` only when an action creates or mutates an experiment
 contract, package, launch, persistent monitor, failed runtime stage or terminal
