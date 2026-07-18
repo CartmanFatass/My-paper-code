@@ -4775,6 +4775,174 @@ def _summarize_event_prefix_rows(
     }
 
 
+def _event_semantic_primitive_probabilities(
+    model_owner,
+    rows: Sequence[Any],
+) -> list[list[float]]:
+    """Replay already-emitted low rows without sampling or advancing a runtime."""
+
+    if not rows:
+        return []
+    if int(model_owner.action_dim) != 3 or str(model_owner.action_space_type) != (
+        "discrete"
+    ):
+        raise ValueError("semantic provenance requires three discrete primitives")
+    actor = model_owner.low_actor
+    observations = torch.as_tensor(
+        np.stack([row.observation for row in rows]),
+        dtype=torch.float32,
+        device=model_owner.device,
+    )
+    skills = torch.as_tensor(
+        [int(row.skill) for row in rows],
+        dtype=torch.long,
+        device=model_owner.device,
+    )
+    hidden = torch.as_tensor(
+        np.stack([row.actor_hidden_before for row in rows]),
+        dtype=torch.float32,
+        device=model_owner.device,
+    )
+    features = actor._features(observations, skills)
+    features, _unused_hidden = actor.actor_rnn(
+        features,
+        hidden,
+        torch.ones(
+            features.shape[0], 1, dtype=torch.float32, device=model_owner.device
+        ),
+    )
+    probabilities = actor.actor_act.action_out(features).probs.detach().cpu().numpy()
+    if probabilities.shape != (len(rows), 3) or not np.isfinite(probabilities).all():
+        raise RuntimeError("semantic provenance primitive probabilities are invalid")
+    output = probabilities.astype(np.float64).tolist()
+    for row, probability in zip(rows, output):
+        action_values = np.asarray(row.action).reshape(-1)
+        if action_values.size != 1:
+            raise RuntimeError("semantic provenance requires scalar discrete actions")
+        action = int(action_values[0])
+        replayed_logp = float(
+            np.log(max(float(probability[action]), np.finfo(np.float64).tiny))
+        )
+        if abs(replayed_logp - float(row.old_log_probability)) > 1e-5:
+            raise RuntimeError("semantic provenance low-policy replay mismatch")
+    return output
+
+
+def _project_event_semantic_natural_row(
+    row,
+    *,
+    arm: str,
+    episode_id: int,
+    active_set_size: int,
+    primitive_probabilities: Sequence[float],
+) -> dict[str, Any]:
+    """Project one emitted low row into the leakage-free natural schema."""
+
+    action_values = np.asarray(row.action).reshape(-1)
+    probabilities = np.asarray(primitive_probabilities, dtype=np.float64).reshape(-1)
+    if action_values.size != 1 or probabilities.shape != (3,):
+        raise ValueError("semantic provenance natural row has invalid action shape")
+    if not np.isfinite(probabilities).all():
+        raise ValueError("semantic provenance natural probabilities must be finite")
+    return {
+        "arm": str(arm),
+        "task_master_seed": 97_057,
+        "episode_id": int(episode_id),
+        "physical_time": int(row.physical_time),
+        "lifecycle_key": str(row.lifecycle_key),
+        "membership_epoch": int(row.membership_epoch),
+        "observation": np.asarray(row.observation, dtype=np.float32).tolist(),
+        "actor_hidden_before": np.asarray(
+            row.actor_hidden_before, dtype=np.float32
+        ).tolist(),
+        "natural_skill": int(row.skill),
+        "natural_action": int(action_values[0]),
+        "natural_action_log_probability": float(row.old_log_probability),
+        "primitive_legal_support": [0, 1, 2],
+        "primitive_probabilities": probabilities.tolist(),
+        "active_set_size": int(active_set_size),
+    }
+
+
+def _capture_event_semantic_source(
+    *,
+    core,
+    snapshot,
+    transaction,
+    focal_key: str,
+) -> dict[str, Any]:
+    """Capture source-only routing and owned-PCG64 state before branch cloning."""
+
+    key = str(focal_key)
+    if key not in snapshot.keys:
+        raise ValueError("semantic provenance focal key is not active")
+    active_skills = core.active_skills()
+    if set(active_skills) != set(snapshot.keys):
+        raise RuntimeError("semantic provenance active skill routing is incomplete")
+    return {
+        "focal_index": int(snapshot.keys.index(key)),
+        "active_keys": list(snapshot.keys),
+        "active_membership_epochs": [
+            int(member.membership_epoch) for member in snapshot.members
+        ],
+        "active_skills": [int(active_skills[active]) for active in snapshot.keys],
+        "frontier": list(snapshot.frontier),
+        "membership_deltas": [
+            {
+                "kind": str(delta.kind),
+                "lifecycle_key": str(delta.lifecycle_key),
+                "expected_membership_epoch": int(delta.expected_membership_epoch),
+            }
+            for delta in transaction.atomic_membership_delta
+        ],
+        "source_rng_ledger": {
+            "episode_id": int(core.rng_episode_id),
+            "opportunity": {
+                "master_seed": int(core.opportunity_master_seed),
+                "stream_id": int(core.opportunity_stream_id),
+            },
+            "frontier_order": {
+                "master_seed": int(core.frontier_master_seed),
+                "stream_id": int(core.frontier_stream_id),
+            },
+            "policy_action": {
+                "master_seed": int(core.action_master_seed),
+                "stream_id": int(core.action_stream_id),
+            },
+        },
+        "source_rng_states": {
+            "opportunity": deepcopy(core.opportunity_rng.bit_generator.state),
+            "frontier_order": deepcopy(core.frontier_rng.bit_generator.state),
+            "policy_action": deepcopy(core.action_rng.bit_generator.state),
+        },
+    }
+
+
+def _project_event_semantic_forced_source(
+    natural_row: Mapping[str, Any],
+    *,
+    source: Mapping[str, Any],
+    forced_effects: Sequence[Any],
+) -> dict[str, Any]:
+    """Join a captured source to its already-produced focal natural row."""
+
+    effects = np.asarray(forced_effects, dtype=np.float64)
+    if effects.shape != (3, 2, 4) or not np.isfinite(effects).all():
+        raise ValueError("semantic provenance forced effects have invalid shape")
+    focal_index = int(source["focal_index"])
+    if str(source["active_keys"][focal_index]) != str(natural_row["lifecycle_key"]):
+        raise RuntimeError("semantic provenance focal source does not match natural row")
+    if int(source["active_membership_epochs"][focal_index]) != int(
+        natural_row["membership_epoch"]
+    ):
+        raise RuntimeError("semantic provenance focal epoch does not match natural row")
+    return {
+        **deepcopy(dict(natural_row)),
+        **deepcopy(dict(source)),
+        "forced_effects": effects.tolist(),
+    }
+
+
 @torch.no_grad()
 def _forced_event_snapshot_effects(
     *,
@@ -4784,6 +4952,7 @@ def _forced_event_snapshot_effects(
     snapshot,
     episode_id: int,
     audit_index: int,
+    focal_key: str | None = None,
 ) -> list[list[list[float]]]:
     from ha_ctse_process.collectors import SyncEnvCollector
     from ha_ctse_process.dynamic_roster_testbed import (
@@ -4808,7 +4977,13 @@ def _forced_event_snapshot_effects(
         normalizer_states=_event_identity_normalizers(),
         pending_membership_transaction=core.pending_membership_transaction,
     )
-    focal_key = snapshot.keys[int(audit_index) % len(snapshot.keys)]
+    selected_focal_key = (
+        snapshot.keys[int(audit_index) % len(snapshot.keys)]
+        if focal_key is None
+        else str(focal_key)
+    )
+    if selected_focal_key not in snapshot.keys:
+        raise ValueError("forced audit focal key is not active in the source snapshot")
     skill_results: list[list[list[float]]] = []
     for skill in range(model_owner.n_skills):
         replica_results: list[list[float]] = []
@@ -4836,11 +5011,11 @@ def _forced_event_snapshot_effects(
             persist_actions = 0
             short_actions = 0
             for _step in range(12):
-                if focal_key not in branch_core.records or (
-                    branch_core.records[focal_key].status != "ACTIVE"
+                if selected_focal_key not in branch_core.records or (
+                    branch_core.records[selected_focal_key].status != "ACTIVE"
                 ):
                     raise RuntimeError("forced focal lifecycle left before audit window closed")
-                branch_core.records[focal_key].active_skill = int(skill)
+                branch_core.records[selected_focal_key].active_skill = int(skill)
                 actions, _logp, _values = branch_core.low_step(
                     branch_snapshot, deterministic=False
                 )
@@ -4848,7 +5023,7 @@ def _forced_event_snapshot_effects(
                     key: int(actions[index].detach().cpu())
                     for index, key in enumerate(branch_snapshot.keys)
                 }
-                focal_action = int(routed[focal_key])
+                focal_action = int(routed[selected_focal_key])
                 persist_actions += int(focal_action == PERSIST)
                 short_actions += int(focal_action == SHORT)
                 event_step = branch_environment.step_event_runtime(routed)
@@ -4957,6 +5132,7 @@ def _evaluate_event_model(
     deterministic: bool,
     capture_prefix: bool,
     capture_forced_audit: bool,
+    capture_semantic_provenance: bool = False,
 ) -> dict[str, Any]:
     from ha_ctse_process.dynamic_roster_testbed import DynamicRosterEventEnv, HORIZON
 
@@ -4977,6 +5153,8 @@ def _evaluate_event_model(
     timing_rows: list[dict[str, Any]] = []
     natural_skill_counts = np.zeros(model_owner.n_skills, dtype=np.int64)
     forced_effects: list[Any] = []
+    semantic_natural_rows: list[dict[str, Any]] = []
+    semantic_forced_sources: list[dict[str, Any]] = []
     try:
         for episode_id in episode_ids:
             environment = DynamicRosterEventEnv(task_master_seed=97_057)
@@ -4998,7 +5176,7 @@ def _evaluate_event_model(
                     _event_prefix_rows(core, result.token_rows, episode_id=episode_id)
                 )
             selected_times = set()
-            if capture_forced_audit and episode_id < 32:
+            if (capture_forced_audit or capture_semantic_provenance) and episode_id < 32:
                 selected_times = {
                     1 + episode_id % 8,
                     20 + episode_id % 9,
@@ -5006,17 +5184,28 @@ def _evaluate_event_model(
                     60 + episode_id % 8,
                 }
             for primitive_time in range(HORIZON):
+                semantic_source = None
+                source_forced_effects = None
                 if primitive_time in selected_times:
-                    forced_effects.append(
-                        _forced_event_snapshot_effects(
-                            model_owner=model_owner,
+                    audit_index = len(forced_effects)
+                    focal_key = snapshot.keys[audit_index % len(snapshot.keys)]
+                    if capture_semantic_provenance:
+                        semantic_source = _capture_event_semantic_source(
                             core=core,
-                            environment=environment,
                             snapshot=snapshot,
-                            episode_id=episode_id,
-                            audit_index=len(forced_effects),
+                            transaction=bound,
+                            focal_key=focal_key,
                         )
+                    source_forced_effects = _forced_event_snapshot_effects(
+                        model_owner=model_owner,
+                        core=core,
+                        environment=environment,
+                        snapshot=snapshot,
+                        episode_id=episode_id,
+                        audit_index=audit_index,
+                        focal_key=focal_key,
                     )
+                    forced_effects.append(source_forced_effects)
                 skills_now = core.active_skills()
                 for skill in skills_now.values():
                     natural_skill_counts[int(skill)] += 1
@@ -5052,9 +5241,65 @@ def _evaluate_event_model(
                         environment_state.persistent_owner is not None
                     ),
                 }
+                low_ledger_start = (
+                    len(core.low_ledger)
+                    if capture_semantic_provenance and episode_id < 32
+                    else None
+                )
                 actions, _logp, _values = core.low_step(
                     snapshot, deterministic=bool(deterministic)
                 )
+                if low_ledger_start is not None:
+                    emitted_low_rows = core.low_ledger[low_ledger_start:]
+                    if len(emitted_low_rows) != len(snapshot.keys) or {
+                        (str(row.lifecycle_key), int(row.membership_epoch))
+                        for row in emitted_low_rows
+                    } != {
+                        (str(member.lifecycle_key), int(member.membership_epoch))
+                        for member in snapshot.members
+                    }:
+                        raise RuntimeError(
+                            "semantic provenance low-ledger source slice is not exact"
+                        )
+                    probability_rows = _event_semantic_primitive_probabilities(
+                        model_owner, emitted_low_rows
+                    )
+                    projected_rows = [
+                        _project_event_semantic_natural_row(
+                            row,
+                            arm=model_owner.architecture_mode,
+                            episode_id=episode_id,
+                            active_set_size=len(snapshot.keys),
+                            primitive_probabilities=probabilities,
+                        )
+                        for row, probabilities in zip(
+                            emitted_low_rows, probability_rows
+                        )
+                    ]
+                    semantic_natural_rows.extend(projected_rows)
+                    if semantic_source is not None:
+                        focal_index = int(semantic_source["focal_index"])
+                        focal_key = str(semantic_source["active_keys"][focal_index])
+                        focal_epoch = int(
+                            semantic_source["active_membership_epochs"][focal_index]
+                        )
+                        focal_rows = [
+                            row
+                            for row in projected_rows
+                            if str(row["lifecycle_key"]) == focal_key
+                            and int(row["membership_epoch"]) == focal_epoch
+                        ]
+                        if len(focal_rows) != 1 or source_forced_effects is None:
+                            raise RuntimeError(
+                                "semantic provenance forced source lacks one natural match"
+                            )
+                        semantic_forced_sources.append(
+                            _project_event_semantic_forced_source(
+                                focal_rows[0],
+                                source=semantic_source,
+                                forced_effects=source_forced_effects,
+                            )
+                        )
                 routed = {
                     key: int(actions[index].detach().cpu())
                     for index, key in enumerate(snapshot.keys)
@@ -5119,6 +5364,14 @@ def _evaluate_event_model(
                 forced_effects,
                 natural_skill_counts=natural_skill_counts,
             )
+        if capture_semantic_provenance:
+            if len(semantic_forced_sources) != 128:
+                raise RuntimeError("semantic provenance forced source count is not exact")
+            payload["semantic_provenance"] = {
+                "schema": 1,
+                "natural_rows": semantic_natural_rows,
+                "forced_sources": semantic_forced_sources,
+            }
         return payload
     finally:
         for module, was_training in zip(modules, previous_training):
