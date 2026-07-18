@@ -23,10 +23,10 @@ task access.
 
 The external portfolio round
 `20260718_stage_c_skill_bottleneck_portfolio` is closed with
-`ACCEPT_PORTFOLIO_WITH_EXISTING_CHECKPOINT_REANALYSIS`. Iteration 3 is one
-diagnostic-only reanalysis of existing Stage C checkpoints, forced branches and
-the natural ledger. It must distinguish skill existence, cross-context
-stability and natural overlap without training or adding a mechanism.
+`ACCEPT_PORTFOLIO_WITH_EXISTING_CHECKPOINT_REANALYSIS`. Iteration 3 is now
+closed as valid `F_UNDERPOWERED_OR_UNIDENTIFIABLE`: both arms pass M0 and expose
+small checkpoint-local `z -> action` dependence, but the stored forced branches
+lack the provenance required to identify stability or natural overlap.
 
 ## Causal Portfolio
 
@@ -42,15 +42,17 @@ stability and natural overlap without training or adding a mechanism.
 
 ## Next Actions
 
-1. Count Stage C as overnight iteration 1 and the closed portfolio review as
-   iteration 2 of 5.
-2. Freeze the iteration-3 existing-checkpoint audit before reading its result:
-   same-snapshot `z` interventions, nuisance-matched stability, natural overlap,
-   diagnostic nulls, support floor and outcome-dependent portfolio updates.
-3. Run only that reanalysis. It performs no optimizer step, environment rollout
-   or reward computation and cannot reopen Stage C.
-4. Use its terminal result to reweight the whole portfolio before any C1, C2,
-   credit or C3 implementation decision.
+1. Count Stage C, the closed portfolio review and the valid underpowered audit
+   as overnight iterations 1--3 of 5.
+2. Preserve the portfolio ranking: C3 remains the empirical leader, C1 remains
+   the strongest live hierarchical explanation, C2 is not promoted and credit
+   stays dormant.
+3. For iteration 4, design only the minimal provenance-complete collection that
+   repeats the same frozen-checkpoint estimand in the same environment. It must
+   record forced observation, recurrent state, lifecycle/source episode, legal
+   support, nuisance strata and a shared natural key at collection time.
+4. Do not add training, reward, thresholds, a new toy or an algorithm mechanism
+   until that instrument design is coherent and preserves the registered nulls.
 
 ## Overnight Autonomous Boundary
 
@@ -118,6 +120,11 @@ stability and natural overlap without training or adding a mechanism.
   eligible natural prefix rows each, replay maxima below `3.71e-7`, final
   `P/S/U=0/1/0.5`, and no executable naturally used skills. F1 forced
   `rho=0.070304` does not establish natural task transport.
+- Iteration 3 is valid `F_UNDERPOWERED_OR_UNIDENTIFIABLE`: policy lineage passes
+  and F1 fixed-input pairwise action TV reaches at most `0.048072`, but forced
+  snapshot provenance and forced--natural alignment are absent. This result
+  cannot be interpreted as stable semantics, absent semantics or algorithm
+  failure.
 - R41B remains the positive fixed-`N` source anchor. R51--R55 exact contracts
   are retired and inactive.
 - Do not add graph, attention, slots, critical residuals, team latent, a new

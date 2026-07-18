@@ -4,6 +4,200 @@ Purpose: staged core-algorithm work only. The binding research target, S7-S1
 parity definition, baseline hierarchy, promotion ladder, and failure-review gate
 live in `memory/ALGORITHM_PRINCIPLES.md`; they are not repeated here.
 
+## Task 1: Iteration 3 Existing-Checkpoint Skill-Semantics Audit
+
+Status: COMPLETE. The reviewed analyzer and direct-script regression passed 18
+focused checks; the controller-owned offline invocation terminated validly as
+`F_UNDERPOWERED_OR_UNIDENTIFIABLE`.
+
+### HMASD Contract
+
+Goal: distinguish whether terminal Stage C F1 contains a checkpoint-local,
+persistent skill-conditioned action process, whether that process keeps its
+relative meaning across lifecycle nuisances, and whether naturally assigned
+segments enter the same coarse action-process regions. F1 alone selects the
+scientific branch; F0 runs the identical analysis only as a matched diagnostic.
+
+Evidence is strictly offline and read-only. Inputs are each arm's
+`result/stage_c_arm.json` and `checkpoints/update_250_live.pt` under
+`logs/f0f1_dynamic_roster_stage_c_20260717_221247`. No optimizer, collector,
+environment, reward helper or new rollout is allowed. Only the first two forced
+effect dimensions are read; the third primitive-action occupancy is
+`1 - q0 - q1`. Reward, utility, wave, owner, progress, contact, success, role
+and the task-effect dimensions are prohibited.
+
+The audit may establish only local `do(z)` policy dependence, 12-active-step
+action-mode stability and late-training natural-context overlap. It cannot
+establish environment-independent transition semantics, transfer, cooperation,
+commitment advantage or hierarchy superiority over Stage B.
+
+### Binding Evidence-Sufficiency Revision
+
+The pre-execution artifact mapping established that the registered forced
+result stores only the aggregate tensor `[128,3,2,4]`; it does not retain each
+forced snapshot's observation, recurrent state, lifecycle/event metadata,
+primitive legal support or a key shared with the natural ledger. The natural
+low ledger retains final-rollout observations and recurrent state but no
+per-row source episode or forced-snapshot alignment. Consequently the full
+stability and natural-overlap estimands below are not identifiable from the
+existing artifacts without a new rollout, which this iteration forbids.
+
+This iteration therefore performs an evidence-sufficiency audit before any
+full semantic estimator:
+
+1. validate both registered arm results and both schema-3 live checkpoints;
+2. reconstruct the final low actor and derive the identifiable fixed-input
+   `z -> primitive-action distribution` read plus final-versus-stored action
+   log-probability drift directly from checkpoint rows;
+3. validate and summarize the permitted first two dimensions of the aggregate
+   forced tensor without inventing snapshot metadata, clusters or strata;
+4. record an explicit field/support matrix for forced stability and natural
+   overlap.
+
+If any field needed by the full estimands is absent, the valid terminal result
+is `F_UNDERPOWERED_OR_UNIDENTIFIABLE`. Do not synthesize zero metrics, fabricate
+episode labels, accept precomputed metrics from a caller, merge strata or run an
+environment to fill the gap. The A--E decision logic below is reachable only
+when every required metric was actually derived from serialized evidence.
+
+### Frozen Data and Probability Flow
+
+Instantiate `EventLowActor` from the checkpoint architecture header and load
+`low_actor_state` strictly. For every stored low row, hold observation and
+`actor_hidden_before` fixed and evaluate the full three-action categorical
+distribution for all three skills. This is the exact same-input `do(z)` read;
+it does not replay a counterfactual history.
+
+Reconstruct active age, entry/resume state, active team size and realized
+constant-skill duration only from lifecycle key, membership epoch, physical
+time, skill and active-set size. Inactive steps do not increase age; a skill
+change resets age; rejoin preserves age when the skill is unchanged. Required
+nuisance bins are:
+
+- age: `0..9`, `10..19`, `>=20`;
+- entry: first ten active steps of a membership epoch versus ordinary;
+- active team size: `2`, `4`, `6`;
+- active duration: `1..9`, `10..19`, `>=20`.
+
+For registered forced effects, use only action occupancy
+`q[c,z,r] = [effect0, effect1, 1-effect0-effect1]`. Evaluation episodes `0..15`
+are the fixed reference fold and `16..31` are the inference fold. Select one
+unordered pair on the reference fold by maximum cross-replica skill energy,
+breaking ties lexicographically; never select a favorable arm or inference
+pair after seeing results.
+
+Natural data are split by environment episode, lifecycle key, membership epoch,
+constant skill and constant active-N. A segment contributes at most its first
+12 consecutive active steps; shorter segments are excluded and longer segments
+do not receive extra weight. Replay the final actor recurrently over the stored
+observations from the segment's stored initial hidden state. The resulting mean
+categorical distribution is the window signature. Sampled actions are
+diagnostic only.
+
+All bootstrap and shuffle RNGs are local PCG64 generators; Python, global NumPy
+and Torch RNG states and every checkpoint tensor must remain exactly unchanged.
+Cluster bootstrap uses source episode, 10,000 repetitions and seed `307057`;
+matched shuffles use seed `307058`.
+
+### Frozen Metrics and Support
+
+Let `delta = 1/12` and `delta_stratum = 1/24`, corresponding to one expected
+primitive-action change per 12 active steps and half that effect within a
+nuisance stratum.
+
+1. **Same-input dependence.** For every skill pair, report episode-clustered
+   mean total variation between exact categorical distributions. For the frozen
+   pair also report the square root of nonnegative cross-replica forced skill
+   energy. Persistent dependence requires both 95% lower bounds to reach
+   `delta`.
+2. **Stability.** Build per-skill reference centroids separately for exact and
+   forced signatures. On the inference fold, the frozen pair's label-aligned
+   distance margin must have a pooled lower bound of at least `delta` and a
+   lower bound of at least `delta_stratum` in every required age, entry,
+   active-N and duration stratum. An upper bound at or below zero is a reversal.
+3. **Natural overlap.** Macro-average only the frozen pair. It requires a
+   balanced distance-margin lower bound of at least `delta`, nearest-centroid
+   balanced-accuracy lower bound above `0.5`, positive lower-bound gain over a
+   leave-one-episode-out nuisance-only predictor, and a margin above the 95th
+   percentile of the per-repetition maximum age-, duration-, entry- and
+   active-N-matched segment-label shuffle. Skill prior is an additional null.
+4. **Policy-lineage guard.** Re-evaluate stored actions under the final actor.
+   If the 95th percentile absolute final-minus-old log-probability exceeds
+   `log(1.2)`, natural overlap is unidentifiable and returns underpowered. This
+   is a support guard, not replay parity: the ledger precedes the final PPO
+   update.
+
+Minimum support is eight independent episodes and 24 forced snapshots pooled,
+eight episodes and eight snapshots per forced stratum, eight episodes and 32
+exact rows per exact stratum, and eight episodes plus 24 natural windows for
+each endpoint skill. Missing common support never permits bin merging or a
+threshold change.
+
+### Validity and Mutually Exclusive Result
+
+M0 requires the registered valid source result, exact arm modes, schema-3
+vector checkpoints, 16 runtimes, update 250, 320,000 transitions, zero intrinsic
+applications, forced shape `[128,3,2,4]`, exact timing grid, 5,120 low rows per
+arm, skill/action range `0..2`, full categorical support, finite occupancy
+simplexes, no prohibited field reads, tensor equality before/after, unchanged
+global RNG and exactly one result JSON. M0 failure is
+`INVALID_ITERATION3_AUDIT`.
+
+F1 selects exactly one outcome in this order:
+
+- `A_NO_MATERIAL_Z_DEPENDENCE`: every pair's exact and forced upper bounds are
+  below `delta`;
+- `B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT`: some dependence exists, but the frozen
+  pair is nonpersistent or a supported stratum definitively vanishes/reverses;
+- `C_STABLE_FORCED_NO_NATURAL_OVERLAP`: stability passes and raw natural overlap
+  definitively misses its thresholds;
+- `D_STABLE_LOCAL_NATURAL_OVERLAP`: stability and all raw/matched natural reads
+  pass; this remains checkpoint-local and is not a utility or credit success;
+- `E_NUISANCE_SHORTCUT`: raw overlap passes the prior but fails the nuisance-only
+  or matched-shuffle comparison;
+- `F_UNDERPOWERED_OR_UNIDENTIFIABLE`: fields/support are missing, policy-lineage
+  drift fails, or a confidence interval crosses a decision threshold.
+
+### Execution
+
+1. Add `tests/ha_ctse_process_stage_c_skill_semantics_test.py` first. Synthetic
+   fixtures matching the real nested JSON/checkpoint/dataclass layout must
+   demonstrate RED for two-arm M0, direct actor lineage, fixed-input `do(z)`,
+   missing-field F, prohibited-field non-access and no-mutation/RNG behavior.
+2. Add only `scripts/analyze_stage_c_skill_semantics.py`, with pure functions
+   `load_audit_inputs`, `counterfactual_action_distributions`,
+   `reconstruct_context_rows`, `forced_action_signatures`, `natural_segments`,
+   `cluster_bootstrap_ci`, `matched_nulls`, `decide_outcome` and `run_audit`.
+3. The complete entry point must parse the real nested source layout itself,
+   invalidate the audit if either arm fails M0, calculate available diagnostics
+   rather than accept them, and write one JSON-safe result. It must stop at F
+   before unreachable stability/natural logic when the availability matrix is
+   incomplete.
+4. Run the focused test and return the implementation for review. Do not read
+   or analyze the real Stage C inputs during implementation.
+
+## Task 2: Iteration 3 Evidence Execution and Portfolio Disposition
+
+The controller ran the analyzer once to
+`logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/iteration3_skill_semantics_audit.json`.
+Both arms pass every M0 check. Final-versus-ledger policy lineage is supported
+(`p95 |delta logp| = 0.04337` for F0 and `0.04253` for F1 against
+`log(1.2) = 0.18232`). Fixed-input exact categorical reads show only small local
+skill dependence: F1 pairwise mean TV is `0.009998`, `0.040035`, and `0.048072`.
+
+The serialized forced aggregate has no per-snapshot observation, recurrent
+state, lifecycle metadata, legal support, source episode, nuisance strata or
+shared natural key. Natural rows likewise have no source episode or exact
+forced alignment. Stability and natural overlap are therefore unidentified;
+the valid terminal outcome is `F_UNDERPOWERED_OR_UNIDENTIFIABLE`, not zero
+semantics or algorithm failure.
+
+Iteration 3 leaves C3 as the empirical leader and C1 as the strongest live
+hierarchical explanation; it neither promotes C2 nor opens credit. A repeated
+read is allowed only as an instrument repair that preserves the environment,
+frozen policies, estimand, thresholds and nulls while recording the missing
+provenance at collection time. It may not add training, reward or a new toy.
+
 ## Variable-N + Variable-Lifetime Event Architecture — Stage A Passed
 
 The architecture and implementation-plan rounds are complete under:
