@@ -25,25 +25,34 @@ Use the registered cloud scheduler for cloud work. Treat the server as
 available until an actual connection failure. Put large output on the data disk
 and long commands in the registered background runner.
 
-## Terra Monitor Subagent
+## Persistent Luna Monitor Task
 
-After the live status file exists, spawn exactly one depth-one child per run:
+After the live status file exists, assign the run to the one task registered in
+`references/monitor-task.json`. That task is created once with:
 
 ```text
-task_name: monitor_<normalized-run-id>
-fork_turns: none
-model: gpt-5.6-terra
-reasoning_effort: medium
+model: gpt-5.6-luna
+thinking: medium
+workspace: C:\project\HMASD
 ```
 
-Give the child only the absolute run root and status path, registered terminal
+Do not create a new monitor task per run. Only one run may be assigned at a
+time. Immediately before assignment, use `$hmasd-task-router` to resolve both
+the registered monitor and the active controller. Their live routes must match
+their registry mirrors. Send the assignment once with the monitor's exact
+`hostId`, `threadId`, `model`, and `thinking`; include the controller thread ID
+and the absolute path to `.agents/skills/hmasd-task-router/SKILL.md`. The monitor
+reads that Skill before waiting.
+
+Give the monitor only the absolute run root and status path, registered terminal
 spelling (`complete` or `completed`, plus `failed`), payload keys, monitor
 deadline, terminal schema, and read-only/no-science boundary.
 
-The child runs `scripts/wait_runner_status.ps1`. The helper performs one initial
-read and then waits on file events; it does not sleep or poll. The child may
-resume a yielded helper with the process-wait tool. It reads no result, stderr,
-or progress file, changes no file, and never restarts or interprets the run.
+The monitor runs `scripts/wait_runner_status.ps1`. The helper performs one
+initial read and then waits on file events; it does not sleep or poll. The
+monitor may resume a yielded helper with the process-wait tool. It reads no
+result, stderr, or progress file, changes no file, and never restarts or
+interprets the run.
 
 Every existing status must parse completely. `running` is the only nonterminal
 state; terminal states are the registered `complete`/`completed` and `failed`.
@@ -51,8 +60,8 @@ Every state contains `updated` and `phase`. Validate `run_root`, `run_id`, and
 terminal payload containment when present. Malformed, missing, unknown, or
 escaping data is an immediate actionable monitor error.
 
-The child returns exactly one final payload; the subagent runtime delivers it
-to `/root` automatically:
+At terminal state the monitor resolves the controller's live route again and
+sends exactly one final payload through `$hmasd-task-router`:
 
 ```text
 EXPERIMENT_MONITOR
@@ -66,18 +75,16 @@ payload=<result path, direct-error path, or none>
 reason=<one actionable line or none>
 ```
 
-Do not additionally send a collaboration message. Do not create a monitor
-conversation, heartbeat, automation, dashboard, cross-thread relay, or monitor
-state file.
+The terminal send must include the freshly resolved controller `model` and
+`thinking`; omission is forbidden. Do not send an additional message or create
+a heartbeat, automation, dashboard, replacement monitor, or monitor state file.
 
-The controller may keep at most one `wait_agent` call active for this child. If
-it returns before the registered monitor deadline while the child remains
-active, wait on the same child again without an intervening status read, child
-read, sleep, poll, or replacement. At the deadline, perform one direct
-authority/status inspection. If the run is not terminal, stop waiting and close
-the lifecycle as `BLOCKED_MONITOR_TIMEOUT`; do not spawn or dispatch another
-monitor. A user-requested progress read is a separate one-time controller
-inspection and does not replace the child.
+The controller does not poll or sleep while the monitor owns the run. At the
+deadline, if no terminal relay has arrived, perform one direct authority/status
+inspection. If the run is not terminal, close the lifecycle as
+`BLOCKED_MONITOR_TIMEOUT`; do not dispatch another monitor. A user-requested
+progress read is a separate one-time controller inspection and does not replace
+the monitor.
 
 ## Failure Classification and Retry Limit
 

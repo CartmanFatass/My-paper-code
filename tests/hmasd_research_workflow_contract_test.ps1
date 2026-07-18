@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $skillsRoot = Join-Path $repo ".agents/skills"
 $canonicalRoot = Join-Path $repo "docs/project"
-$expectedSkills = @("hmasd-experiment", "hmasd-research-cycle", "hmasd-review-round")
+$expectedSkills = @("hmasd-experiment", "hmasd-research-cycle", "hmasd-review-round", "hmasd-task-router")
 $canonicalDocs = @(
     "CURRENT_WORK.md",
     "ALGORITHM_PRINCIPLES.md",
@@ -46,7 +46,8 @@ foreach ($required in @(
     "Direct controller work is the default",
     "MARL exploration is agile by default",
     "Active-line development is the default",
-    "No Skill recursively triggers itself"
+    "No Skill recursively triggers itself",
+    "`$hmasd-task-router"
 )) {
     if (-not $agents.Contains($required)) {
         throw "AGENTS.md is missing structural contract: $required"
@@ -67,6 +68,8 @@ if ($research -notmatch '(?s)^---.*description:.*explicitly invokes \$hmasd-rese
 $experiment = Read-Text (Join-Path $skillsRoot "hmasd-experiment/SKILL.md")
 $protocol = Read-Text (Join-Path $skillsRoot "hmasd-experiment/references/experiment-protocol.md")
 if (-not $experiment.Contains("references/experiment-protocol.md") -or
+    -not $experiment.Contains("references/monitor-task.json") -or
+    -not $protocol.Contains("Persistent Luna Monitor Task") -or
     -not $protocol.Contains("BLOCKED_MONITOR_TIMEOUT") -or
     -not $protocol.Contains("BLOCKED_REPEATED_OPERATIONAL_FAILURE")) {
     throw "Experiment lifecycle deadline or retry boundary is incomplete"

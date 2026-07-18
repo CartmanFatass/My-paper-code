@@ -44,6 +44,11 @@ Only these conditional workflows exist:
   round, not for one prompt, one returned answer, routine result interpretation,
   literature discussion, or ordinary brainstorming.
 
+One internal transport Skill also exists: `$hmasd-task-router`. It is mandatory
+for every message to an existing Codex task and for every experiment monitor
+session, but it owns only route preservation and delivery. It never starts a
+research, review, or experiment workflow by itself.
+
 No Skill recursively triggers itself from its own result. A valid result alone
 does not start another research iteration. Generic Skills are optional
 techniques; they do not own HMASD planning, delegation, review, Git, memory, or
@@ -86,14 +91,11 @@ implementers and implementation fixers use `gpt-5.6-sol` with `xhigh`
 reasoning. Never change an existing task's model; create a correctly routed
 replacement instead.
 
-When a project workflow sends to an existing Codex task, the call must include
-that task's registered `model` and `thinking` values exactly. Omitting either is
-forbidden because it can replace the target task's routing with the sender's;
-matching the registered pair preserves the model and is not a model change.
-For an external-review Exchange, the registry also mirrors the active
-controller's current model and thinking for the return message. This mirror
-does not select the controller model and must be refreshed from live task
-metadata whenever the user changes it.
+Every message to an existing Codex task and every monitor session must use
+`$hmasd-task-router`; ad hoc cross-task sends are forbidden. The Skill resolves
+the target and controller from live task metadata and requires their exact
+`model` and `thinking` values in any explicit send. Its route snapshots preserve
+user-selected settings and never select or change a model.
 
 Use one implementer for a coupled change. Use two or three only when interfaces
 are frozen and write scopes are disjoint. One file has one writer; the

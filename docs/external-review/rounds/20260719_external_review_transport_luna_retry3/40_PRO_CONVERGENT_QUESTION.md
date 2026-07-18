@@ -13,6 +13,12 @@ review or recommend an algorithm or experiment.
 - `docs/external-review/rounds/20260719_external_review_transport_luna_retry3/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260719_external_review_transport_luna_retry3/30_CONTROLLER_SYNTHESIS.md`
 - `docs/external-review/rounds/20260719_external_review_transport_luna_retry3/31_CONTROLLER_TRANSPORT_CORRECTION.md`
+- `.agents/skills/hmasd-task-router/SKILL.md`
+- `.agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1`
+- `.agents/skills/hmasd-review-round/SKILL.md`
+- `.agents/skills/hmasd-experiment/references/experiment-protocol.md`
+- `.agents/skills/hmasd-experiment/references/monitor-task.json`
+- `tests/hmasd_task_router_contract_test.ps1`
 
 ## Requested decision
 

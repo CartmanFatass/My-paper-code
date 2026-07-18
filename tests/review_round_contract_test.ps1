@@ -10,7 +10,7 @@ $stateScript = Join-Path $repo ".agents/skills/hmasd-review-round/scripts/review
 
 $registryText = Get-Content -LiteralPath $registryPath -Raw
 $registry = $registryText | ConvertFrom-Json
-if ($registry.schema_version -ne 10 -or
+if ($registry.schema_version -ne 11 -or
     $registry.gemini_transport.kind -ne "one_shot_subagent_antigravity_cli" -or
     $registry.gemini_transport.subagent_model -ne "gpt-5.6-terra" -or
     $registry.gemini_transport.reasoning_effort -ne "medium" -or
@@ -18,6 +18,8 @@ if ($registry.schema_version -ne 10 -or
     -not $registry.gemini_transport.state_write_scope.Contains("last_conversations.json") -or
     $registry.pro_transport.kind -ne "role_specific_luna_exchange_in_app_browser" -or
     $registry.pro_transport.dispatch_tool -ne "codex_app__send_message_to_thread" -or
+    $registry.pro_transport.routing_skill -ne ".agents/skills/hmasd-task-router/SKILL.md" -or
+    $registry.pro_transport.route_resolver -ne ".agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1" -or
     $registry.pro_transport.target_route_fields -ne "REQUIRED_EXACT_REGISTERED_VALUES" -or
     $registry.reviewers.open_divergent.transport -ne "luna_exchange_in_app_browser" -or
     $registry.reviewers.open_divergent.codex_exchange.thread_id -ne "019f716c-3c8a-7891-8c89-c94dc94fab4c" -or
@@ -34,7 +36,7 @@ if ($registry.schema_version -ne 10 -or
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("role-specific Luna Exchange", "Codex in-app browser", "schema 4", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "All five fields are mandatory", "registered controller route")) {
+foreach ($required in @("role-specific Luna Exchange", "Codex in-app browser", "schema 4", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "../hmasd-task-router/SKILL.md", "freshly resolved controller route")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }

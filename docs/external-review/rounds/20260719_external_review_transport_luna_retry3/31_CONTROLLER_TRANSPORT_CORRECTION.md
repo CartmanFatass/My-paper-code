@@ -17,3 +17,17 @@ route will be sent. Live task metadata identifies the Exchange route as
 `model=gpt-5.6-sol`, `thinking=ultra`. The Convergent Exchange must use both
 exact route pairs, and the final disposition must decide whether a fresh
 transport-only round is required before algorithm research.
+
+The correction is now centralized in `.agents/skills/hmasd-task-router/`.
+Before a cross-task send it resolves both live routes from the local Codex task
+database, blocks a registry mismatch, and requires the exact five-field send in
+both directions. The external-review and experiment-monitor workflows both
+depend on this Skill.
+
+A new persistent monitor task was created as
+`019f772b-355f-79f3-abbc-2f08800738f8`, with live route
+`gpt-5.6-luna/medium`. A bidirectional transport self-test sent one controller
+route to that task and received exactly one return message. Live metadata after
+the exchange remained `gpt-5.6-sol/ultra` for the controller and
+`gpt-5.6-luna/medium` for the monitor. This proves the shared routing primitive
+without resubmitting either completed divergent review.

@@ -15,6 +15,10 @@ Read only the round's `00_REVIEW_BRIEF.md` and
 `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md` for the neutral Pro
 handoff.
 
+Before any controller-to-Exchange or Exchange-to-controller task message, read
+and follow `../hmasd-task-router/SKILL.md`. It is the sole task-routing contract
+for this workflow.
+
 ## Five Serialized Stages
 
 1. Gemini blind divergent review.
@@ -83,20 +87,12 @@ Reuse the two registered role-specific Luna Exchange tasks. `OPEN_DIVERGENT`
 and `CONVERGENT` each have one fixed Codex task and one fixed ChatGPT Pro URL;
 never substitute, merge, or create a replacement role session.
 
-The controller dispatches one route to the matching Exchange with
-`codex_app__send_message_to_thread` using the registered `hostId`, `threadId`,
-`model`, `thinking`, and `prompt`. All five fields are mandatory. `model` and
-`thinking` must equal the target task's registry values exactly; omitting them
-can replace the target routing with the sender's model, while changing them is
-also forbidden. The prompt contains only the route token, commit, question
-path, raw path, and deadline.
-
-The Exchange's terminal message back to the controller follows the same rule:
-it uses the registry's exact controller `hostId`, `threadId`, `model`, and
-`thinking` plus the terminal payload. Before either direction is used, compare
-both registered routes with live local task metadata. The registry mirrors the
-user-selected controller setting; it never chooses it. A mismatch blocks before
-dispatch until the mirror is refreshed.
+The controller dispatches one route to the matching Exchange through
+`$hmasd-task-router`. The prompt contains only the route token, commit, question
+path, raw path, and deadline. The Exchange's terminal message also goes through
+that Skill using a freshly resolved controller route. The registry contains the
+role-specific expected route and a controller mirror; a live mismatch blocks
+before delivery and is never repaired by changing either task's model.
 
 The Exchange alone operates the Codex in-app browser. It opens the registered
 role-specific URL, verifies the visible `Pro` setting, expands the neutral

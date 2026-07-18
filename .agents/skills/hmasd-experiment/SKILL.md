@@ -1,6 +1,6 @@
 ---
 name: hmasd-experiment
-description: Use only when an authorized HMASD action creates or mutates an experiment contract, package, launch, Terra Medium monitor subagent, failed runtime stage, analysis-only repair, or terminal closure. Do not use for a one-time status read, interpretation of a closed result, or read-only failure location. Completed code never implies training authority.
+description: Use only when an authorized HMASD action creates or mutates an experiment contract, package, launch, persistent Luna Medium monitor assignment, failed runtime stage, analysis-only repair, or terminal closure. Do not use for a one-time status read, interpretation of a closed result, or read-only failure location. Completed code never implies training authority.
 ---
 
 # HMASD Experiment
@@ -11,6 +11,12 @@ Read `docs/project/CURRENT_WORK.md`,
 `references/experiment-protocol.md`. If the lifecycle creates or changes
 executable MARL code, also read
 `docs/project/MARL_ENGINEERING_PRINCIPLES.md`.
+
+Before assigning the persistent monitor, also read
+`../hmasd-task-router/SKILL.md`. Every controller-to-monitor assignment and
+monitor-to-controller terminal relay uses that Skill.
+Read `references/monitor-task.json` for the expected monitor route and the
+controller return mirror; both must match live metadata before assignment.
 
 ## Prepare and Launch
 
@@ -30,10 +36,10 @@ parallelism, host, budget, or algorithm.
 
 ## Monitor, Repair, and Close
 
-Create the single Terra Medium monitor and apply its deadline exactly as defined
-in `references/experiment-protocol.md`. The protocol exclusively owns monitor
-prompt, wait behavior, terminal payload, and retry limit; do not restate or
-invent another monitoring workflow.
+Assign the single registered Luna Medium monitor task and apply its deadline
+exactly as defined in `references/experiment-protocol.md`. The protocol
+exclusively owns monitor prompt, wait behavior, terminal payload, and retry
+limit; do not restate or invent another monitoring workflow.
 
 At terminal delivery, the controller verifies the registered status once and
 reads only the registered result or direct error. Repair only the failed stage.

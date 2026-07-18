@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-19",
+  "monitor_route": {
+    "host_id": "local",
+    "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
+    "model": "gpt-5.6-luna",
+    "thinking": "medium",
+    "title": "HMASD Experiment Monitor — Luna Medium"
+  },
+  "controller_return_route": {
+    "host_id": "local",
+    "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
+    "model": "gpt-5.6-sol",
+    "thinking": "ultra",
+    "source": "live_task_metadata_mirror"
+  },
+  "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
+  "assignment_state": "IDLE"
+}
