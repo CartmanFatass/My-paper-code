@@ -57,6 +57,11 @@ no Chrome, Computer Use, external browser, plugin, MCP, heartbeat, automation,
 shell sleep, response-control button or replacement conversation. A transport
 error is a blocker, not reviewer evidence.
 
+Before Gemini dispatch, verify write access only for its registered conversation
+database, `agentapi.bat`, `cache/last_conversations.json`, and the auxiliary
+files those stores create atomically. A missing precondition blocks before the
+single dispatch; it never authorizes broader `.gemini` access.
+
 ## Round ownership
 
 New multi-review work lives under one round directory:

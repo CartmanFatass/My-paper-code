@@ -70,10 +70,12 @@ state and `11_GEMINI_DIVERGENT_RAW.md`, returns one terminal payload to the
 controller, and is not reused for another round.
 
 Before dispatch, verify that the sandbox identity can update the registered
-Antigravity conversation database and `agentapi.bat`. This is a transport
-precondition, not a reason to grant write access to the whole user profile or
-to run the CLI unsandboxed. If either exact path is not writable, stop before
-dispatch with `BLOCKED_GEMINI_STATE_NOT_WRITABLE`.
+Antigravity conversation database, `agentapi.bat`, and
+`cache/last_conversations.json`, including creation of only their required
+SQLite or atomic-replace auxiliary files. This is a transport precondition, not
+a reason to grant write access to the whole user profile or to run the CLI
+unsandboxed. If any exact path is not writable, stop before dispatch with
+`BLOCKED_GEMINI_STATE_NOT_WRITABLE`.
 
 ## Pro
 

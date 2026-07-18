@@ -9,7 +9,7 @@
     "cli_mode": "interactive_pty",
     "handoff": "single_line_document_pointer",
     "permission_bypass": "FORBIDDEN",
-    "state_write_scope": "registered conversation database plus agentapi.bat only"
+    "state_write_scope": "registered conversation database, agentapi.bat, last_conversations.json, and only their SQLite or atomic-replace auxiliary files"
   },
   "pro_transport": {
     "kind": "role_specific_luna_exchange_in_app_browser",
