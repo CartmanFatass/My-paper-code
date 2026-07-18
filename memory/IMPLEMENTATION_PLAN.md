@@ -435,9 +435,10 @@ classification to semantic success.
 
 ## Task 5: Iteration 5 Spatial Process-Semantics Comparison
 
-Status: launch-ready; integrated controller review, focused checks and the
-reduced three-arm CUDA smoke pass. The formal evidence source is not yet
-launched.
+Status: implementation launch-ready; integrated controller review, focused
+checks and the reduced three-arm CUDA smoke pass. The first formal launch was
+stopped on the user's request before a result and carries no scientific
+disposition. Do not relaunch automatically.
 
 ### HMASD Contract
 

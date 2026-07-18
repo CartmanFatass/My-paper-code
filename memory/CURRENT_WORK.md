@@ -33,11 +33,11 @@ audit passed M0, but F1's strongest skill pair has same-input action-TV CI95
 `[0.046582,0.051259]` and 12-step forced-effect CI95
 `[0.027817,0.069094]`; both upper bounds remain below `1/12`.
 
-Iteration 5 is launch-ready. It replaces the blocked raw-delta view with a
-separate route-only 1-D position process, compares conditional process
-semantics on/off inside the same F0 hierarchy, and retains the unchanged C3
-direct active-set controller on the same carrier. The focused checks and final
-`2 env x 1 update` three-arm CUDA smoke pass; no formal result exists yet.
+Iteration 5 implementation remains launch-ready, but its first formal run at
+`logs/iteration5_spatial_process_semantics_20260719_012002` was stopped on the
+user's request before a terminal result. It carries no scientific evidence or
+portfolio update and must not restart automatically. The focused checks and
+final `2 env x 1 update` three-arm CUDA smoke remain valid engineering evidence.
 
 ## Causal Portfolio
 
@@ -54,16 +54,13 @@ direct active-set controller on the same carrier. The focused checks and final
 
 ## Next Actions
 
-1. Commit and push the accepted Iteration-5 implementation and frozen formal
-   contract as one pre-launch boundary.
-2. Launch the single local-CUDA three-arm evidence source at exactly
-   `16 env x 250 updates x 80 steps` per arm and attach one Terra Medium
-   status-only monitor.
-3. Apply the registered five-way result priority without seed, budget, beta,
-   threshold, task, model or audit rescue.
-4. Interpret the terminal result against C3, C1, C1-null and carrier mismatch,
-   update the portfolio once, and stop the standing five-iteration autonomous
-   boundary.
+1. Preserve the stopped Iteration-5 run without reading partial training as a
+   result or applying any scientific branch.
+2. Keep the accepted implementation and frozen contract available; do not
+   relaunch until the user explicitly resumes this evidence source.
+3. Treat experiment-code efficiency as a separate future engineering review:
+   any accepted optimization is implemented and re-reviewed before a later
+   launch, never folded into scientific disposition.
 
 ## Overnight Autonomous Boundary
 
