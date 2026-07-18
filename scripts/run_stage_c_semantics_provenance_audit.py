@@ -431,8 +431,64 @@ def _forced_metadata_valid(row: Mapping[str, Any]) -> bool:
     )
 
 
+def validate_actor_lineage(
+    actor: Any, natural_rows: Sequence[Mapping[str, Any]]
+) -> dict[str, Any]:
+    """Replay stored natural actions at their exact collection actor inputs."""
+
+    rows = list(natural_rows)
+    if not rows:
+        return {
+            "abs_delta_logp_p95": LINEAGE_THRESHOLD + 1.0,
+            "threshold": LINEAGE_THRESHOLD,
+            "rows": 0,
+            "valid": False,
+        }
+    observations = torch.as_tensor(
+        np.stack([row["observation"] for row in rows]), dtype=torch.float32
+    ).unsqueeze(0)
+    skills = torch.as_tensor(
+        [int(row["natural_skill"]) for row in rows], dtype=torch.long
+    ).unsqueeze(0)
+    actions = torch.as_tensor(
+        [int(row["natural_action"]) for row in rows], dtype=torch.long
+    ).unsqueeze(0)
+    initial_hidden = torch.as_tensor(
+        np.stack([row["actor_hidden_before"] for row in rows]),
+        dtype=torch.float32,
+    )
+    valid_masks = torch.ones((1, len(rows)), dtype=torch.float32)
+    reset_masks = torch.ones((1, len(rows)), dtype=torch.float32)
+    with torch.no_grad():
+        replayed_logp, _ = actor.actor_replay(
+            observations,
+            skills,
+            actions,
+            initial_hidden,
+            valid_masks,
+            reset_masks,
+        )
+    replayed = replayed_logp.detach().cpu().numpy().reshape(-1).astype(np.float64)
+    stored = np.asarray(
+        [float(row["natural_action_log_probability"]) for row in rows],
+        dtype=np.float64,
+    )
+    if replayed.shape != stored.shape or not np.isfinite(replayed).all():
+        raise ValueError("actor lineage replay produced malformed log probabilities")
+    lineage_p95 = float(np.quantile(np.abs(replayed - stored), 0.95))
+    return {
+        "abs_delta_logp_p95": lineage_p95,
+        "threshold": LINEAGE_THRESHOLD,
+        "rows": len(rows),
+        "valid": lineage_p95 <= LINEAGE_THRESHOLD,
+    }
+
+
 def validate_provenance(
-    provenance: Mapping[str, Any], expected_arm: str
+    provenance: Mapping[str, Any],
+    expected_arm: str,
+    *,
+    expected_forced_effects: Any | None = None,
 ) -> dict[str, Any]:
     """Validate the Task 3A leakage-free schema and forced--natural pairing."""
 
@@ -508,6 +564,25 @@ def validate_provenance(
         and all(_forced_metadata_valid(row) for row in forced),
         "prohibited_fields_absent": not _recursive_prohibited_fields(provenance),
     }
+    if expected_forced_effects is not None:
+        try:
+            provenance_effects = np.asarray(
+                [row["forced_effects"] for row in forced], dtype=np.float64
+            )
+            evaluator_effects = np.asarray(
+                expected_forced_effects, dtype=np.float64
+            )
+            ordered_bridge_exact = (
+                provenance_effects.shape == (EXPECTED_FORCED_SOURCES, 3, 2, 4)
+                and evaluator_effects.shape
+                == (EXPECTED_FORCED_SOURCES, 3, 2, 4)
+                and np.array_equal(provenance_effects, evaluator_effects)
+            )
+        except (KeyError, TypeError, ValueError):
+            ordered_bridge_exact = False
+        checks["forced_effects_ordered_bridge_exact"] = bool(
+            ordered_bridge_exact
+        )
     return {
         "valid": all(checks.values()),
         "checks": checks,
@@ -559,10 +634,20 @@ def select_reference_pair(
             energies[f"{left}-{right}"] = float(
                 np.mean(_forced_energy(effects, left, right))
             )
-    selected_name = sorted(energies, key=lambda name: (-energies[name], name))[0]
-    pair = [int(value) for value in selected_name.split("-")]
+    maximum_energy = max(energies.values())
+    maximum_pairs = [
+        name for name in sorted(energies) if energies[name] == maximum_energy
+    ]
+    ambiguous = len(maximum_pairs) != 1
+    pair = (
+        None
+        if ambiguous
+        else [int(value) for value in maximum_pairs[0].split("-")]
+    )
     return {
         "pair": pair,
+        "ambiguous": ambiguous,
+        "maximum_energy_pairs": maximum_pairs,
         "mean_cross_replica_forced_energy": energies,
         "reference_episodes": list(REFERENCE_EPISODES),
         "inference_episodes": list(INFERENCE_EPISODES),
@@ -696,6 +781,84 @@ def _context_only_predictions(
     return predictions
 
 
+def inferential_shuffle_margin_ci(
+    observed_balanced_accuracy: float,
+    null_draws: Mapping[str, np.ndarray],
+) -> list[float]:
+    """Compare the observation against the strongest global or matched null."""
+
+    required_names = ("global", *tuple(FROZEN_STRATA))
+    if not all(name in null_draws for name in required_names):
+        return [0.0, 0.0]
+    arrays = [np.asarray(null_draws[name], dtype=np.float64) for name in required_names]
+    if (
+        not arrays
+        or arrays[0].size == 0
+        or any(array.shape != arrays[0].shape for array in arrays)
+        or any(not np.isfinite(array).all() for array in arrays)
+    ):
+        raise ValueError("shuffle null draws must be finite, non-empty, and aligned")
+    strongest_null = np.max(np.stack(arrays, axis=0), axis=0)
+    margins = float(observed_balanced_accuracy) - strongest_null
+    return [
+        float(np.quantile(margins, 0.025)),
+        float(np.quantile(margins, 0.975)),
+    ]
+
+
+def _ambiguous_reference_analysis(
+    selection: Mapping[str, Any], lineage: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Return a complete finite F payload when no unique reference pair exists."""
+
+    metrics = {
+        "validity_ok": True,
+        "support_ok": False,
+        "policy_lineage_ok": bool(lineage["valid"]),
+        "all_pairs_exact_upper_below_delta": False,
+        "all_pairs_forced_upper_below_delta": False,
+        "frozen_pair_exact_ci": [0.0, 0.0],
+        "frozen_pair_forced_ci": [0.0, 0.0],
+        "stability_pooled_ci": [0.0, 0.0],
+        "stability_stratum_cis": [],
+        "natural_raw_ci": [0.0, 0.0],
+        "natural_nuisance_ci": [0.0, 0.0],
+        "natural_matched_margin_ci": [0.0, 0.0],
+    }
+    return {
+        "metrics": metrics,
+        "reference_selection": dict(selection),
+        "same_input_action_tv_ci": {},
+        "persistent_process_dependence_ci": {},
+        "reference_centroids": {"exact": {}, "forced": {}},
+        "stability": {
+            "pooled_decision_ci": [0.0, 0.0],
+            "pooled_exact_ci": [0.0, 0.0],
+            "pooled_forced_ci": [0.0, 0.0],
+            "pooled_episodes": 0,
+            "pooled_forced_snapshots": 0,
+            "pooled_supported": False,
+            "strata": {},
+        },
+        "natural_overlap": {
+            "selected_segments": 0,
+            "segments_per_skill": {},
+            "episodes_per_skill": {},
+            "raw_distance_margin_ci": [0.0, 0.0],
+            "raw_decision_ci": [0.0, 0.0],
+            "balanced_accuracy": 0.0,
+            "balanced_accuracy_ci": [0.0, 0.0],
+            "context_only_balanced_accuracy": 0.0,
+            "skill_prior_balanced_accuracy": 0.0,
+            "nuisance_margin_ci": [0.0, 0.0],
+            "matched_shuffle_margin_ci": [0.0, 0.0],
+            "shuffle_nulls": {},
+        },
+        "policy_lineage": dict(lineage),
+        "support_ok": False,
+    }
+
+
 def analyze_semantics(
     provenance: Mapping[str, Any], actor: Any
 ) -> dict[str, Any]:
@@ -705,6 +868,10 @@ def analyze_semantics(
     forced_sources = list(provenance["forced_sources"])
     selection = select_reference_pair(forced_sources)
     pair = selection["pair"]
+    if pair is None:
+        return _ambiguous_reference_analysis(
+            selection, validate_actor_lineage(actor, natural_rows)
+        )
     reference = [
         row for row in forced_sources if int(row["episode_id"]) in REFERENCE_EPISODES
     ]
@@ -1019,29 +1186,12 @@ def analyze_semantics(
                 "mean": float(np.mean(draws)),
                 "upper": float(np.quantile(draws, 0.975)),
             }
-    matched_margin_ci = [0.0, 0.0]
-    matched_names = tuple(FROZEN_STRATA)
-    if all(name in null_draws for name in matched_names):
-        strongest_null = np.max(
-            np.stack([null_draws[name] for name in matched_names], axis=0), axis=0
-        )
-        margins = observed_balanced_accuracy - strongest_null
-        matched_margin_ci = [
-            float(np.quantile(margins, 0.025)),
-            float(np.quantile(margins, 0.975)),
-        ]
+    matched_margin_ci = inferential_shuffle_margin_ci(
+        observed_balanced_accuracy, null_draws
+    )
 
-    lineage_deltas = []
-    for row in natural_rows:
-        probabilities = np.asarray(row["primitive_probabilities"], dtype=np.float64)
-        action = int(row["natural_action"])
-        lineage_deltas.append(
-            abs(
-                math.log(float(probabilities[action]))
-                - float(row["natural_action_log_probability"])
-            )
-        )
-    lineage_p95 = float(np.quantile(lineage_deltas, 0.95))
+    lineage = validate_actor_lineage(actor, natural_rows)
+    lineage_p95 = float(lineage["abs_delta_logp_p95"])
     support_ok = bool(stability_support_ok and natural_support_ok)
     selected_name = f"{pair[0]}-{pair[1]}"
     metrics = {
@@ -1102,11 +1252,7 @@ def analyze_semantics(
             "matched_shuffle_margin_ci": matched_margin_ci,
             "shuffle_nulls": null_summaries,
         },
-        "policy_lineage": {
-            "abs_delta_logp_p95": lineage_p95,
-            "threshold": LINEAGE_THRESHOLD,
-            "valid": lineage_p95 <= LINEAGE_THRESHOLD,
-        },
+        "policy_lineage": lineage,
         "support_ok": support_ok,
     }
 
@@ -1326,7 +1472,17 @@ def collect_arm(source: Mapping[str, Any], expected_arm: str, device: torch.devi
     )
     parity = validate_registered_parity(source["result"], evaluation)
     provenance_payload = evaluation.get("semantic_provenance", {})
-    provenance = validate_provenance(provenance_payload, expected_arm)
+    evaluation_forced_audit = evaluation.get("forced_audit")
+    expected_forced_effects = (
+        evaluation_forced_audit.get("effects", ())
+        if isinstance(evaluation_forced_audit, Mapping)
+        else ()
+    )
+    provenance = validate_provenance(
+        provenance_payload,
+        expected_arm,
+        expected_forced_effects=expected_forced_effects,
+    )
     guards["strict_model_only_restore"] = strict_restore
     source_tensors_unchanged = _tensors_unchanged(checkpoint, source_tensor_records)
     valid = bool(

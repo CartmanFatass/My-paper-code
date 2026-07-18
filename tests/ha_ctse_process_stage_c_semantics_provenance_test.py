@@ -833,3 +833,222 @@ def test_guarded_evaluation_preserves_global_rng_model_tensors_grads_and_modes()
     }
     runner.assert_model_state_equal(before_model, runner.model_state_snapshot(owner))
     _assert_global_rng_equal(before_rng, _global_rng_state())
+
+
+def _small_event_actor(*, seed=17058):
+    from ha_ctse_process.variable_roster_event import EventLowActor
+
+    torch.manual_seed(seed)
+    actor = EventLowActor(
+        obs_dim=2,
+        n_skills=3,
+        action_dim=3,
+        hidden_dim=2,
+        action_space_type="discrete",
+        device="cpu",
+    )
+    actor.eval()
+    return actor
+
+
+def _align_stored_policy_rows_with_actor(provenance, actor):
+    runner = _runner()
+    natural_rows = provenance["natural_rows"]
+    replayed = runner.counterfactual_action_distributions(actor, natural_rows)
+    forced_by_key = {
+        _shared_key(row): row for row in provenance["forced_sources"]
+    }
+    for index, natural in enumerate(natural_rows):
+        probabilities = replayed[index, int(natural["natural_skill"])].tolist()
+        log_probability = float(
+            math.log(probabilities[int(natural["natural_action"])])
+        )
+        for row in (natural, forced_by_key[_shared_key(natural)]):
+            row["primitive_probabilities"] = probabilities
+            row["natural_action_log_probability"] = log_probability
+
+
+def _distinct_forced_effects():
+    effects = np.zeros((128, 3, 2, 4), dtype=np.float64)
+    effects[:, 1, :, 0] = 0.1
+    effects[:, 2, :, 1] = 0.4
+    return effects
+
+
+def test_policy_lineage_replays_stored_actions_through_the_restored_actor():
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    collection_actor = _small_event_actor()
+    _align_stored_policy_rows_with_actor(provenance, collection_actor)
+
+    matching = runner.validate_actor_lineage(
+        collection_actor, provenance["natural_rows"]
+    )
+    assert matching["valid"] is True
+    assert matching["abs_delta_logp_p95"] <= runner.LINEAGE_THRESHOLD
+
+    drifted_actor = deepcopy(collection_actor)
+    with torch.no_grad():
+        drifted_actor.actor_act.action_out.linear.weight.zero_()
+        drifted_actor.actor_act.action_out.linear.bias.copy_(
+            torch.tensor([8.0, -8.0, -8.0])
+        )
+    drifted = runner.validate_actor_lineage(
+        drifted_actor, provenance["natural_rows"]
+    )
+
+    assert all(runner._row_probability_valid(row) for row in provenance["natural_rows"])
+    assert drifted["valid"] is False
+    assert drifted["abs_delta_logp_p95"] > math.log(1.2)
+
+
+def test_provenance_requires_exact_ordered_bridge_to_evaluator_forced_effects():
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    expected_effects = np.asarray(
+        [row["forced_effects"] for row in provenance["forced_sources"]],
+        dtype=np.float64,
+    )
+
+    exact = runner.validate_provenance(
+        provenance,
+        "f1",
+        expected_forced_effects=expected_effects,
+    )
+    assert exact["valid"] is True
+    assert exact["checks"]["forced_effects_ordered_bridge_exact"] is True
+
+    mismatched = deepcopy(provenance)
+    mismatched["forced_sources"][1]["forced_effects"][0][0][0] += 1e-12
+    report = runner.validate_provenance(
+        mismatched,
+        "f1",
+        expected_forced_effects=expected_effects,
+    )
+
+    assert report["valid"] is False
+    assert report["checks"]["forced_effects_ordered_bridge_exact"] is False
+
+
+def test_global_shuffle_null_is_included_in_the_inferential_f_gate():
+    runner = _runner()
+    observed = 0.6
+    draws = {
+        "global": np.asarray([0.59, 0.61] * 50, dtype=np.float64),
+        **{
+            name: np.full(100, 0.2, dtype=np.float64)
+            for name in runner.FROZEN_STRATA
+        },
+    }
+    matched_only = observed - np.max(
+        np.stack([draws[name] for name in runner.FROZEN_STRATA], axis=0),
+        axis=0,
+    )
+    assert float(np.quantile(matched_only, 0.025)) > 0.0
+
+    inferential_ci = runner.inferential_shuffle_margin_ci(observed, draws)
+
+    assert inferential_ci[0] < 0.0 < inferential_ci[1]
+    metrics = _decision_metrics(natural_matched_margin_ci=inferential_ci)
+    assert runner.frozen_outcome(metrics) == "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
+
+
+def test_exact_reference_energy_tie_is_ambiguous_and_fails_closed(monkeypatch):
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    actor = _small_event_actor()
+    monkeypatch.setattr(runner, "BOOTSTRAP_REPETITIONS", 8)
+
+    selected = runner.select_reference_pair(provenance["forced_sources"])
+    analysis = runner.analyze_semantics(provenance, actor)
+
+    assert selected["pair"] is None
+    assert selected["ambiguous"] is True
+    assert analysis["reference_selection"] == selected
+    assert analysis["metrics"]["support_ok"] is False
+    assert (
+        runner.frozen_outcome(analysis["metrics"])
+        == "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
+    )
+
+
+def test_synthetic_orchestration_joins_collection_validation_analysis_and_outputs(
+    monkeypatch,
+    tmp_path,
+):
+    from ha_ctse_process import variable_roster_event
+
+    runner = _runner()
+    actor = _small_event_actor(seed=17059)
+    owner = SimpleNamespace(
+        commitment_model=torch.nn.Linear(2, 2),
+        event_critic=torch.nn.Linear(2, 1),
+        low_actor=actor,
+        low_critic=torch.nn.Linear(2, 1),
+    )
+    provenance = _synthetic_provenance()
+    effects = _distinct_forced_effects()
+    for row, row_effects in zip(provenance["forced_sources"], effects):
+        row["forced_effects"] = row_effects.tolist()
+    _align_stored_policy_rows_with_actor(provenance, actor)
+
+    registered, evaluation = _registered_evaluation()
+    registered["forced_audit"]["effects"] = effects.tolist()
+    evaluation["forced_audit"]["effects"] = effects.tolist()
+    evaluation["semantic_provenance"] = deepcopy(provenance)
+    source = _source_bundle("f1")
+    source["result"].update(registered)
+
+    monkeypatch.setattr(runner, "_construct_model_owner", lambda *_args: owner)
+    monkeypatch.setattr(
+        variable_roster_event,
+        "restore_event_model_only_checkpoint",
+        lambda _checkpoint, *, model_owner: (
+            {
+                "high": {"schema_version": 1, "enabled": False, "kind": "identity"},
+                "low": {"schema_version": 1, "enabled": False, "kind": "identity"},
+            },
+            320_000,
+            250,
+        ),
+    )
+    monkeypatch.setattr(
+        process_train,
+        "_evaluate_event_model",
+        lambda _owner, **_kwargs: deepcopy(evaluation),
+    )
+    monkeypatch.setattr(runner, "BOOTSTRAP_REPETITIONS", 12)
+
+    collection = runner.collect_arm(source, "f1", torch.device("cpu"))
+    analysis = runner.analyze_semantics(collection["raw_provenance"], actor)
+    outcome = runner.frozen_outcome(analysis["metrics"])
+    raw_f0 = deepcopy(collection["raw_provenance"])
+    for row in (*raw_f0["natural_rows"], *raw_f0["forced_sources"]):
+        row["arm"] = "f0"
+    output_root = tmp_path / "synthetic-audit"
+    runner.write_audit_outputs(
+        output_root,
+        {"f0": raw_f0, "f1": collection["raw_provenance"]},
+        {"schema_version": 1, "outcome": outcome, "analysis": analysis},
+    )
+
+    assert collection["valid"] is True
+    assert collection["identity"]["valid"] is True
+    assert collection["parity"]["valid"] is True
+    assert collection["provenance"]["valid"] is True
+    assert collection["provenance"]["checks"][
+        "forced_effects_ordered_bridge_exact"
+    ] is True
+    assert collection["guard_checks"]["strict_model_only_restore"] is True
+    assert analysis["policy_lineage"]["valid"] is True
+    assert outcome == "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
+    assert sorted(
+        path.relative_to(output_root).as_posix()
+        for path in output_root.rglob("*")
+        if path.is_file()
+    ) == [
+        "raw/f0_provenance.pt",
+        "raw/f1_provenance.pt",
+        "result/iteration4_provenance_audit.json",
+        "runner_status.txt",
+    ]
