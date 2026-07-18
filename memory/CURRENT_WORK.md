@@ -33,6 +33,12 @@ audit passed M0, but F1's strongest skill pair has same-input action-TV CI95
 `[0.046582,0.051259]` and 12-step forced-effect CI95
 `[0.027817,0.069094]`; both upper bounds remain below `1/12`.
 
+The registered Convergent Pro follow-up is accepted with controller
+modification: its causal update and C3/C1 ranking stand, but its exact
+`[action, raw observation delta]` C1 training view is blocked because the
+current carrier has no clean task-neutral process channel. No C1 code or
+experiment is authorized until that input boundary is replaced.
+
 ## Causal Portfolio
 
 - **C3 / hierarchy-null active-set control:** strengthened empirical leader and
@@ -57,10 +63,13 @@ audit passed M0, but F1's strongest skill pair has same-input action-TV CI95
    reanalyze these checkpoints, append episodes, merge strata or reinterpret
    natural classification as semantic success.
 4. Before iteration 5 implementation, compare at least C3 and a genuinely
-   semantic-creation C1 architecture. The next evidence must test creation of a
-   material environment-agnostic `z -> behavior` effect and retain the direct
-   active-set controller as the ordinary-MARL objection; C2 and credit remain
-   unavailable as rescue routes.
+   semantic-creation C1 architecture. First freeze a clean local process view:
+   primitive actions, raw Generic-SHORT observation deltas, recurrent hidden
+   state and hard-coded task-coordinate slices are not valid positive targets.
+   If real task-neutral action consequences require a new spatial carrier, C3
+   must be evaluated on that same carrier. The next evidence must test creation
+   of a material environment-agnostic `z -> behavior` effect; C2 and credit
+   remain unavailable as rescue routes.
 
 ## Overnight Autonomous Boundary
 
@@ -164,3 +173,5 @@ audit passed M0, but F1's strongest skill pair has same-input action-TV CI95
   preceding implementation-plan review.
 - `docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/` —
   closed iteration-2 portfolio review and authorized reanalysis boundary.
+- `docs/external-review/gpt5_6_pro/20260718_iteration4_semantic_null_convergence/`
+  — accepted Iteration 4 convergent follow-up and modified C1 boundary.
