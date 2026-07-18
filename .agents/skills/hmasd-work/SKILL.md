@@ -1,6 +1,6 @@
 ---
 name: hmasd-work
-description: Orchestrate an explicitly requested or genuinely collaboration-dependent HMASD multi-file core algorithm, trainer, or runtime change through one controller design, one canonical brief, bounded implementers, and one combined reviewer. Do not use for explanations, status or progress, read-only inspection, bounded diagnosis, single-file edits, simple bugs, ordinary Git or documentation, prompt generation, experiment-need decisions, routine continuation, or work the controller can complete efficiently without collaboration.
+description: Orchestrate an HMASD core implementation only when the user explicitly invokes $hmasd-work or the controller will delegate a coupled change spanning at least two implementation files to an implementer and one combined reviewer. Do not use for direct controller work, explanations, status, read-only diagnosis, one-file changes, Git/docs, prompts, result interpretation, or routine continuation.
 ---
 
 # HMASD Work
@@ -10,19 +10,24 @@ first and do not change another task's controller ownership.
 
 ## Activation Boundary
 
-Direct controller work is the default. Do not activate for explanation, status,
-bounded inspection or diagnosis, one-file work, simple bugs, ordinary Git/docs,
-prompt generation, experiment-need decisions, or routine continuation. Activate
-only when the user names `$hmasd-work` or a multi-file core change genuinely
-benefits from a brief plus implementer/reviewer separation.
+Direct controller work is the default. Activate only when either condition is
+true:
+
+1. the user explicitly names `$hmasd-work`; or
+2. the controller will delegate a coupled core change that writes at least two
+   implementation files to an implementer and will use one combined reviewer.
+
+Otherwise do not create a brief, implementer or reviewer. A documentation-only
+change never satisfies condition 2; explicit user invocation still satisfies
+condition 1.
 
 Never parallelize competing algorithms or formal experiments. Never change the
 controller or another conversation's model.
 
 ## Freeze the Controller Design
 
-The active controller uses the strongest available model and decides before
-delegation:
+The current user-selected controller model is fixed. Never change it or select a
+replacement automatically. The active controller decides before delegation:
 
 - the core algorithm and causal hypothesis;
 - the network and training architecture;
@@ -64,10 +69,22 @@ Return `BLOCKED` on a real conflict or missing authority.
 
 Read `references/collaboration-protocol.md` before delegating.
 
-Use one writer per file, one implementer for a coherent change, and bounded
-implementers only for independent disjoint packages. After the stable combined
-diff, use one fresh read-only reviewer and at most one repair/re-review pass.
-Task states are only `BLOCKED`, `PACKAGE_READY`, `REVIEW_READY`, and `COMPLETE`.
+Use one writer per file and one implementer by default. Multiple implementers
+are allowed only when `BRIEF.md` gives them disjoint exclusive file lists and
+frozen interfaces. After every writer has stopped, use one fresh read-only
+reviewer and at most one repair/re-review pass.
+
+Task states have these exact conditions:
+
+- `BLOCKED`: a named contract conflict, missing authority, file collision or
+  required scope expansion prevents the assigned work;
+- `PACKAGE_READY`: the package changed only its exclusive files and its one
+  registered check exited zero or the brief explicitly registered `Check: none`;
+- `REVIEW_READY`: every package is `PACKAGE_READY`, no writer remains active,
+  and the controller has listed the complete intended diff and check evidence;
+- `COMPLETE`: the reviewer returned `APPROVED` or the controller disposed every
+  finding, inspected the final diff/evidence, removed the temporary brief and
+  performed only an already-authorized project boundary action.
 
 The controller alone edits root memory, integrates Git, authorizes experiments,
 interprets scientific evidence, and reports to the user.
@@ -76,8 +93,10 @@ interprets scientific evidence, and reports to the user.
 
 Apply the research and runtime invariants from `AGENTS.md`. Do not copy generic
 rules into the brief; record only the task-specific invariants needed to prevent
-semantic drift. Ordinary implementation gets one necessary direct behavioral
-check. Repair only a concrete failed boundary and never reinterpret a valid
+semantic drift. The default is no new test. Register exactly one focused command
+only when the brief names a concrete corruption or wrong-experiment risk that
+the next authorized run cannot expose cheaply; otherwise write `Check: none`.
+Repair only a concrete failed boundary and never reinterpret a valid
 scientific failure as an engineering rescue. Performance remains ordinary code
 quality, not a separate gate or reviewer.
 

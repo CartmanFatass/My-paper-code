@@ -6,8 +6,11 @@ Use one active root controller in the project directory. The controller owns
 root memory, Git, scientific interpretation, experiment authority, and the
 user-facing result.
 
-Direct controller work is the default. When collaboration is justified, the
-controller uses the strongest available model and retains all decisions about
+Direct controller work is the default. Collaboration exists only when the user
+explicitly invokes the Skill or the controller delegates a coupled change that
+writes at least two implementation files and uses a combined reviewer. The
+current user-selected controller model is fixed; it is never changed or replaced
+automatically. The controller retains all decisions about
 the algorithm, architecture, causal route, reuse/replacement/deletion, data and
 gradient flow, invariants, stability targets, and evidence boundary. These
 decisions are frozen in the brief before implementation.
@@ -21,19 +24,20 @@ decisions are frozen in the brief before implementation.
 
 ## Work Shapes
 
-Use one implementer for a coherent core implementation. The implementer has
+Use one implementer by default. The implementer has
 engineering judgment inside the frozen design, but does not select the route,
 add mechanisms, reinterpret the experiment, or expand scope. A real mismatch
 between design and code returns `BLOCKED` to the controller.
 
-Use bounded implementers only for genuinely independent work packages with
-disjoint files and a controller-frozen interface. One file never has two
-writers. Do not create a mapper or automatic delegation stage.
+Use multiple implementers only when the brief lists mutually disjoint exclusive
+file sets and a controller-frozen interface for each package. One file never has
+two writers. Do not create a mapper or automatic delegation stage.
 
 ## Reviewer
 
-Use one fresh combined reviewer for the complete stable diff, focused evidence,
-brief, and necessary contract. The reviewer is read-only and returns either
+Start review only after every writer has stopped and the controller has listed
+the complete intended diff and check evidence. Use one fresh combined reviewer
+for that diff, brief, and necessary contract. The reviewer is read-only and returns either
 `APPROVED` or findings tied to paths and contract clauses. Send accepted
 findings directly to the owning implementer. Allow one repair/re-review loop.
 
@@ -48,9 +52,13 @@ additional reviewer.
 
 - `BLOCKED`: contract conflict, missing authority, file collision, or required
   scope expansion.
-- `PACKAGE_READY`: one disjoint package is stable for integration.
-- `REVIEW_READY`: the combined diff and direct evidence are stable.
-- `COMPLETE`: the controller integrated and closed the task.
+- `PACKAGE_READY`: the package changed only its exclusive files and its
+  registered check exited zero, or the brief explicitly says `Check: none`.
+- `REVIEW_READY`: every package is `PACKAGE_READY`, no writer remains active,
+  and the controller listed the complete intended diff and check evidence.
+- `COMPLETE`: the reviewer returned `APPROVED` or the controller disposed every
+  finding, the controller inspected the final diff/evidence, and the temporary
+  brief was removed.
 
 Do not send heartbeat, unchanged-state, or ordinary file-completion messages.
 Direct messages should carry only interfaces, findings, or one of these states.

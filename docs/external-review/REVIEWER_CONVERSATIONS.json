@@ -1,7 +1,15 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "updated": "2026-07-18",
   "reviewers": {
+    "gemini_divergent": {
+      "role": "GEMINI_DIVERGENT",
+      "session_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
+      "conversation_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
+      "expected_model": "Gemini 3.1 Pro (High)",
+      "transport": "antigravity_cli",
+      "session_frozen": true
+    },
     "open_divergent": {
       "role": "OPEN_DIVERGENT",
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",

@@ -1,6 +1,6 @@
 ---
 name: hmasd-experiment
-description: Prepare, launch, create or change persistent monitoring for, repair, or formally close an authorized HMASD smoke test, formal experiment, scale run, or analysis-only rerun. Use for real experiment lifecycle operations, including terminal closure that pauses monitoring, applies the registered branch, and records the result boundary. Do not use for a one-time status read, reading or interpreting an already closed result, simple monitor diagnosis, or ordinary failure-location check. Do not infer training authority from completed code.
+description: Use only when an authorized HMASD action creates or mutates an experiment contract, package, launch, persistent monitor, failed runtime stage, analysis-only repair, or terminal closure. Do not use for a one-time status read, interpretation of an already closed result, or read-only failure location. Completed code never implies training authority.
 ---
 
 # HMASD Experiment
@@ -34,32 +34,44 @@ Implementation completion alone never launches a run.
 ## Monitor One Run
 
 Create the persistent project-local monitor conversation as `Luna High`, then
-freeze that model for its lifetime. Reuse that one monitor conversation and one
+freeze that model for its lifetime. At activation, initialize
+`logs/<run-id>/monitor_state.json` only through
+`scripts/monitor_state.ps1`; it is the durable handoff authority. Reuse that one monitor conversation and one
 heartbeat schedule targeting it; never change the model of an existing monitor
 and never attach model/thinking overrides to heartbeat updates. At activation,
 freeze the exact controller thread,
 monitor thread, automation id and run id in the prompt. Each wake performs one
 bounded read of the authoritative status. The monitor is read-only with respect
-to the repository and run: it never edits, tests, restarts, or interprets
-science. Its only allowed mutation is the registered heartbeat's cadence,
-prompt and status. Routine dashboards remain in that conversation.
+to code, scientific artifacts and process state: it never edits code/results,
+tests, restarts, or interprets science. Its only allowed writes are the exact
+run's `monitor_state.json` through the state script and the registered
+heartbeat's cadence, prompt and status. Routine dashboards remain in that
+conversation.
 
-Never use unguarded cross-thread messaging for terminal relay: the desktop
-runtime has been observed applying sender settings when target settings are
-omitted. On completion, explicit failure, or monitor error, use the guarded
-direct format in
-`references/experiment-protocol.md`: resolve the controller's live model and
-effort while it is idle, supply them explicitly with host and thread ID, then
-verify they remain unchanged. If the controller is active, leave the heartbeat
-active for the next bounded attempt. After confirmed delivery, pause it and verify
-`PAUSED`. A stable `handoff_id` makes duplicate delivery a no-op. Never use a
-message to repair a settings mismatch, and never read or interpret the result in
-the monitor.
+Never use unguarded cross-thread messaging for terminal relay. The frozen
+controller host/thread/model/effort recorded in `monitor_state.json` is the
+routing authority; do not infer settings from the sender or conversation prose.
+Use `codex_app__list_threads` to require that exact target and an idle status,
+then send the guarded direct format in `references/experiment-protocol.md`. If
+the target is running or absent, leave the heartbeat active. Record the returned
+controller turn ID confirmed by `codex_app__read_thread`, then pause the exact
+automation and confirm `PAUSED` through an update plus view call and its exact
+`automation.toml`. Advance monitor state only from those durable observations.
+A closed `handoff_id` makes duplicate delivery a no-op. Never use a message to
+repair a registry mismatch, and never read or interpret the result in the monitor.
 
 The required call shape is
 `send_message_to_thread({hostId, threadId, model: target_model, thinking:
 target_effort, prompt})`; none of the four routing/settings fields may be
 omitted.
+
+Initialize monitor state only after the heartbeat is active; the script freezes
+its config path, status and `updated_at` as the activation baseline. Relay with
+`-ReadThreadReceipt
+"host=<controller-host>;thread=<controller-thread>;turn=<turn-uuid>;handoff=<handoff-id>"`.
+The pause transition must observe a newer `automation.toml` update occurring
+after that relay. A closed state validates its stored receipt and is unaffected
+when the same heartbeat is later reactivated for another run.
 
 ## Diagnose and Close
 
@@ -73,7 +85,7 @@ may stop the run and repair the engineering path directly. This is runtime
 judgment, not a performance gate, new threshold, extra smoke, or authorization
 to change the registered algorithm or experiment contract.
 
-On a valid terminal result, read the registered result once, apply the existing
+On a valid terminal result, require monitor state `CLOSED`, read the registered result once, apply the existing
 outcome branch without rescue, update the owning experiment record, and create
 one result/disposition Git boundary. A negative scientific result remains
 binding.

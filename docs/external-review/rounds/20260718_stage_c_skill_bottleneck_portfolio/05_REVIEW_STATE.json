@@ -1,52 +1,71 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "round_id": "20260718_stage_c_skill_bottleneck_portfolio",
-  "updated_at": "2026-07-18T11:03:34.1325066+08:00",
+  "updated_at": "2026-07-18T11:44:09.6650282+08:00",
   "stages": {
     "gemini_divergent": {
       "state": "BLOCKED",
       "route_token": null,
+      "dispatch_receipt": null,
       "dispatched_at": null,
       "completion_receipt": null,
       "completed_at": null,
       "artifact_path": "11_GEMINI_DIVERGENT_RAW.md",
-      "blocker": "BLOCKED_EXTERNAL_SOURCE_CONSENT: local-source allowlist has no explicit informed approval"
+      "blocker": "BLOCKED_EXTERNAL_SOURCE_CONSENT: local-source allowlist has no explicit informed approval",
+      "blocker_resolution": null
     },
     "open_pro": {
       "state": "BLOCKED",
       "route_token": null,
+      "dispatch_receipt": null,
       "dispatched_at": null,
       "completion_receipt": null,
       "completed_at": null,
       "artifact_path": "21_PRO_OPEN_RAW.md",
-      "blocker": "BLOCKED_UNVERIFIED_RAW: 21_PRO_OPEN_RAW.md has no matching Exchange receipt or identified manual source"
+      "blocker": "BLOCKED_UNVERIFIED_RAW: 21_PRO_OPEN_RAW.md has no matching Exchange receipt or identified manual source",
+      "blocker_resolution": null
     },
     "controller_synthesis": {
       "state": "NOT_STARTED",
       "route_token": null,
+      "dispatch_receipt": null,
       "dispatched_at": null,
       "completion_receipt": null,
       "completed_at": null,
       "artifact_path": "30_CONTROLLER_SYNTHESIS.md",
-      "blocker": null
+      "blocker": null,
+      "blocker_resolution": null
     },
     "convergent_pro": {
       "state": "NOT_STARTED",
       "route_token": null,
+      "dispatch_receipt": null,
       "dispatched_at": null,
       "completion_receipt": null,
       "completed_at": null,
       "artifact_path": "41_PRO_CONVERGENT_RAW.md",
-      "blocker": null
+      "blocker": null,
+      "blocker_resolution": null
     },
     "controller_disposition": {
       "state": "NOT_STARTED",
       "route_token": null,
+      "dispatch_receipt": null,
       "dispatched_at": null,
       "completion_receipt": null,
       "completed_at": null,
       "artifact_path": "50_DISPOSITION.md",
-      "blocker": null
+      "blocker": null,
+      "blocker_resolution": null
     }
+  },
+  "round_status": "ACTIVE",
+  "external_source_consent": {
+    "state": "PENDING",
+    "manifest_path": "docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/02_GEMINI_LOCAL_SOURCE_MANIFEST.md",
+    "manifest_commit": null,
+    "destination": null,
+    "approval_receipt": null,
+    "approved_at": null
   }
 }

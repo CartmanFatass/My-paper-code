@@ -27,17 +27,25 @@ write scope.
 
 ## Unified Collaboration Workflow
 
-Direct controller work is the default. Explanations, status, bounded inspection
-or diagnosis, small edits, simple bugs, ordinary Git/docs, prompt generation,
-and routine continuation use no Skill, brief, subagent, or reviewer.
+Direct controller work is the default. Use no project Skill when the task does
+not create or mutate collaboration state, experiment lifecycle state, or a
+tracked external-review round, unless the user explicitly invokes a matching
+Skill. In particular, without such explicit invocation, explanations, status reads,
+read-only diagnosis, one-file changes, Git/docs, prompt generation, result
+interpretation, and routine continuation stay direct.
 
-Use one matching project Skill only when its full lifecycle is required:
+Activate exactly one matching project Skill only under its observable trigger:
 
-- `$hmasd-work`: collaboration-dependent multi-file core implementation;
-- `$hmasd-experiment`: real experiment launch, monitoring, repair, or closure;
-- `$hmasd-review-round`: a complete tracked Gemini/Pro review round.
+- `$hmasd-work`: the user names it, or the controller will delegate a coupled
+  core change spanning at least two implementation files to an implementer and
+  a combined reviewer;
+- `$hmasd-experiment`: the action creates or mutates an experiment contract,
+  package, launch, persistent monitor, failed runtime stage, or terminal closure;
+- `$hmasd-review-round`: the action creates or resumes a tracked five-stage
+  round governed by `05_REVIEW_STATE.json`.
 
-The active controller uses the strongest available model and alone decides the
+The user-selected active controller model is fixed for the task; never select,
+upgrade, downgrade, or repair it automatically. The active controller alone decides the
 algorithm, architecture, causal route, reuse/replacement, data and gradient
 flow, invariants, and stability goals. Implementers execute that frozen design;
 reviewers inspect it. Detailed mechanics live only in the matching Skill and its
@@ -108,8 +116,12 @@ controller owns `aggressive`, push with `git push My-paper-code aggressive`. If
 Git/MSYS fails with a Win32 pipe or permission error, retry that exact command
 with scoped escalation.
 
-Use one stable pre-launch commit/push and one terminal result/disposition
-boundary. Do not commit progress pointers, dry runs, or wording alone; runtime
+The only default project boundaries are: accepted core implementation,
+pre-launch, terminal experiment result/disposition, one pre-convergent
+external-evidence package when the reviewer requires Git-visible inputs,
+accepted external-review disposition, and explicit controller handoff. Use one stable pre-launch
+commit/push and one terminal result/disposition boundary. Do not commit progress
+pointers, dry runs, or wording alone; runtime
 state stays in `logs/`. Batch related docs, and switch once to an exact fallback
 if an edit method is rejected. Generate a timestamp once at real launch; dry
 runs use `DRY_RUN`.
@@ -139,8 +151,9 @@ expected wall clock, placement, and status authority.
 
 Formal experiments use CUDA and parallel execution sized for the wall-clock
 target. Do not silently fall back to CPU or serial execution. Reuse a known
-parallel topology; diagnose topology only after an actual launch failure or for
-a genuinely new workload shape.
+parallel topology; diagnose topology only after an actual launch failure or when
+the registered collector backend, environment count, or memory envelope has no
+known-good topology.
 
 Long, multi-seed, or heavy work defaults to cloud data storage and a background
 runner. An explicit authorization and contract may place bounded work on local
@@ -164,11 +177,13 @@ unless the fact changed, blocks the next action, or the user asked.
 
 ## External Review
 
-Use `$hmasd-review-round` only for a cross-round architecture contradiction, a
-coherent route connected to the final variable-team plus variable-lifetime
-algorithm, or a critical promotion or retirement boundary that the registered
-contract cannot settle; routine prompts and registered PASS/FAIL interpretation
-stay direct. Gemini and open Pro are blind divergent reviewers with equal
+Use `$hmasd-review-round` only when the controller creates or resumes its full
+tracked five-stage round. A new round may address a cross-round architecture
+contradiction, a route connected to the final variable-team plus
+variable-lifetime algorithm, or a promotion/retirement boundary that the
+registered contract cannot settle. Routine prompts, one returned review,
+literature discussion, and registered PASS/FAIL interpretation stay direct.
+Gemini and open Pro are blind divergent reviewers with equal
 standing; controller synthesis precedes convergent Pro. Reviewers recommend but
 never authorize code, experiments, promotion, disposition, or a unique legal
 research direction.
@@ -179,7 +194,9 @@ in parallel. Pro transport uses the Skill's guarded direct format with explicit
 target host/thread/model/effort and pre/post identity checks. Archive every raw
 before interpretation; missing or ambiguous raw is incomplete evidence. Private
 local-source transfer to an external reviewer requires explicit informed
-approval for its allowlist. Other transport and recovery mechanics live only in
+approval recorded against the exact allowlist path, Git commit, destination and
+user-message reference. Any allowlist change invalidates that approval. Other
+transport and recovery mechanics live only in
 `$hmasd-review-round` and its protocol.
 
 ## State and Memory
@@ -191,7 +208,9 @@ Keep the four root memory files compact and current:
 - `IMPLEMENTATION_PLAN.md`: current staged core work;
 - `ExpRecord.md`: formal experiment dashboard.
 
-At each meaningful boundary, update the one owning file. Durable designs and
+Update the owning file only at an accepted core implementation, pre-launch,
+terminal result/disposition, accepted external-review disposition, or explicit
+controller handoff. Durable designs and
 decisions belong in `docs/research/`; raw reviews in `docs/external-review/`;
 unique legacy imports in `docs/archive/`. Git history preserves removed
 material. Do not create memory archives or duplicate commands, thresholds,

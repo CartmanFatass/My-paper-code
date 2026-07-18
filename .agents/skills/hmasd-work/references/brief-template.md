@@ -16,10 +16,15 @@ short enough for every implementer and reviewer to read completely.
 - Core algorithm decision:
 - Existing implementation to reuse:
 - Components replaced or deleted:
-- Data and gradient flow:
+- Exact files and symbols to write:
+- Input/output tensor shapes and ordering:
+- Data ownership and state lifecycle:
+- Gradient owners and detach boundaries:
+- Call path before and after the change:
 - Probability, clock, RNG and checkpoint invariants:
+- Interfaces and symbols that remain unchanged:
 - Expected algorithm behavior and stability:
-- Implementer write scope, exact symbols and frozen interfaces:
+- Decisions left to implementer:
 
 ## Causal Question and Relevant History
 - Active question or engineering objective:
@@ -40,7 +45,8 @@ short enough for every implementer and reviewer to read completely.
 -
 
 ## Focused Evidence
-- Check:
+- Concrete corruption or wrong-experiment risk not cheaply exposed later:
+- Check command, or `none`:
 - Required observation:
 
 ## Completion and Stop Conditions

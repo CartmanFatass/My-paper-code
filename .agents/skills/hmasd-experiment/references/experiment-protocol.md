@@ -22,6 +22,14 @@ The model selection is made only at conversation creation. Never change either
 conversation's model afterward, and never include model or thinking settings in
 heartbeat create/update/retarget operations.
 
+Initialize `logs/<run-id>/monitor_state.json` with
+`scripts/monitor_state.ps1 -Mode init`. Record the exact controller and monitor
+host/thread/model/effort, automation id, run id and status authority. This state
+file is the durable handoff authority; conversation prose and an unrecorded
+tool call are not lifecycle state. Initialize only while the heartbeat is active;
+the script records its config path, status and `updated_at` as this run's
+activation baseline.
+
 Never omit target settings from a monitor relay. In the observed desktop
 runtime, omitted settings inherit the sender turn and can make Luna/Sol threads
 appear to exchange models. Use exactly:
@@ -30,20 +38,27 @@ appear to exchange models. Use exactly:
 await tools.codex_app__send_message_to_thread({
   hostId: "<target host_id>",
   threadId: "<target thread_id>",
-  model: "<target live model_id>",
-  thinking: "<target live reasoning_effort>",
+  model: "<frozen target model_id from monitor_state.json>",
+  thinking: "<frozen target reasoning_effort from monitor_state.json>",
   prompt: "<stable handoff_id and terminal payload>"
 })
 ```
 
-Immediately before the call, require the frozen target thread to be idle and
-resolve its current model/effort from the local thread state. Immediately
-afterward, require the same values. If the target is active, keep the monitor
-heartbeat active and retry at the next bounded wake. `hostId`, `threadId`,
-`model`, and `thinking` are all mandatory.
-Explicit values preserve an already matching target; they must never repair a
-mismatch. Use the stable handoff ID for idempotence and never edit or restore
-thread settings after delivery.
+Immediately before the call, invoke `codex_app__list_threads` and require one
+entry whose `id` and `hostId` equal the frozen controller fields. The target is
+idle only when its returned status is `notLoaded`, `completed`, or `idle`; a
+`running` or unknown status is not idle. The API does not expose authoritative
+live model/effort fields, so use only the frozen model/effort recorded by the
+controller at activation and never claim a live re-read. A user-reported or
+registry mismatch is `BLOCKED_THREAD_IDENTITY`, not something a message may
+repair. `hostId`, `threadId`, `model`, and `thinking` are mandatory. After the
+call, invoke `codex_app__list_threads` again and require the same host/thread
+identity, then invoke `codex_app__read_thread` on the controller and locate one
+delivered turn containing the exact handoff ID. Transition to
+`RELAY_CONFIRMED` only with
+`-ReadThreadReceipt
+"host=<host>;thread=<thread>;turn=<uuid>;handoff=<handoff-id>"` built from that
+returned target-thread observation.
 
 Each scheduled wake reads the authoritative status once:
 
@@ -61,18 +76,44 @@ stable identifier:
 handoff_id = <run-id>:<state>:<status-updated-at>
 ```
 
+The transition script reads the frozen `status_authority` itself. For a terminal
+file it requires the recorded `run_id`, normalized `state`, `updated` timestamp,
+`phase`, and `result_path` or `error_path` to equal the proposed terminal fields. For a
+`missing` report it requires the authority file to be absent. It also recomputes
+the exact handoff ID; caller-supplied status summaries or path variants cannot
+advance the state machine.
+
 The terminal payload contains only the handoff ID, automation ID, run ID, state,
 phase, status path, and result or direct-error path. The monitor reads no result
-or stderr. After the guarded send returns and the controller settings remain
-unchanged, pause the existing monitor heartbeat and verify `PAUSED`. Only then
-report `handoff_confirmed=true`. If send or settings verification fails, leave
-the heartbeat active for a bounded retry and report `monitor_handoff_error`. If
-pause fails, report `monitor_pause_error`; neither error is an experiment FAIL.
+or stderr. Advance the state machine exactly:
 
-The controller treats `handoff_id` idempotently, reads the registered result or
-direct error once, applies the existing branch, and records closure. A duplicate
-message for a closed handoff is a no-op. A future run reactivates the same
+```text
+RUNNING
+-> TERMINAL_DETECTED
+-> RELAY_CONFIRMED
+-> AUTOMATION_PAUSED
+-> CLOSED
+```
+
+After the guarded send returns, record the delivered controller turn UUID and
+transition to `RELAY_CONFIRMED`. Pause the existing heartbeat with
+`automation_update`, view the same automation id, then require the exact
+`$CODEX_HOME/automations/<automation-id>/automation.toml` to contain the frozen
+id, monitor thread and `status = "PAUSED"`. The state script records its
+`updated_at` only when it is newer than the activation baseline and occurs after
+the relay confirmation. It transitions to `AUTOMATION_PAUSED`, then `CLOSED` with the same
+explicit handoff ID. Only `CLOSED`
+means `handoff_confirmed=true`. Any failure transitions to `BLOCKED` with the
+exact failed operation; it is not an experiment FAIL. Leaving `BLOCKED`
+requires a typed resolution receipt.
+
+The controller validates the state file, treats a closed `handoff_id`
+idempotently, reads the registered result or direct error once, applies the
+existing branch, and records closure. A duplicate message for a closed handoff
+is a no-op. A future run reactivates the same
 heartbeat on the unchanged monitor conversation with a new run namespace.
+Closed validation uses the stored pause receipt rather than the later live
+heartbeat state, so reactivation cannot invalidate an older handoff.
 
 Show registered parameters, progress, primary live metric, observed ETA and
 next check in the monitor. Adapt the same schedule to observed ETA:
@@ -84,16 +125,18 @@ next check in the monitor. Adapt the same schedule to observed ETA:
 - at most 2 minutes or finalization: 1 minute;
 - unknown ETA: 15 minutes.
 
-Do not create heartbeat files or duplicate monitoring tasks. Tool invocation
-and its returned confirmation are the authority for schedule target and state;
-prose describing an intended invocation is not authority.
+Do not create heartbeat files or duplicate monitoring tasks. The recorded tool
+receipts plus valid `monitor_state.json` are the authority; prose describing an
+intended invocation is not authority.
 
 ## Failure Classification
 
 Read only the status source and direct error needed to locate the first failed
 boundary. Distinguish operational failure, invalid implementation, analyzer or
-monitor failure, and valid scientific FAIL. Compare with the nearest known-good
-path, make one falsifiable root-cause hypothesis, and run one bounded diagnostic.
+monitor failure, and valid scientific FAIL. The nearest known-good path is the
+same runner/configuration with only the failed stage differing. Inspect at most
+the authoritative status, its direct error and one comparator artifact; state
+one falsifiable root-cause hypothesis and run at most one diagnostic.
 
 Do not change budget, seed, reward, model, threshold or estimand as an
 operational repair. Do not rescue a retired line.

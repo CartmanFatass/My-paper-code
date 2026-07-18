@@ -125,7 +125,7 @@ rounds/YYYYMMDD_topic/
   11_GEMINI_DIVERGENT_RAW.md
   20_PRO_OPEN_QUESTION.md
   21_PRO_OPEN_RAW.md
-  30_CODEX_SYNTHESIS.md
+  30_CONTROLLER_SYNTHESIS.md
   40_PRO_CONVERGENT_QUESTION.md
   41_PRO_CONVERGENT_RAW.md
   50_DISPOSITION.md
@@ -137,9 +137,10 @@ before synthesis. Accepted algorithm design moves to `docs/research/`; current
 ownership stays in `memory/CURRENT_WORK.md`; runtime evidence stays in `logs/`.
 
 `05_REVIEW_STATE.json`, maintained by the Skill's state script, is the sole
-progress authority. Resume its first non-`COMPLETE` stage. A confirmed raw is
-immutable and its prompt is never submitted again. Preserve a nonempty raw
-without a matching Exchange receipt or explicitly identified manual source as
+progress authority. Run `-Mode next` and act only on `NEXT:<stage>`; divergent
+reviewers are independent prerequisites but their submissions are serialized.
+A state-confirmed raw is immutable and its prompt is never submitted again.
+Preserve a nonempty raw without a matching structured receipt as
 `BLOCKED_UNVERIFIED_RAW`; it is neither completion evidence nor permission to
 create a duplicate.
 

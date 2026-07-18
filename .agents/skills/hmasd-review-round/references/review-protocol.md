@@ -24,10 +24,14 @@ Both Pro question files must state their role explicitly and contain an exact
 
 ## Gemini Divergent Reviewer
 
-Reuse the persistent Antigravity CLI conversation with Gemini 3.1 Pro (High).
+Reuse the exact Antigravity session and Gemini 3.1 Pro (High) model registered
+in `docs/external-review/REVIEWER_CONVERSATIONS.json`.
 Run in plan and sandbox mode with the tracked local-file and paper allowlist.
-Obtain explicit informed user approval for that allowlist before transmitting
-private repository content, logs, or local papers to the external service.
+Before transmitting private repository content, logs or local papers, record
+consent with `review_state.ps1 -Mode consent -ConsentState APPROVED`, the exact
+manifest path, its 40-character Git commit, destination and a
+`user:<thread-id>:<message-ref>` receipt. Any manifest difference invalidates
+consent; `NOT_REQUIRED` is invalid while that local-source manifest exists.
 Keep one live client for research, then export its exact completed response from
 the local `transcript_full.jsonl`; do not send another archival prompt. Use a
 non-interactive invocation only as a failure fallback, never concurrently with
@@ -76,18 +80,22 @@ Exchange — Convergent Pro` may access only the `CONVERGENT` external thread an
 itself.
 
 Use the exact guarded command in `SKILL.md` for every controller/exchange
-message. Require an idle target, then resolve its current model and effort and
-compare them with the registry. Check them again after delivery. Never omit either field:
-Codex Desktop 26.715.2305.0 / codex-cli 0.145.0-alpha.18 otherwise copies the
-sender turn's settings into the target. The explicit values preserve the already
-matching target; they must never be used to repair a mismatch. `hostId` and a
-stable route token are mandatory to prevent ambiguous or duplicate routing.
+message. `codex_app__list_threads` is authoritative for target host, thread and
+status. Accept only the registered host/thread with status `notLoaded`,
+`completed`, or `idle`; `running`, absent or unknown is not idle. The thread API
+does not expose authoritative live model/effort, so use the frozen registry
+values and never claim a live re-read. Never omit either field. Explicit values
+must not be used to repair a reported mismatch. `hostId` and a stable route
+token are mandatory to prevent ambiguous or duplicate routing.
+After delivery, `codex_app__read_thread` must expose the completed Exchange turn;
+its UUID is the `turn:<uuid>` completion reference.
 The exchange acknowledges its Codex thread ID, target Pro conversation ID and
 role before opening the browser, then returns a terminal payload through the
 same guarded format. It never messages the other role.
 
-Use route token `<round>:<role>:<commit>:<raw-path>` for idempotence. A nonempty
-scientific raw closes the token. A GitHub-plugin, authentication, model, thread
+Use route token `<round>:<role>:<commit>:<raw-path>` for idempotence. Only a
+state-script `COMPLETE` transition with the matching route, structured receipt
+and nonempty raw closes the token. A GitHub-plugin, authentication, model, thread
 identity or incomplete-response failure closes only the transport attempt and
 must not be written as `21_PRO_OPEN_RAW.md` or `41_PRO_CONVERGENT_RAW.md`.
 
@@ -99,20 +107,35 @@ the same immutable commit for the entire submission. A missing commit, role,
 section or path is `BLOCKED_REMOTE_EVIDENCE`, not a reviewer task and not a
 scientific result.
 
+`DISPATCHED` is not a claim that a send was intended. The state transition must
+include a structured `-DispatchReceipt` with the registered session,
+conversation, role and model, the exact route, `terminal=DISPATCHED`, and a
+`turn:<uuid>` reference from the target Exchange task exposed by
+`codex_app__read_thread` or `transcript:<id>` for the submitted Gemini prompt
+event. A non-manual completion cannot replace that route and requires a second
+structured receipt with `terminal=COMPLETE`. The stage artifact is fixed by
+stage name; `-ArtifactPath` may only repeat that exact path and cannot redirect
+evidence to another file in the round.
+
 ## Evidence and Disposition
 
 Use the round's tracked `05_REVIEW_STATE.json` as the sole progress authority.
 Create and validate it only with `scripts/review_state.ps1`; artifact presence,
-conversation prose or an intended tool call cannot advance a stage. Commit each
-`COMPLETE` transition with its confirmed raw, synthesis or disposition artifact.
+conversation prose or an intended tool call cannot advance a stage. Do not
+commit stage progress alone. Commit one package containing both divergent raws,
+controller synthesis and their state before convergent Pro when Git-visible
+evidence is required; commit convergent raw, disposition and final state together.
 
 Store the exact prompt boundary, raw response, source model, date and related
 claim in the tracked round. Raw absence means incomplete evidence. The
 controller evaluates claims by evidence and reasoning rather than model
 identity and owns every disposition and next authorization.
 
-Before transport, validate and show the state file, then resume its first
-non-`COMPLETE` stage. Treat an identity-confirmed raw as immutable and never
+Before transport, validate and show the state file, then run `-Mode next`.
+Gemini and open Pro are independent prerequisites: a blocker in one does not
+prevent `next` from selecting the other, but at most one external stage may be
+`DISPATCHED`. Synthesis requires both `COMPLETE`; convergent review requires
+synthesis; disposition requires convergent review. Treat an identity-confirmed raw as immutable and never
 resubmit its prompt. Record a nonempty raw without a matching Exchange receipt
 or explicitly identified manual source as `BLOCKED_UNVERIFIED_RAW`; preserve it
 for exact recovery rather than generating a duplicate.

@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Run the full tracked HMASD external algorithm-review round with blind Gemini 3.1 Pro High and GPT-5.6 Pro divergent reviews, controller synthesis, and a convergent GPT-5.6 Pro review. Use only for a cross-round architecture contradiction, a coherent new route tied to the final variable-team plus variable-lifetime capability, or a critical promotion or retirement boundary that the registered contract cannot settle. Do not use for prompt generation, manual handoff, reading one returned review, routine result interpretation, literature discussion, open brainstorming, a single-reviewer consultation, or a disposition already determined by the registered contract. Archive raw replies before interpretation; reviewer advice never authorizes edits or experiments.
+description: "Create or resume the full tracked HMASD five-stage external-review round governed by 05_REVIEW_STATE.json: blind Gemini and open GPT-5.6 Pro reviews, controller synthesis, convergent GPT-5.6 Pro review, and controller disposition. Do not use for prompts, manual handoff, one returned review, literature discussion, brainstorming, single-reviewer consultation, routine result interpretation, or a contract-determined disposition."
 ---
 
 # HMASD Review Round
@@ -10,26 +10,31 @@ Read the round's `00_REVIEW_BRIEF.md`, `01_SHARED_SOURCE_MANIFEST.md`, and
 `02_GEMINI_LOCAL_SOURCE_MANIFEST.md`. Read the neutral
 `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md` only before a Pro
 submission. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` before any
-Pro browser transport. `docs/external-review/README.md` is a human index, not a
+external transport. `docs/external-review/README.md` is a human index, not a
 mandatory runtime read. Do not reload workflow documents at every stage.
 
 ## Establish and Resume Round State
 
 Initialize the tracked `05_REVIEW_STATE.json` at the question boundary with
 `scripts/review_state.ps1 -Mode init`. It is the sole progress authority for the
-round. Update it only through that script and commit a `COMPLETE` transition with
-the artifact it confirms. At activation and before ending the turn, run
-`-Mode validate`, then `-Mode show` and resume the first non-`COMPLETE` stage.
-Do not infer progress from directory contents or conversation prose.
+round. Update it only through that script. Do not commit a stage transition or
+state pointer alone. After both divergent raws and controller synthesis are
+complete, create one pre-convergent evidence commit/push when Pro needs those
+Git-visible inputs. Commit convergent raw, controller disposition and final
+state together at the disposition boundary. At activation and before ending the turn, run
+`-Mode validate`, `-Mode show`, then `-Mode next`. Resume only the returned
+`NEXT:<stage>`; `WAIT`, `BLOCKED`, `SUSPENDED` and `CLOSED` do not authorize a
+send. Do not infer progress from directory contents or conversation prose.
 
 Use these transport states precisely:
 
 - `NOT_STARTED`: no successful transport call exists;
-- `DISPATCHED`: the guarded send returned, but no verified terminal exchange
-  response has returned;
-- `COMPLETE`: the Exchange identity and role ACK match, its terminal payload is
-  confirmed, the exact raw response is archived, and the receipt identifies an
-  `exchange:`, `gemini:`, or explicitly confirmed `manual:` source;
+- `DISPATCHED`: the guarded send is visible in the destination Exchange task as
+  `turn:<uuid>`, or in the Gemini transcript as `transcript:<id>`, but no
+  verified terminal response has returned;
+- `COMPLETE`: the exact raw is archived and the script accepts a receipt
+  containing exactly `source`, `session`, `conversation`, `role`, `model`,
+  `route`, `terminal` and `reference`;
 - `BLOCKED`: consent, identity, remote evidence, authentication, completeness,
   or transport prevents progress.
 
@@ -39,21 +44,43 @@ explicitly identified manual source is `BLOCKED_UNVERIFIED_RAW`; preserve it and
 record the blocker through the script rather than resubmitting or calling it
 complete.
 
+The stage-to-artifact mapping is immutable. `-ArtifactPath` may only repeat the
+registered filename. Every external `DISPATCHED` transition requires
+`-DispatchReceipt`; `dispatched_at` or a route token cannot be supplied as a
+substitute for destination-side evidence.
+
+The receipt syntax is:
+
+```text
+source=<exchange|gemini|manual>;session=<id>;conversation=<id>;
+role=<registered role>;model=<registered label>;route=<exact route token>;
+terminal=<DISPATCHED|COMPLETE>;reference=<turn UUID, transcript id, or user:<thread-id>:<message-ref>>
+```
+
+`DISPATCHED` forbids `source=manual` and binds the registered reviewer identity,
+exact route and destination-side turn/transcript reference. A non-manual
+`COMPLETE` must keep that route and add a second structured receipt with
+`terminal=COMPLETE` and a different destination-side reference. Manual completion uses `session=manual`,
+`conversation=manual`, `model=manual`, and a `user:` reference.
+
 `COMPLETE` is immutable. Never edit the JSON directly or move a `DISPATCHED`
 stage back to `NOT_STARTED`; transition a failed attempt to `BLOCKED` and retain
-its route token.
+its route token. Leaving `BLOCKED` requires `-ResolutionReceipt` beginning with
+`user:`, `tool:`, `evidence:` or `controller:`.
 
-Workflow maintenance does not close or satisfy a suspended round. After such
-maintenance, return to the first incomplete stage before the final user response
-whenever the round remains authorized. If a blocker prevents that, report the
-blocker and exact missing authority; never report the round as handed off or
-completed.
+`round_status` is only `ACTIVE`, `SUSPENDED`, or `CLOSED`. Workflow maintenance
+does not change it. An `ACTIVE` round must run `-Mode next` before the final user
+response; a `SUSPENDED` round resumes only through `-Mode round -RoundStatus
+ACTIVE`; `CLOSED` is immutable. Report a returned blocker and exact missing
+authority rather than describing an intended handoff as complete.
 
 ## Run the Round
 
 1. Freeze one shared evidence boundary and exact source allowlists.
 2. Run Gemini and the open GPT-5.6 Pro as blind, independent divergent
-   reviewers with equal standing.
+   reviewers with equal standing. They are independent dependencies but external
+   submissions are serialized: if one is `BLOCKED`, `-Mode next` may select the
+   other; at most one external stage may be `DISPATCHED`.
 3. Archive both raw responses before the controller compares their claims with
    repository evidence and writes a synthesis.
 4. Give the synthesis and both raw reviews to the convergent GPT-5.6 Pro.
@@ -81,9 +108,12 @@ missing evidence.
 ## Mandatory Pro Transport
 
 The controller never operates the Pro browser. For each missing raw artifact,
-select its exact registered local/external pair, pass the remote evidence
-preflight, and require the idle target's live model and effort to match the
-registry. Send only the route token and tracked paths with this exact shape:
+select its exact registered local/external pair and pass the remote evidence
+preflight. Invoke `codex_app__list_threads`; require exactly the registered
+host/thread and an idle status of `notLoaded`, `completed`, or `idle`. Model and
+effort are frozen registry fields because the thread API exposes no authoritative
+live settings; never claim they were re-read. Send only the route token and
+tracked paths with this exact shape:
 
 ```javascript
 await tools.codex_app__send_message_to_thread({
@@ -95,16 +125,21 @@ await tools.codex_app__send_message_to_thread({
 })
 ```
 
-Re-read the target settings after delivery. The exchange must verify its local
-thread, external conversation, role ACK and visible `Pro` label before browser
-use, archive the exact response, then return `COMPLETE` or `BLOCKED` through the
-same guarded format resolved against the controller. Never omit `model` or
+After delivery, require the same host/thread identity. Confirm the delivered
+Exchange request through `codex_app__read_thread` and use its turn UUID for the
+`DISPATCHED` receipt. Confirm the completed Exchange turn through another
+bounded read and use that turn UUID in the completion receipt. The exchange must verify its local thread, external
+conversation, role ACK and visible `Pro` label before browser use, archive the
+exact response, then return `COMPLETE` or `BLOCKED` through the same guarded
+format resolved against the controller. Never omit `model` or
 `thinking`, repair a mismatch, change a model, edit thread state, mix roles,
 create a duplicate, or submit roles in parallel. A mismatch is
 `BLOCKED_REVIEW_THREAD_IDENTITY`.
 
-The route token is `<round>:<role>:<commit>:<raw-path>`; a closed token is a
-no-op. Browser, plugin, authentication, identity, or completeness failures are
+The route token is `<round>:<role>:<commit>:<raw-path>`. A token closes only when
+`review_state.ps1` accepts its `COMPLETE` transition with the exact raw and
+receipt; a nonempty raw alone does not close it. Browser, plugin, authentication,
+identity, or completeness failures are
 transport blockers, never scientific raw responses.
 
 An identity-confirmed raw response is immutable; archive or interpret it but
@@ -114,8 +149,11 @@ silently submit again.
 
 Automatic permission covers Git-visible Pro transport and raw archival only.
 Sending private repository content, logs, or local papers to Gemini or another
-external service requires explicit informed user approval naming the allowlist;
-workflow automation never implies that consent. Reviewer advice does not
+external service requires `-Mode consent -ConsentState APPROVED` with the exact
+manifest path, 40-character Git commit, destination and a
+`user:<thread-id>:<message-ref>`
+receipt. The script rejects dispatch if that manifest differs from the approved
+commit. Workflow automation never implies consent. Reviewer advice does not
 authorize code, experiments, promotion, or scientific disposition. If
 authentication, model identity, page state, source completeness, or response
 completeness is ambiguous, return `BLOCKED` with the exact manual prompt.
