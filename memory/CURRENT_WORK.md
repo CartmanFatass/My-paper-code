@@ -17,46 +17,42 @@ Updated: 2026-07-18
 
 ## Objective
 
-The generic-`SHORT` environment passed Stage A and the direct primitive-AR
-carrier passed Stage B. The fresh paired Stage C run from commit `bf933a3` is a
-valid terminal `SUPPORT_H2_SKILL_LIMIT` result at
-`logs/f0f1_dynamic_roster_stage_c_20260717_221247`.
+The generic-`SHORT` Stage A carrier, Stage B direct primitive controller and
+terminal Stage C F0/F1 result are closed evidence. Stage C remains
+`SUPPORT_H2_SKILL_LIMIT`: F1 changes later high-level distributions and has a
+small forced `z` effect, but neither arm forms naturally executable skills or
+task access.
 
-F1 changed its natural later-token distribution and showed a small forced
-skill effect, but neither arm transported skill conditioning into executable
-natural behavior or task access. Both final arms have `P/S/U=0/1/0.5`; the
-paired F1-minus-F0 utility CI95 is `[0,0,0]`. The current F0/F1 route therefore
-stops at an upstream skill-execution bottleneck. It cannot be rescued by
-retuning F1, adding a module, or reading the timing branch.
+The external portfolio round
+`20260718_stage_c_skill_bottleneck_portfolio` is closed with
+`ACCEPT_PORTFOLIO_WITH_EXISTING_CHECKPOINT_REANALYSIS`. Iteration 3 is one
+diagnostic-only reanalysis of existing Stage C checkpoints, forced branches and
+the natural ledger. It must distinguish skill existence, cross-context
+stability and natural overlap without training or adding a mechanism.
 
 ## Causal Portfolio
 
-- **H0 / F0 sufficiency:** rejected on this testbed; F0 has no task access.
-- **H1 / F1 applied-prefix value:** conditional distribution response exists,
-  but task transport is rejected under the frozen Stage C contract.
-- **H2 / skill execution failure:** supported; both arms lack executable
-  naturally used skills despite the Stage B carrier.
-- **H3 / exogenous timing limitation:** unread because its registered upstream
-  prerequisites failed; learned event time remains deferred.
-
-F0 and F1 must share the complete runtime, model, optimization, ledgers and
-exposure. Their sole treatment difference is:
-
-```text
-F0 -> initial_summary
-F1 -> working_summary
-```
+- **C3 / hierarchy-null active-set control:** current empirical leader and
+  mandatory ordinary-MARL null; not yet a final rejection of hierarchy.
+- **C1 / segment-owned environment-agnostic semantics:** strongest live
+  hierarchical explanation; no task fields, reward, identity, role, age or
+  duration shortcuts may define its intrinsic signal.
+- **C2 / minimal event-context execution:** rises only if existing `z` effects
+  fail specifically across age, new/resumed execution or membership events.
+- **Conditional SMDP credit:** dormant until stable executable semantics exist
+  but natural assignment fails.
 
 ## Next Actions
 
-1. Count the closed Stage C disposition as overnight iteration 1 of 5.
-2. Iteration 2 is a portfolio refresh around H2, not a single attribution gate.
-   Use the two divergent reviewers, repository evidence and controller
-   synthesis to retain two to four candidate explanations or architectural
-   replacements, including the strongest ordinary direct-policy objection.
-3. The convergent reviewer ranks the portfolio and suggests the next serialized
-   evidence source. It does not select a unique legal route. No Stage C rescue,
-   new module or training starts merely from reviewer advice.
+1. Count Stage C as overnight iteration 1 and the closed portfolio review as
+   iteration 2 of 5.
+2. Freeze the iteration-3 existing-checkpoint audit before reading its result:
+   same-snapshot `z` interventions, nuisance-matched stability, natural overlap,
+   diagnostic nulls, support floor and outcome-dependent portfolio updates.
+3. Run only that reanalysis. It performs no optimizer step, environment rollout
+   or reward computation and cannot reopen Stage C.
+4. Use its terminal result to reweight the whole portfolio before any C1, C2,
+   credit or C3 implementation decision.
 
 ## Overnight Autonomous Boundary
 
@@ -147,3 +143,5 @@ F1 -> working_summary
   preceding architecture review.
 - `docs/external-review/rounds/20260717_variable_n_lifetime_implementation/` —
   preceding implementation-plan review.
+- `docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/` —
+  closed iteration-2 portfolio review and authorized reanalysis boundary.
