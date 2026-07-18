@@ -30,6 +30,7 @@ decide_outcome = _AUDIT.decide_outcome
 natural_segments = _AUDIT.natural_segments
 reconstruct_context_rows = _AUDIT.reconstruct_context_rows
 load_audit_inputs = _AUDIT.load_audit_inputs
+run_audit = _AUDIT.run_audit
 
 
 DELTA = 1.0 / 12.0
@@ -38,18 +39,18 @@ DELTA_STRATUM = 1.0 / 24.0
 
 def _metrics(**overrides):
     values = {
+        "validity_ok": True,
+        "support_ok": True,
+        "policy_lineage_ok": True,
         "all_pairs_exact_upper_below_delta": False,
         "all_pairs_forced_upper_below_delta": False,
-        "frozen_pair_exact_lower": DELTA,
-        "frozen_pair_forced_lower": DELTA,
-        "stability_pooled_lower": DELTA,
-        "stability_stratum_lowers": [DELTA_STRATUM] * 12,
-        "stability_has_reversal": False,
-        "natural_raw_pass": True,
-        "natural_nuisance_lower": 0.01,
-        "natural_matched_margin": 0.01,
-        "policy_lineage_ok": True,
-        "support_ok": True,
+        "frozen_pair_exact_ci": (DELTA, 0.2),
+        "frozen_pair_forced_ci": (DELTA, 0.2),
+        "stability_pooled_ci": (DELTA, 0.2),
+        "stability_stratum_cis": [(DELTA_STRATUM, 0.2)] * 12,
+        "natural_raw_ci": (DELTA, 0.2),
+        "natural_nuisance_ci": (0.01, 0.2),
+        "natural_matched_margin_ci": (0.01, 0.2),
     }
     values.update(overrides)
     return values
@@ -59,12 +60,11 @@ def _metrics(**overrides):
     ("metrics", "expected"),
     [
         (_metrics(all_pairs_exact_upper_below_delta=True, all_pairs_forced_upper_below_delta=True), "A_NO_MATERIAL_Z_DEPENDENCE"),
-        (_metrics(frozen_pair_exact_lower=0.0), "B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT"),
-        (_metrics(stability_stratum_lowers=[0.0] + [DELTA_STRATUM] * 11), "B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT"),
-        (_metrics(stability_has_reversal=True), "B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT"),
-        (_metrics(natural_raw_pass=False), "C_STABLE_FORCED_NO_NATURAL_OVERLAP"),
-        (_metrics(natural_nuisance_lower=0.0), "E_NUISANCE_SHORTCUT"),
-        (_metrics(natural_matched_margin=0.0), "E_NUISANCE_SHORTCUT"),
+        (_metrics(frozen_pair_exact_ci=(0.0, 0.0)), "B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT"),
+        (_metrics(stability_stratum_cis=[(0.0, 0.0)] + [(DELTA_STRATUM, 0.2)] * 11), "B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT"),
+        (_metrics(natural_raw_ci=(0.0, 0.0)), "C_STABLE_FORCED_NO_NATURAL_OVERLAP"),
+        (_metrics(natural_nuisance_ci=(0.0, 0.2)), "E_NUISANCE_SHORTCUT"),
+        (_metrics(natural_matched_margin_ci=(0.0, 0.2)), "E_NUISANCE_SHORTCUT"),
         (_metrics(policy_lineage_ok=False), "F_UNDERPOWERED_OR_UNIDENTIFIABLE"),
         (_metrics(support_ok=False), "F_UNDERPOWERED_OR_UNIDENTIFIABLE"),
         (_metrics(), "D_STABLE_LOCAL_NATURAL_OVERLAP"),
@@ -72,6 +72,10 @@ def _metrics(**overrides):
 )
 def test_decide_outcome_follows_frozen_a_to_f_order(metrics, expected):
     assert decide_outcome(metrics) == expected
+
+
+def test_decide_outcome_sends_crossing_ci_to_underpowered():
+    assert decide_outcome(_metrics(frozen_pair_exact_ci=(0.0, 0.2))) == "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
 
 
 def test_reconstruct_context_rows_reads_only_lifecycle_fields_and_preserves_rejoin_age():
@@ -150,3 +154,17 @@ def test_load_audit_inputs_reconstructs_final_actor_strictly_without_rng_mutatio
     assert isinstance(loaded["actor"], EventLowActor)
     assert all(torch.equal(loaded["actor"].state_dict()[key], value) for key, value in actor.state_dict().items())
     assert torch.equal(torch.get_rng_state(), before)
+
+
+def test_run_audit_selects_f1_fails_closed_and_writes_one_json_safe_artifact(tmp_path):
+    f0 = {"result": {"arm_mode": "f0", "source_valid": True}}
+    f1 = {"result": {"arm_mode": "f1", "source_valid": False}}
+    output_path = tmp_path / "audit.json"
+
+    payload = run_audit(f0, f1, output_path=output_path)
+
+    assert payload["selector_arm"] == "f1"
+    assert payload["f1_outcome"] == "INVALID_ITERATION3_AUDIT"
+    assert output_path.exists()
+    assert output_path.read_text(encoding="utf-8") == __import__("json").dumps(payload, sort_keys=True, indent=2) + "\n"
+    assert "actor" not in output_path.read_text(encoding="utf-8")
