@@ -41,12 +41,31 @@ decision boundaries. Existing HMASD authorization satisfies the approval
 boundary for its registered scope; do not request it again. Do not create a
 worktree unless the user explicitly requests one.
 
+Active-line development is the default. Do not implement or retain
+backward-compatibility adapters, deprecated runtime branches, old library
+interfaces, legacy transport formats or migrations for superseded checkpoints.
+Historical code and artifacts are not executable or design dependencies. Read
+them only when a current research question explicitly names them as evidence;
+otherwise do not inspect, import, adapt or test them. When the active design
+replaces a component, delete the replaced path instead of keeping a
+compatibility switch. Only an explicit current user instruction may reopen a
+retired interface.
+
+MARL exploration is agile by default. Prefer the smallest coherent algorithm
+change that can produce decision-relevant evidence, reuse only the active
+implementation, and remove superseded code promptly. Do not spend an iteration
+on compatibility work, speculative abstraction, broad regression validation,
+workflow prose or legacy-library integration unless it is required to prevent
+an invalid current experiment. Workflow gates must protect attribution and
+runtime integrity, not replace algorithm exploration.
+
 For staged core work, keep one persistent plan in
 `memory/IMPLEMENTATION_PLAN.md` with one `HMASD Contract` section. Freeze the
 causal or engineering goal, evidence boundary, reused/replaced/deleted/added
 components, exact files and symbols, tensor and collector flow, state ownership,
 gradient and detach boundaries, reward and advantage semantics, probability,
-RNG, replay, masks, clocks, checkpoints, preserved interfaces and non-goals.
+RNG, replay, masks, clocks, active checkpoint semantics, preserved current
+interfaces and non-goals.
 Do not create a parallel collaboration brief or duplicate plan.
 
 One active implementation plan or serialized evidence source does not imply one
@@ -143,7 +162,7 @@ runs use `DRY_RUN`.
 Preserve unrelated user changes in a dirty worktree and stage only intended
 files. Core MARL changes must explicitly account for tensor shapes, gradient
 and detach boundaries, clocks, masks, reward scale, advantage semantics,
-checkpoint compatibility, and collector behavior.
+active-schema checkpoint consistency, and collector behavior.
 
 Remove controller-created transient files at their evidence boundary. Delete
 only exact verified paths under the project or OS temp directory; never remove
@@ -231,9 +250,7 @@ approval for project-only, tracked, read-only per-round manifests, so the
 controller records that exact boundary automatically without asking again.
 Any allowlist change invalidates the recorded boundary; credentials, personal
 data, project-external paths, writes, execution and training remain excluded.
-Other
-transport and recovery mechanics live only in
-`$hmasd-review-round` and its protocol.
+Other transport and recovery mechanics live only in `$hmasd-review-round`.
 
 ## State and Memory
 
@@ -248,6 +265,6 @@ Update the owning file only at an accepted core implementation, pre-launch,
 terminal result/disposition, accepted external-review disposition, or explicit
 controller handoff. Durable designs and
 decisions belong in `docs/research/`; raw reviews in `docs/external-review/`;
-unique legacy imports in `docs/archive/`. Git history preserves removed
+unique historical evidence in `docs/archive/`. Git history preserves removed
 material. Do not create memory archives or duplicate commands, thresholds,
 status, or results.

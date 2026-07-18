@@ -1,7 +1,7 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "updated": "2026-07-18",
-  "gemini_exchange_transport": {
+  "gemini_transport": {
     "kind": "one_to_one_codex_exchange",
     "send_tool": "codex_app__send_message_to_thread",
     "required_arguments": [
@@ -9,15 +9,7 @@
       "threadId",
       "prompt"
     ],
-    "optional_model_fields": "FORBIDDEN",
-    "identity_preflight": "codex_app__read_thread",
-    "identity_postflight": "codex_app__read_thread",
-    "worker_to_controller": "guarded_direct_terminal_relay",
-    "terminal_messages": [
-      "COMPLETE",
-      "BLOCKED",
-      "WAIT_PRO_THINKING"
-    ]
+    "model_override_fields": "FORBIDDEN"
   },
   "pro_transport": {
     "kind": "codex_chatgpt_control_visible_ui",
@@ -26,10 +18,7 @@
     "source_commit": "73c5737f222709e324a1c7ba1637cef9966000ce",
     "skill": "chatgpt-delegate",
     "experience": "chat",
-    "intelligence": "Pro",
-    "session_id": "codex-chatgpt-control@0.5.1-alpha.1+codex.20260717041128",
-    "submission_reference": "plugin:submitted",
-    "completion_reference": "plugin:completed"
+    "intelligence": "Pro"
   },
   "reviewers": {
     "gemini_divergent": {
@@ -38,21 +27,17 @@
       "conversation_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
       "expected_model": "Gemini 3.1 Pro (High)",
       "transport": "antigravity_cli",
-      "session_frozen": true,
+      "raw_file": "11_GEMINI_DIVERGENT_RAW.md",
       "codex_exchange": {
         "title": "HMASD External Review Exchange Operator",
         "thread_id": "019f6e7a-8671-7463-9615-8eea2fa5d7d1",
         "host_id": "local",
-        "expected_model": "Luna High",
-        "model_frozen": true,
-        "write_scope": "11_GEMINI_DIVERGENT_RAW.md"
+        "expected_model": "Luna High"
       },
       "standing_consent": {
         "state": "APPROVED",
-        "granted_at": "2026-07-18",
-        "approval_receipt": "user:019f5c78-0c91-7612-adb4-c1fcfe4484c8:20260718-gemini-open-source-standing-consent-2",
         "scope": "tracked_round_gemini_local_source_manifests",
-        "basis": "user confirmed HMASD project materials are open source after risk disclosure",
+        "approval_receipt": "user:019f5c78-0c91-7612-adb4-c1fcfe4484c8:20260718-gemini-open-source-standing-consent-2",
         "constraints": "project-only explicit allowlist; read-only; no credentials, personal data, project-external files, writes, execution or training"
       }
     },
@@ -62,22 +47,7 @@
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
       "transport": "codex_chatgpt_control",
-      "role_ack": "HEARTBEAT_ACK role=OPEN_DIVERGENT",
-      "full_thinking_required": true,
-      "forbidden_page_controls": [
-        "立即回答",
-        "停止回答",
-        "重新生成",
-        "重试"
-      ],
-      "legacy_codex_exchange": {
-        "title": "External Review Exchange — Open Pro",
-        "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
-        "host_id": "local",
-        "expected_model": "Luna High",
-        "model_frozen": true,
-        "write_scope": "21_PRO_OPEN_RAW.md"
-      }
+      "raw_file": "21_PRO_OPEN_RAW.md"
     },
     "convergent": {
       "role": "CONVERGENT",
@@ -85,22 +55,7 @@
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
       "transport": "codex_chatgpt_control",
-      "role_ack": "HEARTBEAT_ACK role=CONVERGENT",
-      "full_thinking_required": true,
-      "forbidden_page_controls": [
-        "立即回答",
-        "停止回答",
-        "重新生成",
-        "重试"
-      ],
-      "legacy_codex_exchange": {
-        "title": "External Review Exchange — Convergent Pro",
-        "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-        "host_id": "local",
-        "expected_model": "Luna High",
-        "model_frozen": true,
-        "write_scope": "41_PRO_CONVERGENT_RAW.md"
-      }
+      "raw_file": "41_PRO_CONVERGENT_RAW.md"
     }
   }
 }
