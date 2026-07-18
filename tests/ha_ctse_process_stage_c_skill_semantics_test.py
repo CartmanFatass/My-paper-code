@@ -168,3 +168,26 @@ def test_run_audit_selects_f1_fails_closed_and_writes_one_json_safe_artifact(tmp
     assert output_path.exists()
     assert output_path.read_text(encoding="utf-8") == __import__("json").dumps(payload, sort_keys=True, indent=2) + "\n"
     assert "actor" not in output_path.read_text(encoding="utf-8")
+
+
+def test_run_audit_reports_missing_estimator_metadata_as_f_for_nested_schema3_sources():
+    effects = np.full((128, 3, 2, 4), 0.1, dtype=np.float64)
+    arm = {
+        "result": {
+            "schema_version": 1, "stage": "stage_c_paired_f0_f1", "arm": "f0",
+            "implementation_valid": True,
+            "m0": {"strict_vector_schema3_resume": True, "forced_audit_exact": True, "intrinsic_reward_and_count_zero": True},
+            "contract": {"num_envs": 16, "outer_updates": 250, "environment_transitions": 320_000, "latent_skills": 3},
+            "counts": {"intrinsic_applied_count": 0},
+            "forced_audit": {"effects": effects.tolist()},
+        },
+        "checkpoint": {"checkpoint_schema_version": 3, "event_architecture": {"low_ledger": [None] * 5_120}},
+    }
+    f1 = copy.deepcopy(arm)
+    f1["result"]["arm"] = "f1"
+
+    payload = run_audit(arm, f1)
+
+    assert payload["f1_outcome"] == "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
+    assert payload["m0"] == {"f0": True, "f1": True}
+    assert payload["diagnostics"]["f1"]["evidence_availability"]["forced_snapshot_metadata"] is False

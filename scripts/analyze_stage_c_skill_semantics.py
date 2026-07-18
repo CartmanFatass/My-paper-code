@@ -248,80 +248,94 @@ def _source_identity(source: Mapping[str, Any]) -> str:
     return str(source.get("source_identity", source.get("result_path", "synthetic")))
 
 
-def _m0(result: Mapping[str, Any], expected_arm: str) -> tuple[bool, list[str]]:
-    required = {
-        "source_valid": True, "arm_mode": expected_arm, "checkpoint_schema_version": 3,
-        "runtime_count": 16, "update": 250, "transitions": 320_000,
-        "intrinsic_applications": 0, "forced_effects": object, "low_rows": object,
-    }
+def _m0(result: Mapping[str, Any], checkpoint: Mapping[str, Any], expected_arm: str) -> tuple[bool, list[str]]:
+    """Validate the actual nested Stage C result/checkpoint contract."""
     reasons = []
-    for name, expected in required.items():
-        if name not in result or (expected is not object and result[name] != expected):
-            reasons.append(f"m0_{name}")
-    if "forced_effects" in result:
+    contract = result.get("contract", {})
+    counts = result.get("counts", {})
+    if result.get("schema_version") != 1 or result.get("stage") != "stage_c_paired_f0_f1":
+        reasons.append("m0_result_schema")
+    if result.get("arm") != expected_arm or not result.get("implementation_valid"):
+        reasons.append("m0_arm_or_validity")
+    if checkpoint.get("checkpoint_schema_version") != 3:
+        reasons.append("m0_checkpoint_schema")
+    if (contract.get("num_envs"), contract.get("outer_updates"), contract.get("environment_transitions"), contract.get("latent_skills")) != (16, 250, 320_000, 3):
+        reasons.append("m0_registered_contract")
+    if counts.get("intrinsic_applied_count") != 0:
+        reasons.append("m0_intrinsic")
+    if not all(bool(value) for value in result.get("m0", {}).values()):
+        reasons.append("m0_source_checks")
+    effects = result.get("forced_audit", {}).get("effects")
+    if effects is None:
+        reasons.append("m0_forced_missing")
+    else:
         try:
-            forced_action_signatures(np.asarray(result["forced_effects"]))
+            forced_action_signatures(np.asarray(effects))
         except (TypeError, ValueError):
             reasons.append("m0_forced_shape_or_simplex")
-    if len(result.get("low_rows", [])) != 5_120:
+    ledger = checkpoint.get("event_architecture", {}).get("low_ledger")
+    if not isinstance(ledger, Sequence) or len(ledger) != 5_120:
         reasons.append("m0_low_row_count")
-    prohibited = {"reward", "utility", "wave", "owner", "progress", "contact", "success", "role"}
-    if any(prohibited & set(row) for row in result.get("low_rows", []) if isinstance(row, Mapping)):
-        reasons.append("m0_prohibited_field")
     return not reasons, reasons
 
 
-def _minimal_metrics(result: Mapping[str, Any], actor: Any | None) -> tuple[dict[str, Any], list[str]]:
-    """Derive fail-closed audit inputs from permitted source fields only."""
-    rows = result.get("low_rows")
-    effects = result.get("forced_effects")
-    if actor is None or not isinstance(rows, Sequence) or effects is None:
-        return {}, ["missing_actor_or_low_rows"]
+def _row_value(row: Any, name: str) -> Any:
+    if isinstance(row, Mapping):
+        return row[name]
+    return getattr(row, name)
+
+
+def _allowed_rows(ledger: Sequence[Any]) -> list[dict[str, Any]]:
+    fields = ("lifecycle_key", "membership_epoch", "physical_time", "observation", "skill", "action", "old_log_probability", "actor_hidden_before")
+    return [{field: _row_value(row, field) for field in fields} for row in ledger]
+
+
+def _final_log_probabilities(actor: Any, rows: Sequence[Mapping[str, Any]]) -> np.ndarray:
+    values = []
+    with torch.no_grad():
+        for row in rows:
+            observation = torch.as_tensor(row["observation"], dtype=torch.float32).reshape(1, -1).to(actor.device)
+            skills = torch.tensor([int(row["skill"])], dtype=torch.long, device=actor.device)
+            hidden = torch.as_tensor(row["actor_hidden_before"], dtype=torch.float32).reshape(1, -1).to(actor.device)
+            features = actor._features(observation, skills)
+            features, _ = actor.actor_rnn(features, hidden, torch.ones(1, 1, device=actor.device))
+            action = torch.as_tensor(row["action"], dtype=torch.long, device=actor.device).reshape(1, 1)
+            values.append(float(actor.actor_act.action_out(features).log_probs(action).item()))
+    return np.asarray(values, dtype=np.float64)
+
+
+def _minimal_metrics(result: Mapping[str, Any], checkpoint: Mapping[str, Any], actor: Any | None) -> tuple[dict[str, Any], list[str], dict[str, bool]]:
+    """Derive available local diagnostics and name unavailable estimands explicitly."""
+    ledger = checkpoint["event_architecture"]["low_ledger"]
+    effects = result["forced_audit"]["effects"]
+    availability = {
+        "fixed_input_rows": False, "policy_lineage": False, "forced_aggregate": False,
+        "forced_snapshot_metadata": False, "forced_nuisance_metadata": False,
+        "natural_source_episode": False, "natural_forced_alignment": False,
+        "natural_common_support": False,
+    }
+    if actor is None:
+        return {}, ["actor_unavailable"], availability
     try:
         signatures = forced_action_signatures(np.asarray(effects))
+        rows = _allowed_rows(ledger)
         distributions = counterfactual_action_distributions(actor, rows)
-    except (KeyError, TypeError, ValueError, RuntimeError):
-        return {}, ["counterfactual_or_forced_evidence_malformed"]
-    if distributions.ndim != 3 or distributions.shape[1:] != (3, 3):
-        return {}, ["categorical_support"]
-    episodes = np.asarray([row.get("episode") for row in rows])
-    if any(value is None for value in episodes):
-        return {}, ["episode_missing"]
-    pair_rows = []
+        final_logp = _final_log_probabilities(actor, rows)
+    except (KeyError, AttributeError, TypeError, ValueError, RuntimeError):
+        return {}, ["ledger_or_actor_evidence_malformed"], availability
+    availability.update(fixed_input_rows=True, policy_lineage=True, forced_aggregate=True)
+    pairs = {}
     for left in range(3):
         for right in range(left + 1, 3):
-            tv = 0.5 * np.abs(distributions[:, left] - distributions[:, right]).sum(axis=1)
-            pair_rows.append(((left, right), [{"episode": episode, "value": value} for episode, value in zip(episodes, tv)]))
-    try:
-        pair_cis = {pair: _ci_rows(values, "value") for pair, values in pair_rows}
-    except ValueError:
-        return {}, ["exact_cluster_support"]
-    forced_ref = signatures[:64]
-    energies = {}
-    for pair, _ in pair_rows:
-        diff = forced_ref[:, pair[0]] - forced_ref[:, pair[1]]
-        energies[pair] = float(np.mean(np.maximum(0.0, (diff[:, 0] * diff[:, 1]))))
-    frozen_pair = sorted(energies, key=lambda pair: (-energies[pair], pair))[0]
-    forced_values = [{"episode": index // 4, "value": math.sqrt(energies[frozen_pair])} for index in range(64)]
-    forced_ci = _ci_rows(forced_values, "value")
-    contexts = reconstruct_context_rows(rows)
-    context_ok = all(name in row for row in contexts for name in ("duration_bin", "age_bin", "entry", "active_n_bin"))
-    # The remaining endpoints are intentionally conservative until all windows
-    # and strata are present; a missing/ambiguous endpoint is F, never a pass.
-    support_ok = len(set(episodes)) >= 8 and len(rows) >= 32
-    lineage = result.get("final_minus_old_logp")
-    lineage_ok = isinstance(lineage, Sequence) and len(lineage) and float(np.quantile(np.abs(lineage), 0.95)) <= math.log(1.2)
-    metrics = {
-        "validity_ok": True, "support_ok": support_ok and context_ok,
-        "policy_lineage_ok": lineage_ok,
-        "all_pairs_exact_upper_below_delta": all(ci[1] < DELTA for ci in pair_cis.values()),
-        "all_pairs_forced_upper_below_delta": forced_ci[1] < DELTA,
-        "frozen_pair_exact_ci": pair_cis[frozen_pair], "frozen_pair_forced_ci": forced_ci,
-        "stability_pooled_ci": (0.0, 0.0), "stability_stratum_cis": [(0.0, 0.0)] * 12,
-        "natural_raw_ci": (0.0, 0.0), "natural_nuisance_ci": (0.0, 0.0),
-        "natural_matched_margin_ci": (0.0, 0.0), "frozen_pair": list(frozen_pair),
+            pairs[f"{left}-{right}"] = float(np.mean(0.5 * np.abs(distributions[:, left] - distributions[:, right]).sum(axis=1)))
+    lineage = final_logp - np.asarray([row["old_log_probability"] for row in rows], dtype=np.float64)
+    diagnostics = {
+        "all_skill_tv_means": pairs,
+        "forced_aggregate_signature_mean": signatures.mean(axis=(0, 2)).tolist(),
+        "policy_lineage_abs_delta_p95": float(np.quantile(np.abs(lineage), 0.95)),
     }
-    return metrics, ([] if support_ok and context_ok and lineage_ok else ["support_or_lineage_or_context"])
+    reasons = [name for name, available in availability.items() if not available]
+    return diagnostics, reasons, availability
 
 
 def _coerce_source(source: Mapping[str, Any] | str | Path) -> Mapping[str, Any]:
@@ -329,7 +343,7 @@ def _coerce_source(source: Mapping[str, Any] | str | Path) -> Mapping[str, Any]:
         return source
     root = Path(source)
     loaded = load_audit_inputs(root / "result" / "stage_c_arm.json", root / "checkpoints" / "update_250_live.pt")
-    return {"result": loaded["result"], "actor": loaded["actor"], "source_identity": str(root)}
+    return {"result": loaded["result"], "checkpoint": loaded["checkpoint"], "actor": loaded["actor"], "source_identity": str(root)}
 
 
 def _analyze_arm(source: Mapping[str, Any] | str | Path, expected_arm: str) -> dict[str, Any]:
@@ -337,11 +351,14 @@ def _analyze_arm(source: Mapping[str, Any] | str | Path, expected_arm: str) -> d
     result = source.get("result", source)
     if not isinstance(result, Mapping):
         return {"identity": _source_identity(source), "m0_valid": False, "reasons": ["result_not_mapping"]}
-    valid, reasons = _m0(result, expected_arm)
+    checkpoint = source.get("checkpoint")
+    if not isinstance(checkpoint, Mapping):
+        return {"identity": _source_identity(source), "m0_valid": False, "reasons": ["checkpoint_not_mapping"]}
+    valid, reasons = _m0(result, checkpoint, expected_arm)
     if not valid:
         return {"identity": _source_identity(source), "m0_valid": False, "reasons": reasons}
-    metrics, measured_reasons = _minimal_metrics(result, source.get("actor"))
-    return {"identity": _source_identity(source), "m0_valid": True, "metrics": metrics, "reasons": measured_reasons}
+    diagnostics, measured_reasons, availability = _minimal_metrics(result, checkpoint, source.get("actor"))
+    return {"identity": _source_identity(source), "m0_valid": True, "diagnostics": diagnostics, "evidence_availability": availability, "reasons": measured_reasons}
 
 
 def _json_safe(value: Any) -> Any:
@@ -360,10 +377,10 @@ def run_audit(f0_source: Mapping[str, Any] | str | Path, f1_source: Mapping[str,
     """Derive both diagnostics, selecting only F1 for the scientific outcome."""
     f0 = _analyze_arm(f0_source, "f0")
     f1 = _analyze_arm(f1_source, "f1")
-    if not f1["m0_valid"]:
+    if not f0["m0_valid"] or not f1["m0_valid"]:
         outcome = "INVALID_ITERATION3_AUDIT"
     else:
-        outcome = decide_outcome(f1.get("metrics", {}))
+        outcome = "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
     payload = _json_safe({
         "selector_arm": "f1", "f1_outcome": outcome, "source_identity": {"f0": f0["identity"], "f1": f1["identity"]},
         "m0": {"f0": f0["m0_valid"], "f1": f1["m0_valid"]},
