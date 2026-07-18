@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: "Create or resume the full tracked HMASD five-stage external-review round governed by 05_REVIEW_STATE.json: blind Gemini and open GPT-5.6 Pro reviews, controller synthesis, convergent GPT-5.6 Pro review, and controller disposition. Use role-specific Terra Medium transport subagents. Do not use for prompts, manual handoff, one returned review, literature discussion, brainstorming, single-reviewer consultation, routine result interpretation, or a contract-determined disposition."
+description: "Use when creating or resuming a tracked HMASD five-stage external-review round governed by 05_REVIEW_STATE.json. Do not use for prompt generation, manual handoff, one returned review, literature discussion, brainstorming, single-reviewer consultation, routine result interpretation, or a contract-determined disposition."
 ---
 
 # HMASD Review Round
@@ -21,8 +21,8 @@ while an external stage remains `DISPATCHED`.
 
 States mean:
 
-- `NOT_STARTED`: no transport worker was created;
-- `DISPATCHED`: the registered role subagent was created for the exact route;
+- `NOT_STARTED`: no guarded Exchange dispatch was delivered;
+- `DISPATCHED`: the exact route was delivered to the registered Exchange task;
 - `COMPLETE`: the exact raw is archived and a completion receipt is accepted;
 - `BLOCKED`: an actionable authority, identity, source, authentication, or
   transport problem prevents progress.
@@ -37,14 +37,12 @@ External receipts retain exactly these fields:
 source;session;conversation;role;model;route;terminal;reference
 ```
 
-A new transport uses `source=subagent`, the canonical child task name as
-`session`, the registered external conversation as `conversation`, and
-`reference=agent:<canonical-task>:spawn` or
-`reference=agent:<canonical-task>:complete`. The two references must differ.
-The state script derives the one legal task name from round ID and role and
-requires the registry's `gpt-5.6-terra`/`medium` worker profile.
-Manual receipts remain user-message receipts. Existing tracked receipts from a
-prior transport remain valid history and are never rewritten.
+A new transport uses `source=exchange`, the registered Codex Exchange task ID
+as `session`, the registered external conversation as `conversation`, and an
+exact `turn:<uuid>#item-<id>` from `read_thread` as `reference`. Dispatch and
+completion references must differ and must come from the same Exchange task.
+Existing `source=gemini` transcript receipts and manual user-message receipts
+remain valid history and are never rewritten.
 
 ## Round Order
 
@@ -70,66 +68,89 @@ inspect` section, and every listed path at that commit. Run
 `scripts/verify_pro_review_boundary.ps1`. A failed check is
 `BLOCKED_REMOTE_EVIDENCE`; do not send the reviewer to discover missing inputs.
 
-## Role-Specific Transport Subagents
+## One-to-One Codex Exchanges
 
-Create one depth-one child for each external role that is actually reached:
+Gemini, Open Pro and Convergent Pro each have one persistent local Codex
+Exchange task bound one-to-one to one external reviewer session. Reuse the
+registered task; never create a replacement, mix roles, hand off the task,
+rename it, open its model selector or modify its model. The task API does not
+expose authoritative live model settings, so never claim a live model check or
+attempt a model repair. A user- or UI-reported mismatch is
+`BLOCKED_REVIEW_THREAD_IDENTITY`.
 
-```text
-task_name: review_<normalized-round-id>_<gemini|open|convergent> (exact)
-fork_turns: none
-model: gpt-5.6-terra
-reasoning_effort: medium
+Before dispatch, call `codex_app__read_thread` and require the registry's exact
+`host_id`, `thread_id`, title, `C:\project\HMASD` cwd and a non-running status.
+Then use the only legal controller-to-Exchange call shape:
+
+```javascript
+await tools.codex_app__send_message_to_thread({
+  hostId: "<registered exchange host_id>",
+  threadId: "<registered exchange thread_id>",
+  prompt: "<internal route payload>"
+})
 ```
 
-Open and convergent Pro must use different children. A child handles only its
-registered external conversation and raw path. Reuse the same child with
-`collaboration.followup_task` only after an actionable blocker is resolved;
-never create a duplicate or change its model.
+Do not add `model` or `thinking`. Under the current tool contract, omission
+keeps the target task's current settings; supplying either field is a model
+override. Read the same Exchange task once after delivery and require the exact
+route message before recording `DISPATCHED`.
 
-The controller prompt supplies the exact route, round paths, immutable commit,
-registered external identity, and allowed raw path.
-The child reads the sources itself, performs transport, waits for natural
-completion, archives and byte-verifies the raw, and returns exactly one terminal
-final answer. The subagent runtime delivers it to `/root`:
+The internal payload contains exactly:
 
 ```text
-REVIEW_TRANSPORT
-terminal=<COMPLETE|BLOCKED>
-stage=<stage>
-route=<exact route>
-raw=<registered raw path or none>
-receipt=<completion receipt or none>
-reason=<actionable code or none>
+ACTIVE_DISPATCH
+route=<route token>
+round=<round path>
+commit=<40-character commit>
+question=<registered question path>
+raw=<registered raw path>
+controller_host_id=<current controller host>
+controller_thread_id=<current controller task>
 ```
 
-There is no `WAIT_PRO_THINKING` relay. While Pro is thinking, the child keeps
-its turn active and performs bounded read-only browser recovery on the same
-page. It must not use shell sleep. The controller remains idle after dispatch:
-do not call `wait_agent`, poll the child or page, read another task, create an
-automation/heartbeat, or spawn a replacement.
+Models, reasoning settings and external prompt text are not routing fields.
+Internal route data never enters ChatGPT or Antigravity.
 
-Do not use `create_thread`, `send_message_to_thread`, `list_threads`, or
-`read_thread` for this workflow. Do not also call
-`collaboration.send_message`; the automatic final delivery is the sole relay.
-It contains no model or reasoning fields; the worker model is fixed only by
-`spawn_agent`.
+## Required Terminal Relay
 
-## Transport Boundaries
+An Exchange local final answer is not controller notification. Before ending a
+`COMPLETE`, actionable `BLOCKED`, or unavoidable `WAIT_PRO_THINKING` turn, the
+Exchange reads the exact controller task from the current dispatch and calls
+exactly once:
 
-Gemini uses only the registered Antigravity session and approved per-round
-local-source manifest. The child may write only `11_GEMINI_DIVERGENT_RAW.md`.
+```javascript
+await tools.codex_app__send_message_to_thread({
+  hostId: "<controller_host_id from current dispatch>",
+  threadId: "<controller_thread_id from current dispatch>",
+  prompt: "REVIEW_RELAY\nroute=<exact route>\nterminal=<COMPLETE|BLOCKED|WAIT_PRO_THINKING>\nraw=<registered raw or none>\nreason=<single line or none>"
+})
+```
 
-A Pro child verifies the registered URL, visible `Pro` label, and role ACK. It
-submits the complete neutral handoff template with only `<commit>` and
-`<question-path>` replaced. Internal route data, raw paths, controller identity,
-or worker instructions never enter ChatGPT. It may write only its registered
-raw file.
+Again, omit `model` and `thinking`. Read the controller task once to confirm the
+relay arrived, then answer locally `RELAY_SENT route=<exact route>`. A missing
+or ambiguous delivery is `BLOCKED_CONTROLLER_RELAY`; never send a duplicate or
+message the other Exchange.
 
-Never click `立即回答`, `停止回答`, `重新生成`, `重试`, continuation, or an
-equivalent response-control. A browser timeout ends only that read attempt; it
-does not end the child or authorize resubmission. Only a naturally completed
-response is admissible raw.
+Do not use review transport subagents, `collaboration.send_message`, heartbeat,
+automation, shell sleep or controller polling. The Exchange normally remains
+active through external thinking. If the platform forces its turn to end, send
+one `WAIT_PRO_THINKING`; the controller may reactivate only the same Exchange
+for read-only recovery of the same response. Never resubmit the prompt.
 
-Children never edit `05_REVIEW_STATE.json`, root memory, synthesis,
-disposition, code, or Git. The controller records the returned receipt and owns
-all interpretation and scientific decisions.
+## External Transport Boundaries
+
+The Gemini Exchange uses only the registered Antigravity session and approved
+per-round local-source manifest and may write only
+`11_GEMINI_DIVERGENT_RAW.md`.
+
+Each Pro Exchange verifies its registered URL, visible `Pro` label and role ACK.
+It expands the neutral handoff template by replacing only `<commit>` and
+`<question-path>`, submits that complete prompt, and may write only its role's
+registered raw file. Never click `立即回答`, `停止回答`, `重新生成`, `重试`,
+continuation, or an equivalent response-control. A browser timeout authorizes
+only a bounded read of the same page; only a naturally completed response is
+admissible raw.
+
+Exchanges never edit `05_REVIEW_STATE.json`, root memory, synthesis,
+disposition, code or Git. The controller records receipts and owns all
+interpretation and scientific decisions.

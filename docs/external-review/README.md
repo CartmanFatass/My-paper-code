@@ -30,18 +30,17 @@ one scheduled experiment into a claim that only one research direction exists.
 
 ## Execution default
 
-Reviewer communication is automatic by default. The controller may run Gemini
-after each tracked question boundary is committed and pushed. Pro submissions
-are performed only by role-specific Terra Medium transport subagents; the
-controller never submits them in its own browser. A tracked Git-visible Pro
-exchange needs no repeated approval after the round is authorized. Transmitting
-private repository material, logs or local papers to Gemini/Antigravity requires
-explicit informed approval for the named allowlist; automatic review authority
-does not imply external-data consent. The automatic sequence remains bounded to one
-blind divergent response per reviewer, one controller synthesis and one
-convergent response. A follow-up is allowed only to repair a concrete missing
-source or ambiguous response, not to keep searching until a preferred answer
-appears.
+Reviewer communication is automatic by default through three persistent
+one-to-one local Codex Exchanges: Gemini, Open Pro and Convergent Pro. The
+controller never performs their browser or Antigravity transport directly. A
+tracked Git-visible Pro exchange needs no repeated approval after the round is
+authorized. Transmitting private repository material, logs or local papers to
+Gemini/Antigravity requires explicit informed approval for the named allowlist;
+automatic review authority does not imply external-data consent. The automatic
+sequence remains bounded to one blind divergent response per reviewer, one
+controller synthesis and one convergent response. A follow-up may repair a
+concrete missing source or ambiguous response, not search until a preferred
+answer appears.
 
 Before either Pro submission, the controller must resolve the exact full
 40-character commit, confirm that it is reachable from the remote `aggressive`
@@ -51,54 +50,48 @@ explicitly and contain that exact section. The controller runs
 `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`;
 any failed remote boundary check stops the submission before browser transport.
 
-The machine-readable Pro role and exchange registry is
-`docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each role to one
-external conversation ID, URL, visible model label and role ACK. Open and
-convergent roles use different external conversations and different
-role-specific Terra Medium transport subagents. Before every submission, verify
-the exact URL, visible model label and existing role ACK without changing the
-external model. Any mismatch stops as `BLOCKED_REVIEW_THREAD_IDENTITY`; never
-route to the other role or a mixed-purpose conversation as fallback.
+The machine-readable registry is
+`docs/external-review/REVIEWER_CONVERSATIONS.json`. It binds each reviewer to
+one external session and one local Exchange task. Open and convergent roles use
+different external and local conversations. Before every submission, verify
+the exact local host/thread/title/cwd and external URL/model label/role ACK.
+Neither thread API exposes authoritative live model settings; do not claim a
+live model read or repair a mismatch. Any reported mismatch is
+`BLOCKED_REVIEW_THREAD_IDENTITY`.
 
-Reuse the two registered Pro conversations and the one live Gemini process.
-Do not create duplicate conversations, alter a conversation's model or run the
-open and convergent prompts in the same conversation. Automatic exchange does
-not authorize reviewer-proposed edits, experiments or promotion.
-
-The controller does not perform Pro browser transport. It creates one
-depth-one `gpt-5.6-terra` medium subagent for the reached reviewer role. The
-child is fixed at creation, accesses only its matching external conversation,
-stays active through natural Pro completion, archives the exact raw and returns
-one final payload that the subagent runtime delivers to `/root`. It never sends
-a second collaboration message or receives model settings in a message.
+Reuse the three registered Exchanges and their external sessions. Do not create,
+fork, hand off, rename, duplicate or alter their models. Automatic exchange
+does not authorize reviewer-proposed edits, experiments or promotion.
 
 The exact dispatch sequence is:
 
 ```text
-controller preflight
--> spawn the role-specific Terra Medium subagent
--> verify external role/conversation/model ACK
--> child browser submission and internal wait
+controller read_thread identity preflight
+-> send hostId/threadId/prompt to the matching Exchange
+-> read_thread delivery confirmation and DISPATCHED receipt
+-> Exchange external identity check and submission
 -> exact raw archive or transport blocker
--> automatic subagent final delivery
+-> Exchange sends one terminal REVIEW_RELAY to the controller
+-> controller confirms the Exchange terminal turn/item
 -> controller resumes from the first missing artifact
 ```
 
-Do not create local Exchange conversations or use `send_message_to_thread`,
-`list_threads`, `read_thread`, heartbeat or automation. Those paths combine
-transport with conversation identity and previously allowed sender/receiver
-model settings to cross. Subagent collaboration messages contain no model or
-reasoning fields; the child uses only its automatic final delivery and the
-controller remains idle until `COMPLETE` or actionable `BLOCKED`.
+Both directions call `codex_app__send_message_to_thread` with only `hostId`,
+`threadId` and `prompt`. Do not add `model` or `thinking`: current tool semantics
+preserve the target settings when they are omitted, while supplying either is
+an override. Confirm both deliveries with `read_thread`. A local Exchange final
+without the active terminal relay is not notification. Do not use a review
+transport subagent, `collaboration.send_message`, heartbeat, automation, shell
+sleep or a replacement conversation.
 
 The idempotence token is `<round>:<role>:<commit>:<raw-path>`. A plugin or
 authentication failure is not a scientific reviewer response and is never
 stored in the role raw path.
 
-All GPT-5.6 Pro submissions use the Codex built-in browser. Reuse a registered
-usable conversation; if it is busy, wait or recover it. Create one and register
-it only when no usable corresponding conversation exists. Never use Chrome,
-Computer Use or a generic web request as a substitute.
+All GPT-5.6 Pro submissions use the Codex built-in browser inside the matching
+Exchange. If a registered task or external conversation is missing or busy,
+recover that same pair or return `BLOCKED`; never create a substitute or use
+Chrome, Computer Use or a generic web request.
 
 ## Round ownership
 

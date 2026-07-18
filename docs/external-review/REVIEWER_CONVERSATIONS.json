@@ -1,27 +1,23 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "updated": "2026-07-18",
-  "subagent_transport": {
-    "kind": "role_specific_depth_one_subagent",
-    "model_id": "gpt-5.6-terra",
-    "reasoning_effort": "medium",
-    "fork_turns": "none",
-    "controller_to_worker": "collaboration.spawn_agent_or_followup_task",
-    "worker_to_controller": "automatic_subagent_final_delivery",
+  "exchange_transport": {
+    "kind": "role_specific_one_to_one_codex_exchange",
+    "send_tool": "codex_app__send_message_to_thread",
+    "required_arguments": [
+      "hostId",
+      "threadId",
+      "prompt"
+    ],
+    "optional_model_fields": "FORBIDDEN",
+    "identity_preflight": "codex_app__read_thread",
+    "identity_postflight": "codex_app__read_thread",
+    "worker_to_controller": "guarded_direct_terminal_relay",
     "terminal_messages": [
       "COMPLETE",
-      "BLOCKED"
+      "BLOCKED",
+      "WAIT_PRO_THINKING"
     ]
-  },
-  "receipt_compatibility": {
-    "exchange_sessions": {
-      "OPEN_DIVERGENT": [
-        "019f716c-3c8a-7891-8c89-c94dc94fab4c"
-      ],
-      "CONVERGENT": [
-        "019f716c-676f-7673-9782-f37b72f200d2"
-      ]
-    }
   },
   "reviewers": {
     "gemini_divergent": {
@@ -31,6 +27,14 @@
       "expected_model": "Gemini 3.1 Pro (High)",
       "transport": "antigravity_cli",
       "session_frozen": true,
+      "codex_exchange": {
+        "title": "HMASD External Review Exchange Operator",
+        "thread_id": "019f6e7a-8671-7463-9615-8eea2fa5d7d1",
+        "host_id": "local",
+        "expected_model": "Luna High",
+        "model_frozen": true,
+        "write_scope": "11_GEMINI_DIVERGENT_RAW.md"
+      },
       "standing_consent": {
         "state": "APPROVED",
         "granted_at": "2026-07-18",
@@ -52,7 +56,15 @@
         "停止回答",
         "重新生成",
         "重试"
-      ]
+      ],
+      "codex_exchange": {
+        "title": "External Review Exchange — Open Pro",
+        "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
+        "host_id": "local",
+        "expected_model": "Luna High",
+        "model_frozen": true,
+        "write_scope": "21_PRO_OPEN_RAW.md"
+      }
     },
     "convergent": {
       "role": "CONVERGENT",
@@ -66,7 +78,15 @@
         "停止回答",
         "重新生成",
         "重试"
-      ]
+      ],
+      "codex_exchange": {
+        "title": "External Review Exchange — Convergent Pro",
+        "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
+        "host_id": "local",
+        "expected_model": "Luna High",
+        "model_frozen": true,
+        "write_scope": "41_PRO_CONVERGENT_RAW.md"
+      }
     }
   }
 }

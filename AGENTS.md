@@ -195,20 +195,20 @@ standing; controller synthesis precedes convergent Pro. Reviewers recommend but
 never authorize code, experiments, promotion, disposition, or a unique legal
 research direction.
 
-Reuse the registered persistent external reviewer conversations and never
-create duplicates, mix open/convergent roles, change their models, or submit
-them in parallel. Each external stage uses its own depth-one
-`gpt-5.6-terra` medium transport subagent; open and convergent Pro never share a
-child. The child remains active through external thinking, archives the exact
-raw, and returns only `COMPLETE` or actionable `BLOCKED`; the subagent runtime
-delivers that final payload to `/root`. Do not use an additional
-`collaboration.send_message`, independent Codex exchange conversations,
-cross-thread messaging, model fields in messages, heartbeat, automation,
-controller sleep, or controller polling. Archive every raw before
-interpretation; missing or ambiguous raw is incomplete evidence. Pro responses
-must finish naturally; never use page controls that shorten, stop, regenerate,
-retry or continue a response. A browser timeout permits only read-only recovery
-by the same child on the same page. Private
+Reuse the three registered one-to-one Codex Exchanges and their persistent
+external reviewer sessions. Never create substitutes, mix roles, change a
+model, or submit roles in parallel. Both controller dispatch and Exchange
+terminal relay use `send_message_to_thread` with only `hostId`, `threadId` and
+`prompt`; never pass `model` or `thinking`. Verify the exact task before and
+after delivery. An Exchange must actively relay `COMPLETE`, actionable
+`BLOCKED`, or unavoidable `WAIT_PRO_THINKING` to the controller; its local final
+answer is not notification. Do not use review transport subagents,
+`collaboration.send_message`, heartbeat, automation, shell sleep or controller
+polling. Archive every raw before interpretation; missing or ambiguous raw is
+incomplete evidence. Pro responses must finish naturally; never use page
+controls that shorten, stop, regenerate, retry or continue a response. A
+browser timeout permits only read-only recovery by the same Exchange on the
+same page. Private
 local-source transfer to an external reviewer requires explicit informed
 approval recorded against the exact allowlist path, Git commit, destination and
 user-message reference. The registered Gemini reviewer has standing user
