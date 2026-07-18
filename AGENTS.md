@@ -192,7 +192,10 @@ Reuse the registered persistent, role-specific conversations and never create
 duplicates, mix open/convergent roles, change an existing model, or submit them
 in parallel. Pro transport uses the Skill's guarded direct format with explicit
 target host/thread/model/effort and pre/post identity checks. Archive every raw
-before interpretation; missing or ambiguous raw is incomplete evidence. Private
+before interpretation; missing or ambiguous raw is incomplete evidence. Pro
+responses must finish naturally; never use page controls that shorten, stop,
+regenerate, retry or continue a response. A browser timeout permits only
+read-only recovery of that same response. Private
 local-source transfer to an external reviewer requires explicit informed
 approval recorded against the exact allowlist path, Git commit, destination and
 user-message reference. The registered Gemini reviewer has standing user

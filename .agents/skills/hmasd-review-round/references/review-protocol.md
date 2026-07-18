@@ -96,6 +96,17 @@ message and completed answer are two items in that same turn, identify them as
 `turn:<uuid>#item-<id>` using the exact item IDs returned by `read_thread`.
 Those two item-qualified references are distinct receipts; do not fabricate a
 second turn.
+
+The external Pro response must finish naturally. The Exchange must never click
+`立即回答`, `停止回答`, `重新生成`, `重试`, a continuation control or an equivalent
+response-control button. A browser tool timeout ends only that read attempt:
+restore the same page and inspect it without mutation. If the page remains in
+`Pro 思考中`, return `WAIT_PRO_THINKING`; the controller keeps the registered
+stage `DISPATCHED` and may later request read-only inspection of that same
+response. Never submit the question again. If a forbidden control is used, the
+transport is invalid, no raw is admissible, and recovery requires an explicit
+controller decision.
+
 The exchange acknowledges its Codex thread ID, target Pro conversation ID and
 role before opening the browser, then returns a terminal payload through the
 same guarded format. It never messages the other role.

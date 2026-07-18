@@ -140,6 +140,16 @@ format resolved against the controller. Never omit `model` or
 create a duplicate, or submit roles in parallel. A mismatch is
 `BLOCKED_REVIEW_THREAD_IDENTITY`.
 
+Full Pro thinking is part of the evidence contract. Never click `立即回答`,
+`停止回答`, `重新生成`, `重试`, a continuation control, or any equivalent that
+shortens, replaces or restarts the response. A browser-call timeout is not a
+response timeout. Reopen the same registered page read-only; if it is still
+thinking, return `WAIT_PRO_THINKING` and leave the stage `DISPATCHED`. A later
+bounded wakeup may inspect that same response but must not resubmit the prompt.
+Only a naturally completed full response may be archived as raw. Use of a
+forbidden control is `BLOCKED_INVALID_FULL_THINKING_TRANSPORT`; preserve no raw
+and require explicit controller recovery authority.
+
 The route token is `<round>:<role>:<commit>:<raw-path>`. A token closes only when
 `review_state.ps1` accepts its `COMPLETE` transition with the exact raw and
 receipt; a nonempty raw alone does not close it. Browser, plugin, authentication,
