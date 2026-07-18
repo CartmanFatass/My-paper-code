@@ -27,19 +27,19 @@ Direct controller work is the default. Explanations, status reads, bounded
 inspection or diagnosis, one-file changes, Git/docs, prompt generation, result
 interpretation and routine continuation stay direct.
 
-Superpowers owns the generic core-development lifecycle. Use
-`superpowers:brainstorming` for an unapproved new design,
-`superpowers:writing-plans` for multi-step work,
-`superpowers:test-driven-development` for every implementation or bug fix,
-`superpowers:subagent-driven-development` when subagents are available, and
-`superpowers:verification-before-completion` before a completion, commit or push
-claim. Existing HMASD authorization satisfies the approval boundary for its
-registered scope; do not request it again. Do not create a worktree unless the
-user explicitly requests one.
+Only three project Skills own conditional workflows:
 
-Implementation and review permissions, edit and commit boundaries, task
-handoffs and fix loops follow the invoked Superpowers workflow. `AGENTS.md`
-does not add a parallel implementer or reviewer permission model.
+- use `$hmasd-research-cycle` for an explicit autonomous research iteration, an
+  unresolved architecture boundary, selection of a discriminating evidence
+  source, or a valid result that must reweight the live portfolio;
+- use `$hmasd-experiment` for authorized experiment lifecycle mutations;
+- use `$hmasd-review-round` for a tracked five-stage external-review round.
+
+Generic skills are optional techniques selected by the controller. They do not
+own project planning, delegation, review, edit, commit, Git, memory or scientific
+decision boundaries. Existing HMASD authorization satisfies the approval
+boundary for its registered scope; do not request it again. Do not create a
+worktree unless the user explicitly requests one.
 
 For staged core work, keep one persistent plan in
 `memory/IMPLEMENTATION_PLAN.md` with one `HMASD Contract` section. Freeze the
@@ -57,7 +57,7 @@ preserve attribution and workspace integrity.
 The active controller alone decides the algorithm, architecture, causal route,
 reuse/replacement, data and gradient flow, invariants and stability goals. Freeze
 those decisions in the active plan before delegated implementation; unresolved
-core semantics return to the controller through the Superpowers workflow.
+core semantics return directly to the controller.
 
 Project files do not select or record the controller model. Every newly spawned
 HMASD implementer, implementation fixer, task reviewer and whole-change reviewer
@@ -67,12 +67,8 @@ Sol-xhigh implementation/review loop fails twice on the same task, stop
 delegating and the active controller takes over the research implementation
 under the same frozen contract and evidence boundary.
 
-Use `$hmasd-experiment` only when an action creates or mutates an experiment
-contract, package, launch, persistent monitor, failed runtime stage or terminal
-closure. Use `$hmasd-review-round` only when an action creates or resumes a
-tracked five-stage round governed by `05_REVIEW_STATE.json`. Respect the
-configured eight-thread ceiling and spawn depth one. Return `BLOCKED` on missing
-authority, a contract conflict or required scope expansion.
+Respect the configured eight-thread ceiling and spawn depth one. Return
+`BLOCKED` on missing authority, a contract conflict or required scope expansion.
 
 ## Research Loop
 
@@ -181,9 +177,12 @@ connection failure.
 Each launched run uses one depth-one `gpt-5.6-terra` medium monitor subagent.
 The child remains active until the registered status authority reaches a
 terminal state, then returns one final payload that the subagent runtime
-delivers to `/root`. The controller
-does not create a monitor conversation, heartbeat or automation, and does not
-sleep or poll while the child is active.
+delivers to `/root`. The controller does not create a monitor conversation,
+heartbeat or automation and performs no status or child polling. A mailbox wait
+is not status polling: keep at most one active `wait_agent` for the same child at
+a time. If a native wait times out while that child remains active, wait on the
+same child again without an intervening status/child read, sleep, poll or
+replacement monitor.
 
 Negative results are binding constraints. Do not retune, rename, reinterpret,
 or rerun a failed line without a newly registered causal reason.

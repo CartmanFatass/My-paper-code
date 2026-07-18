@@ -3,7 +3,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$RunPath,
 
-    [string]$StatusPath = "runner_status.txt"
+    [string]$StatusPath = "runner_status.txt",
+
+    [string]$ReadyPath
 )
 
 $ErrorActionPreference = "Stop"
@@ -19,6 +21,18 @@ if (-not $status.StartsWith($run + [IO.Path]::DirectorySeparatorChar, [StringCom
     throw "Status path escapes run root: $status"
 }
 
+$ready = if ([string]::IsNullOrWhiteSpace($ReadyPath)) {
+    $null
+} elseif ([IO.Path]::IsPathRooted($ReadyPath)) {
+    [IO.Path]::GetFullPath($ReadyPath)
+} else {
+    [IO.Path]::GetFullPath((Join-Path $run $ReadyPath))
+}
+if ($null -ne $ready -and
+    -not $ready.StartsWith($run + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+    throw "Ready path escapes run root: $ready"
+}
+
 function Read-Status {
     if (-not (Test-Path -LiteralPath $status -PathType Leaf)) {
         return $null
@@ -31,32 +45,36 @@ function Read-Status {
         }
         $pair = $line.Split("=", 2)
         if ($pair.Count -ne 2 -or [string]::IsNullOrWhiteSpace($pair[0])) {
-            return $null
+            throw "Malformed status line: $line"
         }
         $values[$pair[0].Trim()] = $pair[1].Trim()
     }
 
-    if (-not $values.Contains("state")) {
-        return $null
+    if (-not $values.Contains("state") -or [string]::IsNullOrWhiteSpace([string]$values.state)) {
+        throw "Status is missing state"
     }
-    if ($values.state -notin @("complete", "completed", "failed")) {
-        return $null
+    if ($values.state -notin @("running", "complete", "completed", "failed")) {
+        throw "Unknown status state: $($values.state)"
     }
     foreach ($required in @("updated", "phase")) {
         if (-not $values.Contains($required) -or [string]::IsNullOrWhiteSpace([string]$values[$required])) {
-            throw "Terminal status is missing $required"
+            throw "Status is missing $required"
         }
     }
 
     if ($values.Contains("run_root")) {
         $reportedRun = [IO.Path]::GetFullPath([string]$values.run_root)
         if (-not [string]::Equals($reportedRun, $run, [StringComparison]::OrdinalIgnoreCase)) {
-            throw "Terminal status run_root does not match the frozen run root"
+            throw "Status run_root does not match the frozen run root"
         }
     }
     if ($values.Contains("run_id") -and
         [string]$values.run_id -ne (Split-Path -Leaf $run)) {
-        throw "Terminal status run_id does not match the frozen run root"
+        throw "Status run_id does not match the frozen run root"
+    }
+
+    if ($values.state -eq "running") {
+        return $null
     }
 
     $payload = $null
@@ -96,6 +114,10 @@ $subscriptions = @()
 $subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Created -SourceIdentifier $sourceIds[0]
 $subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Changed -SourceIdentifier $sourceIds[1]
 $subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Renamed -SourceIdentifier $sourceIds[2]
+
+if ($null -ne $ready) {
+    [IO.File]::WriteAllText($ready, "ready", [Text.UTF8Encoding]::new($false))
+}
 
 try {
     while ($true) {

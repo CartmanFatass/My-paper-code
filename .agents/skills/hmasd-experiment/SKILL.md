@@ -17,13 +17,19 @@ Before a conclusion-bearing launch, require a contract naming the causal edge,
 comparator, metrics and thresholds, nulls, seeds, environment steps, optimizer
 updates, outcome branches, prohibited changes, expected wall clock, placement,
 and authoritative status source. Use the registered parallel CUDA topology and
-one timestamped `logs/<run-id>/` root. Do not fall back to CPU or serial
-execution, change placement, or launch merely because implementation completed.
+one timestamped `logs/<run-id>/` final run root. Create that final run root and
+its live `runner_status.txt` at launch. Keep raw and result payload staging
+inside the final run root; never publish the run by renaming an external staging
+root. Publish a completed payload with an atomic file or result-directory rename
+inside that root, then atomically update the status to its terminal state. Do not
+fall back to CPU or serial execution, change placement, or launch merely because
+implementation completed.
 
 ## Monitor with One Subagent
 
-After the runner creates its registered `runner_status.txt`, create exactly one
-depth-one monitor with `collaboration.spawn_agent`:
+After launch has created the final run root and live registered
+`runner_status.txt`, create exactly one depth-one monitor with
+`collaboration.spawn_agent`:
 
 ```text
 task_name: monitor_<normalized-run-id>
@@ -38,6 +44,13 @@ monitor is read-only. It runs
 `scripts/wait_runner_status.ps1`, remains active until a terminal status or an
 actionable monitoring error, and never reads result content or stderr, edits a
 file, restarts work, interprets science, or changes the experiment.
+
+Only an absent status file is ordinary silence. For every existing status, the
+only nonterminal state is `running`; terminal state is the contract's registered
+`complete` or `completed`, plus `failed`. Require `updated` and `phase` in every
+state and continue validating `run_root`, `run_id`, and terminal payload
+containment. A malformed line, missing state or required field, or unknown state
+is an immediate actionable monitoring error.
 
 The monitor returns exactly one terminal final answer, which the subagent
 runtime delivers to `/root`, then exits:
@@ -59,9 +72,13 @@ Do not create a monitor conversation, automation, heartbeat, dashboard, or
 `list_threads`, `read_thread`, `collaboration.send_message`, `Start-Sleep`, or
 model/thinking fields in a message. An additional send would duplicate the
 automatic final delivery. The model is fixed only at subagent creation. While it is active, the
-controller remains idle: do not poll the status, read the child repeatedly,
-call `wait_agent`, or spawn a duplicate monitor. A user-requested progress read
-is a separate one-time controller inspection and does not replace the monitor.
+controller may use a native mailbox wait for terminal delivery. Keep at most one
+active `wait_agent` for the same child at a time. If a native wait times out while
+the child remains active, call `wait_agent` again only for that same child. Do
+not poll the status, read the status or child between waits, sleep, or spawn a
+duplicate monitor. A mailbox wait is not status polling. A user-requested
+progress read is a separate one-time controller inspection and does not replace
+the monitor.
 
 ## Diagnose and Close
 

@@ -1736,6 +1736,113 @@ single result source are owned by `memory/ExpRecord.md`.
   normalization, or clip.
 
 
+## Task 4: HMASD-Native Research Workflow Skills
+
+Status: completed on 2026-07-18. Mandatory generic software-development
+orchestration is removed; the project-native research cycle now owns research
+iteration boundaries while generic techniques remain optional.
+
+### HMASD Contract
+
+- Goal: keep hypothesis generation, evidence selection, coherent implementation,
+  experiment execution and portfolio disposition aligned with algorithm research
+  rather than task-completion throughput.
+- Preserve: active-controller ownership, two-to-four live research candidates,
+  serialized mutating evidence, Git/memory ownership, existing external-review
+  Exchange identities, experiment authority and negative-result semantics.
+- Replace: mandatory Superpowers lifecycle ownership, automatic SDD whenever a
+  subagent exists, per-task briefs/reports/review packages, per-task commits and
+  unconditional TDD/review loops.
+- Add: one `hmasd-research-cycle` skill for explicit automated iterations,
+  architecture boundaries and portfolio evidence decisions.
+- Retain and narrow: `hmasd-experiment` and `hmasd-review-round`.
+- Non-goals: no algorithm, reward, environment, experiment, model-routing,
+  external-session, checkpoint or runtime-result change.
+
+### Exact Files and Interfaces
+
+- Create `.agents/skills/hmasd-research-cycle/SKILL.md` with trigger-only
+  frontmatter and the single-iteration research contract.
+- Create `.agents/skills/hmasd-research-cycle/agents/openai.yaml` for UI metadata.
+- Modify `AGENTS.md` so direct controller work remains the default and only the
+  three project skills own conditional workflows. Generic Superpowers skills are
+  optional techniques selected by the controller; they do not own Git, planning,
+  delegation or review boundaries.
+- Modify `.agents/skills/hmasd-experiment/SKILL.md` and
+  `references/experiment-protocol.md`: the final run root and live
+  `runner_status.txt` exist from launch; raw/result payloads stage inside that
+  root; only one native `wait_agent` may be active at a time. A native wait
+  timeout may resume the same child without an intervening status/child read;
+  repeated status polling remains forbidden.
+- Modify `.agents/skills/hmasd-review-round/SKILL.md` only if needed to preserve
+  the already narrow five-stage trigger and controller-only disposition.
+- Keep the existing one-to-one Exchange registry, helper scripts and external
+  model/session contracts unchanged.
+- Add `tests/hmasd_research_workflow_contract_test.ps1` as the single persistent
+  deterministic contract check.
+- Delete `tests/hmasd_core_development_contract_test.ps1`; it asserts the
+  mandatory Superpowers lifecycle being replaced and must not remain as a
+  contradictory legacy test.
+
+### Research-Cycle Semantics
+
+1. Enter only for an explicit autonomous research iteration, an unresolved
+   architecture boundary, selection of a discriminating evidence source, or a
+   valid result that must reweight the live portfolio.
+2. Keep two to four live causal explanations or architectures when evidence
+   permits. Serialize one mutating implementation or compute source without
+   declaring it the only legal successor.
+3. The controller freezes the causal question, replacement ledger, data and
+   gradient flow, invariants, strongest ordinary baseline, outcome-dependent
+   portfolio updates and stop condition in this plan.
+4. Work directly by default. If delegation has clear net benefit, use one
+   coherent implementer and one whole-change reviewer, with at most one repair
+   cycle. Do not create task briefs, reports, ledgers or task commits.
+5. Add at most one focused corruption check unless a newly observed operational
+   failure requires its own regression reproduction. A valid scientific
+   negative closes the evidence source without rescue.
+6. Stop after one accepted evidence source updates the whole portfolio. A later
+   iteration requires a new explicit or standing autonomous-iteration boundary.
+
+### RED, GREEN and Verification
+
+- RED is the completed iteration-4 trace: duplicated task artifacts, seven
+  commits, repeated reviews/tests, a monitor visible only after terminal
+  publication and a required native wait despite the old prohibition.
+- The deterministic contract test must initially fail because
+  `hmasd-research-cycle` is absent and the old mandatory Superpowers/monitor
+  wording remains.
+- GREEN requires the new skill, narrowed AGENTS and live-status experiment
+  contract to satisfy that test.
+- Run `quick_validate.py` for all three project skills and validate their
+  `openai.yaml` metadata.
+- Require every status publication to be atomic and accept only `running` or a
+  registered terminal state. A malformed or unknown existing status is an
+  actionable monitor error, not indefinite silence. Exercise one real
+  running-to-terminal watcher transition and one malformed transition in the
+  deterministic contract test.
+- Run three read-only forward scenarios: ordinary small work stays direct; an
+  autonomous iteration selects one evidence source without task artifacts or a
+  unique research route; a formal experiment creates a live status plus one
+  monitor and one terminal wait.
+- Use one fresh whole-change reviewer. Form one workflow commit and push only
+  after controller verification. Do not launch an experiment or external review.
+
+### Completion Evidence
+
+- The three project Skills validate, and `AGENTS.md` contains no mandatory
+  Superpowers trigger or lifecycle ownership.
+- Read-only forward scenarios kept ordinary work direct, preserved a live
+  research portfolio during autonomous iteration, and selected the experiment
+  lifecycle only for a formal launch.
+- The whole-change review found three monitor-contract defects; the single
+  repair cycle closed malformed-state silence, native-wait timeout semantics,
+  and missing watcher execution coverage.
+- `tests/hmasd_research_workflow_contract_test.ps1` passes under Windows
+  PowerShell 5.1, including atomic `running -> complete` publication and an
+  immediate error for an unknown existing status. No experiment or external
+  review was launched.
+
 ## Archived Plan History
 
 Completed R22/R24/R26/R27 implementation detail is preserved by the frozen
