@@ -60,6 +60,13 @@ The controller does not call the browser. It sends routing metadata to the
 matching local exchange with all target settings explicit. Each exchange is
 created once as `Luna High`; after creation its model is immutable.
 
+Routing metadata stays inside Codex. The Exchange never pastes
+`ACTIVE_DISPATCH`, a route token, raw path, controller identity, or relay fields
+into ChatGPT. The only external Pro prompt is the complete neutral handoff
+template with exactly `<commit>` and `<question-path>` replaced. Any prior send
+of internal routing metadata is an invalid transport attempt, not a submitted
+review question and not evidence.
+
 Use the Codex built-in browser. Reuse the dedicated open reviewer conversation
 and the dedicated convergent reviewer conversation registered in
 `docs/external-review/REVIEWER_CONVERSATIONS.json`. The two roles must have

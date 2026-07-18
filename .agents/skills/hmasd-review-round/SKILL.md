@@ -134,6 +134,15 @@ await tools.codex_app__send_message_to_thread({
 })
 ```
 
+This controller payload is internal routing metadata. The Exchange must never
+paste `ACTIVE_DISPATCH`, the route token, raw path, controller identity, or any
+other internal field into the external Pro conversation. Before browser use it
+reads `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md`, replaces only
+`<commit>` and `<question-path>`, and submits the complete expanded template
+verbatim. Sending routing metadata instead is
+`BLOCKED_INVALID_EXTERNAL_PROMPT`; it is not a completed reviewer request and
+produces no admissible raw.
+
 After delivery, require the same host/thread identity. Confirm the delivered
 Exchange request through `codex_app__read_thread` and use its turn UUID for the
 `DISPATCHED` receipt. Confirm the completed Exchange turn through another
