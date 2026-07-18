@@ -19,6 +19,8 @@ $requiredAgentsText = @(
     "superpowers:test-driven-development",
     "superpowers:subagent-driven-development",
     "superpowers:verification-before-completion",
+    "Implementation and review permissions, edit and commit boundaries, task handoffs and fix loops follow the invoked Superpowers workflow",
+    "final Git integration and push",
     "HMASD Contract",
     "does not imply one research hypothesis, architecture or permitted successor",
     "gpt-5.6-sol` xhigh",
@@ -33,6 +35,10 @@ foreach ($text in $requiredAgentsText) {
 
 $forbiddenRepositoryText = @(
     '$hmasd-work',
+    'Implementers read root memory but do not edit it',
+    'Reviewers, monitors, and side conversations are read-only',
+    'Implementers execute that frozen design',
+    'reviewers inspect fidelity',
     'strongest available model',
     'Controller model:',
     'Controller reasoning:',

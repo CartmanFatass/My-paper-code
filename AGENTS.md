@@ -16,14 +16,10 @@ additional sources only when the task crosses their boundary:
   current pointer or explicit request.
 
 One active controller works directly in `C:\project\HMASD` and owns project
-decisions, root memory, Git integration, scientific interpretation, experiment
-authorization, and user communication. `memory/CURRENT_WORK.md` names that task
-and is writable only by it. A new controller may write only after an explicit
-handoff recorded there.
-
-Implementers read root memory but do not edit it. Reviewers, monitors, and side
-conversations are read-only unless the controller gives an exact non-root-memory
-write scope.
+decisions, root memory, scientific interpretation, experiment authorization,
+final Git integration and push, and user communication.
+`memory/CURRENT_WORK.md` names that task; controller ownership changes only
+through an explicit handoff recorded there.
 
 ## Unified Collaboration Workflow
 
@@ -41,6 +37,10 @@ claim. Existing HMASD authorization satisfies the approval boundary for its
 registered scope; do not request it again. Do not create a worktree unless the
 user explicitly requests one.
 
+Implementation and review permissions, edit and commit boundaries, task
+handoffs and fix loops follow the invoked Superpowers workflow. `AGENTS.md`
+does not add a parallel implementer or reviewer permission model.
+
 For staged core work, keep one persistent plan in
 `memory/IMPLEMENTATION_PLAN.md` with one `HMASD Contract` section. Freeze the
 causal or engineering goal, evidence boundary, reused/replaced/deleted/added
@@ -55,9 +55,9 @@ live competing portfolio; implementation and compute are serialized only to
 preserve attribution and workspace integrity.
 
 The active controller alone decides the algorithm, architecture, causal route,
-reuse/replacement, data and gradient flow, invariants and stability goals.
-Implementers execute that frozen design and return `BLOCKED` rather than invent
-missing semantics; reviewers inspect fidelity and do not redesign the route.
+reuse/replacement, data and gradient flow, invariants and stability goals. Freeze
+those decisions in the active plan before delegated implementation; unresolved
+core semantics return to the controller through the Superpowers workflow.
 
 Project files do not select or record the controller model. Every newly spawned
 HMASD implementer, implementation fixer, task reviewer and whole-change reviewer
