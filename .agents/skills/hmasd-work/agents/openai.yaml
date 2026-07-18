@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Work"
-  short_description: "Orchestrate a complex HMASD core change"
-  default_prompt: "Use $hmasd-work for this collaboration-dependent multi-file HMASD core change."
+  short_description: "Apply HMASD semantic constraints to core work"
+  default_prompt: "Use $hmasd-work as the HMASD domain overlay for this Superpowers-managed core change."

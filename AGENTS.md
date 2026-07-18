@@ -34,15 +34,28 @@ Skill. In particular, without such explicit invocation, explanations, status rea
 read-only diagnosis, one-file changes, Git/docs, prompt generation, result
 interpretation, and routine continuation stay direct.
 
-Activate exactly one matching project Skill only under its observable trigger:
+Superpowers is the generic development lifecycle harness for design, planning,
+test-first implementation, task reviews, verification, and completion. HMASD
+project Skills add domain contracts or own external lifecycles; they do not
+duplicate the generic harness. Activate at most one matching HMASD project
+Skill under its observable trigger while using the applicable Superpowers
+process Skills:
 
-- `$hmasd-work`: the user names it, or the controller will delegate a coupled
-  core change spanning at least two implementation files to an implementer and
-  a combined reviewer;
+- `$hmasd-work`: a planned change touches core algorithm, trainer, runtime,
+  replay, roster, credit, probability, clock, mask, checkpoint, collector, or
+  scientific-evidence semantics;
 - `$hmasd-experiment`: the action creates or mutates an experiment contract,
   package, launch, persistent monitor, failed runtime stage, or terminal closure;
 - `$hmasd-review-round`: the action creates or resumes a tracked five-stage
   round governed by `05_REVIEW_STATE.json`.
+
+Superpowers test-first and task-review requirements take precedence over the
+former `hmasd-work` one-check and one-review limits. Existing HMASD
+authorization satisfies the approval boundary for its registered scope; do not
+request the same approval again. Do not create a worktree unless the user
+explicitly requests one; the active controller works in `C:\project\HMASD`. Keep one
+persistent implementation plan in `memory/IMPLEMENTATION_PLAN.md`; do not add a
+parallel collaboration brief or duplicate plan.
 
 The user-selected active controller model is fixed for the task; never select,
 upgrade, downgrade, or repair it automatically. The active controller alone decides the

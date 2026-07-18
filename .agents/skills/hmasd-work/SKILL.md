@@ -1,112 +1,75 @@
 ---
 name: hmasd-work
-description: Orchestrate an HMASD core implementation only when the user explicitly invokes $hmasd-work or the controller will delegate a coupled change spanning at least two implementation files to an implementer and one combined reviewer. Do not use for direct controller work, explanations, status, read-only diagnosis, one-file changes, Git/docs, prompts, result interpretation, or routine continuation.
+description: Use when a Superpowers-managed HMASD change touches core algorithm, trainer, runtime, replay, dynamic roster, credit, probability, clocks, masks, checkpoints, collectors, or scientific-evidence semantics.
 ---
 
 # HMASD Work
 
+## Overview
+
+Use this Skill as the HMASD domain overlay. Superpowers owns the generic
+development lifecycle: design, planning, test-first implementation, task
+reviews, final verification, and completion. Do not create a second harness,
+brief, task-state vocabulary, or reviewer workflow here.
+
+## Establish the Project Boundary
+
 Keep the current root task as active controller. Read `memory/CURRENT_WORK.md`
-first and do not change another task's controller ownership.
+first. Read `memory/ALGORITHM_PRINCIPLES.md` before changing an algorithm,
+reward, or experiment design, and read the active
+`memory/IMPLEMENTATION_PLAN.md` section before staged core work.
 
-## Activation Boundary
+The active controller alone decides the causal route, architecture,
+reuse/replacement/deletion, data and gradient flow, scientific evidence
+boundary, experiment authorization, root memory, and Git integration. An
+implementer may make engineering decisions inside that frozen design but must
+return `BLOCKED` instead of inventing a mechanism, changing the estimand, or
+expanding scope.
 
-Direct controller work is the default. Activate only when either condition is
-true:
+## Use the Superpowers Lifecycle
 
-1. the user explicitly names `$hmasd-work`; or
-2. the controller will delegate a coupled core change that writes at least two
-   implementation files to an implementer and will use one combined reviewer.
+- **REQUIRED SUB-SKILL:** Use superpowers:brainstorming for a new design that
+  is not already covered by explicit user approval or an accepted HMASD design.
+- **REQUIRED SUB-SKILL:** Use superpowers:writing-plans for multi-step work.
+- **REQUIRED SUB-SKILL:** Use superpowers:test-driven-development for every
+  implementation or bug fix. Observe RED before changing production files.
+- **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development when
+  subagents are available; otherwise use superpowers:executing-plans.
+- Follow Superpowers task-review cadence and final review. Add no separate
+  HMASD review layer or review state machine.
+- **REQUIRED SUB-SKILL:** Use superpowers:verification-before-completion before
+  any completion, commit, or push claim.
 
-Otherwise do not create a brief, implementer or reviewer. A documentation-only
-change never satisfies condition 2; explicit user invocation still satisfies
-condition 1.
+Existing HMASD authorization satisfies the corresponding approval boundary;
+do not ask again merely because the lifecycle advances. Work in the active
+controller workspace. Do not create a worktree unless the user explicitly
+requests one.
 
-Never parallelize competing algorithms or formal experiments. Never change the
-controller or another conversation's model.
+## Require One HMASD Contract
 
-## Freeze the Controller Design
+Put one `HMASD Contract` section in the active implementation plan. It must
+state only the task-specific facts needed to prevent semantic drift:
 
-The current user-selected controller model is fixed. Never change it or select a
-replacement automatically. The active controller decides before delegation:
+- causal or engineering goal and authorized evidence boundary;
+- reused, replaced, deleted, and added components;
+- exact files, symbols, tensor shapes, ordering, and collector path;
+- data/state ownership and recurrent-state lifecycle;
+- gradient owners, detach boundaries, reward scale, advantage, and credit;
+- probability factorization, RNG, replay, masks, clocks, and checkpoints;
+- preserved interfaces, dirty-worktree boundary, and explicit non-goals.
 
-- the core algorithm and causal hypothesis;
-- the network and training architecture;
-- what existing implementation is reused, replaced, or deleted;
-- the data and gradient flow;
-- probability, clock, RNG, credit, replay, mask, and checkpoint invariants;
-- expected behavior, stability, and evidence boundary;
-- the implementer's exact write scope.
+Do not create `.codex/collaboration` briefs or a parallel plan. Keep the
+persistent staged plan in `memory/IMPLEMENTATION_PLAN.md`.
 
-An implementer may locate concrete interfaces and exercise engineering
-judgment inside that design, but does not fill in missing core design, select a
-route, add a mechanism, redefine the experiment, or expand scope. A real
-conflict returns `BLOCKED` to the controller.
+## Preserve Scientific Meaning
 
-## Create One Canonical Brief
+Test-first implementation proves the code contract, not the algorithm claim.
+Use the next authorized evidence-bearing experiment to judge capability and
+stability. Do not add a separate scientific-verification stage, reinterpret a
+valid negative result as an engineering rescue, or launch smoke/formal training
+without `$hmasd-experiment` authority.
 
-For a qualifying collaboration task, create only:
-
-```text
-.codex/collaboration/active/<task-id>/BRIEF.md
-```
-
-Read `references/brief-template.md` and include only the facts needed to execute
-the current task. Do not create manifests, leases, handoff files, heartbeat
-files, result files, or review files.
-
-Use this priority:
-
-```text
-current user instruction
-> BRIEF.md
-> current repository contract
-> inherited conversation context
-```
-
-Return `BLOCKED` on a real conflict or missing authority.
-
-## Dispatch and Integrate
-
-Read `references/collaboration-protocol.md` before delegating.
-
-Use one writer per file and one implementer by default. Multiple implementers
-are allowed only when `BRIEF.md` gives them disjoint exclusive file lists and
-frozen interfaces. After every writer has stopped, use one fresh read-only
-reviewer and at most one repair/re-review pass.
-
-Task states have these exact conditions:
-
-- `BLOCKED`: a named contract conflict, missing authority, file collision or
-  required scope expansion prevents the assigned work;
-- `PACKAGE_READY`: the package changed only its exclusive files and its one
-  registered check exited zero or the brief explicitly registered `Check: none`;
-- `REVIEW_READY`: every package is `PACKAGE_READY`, no writer remains active,
-  and the controller has listed the complete intended diff and check evidence;
-- `COMPLETE`: the reviewer returned `APPROVED` or the controller disposed every
-  finding, inspected the final diff/evidence, removed the temporary brief and
-  performed only an already-authorized project boundary action.
-
-The controller alone edits root memory, integrates Git, authorizes experiments,
-interprets scientific evidence, and reports to the user.
-
-## Preserve the Research Boundary
-
-Apply the research and runtime invariants from `AGENTS.md`. Do not copy generic
-rules into the brief; record only the task-specific invariants needed to prevent
-semantic drift. The default is no new test. Register exactly one focused command
-only when the brief names a concrete corruption or wrong-experiment risk that
-the next authorized run cannot expose cheaply; otherwise write `Check: none`.
-Repair only a concrete failed boundary and never reinterpret a valid
-scientific failure as an engineering rescue. Performance remains ordinary code
-quality, not a separate gate or reviewer.
-
-An implementation ending at `COMPLETE` does not authorize smoke training,
-formal experiments, external handoff, staging, or promotion unless that
-authority already exists.
-
-## Close the Task
-
-The controller reviews the final diff and direct evidence, updates only the
-owning memory file at a real boundary, removes the task's temporary brief, and
-stages only intended files. Report the outcome, direct evidence, remaining
-risk, and next authorized action.
+Reviewers inspect implementation fidelity, probability, gradient, RNG, replay,
+clock, checkpoint, collector, stability, scope, and code quality. They do not
+choose the algorithm, authorize experiments, edit root memory, or issue the
+scientific disposition.
