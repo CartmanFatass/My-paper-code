@@ -1,0 +1,1469 @@
+{
+  "claim_ceiling": "checkpoint-local z -> action dependence, 12-active-step persistence, nuisance-stratified stability, and natural overlap in this testbed only; no environment-independent semantics, transfer, cooperation, hierarchy superiority, commitment advantage, credit success, or training-seed robustness claim",
+  "frozen_contract": {
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 307057,
+    "delta": 0.08333333333333333,
+    "delta_stratum": 0.041666666666666664,
+    "inference_episodes": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "lineage_guard": 0.1823215567939546,
+    "ordinary_marl_objection": "Outcome D remains compatible with redundant latent modes because Stage C has no utility advantage over Stage B.",
+    "reference_episodes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "shuffle_seed": 307058
+  },
+  "m0": {
+    "arms": {
+      "f0": {
+        "guard_checks": {
+          "analysis_model_grads_unchanged": true,
+          "analysis_model_tensors_unchanged": true,
+          "analysis_module_modes_unchanged": true,
+          "global_python_numpy_torch_cuda_rng_unchanged": true,
+          "model_grads_unchanged": true,
+          "model_tensors_unchanged": true,
+          "module_modes_unchanged": true,
+          "source_tensors_after_analysis_unchanged": true,
+          "strict_model_only_restore": true
+        },
+        "provenance": {
+          "checks": {
+            "arm_and_task_seed_exact": true,
+            "copied_natural_fields_exact": true,
+            "finite_source_vectors": true,
+            "forced_effects_and_source_metadata": true,
+            "forced_effects_ordered_bridge_exact": true,
+            "forced_shared_keys_unique": true,
+            "forced_source_schema_and_count": true,
+            "full_three_action_support_and_replay": true,
+            "natural_row_schema": true,
+            "natural_shared_keys_unique": true,
+            "one_natural_match_per_forced_key": true,
+            "only_reference_and_inference_episodes": true,
+            "prohibited_fields_absent": true,
+            "provenance_schema": true,
+            "source_observation_and_hidden_exact": true
+          },
+          "reasons": [],
+          "support_counts": {
+            "forced_sources": 128,
+            "natural_rows": 10240,
+            "unique_forced_shared_keys": 128,
+            "unique_natural_shared_keys": 10240
+          },
+          "valid": true
+        },
+        "registered_parity": {
+          "checks": {
+            "forced_effects_exact": true,
+            "natural_skill_counts_exact": true,
+            "registered_stochastic_settings_exact": true,
+            "stochastic_episode_outcomes_exact": true
+          },
+          "reasons": [],
+          "valid": true
+        },
+        "source_identity": {
+          "checks": {
+            "checkpoint_actor_header": true,
+            "checkpoint_arm_update_steps": true,
+            "checkpoint_runtime_header": true,
+            "model_only_schema3_header": true,
+            "parent_contract_exact": true,
+            "parent_result_header_and_authority_exact": true,
+            "parent_terminal_manifest_exact": true,
+            "registered_contract_exact": true,
+            "registered_counts": true,
+            "registered_result_arm": true,
+            "registered_result_header": true,
+            "registered_result_implementation_valid": true,
+            "registered_source_m0": true,
+            "source_root_bound_to_parent_run": true,
+            "terminal_arm_manifest": true,
+            "terminal_arm_paths_exact": true
+          },
+          "reasons": [],
+          "valid": true
+        },
+        "source_tensors_unchanged": true
+      },
+      "f1": {
+        "guard_checks": {
+          "analysis_model_grads_unchanged": true,
+          "analysis_model_tensors_unchanged": true,
+          "analysis_module_modes_unchanged": true,
+          "global_python_numpy_torch_cuda_rng_unchanged": true,
+          "model_grads_unchanged": true,
+          "model_tensors_unchanged": true,
+          "module_modes_unchanged": true,
+          "source_tensors_after_analysis_unchanged": true,
+          "strict_model_only_restore": true
+        },
+        "provenance": {
+          "checks": {
+            "arm_and_task_seed_exact": true,
+            "copied_natural_fields_exact": true,
+            "finite_source_vectors": true,
+            "forced_effects_and_source_metadata": true,
+            "forced_effects_ordered_bridge_exact": true,
+            "forced_shared_keys_unique": true,
+            "forced_source_schema_and_count": true,
+            "full_three_action_support_and_replay": true,
+            "natural_row_schema": true,
+            "natural_shared_keys_unique": true,
+            "one_natural_match_per_forced_key": true,
+            "only_reference_and_inference_episodes": true,
+            "prohibited_fields_absent": true,
+            "provenance_schema": true,
+            "source_observation_and_hidden_exact": true
+          },
+          "reasons": [],
+          "support_counts": {
+            "forced_sources": 128,
+            "natural_rows": 10240,
+            "unique_forced_shared_keys": 128,
+            "unique_natural_shared_keys": 10240
+          },
+          "valid": true
+        },
+        "registered_parity": {
+          "checks": {
+            "forced_effects_exact": true,
+            "natural_skill_counts_exact": true,
+            "registered_stochastic_settings_exact": true,
+            "stochastic_episode_outcomes_exact": true
+          },
+          "reasons": [],
+          "valid": true
+        },
+        "source_identity": {
+          "checks": {
+            "checkpoint_actor_header": true,
+            "checkpoint_arm_update_steps": true,
+            "checkpoint_runtime_header": true,
+            "model_only_schema3_header": true,
+            "parent_contract_exact": true,
+            "parent_result_header_and_authority_exact": true,
+            "parent_terminal_manifest_exact": true,
+            "registered_contract_exact": true,
+            "registered_counts": true,
+            "registered_result_arm": true,
+            "registered_result_header": true,
+            "registered_result_implementation_valid": true,
+            "registered_source_m0": true,
+            "source_root_bound_to_parent_run": true,
+            "terminal_arm_manifest": true,
+            "terminal_arm_paths_exact": true
+          },
+          "reasons": [],
+          "valid": true
+        },
+        "source_tensors_unchanged": true
+      }
+    },
+    "global_rng_unchanged": true,
+    "paired_source_binding": {
+      "checks": {
+        "exact_f0_f1_arms": true,
+        "individual_source_identity_valid": true,
+        "same_full_source_commit": true,
+        "same_parent_contract": true,
+        "same_parent_root": true,
+        "same_parent_run": true
+      },
+      "reasons": [],
+      "valid": true
+    },
+    "valid": true
+  },
+  "outcome": "A_NO_MATERIAL_Z_DEPENDENCE",
+  "registered_metrics": {
+    "f0": {
+      "forced": {
+        "executable_naturally_used_skills": false,
+        "persistent_like_skill": 0,
+        "reactive_like_skill": 2,
+        "rho": 0.0,
+        "rho_ci95": [
+          0.0,
+          0.0,
+          0.06911206789255277
+        ]
+      },
+      "stochastic": {
+        "natural_skill_step_counts": [
+          9028,
+          24982,
+          47910
+        ],
+        "persistent_mean": 0.33489990234375,
+        "short_mean": 0.4908854166666667,
+        "utility_mean": 0.41289265950520837
+      }
+    },
+    "f1": {
+      "forced": {
+        "executable_naturally_used_skills": false,
+        "persistent_like_skill": 1,
+        "reactive_like_skill": 2,
+        "rho": 0.07030408926280159,
+        "rho_ci95": [
+          0.058321183774750436,
+          0.07030408926280159,
+          0.11116411958574053
+        ]
+      },
+      "stochastic": {
+        "natural_skill_step_counts": [
+          18165,
+          22864,
+          40891
+        ],
+        "persistent_mean": 0.32305908203125,
+        "short_mean": 0.50830078125,
+        "utility_mean": 0.415679931640625
+      }
+    }
+  },
+  "schema_version": 1,
+  "selector_arm": "f1",
+  "semantic_metrics": {
+    "f0": {
+      "metrics": {
+        "all_pairs_exact_upper_below_delta": true,
+        "all_pairs_forced_upper_below_delta": true,
+        "frozen_pair_exact_ci": [
+          0.030430810124380515,
+          0.034036026283865796
+        ],
+        "frozen_pair_forced_ci": [
+          0.009081629550375211,
+          0.0365774981941501
+        ],
+        "natural_matched_margin_ci": [
+          0.35910878112712974,
+          0.4713302752293578
+        ],
+        "natural_nuisance_ci": [
+          0.2978035094246032,
+          0.4871651785714286
+        ],
+        "natural_raw_ci": [
+          0.03275465870032292,
+          0.03582255265366403
+        ],
+        "policy_lineage_ok": true,
+        "stability_pooled_ci": [
+          0.0020043428868611046,
+          0.006849483578299326
+        ],
+        "stability_stratum_cis": [
+          [
+            0.015959669165728444,
+            0.02225402381351795
+          ],
+          [
+            0.0020343771359005868,
+            0.0055212834908404665
+          ],
+          [
+            0.007605298806074416,
+            0.01973664555085169
+          ],
+          [
+            0.00018628410803083728,
+            0.014247305694934008
+          ],
+          [
+            0.006691784403409904,
+            0.02678099317752014
+          ],
+          [
+            0.0005422505824798858,
+            0.02109428352109874
+          ],
+          [
+            0.014519418589426816,
+            0.024332131443469105
+          ],
+          [
+            0.0013435083033417625,
+            0.005291360696829984
+          ],
+          [
+            0.0030447356799145446,
+            0.028225055918743035
+          ],
+          [
+            0.0,
+            0.013755358355025601
+          ],
+          [
+            0.015216780615775286,
+            0.021479117537785967
+          ],
+          [
+            0.0016623588844871977,
+            0.009274965601978432
+          ],
+          [
+            0.014085717977944459,
+            0.024874445783901016
+          ],
+          [
+            0.00104569983062943,
+            0.011451128966796066
+          ],
+          [
+            0.014535538121704916,
+            0.022515869411656435
+          ],
+          [
+            0.00185399084798851,
+            0.008808922192526221
+          ],
+          [
+            0.010143415743394767,
+            0.021628956257751755
+          ],
+          [
+            6.273645284479198e-05,
+            0.0041591563258106595
+          ],
+          [
+            0.015476969444948745,
+            0.021658568141000645
+          ],
+          [
+            0.0020185153176030153,
+            0.005478810305476607
+          ],
+          [
+            0.010107164989606628,
+            0.02494386919843332
+          ],
+          [
+            5.157511097747073e-05,
+            0.011662819473899022
+          ],
+          [
+            0.008245148883066943,
+            0.025703491429592773
+          ],
+          [
+            0.0,
+            0.018457498080961397
+          ]
+        ],
+        "support_ok": false,
+        "validity_ok": true
+      },
+      "natural_overlap": {
+        "balanced_accuracy": 0.9862385321100917,
+        "balanced_accuracy_ci": [
+          0.9668898809523809,
+          1.0
+        ],
+        "context_only_balanced_accuracy": 0.4954128440366973,
+        "episodes_per_skill": {
+          "0": 13,
+          "2": 16
+        },
+        "matched_shuffle_margin_ci": [
+          0.35910878112712974,
+          0.4713302752293578
+        ],
+        "nuisance_margin_ci": [
+          0.2978035094246032,
+          0.4871651785714286
+        ],
+        "raw_decision_ci": [
+          0.03275465870032292,
+          0.03582255265366403
+        ],
+        "raw_distance_margin_ci": [
+          0.03275465870032292,
+          0.03582255265366403
+        ],
+        "segments_per_skill": {
+          "0": 28,
+          "2": 109
+        },
+        "selected_segments": 137,
+        "shuffle_nulls": {
+          "active_n_bin": {
+            "lower": 0.4251310615989515,
+            "mean": 0.5019062745740498,
+            "upper": 0.5822411533420708
+          },
+          "age_bin": {
+            "lower": 0.4251310615989515,
+            "mean": 0.5198549803407602,
+            "upper": 0.6046854521625163
+          },
+          "duration_bin": {
+            "lower": 0.4251310615989515,
+            "mean": 0.5192781618610749,
+            "upper": 0.6046854521625163
+          },
+          "entry_rejoin": {
+            "lower": 0.4251310615989515,
+            "mean": 0.5013451671035387,
+            "upper": 0.5822411533420708
+          },
+          "global": {
+            "lower": 0.4251310615989515,
+            "mean": 0.49965511140235913,
+            "upper": 0.5822411533420708
+          }
+        },
+        "skill_prior_balanced_accuracy": 0.5
+      },
+      "persistent_process_dependence_ci": {
+        "0-1": [
+          0.0,
+          0.005524271728019902
+        ],
+        "0-2": [
+          0.009081629550375211,
+          0.0365774981941501
+        ],
+        "1-2": [
+          0.002604166666666666,
+          0.026581007242673302
+        ]
+      },
+      "policy_lineage": {
+        "abs_delta_logp_p95": 3.0460953712463336e-05,
+        "rows": 10240,
+        "threshold": 0.1823215567939546,
+        "valid": true
+      },
+      "reference_centroids": {
+        "exact": {
+          "0": [
+            0.27682617912068963,
+            0.3481841888278723,
+            0.3749896418303251
+          ],
+          "2": [
+            0.28733984753489494,
+            0.31631998950615525,
+            0.3963401596993208
+          ]
+        },
+        "forced": {
+          "0": [
+            0.3652343749999999,
+            0.3619791666666668,
+            0.27278645833333337
+          ],
+          "2": [
+            0.3281249999999999,
+            0.38736979166666663,
+            0.28450520833333337
+          ]
+        }
+      },
+      "reference_selection": {
+        "ambiguous": false,
+        "inference_episodes": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "maximum_energy_pairs": [
+          "0-2"
+        ],
+        "mean_cross_replica_forced_energy": {
+          "0-1": 0.0,
+          "0-2": 0.0021701388888888894,
+          "1-2": 0.001519097222222222
+        },
+        "pair": [
+          0,
+          2
+        ],
+        "reference_episodes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "same_input_action_tv_ci": {
+        "0-1": [
+          0.008933361567324027,
+          0.010867747053271159
+        ],
+        "0-2": [
+          0.030430810124380515,
+          0.034036026283865796
+        ],
+        "1-2": [
+          0.02373229806544259,
+          0.028708168922457842
+        ]
+      },
+      "stability": {
+        "pooled_decision_ci": [
+          0.0020043428868611046,
+          0.006849483578299326
+        ],
+        "pooled_episodes": 16,
+        "pooled_exact_ci": [
+          0.01576991467364368,
+          0.02007405899533233
+        ],
+        "pooled_forced_ci": [
+          0.0020043428868611046,
+          0.006849483578299326
+        ],
+        "pooled_forced_snapshots": 64,
+        "pooled_supported": true,
+        "strata": {
+          "active_n_bin:2": {
+            "exact_ci": [
+              0.014085717977944459,
+              0.024874445783901016
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 32,
+            "exact_supported": true,
+            "forced_ci": [
+              0.00104569983062943,
+              0.011451128966796066
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 16,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "active_n_bin:4": {
+            "exact_ci": [
+              0.014535538121704916,
+              0.022515869411656435
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 64,
+            "exact_supported": true,
+            "forced_ci": [
+              0.00185399084798851,
+              0.008808922192526221
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 32,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "active_n_bin:6": {
+            "exact_ci": [
+              0.010143415743394767,
+              0.021628956257751755
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 32,
+            "exact_supported": true,
+            "forced_ci": [
+              6.273645284479198e-05,
+              0.0041591563258106595
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 16,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "age_bin:0..9": {
+            "exact_ci": [
+              0.015959669165728444,
+              0.02225402381351795
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 94,
+            "exact_supported": true,
+            "forced_ci": [
+              0.0020343771359005868,
+              0.0055212834908404665
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 47,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "age_bin:10..19": {
+            "exact_ci": [
+              0.007605298806074416,
+              0.01973664555085169
+            ],
+            "exact_episodes": 9,
+            "exact_rows": 20,
+            "exact_supported": false,
+            "forced_ci": [
+              0.00018628410803083728,
+              0.014247305694934008
+            ],
+            "forced_episodes": 9,
+            "forced_snapshots": 10,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": false
+          },
+          "age_bin:>=20": {
+            "exact_ci": [
+              0.006691784403409904,
+              0.02678099317752014
+            ],
+            "exact_episodes": 7,
+            "exact_rows": 14,
+            "exact_supported": false,
+            "forced_ci": [
+              0.0005422505824798858,
+              0.02109428352109874
+            ],
+            "forced_episodes": 7,
+            "forced_snapshots": 7,
+            "forced_supported": false,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": false
+          },
+          "duration_bin:1..9": {
+            "exact_ci": [
+              0.015476969444948745,
+              0.021658568141000645
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 88,
+            "exact_supported": true,
+            "forced_ci": [
+              0.0020185153176030153,
+              0.005478810305476607
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 44,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "duration_bin:10..19": {
+            "exact_ci": [
+              0.010107164989606628,
+              0.02494386919843332
+            ],
+            "exact_episodes": 9,
+            "exact_rows": 24,
+            "exact_supported": false,
+            "forced_ci": [
+              5.157511097747073e-05,
+              0.011662819473899022
+            ],
+            "forced_episodes": 9,
+            "forced_snapshots": 12,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": false
+          },
+          "duration_bin:>=20": {
+            "exact_ci": [
+              0.008245148883066943,
+              0.025703491429592773
+            ],
+            "exact_episodes": 8,
+            "exact_rows": 16,
+            "exact_supported": false,
+            "forced_ci": [
+              0.0,
+              0.018457498080961397
+            ],
+            "forced_episodes": 8,
+            "forced_snapshots": 8,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": false
+          },
+          "entry_rejoin:entry": {
+            "exact_ci": [
+              0.014519418589426816,
+              0.024332131443469105
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 48,
+            "exact_supported": true,
+            "forced_ci": [
+              0.0013435083033417625,
+              0.005291360696829984
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 24,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "entry_rejoin:ordinary": {
+            "exact_ci": [
+              0.015216780615775286,
+              0.021479117537785967
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 74,
+            "exact_supported": true,
+            "forced_ci": [
+              0.0016623588844871977,
+              0.009274965601978432
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 37,
+            "forced_supported": true,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": true
+          },
+          "entry_rejoin:rejoin": {
+            "exact_ci": [
+              0.0030447356799145446,
+              0.028225055918743035
+            ],
+            "exact_episodes": 3,
+            "exact_rows": 6,
+            "exact_supported": false,
+            "forced_ci": [
+              0.0,
+              0.013755358355025601
+            ],
+            "forced_episodes": 3,
+            "forced_snapshots": 3,
+            "forced_supported": false,
+            "selected_skills": [
+              0,
+              2
+            ],
+            "supported": false
+          }
+        }
+      },
+      "support_ok": false
+    },
+    "f1": {
+      "metrics": {
+        "all_pairs_exact_upper_below_delta": true,
+        "all_pairs_forced_upper_below_delta": true,
+        "frozen_pair_exact_ci": [
+          0.04658194319054019,
+          0.05125877616228536
+        ],
+        "frozen_pair_forced_ci": [
+          0.027817183010090396,
+          0.06909390021849628
+        ],
+        "natural_matched_margin_ci": [
+          0.38952784503631954,
+          0.49051654560129143
+        ],
+        "natural_nuisance_ci": [
+          0.5096698288690477,
+          0.7017866443452381
+        ],
+        "natural_raw_ci": [
+          0.061482857721999566,
+          0.06422753474541386
+        ],
+        "policy_lineage_ok": true,
+        "stability_pooled_ci": [
+          0.013041089052700761,
+          0.023866078345127627
+        ],
+        "stability_stratum_cis": [
+          [
+            0.03425235633220902,
+            0.04221900060603487
+          ],
+          [
+            0.012515127571579408,
+            0.022581308669227137
+          ],
+          [
+            0.007518637371466019,
+            0.04355677033790705
+          ],
+          [
+            0.00903662249634768,
+            0.0548819474593351
+          ],
+          [
+            0.017168370980593498,
+            0.04935640584436718
+          ],
+          [
+            0.0016873733070995069,
+            0.049804004154836025
+          ],
+          [
+            0.028878378003361762,
+            0.0440738761304995
+          ],
+          [
+            0.00677732945536373,
+            0.02220724742499357
+          ],
+          [
+            0.0050079678412487776,
+            0.05443739974298756
+          ],
+          [
+            0.00992430859613272,
+            0.03257398492949588
+          ],
+          [
+            0.030821209693368948,
+            0.04143676245629733
+          ],
+          [
+            0.012989907363302805,
+            0.030836304738824382
+          ],
+          [
+            0.036604832608606655,
+            0.05383028749070435
+          ],
+          [
+            0.009152160832488068,
+            0.032450843947536424
+          ],
+          [
+            0.0265425995404937,
+            0.038739177995482044
+          ],
+          [
+            0.012395134062653232,
+            0.03396883119379665
+          ],
+          [
+            0.022869028676517605,
+            0.04532497886246582
+          ],
+          [
+            0.0028967280273807182,
+            0.014120377166270579
+          ],
+          [
+            0.03379756401827425,
+            0.04257264473127501
+          ],
+          [
+            0.012259327009163329,
+            0.025852461661155766
+          ],
+          [
+            0.016353563176851032,
+            0.053928262024941935
+          ],
+          [
+            0.01604046211022688,
+            0.05546856083155964
+          ],
+          [
+            0.019627469200448253,
+            0.04737312909340289
+          ],
+          [
+            0.001446319977513863,
+            0.04349108221834974
+          ]
+        ],
+        "support_ok": false,
+        "validity_ok": true
+      },
+      "natural_overlap": {
+        "balanced_accuracy": 1.0,
+        "balanced_accuracy_ci": [
+          1.0,
+          1.0
+        ],
+        "context_only_balanced_accuracy": 0.36702986279257466,
+        "episodes_per_skill": {
+          "1": 16,
+          "2": 16
+        },
+        "matched_shuffle_margin_ci": [
+          0.38952784503631954,
+          0.49051654560129143
+        ],
+        "nuisance_margin_ci": [
+          0.5096698288690477,
+          0.7017866443452381
+        ],
+        "raw_decision_ci": [
+          0.061482857721999566,
+          0.06422753474541386
+        ],
+        "raw_distance_margin_ci": [
+          0.061482857721999566,
+          0.06422753474541386
+        ],
+        "segments_per_skill": {
+          "1": 59,
+          "2": 84
+        },
+        "selected_segments": 143,
+        "shuffle_nulls": {
+          "active_n_bin": {
+            "lower": 0.42292171105730425,
+            "mean": 0.505950292574657,
+            "upper": 0.5816182405165455
+          },
+          "age_bin": {
+            "lower": 0.43734866828087166,
+            "mean": 0.5134869350282485,
+            "upper": 0.596045197740113
+          },
+          "duration_bin": {
+            "lower": 0.43734866828087166,
+            "mean": 0.5126299737691685,
+            "upper": 0.596045197740113
+          },
+          "entry_rejoin": {
+            "lower": 0.42292171105730425,
+            "mean": 0.5013293381759483,
+            "upper": 0.5816182405165455
+          },
+          "global": {
+            "lower": 0.42292171105730425,
+            "mean": 0.4997106335754641,
+            "upper": 0.5816182405165455
+          }
+        },
+        "skill_prior_balanced_accuracy": 0.5
+      },
+      "persistent_process_dependence_ci": {
+        "0-1": [
+          0.0018414239093399677,
+          0.016934014945106664
+        ],
+        "0-2": [
+          0.013652710122706472,
+          0.05161750165206881
+        ],
+        "1-2": [
+          0.027817183010090396,
+          0.06909390021849628
+        ]
+      },
+      "policy_lineage": {
+        "abs_delta_logp_p95": 2.491474151611328e-05,
+        "rows": 10240,
+        "threshold": 0.1823215567939546,
+        "valid": true
+      },
+      "reference_centroids": {
+        "exact": {
+          "1": [
+            0.289325893856585,
+            0.3411162653937936,
+            0.3695578374899924
+          ],
+          "2": [
+            0.2920307843014598,
+            0.29285396239720285,
+            0.41511524794623256
+          ]
+        },
+        "forced": {
+          "1": [
+            0.37174479166666663,
+            0.34179687500000017,
+            0.2864583333333334
+          ],
+          "2": [
+            0.30078125000000006,
+            0.41406250000000006,
+            0.28515625000000006
+          ]
+        }
+      },
+      "reference_selection": {
+        "ambiguous": false,
+        "inference_episodes": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "maximum_energy_pairs": [
+          "1-2"
+        ],
+        "mean_cross_replica_forced_energy": {
+          "0-1": 0.0010850694444444451,
+          "0-2": 0.005750868055555556,
+          "1-2": 0.011827256944444448
+        },
+        "pair": [
+          1,
+          2
+        ],
+        "reference_episodes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "same_input_action_tv_ci": {
+        "0-1": [
+          0.008653119410155341,
+          0.010690439032623544
+        ],
+        "0-2": [
+          0.039019553584512326,
+          0.043416950953542255
+        ],
+        "1-2": [
+          0.04658194319054019,
+          0.05125877616228536
+        ]
+      },
+      "stability": {
+        "pooled_decision_ci": [
+          0.013041089052700761,
+          0.023866078345127627
+        ],
+        "pooled_episodes": 16,
+        "pooled_exact_ci": [
+          0.03271792386560475,
+          0.039375543331613264
+        ],
+        "pooled_forced_ci": [
+          0.013041089052700761,
+          0.023866078345127627
+        ],
+        "pooled_forced_snapshots": 64,
+        "pooled_supported": true,
+        "strata": {
+          "active_n_bin:2": {
+            "exact_ci": [
+              0.036604832608606655,
+              0.05383028749070435
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 32,
+            "exact_supported": true,
+            "forced_ci": [
+              0.009152160832488068,
+              0.032450843947536424
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 16,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "active_n_bin:4": {
+            "exact_ci": [
+              0.0265425995404937,
+              0.038739177995482044
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 64,
+            "exact_supported": true,
+            "forced_ci": [
+              0.012395134062653232,
+              0.03396883119379665
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 32,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "active_n_bin:6": {
+            "exact_ci": [
+              0.022869028676517605,
+              0.04532497886246582
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 32,
+            "exact_supported": true,
+            "forced_ci": [
+              0.0028967280273807182,
+              0.014120377166270579
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 16,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "age_bin:0..9": {
+            "exact_ci": [
+              0.03425235633220902,
+              0.04221900060603487
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 102,
+            "exact_supported": true,
+            "forced_ci": [
+              0.012515127571579408,
+              0.022581308669227137
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 51,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "age_bin:10..19": {
+            "exact_ci": [
+              0.007518637371466019,
+              0.04355677033790705
+            ],
+            "exact_episodes": 7,
+            "exact_rows": 14,
+            "exact_supported": false,
+            "forced_ci": [
+              0.00903662249634768,
+              0.0548819474593351
+            ],
+            "forced_episodes": 7,
+            "forced_snapshots": 7,
+            "forced_supported": false,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": false
+          },
+          "age_bin:>=20": {
+            "exact_ci": [
+              0.017168370980593498,
+              0.04935640584436718
+            ],
+            "exact_episodes": 6,
+            "exact_rows": 12,
+            "exact_supported": false,
+            "forced_ci": [
+              0.0016873733070995069,
+              0.049804004154836025
+            ],
+            "forced_episodes": 6,
+            "forced_snapshots": 6,
+            "forced_supported": false,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": false
+          },
+          "duration_bin:1..9": {
+            "exact_ci": [
+              0.03379756401827425,
+              0.04257264473127501
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 94,
+            "exact_supported": true,
+            "forced_ci": [
+              0.012259327009163329,
+              0.025852461661155766
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 47,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "duration_bin:10..19": {
+            "exact_ci": [
+              0.016353563176851032,
+              0.053928262024941935
+            ],
+            "exact_episodes": 7,
+            "exact_rows": 20,
+            "exact_supported": false,
+            "forced_ci": [
+              0.01604046211022688,
+              0.05546856083155964
+            ],
+            "forced_episodes": 7,
+            "forced_snapshots": 10,
+            "forced_supported": false,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": false
+          },
+          "duration_bin:>=20": {
+            "exact_ci": [
+              0.019627469200448253,
+              0.04737312909340289
+            ],
+            "exact_episodes": 7,
+            "exact_rows": 14,
+            "exact_supported": false,
+            "forced_ci": [
+              0.001446319977513863,
+              0.04349108221834974
+            ],
+            "forced_episodes": 7,
+            "forced_snapshots": 7,
+            "forced_supported": false,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": false
+          },
+          "entry_rejoin:entry": {
+            "exact_ci": [
+              0.028878378003361762,
+              0.0440738761304995
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 48,
+            "exact_supported": true,
+            "forced_ci": [
+              0.00677732945536373,
+              0.02220724742499357
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 24,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "entry_rejoin:ordinary": {
+            "exact_ci": [
+              0.030821209693368948,
+              0.04143676245629733
+            ],
+            "exact_episodes": 16,
+            "exact_rows": 74,
+            "exact_supported": true,
+            "forced_ci": [
+              0.012989907363302805,
+              0.030836304738824382
+            ],
+            "forced_episodes": 16,
+            "forced_snapshots": 37,
+            "forced_supported": true,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": true
+          },
+          "entry_rejoin:rejoin": {
+            "exact_ci": [
+              0.0050079678412487776,
+              0.05443739974298756
+            ],
+            "exact_episodes": 3,
+            "exact_rows": 6,
+            "exact_supported": false,
+            "forced_ci": [
+              0.00992430859613272,
+              0.03257398492949588
+            ],
+            "forced_episodes": 3,
+            "forced_snapshots": 3,
+            "forced_supported": false,
+            "selected_skills": [
+              1,
+              2
+            ],
+            "supported": false
+          }
+        }
+      },
+      "support_ok": false
+    }
+  },
+  "source_identity": {
+    "f0": {
+      "architecture_mode": "f0",
+      "arm_status_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f0\\arm_status.json",
+      "checkpoint_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f0\\checkpoints\\update_250_eval.pt",
+      "checkpoint_schema_version": 3,
+      "event_architecture_schema_version": 1,
+      "parent_manifest_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\runner_status.txt",
+      "parent_result_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\result\\stage_c_f0_f1.json",
+      "parent_root": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247",
+      "result_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f0\\result\\stage_c_arm.json",
+      "root": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f0",
+      "run_id": "f0f1_dynamic_roster_stage_c_20260717_221247",
+      "snapshot_capability_name": "variable_roster_event_snapshot",
+      "snapshot_capability_version": 1,
+      "source_commit": "bf933a3c2b2af4a805f4f9485390ee578934aacd",
+      "total_steps": 320000,
+      "update_idx": 250
+    },
+    "f1": {
+      "architecture_mode": "f1",
+      "arm_status_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f1\\arm_status.json",
+      "checkpoint_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f1\\checkpoints\\update_250_eval.pt",
+      "checkpoint_schema_version": 3,
+      "event_architecture_schema_version": 1,
+      "parent_manifest_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\runner_status.txt",
+      "parent_result_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\result\\stage_c_f0_f1.json",
+      "parent_root": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247",
+      "result_path": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f1\\result\\stage_c_arm.json",
+      "root": "C:\\project\\HMASD\\logs\\f0f1_dynamic_roster_stage_c_20260717_221247\\f1",
+      "run_id": "f0f1_dynamic_roster_stage_c_20260717_221247",
+      "snapshot_capability_name": "variable_roster_event_snapshot",
+      "snapshot_capability_version": 1,
+      "source_commit": "bf933a3c2b2af4a805f4f9485390ee578934aacd",
+      "total_steps": 320000,
+      "update_idx": 250
+    }
+  },
+  "stage": "iteration4_stage_c_semantics_provenance_audit",
+  "support_counts": {
+    "f0": {
+      "forced_sources": 128,
+      "natural_rows": 10240,
+      "unique_forced_shared_keys": 128,
+      "unique_natural_shared_keys": 10240
+    },
+    "f1": {
+      "forced_sources": 128,
+      "natural_rows": 10240,
+      "unique_forced_shared_keys": 128,
+      "unique_natural_shared_keys": 10240
+    }
+  }
+}
+
