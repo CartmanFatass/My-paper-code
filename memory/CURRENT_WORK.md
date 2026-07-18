@@ -6,8 +6,6 @@ Updated: 2026-07-18
 
 - Active controller: Codex root task `019f5c78-0c91-7612-adb4-c1fcfe4484c8`
 - Controller host: `local`
-- Controller model: `gpt-5.6-sol`
-- Controller reasoning: `high`
 - Controller status: ACTIVE
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`

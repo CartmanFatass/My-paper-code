@@ -27,47 +27,46 @@ write scope.
 
 ## Unified Collaboration Workflow
 
-Direct controller work is the default. Use no project Skill when the task does
-not create or mutate collaboration state, experiment lifecycle state, or a
-tracked external-review round, unless the user explicitly invokes a matching
-Skill. In particular, without such explicit invocation, explanations, status reads,
-read-only diagnosis, one-file changes, Git/docs, prompt generation, result
-interpretation, and routine continuation stay direct.
+Direct controller work is the default. Explanations, status reads, bounded
+inspection or diagnosis, one-file changes, Git/docs, prompt generation, result
+interpretation and routine continuation stay direct.
 
-Superpowers is the generic development lifecycle harness for design, planning,
-test-first implementation, task reviews, verification, and completion. HMASD
-project Skills add domain contracts or own external lifecycles; they do not
-duplicate the generic harness. Activate at most one matching HMASD project
-Skill under its observable trigger while using the applicable Superpowers
-process Skills:
+Superpowers owns the generic core-development lifecycle. Use
+`superpowers:brainstorming` for an unapproved new design,
+`superpowers:writing-plans` for multi-step work,
+`superpowers:test-driven-development` for every implementation or bug fix,
+`superpowers:subagent-driven-development` when subagents are available, and
+`superpowers:verification-before-completion` before a completion, commit or push
+claim. Existing HMASD authorization satisfies the approval boundary for its
+registered scope; do not request it again. Do not create a worktree unless the
+user explicitly requests one.
 
-- `$hmasd-work`: a planned change touches core algorithm, trainer, runtime,
-  replay, roster, credit, probability, clock, mask, checkpoint, collector, or
-  scientific-evidence semantics;
-- `$hmasd-experiment`: the action creates or mutates an experiment contract,
-  package, launch, persistent monitor, failed runtime stage, or terminal closure;
-- `$hmasd-review-round`: the action creates or resumes a tracked five-stage
-  round governed by `05_REVIEW_STATE.json`.
+For staged core work, keep one persistent plan in
+`memory/IMPLEMENTATION_PLAN.md` with one `HMASD Contract` section. Freeze the
+causal or engineering goal, evidence boundary, reused/replaced/deleted/added
+components, exact files and symbols, tensor and collector flow, state ownership,
+gradient and detach boundaries, reward and advantage semantics, probability,
+RNG, replay, masks, clocks, checkpoints, preserved interfaces and non-goals.
+Do not create a parallel collaboration brief or duplicate plan.
 
-Superpowers test-first and task-review requirements take precedence over the
-former `hmasd-work` one-check and one-review limits. Existing HMASD
-authorization satisfies the approval boundary for its registered scope; do not
-request the same approval again. Do not create a worktree unless the user
-explicitly requests one; the active controller works in `C:\project\HMASD`. Keep one
-persistent implementation plan in `memory/IMPLEMENTATION_PLAN.md`; do not add a
-parallel collaboration brief or duplicate plan.
+The active controller alone decides the algorithm, architecture, causal route,
+reuse/replacement, data and gradient flow, invariants and stability goals.
+Implementers execute that frozen design and return `BLOCKED` rather than invent
+missing semantics; reviewers inspect fidelity and do not redesign the route.
 
-The user-selected active controller model is fixed for the task; never select,
-upgrade, downgrade, or repair it automatically. The active controller alone decides the
-algorithm, architecture, causal route, reuse/replacement, data and gradient
-flow, invariants, and stability goals. Implementers execute that frozen design;
-reviewers inspect it. Detailed mechanics live only in the matching Skill and its
-protocol. Never reconstruct them in an ad hoc prompt.
+Project files do not select or record the controller model. For a newly spawned
+development subagent, specify the route explicitly: gpt-5.6-terra medium for a
+mechanical one-to-two-file implementation, gpt-5.6-terra high for integration or
+ordinary engineering review, and gpt-5.6-sol high for algorithm, probability,
+credit, recurrent-state or scientific-semantics review. Never change an existing
+conversation's model.
 
-Respect the configured eight-thread ceiling and spawn depth one. Select a model
-only when creating a new subagent; never change an existing conversation's
-model. Return `BLOCKED` on missing authority, a contract conflict, or required
-scope expansion.
+Use `$hmasd-experiment` only when an action creates or mutates an experiment
+contract, package, launch, persistent monitor, failed runtime stage or terminal
+closure. Use `$hmasd-review-round` only when an action creates or resumes a
+tracked five-stage round governed by `05_REVIEW_STATE.json`. Respect the
+configured eight-thread ceiling and spawn depth one. Return `BLOCKED` on missing
+authority, a contract conflict or required scope expansion.
 
 ## Research Loop
 
