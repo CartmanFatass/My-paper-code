@@ -1,17 +1,17 @@
 {
   "schema_version": 4,
-  "round_id": "20260719_external_review_transport_self_test",
+  "round_id": "20260719_external_review_transport_subagent_retry1",
   "round_status": "ACTIVE",
-  "updated_at": "2026-07-19T04:00:46.8570541+08:00",
+  "updated_at": "2026-07-19T04:05:18.9597606+08:00",
   "stages": {
     "gemini_divergent": {
-      "state": "BLOCKED",
-      "dispatch_count": 1,
-      "route_token": "20260719_external_review_transport_self_test:GEMINI_DIVERGENT:a83280862d2d7db7ee452dfaf4e1f93ff20e2b8c:docs/external-review/rounds/20260719_external_review_transport_self_test/11_GEMINI_DIVERGENT_RAW.md",
-      "dispatched_at": "2026-07-19T04:00:46.7907309+08:00",
-      "deadline_at": "2026-07-19T06:00:46.7527779+08:00",
+      "state": "NOT_STARTED",
+      "dispatch_count": 0,
+      "route_token": null,
+      "dispatched_at": null,
+      "deadline_at": null,
       "artifact_path": "11_GEMINI_DIVERGENT_RAW.md",
-      "blocker": "POST_DISPATCH_HEADLESS_CLI_AUTO_DENIED_GEMINI_BASH_PERMISSION_NO_RAW_RESPONSE"
+      "blocker": null
     },
     "open_pro": {
       "state": "NOT_STARTED",
