@@ -28,6 +28,11 @@ closed as valid `F_UNDERPOWERED_OR_UNIDENTIFIABLE`: both arms pass M0 and expose
 small checkpoint-local `z -> action` dependence, but the stored forced branches
 lack the provenance required to identify stability or natural overlap.
 
+Iteration 4 implementation is accepted at `05b40eb`: the frozen Stage C
+evaluator now emits exact forced--natural source provenance, and the standalone
+audit strictly binds both arms to the original paired run, preserves the
+registered A--F analysis, and publishes terminal evidence transactionally.
+
 ## Causal Portfolio
 
 - **C3 / hierarchy-null active-set control:** current empirical leader and
@@ -47,12 +52,12 @@ lack the provenance required to identify stability or natural overlap.
 2. Preserve the portfolio ranking: C3 remains the empirical leader, C1 remains
    the strongest live hierarchical explanation, C2 is not promoted and credit
    stays dormant.
-3. For iteration 4, design only the minimal provenance-complete collection that
-   repeats the same frozen-checkpoint estimand in the same environment. It must
-   record forced observation, recurrent state, lifecycle/source episode, legal
-   support, nuisance strata and a shared natural key at collection time.
-4. Do not add training, reward, thresholds, a new toy or an algorithm mechanism
-   until that instrument design is coherent and preserves the registered nulls.
+3. Launch exactly one local-CUDA iteration-4 audit at
+   `logs/stage_c_semantics_provenance_audit_20260718_190948`, then read its
+   authoritative terminal status and result once.
+4. Apply the registered A--F branch to the whole portfolio without rescue. Do
+   not add training, reward, thresholds, a new toy or an algorithm mechanism
+   before the valid iteration-4 disposition.
 
 ## Overnight Autonomous Boundary
 
@@ -125,6 +130,11 @@ lack the provenance required to identify stability or natural overlap.
   snapshot provenance and forced--natural alignment are absent. This result
   cannot be interpreted as stable semantics, absent semantics or algorithm
   failure.
+- Iteration 4 is launch-ready under
+  `EXP-20260718-stage-c-semantics-provenance-audit`: no training or reward is
+  involved; exact F0/F1 update-250 checkpoints are re-evaluated under the same
+  256-episode ledger and 128-source forced grid. Implementation tests pass
+  `32 + 18`, and combined review has no open finding.
 - R41B remains the positive fixed-`N` source anchor. R51--R55 exact contracts
   are retired and inactive.
 - Do not add graph, attention, slots, critical residuals, team latent, a new

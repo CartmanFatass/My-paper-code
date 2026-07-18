@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260718-stage-c-semantics-provenance-audit | launch-ready | iteration-4 frozen-checkpoint provenance audit | local CUDA; `logs/stage_c_semantics_provenance_audit_20260718_190948`; implementation `05b40eb` | terminal `runner_status.txt`, then one result JSON | reviewed default-off provenance, exact Stage C source binding, transactional four-file publication; tests `32 + 18` pass | Run exactly once without training or scientific-contract changes; operational failure permits unchanged repair only |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
 | EXP-20260717-f0f1-dynamic-roster-stage-a | completed -- valid `PASS_STAGE_A_CARRIER` | no-learning dynamic-roster carrier | `logs/f0f1_dynamic_roster_stage_a_20260717_143552/result/stage_a_carrier.json`; implementation `044c8df` | Stage B direct-access result | all M0 true; constructive `P/S/U=1/1/1`; random positive fraction `1.0`, mean `U=0.331217`; 20,480 steps/controller, zero optimizers/intrinsic | Accept carrier only; do not infer learnability or F1 value; Stage B is now separately authorized |
@@ -77,6 +78,61 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260718-stage-c-semantics-provenance-audit — Frozen Evaluation Repair
+
+- Authorization/class: iteration 4 of the user's 2026-07-18 five-iteration
+  autonomous research boundary; conclusion-bearing evaluation-only formal
+  audit, not training, smoke testing or scale training.
+- Causal question: do the frozen Stage C F1 skills induce checkpoint-local
+  action dependence, persistent 12-step effects, nuisance-stable semantics and
+  natural occupation once forced and natural evidence share exact source
+  provenance? F0 is the diagnostic arm; F1 selects the A--F outcome.
+- Sources/comparator: the exact paired run
+  `logs/f0f1_dynamic_roster_stage_c_20260717_221247`, strict F0/F1
+  `checkpoints/update_250_eval.pt`, parent source
+  `bf933a3c2b2af4a805f4f9485390ee578934aacd`, selectors
+  `initial_summary/working_summary`, and the complete registered Stage C
+  contract. Cross-run, cross-commit or selector mixing is invalid.
+- Collection: same anonymous generic-`SHORT` dynamic roster, evaluation ledger
+  seed `97057`, 256 stochastic episodes per arm, 128 forced sources from
+  episodes `0..31`, three skills, two CRN replicas, and 12 primitive steps.
+  There are zero training transitions, optimizer updates, gradients, reward
+  changes or checkpoint writes.
+- Analysis: episodes `0..15` choose the maximum-energy unordered pair and form
+  references; episodes `16..31` are inference only. Preserve
+  `delta=1/12`, `delta_stratum=1/24`, lineage `log(1.2)`, 10,000
+  episode-cluster bootstrap/shuffle repetitions, registered seeds/support
+  floors, context/skill-prior/global and all four nuisance-matched nulls.
+- M0: exact paired parent identity and full contract; registered/new equality
+  for stochastic outcomes, skill counts and ordered forced effects; 128 unique
+  keys with one natural match each; observation/hidden equality; finite full
+  three-action support; no prohibited task/outcome fields; model tensors,
+  gradients, modes and Python/NumPy/Torch/CUDA RNG unchanged; exactly four
+  create-new terminal outputs. M0/operational failure is
+  `INVALID_ITERATION4_PROVENANCE_AUDIT` and permits only an unchanged repair.
+- Scientific branches, in frozen priority: `A_NO_MATERIAL_Z_DEPENDENCE`,
+  `B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT`,
+  `C_STABLE_FORCED_NO_NATURAL_OVERLAP`,
+  `D_STABLE_LOCAL_NATURAL_OVERLAP`, `E_NUISANCE_SHORTCUT`, or
+  `F_UNDERPOWERED_OR_UNIDENTIFIABLE`. Any missing support, exact pair tie,
+  lineage failure or CI crossing remains F; no added episodes, bin merge,
+  threshold, seed or null change is allowed.
+- Placement/runtime: local CUDA, one process evaluating F0 then F1 under
+  implementation `05b40eb563e03ca5d54d4d7ff410ba856da8ab9b`; expected
+  wall clock 10--30 minutes. No CPU fallback. Root is
+  `logs/stage_c_semantics_provenance_audit_20260718_190948`.
+- Authority/outputs: `runner_status.txt` is authoritative; terminal success
+  points to `result/iteration4_provenance_audit.json`; raw provenance is only
+  `raw/f0_provenance.pt` and `raw/f1_provenance.pt`. A failed root contains
+  only terminal failed status. No overwrite or resume.
+- Claim ceiling: only checkpoint-local `z -> action`, 12-active-step
+  persistence, nuisance-stratified stability and natural overlap on this
+  testbed. Even D does not establish utility, cooperation, credit, transfer,
+  hierarchy superiority or defeat the ordinary-MARL redundancy objection.
+- Prohibited: training, optimizer/reward/model/environment/checkpoint changes,
+  task-specific fields, budget/seed/threshold/null/support rescue, automatic
+  integration, successor experiment or extra iteration.
 
 ## EXP-20260717-f0f1-dynamic-roster-stage-c — Paired Applied-Prefix Test
 

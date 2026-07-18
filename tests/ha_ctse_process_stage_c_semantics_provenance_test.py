@@ -1,4 +1,5 @@
 from copy import deepcopy
+from datetime import datetime
 import importlib.util
 import inspect
 import json
@@ -998,6 +999,9 @@ def test_create_new_outputs_write_only_four_registered_files_and_refuse_second_w
             encoding="utf-8"
         )
     ) == result
+    status = runner._read_runner_manifest(output_root / "runner_status.txt")
+    assert Path(status["run_root"]).resolve() == output_root.resolve()
+    assert datetime.fromisoformat(status["updated"]).tzinfo is not None
     with pytest.raises(FileExistsError, match="output root already exists"):
         runner.write_audit_outputs(output_root, raw, result)
 
@@ -1544,6 +1548,8 @@ def test_run_audit_writes_terminal_failed_status_when_cuda_is_unavailable(
     assert status["state"] == "failed"
     assert status["phase"] == "terminal"
     assert status["status"] == "INVALID_ITERATION4_PROVENANCE_AUDIT"
+    assert Path(status["run_root"]).resolve() == output_root.resolve()
+    assert datetime.fromisoformat(status["updated"]).tzinfo is not None
     assert "requires available CUDA" in status["error"]
 
 

@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
 from copy import deepcopy
+from datetime import datetime
 import io
 import json
 import math
@@ -1765,6 +1766,8 @@ def write_audit_outputs(
             "state=complete",
             "phase=terminal",
             f"status={safe_result.get('outcome', 'INVALID_ITERATION4_PROVENANCE_AUDIT')}",
+            f"run_root={destination.resolve()}",
+            f"updated={datetime.now().astimezone().isoformat(timespec='seconds')}",
             f"result_path={destination.resolve() / 'result' / 'iteration4_provenance_audit.json'}",
             "",
         )
@@ -1827,6 +1830,8 @@ def write_failed_status(output_root: str | Path, error: BaseException) -> None:
             "state=failed",
             "phase=terminal",
             "status=INVALID_ITERATION4_PROVENANCE_AUDIT",
+            f"run_root={destination.resolve()}",
+            f"updated={datetime.now().astimezone().isoformat(timespec='seconds')}",
             f"error_type={type(error).__name__}",
             f"error={error_text}",
             "",

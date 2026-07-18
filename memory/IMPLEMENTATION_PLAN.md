@@ -198,6 +198,223 @@ read is allowed only as an instrument repair that preserves the environment,
 frozen policies, estimand, thresholds and nulls while recording the missing
 provenance at collection time. It may not add training, reward or a new toy.
 
+## Task 3: Iteration 4 Provenance-Complete Frozen Evaluation
+
+Status: implementation and combined review accepted at `05b40eb`; the
+provenance-only CUDA audit is launch-ready under the frozen contract below.
+
+### HMASD Contract
+
+Repair only the evidence serialization that caused iteration 3 to return F.
+Re-run the original final stochastic Stage C evaluation from each arm's strict
+`update_250_eval.pt`: the same environment, F0/F1 weights and normalizers,
+256 episode ledger, seeds, 128 source snapshots, three forced skills, two CRN
+replicas and twelve primitive steps. No optimizer, gradient, training,
+checkpoint mutation, reward mechanism, new toy, threshold or null changes.
+The existing environment reward may pass through the frozen runtime exactly as
+before but is excluded from provenance, metrics and interpretation.
+
+Existing-row reconstruction is rejected because it cannot recover source
+episode or forced--natural alignment. Checkpoint-schema augmentation plus
+retraining is rejected because it would create new policies rather than repair
+the frozen Stage C estimand.
+
+### Replacement Ledger
+
+- Retain the environment, policies, model-only checkpoints, seeds, stochastic
+  evaluation, snapshot grid, forced effects, metrics, support floors, A--F
+  order, F0 diagnostic role and C3 baseline.
+- Replace aggregate-only forced evidence and unaligned training-ledger rows as
+  inferential inputs.
+- Add evaluation-only source provenance and a shared forced--natural boundary
+  key. Add nothing to the algorithm.
+- Do not change `variable_roster_event.py`, `dynamic_roster_testbed.py`,
+  `collectors.py`, config, reward, optimizer, checkpoint schema or training
+  update path.
+
+### Collection Data Flow
+
+Add an optional default-off provenance sink to
+`ha_ctse_process.train::_evaluate_event_model` and explicit focal-key plumbing
+to `_forced_event_snapshot_effects`. At every registered forced source, capture
+the source state before cloning or branching. After the untouched source
+`core.low_step`, match the focal `LowTransitionRow` emitted at that same
+boundary. Forced branches may never provide source metadata.
+
+The shared key is:
+
+```text
+(arm, task_master_seed=97057, episode_id, physical_time,
+ lifecycle_key, membership_epoch)
+```
+
+For episodes 0--31, natural rows contain only the shared key, observation,
+`actor_hidden_before`, natural skill/action/log-probability, full primitive
+support, active set size and lifecycle inputs needed to derive active age,
+entry/rejoin and realized constant-skill duration. Each of the 128 forced rows
+contains the same source fields, focal index, full active keys/epochs/skills,
+frontier, membership deltas, and the source PCG64 ledger/state identifiers
+needed to establish branch pairing, plus the unchanged `[3,2,4]` effects.
+Collector/environment snapshots remain internal to clone/restore and are not
+serialized. Task phase, reward, utility, progress, role, contact, owner and
+success fields are prohibited.
+
+The source evaluator still completes all 256 episodes so its original
+stochastic episode outputs and natural skill counts can be checked. Capturing
+only episodes 0--31 bounds the provenance artifact while retaining the frozen
+reference/inference folds. Capture performs no random draw and must not change
+the source continuation.
+
+### Validity and Analysis
+
+M0 additionally requires:
+
+- strict F0/F1 model-only source headers and update 250;
+- exact equality between new and registered forced effects, natural skill
+  counts and stochastic episode outcomes;
+- 128 unique forced source rows and one exact natural match for every key;
+- source observation/hidden equality with the matched natural row;
+- full three-action primitive support and finite categorical probabilities;
+- unchanged model tensors, `.grad` state, module mode and global RNG;
+- no prohibited fields, optimizer construction or output overwrite.
+
+Use episodes 0--15 only to select the unordered skill pair with maximum mean
+cross-replica forced energy and form reference centroids. Episodes 16--31 are
+the inference fold. Exact same-input dependence uses total variation of the
+three-action distributions under all forced skills. Persistent process
+dependence uses the square root of the nonnegative cross-replica forced energy.
+Stability uses label-aligned distance margins pooled and separately by age,
+entry/rejoin, active-N and duration. Natural overlap uses one first
+12-consecutive-active-step window per constant episode/lifecycle/epoch/skill/N
+segment, macro-averaged over the frozen pair.
+
+Preserve `delta=1/12`, `delta_stratum=1/24`, the `log(1.2)` lineage guard,
+10,000 episode-cluster bootstrap/shuffle repetitions, existing seeds, support
+floors, context-only/skill-prior/global and nuisance-matched label nulls, and
+the frozen A--F priority. Any missing field, insufficient stratum, CI crossing
+or lineage failure remains `F_UNDERPOWERED_OR_UNIDENTIFIABLE`; no extra episode,
+bin merge or threshold change is allowed.
+
+### Claim and Stop Boundary
+
+The result may identify only checkpoint-local `z -> action` dependence,
+12-active-step persistence, nuisance-stratified stability and natural overlap
+on this testbed. It cannot establish environment-independent semantics,
+transfer, cooperation, hierarchy superiority, commitment advantage, credit
+success or robustness across training seeds. Outcome D remains compatible with
+the ordinary-MARL objection that the latent modes are redundant because Stage
+C has no utility advantage over Stage B.
+
+Implementation write scope is limited to:
+
+- `ha_ctse_process/train.py` for default-off capture and focal-key plumbing;
+- one new `scripts/run_stage_c_semantics_provenance_audit.py` entry point;
+- one focused provenance test file.
+
+The entry point writes raw provenance and one terminal result only under one
+new `logs/<run-id>/` root. It refuses overwrite. An operational defect permits
+only repair and unchanged retry; a valid A--F result closes iteration 4 and
+updates the whole portfolio.
+
+### Implementation Task 3A: Default-Off Provenance Capture
+
+**Files**
+
+- Modify `ha_ctse_process/train.py` only at `_forced_event_snapshot_effects`,
+  `_evaluate_event_model` and adjacent private helpers.
+- Create `tests/ha_ctse_process_stage_c_semantics_provenance_test.py`.
+
+**Frozen interfaces**
+
+- `_forced_event_snapshot_effects(*, model_owner, core, environment, snapshot,
+  episode_id: int, audit_index: int, focal_key: str | None = None) ->
+  list[list[list[float]]]`
+- `_evaluate_event_model(model_owner, *, deterministic: bool,
+  capture_prefix: bool, capture_forced_audit: bool,
+  capture_semantic_provenance: bool = False) -> dict[str, Any]`
+
+When provenance is false, the return structure and RNG/action sequence are
+unchanged. When true, return `semantic_provenance` with schema 1,
+`natural_rows[episodes 0..31]` and `forced_sources[128]`. The private projection
+helpers accept already-produced runtime rows and perform no model/environment
+action.
+
+- [ ] Add RED tests for explicit focal-key equivalence, one-to-one shared-key
+  pairing, allowed fields/shapes, default-off absence, source RNG immutability
+  and prohibited-field absence.
+- [ ] Run only the exact new test file and confirm the missing signatures/keys
+  fail before production edits.
+- [ ] Add the optional sink and projection helpers. Capture the source before
+  branch clone; capture natural rows from the exact `low_ledger` slice emitted
+  immediately after source `low_step`. Do not draw RNG or alter forced skill,
+  hidden-state or age semantics.
+- [ ] Run the focused test file and the existing Stage C focused file. Require
+  all tests to pass and `git diff --check` to be clean.
+- [ ] Commit only Task 3A files.
+
+### Implementation Task 3B: One-Shot Collection and Frozen A--F Analysis
+
+**Files**
+
+- Create `scripts/run_stage_c_semantics_provenance_audit.py`.
+- Extend only the same focused provenance test file.
+
+**CLI and outputs**
+
+```text
+python scripts/run_stage_c_semantics_provenance_audit.py \
+  --f0 <stage-c-f0-root> --f1 <stage-c-f1-root> \
+  --output-root <new-log-root> --device cuda
+```
+
+The script loads each `checkpoints/update_250_eval.pt` strictly, calls the
+provenance-enabled evaluator, compares in-memory task outcomes/counts/effects
+to the registered arm result, then writes only:
+
+```text
+<output-root>/raw/f0_provenance.pt
+<output-root>/raw/f1_provenance.pt
+<output-root>/result/iteration4_provenance_audit.json
+<output-root>/runner_status.txt
+```
+
+Raw files contain no task outcome/reward fields. The result contains parity
+booleans, support counts, registered metrics, A--F outcome and claim ceiling.
+Every destination uses create-new semantics; no overwrite or resume.
+
+- [ ] Add RED synthetic tests for strict checkpoint identity, parity mismatch
+  invalidation, duplicate/missing shared keys, fixed reference/inference pair
+  selection, supported A--E decisions, underpowered F, prohibited-field
+  rejection and second-write refusal.
+- [ ] Run the exact new tests and confirm they fail on missing runner symbols.
+- [ ] Implement strict load/collection, raw serialization, pair energy,
+  episode-cluster bootstrap, exact/forced stability margins, natural-window
+  margins, balanced accuracy, context-only comparator, global and four
+  nuisance-matched segment shuffles, M0 and frozen A--F dispatch. Import the
+  existing iteration-3 pure actor/signature/window helpers; do not change its
+  result path or semantics.
+- [ ] Preserve global Python/NumPy/Torch/CUDA RNG around construction and
+  collection; assert every source tensor, `.grad` state and module mode is
+  unchanged.
+- [ ] Run Task 3A/3B focused tests plus the existing iteration-3 analyzer test;
+  require all finite and `git diff --check` clean.
+- [ ] Commit only Task 3B files.
+
+### Review and Evidence Execution
+
+Each implementation task receives a fresh Sol-xhigh task review before the
+next begins. After both pass, a fresh whole-change reviewer checks design
+fidelity, probability/RNG/clock/checkpoint semantics, data leakage and
+scientific branches. The controller then reruns the focused tests and performs
+exactly one CUDA collection under `$hmasd-experiment`. A launch/runtime defect
+does not consume iteration 4; a valid A--F result does.
+
+Implementation evidence: Task 3A and Task 3B passed fresh Sol-xhigh task
+reviews; the whole change passed final review after controller takeover fixed
+transactional result publication. Focused provenance tests are `32/32` and the
+unchanged iteration-3 analyzer tests are `18/18`. The launch implementation is
+`05b40eb563e03ca5d54d4d7ff410ba856da8ab9b`.
+
 ## Variable-N + Variable-Lifetime Event Architecture — Stage A Passed
 
 The architecture and implementation-plan rounds are complete under:
