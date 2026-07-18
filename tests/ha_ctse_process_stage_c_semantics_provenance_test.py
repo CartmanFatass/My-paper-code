@@ -1,6 +1,11 @@
 from copy import deepcopy
+import importlib.util
 import inspect
+import json
+import math
+from pathlib import Path
 import random
+import sys
 from types import SimpleNamespace
 
 import numpy as np
@@ -14,6 +19,18 @@ from ha_ctse_process.dynamic_roster_testbed import (
     DynamicRosterEventEnv,
 )
 from ha_ctse_process.variable_roster_event import VariableRosterEventCore
+
+
+_ROOT = Path(__file__).parents[1]
+_RUNNER_PATH = _ROOT / "scripts" / "run_stage_c_semantics_provenance_audit.py"
+_RUNNER_SPEC = importlib.util.spec_from_file_location(
+    "run_stage_c_semantics_provenance_audit", _RUNNER_PATH
+)
+_RUNNER = None
+if _RUNNER_PATH.is_file():
+    assert _RUNNER_SPEC is not None and _RUNNER_SPEC.loader is not None
+    _RUNNER = importlib.util.module_from_spec(_RUNNER_SPEC)
+    _RUNNER_SPEC.loader.exec_module(_RUNNER)
 
 
 NATURAL_FIELDS = {
@@ -401,3 +418,418 @@ def test_provenance_has_one_natural_match_per_forced_key_and_allowed_shapes(
 )
 def test_provenance_recursively_excludes_task_and_outcome_shortcuts(evaluation_pair):
     _assert_no_prohibited_fields(evaluation_pair.enabled["semantic_provenance"])
+
+
+def _runner():
+    assert _RUNNER is not None, (
+        "RED: scripts/run_stage_c_semantics_provenance_audit.py and its frozen "
+        "runner symbols are not implemented"
+    )
+    return _RUNNER
+
+
+def _source_bundle(arm):
+    result = {
+        "schema_version": 1,
+        "stage": "stage_c_paired_f0_f1",
+        "arm": arm,
+        "implementation_valid": True,
+        "m0": {name: True for name in _runner().REQUIRED_SOURCE_M0},
+        "contract": {
+            "num_envs": 16,
+            "horizon": 80,
+            "outer_updates": 250,
+            "environment_transitions": 320_000,
+            "latent_skills": 3,
+            "evaluation_episodes_per_mode": 256,
+        },
+        "counts": {
+            "environment_steps": 320_000,
+            "high_optimizer_steps": 1_000,
+            "low_optimizer_steps": 1_000,
+            "training_ledger_ids": 4_000,
+            "intrinsic_applied_count": 0,
+        },
+    }
+    checkpoint = {
+        "checkpoint_schema_version": 3,
+        "high_controller": "variable_roster_event",
+        "event_architecture": {
+            "architecture_mode": arm,
+            "event_architecture_schema_version": 1,
+            "k0": 10,
+            "opportunity_schedule_name": "uniform_active_gap_v1",
+            "snapshot_capability_name": "variable_roster_event_snapshot",
+            "snapshot_capability_version": 1,
+            "runtime_state_absent_for_fresh_eval": True,
+            "total_steps": 320_000,
+            "update_idx": 250,
+            "architecture_state": {
+                "obs_dim": OBSERVATION_DIM,
+                "critic_member_dim": OBSERVATION_DIM,
+                "critic_global_dim": 8,
+                "n_skills": 3,
+                "action_dim": 3,
+                "member_hidden_dim": 64,
+                "high_hidden_dim": 64,
+                "low_hidden_dim": 64,
+                "skill_embedding_dim": 16,
+                "action_space_type": "discrete",
+                "gamma": 0.99,
+                "gae_lambda": 0.95,
+                "age_reference_steps": 500,
+            },
+        },
+    }
+    status = {
+        "state": "complete",
+        "phase": "terminal",
+        "mode": arm,
+        "update": 250,
+        "updates_total": 250,
+        "steps": 320_000,
+        "steps_total": 320_000,
+        "high_optimizer_steps": 1_000,
+        "low_optimizer_steps": 1_000,
+        "implementation_valid": True,
+    }
+    return {"result": result, "checkpoint": checkpoint, "arm_status": status}
+
+
+def _registered_evaluation():
+    effects = np.arange(128 * 3 * 2 * 4, dtype=np.float64).reshape(128, 3, 2, 4)
+    effects /= float(effects.size)
+    stochastic = {
+        "episode_ids": list(range(256)),
+        "deterministic": False,
+        "environment_steps": 256 * 80,
+        "persistent": [float(index % 2) for index in range(256)],
+        "short": [float((index + 1) % 3) / 2.0 for index in range(256)],
+        "utility": [float(index % 5) / 4.0 for index in range(256)],
+        "natural_skill_step_counts": [1_000, 2_000, 3_000],
+    }
+    registered = {
+        "final": {"stochastic": deepcopy(stochastic)},
+        "forced_audit": {"effects": effects.tolist()},
+    }
+    evaluation = {
+        **deepcopy(stochastic),
+        "forced_audit": {"effects": effects.tolist()},
+    }
+    return registered, evaluation
+
+
+def _provenance_row(arm, episode, offset):
+    physical_time = offset
+    lifecycle_key = f"member-{episode}-{offset}"
+    natural_skill = (episode + offset) % 3
+    probabilities = [0.2, 0.3, 0.5]
+    natural_action = natural_skill
+    natural = {
+        "arm": arm,
+        "task_master_seed": 97_057,
+        "episode_id": episode,
+        "physical_time": physical_time,
+        "lifecycle_key": lifecycle_key,
+        "membership_epoch": 0,
+        "observation": [float(episode), float(offset)],
+        "actor_hidden_before": [0.0, 1.0],
+        "natural_skill": natural_skill,
+        "natural_action": natural_action,
+        "natural_action_log_probability": float(math.log(probabilities[natural_action])),
+        "primitive_legal_support": [0, 1, 2],
+        "primitive_probabilities": probabilities,
+        "active_set_size": 2,
+    }
+    forced = {
+        **deepcopy(natural),
+        "focal_index": 0,
+        "active_keys": [lifecycle_key, f"peer-{episode}-{offset}"],
+        "active_membership_epochs": [0, 0],
+        "active_skills": [natural_skill, (natural_skill + 1) % 3],
+        "frontier": [],
+        "membership_deltas": [],
+        "source_rng_ledger": {
+            "episode_id": episode,
+            "opportunity": {"master_seed": 77_057, "stream_id": 0},
+            "frontier_order": {"master_seed": 77_057, "stream_id": 1},
+            "policy_action": {"master_seed": 87_057, "stream_id": 2},
+        },
+        "source_rng_states": {
+            "opportunity": {"bit_generator": "PCG64", "state": {"state": 1, "inc": 3}},
+            "frontier_order": {"bit_generator": "PCG64", "state": {"state": 2, "inc": 5}},
+            "policy_action": {"bit_generator": "PCG64", "state": {"state": 3, "inc": 7}},
+        },
+        "forced_effects": np.full((3, 2, 4), 0.1, dtype=np.float64).tolist(),
+    }
+    return natural, forced
+
+
+def _synthetic_provenance(arm="f1"):
+    natural_rows = []
+    forced_sources = []
+    for episode in range(32):
+        for offset in range(4):
+            natural, forced = _provenance_row(arm, episode, offset)
+            natural_rows.append(natural)
+            forced_sources.append(forced)
+    return {"schema": 1, "natural_rows": natural_rows, "forced_sources": forced_sources}
+
+
+def _decision_metrics(**overrides):
+    delta = 1.0 / 12.0
+    delta_stratum = 1.0 / 24.0
+    values = {
+        "validity_ok": True,
+        "support_ok": True,
+        "policy_lineage_ok": True,
+        "all_pairs_exact_upper_below_delta": False,
+        "all_pairs_forced_upper_below_delta": False,
+        "frozen_pair_exact_ci": (delta, 0.2),
+        "frozen_pair_forced_ci": (delta, 0.2),
+        "stability_pooled_ci": (delta, 0.2),
+        "stability_stratum_cis": [(delta_stratum, 0.2)] * 12,
+        "natural_raw_ci": (delta, 0.2),
+        "natural_nuisance_ci": (0.01, 0.2),
+        "natural_matched_margin_ci": (0.01, 0.2),
+    }
+    values.update(overrides)
+    return values
+
+
+def test_runner_symbols_and_frozen_constants_are_present():
+    runner = _runner()
+    assert runner.DELTA == 1.0 / 12.0
+    assert runner.DELTA_STRATUM == 1.0 / 24.0
+    assert runner.LINEAGE_THRESHOLD == pytest.approx(math.log(1.2))
+    assert runner.BOOTSTRAP_REPETITIONS == 10_000
+    assert runner.REFERENCE_EPISODES == tuple(range(16))
+    assert runner.INFERENCE_EPISODES == tuple(range(16, 32))
+    assert runner.MIN_POOLED_EPISODES == 8
+    assert runner.MIN_POOLED_FORCED_SNAPSHOTS == 24
+    assert runner.MIN_STRATUM_EPISODES == 8
+    assert runner.MIN_FORCED_SNAPSHOTS_PER_STRATUM == 8
+    assert runner.MIN_EXACT_ROWS_PER_STRATUM == 32
+    assert runner.MIN_NATURAL_WINDOWS_PER_SKILL == 24
+
+
+def test_source_identity_requires_registered_headers_arm_update_and_terminal_manifest():
+    runner = _runner()
+    bundle = _source_bundle("f0")
+    report = runner.validate_source_identity(bundle, "f0")
+    assert report["valid"] is True
+    assert all(report["checks"].values())
+
+    wrong_arm = deepcopy(bundle)
+    wrong_arm["checkpoint"]["event_architecture"]["architecture_mode"] = "f1"
+    assert runner.validate_source_identity(wrong_arm, "f0")["valid"] is False
+    wrong_update = deepcopy(bundle)
+    wrong_update["checkpoint"]["event_architecture"]["update_idx"] = 249
+    assert runner.validate_source_identity(wrong_update, "f0")["valid"] is False
+    nonterminal = deepcopy(bundle)
+    nonterminal["arm_status"]["state"] = "running"
+    assert runner.validate_source_identity(nonterminal, "f0")["valid"] is False
+
+
+def test_registered_parity_is_exact_and_any_mismatch_invalidates():
+    runner = _runner()
+    registered, evaluation = _registered_evaluation()
+    report = runner.validate_registered_parity(registered, evaluation)
+    assert report["valid"] is True
+    assert all(report["checks"].values())
+
+    mismatch = deepcopy(evaluation)
+    mismatch["utility"][17] += 1e-12
+    report = runner.validate_registered_parity(registered, mismatch)
+    assert report["valid"] is False
+    assert report["checks"]["stochastic_episode_outcomes_exact"] is False
+
+
+def test_provenance_rejects_duplicate_missing_pair_and_source_tensor_mismatch():
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    assert runner.validate_provenance(provenance, "f1")["valid"] is True
+
+    duplicate = deepcopy(provenance)
+    duplicate["forced_sources"][-1] = deepcopy(duplicate["forced_sources"][0])
+    report = runner.validate_provenance(duplicate, "f1")
+    assert report["valid"] is False
+    assert report["checks"]["forced_shared_keys_unique"] is False
+
+    missing = deepcopy(provenance)
+    missing["natural_rows"].pop()
+    report = runner.validate_provenance(missing, "f1")
+    assert report["valid"] is False
+    assert report["checks"]["one_natural_match_per_forced_key"] is False
+
+    mismatch = deepcopy(provenance)
+    mismatch["forced_sources"][0]["actor_hidden_before"][0] = 99.0
+    report = runner.validate_provenance(mismatch, "f1")
+    assert report["valid"] is False
+    assert report["checks"]["source_observation_and_hidden_exact"] is False
+
+
+def test_reference_pair_selection_uses_only_episodes_zero_through_fifteen():
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    for row in provenance["forced_sources"]:
+        effects = np.zeros((3, 2, 4), dtype=np.float64)
+        if row["episode_id"] < 16:
+            effects[1, :, 0] = 0.2
+            effects[2, :, 0] = 0.9
+        else:
+            effects[0, :, 0] = 100.0
+        row["forced_effects"] = effects.tolist()
+
+    selected = runner.select_reference_pair(provenance["forced_sources"])
+
+    assert selected["pair"] == [0, 2]
+    assert selected["reference_episodes"] == list(range(16))
+    assert selected["inference_episodes"] == list(range(16, 32))
+
+
+def test_synthetic_analysis_derives_finite_metrics_and_fails_closed_on_support(
+    monkeypatch,
+):
+    from ha_ctse_process.variable_roster_event import EventLowActor
+
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    for row in provenance["forced_sources"]:
+        effects = np.zeros((3, 2, 4), dtype=np.float64)
+        effects[1, :, 0] = 0.4
+        effects[2, :, 1] = 0.4
+        row["forced_effects"] = effects.tolist()
+    monkeypatch.setattr(runner, "BOOTSTRAP_REPETITIONS", 50)
+    actor = EventLowActor(
+        obs_dim=2,
+        n_skills=3,
+        action_dim=3,
+        hidden_dim=2,
+        action_space_type="discrete",
+        device="cpu",
+    )
+    actor.eval()
+
+    analysis = runner.analyze_semantics(provenance, actor)
+
+    assert analysis["reference_selection"]["pair"] == [1, 2]
+    assert analysis["metrics"]["support_ok"] is False
+    assert len(analysis["metrics"]["stability_stratum_cis"]) == 24
+    assert runner._finite_json_values(analysis)
+
+
+@pytest.mark.parametrize(
+    ("metrics", "expected"),
+    [
+        (
+            _decision_metrics(
+                all_pairs_exact_upper_below_delta=True,
+                all_pairs_forced_upper_below_delta=True,
+            ),
+            "A_NO_MATERIAL_Z_DEPENDENCE",
+        ),
+        (
+            _decision_metrics(frozen_pair_exact_ci=(0.0, 0.0)),
+            "B_UNSTABLE_OR_NONPERSISTENT_Z_EFFECT",
+        ),
+        (
+            _decision_metrics(natural_raw_ci=(0.0, 0.0)),
+            "C_STABLE_FORCED_NO_NATURAL_OVERLAP",
+        ),
+        (_decision_metrics(), "D_STABLE_LOCAL_NATURAL_OVERLAP"),
+        (
+            _decision_metrics(natural_nuisance_ci=(0.0, 0.0)),
+            "E_NUISANCE_SHORTCUT",
+        ),
+        (
+            _decision_metrics(support_ok=False),
+            "F_UNDERPOWERED_OR_UNIDENTIFIABLE",
+        ),
+    ],
+)
+def test_frozen_outcome_supports_a_through_f_without_priority_changes(metrics, expected):
+    assert _runner().frozen_outcome(metrics) == expected
+
+
+def test_prohibited_field_is_rejected_recursively():
+    runner = _runner()
+    provenance = _synthetic_provenance()
+    provenance["forced_sources"][0]["source_rng_states"]["reward"] = 1.0
+    report = runner.validate_provenance(provenance, "f1")
+    assert report["valid"] is False
+    assert report["checks"]["prohibited_fields_absent"] is False
+
+
+def test_create_new_outputs_write_only_four_registered_files_and_refuse_second_write(
+    tmp_path,
+):
+    runner = _runner()
+    output_root = tmp_path / "audit"
+    raw = {
+        "f0": {"schema": 1, "natural_rows": [], "forced_sources": []},
+        "f1": {"schema": 1, "natural_rows": [], "forced_sources": []},
+    }
+    result = {"schema_version": 1, "outcome": "F_UNDERPOWERED_OR_UNIDENTIFIABLE"}
+
+    runner.write_audit_outputs(output_root, raw, result)
+
+    assert sorted(
+        path.relative_to(output_root).as_posix()
+        for path in output_root.rglob("*")
+        if path.is_file()
+    ) == [
+        "raw/f0_provenance.pt",
+        "raw/f1_provenance.pt",
+        "result/iteration4_provenance_audit.json",
+        "runner_status.txt",
+    ]
+    assert torch.load(
+        output_root / "raw" / "f0_provenance.pt", weights_only=False
+    ) == raw["f0"]
+    assert json.loads(
+        (output_root / "result" / "iteration4_provenance_audit.json").read_text(
+            encoding="utf-8"
+        )
+    ) == result
+    with pytest.raises(FileExistsError, match="output root already exists"):
+        runner.write_audit_outputs(output_root, raw, result)
+
+
+def test_guarded_evaluation_preserves_global_rng_model_tensors_grads_and_modes():
+    runner = _runner()
+    owner = SimpleNamespace(
+        commitment_model=torch.nn.Linear(2, 2),
+        event_critic=torch.nn.Linear(2, 1),
+        low_actor=torch.nn.Linear(2, 3),
+        low_critic=torch.nn.Linear(2, 1),
+    )
+    owner.commitment_model.train(False)
+    owner.event_critic.train(True)
+    owner.low_actor.train(False)
+    owner.low_critic.train(True)
+    for module in (
+        owner.commitment_model,
+        owner.event_critic,
+        owner.low_actor,
+        owner.low_critic,
+    ):
+        for parameter in module.parameters():
+            parameter.grad = torch.full_like(parameter, 0.25)
+    random.seed(801)
+    np.random.seed(802)
+    torch.manual_seed(803)
+    before_rng = _global_rng_state()
+    before_model = runner.model_state_snapshot(owner)
+
+    payload, checks = runner.evaluate_with_guards(owner, lambda: {"finite": 1.0})
+
+    assert payload == {"finite": 1.0}
+    assert checks == {
+        "model_tensors_unchanged": True,
+        "model_grads_unchanged": True,
+        "module_modes_unchanged": True,
+        "global_python_numpy_torch_cuda_rng_unchanged": True,
+    }
+    runner.assert_model_state_equal(before_model, runner.model_state_snapshot(owner))
+    _assert_global_rng_equal(before_rng, _global_rng_state())
