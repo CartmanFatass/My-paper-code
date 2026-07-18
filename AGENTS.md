@@ -4,13 +4,13 @@
 
 All active project-control documents live in `docs/project/`:
 
-- `CURRENT_WORK.md` — controller ownership, live objective, portfolio, next
+- `docs/project/CURRENT_WORK.md` — controller ownership, live objective, portfolio, next
   action, autonomy state, immediate constraints, and current pointers;
-- `ALGORITHM_PRINCIPLES.md` — durable scientific exploration contract;
-- `MARL_ENGINEERING_PRINCIPLES.md` — durable implementation and experiment-code
+- `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific exploration contract;
+- `docs/project/MARL_ENGINEERING_PRINCIPLES.md` — durable implementation and experiment-code
   contract;
-- `IMPLEMENTATION_PLAN.md` — the single active staged implementation contract;
-- `ExpRecord.md` — formal experiment contracts and terminal dispositions.
+- `docs/project/IMPLEMENTATION_PLAN.md` — the single active staged implementation contract;
+- `docs/project/ExpRecord.md` — formal experiment contracts and terminal dispositions.
 
 Read `docs/project/CURRENT_WORK.md` first. It is the only mandatory default
 read. Load another control document only when the task crosses its boundary.
@@ -21,9 +21,9 @@ active instruction source.
 One active controller works directly in `C:\project\HMASD` and owns algorithm
 and architecture decisions, root project state, scientific interpretation,
 experiment authorization, final Git integration and push, and user
-communication. `CURRENT_WORK.md` names that task; ownership changes only by an
-explicit handoff recorded there. Project files never select the controller
-model.
+communication. `docs/project/CURRENT_WORK.md` names that task; ownership changes
+only by an explicit handoff recorded there. Project files never select the
+controller model.
 
 ## Workflow Routing
 
@@ -34,8 +34,9 @@ interpretation, and routine continuation do not invoke a project Skill.
 Only these conditional workflows exist:
 
 - `$hmasd-research-cycle`: use only when the user explicitly invokes it or
-  `CURRENT_WORK.md` records `Autonomous Boundary: ACTIVE`; one invocation owns
-  one bounded evidence-bearing iteration and must return to the controller;
+  `docs/project/CURRENT_WORK.md` records `Autonomous Boundary: ACTIVE`; one
+  invocation owns one bounded evidence-bearing iteration and must return to the
+  controller;
 - `$hmasd-experiment`: use for an authorized mutation of an experiment
   contract, package, launch, monitor, failed runtime stage, analysis repair, or
   terminal closure;

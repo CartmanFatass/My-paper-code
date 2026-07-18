@@ -10,15 +10,23 @@ $stateScript = Join-Path $repo ".agents/skills/hmasd-review-round/scripts/review
 
 $registryText = Get-Content -LiteralPath $registryPath -Raw
 $registry = $registryText | ConvertFrom-Json
-if ($registry.schema_version -ne 7 -or
-    $registry.pro_transport.kind -ne "codex_chatgpt_control_visible_ui" -or
-    $registry.reviewers.open_divergent.transport -ne "codex_chatgpt_control" -or
-    $registry.reviewers.convergent.transport -ne "codex_chatgpt_control") {
+if ($registry.schema_version -ne 9 -or
+    $registry.gemini_transport.kind -ne "one_shot_subagent_antigravity_cli" -or
+    $registry.gemini_transport.subagent_model -ne "gpt-5.6-terra" -or
+    $registry.gemini_transport.reasoning_effort -ne "medium" -or
+    $registry.gemini_transport.handoff -ne "single_line_document_pointer" -or
+    $registry.pro_transport.kind -ne "role_specific_luna_exchange_in_app_browser" -or
+    $registry.pro_transport.dispatch_tool -ne "codex_app__send_message_to_thread" -or
+    $registry.pro_transport.model_override_fields -ne "FORBIDDEN" -or
+    $registry.reviewers.open_divergent.transport -ne "luna_exchange_in_app_browser" -or
+    $registry.reviewers.open_divergent.codex_exchange.thread_id -ne "019f716c-3c8a-7891-8c89-c94dc94fab4c" -or
+    $registry.reviewers.convergent.transport -ne "luna_exchange_in_app_browser" -or
+    $registry.reviewers.convergent.codex_exchange.thread_id -ne "019f716c-676f-7673-9782-f37b72f200d2") {
     throw "Registry is not the current review transport contract"
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("chatgpt-delegate", "schema 4", "dispatched exactly once", "BLOCKED_TIMEOUT")) {
+foreach ($required in @("role-specific Luna Exchange", "Codex in-app browser", "schema 4", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }
@@ -79,6 +87,13 @@ try {
 
     & $stateScript -Mode transition -RoundPath $blocked -Stage gemini_divergent `
         -State BLOCKED -Blocker "PRE_DISPATCH_BOUNDARY" | Out-Null
+    & $stateScript -Mode transition -RoundPath $blocked -Stage gemini_divergent `
+        -State BLOCKED -Blocker "PRE_DISPATCH_BOUNDARY_UPDATED" | Out-Null
+    $preDispatchState = Get-Content -LiteralPath (Join-Path $blocked "05_REVIEW_STATE.json") -Raw | ConvertFrom-Json
+    if ($preDispatchState.stages.gemini_divergent.dispatch_count -ne 0 -or
+        $preDispatchState.stages.gemini_divergent.blocker -ne "PRE_DISPATCH_BOUNDARY_UPDATED") {
+        throw "Pre-dispatch blocker could not be updated without consuming dispatch"
+    }
     $route = Route $blocked "GEMINI_DIVERGENT" "11_GEMINI_DIVERGENT_RAW.md"
     $deadline = [DateTimeOffset]::Now.AddHours(2).ToString("o")
     & $stateScript -Mode transition -RoundPath $blocked -Stage gemini_divergent `

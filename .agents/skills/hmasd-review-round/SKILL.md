@@ -52,29 +52,53 @@ listed repository inputs. Stop before dispatch if any path is unavailable.
 
 ## Gemini
 
-Reuse the registered Gemini Exchange and Antigravity session. Send one route
-using only `hostId`, `threadId`, and `prompt`; never pass model or thinking.
-Gemini reads the approved manifest and writes only
-`11_GEMINI_DIVERGENT_RAW.md`.
+Spawn one depth-one transport subagent with `fork_turns="none"`, model
+`gpt-5.6-terra`, and reasoning effort `medium`. It resumes the registered
+Antigravity conversation through an interactive `agy` PTY; never create a
+persistent Codex Exchange or change the Gemini model.
+
+The TUI handoff is exactly one single-line document pointer:
+`Read @<question-path> and follow it exactly.` Do not paste the question body or
+any multiline prompt into the TUI. Mark `DISPATCHED` only after that one message
+is visibly accepted by the registered session.
+
+The subagent may approve once only a displayed read-only command whose resolved
+paths are all in `02_GEMINI_LOCAL_SOURCE_MANIFEST.md`. Never use
+`--dangerously-skip-permissions`; deny invisible commands, writes, credentials,
+project-external paths, or broader execution. It may write only this round's
+state and `11_GEMINI_DIVERGENT_RAW.md`, returns one terminal payload to the
+controller, and is not reused for another round.
+
+Before dispatch, verify that the sandbox identity can update the registered
+Antigravity conversation database and `agentapi.bat`. This is a transport
+precondition, not a reason to grant write access to the whole user profile or
+to run the CLI unsandboxed. If either exact path is not writable, stop before
+dispatch with `BLOCKED_GEMINI_STATE_NOT_WRITABLE`.
 
 ## Pro
 
-**Required sub-skill:** use `chatgpt-delegate` from
-`codex-chatgpt-control`.
+Reuse the two registered role-specific Luna Exchange tasks. `OPEN_DIVERGENT`
+and `CONVERGENT` each have one fixed Codex task and one fixed ChatGPT Pro URL;
+never substitute, merge, or create a replacement role session.
 
-The controller opens the registered role-specific URL, verifies the visible
-`Pro` setting, expands the neutral handoff by replacing only commit and question
-path, and submits once. After verified submission, record `DISPATCHED` with the
-same route and deadline.
+The controller dispatches one route to the matching Exchange with
+`codex_app__send_message_to_thread` using only the registered `hostId`,
+`threadId`, and `prompt`. Do not pass `model` or `thinking`; the manually
+configured Exchange model is authoritative and must not be mutated. The prompt
+contains only the route token, commit, question path, raw path, and deadline.
 
-Use bounded reads on that URL until natural completion or the deadline. Never
-use a Pro Codex Exchange, transport subagent, cross-task relay, heartbeat,
-automation, shell sleep, alternate conversation, or response-control button.
-Stop on a structured plugin blocker.
+The Exchange alone operates the Codex in-app browser. It opens the registered
+role-specific URL, verifies the visible `Pro` setting, expands the neutral
+handoff by replacing only commit and question path, and submits once. It does
+not use Chrome, Computer Use, an external browser, a plugin, MCP, shell sleep,
+heartbeat, automation, an alternate conversation, or a response-control
+button.
 
-When the response is complete and inactive, write `responseText` exactly to the
-registered raw and compare file content byte-for-byte before marking
-`COMPLETE`. Missing, partial, or ambiguous raw is incomplete evidence.
+The Exchange performs bounded same-page reads until natural completion or the
+deadline. It writes the completed response exactly to the registered raw,
+compares file content byte-for-byte, transitions the stage, and sends one
+terminal payload back to the controller. The controller does not poll the
+Exchange. Missing, partial, or ambiguous raw is incomplete evidence.
 
 ## Finish
 

@@ -76,6 +76,10 @@ $review = Read-Text (Join-Path $skillsRoot "hmasd-review-round/SKILL.md")
 $reviewState = Read-Text (Join-Path $skillsRoot "hmasd-review-round/scripts/review_state.ps1")
 if (-not $review.Contains("dispatched exactly once") -or
     -not $review.Contains("BLOCKED_TIMEOUT") -or
+    -not $review.Contains("gpt-5.6-terra") -or
+    -not $review.Contains("single-line document pointer") -or
+    -not $review.Contains("role-specific Luna Exchange") -or
+    -not $review.Contains("Codex in-app browser") -or
     -not $reviewState.Contains("schema_version = 4") -or
     -not $reviewState.Contains("dispatch_count")) {
     throw "Review dispatch loop guard is incomplete"

@@ -251,7 +251,7 @@ if ($Mode -eq "transition") {
             "NOT_STARTED" { @("DISPATCHED", "BLOCKED") }
             "DISPATCHED" { @("COMPLETE", "BLOCKED") }
             "BLOCKED" {
-                if ($entry.dispatch_count -eq 0) { @("DISPATCHED") } else { @() }
+                if ($entry.dispatch_count -eq 0) { @("DISPATCHED", "BLOCKED") } else { @() }
             }
         }
     } else {

@@ -30,11 +30,12 @@ one scheduled experiment into a claim that only one research direction exists.
 
 ## Execution default
 
-Communication is automatic once a round exists. Gemini uses its registered
-Antigravity Exchange. The controller accesses the two role-specific Pro
-conversations directly through the pinned `codex-chatgpt-control` plugin. Reuse
-the sessions in `REVIEWER_CONVERSATIONS.json`; never substitute or mix roles.
-Submit external roles serially and archive each completed raw before using it.
+Communication is automatic once a round exists. Gemini uses one bounded
+Antigravity transport subagent against its registered persistent conversation.
+The two role-specific Luna Exchange tasks use only the Codex in-app browser to
+operate their fixed Pro conversations. Reuse the sessions in
+`REVIEWER_CONVERSATIONS.json`; never substitute or mix roles. Submit external
+roles serially and archive each completed raw before using it.
 
 Before a Pro submission, verify one remote-reachable 40-character commit, its
 question and every `Repository files to inspect` path with
@@ -49,10 +50,12 @@ verify remote evidence boundary
 -> exact raw archive
 ```
 
-Gemini sends only `hostId`, `threadId` and `prompt`; never model or thinking
-fields. Pro uses no Codex Exchange, relay task, heartbeat, automation, shell
-sleep, response-control button or replacement conversation. A transport error
-is a blocker, not reviewer evidence.
+Gemini receives one single-line document pointer in its interactive Antigravity
+PTY. Pro routes are sent to the matching Luna Exchange using only `hostId`,
+`threadId` and `prompt`; never pass model or thinking fields. The Exchange uses
+no Chrome, Computer Use, external browser, plugin, MCP, heartbeat, automation,
+shell sleep, response-control button or replacement conversation. A transport
+error is a blocker, not reviewer evidence.
 
 ## Round ownership
 
@@ -77,7 +80,8 @@ rounds/YYYYMMDD_topic/
 The brief, manifests and initial review state are written once. Reviewer-specific questions
 contain only role and requested-output differences. Raw responses are archived
 before synthesis. Accepted algorithm design moves to `docs/research/`; current
-ownership stays in `memory/CURRENT_WORK.md`; runtime evidence stays in `logs/`.
+ownership stays in `docs/project/CURRENT_WORK.md`; runtime evidence stays in
+`logs/`.
 
 `05_REVIEW_STATE.json` is the sole progress authority. Run `show` once on
 resume; transition only after a real dispatch, completed artifact or actionable

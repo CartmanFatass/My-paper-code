@@ -17,7 +17,7 @@ reviews executable MARL code.
 
 ## Run One Evidence-Bearing Iteration
 
-1. Reconstruct the live portfolio from `CURRENT_WORK.md`.
+1. Reconstruct the live portfolio from `docs/project/CURRENT_WORK.md`.
 2. Freeze the causal question, final capability, replacement ledger, strongest
    ordinary baseline, outcome-dependent portfolio updates, and portfolio-
    exhaustion condition in the single active implementation plan.

@@ -40,6 +40,6 @@ reads only the registered result or direct error. Repair only the failed stage.
 Never retrain when analysis-only repair suffices, and never rescue a scientific
 failure.
 
-Apply the existing result branch, update `ExpRecord.md` once, update
-`CURRENT_WORK.md` only if the live objective or autonomy state changes, and
-create one terminal result/disposition Git boundary.
+Apply the existing result branch, update `docs/project/ExpRecord.md` once,
+update `docs/project/CURRENT_WORK.md` only if the live objective or autonomy
+state changes, and create one terminal result/disposition Git boundary.
