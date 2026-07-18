@@ -58,9 +58,11 @@ final `2 env x 1 update` three-arm CUDA smoke remain valid engineering evidence.
    result or applying any scientific branch.
 2. Keep the accepted implementation and frozen contract available; do not
    relaunch until the user explicitly resumes this evidence source.
-3. Treat experiment-code efficiency as a separate future engineering review:
-   any accepted optimization is implemented and re-reviewed before a later
-   launch, never folded into scientific disposition.
+3. Before any Iteration-5 relaunch, review the actual end-to-end experiment path
+   once against `docs/research/MARL_ENGINEERING_PRINCIPLES.md`, implement accepted
+   efficiency fixes once, and re-inspect only the changed paths. This engineering
+   work must not alter the frozen scientific contract or interpret the stopped
+   run.
 
 ## Overnight Autonomous Boundary
 
@@ -154,7 +156,9 @@ final `2 env x 1 update` three-arm CUDA smoke remain valid engineering evidence.
 
 ## Pointers
 
-- `memory/ALGORITHM_PRINCIPLES.md` — durable research contract.
+- `memory/ALGORITHM_PRINCIPLES.md` — durable scientific exploration contract.
+- `docs/research/MARL_ENGINEERING_PRINCIPLES.md` — durable MARL training,
+  runtime, and experiment-code design contract.
 - `memory/IMPLEMENTATION_PLAN.md` — latest staged core implementation state.
 - `memory/ExpRecord.md` — formal experiment contracts and terminal decisions.
 - `docs/research/designs/F0_F1_DYNAMIC_ROSTER_TESTBED_CONTRACT.md` — accepted

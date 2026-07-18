@@ -1,14 +1,19 @@
 # HMASD Codex Project Instructions
 
-The durable research contract lives in `memory/ALGORITHM_PRINCIPLES.md`.
+The durable scientific contract lives in `memory/ALGORITHM_PRINCIPLES.md`.
+The durable MARL implementation contract lives in
+`docs/research/MARL_ENGINEERING_PRINCIPLES.md`.
 
 ## Project Entry and Controller
 
 Read `memory/CURRENT_WORK.md` first. It is the only mandatory default read. Read
 additional sources only when the task crosses their boundary:
 
-- `memory/ALGORITHM_PRINCIPLES.md` before algorithm, reward, or experiment
-  design;
+- `memory/ALGORITHM_PRINCIPLES.md` before algorithm, reward, benchmark,
+  scientific-evidence, or experiment-contract decisions;
+- `docs/research/MARL_ENGINEERING_PRINCIPLES.md` before implementing or
+  reviewing training, runtime, collector, replay, evaluation, intervention
+  audit, analyzer, or runner code;
 - the active `memory/IMPLEMENTATION_PLAN.md` section before staged core work;
 - the relevant `memory/ExpRecord.md` row before a formal experiment or
   scientific result decision;
@@ -51,13 +56,11 @@ replaces a component, delete the replaced path instead of keeping a
 compatibility switch. Only an explicit current user instruction may reopen a
 retired interface.
 
-MARL exploration is agile by default. Prefer the smallest coherent algorithm
-change that can produce decision-relevant evidence, reuse only the active
-implementation, and remove superseded code promptly. Do not spend an iteration
-on compatibility work, speculative abstraction, broad regression validation,
-workflow prose or legacy-library integration unless it is required to prevent
-an invalid current experiment. Workflow gates must protect attribution and
-runtime integrity, not replace algorithm exploration.
+Scientific exploration rules live only in `memory/ALGORITHM_PRINCIPLES.md`.
+MARL implementation and efficiency rules live only in
+`docs/research/MARL_ENGINEERING_PRINCIPLES.md`. A task that changes both
+scientific semantics and executable MARL code reads both. Do not duplicate
+either contract in this file or in a project Skill.
 
 For staged core work, keep one persistent plan in
 `memory/IMPLEMENTATION_PLAN.md` with one `HMASD Contract` section. Freeze the
@@ -79,59 +82,32 @@ those decisions in the active plan before delegated implementation; unresolved
 core semantics return directly to the controller.
 
 Project files do not select or record the controller model. Every newly spawned
-HMASD implementer, implementation fixer, task reviewer and whole-change reviewer
-uses gpt-5.6-sol xhigh. Never change an existing conversation's model; stop it
-and create a correctly routed replacement when a route must change. If the
-Sol-xhigh implementation/review loop fails twice on the same task, stop
-delegating and the active controller takes over the research implementation
-under the same frozen contract and evidence boundary.
+HMASD implementer or implementation fixer uses gpt-5.6-sol xhigh. Never change
+an existing conversation's model; stop it and create a correctly routed
+replacement when a route must change. The active controller personally inspects
+every integrated implementation, focused check and evidence result; do not
+spawn internal reviewer subagents. If delegated implementation fails twice on
+the same task, stop delegating and the active controller takes over under the
+same frozen contract and evidence boundary.
+
+Use one implementer by default. When two or three implementation packages have
+frozen interfaces and disjoint write scopes, run them in parallel. One file has
+one writer; shared or strongly coupled integration files belong to the
+controller or one designated integration implementer. Parallel implementation
+must reduce the critical path rather than duplicate competing solutions.
 
 Respect the configured eight-thread ceiling and spawn depth one. Return
 `BLOCKED` on missing authority, a contract conflict or required scope expansion.
 
-## Research Loop
+## Scientific and Engineering Contracts
 
-HMASD is an algorithm-exploration project. At architecture or direction
-boundaries, keep two to four causal hypotheses and, when useful, two to four
-candidate architectures. Generate and compare ideas in parallel, but serialize
-mutating implementation and compute through one active evidence source. One
-evidence source does not imply one permitted research direction.
-
-```text
-live hypothesis and architecture portfolio
--> choose a discriminating observation by information gain and final relevance
--> smallest coherent implementation, reanalysis, prototype or controlled run
--> interpret the evidence against the whole portfolio
--> reweight, merge or retire only evidence-resolved branches; repeat or stop
-```
-
-Progress means new algorithm capability, new experimental evidence, or a
-decision that changes the portfolio. Documentation, audits, inventories,
-repeated state checks, and workflow prose are support work. Keep contracts to
-the minimum needed to prevent an invalid experiment, and do not re-prove an
-accepted fact without a concrete contradiction.
-
-There is no separate algorithm-verification stage. Let the next
-evidence-bearing diagnostic or run exercise a coherent change. Add at most one
-focused check for a concrete operational failure or a corruption risk the run
-cannot cheaply expose. Retry only the failed operational path. Apply scientific
-failure review only to a valid non-PASS result and preserve its estimand,
-thresholds, and outcome branches.
-
-Every toy must test a capability needed by the final target: one shared algorithm
-with variable team membership and variable skill lifetime. Before implementing
-a new route, its review question must record:
-
-- the final capability it unlocks and what later integration would consume it;
-- a replacement ledger: what is deleted, retained, and added;
-- at least two competing causal explanations for the current evidence and the
-  smallest observation that separates them;
-- the strongest ordinary baseline or standard-MARL objection;
-- the next serialized evidence source, the outcome-dependent updates for every
-  live candidate and the conditions that would exhaust the whole portfolio.
-
-Do not chain toys automatically. Prefer replacement and simplification over
-module accumulation; an isolated mechanism pass does not authorize integration.
+Use `memory/ALGORITHM_PRINCIPLES.md` for portfolio construction, evidence
+selection, reward boundaries, toy relevance, result semantics, and scientific
+disposition. Use `docs/research/MARL_ENGINEERING_PRINCIPLES.md` for tensor and
+device structure, batching, replay, RNG, recurrent state, persistence,
+observability, and final experiment-code review. Current routes and exact
+symbols remain in `CURRENT_WORK.md` and `IMPLEMENTATION_PLAN.md`, not in either
+durable principles file.
 
 ## Repository and Runtime
 
@@ -160,9 +136,8 @@ if an edit method is rejected. Generate a timestamp once at real launch; dry
 runs use `DRY_RUN`.
 
 Preserve unrelated user changes in a dirty worktree and stage only intended
-files. Core MARL changes must explicitly account for tensor shapes, gradient
-and detach boundaries, clocks, masks, reward scale, advantage semantics,
-active-schema checkpoint consistency, and collector behavior.
+files. Apply `docs/research/MARL_ENGINEERING_PRINCIPLES.md` to every changed
+MARL execution path rather than restating its checklist here.
 
 Remove controller-created transient files at their evidence boundary. Delete
 only exact verified paths under the project or OS temp directory; never remove
@@ -178,9 +153,12 @@ and only the artifact needed for a result claim or concrete failure.
 ## Formal Experiments
 
 Use `$hmasd-experiment` for every real experiment lifecycle. Before launch, read
-`ALGORITHM_PRINCIPLES.md` and the owning `ExpRecord.md` contract; it fixes the
-causal edge, authority, comparator, metrics, budgets, branches, prohibitions,
-expected wall clock, placement, and status authority.
+`memory/ALGORITHM_PRINCIPLES.md` and the owning `memory/ExpRecord.md` contract;
+it fixes the causal edge, authority, comparator, metrics, budgets, branches,
+prohibitions, expected wall clock, placement, and status authority. If the run
+uses new or changed executable MARL code, close the single pre-launch review in
+`docs/research/MARL_ENGINEERING_PRINCIPLES.md`; unchanged frozen code does not
+repeat that review.
 
 Formal experiments use CUDA and parallel execution sized for the wall-clock
 target. Do not silently fall back to CPU or serial execution. Reuse a known
@@ -257,9 +235,13 @@ Other transport and recovery mechanics live only in `$hmasd-review-round`.
 Keep the four root memory files compact and current:
 
 - `CURRENT_WORK.md`: controller, objective, actions, constraints, pointers;
-- `ALGORITHM_PRINCIPLES.md`: durable research contract;
+- `ALGORITHM_PRINCIPLES.md`: durable scientific exploration contract;
 - `IMPLEMENTATION_PLAN.md`: current staged core work;
 - `ExpRecord.md`: formal experiment dashboard.
+
+`docs/research/MARL_ENGINEERING_PRINCIPLES.md` is the durable implementation
+contract read only for relevant MARL code work; it is not a fifth root memory
+file.
 
 Update the owning file only at an accepted core implementation, pre-launch,
 terminal result/disposition, accepted external-review disposition, or explicit

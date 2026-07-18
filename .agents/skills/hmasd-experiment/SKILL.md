@@ -7,6 +7,9 @@ description: Use only when an authorized HMASD action creates or mutates an expe
 
 Read `memory/CURRENT_WORK.md`, `memory/ALGORITHM_PRINCIPLES.md`, the owning row
 in `memory/ExpRecord.md`, and `references/experiment-protocol.md`.
+If the lifecycle creates or changes executable MARL code, also read
+`docs/research/MARL_ENGINEERING_PRINCIPLES.md`. A launch of already frozen code
+uses its recorded controller review and does not repeat the engineering review.
 
 ## Authority and Launch
 
@@ -24,6 +27,11 @@ root. Publish a completed payload with an atomic file or result-directory rename
 inside that root, then atomically update the status to its terminal state. Do not
 fall back to CPU or serial execution, change placement, or launch merely because
 implementation completed.
+
+Before launching new or changed executable code, require one completed
+controller review of the actual end-to-end path under the engineering contract,
+including any accepted efficiency fix and its one changed-path reinspection.
+This is part of code readiness, not a separate performance gate.
 
 ## Monitor with One Subagent
 
