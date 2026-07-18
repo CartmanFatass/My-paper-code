@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260718-stage-c-semantics-provenance-audit | launch-ready | iteration-4 frozen-checkpoint provenance audit | local CUDA; `logs/stage_c_semantics_provenance_audit_20260718_190948`; implementation `05b40eb` | terminal `runner_status.txt`, then one result JSON | reviewed default-off provenance, exact Stage C source binding, transactional four-file publication; tests `32 + 18` pass | Run exactly once without training or scientific-contract changes; operational failure permits unchanged repair only |
+| EXP-20260718-stage-c-semantics-provenance-audit | completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE` | iteration-4 frozen-checkpoint provenance audit | `logs/stage_c_semantics_provenance_audit_20260718_190948/result/iteration4_provenance_audit.json`; implementation `05b40eb` | iteration-5 portfolio design, not checkpoint rescue | M0 pass; F1 pair 1--2 action-TV CI `[0.046582,0.051259]`, forced-effect CI `[0.027817,0.069094]`, both UCB `<1/12`; 128/10,240 paired forced/natural rows per arm | Strengthen C3 and the C1 missing-semantic-pressure diagnosis; weaken C2; keep credit closed; no reanalysis/threshold/support rescue |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
 | EXP-20260717-f0f1-dynamic-roster-stage-a | completed -- valid `PASS_STAGE_A_CARRIER` | no-learning dynamic-roster carrier | `logs/f0f1_dynamic_roster_stage_a_20260717_143552/result/stage_a_carrier.json`; implementation `044c8df` | Stage B direct-access result | all M0 true; constructive `P/S/U=1/1/1`; random positive fraction `1.0`, mean `U=0.331217`; 20,480 steps/controller, zero optimizers/intrinsic | Accept carrier only; do not infer learnability or F1 value; Stage B is now separately authorized |
@@ -133,6 +133,20 @@ explicitly approves the exception.
 - Prohibited: training, optimizer/reward/model/environment/checkpoint changes,
   task-specific fields, budget/seed/threshold/null/support rescue, automatic
   integration, successor experiment or extra iteration.
+- Terminal result (2026-07-18): valid
+  `A_NO_MATERIAL_Z_DEPENDENCE`; monitor handoff
+  `stage_c_semantics_provenance_audit_20260718_190948:complete:2026-07-18T19:24:06+08:00`.
+  M0 passes, both arms have 128 forced sources and 10,240 unique natural rows,
+  and all registered/new outcomes, counts and ordered effects match exactly.
+  F1's selected pair is skills `1--2`; same-input action-TV CI95 is
+  `[0.0465819432,0.0512587762]` and persistent forced-effect CI95 is
+  `[0.0278171830,0.0690939002]`. Both upper bounds are below
+  `delta=0.0833333333`, so the frozen priority stops at A. Natural balanced
+  accuracy `1.0` and positive raw/null margins describe separable small modes;
+  they cannot override the failed material-dependence prerequisite. Strengthen
+  C3 and only the C1 missing-pressure explanation, weaken broad C2, and keep
+  SMDP/assignment credit closed. No checkpoint reanalysis, episode/support
+  extension, threshold rescue or automatic successor is authorized.
 
 ## EXP-20260717-f0f1-dynamic-roster-stage-c — Paired Applied-Prefix Test
 

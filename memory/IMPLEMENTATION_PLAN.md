@@ -200,8 +200,9 @@ provenance at collection time. It may not add training, reward or a new toy.
 
 ## Task 3: Iteration 4 Provenance-Complete Frozen Evaluation
 
-Status: implementation and combined review accepted at `05b40eb`; the
-provenance-only CUDA audit is launch-ready under the frozen contract below.
+Status: completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE`. Implementation and
+combined review were accepted at `05b40eb`; the frozen CUDA audit closed at
+`logs/stage_c_semantics_provenance_audit_20260718_190948`.
 
 ### HMASD Contract
 
@@ -414,6 +415,23 @@ reviews; the whole change passed final review after controller takeover fixed
 transactional result publication. Focused provenance tests are `32/32` and the
 unchanged iteration-3 analyzer tests are `18/18`. The launch implementation is
 `05b40eb563e03ca5d54d4d7ff410ba856da8ab9b`.
+
+Terminal evidence: M0 and every paired-source/provenance/state guard pass. Each
+arm has 128 forced sources and 10,240 unique natural rows. F1 selects skills
+`1--2`; same-input action-TV CI95 is `[0.046582, 0.051259]` and persistent
+forced-effect CI95 is `[0.027817, 0.069094]`. Both upper bounds are below
+`delta=1/12`, so the priority outcome is `A_NO_MATERIAL_Z_DEPENDENCE` even
+though downstream natural classifiers separate the small modes. Sparse
+age/rejoin/duration strata also remain unsupported, but no later support read
+can override outcome A.
+
+Portfolio disposition: strengthen C3 as the empirical leader and strengthen
+only the C1 diagnosis that Stage C lacks a mechanism creating material
+environment-agnostic skill effects. Weaken broad C2: extra event context cannot
+repair a latent whose intervention effect is already below the registered
+materiality floor. Keep SMDP/assignment credit closed. Do not reanalyze these
+checkpoints, append episodes, rescue thresholds or promote natural
+classification to semantic success.
 
 ## Variable-N + Variable-Lifetime Event Architecture — Stage A Passed
 

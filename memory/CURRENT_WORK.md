@@ -28,22 +28,23 @@ closed as valid `F_UNDERPOWERED_OR_UNIDENTIFIABLE`: both arms pass M0 and expose
 small checkpoint-local `z -> action` dependence, but the stored forced branches
 lack the provenance required to identify stability or natural overlap.
 
-Iteration 4 implementation is accepted at `05b40eb`: the frozen Stage C
-evaluator now emits exact forced--natural source provenance, and the standalone
-audit strictly binds both arms to the original paired run, preserves the
-registered A--F analysis, and publishes terminal evidence transactionally.
+Iteration 4 is closed as valid `A_NO_MATERIAL_Z_DEPENDENCE`. The frozen Stage C
+audit passed M0, but F1's strongest skill pair has same-input action-TV CI95
+`[0.046582,0.051259]` and 12-step forced-effect CI95
+`[0.027817,0.069094]`; both upper bounds remain below `1/12`.
 
 ## Causal Portfolio
 
-- **C3 / hierarchy-null active-set control:** current empirical leader and
-  mandatory ordinary-MARL null; not yet a final rejection of hierarchy.
-- **C1 / segment-owned environment-agnostic semantics:** strongest live
-  hierarchical explanation; no task fields, reward, identity, role, age or
-  duration shortcuts may define its intrinsic signal.
-- **C2 / minimal event-context execution:** rises only if existing `z` effects
-  fail specifically across age, new/resumed execution or membership events.
-- **Conditional SMDP credit:** dormant until stable executable semantics exist
-  but natural assignment fails.
+- **C3 / hierarchy-null active-set control:** strengthened empirical leader and
+  mandatory ordinary-MARL null; still not a universal rejection of hierarchy.
+- **C1 / segment-owned environment-agnostic semantics:** retained only as the
+  missing-mechanism explanation: a future hierarchy must first create material
+  intervention-sensitive skill effects without task, reward, identity, role,
+  age or duration shortcuts.
+- **C2 / minimal event-context execution:** weakened and dormant; event context
+  cannot rescue the current below-materiality latent modes.
+- **Conditional SMDP credit:** closed until a new mechanism first establishes
+  material, persistent and executable semantics.
 
 ## Next Actions
 
@@ -52,12 +53,14 @@ registered A--F analysis, and publishes terminal evidence transactionally.
 2. Preserve the portfolio ranking: C3 remains the empirical leader, C1 remains
    the strongest live hierarchical explanation, C2 is not promoted and credit
    stays dormant.
-3. Launch exactly one local-CUDA iteration-4 audit at
-   `logs/stage_c_semantics_provenance_audit_20260718_190948`, then read its
-   authoritative terminal status and result once.
-4. Apply the registered A--F branch to the whole portfolio without rescue. Do
-   not add training, reward, thresholds, a new toy or an algorithm mechanism
-   before the valid iteration-4 disposition.
+3. Preserve iteration 4 as a binding material-dependence negative. Do not
+   reanalyze these checkpoints, append episodes, merge strata or reinterpret
+   natural classification as semantic success.
+4. Before iteration 5 implementation, compare at least C3 and a genuinely
+   semantic-creation C1 architecture. The next evidence must test creation of a
+   material environment-agnostic `z -> behavior` effect and retain the direct
+   active-set controller as the ordinary-MARL objection; C2 and credit remain
+   unavailable as rescue routes.
 
 ## Overnight Autonomous Boundary
 
@@ -130,11 +133,12 @@ registered A--F analysis, and publishes terminal evidence transactionally.
   snapshot provenance and forced--natural alignment are absent. This result
   cannot be interpreted as stable semantics, absent semantics or algorithm
   failure.
-- Iteration 4 is launch-ready under
-  `EXP-20260718-stage-c-semantics-provenance-audit`: no training or reward is
-  involved; exact F0/F1 update-250 checkpoints are re-evaluated under the same
-  256-episode ledger and 128-source forced grid. Implementation tests pass
-  `32 + 18`, and combined review has no open finding.
+- Iteration 4 is valid `A_NO_MATERIAL_Z_DEPENDENCE` at
+  `logs/stage_c_semantics_provenance_audit_20260718_190948`: all M0 checks pass;
+  per arm support is 128 forced sources and 10,240 natural rows; the F1 pair
+  `1--2` action/effect UCBs remain below `1/12`. This retires further
+  checkpoint-local context/credit reads, not all possible semantic-creation
+  architectures.
 - R41B remains the positive fixed-`N` source anchor. R51--R55 exact contracts
   are retired and inactive.
 - Do not add graph, attention, slots, critical residuals, team latent, a new
