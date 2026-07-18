@@ -13,6 +13,34 @@ submission. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` before any
 Pro browser transport. `docs/external-review/README.md` is a human index, not a
 mandatory runtime read. Do not reload workflow documents at every stage.
 
+## Establish and Resume Round State
+
+At activation and before ending the turn, inspect the ordered artifacts in the
+round brief. The standard order is Gemini raw, Open Pro raw, controller
+synthesis, Convergent Pro raw, then controller disposition. Resume from the
+first stage that is not confirmed `COMPLETE`.
+
+Use these transport states precisely:
+
+- `NOT_STARTED`: no successful transport call exists;
+- `DISPATCHED`: the guarded send returned, but no verified terminal exchange
+  response has returned;
+- `COMPLETE`: the Exchange identity and role ACK match, its terminal payload is
+  confirmed, and the exact raw response is archived;
+- `BLOCKED`: consent, identity, remote evidence, authentication, completeness,
+  or transport prevents progress.
+
+A prompt file, intended send, browser page, or nonempty raw file alone does not
+prove handoff. A pre-existing raw without a matching Exchange receipt or an
+explicitly identified manual source is `BLOCKED_UNVERIFIED_RAW`; preserve it and
+request exact recovery rather than resubmitting or calling it complete.
+
+Workflow maintenance does not close or satisfy a suspended round. After such
+maintenance, return to the first incomplete stage before the final user response
+whenever the round remains authorized. If a blocker prevents that, report the
+blocker and exact missing authority; never report the round as handed off or
+completed.
+
 ## Run the Round
 
 1. Freeze one shared evidence boundary and exact source allowlists.
@@ -71,11 +99,10 @@ The route token is `<round>:<role>:<commit>:<raw-path>`; a closed token is a
 no-op. Browser, plugin, authentication, identity, or completeness failures are
 transport blockers, never scientific raw responses.
 
-Resume a round from its first missing artifact. A nonempty raw response is
-immutable and proves that submission is already complete; archive or interpret
-it, but never resubmit that reviewer prompt. An incomplete or ambiguous raw
-response is `BLOCKED` for exact manual recovery, not authority to create another
-reviewer conversation or silently submit again.
+An identity-confirmed raw response is immutable; archive or interpret it but
+never resubmit its prompt. An incomplete or ambiguous raw is `BLOCKED` for exact
+manual recovery, not authority to create another reviewer conversation or
+silently submit again.
 
 Automatic permission covers Git-visible Pro transport and raw archival only.
 Sending private repository content, logs, or local papers to Gemini or another

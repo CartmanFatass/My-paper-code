@@ -107,6 +107,8 @@ controller evaluates claims by evidence and reasoning rather than model
 identity and owns every disposition and next authorization.
 
 Before transport, inspect the ordered artifact list and resume at the first
-missing artifact. Treat every nonempty raw file as immutable completed evidence;
-never resubmit its prompt. If the stored raw is partial or its identity cannot
-be verified, stop for exact manual recovery rather than generating a duplicate.
+stage without an identity-confirmed raw. Treat that raw as immutable completed
+evidence and never resubmit its prompt. A nonempty raw without a matching
+Exchange receipt or explicitly identified manual source is
+`BLOCKED_UNVERIFIED_RAW`; preserve it for exact recovery rather than generating
+a duplicate.

@@ -135,10 +135,11 @@ contain only role and requested-output differences. Raw responses are archived
 before synthesis. Accepted algorithm design moves to `docs/research/`; current
 ownership stays in `memory/CURRENT_WORK.md`; runtime evidence stays in `logs/`.
 
-Resume an interrupted round from the first missing artifact. A nonempty raw
-response is immutable completed evidence and its reviewer prompt is never
-submitted again. Partial or identity-ambiguous raw text stops for exact manual
-recovery instead of creating a duplicate response or conversation.
+Resume an interrupted round from the first stage without an identity-confirmed
+raw. A confirmed raw is immutable and its prompt is never submitted again. A
+nonempty raw without a matching Exchange receipt or explicitly identified
+manual source is preserved as `BLOCKED_UNVERIFIED_RAW` for exact recovery; it is
+neither completion evidence nor permission to create a duplicate.
 
 Existing model-specific directories remain historical/operational stores and
 are not reorganized retroactively.
