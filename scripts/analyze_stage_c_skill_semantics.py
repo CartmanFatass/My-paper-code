@@ -1,16 +1,18 @@
 """Read-only, checkpoint-local Stage C skill-semantics audit helpers.
 
-This module deliberately performs no experiment I/O or result-file writes.  The
-controller supplies validated inputs to :func:`run_audit` after the audit gate.
+This module performs only registered offline reads.  Its CLI creates one new
+JSON result and refuses to replace an existing destination.
 """
 
 from __future__ import annotations
 
 from collections import defaultdict
+from copy import deepcopy
 import json
 import math
 from pathlib import Path
 import argparse
+import random
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
 import numpy as np
@@ -19,50 +21,97 @@ import torch
 
 DELTA = 1.0 / 12.0
 DELTA_STRATUM = 1.0 / 24.0
+LINEAGE_THRESHOLD = math.log(1.2)
+
+REQUIRED_SOURCE_M0 = frozenset(
+    {
+        "formal_contract_exact",
+        "environment_steps_exact",
+        "high_optimizer_steps_exact",
+        "low_optimizer_steps_exact",
+        "training_ledger_ids_exact",
+        "zero_evaluation_exact",
+        "final_evaluation_exact",
+        "forced_audit_exact",
+        "intrinsic_reward_and_count_zero",
+        "sampling_replay_probability",
+        "sampling_replay_value",
+        "natural_probability_read_replay",
+        "all_updates_finite",
+        "final_parameters_finite",
+        "parameter_update_nonzero",
+        "strict_vector_schema3_resume",
+        "f0_common_support_reduction",
+    }
+)
+
+EVIDENCE_AVAILABILITY = {
+    "fixed_input_rows": True,
+    "all_skill_categorical_distributions": True,
+    "policy_lineage_final_log_probabilities": True,
+    "forced_aggregate_action_signatures": True,
+    "natural_observation": True,
+    "natural_recurrent_state": True,
+    "natural_lifecycle_context": True,
+    "forced_snapshot_observation": False,
+    "forced_snapshot_recurrent_state": False,
+    "forced_snapshot_lifecycle_metadata": False,
+    "forced_snapshot_legal_support": False,
+    "forced_snapshot_source_episode": False,
+    "forced_nuisance_strata": False,
+    "forced_per_stratum_support": False,
+    "natural_source_episode": False,
+    "forced_natural_shared_key": False,
+    "natural_forced_alignment": False,
+    "natural_common_support": False,
+    "natural_endpoint_window_support": False,
+}
 
 
 def load_audit_inputs(result_path: str | Path, checkpoint_path: str | Path) -> dict[str, Any]:
     """Load offline sources and reconstruct the final actor without RNG mutation."""
-    import json
-    from ha_ctse_process.variable_roster_event import EventLowActor
-
-    with Path(result_path).open("r", encoding="utf-8") as handle:
-        result = json.load(handle)
-    checkpoint = torch.load(Path(checkpoint_path), map_location="cpu", weights_only=False)
-    bundle = checkpoint["event_architecture"]
-    header = bundle["architecture_state"]
-    rng_state = torch.get_rng_state()
+    rng_state = _global_rng_snapshot()
     try:
-        actor = EventLowActor(
-            obs_dim=int(header["obs_dim"]),
-            n_skills=int(header["n_skills"]),
-            action_dim=int(header["action_dim"]),
-            hidden_dim=int(header["low_hidden_dim"]),
-            action_space_type=str(header.get("action_space_type", "discrete")),
-            device="cpu",
+        with Path(result_path).open("r", encoding="utf-8") as handle:
+            result = json.load(handle)
+        checkpoint = torch.load(
+            Path(checkpoint_path), map_location="cpu", weights_only=False
         )
+        actor = _actor_from_checkpoint(checkpoint)
     finally:
-        torch.set_rng_state(rng_state)
-    actor.load_state_dict(bundle["low_actor_state"], strict=True)
-    actor.eval()
+        _restore_global_rng(rng_state)
     return {"result": result, "checkpoint": checkpoint, "actor": actor}
 
 
 def counterfactual_action_distributions(actor: Any, rows: Sequence[Mapping[str, Any]]) -> np.ndarray:
     """Evaluate all skills at fixed stored observations and hidden states."""
-    outputs: list[np.ndarray] = []
+    if not rows:
+        return np.empty((0, 3, 3), dtype=np.float64)
+    observations = torch.as_tensor(
+        np.stack([row["observation"] for row in rows]), dtype=torch.float32
+    )
+    hidden = torch.as_tensor(
+        np.stack([row["actor_hidden_before"] for row in rows]), dtype=torch.float32
+    )
+    row_count = observations.shape[0]
+    expanded_observations = observations.repeat_interleave(3, dim=0).to(actor.device)
+    expanded_hidden = hidden.repeat_interleave(3, dim=0).to(actor.device)
+    skills = torch.arange(3, dtype=torch.long).repeat(row_count).to(actor.device)
     with torch.no_grad():
-        for row in rows:
-            observation = torch.as_tensor(row["observation"], dtype=torch.float32).reshape(1, -1)
-            hidden = torch.as_tensor(row["actor_hidden_before"], dtype=torch.float32).reshape(1, -1)
-            row_outputs = []
-            for skill in range(3):
-                skills = torch.tensor([skill], dtype=torch.long)
-                features = actor._features(observation.to(actor.device), skills.to(actor.device))
-                features, _ = actor.actor_rnn(features, hidden.to(actor.device), torch.ones(1, 1, device=actor.device))
-                row_outputs.append(actor.actor_act.action_out(features).probs.detach().cpu().numpy()[0].copy())
-            outputs.append(np.asarray(row_outputs))
-    return np.asarray(outputs)
+        features = actor._features(expanded_observations, skills)
+        features, _ = actor.actor_rnn(
+            features,
+            expanded_hidden,
+            torch.ones(row_count * 3, 1, device=actor.device),
+        )
+        probabilities = (
+            actor.actor_act.action_out(features)
+            .probs.detach()
+            .cpu()
+            .numpy()
+            .astype(np.float64, copy=True)
+        )
+    return probabilities.reshape(row_count, 3, 3)
 
 
 def reconstruct_context_rows(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
@@ -232,10 +281,12 @@ def decide_outcome(metrics: Mapping[str, Any]) -> str:
         return "C_STABLE_FORCED_NO_NATURAL_OVERLAP"
     if raw_low < DELTA:
         return "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
-    nuisance_low, _ = metrics["natural_nuisance_ci"]
-    matched_low, _ = metrics["natural_matched_margin_ci"]
-    if nuisance_low <= 0 or matched_low <= 0:
+    nuisance_low, nuisance_high = metrics["natural_nuisance_ci"]
+    matched_low, matched_high = metrics["natural_matched_margin_ci"]
+    if nuisance_high <= 0 or matched_high <= 0:
         return "E_NUISANCE_SHORTCUT"
+    if nuisance_low <= 0 or matched_low <= 0:
+        return "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
     return "D_STABLE_LOCAL_NATURAL_OVERLAP"
 
 
@@ -248,35 +299,152 @@ def _source_identity(source: Mapping[str, Any]) -> str:
     return str(source.get("source_identity", source.get("result_path", "synthetic")))
 
 
-def _m0(result: Mapping[str, Any], checkpoint: Mapping[str, Any], expected_arm: str) -> tuple[bool, list[str]]:
-    """Validate the actual nested Stage C result/checkpoint contract."""
-    reasons = []
-    contract = result.get("contract", {})
-    counts = result.get("counts", {})
-    if result.get("schema_version") != 1 or result.get("stage") != "stage_c_paired_f0_f1":
-        reasons.append("m0_result_schema")
-    if result.get("arm") != expected_arm or not result.get("implementation_valid"):
-        reasons.append("m0_arm_or_validity")
-    if checkpoint.get("checkpoint_schema_version") != 3:
-        reasons.append("m0_checkpoint_schema")
-    if (contract.get("num_envs"), contract.get("outer_updates"), contract.get("environment_transitions"), contract.get("latent_skills")) != (16, 250, 320_000, 3):
-        reasons.append("m0_registered_contract")
-    if counts.get("intrinsic_applied_count") != 0:
-        reasons.append("m0_intrinsic")
-    if not all(bool(value) for value in result.get("m0", {}).values()):
-        reasons.append("m0_source_checks")
-    effects = result.get("forced_audit", {}).get("effects")
-    if effects is None:
-        reasons.append("m0_forced_missing")
-    else:
-        try:
-            forced_action_signatures(np.asarray(effects))
-        except (TypeError, ValueError):
-            reasons.append("m0_forced_shape_or_simplex")
-    ledger = checkpoint.get("event_architecture", {}).get("low_ledger")
-    if not isinstance(ledger, Sequence) or len(ledger) != 5_120:
-        reasons.append("m0_low_row_count")
-    return not reasons, reasons
+def _global_rng_snapshot() -> dict[str, Any]:
+    return {
+        "python": random.getstate(),
+        "numpy": deepcopy(np.random.get_state()),
+        "torch_cpu": torch.get_rng_state().clone(),
+        "torch_cuda": (
+            [state.clone() for state in torch.cuda.get_rng_state_all()]
+            if torch.cuda.is_available()
+            else []
+        ),
+    }
+
+
+def _numpy_rng_equal(left: tuple[Any, ...], right: tuple[Any, ...]) -> bool:
+    return (
+        left[0] == right[0]
+        and np.array_equal(left[1], right[1])
+        and left[2:] == right[2:]
+    )
+
+
+def _global_rng_equal(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    return (
+        left["python"] == right["python"]
+        and _numpy_rng_equal(left["numpy"], right["numpy"])
+        and torch.equal(left["torch_cpu"], right["torch_cpu"])
+        and len(left["torch_cuda"]) == len(right["torch_cuda"])
+        and all(
+            torch.equal(left_state, right_state)
+            for left_state, right_state in zip(
+                left["torch_cuda"], right["torch_cuda"]
+            )
+        )
+    )
+
+
+def _restore_global_rng(state: Mapping[str, Any]) -> None:
+    random.setstate(state["python"])
+    np.random.set_state(state["numpy"])
+    torch.set_rng_state(state["torch_cpu"])
+    if state["torch_cuda"]:
+        torch.cuda.set_rng_state_all(state["torch_cuda"])
+
+
+def _tensor_records(
+    value: Any, path: tuple[Any, ...] = ()
+) -> list[tuple[tuple[Any, ...], torch.Tensor]]:
+    if isinstance(value, torch.Tensor):
+        return [(path, value.detach().clone())]
+    records: list[tuple[tuple[Any, ...], torch.Tensor]] = []
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            if isinstance(item, (torch.Tensor, Mapping, list, tuple)):
+                records.extend(_tensor_records(item, (*path, key)))
+    elif isinstance(value, (list, tuple)):
+        for index, item in enumerate(value):
+            if isinstance(item, (torch.Tensor, Mapping, list, tuple)):
+                records.extend(_tensor_records(item, (*path, index)))
+    return records
+
+
+def _path_value(value: Any, path: Sequence[Any]) -> Any:
+    current = value
+    for component in path:
+        current = current[component]
+    return current
+
+
+def _tensors_unchanged(
+    checkpoint: Mapping[str, Any],
+    records: Sequence[tuple[tuple[Any, ...], torch.Tensor]],
+) -> bool:
+    try:
+        current = _tensor_records(checkpoint)
+        if [path for path, _ in current] != [path for path, _ in records]:
+            return False
+        return all(
+            isinstance(_path_value(checkpoint, path), torch.Tensor)
+            and torch.equal(_path_value(checkpoint, path), saved)
+            for path, saved in records
+        )
+    except (KeyError, IndexError, TypeError):
+        return False
+
+
+def _actor_from_checkpoint(checkpoint: Mapping[str, Any]) -> Any:
+    bundle = checkpoint["event_architecture"]
+    header = bundle["architecture_state"]
+    if not isinstance(header, Mapping):
+        raise ValueError("checkpoint architecture header is malformed")
+    if (
+        int(header.get("n_skills", -1)) != 3
+        or int(header.get("action_dim", -1)) != 3
+        or str(header.get("action_space_type", "")) != "discrete"
+        or int(header.get("obs_dim", 0)) <= 0
+        or int(header.get("low_hidden_dim", 0)) <= 0
+    ):
+        raise ValueError("checkpoint low-actor architecture is incompatible")
+    state = bundle.get("low_actor_state")
+    if not isinstance(state, Mapping) or not state:
+        raise ValueError("checkpoint low-actor state is missing")
+    rng_state = _global_rng_snapshot()
+    try:
+        from ha_ctse_process.variable_roster_event import EventLowActor
+
+        actor = EventLowActor(
+            obs_dim=int(header["obs_dim"]),
+            n_skills=3,
+            action_dim=3,
+            hidden_dim=int(header["low_hidden_dim"]),
+            action_space_type="discrete",
+            device="cpu",
+        )
+    finally:
+        _restore_global_rng(rng_state)
+    actor.load_state_dict(state, strict=True)
+    if not all(torch.isfinite(parameter).all().item() for parameter in actor.parameters()):
+        raise ValueError("checkpoint low-actor parameters are non-finite")
+    actor.eval()
+    return actor
+
+
+def _is_sequence(value: Any) -> bool:
+    return isinstance(value, Sequence) and not isinstance(
+        value, (str, bytes, bytearray)
+    )
+
+
+def _extract_runtime_ledger(checkpoint: Mapping[str, Any]) -> list[Any]:
+    bundle = checkpoint["event_architecture"]
+    runtime_payloads = bundle.get("runtime_payloads")
+    if not _is_sequence(runtime_payloads) or len(runtime_payloads) != 16:
+        raise ValueError("checkpoint must contain runtime_payloads[16]")
+    rows: list[Any] = []
+    for environment_index, runtime_payload in enumerate(runtime_payloads):
+        if not isinstance(runtime_payload, Mapping):
+            raise ValueError("runtime payload is not a mapping")
+        if runtime_payload.get("environment_index") != environment_index:
+            raise ValueError("runtime environment indices are not canonical")
+        ledger = runtime_payload.get("low_ledger")
+        if not _is_sequence(ledger):
+            raise ValueError("runtime low ledger is malformed")
+        rows.extend(ledger)
+    if len(rows) != 5_120:
+        raise ValueError("checkpoint must contain exactly 5,120 low rows")
+    return rows
 
 
 def _row_value(row: Any, name: str) -> Any:
@@ -285,80 +453,297 @@ def _row_value(row: Any, name: str) -> Any:
     return getattr(row, name)
 
 
-def _allowed_rows(ledger: Sequence[Any]) -> list[dict[str, Any]]:
-    fields = ("lifecycle_key", "membership_epoch", "physical_time", "observation", "skill", "action", "old_log_probability", "actor_hidden_before")
-    return [{field: _row_value(row, field) for field in fields} for row in ledger]
+def _integer_scalar(value: Any, name: str) -> int:
+    array = np.asarray(value)
+    if array.size != 1 or not np.issubdtype(array.dtype, np.number):
+        raise ValueError(f"{name} must be one numeric scalar")
+    scalar = float(array.reshape(-1)[0])
+    if not np.isfinite(scalar) or scalar != int(scalar):
+        raise ValueError(f"{name} must be one finite integer")
+    return int(scalar)
 
 
-def _final_log_probabilities(actor: Any, rows: Sequence[Mapping[str, Any]]) -> np.ndarray:
-    values = []
-    with torch.no_grad():
-        for row in rows:
-            observation = torch.as_tensor(row["observation"], dtype=torch.float32).reshape(1, -1).to(actor.device)
-            skills = torch.tensor([int(row["skill"])], dtype=torch.long, device=actor.device)
-            hidden = torch.as_tensor(row["actor_hidden_before"], dtype=torch.float32).reshape(1, -1).to(actor.device)
-            features = actor._features(observation, skills)
-            features, _ = actor.actor_rnn(features, hidden, torch.ones(1, 1, device=actor.device))
-            action = torch.as_tensor(row["action"], dtype=torch.long, device=actor.device).reshape(1, 1)
-            values.append(float(actor.actor_act.action_out(features).log_probs(action).item()))
-    return np.asarray(values, dtype=np.float64)
+def _allowed_rows(ledger: Sequence[Any], actor: Any) -> list[dict[str, Any]]:
+    """Extract and validate only the registered non-task row fields."""
+    rows = []
+    for source_row in ledger:
+        lifecycle_key = _row_value(source_row, "lifecycle_key")
+        if not isinstance(lifecycle_key, str) or not lifecycle_key:
+            raise ValueError("low row lifecycle key is malformed")
+        membership_epoch = _integer_scalar(
+            _row_value(source_row, "membership_epoch"), "membership_epoch"
+        )
+        physical_time = _integer_scalar(
+            _row_value(source_row, "physical_time"), "physical_time"
+        )
+        skill = _integer_scalar(_row_value(source_row, "skill"), "skill")
+        action_source = np.asarray(_row_value(source_row, "action"))
+        if action_source.shape != (1,):
+            raise ValueError("low row action must have exact shape [1]")
+        action = _integer_scalar(action_source, "action")
+        if skill not in (0, 1, 2) or action not in (0, 1, 2):
+            raise ValueError("low row skill/action lies outside 0..2")
+        observation = np.asarray(
+            _row_value(source_row, "observation"), dtype=np.float32
+        )
+        hidden = np.asarray(
+            _row_value(source_row, "actor_hidden_before"), dtype=np.float32
+        )
+        if observation.shape != (actor.obs_dim,) or not np.isfinite(observation).all():
+            raise ValueError("low row observation shape/value is malformed")
+        if hidden.shape != (actor.hidden_dim,) or not np.isfinite(hidden).all():
+            raise ValueError("low row actor hidden shape/value is malformed")
+        old_log_probability = float(
+            _row_value(source_row, "old_log_probability")
+        )
+        if not np.isfinite(old_log_probability):
+            raise ValueError("low row stored log probability is non-finite")
+        rows.append(
+            {
+                "lifecycle_key": lifecycle_key,
+                "membership_epoch": membership_epoch,
+                "physical_time": physical_time,
+                "observation": observation.copy(),
+                "skill": skill,
+                "action": action,
+                "old_log_probability": old_log_probability,
+                "actor_hidden_before": hidden.copy(),
+            }
+        )
+    return rows
 
 
-def _minimal_metrics(result: Mapping[str, Any], checkpoint: Mapping[str, Any], actor: Any | None) -> tuple[dict[str, Any], list[str], dict[str, bool]]:
-    """Derive available local diagnostics and name unavailable estimands explicitly."""
-    ledger = checkpoint["event_architecture"]["low_ledger"]
-    effects = result["forced_audit"]["effects"]
-    availability = {
-        "fixed_input_rows": False, "policy_lineage": False, "forced_aggregate": False,
-        "forced_snapshot_metadata": False, "forced_nuisance_metadata": False,
-        "natural_source_episode": False, "natural_forced_alignment": False,
-        "natural_common_support": False,
-    }
-    if actor is None:
-        return {}, ["actor_unavailable"], availability
-    try:
-        signatures = forced_action_signatures(np.asarray(effects))
-        rows = _allowed_rows(ledger)
-        distributions = counterfactual_action_distributions(actor, rows)
-        final_logp = _final_log_probabilities(actor, rows)
-    except (KeyError, AttributeError, TypeError, ValueError, RuntimeError):
-        return {}, ["ledger_or_actor_evidence_malformed"], availability
-    availability.update(fixed_input_rows=True, policy_lineage=True, forced_aggregate=True)
+def _all_z_valid(distributions: np.ndarray, row_count: int) -> bool:
+    return bool(
+        distributions.shape == (row_count, 3, 3)
+        and np.isfinite(distributions).all()
+        and np.all(distributions > 0.0)
+        and np.allclose(distributions.sum(axis=-1), 1.0, atol=1e-6, rtol=0.0)
+    )
+
+
+def _local_diagnostics(
+    rows: Sequence[Mapping[str, Any]],
+    distributions: np.ndarray,
+    signatures: np.ndarray,
+) -> dict[str, Any]:
     pairs = {}
     for left in range(3):
         for right in range(left + 1, 3):
-            pairs[f"{left}-{right}"] = float(np.mean(0.5 * np.abs(distributions[:, left] - distributions[:, right]).sum(axis=1)))
-    lineage = final_logp - np.asarray([row["old_log_probability"] for row in rows], dtype=np.float64)
-    diagnostics = {
+            pairs[f"{left}-{right}"] = float(
+                np.mean(
+                    0.5
+                    * np.abs(distributions[:, left] - distributions[:, right]).sum(
+                        axis=1
+                    )
+                )
+            )
+    indices = np.arange(len(rows), dtype=np.int64)
+    skills = np.asarray([row["skill"] for row in rows], dtype=np.int64)
+    actions = np.asarray([row["action"] for row in rows], dtype=np.int64)
+    final_logp = np.log(distributions[indices, skills, actions])
+    old_logp = np.asarray(
+        [row["old_log_probability"] for row in rows], dtype=np.float64
+    )
+    lineage_p95 = float(np.quantile(np.abs(final_logp - old_logp), 0.95))
+    return {
         "all_skill_tv_means": pairs,
         "forced_aggregate_signature_mean": signatures.mean(axis=(0, 2)).tolist(),
-        "policy_lineage_abs_delta_p95": float(np.quantile(np.abs(lineage), 0.95)),
+        "all_skill_distribution_shape": list(distributions.shape),
+        "runtime_payload_count": 16,
+        "runtime_low_row_count": len(rows),
+        "policy_lineage_abs_delta_p95": lineage_p95,
+        "policy_lineage_threshold": LINEAGE_THRESHOLD,
+        "policy_lineage_ok": lineage_p95 <= LINEAGE_THRESHOLD,
     }
-    reasons = [name for name, available in availability.items() if not available]
-    return diagnostics, reasons, availability
+
+
+def _timing_grid_valid(result: Mapping[str, Any]) -> bool:
+    rows = result.get("timing_rows")
+    if not _is_sequence(rows) or len(rows) != 256 * 80:
+        return False
+    pairs = set()
+    try:
+        for row in rows:
+            if not isinstance(row, Mapping):
+                return False
+            episode = _integer_scalar(row["episode_id"], "episode_id")
+            physical_time = _integer_scalar(row["physical_time"], "physical_time")
+            if not 0 <= episode < 256 or not 0 <= physical_time < 80:
+                return False
+            pairs.add((episode, physical_time))
+    except (KeyError, TypeError, ValueError):
+        return False
+    return len(pairs) == 256 * 80
+
+
+def _static_m0_checks(
+    result: Mapping[str, Any], checkpoint: Mapping[str, Any], expected_arm: str
+) -> dict[str, bool]:
+    contract = result.get("contract")
+    counts = result.get("counts")
+    source_m0 = result.get("m0")
+    bundle = checkpoint.get("event_architecture")
+    counters = bundle.get("counters") if isinstance(bundle, Mapping) else None
+    return {
+        "result_schema": result.get("schema_version") == 1
+        and result.get("stage") == "stage_c_paired_f0_f1",
+        "arm_mode_and_implementation_valid": result.get("arm") == expected_arm
+        and result.get("implementation_valid") is True,
+        "source_m0_complete": isinstance(source_m0, Mapping)
+        and REQUIRED_SOURCE_M0.issubset(source_m0)
+        and all(value is True for value in source_m0.values()),
+        "registered_result_contract": isinstance(contract, Mapping)
+        and (
+            contract.get("num_envs"),
+            contract.get("outer_updates"),
+            contract.get("environment_transitions"),
+            contract.get("latent_skills"),
+        )
+        == (16, 250, 320_000, 3),
+        "registered_result_counts": isinstance(counts, Mapping)
+        and (
+            counts.get("environment_steps"),
+            counts.get("high_optimizer_steps"),
+            counts.get("low_optimizer_steps"),
+            counts.get("training_ledger_ids"),
+            counts.get("intrinsic_applied_count"),
+        )
+        == (320_000, 1_000, 1_000, 4_000, 0),
+        "checkpoint_schema3_vector": checkpoint.get("checkpoint_schema_version")
+        == 3
+        and checkpoint.get("high_controller") == "variable_roster_event"
+        and isinstance(bundle, Mapping)
+        and bundle.get("vector_checkpoint_schema_version") == 1
+        and bundle.get("num_envs") == 16
+        and bundle.get("runtime_state_absent_for_fresh_eval") is False
+        and bundle.get("architecture_mode") == expected_arm
+        and bundle.get("event_architecture_schema_version") == 1,
+        "checkpoint_registered_counters": isinstance(counters, Mapping)
+        and (
+            counters.get("total_steps"),
+            counters.get("update_idx"),
+            counters.get("high_optimizer_steps"),
+            counters.get("low_optimizer_steps"),
+            counters.get("next_episode_id"),
+            counters.get("intrinsic_applied_count"),
+        )
+        == (320_000, 250, 1_000, 1_000, 4_000, 0),
+        "exact_timing_grid": _timing_grid_valid(result),
+    }
+
+
+def _analyze_arm(source: Mapping[str, Any], expected_arm: str) -> dict[str, Any]:
+    identity = _source_identity(source)
+    result = source.get("result", source)
+    checkpoint = source.get("checkpoint")
+    if not isinstance(result, Mapping) or not isinstance(checkpoint, Mapping):
+        return {
+            "identity": identity,
+            "m0_valid": False,
+            "m0_checks": {
+                "result_mapping": isinstance(result, Mapping),
+                "checkpoint_mapping": isinstance(checkpoint, Mapping),
+            },
+            "reasons": [
+                name
+                for name, ok in {
+                    "result_not_mapping": isinstance(result, Mapping),
+                    "checkpoint_not_mapping": isinstance(checkpoint, Mapping),
+                }.items()
+                if not ok
+            ],
+        }
+    checks = _static_m0_checks(result, checkpoint, expected_arm)
+    diagnostics: dict[str, Any] = {}
+    availability: dict[str, bool] | None = None
+    try:
+        ledger = _extract_runtime_ledger(checkpoint)
+        checks["runtime_payloads_and_low_row_count"] = True
+    except (KeyError, TypeError, ValueError):
+        ledger = []
+        checks["runtime_payloads_and_low_row_count"] = False
+    try:
+        actor = _actor_from_checkpoint(checkpoint)
+        checks["final_actor_strict_load"] = True
+    except (KeyError, RuntimeError, TypeError, ValueError):
+        actor = None
+        checks["final_actor_strict_load"] = False
+    if actor is not None and ledger:
+        try:
+            rows = _allowed_rows(ledger, actor)
+            checks["allowed_row_schema_ranges_and_shapes"] = True
+        except (AttributeError, KeyError, TypeError, ValueError):
+            rows = []
+            checks["allowed_row_schema_ranges_and_shapes"] = False
+    else:
+        rows = []
+        checks["allowed_row_schema_ranges_and_shapes"] = False
+    try:
+        effects = result["forced_audit"]["effects"]
+        signatures = forced_action_signatures(np.asarray(effects))
+        checks["forced_shape_and_occupancy_simplex"] = True
+    except (KeyError, TypeError, ValueError):
+        signatures = np.empty((0, 3, 2, 3), dtype=np.float64)
+        checks["forced_shape_and_occupancy_simplex"] = False
+    if actor is not None and rows:
+        try:
+            distributions = counterfactual_action_distributions(actor, rows)
+            checks["all_z_categorical_shape_support_and_simplex"] = _all_z_valid(
+                distributions, len(rows)
+            )
+        except (RuntimeError, TypeError, ValueError):
+            distributions = np.empty((0, 3, 3), dtype=np.float64)
+            checks["all_z_categorical_shape_support_and_simplex"] = False
+    else:
+        distributions = np.empty((0, 3, 3), dtype=np.float64)
+        checks["all_z_categorical_shape_support_and_simplex"] = False
+    if all(checks.values()):
+        diagnostics = _local_diagnostics(rows, distributions, signatures)
+        availability = dict(EVIDENCE_AVAILABILITY)
+    reasons = [f"m0:{name}" for name, ok in checks.items() if not ok]
+    if availability is not None:
+        reasons.extend(
+            f"missing:{name}" for name, available in availability.items() if not available
+        )
+        if not diagnostics["policy_lineage_ok"]:
+            reasons.append("policy_lineage_drift")
+    return {
+        "identity": identity,
+        "m0_valid": all(checks.values()),
+        "m0_checks": checks,
+        "diagnostics": diagnostics,
+        "evidence_availability": availability,
+        "reasons": reasons,
+    }
 
 
 def _coerce_source(source: Mapping[str, Any] | str | Path) -> Mapping[str, Any]:
     if isinstance(source, Mapping):
         return source
     root = Path(source)
-    loaded = load_audit_inputs(root / "result" / "stage_c_arm.json", root / "checkpoints" / "update_250_live.pt")
-    return {"result": loaded["result"], "checkpoint": loaded["checkpoint"], "actor": loaded["actor"], "source_identity": str(root)}
+    loaded = load_audit_inputs(
+        root / "result" / "stage_c_arm.json",
+        root / "checkpoints" / "update_250_live.pt",
+    )
+    return {
+        "result": loaded["result"],
+        "checkpoint": loaded["checkpoint"],
+        "source_identity": str(root),
+    }
 
 
-def _analyze_arm(source: Mapping[str, Any] | str | Path, expected_arm: str) -> dict[str, Any]:
-    source = _coerce_source(source)
-    result = source.get("result", source)
-    if not isinstance(result, Mapping):
-        return {"identity": _source_identity(source), "m0_valid": False, "reasons": ["result_not_mapping"]}
-    checkpoint = source.get("checkpoint")
-    if not isinstance(checkpoint, Mapping):
-        return {"identity": _source_identity(source), "m0_valid": False, "reasons": ["checkpoint_not_mapping"]}
-    valid, reasons = _m0(result, checkpoint, expected_arm)
-    if not valid:
-        return {"identity": _source_identity(source), "m0_valid": False, "reasons": reasons}
-    diagnostics, measured_reasons, availability = _minimal_metrics(result, checkpoint, source.get("actor"))
-    return {"identity": _source_identity(source), "m0_valid": True, "diagnostics": diagnostics, "evidence_availability": availability, "reasons": measured_reasons}
+def _coerce_or_invalid(
+    source: Mapping[str, Any] | str | Path,
+) -> Mapping[str, Any]:
+    try:
+        return _coerce_source(source)
+    except (FileNotFoundError, KeyError, OSError, RuntimeError, TypeError, ValueError):
+        return {
+            "source_identity": str(source),
+            "result": None,
+            "checkpoint": None,
+        }
 
 
 def _json_safe(value: Any) -> Any:
@@ -375,25 +760,91 @@ def _json_safe(value: Any) -> Any:
 
 def run_audit(f0_source: Mapping[str, Any] | str | Path, f1_source: Mapping[str, Any] | str | Path, *, output_path: str | Path | None = None) -> dict[str, Any]:
     """Derive both diagnostics, selecting only F1 for the scientific outcome."""
-    f0 = _analyze_arm(f0_source, "f0")
-    f1 = _analyze_arm(f1_source, "f1")
-    if not f0["m0_valid"] or not f1["m0_valid"]:
-        outcome = "INVALID_ITERATION3_AUDIT"
-    else:
-        outcome = "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
-    payload = _json_safe({
-        "selector_arm": "f1", "f1_outcome": outcome, "source_identity": {"f0": f0["identity"], "f1": f1["identity"]},
-        "m0": {"f0": f0["m0_valid"], "f1": f1["m0_valid"]},
-        "diagnostics": {"f0": f0, "f1": f1},
-        "evidence_ceiling": "checkpoint-local policy evidence only; no transfer, utility, credit, or hierarchy claim",
-    })
-    if output_path is not None:
-        destination = Path(output_path)
-        if destination.exists():
-            raise FileExistsError("audit result path already exists")
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8")
-    return payload
+    destination = Path(output_path) if output_path is not None else None
+    if destination is not None and destination.exists():
+        raise FileExistsError("audit result path already exists")
+    rng_before = _global_rng_snapshot()
+    try:
+        sources = {
+            "f0": _coerce_or_invalid(f0_source),
+            "f1": _coerce_or_invalid(f1_source),
+        }
+        tensor_records = {
+            name: (
+                _tensor_records(source["checkpoint"])
+                if isinstance(source.get("checkpoint"), Mapping)
+                else []
+            )
+            for name, source in sources.items()
+        }
+        arms = {
+            "f0": _analyze_arm(sources["f0"], "f0"),
+            "f1": _analyze_arm(sources["f1"], "f1"),
+        }
+        rng_unchanged = _global_rng_equal(rng_before, _global_rng_snapshot())
+        for name, arm in arms.items():
+            checkpoint = sources[name].get("checkpoint")
+            tensors_unchanged = isinstance(checkpoint, Mapping) and _tensors_unchanged(
+                checkpoint, tensor_records[name]
+            )
+            arm["m0_checks"]["global_python_numpy_cpu_cuda_rng_unchanged"] = (
+                rng_unchanged
+            )
+            arm["m0_checks"]["checkpoint_tensors_unchanged"] = tensors_unchanged
+            arm["m0_valid"] = all(arm["m0_checks"].values())
+            arm["reasons"] = [
+                reason
+                for reason in arm["reasons"]
+                if not reason.startswith("m0:global_")
+                and reason != "m0:checkpoint_tensors_unchanged"
+            ]
+            arm["reasons"].extend(
+                f"m0:{check}"
+                for check in (
+                    "global_python_numpy_cpu_cuda_rng_unchanged",
+                    "checkpoint_tensors_unchanged",
+                )
+                if not arm["m0_checks"][check]
+            )
+        outcome = (
+            "F_UNDERPOWERED_OR_UNIDENTIFIABLE"
+            if arms["f0"]["m0_valid"] and arms["f1"]["m0_valid"]
+            else "INVALID_ITERATION3_AUDIT"
+        )
+        payload = _json_safe(
+            {
+                "selector_arm": "f1",
+                "f1_outcome": outcome,
+                "source_identity": {
+                    "f0": arms["f0"]["identity"],
+                    "f1": arms["f1"]["identity"],
+                },
+                "m0": {
+                    name: {
+                        "valid": arm["m0_valid"],
+                        "checks": arm["m0_checks"],
+                        "reasons": [
+                            reason
+                            for reason in arm["reasons"]
+                            if reason.startswith("m0:")
+                        ],
+                    }
+                    for name, arm in arms.items()
+                },
+                "diagnostics": arms,
+                "uncertainty_and_support": {
+                    name: arm["reasons"] for name, arm in arms.items()
+                },
+                "evidence_ceiling": "checkpoint-local policy evidence only; no transfer, utility, credit, or hierarchy claim",
+            }
+        )
+        if destination is not None:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with destination.open("x", encoding="utf-8") as handle:
+                handle.write(json.dumps(payload, sort_keys=True, indent=2) + "\n")
+        return payload
+    finally:
+        _restore_global_rng(rng_before)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
