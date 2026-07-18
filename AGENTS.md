@@ -195,7 +195,12 @@ target host/thread/model/effort and pre/post identity checks. Archive every raw
 before interpretation; missing or ambiguous raw is incomplete evidence. Private
 local-source transfer to an external reviewer requires explicit informed
 approval recorded against the exact allowlist path, Git commit, destination and
-user-message reference. Any allowlist change invalidates that approval. Other
+user-message reference. The registered Gemini reviewer has standing user
+approval for project-only, tracked, read-only per-round manifests, so the
+controller records that exact boundary automatically without asking again.
+Any allowlist change invalidates the recorded boundary; credentials, personal
+data, project-external paths, writes, execution and training remain excluded.
+Other
 transport and recovery mechanics live only in
 `$hmasd-review-round` and its protocol.
 

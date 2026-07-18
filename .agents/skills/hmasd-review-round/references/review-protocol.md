@@ -30,8 +30,11 @@ Run in plan and sandbox mode with the tracked local-file and paper allowlist.
 Before transmitting private repository content, logs or local papers, record
 consent with `review_state.ps1 -Mode consent -ConsentState APPROVED`, the exact
 manifest path, its 40-character Git commit, destination and a
-`user:<thread-id>:<message-ref>` receipt. Any manifest difference invalidates
-consent; `NOT_REQUIRED` is invalid while that local-source manifest exists.
+`user:<thread-id>:<message-ref>` receipt. The registered Gemini reviewer's
+standing consent may supply that receipt without another user prompt, but does
+not remove the per-round manifest, commit or destination freeze. Any manifest
+difference invalidates consent; `NOT_REQUIRED` is invalid while that
+local-source manifest exists.
 Keep one live client for research, then export its exact completed response from
 the local `transcript_full.jsonl`; do not send another archival prompt. Use a
 non-interactive invocation only as a failure fallback, never concurrently with

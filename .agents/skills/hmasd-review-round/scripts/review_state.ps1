@@ -461,12 +461,22 @@ if ($Mode -eq "consent") {
     }
     if ($ConsentState -eq "APPROVED") {
         $expectedManifest = [string]$document.external_source_consent.manifest_path
+        $registry = Get-Content -LiteralPath $reviewerRegistryPath -Raw | ConvertFrom-Json
+        $geminiReviewer = $registry.reviewers.gemini_divergent
+        $standingConsent = $geminiReviewer.standing_consent
+        $registeredDestination = "$($geminiReviewer.expected_model) / Antigravity conversation $($geminiReviewer.conversation_id)"
+        if ([string]::IsNullOrWhiteSpace($ConsentApprovalReceipt) -and
+            $null -ne $standingConsent -and
+            $standingConsent.state -eq "APPROVED" -and
+            $standingConsent.scope -eq "tracked_round_gemini_local_source_manifests") {
+            $ConsentApprovalReceipt = [string]$standingConsent.approval_receipt
+        }
         if ([string]::IsNullOrWhiteSpace($ConsentManifestPath) -or
             $ConsentManifestPath.Replace("\", "/") -ne $expectedManifest -or
             $ConsentManifestCommit -notmatch '^[0-9a-fA-F]{40}$' -or
-            [string]::IsNullOrWhiteSpace($ConsentDestination) -or
+            $ConsentDestination -ne $registeredDestination -or
             $ConsentApprovalReceipt -notmatch '^user:[^:;]+:[^:;]+$') {
-            throw "APPROVED consent requires the registered manifest, commit, destination and user thread/message receipt"
+            throw "APPROVED consent requires the registered manifest, commit, Gemini destination and explicit or registered standing user receipt"
         }
         $document.external_source_consent = [pscustomobject]@{
             state = "APPROVED"

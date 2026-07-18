@@ -156,8 +156,12 @@ Sending private repository content, logs, or local papers to Gemini or another
 external service requires `-Mode consent -ConsentState APPROVED` with the exact
 manifest path, 40-character Git commit, destination and a
 `user:<thread-id>:<message-ref>`
-receipt. The script rejects dispatch if that manifest differs from the approved
-commit. Workflow automation never implies consent. Reviewer advice does not
+receipt. For the registered Gemini reviewer, an `APPROVED` standing consent in
+`REVIEWER_CONVERSATIONS.json` supplies that user receipt automatically; every
+round must still freeze its exact manifest, commit and registered destination.
+The script rejects dispatch if that manifest differs from the approved commit.
+Standing consent excludes credentials, personal data, project-external paths,
+writes, execution and training. Reviewer advice does not
 authorize code, experiments, promotion, or scientific disposition. If
 authentication, model identity, page state, source completeness, or response
 completeness is ambiguous, return `BLOCKED` with the exact manual prompt.

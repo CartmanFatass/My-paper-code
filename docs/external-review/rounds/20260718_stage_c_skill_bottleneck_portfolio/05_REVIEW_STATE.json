@@ -1,37 +1,37 @@
 {
   "schema_version": 2,
   "round_id": "20260718_stage_c_skill_bottleneck_portfolio",
-  "updated_at": "2026-07-18T11:44:09.6650282+08:00",
+  "updated_at": "2026-07-18T12:58:24.0902994+08:00",
   "stages": {
     "gemini_divergent": {
-      "state": "BLOCKED",
-      "route_token": null,
-      "dispatch_receipt": null,
-      "dispatched_at": null,
-      "completion_receipt": null,
-      "completed_at": null,
+      "state": "COMPLETE",
+      "route_token": "20260718_stage_c_skill_bottleneck_portfolio:GEMINI_DIVERGENT:5d8e581b239ba54918641d6e8286db335cee2632:docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/11_GEMINI_DIVERGENT_RAW.md",
+      "dispatch_receipt": "source=gemini;session=111dc970-bd72-4d67-8d7a-caea65394b78;conversation=111dc970-bd72-4d67-8d7a-caea65394b78;role=GEMINI_DIVERGENT;model=Gemini 3.1 Pro (High);route=20260718_stage_c_skill_bottleneck_portfolio:GEMINI_DIVERGENT:5d8e581b239ba54918641d6e8286db335cee2632:docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/11_GEMINI_DIVERGENT_RAW.md;terminal=DISPATCHED;reference=transcript:267",
+      "dispatched_at": "2026-07-18T12:55:20.9425754+08:00",
+      "completion_receipt": "source=gemini;session=111dc970-bd72-4d67-8d7a-caea65394b78;conversation=111dc970-bd72-4d67-8d7a-caea65394b78;role=GEMINI_DIVERGENT;model=Gemini 3.1 Pro (High);route=20260718_stage_c_skill_bottleneck_portfolio:GEMINI_DIVERGENT:5d8e581b239ba54918641d6e8286db335cee2632:docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/11_GEMINI_DIVERGENT_RAW.md;terminal=COMPLETE;reference=transcript:287",
+      "completed_at": "2026-07-18T12:55:21.2158120+08:00",
       "artifact_path": "11_GEMINI_DIVERGENT_RAW.md",
-      "blocker": "BLOCKED_EXTERNAL_SOURCE_CONSENT: local-source allowlist has no explicit informed approval",
-      "blocker_resolution": null
+      "blocker": null,
+      "blocker_resolution": "evidence:transcript:267"
     },
     "open_pro": {
-      "state": "BLOCKED",
-      "route_token": null,
-      "dispatch_receipt": null,
-      "dispatched_at": null,
-      "completion_receipt": null,
-      "completed_at": null,
+      "state": "COMPLETE",
+      "route_token": "20260718_stage_c_skill_bottleneck_portfolio:OPEN_DIVERGENT:5f0b1177af172fdd9455a697b25941d686992774:docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/21_PRO_OPEN_RAW.md",
+      "dispatch_receipt": "source=exchange;session=019f716c-3c8a-7891-8c89-c94dc94fab4c;conversation=6a5a7735-ab30-83e8-bb88-d0cfb3cea56c;role=OPEN_DIVERGENT;model=Pro;route=20260718_stage_c_skill_bottleneck_portfolio:OPEN_DIVERGENT:5f0b1177af172fdd9455a697b25941d686992774:docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/21_PRO_OPEN_RAW.md;terminal=DISPATCHED;reference=turn:019f7173-98b9-7022-95c4-764e7ae3d6ce#item-3",
+      "dispatched_at": "2026-07-18T12:40:01.3452471+08:00",
+      "completion_receipt": "source=exchange;session=019f716c-3c8a-7891-8c89-c94dc94fab4c;conversation=6a5a7735-ab30-83e8-bb88-d0cfb3cea56c;role=OPEN_DIVERGENT;model=Pro;route=20260718_stage_c_skill_bottleneck_portfolio:OPEN_DIVERGENT:5f0b1177af172fdd9455a697b25941d686992774:docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/21_PRO_OPEN_RAW.md;terminal=COMPLETE;reference=turn:019f7173-98b9-7022-95c4-764e7ae3d6ce#item-9",
+      "completed_at": "2026-07-18T12:40:01.4380864+08:00",
       "artifact_path": "21_PRO_OPEN_RAW.md",
-      "blocker": "BLOCKED_UNVERIFIED_RAW: 21_PRO_OPEN_RAW.md has no matching Exchange receipt or identified manual source",
-      "blocker_resolution": null
+      "blocker": null,
+      "blocker_resolution": "evidence:read_thread:019f7173-98b9-7022-95c4-764e7ae3d6ce#item-3"
     },
     "controller_synthesis": {
-      "state": "NOT_STARTED",
+      "state": "COMPLETE",
       "route_token": null,
       "dispatch_receipt": null,
       "dispatched_at": null,
       "completion_receipt": null,
-      "completed_at": null,
+      "completed_at": "2026-07-18T12:58:23.9387480+08:00",
       "artifact_path": "30_CONTROLLER_SYNTHESIS.md",
       "blocker": null,
       "blocker_resolution": null
@@ -61,11 +61,11 @@
   },
   "round_status": "ACTIVE",
   "external_source_consent": {
-    "state": "PENDING",
+    "state": "APPROVED",
     "manifest_path": "docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/02_GEMINI_LOCAL_SOURCE_MANIFEST.md",
-    "manifest_commit": null,
-    "destination": null,
-    "approval_receipt": null,
-    "approved_at": null
+    "manifest_commit": "5d8e581b239ba54918641d6e8286db335cee2632",
+    "destination": "Gemini 3.1 Pro (High) / Antigravity conversation 111dc970-bd72-4d67-8d7a-caea65394b78",
+    "approval_receipt": "user:019f5c78-0c91-7612-adb4-c1fcfe4484c8:20260718-gemini-open-source-standing-consent-2",
+    "approved_at": "2026-07-18T12:50:06.2478960+08:00"
   }
 }
