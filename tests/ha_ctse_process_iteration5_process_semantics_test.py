@@ -19,6 +19,7 @@ from ha_ctse_process.dynamic_roster_spatial_testbed import (
 from ha_ctse_process.process_semantics import (
     ConditionalProcessPosterior,
     ProcessSemanticTrainer,
+    ProcessWindow,
     ProcessWindowLedger,
     restore_event_semantic_bundle,
     snapshot_event_semantic_bundle,
@@ -38,10 +39,15 @@ from ha_ctse_process.variable_roster_event import (
     low_row_index_hooks,
 )
 from ha_ctse_process.train import (
+    _evaluate_iteration5_spatial_model,
+    _make_event_model_owner,
+    _make_event_runtime,
     enforce_iteration5_process_semantics_contract,
     is_iteration5_process_semantics,
 )
 from scripts.run_iteration5_process_semantics import (
+    _batched_branch_process_effects,
+    _branch_process_effect,
     _load_hierarchical_owner,
     _matched_shuffle_residual_ci,
     _select_reference_pair,
@@ -51,7 +57,9 @@ from scripts.run_iteration5_process_semantics import (
 
 
 def _assert_nested_equal(left, right) -> None:
-    if isinstance(left, np.ndarray) or isinstance(right, np.ndarray):
+    if isinstance(left, torch.Tensor) or isinstance(right, torch.Tensor):
+        assert torch.equal(torch.as_tensor(left), torch.as_tensor(right))
+    elif isinstance(left, np.ndarray) or isinstance(right, np.ndarray):
         assert np.array_equal(np.asarray(left), np.asarray(right))
     elif hasattr(left, "__dataclass_fields__") or hasattr(right, "__dataclass_fields__"):
         assert type(left) is type(right)
@@ -211,7 +219,7 @@ def test_process_window_ownership_scores_and_low_reward_assignment() -> None:
     trainer.semantic_ready = True
     trainer.frozen.load_state_dict(trainer.online.state_dict())
     rows = [_low_row("0", 0, 1), _low_row("0", 0, 1)]
-    scores = trainer.score_closed_windows(windows)
+    scores = trainer.score_closed_windows(trainer.pack_closed_windows(windows))
     applied = trainer.apply_low_rewards(rows, windows, scores)
     assert applied == 2
     assert sum(float(row.reward) for row in rows) == pytest.approx(
@@ -224,7 +232,12 @@ def test_process_window_ownership_scores_and_low_reward_assignment() -> None:
     )
     off.semantic_ready = True
     off.frozen.load_state_dict(off.online.state_dict())
-    assert off.apply_low_rewards(off_rows, windows, off.score_closed_windows(windows)) == 0
+    assert (
+        off.apply_low_rewards(
+            off_rows, windows, off.score_closed_windows(off.pack_closed_windows(windows))
+        )
+        == 0
+    )
     assert [row.reward for row in off_rows] == [0.0, 0.0]
 
 
@@ -254,7 +267,9 @@ def test_posterior_gradient_isolation_and_semantic_checkpoint_round_trip() -> No
         ledger.close_window(str(skill), 0, 0)
 
     external = torch.nn.Parameter(torch.tensor(2.0))
-    metrics = trainer.update_posterior(ledger.closed_windows)
+    metrics = trainer.update_posterior(
+        trainer.pack_closed_windows(ledger.closed_windows)
+    )
     assert metrics["posterior_steps"] == 1.0
     assert external.grad is None
     assert trainer.semantic_ready
@@ -280,6 +295,200 @@ def test_posterior_gradient_isolation_and_semantic_checkpoint_round_trip() -> No
         assert torch.equal(value, clone.online.state_dict()[name])
     with pytest.raises(ValueError, match="semantic bundle"):
         restore_event_semantic_bundle({}, trainer=clone, ledgers=[clone_ledger])
+
+
+def test_four_pass_posterior_pack_preserves_exact_training_state() -> None:
+    windows = []
+    row_index = 0
+    for skill in range(3):
+        for replica in range(3):
+            windows.append(
+                ProcessWindow(
+                    lifecycle_key=f"{skill}-{replica}",
+                    membership_epoch=0,
+                    policy_version=0,
+                    skill=skill,
+                    linked_low_row_indices=(row_index, row_index + 1),
+                    start_observation=np.full(
+                        15, skill + replica / 10.0, dtype=np.float32
+                    ),
+                    start_actor_hidden=np.full(
+                        4, replica - skill / 10.0, dtype=np.float32
+                    ),
+                    process_state_sequence=(
+                        0.0,
+                        float(skill + 1) / 8.0,
+                        float(skill + replica + 2) / 8.0,
+                    ),
+                )
+            )
+            row_index += 2
+
+    torch.manual_seed(17)
+    reference = ProcessSemanticTrainer(
+        ConditionalProcessPosterior(15, 4, 3, 8),
+        beta=0.05,
+        device="cpu",
+        sampler_seed=71,
+    )
+    combined = ProcessSemanticTrainer(
+        ConditionalProcessPosterior(15, 4, 3, 8),
+        beta=0.05,
+        device="cpu",
+        sampler_seed=999,
+    )
+    combined.load_state_dict(reference.state_dict())
+    reference_pack = reference.pack_closed_windows(windows)
+    combined_pack = combined.pack_closed_windows(windows)
+
+    reference_metrics = None
+    for _ in range(4):
+        reference_metrics = reference.update_posterior(reference_pack, passes=1)
+    combined_metrics = combined.update_posterior(combined_pack, passes=4)
+
+    assert reference_metrics is not None
+    assert combined_metrics["posterior_steps"] == 4.0
+    assert combined_metrics["posterior_windows"] == reference_metrics["posterior_windows"]
+    assert combined_metrics["posterior_loss"] == reference_metrics["posterior_loss"]
+    assert reference.posterior_steps == combined.posterior_steps == 4
+    _assert_nested_equal(reference.state_dict(), combined.state_dict())
+
+
+@torch.no_grad()
+def _scalar_iteration5_spatial_evaluation(
+    owner, *, deterministic: bool, episodes: int
+) -> dict[str, object]:
+    persistent = []
+    short = []
+    utility = []
+    skill_counts = np.zeros(owner.n_skills, dtype=np.int64)
+    for episode_id in range(episodes):
+        environment = SpatialDynamicRosterEventEnv(task_master_seed=97_057)
+        core = _make_event_runtime(
+            owner,
+            environment_index=0,
+            episode_id=episode_id,
+            event_master_seed=77_057,
+            action_master_seed=87_057,
+        )
+        bound = core.bind_due_frontier(environment.reset_event_runtime(episode_id))
+        core.apply_transaction(bound, deterministic_policy=deterministic)
+        snapshot = bound.post_membership_pre_policy_snapshot
+        for _ in range(HORIZON):
+            for skill in core.active_skills().values():
+                skill_counts[int(skill)] += 1
+            actions, _logp, _values = core.low_step(
+                snapshot, deterministic=deterministic
+            )
+            routed = {
+                key: int(np.asarray(actions[index].detach().cpu()).reshape(-1)[0])
+                for index, key in enumerate(snapshot.keys)
+            }
+            step = environment.step_event_runtime(routed)
+            core.complete_primitive_transition(float(step.reward))
+            if step.terminated:
+                core.close_terminal()
+                persistent.append(float(step.info["persistent_score"]))
+                short.append(float(step.info["short_score"]))
+                utility.append(float(step.info["utility"]))
+                break
+            assert step.next_transaction is not None
+            bound = core.bind_due_frontier(step.next_transaction)
+            core.apply_transaction(bound, deterministic_policy=deterministic)
+            snapshot = bound.post_membership_pre_policy_snapshot
+    counts = skill_counts.astype(np.float64)
+    return {
+        "episodes": episodes,
+        "deterministic": deterministic,
+        "persistent": persistent,
+        "short": short,
+        "utility": utility,
+        "persistent_mean": float(np.mean(persistent)),
+        "short_mean": float(np.mean(short)),
+        "utility_mean": float(np.mean(utility)),
+        "natural_skill_step_counts": skill_counts.tolist(),
+        "natural_skill_step_shares": (
+            counts / max(float(counts.sum()), 1.0)
+        ).tolist(),
+    }
+
+
+def _small_event_owner() -> object:
+    torch.manual_seed(29)
+    return _make_event_model_owner(
+        SimpleNamespace(
+            event_architecture_mode="f0",
+            event_member_hidden_dim=8,
+            event_high_hidden_dim=8,
+            event_low_hidden_dim=8,
+            event_skill_embedding_dim=4,
+        ),
+        torch.device("cpu"),
+    )
+
+
+def test_batched_iteration5_evaluation_matches_scalar_episode_rng() -> None:
+    owner = _small_event_owner()
+    for deterministic in (True, False):
+        expected = _scalar_iteration5_spatial_evaluation(
+            owner, deterministic=deterministic, episodes=4
+        )
+        actual = _evaluate_iteration5_spatial_model(
+            owner, deterministic=deterministic, episodes=4
+        )
+        _assert_nested_equal(expected, actual)
+
+
+def test_iteration5_batched_audit_matches_scalar_crn() -> None:
+    owner = _small_event_owner()
+    environment = SpatialDynamicRosterEventEnv(task_master_seed=97_057)
+    core = _make_event_runtime(
+        owner,
+        environment_index=0,
+        episode_id=3,
+        event_master_seed=77_057,
+        action_master_seed=87_057,
+    )
+    bound = core.bind_due_frontier(environment.reset_event_runtime(3))
+    core.apply_transaction(bound, deterministic_policy=False)
+    snapshot = bound.post_membership_pre_policy_snapshot
+    focal_key = snapshot.keys[0]
+    forced = np.empty((3, 2, 2), dtype=np.float64)
+    for skill in range(3):
+        for replica in range(2):
+            forced[skill, replica] = _branch_process_effect(
+                owner=owner,
+                source_core=core,
+                source_environment=environment,
+                source_snapshot=snapshot,
+                episode_id=3,
+                audit_index=5,
+                focal_key=focal_key,
+                forced_skill=skill,
+                replica=replica,
+            )
+    natural = _branch_process_effect(
+        owner=owner,
+        source_core=core,
+        source_environment=environment,
+        source_snapshot=snapshot,
+        episode_id=3,
+        audit_index=5,
+        focal_key=focal_key,
+        forced_skill=None,
+        replica=0,
+    )
+    batched_forced, batched_natural = _batched_branch_process_effects(
+        owner=owner,
+        source_core=core,
+        source_environment=environment,
+        source_snapshot=snapshot,
+        episode_id=3,
+        audit_index=5,
+        focal_key=focal_key,
+    )
+    assert np.array_equal(batched_forced, forced)
+    assert np.array_equal(batched_natural, natural)
 
 
 def test_event_runtime_exposes_stable_semantic_hooks() -> None:

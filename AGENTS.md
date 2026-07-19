@@ -91,6 +91,16 @@ implementers and implementation fixers use `gpt-5.6-sol` with `xhigh`
 reasoning. Never change an existing task's model; create a correctly routed
 replacement instead.
 
+Before editing any algorithm, reward, credit, dynamic-roster, trainer, runtime,
+or experiment-code path, every implementer and implementation fixer must read
+`docs/project/CURRENT_WORK.md`, `docs/project/ALGORITHM_PRINCIPLES.md`,
+`docs/project/MARL_ENGINEERING_PRINCIPLES.md`, and the active section of
+`docs/project/IMPLEMENTATION_PLAN.md`. Every dispatch must state this entry
+requirement explicitly. The plan fixes the concrete implementation; the other
+three documents remain independent scientific, engineering, and project-state
+constraints. A missing document or real conflict returns `BLOCKED` before an
+edit.
+
 Every message to an existing Codex task and every monitor session must use
 `$hmasd-task-router`; ad hoc cross-task sends are forbidden. The Skill resolves
 the target and controller from live task metadata and requires their exact

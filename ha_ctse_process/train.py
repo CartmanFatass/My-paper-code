@@ -5446,18 +5446,44 @@ def _iteration5_semantic_checkpoint(
     trainer,
     ledgers,
     intrinsic_applied_count: int,
+    replay: Mapping[str, float],
+    high_intrinsic_isolated: bool,
+    posterior_policy_gradient_isolated: bool,
 ) -> dict[str, Any]:
     from ha_ctse_process.process_semantics import snapshot_event_semantic_bundle
 
     payload = deepcopy(dict(base_payload))
     event = payload.get("event_architecture")
-    if not isinstance(event, dict) or "event_semantic" in event:
+    if (
+        not isinstance(event, dict)
+        or "event_semantic" in event
+        or "iteration5_evidence_state" in event
+    ):
         raise ValueError("Iteration-5 checkpoint requires one clean event bundle")
     event["event_semantic"] = snapshot_event_semantic_bundle(
         trainer=trainer,
         ledgers=ledgers,
         intrinsic_applied_count=int(intrinsic_applied_count),
     )
+    replay_value = {str(name): float(value) for name, value in dict(replay).items()}
+    required_replay = {
+        "high_logp_max_error",
+        "high_value_max_error",
+        "low_logp_max_error",
+        "low_value_max_error",
+    }
+    if set(replay_value) != required_replay or any(
+        not np.isfinite(value) or value < 0.0 for value in replay_value.values()
+    ):
+        raise ValueError("Iteration-5 checkpoint replay evidence is invalid")
+    event["iteration5_evidence_state"] = {
+        "schema_version": 1,
+        "replay": replay_value,
+        "high_intrinsic_isolated": bool(high_intrinsic_isolated),
+        "posterior_policy_gradient_isolated": bool(
+            posterior_policy_gradient_isolated
+        ),
+    }
     return payload
 
 
@@ -5475,9 +5501,36 @@ def _restore_iteration5_vector_checkpoint(
 
     value = deepcopy(dict(payload))
     event = value.get("event_architecture")
-    if not isinstance(event, dict) or "event_semantic" not in event:
-        raise ValueError("Iteration-5 checkpoint is missing semantic bundle")
+    if (
+        not isinstance(event, dict)
+        or "event_semantic" not in event
+        or "iteration5_evidence_state" not in event
+    ):
+        raise ValueError("Iteration-5 checkpoint is missing semantic/evidence state")
     semantic = event.pop("event_semantic")
+    evidence = deepcopy(dict(event.pop("iteration5_evidence_state")))
+    if set(evidence) != {
+        "schema_version",
+        "replay",
+        "high_intrinsic_isolated",
+        "posterior_policy_gradient_isolated",
+    } or int(evidence["schema_version"]) != 1:
+        raise ValueError("Iteration-5 checkpoint evidence schema mismatch")
+    replay = {str(name): float(value) for name, value in dict(evidence["replay"]).items()}
+    if set(replay) != {
+        "high_logp_max_error",
+        "high_value_max_error",
+        "low_logp_max_error",
+        "low_value_max_error",
+    } or any(not np.isfinite(value) or value < 0.0 for value in replay.values()):
+        raise ValueError("Iteration-5 restored replay evidence is invalid")
+    evidence["replay"] = replay
+    evidence["high_intrinsic_isolated"] = bool(
+        evidence["high_intrinsic_isolated"]
+    )
+    evidence["posterior_policy_gradient_isolated"] = bool(
+        evidence["posterior_policy_gradient_isolated"]
+    )
     optimizer_states, normalizers, counters = restore_vector_event_checkpoint(
         value, model_owner=model_owner, cores=cores, collector=collector
     )
@@ -5486,7 +5539,7 @@ def _restore_iteration5_vector_checkpoint(
     )
     if int(counters["intrinsic_applied_count"]) != int(semantic_count):
         raise ValueError("Iteration-5 intrinsic counters disagree across bundles")
-    return optimizer_states, normalizers, counters
+    return optimizer_states, normalizers, counters, evidence
 
 
 def _open_iteration5_window(
@@ -5563,46 +5616,75 @@ def _evaluate_iteration5_spatial_model(
         HORIZON,
         SpatialDynamicRosterEventEnv,
     )
+    from ha_ctse_process.collectors import SyncEnvCollector
+    from ha_ctse_process.variable_roster_event import batched_low_step
 
     persistent: list[float] = []
     short: list[float] = []
     utility: list[float] = []
     skill_counts = np.zeros(model_owner.n_skills, dtype=np.int64)
-    for episode_id in range(int(episodes)):
-        environment = SpatialDynamicRosterEventEnv(task_master_seed=97_057)
-        core = _make_event_runtime(
-            model_owner,
-            environment_index=0,
-            episode_id=episode_id,
-            event_master_seed=77_057,
-            action_master_seed=87_057,
-        )
-        bound = core.bind_due_frontier(environment.reset_event_runtime(episode_id))
-        core.apply_transaction(bound, deterministic_policy=bool(deterministic))
-        snapshot = bound.post_membership_pre_policy_snapshot
-        for _ in range(HORIZON):
-            for skill in core.active_skills().values():
-                skill_counts[int(skill)] += 1
-            actions, _logp, _values = core.low_step(
-                snapshot, deterministic=bool(deterministic)
+    episode_count = int(episodes)
+    if episode_count <= 0:
+        raise ValueError("Iteration-5 evaluation requires at least one episode")
+    environments = [
+        SpatialDynamicRosterEventEnv(task_master_seed=97_057)
+        for _episode_id in range(episode_count)
+    ]
+    collector = SyncEnvCollector(environments)
+    try:
+        transactions = collector.reset_event_runtime(tuple(range(episode_count)))
+        cores = []
+        snapshots = []
+        for episode_id, transaction in enumerate(transactions):
+            core = _make_event_runtime(
+                model_owner,
+                environment_index=0,
+                episode_id=episode_id,
+                event_master_seed=77_057,
+                action_master_seed=87_057,
             )
-            routed = {
-                key: int(np.asarray(actions[index].detach().cpu()).reshape(-1)[0])
-                for index, key in enumerate(snapshot.keys)
-            }
-            step = environment.step_event_runtime(routed)
-            core.complete_primitive_transition(float(step.reward))
-            if step.terminated:
-                core.close_terminal()
-                persistent.append(float(step.info["persistent_score"]))
-                short.append(float(step.info["short_score"]))
-                utility.append(float(step.info["utility"]))
-                break
-            if step.next_transaction is None:
-                raise RuntimeError("Iteration-5 evaluation lost its next transaction")
-            bound = core.bind_due_frontier(step.next_transaction)
+            bound = core.bind_due_frontier(transaction)
             core.apply_transaction(bound, deterministic_policy=bool(deterministic))
-            snapshot = bound.post_membership_pre_policy_snapshot
+            cores.append(core)
+            snapshots.append(bound.post_membership_pre_policy_snapshot)
+        for physical_time in range(HORIZON):
+            for core in cores:
+                for skill in core.active_skills().values():
+                    skill_counts[int(skill)] += 1
+            low = batched_low_step(
+                cores, snapshots, deterministic=bool(deterministic)
+            )
+            steps = collector.step_event_runtime(low.routed_actions)
+            terminal_flags = tuple(bool(step.terminated) for step in steps)
+            for core, step in zip(cores, steps):
+                core.complete_primitive_transition(float(step.reward))
+            if any(terminal_flags):
+                if not all(terminal_flags) or physical_time != HORIZON - 1:
+                    raise RuntimeError(
+                        "Iteration-5 evaluation episodes lost their shared horizon"
+                    )
+                for core, step in zip(cores, steps):
+                    core.close_terminal()
+                    persistent.append(float(step.info["persistent_score"]))
+                    short.append(float(step.info["short_score"]))
+                    utility.append(float(step.info["utility"]))
+                break
+            next_snapshots = []
+            for core, step in zip(cores, steps):
+                if step.next_transaction is None:
+                    raise RuntimeError(
+                        "Iteration-5 evaluation lost its next transaction"
+                    )
+                bound = core.bind_due_frontier(step.next_transaction)
+                core.apply_transaction(
+                    bound, deterministic_policy=bool(deterministic)
+                )
+                next_snapshots.append(bound.post_membership_pre_policy_snapshot)
+            snapshots = next_snapshots
+        if len(persistent) != episode_count:
+            raise RuntimeError("Iteration-5 evaluation did not complete every episode")
+    finally:
+        collector.close()
     counts = skill_counts.astype(np.float64)
     return {
         "episodes": int(episodes),
@@ -5705,6 +5787,14 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
             trainer=semantic_trainer,
             ledgers=ledgers,
             intrinsic_applied_count=0,
+            replay={
+                "high_logp_max_error": 0.0,
+                "high_value_max_error": 0.0,
+                "low_logp_max_error": 0.0,
+                "low_value_max_error": 0.0,
+            },
+            high_intrinsic_isolated=True,
+            posterior_policy_gradient_isolated=True,
         )
         zero_temporary = zero_checkpoint_path.with_suffix(".pt.tmp")
         torch.save(zero_payload, zero_temporary)
@@ -5787,13 +5877,15 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
                     action_master_seed=int(rng["policy_action"]["master_seed"]),
                 )
             )
-        optimizer_states, normalizers, counters = _restore_iteration5_vector_checkpoint(
-            payload,
-            model_owner=model_owner,
-            cores=cores,
-            collector=collector,
-            trainer=semantic_trainer,
-            ledgers=ledgers,
+        optimizer_states, normalizers, counters, evidence = (
+            _restore_iteration5_vector_checkpoint(
+                payload,
+                model_owner=model_owner,
+                cores=cores,
+                collector=collector,
+                trainer=semantic_trainer,
+                ledgers=ledgers,
+            )
         )
         high_optimizer.load_state_dict(optimizer_states["high"])
         low_optimizer.load_state_dict(optimizer_states["low"])
@@ -5804,6 +5896,11 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
         next_episode_id = int(counters["next_episode_id"])
         intrinsic_count = int(counters["intrinsic_applied_count"])
         posterior_steps = int(semantic_trainer.posterior_steps)
+        replay = dict(evidence["replay"])
+        high_intrinsic_isolated = bool(evidence["high_intrinsic_isolated"])
+        posterior_policy_gradient_isolated = bool(
+            evidence["posterior_policy_gradient_isolated"]
+        )
         if not 0 < update_idx < updates_total:
             raise ValueError("Iteration-5 resume update lies outside the active run")
         if (
@@ -5920,7 +6017,8 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
                 ledger.close_rollout()
                 windows_by_env.append(ledger.drain_closed_windows())
             all_windows = [window for rows in windows_by_env for window in rows]
-            scores = semantic_trainer.score_closed_windows(all_windows)
+            packed_windows = semantic_trainer.pack_closed_windows(all_windows)
+            scores = semantic_trainer.score_closed_windows(packed_windows)
             high_rewards_before = [
                 tuple(
                     (float(row.discounted_reward), float(row.return_target))
@@ -5946,23 +6044,23 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
                 )
                 for before, core in zip(high_rewards_before, cores)
             )
-            posterior_metrics = {}
-            for _posterior_pass in range(4):
-                posterior_metrics = semantic_trainer.update_posterior(all_windows)
-                posterior_steps += int(posterior_metrics["posterior_steps"])
-                posterior_policy_gradient_isolated = (
-                    posterior_policy_gradient_isolated
-                    and all(
-                        parameter.grad is None
-                        for module in (
-                            model_owner.commitment_model,
-                            model_owner.event_critic,
-                            model_owner.low_actor,
-                            model_owner.low_critic,
-                        )
-                        for parameter in module.parameters()
+            posterior_metrics = semantic_trainer.update_posterior(
+                packed_windows, passes=4
+            )
+            posterior_steps += int(posterior_metrics["posterior_steps"])
+            posterior_policy_gradient_isolated = (
+                posterior_policy_gradient_isolated
+                and all(
+                    parameter.grad is None
+                    for module in (
+                        model_owner.commitment_model,
+                        model_owner.event_critic,
+                        model_owner.low_actor,
+                        model_owner.low_critic,
                     )
+                    for parameter in module.parameters()
                 )
+            )
             packed = pack_event_ppo_data(cores)
             metrics = None
             first_pass_replay = None
@@ -5996,43 +6094,54 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
                     **replay,
                 }
             )
-            boundaries = [
-                {
-                    "physical_time": int(core.physical_time),
-                    "episode_id": int(core.rng_episode_id),
-                    "terminal": True,
-                }
-                for core in cores
-            ]
-            base = vector_event_checkpoint_payload(
-                model_owner=model_owner,
-                cores=cores,
-                collector_snapshot=collector.snapshot_event_runtime(),
-                current_boundaries=boundaries,
-                optimizer_states={
-                    "high": high_optimizer.state_dict(),
-                    "low": low_optimizer.state_dict(),
-                },
-                normalizer_states=normalizers,
-                counters={
-                    "total_steps": total_steps,
-                    "update_idx": update_idx,
-                    "high_optimizer_steps": high_steps,
-                    "low_optimizer_steps": low_steps,
-                    "next_episode_id": next_episode_id,
-                    "intrinsic_applied_count": intrinsic_count,
-                },
+            checkpoint_interval = max(int(args.save_interval), 1)
+            checkpoint_due = (
+                update_idx % checkpoint_interval == 0
+                or update_idx == updates_total
             )
-            payload = _iteration5_semantic_checkpoint(
-                base,
-                trainer=semantic_trainer,
-                ledgers=ledgers,
-                intrinsic_applied_count=intrinsic_count,
-            )
-            latest = checkpoint_dir / "latest.pt"
-            temporary = latest.with_suffix(".pt.tmp")
-            torch.save(payload, temporary)
-            _replace_event_file(temporary, latest)
+            if checkpoint_due:
+                boundaries = [
+                    {
+                        "physical_time": int(core.physical_time),
+                        "episode_id": int(core.rng_episode_id),
+                        "terminal": True,
+                    }
+                    for core in cores
+                ]
+                base = vector_event_checkpoint_payload(
+                    model_owner=model_owner,
+                    cores=cores,
+                    collector_snapshot=collector.snapshot_event_runtime(),
+                    current_boundaries=boundaries,
+                    optimizer_states={
+                        "high": high_optimizer.state_dict(),
+                        "low": low_optimizer.state_dict(),
+                    },
+                    normalizer_states=normalizers,
+                    counters={
+                        "total_steps": total_steps,
+                        "update_idx": update_idx,
+                        "high_optimizer_steps": high_steps,
+                        "low_optimizer_steps": low_steps,
+                        "next_episode_id": next_episode_id,
+                        "intrinsic_applied_count": intrinsic_count,
+                    },
+                )
+                payload = _iteration5_semantic_checkpoint(
+                    base,
+                    trainer=semantic_trainer,
+                    ledgers=ledgers,
+                    intrinsic_applied_count=intrinsic_count,
+                    replay=replay,
+                    high_intrinsic_isolated=high_intrinsic_isolated,
+                    posterior_policy_gradient_isolated=(
+                        posterior_policy_gradient_isolated
+                    ),
+                )
+                latest = checkpoint_dir / "latest.pt"
+                temporary = latest.with_suffix(".pt.tmp")
+                torch.save(payload, temporary)
+                _replace_event_file(temporary, latest)
             cores = []
             snapshots = []
             _write_event_arm_status(
@@ -6090,7 +6199,12 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
                     action_master_seed=int(rng["policy_action"]["master_seed"]),
                 )
             )
-        restored_optimizers, restored_normalizers, restored_counters = (
+        (
+            restored_optimizers,
+            restored_normalizers,
+            restored_counters,
+            restored_evidence,
+        ) = (
             _restore_iteration5_vector_checkpoint(
                 live_payload,
                 model_owner=verification_owner,
@@ -6137,6 +6251,17 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
             ),
             _nested_state_maximum_difference(
                 low_optimizer.state_dict(), restored_optimizers["low"]
+            ),
+            _nested_state_maximum_difference(
+                {
+                    "schema_version": 1,
+                    "replay": replay,
+                    "high_intrinsic_isolated": high_intrinsic_isolated,
+                    "posterior_policy_gradient_isolated": (
+                        posterior_policy_gradient_isolated
+                    ),
+                },
+                restored_evidence,
             ),
         )
         verification_collector.close()

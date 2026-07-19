@@ -550,28 +550,49 @@ def _window_batch(
         raise ValueError("process posterior window exceeds the frozen length")
     if any(not 0 <= int(window.skill) < int(n_skills) for window in rows):
         raise ValueError("process window contains an out-of-range skill")
-    observation = torch.as_tensor(
-        np.stack([window.start_observation for window in rows]),
-        dtype=torch.float32,
-        device=device,
-    ).detach()
-    hidden = torch.as_tensor(
-        np.stack([window.start_actor_hidden for window in rows]),
-        dtype=torch.float32,
-        device=device,
-    ).detach()
-    process = torch.zeros((len(rows), max_length, 2), device=device)
-    mask = torch.zeros((len(rows), max_length), dtype=torch.bool, device=device)
+    observation_array = np.stack(
+        [window.start_observation for window in rows]
+    ).astype(np.float32, copy=False)
+    hidden_array = np.stack(
+        [window.start_actor_hidden for window in rows]
+    ).astype(np.float32, copy=False)
+    process_array = np.zeros((len(rows), max_length, 2), dtype=np.float32)
+    mask_array = np.zeros((len(rows), max_length), dtype=np.bool_)
     for index, window in enumerate(rows):
-        features = torch.as_tensor(
-            window.process_features(), dtype=torch.float32, device=device
-        ).detach()
-        process[index, : window.valid_length] = features
-        mask[index, : window.valid_length] = True
+        process_array[index, : window.valid_length] = window.process_features()
+        mask_array[index, : window.valid_length] = True
+    observation = torch.as_tensor(
+        observation_array, dtype=torch.float32, device=device
+    ).detach()
+    hidden = torch.as_tensor(hidden_array, dtype=torch.float32, device=device).detach()
+    process = torch.as_tensor(
+        process_array, dtype=torch.float32, device=device
+    ).detach()
+    mask = torch.as_tensor(mask_array, dtype=torch.bool, device=device).detach()
     skills = torch.as_tensor(
-        [window.skill for window in rows], dtype=torch.long, device=device
-    )
+        np.asarray([window.skill for window in rows], dtype=np.int64),
+        dtype=torch.long,
+        device=device,
+    ).detach()
     return observation, hidden, process, mask, skills
+
+
+@dataclass(frozen=True)
+class PackedProcessWindows:
+    """One immutable, device-resident view of a closed-window collection."""
+
+    source_count: int
+    source_indices: tuple[int, ...]
+    strata: tuple[tuple[int, int, tuple[int, ...]], ...]
+    observation: torch.Tensor
+    hidden: torch.Tensor
+    process: torch.Tensor
+    mask: torch.Tensor
+    skills: torch.Tensor
+
+    @property
+    def row_count(self) -> int:
+        return len(self.source_indices)
 
 
 class ProcessSemanticTrainer:
@@ -599,29 +620,84 @@ class ProcessSemanticTrainer:
         )
         self.posterior_steps = 0
 
-    def score_closed_windows(
+    def pack_closed_windows(
         self, windows: Sequence[ProcessWindow]
-    ) -> tuple[float, ...]:
-        scores = np.zeros(len(windows), dtype=np.float64)
-        valid_indices = [index for index, window in enumerate(windows) if window.valid_length > 0]
-        if not self.semantic_ready or not valid_indices:
-            return tuple(float(value) for value in scores)
-        valid_windows = [windows[index] for index in valid_indices]
+    ) -> PackedProcessWindows:
+        source_count = len(windows)
+        valid_rows = tuple(
+            (index, window)
+            for index, window in enumerate(windows)
+            if window.valid_length > 0
+        )
+        if not valid_rows:
+            return PackedProcessWindows(
+                source_count=source_count,
+                source_indices=(),
+                strata=(),
+                observation=torch.empty(
+                    (0, self.online.observation_dim),
+                    dtype=torch.float32,
+                    device=self.device,
+                ),
+                hidden=torch.empty(
+                    (0, self.online.actor_hidden_dim),
+                    dtype=torch.float32,
+                    device=self.device,
+                ),
+                process=torch.empty(
+                    (0, 0, 2), dtype=torch.float32, device=self.device
+                ),
+                mask=torch.empty((0, 0), dtype=torch.bool, device=self.device),
+                skills=torch.empty((0,), dtype=torch.long, device=self.device),
+            )
+        source_indices = tuple(int(index) for index, _window in valid_rows)
+        valid_windows = tuple(window for _index, window in valid_rows)
         observation, hidden, process, mask, skills = _window_batch(
             valid_windows, device=self.device, n_skills=self.online.n_skills
         )
+        by_key: dict[tuple[int, int], list[int]] = {}
+        for packed_index, window in enumerate(valid_windows):
+            by_key.setdefault((int(window.skill), int(window.valid_length)), []).append(
+                int(packed_index)
+            )
+        strata = tuple(
+            (int(skill), int(valid_length), tuple(int(index) for index in by_key[key]))
+            for key in sorted(by_key)
+            for skill, valid_length in (key,)
+        )
+        return PackedProcessWindows(
+            source_count=source_count,
+            source_indices=source_indices,
+            strata=strata,
+            observation=observation,
+            hidden=hidden,
+            process=process,
+            mask=mask,
+            skills=skills,
+        )
+
+    def score_closed_windows(
+        self, packed: PackedProcessWindows
+    ) -> tuple[float, ...]:
+        scores = np.zeros(int(packed.source_count), dtype=np.float64)
+        if not self.semantic_ready or packed.row_count == 0:
+            return tuple(float(value) for value in scores)
         with torch.no_grad():
-            full, null = self.frozen(observation, hidden, process, mask)
+            full, null = self.frozen(
+                packed.observation, packed.hidden, packed.process, packed.mask
+            )
             full_logp = F.log_softmax(full, dim=-1)
             null_logp = F.log_softmax(null, dim=-1)
-            row = torch.arange(len(valid_windows), device=self.device)
+            row = torch.arange(packed.row_count, device=self.device)
             values = torch.clamp(
-                (full_logp[row, skills] - null_logp[row, skills])
+                (full_logp[row, packed.skills] - null_logp[row, packed.skills])
                 / math.log(float(PROCESS_SKILL_COUNT)),
                 -1.0,
                 1.0,
             )
-        for index, value in zip(valid_indices, values.detach().cpu().numpy()):
+        for index, value in zip(
+            packed.source_indices, values.detach().cpu().numpy()
+        ):
             scores[index] = float(value)
         return tuple(float(value) for value in scores)
 
@@ -667,62 +743,79 @@ class ProcessSemanticTrainer:
             row.reward = float(reward)
         return len(assignments)
 
-    def _balanced_windows(
-        self, windows: Sequence[ProcessWindow]
-    ) -> tuple[ProcessWindow, ...]:
-        by_key: dict[tuple[int, int], list[ProcessWindow]] = {}
-        for window in windows:
-            if window.valid_length > 0:
-                by_key.setdefault((window.skill, window.valid_length), []).append(window)
-        if not by_key:
-            return ()
+    def _balanced_indices(self, packed: PackedProcessWindows) -> np.ndarray:
+        if not packed.strata:
+            return np.empty((0,), dtype=np.int64)
         skills = tuple(range(self.online.n_skills))
-        if set(key[0] for key in by_key) != set(skills):
+        if {skill for skill, _length, _rows in packed.strata} != set(skills):
             # A rollout without all skills has no balanced posterior update.
-            return ()
+            return np.empty((0,), dtype=np.int64)
         # Joint stratification prevents either a frequent skill or a frequent
         # valid length from dominating the posterior minibatch.  Missing joint
         # strata remain visible to the explicitly trained context null rather
         # than being synthesized or relabelled.
-        count = min(len(rows) for rows in by_key.values())
-        selected: list[ProcessWindow] = []
-        for key in sorted(by_key):
-            rows = by_key[key]
+        count = min(len(rows) for _skill, _length, rows in packed.strata)
+        selected: list[int] = []
+        for _skill, _length, rows in packed.strata:
             order = self.sampler_rng.permutation(len(rows))[:count]
-            selected.extend(rows[int(index)] for index in order)
-        return tuple(selected)
+            selected.extend(int(rows[int(index)]) for index in order)
+        return np.asarray(selected, dtype=np.int64)
 
     def update_posterior(
-        self, windows: Sequence[ProcessWindow]
+        self, packed: PackedProcessWindows, *, passes: int = 1
     ) -> dict[str, float]:
-        selected = self._balanced_windows(windows)
-        if not selected:
+        pass_count = int(passes)
+        if pass_count <= 0:
+            raise ValueError("posterior passes must be positive")
+        selections = tuple(
+            self._balanced_indices(packed) for _pass in range(pass_count)
+        )
+        if not selections or any(selection.size == 0 for selection in selections):
             return {
                 "posterior_loss": 0.0,
                 "posterior_steps": 0.0,
                 "posterior_windows": 0.0,
             }
-        observation, hidden, process, mask, skills = _window_batch(
-            selected, device=self.device, n_skills=self.online.n_skills
+        selection_sizes = tuple(int(selection.size) for selection in selections)
+        flat_indices = torch.as_tensor(
+            np.concatenate(selections), dtype=torch.long, device=self.device
         )
         self.online.train()
-        full, null = self.online(observation, hidden, process, mask)
-        loss = F.cross_entropy(full, skills) + F.cross_entropy(null, skills)
-        if not bool(torch.isfinite(loss)):
-            raise RuntimeError("process posterior produced a non-finite loss")
-        self.optimizer.zero_grad(set_to_none=True)
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.online.parameters(), 0.5)
-        self.optimizer.step()
-        self.posterior_steps += 1
+        final_loss: torch.Tensor | None = None
+        offset = 0
+        executed = 0
+        for selection_size in selection_sizes:
+            indices = flat_indices[offset : offset + selection_size]
+            offset += selection_size
+            full, null = self.online(
+                packed.observation.index_select(0, indices),
+                packed.hidden.index_select(0, indices),
+                packed.process.index_select(0, indices),
+                packed.mask.index_select(0, indices),
+            )
+            selected_skills = packed.skills.index_select(0, indices)
+            loss = F.cross_entropy(full, selected_skills) + F.cross_entropy(
+                null, selected_skills
+            )
+            if not bool(torch.isfinite(loss)):
+                raise RuntimeError("process posterior produced a non-finite loss")
+            self.optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(self.online.parameters(), 0.5)
+            self.optimizer.step()
+            self.posterior_steps += 1
+            executed += 1
+            final_loss = loss.detach()
+        if executed != pass_count or final_loss is None:
+            raise RuntimeError("process posterior did not execute every requested pass")
         self.frozen.load_state_dict(self.online.state_dict(), strict=True)
         self.frozen.requires_grad_(False)
         self.frozen.eval()
         self.semantic_ready = True
         return {
-            "posterior_loss": float(loss.detach().cpu()),
-            "posterior_steps": 1.0,
-            "posterior_windows": float(len(selected)),
+            "posterior_loss": float(final_loss.cpu()),
+            "posterior_steps": float(executed),
+            "posterior_windows": float(selection_sizes[-1]),
         }
 
     def state_dict(self) -> dict[str, Any]:

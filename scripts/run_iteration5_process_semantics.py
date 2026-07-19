@@ -52,7 +52,7 @@ from ha_ctse_process.dynamic_roster_spatial_testbed import (
 )
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process.train import _make_event_model_owner, _make_event_runtime
-from ha_ctse_process.variable_roster_event import make_pcg64_rng
+from ha_ctse_process.variable_roster_event import batched_low_step, make_pcg64_rng
 
 
 FORMAL_NUM_ENVS = 16
@@ -190,20 +190,25 @@ def _nested_maximum_difference(left: Any, right: Any) -> float:
 
 @torch.no_grad()
 def _skill_action_probabilities(owner, observation: np.ndarray, hidden: np.ndarray) -> np.ndarray:
-    probabilities = []
     actor = owner.low_actor
-    for skill in range(owner.n_skills):
-        obs = torch.as_tensor(observation, dtype=torch.float32, device=owner.device).reshape(1, -1)
-        skills = torch.as_tensor([skill], dtype=torch.long, device=owner.device)
-        state = torch.as_tensor(hidden, dtype=torch.float32, device=owner.device).reshape(1, -1)
-        features = actor._features(obs, skills)
-        features, _ = actor.actor_rnn(
-            features,
-            state,
-            torch.ones(1, 1, dtype=torch.float32, device=owner.device),
-        )
-        probabilities.append(actor.actor_act.action_out(features).probs[0].detach().cpu().numpy())
-    value = np.asarray(probabilities, dtype=np.float64)
+    batch_size = int(owner.n_skills)
+    obs = torch.as_tensor(
+        observation, dtype=torch.float32, device=owner.device
+    ).reshape(1, -1).expand(batch_size, -1)
+    skills = torch.arange(batch_size, dtype=torch.long, device=owner.device)
+    state = torch.as_tensor(
+        hidden, dtype=torch.float32, device=owner.device
+    ).reshape(1, -1).expand(batch_size, -1)
+    features = actor._features(obs, skills)
+    features, _ = actor.actor_rnn(
+        features,
+        state,
+        torch.ones(batch_size, 1, dtype=torch.float32, device=owner.device),
+    )
+    value = np.asarray(
+        actor.actor_act.action_out(features).probs.detach().cpu().numpy(),
+        dtype=np.float64,
+    )
     if value.shape != (3, 3) or not np.isfinite(value).all():
         raise RuntimeError("Iteration-5 action-probability audit shape is invalid")
     return value
@@ -283,6 +288,126 @@ def _branch_process_effect(
         [states_array[-1] - start, float(np.mean(states_array[6:] - start))],
         dtype=np.float64,
     )
+
+
+@torch.no_grad()
+def _batched_branch_process_effects(
+    *,
+    owner,
+    source_core,
+    source_environment,
+    source_snapshot,
+    episode_id: int,
+    audit_index: int,
+    focal_key: str,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Evaluate all forced skills and the natural branch in one model batch."""
+
+    branch_specs = (
+        (0, 0),
+        (0, 1),
+        (1, 0),
+        (1, 1),
+        (2, 0),
+        (2, 1),
+        (None, 0),
+    )
+    source_collector = SyncEnvCollector([source_environment])
+    branch_collectors: list[SyncEnvCollector] = []
+    try:
+        collector_snapshot = source_collector.snapshot_event_runtime()
+        checkpoint = source_core.checkpoint_payload(
+            collector_snapshot=collector_snapshot,
+            current_observation_state_boundary={
+                "physical_time": int(source_core.physical_time),
+                "episode_id": int(episode_id),
+            },
+            optimizer_states={"high": {}, "low": {}},
+            normalizer_states={
+                "high": {"schema_version": 1, "enabled": False, "kind": "identity"},
+                "low": {"schema_version": 1, "enabled": False, "kind": "identity"},
+            },
+            pending_membership_transaction=source_core.pending_membership_transaction,
+        )
+
+        environments = []
+        cores = []
+        snapshots = []
+        starts = []
+        states: list[list[float]] = [[] for _ in branch_specs]
+        for _forced_skill, replica in branch_specs:
+            environment = SpatialDynamicRosterEventEnv(task_master_seed=97_057)
+            collector = SyncEnvCollector([environment])
+            core = _make_event_runtime(
+                owner,
+                environment_index=0,
+                episode_id=episode_id,
+                event_master_seed=77_057,
+                action_master_seed=87_057,
+            )
+            core.restore_checkpoint_payload(checkpoint, collector=collector)
+            core.action_rng = make_pcg64_rng(
+                87_057, int(audit_index), 200 + int(replica)
+            )
+            environments.append(environment)
+            branch_collectors.append(collector)
+            cores.append(core)
+            snapshots.append(source_snapshot)
+            starts.append(float(environment.process_state_mapping([focal_key])[focal_key]))
+
+        for step_index in range(12):
+            for (forced_skill, _replica), core in zip(branch_specs, cores):
+                record = core.records.get(focal_key)
+                if record is None or record.status != "ACTIVE":
+                    raise RuntimeError("forced process focal lifecycle left before 12 steps")
+                if forced_skill is not None:
+                    record.active_skill = int(forced_skill)
+
+            low_step = batched_low_step(cores, snapshots, deterministic=False)
+            next_snapshots = list(snapshots)
+            for branch_index, (core, environment, routed) in enumerate(
+                zip(cores, environments, low_step.routed_actions)
+            ):
+                step = environment.step_event_runtime(routed)
+                states[branch_index].append(
+                    float(step.info["process_state"][focal_key])
+                )
+                core.complete_primitive_transition(float(step.reward))
+                if step.terminated:
+                    if step_index != 11:
+                        raise RuntimeError("forced process branch terminated early")
+                    core.close_terminal()
+                    continue
+                if step.next_transaction is None:
+                    raise RuntimeError("forced process branch lost transaction")
+                bound = core.bind_due_frontier(step.next_transaction)
+                core.apply_transaction(bound, deterministic_policy=False)
+                next_snapshots[branch_index] = (
+                    bound.post_membership_pre_policy_snapshot
+                )
+            snapshots = next_snapshots
+
+        effects = []
+        for branch_states, start in zip(states, starts):
+            states_array = np.asarray(branch_states, dtype=np.float64)
+            if states_array.shape != (12,):
+                raise RuntimeError("forced process branch did not execute exactly 12 steps")
+            effects.append(
+                np.asarray(
+                    [
+                        states_array[-1] - start,
+                        float(np.mean(states_array[6:] - start)),
+                    ],
+                    dtype=np.float64,
+                )
+            )
+        forced = np.asarray(effects[:6], dtype=np.float64).reshape(3, 2, 2)
+        natural = np.asarray(effects[6], dtype=np.float64)
+        return forced, natural
+    finally:
+        for collector in reversed(branch_collectors):
+            collector.close()
+        source_collector.close()
 
 
 def _episode_cluster_ci(
@@ -479,21 +604,7 @@ def _semantic_materiality_audit(
                     np.asarray(snapshot.members[focal_index].observation, dtype=np.float32),
                     np.asarray(record.low_actor_hidden, dtype=np.float32),
                 )
-                forced = np.empty((3, 2, 2), dtype=np.float64)
-                for skill in range(3):
-                    for replica in range(2):
-                        forced[skill, replica] = _branch_process_effect(
-                            owner=owner,
-                            source_core=core,
-                            source_environment=environment,
-                            source_snapshot=snapshot,
-                            episode_id=episode_id,
-                            audit_index=audit_index,
-                            focal_key=focal_key,
-                            forced_skill=skill,
-                            replica=replica,
-                        )
-                natural_effect = _branch_process_effect(
+                forced, natural_effect = _batched_branch_process_effects(
                     owner=owner,
                     source_core=core,
                     source_environment=environment,
@@ -501,8 +612,6 @@ def _semantic_materiality_audit(
                     episode_id=episode_id,
                     audit_index=audit_index,
                     focal_key=focal_key,
-                    forced_skill=None,
-                    replica=0,
                 )
                 records.append(
                     {

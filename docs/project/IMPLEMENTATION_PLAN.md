@@ -9,10 +9,12 @@ in `ALGORITHM_PRINCIPLES.md`, engineering principles in
 
 ## Iteration 5 — Spatial Process-Semantics Comparison
 
-Status: implementation launch-ready and currently paused. The integrated code,
-focused checks, and reduced three-arm CUDA smoke passed. The first formal launch
-was stopped by the user before a terminal result and has no scientific meaning.
-Do not resume or relaunch it without explicit user instruction.
+Status: engineering refactor accepted; fresh formal relaunch is the next
+boundary. The integrated code, focused checks, and reduced three-arm CUDA smoke passed. The
+first formal launch was stopped by the user before a terminal result and has no
+scientific meaning; it is not resumed. The 2026-07-19 instruction to start the
+automatic research flow authorizes the one remaining iteration from the
+engineering refactor through one fresh terminal evidence source.
 
 ### HMASD Contract
 
@@ -270,3 +272,54 @@ runner once under `MARL_ENGINEERING_PRINCIPLES.md`, implement accepted
 efficiency fixes once, and inspect changed paths once. This must preserve every
 scientific field above. A formal relaunch still requires explicit user
 instruction and `$hmasd-experiment`.
+
+### Accepted Engineering Refactor for the Authorized Relaunch
+
+The controller accepted the following active-line replacement. No algorithm,
+reward, sample, optimizer, exposure, threshold, model, seed, RNG stream, result
+branch, or checkpoint schema changes.
+
+1. `ProcessSemanticTrainer.update_posterior` owns all four registered posterior
+   passes in one call. It invokes the existing balanced sampler four times in
+   the original order, preserving the exact sampler-RNG advancement and one
+   selected batch per optimizer step; it packs and transfers their concatenated
+   tensors once, performs four ordered optimizer steps, and hard-copies online
+   to frozen only after the fourth step. `train.py` invokes this interface once
+   per rollout and retains the exact count of 1,000 posterior optimizer steps.
+2. `scripts/run_iteration5_process_semantics.py` adds one seven-branch audit
+   batch for the canonical order `skill 0 replica 0/1`, `skill 1 replica 0/1`,
+   `skill 2 replica 0/1`, then natural replica 0. Each branch restores the same
+   source checkpoint and retains its registered independent PCG64 state; equal
+   replica indices retain common random numbers across skills. Twelve physical
+   steps use the existing `batched_low_step`; recurrent state, membership,
+   masks, environment transitions, and output layout remain branch-owned.
+   Three same-input skill action distributions are also evaluated as one tensor
+   batch.
+3. `_evaluate_iteration5_spatial_model` constructs the registered evaluation
+   episodes as one runtime batch and uses `batched_low_step` once per physical
+   time. Environment transitions, membership transactions, recurrent state,
+   action RNG and metric rows remain episode-owned and retain episode order.
+4. The hierarchy arm builds and writes its full live checkpoint only at the
+   existing `--save_interval` boundary and the final update, rather than every
+   update. `latest.pt`, strict resume, final reload, semantic-v1 state, and the
+   schema-3 payload remain unchanged; a recovery resumes from the latest saved
+   registered boundary.
+
+Write scope is limited to
+`ha_ctse_process/process_semantics.py`, `ha_ctse_process/train.py`,
+`scripts/run_iteration5_process_semantics.py`, and
+`tests/ha_ctse_process_iteration5_process_semantics_test.py`. One focused check
+must show that four-pass packing preserves sampler state, ordered optimizer
+count, and final online/frozen state; batched evaluation and audit outputs must
+match their scalar references under the registered episode/RNG/CRN schedules.
+The controller then inspects the integrated execution path once and enters
+`$hmasd-experiment` for the unchanged fresh formal run. The explicit 2026-07-19
+instruction already satisfies the relaunch authority; it is not requested
+again.
+
+Focused acceptance evidence: four-pass posterior state/RNG equivalence,
+batched-versus-scalar evaluation equivalence, seven-branch CRN equivalence, and
+the reduced three-arm CUDA checkpoint/roundtrip path all passed in one focused
+pytest selection (`4 passed`). Controller review also required replay maxima and
+both isolation booleans to persist through the sparse live checkpoint, so a
+resume cannot erase previously accumulated M0 evidence.

@@ -21,11 +21,15 @@ access. Iteration 3 then closed as `F_UNDERPOWERED_OR_UNIDENTIFIABLE`, and
 Iteration 4 as `A_NO_MATERIAL_Z_DEPENDENCE`; their detailed evidence and legal
 claims are owned by `ExpRecord.md`.
 
-Iteration 5 is the current frozen implementation. Its code, focused checks, and
-reduced three-arm CUDA smoke are launch-ready. The first formal run at
+Iteration 5 is the current frozen scientific implementation. Its code, focused
+checks, and reduced three-arm CUDA smoke are launch-ready. The first formal run at
 `logs/iteration5_spatial_process_semantics_20260719_012002` was stopped by the
 user before a terminal scientific result. Partial data is not evidence and the
-run must not restart automatically.
+run will not be resumed. The engineering-only efficiency refactor is accepted:
+posterior data packs once for four ordered samples, evaluation and semantic
+audit use batched low inference, sparse checkpoints retain cumulative M0
+evidence, and the focused CUDA path passed. The explicit 2026-07-19 instruction
+authorizes a fresh update-0 relaunch of the unchanged contract.
 
 ## Causal Portfolio
 
@@ -43,22 +47,21 @@ run must not restart automatically.
 ## Next Actions
 
 1. Preserve the stopped Iteration-5 run without interpreting its partial state.
-2. Keep the frozen implementation available; do not relaunch without an
-   explicit user instruction.
-3. Before an authorized relaunch, apply
-   `MARL_ENGINEERING_PRINCIPLES.md` once to the actual end-to-end path, fix the
-   accepted efficiency findings once, and re-inspect only changed paths. Do not
-   alter the scientific contract.
+2. Commit and push the accepted pre-launch implementation boundary.
+3. Launch the unchanged formal contract from update 0 and accept exactly one
+   terminal evidence source.
 
 ## Autonomous Boundary
 
-- Status: PAUSED
+- Status: ACTIVE
 - Prior grant: five serialized iterations total
 - Completed evidence-bearing iterations: four
-- Remaining iterations: one, inactive while paused
-- Pause reason: user stopped Iteration 5 before a terminal result
-- Permitted automatic action: none
-- Resume authority: explicit user instruction
+- Remaining iterations: one, now active
+- Activation authority: explicit user instruction on 2026-07-19
+- Permitted automatic action: complete the frozen efficiency refactor, run one
+  focused check, launch one fresh Iteration-5 evidence source, interpret its
+  terminal result, and return control
+- Stop condition: one accepted terminal evidence source or a genuine blocker
 
 ## Immediate Constraints
 
