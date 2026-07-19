@@ -24,7 +24,7 @@ threshold changes, budget changes, or another autonomous iteration.
   general, environment-agnostic semantics, hierarchy in general, or the final
   anonymous variable-membership/variable-lifetime capability.
 
-## Evidence package
+## Repository files to inspect
 
 Read all of:
 
