@@ -51,6 +51,14 @@ ID, target it at the exact monitor thread, set it `ACTIVE`, and verify both the
 status and target. This automation update is the assignment; do not also send a
 duplicate assignment message.
 
+The controller owns only initial binding: install the run prompt, choose the
+initial cadence, set `ACTIVE`, and verify the exact target. From that point
+until terminal relay, the registered monitor task exclusively owns ETA
+estimation, cadence updates, and terminal pause. The controller must not change
+the heartbeat during an active run. Its only recovery authority is the single
+direct inspection after deadline plus one heartbeat interval when no relay was
+received.
+
 The automation prompt contains only its automation ID, the absolute run root
 and status path, the registered progress paths and fields, registered terminal
 spelling (`complete` or `completed`, plus `failed`), payload keys, monitor
@@ -69,6 +77,30 @@ available counters support it, and the registered key metrics or `unavailable`.
 It sends no running update to the controller and ends with `MONITOR_RUNNING`;
 the next heartbeat is the only continuation mechanism. A Codex final answer is
 never treated as a live background waiter.
+
+### ETA-based heartbeat cadence
+
+Estimate remaining time from the slowest active arm using elapsed time and its
+completed/total counter. Use the estimate only after at least 5% completion and
+when the progress timestamp is fresh; otherwise use the 15-minute fallback.
+The registered cadence buckets are:
+
+```text
+ETA > 4 hours       -> 30 minutes
+2 hours < ETA <= 4 -> 20 minutes
+45 min < ETA <= 2h -> 10 minutes
+ETA <= 45 minutes  -> 5 minutes
+unavailable/stale  -> 15 minutes
+```
+
+After writing `MONITOR_PROGRESS`, update only the existing heartbeat automation
+when the desired interval differs. Preserve its ID, name, target task, prompt,
+and `ACTIVE` state, changing only the schedule and the prompt's declared current
+cadence, then verify the target and state. Tighten immediately as completion
+approaches. Relax to a longer interval only when ETA exceeds the current
+bucket's upper boundary by 25%, preventing cadence oscillation. Never create a
+second automation. Terminal, error, and deadline handling takes precedence and
+pauses instead of rescheduling.
 
 Every existing status must parse completely. `running` is the only nonterminal
 state; terminal states are the registered `complete`/`completed` and `failed`.

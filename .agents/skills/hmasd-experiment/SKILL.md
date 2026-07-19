@@ -39,9 +39,11 @@ parallelism, host, budget, or algorithm.
 Bind the single registered heartbeat automation to the single registered Luna
 Medium monitor task and apply its deadline exactly as defined in
 `references/experiment-protocol.md`. Verify that the automation is `ACTIVE`
-before yielding control. The protocol exclusively owns the monitor prompt,
-tick behavior, progress display, terminal payload, pause order, and retry
-limit; do not restate or invent another monitoring workflow.
+before yielding control. After that verification, the monitor task exclusively
+owns runtime cadence changes and terminal pause. The protocol exclusively owns
+the monitor prompt, tick behavior, adaptive cadence, progress display, terminal
+payload, pause order, and retry limit; do not restate or invent another
+monitoring workflow.
 
 At terminal delivery, the controller verifies the registered status once and
 reads only the registered result or direct error. Repair only the failed stage.

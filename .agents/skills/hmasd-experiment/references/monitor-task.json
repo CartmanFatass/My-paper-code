@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "updated": "2026-07-19",
   "monitor_route": {
     "host_id": "local",
@@ -12,14 +12,30 @@
     "host_id": "local",
     "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
     "model": "gpt-5.6-sol",
-    "thinking": "ultra",
+    "thinking": "xhigh",
     "source": "live_task_metadata_mirror"
   },
   "automation": {
     "id": "hmasd-r35-single-thread-monitor",
     "kind": "heartbeat",
-    "cadence_minutes": 15,
+    "initial_cadence_minutes": 15,
     "target_thread_id": "019f772b-355f-79f3-abbc-2f08800738f8"
+  },
+  "cadence_policy": {
+    "fallback_minutes": 15,
+    "minimum_progress_fraction": 0.05,
+    "relax_hysteresis_multiplier": 1.25,
+    "eta_buckets": [
+      {"eta_minutes_above": 240, "interval_minutes": 30},
+      {"eta_minutes_above": 120, "interval_minutes": 20},
+      {"eta_minutes_above": 45, "interval_minutes": 10},
+      {"eta_minutes_above": 0, "interval_minutes": 5}
+    ]
+  },
+  "automation_ownership": {
+    "initial_binding": "active_controller",
+    "runtime_cadence_and_terminal_pause": "registered_monitor_task",
+    "controller_recovery": "one_inspection_after_deadline_plus_one_interval"
   },
   "progress_policy": {
     "display": "monitor_task_each_tick",

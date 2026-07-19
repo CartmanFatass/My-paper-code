@@ -31,13 +31,13 @@ foreach ($path in @($reviewSkill, $experimentSkill, $experimentProtocol)) {
 }
 
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
-if ($monitor.schema_version -ne 2 -or
+if ($monitor.schema_version -ne 3 -or
     $monitor.monitor_route.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
     $monitor.monitor_route.model -ne 'gpt-5.6-luna' -or
     $monitor.monitor_route.thinking -ne 'medium' -or
     $monitor.controller_return_route.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
     $monitor.controller_return_route.model -ne 'gpt-5.6-sol' -or
-    $monitor.controller_return_route.thinking -ne 'ultra' -or
+    $monitor.controller_return_route.thinking -ne 'xhigh' -or
     $monitor.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
     $monitor.automation.kind -ne 'heartbeat' -or
     $monitor.automation.target_thread_id -ne $monitor.monitor_route.thread_id -or

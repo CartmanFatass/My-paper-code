@@ -24,6 +24,9 @@ foreach ($required in @(
 foreach ($required in @(
     '`runner_status.txt` exactly once',
     '`MONITOR_PROGRESS`',
+    'ETA-based heartbeat cadence',
+    'Relax to a longer interval only when ETA exceeds',
+    'monitor task exclusively owns ETA',
     'ends with `MONITOR_RUNNING`',
     'automation to `PAUSED`',
     'is confirmed does it resolve',
@@ -33,11 +36,18 @@ foreach ($required in @(
     }
 }
 
-if ($registry.schema_version -ne 2 -or
+if ($registry.schema_version -ne 3 -or
     $registry.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
     $registry.automation.kind -ne 'heartbeat' -or
-    $registry.automation.cadence_minutes -ne 15 -or
+    $registry.automation.initial_cadence_minutes -ne 15 -or
     $registry.automation.target_thread_id -ne $registry.monitor_route.thread_id -or
+    $registry.cadence_policy.fallback_minutes -ne 15 -or
+    $registry.cadence_policy.minimum_progress_fraction -ne 0.05 -or
+    $registry.cadence_policy.relax_hysteresis_multiplier -ne 1.25 -or
+    $registry.cadence_policy.eta_buckets.Count -ne 4 -or
+    $registry.cadence_policy.eta_buckets[3].interval_minutes -ne 5 -or
+    $registry.automation_ownership.initial_binding -ne 'active_controller' -or
+    $registry.automation_ownership.runtime_cadence_and_terminal_pause -ne 'registered_monitor_task' -or
     $registry.progress_policy.display -ne 'monitor_task_each_tick' -or
     $registry.progress_policy.controller_relay -ne 'terminal_or_actionable_error_only') {
     throw 'Monitor registry does not bind one progress heartbeat to the registered monitor task'
