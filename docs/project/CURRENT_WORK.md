@@ -37,32 +37,36 @@ existing high/event assignment path can learn when supplied with fixed
 zero-parameter `IDLE/PERSIST/SHORT` executors; it is not evidence for learned
 skills, hierarchy efficacy, variable lifetime, cooperation, or transfer.
 
-No implementation or experiment is active. On 2026-07-20 the user authorized
-one automatic algorithm iteration for the selected
-`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` boundary, including its bounded code and
-compute work. This authorization does not extend to a successor route.
+On 2026-07-20 the user authorized five automatic algorithm iterations,
+including bounded code, compute, result analysis, and tracked external review.
+The active first iteration is `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`; its
+implementation has been dispatched to the registered Code Implementation
+Manager. No experiment is active yet.
 
 ## Next Action
 
-Send the accepted `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` scientific boundary to
-the registered Code Implementation Manager. That session freezes the
-executable contract and owns implementation plus code review; the controller
-retains Git integration, experiment lifecycle, evidence acceptance, and user
-communication. After accepted implementation, run only the registered G0
-experiment and complete its tracked external-review disposition.
+Complete the accepted `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` implementation,
+run only its registered experiment, and obtain its tracked external-review
+disposition. If that disposition selects another evidence source, begin the
+next authorized iteration from that pushed boundary. Each successor must be
+selected by the preceding convergent review; no route is inferred locally.
 
 ## Autonomous Boundary
 
 - Status: ACTIVE
-- Authorized evidence-bearing iterations: one
-- Remaining iterations: one
-- Permitted automatic action: implement, review, run, analyze, and externally
-  review `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` under its accepted frozen
+- Authorized evidence-bearing iterations: five, counting the active G0 source
+  as iteration one
+- Remaining iterations: five
+- Permitted automatic action: for each iteration, implement, review, run,
+  analyze, externally review, adopt the convergent disposition, then decrement
+  the remaining count and begin its selected successor while the count remains
+  positive
+- Stop condition: five terminal dispositions are accepted, committed, and
+  pushed; convergent review recommends stopping or selects no executable
+  successor; or a genuine contract/operational blocker requires user authority
+- Forbidden: more than five iterations, concurrent mutating research routes,
+  locally invented successor routes, or expansion beyond each accepted
   scientific boundary
-- Stop condition: the G0 terminal disposition is accepted, committed, and
-  pushed, or a genuine contract/operational blocker requires user authority
-- Forbidden: automatic successor implementation, a second experiment route,
-  or recursive research iteration
 
 ## Durable Constraints
 
