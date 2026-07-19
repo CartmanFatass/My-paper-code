@@ -100,7 +100,8 @@ explicitly approves the exception.
   320,000 direct transitions, PPO4 and exactly 1,000 optimizer steps; 256
   deterministic and 256 paired stochastic evaluation episodes. Seeds are
   model/train/action/evaluation/bootstrap/random-control
-  `57056/67057/87057/97057/107057/117057`.
+  `57056/67057/87057/97057/107057/117057`. Expected wall clock is 45 minutes;
+  the monitor deadline is launch plus 75 minutes.
 - Controls: constructive minimum `P/S/U >=0.95`; uniform-random positive
   utility fraction `>=0.20` and mean utility `<0.55`. If calibration fails,
   terminate without running or interpreting the direct learner.
