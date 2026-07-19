@@ -36,14 +36,14 @@ if ($registry.schema_version -ne 12 -or
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "empty current-session tab list is normal", "creates a fresh in-app-browser tab", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
+foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "empty current-session tab list is normal", "creates a fresh in-app-browser tab", "active-thinking control", "repair_incomplete", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }
 }
 
 $stateText = Get-Content -LiteralPath $stateScript -Raw
-foreach ($required in @("schema_version = 5", "dispatch_count", "deadline_at", "evidence_reconciliation")) {
+foreach ($required in @("schema_version = 5", "dispatch_count", "deadline_at", "evidence_reconciliation", "repair_incomplete")) {
     if (-not $stateText.Contains($required)) {
         throw "Review state script is missing: $required"
     }
@@ -78,6 +78,7 @@ function Complete-External([string]$RoundPath, [string]$Stage, [string]$Role, [s
 
 $happy = New-Round
 $blocked = New-Round
+$repair = New-Round
 try {
     $initial = Get-Content -LiteralPath (Join-Path $happy "05_REVIEW_STATE.json") -Raw | ConvertFrom-Json
     if ($initial.schema_version -ne 5 -or $initial.stages.gemini_divergent.dispatch_count -ne 0) {
@@ -127,8 +128,29 @@ try {
         $state.stages.gemini_divergent.state -ne "BLOCKED") {
         throw "Blocked review stage lost immutable dispatch evidence"
     }
+
+    Complete-External $repair "gemini_divergent" "GEMINI_DIVERGENT" "11_GEMINI_DIVERGENT_RAW.md"
+    Complete-External $repair "open_pro" "OPEN_DIVERGENT" "21_PRO_OPEN_RAW.md"
+    Set-Content -LiteralPath (Join-Path $repair "30_EVIDENCE_RECONCILIATION.md") `
+        -Value "PREMATURE" -Encoding utf8NoBOM
+    & $stateScript -Mode transition -RoundPath $repair -Stage evidence_reconciliation `
+        -State COMPLETE | Out-Null
+    $beforeRepair = Get-Content -LiteralPath (Join-Path $repair "05_REVIEW_STATE.json") `
+        -Raw | ConvertFrom-Json
+    $openRoute = $beforeRepair.stages.open_pro.route_token
+    & $stateScript -Mode repair_incomplete -RoundPath $repair -Stage open_pro `
+        -Blocker "ACTIVE_THINKING_CONTROL_PRESENT" | Out-Null
+    $afterRepair = Get-Content -LiteralPath (Join-Path $repair "05_REVIEW_STATE.json") `
+        -Raw | ConvertFrom-Json
+    if ($afterRepair.stages.open_pro.state -ne "DISPATCHED" -or
+        $afterRepair.stages.open_pro.dispatch_count -ne 1 -or
+        $afterRepair.stages.open_pro.route_token -ne $openRoute -or
+        $afterRepair.stages.evidence_reconciliation.state -ne "NOT_STARTED" -or
+        $afterRepair.stages.convergent_pro.dispatch_count -ne 0) {
+        throw "Incomplete raw repair changed dispatch identity or retained downstream state"
+    }
 } finally {
-    foreach ($path in @($happy, $blocked)) {
+    foreach ($path in @($happy, $blocked, $repair)) {
         if (Test-Path -LiteralPath $path) {
             Remove-Item -LiteralPath $path -Recurse -Force
         }

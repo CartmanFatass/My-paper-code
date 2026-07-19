@@ -137,6 +137,19 @@ terminal payload back with the registered controller route. The controller does
 not poll the Exchange. Missing, partial, or ambiguous raw is incomplete
 evidence.
 
+Before any Pro stage becomes `COMPLETE`, the page must no longer expose an
+active-thinking control and the latest assistant response must satisfy every
+explicit section required by that stage's question. Intermediate status text,
+tool narration, or a short conclusion is not a completed raw. While the page is
+still active, keep the stage `DISPATCHED` and do not create its raw.
+
+If the controller detects a premature `COMPLETE` before any later external
+stage was dispatched, use `review_state.ps1 -Mode repair_incomplete` to restore
+the same stage to `DISPATCHED` while preserving its route, timestamp, deadline,
+and `dispatch_count=1`. Remove only the incomplete raw and downstream internal
+artifacts, then continue reading the same page. This is archival recovery, not
+a second submission; the question must never be sent again.
+
 ## Finish
 
 Archive each raw before interpretation. Write

@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("init", "show", "next", "transition", "validate")]
+    [ValidateSet("init", "show", "next", "transition", "validate", "repair_incomplete")]
     [string]$Mode,
 
     [Parameter(Mandatory = $true)]
@@ -232,6 +232,45 @@ if ($Mode -eq "init") {
 }
 
 $document = Read-State
+
+if ($Mode -eq "repair_incomplete") {
+    if ([string]::IsNullOrWhiteSpace($Stage) -or [string]::IsNullOrWhiteSpace($Blocker)) {
+        throw "repair_incomplete requires -Stage and -Blocker"
+    }
+    if ($document.round_status -ne "ACTIVE" -or $Stage -notin $externalStages) {
+        throw "repair_incomplete requires an active external stage"
+    }
+
+    $entry = $document.stages.$Stage
+    if ($entry.state -ne "COMPLETE" -or $entry.dispatch_count -ne 1) {
+        throw "repair_incomplete requires a falsely completed dispatched stage: $Stage"
+    }
+
+    $stageIndex = [Array]::IndexOf($stageOrder, $Stage)
+    foreach ($laterName in $stageOrder[($stageIndex + 1)..($stageOrder.Count - 1)]) {
+        $later = $document.stages.$laterName
+        if ($laterName -in $externalStages -and $later.dispatch_count -ne 0) {
+            throw "Cannot repair $Stage after a later external dispatch: $laterName"
+        }
+    }
+
+    $entry.state = "DISPATCHED"
+    $entry.blocker = $null
+    foreach ($laterName in $stageOrder[($stageIndex + 1)..($stageOrder.Count - 1)]) {
+        $later = $document.stages.$laterName
+        $later.state = "NOT_STARTED"
+        $later.dispatch_count = 0
+        $later.route_token = $null
+        $later.dispatched_at = $null
+        $later.deadline_at = $null
+        $later.blocker = $null
+    }
+
+    Assert-State $document
+    Write-State $document
+    Write-Output "review_state=REPAIRED_INCOMPLETE stage=$Stage reason=$Blocker path=$statePath"
+    exit 0
+}
 
 if ($Mode -eq "transition") {
     if ([string]::IsNullOrWhiteSpace($Stage) -or [string]::IsNullOrWhiteSpace($State)) {
