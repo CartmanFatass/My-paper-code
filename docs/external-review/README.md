@@ -65,9 +65,11 @@ shell sleep, response-control button or replacement conversation. A transport
 error is a blocker, not reviewer evidence.
 
 Before Gemini dispatch, verify write access only for its registered conversation
-database, `agentapi.bat`, `cache/last_conversations.json`, and the auxiliary
-files those stores create atomically. A missing precondition blocks before the
-single dispatch; it never authorizes broader `.gemini` access.
+database, `bin/agentapi.bat`, `cache/last_conversations.json`, Antigravity's own
+`log/` and `crashes/` runtime-output directories, and the auxiliary files those
+stores require. These are transport-state writes, not evidence-read scope. A
+missing precondition blocks before the single dispatch; it never authorizes
+broader `.gemini` access.
 
 ## Round ownership
 

@@ -88,12 +88,15 @@ project-external paths, or broader execution. It may write only this round's
 state and `11_GEMINI_DIVERGENT_RAW.md`, returns one terminal payload to the
 controller, and is not reused for another round.
 
-Before dispatch, verify that the sandbox identity can update the registered
-Antigravity conversation database, `agentapi.bat`, and
-`cache/last_conversations.json`, including creation of only their required
-SQLite or atomic-replace auxiliary files. This is a transport precondition, not
-a reason to grant write access to the whole user profile or to run the CLI
-unsandboxed. If any exact path is not writable, stop before dispatch with
+Before dispatch, verify that the transport identity can update only the
+registered Antigravity conversation database, `bin/agentapi.bat`,
+`cache/last_conversations.json`, and Antigravity's own `log/` and `crashes/`
+runtime-output directories, including creation of only their required SQLite,
+atomic-replace, log, or crash auxiliary files. These paths are transport state,
+not review evidence, and their write allowance grants no additional read scope.
+This is a transport precondition, not a reason to grant write access to the
+whole user profile or to bypass Antigravity permissions. If any exact path is
+not writable, stop before dispatch with
 `BLOCKED_GEMINI_STATE_NOT_WRITABLE`.
 
 ## Pro

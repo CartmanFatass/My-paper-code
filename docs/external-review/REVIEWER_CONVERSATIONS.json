@@ -9,7 +9,7 @@
     "cli_mode": "interactive_pty",
     "handoff": "single_line_document_pointer",
     "permission_bypass": "FORBIDDEN",
-    "state_write_scope": "registered conversation database, agentapi.bat, last_conversations.json, and only their SQLite or atomic-replace auxiliary files"
+    "state_write_scope": "registered conversation database, bin/agentapi.bat, cache/last_conversations.json, Antigravity log and crashes runtime-output directories, and only their required SQLite, atomic-replace, log or crash auxiliary files"
   },
   "pro_transport": {
     "kind": "single_luna_exchange_multi_page_in_app_browser",

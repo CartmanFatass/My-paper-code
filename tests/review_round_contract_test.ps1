@@ -16,6 +16,7 @@ if ($registry.schema_version -ne 12 -or
     $registry.gemini_transport.reasoning_effort -ne "medium" -or
     $registry.gemini_transport.handoff -ne "single_line_document_pointer" -or
     -not $registry.gemini_transport.state_write_scope.Contains("last_conversations.json") -or
+    -not $registry.gemini_transport.state_write_scope.Contains("log and crashes") -or
     $registry.pro_transport.kind -ne "single_luna_exchange_multi_page_in_app_browser" -or
     $registry.pro_transport.dispatch_tool -ne "codex_app__send_message_to_thread" -or
     $registry.pro_transport.routing_skill -ne ".agents/skills/hmasd-task-router/SKILL.md" -or
@@ -35,7 +36,7 @@ if ($registry.schema_version -ne 12 -or
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
+foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }
