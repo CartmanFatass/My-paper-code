@@ -2,7 +2,7 @@
   "schema_version": 5,
   "round_id": "20260719_clean_process_access_portfolio",
   "round_status": "ACTIVE",
-  "updated_at": "2026-07-19T20:25:45.0245435+08:00",
+  "updated_at": "2026-07-20T01:13:26.5691957+08:00",
   "stages": {
     "gemini_divergent": {
       "state": "COMPLETE",
@@ -14,16 +14,16 @@
       "blocker": null
     },
     "open_pro": {
-      "state": "NOT_STARTED",
-      "dispatch_count": 0,
-      "route_token": null,
-      "dispatched_at": null,
-      "deadline_at": null,
+      "state": "COMPLETE",
+      "dispatch_count": 1,
+      "route_token": "20260719_clean_process_access_portfolio:OPEN_DIVERGENT:3852477535fa4fac5569ad626b1cc2d2788de9b9:docs/external-review/rounds/20260719_clean_process_access_portfolio/21_PRO_OPEN_RAW.md",
+      "dispatched_at": "2026-07-19T20:37:11.3299956+08:00",
+      "deadline_at": "2026-07-19T22:34:40.034256+08:00",
       "artifact_path": "21_PRO_OPEN_RAW.md",
       "blocker": null
     },
     "evidence_reconciliation": {
-      "state": "NOT_STARTED",
+      "state": "COMPLETE",
       "dispatch_count": 0,
       "route_token": null,
       "dispatched_at": null,
