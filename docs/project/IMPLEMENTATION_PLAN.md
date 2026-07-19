@@ -1,9 +1,10 @@
 # HA-CTSE Active Implementation Plan
 
 Updated: 2026-07-20
-Status: AUTHORIZED_IN_PROGRESS
+Status: IMPLEMENTATION_COMPLETE_AWAITING_FORMAL_RUN
 Work ID: `clean-supplied-executor-high-path-g0-20260720-v2`
-Base/source commit: `a322e8293bbddcf6555afd2a5534a54c39121153`
+Assignment base/source commit: `7e289a107bafd47666c802555e23a7d625e8794f`
+Implementation commit: `2d66d253d8b129e4c58e7cf4762b4ca96125dd31`
 
 ## 1. Accepted executable boundary
 
@@ -45,8 +46,8 @@ Use the registered seed ledger without secondary folding:
 
 ## 2. Files, symbols, and ownership
 
-The Code Implementation Manager is the sole writer of this plan. One native
-`$hmasd-implementer` owns all coupled executable/test files below:
+The Code Implementation Manager is the sole writer of this plan. The accepted
+implementation package comprises the coupled executable/test files below:
 
 - `ha_ctse_process/variable_roster_event.py`
   - add an explicit supplied-executor/no-low-path runtime mode with the existing
@@ -173,10 +174,10 @@ only for simulator/lifecycle causality, and transfer/reduce metrics only at
 update/evaluation boundaries. Formal mode requires CUDA; focused tests and smoke
 mode use CPU and reduced counts without changing formulas.
 
-## 8. Focused verification and completion
+## 8. Focused evidence and implementation state
 
-Run exactly the new focused pytest file plus any directly affected existing
-event-runtime test needed after an API change. The new test must cover in one
+Focused verification completed with exactly the new focused pytest file plus
+the directly affected existing event-runtime test. The new test covers in one
 deterministic contract:
 
 - exact `IDLE/PERSIST/SHORT` execution and absence of low likelihood/state rows;
@@ -189,10 +190,10 @@ deterministic contract:
 - checkpoint strictness, tensor/optimizer/counter/collector/RNG round trip, and
   exact continuation from an open mid-segment boundary.
 
-Do not run the formal 320,000-step diagnostic. Completion requires the focused
-checks to pass, a fresh `$hmasd-code-reviewer` result of
-`CODE_REVIEW_APPROVED`, and a `CODE_GIT_PUSH_REQUIRED` callback listing only the
-authorized changed paths.
+The formal 320,000-step diagnostic has not been run. Implementation is complete
+and awaiting that registered formal run. The accepted implementation boundary
+is commit `2d66d253d8b129e4c58e7cf4762b4ca96125dd31`; its focused checks passed and
+the package was accepted with `acceptance=MANAGER_ACCEPTED`.
 
 ## 9. Non-goals
 
