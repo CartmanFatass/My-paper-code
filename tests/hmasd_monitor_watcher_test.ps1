@@ -16,6 +16,10 @@ $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 foreach ($required in @(
     'inside the persistent HMASD experiment-monitor session',
     'monitor session creates and owns its heartbeat',
+    'session-roles.json.roles.experiment_monitor.thread_id',
+    'session-roles.json.roles.controller.thread_id',
+    'returned `hostId`',
+    'ID or model setting from the assignment',
     'controller never creates, updates, pauses, or deletes',
     'interval is never shorter than 10',
     'Delete and verify deletion of the heartbeat only',
@@ -42,7 +46,8 @@ foreach ($required in @(
     }
 }
 
-if ($registry.schema_version -ne 6 -or
+if ($registry.schema_version -ne 7 -or
+    $registry.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or
     $registry.automation.kind -ne 'heartbeat' -or
     $registry.automation.name_template -ne 'hmasd-experiment-<run-id>' -or
     $registry.automation.owner -ne 'registered_monitor_session' -or
@@ -57,7 +62,6 @@ if ($registry.schema_version -ne 6 -or
     $registry.cadence_policy.eta_buckets[2].interval_minutes -ne 10 -or
     $registry.automation_ownership.create_retarget_and_delete -ne 'registered_monitor_session' -or
     $registry.automation_ownership.controller_role -ne 'communication_only' -or
-    $registry.controller_return_route.route_policy -ne 'resolve_live_immediately_before_each_send' -or
     $registry.progress_policy.display -ne 'monitor_task_each_tick' -or
     $registry.progress_policy.controller_relay -ne 'terminal_or_actionable_error_only') {
     throw 'Monitor registry does not bind one progress heartbeat to the registered monitor task'
@@ -67,10 +71,9 @@ if (@($registry.cadence_policy.eta_buckets | Where-Object {
 }).Count -ne 0) {
     throw 'Monitor ETA cadence violates the 10-minute minimum'
 }
-foreach ($route in @($registry.monitor_route, $registry.controller_return_route)) {
-    if ($null -ne $route.PSObject.Properties['model'] -or
-        $null -ne $route.PSObject.Properties['thinking']) {
-        throw 'Monitor registry must not mirror task model or thinking'
+foreach ($forbidden in @('monitor_route', 'controller_return_route', 'routing_skill', 'route_policy', 'model', 'thinking')) {
+    if ($null -ne $registry.PSObject.Properties[$forbidden]) {
+        throw "Monitor registry duplicates router-owned session data: $forbidden"
     }
 }
 

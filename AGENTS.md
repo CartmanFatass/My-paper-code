@@ -53,7 +53,8 @@ Choose exactly one execution surface and one role:
 - code implementation or repair -> temporary subagent with
   `$hmasd-implementer`; do not use `$hmasd-task-router`;
 - complete external review -> persistent session with `$hmasd-task-router` and
-  `$hmasd-review-round`;
+  `$hmasd-review-round`; that manager alone dispatches the three registered,
+  one-reviewer-per-session exchanges using `$hmasd-review-exchange`;
 - authorized run monitoring -> persistent session with `$hmasd-task-router`
   and `$hmasd-experiment`.
 
@@ -99,7 +100,9 @@ A role Skill is both an authority grant and a context denylist:
   enumeration;
 - tools and mutations not granted by the role Skill are forbidden;
 - a role cannot authorize another role, launch a successor, edit project
-  control, change a task model, or expand its own assignment;
+  control, change a task model, or expand its own assignment; the sole routing
+  exception is that the Review Manager may dispatch the fixed reviewer stages
+  defined by `$hmasd-review-round` to their pre-registered exchange sessions;
 - persistent-session messages always return through `$hmasd-task-router` with
   delivery proof;
 - subagents return only through the native subagent channel and never contact a
@@ -109,6 +112,8 @@ A role Skill is both an authority grant and a context denylist:
 Project files never select or change task models. Existing tasks retain their
 user-selected settings; communication reads the recipient's live delivery
 metadata immediately before each send and copies it unchanged into the send.
+The controller communicates only with the Review Manager for external review;
+it never sends to or receives from a reviewer exchange directly.
 
 ## Agile Research and Active-Line Code
 
@@ -120,6 +125,13 @@ Use active-line development. Do not retain backward-compatibility adapters,
 deprecated branches, old library interfaces, legacy transport formats, or
 superseded checkpoint migrations. Git history is the archive. Replace obsolete
 active paths instead of preserving them behind switches.
+
+When an implementation or workflow replacement is accepted, delete its
+superseded executable code, recovery scripts, state schemas, generated state
+files, compatibility branches, and inactive fallbacks at the same Git boundary.
+Do not retain obsolete machinery for possible rollback. Preserve only raw
+scientific evidence or an artifact explicitly named by the current control
+plane.
 
 The implementation plan contains only the current executable design. When no
 implementation is authorized, it says so and contains no completed contract.

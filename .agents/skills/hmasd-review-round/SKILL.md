@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use only in the dedicated External Review Manager persistent session when a controller message assigns one complete HMASD external-review round. It isolates Gemini and Pro transport, round artifacts, Git-visible review boundaries, and final disposition from controller, implementation, experiment, and project-control context.
+description: Use only in the dedicated External Review Manager persistent session when the controller assigns one complete HMASD external-review round. It mechanically sequences three independently registered reviewer-exchange sessions, verifies their artifacts, writes factual reconciliation and final disposition, maintains Git-visible round boundaries, and returns one result to the controller; it never operates an external reviewer itself.
 ---
 
 # HMASD External Review Manager
@@ -24,92 +24,113 @@ implementation, monitoring, experiment, or controller work.
 Read only:
 
 1. `../hmasd-task-router/SKILL.md`;
-2. this Skill;
-3. `docs/external-review/REVIEWER_CONVERSATIONS.json`;
-4. the named round directory;
-5. reviewer inputs explicitly listed by its manifests.
+2. `../hmasd-task-router/references/session-roles.json`;
+3. this Skill;
+4. `docs/external-review/REVIEWER_CONVERSATIONS.json`;
+5. the named round directory;
+6. reviewer inputs explicitly listed by its manifests.
 
 Do not load `AGENTS.md`, `CURRENT_WORK.md`, `IMPLEMENTATION_PLAN.md`,
 `ExpRecord.md`, unrelated reviews, logs, or conversation history as operating
 instructions. A manifest may expose a listed project file as reviewer evidence;
 that does not make it manager context.
 
+Before role work, require the current Codex task ID to equal
+`session-roles.json.roles.external_review_manager.thread_id` and require the
+assignment `role_skill` to equal that entry's `role_skill`. Otherwise return
+`TASK_BLOCKED` through the router without opening a reviewer transport.
+
 ## Authority
 
 Own only:
 
-- the registered Gemini and Pro transports;
-- the shared review browser and Antigravity interaction for this round;
-- question, raw, reconciliation, and disposition files inside `round_path`;
+- review-stage sequencing and assignments to the three registered reviewer
+  exchange sessions;
+- question, reconciliation, and disposition files inside `round_path`;
+- verification and Git integration of raw files written by those exchanges;
 - Git add, commit, and `git push My-paper-code aggressive` for active-round
   files needed by a reviewer;
-- the heartbeat created by this manager for the active external request;
 - one terminal callback to the controller.
 
 Do not edit code or project-control files, choose or authorize implementation or
-compute, change task settings, create reviewer conversations, or read unlisted
-local material.
+compute, change task settings, create reviewer conversations, operate a browser
+or Antigravity, write a reviewer raw, create a reviewer heartbeat, or read
+unlisted local material. Contact reviewer exchanges only through
+`$hmasd-task-router`; contact no reviewer model or controller-bypassing session.
 
 ## Round Procedure
 
-Complete, in order:
+Complete these mechanical steps:
 
-1. Gemini blind divergent review;
-2. Open-Pro blind divergent review;
-3. factual reconciliation without route ranking;
-4. Convergent-Pro synthesis;
-5. `50_DISPOSITION.md`.
+1. validate the initial round files and pushed `evidence_commit`;
+2. dispatch the Gemini and Open-Pro blind divergent stages independently to
+   `gemini_divergent_exchange` and `open_divergent_exchange`;
+3. after both verified raws return, write factual
+   `30_EVIDENCE_RECONCILIATION.md` without ranking routes;
+4. write `40_PRO_CONVERGENT_QUESTION.md`, commit and push the active round, then
+   dispatch it to `convergent_exchange`;
+5. after its verified raw returns, write `50_DISPOSITION.md` from that response,
+   commit and push the active round, and reply once to the controller.
 
-There is no review state machine. Existing nonempty raw artifacts are immutable
-completion evidence. For a missing raw, inspect only the registered reviewer
-page or conversation:
+Every reviewer dispatch is exactly:
 
-- if the exact question is already accepted and a response is active, wait
-  through the registered heartbeat and never resubmit;
-- if the completed response is visible, archive it byte-for-byte and continue;
-- only when no accepted matching submission exists may the question be sent
-  once.
+```text
+REVIEW_STAGE
+role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+reviewer_role=<GEMINI_DIVERGENT|OPEN_DIVERGENT|CONVERGENT>
+round=<id>
+stage_commit=<40-character pushed SHA>
+round_path=<round_path>
+question=<round-relative question path>
+raw=<round-relative raw path>
+```
 
-Before a Pro submission, verify the evidence commit and question path are
-visible remotely, then verify the registered URL and visible `Pro`. Use the
-neutral handoff template. For Gemini, use only the registered Antigravity
-conversation and allowlisted local manifest.
+Use `$hmasd-task-router` to select only the role-directory entry matching that
+reviewer role. The controller is never a stage recipient. Gemini and Open Pro
+may run concurrently because their sessions, evidence views, outputs, and
+heartbeats are disjoint. Convergent may start only after both divergent raws and
+the reconciliation exist in one pushed boundary.
 
-When a downstream question becomes reviewer-visible, commit and push only the
-active round before submitting it. A push failure is an operational blocker to
-report, not a request for the controller to operate the review.
+There is no review state machine. Derive progress from immutable round
+artifacts and tool-confirmed `REVIEW_STAGE_COMPLETE` callbacks. Nonempty is not
+sufficient: accept a raw only when the callback comes from the registered
+exchange session, uses the expected stable `handoff_id`, names the assigned raw,
+and reports
+`verification=natural_complete;required_fields_present;exact_text_equal`.
+Read the corresponding question and raw once to confirm every explicitly
+required section or decision field is present before downstream use.
 
-## Heartbeat
+If a raw already exists, send the same assignment to its owning exchange for
+verification; never inspect an external reviewer from this manager and never
+resubmit from the manager. A `REVIEW_STAGE_BLOCKED` callback is a terminal round
+blocker, not authority to substitute another exchange or reviewer.
 
-The manager session owns its heartbeat; the controller never creates, updates,
-pauses, or deletes it. Immediately after a Gemini or Pro question is visibly
-accepted, use `automation_update` to create one 5-minute heartbeat targeted to
-this session. Name it from the round and reviewer stage, capture the returned
-heartbeat ID, then update that same heartbeat with the prompt generated by
-`scripts/render_review_heartbeat.ps1`. The prompt contains only the router
-Skill path, this Skill path, registry path, `round_path`, stage, question path,
-raw path, and heartbeat ID. Do not include project control, algorithm context,
-conversation history, model, or thinking.
+Commit and push only active-round artifacts before every downstream dispatch.
+A push failure is an operational blocker to report, not a request for the
+controller to operate the review.
 
-Each wake performs one bounded inspection of the single active external reply
-and ends. Do not sleep, poll, resubmit, or send waiting messages to the
-controller. Reuse the exact heartbeat for a repeated assignment; never create a
-duplicate.
+## Liveness
 
-For Gemini, Open Pro, and a nonfinal external stage, archive the completed raw
-byte-for-byte, then delete and verify deletion of that stage heartbeat before
-continuing. For Convergent Pro, keep the heartbeat active while writing
-`50_DISPOSITION.md` and delivering the terminal callback; delete it only after
-the callback is tool-confirmed. If a terminal blocker occurs without an active
-heartbeat, create one 5-minute callback-only heartbeat before attempting the
-callback.
+Each reviewer exchange creates, retargets, and deletes its own external-response
+heartbeat. This manager never creates or manages a heartbeat. It performs one
+bounded mechanical transition when it receives `START_REVIEW`,
+`REVIEW_STAGE_COMPLETE`, or `REVIEW_STAGE_BLOCKED`, sends the next required
+message, and ends. The recipient message wakes the next session.
+
+Attempt the final controller callback once with the stable `handoff_id`. If the
+send tool does not confirm the registered controller task, preserve the pushed
+disposition and end locally with `REVIEW_DELIVERY_UNCONFIRMED`; do not create a
+heartbeat, contact a reviewer, or repeat scientific work. Re-delivery of the
+same handoff is idempotent when the controller explicitly resumes the manager.
 
 ## Reply to Controller
 
-The stable controller session ID comes only from
-`REVIEWER_CONVERSATIONS.json.controller_return_route.thread_id`. Immediately
-before replying, resolve that ID live with `$hmasd-task-router` and copy its
-current model and thinking unchanged into the send.
+Take the controller session ID only from
+`session-roles.json.roles.controller.thread_id`. Immediately before replying,
+resolve that ID live with `$hmasd-task-router`; copy the returned `hostId`,
+`threadId`, `model`, and `thinking` unchanged into the send. Never take a return
+ID or model setting from the assignment, review registry, conversation history,
+or heartbeat prompt.
 
 On success send exactly:
 
@@ -132,13 +153,11 @@ round=<id>
 reason=<direct blocker>
 ```
 
-The callback is complete only when the send tool returns the same controller
-`threadId`. A local final response is not delivery. Keep the heartbeat active
-until that proof, then delete it and verify deletion. If delivery fails before
-acceptance, leave the heartbeat active and retry only the same `handoff_id` on
-the next wake; do not repeat review work or create another session. If delivery
-succeeded but deletion failed, a duplicate callback with the same `handoff_id`
-is harmless under the router receive contract.
+The callback is complete only when the send tool returns the same registered
+controller `threadId`. A local final response is not delivery. If delivery is
+unconfirmed, follow the `REVIEW_DELIVERY_UNCONFIRMED` rule above; do not contact
+a reviewer or create a heartbeat. A later explicit re-delivery uses the same
+`handoff_id` and is idempotent under the router receive contract.
 
 External review recommends scientific action but never grants code or experiment
 authority. The controller consumes only `50_DISPOSITION.md`.

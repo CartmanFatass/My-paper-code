@@ -10,15 +10,17 @@ Accept only one active run. A `MONITOR_ASSIGNMENT` must provide:
 - terminal spellings and terminal payload key;
 - deadline.
 
-Use `monitor-task.json` for stable session IDs and cadence policy only. Resolve
-all task models and reasoning effort live through `$hmasd-task-router`;
-registry files never supply them.
+Use `monitor-task.json` for monitor and cadence policy only. Take monitor and
+controller session IDs from the router-owned `session-roles.json`. Resolve all
+live route fields through `$hmasd-task-router`; registry files never supply
+`hostId`, model, or reasoning effort.
 
 On acceptance, use `automation_update` to create one heartbeat named from the
 run ID and targeted to this monitor session. Start at the registry's fallback
 cadence, capture the returned heartbeat ID, then update that same heartbeat with
-its final prompt. The prompt contains only the router Skill path, this Skill
-path, `monitor-task.json`, the assignment fields, and the heartbeat ID. Verify
+its final prompt. The prompt contains only the router Skill path,
+`session-roles.json`, this Skill path, `monitor-task.json`, the assignment
+fields, and the heartbeat ID. Verify
 the target, prompt, cadence, and `ACTIVE` state. Do not put project-control,
 algorithm, review, conversation history, model, or thinking context in the
 prompt. Reuse the exact heartbeat if the same assignment is delivered again;

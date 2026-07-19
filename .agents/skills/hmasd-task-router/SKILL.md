@@ -18,6 +18,27 @@ Every delegated persistent session receives this Skill and exactly one
 session-role Skill. Reject an assignment that names zero or multiple role
 Skills with `TASK_BLOCKED` before doing role work.
 
+## Session and Role Directory
+
+Read `references/session-roles.json` before any persistent-session send or
+callback acceptance. It is the only communication registry for the controller,
+External Review Manager, three reviewer-exchange sessions, and Experiment
+Monitor session IDs and their one-to-one role bindings. Other role registries
+must not duplicate Codex session IDs.
+
+The active controller alone maintains this directory. Change an entry only for
+an explicit controller handoff or explicit persistent-session replacement.
+Before accepting a replacement, require a unique unarchived session, bind it to
+exactly one role and role Skill, and remove the prior binding in the same Git
+change. Never infer a role from a task title, model, conversation history, or
+message prose. Never store `hostId`, `model`, or `thinking` in the directory.
+
+A persistent role session must verify that its current task ID equals the
+directory entry for its declared role and that the assignment's `role_skill`
+equals the registered role Skill. Otherwise return `TASK_BLOCKED` without role
+work. A null or `UNASSIGNED` directory entry is not a routable destination and
+must not be replaced by another role session.
+
 ## Assignment Envelope
 
 Send a self-contained envelope:
@@ -92,14 +113,59 @@ Skill by keeping its own heartbeat active and retrying only the same stable
 Before replying, resolve the reply destination again as the new recipient.
 Never reuse route metadata carried by the incoming message.
 
+## Controller Send Contract
+
+For every controller-to-session assignment:
+
+1. select the declared role in `references/session-roles.json`;
+2. require its registered role Skill to equal the assignment's `role_skill`;
+3. take the recipient `thread_id` only from that role entry;
+4. resolve that ID immediately before delivery;
+5. copy the returned `hostId`, `threadId`, `model`, and `thinking` unchanged into
+   one `send_message_to_thread` call;
+6. accept delivery only when the tool returns the same recipient `threadId`.
+
+Do not send to an ID supplied in free-form task text, reuse cached live metadata,
+compare against a preferred model, or mutate either session's model or thinking.
+The controller records no waiting state and does not manage a role session's
+heartbeat.
+
+## External Review Topology
+
+Enforce this exact communication graph:
+
+```text
+controller <-> external_review_manager
+external_review_manager <-> gemini_divergent_exchange
+external_review_manager <-> open_divergent_exchange
+external_review_manager <-> convergent_exchange
+```
+
+The controller sends `START_REVIEW` only to `external_review_manager` and never
+sends a reviewer-stage assignment. The manager sends `REVIEW_STAGE` only to the
+single exchange whose registered `reviewer_role` matches that assignment. A
+reviewer exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` only
+to the manager. The manager alone returns `REVIEW_COMPLETE` or
+`REVIEW_BLOCKED` to the controller. Reject controller-to-reviewer,
+reviewer-to-controller, reviewer-to-reviewer, and reviewer-to-monitor sends.
+
+For a manager-to-exchange send, apply the same live-resolution and unchanged
+`hostId`/`threadId`/`model`/`thinking` rules as the Controller Send Contract.
+The manager takes the recipient ID only from the role directory and accepts
+delivery only when the tool returns that same exchange `threadId`.
+
 ## Receive Contract
 
 Accept a persistent-session callback only when all of these are true:
 
-- the native delegation metadata names the registered task ID for the declared
-  role;
+- the native delegation metadata `source_thread_id` equals the session ID in
+  `references/session-roles.json` for the declared role;
 - the payload contains that role's stable `handoff_id`;
 - the payload matches the exact terminal schema in the named role Skill.
+
+Also require the sender and receiver pair to be an edge in the External Review
+Topology or the registered experiment-monitor-to-controller edge. A valid
+payload on an invalid edge is rejected without forwarding.
 
 Reject a callback whose source task, role, or schema does not match. Never infer
 the sender from prose inside the payload. Receipt grants no new project,

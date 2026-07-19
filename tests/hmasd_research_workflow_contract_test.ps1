@@ -3,9 +3,11 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $skillsRoot = Join-Path $repo ".agents/skills"
 $canonicalRoot = Join-Path $repo "docs/project"
+$sessionRolesPath = Join-Path $skillsRoot "hmasd-task-router/references/session-roles.json"
 $expectedSkills = @(
     "hmasd-experiment",
     "hmasd-implementer",
+    "hmasd-review-exchange",
     "hmasd-review-round",
     "hmasd-task-router"
 )
@@ -62,6 +64,7 @@ foreach ($required in @(
     "MARL exploration remains agile",
     "Do not retain backward-compatibility adapters",
     "hmasd-implementer",
+    "hmasd-review-exchange",
     "hmasd-review-round",
     "hmasd-experiment",
     "hmasd-task-router"
@@ -132,6 +135,8 @@ if (-not $experiment.Contains("inside the persistent HMASD experiment-monitor se
     -not $experiment.Contains("role_skill=.agents/skills/hmasd-experiment/SKILL.md") -or
     -not $experiment.Contains("Do not read project-control") -or
     -not $experiment.Contains("monitor session creates and owns its heartbeat") -or
+    -not $experiment.Contains("session-roles.json.roles.experiment_monitor.thread_id") -or
+    -not $experiment.Contains("session-roles.json.roles.controller.thread_id") -or
     -not $experiment.Contains("interval is never shorter than 10") -or
     -not $protocol.Contains("One bounded heartbeat") -or
     -not $protocol.Contains('delete this heartbeat with `automation_update`')) {
@@ -143,10 +148,40 @@ if (-not $review.Contains("role_skill=.agents/skills/hmasd-review-round/SKILL.md
     -not $review.Contains("Do not load") -or
     -not $review.Contains("AGENTS.md") -or
     -not $review.Contains("There is no review state machine") -or
-    -not $review.Contains("create one 5-minute heartbeat") -or
+    -not $review.Contains("session-roles.json.roles.external_review_manager.thread_id") -or
+    -not $review.Contains("session-roles.json.roles.controller.thread_id") -or
+    -not $review.Contains("REVIEW_STAGE") -or
+    -not $review.Contains("controller is never a stage recipient") -or
+    -not $review.Contains("manager never creates or manages a heartbeat") -or
     -not $review.Contains("git push My-paper-code aggressive") -or
-    -not $review.Contains("delete it and verify deletion")) {
+    -not $review.Contains("convergent_exchange")) {
     throw "External Review Manager role boundary is incomplete"
+}
+
+$exchange = Read-Text (Join-Path $skillsRoot "hmasd-review-exchange/SKILL.md")
+$normalizedExchange = $exchange -replace '\s+', ' '
+foreach ($required in @(
+    'role_skill=.agents/skills/hmasd-review-exchange/SKILL.md',
+    'gemini_divergent_exchange',
+    'open_divergent_exchange',
+    'convergent_exchange',
+    'do not contact the controller',
+    'create one 5-minute heartbeat',
+    'exact text equality',
+    'Reply to Review Manager'
+)) {
+    if (-not $normalizedExchange.Contains($required)) {
+        throw "Reviewer Exchange role boundary is incomplete: $required"
+    }
+}
+
+$router = Read-Text (Join-Path $skillsRoot "hmasd-task-router/SKILL.md")
+$sessionRoles = Read-Text $sessionRolesPath | ConvertFrom-Json
+if (-not $router.Contains("Controller Send Contract") -or
+    -not $router.Contains("Session and Role Directory") -or
+    $sessionRoles.policy.update_owner -ne "active_controller" -or
+    -not $sessionRoles.policy.one_session_one_role) {
+    throw "Controller communication or session-role ownership is incomplete"
 }
 foreach ($forbidden in @("CONTINUE_REVIEW", "RESUME_REVIEW", "REVIEW_BOUNDARY_READY", "05_REVIEW_STATE.json")) {
     if ($review.Contains($forbidden)) {

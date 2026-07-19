@@ -4,7 +4,7 @@ param(
     [string]$RoundPath,
 
     [Parameter(Mandatory = $true)]
-    [ValidateSet("GEMINI_DIVERGENT", "OPEN_DIVERGENT", "CONVERGENT", "CALLBACK_ONLY")]
+    [ValidateSet("GEMINI_DIVERGENT", "OPEN_DIVERGENT", "CONVERGENT")]
     [string]$Stage,
 
     [Parameter(Mandatory = $true)]
@@ -27,34 +27,35 @@ foreach ($path in @($question, $raw)) {
         throw "Heartbeat path escapes round directory: $path"
     }
 }
-if ($Stage -ne "CALLBACK_ONLY" -and
-    -not (Test-Path -LiteralPath $question -PathType Leaf)) {
+if (-not (Test-Path -LiteralPath $question -PathType Leaf)) {
     throw "Missing review question: $question"
 }
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "../../../..")).Path
 $router = Join-Path $repo ".agents/skills/hmasd-task-router/SKILL.md"
-$review = Join-Path $repo ".agents/skills/hmasd-review-round/SKILL.md"
+$roles = Join-Path $repo ".agents/skills/hmasd-task-router/references/session-roles.json"
+$exchange = Join-Path $repo ".agents/skills/hmasd-review-exchange/SKILL.md"
 $registry = Join-Path $repo "docs/external-review/REVIEWER_CONVERSATIONS.json"
 $roundId = Split-Path -Leaf $round
 
 @"
-HMASD EXTERNAL REVIEW HEARTBEAT
+HMASD REVIEWER EXCHANGE HEARTBEAT
 
 Read the current working-tree versions of:
 $router
-$review
+$roles
+$exchange
 $registry
 
 heartbeat_id=$HeartbeatId
 round=$roundId
 round_path=$round
-stage=$Stage
+reviewer_role=$Stage
 question=$question
 raw=$raw
 
-Perform one bounded External Review Manager inspection for this stage and end.
-Never load controller context, infer routing from prior turns, or resubmit an
-accepted prompt. Follow the role Skill for byte-exact archival, callback, and
-heartbeat deletion.
+Perform one bounded inspection of this exchange session's registered external
+response and end. Never load controller or manager context, operate another
+reviewer, or resubmit an accepted prompt. Follow the exchange Skill for raw
+validation, manager callback, and heartbeat deletion.
 "@

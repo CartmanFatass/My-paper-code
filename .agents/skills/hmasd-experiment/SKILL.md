@@ -6,9 +6,16 @@ description: Use only inside the persistent HMASD experiment-monitor session whe
 # HMASD Experiment Monitor
 
 Read `../hmasd-task-router/SKILL.md`, `references/monitor-task.json`,
+`../hmasd-task-router/references/session-roles.json`,
 `references/experiment-protocol.md`, and only the run paths supplied in the
 assignment. Do not read project-control, algorithm, implementation-plan,
 experiment-history, external-review, or archive documents.
+
+Before monitoring, require the current Codex task ID to equal
+`session-roles.json.roles.experiment_monitor.thread_id` and require the
+assignment `role_skill` to equal that entry's `role_skill`. Otherwise return
+`TASK_BLOCKED` through the router without reading run artifacts or creating a
+heartbeat.
 
 The controller supplies one `MONITOR_ASSIGNMENT` containing
 `role_skill=.agents/skills/hmasd-experiment/SKILL.md`, the run ID, status path,
@@ -32,3 +39,14 @@ If callback delivery fails, leave the heartbeat active. Its next wake retries
 only the same `handoff_id`; it does not reread unrelated artifacts or repeat
 experiment work. If delivery succeeded but deletion failed, the controller's
 router treats the repeated `handoff_id` idempotently.
+
+## Reply to Controller
+
+Take the controller session ID only from
+`session-roles.json.roles.controller.thread_id`. Immediately before a terminal
+callback, resolve that ID with `$hmasd-task-router`; copy the returned `hostId`,
+`threadId`, `model`, and `thinking` unchanged into the send. Never take a return
+ID or model setting from the assignment, monitor registry, conversation history,
+or heartbeat prompt. Delivery succeeds only when the send tool returns the same
+registered controller `threadId`; only then may this session delete its
+heartbeat.

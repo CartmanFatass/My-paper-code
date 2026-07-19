@@ -6,8 +6,10 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skillPath = Join-Path $repo '.agents/skills/hmasd-task-router/SKILL.md'
 $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1'
+$rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
 $sessionRoleSkills = @(
     (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'),
+    (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md')
 )
 $implementerSkill = Join-Path $repo '.agents/skills/hmasd-implementer/SKILL.md'
@@ -24,20 +26,83 @@ foreach ($required in @(
     'role_skill=<one .agents/skills/.../SKILL.md path>',
     'Conversation history, nearby files, registries, and earlier assignments are not implicit inputs',
     'Every compact message must still contain exactly one',
+    'Session and Role Directory',
+    'references/session-roles.json',
+    'one-to-one role bindings',
+    'active controller alone maintains this directory',
+    'current task ID equals the directory entry',
     'Resolve the Recipient Live',
     'Copy the recipient''s current values unchanged',
     'Send once',
     'same recipient `threadId`',
     'ambiguous send is never repeated',
     'Before replying, resolve the reply destination again',
+    'Controller Send Contract',
+    'take the recipient `thread_id` only from that role entry',
+    'controller records no waiting state',
+    'External Review Topology',
+    'controller <-> external_review_manager',
+    'controller-to-reviewer',
+    'manager-to-exchange send',
     'Receive Contract',
-    'native delegation metadata names the registered task ID',
+    'native delegation metadata `source_thread_id` equals the session ID',
     'stable `handoff_id`',
     'same role and `handoff_id` as the same delivery',
     'do not add a separate relay state machine')) {
     if (-not $normalizedSkillText.Contains($required)) {
         throw "Communication Skill is missing: $required"
     }
+}
+
+$roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
+$managerId = $roles.roles.external_review_manager.thread_id
+$managerStatus = $roles.roles.external_review_manager.registration_status
+if ($roles.schema_version -ne 2 -or
+    $roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
+    $roles.roles.external_review_manager.role_skill -ne '.agents/skills/hmasd-review-round/SKILL.md' -or
+    $roles.roles.gemini_divergent_exchange.thread_id -ne '019f76cc-580b-7c40-8c92-97bfffaf51b1' -or
+    $roles.roles.gemini_divergent_exchange.reviewer_role -ne 'GEMINI_DIVERGENT' -or
+    $roles.roles.open_divergent_exchange.thread_id -ne '019f716c-3c8a-7891-8c89-c94dc94fab4c' -or
+    $roles.roles.open_divergent_exchange.reviewer_role -ne 'OPEN_DIVERGENT' -or
+    $roles.roles.convergent_exchange.thread_id -ne '019f716c-676f-7673-9782-f37b72f200d2' -or
+    $roles.roles.convergent_exchange.reviewer_role -ne 'CONVERGENT' -or
+    $roles.roles.gemini_divergent_exchange.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md' -or
+    $roles.roles.open_divergent_exchange.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md' -or
+    $roles.roles.convergent_exchange.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md' -or
+    $roles.roles.experiment_monitor.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
+    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment/SKILL.md' -or
+    -not $roles.policy.one_session_one_role -or
+    $roles.policy.update_owner -ne 'active_controller') {
+    throw 'Session-role directory is inconsistent'
+}
+if (($null -eq $managerId -and $managerStatus -ne 'UNASSIGNED') -or
+    ($null -ne $managerId -and $managerStatus -ne 'ACTIVE')) {
+    throw 'External Review Manager registration state is inconsistent'
+}
+foreach ($entry in @(
+    $roles.roles.controller,
+    $roles.roles.external_review_manager,
+    $roles.roles.gemini_divergent_exchange,
+    $roles.roles.open_divergent_exchange,
+    $roles.roles.convergent_exchange,
+    $roles.roles.experiment_monitor
+)) {
+    foreach ($forbidden in @('hostId', 'model', 'thinking')) {
+        if ($null -ne $entry.PSObject.Properties[$forbidden]) {
+            throw "Session-role directory mirrors live route field: $forbidden"
+        }
+    }
+}
+$assignedIds = @(
+    $roles.roles.controller.thread_id,
+    $managerId,
+    $roles.roles.gemini_divergent_exchange.thread_id,
+    $roles.roles.open_divergent_exchange.thread_id,
+    $roles.roles.convergent_exchange.thread_id,
+    $roles.roles.experiment_monitor.thread_id
+) | Where-Object { $null -ne $_ }
+if (@($assignedIds | Select-Object -Unique).Count -ne $assignedIds.Count) {
+    throw 'A persistent Codex task is bound to more than one role'
 }
 foreach ($forbidden in @(
     'ExpectedModel',
@@ -64,20 +129,15 @@ if (-not $implementerText.Contains('native subagent result channel') -or
 }
 
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
-if ($monitor.schema_version -ne 6 -or
-    $monitor.monitor_route.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
-    $monitor.controller_return_route.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
-    $monitor.controller_return_route.route_policy -ne 'resolve_live_immediately_before_each_send' -or
+if ($monitor.schema_version -ne 7 -or
+    $monitor.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or
     $monitor.automation.owner -ne 'registered_monitor_session' -or
-    $monitor.automation.target -ne 'self' -or
-    $monitor.routing_skill -ne '.agents/skills/hmasd-task-router/SKILL.md') {
-    throw 'Persistent monitor registry is not the stable-ID communication contract'
+    $monitor.automation.target -ne 'self') {
+    throw 'Persistent monitor registry is not isolated from session routing'
 }
-foreach ($route in @($monitor.monitor_route, $monitor.controller_return_route)) {
-    if ($null -ne $route.PSObject.Properties['model'] -or
-        $null -ne $route.PSObject.Properties['thinking'] -or
-        $null -ne $route.PSObject.Properties['host_id']) {
-        throw 'Monitor registry must not mirror live delivery metadata'
+foreach ($forbidden in @('monitor_route', 'controller_return_route', 'routing_skill', 'route_policy')) {
+    if ($null -ne $monitor.PSObject.Properties[$forbidden]) {
+        throw "Monitor registry duplicates router-owned session data: $forbidden"
     }
 }
 

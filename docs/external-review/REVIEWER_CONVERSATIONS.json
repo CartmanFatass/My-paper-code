@@ -1,14 +1,10 @@
 {
-  "schema_version": 17,
+  "schema_version": 19,
   "updated": "2026-07-20",
   "review_manager": {
     "kind": "persistent_full_round_manager",
     "title": "External Review Manager",
-    "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-    "role_skill": ".agents/skills/hmasd-review-round/SKILL.md",
-    "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
-    "route_resolver": ".agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1",
-    "route_policy": "resolve_live_immediately_before_each_send",
+    "session_role_registry": ".agents/skills/hmasd-task-router/references/session-roles.json",
     "controller_messages": [
       "START_REVIEW"
     ],
@@ -16,47 +12,54 @@
       "REVIEW_COMPLETE",
       "REVIEW_BLOCKED"
     ],
+    "exchange_messages": {
+      "manager_to_exchange": "REVIEW_STAGE",
+      "exchange_to_manager": [
+        "REVIEW_STAGE_COMPLETE",
+        "REVIEW_STAGE_BLOCKED"
+      ]
+    },
     "owns": [
-      "gemini_transport",
-      "open_pro_browser",
-      "external_request_heartbeat",
-      "raw_archival",
+      "reviewer_stage_dispatch",
+      "active_round_questions",
+      "raw_acceptance",
       "evidence_reconciliation",
-      "convergent_pro_browser",
       "final_disposition",
       "active_round_git_commit_push"
     ],
     "git_boundary": {
       "manager_role": "stage_commit_push_active_round_only",
       "controller_role": "consume_terminal_disposition_only"
-    },
+    }
+  },
+  "exchange_contract": {
+    "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md",
+    "one_reviewer_per_session": true,
+    "controller_contact": "forbidden",
     "browser": {
       "surface": "codex_in_app_browser",
       "ui_scope": "application_shared",
-      "logical_owner": "review_manager",
-      "foreground_policy": "navigate_to_review_manager_before_browser_operation"
+      "logical_owner": "registered_pro_exchange",
+      "foreground_policy": "navigate_to_own_exchange_before_browser_operation"
     },
     "heartbeat": {
       "kind": "heartbeat",
       "name_template": "hmasd-review-<round>-<stage>",
-      "owner": "review_manager_session",
+      "owner": "registered_reviewer_exchange_session",
       "target": "self",
       "interval_minutes": 5,
-      "active_condition": "one accepted external response or terminal callback is pending",
-      "terminal_order": "archive_or_disposition_then_confirm_callback_then_delete",
+      "active_condition": "one accepted external response or manager callback is pending",
+      "terminal_order": "validate_raw_then_confirm_manager_callback_then_delete",
       "duplicate_policy": "same_handoff_id_is_idempotent"
-    },
-    "controller_return_route": {
-      "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
-      "route_policy": "resolve_live_immediately_before_each_send"
     }
   },
   "reviewers": {
     "gemini_divergent": {
       "role": "GEMINI_DIVERGENT",
+      "session_role": "gemini_divergent_exchange",
       "conversation_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
       "expected_model": "Gemini 3.1 Pro (High)",
-      "transport": "review_manager_antigravity_cli",
+      "transport": "reviewer_exchange_antigravity_cli",
       "raw_file": "11_GEMINI_DIVERGENT_RAW.md",
       "standing_consent": {
         "state": "APPROVED",
@@ -66,18 +69,20 @@
     },
     "open_divergent": {
       "role": "OPEN_DIVERGENT",
+      "session_role": "open_divergent_exchange",
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
-      "transport": "review_manager_in_app_browser",
+      "transport": "reviewer_exchange_in_app_browser",
       "raw_file": "21_PRO_OPEN_RAW.md"
     },
     "convergent": {
       "role": "CONVERGENT",
+      "session_role": "convergent_exchange",
       "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
-      "transport": "review_manager_in_app_browser",
+      "transport": "reviewer_exchange_in_app_browser",
       "raw_file": "41_PRO_CONVERGENT_RAW.md"
     }
   }

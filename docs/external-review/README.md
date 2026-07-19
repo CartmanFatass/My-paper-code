@@ -1,8 +1,12 @@
 # HMASD External Review Workflow
 
 External review is a mandatory scientific boundary. One persistent Codex
-`External Review Manager` owns the complete mechanical lifecycle so the active
-controller does not carry browser, CLI, heartbeat, or archival context.
+`External Review Manager` owns mechanical sequencing, Git-visible boundaries,
+reconciliation, and disposition. Three additional persistent exchange sessions
+are each bound to exactly one reviewer: Gemini divergent, Open-Pro divergent,
+or Convergent Pro. Each exchange alone owns its reviewer transport, raw capture,
+and heartbeat, so neither the controller nor manager carries browser or CLI
+state.
 
 ## Scientific sequence
 
@@ -30,9 +34,13 @@ START_REVIEW role_skill=.agents/skills/hmasd-review-round/SKILL.md round=<round-
 ```
 
 The commit pins reviewer-visible scientific evidence. The manager owns all
-later active-round question/raw/reconciliation/disposition commits and pushes;
-the controller does not perform intermediate handshakes. Completed nonempty raw
-artifacts are immutable, and an externally accepted stage is never resubmitted.
+later active-round question/raw/reconciliation/disposition commits and pushes,
+but each raw has exactly one writer: its registered reviewer exchange. The
+controller does not perform intermediate handshakes and never contacts a
+reviewer exchange directly. A raw artifact becomes immutable only after its
+exchange verifies natural response completion, all question-required fields,
+and exact captured-text equality after rereading the file; nonempty alone is not
+completion. An externally accepted stage is never resubmitted.
 
 The manager returns exactly one terminal message:
 
@@ -47,8 +55,13 @@ REVIEW_BLOCKED role=external_review_manager handoff_id=<stable-id> round=<round-
 ```
 
 The controller does not operate reviewer transports or intermediate review
-progress. Its only scientific input is the completed disposition. All session
-lifecycle mechanics live only in the manager Skill.
+progress. Its only scientific input is the completed disposition. Manager and
+exchange lifecycle mechanics remain isolated in their respective Skills.
+
+The manager has no heartbeat. It wakes only for controller or reviewer-exchange
+messages, performs one bounded transition, sends the next message, and ends.
+Each reviewer exchange independently owns a 5-minute heartbeat only while its
+external response or callback is pending.
 
 A terminal callback exists only after the manager invokes the common
 communication Skill and receives a tool result identifying the controller task.
@@ -75,5 +88,7 @@ rounds/YYYYMMDD_topic/
 
 Raw responses are byte-preserved and precede downstream use. Detailed manager
 behavior lives only in `.agents/skills/hmasd-review-round/SKILL.md`; registered
-task IDs, reviewer conversations, roles, and URLs live only in
-`REVIEWER_CONVERSATIONS.json`.
+exchange behavior lives only in
+`.agents/skills/hmasd-review-exchange/SKILL.md`. Codex task IDs and role bindings
+live only in the router's `session-roles.json`; external reviewer conversations
+and URLs live only in `REVIEWER_CONVERSATIONS.json`.

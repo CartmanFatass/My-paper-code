@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "updated": "2026-07-20",
+  "roles": {
+    "controller": {
+      "kind": "active_controller",
+      "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
+      "contract": "AGENTS.md"
+    },
+    "external_review_manager": {
+      "kind": "persistent_role_session",
+      "thread_id": null,
+      "registration_status": "UNASSIGNED",
+      "role_skill": ".agents/skills/hmasd-review-round/SKILL.md"
+    },
+    "gemini_divergent_exchange": {
+      "kind": "persistent_reviewer_exchange",
+      "thread_id": "019f76cc-580b-7c40-8c92-97bfffaf51b1",
+      "reviewer_role": "GEMINI_DIVERGENT",
+      "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md"
+    },
+    "open_divergent_exchange": {
+      "kind": "persistent_reviewer_exchange",
+      "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
+      "reviewer_role": "OPEN_DIVERGENT",
+      "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md"
+    },
+    "convergent_exchange": {
+      "kind": "persistent_reviewer_exchange",
+      "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
+      "reviewer_role": "CONVERGENT",
+      "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md"
+    },
+    "experiment_monitor": {
+      "kind": "persistent_role_session",
+      "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
+      "role_skill": ".agents/skills/hmasd-experiment/SKILL.md"
+    }
+  },
+  "policy": {
+    "one_session_one_role": true,
+    "live_route_source": ".agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1",
+    "stored_fields": ["role", "thread_id", "role_skill_or_contract", "reviewer_role", "registration_status"],
+    "forbidden_fields": ["hostId", "model", "thinking"],
+    "update_owner": "active_controller",
+    "update_condition": "explicit controller handoff or explicit persistent-session replacement"
+  }
+}

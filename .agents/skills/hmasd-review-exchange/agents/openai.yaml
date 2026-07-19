@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Reviewer Exchange"
+  short_description: "Run one registered external reviewer exchange"
+  default_prompt: "Use $hmasd-review-exchange to execute one registered HMASD reviewer stage."

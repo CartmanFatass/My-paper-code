@@ -1,14 +1,7 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "updated": "2026-07-20",
-  "monitor_route": {
-    "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
-    "title": "HMASD Experiment Monitor"
-  },
-  "controller_return_route": {
-    "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
-    "route_policy": "resolve_live_immediately_before_each_send"
-  },
+  "session_role_registry": ".agents/skills/hmasd-task-router/references/session-roles.json",
   "automation": {
     "kind": "heartbeat",
     "name_template": "hmasd-experiment-<run-id>",
@@ -37,7 +30,5 @@
     "controller_relay": "terminal_or_actionable_error_only",
     "artifact_scope": "registered_paths_and_fields_only"
   },
-  "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
-  "route_policy": "resolve_live_immediately_before_each_send",
   "runtime_state_authority": "Codex automation state and the assigned runner_status.txt"
 }
