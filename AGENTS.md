@@ -92,10 +92,10 @@ write scope, interfaces, invariants, non-goals, and one focused check. An
 implementer follows that task, `ALGORITHM_PRINCIPLES.md`, and
 `$hmasd-implementer`; it does not reconstruct project state or choose a route.
 
-Every message to an existing Codex task uses `$hmasd-task-router`. Resolve both
-tasks immediately before delivery and explicitly include the recipient's exact
-live model and thinking values. Never use a static route mirror, sender default,
-omitted route field, or communication as a model-selection mechanism.
+Every message to an existing Codex task uses `$hmasd-task-router`. Immediately
+before delivery, read only the recipient's live delivery metadata and include
+its current model and thinking values unchanged. Communication never stores,
+compares, selects, synchronizes, or changes models.
 
 Use one implementer for a coupled change. Use two or three only when interfaces
 are frozen and write scopes are disjoint. One file has one writer; the

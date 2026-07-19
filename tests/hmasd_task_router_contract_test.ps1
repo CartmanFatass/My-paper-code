@@ -13,9 +13,10 @@ $monitorRegistry = Join-Path $repo '.agents/skills/hmasd-experiment/references/m
 $skillText = Get-Content -LiteralPath $skillPath -Raw
 foreach ($required in @(
     'Mandatory communication contract for every HMASD Codex session',
-    'Live metadata is authoritative',
+    'for the recipient only',
+    'not store expected values, compare models',
     'Omitting `model` or `thinking` is forbidden',
-    'The recipient resolves the controller or other destination again',
+    'treats the reply destination as the new',
     'one `START_REVIEW`',
     '`REVIEW_COMPLETE`',
     '`REVIEW_BLOCKED` from the External Review Manager',
@@ -25,7 +26,12 @@ foreach ($required in @(
         throw "Communication Skill is missing: $required"
     }
 }
-foreach ($forbidden in @('ExpectedModel', 'ExpectedThinking', 'frozen route')) {
+foreach ($forbidden in @(
+    'ExpectedModel',
+    'ExpectedThinking',
+    'frozen route',
+    'for the sender and recipient',
+    'resolve both tasks')) {
     if ($skillText.Contains($forbidden)) {
         throw "Communication Skill retains static routing: $forbidden"
     }

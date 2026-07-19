@@ -1,6 +1,6 @@
 ---
 name: hmasd-task-router
-description: Mandatory communication contract for every HMASD Codex session. Read at task entry and use before every message to an existing Codex task or expected reply. Resolve both endpoints from live metadata and send the target's exact current model and thinking values so communication never changes task routing. This Skill does not own research, implementation, review, monitoring, task creation, or model selection.
+description: Mandatory communication contract for every HMASD Codex session. Read at task entry and use before every message to an existing Codex task or expected reply. Immediately before sending, read the recipient's live delivery metadata and echo its current model and thinking values unchanged into the send so communication cannot alter them. This Skill does not manage models or own research, implementation, review, monitoring, or task creation.
 ---
 
 # HMASD Communication
@@ -8,10 +8,10 @@ description: Mandatory communication contract for every HMASD Codex session. Rea
 Every HMASD session reads this Skill at entry. It governs communication only;
 the session's role-specific Skill governs its work.
 
-## Resolve Live Routes
+## Read Recipient Delivery Metadata
 
 Immediately before a cross-task send, run
-`scripts/resolve_task_route.ps1 -ThreadId <id>` for the sender and recipient.
+`scripts/resolve_task_route.ps1 -ThreadId <recipient-id>` for the recipient only.
 Require one unarchived task with nonempty `hostId`, `threadId`, `model`, and
 `thinking`.
 
@@ -19,6 +19,11 @@ Registries may store stable task IDs and roles, but must not prescribe or mirror
 models or reasoning effort. Live metadata is authoritative. Never infer the
 recipient route from the sender, a registry, an earlier message, or a project
 document. Never change a task's model or thinking to satisfy delivery.
+
+`model` and `thinking` are read-only delivery arguments here. This Skill does
+not store expected values, compare models, enforce a preferred model, select a
+model, synchronize two tasks, or modify either task. It only copies the
+recipient's values observed immediately before this send.
 
 ## Send Exactly Once
 
@@ -32,11 +37,12 @@ thinking=<live recipient thinking>
 prompt=<task-local payload>
 ```
 
-Omitting `model` or `thinking` is forbidden. Supplying their exact live values
-preserves the recipient's current route; it does not select a new route.
+Omitting `model` or `thinking` is forbidden because sender defaults may alter
+the recipient. Supplying the recipient's exact live values preserves its
+current settings; it does not manage or select them.
 
-The recipient resolves the controller or other destination again immediately
-before replying and uses that destination's exact live four-field route. A task
+Before replying, the recipient treats the reply destination as the new
+recipient, reads its live delivery metadata, and uses those exact values. A task
 must not reuse route metadata received in the prompt as current truth.
 
 Send one task message and one terminal reply unless the owning role contract
