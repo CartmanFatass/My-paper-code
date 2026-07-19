@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Review Round"
-  short_description: "Isolate one complete tracked external review"
-  default_prompt: "Use $hmasd-review-round only in the dedicated External Review Manager to process the named round and return tool-confirmed lifecycle messages."
+  short_description: "Coordinate direct tracked reviewer exchanges"
+  default_prompt: "Use $hmasd-review-round as the active controller to coordinate one complete tracked round through the registered Exchange sessions."

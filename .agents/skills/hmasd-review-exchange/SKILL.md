@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-exchange
-description: Use only inside one registered persistent HMASD reviewer-exchange session when the External Review Manager assigns exactly one Gemini divergent, Open-Pro divergent, or Convergent-Pro stage. It owns that reviewer's transport, raw capture, completion validation, heartbeat, and one callback to the manager; it never manages the round or contacts the controller.
+description: Use only inside one registered persistent HMASD reviewer-exchange session when the active controller assigns exactly one Gemini divergent, Open-Pro divergent, or Convergent-Pro stage. It owns that reviewer's transport, raw capture, completion validation, heartbeat, and one direct callback to the controller; it never manages the round or another reviewer.
 ---
 
 # HMASD Reviewer Exchange
@@ -37,8 +37,8 @@ Map `reviewer_role` to exactly one role-directory entry:
 Require the current Codex task ID, assignment role, assignment `role_skill`,
 registered external conversation, question filename, and raw filename all to
 match that entry and `REVIEWER_CONVERSATIONS.json`. Otherwise return
-`REVIEW_STAGE_BLOCKED` to the registered Review Manager before opening a
-transport or creating a heartbeat.
+`REVIEW_STAGE_BLOCKED` to the registered controller before opening a transport
+or creating a heartbeat.
 
 ## Role Firewall
 
@@ -46,8 +46,9 @@ Own only the assigned external conversation, assigned question, assigned raw
 file, and this session's stage heartbeat. Do not write questions,
 reconciliation, disposition, Git, project control, code, experiments, or
 another reviewer's files. Do not create or replace an external conversation,
-change any task or reviewer model, rank routes, interpret the result, contact
-the controller, or dispatch another role.
+change any task or reviewer model, rank routes, interpret the result, or
+dispatch another role. Contact only the controller through
+`$hmasd-task-router`; never contact another Exchange or the Code Manager.
 
 Stage evidence is isolated:
 
@@ -64,9 +65,9 @@ Pro submission. Submit the neutral handoff exactly once. If the matching
 question is already accepted, never resubmit it.
 
 Before every Pro browser operation, call
-`codex_app__navigate_to_codex_page` with this exchange session's registered
-task ID, then verify the exact registered reviewer URL and visible `Pro`. Never
-use ambient browser state or operate another reviewer page.
+`codex_app__navigate_to_codex_page` with this Exchange session's registered task
+ID, then verify the exact registered reviewer URL and visible `Pro`. Never use
+ambient browser state or operate another reviewer page.
 
 For Gemini, use only the registered Antigravity conversation and allowlisted
 manifest. If the direct registered command fails only because the allowlisted
@@ -86,26 +87,24 @@ reporting success.
 ## Heartbeat
 
 Immediately after the external question is visibly accepted, create one
-5-minute heartbeat targeted to this exchange session. Capture its ID and update
+5-minute heartbeat targeted to this Exchange session. Capture its ID and update
 that same heartbeat with a minimal prompt containing only the router Skill,
 role directory, this Skill, reviewer registry, assignment fields, and heartbeat
 ID. Each wake performs one bounded inspection and ends. Do not sleep, poll,
 resubmit, create a second heartbeat, or send waiting messages.
 
-Keep the heartbeat active through raw validation and manager callback. Delete
-and verify deletion only after the callback tool confirms the registered Review
-Manager task. If callback delivery fails, the next wake retries only the same
-`handoff_id`. If deletion alone fails, retry deletion without repeating review
-work.
+Keep the heartbeat active through raw validation and controller callback.
+Delete and verify deletion only after the callback tool confirms the registered
+controller task. If callback delivery fails, the next wake retries only the
+same `handoff_id`. If deletion alone fails, retry deletion without repeating
+review work.
 
-## Reply to Review Manager
+## Reply to Controller
 
 Take the destination only from
-`session-roles.json.roles.external_review_manager.thread_id`. If it is null or
-unassigned, keep the heartbeat active and do not contact the controller or a
-reviewer session. Otherwise resolve the manager live with `$hmasd-task-router`
-and copy its returned `hostId`, `threadId`, `model`, and `thinking` unchanged
-into the send.
+`session-roles.json.roles.controller.thread_id`. Resolve it live immediately
+before the send and copy its current `hostId`, `threadId`, `model`, and
+`thinking` unchanged into the delivery call.
 
 On success send exactly:
 
@@ -129,6 +128,6 @@ round=<id>
 reason=<direct blocker>
 ```
 
-Delivery succeeds only when the send tool returns the registered manager
+Delivery succeeds only when the send tool returns the registered controller
 `threadId`. A local final response is not delivery. Never send either payload
-to the controller.
+to another persistent session.

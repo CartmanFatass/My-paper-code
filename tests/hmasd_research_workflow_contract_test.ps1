@@ -59,7 +59,7 @@ foreach ($required in @(
     "Temporary subagents do not use that Skill",
     "docs/project/CURRENT_WORK.md",
     "The controller alone owns",
-    "There is no controller orchestration Skill",
+    "There is no general controller orchestration Skill",
     "Mutation Tiers",
     "ordinary files inside an assigned working scope",
     "Role and Context Firewall",
@@ -183,20 +183,16 @@ if (-not $experiment.Contains("inside the persistent HMASD experiment-monitor se
 }
 
 $review = Read-Text (Join-Path $skillsRoot "hmasd-review-round/SKILL.md")
-if (-not $review.Contains("role_skill=.agents/skills/hmasd-review-round/SKILL.md") -or
-    -not $review.Contains("Do not load") -or
-    -not $review.Contains("AGENTS.md") -or
-    -not $review.Contains("There is no review state machine") -or
-    -not $review.Contains("session-roles.json.roles.external_review_manager.thread_id") -or
-    -not $review.Contains("session-roles.json.roles.controller.thread_id") -or
+if (-not $review.Contains("This is a controller workflow") -or
+    -not $review.Contains("controller owns round files") -or
     -not $review.Contains("REVIEW_STAGE") -or
-    -not $review.Contains("controller is never a stage recipient") -or
-    -not $review.Contains("manager never creates or manages a heartbeat") -or
-    -not $review.Contains("REVIEW_GIT_PUSH_REQUIRED") -or
-    -not $review.Contains("Do not edit code or project-control files, stage, commit, push") -or
-    -not $review.Contains("git merge-base --is-ancestor <evidence_commit> My-paper-code/aggressive") -or
-    -not $review.Contains("convergent_exchange")) {
-    throw "External Review Manager role boundary is incomplete"
+    -not $review.Contains("gemini_divergent_exchange") -or
+    -not $review.Contains("open_divergent_exchange") -or
+    -not $review.Contains("convergent_exchange") -or
+    -not $review.Contains("There is no review state machine") -or
+    -not $review.Contains("no controller heartbeat") -or
+    -not $review.Contains("commit and push")) {
+    throw "Controller-owned external review boundary is incomplete"
 }
 
 $exchange = Read-Text (Join-Path $skillsRoot "hmasd-review-exchange/SKILL.md")
@@ -206,10 +202,10 @@ foreach ($required in @(
     'gemini_divergent_exchange',
     'open_divergent_exchange',
     'convergent_exchange',
-    'do not contact the controller',
+    'Contact only the controller',
     'create one 5-minute heartbeat',
     'exact text equality',
-    'Reply to Review Manager'
+    'Reply to Controller'
 )) {
     if (-not $normalizedExchange.Contains($required)) {
         throw "Reviewer Exchange role boundary is incomplete: $required"
@@ -228,6 +224,11 @@ foreach ($forbidden in @("CONTINUE_REVIEW", "RESUME_REVIEW", "REVIEW_BOUNDARY_RE
     if ($review.Contains($forbidden)) {
         throw "External Review Manager retains obsolete controller/state lifecycle: $forbidden"
     }
+}
+if ($review.Contains('external_review_manager') -or
+    $exchange.Contains('external_review_manager') -or
+    $null -ne $sessionRoles.roles.PSObject.Properties['external_review_manager']) {
+    throw 'Obsolete External Review Manager topology remains'
 }
 
 foreach ($skill in $expectedSkills) {

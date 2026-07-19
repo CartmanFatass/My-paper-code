@@ -22,9 +22,9 @@ Skills with `TASK_BLOCKED` before doing role work.
 
 Read `references/session-roles.json` before any persistent-session send or
 callback acceptance. It is the only communication registry for the controller,
-Code Implementation Manager, External Review Manager, three reviewer-exchange
-sessions, and Experiment Monitor session IDs and their one-to-one role
-bindings. Other role registries must not duplicate Codex session IDs.
+Code Implementation Manager, three reviewer-exchange sessions, and Experiment
+Monitor session IDs and their one-to-one role bindings. Other role registries
+must not duplicate Codex session IDs.
 
 The active controller alone maintains this directory. Change an entry only for
 an explicit controller handoff or explicit persistent-session replacement.
@@ -62,7 +62,7 @@ those two sources allow. Conversation history, nearby files, registries, and
 earlier assignments are not implicit inputs. A missing or conflicting field
 returns `TASK_BLOCKED task_id=<id> reason=<exact reason>` through this Skill.
 
-Role-specific lifecycle messages such as `START_REVIEW` or
+Role-specific lifecycle messages such as `REVIEW_STAGE` or
 `MONITOR_ASSIGNMENT` may use their role Skill's compact schema instead of the
 generic envelope. Every compact message must still contain exactly one
 `role_skill=<path>` field and grants no implied context.
@@ -135,23 +135,19 @@ heartbeat.
 Enforce this exact communication graph:
 
 ```text
-controller <-> external_review_manager
-external_review_manager <-> gemini_divergent_exchange
-external_review_manager <-> open_divergent_exchange
-external_review_manager <-> convergent_exchange
+controller <-> gemini_divergent_exchange
+controller <-> open_divergent_exchange
+controller <-> convergent_exchange
 ```
 
-The controller sends `START_REVIEW` only to `external_review_manager` and never
-sends a reviewer-stage assignment. The manager sends `REVIEW_STAGE` only to the
-single exchange whose registered `reviewer_role` matches that assignment. A
-reviewer exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` only
-to the manager. The manager alone returns `REVIEW_GIT_PUSH_REQUIRED`,
-`REVIEW_COMPLETE`, or `REVIEW_BLOCKED` to the controller. Reject controller-to-reviewer,
-reviewer-to-controller, reviewer-to-reviewer, and reviewer-to-monitor sends.
+The controller sends `REVIEW_STAGE` only to the single exchange whose
+registered `reviewer_role` matches that assignment. A reviewer exchange returns
+`REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` only to the controller. Reject
+reviewer-to-reviewer, reviewer-to-monitor, and exchange-to-Code-Manager sends.
 
-For a manager-to-exchange send, apply the same live-resolution and unchanged
+For a controller-to-exchange send, apply the same live-resolution and unchanged
 `hostId`/`threadId`/`model`/`thinking` rules as the Controller Send Contract.
-The manager takes the recipient ID only from the role directory and accepts
+The controller takes the recipient ID only from the role directory and accepts
 delivery only when the tool returns that same exchange `threadId`.
 
 ## Code Implementation Topology

@@ -1,13 +1,11 @@
 # HMASD External Review Workflow
 
-External review is a mandatory scientific boundary. One persistent Codex
-`External Review Manager` owns mechanical sequencing, Git-boundary requests,
-reconciliation, and disposition. The controller alone owns commit and push.
-Three additional persistent exchange sessions
-are each bound to exactly one reviewer: Gemini divergent, Open-Pro divergent,
-or Convergent Pro. Each exchange alone owns its reviewer transport, raw capture,
-and heartbeat, so neither the controller nor manager carries browser or CLI
-state.
+External review is a mandatory scientific boundary. The active controller owns
+round sequencing, factual reconciliation, disposition, and every Git-visible
+boundary. Three persistent Exchange sessions are each bound to exactly one
+reviewer: Gemini divergent, Open-Pro divergent, or Convergent Pro. Each Exchange
+alone owns its reviewer transport, raw capture, validation, and heartbeat, so
+the controller carries no browser or Antigravity state.
 
 ## Scientific sequence
 
@@ -15,67 +13,50 @@ state.
    evidence and allowlisted local sources.
 2. GPT-5.6 Pro performs an independent blind divergent review from the same
    Git-visible evidence.
-3. The Review Manager writes a factual reconciliation without selecting a
-   route.
+3. The controller writes a factual reconciliation without selecting a route.
 4. A separate GPT-5.6 Pro conversation performs convergent synthesis and
    chooses the next evidence source or stop.
-5. The Review Manager writes `50_DISPOSITION.md` from that convergent decision.
+5. The controller writes `50_DISPOSITION.md` from that convergent decision and
+   updates the project boundary once.
 
 The controller may not replace a missing external decision with its own
 scientific choice. External review does not authorize code execution or
 training.
 
-## Controller interface
+## Direct Exchange interface
 
-The controller prepares and pushes one immutable round boundary, then sends one
-compact assignment through the communication Skill:
-
-```text
-START_REVIEW role_skill=.agents/skills/hmasd-review-round/SKILL.md round=<round-id> evidence_commit=<40-char-sha> round_path=docs/external-review/rounds/<round-id>
-```
-
-The commit pins reviewer-visible scientific evidence. The manager writes later
-active-round question, reconciliation, and disposition files, while each raw
-has exactly one writer: its registered reviewer exchange. When those files need
-a reviewer-visible boundary, the manager sends `REVIEW_GIT_PUSH_REQUIRED` with
-the exact paths; the controller alone inspects, commits, pushes, and resends
-`START_REVIEW` with the new commit. This is a stateless Git handoff, not a review
-state machine. The controller never contacts a reviewer exchange directly. A
-raw artifact becomes immutable only after its
-exchange verifies natural response completion, all question-required fields,
-and exact captured-text equality after rereading the file; nonempty alone is not
-completion. An externally accepted stage is never resubmitted.
-
-The manager may return this mechanical boundary request before completion:
+The controller prepares and pushes each immutable reviewer-visible boundary,
+then resolves and sends one compact stage assignment directly to the registered
+Exchange session:
 
 ```text
-REVIEW_GIT_PUSH_REQUIRED role=external_review_manager handoff_id=<stable-id> round=<round-id> paths=<exact-paths> next=<next-stage>
+REVIEW_STAGE
+role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+reviewer_role=<GEMINI_DIVERGENT|OPEN_DIVERGENT|CONVERGENT>
+round=<round-id>
+stage_commit=<40-character pushed SHA>
+round_path=docs/external-review/rounds/<round-id>
+question=<round-relative question path>
+raw=<round-relative raw path>
 ```
 
-It ultimately returns exactly one terminal message:
+Gemini and Open Pro may run concurrently. Their Exchange sessions return
+`REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` directly to the controller
+through the task router. After both divergent raws are verified, the controller
+writes and pushes reconciliation plus the convergent question before dispatching
+the convergent Exchange.
 
-```text
-REVIEW_COMPLETE role=external_review_manager handoff_id=<stable-id> round=<round-id> disposition=<path> commit=<sha>
-```
+Each raw has exactly one writer: its registered Exchange. A raw becomes
+immutable only after that Exchange verifies natural response completion, every
+question-required field, and exact captured-text equality after rereading the
+file; nonempty alone is not completion. An externally accepted stage is never
+resubmitted.
 
-or:
-
-```text
-REVIEW_BLOCKED role=external_review_manager handoff_id=<stable-id> round=<round-id> reason=<exact blocker>
-```
-
-The controller does not operate reviewer transports or intermediate review
-progress. Its only scientific input is the completed disposition. Manager and
-exchange lifecycle mechanics remain isolated in their respective Skills.
-
-The manager has no heartbeat. It wakes only for controller or reviewer-exchange
-messages, performs one bounded transition, sends the next message, and ends.
-Each reviewer exchange independently owns a 5-minute heartbeat only while its
-external response or callback is pending.
-
-A terminal callback exists only after the manager invokes the common
-communication Skill and receives a tool result identifying the controller task.
-Text written only in the manager task is not delivery.
+The workflow uses no intermediate persistent session, Git handoff callback, or
+review state file. The controller has no review heartbeat. Each Exchange
+independently owns one 5-minute heartbeat only while its external response or
+direct callback is pending, and deletes it after callback delivery is
+confirmed.
 
 ## Round files
 
@@ -96,9 +77,9 @@ rounds/YYYYMMDD_topic/
   50_DISPOSITION.md
 ```
 
-Raw responses are byte-preserved and precede downstream use. Detailed manager
-behavior lives only in `.agents/skills/hmasd-review-round/SKILL.md`; registered
-exchange behavior lives only in
-`.agents/skills/hmasd-review-exchange/SKILL.md`. Codex task IDs and role bindings
-live only in the router's `session-roles.json`; external reviewer conversations
-and URLs live only in `REVIEWER_CONVERSATIONS.json`.
+Raw responses are byte-preserved and precede downstream use. Controller round
+behavior lives in `.agents/skills/hmasd-review-round/SKILL.md`; registered
+Exchange behavior lives in `.agents/skills/hmasd-review-exchange/SKILL.md`.
+Codex task IDs and role bindings live only in the router's
+`session-roles.json`; external reviewer conversations and URLs live only in
+`REVIEWER_CONVERSATIONS.json`.

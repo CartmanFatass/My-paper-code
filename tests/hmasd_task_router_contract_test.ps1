@@ -9,7 +9,6 @@ $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_ta
 $rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
 $sessionRoleSkills = @(
     (Join-Path $repo '.agents/skills/hmasd-code-manager/SKILL.md'),
-    (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md')
 )
@@ -42,9 +41,11 @@ foreach ($required in @(
     'take the recipient `thread_id` only from that role entry',
     'controller records no waiting state',
     'External Review Topology',
-    'controller <-> external_review_manager',
-    'controller-to-reviewer',
-    'manager-to-exchange send',
+    'controller <-> gemini_divergent_exchange',
+    'controller <-> open_divergent_exchange',
+    'controller <-> convergent_exchange',
+    'controller-to-exchange send',
+    'A reviewer exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` only to the controller',
     'Code Implementation Topology',
     'controller <-> code_implementation_manager',
     'START_CODE_WORK',
@@ -63,14 +64,11 @@ foreach ($required in @(
 }
 
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
-$managerId = $roles.roles.external_review_manager.thread_id
-$managerStatus = $roles.roles.external_review_manager.registration_status
 $codeManagerId = $roles.roles.code_implementation_manager.thread_id
 $codeManagerStatus = $roles.roles.code_implementation_manager.registration_status
-if ($roles.schema_version -ne 3 -or
+if ($roles.schema_version -ne 4 -or
     $roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
     $roles.roles.code_implementation_manager.role_skill -ne '.agents/skills/hmasd-code-manager/SKILL.md' -or
-    $roles.roles.external_review_manager.role_skill -ne '.agents/skills/hmasd-review-round/SKILL.md' -or
     $roles.roles.gemini_divergent_exchange.thread_id -ne '019f76cc-580b-7c40-8c92-97bfffaf51b1' -or
     $roles.roles.gemini_divergent_exchange.reviewer_role -ne 'GEMINI_DIVERGENT' -or
     $roles.roles.open_divergent_exchange.thread_id -ne '019f716c-3c8a-7891-8c89-c94dc94fab4c' -or
@@ -90,14 +88,12 @@ if (($null -eq $codeManagerId -and $codeManagerStatus -ne 'UNASSIGNED') -or
     ($null -ne $codeManagerId -and $codeManagerStatus -ne 'ACTIVE')) {
     throw 'Code Implementation Manager registration state is inconsistent'
 }
-if (($null -eq $managerId -and $managerStatus -ne 'UNASSIGNED') -or
-    ($null -ne $managerId -and $managerStatus -ne 'ACTIVE')) {
-    throw 'External Review Manager registration state is inconsistent'
+if ($null -ne $roles.roles.PSObject.Properties['external_review_manager']) {
+    throw 'External Review Manager must not remain registered'
 }
 foreach ($entry in @(
     $roles.roles.controller,
     $roles.roles.code_implementation_manager,
-    $roles.roles.external_review_manager,
     $roles.roles.gemini_divergent_exchange,
     $roles.roles.open_divergent_exchange,
     $roles.roles.convergent_exchange,
@@ -112,7 +108,6 @@ foreach ($entry in @(
 $assignedIds = @(
     $roles.roles.controller.thread_id,
     $codeManagerId,
-    $managerId,
     $roles.roles.gemini_divergent_exchange.thread_id,
     $roles.roles.open_divergent_exchange.thread_id,
     $roles.roles.convergent_exchange.thread_id,
@@ -125,7 +120,8 @@ foreach ($forbidden in @(
     'ExpectedModel',
     'ExpectedThinking',
     'frozen route',
-    'resolve both tasks')) {
+    'resolve both tasks',
+    'external_review_manager')) {
     if ($normalizedSkillText.Contains($forbidden)) {
         throw "Communication Skill retains static or sender-owned routing: $forbidden"
     }

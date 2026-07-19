@@ -3,102 +3,72 @@ param()
 
 $ErrorActionPreference = "Stop"
 
-$repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$registryPath = Join-Path $repo "docs/external-review/REVIEWER_CONVERSATIONS.json"
-$rolesPath = Join-Path $repo ".agents/skills/hmasd-task-router/references/session-roles.json"
-$skillPath = Join-Path $repo ".agents/skills/hmasd-review-round/SKILL.md"
-$exchangeSkillPath = Join-Path $repo ".agents/skills/hmasd-review-exchange/SKILL.md"
-$heartbeatRenderer = Join-Path $repo ".agents/skills/hmasd-review-exchange/scripts/render_review_heartbeat.ps1"
-$readmePath = Join-Path $repo "docs/external-review/README.md"
+$repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$registryPath = Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json'
+$rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
+$skillPath = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
+$exchangeSkillPath = Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'
+$heartbeatRenderer = Join-Path $repo '.agents/skills/hmasd-review-exchange/scripts/render_review_heartbeat.ps1'
+$readmePath = Join-Path $repo 'docs/external-review/README.md'
 
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
-$manager = $registry.review_manager
-if ($registry.schema_version -ne 20 -or
-    $manager.kind -ne "persistent_full_round_manager" -or
-    $manager.session_role_registry -ne ".agents/skills/hmasd-task-router/references/session-roles.json" -or
-    ($manager.controller_messages -join '|') -ne "START_REVIEW" -or
-    ($manager.manager_messages -join '|') -ne "REVIEW_GIT_PUSH_REQUIRED|REVIEW_COMPLETE|REVIEW_BLOCKED" -or
-    $manager.exchange_messages.manager_to_exchange -ne "REVIEW_STAGE" -or
-    ($manager.exchange_messages.exchange_to_manager -join '|') -ne "REVIEW_STAGE_COMPLETE|REVIEW_STAGE_BLOCKED" -or
-    $manager.git_boundary.manager_role -ne "report_exact_active_round_paths_only" -or
-    $manager.git_boundary.controller_role -ne "inspect_commit_push_then_restart_same_manager" -or
-    $registry.exchange_contract.role_skill -ne ".agents/skills/hmasd-review-exchange/SKILL.md" -or
+$roundController = $registry.round_controller
+if ($registry.schema_version -ne 21 -or
+    $roundController.kind -ne 'active_controller_direct_exchange' -or
+    $roundController.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or
+    $roundController.exchange_messages.controller_to_exchange -ne 'REVIEW_STAGE' -or
+    ($roundController.exchange_messages.exchange_to_controller -join '|') -ne 'REVIEW_STAGE_COMPLETE|REVIEW_STAGE_BLOCKED' -or
+    $roundController.git_boundary.controller_role -ne 'inspect_commit_push_before_each_downstream_dispatch' -or
+    $registry.exchange_contract.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md' -or
     -not $registry.exchange_contract.one_reviewer_per_session -or
-    $registry.exchange_contract.controller_contact -ne "forbidden" -or
-    $registry.exchange_contract.heartbeat.owner -ne "registered_reviewer_exchange_session" -or
-    $registry.exchange_contract.heartbeat.target -ne "self" -or
+    $registry.exchange_contract.controller_contact -ne 'required_terminal_callback' -or
+    $registry.exchange_contract.heartbeat.owner -ne 'registered_reviewer_exchange_session' -or
+    $registry.exchange_contract.heartbeat.target -ne 'self' -or
     $registry.exchange_contract.heartbeat.interval_minutes -ne 5 -or
-    $registry.exchange_contract.browser.logical_owner -ne "registered_pro_exchange" -or
-    $registry.reviewers.gemini_divergent.session_role -ne "gemini_divergent_exchange" -or
-    $registry.reviewers.open_divergent.session_role -ne "open_divergent_exchange" -or
-    $registry.reviewers.convergent.session_role -ne "convergent_exchange" -or
-    $registry.reviewers.gemini_divergent.transport -ne "reviewer_exchange_antigravity_cli" -or
-    $registry.reviewers.open_divergent.transport -ne "reviewer_exchange_in_app_browser" -or
-    $registry.reviewers.convergent.transport -ne "reviewer_exchange_in_app_browser") {
-    throw "External Review Manager registry is inconsistent"
+    $registry.exchange_contract.browser.logical_owner -ne 'registered_pro_exchange' -or
+    $registry.reviewers.gemini_divergent.session_role -ne 'gemini_divergent_exchange' -or
+    $registry.reviewers.open_divergent.session_role -ne 'open_divergent_exchange' -or
+    $registry.reviewers.convergent.session_role -ne 'convergent_exchange') {
+    throw 'Direct external-review registry is inconsistent'
 }
-foreach ($forbidden in @('thread_id', 'role_skill', 'routing_skill', 'controller_return_route', 'route_resolver', 'route_policy', 'model', 'thinking', 'host_id', 'browser', 'heartbeat')) {
-    if ($null -ne $manager.PSObject.Properties[$forbidden]) {
-        throw "External Review Manager registry duplicates router-owned session data: $forbidden"
-    }
+if ($null -ne $registry.PSObject.Properties['review_manager'] -or
+    $null -ne $roles.roles.PSObject.Properties['external_review_manager']) {
+    throw 'External Review Manager topology remains registered'
 }
-$managerId = $roles.roles.external_review_manager.thread_id
-$managerStatus = $roles.roles.external_review_manager.registration_status
-if ($roles.roles.external_review_manager.role_skill -ne '.agents/skills/hmasd-review-round/SKILL.md' -or
-    $roles.roles.gemini_divergent_exchange.thread_id -ne '019f76cc-580b-7c40-8c92-97bfffaf51b1' -or
+if ($roles.roles.gemini_divergent_exchange.thread_id -ne '019f76cc-580b-7c40-8c92-97bfffaf51b1' -or
     $roles.roles.open_divergent_exchange.thread_id -ne '019f716c-3c8a-7891-8c89-c94dc94fab4c' -or
     $roles.roles.convergent_exchange.thread_id -ne '019f716c-676f-7673-9782-f37b72f200d2' -or
     $roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8') {
-    throw 'Review role is not bound by the common session-role directory'
-}
-if (($null -eq $managerId -and $managerStatus -ne 'UNASSIGNED') -or
-    ($null -ne $managerId -and $managerStatus -ne 'ACTIVE')) {
-    throw 'Review Manager registration state is inconsistent'
+    throw 'Direct review tasks are not bound by the common session-role directory'
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
 $normalizedSkillText = $skillText -replace '\s+', ' '
 foreach ($required in @(
-    "role_skill=.agents/skills/hmasd-review-round/SKILL.md",
-    "Do not load",
-    "conversation history",
-    "session-roles.json.roles.external_review_manager.thread_id",
-    "session-roles.json.roles.controller.thread_id",
-    'returned `hostId`',
-    "ID or model setting from the assignment",
-    "REVIEW_GIT_PUSH_REQUIRED",
-    "Do not edit code or project-control files, stage, commit, push",
-    "git merge-base --is-ancestor <evidence_commit> My-paper-code/aggressive",
-    'Do not run `git push`, `git fetch`, `git ls-remote`',
-    "There is no review state machine",
-    "REVIEW_STAGE",
-    "controller is never a stage recipient",
-    "gemini_divergent_exchange",
-    "open_divergent_exchange",
-    "convergent_exchange",
-    "Nonempty is not",
-    "manager never creates or manages a heartbeat",
-    "handoff_id=<round>:complete:<pushed-disposition-commit>",
-    "REVIEW_DELIVERY_UNCONFIRMED",
-    'same `handoff_id`'
+    'This is a controller workflow, not a persistent-session role',
+    'controller owns round files',
+    'Direct Exchange Procedure',
+    'REVIEW_STAGE',
+    'gemini_divergent_exchange',
+    'open_divergent_exchange',
+    'convergent_exchange',
+    'copy its live `hostId`, `threadId`, `model`, and `thinking` unchanged',
+    'There is no review state machine and no controller heartbeat',
+    '50_DISPOSITION.md'
 )) {
     if (-not $normalizedSkillText.Contains($required)) {
-        throw "Review Manager contract is missing: $required"
+        throw "Controller review contract is missing: $required"
     }
 }
 foreach ($forbidden in @(
-    "CONTINUE_REVIEW",
-    "RESUME_REVIEW",
-    "REVIEW_BOUNDARY_READY",
-    "05_REVIEW_STATE.json",
-    "pause and verify the heartbeat",
-    "codex_app__navigate_to_codex_page",
-    "Antigravity interaction",
-    "create one 5-minute heartbeat"
+    'REVIEW_GIT_PUSH_REQUIRED',
+    'START_REVIEW',
+    'external_review_manager',
+    'REVIEW_DELIVERY_UNCONFIRMED'
 )) {
     if ($skillText.Contains($forbidden)) {
-        throw "Review Manager retains obsolete controller/state lifecycle: $forbidden"
+        throw "Controller review contract retains manager lifecycle: $forbidden"
     }
 }
 
@@ -109,7 +79,7 @@ foreach ($required in @(
     "gemini_divergent_exchange",
     "open_divergent_exchange",
     "convergent_exchange",
-    "do not contact the controller",
+    "Contact only the controller",
     "codex_app__navigate_to_codex_page",
     "ambient browser state",
     "retry that exact command once",
@@ -118,30 +88,36 @@ foreach ($required in @(
     "Nonempty is not",
     "exact text equality",
     "create one 5-minute heartbeat",
-    "Reply to Review Manager",
-    "session-roles.json.roles.external_review_manager.thread_id",
-    'returned `hostId`'
+    "Reply to Controller",
+    "session-roles.json.roles.controller.thread_id",
+    "REVIEW_STAGE_COMPLETE",
+    "REVIEW_STAGE_BLOCKED"
 )) {
     if (-not $normalizedExchangeText.Contains($required)) {
         throw "Reviewer Exchange contract is missing: $required"
     }
 }
-foreach ($forbidden in @("REVIEW_COMPLETE", "REVIEW_BLOCKED", "session-roles.json.roles.controller.thread_id")) {
+foreach ($forbidden in @('external_review_manager', 'REVIEW_GIT_PUSH_REQUIRED', 'REVIEW_COMPLETE')) {
     if ($exchangeText.Contains($forbidden)) {
-        throw "Reviewer Exchange bypasses the manager: $forbidden"
+        throw "Reviewer Exchange retains manager lifecycle: $forbidden"
     }
 }
 
 $readme = Get-Content -LiteralPath $readmePath -Raw
 $normalizedReadme = $readme -replace '\s+', ' '
-foreach ($required in @("nonempty alone is not completion", "exact captured-text equality")) {
+foreach ($required in @(
+    'controller owns round sequencing',
+    'return `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` directly to the controller',
+    'nonempty alone is not completion',
+    'The workflow uses no intermediate persistent session'
+)) {
     if (-not $normalizedReadme.Contains($required)) {
-        throw "External-review overview is missing raw acceptance: $required"
+        throw "External-review overview is missing: $required"
     }
 }
-foreach ($forbidden in @("CONTINUE_REVIEW", "RESUME_REVIEW", "REVIEW_BOUNDARY_READY", "05_REVIEW_STATE.json")) {
+foreach ($forbidden in @('REVIEW_GIT_PUSH_REQUIRED', 'START_REVIEW', 'role=external_review_manager')) {
     if ($readme.Contains($forbidden)) {
-        throw "External-review overview exposes obsolete manager mechanics: $forbidden"
+        throw "External-review overview exposes manager mechanics: $forbidden"
     }
 }
 
@@ -163,12 +139,14 @@ try {
         "reviewer_role=OPEN_DIVERGENT",
         "20_PRO_OPEN_QUESTION.md",
         "21_PRO_OPEN_RAW.md",
-        "heartbeat_id=review-heartbeat-test")) {
+        "heartbeat_id=review-heartbeat-test",
+        "controller callback")) {
         if (-not $prompt.Contains($required)) {
             throw "Rendered heartbeat is missing: $required"
         }
     }
     foreach ($forbidden in @(
+        "manager callback",
         "05_REVIEW_STATE.json",
         "CURRENT_WORK.md",
         "model=",
@@ -185,4 +163,4 @@ try {
     }
 }
 
-Write-Output "REVIEW_MANAGER_CONTRACT_OK"
+Write-Output "REVIEW_DIRECT_EXCHANGE_CONTRACT_OK"

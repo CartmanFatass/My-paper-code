@@ -100,7 +100,7 @@ if (-not $current.Contains('Code Implementation Manager') -or
 }
 
 $codeManagerRole = $roles.roles.code_implementation_manager
-if ($roles.schema_version -ne 3 -or
+if ($roles.schema_version -ne 4 -or
     [string]::IsNullOrWhiteSpace($codeManagerRole.thread_id) -or
     $codeManagerRole.registration_status -ne 'ACTIVE' -or
     $codeManagerRole.role_skill -ne '.agents/skills/hmasd-code-manager/SKILL.md') {

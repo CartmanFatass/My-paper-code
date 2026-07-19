@@ -41,8 +41,9 @@ Manager owns concrete executable architecture, `IMPLEMENTATION_PLAN.md`, code
 task decomposition, implementation integration, and code review inside one
 controller-authorized boundary.
 Unresolved hypothesis generation, portfolio weighting, or next-evidence choice
-is sent to the External Review Manager; the controller does not silently replace
-a missing convergent disposition.
+is sent through one tracked external-review round. The controller directly
+coordinates the three registered Exchange sessions but does not silently
+replace a missing convergent disposition.
 
 During ordinary work the controller does not execute a role procedure. It may
 inspect or repair a role Skill only when the user explicitly requests workflow
@@ -55,16 +56,16 @@ Choose exactly one execution surface and one role:
 - complete code implementation or repair workflow -> persistent session with
   `$hmasd-task-router` and `$hmasd-code-manager`; that manager alone creates
   temporary `$hmasd-implementer` and `$hmasd-code-reviewer` subagents;
-- complete external review -> persistent session with `$hmasd-task-router` and
-  `$hmasd-review-round`; that manager alone dispatches the three registered,
-  one-reviewer-per-session exchanges using `$hmasd-review-exchange`;
+- complete external review -> controller uses `$hmasd-review-round` and
+  `$hmasd-task-router` to dispatch the three registered, one-reviewer-per-session
+  exchanges; each exchange uses `$hmasd-review-exchange`;
 - authorized run monitoring -> persistent session with `$hmasd-task-router`
   and `$hmasd-experiment`.
 
-There is no controller orchestration Skill. The controller sends code work only
-to the Code Implementation Manager, external review only to the Review Manager,
-and monitoring only to the Experiment Monitor. A role completion never starts
-another role automatically.
+There is no general controller orchestration Skill. The controller sends code
+work only to the Code Implementation Manager, external-review stages directly
+to their registered Exchange sessions, and monitoring only to the Experiment
+Monitor. A role completion never starts another role automatically.
 
 Every assignment states the objective, granted authority, required inputs,
 working scope, protected changes, forbidden scope, completion condition, and
@@ -105,10 +106,8 @@ A role Skill is both an authority grant and a context denylist:
 - tools and mutations not granted by the role Skill are forbidden;
 - a role cannot authorize another role, launch a successor, edit project
   control, change a task model, or expand its own assignment; the sole routing
-  exceptions are that the Review Manager may dispatch the fixed reviewer stages
-  defined by `$hmasd-review-round` to their pre-registered exchange sessions,
-  and the Code Implementation Manager may create bounded native implementer and
-  reviewer subagents defined by `$hmasd-code-manager`;
+  exception is that the Code Implementation Manager may create bounded native
+  implementer and reviewer subagents defined by `$hmasd-code-manager`;
 - persistent-session messages always return through `$hmasd-task-router` with
   delivery proof;
 - subagents return only through the native subagent channel and never contact a
@@ -118,13 +117,12 @@ A role Skill is both an authority grant and a context denylist:
 Project files never select or change task models. Existing tasks retain their
 user-selected settings; communication reads the recipient's live delivery
 metadata immediately before each send and copies it unchanged into the send.
-The controller communicates only with the Review Manager for external review;
-it never sends to or receives from a reviewer exchange directly.
+The controller communicates directly with each registered Exchange session for
+external review; Exchange sessions never communicate with one another.
 The controller communicates only with the Code Implementation Manager for code;
 it never sends to or receives from that manager's subagents directly.
-The Review Manager never stages, commits, or pushes. When a reviewer-visible
-boundary is required, it returns the exact active-round paths; the controller
-alone commits and pushes them, then resumes the same manager with the new commit.
+The controller alone writes reconciliation and disposition files and creates
+the Git-visible boundary required before each downstream reviewer stage.
 
 ## Agile Research and Active-Line Code
 

@@ -1,42 +1,32 @@
 {
-  "schema_version": 20,
+  "schema_version": 21,
   "updated": "2026-07-20",
-  "review_manager": {
-    "kind": "persistent_full_round_manager",
-    "title": "External Review Manager",
+  "round_controller": {
+    "kind": "active_controller_direct_exchange",
     "session_role_registry": ".agents/skills/hmasd-task-router/references/session-roles.json",
-    "controller_messages": [
-      "START_REVIEW"
-    ],
-    "manager_messages": [
-      "REVIEW_GIT_PUSH_REQUIRED",
-      "REVIEW_COMPLETE",
-      "REVIEW_BLOCKED"
-    ],
     "exchange_messages": {
-      "manager_to_exchange": "REVIEW_STAGE",
-      "exchange_to_manager": [
+      "controller_to_exchange": "REVIEW_STAGE",
+      "exchange_to_controller": [
         "REVIEW_STAGE_COMPLETE",
         "REVIEW_STAGE_BLOCKED"
       ]
     },
     "owns": [
-      "reviewer_stage_dispatch",
+      "direct_reviewer_stage_dispatch",
       "active_round_questions",
       "raw_acceptance",
       "evidence_reconciliation",
       "final_disposition",
-      "exact_git_boundary_request"
+      "git_visible_round_boundaries"
     ],
     "git_boundary": {
-      "manager_role": "report_exact_active_round_paths_only",
-      "controller_role": "inspect_commit_push_then_restart_same_manager"
+      "controller_role": "inspect_commit_push_before_each_downstream_dispatch"
     }
   },
   "exchange_contract": {
     "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md",
     "one_reviewer_per_session": true,
-    "controller_contact": "forbidden",
+    "controller_contact": "required_terminal_callback",
     "browser": {
       "surface": "codex_in_app_browser",
       "ui_scope": "application_shared",
@@ -49,8 +39,8 @@
       "owner": "registered_reviewer_exchange_session",
       "target": "self",
       "interval_minutes": 5,
-      "active_condition": "one accepted external response or manager callback is pending",
-      "terminal_order": "validate_raw_then_confirm_manager_callback_then_delete",
+      "active_condition": "one accepted external response or controller callback is pending",
+      "terminal_order": "validate_raw_then_confirm_controller_callback_then_delete",
       "duplicate_policy": "same_handoff_id_is_idempotent"
     }
   },

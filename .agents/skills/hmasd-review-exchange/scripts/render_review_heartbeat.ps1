@@ -55,7 +55,7 @@ question=$question
 raw=$raw
 
 Perform one bounded inspection of this exchange session's registered external
-response and end. Never load controller or manager context, operate another
-reviewer, or resubmit an accepted prompt. Follow the exchange Skill for raw
-validation, manager callback, and heartbeat deletion.
+response and end. Never load controller context, operate another reviewer, or
+resubmit an accepted prompt. Follow the exchange Skill for raw validation,
+controller callback, and heartbeat deletion.
 "@
