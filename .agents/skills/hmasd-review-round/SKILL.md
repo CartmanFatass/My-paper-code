@@ -123,6 +123,13 @@ not use Chrome, Computer Use, an external browser, a plugin, MCP, shell sleep,
 heartbeat, automation, an alternate conversation, or a response-control
 button.
 
+An empty current-session tab list is normal and is never a reason to ask the
+user to open a registered Pro URL. The Exchange must first claim an existing
+in-app-browser handoff tab whose URL exactly matches the registered role. If no
+such tab exists, it creates a fresh in-app-browser tab and navigates directly
+to that exact URL. After dispatch, this recovery is read-only: it never submits
+the question again or changes the route, deadline, conversation, or model.
+
 The Exchange performs bounded same-page reads until natural completion or the
 deadline. It writes the completed response exactly to the registered raw,
 compares file content byte-for-byte, transitions the stage, and sends one

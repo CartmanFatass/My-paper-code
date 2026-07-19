@@ -36,7 +36,7 @@ if ($registry.schema_version -ne 12 -or
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
+foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "empty current-session tab list is normal", "creates a fresh in-app-browser tab", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }
