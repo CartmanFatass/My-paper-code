@@ -1,8 +1,8 @@
 {
   "schema_version": 5,
   "round_id": "20260719_iteration5_postmortem_portfolio",
-  "round_status": "ACTIVE",
-  "updated_at": "2026-07-19T17:28:16.4109423+08:00",
+  "round_status": "CLOSED",
+  "updated_at": "2026-07-19T18:03:05.9847580+08:00",
   "stages": {
     "gemini_divergent": {
       "state": "COMPLETE",
@@ -32,16 +32,16 @@
       "blocker": null
     },
     "convergent_pro": {
-      "state": "NOT_STARTED",
-      "dispatch_count": 0,
-      "route_token": null,
-      "dispatched_at": null,
-      "deadline_at": null,
+      "state": "COMPLETE",
+      "dispatch_count": 1,
+      "route_token": "20260719_iteration5_postmortem_portfolio:CONVERGENT:5863eea9932749f5865f44096c680de5f3c3e1fb:docs/external-review/rounds/20260719_iteration5_postmortem_portfolio/41_PRO_CONVERGENT_RAW.md",
+      "dispatched_at": "2026-07-19T17:33:28.6598676+08:00",
+      "deadline_at": "2026-07-19T19:32:13.8977576+08:00",
       "artifact_path": "41_PRO_CONVERGENT_RAW.md",
       "blocker": null
     },
     "controller_disposition": {
-      "state": "NOT_STARTED",
+      "state": "COMPLETE",
       "dispatch_count": 0,
       "route_token": null,
       "dispatched_at": null,

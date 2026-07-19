@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260719-iteration5-spatial-process-semantics | completed -- valid `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS` | iteration-5 spatial process-semantics comparison | `logs/iteration5_spatial_process_semantics_20260719_130334/result/iteration5_process_semantics.json`; source `55f7093` | tracked Pro-led portfolio review; no automatic successor | M0 pass; C3 deterministic final `P/S/U=1.0000/0.5269/0.7634`, stochastic `U=0.7245`, gain CI `[0.0484,0.0705,0.0931]`; C1 selected-pair action-TV and forced-effect UCBs `0.0123/0.0335 < 1/12` | Retire this exact spatial carrier without rescue; quarantine C1 utility gains from a semantics claim; close the five-iteration autonomous boundary |
+| EXP-20260719-iteration5-spatial-process-semantics | completed -- valid `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS` | iteration-5 spatial process-semantics comparison | `logs/iteration5_spatial_process_semantics_20260719_130334/result/iteration5_process_semantics.json`; source `55f7093`; completed postmortem round | explicit authority for the separately registered clean-carrier access qualification | M0 pass; C3 deterministic final `P/S/U=1.0000/0.5269/0.7634`, stochastic `U=0.7245`, gain CI `[0.0484,0.0705,0.0931]`; C1 selected-pair action-TV and forced-effect UCBs `0.0123/0.0335 < 1/12` | Retire this exact spatial carrier and C1 objective without rescue; retain A/D/B/C; adopt one clean-process-channel direct-access qualification as the only recommended next evidence source, not yet authorized |
 | EXP-20260718-stage-c-semantics-provenance-audit | completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE` | iteration-4 frozen-checkpoint provenance audit | `logs/stage_c_semantics_provenance_audit_20260718_190948/result/iteration4_provenance_audit.json`; implementation `05b40eb` | iteration-5 portfolio design, not checkpoint rescue | M0 pass; F1 pair 1--2 action-TV CI `[0.046582,0.051259]`, forced-effect CI `[0.027817,0.069094]`, both UCB `<1/12`; 128/10,240 paired forced/natural rows per arm | Strengthen C3 and the C1 missing-semantic-pressure diagnosis; weaken C2; keep credit closed; no reanalysis/threshold/support rescue |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
@@ -153,6 +153,14 @@ explicitly approves the exception.
   contract. Do not claim useful C1 process semantics, rescue any registered
   setting, or automatically select a successor. The standing five-iteration
   autonomous grant is exhausted and control returns to the user.
+- Accepted external disposition: the completed round under
+  `docs/external-review/rounds/20260719_iteration5_postmortem_portfolio/`
+  retains A (access substrate), D (direct recurrent null), B (factorized
+  discrete executor), and C (parked simplex command) at decreasing evidential
+  weight. Its only recommended next evidence is a one-time, newly registered
+  clean-process-channel dynamic-roster direct-access qualification with
+  constructive, random, and unchanged direct recurrent arms. This is not an
+  Iteration-5 rescue and does not authorize implementation, training, or B/C.
 
 ## EXP-20260718-stage-c-semantics-provenance-audit — Frozen Evaluation Repair
 

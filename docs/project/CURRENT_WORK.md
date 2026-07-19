@@ -34,33 +34,38 @@ therefore failed. C1-on showed positive paired utility differences, but the
 priority branch prevents an algorithmic C1 claim and its material-semantics
 audit also failed. The five-iteration autonomous research boundary is complete.
 
+The tracked postmortem round is complete. Convergent GPT-5.6 Pro accepted the
+Iteration-5 terminal interpretation, retained a weighted four-candidate
+portfolio, and recommended exactly one future evidence source: a one-time
+clean-process-channel dynamic-roster direct-access qualification on a newly
+registered carrier. The recommendation is adopted as the next design boundary;
+it does not authorize implementation, training, or another autonomous cycle.
+
 ## Causal Portfolio
 
-- **C3 — direct active-set control:** remains the mandatory ordinary-MARL null
-  and retains its earlier Stage-B access evidence, but it did not access the
-  Iteration-5 spatial carrier under the frozen contract. This retires the
-  carrier as an identified algorithm test, not direct control in general.
-- **C1 — segment-owned environment-agnostic semantics:** remains a structural
-  research explanation, but the exact Iteration-5 posterior-pressure instance
-  is not promoted. Its selected pair had action-TV CI
-  `[0.0101,0.0112,0.0123]`, forced-effect CI
-  `[0.0026,0.0146,0.0335]`, and no positive overlap or matched-shuffle lower
-  bound.
-- **C1-null — arbitrary diversity:** strengthened locally: positive task
-  utility differences occurred without registered material semantics, although
-  the carrier-priority failure prevents a standalone causal conclusion.
-- **C2 — minimal event context:** weakened and dormant.
-- **Conditional SMDP credit:** closed until executable skill semantics exist.
+- **A — access-valid evidence substrate (high):** Iteration 5 was not an
+  identified hierarchy comparison because ordinary recurrent access failed.
+  One final clean carrier qualification may resolve whether this was specific
+  to that substrate.
+- **D — hierarchy-null direct recurrence (medium-high):** remains the mandatory
+  ordinary-MARL null. It is not yet proven sufficient for the final
+  decentralized variable-membership/lifetime capability.
+- **B — factorized discrete process executor (medium-low):** remains a possible
+  replacement for shared FiLM conditioning, conditional on a valid access
+  substrate and later process-realizability evidence.
+- **C — simplex process command (low, parked):** remains an alternative to B,
+  not an additive module. It requires evidence that non-vertex composition is
+  load-bearing.
 
 ## Next Actions
 
-1. Preserve the Iteration-5 terminal result and retire this exact spatial
-   carrier contract without rescue.
-2. Put the unresolved post-Iteration-5 portfolio and next-evidence decision
-   through one tracked external-review round. Codex prepares evidence and a
-   factual reconciliation; convergent Pro selects the scientific disposition.
-3. Do not implement or launch a successor until that disposition exists and the
-   required experiment authority is present.
+1. Preserve the Iteration-5 terminal result and the completed postmortem review.
+2. If the user authorizes a successor, first register the one-time
+   clean-process-channel dynamic-roster direct-access qualification exactly
+   within `50_DISPOSITION.md`; do not implement B/C or reopen C1.
+3. Do not implement or launch the qualification until explicit authority is
+   present. A positive access result would open later hypothesis testing, not
+   authorize it automatically.
 
 ## Autonomous Boundary
 
@@ -87,6 +92,10 @@ audit also failed. The five-iteration autonomous research boundary is complete.
   mechanisms are inactive evidence, not implementation dependencies.
 - No stopped-run resume across source commits and no automatic budget, seed,
   threshold, reward, model, task, or skill-count rescue.
+- The recommended next source is a new carrier qualification, not an
+  Iteration-5 capacity/budget rescue. It contains constructive, random, and
+  direct recurrent access arms only; no high policy, skill, KEEP/SET,
+  posterior, intrinsic reward, or semantic audit enters its scientific branch.
 
 ## Pointers
 
@@ -104,3 +113,5 @@ audit also failed. The five-iteration autonomous research boundary is complete.
   closed portfolio review.
 - `docs/external-review/gpt5_6_pro/20260718_iteration4_semantic_null_convergence/`
   — accepted Iteration-4 convergence review.
+- `docs/external-review/rounds/20260719_iteration5_postmortem_portfolio/` —
+  completed post-Iteration-5 portfolio review and accepted disposition.
