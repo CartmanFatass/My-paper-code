@@ -60,13 +60,31 @@ $question = Assert-CommitPath -ResolvedCommit $resolved -Path $QuestionPath
 $questionText = (Invoke-GitChecked -Arguments @('show', "$resolved`:$question")) -join "`n"
 $questionName = [System.IO.Path]::GetFileName($question)
 
-if ($questionName -eq '20_PRO_OPEN_QUESTION.md' -and
+if ($questionName -in @('10_GEMINI_DIVERGENT_QUESTION.md', '20_PRO_OPEN_QUESTION.md') -and
     $questionText -notmatch '(?i)divergent') {
-    throw 'The open-Pro question does not explicitly identify the divergent role.'
+    throw 'The open-review question does not explicitly identify the divergent role.'
 }
 if ($questionName -eq '40_PRO_CONVERGENT_QUESTION.md' -and
     $questionText -notmatch '(?i)convergent') {
     throw 'The convergent-Pro question does not explicitly identify the convergent role.'
+}
+
+$basePrinciples = 'docs/project/ALGORITHM_PRINCIPLES.md'
+$openPrinciples = 'docs/external-review/OPEN_REVIEW_PRINCIPLES.md'
+$convergentPrinciples = 'docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md'
+if ($questionName -in @('10_GEMINI_DIVERGENT_QUESTION.md', '20_PRO_OPEN_QUESTION.md')) {
+    if (-not $questionText.Contains($basePrinciples) -or
+        -not $questionText.Contains($openPrinciples) -or
+        $questionText.Contains($convergentPrinciples)) {
+        throw 'The open-Pro question has an invalid scientific-principle binding.'
+    }
+}
+if ($questionName -eq '40_PRO_CONVERGENT_QUESTION.md') {
+    if (-not $questionText.Contains($basePrinciples) -or
+        -not $questionText.Contains($convergentPrinciples) -or
+        $questionText.Contains($openPrinciples)) {
+        throw 'The convergent-Pro question has an invalid scientific-principle binding.'
+    }
 }
 
 $section = [regex]::Match(

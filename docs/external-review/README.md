@@ -10,18 +10,24 @@ the controller carries no browser or Antigravity state.
 ## Scientific sequence
 
 1. Gemini 3.1 Pro (High) performs a blind divergent review with the shared
-   evidence and allowlisted local sources.
+   evidence, allowlisted local sources, and `OPEN_REVIEW_PRINCIPLES.md`.
 2. GPT-5.6 Pro performs an independent blind divergent review from the same
-   Git-visible evidence.
+   Git-visible evidence under the same open-review principles.
 3. The controller writes a factual reconciliation without selecting a route.
 4. A separate GPT-5.6 Pro conversation performs convergent synthesis and
-   chooses the next evidence source or stop.
+   follows `CONVERGENT_REVIEW_PRINCIPLES.md`, then chooses the next evidence
+   source or stop while preserving valuable unselected ideas.
 5. The controller writes `50_DISPOSITION.md` from that convergent decision and
    updates the project boundary once.
 
 The controller may not replace a missing external decision with its own
 scientific choice. External review does not authorize code execution or
 training.
+
+`docs/project/ALGORITHM_PRINCIPLES.md` is the common scientific contract.
+`OPEN_REVIEW_PRINCIPLES.md` and `CONVERGENT_REVIEW_PRINCIPLES.md` specialize
+the two reviewer modes. Every new question lists the base file and exactly one
+matching role file; historical rounds are not rewritten.
 
 ## Direct Exchange interface
 

@@ -14,7 +14,9 @@ conversation for this turn.
 PRO_CONVERGENT 或 DISPOSITION 文件。
 
 请完整读取入口、00_REVIEW_BRIEF.md、01_SHARED_SOURCE_MANIFEST.md 及其中列出的
-Git 可见材料。你可以推翻现有假设组合、提出遗漏的结构性路线或判断普通 MARL 已经
-足够，但不要生成编号实验、调参建议或并行实现任务。区分仓库事实、文献证据和你的
-推断，并严格按入口中的 Requested response 输出。不要修改仓库或启动实验。
+Git 可见材料，并遵循 `docs/project/ALGORITHM_PRINCIPLES.md` 与
+`docs/external-review/OPEN_REVIEW_PRINCIPLES.md`。你可以推翻现有假设组合、提出
+遗漏的结构性路线或判断普通 MARL 已经足够，但不要选择唯一后续路线、生成调参救援
+或并行实现任务。区分仓库事实、文献证据和你的推断，并严格按入口中的 Requested
+response 输出。不要修改仓库或启动实验。
 ```

@@ -60,6 +60,8 @@ data/
 !docs/external-review/gemini_3_1_pro/**/*.md
 !docs/external-review/rounds/**/*.md
 !docs/external-review/GPT5_6_PRO_OPEN_HANDOFF_TEMPLATE.md
+!docs/external-review/OPEN_REVIEW_PRINCIPLES.md
+!docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md
 !docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md
 # LTM holds the rotated long-form history the compact files point at. It is the
 # archive half of the compact-memory contract, so it must be tracked too.

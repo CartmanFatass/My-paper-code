@@ -52,11 +52,19 @@ dispatch another role. Contact only the controller through
 
 Stage evidence is isolated:
 
-- Gemini reads the shared and Gemini-local manifests named by its question;
-- Open Pro reads only its Git-visible shared evidence and never sees Gemini raw
-  or reconciliation;
+- Gemini reads the shared and Gemini-local manifests named by its question plus
+  `ALGORITHM_PRINCIPLES.md` and `OPEN_REVIEW_PRINCIPLES.md`;
+- Open Pro reads only its Git-visible shared evidence plus those same two
+  principle files and never sees Gemini raw or reconciliation;
 - Convergent Pro reads only the two verified divergent raws, factual
-  reconciliation, its question, and files explicitly listed there.
+  reconciliation, its question, explicitly listed evidence,
+  `ALGORITHM_PRINCIPLES.md`, and `CONVERGENT_REVIEW_PRINCIPLES.md`.
+
+Before transport, require the assigned question to list the matching principle
+file exactly. Reject an open question that lists the convergent principle, a
+convergent question that lists the open principle, or any stage that omits the
+base algorithm principles. Return `REVIEW_STAGE_BLOCKED` without opening the
+external transport when this binding is invalid.
 
 ## Execute One Stage
 

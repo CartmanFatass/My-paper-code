@@ -12,6 +12,9 @@ $heartbeatRenderer = Join-Path $repo '.agents/skills/hmasd-review-exchange/scrip
 $geminiInvoker = Join-Path $repo 'scripts/invoke_gemini_reviewer.ps1'
 $geminiLive = Join-Path $repo 'scripts/start_gemini_reviewer_live.ps1'
 $readmePath = Join-Path $repo 'docs/external-review/README.md'
+$openPrinciplesPath = Join-Path $repo 'docs/external-review/OPEN_REVIEW_PRINCIPLES.md'
+$convergentPrinciplesPath = Join-Path $repo 'docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md'
+$boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
 
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
@@ -57,6 +60,9 @@ foreach ($required in @(
     'convergent_exchange',
     'copy its live `hostId`, `threadId`, `model`, and `thinking` unchanged',
     'There is no review state machine and no controller heartbeat',
+    'OPEN_REVIEW_PRINCIPLES.md',
+    'CONVERGENT_REVIEW_PRINCIPLES.md',
+    'Open questions request a plural portfolio',
     '50_DISPOSITION.md'
 )) {
     if (-not $normalizedSkillText.Contains($required)) {
@@ -99,6 +105,9 @@ foreach ($required in @(
     'the visible deferred action `立即回答` means the request was accepted',
     "waiting state, never a transport failure",
     "not for ordinary deferred Pro thinking",
+    "OPEN_REVIEW_PRINCIPLES.md",
+    "CONVERGENT_REVIEW_PRINCIPLES.md",
+    "Reject an open question that lists the convergent principle",
     "create one 5-minute heartbeat",
     "Reply to Controller",
     "session-roles.json.roles.controller.thread_id",
@@ -107,6 +116,47 @@ foreach ($required in @(
 )) {
     if (-not $normalizedExchangeText.Contains($required)) {
         throw "Reviewer Exchange contract is missing: $required"
+    }
+}
+
+$openPrinciples = Get-Content -LiteralPath $openPrinciplesPath -Raw
+$convergentPrinciples = Get-Content -LiteralPath $convergentPrinciplesPath -Raw
+$normalizedOpenPrinciples = $openPrinciples -replace '\s+', ' '
+$normalizedConvergentPrinciples = $convergentPrinciples -replace '\s+', ' '
+foreach ($required in @(
+    'Expand and stress-test the scientific portfolio',
+    'Do not choose a unique successor',
+    'two to four structurally distinct causal explanations',
+    'unselected-ideas section'
+)) {
+    if (-not $normalizedOpenPrinciples.Contains($required)) {
+        throw "Open-review principles are missing: $required"
+    }
+}
+foreach ($required in @(
+    'Own the scientific decision pressure',
+    'One serialized implementation or experiment is not the same as one legal hypothesis',
+    'select the smallest next evidence source or an explicit stop',
+    'valuable unselected ideas'
+)) {
+    if (-not $normalizedConvergentPrinciples.Contains($required)) {
+        throw "Convergent-review principles are missing: $required"
+    }
+}
+if ($normalizedOpenPrinciples.Contains('Own the scientific decision pressure') -or
+    $normalizedConvergentPrinciples.Contains('Do not choose a unique successor')) {
+    throw 'Open and convergent scientific responsibilities are conflated'
+}
+
+$verifierText = Get-Content -LiteralPath $boundaryVerifier -Raw
+foreach ($required in @(
+    'docs/project/ALGORITHM_PRINCIPLES.md',
+    'docs/external-review/OPEN_REVIEW_PRINCIPLES.md',
+    'docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md',
+    'invalid scientific-principle binding'
+)) {
+    if (-not $verifierText.Contains($required)) {
+        throw "Review-boundary verifier is missing: $required"
     }
 }
 
@@ -131,6 +181,8 @@ foreach ($required in @(
     'return `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` directly to the controller',
     'nonempty alone is not completion',
     'The workflow uses no intermediate persistent session'
+    'OPEN_REVIEW_PRINCIPLES.md'
+    'CONVERGENT_REVIEW_PRINCIPLES.md'
 )) {
     if (-not $normalizedReadme.Contains($required)) {
         throw "External-review overview is missing: $required"

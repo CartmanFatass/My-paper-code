@@ -26,6 +26,27 @@ dispatch, callback acceptance, and the final project-state update. It never
 controls a reviewer browser or Antigravity; each Exchange session owns its
 transport, raw and heartbeat.
 
+## Reviewer Principle Binding
+
+Use role-specific Git-visible scientific contracts rather than copying generic
+review prose into every round:
+
+- both `10_GEMINI_DIVERGENT_QUESTION.md` and
+  `20_PRO_OPEN_QUESTION.md` must list
+  `docs/project/ALGORITHM_PRINCIPLES.md` and
+  `docs/external-review/OPEN_REVIEW_PRINCIPLES.md` in their evidence inputs;
+- `40_PRO_CONVERGENT_QUESTION.md` must list
+  `docs/project/ALGORITHM_PRINCIPLES.md` and
+  `docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md`.
+
+Open questions request a plural portfolio and must not select one successor.
+The convergent question requests evidence validation, weighted synthesis, one
+next evidence source or stop, and preservation of valuable unselected ideas.
+Keep round-specific facts, required output fields, and evidence paths in the
+question; keep durable role behavior only in the corresponding principle file.
+Never give an open reviewer the convergent principle file or a convergent
+reviewer the open principle file as an instruction source.
+
 ## Round Boundary
 
 For one round require:
@@ -38,7 +59,8 @@ round_path=docs/external-review/rounds/<id>
 
 The initial boundary contains `00_REVIEW_BRIEF.md`, the shared and local source
 manifests, and the two divergent questions. Before any dispatch, verify the
-commit and every assigned question are present on `My-paper-code/aggressive`.
+commit, assigned question, base algorithm principles, and matching role
+principle file are present on `My-paper-code/aggressive`.
 The controller may stage, commit and push only the current round paths needed by
 the next stage.
 
@@ -50,7 +72,8 @@ the next stage.
 2. accept each raw only from its registered Exchange callback and verify the
    required sections plus exact-text-equality claim;
 3. write `30_EVIDENCE_RECONCILIATION.md` as a factual reconciliation without
-   ranking routes, then write `40_PRO_CONVERGENT_QUESTION.md`;
+   ranking routes, then write `40_PRO_CONVERGENT_QUESTION.md` under the
+   convergent principle contract;
 4. commit and push that round boundary;
 5. dispatch the convergent stage directly to `convergent_exchange`;
 6. after its verified raw returns, write `50_DISPOSITION.md`, commit and push
