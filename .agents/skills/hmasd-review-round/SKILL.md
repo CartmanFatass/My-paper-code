@@ -123,6 +123,10 @@ task. Each tick performs one bounded read of the registered
 page. A still-active response ends that Codex turn as `WAIT_PRO_THINKING`; the
 next heartbeat, rather than an in-turn wait or controller polling, performs the
 next read. The heartbeat carries no review content and never submits a prompt.
+`WAIT_PRO_THINKING` is legal only after the Exchange has verified that this
+automation is `ACTIVE` and still targets the registered Exchange task. If that
+verification fails, the Exchange must report `BLOCKED_HEARTBEAT_NOT_ACTIVE` to
+the controller instead of ending silently.
 
 The Exchange alone operates the Codex in-app browser. It opens the registered
 URL for the current role even when another Pro page is already open, verifies
