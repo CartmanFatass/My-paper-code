@@ -25,30 +25,33 @@ does not establish hierarchy, skill semantics, variable lifetime, cooperation,
 or transfer.
 
 The tracked round
-`docs/external-review/rounds/20260719_clean_process_access_portfolio/` is the
-only active scientific boundary. Gemini and Open-Pro divergent reviews and the
-factual reconciliation are complete. Convergent Pro is already
-`DISPATCHED`; that accepted prompt must not be submitted again.
+`docs/external-review/rounds/20260719_clean_process_access_portfolio/` is
+complete at commit `8cb53cd7675e4721c6f1dcefc15ec68fd62670e6`.
+Its accepted disposition keeps information-matched direct active-set recurrence
+as the mandatory null and selects exactly one next evidence source:
+`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`. This source diagnoses whether the
+existing high/event assignment path can learn when supplied with fixed
+zero-parameter `IDLE/PERSIST/SHORT` executors; it is not evidence for learned
+skills, hierarchy efficacy, variable lifetime, cooperation, or transfer.
 
-No implementation or experiment is active. Until the round produces an
-accepted `50_DISPOSITION.md`, there is no authorized successor hypothesis,
-implementation plan, or evidence run.
+No implementation or experiment is active. The disposition explicitly grants
+no code or compute authority, so the selected source remains unimplemented
+until the user authorizes that boundary.
 
 ## Next Action
 
-The dedicated External Review Manager completes the already-dispatched
-convergent stage, writes the disposition, and returns one tool-confirmed
-terminal message. The controller then reads that disposition, checks it against
-the pinned evidence, updates the project control plane, and stops unless the
-user grants a new implementation or experiment boundary.
+Wait for user authorization. If granted, freeze one implementation contract for
+`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` using the unchanged clean carrier and the
+registered learned-high, byte-equal frozen-high, and routing-only oracle arms.
+Do not start implementation or training from this disposition alone.
 
 ## Autonomous Boundary
 
-- Status: REVIEW_PENDING
+- Status: COMPLETE
 - Completed evidence-bearing iterations under the prior grant: one
 - Remaining iterations: zero
-- Permitted automatic action: finish the active external-review round only
-- Stop condition: accepted disposition for the completed evidence source
+- Permitted automatic action: none
+- Stop condition: reached; accepted disposition committed and pushed
 - Forbidden: automatic successor implementation, experiment, or research loop
 
 ## Durable Constraints
@@ -73,4 +76,4 @@ user grants a new implementation or experiment boundary.
   explicit `NONE`.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
-  — active review evidence boundary and eventual disposition.
+  — completed review evidence and accepted `50_DISPOSITION.md`.

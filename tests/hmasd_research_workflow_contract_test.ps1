@@ -85,8 +85,10 @@ foreach ($forbidden in @(
 }
 
 $current = Read-Text (Join-Path $canonicalRoot "CURRENT_WORK.md")
-if (-not $current.Contains("Status: REVIEW_PENDING") -or
+if (-not $current.Contains("Status: COMPLETE") -or
     -not $current.Contains("Remaining iterations: zero") -or
+    -not $current.Contains("Permitted automatic action: none") -or
+    -not $current.Contains("CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0") -or
     $current.Contains("Status: ACTIVE") -or
     $current.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
     throw "CURRENT_WORK does not close the zero-remaining autonomy loop"
