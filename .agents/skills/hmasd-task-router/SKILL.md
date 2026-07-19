@@ -67,6 +67,40 @@ Role-specific lifecycle messages such as `REVIEW_STAGE` or
 generic envelope. Every compact message must still contain exactly one
 `role_skill=<path>` field and grants no implied context.
 
+## Route Self-Test
+
+Use this communication-only envelope to test a registered persistent route
+without starting its role workflow:
+
+```text
+SESSION_ROUTE_SELF_TEST
+task_id=<stable id>
+role=<registered role key>
+role_skill=<registered role Skill path>
+nonce=<stable nonce>
+return=SESSION_ROUTE_SELF_TEST_OK
+```
+
+The recipient reads this Skill, the role directory, and the named role Skill
+only. Verify that its current task ID and `role_skill` match the role entry.
+Do no role work and create no heartbeat: do not use a browser, external model,
+Git, project mutation, subagent, or experiment. Resolve the registered
+controller live and send exactly:
+
+```text
+SESSION_ROUTE_SELF_TEST_OK
+role=<registered role key>
+handoff_id=<task_id>:<nonce>
+task_id=<stable id>
+source_thread_id=<recipient task ID>
+```
+
+Require ordinary delivery proof and post-send route invariance for the
+controller. The recipient may then finish locally with
+`ROUTE_SELF_TEST_RELAYED`. This self-test proves communication only; it never
+substitutes for a role-specific transport, browser, external-model, Git, or
+experiment smoke.
+
 ## Resolve the Recipient Live
 
 Immediately before a send, run:
