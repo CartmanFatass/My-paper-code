@@ -78,6 +78,12 @@ It sends no running update to the controller and ends with `MONITOR_RUNNING`;
 the next heartbeat is the only continuation mechanism. A Codex final answer is
 never treated as a live background waiter.
 
+If every registered training counter is complete while the authoritative
+runner state remains `running`, report `FINALIZATION_PENDING`, set training ETA
+to `complete` and experiment ETA to `unavailable`, and keep the 5-minute
+cadence. Training completion is not an experiment terminal: do not pause or
+relay until the parent publishes `complete`/`completed` or `failed`.
+
 ### ETA-based heartbeat cadence
 
 Estimate remaining time from the slowest active arm using elapsed time and its
@@ -108,10 +114,13 @@ Every state contains `updated` and `phase`. Validate `run_root`, `run_id`, and
 terminal payload containment when present. Malformed, missing, unknown, or
 escaping data is an immediate actionable monitor error.
 
-At terminal state, malformed status, or deadline, the monitor first updates its
-registered automation to `PAUSED` and verifies that state. Only after the pause
-is confirmed does it resolve the controller's live route again and send exactly
-one final payload through `$hmasd-task-router`:
+At terminal state, malformed status, or deadline, the monitor first resolves
+the controller's live route and verifies the frozen registered expectation. If
+they differ, it keeps the heartbeat `ACTIVE`, sends nothing, displays
+`ROUTE_MISMATCH_WAITING`, and retries the route check on the next tick. It never
+refreshes the frozen route from live metadata. After a match, it updates its
+registered automation to `PAUSED`, verifies that state, and sends exactly one
+final payload through `$hmasd-task-router`:
 
 ```text
 EXPERIMENT_MONITOR

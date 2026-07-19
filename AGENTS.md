@@ -22,8 +22,10 @@ One active controller works directly in `C:\project\HMASD` and owns algorithm
 and architecture decisions, root project state, scientific interpretation,
 experiment authorization, final Git integration and push, and user
 communication. `docs/project/CURRENT_WORK.md` names that task; ownership changes
-only by an explicit handoff recorded there. Project files never select the
-controller model.
+only by an explicit handoff recorded there. Project files never change the
+controller model. The normal-research routing expectation is the user-frozen
+`gpt-5.6-sol` / `ultra` pair; it is a delivery guard, not a model selector, and
+changes only on an explicit user instruction.
 
 ## Workflow Routing
 
@@ -103,9 +105,10 @@ edit.
 
 Every message to an existing Codex task and every monitor session must use
 `$hmasd-task-router`; ad hoc cross-task sends are forbidden. The Skill resolves
-the target and controller from live task metadata and requires their exact
-`model` and `thinking` values in any explicit send. Its route snapshots preserve
-user-selected settings and never select or change a model.
+live task metadata and requires exact `model` and `thinking` values in every
+explicit send. The controller snapshot is the frozen normal-research route,
+not an automatically refreshed mirror. A mismatch blocks delivery without
+changing either task or the snapshot; update it only on explicit user direction.
 
 Use one implementer for a coupled change. Use two or three only when interfaces
 are frozen and write scopes are disjoint. One file has one writer; the

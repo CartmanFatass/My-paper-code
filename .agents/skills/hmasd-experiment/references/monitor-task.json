@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "updated": "2026-07-19",
   "monitor_route": {
     "host_id": "local",
@@ -12,8 +12,9 @@
     "host_id": "local",
     "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
     "model": "gpt-5.6-sol",
-    "thinking": "xhigh",
-    "source": "live_task_metadata_mirror"
+    "thinking": "ultra",
+    "source": "user_frozen_normal_research_default",
+    "change_policy": "explicit_user_instruction_only"
   },
   "automation": {
     "id": "hmasd-r35-single-thread-monitor",

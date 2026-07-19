@@ -12,12 +12,15 @@ review state, experiment state, task creation, or model selection.
 
 Before any cross-task send, run `scripts/resolve_task_route.ps1` separately for
 the target task and the active controller task. Live Codex task metadata is the
-routing authority. A project registry may mirror those values but may not
-select them.
+actual delivery route. The registered controller route is the user-frozen
+normal-research expectation, defaulting to `gpt-5.6-sol` / `ultra`; it is a
+guard and never changes the task model.
 
-Require an unarchived task and nonempty `model` and `thinking`. If a registry
-value differs from live metadata, do not send and do not change either task's
-model. Refresh the mirror from live metadata or return `BLOCKED_ROUTE_MISMATCH`.
+Require an unarchived task and nonempty `model` and `thinking`. If a registered
+value differs from live metadata, do not send, do not change either task's
+model, and do not refresh the frozen route from live metadata. Return
+`BLOCKED_ROUTE_MISMATCH`. Change the registered expectation only when the user
+explicitly directs that change.
 
 The resolved route has exactly these fields:
 
@@ -54,11 +57,11 @@ create another task or automation and does not send a duplicate assignment.
 
 Each heartbeat only schedules one bounded monitor turn; it is not a transport
 substitute and carries no terminal result. At terminal state the monitor first
-pauses and verifies that automation, then resolves the controller again from
-live metadata, verifies the registered mirror, and sends one terminal payload
-with the controller's exact five-field route. Its Luna Medium setting is fixed
-when the monitor task is created; the controller route never selects or changes
-either model.
+resolves live controller metadata and verifies the frozen route. A mismatch
+keeps the heartbeat active and sends nothing. After a match, the monitor pauses
+and verifies the automation, then sends one terminal payload with the exact
+five-field route. Its Luna Medium setting is fixed when the monitor task is
+created; the controller route never selects or changes either model.
 
 ## Stop Conditions
 

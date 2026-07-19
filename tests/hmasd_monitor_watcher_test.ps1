@@ -24,19 +24,21 @@ foreach ($required in @(
 foreach ($required in @(
     '`runner_status.txt` exactly once',
     '`MONITOR_PROGRESS`',
+    '`FINALIZATION_PENDING`',
     'ETA-based heartbeat cadence',
     'Relax to a longer interval only when ETA exceeds',
     'monitor task exclusively owns ETA',
     'ends with `MONITOR_RUNNING`',
     'automation to `PAUSED`',
-    'is confirmed does it resolve',
+    '`ROUTE_MISMATCH_WAITING`',
+    'After a match',
     'live background waiter.')) {
     if (-not $protocol.Contains($required)) {
         throw "Experiment protocol is missing: $required"
     }
 }
 
-if ($registry.schema_version -ne 3 -or
+if ($registry.schema_version -ne 4 -or
     $registry.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
     $registry.automation.kind -ne 'heartbeat' -or
     $registry.automation.initial_cadence_minutes -ne 15 -or
@@ -48,6 +50,9 @@ if ($registry.schema_version -ne 3 -or
     $registry.cadence_policy.eta_buckets[3].interval_minutes -ne 5 -or
     $registry.automation_ownership.initial_binding -ne 'active_controller' -or
     $registry.automation_ownership.runtime_cadence_and_terminal_pause -ne 'registered_monitor_task' -or
+    $registry.controller_return_route.model -ne 'gpt-5.6-sol' -or
+    $registry.controller_return_route.thinking -ne 'ultra' -or
+    $registry.controller_return_route.change_policy -ne 'explicit_user_instruction_only' -or
     $registry.progress_policy.display -ne 'monitor_task_each_tick' -or
     $registry.progress_policy.controller_relay -ne 'terminal_or_actionable_error_only') {
     throw 'Monitor registry does not bind one progress heartbeat to the registered monitor task'

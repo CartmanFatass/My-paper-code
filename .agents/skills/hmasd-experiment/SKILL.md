@@ -16,7 +16,8 @@ Before assigning the persistent monitor, also read
 `../hmasd-task-router/SKILL.md`. Every controller-to-monitor assignment and
 monitor-to-controller terminal relay uses that Skill.
 Read `references/monitor-task.json` for the expected monitor route and the
-controller return mirror; both must match live metadata before assignment.
+frozen controller return route. Both must match live metadata before delivery;
+the frozen route is never refreshed without explicit user direction.
 
 ## Prepare and Launch
 
