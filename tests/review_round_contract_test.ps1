@@ -91,6 +91,8 @@ foreach ($required in @(
     "user's explicit standing approval",
     "Nonempty is not",
     "exact text equality",
+    'question at the assigned `stage_commit`',
+    "never add a field from conversation memory",
     'the visible deferred action `立即回答` means the request was accepted',
     "waiting state, never a transport failure",
     "not for ordinary deferred Pro thinking",

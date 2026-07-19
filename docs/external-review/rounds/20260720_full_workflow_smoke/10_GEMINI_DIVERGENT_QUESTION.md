@@ -13,6 +13,7 @@ otherwise state `TRANSPORT_BLOCKED` and one direct blocker.
 ## EVIDENCE_PATHS_READ
 
 List the exact paths actually read.
+No per-path label such as `manifest_received` is required.
 
 ## ROLE_ISOLATION
 

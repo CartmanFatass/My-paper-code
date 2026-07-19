@@ -81,7 +81,9 @@ second transport failure is terminal.
 
 Treat a response as complete only when the external surface shows natural
 completion and every section or decision field explicitly required by the
-question is present. Write the exact captured response to the assigned raw,
+question at the assigned `stage_commit` is present. Derive requirements from
+that committed question text only; never add a field from conversation memory,
+an earlier working-tree version, or another round. Write the exact captured response to the assigned raw,
 reread it, and require exact text equality with the capture. Nonempty is not
 sufficient. For an existing raw, inspect this session's registered external
 conversation once and repeat the same completion and equality checks before
