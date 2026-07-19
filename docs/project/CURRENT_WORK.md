@@ -12,8 +12,8 @@ Updated: 2026-07-20
 - Codex role: project state, accepted scientific boundary, implementation and
   experiment authorization, evidence, Git, and user communication
 - Code implementation source: registered persistent Code Implementation
-  Manager; it owns executable architecture, implementation planning,
-  implementer/reviewer subagents, and focused code acceptance
+  Manager; it owns executable architecture, implementation planning, its native
+  coding workflow, and focused code acceptance
 - Scientific decision source: accepted tracked convergent GPT-5.6 Pro
   disposition
 
@@ -39,14 +39,15 @@ skills, hierarchy efficacy, variable lifetime, cooperation, or transfer.
 
 On 2026-07-20 the user authorized five automatic algorithm iterations,
 including bounded code, compute, result analysis, and tracked external review.
-The active first iteration is `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`; its
-implementation has been dispatched to the registered Code Implementation
-Manager. No experiment is active yet.
+The active first iteration is `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`. Its
+implementation and focused checks are accepted at commit `2d66d253`; the
+normalized active plan is pushed at `c631576`. The registered formal CUDA run
+is launch-ready and no experiment is active yet.
 
 ## Next Action
 
-Complete the accepted `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` implementation,
-run only its registered experiment, and obtain its tracked external-review
+Run only the registered `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` experiment and
+obtain its tracked external-review
 disposition. If that disposition selects another evidence source, begin the
 next authorized iteration from that pushed boundary. Each successor must be
 selected by the preceding convergent review; no route is inferred locally.
@@ -84,8 +85,9 @@ selected by the preceding convergent review; no route is inferred locally.
 
 ## Pointers
 
-- `docs/project/ALGORITHM_PRINCIPLES.md` — controller and implementer
-  scientific constraints.
+- `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints.
+- `.agents/skills/hmasd-code-manager/references/engineering-principles.md` —
+  Code Implementation Manager engineering constraints.
 - `docs/project/IMPLEMENTATION_PLAN.md` — Code Implementation Manager-owned
   current executable design or explicit `NONE`.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
