@@ -39,7 +39,9 @@ Iteration-5 terminal interpretation, retained a weighted four-candidate
 portfolio, and recommended exactly one future evidence source: a one-time
 clean-process-channel dynamic-roster direct-access qualification on a newly
 registered carrier. The recommendation is adopted as the next design boundary;
-it does not authorize implementation, training, or another autonomous cycle.
+it did not itself authorize implementation or training. The user subsequently
+authorized one complete automatic research iteration on 2026-07-19, limited to
+that clean-carrier direct-access evidence source.
 
 ## Causal Portfolio
 
@@ -59,23 +61,25 @@ it does not authorize implementation, training, or another autonomous cycle.
 
 ## Next Actions
 
-1. Preserve the Iteration-5 terminal result and the completed postmortem review.
-2. If the user authorizes a successor, first register the one-time
-   clean-process-channel dynamic-roster direct-access qualification exactly
-   within `50_DISPOSITION.md`; do not implement B/C or reopen C1.
-3. Do not implement or launch the qualification until explicit authority is
-   present. A positive access result would open later hypothesis testing, not
-   authorize it automatically.
+1. Launch the accepted clean-process carrier and direct-access qualification
+   under its exact local-CUDA 16-env/320K contract.
+2. Apply one registered
+   terminal branch without rescue.
+3. If the result leaves the portfolio or next evidence open, complete one
+   tracked external-review round, then stop. Do not start B/C or a second
+   research iteration automatically.
 
 ## Autonomous Boundary
 
-- Status: COMPLETE
-- Prior grant: five serialized iterations total
-- Completed evidence-bearing iterations: five
-- Remaining iterations: zero
+- Status: ACTIVE
+- Scope: one clean-process dynamic-roster direct-access qualification
+- Completed evidence-bearing iterations under this grant: zero
+- Remaining iterations: one
 - Activation authority: explicit user instruction on 2026-07-19
-- Permitted automatic action: none; the granted cycle is exhausted
-- Stop condition: satisfied by the accepted Iteration-5 terminal evidence
+- Permitted automatic action: design, implementation, focused smoke, prelaunch
+  review, exact formal experiment, terminal disposition, and one required
+  external-review round
+- Stop condition: one accepted evidence source and any required disposition
 
 ## Immediate Constraints
 

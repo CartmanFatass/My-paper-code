@@ -27,6 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
+| EXP-20260719-clean-process-direct-access | launch-ready -- implementation accepted | clean-process dynamic-roster direct access | active plan; output root assigned at launch | exact formal result | focused carrier/direct checks pass; replay `<=1e-6`; process channel excluded; no skill/high/intrinsic path | Run exactly once; apply PASS/NO_ACCESS/CALIBRATION/INVALID branch without rescue |
 | EXP-20260719-iteration5-spatial-process-semantics | completed -- valid `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS` | iteration-5 spatial process-semantics comparison | `logs/iteration5_spatial_process_semantics_20260719_130334/result/iteration5_process_semantics.json`; source `55f7093`; completed postmortem round | explicit authority for the separately registered clean-carrier access qualification | M0 pass; C3 deterministic final `P/S/U=1.0000/0.5269/0.7634`, stochastic `U=0.7245`, gain CI `[0.0484,0.0705,0.0931]`; C1 selected-pair action-TV and forced-effect UCBs `0.0123/0.0335 < 1/12` | Retire this exact spatial carrier and C1 objective without rescue; retain A/D/B/C; adopt one clean-process-channel direct-access qualification as the only recommended next evidence source, not yet authorized |
 | EXP-20260718-stage-c-semantics-provenance-audit | completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE` | iteration-4 frozen-checkpoint provenance audit | `logs/stage_c_semantics_provenance_audit_20260718_190948/result/iteration4_provenance_audit.json`; implementation `05b40eb` | iteration-5 portfolio design, not checkpoint rescue | M0 pass; F1 pair 1--2 action-TV CI `[0.046582,0.051259]`, forced-effect CI `[0.027817,0.069094]`, both UCB `<1/12`; 128/10,240 paired forced/natural rows per arm | Strengthen C3 and the C1 missing-semantic-pressure diagnosis; weaken C2; keep credit closed; no reanalysis/threshold/support rescue |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
@@ -79,6 +80,40 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
+
+## EXP-20260719-clean-process-direct-access — Launch Contract
+
+- Authorization/class: the user's one complete autonomous research iteration;
+  one newly registered clean-carrier qualification, not an Iteration-5 rescue,
+  parameter search, skill experiment or scale expansion.
+- Scientific comparison: routing-only constructive control, uniform-random
+  control with independent seed `117057`, and the unchanged active-set direct
+  recurrent learner. The carrier retains anonymous `JOIN`, temporary `LEAVE`,
+  `REJOIN` plus genuine new `JOIN`, terminal `LEAVE`, survivor continuity,
+  persistent plus reactive/short loads and terminal-only `P/S/U`.
+- Process boundary: lifecycle-owned `actuator_position` and
+  `actuator_velocity` are deterministic audit-only physical state. They freeze
+  while absent, resume on rejoin, start at zero on genuine join and round-trip
+  in environment snapshots. They never enter actor, critic, reward, GAE, PPO,
+  task dynamics, high, skill or intrinsic paths.
+- Runtime: local CUDA, 16 environments, horizon/rollout 80, 250 updates,
+  320,000 direct transitions, PPO4 and exactly 1,000 optimizer steps; 256
+  deterministic and 256 paired stochastic evaluation episodes. Seeds are
+  model/train/action/evaluation/bootstrap/random-control
+  `57056/67057/87057/97057/107057/117057`.
+- Controls: constructive minimum `P/S/U >=0.95`; uniform-random positive
+  utility fraction `>=0.20` and mean utility `<0.55`. If calibration fails,
+  terminate without running or interpreting the direct learner.
+- Direct access: deterministic `U>=0.70`, `P/S>=0.65`, stochastic `U>=0.60`,
+  and paired deterministic final-minus-zero utility LCB95 `>0.15`.
+- Validity: exact count and ledger ownership, finite nonzero updates, sampling
+  and recurrent replay `<=1e-6`, temporary-absence hidden continuity, strict
+  schema-3 checkpoint and exact optimizer restoration, process ownership and
+  information exclusion, plus stage wall-time telemetry.
+- Branches: `PASS_CLEAN_CARRIER_DIRECT_ACCESS`,
+  `NO_ACCESS_CLEAN_CARRIER_DIRECT`, `RETIRE_CLEAN_CARRIER_CALIBRATION`, or
+  `INVALID_CLEAN_CARRIER_IMPLEMENTATION`. No result-contingent rescue, third
+  carrier, threshold/budget/seed/model change, or automatic B/C implementation.
 
 ## EXP-20260719-iteration5-spatial-process-semantics — Launch Contract
 

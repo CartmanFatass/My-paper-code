@@ -7,7 +7,92 @@ in `ALGORITHM_PRINCIPLES.md`, engineering principles in
 `MARL_ENGINEERING_PRINCIPLES.md`, formal run contracts and dispositions in
 `ExpRecord.md`, and removed plans in Git history.
 
-## Iteration 5 — Spatial Process-Semantics Comparison
+## Clean-Process Dynamic-Roster Direct-Access Qualification
+
+Status: authorized for one complete autonomous research iteration by the user
+on 2026-07-19. This is the single next evidence source selected by the accepted
+post-Iteration-5 convergent disposition. It is not an Iteration-5 rescue and
+does not implement B, C, hierarchy, skills, or intrinsic reward.
+
+### Controller Design
+
+- **Core decision:** qualify one new dynamic-roster carrier that retains the
+  learnable Generic-SHORT task and adds a separate task-neutral physical process
+  channel, then test the unchanged active-set direct recurrent learner.
+- **Reuse:** `DirectPrimitiveARPolicy`, direct collection/PPO/replay/checkpoint
+  code, Generic-SHORT membership/task ledger, typed event runtime, constructive
+  controller, exposure, seeds, and Stage-A/B thresholds.
+- **Replace/delete:** replace the Iteration-5 spatial carrier and all C1
+  semantic-on/off paths with one clean-process carrier and a three-control
+  qualification. Do not add an alternate learner path.
+- **Data flow:** task observation and critic state remain exactly the existing
+  15/8-dimensional Generic-SHORT inputs. A separate per-lifecycle two-scalar
+  actuator process state updates only on active primitive steps, freezes during
+  temporary absence, resumes on REJOIN, starts at zero on genuine JOIN, and is
+  removed from active execution on terminal leave. It is audit-only and never
+  enters actor, critic, reward, GAE, PPO, or checkpoint selection.
+- **Gradient/probability flow:** unchanged direct primitive autoregressive
+  likelihood over active members only; no event, membership, process-channel,
+  high, skill, survival, or semantic probability factor. Gradients enter only
+  the existing direct actor-critic through terminal external reward.
+- **RNG:** retain model/train/action/evaluation/bootstrap streams
+  `57056/67057/87057/97057/107057`; use independent random-control stream
+  `117057`. Process dynamics are deterministic conditional on executed actions.
+- **Checkpoint:** retain strict schema-3 direct checks; carrier snapshots also
+  own process state and must round-trip exactly. Missing live state hard-fails.
+- **Expected behavior:** constructive P/S/U is at least 0.95; uniform-random
+  positive utility fraction is at least 0.20 with mean below 0.55; direct must
+  pass the frozen Stage-B access thresholds. Process readout alone is not skill
+  evidence.
+
+### Exact Files and Symbols
+
+1. `ha_ctse_process/dynamic_roster_clean_process_testbed.py`: carrier ledger,
+   environment, event adapter, factories and contract audit.
+2. `scripts/run_dynamic_roster_stage_b.py::run_stage_b`: factory injection
+   only; model, optimization, thresholds and result semantics remain frozen.
+3. `ha_ctse_process/dynamic_roster_direct.py`: preserve the frozen direct
+   algorithm while removing per-member CUDA scalar synchronization and packing
+   each rollout onto the device once for all PPO passes.
+4. `scripts/run_clean_process_direct_access.py`: controls, direct-core reuse,
+   result branches, status and stage timings.
+5. `tests/ha_ctse_process_clean_process_direct_test.py`: one focused carrier
+   and runner smoke contract.
+
+Frozen interfaces are the direct policy architecture and factorization,
+collection/update/replay ordering, task observation, critic features, terminal
+reward, membership schedule `4 -> 2 -> 6 -> 4`, horizon 80 and active masks.
+
+### Formal Evidence Contract
+
+- Local CUDA; 16 batched environments; horizon/rollout 80; 250 updates;
+  320,000 transitions; PPO4; 1,000 optimizer steps; 256 deterministic and 256
+  paired stochastic exact-final evaluation episodes.
+- Constructive minimum P/S/U `>=0.95`. Random positive-utility fraction
+  `>=0.20` and mean utility `<0.55`.
+- Direct deterministic U `>=0.70`, P/S `>=0.65`, stochastic U `>=0.60`, and
+  paired deterministic final-minus-zero utility LCB95 `>0.15`.
+- M0 covers counts, replay `<=1e-6`, finite nonzero update, exact checkpoint,
+  lifecycle/mask ownership, process freeze/resume/new-join zero, process
+  snapshot round-trip and exclusion, independent RNG, and stage wall time.
+
+Branches are `PASS_CLEAN_CARRIER_DIRECT_ACCESS`,
+`NO_ACCESS_CLEAN_CARRIER_DIRECT`, `RETIRE_CLEAN_CARRIER_CALIBRATION`, and
+`INVALID_CLEAN_CARRIER_IMPLEMENTATION`. A valid outcome is terminal for this
+iteration and is not rescued.
+
+No result-contingent observation, reward, horizon, task, model, optimizer,
+budget, seed, threshold, checkpoint or process change is allowed. No high,
+skill, KEEP/SET, posterior, intrinsic reward, graph, slot, latent,
+communication, identity/role/task field, learned timing, scheduler, duration
+catalogue, or renamed retired objective may enter.
+
+Completion requires one focused CPU smoke, one controller semantic/efficiency
+review, the exact CUDA run, registered disposition and one external-review round
+if the result leaves a portfolio or next-evidence decision open. No second
+research iteration starts automatically.
+
+## Completed Prior Contract — Iteration 5 Spatial Process-Semantics Comparison
 
 Status: complete. The fresh formal run closed as valid
 `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`; M0 passed, but the C3 direct arm did

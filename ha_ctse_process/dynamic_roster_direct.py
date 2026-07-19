@@ -384,41 +384,42 @@ def collect_direct_trajectory(
                 hidden=hidden,
                 sampling_uniforms=uniforms,
             )
+            action_values = output.actions.detach().cpu().numpy()
             rewards = np.zeros(env_count, dtype=np.float32)
             for env_index, (environment, view) in enumerate(
                 zip(environments, views)
             ):
                 actions = {
-                    key: int(output.actions[env_index, key].item())
+                    key: int(action_values[env_index, key])
                     for key in view.active_keys
                 }
                 reward, _terminal, _info = environment.step(actions)
                 rewards[env_index] = reward
 
-            observations_rows.append(observations.cpu())
-            active_rows.append(active_mask.cpu())
-            order_rows.append(order.cpu())
-            action_rows.append(output.actions.cpu())
-            logp_rows.append(output.token_log_probs.cpu())
-            value_rows.append(output.value.cpu())
+            observations_rows.append(observations)
+            active_rows.append(active_mask)
+            order_rows.append(order)
+            action_rows.append(output.actions)
+            logp_rows.append(output.token_log_probs)
+            value_rows.append(output.value)
             reward_rows.append(torch.from_numpy(rewards))
-            hidden_before_rows.append(hidden_before.cpu())
-            hidden_after_rows.append(output.next_hidden.cpu())
-            prefix_rows.append(output.prefix_counts.cpu())
+            hidden_before_rows.append(hidden_before)
+            hidden_after_rows.append(output.next_hidden)
+            prefix_rows.append(output.prefix_counts)
             hidden = output.next_hidden
 
     outcomes = tuple(environment.outcome() for environment in environments)
     return DirectTrajectory(
-        observations=torch.stack(observations_rows),
-        active_mask=torch.stack(active_rows),
-        orders=torch.stack(order_rows),
-        actions=torch.stack(action_rows),
-        old_log_probs=torch.stack(logp_rows),
-        old_values=torch.stack(value_rows),
+        observations=torch.stack(observations_rows).cpu(),
+        active_mask=torch.stack(active_rows).cpu(),
+        orders=torch.stack(order_rows).cpu(),
+        actions=torch.stack(action_rows).cpu(),
+        old_log_probs=torch.stack(logp_rows).cpu(),
+        old_values=torch.stack(value_rows).cpu(),
         rewards=torch.stack(reward_rows),
-        hidden_before=torch.stack(hidden_before_rows),
-        hidden_after=torch.stack(hidden_after_rows),
-        prefix_counts=torch.stack(prefix_rows),
+        hidden_before=torch.stack(hidden_before_rows).cpu(),
+        hidden_after=torch.stack(hidden_after_rows).cpu(),
+        prefix_counts=torch.stack(prefix_rows).cpu(),
         outcomes=outcomes,
         ledger_ids=ids,
     )
@@ -490,21 +491,50 @@ class DirectReplay:
     active_mask: torch.Tensor
 
 
-def replay_direct_trajectory(
-    model: DirectPrimitiveARPolicy,
+@dataclass
+class DirectPackedTrajectory:
+    observations: torch.Tensor
+    active_mask: torch.Tensor
+    orders: torch.Tensor
+    actions: torch.Tensor
+    initial_hidden: torch.Tensor
+    old_log_probs: torch.Tensor
+    old_values: torch.Tensor
+    old_hidden_after: torch.Tensor
+    old_prefix_counts: torch.Tensor
+
+
+def _pack_direct_trajectory(
     trajectory: DirectTrajectory,
     *,
     device: torch.device,
-) -> DirectReplay:
-    observations = _chunk_time_env(trajectory.observations).to(device)
-    active_mask = _chunk_time_env(trajectory.active_mask).to(device)
-    orders = _chunk_time_env(trajectory.orders).to(device)
-    actions = _chunk_time_env(trajectory.actions).to(device)
-    initial_hidden = trajectory.hidden_before[::MAX_RECURRENT_CHUNK].reshape(
-        -1, MAX_LIFECYCLES, model.hidden_dim
-    ).to(device)
+    hidden_dim: int,
+) -> DirectPackedTrajectory:
+    return DirectPackedTrajectory(
+        observations=_chunk_time_env(trajectory.observations).to(device),
+        active_mask=_chunk_time_env(trajectory.active_mask).to(device),
+        orders=_chunk_time_env(trajectory.orders).to(device),
+        actions=_chunk_time_env(trajectory.actions).to(device),
+        initial_hidden=trajectory.hidden_before[::MAX_RECURRENT_CHUNK]
+        .reshape(-1, MAX_LIFECYCLES, hidden_dim)
+        .to(device),
+        old_log_probs=_chunk_time_env(trajectory.old_log_probs).to(device),
+        old_values=_chunk_time_env(trajectory.old_values).to(device),
+        old_hidden_after=_chunk_time_env(trajectory.hidden_after).to(device),
+        old_prefix_counts=_chunk_time_env(trajectory.prefix_counts).to(device),
+    )
 
-    env_count = trajectory.observations.shape[1]
+
+def _replay_packed_direct_trajectory(
+    model: DirectPrimitiveARPolicy,
+    packed: DirectPackedTrajectory,
+) -> DirectReplay:
+    observations = packed.observations
+    active_mask = packed.active_mask
+    orders = packed.orders
+    actions = packed.actions
+    initial_hidden = packed.initial_hidden
+    env_count = observations.shape[0] // (HORIZON // MAX_RECURRENT_CHUNK)
     chunk_count = HORIZON // MAX_RECURRENT_CHUNK
     chunk_log_probs: list[torch.Tensor] = []
     chunk_entropies: list[torch.Tensor] = []
@@ -550,18 +580,40 @@ def replay_direct_trajectory(
     )
 
 
+def replay_direct_trajectory(
+    model: DirectPrimitiveARPolicy,
+    trajectory: DirectTrajectory,
+    *,
+    device: torch.device,
+) -> DirectReplay:
+    return _replay_packed_direct_trajectory(
+        model,
+        _pack_direct_trajectory(
+            trajectory, device=device, hidden_dim=model.hidden_dim
+        ),
+    )
+
+
 def replay_errors(
     replay: DirectReplay,
     trajectory: DirectTrajectory,
 ) -> dict[str, float]:
-    old_logp = _chunk_time_env(trajectory.old_log_probs).to(replay.log_probs.device)
-    old_value = _chunk_time_env(trajectory.old_values).to(replay.values.device)
-    old_hidden = _chunk_time_env(trajectory.hidden_after).to(
-        replay.hidden_after.device
+    packed = _pack_direct_trajectory(
+        trajectory,
+        device=replay.log_probs.device,
+        hidden_dim=trajectory.hidden_before.shape[-1],
     )
-    old_prefix = _chunk_time_env(trajectory.prefix_counts).to(
-        replay.prefix_counts.device
-    )
+    return _replay_errors_packed(replay, packed)
+
+
+def _replay_errors_packed(
+    replay: DirectReplay,
+    packed: DirectPackedTrajectory,
+) -> dict[str, float]:
+    old_logp = packed.old_log_probs
+    old_value = packed.old_values
+    old_hidden = packed.old_hidden_after
+    old_prefix = packed.old_prefix_counts
     mask = replay.active_mask
     position_mask = (
         torch.arange(MAX_LIFECYCLES, device=mask.device)
@@ -599,11 +651,27 @@ def ppo_loss(
     advantages: torch.Tensor,
     returns: torch.Tensor,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
-    device = replay.log_probs.device
-    old_logp = _chunk_time_env(trajectory.old_log_probs).to(device)
-    old_values = _chunk_time_env(trajectory.old_values).to(device)
-    chunk_advantages = _chunk_time_env(advantages).to(device)
-    chunk_returns = _chunk_time_env(returns).to(device)
+    packed = _pack_direct_trajectory(
+        trajectory,
+        device=replay.log_probs.device,
+        hidden_dim=trajectory.hidden_before.shape[-1],
+    )
+    return _ppo_loss_packed(
+        replay,
+        packed,
+        _chunk_time_env(advantages).to(replay.log_probs.device),
+        _chunk_time_env(returns).to(replay.log_probs.device),
+    )
+
+
+def _ppo_loss_packed(
+    replay: DirectReplay,
+    packed: DirectPackedTrajectory,
+    chunk_advantages: torch.Tensor,
+    chunk_returns: torch.Tensor,
+) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
+    old_logp = packed.old_log_probs
+    old_values = packed.old_values
     mask = replay.active_mask
 
     ratio = torch.exp(replay.log_probs - old_logp)
@@ -655,19 +723,24 @@ def optimize_direct_update(
     advantages, returns = compute_gae(
         trajectory.rewards, trajectory.old_values
     )
+    packed = _pack_direct_trajectory(
+        trajectory, device=device, hidden_dim=model.hidden_dim
+    )
+    chunk_advantages = _chunk_time_env(advantages).to(device)
+    chunk_returns = _chunk_time_env(returns).to(device)
     model.train()
     with torch.no_grad():
-        first_replay = replay_direct_trajectory(model, trajectory, device=device)
-        errors = replay_errors(first_replay, trajectory)
+        first_replay = _replay_packed_direct_trajectory(model, packed)
+        errors = _replay_errors_packed(first_replay, packed)
 
     totals = {name: 0.0 for name in (
         "policy_loss", "value_loss", "entropy", "clip_fraction", "gradient_norm"
     )}
     finite = True
     for _ in range(int(ppo_passes)):
-        replay = replay_direct_trajectory(model, trajectory, device=device)
-        loss, metrics = ppo_loss(
-            replay, trajectory, advantages, returns
+        replay = _replay_packed_direct_trajectory(model, packed)
+        loss, metrics = _ppo_loss_packed(
+            replay, packed, chunk_advantages, chunk_returns
         )
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
@@ -770,12 +843,13 @@ def evaluate_direct_policy(
                 hidden=hidden,
                 **kwargs,
             )
+            action_values = output.actions.detach().cpu().numpy()
             for env_index, (environment, view) in enumerate(
                 zip(environments, views)
             ):
                 environment.step(
                     {
-                        key: int(output.actions[env_index, key].item())
+                        key: int(action_values[env_index, key])
                         for key in view.active_keys
                     }
                 )

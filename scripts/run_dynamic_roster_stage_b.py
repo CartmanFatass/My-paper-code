@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 import time
 import traceback
-from typing import Any
+from typing import Any, Callable
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -46,7 +46,11 @@ from ha_ctse_process.dynamic_roster_direct import (
     save_checkpoint,
     state_dict_finite,
 )
-from ha_ctse_process.dynamic_roster_testbed import HORIZON
+from ha_ctse_process.dynamic_roster_testbed import (
+    HORIZON,
+    DynamicRosterLedger,
+    GenericShortDynamicRosterEnv,
+)
 
 
 FORMAL_NUM_ENVS = 16
@@ -87,6 +91,10 @@ def run_stage_b(
     eval_episodes: int,
     smoke: bool,
     resume_checkpoint: Path | None = None,
+    ledger_factory: Callable[..., DynamicRosterLedger] | None = None,
+    environment_factory: Callable[
+        [DynamicRosterLedger], GenericShortDynamicRosterEnv
+    ] | None = None,
 ) -> dict[str, Any]:
     formal = not smoke
     if formal and (
@@ -162,6 +170,8 @@ def run_stage_b(
         episode_ids=evaluation_ids,
         deterministic=True,
         device=device,
+        ledger_factory=ledger_factory,
+        environment_factory=environment_factory,
     )
     zero_stochastic = evaluate_direct_policy(
         zero_model,
@@ -169,6 +179,8 @@ def run_stage_b(
         deterministic=False,
         device=device,
         uniforms=evaluation_uniforms,
+        ledger_factory=ledger_factory,
+        environment_factory=environment_factory,
     )
 
     fieldnames = [
@@ -264,6 +276,8 @@ def run_stage_b(
                 ledger_ids=ledger_ids,
                 ledger_seed=TRAIN_LEDGER_SEED,
                 device=device,
+                ledger_factory=ledger_factory,
+                environment_factory=environment_factory,
             )
             consumed_ledger_ids.extend(trajectory.ledger_ids)
             hidden_lifecycle_valid = (
@@ -388,6 +402,8 @@ def run_stage_b(
         episode_ids=evaluation_ids,
         deterministic=True,
         device=device,
+        ledger_factory=ledger_factory,
+        environment_factory=environment_factory,
     )
     final_stochastic = evaluate_direct_policy(
         reloaded,
@@ -395,6 +411,8 @@ def run_stage_b(
         deterministic=False,
         device=device,
         uniforms=evaluation_uniforms,
+        ledger_factory=ledger_factory,
+        environment_factory=environment_factory,
     )
     improvement_ci = paired_bootstrap_ci(
         final_deterministic["utility"] - zero_deterministic["utility"],
