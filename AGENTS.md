@@ -32,12 +32,14 @@ The active controller reads `docs/project/CURRENT_WORK.md` first and loads only
 the project document needed for the current boundary:
 
 - `docs/project/ALGORITHM_PRINCIPLES.md` for scientific constraints;
-- `docs/project/IMPLEMENTATION_PLAN.md` for the one active executable design;
 - `docs/project/ExpRecord.md` for a formal experiment contract or disposition.
 
-The controller alone owns project-control documents, adoption of external
-scientific decisions, executable architecture, task decomposition, experiment
-authorization, Git integration, evidence integrity, and user communication.
+The controller alone owns root project state, adoption of external scientific
+decisions, implementation and experiment authorization, Git integration,
+evidence integrity, and user communication. The dedicated Code Implementation
+Manager owns concrete executable architecture, `IMPLEMENTATION_PLAN.md`, code
+task decomposition, implementation integration, and code review inside one
+controller-authorized boundary.
 Unresolved hypothesis generation, portfolio weighting, or next-evidence choice
 is sent to the External Review Manager; the controller does not silently replace
 a missing convergent disposition.
@@ -50,17 +52,19 @@ maintenance or a terminal protocol failure identifies that Skill as the fault.
 
 Choose exactly one execution surface and one role:
 
-- code implementation or repair -> temporary subagent with
-  `$hmasd-implementer`; do not use `$hmasd-task-router`;
+- complete code implementation or repair workflow -> persistent session with
+  `$hmasd-task-router` and `$hmasd-code-manager`; that manager alone creates
+  temporary `$hmasd-implementer` and `$hmasd-code-reviewer` subagents;
 - complete external review -> persistent session with `$hmasd-task-router` and
   `$hmasd-review-round`; that manager alone dispatches the three registered,
   one-reviewer-per-session exchanges using `$hmasd-review-exchange`;
 - authorized run monitoring -> persistent session with `$hmasd-task-router`
   and `$hmasd-experiment`.
 
-There is no controller orchestration Skill. The controller sequences these
-role assignments directly and accepts each returned artifact before sending a
-successor. A role completion never starts another role automatically.
+There is no controller orchestration Skill. The controller sends code work only
+to the Code Implementation Manager, external review only to the Review Manager,
+and monitoring only to the Experiment Monitor. A role completion never starts
+another role automatically.
 
 Every assignment states the objective, granted authority, required inputs,
 working scope, protected changes, forbidden scope, completion condition, and
@@ -69,10 +73,10 @@ broad repository context, or an additional Skill "for reference." Missing
 information is returned as `TASK_BLOCKED`; the recipient does not search for
 implied context.
 
-One coupled change has one implementer. Parallel implementers are allowed only
-for frozen, disjoint working scopes; one file has one writer. The controller
-integrates results and performs one focused inspection. Do not create internal
-reviewer subagents.
+The Code Implementation Manager enforces one implementer for a coupled change,
+parallel writers only for frozen disjoint scopes, one writer per file, and one
+fresh reviewer after integration. The controller neither dispatches these
+subagents nor performs implementation review.
 
 ## Mutation Tiers
 
@@ -84,12 +88,12 @@ Use strict authorization only for protected material:
 - `AGENTS.md`, `.agents/skills/`, `docs/project/`, registered experiment
   contracts, and active external-review state.
 
-A protected change requires an explicit controller specification and final
-controller inspection. Within an authorized working directory, ordinary helper
-code, runners, analyzers, tests, transient files, and non-normative documents
-may be created, edited, replaced, or deleted without a per-file approval loop.
-Do not preserve obsolete ordinary files merely because deleting them would
-otherwise require another confirmation.
+A protected change requires a controller-authorized scientific boundary, one
+Code Manager implementation plan, and an approved reviewer result. Within an
+authorized working directory, ordinary helper code, runners, analyzers, tests,
+transient files, and non-normative documents may be created, edited, replaced,
+or deleted without a per-file approval loop. Do not preserve obsolete ordinary
+files merely because deleting them would otherwise require another confirmation.
 
 ## Role and Context Firewall
 
@@ -101,8 +105,10 @@ A role Skill is both an authority grant and a context denylist:
 - tools and mutations not granted by the role Skill are forbidden;
 - a role cannot authorize another role, launch a successor, edit project
   control, change a task model, or expand its own assignment; the sole routing
-  exception is that the Review Manager may dispatch the fixed reviewer stages
-  defined by `$hmasd-review-round` to their pre-registered exchange sessions;
+  exceptions are that the Review Manager may dispatch the fixed reviewer stages
+  defined by `$hmasd-review-round` to their pre-registered exchange sessions,
+  and the Code Implementation Manager may create bounded native implementer and
+  reviewer subagents defined by `$hmasd-code-manager`;
 - persistent-session messages always return through `$hmasd-task-router` with
   delivery proof;
 - subagents return only through the native subagent channel and never contact a
@@ -114,6 +120,8 @@ user-selected settings; communication reads the recipient's live delivery
 metadata immediately before each send and copies it unchanged into the send.
 The controller communicates only with the Review Manager for external review;
 it never sends to or receives from a reviewer exchange directly.
+The controller communicates only with the Code Implementation Manager for code;
+it never sends to or receives from that manager's subagents directly.
 The Review Manager never stages, commits, or pushes. When a reviewer-visible
 boundary is required, it returns the exact active-round paths; the controller
 alone commits and pushes them, then resumes the same manager with the new commit.
@@ -136,7 +144,8 @@ Do not retain obsolete machinery for possible rollback. Preserve only raw
 scientific evidence or an artifact explicitly named by the current control
 plane.
 
-The implementation plan contains only the current executable design. When no
+The Code Implementation Manager writes the implementation plan only for an
+authorized assignment. It contains only the current executable design. When no
 implementation is authorized, it says so and contains no completed contract.
 
 ## Repository Boundaries

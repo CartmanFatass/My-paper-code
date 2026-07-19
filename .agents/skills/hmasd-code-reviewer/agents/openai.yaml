@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Code Reviewer"
+  short_description: "Review bounded HMASD implementation diffs"
+  default_prompt: "Use $hmasd-code-reviewer in a temporary reviewer subagent to inspect one completed implementation package."

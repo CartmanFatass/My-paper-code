@@ -8,6 +8,7 @@ $skillPath = Join-Path $repo '.agents/skills/hmasd-task-router/SKILL.md'
 $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1'
 $rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
 $sessionRoleSkills = @(
+    (Join-Path $repo '.agents/skills/hmasd-code-manager/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md')
@@ -44,6 +45,13 @@ foreach ($required in @(
     'controller <-> external_review_manager',
     'controller-to-reviewer',
     'manager-to-exchange send',
+    'Code Implementation Topology',
+    'controller <-> code_implementation_manager',
+    'START_CODE_WORK',
+    'CODE_GIT_PUSH_REQUIRED',
+    'CODE_COMPLETE',
+    'CODE_BLOCKED',
+    'subagents are not persistent-session destinations',
     'Receive Contract',
     'native delegation metadata `source_thread_id` equals the session ID',
     'stable `handoff_id`',
@@ -57,8 +65,11 @@ foreach ($required in @(
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 $managerId = $roles.roles.external_review_manager.thread_id
 $managerStatus = $roles.roles.external_review_manager.registration_status
-if ($roles.schema_version -ne 2 -or
+$codeManagerId = $roles.roles.code_implementation_manager.thread_id
+$codeManagerStatus = $roles.roles.code_implementation_manager.registration_status
+if ($roles.schema_version -ne 3 -or
     $roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
+    $roles.roles.code_implementation_manager.role_skill -ne '.agents/skills/hmasd-code-manager/SKILL.md' -or
     $roles.roles.external_review_manager.role_skill -ne '.agents/skills/hmasd-review-round/SKILL.md' -or
     $roles.roles.gemini_divergent_exchange.thread_id -ne '019f76cc-580b-7c40-8c92-97bfffaf51b1' -or
     $roles.roles.gemini_divergent_exchange.reviewer_role -ne 'GEMINI_DIVERGENT' -or
@@ -75,12 +86,17 @@ if ($roles.schema_version -ne 2 -or
     $roles.policy.update_owner -ne 'active_controller') {
     throw 'Session-role directory is inconsistent'
 }
+if (($null -eq $codeManagerId -and $codeManagerStatus -ne 'UNASSIGNED') -or
+    ($null -ne $codeManagerId -and $codeManagerStatus -ne 'ACTIVE')) {
+    throw 'Code Implementation Manager registration state is inconsistent'
+}
 if (($null -eq $managerId -and $managerStatus -ne 'UNASSIGNED') -or
     ($null -ne $managerId -and $managerStatus -ne 'ACTIVE')) {
     throw 'External Review Manager registration state is inconsistent'
 }
 foreach ($entry in @(
     $roles.roles.controller,
+    $roles.roles.code_implementation_manager,
     $roles.roles.external_review_manager,
     $roles.roles.gemini_divergent_exchange,
     $roles.roles.open_divergent_exchange,
@@ -95,6 +111,7 @@ foreach ($entry in @(
 }
 $assignedIds = @(
     $roles.roles.controller.thread_id,
+    $codeManagerId,
     $managerId,
     $roles.roles.gemini_divergent_exchange.thread_id,
     $roles.roles.open_divergent_exchange.thread_id,

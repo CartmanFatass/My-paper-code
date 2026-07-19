@@ -9,8 +9,11 @@ Updated: 2026-07-20
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
 - Handoff state: NONE
-- Codex role: project state, executable architecture, delegation, evidence,
-  Git, and user communication
+- Codex role: project state, accepted scientific boundary, implementation and
+  experiment authorization, evidence, Git, and user communication
+- Code implementation source: registered persistent Code Implementation
+  Manager; it owns executable architecture, implementation planning,
+  implementer/reviewer subagents, and focused code acceptance
 - Scientific decision source: accepted tracked convergent GPT-5.6 Pro
   disposition
 
@@ -40,10 +43,12 @@ until the user authorizes that boundary.
 
 ## Next Action
 
-Wait for user authorization. If granted, freeze one implementation contract for
-`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` using the unchanged clean carrier and the
-registered learned-high, byte-equal frozen-high, and routing-only oracle arms.
-Do not start implementation or training from this disposition alone.
+Wait for user authorization. If granted, send the accepted
+`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` scientific boundary to the registered
+Code Implementation Manager. That session freezes the executable contract and
+owns implementation plus code review; the controller retains authorization,
+Git integration, evidence acceptance, and user communication. Do not start
+implementation or training from this disposition alone.
 
 ## Autonomous Boundary
 
@@ -72,8 +77,8 @@ Do not start implementation or training from this disposition alone.
 
 - `docs/project/ALGORITHM_PRINCIPLES.md` — controller and implementer
   scientific constraints.
-- `docs/project/IMPLEMENTATION_PLAN.md` — current executable design or
-  explicit `NONE`.
+- `docs/project/IMPLEMENTATION_PLAN.md` — Code Implementation Manager-owned
+  current executable design or explicit `NONE`.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
   — completed review evidence and accepted `50_DISPOSITION.md`.

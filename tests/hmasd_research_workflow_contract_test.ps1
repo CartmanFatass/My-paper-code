@@ -5,6 +5,8 @@ $skillsRoot = Join-Path $repo ".agents/skills"
 $canonicalRoot = Join-Path $repo "docs/project"
 $sessionRolesPath = Join-Path $skillsRoot "hmasd-task-router/references/session-roles.json"
 $expectedSkills = @(
+    "hmasd-code-manager",
+    "hmasd-code-reviewer",
     "hmasd-experiment",
     "hmasd-implementer",
     "hmasd-review-exchange",
@@ -96,9 +98,44 @@ if (-not $current.Contains("Status: COMPLETE") -or
 
 $plan = Read-Text (Join-Path $canonicalRoot "IMPLEMENTATION_PLAN.md")
 if (-not $plan.Contains("Status: NONE") -or
+    -not $plan.Contains("registered Code Implementation Manager") -or
+    -not $plan.Contains('START_CODE_WORK') -or
     $plan.Contains("Completed Prior Contract") -or
     $plan.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
     throw "IMPLEMENTATION_PLAN retains a completed or dangling active contract"
+}
+
+$codeManager = Read-Text (Join-Path $skillsRoot "hmasd-code-manager/SKILL.md")
+foreach ($required in @(
+    'START_CODE_WORK',
+    'code_implementation_manager',
+    'docs/project/IMPLEMENTATION_PLAN.md',
+    'native subagents',
+    '$hmasd-implementer',
+    '$hmasd-code-reviewer',
+    'CODE_GIT_PUSH_REQUIRED',
+    'CODE_COMPLETE',
+    'CODE_BLOCKED',
+    'never stages, commits, pushes'
+)) {
+    if (-not $codeManager.Contains($required)) {
+        throw "Code Implementation Manager Skill is missing: $required"
+    }
+}
+
+$codeReviewer = Read-Text (Join-Path $skillsRoot "hmasd-code-reviewer/SKILL.md")
+foreach ($required in @(
+    'temporary read-only HMASD reviewer subagent',
+    'actual integrated diff',
+    'probability support and likelihood replay',
+    'scalar CUDA',
+    'CODE_REVIEW_APPROVED',
+    'CODE_REVIEW_CHANGES_REQUIRED',
+    'Do not send a cross-session message'
+)) {
+    if (-not $codeReviewer.Contains($required)) {
+        throw "Code Reviewer Skill is missing: $required"
+    }
 }
 
 $implementer = Read-Text (Join-Path $skillsRoot "hmasd-implementer/SKILL.md")

@@ -1,11 +1,17 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "updated": "2026-07-20",
   "roles": {
     "controller": {
       "kind": "active_controller",
       "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
       "contract": "AGENTS.md"
+    },
+    "code_implementation_manager": {
+      "kind": "persistent_role_session",
+      "thread_id": "019f7bd8-b4db-71f2-9a6e-f0082a0dc3d5",
+      "registration_status": "ACTIVE",
+      "role_skill": ".agents/skills/hmasd-code-manager/SKILL.md"
     },
     "external_review_manager": {
       "kind": "persistent_role_session",
