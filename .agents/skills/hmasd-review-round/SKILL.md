@@ -116,9 +116,10 @@ mismatch blocks before delivery and is never repaired by changing either task's
 model.
 
 One registered review heartbeat automation wakes that same Exchange while and
-only while a Pro stage is `DISPATCHED`. The controller activates the existing
-automation after verified dispatch; it never creates a second automation or a
-second Exchange task. Each tick performs one bounded read of the registered
+only while a Pro stage is `DISPATCHED`. The Exchange activates and verifies the
+existing automation immediately after the browser visibly accepts the single
+submission; neither role creates a second automation or a second Exchange
+task. Each tick performs one bounded read of the registered
 page. A still-active response ends that Codex turn as `WAIT_PRO_THINKING`; the
 next heartbeat, rather than an in-turn wait or controller polling, performs the
 next read. The heartbeat carries no review content and never submits a prompt.
