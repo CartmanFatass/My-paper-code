@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "source_run": "logs/clean_process_direct_access_20260719_192523",
+  "implementation_commit": "3d1511e",
+  "status": "PASS_CLEAN_CARRIER_DIRECT_ACCESS",
+  "implementation_valid": true,
+  "carrier_pass": true,
+  "direct_access_pass": true,
+  "process_channel": {
+    "fields": ["actuator_position", "actuator_velocity"],
+    "snapshot_round_trip": true,
+    "temporary_absence_frozen": true,
+    "rejoin_resumed": true,
+    "genuine_join_zero": true,
+    "input_to_actor": false,
+    "input_to_critic": false,
+    "input_to_reward": false,
+    "input_to_gae_or_ppo": false,
+    "task_neutral_schema": true
+  },
+  "controls": {
+    "constructive_min": {"persistent": 1.0, "short": 1.0, "utility": 1.0},
+    "uniform_random": {"positive_utility_fraction": 1.0, "utility_mean": 0.32421875}
+  },
+  "contract": {
+    "num_envs": 16,
+    "horizon": 80,
+    "outer_updates": 250,
+    "environment_transitions": 320000,
+    "active_agent_rows": 1280000,
+    "ppo_passes_per_update": 4,
+    "optimizer_steps": 1000,
+    "training_ledger_ids_consumed": 4000,
+    "evaluation_episodes_per_mode": 256,
+    "skill_updates": 0,
+    "high_updates": 0,
+    "intrinsic_reward_reads": 0
+  },
+  "m0": {
+    "requested_contract_valid": true,
+    "environment_steps_exact": true,
+    "active_agent_rows_exact": true,
+    "optimizer_steps_exact": true,
+    "train_ledger_ids_exact": true,
+    "evaluation_ledger_ids_exact": true,
+    "sampling_replay_logp": true,
+    "sampling_replay_joint_logp": true,
+    "sampling_replay_value": true,
+    "recurrent_hidden_replay": true,
+    "prefix_replay": true,
+    "all_updates_finite": true,
+    "final_parameters_finite": true,
+    "parameter_update_nonzero": true,
+    "strict_schema3_checkpoint": true,
+    "exact_final_checkpoint": true,
+    "temporary_absence_hidden_frozen": true
+  },
+  "replay_max_errors": {
+    "logp": 0.0,
+    "joint_logp": 0.0,
+    "value": 0.0,
+    "hidden": 0.0,
+    "prefix": 0.0
+  },
+  "zero": {
+    "deterministic_means": {"persistent": 0.0, "short": 1.0, "utility": 0.5}
+  },
+  "final": {
+    "deterministic_means": {"persistent": 1.0, "short": 0.9982096354166667, "utility": 0.9991048177083333},
+    "stochastic_means": {"persistent": 1.0, "short": 0.9733072916666667, "utility": 0.9866536458333333},
+    "paired_final_minus_zero_deterministic_utility_ci95": [0.49853515625, 0.49910481770833337, 0.49959309895833337]
+  },
+  "thresholds": {
+    "constructive_min": 0.95,
+    "random_positive_fraction_min": 0.20,
+    "random_utility_mean_exclusive_max": 0.55,
+    "direct_deterministic_utility_min": 0.70,
+    "direct_deterministic_persistent_min": 0.65,
+    "direct_deterministic_short_min": 0.65,
+    "direct_stochastic_utility_min": 0.60,
+    "paired_gain_lcb_exclusive": 0.15,
+    "replay_tolerance": 0.000001
+  },
+  "wall_seconds": {"carrier_controls": 25.887841400006437, "direct_core": 2151.4734758000122, "total": 2177.361751900011}
+}
