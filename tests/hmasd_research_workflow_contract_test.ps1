@@ -6,7 +6,6 @@ $canonicalRoot = Join-Path $repo "docs/project"
 $expectedSkills = @(
     "hmasd-experiment",
     "hmasd-implementer",
-    "hmasd-research-cycle",
     "hmasd-review-round",
     "hmasd-task-router"
 )
@@ -25,6 +24,7 @@ function Read-Text([string]$Path) {
 }
 
 $skillNames = @(Get-ChildItem -LiteralPath $skillsRoot -Directory |
+    Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') } |
     Sort-Object Name | Select-Object -ExpandProperty Name)
 if (($skillNames -join "|") -ne ($expectedSkills -join "|")) {
     throw "Project Skill set must be exactly: $($expectedSkills -join ', ')"
@@ -39,81 +39,123 @@ foreach ($legacy in @(
     "memory/ALGORITHM_PRINCIPLES.md",
     "memory/IMPLEMENTATION_PLAN.md",
     "memory/ExpRecord.md",
-    "docs/research/MARL_ENGINEERING_PRINCIPLES.md"
+    "docs/research/MARL_ENGINEERING_PRINCIPLES.md",
+    ".codex/collaboration/.gitignore",
+    ".codex/collaboration/conversations.json",
+    ".codex/collaboration/active/stage-c-performance-diagnosis/BRIEF.md"
 )) {
     if (Test-Path -LiteralPath (Join-Path $repo $legacy)) {
-        throw "Legacy canonical path must not exist: $legacy"
+        throw "Legacy workflow path must not exist: $legacy"
     }
 }
 
 $agents = Read-Text (Join-Path $repo "AGENTS.md")
 foreach ($required in @(
-    "Every HMASD Codex session reads",
+    "Every persistent HMASD Codex session reads",
+    "Temporary subagents do not use that Skill",
     "docs/project/CURRENT_WORK.md",
-    "Direct controller work is the default",
-    "MARL exploration is agile by default",
-    "Do not implement or retain backward",
-    "External Review Manager",
-    '`$hmasd-implementer',
-    '`$hmasd-task-router'
+    "The controller alone owns",
+    "There is no controller orchestration Skill",
+    "Mutation Tiers",
+    "ordinary files inside an assigned working scope",
+    "Role and Context Firewall",
+    "MARL exploration remains agile",
+    "Do not retain backward-compatibility adapters",
+    "hmasd-implementer",
+    "hmasd-review-round",
+    "hmasd-experiment",
+    "hmasd-task-router"
 )) {
     if (-not $agents.Contains($required)) {
-        throw "AGENTS.md is missing structural contract: $required"
+        throw "AGENTS.md is missing controller contract: $required"
     }
 }
-foreach ($forbidden in @("MARL_ENGINEERING_PRINCIPLES.md", "normal-research expectation")) {
+foreach ($forbidden in @(
+    "MARL_ENGINEERING_PRINCIPLES.md",
+    "hmasd-research-cycle",
+    "combined reviewer",
+    "BRIEF.md"
+)) {
     if ($agents.Contains($forbidden)) {
-        throw "AGENTS.md retains obsolete global workflow text: $forbidden"
+        throw "AGENTS.md retains obsolete workflow text: $forbidden"
     }
+}
+
+$current = Read-Text (Join-Path $canonicalRoot "CURRENT_WORK.md")
+if (-not $current.Contains("Status: REVIEW_PENDING") -or
+    -not $current.Contains("Remaining iterations: zero") -or
+    $current.Contains("Status: ACTIVE") -or
+    $current.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
+    throw "CURRENT_WORK does not close the zero-remaining autonomy loop"
+}
+
+$plan = Read-Text (Join-Path $canonicalRoot "IMPLEMENTATION_PLAN.md")
+if (-not $plan.Contains("Status: NONE") -or
+    $plan.Contains("Completed Prior Contract") -or
+    $plan.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
+    throw "IMPLEMENTATION_PLAN retains a completed or dangling active contract"
 }
 
 $implementer = Read-Text (Join-Path $skillsRoot "hmasd-implementer/SKILL.md")
 $engineering = Read-Text (Join-Path $skillsRoot "hmasd-implementer/references/engineering-principles.md")
 foreach ($required in @(
-    'the controller''s current task message',
+    'role_skill=.agents/skills/hmasd-implementer/SKILL.md',
+    'temporary HMASD implementation or implementation-fix subagent',
+    'working_scope=<one or more project directories>',
+    'protected_changes=<exact protected files/symbols or none>',
     'docs/project/ALGORITHM_PRINCIPLES.md',
-    'Do not load `CURRENT_WORK.md`',
-    'Do not add backward-compatibility branches',
-    'Run the single focused check'
+    'Do not load',
+    'only assignment-listed inputs',
+    'replace superseded active code',
+    'run the single focused check'
 )) {
     if (-not $implementer.Contains($required)) {
         throw "Implementer Skill is missing: $required"
     }
 }
-foreach ($required in @('Pack padded or indexed data once', 'Sampling, storage, replay', 'stage-level wall time')) {
+if ($implementer.Contains('../hmasd-task-router/SKILL.md')) {
+    throw "Implementer must not load the persistent-session router"
+}
+foreach ($required in @(
+    'Pack padded or indexed data once',
+    'Sampling, storage, replay',
+    'stage-level wall time'
+)) {
     if (-not $engineering.Contains($required)) {
         throw "Implementer engineering reference is missing: $required"
     }
 }
 
-$research = Read-Text (Join-Path $skillsRoot "hmasd-research-cycle/SKILL.md")
-if ($research -notmatch '(?s)^---.*description:.*explicitly invokes \$hmasd-research-cycle.*ACTIVE Autonomous Boundary.*---' -or
-    $research -notmatch '(?s)## Stop.*Do not invoke this Skill\s+again' -or
-    -not $research.Contains('BLOCKED_MISSING_PRO_DISPOSITION')) {
-    throw "Research-cycle trigger or stop boundary is incomplete"
-}
-
 $experiment = Read-Text (Join-Path $skillsRoot "hmasd-experiment/SKILL.md")
 $protocol = Read-Text (Join-Path $skillsRoot "hmasd-experiment/references/experiment-protocol.md")
-if (-not $experiment.Contains("inside the persistent HMASD experiment-monitor task") -or
-    -not $experiment.Contains("hmasd-task-router") -or
+if (-not $experiment.Contains("inside the persistent HMASD experiment-monitor session") -or
+    -not $experiment.Contains("role_skill=.agents/skills/hmasd-experiment/SKILL.md") -or
+    -not $experiment.Contains("Do not read project-control") -or
+    -not $experiment.Contains("monitor session creates and owns its heartbeat") -or
+    -not $experiment.Contains("interval is never shorter than 10") -or
     -not $protocol.Contains("One bounded heartbeat") -or
-    -not $protocol.Contains('send exactly one payload')) {
+    -not $protocol.Contains('delete this heartbeat with `automation_update`')) {
     throw "Experiment-monitor role boundary is incomplete"
 }
 
 $review = Read-Text (Join-Path $skillsRoot "hmasd-review-round/SKILL.md")
-$reviewState = Read-Text (Join-Path $skillsRoot "hmasd-review-round/scripts/review_state.ps1")
-if (-not $review.Contains("START_REVIEW") -or
-    -not $review.Contains("REVIEW_COMPLETE") -or
-    -not $review.Contains("persistent Luna External Review Manager") -or
-    -not $review.Contains("30_EVIDENCE_RECONCILIATION.md") -or
-    -not $reviewState.Contains("schema_version = 5")) {
-    throw "External Review Manager boundary is incomplete"
+if (-not $review.Contains("role_skill=.agents/skills/hmasd-review-round/SKILL.md") -or
+    -not $review.Contains("Do not load") -or
+    -not $review.Contains("AGENTS.md") -or
+    -not $review.Contains("There is no review state machine") -or
+    -not $review.Contains("create one 5-minute heartbeat") -or
+    -not $review.Contains("git push My-paper-code aggressive") -or
+    -not $review.Contains("delete it and verify deletion")) {
+    throw "External Review Manager role boundary is incomplete"
+}
+foreach ($forbidden in @("CONTINUE_REVIEW", "RESUME_REVIEW", "REVIEW_BOUNDARY_READY", "05_REVIEW_STATE.json")) {
+    if ($review.Contains($forbidden)) {
+        throw "External Review Manager retains obsolete controller/state lifecycle: $forbidden"
+    }
 }
 
 foreach ($skill in $expectedSkills) {
     [void](Read-Text (Join-Path $skillsRoot "$skill/agents/openai.yaml"))
 }
 
-Write-Output "HMASD_RESEARCH_WORKFLOW_CONTRACT_OK"
+Write-Output "HMASD_ROLE_ISOLATION_CONTRACT_OK"

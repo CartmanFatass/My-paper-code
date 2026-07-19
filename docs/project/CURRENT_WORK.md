@@ -1,125 +1,76 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 
 ## Controller Ownership
 
 - Active controller: Codex root task `019f5c78-0c91-7612-adb4-c1fcfe4484c8`
-- Controller host: `local`
 - Controller status: ACTIVE
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
-- Ownership since: `2026-07-17T18:02:29.8227942+08:00`
-- Previous controller: none
 - Handoff state: NONE
-- Codex role: engineering, evidence, experiment, Git, and user-facing control;
-  no independent algorithm-route selection
-- Scientific decision source: tracked convergent GPT-5.6 Pro disposition
+- Codex role: project state, executable architecture, delegation, evidence,
+  Git, and user communication
+- Scientific decision source: accepted tracked convergent GPT-5.6 Pro
+  disposition
 
-## Objective
+## Current Boundary
 
-Stage C is closed as `SUPPORT_H2_SKILL_LIMIT`: its high-level treatment changed
-later distributions but neither arm formed naturally executable skills or task
-access. Iteration 3 then closed as `F_UNDERPOWERED_OR_UNIDENTIFIABLE`, and
-Iteration 4 as `A_NO_MATERIAL_Z_DEPENDENCE`; their detailed evidence and legal
-claims are owned by `ExpRecord.md`.
+The clean-process dynamic-roster direct-access qualification is complete as
+`PASS_CLEAN_CARRIER_DIRECT_ACCESS`. The clean carrier passed its controls and
+the unchanged direct recurrent learner passed every registered absolute and
+paired-gain threshold with zero replay error. This establishes an access-valid
+substrate and narrows the Iteration-5 failure to its retired spatial carrier. It
+does not establish hierarchy, skill semantics, variable lifetime, cooperation,
+or transfer.
 
-Iteration 5 is closed as the valid registered priority branch
-`RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`. M0 passed, but the C3 direct arm did
-not establish ordinary-controller access on this spatial carrier: deterministic
-final `P/S/U=1.0000/0.5269/0.7634`, stochastic final `U=0.7245`, and the
-deterministic final-minus-zero utility CI was
-`[0.0484,0.0705,0.0931]`. The registered short-duty and gain requirements
-therefore failed. C1-on showed positive paired utility differences, but the
-priority branch prevents an algorithmic C1 claim and its material-semantics
-audit also failed. The five-iteration autonomous research boundary is complete.
+The tracked round
+`docs/external-review/rounds/20260719_clean_process_access_portfolio/` is the
+only active scientific boundary. Gemini and Open-Pro divergent reviews and the
+factual reconciliation are complete. Convergent Pro is already
+`DISPATCHED`; that accepted prompt must not be submitted again.
 
-The tracked postmortem round is complete. Convergent GPT-5.6 Pro accepted the
-Iteration-5 terminal interpretation, retained a weighted four-candidate
-portfolio, and recommended exactly one future evidence source: a one-time
-clean-process-channel dynamic-roster direct-access qualification on a newly
-registered carrier. The recommendation is adopted as the next design boundary;
-it did not itself authorize implementation or training. The user subsequently
-authorized one complete automatic research iteration on 2026-07-19, limited to
-that clean-carrier direct-access evidence source.
+No implementation or experiment is active. Until the round produces an
+accepted `50_DISPOSITION.md`, there is no authorized successor hypothesis,
+implementation plan, or evidence run.
 
-That evidence source is now complete as the valid registered positive branch
-`PASS_CLEAN_CARRIER_DIRECT_ACCESS`. The clean carrier passed both controls and
-the unchanged direct learner passed every absolute and paired-gain threshold
-with zero replay error. This establishes an access-valid substrate and narrows
-the exact Iteration-5 no-access outcome to its spatial carrier; it does not
-establish hierarchy, skill semantics, variable lifetime, cooperation or
-transfer.
+## Next Action
 
-## Causal Portfolio
-
-- **A — access-valid evidence substrate (high):** Iteration 5 was not an
-  identified hierarchy comparison because ordinary recurrent access failed.
-  One final clean carrier qualification may resolve whether this was specific
-  to that substrate.
-- **D — hierarchy-null direct recurrence (medium-high):** remains the mandatory
-  ordinary-MARL null. It is not yet proven sufficient for the final
-  decentralized variable-membership/lifetime capability.
-- **B — factorized discrete process executor (medium-low):** remains a possible
-  replacement for shared FiLM conditioning, conditional on a valid access
-  substrate and later process-realizability evidence.
-- **C — simplex process command (low, parked):** remains an alternative to B,
-  not an additive module. It requires evidence that non-vertex composition is
-  load-bearing.
-
-## Next Actions
-
-1. Complete one tracked external-review round over the accepted positive result
-   and the A/D/B/C portfolio.
-2. Adopt its evidence-consistent disposition, close this autonomous iteration,
-   and stop. Do not start B/C or a second research iteration automatically.
+The dedicated External Review Manager completes the already-dispatched
+convergent stage, writes the disposition, and returns one tool-confirmed
+terminal message. The controller then reads that disposition, checks it against
+the pinned evidence, updates the project control plane, and stops unless the
+user grants a new implementation or experiment boundary.
 
 ## Autonomous Boundary
 
-- Status: ACTIVE
-- Scope: one clean-process dynamic-roster direct-access qualification
-- Completed evidence-bearing iterations under this grant: one
+- Status: REVIEW_PENDING
+- Completed evidence-bearing iterations under the prior grant: one
 - Remaining iterations: zero
-- Activation authority: explicit user instruction on 2026-07-19
-- Permitted automatic action: the one required tracked external-review round
-  and its evidence-consistent disposition only
-- Stop condition: accepted external-review disposition for the completed source
+- Permitted automatic action: finish the active external-review round only
+- Stop condition: accepted disposition for the completed evidence source
+- Forbidden: automatic successor implementation, experiment, or research loop
 
-## Immediate Constraints
+## Durable Constraints
 
-- Final capability: one shared algorithm with runtime-variable team membership
+- Target capability: one shared algorithm with runtime-variable team membership
   and variable individual skill lifetime.
-- Current testbed: anonymous `4 -> 2 -> 6 -> 4`, persistent and reactive duties,
-  horizon 80, and one sparse terminal utility.
-- The exact Iteration-5 spatial carrier is retired under its no-direct-access
-  priority branch. Do not rescue it by changing budget, seed, threshold,
-  reward, model, task, process window, skill count, or audit.
-- Intrinsic reward must remain environment-agnostic; no task field, identity,
-  role, success predicate, progress, or external reward may enter it.
-- R41B is the positive fixed-`N` source anchor. R51--R55 and other retired
-  mechanisms are inactive evidence, not implementation dependencies.
-- No stopped-run resume across source commits and no automatic budget, seed,
-  threshold, reward, model, task, or skill-count rescue.
-- The recommended next source is a new carrier qualification, not an
-  Iteration-5 capacity/budget rescue. It contains constructive, random, and
-  direct recurrent access arms only; no high policy, skill, KEEP/SET,
-  posterior, intrinsic reward, or semantic audit enters its scientific branch.
+- Preserve the ordinary recurrent direct learner as the access null.
+- Intrinsic reward remains environment-agnostic: no task field, identity, role,
+  success predicate, progress measure, or external reward may enter it.
+- R41B is the positive fixed-`N` source anchor. Retired mechanisms and old
+  carriers are evidence, not executable dependencies.
+- Do not rescue a valid failure by changing budget, seed, threshold, reward,
+  model, task, skill count, or carrier under the same claim.
+- Active-line development applies; no backward-compatibility or legacy path is
+  required.
 
 ## Pointers
 
-- `docs/project/ALGORITHM_PRINCIPLES.md` — scientific exploration contract.
-- `docs/project/MARL_ENGINEERING_PRINCIPLES.md` — implementation and
-  experiment-code contract.
-- `docs/project/IMPLEMENTATION_PLAN.md` — frozen Iteration-5 implementation and
-  evidence contract.
+- `docs/project/ALGORITHM_PRINCIPLES.md` — controller and implementer
+  scientific constraints.
+- `docs/project/IMPLEMENTATION_PLAN.md` — current executable design or
+  explicit `NONE`.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
-- `docs/research/designs/F0_F1_DYNAMIC_ROSTER_TESTBED_CONTRACT.md` — accepted
-  variable-roster testbed contract.
-- `docs/research/designs/VARIABLE_N_LIFETIME_EVENT_ARCHITECTURE_CONTRACT.md` —
-  retained event-runtime architecture boundary.
-- `docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/` —
-  closed portfolio review.
-- `docs/external-review/gpt5_6_pro/20260718_iteration4_semantic_null_convergence/`
-  — accepted Iteration-4 convergence review.
-- `docs/external-review/rounds/20260719_iteration5_postmortem_portfolio/` —
-  completed post-Iteration-5 portfolio review and accepted disposition.
+- `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
+  — active review evidence boundary and eventual disposition.

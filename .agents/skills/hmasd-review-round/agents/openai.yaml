@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Review Round"
-  short_description: "Run the complete tracked review in one Review Manager"
-  default_prompt: "Use $hmasd-review-round as the persistent External Review Manager, complete every registered external stage, archive its evidence, and return only the final disposition or terminal blocker."
+  short_description: "Isolate one complete tracked external review"
+  default_prompt: "Use $hmasd-review-round only in the dedicated External Review Manager to process the named round and return tool-confirmed lifecycle messages."

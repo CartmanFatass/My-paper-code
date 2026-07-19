@@ -1,21 +1,22 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "updated": "2026-07-20",
   "monitor_route": {
-    "host_id": "local",
     "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
-    "title": "HMASD Experiment Monitor — Luna Medium"
+    "title": "HMASD Experiment Monitor"
   },
   "controller_return_route": {
-    "host_id": "local",
     "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
     "route_policy": "resolve_live_immediately_before_each_send"
   },
   "automation": {
-    "id": "hmasd-r35-single-thread-monitor",
     "kind": "heartbeat",
+    "name_template": "hmasd-experiment-<run-id>",
+    "owner": "registered_monitor_session",
     "initial_cadence_minutes": 15,
-    "target_thread_id": "019f772b-355f-79f3-abbc-2f08800738f8"
+    "minimum_cadence_minutes": 10,
+    "target": "self",
+    "terminal_action": "delete_after_confirmed_controller_delivery"
   },
   "cadence_policy": {
     "fallback_minutes": 15,
@@ -24,12 +25,11 @@
     "eta_buckets": [
       {"eta_minutes_above": 240, "interval_minutes": 30},
       {"eta_minutes_above": 120, "interval_minutes": 20},
-      {"eta_minutes_above": 45, "interval_minutes": 10},
-      {"eta_minutes_above": 0, "interval_minutes": 5}
+      {"eta_minutes_above": 0, "interval_minutes": 10}
     ]
   },
   "automation_ownership": {
-    "assignment_activation_cadence_and_terminal_pause": "registered_monitor_task",
+    "create_retarget_and_delete": "registered_monitor_session",
     "controller_role": "communication_only"
   },
   "progress_policy": {

@@ -6,27 +6,36 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skillPath = Join-Path $repo '.agents/skills/hmasd-task-router/SKILL.md'
 $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1'
-$reviewSkill = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
-$experimentSkill = Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md'
+$sessionRoleSkills = @(
+    (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'),
+    (Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md')
+)
+$implementerSkill = Join-Path $repo '.agents/skills/hmasd-implementer/SKILL.md'
 $monitorRegistry = Join-Path $repo '.agents/skills/hmasd-experiment/references/monitor-task.json'
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
+$normalizedSkillText = $skillText -replace '\s+', ' '
 foreach ($required in @(
-    'Mandatory communication contract for every HMASD Codex session',
-    'for the recipient only',
-    'not store expected values, compare models',
-    'Omitting `model` or `thinking` is forbidden',
-    'treats the reply destination as the new',
-    'one `START_REVIEW`',
-    '`REVIEW_COMPLETE`',
-    '`REVIEW_BLOCKED` from the External Review Manager',
-    'heartbeat ticks remain inside the monitor task',
-    'ambiguous delivery is never repeated',
-    'Require Delivery Proof',
-    'tool result identifies the resolved recipient `threadId`',
-    'final response',
-    'not cross-task')) {
-    if (-not $skillText.Contains($required)) {
+    'Own persistent-session communication only',
+    'Never use this Skill for a temporary',
+    'exactly one session-role Skill',
+    'HMASD_SESSION_TASK',
+    'task_id=<stable id>',
+    'role_skill=<one .agents/skills/.../SKILL.md path>',
+    'Conversation history, nearby files, registries, and earlier assignments are not implicit inputs',
+    'Every compact message must still contain exactly one',
+    'Resolve the Recipient Live',
+    'Copy the recipient''s current values unchanged',
+    'Send once',
+    'same recipient `threadId`',
+    'ambiguous send is never repeated',
+    'Before replying, resolve the reply destination again',
+    'Receive Contract',
+    'native delegation metadata names the registered task ID',
+    'stable `handoff_id`',
+    'same role and `handoff_id` as the same delivery',
+    'do not add a separate relay state machine')) {
+    if (-not $normalizedSkillText.Contains($required)) {
         throw "Communication Skill is missing: $required"
     }
 }
@@ -34,33 +43,41 @@ foreach ($forbidden in @(
     'ExpectedModel',
     'ExpectedThinking',
     'frozen route',
-    'for the sender and recipient',
     'resolve both tasks')) {
-    if ($skillText.Contains($forbidden)) {
-        throw "Communication Skill retains static routing: $forbidden"
+    if ($normalizedSkillText.Contains($forbidden)) {
+        throw "Communication Skill retains static or sender-owned routing: $forbidden"
     }
 }
 
-foreach ($path in @($reviewSkill, $experimentSkill)) {
-    if (-not (Get-Content -LiteralPath $path -Raw).Contains('hmasd-task-router')) {
-        throw "Role Skill does not require common communication: $path"
+foreach ($path in $sessionRoleSkills) {
+    $text = Get-Content -LiteralPath $path -Raw
+    if (-not $text.Contains('hmasd-task-router') -or
+        -not $text.Contains('role_skill=')) {
+        throw "Role Skill lacks the common router or explicit role grant: $path"
     }
+}
+$implementerText = Get-Content -LiteralPath $implementerSkill -Raw
+if (-not $implementerText.Contains('native subagent result channel') -or
+    -not $implementerText.Contains('invoke `$hmasd-task-router`') -or
+    $implementerText.Contains('../hmasd-task-router/SKILL.md')) {
+    throw 'Implementer incorrectly uses persistent-session routing'
 }
 
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
-if ($monitor.schema_version -ne 5 -or
+if ($monitor.schema_version -ne 6 -or
     $monitor.monitor_route.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
     $monitor.controller_return_route.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
     $monitor.controller_return_route.route_policy -ne 'resolve_live_immediately_before_each_send' -or
-    $monitor.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
-    $monitor.automation.target_thread_id -ne $monitor.monitor_route.thread_id -or
+    $monitor.automation.owner -ne 'registered_monitor_session' -or
+    $monitor.automation.target -ne 'self' -or
     $monitor.routing_skill -ne '.agents/skills/hmasd-task-router/SKILL.md') {
     throw 'Persistent monitor registry is not the stable-ID communication contract'
 }
 foreach ($route in @($monitor.monitor_route, $monitor.controller_return_route)) {
     if ($null -ne $route.PSObject.Properties['model'] -or
-        $null -ne $route.PSObject.Properties['thinking']) {
-        throw 'Monitor registry must not mirror task model or thinking'
+        $null -ne $route.PSObject.Properties['thinking'] -or
+        $null -ne $route.PSObject.Properties['host_id']) {
+        throw 'Monitor registry must not mirror live delivery metadata'
     }
 }
 

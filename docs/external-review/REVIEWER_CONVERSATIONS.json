@@ -1,30 +1,35 @@
 {
-  "schema_version": 15,
+  "schema_version": 17,
   "updated": "2026-07-20",
   "review_manager": {
     "kind": "persistent_full_round_manager",
     "title": "External Review Manager",
     "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-    "host_id": "local",
+    "role_skill": ".agents/skills/hmasd-review-round/SKILL.md",
     "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
     "route_resolver": ".agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1",
     "route_policy": "resolve_live_immediately_before_each_send",
-    "start_message": "START_REVIEW",
-    "terminal_messages": [
+    "controller_messages": [
+      "START_REVIEW"
+    ],
+    "manager_messages": [
       "REVIEW_COMPLETE",
       "REVIEW_BLOCKED"
     ],
     "owns": [
       "gemini_transport",
       "open_pro_browser",
-      "review_state",
-      "heartbeat",
+      "external_request_heartbeat",
       "raw_archival",
       "evidence_reconciliation",
-      "round_git_boundary",
       "convergent_pro_browser",
-      "final_disposition"
+      "final_disposition",
+      "active_round_git_commit_push"
     ],
+    "git_boundary": {
+      "manager_role": "stage_commit_push_active_round_only",
+      "controller_role": "consume_terminal_disposition_only"
+    },
     "browser": {
       "surface": "codex_in_app_browser",
       "ui_scope": "application_shared",
@@ -32,13 +37,16 @@
       "foreground_policy": "navigate_to_review_manager_before_browser_operation"
     },
     "heartbeat": {
-      "automation_id": "hmasd-external-review-exchange",
-      "target_thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-      "active_condition": "one accepted Pro response is pending",
-      "terminal_order": "pause_verify_then_final_relay"
+      "kind": "heartbeat",
+      "name_template": "hmasd-review-<round>-<stage>",
+      "owner": "review_manager_session",
+      "target": "self",
+      "interval_minutes": 5,
+      "active_condition": "one accepted external response or terminal callback is pending",
+      "terminal_order": "archive_or_disposition_then_confirm_callback_then_delete",
+      "duplicate_policy": "same_handoff_id_is_idempotent"
     },
     "controller_return_route": {
-      "host_id": "local",
       "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
       "route_policy": "resolve_live_immediately_before_each_send"
     }

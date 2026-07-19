@@ -14,8 +14,12 @@ $protocol = Get-Content -LiteralPath $protocolPath -Raw
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 
 foreach ($required in @(
-    'inside the persistent HMASD experiment-monitor task',
-    'pause and verify the heartbeat',
+    'inside the persistent HMASD experiment-monitor session',
+    'monitor session creates and owns its heartbeat',
+    'controller never creates, updates, pauses, or deletes',
+    'interval is never shorter than 10',
+    'Delete and verify deletion of the heartbeat only',
+    'same `handoff_id`',
     'Never use sleep')) {
     if (-not $skill.Contains($required)) {
         throw "Experiment Skill is missing: $required"
@@ -29,30 +33,39 @@ foreach ($required in @(
     'Use the slowest active arm',
     'Relax to a longer interval only after ETA crosses',
     'end with `MONITOR_RUNNING`',
-    'automation to `PAUSED`',
+    'keep this session''s heartbeat `ACTIVE`',
     'resolve the controller''s live route immediately',
-    'send exactly one payload')) {
+    'delete this heartbeat with `automation_update`',
+    'same `handoff_id`')) {
     if (-not $protocol.Contains($required)) {
         throw "Experiment protocol is missing: $required"
     }
 }
 
-if ($registry.schema_version -ne 5 -or
-    $registry.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
+if ($registry.schema_version -ne 6 -or
     $registry.automation.kind -ne 'heartbeat' -or
+    $registry.automation.name_template -ne 'hmasd-experiment-<run-id>' -or
+    $registry.automation.owner -ne 'registered_monitor_session' -or
     $registry.automation.initial_cadence_minutes -ne 15 -or
-    $registry.automation.target_thread_id -ne $registry.monitor_route.thread_id -or
+    $registry.automation.minimum_cadence_minutes -ne 10 -or
+    $registry.automation.target -ne 'self' -or
+    $registry.automation.terminal_action -ne 'delete_after_confirmed_controller_delivery' -or
     $registry.cadence_policy.fallback_minutes -ne 15 -or
     $registry.cadence_policy.minimum_progress_fraction -ne 0.05 -or
     $registry.cadence_policy.relax_hysteresis_multiplier -ne 1.25 -or
-    $registry.cadence_policy.eta_buckets.Count -ne 4 -or
-    $registry.cadence_policy.eta_buckets[3].interval_minutes -ne 5 -or
-    $registry.automation_ownership.assignment_activation_cadence_and_terminal_pause -ne 'registered_monitor_task' -or
+    $registry.cadence_policy.eta_buckets.Count -ne 3 -or
+    $registry.cadence_policy.eta_buckets[2].interval_minutes -ne 10 -or
+    $registry.automation_ownership.create_retarget_and_delete -ne 'registered_monitor_session' -or
     $registry.automation_ownership.controller_role -ne 'communication_only' -or
     $registry.controller_return_route.route_policy -ne 'resolve_live_immediately_before_each_send' -or
     $registry.progress_policy.display -ne 'monitor_task_each_tick' -or
     $registry.progress_policy.controller_relay -ne 'terminal_or_actionable_error_only') {
     throw 'Monitor registry does not bind one progress heartbeat to the registered monitor task'
+}
+if (@($registry.cadence_policy.eta_buckets | Where-Object {
+    $_.interval_minutes -lt $registry.automation.minimum_cadence_minutes
+}).Count -ne 0) {
+    throw 'Monitor ETA cadence violates the 10-minute minimum'
 }
 foreach ($route in @($registry.monitor_route, $registry.controller_return_route)) {
     if ($null -ne $route.PSObject.Properties['model'] -or

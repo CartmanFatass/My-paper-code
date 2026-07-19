@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("init", "show", "next", "transition", "resume", "validate")]
+    [ValidateSet("init", "show", "next", "transition", "resume", "relay", "validate")]
     [string]$Mode,
 
     [Parameter(Mandatory = $true)]
@@ -22,7 +22,8 @@ param(
     [string]$RouteToken,
     [string]$DeadlineAt,
     [string]$Blocker,
-    [string]$ResolvedBlocker
+    [string]$ResolvedBlocker,
+    [string]$DeliveredThreadId
 )
 
 $ErrorActionPreference = "Stop"
@@ -99,12 +100,32 @@ function Assert-Route([string]$StageName, [object]$Entry) {
 }
 
 function Assert-State([object]$Document) {
-    if ($Document.schema_version -ne 5 -or
+    if ($Document.schema_version -ne 6 -or
         $Document.round_id -ne (Split-Path -Leaf $round)) {
         throw "Review state identity or schema mismatch"
     }
     if ($Document.round_status -notin @("ACTIVE", "CLOSED")) {
         throw "Invalid round status: $($Document.round_status)"
+    }
+
+    $relay = $Document.controller_relay
+    if ($null -eq $relay -or $relay.state -notin @("NONE", "PENDING", "SENT")) {
+        throw "Invalid controller relay state"
+    }
+    if ($relay.state -eq "NONE" -and
+        (-not [string]::IsNullOrWhiteSpace($relay.message) -or
+         -not [string]::IsNullOrWhiteSpace($relay.delivered_thread_id))) {
+        throw "NONE relay contains delivery evidence"
+    }
+    if ($relay.state -eq "PENDING" -and
+        ([string]::IsNullOrWhiteSpace($relay.message) -or
+         -not [string]::IsNullOrWhiteSpace($relay.delivered_thread_id))) {
+        throw "PENDING relay is malformed"
+    }
+    if ($relay.state -eq "SENT" -and
+        ([string]::IsNullOrWhiteSpace($relay.message) -or
+         [string]::IsNullOrWhiteSpace($relay.delivered_thread_id))) {
+        throw "SENT relay lacks delivery proof"
     }
 
     foreach ($name in $stageOrder) {
@@ -185,9 +206,22 @@ function Assert-State([object]$Document) {
         ($Document.stages.controller_disposition.state -eq "COMPLETE")) {
         throw "Round closure and disposition disagree"
     }
+
+    $terminal = $Document.round_status -eq "CLOSED" -or @($stageOrder | Where-Object {
+        $Document.stages.$_.state -eq "BLOCKED"
+    }).Count -gt 0
+    if ($terminal -and $relay.state -eq "NONE") {
+        throw "Terminal review state requires a durable controller relay"
+    }
+    if (-not $terminal -and $relay.state -ne "NONE") {
+        throw "Nonterminal review state contains a terminal relay"
+    }
 }
 
 function Get-Next([object]$Document) {
+    if ($Document.controller_relay.state -eq "PENDING") {
+        return "RELAY:PENDING"
+    }
     if ($Document.round_status -eq "CLOSED") { return "CLOSED" }
     $waiting = @($externalStages | Where-Object {
         $Document.stages.$_.state -eq "DISPATCHED"
@@ -222,11 +256,16 @@ if ($Mode -eq "init") {
         }
     }
     $document = [ordered]@{
-        schema_version = 5
+        schema_version = 6
         round_id = Split-Path -Leaf $round
         round_status = "ACTIVE"
         updated_at = [DateTimeOffset]::Now.ToString("o")
         stages = $stages
+        controller_relay = [ordered]@{
+            state = "NONE"
+            message = $null
+            delivered_thread_id = $null
+        }
     }
     Write-State $document
 } else {
@@ -275,6 +314,9 @@ if ($Mode -eq "transition") {
         $entry.blocker = $null
         if ($Stage -eq "controller_disposition") {
             $document.round_status = "CLOSED"
+            $document.controller_relay.state = "PENDING"
+            $document.controller_relay.message = "REVIEW_COMPLETE`nround=$($document.round_id)`ndisposition=docs/external-review/rounds/$($document.round_id)/$($entry.artifact_path)"
+            $document.controller_relay.delivered_thread_id = $null
         }
     } elseif ($State -eq "BLOCKED") {
         if ([string]::IsNullOrWhiteSpace($Blocker)) {
@@ -282,6 +324,9 @@ if ($Mode -eq "transition") {
         }
         $entry.state = "BLOCKED"
         $entry.blocker = $Blocker
+        $document.controller_relay.state = "PENDING"
+        $document.controller_relay.message = "REVIEW_BLOCKED`nround=$($document.round_id)`nblocker=$Blocker`ndisposition=none"
+        $document.controller_relay.delivered_thread_id = $null
     } else {
         throw "Invalid transition target: $State"
     }
@@ -300,6 +345,9 @@ if ($Mode -eq "resume") {
     $entry = $document.stages.$Stage
     if ($entry.state -ne "BLOCKED") {
         throw "Only a BLOCKED stage may resume: $Stage"
+    }
+    if ($document.controller_relay.state -ne "SENT") {
+        throw "A BLOCKED stage may resume only after its callback was delivered"
     }
     if (-not [string]::Equals(
         [string]$entry.blocker,
@@ -329,6 +377,22 @@ if ($Mode -eq "resume") {
     $entry.dispatched_at = $null
     $entry.deadline_at = $null
     $entry.blocker = $null
+    $document.controller_relay.state = "NONE"
+    $document.controller_relay.message = $null
+    $document.controller_relay.delivered_thread_id = $null
+    Assert-State $document
+    Write-State $document
+}
+
+if ($Mode -eq "relay") {
+    if ($document.controller_relay.state -ne "PENDING") {
+        throw "Only a PENDING controller relay may be marked SENT"
+    }
+    if ([string]::IsNullOrWhiteSpace($DeliveredThreadId)) {
+        throw "relay requires -DeliveredThreadId from the send tool result"
+    }
+    $document.controller_relay.state = "SENT"
+    $document.controller_relay.delivered_thread_id = $DeliveredThreadId
     Assert-State $document
     Write-State $document
 }

@@ -6,146 +6,115 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $registryPath = Join-Path $repo "docs/external-review/REVIEWER_CONVERSATIONS.json"
 $skillPath = Join-Path $repo ".agents/skills/hmasd-review-round/SKILL.md"
-$stateScript = Join-Path $repo ".agents/skills/hmasd-review-round/scripts/review_state.ps1"
+$heartbeatRenderer = Join-Path $repo ".agents/skills/hmasd-review-round/scripts/render_review_heartbeat.ps1"
+$readmePath = Join-Path $repo "docs/external-review/README.md"
 
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 $manager = $registry.review_manager
-if ($registry.schema_version -ne 15 -or
+if ($registry.schema_version -ne 17 -or
     $manager.kind -ne "persistent_full_round_manager" -or
     $manager.thread_id -ne "019f716c-676f-7673-9782-f37b72f200d2" -or
+    $manager.role_skill -ne ".agents/skills/hmasd-review-round/SKILL.md" -or
+    $manager.routing_skill -ne ".agents/skills/hmasd-task-router/SKILL.md" -or
     $manager.route_policy -ne "resolve_live_immediately_before_each_send" -or
-    $manager.start_message -ne "START_REVIEW" -or
+    ($manager.controller_messages -join '|') -ne "START_REVIEW" -or
+    ($manager.manager_messages -join '|') -ne "REVIEW_COMPLETE|REVIEW_BLOCKED" -or
+    $manager.git_boundary.manager_role -ne "stage_commit_push_active_round_only" -or
+    $manager.git_boundary.controller_role -ne "consume_terminal_disposition_only" -or
+    $manager.heartbeat.owner -ne "review_manager_session" -or
+    $manager.heartbeat.target -ne "self" -or
+    $manager.heartbeat.interval_minutes -ne 5 -or
+    $manager.heartbeat.terminal_order -ne "archive_or_disposition_then_confirm_callback_then_delete" -or
+    $manager.heartbeat.duplicate_policy -ne "same_handoff_id_is_idempotent" -or
     $manager.browser.ui_scope -ne "application_shared" -or
     $manager.browser.logical_owner -ne "review_manager" -or
-    $manager.heartbeat.target_thread_id -ne $manager.thread_id -or
     $registry.reviewers.gemini_divergent.transport -ne "review_manager_antigravity_cli" -or
     $registry.reviewers.open_divergent.transport -ne "review_manager_in_app_browser" -or
     $registry.reviewers.convergent.transport -ne "review_manager_in_app_browser") {
     throw "External Review Manager registry is inconsistent"
 }
-if ($null -ne $manager.PSObject.Properties['model'] -or
-    $null -ne $manager.PSObject.Properties['thinking'] -or
-    $null -ne $manager.controller_return_route.PSObject.Properties['model'] -or
-    $null -ne $manager.controller_return_route.PSObject.Properties['thinking']) {
-    throw "External Review Manager registry must not mirror Codex model or thinking"
+foreach ($routeEntry in @($manager, $manager.controller_return_route)) {
+    if ($null -ne $routeEntry.PSObject.Properties['model'] -or
+        $null -ne $routeEntry.PSObject.Properties['thinking'] -or
+        $null -ne $routeEntry.PSObject.Properties['host_id']) {
+        throw "External Review Manager registry must not mirror live delivery metadata"
+    }
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
 foreach ($required in @(
-    "START_REVIEW",
-    "RESUME_REVIEW",
-    "Do not spawn a Gemini transport subagent",
-    "browser tools for a tracked review",
-    "controller's only scientific input from the round",
-    "pins reviewer-visible scientific evidence only",
-    "current working tree",
-    'tool result''s target `threadId`',
-    "local final response"
+    "role_skill=.agents/skills/hmasd-review-round/SKILL.md",
+    "Do not load",
+    "conversation history",
+    "git push My-paper-code aggressive",
+    "There is no review state machine",
+    "create one 5-minute heartbeat",
+    "scripts/render_review_heartbeat.ps1",
+    "controller never creates, updates",
+    "handoff_id=<round>:complete:<pushed-disposition-commit>",
+    "keep the heartbeat active",
+    "delete it and verify deletion",
+    'same `handoff_id`'
 )) {
     if (-not $skillText.Contains($required)) {
         throw "Review Manager contract is missing: $required"
     }
 }
-if ($skillText -match "repair_incomplete|repair_unaccepted_dispatch|fork_turns") {
-    throw "Review Manager retains removed recovery or subagent machinery"
+foreach ($forbidden in @(
+    "CONTINUE_REVIEW",
+    "RESUME_REVIEW",
+    "REVIEW_BOUNDARY_READY",
+    "05_REVIEW_STATE.json",
+    "pause and verify the heartbeat"
+)) {
+    if ($skillText.Contains($forbidden)) {
+        throw "Review Manager retains obsolete controller/state lifecycle: $forbidden"
+    }
 }
 
-function New-Round {
-    $path = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-review-state-" + [guid]::NewGuid().ToString("N"))
-    [void](New-Item -ItemType Directory -Path $path)
-    & $stateScript -Mode init -RoundPath $path | Out-Null
-    $path
+$readme = Get-Content -LiteralPath $readmePath -Raw
+foreach ($forbidden in @("CONTINUE_REVIEW", "RESUME_REVIEW", "REVIEW_BOUNDARY_READY", "05_REVIEW_STATE.json")) {
+    if ($readme.Contains($forbidden)) {
+        throw "External-review overview exposes obsolete manager mechanics: $forbidden"
+    }
 }
 
-function Route([string]$RoundPath, [string]$Role, [string]$Artifact) {
-    $id = Split-Path -Leaf $RoundPath
-    "$id`:$Role`:$("a" * 40)`:docs/external-review/rounds/$id/$Artifact"
-}
-
-function Complete-External([string]$RoundPath, [string]$Stage, [string]$Role, [string]$Artifact) {
-    $route = Route $RoundPath $Role $Artifact
-    $deadline = [DateTimeOffset]::Now.AddHours(2).ToString("o")
-    & $stateScript -Mode transition -RoundPath $RoundPath -Stage $Stage `
-        -State DISPATCHED -RouteToken $route -DeadlineAt $deadline | Out-Null
-    Set-Content -LiteralPath (Join-Path $RoundPath $Artifact) -Value "RAW" -Encoding utf8NoBOM
-    & $stateScript -Mode transition -RoundPath $RoundPath -Stage $Stage `
-        -State COMPLETE | Out-Null
-}
-
-$happy = New-Round
-$blocked = New-Round
-$acceptedBlocked = New-Round
+$round = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-review-heartbeat-" + [guid]::NewGuid().ToString("N"))
 try {
-    $initial = Get-Content -LiteralPath (Join-Path $happy "05_REVIEW_STATE.json") -Raw | ConvertFrom-Json
-    if ($initial.schema_version -ne 5 -or $initial.stages.gemini_divergent.dispatch_count -ne 0) {
-        throw "Review state did not initialize schema 5"
-    }
-
-    Complete-External $happy "gemini_divergent" "GEMINI_DIVERGENT" "11_GEMINI_DIVERGENT_RAW.md"
-    Complete-External $happy "open_pro" "OPEN_DIVERGENT" "21_PRO_OPEN_RAW.md"
-    Set-Content -LiteralPath (Join-Path $happy "30_EVIDENCE_RECONCILIATION.md") -Value "RECONCILIATION" -Encoding utf8NoBOM
-    & $stateScript -Mode transition -RoundPath $happy -Stage evidence_reconciliation -State COMPLETE | Out-Null
-    Complete-External $happy "convergent_pro" "CONVERGENT" "41_PRO_CONVERGENT_RAW.md"
-    Set-Content -LiteralPath (Join-Path $happy "50_DISPOSITION.md") -Value "DISPOSITION" -Encoding utf8NoBOM
-    & $stateScript -Mode transition -RoundPath $happy -Stage controller_disposition -State COMPLETE | Out-Null
-    if ((& $stateScript -Mode next -RoundPath $happy) -ne "CLOSED") {
-        throw "Completed review round did not close"
-    }
-
-    & $stateScript -Mode transition -RoundPath $blocked -Stage gemini_divergent `
-        -State BLOCKED -Blocker "TRANSPORT_FAILURE" | Out-Null
-    $route = Route $blocked "GEMINI_DIVERGENT" "11_GEMINI_DIVERGENT_RAW.md"
-    $deadline = [DateTimeOffset]::Now.AddHours(2).ToString("o")
-    $retrySucceeded = $false
-    try {
-        & $stateScript -Mode transition -RoundPath $blocked -Stage gemini_divergent `
-            -State DISPATCHED -RouteToken $route -DeadlineAt $deadline | Out-Null
-        $retrySucceeded = $true
-    } catch {}
-    if ($retrySucceeded) {
-        throw "Terminal blocker allowed an implicit repair or duplicate dispatch"
-    }
-
-    $mismatchSucceeded = $false
-    try {
-        & $stateScript -Mode resume -RoundPath $blocked -Stage gemini_divergent `
-            -ResolvedBlocker "OTHER_FAILURE" | Out-Null
-        $mismatchSucceeded = $true
-    } catch {}
-    if ($mismatchSucceeded) {
-        throw "Resume accepted a blocker that did not match exactly"
-    }
-
-    & $stateScript -Mode resume -RoundPath $blocked -Stage gemini_divergent `
-        -ResolvedBlocker "TRANSPORT_FAILURE" | Out-Null
-    if ((& $stateScript -Mode next -RoundPath $blocked) -ne "NEXT:gemini_divergent") {
-        throw "Resolved pre-dispatch blocker did not resume in place"
-    }
-
-    $acceptedRoute = Route $acceptedBlocked "GEMINI_DIVERGENT" "11_GEMINI_DIVERGENT_RAW.md"
-    $acceptedDeadline = [DateTimeOffset]::Now.AddHours(2).ToString("o")
-    & $stateScript -Mode transition -RoundPath $acceptedBlocked -Stage gemini_divergent `
-        -State DISPATCHED -RouteToken $acceptedRoute -DeadlineAt $acceptedDeadline | Out-Null
-    & $stateScript -Mode transition -RoundPath $acceptedBlocked -Stage gemini_divergent `
-        -State BLOCKED -Blocker "ACCEPTED_TRANSPORT_FAILURE" | Out-Null
-    $acceptedResumeSucceeded = $false
-    try {
-        & $stateScript -Mode resume -RoundPath $acceptedBlocked -Stage gemini_divergent `
-            -ResolvedBlocker "ACCEPTED_TRANSPORT_FAILURE" | Out-Null
-        $acceptedResumeSucceeded = $true
-    } catch {}
-    if ($acceptedResumeSucceeded) {
-        throw "Resume reopened an externally accepted stage"
-    }
-
-    $activeRound = Join-Path $repo `
-        "docs/external-review/rounds/20260719_clean_process_access_portfolio"
-    & $stateScript -Mode validate -RoundPath $activeRound | Out-Null
-} finally {
-    foreach ($path in @($happy, $blocked, $acceptedBlocked)) {
-        if (Test-Path -LiteralPath $path) {
-            Remove-Item -LiteralPath $path -Recurse -Force
+    [void](New-Item -ItemType Directory -Path $round)
+    Set-Content -LiteralPath (Join-Path $round "20_PRO_OPEN_QUESTION.md") -Value "QUESTION" -Encoding utf8NoBOM
+    $prompt = (& $heartbeatRenderer `
+        -RoundPath $round `
+        -Stage OPEN_DIVERGENT `
+        -QuestionPath "20_PRO_OPEN_QUESTION.md" `
+        -RawPath "21_PRO_OPEN_RAW.md" `
+        -HeartbeatId "review-heartbeat-test") -join [Environment]::NewLine
+    foreach ($required in @(
+        "hmasd-task-router",
+        "hmasd-review-round",
+        "REVIEWER_CONVERSATIONS.json",
+        "stage=OPEN_DIVERGENT",
+        "20_PRO_OPEN_QUESTION.md",
+        "21_PRO_OPEN_RAW.md",
+        "heartbeat_id=review-heartbeat-test")) {
+        if (-not $prompt.Contains($required)) {
+            throw "Rendered heartbeat is missing: $required"
         }
+    }
+    foreach ($forbidden in @(
+        "05_REVIEW_STATE.json",
+        "CURRENT_WORK.md",
+        "model=",
+        "thinking=",
+        "hostId=",
+        "threadId=")) {
+        if ($prompt.Contains($forbidden)) {
+            throw "Rendered heartbeat leaks unrelated context or routing: $forbidden"
+        }
+    }
+} finally {
+    if (Test-Path -LiteralPath $round) {
+        Remove-Item -LiteralPath $round -Recurse -Force
     }
 }
 

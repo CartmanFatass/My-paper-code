@@ -8,17 +8,21 @@ Accept only one active run. A `MONITOR_ASSIGNMENT` must provide:
 - absolute authoritative `runner_status.txt` path;
 - exact progress files and fields, or `unavailable`;
 - terminal spellings and terminal payload key;
-- deadline and initial cadence;
-- the registered automation ID.
+- deadline.
 
-Use `monitor-task.json` for stable task and automation IDs only. Resolve all
-task models and reasoning effort live through `$hmasd-task-router`; registry
-files never supply them.
+Use `monitor-task.json` for stable session IDs and cadence policy only. Resolve
+all task models and reasoning effort live through `$hmasd-task-router`;
+registry files never supply them.
 
-On acceptance, retarget the existing heartbeat automation to this monitor task,
-install the assignment prompt, set it `ACTIVE`, and verify ID, target, prompt,
-schedule, and state. Do not create another automation or send a duplicate
-assignment.
+On acceptance, use `automation_update` to create one heartbeat named from the
+run ID and targeted to this monitor session. Start at the registry's fallback
+cadence, capture the returned heartbeat ID, then update that same heartbeat with
+its final prompt. The prompt contains only the router Skill path, this Skill
+path, `monitor-task.json`, the assignment fields, and the heartbeat ID. Verify
+the target, prompt, cadence, and `ACTIVE` state. Do not put project-control,
+algorithm, review, conversation history, model, or thinking context in the
+prompt. Reuse the exact heartbeat if the same assignment is delivered again;
+never create a duplicate.
 
 ## One bounded heartbeat
 
@@ -37,7 +41,7 @@ eta=<straight-line estimate or unavailable>
 metrics=<registered fields or unavailable>
 ```
 
-Then update only the existing automation schedule when the ETA bucket changes,
+Then update only this session's heartbeat schedule when the ETA bucket changes,
 verify it remains targeted here and `ACTIVE`, and end with `MONITOR_RUNNING`.
 Do not send running or unchanged-state messages to the controller.
 
@@ -47,14 +51,13 @@ with fresh progress:
 ```text
 ETA > 4 hours       -> 30 minutes
 2 hours < ETA <= 4 -> 20 minutes
-45 min < ETA <= 2h -> 10 minutes
-ETA <= 45 minutes  -> 5 minutes
+ETA <= 2 hours      -> 10 minutes
 unavailable/stale  -> 15 minutes
 ```
 
 Relax to a longer interval only after ETA crosses its boundary by 25%. Tighten
 immediately. If training counters are complete while runner state is still
-running, report `FINALIZATION_PENDING`, use 5 minutes, and wait for the
+running, report `FINALIZATION_PENDING`, use 10 minutes, and wait for the
 authoritative terminal status.
 
 ## Terminal relay
@@ -65,13 +68,13 @@ beyond the deadline, or path-escaping status is an actionable monitor error.
 
 At terminal, error, or deadline:
 
-1. update the existing automation to `PAUSED`;
-2. verify the same automation is paused;
-3. resolve the controller's live route immediately;
-4. send exactly one payload through `$hmasd-task-router`:
+1. keep this session's heartbeat `ACTIVE`;
+2. resolve the controller's live route immediately;
+3. send exactly one payload through `$hmasd-task-router`:
 
 ```text
 EXPERIMENT_MONITOR
+role=experiment_monitor
 terminal=<COMPLETE|COMPLETED|FAILED|ACTIONABLE_ERROR|TIMEOUT>
 handoff_id=<run-id>:<state>:<status-updated-at>
 run=<run-id>
@@ -82,8 +85,11 @@ payload=<result path, direct-error path, or none>
 reason=<one actionable line or none>
 ```
 
-If pause verification fails, send nothing and leave the next heartbeat able to
-retry. If live controller routing cannot be resolved, keep the heartbeat active
-and retry only that resolution on the next tick. Never refresh a route mirror,
-change a task model, create a replacement task, or send a second terminal
-payload.
+4. require the send tool to return the registered controller `threadId`;
+5. delete this heartbeat with `automation_update` and verify deletion.
+
+If routing or delivery cannot be confirmed, leave the heartbeat active and
+retry only the same terminal payload on the next wake. If delivery succeeds but
+deletion fails, retry deletion; a repeated payload uses the same `handoff_id`
+and is idempotent at the controller. Never pause before delivery, create a
+replacement session, change a task model, or interpret the result.

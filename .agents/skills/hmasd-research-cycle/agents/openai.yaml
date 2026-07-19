@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Research Cycle"
-  short_description: "Execute one Pro-selected HMASD evidence iteration"
-  default_prompt: "Use $hmasd-research-cycle to execute one bounded evidence iteration from the accepted convergent-Pro disposition."

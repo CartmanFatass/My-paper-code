@@ -2,8 +2,7 @@
 
 External review is a mandatory scientific boundary. One persistent Codex
 `External Review Manager` owns the complete mechanical lifecycle so the active
-controller does not carry browser, CLI, heartbeat, state-machine, or archival
-context.
+controller does not carry browser, CLI, heartbeat, or archival context.
 
 ## Scientific sequence
 
@@ -23,40 +22,33 @@ training.
 
 ## Controller interface
 
-The controller prepares and pushes one immutable round boundary, then sends:
+The controller prepares and pushes one immutable round boundary, then sends one
+compact assignment through the communication Skill:
 
 ```text
-START_REVIEW round=<round-id> commit=<40-char-sha> state=<state-path>
+START_REVIEW role_skill=.agents/skills/hmasd-review-round/SKILL.md round=<round-id> evidence_commit=<40-char-sha> round_path=docs/external-review/rounds/<round-id>
 ```
 
-The commit pins reviewer-visible scientific evidence, not the operating
-workflow. The manager always reads its Skills, registry, and state script from
-the current working tree. If an undispatched stage was blocked by an operational
-condition that is now resolved, the controller sends:
-
-```text
-RESUME_REVIEW round=<round-id> evidence_commit=<40-char-sha> state=<state-path> resolved_blocker=<exact recorded blocker>
-```
-
-Completed stages are not repeated, and an externally accepted stage is never
-resubmitted.
+The commit pins reviewer-visible scientific evidence. The manager owns all
+later active-round question/raw/reconciliation/disposition commits and pushes;
+the controller does not perform intermediate handshakes. Completed nonempty raw
+artifacts are immutable, and an externally accepted stage is never resubmitted.
 
 The manager returns exactly one terminal message:
 
 ```text
-REVIEW_COMPLETE round=<round-id> disposition=<path>
+REVIEW_COMPLETE role=external_review_manager handoff_id=<stable-id> round=<round-id> disposition=<path> commit=<sha>
 ```
 
 or:
 
 ```text
-REVIEW_BLOCKED round=<round-id> reason=<exact blocker>
+REVIEW_BLOCKED role=external_review_manager handoff_id=<stable-id> round=<round-id> reason=<exact blocker>
 ```
 
-The controller does not operate reviewer transports, create intermediate Git
-boundaries, or consume intermediate review progress. The manager may commit and
-push only its active round directory. The controller's only scientific input is
-the completed disposition.
+The controller does not operate reviewer transports or intermediate review
+progress. Its only scientific input is the completed disposition. All session
+lifecycle mechanics live only in the manager Skill.
 
 A terminal callback exists only after the manager invokes the common
 communication Skill and receives a tool result identifying the controller task.
@@ -71,7 +63,6 @@ rounds/YYYYMMDD_topic/
   00_REVIEW_BRIEF.md
   01_SHARED_SOURCE_MANIFEST.md
   02_GEMINI_LOCAL_SOURCE_MANIFEST.md
-  05_REVIEW_STATE.json
   10_GEMINI_DIVERGENT_QUESTION.md
   11_GEMINI_DIVERGENT_RAW.md
   20_PRO_OPEN_QUESTION.md

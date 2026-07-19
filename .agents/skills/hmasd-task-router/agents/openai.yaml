@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Communication"
-  short_description: "Send without changing the recipient's model settings"
-  default_prompt: "Use $hmasd-task-router to read the recipient's live delivery metadata and send one message with its current model and thinking values unchanged."
+  short_description: "Route one isolated persistent HMASD session safely"
+  default_prompt: "Use $hmasd-task-router to deliver one minimal persistent-session assignment or callback with live recipient metadata and tool-confirmed delivery; never use it for a subagent."

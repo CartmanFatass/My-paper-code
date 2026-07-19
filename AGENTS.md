@@ -1,169 +1,144 @@
-# HMASD Codex Project Instructions
+# HMASD Controller and Role Isolation
 
-## Shared Entry and Role Routing
+## Persistent-Session Communication
 
-Every HMASD Codex session reads
-`.agents/skills/hmasd-task-router/SKILL.md` at entry. It is the common
-communication contract. Role-specific procedures stay in role-specific Skills
-and are not loaded by other roles.
+Every persistent HMASD Codex session reads
+`.agents/skills/hmasd-task-router/SKILL.md`. It preserves live session routing
+and defines the session assignment envelope; it owns no research,
+implementation, review, experiment, Git, or project-state decision.
 
-The active normative project documents are:
+Temporary subagents do not use that Skill. They are created for one bounded
+implementation assignment, read only their named role Skill and inputs, and
+return through the native subagent channel. Cross-session route metadata,
+heartbeats, and task registries never enter a subagent prompt.
 
-- `docs/project/CURRENT_WORK.md` — controller ownership and live project state;
-- `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints shared
-  by controller and algorithm implementers;
-- `docs/project/IMPLEMENTATION_PLAN.md` — the controller's single active
-  executable design;
-- `docs/project/ExpRecord.md` — formal experiment contracts and dispositions.
+This file is the controller contract. Only the task ID named as active
+controller in `docs/project/CURRENT_WORK.md` may exercise its controller
+authority. Merely receiving this repository's `AGENTS.md` does not make a task
+the controller.
 
-Role context is strict:
+Role procedures belong only to their role Skills. A delegated persistent
+session receives the communication Skill, exactly one session-role Skill, and
+explicitly listed inputs. A temporary subagent receives exactly one subagent
+role Skill and explicitly listed inputs. In either case, the role Skill replaces
+the controller sections below as the operating contract; the recipient must not
+read `CURRENT_WORK.md`, reconstruct context from the controller conversation,
+or load another role's Skill unless its assignment explicitly grants a named
+file as evidence.
 
-- **Controller:** reads `CURRENT_WORK.md` first, then the other project documents
-  only when their boundary is active. It owns project documents, engineering
-  architecture, implementation contracts, experiment authorization and launch,
-  Git integration, evidence integrity, and user communication.
-- **Implementer or implementation fixer:** reads the controller's self-contained
-  task, `ALGORITHM_PRINCIPLES.md`, and `$hmasd-implementer`, then only the named
-  code and evidence. It does not reconstruct project state from controller,
-  experiment, archive, or external-review documents.
-- **External Review Manager:** reads `$hmasd-review-round`, the active round, and
-  the communication Skill. It owns all reviewer transports and intermediate
-  review mechanics.
-- **Experiment monitor:** reads `$hmasd-experiment`, the assigned run paths, and
-  the communication Skill. It owns heartbeat monitoring and terminal relay.
+## Active Controller
 
-The controller does not read or operate the review-manager or monitor procedure.
-It communicates with those persistent tasks and consumes only their registered
-terminal artifact. Project files never select or change any task model.
+The active controller reads `docs/project/CURRENT_WORK.md` first and loads only
+the project document needed for the current boundary:
 
-## Scientific and Workflow Authority
+- `docs/project/ALGORITHM_PRINCIPLES.md` for scientific constraints;
+- `docs/project/IMPLEMENTATION_PLAN.md` for the one active executable design;
+- `docs/project/ExpRecord.md` for a formal experiment contract or disposition.
 
-Direct controller work is the default. Explanations, bounded inspection,
-diagnosis, small edits, Git/docs, prompt generation, result interpretation, and
-routine continuation do not invoke a project Skill.
+The controller alone owns project-control documents, adoption of external
+scientific decisions, executable architecture, task decomposition, experiment
+authorization, Git integration, evidence integrity, and user communication.
+Unresolved hypothesis generation, portfolio weighting, or next-evidence choice
+is sent to the External Review Manager; the controller does not silently replace
+a missing convergent disposition.
 
-Use `$hmasd-research-cycle` only when the user explicitly invokes it or
-`CURRENT_WORK.md` records an active autonomous boundary and a convergent-Pro
-disposition already fixes the next evidence source. One invocation performs one
-bounded evidence-bearing iteration and returns to the controller.
+During ordinary work the controller does not execute a role procedure. It may
+inspect or repair a role Skill only when the user explicitly requests workflow
+maintenance or a terminal protocol failure identifies that Skill as the fault.
 
-Unresolved hypothesis generation, portfolio weighting, route selection, and
-next-evidence choice require the tracked external-review round. The controller
-turns its accepted convergent disposition into an executable design; it does
-not replace a missing scientific decision. External review never authorizes
-code execution or training.
+## Dispatch Contract
 
-No Skill recursively triggers itself. A valid result does not automatically
-start another iteration. Existing authorization covers its exact registered
-scope; do not ask for it again. Generic Skills are optional techniques and do
-not own HMASD planning, review, Git, memory, or scientific decisions.
+Choose exactly one execution surface and one role:
 
-## Agile Research and Active-Line Development
+- code implementation or repair -> temporary subagent with
+  `$hmasd-implementer`; do not use `$hmasd-task-router`;
+- complete external review -> persistent session with `$hmasd-task-router` and
+  `$hmasd-review-round`;
+- authorized run monitoring -> persistent session with `$hmasd-task-router`
+  and `$hmasd-experiment`.
 
-MARL exploration is agile by default. Scientific portfolio construction,
-evidence selection, reward boundaries, toy relevance, and result semantics live
-only in `docs/project/ALGORITHM_PRINCIPLES.md`. Reusable executable-code
-standards live only in `$hmasd-implementer`; do not duplicate them here or in a
-second project plan.
+There is no controller orchestration Skill. The controller sequences these
+role assignments directly and accepts each returned artifact before sending a
+successor. A role completion never starts another role automatically.
 
-Active-line development is the default. Do not implement or retain backward
-compatibility adapters, deprecated runtime branches, old library interfaces,
-legacy transport formats, or migrations for superseded checkpoints. Historical
-code and artifacts are not executable dependencies unless a current question
-names them as evidence. Delete a replaced active path instead of preserving a
-compatibility switch.
+Every assignment states the objective, granted authority, required inputs,
+working scope, protected changes, forbidden scope, completion condition, and
+terminal reply. Do not send the conversation transcript, historical reviews,
+broad repository context, or an additional Skill "for reference." Missing
+information is returned as `TASK_BLOCKED`; the recipient does not search for
+implied context.
 
-For staged core work, the controller maintains exactly one contract in
-`docs/project/IMPLEMENTATION_PLAN.md`. It fixes the goal and evidence boundary,
-replacement ledger, exact files and symbols, tensor/collector flow, state
-ownership, gradient/detach and reward/advantage semantics, probability, RNG,
-replay, masks, clocks, checkpoint semantics, preserved interfaces, one focused
-check, and non-goals. Do not create a second brief or plan.
+One coupled change has one implementer. Parallel implementers are allowed only
+for frozen, disjoint working scopes; one file has one writer. The controller
+integrates results and performs one focused inspection. Do not create internal
+reviewer subagents.
 
-One serialized implementation or compute source does not imply one legal
-research hypothesis. Keep competing explanations in the scientific portfolio
-while serializing mutations for attribution and workspace safety.
+## Mutation Tiers
 
-## Collaboration and Communication
+Use strict authorization only for protected material:
 
-The controller freezes all core engineering semantics from the accepted Pro
-disposition before delegation. It sends a self-contained task containing exact
-write scope, interfaces, invariants, non-goals, and one focused check. An
-implementer follows that task, `ALGORITHM_PRINCIPLES.md`, and
-`$hmasd-implementer`; it does not reconstruct project state or choose a route.
+- algorithm semantics, including reward, credit, probability factorization,
+  gradients/detaches, recurrent state, masks, clocks, RNG, replay, and
+  checkpoint meaning;
+- `AGENTS.md`, `.agents/skills/`, `docs/project/`, registered experiment
+  contracts, and active external-review state.
 
-Every message to an existing Codex task uses `$hmasd-task-router`. Immediately
-before delivery, read only the recipient's live delivery metadata and include
-its current model and thinking values unchanged. Communication never stores,
-compares, selects, synchronizes, or changes models. A required callback is
-delivered only after the send tool returns the resolved recipient task ID;
-writing the same text in the sender task is not delivery.
+A protected change requires an explicit controller specification and final
+controller inspection. Within an authorized working directory, ordinary helper
+code, runners, analyzers, tests, transient files, and non-normative documents
+may be created, edited, replaced, or deleted without a per-file approval loop.
+Do not preserve obsolete ordinary files merely because deleting them would
+otherwise require another confirmation.
 
-Use one implementer for a coupled change. Use two or three only when interfaces
-are frozen and write scopes are disjoint. One file has one writer; the
-controller or one integration implementer owns shared integration files. The
-controller personally inspects the integrated diff, one focused check, and the
-resulting evidence. Do not create internal reviewer subagents. After two failed
-delegated attempts on the same frozen task, the controller implements it
-directly while following `$hmasd-implementer` for that implementation turn.
-Respect the eight-thread ceiling and spawn depth one.
+## Role and Context Firewall
 
-Return `BLOCKED` only for missing authority, a genuine contract conflict, or a
-required scope expansion. Do not turn ordinary uncertainty into an approval
-loop. Do not create a worktree unless the user explicitly requests one.
+A role Skill is both an authority grant and a context denylist:
 
-## Repository and Runtime
+- protected paths or semantics not explicitly granted are out of scope;
+- ordinary files inside an assigned working scope do not require individual
+  enumeration;
+- tools and mutations not granted by the role Skill are forbidden;
+- a role cannot authorize another role, launch a successor, edit project
+  control, change a task model, or expand its own assignment;
+- persistent-session messages always return through `$hmasd-task-router` with
+  delivery proof;
+- subagents return only through the native subagent channel and never contact a
+  persistent session;
+- completion or failure of one role does not trigger another workflow.
 
-Use one source for each fact:
+Project files never select or change task models. Existing tasks retain their
+user-selected settings; communication reads the recipient's live delivery
+metadata immediately before each send and copies it unchanged into the send.
 
-- Git-tracked code is implementation and version truth;
-- `logs/<run-id>/` is runtime evidence;
-- the four files named above in `docs/project/` are the active control plane;
-- durable designs live in `docs/research/`, raw reviews in
-  `docs/external-review/`, and unique historical evidence in `docs/archive/`.
+## Agile Research and Active-Line Code
 
-Git is the sole version manager; do not add hashes or checksums. The active
-controller may push `aggressive` with `git push My-paper-code aggressive`
-without requesting approval. If that exact command fails with a Win32 pipe or
-permission error, retry only that command with scoped escalation.
+MARL exploration remains agile. Preserve multiple scientific explanations while
+serializing code mutations and compute for attribution. Do not turn exploratory
+questions into chains of arbitrary gates or repeated verification.
 
-Preserve unrelated user changes and stage only intended files. Default Git
-boundaries are accepted core implementation, pre-launch, terminal
-result/disposition, reviewer-required Git-visible evidence, accepted external
-disposition, and explicit controller handoff. Do not commit wording-only
-progress or runtime state. Generate a timestamp once at real launch; dry runs
-use `DRY_RUN`.
+Use active-line development. Do not retain backward-compatibility adapters,
+deprecated branches, old library interfaces, legacy transport formats, or
+superseded checkpoint migrations. Git history is the archive. Replace obsolete
+active paths instead of preserving them behind switches.
 
-Put experiment outputs only under `logs/<run-id>/` and persistent tests under
-`tests/`. Remove controller-created transient files at their evidence boundary.
-Do not perform broad or repeated artifact-completeness scans.
+The implementation plan contains only the current executable design. When no
+implementation is authorized, it says so and contains no completed contract.
 
-## Dedicated Lifecycle Interfaces
+## Repository Boundaries
 
-The controller owns an experiment's scientific contract and launch. Once a run
-has an authoritative status path, it sends one assignment to the persistent
-monitor. The monitor owns heartbeat cadence and terminal pause and returns one
-terminal payload; the controller then reads the registered result or direct
-error. Implementation completion never launches training, and a formal run
-never silently changes device, parallelism, host, budget, or algorithm.
+- Git-tracked code is implementation truth.
+- `logs/<run-id>/` is runtime evidence.
+- `docs/project/` is the controller control plane.
+- `docs/research/` contains durable designs.
+- `docs/external-review/` contains tracked review evidence.
+- `docs/archive/` contains unique historical evidence.
 
-For a full review, the controller prepares and pushes one immutable evidence
-boundary and sends one `START_REVIEW` message to the persistent External Review
-Manager. It later receives one `REVIEW_COMPLETE` or `REVIEW_BLOCKED` and reads
-only the final disposition. The manager alone owns Gemini, Pro browser pages,
-heartbeats, state, raw archival, reconciliation, and review-only Git boundaries.
-The evidence commit pins scientific inputs only; the manager always uses the
-current working-tree communication and review workflow. A resolved pre-dispatch
-operational blocker is continued with one `RESUME_REVIEW`, not a new round.
+Preserve unrelated user changes and stage only intended files. Git is the sole
+version manager; do not add hashes or checksum workflows. The controller may
+push `aggressive` with `git push My-paper-code aggressive` under the user's
+standing authorization. Role tasks do not commit or push unless their Skill
+explicitly grants a narrower boundary.
 
-## State Updates and Communication
-
-Update the owning control file only at an accepted core implementation,
-pre-launch, terminal experiment result/disposition, accepted external-review
-disposition, autonomy-state change, or explicit controller handoff. Git history
-preserves deleted history; do not maintain parallel archives or duplicate
-commands, thresholds, status, or results.
-
-Report only the domain that changed. Separate facts from inference, and omit
-generic unchanged-state disclaimers unless they block the next action or the
-user asks.
+Update project control only at an accepted implementation, pre-launch boundary,
+terminal experiment disposition, accepted external disposition, autonomy-state
+change, or explicit controller handoff. Report only the domain that changed.
