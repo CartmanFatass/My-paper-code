@@ -69,6 +69,8 @@ foreach ($required in @(
     "ID or model setting from the assignment",
     "REVIEW_GIT_PUSH_REQUIRED",
     "Do not edit code or project-control files, stage, commit, push",
+    "git merge-base --is-ancestor <evidence_commit> My-paper-code/aggressive",
+    'Do not run `git push`, `git fetch`, `git ls-remote`',
     "There is no review state machine",
     "REVIEW_STAGE",
     "controller is never a stage recipient",

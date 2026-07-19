@@ -155,6 +155,7 @@ if (-not $review.Contains("role_skill=.agents/skills/hmasd-review-round/SKILL.md
     -not $review.Contains("manager never creates or manages a heartbeat") -or
     -not $review.Contains("REVIEW_GIT_PUSH_REQUIRED") -or
     -not $review.Contains("Do not edit code or project-control files, stage, commit, push") -or
+    -not $review.Contains("git merge-base --is-ancestor <evidence_commit> My-paper-code/aggressive") -or
     -not $review.Contains("convergent_exchange")) {
     throw "External Review Manager role boundary is incomplete"
 }

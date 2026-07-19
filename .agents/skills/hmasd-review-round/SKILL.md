@@ -114,6 +114,12 @@ turn. The controller inspects only the named paths, commits and pushes them, the
 resends `START_REVIEW` with the new 40-character commit. Derive progress from
 the files and commit; do not add a state file or a separate resume command.
 
+Verify a controller-supplied pushed boundary only against the shared local
+remote-tracking ref: require `git merge-base --is-ancestor <evidence_commit> My-paper-code/aggressive`
+to succeed. Do not run `git push`, `git fetch`,
+`git ls-remote`, or another network command from the manager. The controller's
+successful push is what updates that ref in this shared repository.
+
 ## Liveness
 
 Each reviewer exchange creates, retargets, and deletes its own external-response
