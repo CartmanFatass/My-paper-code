@@ -9,6 +9,8 @@ $rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/sessio
 $skillPath = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
 $exchangeSkillPath = Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'
 $heartbeatRenderer = Join-Path $repo '.agents/skills/hmasd-review-exchange/scripts/render_review_heartbeat.ps1'
+$geminiInvoker = Join-Path $repo 'scripts/invoke_gemini_reviewer.ps1'
+$geminiLive = Join-Path $repo 'scripts/start_gemini_reviewer_live.ps1'
 $readmePath = Join-Path $repo 'docs/external-review/README.md'
 
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
@@ -84,7 +86,9 @@ foreach ($required in @(
     "ambient browser state",
     "retry that exact command once",
     "duplicate consent",
-    "A second permission failure is terminal",
+    "A second transport failure is terminal",
+    "--dangerously-skip-permissions",
+    "user's explicit standing approval",
     "Nonempty is not",
     "exact text equality",
     'the visible deferred action `立即回答` means the request was accepted',
@@ -98,6 +102,15 @@ foreach ($required in @(
 )) {
     if (-not $normalizedExchangeText.Contains($required)) {
         throw "Reviewer Exchange contract is missing: $required"
+    }
+}
+
+foreach ($path in @($geminiInvoker, $geminiLive)) {
+    $text = Get-Content -LiteralPath $path -Raw
+    foreach ($required in @('--mode', 'plan', '--sandbox', '--dangerously-skip-permissions')) {
+        if (-not $text.Contains($required)) {
+            throw "Gemini transport lacks permanently approved headless permissions: $path $required"
+        }
     }
 }
 foreach ($forbidden in @('external_review_manager', 'REVIEW_GIT_PUSH_REQUIRED', 'REVIEW_COMPLETE')) {

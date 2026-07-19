@@ -107,6 +107,7 @@ function Invoke-AgyPrompt {
     $startInfo.ArgumentList.Add('--mode')
     $startInfo.ArgumentList.Add('plan')
     $startInfo.ArgumentList.Add('--sandbox')
+    $startInfo.ArgumentList.Add('--dangerously-skip-permissions')
     $startInfo.ArgumentList.Add('--print-timeout')
     $startInfo.ArgumentList.Add("${TimeoutMinutes}m")
     $startInfo.ArgumentList.Add('--print')

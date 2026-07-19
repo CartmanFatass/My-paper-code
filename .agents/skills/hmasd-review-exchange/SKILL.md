@@ -70,11 +70,14 @@ ID, then verify the exact registered reviewer URL and visible `Pro`. Never use
 ambient browser state or operate another reviewer page.
 
 For Gemini, use only the registered Antigravity conversation and allowlisted
-manifest. If the direct registered command fails only because the allowlisted
+manifest. The two tracked Gemini launch scripts permanently include
+`--dangerously-skip-permissions` under the user's explicit standing approval;
+retain plan mode, sandbox mode, the registered conversation, and the manifest
+evidence boundary. If the direct registered command fails only because the
 Antigravity state root is not writable and standing consent is `APPROVED`, retry
 that exact command once with escalation restricted to that state root. Do not
-request duplicate consent, use a wrapper, choose an alternate state path, or
-bypass policy. A second permission failure is terminal.
+request duplicate consent, use a wrapper, or choose an alternate state path. A
+second transport failure is terminal.
 
 Treat a response as complete only when the external surface shows natural
 completion and every section or decision field explicitly required by the

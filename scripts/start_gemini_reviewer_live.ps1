@@ -50,6 +50,7 @@ $arguments = @(
     '--model', $model,
     '--mode', 'plan',
     '--sandbox',
+    '--dangerously-skip-permissions',
     '--prompt-interactive', $prompt
 )
 
