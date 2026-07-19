@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260719-clean-process-direct-access | launch-ready -- implementation accepted | clean-process dynamic-roster direct access | active plan; output root assigned at launch | exact formal result | focused carrier/direct checks pass; replay `<=1e-6`; process channel excluded; no skill/high/intrinsic path | Run exactly once; apply PASS/NO_ACCESS/CALIBRATION/INVALID branch without rescue |
+| EXP-20260719-clean-process-direct-access | completed -- valid `PASS_CLEAN_CARRIER_DIRECT_ACCESS` | clean-process dynamic-roster direct access | `logs/clean_process_direct_access_20260719_192523/result/clean_process_direct_access.json`; implementation `3d1511e` | tracked post-result portfolio review | M0 pass and replay all zero; controls pass; direct deterministic `P/S/U=1.0000/0.9982/0.9991`, stochastic `U=0.9867`, gain CI `[0.4985,0.4991,0.4996]` | Accept access-valid clean carrier only; interpret Iteration-5 no-access as substrate-specific; keep D mandatory and B/C live without automatic implementation |
 | EXP-20260719-iteration5-spatial-process-semantics | completed -- valid `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS` | iteration-5 spatial process-semantics comparison | `logs/iteration5_spatial_process_semantics_20260719_130334/result/iteration5_process_semantics.json`; source `55f7093`; completed postmortem round | explicit authority for the separately registered clean-carrier access qualification | M0 pass; C3 deterministic final `P/S/U=1.0000/0.5269/0.7634`, stochastic `U=0.7245`, gain CI `[0.0484,0.0705,0.0931]`; C1 selected-pair action-TV and forced-effect UCBs `0.0123/0.0335 < 1/12` | Retire this exact spatial carrier and C1 objective without rescue; retain A/D/B/C; adopt one clean-process-channel direct-access qualification as the only recommended next evidence source, not yet authorized |
 | EXP-20260718-stage-c-semantics-provenance-audit | completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE` | iteration-4 frozen-checkpoint provenance audit | `logs/stage_c_semantics_provenance_audit_20260718_190948/result/iteration4_provenance_audit.json`; implementation `05b40eb` | iteration-5 portfolio design, not checkpoint rescue | M0 pass; F1 pair 1--2 action-TV CI `[0.046582,0.051259]`, forced-effect CI `[0.027817,0.069094]`, both UCB `<1/12`; 128/10,240 paired forced/natural rows per arm | Strengthen C3 and the C1 missing-semantic-pressure diagnosis; weaken C2; keep credit closed; no reanalysis/threshold/support rescue |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
@@ -115,6 +115,32 @@ explicitly approves the exception.
   `NO_ACCESS_CLEAN_CARRIER_DIRECT`, `RETIRE_CLEAN_CARRIER_CALIBRATION`, or
   `INVALID_CLEAN_CARRIER_IMPLEMENTATION`. No result-contingent rescue, third
   carrier, threshold/budget/seed/model change, or automatic B/C implementation.
+
+### Terminal Disposition
+
+- Accepted source: `logs/clean_process_direct_access_20260719_192523`,
+  implementation commit `3d1511e`; terminal status
+  `PASS_CLEAN_CARRIER_DIRECT_ACCESS`, `implementation_valid=true`.
+- M0/counts: 320,000 transitions, 1,000 optimizer steps, 1,280,000 active
+  rows and 4,000 distinct training ledgers; all sampling, joint-likelihood,
+  value, recurrent-hidden and prefix replay errors are zero; checkpoint and
+  optimizer restore exactly; skill/high/intrinsic counts are zero.
+- Carrier controls: constructive minimum `P/S/U=1/1/1`; uniform-random
+  positive-utility fraction `1.0` and mean `U=0.32421875`. All process
+  ownership, snapshot, exclusion and task-neutral schema audits pass.
+- Direct access: deterministic final
+  `P/S/U=1.000000/0.998210/0.999105`; stochastic final
+  `P/S/U=1.000000/0.973307/0.986654`; deterministic final-minus-zero utility
+  CI95 `[0.498535,0.499105,0.499593]`. Every registered access threshold passes.
+- Runtime: total `2177.36` seconds. The run finished within its 45-minute
+  expectation; the persistent monitor paused and relayed the authoritative
+  result exactly once.
+- Legal conclusion: accept only an access-valid clean dynamic-roster evidence
+  substrate and interpret the exact Iteration-5 spatial no-access as
+  substrate-specific. This does not establish hierarchy, skills, semantics,
+  variable lifetime, cooperation or benchmark transfer. D remains mandatory;
+  B/C remain live candidates without implementation authority. One tracked
+  portfolio review is required before the autonomous iteration closes.
 
 ## EXP-20260719-iteration5-spatial-process-semantics — Launch Contract
 

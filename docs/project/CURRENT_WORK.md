@@ -43,6 +43,14 @@ it did not itself authorize implementation or training. The user subsequently
 authorized one complete automatic research iteration on 2026-07-19, limited to
 that clean-carrier direct-access evidence source.
 
+That evidence source is now complete as the valid registered positive branch
+`PASS_CLEAN_CARRIER_DIRECT_ACCESS`. The clean carrier passed both controls and
+the unchanged direct learner passed every absolute and paired-gain threshold
+with zero replay error. This establishes an access-valid substrate and narrows
+the exact Iteration-5 no-access outcome to its spatial carrier; it does not
+establish hierarchy, skill semantics, variable lifetime, cooperation or
+transfer.
+
 ## Causal Portfolio
 
 - **A — access-valid evidence substrate (high):** Iteration 5 was not an
@@ -61,25 +69,21 @@ that clean-carrier direct-access evidence source.
 
 ## Next Actions
 
-1. Launch the accepted clean-process carrier and direct-access qualification
-   under its exact local-CUDA 16-env/320K contract.
-2. Apply one registered
-   terminal branch without rescue.
-3. If the result leaves the portfolio or next evidence open, complete one
-   tracked external-review round, then stop. Do not start B/C or a second
-   research iteration automatically.
+1. Complete one tracked external-review round over the accepted positive result
+   and the A/D/B/C portfolio.
+2. Adopt its evidence-consistent disposition, close this autonomous iteration,
+   and stop. Do not start B/C or a second research iteration automatically.
 
 ## Autonomous Boundary
 
 - Status: ACTIVE
 - Scope: one clean-process dynamic-roster direct-access qualification
-- Completed evidence-bearing iterations under this grant: zero
-- Remaining iterations: one
+- Completed evidence-bearing iterations under this grant: one
+- Remaining iterations: zero
 - Activation authority: explicit user instruction on 2026-07-19
-- Permitted automatic action: design, implementation, focused smoke, prelaunch
-  review, exact formal experiment, terminal disposition, and one required
-  external-review round
-- Stop condition: one accepted evidence source and any required disposition
+- Permitted automatic action: the one required tracked external-review round
+  and its evidence-consistent disposition only
+- Stop condition: accepted external-review disposition for the completed source
 
 ## Immediate Constraints
 
