@@ -37,27 +37,32 @@ existing high/event assignment path can learn when supplied with fixed
 zero-parameter `IDLE/PERSIST/SHORT` executors; it is not evidence for learned
 skills, hierarchy efficacy, variable lifetime, cooperation, or transfer.
 
-No implementation or experiment is active. The disposition explicitly grants
-no code or compute authority, so the selected source remains unimplemented
-until the user authorizes that boundary.
+No implementation or experiment is active. On 2026-07-20 the user authorized
+one automatic algorithm iteration for the selected
+`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` boundary, including its bounded code and
+compute work. This authorization does not extend to a successor route.
 
 ## Next Action
 
-Wait for user authorization. If granted, send the accepted
-`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` scientific boundary to the registered
-Code Implementation Manager. That session freezes the executable contract and
-owns implementation plus code review; the controller retains authorization,
-Git integration, evidence acceptance, and user communication. Do not start
-implementation or training from this disposition alone.
+Send the accepted `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` scientific boundary to
+the registered Code Implementation Manager. That session freezes the
+executable contract and owns implementation plus code review; the controller
+retains Git integration, experiment lifecycle, evidence acceptance, and user
+communication. After accepted implementation, run only the registered G0
+experiment and complete its tracked external-review disposition.
 
 ## Autonomous Boundary
 
-- Status: COMPLETE
-- Completed evidence-bearing iterations under the prior grant: one
-- Remaining iterations: zero
-- Permitted automatic action: none
-- Stop condition: reached; accepted disposition committed and pushed
-- Forbidden: automatic successor implementation, experiment, or research loop
+- Status: ACTIVE
+- Authorized evidence-bearing iterations: one
+- Remaining iterations: one
+- Permitted automatic action: implement, review, run, analyze, and externally
+  review `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` under its accepted frozen
+  scientific boundary
+- Stop condition: the G0 terminal disposition is accepted, committed, and
+  pushed, or a genuine contract/operational blocker requires user authority
+- Forbidden: automatic successor implementation, a second experiment route,
+  or recursive research iteration
 
 ## Durable Constraints
 
