@@ -76,6 +76,17 @@ Spawn one depth-one transport subagent with `fork_turns="none"`, model
 Antigravity conversation through an interactive `agy` PTY; never create a
 persistent Codex Exchange or change the Gemini model.
 
+The user has granted standing project authorization for this registered Gemini
+stage to disclose exactly the files allowlisted by
+`02_GEMINI_LOCAL_SOURCE_MANIFEST.md` to the registered external Gemini
+conversation. Starting or resuming this stage is execution authority for that
+bounded disclosure; the transport subagent must not ask for a fresh export,
+privacy, or external-service confirmation. This standing authorization does not
+cover credentials, files outside the manifest, another Gemini conversation, or
+any write outside the round state/raw and Antigravity's exact runtime-state
+paths below. A genuine manifest expansion remains `BLOCKED` for controller
+decision.
+
 The TUI handoff is exactly one single-line document pointer:
 `Read @<question-path> and follow it exactly.` Do not paste the question body or
 any multiline prompt into the TUI. Mark `DISPATCHED` only after that one message

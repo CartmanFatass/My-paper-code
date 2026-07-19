@@ -2,14 +2,14 @@
   "schema_version": 5,
   "round_id": "20260719_clean_process_access_portfolio",
   "round_status": "ACTIVE",
-  "updated_at": "2026-07-19T20:07:53.9026345+08:00",
+  "updated_at": "2026-07-19T20:25:45.0245435+08:00",
   "stages": {
     "gemini_divergent": {
-      "state": "NOT_STARTED",
-      "dispatch_count": 0,
-      "route_token": null,
-      "dispatched_at": null,
-      "deadline_at": null,
+      "state": "COMPLETE",
+      "dispatch_count": 1,
+      "route_token": "20260719_clean_process_access_portfolio:GEMINI_DIVERGENT:df2b9b46b4589d9c5ab510a3a0a1a53419a33adc:docs/external-review/rounds/20260719_clean_process_access_portfolio/11_GEMINI_DIVERGENT_RAW.md",
+      "dispatched_at": "2026-07-19T20:21:02.0382872+08:00",
+      "deadline_at": "2026-07-19T22:21:01.9912704+08:00",
       "artifact_path": "11_GEMINI_DIVERGENT_RAW.md",
       "blocker": null
     },
