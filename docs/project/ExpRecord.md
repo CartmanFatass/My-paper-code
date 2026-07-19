@@ -27,7 +27,7 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260719-iteration5-spatial-process-semantics | stopped by user; no result | iteration-5 spatial process-semantics comparison | local CUDA; `logs/iteration5_spatial_process_semantics_20260719_012002`; source `4721657` | none until explicit relaunch authority | focused checks and final reduced smoke pass; formal process tree stopped cleanly and status is `failed/controller_stop`; no partial result read | Preserve without scientific interpretation or automatic restart; implementation and frozen contract remain launch-ready |
+| EXP-20260719-iteration5-spatial-process-semantics | completed -- valid `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS` | iteration-5 spatial process-semantics comparison | `logs/iteration5_spatial_process_semantics_20260719_130334/result/iteration5_process_semantics.json`; source `55f7093` | controller portfolio review; no automatic successor | M0 pass; C3 deterministic final `P/S/U=1.0000/0.5269/0.7634`, stochastic `U=0.7245`, gain CI `[0.0484,0.0705,0.0931]`; C1 selected-pair action-TV and forced-effect UCBs `0.0123/0.0335 < 1/12` | Retire this exact spatial carrier without rescue; quarantine C1 utility gains from a semantics claim; close the five-iteration autonomous boundary |
 | EXP-20260718-stage-c-semantics-provenance-audit | completed -- valid `A_NO_MATERIAL_Z_DEPENDENCE` | iteration-4 frozen-checkpoint provenance audit | `logs/stage_c_semantics_provenance_audit_20260718_190948/result/iteration4_provenance_audit.json`; implementation `05b40eb` | iteration-5 portfolio design, not checkpoint rescue | M0 pass; F1 pair 1--2 action-TV CI `[0.046582,0.051259]`, forced-effect CI `[0.027817,0.069094]`, both UCB `<1/12`; 128/10,240 paired forced/natural rows per arm | Strengthen C3 and the C1 missing-semantic-pressure diagnosis; weaken C2; keep credit closed; no reanalysis/threshold/support rescue |
 | EXP-20260717-f0f1-dynamic-roster-stage-c | completed -- valid `SUPPORT_H2_SKILL_LIMIT` | paired F0/F1 applied-prefix test | `logs/f0f1_dynamic_roster_stage_c_20260717_221247/result/stage_c_f0_f1.json`; source `bf933a3` | portfolio-level H2 architecture review; no Stage C rescue | M0 pass; both arms `P/S/U=0/1/0.5`; utility CI `[0,0,0]`; F1 prefix response and forced `rho=0.070304` do not yield executable natural skills | Record the upstream skill bottleneck; stop Stage C without F1 rescue, timing read or a new module |
 | EXP-20260717-f0f1-dynamic-roster-stage-b | completed -- valid `PASS_STAGE_B_DIRECT_ACCESS` | direct primitive-action AR access | `logs/f0f1_dynamic_roster_stage_b_20260717_160956/result/stage_b_direct.json`; implementation `e45a54a` | separate F0/F1 implementation decision | all M0 true and all replay errors zero; final deterministic `P/S/U=1/0.998210/0.999105`; stochastic `U=0.986654`; paired deterministic gain CI `[0.498535,0.499105,0.499593]` | Accept direct dynamic-roster access only; stop before F0/F1 until its separate implementation boundary is authorized |
@@ -127,6 +127,32 @@ explicitly approves the exception.
   root on local CUDA; expected wall clock 2--5 hours; its
   `runner_status.txt` is authoritative and names the contained terminal result
   or direct error. One depth-one Terra Medium monitor observes only that file.
+
+### Terminal Disposition
+
+- Accepted source: `logs/iteration5_spatial_process_semantics_20260719_130334`,
+  commit `55f7093db3f2bc0683f897fecb40d34bb7a29bbf`; terminal status
+  `RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`, `implementation_valid=true`.
+- M0/counts: both hierarchy arms completed 320,000 transitions and exactly
+  1,000 high, low, and posterior optimizer steps; C3 completed 320,000
+  transitions and 1,000 optimizer steps. Maximum recorded hierarchy replay
+  error was `3.5763e-7`; all C3 replay errors were zero.
+- Registered priority evidence: C3 deterministic final
+  `P/S/U=1.0000/0.5269/0.7634`, stochastic final `U=0.7245`, and deterministic
+  final-minus-zero utility CI `[0.0484,0.0705,0.0931]`. The short-duty floor
+  `0.65` and gain lower-bound requirement `>0.15` failed, so direct access on
+  this carrier was not established.
+- Secondary evidence: C1-on minus C1-off utility CI
+  `[0.0379,0.0445,0.0511]` and C1-on final-minus-zero utility CI
+  `[0.1168,0.1297,0.1431]` were positive. They do not override the priority
+  branch. The selected skill pair's action-TV CI
+  `[0.0101,0.0112,0.0123]` and forced-effect CI
+  `[0.0026,0.0146,0.0335]` missed the material threshold `>1/12`; natural-to-
+  forced overlap and matched-shuffle residual CIs both crossed zero.
+- Legal conclusion: retire only this exact spatial carrier/direct-access
+  contract. Do not claim useful C1 process semantics, rescue any registered
+  setting, or automatically select a successor. The standing five-iteration
+  autonomous grant is exhausted and control returns to the user.
 
 ## EXP-20260718-stage-c-semantics-provenance-audit — Frozen Evaluation Repair
 

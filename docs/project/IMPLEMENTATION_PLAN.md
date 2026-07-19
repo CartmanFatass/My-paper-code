@@ -9,12 +9,13 @@ in `ALGORITHM_PRINCIPLES.md`, engineering principles in
 
 ## Iteration 5 — Spatial Process-Semantics Comparison
 
-Status: engineering refactor accepted; fresh formal relaunch is the next
-boundary. The integrated code, focused checks, and reduced three-arm CUDA smoke passed. The
-first formal launch was stopped by the user before a terminal result and has no
-scientific meaning; it is not resumed. The 2026-07-19 instruction to start the
-automatic research flow authorizes the one remaining iteration from the
-engineering refactor through one fresh terminal evidence source.
+Status: complete. The fresh formal run closed as valid
+`RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`; M0 passed, but the C3 direct arm did
+not meet the registered short-duty or final-minus-zero gain requirements on
+this carrier. The C1 utility differences therefore remain quarantined from an
+algorithmic claim, and the material-semantics audit independently failed. The
+exact contract is retired without rescue and the five-iteration autonomous
+boundary is exhausted.
 
 ### HMASD Contract
 

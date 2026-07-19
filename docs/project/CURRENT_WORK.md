@@ -21,47 +21,50 @@ access. Iteration 3 then closed as `F_UNDERPOWERED_OR_UNIDENTIFIABLE`, and
 Iteration 4 as `A_NO_MATERIAL_Z_DEPENDENCE`; their detailed evidence and legal
 claims are owned by `ExpRecord.md`.
 
-Iteration 5 is the current frozen scientific implementation. Its code, focused
-checks, and reduced three-arm CUDA smoke are launch-ready. The first formal run at
-`logs/iteration5_spatial_process_semantics_20260719_012002` was stopped by the
-user before a terminal scientific result. Partial data is not evidence and the
-run will not be resumed. The engineering-only efficiency refactor is accepted:
-posterior data packs once for four ordered samples, evaluation and semantic
-audit use batched low inference, sparse checkpoints retain cumulative M0
-evidence, and the focused CUDA path passed. The explicit 2026-07-19 instruction
-authorizes a fresh update-0 relaunch of the unchanged contract.
+Iteration 5 is closed as the valid registered priority branch
+`RETIRE_SPATIAL_CARRIER_NO_DIRECT_ACCESS`. M0 passed, but the C3 direct arm did
+not establish ordinary-controller access on this spatial carrier: deterministic
+final `P/S/U=1.0000/0.5269/0.7634`, stochastic final `U=0.7245`, and the
+deterministic final-minus-zero utility CI was
+`[0.0484,0.0705,0.0931]`. The registered short-duty and gain requirements
+therefore failed. C1-on showed positive paired utility differences, but the
+priority branch prevents an algorithmic C1 claim and its material-semantics
+audit also failed. The five-iteration autonomous research boundary is complete.
 
 ## Causal Portfolio
 
-- **C3 — direct active-set control:** current empirical leader and mandatory
-  ordinary-MARL null; not a universal rejection of hierarchy.
-- **C1 — segment-owned environment-agnostic semantics:** retained missing-
-  mechanism explanation. A future hierarchy must create material,
-  intervention-sensitive, persistent, naturally used behavior without task,
-  reward, identity, role, age, or duration shortcuts.
-- **C1-null — arbitrary diversity:** retained as the alternative that semantic
-  separation may not improve the cooperative task.
+- **C3 — direct active-set control:** remains the mandatory ordinary-MARL null
+  and retains its earlier Stage-B access evidence, but it did not access the
+  Iteration-5 spatial carrier under the frozen contract. This retires the
+  carrier as an identified algorithm test, not direct control in general.
+- **C1 — segment-owned environment-agnostic semantics:** remains a structural
+  research explanation, but the exact Iteration-5 posterior-pressure instance
+  is not promoted. Its selected pair had action-TV CI
+  `[0.0101,0.0112,0.0123]`, forced-effect CI
+  `[0.0026,0.0146,0.0335]`, and no positive overlap or matched-shuffle lower
+  bound.
+- **C1-null — arbitrary diversity:** strengthened locally: positive task
+  utility differences occurred without registered material semantics, although
+  the carrier-priority failure prevents a standalone causal conclusion.
 - **C2 — minimal event context:** weakened and dormant.
 - **Conditional SMDP credit:** closed until executable skill semantics exist.
 
 ## Next Actions
 
-1. Preserve the stopped Iteration-5 run without interpreting its partial state.
-2. Commit and push the accepted pre-launch implementation boundary.
-3. Launch the unchanged formal contract from update 0 and accept exactly one
-   terminal evidence source.
+1. Preserve the Iteration-5 terminal result and retire this exact spatial
+   carrier contract without rescue.
+2. Return control to the user for portfolio redesign or an explicitly requested
+   external review; do not select or launch an automatic successor.
 
 ## Autonomous Boundary
 
-- Status: ACTIVE
+- Status: COMPLETE
 - Prior grant: five serialized iterations total
-- Completed evidence-bearing iterations: four
-- Remaining iterations: one, now active
+- Completed evidence-bearing iterations: five
+- Remaining iterations: zero
 - Activation authority: explicit user instruction on 2026-07-19
-- Permitted automatic action: complete the frozen efficiency refactor, run one
-  focused check, launch one fresh Iteration-5 evidence source, interpret its
-  terminal result, and return control
-- Stop condition: one accepted terminal evidence source or a genuine blocker
+- Permitted automatic action: none; the granted cycle is exhausted
+- Stop condition: satisfied by the accepted Iteration-5 terminal evidence
 
 ## Immediate Constraints
 
@@ -69,8 +72,9 @@ authorizes a fresh update-0 relaunch of the unchanged contract.
   and variable individual skill lifetime.
 - Current testbed: anonymous `4 -> 2 -> 6 -> 4`, persistent and reactive duties,
   horizon 80, and one sparse terminal utility.
-- Iteration 5 compares environment-agnostic process semantics on/off against the
-  same-carrier C3 direct controller under one frozen contract.
+- The exact Iteration-5 spatial carrier is retired under its no-direct-access
+  priority branch. Do not rescue it by changing budget, seed, threshold,
+  reward, model, task, process window, skill count, or audit.
 - Intrinsic reward must remain environment-agnostic; no task field, identity,
   role, success predicate, progress, or external reward may enter it.
 - R41B is the positive fixed-`N` source anchor. R51--R55 and other retired
