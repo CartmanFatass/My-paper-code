@@ -42,15 +42,27 @@ including bounded code, compute, result analysis, and tracked external review.
 The active first iteration is `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`. Its
 implementation and focused checks are accepted at commit `2d66d253`; the
 normalized active plan is pushed at `c631576`. The registered formal CUDA run
-is launch-ready and no experiment is active yet.
+completed on 2026-07-20 as
+`INVALID_CLEAN_SUPPLIED_EXECUTOR_OPPORTUNITY_CONTRACT` with
+`implementation_valid=true` and every registered M0 item true. The learned
+high path reached `P/S/U=0.942383/0.938639/0.940511`, with learned-minus-frozen
+utility CI95 `[0.435689, 0.440511, 0.445251]`. The result is nevertheless
+scientifically invalid under its frozen branch ordering because the registered
+routing-oracle opportunity floor failed at
+`P/S/U=0.978699/0.660807/0.819753`. The invalid oracle contract and the strong
+learned signal must therefore be reviewed together; the controller does not
+relabel the result or infer a successor locally.
 
 ## Next Action
 
-Run only the registered `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` experiment and
-obtain its tracked external-review
-disposition. If that disposition selects another evidence source, begin the
-next authorized iteration from that pushed boundary. Each successor must be
-selected by the preceding convergent review; no route is inferred locally.
+Complete the tracked external-review round
+`docs/external-review/rounds/20260720_supplied_executor_opportunity_contract/`.
+The open reviewers must independently assess whether the oracle opportunity
+contract is an invalid comparator, what scientific information remains in the
+learned signal, and which two-to-four causal explanations remain live. The
+convergent reviewer then selects one next evidence source or stop. No rerun,
+threshold change, oracle repair, implementation, or successor launch occurs
+before that disposition is accepted.
 
 ## Autonomous Boundary
 
