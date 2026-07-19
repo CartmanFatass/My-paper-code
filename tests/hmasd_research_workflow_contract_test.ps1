@@ -6,9 +6,7 @@ $canonicalRoot = Join-Path $repo "docs/project"
 $sessionRolesPath = Join-Path $skillsRoot "hmasd-task-router/references/session-roles.json"
 $expectedSkills = @(
     "hmasd-code-manager",
-    "hmasd-code-reviewer",
     "hmasd-experiment",
-    "hmasd-implementer",
     "hmasd-review-exchange",
     "hmasd-review-round",
     "hmasd-task-router"
@@ -58,7 +56,6 @@ foreach ($required in @(
     "Every persistent HMASD Codex session reads",
     "Any persistent-session topology change also uses that Skill",
     "Do not send across a partially migrated graph",
-    "Temporary subagents do not use that Skill",
     "docs/project/CURRENT_WORK.md",
     "The controller alone owns",
     "There is no general controller orchestration Skill",
@@ -67,7 +64,7 @@ foreach ($required in @(
     "Role and Context Firewall",
     "MARL exploration remains agile",
     "Do not retain backward-compatibility adapters",
-    "hmasd-implementer",
+    "sole tracked-worktree write lease",
     "hmasd-review-exchange",
     "hmasd-review-round",
     "hmasd-experiment",
@@ -89,19 +86,17 @@ foreach ($forbidden in @(
 }
 
 $current = Read-Text (Join-Path $canonicalRoot "CURRENT_WORK.md")
-if (-not $current.Contains("Status: COMPLETE") -or
-    -not $current.Contains("Remaining iterations: zero") -or
-    -not $current.Contains("Permitted automatic action: none") -or
+if (-not $current.Contains("Status: ACTIVE") -or
+    -not $current.Contains("Remaining iterations: five") -or
+    -not $current.Contains("Authorized evidence-bearing iterations: five") -or
     -not $current.Contains("CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0") -or
-    $current.Contains("Status: ACTIVE") -or
     $current.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
-    throw "CURRENT_WORK does not close the zero-remaining autonomy loop"
+    throw "CURRENT_WORK does not preserve the authorized five-iteration boundary"
 }
 
 $plan = Read-Text (Join-Path $canonicalRoot "IMPLEMENTATION_PLAN.md")
-if (-not $plan.Contains("Status: NONE") -or
-    -not $plan.Contains("registered Code Implementation Manager") -or
-    -not $plan.Contains('START_CODE_WORK') -or
+if (-not $plan.Contains("Status: AUTHORIZED_IN_PROGRESS") -or
+    -not $plan.Contains("Code Implementation Manager") -or
     $plan.Contains("Completed Prior Contract") -or
     $plan.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
     throw "IMPLEMENTATION_PLAN retains a completed or dangling active contract"
@@ -112,61 +107,28 @@ foreach ($required in @(
     'START_CODE_WORK',
     'code_implementation_manager',
     'docs/project/IMPLEMENTATION_PLAN.md',
-    'native subagents',
-    '$hmasd-implementer',
-    '$hmasd-code-reviewer',
+    'references/engineering-principles.md',
+    "model's native coding workflow",
+    'Shared-Worktree Lease',
     'CODE_GIT_PUSH_REQUIRED',
+    'CODE_EXTERNAL_REVIEW_REQUIRED',
     'CODE_COMPLETE',
     'CODE_BLOCKED',
-    'never stages, commits, pushes'
+    'Never stage, commit, or push'
 )) {
     if (-not $codeManager.Contains($required)) {
         throw "Code Implementation Manager Skill is missing: $required"
     }
 }
 
-$codeReviewer = Read-Text (Join-Path $skillsRoot "hmasd-code-reviewer/SKILL.md")
-foreach ($required in @(
-    'temporary read-only HMASD reviewer subagent',
-    'actual integrated diff',
-    'probability support and likelihood replay',
-    'scalar CUDA',
-    'CODE_REVIEW_APPROVED',
-    'CODE_REVIEW_CHANGES_REQUIRED',
-    'Do not send a cross-session message'
-)) {
-    if (-not $codeReviewer.Contains($required)) {
-        throw "Code Reviewer Skill is missing: $required"
-    }
-}
-
-$implementer = Read-Text (Join-Path $skillsRoot "hmasd-implementer/SKILL.md")
-$engineering = Read-Text (Join-Path $skillsRoot "hmasd-implementer/references/engineering-principles.md")
-foreach ($required in @(
-    'role_skill=.agents/skills/hmasd-implementer/SKILL.md',
-    'temporary HMASD implementation or implementation-fix subagent',
-    'working_scope=<one or more project directories>',
-    'protected_changes=<exact protected files/symbols or none>',
-    'docs/project/ALGORITHM_PRINCIPLES.md',
-    'Do not load',
-    'only assignment-listed inputs',
-    'replace superseded active code',
-    'run the single focused check'
-)) {
-    if (-not $implementer.Contains($required)) {
-        throw "Implementer Skill is missing: $required"
-    }
-}
-if ($implementer.Contains('../hmasd-task-router/SKILL.md')) {
-    throw "Implementer must not load the persistent-session router"
-}
+$engineering = Read-Text (Join-Path $skillsRoot "hmasd-code-manager/references/engineering-principles.md")
 foreach ($required in @(
     'Pack padded or indexed data once',
     'Sampling, storage, replay',
     'stage-level wall time'
 )) {
     if (-not $engineering.Contains($required)) {
-        throw "Implementer engineering reference is missing: $required"
+        throw "Code Manager engineering reference is missing: $required"
     }
 }
 

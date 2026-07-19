@@ -13,14 +13,13 @@ $sessionRoleSkills = @(
     (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md')
 )
-$implementerSkill = Join-Path $repo '.agents/skills/hmasd-implementer/SKILL.md'
 $monitorRegistry = Join-Path $repo '.agents/skills/hmasd-experiment/references/monitor-task.json'
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
 $normalizedSkillText = $skillText -replace '\s+', ' '
 foreach ($required in @(
     'Own persistent-session communication only',
-    'Never use this Skill for a temporary',
+    'Internal coding workflow is outside this router',
     'exactly one session-role Skill',
     'HMASD_SESSION_TASK',
     'task_id=<stable id>',
@@ -69,9 +68,9 @@ foreach ($required in @(
     'controller <-> code_implementation_manager',
     'START_CODE_WORK',
     'CODE_GIT_PUSH_REQUIRED',
+    'CODE_EXTERNAL_REVIEW_REQUIRED',
     'CODE_COMPLETE',
     'CODE_BLOCKED',
-    'subagents are not persistent-session destinations',
     'Receive Contract',
     'native delegation metadata `source_thread_id` equals the session ID',
     'stable `handoff_id`',
@@ -164,13 +163,6 @@ if ($audit.schema_version -ne 1 -or
     -not ($audit.matches.path -contains '.agents/skills/hmasd-review-exchange/SKILL.md')) {
     throw 'Topology impact audit did not discover both router and role-Skill surfaces'
 }
-$implementerText = Get-Content -LiteralPath $implementerSkill -Raw
-if (-not $implementerText.Contains('native subagent result channel') -or
-    -not $implementerText.Contains('invoke `$hmasd-task-router`') -or
-    $implementerText.Contains('../hmasd-task-router/SKILL.md')) {
-    throw 'Implementer incorrectly uses persistent-session routing'
-}
-
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
 if ($monitor.schema_version -ne 7 -or
     $monitor.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or

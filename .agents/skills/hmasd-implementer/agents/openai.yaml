@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Implementer"
-  short_description: "Implement HMASD algorithm and trainer changes"
-  default_prompt: "Use $hmasd-implementer in a temporary subagent to implement one bounded controller assignment under HMASD scientific and engineering constraints."

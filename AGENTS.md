@@ -13,11 +13,6 @@ audit and update the registry, sender and receiver role Skills, heartbeat
 terminal behavior, helper prompts/scripts, and affected contract tests in one
 Git boundary. Do not send across a partially migrated graph.
 
-Temporary subagents do not use that Skill. They are created for one bounded
-implementation assignment, read only their named role Skill and inputs, and
-return through the native subagent channel. Cross-session route metadata,
-heartbeats, and task registries never enter a subagent prompt.
-
 This file is the controller contract. Only the task ID named as active
 controller in `docs/project/CURRENT_WORK.md` may exercise its controller
 authority. Merely receiving this repository's `AGENTS.md` does not make a task
@@ -25,12 +20,10 @@ the controller.
 
 Role procedures belong only to their role Skills. A delegated persistent
 session receives the communication Skill, exactly one session-role Skill, and
-explicitly listed inputs. A temporary subagent receives exactly one subagent
-role Skill and explicitly listed inputs. In either case, the role Skill replaces
-the controller sections below as the operating contract; the recipient must not
-read `CURRENT_WORK.md`, reconstruct context from the controller conversation,
-or load another role's Skill unless its assignment explicitly grants a named
-file as evidence.
+explicitly listed inputs. The role Skill replaces the controller sections below
+as the operating contract; the recipient must not read `CURRENT_WORK.md`,
+reconstruct context from the controller conversation, or load another role's
+Skill unless its assignment explicitly grants a named file as evidence.
 
 ## Active Controller
 
@@ -44,8 +37,9 @@ The controller alone owns root project state, adoption of external scientific
 decisions, implementation and experiment authorization, Git integration,
 evidence integrity, and user communication. The dedicated Code Implementation
 Manager owns concrete executable architecture, `IMPLEMENTATION_PLAN.md`, code
-task decomposition, implementation integration, and code review inside one
-controller-authorized boundary.
+implementation, engineering-quality application, and focused verification
+inside one controller-authorized boundary. Its internal coding workflow is not
+prescribed by project documents.
 The registered Code Implementation Manager has standing, permanent, exclusive
 write authority over `docs/project/IMPLEMENTATION_PLAN.md` whenever it has
 accepted a valid `START_CODE_WORK`. It may create, replace, or clear that plan
@@ -65,8 +59,7 @@ maintenance or a terminal protocol failure identifies that Skill as the fault.
 Choose exactly one execution surface and one role:
 
 - complete code implementation or repair workflow -> persistent session with
-  `$hmasd-task-router` and `$hmasd-code-manager`; that manager alone creates
-  temporary `$hmasd-implementer` and `$hmasd-code-reviewer` subagents;
+  `$hmasd-task-router` and `$hmasd-code-manager`;
 - complete external review -> controller uses `$hmasd-review-round` and
   `$hmasd-task-router` to dispatch the three registered, one-reviewer-per-session
   exchanges; each exchange uses `$hmasd-review-exchange`;
@@ -85,10 +78,16 @@ broad repository context, or an additional Skill "for reference." Missing
 information is returned as `TASK_BLOCKED`; the recipient does not search for
 implied context.
 
-The Code Implementation Manager enforces one implementer for a coupled change,
-parallel writers only for frozen disjoint scopes, one writer per file, and one
-fresh reviewer after integration. The controller neither dispatches these
-subagents nor performs implementation review.
+The Code Implementation Manager uses its native coding workflow and remains
+responsible for the complete integrated diff and focused verification. The
+controller does not prescribe internal roles, models, effort settings,
+delegation, or review ceremony.
+
+After a mutating `START_CODE_WORK` is accepted, the Code Implementation Manager
+holds the sole tracked-worktree write lease. Until it sends
+`CODE_GIT_PUSH_REQUIRED` or `CODE_BLOCKED`, the controller performs no project
+edit, staging, commit, or push. Urgent controller work first terminates the code
+task at a clean boundary and then redispatches from a new pushed commit.
 
 ## Mutation Tiers
 
@@ -101,7 +100,8 @@ Use strict authorization only for protected material:
   contracts, and active external-review state.
 
 A protected change requires a controller-authorized scientific boundary, one
-Code Manager implementation plan, and an approved reviewer result. Within an
+Code Manager implementation plan, and manager acceptance of the integrated
+result. Within an
 authorized working directory, ordinary helper code, runners, analyzers, tests,
 transient files, and non-normative documents may be created, edited, replaced,
 or deleted without a per-file approval loop. Do not preserve obsolete ordinary
@@ -116,13 +116,9 @@ A role Skill is both an authority grant and a context denylist:
   enumeration;
 - tools and mutations not granted by the role Skill are forbidden;
 - a role cannot authorize another role, launch a successor, edit project
-  control, change a task model, or expand its own assignment; the sole routing
-  exception is that the Code Implementation Manager may create bounded native
-  implementer and reviewer subagents defined by `$hmasd-code-manager`;
+  control, change a task model, or expand its own assignment;
 - persistent-session messages always return through `$hmasd-task-router` with
   delivery proof;
-- subagents return only through the native subagent channel and never contact a
-  persistent session;
 - completion or failure of one role does not trigger another workflow.
 
 Project files never select or change task models. Existing tasks retain their
@@ -131,7 +127,6 @@ metadata immediately before each send and copies it unchanged into the send.
 The controller communicates directly with each registered Exchange session for
 external review; Exchange sessions never communicate with one another.
 The controller communicates only with the Code Implementation Manager for code;
-it never sends to or receives from that manager's subagents directly.
 The controller alone writes reconciliation and disposition files and creates
 the Git-visible boundary required before each downstream reviewer stage.
 

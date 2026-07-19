@@ -1,16 +1,16 @@
 ---
 name: hmasd-task-router
-description: Mandatory communication-only Skill for every persistent HMASD Codex session and for active-controller maintenance of the persistent-session topology. Use before every message or callback, and whenever roles, edges, session bindings, or callback destinations change. Never use it for temporary subagents. Resolve and preserve live delivery metadata, audit every topology change across affected role Skills and contracts, and require tool-level delivery plus post-send route invariance without selecting or changing a model or project decision.
+description: Mandatory communication-only Skill for every persistent HMASD Codex session and for active-controller maintenance of the persistent-session topology. Use before every persistent-session message or callback, and whenever roles, edges, session bindings, or callback destinations change. Resolve and preserve live delivery metadata, audit every topology change across affected role Skills and contracts, and require tool-level delivery plus post-send route invariance without selecting or changing a model or project decision.
 ---
 
 # HMASD Task Router
 
 ## Scope
 
-Own persistent-session communication only. Never use this Skill for a temporary
-subagent or native subagent messaging. This Skill by itself grants no authority
-to read project-control documents, interpret the task, choose a role, operate a
-role tool, create a task, or authorize work. It does not revoke context
+Own persistent-session communication only. Internal coding workflow is outside
+this router. This Skill by itself grants no authority to read project-control
+documents, interpret the task, choose a role, operate a role tool, create a
+task, or authorize work. It does not revoke context
 separately granted by active-controller status or by the one assigned role
 Skill.
 
@@ -84,7 +84,7 @@ return=SESSION_ROUTE_SELF_TEST_OK
 The recipient reads this Skill, the role directory, and the named role Skill
 only. Verify that its current task ID and `role_skill` match the role entry.
 Do no role work and create no heartbeat: do not use a browser, external model,
-Git, project mutation, subagent, or experiment. Resolve the registered
+Git, project mutation, internal coding workflow, or experiment. Resolve the registered
 controller live and send exactly:
 
 ```text
@@ -236,11 +236,11 @@ controller <-> code_implementation_manager
 ```
 
 The controller sends `START_CODE_WORK` only to the registered Code
-Implementation Manager. That manager alone creates temporary native implementer
-and reviewer subagents; subagents are not persistent-session destinations and
-never use this router. The manager alone returns `CODE_GIT_PUSH_REQUIRED`,
-`CODE_COMPLETE`, or `CODE_BLOCKED` to the controller. Reject controller-to-code-
-subagent and code-subagent-to-controller persistent sends.
+Implementation Manager. The manager's internal coding workflow is outside the
+persistent-session graph and is not prescribed by this router. The manager
+alone returns `CODE_GIT_PUSH_REQUIRED`, `CODE_EXTERNAL_REVIEW_REQUIRED`,
+`CODE_COMPLETE`, or `CODE_BLOCKED` to the controller. Reject every other
+persistent code-work edge.
 
 ## Receive Contract
 

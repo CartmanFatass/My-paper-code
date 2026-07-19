@@ -1,14 +1,14 @@
-# HMASD Implementer Engineering Principles
+# HMASD Code Engineering Principles
 
-Apply these rules to executable MARL code. They optimize implementation quality
-without changing the controller's scientific or algorithm contract.
+Apply these rules to executable MARL code without changing the accepted
+scientific or algorithm contract.
 
 ## Batch and device
 
 - Keep environment, agent, active-member, branch, skill, replica, and
   evaluation dimensions explicit. Batch independent work through an existing
-  tensor path; retain a loop only for real autoregressive, causal, simulator, or
-  recurrent dependence.
+  tensor path; retain a loop only for real autoregressive, causal, simulator,
+  or recurrent dependence.
 - Pack padded or indexed data once per collection boundary, transfer it once,
   and reuse it across optimizer passes.
 - Accumulate metrics on device and synchronize at update or reporting
@@ -38,12 +38,12 @@ without changing the controller's scientific or algorithm contract.
   provide useful concurrency rather than duplicate contexts and serialization.
 - Conclusion-bearing runners expose enough stage-level wall time to locate an
   order-of-magnitude regression without repeated profiling.
-- Before handing back executable experiment code, inspect the changed end-to-
-  end path once for scalar CUDA work, repeated packing or transfer, premature
-  synchronization, recurrent leakage, replay mismatch, RNG drift, excessive
-  persistence, and serial evaluation.
+- Before handing back executable experiment code, inspect the changed
+  end-to-end path once for scalar CUDA work, repeated packing or transfer,
+  premature synchronization, recurrent leakage, replay mismatch, RNG drift,
+  excessive persistence, and serial evaluation.
 
 Fix an observed issue once. Do not create a separate performance gate, require
-a fixed speedup, or loop on speculative optimization. If a recurring problem
+a fixed speedup, or loop on speculative optimization. When a recurring problem
 reveals a reusable rule, update this reference at the same accepted code
 boundary rather than adding workflow prose elsewhere.
