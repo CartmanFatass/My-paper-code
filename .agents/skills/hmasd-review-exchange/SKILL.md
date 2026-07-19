@@ -84,6 +84,13 @@ sufficient. For an existing raw, inspect this session's registered external
 conversation once and repeat the same completion and equality checks before
 reporting success.
 
+On a Pro page, the visible deferred action `立即回答` means the request was
+accepted and Pro is still working. It is a waiting state, never a transport
+failure and never permission to click the control. Create or retain this
+stage's heartbeat, close the bounded inspection, and let the next heartbeat
+reopen the registered page. Send `REVIEW_STAGE_BLOCKED` only for a direct
+terminal transport error, not for ordinary deferred Pro thinking.
+
 ## Heartbeat
 
 Immediately after the external question is visibly accepted, create one
