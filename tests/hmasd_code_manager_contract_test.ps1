@@ -30,6 +30,8 @@ foreach ($required in @(
     'git merge-base --is-ancestor <source_commit> My-paper-code/aggressive',
     'never run a network Git command',
     'Own the concrete executable architecture',
+    'standing permanent grant',
+    'without a separate approval or retry loop',
     'spawn one implementer with `$hmasd-implementer`',
     'spawn one fresh read-only reviewer with `$hmasd-code-reviewer`',
     'after two failed delegated attempts',
@@ -84,7 +86,9 @@ foreach ($required in @(
     '$hmasd-code-manager',
     '$hmasd-code-reviewer',
     'controller communicates only with the Code Implementation Manager',
-    'controller neither dispatches these subagents nor performs implementation review'
+    'controller neither dispatches these subagents nor performs implementation review',
+    'standing, permanent, exclusive write authority',
+    'must not trigger repeated protected-file approval requests'
 )) {
     if (-not $normalizedAgents.Contains($required)) {
         throw "AGENTS code-role isolation is missing: $required"
@@ -92,10 +96,10 @@ foreach ($required in @(
 }
 
 if (-not $current.Contains('Code Implementation Manager') -or
-    -not $current.Contains('controller retains authorization') -or
-    -not $plan.Contains('Status: NONE') -or
-    -not $plan.Contains('registered Code Implementation Manager') -or
-    -not $plan.Contains('START_CODE_WORK')) {
+    -not $current.Contains('Active controller:') -or
+    -not ($plan.Contains('Status: NONE') -or $plan.Contains('Status: AUTHORIZED_IN_PROGRESS')) -or
+    -not ($plan.Contains('registered Code Implementation Manager') -or
+          $plan.Contains('Code Implementation Manager is the sole writer'))) {
     throw 'Project control does not preserve controller/code-manager ownership'
 }
 

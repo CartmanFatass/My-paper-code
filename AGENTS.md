@@ -46,6 +46,11 @@ evidence integrity, and user communication. The dedicated Code Implementation
 Manager owns concrete executable architecture, `IMPLEMENTATION_PLAN.md`, code
 task decomposition, implementation integration, and code review inside one
 controller-authorized boundary.
+The registered Code Implementation Manager has standing, permanent, exclusive
+write authority over `docs/project/IMPLEMENTATION_PLAN.md` whenever it has
+accepted a valid `START_CODE_WORK`. It may create, replace, or clear that plan
+without per-edit approval. The assignment still bounds the scientific scope;
+this standing grant does not authorize experiments, Git, or a successor route.
 Unresolved hypothesis generation, portfolio weighting, or next-evidence choice
 is sent through one tracked external-review round. The controller directly
 coordinates the three registered Exchange sessions but does not silently
@@ -151,6 +156,8 @@ plane.
 The Code Implementation Manager writes the implementation plan only for an
 authorized assignment. It contains only the current executable design. When no
 implementation is authorized, it says so and contains no completed contract.
+Plan replacement and cleanup under a valid assignment use the standing grant
+above and must not trigger repeated protected-file approval requests.
 
 ## Repository Boundaries
 

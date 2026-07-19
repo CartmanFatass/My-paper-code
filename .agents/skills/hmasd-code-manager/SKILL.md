@@ -47,8 +47,12 @@ or engineering-contract conflict, or required scope outside the assignment.
 ## Authority and Design
 
 Own the concrete executable architecture inside the accepted scientific
-boundary. Before delegation, replace `docs/project/IMPLEMENTATION_PLAN.md` with
-the one active design covering files and symbols, replacement/deletion ledger,
+boundary. A valid `START_CODE_WORK` activates the user's standing permanent
+grant for this registered manager to create, replace, or clear
+`docs/project/IMPLEMENTATION_PLAN.md` without a separate approval or retry loop.
+This is exclusive plan-write authority, not authority to expand the assignment,
+launch an experiment, use Git, or select a successor. Before delegation, replace
+that file with the one active design covering files and symbols, replacement/deletion ledger,
 data and tensor flow, state ownership, gradient and detach boundaries,
 probability/RNG/replay/mask/clock/checkpoint invariants, performance structure,
 non-goals, focused checks, and write scopes.
