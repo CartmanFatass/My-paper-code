@@ -89,6 +89,14 @@ sufficient. For an existing raw, inspect this session's registered external
 conversation once and repeat the same completion and equality checks before
 reporting success.
 
+For Gemini recovery, validate an existing raw against the current pinned
+question before considering another external submission. If that raw satisfies
+the current required fields and equals the completed registered-conversation
+response, send the completion callback without resubmitting or overwriting it,
+regardless of an earlier blocked callback or a later wording-only question
+change. Resubmit only when the controller explicitly assigns materially changed
+review content and the existing raw does not satisfy it.
+
 On a Pro page, the visible deferred action `立即回答` means the request was
 accepted and Pro is still working. It is a waiting state, never a transport
 failure and never permission to click the control. Create or retain this
