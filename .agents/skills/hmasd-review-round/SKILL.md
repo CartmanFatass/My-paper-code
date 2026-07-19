@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use only in the dedicated External Review Manager persistent session when the controller assigns one complete HMASD external-review round. It mechanically sequences three independently registered reviewer-exchange sessions, verifies their artifacts, writes factual reconciliation and final disposition, maintains Git-visible round boundaries, and returns one result to the controller; it never operates an external reviewer itself.
+description: Use only in the dedicated External Review Manager persistent session when the controller assigns one complete HMASD external-review round. It mechanically sequences three independently registered reviewer-exchange sessions, verifies their artifacts, writes factual reconciliation and final disposition, requests controller-owned Git boundaries, and returns one result to the controller; it never operates an external reviewer itself.
 ---
 
 # HMASD External Review Manager
@@ -47,16 +47,16 @@ Own only:
 - review-stage sequencing and assignments to the three registered reviewer
   exchange sessions;
 - question, reconciliation, and disposition files inside `round_path`;
-- verification and Git integration of raw files written by those exchanges;
-- Git add, commit, and `git push My-paper-code aggressive` for active-round
-  files needed by a reviewer;
+- verification of raw files written by those exchanges;
+- one exact active-round file list when a pushed Git boundary is required;
 - one terminal callback to the controller.
 
-Do not edit code or project-control files, choose or authorize implementation or
-compute, change task settings, create reviewer conversations, operate a browser
-or Antigravity, write a reviewer raw, create a reviewer heartbeat, or read
-unlisted local material. Contact reviewer exchanges only through
-`$hmasd-task-router`; contact no reviewer model or controller-bypassing session.
+Do not edit code or project-control files, stage, commit, push, choose or
+authorize implementation or compute, change task settings, create reviewer
+conversations, operate a browser or Antigravity, write a reviewer raw, create a
+reviewer heartbeat, or read unlisted local material. Contact reviewer exchanges
+only through `$hmasd-task-router`; contact no reviewer model or
+controller-bypassing session.
 
 ## Round Procedure
 
@@ -67,10 +67,12 @@ Complete these mechanical steps:
    `gemini_divergent_exchange` and `open_divergent_exchange`;
 3. after both verified raws return, write factual
    `30_EVIDENCE_RECONCILIATION.md` without ranking routes;
-4. write `40_PRO_CONVERGENT_QUESTION.md`, commit and push the active round, then
-   dispatch it to `convergent_exchange`;
+4. write `40_PRO_CONVERGENT_QUESTION.md`, request one controller-owned pushed
+   boundary, then dispatch it to `convergent_exchange` after a new
+   `START_REVIEW` names that pushed commit;
 5. after its verified raw returns, write `50_DISPOSITION.md` from that response,
-   commit and push the active round, and reply once to the controller.
+   request one controller-owned pushed boundary, and after a new `START_REVIEW`
+   names that pushed commit, reply once to the controller.
 
 Every reviewer dispatch is exactly:
 
@@ -105,9 +107,12 @@ verification; never inspect an external reviewer from this manager and never
 resubmit from the manager. A `REVIEW_STAGE_BLOCKED` callback is a terminal round
 blocker, not authority to substitute another exchange or reviewer.
 
-Commit and push only active-round artifacts before every downstream dispatch.
-A push failure is an operational blocker to report, not a request for the
-controller to operate the review.
+Before a downstream dispatch, require every needed active-round artifact to be
+present in `evidence_commit`. If newly written or verified files are not in that
+pushed commit, send exactly one `REVIEW_GIT_PUSH_REQUIRED` callback and end the
+turn. The controller inspects only the named paths, commits and pushes them, then
+resends `START_REVIEW` with the new 40-character commit. Derive progress from
+the files and commit; do not add a state file or a separate resume command.
 
 ## Liveness
 
@@ -115,7 +120,8 @@ Each reviewer exchange creates, retargets, and deletes its own external-response
 heartbeat. This manager never creates or manages a heartbeat. It performs one
 bounded mechanical transition when it receives `START_REVIEW`,
 `REVIEW_STAGE_COMPLETE`, or `REVIEW_STAGE_BLOCKED`, sends the next required
-message, and ends. The recipient message wakes the next session.
+message, and ends. The recipient message wakes the next session. A Git-boundary
+callback ends the turn; the controller's next `START_REVIEW` wakes it again.
 
 Attempt the final controller callback once with the stable `handoff_id`. If the
 send tool does not confirm the registered controller task, preserve the pushed
@@ -131,6 +137,20 @@ resolve that ID live with `$hmasd-task-router`; copy the returned `hostId`,
 `threadId`, `model`, and `thinking` unchanged into the send. Never take a return
 ID or model setting from the assignment, review registry, conversation history,
 or heartbeat prompt.
+
+When a pushed boundary is required, send exactly:
+
+```text
+REVIEW_GIT_PUSH_REQUIRED
+role=external_review_manager
+handoff_id=<round>:git:<divergent-acceptance|convergent-question|final-disposition>
+round=<id>
+paths=<comma-separated exact round-relative paths>
+next=<CONVERGENT_DISPATCH|FINAL_CALLBACK>
+```
+
+This callback grants no Git authority to the manager. After the controller
+pushes the named paths, it resends `START_REVIEW` with the new pushed commit.
 
 On success send exactly:
 

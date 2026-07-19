@@ -14,15 +14,15 @@ $readmePath = Join-Path $repo "docs/external-review/README.md"
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 $manager = $registry.review_manager
-if ($registry.schema_version -ne 19 -or
+if ($registry.schema_version -ne 20 -or
     $manager.kind -ne "persistent_full_round_manager" -or
     $manager.session_role_registry -ne ".agents/skills/hmasd-task-router/references/session-roles.json" -or
     ($manager.controller_messages -join '|') -ne "START_REVIEW" -or
-    ($manager.manager_messages -join '|') -ne "REVIEW_COMPLETE|REVIEW_BLOCKED" -or
+    ($manager.manager_messages -join '|') -ne "REVIEW_GIT_PUSH_REQUIRED|REVIEW_COMPLETE|REVIEW_BLOCKED" -or
     $manager.exchange_messages.manager_to_exchange -ne "REVIEW_STAGE" -or
     ($manager.exchange_messages.exchange_to_manager -join '|') -ne "REVIEW_STAGE_COMPLETE|REVIEW_STAGE_BLOCKED" -or
-    $manager.git_boundary.manager_role -ne "stage_commit_push_active_round_only" -or
-    $manager.git_boundary.controller_role -ne "consume_terminal_disposition_only" -or
+    $manager.git_boundary.manager_role -ne "report_exact_active_round_paths_only" -or
+    $manager.git_boundary.controller_role -ne "inspect_commit_push_then_restart_same_manager" -or
     $registry.exchange_contract.role_skill -ne ".agents/skills/hmasd-review-exchange/SKILL.md" -or
     -not $registry.exchange_contract.one_reviewer_per_session -or
     $registry.exchange_contract.controller_contact -ne "forbidden" -or
@@ -67,7 +67,8 @@ foreach ($required in @(
     "session-roles.json.roles.controller.thread_id",
     'returned `hostId`',
     "ID or model setting from the assignment",
-    "git push My-paper-code aggressive",
+    "REVIEW_GIT_PUSH_REQUIRED",
+    "Do not edit code or project-control files, stage, commit, push",
     "There is no review state machine",
     "REVIEW_STAGE",
     "controller is never a stage recipient",

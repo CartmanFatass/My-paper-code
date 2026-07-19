@@ -114,6 +114,9 @@ user-selected settings; communication reads the recipient's live delivery
 metadata immediately before each send and copies it unchanged into the send.
 The controller communicates only with the Review Manager for external review;
 it never sends to or receives from a reviewer exchange directly.
+The Review Manager never stages, commits, or pushes. When a reviewer-visible
+boundary is required, it returns the exact active-round paths; the controller
+alone commits and pushes them, then resumes the same manager with the new commit.
 
 ## Agile Research and Active-Line Code
 

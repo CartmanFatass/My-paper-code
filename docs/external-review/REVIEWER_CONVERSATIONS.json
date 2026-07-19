@@ -1,5 +1,5 @@
 {
-  "schema_version": 19,
+  "schema_version": 20,
   "updated": "2026-07-20",
   "review_manager": {
     "kind": "persistent_full_round_manager",
@@ -9,6 +9,7 @@
       "START_REVIEW"
     ],
     "manager_messages": [
+      "REVIEW_GIT_PUSH_REQUIRED",
       "REVIEW_COMPLETE",
       "REVIEW_BLOCKED"
     ],
@@ -25,11 +26,11 @@
       "raw_acceptance",
       "evidence_reconciliation",
       "final_disposition",
-      "active_round_git_commit_push"
+      "exact_git_boundary_request"
     ],
     "git_boundary": {
-      "manager_role": "stage_commit_push_active_round_only",
-      "controller_role": "consume_terminal_disposition_only"
+      "manager_role": "report_exact_active_round_paths_only",
+      "controller_role": "inspect_commit_push_then_restart_same_manager"
     }
   },
   "exchange_contract": {

@@ -145,8 +145,8 @@ The controller sends `START_REVIEW` only to `external_review_manager` and never
 sends a reviewer-stage assignment. The manager sends `REVIEW_STAGE` only to the
 single exchange whose registered `reviewer_role` matches that assignment. A
 reviewer exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` only
-to the manager. The manager alone returns `REVIEW_COMPLETE` or
-`REVIEW_BLOCKED` to the controller. Reject controller-to-reviewer,
+to the manager. The manager alone returns `REVIEW_GIT_PUSH_REQUIRED`,
+`REVIEW_COMPLETE`, or `REVIEW_BLOCKED` to the controller. Reject controller-to-reviewer,
 reviewer-to-controller, reviewer-to-reviewer, and reviewer-to-monitor sends.
 
 For a manager-to-exchange send, apply the same live-resolution and unchanged

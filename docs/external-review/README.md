@@ -1,8 +1,9 @@
 # HMASD External Review Workflow
 
 External review is a mandatory scientific boundary. One persistent Codex
-`External Review Manager` owns mechanical sequencing, Git-visible boundaries,
-reconciliation, and disposition. Three additional persistent exchange sessions
+`External Review Manager` owns mechanical sequencing, Git-boundary requests,
+reconciliation, and disposition. The controller alone owns commit and push.
+Three additional persistent exchange sessions
 are each bound to exactly one reviewer: Gemini divergent, Open-Pro divergent,
 or Convergent Pro. Each exchange alone owns its reviewer transport, raw capture,
 and heartbeat, so neither the controller nor manager carries browser or CLI
@@ -33,16 +34,25 @@ compact assignment through the communication Skill:
 START_REVIEW role_skill=.agents/skills/hmasd-review-round/SKILL.md round=<round-id> evidence_commit=<40-char-sha> round_path=docs/external-review/rounds/<round-id>
 ```
 
-The commit pins reviewer-visible scientific evidence. The manager owns all
-later active-round question/raw/reconciliation/disposition commits and pushes,
-but each raw has exactly one writer: its registered reviewer exchange. The
-controller does not perform intermediate handshakes and never contacts a
-reviewer exchange directly. A raw artifact becomes immutable only after its
+The commit pins reviewer-visible scientific evidence. The manager writes later
+active-round question, reconciliation, and disposition files, while each raw
+has exactly one writer: its registered reviewer exchange. When those files need
+a reviewer-visible boundary, the manager sends `REVIEW_GIT_PUSH_REQUIRED` with
+the exact paths; the controller alone inspects, commits, pushes, and resends
+`START_REVIEW` with the new commit. This is a stateless Git handoff, not a review
+state machine. The controller never contacts a reviewer exchange directly. A
+raw artifact becomes immutable only after its
 exchange verifies natural response completion, all question-required fields,
 and exact captured-text equality after rereading the file; nonempty alone is not
 completion. An externally accepted stage is never resubmitted.
 
-The manager returns exactly one terminal message:
+The manager may return this mechanical boundary request before completion:
+
+```text
+REVIEW_GIT_PUSH_REQUIRED role=external_review_manager handoff_id=<stable-id> round=<round-id> paths=<exact-paths> next=<next-stage>
+```
+
+It ultimately returns exactly one terminal message:
 
 ```text
 REVIEW_COMPLETE role=external_review_manager handoff_id=<stable-id> round=<round-id> disposition=<path> commit=<sha>
