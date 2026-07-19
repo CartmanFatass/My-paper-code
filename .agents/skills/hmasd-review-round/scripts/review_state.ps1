@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("init", "show", "next", "transition", "validate")]
+    [ValidateSet("init", "show", "next", "transition", "resume", "validate")]
     [string]$Mode,
 
     [Parameter(Mandatory = $true)]
@@ -21,7 +21,8 @@ param(
 
     [string]$RouteToken,
     [string]$DeadlineAt,
-    [string]$Blocker
+    [string]$Blocker,
+    [string]$ResolvedBlocker
 )
 
 $ErrorActionPreference = "Stop"
@@ -284,6 +285,50 @@ if ($Mode -eq "transition") {
     } else {
         throw "Invalid transition target: $State"
     }
+    Assert-State $document
+    Write-State $document
+}
+
+if ($Mode -eq "resume") {
+    if ([string]::IsNullOrWhiteSpace($Stage) -or
+        [string]::IsNullOrWhiteSpace($ResolvedBlocker)) {
+        throw "resume requires -Stage and -ResolvedBlocker"
+    }
+    if ($document.round_status -ne "ACTIVE") {
+        throw "Closed review rounds are immutable"
+    }
+    $entry = $document.stages.$Stage
+    if ($entry.state -ne "BLOCKED") {
+        throw "Only a BLOCKED stage may resume: $Stage"
+    }
+    if (-not [string]::Equals(
+        [string]$entry.blocker,
+        $ResolvedBlocker,
+        [StringComparison]::Ordinal
+    )) {
+        throw "Resolved blocker does not match recorded blocker: $Stage"
+    }
+    if ($entry.dispatch_count -ne 0 -or
+        -not [string]::IsNullOrWhiteSpace($entry.route_token) -or
+        -not [string]::IsNullOrWhiteSpace($entry.dispatched_at) -or
+        -not [string]::IsNullOrWhiteSpace($entry.deadline_at)) {
+        throw "A dispatched or accepted external stage cannot resume: $Stage"
+    }
+
+    $stageIndex = [Array]::IndexOf($stageOrder, $Stage)
+    if ($stageIndex -gt 0) {
+        foreach ($prior in $stageOrder[0..($stageIndex - 1)]) {
+            if ($document.stages.$prior.state -ne "COMPLETE") {
+                throw "Cannot resume $Stage before completed prior stage: $prior"
+            }
+        }
+    }
+
+    $entry.state = "NOT_STARTED"
+    $entry.route_token = $null
+    $entry.dispatched_at = $null
+    $entry.deadline_at = $null
+    $entry.blocker = $null
     Assert-State $document
     Write-State $document
 }

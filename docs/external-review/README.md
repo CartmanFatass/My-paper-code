@@ -29,6 +29,18 @@ The controller prepares and pushes one immutable round boundary, then sends:
 START_REVIEW round=<round-id> commit=<40-char-sha> state=<state-path>
 ```
 
+The commit pins reviewer-visible scientific evidence, not the operating
+workflow. The manager always reads its Skills, registry, and state script from
+the current working tree. If an undispatched stage was blocked by an operational
+condition that is now resolved, the controller sends:
+
+```text
+RESUME_REVIEW round=<round-id> evidence_commit=<40-char-sha> state=<state-path> resolved_blocker=<exact recorded blocker>
+```
+
+Completed stages are not repeated, and an externally accepted stage is never
+resubmitted.
+
 The manager returns exactly one terminal message:
 
 ```text
@@ -45,6 +57,10 @@ The controller does not operate reviewer transports, create intermediate Git
 boundaries, or consume intermediate review progress. The manager may commit and
 push only its active round directory. The controller's only scientific input is
 the completed disposition.
+
+A terminal callback exists only after the manager invokes the common
+communication Skill and receives a tool result identifying the controller task.
+Text written only in the manager task is not delivery.
 
 ## Round files
 

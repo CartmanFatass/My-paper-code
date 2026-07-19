@@ -21,7 +21,11 @@ foreach ($required in @(
     '`REVIEW_COMPLETE`',
     '`REVIEW_BLOCKED` from the External Review Manager',
     'heartbeat ticks remain inside the monitor task',
-    'ambiguous delivery is never repeated')) {
+    'ambiguous delivery is never repeated',
+    'Require Delivery Proof',
+    'tool result identifies the resolved recipient `threadId`',
+    'final response',
+    'not cross-task')) {
     if (-not $skillText.Contains($required)) {
         throw "Communication Skill is missing: $required"
     }

@@ -51,6 +51,19 @@ unchanged-state messages across tasks. A definite pre-delivery `notLoaded`
 error permits one identical retry after loading the same target. An accepted or
 ambiguous delivery is never repeated.
 
+## Require Delivery Proof
+
+Delivery succeeds only when `send_message_to_thread` was actually called and
+its tool result identifies the resolved recipient `threadId`. Compare that
+returned target with the live recipient resolved immediately before the call.
+
+Writing the payload in the sender's commentary or final response, emitting a
+heartbeat directive, or placing text in delegation metadata is not cross-task
+delivery. For a required callback, finish only after observing the matching
+tool result. If the call fails before acceptance, keep the callback pending and
+report the delivery failure locally; never claim that the recipient was
+notified.
+
 ## Role Boundaries
 
 - The controller sends a self-contained implementation task and receives one

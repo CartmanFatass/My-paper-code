@@ -33,9 +33,14 @@ if ($null -ne $manager.PSObject.Properties['model'] -or
 $skillText = Get-Content -LiteralPath $skillPath -Raw
 foreach ($required in @(
     "START_REVIEW",
+    "RESUME_REVIEW",
     "Do not spawn a Gemini transport subagent",
     "browser tools for a tracked review",
-    "controller's only scientific input from the round"
+    "controller's only scientific input from the round",
+    "pins reviewer-visible scientific evidence only",
+    "current working tree",
+    'tool result''s target `threadId`',
+    "local final response"
 )) {
     if (-not $skillText.Contains($required)) {
         throw "Review Manager contract is missing: $required"
@@ -69,6 +74,7 @@ function Complete-External([string]$RoundPath, [string]$Stage, [string]$Role, [s
 
 $happy = New-Round
 $blocked = New-Round
+$acceptedBlocked = New-Round
 try {
     $initial = Get-Content -LiteralPath (Join-Path $happy "05_REVIEW_STATE.json") -Raw | ConvertFrom-Json
     if ($initial.schema_version -ne 5 -or $initial.stages.gemini_divergent.dispatch_count -ne 0) {
@@ -100,11 +106,43 @@ try {
         throw "Terminal blocker allowed an implicit repair or duplicate dispatch"
     }
 
+    $mismatchSucceeded = $false
+    try {
+        & $stateScript -Mode resume -RoundPath $blocked -Stage gemini_divergent `
+            -ResolvedBlocker "OTHER_FAILURE" | Out-Null
+        $mismatchSucceeded = $true
+    } catch {}
+    if ($mismatchSucceeded) {
+        throw "Resume accepted a blocker that did not match exactly"
+    }
+
+    & $stateScript -Mode resume -RoundPath $blocked -Stage gemini_divergent `
+        -ResolvedBlocker "TRANSPORT_FAILURE" | Out-Null
+    if ((& $stateScript -Mode next -RoundPath $blocked) -ne "NEXT:gemini_divergent") {
+        throw "Resolved pre-dispatch blocker did not resume in place"
+    }
+
+    $acceptedRoute = Route $acceptedBlocked "GEMINI_DIVERGENT" "11_GEMINI_DIVERGENT_RAW.md"
+    $acceptedDeadline = [DateTimeOffset]::Now.AddHours(2).ToString("o")
+    & $stateScript -Mode transition -RoundPath $acceptedBlocked -Stage gemini_divergent `
+        -State DISPATCHED -RouteToken $acceptedRoute -DeadlineAt $acceptedDeadline | Out-Null
+    & $stateScript -Mode transition -RoundPath $acceptedBlocked -Stage gemini_divergent `
+        -State BLOCKED -Blocker "ACCEPTED_TRANSPORT_FAILURE" | Out-Null
+    $acceptedResumeSucceeded = $false
+    try {
+        & $stateScript -Mode resume -RoundPath $acceptedBlocked -Stage gemini_divergent `
+            -ResolvedBlocker "ACCEPTED_TRANSPORT_FAILURE" | Out-Null
+        $acceptedResumeSucceeded = $true
+    } catch {}
+    if ($acceptedResumeSucceeded) {
+        throw "Resume reopened an externally accepted stage"
+    }
+
     $activeRound = Join-Path $repo `
         "docs/external-review/rounds/20260719_clean_process_access_portfolio"
     & $stateScript -Mode validate -RoundPath $activeRound | Out-Null
 } finally {
-    foreach ($path in @($happy, $blocked)) {
+    foreach ($path in @($happy, $blocked, $acceptedBlocked)) {
         if (Test-Path -LiteralPath $path) {
             Remove-Item -LiteralPath $path -Recurse -Force
         }

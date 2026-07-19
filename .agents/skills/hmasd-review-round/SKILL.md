@@ -24,17 +24,26 @@ The persistent Luna External Review Manager registered in
 5. final converged disposition and terminal relay.
 
 The controller creates and pushes the immutable evidence boundary, then sends
-exactly one `START_REVIEW` message through `../hmasd-task-router/SKILL.md`. It
-does not operate Gemini, browser pages, heartbeat, review state, reconciliation,
-or recovery. The manager sends exactly one terminal `REVIEW_COMPLETE` or
-`REVIEW_BLOCKED` message through the router. Intermediate progress remains in
-the manager task and round state; it is never relayed to the controller.
+exactly one `START_REVIEW` message through `../hmasd-task-router/SKILL.md`. If a
+recorded operational blocker is later resolved, the controller sends one
+`RESUME_REVIEW` instead of starting a new round. It does not operate Gemini,
+browser pages, heartbeat, review state, reconciliation, or recovery. The
+manager sends exactly one terminal `REVIEW_COMPLETE` or `REVIEW_BLOCKED`
+message through the router. Intermediate progress remains in the manager task
+and round state; it is never relayed to the controller.
 
 The manager may stage, commit, and push only files inside its active round
 directory when a Git-visible boundary is required for an external reviewer. It
 must not stage unrelated dirty-worktree changes or modify project-control files.
 
 ## Required Inputs
+
+The registered commit pins reviewer-visible scientific evidence only. It never
+pins operational instructions. At every start, resume, heartbeat, and relay,
+read this Skill, `../hmasd-task-router/SKILL.md`, the state script, and the
+conversation registry from the current working tree. Ignore workflow copies,
+static route expectations, model values, or thinking values embedded in an
+evidence commit, an old prompt, or prior task history.
 
 The manager reads:
 
@@ -75,6 +84,13 @@ raws are archived byte-for-byte before they are used downstream. A stage with
 an accepted prompt is never resubmitted; a failure before visible acceptance
 does not consume the one external submission.
 
+`RESUME_REVIEW` is legal only after the exact recorded operational blocker has
+been resolved. Invoke the state script's `resume` mode with that exact blocker.
+It may reopen only a `BLOCKED` stage whose `dispatch_count` is zero and which has
+no route or dispatch timestamps. Completed stages and their artifacts remain
+immutable. A blocked stage with an accepted external dispatch is never reopened
+or resubmitted.
+
 The manager directly resumes the registered Antigravity conversation and sends
 one document pointer for Gemini:
 
@@ -100,6 +116,27 @@ One heartbeat automation targets the manager. The manager activates it only
 while a Pro response is pending, performs one bounded read per wake, and pauses
 it at every terminal boundary. It never uses shell sleep or sends repeated
 waiting messages to the controller.
+
+Heartbeat prompts contain stable task and round identifiers only. They must not
+contain model, thinking, expected route, or frozen-route values. Every heartbeat
+reads the current operational Skills and resolves the recipient live only when
+an actual cross-task send is required.
+
+## Terminal Relay
+
+Complete a terminal boundary in this order:
+
+1. write and validate the authoritative round state and terminal artifact;
+2. pause the review heartbeat and confirm that it is paused;
+3. resolve the controller's live recipient metadata through the task router;
+4. call `send_message_to_thread` once with those exact live values;
+5. require the tool result's target `threadId` to match the resolved controller.
+
+Only step 5 proves delivery. A local final response, commentary, heartbeat text,
+or delegation payload is not a relay. If delivery proof is unavailable, keep a
+relay-only heartbeat pending and do not finish or report the callback as sent.
+The relay-only heartbeat may retry only after a definite pre-acceptance failure;
+an accepted or ambiguous send is never duplicated.
 
 ## Outputs
 

@@ -95,7 +95,9 @@ implementer follows that task, `ALGORITHM_PRINCIPLES.md`, and
 Every message to an existing Codex task uses `$hmasd-task-router`. Immediately
 before delivery, read only the recipient's live delivery metadata and include
 its current model and thinking values unchanged. Communication never stores,
-compares, selects, synchronizes, or changes models.
+compares, selects, synchronizes, or changes models. A required callback is
+delivered only after the send tool returns the resolved recipient task ID;
+writing the same text in the sender task is not delivery.
 
 Use one implementer for a coupled change. Use two or three only when interfaces
 are frozen and write scopes are disjoint. One file has one writer; the
@@ -150,6 +152,9 @@ boundary and sends one `START_REVIEW` message to the persistent External Review
 Manager. It later receives one `REVIEW_COMPLETE` or `REVIEW_BLOCKED` and reads
 only the final disposition. The manager alone owns Gemini, Pro browser pages,
 heartbeats, state, raw archival, reconciliation, and review-only Git boundaries.
+The evidence commit pins scientific inputs only; the manager always uses the
+current working-tree communication and review workflow. A resolved pre-dispatch
+operational blocker is continued with one `RESUME_REVIEW`, not a new round.
 
 ## State Updates and Communication
 
