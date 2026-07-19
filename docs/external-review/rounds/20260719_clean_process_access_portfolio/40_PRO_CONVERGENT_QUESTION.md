@@ -1,6 +1,8 @@
 # Convergent-Pro Question — Clean-Process Access Portfolio
 
-## Evidence boundary
+## Repository files to inspect
+
+The following paths are the complete review input set for this question:
 
 Read the following files at the exact Git-visible commit supplied with this
 handoff, then answer from those files rather than from conversation context:
