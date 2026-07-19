@@ -27,6 +27,9 @@ CHECKPOINT_SCHEMA_VERSION = 3
 EVENT_ARCHITECTURE_SCHEMA_VERSION = 1
 EVENT_CONTROLLER = "variable_roster_event"
 EVENT_MODES = ("f0", "f1")
+LEARNED_LOW_RUNTIME = "learned_low"
+SUPPLIED_EXECUTOR_RUNTIME = "supplied_executor"
+EVENT_RUNTIME_MODES = (LEARNED_LOW_RUNTIME, SUPPLIED_EXECUTOR_RUNTIME)
 OPPORTUNITY_SCHEDULE_NAME = "uniform_active_gap_v1"
 OPPORTUNITY_K0 = 10
 OPPORTUNITY_GAP_LOW = 1
@@ -496,6 +499,19 @@ class EventPPOLosses:
 
 
 @dataclass(frozen=True)
+class EventHighPPOLosses:
+    """The high half of :class:`EventPPOLosses`, with no low-policy surface."""
+
+    high_loss: torch.Tensor
+    high_policy_loss: torch.Tensor
+    high_value_loss: torch.Tensor
+    high_entropy: torch.Tensor
+    high_rows: int
+    high_logp_max_error: float
+    high_value_max_error: float
+
+
+@dataclass(frozen=True)
 class BatchedLowStepResult:
     """Cross-environment low-policy outputs plus already-routed CPU actions."""
 
@@ -554,6 +570,14 @@ class PackedEventPPOData:
     cores: tuple["VariableRosterEventCore", ...]
     high: tuple[PackedEventHighReplay, ...]
     low: PackedEventLowReplay
+
+
+@dataclass(frozen=True)
+class PackedEventHighPPOData:
+    """Immutable owner-GAE replay reused by every high-only PPO pass."""
+
+    cores: tuple["VariableRosterEventCore", ...]
+    high: tuple[PackedEventHighReplay, ...]
 
 
 class EventCommitmentPolicy(nn.Module):
@@ -1145,6 +1169,28 @@ class EventActiveSetLowCritic(nn.Module):
         return torch.stack(values), hidden, source
 
 
+class SuppliedExecutorLowSentinel(nn.Module):
+    """Parameterless, state-free guard replacing both low graphs in supplied mode."""
+
+    def __init__(self, path_name: str, device: str | torch.device) -> None:
+        super().__init__()
+        self.path_name = str(path_name)
+        self.device = torch.device(device)
+
+    def _fail(self, *_args: Any, **_kwargs: Any):
+        raise RuntimeError(
+            f"{self.path_name} is unavailable in supplied-executor/no-low-path mode"
+        )
+
+    forward = _fail
+    actor_step = _fail
+    actor_replay = _fail
+    actor_replay_with_entropy = _fail
+    critic_step = _fail
+    critic_replay = _fail
+    critic_replay_from_active_sets = _fail
+
+
 class VariableRosterEventCore:
     """Single-environment lifecycle runtime used by the focused trace."""
 
@@ -1174,13 +1220,20 @@ class VariableRosterEventCore:
         action_stream_id: int = 0,
         device: str | torch.device = "cpu",
         shared_models_from: "VariableRosterEventCore | None" = None,
+        runtime_mode: str = LEARNED_LOW_RUNTIME,
     ) -> None:
         mode = str(architecture_mode).lower()
         if mode not in EVENT_MODES:
             raise ValueError(f"event architecture mode must be one of {EVENT_MODES}")
+        selected_runtime_mode = str(runtime_mode).lower()
+        if selected_runtime_mode not in EVENT_RUNTIME_MODES:
+            raise ValueError(
+                f"event runtime mode must be one of {EVENT_RUNTIME_MODES}"
+            )
         if int(n_skills) < 2:
             raise ValueError("event runtime requires at least two skills")
         self.architecture_mode = mode
+        self.runtime_mode = selected_runtime_mode
         self.obs_dim = int(obs_dim)
         self.critic_member_dim = int(critic_member_dim)
         self.critic_global_dim = int(critic_global_dim)
@@ -1188,7 +1241,11 @@ class VariableRosterEventCore:
         self.action_dim = int(action_dim)
         self.member_hidden_dim = int(member_hidden_dim)
         self.high_hidden_dim = int(high_hidden_dim)
-        self.low_hidden_dim = int(low_hidden_dim)
+        self.low_hidden_dim = (
+            0
+            if selected_runtime_mode == SUPPLIED_EXECUTOR_RUNTIME
+            else int(low_hidden_dim)
+        )
         self.skill_embedding_dim = int(skill_embedding_dim)
         self.action_space_type = str(action_space_type)
         self.gamma = float(gamma)
@@ -1221,22 +1278,30 @@ class VariableRosterEventCore:
                 high_hidden_dim=self.high_hidden_dim,
                 skill_embedding_dim=self.skill_embedding_dim,
             ).to(self.device)
-            self.low_actor = EventLowActor(
-                obs_dim=self.obs_dim,
-                n_skills=self.n_skills,
-                action_dim=self.action_dim,
-                hidden_dim=self.low_hidden_dim,
-                action_space_type=self.action_space_type,
-                device=self.device,
-            )
-            self.low_critic = EventActiveSetLowCritic(
-                critic_member_dim=self.critic_member_dim,
-                critic_global_dim=self.critic_global_dim,
-                n_skills=self.n_skills,
-                hidden_dim=self.low_hidden_dim,
-                skill_embedding_dim=self.skill_embedding_dim,
-                device=self.device,
-            )
+            if self.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME:
+                self.low_actor = SuppliedExecutorLowSentinel(
+                    "low actor", self.device
+                )
+                self.low_critic = SuppliedExecutorLowSentinel(
+                    "low critic", self.device
+                )
+            else:
+                self.low_actor = EventLowActor(
+                    obs_dim=self.obs_dim,
+                    n_skills=self.n_skills,
+                    action_dim=self.action_dim,
+                    hidden_dim=self.low_hidden_dim,
+                    action_space_type=self.action_space_type,
+                    device=self.device,
+                )
+                self.low_critic = EventActiveSetLowCritic(
+                    critic_member_dim=self.critic_member_dim,
+                    critic_global_dim=self.critic_global_dim,
+                    n_skills=self.n_skills,
+                    hidden_dim=self.low_hidden_dim,
+                    skill_embedding_dim=self.skill_embedding_dim,
+                    device=self.device,
+                )
         else:
             if shared_models_from.architecture_state() != self.architecture_state():
                 raise ValueError("shared event cores must have identical architecture")
@@ -1286,6 +1351,12 @@ class VariableRosterEventCore:
                 self.low_critic,
             )
         )
+
+    def _require_learned_low_runtime(self, operation: str) -> None:
+        if self.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME:
+            raise RuntimeError(
+                f"{operation} is unavailable in supplied-executor/no-low-path mode"
+            )
 
     def _new_record(self, key: str) -> LifecycleRecord:
         return LifecycleRecord(
@@ -1474,6 +1545,7 @@ class VariableRosterEventCore:
     def _low_critic_values(
         self, snapshot: BoundarySnapshot
     ) -> tuple[torch.Tensor, ActiveRoutingView]:
+        self._require_learned_low_runtime("low critic inference")
         packed, routing = self.pack_active(snapshot)
         values, _next_hidden, _source = self.low_critic.critic_step(
             packed.critic_member_features,
@@ -1625,11 +1697,12 @@ class VariableRosterEventCore:
                 key: float(values[index].detach().cpu())
                 for index, key in enumerate(routing.lifecycle_keys)
             }
-            low_values, low_routing = self._low_critic_values(pre)
-            pre_low_values = {
-                key: float(low_values[index].detach().cpu())
-                for index, key in enumerate(low_routing.lifecycle_keys)
-            }
+            if self.runtime_mode == LEARNED_LOW_RUNTIME:
+                low_values, low_routing = self._low_critic_values(pre)
+                pre_low_values = {
+                    key: float(low_values[index].detach().cpu())
+                    for index, key in enumerate(low_routing.lifecycle_keys)
+                }
 
         # Validation above completed on a clone; state mutation starts here.
         for delta in transaction.atomic_membership_delta:
@@ -1642,11 +1715,12 @@ class VariableRosterEventCore:
                     bootstrap_value=pre_values[current.lifecycle_key],
                     boundary_kind=TEMPORARY_BOUNDARY,
                 )
-                self._record_low_boundary(
-                    current,
-                    TEMPORARY_BOUNDARY,
-                    bootstrap_value=pre_low_values[current.lifecycle_key],
-                )
+                if self.runtime_mode == LEARNED_LOW_RUNTIME:
+                    self._record_low_boundary(
+                        current,
+                        TEMPORARY_BOUNDARY,
+                        bootstrap_value=pre_low_values[current.lifecycle_key],
+                    )
                 trial[current.lifecycle_key].open_event_trace = None
             elif delta.kind == TERMINAL_LEAVE:
                 self._close_trace(
@@ -1654,11 +1728,12 @@ class VariableRosterEventCore:
                     bootstrap_value=0.0,
                     boundary_kind=TERMINAL_BOUNDARY,
                 )
-                self._record_low_boundary(
-                    current,
-                    TERMINAL_BOUNDARY,
-                    bootstrap_value=0.0,
-                )
+                if self.runtime_mode == LEARNED_LOW_RUNTIME:
+                    self._record_low_boundary(
+                        current,
+                        TERMINAL_BOUNDARY,
+                        bootstrap_value=0.0,
+                    )
                 trial[current.lifecycle_key].open_event_trace = None
         self.records = trial
 
@@ -1991,6 +2066,29 @@ class VariableRosterEventCore:
         active_records = [
             record for record in self.records.values() if record.status == ACTIVE
         ]
+        if self.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME:
+            if self.low_ledger or self.low_chunk_boundaries:
+                raise RuntimeError(
+                    "supplied-executor runtime rejects low replay state"
+                )
+            for record in active_records:
+                if record.active_skill is None:
+                    raise RuntimeError(
+                        "an active lifecycle reached a primitive step without a skill"
+                    )
+                if record.active_gap_remaining is None:
+                    raise RuntimeError(
+                        "active lifecycle is missing its opportunity gap"
+                    )
+            for record in active_records:
+                record.skill_active_age += 1
+                record.active_gap_remaining = max(
+                    int(record.active_gap_remaining) - 1, 0
+                )
+                if record.open_event_trace is not None:
+                    record.open_event_trace.accumulate(float(team_reward), self.gamma)
+            self.physical_time += 1
+            return
         pending_rows: dict[str, LowTransitionRow] = {}
         for row in reversed(self.low_ledger):
             if row.physical_time != self.physical_time:
@@ -2031,11 +2129,12 @@ class VariableRosterEventCore:
                 bootstrap_value=0.0,
                 boundary_kind=TERMINAL_BOUNDARY,
             )
-            self._record_low_boundary(
-                record,
-                TERMINAL_BOUNDARY,
-                bootstrap_value=0.0,
-            )
+            if self.runtime_mode == LEARNED_LOW_RUNTIME:
+                self._record_low_boundary(
+                    record,
+                    TERMINAL_BOUNDARY,
+                    bootstrap_value=0.0,
+                )
 
     def active_skills(self) -> dict[str, int]:
         return {
@@ -2171,6 +2270,7 @@ class VariableRosterEventCore:
         *,
         deterministic: bool = False,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        self._require_learned_low_runtime("low policy step")
         packed, routing = self.pack_active(snapshot)
         if bool(torch.any(packed.skills < 0).item()):
             raise RuntimeError("low actor cannot run before genuine joins receive SET")
@@ -2225,15 +2325,17 @@ class VariableRosterEventCore:
 
     def truncate_policy_version(self, snapshot: BoundarySnapshot) -> None:
         values, routing = self._critic_values(snapshot, ROLLOUT_TRUNCATION)
-        low_values, low_routing = self._low_critic_values(snapshot)
         value_by_key = {
             key: float(values[index].detach().cpu())
             for index, key in enumerate(routing.lifecycle_keys)
         }
-        low_value_by_key = {
-            key: float(low_values[index].detach().cpu())
-            for index, key in enumerate(low_routing.lifecycle_keys)
-        }
+        low_value_by_key: dict[str, float] = {}
+        if self.runtime_mode == LEARNED_LOW_RUNTIME:
+            low_values, low_routing = self._low_critic_values(snapshot)
+            low_value_by_key = {
+                key: float(low_values[index].detach().cpu())
+                for index, key in enumerate(low_routing.lifecycle_keys)
+            }
         for key in routing.lifecycle_keys:
             record = self.records[key]
             self._close_trace(
@@ -2241,11 +2343,12 @@ class VariableRosterEventCore:
                 bootstrap_value=value_by_key[key],
                 boundary_kind=ROLLOUT_TRUNCATION,
             )
-            self._record_low_boundary(
-                record,
-                ROLLOUT_TRUNCATION,
-                bootstrap_value=low_value_by_key[key],
-            )
+            if self.runtime_mode == LEARNED_LOW_RUNTIME:
+                self._record_low_boundary(
+                    record,
+                    ROLLOUT_TRUNCATION,
+                    bootstrap_value=low_value_by_key[key],
+                )
         self.policy_version += 1
         for key in routing.lifecycle_keys:
             record = self.records[key]
@@ -2278,6 +2381,7 @@ class VariableRosterEventCore:
         return advantages
 
     def low_gae(self) -> tuple[np.ndarray, np.ndarray]:
+        self._require_learned_low_runtime("low GAE")
         advantages = np.zeros(len(self.low_ledger), dtype=np.float64)
         next_value: dict[tuple[str, int, int], float] = {}
         next_advantage: dict[tuple[str, int, int], float] = {}
@@ -2308,6 +2412,7 @@ class VariableRosterEventCore:
     def low_recurrent_chunks(
         self, max_length: int = MAX_RECURRENT_CHUNK
     ) -> tuple[tuple[int, ...], ...]:
+        self._require_learned_low_runtime("low recurrent replay")
         limit = int(max_length)
         if limit <= 0:
             raise ValueError("recurrent chunk length must be positive")
@@ -2338,6 +2443,7 @@ class VariableRosterEventCore:
 
     def architecture_state(self) -> dict[str, Any]:
         return {
+            "runtime_mode": self.runtime_mode,
             "obs_dim": self.obs_dim,
             "critic_member_dim": self.critic_member_dim,
             "critic_global_dim": self.critic_global_dim,
@@ -2616,6 +2722,10 @@ def batched_low_step(
     snapshot_rows = tuple(snapshots)
     if not core_rows or len(core_rows) != len(snapshot_rows):
         raise ValueError("batched low step requires one snapshot per core")
+    if any(core.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME for core in core_rows):
+        raise RuntimeError(
+            "batched low policy step is unavailable in supplied-executor/no-low-path mode"
+        )
     owner = core_rows[0]
     if any(
         core.low_actor is not owner.low_actor or core.low_critic is not owner.low_critic
@@ -3288,6 +3398,10 @@ def pack_event_ppo_data(
     core_rows = tuple(cores)
     if not core_rows:
         raise ValueError("event PPO requires at least one runtime core")
+    if any(core.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME for core in core_rows):
+        raise RuntimeError(
+            "joint high+low PPO is unavailable in supplied-executor/no-low-path mode"
+        )
     owner = core_rows[0]
     if any(
         core.commitment_model is not owner.commitment_model
@@ -3331,12 +3445,191 @@ def pack_event_ppo_data(
     )
 
 
+def pack_event_high_ppo_data(
+    cores: Iterable[VariableRosterEventCore],
+) -> PackedEventHighPPOData:
+    """Pack owner GAE and immutable high replay once for supplied execution."""
+
+    core_rows = tuple(cores)
+    if not core_rows:
+        raise ValueError("high-only event PPO requires at least one runtime core")
+    owner = core_rows[0]
+    if any(core.runtime_mode != SUPPLIED_EXECUTOR_RUNTIME for core in core_rows):
+        raise RuntimeError(
+            "high-only event PPO requires supplied-executor/no-low-path mode"
+        )
+    if any(core.low_ledger or core.low_chunk_boundaries for core in core_rows):
+        raise RuntimeError("high-only event PPO rejects low replay state")
+    if any(
+        core.commitment_model is not owner.commitment_model
+        or core.event_critic is not owner.event_critic
+        for core in core_rows
+    ):
+        raise ValueError("vector high-only runtimes must share one high parameter graph")
+
+    entries: list[
+        tuple[VariableRosterEventCore, ClosedEventRow, EventTokenRow, float]
+    ] = []
+    for core in core_rows:
+        advantages = core.owner_gae()
+        for index, closed in enumerate(core.closed_event_rows):
+            if not closed.actor_valid:
+                continue
+            if closed.token_ledger_index is None:
+                raise RuntimeError("actor-valid owner row is missing its event token")
+            token_index = int(closed.token_ledger_index)
+            if not 0 <= token_index < len(core.high_ledger):
+                raise RuntimeError("owner row references an invalid event token")
+            token = core.high_ledger[token_index]
+            if (
+                token.owner_lifecycle_key != closed.lifecycle_key
+                or int(token.membership_epoch) != int(closed.membership_epoch)
+                or int(token.policy_version) != int(closed.policy_version)
+            ):
+                raise RuntimeError("owner row/event token lifecycle mismatch")
+            entries.append((core, closed, token, float(advantages[index])))
+    if not entries:
+        raise RuntimeError("high-only event PPO has no actor-valid rows")
+    normalized = _normalize_advantages(
+        np.asarray([entry[3] for entry in entries], dtype=np.float64)
+    )
+    high = tuple(
+        _pack_event_high_replay(
+            core,
+            closed,
+            token,
+            normalized_advantage=float(normalized[index]),
+            raw_advantage=raw_advantage,
+        )
+        for index, (core, closed, token, raw_advantage) in enumerate(entries)
+    )
+    return PackedEventHighPPOData(cores=core_rows, high=high)
+
+
+def event_high_ppo_losses_from_packed(
+    data: PackedEventHighPPOData,
+) -> EventHighPPOLosses:
+    """Replay exactly the current high PPO algebra without any low graph."""
+
+    if not data.high or not data.cores:
+        raise ValueError("packed high-only PPO data is empty")
+    if any(core.runtime_mode != SUPPLIED_EXECUTOR_RUNTIME for core in data.cores):
+        raise RuntimeError(
+            "high-only event PPO requires supplied-executor/no-low-path mode"
+        )
+    high_policy_terms: list[torch.Tensor] = []
+    high_value_terms: list[torch.Tensor] = []
+    high_entropies: list[torch.Tensor] = []
+    high_logp_errors: list[torch.Tensor] = []
+    high_value_errors: list[torch.Tensor] = []
+    for row in data.high:
+        logp, value, entropy = _replay_packed_event_token(row)
+        high_logp_errors.append(torch.abs(logp.detach() - row.old_logp))
+        high_value_errors.append(torch.abs(value.detach() - row.old_value))
+        ratio = torch.exp(logp - row.old_logp)
+        high_policy_terms.append(
+            -torch.minimum(
+                ratio * row.advantage,
+                torch.clamp(ratio, 1.0 - PPO_CLIP, 1.0 + PPO_CLIP)
+                * row.advantage,
+            )
+        )
+        clipped_value = row.old_value + torch.clamp(
+            value - row.old_value, -VALUE_CLIP, VALUE_CLIP
+        )
+        high_value_terms.append(
+            torch.maximum(
+                torch.square(value - row.target),
+                torch.square(clipped_value - row.target),
+            )
+        )
+        high_entropies.append(entropy)
+
+    high_policy = torch.stack(high_policy_terms).mean()
+    high_value = torch.stack(high_value_terms).mean()
+    high_entropy = torch.stack(high_entropies).mean()
+    high_loss = (
+        high_policy
+        + VALUE_COEFFICIENT * high_value
+        - ENTROPY_COEFFICIENT * high_entropy
+    )
+    if not bool(torch.isfinite(high_loss).item()):
+        raise FloatingPointError("high-only PPO loss is non-finite")
+    return EventHighPPOLosses(
+        high_loss=high_loss,
+        high_policy_loss=high_policy,
+        high_value_loss=high_value,
+        high_entropy=high_entropy,
+        high_rows=len(data.high),
+        high_logp_max_error=float(
+            torch.stack(high_logp_errors).max().detach().cpu()
+        ),
+        high_value_max_error=float(
+            torch.stack(high_value_errors).max().detach().cpu()
+        ),
+    )
+
+
+def event_high_ppo_losses(
+    cores: Iterable[VariableRosterEventCore],
+) -> EventHighPPOLosses:
+    """Pack once and compute one high-only loss (primarily for focused audits)."""
+
+    return event_high_ppo_losses_from_packed(pack_event_high_ppo_data(cores))
+
+
+def apply_event_high_ppo_update(
+    data: PackedEventHighPPOData,
+    *,
+    high_optimizer: torch.optim.Optimizer,
+) -> dict[str, float]:
+    """Apply one commitment-actor/event-critic PPO pass and no low update."""
+
+    losses = event_high_ppo_losses_from_packed(data)
+    owner = data.cores[0]
+    high_parameters = tuple(owner.commitment_model.parameters()) + tuple(
+        owner.event_critic.parameters()
+    )
+    expected = {id(parameter) for parameter in high_parameters}
+    actual = {
+        id(parameter)
+        for group in high_optimizer.param_groups
+        for parameter in group["params"]
+    }
+    if actual != expected:
+        raise ValueError(
+            "high-only optimizer must own exactly commitment actor and event critic"
+        )
+    high_optimizer.zero_grad(set_to_none=True)
+    losses.high_loss.backward()
+    high_gradient = torch.nn.utils.clip_grad_norm_(high_parameters, GRADIENT_CLIP)
+    if not bool(torch.isfinite(torch.as_tensor(high_gradient)).item()):
+        raise FloatingPointError("high-only PPO gradient is non-finite")
+    high_optimizer.step()
+    return {
+        "high_loss": float(losses.high_loss.detach().cpu()),
+        "high_policy_loss": float(losses.high_policy_loss.detach().cpu()),
+        "high_value_loss": float(losses.high_value_loss.detach().cpu()),
+        "high_entropy": float(losses.high_entropy.detach().cpu()),
+        "high_gradient_norm": float(torch.as_tensor(high_gradient).detach().cpu()),
+        "high_rows": float(losses.high_rows),
+        "high_logp_max_error": float(losses.high_logp_max_error),
+        "high_value_max_error": float(losses.high_value_max_error),
+        "low_rows": 0.0,
+        "low_optimizer_steps": 0.0,
+    }
+
+
 def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses:
     """Differentiably replay one shared F0/F1 high+low on-policy update."""
 
     core_rows = tuple(cores)
     if not core_rows:
         raise ValueError("event PPO requires at least one runtime core")
+    if any(core.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME for core in core_rows):
+        raise RuntimeError(
+            "joint high+low PPO is unavailable in supplied-executor/no-low-path mode"
+        )
     owner = core_rows[0]
     if any(core.commitment_model is not owner.commitment_model for core in core_rows):
         raise ValueError("vector event runtimes must share one parameter graph")
@@ -3545,6 +3838,11 @@ def event_ppo_losses(cores: Iterable[VariableRosterEventCore]) -> EventPPOLosses
 def event_ppo_losses_from_packed(data: PackedEventPPOData) -> EventPPOLosses:
     """Recompute only differentiable forwards from one frozen rollout pack."""
 
+    if any(core.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME for core in data.cores):
+        raise RuntimeError(
+            "joint high+low PPO is unavailable in supplied-executor/no-low-path mode"
+        )
+
     high_policy_terms: list[torch.Tensor] = []
     high_value_terms: list[torch.Tensor] = []
     high_entropies: list[torch.Tensor] = []
@@ -3664,9 +3962,17 @@ def apply_event_ppo_update(
 
     if isinstance(cores, PackedEventPPOData):
         core_rows = cores.cores
+        if any(core.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME for core in core_rows):
+            raise RuntimeError(
+                "joint high+low PPO is unavailable in supplied-executor/no-low-path mode"
+            )
         losses = event_ppo_losses_from_packed(cores)
     else:
         core_rows = tuple(cores)
+        if any(core.runtime_mode == SUPPLIED_EXECUTOR_RUNTIME for core in core_rows):
+            raise RuntimeError(
+                "joint high+low PPO is unavailable in supplied-executor/no-low-path mode"
+            )
         losses = event_ppo_losses(core_rows)
     owner = core_rows[0]
     high_parameters = tuple(owner.commitment_model.parameters()) + tuple(
