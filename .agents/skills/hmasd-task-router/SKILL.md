@@ -13,7 +13,7 @@ review state, experiment state, task creation, or model selection.
 Before any cross-task send, run `scripts/resolve_task_route.ps1` separately for
 the target task and the active controller task. Live Codex task metadata is the
 actual delivery route. The registered controller route is the user-frozen
-normal-research expectation, defaulting to `gpt-5.6-sol` / `ultra`; it is a
+normal-research expectation, defaulting to `gpt-5.6-sol` / `xhigh`; it is a
 guard and never changes the task model.
 
 Require an unarchived task and nonempty `model` and `thinking`. If a registered

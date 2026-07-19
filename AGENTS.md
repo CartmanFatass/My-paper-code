@@ -18,14 +18,19 @@ Read `docs/research/`, `docs/external-review/`, or `docs/archive/` only through 
 current pointer or an explicit user request. Historical evidence is not an
 active instruction source.
 
-One active controller works directly in `C:\project\HMASD` and owns algorithm
-and architecture decisions, root project state, scientific interpretation,
-experiment authorization, final Git integration and push, and user
-communication. `docs/project/CURRENT_WORK.md` names that task; ownership changes
-only by an explicit handoff recorded there. Project files never change the
-controller model. The normal-research routing expectation is the user-frozen
-`gpt-5.6-sol` / `ultra` pair; it is a delivery guard, not a model selector, and
-changes only on an explicit user instruction.
+One active Codex controller works directly in `C:\project\HMASD` and owns
+evidence integrity, engineering architecture, implementation contracts,
+experiment authorization and lifecycle, root project state, final Git
+integration and push, and user communication. It does not independently choose
+new research hypotheses, rank the scientific portfolio, or select the next
+evidence source. Those unresolved scientific decisions belong to the tracked
+convergent GPT-5.6 Pro stage; the Codex controller operationalizes its accepted
+disposition and blocks only on evidence mismatch, an explicit project/user
+constraint, or operational infeasibility. `docs/project/CURRENT_WORK.md` names
+the Codex controller; ownership changes only by an explicit handoff recorded
+there. Project files never change the controller model. The user-selected route
+expectation is `gpt-5.6-sol` / `xhigh`; it is a delivery guard, not a model
+selector, and changes only on an explicit user instruction.
 
 ## Workflow Routing
 
@@ -36,15 +41,17 @@ interpretation, and routine continuation do not invoke a project Skill.
 Only these conditional workflows exist:
 
 - `$hmasd-research-cycle`: use only when the user explicitly invokes it or
-  `docs/project/CURRENT_WORK.md` records `Autonomous Boundary: ACTIVE`; one
-  invocation owns one bounded evidence-bearing iteration and must return to the
-  controller;
+  `docs/project/CURRENT_WORK.md` records `Autonomous Boundary: ACTIVE`, and an
+  accepted convergent-Pro disposition already fixes the scientific route; one
+  invocation executes one bounded evidence-bearing iteration and returns to the
+  controller without inventing a successor;
 - `$hmasd-experiment`: use for an authorized mutation of an experiment
   contract, package, launch, monitor, failed runtime stage, analysis repair, or
   terminal closure;
 - `$hmasd-review-round`: use for a complete tracked five-stage external-review
-  round, not for one prompt, one returned answer, routine result interpretation,
-  literature discussion, or ordinary brainstorming.
+  round and whenever an unresolved algorithm, portfolio, or next-evidence
+  decision must be made; not for one prompt, one returned answer, routine result
+  interpretation, literature discussion, or ordinary brainstorming.
 
 One internal transport Skill also exists: `$hmasd-task-router`. It is mandatory
 for every message to an existing Codex task and for every experiment monitor
@@ -88,10 +95,10 @@ while serializing mutations for attribution and workspace safety.
 
 ## Collaboration
 
-The controller freezes all core semantics before delegation. New HMASD
-implementers and implementation fixers use `gpt-5.6-sol` with `xhigh`
-reasoning. Never change an existing task's model; create a correctly routed
-replacement instead.
+The controller freezes all core engineering semantics from the accepted Pro
+disposition before delegation. New HMASD implementers and implementation
+fixers use `gpt-5.6-sol` with `xhigh` reasoning. Never change an existing task's
+model; create a correctly routed replacement instead.
 
 Before editing any algorithm, reward, credit, dynamic-roster, trainer, runtime,
 or experiment-code path, every implementer and implementation fixer must read
@@ -158,10 +165,15 @@ deadlines, retry limits, and terminal closure live only in that Skill and its
 protocol.
 
 Every full external-review round uses `$hmasd-review-round`. Gemini and open Pro
-are blind divergent reviewers with equal standing; controller synthesis precedes
-convergent Pro. Reviewers recommend but never authorize code, experiments,
-promotion, retirement, or a unique legal research direction. State, transport,
-deadlines, raw archival, and recovery mechanics live only in that Skill.
+are blind divergent reviewers with equal standing. Codex then writes a factual
+evidence reconciliation without ranking routes; convergent Pro owns scientific
+synthesis, portfolio weighting, and the recommended next evidence source or
+stop. One persistent Luna Exchange task operates both registered Pro browser
+pages serially. The Codex controller records and operationalizes the convergent
+disposition but does not replace it with its own research judgment. External
+review never authorizes code execution or an experiment; existing user authority
+and project constraints still govern mutations. State, transport, deadlines,
+raw archival, and recovery mechanics live only in that Skill.
 
 ## State Updates and Communication
 

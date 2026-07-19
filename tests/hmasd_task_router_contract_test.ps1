@@ -39,7 +39,7 @@ if ($monitor.schema_version -ne 4 -or
     $monitor.monitor_route.thinking -ne 'medium' -or
     $monitor.controller_return_route.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
     $monitor.controller_return_route.model -ne 'gpt-5.6-sol' -or
-    $monitor.controller_return_route.thinking -ne 'ultra' -or
+    $monitor.controller_return_route.thinking -ne 'xhigh' -or
     $monitor.controller_return_route.source -ne 'user_frozen_normal_research_default' -or
     $monitor.controller_return_route.change_policy -ne 'explicit_user_instruction_only' -or
     $monitor.automation.id -ne 'hmasd-r35-single-thread-monitor' -or

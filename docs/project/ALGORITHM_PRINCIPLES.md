@@ -5,7 +5,11 @@ It contains cross-experiment principles, not the active route, implementation
 specification, experiment dashboard, or research history.
 
 Current ownership and the live portfolio belong in
-`docs/project/CURRENT_WORK.md`. Executable design belongs in
+`docs/project/CURRENT_WORK.md`. Unresolved hypothesis generation, portfolio
+weighting, route selection, and next-evidence choice are decided through the
+tracked external-review round, with convergent GPT-5.6 Pro as the scientific
+decision source. Codex preserves the evidence boundary and converts the
+accepted disposition into executable design in
 `docs/project/IMPLEMENTATION_PLAN.md`. Formal experiment contracts and
 dispositions belong in `docs/project/ExpRecord.md`. Git history preserves
 removed research history.
@@ -86,9 +90,11 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 
 ## 3. Portfolio-First Exploration
 
-At an unresolved architecture or direction boundary, maintain two to four
-structurally distinct causal explanations and, when useful, candidate
-architectures. Each candidate states:
+At an unresolved architecture or direction boundary, the blind divergent
+reviewers generate and attack two to four structurally distinct causal
+explanations and, when useful, candidate architectures. Convergent Pro weighs
+the resulting portfolio and chooses the next decision-relevant evidence source
+or a stop. Each candidate states:
 
 - the final capability it unlocks and what later integration would consume it;
 - its replacement ledger;
@@ -101,11 +107,13 @@ implementation and compute to preserve attribution and workspace integrity.
 One active evidence source does not imply one legal research direction or one
 mandatory successor.
 
-Select the next evidence source by expected information gain and relevance to
-the final target. It may be a reanalysis, constructive toy, bounded prototype,
-controlled intervention, or training run. Prefer the smallest coherent source
-whose plausible outcomes change relative support among live candidates or
-cause a real stop or integration decision.
+The convergent disposition selects the next evidence source by expected
+information gain and relevance to the final target. It may be a reanalysis,
+constructive toy, bounded prototype, controlled intervention, or training run.
+Codex must not silently replace that choice; it may return an evidence mismatch
+or operational infeasibility to Pro. Prefer the smallest coherent source whose
+plausible outcomes change relative support among live candidates or cause a
+real stop or integration decision.
 
 Do not replace algorithm exploration with a chain of arbitrary gates. A result
 constrains only the causal claim and implementation family it identifies.
@@ -114,7 +122,8 @@ Failure of one mechanism does not prohibit a structurally different route.
 ## 4. Evidence Design
 
 Before implementing a new scientific route or launching a conclusion-bearing
-experiment, record in the active plan and, for a formal run, `ExpRecord.md`:
+experiment, require an accepted convergent-Pro disposition and record its
+scientific content in the active plan and, for a formal run, `ExpRecord.md`:
 
 - the exact causal claim and estimand;
 - at least two plausible explanations for the current evidence;
@@ -194,10 +203,16 @@ Progress is one of:
 Documentation, inventories, repeated status reads, and workflow prose are
 support work. Keep them to the minimum required for valid attribution.
 
-External reviewers provide independent hypotheses, objections, and evidence
-assessment. They do not authorize code, experiments, promotion, retirement, or
-a unique legal successor. The active controller integrates reviewer advice with
-repository evidence and owns the scientific disposition.
+Gemini and open Pro provide independent blind hypotheses, objections, and
+evidence assessment. Codex reconciles source provenance and contradictions but
+does not rank routes. Convergent Pro owns scientific synthesis, portfolio
+weighting, promotion or retirement recommendations, and the next evidence
+source or stop. Codex adopts that disposition unless it conflicts with the
+registered evidence boundary, an explicit project/user constraint, or
+operational feasibility; such a conflict is returned to Pro rather than solved
+through local research judgment. Review output never authorizes code execution
+or an experiment; those mutations still require the applicable user/project
+authority.
 
 ## 8. Maintaining This Contract
 

@@ -12,6 +12,9 @@ Updated: 2026-07-19
 - Ownership since: `2026-07-17T18:02:29.8227942+08:00`
 - Previous controller: none
 - Handoff state: NONE
+- Codex role: engineering, evidence, experiment, Git, and user-facing control;
+  no independent algorithm-route selection
+- Scientific decision source: tracked convergent GPT-5.6 Pro disposition
 
 ## Objective
 
@@ -53,8 +56,11 @@ audit also failed. The five-iteration autonomous research boundary is complete.
 
 1. Preserve the Iteration-5 terminal result and retire this exact spatial
    carrier contract without rescue.
-2. Return control to the user for portfolio redesign or an explicitly requested
-   external review; do not select or launch an automatic successor.
+2. Put the unresolved post-Iteration-5 portfolio and next-evidence decision
+   through one tracked external-review round. Codex prepares evidence and a
+   factual reconciliation; convergent Pro selects the scientific disposition.
+3. Do not implement or launch a successor until that disposition exists and the
+   required experiment authority is present.
 
 ## Autonomous Boundary
 

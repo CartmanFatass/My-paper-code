@@ -23,17 +23,32 @@ for this workflow.
 
 1. Gemini blind divergent review.
 2. Open-Pro blind divergent review.
-3. Controller synthesis from both immutable raws.
-4. Convergent-Pro review of evidence, both raws, and synthesis.
-5. Controller disposition.
+3. Codex factual evidence reconciliation from both immutable raws.
+4. Convergent-Pro scientific synthesis and decision from evidence, both raws,
+   and the reconciliation.
+5. Codex operational disposition.
 
-The divergent reviewers have equal standing. Reviewers recommend; only the
-controller changes algorithms, experiments, or the portfolio.
+The divergent reviewers have equal standing. Codex stage 3 checks provenance,
+claim support, contradictions, and missing inputs only; it does not rank the
+portfolio or select a route. Convergent Pro owns scientific synthesis,
+portfolio weighting, and the recommended next evidence source or stop. Codex
+stage 5 adopts that decision unless it conflicts with the registered evidence,
+an explicit user/project constraint, or operational feasibility. Such a
+conflict is returned as `BLOCKED` rather than resolved through local research.
+No external response authorizes code execution or an experiment.
+
+Before convergent dispatch, `40_PRO_CONVERGENT_QUESTION.md` must explicitly ask
+for: the evidence-validity decision; a two-to-four-candidate portfolio when the
+portfolio remains open; one selected next evidence source or an explicit stop;
+its causal estimand, comparator, outcome branches, and prohibited rescues; and
+the implementation boundary Codex may operationalize. A missing item is a
+pre-dispatch blocker. This is the required coverage that prevents scientific
+choices from falling back to the Codex controller.
 
 ## State and Dispatch Invariants
 
 Manage `05_REVIEW_STATE.json` only with `scripts/review_state.ps1`. Current
-schema 4 records `dispatch_count`, immutable `route_token`, `dispatched_at`, and
+schema 5 records `dispatch_count`, immutable `route_token`, `dispatched_at`, and
 `deadline_at` for each external stage.
 
 - Run `show` once when resuming.
@@ -83,19 +98,23 @@ unsandboxed. If any exact path is not writable, stop before dispatch with
 
 ## Pro
 
-Reuse the two registered role-specific Luna Exchange tasks. `OPEN_DIVERGENT`
-and `CONVERGENT` each have one fixed Codex task and one fixed ChatGPT Pro URL;
-never substitute, merge, or create a replacement role session.
+Reuse the one registered Luna Exchange task for both Pro stages. It owns two
+distinct registered ChatGPT Pro conversation URLs, one for `OPEN_DIVERGENT` and
+one for `CONVERGENT`, and switches the Codex in-app browser to the URL named by
+the current route. Do not create a second Codex Exchange task, merge the two Pro
+conversations, substitute another URL, or reuse one Pro page for both roles.
 
-The controller dispatches one route to the matching Exchange through
+The controller dispatches one route to the shared Exchange through
 `$hmasd-task-router`. The prompt contains only the route token, commit, question
 path, raw path, and deadline. The Exchange's terminal message also goes through
-that Skill using a freshly resolved controller route. The registry contains the
-role-specific expected route and a controller mirror; a live mismatch blocks
-before delivery and is never repaired by changing either task's model.
+that Skill using a freshly resolved controller route. The registry contains one
+Exchange route, two role-specific browser URLs, and a controller mirror; a live
+mismatch blocks before delivery and is never repaired by changing either task's
+model.
 
 The Exchange alone operates the Codex in-app browser. It opens the registered
-role-specific URL, verifies the visible `Pro` setting, expands the neutral
+URL for the current role even when another Pro page is already open, verifies
+the conversation ID and visible `Pro` setting, expands the neutral
 handoff by replacing only commit and question path, and submits once. It does
 not use Chrome, Computer Use, an external browser, a plugin, MCP, shell sleep,
 heartbeat, automation, an alternate conversation, or a response-control
@@ -110,7 +129,10 @@ evidence.
 
 ## Finish
 
-Archive each raw before interpretation. Write controller synthesis only after
-both divergent raws and disposition only after the convergent raw. Update
+Archive each raw before interpretation. Write
+`30_EVIDENCE_RECONCILIATION.md` only after both divergent raws; it may map
+claims to evidence and list contradictions but may not choose an algorithm.
+Write `50_DISPOSITION.md` only after the convergent raw and preserve its
+scientific decision without adding a Codex-selected successor. Update
 `docs/project/CURRENT_WORK.md`, `docs/project/ExpRecord.md`, and Git only once at
 the accepted disposition boundary.

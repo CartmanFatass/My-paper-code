@@ -10,7 +10,7 @@ param(
     [ValidateSet(
         "gemini_divergent",
         "open_pro",
-        "controller_synthesis",
+        "evidence_reconciliation",
         "convergent_pro",
         "controller_disposition"
     )]
@@ -31,7 +31,7 @@ $statePath = Join-Path $round "05_REVIEW_STATE.json"
 $stageOrder = @(
     "gemini_divergent",
     "open_pro",
-    "controller_synthesis",
+    "evidence_reconciliation",
     "convergent_pro",
     "controller_disposition"
 )
@@ -44,7 +44,7 @@ $roles = @{
 $artifacts = [ordered]@{
     gemini_divergent = "11_GEMINI_DIVERGENT_RAW.md"
     open_pro = "21_PRO_OPEN_RAW.md"
-    controller_synthesis = "30_CONTROLLER_SYNTHESIS.md"
+    evidence_reconciliation = "30_EVIDENCE_RECONCILIATION.md"
     convergent_pro = "41_PRO_CONVERGENT_RAW.md"
     controller_disposition = "50_DISPOSITION.md"
 }
@@ -106,8 +106,8 @@ function Get-Next([object]$Document) {
             return "NEXT:$name"
         }
     }
-    if ($Document.stages.controller_synthesis.state -eq "NOT_STARTED") {
-        return "NEXT:controller_synthesis"
+    if ($Document.stages.evidence_reconciliation.state -eq "NOT_STARTED") {
+        return "NEXT:evidence_reconciliation"
     }
     if ($Document.stages.convergent_pro.state -eq "NOT_STARTED") {
         return "NEXT:convergent_pro"
@@ -119,7 +119,7 @@ function Get-Next([object]$Document) {
 }
 
 function Assert-State([object]$Document) {
-    if ($Document.schema_version -ne 4 -or $Document.round_id -ne (Split-Path -Leaf $round)) {
+    if ($Document.schema_version -ne 5 -or $Document.round_id -ne (Split-Path -Leaf $round)) {
         throw "Review state identity or schema mismatch"
     }
     if ($Document.round_status -notin @("ACTIVE", "CLOSED")) {
@@ -184,14 +184,14 @@ function Assert-State([object]$Document) {
         $Document.stages.gemini_divergent.state -ne "COMPLETE") {
         throw "Open Pro requires completed Gemini raw"
     }
-    if ($Document.stages.controller_synthesis.state -ne "NOT_STARTED" -and
+    if ($Document.stages.evidence_reconciliation.state -ne "NOT_STARTED" -and
         ($Document.stages.gemini_divergent.state -ne "COMPLETE" -or
          $Document.stages.open_pro.state -ne "COMPLETE")) {
-        throw "Controller synthesis requires both divergent raws"
+        throw "Evidence reconciliation requires both divergent raws"
     }
     if ($Document.stages.convergent_pro.state -ne "NOT_STARTED" -and
-        $Document.stages.controller_synthesis.state -ne "COMPLETE") {
-        throw "Convergent Pro requires controller synthesis"
+        $Document.stages.evidence_reconciliation.state -ne "COMPLETE") {
+        throw "Convergent Pro requires evidence reconciliation"
     }
     if ($Document.stages.controller_disposition.state -ne "NOT_STARTED" -and
         $Document.stages.convergent_pro.state -ne "COMPLETE") {
@@ -220,7 +220,7 @@ if ($Mode -eq "init") {
         }
     }
     $document = [ordered]@{
-        schema_version = 4
+        schema_version = 5
         round_id = Split-Path -Leaf $round
         round_status = "ACTIVE"
         updated_at = [DateTimeOffset]::Now.ToString("o")

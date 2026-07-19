@@ -51,7 +51,7 @@ if ($registry.schema_version -ne 4 -or
     $registry.automation_ownership.initial_binding -ne 'active_controller' -or
     $registry.automation_ownership.runtime_cadence_and_terminal_pause -ne 'registered_monitor_task' -or
     $registry.controller_return_route.model -ne 'gpt-5.6-sol' -or
-    $registry.controller_return_route.thinking -ne 'ultra' -or
+    $registry.controller_return_route.thinking -ne 'xhigh' -or
     $registry.controller_return_route.change_policy -ne 'explicit_user_instruction_only' -or
     $registry.progress_policy.display -ne 'monitor_task_each_tick' -or
     $registry.progress_policy.controller_relay -ne 'terminal_or_actionable_error_only') {

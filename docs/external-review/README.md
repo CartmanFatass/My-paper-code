@@ -1,8 +1,8 @@
 # HMASD External Review Workflow
 
-External reviewers have different contexts, but no fixed hierarchy of
-intellectual authority. Claims are weighted by evidence, reasoning and fit to
-the HMASD contract rather than by model identity.
+External reviewers have different contexts. Gemini and open Pro are equal blind
+divergent sources; convergent Pro is the designated scientific decision source
+after both raws and a factual Codex evidence reconciliation exist.
 
 ## Roles
 
@@ -10,21 +10,25 @@ the HMASD contract rather than by model identity.
    conversation using Gemini 3.1 Pro (High). It reads the shared evidence pack
    plus explicitly allowlisted local papers and may propose, replace or reject
    architecture hypotheses.
-2. **GPT-5.6 Pro open reviewer.** A dedicated persistent conversation,
-   separate from the convergent reviewer. It receives the shared Git-visible
+2. **GPT-5.6 Pro open reviewer.** A dedicated persistent Pro conversation,
+   separate from the convergent Pro conversation. It receives the shared Git-visible
    evidence pack but not Gemini's response. It performs an independent open
    architecture review and has equal standing with Gemini.
-3. **Codex controller.** It compares the two raw reviews, checks them against
-   repository evidence and writes a synthesis without selecting by model name.
+3. **Codex evidence controller.** It compares the two raw reviews against
+   repository evidence and writes a factual reconciliation of supported claims,
+   contradictions and missing inputs. It does not rank routes or choose the
+   next evidence source.
 4. **GPT-5.6 Pro convergent reviewer.** The existing `HMASD Algorithm
-   Consultation` role in its own registered persistent conversation. It receives
-   the evidence pack, both raw reviews and the Codex synthesis, then ranks and
-   stress-tests a portfolio of two to four live candidates and recommends the
-   next serialized evidence source or an explicit stop. Only the controller
-   adopts or rejects that recommendation.
+   Consultation` role in its own registered persistent Pro conversation. It
+   receives the evidence pack, both raw reviews and the Codex reconciliation,
+   then owns scientific synthesis, portfolio weighting, and the next serialized
+   evidence source or explicit stop.
 
-The two divergent reviews are blind on their first pass. Neither output is an
-experiment authorization. The convergent reviewer may add an omitted candidate
+The two divergent reviews are blind on their first pass. No review output is an
+experiment authorization. Codex operationalizes the convergent decision unless
+it conflicts with registered evidence, an explicit user/project constraint, or
+operational feasibility; it does not replace it with local research judgment.
+The convergent reviewer may add an omitted candidate
 only by identifying a concrete omission in the evidence pack. It must not turn
 one scheduled experiment into a claim that only one research direction exists.
 
@@ -32,10 +36,11 @@ one scheduled experiment into a claim that only one research direction exists.
 
 Communication is automatic once a round exists. Gemini uses one bounded
 Antigravity transport subagent against its registered persistent conversation.
-The two role-specific Luna Exchange tasks use only the Codex in-app browser to
-operate their fixed Pro conversations. Reuse the sessions in
-`REVIEWER_CONVERSATIONS.json`; never substitute or mix roles. Submit external
-roles serially and archive each completed raw before using it.
+One persistent Luna Exchange task uses only the Codex in-app browser and
+switches between the two fixed role-specific Pro pages. Reuse the task and the
+two Pro conversations in `REVIEWER_CONVERSATIONS.json`; never create a second
+Exchange, substitute a page, or mix roles. Submit external roles serially and
+archive each completed raw before using it.
 
 Before a Pro submission, verify one remote-reachable 40-character commit, its
 question and every `Repository files to inspect` path with
@@ -78,7 +83,7 @@ rounds/YYYYMMDD_topic/
   11_GEMINI_DIVERGENT_RAW.md
   20_PRO_OPEN_QUESTION.md
   21_PRO_OPEN_RAW.md
-  30_CONTROLLER_SYNTHESIS.md
+  30_EVIDENCE_RECONCILIATION.md
   40_PRO_CONVERGENT_QUESTION.md
   41_PRO_CONVERGENT_RAW.md
   50_DISPOSITION.md
@@ -86,7 +91,7 @@ rounds/YYYYMMDD_topic/
 
 The brief, manifests and initial review state are written once. Reviewer-specific questions
 contain only role and requested-output differences. Raw responses are archived
-before synthesis. Accepted algorithm design moves to `docs/research/`; current
+before reconciliation. Accepted algorithm design moves to `docs/research/`; current
 ownership stays in `docs/project/CURRENT_WORK.md`; runtime evidence stays in
 `logs/`.
 

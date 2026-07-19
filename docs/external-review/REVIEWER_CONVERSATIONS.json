@@ -1,5 +1,5 @@
 {
-  "schema_version": 11,
+  "schema_version": 12,
   "updated": "2026-07-19",
   "gemini_transport": {
     "kind": "one_shot_subagent_antigravity_cli",
@@ -12,7 +12,7 @@
     "state_write_scope": "registered conversation database, agentapi.bat, last_conversations.json, and only their SQLite or atomic-replace auxiliary files"
   },
   "pro_transport": {
-    "kind": "role_specific_luna_exchange_in_app_browser",
+    "kind": "single_luna_exchange_multi_page_in_app_browser",
     "dispatch_tool": "codex_app__send_message_to_thread",
     "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
     "route_resolver": ".agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1",
@@ -26,12 +26,22 @@
     "target_route_fields": "REQUIRED_EXACT_REGISTERED_VALUES",
     "browser_surface": "codex_in_app_browser",
     "intelligence": "Pro",
+    "codex_exchange": {
+      "title": "External Review Exchange",
+      "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
+      "host_id": "local",
+      "model": "gpt-5.6-luna",
+      "thinking": "high",
+      "expected_model": "Luna High",
+      "role_policy": "switch_to_registered_role_url_for_each_serial_stage"
+    },
     "controller_return_route": {
       "host_id": "local",
       "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
       "model": "gpt-5.6-sol",
-      "thinking": "ultra",
-      "source": "live_task_metadata_mirror"
+      "thinking": "xhigh",
+      "source": "user_frozen_controller_default",
+      "change_policy": "explicit_user_instruction_only"
     }
   },
   "reviewers": {
@@ -54,32 +64,18 @@
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
-      "transport": "luna_exchange_in_app_browser",
+      "transport": "shared_luna_exchange_in_app_browser",
       "raw_file": "21_PRO_OPEN_RAW.md",
-      "codex_exchange": {
-        "title": "External Review Exchange — Open Pro",
-        "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
-        "host_id": "local",
-        "model": "gpt-5.6-luna",
-        "thinking": "high",
-        "expected_model": "Luna High"
-      }
+      "codex_exchange_ref": "pro_transport.codex_exchange"
     },
     "convergent": {
       "role": "CONVERGENT",
       "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
-      "transport": "luna_exchange_in_app_browser",
+      "transport": "shared_luna_exchange_in_app_browser",
       "raw_file": "41_PRO_CONVERGENT_RAW.md",
-      "codex_exchange": {
-        "title": "External Review Exchange — Convergent Pro",
-        "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-        "host_id": "local",
-        "model": "gpt-5.6-luna",
-        "thinking": "high",
-        "expected_model": "Luna High"
-      }
+      "codex_exchange_ref": "pro_transport.codex_exchange"
     }
   }
 }

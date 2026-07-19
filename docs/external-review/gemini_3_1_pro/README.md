@@ -14,8 +14,9 @@ round-centric directories under `docs/external-review/rounds/`.
   separate conversation.
 - **GPT-5.6 Pro convergent reviewer:** evidence and validity adjudication after
   both divergent raw responses and the Codex synthesis exist.
-- **Codex:** controller. It owns the hypothesis portfolio, chooses at most one
-  active experiment, interprets external responses and writes the repository.
+- **Codex:** evidence and engineering controller. It checks provenance,
+  operationalizes the convergent Pro disposition, and writes the repository;
+  it does not independently rank the hypothesis portfolio.
 
 No reviewer receives a fixed evidentiary weight from model identity. Reviewer
 suggestions are evidence and criticism, not authorization to edit, launch an
@@ -87,5 +88,5 @@ The shared round layout and blind-review ordering are defined by
   no additional files.
 
 Accepted algorithm synthesis moves to `docs/research/`. Current ownership and
-the next active experiment remain in `memory/CURRENT_WORK.md`; experiment data
+the next active experiment remain in `docs/project/CURRENT_WORK.md`; experiment data
 remain under `logs/`.

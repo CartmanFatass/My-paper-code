@@ -47,7 +47,9 @@ foreach ($required in @(
     "MARL exploration is agile by default",
     "Active-line development is the default",
     "No Skill recursively triggers itself",
-    "`$hmasd-task-router"
+    "convergent GPT-5.6 Pro stage",
+    '`gpt-5.6-sol` / `xhigh`',
+    '`$hmasd-task-router'
 )) {
     if (-not $agents.Contains($required)) {
         throw "AGENTS.md is missing structural contract: $required"
@@ -61,7 +63,8 @@ foreach ($legacy in @("memory/CURRENT_WORK.md", "memory/IMPLEMENTATION_PLAN.md")
 
 $research = Read-Text (Join-Path $skillsRoot "hmasd-research-cycle/SKILL.md")
 if ($research -notmatch '(?s)^---.*description:.*explicitly invokes \$hmasd-research-cycle.*ACTIVE Autonomous Boundary.*---' -or
-    $research -notmatch '(?s)## Stop.*Do not invoke this Skill\s+again') {
+    $research -notmatch '(?s)## Stop.*Do not invoke this Skill\s+again' -or
+    -not $research.Contains('BLOCKED_MISSING_PRO_DISPOSITION')) {
     throw "Research-cycle trigger or stop boundary is incomplete"
 }
 
@@ -70,7 +73,7 @@ $protocol = Read-Text (Join-Path $skillsRoot "hmasd-experiment/references/experi
 if (-not $experiment.Contains("references/experiment-protocol.md") -or
     -not $experiment.Contains("references/monitor-task.json") -or
     -not $protocol.Contains("Persistent Luna Monitor Task") -or
-    -not $protocol.Contains("BLOCKED_MONITOR_TIMEOUT") -or
+    -not $protocol.Contains('relays `TIMEOUT`') -or
     -not $protocol.Contains("BLOCKED_REPEATED_OPERATIONAL_FAILURE")) {
     throw "Experiment lifecycle deadline or retry boundary is incomplete"
 }
@@ -81,9 +84,10 @@ if (-not $review.Contains("dispatched exactly once") -or
     -not $review.Contains("BLOCKED_TIMEOUT") -or
     -not $review.Contains("gpt-5.6-terra") -or
     -not $review.Contains("single-line document pointer") -or
-    -not $review.Contains("role-specific Luna Exchange") -or
+    -not $review.Contains("one registered Luna Exchange") -or
+    -not $review.Contains("30_EVIDENCE_RECONCILIATION.md") -or
     -not $review.Contains("Codex in-app browser") -or
-    -not $reviewState.Contains("schema_version = 4") -or
+    -not $reviewState.Contains("schema_version = 5") -or
     -not $reviewState.Contains("dispatch_count")) {
     throw "Review dispatch loop guard is incomplete"
 }

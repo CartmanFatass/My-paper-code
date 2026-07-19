@@ -7,7 +7,10 @@ description: Use only when the user explicitly invokes $hmasd-research-cycle or 
 
 Confirm the entry condition before doing work. If neither an explicit invocation
 nor an `ACTIVE` autonomous boundary exists, return control without starting a
-cycle.
+cycle. Also require `docs/project/CURRENT_WORK.md` to point to one accepted
+convergent-Pro disposition that fixes the scientific route and next evidence
+source. If that pointer is absent, enter `$hmasd-review-round` or return
+`BLOCKED_MISSING_PRO_DISPOSITION`; do not design the route locally.
 
 Read `docs/project/CURRENT_WORK.md`,
 `docs/project/ALGORITHM_PRINCIPLES.md`, and the current contract in
@@ -17,20 +20,22 @@ reviews executable MARL code.
 
 ## Run One Evidence-Bearing Iteration
 
-1. Reconstruct the live portfolio from `docs/project/CURRENT_WORK.md`.
-2. Freeze the causal question, final capability, replacement ledger, strongest
-   ordinary baseline, outcome-dependent portfolio updates, and portfolio-
-   exhaustion condition in the single active implementation plan.
-3. Choose the smallest coherent observation, reanalysis, prototype, or
-   controlled run that best separates the live candidates and remains relevant
-   to variable team membership plus variable skill lifetime.
+1. Read the accepted convergent raw and disposition named by
+   `docs/project/CURRENT_WORK.md`; do not reconstruct or re-rank the portfolio.
+2. Translate the selected causal question, replacement ledger, comparator,
+   outcome branches, and evidence source into the single active implementation
+   plan without changing their scientific meaning.
+3. Resolve only engineering details needed to make that frozen decision
+   executable. A missing scientific choice returns to Pro rather than being
+   filled by Codex.
 4. Implement under the collaboration rules in `AGENTS.md`. Do not create a
    second brief, an internal reviewer, a task report, or a task commit.
 5. Let the controller inspect the integrated path once. If a real experiment
    lifecycle is required, enter `$hmasd-experiment`; implementation completion
    itself is not launch authority.
-6. Interpret one accepted evidence source against every live candidate. Update
-   only evidence-resolved weights, retirements, or promotions.
+6. Apply the registered outcome branch to one accepted evidence source. If the
+   result leaves a new algorithm, portfolio, or next-evidence decision open,
+   stop and enter `$hmasd-review-round`; do not invent the successor.
 
 Retry only a concrete operational failure under the same contract and within
 the experiment protocol's retry limit. A valid scientific negative closes its
