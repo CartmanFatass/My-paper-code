@@ -16,7 +16,8 @@ foreach ($required in @(
     'routing authority.',
     '`thinking` is forbidden',
     'Resolve the controller route again',
-    'registered Luna Medium monitor task',
+    'registered heartbeat automation',
+    'heartbeat only schedules one bounded monitor turn',
     'Do not retry an ambiguous delivery')) {
     if (-not $skillText.Contains($required)) {
         throw "Task router Skill is missing: $required"
@@ -30,13 +31,16 @@ foreach ($path in @($reviewSkill, $experimentSkill, $experimentProtocol)) {
 }
 
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
-if ($monitor.schema_version -ne 1 -or
+if ($monitor.schema_version -ne 2 -or
     $monitor.monitor_route.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
     $monitor.monitor_route.model -ne 'gpt-5.6-luna' -or
     $monitor.monitor_route.thinking -ne 'medium' -or
     $monitor.controller_return_route.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
     $monitor.controller_return_route.model -ne 'gpt-5.6-sol' -or
     $monitor.controller_return_route.thinking -ne 'ultra' -or
+    $monitor.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
+    $monitor.automation.kind -ne 'heartbeat' -or
+    $monitor.automation.target_thread_id -ne $monitor.monitor_route.thread_id -or
     $monitor.routing_skill -ne '.agents/skills/hmasd-task-router/SKILL.md') {
     throw 'Persistent monitor registry is not the exact two-way route contract'
 }

@@ -46,20 +46,24 @@ substitute another role, or send the same route twice.
 
 ## Use the Persistent Experiment Monitor
 
-`$hmasd-experiment` owns one registered Luna Medium monitor task. Before each
-assignment, resolve both that task and the active controller. The controller
-sends the run contract through the five-field persistent-task route above.
+`$hmasd-experiment` owns one registered Luna Medium monitor task and one
+registered heartbeat automation. Before each assignment, resolve both that task
+and the active controller. The controller binds the run by updating the
+existing automation and targeting the resolved monitor thread; it does not
+create another task or automation and does not send a duplicate assignment.
 
-The monitor reads this Skill before waiting. At terminal state it resolves the
-controller again from live metadata, verifies the registered mirror, and sends
-one terminal payload with the controller's exact five-field route. The monitor
-does not rely on native subagent delivery, heartbeat, automation, or controller
-polling. Its Luna Medium setting is fixed when the monitor task is created; the
-controller route never selects or changes either model.
+Each heartbeat only schedules one bounded monitor turn; it is not a transport
+substitute and carries no terminal result. At terminal state the monitor first
+pauses and verifies that automation, then resolves the controller again from
+live metadata, verifies the registered mirror, and sends one terminal payload
+with the controller's exact five-field route. Its Luna Medium setting is fixed
+when the monitor task is created; the controller route never selects or changes
+either model.
 
 ## Stop Conditions
 
 Return `BLOCKED` before delivery when a task is missing, archived, lacks route
 metadata, disagrees with its registered mirror, or the previous delivery is
-ambiguous. Never replace exact routing with heartbeat, automation, shell wait,
-an alternate task, or sender-default model inference.
+ambiguous. A heartbeat may wake the registered monitor, but never replaces the
+exact terminal route. Never use a shell wait, alternate task, duplicate
+automation, or sender-default model inference.

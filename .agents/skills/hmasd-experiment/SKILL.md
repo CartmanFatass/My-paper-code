@@ -36,9 +36,11 @@ parallelism, host, budget, or algorithm.
 
 ## Monitor, Repair, and Close
 
-Assign the single registered Luna Medium monitor task and apply its deadline
-exactly as defined in `references/experiment-protocol.md`. The protocol
-exclusively owns monitor prompt, wait behavior, terminal payload, and retry
+Bind the single registered heartbeat automation to the single registered Luna
+Medium monitor task and apply its deadline exactly as defined in
+`references/experiment-protocol.md`. Verify that the automation is `ACTIVE`
+before yielding control. The protocol exclusively owns the monitor prompt,
+tick behavior, progress display, terminal payload, pause order, and retry
 limit; do not restate or invent another monitoring workflow.
 
 At terminal delivery, the controller verifies the registered status once and

@@ -15,6 +15,12 @@ launch time + registered expected wall clock + max(30 minutes, 25% of expected)
 Record it in the monitor prompt. A contract without an expected wall clock is
 not launch-ready.
 
+Register the smallest authoritative progress sources exposed by the runner and
+the exact fields that matter for this experiment. Prefer one per-arm status
+JSON with completed/total steps and updates, plus already-terminal arm metrics.
+If no online metric exists, record `unavailable`; never infer it by scanning
+logs, TensorBoard events, checkpoints, stdout, or stderr.
+
 Create the final run root and authoritative `runner_status.txt` at launch.
 Stage raw and result payloads inside that root. Publish a file or result
 directory with an atomic replace/rename inside the root, then atomically publish
@@ -27,8 +33,9 @@ and long commands in the registered background runner.
 
 ## Persistent Luna Monitor Task
 
-After the live status file exists, assign the run to the one task registered in
-`references/monitor-task.json`. That task is created once with:
+After the live status file exists, bind the run to the one task and one
+heartbeat automation registered in `references/monitor-task.json`. The task is
+created once with:
 
 ```text
 model: gpt-5.6-luna
@@ -36,23 +43,32 @@ thinking: medium
 workspace: C:\project\HMASD
 ```
 
-Do not create a new monitor task per run. Only one run may be assigned at a
-time. Immediately before assignment, use `$hmasd-task-router` to resolve both
-the registered monitor and the active controller. Their live routes must match
-their registry mirrors. Send the assignment once with the monitor's exact
-`hostId`, `threadId`, `model`, and `thinking`; include the controller thread ID
-and the absolute path to `.agents/skills/hmasd-task-router/SKILL.md`. The monitor
-reads that Skill before waiting.
+Do not create a new monitor task or automation per run. Only one run may be
+bound at a time. Immediately before binding, use `$hmasd-task-router` to resolve
+both the registered monitor and the active controller. Their live routes must
+match their registry mirrors. Update the existing automation by its registered
+ID, target it at the exact monitor thread, set it `ACTIVE`, and verify both the
+status and target. This automation update is the assignment; do not also send a
+duplicate assignment message.
 
-Give the monitor only the absolute run root and status path, registered terminal
+The automation prompt contains only its automation ID, the absolute run root
+and status path, the registered progress paths and fields, registered terminal
 spelling (`complete` or `completed`, plus `failed`), payload keys, monitor
-deadline, terminal schema, and read-only/no-science boundary.
+deadline, terminal schema, the controller registry mirror, and the
+read-only/no-science boundary. It requires the monitor to read
+`$hmasd-task-router` before any terminal relay.
 
-The monitor runs `scripts/wait_runner_status.ps1`. The helper performs one
-initial read and then waits on file events; it does not sleep or poll. The
-monitor may resume a yielded helper with the process-wait tool. It reads no
-result, stderr, or progress file, changes no file, and never restarts or
-interprets the run.
+Each heartbeat starts one bounded monitor turn. That turn reads
+`runner_status.txt` exactly once and each explicitly registered progress source
+at most once. It does not start a watcher, sleep, poll, scan other artifacts,
+change experiment files, restart the run, or interpret science. Every running
+tick writes one concise `MONITOR_PROGRESS` entry in the dedicated monitor task
+with observation time, phase, per-arm completed/total steps and updates,
+percent complete, elapsed time, a clearly labelled straight-line ETA when the
+available counters support it, and the registered key metrics or `unavailable`.
+It sends no running update to the controller and ends with `MONITOR_RUNNING`;
+the next heartbeat is the only continuation mechanism. A Codex final answer is
+never treated as a live background waiter.
 
 Every existing status must parse completely. `running` is the only nonterminal
 state; terminal states are the registered `complete`/`completed` and `failed`.
@@ -60,8 +76,10 @@ Every state contains `updated` and `phase`. Validate `run_root`, `run_id`, and
 terminal payload containment when present. Malformed, missing, unknown, or
 escaping data is an immediate actionable monitor error.
 
-At terminal state the monitor resolves the controller's live route again and
-sends exactly one final payload through `$hmasd-task-router`:
+At terminal state, malformed status, or deadline, the monitor first updates its
+registered automation to `PAUSED` and verifies that state. Only after the pause
+is confirmed does it resolve the controller's live route again and send exactly
+one final payload through `$hmasd-task-router`:
 
 ```text
 EXPERIMENT_MONITOR
@@ -77,12 +95,19 @@ reason=<one actionable line or none>
 
 The terminal send must include the freshly resolved controller `model` and
 `thinking`; omission is forbidden. Do not send an additional message or create
-a heartbeat, automation, dashboard, replacement monitor, or monitor state file.
+a second heartbeat, automation, dashboard, replacement monitor, or monitor
+state file. If pausing cannot be confirmed, do not relay a terminal payload;
+leave the automation active so the next bounded tick can retry the pause.
 
-The controller does not poll or sleep while the monitor owns the run. At the
-deadline, if no terminal relay has arrived, perform one direct authority/status
-inspection. If the run is not terminal, close the lifecycle as
-`BLOCKED_MONITOR_TIMEOUT`; do not dispatch another monitor. A user-requested
+On `complete`, the monitor may read the contained result once to display only
+the terminal status and the exact registered key fields in its own task. The
+controller relay still carries the result path as authority; the monitor does
+not choose a branch or add scientific interpretation.
+
+The controller does not poll or sleep while the monitor owns the run. The
+heartbeat tick itself applies the deadline and relays `TIMEOUT` after first
+pausing. If no relay exists after the deadline plus one heartbeat interval, the
+controller performs one direct automation/status inspection. A user-requested
 progress read is a separate one-time controller inspection and does not replace
 the monitor.
 

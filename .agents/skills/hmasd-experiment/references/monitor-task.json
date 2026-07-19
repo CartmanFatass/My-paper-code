@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated": "2026-07-19",
   "monitor_route": {
     "host_id": "local",
@@ -15,6 +15,17 @@
     "thinking": "ultra",
     "source": "live_task_metadata_mirror"
   },
+  "automation": {
+    "id": "hmasd-r35-single-thread-monitor",
+    "kind": "heartbeat",
+    "cadence_minutes": 15,
+    "target_thread_id": "019f772b-355f-79f3-abbc-2f08800738f8"
+  },
+  "progress_policy": {
+    "display": "monitor_task_each_tick",
+    "controller_relay": "terminal_or_actionable_error_only",
+    "artifact_scope": "registered_paths_and_fields_only"
+  },
   "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
-  "assignment_state": "IDLE"
+  "runtime_state_authority": "Codex automation state and the assigned runner_status.txt"
 }
