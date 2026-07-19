@@ -1,20 +1,15 @@
 {
-  "schema_version": 4,
-  "updated": "2026-07-19",
+  "schema_version": 5,
+  "updated": "2026-07-20",
   "monitor_route": {
     "host_id": "local",
     "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
-    "model": "gpt-5.6-luna",
-    "thinking": "medium",
     "title": "HMASD Experiment Monitor — Luna Medium"
   },
   "controller_return_route": {
     "host_id": "local",
     "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
-    "model": "gpt-5.6-sol",
-    "thinking": "xhigh",
-    "source": "user_frozen_normal_research_default",
-    "change_policy": "explicit_user_instruction_only"
+    "route_policy": "resolve_live_immediately_before_each_send"
   },
   "automation": {
     "id": "hmasd-r35-single-thread-monitor",
@@ -34,9 +29,8 @@
     ]
   },
   "automation_ownership": {
-    "initial_binding": "active_controller",
-    "runtime_cadence_and_terminal_pause": "registered_monitor_task",
-    "controller_recovery": "one_inspection_after_deadline_plus_one_interval"
+    "assignment_activation_cadence_and_terminal_pause": "registered_monitor_task",
+    "controller_role": "communication_only"
   },
   "progress_policy": {
     "display": "monitor_task_each_tick",
@@ -44,5 +38,6 @@
     "artifact_scope": "registered_paths_and_fields_only"
   },
   "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
+  "route_policy": "resolve_live_immediately_before_each_send",
   "runtime_state_authority": "Codex automation state and the assigned runner_status.txt"
 }

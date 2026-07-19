@@ -1,70 +1,59 @@
 {
-  "schema_version": 13,
-  "updated": "2026-07-19",
-  "gemini_transport": {
-    "kind": "one_shot_subagent_antigravity_cli",
-    "subagent_model": "gpt-5.6-terra",
-    "reasoning_effort": "medium",
-    "fork_turns": "none",
-    "cli_mode": "interactive_pty",
-    "handoff": "single_line_document_pointer",
-    "permission_bypass": "FORBIDDEN",
-    "state_write_scope": "registered conversation database, bin/agentapi.bat, cache/last_conversations.json, Antigravity log and crashes runtime-output directories, and only their required SQLite, atomic-replace, log or crash auxiliary files"
-  },
-  "pro_transport": {
-    "kind": "single_luna_exchange_multi_page_in_app_browser",
-    "dispatch_tool": "codex_app__send_message_to_thread",
+  "schema_version": 15,
+  "updated": "2026-07-20",
+  "review_manager": {
+    "kind": "persistent_full_round_manager",
+    "title": "External Review Manager",
+    "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
+    "host_id": "local",
     "routing_skill": ".agents/skills/hmasd-task-router/SKILL.md",
     "route_resolver": ".agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1",
-    "required_arguments": [
-      "hostId",
-      "threadId",
-      "model",
-      "thinking",
-      "prompt"
+    "route_policy": "resolve_live_immediately_before_each_send",
+    "start_message": "START_REVIEW",
+    "terminal_messages": [
+      "REVIEW_COMPLETE",
+      "REVIEW_BLOCKED"
     ],
-    "target_route_fields": "REQUIRED_EXACT_REGISTERED_VALUES",
-    "browser_surface": "codex_in_app_browser",
-    "intelligence": "Pro",
-    "codex_exchange": {
-      "title": "External Review Exchange",
-      "thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-      "host_id": "local",
-      "model": "gpt-5.6-luna",
-      "thinking": "high",
-      "expected_model": "Luna High",
-      "role_policy": "switch_to_registered_role_url_for_each_serial_stage"
+    "owns": [
+      "gemini_transport",
+      "open_pro_browser",
+      "review_state",
+      "heartbeat",
+      "raw_archival",
+      "evidence_reconciliation",
+      "round_git_boundary",
+      "convergent_pro_browser",
+      "final_disposition"
+    ],
+    "browser": {
+      "surface": "codex_in_app_browser",
+      "ui_scope": "application_shared",
+      "logical_owner": "review_manager",
+      "foreground_policy": "navigate_to_review_manager_before_browser_operation"
     },
     "heartbeat": {
       "automation_id": "hmasd-external-review-exchange",
-      "kind": "heartbeat",
       "target_thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
-      "ownership": "registered_exchange_task",
-      "active_condition": "exactly one Pro stage is DISPATCHED",
-      "terminal_order": "pause_verify_then_relay"
+      "active_condition": "one accepted Pro response is pending",
+      "terminal_order": "pause_verify_then_final_relay"
     },
     "controller_return_route": {
       "host_id": "local",
       "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
-      "model": "gpt-5.6-sol",
-      "thinking": "xhigh",
-      "source": "user_frozen_controller_default",
-      "change_policy": "explicit_user_instruction_only"
+      "route_policy": "resolve_live_immediately_before_each_send"
     }
   },
   "reviewers": {
     "gemini_divergent": {
       "role": "GEMINI_DIVERGENT",
-      "session_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
       "conversation_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
       "expected_model": "Gemini 3.1 Pro (High)",
-      "transport": "antigravity_cli",
+      "transport": "review_manager_antigravity_cli",
       "raw_file": "11_GEMINI_DIVERGENT_RAW.md",
       "standing_consent": {
         "state": "APPROVED",
         "scope": "tracked_round_gemini_local_source_manifests",
-        "approval_receipt": "user:019f5c78-0c91-7612-adb4-c1fcfe4484c8:20260718-gemini-open-source-standing-consent-2",
-        "constraints": "project-only explicit allowlist; read-only; no credentials, personal data, project-external files, writes, execution or training"
+        "constraints": "manifest-listed project files and Antigravity state root only; no credentials, personal files, training, or unrelated execution"
       }
     },
     "open_divergent": {
@@ -72,18 +61,16 @@
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
-      "transport": "shared_luna_exchange_in_app_browser",
-      "raw_file": "21_PRO_OPEN_RAW.md",
-      "codex_exchange_ref": "pro_transport.codex_exchange"
+      "transport": "review_manager_in_app_browser",
+      "raw_file": "21_PRO_OPEN_RAW.md"
     },
     "convergent": {
       "role": "CONVERGENT",
       "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
       "expected_model_ui": "Pro",
-      "transport": "shared_luna_exchange_in_app_browser",
-      "raw_file": "41_PRO_CONVERGENT_RAW.md",
-      "codex_exchange_ref": "pro_transport.codex_exchange"
+      "transport": "review_manager_in_app_browser",
+      "raw_file": "41_PRO_CONVERGENT_RAW.md"
     }
   }
 }

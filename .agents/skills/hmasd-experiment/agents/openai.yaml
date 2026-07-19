@@ -1,4 +1,4 @@
 interface:
-  display_name: "HMASD Experiment"
-  short_description: "Manage an authorized HMASD experiment lifecycle"
-  default_prompt: "Use $hmasd-experiment to prepare, launch, monitor, repair, or formally close this authorized HMASD experiment."
+  display_name: "HMASD Experiment Monitor"
+  short_description: "Monitor one assigned HMASD run to terminal state"
+  default_prompt: "Use $hmasd-experiment in the persistent monitor task to watch the assigned run, manage its heartbeat, and relay one terminal payload."

@@ -1,79 +1,70 @@
 # HMASD Codex Project Instructions
 
-## Canonical Project Control
+## Shared Entry and Role Routing
 
-All active project-control documents live in `docs/project/`:
+Every HMASD Codex session reads
+`.agents/skills/hmasd-task-router/SKILL.md` at entry. It is the common
+communication contract. Role-specific procedures stay in role-specific Skills
+and are not loaded by other roles.
 
-- `docs/project/CURRENT_WORK.md` — controller ownership, live objective, portfolio, next
-  action, autonomy state, immediate constraints, and current pointers;
-- `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific exploration contract;
-- `docs/project/MARL_ENGINEERING_PRINCIPLES.md` — durable implementation and experiment-code
-  contract;
-- `docs/project/IMPLEMENTATION_PLAN.md` — the single active staged implementation contract;
-- `docs/project/ExpRecord.md` — formal experiment contracts and terminal dispositions.
+The active normative project documents are:
 
-Read `docs/project/CURRENT_WORK.md` first. It is the only mandatory default
-read. Load another control document only when the task crosses its boundary.
-Read `docs/research/`, `docs/external-review/`, or `docs/archive/` only through a
-current pointer or an explicit user request. Historical evidence is not an
-active instruction source.
+- `docs/project/CURRENT_WORK.md` — controller ownership and live project state;
+- `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints shared
+  by controller and algorithm implementers;
+- `docs/project/IMPLEMENTATION_PLAN.md` — the controller's single active
+  executable design;
+- `docs/project/ExpRecord.md` — formal experiment contracts and dispositions.
 
-One active Codex controller works directly in `C:\project\HMASD` and owns
-evidence integrity, engineering architecture, implementation contracts,
-experiment authorization and lifecycle, root project state, final Git
-integration and push, and user communication. It does not independently choose
-new research hypotheses, rank the scientific portfolio, or select the next
-evidence source. Those unresolved scientific decisions belong to the tracked
-convergent GPT-5.6 Pro stage; the Codex controller operationalizes its accepted
-disposition and blocks only on evidence mismatch, an explicit project/user
-constraint, or operational infeasibility. `docs/project/CURRENT_WORK.md` names
-the Codex controller; ownership changes only by an explicit handoff recorded
-there. Project files never change the controller model. The user-selected route
-expectation is `gpt-5.6-sol` / `xhigh`; it is a delivery guard, not a model
-selector, and changes only on an explicit user instruction.
+Role context is strict:
 
-## Workflow Routing
+- **Controller:** reads `CURRENT_WORK.md` first, then the other project documents
+  only when their boundary is active. It owns project documents, engineering
+  architecture, implementation contracts, experiment authorization and launch,
+  Git integration, evidence integrity, and user communication.
+- **Implementer or implementation fixer:** reads the controller's self-contained
+  task, `ALGORITHM_PRINCIPLES.md`, and `$hmasd-implementer`, then only the named
+  code and evidence. It does not reconstruct project state from controller,
+  experiment, archive, or external-review documents.
+- **External Review Manager:** reads `$hmasd-review-round`, the active round, and
+  the communication Skill. It owns all reviewer transports and intermediate
+  review mechanics.
+- **Experiment monitor:** reads `$hmasd-experiment`, the assigned run paths, and
+  the communication Skill. It owns heartbeat monitoring and terminal relay.
 
-Direct controller work is the default. Explanations, status reads, bounded
-inspection or diagnosis, small edits, Git/docs, prompt generation, result
-interpretation, and routine continuation do not invoke a project Skill.
+The controller does not read or operate the review-manager or monitor procedure.
+It communicates with those persistent tasks and consumes only their registered
+terminal artifact. Project files never select or change any task model.
 
-Only these conditional workflows exist:
+## Scientific and Workflow Authority
 
-- `$hmasd-research-cycle`: use only when the user explicitly invokes it or
-  `docs/project/CURRENT_WORK.md` records `Autonomous Boundary: ACTIVE`, and an
-  accepted convergent-Pro disposition already fixes the scientific route; one
-  invocation executes one bounded evidence-bearing iteration and returns to the
-  controller without inventing a successor;
-- `$hmasd-experiment`: use for an authorized mutation of an experiment
-  contract, package, launch, monitor, failed runtime stage, analysis repair, or
-  terminal closure;
-- `$hmasd-review-round`: use for a complete tracked five-stage external-review
-  round and whenever an unresolved algorithm, portfolio, or next-evidence
-  decision must be made; not for one prompt, one returned answer, routine result
-  interpretation, literature discussion, or ordinary brainstorming.
+Direct controller work is the default. Explanations, bounded inspection,
+diagnosis, small edits, Git/docs, prompt generation, result interpretation, and
+routine continuation do not invoke a project Skill.
 
-One internal transport Skill also exists: `$hmasd-task-router`. It is mandatory
-for every message to an existing Codex task and for every experiment monitor
-session, but it owns only route preservation and delivery. It never starts a
-research, review, or experiment workflow by itself.
+Use `$hmasd-research-cycle` only when the user explicitly invokes it or
+`CURRENT_WORK.md` records an active autonomous boundary and a convergent-Pro
+disposition already fixes the next evidence source. One invocation performs one
+bounded evidence-bearing iteration and returns to the controller.
 
-No Skill recursively triggers itself from its own result. A valid result alone
-does not start another research iteration. Generic Skills are optional
-techniques; they do not own HMASD planning, delegation, review, Git, memory, or
-scientific decisions. Existing project authorization satisfies its exact
-registered scope. Do not ask for it again, and do not create a worktree unless
-the user explicitly requests one.
+Unresolved hypothesis generation, portfolio weighting, route selection, and
+next-evidence choice require the tracked external-review round. The controller
+turns its accepted convergent disposition into an executable design; it does
+not replace a missing scientific decision. External review never authorizes
+code execution or training.
+
+No Skill recursively triggers itself. A valid result does not automatically
+start another iteration. Existing authorization covers its exact registered
+scope; do not ask for it again. Generic Skills are optional techniques and do
+not own HMASD planning, review, Git, memory, or scientific decisions.
 
 ## Agile Research and Active-Line Development
 
 MARL exploration is agile by default. Scientific portfolio construction,
 evidence selection, reward boundaries, toy relevance, and result semantics live
-only in `docs/project/ALGORITHM_PRINCIPLES.md`. Tensor/device structure,
-batching, replay, recurrent state, persistence, observability, and the single
-final experiment-code review live only in
-`docs/project/MARL_ENGINEERING_PRINCIPLES.md`. Do not restate either contract in
-AGENTS or a Skill.
+only in `docs/project/ALGORITHM_PRINCIPLES.md`. Reusable executable-code
+standards live only in `$hmasd-implementer`; do not duplicate them here or in a
+second project plan.
 
 Active-line development is the default. Do not implement or retain backward
 compatibility adapters, deprecated runtime branches, old library interfaces,
@@ -82,40 +73,29 @@ code and artifacts are not executable dependencies unless a current question
 names them as evidence. Delete a replaced active path instead of preserving a
 compatibility switch.
 
-For staged core work, maintain exactly one contract in
+For staged core work, the controller maintains exactly one contract in
 `docs/project/IMPLEMENTATION_PLAN.md`. It fixes the goal and evidence boundary,
 replacement ledger, exact files and symbols, tensor/collector flow, state
 ownership, gradient/detach and reward/advantage semantics, probability, RNG,
-replay, masks, clocks, checkpoint semantics, preserved interfaces, and
-non-goals. Do not create a second brief or plan.
+replay, masks, clocks, checkpoint semantics, preserved interfaces, one focused
+check, and non-goals. Do not create a second brief or plan.
 
 One serialized implementation or compute source does not imply one legal
 research hypothesis. Keep competing explanations in the scientific portfolio
 while serializing mutations for attribution and workspace safety.
 
-## Collaboration
+## Collaboration and Communication
 
 The controller freezes all core engineering semantics from the accepted Pro
-disposition before delegation. New HMASD implementers and implementation
-fixers use `gpt-5.6-sol` with `xhigh` reasoning. Never change an existing task's
-model; create a correctly routed replacement instead.
+disposition before delegation. It sends a self-contained task containing exact
+write scope, interfaces, invariants, non-goals, and one focused check. An
+implementer follows that task, `ALGORITHM_PRINCIPLES.md`, and
+`$hmasd-implementer`; it does not reconstruct project state or choose a route.
 
-Before editing any algorithm, reward, credit, dynamic-roster, trainer, runtime,
-or experiment-code path, every implementer and implementation fixer must read
-`docs/project/CURRENT_WORK.md`, `docs/project/ALGORITHM_PRINCIPLES.md`,
-`docs/project/MARL_ENGINEERING_PRINCIPLES.md`, and the active section of
-`docs/project/IMPLEMENTATION_PLAN.md`. Every dispatch must state this entry
-requirement explicitly. The plan fixes the concrete implementation; the other
-three documents remain independent scientific, engineering, and project-state
-constraints. A missing document or real conflict returns `BLOCKED` before an
-edit.
-
-Every message to an existing Codex task and every monitor session must use
-`$hmasd-task-router`; ad hoc cross-task sends are forbidden. The Skill resolves
-live task metadata and requires exact `model` and `thinking` values in every
-explicit send. The controller snapshot is the frozen normal-research route,
-not an automatically refreshed mirror. A mismatch blocks delivery without
-changing either task or the snapshot; update it only on explicit user direction.
+Every message to an existing Codex task uses `$hmasd-task-router`. Resolve both
+tasks immediately before delivery and explicitly include the recipient's exact
+live model and thinking values. Never use a static route mirror, sender default,
+omitted route field, or communication as a model-selection mechanism.
 
 Use one implementer for a coupled change. Use two or three only when interfaces
 are frozen and write scopes are disjoint. One file has one writer; the
@@ -123,11 +103,12 @@ controller or one integration implementer owns shared integration files. The
 controller personally inspects the integrated diff, one focused check, and the
 resulting evidence. Do not create internal reviewer subagents. After two failed
 delegated attempts on the same frozen task, the controller implements it
-directly. Respect the eight-thread ceiling and spawn depth one.
+directly while following `$hmasd-implementer` for that implementation turn.
+Respect the eight-thread ceiling and spawn depth one.
 
 Return `BLOCKED` only for missing authority, a genuine contract conflict, or a
 required scope expansion. Do not turn ordinary uncertainty into an approval
-loop.
+loop. Do not create a worktree unless the user explicitly requests one.
 
 ## Repository and Runtime
 
@@ -135,7 +116,7 @@ Use one source for each fact:
 
 - Git-tracked code is implementation and version truth;
 - `logs/<run-id>/` is runtime evidence;
-- the five files in `docs/project/` are the active control plane;
+- the four files named above in `docs/project/` are the active control plane;
 - durable designs live in `docs/research/`, raw reviews in
   `docs/external-review/`, and unique historical evidence in `docs/archive/`.
 
@@ -155,25 +136,20 @@ Put experiment outputs only under `logs/<run-id>/` and persistent tests under
 `tests/`. Remove controller-created transient files at their evidence boundary.
 Do not perform broad or repeated artifact-completeness scans.
 
-## Experiments and External Review
+## Dedicated Lifecycle Interfaces
 
-Every real experiment lifecycle uses `$hmasd-experiment` and the owning
-`docs/project/ExpRecord.md` contract. Implementation completion never launches
-training. Formal runs use their registered CUDA/parallel topology and placement;
-never silently fall back to CPU, serial execution, or another host. Monitoring,
-deadlines, retry limits, and terminal closure live only in that Skill and its
-protocol.
+The controller owns an experiment's scientific contract and launch. Once a run
+has an authoritative status path, it sends one assignment to the persistent
+monitor. The monitor owns heartbeat cadence and terminal pause and returns one
+terminal payload; the controller then reads the registered result or direct
+error. Implementation completion never launches training, and a formal run
+never silently changes device, parallelism, host, budget, or algorithm.
 
-Every full external-review round uses `$hmasd-review-round`. Gemini and open Pro
-are blind divergent reviewers with equal standing. Codex then writes a factual
-evidence reconciliation without ranking routes; convergent Pro owns scientific
-synthesis, portfolio weighting, and the recommended next evidence source or
-stop. One persistent Luna Exchange task operates both registered Pro browser
-pages serially. The Codex controller records and operationalizes the convergent
-disposition but does not replace it with its own research judgment. External
-review never authorizes code execution or an experiment; existing user authority
-and project constraints still govern mutations. State, transport, deadlines,
-raw archival, and recovery mechanics live only in that Skill.
+For a full review, the controller prepares and pushes one immutable evidence
+boundary and sends one `START_REVIEW` message to the persistent External Review
+Manager. It later receives one `REVIEW_COMPLETE` or `REVIEW_BLOCKED` and reads
+only the final disposition. The manager alone owns Gemini, Pro browser pages,
+heartbeats, state, raw archival, reconciliation, and review-only Git boundaries.
 
 ## State Updates and Communication
 

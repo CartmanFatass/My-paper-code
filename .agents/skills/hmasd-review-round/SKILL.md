@@ -1,192 +1,125 @@
 ---
 name: hmasd-review-round
-description: Use only when creating or resuming a complete tracked HMASD five-stage external-review round. Do not use for prompt generation, one returned review, literature discussion, brainstorming, single-reviewer consultation, routine result interpretation, or a disposition already determined by the registered contract.
+description: Use only for a complete tracked HMASD external-review round or an unresolved algorithm, portfolio, or next-evidence decision. One persistent External Review Manager owns the full round after one controller start message. Do not use for prompt generation, one returned answer, routine result interpretation, literature discussion, brainstorming, or a disposition already fixed by evidence.
 ---
 
-# HMASD Review Round
+# HMASD External Review Round
 
-This is a current-path workflow, not a compatibility layer. Ignore old states,
-transports, receipts, and scripts.
+External review is a mandatory scientific boundary, not an optional advisory
+step. Transport complexity must remain isolated from the active controller.
 
-Read only the round's `00_REVIEW_BRIEF.md` and
-`01_SHARED_SOURCE_MANIFEST.md`; additionally read
-`02_GEMINI_LOCAL_SOURCE_MANIFEST.md` for Gemini. Read
-`docs/external-review/REVIEWER_CONVERSATIONS.json` for current sessions and
-`docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md` for the neutral Pro
-handoff.
+Read `../hmasd-task-router/SKILL.md` before any cross-task communication. Read
+only the active round and the review resources named below; do not load the
+controller control plane.
 
-Before any controller-to-Exchange or Exchange-to-controller task message, read
-and follow `../hmasd-task-router/SKILL.md`. It is the sole task-routing contract
-for this workflow.
+## Ownership
 
-## Five Serialized Stages
+The persistent Luna External Review Manager registered in
+`docs/external-review/REVIEWER_CONVERSATIONS.json` owns the complete round:
 
-1. Gemini blind divergent review.
-2. Open-Pro blind divergent review.
-3. Codex factual evidence reconciliation from both immutable raws.
-4. Convergent-Pro scientific synthesis and decision from evidence, both raws,
-   and the reconciliation.
-5. Codex operational disposition.
+1. Gemini blind divergent review;
+2. Open-Pro blind divergent review;
+3. factual evidence reconciliation from both immutable raws;
+4. Convergent-Pro scientific synthesis;
+5. final converged disposition and terminal relay.
 
-The divergent reviewers have equal standing. Codex stage 3 checks provenance,
-claim support, contradictions, and missing inputs only; it does not rank the
-portfolio or select a route. Convergent Pro owns scientific synthesis,
-portfolio weighting, and the recommended next evidence source or stop. Codex
-stage 5 adopts that decision unless it conflicts with the registered evidence,
-an explicit user/project constraint, or operational feasibility. Such a
-conflict is returned as `BLOCKED` rather than resolved through local research.
-No external response authorizes code execution or an experiment.
+The controller creates and pushes the immutable evidence boundary, then sends
+exactly one `START_REVIEW` message through `../hmasd-task-router/SKILL.md`. It
+does not operate Gemini, browser pages, heartbeat, review state, reconciliation,
+or recovery. The manager sends exactly one terminal `REVIEW_COMPLETE` or
+`REVIEW_BLOCKED` message through the router. Intermediate progress remains in
+the manager task and round state; it is never relayed to the controller.
 
-Before convergent dispatch, `40_PRO_CONVERGENT_QUESTION.md` must explicitly ask
-for: the evidence-validity decision; a two-to-four-candidate portfolio when the
-portfolio remains open; one selected next evidence source or an explicit stop;
-its causal estimand, comparator, outcome branches, and prohibited rescues; and
-the implementation boundary Codex may operationalize. A missing item is a
-pre-dispatch blocker. This is the required coverage that prevents scientific
-choices from falling back to the Codex controller.
+The manager may stage, commit, and push only files inside its active round
+directory when a Git-visible boundary is required for an external reviewer. It
+must not stage unrelated dirty-worktree changes or modify project-control files.
 
-## State and Dispatch Invariants
+## Required Inputs
 
-Manage `05_REVIEW_STATE.json` only with `scripts/review_state.ps1`. Current
-schema 5 records `dispatch_count`, immutable `route_token`, `dispatched_at`, and
-`deadline_at` for each external stage.
+The manager reads:
 
-- Run `show` once when resuming.
-- An external stage may be dispatched exactly once.
-- A pre-dispatch blocker may be repaired and then dispatched once.
-- A blocker after dispatch is terminal for that stage; never submit again in the
-  same round.
-- `COMPLETE` and archived raw files are immutable.
-- Only one external stage may be `DISPATCHED` at a time.
+- `00_REVIEW_BRIEF.md`;
+- `01_SHARED_SOURCE_MANIFEST.md`;
+- `02_GEMINI_LOCAL_SOURCE_MANIFEST.md` for Gemini;
+- `docs/external-review/REVIEWER_CONVERSATIONS.json`;
+- `docs/external-review/GPT5_6_PRO_HANDOFF_TEMPLATE.md`.
 
-Set `deadline_at` from the explicit deadline in `00_REVIEW_BRIEF.md`; if absent,
-use two hours after verified dispatch. When the deadline passes, make one final
-bounded same-thread read. If incomplete, mark `BLOCKED_TIMEOUT` and stop; do not
-resubmit, regenerate, continue, or move to another session.
+Before either Pro submission, run
+`scripts/verify_pro_review_boundary.ps1` against the registered 40-character
+commit, question path, and repository inputs. An unavailable boundary is a
+terminal blocker; it is not reviewer evidence.
 
-The route token is
-`<round>:<role>:<40-char-commit>:<raw-path>`. Before either Pro dispatch, run
-`scripts/verify_pro_review_boundary.ps1` for that commit, question path, and all
-listed repository inputs. Stop before dispatch if any path is unavailable.
+## Scientific Contract
 
-## Gemini
+Gemini and Open Pro are independent blind divergent reviewers with equal
+standing. The manager's reconciliation may map claims to evidence, identify
+contradictions, and identify missing inputs, but it may not rank candidates or
+select the next evidence source. Convergent Pro receives the evidence, both
+raws, and the reconciliation, and must provide:
 
-Spawn one depth-one transport subagent with `fork_turns="none"`, model
-`gpt-5.6-terra`, and reasoning effort `medium`. It resumes the registered
-Antigravity conversation through an interactive `agy` PTY; never create a
-persistent Codex Exchange or change the Gemini model.
+- an evidence-validity decision;
+- a two-to-four-candidate portfolio when the portfolio remains open;
+- one selected next evidence source or an explicit stop;
+- the causal estimand, comparator, result branches, and prohibited rescues;
+- the implementation boundary Codex may operationalize.
 
-The user has granted standing project authorization for this registered Gemini
-stage to disclose exactly the files allowlisted by
-`02_GEMINI_LOCAL_SOURCE_MANIFEST.md` to the registered external Gemini
-conversation. Starting or resuming this stage is execution authority for that
-bounded disclosure; the transport subagent must not ask for a fresh export,
-privacy, or external-service confirmation. This standing authorization does not
-cover credentials, files outside the manifest, another Gemini conversation, or
-any write outside the round state/raw and Antigravity's exact runtime-state
-paths below. A genuine manifest expansion remains `BLOCKED` for controller
-decision.
+No external response authorizes code execution or an experiment. The final
+converged disposition is nevertheless mandatory before the controller selects
+or promotes a new scientific route.
 
-The TUI handoff is exactly one single-line document pointer:
-`Read @<question-path> and follow it exactly.` Do not paste the question body or
-any multiline prompt into the TUI. Mark `DISPATCHED` only after that one message
-is visibly accepted by the registered session.
+## Manager Execution
 
-The subagent may approve once only a displayed read-only command whose resolved
-paths are all in `02_GEMINI_LOCAL_SOURCE_MANIFEST.md`. Never use
-`--dangerously-skip-permissions`; deny invisible commands, writes, credentials,
-project-external paths, or broader execution. It may write only this round's
-state and `11_GEMINI_DIVERGENT_RAW.md`, returns one terminal payload to the
-controller, and is not reused for another round.
+Use `05_REVIEW_STATE.json` and `scripts/review_state.ps1` only inside the manager
+task. External prompts are submitted once after visible acceptance. Completed
+raws are archived byte-for-byte before they are used downstream. A stage with
+an accepted prompt is never resubmitted; a failure before visible acceptance
+does not consume the one external submission.
 
-Before dispatch, verify that the transport identity can update only the
-registered Antigravity conversation database, `bin/agentapi.bat`,
-`cache/last_conversations.json`, and Antigravity's own `log/` and `crashes/`
-runtime-output directories, including creation of only their required SQLite,
-atomic-replace, log, or crash auxiliary files. These paths are transport state,
-not review evidence, and their write allowance grants no additional read scope.
-This is a transport precondition, not a reason to grant write access to the
-whole user profile or to bypass Antigravity permissions. If any exact path is
-not writable, stop before dispatch with
-`BLOCKED_GEMINI_STATE_NOT_WRITABLE`.
+The manager directly resumes the registered Antigravity conversation and sends
+one document pointer for Gemini:
 
-## Pro
+```text
+Read @<question-path> and follow it exactly.
+```
 
-Reuse the one registered Luna Exchange task for both Pro stages. It owns two
-distinct registered ChatGPT Pro conversation URLs, one for `OPEN_DIVERGENT` and
-one for `CONVERGENT`, and switches the Codex in-app browser to the URL named by
-the current route. Do not create a second Codex Exchange task, merge the two Pro
-conversations, substitute another URL, or reuse one Pro page for both roles.
+Do not spawn a Gemini transport subagent. The user's standing authorization
+covers the project files explicitly listed in the Gemini manifest and the
+Antigravity CLI's own state root. It excludes credentials, personal files,
+unlisted project material, training, and unrelated execution. Do not ask the
+controller to repeat the registered authorization.
 
-The controller dispatches one route to the shared Exchange through
-`$hmasd-task-router`. The prompt contains only the route token, commit, question
-path, raw path, and deadline. The Exchange's terminal message also goes through
-that Skill using a freshly resolved controller route. The registry contains one
-Exchange route, two role-specific browser URLs, and a controller mirror; a live
-mismatch blocks before delivery and is never repaired by changing either task's
-model.
+For Pro, the manager alone uses the Codex in-app browser. It switches the Codex
+application to the manager task before browser work, opens the role's registered
+URL, verifies the conversation ID and visible `Pro`, submits the neutral handoff
+once, and waits only through the registered heartbeat. The browser surface is
+application-shared; task isolation is therefore an ownership rule, not a claim
+that the UI is physically private to the manager. The controller never invokes
+browser tools for a tracked review.
 
-One registered review heartbeat automation wakes that same Exchange while and
-only while a Pro stage is `DISPATCHED`. The Exchange activates and verifies the
-existing automation immediately after the browser visibly accepts the single
-submission; neither role creates a second automation or a second Exchange
-task. Each tick performs one bounded read of the registered
-page. A still-active response ends that Codex turn as `WAIT_PRO_THINKING`; the
-next heartbeat, rather than an in-turn wait or controller polling, performs the
-next read. The heartbeat carries no review content and never submits a prompt.
-`WAIT_PRO_THINKING` is legal only after the Exchange has verified that this
-automation is `ACTIVE` and still targets the registered Exchange task. If that
-verification fails, the Exchange must report `BLOCKED_HEARTBEAT_NOT_ACTIVE` to
-the controller instead of ending silently.
+One heartbeat automation targets the manager. The manager activates it only
+while a Pro response is pending, performs one bounded read per wake, and pauses
+it at every terminal boundary. It never uses shell sleep or sends repeated
+waiting messages to the controller.
 
-The Exchange alone operates the Codex in-app browser. It opens the registered
-URL for the current role even when another Pro page is already open, verifies
-the conversation ID and visible `Pro` setting, expands the neutral
-handoff by replacing only commit and question path, and submits once. It does
-not use Chrome, Computer Use, an external browser, a plugin, MCP, shell sleep,
-an alternate conversation, or a response-control button.
+## Outputs
 
-An empty current-session tab list is normal and is never a reason to ask the
-user to open a registered Pro URL. The Exchange must first claim an existing
-in-app-browser handoff tab whose URL exactly matches the registered role. If no
-such tab exists, it creates a fresh in-app-browser tab and navigates directly
-to that exact URL. After dispatch, this recovery is read-only: it never submits
-the question again or changes the route, deadline, conversation, or model.
+The manager owns these files:
 
-The Exchange performs bounded same-page reads until natural completion or the
-deadline. It writes the completed response exactly to the registered raw,
-compares file content byte-for-byte, transitions the stage, and sends one
-terminal payload back with the registered controller route. The controller does
-not poll the Exchange. Missing, partial, or ambiguous raw is incomplete
-evidence.
+```text
+11_GEMINI_DIVERGENT_RAW.md
+21_PRO_OPEN_RAW.md
+30_EVIDENCE_RECONCILIATION.md
+40_PRO_CONVERGENT_QUESTION.md
+41_PRO_CONVERGENT_RAW.md
+50_DISPOSITION.md
+```
 
-At natural completion, timeout, route mismatch, or actionable transport error,
-the Exchange pauses the registered review heartbeat and verifies `PAUSED`
-before sending its single terminal payload. If pausing cannot be confirmed, it
-sends nothing and lets the next tick retry. When a tick finds no external Pro
-stage in `DISPATCHED`, it pauses itself immediately. The Exchange may change
-only this automation's status and cadence; it may not change its target task,
-prompt contract, model, thinking, route token, conversation, or deadline.
+`50_DISPOSITION.md` is the controller's only scientific input from the round.
+It preserves the convergent decision and points to the immutable raws; it does
+not add a manager-selected successor. The final relay contains only the round,
+terminal state, disposition path, and blocker when present.
 
-Before any Pro stage becomes `COMPLETE`, the page must no longer expose an
-active-thinking control and the latest assistant response must satisfy every
-explicit section required by that stage's question. Intermediate status text,
-tool narration, or a short conclusion is not a completed raw. While the page is
-still active, keep the stage `DISPATCHED` and do not create its raw.
-
-If the controller detects a premature `COMPLETE` before any later external
-stage was dispatched, use `review_state.ps1 -Mode repair_incomplete` to restore
-the same stage to `DISPATCHED` while preserving its route, timestamp, deadline,
-and `dispatch_count=1`. Remove only the incomplete raw and downstream internal
-artifacts, then continue reading the same page. This is archival recovery, not
-a second submission; the question must never be sent again.
-
-## Finish
-
-Archive each raw before interpretation. Write
-`30_EVIDENCE_RECONCILIATION.md` only after both divergent raws; it may map
-claims to evidence and list contradictions but may not choose an algorithm.
-Write `50_DISPOSITION.md` only after the convergent raw and preserve its
-scientific decision without adding a Codex-selected successor. Update
-`docs/project/CURRENT_WORK.md`, `docs/project/ExpRecord.md`, and Git only once at
-the accepted disposition boundary.
+At `REVIEW_COMPLETE` the controller reads `50_DISPOSITION.md`, checks it against
+the immutable evidence and project constraints, records the accepted boundary,
+and operationalizes it. At `REVIEW_BLOCKED` the controller reports the exact
+transport or evidence blocker without substituting its own scientific decision.

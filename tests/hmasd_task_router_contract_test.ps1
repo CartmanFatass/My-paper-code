@@ -8,45 +8,50 @@ $skillPath = Join-Path $repo '.agents/skills/hmasd-task-router/SKILL.md'
 $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1'
 $reviewSkill = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
 $experimentSkill = Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md'
-$experimentProtocol = Join-Path $repo '.agents/skills/hmasd-experiment/references/experiment-protocol.md'
 $monitorRegistry = Join-Path $repo '.agents/skills/hmasd-experiment/references/monitor-task.json'
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
 foreach ($required in @(
-    'user-frozen',
-    'normal-research expectation',
-    'do not refresh the frozen route from live metadata',
-    '`thinking` is forbidden',
-    'Resolve the controller route again',
-    'registered heartbeat automation',
-    'heartbeat only schedules one bounded monitor turn',
-    'Do not retry an ambiguous delivery')) {
+    'Mandatory communication contract for every HMASD Codex session',
+    'Live metadata is authoritative',
+    'Omitting `model` or `thinking` is forbidden',
+    'The recipient resolves the controller or other destination again',
+    'one `START_REVIEW`',
+    '`REVIEW_COMPLETE`',
+    '`REVIEW_BLOCKED` from the External Review Manager',
+    'heartbeat ticks remain inside the monitor task',
+    'ambiguous delivery is never repeated')) {
     if (-not $skillText.Contains($required)) {
-        throw "Task router Skill is missing: $required"
+        throw "Communication Skill is missing: $required"
+    }
+}
+foreach ($forbidden in @('ExpectedModel', 'ExpectedThinking', 'frozen route')) {
+    if ($skillText.Contains($forbidden)) {
+        throw "Communication Skill retains static routing: $forbidden"
     }
 }
 
-foreach ($path in @($reviewSkill, $experimentSkill, $experimentProtocol)) {
+foreach ($path in @($reviewSkill, $experimentSkill)) {
     if (-not (Get-Content -LiteralPath $path -Raw).Contains('hmasd-task-router')) {
-        throw "Workflow does not require hmasd-task-router: $path"
+        throw "Role Skill does not require common communication: $path"
     }
 }
 
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
-if ($monitor.schema_version -ne 4 -or
+if ($monitor.schema_version -ne 5 -or
     $monitor.monitor_route.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
-    $monitor.monitor_route.model -ne 'gpt-5.6-luna' -or
-    $monitor.monitor_route.thinking -ne 'medium' -or
     $monitor.controller_return_route.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
-    $monitor.controller_return_route.model -ne 'gpt-5.6-sol' -or
-    $monitor.controller_return_route.thinking -ne 'xhigh' -or
-    $monitor.controller_return_route.source -ne 'user_frozen_normal_research_default' -or
-    $monitor.controller_return_route.change_policy -ne 'explicit_user_instruction_only' -or
+    $monitor.controller_return_route.route_policy -ne 'resolve_live_immediately_before_each_send' -or
     $monitor.automation.id -ne 'hmasd-r35-single-thread-monitor' -or
-    $monitor.automation.kind -ne 'heartbeat' -or
     $monitor.automation.target_thread_id -ne $monitor.monitor_route.thread_id -or
     $monitor.routing_skill -ne '.agents/skills/hmasd-task-router/SKILL.md') {
-    throw 'Persistent monitor registry is not the exact two-way route contract'
+    throw 'Persistent monitor registry is not the stable-ID communication contract'
+}
+foreach ($route in @($monitor.monitor_route, $monitor.controller_return_route)) {
+    if ($null -ne $route.PSObject.Properties['model'] -or
+        $null -ne $route.PSObject.Properties['thinking']) {
+        throw 'Monitor registry must not mirror task model or thinking'
+    }
 }
 
 $tempRoot = Join-Path ([IO.Path]::GetTempPath()) ('hmasd-task-router-' + [guid]::NewGuid().ToString('N'))
@@ -55,27 +60,22 @@ $threadId = '11111111-2222-3333-4444-555555555555'
 try {
     [void](New-Item -ItemType Directory -Path $tempRoot)
     & sqlite3 $db 'CREATE TABLE threads (id TEXT PRIMARY KEY, model TEXT, reasoning_effort TEXT, archived INTEGER);'
-    & sqlite3 $db "INSERT INTO threads VALUES ('$threadId','gpt-5.6-luna','high',0);"
+    & sqlite3 $db "INSERT INTO threads VALUES ('$threadId','gpt-5.6-luna','max',0);"
     if ($LASTEXITCODE -ne 0) {
-        throw 'Unable to create task-router fixture database'
+        throw 'Unable to create communication fixture database'
     }
 
-    $route = & $resolver -ThreadId $threadId -ExpectedModel 'gpt-5.6-luna' `
-        -ExpectedThinking 'high' -StateDb $db | ConvertFrom-Json
+    $route = & $resolver -ThreadId $threadId -StateDb $db | ConvertFrom-Json
     if ($route.hostId -ne 'local' -or $route.threadId -ne $threadId -or
-        $route.model -ne 'gpt-5.6-luna' -or $route.thinking -ne 'high') {
-        throw 'Resolver did not preserve the exact live route'
+        $route.model -ne 'gpt-5.6-luna' -or $route.thinking -ne 'max') {
+        throw 'Resolver did not return the exact live route'
     }
 
-    $mismatchBlocked = $false
-    try {
-        & $resolver -ThreadId $threadId -ExpectedModel 'gpt-5.6-sol' `
-            -ExpectedThinking 'high' -StateDb $db | Out-Null
-    } catch {
-        $mismatchBlocked = $true
-    }
-    if (-not $mismatchBlocked) {
-        throw 'Resolver accepted a model mismatch'
+    & sqlite3 $db "UPDATE threads SET archived=1 WHERE id='$threadId';"
+    $archivedBlocked = $false
+    try { & $resolver -ThreadId $threadId -StateDb $db | Out-Null } catch { $archivedBlocked = $true }
+    if (-not $archivedBlocked) {
+        throw 'Resolver accepted an archived task'
     }
 } finally {
     if (Test-Path -LiteralPath $tempRoot) {

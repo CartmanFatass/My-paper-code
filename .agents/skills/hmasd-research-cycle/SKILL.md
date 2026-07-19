@@ -9,14 +9,16 @@ Confirm the entry condition before doing work. If neither an explicit invocation
 nor an `ACTIVE` autonomous boundary exists, return control without starting a
 cycle. Also require `docs/project/CURRENT_WORK.md` to point to one accepted
 convergent-Pro disposition that fixes the scientific route and next evidence
-source. If that pointer is absent, enter `$hmasd-review-round` or return
-`BLOCKED_MISSING_PRO_DISPOSITION`; do not design the route locally.
+source. If that pointer is absent, return `BLOCKED_MISSING_PRO_DISPOSITION` so
+the controller can prepare an evidence boundary and message the External Review
+Manager; do not design the route locally.
 
 Read `docs/project/CURRENT_WORK.md`,
 `docs/project/ALGORITHM_PRINCIPLES.md`, and the current contract in
-`docs/project/IMPLEMENTATION_PLAN.md`. Read
-`docs/project/MARL_ENGINEERING_PRINCIPLES.md` only if this iteration changes or
-reviews executable MARL code.
+`docs/project/IMPLEMENTATION_PLAN.md`. If this iteration changes executable
+MARL code, dispatch it through `$hmasd-implementer`; if the controller must
+implement directly after two failed attempts, it assumes that role for the
+implementation turn.
 
 ## Run One Evidence-Bearing Iteration
 
@@ -31,14 +33,16 @@ reviews executable MARL code.
 4. Implement under the collaboration rules in `AGENTS.md`. Do not create a
    second brief, an internal reviewer, a task report, or a task commit.
 5. Let the controller inspect the integrated path once. If a real experiment
-   lifecycle is required, enter `$hmasd-experiment`; implementation completion
-   itself is not launch authority.
+   is authorized, launch it under `ExpRecord.md`, then assign its authoritative
+   status path to the persistent monitor; implementation completion itself is
+   not launch authority.
 6. Apply the registered outcome branch to one accepted evidence source. If the
    result leaves a new algorithm, portfolio, or next-evidence decision open,
-   stop and enter `$hmasd-review-round`; do not invent the successor.
+   stop and send the immutable evidence boundary to the External Review
+   Manager; do not invent the successor.
 
-Retry only a concrete operational failure under the same contract and within
-the experiment protocol's retry limit. A valid scientific negative closes its
+Retry only a concrete operational failure under the same contract and its
+registered `ExpRecord.md` retry limit. A valid scientific negative closes its
 line without rescue.
 
 ## Stop

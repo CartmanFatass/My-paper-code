@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Review Round"
-  short_description: "Coordinate the bounded HMASD reviewer round"
-  default_prompt: "Use $hmasd-review-round to run this tracked HMASD external-review exchange and archive its evidence."
+  short_description: "Run the complete tracked review in one Review Manager"
+  default_prompt: "Use $hmasd-review-round as the persistent External Review Manager, complete every registered external stage, archive its evidence, and return only the final disposition or terminal blocker."

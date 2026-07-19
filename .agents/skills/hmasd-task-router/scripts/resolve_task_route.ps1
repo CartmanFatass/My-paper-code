@@ -4,8 +4,6 @@ param(
     [ValidatePattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')]
     [string]$ThreadId,
 
-    [string]$ExpectedModel,
-    [string]$ExpectedThinking,
     [string]$StateDb = (Join-Path $env:USERPROFILE '.codex\state_5.sqlite')
 )
 
@@ -40,15 +38,9 @@ if ([string]::IsNullOrWhiteSpace([string]$row.model) -or
     [string]::IsNullOrWhiteSpace([string]$row.reasoning_effort)) {
     throw "Codex task has incomplete route metadata: $ThreadId"
 }
-if ($ExpectedModel -and $row.model -cne $ExpectedModel) {
-    throw "Model mismatch for $ThreadId; live=$($row.model), expected=$ExpectedModel"
-}
-if ($ExpectedThinking -and $row.reasoning_effort -cne $ExpectedThinking) {
-    throw "Thinking mismatch for $ThreadId; live=$($row.reasoning_effort), expected=$ExpectedThinking"
-}
 
 [ordered]@{
-    hostId  = 'local'
+    hostId = 'local'
     threadId = [string]$row.id
     model = [string]$row.model
     thinking = [string]$row.reasoning_effort

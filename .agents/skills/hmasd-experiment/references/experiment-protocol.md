@@ -1,95 +1,48 @@
-# HMASD Experiment Protocol
+# HMASD Persistent Monitor Protocol
 
-## Launch Boundary
+## Assignment
 
-Confirm the exact commit, branch, runner, configuration, seeds, environment and
-optimizer budgets, output root, expected wall clock, placement, and status
-authority. Generate the timestamp once at launch; dry runs use `DRY_RUN`.
+Accept only one active run. A `MONITOR_ASSIGNMENT` must provide:
 
-The monitor deadline is:
+- run ID and absolute run root;
+- absolute authoritative `runner_status.txt` path;
+- exact progress files and fields, or `unavailable`;
+- terminal spellings and terminal payload key;
+- deadline and initial cadence;
+- the registered automation ID.
 
-```text
-launch time + registered expected wall clock + max(30 minutes, 25% of expected)
-```
+Use `monitor-task.json` for stable task and automation IDs only. Resolve all
+task models and reasoning effort live through `$hmasd-task-router`; registry
+files never supply them.
 
-Record it in the monitor prompt. A contract without an expected wall clock is
-not launch-ready.
+On acceptance, retarget the existing heartbeat automation to this monitor task,
+install the assignment prompt, set it `ACTIVE`, and verify ID, target, prompt,
+schedule, and state. Do not create another automation or send a duplicate
+assignment.
 
-Register the smallest authoritative progress sources exposed by the runner and
-the exact fields that matter for this experiment. Prefer one per-arm status
-JSON with completed/total steps and updates, plus already-terminal arm metrics.
-If no online metric exists, record `unavailable`; never infer it by scanning
-logs, TensorBoard events, checkpoints, stdout, or stderr.
+## One bounded heartbeat
 
-Create the final run root and authoritative `runner_status.txt` at launch.
-Stage raw and result payloads inside that root. Publish a file or result
-directory with an atomic replace/rename inside the root, then atomically publish
-the terminal status that references it. Never rename an external staging root
-into place after completion.
+Read the status file exactly once and each registered progress source at most
+once. Do not sleep, poll, watch, scan the run directory, parse unregistered
+logs, restart work, or interpret scientific results.
 
-Use the registered cloud scheduler for cloud work. Treat the server as
-available until an actual connection failure. Put large output on the data disk
-and long commands in the registered background runner.
-
-## Persistent Luna Monitor Task
-
-After the live status file exists, bind the run to the one task and one
-heartbeat automation registered in `references/monitor-task.json`. The task is
-created once with:
+For a running state, write one concise `MONITOR_PROGRESS` entry in this task:
 
 ```text
-model: gpt-5.6-luna
-thinking: medium
-workspace: C:\project\HMASD
+observed_at=<time>
+phase=<phase>
+progress=<registered counters and percent>
+elapsed=<duration>
+eta=<straight-line estimate or unavailable>
+metrics=<registered fields or unavailable>
 ```
 
-Do not create a new monitor task or automation per run. Only one run may be
-bound at a time. Immediately before binding, use `$hmasd-task-router` to resolve
-both the registered monitor and the active controller. Their live routes must
-match their registry mirrors. Update the existing automation by its registered
-ID, target it at the exact monitor thread, set it `ACTIVE`, and verify both the
-status and target. This automation update is the assignment; do not also send a
-duplicate assignment message.
+Then update only the existing automation schedule when the ETA bucket changes,
+verify it remains targeted here and `ACTIVE`, and end with `MONITOR_RUNNING`.
+Do not send running or unchanged-state messages to the controller.
 
-The controller owns only initial binding: install the run prompt, choose the
-initial cadence, set `ACTIVE`, and verify the exact target. From that point
-until terminal relay, the registered monitor task exclusively owns ETA
-estimation, cadence updates, and terminal pause. The controller must not change
-the heartbeat during an active run. Its only recovery authority is the single
-direct inspection after deadline plus one heartbeat interval when no relay was
-received.
-
-The automation prompt contains only its automation ID, the absolute run root
-and status path, the registered progress paths and fields, registered terminal
-spelling (`complete` or `completed`, plus `failed`), payload keys, monitor
-deadline, terminal schema, the controller registry mirror, and the
-read-only/no-science boundary. It requires the monitor to read
-`$hmasd-task-router` before any terminal relay.
-
-Each heartbeat starts one bounded monitor turn. That turn reads
-`runner_status.txt` exactly once and each explicitly registered progress source
-at most once. It does not start a watcher, sleep, poll, scan other artifacts,
-change experiment files, restart the run, or interpret science. Every running
-tick writes one concise `MONITOR_PROGRESS` entry in the dedicated monitor task
-with observation time, phase, per-arm completed/total steps and updates,
-percent complete, elapsed time, a clearly labelled straight-line ETA when the
-available counters support it, and the registered key metrics or `unavailable`.
-It sends no running update to the controller and ends with `MONITOR_RUNNING`;
-the next heartbeat is the only continuation mechanism. A Codex final answer is
-never treated as a live background waiter.
-
-If every registered training counter is complete while the authoritative
-runner state remains `running`, report `FINALIZATION_PENDING`, set training ETA
-to `complete` and experiment ETA to `unavailable`, and keep the 5-minute
-cadence. Training completion is not an experiment terminal: do not pause or
-relay until the parent publishes `complete`/`completed` or `failed`.
-
-### ETA-based heartbeat cadence
-
-Estimate remaining time from the slowest active arm using elapsed time and its
-completed/total counter. Use the estimate only after at least 5% completion and
-when the progress timestamp is fresh; otherwise use the 15-minute fallback.
-The registered cadence buckets are:
+Use the slowest active arm. Estimate ETA only after at least 5% completion and
+with fresh progress:
 
 ```text
 ETA > 4 hours       -> 30 minutes
@@ -99,28 +52,23 @@ ETA <= 45 minutes  -> 5 minutes
 unavailable/stale  -> 15 minutes
 ```
 
-After writing `MONITOR_PROGRESS`, update only the existing heartbeat automation
-when the desired interval differs. Preserve its ID, name, target task, prompt,
-and `ACTIVE` state, changing only the schedule and the prompt's declared current
-cadence, then verify the target and state. Tighten immediately as completion
-approaches. Relax to a longer interval only when ETA exceeds the current
-bucket's upper boundary by 25%, preventing cadence oscillation. Never create a
-second automation. Terminal, error, and deadline handling takes precedence and
-pauses instead of rescheduling.
+Relax to a longer interval only after ETA crosses its boundary by 25%. Tighten
+immediately. If training counters are complete while runner state is still
+running, report `FINALIZATION_PENDING`, use 5 minutes, and wait for the
+authoritative terminal status.
 
-Every existing status must parse completely. `running` is the only nonterminal
-state; terminal states are the registered `complete`/`completed` and `failed`.
-Every state contains `updated` and `phase`. Validate `run_root`, `run_id`, and
-terminal payload containment when present. Malformed, missing, unknown, or
-escaping data is an immediate actionable monitor error.
+## Terminal relay
 
-At terminal state, malformed status, or deadline, the monitor first resolves
-the controller's live route and verifies the frozen registered expectation. If
-they differ, it keeps the heartbeat `ACTIVE`, sends nothing, displays
-`ROUTE_MISMATCH_WAITING`, and retries the route check on the next tick. It never
-refreshes the frozen route from live metadata. After a match, it updates its
-registered automation to `PAUSED`, verifies that state, and sends exactly one
-final payload through `$hmasd-task-router`:
+Valid nonterminal state is `running`; valid terminal states are the assignment's
+registered complete spelling and `failed`. Missing, malformed, unknown, stale
+beyond the deadline, or path-escaping status is an actionable monitor error.
+
+At terminal, error, or deadline:
+
+1. update the existing automation to `PAUSED`;
+2. verify the same automation is paused;
+3. resolve the controller's live route immediately;
+4. send exactly one payload through `$hmasd-task-router`:
 
 ```text
 EXPERIMENT_MONITOR
@@ -134,37 +82,8 @@ payload=<result path, direct-error path, or none>
 reason=<one actionable line or none>
 ```
 
-The terminal send must include the freshly resolved controller `model` and
-`thinking`; omission is forbidden. Do not send an additional message or create
-a second heartbeat, automation, dashboard, replacement monitor, or monitor
-state file. If pausing cannot be confirmed, do not relay a terminal payload;
-leave the automation active so the next bounded tick can retry the pause.
-
-On `complete`, the monitor may read the contained result once to display only
-the terminal status and the exact registered key fields in its own task. The
-controller relay still carries the result path as authority; the monitor does
-not choose a branch or add scientific interpretation.
-
-The controller does not poll or sleep while the monitor owns the run. The
-heartbeat tick itself applies the deadline and relays `TIMEOUT` after first
-pausing. If no relay exists after the deadline plus one heartbeat interval, the
-controller performs one direct automation/status inspection. A user-requested
-progress read is a separate one-time controller inspection and does not replace
-the monitor.
-
-## Failure Classification and Retry Limit
-
-Read only the status authority, the direct error needed to locate the first
-failed boundary, and at most one comparator artifact. Distinguish launch,
-collector, training, analyzer, packaging, monitor, invalid implementation, and
-valid scientific failure.
-
-State one falsifiable operational cause and run at most one diagnostic. The same
-root cause receives at most one repair and one retry. If it recurs, return
-`BLOCKED_REPEATED_OPERATIONAL_FAILURE` to the controller; do not continue a
-repair loop. A materially different direct error may be classified separately.
-
-Use the nearest known-good runner/configuration and change only the failed
-stage. Do not retrain for analyzer-only repair. Do not change budget, seed,
-reward, model, threshold, estimand, or placement as an operational repair, and
-do not rescue a retired scientific line.
+If pause verification fails, send nothing and leave the next heartbeat able to
+retry. If live controller routing cannot be resolved, keep the heartbeat active
+and retry only that resolution on the next tick. Never refresh a route mirror,
+change a task model, create a replacement task, or send a second terminal
+payload.

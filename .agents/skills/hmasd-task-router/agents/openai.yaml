@@ -1,4 +1,4 @@
 interface:
-  display_name: "HMASD Task Router"
-  short_description: "Preserve exact task models in HMASD relays"
-  default_prompt: "Use $hmasd-task-router to route this HMASD task message without changing either task model or reasoning setting."
+  display_name: "HMASD Communication"
+  short_description: "Preserve live task routes in every HMASD relay"
+  default_prompt: "Use $hmasd-task-router to resolve both tasks live and deliver one message with the recipient's exact current model and thinking values."

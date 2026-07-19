@@ -1,72 +1,59 @@
 ---
 name: hmasd-task-router
-description: Use whenever an HMASD workflow sends to an existing Codex task, expects a terminal message back from that task, or assigns work to the persistent Luna Medium experiment monitor. It resolves the live model and thinking settings for both endpoints, prevents model replacement, and forbids ambiguous or duplicate delivery. Do not use for ordinary work inside the active task.
+description: Mandatory communication contract for every HMASD Codex session. Read at task entry and use before every message to an existing Codex task or expected reply. Resolve both endpoints from live metadata and send the target's exact current model and thinking values so communication never changes task routing. This Skill does not own research, implementation, review, monitoring, task creation, or model selection.
 ---
 
-# HMASD Task Router
+# HMASD Communication
 
-This Skill owns Codex task routing only. It does not own algorithm decisions,
-review state, experiment state, task creation, or model selection.
+Every HMASD session reads this Skill at entry. It governs communication only;
+the session's role-specific Skill governs its work.
 
-## Resolve Both Endpoints
+## Resolve Live Routes
 
-Before any cross-task send, run `scripts/resolve_task_route.ps1` separately for
-the target task and the active controller task. Live Codex task metadata is the
-actual delivery route. The registered controller route is the user-frozen
-normal-research expectation, defaulting to `gpt-5.6-sol` / `xhigh`; it is a
-guard and never changes the task model.
+Immediately before a cross-task send, run
+`scripts/resolve_task_route.ps1 -ThreadId <id>` for the sender and recipient.
+Require one unarchived task with nonempty `hostId`, `threadId`, `model`, and
+`thinking`.
 
-Require an unarchived task and nonempty `model` and `thinking`. If a registered
-value differs from live metadata, do not send, do not change either task's
-model, and do not refresh the frozen route from live metadata. Return
-`BLOCKED_ROUTE_MISMATCH`. Change the registered expectation only when the user
-explicitly directs that change.
+Registries may store stable task IDs and roles, but must not prescribe or mirror
+models or reasoning effort. Live metadata is authoritative. Never infer the
+recipient route from the sender, a registry, an earlier message, or a project
+document. Never change a task's model or thinking to satisfy delivery.
 
-The resolved route has exactly these fields:
+## Send Exactly Once
+
+Call `send_message_to_thread` with the recipient's resolved fields:
 
 ```text
-hostId
-threadId
-model
-thinking
+hostId=<live recipient hostId>
+threadId=<live recipient threadId>
+model=<live recipient model>
+thinking=<live recipient thinking>
+prompt=<task-local payload>
 ```
 
-## Send to a Persistent Codex Task
+Omitting `model` or `thinking` is forbidden. Supplying their exact live values
+preserves the recipient's current route; it does not select a new route.
 
-Call `send_message_to_thread` with exactly the resolved target `hostId`,
-`threadId`, `model`, and `thinking`, plus `prompt`. Omitting `model` or
-`thinking` is forbidden. Supplying the target's exact current pair preserves
-its routing; it does not change the model.
+The recipient resolves the controller or other destination again immediately
+before replying and uses that destination's exact live four-field route. A task
+must not reuse route metadata received in the prompt as current truth.
 
-The receiving task returns its terminal payload with the controller's resolved
-four route fields plus `prompt`. Resolve the controller route again immediately
-before that return if the user may have changed its model or reasoning setting.
+Send one task message and one terminal reply unless the owning role contract
+explicitly defines another message. Do not send polling, waiting, heartbeat, or
+unchanged-state messages across tasks. A definite pre-delivery `notLoaded`
+error permits one identical retry after loading the same target. An accepted or
+ambiguous delivery is never repeated.
 
-If a send returns a definite pre-delivery `notLoaded` failure, load only the
-registered target task, retry the identical route once, then restore the
-controller task. Do not retry an ambiguous delivery, create a replacement task,
-substitute another role, or send the same route twice.
+## Role Boundaries
 
-## Use the Persistent Experiment Monitor
+- The controller sends a self-contained implementation task and receives one
+  implementation terminal report.
+- The controller sends one `START_REVIEW` and receives one `REVIEW_COMPLETE` or
+  `REVIEW_BLOCKED` from the External Review Manager.
+- The controller assigns one run and receives one terminal payload from the
+  experiment monitor; heartbeat ticks remain inside the monitor task.
 
-`$hmasd-experiment` owns one registered Luna Medium monitor task and one
-registered heartbeat automation. Before each assignment, resolve both that task
-and the active controller. The controller binds the run by updating the
-existing automation and targeting the resolved monitor thread; it does not
-create another task or automation and does not send a duplicate assignment.
-
-Each heartbeat only schedules one bounded monitor turn; it is not a transport
-substitute and carries no terminal result. At terminal state the monitor first
-resolves live controller metadata and verifies the frozen route. A mismatch
-keeps the heartbeat active and sends nothing. After a match, the monitor pauses
-and verifies the automation, then sends one terminal payload with the exact
-five-field route. Its Luna Medium setting is fixed when the monitor task is
-created; the controller route never selects or changes either model.
-
-## Stop Conditions
-
-Return `BLOCKED` before delivery when a task is missing, archived, lacks route
-metadata, disagrees with its registered mirror, or the previous delivery is
-ambiguous. A heartbeat may wake the registered monitor, but never replaces the
-exact terminal route. Never use a shell wait, alternate task, duplicate
-automation, or sender-default model inference.
+Communication does not create a task, switch a task, operate a browser, update
+an automation, authorize an experiment, or choose a scientific route. Return
+`BLOCKED_ROUTE` only when live routing cannot be resolved safely.
