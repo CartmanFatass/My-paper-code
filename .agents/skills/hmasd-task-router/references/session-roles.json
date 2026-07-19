@@ -9,8 +9,8 @@
     },
     "external_review_manager": {
       "kind": "persistent_role_session",
-      "thread_id": null,
-      "registration_status": "UNASSIGNED",
+      "thread_id": "019f7bb7-6718-7030-9107-5fae57da898a",
+      "registration_status": "ACTIVE",
       "role_skill": ".agents/skills/hmasd-review-round/SKILL.md"
     },
     "gemini_divergent_exchange": {
