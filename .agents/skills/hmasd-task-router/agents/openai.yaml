@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Communication"
-  short_description: "Route one isolated persistent HMASD session safely"
-  default_prompt: "Use $hmasd-task-router to deliver one minimal persistent-session assignment or callback with live recipient metadata and tool-confirmed delivery; never use it for a subagent."
+  short_description: "Route sessions and migrate topology safely"
+  default_prompt: "Use $hmasd-task-router to deliver one model-preserving persistent-session message or audit and update one explicit session-topology change; never use it for a subagent."

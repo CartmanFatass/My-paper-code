@@ -56,6 +56,8 @@ foreach ($legacy in @(
 $agents = Read-Text (Join-Path $repo "AGENTS.md")
 foreach ($required in @(
     "Every persistent HMASD Codex session reads",
+    "Any persistent-session topology change also uses that Skill",
+    "Do not send across a partially migrated graph",
     "Temporary subagents do not use that Skill",
     "docs/project/CURRENT_WORK.md",
     "The controller alone owns",

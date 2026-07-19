@@ -6,6 +6,7 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skillPath = Join-Path $repo '.agents/skills/hmasd-task-router/SKILL.md'
 $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_task_route.ps1'
+$topologyAuditor = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/audit_session_topology.ps1'
 $rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
 $sessionRoleSkills = @(
     (Join-Path $repo '.agents/skills/hmasd-code-manager/SKILL.md'),
@@ -35,11 +36,22 @@ foreach ($required in @(
     'Copy the recipient''s current values unchanged',
     'Send once',
     'same recipient `threadId`',
+    'Immediately after an accepted send, resolve the same recipient again',
+    'post-send `hostId`, `threadId`, `model`, and `thinking`',
+    'TASK_ROUTE_CORRUPTION',
     'ambiguous send is never repeated',
     'Before replying, resolve the reply destination again',
     'Controller Send Contract',
     'take the recipient `thread_id` only from that role entry',
     'controller records no waiting state',
+    'Topology Change Protocol',
+    'scripts/audit_session_topology.ps1',
+    'update all applicable surfaces in the same boundary',
+    'sender role Skill''s destination and message schema',
+    'receiver role Skill''s callback destination and terminal schema',
+    'heartbeat ownership and the condition for deleting it',
+    'Do not message any affected persistent session while its graph is internally inconsistent',
+    'register only its stable task ID',
     'External Review Topology',
     'controller <-> gemini_divergent_exchange',
     'controller <-> open_divergent_exchange',
@@ -133,6 +145,17 @@ foreach ($path in $sessionRoleSkills) {
         -not $text.Contains('role_skill=')) {
         throw "Role Skill lacks the common router or explicit role grant: $path"
     }
+}
+
+$audit = & $topologyAuditor `
+    -RepoRoot $repo `
+    -Terms @('controller <-> convergent_exchange', 'Reply to Controller') |
+    ConvertFrom-Json
+if ($audit.schema_version -ne 1 -or
+    -not ($audit.always_inspect -contains '.agents/skills/hmasd-task-router/SKILL.md') -or
+    -not ($audit.matches.path -contains '.agents/skills/hmasd-task-router/SKILL.md') -or
+    -not ($audit.matches.path -contains '.agents/skills/hmasd-review-exchange/SKILL.md')) {
+    throw 'Topology impact audit did not discover both router and role-Skill surfaces'
 }
 $implementerText = Get-Content -LiteralPath $implementerSkill -Raw
 if (-not $implementerText.Contains('native subagent result channel') -or

@@ -1,6 +1,6 @@
 ---
 name: hmasd-task-router
-description: Mandatory communication-only Skill for every persistent HMASD Codex session. Use before every message to an existing session and every expected callback. Never use it for temporary subagents. Resolve the recipient's live delivery metadata, carry one minimal session-role assignment, and require tool-level delivery proof without selecting or changing any model, role, workflow, or project decision.
+description: Mandatory communication-only Skill for every persistent HMASD Codex session and for active-controller maintenance of the persistent-session topology. Use before every message or callback, and whenever roles, edges, session bindings, or callback destinations change. Never use it for temporary subagents. Resolve and preserve live delivery metadata, audit every topology change across affected role Skills and contracts, and require tool-level delivery plus post-send route invariance without selecting or changing a model or project decision.
 ---
 
 # HMASD Task Router
@@ -104,6 +104,13 @@ recipient `threadId` resolved immediately before the call. Commentary, a final
 response in the sender task, heartbeat text, or delegation metadata is not
 delivery.
 
+Immediately after an accepted send, resolve the same recipient again. Require
+the post-send `hostId`, `threadId`, `model`, and `thinking` to equal the
+pre-send values exactly. If any field changed, do not resend, repair, or mirror
+a setting. Return `TASK_ROUTE_CORRUPTION` with the before/after values to the
+active controller. This post-send check is delivery validation, not permission
+to alter either task.
+
 A definite pre-acceptance `notLoaded` error permits one identical retry after
 loading the same target. An accepted or ambiguous send is never repeated. If a
 required callback cannot obtain delivery proof, the sender follows its role
@@ -129,6 +136,42 @@ Do not send to an ID supplied in free-form task text, reuse cached live metadata
 compare against a preferred model, or mutate either session's model or thinking.
 The controller records no waiting state and does not manage a role session's
 heartbeat.
+
+## Topology Change Protocol
+
+Only the active controller changes the persistent-session graph. Before editing
+an edge, role, callback target, or session binding:
+
+1. state the old graph and intended graph;
+2. run `scripts/audit_session_topology.ps1 -Terms <old and new role, message,
+   and callback names>`;
+3. inspect every returned match plus every `always_inspect` path;
+4. freeze which sessions are retained, archived, replaced, or newly created;
+5. make one active-line change with no compatibility route.
+
+For every changed edge, update all applicable surfaces in the same boundary:
+
+- `references/session-roles.json` and its schema version;
+- this Skill's legal graph and receive contract;
+- the sender role Skill's destination and message schema;
+- the receiver role Skill's callback destination and terminal schema;
+- heartbeat ownership and the condition for deleting it;
+- role helper scripts and `agents/openai.yaml` prompts that name the flow;
+- role-specific registries and workflow documentation;
+- `AGENTS.md` dispatch and firewall statements;
+- every affected contract test.
+
+Do not message any affected persistent session while its graph is internally
+inconsistent. After editing, rerun the audit using removed role/message terms,
+inspect every remaining match, validate all affected Skills and contract tests,
+and commit/push the complete boundary before the next workflow dispatch.
+
+When a topology change creates or replaces a persistent session, create it once
+with the model/thinking explicitly requested by the user, resolve its live route,
+then register only its stable task ID. Never store route fields, reuse the old
+session for a new role, or silently substitute a task after creation failure.
+Archive an explicitly removed session after its replacement or removal boundary
+is unambiguous.
 
 ## External Review Topology
 

@@ -7,6 +7,12 @@ Every persistent HMASD Codex session reads
 and defines the session assignment envelope; it owns no research,
 implementation, review, experiment, Git, or project-state decision.
 
+Any persistent-session topology change also uses that Skill. Before changing a
+role, edge, callback destination, or session binding, run its topology impact
+audit and update the registry, sender and receiver role Skills, heartbeat
+terminal behavior, helper prompts/scripts, and affected contract tests in one
+Git boundary. Do not send across a partially migrated graph.
+
 Temporary subagents do not use that Skill. They are created for one bounded
 implementation assignment, read only their named role Skill and inputs, and
 return through the native subagent channel. Cross-session route metadata,
