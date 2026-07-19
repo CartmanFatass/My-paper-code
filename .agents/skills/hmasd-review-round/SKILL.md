@@ -115,13 +115,20 @@ Exchange route, two role-specific browser URLs, and a controller mirror; a live
 mismatch blocks before delivery and is never repaired by changing either task's
 model.
 
+One registered review heartbeat automation wakes that same Exchange while and
+only while a Pro stage is `DISPATCHED`. The controller activates the existing
+automation after verified dispatch; it never creates a second automation or a
+second Exchange task. Each tick performs one bounded read of the registered
+page. A still-active response ends that Codex turn as `WAIT_PRO_THINKING`; the
+next heartbeat, rather than an in-turn wait or controller polling, performs the
+next read. The heartbeat carries no review content and never submits a prompt.
+
 The Exchange alone operates the Codex in-app browser. It opens the registered
 URL for the current role even when another Pro page is already open, verifies
 the conversation ID and visible `Pro` setting, expands the neutral
 handoff by replacing only commit and question path, and submits once. It does
 not use Chrome, Computer Use, an external browser, a plugin, MCP, shell sleep,
-heartbeat, automation, an alternate conversation, or a response-control
-button.
+an alternate conversation, or a response-control button.
 
 An empty current-session tab list is normal and is never a reason to ask the
 user to open a registered Pro URL. The Exchange must first claim an existing
@@ -136,6 +143,14 @@ compares file content byte-for-byte, transitions the stage, and sends one
 terminal payload back with the registered controller route. The controller does
 not poll the Exchange. Missing, partial, or ambiguous raw is incomplete
 evidence.
+
+At natural completion, timeout, route mismatch, or actionable transport error,
+the Exchange pauses the registered review heartbeat and verifies `PAUSED`
+before sending its single terminal payload. If pausing cannot be confirmed, it
+sends nothing and lets the next tick retry. When a tick finds no external Pro
+stage in `DISPATCHED`, it pauses itself immediately. The Exchange may change
+only this automation's status and cadence; it may not change its target task,
+prompt contract, model, thinking, route token, conversation, or deadline.
 
 Before any Pro stage becomes `COMPLETE`, the page must no longer expose an
 active-thinking control and the latest assistant response must satisfy every

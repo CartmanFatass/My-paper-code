@@ -10,7 +10,7 @@ $stateScript = Join-Path $repo ".agents/skills/hmasd-review-round/scripts/review
 
 $registryText = Get-Content -LiteralPath $registryPath -Raw
 $registry = $registryText | ConvertFrom-Json
-if ($registry.schema_version -ne 12 -or
+if ($registry.schema_version -ne 13 -or
     $registry.gemini_transport.kind -ne "one_shot_subagent_antigravity_cli" -or
     $registry.gemini_transport.subagent_model -ne "gpt-5.6-terra" -or
     $registry.gemini_transport.reasoning_effort -ne "medium" -or
@@ -25,6 +25,9 @@ if ($registry.schema_version -ne 12 -or
     $registry.pro_transport.codex_exchange.thread_id -ne "019f716c-676f-7673-9782-f37b72f200d2" -or
     $registry.pro_transport.codex_exchange.model -ne "gpt-5.6-luna" -or
     $registry.pro_transport.codex_exchange.thinking -ne "high" -or
+    $registry.pro_transport.heartbeat.automation_id -ne "hmasd-external-review-exchange" -or
+    $registry.pro_transport.heartbeat.target_thread_id -ne "019f716c-676f-7673-9782-f37b72f200d2" -or
+    $registry.pro_transport.heartbeat.terminal_order -ne "pause_verify_then_relay" -or
     $registry.reviewers.open_divergent.transport -ne "shared_luna_exchange_in_app_browser" -or
     $registry.reviewers.open_divergent.codex_exchange_ref -ne "pro_transport.codex_exchange" -or
     $registry.reviewers.convergent.transport -ne "shared_luna_exchange_in_app_browser" -or
@@ -36,7 +39,7 @@ if ($registry.schema_version -ne 12 -or
 }
 
 $skillText = Get-Content -LiteralPath $skillPath -Raw
-foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "empty current-session tab list is normal", "creates a fresh in-app-browser tab", "active-thinking control", "repair_incomplete", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
+foreach ($required in @("one registered Luna Exchange", "two role-specific browser URLs", "Codex in-app browser", "schema 5", "dispatched exactly once", "BLOCKED_TIMEOUT", "gpt-5.6-terra", "single-line document pointer", "last_conversations.json", "runtime-output directories", "empty current-session tab list is normal", "creates a fresh in-app-browser tab", "active-thinking control", "repair_incomplete", "../hmasd-task-router/SKILL.md", "freshly resolved controller route", "One registered review heartbeat automation", "pauses the registered review heartbeat", "30_EVIDENCE_RECONCILIATION.md", "one selected next evidence source or an explicit stop")) {
     if (-not $skillText.Contains($required)) {
         throw "Review Skill is missing current contract: $required"
     }

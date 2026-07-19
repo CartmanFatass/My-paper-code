@@ -1,5 +1,5 @@
 {
-  "schema_version": 12,
+  "schema_version": 13,
   "updated": "2026-07-19",
   "gemini_transport": {
     "kind": "one_shot_subagent_antigravity_cli",
@@ -34,6 +34,14 @@
       "thinking": "high",
       "expected_model": "Luna High",
       "role_policy": "switch_to_registered_role_url_for_each_serial_stage"
+    },
+    "heartbeat": {
+      "automation_id": "hmasd-external-review-exchange",
+      "kind": "heartbeat",
+      "target_thread_id": "019f716c-676f-7673-9782-f37b72f200d2",
+      "ownership": "registered_exchange_task",
+      "active_condition": "exactly one Pro stage is DISPATCHED",
+      "terminal_order": "pause_verify_then_relay"
     },
     "controller_return_route": {
       "host_id": "local",
