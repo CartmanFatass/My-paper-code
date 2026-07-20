@@ -17,12 +17,22 @@ the controller carries no browser or Antigravity state.
 4. A separate GPT-5.6 Pro conversation performs convergent synthesis and
    follows `CONVERGENT_REVIEW_PRINCIPLES.md`, then chooses the next evidence
    source or stop while preserving valuable unselected ideas.
-5. The controller writes `50_DISPOSITION.md` from that convergent decision and
-   updates the project boundary once.
+5. The registered Research Project Manager performs one read-only mission and
+   causal-direction audit of the Convergent recommendation and produces a
+   concise user-visible handoff brief.
+6. If that brief is `ALIGNED`, the controller writes `50_DISPOSITION.md` and
+   updates the project boundary once. `REVISE` or `BLOCK` returns the exact
+   conflict to the Convergent reviewer through one focused correction.
 
 The controller may not replace a missing external decision with its own
 scientific choice. External review does not authorize code execution or
 training.
+
+The Research Project Manager is not a fourth scientific reviewer and does not
+reweight the portfolio. It prevents objective inversion: the project target is
+a stronger MARL algorithm, while hierarchy, skills, variable lifetime,
+ordinary-MARL controls and causal diagnostics are mechanisms or evidence—not
+universal prerequisites that may silently replace the target.
 
 `docs/project/ALGORITHM_PRINCIPLES.md` is the common scientific contract.
 `OPEN_REVIEW_PRINCIPLES.md` and `CONVERGENT_REVIEW_PRINCIPLES.md` specialize
@@ -51,6 +61,12 @@ Gemini and Open Pro may run concurrently. Their Exchange sessions return
 through the task router. After both divergent raws are verified, the controller
 writes and pushes reconciliation plus the convergent question before dispatching
 the convergent Exchange.
+
+After the Convergent raw is verified, the controller sends one bounded
+`PROJECT_REVIEW_TASK` directly to the registered Research Project Manager. The
+manager is read-only, owns no heartbeat, contacts only the controller and
+returns exactly one `PROJECT_REVIEW_BRIEF` or `PROJECT_REVIEW_BLOCKED`. Only an
+`ALIGNED` brief permits disposition adoption and downstream handoff.
 
 Each raw has exactly one writer: its registered Exchange. A raw becomes
 immutable only after that Exchange verifies natural response completion, every
@@ -94,6 +110,8 @@ rounds/YYYYMMDD_topic/
 Raw responses are byte-preserved and precede downstream use. Controller round
 behavior lives in `.agents/skills/hmasd-review-round/SKILL.md`; registered
 Exchange behavior lives in `.agents/skills/hmasd-review-exchange/SKILL.md`.
+Mission-alignment behavior lives in
+`.agents/skills/hmasd-project-manager/SKILL.md`.
 Codex task IDs and role bindings live only in the router's
 `session-roles.json`; external reviewer conversations and URLs live only in
 `REVIEWER_CONVERSATIONS.json`.

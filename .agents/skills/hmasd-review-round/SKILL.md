@@ -23,9 +23,9 @@ The controller also reads:
 5. the named round directory and its explicitly listed evidence.
 
 The controller owns round files, Git-visible boundaries, direct Exchange
-dispatch, callback acceptance, and the final project-state update. It never
-controls a reviewer browser or Antigravity; each Exchange session owns its
-transport, raw and heartbeat.
+dispatch, callback acceptance, Research Project Manager alignment dispatch,
+and the final project-state update. It never controls a reviewer browser or
+Antigravity; each Exchange session owns its transport, raw and heartbeat.
 
 ## Reviewer Principle Binding
 
@@ -77,8 +77,16 @@ the next stage.
    convergent principle contract;
 4. commit and push that round boundary;
 5. dispatch the convergent stage directly to `convergent_exchange`;
-6. after its verified raw returns, write `50_DISPOSITION.md`, commit and push
-   it, then update the owning project-control boundary once.
+6. after its verified raw returns, send one `PROJECT_REVIEW_TASK` to the
+   registered `research_project_manager`, with the round brief, Convergent raw,
+   reconciliation, `CURRENT_WORK.md` and `ALGORITHM_PRINCIPLES.md` as explicit
+   inputs;
+7. accept one `PROJECT_REVIEW_BRIEF`; show its `user_brief` before any code or
+   experiment handoff. `REVISE` or `BLOCK` returns the exact mission/causal
+   conflict to Convergent Pro through one focused follow-up rather than local
+   reinterpretation;
+8. only after `ALIGNED`, write `50_DISPOSITION.md`, commit and push it, then
+   update the owning project-control boundary once.
 
 Every dispatch is exactly:
 
@@ -103,31 +111,50 @@ raws and heartbeats are disjoint. Convergent starts only after both verified
 divergent raws, factual reconciliation and its question are in one pushed
 commit.
 
+The Project Manager review is bounded and read-only. Dispatch exactly:
+
+```text
+PROJECT_REVIEW_TASK
+role_skill=.agents/skills/hmasd-project-manager/SKILL.md
+review_id=<round>:convergent-adoption
+purpose=CONVERGENT_ADOPTION
+inputs=<explicit round and project paths>
+question=Check mission alignment, causal direction, route class and handoff clarity before controller adoption.
+```
+
+It is not another scientific reviewer and does not select a replacement route.
+
 ## Focused Convergent Follow-up
 
-Use exactly one focused follow-up when an accepted Convergent disposition has
-already frozen the scientific source and portfolio but omitted scientific
-values that the Code Implementation Manager is forbidden to choose, such as
-task dynamics, information contracts, model, budget, seeds, absolute floors or
-material margins.
+Use exactly one focused follow-up in either of two cases:
+
+- an accepted Convergent disposition froze the scientific source and portfolio
+  but omitted scientific values that the Code Implementation Manager is
+  forbidden to choose; or
+- the Research Project Manager returned `REVISE` or `BLOCK` because the
+  Convergent recommendation inverted the declared mission or causal direction.
 
 For this case:
 
 1. create a new tracked follow-up directory containing only
    `00_REVIEW_BRIEF.md` and `40_PRO_CONVERGENT_QUESTION.md` before dispatch;
-2. bind the question to the accepted disposition, its Convergent raw,
-   `ALGORITHM_PRINCIPLES.md`, and `CONVERGENT_REVIEW_PRINCIPLES.md`;
-3. ask only for the missing code-ready contract and allow an explicit stop if
-   no defensible contract can be frozen;
+2. bind the question to the prior Convergent raw, the Project Manager brief when
+   present, `ALGORITHM_PRINCIPLES.md`, and
+   `CONVERGENT_REVIEW_PRINCIPLES.md`;
+3. ask only for the missing code-ready contract or the exact mission-alignment
+   correction, and allow an explicit stop if no defensible route can be frozen;
 4. commit, push and verify the question boundary, then dispatch only the
    registered `convergent_exchange` with the ordinary `REVIEW_STAGE` schema;
 5. archive `41_PRO_CONVERGENT_RAW.md`, adopt one focused disposition, and then
    update project control once.
 
-Do not create divergent questions, dispatch Gemini or Open Pro, reconsider the
-selected source, reweight the portfolio, or count this clarification as a new
-evidence-bearing research iteration. This is a completion of the prior
-scientific contract, not a new full external-review round.
+Do not create divergent questions, dispatch Gemini or Open Pro, reweight the
+portfolio from scratch, or count this clarification as a new evidence-bearing
+research iteration. A missing-values follow-up must not reconsider its selected
+source. A mission-alignment correction may retract that source and select one
+replacement from the already reviewed portfolio, but must answer only the
+Project Manager's exact conflict. This is a correction or completion of the
+prior scientific contract, not a new full external-review round.
 
 ## Callback and Recovery
 
@@ -147,3 +174,8 @@ or replaces that registered Exchange.
 External review recommends scientific action but never grants code or
 experiment authority. The controller operationalizes only the accepted
 `50_DISPOSITION.md` within current user authority.
+
+Accept `PROJECT_REVIEW_BRIEF` or `PROJECT_REVIEW_BLOCKED` only from the
+registered Research Project Manager and matching `review_id`. A manager
+`REVISE`/`BLOCK` is an alignment conflict, not a scientific replacement; keep
+the Convergent raw immutable and request one focused correction.

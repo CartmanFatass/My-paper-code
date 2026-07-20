@@ -22,9 +22,9 @@ Skills with `TASK_BLOCKED` before doing role work.
 
 Read `references/session-roles.json` before any persistent-session send or
 callback acceptance. It is the only communication registry for the controller,
-Code Implementation Manager, three reviewer-exchange sessions, and Experiment
-Monitor session IDs and their one-to-one role bindings. Other role registries
-must not duplicate Codex session IDs.
+Research Project Manager, Code Implementation Manager, three reviewer-exchange
+sessions, and Experiment Monitor session IDs and their one-to-one role
+bindings. Other role registries must not duplicate Codex session IDs.
 
 The active controller alone maintains this directory. Change an entry only for
 an explicit controller handoff or explicit persistent-session replacement.
@@ -242,6 +242,21 @@ alone returns `CODE_GIT_PUSH_REQUIRED`, `CODE_EXTERNAL_REVIEW_REQUIRED`,
 `CODE_COMPLETE`, or `CODE_BLOCKED` to the controller. Reject every other
 persistent code-work edge.
 
+## Research Project Management Topology
+
+Enforce this exact persistent-session edge:
+
+```text
+controller <-> research_project_manager
+```
+
+The controller sends `PROJECT_REVIEW_TASK` only to the registered Research
+Project Manager after a Convergent raw, on an explicit route-alignment request,
+or before a scientific implementation/experiment handoff whose mission role is
+unclear. The manager returns exactly one `PROJECT_REVIEW_BRIEF` or
+`PROJECT_REVIEW_BLOCKED` directly to the controller. It never contacts an
+Exchange, Code Manager or Experiment Monitor and owns no heartbeat.
+
 ## Receive Contract
 
 Accept a persistent-session callback only when all of these are true:
@@ -252,9 +267,9 @@ Accept a persistent-session callback only when all of these are true:
 - the payload matches the exact terminal schema in the named role Skill.
 
 Also require the sender and receiver pair to be an edge in the External Review
-Topology, Code Implementation Topology, or the registered
-experiment-monitor-to-controller edge. A valid payload on an invalid edge is
-rejected without forwarding.
+Topology, Code Implementation Topology, Research Project Management Topology,
+or the registered experiment-monitor-to-controller edge. A valid payload on an
+invalid edge is rejected without forwarding.
 
 Reject a callback whose source task, role, or schema does not match. Never infer
 the sender from prose inside the payload. Receipt grants no new project,

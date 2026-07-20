@@ -40,6 +40,13 @@ Manager owns concrete executable architecture, `IMPLEMENTATION_PLAN.md`, code
 implementation, engineering-quality application, and focused verification
 inside one controller-authorized boundary. Its internal coding workflow is not
 prescribed by project documents.
+The dedicated Research Project Manager is a read-only mission-alignment layer.
+After Convergent review and before scientific implementation or experiment
+handoff, it checks that the proposed action advances the stronger-MARL target,
+does not invert mechanism and evidence causality, and does not promote a
+diagnostic baseline into a universal research prerequisite. It returns one
+user-visible review brief directly to the controller. The controller retains
+adoption and authorization authority.
 The registered Code Implementation Manager has standing, permanent, exclusive
 write authority over `docs/project/IMPLEMENTATION_PLAN.md` whenever it has
 accepted a valid `START_CODE_WORK`. It may create, replace, or clear that plan
@@ -64,6 +71,8 @@ Choose exactly one execution surface and one role:
 
 - complete code implementation or repair workflow -> persistent session with
   `$hmasd-task-router` and `$hmasd-code-manager`;
+- Convergent adoption, route-alignment audit, or scientific handoff brief ->
+  persistent session with `$hmasd-task-router` and `$hmasd-project-manager`;
 - complete external review -> controller uses `$hmasd-review-round` and
   `$hmasd-task-router` to dispatch the three registered, one-reviewer-per-session
   exchanges; each exchange uses `$hmasd-review-exchange`;
@@ -73,7 +82,8 @@ Choose exactly one execution surface and one role:
 There is no general controller orchestration Skill. The controller sends code
 work only to the Code Implementation Manager, external-review stages directly
 to their registered Exchange sessions, and monitoring only to the Experiment
-Monitor. A role completion never starts another role automatically.
+Monitor. It sends mission-alignment review only to the Research Project Manager.
+A role completion never starts another role automatically.
 
 Every assignment states the objective, granted authority, required inputs,
 working scope, protected changes, forbidden scope, completion condition, and
@@ -130,9 +140,15 @@ user-selected settings; communication reads the recipient's live delivery
 metadata immediately before each send and copies it unchanged into the send.
 The controller communicates directly with each registered Exchange session for
 external review; Exchange sessions never communicate with one another.
+The controller communicates directly with the Research Project Manager for one
+bounded alignment brief; that manager never contacts another role session.
 The controller communicates only with the Code Implementation Manager for code;
 The controller alone writes reconciliation and disposition files and creates
 the Git-visible boundary required before each downstream reviewer stage.
+Before adopting a Convergent recommendation as a code or experiment handoff,
+the controller must receive the Research Project Manager's structured brief and
+show its concise user-facing summary. `REVISE` or `BLOCK` returns the exact
+conflict to Convergent Pro instead of silently repairing the route locally.
 
 ## Agile Research and Active-Line Code
 

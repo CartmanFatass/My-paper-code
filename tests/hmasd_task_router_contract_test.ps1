@@ -9,6 +9,7 @@ $resolver = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/resolve_ta
 $topologyAuditor = Join-Path $repo '.agents/skills/hmasd-task-router/scripts/audit_session_topology.ps1'
 $rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
 $sessionRoleSkills = @(
+    (Join-Path $repo '.agents/skills/hmasd-project-manager/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-code-manager/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md'),
     (Join-Path $repo '.agents/skills/hmasd-experiment/SKILL.md')
@@ -71,6 +72,11 @@ foreach ($required in @(
     'CODE_EXTERNAL_REVIEW_REQUIRED',
     'CODE_COMPLETE',
     'CODE_BLOCKED',
+    'Research Project Management Topology',
+    'controller <-> research_project_manager',
+    'PROJECT_REVIEW_TASK',
+    'PROJECT_REVIEW_BRIEF',
+    'PROJECT_REVIEW_BLOCKED',
     'Receive Contract',
     'native delegation metadata `source_thread_id` equals the session ID',
     'stable `handoff_id`',
@@ -84,8 +90,11 @@ foreach ($required in @(
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 $codeManagerId = $roles.roles.code_implementation_manager.thread_id
 $codeManagerStatus = $roles.roles.code_implementation_manager.registration_status
-if ($roles.schema_version -ne 4 -or
+if ($roles.schema_version -ne 5 -or
     $roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
+    $roles.roles.research_project_manager.thread_id -ne '019f7e6e-2f81-7463-93a6-4bb836585fb8' -or
+    $roles.roles.research_project_manager.registration_status -ne 'ACTIVE' -or
+    $roles.roles.research_project_manager.role_skill -ne '.agents/skills/hmasd-project-manager/SKILL.md' -or
     $roles.roles.code_implementation_manager.role_skill -ne '.agents/skills/hmasd-code-manager/SKILL.md' -or
     $roles.roles.gemini_divergent_exchange.thread_id -ne '019f76cc-580b-7c40-8c92-97bfffaf51b1' -or
     $roles.roles.gemini_divergent_exchange.reviewer_role -ne 'GEMINI_DIVERGENT' -or
@@ -111,6 +120,7 @@ if ($null -ne $roles.roles.PSObject.Properties['external_review_manager']) {
 }
 foreach ($entry in @(
     $roles.roles.controller,
+    $roles.roles.research_project_manager,
     $roles.roles.code_implementation_manager,
     $roles.roles.gemini_divergent_exchange,
     $roles.roles.open_divergent_exchange,
@@ -125,6 +135,7 @@ foreach ($entry in @(
 }
 $assignedIds = @(
     $roles.roles.controller.thread_id,
+    $roles.roles.research_project_manager.thread_id,
     $codeManagerId,
     $roles.roles.gemini_divergent_exchange.thread_id,
     $roles.roles.open_divergent_exchange.thread_id,
@@ -155,13 +166,14 @@ foreach ($path in $sessionRoleSkills) {
 
 $audit = & $topologyAuditor `
     -RepoRoot $repo `
-    -Terms @('controller <-> convergent_exchange', 'Reply to Controller') |
+    -Terms @('controller <-> convergent_exchange', 'controller <-> research_project_manager', 'PROJECT_REVIEW_BRIEF', 'Reply to Controller') |
     ConvertFrom-Json
 if ($audit.schema_version -ne 1 -or
     -not ($audit.always_inspect -contains '.agents/skills/hmasd-task-router/SKILL.md') -or
     -not ($audit.matches.path -contains '.agents/skills/hmasd-task-router/SKILL.md') -or
-    -not ($audit.matches.path -contains '.agents/skills/hmasd-review-exchange/SKILL.md')) {
-    throw 'Topology impact audit did not discover both router and role-Skill surfaces'
+    -not ($audit.matches.path -contains '.agents/skills/hmasd-review-exchange/SKILL.md') -or
+    -not ($audit.matches.path -contains '.agents/skills/hmasd-project-manager/SKILL.md')) {
+    throw 'Topology impact audit did not discover router and affected role-Skill surfaces'
 }
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
 if ($monitor.schema_version -ne 7 -or

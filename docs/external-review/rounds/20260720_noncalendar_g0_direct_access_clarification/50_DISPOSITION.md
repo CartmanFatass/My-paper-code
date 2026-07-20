@@ -1,18 +1,22 @@
-# Accepted Disposition — Noncalendar Direct-Access Clarification
+# Retracted Disposition — Noncalendar Direct-Access Clarification
 
 ## Decision
 
-`ACCEPT_D0_D1_CAUSAL_OBSERVATION_REFACTOR_G0`
+`RETRACT_D0_D1_OBJECTIVE_INVERSION`
 
-The focused Convergent response in `41_PRO_CONVERGENT_RAW.md` is accepted as
-the code-ready completion of the prior no-access portfolio review. It retracts
-the no-op evaluation-only treatment and selects one new bounded training source
-before any hierarchy comparison.
+The focused Convergent response in `41_PRO_CONVERGENT_RAW.md` remains immutable
+reviewer evidence, but its selected route is retracted before implementation or
+compute. It converted ordinary-controller access from a matched comparator and
+diagnostic into a prerequisite for studying the hierarchy, skill and
+variable-lifetime mechanisms intended to build a stronger MARL algorithm. That
+is an inversion of the project objective.
 
-The completed source remains valid
-`NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`; it is not rerun, repaired or relabeled.
+The completed source remains valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`; it is
+not rerun, repaired or relabeled. This retraction changes only the successor
+authority. The detailed D0/D1 contract below is retained solely to identify the
+retracted proposal; it has no active implementation or experiment authority.
 
-## Selected causal edge
+## Retracted causal edge
 
 Compare two ordinary recurrent primitive controllers under the same task,
 information authority, lifecycle, action distribution, external reward,
@@ -83,13 +87,12 @@ D1 access requires held-out deterministic tracking/completion/utility at least
 If neither ordinary arm establishes access, stop this benchmark algorithm line
 without model, seed, budget, reward, threshold or intrinsic rescue.
 
-## Authorized boundary
+## Active boundary
 
-The Code Implementation Manager may implement this frozen D0/D1 source and run
-one focused deterministic contract check. This disposition does not launch the
-formal training/evaluation run. Implementation must reuse the current active
-runtime and delete superseded ordinary helper paths rather than adding a
-parallel compatibility layer.
-
-Formal compute remains separately controlled by the active controller under
-the existing autonomous experiment authorization.
+No code, focused check or formal compute is authorized from this disposition.
+The Code Implementation Manager stopped and the retracted files were removed.
+The active controller must obtain one Research Project Manager alignment brief
+and return the exact objective-inversion conflict to Convergent Pro for a
+focused correction. The corrected route must advance a stronger MARL algorithm;
+ordinary MARL may remain a matched comparator or diagnostic but not a universal
+admission gate.
