@@ -19,57 +19,43 @@ Updated: 2026-07-20
 
 ## Current Boundary
 
-The clean-process dynamic-roster direct-access qualification is complete as
-`PASS_CLEAN_CARRIER_DIRECT_ACCESS`. The clean carrier passed its controls and
-the unchanged direct recurrent learner passed every registered absolute and
-paired-gain threshold with zero replay error. This establishes an access-valid
-substrate and narrows the Iteration-5 failure to its retired spatial carrier. It
-does not establish hierarchy, skill semantics, variable lifetime, cooperation,
-or transfer.
+The first authorized autonomous iteration is complete. The formal
+`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` run remains
+`INVALID_CLEAN_SUPPLIED_EXECUTOR_OPPORTUNITY_CONTRACT`: implementation and all
+M0 checks passed, learned high achieved
+`P/S/U=0.942383/0.938639/0.940511`, and learned-minus-frozen utility CI95 was
+`[0.435689, 0.440511, 0.445251]`; however, the registered routing oracle failed
+its joint `0.95` prerequisite at
+`P/S/U=0.978699/0.660807/0.819753`.
 
 The tracked round
-`docs/external-review/rounds/20260719_clean_process_access_portfolio/` is
-complete at commit `8cb53cd7675e4721c6f1dcefc15ec68fd62670e6`.
-Its accepted disposition keeps information-matched direct active-set recurrence
-as the mandatory null and selects exactly one next evidence source:
-`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`. This source diagnoses whether the
-existing high/event assignment path can learn when supplied with fixed
-zero-parameter `IDLE/PERSIST/SHORT` executors; it is not evidence for learned
-skills, hierarchy efficacy, variable lifetime, cooperation, or transfer.
+`docs/external-review/rounds/20260720_supplied_executor_opportunity_contract/`
+accepted that the current oracle is a myopic frontier-filtered projection, not
+an established opportunity-constrained upper bound. It preserves the original
+INVALID result, the strong learned signal as task-local secondary evidence, and
+the mandatory direct recurrent null. It selects exactly one next source:
+`READ_ONLY_OPPORTUNITY_AUTHORITY_AND_USE_AUDIT`.
 
-On 2026-07-20 the user authorized five automatic algorithm iterations,
-including bounded code, compute, result analysis, and tracked external review.
-The active first iteration is `CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0`. Its
-implementation and focused checks are accepted at commit `2d66d253`; the
-normalized active plan is pushed at `c631576`. The registered formal CUDA run
-completed on 2026-07-20 as
-`INVALID_CLEAN_SUPPLIED_EXECUTOR_OPPORTUNITY_CONTRACT` with
-`implementation_valid=true` and every registered M0 item true. The learned
-high path reached `P/S/U=0.942383/0.938639/0.940511`, with learned-minus-frozen
-utility CI95 `[0.435689, 0.440511, 0.445251]`. The result is nevertheless
-scientifically invalid under its frozen branch ordering because the registered
-routing-oracle opportunity floor failed at
-`P/S/U=0.978699/0.660807/0.819753`. The invalid oracle contract and the strong
-learned signal must therefore be reviewed together; the controller does not
-relabel the result or infer a successor locally.
+The selected source performs a no-training hindsight authority calculation and
+existing-checkpoint behavior-use decomposition on the same 256 evaluation
+ledgers. It may stop the toy line, reduce the result to scheduled recurrence, or
+make a future matched F0/F1 comparison eligible for separate review. It does
+not authorize that future training or any learned-executor integration.
 
 ## Next Action
 
-Complete the tracked external-review round
-`docs/external-review/rounds/20260720_supplied_executor_opportunity_contract/`.
-The open reviewers must independently assess whether the oracle opportunity
-contract is an invalid comparator, what scientific information remains in the
-learned signal, and which two-to-four causal explanations remain live. The
-convergent reviewer then selects one next evidence source or stop. No rerun,
-threshold change, oracle repair, implementation, or successor launch occurs
-before that disposition is accepted.
+Implement and run only the selected evaluation-only
+`READ_ONLY_OPPORTUNITY_AUTHORITY_AND_USE_AUDIT` under the accepted disposition.
+It must not change the original behavior path, task, opportunity process,
+threshold, reward, model, seeds or checkpoints and must perform zero optimizer
+steps. Its terminal result then enters the next tracked external-review round.
 
 ## Autonomous Boundary
 
 - Status: ACTIVE
 - Authorized evidence-bearing iterations: five, counting the active G0 source
   as iteration one
-- Remaining iterations: five
+- Remaining iterations: four
 - Permitted automatic action: for each iteration, implement, review, run,
   analyze, externally review, adopt the convergent disposition, then decrement
   the remaining count and begin its selected successor while the count remains
