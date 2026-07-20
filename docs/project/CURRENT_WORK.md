@@ -20,8 +20,7 @@ Updated: 2026-07-20
 ## Current Boundary
 
 The independent `NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification
-is implementation-complete and launch-ready at commit
-`47275d1a0c7bc7f6d674fbe745a0239c78001994`.
+completed as valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`.
 The full H/C/S/D task, information, model, training, evaluation, seed, metric,
 threshold and result-branch contract is frozen in
 `docs/external-review/rounds/20260720_benchmark_identifiability_contract_followup/41_PRO_CONVERGENT_RAW.md`.
@@ -30,19 +29,22 @@ common observation field 5 is
 `mean_{i in A_t}(abs(g_i-x_i)/4)`, range `[0,1]`, retained by D and masked to
 zero by C. No other scientific choice is open.
 
-The Code Implementation Manager accepted the five-path package after a focused
-test and a controller-found runner-helper defect was repaired. The direct
-`_tiny_solver_valid()` regression now passes. No formal training or evaluation
-has run yet.
+All M0 checks pass with zero replay and checkpoint error. H establishes
+structural reachability, C establishes the calendar/static information null,
+and S establishes heterogeneous-lifetime pressure. D improves over update zero
+but misses every access family: held-out deterministic utility is `0.616348`,
+its learning-gain LCB is `0.101414`, and its D-minus-C utility LCB is `0.132124`.
+The result identifies an ordinary-control access failure under the frozen
+contract; it does not identify a temporal algorithm or invalidate the benchmark.
 
 ## Next Action
 
-Launch the already authorized formal CUDA run from update 0 at
-`logs/noncalendar_heterogeneous_tracking_g0_20260720_130453` using the frozen
-runner and no resume flag. Assign only its authoritative status and registered
-progress/result fields to the persistent Experiment Monitor. Do not alter the
-contract, restart automatically after a scientific terminal result, or begin a
-successor before the terminal result is externally reviewed and adopted.
+Complete the tracked full external-review round at
+`docs/external-review/rounds/20260720_noncalendar_g0_no_access_portfolio/`.
+Blind reviewers must preserve the valid H/C/S and invalidated D-access boundary,
+generate a plural causal portfolio, and distinguish benchmark learnability from
+ordinary learner/credit failure. Do not rerun, tune D, implement a successor or
+decrement the autonomous counter until the Convergent disposition is accepted.
 
 ## Autonomous Boundary
 

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "source_result": "logs/noncalendar_heterogeneous_tracking_g0_20260720_130453/result/noncalendar_heterogeneous_tracking_g0.json",
+  "implementation_commit": "47275d1a0c7bc7f6d674fbe745a0239c78001994",
+  "stage": "NONCALENDAR_HETEROGENEOUS_TRACKING_G0",
+  "status": "NO_ACCESS_BENCHMARK_ORDINARY_CONTROL",
+  "implementation_valid": true,
+  "successor_selected": false,
+  "all_m0_checks_pass": true,
+  "counts": {
+    "environment_transitions_per_causal_arm": 320000,
+    "optimizer_steps_per_causal_arm": 1000,
+    "training_episodes_per_causal_arm": 4000,
+    "active_rows_per_causal_arm": 1124320,
+    "evaluation_episodes_per_causal_arm": 2048,
+    "h_evaluation_episodes": 256,
+    "s_evaluation_episodes": 256,
+    "h_optimizer_steps": 0,
+    "s_optimizer_steps": 0,
+    "skill_updates": 0,
+    "high_updates": 0,
+    "intrinsic_reward_reads": 0,
+    "posterior_reads": 0,
+    "new_critic_count": 0
+  },
+  "means": {
+    "h_tracking": 0.796128900779062,
+    "h_completion": 1.0,
+    "h_utility": 0.892258978736577,
+    "c_held_det_tracking": 0.5,
+    "c_held_det_completion": 0.432827098084267,
+    "c_held_det_utility": 0.46361279941104,
+    "s_tracking": 0.68094376422444,
+    "s_completion": 0.706958768431702,
+    "s_utility": 0.693184515185459,
+    "d_iid_det_tracking": 0.631952921549479,
+    "d_iid_det_completion": 0.621858155582439,
+    "d_iid_det_utility": 0.626236483302206,
+    "d_held_det_tracking": 0.614936208858543,
+    "d_held_det_completion": 0.618980324684612,
+    "d_held_det_utility": 0.616348358120638,
+    "d_held_stoch_tracking": 0.551581374737395,
+    "d_held_stoch_completion": 0.424647419987407,
+    "d_held_stoch_utility": 0.481513176039111
+  },
+  "paired_ci95": {
+    "h_minus_s_tracking": [0.110933516472995, 0.115185136554622, 0.11944085984003],
+    "h_minus_s_completion": [0.285897644376118, 0.293041231568298, 0.300112171524723],
+    "h_minus_s_utility": [0.196319407122682, 0.199074463551118, 0.201775455575605],
+    "d_gain_utility": [0.101413704763102, 0.116537691084259, 0.131586970975364],
+    "d_minus_c_tracking": [0.102066151167498, 0.114936208858543, 0.127755694562981],
+    "d_minus_c_completion": [0.158723693628177, 0.186153226600345, 0.213792178305819],
+    "d_minus_c_utility": [0.132123744441084, 0.152735558709597, 0.173242318433834]
+  },
+  "engineering": {
+    "all_replay_max_errors": 0.0,
+    "checkpoint_round_trip_error": 0.0,
+    "demand_parameter_drift": 0.14995063841342926,
+    "parameter_count_per_arm": 14980,
+    "anonymous_relabeling_valid": true,
+    "anonymous_relabeling_maximum_error": 1.7881393432617188e-7
+  },
+  "wall_seconds": {
+    "paired_training": 3423.281088,
+    "registered_evaluation": 96.6696901000032,
+    "total": 3525.8439951
+  }
+}
