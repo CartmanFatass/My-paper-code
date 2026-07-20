@@ -167,6 +167,8 @@ foreach ($required in @(
     'open_divergent_exchange',
     'convergent_exchange',
     'Contact only the controller',
+    'CURRENT_REVIEW_ASSIGNMENT',
+    'Ignore every earlier round, SHA and question path in this conversation',
     'create one 5-minute heartbeat',
     'exact text equality',
     'Reply to Controller'

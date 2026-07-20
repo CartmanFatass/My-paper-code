@@ -36,19 +36,21 @@ route is not active authority.
 
 ## Next Action
 
-Complete a Research Project Manager mission-alignment audit, then return the
-exact objective-inversion conflict to Convergent Pro for one focused correction.
-The corrected route must advance a stronger variable-membership,
-variable-lifetime MARL algorithm; ordinary MARL remains a matched comparator or
-diagnostic, not a universal admission gate. No code or experiment is authorized
-until an aligned disposition is accepted.
+Rerun the same event-held-commitment focused correction against a fresh,
+Git-visible boundary. The prior transport completed but the external reviewer
+read stale commit `4dc1c3b582d2c86ef68dce848e7e8ce62f7d9bb8` instead of the assigned
+commit, so it supplied no scientific disposition. The corrected route must
+advance a stronger variable-membership, variable-lifetime MARL algorithm;
+ordinary MARL remains a matched comparator or diagnostic, not a universal
+admission gate. No code or experiment is authorized until an aligned
+disposition is accepted.
 
 ## Autonomous Boundary
 
 - Status: ACTIVE
-- Authorized evidence-bearing iterations: five, counting the active G0 source
-  as iteration one
-- Remaining iterations: three
+- Authorized evidence-bearing iterations: five additional iterations from this
+  corrected boundary
+- Remaining iterations: five
 - Permitted automatic action: for each iteration, implement, review, run,
   analyze, externally review, adopt the convergent disposition, then decrement
   the remaining count and begin its selected successor while the count remains

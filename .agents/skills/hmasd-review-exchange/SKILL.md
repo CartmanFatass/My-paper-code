@@ -75,8 +75,28 @@ external transport when this binding is invalid.
 ## Execute One Stage
 
 Verify `stage_commit` and the assigned question are remotely visible before any
-Pro submission. Submit the neutral handoff exactly once. If the matching
-question is already accepted, never resubmit it.
+Pro submission. Submit the neutral handoff exactly once. The handoff is a
+current-stage freshness fence, not a scientific prompt assembled by the
+Exchange:
+
+```text
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=<round>
+stage_commit=<stage_commit>
+question=<question>
+instruction=Ignore every earlier round, SHA and question path in this conversation. Use only this assignment. Read the assigned question; it contains the complete role and scientific instructions. If the GitHub connector resolves any other ref, repeat the lookup with stage_commit before answering.
+```
+
+Do not append generic full-round requests, candidate weighting, route selection,
+result-JSON requirements or rescue prohibitions to this handoff. Those belong
+only to the assigned question. This is especially important for a focused
+Convergent follow-up, which must not inherit the preceding full-round request or
+an earlier commit from the persistent external conversation. After submission,
+require the visible user turn to contain the exact current `round`,
+`stage_commit` and `question`. If the matching question is already accepted,
+never resubmit it.
 
 Before the initial Pro transport, call `codex_app__navigate_to_codex_page` once
 with this Exchange session's registered task ID, then verify the exact
@@ -105,6 +125,13 @@ naturally stopped generating and its text is stable. Write every naturally
 completed response to the assigned raw, reread it, and require exact text
 equality with the capture. Never discard completed evidence because a heading,
 field or recommendation is missing.
+
+If a completed Pro response states that it inspected a different commit or
+question path than the current freshness fence, archive it exactly and report
+`COMPLETE_WITH_GAPS` with the mismatched ref. It is completed transport but has
+no adoptable scientific authority. The controller may assign one corrected
+stage; the Exchange must not silently reinterpret the response or reuse the
+stale ref.
 
 After archival, read the assigned question and response semantically. Report a
 short `quality` and `quality_notes` to the controller. Use model judgment rather
