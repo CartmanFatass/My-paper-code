@@ -23,6 +23,10 @@ foreach ($required in @(
     'Internal coding workflow is outside this router',
     'exactly one session-role Skill',
     'HMASD_SESSION_TASK',
+    'Every persistent-session message starts with explicit Skill activation',
+    '$hmasd-task-router',
+    '$<destination-role-skill>',
+    'Literal `role_skill=` fields, Skill paths, and prose references do not activate a Skill',
     'task_id=<stable id>',
     'role_skill=<one .agents/skills/.../SKILL.md path>',
     'Conversation history, nearby files, registries, and earlier assignments are not implicit inputs',
@@ -48,6 +52,10 @@ foreach ($required in @(
     'TASK_ROUTE_CORRUPTION',
     'ambiguous send is never repeated',
     'Before replying, resolve the reply destination again',
+    'Semantic Recovery',
+    'does not ask the controller to prescribe a selector, command, click sequence, code patch',
+    'same bounded assignment to the same registered session',
+    'explicitly activates the router and that role Skill again',
     'Controller Send Contract',
     'take the recipient `thread_id` only from that role entry',
     'controller records no waiting state',
@@ -159,7 +167,8 @@ foreach ($forbidden in @(
 foreach ($path in $sessionRoleSkills) {
     $text = Get-Content -LiteralPath $path -Raw
     if (-not $text.Contains('hmasd-task-router') -or
-        -not $text.Contains('role_skill=')) {
+        -not $text.Contains('role_skill=') -or
+        -not $text.Contains('$hmasd-task-router')) {
         throw "Role Skill lacks the common router or explicit role grant: $path"
     }
 }
@@ -176,7 +185,7 @@ if ($audit.schema_version -ne 1 -or
     throw 'Topology impact audit did not discover router and affected role-Skill surfaces'
 }
 $monitor = Get-Content -LiteralPath $monitorRegistry -Raw | ConvertFrom-Json
-if ($monitor.schema_version -ne 7 -or
+if ($monitor.schema_version -ne 8 -or
     $monitor.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or
     $monitor.automation.owner -ne 'registered_monitor_session' -or
     $monitor.automation.target -ne 'self') {

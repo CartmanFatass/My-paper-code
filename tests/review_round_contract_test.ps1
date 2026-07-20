@@ -19,7 +19,7 @@ $boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/v
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 $roundController = $registry.round_controller
-if ($registry.schema_version -ne 21 -or
+if ($registry.schema_version -ne 22 -or
     $roundController.kind -ne 'active_controller_direct_exchange' -or
     $roundController.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or
     $roundController.exchange_messages.controller_to_exchange -ne 'REVIEW_STAGE' -or
@@ -32,9 +32,9 @@ if ($registry.schema_version -ne 21 -or
     $registry.exchange_contract.heartbeat.target -ne 'self' -or
     $registry.exchange_contract.heartbeat.interval_minutes -ne 5 -or
     $registry.exchange_contract.browser.logical_owner -ne 'registered_pro_exchange' -or
-    $registry.exchange_contract.browser.foreground_policy -ne 'reuse_controlled_or_claim_registered_user_tab' -or
-    $registry.exchange_contract.browser.waiting_policy -ne 'finalize_keep_handoff_without_reload_or_duplicate' -or
-    $registry.exchange_contract.browser.terminal_policy -ne 'close_once_after_raw_callback_and_heartbeat_cleanup' -or
+    $registry.exchange_contract.browser.access_policy -ne 'operate_only_registered_conversation_and_avoid_unnecessary_duplicates_or_reloads' -or
+    $registry.exchange_contract.browser.waiting_policy -ne 'preserve_registered_page_for_next_wake' -or
+    $registry.exchange_contract.browser.terminal_policy -ne 'release_page_after_raw_callback_and_heartbeat_cleanup' -or
     $registry.reviewers.gemini_divergent.session_role -ne 'gemini_divergent_exchange' -or
     $registry.reviewers.open_divergent.session_role -ne 'open_divergent_exchange' -or
     $registry.reviewers.convergent.session_role -ne 'convergent_exchange') {
@@ -57,6 +57,9 @@ foreach ($required in @(
     'This is a controller workflow, not a persistent-session role',
     'controller owns round files',
     'Direct Exchange Procedure',
+    '$hmasd-task-router',
+    '$hmasd-review-exchange',
+    '$hmasd-project-manager',
     'REVIEW_STAGE',
     'gemini_divergent_exchange',
     'open_divergent_exchange',
@@ -70,6 +73,9 @@ foreach ($required in @(
     'dispatch only the registered `convergent_exchange`',
     'Do not create divergent questions, dispatch Gemini or Open Pro',
     'not a new full external-review round',
+    'observed error as `recovery_context`',
+    'Do not prescribe selectors, browser commands, click sequences, shell recipes',
+    'same Exchange',
     '50_DISPOSITION.md'
 )) {
     if (-not $normalizedSkillText.Contains($required)) {
@@ -92,6 +98,9 @@ $normalizedExchangeText = $exchangeText -replace '\s+', ' '
 foreach ($required in @(
     "role_skill=.agents/skills/hmasd-review-exchange/SKILL.md",
     "completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY",
+    '$hmasd-task-router',
+    '$hmasd-review-exchange',
+    'recovery_context=<optional prior error evidence or none>',
     "gemini_divergent_exchange",
     "open_divergent_exchange",
     "convergent_exchange",
@@ -101,21 +110,13 @@ foreach ($required in @(
     "Do not append generic full-round requests",
     "require the visible user turn to contain the exact current",
     "inspected a different commit or question path",
-    "codex_app__navigate_to_codex_page",
-    "Keep that owned page open for the whole assigned stage",
-    "browser.user.openTabs()",
-    "browser.user.claimTab",
-    "Do not create a duplicate tab",
-    "browser.tabs.finalize({ keep:",
-    'status: "handoff"',
-    "final browser action",
-    "only normal close point for the stage",
-    "ambient browser state",
-    "retry that exact command once",
+    "control only this Exchange session's registered reviewer conversation",
+    "How the page is found, claimed, inspected, released between wakes and recovered is model judgment",
+    "Never use an unrelated ambient page",
+    "Diagnose and recover transport problems inside that registered state and evidence boundary",
     "duplicate consent",
-    "A second transport failure is terminal",
     "--dangerously-skip-permissions",
-    "user's explicit standing approval",
+    "user's standing approval",
     "Write every naturally completed response to the assigned raw",
     "exact text equality",
     "Never discard completed evidence",
@@ -123,20 +124,19 @@ foreach ($required in @(
     "COMPLETE_WITH_GAPS",
     "For Gemini recovery, compare an existing raw",
     "keep identity strict and inspection flexible",
-    "any read-only inspection method it judges reliable",
-    "No selector, container hierarchy or page-layout assumption is prescribed",
-    "try another reasonable read-only method before reporting a blocker",
-    "DOM ambiguity alone is not a transport failure",
+    "whatever read-only evidence is reliable on the live surface",
+    "A stale locator, DOM ambiguity or layout change is not evidence",
     "send the completion callback without resubmitting or overwriting it",
     "a compacted-context summary",
     "Terminal evidence rule",
-    "codex_app__send_message_to_thread",
-    "codex_app__automation_update",
+    "tool-level facts",
     "Text saying that a callback or deletion happened is never evidence",
     'rather than heading-string equality, regular expressions',
     "current page evidence supports continued generation or changing output",
     "stable completed answer",
-    "not for ordinary deferred Pro thinking or content quality",
+    "not ordinary deferred thinking, content quality",
+    'assignment interface is narrow; transport and page inspection are wide',
+    'do not require the controller to supply selectors, browser commands or Antigravity steps',
     "OPEN_REVIEW_PRINCIPLES.md",
     "CONVERGENT_REVIEW_PRINCIPLES.md",
     "Reject an open question that lists the convergent principle",
@@ -241,7 +241,10 @@ try {
         -QuestionPath "20_PRO_OPEN_QUESTION.md" `
         -RawPath "21_PRO_OPEN_RAW.md" `
         -HeartbeatId "review-heartbeat-test") -join [Environment]::NewLine
+    $normalizedPrompt = $prompt -replace '\s+', ' '
     foreach ($required in @(
+        '$hmasd-task-router',
+        '$hmasd-review-exchange',
         "hmasd-task-router",
         "session-roles.json",
         "hmasd-review-exchange",
@@ -253,7 +256,7 @@ try {
         "controller callback",
         "Prior-turn text",
         "send-message and automation-delete tool confirmations")) {
-        if (-not $prompt.Contains($required)) {
+        if (-not $normalizedPrompt.Contains($required)) {
             throw "Rendered heartbeat is missing: $required"
         }
     }
@@ -265,24 +268,21 @@ try {
         "thinking=",
         "hostId=",
         "threadId=")) {
-        if ($prompt.Contains($forbidden)) {
+        if ($normalizedPrompt.Contains($forbidden)) {
             throw "Rendered heartbeat leaks unrelated context or routing: $forbidden"
         }
     }
     foreach ($required in @(
-        "claim the exact registered page",
-        "never create a duplicate",
-        "Confirm the registered URL and current assignment",
-        "inspection method you judge reliable for the page",
-        "revise a failed locator",
-        "another reasonable read-only inspection method has also failed",
+        "Reread both explicitly invoked Skills",
+        "choose any reliable",
+        "read-only inspection method",
+        "Diagnose and adapt",
         "Archive every stable naturally completed response exactly",
         "COMPLETE_WITH_GAPS",
         "never convert a content gap into a transport BLOCKED result",
-        "browser.tabs.finalize({ keep })",
-        "status handoff",
-        "single terminal page close")) {
-        if (-not $prompt.Contains($required)) {
+        "preserve the owned page for the next wake",
+        "heartbeat ownership and terminal cleanup")) {
+        if (-not $normalizedPrompt.Contains($required)) {
             throw "Rendered heartbeat lacks stable browser lifecycle: $required"
         }
     }

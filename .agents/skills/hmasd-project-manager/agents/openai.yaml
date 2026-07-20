@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Research Project Manager"
   short_description: "Guard research mission and handoff clarity"
-  default_prompt: "Use $hmasd-project-manager only in the registered persistent Research Project Manager session to audit mission alignment and return a concise route briefing directly to the active controller."
+  default_prompt: "Use $hmasd-task-router and $hmasd-project-manager only in the registered Research Project Manager session to audit mission alignment and return one concise briefing to the controller."

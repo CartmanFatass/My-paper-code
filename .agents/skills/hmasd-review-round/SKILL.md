@@ -90,9 +90,13 @@ the next stage.
 8. only after `ALIGNED`, write `50_DISPOSITION.md`, commit and push it, then
    update the owning project-control boundary once.
 
-Every dispatch is exactly:
+Every dispatch explicitly activates the current communication and destination
+role contracts:
 
 ```text
+$hmasd-task-router
+$hmasd-review-exchange
+
 REVIEW_STAGE
 role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
 reviewer_role=<GEMINI_DIVERGENT|OPEN_DIVERGENT|CONVERGENT>
@@ -117,6 +121,9 @@ commit.
 The Project Manager review is bounded and read-only. Dispatch exactly:
 
 ```text
+$hmasd-task-router
+$hmasd-project-manager
+
 PROJECT_REVIEW_TASK
 role_skill=.agents/skills/hmasd-project-manager/SKILL.md
 review_id=<round>:convergent-adoption
@@ -170,9 +177,17 @@ idempotent.
 There is no review state machine and no controller heartbeat. Derive progress
 from immutable round artifacts plus callbacks. If a raw already exists, send
 the same stage to its owning Exchange for one natural-completion/equality
-verification; never resubmit the external question from the controller. A
-blocked Exchange is a terminal operational blocker for the round unless the
-user explicitly repairs or replaces that registered Exchange.
+verification; never resubmit the external question from the controller.
+
+On an Exchange error, return the same stage to that same Exchange with the
+observed error as `recovery_context` and one semantic recovery objective. Begin
+the retry with both explicit Skill invocations. Do not prescribe selectors,
+browser commands, click sequences, shell recipes or other mechanical steps; the
+Exchange diagnoses and adapts inside its role. Treat the round as operationally
+blocked only after reasonable in-scope recovery exposes a genuine authority,
+evidence, transport or external-service boundary. When the diagnosis identifies
+a reusable Skill defect, repair that protected contract in one tested Git
+boundary before retrying.
 
 An Exchange `COMPLETE_WITH_GAPS` callback is completed transport, not a blocked
 round. Preserve the raw, pass the quality note into controller and Project

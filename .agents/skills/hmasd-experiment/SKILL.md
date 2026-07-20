@@ -5,6 +5,13 @@ description: Use only inside the persistent HMASD experiment-monitor session whe
 
 # HMASD Experiment Monitor
 
+Accept only an assignment whose first lines explicitly invoke:
+
+```text
+$hmasd-task-router
+$hmasd-experiment
+```
+
 Read `../hmasd-task-router/SKILL.md`, `references/monitor-task.json`,
 `../hmasd-task-router/references/session-roles.json`,
 `references/experiment-protocol.md`, and only the run paths supplied in the
@@ -44,6 +51,13 @@ missing optional metric into experiment failure. Strictness applies to the
 assigned run identity, read-only authority, terminal evidence and callback—not
 to one universal progress template.
 
+Diagnose a monitoring anomaly from the registered evidence before reporting it.
+Try reasonable read-only alternatives inside the run boundary; do not ask the
+controller for a command sequence or file-by-file recipe. A retry reuses the
+same assignment with semantic `recovery_context` and an observable outcome,
+explicitly activates both Skills again, and leaves the monitor free to choose
+the bounded recovery method.
+
 If callback delivery fails, leave the heartbeat active. Its next wake retries
 only the same `handoff_id`; it does not reread unrelated artifacts or repeat
 experiment work. If delivery succeeded but deletion failed, the controller's
@@ -59,3 +73,6 @@ ID or model setting from the assignment, monitor registry, conversation history,
 or heartbeat prompt. Delivery succeeds only when the send tool returns the same
 registered controller `threadId`; only then may this session delete its
 heartbeat.
+
+Every terminal callback prompt begins with `$hmasd-task-router`, followed by a
+blank line and the registered `EXPERIMENT_MONITOR` payload.

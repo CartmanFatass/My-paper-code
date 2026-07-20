@@ -10,6 +10,9 @@ description: Use only inside the registered persistent HMASD Code Implementation
 Accept only:
 
 ```text
+$hmasd-task-router
+$hmasd-code-manager
+
 START_CODE_WORK
 role_skill=.agents/skills/hmasd-code-manager/SKILL.md
 work_id=<stable id>
@@ -37,6 +40,14 @@ git merge-base --is-ancestor <source_commit> My-paper-code/aggressive
 Never run a network Git command. Return `CODE_BLOCKED` before mutation when the
 assignment lacks authority, conflicts with the scientific or engineering
 contract, or requires work outside its boundary.
+
+Treat entry and exit as narrow interfaces and implementation as a wide process.
+Diagnose ordinary code, test and integration failures with engineering judgment
+and try reasonable in-scope repairs before blocking. If the scientific contract
+cannot resolve a conflict, report its semantic cause and evidence; do not ask
+the controller for a patch, command sequence or internal implementation recipe.
+A retry reuses the same bounded assignment with `recovery_context=<observed
+evidence>` and must explicitly activate both Skills again.
 
 ## Authority
 
@@ -93,6 +104,8 @@ Before handing back code:
 Never stage, commit, or push. Send:
 
 ```text
+$hmasd-task-router
+
 CODE_GIT_PUSH_REQUIRED
 role=code_implementation_manager
 handoff_id=<work_id>:git:<stable package id>
@@ -113,6 +126,8 @@ When scientific judgment or a new external-review boundary is required, stop
 editing and send:
 
 ```text
+$hmasd-task-router
+
 CODE_EXTERNAL_REVIEW_REQUIRED
 role=code_implementation_manager
 handoff_id=<work_id>:review:<stable id>
@@ -125,6 +140,8 @@ question=<precise question for external review>
 On completion send:
 
 ```text
+$hmasd-task-router
+
 CODE_COMPLETE
 role=code_implementation_manager
 handoff_id=<work_id>:complete:<pushed commit>
@@ -139,6 +156,8 @@ risk=<one remaining engineering risk or none>
 On a terminal blocker send:
 
 ```text
+$hmasd-task-router
+
 CODE_BLOCKED
 role=code_implementation_manager
 handoff_id=<work_id>:blocked:<stable code>

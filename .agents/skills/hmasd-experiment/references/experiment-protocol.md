@@ -20,7 +20,8 @@ run ID and targeted to this monitor session. Start at the registry's fallback
 cadence, capture the returned heartbeat ID, then update that same heartbeat with
 its final prompt. The prompt contains only the router Skill path,
 `session-roles.json`, this Skill path, `monitor-task.json`, the assignment
-fields, and the heartbeat ID. Verify
+fields, and the heartbeat ID. Its first lines explicitly invoke
+`$hmasd-task-router` and `$hmasd-experiment`. Verify
 the target, prompt, cadence, and `ACTIVE` state. Do not put project-control,
 algorithm, review, conversation history, model, or thinking context in the
 prompt. Reuse the exact heartbeat if the same assignment is delivered again;
@@ -28,9 +29,10 @@ never create a duplicate.
 
 ## One bounded heartbeat
 
-Read the status file exactly once and each registered progress source at most
-once. Do not sleep, poll, watch, scan the run directory, parse unregistered
-logs, restart work, or interpret scientific results.
+Inspect the authoritative status and the smallest useful registered progress
+evidence once per wake. Choose the read-only method and fields that best explain
+the current run; do not sleep, poll continuously, scan unrelated artifacts,
+restart work, or interpret scientific results.
 
 For a running state, write one concise `MONITOR_PROGRESS` entry in this task:
 
@@ -43,30 +45,21 @@ eta=<straight-line estimate or unavailable>
 metrics=<registered fields or unavailable>
 ```
 
-Then update only this session's heartbeat schedule when the ETA bucket changes,
-verify it remains targeted here and `ACTIVE`, and end with `MONITOR_RUNNING`.
-Do not send running or unchanged-state messages to the controller.
-
-Use the slowest active arm. Estimate ETA only after at least 5% completion and
-with fresh progress:
-
-```text
-ETA > 4 hours       -> 30 minutes
-2 hours < ETA <= 4 -> 20 minutes
-ETA <= 2 hours      -> 10 minutes
-unavailable/stale  -> 15 minutes
-```
-
-Relax to a longer interval only after ETA crosses its boundary by 25%. Tighten
-immediately. If training counters are complete while runner state is still
-running, report `FINALIZATION_PENDING`, use 10 minutes, and wait for the
-authoritative terminal status.
+Then use judgment to retarget only this session's heartbeat when the expected
+information gain changes, verify it remains targeted here and `ACTIVE`, and end
+locally. The interval is never shorter than 10 minutes. Prefer the slowest
+active arm and recent progress over nominal duration; increase frequency near
+expected completion and reduce it when little can change. If ETA is unavailable,
+retain the configured fallback. Do not send running or unchanged-state messages
+to the controller. Completed training counters with a nonterminal runner state
+mean finalization is pending, not failure.
 
 ## Terminal relay
 
-Valid nonterminal state is `running`; valid terminal states are the assignment's
-registered complete spelling and `failed`. Missing, malformed, unknown, stale
-beyond the deadline, or path-escaping status is an actionable monitor error.
+Use the assignment's registered terminal meanings and the authoritative status
+semantics. Missing, malformed, path-escaping or stale-beyond-deadline evidence
+is actionable only after reasonable read-only diagnosis inside the registered
+run boundary.
 
 At terminal, error, or deadline:
 
@@ -75,6 +68,8 @@ At terminal, error, or deadline:
 3. send exactly one payload through `$hmasd-task-router`:
 
 ```text
+$hmasd-task-router
+
 EXPERIMENT_MONITOR
 role=experiment_monitor
 terminal=<COMPLETE|COMPLETED|FAILED|ACTIONABLE_ERROR|TIMEOUT>

@@ -21,12 +21,17 @@ $roles = Read-Text (Join-Path $repo '.agents/skills/hmasd-task-router/references
 
 foreach ($required in @(
     'START_CODE_WORK',
+    '$hmasd-task-router',
+    '$hmasd-code-manager',
     'base_commit=<40-character pushed SHA>',
     'source_commit=<40-character pushed SHA>',
     'git merge-base --is-ancestor <source_commit> My-paper-code/aggressive',
     'references/engineering-principles.md',
     'standing, permanent, exclusive authority',
     "model's native coding workflow",
+    'entry and exit as narrow interfaces and implementation as a wide process',
+    'do not ask the controller for a patch, command sequence',
+    'recovery_context=<observed evidence>',
     'Shared-Worktree Lease',
     'sole tracked workspace write lease',
     'CODE_GIT_PUSH_REQUIRED',

@@ -1,5 +1,5 @@
 {
-  "schema_version": 21,
+  "schema_version": 22,
   "updated": "2026-07-20",
   "round_controller": {
     "kind": "active_controller_direct_exchange",
@@ -31,9 +31,9 @@
       "surface": "codex_in_app_browser",
       "ui_scope": "application_shared",
       "logical_owner": "registered_pro_exchange",
-      "foreground_policy": "reuse_controlled_or_claim_registered_user_tab",
-      "waiting_policy": "finalize_keep_handoff_without_reload_or_duplicate",
-      "terminal_policy": "close_once_after_raw_callback_and_heartbeat_cleanup"
+      "access_policy": "operate_only_registered_conversation_and_avoid_unnecessary_duplicates_or_reloads",
+      "waiting_policy": "preserve_registered_page_for_next_wake",
+      "terminal_policy": "release_page_after_raw_callback_and_heartbeat_cleanup"
     },
     "heartbeat": {
       "kind": "heartbeat",

@@ -10,6 +10,9 @@ description: Use only inside one registered persistent HMASD reviewer-exchange s
 Accept only:
 
 ```text
+$hmasd-task-router
+$hmasd-review-exchange
+
 REVIEW_STAGE
 role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
 reviewer_role=<GEMINI_DIVERGENT|OPEN_DIVERGENT|CONVERGENT>
@@ -19,6 +22,7 @@ round_path=docs/external-review/rounds/<id>
 question=<round-relative question path>
 raw=<round-relative raw path>
 completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
+recovery_context=<optional prior error evidence or none>
 ```
 
 Read, in order:
@@ -40,6 +44,9 @@ registered external conversation, question filename, and raw filename all to
 match that entry and `REVIEWER_CONVERSATIONS.json`. Otherwise return
 `REVIEW_STAGE_BLOCKED` to the registered controller before opening a transport
 or creating a heartbeat.
+
+The first two invocation lines are mandatory. A `role_skill=` field or Skill
+path does not activate the current Skill in a long-lived Exchange session.
 
 Require the literal `completion_policy` value above. It is the only
 content-lifecycle rule carried across the persistent-session boundary: archive
@@ -74,6 +81,13 @@ external transport when this binding is invalid.
 
 ## Execute One Stage
 
+The assignment interface is narrow; transport and page inspection are wide.
+Within the registered conversation, evidence boundary and read-only authority,
+choose the inspection strategy that best fits the live surface. Diagnose
+mismatches semantically, revise failed locators or page assumptions, and try
+reasonable safe alternatives before reporting a blocker. No selector, DOM
+hierarchy, click sequence or fixed page algorithm is part of this contract.
+
 Verify `stage_commit` and the assigned question are remotely visible before any
 Pro submission. Submit the neutral handoff exactly once. The handoff is a
 current-stage freshness fence, not a scientific prompt assembled by the
@@ -98,27 +112,19 @@ require the visible user turn to contain the exact current `round`,
 `stage_commit` and `question`. If the matching question is already accepted,
 never resubmit it.
 
-Before the initial Pro transport, call `codex_app__navigate_to_codex_page` once
-with this Exchange session's registered task ID, then verify the exact
-registered reviewer URL and visible `Pro`. Keep that owned page open for the
-whole assigned stage. At the start of every later inspection, first reuse a
-matching controlled tab from `browser.tabs.list()`. Otherwise inspect
-`browser.user.openTabs()` and pass the exact matching registered-URL object to
-`browser.user.claimTab(...)`. Do not create a duplicate tab when that user tab
-exists, and do not call `goto` when the claimed tab is already on the registered
-URL. Only if neither surface contains the registered page may the Exchange open
-it once as recovery. Never use an unrelated ambient tab or operate another
-reviewer page; ambient browser state is not assignment authority.
+For Pro, control only this Exchange session's registered reviewer conversation
+and verify its exact URL and visible `Pro` before submission or capture. Reuse
+the live page when available and keep it available while the stage is pending;
+avoid needless duplicate tabs or reloads. How the page is found, claimed,
+inspected, released between wakes and recovered is model judgment. Never use an
+unrelated ambient page or operate another reviewer's conversation.
 
 For Gemini, use only the registered Antigravity conversation and allowlisted
-manifest. The two tracked Gemini launch scripts permanently include
-`--dangerously-skip-permissions` under the user's explicit standing approval;
-retain plan mode, sandbox mode, the registered conversation, and the manifest
-evidence boundary. If the direct registered command fails only because the
-Antigravity state root is not writable and standing consent is `APPROVED`, retry
-that exact command once with escalation restricted to that state root. Do not
-request duplicate consent, use a wrapper, or choose an alternate state path. A
-second transport failure is terminal.
+manifest. The tracked launch path retains `--dangerously-skip-permissions` under
+the user's standing approval. Diagnose and recover transport problems inside
+that registered state and evidence boundary; do not request duplicate consent,
+substitute a conversation, expand evidence access or disguise the launch behind
+an untracked wrapper.
 
 Treat transport as complete when the current assigned external response has
 naturally stopped generating and its text is stable. Write every naturally
@@ -157,18 +163,12 @@ equal, send the completion callback without resubmitting or overwriting it.
 Resubmit only when the controller explicitly assigns materially changed review
 content.
 
-On a Pro page, keep identity strict and inspection flexible. Confirm the exact
-registered URL and the current assignment by its `round`, `stage_commit` and
-question path. Within that confirmed page, the Exchange may use any read-only
-inspection method it judges reliable, including visible text, accessibility
-structure, message roles, snapshots or a revised locator. No selector,
-container hierarchy or page-layout assumption is prescribed by this Skill.
-
-If one read-only method cannot associate the visible answer with the current
-assignment, try another reasonable read-only method before reporting a blocker.
-Do not infer that Pro failed to answer merely because a prior wake's locator,
-DOM handle or page-layout assumption no longer works. Do not use response
-controls or resubmit the question as a discovery method.
+On a Pro page, keep identity strict and inspection flexible. Associate the
+answer with the current `round`, `stage_commit` and question using whatever
+read-only evidence is reliable on the live surface. Revise failed assumptions
+and inspect alternative representations before blocking. A stale locator, DOM
+ambiguity or layout change is not evidence that Pro failed to answer. Do not use
+response controls or resubmit the question as a discovery method.
 
 Use model judgment to distinguish active generation, incomplete output and a
 stable completed answer. `WAIT_PRO_THINKING` is appropriate only when current
@@ -177,25 +177,28 @@ associated with the current assignment must be archived and returned as
 `REVIEW_STAGE_COMPLETE`, using `COMPLETE_WITH_GAPS` for content limitations.
 DOM ambiguity alone is not a transport failure.
 
-Create or retain this stage's heartbeat while the current turn is pending. As
-the final browser action of that waiting turn, call
-`browser.tabs.finalize({ keep: [{ tab: <owned-tab>, status: "handoff" }] })`.
-This releases automation control while preserving the live page for the next
-heartbeat; it is not a close. Do not call another browser operation after
-finalize. Send `REVIEW_STAGE_BLOCKED` only for a direct operational or transport
-error, not for ordinary deferred Pro thinking or content quality.
+Create or retain this stage's heartbeat while the response is pending and leave
+the registered page available for the next wake. Send `REVIEW_STAGE_BLOCKED`
+only for a diagnosed operational or transport boundary, not ordinary deferred
+thinking, content quality or one failed inspection method.
+
+When an error occurs, describe the observed evidence, likely semantic cause and
+remaining boundary instead of requesting mechanical instructions. On a retry,
+reread both explicitly invoked Skills and use `recovery_context` only as
+evidence. Choose the recovery method here; do not require the controller to
+supply selectors, browser commands or Antigravity steps. If the failure exposes
+a reusable role-contract weakness, include the smallest Skill improvement
+recommendation in `reason`; the controller owns that protected edit.
 
 ## Heartbeat
 
-Immediately after the external question is visibly accepted, create one
-5-minute heartbeat targeted to this Exchange session. Capture its ID and update
-that same heartbeat with a minimal prompt containing only the router Skill,
-role directory, this Skill, reviewer registry, assignment fields, and heartbeat
-ID. Each wake performs one bounded inspection and ends. Do not sleep, poll,
-resubmit, create a second heartbeat, send waiting messages, or close and reopen
-the owned Pro page. A pending wake must finalize the owned page with
-`status: "handoff"` before ending, and the next wake must claim that page rather
-than create a replacement.
+After the external question is visibly accepted, create one 5-minute heartbeat
+targeted to this Exchange session. Its minimal prompt explicitly invokes both
+current Skills and includes only the role directory, reviewer registry,
+assignment and heartbeat ID. Each wake performs one bounded inspection and ends.
+Do not sleep, poll continuously, resubmit, create a second heartbeat or send
+waiting messages to the controller. Preserve the same external page across
+wakes when possible; page-control mechanics are not part of the contract.
 
 Keep the heartbeat active through raw validation and controller callback.
 Delete and verify deletion only after the callback tool confirms the registered
@@ -222,10 +225,9 @@ If any fact is missing, keep the heartbeat active and end the bounded wake
 without a terminal claim. After the callback succeeds but deletion fails, the
 next wake performs deletion only and must not send the callback again.
 
-After all three terminal facts exist, close the owned Pro page or finalize it
-without a keep entry exactly once. This is the only normal close point for the
-stage. Do not reopen it after terminal cleanup. If final page cleanup fails, do
-not repeat the review, raw write, callback, or heartbeat deletion.
+After all three terminal facts exist, release or close the owned external page.
+If final page cleanup fails, do not repeat the review, raw write, callback or
+heartbeat deletion.
 
 ## Reply to Controller
 
@@ -237,6 +239,8 @@ before the send and copy its current `hostId`, `threadId`, `model`, and
 On success send exactly:
 
 ```text
+$hmasd-task-router
+
 REVIEW_STAGE_COMPLETE
 role=<reviewer_role>
 handoff_id=<round>:<reviewer_role>:complete:<question>
@@ -251,6 +255,8 @@ quality_notes=<concise semantic observation or none>
 On terminal operational or transport failure send exactly:
 
 ```text
+$hmasd-task-router
+
 REVIEW_STAGE_BLOCKED
 role=<reviewer_role>
 handoff_id=<round>:<reviewer_role>:blocked:<stable-code>

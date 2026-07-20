@@ -47,9 +47,32 @@ must not be replaced by another role session.
 
 ## Assignment Envelope
 
+Every persistent-session message starts with explicit Skill activation. The
+first nonempty line is:
+
+```text
+$hmasd-task-router
+```
+
+A controller assignment then names exactly one destination role Skill on the
+next line, such as `$hmasd-code-manager`, `$hmasd-project-manager`,
+`$hmasd-review-exchange`, or `$hmasd-experiment`. The assignment envelope
+follows after a blank line. A role callback to the controller names only
+`$hmasd-task-router` before its callback payload. Literal `role_skill=` fields,
+Skill paths, and prose references do not activate a Skill and are not a
+substitute for these lines.
+
+The recipient rejects a message missing the required explicit invocation before
+using conversation history or doing role work. This reloads the current
+working-tree contracts in long-lived sessions and prevents stale compacted
+context from silently selecting an old procedure.
+
 Send a self-contained envelope:
 
 ```text
+$hmasd-task-router
+$<destination-role-skill>
+
 HMASD_SESSION_TASK
 task_id=<stable id>
 role=<one role>
@@ -79,6 +102,9 @@ Use this communication-only envelope to test a registered persistent route
 without starting its role workflow:
 
 ```text
+$hmasd-task-router
+$<registered-role-skill>
+
 SESSION_ROUTE_SELF_TEST
 task_id=<stable id>
 role=<registered role key>
@@ -94,6 +120,8 @@ Git, project mutation, internal coding workflow, or experiment. Resolve the regi
 controller live and send exactly:
 
 ```text
+$hmasd-task-router
+
 SESSION_ROUTE_SELF_TEST_OK
 role=<registered role key>
 handoff_id=<task_id>:<nonce>
@@ -160,6 +188,21 @@ Skill by keeping its own heartbeat active and retrying only the same stable
 Before replying, resolve the reply destination again as the new recipient.
 Never reuse route metadata carried by the incoming message.
 
+## Semantic Recovery
+
+Routing failures remain strict; role-work failures do not become mechanical
+controller scripts. A role reports the direct evidence, its best semantic
+diagnosis, what remains incomplete, and whether recovery is possible inside the
+same authority. It does not ask the controller to prescribe a selector, command,
+click sequence, code patch or internal reasoning procedure.
+
+When retrying, the controller sends the same bounded assignment to the same
+registered session, explicitly activates the router and that role Skill again,
+and supplies the previous error as evidence plus the desired observable outcome.
+The role rereads both Skills and chooses its own safe recovery approach. A
+repeated failure that reveals a reusable contract defect is returned as a Skill
+improvement recommendation; only the controller edits the protected Skill.
+
 ## Controller Send Contract
 
 For every controller-to-session assignment:
@@ -168,9 +211,11 @@ For every controller-to-session assignment:
 2. require its registered role Skill to equal the assignment's `role_skill`;
 3. take the recipient `thread_id` only from that role entry;
 4. resolve that ID immediately before delivery;
-5. copy the returned `hostId`, `threadId`, `model`, and `thinking` unchanged into
+5. require the prompt to begin with `$hmasd-task-router` and the registered
+   destination role Skill;
+6. copy the returned `hostId`, `threadId`, `model`, and `thinking` unchanged into
    one `send_message_to_thread` call;
-6. accept delivery only when the tool returns the same recipient `threadId`.
+7. accept delivery only when the tool returns the same recipient `threadId`.
 
 Do not send to an ID supplied in free-form task text, reuse cached live metadata,
 compare against a preferred model, or mutate either session's model or thinking.
@@ -267,6 +312,8 @@ Exchange, Code Manager or Experiment Monitor and owns no heartbeat.
 
 Accept a persistent-session callback only when all of these are true:
 
+- the callback prompt explicitly activates `$hmasd-task-router` before the
+  payload;
 - the native delegation metadata `source_thread_id` equals the session ID in
   `references/session-roles.json` for the declared role;
 - the payload contains that role's stable `handoff_id`;

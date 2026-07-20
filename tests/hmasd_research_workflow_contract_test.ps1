@@ -53,8 +53,11 @@ foreach ($legacy in @(
 }
 
 $agents = Read-Text (Join-Path $repo "AGENTS.md")
+$normalizedAgents = $agents -replace '\s+', ' '
 foreach ($required in @(
     "Every persistent HMASD Codex session reads",
+    'Every cross-session prompt explicitly activates',
+    'A `role_skill=` field or a file path is routing data, not Skill activation',
     "Any persistent-session topology change also uses that Skill",
     "Do not send across a partially migrated graph",
     "docs/project/CURRENT_WORK.md",
@@ -63,6 +66,8 @@ foreach ($required in @(
     "Mutation Tiers",
     "ordinary files inside an assigned working scope",
     "Role and Context Firewall",
+    'narrow-interface, wide-process design',
+    'Do not send selectors, shell recipes, click sequences',
     "MARL exploration remains agile",
     "Do not retain backward-compatibility adapters",
     "sole tracked-worktree write lease",
@@ -71,7 +76,7 @@ foreach ($required in @(
     "hmasd-experiment",
     "hmasd-task-router"
 )) {
-    if (-not $agents.Contains($required)) {
+    if (-not $normalizedAgents.Contains($required)) {
         throw "AGENTS.md is missing controller contract: $required"
     }
 }
@@ -105,6 +110,8 @@ if (-not $plan.Contains("# HA-CTSE Active Implementation Plan") -or
 $codeManager = Read-Text (Join-Path $skillsRoot "hmasd-code-manager/SKILL.md")
 foreach ($required in @(
     'START_CODE_WORK',
+    '$hmasd-task-router',
+    '$hmasd-code-manager',
     'code_implementation_manager',
     'docs/project/IMPLEMENTATION_PLAN.md',
     'references/engineering-principles.md',
@@ -135,6 +142,8 @@ foreach ($required in @(
 $experiment = Read-Text (Join-Path $skillsRoot "hmasd-experiment/SKILL.md")
 $protocol = Read-Text (Join-Path $skillsRoot "hmasd-experiment/references/experiment-protocol.md")
 if (-not $experiment.Contains("inside the persistent HMASD experiment-monitor session") -or
+    -not $experiment.Contains('$hmasd-task-router') -or
+    -not $experiment.Contains('$hmasd-experiment') -or
     -not $experiment.Contains("role_skill=.agents/skills/hmasd-experiment/SKILL.md") -or
     -not $experiment.Contains("Do not read project-control") -or
     -not $experiment.Contains("monitor session creates and owns its heartbeat") -or
@@ -163,6 +172,8 @@ $exchange = Read-Text (Join-Path $skillsRoot "hmasd-review-exchange/SKILL.md")
 $normalizedExchange = $exchange -replace '\s+', ' '
 foreach ($required in @(
     'role_skill=.agents/skills/hmasd-review-exchange/SKILL.md',
+    '$hmasd-task-router',
+    '$hmasd-review-exchange',
     'gemini_divergent_exchange',
     'open_divergent_exchange',
     'convergent_exchange',

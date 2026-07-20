@@ -39,6 +39,9 @@ $registry = Join-Path $repo "docs/external-review/REVIEWER_CONVERSATIONS.json"
 $roundId = Split-Path -Leaf $round
 
 @"
+`$hmasd-task-router
+`$hmasd-review-exchange
+
 HMASD REVIEWER EXCHANGE HEARTBEAT
 
 Read the current working-tree versions of:
@@ -54,27 +57,20 @@ reviewer_role=$Stage
 question=$question
 raw=$raw
 
-Perform one bounded inspection of this exchange session's registered external
-response. Reuse a matching controlled tab or claim the exact registered page
-from browser.user.openTabs(); never create a duplicate when that page exists.
-Confirm the registered URL and current assignment, then choose any read-only
-inspection method you judge reliable for the page. You may inspect visible text,
-accessibility structure, message roles, snapshots or revise a failed locator.
-Do not repeat a prior DOM or layout assumption when it conflicts with the
-visible page. Do not report a missing response until another reasonable read-only inspection method has also failed.
-WAIT is legal only when current
-page evidence supports continued generation or changing output.
+Reread both explicitly invoked Skills from the current working tree, confirm the
+registered conversation and current assignment, then choose any reliable
+read-only inspection method for the live surface. Diagnose and adapt when a
+locator, page layout or transport assumption fails. WAIT is legal only when
+current evidence supports continued generation or changing output.
 
 Archive every stable naturally completed response exactly. Then use semantic
 judgment to return COMPLETE or COMPLETE_WITH_GAPS with a concise quality note.
 Do not implement heading, regular-expression or field-presence gates in page
 code, and never convert a content gap into a transport BLOCKED result.
-While Pro is thinking, preserve it by making browser.tabs.finalize({ keep })
-with status handoff the final browser action of this wake. Recover the page by
-opening it only if neither controlled nor user tabs contain the registered URL.
-Never load controller context, operate another reviewer, or resubmit an
-accepted prompt. Follow the exchange Skill for raw archival and controller callback,
-heartbeat deletion, handoff preservation, and the single terminal page close.
+While Pro is thinking, preserve the owned page for the next wake. Never load
+controller context, operate another reviewer, or resubmit an accepted prompt.
+Follow the Exchange Skill for raw archival, controller callback, heartbeat
+ownership and terminal cleanup.
 Prior-turn text and compacted context are not terminal evidence. Never claim callback or
 deletion unless the current stage has its assigned raw and the current wake
 obtains the required send-message and automation-delete tool confirmations. If

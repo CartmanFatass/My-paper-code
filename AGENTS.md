@@ -7,6 +7,15 @@ Every persistent HMASD Codex session reads
 and defines the session assignment envelope; it owns no research,
 implementation, review, experiment, Git, or project-state decision.
 
+Every cross-session prompt explicitly activates the current communication
+contract. Its first nonempty line is `$hmasd-task-router`. A controller
+assignment adds the destination role Skill on the next line, for example
+`$hmasd-review-exchange`; a callback to the controller names only the router
+because `AGENTS.md` is the controller contract. A `role_skill=` field or a file
+path is routing data, not Skill activation. Reject a persistent-session message
+that omits these explicit invocations rather than executing it from stale
+conversation context.
+
 Any persistent-session topology change also uses that Skill. Before changing a
 role, edge, callback destination, or session binding, run its topology impact
 audit and update the registry, sender and receiver role Skills, heartbeat
@@ -92,6 +101,16 @@ broad repository context, or an additional Skill "for reference." Missing
 information is returned as `TASK_BLOCKED`; the recipient does not search for
 implied context.
 
+When a role encounters an error, let that same role diagnose and recover inside
+its existing authority. It reports the observed evidence, semantic cause and
+unresolved boundary to the controller. If another attempt is warranted, the
+controller returns the same bounded assignment to the same session with the
+error evidence and desired outcome, explicitly activating the same two Skills.
+Do not send selectors, shell recipes, click sequences or other mechanical repair
+instructions. If the failure exposes a reusable contract weakness, the role
+recommends the smallest Skill improvement and the controller owns that protected
+change before retrying.
+
 The Code Implementation Manager uses its native coding workflow and remains
 responsible for the complete integrated diff and focused verification. The
 controller does not prescribe internal roles, models, effort settings,
@@ -174,6 +193,14 @@ Separate transport, content quality and scientific adoption:
 Prefer three observable conditions: active work, completed evidence delivery,
 or a direct operational blocker. Do not create additional workflow states for
 formatting differences or ordinary uncertainty.
+
+Role Skills follow a narrow-interface, wide-process design. They strictly define
+identity, authority, evidence boundaries, irreversible effects and callback
+semantics, then leave diagnosis, tool choice, implementation sequence, page
+inspection, progress interpretation and presentation to the assigned model's
+judgment. A role-local procedure is not an acceptance criterion unless violating
+it could corrupt evidence, authority, routing, model settings or protected
+algorithm semantics.
 Before adopting a Convergent recommendation as a code or experiment handoff,
 the controller must receive the Research Project Manager's structured brief and
 show its concise user-facing summary. `REVISE` or `BLOCK` returns the exact

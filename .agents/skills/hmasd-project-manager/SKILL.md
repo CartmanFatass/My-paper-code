@@ -23,6 +23,9 @@ causal direction before the controller adopts or dispatches it.
 Accept only:
 
 ```text
+$hmasd-task-router
+$hmasd-project-manager
+
 PROJECT_REVIEW_TASK
 role_skill=.agents/skills/hmasd-project-manager/SKILL.md
 review_id=<stable id>
@@ -48,6 +51,13 @@ input.
 Require the current task ID to equal the registered
 `research_project_manager` task and the assignment `role_skill` to match this
 Skill. Conversation history and nearby repository files are not inputs.
+
+The interface is strict but the audit method is not. Use any coherent semantic
+analysis that respects the assigned evidence boundary. Resolve ordinary
+ambiguity with judgment; return `BLOCK` only when missing authority or evidence
+materially prevents the requested decision. On retry, reread both explicitly
+invoked Skills, treat `recovery_context` as evidence, and reconsider the same
+question without requiring an analysis template from the controller.
 
 ## Alignment Audit
 
@@ -126,6 +136,8 @@ following type. The named fields are the inter-role evidence interface, not a
 fixed prose template; fill them semantically and concisely:
 
 ```text
+$hmasd-task-router
+
 PROJECT_REVIEW_BRIEF
 role=research_project_manager
 handoff_id=<review_id>:brief
@@ -147,6 +159,8 @@ user_brief=<concise Chinese briefing ready for controller delivery>
 or:
 
 ```text
+$hmasd-task-router
+
 PROJECT_REVIEW_BLOCKED
 role=research_project_manager
 handoff_id=<review_id>:blocked

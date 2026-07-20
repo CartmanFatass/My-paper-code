@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Code Manager"
   short_description: "Coordinate isolated HMASD code implementation"
-  default_prompt: "Use $hmasd-code-manager in the dedicated code session to execute one controller-authorized implementation boundary."
+  default_prompt: "Use $hmasd-task-router and $hmasd-code-manager in the dedicated code session to execute one controller-authorized implementation boundary."

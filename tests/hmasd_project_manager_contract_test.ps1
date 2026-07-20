@@ -13,6 +13,8 @@ $skill = (Get-Content -LiteralPath $skillPath -Raw) -replace '\s+', ' '
 foreach ($required in @(
     'name: hmasd-project-manager',
     'PROJECT_REVIEW_TASK',
+    '$hmasd-task-router',
+    '$hmasd-project-manager',
     'purpose=<CONVERGENT_ADOPTION|ROUTE_ALIGNMENT|HANDOFF_BRIEF>',
     'Research objective:',
     'build a more capable and robust MARL algorithm',
@@ -20,6 +22,8 @@ foreach ($required in @(
     'never become a universal prerequisite',
     'Ordinary MARL remains the strongest matched comparator',
     'does not by itself forbid designing or testing a structurally different algorithm',
+    'The interface is strict but the audit method is not',
+    'without requiring an analysis template from the controller',
     'This role is read-only',
     'Communicate only with the registered controller',
     'PROJECT_REVIEW_BRIEF',
