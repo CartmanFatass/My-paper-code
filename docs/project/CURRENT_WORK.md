@@ -38,17 +38,20 @@ the mandatory direct recurrent null. It selects exactly one next source:
 
 The selected source performs a no-training hindsight authority calculation and
 existing-checkpoint behavior-use decomposition on the same 256 evaluation
-ledgers. It may stop the toy line, reduce the result to scheduled recurrence, or
-make a future matched F0/F1 comparison eligible for separate review. It does
-not authorize that future training or any learned-executor integration.
+ledgers. Its implementation is accepted at
+`74779fa81d4cf563ddaa6a649f8881ba18151225`. The formal read-only run is
+`clean_supplied_executor_opportunity_authority_audit_20260720_092154`; it may
+stop the toy line, reduce the result to scheduled recurrence, or make a future
+matched F0/F1 comparison eligible for separate review. It does not authorize
+that future training or any learned-executor integration.
 
 ## Next Action
 
-Implement and run only the selected evaluation-only
-`READ_ONLY_OPPORTUNITY_AUTHORITY_AND_USE_AUDIT` under the accepted disposition.
-It must not change the original behavior path, task, opportunity process,
-threshold, reward, model, seeds or checkpoints and must perform zero optimizer
-steps. Its terminal result then enters the next tracked external-review round.
+Monitor only the formal evaluation-only
+`clean_supplied_executor_opportunity_authority_audit_20260720_092154` run. It
+must perform zero optimizer steps and preserve the original behavior path,
+task, opportunity process, threshold, reward, model, seeds and checkpoints. Its
+terminal result then enters the next tracked external-review round.
 
 ## Autonomous Boundary
 
