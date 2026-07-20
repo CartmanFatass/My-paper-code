@@ -63,6 +63,10 @@ foreach ($required in @(
     'OPEN_REVIEW_PRINCIPLES.md',
     'CONVERGENT_REVIEW_PRINCIPLES.md',
     'Open questions request a plural portfolio',
+    'Focused Convergent Follow-up',
+    'dispatch only the registered `convergent_exchange`',
+    'Do not create divergent questions, dispatch Gemini or Open Pro',
+    'not a new full external-review round',
     '50_DISPOSITION.md'
 )) {
     if (-not $normalizedSkillText.Contains($required)) {

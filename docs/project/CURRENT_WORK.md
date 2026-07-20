@@ -38,16 +38,16 @@ prefix P. The unique next source is the independent
 
 ## Next Action
 
-Complete the tracked contract-design round
-`docs/external-review/rounds/20260720_benchmark_identifiability_contract_design/`.
+Complete the tracked focused Convergent follow-up
+`docs/external-review/rounds/20260720_benchmark_identifiability_contract_followup/`.
 The convergent result selected
 `BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` but did not freeze concrete
 task dynamics, model, budget, seeds, absolute floors or material margins. The
-design round must choose one code-ready contract covering H hindsight
-authority, C calendar/static null, S shared-lifetime ceiling and D ordinary
-recurrent access. It contains no hierarchy, skills, intrinsic reward or module
-stack. Only the accepted exact contract may be sent to the Code Implementation
-Manager.
+same Convergent reviewer must now freeze one code-ready contract covering H
+hindsight authority, C calendar/static null, S shared-lifetime ceiling and D
+ordinary recurrent access. Do not reopen Gemini/Open-Pro divergence, the
+selected source or portfolio. Only the accepted exact contract may be sent to
+the Code Implementation Manager.
 
 ## Autonomous Boundary
 

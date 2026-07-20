@@ -1,17 +1,18 @@
 ---
 name: hmasd-review-round
-description: Use only by the active HMASD controller for one complete tracked external-review round. It prepares and pushes reviewer-visible boundaries, directly dispatches the three registered reviewer-exchange sessions through the task router, validates immutable raw callbacks, writes factual reconciliation and the accepted disposition, and never operates an external reviewer itself.
+description: Use only by the active HMASD controller for one complete tracked external-review round or one focused follow-up to an already accepted Convergent disposition. It prepares and pushes reviewer-visible boundaries, dispatches only the required registered reviewer-exchange sessions through the task router, validates immutable raw callbacks, writes the accepted disposition, and never operates an external reviewer itself.
 ---
 
 # HMASD External Review Round
 
 ## Scope
 
-This is a controller workflow, not a persistent-session role. Use it only for a
-complete tracked round whose unresolved scientific question requires two blind
-divergent reviews followed by one convergent review. Do not use it for one
-prompt, one returned answer, ordinary result interpretation, literature
-discussion, or an already determined disposition.
+This is a controller workflow, not a persistent-session role. Use it for either
+a complete tracked round whose unresolved scientific question requires two
+blind divergent reviews followed by one convergent review, or the narrowly
+defined focused Convergent follow-up below. Do not use it for an ordinary
+prompt, one returned answer, routine result interpretation, literature
+discussion, or a disposition that is already code-ready.
 
 The controller also reads:
 
@@ -101,6 +102,32 @@ Gemini and Open Pro may run concurrently because their sessions, source views,
 raws and heartbeats are disjoint. Convergent starts only after both verified
 divergent raws, factual reconciliation and its question are in one pushed
 commit.
+
+## Focused Convergent Follow-up
+
+Use exactly one focused follow-up when an accepted Convergent disposition has
+already frozen the scientific source and portfolio but omitted scientific
+values that the Code Implementation Manager is forbidden to choose, such as
+task dynamics, information contracts, model, budget, seeds, absolute floors or
+material margins.
+
+For this case:
+
+1. create a new tracked follow-up directory containing only
+   `00_REVIEW_BRIEF.md` and `40_PRO_CONVERGENT_QUESTION.md` before dispatch;
+2. bind the question to the accepted disposition, its Convergent raw,
+   `ALGORITHM_PRINCIPLES.md`, and `CONVERGENT_REVIEW_PRINCIPLES.md`;
+3. ask only for the missing code-ready contract and allow an explicit stop if
+   no defensible contract can be frozen;
+4. commit, push and verify the question boundary, then dispatch only the
+   registered `convergent_exchange` with the ordinary `REVIEW_STAGE` schema;
+5. archive `41_PRO_CONVERGENT_RAW.md`, adopt one focused disposition, and then
+   update project control once.
+
+Do not create divergent questions, dispatch Gemini or Open Pro, reconsider the
+selected source, reweight the portfolio, or count this clarification as a new
+evidence-bearing research iteration. This is a completion of the prior
+scientific contract, not a new full external-review round.
 
 ## Callback and Recovery
 

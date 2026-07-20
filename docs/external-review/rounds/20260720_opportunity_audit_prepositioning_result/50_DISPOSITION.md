@@ -129,11 +129,12 @@ seeds, model, budget, optimizer exposure and checkpoint choice before launch.
 ## Pre-implementation design boundary
 
 The selected evidence class is scientifically fixed, but the convergent raw
-deliberately leaves the task dynamics, model, budget, seeds, absolute floors
-and material paired margins to be frozen before implementation. The Code
-Implementation Manager cannot choose those scientific quantities. One tracked
-benchmark-contract design round must therefore select and freeze them before a
-valid `START_CODE_WORK` can be issued.
+leaves the task dynamics, model, budget, seeds, absolute floors and material
+paired margins to be frozen before implementation. The Code Implementation
+Manager cannot choose those scientific quantities. One tracked focused
+follow-up to the same Convergent reviewer must therefore freeze them before a
+valid `START_CODE_WORK` can be issued. This follow-up does not reopen the
+portfolio or require new divergent reviews.
 
 After that contract is accepted, its implementation ceiling is:
 
@@ -160,8 +161,8 @@ field, slot, attention, communication, team latent, posterior, hazard, critic
 or reward mechanisms. Do not select best checkpoints or change the frozen
 contract after seeing results.
 
-This disposition authorizes the tracked benchmark-contract design round under
-the existing autonomous boundary. It does not yet authorize code or compute.
-Once that round supplies a complete frozen contract, the existing autonomy may
+This disposition authorizes the tracked focused Convergent follow-up under the
+existing autonomous boundary. It does not yet authorize code or compute. Once
+that follow-up supplies a complete frozen contract, the existing autonomy may
 authorize its bounded implementation and one formal local run. It does not
 authorize a successor algorithm comparison.

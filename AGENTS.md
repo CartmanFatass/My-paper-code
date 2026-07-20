@@ -49,6 +49,10 @@ Unresolved hypothesis generation, portfolio weighting, or next-evidence choice
 is sent through one tracked external-review round. The controller directly
 coordinates the three registered Exchange sessions but does not silently
 replace a missing convergent disposition.
+When an accepted convergent disposition has already selected the evidence
+source but omits code-ready scientific constants, the controller sends one
+tracked focused follow-up to that same registered Convergent Exchange. Do not
+reopen Gemini or Open-Pro divergence, the source choice, or the portfolio.
 
 During ordinary work the controller does not execute a role procedure. It may
 inspect or repair a role Skill only when the user explicitly requests workflow
