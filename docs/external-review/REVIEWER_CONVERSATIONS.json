@@ -31,8 +31,8 @@
       "surface": "codex_in_app_browser",
       "ui_scope": "application_shared",
       "logical_owner": "registered_pro_exchange",
-      "foreground_policy": "navigate_once_then_keep_owned_page_open",
-      "waiting_policy": "inspect_in_place_without_close_or_reopen",
+      "foreground_policy": "reuse_controlled_or_claim_registered_user_tab",
+      "waiting_policy": "finalize_keep_handoff_without_reload_or_duplicate",
       "terminal_policy": "close_once_after_raw_callback_and_heartbeat_cleanup"
     },
     "heartbeat": {

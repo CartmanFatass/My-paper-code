@@ -75,12 +75,14 @@ question is already accepted, never resubmit it.
 Before the initial Pro transport, call `codex_app__navigate_to_codex_page` once
 with this Exchange session's registered task ID, then verify the exact
 registered reviewer URL and visible `Pro`. Keep that owned page open for the
-whole assigned stage. A heartbeat wake inspects the existing owned page in
-place; it must not close, finalize, detach, reopen, or renavigate the page while
-Pro is thinking. Only if the page was genuinely lost because the user or app
-closed it or the browser restarted may the Exchange navigate once to recover
-the same registered page. Never use ambient browser state or operate another
-reviewer page.
+whole assigned stage. At the start of every later inspection, first reuse a
+matching controlled tab from `browser.tabs.list()`. Otherwise inspect
+`browser.user.openTabs()` and pass the exact matching registered-URL object to
+`browser.user.claimTab(...)`. Do not create a duplicate tab when that user tab
+exists, and do not call `goto` when the claimed tab is already on the registered
+URL. Only if neither surface contains the registered page may the Exchange open
+it once as recovery. Never use an unrelated ambient tab or operate another
+reviewer page; ambient browser state is not assignment authority.
 
 For Gemini, use only the registered Antigravity conversation and allowlisted
 manifest. The two tracked Gemini launch scripts permanently include
@@ -120,10 +122,12 @@ review content and the existing raw does not satisfy it.
 On a Pro page, the visible deferred action `立即回答` means the request was
 accepted and Pro is still working. It is a waiting state, never a transport
 failure and never permission to click the control. Create or retain this
-stage's heartbeat, end the bounded inspection without closing the browser, and
-let the next heartbeat inspect the same open page. Send `REVIEW_STAGE_BLOCKED`
-only for a direct terminal transport error, not for ordinary deferred Pro
-thinking.
+stage's heartbeat. As the final browser action of that waiting turn, call
+`browser.tabs.finalize({ keep: [{ tab: <owned-tab>, status: "handoff" }] })`.
+This releases automation control while preserving the live page for the next
+heartbeat; it is not a close. Do not call another browser operation after
+finalize. Send `REVIEW_STAGE_BLOCKED` only for a direct terminal transport
+error, not for ordinary deferred Pro thinking.
 
 ## Heartbeat
 
@@ -133,7 +137,9 @@ that same heartbeat with a minimal prompt containing only the router Skill,
 role directory, this Skill, reviewer registry, assignment fields, and heartbeat
 ID. Each wake performs one bounded inspection and ends. Do not sleep, poll,
 resubmit, create a second heartbeat, send waiting messages, or close and reopen
-the owned Pro page.
+the owned Pro page. A pending wake must finalize the owned page with
+`status: "handoff"` before ending, and the next wake must claim that page rather
+than create a replacement.
 
 Keep the heartbeat active through raw validation and controller callback.
 Delete and verify deletion only after the callback tool confirms the registered
@@ -160,10 +166,10 @@ If any fact is missing, keep the heartbeat active and end the bounded wake
 without a terminal claim. After the callback succeeds but deletion fails, the
 next wake performs deletion only and must not send the callback again.
 
-After all three terminal facts exist, close or finalize the owned Pro page
-exactly once. This is the only normal close point for the stage. Do not reopen
-it after terminal cleanup. If final page cleanup fails, do not repeat the
-review, raw write, callback, or heartbeat deletion.
+After all three terminal facts exist, close the owned Pro page or finalize it
+without a keep entry exactly once. This is the only normal close point for the
+stage. Do not reopen it after terminal cleanup. If final page cleanup fails, do
+not repeat the review, raw write, callback, or heartbeat deletion.
 
 ## Reply to Controller
 

@@ -58,11 +58,13 @@ question-required field, and exact captured-text equality after rereading the
 file; nonempty alone is not completion. An externally accepted stage is never
 resubmitted.
 
-Each Pro Exchange uses one browser lifecycle per assigned stage: navigate to
-its registered page once, keep that page open while Pro is thinking, inspect it
-in place on heartbeat wakes, and close it once only after raw archival,
-controller callback, and heartbeat cleanup. Waiting never closes and reopens a
-Pro page; navigation recovery is allowed only after genuine external page loss.
+Each Pro Exchange uses one browser lifecycle per assigned stage. At the end of
+a waiting wake it finalizes the registered page with `status: "handoff"`, which
+keeps the page open after automation releases it. The next wake first claims
+that exact user-visible page and never creates or reloads a duplicate. It closes
+the page once only after raw archival, controller callback and heartbeat
+cleanup. Navigation recovery is allowed only when the registered page is absent
+from both controlled and user-visible tabs.
 
 The workflow uses no intermediate persistent session, Git handoff callback, or
 review state file. The controller has no review heartbeat. Each Exchange

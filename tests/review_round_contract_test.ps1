@@ -32,8 +32,8 @@ if ($registry.schema_version -ne 21 -or
     $registry.exchange_contract.heartbeat.target -ne 'self' -or
     $registry.exchange_contract.heartbeat.interval_minutes -ne 5 -or
     $registry.exchange_contract.browser.logical_owner -ne 'registered_pro_exchange' -or
-    $registry.exchange_contract.browser.foreground_policy -ne 'navigate_once_then_keep_owned_page_open' -or
-    $registry.exchange_contract.browser.waiting_policy -ne 'inspect_in_place_without_close_or_reopen' -or
+    $registry.exchange_contract.browser.foreground_policy -ne 'reuse_controlled_or_claim_registered_user_tab' -or
+    $registry.exchange_contract.browser.waiting_policy -ne 'finalize_keep_handoff_without_reload_or_duplicate' -or
     $registry.exchange_contract.browser.terminal_policy -ne 'close_once_after_raw_callback_and_heartbeat_cleanup' -or
     $registry.reviewers.gemini_divergent.session_role -ne 'gemini_divergent_exchange' -or
     $registry.reviewers.open_divergent.session_role -ne 'open_divergent_exchange' -or
@@ -97,8 +97,12 @@ foreach ($required in @(
     "Contact only the controller",
     "codex_app__navigate_to_codex_page",
     "Keep that owned page open for the whole assigned stage",
-    "must not close, finalize, detach, reopen, or renavigate",
-    "inspect the same open page",
+    "browser.user.openTabs()",
+    "browser.user.claimTab",
+    "Do not create a duplicate tab",
+    "browser.tabs.finalize({ keep:",
+    'status: "handoff"',
+    "final browser action",
     "only normal close point for the stage",
     "ambient browser state",
     "retry that exact command once",
@@ -249,8 +253,10 @@ try {
         }
     }
     foreach ($required in @(
-        "already-open owned page",
-        "without closing, finalizing",
+        "claim the exact registered page",
+        "never create a duplicate",
+        "browser.tabs.finalize({ keep })",
+        "status handoff",
         "single terminal page close")) {
         if (-not $prompt.Contains($required)) {
             throw "Rendered heartbeat lacks stable browser lifecycle: $required"

@@ -55,12 +55,14 @@ question=$question
 raw=$raw
 
 Perform one bounded inspection of this exchange session's registered external
-response in the already-open owned page and end without closing, finalizing,
-detaching, reopening, or renavigating that page while Pro is thinking. Recover
-the same registered page only if it was genuinely lost outside this workflow.
+response. Reuse a matching controlled tab or claim the exact registered page
+from browser.user.openTabs(); never create a duplicate when that page exists.
+While Pro is thinking, preserve it by making browser.tabs.finalize({ keep })
+with status handoff the final browser action of this wake. Recover the page by
+opening it only if neither controlled nor user tabs contain the registered URL.
 Never load controller context, operate another reviewer, or resubmit an
 accepted prompt. Follow the exchange Skill for raw validation and controller callback,
-heartbeat deletion, and the single terminal page close.
+heartbeat deletion, handoff preservation, and the single terminal page close.
 Prior-turn text and compacted context are not terminal evidence. Never claim callback or
 deletion unless the current stage has its assigned raw and the current wake
 obtains the required send-message and automation-delete tool confirmations. If
