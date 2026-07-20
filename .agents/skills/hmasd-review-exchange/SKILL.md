@@ -119,10 +119,24 @@ regardless of an earlier blocked callback or a later wording-only question
 change. Resubmit only when the controller explicitly assigns materially changed
 review content and the existing raw does not satisfy it.
 
-On a Pro page, the visible deferred action `立即回答` means the request was
-accepted and Pro is still working. It is a waiting state, never a transport
-failure and never permission to click the control. Create or retain this
-stage's heartbeat. As the final browser action of that waiting turn, call
+On a Pro page, determine state from the current assigned turn only. Locate the
+user turn containing this stage's exact round and commit, then inspect only its
+following assistant response container and current-generation indicator.
+Controls inside historical turns, page navigation, a prior response, or another
+conversation section are irrelevant. Never scan all page buttons and treat any
+matching label as current-stage state.
+
+A current-turn `停止回答` or deferred `立即回答` means the request was accepted
+and Pro is still working. It is a waiting state, never a transport failure and
+never permission to click the control. `重新生成` on a stable completed current
+response is a completion affordance, not a thinking signal; it must not block
+archival. A `继续` control associated with the current response means the answer
+is incomplete and must not be clicked or archived. Do not decide from controls
+alone: natural completion requires stable current-response text, every field
+required by the pinned question, and no current-turn active/deferred indicator.
+
+Create or retain this stage's heartbeat while the current turn is pending. As
+the final browser action of that waiting turn, call
 `browser.tabs.finalize({ keep: [{ tab: <owned-tab>, status: "handoff" }] })`.
 This releases automation control while preserving the live page for the next
 heartbeat; it is not a close. Do not call another browser operation after

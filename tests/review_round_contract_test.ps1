@@ -122,7 +122,11 @@ foreach ($required in @(
     "codex_app__send_message_to_thread",
     "codex_app__automation_update",
     "Text saying that a callback or deletion happened is never evidence",
-    'the visible deferred action `立即回答` means the request was accepted',
+    'current assigned turn only',
+    'Never scan all page buttons',
+    'current-turn `停止回答` or deferred `立即回答`',
+    '`重新生成` on a stable completed current response is a completion affordance',
+    'Do not decide from controls alone',
     "waiting state, never a transport failure",
     "not for ordinary deferred Pro thinking",
     "OPEN_REVIEW_PRINCIPLES.md",
@@ -255,6 +259,8 @@ try {
     foreach ($required in @(
         "claim the exact registered page",
         "never create a duplicate",
+        "Scope completion and control detection to the exact assigned user turn",
+        "regenerate control is not a thinking signal",
         "browser.tabs.finalize({ keep })",
         "status handoff",
         "single terminal page close")) {

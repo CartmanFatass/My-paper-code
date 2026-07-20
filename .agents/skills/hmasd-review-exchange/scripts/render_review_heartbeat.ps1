@@ -57,6 +57,9 @@ raw=$raw
 Perform one bounded inspection of this exchange session's registered external
 response. Reuse a matching controlled tab or claim the exact registered page
 from browser.user.openTabs(); never create a duplicate when that page exists.
+Scope completion and control detection to the exact assigned user turn and its
+following assistant response. Ignore matching buttons in historical turns or
+other page regions; a current completed response's regenerate control is not a thinking signal.
 While Pro is thinking, preserve it by making browser.tabs.finalize({ keep })
 with status handoff the final browser action of this wake. Recover the page by
 opening it only if neither controlled nor user tabs contain the registered URL.
