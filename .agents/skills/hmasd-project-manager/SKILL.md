@@ -40,6 +40,11 @@ Read, in order:
 5. `docs/project/ALGORITHM_PRINCIPLES.md`;
 6. only the assigned inputs.
 
+For a large ledger or archive, locate the assigned experiment/round ID and read
+that complete record plus only the immediately referenced evidence. Do not scan
+or chunk unrelated historical entries merely because the file was named as an
+input.
+
 Require the current task ID to equal the registered
 `research_project_manager` task and the assignment `role_skill` to match this
 Skill. Conversation history and nearby repository files are not inputs.
