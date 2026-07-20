@@ -38,14 +38,16 @@ prefix P. The unique next source is the independent
 
 ## Next Action
 
-Send the accepted
-`BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` boundary to the registered
-Code Implementation Manager. The implementation must create one independent
-non-calendar heterogeneous-commitment benchmark and one frozen result covering
-H hindsight authority, C calendar/static null, S shared-lifetime ceiling and D
-ordinary recurrent access. It contains no hierarchy, skills, intrinsic reward
-or module stack. After manager acceptance, the controller reviews launch
-readiness and runs the single authorized local formal source.
+Complete the tracked contract-design round
+`docs/external-review/rounds/20260720_benchmark_identifiability_contract_design/`.
+The convergent result selected
+`BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` but did not freeze concrete
+task dynamics, model, budget, seeds, absolute floors or material margins. The
+design round must choose one code-ready contract covering H hindsight
+authority, C calendar/static null, S shared-lifetime ceiling and D ordinary
+recurrent access. It contains no hierarchy, skills, intrinsic reward or module
+stack. Only the accepted exact contract may be sent to the Code Implementation
+Manager.
 
 ## Autonomous Boundary
 

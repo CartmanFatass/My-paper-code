@@ -126,10 +126,16 @@ seeds, model, budget, optimizer exposure and checkpoint choice before launch.
    held-out checks. Only then may a separate review consider a matched D-vs-R
    source; this branch does not automatically authorize it.
 
-## Minimal implementation boundary
+## Pre-implementation design boundary
 
-The existing autonomous authorization permits the Code Implementation Manager
-to design and implement only:
+The selected evidence class is scientifically fixed, but the convergent raw
+deliberately leaves the task dynamics, model, budget, seeds, absolute floors
+and material paired margins to be frozen before implementation. The Code
+Implementation Manager cannot choose those scientific quantities. One tracked
+benchmark-contract design round must therefore select and freeze them before a
+valid `START_CODE_WORK` can be issued.
+
+After that contract is accepted, its implementation ceiling is:
 
 - `docs/research/designs/NONCALENDAR_HETEROGENEOUS_COMMITMENT_BENCHMARK_G0.md`;
 - `ha_ctse_process/noncalendar_commitment_testbed.py`;
@@ -154,6 +160,8 @@ field, slot, attention, communication, team latent, posterior, hazard, critic
 or reward mechanisms. Do not select best checkpoints or change the frozen
 contract after seeing results.
 
-This disposition authorizes the bounded implementation and, after manager
-acceptance plus controller launch-readiness review, one formal local run under
-the frozen contract. It does not authorize a successor algorithm comparison.
+This disposition authorizes the tracked benchmark-contract design round under
+the existing autonomous boundary. It does not yet authorize code or compute.
+Once that round supplies a complete frozen contract, the existing autonomy may
+authorize its bounded implementation and one formal local run. It does not
+authorize a successor algorithm comparison.
