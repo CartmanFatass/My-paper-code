@@ -34,20 +34,24 @@ skills and variable-lifetime mechanisms whose purpose is to build a stronger
 MARL algorithm. The Convergent raw remains historical reviewer evidence; its
 route is not active authority.
 
+The subsequent focused review retained `EVENT_HELD_COMMITMENT` as a
+mission-aligned primary-algorithm proposal, but its final code-ready claim was
+not adopted. The registered Research Project Manager returned `REVISE` because
+segment continuity, TERMINATE support, rollout-truncation ownership, exact
+capacity/optimizer exposure and the statistical branch partition remain
+non-unique. No implementation or experiment authority exists for this source.
+
 ## Next Action
 
-Rerun the same event-held-commitment focused correction against a fresh,
-Git-visible boundary. The prior transport completed but the external reviewer
-read stale commit `4dc1c3b582d2c86ef68dce848e7e8ce62f7d9bb8` instead of the assigned
-commit, so it supplied no scientific disposition. The corrected route must
-advance a stronger variable-membership, variable-lifetime MARL algorithm;
-ordinary MARL remains a matched comparator or diagnostic, not a universal
-admission gate. No code or experiment is authorized until an aligned
-disposition is accepted.
+Autonomous progression is paused at a scientific-contract boundary. The final
+focused completion did not yield an adoptable executable successor, and another
+automatic field-completion loop is not authorized. User direction is required
+to stop this source or open a fresh portfolio round. No code or experiment is
+authorized.
 
 ## Autonomous Boundary
 
-- Status: ACTIVE
+- Status: PAUSED_CONTRACT_INCOMPLETE
 - Authorized evidence-bearing iterations: five additional iterations from this
   corrected boundary
 - Remaining iterations: five
@@ -90,3 +94,6 @@ disposition is accepted.
   — completed G0 no-access portfolio and accepted evidence boundary.
 - `docs/external-review/rounds/20260720_noncalendar_g0_direct_access_clarification/`
   — immutable clarification raw plus retracted objective-inverting disposition.
+- `docs/external-review/rounds/20260720_event_held_commitment_replay_statistical_finalization/`
+  — final focused raw and controller non-adoption record; no code or experiment
+  handoff.
