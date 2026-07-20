@@ -62,6 +62,9 @@ following assistant response. Ignore matching buttons in historical turns or
 other page regions; a current completed response's regenerate control is not a thinking signal.
 Use data-message-author-role user/assistant containers (or their enclosing
 conversation-turn articles); never infer the reply with section index plus one.
+Validate numbered sections semantically; translated headings are acceptable.
+WAIT is legal only for a current generation indicator or changing text. A
+stable completed response with missing fields is terminal BLOCKED, not WAIT.
 While Pro is thinking, preserve it by making browser.tabs.finalize({ keep })
 with status handoff the final browser action of this wake. Recover the page by
 opening it only if neither controlled nor user tabs contain the registered URL.

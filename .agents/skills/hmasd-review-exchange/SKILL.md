@@ -104,6 +104,12 @@ sufficient. For an existing raw, inspect this session's registered external
 conversation once and repeat the same completion and equality checks before
 reporting success.
 
+Validate required sections by numbered structure and semantic field content,
+not by English heading string equality, unless the pinned question explicitly
+requires literal tokens. A Chinese or bilingual heading is valid when its
+section unambiguously contains the required decision field. Do not use a list
+of English `includes(...)` checks as the completion gate.
+
 Never use a prior turn, another round, a compacted-context summary, local final
 text, or a heartbeat message as evidence that the current stage completed. If
 context compaction occurs during a bounded inspection, discard every
@@ -143,13 +149,23 @@ is incomplete and must not be clicked or archived. Do not decide from controls
 alone: natural completion requires stable current-response text, every field
 required by the pinned question, and no current-turn active/deferred indicator.
 
+`WAIT_PRO_THINKING` is legal only when the current assigned turn has an active
+or deferred generation indicator, or when two bounded reads in the same wake
+show that its assistant text is still changing. If the current response is
+naturally complete and stable but a required field is genuinely absent, send
+`REVIEW_STAGE_BLOCKED` with stable code
+`COMPLETED_RESPONSE_MISSING_REQUIRED_FIELDS`, naming the missing fields; delete
+and verify the stage heartbeat after callback delivery. A completed response
+must never remain in `WAIT` merely because validation failed.
+
 Create or retain this stage's heartbeat while the current turn is pending. As
 the final browser action of that waiting turn, call
 `browser.tabs.finalize({ keep: [{ tab: <owned-tab>, status: "handoff" }] })`.
 This releases automation control while preserving the live page for the next
 heartbeat; it is not a close. Do not call another browser operation after
-finalize. Send `REVIEW_STAGE_BLOCKED` only for a direct terminal transport
-error, not for ordinary deferred Pro thinking.
+finalize. Send `REVIEW_STAGE_BLOCKED` for a direct terminal transport error or
+a naturally completed response that fails the pinned field contract, not for
+ordinary deferred Pro thinking.
 
 ## Heartbeat
 
