@@ -72,10 +72,15 @@ Verify `stage_commit` and the assigned question are remotely visible before any
 Pro submission. Submit the neutral handoff exactly once. If the matching
 question is already accepted, never resubmit it.
 
-Before every Pro browser operation, call
-`codex_app__navigate_to_codex_page` with this Exchange session's registered task
-ID, then verify the exact registered reviewer URL and visible `Pro`. Never use
-ambient browser state or operate another reviewer page.
+Before the initial Pro transport, call `codex_app__navigate_to_codex_page` once
+with this Exchange session's registered task ID, then verify the exact
+registered reviewer URL and visible `Pro`. Keep that owned page open for the
+whole assigned stage. A heartbeat wake inspects the existing owned page in
+place; it must not close, finalize, detach, reopen, or renavigate the page while
+Pro is thinking. Only if the page was genuinely lost because the user or app
+closed it or the browser restarted may the Exchange navigate once to recover
+the same registered page. Never use ambient browser state or operate another
+reviewer page.
 
 For Gemini, use only the registered Antigravity conversation and allowlisted
 manifest. The two tracked Gemini launch scripts permanently include
@@ -115,9 +120,10 @@ review content and the existing raw does not satisfy it.
 On a Pro page, the visible deferred action `立即回答` means the request was
 accepted and Pro is still working. It is a waiting state, never a transport
 failure and never permission to click the control. Create or retain this
-stage's heartbeat, close the bounded inspection, and let the next heartbeat
-reopen the registered page. Send `REVIEW_STAGE_BLOCKED` only for a direct
-terminal transport error, not for ordinary deferred Pro thinking.
+stage's heartbeat, end the bounded inspection without closing the browser, and
+let the next heartbeat inspect the same open page. Send `REVIEW_STAGE_BLOCKED`
+only for a direct terminal transport error, not for ordinary deferred Pro
+thinking.
 
 ## Heartbeat
 
@@ -126,7 +132,8 @@ Immediately after the external question is visibly accepted, create one
 that same heartbeat with a minimal prompt containing only the router Skill,
 role directory, this Skill, reviewer registry, assignment fields, and heartbeat
 ID. Each wake performs one bounded inspection and ends. Do not sleep, poll,
-resubmit, create a second heartbeat, or send waiting messages.
+resubmit, create a second heartbeat, send waiting messages, or close and reopen
+the owned Pro page.
 
 Keep the heartbeat active through raw validation and controller callback.
 Delete and verify deletion only after the callback tool confirms the registered
@@ -152,6 +159,11 @@ terminal-success wording unless all three facts were produced for this stage.
 If any fact is missing, keep the heartbeat active and end the bounded wake
 without a terminal claim. After the callback succeeds but deletion fails, the
 next wake performs deletion only and must not send the callback again.
+
+After all three terminal facts exist, close or finalize the owned Pro page
+exactly once. This is the only normal close point for the stage. Do not reopen
+it after terminal cleanup. If final page cleanup fails, do not repeat the
+review, raw write, callback, or heartbeat deletion.
 
 ## Reply to Controller
 

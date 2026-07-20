@@ -32,6 +32,9 @@ if ($registry.schema_version -ne 21 -or
     $registry.exchange_contract.heartbeat.target -ne 'self' -or
     $registry.exchange_contract.heartbeat.interval_minutes -ne 5 -or
     $registry.exchange_contract.browser.logical_owner -ne 'registered_pro_exchange' -or
+    $registry.exchange_contract.browser.foreground_policy -ne 'navigate_once_then_keep_owned_page_open' -or
+    $registry.exchange_contract.browser.waiting_policy -ne 'inspect_in_place_without_close_or_reopen' -or
+    $registry.exchange_contract.browser.terminal_policy -ne 'close_once_after_raw_callback_and_heartbeat_cleanup' -or
     $registry.reviewers.gemini_divergent.session_role -ne 'gemini_divergent_exchange' -or
     $registry.reviewers.open_divergent.session_role -ne 'open_divergent_exchange' -or
     $registry.reviewers.convergent.session_role -ne 'convergent_exchange') {
@@ -93,6 +96,10 @@ foreach ($required in @(
     "convergent_exchange",
     "Contact only the controller",
     "codex_app__navigate_to_codex_page",
+    "Keep that owned page open for the whole assigned stage",
+    "must not close, finalize, detach, reopen, or renavigate",
+    "inspect the same open page",
+    "only normal close point for the stage",
     "ambient browser state",
     "retry that exact command once",
     "duplicate consent",
@@ -239,6 +246,14 @@ try {
         "threadId=")) {
         if ($prompt.Contains($forbidden)) {
             throw "Rendered heartbeat leaks unrelated context or routing: $forbidden"
+        }
+    }
+    foreach ($required in @(
+        "already-open owned page",
+        "without closing, finalizing",
+        "single terminal page close")) {
+        if (-not $prompt.Contains($required)) {
+            throw "Rendered heartbeat lacks stable browser lifecycle: $required"
         }
     }
 } finally {

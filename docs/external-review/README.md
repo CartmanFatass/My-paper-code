@@ -58,6 +58,12 @@ question-required field, and exact captured-text equality after rereading the
 file; nonempty alone is not completion. An externally accepted stage is never
 resubmitted.
 
+Each Pro Exchange uses one browser lifecycle per assigned stage: navigate to
+its registered page once, keep that page open while Pro is thinking, inspect it
+in place on heartbeat wakes, and close it once only after raw archival,
+controller callback, and heartbeat cleanup. Waiting never closes and reopens a
+Pro page; navigation recovery is allowed only after genuine external page loss.
+
 The workflow uses no intermediate persistent session, Git handoff callback, or
 review state file. The controller has no review heartbeat. Each Exchange
 independently owns one 5-minute heartbeat only while its external response or

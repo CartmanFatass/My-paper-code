@@ -31,7 +31,9 @@
       "surface": "codex_in_app_browser",
       "ui_scope": "application_shared",
       "logical_owner": "registered_pro_exchange",
-      "foreground_policy": "navigate_to_own_exchange_before_browser_operation"
+      "foreground_policy": "navigate_once_then_keep_owned_page_open",
+      "waiting_policy": "inspect_in_place_without_close_or_reopen",
+      "terminal_policy": "close_once_after_raw_callback_and_heartbeat_cleanup"
     },
     "heartbeat": {
       "kind": "heartbeat",
