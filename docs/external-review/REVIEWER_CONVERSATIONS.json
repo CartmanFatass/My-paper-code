@@ -1,65 +1,21 @@
 {
-  "schema_version": 22,
+  "schema_version": 23,
   "updated": "2026-07-20",
   "round_controller": {
     "kind": "active_controller_direct_exchange",
     "session_role_registry": ".agents/skills/hmasd-task-router/references/session-roles.json",
-    "exchange_messages": {
-      "controller_to_exchange": "REVIEW_STAGE",
-      "exchange_to_controller": [
-        "REVIEW_STAGE_COMPLETE",
-        "REVIEW_STAGE_BLOCKED"
-      ]
-    },
-    "owns": [
-      "direct_reviewer_stage_dispatch",
-      "active_round_questions",
-      "raw_acceptance",
-      "evidence_reconciliation",
-      "final_disposition",
-      "git_visible_round_boundaries"
-    ],
-    "git_boundary": {
-      "controller_role": "inspect_commit_push_before_each_downstream_dispatch"
-    }
+    "external_stage": "OPEN_DIVERGENT",
+    "scientific_convergence": "research_project_manager",
+    "git_boundary_owner": "active_controller"
   },
   "exchange_contract": {
     "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md",
     "one_reviewer_per_session": true,
     "controller_contact": "required_terminal_callback",
-    "browser": {
-      "surface": "codex_in_app_browser",
-      "ui_scope": "application_shared",
-      "logical_owner": "registered_pro_exchange",
-      "access_policy": "operate_only_registered_conversation_and_avoid_unnecessary_duplicates_or_reloads",
-      "waiting_policy": "preserve_registered_page_for_next_wake",
-      "terminal_policy": "release_page_after_raw_callback_and_heartbeat_cleanup"
-    },
-    "heartbeat": {
-      "kind": "heartbeat",
-      "name_template": "hmasd-review-<round>-<stage>",
-      "owner": "registered_reviewer_exchange_session",
-      "target": "self",
-      "interval_minutes": 5,
-      "active_condition": "one accepted external response or controller callback is pending",
-      "terminal_order": "validate_raw_then_confirm_controller_callback_then_delete",
-      "duplicate_policy": "same_handoff_id_is_idempotent"
-    }
+    "heartbeat_minutes": 5,
+    "terminal_order": "validate_raw_then_confirm_controller_callback_then_delete"
   },
   "reviewers": {
-    "gemini_divergent": {
-      "role": "GEMINI_DIVERGENT",
-      "session_role": "gemini_divergent_exchange",
-      "conversation_id": "111dc970-bd72-4d67-8d7a-caea65394b78",
-      "expected_model": "Gemini 3.1 Pro (High)",
-      "transport": "reviewer_exchange_antigravity_cli",
-      "raw_file": "11_GEMINI_DIVERGENT_RAW.md",
-      "standing_consent": {
-        "state": "APPROVED",
-        "scope": "tracked_round_gemini_local_source_manifests",
-        "constraints": "manifest-listed project files and Antigravity state root only; no credentials, personal files, training, or unrelated execution"
-      }
-    },
     "open_divergent": {
       "role": "OPEN_DIVERGENT",
       "session_role": "open_divergent_exchange",
@@ -67,16 +23,8 @@
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
       "transport": "reviewer_exchange_in_app_browser",
+      "question_file": "20_PRO_OPEN_QUESTION.md",
       "raw_file": "21_PRO_OPEN_RAW.md"
-    },
-    "convergent": {
-      "role": "CONVERGENT",
-      "session_role": "convergent_exchange",
-      "conversation_id": "6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
-      "url": "https://chatgpt.com/c/6a5a77a4-b4e4-83e8-b8c6-30bd5f84a638",
-      "expected_model_ui": "Pro",
-      "transport": "reviewer_exchange_in_app_browser",
-      "raw_file": "41_PRO_CONVERGENT_RAW.md"
     }
   }
 }

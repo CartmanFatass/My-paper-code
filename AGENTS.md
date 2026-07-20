@@ -42,33 +42,23 @@ the project document needed for the current boundary:
 - `docs/project/ALGORITHM_PRINCIPLES.md` for scientific constraints;
 - `docs/project/ExpRecord.md` for a formal experiment contract or disposition.
 
-The controller alone owns root project state, adoption of external scientific
-decisions, implementation and experiment authorization, Git integration,
-evidence integrity, and user communication. The dedicated Code Implementation
-Manager owns concrete executable architecture, `IMPLEMENTATION_PLAN.md`, code
-implementation, engineering-quality application, and focused verification
-inside one controller-authorized boundary. Its internal coding workflow is not
-prescribed by project documents.
-The dedicated Research Project Manager is a read-only mission-alignment layer.
-After Convergent review and before scientific implementation or experiment
-handoff, it checks that the proposed action advances the stronger-MARL target,
-does not invert mechanism and evidence causality, and does not promote a
-diagnostic baseline into a universal research prerequisite. It returns one
-user-visible review brief directly to the controller. The controller retains
-adoption and authorization authority.
-The registered Code Implementation Manager has standing, permanent, exclusive
-write authority over `docs/project/IMPLEMENTATION_PLAN.md` whenever it has
-accepted a valid `START_CODE_WORK`. It may create, replace, or clear that plan
-without per-edit approval. The assignment still bounds the scientific scope;
-this standing grant does not authorize experiments, Git, or a successor route.
-Unresolved hypothesis generation, portfolio weighting, or next-evidence choice
-is sent through one tracked external-review round. The controller directly
-coordinates the three registered Exchange sessions but does not silently
-replace a missing convergent disposition.
-When an accepted convergent disposition has already selected the evidence
-source but omits code-ready scientific constants, the controller sends one
-tracked focused follow-up to that same registered Convergent Exchange. Do not
-reopen Gemini or Open-Pro divergence, the source choice, or the portfolio.
+The controller alone owns root project state, scientific adoption,
+implementation and experiment authorization, Git integration, evidence
+integrity and user communication.
+
+The registered Research Project Manager owns two bounded functions. In
+scientific-convergence mode it reads Open-Pro divergent evidence and project
+principles, maintains the idea portfolio and selects one code-ready next source
+or stop. In implementation-management mode, entered only after separate
+controller authorization, it owns the executable architecture,
+`IMPLEMENTATION_PLAN.md`, task partitioning, temporary implementation and
+review subagents, integrated diff and focused acceptance. The controller retains
+adoption, Git and experiment authority.
+
+Unresolved hypothesis generation, portfolio weighting or next-evidence choice
+uses one tracked Open-Pro divergent round followed by Research Project Manager
+convergence. Concrete implementation is managed by that same manager through
+temporary implementation and review subagents.
 
 During ordinary work the controller does not execute a role procedure. It may
 inspect or repair a role Skill only when the user explicitly requests workflow
@@ -78,21 +68,19 @@ maintenance or a terminal protocol failure identifies that Skill as the fault.
 
 Choose exactly one execution surface and one role:
 
-- complete code implementation or repair workflow -> persistent session with
-  `$hmasd-task-router` and `$hmasd-code-manager`;
-- Convergent adoption, route-alignment audit, or scientific handoff brief ->
-  persistent session with `$hmasd-task-router` and `$hmasd-project-manager`;
-- complete external review -> controller uses `$hmasd-review-round` and
-  `$hmasd-task-router` to dispatch the three registered, one-reviewer-per-session
-  exchanges; each exchange uses `$hmasd-review-exchange`;
+- scientific convergence or implementation management -> persistent Research
+  Project Manager with `$hmasd-task-router` and `$hmasd-project-manager`;
+- external divergent review -> controller uses `$hmasd-review-round` and
+  `$hmasd-task-router` to dispatch the registered Open-Pro Exchange, which uses
+  `$hmasd-review-exchange`;
 - authorized run monitoring -> persistent session with `$hmasd-task-router`
   and `$hmasd-experiment`.
 
-There is no general controller orchestration Skill. The controller sends code
-work only to the Code Implementation Manager, external-review stages directly
-to their registered Exchange sessions, and monitoring only to the Experiment
-Monitor. It sends mission-alignment review only to the Research Project Manager.
-A role completion never starts another role automatically.
+There is no general controller orchestration Skill. The controller sends
+scientific convergence and authorized code work only to the Research Project
+Manager, external review only to the Open-Pro Exchange, and monitoring only to
+the Experiment Monitor. A role completion never starts another persistent role
+automatically.
 
 Every assignment states the objective, granted authority, required inputs,
 working scope, protected changes, forbidden scope, completion condition, and
@@ -111,16 +99,17 @@ instructions. If the failure exposes a reusable contract weakness, the role
 recommends the smallest Skill improvement and the controller owns that protected
 change before retrying.
 
-The Code Implementation Manager uses its native coding workflow and remains
-responsible for the complete integrated diff and focused verification. The
-controller does not prescribe internal roles, models, effort settings,
-delegation, or review ceremony.
+Subagent model, effort, partition and review rules live only in the Research
+Project Manager and temporary role Skills. Temporary subagents use native
+parent-child communication; they are not persistent sessions and never read the
+task router.
 
-After a mutating `START_CODE_WORK` is accepted, the Code Implementation Manager
-holds the sole tracked-worktree write lease. Until it sends
-`CODE_GIT_PUSH_REQUIRED` or `CODE_BLOCKED`, the controller performs no project
-edit, staging, commit, or push. Urgent controller work first terminates the code
-task at a clean boundary and then redispatches from a new pushed commit.
+After a mutating `START_IMPLEMENTATION` is accepted, the Research Project
+Manager holds the sole tracked-worktree write lease. Until it sends
+`IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`, the controller performs no
+project edit, staging, commit or push. Urgent controller work first terminates
+the implementation at a clean boundary and then redispatches from a new pushed
+commit.
 
 ## Mutation Tiers
 
@@ -157,13 +146,12 @@ A role Skill is both an authority grant and a context denylist:
 Project files never select or change task models. Existing tasks retain their
 user-selected settings; communication reads the recipient's live delivery
 metadata immediately before each send and copies it unchanged into the send.
-The controller communicates directly with each registered Exchange session for
-external review; Exchange sessions never communicate with one another.
-The controller communicates directly with the Research Project Manager for one
-bounded alignment brief; that manager never contacts another role session.
-The controller communicates only with the Code Implementation Manager for code;
-The controller alone writes reconciliation and disposition files and creates
-the Git-visible boundary required before each downstream reviewer stage.
+The controller communicates directly with the one registered Open-Pro Exchange,
+the Research Project Manager and the Experiment Monitor. The Research Project
+Manager's temporary implementer and reviewer subagents communicate only through
+native parent-child results and never enter the persistent graph. The controller
+alone writes reconciliation and disposition files and creates each Git-visible
+external-review boundary.
 
 ## Strict Interfaces, Intelligent Interiors
 
@@ -201,10 +189,10 @@ inspection, progress interpretation and presentation to the assigned model's
 judgment. A role-local procedure is not an acceptance criterion unless violating
 it could corrupt evidence, authority, routing, model settings or protected
 algorithm semantics.
-Before adopting a Convergent recommendation as a code or experiment handoff,
-the controller must receive the Research Project Manager's structured brief and
-show its concise user-facing summary. `REVISE` or `BLOCK` returns the exact
-conflict to Convergent Pro instead of silently repairing the route locally.
+Before adopting a scientific source as a code or experiment handoff, the
+controller must receive the Research Project Manager's convergence brief and
+show its concise user-facing summary. `BLOCK` pauses at the exact missing
+evidence or authority boundary; it does not create a field-completion loop.
 
 ## Agile Research and Active-Line Code
 
@@ -224,7 +212,7 @@ Do not retain obsolete machinery for possible rollback. Preserve only raw
 scientific evidence or an artifact explicitly named by the current control
 plane.
 
-The Code Implementation Manager writes the implementation plan only for an
+The Research Project Manager writes the implementation plan only for an
 authorized assignment. It contains only the current executable design. When no
 implementation is authorized, it says so and contains no completed contract.
 Plan replacement and cleanup under a valid assignment use the standing grant

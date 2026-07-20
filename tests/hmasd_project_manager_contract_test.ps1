@@ -1,67 +1,19 @@
 [CmdletBinding()]
 param()
-
 $ErrorActionPreference = 'Stop'
-
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$skillPath = Join-Path $repo '.agents/skills/hmasd-project-manager/SKILL.md'
-$rolesPath = Join-Path $repo '.agents/skills/hmasd-task-router/references/session-roles.json'
-$agentsPath = Join-Path $repo 'AGENTS.md'
-$reviewRoundPath = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
-
-$skill = (Get-Content -LiteralPath $skillPath -Raw) -replace '\s+', ' '
-foreach ($required in @(
-    'name: hmasd-project-manager',
-    'PROJECT_REVIEW_TASK',
-    '$hmasd-task-router',
-    '$hmasd-project-manager',
-    'purpose=<CONVERGENT_ADOPTION|ROUTE_ALIGNMENT|HANDOFF_BRIEF>',
-    'Research objective:',
-    'build a more capable and robust MARL algorithm',
-    'Diagnostic baseline:',
-    'never become a universal prerequisite',
-    'Ordinary MARL remains the strongest matched comparator',
-    'does not by itself forbid designing or testing a structurally different algorithm',
-    'The interface is strict but the audit method is not',
-    'without requiring an analysis template from the controller',
-    'This role is read-only',
-    'Communicate only with the registered controller',
-    'PROJECT_REVIEW_BRIEF',
-    'verdict=<ALIGNED|REVISE|BLOCK>',
-    'PROJECT_REVIEW_BLOCKED',
-    'This bounded role needs no heartbeat')) {
-    if (-not $skill.Contains($required)) {
-        throw "Project Manager Skill is missing: $required"
+$skill = Get-Content (Join-Path $repo '.agents/skills/hmasd-project-manager/SKILL.md') -Raw
+$managerYaml = Get-Content (Join-Path $repo '.agents/skills/hmasd-project-manager/agents/openai.yaml') -Raw
+$implementer = Get-Content (Join-Path $repo '.agents/skills/hmasd-implementer/SKILL.md') -Raw
+$reviewer = Get-Content (Join-Path $repo '.agents/skills/hmasd-reviewer/SKILL.md') -Raw
+foreach ($required in @('SCIENTIFIC_CONVERGENCE_TASK','START_IMPLEMENTATION','RESEARCH_CONVERGENCE_BRIEF','IMPLEMENTATION_READY','two or three temporary implementers','model=gpt-5.6-sol','reasoning_effort=high','reasoning_effort=xhigh','fork_turns=none','$hmasd-implementer','$hmasd-reviewer','This manager owns no heartbeat')) {
+    if (-not $skill.Contains($required)) { throw "Project Manager missing: $required" }
+}
+if (-not $managerYaml.Contains('allow_implicit_invocation: false')) { throw 'Manager invocation must be explicit' }
+if ($implementer.Contains('$hmasd-task-router') -or $reviewer.Contains('$hmasd-task-router')) { throw 'Temporary subagent uses persistent router' }
+foreach ($text in @($implementer,$reviewer)) {
+    foreach ($required in @('native parent-child','Do not read','AGENTS.md','CURRENT_WORK.md')) {
+        if (-not $text.Contains($required)) { throw "Subagent isolation missing: $required" }
     }
 }
-
-$roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
-$manager = $roles.roles.research_project_manager
-if ($roles.schema_version -ne 5 -or
-    $manager.thread_id -ne '019f7e6e-2f81-7463-93a6-4bb836585fb8' -or
-    $manager.registration_status -ne 'ACTIVE' -or
-    $manager.role_skill -ne '.agents/skills/hmasd-project-manager/SKILL.md') {
-    throw 'Research Project Manager registry binding is inconsistent'
-}
-foreach ($forbidden in @('hostId', 'model', 'thinking')) {
-    if ($null -ne $manager.PSObject.Properties[$forbidden]) {
-        throw "Research Project Manager registry mirrors live route field: $forbidden"
-    }
-}
-
-$agents = (Get-Content -LiteralPath $agentsPath -Raw) -replace '\s+', ' '
-$reviewRound = (Get-Content -LiteralPath $reviewRoundPath -Raw) -replace '\s+', ' '
-foreach ($required in @(
-    'Research Project Manager',
-    'mission-alignment',
-    'PROJECT_REVIEW_BRIEF')) {
-    if (-not $agents.Contains($required) -and -not $reviewRound.Contains($required)) {
-        throw "Controller workflow does not expose Project Manager boundary: $required"
-    }
-}
-if (-not $reviewRound.Contains('only after `ALIGNED`') -or
-    -not $reviewRound.Contains('It is not another scientific reviewer')) {
-    throw 'Review-round adoption boundary is incomplete'
-}
-
 Write-Output 'HMASD_PROJECT_MANAGER_CONTRACT_OK'

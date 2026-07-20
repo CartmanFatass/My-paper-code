@@ -1,113 +1,57 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)]
-    [string]$Commit,
-
-    [Parameter(Mandatory = $true)]
-    [string]$QuestionPath,
-
+    [Parameter(Mandatory = $true)][string]$Commit,
+    [Parameter(Mandatory = $true)][string]$QuestionPath,
     [string]$Remote = 'My-paper-code',
     [string]$Branch = 'aggressive',
     [string]$RepoRoot = (Get-Location).Path
 )
 
 $ErrorActionPreference = 'Stop'
-
-function Invoke-GitChecked {
-    param([string[]]$Arguments)
-
-    $output = & git -C $RepoRoot @Arguments 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        throw "git $($Arguments -join ' ') failed: $($output -join [Environment]::NewLine)"
-    }
-    return @($output)
+function Git([string[]]$Args) {
+    $out = & git -C $RepoRoot @Args 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "git $($Args -join ' ') failed: $($out -join [Environment]::NewLine)" }
+    @($out)
 }
 
-function Assert-CommitPath {
-    param(
-        [string]$ResolvedCommit,
-        [string]$Path
-    )
+$resolved = ([string](Git @('rev-parse', "$Commit^{commit}"))[-1]).Trim()
+if ($resolved -notmatch '^[0-9a-fA-F]{40}$') { throw 'Commit must resolve to 40 hexadecimal characters.' }
+$remoteLine = (Git @('ls-remote', $Remote, "refs/heads/$Branch")) -join "`n"
+$m = [regex]::Match($remoteLine, '^(?<sha>[0-9a-fA-F]{40})\s+')
+if (-not $m.Success) { throw 'Remote branch did not resolve.' }
+$tip = $m.Groups['sha'].Value.ToLowerInvariant()
+$null = Git @('cat-file', '-e', "$tip^{commit}")
+& git -C $RepoRoot merge-base --is-ancestor $resolved $tip 2>$null
+if ($LASTEXITCODE -ne 0) { throw "Commit $resolved is not reachable from $Remote/$Branch." }
 
-    $normalized = $Path.Replace('\', '/')
-    $null = Invoke-GitChecked -Arguments @('cat-file', '-e', "$ResolvedCommit`:$normalized")
-    return $normalized
+$question = $QuestionPath.Replace('\', '/')
+if ([IO.Path]::GetFileName($question) -ne '20_PRO_OPEN_QUESTION.md') {
+    throw 'Only the registered Open-Pro question is externally dispatched.'
 }
-
-$resolvedOutput = @(Invoke-GitChecked -Arguments @('rev-parse', "$Commit^{commit}"))
-$resolved = ([string]$resolvedOutput[-1]).Trim()
-if ($resolved -notmatch '^[0-9a-fA-F]{40}$') {
-    throw "Commit did not resolve to exactly 40 hexadecimal characters: $resolved"
+$null = Git @('cat-file', '-e', "$resolved`:$question")
+$text = (Git @('show', "$resolved`:$question")) -join "`n"
+foreach ($required in @(
+    'docs/project/ALGORITHM_PRINCIPLES.md',
+    'docs/external-review/OPEN_REVIEW_PRINCIPLES.md'
+)) {
+    if (-not $text.Contains($required)) { throw "Open question is missing: $required" }
 }
-
-$remoteLines = Invoke-GitChecked -Arguments @('ls-remote', $Remote, "refs/heads/$Branch")
-$remoteMatch = [regex]::Match(($remoteLines -join "`n"), '^(?<sha>[0-9a-fA-F]{40})\s+')
-if (-not $remoteMatch.Success) {
-    throw "Remote branch $Remote/$Branch did not resolve to a commit."
-}
-$remoteTip = $remoteMatch.Groups['sha'].Value.ToLowerInvariant()
-
-$null = Invoke-GitChecked -Arguments @('cat-file', '-e', "$remoteTip^{commit}")
-& git -C $RepoRoot merge-base --is-ancestor $resolved $remoteTip 2>$null
-if ($LASTEXITCODE -eq 1) {
-    throw "Commit $resolved is not reachable from $Remote/$Branch at $remoteTip."
-}
-if ($LASTEXITCODE -ne 0) {
-    throw "Unable to verify ancestry between $resolved and $remoteTip."
+if ($text.Contains('CONVERGENT_REVIEW_PRINCIPLES.md')) {
+    throw 'Open question contains an internal convergence contract.'
 }
 
-$question = Assert-CommitPath -ResolvedCommit $resolved -Path $QuestionPath
-$questionText = (Invoke-GitChecked -Arguments @('show', "$resolved`:$question")) -join "`n"
-$questionName = [System.IO.Path]::GetFileName($question)
+$paths = @([regex]::Matches($text, '`([^`\r\n]+)`') | ForEach-Object {
+    $_.Groups[1].Value.Trim().Replace('\', '/')
+} | Where-Object { $_ -match '^(docs|ha_ctse_process|scripts|tests|ref)/' } | Sort-Object -Unique)
+if ($paths.Count -eq 0) { throw 'Question does not contain exact repository evidence paths.' }
+foreach ($path in $paths) { $null = Git @('cat-file', '-e', "$resolved`:$path") }
 
-if ($questionName -in @('10_GEMINI_DIVERGENT_QUESTION.md', '20_PRO_OPEN_QUESTION.md') -and
-    $questionText -notmatch '(?i)divergent') {
-    throw 'The open-review question does not explicitly identify the divergent role.'
-}
-if ($questionName -eq '40_PRO_CONVERGENT_QUESTION.md' -and
-    $questionText -notmatch '(?i)convergent') {
-    throw 'The convergent-Pro question does not explicitly identify the convergent role.'
-}
-
-$basePrinciples = 'docs/project/ALGORITHM_PRINCIPLES.md'
-$openPrinciples = 'docs/external-review/OPEN_REVIEW_PRINCIPLES.md'
-$convergentPrinciples = 'docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md'
-if ($questionName -in @('10_GEMINI_DIVERGENT_QUESTION.md', '20_PRO_OPEN_QUESTION.md')) {
-    if (-not $questionText.Contains($basePrinciples) -or
-        -not $questionText.Contains($openPrinciples) -or
-        $questionText.Contains($convergentPrinciples)) {
-        throw 'The open-Pro question has an invalid scientific-principle binding.'
-    }
-}
-if ($questionName -eq '40_PRO_CONVERGENT_QUESTION.md') {
-    if (-not $questionText.Contains($basePrinciples) -or
-        -not $questionText.Contains($convergentPrinciples) -or
-        $questionText.Contains($openPrinciples)) {
-        throw 'The convergent-Pro question has an invalid scientific-principle binding.'
-    }
-}
-
-$listedPaths = @(
-    [regex]::Matches($questionText, '`([^`\r\n]+)`') |
-        ForEach-Object { $_.Groups[1].Value.Trim().Replace('\', '/') } |
-        Where-Object { $_ -match '/' -and $_ -notmatch '[*?]' } |
-        Select-Object -Unique
-)
-if ($listedPaths.Count -eq 0) {
-    throw 'Question does not contain any exact repository evidence paths.'
-}
-
-$verifiedPaths = @()
-foreach ($path in $listedPaths) {
-    $verifiedPaths += Assert-CommitPath -ResolvedCommit $resolved -Path $path
-}
-
-[ordered]@{
+[pscustomobject]@{
     status = 'REMOTE_EVIDENCE_READY'
-    commit = $resolved.ToLowerInvariant()
+    commit = $resolved
     remote = $Remote
     branch = $Branch
-    remote_tip = $remoteTip
+    remote_tip = $tip
     question = $question
-    inspected_paths = $verifiedPaths
-} | ConvertTo-Json -Depth 3
+    inspected_paths = $paths
+} | ConvertTo-Json -Depth 4

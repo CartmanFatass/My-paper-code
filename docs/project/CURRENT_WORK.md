@@ -11,11 +11,11 @@ Updated: 2026-07-20
 - Handoff state: NONE
 - Codex role: project state, accepted scientific boundary, implementation and
   experiment authorization, evidence, Git, and user communication
-- Code implementation source: registered persistent Code Implementation
-  Manager; it owns executable architecture, implementation planning, its native
-  coding workflow, and focused code acceptance
-- Scientific decision source: accepted tracked convergent GPT-5.6 Pro
-  disposition
+- Scientific convergence source: registered Research Project Manager using
+  tracked Open-Pro divergent evidence and project principles
+- Code implementation source: Research Project Manager-managed temporary
+  `$hmasd-implementer` and `$hmasd-reviewer` subagents; there is no persistent
+  code-manager session
 
 ## Current Boundary
 
@@ -26,13 +26,13 @@ shared four-step renewal restriction, and D partial causal learning without
 ordinary access. It does not establish hierarchy, learned skills or learned
 heterogeneous lifetime.
 
-The prior focused clarification selected
+The prior external clarification selected
 `D0_D1_CAUSAL_OBSERVATION_REFACTOR_G0`, but the controller retracted that route
 before implementation or compute. It inverted the research objective by making
 ordinary-controller access a prerequisite for developing the hierarchy,
 skills and variable-lifetime mechanisms whose purpose is to build a stronger
-MARL algorithm. The Convergent raw remains historical reviewer evidence; its
-route is not active authority.
+MARL algorithm. That raw remains historical reviewer evidence; its route is not
+active authority.
 
 The subsequent focused review retained `EVENT_HELD_COMMITMENT` as a
 mission-aligned primary-algorithm proposal, but its final code-ready claim was
@@ -43,11 +43,10 @@ non-unique. No implementation or experiment authority exists for this source.
 
 ## Next Action
 
-Autonomous progression is paused at a scientific-contract boundary. The final
-focused completion did not yield an adoptable executable successor, and another
-automatic field-completion loop is not authorized. User direction is required
-to stop this source or open a fresh portfolio round. No code or experiment is
-authorized.
+Autonomous progression is paused at a scientific-contract boundary. A fresh
+Open-Pro divergent round may provide alternative explanations, after which the
+Research Project Manager must select one executable source or `STOP`. No code
+or experiment is authorized before controller adoption.
 
 ## Autonomous Boundary
 
@@ -55,13 +54,12 @@ authorized.
 - Authorized evidence-bearing iterations: five additional iterations from this
   corrected boundary
 - Remaining iterations: five
-- Permitted automatic action: for each iteration, implement, review, run,
-  analyze, externally review, adopt the convergent disposition, then decrement
-  the remaining count and begin its selected successor while the count remains
-  positive
-- Stop condition: five terminal dispositions are accepted, committed, and
-  pushed; convergent review recommends stopping or selects no executable
-  successor; or a genuine contract/operational blocker requires user authority
+- Permitted automatic action: for each iteration, obtain Open-Pro divergence,
+  converge internally, adopt, implement, review, run, analyze and record one
+  terminal disposition, then decrement the remaining count
+- Stop condition: five terminal dispositions are accepted, committed and
+  pushed; the Research Project Manager selects `STOP`; or a genuine
+  contract/operational blocker requires user authority
 - Forbidden: more than five iterations, concurrent mutating research routes,
   locally invented successor routes, or expansion beyond each accepted
   scientific boundary
@@ -83,10 +81,15 @@ authorized.
 ## Pointers
 
 - `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints.
-- `.agents/skills/hmasd-code-manager/references/engineering-principles.md` —
-  Code Implementation Manager engineering constraints.
-- `docs/project/IMPLEMENTATION_PLAN.md` — Code Implementation Manager-owned
-  current executable design or explicit `NONE`.
+- `.agents/skills/hmasd-project-manager/references/convergence-principles.md` —
+  internal scientific-convergence guidance.
+- `.agents/skills/hmasd-project-manager/references/engineering-principles.md` —
+  implementation-management engineering constraints.
+- `.agents/skills/hmasd-implementer/references/engineering-principles.md` and
+  `.agents/skills/hmasd-reviewer/references/review-principles.md` — temporary
+  subagent contracts.
+- `docs/project/IMPLEMENTATION_PLAN.md` — Research Project Manager-owned current
+  executable design or explicit `NONE`.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
   — completed review evidence and accepted `50_DISPOSITION.md`.
