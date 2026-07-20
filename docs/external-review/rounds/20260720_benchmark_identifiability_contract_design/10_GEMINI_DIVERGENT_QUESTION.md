@@ -1,6 +1,6 @@
 # Gemini Divergent — Benchmark Contract Portfolio
 
-Read:
+## Repository files to inspect
 
 - `docs/project/ALGORITHM_PRINCIPLES.md`;
 - `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`;

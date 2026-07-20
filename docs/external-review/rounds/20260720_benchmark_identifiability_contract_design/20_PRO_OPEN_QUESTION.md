@@ -1,5 +1,7 @@
 # Open GPT-5.6 Pro — Benchmark Contract Portfolio
 
+## Repository files to inspect
+
 Read through the GitHub-visible boundary:
 
 - `docs/project/ALGORITHM_PRINCIPLES.md`;
