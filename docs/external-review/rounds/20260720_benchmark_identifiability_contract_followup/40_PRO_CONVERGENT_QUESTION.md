@@ -12,7 +12,7 @@ defensible code-ready contract cannot be frozen.
 - `docs/project/CURRENT_WORK.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md`
-- `logs/clean_supplied_executor_opportunity_authority_audit_20260720_092154/result/clean_supplied_executor_opportunity_authority_audit.json`
+- `docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/03_OPPORTUNITY_AUDIT_RESULT.json`
 - `docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/30_EVIDENCE_RECONCILIATION.md`
 - `docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/41_PRO_CONVERGENT_RAW.md`
 - `docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/50_DISPOSITION.md`
