@@ -20,38 +20,34 @@ Updated: 2026-07-20
 ## Current Boundary
 
 The independent `NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification
-completed as valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`.
-The full H/C/S/D task, information, model, training, evaluation, seed, metric,
-threshold and result-branch contract is frozen in
-`docs/external-review/rounds/20260720_benchmark_identifiability_contract_followup/41_PRO_CONVERGENT_RAW.md`.
-The sole rendering loss was repaired by the accepted clarification disposition:
-common observation field 5 is
-`mean_{i in A_t}(abs(g_i-x_i)/4)`, range `[0,1]`, retained by D and masked to
-zero by C. No other scientific choice is open.
+is valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`. H establishes structural
+reachability, C the current-demand/error information null, S the cost of one
+shared four-step renewal restriction, and D partial causal learning without
+ordinary access. It does not establish hierarchy, learned skills or learned
+heterogeneous lifetime.
 
-All M0 checks pass with zero replay and checkpoint error. H establishes
-structural reachability, C establishes the calendar/static information null,
-and S establishes heterogeneous-lifetime pressure. D improves over update zero
-but misses every access family: held-out deterministic utility is `0.616348`,
-its learning-gain LCB is `0.101414`, and its D-minus-C utility LCB is `0.132124`.
-The result identifies an ordinary-control access failure under the frozen
-contract; it does not identify a temporal algorithm or invalidate the benchmark.
+The completed external portfolio and focused clarification select the next
+bounded source `D0_D1_CAUSAL_OBSERVATION_REFACTOR_G0`. It compares the existing
+ordinary D0 with an information-authority-matched D1 that replaces aggregate/
+local mixed demand organization by explicit focal-local demand-transition
+encoding. Both remain primitive recurrent controllers; no hierarchy or
+intrinsic mechanism is introduced.
 
 ## Next Action
 
-Complete the tracked full external-review round at
-`docs/external-review/rounds/20260720_noncalendar_g0_no_access_portfolio/`.
-Blind reviewers must preserve the valid H/C/S and invalidated D-access boundary,
-generate a plural causal portfolio, and distinguish benchmark learnability from
-ordinary learner/credit failure. Do not rerun, tune D, implement a successor or
-decrement the autonomous counter until the Convergent disposition is accepted.
+Implement the accepted D0/D1 observation-refactor source through the registered
+Code Implementation Manager, then run its frozen local CUDA paired contract.
+Do not alter the task, reward, model width, optimizer exposure, seeds,
+thresholds, lifecycle or ordinary primitive action contract. A valid failure
+does not authorize hierarchy; it stops this benchmark line unless the accepted
+result branch says otherwise.
 
 ## Autonomous Boundary
 
 - Status: ACTIVE
 - Authorized evidence-bearing iterations: five, counting the active G0 source
   as iteration one
-- Remaining iterations: three
+- Remaining iterations: two
 - Permitted automatic action: for each iteration, implement, review, run,
   analyze, externally review, adopt the convergent disposition, then decrement
   the remaining count and begin its selected successor while the count remains
@@ -87,3 +83,7 @@ decrement the autonomous counter until the Convergent disposition is accepted.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
   — completed review evidence and accepted `50_DISPOSITION.md`.
+- `docs/external-review/rounds/20260720_noncalendar_g0_no_access_portfolio/`
+  — completed G0 no-access portfolio and accepted evidence boundary.
+- `docs/external-review/rounds/20260720_noncalendar_g0_direct_access_clarification/`
+  — accepted code-ready D0/D1 observation-refactor source.
