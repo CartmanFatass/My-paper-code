@@ -19,33 +19,28 @@ Updated: 2026-07-20
 
 ## Current Boundary
 
-The second authorized autonomous iteration is complete. The accepted round
-`docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/`
-preserves `HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION` as a valid read-only
-result and permanently stops the exact Generic-SHORT supplied-executor F1 toy
-line. Hindsight reaches joint `P/S/U=1/1/1`; decisive learned excess is
-`PREWAVE_SHORT=+10.613281`, while multi-owner-later excess is `-1.898438` and
-the associated working-prefix direction is `-0.039538`. The supported
-explanation is calendar-compatible pre-positioning plus persistent supplied
-marks and long KEEP, not learned skills, heterogeneous learned lifetime or F1
-cooperation.
+The scientific contract for the independent
+`NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification is code-ready.
+The full H/C/S/D task, information, model, training, evaluation, seed, metric,
+threshold and result-branch contract is frozen in
+`docs/external-review/rounds/20260720_benchmark_identifiability_contract_followup/41_PRO_CONVERGENT_RAW.md`.
+The sole rendering loss was repaired by the accepted clarification disposition:
+common observation field 5 is
+`mean_{i in A_t}(abs(g_i-x_i)/4)`, range `[0,1]`, retained by D and masked to
+zero by C. No other scientific choice is open.
 
-The broader target remains live. The accepted portfolio weights calendar
-identifiability K and matched direct recurrence D high, persistent event
-abstraction R medium, learned executor B low/conditional, and parks applied
-prefix P. The unique next source is the independent
-`BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` qualification.
+This clarification completes the prior contract and is not a new
+evidence-bearing iteration. No implementation or experiment result exists yet.
 
 ## Next Action
 
-Complete the one-field Convergent clarification in
-`docs/external-review/rounds/20260720_benchmark_identifiability_field5_clarification/`.
-The focused contract response froze the task, H/C/S/D interfaces, model,
-budget, seeds, thresholds and result branches, but its archived observation
-table lost the formula, range and mask status for common field 5 during webpage
-math rendering. Do not infer that field locally or reopen any other scientific
-choice. Once the same Convergent reviewer supplies that exact row, adopt the
-complete contract and send it to the Code Implementation Manager.
+Send the accepted code-ready contract to the registered Code Implementation
+Manager. It may implement the minimal benchmark, runner, focused test and
+current executable plan frozen by the Convergent response. It must reuse the
+registered direct-policy and dynamic-roster infrastructure, preserve every
+H/C/S/D probability, information, seed, budget and decision branch, and launch
+no experiment. After manager acceptance and a pushed implementation boundary,
+the controller may start the already authorized formal G0 run from update 0.
 
 ## Autonomous Boundary
 
