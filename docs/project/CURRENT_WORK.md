@@ -34,23 +34,27 @@ skills and variable-lifetime mechanisms whose purpose is to build a stronger
 MARL algorithm. That raw remains historical reviewer evidence; its route is not
 active authority.
 
-The subsequent focused review retained `EVENT_HELD_COMMITMENT` as a
-mission-aligned primary-algorithm proposal, but its final code-ready claim was
-not adopted. The registered Research Project Manager returned `REVISE` because
-segment continuity, TERMINATE support, rollout-truncation ownership, exact
-capacity/optimizer exposure and the statistical branch partition remain
-non-unique. No implementation or experiment authority exists for this source.
+The Research Project Manager has now converged the unresolved proposal into
+controller-adopted `EVENT_HELD_COMMITMENT_LINK_G0`. It isolates one treatment:
+whether an event-held commitment reaches primitive action logits. Ordinary
+recurrent `OR` is the full-algorithm comparator; `DUM` and `EHC` have identical
+commitment state, capacity, event learning and optimizer exposure, while only
+`EHC` enables the commitment-to-action link. The execution, probability,
+replay, lifecycle, checkpoint, experiment and mutually exclusive result
+contracts are frozen in the durable design. No formal experiment is authorized
+until implementation and focused review complete.
 
 ## Next Action
 
-Autonomous progression is paused at a scientific-contract boundary. A fresh
-Open-Pro divergent round may provide alternative explanations, after which the
-Research Project Manager must select one executable source or `STOP`. No code
-or experiment is authorized before controller adoption.
+Dispatch controller-authorized implementation of
+`EVENT_HELD_COMMITMENT_LINK_G0` to the Research Project Manager. It must freeze
+the executable plan, use bounded temporary implementation subagents and one
+fresh implementation reviewer, and return an integrated focused-tested package.
+Formal training remains a separate later authorization.
 
 ## Autonomous Boundary
 
-- Status: PAUSED_CONTRACT_INCOMPLETE
+- Status: IMPLEMENTATION_SOURCE_ADOPTED
 - Authorized evidence-bearing iterations: five additional iterations from this
   corrected boundary
 - Remaining iterations: five
@@ -91,6 +95,8 @@ or experiment is authorized before controller adoption.
 - `docs/project/IMPLEMENTATION_PLAN.md` — Research Project Manager-owned current
   executable design or explicit `NONE`.
 - `docs/project/ExpRecord.md` — formal experiment history and dispositions.
+- `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md` — current adopted
+  scientific and executable source.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
   — completed review evidence and accepted `50_DISPOSITION.md`.
 - `docs/external-review/rounds/20260720_noncalendar_g0_no_access_portfolio/`
