@@ -36,22 +36,26 @@ INVALID result, the strong learned signal as task-local secondary evidence, and
 the mandatory direct recurrent null. It selects exactly one next source:
 `READ_ONLY_OPPORTUNITY_AUTHORITY_AND_USE_AUDIT`.
 
-The selected source performs a no-training hindsight authority calculation and
-existing-checkpoint behavior-use decomposition on the same 256 evaluation
-ledgers. Its implementation is accepted at
-`74779fa81d4cf563ddaa6a649f8881ba18151225`. The formal read-only run is
-`clean_supplied_executor_opportunity_authority_audit_20260720_092154`; it may
-stop the toy line, reduce the result to scheduled recurrence, or make a future
-matched F0/F1 comparison eligible for separate review. It does not authorize
-that future training or any learned-executor integration.
+The selected source completed as the valid branch
+`HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION`. Its implementation is accepted
+at `74779fa81d4cf563ddaa6a649f8881ba18151225`; the formal read-only run is
+`clean_supplied_executor_opportunity_authority_audit_20260720_092154`.
+Hindsight authority reaches `P/S/U=1/1/1`, so the opportunity contract is
+structurally feasible. The unique decisive learned-minus-oracle contribution
+class is `PREWAVE_SHORT` (`+10.613281` units per episode), while
+`POSTWAVE_MULTIOWNER_LATER` is negative (`-1.898438`) and the associated
+working-prefix directional mean is `-0.039538`. The registered branch therefore
+reduces the learned gain to time-aware pre-positioning/long KEEP rather than
+identifying F1 applied-prefix cooperation.
 
 ## Next Action
 
-Monitor only the formal evaluation-only
-`clean_supplied_executor_opportunity_authority_audit_20260720_092154` run. It
-must perform zero optimizer steps and preserve the original behavior path,
-task, opportunity process, threshold, reward, model, seeds and checkpoints. Its
-terminal result then enters the next tracked external-review round.
+Complete the tracked result-review round
+`docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/`.
+The round must audit the valid pre-positioning reduction, decide whether this
+supplied-executor toy line should stop, update the weighted broader algorithm
+portfolio, and select one next evidence source or stop. No F0/F1 training,
+learned executor, task change or successor is inferred locally.
 
 ## Autonomous Boundary
 

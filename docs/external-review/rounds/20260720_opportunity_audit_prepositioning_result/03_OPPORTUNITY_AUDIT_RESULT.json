@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "artifact_type": "compact_reviewer_summary",
+  "source_run": "clean_supplied_executor_opportunity_authority_audit_20260720_092154",
+  "full_result_path": "logs/clean_supplied_executor_opportunity_authority_audit_20260720_092154/result/clean_supplied_executor_opportunity_authority_audit.json",
+  "status": "HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION",
+  "scientific_status": "HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION",
+  "formal_evidence": true,
+  "implementation_valid": true,
+  "audit": {
+    "source_result_exact": true,
+    "frontier_order_ledgers_equal": true,
+    "frontier_action_constraint": true,
+    "primitive_action_identity": true,
+    "future_ledger_solver_only": true,
+    "tiny_dp_bruteforce_equal": true,
+    "full_step_constructive_reproduced": true,
+    "unique_contribution_classification": true,
+    "zero_optimizer_steps": true,
+    "zero_parameter_drift": true,
+    "checkpoint_contract_exact": true,
+    "frozen_source_header_exact": true,
+    "registered_headers_exact": true
+  },
+  "reproduction_max_absolute_error": {
+    "learned": {"persistent": 0.0, "short": 0.0, "utility": 0.0},
+    "frozen": {"persistent": 0.0, "short": 0.0, "utility": 0.0},
+    "oracle": {"persistent": 0.0, "short": 0.0, "utility": 0.0}
+  },
+  "hindsight": {
+    "g_h": 1.0,
+    "persistent_mean": 1.0,
+    "short_mean": 1.0,
+    "utility_mean": 1.0,
+    "floor": 0.95,
+    "floor_feasible": true,
+    "aggregate_pareto_size": 1,
+    "episode_pareto_size_min": 1,
+    "episode_pareto_size_max": 1,
+    "episode_explored_control_states_min": 25538,
+    "episode_explored_control_states_max": 48977,
+    "episode_explored_control_states_mean": 33605.05078125
+  },
+  "behavior_use": {
+    "learned_minus_oracle_mean": {
+      "PREWAVE_SHORT": 10.61328125,
+      "POSTWAVE_SINGLETON": -1.62109375,
+      "POSTWAVE_MULTIOWNER_FIRST": -0.42578125,
+      "POSTWAVE_MULTIOWNER_LATER": -1.8984375,
+      "OTHER_OR_NO_TIMELY_OPPORTUNITY": 0.0
+    },
+    "prewave_pairwise_bootstrap_ci95": {
+      "versus_POSTWAVE_SINGLETON": [11.90234375, 12.234375, 12.55087890625],
+      "versus_POSTWAVE_MULTIOWNER_FIRST": [10.71484375, 11.0390625, 11.3515625],
+      "versus_POSTWAVE_MULTIOWNER_LATER": [12.19140625, 12.51171875, 12.8125],
+      "versus_OTHER_OR_NO_TIMELY_OPPORTUNITY": [10.33984375, 10.61328125, 10.875]
+    },
+    "decisive_classes": ["PREWAVE_SHORT"],
+    "decisive_class": "PREWAVE_SHORT",
+    "unique_decisive_class": true,
+    "bootstrap_seed": 107057,
+    "bootstrap_resamples": 10000
+  },
+  "working_vs_initial": {
+    "row_count": 2700,
+    "mean_tv": 0.08136929014214762,
+    "mean_duplicate_persist_reduction": 0.00007891266482144925,
+    "mean_missing_short_increase": -0.01374500795234545,
+    "associated_row_count": 1263,
+    "positive_associated_row_count": 166,
+    "associated_directional_mean": -0.03953810396028339,
+    "positive_directional_shift": false,
+    "completion_or_recovery_association": true,
+    "interpretation_boundary": "diagnostic-only; not an F0 treatment or causal F1 utility estimate"
+  },
+  "contract": {
+    "episode_ids": [0, 255],
+    "episode_id_semantics": "inclusive contiguous range",
+    "episode_count": 256,
+    "horizon": 80,
+    "floor": 0.95,
+    "opportunity_gap": [1, 19],
+    "wave_candidates": [[0], [9, 10], [24, 25], [32, 33], [40], [49, 50], [64, 65], [72, 73]],
+    "short_window": 4,
+    "short_streak_target": 2,
+    "short_required_total": 24,
+    "seeds": {
+      "evaluation_task": 97057,
+      "opportunity_frontier": 77057,
+      "opportunity_stream": 0,
+      "frontier_stream": 1,
+      "action": 87057,
+      "bootstrap": 107057
+    },
+    "bootstrap_resamples": 10000,
+    "optimizer_steps": {"high": 0, "low": 0}
+  },
+  "wall_seconds": 454.9687539000006,
+  "runner_selects_successor": false
+}
