@@ -97,6 +97,13 @@ sufficient. For an existing raw, inspect this session's registered external
 conversation once and repeat the same completion and equality checks before
 reporting success.
 
+Never use a prior turn, another round, a compacted-context summary, local final
+text, or a heartbeat message as evidence that the current stage completed. If
+context compaction occurs during a bounded inspection, discard every
+unconfirmed terminal assumption and restart the next wake from the current
+assignment fields and filesystem. In particular, a missing assigned raw means
+the current stage is not archived, regardless of what earlier text claims.
+
 For Gemini recovery, validate an existing raw against the current pinned
 question before considering another external submission. If that raw satisfies
 the current required fields and equals the completed registered-conversation
@@ -126,6 +133,25 @@ Delete and verify deletion only after the callback tool confirms the registered
 controller task. If callback delivery fails, the next wake retries only the
 same `handoff_id`. If deletion alone fails, retry deletion without repeating
 review work.
+
+### Terminal evidence rule
+
+A terminal success requires three separate tool-level facts for the current
+round and current `handoff_id`:
+
+1. the assigned raw exists and the current wake has verified exact equality
+   with the naturally completed external response;
+2. `codex_app__send_message_to_thread` returned the registered controller task
+   ID for the exact `REVIEW_STAGE_COMPLETE` payload;
+3. `codex_app__automation_update` deleted this assignment's exact
+   `heartbeat_id`, and a follow-up view confirms that it is no longer active.
+
+Text saying that a callback or deletion happened is never evidence. Do not
+emit `DONT_NOTIFY`, `heartbeat_deleted`, `controller confirmed`, or any local
+terminal-success wording unless all three facts were produced for this stage.
+If any fact is missing, keep the heartbeat active and end the bounded wake
+without a terminal claim. After the callback succeeds but deletion fails, the
+next wake performs deletion only and must not send the callback again.
 
 ## Reply to Controller
 

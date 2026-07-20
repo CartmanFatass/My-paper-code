@@ -102,6 +102,11 @@ foreach ($required in @(
     "For Gemini recovery, validate an existing raw against the current pinned",
     "send the completion callback without resubmitting or overwriting it",
     "existing raw does not satisfy it",
+    "a compacted-context summary",
+    "Terminal evidence rule",
+    "codex_app__send_message_to_thread",
+    "codex_app__automation_update",
+    "Text saying that a callback or deletion happened is never evidence",
     'the visible deferred action `立即回答` means the request was accepted',
     "waiting state, never a transport failure",
     "not for ordinary deferred Pro thinking",
@@ -213,7 +218,9 @@ try {
         "20_PRO_OPEN_QUESTION.md",
         "21_PRO_OPEN_RAW.md",
         "heartbeat_id=review-heartbeat-test",
-        "controller callback")) {
+        "controller callback",
+        "Prior-turn text",
+        "send-message and automation-delete tool confirmations")) {
         if (-not $prompt.Contains($required)) {
             throw "Rendered heartbeat is missing: $required"
         }
