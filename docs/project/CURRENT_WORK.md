@@ -19,50 +19,40 @@ Updated: 2026-07-20
 
 ## Current Boundary
 
-The first authorized autonomous iteration is complete. The formal
-`CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0` run remains
-`INVALID_CLEAN_SUPPLIED_EXECUTOR_OPPORTUNITY_CONTRACT`: implementation and all
-M0 checks passed, learned high achieved
-`P/S/U=0.942383/0.938639/0.940511`, and learned-minus-frozen utility CI95 was
-`[0.435689, 0.440511, 0.445251]`; however, the registered routing oracle failed
-its joint `0.95` prerequisite at
-`P/S/U=0.978699/0.660807/0.819753`.
+The second authorized autonomous iteration is complete. The accepted round
+`docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/`
+preserves `HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION` as a valid read-only
+result and permanently stops the exact Generic-SHORT supplied-executor F1 toy
+line. Hindsight reaches joint `P/S/U=1/1/1`; decisive learned excess is
+`PREWAVE_SHORT=+10.613281`, while multi-owner-later excess is `-1.898438` and
+the associated working-prefix direction is `-0.039538`. The supported
+explanation is calendar-compatible pre-positioning plus persistent supplied
+marks and long KEEP, not learned skills, heterogeneous learned lifetime or F1
+cooperation.
 
-The tracked round
-`docs/external-review/rounds/20260720_supplied_executor_opportunity_contract/`
-accepted that the current oracle is a myopic frontier-filtered projection, not
-an established opportunity-constrained upper bound. It preserves the original
-INVALID result, the strong learned signal as task-local secondary evidence, and
-the mandatory direct recurrent null. It selects exactly one next source:
-`READ_ONLY_OPPORTUNITY_AUTHORITY_AND_USE_AUDIT`.
-
-The selected source completed as the valid branch
-`HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION`. Its implementation is accepted
-at `74779fa81d4cf563ddaa6a649f8881ba18151225`; the formal read-only run is
-`clean_supplied_executor_opportunity_authority_audit_20260720_092154`.
-Hindsight authority reaches `P/S/U=1/1/1`, so the opportunity contract is
-structurally feasible. The unique decisive learned-minus-oracle contribution
-class is `PREWAVE_SHORT` (`+10.613281` units per episode), while
-`POSTWAVE_MULTIOWNER_LATER` is negative (`-1.898438`) and the associated
-working-prefix directional mean is `-0.039538`. The registered branch therefore
-reduces the learned gain to time-aware pre-positioning/long KEEP rather than
-identifying F1 applied-prefix cooperation.
+The broader target remains live. The accepted portfolio weights calendar
+identifiability K and matched direct recurrence D high, persistent event
+abstraction R medium, learned executor B low/conditional, and parks applied
+prefix P. The unique next source is the independent
+`BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` qualification.
 
 ## Next Action
 
-Complete the tracked result-review round
-`docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/`.
-The round must audit the valid pre-positioning reduction, decide whether this
-supplied-executor toy line should stop, update the weighted broader algorithm
-portfolio, and select one next evidence source or stop. No F0/F1 training,
-learned executor, task change or successor is inferred locally.
+Send the accepted
+`BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` boundary to the registered
+Code Implementation Manager. The implementation must create one independent
+non-calendar heterogeneous-commitment benchmark and one frozen result covering
+H hindsight authority, C calendar/static null, S shared-lifetime ceiling and D
+ordinary recurrent access. It contains no hierarchy, skills, intrinsic reward
+or module stack. After manager acceptance, the controller reviews launch
+readiness and runs the single authorized local formal source.
 
 ## Autonomous Boundary
 
 - Status: ACTIVE
 - Authorized evidence-bearing iterations: five, counting the active G0 source
   as iteration one
-- Remaining iterations: four
+- Remaining iterations: three
 - Permitted automatic action: for each iteration, implement, review, run,
   analyze, externally review, adopt the convergent disposition, then decrement
   the remaining count and begin its selected successor while the count remains
