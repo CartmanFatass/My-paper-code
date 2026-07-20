@@ -19,8 +19,9 @@ Updated: 2026-07-20
 
 ## Current Boundary
 
-The scientific contract for the independent
-`NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification is code-ready.
+The independent `NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification
+is implementation-complete and launch-ready at commit
+`47275d1a0c7bc7f6d674fbe745a0239c78001994`.
 The full H/C/S/D task, information, model, training, evaluation, seed, metric,
 threshold and result-branch contract is frozen in
 `docs/external-review/rounds/20260720_benchmark_identifiability_contract_followup/41_PRO_CONVERGENT_RAW.md`.
@@ -29,18 +30,19 @@ common observation field 5 is
 `mean_{i in A_t}(abs(g_i-x_i)/4)`, range `[0,1]`, retained by D and masked to
 zero by C. No other scientific choice is open.
 
-This clarification completes the prior contract and is not a new
-evidence-bearing iteration. No implementation or experiment result exists yet.
+The Code Implementation Manager accepted the five-path package after a focused
+test and a controller-found runner-helper defect was repaired. The direct
+`_tiny_solver_valid()` regression now passes. No formal training or evaluation
+has run yet.
 
 ## Next Action
 
-Send the accepted code-ready contract to the registered Code Implementation
-Manager. It may implement the minimal benchmark, runner, focused test and
-current executable plan frozen by the Convergent response. It must reuse the
-registered direct-policy and dynamic-roster infrastructure, preserve every
-H/C/S/D probability, information, seed, budget and decision branch, and launch
-no experiment. After manager acceptance and a pushed implementation boundary,
-the controller may start the already authorized formal G0 run from update 0.
+Launch the already authorized formal CUDA run from update 0 at
+`logs/noncalendar_heterogeneous_tracking_g0_20260720_130453` using the frozen
+runner and no resume flag. Assign only its authoritative status and registered
+progress/result fields to the persistent Experiment Monitor. Do not alter the
+contract, restart automatically after a scientific terminal result, or begin a
+successor before the terminal result is externally reviewed and adopted.
 
 ## Autonomous Boundary
 
