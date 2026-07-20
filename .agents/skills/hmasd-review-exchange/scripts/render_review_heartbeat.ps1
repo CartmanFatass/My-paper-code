@@ -57,12 +57,13 @@ raw=$raw
 Perform one bounded inspection of this exchange session's registered external
 response. Reuse a matching controlled tab or claim the exact registered page
 from browser.user.openTabs(); never create a duplicate when that page exists.
-Scope completion and control detection to the exact assigned user turn and its
-following assistant response. Ignore matching buttons in historical turns or
-other page regions; a current completed response's regenerate control is not a
-thinking signal. Use robust current-turn message-role scoping rather than page
-position assumptions. WAIT is legal only for a current generation indicator or
-changing text.
+Confirm the registered URL and current assignment, then choose any read-only
+inspection method you judge reliable for the page. You may inspect visible text,
+accessibility structure, message roles, snapshots or revise a failed locator.
+Do not repeat a prior DOM or layout assumption when it conflicts with the
+visible page. Do not report a missing response until another reasonable read-only inspection method has also failed.
+WAIT is legal only when current
+page evidence supports continued generation or changing output.
 
 Archive every stable naturally completed response exactly. Then use semantic
 judgment to return COMPLETE or COMPLETE_WITH_GAPS with a concise quality note.

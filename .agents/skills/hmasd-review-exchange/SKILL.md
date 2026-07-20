@@ -157,37 +157,25 @@ equal, send the completion callback without resubmitting or overwriting it.
 Resubmit only when the controller explicitly assigns materially changed review
 content.
 
-On a Pro page, determine state from the current assigned turn only. Locate the
-user turn containing this stage's exact round and commit, then inspect only its
-following assistant response container and current-generation indicator.
-Controls inside historical turns, page navigation, a prior response, or another
-conversation section are irrelevant. Never scan all page buttons and treat any
-matching label as current-stage state.
+On a Pro page, keep identity strict and inspection flexible. Confirm the exact
+registered URL and the current assignment by its `round`, `stage_commit` and
+question path. Within that confirmed page, the Exchange may use any read-only
+inspection method it judges reliable, including visible text, accessibility
+structure, message roles, snapshots or a revised locator. No selector,
+container hierarchy or page-layout assumption is prescribed by this Skill.
 
-Use message-role containers, not positional page sections: locate the matching
-`[data-message-author-role="user"]` (or its enclosing conversation-turn
-article), then select the first later
-`[data-message-author-role="assistant"]`. Do not use
-`document.querySelectorAll('section')` plus `idx+1`; ChatGPT page sections are
-not a stable one-message-per-section contract. Scope text and controls to that
-assistant element's enclosing conversation-turn article.
+If one read-only method cannot associate the visible answer with the current
+assignment, try another reasonable read-only method before reporting a blocker.
+Do not infer that Pro failed to answer merely because a prior wake's locator,
+DOM handle or page-layout assumption no longer works. Do not use response
+controls or resubmit the question as a discovery method.
 
-A current-turn `停止回答` or deferred `立即回答` means the request was accepted
-and Pro is still working. It is a waiting state, never a transport failure and
-never permission to click the control. `重新生成` on a stable completed current
-response is a completion affordance, not a thinking signal; it must not block
-archival. A `继续` control associated with the current response means the answer
-is incomplete and must not be clicked or archived. Do not decide from controls
-alone: natural completion requires stable current-response text and no
-current-turn active or deferred generation indicator.
-
-`WAIT_PRO_THINKING` is legal only when the current assigned turn has an active
-or deferred generation indicator, or when two bounded reads in the same wake
-show that its assistant text is still changing. If the current response is
-naturally complete and stable, archive it and return `REVIEW_STAGE_COMPLETE`,
-using `COMPLETE_WITH_GAPS` when semantic review finds a material omission. A
-completed response must never remain in `WAIT` or become
-`REVIEW_STAGE_BLOCKED` because of content quality.
+Use model judgment to distinguish active generation, incomplete output and a
+stable completed answer. `WAIT_PRO_THINKING` is appropriate only when current
+page evidence supports continued generation or changing output. A stable answer
+associated with the current assignment must be archived and returned as
+`REVIEW_STAGE_COMPLETE`, using `COMPLETE_WITH_GAPS` for content limitations.
+DOM ambiguity alone is not a transport failure.
 
 Create or retain this stage's heartbeat while the current turn is pending. As
 the final browser action of that waiting turn, call
