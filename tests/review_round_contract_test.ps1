@@ -127,6 +127,9 @@ foreach ($required in @(
     'current-turn `停止回答` or deferred `立即回答`',
     '`重新生成` on a stable completed current response is a completion affordance',
     'Do not decide from controls alone',
+    '`[data-message-author-role="user"]`',
+    '`[data-message-author-role="assistant"]`',
+    'ChatGPT page sections are not a stable one-message-per-section contract',
     "waiting state, never a transport failure",
     "not for ordinary deferred Pro thinking",
     "OPEN_REVIEW_PRINCIPLES.md",
@@ -261,6 +264,8 @@ try {
         "never create a duplicate",
         "Scope completion and control detection to the exact assigned user turn",
         "regenerate control is not a thinking signal",
+        "data-message-author-role user/assistant containers",
+        "never infer the reply with section index plus one",
         "browser.tabs.finalize({ keep })",
         "status handoff",
         "single terminal page close")) {

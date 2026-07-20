@@ -126,6 +126,14 @@ Controls inside historical turns, page navigation, a prior response, or another
 conversation section are irrelevant. Never scan all page buttons and treat any
 matching label as current-stage state.
 
+Use message-role containers, not positional page sections: locate the matching
+`[data-message-author-role="user"]` (or its enclosing conversation-turn
+article), then select the first later
+`[data-message-author-role="assistant"]`. Do not use
+`document.querySelectorAll('section')` plus `idx+1`; ChatGPT page sections are
+not a stable one-message-per-section contract. Scope text and controls to that
+assistant element's enclosing conversation-turn article.
+
 A current-turn `停止回答` or deferred `立即回答` means the request was accepted
 and Pro is still working. It is a waiting state, never a transport failure and
 never permission to click the control. `重新生成` on a stable completed current
