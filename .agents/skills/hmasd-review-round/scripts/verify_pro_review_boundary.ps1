@@ -87,22 +87,14 @@ if ($questionName -eq '40_PRO_CONVERGENT_QUESTION.md') {
     }
 }
 
-$section = [regex]::Match(
-    $questionText,
-    '(?ms)^## Repository files to inspect\s*\r?\n(?<body>.*?)(?=^##\s|\z)'
-)
-if (-not $section.Success) {
-    throw 'Question is missing the exact Repository files to inspect section.'
-}
-
 $listedPaths = @(
-    [regex]::Matches($section.Groups['body'].Value, '`([^`\r\n]+)`') |
+    [regex]::Matches($questionText, '`([^`\r\n]+)`') |
         ForEach-Object { $_.Groups[1].Value.Trim().Replace('\', '/') } |
         Where-Object { $_ -match '/' -and $_ -notmatch '[*?]' } |
         Select-Object -Unique
 )
 if ($listedPaths.Count -eq 0) {
-    throw 'Repository files to inspect does not contain any exact repository paths.'
+    throw 'Question does not contain any exact repository evidence paths.'
 }
 
 $verifiedPaths = @()

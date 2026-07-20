@@ -183,11 +183,15 @@ foreach ($required in @(
     'docs/project/ALGORITHM_PRINCIPLES.md',
     'docs/external-review/OPEN_REVIEW_PRINCIPLES.md',
     'docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md',
-    'invalid scientific-principle binding'
+    'invalid scientific-principle binding',
+    'Question does not contain any exact repository evidence paths.'
 )) {
     if (-not $verifierText.Contains($required)) {
         throw "Review-boundary verifier is missing: $required"
     }
+}
+if ($verifierText.Contains('Repository files to inspect section')) {
+    throw 'Review-boundary verifier still requires one literal evidence heading'
 }
 
 foreach ($path in @($geminiInvoker, $geminiLive)) {
