@@ -35,6 +35,15 @@ after the send tool confirms the controller task. Never use sleep, continuous
 polling, broad artifact scans, duplicate automations, or waiting messages to
 the controller.
 
+Within those boundaries, use model judgment rather than a fixed progress state
+machine. Select the registered counters that best explain current progress,
+estimate ETA from recent movement, adjust cadence to expected information gain,
+and report a concise anomaly explanation when direct evidence supports one.
+Do not require every run to expose identical progress fields, and do not turn a
+missing optional metric into experiment failure. Strictness applies to the
+assigned run identity, read-only authority, terminal evidence and callback—not
+to one universal progress template.
+
 If callback delivery fails, leave the heartbeat active. Its next wake retries
 only the same `handoff_id`; it does not reread unrelated artifacts or repeat
 experiment work. If delivery succeeded but deletion failed, the controller's

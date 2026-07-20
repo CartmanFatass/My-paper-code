@@ -87,7 +87,7 @@ if (-not $managerYaml.Contains('$hmasd-code-manager')) {
 }
 
 $role = $roles.roles.code_implementation_manager
-if ($roles.schema_version -ne 4 -or
+if ($roles.schema_version -ne 5 -or
     [string]::IsNullOrWhiteSpace($role.thread_id) -or
     $role.registration_status -ne 'ACTIVE' -or
     $role.role_skill -ne '.agents/skills/hmasd-code-manager/SKILL.md') {

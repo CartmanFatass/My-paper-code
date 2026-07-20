@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-exchange
-description: Use only inside one registered persistent HMASD reviewer-exchange session when the active controller assigns exactly one Gemini divergent, Open-Pro divergent, or Convergent-Pro stage. It owns that reviewer's transport, raw capture, completion validation, heartbeat, and one direct callback to the controller; it never manages the round or another reviewer.
+description: Use only inside one registered persistent HMASD reviewer-exchange session when the active controller assigns exactly one Gemini divergent, Open-Pro divergent, or Convergent-Pro stage. It owns that reviewer's transport, exact raw capture, semantic quality note, heartbeat, and one direct callback to the controller; it never manages the round or another reviewer.
 ---
 
 # HMASD Reviewer Exchange
@@ -94,21 +94,22 @@ that exact command once with escalation restricted to that state root. Do not
 request duplicate consent, use a wrapper, or choose an alternate state path. A
 second transport failure is terminal.
 
-Treat a response as complete only when the external surface shows natural
-completion and every section or decision field explicitly required by the
-question at the assigned `stage_commit` is present. Derive requirements from
-that committed question text only; never add a field from conversation memory,
-an earlier working-tree version, or another round. Write the exact captured response to the assigned raw,
-reread it, and require exact text equality with the capture. Nonempty is not
-sufficient. For an existing raw, inspect this session's registered external
-conversation once and repeat the same completion and equality checks before
-reporting success.
+Treat transport as complete when the current assigned external response has
+naturally stopped generating and its text is stable. Write every naturally
+completed response to the assigned raw, reread it, and require exact text
+equality with the capture. Never discard completed evidence because a heading,
+field or recommendation is missing.
 
-Validate required sections by numbered structure and semantic field content,
-not by English heading string equality, unless the pinned question explicitly
-requires literal tokens. A Chinese or bilingual heading is valid when its
-section unambiguously contains the required decision field. Do not use a list
-of English `includes(...)` checks as the completion gate.
+After archival, read the assigned question and response semantically. Report a
+short `quality` and `quality_notes` to the controller. Use model judgment rather
+than heading-string equality, regular expressions or a checklist implemented in
+page code. `COMPLETE_WITH_GAPS` means transport succeeded but the response may
+need a controller-authorized follow-up; it is not a transport failure and this
+Exchange does not decide scientific adoption.
+
+For an existing raw, inspect this session's registered external conversation
+once and repeat only the natural-completion and exact-equality checks before
+reporting success.
 
 Never use a prior turn, another round, a compacted-context summary, local final
 text, or a heartbeat message as evidence that the current stage completed. If
@@ -117,13 +118,11 @@ unconfirmed terminal assumption and restart the next wake from the current
 assignment fields and filesystem. In particular, a missing assigned raw means
 the current stage is not archived, regardless of what earlier text claims.
 
-For Gemini recovery, validate an existing raw against the current pinned
-question before considering another external submission. If that raw satisfies
-the current required fields and equals the completed registered-conversation
-response, send the completion callback without resubmitting or overwriting it,
-regardless of an earlier blocked callback or a later wording-only question
-change. Resubmit only when the controller explicitly assigns materially changed
-review content and the existing raw does not satisfy it.
+For Gemini recovery, compare an existing raw with the completed registered
+conversation response before considering another external submission. If it is
+equal, send the completion callback without resubmitting or overwriting it.
+Resubmit only when the controller explicitly assigns materially changed review
+content.
 
 On a Pro page, determine state from the current assigned turn only. Locate the
 user turn containing this stage's exact round and commit, then inspect only its
@@ -146,26 +145,24 @@ never permission to click the control. `重新生成` on a stable completed curr
 response is a completion affordance, not a thinking signal; it must not block
 archival. A `继续` control associated with the current response means the answer
 is incomplete and must not be clicked or archived. Do not decide from controls
-alone: natural completion requires stable current-response text, every field
-required by the pinned question, and no current-turn active/deferred indicator.
+alone: natural completion requires stable current-response text and no
+current-turn active or deferred generation indicator.
 
 `WAIT_PRO_THINKING` is legal only when the current assigned turn has an active
 or deferred generation indicator, or when two bounded reads in the same wake
 show that its assistant text is still changing. If the current response is
-naturally complete and stable but a required field is genuinely absent, send
-`REVIEW_STAGE_BLOCKED` with stable code
-`COMPLETED_RESPONSE_MISSING_REQUIRED_FIELDS`, naming the missing fields; delete
-and verify the stage heartbeat after callback delivery. A completed response
-must never remain in `WAIT` merely because validation failed.
+naturally complete and stable, archive it and return `REVIEW_STAGE_COMPLETE`,
+using `COMPLETE_WITH_GAPS` when semantic review finds a material omission. A
+completed response must never remain in `WAIT` or become
+`REVIEW_STAGE_BLOCKED` because of content quality.
 
 Create or retain this stage's heartbeat while the current turn is pending. As
 the final browser action of that waiting turn, call
 `browser.tabs.finalize({ keep: [{ tab: <owned-tab>, status: "handoff" }] })`.
 This releases automation control while preserving the live page for the next
 heartbeat; it is not a close. Do not call another browser operation after
-finalize. Send `REVIEW_STAGE_BLOCKED` for a direct terminal transport error or
-a naturally completed response that fails the pinned field contract, not for
-ordinary deferred Pro thinking.
+finalize. Send `REVIEW_STAGE_BLOCKED` only for a direct operational or transport
+error, not for ordinary deferred Pro thinking or content quality.
 
 ## Heartbeat
 
@@ -225,10 +222,12 @@ handoff_id=<round>:<reviewer_role>:complete:<question>
 round=<id>
 stage_commit=<pushed SHA>
 raw=<round_path>/<raw>
-verification=natural_complete;required_fields_present;exact_text_equal
+verification=natural_complete;exact_text_equal
+quality=<COMPLETE|COMPLETE_WITH_GAPS>
+quality_notes=<concise semantic observation or none>
 ```
 
-On terminal transport failure send exactly:
+On terminal operational or transport failure send exactly:
 
 ```text
 REVIEW_STAGE_BLOCKED

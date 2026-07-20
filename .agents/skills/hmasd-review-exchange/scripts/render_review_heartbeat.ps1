@@ -59,17 +59,20 @@ response. Reuse a matching controlled tab or claim the exact registered page
 from browser.user.openTabs(); never create a duplicate when that page exists.
 Scope completion and control detection to the exact assigned user turn and its
 following assistant response. Ignore matching buttons in historical turns or
-other page regions; a current completed response's regenerate control is not a thinking signal.
-Use data-message-author-role user/assistant containers (or their enclosing
-conversation-turn articles); never infer the reply with section index plus one.
-Validate numbered sections semantically; translated headings are acceptable.
-WAIT is legal only for a current generation indicator or changing text. A
-stable completed response with missing fields is terminal BLOCKED, not WAIT.
+other page regions; a current completed response's regenerate control is not a
+thinking signal. Use robust current-turn message-role scoping rather than page
+position assumptions. WAIT is legal only for a current generation indicator or
+changing text.
+
+Archive every stable naturally completed response exactly. Then use semantic
+judgment to return COMPLETE or COMPLETE_WITH_GAPS with a concise quality note.
+Do not implement heading, regular-expression or field-presence gates in page
+code, and never convert a content gap into a transport BLOCKED result.
 While Pro is thinking, preserve it by making browser.tabs.finalize({ keep })
 with status handoff the final browser action of this wake. Recover the page by
 opening it only if neither controlled nor user tabs contain the registered URL.
 Never load controller context, operate another reviewer, or resubmit an
-accepted prompt. Follow the exchange Skill for raw validation and controller callback,
+accepted prompt. Follow the exchange Skill for raw archival and controller callback,
 heartbeat deletion, handoff preservation, and the single terminal page close.
 Prior-turn text and compacted context are not terminal evidence. Never claim callback or
 deletion unless the current stage has its assigned raw and the current wake

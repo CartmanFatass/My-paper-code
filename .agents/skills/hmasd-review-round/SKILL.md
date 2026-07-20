@@ -71,7 +71,8 @@ the next stage.
    independently to `gemini_divergent_exchange` and
    `open_divergent_exchange`;
 2. accept each raw only from its registered Exchange callback and verify the
-   required sections plus exact-text-equality claim;
+   natural-completion and exact-text-equality claim; retain its semantic
+   `quality_notes` without treating presentation gaps as transport failures;
 3. write `30_EVIDENCE_RECONCILIATION.md` as a factual reconciliation without
    ranking routes, then write `40_PRO_CONVERGENT_QUESTION.md` under the
    convergent principle contract;
@@ -82,9 +83,10 @@ the next stage.
    reconciliation, `CURRENT_WORK.md` and `ALGORITHM_PRINCIPLES.md` as explicit
    inputs;
 7. accept one `PROJECT_REVIEW_BRIEF`; show its `user_brief` before any code or
-   experiment handoff. `REVISE` or `BLOCK` returns the exact mission/causal
-   conflict to Convergent Pro through one focused follow-up rather than local
-   reinterpretation;
+   experiment handoff. The Project Manager judges scientific sufficiency from
+   the raw response and its quality note. `REVISE` or `BLOCK` returns the exact
+   mission, causal or material-content conflict to Convergent Pro through one
+   focused follow-up rather than local reinterpretation;
 8. only after `ALIGNED`, write `50_DISPOSITION.md`, commit and push it, then
    update the owning project-control boundary once.
 
@@ -166,10 +168,16 @@ idempotent.
 
 There is no review state machine and no controller heartbeat. Derive progress
 from immutable round artifacts plus callbacks. If a raw already exists, send
-the same stage to its owning Exchange for one completion/equality verification;
-never resubmit the external question from the controller. A blocked Exchange is
-a terminal operational blocker for the round unless the user explicitly repairs
-or replaces that registered Exchange.
+the same stage to its owning Exchange for one natural-completion/equality
+verification; never resubmit the external question from the controller. A
+blocked Exchange is a terminal operational blocker for the round unless the
+user explicitly repairs or replaces that registered Exchange.
+
+An Exchange `COMPLETE_WITH_GAPS` callback is completed transport, not a blocked
+round. Preserve the raw, pass the quality note into controller and Project
+Manager assessment, and create a focused follow-up only when missing scientific
+content prevents adoption. Do not ask the Exchange to enforce prose templates
+or discard evidence.
 
 External review recommends scientific action but never grants code or
 experiment authority. The controller operationalizes only the accepted

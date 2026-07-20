@@ -14,6 +14,12 @@ task, or authorize work. It does not revoke context
 separately granted by active-controller status or by the one assigned role
 Skill.
 
+Routing remains deliberately strict because a wrong recipient or route field
+can change another task. This Skill validates identity, delivery and route
+invariance only. It does not validate scientific content, prose structure,
+implementation quality or role-internal procedure; those judgments remain with
+the receiving role and controller.
+
 Every delegated persistent session receives this Skill and exactly one
 session-role Skill. Reject an assignment that names zero or multiple role
 Skills with `TASK_BLOCKED` before doing role work.

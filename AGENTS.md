@@ -145,6 +145,35 @@ bounded alignment brief; that manager never contacts another role session.
 The controller communicates only with the Code Implementation Manager for code;
 The controller alone writes reconciliation and disposition files and creates
 the Git-visible boundary required before each downstream reviewer stage.
+
+## Strict Interfaces, Intelligent Interiors
+
+Use hard checks only for facts whose violation can corrupt evidence, alter
+authority, change a model, or create an irreversible external effect. These
+include session identity and live routing, write leases, Git-visible review
+boundaries, exact raw evidence, formal experiment contracts, and algorithmic
+probability, gradient, credit, clock, RNG, replay, recurrent-state and
+checkpoint semantics.
+
+Inside an accepted role boundary, let the assigned model choose its analysis,
+tools, implementation sequence and presentation. Judge the delivered evidence
+and preserved invariants rather than compliance with a microscopic procedure.
+Do not replace semantic judgment with heading strings, regular expressions,
+fixed prose templates, repeated approval steps or role-local state machines.
+
+Separate transport, content quality and scientific adoption:
+
+- a naturally completed external response is transport evidence and is
+  archived exactly even when its content has gaps;
+- the owning role may report a concise semantic quality note, but only the
+  controller and Research Project Manager decide whether a follow-up is needed;
+- a content gap is not a transport failure, and a diagnostic result is not a
+  scientific disposition;
+- irreversible or high-cost actions retain strict controller authorization.
+
+Prefer three observable conditions: active work, completed evidence delivery,
+or a direct operational blocker. Do not create additional workflow states for
+formatting differences or ordinary uncertainty.
 Before adopting a Convergent recommendation as a code or experiment handoff,
 the controller must receive the Research Project Manager's structured brief and
 show its concise user-facing summary. `REVISE` or `BLOCK` returns the exact

@@ -51,6 +51,12 @@ Skill. Conversation history and nearby repository files are not inputs.
 
 ## Alignment Audit
 
+Use semantic judgment across the assigned evidence. The distinctions below are
+decision principles, not a checklist or heading validator. A different prose
+structure is acceptable when it preserves the mission, causal direction,
+evidence delta and user-visible handoff. Do not reject an otherwise sufficient
+boundary solely because a reviewer omitted a title or used translated wording.
+
 Check the assigned boundary against these distinctions:
 
 - **Research objective:** build a more capable and robust MARL algorithm.
@@ -100,6 +106,11 @@ Do not invent missing scientific values. If the selected source is misaligned
 or incomplete, recommend returning the exact conflict to Convergent Pro rather
 than repairing it locally.
 
+When an Exchange reports `COMPLETE_WITH_GAPS`, inspect the archived raw rather
+than inheriting the Exchange's conclusion. Return `ALIGNED` when the scientific
+contract is substantively usable; return `REVISE` only when the omission changes
+mission, causal interpretation, implementation authority or result meaning.
+
 ## Role Firewall
 
 This role is read-only. Do not edit files, use Git, launch code work, run an
@@ -110,7 +121,9 @@ controller through `$hmasd-task-router`.
 ## Reply to Controller
 
 Resolve the registered controller live immediately before sending and copy its
-`hostId`, `threadId`, `model` and `thinking` unchanged. Send exactly one of:
+`hostId`, `threadId`, `model` and `thinking` unchanged. Send one callback of the
+following type. The named fields are the inter-role evidence interface, not a
+fixed prose template; fill them semantically and concisely:
 
 ```text
 PROJECT_REVIEW_BRIEF

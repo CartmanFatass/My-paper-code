@@ -69,9 +69,12 @@ returns exactly one `PROJECT_REVIEW_BRIEF` or `PROJECT_REVIEW_BLOCKED`. Only an
 `ALIGNED` brief permits disposition adoption and downstream handoff.
 
 Each raw has exactly one writer: its registered Exchange. A raw becomes
-immutable only after that Exchange verifies natural response completion, every
-question-required field, and exact captured-text equality after rereading the
-file; nonempty alone is not completion. An externally accepted stage is never
+immutable after that Exchange verifies natural response completion and exact
+captured-text equality after rereading the file. Every naturally completed
+response is preserved even when its content has gaps. The Exchange reports a
+semantic quality note; the controller and Research Project Manager decide
+whether the scientific contract is sufficient or needs a focused follow-up. A
+content gap is not a transport failure. An externally accepted stage is never
 resubmitted.
 
 Each Pro Exchange uses one browser lifecycle per assigned stage. At the end of

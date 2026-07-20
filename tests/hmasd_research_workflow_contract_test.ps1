@@ -7,6 +7,7 @@ $sessionRolesPath = Join-Path $skillsRoot "hmasd-task-router/references/session-
 $expectedSkills = @(
     "hmasd-code-manager",
     "hmasd-experiment",
+    "hmasd-project-manager",
     "hmasd-review-exchange",
     "hmasd-review-round",
     "hmasd-task-router"
@@ -86,20 +87,19 @@ foreach ($forbidden in @(
 }
 
 $current = Read-Text (Join-Path $canonicalRoot "CURRENT_WORK.md")
-if (-not $current.Contains("Status: ACTIVE") -or
-    -not $current.Contains("Remaining iterations: five") -or
-    -not $current.Contains("Authorized evidence-bearing iterations: five") -or
-    -not $current.Contains("CLEAN_SUPPLIED_EXECUTOR_HIGH_PATH_G0") -or
+if (-not $current.Contains("## Controller Ownership") -or
+    -not $current.Contains("## Current Boundary") -or
+    -not $current.Contains("## Next Action") -or
+    -not $current.Contains("## Autonomous Boundary") -or
     $current.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
-    throw "CURRENT_WORK does not preserve the authorized five-iteration boundary"
+    throw "CURRENT_WORK does not preserve the controller control-plane structure"
 }
 
 $plan = Read-Text (Join-Path $canonicalRoot "IMPLEMENTATION_PLAN.md")
-if (-not $plan.Contains("Status: AUTHORIZED_IN_PROGRESS") -or
-    -not $plan.Contains("Code Implementation Manager") -or
-    $plan.Contains("Completed Prior Contract") -or
+if (-not $plan.Contains("# HA-CTSE Active Implementation Plan") -or
+    -not $plan.Contains("Status:") -or
     $plan.Contains("MARL_ENGINEERING_PRINCIPLES.md")) {
-    throw "IMPLEMENTATION_PLAN retains a completed or dangling active contract"
+    throw "IMPLEMENTATION_PLAN does not preserve its active-plan interface"
 }
 
 $codeManager = Read-Text (Join-Path $skillsRoot "hmasd-code-manager/SKILL.md")

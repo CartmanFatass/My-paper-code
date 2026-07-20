@@ -53,6 +53,13 @@ routes, effort settings, delegation structure, or review ceremony. Apply the
 engineering principles directly and remain responsible for the integrated diff
 and focused verification.
 
+The assignment boundary and protected semantics are strict; the internal route
+to a correct integrated result is not. Choose implementation structure, tools,
+sequencing and focused checks with engineering judgment. Do not create local
+state machines, template gates or repeated review ceremonies merely to prove
+that an internal procedure was followed. Acceptance rests on the executable
+design, preserved invariants, focused evidence and absence of scope expansion.
+
 Do not choose a hypothesis, reward, budget, threshold, experiment, successor,
 or scientific interpretation. Do not edit `CURRENT_WORK.md`,
 `ALGORITHM_PRINCIPLES.md`, `ExpRecord.md`, external-review files, role Skills,
