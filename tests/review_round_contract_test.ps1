@@ -91,6 +91,7 @@ $exchangeText = Get-Content -LiteralPath $exchangeSkillPath -Raw
 $normalizedExchangeText = $exchangeText -replace '\s+', ' '
 foreach ($required in @(
     "role_skill=.agents/skills/hmasd-review-exchange/SKILL.md",
+    "completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY",
     "gemini_divergent_exchange",
     "open_divergent_exchange",
     "convergent_exchange",

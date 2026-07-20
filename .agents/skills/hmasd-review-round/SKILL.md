@@ -101,6 +101,7 @@ stage_commit=<40-character pushed SHA>
 round_path=<round_path>
 question=<round-relative question path>
 raw=<round-relative raw path>
+completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 ```
 
 Resolve only the matching registered Exchange immediately before each send and

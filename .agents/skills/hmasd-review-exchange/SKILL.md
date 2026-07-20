@@ -18,6 +18,7 @@ stage_commit=<40-character pushed SHA>
 round_path=docs/external-review/rounds/<id>
 question=<round-relative question path>
 raw=<round-relative raw path>
+completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 ```
 
 Read, in order:
@@ -39,6 +40,11 @@ registered external conversation, question filename, and raw filename all to
 match that entry and `REVIEWER_CONVERSATIONS.json`. Otherwise return
 `REVIEW_STAGE_BLOCKED` to the registered controller before opening a transport
 or creating a heartbeat.
+
+Require the literal `completion_policy` value above. It is the only
+content-lifecycle rule carried across the persistent-session boundary: archive
+every naturally completed response and report quality separately. It does not
+prescribe headings, fields, reasoning or scientific judgment.
 
 ## Role Firewall
 

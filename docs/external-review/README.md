@@ -54,6 +54,7 @@ stage_commit=<40-character pushed SHA>
 round_path=docs/external-review/rounds/<round-id>
 question=<round-relative question path>
 raw=<round-relative raw path>
+completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 ```
 
 Gemini and Open Pro may run concurrently. Their Exchange sessions return
