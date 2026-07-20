@@ -38,16 +38,14 @@ prefix P. The unique next source is the independent
 
 ## Next Action
 
-Complete the tracked focused Convergent follow-up
-`docs/external-review/rounds/20260720_benchmark_identifiability_contract_followup/`.
-The convergent result selected
-`BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS_G0` but did not freeze concrete
-task dynamics, model, budget, seeds, absolute floors or material margins. The
-same Convergent reviewer must now freeze one code-ready contract covering H
-hindsight authority, C calendar/static null, S shared-lifetime ceiling and D
-ordinary recurrent access. Do not reopen Gemini/Open-Pro divergence, the
-selected source or portfolio. Only the accepted exact contract may be sent to
-the Code Implementation Manager.
+Complete the one-field Convergent clarification in
+`docs/external-review/rounds/20260720_benchmark_identifiability_field5_clarification/`.
+The focused contract response froze the task, H/C/S/D interfaces, model,
+budget, seeds, thresholds and result branches, but its archived observation
+table lost the formula, range and mask status for common field 5 during webpage
+math rendering. Do not infer that field locally or reopen any other scientific
+choice. Once the same Convergent reviewer supplies that exact row, adopt the
+complete contract and send it to the Code Implementation Manager.
 
 ## Autonomous Boundary
 
