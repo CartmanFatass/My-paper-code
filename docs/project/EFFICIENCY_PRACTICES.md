@@ -15,6 +15,10 @@ Update this file when a measurement is taken or a practice is corrected. Record
 the conditions with every number; a number without its conditions becomes a
 false generalization within weeks.
 
+`docs/project/WORKING_PRINCIPLES.md` holds the abstract form of what the
+practices below instantiate. Read that first for a brief; read this for the
+evidence.
+
 ## Practices
 
 ### P1. Measure before you state a number
