@@ -16,6 +16,29 @@ Updated: 2026-07-21
   historical workflow. It is not the operating contract for this session and is
   not modified here.
 
+## Execution Flow
+
+Work is executed through bounded subagents under a single orchestrator.
+
+- Orchestrator: writes the frozen plan, dispatches, integrates the result,
+  reruns the focused suite itself, commits and maintains `docs/project/`. A
+  subagent's own claim that tests pass is never accepted as evidence.
+- Implementer: one bounded task against a frozen plan, receiving the plan, the
+  exact file scope, the acceptance criteria and the execution-environment
+  facts. It receives no research context and holds no Git authority.
+- Reviewer: a separate read-only spawn with fresh context that audits the diff
+  against the plan and returns findings without editing. A review pass is
+  mandatory before committing any change touching protected semantics, meaning
+  probability factorization, gradients and detach boundaries, RNG stream
+  ownership, replay, lifecycle clocks, credit assignment, masks and checkpoint
+  meaning.
+- Mechanical work such as inventories, search sweeps, log scraping and
+  packaging is delegated to a low-cost tier and never touches algorithm
+  semantics.
+
+One writer holds a given file set at a time. Concurrent mutating tasks on the
+same scope are not dispatched.
+
 Handoff note: the prior Codex controller task
 `019f5c78-0c91-7612-adb4-c1fcfe4484c8` left the
 `EVENT_HELD_COMMITMENT_LINK_G0` implementation complete but uncommitted. It was
