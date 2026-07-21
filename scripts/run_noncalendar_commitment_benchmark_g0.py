@@ -1,14 +1,12 @@
-"""Run the registered NONCALENDAR_HETEROGENEOUS_TRACKING_G0 benchmark."""
+"""Package EVENT_HELD_COMMITMENT_LINK_G0 contract, smoke, train, eval, analysis."""
 
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
 import json
+import math
 from pathlib import Path
 import sys
-import time
-import traceback
 from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -18,748 +16,746 @@ if str(PROJECT_ROOT) not in sys.path:
 import numpy as np
 import torch
 
-from ha_ctse_process.dynamic_roster_direct import (
-    maximum_state_difference,
-    model_state_copy,
-    optimize_direct_update,
-    state_dict_finite,
+from ha_ctse_process.event_held_commitment_link import (
+    ArmName,
+    CREATE,
+    KEEP,
+    RENEW,
+    RNG_NAMES,
+    authoritative_seed_map,
+    collect_trajectory,
+    compare_continuations,
+    factor_counts,
+    initialize_arms,
+    load_checkpoint,
+    make_training_state,
+    nested_state_maximum_difference,
+    optimize_update,
+    parameter_and_optimizer_counts,
+    replay_errors,
+    replay_trajectory,
+    runtime_rng_snapshot,
+    save_checkpoint,
+    validate_replay,
 )
 from ha_ctse_process.noncalendar_commitment_testbed import (
     BOOTSTRAP_REPETITIONS,
-    CALENDAR_MASK_INDICES,
-    EVAL_ORDER_SEED,
+    BOOTSTRAP_SEED,
     FORMAL_EVAL_EPISODES,
-    FORMAL_NUM_ENVS,
-    FORMAL_OPTIMIZER_STEPS_PER_ARM,
-    FORMAL_TRAIN_EPISODES,
-    FORMAL_TRANSITIONS_PER_ARM,
     FORMAL_UPDATES,
-    HELD_OUT_EVAL_TASK_SEED,
     HORIZON,
-    MODEL_INITIALIZATION_SEED,
-    PARAMETER_COUNT,
-    PPO_PASSES,
-    TRAIN_ACTION_SEED,
-    TRAIN_ORDER_SEED,
-    TRAIN_TASK_SEED,
-    anonymous_relabeling_audit,
-    bootstrap_cluster_indices,
-    brute_force_trace_outcomes,
-    checkpoint_round_trip_error,
-    collect_causal_trajectory,
-    heterogeneity_support,
-    initialize_causal_arms,
-    ledger_active_row_count,
-    load_benchmark_checkpoint,
-    make_noncalendar_ledger,
-    paired_cluster_ci,
-    paired_ledgers_equal_except_targets,
+    REGISTERED_CONTRACT,
     registered_contract,
-    save_benchmark_checkpoint,
     select_result_branch,
-    solve_hindsight_episode,
-    solve_trace_outcomes,
-    SolverStep,
-    THRESHOLDS,
-    trajectory_metric_arrays,
+)
+
+FORMAL_AUTHORIZATION = "AUTHORIZE_EVENT_HELD_COMMITMENT_LINK_G0_FORMAL"
+TRAIN_MANIFEST_SCHEMA = 1
+EVALUATION_CELL_SCHEMA = 1
+ARMS: tuple[ArmName, ...] = ("OR", "DUM", "EHC")
+EVALUATION_CELLS = (
+    ("iid", True, "iid_deterministic"),
+    ("iid", False, "iid_stochastic"),
+    ("held_out", True, "held_out_deterministic"),
+    ("held_out", False, "held_out_stochastic"),
 )
 
 
-RESULT_NAME = "noncalendar_heterogeneous_tracking_g0.json"
-
-
-def _write_status(path: Path, **fields: Any) -> None:
-    value = {
-        **fields,
-        "updated": datetime.now().astimezone().isoformat(timespec="seconds"),
-    }
-    path.write_text(
-        "".join(f"{key}={item}\n" for key, item in value.items()),
-        encoding="utf-8",
-    )
+def _require_cuda(device_name: str) -> torch.device:
+    if device_name != "cuda":
+        raise ValueError("focused and formal execution requires --device cuda")
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA is required; CPU fallback is forbidden")
+    return torch.device("cuda")
 
 
 def _json_ready(value: Any) -> Any:
-    if isinstance(value, dict):
-        return {str(key): _json_ready(item) for key, item in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [_json_ready(item) for item in value]
-    if isinstance(value, np.ndarray):
-        return value.tolist()
-    if isinstance(value, np.generic):
-        return value.item()
-    if isinstance(value, torch.Tensor):
-        return value.detach().cpu().tolist()
+    if isinstance(value, dict): return {str(k): _json_ready(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)): return [_json_ready(v) for v in value]
+    if isinstance(value, np.ndarray): return value.tolist()
+    if isinstance(value, np.generic): return value.item()
+    if isinstance(value, torch.Tensor): return value.detach().cpu().tolist()
+    if hasattr(value, "__dict__"): return _json_ready(vars(value))
     return value
 
 
-def _checkpoint_paths(root: Path, arm: str) -> dict[str, Path]:
-    directory = root / "checkpoints" / arm
-    return {
-        "update_000": directory / "update_000.pt",
-        "latest": directory / "latest.pt",
-        "update_250": directory / "update_250.pt",
-    }
+def _write_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(_json_ready(value), indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def _metric_summary(trajectory: Any) -> dict[str, Any]:
-    arrays = trajectory_metric_arrays(trajectory)
-    return {
-        **arrays,
-        "tracking_mean": float(arrays["tracking"].mean()),
-        "completion_mean": float(arrays["completion"].mean()),
-        "utility_mean": float(arrays["utility"].mean()),
-    }
-
-
-def _lifecycle_hidden_valid(trajectory: Any) -> bool:
-    for env_index, episode_id in enumerate(trajectory.ledger_ids):
-        ledger = make_noncalendar_ledger(
-            episode_id,
-            profile="train",
-            task_seed=TRAIN_TASK_SEED,
-            order_seed=TRAIN_ORDER_SEED,
-        )
-        temporary = ledger.temporary_key
-        leave = ledger.temporary_leave_time
-        rejoin = ledger.rejoin_time
-        frozen = trajectory.hidden_after[leave - 1, env_index, temporary]
-        if not torch.equal(trajectory.hidden_before[leave, env_index, temporary], frozen):
-            return False
-        if not torch.equal(trajectory.hidden_after[rejoin - 1, env_index, temporary], frozen):
-            return False
-        if not torch.equal(trajectory.hidden_before[rejoin, env_index, temporary], frozen):
-            return False
-        joined = ledger.joined_key
-        if not torch.equal(
-            trajectory.hidden_before[rejoin, env_index, joined],
-            torch.zeros_like(trajectory.hidden_before[rejoin, env_index, joined]),
-        ):
-            return False
-        terminal = ledger.terminal_key
-        terminal_time = ledger.terminal_leave_time
-        if not torch.equal(
-            trajectory.hidden_before[terminal_time, env_index, terminal],
-            torch.zeros_like(trajectory.hidden_before[terminal_time, env_index, terminal]),
-        ):
-            return False
-    return True
-
-
-def _calendar_pair_audit(trajectory: Any) -> dict[str, Any]:
-    arrays = trajectory_metric_arrays(trajectory)
-    pair_tracking = arrays["tracking"].reshape(-1, 2).mean(axis=1)
-    pair_completion = arrays["completion"].reshape(-1, 2).mean(axis=1)
-    pair_utility = arrays["utility"].reshape(-1, 2).mean(axis=1)
-    obs_error = 0.0
-    hidden_error = 0.0
-    action_equal = True
-    order_equal = True
-    mask_zero = not bool(
-        torch.count_nonzero(trajectory.observations[..., CALENDAR_MASK_INDICES])
-    )
-    for left in range(0, len(trajectory.ledger_ids), 2):
-        right = left + 1
-        obs_error = max(
-            obs_error,
-            float(torch.max(torch.abs(trajectory.observations[:, left] - trajectory.observations[:, right]))),
-        )
-        hidden_error = max(
-            hidden_error,
-            float(torch.max(torch.abs(trajectory.hidden_after[:, left] - trajectory.hidden_after[:, right]))),
-        )
-        action_equal = action_equal and bool(torch.equal(trajectory.actions[:, left], trajectory.actions[:, right]))
-        order_equal = order_equal and bool(torch.equal(trajectory.orders[:, left], trajectory.orders[:, right]))
-    return {
-        "observation_max_error": obs_error,
-        "hidden_max_error": hidden_error,
-        "action_tape_equal": action_equal,
-        "order_equal": order_equal,
-        "mask_zero_in_storage": mask_zero,
-        "pair_tracking_max_error_from_half": float(np.max(np.abs(pair_tracking - 0.5))),
-        "pair_completion_max": float(pair_completion.max()),
-        "pair_utility_max": float(pair_utility.max()),
-        "valid": bool(
-            obs_error == 0.0
-            and hidden_error <= 1e-6
-            and action_equal
-            and order_equal
-            and mask_zero
-            and np.max(np.abs(pair_tracking - 0.5)) <= 1e-12
-            and pair_completion.max() <= 0.5 + 1e-12
-            and pair_utility.max() <= 0.5 + 1e-12
-        ),
-    }
-
-
-def _evaluate_checkpoint(
-    *,
-    checkpoint: Path,
-    arm_mode: str,
-    device: torch.device,
-) -> dict[str, Any]:
-    calendar, demand, calendar_optimizer, demand_optimizer = initialize_causal_arms(device)
-    if arm_mode == "calendar_masked":
-        model, optimizer = calendar, calendar_optimizer
-    elif arm_mode == "demand_visible":
-        model, optimizer = demand, demand_optimizer
-    else:
-        raise ValueError("invalid evaluation arm")
-    load_benchmark_checkpoint(
-        checkpoint,
-        arm_mode=arm_mode,
-        model=model,
-        optimizer=optimizer,
-    )
-    ids = tuple(range(FORMAL_EVAL_EPISODES))
-    cells: dict[str, Any] = {}
-    for profile in ("iid", "held_out"):
-        for deterministic in (True, False):
-            trajectory = collect_causal_trajectory(
-                model,
-                episode_ids=ids,
-                profile=profile,
-                arm_mode=arm_mode,
-                device=device,
-                deterministic=deterministic,
-            )
-            key = f"{profile}_{'det' if deterministic else 'stoch'}"
-            cells[key] = {
-                "summary": _metric_summary(trajectory),
-                "trajectory": trajectory,
-            }
-    return cells
-
-
-def _hindsight_cells() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    ledgers = tuple(
-        make_noncalendar_ledger(
-            episode_id,
-            profile="held_out",
-            task_seed=HELD_OUT_EVAL_TASK_SEED,
-            order_seed=EVAL_ORDER_SEED,
-        )
-        for episode_id in range(FORMAL_EVAL_EPISODES)
-    )
-    h_outcomes = tuple(solve_hindsight_episode(ledger, arm="H") for ledger in ledgers)
-    s_outcomes = tuple(solve_hindsight_episode(ledger, arm="S") for ledger in ledgers)
-
-    def summarize(values: tuple[Any, ...]) -> dict[str, Any]:
-        arrays = {
-            "tracking": np.asarray([v.tracking for v in values], dtype=np.float64),
-            "completion": np.asarray([v.completion for v in values], dtype=np.float64),
-            "utility": np.asarray([v.utility for v in values], dtype=np.float64),
-        }
-        return {
-            **arrays,
-            "tracking_mean": float(arrays["tracking"].mean()),
-            "completion_mean": float(arrays["completion"].mean()),
-            "utility_mean": float(arrays["utility"].mean()),
-        }
-
-    audit = {
-        "every_action_active_only": True,
-        "target_membership_ledgers_unchanged": True,
-        "h_optimizer_steps": 0,
-        "s_optimizer_steps": 0,
-    }
-    return summarize(h_outcomes), summarize(s_outcomes), audit
-
-
-def _tiny_solver_valid() -> bool:
-    steps = (
-        SolverStep(0, 2, False, True),
-        SolverStep(1, 2, True, False),
-        SolverStep(4, -2, False, False),
-        SolverStep(5, -2, True, False),
-    )
+def _owned_rng_equal(left: Any, right: Any, names: tuple[str, ...]) -> bool:
     return all(
-        solve_trace_outcomes(steps, arm=arm, prune=False)
-        == brute_force_trace_outcomes(steps, arm=arm)
-        for arm in ("H", "S")
+        repr(left.rngs[name].bit_generator.state)
+        == repr(right.rngs[name].bit_generator.state)
+        for name in names
     )
 
 
-def _training_active_rows(episode_count: int) -> int:
-    return sum(
-        ledger_active_row_count(
-            make_noncalendar_ledger(
-                episode_id,
-                profile="train",
-                task_seed=TRAIN_TASK_SEED,
-                order_seed=TRAIN_ORDER_SEED,
-            )
+def _no_op_equal(ordinary: Any, dummy: Any) -> bool:
+    return all(
+        torch.equal(getattr(ordinary, name), getattr(dummy, name))
+        for name in (
+            "observations", "active_mask", "orders", "actions",
+            "old_log_probs", "old_values", "hidden_before", "hidden_after",
+            "prefix_counts", "rewards", "terminal",
         )
-        for episode_id in range(int(episode_count))
     )
 
 
-def run_benchmark(
+def validate_operational_records(
+    training_manifest: dict[str, Any],
+    evaluation_payloads: dict[tuple[int, str, str], dict[str, Any]],
     *,
-    output_root: Path,
-    device_name: str,
-    resume: bool,
-) -> dict[str, Any]:
-    if device_name == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("registered CUDA run requested but CUDA is unavailable")
-    device = torch.device(device_name)
-    output_root.mkdir(parents=True, exist_ok=True)
-    result_dir = output_root / "result"
-    result_dir.mkdir(parents=True, exist_ok=True)
-    status_path = output_root / "runner_status.txt"
-    wall_start = time.perf_counter()
+    expected_replicates: tuple[int, ...] = tuple(range(5)),
+) -> tuple[bool, list[str]]:
+    """Fail-closed validation of all conclusion-bearing operational evidence."""
 
-    calendar, demand, calendar_optimizer, demand_optimizer = initialize_causal_arms(device)
-    initial_calendar = model_state_copy(calendar)
-    initial_demand = model_state_copy(demand)
-    initialization_equal = maximum_state_difference(initial_calendar, initial_demand) == 0.0
-    paths = {
-        "calendar_masked": _checkpoint_paths(output_root, "calendar_masked"),
-        "demand_visible": _checkpoint_paths(output_root, "demand_visible"),
-    }
-
-    completed = 0
-    if resume:
-        calendar_bundle = load_benchmark_checkpoint(
-            paths["calendar_masked"]["latest"],
-            arm_mode="calendar_masked",
-            model=calendar,
-            optimizer=calendar_optimizer,
-        )
-        demand_bundle = load_benchmark_checkpoint(
-            paths["demand_visible"]["latest"],
-            arm_mode="demand_visible",
-            model=demand,
-            optimizer=demand_optimizer,
-        )
-        if int(calendar_bundle["completed_update"]) != int(demand_bundle["completed_update"]):
-            raise ValueError("paired arm checkpoints disagree on completed update")
-        completed = int(calendar_bundle["completed_update"])
-    else:
-        for arm_mode, model, optimizer in (
-            ("calendar_masked", calendar, calendar_optimizer),
-            ("demand_visible", demand, demand_optimizer),
+    errors: list[str] = []
+    if set(training_manifest) != {
+        "schema_version", "contract", "mode", "replicates"
+    }:
+        errors.append("training_manifest_schema")
+    if training_manifest.get("schema_version") != TRAIN_MANIFEST_SCHEMA:
+        errors.append("training_manifest_version")
+    if training_manifest.get("contract") != registered_contract():
+        errors.append("training_manifest_contract")
+    if training_manifest.get("mode") != "formal_train":
+        errors.append("training_manifest_mode")
+    replicates = training_manifest.get("replicates", {})
+    if set(replicates) != {str(value) for value in expected_replicates}:
+        errors.append("training_replicate_set")
+    for replicate in expected_replicates:
+        record = replicates.get(str(replicate), {})
+        if set(record) != {"operational", "updates", "arms"}:
+            errors.append(f"training_record_schema:{replicate}")
+            continue
+        operational = record.get("operational", {})
+        required_families = {
+            "no_op", "probability_replay", "lifecycle", "finiteness",
+            "rng_pairing", "checkpoint_resume", "exposure",
+        }
+        if set(operational) != required_families or not all(
+            operational.get(name) is True for name in required_families
         ):
-            save_benchmark_checkpoint(
-                paths[arm_mode]["update_000"],
-                arm_mode=arm_mode,
-                model=model,
-                optimizer=optimizer,
-                completed_update=0,
-            )
-            save_benchmark_checkpoint(
-                paths[arm_mode]["latest"],
-                arm_mode=arm_mode,
-                model=model,
-                optimizer=optimizer,
-                completed_update=0,
-            )
+            errors.append(f"training_operational:{replicate}")
+        if len(record.get("updates", [])) != FORMAL_UPDATES:
+            errors.append(f"training_update_count:{replicate}")
+        arms = record.get("arms", {})
+        if set(arms) != set(ARMS):
+            errors.append(f"training_arm_set:{replicate}")
+            continue
+        for arm in ARMS:
+            entry = arms[arm]
+            expected_event = 0 if arm == "OR" else 1000
+            if (
+                entry.get("arm") != arm
+                or entry.get("replicate") != replicate
+                or entry.get("checkpoint_origin") != "update_250.pt"
+                or entry.get("completed_update") != 250
+                or entry.get("next_episode_id") != 4000
+                or entry.get("base_steps") != 1000
+                or entry.get("event_steps") != expected_event
+                or entry.get("seed_map") != authoritative_seed_map("train", replicate)
+                or entry.get("checkpoint_resume") is not True
+            ):
+                errors.append(f"training_arm_evidence:{replicate}:{arm}")
 
-    historical_active_rows = _training_active_rows(completed * FORMAL_NUM_ENVS)
-    counts = {
-        "calendar_environment_transitions": completed * FORMAL_NUM_ENVS * HORIZON,
-        "demand_environment_transitions": completed * FORMAL_NUM_ENVS * HORIZON,
-        "calendar_optimizer_steps": completed * PPO_PASSES,
-        "demand_optimizer_steps": completed * PPO_PASSES,
-        "calendar_training_episodes": completed * FORMAL_NUM_ENVS,
-        "demand_training_episodes": completed * FORMAL_NUM_ENVS,
-        "calendar_active_rows": historical_active_rows,
-        "demand_active_rows": historical_active_rows,
-        "h_optimizer_steps": 0,
-        "s_optimizer_steps": 0,
-        "skill_updates": 0,
-        "high_updates": 0,
-        "keep_set_actions": 0,
-        "intrinsic_reward_reads": 0,
-        "posterior_reads": 0,
-        "new_critic_count": 0,
+    expected_keys = {
+        (replicate, arm, cell)
+        for replicate in expected_replicates
+        for arm in ARMS
+        for _profile, _deterministic, cell in EVALUATION_CELLS
     }
-    replay_max = {name: 0.0 for name in (
-        "logp_max_error", "joint_logp_max_error", "value_max_error",
-        "hidden_max_error", "prefix_max_error",
-    )}
-    finite_updates = True
-    active_rows_equal = True
-    lifecycle_valid = True
+    if set(evaluation_payloads) != expected_keys:
+        errors.append("evaluation_artifact_set")
+    for replicate in expected_replicates:
+        for profile, deterministic, cell in EVALUATION_CELLS:
+            paired_ids: tuple[int, ...] | None = None
+            for arm in ARMS:
+                payload = evaluation_payloads.get((replicate, arm, cell), {})
+                required = {
+                    "schema_version", "contract", "arm", "replicate", "cell",
+                    "profile", "mode", "checkpoint", "checkpoint_origin",
+                    "counts", "seed_map", "replay", "operational", "episodes",
+                }
+                if set(payload) != required:
+                    errors.append(f"evaluation_schema:{replicate}:{arm}:{cell}")
+                    continue
+                expected_mode = "deterministic" if deterministic else "stochastic"
+                counts = payload.get("counts", {})
+                operational = payload.get("operational", {})
+                training_checkpoint = (
+                    replicates.get(str(replicate), {})
+                    .get("arms", {}).get(arm, {}).get("checkpoint")
+                )
+                if (
+                    payload.get("schema_version") != EVALUATION_CELL_SCHEMA
+                    or payload.get("contract") != registered_contract()
+                    or payload.get("arm") != arm
+                    or payload.get("replicate") != replicate
+                    or payload.get("cell") != cell
+                    or payload.get("profile") != profile
+                    or payload.get("mode") != expected_mode
+                    or payload.get("checkpoint_origin") != "update_250.pt"
+                    or payload.get("checkpoint") != training_checkpoint
+                    or counts != {"episodes": FORMAL_EVAL_EPISODES, "horizon": HORIZON}
+                    or payload.get("seed_map") != authoritative_seed_map(profile, replicate)
+                    or set(operational) != {"probability_replay", "lifecycle", "rng", "checkpoint", "finite"}
+                    or not all(value is True for value in operational.values())
+                    or float(payload.get("replay", {}).get("maximum_error", float("inf"))) > 1e-6
+                ):
+                    errors.append(f"evaluation_operational:{replicate}:{arm}:{cell}")
+                episode_ids = tuple(
+                    int(value.get("episode_id", -1))
+                    for value in payload.get("episodes", [])
+                )
+                if episode_ids != tuple(range(FORMAL_EVAL_EPISODES)):
+                    errors.append(f"evaluation_episode_ids:{replicate}:{arm}:{cell}")
+                if paired_ids is None:
+                    paired_ids = episode_ids
+                elif episode_ids != paired_ids:
+                    errors.append(f"evaluation_pairing:{replicate}:{cell}")
+    return not errors, errors
 
-    train_start = time.perf_counter()
-    for update in range(completed, FORMAL_UPDATES):
-        _write_status(
-            status_path,
-            state="running",
-            phase="paired_training_collection",
-            update=update,
-            updates_total=FORMAL_UPDATES,
-        )
-        ids = tuple(range(update * FORMAL_NUM_ENVS, (update + 1) * FORMAL_NUM_ENVS))
-        calendar_trajectory = collect_causal_trajectory(
-            calendar,
-            episode_ids=ids,
-            profile="train",
-            arm_mode="calendar_masked",
-            device=device,
-        )
-        demand_trajectory = collect_causal_trajectory(
-            demand,
-            episode_ids=ids,
-            profile="train",
-            arm_mode="demand_visible",
-            device=device,
-        )
-        if bool(torch.count_nonzero(calendar_trajectory.observations[..., CALENDAR_MASK_INDICES])):
-            raise RuntimeError("calendar mask leaked into rollout storage")
-        active_rows_equal = active_rows_equal and bool(
-            torch.equal(calendar_trajectory.active_mask, demand_trajectory.active_mask)
-        )
-        lifecycle_valid = lifecycle_valid and _lifecycle_hidden_valid(calendar_trajectory)
-        lifecycle_valid = lifecycle_valid and _lifecycle_hidden_valid(demand_trajectory)
 
-        calendar_metrics = optimize_direct_update(
-            calendar, calendar_optimizer, calendar_trajectory, device=device
-        )
-        demand_metrics = optimize_direct_update(
-            demand, demand_optimizer, demand_trajectory, device=device
-        )
-        for metrics in (calendar_metrics, demand_metrics):
-            finite_updates = finite_updates and bool(metrics["finite_update"])
-            for name in replay_max:
-                replay_max[name] = max(replay_max[name], float(metrics[name]))
-        counts["calendar_environment_transitions"] += calendar_trajectory.environment_steps
-        counts["demand_environment_transitions"] += demand_trajectory.environment_steps
-        counts["calendar_optimizer_steps"] += PPO_PASSES
-        counts["demand_optimizer_steps"] += PPO_PASSES
-        counts["calendar_training_episodes"] += FORMAL_NUM_ENVS
-        counts["demand_training_episodes"] += FORMAL_NUM_ENVS
-        counts["calendar_active_rows"] += calendar_trajectory.active_token_count
-        counts["demand_active_rows"] += demand_trajectory.active_token_count
-
-        completed_update = update + 1
-        save_benchmark_checkpoint(
-            paths["calendar_masked"]["latest"],
-            arm_mode="calendar_masked",
-            model=calendar,
-            optimizer=calendar_optimizer,
-            completed_update=completed_update,
-        )
-        save_benchmark_checkpoint(
-            paths["demand_visible"]["latest"],
-            arm_mode="demand_visible",
-            model=demand,
-            optimizer=demand_optimizer,
-            completed_update=completed_update,
-        )
-        _write_status(
-            status_path,
-            state="running",
-            phase="paired_training_complete",
-            update=completed_update,
-            updates_total=FORMAL_UPDATES,
-        )
-    training_seconds = time.perf_counter() - train_start
-
-    for arm_mode, model, optimizer in (
-        ("calendar_masked", calendar, calendar_optimizer),
-        ("demand_visible", demand, demand_optimizer),
-    ):
-        save_benchmark_checkpoint(
-            paths[arm_mode]["update_250"],
-            arm_mode=arm_mode,
-            model=model,
-            optimizer=optimizer,
-            completed_update=FORMAL_UPDATES,
-        )
-
-    final_calendar = model_state_copy(calendar)
-    final_demand = model_state_copy(demand)
-    demand_drift = maximum_state_difference(initial_demand, final_demand)
-    parameter_finite = state_dict_finite(final_calendar) and state_dict_finite(final_demand)
-    (
-        zero_calendar,
-        zero_demand,
-        zero_calendar_optimizer,
-        zero_demand_optimizer,
-    ) = initialize_causal_arms(device)
-    load_benchmark_checkpoint(
-        paths["calendar_masked"]["update_000"],
-        arm_mode="calendar_masked",
-        model=zero_calendar,
-        optimizer=zero_calendar_optimizer,
+def _lifecycle_valid(trajectory: Any, arm: ArmName) -> bool:
+    counts = factor_counts(trajectory)
+    if arm == "OR":
+        return all(value == 0 for value in counts.values())
+    return bool(
+        counts["categorical"] == counts["keep"] + counts["renew"]
+        and counts["mark"] == counts["create"] + counts["renew"]
+        and all(record.active_lifetime >= 1 for rows in trajectory.segments for record in rows)
     )
-    load_benchmark_checkpoint(
-        paths["demand_visible"]["update_000"],
-        arm_mode="demand_visible",
-        model=zero_demand,
-        optimizer=zero_demand_optimizer,
-    )
-    update_zero_equal = maximum_state_difference(
-        model_state_copy(zero_calendar), model_state_copy(zero_demand)
-    ) == 0.0
-    checkpoint_error = max(
-        checkpoint_round_trip_error(
-            paths["calendar_masked"]["update_250"],
-            arm_mode="calendar_masked",
-            model=calendar,
-            optimizer=calendar_optimizer,
-        ),
-        checkpoint_round_trip_error(
-            paths["demand_visible"]["update_250"],
-            arm_mode="demand_visible",
-            model=demand,
-            optimizer=demand_optimizer,
-        ),
-    )
-    relabeling_audit = anonymous_relabeling_audit(demand, device=device)
 
-    _write_status(status_path, state="running", phase="registered_evaluation", update=FORMAL_UPDATES)
-    eval_start = time.perf_counter()
-    evaluations = {
-        "calendar_masked": {
-            "update_000": _evaluate_checkpoint(
-                checkpoint=paths["calendar_masked"]["update_000"],
-                arm_mode="calendar_masked",
-                device=device,
+
+def run_smoke(output_root: Path, *, device_name: str = "cuda") -> dict[str, Any]:
+    """One real, bounded, explicitly non-formal CUDA package exercise."""
+
+    device = _require_cuda(device_name)
+    arms, base_optimizers, event_optimizers = initialize_arms(device)
+    states = {name: make_training_state(name, 0) for name in ARMS}
+    evidence: dict[str, Any] = {}
+    trajectories: dict[str, Any] = {}
+    for name in ARMS:
+        arm = arms[name]
+        trajectory = collect_trajectory(
+            arm, states[name], device=device, episode_ids=(0,)
+        )
+        trajectories[name] = trajectory
+        _replay, replay = validate_replay(arm, trajectory, device=device)
+        update = optimize_update(
+            arm, base_optimizers[name], event_optimizers[name],
+            states[name], trajectory, device=device,
+        )
+        checkpoint = output_root / "checkpoints" / name / "smoke_update_001.pt"
+        save_checkpoint(
+            checkpoint, arm=arm, base_optimizer=base_optimizers[name],
+            event_optimizer=event_optimizers[name], state=states[name],
+        )
+        loaded_arm, loaded_base, loaded_event, loaded_state = load_checkpoint(
+            checkpoint, device=device, expected_arm=name, expected_replicate=0
+        )
+        evidence[name] = {
+            "replay": replay,
+            "update": update,
+            "factors": factor_counts(trajectory),
+            "lifecycle_valid": _lifecycle_valid(trajectory, name),
+            "counts": parameter_and_optimizer_counts(
+                arm, base_optimizers[name], event_optimizers[name]
             ),
-            "update_250": _evaluate_checkpoint(
-                checkpoint=paths["calendar_masked"]["update_250"],
-                arm_mode="calendar_masked",
-                device=device,
+            "checkpoint_model_error": nested_state_maximum_difference(
+                arm.state_dict(), loaded_arm.state_dict()
             ),
-        },
-        "demand_visible": {
-            "update_000": _evaluate_checkpoint(
-                checkpoint=paths["demand_visible"]["update_000"],
-                arm_mode="demand_visible",
-                device=device,
+            "checkpoint_base_optimizer_error": nested_state_maximum_difference(
+                base_optimizers[name].state_dict(), loaded_base.state_dict()
             ),
-            "update_250": _evaluate_checkpoint(
-                checkpoint=paths["demand_visible"]["update_250"],
-                arm_mode="demand_visible",
-                device=device,
+            "checkpoint_event_optimizer_error": nested_state_maximum_difference(
+                None if event_optimizers[name] is None else event_optimizers[name].state_dict(),
+                None if loaded_event is None else loaded_event.state_dict(),
             ),
-        },
-    }
-    h_cell, s_cell, solver_audit = _hindsight_cells()
-    counts["calendar_evaluation_episodes"] = 8 * FORMAL_EVAL_EPISODES
-    counts["demand_evaluation_episodes"] = 8 * FORMAL_EVAL_EPISODES
-    counts["h_evaluation_episodes"] = FORMAL_EVAL_EPISODES
-    counts["s_evaluation_episodes"] = FORMAL_EVAL_EPISODES
-    evaluation_seconds = time.perf_counter() - eval_start
+            "checkpoint_state_equal": (
+                states[name].completed_update == loaded_state.completed_update
+                and states[name].next_episode_id == loaded_state.next_episode_id
+                and states[name].base_optimizer_steps == loaded_state.base_optimizer_steps
+                and states[name].event_optimizer_steps == loaded_state.event_optimizer_steps
+            ),
+            "artifact": str(checkpoint),
+        }
+    no_op = _no_op_equal(trajectories["OR"], trajectories["DUM"])
 
-    indices = bootstrap_cluster_indices()
-    c_final = evaluations["calendar_masked"]["update_250"]["held_out_det"]["summary"]
-    d_zero = evaluations["demand_visible"]["update_000"]["held_out_det"]["summary"]
-    d_final_held_det = evaluations["demand_visible"]["update_250"]["held_out_det"]["summary"]
-    d_final_iid_det = evaluations["demand_visible"]["update_250"]["iid_det"]["summary"]
-    d_final_held_stoch = evaluations["demand_visible"]["update_250"]["held_out_stoch"]["summary"]
-    cis = {
-        "h_minus_s_tracking": paired_cluster_ci(h_cell["tracking"] - s_cell["tracking"], indices=indices),
-        "h_minus_s_completion": paired_cluster_ci(h_cell["completion"] - s_cell["completion"], indices=indices),
-        "h_minus_s_utility": paired_cluster_ci(h_cell["utility"] - s_cell["utility"], indices=indices),
-        "d_gain_utility": paired_cluster_ci(d_final_held_det["utility"] - d_zero["utility"], indices=indices),
-        "d_minus_c_tracking": paired_cluster_ci(d_final_held_det["tracking"] - c_final["tracking"], indices=indices),
-        "d_minus_c_completion": paired_cluster_ci(d_final_held_det["completion"] - c_final["completion"], indices=indices),
-        "d_minus_c_utility": paired_cluster_ci(d_final_held_det["utility"] - c_final["utility"], indices=indices),
-    }
-    means = {
-        "h_tracking": h_cell["tracking_mean"],
-        "h_completion": h_cell["completion_mean"],
-        "h_utility": h_cell["utility_mean"],
-        "c_held_det_tracking": c_final["tracking_mean"],
-        "c_held_det_completion": c_final["completion_mean"],
-        "c_held_det_utility": c_final["utility_mean"],
-        "s_tracking": s_cell["tracking_mean"],
-        "s_completion": s_cell["completion_mean"],
-        "s_utility": s_cell["utility_mean"],
-        "d_iid_det_tracking": d_final_iid_det["tracking_mean"],
-        "d_iid_det_completion": d_final_iid_det["completion_mean"],
-        "d_iid_det_utility": d_final_iid_det["utility_mean"],
-        "d_held_det_tracking": d_final_held_det["tracking_mean"],
-        "d_held_det_completion": d_final_held_det["completion_mean"],
-        "d_held_det_utility": d_final_held_det["utility_mean"],
-        "d_held_stoch_tracking": d_final_held_stoch["tracking_mean"],
-        "d_held_stoch_completion": d_final_held_stoch["completion_mean"],
-        "d_held_stoch_utility": d_final_held_stoch["utility_mean"],
-    }
-    lcbs = {name: interval[0] for name, interval in cis.items()}
+    checkpoint = output_root / "checkpoints" / "EHC" / "continuation_origin.pt"
+    save_checkpoint(
+        checkpoint, arm=arms["EHC"], base_optimizer=base_optimizers["EHC"],
+        event_optimizer=event_optimizers["EHC"], state=states["EHC"],
+    )
+    left_arm, left_base, left_event, left_state = load_checkpoint(
+        checkpoint, device=device, expected_arm="EHC", expected_replicate=0
+    )
+    left_trajectory = collect_trajectory(
+        left_arm, left_state, device=device, episode_ids=(1,)
+    )
+    optimize_update(
+        left_arm, left_base, left_event, left_state,
+        left_trajectory, device=device,
+    )
+    left_global_rng = runtime_rng_snapshot()
 
-    calendar_pair = _calendar_pair_audit(
-        evaluations["calendar_masked"]["update_250"]["held_out_det"]["trajectory"]
+    right_arm, right_base, right_event, right_state = load_checkpoint(
+        checkpoint, device=device, expected_arm="EHC", expected_replicate=0
     )
-    held_ledgers = tuple(
-        make_noncalendar_ledger(
-            episode_id,
-            profile="held_out",
-            task_seed=HELD_OUT_EVAL_TASK_SEED,
-            order_seed=EVAL_ORDER_SEED,
-        )
-        for episode_id in range(FORMAL_EVAL_EPISODES)
+    right_trajectory = collect_trajectory(
+        right_arm, right_state, device=device, episode_ids=(1,)
     )
-    pair_ledgers_valid = all(
-        paired_ledgers_equal_except_targets(held_ledgers[index], held_ledgers[index + 1])
-        for index in range(0, FORMAL_EVAL_EPISODES, 2)
+    optimize_update(
+        right_arm, right_base, right_event, right_state,
+        right_trajectory, device=device,
     )
-    heterogeneity_valid = all(heterogeneity_support(held_ledgers[index])["valid"] for index in range(0, FORMAL_EVAL_EPISODES, 2))
-    replay_valid = all(value <= 1e-6 for value in replay_max.values())
-    counts_valid = bool(
-        counts["calendar_environment_transitions"] == FORMAL_TRANSITIONS_PER_ARM
-        and counts["demand_environment_transitions"] == FORMAL_TRANSITIONS_PER_ARM
-        and counts["calendar_optimizer_steps"] == FORMAL_OPTIMIZER_STEPS_PER_ARM
-        and counts["demand_optimizer_steps"] == FORMAL_OPTIMIZER_STEPS_PER_ARM
-        and counts["calendar_training_episodes"] == FORMAL_TRAIN_EPISODES
-        and counts["demand_training_episodes"] == FORMAL_TRAIN_EPISODES
-        and counts["calendar_evaluation_episodes"] == 2_048
-        and counts["demand_evaluation_episodes"] == 2_048
-        and counts["h_evaluation_episodes"] == FORMAL_EVAL_EPISODES
-        and counts["s_evaluation_episodes"] == FORMAL_EVAL_EPISODES
+    right_global_rng = runtime_rng_snapshot()
+    continuation = compare_continuations(
+        left_arm, right_arm, left_trajectory, right_trajectory,
+        left_base, right_base, left_event, right_event,
+        left_state, right_state, left_global_rng, right_global_rng,
     )
-    expected_active_rows = _training_active_rows(FORMAL_TRAIN_EPISODES)
-    active_rows_equal = bool(
-        active_rows_equal
-        and counts["calendar_active_rows"] == expected_active_rows
-        and counts["demand_active_rows"] == expected_active_rows
-    )
-    m0_checks = {
-        "registered_environment_contract": True,
-        "duration_support_exact": True,
-        "membership_and_routing_contract": True,
-        "sign_pair_ledger_isolation": pair_ledgers_valid,
-        "calendar_mask_storage_and_replay": calendar_pair["mask_zero_in_storage"],
-        "calendar_sign_pair_information_null": calendar_pair["valid"],
-        "demand_reads_current_fields_only": True,
-        "h_s_legal_action_authority": bool(
-            solver_audit["every_action_active_only"]
-            and solver_audit["target_membership_ledgers_unchanged"]
-            and solver_audit["h_optimizer_steps"] == 0
-            and solver_audit["s_optimizer_steps"] == 0
-        ),
-        "tiny_dp_equals_bruteforce": _tiny_solver_valid(),
-        "held_out_heterogeneity_support": heterogeneity_valid,
-        "anonymous_relabeling_invariant": relabeling_audit["valid"],
-        "lifecycle_hidden_ownership": lifecycle_valid,
-        "update_zero_models_byte_equal": initialization_equal and update_zero_equal,
-        "registered_counts": counts_valid,
-        "active_rows_equal": active_rows_equal,
-        "replay_errors": replay_valid,
-        "finite_updates_and_parameters": finite_updates and parameter_finite,
-        "demand_parameter_drift": demand_drift > 1e-8,
-        "checkpoint_round_trip": checkpoint_error == 0.0,
-        "zero_forbidden_optimizer_and_module_counts": all(
-            counts[name] == 0
-            for name in (
-                "h_optimizer_steps", "s_optimizer_steps", "skill_updates",
-                "high_updates", "keep_set_actions", "intrinsic_reward_reads",
-                "posterior_reads", "new_critic_count",
-            )
-        ),
-        "evaluation_and_bootstrap_headers": bool(
-            indices.shape == (BOOTSTRAP_REPETITIONS, 128)
-            and tuple(range(FORMAL_EVAL_EPISODES)) == tuple(held_ledgers[index].episode_id for index in range(FORMAL_EVAL_EPISODES))
-        ),
-        "runner_selects_no_successor": True,
-    }
-    implementation_valid = all(bool(value) for value in m0_checks.values())
-    status = select_result_branch(m0_valid=implementation_valid, means=means, lcbs=lcbs)
-
-    serializable_evaluations: dict[str, Any] = {}
-    for arm, checkpoints in evaluations.items():
-        serializable_evaluations[arm] = {}
-        for checkpoint, cells in checkpoints.items():
-            serializable_evaluations[arm][checkpoint] = {
-                name: {key: value for key, value in cell["summary"].items()}
-                for name, cell in cells.items()
-            }
-
     result = {
-        "schema_version": 1,
-        "stage": "NONCALENDAR_HETEROGENEOUS_TRACKING_G0",
-        "status": status,
-        "implementation_valid": implementation_valid,
-        "m0_checks": m0_checks,
-        "contract": registered_contract(),
-        "counts": counts,
-        "means": means,
-        "paired_confidence_intervals": cis,
-        "thresholds": dict(THRESHOLDS),
-        "hindsight": {"H": h_cell, "S": s_cell, "audit": solver_audit},
-        "causal_evaluation": serializable_evaluations,
-        "calendar_information_null": calendar_pair,
-        "engineering": {
-            "replay_max_errors": replay_max,
-            "demand_parameter_drift": demand_drift,
-            "checkpoint_round_trip_error": checkpoint_error,
-            "parameter_count_per_arm": PARAMETER_COUNT,
-            "model_initialization_seed": MODEL_INITIALIZATION_SEED,
-            "anonymous_relabeling": relabeling_audit,
-        },
-        "wall_seconds": {
-            "paired_training": training_seconds,
-            "registered_evaluation": evaluation_seconds,
-            "total": time.perf_counter() - wall_start,
-        },
-        "authoritative_status_source": str(status_path),
-        "successor_selected": False,
-        "next_action": "return this terminal evidence to the active controller",
+        "mode": "non_formal_smoke",
+        "device": str(device),
+        "registered_contract": REGISTERED_CONTRACT,
+        "formal": False,
+        "arms": evidence,
+        "or_dum_no_op": no_op,
+        "continuation": continuation,
     }
-    result_path = result_dir / RESULT_NAME
-    result_path.write_text(
-        json.dumps(_json_ready(result), ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    _write_status(
-        status_path,
-        state="complete",
-        phase="terminal",
-        status=status,
-        update=FORMAL_UPDATES,
-        updates_total=FORMAL_UPDATES,
-        environment_transitions_per_arm=FORMAL_TRANSITIONS_PER_ARM,
-        optimizer_steps_per_arm=FORMAL_OPTIMIZER_STEPS_PER_ARM,
-        result=result_path,
-    )
+    _write_json(output_root / "smoke_result.json", result)
     return result
 
 
+def formal_train(
+    output_root: Path, *, device_name: str, authorization: str
+) -> dict[str, Any]:
+    if authorization != FORMAL_AUTHORIZATION:
+        raise PermissionError("formal train requires the exact authorization token")
+    device = _require_cuda(device_name)
+    manifest: dict[str, Any] = {
+        "schema_version": TRAIN_MANIFEST_SCHEMA,
+        "contract": registered_contract(),
+        "mode": "formal_train",
+        "replicates": {},
+    }
+    for replicate in range(5):
+        arms, base_optimizers, event_optimizers = initialize_arms(
+            device, replicate=replicate
+        )
+        states = {arm: make_training_state(arm, replicate) for arm in ARMS}
+        update_evidence: list[dict[str, Any]] = []
+        all_operational = {
+            "no_op": True,
+            "probability_replay": True,
+            "lifecycle": True,
+            "finiteness": True,
+            "rng_pairing": True,
+            "checkpoint_resume": True,
+            "exposure": True,
+        }
+        for update_index in range(FORMAL_UPDATES):
+            trajectories = {
+                arm: collect_trajectory(
+                    arms[arm], states[arm], device=device
+                )
+                for arm in ARMS
+            }
+            no_op = _no_op_equal(trajectories["OR"], trajectories["DUM"])
+            rng_pairing = bool(
+                _owned_rng_equal(
+                    states["OR"], states["DUM"],
+                    ("ledger", "order", "primitive"),
+                )
+                and _owned_rng_equal(
+                    states["DUM"], states["EHC"],
+                    ("ledger", "order", "primitive", "opportunity", "event", "mark"),
+                )
+            )
+            lifecycle = all(
+                _lifecycle_valid(trajectories[arm], arm) for arm in ARMS
+            )
+            update_metrics = {
+                arm: optimize_update(
+                    arms[arm], base_optimizers[arm], event_optimizers[arm],
+                    states[arm], trajectories[arm], device=device,
+                )
+                for arm in ARMS
+            }
+            replay_maximum = max(
+                max(metrics["replay"].values())
+                for metrics in update_metrics.values()
+            )
+            finite = all(metrics["finite"] for metrics in update_metrics.values())
+            exposure = all(
+                metrics["base_steps"] == 4
+                and metrics["primitive_replays"] == 4
+                and metrics["packed_trajectory_count"] == 1
+                and metrics["event_steps"] == (0 if arm == "OR" else 4)
+                for arm, metrics in update_metrics.items()
+            )
+            base_noop_error = nested_state_maximum_difference(
+                arms["OR"].base.state_dict(), arms["DUM"].base.state_dict()
+            )
+            no_op = no_op and base_noop_error == 0.0
+            current = {
+                "update": update_index + 1,
+                "no_op": no_op,
+                "base_noop_error": base_noop_error,
+                "replay_maximum": replay_maximum,
+                "lifecycle": lifecycle,
+                "finite": finite,
+                "rng_pairing": rng_pairing,
+                "exposure": exposure,
+            }
+            update_evidence.append(current)
+            all_operational["no_op"] &= no_op
+            all_operational["probability_replay"] &= replay_maximum <= 1e-6
+            all_operational["lifecycle"] &= lifecycle
+            all_operational["finiteness"] &= finite
+            all_operational["rng_pairing"] &= rng_pairing
+            all_operational["exposure"] &= exposure
+            if not all(
+                (no_op, replay_maximum <= 1e-6, lifecycle, finite, rng_pairing, exposure)
+            ):
+                raise RuntimeError(f"formal training operational failure {current}")
+
+        arm_records: dict[str, Any] = {}
+        for arm in ARMS:
+            checkpoint = (
+                output_root / "train" / f"replicate_{replicate}"
+                / arm / "update_250.pt"
+            )
+            save_checkpoint(
+                checkpoint, arm=arms[arm], base_optimizer=base_optimizers[arm],
+                event_optimizer=event_optimizers[arm], state=states[arm],
+            )
+            loaded_arm, loaded_base, loaded_event, loaded_state = load_checkpoint(
+                checkpoint, device=device, expected_arm=arm,
+                expected_replicate=replicate, formal_evaluation=True,
+            )
+            resume_valid = bool(
+                nested_state_maximum_difference(
+                    arms[arm].state_dict(), loaded_arm.state_dict()
+                ) == 0.0
+                and nested_state_maximum_difference(
+                    base_optimizers[arm].state_dict(), loaded_base.state_dict()
+                ) == 0.0
+                and nested_state_maximum_difference(
+                    None if event_optimizers[arm] is None else event_optimizers[arm].state_dict(),
+                    None if loaded_event is None else loaded_event.state_dict(),
+                ) == 0.0
+                and loaded_state.completed_update == FORMAL_UPDATES
+                and loaded_state.next_episode_id == 4000
+            )
+            all_operational["checkpoint_resume"] &= resume_valid
+            arm_records[arm] = {
+                "arm": arm,
+                "replicate": replicate,
+                "checkpoint": str(checkpoint),
+                "checkpoint_origin": "update_250.pt",
+                "completed_update": states[arm].completed_update,
+                "next_episode_id": states[arm].next_episode_id,
+                "base_steps": states[arm].base_optimizer_steps,
+                "event_steps": states[arm].event_optimizer_steps,
+                "seed_map": dict(states[arm].seed_map),
+                "checkpoint_resume": resume_valid,
+            }
+        if not all(all_operational.values()):
+            raise RuntimeError(
+                f"formal training terminal operational failure {all_operational}"
+            )
+        manifest["replicates"][str(replicate)] = {
+            "operational": all_operational,
+            "updates": update_evidence,
+            "arms": arm_records,
+        }
+    _write_json(output_root / "train_manifest.json", manifest)
+    return manifest
+
+
+def _evaluation_state(
+    arm: ArmName, replicate: int, *, profile: str
+) -> Any:
+    if profile not in ("iid", "held_out"):
+        raise ValueError("formal evaluation profile must be iid or held_out")
+    return make_training_state(arm, replicate, profile=profile)
+
+def _trajectory_episode_rows(trajectory: Any, arm: Any) -> list[dict[str, Any]]:
+    rows = []
+    for env_index, outcome in enumerate(trajectory.outcomes):
+        kinds = trajectory.event_kind[:, env_index]
+        active = trajectory.active_mask[:, env_index]
+        intervention: list[float] = []
+        if arm.arm == "EHC" and arm.W_z is not None:
+            with torch.no_grad():
+                for time in range(trajectory.time_steps):
+                    keys = torch.flatnonzero(active[time])
+                    if len(keys) >= 2:
+                        z = trajectory.primitive_z[time, keys].to(next(arm.parameters()).device); perm = torch.roll(z, 1, 0); values = arm.W_z(z - perm).norm(dim=-1) / math.sqrt(3.0); intervention.extend(values.detach().cpu().tolist())
+        segments = [vars(v) | {"active_lifetime": v.active_lifetime} for v in trajectory.segments[env_index]]
+        rows.append({"episode_id": trajectory.ledger_ids[env_index], "utility": outcome.utility, "keep": int((kinds == KEEP).sum()), "renew": int((kinds == RENEW).sum()), "non_create": int(((kinds == KEEP) | (kinds == RENEW)).sum()), "multi_opportunity_lifecycles": int(sum(int((((kinds == KEEP) | (kinds == RENEW))[:, key]).sum()) >= 2 for key in range(kinds.shape[-1]))), "segments": segments, "intervention": intervention})
+    return rows
+
+
+def formal_evaluate(
+    output_root: Path, *, device_name: str, authorization: str
+) -> dict[str, Any]:
+    if authorization != FORMAL_AUTHORIZATION:
+        raise PermissionError("formal evaluation requires the exact authorization token")
+    device = _require_cuda(device_name)
+    manifest: dict[str, Any] = {
+        "schema_version": 1,
+        "contract": registered_contract(),
+        "mode": "formal_evaluate",
+        "artifacts": {},
+    }
+    for replicate in range(5):
+        for arm_name in ARMS:
+            checkpoint = (
+                output_root / "train" / f"replicate_{replicate}"
+                / arm_name / "update_250.pt"
+            )
+            arm, _, _, checkpoint_state = load_checkpoint(
+                checkpoint, device=device, expected_arm=arm_name,
+                expected_replicate=replicate, formal_evaluation=True,
+            )
+            for profile, deterministic, cell in EVALUATION_CELLS:
+                state = _evaluation_state(
+                    arm_name, replicate, profile=profile
+                )
+                episode_rows: list[dict[str, Any]] = []
+                replay_maximum = 0.0
+                lifecycle_valid = True
+                finite = True
+                for start in range(0, FORMAL_EVAL_EPISODES, 16):
+                    trajectory = collect_trajectory(
+                        arm, state, device=device,
+                        episode_ids=range(start, start + 16),
+                        deterministic=deterministic, profile=profile,
+                    )
+                    _replay, errors = validate_replay(
+                        arm, trajectory, device=device
+                    )
+                    replay_maximum = max(replay_maximum, max(errors.values()))
+                    lifecycle_valid &= _lifecycle_valid(trajectory, arm_name)
+                    finite &= all(
+                        bool(torch.isfinite(getattr(trajectory, name)).all().detach().cpu())
+                        for name in (
+                            "old_log_probs", "old_values", "hidden_after",
+                            "event_old_joint_logp",
+                        )
+                    )
+                    episode_rows.extend(
+                        _trajectory_episode_rows(trajectory, arm)
+                    )
+                operational = {
+                    "probability_replay": replay_maximum <= 1e-6,
+                    "lifecycle": lifecycle_valid,
+                    "rng": (
+                        state.seed_map
+                        == authoritative_seed_map(profile, replicate)
+                        and set(state.rngs) == set(RNG_NAMES)
+                    ),
+                    "checkpoint": (
+                        checkpoint_state.completed_update == 250
+                        and checkpoint_state.next_episode_id == 4000
+                    ),
+                    "finite": finite,
+                }
+                if not all(operational.values()):
+                    raise RuntimeError(
+                        f"formal evaluation operational failure "
+                        f"{replicate}:{arm_name}:{cell}:{operational}"
+                    )
+                payload = {
+                    "schema_version": EVALUATION_CELL_SCHEMA,
+                    "contract": registered_contract(),
+                    "arm": arm_name,
+                    "replicate": replicate,
+                    "cell": cell,
+                    "profile": profile,
+                    "mode": "deterministic" if deterministic else "stochastic",
+                    "checkpoint": str(checkpoint),
+                    "checkpoint_origin": "update_250.pt",
+                    "counts": {
+                        "episodes": len(episode_rows),
+                        "horizon": HORIZON,
+                    },
+                    "seed_map": authoritative_seed_map(profile, replicate),
+                    "replay": {"maximum_error": replay_maximum},
+                    "operational": operational,
+                    "episodes": episode_rows,
+                }
+                path = (
+                    output_root / "evaluation" / f"replicate_{replicate}"
+                    / arm_name / f"{cell}.json"
+                )
+                _write_json(path, payload)
+                manifest["artifacts"][f"{replicate}:{arm_name}:{cell}"] = str(path)
+    _write_json(output_root / "evaluation_manifest.json", manifest)
+    return manifest
+
+def _percentile(values: list[float]) -> tuple[float, float]:
+    return float(np.quantile(values, 0.025)), float(np.quantile(values, 0.975))
+
+
+def aggregate_analysis(
+    output_root: Path, *, authorization: str
+) -> dict[str, Any]:
+    if authorization != FORMAL_AUTHORIZATION:
+        raise PermissionError("formal analysis requires the exact authorization token")
+    training_manifest = json.loads(
+        (output_root / "train_manifest.json").read_text(encoding="utf-8")
+    )
+    evaluation_payloads: dict[tuple[int, str, str], dict[str, Any]] = {}
+    for replicate in range(5):
+        for arm in ARMS:
+            for _profile, _deterministic, cell in EVALUATION_CELLS:
+                path = (
+                    output_root / "evaluation" / f"replicate_{replicate}"
+                    / arm / f"{cell}.json"
+                )
+                if path.is_file():
+                    evaluation_payloads[(replicate, arm, cell)] = json.loads(
+                        path.read_text(encoding="utf-8")
+                    )
+    operational_valid, operational_errors = validate_operational_records(
+        training_manifest, evaluation_payloads
+    )
+    if not operational_valid:
+        inputs = {
+            "operational_valid": False,
+            "non_create_opportunities": 0,
+            "multi_opportunity_lifecycles": 0,
+            "utility_ci": {arm: (0.0, 0.0) for arm in ARMS},
+            "g_ci": (0.0, 0.0),
+            "keep_ci": (0.0, 0.0),
+            "renew_ci": (0.0, 0.0),
+            "cv_ci": (0.0, 0.0),
+            "lifetime_bin_cis": [(0.0, 0.0)] * 3,
+            "intervention_ci": (0.0, 0.0),
+        }
+        result = {
+            "branch": select_result_branch(**inputs),
+            "predicate_inputs": inputs,
+            "operational_errors": operational_errors,
+            "registered_contract": REGISTERED_CONTRACT,
+        }
+        _write_json(output_root / "analysis_result.json", result)
+        return result
+
+    data = {
+        (replicate, arm): evaluation_payloads[
+            (replicate, arm, "held_out_stochastic")
+        ]["episodes"]
+        for replicate in range(5)
+        for arm in ARMS
+    }
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    utilities = {arm: [] for arm in ARMS}
+    gains: list[float] = []
+    secondary_gains: list[float] = []
+    keep_values: list[float] = []
+    renew_values: list[float] = []
+    cv_values: list[float] = []
+    bin_values: list[list[float]] = [[], [], []]
+    intervention_values: list[float] = []
+    for _ in range(BOOTSTRAP_REPETITIONS):
+        sampled_replicates = rng.integers(0, 5, size=5)
+        sampled: dict[str, list[dict[str, Any]]] = {arm: [] for arm in ARMS}
+        for replicate in sampled_replicates:
+            episode_indices = rng.integers(
+                0, FORMAL_EVAL_EPISODES, size=FORMAL_EVAL_EPISODES
+            )
+            for arm in ARMS:
+                sampled[arm].extend(
+                    data[(int(replicate), arm)][int(index)]
+                    for index in episode_indices
+                )
+        means = {
+            arm: float(np.mean([row["utility"] for row in rows]))
+            for arm, rows in sampled.items()
+        }
+        for arm in ARMS:
+            utilities[arm].append(means[arm])
+        gains.append(means["EHC"] - means["DUM"])
+        secondary_gains.append(means["EHC"] - means["OR"])
+        ehc = sampled["EHC"]
+        keep = sum(row["keep"] for row in ehc)
+        renew = sum(row["renew"] for row in ehc)
+        opportunities = keep + renew
+        keep_values.append(keep / max(opportunities, 1))
+        renew_values.append(renew / max(opportunities, 1))
+        lifetimes = [
+            segment["active_lifetime"]
+            for row in ehc for segment in row["segments"]
+            if not segment["censored"]
+        ]
+        cv_values.append(
+            float(np.std(lifetimes) / max(np.mean(lifetimes), 1e-12))
+            if lifetimes else 0.0
+        )
+        for index, (low, high) in enumerate(
+            ((1, 8), (9, 16), (17, float("inf")))
+        ):
+            bin_values[index].append(
+                sum(low <= value <= high for value in lifetimes)
+                / max(len(lifetimes), 1)
+            )
+        intervention = [value for row in ehc for value in row["intervention"]]
+        intervention_values.append(
+            float(np.mean(intervention)) if intervention else 0.0
+        )
+    utility_ci = {
+        arm: _percentile(values) for arm, values in utilities.items()
+    }
+    ehc_rows = [
+        row for replicate in range(5) for row in data[(replicate, "EHC")]
+    ]
+    inputs = {
+        "operational_valid": True,
+        "non_create_opportunities": sum(
+            row["non_create"] for row in ehc_rows
+        ),
+        "multi_opportunity_lifecycles": sum(
+            row["multi_opportunity_lifecycles"] for row in ehc_rows
+        ),
+        "utility_ci": utility_ci,
+        "g_ci": _percentile(gains),
+        "keep_ci": _percentile(keep_values),
+        "renew_ci": _percentile(renew_values),
+        "cv_ci": _percentile(cv_values),
+        "lifetime_bin_cis": [_percentile(values) for values in bin_values],
+        "intervention_ci": _percentile(intervention_values),
+    }
+    result = {
+        "branch": select_result_branch(**inputs),
+        "predicate_inputs": inputs,
+        "secondary_v_ci": _percentile(secondary_gains),
+        "operational_errors": [],
+        "registered_contract": REGISTERED_CONTRACT,
+    }
+    _write_json(output_root / "analysis_result.json", result)
+    return result
+
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output-root", type=Path, required=True)
-    parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
-    parser.add_argument("--resume", action="store_true")
-    return parser.parse_args()
+    parser = argparse.ArgumentParser(); parser.add_argument("--mode", choices=("contract", "smoke", "train", "evaluate", "analyze"), default="contract"); parser.add_argument("--output-root", type=Path, default=Path("logs/event_held_commitment_link_g0")); parser.add_argument("--device", choices=("cuda", "cpu"), default="cuda"); parser.add_argument("--authorize-formal", default=""); return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    status_path = args.output_root / "runner_status.txt"
-    try:
-        result = run_benchmark(
-            output_root=args.output_root,
-            device_name=args.device,
-            resume=args.resume,
-        )
-        print(
-            json.dumps(
-                {
-                    "status": result["status"],
-                    "implementation_valid": result["implementation_valid"],
-                    "result": str(args.output_root / "result" / RESULT_NAME),
-                },
-                ensure_ascii=False,
-            )
-        )
-        return 0
-    except Exception as exc:
-        args.output_root.mkdir(parents=True, exist_ok=True)
-        (args.output_root / "runner_stderr.log").write_text(
-            traceback.format_exc(), encoding="utf-8"
-        )
-        _write_status(
-            status_path,
-            state="failed",
-            phase="runner",
-            error=f"{type(exc).__name__}: {exc}",
-        )
-        raise
+    if args.mode == "contract": result = registered_contract()
+    elif args.mode == "smoke": result = run_smoke(args.output_root, device_name=args.device)
+    elif args.mode == "train": result = formal_train(args.output_root, device_name=args.device, authorization=args.authorize_formal)
+    elif args.mode == "evaluate": result = formal_evaluate(args.output_root, device_name=args.device, authorization=args.authorize_formal)
+    else: result = aggregate_analysis(args.output_root, authorization=args.authorize_formal)
+    print(json.dumps(_json_ready(result), ensure_ascii=False)); return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

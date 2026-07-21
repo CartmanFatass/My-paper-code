@@ -92,6 +92,16 @@ class DirectStepOutput:
     prefix_counts: torch.Tensor
 
 
+@dataclass
+class DirectPreparedStep:
+    """One encoded source-policy step, reusable by an attached event head."""
+
+    member_embeddings: torch.Tensor
+    context_input: torch.Tensor
+    context: torch.Tensor
+    value: torch.Tensor
+
+
 class DirectPrimitiveARPolicy(nn.Module):
     """Anonymous per-lifecycle recurrent actor with an active-set critic."""
 
@@ -127,67 +137,23 @@ class DirectPrimitiveARPolicy(nn.Module):
     def parameter_count(self) -> int:
         return int(sum(parameter.numel() for parameter in self.parameters()))
 
-    def forward_step(
+    def prepare_step(
         self,
         *,
         observations: torch.Tensor,
         active_mask: torch.Tensor,
-        order: torch.Tensor,
-        hidden: torch.Tensor,
-        sampling_uniforms: torch.Tensor | None = None,
-        teacher_actions: torch.Tensor | None = None,
-        deterministic: bool = False,
-    ) -> DirectStepOutput:
+        validated: bool = False,
+    ) -> DirectPreparedStep:
+        """Encode the ordinary observation and critic inputs exactly once."""
+
         batch, members, observation_dim = observations.shape
-        if members != MAX_LIFECYCLES or observation_dim != OBSERVATION_DIM:
+        if not validated and (members != MAX_LIFECYCLES or observation_dim != OBSERVATION_DIM):
             raise ValueError("direct actor observation shape mismatch")
-        if tuple(active_mask.shape) != (batch, members):
+        if not validated and tuple(active_mask.shape) != (batch, members):
             raise ValueError("direct actor active mask shape mismatch")
-        if tuple(order.shape) != (batch, members):
-            raise ValueError("direct actor order shape mismatch")
-        if tuple(hidden.shape) != (batch, members, self.hidden_dim):
-            raise ValueError("direct actor hidden shape mismatch")
-        modes = int(sampling_uniforms is not None) + int(
-            teacher_actions is not None
-        ) + int(bool(deterministic))
-        if modes != 1:
-            raise ValueError("choose exactly one sampling, replay, or deterministic mode")
-        if sampling_uniforms is not None and tuple(sampling_uniforms.shape) != (
-            batch,
-            members,
-        ):
-            raise ValueError("direct actor sampling-uniform shape mismatch")
-        if teacher_actions is not None and tuple(teacher_actions.shape) != (
-            batch,
-            members,
-        ):
-            raise ValueError("direct actor teacher-action shape mismatch")
-
         active_count = active_mask.sum(dim=1)
-        if bool((active_count <= 0).any()):
+        if not validated and bool((active_count <= 0).any()):
             raise ValueError("direct actor requires a non-empty active set")
-        expected_positions = torch.arange(members, device=order.device).unsqueeze(0)
-        position_mask = expected_positions < active_count.unsqueeze(1)
-        safe_order = order.clamp(min=0)
-        order_active = torch.gather(active_mask, 1, safe_order)
-        if not bool(torch.equal(order.ge(0), position_mask)):
-            raise ValueError("direct actor order padding does not match active count")
-        if not bool(order_active[position_mask].all()):
-            raise ValueError("direct actor order contains an inactive lifecycle")
-        sorted_order = torch.sort(
-            torch.where(position_mask, order, torch.full_like(order, members)), dim=1
-        ).values
-        sorted_active = torch.sort(
-            torch.where(
-                active_mask,
-                torch.arange(members, device=order.device).unsqueeze(0),
-                torch.full_like(order, members),
-            ),
-            dim=1,
-        ).values
-        if not bool(torch.equal(sorted_order, sorted_active)):
-            raise ValueError("direct actor order is not a permutation of active members")
-
         dtype = observations.dtype
         device = observations.device
         batch_index = torch.arange(batch, device=device)
@@ -199,9 +165,94 @@ class DirectPrimitiveARPolicy(nn.Module):
         context = self.context_encoder(context_input)
         first_active = torch.argmax(active_mask.to(torch.int64), dim=1)
         common_fields = observations[batch_index, first_active, :8]
-        value = self.critic(
-            torch.cat((context_input, common_fields), dim=-1)
-        ).squeeze(-1)
+        value = self.critic(torch.cat((context_input, common_fields), dim=-1)).squeeze(-1)
+        return DirectPreparedStep(
+            member_embeddings=member_embeddings,
+            context_input=context_input,
+            context=context,
+            value=value,
+        )
+
+    def forward_step(
+        self,
+        *,
+        observations: torch.Tensor,
+        active_mask: torch.Tensor,
+        order: torch.Tensor,
+        hidden: torch.Tensor,
+        sampling_uniforms: torch.Tensor | None = None,
+        teacher_actions: torch.Tensor | None = None,
+        deterministic: bool = False,
+        primitive_logit_bias: torch.Tensor | None = None,
+        prepared: DirectPreparedStep | None = None,
+        validated: bool = False,
+    ) -> DirectStepOutput:
+        batch, members, observation_dim = observations.shape
+        if not validated and (members != MAX_LIFECYCLES or observation_dim != OBSERVATION_DIM):
+            raise ValueError("direct actor observation shape mismatch")
+        if not validated and tuple(active_mask.shape) != (batch, members):
+            raise ValueError("direct actor active mask shape mismatch")
+        if not validated and tuple(order.shape) != (batch, members):
+            raise ValueError("direct actor order shape mismatch")
+        if not validated and tuple(hidden.shape) != (batch, members, self.hidden_dim):
+            raise ValueError("direct actor hidden shape mismatch")
+        modes = int(sampling_uniforms is not None) + int(
+            teacher_actions is not None
+        ) + int(bool(deterministic))
+        if not validated and modes != 1:
+            raise ValueError("choose exactly one sampling, replay, or deterministic mode")
+        if not validated and sampling_uniforms is not None and tuple(sampling_uniforms.shape) != (
+            batch,
+            members,
+        ):
+            raise ValueError("direct actor sampling-uniform shape mismatch")
+        if not validated and teacher_actions is not None and tuple(teacher_actions.shape) != (
+            batch,
+            members,
+        ):
+            raise ValueError("direct actor teacher-action shape mismatch")
+        if not validated and primitive_logit_bias is not None and tuple(primitive_logit_bias.shape) != (
+            batch,
+            members,
+            ACTION_COUNT,
+        ):
+            raise ValueError("direct actor primitive-logit-bias shape mismatch")
+
+        active_count = active_mask.sum(dim=1)
+        if not validated and bool((active_count <= 0).any()):
+            raise ValueError("direct actor requires a non-empty active set")
+        expected_positions = torch.arange(members, device=order.device).unsqueeze(0)
+        position_mask = expected_positions < active_count.unsqueeze(1)
+        if not validated:
+            safe_order = order.clamp(min=0)
+            order_active = torch.gather(active_mask, 1, safe_order)
+            if not bool(torch.equal(order.ge(0), position_mask)):
+                raise ValueError("direct actor order padding does not match active count")
+            if not bool(order_active[position_mask].all()):
+                raise ValueError("direct actor order contains an inactive lifecycle")
+            sorted_order = torch.sort(
+                torch.where(position_mask, order, torch.full_like(order, members)), dim=1
+            ).values
+            sorted_active = torch.sort(
+                torch.where(
+                    active_mask,
+                    torch.arange(members, device=order.device).unsqueeze(0),
+                    torch.full_like(order, members),
+                ),
+                dim=1,
+            ).values
+            if not bool(torch.equal(sorted_order, sorted_active)):
+                raise ValueError("direct actor order is not a permutation of active members")
+
+        dtype = observations.dtype
+        device = observations.device
+        batch_index = torch.arange(batch, device=device)
+        encoded = self.prepare_step(
+            observations=observations, active_mask=active_mask, validated=validated
+        ) if prepared is None else prepared
+        member_embeddings = encoded.member_embeddings
+        context = encoded.context
+        value = encoded.value
 
         next_hidden = hidden.clone()
         prefix = torch.zeros(
@@ -218,7 +269,7 @@ class DirectPrimitiveARPolicy(nn.Module):
 
         for position in range(members):
             valid = position_mask[:, position]
-            if not bool(valid.any()):
+            if not validated and not bool(valid.any()):
                 break
             focal = order[:, position].clamp(min=0)
             local_embedding = member_embeddings[batch_index, focal]
@@ -230,6 +281,8 @@ class DirectPrimitiveARPolicy(nn.Module):
             logits = self.action_head(
                 torch.cat((candidate_hidden, prefix), dim=-1)
             )
+            if primitive_logit_bias is not None:
+                logits = logits + primitive_logit_bias[batch_index, focal]
             log_probability = F.log_softmax(logits, dim=-1)
             probability = torch.exp(log_probability)
             if teacher_actions is not None:
@@ -243,7 +296,7 @@ class DirectPrimitiveARPolicy(nn.Module):
                     sampling_uniforms[:, position].unsqueeze(-1) > cumulative,
                     dim=-1,
                 ).clamp(max=ACTION_COUNT - 1)
-            if bool(((selected < 0) | (selected >= ACTION_COUNT))[valid].any()):
+            if not validated and bool(((selected < 0) | (selected >= ACTION_COUNT))[valid].any()):
                 raise ValueError("direct actor selected an invalid primitive action")
             safe_selected = selected.clamp(min=0, max=ACTION_COUNT - 1)
 

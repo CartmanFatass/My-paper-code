@@ -1,33 +1,12 @@
-"""Noncalendar heterogeneous-tracking G0 benchmark.
-
-This module is the complete task-side boundary for the registered H/C/S/D
-benchmark.  It owns deterministic paired ledgers, the primitive tracking
-environment, the calendar-null mask, exact hindsight solvers, causal direct
-rollouts, strict checkpoints, bootstrap helpers, and terminal branch logic.
-It deliberately imports the existing direct recurrent policy and PPO algebra;
-there is no skill, high-level action, intrinsic reward, or extra critic here.
-"""
+"""Unchanged noncalendar G0 ledger/environment and EHC result contract."""
 
 from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Any, Iterable, Literal, Mapping, Sequence
+from typing import Any, Literal, Mapping, Sequence
 
 import numpy as np
-import torch
-
-from ha_ctse_process.dynamic_roster_direct import (
-    DirectPrimitiveARPolicy,
-    DirectTrajectory,
-    HIDDEN_DIM,
-    LEARNING_RATE,
-    MAX_RECURRENT_CHUNK,
-    PPO_PASSES,
-    model_state_copy,
-    nested_state_maximum_difference,
-)
 from ha_ctse_process.dynamic_roster_testbed import (
     ACTION_COUNT,
     HORIZON,
@@ -43,9 +22,7 @@ from ha_ctse_process.variable_roster_event import (
 )
 
 
-ArmMode = Literal["calendar_masked", "demand_visible"]
 Profile = Literal["train", "iid", "held_out"]
-SolverArm = Literal["H", "S"]
 
 THRUST_BY_ACTION = np.asarray((-1, 0, 1), dtype=np.int64)
 STATE_MIN = -2
@@ -53,18 +30,19 @@ STATE_MAX = 2
 TARGET_STREAK = 2
 SHARED_RENEWAL_PERIOD = 4
 
-CALENDAR_MASK_INDICES = (3, 4, 5, 6, 9, 10, 11)
 COMMON_FIELD_COUNT = 8
 PARAMETER_COUNT = 14_980
+ADDED_PARAMETER_COUNT = 1_608
 
 MODEL_INITIALIZATION_SEED = 58_058
 TRAIN_TASK_SEED = 68_058
 TRAIN_ORDER_SEED = 78_058
 TRAIN_ACTION_SEED = 88_058
+OPPORTUNITY_SEED = 90_058
+EVENT_SEED = 92_058
+MARK_SEED = 94_058
 IID_EVAL_TASK_SEED = 98_058
 HELD_OUT_EVAL_TASK_SEED = 99_058
-EVAL_ORDER_SEED = 79_058
-EVAL_ACTION_SEED = 89_058
 BOOTSTRAP_SEED = 108_058
 
 FORMAL_NUM_ENVS = 16
@@ -83,36 +61,34 @@ ACTIVE = "active"
 TEMPORARILY_ABSENT = "temporarily_absent"
 TERMINAL = "terminal"
 
-CHECKPOINT_SCHEMA_VERSION = 1
-CHECKPOINT_KIND = "noncalendar_heterogeneous_tracking_g0"
-
-THRESHOLDS: dict[str, float] = {
-    "h_tracking_min": 0.780,
-    "h_completion_min": 0.980,
-    "h_utility_min": 0.880,
-    "c_tracking_max": 0.550,
-    "c_completion_max": 0.550,
-    "c_utility_max": 0.550,
-    "s_tracking_exclusive_max": 0.750,
-    "s_completion_exclusive_max": 0.800,
-    "s_utility_exclusive_max": 0.750,
-    "h_minus_s_tracking_lcb_exclusive_min": 0.080,
-    "h_minus_s_completion_lcb_exclusive_min": 0.200,
-    "h_minus_s_utility_lcb_exclusive_min": 0.150,
-    "d_iid_det_tracking_min": 0.780,
-    "d_iid_det_completion_min": 0.900,
-    "d_iid_det_utility_min": 0.830,
-    "d_held_det_tracking_min": 0.720,
-    "d_held_det_completion_min": 0.850,
-    "d_held_det_utility_min": 0.780,
-    "d_held_stoch_tracking_min": 0.650,
-    "d_held_stoch_completion_min": 0.750,
-    "d_held_stoch_utility_min": 0.700,
-    "d_gain_utility_lcb_exclusive_min": 0.200,
-    "d_minus_c_tracking_lcb_exclusive_min": 0.200,
-    "d_minus_c_completion_lcb_exclusive_min": 0.250,
-    "d_minus_c_utility_lcb_exclusive_min": 0.200,
-}
+CHECKPOINT_SCHEMA_VERSION = 2
+CHECKPOINT_KIND = "event_held_commitment_link_g0"
+REGISTERED_CONTRACT = "EVENT_HELD_COMMITMENT_LINK_G0"
+ACCESS_FLOOR = 0.78
+GAIN_THRESHOLD = 0.10
+KEEP_THRESHOLD = 0.20
+RENEW_THRESHOLD = 0.10
+CV_THRESHOLD = 0.25
+LIFETIME_BIN_THRESHOLD = 0.10
+INTERVENTION_THRESHOLD = 0.10
+IDENTIFIABILITY_OPPORTUNITIES = 1_000
+IDENTIFIABILITY_LIFECYCLES = 250
+GAMMA = 0.99
+GAE_LAMBDA = 0.95
+PPO_CLIP = 0.20
+VALUE_CLIP = 0.20
+VALUE_COEFFICIENT = 0.50
+PRIMITIVE_ENTROPY_COEFFICIENT = 0.01
+EVENT_ENTROPY_COEFFICIENT = 0.01
+MARK_ENTROPY_COEFFICIENT = 0.0
+GRADIENT_CLIP = 0.50
+LEARNING_RATE = 3e-4
+ADAM_EPSILON = 1e-5
+WEIGHT_DECAY = 0.0
+PPO_PASSES = 4
+REPLAY_TOLERANCE = 1e-6
+RESUME_TOLERANCE = 1e-7
+OPPORTUNITY_SUPPORT = (4, 8, 12)
 
 
 def make_rng(seed: int, *coordinates: int) -> np.random.Generator:
@@ -430,12 +406,9 @@ class TrackingOutcome:
 class NoncalendarTrackingEnv:
     """Exact finite-state primitive tracking environment for one ledger."""
 
-    def __init__(self, ledger: NoncalendarLedger, *, arm_mode: ArmMode):
+    def __init__(self, ledger: NoncalendarLedger):
         ledger.validate()
-        if arm_mode not in ("calendar_masked", "demand_visible"):
-            raise ValueError("invalid causal arm mode")
         self.ledger = ledger
-        self.arm_mode = arm_mode
         self.members = {key: TrackingMemberState(key=key) for key in range(MAX_LIFECYCLES)}
         self.time = 0
         self.tracking_quarter_units = 0
@@ -565,8 +538,6 @@ class NoncalendarTrackingEnv:
     def observe(self) -> TrackingView:
         self._prepare()
         observations = self._raw_observations()
-        if self.arm_mode == "calendar_masked":
-            observations[:, CALENDAR_MASK_INDICES] = 0.0
         return TrackingView(
             time=self.time,
             active_keys=self.active_keys,
@@ -656,7 +627,6 @@ class NoncalendarTrackingEnv:
         return {
             "schema_version": 1,
             "ledger": deepcopy(self.ledger),
-            "arm_mode": self.arm_mode,
             "members": deepcopy(self.members),
             "time": self.time,
             "tracking_quarter_units": self.tracking_quarter_units,
@@ -673,7 +643,7 @@ class NoncalendarTrackingEnv:
     @classmethod
     def from_snapshot_state(cls, value: Mapping[str, Any]) -> "NoncalendarTrackingEnv":
         required = {
-            "schema_version", "ledger", "arm_mode", "members", "time",
+            "schema_version", "ledger", "members", "time",
             "tracking_quarter_units", "active_rows", "completed_segments",
             "eligible_segments", "roster_sizes", "reward_trace", "prepared_time",
             "membership_change", "terminated",
@@ -681,7 +651,7 @@ class NoncalendarTrackingEnv:
         payload = dict(value)
         if set(payload) != required or int(payload["schema_version"]) != 1:
             raise ValueError("tracking environment snapshot schema mismatch")
-        env = cls(deepcopy(payload["ledger"]), arm_mode=payload["arm_mode"])
+        env = cls(deepcopy(payload["ledger"]))
         env.members = deepcopy(payload["members"])
         env.time = int(payload["time"])
         env.tracking_quarter_units = int(payload["tracking_quarter_units"])
@@ -696,15 +666,21 @@ class NoncalendarTrackingEnv:
         return env
 
 
-def make_action_uniforms(episode_ids: Iterable[int], *, seed: int) -> np.ndarray:
-    rows = []
-    for episode_id in (int(v) for v in episode_ids):
-        rng = make_rng(seed, episode_id // 2, 0)
-        rows.append(rng.random((HORIZON, MAX_LIFECYCLES), dtype=np.float32))
-    return np.stack(rows, axis=1)
 
 
-def frontier_order(ledgers: Sequence[NoncalendarLedger], active_masks: np.ndarray, time: int) -> np.ndarray:
+def profile_seeds(profile: Profile) -> tuple[int, int]:
+    if profile == "train":
+        return TRAIN_TASK_SEED, TRAIN_ORDER_SEED
+    if profile == "iid":
+        return IID_EVAL_TASK_SEED, TRAIN_ORDER_SEED
+    if profile == "held_out":
+        return HELD_OUT_EVAL_TASK_SEED, TRAIN_ORDER_SEED
+    raise ValueError(f"unsupported profile {profile!r}")
+
+
+def frontier_order(
+    ledgers: Sequence[NoncalendarLedger], active_masks: np.ndarray, time: int
+) -> np.ndarray:
     rows: list[np.ndarray] = []
     for ledger, mask in zip(ledgers, active_masks):
         active = np.flatnonzero(mask)
@@ -712,646 +688,131 @@ def frontier_order(ledgers: Sequence[NoncalendarLedger], active_masks: np.ndarra
         row = np.full(MAX_LIFECYCLES, -1, dtype=np.int64)
         row[: len(ordered)] = ordered
         rows.append(row)
-    return np.stack(rows, axis=0)
-
-
-def _seeds_for_profile(profile: Profile) -> tuple[int, int]:
-    if profile == "train":
-        return TRAIN_TASK_SEED, TRAIN_ORDER_SEED
-    if profile == "iid":
-        return IID_EVAL_TASK_SEED, EVAL_ORDER_SEED
-    if profile == "held_out":
-        return HELD_OUT_EVAL_TASK_SEED, EVAL_ORDER_SEED
-    raise ValueError(f"unsupported profile {profile!r}")
-
-
-def collect_causal_trajectory(
-    model: DirectPrimitiveARPolicy,
-    *,
-    episode_ids: Iterable[int],
-    profile: Profile,
-    arm_mode: ArmMode,
-    device: torch.device,
-    deterministic: bool = False,
-    action_seed: int | None = None,
-) -> DirectTrajectory:
-    ids = tuple(int(v) for v in episode_ids)
-    if not ids:
-        raise ValueError("causal collection requires at least one episode")
-    task_seed, order_seed = _seeds_for_profile(profile)
-    ledgers = tuple(
-        make_noncalendar_ledger(
-            episode_id, profile=profile, task_seed=task_seed, order_seed=order_seed
-        )
-        for episode_id in ids
-    )
-    environments = [NoncalendarTrackingEnv(ledger, arm_mode=arm_mode) for ledger in ledgers]
-    uniforms = None
-    if not deterministic:
-        seed = TRAIN_ACTION_SEED if profile == "train" else EVAL_ACTION_SEED
-        if action_seed is not None:
-            seed = int(action_seed)
-        uniforms = make_action_uniforms(ids, seed=seed)
-    env_count = len(ids)
-    hidden = torch.zeros((env_count, MAX_LIFECYCLES, model.hidden_dim), device=device)
-
-    observations_rows: list[torch.Tensor] = []
-    active_rows: list[torch.Tensor] = []
-    order_rows: list[torch.Tensor] = []
-    action_rows: list[torch.Tensor] = []
-    logp_rows: list[torch.Tensor] = []
-    value_rows: list[torch.Tensor] = []
-    reward_rows: list[torch.Tensor] = []
-    hidden_before_rows: list[torch.Tensor] = []
-    hidden_after_rows: list[torch.Tensor] = []
-    prefix_rows: list[torch.Tensor] = []
-
-    model.eval()
-    with torch.no_grad():
-        for time in range(HORIZON):
-            # Membership-boundary resets must not mutate the previously stored
-            # hidden-after tensor, which is also the next step's live state.
-            hidden = hidden.clone()
-            obs_np = np.zeros((env_count, MAX_LIFECYCLES, OBSERVATION_DIM), dtype=np.float32)
-            active_np = np.zeros((env_count, MAX_LIFECYCLES), dtype=np.bool_)
-            views: list[TrackingView] = []
-            for env_index, environment in enumerate(environments):
-                view = environment.observe()
-                views.append(view)
-                for row_index, key in enumerate(view.active_keys):
-                    obs_np[env_index, key] = view.observations[row_index]
-                    active_np[env_index, key] = True
-                for key in view.membership_change.terminally_left:
-                    hidden[env_index, key].zero_()
-                for key in view.membership_change.joined:
-                    if bool(torch.count_nonzero(hidden[env_index, key])):
-                        raise RuntimeError("genuine JOIN recurrent state is not zero")
-            order_np = frontier_order(ledgers, active_np, time)
-            observations = torch.as_tensor(obs_np, device=device)
-            active_mask = torch.as_tensor(active_np, device=device)
-            order = torch.as_tensor(order_np, device=device)
-            hidden_before = hidden.clone()
-            kwargs: dict[str, Any]
-            if deterministic:
-                kwargs = {"deterministic": True}
-            else:
-                assert uniforms is not None
-                kwargs = {"sampling_uniforms": torch.as_tensor(uniforms[time], device=device)}
-            output = model.forward_step(
-                observations=observations,
-                active_mask=active_mask,
-                order=order,
-                hidden=hidden,
-                **kwargs,
-            )
-            action_values = output.actions.detach().cpu().numpy()
-            rewards = np.zeros(env_count, dtype=np.float32)
-            for env_index, (environment, view) in enumerate(zip(environments, views)):
-                reward, _terminal, _info = environment.step(
-                    {key: int(action_values[env_index, key]) for key in view.active_keys}
-                )
-                rewards[env_index] = reward
-            observations_rows.append(observations)
-            active_rows.append(active_mask)
-            order_rows.append(order)
-            action_rows.append(output.actions)
-            logp_rows.append(output.token_log_probs)
-            value_rows.append(output.value)
-            reward_rows.append(torch.from_numpy(rewards))
-            hidden_before_rows.append(hidden_before)
-            hidden_after_rows.append(output.next_hidden)
-            prefix_rows.append(output.prefix_counts)
-            hidden = output.next_hidden
-
-    return DirectTrajectory(
-        observations=torch.stack(observations_rows).cpu(),
-        active_mask=torch.stack(active_rows).cpu(),
-        orders=torch.stack(order_rows).cpu(),
-        actions=torch.stack(action_rows).cpu(),
-        old_log_probs=torch.stack(logp_rows).cpu(),
-        old_values=torch.stack(value_rows).cpu(),
-        rewards=torch.stack(reward_rows),
-        hidden_before=torch.stack(hidden_before_rows).cpu(),
-        hidden_after=torch.stack(hidden_after_rows).cpu(),
-        prefix_counts=torch.stack(prefix_rows).cpu(),
-        outcomes=tuple(environment.outcome() for environment in environments),
-        ledger_ids=ids,
-    )
-
-
-def trajectory_metric_arrays(trajectory: DirectTrajectory) -> dict[str, np.ndarray]:
-    outcomes = tuple(trajectory.outcomes)
-    return {
-        "tracking": np.asarray([o.tracking for o in outcomes], dtype=np.float64),
-        "completion": np.asarray([o.completion for o in outcomes], dtype=np.float64),
-        "utility": np.asarray([o.utility for o in outcomes], dtype=np.float64),
-    }
-
-
-def anonymous_relabeling_audit(
-    model: DirectPrimitiveARPolicy,
-    *,
-    device: torch.device,
-) -> dict[str, Any]:
-    """Check model/environment equivariance under one opaque-key relabeling."""
-
-    ledger = make_noncalendar_ledger(
-        0,
-        profile="held_out",
-        task_seed=HELD_OUT_EVAL_TASK_SEED,
-        order_seed=EVAL_ORDER_SEED,
-    )
-    mapping = (2, 5, 1, 4, 0, 3)
-    renamed = relabel_ledger(ledger, mapping)
-    left = NoncalendarTrackingEnv(ledger, arm_mode="demand_visible")
-    right = NoncalendarTrackingEnv(renamed, arm_mode="demand_visible")
-    left_hidden = torch.zeros((1, MAX_LIFECYCLES, model.hidden_dim), device=device)
-    right_hidden = torch.zeros_like(left_hidden)
-    maximum_error = 0.0
-    actions_equal = True
-    rewards_equal = True
-    model.eval()
-    with torch.no_grad():
-        for time in range(HORIZON):
-            left_view = left.observe()
-            right_view = right.observe()
-            left_obs = np.zeros((1, MAX_LIFECYCLES, OBSERVATION_DIM), dtype=np.float32)
-            right_obs = np.zeros_like(left_obs)
-            left_active = np.zeros((1, MAX_LIFECYCLES), dtype=np.bool_)
-            right_active = np.zeros_like(left_active)
-            for row, key in enumerate(left_view.active_keys):
-                left_obs[0, key] = left_view.observations[row]
-                left_active[0, key] = True
-            for row, key in enumerate(right_view.active_keys):
-                right_obs[0, key] = right_view.observations[row]
-                right_active[0, key] = True
-            for old, new in enumerate(mapping):
-                if not np.array_equal(left_obs[0, old], right_obs[0, new]):
-                    maximum_error = float("inf")
-                if bool(left_active[0, old]) != bool(right_active[0, new]):
-                    maximum_error = float("inf")
-                right_hidden[0, new] = left_hidden[0, old]
-            left_order_np = frontier_order((ledger,), left_active, time)
-            right_order_np = frontier_order((renamed,), right_active, time)
-            expected_right_order = np.asarray(
-                [[mapping[key] if key >= 0 else -1 for key in left_order_np[0]]],
-                dtype=np.int64,
-            )
-            if not np.array_equal(right_order_np, expected_right_order):
-                maximum_error = float("inf")
-            left_output = model.forward_step(
-                observations=torch.as_tensor(left_obs, device=device),
-                active_mask=torch.as_tensor(left_active, device=device),
-                order=torch.as_tensor(left_order_np, device=device),
-                hidden=left_hidden,
-                deterministic=True,
-            )
-            right_output = model.forward_step(
-                observations=torch.as_tensor(right_obs, device=device),
-                active_mask=torch.as_tensor(right_active, device=device),
-                order=torch.as_tensor(right_order_np, device=device),
-                hidden=right_hidden,
-                deterministic=True,
-            )
-            for old, new in enumerate(mapping):
-                if left_active[0, old]:
-                    actions_equal = actions_equal and int(left_output.actions[0, old]) == int(right_output.actions[0, new])
-                    maximum_error = max(
-                        maximum_error,
-                        float(torch.abs(left_output.token_log_probs[0, old] - right_output.token_log_probs[0, new])),
-                        float(torch.max(torch.abs(left_output.next_hidden[0, old] - right_output.next_hidden[0, new]))),
-                    )
-            maximum_error = max(
-                maximum_error,
-                float(torch.abs(left_output.value[0] - right_output.value[0])),
-            )
-            left_reward, _, _ = left.step(
-                {key: int(left_output.actions[0, key]) for key in left_view.active_keys}
-            )
-            right_reward, _, _ = right.step(
-                {key: int(right_output.actions[0, key]) for key in right_view.active_keys}
-            )
-            rewards_equal = rewards_equal and left_reward == right_reward
-            left_hidden = left_output.next_hidden
-            right_hidden = right_output.next_hidden
-    outcomes_equal = left.outcome() == right.outcome()
-    return {
-        "actions_equal": actions_equal,
-        "rewards_equal": rewards_equal,
-        "outcomes_equal": outcomes_equal,
-        "maximum_error": maximum_error,
-        "valid": bool(actions_equal and rewards_equal and outcomes_equal and maximum_error <= 1e-6),
-    }
-
-
-@dataclass(frozen=True)
-class SolverStep:
-    physical_time: int
-    target: int
-    segment_end: bool
-    join_or_rejoin: bool
-
-
-@dataclass(frozen=True)
-class SolverOutcome:
-    tracking: float
-    completion: float
-    utility: float
-    tracking_quarter_units: int
-    completed_segments: int
-    active_rows: int
-    eligible_segments: int
-
-
-def lifecycle_solver_steps(ledger: NoncalendarLedger, key: int) -> tuple[SolverStep, ...]:
-    rows: list[SolverStep] = []
-    started = False
-    target = int(ledger.initial_targets[key])
-    remaining = 0
-    duration_index = 0
-    for time in range(HORIZON):
-        active = key in _membership_active_keys(ledger, time)
-        if not active:
-            continue
-        if not started:
-            started = True
-            remaining = int(ledger.duration_streams[key, 0])
-        remaining -= 1
-        segment_end = remaining == 0
-        join_or_rejoin = bool(
-            time == 0
-            or (key == ledger.joined_key and time == ledger.rejoin_time)
-            or (key == ledger.temporary_key and time == ledger.rejoin_time)
-        )
-        rows.append(SolverStep(time, target, segment_end, join_or_rejoin))
-        if segment_end:
-            duration_index += 1
-            target = -target
-            remaining = int(ledger.duration_streams[key, duration_index])
-    return tuple(rows)
-
-
-def _pareto_pairs(values: Iterable[tuple[int, int]]) -> set[tuple[int, int]]:
-    unique = set(values)
-    return {
-        value
-        for value in unique
-        if not any(
-            other != value and other[0] >= value[0] and other[1] >= value[1]
-            for other in unique
-        )
-    }
-
-
-def solve_trace_outcomes(
-    steps: Sequence[SolverStep], *, arm: SolverArm, prune: bool = True
-) -> set[tuple[int, int]]:
-    if arm not in ("H", "S"):
-        raise ValueError("solver arm must be H or S")
-    states: dict[tuple[int, int, int], set[tuple[int, int]]] = {(0, 0, 0): {(0, 0)}}
-    for step in steps:
-        next_states: dict[tuple[int, int, int], set[tuple[int, int]]] = {}
-        for (x, streak, previous), labels in states.items():
-            can_change = arm == "H" or step.physical_time % SHARED_RENEWAL_PERIOD == 0 or step.join_or_rejoin
-            actions = (-1, 0, 1) if can_change else (previous,)
-            for thrust in actions:
-                new_x = int(np.clip(x + thrust, STATE_MIN, STATE_MAX))
-                new_streak = min(streak + 1, TARGET_STREAK) if new_x == step.target else 0
-                completed = int(step.segment_end and new_streak == TARGET_STREAK)
-                state_streak = 0 if step.segment_end else new_streak
-                state = (new_x, state_streak, thrust)
-                bucket = next_states.setdefault(state, set())
-                for tracking, completion in labels:
-                    bucket.add((tracking + 4 - abs(new_x - step.target), completion + completed))
-        states = {
-            state: (_pareto_pairs(labels) if prune else set(labels))
-            for state, labels in next_states.items()
-        }
-    outcomes = set().union(*states.values()) if states else {(0, 0)}
-    return _pareto_pairs(outcomes) if prune else outcomes
-
-
-def brute_force_trace_outcomes(steps: Sequence[SolverStep], *, arm: SolverArm) -> set[tuple[int, int]]:
-    outcomes: set[tuple[int, int]] = set()
-
-    def visit(index: int, x: int, streak: int, previous: int, tracking: int, completed: int) -> None:
-        if index == len(steps):
-            outcomes.add((tracking, completed))
-            return
-        step = steps[index]
-        can_change = arm == "H" or step.physical_time % SHARED_RENEWAL_PERIOD == 0 or step.join_or_rejoin
-        actions = (-1, 0, 1) if can_change else (previous,)
-        for thrust in actions:
-            new_x = int(np.clip(x + thrust, STATE_MIN, STATE_MAX))
-            new_streak = min(streak + 1, TARGET_STREAK) if new_x == step.target else 0
-            visit(
-                index + 1,
-                new_x,
-                0 if step.segment_end else new_streak,
-                thrust,
-                tracking + 4 - abs(new_x - step.target),
-                completed + int(step.segment_end and new_streak == TARGET_STREAK),
-            )
-
-    visit(0, 0, 0, 0, 0, 0)
-    return outcomes
-
-
-def solve_hindsight_episode(ledger: NoncalendarLedger, *, arm: SolverArm) -> SolverOutcome:
-    aggregate: set[tuple[int, int]] = {(0, 0)}
-    active_rows = 0
-    eligible = 0
-    for key in range(MAX_LIFECYCLES):
-        steps = lifecycle_solver_steps(ledger, key)
-        if not steps:
-            continue
-        active_rows += len(steps)
-        eligible += sum(int(step.segment_end) for step in steps)
-        member = solve_trace_outcomes(steps, arm=arm, prune=True)
-        aggregate = _pareto_pairs(
-            (left_a + right_a, left_b + right_b)
-            for left_a, left_b in aggregate
-            for right_a, right_b in member
-        )
-    if active_rows <= 0 or eligible <= 0:
-        raise RuntimeError("solver episode has an invalid denominator")
-    candidates = []
-    for tracking_units, completed in aggregate:
-        tracking = tracking_units / float(4 * active_rows)
-        completion = completed / float(eligible)
-        candidates.append((float(np.sqrt(tracking * completion)), tracking, completion, tracking_units, completed))
-    utility, tracking, completion, tracking_units, completed = max(candidates)
-    return SolverOutcome(
-        tracking=float(tracking),
-        completion=float(completion),
-        utility=float(utility),
-        tracking_quarter_units=int(tracking_units),
-        completed_segments=int(completed),
-        active_rows=int(active_rows),
-        eligible_segments=int(eligible),
-    )
-
-
-def bootstrap_cluster_indices(
-    cluster_count: int = 128,
-    *,
-    repetitions: int = BOOTSTRAP_REPETITIONS,
-    seed: int = BOOTSTRAP_SEED,
-) -> np.ndarray:
-    rng = np.random.Generator(
-        np.random.PCG64(np.random.SeedSequence([int(seed)]))
-    )
-    return rng.integers(0, cluster_count, size=(repetitions, cluster_count), dtype=np.int64)
-
-
-def paired_cluster_ci(values: np.ndarray, *, indices: np.ndarray) -> tuple[float, float, float]:
-    episode_values = np.asarray(values, dtype=np.float64)
-    if episode_values.shape != (2 * indices.shape[1],):
-        raise ValueError("paired bootstrap requires two sign mates per base cluster")
-    clusters = episode_values.reshape(-1, 2).mean(axis=1)
-    estimates = clusters[indices].mean(axis=1)
-    return (
-        float(np.quantile(estimates, 0.025)),
-        float(clusters.mean()),
-        float(np.quantile(estimates, 0.975)),
-    )
-
-
-def initialize_causal_arms(device: torch.device) -> tuple[
-    DirectPrimitiveARPolicy,
-    DirectPrimitiveARPolicy,
-    torch.optim.Optimizer,
-    torch.optim.Optimizer,
-]:
-    torch.manual_seed(MODEL_INITIALIZATION_SEED)
-    calendar = DirectPrimitiveARPolicy().to(device)
-    demand = DirectPrimitiveARPolicy().to(device)
-    demand.load_state_dict(calendar.state_dict(), strict=True)
-    if calendar.parameter_count != PARAMETER_COUNT or demand.parameter_count != PARAMETER_COUNT:
-        raise RuntimeError("registered direct policy parameter count mismatch")
-    calendar_optimizer = torch.optim.Adam(calendar.parameters(), lr=LEARNING_RATE)
-    demand_optimizer = torch.optim.Adam(demand.parameters(), lr=LEARNING_RATE)
-    return calendar, demand, calendar_optimizer, demand_optimizer
-
-
-def _checkpoint_header(arm_mode: ArmMode) -> dict[str, Any]:
-    return {
-        "schema_version": CHECKPOINT_SCHEMA_VERSION,
-        "kind": CHECKPOINT_KIND,
-        "arm_mode": arm_mode,
-        "model_shape": {
-            "observation_width": OBSERVATION_DIM,
-            "hidden_width": HIDDEN_DIM,
-            "parameter_count": PARAMETER_COUNT,
-            "bptt_chunk": MAX_RECURRENT_CHUNK,
-        },
-        "observation_mask_indices": list(CALENDAR_MASK_INDICES if arm_mode == "calendar_masked" else ()),
-        "seeds": {
-            "model": MODEL_INITIALIZATION_SEED,
-            "train_task": TRAIN_TASK_SEED,
-            "train_order": TRAIN_ORDER_SEED,
-            "train_action": TRAIN_ACTION_SEED,
-            "iid_eval_task": IID_EVAL_TASK_SEED,
-            "held_out_eval_task": HELD_OUT_EVAL_TASK_SEED,
-            "eval_order": EVAL_ORDER_SEED,
-            "eval_action": EVAL_ACTION_SEED,
-            "bootstrap": BOOTSTRAP_SEED,
-        },
-        "profiles": {
-            "train_duration_support": list(TRAIN_DURATION_SUPPORT),
-            "iid_duration_support": list(TRAIN_DURATION_SUPPORT),
-            "held_out_duration_support": list(HELD_OUT_DURATION_SUPPORT),
-        },
-        "exposure": {
-            "num_envs": FORMAL_NUM_ENVS,
-            "horizon": HORIZON,
-            "outer_updates": FORMAL_UPDATES,
-            "ppo_passes": PPO_PASSES,
-            "training_episode_ids": [0, FORMAL_TRAIN_EPISODES - 1],
-        },
-        "evaluation": {
-            "episode_ids": [0, FORMAL_EVAL_EPISODES - 1],
-            "profiles": ["iid", "held_out"],
-            "modes": ["deterministic", "stochastic"],
-            "checkpoints": [0, FORMAL_UPDATES],
-        },
-        "rng_ownership": {
-            "task": "PCG64 SeedSequence([task_seed, base_id, attempt])",
-            "order": "PCG64 SeedSequence([order_seed, base_id, 0])",
-            "action": "PCG64 SeedSequence([action_seed, base_id, 0])",
-        },
-    }
-
-
-def save_benchmark_checkpoint(
-    path: Path,
-    *,
-    arm_mode: ArmMode,
-    model: DirectPrimitiveARPolicy,
-    optimizer: torch.optim.Optimizer,
-    completed_update: int,
-) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save(
-        {
-            **_checkpoint_header(arm_mode),
-            "completed_update": int(completed_update),
-            "next_training_episode_id": int(completed_update) * FORMAL_NUM_ENVS,
-            "model_state": model.state_dict(),
-            "optimizer_state": optimizer.state_dict(),
-            "torch_cpu_rng_state": torch.get_rng_state(),
-            "torch_cuda_rng_states": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else [],
-        },
-        path,
-    )
-
-
-def load_benchmark_checkpoint(
-    path: Path,
-    *,
-    arm_mode: ArmMode,
-    model: DirectPrimitiveARPolicy,
-    optimizer: torch.optim.Optimizer,
-) -> dict[str, Any]:
-    payload = torch.load(path, map_location="cpu", weights_only=False)
-    required = set(_checkpoint_header(arm_mode)) | {
-        "completed_update", "next_training_episode_id", "model_state",
-        "optimizer_state", "torch_cpu_rng_state", "torch_cuda_rng_states",
-    }
-    if not isinstance(payload, dict) or set(payload) != required:
-        raise ValueError("benchmark checkpoint key set mismatch")
-    for key, expected in _checkpoint_header(arm_mode).items():
-        if payload[key] != expected:
-            raise ValueError(f"benchmark checkpoint header mismatch: {key}")
-    completed = int(payload["completed_update"])
-    if completed < 0 or completed > FORMAL_UPDATES:
-        raise ValueError("benchmark checkpoint completed-update mismatch")
-    if int(payload["next_training_episode_id"]) != completed * FORMAL_NUM_ENVS:
-        raise ValueError("benchmark checkpoint episode counter mismatch")
-    model.load_state_dict(payload["model_state"], strict=True)
-    optimizer.load_state_dict(payload["optimizer_state"])
-    model_device = next(model.parameters()).device
-    for state in optimizer.state.values():
-        for name, value in state.items():
-            if isinstance(value, torch.Tensor):
-                state[name] = value.to(model_device)
-    torch.set_rng_state(payload["torch_cpu_rng_state"])
-    if torch.cuda.is_available() and payload["torch_cuda_rng_states"]:
-        torch.cuda.set_rng_state_all(payload["torch_cuda_rng_states"])
-    return payload
-
-
-def checkpoint_round_trip_error(
-    path: Path,
-    *,
-    arm_mode: ArmMode,
-    model: DirectPrimitiveARPolicy,
-    optimizer: torch.optim.Optimizer,
-) -> float:
-    model_before = model_state_copy(model)
-    optimizer_before = deepcopy(optimizer.state_dict())
-    load_benchmark_checkpoint(path, arm_mode=arm_mode, model=model, optimizer=optimizer)
-    return max(
-        max(float(torch.max(torch.abs(model_before[name] - model.state_dict()[name].cpu()))) for name in model_before),
-        nested_state_maximum_difference(optimizer_before, optimizer.state_dict()),
-    )
+    return np.stack(rows)
 
 
 def select_result_branch(
     *,
-    m0_valid: bool,
-    means: Mapping[str, float],
-    lcbs: Mapping[str, float],
+    operational_valid: bool,
+    non_create_opportunities: int,
+    multi_opportunity_lifecycles: int,
+    utility_ci: Mapping[str, tuple[float, float]],
+    g_ci: tuple[float, float],
+    keep_ci: tuple[float, float],
+    renew_ci: tuple[float, float],
+    cv_ci: tuple[float, float],
+    lifetime_bin_cis: Sequence[tuple[float, float]],
+    intervention_ci: tuple[float, float],
 ) -> str:
-    """Apply the frozen mutually-exclusive priority tree, failing closed."""
+    """Apply the frozen eight-branch first-match precedence."""
 
-    required_means = {
-        "h_tracking", "h_completion", "h_utility",
-        "c_held_det_tracking", "c_held_det_completion", "c_held_det_utility",
-        "s_tracking", "s_completion", "s_utility",
-        "d_iid_det_tracking", "d_iid_det_completion", "d_iid_det_utility",
-        "d_held_det_tracking", "d_held_det_completion", "d_held_det_utility",
-        "d_held_stoch_tracking", "d_held_stoch_completion", "d_held_stoch_utility",
-    }
-    required_lcbs = {
-        "h_minus_s_tracking", "h_minus_s_completion", "h_minus_s_utility",
-        "d_gain_utility", "d_minus_c_tracking", "d_minus_c_completion",
-        "d_minus_c_utility",
-    }
-    if set(means) != required_means or set(lcbs) != required_lcbs:
-        raise ValueError("terminal result contract key set mismatch")
-    if not all(np.isfinite(float(value)) for value in (*means.values(), *lcbs.values())):
-        raise ValueError("terminal result contract contains non-finite values")
-    if not m0_valid:
-        return "INVALID_BENCHMARK_IDENTIFIABILITY_G0"
-    h_pass = bool(
-        means["h_tracking"] >= THRESHOLDS["h_tracking_min"]
-        and means["h_completion"] >= THRESHOLDS["h_completion_min"]
-        and means["h_utility"] >= THRESHOLDS["h_utility_min"]
+    if not operational_valid:
+        return "INVALID_OPERATIONAL"
+    if (
+        non_create_opportunities < IDENTIFIABILITY_OPPORTUNITIES
+        or multi_opportunity_lifecycles < IDENTIFIABILITY_LIFECYCLES
+    ):
+        return "BENCHMARK_NON_IDENTIFIABLE"
+    maximum_ucb = max(interval[1] for interval in utility_ci.values())
+    maximum_lcb = max(interval[0] for interval in utility_ci.values())
+    if maximum_ucb < ACCESS_FLOOR:
+        return "NO_ACCESS_THIS_BENCHMARK"
+    if maximum_lcb < ACCESS_FLOOR:
+        return "UNDERPOWERED_ACCESS"
+    behavior_passes = bool(
+        keep_ci[0] > KEEP_THRESHOLD
+        and renew_ci[0] > RENEW_THRESHOLD
+        and cv_ci[0] > CV_THRESHOLD
+        and sum(ci[0] > LIFETIME_BIN_THRESHOLD for ci in lifetime_bin_cis) >= 2
+        and intervention_ci[0] > INTERVENTION_THRESHOLD
     )
-    if not h_pass:
-        return "REJECT_BENCHMARK_STRUCTURALLY_UNREACHABLE"
-    c_pass = bool(
-        means["c_held_det_tracking"] <= THRESHOLDS["c_tracking_max"]
-        and means["c_held_det_completion"] <= THRESHOLDS["c_completion_max"]
-        and means["c_held_det_utility"] <= THRESHOLDS["c_utility_max"]
+    if g_ci[0] > GAIN_THRESHOLD and behavior_passes:
+        return "COMMITMENT_SUPPORTED"
+    behavior_confidently_fails = bool(
+        keep_ci[1] <= KEEP_THRESHOLD
+        or renew_ci[1] <= RENEW_THRESHOLD
+        or cv_ci[1] <= CV_THRESHOLD
+        or sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in lifetime_bin_cis) < 2
+        or intervention_ci[1] <= INTERVENTION_THRESHOLD
     )
-    d_pass = bool(
-        means["d_iid_det_tracking"] >= THRESHOLDS["d_iid_det_tracking_min"]
-        and means["d_iid_det_completion"] >= THRESHOLDS["d_iid_det_completion_min"]
-        and means["d_iid_det_utility"] >= THRESHOLDS["d_iid_det_utility_min"]
-        and means["d_held_det_tracking"] >= THRESHOLDS["d_held_det_tracking_min"]
-        and means["d_held_det_completion"] >= THRESHOLDS["d_held_det_completion_min"]
-        and means["d_held_det_utility"] >= THRESHOLDS["d_held_det_utility_min"]
-        and means["d_held_stoch_tracking"] >= THRESHOLDS["d_held_stoch_tracking_min"]
-        and means["d_held_stoch_completion"] >= THRESHOLDS["d_held_stoch_completion_min"]
-        and means["d_held_stoch_utility"] >= THRESHOLDS["d_held_stoch_utility_min"]
-        and lcbs["d_gain_utility"] > THRESHOLDS["d_gain_utility_lcb_exclusive_min"]
-    )
-    d_minus_c_pass = bool(
-        lcbs["d_minus_c_tracking"] > THRESHOLDS["d_minus_c_tracking_lcb_exclusive_min"]
-        and lcbs["d_minus_c_completion"] > THRESHOLDS["d_minus_c_completion_lcb_exclusive_min"]
-        and lcbs["d_minus_c_utility"] > THRESHOLDS["d_minus_c_utility_lcb_exclusive_min"]
-    )
-    if not c_pass or (d_pass and not d_minus_c_pass):
-        return "REJECT_BENCHMARK_CALENDAR_IDENTIFIABLE"
-    s_pressure = bool(
-        means["s_tracking"] < THRESHOLDS["s_tracking_exclusive_max"]
-        and means["s_completion"] < THRESHOLDS["s_completion_exclusive_max"]
-        and means["s_utility"] < THRESHOLDS["s_utility_exclusive_max"]
-        and lcbs["h_minus_s_tracking"] > THRESHOLDS["h_minus_s_tracking_lcb_exclusive_min"]
-        and lcbs["h_minus_s_completion"] > THRESHOLDS["h_minus_s_completion_lcb_exclusive_min"]
-        and lcbs["h_minus_s_utility"] > THRESHOLDS["h_minus_s_utility_lcb_exclusive_min"]
-    )
-    if not s_pressure:
-        return "REJECT_BENCHMARK_NO_HETEROGENEOUS_LIFETIME_PRESSURE"
-    if not d_pass:
-        return "NO_ACCESS_BENCHMARK_ORDINARY_CONTROL"
-    return "PASS_BENCHMARK_IDENTIFIABILITY_AND_ORDINARY_ACCESS"
+    if g_ci[0] > GAIN_THRESHOLD and behavior_confidently_fails:
+        return "REPRESENTATION_ONLY"
+    if g_ci[1] <= GAIN_THRESHOLD:
+        return "ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED"
+    return "MIXED_UNDERPOWERED"
 
 
 def registered_contract() -> dict[str, Any]:
     return {
+        "name": REGISTERED_CONTRACT,
         "horizon": HORIZON,
         "maximum_lifecycles": MAX_LIFECYCLES,
         "observation_width": OBSERVATION_DIM,
-        "calendar_mask_indices": list(CALENDAR_MASK_INDICES),
-        "field_5_formula": "mean_{i in A_t}(abs(g_i-x_i)/4)",
-        "field_5_range": [0.0, 1.0],
+        "arms": ["OR", "DUM", "EHC"],
+        "base_parameters": PARAMETER_COUNT,
+        "added_parameters": {"DUM": ADDED_PARAMETER_COUNT, "EHC": ADDED_PARAMETER_COUNT},
+        "num_envs": FORMAL_NUM_ENVS,
+        "outer_updates": FORMAL_UPDATES,
+        "transitions_per_arm": FORMAL_TRANSITIONS_PER_ARM,
+        "training_episodes_per_arm": FORMAL_TRAIN_EPISODES,
+        "optimizer_steps": {
+            "base": FORMAL_OPTIMIZER_STEPS_PER_ARM,
+            "event_DUM_EHC": FORMAL_OPTIMIZER_STEPS_PER_ARM,
+            "event_OR": 0,
+        },
+        "eval_episodes_per_cell": FORMAL_EVAL_EPISODES,
+        "evaluation_cells": [
+            "iid_deterministic",
+            "iid_stochastic",
+            "held_out_deterministic",
+            "held_out_stochastic",
+        ],
+        "bootstrap_repetitions": BOOTSTRAP_REPETITIONS,
         "duration_support": {
             "train": list(TRAIN_DURATION_SUPPORT),
             "iid": list(TRAIN_DURATION_SUPPORT),
             "held_out": list(HELD_OUT_DURATION_SUPPORT),
         },
-        "shared_renewal_period": SHARED_RENEWAL_PERIOD,
-        "num_envs": FORMAL_NUM_ENVS,
-        "outer_updates": FORMAL_UPDATES,
-        "transitions_per_arm": FORMAL_TRANSITIONS_PER_ARM,
-        "optimizer_steps_per_arm": FORMAL_OPTIMIZER_STEPS_PER_ARM,
-        "training_episodes_per_arm": FORMAL_TRAIN_EPISODES,
-        "eval_episodes_per_cell": FORMAL_EVAL_EPISODES,
-        "evaluation_cells_per_arm": 8,
-        "parameter_count_per_arm": PARAMETER_COUNT,
-        "ppo_passes": PPO_PASSES,
-        "thresholds": dict(THRESHOLDS),
+        "seeds": {
+            "initialization": MODEL_INITIALIZATION_SEED,
+            "ledger": TRAIN_TASK_SEED,
+            "order": TRAIN_ORDER_SEED,
+            "primitive": TRAIN_ACTION_SEED,
+            "opportunity": OPPORTUNITY_SEED,
+            "event": EVENT_SEED,
+            "mark": MARK_SEED,
+            "iid_evaluation": IID_EVAL_TASK_SEED,
+            "held_out_evaluation": HELD_OUT_EVAL_TASK_SEED,
+            "bootstrap": BOOTSTRAP_SEED,
+            "replicate_stride": 1000,
+        },
+        "thresholds": {
+            "access": ACCESS_FLOOR,
+            "gain": GAIN_THRESHOLD,
+            "keep": KEEP_THRESHOLD,
+            "renew": RENEW_THRESHOLD,
+            "cv": CV_THRESHOLD,
+            "lifetime_bin": LIFETIME_BIN_THRESHOLD,
+            "intervention": INTERVENTION_THRESHOLD,
+            "identifiability_opportunities": IDENTIFIABILITY_OPPORTUNITIES,
+            "identifiability_lifecycles": IDENTIFIABILITY_LIFECYCLES,
+        },
+        "optimization": {
+            "gamma": GAMMA,
+            "gae_lambda": GAE_LAMBDA,
+            "ppo_clip": PPO_CLIP,
+            "value_clip": VALUE_CLIP,
+            "value_coefficient": VALUE_COEFFICIENT,
+            "primitive_entropy_coefficient": PRIMITIVE_ENTROPY_COEFFICIENT,
+            "event_entropy_coefficient": EVENT_ENTROPY_COEFFICIENT,
+            "mark_entropy_coefficient": MARK_ENTROPY_COEFFICIENT,
+            "gradient_clip": GRADIENT_CLIP,
+            "learning_rate": LEARNING_RATE,
+            "adam_epsilon": ADAM_EPSILON,
+            "weight_decay": WEIGHT_DECAY,
+            "ppo_passes": PPO_PASSES,
+            "replay_tolerance": REPLAY_TOLERANCE,
+            "resume_tolerance": RESUME_TOLERANCE,
+            "opportunity_support": list(OPPORTUNITY_SUPPORT),
+        },
     }
