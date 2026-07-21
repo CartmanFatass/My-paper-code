@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import replace
+import hashlib
 import json
 import random
 
@@ -14,6 +15,7 @@ from ha_ctse_process.event_held_commitment_link import (
     CREATE,
     KEEP,
     MARK_DIM,
+    OPPORTUNITY_SUPPORT,
     RENEW,
     RNG_NAMES,
     _normal_parameters,
@@ -35,6 +37,7 @@ from ha_ctse_process.event_held_commitment_link import (
     save_checkpoint,
     validate_replay,
 )
+from ha_ctse_process.dynamic_roster_testbed import MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
     EVENT_SEED,
@@ -531,22 +534,63 @@ def test_candidate_retention_faithful_and_recovers_discarded_keep(
     `event_new_z` -- proving no extra draw and no value drift. On natural
     KEEP rows the existing masking rule must be untouched (`event_u` still
     zero) while the retained candidate recovers the discarded pre-mask
-    value. Detachment is checked so the audit fields can never reach a
-    loss/gradient/optimizer step. Uses a real 16-environment collection,
-    not a hand-built stub."""
+    value. Uses a real 16-environment collection, not a hand-built stub.
 
-    arms, _, _ = initialize_arms(cuda_device)
-    arm = arms["EHC"]
-    state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+    Audit-only isolation used to be "checked" by asserting
+    `candidate_u.requires_grad is False` and `.grad_fn is None`. That is
+    VACUOUS: the whole collection body runs under `torch.no_grad()`, so
+    `torch.tanh(u)` WITHOUT `.detach()` also yields
+    `requires_grad=False, grad_fn=None` -- an implementation that dropped
+    both `.detach()` calls would pass every one of those asserts. The real
+    invariant is a corruption-negative: `candidate_u`/`candidate_z` must be
+    read by nothing in the optimization path. Collect and `optimize_update`
+    from a fresh, identically-seeded start twice -- once faithful, once
+    with `candidate_u`/`candidate_z` overwritten with NaN before
+    `optimize_update` -- and require the resulting model parameters, both
+    optimizer states and the full returned metrics (including the replay
+    error dict) to be bit-identical between the two runs. Any read of the
+    corrupted fields would poison the result with NaN or otherwise diverge;
+    since neither field is referenced anywhere in `optimize_update`,
+    `replay_trajectory` or `compute_gae`, faithfully audit-only code is
+    unaffected by construction, and this test proves that empirically
+    rather than via the vacuous no-grad check."""
+
+    def collect_and_optimize(*, corrupt: bool):
+        arms, base_optimizers, event_optimizers = initialize_arms(cuda_device)
+        arm = arms["EHC"]
+        state = make_training_state("EHC", 0)
+        trajectory = collect_trajectory(
+            arm, state, device=cuda_device, episode_ids=tuple(range(16))
+        )
+        if corrupt:
+            trajectory = replace(
+                trajectory,
+                candidate_u=torch.full_like(trajectory.candidate_u, float("nan")),
+                candidate_z=torch.full_like(trajectory.candidate_z, float("nan")),
+            )
+        update = optimize_update(
+            arm, base_optimizers["EHC"], event_optimizers["EHC"], state,
+            trajectory, device=cuda_device,
+        )
+        return trajectory, arm, base_optimizers["EHC"], event_optimizers["EHC"], update
+
+    trajectory, faithful_arm, faithful_base, faithful_event, faithful_update = (
+        collect_and_optimize(corrupt=False)
+    )
+    _corrupted_trajectory, corrupted_arm, corrupted_base, corrupted_event, corrupted_update = (
+        collect_and_optimize(corrupt=True)
     )
 
-    # Detachment: audit-only fields never carry a grad_fn.
-    assert trajectory.candidate_u.requires_grad is False
-    assert trajectory.candidate_z.requires_grad is False
-    assert trajectory.candidate_u.grad_fn is None
-    assert trajectory.candidate_z.grad_fn is None
+    assert nested_state_maximum_difference(
+        faithful_arm.state_dict(), corrupted_arm.state_dict()
+    ) == 0.0
+    assert nested_state_maximum_difference(
+        faithful_base.state_dict(), corrupted_base.state_dict()
+    ) == 0.0
+    assert nested_state_maximum_difference(
+        faithful_event.state_dict(), corrupted_event.state_dict()
+    ) == 0.0
+    assert faithful_update == corrupted_update
 
     mark_mask = trajectory.event_mark_mask
     assert bool(mark_mask.any())
@@ -614,19 +658,46 @@ def test_candidate_retention_preserves_mark_rng_stream_position(
     cuda_device: torch.device,
 ) -> None:
     """No new RNG draw anywhere: retaining the discarded candidate must not
-    perturb the owned `mark` stream. Two identically seeded collections
-    stay byte-identical on primitive actions, event categorical actions,
+    perturb any owned RNG stream. Two identically seeded collections stay
+    byte-identical on primitive actions, event categorical actions,
     `old_log_probs` and `event_old_joint_logp`, and their owned RNG states
     agree afterward -- but that alone only proves the *modified* code is
     self-consistent across two runs, not that its draw count matches the
     pre-change behavior (an added-but-deterministic draw would still pass
-    it). The stronger, independent check below reconstructs the expected
-    `mark`-stream consumption directly from the request count recorded in
-    the collected trajectory (one MARK_DIM draw per request, regardless of
-    derived masking -- unchanged by this edit) against a freshly seeded
-    reference generator, and confirms the owned RNG lands in exactly that
-    position: proof the stream position is unchanged, not merely
-    reproducible."""
+    it). The stronger, independent checks below reconstruct the expected
+    stream consumption directly from counts recorded in the collected
+    trajectory against freshly seeded reference generators, and confirm
+    each owned RNG lands in exactly that position: proof the stream
+    position is unchanged, not merely reproducible.
+
+    Independently reconstructed:
+    - `mark`: one `standard_normal((*, MARK_DIM))` draw per request,
+      regardless of derived masking -- unchanged by the Stage-1 edit.
+    - `opportunity`: one `choice(OPPORTUNITY_SUPPORT, size=*)` draw per
+      request, from the same per-step call site as `mark`.
+    - `primitive`: one `random((env_count, MAX_LIFECYCLES), dtype=float32)`
+      table per physical collection step, unconditional on requests.
+
+    `Generator.choice`'s internal implementation differs from
+    `standard_normal`'s (it is not simply "consume K raw draws"), so its
+    chunk-invariance -- drawing N in one call leaves the same state, and
+    the same element values, as several calls whose sizes sum to N -- was
+    verified independently for this exact call shape (`choice` over a
+    fixed 3-element support, `size=N`, default `replace=True`, no `p`)
+    before relying on it here; it holds. The same was verified for
+    `Generator.random(shape, dtype=np.float32)` chunked along its leading
+    axis, matching how `primitive` is drawn once per step.
+
+    Not independently reconstructed here: `event` (categorical mark-kind
+    selection consumes one `random(len(requests))` draw per step -- the
+    same shape as `opportunity`/`primitive` and reconstructable the same
+    way, but extending to it was outside this bounded hardening pass),
+    `order` (derived from `frontier_order`, a function of ledger content
+    and the active mask rather than a simple per-step draw count) and
+    `ledger` (task/ledger generation, not a per-step draw at all). Those
+    three streams are covered only by the cross-run agreement check above,
+    not by an independent reconstruction.
+    """
 
     arms, _, _ = initialize_arms(cuda_device)
     arm = arms["EHC"]
@@ -651,10 +722,74 @@ def test_candidate_retention_preserves_mark_rng_stream_position(
 
     total_requests = int(left.event_kind.ne(0).sum())
     assert total_requests > 0
-    reference = np.random.default_rng(state_left.seed_map["mark"])
-    reference.standard_normal((total_requests, MARK_DIM))
+
+    mark_reference = np.random.default_rng(state_left.seed_map["mark"])
+    mark_reference.standard_normal((total_requests, MARK_DIM))
     assert (
-        reference.bit_generator.state == state_left.rngs["mark"].bit_generator.state
+        mark_reference.bit_generator.state
+        == state_left.rngs["mark"].bit_generator.state
+    )
+
+    opportunity_reference = np.random.default_rng(
+        state_left.seed_map["opportunity"]
+    )
+    opportunity_reference.choice(OPPORTUNITY_SUPPORT, size=total_requests)
+    assert (
+        opportunity_reference.bit_generator.state
+        == state_left.rngs["opportunity"].bit_generator.state
+    )
+
+    env_count = len(left.ledger_ids)
+    primitive_reference = np.random.default_rng(state_left.seed_map["primitive"])
+    primitive_reference.random(
+        (left.time_steps, env_count, MAX_LIFECYCLES), dtype=np.float32
+    )
+    assert (
+        primitive_reference.bit_generator.state
+        == state_left.rngs["primitive"].bit_generator.state
+    )
+
+
+def _tensor_sha256(tensor: torch.Tensor) -> str:
+    return hashlib.sha256(
+        tensor.detach().cpu().contiguous().numpy().tobytes()
+    ).hexdigest()
+
+
+def test_collector_protected_outputs_pinned_digest(
+    cuda_device: torch.device,
+) -> None:
+    """Regression pin against silent drift in the protected collector
+    outputs `event_new_z` / `primitive_z`. `validate_replay` recomputes
+    both from the same forward pass that collection used, so if a future
+    change silently altered `packed_new_z` on some rows, replay would stay
+    self-consistent with the (equally altered) collected value and the
+    `<=1e-7` continuation gate would still pass -- both sides would drift
+    together. This test compares against a reference fixed independently
+    of any code path in this module, for a fixed EHC collection at the
+    registered 16-environment width, replicate 0, `train` profile.
+
+    Reproducibility was verified before pinning, not assumed: the SHA256
+    digest of both tensors was observed bit-for-bit identical across 3
+    collections within one process AND across 2 separate process
+    invocations of the same script (6 observations total on this machine,
+    zero variation -- see the probe run at task time). Because
+    bitwise-exact reproduction held in every observation, this pins an
+    exact digest rather than falling back to a numeric summary at
+    tolerance.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+    )
+    assert _tensor_sha256(trajectory.event_new_z) == (
+        "93456fbf72531b9deb203d86bcb1c012db4d072160450c9e26e333ebd0eb5fd3"
+    )
+    assert _tensor_sha256(trajectory.primitive_z) == (
+        "2c0a71be5a455a3f1260149f5dac4527f6deabaa1ad9de6cfe3267fa8158a57f"
     )
 
 

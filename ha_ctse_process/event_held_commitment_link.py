@@ -1451,6 +1451,7 @@ def compare_continuations(
         "hidden_after", "prefix_counts", "primitive_z", "event_inputs",
         "event_u", "event_z_pre", "event_new_z", "event_old_cat_logp",
         "event_old_mark_component_logp", "event_old_joint_logp",
+        "candidate_u", "candidate_z",
     )
     discrete_equal = all(
         torch.equal(getattr(left_trajectory, name), getattr(right_trajectory, name))
