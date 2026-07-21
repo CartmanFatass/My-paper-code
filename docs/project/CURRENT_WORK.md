@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 
 ## Controller Ownership
 
@@ -44,13 +44,49 @@ replay, lifecycle, checkpoint, experiment and mutually exclusive result
 contracts are frozen in the durable design. No formal experiment is authorized
 until implementation and focused review complete.
 
+## Implementation State
+
+`EVENT_HELD_COMMITMENT_LINK_G0` is implemented and committed at `ce0d0ec`
+("implement event-held commitment link G0 arms"), replacing the superseded
+noncalendar H/C/S/D executable benchmark. Focused evidence was reproduced on
+CUDA before the commit:
+
+- 7/7 focused tests pass in 60s;
+- `or_dum_no_op` true under matched weights, observations, orders and uniforms;
+- added parameters 1608 per arm, base optimizer 15004, event optimizer 1584;
+- DUM base zero-gradients `[1,1,1,1]` against EHC `[0,0,0,0]` at equal event
+  steps, so `W_z` Adam exposure matches while its primitive effect stays zero;
+- maximum replay error 4.77e-7 against the 1e-6 tolerance;
+- checkpoint continuation exact on discrete, lifecycle and RNG state with all
+  continuous, model and optimizer errors 0.0.
+
+No formal training or registered evaluation has been launched.
+
 ## Next Action
 
-Dispatch controller-authorized implementation of
-`EVENT_HELD_COMMITMENT_LINK_G0` to the Research Project Manager. It must freeze
-the executable plan, use bounded temporary implementation subagents and one
-fresh implementation reviewer, and return an integrated focused-tested package.
-Formal training remains a separate later authorization.
+External review of the committed diff is performed by the user's GPT 5.6 pro
+reviewer against the frozen plan in `IMPLEMENTATION_PLAN.md`. Formal training
+remains a separate later authorization.
+
+## Measured Compute Cost
+
+Registered `16 x 80` four-epoch update on the local RTX 4070: 8.61s for `OR`,
+8.14s for `DUM`, 8.18s for `EHC`. Serial formal training over 250 updates,
+three arms and five replicates is 8.65h, and the four evaluation cells add
+roughly 1 to 1.5h, for about 10h continuous.
+
+Throughput is Python-loop and kernel-launch bound rather than compute bound at
+roughly 160 transitions/s for a 15k-parameter model, so the GPU stays nearly
+idle. The 15 `(arm, replicate)` cells are independent and can be executed
+concurrently before any formal launch is authorized.
+
+## Local Execution Environment
+
+Focused tests and the smoke fail closed without CUDA by design. The default
+interpreter carries a CPU-only `torch 2.8.0+cpu`; use
+`C:/Users/wu/.conda/envs/SB3/python.exe` (`torch 2.7.0+cu118`) directly.
+`conda run -n SB3` raises `UnicodeDecodeError` from a non-UTF-8 `.pth` during
+`site.py` and must not be used.
 
 ## Autonomous Boundary
 
