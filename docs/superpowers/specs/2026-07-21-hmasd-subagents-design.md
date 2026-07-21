@@ -27,8 +27,8 @@ this time.
 
 | Agent | model | effort | tools | reads at start |
 |---|---|---|---|---|
-| implementer | `opus` | `high` | inherit all, plus a PreToolUse git hook | context + implementer engineering principles |
-| reviewer | `opus` | `xhigh` | `Read, Grep, Glob, Bash`; `disallowedTools: Write, Edit, NotebookEdit` | context + reviewer review principles |
+| implementer | `opus` | `high` | `tools` omitted so all are inherited, plus a PreToolUse git hook | context + implementer engineering principles |
+| reviewer | `opus` | `xhigh` | `Read, Grep, Glob, Bash` | context + reviewer review principles |
 | scout | `haiku` | `low` | `Read, Grep, Glob` | inline environment block |
 | monitor | `haiku` | `low` | `Read, Grep, Glob, Write` | inline environment block |
 
@@ -37,6 +37,11 @@ a shared context file costs them little and removes drift between them. The two
 lightweight roles need three lines of environment and never touch algorithm
 semantics, so they carry those inline rather than reading two documents to run a
 grep sweep.
+
+The reviewer uses a `tools` allowlist alone. Adding `disallowedTools` for
+`Write` and `Edit` on top would be dead config, since an allowlist that omits
+them already withholds them, and dead config implies a protection that is not
+operating.
 
 Reviewer runs at `xhigh` rather than `high` because the frozen plan already
 specified a read-only `xhigh` reviewer for this work, and review is where depth
