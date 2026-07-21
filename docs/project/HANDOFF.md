@@ -1,31 +1,13 @@
-# Handoff — Formal Training Launched
+# Handoff — Formal Training Running
 
-Written 2026-07-22 00:48, immediately after launch. This is a cycle boundary:
-implementation is complete and the experiment is running.
+Written 2026-07-22 01:05. Cycle boundary: implementation complete, experiment
+running, one aborted launch diagnosed and fixed.
 
-## Status: LAUNCH FAILED, FIX IN FLIGHT
-
-The first launch aborted at update 4 of replicate 0 with
-`formal training operational failure`, every boolean reading true and
-`failures: []`. Diagnosed: `formal_train` gates on a replay record merged across
-all three arms, and `merge_replay_records` merges field by field, so the event
-joint takes `rows` from DUM or EHC while `factor_count` takes `0.0` from OR,
-which has no event head. The merged record is internally incoherent and
-`_replay_record_valid` correctly rejects it. `formal_evaluate` already validates
-per arm with `event_rows_required=arm != "OR"`; `formal_train` does not.
-
-The validator was right and its input was malformed. A per-arm fix plus the first
-test coverage for `formal_train` is in flight. No checkpoint was written, so
-nothing is contaminated.
-
-This is the third defect found in code reachable only under
-`FORMAL_AUTHORIZATION`, after a `torch.flatnonzero` call absent from this torch
-build and a slice omitting `env_index`. See `PROBLEM_CACHE.md` P8.
-
-## What was launched
+## Status: RUNNING
 
 ```
-run root : logs/event_held_commitment_link_g0_20260722_004657/  (aborted)
+run root : logs/event_held_commitment_link_g0_20260722_005749/
+launched : 2026-07-22 00:57
 command  : scripts/run_noncalendar_commitment_benchmark_g0.py --mode train
            --device cuda
            --authorize-formal AUTHORIZE_EVENT_HELD_COMMITMENT_LINK_G0_FORMAL
@@ -33,11 +15,38 @@ stdout   : <run root>/train_stdout.log
 ```
 
 Three arms, five replicates, 250 updates each, 320,000 transitions per arm.
-Expected wall clock about **7 hours** on the RTX 4070, serial. Confirmed live at
-launch: GPU 21% against a 1% idle baseline, 1434 MiB, one process.
+Expected wall clock about **7 hours**, serial, finishing around 08:00.
+Confirmed past the first launch's failure point: at seven minutes the stdout log
+was empty, GPU at 16% against a 1% idle baseline, one process alive.
 
 Checkpoints land under `<run root>/train/replicate_<r>/<arm>/`. Formal evaluation
 accepts only `update_250.pt`.
+
+### The first launch aborted; this is the second
+
+Run `logs/event_held_commitment_link_g0_20260722_004657/` died at update 4 of
+replicate 0 with every operational boolean true and no listed failures. The
+cause was the input, not the check. `formal_train` gated on a record merged
+across all three arms by `merge_replay_records`, which takes field-wise extrema.
+OR carries no event head, so its event joint is all zero with `excess` exactly
+0.0 — the maximum among records whose real excess is negative — so OR won the
+worst-case comparison on some fields while `rows` came from an event-bearing arm.
+The result was a record no single arm ever emitted: `rows` 1214 with
+`factor_count` 0. `_replay_record_valid` correctly rejected it.
+
+Intermittent, which is why three updates passed first: at update 1 the same merge
+yields `rows` 1218 with `factor_count` 9 and validates.
+
+Fixed at `e80cef0` by validating per arm with `event_rows_required` set from the
+arm, exactly as `formal_evaluate` already did. The per-update manifest entry now
+carries three per-arm records, which also restores attribution. No checkpoint was
+written by the aborted run.
+
+This was the third defect found in code reachable only behind
+`FORMAL_AUTHORIZATION`, after a `torch.flatnonzero` call absent from this torch
+build and a slice omitting `env_index`. That path still has no test coverage —
+see `PROBLEM_CACHE.md` P8, which is now the highest-value deferred item rather
+than a background note.
 
 ## Read this before interpreting results
 
@@ -92,6 +101,7 @@ bcdff53  sequential counterfactual fork engine
 def063c  per-factor replay tolerance classes
 f6c6204  execution backend and Replacement C gates
 8d2e10e  untrack a literature script committed by accident
+e80cef0  validate training replay evidence per arm, not merged
 ```
 
 38 focused tests pass on the CUDA backend.
