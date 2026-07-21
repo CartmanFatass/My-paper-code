@@ -53,6 +53,8 @@ data/
 # Canonical project memory + plan docs are load-bearing collaboration state — track them
 # (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
 !memory/*.md
+# Project control plane is load-bearing collaboration state.
+!docs/project/*.md
 !docs/superpowers/plans/*.md
 # Exact R27-G2 design/review evidence is durable project state.
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
