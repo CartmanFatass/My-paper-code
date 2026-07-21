@@ -16,14 +16,19 @@ this time.
 ## Roster
 
 ```
+docs/project/AGENT_CONTEXT.md   shared constraints, read by implementer and reviewer
 .claude/
   agents/
-    hmasd-context.md        shared constraints, read by implementer and reviewer
     hmasd-implementer.md
     hmasd-reviewer.md
     hmasd-scout.md
     hmasd-monitor.md
 ```
+
+The shared context lives outside `.claude/agents/` deliberately. Every file in
+that directory is treated as an agent definition, so a plain reference document
+placed there risks being parsed as a malformed agent. `docs/project/` is already
+git-negated and is the orchestrator's own area.
 
 | Agent | model | effort | tools | reads at start |
 |---|---|---|---|---|
@@ -101,6 +106,30 @@ is not an option because the implementer needs Bash to run the suite.
 
 The instruction stays in the definition as well; the hook makes it enforced
 rather than trusted.
+
+The hook does its matching **inside** the command, against `.tool_input.command`
+read from stdin, rather than using the frontmatter `if` filter. The `if` field
+fails open when a command cannot be parsed, which makes it a performance filter
+rather than a security boundary. A guard that silently stops guarding is worse
+than none.
+
+Verified by executing the exact command string extracted from the definition
+against synthetic tool inputs: `git commit`, `git add`, `git push` and a chained
+`cd /tmp && git reset --hard` are blocked with exit 2; `git status`,
+`git diff`, `git log`, a `pytest` invocation, `grep -n git file.py` and
+`echo git commits are fine` all pass through.
+
+## Verification status
+
+Frontmatter for all four definitions parses as YAML with the expected keys,
+models and effort levels. The git hook is verified by direct execution.
+
+The definitions are **not yet dispatchable in the session that created them** —
+a dispatch to `hmasd-scout` returned "Agent type not found", listing only the
+built-in agents. Agent discovery appears to happen at session start. They must
+be exercised in a fresh session before being relied on, and until then dispatch
+continues to use the built-in `general-purpose` and `Explore` agents with
+inline briefs.
 
 ## Repository requirement
 
