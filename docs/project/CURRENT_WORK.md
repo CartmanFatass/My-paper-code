@@ -6,15 +6,18 @@ Updated: 2026-07-21
 
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
-- Scientific authority: the user. Route selection, adoption, threshold changes
-  and experiment authorization are theirs.
-- Implementation and documentation: Claude Code session. It owns code
-  correctness, focused evidence, Git integration and the maintenance of
-  `docs/project/`.
-- External review: the user's GPT-5.6 Pro, dispatched by the user directly.
-- The Codex role graph in `AGENTS.md` and `.agents/skills/` is retained as
-  historical workflow. It is not the operating contract for this session and is
-  not modified here.
+- **Controller: Codex.** The project was returned to Codex on 2026-07-22.
+  `AGENTS.md` and `.agents/skills/` are the operating contract again; they were
+  never modified.
+- Read `docs/project/HANDOFF.md` first. It carries the current blocker, the two
+  aborted launch attempts and their causes, the pending external question, and
+  what the Claude Code session added.
+
+Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
+`docs/project/` at the user's direction, under a different model: the user held
+scientific authority, that session implemented and verified, and GPT-5.6 Pro
+reviewed science through the GitHub connector. No formal experiment completed, so
+no scientific disposition was produced.
 
 ## Execution Flow
 
