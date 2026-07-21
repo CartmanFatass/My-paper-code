@@ -91,18 +91,24 @@ No formal training or registered evaluation has been launched.
 
 ## Next Action
 
-External implementation review is dispatched by the user to GPT-5.6 Pro. The
-package is
-`docs/external-review/gpt5_6_pro/20260721_event_held_commitment_link_g0_code_review/`,
-pinned to implementation commit `ce0d0ec` and pushed at `38da9ae`. It follows
-the older flat convention rather than a `rounds/` divergent round, because the
-`rounds/` contract cites `OPEN_REVIEW_PRINCIPLES.md` and produces scientific
-divergence rather than an implementation audit. It requests one verdict of
-`APPROVE`, `MODIFY` or `REJECT` against the frozen plan.
+Implementation review is internal, per
+`docs/project/EXTERNAL_REVIEW_PIPELINE.md`. A read-only opus reviewer audits
+each diff against the frozen plan before commit. GPT-5.6 Pro is the scientific
+reviewer and is not sent implementation audits.
 
-The returned reply is archived verbatim as `RESPONSE_RAW.md` in that directory
-and the accepted outcome as `DISPOSITION.md`. Formal training remains a
-separate later authorization and is blocked until the verdict is resolved.
+An implementation code-review package pinned to `ce0d0ec` was built and then
+removed unsent, because it addressed the wrong reviewer. Its findings surface
+were absorbed into the internal review, which returned `MODIFY` on the battery
+revision and additionally identified two latent defects in the previously
+committed `_trajectory_episode_rows`: a call to `torch.flatnonzero`, which does
+not exist in `torch 2.7.0+cu118`, and a slice omitting `env_index` that indexed
+the environment dimension with lifecycle-key indices. Both sat behind
+`FORMAL_AUTHORIZATION` and were unreachable from the acceptance suite, so both
+would have surfaced only after formal training completed.
+
+The open external question is Replacement C scope,
+`docs/external-review/gpt5_6_pro/20260721_replacement_c_scope_followup/`.
+Formal training remains a separate later authorization.
 
 ## Open Contract Questions
 

@@ -4,6 +4,29 @@ Standing form for external review as of 2026-07-21. This replaces the Codex
 `rounds/` dispatch machinery for work owned by this session. The reviewer is
 GPT-5.6 Pro, reached by the user directly through the GitHub connector.
 
+## What external review is for
+
+GPT-5.6 Pro is the **scientific** reviewer. It adjudicates estimands, causal
+claims, comparator design, result contracts, portfolio weighting and route
+selection. Its GitHub connector access exists so those research judgments are
+informed by what the code actually does — it is a context channel, not a
+request to audit the implementation.
+
+Code correctness is internal. The orchestrator writes the frozen plan and
+verifies evidence; a separate read-only opus reviewer audits the diff against
+that plan before any commit touching protected semantics. Do not send an
+implementation audit outward: it spends the scientific reviewer's attention on
+work that is owned here, and it is slower than the internal pass. The internal
+review found two latent defects in a formally-authorized-only path that the
+full acceptance suite never reached.
+
+The dividing question is whether the answer changes *what should be measured or
+claimed* (external) or *whether the code does what the plan says* (internal). A
+question may legitimately reference implementation detail — "does your estimand
+require both branches to consume one shared RNG stream" is scientific even
+though the answer determines code — provided the decision being asked for is
+scientific.
+
 ## Boundary
 
 ```text
@@ -13,10 +36,11 @@ docs/external-review/gpt5_6_pro/<YYYYMMDD>_<topic>/
   DISPOSITION.md     what was adopted, rejected or deferred, and why
 ```
 
-A code review adds `REVIEW_ENTRY.md` (repo, branch, pinned commit, read order),
-`CODE_MAP.md` (anchored locations plus a confidence declaration), and
-`PACKAGE_MANIFEST.md`. `RESEARCH_BACKGROUND.md` is added when the reviewer needs
-scientific framing to make the question well-posed.
+`RESEARCH_BACKGROUND.md` is added when the reviewer needs framing to make the
+question well-posed. When the question depends on implementation behavior, name
+the exact paths and function anchors inside `QUESTION.md` and tell the reviewer
+to verify rather than trust the summary; do not build a separate code-map
+package.
 
 Markdown under this tree is tracked through the `.gitignore` negation
 `!docs/external-review/gpt5_6_pro/**/*.md`. Without it the bare `*.md` rule
