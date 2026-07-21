@@ -1,37 +1,30 @@
 ---
 name: hmasd-review-round
-description: Use only by the active HMASD controller for one tracked scientific review round. It creates and pushes one Open-Pro divergent question, dispatches the registered Open-Pro Exchange through $hmasd-dispatch-task, archives the returned raw, writes factual reconciliation, and sends the evidence to the Research Project Manager for scientific convergence and a code-ready next source or stop.
+description: Use only by the active HMASD controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates and pushes one reviewer-visible question, dispatches the registered Open-Pro Exchange through $hmasd-dispatch-task, archives the natural response exactly, writes factual reconciliation, and sends the Pro decision to the Research Project Manager for evidence-preserving intake and operationalization.
 ---
 
-# HMASD Review Round
+# HMASD External Pro Research Round
 
 ## Scope
 
-This is a controller workflow, not a persistent role. The controller owns round
-files, Git-visible boundaries, Open-Pro dispatch, raw acceptance, factual
-reconciliation, adoption and project-state update. It never operates the
-browser and never performs scientific convergence itself.
+External GPT-5.6 Pro is the scientific decision source. It owns conjecture and
+definition correction, derivation, counterexample search, retained lemmas,
+portfolio meaning and selection of one scheduled research action. That action
+serializes resources; it does not make other defensible explanations illegal.
 
-Read the router, role directory, this Skill,
-`docs/external-review/REVIEWER_CONVERSATIONS.json`, the named round and its
-explicit evidence.
+The controller owns reviewer-visible Git boundaries, factual reconciliation,
+adoption, durable record writes and user communication. It never operates the
+browser or replaces the Pro scientific judgment. The Research Project Manager
+checks provenance and executability and translates an adopted implementation
+action; it does not independently reconverge the science.
 
-## Scientific roles
-
-- Open Pro independently expands and attacks two to four causal explanations
-  under `docs/project/ALGORITHM_PRINCIPLES.md` and
-  `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`. It does not choose one
-  successor.
-- The Research Project Manager reads the Open raw, factual reconciliation,
-  project scientific principles and its convergence reference. It validates
-  evidence, weights the portfolio and freezes one code-ready next source or
-  stop.
-- The controller adopts or rejects the manager brief, authorizes later work and
-  owns Git and user communication.
+Use a full plural review for competing explanations, proposed family
+retirement, benchmark-identification disputes, repeated ambiguity or
+full-algorithm integration. Use a focused continuation in the same registered
+Pro conversation for a local scientific ambiguity or correction. Both use the
+same exact evidence and raw-archive discipline.
 
 ## Round boundary
-
-Use:
 
 ```text
 docs/external-review/rounds/<round>/
@@ -43,30 +36,39 @@ docs/external-review/rounds/<round>/
   50_DISPOSITION.md
 ```
 
-Before dispatch, commit and push the brief, manifest and Open question. Run
+Before dispatch, commit and push the brief, manifest and question. Run
 `scripts/verify_pro_review_boundary.ps1` with the 40-character pushed SHA and
-question path. The question must list the base and Open scientific principles
-and every exact Git-visible evidence path.
+question path. List the scientific principles and every exact Git-visible
+evidence path.
+
+The question asks Pro to return:
+
+- plural live conjectures and their scopes;
+- derived intervention, natural and held-out consequences;
+- concrete counterexamples and retained lemmas;
+- the smallest refuted unit in existing evidence;
+- one scheduled research action chosen by information gain, cost and
+  reversibility;
+- evidence semantics to freeze if that action is adopted;
+- reactivation conditions for unscheduled ideas;
+- a concise Chinese user brief.
+
+Pro must not equate one scheduled action with one legal successor or write an
+implementation plan. If implementation is selected, it defines the scientific
+object and estimand; the Manager later freezes executable architecture.
 
 ## Procedure
 
-1. Dispatch one `REVIEW_STAGE` to the registered
-   `open_divergent_exchange` with explicit `$hmasd-dispatch-task` and
-   `$hmasd-review-exchange` activation.
-2. Accept the raw only from that registered task and preserve its semantic
-   quality note separately from transport validity.
-3. Write `30_EVIDENCE_RECONCILIATION.md` as a factual provenance and
-   contradiction record without selecting a route.
-4. Send one `SCIENTIFIC_CONVERGENCE_TASK` to the registered
-   `research_project_manager`, explicitly listing the round brief, raw,
-   reconciliation and required evidence.
-5. Show the returned Chinese user brief. `ADOPT` or `STOP` permits the controller
-   to write `50_DISPOSITION.md`, commit/push it and update project control once.
-   `BLOCK` pauses the round at the exact missing evidence or authority boundary.
-
-The manager is the convergence authority. It must make the needed scientific
-choices itself rather than returning a field-completion loop. The tracked round
-contains one external divergent stage followed by internal convergence.
+1. Dispatch one `REVIEW_STAGE` to `open_divergent_exchange` with explicit
+   `$hmasd-dispatch-task` and `$hmasd-review-exchange` activation.
+2. Accept a naturally completed raw only from that task. Preserve semantic
+   quality notes separately from transport validity.
+3. Write factual `30_EVIDENCE_RECONCILIATION.md` without changing Pro science.
+4. Send `CDC_DECISION_INTAKE` to `research_project_manager` with the raw,
+   reconciliation, CDC records and evidence.
+5. Show the returned Chinese brief. Controller adoption permits one
+   disposition, durable CDC updates and project-control update. A material
+   scientific ambiguity returns as one focused continuation to the same Pro.
 
 ## Exchange dispatch
 
@@ -85,32 +87,28 @@ raw=docs/external-review/rounds/<id>/21_PRO_OPEN_RAW.md
 completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 ```
 
-Resolve the registered Exchange immediately before sending, copy its live route
-fields unchanged, require delivery proof and verify post-send invariance.
+Resolve the Exchange immediately before sending, copy its live route fields
+unchanged, require delivery proof and verify post-send invariance.
 
-## Manager dispatch
+## Manager intake
 
 ```text
 $hmasd-dispatch-task
 $hmasd-project-manager
 
-SCIENTIFIC_CONVERGENCE_TASK
+CDC_DECISION_INTAKE
 role_skill=.agents/skills/hmasd-project-manager/SKILL.md
-review_id=<round>:scientific-convergence
-inputs=<explicit brief, raw, reconciliation and evidence paths>
-question=Validate the evidence, preserve a weighted portfolio, and freeze one code-ready next evidence source or stop.
+research_id=<round>:cdc-intake
+inputs=<brief, raw, reconciliation, CDC records and evidence paths>
+question=Preserve the Pro decision, update the durable research objects, and assess operational executability without making a new scientific choice.
 ```
 
 This is read-only and creates no write lease or heartbeat.
 
 ## Recovery
 
-There is no review state file and no controller heartbeat. Derive progress from
-immutable artifacts and callbacks. On Exchange transport error, return the same
-stage to the same session with observed evidence and one semantic recovery
-objective. Do not prescribe selectors, clicks or browser commands.
-
-A naturally completed raw with content gaps is valid transport. The Research
-Project Manager may still synthesize it using its assigned evidence; do not
-resubmit merely to obtain preferred prose. External review and internal
-convergence never authorize implementation or compute by themselves.
+There is no review state file or controller heartbeat. A naturally completed
+raw with gaps remains valid transport. If a gap changes science, ask the same
+Pro one focused question; if it is engineering-only, the Manager bounds it.
+Never prescribe selectors, clicks or browser commands. Review and intake never
+authorize implementation or compute by themselves.

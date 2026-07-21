@@ -13,6 +13,9 @@ document needed at the current boundary:
 - `docs/project/IMPLEMENTATION_PLAN.md` for an active executable design;
 - `docs/project/ExpRecord.md` for a formal experiment contract or disposition.
 
+The durable research objects live under `docs/research/cdc/`. Load only the
+conjecture, ledger, portfolio or evidence note required at the current boundary.
+
 The controller alone owns scientific adoption, implementation and experiment
 authorization, Git integration, project control, evidence integrity and user
 communication.
@@ -29,22 +32,23 @@ The active surfaces are:
 
 - controller direct work for ordinary inspection, project management, Git,
   evidence integration, user communication and small controller edits;
-- Research Project Manager for scientific convergence and authorized
+- Research Project Manager for external-Pro CDC decision intake and authorized
   implementation management;
 - Open-Pro Exchange for external divergent review;
 - Experiment Monitor for an already authorized run.
 
 Role procedures and callback schemas live only in their role Skills. Temporary
-implementation and review subagents belong to the Research Project Manager and
-use native parent-child communication; they are not controller dispatch targets.
+code agents are registered under `.codex/agents/` and belong only to the
+Research Project Manager. They use native parent-child communication and are
+not controller dispatch targets.
 
 ## Authority and write ownership
 
 The Research Project Manager has two bounded modes:
 
-- scientific convergence: read external divergent evidence and project
-  principles, maintain the idea portfolio and select one code-ready evidence
-  source or stop;
+- CDC decision intake: preserve the external Pro scientific decision, maintain
+  conjecture/lemma/counterexample/portfolio records, and assess operational
+  executability without choosing a local route;
 - implementation management: after controller authorization, freeze the
   executable architecture, maintain `IMPLEMENTATION_PLAN.md`, manage temporary
   implementation/review work and return one integrated package.
@@ -66,8 +70,8 @@ inputs. A role Skill is both an authority grant and a context denylist. Roles do
 not reconstruct controller history, read unrelated project control, change a
 task model, authorize another role or launch a successor.
 
-Scientific convergence and implementation work are sent only to the Research
-Project Manager. External review is sent only to the Open-Pro Exchange.
+Scientific decision work is sent only to the Open-Pro Exchange. CDC decision
+intake and implementation work are sent only to the Research Project Manager.
 Monitoring is sent only to the Experiment Monitor. Completion of one role never
 starts another role automatically.
 
@@ -97,16 +101,28 @@ membership and variable individual lifetime. Hierarchy, skills, temporal
 abstraction and environment-agnostic intrinsic mechanisms are candidate means,
 not propositions that ordinary MARL must first admit.
 
-Preserve multiple plausible explanations while serializing code mutations and
-formal compute for attribution. Do not convert open research into arbitrary gate
-chains. Ordinary recurrent MARL is a matched comparator and access diagnostic,
-not a universal research admission gate.
+Use a CDC outer loop: Conjecture -> Derivation -> Counterexample or Disproof ->
+Correction. External GPT-5.6 Pro owns the scientific judgment in that loop.
+Preserve several legal explanations while serializing only the next
+resource-consuming action. One scheduled action is not one legal research
+direction. Prefer derivation, counterexample and accepted-evidence reanalysis
+before toy, prototype or formal experiment.
 
-Before adopting a scientific source as code or experiment authority, receive a
-Research Project Manager convergence brief and show its concise user-facing
-summary. External divergent review is required for unresolved hypothesis
-generation or portfolio expansion; focused contract completion may return to
-the existing scientific owner without reopening a full portfolio round.
+Freeze evidence semantics, not theory. Gates answer local measurement questions
+and never become research objectives. Ordinary recurrent MARL is a matched
+comparator and access diagnostic, not a universal admission gate. After a
+result, update the smallest implicated unit: engineering path, implementation,
+measurement, benchmark-comparator pair, conjecture scope or, only with strong
+independent evidence, mechanism family.
+
+Before adopting a scheduled action as code or experiment authority, receive the
+external Pro decision and the Research Project Manager `CDC_DECISION_BRIEF`,
+then show its concise user-facing summary. The controller checks evidence,
+authority and feasibility but does not replace the Pro scientific choice. It
+records adopted conjecture, lemma, counterexample, portfolio and evidence-note
+deltas under `docs/research/cdc/`. Use a full plural Pro round for genuinely
+open boundaries and a focused continuation in the same Pro conversation for a
+local scientific ambiguity; the Manager never fills that ambiguity itself.
 
 Intrinsic reward remains environment-agnostic. Task fields, identity, roles,
 success predicates, progress measures and external reward may not be smuggled

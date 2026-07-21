@@ -6,12 +6,34 @@ Updated: 2026-07-22
 
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
-- **Controller: Codex.** The project was returned to Codex on 2026-07-22.
-  `AGENTS.md` and `.agents/skills/` are the operating contract again; they were
-  never modified.
-- Read `docs/project/HANDOFF.md` first. It carries the current blocker, the two
-  aborted launch attempts and their causes, the pending external question, and
-  what the Claude Code session added.
+- **Controller: current Codex root task.** `AGENTS.md` is its operating contract.
+- Scientific decisions come from the registered external GPT-5.6 Pro. The
+  Research Project Manager preserves and operationalizes them; it does not
+  independently select research directions.
+
+## Active Boundary
+
+Research, implementation and formal compute are paused. The workflow now uses
+an external-Pro CDC outer loop and registered custom code-agent inner loop. The
+pause does not consume the standing five-iteration intent.
+
+The interrupted implementation left five unaccepted WIP paths:
+
+- `docs/project/IMPLEMENTATION_PLAN.md`
+- `ha_ctse_process/event_held_commitment_link.py`
+- `ha_ctse_process/noncalendar_commitment_testbed.py`
+- `scripts/run_noncalendar_commitment_benchmark_g0.py`
+- `tests/ha_ctse_process_noncalendar_commitment_benchmark_g0_test.py`
+
+They have partial edits and partial CUDA evidence only. No final syntax check,
+focused suite, review, formal-path exercise, commit or scientific result exists.
+Preserve them exactly until a fresh post-refactor implementation assignment
+either adopts or replaces that WIP.
+
+The workflow-only boundary installs the CDC research records, assigns scientific
+judgment to external Pro, limits the Manager to evidence-preserving intake and
+implementation management, and registers Scout/Implementer/Verifier/Reviewer
+custom agents. No algorithm action follows automatically.
 
 Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 `docs/project/` at the user's direction, under a different model: the user held
@@ -45,13 +67,12 @@ same scope are not dispatched.
 
 ## Binding Engineering Constraints
 
-These are durable technical constraints, not workflow. They bind every
-implementation and every review regardless of which agent executes, and they
-are quoted into implementer and reviewer briefs:
+These are durable technical constraints, not workflow. They bind implementation
+management and are embedded in the registered custom-agent profiles:
 
-- `.agents/skills/hmasd-implementer/references/engineering-principles.md`
 - `.agents/skills/hmasd-project-manager/references/engineering-principles.md`
-- `.agents/skills/hmasd-reviewer/references/review-principles.md`
+- `.codex/agents/hmasd-implementer.toml`
+- `.codex/agents/hmasd-reviewer.toml`
 
 Only `.agents/skills/hmasd-experiment/references/experiment-protocol.md` is
 Codex-session machinery and does not apply here.
@@ -88,7 +109,7 @@ Handoff note: the prior Codex controller task
 `EVENT_HELD_COMMITMENT_LINK_G0` implementation complete but uncommitted. It was
 verified and committed under the ownership above.
 
-## Current Boundary
+## Last Scientific Boundary (paused)
 
 The independent `NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification
 is valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`. H establishes structural
@@ -133,18 +154,13 @@ magnitude. That blocker is pre-existing rather than introduced.
 
 ## Next Action
 
-Resolve the pending external question at
-`docs/external-review/gpt5_6_pro/20260722_per_component_tolerance_unexecutable/`.
-No answer has been received. Until the replay bound has an executable form,
-formal training cannot complete.
+Finish and validate the workflow-only Git boundary. Then obtain a fresh
+external-Pro CDC decision over the preserved evidence and updated conjecture
+records. Only after controller adoption may the Manager receive a new
+`START_IMPLEMENTATION` assignment for the preserved WIP or a replacement.
 
-Before the next launch, `formal_train` and `formal_evaluate` should acquire the
-end-to-end test coverage they have never had; four defects have been found in
-that region and `formal_evaluate` has still never executed. Incomplete work is
-on branch `wip/formal-path-coverage`.
-
-`docs/project/HANDOFF.md` carries the full state, the causes of both aborted
-launches, and the work owed to the science.
+Do not launch formal training, interpret partial WIP checks as evidence, or
+resume the old completion-loop contract.
 
 ## Open Contract Questions
 
@@ -205,11 +221,10 @@ interpreter carries a CPU-only `torch 2.8.0+cpu`; use
 
 ## Autonomous Boundary
 
-INACTIVE. The inherited grant authorized five evidence-bearing iterations
-driven by the Codex loop of Open-Pro divergence, internal convergence,
-adoption, implementation, review, run, analysis and terminal disposition. That
-loop is not operating, so the iteration budget is not being consumed and is
-retained only as the user's standing intent.
+INACTIVE during workflow refactor. The inherited five evidence-bearing
+iterations remain available after the user or controller explicitly resumes the
+new external-Pro CDC loop. No iteration is consumed by workflow edits or custom
+agent registration.
 
 Under current ownership each mutating step is authorized by the user directly.
 Nothing runs formal training, changes a registered threshold, selects a

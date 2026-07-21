@@ -1,31 +1,31 @@
 # HMASD External Review Workflow
 
-External review is a mandatory scientific boundary. The active controller owns
-round sequencing, factual reconciliation, disposition and every Git-visible
+External GPT-5.6 Pro owns scientific CDC decisions. The active controller owns
+round sequencing, factual reconciliation, adoption and every Git-visible
 boundary. One persistent Open-Pro Exchange owns external transport, exact raw
-capture and its heartbeat. The registered Research Project Manager performs
-internal scientific convergence after the divergent raw is accepted.
+capture and its heartbeat. The Research Project Manager preserves the Pro
+decision, maintains the research records and checks operational executability;
+it does not independently reconverge the science.
 
 ## Scientific sequence
 
-1. GPT-5.6 Pro performs one blind divergent review of the Git-visible evidence
-   under `OPEN_REVIEW_PRINCIPLES.md`.
-2. The controller writes a factual reconciliation without selecting a route.
-3. The registered Research Project Manager reads the raw, reconciliation,
-   scientific principles and assigned evidence; it maintains the portfolio and
-   selects one code-ready evidence source or `STOP`.
-4. The controller shows the manager's user brief, adopts or rejects it, writes
-   `50_DISPOSITION.md` and updates project control once.
+1. GPT-5.6 Pro performs CDC scientific review of the Git-visible evidence under
+   `OPEN_REVIEW_PRINCIPLES.md`, preserving plural conjectures while selecting
+   one scheduled research action.
+2. The controller writes factual reconciliation without changing the science.
+3. The Research Project Manager performs `CDC_DECISION_INTAKE`: it projects the
+   Pro decision onto durable records and checks operational feasibility.
+4. The controller shows the resulting user brief, adopts or rejects the action,
+   writes `50_DISPOSITION.md` and updates project control once.
 
-External review does not authorize code execution or training. The Research
-Project Manager owns convergence rather than merely auditing another review. It
-prevents objective inversion: the target is a stronger MARL algorithm, while
-hierarchy, skills, variable lifetime, ordinary-MARL controls and causal
-diagnostics are mechanisms or evidence, not universal prerequisites.
+Review does not authorize code or training. Pro owns science; the Manager owns
+evidence-preserving operationalization. The target remains a stronger MARL
+algorithm, while hierarchy, skills, variable lifetime, ordinary-MARL controls
+and causal diagnostics are mechanisms or evidence, not universal prerequisites.
 
 `docs/project/ALGORITHM_PRINCIPLES.md` is the common scientific contract and
-`OPEN_REVIEW_PRINCIPLES.md` specializes the external divergent role. Internal
-convergence guidance lives only in the Research Project Manager Skill.
+`OPEN_REVIEW_PRINCIPLES.md` specializes the external Pro role. Operational
+intake guidance lives only in the Research Project Manager Skill.
 
 ## Direct Exchange interface
 
@@ -47,9 +47,9 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 
 The Exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` directly
 to the controller through the task dispatcher. After raw verification, the
-controller writes reconciliation and sends one `SCIENTIFIC_CONVERGENCE_TASK` to
-the Research Project Manager. The manager owns no heartbeat and returns
-`RESEARCH_CONVERGENCE_BRIEF` or `RESEARCH_MANAGER_BLOCKED`.
+controller writes reconciliation and sends one `CDC_DECISION_INTAKE` to the
+Research Project Manager. The manager owns no heartbeat and returns
+`CDC_DECISION_BRIEF` or `RESEARCH_MANAGER_BLOCKED`.
 
 Each raw has exactly one writer: its registered Exchange. A raw becomes
 immutable after that Exchange verifies natural response completion and exact
@@ -91,7 +91,7 @@ rounds/YYYYMMDD_topic/
 Raw responses are byte-preserved and precede downstream use. Controller round
 behavior lives in `.agents/skills/hmasd-review-round/SKILL.md`; registered
 Exchange behavior lives in `.agents/skills/hmasd-review-exchange/SKILL.md`.
-Scientific convergence behavior lives in
+Scientific intake and implementation behavior live in
 `.agents/skills/hmasd-project-manager/SKILL.md`.
 Codex task IDs and role bindings live only in the dispatcher's
 `session-roles.json`; external reviewer conversations and URLs live only in

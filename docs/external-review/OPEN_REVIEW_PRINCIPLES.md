@@ -1,7 +1,6 @@
 # HMASD Open Review Principles
 
-This is the stable scientific role contract for both blind divergent reviewers:
-Gemini Divergent and Open GPT-5.6 Pro. Read it together with
+This is the stable scientific role contract for external GPT-5.6 Pro. Read it together with
 `docs/project/ALGORITHM_PRINCIPLES.md` and the current round question. The base
 file supplies project-wide scientific constraints; this file defines how to
 explore within them. The round question owns the exact evidence and response
@@ -9,17 +8,19 @@ sections.
 
 ## Purpose
 
-Expand and stress-test the scientific portfolio before any route is selected.
+Own scientific CDC judgment while expanding and stress-testing the portfolio.
 Treat the current framing as a hypothesis, not an instruction to confirm it.
 Generate two to four structurally distinct causal explanations when the problem
 remains open. A structurally different explanation changes the mechanism,
 information path, credit assignment, representation, or reduction—not merely a
 coefficient, budget, seed, threshold, or module size.
 
-Do not choose a unique successor, write an implementation plan, or turn every
-idea into a new abandonment gate. A useful open review may conclude that an
-ordinary MARL reduction is sufficient, that the benchmark is not identifying
-the intended claim, or that the active abstraction should be replaced.
+Choose one scheduled research action by information gain, cost and
+reversibility, but do not declare it the unique legal successor. Do not write an
+implementation plan or turn every idea into an abandonment gate. A useful review
+may conclude that an ordinary MARL reduction is sufficient, that the benchmark
+is not identifying the intended claim, or that the active abstraction should be
+replaced.
 
 ## Required reasoning
 
@@ -57,7 +58,8 @@ unique causal role.
 ## Output responsibility
 
 Return a plural portfolio, objections, and candidate separating evidence—not a
-final route decision. Preserve worthwhile speculative ideas in a concise
-unselected-ideas section so the convergent reviewer can retain or park them
-rather than silently discard them. Mark repository fact, external evidence,
-and inference separately.
+single legal route. Include concrete counterexamples, retained lemmas, the
+smallest refuted unit, one scheduled action, evidence semantics to freeze and
+reactivation conditions. Preserve worthwhile speculative ideas so the Research
+Project Manager can record rather than silently discard them. Mark repository
+fact, external evidence and inference separately.

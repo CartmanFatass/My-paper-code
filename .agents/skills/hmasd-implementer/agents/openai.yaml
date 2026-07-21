@@ -1,6 +1,0 @@
-interface:
-  display_name: "HMASD Implementer"
-  short_description: "Implement one frozen HMASD contract"
-  default_prompt: "Use $hmasd-implementer to implement one bounded contract supplied by the Research Project Manager."
-policy:
-  allow_implicit_invocation: false

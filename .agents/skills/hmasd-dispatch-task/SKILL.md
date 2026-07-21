@@ -17,9 +17,9 @@ tool:
 
 - ordinary inspection, project management, Git, evidence integration, user
   communication, or a small direct controller edit -> controller works directly;
-- scientific convergence or controller-authorized implementation management ->
+- external-Pro CDC decision intake or controller-authorized implementation management ->
   registered `research_project_manager` with `$hmasd-project-manager`;
-- external divergent review -> registered `open_divergent_exchange` with
+- external GPT-5.6 Pro CDC decision -> registered `open_divergent_exchange` with
   `$hmasd-review-exchange`;
 - monitoring an already authorized run -> registered `experiment_monitor` with
   `$hmasd-experiment`.

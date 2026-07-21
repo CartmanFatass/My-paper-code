@@ -1,6 +1,0 @@
-interface:
-  display_name: "HMASD Implementation Reviewer"
-  short_description: "Audit one frozen HMASD implementation"
-  default_prompt: "Use $hmasd-reviewer to review one integrated HMASD implementation against its frozen plan and evidence."
-policy:
-  allow_implicit_invocation: false

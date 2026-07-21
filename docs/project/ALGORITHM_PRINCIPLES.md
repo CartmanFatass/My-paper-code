@@ -4,15 +4,14 @@ This file is the durable scientific contract for HMASD algorithm exploration.
 It contains cross-experiment principles, not the active route, implementation
 specification, experiment dashboard, or research history.
 
-Current ownership and the live portfolio belong in
-`docs/project/CURRENT_WORK.md`. Unresolved hypothesis generation, portfolio
-weighting, route selection, and next-evidence choice are decided through the
-tracked external-review round, with convergent GPT-5.6 Pro as the scientific
-decision source. Codex preserves the evidence boundary and converts the
-accepted disposition into executable design in
-`docs/project/IMPLEMENTATION_PLAN.md`. Formal experiment contracts and
-dispositions belong in `docs/project/ExpRecord.md`. Git history preserves
-removed research history.
+Current ownership and the scheduled action belong in
+`docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
+counterexamples, idea status and evidence notes live under
+`docs/research/cdc/`. External GPT-5.6 Pro owns scientific CDC decisions. The
+Research Project Manager preserves those decisions, maintains the research
+records and translates an adopted implementation action into executable design.
+Formal experiment contracts and dispositions belong in
+`docs/project/ExpRecord.md`. Git history preserves removed research history.
 
 ## 1. Research Mission
 
@@ -88,51 +87,44 @@ role that the active implementation does not already supply.
 An isolated mechanism pass does not authorize integration. Decorative support,
 diagnostic predictability, or added capacity is not an algorithmic contribution.
 
-## 3. Portfolio-First Exploration
+## 3. CDC Open Research Loop
 
-At an unresolved architecture or direction boundary, the blind divergent
-reviewers generate and attack two to four structurally distinct causal
-explanations and, when useful, candidate architectures. Convergent Pro weighs
-the resulting portfolio and chooses the next decision-relevant evidence source
-or a stop. Each candidate states:
+Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
+External GPT-5.6 Pro owns scientific decisions in this loop. It may use a full
+plural review or a focused continuation in the same registered conversation.
+The Research Project Manager preserves and operationalizes that judgment rather
+than replacing it.
 
-- the final capability it unlocks and what later integration would consume it;
-- its replacement ledger;
-- the evidence it explains and the evidence it does not explain;
-- its strongest ordinary-MARL or simpler-controller reduction;
-- an observation that would strengthen, weaken, merge, or retire it.
+Maintain several live conjectures when evidence permits. Each states its scope,
+mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
+observable intervention, natural-execution and held-out consequences. When
+material, state why ordinary recurrence, capacity or information reorganization
+cannot explain the same consequence.
 
-Generate and compare ideas in parallel when useful, but serialize mutating
-implementation and compute to preserve attribution and workspace integrity.
-One active evidence source does not imply one legal research direction or one
-mandatory successor.
+Actively construct policies or measurements that satisfy a surface metric
+without the intended semantics. A useful counterexample, corrected definition,
+retained lemma or benchmark-identification result is progress even when no code
+is launched.
 
-The convergent disposition selects the next evidence source by expected
-information gain and relevance to the final target. It may be a reanalysis,
-constructive toy, bounded prototype, controlled intervention, or training run.
-Codex must not silently replace that choice; it may return an evidence mismatch
-or operational infeasibility to Pro. Prefer the smallest coherent source whose
-plausible outcomes change relative support among live candidates or cause a
-real stop or integration decision.
-
-Do not replace algorithm exploration with a chain of arbitrary gates. A result
-constrains only the causal claim and implementation family it identifies.
-Failure of one mechanism does not prohibit a structurally different route.
+Schedule one resource-consuming action at a time for attribution, not one legal
+research direction. Choose by information gain, cost and reversibility,
+normally in this order: derivation, counterexample, accepted-evidence
+reanalysis, toy, bounded prototype, formal experiment. Unscheduled ideas remain
+live or parked with a reactivation condition.
 
 ## 4. Evidence Design
 
-Before implementing a new scientific route or launching a conclusion-bearing
-experiment, require an accepted convergent-Pro disposition and record its
-scientific content in the active plan and, for a formal run, `ExpRecord.md`:
+Freeze evidence, not theory. Before observing a conclusion-bearing result,
+freeze provenance, primary estimand, comparator information and resource
+boundaries, probability and credit authority, external/intrinsic reward
+semantics, leakage boundaries and conclusion-bearing metrics. Afterward,
+preserve the observation and its registered meaning while allowing the
+conjecture, definition, scope, benchmark or architecture to be corrected.
 
-- the exact causal claim and estimand;
-- at least two plausible explanations for the current evidence;
-- the smallest observation that separates them;
-- the strongest ordinary baseline and mechanism-matched comparator;
-- metrics, nulls, budgets, optimizer exposure, and result branches;
-- what every scientific outcome does to every live candidate;
-- changes prohibited while the evidence source is open;
-- the condition that would exhaust the relevant portfolio.
+An evidence note states the local question, implicated conjectures, cheapest
+separating observation, matched controls, frozen estimand and metrics, budget
+and optimizer exposure, prohibited changes and plausible portfolio deltas. It
+does not claim that all future theoretical interpretations are exhausted.
 
 Match the comparator to the claim. Use diagnostic nulls for incremental signal,
 mechanism-matched controls for a component claim, temporal controls for a
@@ -143,10 +135,12 @@ capacity, optimizer exposure, environment, seed, or evaluation changes.
 Report both environment interaction and optimizer-update exposure. Equal
 environment steps do not imply equal learning opportunity.
 
-Add at most one focused operational check for a concrete corruption risk the
-evidence-bearing run cannot cheaply expose. Do not add a separate algorithm
-verification stage or repeatedly re-prove accepted facts without a concrete
-contradiction.
+Create an implementation plan only when implementation is the cheapest
+necessary evidence action and the research object is precise enough that two
+reasonable implementations instantiate the same estimand. Add at most one
+focused operational check for a concrete corruption risk the evidence-bearing
+run cannot cheaply expose. Do not repeatedly re-prove accepted facts without a
+concrete contradiction.
 
 ## 5. Toys, Access, and Transfer
 
@@ -171,48 +165,47 @@ A benchmark access failure does not by itself reject the algorithm family.
 
 ## 6. Result Semantics
 
-Interpret outcomes narrowly:
+Interpret outcomes narrowly and update the smallest implicated unit:
 
-- `PASS`: supports only the registered causal claim under the frozen contract;
-- `VALID_FAIL`: rejects or weakens that registered claim and implementation
-  family without automatically rejecting structurally different routes;
-- `MIXED`: resolves only the branches supported by the observed components;
-- `INVALID`: an implementation, replay, probability, RNG, data, or analysis
-  defect prevents scientific interpretation;
-- `NO_ACCESS`: the benchmark or ordinary-policy access condition was not
-  established, so the intended algorithm comparison is not identified;
-- `UNDERPOWERED`: the estimand is valid but the registered evidence cannot
-  resolve it at the declared precision.
+- engineering failure produces no scientific update;
+- invalid implementation updates only that implementation;
+- valid implementation with invalid estimand updates the measurement;
+- benchmark no-access or non-identification updates only that
+  benchmark-comparator pair;
+- an identified failed consequence updates the corresponding conjecture or its
+  scope;
+- a valid positive supports only the frozen causal claim.
 
-Retry only a failed operational path. Preserve scientific thresholds and the
-estimand after observing results. Do not rescue a valid negative by changing
-seed, budget, model size, learning rate, metric, threshold, reward, or name.
+Mixed and underpowered results preserve unresolved explanations. Retry only a
+failed operational path. Do not rescue a valid negative by changing seed,
+budget, model, learning rate, metric, threshold, reward or name. Broad mechanism
+retirement requires a structural contradiction, equivalence proof or multiple
+independent identified counterexamples.
 
-Negative results are reusable constraints. Reopening a failed family requires a
-new causal reason that changes the relevant mechanism or evidence boundary, not
-a parameter search over the retired estimand.
+Every result records the smallest supported or refuted proposition, a retained
+lemma, any counterexample, what the result does not imply and the portfolio
+delta. PASS does not automatically integrate; FAIL does not select a successor;
+NO_ACCESS does not veto stronger-MARL work.
 
 ## 7. Scientific Progress and Review
 
-Progress is one of:
+Progress includes a new capability, decision-relevant evidence, a concrete
+counterexample, a corrected definition, a retained lemma, a benchmark
+identification result or a portfolio update. Documentation and workflow status
+alone are support work.
 
-- a new algorithm capability;
-- new decision-relevant evidence;
-- a portfolio update that changes what should be built or tested.
+External GPT-5.6 Pro generates and corrects conjectures, derives consequences,
+constructs counterexamples, extracts lemmas and chooses one scheduled action
+while retaining plural explanations. The Research Project Manager checks
+provenance and executability, maintains records and manages an authorized
+implementation. The controller owns adoption, resources, Git, claim ceilings
+and user communication. Review output never authorizes code or compute by
+itself.
 
-Documentation, inventories, repeated status reads, and workflow prose are
-support work. Keep them to the minimum required for valid attribution.
-
-Gemini and open Pro provide independent blind hypotheses, objections, and
-evidence assessment. Codex reconciles source provenance and contradictions but
-does not rank routes. Convergent Pro owns scientific synthesis, portfolio
-weighting, promotion or retirement recommendations, and the next evidence
-source or stop. Codex adopts that disposition unless it conflicts with the
-registered evidence boundary, an explicit project/user constraint, or
-operational feasibility; such a conflict is returned to Pro rather than solved
-through local research judgment. Review output never authorizes code execution
-or an experiment; those mutations still require the applicable user/project
-authority.
+Integration is a separate late decision. Require natural use, intervention-
+sensitive sequential behavior, external value, held-out transport, resistance
+to simpler explanations and acceptable complexity benefit before considering a
+local mechanism part of the full algorithm.
 
 ## 8. Maintaining This Contract
 

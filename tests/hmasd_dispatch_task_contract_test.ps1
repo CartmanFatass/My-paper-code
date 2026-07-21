@@ -18,8 +18,8 @@ foreach ($entry in $roles.roles.PSObject.Properties.Value) {
 }
 foreach ($required in @(
     'ordinary inspection, project management, Git',
-    'scientific convergence or controller-authorized implementation management',
-    'external divergent review',
+    'external-Pro CDC decision intake or controller-authorized implementation management',
+    'external GPT-5.6 Pro CDC decision',
     'monitoring an already authorized run',
     'controller <-> research_project_manager',
     'controller <-> open_divergent_exchange',
