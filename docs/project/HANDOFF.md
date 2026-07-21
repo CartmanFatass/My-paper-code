@@ -3,10 +3,29 @@
 Written 2026-07-22 00:48, immediately after launch. This is a cycle boundary:
 implementation is complete and the experiment is running.
 
-## What is running
+## Status: LAUNCH FAILED, FIX IN FLIGHT
+
+The first launch aborted at update 4 of replicate 0 with
+`formal training operational failure`, every boolean reading true and
+`failures: []`. Diagnosed: `formal_train` gates on a replay record merged across
+all three arms, and `merge_replay_records` merges field by field, so the event
+joint takes `rows` from DUM or EHC while `factor_count` takes `0.0` from OR,
+which has no event head. The merged record is internally incoherent and
+`_replay_record_valid` correctly rejects it. `formal_evaluate` already validates
+per arm with `event_rows_required=arm != "OR"`; `formal_train` does not.
+
+The validator was right and its input was malformed. A per-arm fix plus the first
+test coverage for `formal_train` is in flight. No checkpoint was written, so
+nothing is contaminated.
+
+This is the third defect found in code reachable only under
+`FORMAL_AUTHORIZATION`, after a `torch.flatnonzero` call absent from this torch
+build and a slice omitting `env_index`. See `PROBLEM_CACHE.md` P8.
+
+## What was launched
 
 ```
-run root : logs/event_held_commitment_link_g0_20260722_004657/
+run root : logs/event_held_commitment_link_g0_20260722_004657/  (aborted)
 command  : scripts/run_noncalendar_commitment_benchmark_g0.py --mode train
            --device cuda
            --authorize-formal AUTHORIZE_EVENT_HELD_COMMITMENT_LINK_G0_FORMAL
