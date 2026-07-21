@@ -58,6 +58,7 @@ data/
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
 !docs/external-review/R27_G2_design_review_20260712_Claude.md
 !docs/external-review/gemini_3_1_pro/**/*.md
+!docs/external-review/gpt5_6_pro/**/*.md
 !docs/external-review/rounds/**/*.md
 !docs/external-review/GPT5_6_PRO_OPEN_HANDOFF_TEMPLATE.md
 !docs/external-review/OPEN_REVIEW_PRINCIPLES.md
