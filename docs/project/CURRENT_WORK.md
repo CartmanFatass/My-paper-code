@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-21
+Updated: 2026-07-22
 
 ## Ownership
 
@@ -19,9 +19,10 @@ scientific authority, that session implemented and verified, and GPT-5.6 Pro
 reviewed science through the GitHub connector. No formal experiment completed, so
 no scientific disposition was produced.
 
-## Execution Flow
+## Execution Flow (historical — Claude Code session, 2026-07-21/22)
 
-Work is executed through bounded subagents under a single orchestrator.
+Recorded for reference. Codex uses `AGENTS.md` and `.agents/skills/`. That
+session executed work through bounded subagents under a single orchestrator.
 
 - Orchestrator: writes the frozen plan, dispatches, integrates the result,
   reruns the focused suite itself, commits and maintains `docs/project/`. A
@@ -116,42 +117,34 @@ until implementation and focused review complete.
 
 ## Implementation State
 
-`EVENT_HELD_COMMITMENT_LINK_G0` is implemented and committed at `ce0d0ec`
-("implement event-held commitment link G0 arms"), replacing the superseded
-noncalendar H/C/S/D executable benchmark. Focused evidence was reproduced on
-CUDA before the commit:
+`EVENT_HELD_COMMITMENT_LINK_G0` is implemented, reviewed and committed through
+`a83db26` on `aggressive`, with 38 focused tests passing on the CUDA backend.
+The three-arm package, the revised behavioural battery, Replacement C stage 1
+retention, the sequential counterfactual fork engine, the per-factor replay
+tolerance classes and the registered execution backend and result gates are all
+in history.
 
-- 7/7 focused tests pass in 60s;
-- `or_dum_no_op` true under matched weights, observations, orders and uniforms;
-- added parameters 1608 per arm, base optimizer 15004, event optimizer 1584;
-- DUM base zero-gradients `[1,1,1,1]` against EHC `[0,0,0,0]` at equal event
-  steps, so `W_z` Adam exposure matches while its primitive effect stays zero;
-- maximum replay error 4.77e-7 against the 1e-6 tolerance;
-- checkpoint continuation exact on discrete, lifecycle and RNG state with all
-  continuous, model and optimizer errors 0.0.
-
-No formal training or registered evaluation has been launched.
+**Formal training was attempted twice and aborted both times. Nothing is
+running and no checkpoint exists.** The first attempt died at update 4 on a
+replay record merged across arms, fixed at `e80cef0`. The second died mid-
+training on a flat absolute per-component replay tolerance that cannot be
+executed in float32, because four of the nine bounded quantities have unbounded
+magnitude. That blocker is pre-existing rather than introduced.
 
 ## Next Action
 
-Implementation review is internal, per
-`docs/project/EXTERNAL_REVIEW_PIPELINE.md`. A read-only opus reviewer audits
-each diff against the frozen plan before commit. GPT-5.6 Pro is the scientific
-reviewer and is not sent implementation audits.
+Resolve the pending external question at
+`docs/external-review/gpt5_6_pro/20260722_per_component_tolerance_unexecutable/`.
+No answer has been received. Until the replay bound has an executable form,
+formal training cannot complete.
 
-An implementation code-review package pinned to `ce0d0ec` was built and then
-removed unsent, because it addressed the wrong reviewer. Its findings surface
-were absorbed into the internal review, which returned `MODIFY` on the battery
-revision and additionally identified two latent defects in the previously
-committed `_trajectory_episode_rows`: a call to `torch.flatnonzero`, which does
-not exist in `torch 2.7.0+cu118`, and a slice omitting `env_index` that indexed
-the environment dimension with lifecycle-key indices. Both sat behind
-`FORMAL_AUTHORIZATION` and were unreachable from the acceptance suite, so both
-would have surfaced only after formal training completed.
+Before the next launch, `formal_train` and `formal_evaluate` should acquire the
+end-to-end test coverage they have never had; four defects have been found in
+that region and `formal_evaluate` has still never executed. Incomplete work is
+on branch `wip/formal-path-coverage`.
 
-The open external question is Replacement C scope,
-`docs/external-review/gpt5_6_pro/20260721_replacement_c_scope_followup/`.
-Formal training remains a separate later authorization.
+`docs/project/HANDOFF.md` carries the full state, the causes of both aborted
+launches, and the work owed to the science.
 
 ## Open Contract Questions
 
