@@ -6,6 +6,26 @@ the frozen contract and deferring C.
 Prior exchange:
 `docs/external-review/gpt5_6_pro/20260721_lifetime_battery_contract_question/`
 
+## Correction to the question as sent
+
+Question 1 asserted that the "general contract" reading would newly alter
+training-time mark-RNG consumption, and therefore force a rewrite of the
+collector, replay and checkpoint paths. **That premise is wrong.** The reviewer
+corrected it and the correction is verified against
+`ha_ctse_process/event_held_commitment_link.py` at `7ba056e`:
+
+- lines 488-495 draw `mark_eps` for every request unconditionally in the
+  stochastic branch and compute `u = mu + sigma * mark_eps`, before
+  `derived_mark_mask` exists at line 498;
+- line 518 stores `u` where the mask holds and zeros elsewhere;
+- line 507 discards `tanh(u)` on KEEP, retaining `packed_z_pre`.
+
+The mark stream is therefore already consumed once per opportunity regardless
+of the categorical outcome, and the candidate mark already exists in flight and
+is thrown away. Replacement C requires retention only: no additional RNG draw,
+no training change, and no checkpoint rewrite. The cost objection that
+motivated deferring C does not apply in the form it was stated.
+
 ---
 
 ```
