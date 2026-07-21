@@ -640,10 +640,20 @@ def formal_train(
                 )
                 for arm in ARMS
             }
-            replay_record = merge_replay_records(
-                [metrics["replay"] for metrics in update_metrics.values()]
+            # Validate per arm, never merged across arms. `merge_replay_records`
+            # takes field-wise extrema, which is coherent across batches of one
+            # arm but not across arms: the event joint would take `rows` from an
+            # event-bearing arm and `factor_count` from OR, which carries no
+            # event head, producing a record no single arm ever emitted.
+            replay_records = {
+                arm: update_metrics[arm]["replay"] for arm in ARMS
+            }
+            replay_valid = all(
+                _replay_record_valid(
+                    replay_records[arm], event_rows_required=arm != "OR"
+                )
+                for arm in ARMS
             )
-            replay_valid = _replay_record_valid(replay_record)
             finite = all(metrics["finite"] for metrics in update_metrics.values())
             exposure = all(
                 metrics["base_steps"] == 4
@@ -660,7 +670,7 @@ def formal_train(
                 "update": update_index + 1,
                 "no_op": no_op,
                 "base_noop_error": base_noop_error,
-                "replay": replay_record,
+                "replay": replay_records,
                 "lifecycle": lifecycle,
                 "finite": finite,
                 "rng_pairing": rng_pairing,
