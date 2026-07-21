@@ -282,12 +282,69 @@ part of this dual; they resolve earlier as non-identifiable. This introduces no
 new threshold and leaves intervals crossing a threshold to the underpowered
 branch.
 
-Replacement C of the external disposition, the paired natural
-`KEEP`-versus-`RENEW` counterfactual advantage, is **not adopted here**. Its
-training-versus-evaluation scope is unresolved, and a naive per-opportunity
-implementation would fork roughly 2,080 opportunities into 166,000 additional
-single-environment steps and dominate total runtime. It remains a candidate for
-a separate authorized boundary.
+## Natural event-decision consequence
+
+Adopted 2026-07-21 under
+`docs/external-review/gpt5_6_pro/20260721_replacement_c_scope_followup/`. This
+is a **held-out evaluation-only** measurement. Training behavior, the PPO
+objective, the behavior-policy likelihood, optimizer state and the checkpoint
+schema are unchanged, and no additional RNG draw is permitted anywhere.
+
+The collector already draws a mark candidate for every request before the
+categorical mask is applied, and discards it on `KEEP`. The measurement
+therefore requires retention of an existing quantity, not new sampling.
+
+Retain the unmasked `candidate_u` and `candidate_z = tanh(candidate_u)` for
+every opportunity. On a natural `CREATE` or `RENEW` row this is the executed
+mark; on a natural `KEEP` row it is an auxiliary counterfactual mark. Candidate
+fields are stored in all modes for a uniform trajectory schema and are
+audit-only: they never enter a likelihood, loss, gradient or optimizer state.
+
+At each eligible held-out non-`CREATE` opportunity, fork the frozen state into
+two common-randomness branches. The `KEEP` branch retains `z`; the `RENEW`
+branch applies the stored `candidate_z`. Both advance to episode termination
+under identical realized future demand and membership, opportunity gaps,
+primitive order, primitive-action uniforms, later event uniforms and later
+candidate marks. Each branch owns cloned state; the two branches of a pair must
+not share one mutable generator, because advancing one would shift the draws the
+other sees. Truncating a branch to a fixed horizon is prohibited: this
+environment pays zero reward until the terminal step, so a truncated branch
+estimates a different quantity.
+
+For a natural `KEEP` row, `A_KEEP = U(KEEP) - U(RENEW(candidate_z))`. For a
+natural `RENEW` row, `A_RENEW = U(RENEW(candidate_z)) - U(KEEP)`. Cluster by
+original sign-paired base episode, never by event row; multiple selected rows
+from one cluster travel together in every resample. Batch membership is not a
+statistical unit.
+
+Gates are `LCB(A_KEEP)>0` and `LCB(A_RENEW)>0` with frozen point floors
+`mean(A_KEEP)>=0.02` and `mean(A_RENEW)>=0.02`.
+
+Forks are a batched forced-branch dimension per the binding engineering
+constraints, sized in units of the registered 16-environment width. Batched and
+sequential execution must agree exactly on discrete membership, event and
+primitive actions, on terminal outcomes and utilities, and on RNG states after
+continuation, with continuous values within `1e-7`; the natural-action branch
+must additionally reproduce the originally collected continuation exactly. If
+either equality fails the batched engine is invalid.
+
+Default is full per-opportunity forking. The only accepted reduced form is 32
+natural `KEEP` and 32 natural `RENEW` opportunities per replicate, selected
+after natural trajectories are collected but before any fork outcome is
+computed, by simple random sampling without replacement within each
+`(replicate, natural_action)` stratum from a dedicated deterministic stream
+derived from the registered bootstrap seed under a separate namespace. The
+selection key may use only replicate, base episode ID and sign parity, physical
+time, opaque lifecycle key, membership epoch, segment ID and the natural
+action; it may not use observation values, mark values, future trajectory,
+utility or counterfactual advantage. If any replicate has fewer than 32 eligible
+rows for either natural action, the run is `BENCHMARK_NON_IDENTIFIABLE` rather
+than repaired by changing the quota. Adaptive post-result resampling and
+post-result top-up are prohibited.
+
+Implementation is staged. Stage 1 is retention only. Stage 2 is the batched
+fork engine and its equivalence evidence. The result contract does not consume
+`A_KEEP`/`A_RENEW` until stage 2 is accepted.
 
 Apply exactly this first-match result priority:
 
