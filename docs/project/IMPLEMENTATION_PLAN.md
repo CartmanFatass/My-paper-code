@@ -1,9 +1,18 @@
 # HA-CTSE Active Implementation Plan
 
-Updated: 2026-07-20
-Status: ACTIVE_IMPLEMENTATION
+Updated: 2026-07-21
+Status: IMPLEMENTED_AWAITING_EXTERNAL_REVIEW
 Work ID: `event-held-commitment-link-g0-implementation-20260720-retry1`
 Base/source boundary: `5a34c16065c6b92d77f897abaa692ab88d2f2c0f`
+Implementation commit: `ce0d0ec2ee1dc9e2ceee15ee0b76f19ebd84573c`
+
+The executable design below is frozen and implemented. Every focused acceptance
+item in the final section was reproduced on CUDA before commit; the measured
+values are recorded in `docs/project/CURRENT_WORK.md` and in the review package
+`docs/external-review/gpt5_6_pro/20260721_event_held_commitment_link_g0_code_review/`.
+No formal training or registered evaluation has run. Do not edit this plan to
+match a later implementation change; a contract change requires a new
+authorized boundary.
 Scientific source: `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md`
 
 ## Outcome and authority

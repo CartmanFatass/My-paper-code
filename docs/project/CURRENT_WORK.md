@@ -2,20 +2,24 @@
 
 Updated: 2026-07-21
 
-## Controller Ownership
+## Ownership
 
-- Active controller: Codex root task `019f5c78-0c91-7612-adb4-c1fcfe4484c8`
-- Controller status: ACTIVE
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
-- Handoff state: NONE
-- Codex role: project state, accepted scientific boundary, implementation and
-  experiment authorization, evidence, Git, and user communication
-- Scientific convergence source: registered Research Project Manager using
-  tracked Open-Pro divergent evidence and project principles
-- Code implementation source: Research Project Manager-managed temporary
-  `$hmasd-implementer` and `$hmasd-reviewer` subagents; there is no persistent
-  code-manager session
+- Scientific authority: the user. Route selection, adoption, threshold changes
+  and experiment authorization are theirs.
+- Implementation and documentation: Claude Code session. It owns code
+  correctness, focused evidence, Git integration and the maintenance of
+  `docs/project/`.
+- External review: the user's GPT-5.6 Pro, dispatched by the user directly.
+- The Codex role graph in `AGENTS.md` and `.agents/skills/` is retained as
+  historical workflow. It is not the operating contract for this session and is
+  not modified here.
+
+Handoff note: the prior Codex controller task
+`019f5c78-0c91-7612-adb4-c1fcfe4484c8` left the
+`EVENT_HELD_COMMITMENT_LINK_G0` implementation complete but uncommitted. It was
+verified and committed under the ownership above.
 
 ## Current Boundary
 
@@ -64,9 +68,50 @@ No formal training or registered evaluation has been launched.
 
 ## Next Action
 
-External review of the committed diff is performed by the user's GPT 5.6 pro
-reviewer against the frozen plan in `IMPLEMENTATION_PLAN.md`. Formal training
-remains a separate later authorization.
+External implementation review is dispatched by the user to GPT-5.6 Pro. The
+package is
+`docs/external-review/gpt5_6_pro/20260721_event_held_commitment_link_g0_code_review/`,
+pinned to implementation commit `ce0d0ec` and pushed at `38da9ae`. It follows
+the older flat convention rather than a `rounds/` divergent round, because the
+`rounds/` contract cites `OPEN_REVIEW_PRINCIPLES.md` and produces scientific
+divergence rather than an implementation audit. It requests one verdict of
+`APPROVE`, `MODIFY` or `REJECT` against the frozen plan.
+
+The returned reply is archived verbatim as `RESPONSE_RAW.md` in that directory
+and the accepted outcome as `DISPOSITION.md`. Formal training remains a
+separate later authorization and is blocked until the verdict is resolved.
+
+## Open Contract Questions
+
+One unresolved question stands against the result contract, raised before any
+result was observed and therefore not a post-hoc threshold rescue. It is
+recorded here because `ALGORITHM_PRINCIPLES.md` is reserved for generalized
+rules and this is specific to the active source.
+
+`ALGORITHM_PRINCIPLES.md` 2.3 requires that a long-lived skill arise from
+learned behavior under the declared clock contract. The lifetime gate
+`LCB(CV(T))>0.25` appears to be satisfied by construction. `Delta` is sampled
+uniformly from `{4,8,12}` and the policy selects only `KEEP`/`RENEW`, so a
+segment lifetime is a Geometric-count sum of `Delta` draws with
+`Var(Delta)/E[Delta]^2 = (32/3)/64`. That yields `CV(T)=0.408` under always-
+`RENEW` and `0.764` under a balanced policy, so every policy including an
+untrained one clears `0.25`. The lifetime-bin condition appears similarly
+satisfiable.
+
+Two related observations. The natural-use gates are non-degeneracy checks,
+since the support is binary and `P_KEEP+P_RENEW=1`, so a uniform random event
+head clears both; principle 2.2 holds that usage statistics are not evidence of
+a useful skill. The intervention gate measures logit-perturbation magnitude
+rather than behavioral consequence, so a large `W_z` applied to an
+uninformative `z` clears it.
+
+The primary estimand `G` is unaffected and remains mechanism-matched. The
+question is whether the behavioral battery discriminates the
+`COMMITMENT_SUPPORTED` and `REPRESENTATION_ONLY` branches at all. One candidate
+replacement conditions on the `KEEP`-chain length, which is purely
+policy-determined, instead of realized lifetime, which is dominated by the
+`Delta` draw. This is referred to the user and GPT-5.6 Pro; no threshold is
+changed here.
 
 ## Measured Compute Cost
 
@@ -90,19 +135,17 @@ interpreter carries a CPU-only `torch 2.8.0+cpu`; use
 
 ## Autonomous Boundary
 
-- Status: IMPLEMENTATION_SOURCE_ADOPTED
-- Authorized evidence-bearing iterations: five additional iterations from this
-  corrected boundary
-- Remaining iterations: five
-- Permitted automatic action: for each iteration, obtain Open-Pro divergence,
-  converge internally, adopt, implement, review, run, analyze and record one
-  terminal disposition, then decrement the remaining count
-- Stop condition: five terminal dispositions are accepted, committed and
-  pushed; the Research Project Manager selects `STOP`; or a genuine
-  contract/operational blocker requires user authority
-- Forbidden: more than five iterations, concurrent mutating research routes,
-  locally invented successor routes, or expansion beyond each accepted
-  scientific boundary
+INACTIVE. The inherited grant authorized five evidence-bearing iterations
+driven by the Codex loop of Open-Pro divergence, internal convergence,
+adoption, implementation, review, run, analysis and terminal disposition. That
+loop is not operating, so the iteration budget is not being consumed and is
+retained only as the user's standing intent.
+
+Under current ownership each mutating step is authorized by the user directly.
+Nothing runs formal training, changes a registered threshold, selects a
+successor route or creates a terminal disposition without that explicit
+authorization. The prohibitions on concurrent mutating research routes and on
+locally invented successor routes still hold.
 
 ## Durable Constraints
 
@@ -121,16 +164,13 @@ interpreter carries a CPU-only `torch 2.8.0+cpu`; use
 ## Pointers
 
 - `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints.
-- `.agents/skills/hmasd-project-manager/references/convergence-principles.md` —
-  internal scientific-convergence guidance.
-- `.agents/skills/hmasd-project-manager/references/engineering-principles.md` —
-  implementation-management engineering constraints.
-- `.agents/skills/hmasd-implementer/references/engineering-principles.md` and
-  `.agents/skills/hmasd-reviewer/references/review-principles.md` — temporary
-  subagent contracts.
-- `docs/project/IMPLEMENTATION_PLAN.md` — Research Project Manager-owned current
-  executable design or explicit `NONE`.
-- `docs/project/ExpRecord.md` — formal experiment history and dispositions.
+- `docs/project/IMPLEMENTATION_PLAN.md` — current frozen executable design, or
+  explicit `NONE` when no implementation is authorized.
+- `docs/project/ExpRecord.md` — formal experiment history and dispositions. It
+  carries no `EVENT_HELD_COMMITMENT_LINK_G0` row, correctly, because no formal
+  experiment has been authorized or run.
+- `docs/external-review/gpt5_6_pro/20260721_event_held_commitment_link_g0_code_review/`
+  — active implementation review package awaiting `RESPONSE_RAW.md`.
 - `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md` — current adopted
   scientific and executable source.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
