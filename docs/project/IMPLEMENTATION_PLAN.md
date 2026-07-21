@@ -1,7 +1,7 @@
 # HA-CTSE Active Implementation Plan
 
 Updated: 2026-07-21
-Status: IMPLEMENTED_AWAITING_EXTERNAL_REVIEW
+Status: BATTERY_REVISION_AUTHORIZED
 Work ID: `event-held-commitment-link-g0-implementation-20260720-retry1`
 Base/source boundary: `5a34c16065c6b92d77f897abaa692ab88d2f2c0f`
 Implementation commit: `ce0d0ec2ee1dc9e2ceee15ee0b76f19ebd84573c`
@@ -237,36 +237,69 @@ strict.
 
 Primary `G` is held-out stochastic `U_EHC-U_DUM`; secondary `V` is held-out
 stochastic `U_EHC-U_OR`. Access uses held-out stochastic arm utility and floor
-`0.78`. Natural-use, lifetime and intervention measurements use EHC held-out
-stochastic trajectories:
+`0.78`. Support, lifetime and intervention measurements use EHC held-out
+stochastic trajectories.
 
-- `LCB(P_KEEP)>0.20` and `LCB(P_RENEW)>0.10` over non-CREATE opportunities;
-- complete active-step lifetimes exclude temporary absence and rollout cutoff,
-  treat forced closes as censored, require `LCB(CV(T))>0.25`, and require at
-  least two of `[1,8]`, `[9,16]`, `[17,infinity]` to have
-  `LCB(proportion)>0.10`;
-- at states with at least two active lifecycles, derange `z` across lifecycles
-  while fixing `o,h`, environment and primitive RNG; require
-  `LCB(mean(||W_z(z-z_perm)||_2/sqrt(3)))>0.10`;
-- identifiability requires at least 1,000 non-CREATE opportunities and at least
+This battery was revised on 2026-07-21 under external disposition
+`docs/external-review/gpt5_6_pro/20260721_lifetime_battery_contract_question/`,
+before any result was observed. The superseded battery gated on `P_KEEP`,
+`P_RENEW`, `CV(T)`, physical-time lifetime bins and a raw logit-residual norm.
+Each was passable without learned commitment timing: the usage gates only
+require non-degeneracy of a binary support; `CV(T)` mixes policy timing with
+exogenous gap variance, so `CV(T)=0.408` under always-`RENEW` while a crisply
+learned deterministic `K=3` rule yields `0.236` and fails; and a residual
+proportional to `(c,c,c)` has positive norm yet leaves the three-action softmax
+exactly unchanged.
+
+Define `K` for each commitment spell as the number of exogenous opportunity
+intervals it contains, so terminating `RENEW` at the first later opportunity is
+`K=1`, one `KEEP` then `RENEW` is `K=2`, and so on. `K` is policy-determined.
+Temporary absence contributes neither a gap nor active duration. Spells
+censored by terminal leave, forced close or rollout cutoff are excluded from
+complete-spell `K` statistics and reported separately.
+
+- Support, not evidence: at least `128` eligible natural `KEEP` rows and at
+  least `128` eligible natural `RENEW` rows. `P_KEEP` and `P_RENEW` remain
+  reported diagnostics and gate nothing.
+- Policy-generated lifetime: over complete spells, bins `K=1`, `K=2`,
+  `K>=3` require at least two with `LCB(proportion)>0.10`.
+- Executable mark dependence: at states with at least two active lifecycles,
+  derange `z` across lifecycles while holding observation, recurrent hidden
+  state, action mask, active-set context and primitive prefix fixed. Require
+  `LCB(I_TV)>0.10` where
+  `I_TV = E[0.5 * sum_a |pi(a|o,h,z) - pi(a|o,h,z_perm)|]`. This is invariant
+  to a softmax-common logit shift by construction.
+- Identifiability requires at least 1,000 non-CREATE opportunities and at least
   250 lifecycles with two or more such opportunities across all five seeds.
 
+`T`, `CV(T)` and the physical-time bins `[1,8]`, `[9,16]`, `[17,infinity]`
+remain computed and serialized as descriptive outputs. They gate nothing.
+
 For the source phrase "behavior confidently fails", use the exact statistical
-dual of its LCB pass rule: at least one required natural-use, lifetime-bin/CV or
-intervention condition has `UCB <=` its registered threshold. This introduces
-no new threshold and leaves intervals crossing a threshold to the underpowered
+dual of the LCB pass rule: at least one required lifetime-bin or intervention
+condition has `UCB <=` its registered threshold. Support-count failures are not
+part of this dual; they resolve earlier as non-identifiable. This introduces no
+new threshold and leaves intervals crossing a threshold to the underpowered
 branch.
+
+Replacement C of the external disposition, the paired natural
+`KEEP`-versus-`RENEW` counterfactual advantage, is **not adopted here**. Its
+training-versus-evaluation scope is unresolved, and a naive per-opportunity
+implementation would fork roughly 2,080 opportunities into 166,000 additional
+single-environment steps and dominate total runtime. It remains a candidate for
+a separate authorized boundary.
 
 Apply exactly this first-match result priority:
 
 1. `INVALID_OPERATIONAL` for any probability, replay, no-op, lifecycle, RNG or
    resume invariant failure.
-2. `BENCHMARK_NON_IDENTIFIABLE` if either identifiability count floor is missed.
+2. `BENCHMARK_NON_IDENTIFIABLE` if either identifiability count floor or either
+   `128`-row support floor is missed.
 3. `NO_ACCESS_THIS_BENCHMARK` if maximum arm utility UCB is `<0.78`.
 4. `UNDERPOWERED_ACCESS` if maximum arm utility LCB is `<0.78` while its UCB
    reaches the floor.
 5. `COMMITMENT_SUPPORTED` if access is established, `LCB(G)>0.10`, and every
-   natural-use, lifetime and intervention condition passes.
+   `K`-bin and intervention condition passes.
 6. `REPRESENTATION_ONLY` if `LCB(G)>0.10` and behavior confidently fails as
    defined above.
 7. `ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED` if `UCB(G)<=0.10`.
@@ -297,6 +330,12 @@ The integrated package is accepted only after all of the following pass:
    discrete/RNG equality and all continuous/model/optimizer errors `<=1e-7`.
 7. The eight result branches are mutually exclusive by first-match precedence,
    including equality and interval-crossing boundaries.
+7b. `K` accounting is exact: a `CREATE`-opened spell closed by `RENEW` after two
+   `KEEP` decisions records `K=3`; censored spells are excluded from complete-
+   spell statistics and reported separately; temporary absence adds no
+   opportunity. `I_TV` lies in `[0,1]`, is exactly zero under a softmax-common
+   logit shift, and is computed from the same held-fixed state as the natural
+   action.
 8. One real short GPU non-formal smoke performs collection, replay, a finite
    four-epoch base update for all arms and event update for DUM/EHC, strict
    checkpoint round-trip, and artifact serialization without launching formal
