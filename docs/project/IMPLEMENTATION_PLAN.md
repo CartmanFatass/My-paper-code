@@ -352,6 +352,40 @@ deterministic evaluation `candidate_u = mu` may itself be exactly zero, so a
 value test would conflate a real candidate with padding. No separate presence
 mask is added because the kind field already carries it.
 
+### Stage 2 executable design
+
+Fork state is cloned through the existing environment contract
+`NoncalendarTrackingEnv.snapshot_state` and `from_snapshot_state`, which deep
+copy the ledger, members, time, counters, reward trace, membership change and
+terminated flag under strict key-set validation, and return an independent
+instance. Measured cost is 288 microseconds per clone, about 1.2 seconds across
+the full fork budget, so the ledger is cloned rather than shared and no
+optimization is warranted. Do not re-derive this.
+
+Each fork owns independent environment, lifecycle, recurrent hidden, commitment
+and RNG storage. Paired branches receive cloned generator state rather than a
+shared mutable generator, because advancing one branch would shift the draws the
+other observes. Pairs carry a stable pair identifier so they survive compaction;
+no tensor is written across fork identifiers, and batch position, padding and
+termination masks never influence RNG indexing.
+
+Forks are executed as a batched forced-branch dimension sized in units of the
+registered 16-environment width, not one pair at a time. Serial per-opportunity
+execution is rejected: it is roughly fifteen times slower and is the named
+serial-evaluation anti-pattern.
+
+Acceptance requires that batched and sequential execution agree exactly on
+discrete membership, event and primitive actions, on terminal outcomes and
+utilities, and on RNG states after continuation, with continuous values within
+`1e-7`, and that the natural-action branch reproduces the originally collected
+continuation exactly. Failure of either equality invalidates the batched engine.
+
+`registered_contract()` gains the `A_KEEP` and `A_RENEW` gate thresholds and
+their point floors when this stage lands. That changes the contract dictionary,
+and `load_checkpoint` rejects on contract inequality, so every checkpoint
+written before this stage becomes unloadable. Formal training must therefore be
+launched only after this stage is accepted and the contract is final.
+
 Apply exactly this first-match result priority:
 
 1. `INVALID_OPERATIONAL` for any probability, replay, no-op, lifecycle, RNG or
