@@ -346,6 +346,12 @@ Implementation is staged. Stage 1 is retention only. Stage 2 is the batched
 fork engine and its equivalence evidence. The result contract does not consume
 `A_KEEP`/`A_RENEW` until stage 2 is accepted.
 
+Candidate presence is determined by `event_kind != 0`, never by testing
+`candidate_u` against zero. Padded no-request positions hold zeros, and under
+deterministic evaluation `candidate_u = mu` may itself be exactly zero, so a
+value test would conflate a real candidate with padding. No separate presence
+mask is added because the kind field already carries it.
+
 Apply exactly this first-match result priority:
 
 1. `INVALID_OPERATIONAL` for any probability, replay, no-op, lifecycle, RNG or

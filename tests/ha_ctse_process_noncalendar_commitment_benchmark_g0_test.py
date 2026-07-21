@@ -13,8 +13,10 @@ import torch.nn.functional as F
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
     KEEP,
+    MARK_DIM,
     RENEW,
     RNG_NAMES,
+    _normal_parameters,
     action_distribution_tv,
     authoritative_seed_map,
     base_primitive_logits,
@@ -518,6 +520,142 @@ def test_semantic_replay_corruption_negatives(
             arms["DUM"], replace(trajectory, event_kind=changed_kind),
             device=cuda_device,
         )
+
+
+def test_candidate_retention_faithful_and_recovers_discarded_keep(
+    cuda_device: torch.device,
+) -> None:
+    """Stage-1 retention (audit-only `candidate_u`/`candidate_z`): on
+    CREATE/RENEW rows (`event_mark_mask` true) the retained candidate must
+    be bit-identical to what was actually used to produce `event_u` /
+    `event_new_z` -- proving no extra draw and no value drift. On natural
+    KEEP rows the existing masking rule must be untouched (`event_u` still
+    zero) while the retained candidate recovers the discarded pre-mask
+    value. Detachment is checked so the audit fields can never reach a
+    loss/gradient/optimizer step. Uses a real 16-environment collection,
+    not a hand-built stub."""
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+    )
+
+    # Detachment: audit-only fields never carry a grad_fn.
+    assert trajectory.candidate_u.requires_grad is False
+    assert trajectory.candidate_z.requires_grad is False
+    assert trajectory.candidate_u.grad_fn is None
+    assert trajectory.candidate_z.grad_fn is None
+
+    mark_mask = trajectory.event_mark_mask
+    assert bool(mark_mask.any())
+    assert torch.equal(
+        trajectory.candidate_u[mark_mask], trajectory.event_u[mark_mask]
+    )
+    assert torch.equal(
+        trajectory.candidate_z[mark_mask], trajectory.event_new_z[mark_mask]
+    )
+
+    keep_rows = trajectory.event_kind.eq(KEEP)
+    assert bool(keep_rows.any())
+    assert torch.equal(
+        trajectory.event_u[keep_rows],
+        torch.zeros_like(trajectory.event_u[keep_rows]),
+    )
+    candidate_u_on_keep = trajectory.candidate_u[keep_rows]
+    assert bool(torch.isfinite(candidate_u_on_keep).all())
+    assert bool((candidate_u_on_keep != 0.0).any())
+    assert torch.equal(
+        trajectory.candidate_z[keep_rows], torch.tanh(candidate_u_on_keep)
+    )
+
+    # Padded (no-request) positions keep zeros, consistent with event_u.
+    no_request_rows = trajectory.event_kind.eq(0)
+    assert bool(no_request_rows.any())
+    assert torch.equal(
+        trajectory.candidate_u[no_request_rows],
+        torch.zeros_like(trajectory.candidate_u[no_request_rows]),
+    )
+    assert torch.equal(
+        trajectory.candidate_z[no_request_rows],
+        torch.zeros_like(trajectory.candidate_z[no_request_rows]),
+    )
+
+
+def test_candidate_retention_deterministic_matches_mu(
+    cuda_device: torch.device,
+) -> None:
+    """With `deterministic=True` the registered mark rule sets `u = mu`
+    for every request. `candidate_u`/`candidate_z` must retain exactly
+    that value; recomputed here independently from the stored
+    `event_inputs` and the arm's own `mark_head`, for every request row
+    (CREATE/KEEP/RENEW alike, not only the categorical-masked ones)."""
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16)),
+        deterministic=True,
+    )
+    event_mask = trajectory.event_kind.ne(0)
+    assert bool(event_mask.any())
+    inputs = trajectory.event_inputs[event_mask]
+    with torch.no_grad():
+        mu, _sigma = _normal_parameters(arm.mark_head(inputs))
+    candidate_u = trajectory.candidate_u[event_mask]
+    candidate_z = trajectory.candidate_z[event_mask]
+    assert torch.allclose(candidate_u, mu, atol=1e-6, rtol=1e-5)
+    assert torch.allclose(candidate_z, torch.tanh(mu), atol=1e-6, rtol=1e-5)
+
+
+def test_candidate_retention_preserves_mark_rng_stream_position(
+    cuda_device: torch.device,
+) -> None:
+    """No new RNG draw anywhere: retaining the discarded candidate must not
+    perturb the owned `mark` stream. Two identically seeded collections
+    stay byte-identical on primitive actions, event categorical actions,
+    `old_log_probs` and `event_old_joint_logp`, and their owned RNG states
+    agree afterward -- but that alone only proves the *modified* code is
+    self-consistent across two runs, not that its draw count matches the
+    pre-change behavior (an added-but-deterministic draw would still pass
+    it). The stronger, independent check below reconstructs the expected
+    `mark`-stream consumption directly from the request count recorded in
+    the collected trajectory (one MARK_DIM draw per request, regardless of
+    derived masking -- unchanged by this edit) against a freshly seeded
+    reference generator, and confirms the owned RNG lands in exactly that
+    position: proof the stream position is unchanged, not merely
+    reproducible."""
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state_left = make_training_state("EHC", 0)
+    state_right = make_training_state("EHC", 0)
+    left = collect_trajectory(
+        arm, state_left, device=cuda_device, episode_ids=tuple(range(16))
+    )
+    right = collect_trajectory(
+        arm, state_right, device=cuda_device, episode_ids=tuple(range(16))
+    )
+    for name in (
+        "actions", "event_categorical_actions", "old_log_probs",
+        "event_old_joint_logp",
+    ):
+        assert torch.equal(getattr(left, name), getattr(right, name))
+    for name in RNG_NAMES:
+        assert (
+            state_left.rngs[name].bit_generator.state
+            == state_right.rngs[name].bit_generator.state
+        )
+
+    total_requests = int(left.event_kind.ne(0).sum())
+    assert total_requests > 0
+    reference = np.random.default_rng(state_left.seed_map["mark"])
+    reference.standard_normal((total_requests, MARK_DIM))
+    assert (
+        reference.bit_generator.state == state_left.rngs["mark"].bit_generator.state
+    )
 
 
 def test_checkpoint_strict_continuation_and_cuda_smoke(

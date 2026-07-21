@@ -133,6 +133,8 @@ class EventTrajectory:
     event_u: torch.Tensor
     event_z_pre: torch.Tensor
     event_new_z: torch.Tensor
+    candidate_u: torch.Tensor
+    candidate_z: torch.Tensor
     event_cat_mask: torch.Tensor
     event_mark_mask: torch.Tensor
     event_old_cat_logp: torch.Tensor
@@ -378,7 +380,8 @@ def collect_trajectory(
     names = (
         "observations", "active", "orders", "actions", "logp", "values", "rewards",
         "terminal", "h_before", "h_after", "prefix", "z", "kind", "event_input",
-        "event_action", "event_u", "event_z_pre", "event_new_z", "cat_mask",
+        "event_action", "event_u", "event_z_pre", "event_new_z", "candidate_u",
+        "candidate_z", "cat_mask",
         "mark_mask", "old_cat", "old_mark", "old_joint", "epoch", "segment", "q",
     )
     rows: dict[str, list[torch.Tensor]] = {name: [] for name in names}
@@ -431,6 +434,8 @@ def collect_trajectory(
             event_u = torch.zeros((env_count, MAX_LIFECYCLES, MARK_DIM), device=device)
             event_z_pre = torch.zeros_like(event_u)
             event_new_z = torch.zeros_like(event_u)
+            candidate_u = torch.zeros_like(event_u)
+            candidate_z = torch.zeros_like(event_u)
             cat_mask = torch.zeros((env_count, MAX_LIFECYCLES), dtype=torch.bool, device=device)
             mark_mask = torch.zeros_like(cat_mask)
             old_cat = torch.zeros((env_count, MAX_LIFECYCLES), device=device)
@@ -504,8 +509,9 @@ def collect_trajectory(
                 component_logp = torch.where(
                     derived_mark_mask.unsqueeze(-1), component_logp, 0.0
                 )
+                candidate_tanh_u = torch.tanh(u).detach()
                 packed_new_z = torch.where(
-                    derived_mark_mask.unsqueeze(-1), torch.tanh(u).detach(), packed_z_pre
+                    derived_mark_mask.unsqueeze(-1), candidate_tanh_u, packed_z_pre
                 )
                 env_indices = torch.as_tensor([v[0] for v in requests], dtype=torch.long, device=device)
                 key_indices = torch.as_tensor([v[1] for v in requests], dtype=torch.long, device=device)
@@ -518,6 +524,8 @@ def collect_trajectory(
                 event_u[env_indices, key_indices] = torch.where(
                     derived_mark_mask.unsqueeze(-1), u.detach(), torch.zeros_like(u)
                 )
+                candidate_u[env_indices, key_indices] = u.detach()
+                candidate_z[env_indices, key_indices] = candidate_tanh_u
                 event_z_pre[env_indices, key_indices] = packed_z_pre
                 event_new_z[env_indices, key_indices] = packed_new_z
                 cat_mask[env_indices, key_indices] = derived_cat_mask
@@ -620,6 +628,8 @@ def collect_trajectory(
                 "event_u": event_u,
                 "event_z_pre": event_z_pre,
                 "event_new_z": event_new_z,
+                "candidate_u": candidate_u,
+                "candidate_z": candidate_z,
                 "cat_mask": cat_mask,
                 "mark_mask": mark_mask,
                 "old_cat": old_cat,
@@ -676,6 +686,8 @@ def collect_trajectory(
         event_u=stacked["event_u"],
         event_z_pre=stacked["event_z_pre"],
         event_new_z=stacked["event_new_z"],
+        candidate_u=stacked["candidate_u"],
+        candidate_z=stacked["candidate_z"],
         event_cat_mask=stacked["cat_mask"],
         event_mark_mask=stacked["mark_mask"],
         event_old_cat_logp=stacked["old_cat"],
@@ -1069,7 +1081,8 @@ def _pack_trajectory_once(trajectory: EventTrajectory, device: torch.device) -> 
         "prefix_counts", "primitive_z", "event_kind", "event_inputs",
         "event_categorical_actions", "event_u", "event_new_z", "event_cat_mask",
         "event_mark_mask", "event_old_cat_logp", "event_old_mark_component_logp",
-        "event_old_joint_logp", "event_z_pre", "membership_epoch", "segment_id", "q_before",
+        "event_old_joint_logp", "event_z_pre", "candidate_u", "candidate_z",
+        "membership_epoch", "segment_id", "q_before",
         "bootstrap_values",
     )
     return replace(
