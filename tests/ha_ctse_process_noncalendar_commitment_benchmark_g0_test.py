@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import replace
+from typing import Any
 import hashlib
 import json
 import random
@@ -11,20 +12,28 @@ import pytest
 import torch
 import torch.nn.functional as F
 
+from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
+    FORK_STREAM_NAMES,
     KEEP,
     MARK_DIM,
     OPPORTUNITY_SUPPORT,
     RENEW,
     RNG_NAMES,
+    _ForkGenerator,
+    _ForkStream,
+    _ForkStreamView,
+    _nested_equal,
     _normal_parameters,
+    _rng_states,
     action_distribution_tv,
     authoritative_seed_map,
     base_primitive_logits,
     collect_trajectory,
     compare_continuations,
     factor_counts,
+    fork_single_opportunity,
     initialize_arms,
     load_checkpoint,
     make_training_state,
@@ -37,7 +46,7 @@ from ha_ctse_process.event_held_commitment_link import (
     save_checkpoint,
     validate_replay,
 )
-from ha_ctse_process.dynamic_roster_testbed import MAX_LIFECYCLES
+from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
     EVENT_SEED,
@@ -54,6 +63,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     TRAIN_TASK_SEED,
     NoncalendarTrackingEnv,
     make_noncalendar_ledger,
+    make_rng,
     paired_ledgers_equal_except_targets,
     registered_contract,
     select_result_branch,
@@ -652,6 +662,501 @@ def test_candidate_retention_deterministic_matches_mu(
     candidate_z = trajectory.candidate_z[event_mask]
     assert torch.allclose(candidate_u, mu, atol=1e-6, rtol=1e-5)
     assert torch.allclose(candidate_z, torch.tanh(mu), atol=1e-6, rtol=1e-5)
+
+
+def _fork_boundary_differences(
+    left: dict, right: dict
+) -> tuple[list[str], dict[int, list[str]]]:
+    """Field names that differ between the two branch states at the fork."""
+
+    assert set(left) == set(right)
+    assert set(left["lifecycles"]) == set(right["lifecycles"])
+    fields = sorted(
+        name for name in left
+        if name != "lifecycles" and not _nested_equal(left[name], right[name])
+    )
+    lifecycle_fields = {
+        key: sorted(
+            name for name in left["lifecycles"][key]
+            if not _nested_equal(
+                left["lifecycles"][key][name], right["lifecycles"][key][name]
+            )
+        )
+        for key in left["lifecycles"]
+    }
+    return fields, {key: value for key, value in lifecycle_fields.items() if value}
+
+
+def test_fork_single_opportunity_reproduces_the_natural_branch(
+    cuda_device: torch.device,
+) -> None:
+    """Counterfactual KEEP/RENEW fork of one held-out opportunity.
+
+    The headline property is state-reconstruction correctness: the branch
+    matching the naturally taken action must reproduce the *original*
+    continuation exactly -- not merely a close terminal utility, but the
+    identical `TrackingOutcome` (utility, tracking/completion numerators
+    and denominators, roster sizes and the full reward trace), i.e. the
+    same environment terminal state the collected trajectory recorded for
+    that episode. Nothing weaker distinguishes a correct reconstruction
+    from one that merely lands nearby.
+
+    The same fork is used to check the four supporting properties: the
+    pair consumes identical randomness (the same realized variates, not
+    merely the same generator objects), the two branch states differ only
+    by the commitment mark `z`, neither branch is truncated (this
+    environment pays zero reward until the terminal step, so a truncated
+    branch would report zero utility), and the caller's owned and global
+    RNG state is untouched.
+
+    The exactness claim is enforced inside the engine on every fork, over
+    the whole reconstructed window at the registered collection width; this
+    test additionally reads back those engine-side error diagnostics.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0, profile="held_out")
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16)),
+        deterministic=True, profile="held_out",
+    )
+    kinds = trajectory.event_kind.detach().cpu()
+    eligible = [
+        tuple(int(v) for v in row)
+        for row in torch.nonzero(
+            kinds.eq(KEEP) | kinds.eq(RENEW), as_tuple=False
+        ).tolist()
+        if int(row[0]) >= 1
+    ]
+    natural_keep = [row for row in eligible if int(kinds[row]) == KEEP]
+    natural_renew = [row for row in eligible if int(kinds[row]) == RENEW]
+    assert natural_keep and natural_renew
+
+    owned_before = deepcopy(_rng_states(state))
+    global_before = runtime_rng_snapshot()
+
+    checked: list[tuple[int, int, int]] = []
+    discriminating = 0
+    # One naturally-KEEP and one naturally-RENEW coordinate, so the
+    # reproduction claim is not carried by a single branch label. At least
+    # one of them must be *discriminating* (the two branches reach
+    # different terminal utilities); otherwise a fork that silently ignored
+    # `candidate_z` would reproduce the natural branch for free.
+    for coordinates in (natural_keep[:1], natural_renew[:4]):
+        for step, env_index, key in coordinates:
+            diagnostics: dict = {}
+            result = fork_single_opportunity(
+                arm, trajectory, env_index=env_index, time=step, key=key,
+                device=cuda_device, state=state, diagnostics=diagnostics,
+            )
+            checked.append((step, env_index, key))
+
+            expected = "KEEP" if int(kinds[step, env_index, key]) == KEEP else "RENEW"
+            assert result["natural_action"] == expected
+            assert set(result) == {"keep_utility", "renew_utility", "natural_action"}
+
+            # Natural-branch reproduction: exact, on the whole outcome.
+            natural_outcome = trajectory.outcomes[env_index]
+            branch_outcome = diagnostics["outcomes"][result["natural_action"]]
+            assert branch_outcome == natural_outcome, (step, env_index, key)
+            assert result[f"{result['natural_action'].lower()}_utility"] == float(
+                natural_outcome.utility
+            )
+
+            # No truncation: both branches run to the terminal step.
+            assert diagnostics["branch_cutoff"] == {"KEEP": False, "RENEW": False}
+            assert diagnostics["branch_terminal"] == {"KEEP": True, "RENEW": True}
+            assert diagnostics["branch_steps"] == {
+                "KEEP": HORIZON - step, "RENEW": HORIZON - step,
+            }
+
+            # Pair randomness identity: same draw counts on every stream and
+            # -- the falsifiable part -- the same realized variates actually
+            # consumed by the two branches. Comparing the two views' shared
+            # generator objects instead would assert nothing.
+            positions = diagnostics["stream_positions"]
+            assert set(positions["KEEP"]) == set(FORK_STREAM_NAMES)
+            assert positions["KEEP"] == positions["RENEW"]
+            assert diagnostics["stream_calls"]["KEEP"] == diagnostics["stream_calls"]["RENEW"]
+            assert _nested_equal(
+                diagnostics["stream_values"]["KEEP"],
+                diagnostics["stream_values"]["RENEW"],
+            )
+            assert positions["KEEP"]["opportunity"] > 0
+            assert len(diagnostics["stream_values"]["KEEP"]["opportunity"]) > 0
+
+            # Engine-side natural-branch guard: the reconstruction is exact
+            # on every recorded discrete field of the whole continuation,
+            # not only on the terminal outcome.
+            natural_errors = diagnostics["natural_branch_errors"]
+            assert natural_errors["outcome_mismatch"] == 0.0
+            assert natural_errors["discrete_mismatch"] == 0.0, natural_errors
+            assert diagnostics["prefix_errors"]["discrete_mismatch"] == 0.0
+
+            # Bitwise, not within tolerance. Reconstructing at the collected
+            # width instead of at width 1 is justified *only* by removing the
+            # float32 reduction-order drift class rather than bounding it, so
+            # the claim is pinned as exact equality on both windows. A
+            # width-1-grade residual is order 1e-6 and would satisfy any
+            # tolerance-shaped assertion while silently reintroducing the
+            # drift that can flip a primitive argmax.
+            assert natural_errors["continuous"] == 0.0, natural_errors
+            assert diagnostics["prefix_errors"]["continuous"] == 0.0, (
+                diagnostics["prefix_errors"]
+            )
+
+            # `segments` is part of the collected continuation and
+            # `compare_continuations` compares it order sensitively, so the
+            # natural branch must reproduce the whole per-environment
+            # sequence -- compared here directly against the record rather
+            # than by reading back the engine's own verdict. It is also the
+            # only place a `SegmentRecord`'s own fields are checked: the
+            # focal cell of the per-step `membership_epoch` tensor is the
+            # excluded coordinate, so a RENEW record written with a wrong
+            # epoch reaches no tensor comparison at all.
+            branch_segments = diagnostics["natural_branch_segments"]
+            assert branch_segments == trajectory.segments, (step, env_index, key)
+            assert branch_segments[env_index] == trajectory.segments[env_index]
+            focal_renewals = [
+                record for record in branch_segments[env_index]
+                if record.key == key and record.close_reason == "RENEW"
+            ]
+            if result["natural_action"] == "RENEW":
+                assert focal_renewals, (step, env_index, key)
+            assert natural_errors["segment_mismatch"] == 0.0, natural_errors
+            assert diagnostics["prefix_errors"]["segment_mismatch"] == 0.0
+
+            # Treatment isolation: only the focal key's `z` differs.
+            fields, lifecycle_fields = _fork_boundary_differences(
+                diagnostics["boundaries"]["KEEP"], diagnostics["boundaries"]["RENEW"]
+            )
+            assert fields == [], (step, env_index, key, fields)
+            assert lifecycle_fields == {key: ["z"]}, (step, env_index, key)
+
+            if result["keep_utility"] != result["renew_utility"]:
+                discriminating += 1
+                break
+
+    assert len(checked) >= 2
+    assert discriminating >= 1
+
+    # Caller RNG untouched: neither the collector state's owned streams nor
+    # the global Python/NumPy/CPU/CUDA snapshot moved.
+    assert _nested_equal(owned_before, _rng_states(state))
+    assert runtime_rng_equal(global_before, runtime_rng_snapshot())
+
+
+def _held_out_fork_setup(
+    device: torch.device,
+) -> tuple[Any, Any, Any, tuple, list[tuple[int, int, int]]]:
+    """One deterministic held-out collection plus its eligible fork rows."""
+
+    arms, _, _ = initialize_arms(device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0, profile="held_out")
+    trajectory = collect_trajectory(
+        arm, state, device=device, episode_ids=tuple(range(16)),
+        deterministic=True, profile="held_out",
+    )
+    ledgers = tuple(
+        make_noncalendar_ledger(
+            value, profile="held_out",
+            task_seed=state.seed_map["ledger"], order_seed=state.seed_map["order"],
+        )
+        for value in trajectory.ledger_ids
+    )
+    kinds = trajectory.event_kind.detach().cpu()
+    eligible = [
+        tuple(int(v) for v in row)
+        for row in torch.nonzero(
+            kinds.eq(KEEP) | kinds.eq(RENEW), as_tuple=False
+        ).tolist()
+        if int(row[0]) >= 1
+    ]
+    return arm, state, trajectory, ledgers, eligible
+
+
+def test_fork_reproduces_hazardous_lifecycle_coordinates(
+    cuda_device: torch.device,
+) -> None:
+    """Fork where reconstruction is structurally hardest, not only at `t=1`.
+
+    The headline fork test takes the earliest eligible coordinates, so its
+    branch tails start at the very beginning of the episode and never cross
+    a membership transition in a way the *branch* has to carry. Four
+    structurally different coordinates are pinned here:
+
+    * a late step, where almost the whole episode is prefix reconstruction
+      rather than branch tail, and where the branch is only a few steps
+      long -- the regime in which a per-step drift residual is smallest and
+      an exactness claim is easiest to lose unnoticed;
+    * the REJOIN step itself, where a lifecycle's membership epoch advances
+      and a second lifecycle genuinely JOINs in the same physical step the
+      forced event is recorded against;
+    * a coordinate whose focal lifecycle temporarily LEAVEs and REJOINs
+      *inside* the branch tail, so the branch must carry an absent
+      lifecycle across the gap and resume its spell accounting after it;
+    * a coordinate whose focal lifecycle terminally LEAVEs inside the
+      branch tail, so the branch must emit the censored TERMINAL_LEAVE
+      close at the same sequence position the collector did.
+
+    All four are expected to reconstruct exactly; this is regression
+    protection for the reconstruction and segment-ordering contracts, not a
+    discovery test.
+    """
+
+    arm, state, trajectory, ledgers, eligible = _held_out_fork_setup(cuda_device)
+    temporary_leave_time = int(ledgers[0].temporary_leave_time)
+    rejoin_time = int(ledgers[0].rejoin_time)
+    terminal_leave_time = int(ledgers[0].terminal_leave_time)
+    assert 0 < temporary_leave_time < rejoin_time < terminal_leave_time < HORIZON
+
+    def first(predicate) -> tuple[int, int, int]:
+        return next(row for row in eligible if predicate(row))
+
+    coordinates = {
+        "late_step": first(lambda row: row[0] >= HORIZON - 5),
+        "rejoin_step": first(lambda row: row[0] == rejoin_time),
+        "tail_spans_rejoin": first(
+            lambda row: row[0] < temporary_leave_time
+            and row[2] == int(ledgers[row[1]].temporary_key)
+        ),
+        "tail_spans_terminal_leave": first(
+            lambda row: row[0] < terminal_leave_time
+            and row[2] == int(ledgers[row[1]].terminal_key)
+        ),
+    }
+    assert len(set(coordinates.values())) == 4
+
+    # The membership claims above are properties of the record, not of the
+    # selection comment: assert them so the coverage cannot go vacuous if
+    # the ledger contract moves.
+    active = trajectory.active_mask.detach().cpu()
+    step, env_index, key = coordinates["tail_spans_rejoin"]
+    assert bool(active[step, env_index, key])
+    assert not bool(active[rejoin_time - 1, env_index, key])
+    assert bool(active[rejoin_time, env_index, key])
+    step, env_index, key = coordinates["tail_spans_terminal_leave"]
+    assert bool(active[terminal_leave_time - 1, env_index, key])
+    assert not bool(active[terminal_leave_time, env_index, key])
+
+    for label, (step, env_index, key) in coordinates.items():
+        diagnostics: dict = {}
+        result = fork_single_opportunity(
+            arm, trajectory, env_index=env_index, time=step, key=key,
+            device=cuda_device, state=state, diagnostics=diagnostics,
+        )
+        context = (label, step, env_index, key)
+        natural_errors = diagnostics["natural_branch_errors"]
+        prefix_errors = diagnostics["prefix_errors"]
+        assert natural_errors["outcome_mismatch"] == 0.0, (context, natural_errors)
+        assert natural_errors["discrete_mismatch"] == 0.0, (context, natural_errors)
+        assert natural_errors["continuous"] == 0.0, (context, natural_errors)
+        assert natural_errors["segment_mismatch"] == 0.0, (context, natural_errors)
+        assert prefix_errors["discrete_mismatch"] == 0.0, (context, prefix_errors)
+        assert prefix_errors["continuous"] == 0.0, (context, prefix_errors)
+        assert prefix_errors["segment_mismatch"] == 0.0, (context, prefix_errors)
+        assert diagnostics["natural_branch_segments"] == trajectory.segments, context
+        assert (
+            diagnostics["outcomes"][result["natural_action"]]
+            == trajectory.outcomes[env_index]
+        ), context
+        assert diagnostics["branch_steps"] == {
+            "KEEP": HORIZON - step, "RENEW": HORIZON - step,
+        }, context
+        assert diagnostics["coordinate"] == {
+            "time": step, "env_index": env_index, "key": key,
+        }
+
+
+def test_fork_rejects_a_corrupted_branch(cuda_device: torch.device, monkeypatch) -> None:
+    """The natural-branch reproduction guard must actually be able to fail.
+
+    Every other fork test asserts that a correct branch is accepted, which
+    a guard that never fires would satisfy for free. Three corruptions of
+    the forced event are injected here, each on the same coordinate that
+    forks cleanly as the control:
+
+    * the assigned opportunity clock, which desynchronizes the focal
+      lifecycle's next request;
+    * the installed commitment mark, which changes the primitive logit bias
+      from the forked step onward;
+    * the recorded membership epoch of the forced RENEW's `SegmentRecord`,
+      which reaches *no* per-step tensor -- the focal cell of the per-step
+      `membership_epoch` grid is the excluded coordinate -- and is
+      therefore visible only to the order-sensitive `segments` comparison.
+
+    The third case is asserted to be caught by `segments` alone, with the
+    continuous error still exactly zero, because that is the guard the
+    other two do not exercise.
+    """
+
+    arm, state, trajectory, _ledgers, eligible = _held_out_fork_setup(cuda_device)
+    kinds = trajectory.event_kind.detach().cpu()
+    step, env_index, key = next(
+        row for row in eligible
+        if row[0] >= HORIZON - 5 and int(kinds[row]) == RENEW
+    )
+
+    # Control: uncorrupted, the same coordinate is accepted.
+    control: dict = {}
+    fork_single_opportunity(
+        arm, trajectory, env_index=env_index, time=step, key=key,
+        device=cuda_device, state=state, diagnostics=control,
+    )
+    assert control["natural_action"] == "RENEW"
+    assert control["natural_branch_errors"]["segment_mismatch"] == 0.0
+
+    pristine = event_held_commitment_link._apply_fork_event
+
+    def corrupted(offsets):
+        def wrapper(cursor, **kwargs):
+            kwargs["assigned_q"] += offsets.get("assigned_q", 0)
+            kwargs["record_epoch"] += offsets.get("record_epoch", 0)
+            if "new_z" in offsets:
+                kwargs["new_z"] = kwargs["new_z"] + offsets["new_z"]
+            return pristine(cursor, **kwargs)
+
+        return wrapper
+
+    for offsets in ({"assigned_q": 4}, {"new_z": 0.5}):
+        monkeypatch.setattr(
+            event_held_commitment_link, "_apply_fork_event", corrupted(offsets)
+        )
+        stale: dict = {"stale_key": "from a previous fork"}
+        with pytest.raises(RuntimeError, match="fork natural branch continuation"):
+            fork_single_opportunity(
+                arm, trajectory, env_index=env_index, time=step, key=key,
+                device=cuda_device, state=state, diagnostics=stale,
+            )
+        # A raise must not leave the caller reading a previous fork's values.
+        assert "stale_key" not in stale
+        assert stale["coordinate"] == {
+            "time": step, "env_index": env_index, "key": key,
+        }
+        monkeypatch.undo()
+
+    monkeypatch.setattr(
+        event_held_commitment_link, "_apply_fork_event",
+        corrupted({"record_epoch": 7}),
+    )
+    with pytest.raises(RuntimeError) as excinfo:
+        fork_single_opportunity(
+            arm, trajectory, env_index=env_index, time=step, key=key,
+            device=cuda_device, state=state,
+        )
+    message = str(excinfo.value)
+    assert "fork natural branch continuation mismatch" in message
+    # Caught by `segments` and by nothing else: every per-step tensor still
+    # reconstructs bitwise exactly under this corruption.
+    assert "'mismatched_fields': ('segments',)" in message, message
+    assert "'continuous': 0.0" in message, message
+    assert f"(time={step}, env_index={env_index}, key={key})" in message, message
+
+
+def test_fork_rejects_a_collector_state_from_another_profile(
+    cuda_device: torch.device,
+) -> None:
+    """The fork must not silently rebuild a different task ledger.
+
+    An `EventTrajectory` does not record the profile it was collected
+    under, and the fork rebuilds every ledger from the caller's
+    `state.profile`/`state.seed_map`. Handing it the wrong profile yields a
+    different membership schedule and frontier priority order, i.e. a
+    reconstruction of a different episode. That must be named at the fork
+    boundary, not discovered as an opaque reconstruction mismatch after a
+    full rollout, and not left to chance.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0, profile="held_out")
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16)),
+        deterministic=True, profile="held_out",
+    )
+    kinds = trajectory.event_kind.detach().cpu()
+    step, env_index, key = next(
+        tuple(int(v) for v in row)
+        for row in torch.nonzero(
+            kinds.eq(KEEP) | kinds.eq(RENEW), as_tuple=False
+        ).tolist()
+        if int(row[0]) >= 1
+    )
+
+    wrong_profile = make_training_state("EHC", 0, profile="train")
+    with pytest.raises(ValueError, match="disagrees with the collected trajectory"):
+        fork_single_opportunity(
+            arm, trajectory, env_index=env_index, time=step, key=key,
+            device=cuda_device, state=wrong_profile,
+        )
+
+    tampered = make_training_state("EHC", 0, profile="held_out")
+    tampered.seed_map = dict(tampered.seed_map)
+    tampered.seed_map["mark"] += 1
+    with pytest.raises(ValueError, match="seed map is not the authoritative map"):
+        fork_single_opportunity(
+            arm, trajectory, env_index=env_index, time=step, key=key,
+            device=cuda_device, state=tampered,
+        )
+
+    wrong_arm = make_training_state("DUM", 0, profile="held_out")
+    with pytest.raises(ValueError, match="fork state owns arm"):
+        fork_single_opportunity(
+            arm, trajectory, env_index=env_index, time=step, key=key,
+            device=cuda_device, state=wrong_arm,
+        )
+
+
+def test_fork_generator_honors_the_requested_float_dtype() -> None:
+    """The fork RNG facade must draw in the precision it is asked for.
+
+    NumPy's float32 path consumes a different number of bits per variate
+    than its float64 path, so drawing in float64 and casting produces
+    *different values*, not a rounded copy of the same ones. The collector
+    draws its primitive uniform table as float32, so a facade that silently
+    drew float64 would not reproduce that stream once stochastic forking
+    exists. One fork stream is materialized exactly once and replayed, so a
+    second consumer asking for a different precision is a contradiction and
+    must raise rather than hand back the other precision's variates.
+    """
+
+    seed, count = 12345, 24
+
+    for dtype in (np.float32, np.float64):
+        view = _ForkStreamView(
+            {"primitive": _ForkStream("primitive", make_rng(seed, 7))}
+        )
+        drawn = _ForkGenerator(view, "primitive").random((3, 8), dtype=dtype)
+        reference = make_rng(seed, 7).random(count, dtype=dtype).reshape(3, 8)
+        assert drawn.dtype == np.dtype(dtype)
+        assert np.array_equal(drawn, reference)
+
+    # The two precisions really are different variates, so the equality
+    # above is not something a float64-and-cast implementation could pass.
+    narrow = _ForkGenerator(
+        _ForkStreamView({"primitive": _ForkStream("primitive", make_rng(seed, 7))}),
+        "primitive",
+    ).random(count, dtype=np.float32)
+    wide = make_rng(seed, 7).random(count)
+    assert float(np.max(np.abs(narrow.astype(np.float64) - wide))) > 1e-3
+
+    normal = _ForkGenerator(
+        _ForkStreamView({"mark": _ForkStream("mark", make_rng(seed, 9))}), "mark"
+    ).standard_normal((2, 4), dtype=np.float32)
+    assert np.array_equal(
+        normal, make_rng(seed, 9).standard_normal(8, dtype=np.float32).reshape(2, 4)
+    )
+
+    shared = _ForkStream("primitive", make_rng(seed, 7))
+    _ForkGenerator(_ForkStreamView({"primitive": shared}), "primitive").random(
+        4, dtype=np.float32
+    )
+    with pytest.raises(RuntimeError, match="dtype changed"):
+        _ForkGenerator(_ForkStreamView({"primitive": shared}), "primitive").random(
+            4, dtype=np.float64
+        )
 
 
 def test_candidate_retention_preserves_mark_rng_stream_position(
