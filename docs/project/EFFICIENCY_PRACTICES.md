@@ -76,12 +76,32 @@ above.
 
 ### Fork engine
 
-One counterfactual fork pair, sequential, single environment: 1.06 s mean,
-linear in `160 - fork_step`. The registered 32+32 quota is 320 pairs, about
-5.65 minutes. Full per-opportunity forking would be roughly 10,300 pairs per
-replicate, about 3 hours per replicate.
+Reconstruction runs at the collected 16-environment width, which makes it
+bitwise exact. Cost is linear in the reconstructed step count, which is the
+prefix plus two tails:
+
+```
+per fork  =  0.184 s  +  12.86 ms x (160 - fork_step)
+```
+
+Measured 2.178 s at `t=4` down to 1.227 s at `t=76`. The mean eligible fork step
+is 43.3 over 645 opportunities, giving about **1.68 s per fork** and **9.0
+minutes for the registered 320-pair quota** — roughly 18 minutes if both DUM and
+EHC are forked. Reconstructing at width 1 was faster per fork but not bitwise
+exact, and the difference reached 1.19e-6 on `event_old_joint_logp`.
 
 Environment clone via `snapshot_state` / `from_snapshot_state`: 288 microseconds.
+
+### Batch width is nearly free on this workload
+
+A full 80-step collection costs 1.126 s at width 16 against 0.597 s at width 1.
+**Sixteen times the environments costs 1.89x the wall clock.**
+
+This is the clearest single measurement of where the cost lives: the workload is
+bound by the number of sequential physical steps, not by the width of each one.
+Widening a batch is close to free; adding sequential steps is not. It also means
+reconstructing at the factual width costs far less than the 16x its shape
+suggests, which is why exactness was affordable.
 
 ## Refuted
 
