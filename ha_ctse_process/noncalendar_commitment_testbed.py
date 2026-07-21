@@ -66,13 +66,11 @@ CHECKPOINT_KIND = "event_held_commitment_link_g0"
 REGISTERED_CONTRACT = "EVENT_HELD_COMMITMENT_LINK_G0"
 ACCESS_FLOOR = 0.78
 GAIN_THRESHOLD = 0.10
-KEEP_THRESHOLD = 0.20
-RENEW_THRESHOLD = 0.10
-CV_THRESHOLD = 0.25
 LIFETIME_BIN_THRESHOLD = 0.10
 INTERVENTION_THRESHOLD = 0.10
 IDENTIFIABILITY_OPPORTUNITIES = 1_000
 IDENTIFIABILITY_LIFECYCLES = 250
+SUPPORT_FLOOR = 128
 GAMMA = 0.99
 GAE_LAMBDA = 0.95
 PPO_CLIP = 0.20
@@ -696,21 +694,35 @@ def select_result_branch(
     operational_valid: bool,
     non_create_opportunities: int,
     multi_opportunity_lifecycles: int,
+    eligible_keep_rows: int,
+    eligible_renew_rows: int,
     utility_ci: Mapping[str, tuple[float, float]],
     g_ci: tuple[float, float],
-    keep_ci: tuple[float, float],
-    renew_ci: tuple[float, float],
-    cv_ci: tuple[float, float],
-    lifetime_bin_cis: Sequence[tuple[float, float]],
+    k_bin_cis: Sequence[tuple[float, float]],
     intervention_ci: tuple[float, float],
 ) -> str:
-    """Apply the frozen eight-branch first-match precedence."""
+    """Apply the frozen eight-branch first-match precedence.
 
+    `P_KEEP`/`P_RENEW` gate nothing: usage rates were replaced by the
+    `eligible_keep_rows`/`eligible_renew_rows` support floors (precedence
+    position 2). Lifetime evidence is policy-determined `K`-bins
+    (`K==1`, `K==2`, `K>=3` over complete spells), not `CV(T)` or
+    physical-time bins, which mix policy timing with exogenous gap variance
+    and are reported only as descriptive diagnostics elsewhere.
+    """
+
+    if len(k_bin_cis) != 3:
+        raise ValueError(
+            "k_bin_cis must have exactly 3 entries (K==1, K==2, K>=3); "
+            f"got {len(k_bin_cis)}"
+        )
     if not operational_valid:
         return "INVALID_OPERATIONAL"
     if (
         non_create_opportunities < IDENTIFIABILITY_OPPORTUNITIES
         or multi_opportunity_lifecycles < IDENTIFIABILITY_LIFECYCLES
+        or eligible_keep_rows < SUPPORT_FLOOR
+        or eligible_renew_rows < SUPPORT_FLOOR
     ):
         return "BENCHMARK_NON_IDENTIFIABLE"
     maximum_ucb = max(interval[1] for interval in utility_ci.values())
@@ -720,19 +732,13 @@ def select_result_branch(
     if maximum_lcb < ACCESS_FLOOR:
         return "UNDERPOWERED_ACCESS"
     behavior_passes = bool(
-        keep_ci[0] > KEEP_THRESHOLD
-        and renew_ci[0] > RENEW_THRESHOLD
-        and cv_ci[0] > CV_THRESHOLD
-        and sum(ci[0] > LIFETIME_BIN_THRESHOLD for ci in lifetime_bin_cis) >= 2
+        sum(ci[0] > LIFETIME_BIN_THRESHOLD for ci in k_bin_cis) >= 2
         and intervention_ci[0] > INTERVENTION_THRESHOLD
     )
     if g_ci[0] > GAIN_THRESHOLD and behavior_passes:
         return "COMMITMENT_SUPPORTED"
     behavior_confidently_fails = bool(
-        keep_ci[1] <= KEEP_THRESHOLD
-        or renew_ci[1] <= RENEW_THRESHOLD
-        or cv_ci[1] <= CV_THRESHOLD
-        or sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in lifetime_bin_cis) < 2
+        sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in k_bin_cis) < 2
         or intervention_ci[1] <= INTERVENTION_THRESHOLD
     )
     if g_ci[0] > GAIN_THRESHOLD and behavior_confidently_fails:
@@ -789,14 +795,14 @@ def registered_contract() -> dict[str, Any]:
         "thresholds": {
             "access": ACCESS_FLOOR,
             "gain": GAIN_THRESHOLD,
-            "keep": KEEP_THRESHOLD,
-            "renew": RENEW_THRESHOLD,
-            "cv": CV_THRESHOLD,
-            "lifetime_bin": LIFETIME_BIN_THRESHOLD,
+            "support_floor": SUPPORT_FLOOR,
+            "k_bin": LIFETIME_BIN_THRESHOLD,
             "intervention": INTERVENTION_THRESHOLD,
             "identifiability_opportunities": IDENTIFIABILITY_OPPORTUNITIES,
             "identifiability_lifecycles": IDENTIFIABILITY_LIFECYCLES,
         },
+        "k_bins": ["K==1", "K==2", "K>=3"],
+        "intervention_metric": "primitive_action_total_variation",
         "optimization": {
             "gamma": GAMMA,
             "gae_lambda": GAE_LAMBDA,

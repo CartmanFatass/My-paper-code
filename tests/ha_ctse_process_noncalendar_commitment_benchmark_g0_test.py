@@ -2,24 +2,29 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import replace
+import json
 import random
 
 import numpy as np
 import pytest
 import torch
+import torch.nn.functional as F
 
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
     KEEP,
     RENEW,
     RNG_NAMES,
+    action_distribution_tv,
     authoritative_seed_map,
+    base_primitive_logits,
     collect_trajectory,
     compare_continuations,
     factor_counts,
     initialize_arms,
     load_checkpoint,
     make_training_state,
+    natural_and_permuted_action_tv,
     nested_state_maximum_difference,
     optimize_update,
     parameter_and_optimizer_counts,
@@ -34,8 +39,11 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     GAIN_THRESHOLD,
     HELD_OUT_EVAL_TASK_SEED,
     IID_EVAL_TASK_SEED,
+    INTERVENTION_THRESHOLD,
+    LIFETIME_BIN_THRESHOLD,
     MARK_SEED,
     OPPORTUNITY_SEED,
+    SUPPORT_FLOOR,
     TRAIN_ACTION_SEED,
     TRAIN_ORDER_SEED,
     TRAIN_TASK_SEED,
@@ -52,6 +60,8 @@ from scripts.run_noncalendar_commitment_benchmark_g0 import (
     FORMAL_AUTHORIZATION,
     TRAIN_MANIFEST_SCHEMA,
     _evaluation_state,
+    _json_ready,
+    _trajectory_episode_rows,
     run_smoke,
     validate_operational_records,
 )
@@ -196,6 +206,246 @@ def test_ledger_rejoin_epoch_due_event_and_partial_continuity(
             rejoin.primitive_z[0, 0, key],
             rejoin.event_new_z[0, 0, key],
         )
+
+
+def _reconstruct_key_spells(event_kind_row: list[int]) -> list[tuple[int, bool]]:
+    """Independently recompute (K, closed_by_renew) per spell from a raw
+    event-kind timeline for one lifecycle key, ignoring all physical-time
+    gaps (a temporary-absence gap is simply a run of zero entries and so
+    contributes zero opportunities to K by construction of this walk)."""
+
+    running: int | None = None
+    results: list[tuple[int, bool]] = []
+    for value in event_kind_row:
+        if value == CREATE:
+            assert running is None, "unexpected repeated CREATE for one key"
+            running = 0
+        elif value == KEEP:
+            assert running is not None, "KEEP without an open spell"
+            running += 1
+        elif value == RENEW:
+            assert running is not None, "RENEW without an open spell"
+            running += 1
+            results.append((running, True))
+            running = 0
+    if running is not None:
+        results.append((running, False))
+    return results
+
+
+def test_k_accounting_complete_censored_and_temporary_absence(
+    cuda_device: torch.device,
+) -> None:
+    arms, _, _ = initialize_arms(cuda_device)
+    state = make_training_state("EHC", 0)
+    episode_count = 8
+    trajectory = collect_trajectory(
+        arms["EHC"], state, device=cuda_device,
+        episode_ids=tuple(range(episode_count)),
+    )
+
+    found_two_keep_then_renew = False
+    for env_index in range(episode_count):
+        ledger = make_noncalendar_ledger(
+            trajectory.ledger_ids[env_index], profile=state.profile,
+            task_seed=state.seed_map["ledger"], order_seed=state.seed_map["order"],
+        )
+        temporary_key = ledger.temporary_key
+        leave_time = ledger.temporary_leave_time
+        rejoin_time = ledger.rejoin_time
+        # Temporary absence must contribute no opportunity: no event at all
+        # (CREATE/KEEP/RENEW) is recorded for the absent key while it is away.
+        absence_events = trajectory.event_kind[leave_time:rejoin_time, env_index, temporary_key]
+        assert bool((absence_events == 0).all())
+
+        for key in range(trajectory.event_kind.shape[-1]):
+            row = trajectory.event_kind[:, env_index, key].detach().cpu().tolist()
+            if all(value == 0 for value in row):
+                continue
+            reconstructed = _reconstruct_key_spells(row)
+            recorded = [
+                (record.opportunity_count, record.close_reason == "RENEW")
+                for record in trajectory.segments[env_index] if record.key == key
+            ]
+            assert reconstructed == recorded, (env_index, key)
+            # Exactly one spell per key is open at episode end, and it is
+            # always closed by a forced (censored) reason, never RENEW.
+            assert recorded[-1][1] is False
+            complete = [k for k, closed_by_renew in recorded if closed_by_renew]
+            censored = [k for k, closed_by_renew in recorded if not closed_by_renew]
+            assert len(complete) + len(censored) == len(recorded)
+            assert len(censored) >= 1
+            if any(k == 3 and closed for k, closed in reconstructed):
+                found_two_keep_then_renew = True
+
+    # A CREATE-opened spell closed by RENEW after exactly two KEEP decisions
+    # (KEEP, KEEP, RENEW) records K=3; confirm this exact scenario actually
+    # occurred and was recorded correctly above (not merely inferred).
+    assert found_two_keep_then_renew
+
+
+def test_trajectory_episode_rows_k_accounting_and_complete_spell_bins(
+    cuda_device: torch.device,
+) -> None:
+    """`_trajectory_episode_rows` and `aggregate_analysis` previously had no
+    test at all -- the same unreachability that let a `torch.flatnonzero`
+    call and an `env_index` indexing bug survive a freeze. This builds rows
+    on a real collected trajectory, JSON round-trips them (as the real
+    evaluate/analyze split does through disk), and checks the row/segment
+    accounting `aggregate_analysis` relies on."""
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+    )
+    rows = _trajectory_episode_rows(trajectory, arm, compute_intervention=True)
+    round_tripped = json.loads(json.dumps(_json_ready(rows)))
+
+    all_segments = [segment for row in round_tripped for segment in row["segments"]]
+    complete_segments = [segment for segment in all_segments if not segment["censored"]]
+    censored_segments = [segment for segment in all_segments if segment["censored"]]
+    assert complete_segments and censored_segments
+
+    # sum(K over ALL segments, censored included) == sum(non_create events).
+    assert sum(segment["opportunity_count"] for segment in all_segments) == sum(
+        row["non_create"] for row in round_tripped
+    )
+    # sum(row["renew"]) == number of complete (uncensored) segments. Each
+    # RENEW event closes exactly one uncensored segment.
+    assert sum(row["renew"] for row in round_tripped) == len(complete_segments)
+
+    # The three K-bin proportions over COMPLETE spells sum to exactly 1.0.
+    k_values = [segment["opportunity_count"] for segment in complete_segments]
+    assert k_values
+    predicates = (lambda k: k == 1, lambda k: k == 2, lambda k: k >= 3)
+    proportions = [
+        sum(predicate(value) for value in k_values) / len(k_values)
+        for predicate in predicates
+    ]
+    assert sum(proportions) == pytest.approx(1.0, abs=1e-12)
+
+    # K-bin proportions are computed over complete spells only, so a
+    # censored K=0 spell does not enter any bin. This trajectory is known
+    # (deterministically, given the fixed seeds) to contain at least one
+    # such spell; demonstrate that including it (the swapped-in-all-segments
+    # bug) breaks the sum-to-1 invariant just checked.
+    censored_zero_k = [
+        segment for segment in censored_segments if segment["opportunity_count"] == 0
+    ]
+    assert censored_zero_k
+    all_k_values = [segment["opportunity_count"] for segment in all_segments]
+    wrongly_included_sum = sum(
+        sum(predicate(value) for value in all_k_values) / len(all_k_values)
+        for predicate in predicates
+    )
+    assert wrongly_included_sum < 1.0 - 1e-9
+
+
+def test_action_distribution_tv_zero_under_constant_logit_shift(
+    cuda_device: torch.device,
+) -> None:
+    # This is the specific defect being fixed: the superseded
+    # ||W_z(z - z_perm)|| / sqrt(3) metric is positive for a residual
+    # proportional to (c, c, c), even though a softmax-common shift leaves
+    # the three-action distribution exactly unchanged. Assert the fixed
+    # I_TV metric is exactly (within float tolerance) zero in that case.
+    natural = torch.tensor([0.7, -1.3, 2.1], device=cuda_device)
+    for constant in (4.25, -9.0, 0.0):
+        perturbed = natural + constant
+        tv = action_distribution_tv(natural, perturbed)
+        assert float(tv.detach().cpu()) == pytest.approx(0.0, abs=1e-6)
+
+    # Batched form: a per-row constant shift must still cancel exactly.
+    batch_natural = torch.tensor(
+        [[0.1, 0.2, 0.3], [-2.0, 0.5, 1.5], [3.0, -3.0, 0.0]], device=cuda_device
+    )
+    shifts = torch.tensor([[1.0], [-3.5], [0.0]], device=cuda_device)
+    tv_batch = action_distribution_tv(batch_natural, batch_natural + shifts)
+    assert torch.allclose(tv_batch, torch.zeros_like(tv_batch), atol=1e-6)
+
+
+def test_action_distribution_tv_bounded_and_realized_from_trajectory(
+    cuda_device: torch.device,
+) -> None:
+    generator = torch.Generator(device=cuda_device).manual_seed(4471)
+    random_natural = 6.0 * torch.randn((256, 3), generator=generator, device=cuda_device)
+    random_perm = 6.0 * torch.randn((256, 3), generator=generator, device=cuda_device)
+    tv = action_distribution_tv(random_natural, random_perm)
+    assert bool((tv >= -1e-6).all())
+    assert bool((tv <= 1.0 + 1e-6).all())
+
+    arms, _, _ = initialize_arms(cuda_device)
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(
+        arms["EHC"], state, device=cuda_device, episode_ids=(0,)
+    )
+    values: list[float] = []
+    for time in range(trajectory.time_steps):
+        values.extend(
+            natural_and_permuted_action_tv(
+                arms["EHC"], trajectory, env_index=0, time=time, device=cuda_device
+            )
+        )
+    assert values, "expected at least one step with >=2 active lifecycles"
+    assert all(-1e-6 <= value <= 1.0 + 1e-6 for value in values)
+
+    # OR carries no W_z treatment at all: the intervention is vacuous.
+    or_state = make_training_state("OR", 0)
+    or_trajectory = collect_trajectory(
+        arms["OR"], or_state, device=cuda_device, episode_ids=(0,)
+    )
+    assert natural_and_permuted_action_tv(
+        arms["OR"], or_trajectory, env_index=0, time=0, device=cuda_device
+    ) == []
+
+
+def test_base_primitive_logits_reconstruction_matches_recorded_natural_log_probs(
+    cuda_device: torch.device,
+) -> None:
+    """Guards acceptance item 7b: I_TV must be computed from the same
+    held-fixed state as the natural action actually executed during
+    collection. `base_primitive_logits` hand-reimplements the autoregressive
+    loop of `DirectPrimitiveARPolicy.forward_step` from a different module;
+    nothing else asserts the two stay in lockstep. If a future edit to
+    `forward_step` silently repoints `base_primitive_logits` at a policy that
+    was never executed, this test catches it: for every active key-step,
+    `log_softmax(base_primitive_logits(...)[key] + arm.primitive_bias(z))`
+    at the recorded natural action must reproduce the recorded
+    `old_log_probs` exactly (up to float tolerance)."""
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(
+        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+    )
+    maximum_error = 0.0
+    checked_key_steps = 0
+    for env_index in range(len(trajectory.ledger_ids)):
+        for time in range(trajectory.time_steps):
+            active_row = trajectory.active_mask[time, env_index]
+            active_keys = torch.nonzero(active_row, as_tuple=True)[0].tolist()
+            if not active_keys:
+                continue
+            base_logits = base_primitive_logits(
+                arm, trajectory, env_index=env_index, time=time, device=cuda_device
+            )
+            for key in active_keys:
+                z = trajectory.primitive_z[time, env_index, key].to(cuda_device)
+                bias = arm.primitive_bias(z)
+                logits = base_logits[key] + bias
+                log_probability = F.log_softmax(logits, dim=-1)
+                action = int(trajectory.actions[time, env_index, key].item())
+                reconstructed = float(log_probability[action].detach().cpu())
+                stored = float(
+                    trajectory.old_log_probs[time, env_index, key].detach().cpu()
+                )
+                maximum_error = max(maximum_error, abs(reconstructed - stored))
+                checked_key_steps += 1
+    assert checked_key_steps > 0
+    assert maximum_error <= 1e-6
 
 
 def _corrupt_tensor(tensor: torch.Tensor, index: tuple[int, ...]) -> torch.Tensor:
@@ -494,14 +744,13 @@ def _branch_inputs() -> dict[str, object]:
         "operational_valid": True,
         "non_create_opportunities": 1000,
         "multi_opportunity_lifecycles": 250,
+        "eligible_keep_rows": SUPPORT_FLOOR,
+        "eligible_renew_rows": SUPPORT_FLOOR,
         "utility_ci": {
             "OR": (0.79, 0.81), "DUM": (0.79, 0.81), "EHC": (0.80, 0.84)
         },
         "g_ci": (0.11, 0.15),
-        "keep_ci": (0.21, 0.30),
-        "renew_ci": (0.11, 0.20),
-        "cv_ci": (0.26, 0.35),
-        "lifetime_bin_cis": ((0.11, 0.20), (0.11, 0.20), (0.05, 0.09)),
+        "k_bin_cis": ((0.11, 0.20), (0.11, 0.20), (0.05, 0.09)),
         "intervention_ci": (0.11, 0.20),
     }
 
@@ -514,6 +763,17 @@ def test_result_branch_first_match_and_boundaries() -> None:
     ) == "INVALID_OPERATIONAL"
     assert select_result_branch(
         **(base | {"non_create_opportunities": 999})
+    ) == "BENCHMARK_NON_IDENTIFIABLE"
+    assert select_result_branch(
+        **(base | {"multi_opportunity_lifecycles": 249})
+    ) == "BENCHMARK_NON_IDENTIFIABLE"
+    # Support-floor boundary: exactly 127 fails, exactly 128 (the base case
+    # above) proceeds past BENCHMARK_NON_IDENTIFIABLE.
+    assert select_result_branch(
+        **(base | {"eligible_keep_rows": SUPPORT_FLOOR - 1})
+    ) == "BENCHMARK_NON_IDENTIFIABLE"
+    assert select_result_branch(
+        **(base | {"eligible_renew_rows": SUPPORT_FLOOR - 1})
     ) == "BENCHMARK_NON_IDENTIFIABLE"
     low = {
         "OR": (0.1, ACCESS_FLOOR - 1e-6),
@@ -531,16 +791,64 @@ def test_result_branch_first_match_and_boundaries() -> None:
     assert select_result_branch(
         **(base | {"utility_ci": crossing})
     ) == "UNDERPOWERED_ACCESS"
+    # Fewer than two K-bins keep UCB above threshold: confident failure.
     assert select_result_branch(
-        **(base | {"keep_ci": (0.1, 0.20)})
+        **(base | {"k_bin_cis": ((0.01, 0.05), (0.01, 0.05), (0.11, 0.20))})
     ) == "REPRESENTATION_ONLY"
+    # Equality boundary: UCB exactly at threshold still counts as failed
+    # (`UCB <=` threshold), same as the source's strict-dual definition.
+    assert select_result_branch(
+        **(base | {
+            "k_bin_cis": (
+                (0.01, LIFETIME_BIN_THRESHOLD),
+                (0.01, LIFETIME_BIN_THRESHOLD),
+                (0.11, 0.20),
+            )
+        })
+    ) == "REPRESENTATION_ONLY"
+    # Intervention confident failure alone, K-bins still passing.
+    assert select_result_branch(
+        **(base | {"intervention_ci": (0.05, INTERVENTION_THRESHOLD)})
+    ) == "REPRESENTATION_ONLY"
+    # Interval-crossing boundary: neither passes (strict LCB `>`) nor
+    # confidently fails (UCB `<=`) -> falls through to MIXED_UNDERPOWERED.
+    assert select_result_branch(
+        **(base | {
+            "k_bin_cis": (
+                (LIFETIME_BIN_THRESHOLD, 0.20), (0.11, 0.20), (0.05, 0.09),
+            )
+        })
+    ) == "MIXED_UNDERPOWERED"
     assert select_result_branch(
         **(base | {"g_ci": (0.0, GAIN_THRESHOLD)})
     ) == "ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED"
     assert select_result_branch(
-        **(base | {"g_ci": (0.05, 0.11), "keep_ci": (0.19, 0.21)})
+        **(base | {"g_ci": (0.05, 0.11)})
     ) == "MIXED_UNDERPOWERED"
     contract = registered_contract()
     assert contract["arms"] == ["OR", "DUM", "EHC"]
     assert contract["duration_support"]["held_out"] == [5, 7, 9]
     assert contract["optimization"]["opportunity_support"] == [4, 8, 12]
+    assert contract["thresholds"]["support_floor"] == SUPPORT_FLOOR
+    assert "keep" not in contract["thresholds"]
+    assert "renew" not in contract["thresholds"]
+    assert "cv" not in contract["thresholds"]
+    # The K-bin battery (policy-determined K==1/K==2/K>=3 over complete
+    # spells) must be identifiable from the contract alone, distinct from
+    # the physical-time bins the retired "lifetime_bin" name evoked.
+    assert "lifetime_bin" not in contract["thresholds"]
+    assert contract["thresholds"]["k_bin"] == LIFETIME_BIN_THRESHOLD
+    assert contract["k_bins"] == ["K==1", "K==2", "K>=3"]
+    assert contract["intervention_metric"] == "primitive_action_total_variation"
+
+
+def test_select_result_branch_rejects_non_three_k_bins() -> None:
+    base = _branch_inputs()
+    for wrong in (
+        (),
+        ((0.1, 0.2),),
+        ((0.1, 0.2), (0.1, 0.2)),
+        ((0.1, 0.2), (0.1, 0.2), (0.1, 0.2), (0.1, 0.2)),
+    ):
+        with pytest.raises(ValueError, match="k_bin_cis"):
+            select_result_branch(**(base | {"k_bin_cis": wrong}))

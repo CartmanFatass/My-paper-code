@@ -78,6 +78,7 @@ class SegmentRecord:
     end_active_step: int
     censored: bool
     close_reason: str
+    opportunity_count: int
 
     @property
     def active_lifetime(self) -> int:
@@ -93,6 +94,13 @@ class LifecycleState:
     segment_start_active_step: int
     active_steps: int = 0
     non_create_opportunities: int = 0
+    spell_opportunity_count: int = 0
+    """Running `K` (KEEP/RENEW opportunities so far) for the currently open
+    spell only; reset to 0 only when a RENEW closes that spell and opens the
+    next one. At CREATE (`LifecycleState` construction) it is
+    zero-initialized, not reset -- there is no prior spell to reset from.
+    Distinct from `non_create_opportunities`, which accumulates across all
+    spells of this lifecycle and is never reset."""
 
 
 @dataclass
@@ -325,7 +333,7 @@ def _new_cursor(state: TrainingState, episode_ids: tuple[int, ...], device: torc
 
 def _close_segment(cursor: CollectionCursor, env_index: int, key: int, *, reason: str, censored: bool) -> None:
     life = cursor.lifecycles[env_index].pop(key)
-    cursor.segments[env_index].append(SegmentRecord(cursor.episode_ids[env_index], key, life.membership_epoch, life.segment_id, life.segment_start_active_step, life.active_steps, censored, reason))
+    cursor.segments[env_index].append(SegmentRecord(cursor.episode_ids[env_index], key, life.membership_epoch, life.segment_id, life.segment_start_active_step, life.active_steps, censored, reason, life.spell_opportunity_count))
 
 
 def _zeros(shape: tuple[int, ...], *, dtype: torch.dtype = torch.float32) -> torch.Tensor:
@@ -552,16 +560,20 @@ def collect_trajectory(
                     raise RuntimeError("CREATE support drift")
                 if request_kind != CREATE and selected_kind not in (KEEP, RENEW):
                     raise RuntimeError("opportunity support drift")
+                if selected_kind != CREATE:
+                    life.spell_opportunity_count += 1
                 if selected_kind == RENEW:
                     cursor.segments[env_index].append(
                         SegmentRecord(
                             cursor.episode_ids[env_index], key, life.membership_epoch,
                             life.segment_id, life.segment_start_active_step,
                             life.active_steps, False, "RENEW",
+                            life.spell_opportunity_count,
                         )
                     )
                     life.segment_id += 1
                     life.segment_start_active_step = life.active_steps
+                    life.spell_opportunity_count = 0
                 if selected_kind != CREATE:
                     life.non_create_opportunities += 1
                 life.z = event_new_z[env_index, key].detach()
@@ -933,6 +945,120 @@ def validate_replay(
     if any(errors[name] > tolerance for name in approximate_names):
         raise RuntimeError(f"semantic replay tolerance mismatch {errors}")
     return replay, errors
+
+
+def action_distribution_tv(
+    logits_natural: torch.Tensor, logits_perm: torch.Tensor
+) -> torch.Tensor:
+    """Primitive action-distribution total variation from two logit vectors.
+
+    `I_TV = 0.5 * sum_a |pi(a) - pi(a_perm)|`, where `pi`/`pi_perm` are the
+    softmax distributions induced by `logits_natural`/`logits_perm` along
+    their last dimension. This is exactly zero whenever the two logit
+    vectors differ only by a constant (softmax is shift-invariant), and it
+    always lies in `[0, 1]` because it is the total-variation distance
+    between two categorical distributions over the same three actions.
+    """
+
+    pi_natural = torch.softmax(logits_natural, dim=-1)
+    pi_perm = torch.softmax(logits_perm, dim=-1)
+    return 0.5 * torch.abs(pi_natural - pi_perm).sum(dim=-1)
+
+
+def base_primitive_logits(
+    arm: CommitmentArm,
+    trajectory: EventTrajectory,
+    *,
+    env_index: int,
+    time: int,
+    device: torch.device,
+) -> dict[int, torch.Tensor]:
+    """Recompute pre-bias primitive logits for one recorded physical step.
+
+    Reuses `DirectPrimitiveARPolicy`'s exact member/context encoding, GRU
+    cell and action head with the natural recorded hidden state and
+    teacher-forced natural actions, so the reconstructed autoregressive
+    prefix matches the one that actually produced the stored trajectory
+    (each active key's own hidden slot is untouched until its own position,
+    so its pre-step hidden state always equals `trajectory.hidden_before`).
+    `primitive_logit_bias` is intentionally not added here; callers combine
+    the result with `arm.primitive_bias(z)` themselves, exactly reproducing
+    `forward_step`'s `logits = base_logits + primitive_logit_bias`
+    composition.
+    """
+
+    observations = trajectory.observations[time, env_index : env_index + 1].to(device)
+    active = trajectory.active_mask[time, env_index : env_index + 1].to(device)
+    order = trajectory.orders[time, env_index : env_index + 1].to(device)
+    hidden_before = trajectory.hidden_before[time, env_index : env_index + 1].to(device)
+    natural_actions = trajectory.actions[time, env_index : env_index + 1].to(device)
+    logits_by_key: dict[int, torch.Tensor] = {}
+    with torch.no_grad():
+        prepared = arm.base.prepare_step(
+            observations=observations, active_mask=active, validated=True
+        )
+        active_count = int(active.sum(dim=1).item())
+        prefix = torch.zeros(
+            (1, ACTION_COUNT), dtype=observations.dtype, device=device
+        )
+        for position in range(active_count):
+            focal = int(order[0, position].item())
+            local_embedding = prepared.member_embeddings[:, focal]
+            local_hidden = hidden_before[:, focal]
+            candidate_hidden = arm.base.actor_rnn(
+                torch.cat((local_embedding, prepared.context, prefix), dim=-1),
+                local_hidden,
+            )
+            logits = arm.base.action_head(
+                torch.cat((candidate_hidden, prefix), dim=-1)
+            )
+            logits_by_key[focal] = logits[0]
+            selected = int(natural_actions[0, focal].item())
+            prefix = prefix.clone()
+            prefix[0, selected] += 1.0
+    return logits_by_key
+
+
+def natural_and_permuted_action_tv(
+    arm: CommitmentArm,
+    trajectory: EventTrajectory,
+    *,
+    env_index: int,
+    time: int,
+    device: torch.device,
+) -> list[float]:
+    """Per-active-key primitive `I_TV` under a same-step `z` derangement.
+
+    Empty unless the arm carries the `W_z` treatment (EHC) and at least two
+    lifecycles are active at this step. Derangement reuses the registered
+    `torch.roll(z, 1, 0)` strategy over the active keys at this physical
+    step. Observation, recurrent hidden state, action mask, active-set
+    context and primitive prefix are held fixed at their natural recorded
+    values (via `base_primitive_logits`); only `z` differs between the two
+    action distributions being compared.
+    """
+
+    if arm.arm != "EHC" or arm.W_z is None:
+        return []
+    active_row = trajectory.active_mask[time, env_index].to(device)
+    keys = torch.nonzero(active_row, as_tuple=True)[0]
+    if keys.numel() < 2:
+        return []
+    z = trajectory.primitive_z[time, env_index, keys].to(device)
+    perm_z = torch.roll(z, 1, 0)
+    base_logits = base_primitive_logits(
+        arm, trajectory, env_index=env_index, time=time, device=device
+    )
+    values: list[float] = []
+    with torch.no_grad():
+        for index, key in enumerate(keys.tolist()):
+            logits = base_logits[key]
+            natural_logits = logits + arm.primitive_bias(z[index])
+            perm_logits = logits + arm.primitive_bias(perm_z[index])
+            tv = action_distribution_tv(natural_logits, perm_logits)
+            values.append(float(tv.detach().cpu()))
+    return values
+
 
 def _pack_trajectory_once(trajectory: EventTrajectory, device: torch.device) -> EventTrajectory:
     """Transfer the collected tensor package once and reuse it for all epochs."""

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 from pathlib import Path
 import sys
 from typing import Any
@@ -29,6 +28,7 @@ from ha_ctse_process.event_held_commitment_link import (
     initialize_arms,
     load_checkpoint,
     make_training_state,
+    natural_and_permuted_action_tv,
     nested_state_maximum_difference,
     optimize_update,
     parameter_and_optimizer_counts,
@@ -485,18 +485,21 @@ def _evaluation_state(
         raise ValueError("formal evaluation profile must be iid or held_out")
     return make_training_state(arm, replicate, profile=profile)
 
-def _trajectory_episode_rows(trajectory: Any, arm: Any) -> list[dict[str, Any]]:
+def _trajectory_episode_rows(
+    trajectory: Any, arm: Any, *, compute_intervention: bool
+) -> list[dict[str, Any]]:
     rows = []
+    device = next(arm.parameters()).device
     for env_index, outcome in enumerate(trajectory.outcomes):
         kinds = trajectory.event_kind[:, env_index]
-        active = trajectory.active_mask[:, env_index]
         intervention: list[float] = []
-        if arm.arm == "EHC" and arm.W_z is not None:
-            with torch.no_grad():
-                for time in range(trajectory.time_steps):
-                    keys = torch.flatnonzero(active[time])
-                    if len(keys) >= 2:
-                        z = trajectory.primitive_z[time, keys].to(next(arm.parameters()).device); perm = torch.roll(z, 1, 0); values = arm.W_z(z - perm).norm(dim=-1) / math.sqrt(3.0); intervention.extend(values.detach().cpu().tolist())
+        if compute_intervention and arm.arm == "EHC" and arm.W_z is not None:
+            for time in range(trajectory.time_steps):
+                intervention.extend(
+                    natural_and_permuted_action_tv(
+                        arm, trajectory, env_index=env_index, time=time, device=device
+                    )
+                )
         segments = [vars(v) | {"active_lifetime": v.active_lifetime} for v in trajectory.segments[env_index]]
         rows.append({"episode_id": trajectory.ledger_ids[env_index], "utility": outcome.utility, "keep": int((kinds == KEEP).sum()), "renew": int((kinds == RENEW).sum()), "non_create": int(((kinds == KEEP) | (kinds == RENEW)).sum()), "multi_opportunity_lifecycles": int(sum(int((((kinds == KEEP) | (kinds == RENEW))[:, key]).sum()) >= 2 for key in range(kinds.shape[-1]))), "segments": segments, "intervention": intervention})
     return rows
@@ -551,7 +554,10 @@ def formal_evaluate(
                         )
                     )
                     episode_rows.extend(
-                        _trajectory_episode_rows(trajectory, arm)
+                        _trajectory_episode_rows(
+                            trajectory, arm,
+                            compute_intervention=(cell == "held_out_stochastic"),
+                        )
                     )
                 operational = {
                     "probability_replay": replay_maximum <= 1e-6,
@@ -632,12 +638,11 @@ def aggregate_analysis(
             "operational_valid": False,
             "non_create_opportunities": 0,
             "multi_opportunity_lifecycles": 0,
+            "eligible_keep_rows": 0,
+            "eligible_renew_rows": 0,
             "utility_ci": {arm: (0.0, 0.0) for arm in ARMS},
             "g_ci": (0.0, 0.0),
-            "keep_ci": (0.0, 0.0),
-            "renew_ci": (0.0, 0.0),
-            "cv_ci": (0.0, 0.0),
-            "lifetime_bin_cis": [(0.0, 0.0)] * 3,
+            "k_bin_cis": [(0.0, 0.0)] * 3,
             "intervention_ci": (0.0, 0.0),
         }
         result = {
@@ -664,6 +669,10 @@ def aggregate_analysis(
     renew_values: list[float] = []
     cv_values: list[float] = []
     bin_values: list[list[float]] = [[], [], []]
+    k_bin_values: list[list[float]] = [[], [], []]
+    k_bin_predicates = (
+        lambda k: k == 1, lambda k: k == 2, lambda k: k >= 3,
+    )
     intervention_values: list[float] = []
     for _ in range(BOOTSTRAP_REPETITIONS):
         sampled_replicates = rng.integers(0, 5, size=5)
@@ -691,11 +700,12 @@ def aggregate_analysis(
         opportunities = keep + renew
         keep_values.append(keep / max(opportunities, 1))
         renew_values.append(renew / max(opportunities, 1))
-        lifetimes = [
-            segment["active_lifetime"]
+        complete_segments = [
+            segment
             for row in ehc for segment in row["segments"]
             if not segment["censored"]
         ]
+        lifetimes = [segment["active_lifetime"] for segment in complete_segments]
         cv_values.append(
             float(np.std(lifetimes) / max(np.mean(lifetimes), 1e-12))
             if lifetimes else 0.0
@@ -707,6 +717,12 @@ def aggregate_analysis(
                 sum(low <= value <= high for value in lifetimes)
                 / max(len(lifetimes), 1)
             )
+        k_values = [segment["opportunity_count"] for segment in complete_segments]
+        for index, predicate in enumerate(k_bin_predicates):
+            k_bin_values[index].append(
+                sum(predicate(value) for value in k_values)
+                / max(len(k_values), 1)
+            )
         intervention = [value for row in ehc for value in row["intervention"]]
         intervention_values.append(
             float(np.mean(intervention)) if intervention else 0.0
@@ -717,6 +733,14 @@ def aggregate_analysis(
     ehc_rows = [
         row for replicate in range(5) for row in data[(replicate, "EHC")]
     ]
+    complete_segment_count = sum(
+        1 for row in ehc_rows for segment in row["segments"]
+        if not segment["censored"]
+    )
+    censored_segment_count = sum(
+        1 for row in ehc_rows for segment in row["segments"]
+        if segment["censored"]
+    )
     inputs = {
         "operational_valid": True,
         "non_create_opportunities": sum(
@@ -725,17 +749,24 @@ def aggregate_analysis(
         "multi_opportunity_lifecycles": sum(
             row["multi_opportunity_lifecycles"] for row in ehc_rows
         ),
+        "eligible_keep_rows": sum(row["keep"] for row in ehc_rows),
+        "eligible_renew_rows": sum(row["renew"] for row in ehc_rows),
         "utility_ci": utility_ci,
         "g_ci": _percentile(gains),
-        "keep_ci": _percentile(keep_values),
-        "renew_ci": _percentile(renew_values),
-        "cv_ci": _percentile(cv_values),
-        "lifetime_bin_cis": [_percentile(values) for values in bin_values],
+        "k_bin_cis": [_percentile(values) for values in k_bin_values],
         "intervention_ci": _percentile(intervention_values),
     }
     result = {
         "branch": select_result_branch(**inputs),
         "predicate_inputs": inputs,
+        "diagnostics": {
+            "keep_ci": _percentile(keep_values),
+            "renew_ci": _percentile(renew_values),
+            "cv_ci": _percentile(cv_values),
+            "physical_time_bin_cis": [_percentile(values) for values in bin_values],
+            "complete_segment_count": complete_segment_count,
+            "censored_segment_count": censored_segment_count,
+        },
         "secondary_v_ci": _percentile(secondary_gains),
         "operational_errors": [],
         "registered_contract": REGISTERED_CONTRACT,
