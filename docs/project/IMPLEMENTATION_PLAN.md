@@ -153,9 +153,52 @@ Likelihood support is exact:
 - `CLOSE`: no policy row.
 
 Teacher replay uses the recorded primitive action, categorical event action and
-`u`; it recomputes the identical inputs, masks, factors and joint sums. Before
-any update, maximum absolute error for every eligible categorical component,
-mark component and joint likelihood must be `<=1e-6`.
+`u`; it recomputes the identical inputs, masks, factors and joint sums.
+
+The replay bound was corrected on 2026-07-21 under
+`docs/external-review/gpt5_6_pro/20260721_replay_tolerance_device_portability/`.
+A single scalar `1e-6` applied to every quantity was mathematically inconsistent:
+`event_joint` is a categorical term plus eight mark components, and
+`primitive_joint` sums up to six primitive components, yet each derived sum was
+given no more allowance than any one summand. Before any update the contract is
+four classes:
+
+- **Exact, zero error**: event support and factor masks, categorical event
+  action, action and lifecycle masks, kind support, detach status, discrete
+  actions, order and membership ownership.
+- **Ordinary continuous state, `<=1e-6`**: hidden states, values, event inputs,
+  reconstructed marks, primitive component log probabilities, categorical
+  component log probabilities and each individual transformed-mark component.
+- **Derived `primitive_joint`**: bounded by the sum of its eligible primitive
+  component differences plus a float32 reduction allowance over the actual
+  factor count.
+- **Derived `event_joint`**: bounded by the categorical difference plus all
+  eight mark component differences plus the same reduction allowance, with
+  `gamma_9 = 9u/(1-9u)` and float32 unit roundoff `u = 2^-24`.
+
+The reduction allowance follows from the per-factor bound and conservative
+float32 summation; it is not fitted to an observed value. Validating both joints
+against a float64 recomputation from the recorded factors is the preferred
+implementation, because it tests correct factor assembly rather than demanding
+that nine accumulated float32 terms stay inside a one-component tolerance. A
+fixed `1e-5` event-joint ceiling is the conservative fallback.
+
+`RESUME_TOLERANCE = 1e-7` is a separate same-checkpoint continuation invariant
+and is unchanged. The relaxed joint rule must never be used to admit a
+reconstruction that could instead be made bitwise exact.
+
+`registered_contract()` carries a structured `replay_tolerances` block rather
+than one scalar, so checkpoints written under the old constant fail strict load.
+No compatibility path is added. The evaluation artifact stops collapsing errors
+into a single `maximum_error` and serializes named per-factor errors with an
+incremented artifact schema. `validate_replay`, `formal_evaluate`,
+`validate_operational_records`, the contract dictionary and the focused tests
+move together.
+
+All arms and paired replicates execute on one backend and one thread
+configuration. Mixing devices or thread counts across arms or replicates would
+let device-dependent optimization trajectories become an arm or replicate
+confound.
 
 ## Credit, losses and exposure
 
@@ -374,11 +417,19 @@ registered 16-environment width, not one pair at a time. Serial per-opportunity
 execution is rejected: it is roughly fifteen times slower and is the named
 serial-evaluation anti-pattern.
 
-Acceptance requires that batched and sequential execution agree exactly on
-discrete membership, event and primitive actions, on terminal outcomes and
-utilities, and on RNG states after continuation, with continuous values within
-`1e-7`, and that the natural-action branch reproduces the originally collected
-continuation exactly. Failure of either equality invalidates the batched engine.
+The pre-fork prefix is reconstructed at the registered 16-environment width, not
+at width 1. float32 reduction order depends on tensor shape, so a width-1
+reconstruction of a width-16 collection is not bitwise exact, and the relaxed
+derived-joint rule must not be used to admit it when matching the width removes
+the drift entirely. This also removes the argmax-flip risk that an unguarded
+width-1 reconstruction carries at evaluation scale.
+
+Acceptance requires that the natural-action branch reproduces the originally
+collected continuation exactly, checked inside the engine on every fork rather
+than only in a sampled test. Where a batched engine exists, batched and
+sequential execution must additionally agree exactly on discrete membership,
+event and primitive actions, on terminal outcomes and utilities, and on RNG
+states after continuation, with continuous values within `1e-7`.
 
 `registered_contract()` gains the `A_KEEP` and `A_RENEW` gate thresholds and
 their point floors when this stage lands. That changes the contract dictionary,
