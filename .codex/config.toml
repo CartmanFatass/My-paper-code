@@ -2,6 +2,12 @@
 
 # Sol uses the v2 multi-agent runtime. Keep one explicit feature flag so the
 # project configuration matches the live runtime.
+# Temporary local workaround: the upstream catalog currently marks Luna as v1
+# and Spark as unversioned, which hides both from a Sol/v2 spawn surface. The
+# referenced catalog is generated from the account-visible catalog by
+# refresh-model-catalog-v2-workaround.ps1 and changes only those two routing
+# fields. Remove this line and the generated catalog when upstream fixes it.
+model_catalog_json = "C:\\project\\HMASD\\runtime\\model-catalog-v2-workaround.json"
 
 [features]
 multi_agent_v2 = true
