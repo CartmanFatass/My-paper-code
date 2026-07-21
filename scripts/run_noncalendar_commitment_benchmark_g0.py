@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 import sys
 from typing import Any
@@ -41,17 +42,26 @@ from ha_ctse_process.event_held_commitment_link import (
 from ha_ctse_process.noncalendar_commitment_testbed import (
     BOOTSTRAP_REPETITIONS,
     BOOTSTRAP_SEED,
+    EVENT_JOINT_FACTOR_COUNT,
     FORMAL_EVAL_EPISODES,
     FORMAL_UPDATES,
     HORIZON,
     REGISTERED_CONTRACT,
+    REPLAY_COMPONENT_FIELDS,
+    REPLAY_COMPONENT_TOLERANCE,
+    REPLAY_EXACT_FIELDS,
+    REPLAY_JOINT_FIELDS,
+    REPLAY_JOINT_RECORD_FIELDS,
     registered_contract,
     select_result_branch,
 )
 
 FORMAL_AUTHORIZATION = "AUTHORIZE_EVENT_HELD_COMMITMENT_LINK_G0_FORMAL"
 TRAIN_MANIFEST_SCHEMA = 1
-EVALUATION_CELL_SCHEMA = 1
+# 2: the replay record is the named per-factor error dictionary plus the
+# derived joint bounds actually applied and a normalized pass result, not a
+# single `maximum_error` scalar. Collapsing them hid which factor moved.
+EVALUATION_CELL_SCHEMA = 2
 ARMS: tuple[ArmName, ...] = ("OR", "DUM", "EHC")
 EVALUATION_CELLS = (
     ("iid", True, "iid_deterministic"),
@@ -101,6 +111,231 @@ def _no_op_equal(ordinary: Any, dummy: Any) -> bool:
             "prefix_counts", "rewards", "terminal",
         )
     )
+
+
+REPLAY_RECORD_KEYS = frozenset(
+    {"errors", "joints", "component_tolerance", "failures", "passed"}
+)
+# Relative slack for the record's own internal algebra. The reported numbers
+# are float64 selections of float64 quantities, so the equalities below hold
+# to a few ulps; this is a rounding allowance, never a tolerance on evidence.
+RECORD_CONSISTENCY_RELATIVE = 1e-9
+RECORD_CONSISTENCY_ABSOLUTE = 1e-15
+
+
+def _finite_leaves(record: Any) -> bool:
+    """Every numeric leaf of a replay record is finite.
+
+    `nan > tol` and `nan > 0.0` are both false, so a record carrying NaN
+    satisfies every ordinary threshold test. Non-finiteness is therefore
+    checked explicitly and first, in both the validator and the merge.
+    """
+
+    if not isinstance(record, dict):
+        return False
+    for value in record.get("errors", {}).values():
+        if not math.isfinite(float(value)):
+            return False
+    for joint in record.get("joints", {}).values():
+        if not isinstance(joint, dict):
+            return False
+        for value in joint.values():
+            if not math.isfinite(float(value)):
+                return False
+    return math.isfinite(float(record.get("component_tolerance", float("nan"))))
+
+
+def merge_replay_records(records: list[dict[str, Any]]) -> dict[str, Any]:
+    """Worst-case merge of several replay records into one, factor by factor.
+
+    Used where one cell or one update covers several validated batches. Each
+    named error keeps its own maximum; each derived joint keeps the batch
+    that produced the largest joint error, so the reported bound is still
+    the bound that reported error was tested against, while `excess` takes
+    the maximum over every batch. The three assembly numbers move together
+    from the batch with the largest `assembly_excess`, so the merged record
+    keeps `assembly_excess == assembly_residual - assembly_allowance`.
+    Nothing is reduced to a single scalar.
+
+    Merging is fail-closed on non-finiteness. Python's `max(0.0, nan)`
+    returns `0.0` while `max(nan, 0.0)` returns `nan`, so a plain maximum
+    would launder a NaN batch out of the evidence depending on batch order.
+    """
+
+    if not records:
+        raise ValueError("replay merge requires at least one record")
+    non_finite = [
+        index for index, record in enumerate(records) if not _finite_leaves(record)
+    ]
+    if non_finite:
+        raise ValueError(f"replay merge received non-finite records {non_finite}")
+    tolerances = {float(record["component_tolerance"]) for record in records}
+    if len(tolerances) != 1:
+        raise ValueError(f"replay records disagree on component tolerance {tolerances}")
+    errors = {
+        name: max(float(record["errors"][name]) for record in records)
+        for name in records[0]["errors"]
+    }
+    joints: dict[str, dict[str, float]] = {}
+    for name in REPLAY_JOINT_FIELDS:
+        worst = max(records, key=lambda record: float(record["joints"][name]["error"]))
+        merged = {key: float(value) for key, value in worst["joints"][name].items()}
+        merged["excess"] = max(
+            float(record["joints"][name]["excess"]) for record in records
+        )
+        merged["float64_error"] = max(
+            float(record["joints"][name]["float64_error"]) for record in records
+        )
+        assembly = max(
+            records, key=lambda record: float(record["joints"][name]["assembly_excess"])
+        )
+        for key in ("assembly_residual", "assembly_allowance", "assembly_excess"):
+            merged[key] = float(assembly["joints"][name][key])
+        merged["rows"] = float(
+            sum(float(record["joints"][name]["rows"]) for record in records)
+        )
+        joints[name] = merged
+    failures = sorted(
+        {name for record in records for name in record["failures"]}
+    )
+    return {
+        "errors": errors,
+        "joints": joints,
+        "component_tolerance": tolerances.pop(),
+        "failures": failures,
+        "passed": all(bool(record["passed"]) for record in records),
+    }
+
+
+def _consistent(left: float, right: float) -> bool:
+    """`left == right` up to the record's own float64 rounding."""
+
+    return abs(left - right) <= (
+        RECORD_CONSISTENCY_ABSOLUTE
+        + RECORD_CONSISTENCY_RELATIVE * max(abs(left), abs(right))
+    )
+
+
+def _joint_factor_error_cap(name: str, errors: dict[str, Any], joint: dict[str, Any]) -> float:
+    """Largest `component_sum` the recorded per-factor errors can support.
+
+    `component_sum` is a per-row sum of per-factor replay differences, and
+    every factor of both joints is covered by a recorded per-factor maximum
+    -- the event joint's out-of-support factors only because
+    `categorical_support_leak`/`mark_support_leak` force them to be exactly
+    zero on both sides. Without this link a record could declare an
+    arbitrarily wide `bound` (`component_sum + allowance`) and validate any
+    error beneath it.
+    """
+
+    if name == "event_joint":
+        return float(errors["categorical_component"]) + float(
+            EVENT_JOINT_FACTOR_COUNT - 1
+        ) * float(errors["mark_component"])
+    return float(joint["factor_count"]) * float(errors["primitive_component"])
+
+
+def _replay_record_valid(record: Any, *, event_rows_required: bool = True) -> bool:
+    """Fail-closed check of one serialized replay record.
+
+    Re-derives acceptance from the record itself rather than trusting its
+    `passed` flag: every numeric leaf must be finite, exact fields must be
+    exactly zero, ordinary continuous components must sit at or below the
+    registered component tolerance, and each derived joint must sit at or
+    below its own compositional bound and match its float64 assembly. A
+    record missing any named factor, or any named key of a joint, fails.
+
+    The joint block must also be internally consistent -- `bound` really the
+    sum of its own `component_sum` and `allowance`, `excess` dominating
+    `error - bound`, the assembly triple self-consistent, and
+    `component_sum` no larger than the recorded per-factor errors allow --
+    and must have examined a positive number of rows. `event_rows_required`
+    is false only for the ordinary source arm, which carries no event head
+    and therefore legitimately produces an all-zero event joint.
+    """
+
+    if not isinstance(record, dict) or set(record) != REPLAY_RECORD_KEYS:
+        return False
+    errors = record.get("errors")
+    joints = record.get("joints")
+    if not isinstance(errors, dict) or not isinstance(joints, dict):
+        return False
+    if set(errors) != set(
+        REPLAY_EXACT_FIELDS + REPLAY_COMPONENT_FIELDS + REPLAY_JOINT_FIELDS
+    ):
+        return False
+    if set(joints) != set(REPLAY_JOINT_FIELDS):
+        return False
+    if any(
+        not isinstance(joints[name], dict)
+        or set(joints[name]) != set(REPLAY_JOINT_RECORD_FIELDS)
+        for name in REPLAY_JOINT_FIELDS
+    ):
+        return False
+    try:
+        if not _finite_leaves(record):
+            return False
+    except (TypeError, ValueError):
+        return False
+    if float(record["component_tolerance"]) != REPLAY_COMPONENT_TOLERANCE:
+        return False
+    if record.get("passed") is not True or record.get("failures"):
+        return False
+    if any(float(errors[name]) != 0.0 for name in REPLAY_EXACT_FIELDS):
+        return False
+    if any(
+        not float(errors[name]) <= REPLAY_COMPONENT_TOLERANCE
+        for name in REPLAY_COMPONENT_FIELDS
+    ):
+        return False
+    for name in REPLAY_JOINT_FIELDS:
+        joint = {key: float(value) for key, value in joints[name].items()}
+        if any(
+            joint[key] < 0.0
+            for key in (
+                "error", "component_sum", "allowance", "bound", "factor_count",
+                "float64_error", "assembly_residual", "assembly_allowance",
+                "rows",
+            )
+        ):
+            return False
+        if not joint["excess"] <= 0.0 or not joint["assembly_excess"] <= 0.0:
+            return False
+        if not float(errors[name]) <= joint["bound"]:
+            return False
+        if not _consistent(joint["bound"], joint["component_sum"] + joint["allowance"]):
+            return False
+        # `excess` is the per-row maximum of `error - bound` while `error`
+        # and `bound` are read at the largest-error row, so it dominates
+        # rather than equals their difference.
+        if joint["excess"] < joint["error"] - joint["bound"] - (
+            RECORD_CONSISTENCY_ABSOLUTE
+            + RECORD_CONSISTENCY_RELATIVE * abs(joint["bound"])
+        ):
+            return False
+        if not _consistent(
+            joint["assembly_excess"],
+            joint["assembly_residual"] - joint["assembly_allowance"],
+        ):
+            return False
+        cap = _joint_factor_error_cap(name, errors, joint)
+        if joint["component_sum"] > cap + (
+            RECORD_CONSISTENCY_ABSOLUTE + RECORD_CONSISTENCY_RELATIVE * abs(cap)
+        ):
+            return False
+        if joint["rows"] <= 0.0:
+            # An all-zero joint proves nothing was examined. The one lawful
+            # case is the event joint of an arm with no event head, which
+            # must then be all-zero rather than merely row-less.
+            if name != "event_joint" or event_rows_required:
+                return False
+            if any(value != 0.0 for value in joint.values()):
+                return False
+        elif name == "event_joint" and joint["factor_count"] != float(
+            EVENT_JOINT_FACTOR_COUNT
+        ):
+            return False
+    return True
 
 
 def validate_operational_records(
@@ -203,7 +438,9 @@ def validate_operational_records(
                     or payload.get("seed_map") != authoritative_seed_map(profile, replicate)
                     or set(operational) != {"probability_replay", "lifecycle", "rng", "checkpoint", "finite"}
                     or not all(value is True for value in operational.values())
-                    or float(payload.get("replay", {}).get("maximum_error", float("inf"))) > 1e-6
+                    or not _replay_record_valid(
+                        payload.get("replay"), event_rows_required=arm != "OR"
+                    )
                 ):
                     errors.append(f"evaluation_operational:{replicate}:{arm}:{cell}")
                 episode_ids = tuple(
@@ -386,10 +623,10 @@ def formal_train(
                 )
                 for arm in ARMS
             }
-            replay_maximum = max(
-                max(metrics["replay"].values())
-                for metrics in update_metrics.values()
+            replay_record = merge_replay_records(
+                [metrics["replay"] for metrics in update_metrics.values()]
             )
+            replay_valid = _replay_record_valid(replay_record)
             finite = all(metrics["finite"] for metrics in update_metrics.values())
             exposure = all(
                 metrics["base_steps"] == 4
@@ -406,7 +643,7 @@ def formal_train(
                 "update": update_index + 1,
                 "no_op": no_op,
                 "base_noop_error": base_noop_error,
-                "replay_maximum": replay_maximum,
+                "replay": replay_record,
                 "lifecycle": lifecycle,
                 "finite": finite,
                 "rng_pairing": rng_pairing,
@@ -414,13 +651,13 @@ def formal_train(
             }
             update_evidence.append(current)
             all_operational["no_op"] &= no_op
-            all_operational["probability_replay"] &= replay_maximum <= 1e-6
+            all_operational["probability_replay"] &= replay_valid
             all_operational["lifecycle"] &= lifecycle
             all_operational["finiteness"] &= finite
             all_operational["rng_pairing"] &= rng_pairing
             all_operational["exposure"] &= exposure
             if not all(
-                (no_op, replay_maximum <= 1e-6, lifecycle, finite, rng_pairing, exposure)
+                (no_op, replay_valid, lifecycle, finite, rng_pairing, exposure)
             ):
                 raise RuntimeError(f"formal training operational failure {current}")
 
@@ -532,7 +769,7 @@ def formal_evaluate(
                     arm_name, replicate, profile=profile
                 )
                 episode_rows: list[dict[str, Any]] = []
-                replay_maximum = 0.0
+                replay_records: list[dict[str, Any]] = []
                 lifecycle_valid = True
                 finite = True
                 for start in range(0, FORMAL_EVAL_EPISODES, 16):
@@ -541,10 +778,10 @@ def formal_evaluate(
                         episode_ids=range(start, start + 16),
                         deterministic=deterministic, profile=profile,
                     )
-                    _replay, errors = validate_replay(
+                    _replay, replay_evidence = validate_replay(
                         arm, trajectory, device=device
                     )
-                    replay_maximum = max(replay_maximum, max(errors.values()))
+                    replay_records.append(replay_evidence)
                     lifecycle_valid &= _lifecycle_valid(trajectory, arm_name)
                     finite &= all(
                         bool(torch.isfinite(getattr(trajectory, name)).all().detach().cpu())
@@ -559,8 +796,11 @@ def formal_evaluate(
                             compute_intervention=(cell == "held_out_stochastic"),
                         )
                     )
+                replay_record = merge_replay_records(replay_records)
                 operational = {
-                    "probability_replay": replay_maximum <= 1e-6,
+                    "probability_replay": _replay_record_valid(
+                        replay_record, event_rows_required=arm_name != "OR"
+                    ),
                     "lifecycle": lifecycle_valid,
                     "rng": (
                         state.seed_map
@@ -593,7 +833,7 @@ def formal_evaluate(
                         "horizon": HORIZON,
                     },
                     "seed_map": authoritative_seed_map(profile, replicate),
-                    "replay": {"maximum_error": replay_maximum},
+                    "replay": replay_record,
                     "operational": operational,
                     "episodes": episode_rows,
                 }

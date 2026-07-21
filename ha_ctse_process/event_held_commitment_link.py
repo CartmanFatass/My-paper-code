@@ -34,6 +34,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     ADDED_PARAMETER_COUNT,
     CHECKPOINT_KIND,
     CHECKPOINT_SCHEMA_VERSION,
+    EVENT_JOINT_FACTOR_COUNT,
     EVENT_SEED,
     FORMAL_EVAL_EPISODES,
     FORMAL_NUM_ENVS,
@@ -47,9 +48,16 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     OPPORTUNITY_SEED,
     PARAMETER_COUNT,
     REGISTERED_CONTRACT,
+    REPLAY_COMPONENT_FIELDS,
+    REPLAY_COMPONENT_TOLERANCE,
+    REPLAY_EXACT_FIELDS,
+    REPLAY_JOINT_FIELDS,
+    REPLAY_JOINT_RECORD_FIELDS,
+    RESUME_TOLERANCE,
     TRAIN_ORDER_SEED,
     TRAIN_TASK_SEED,
     TRAIN_ACTION_SEED,
+    float32_reduction_gamma,
     frontier_order,
     make_noncalendar_ledger,
     make_rng,
@@ -65,8 +73,6 @@ MARK_DIM = 8
 OPPORTUNITY_SUPPORT = np.asarray((4, 8, 12), dtype=np.int64)
 CREATE, KEEP, RENEW = 1, 2, 3
 EVENT_ENTROPY_COEFFICIENT = 0.01
-REPLAY_TOLERANCE = 1e-6
-RESUME_TOLERANCE = 1e-7
 RNG_NAMES = ("ledger", "order", "primitive", "opportunity", "event", "mark")
 
 
@@ -879,6 +885,23 @@ def replay_errors(replay: ReplayOutput, trajectory: EventTrajectory) -> dict[str
     mark_component_mask = replay.event_mark_mask.unsqueeze(-1).expand_as(
         replay.event_mark_component_logp
     )
+    # The two component checks above read the stored factors only *inside*
+    # their own support, so a factor recorded non-zero outside it is invisible
+    # to them; and if the stored joint is reassembled to include that value the
+    # assembly check sees a self-consistent sum while the joint bound widens by
+    # exactly the corruption. These two quantities look where nothing else
+    # does. The collector zeroes both factors outside their support before
+    # storing, so on clean data they are exactly zero by construction.
+    stored_cat_logp = trajectory.event_old_cat_logp.to(device)
+    stored_mark_logp = trajectory.event_old_mark_component_logp.to(device)
+    categorical_support_leak = torch.where(
+        replay.event_cat_mask, torch.zeros_like(stored_cat_logp), stored_cat_logp
+    )
+    mark_support_leak = torch.where(
+        replay.event_mark_mask.unsqueeze(-1),
+        torch.zeros_like(stored_mark_logp),
+        stored_mark_logp,
+    )
     kind = trajectory.event_kind.to(device)
     kind_support = kind.eq(0) | kind.eq(CREATE) | kind.eq(KEEP) | kind.eq(RENEW)
     action_exact = torch.equal(
@@ -910,12 +933,10 @@ def replay_errors(replay: ReplayOutput, trajectory: EventTrajectory) -> dict[str
             replay.event_inputs - trajectory.event_inputs.to(device), event_input_mask
         ),
         "categorical_component": maximum(
-            replay.event_cat_logp - trajectory.event_old_cat_logp.to(device),
-            replay.event_cat_mask,
+            replay.event_cat_logp - stored_cat_logp, replay.event_cat_mask
         ),
         "mark_component": maximum(
-            replay.event_mark_component_logp
-            - trajectory.event_old_mark_component_logp.to(device),
+            replay.event_mark_component_logp - stored_mark_logp,
             mark_component_mask,
         ),
         "event_joint": maximum(
@@ -937,6 +958,277 @@ def replay_errors(replay: ReplayOutput, trajectory: EventTrajectory) -> dict[str
         "kind_support_mismatch": float(not bool(kind_support.all())),
         "event_action_mismatch": float(not action_exact),
         "detach_mismatch": float(not detached_exact),
+        "categorical_support_leak": maximum(categorical_support_leak),
+        "mark_support_leak": maximum(mark_support_leak),
+    }
+
+
+def _joint_row_summary(
+    *,
+    error: torch.Tensor,
+    component_sum: torch.Tensor,
+    allowance: torch.Tensor,
+    factor_count: torch.Tensor,
+    assembly_residual: torch.Tensor,
+    assembly_allowance: torch.Tensor,
+    assembly_excess: torch.Tensor,
+    exact_error: torch.Tensor,
+    mask: torch.Tensor,
+) -> dict[str, float]:
+    """Reduce one derived joint's per-row bound check to a reportable record.
+
+    Every argument is a per-row tensor over the same rows; `mask` selects the
+    rows on which the joint is defined. The comparison that decides
+    acceptance is elementwise per row -- a joint error may only be compared
+    against *its own* row's bound, never against the largest bound anywhere
+    in the batch -- so `excess` is the per-row maximum of `error - bound` and
+    must not exceed zero. The reported `error`/`component_sum`/`allowance`/
+    `bound` are all read at the row that produced the largest error, so the
+    reported bound is the bound the reported error was actually tested
+    against. `excess` is therefore not `error - bound` in general: it is read
+    at the row that comes closest to failing, which need not be the
+    largest-error row, and it always dominates `error - bound`.
+
+    The three assembly numbers are instead all read at the row *and* side
+    that decide `assembly_excess`, so in the record `assembly_excess` is
+    exactly `assembly_residual - assembly_allowance`. Reporting a residual
+    against an allowance that did not gate it -- for instance the smaller of
+    the two sides' magnitudes -- lets a passing record show a residual larger
+    than its own allowance, which reads as a contradiction.
+
+    Every reported number is selected on device and transferred once. The
+    worst-row index stays a device tensor so that locating it costs no
+    synchronization of its own.
+    """
+
+    bound = component_sum + allowance
+    names = REPLAY_JOINT_RECORD_FIELDS
+    if not bool(mask.any()):
+        return {name: 0.0 for name in names}
+    selected_error = error[mask]
+    selected_bound = bound[mask]
+    selected_assembly_excess = assembly_excess[mask]
+    worst = torch.argmax(selected_error)
+    assembly_worst = torch.argmax(selected_assembly_excess)
+    values = torch.stack(
+        (
+            selected_error[worst],
+            component_sum[mask][worst],
+            allowance[mask][worst],
+            selected_bound[worst],
+            (selected_error - selected_bound).max(),
+            factor_count[mask][worst],
+            exact_error[mask].max(),
+            assembly_residual[mask][assembly_worst],
+            assembly_allowance[mask][assembly_worst],
+            selected_assembly_excess[assembly_worst],
+            mask.sum().to(selected_error.dtype),
+        )
+    )
+    return dict(zip(names, (float(value) for value in values.detach().cpu())))
+
+
+def replay_joint_bounds(
+    replay: ReplayOutput, trajectory: EventTrajectory
+) -> dict[str, dict[str, float]]:
+    """Compositional bounds for the two derived joint log probabilities.
+
+    A joint is a sum of float32 factors, so it accumulates its factors'
+    replay differences; bounding it by one factor's tolerance is a category
+    error. Each joint is instead validated against a float64 recomputation
+    from its own recorded factors:
+
+    * `assembly_residual = |joint_f32 - joint_f64|` must not exceed
+      `gamma_n * sum|f|` on either side. This is the check that the stored
+      and replayed joints really are the sum of their recorded factors --
+      an omitted or duplicated factor fails here regardless of tolerance.
+    * The stored/replay joint difference then satisfies, by the triangle
+      inequality over the float64 assemblies,
+      `|J32_replay - J32_stored| <= sum_i|f_replay_i - f_stored_i|
+       + gamma_n*(sum|f_stored| + sum|f_replay|)`,
+      which is the compositional bound the contract registers. It is
+      derived from the per-factor tolerance and conservative float32
+      summation, never fitted to an observed number.
+
+    `gamma_n = n*u/(1 - n*u)` with the float32 unit roundoff `u = 2**-24`.
+    `n` is 9 for the event joint (categorical plus eight transformed-mark
+    components) and the row's active-lifecycle count for the primitive
+    joint. Per-factor differences are widened to float64 before summing, so
+    the bound itself carries no float32 error of its own.
+
+    What these two records do *not* prove, stated so that nothing here reads
+    as coverage it does not provide:
+
+    * `primitive_joint` is unfalsifiable by construction. No primitive joint
+      is stored independently, so its error is `|sum(replay - stored)|`
+      compared against `sum|replay - stored|` plus slack -- the triangle
+      inequality, an identity. `primitive_joint_assembly` compares the
+      float32 and float64 reductions of the *same* difference terms against
+      a bound orders of magnitude larger, and is likewise invariant to any
+      injected corruption. Real primitive coverage is
+      `primitive_component <= REPLAY_COMPONENT_TOLERANCE`, which is
+      adequate; these two are reported for continuity of the record shape,
+      not as gates.
+    * `event_joint` gates only joint *assembly* drift. Once the stored and
+      replayed assembly checks hold, its rule reduces to the same triangle
+      inequality, so a factor-level defect is caught by the component class
+      and by `categorical_support_leak`/`mark_support_leak`, never here.
+    """
+
+    device = replay.log_probs.device
+    active = trajectory.active_mask.to(device)
+    stored_logp = trajectory.old_log_probs.to(device)
+
+    # Primitive joint: the reported quantity is the float32 masked sum of
+    # per-lifecycle differences, exactly as `replay_errors` computes it.
+    primitive_difference = torch.where(
+        active, replay.log_probs - stored_logp, 0.0
+    ).sum(-1)
+    primitive_terms = torch.where(
+        active, (replay.log_probs - stored_logp).double(), 0.0
+    )
+    primitive_exact = primitive_terms.sum(-1)
+    primitive_count = active.sum(-1).double()
+    primitive_gamma = float32_reduction_gamma(primitive_count)
+    primitive_magnitude = (
+        torch.where(active, stored_logp.double().abs(), 0.0).sum(-1)
+        + torch.where(active, replay.log_probs.double().abs(), 0.0).sum(-1)
+    )
+    primitive_rows = active.any(-1)
+
+    # Event joint: nine recorded factors per row, each already zeroed
+    # outside the row's likelihood support by both the collector and the
+    # replay, so masked-out factors contribute nothing to either sum.
+    stored_cat = trajectory.event_old_cat_logp.to(device)
+    stored_mark = trajectory.event_old_mark_component_logp.to(device)
+    stored_joint = trajectory.event_old_joint_logp.to(device)
+    stored_factors = torch.cat((stored_cat.unsqueeze(-1), stored_mark), dim=-1)
+    replay_factors = torch.cat(
+        (replay.event_cat_logp.unsqueeze(-1), replay.event_mark_component_logp),
+        dim=-1,
+    )
+    event_rows = replay.event_cat_mask | replay.event_mark_mask
+    event_difference = replay.event_joint_logp - stored_joint
+    event_component_sum = (
+        (replay_factors.double() - stored_factors.double()).abs().sum(-1)
+    )
+    event_gamma = float32_reduction_gamma(float(EVENT_JOINT_FACTOR_COUNT))
+    stored_magnitude = stored_factors.double().abs().sum(-1)
+    replay_magnitude = replay_factors.double().abs().sum(-1)
+    stored_exact_joint = stored_factors.double().sum(-1)
+    replay_exact_joint = replay_factors.double().sum(-1)
+    # Each side is checked against its own factor magnitudes: the stored
+    # joint must be the float32 sum of the stored factors, and the replayed
+    # joint the float32 sum of the replayed factors. Combining the two sides
+    # before comparing would let a large-magnitude side cover a small one.
+    stored_assembly = (stored_joint.double() - stored_exact_joint).abs()
+    replay_assembly = (replay.event_joint_logp.double() - replay_exact_joint).abs()
+    stored_assembly_allowance = event_gamma * stored_magnitude
+    replay_assembly_allowance = event_gamma * replay_magnitude
+    # The deciding side is the one furthest past its own allowance, and the
+    # reported residual/allowance pair is read from that same side. Reporting
+    # `max(stored, replay)` residual against `gamma * min(magnitude)` mixes
+    # sides and can show a residual above its allowance on a passing record.
+    stored_side = stored_assembly - stored_assembly_allowance
+    replay_side = replay_assembly - replay_assembly_allowance
+    stored_decides = stored_side >= replay_side
+    event_assembly = torch.where(stored_decides, stored_assembly, replay_assembly)
+    event_assembly_allowance = torch.where(
+        stored_decides, stored_assembly_allowance, replay_assembly_allowance
+    )
+    event_assembly_excess = torch.where(stored_decides, stored_side, replay_side)
+
+    return {
+        "primitive_joint": _joint_row_summary(
+            error=primitive_difference.double().abs(),
+            component_sum=primitive_terms.abs().sum(-1),
+            allowance=primitive_gamma * primitive_magnitude,
+            factor_count=primitive_count,
+            assembly_residual=(primitive_difference.double() - primitive_exact).abs(),
+            assembly_allowance=primitive_gamma * primitive_magnitude,
+            assembly_excess=(
+                (primitive_difference.double() - primitive_exact).abs()
+                - primitive_gamma * primitive_magnitude
+            ),
+            exact_error=primitive_exact.abs(),
+            mask=primitive_rows,
+        ),
+        "event_joint": _joint_row_summary(
+            error=event_difference.double().abs(),
+            component_sum=event_component_sum,
+            allowance=event_gamma * (stored_magnitude + replay_magnitude),
+            factor_count=torch.full_like(
+                stored_magnitude, float(EVENT_JOINT_FACTOR_COUNT)
+            ),
+            assembly_residual=event_assembly,
+            assembly_allowance=event_assembly_allowance,
+            assembly_excess=event_assembly_excess,
+            exact_error=(replay_exact_joint - stored_exact_joint).abs(),
+            mask=event_rows,
+        ),
+    }
+
+
+def replay_report(
+    replay: ReplayOutput,
+    trajectory: EventTrajectory,
+    *,
+    tolerance: float = REPLAY_COMPONENT_TOLERANCE,
+) -> dict[str, Any]:
+    """Named per-factor errors, applied joint bounds and a pass result.
+
+    Nothing here is collapsed into a single scalar: an omitted mark
+    component and a benign reduction-order difference are different facts
+    and must stay separable in the evidence.
+
+    Every acceptance test is written in the `not (x <= limit)` form rather
+    than `x > limit`. Both IEEE comparisons against NaN are false, so the
+    `>` form would let a replay that produced NaN anywhere report
+    `passed: True` -- the exact opposite of the fail-closed contract. Every
+    numeric leaf is additionally required to be finite.
+    """
+
+    errors = replay_errors(replay, trajectory)
+    joints = replay_joint_bounds(replay, trajectory)
+    # The partition is the contract. A factor silently dropped from the
+    # error dictionary would otherwise be reported as covered, so an
+    # unclassified or missing name is a failure of the check itself.
+    if set(errors) != set(
+        REPLAY_EXACT_FIELDS + REPLAY_COMPONENT_FIELDS + REPLAY_JOINT_FIELDS
+    ):
+        raise RuntimeError(f"replay error fields do not match the contract {set(errors)}")
+    if any(set(joints[name]) != set(REPLAY_JOINT_RECORD_FIELDS) for name in joints):
+        raise RuntimeError(f"replay joint record fields do not match the contract {joints}")
+    failures: list[str] = sorted(
+        f"non_finite:{name}"
+        for name, value in (
+            *errors.items(),
+            *(
+                (f"{joint}.{key}", number)
+                for joint, record in joints.items()
+                for key, number in record.items()
+            ),
+        )
+        if not math.isfinite(float(value))
+    )
+    failures.extend(name for name in REPLAY_EXACT_FIELDS if errors[name] != 0.0)
+    failures.extend(
+        name for name in REPLAY_COMPONENT_FIELDS if not errors[name] <= tolerance
+    )
+    failures.extend(
+        name for name in REPLAY_JOINT_FIELDS if not joints[name]["excess"] <= 0.0
+    )
+    failures.extend(
+        f"{name}_assembly"
+        for name in REPLAY_JOINT_FIELDS
+        if not joints[name]["assembly_excess"] <= 0.0
+    )
+    return {
+        "errors": errors,
+        "joints": joints,
+        "component_tolerance": float(tolerance),
+        "failures": failures,
+        "passed": not failures,
     }
 
 
@@ -945,20 +1237,21 @@ def validate_replay(
     trajectory: EventTrajectory,
     *,
     device: torch.device,
-    tolerance: float = REPLAY_TOLERANCE,
-) -> tuple[ReplayOutput, dict[str, float]]:
+    tolerance: float = REPLAY_COMPONENT_TOLERANCE,
+) -> tuple[ReplayOutput, dict[str, Any]]:
     replay = replay_trajectory(arm, trajectory, device=device)
-    errors = replay_errors(replay, trajectory)
-    exact_names = (
-        "mask_mismatch", "kind_support_mismatch",
-        "event_action_mismatch", "detach_mismatch",
-    )
-    if any(errors[name] != 0.0 for name in exact_names):
-        raise RuntimeError(f"semantic replay exact-support mismatch {errors}")
-    approximate_names = tuple(name for name in errors if name not in exact_names)
-    if any(errors[name] > tolerance for name in approximate_names):
-        raise RuntimeError(f"semantic replay tolerance mismatch {errors}")
-    return replay, errors
+    report = replay_report(replay, trajectory, tolerance=tolerance)
+    if not report["passed"]:
+        errors = report["errors"]
+        if any(name in REPLAY_EXACT_FIELDS for name in report["failures"]):
+            raise RuntimeError(
+                f"semantic replay exact-support mismatch {report['failures']} {errors}"
+            )
+        raise RuntimeError(
+            f"semantic replay tolerance mismatch {report['failures']} "
+            f"{errors} {report['joints']}"
+        )
+    return replay, report
 
 
 def action_distribution_tv(
@@ -1667,9 +1960,12 @@ def fork_single_opportunity(
         # exists precisely to remove the float32 reduction-order drift class
         # rather than bound it, so any non-zero residual here is the drift
         # this design eliminated and must fail. Deliberately not expressed
-        # against `REPLAY_TOLERANCE`: that constant bounds the replay of a
-        # collected batch under a different code path and is owned
-        # elsewhere; a fork's acceptance criterion must not move with it.
+        # against the replay contract: `REPLAY_COMPONENT_TOLERANCE` and the
+        # derived-joint compositional bound cover the replay of a collected
+        # batch under a different code path and are owned elsewhere; a
+        # fork's acceptance criterion must not move with them, and the
+        # relaxed joint rule must never admit a reconstruction that can be
+        # made bitwise exact.
         if prefix_errors["continuous"] != 0.0:
             if diagnostics is not None:
                 diagnostics["prefix_errors"] = prefix_errors
@@ -1828,7 +2124,8 @@ def fork_single_opportunity(
         )
     # Exactness, not tolerance -- see the prefix guard above. A fork-owned
     # constant would be required before any non-zero allowance is admitted
-    # here; `REPLAY_TOLERANCE` is not that constant.
+    # here; neither `REPLAY_COMPONENT_TOLERANCE` nor the derived-joint
+    # compositional bound is that constant.
     if natural_errors["continuous"] != 0.0:
         raise RuntimeError(
             f"fork natural branch continuation is not bitwise exact {natural_errors} "
@@ -2013,8 +2310,8 @@ def optimize_update(
         raise ValueError("updates require a complete episode rollout")
     packed = _pack_trajectory_once(trajectory, device)
     arm.train()
-    _validated_replay, errors = validate_replay(
-        arm, packed, device=device, tolerance=REPLAY_TOLERANCE
+    _validated_replay, replay_evidence = validate_replay(
+        arm, packed, device=device, tolerance=REPLAY_COMPONENT_TOLERANCE
     )
     advantages, returns = compute_gae(packed, device=device)
     active = packed.active_mask
@@ -2026,7 +2323,7 @@ def optimize_update(
         (packed.event_kind.eq(KEEP) | packed.event_kind.eq(RENEW)).any().detach().cpu()
     )
     metrics: dict[str, Any] = {
-        "replay": errors,
+        "replay": replay_evidence,
         "base_steps": 0,
         "event_steps": 0,
         "primitive_replays": 0,

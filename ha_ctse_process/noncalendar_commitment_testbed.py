@@ -84,9 +84,84 @@ LEARNING_RATE = 3e-4
 ADAM_EPSILON = 1e-5
 WEIGHT_DECAY = 0.0
 PPO_PASSES = 4
-REPLAY_TOLERANCE = 1e-6
+# Replay portability contract. One scalar cannot bound both a single
+# continuous quantity and a sum of nine of them: a derived joint accumulates
+# its summands' errors, so it needs the summands' allowance plus the float32
+# reduction error of the sum itself. Four classes, not one number.
+REPLAY_COMPONENT_TOLERANCE = 1e-6
+FLOAT32_UNIT_ROUNDOFF = 2.0**-24
+# Categorical factor plus the eight transformed-mark components. Fixed at 9
+# for every event row: factors outside a row's support are exactly zero and
+# so contribute nothing to either the sum or its magnitude bound.
+EVENT_JOINT_FACTOR_COUNT = 9
+# Compared for exact equality; any non-zero value is a defect, never drift.
+# `categorical_support_leak`/`mark_support_leak` close the one blind spot the
+# masked component checks structurally cannot see. `categorical_component` is
+# read only inside `event_cat_mask` and `mark_component` only inside
+# `event_mark_mask`, so a factor recorded non-zero *outside* its own support is
+# invisible to both, and if the stored joint is reassembled to include it the
+# joint's own bound widens by exactly the corruption (the joint rule reduces to
+# the triangle inequality once the assembly checks hold, so it can never fire
+# first). The collector zeroes every factor outside its support before storing
+# it, so both quantities are exactly zero by construction on clean data and any
+# non-zero value is a support leak, never drift.
+REPLAY_EXACT_FIELDS = (
+    "mask_mismatch",
+    "kind_support_mismatch",
+    "event_action_mismatch",
+    "detach_mismatch",
+    "categorical_support_leak",
+    "mark_support_leak",
+)
+# Ordinary continuous state, each an individual quantity rather than a sum,
+# and so gated at `REPLAY_COMPONENT_TOLERANCE` unchanged.
+REPLAY_COMPONENT_FIELDS = (
+    "primitive_component",
+    "value",
+    "hidden",
+    "prefix",
+    "event_input",
+    "categorical_component",
+    "mark_component",
+    "event_new_z",
+    "primitive_event_z",
+)
+# Derived sums, gated by their own compositional bound rather than by
+# `REPLAY_COMPONENT_TOLERANCE`.
+REPLAY_JOINT_FIELDS = ("primitive_joint", "event_joint")
+# The complete per-joint record. A serialized joint reduced to the three keys
+# a validator happens to read would otherwise pass while carrying no evidence,
+# so the full set is required rather than a readable subset.
+REPLAY_JOINT_RECORD_FIELDS = (
+    "error",
+    "component_sum",
+    "allowance",
+    "bound",
+    "excess",
+    "factor_count",
+    "float64_error",
+    "assembly_residual",
+    "assembly_allowance",
+    "assembly_excess",
+    "rows",
+)
+# Same-checkpoint continuation, a different invariant from replay
+# portability, and deliberately unchanged by the replay-bound correction.
 RESUME_TOLERANCE = 1e-7
 OPPORTUNITY_SUPPORT = (4, 8, 12)
+
+
+def float32_reduction_gamma(factor_count: Any) -> Any:
+    """Standard `gamma_n = n*u/(1 - n*u)` float32 summation growth factor.
+
+    `u = 2**-24` is the float32 unit roundoff. Summing `n` float32 values in
+    any order gives a result within `gamma_{n-1} * sum|x_i|` of the exact
+    sum; using `gamma_n` is the conservative form. Accepts a Python number
+    or a tensor/array of per-row factor counts and returns the same kind.
+    """
+
+    scaled = factor_count * FLOAT32_UNIT_ROUNDOFF
+    return scaled / (1.0 - scaled)
 
 
 def make_rng(seed: int, *coordinates: int) -> np.random.Generator:
@@ -817,8 +892,69 @@ def registered_contract() -> dict[str, Any]:
             "adam_epsilon": ADAM_EPSILON,
             "weight_decay": WEIGHT_DECAY,
             "ppo_passes": PPO_PASSES,
-            "replay_tolerance": REPLAY_TOLERANCE,
             "resume_tolerance": RESUME_TOLERANCE,
             "opportunity_support": list(OPPORTUNITY_SUPPORT),
+        },
+        "replay_tolerances": {
+            "exact_fields": list(REPLAY_EXACT_FIELDS),
+            "continuous_component_fields": list(REPLAY_COMPONENT_FIELDS),
+            "joint_fields": list(REPLAY_JOINT_FIELDS),
+            "joint_record_fields": list(REPLAY_JOINT_RECORD_FIELDS),
+            "continuous_component_atol": REPLAY_COMPONENT_TOLERANCE,
+            "categorical_component_atol": REPLAY_COMPONENT_TOLERANCE,
+            "mark_component_atol": REPLAY_COMPONENT_TOLERANCE,
+            "primitive_joint_rule": "component_sum_plus_float32_reduction",
+            "event_joint_rule": (
+                "categorical_plus_8_marks_plus_float32_reduction"
+            ),
+            "event_joint_factor_count": EVENT_JOINT_FACTOR_COUNT,
+            "primitive_joint_factor_count": "active_lifecycles_per_row",
+            "float32_unit_roundoff": FLOAT32_UNIT_ROUNDOFF,
+            "support_leak_fields": [
+                "categorical_support_leak",
+                "mark_support_leak",
+            ],
+            "support_leak_rule": (
+                "stored_factor_outside_its_own_mask_must_be_exactly_zero"
+            ),
+            # What each class does and does not prove, stated rather than
+            # implied. A gate that cannot fire must not read as coverage.
+            "primitive_joint_gating": (
+                "non_gating: there is no independently stored primitive joint, "
+                "so the error |sum(replay-stored)| is bounded by "
+                "sum|replay-stored| plus slack -- the triangle inequality, an "
+                "identity. Real primitive coverage is primitive_component <= "
+                "continuous_component_atol."
+            ),
+            "primitive_joint_assembly_gating": (
+                "non_gating: compares float32 and float64 reductions of the "
+                "identical difference terms against a bound orders of "
+                "magnitude larger; invariant to injected corruption."
+            ),
+            "event_joint_gating": (
+                "gates only joint assembly drift: once the stored and replayed "
+                "assembly checks hold the joint rule is the triangle "
+                "inequality. Factor-level coverage comes from the component "
+                "and support-leak classes, not from this bound."
+            ),
+            "joint_record_internal_consistency": (
+                "bound == component_sum + allowance; "
+                "excess >= error - bound (excess is the row maximum of "
+                "error-bound and the reported error/bound are read at the "
+                "largest-error row, so equality is not an invariant); "
+                "assembly_excess == assembly_residual - assembly_allowance, "
+                "all three read at the deciding row and side; "
+                "component_sum <= sum of the recorded per-factor component "
+                "errors over the joint's factors; rows > 0 for any arm "
+                "carrying the head that produces the joint."
+            ),
+            "correlated_bias_sensitivity": (
+                "per-factor gating is ~9x weaker than the retired single "
+                "scalar against a bias correlated across all nine event "
+                "factors: a uniform displacement up to about 9e-6 nats passes "
+                "where the scalar rule failed. This relaxation is intended "
+                "and immaterial to PPO at an importance ratio of 1 + 9e-6."
+            ),
+            "non_finite_rule": "any_non_finite_leaf_fails_closed",
         },
     }

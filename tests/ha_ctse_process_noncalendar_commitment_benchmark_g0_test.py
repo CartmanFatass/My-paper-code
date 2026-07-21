@@ -5,6 +5,7 @@ from dataclasses import replace
 from typing import Any
 import hashlib
 import json
+import math
 import random
 
 import numpy as np
@@ -41,15 +42,21 @@ from ha_ctse_process.event_held_commitment_link import (
     nested_state_maximum_difference,
     optimize_update,
     parameter_and_optimizer_counts,
+    replay_joint_bounds,
+    replay_report,
+    replay_trajectory,
     runtime_rng_equal,
     runtime_rng_snapshot,
     save_checkpoint,
+    transformed_mark_component_logp,
     validate_replay,
 )
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
+    EVENT_JOINT_FACTOR_COUNT,
     EVENT_SEED,
+    FLOAT32_UNIT_ROUNDOFF,
     GAIN_THRESHOLD,
     HELD_OUT_EVAL_TASK_SEED,
     IID_EVAL_TASK_SEED,
@@ -57,11 +64,17 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     LIFETIME_BIN_THRESHOLD,
     MARK_SEED,
     OPPORTUNITY_SEED,
+    REPLAY_COMPONENT_FIELDS,
+    REPLAY_COMPONENT_TOLERANCE,
+    REPLAY_EXACT_FIELDS,
+    REPLAY_JOINT_FIELDS,
+    REPLAY_JOINT_RECORD_FIELDS,
     SUPPORT_FLOOR,
     TRAIN_ACTION_SEED,
     TRAIN_ORDER_SEED,
     TRAIN_TASK_SEED,
     NoncalendarTrackingEnv,
+    float32_reduction_gamma,
     make_noncalendar_ledger,
     make_rng,
     paired_ledgers_equal_except_targets,
@@ -76,7 +89,9 @@ from scripts.run_noncalendar_commitment_benchmark_g0 import (
     TRAIN_MANIFEST_SCHEMA,
     _evaluation_state,
     _json_ready,
+    _replay_record_valid,
     _trajectory_episode_rows,
+    merge_replay_records,
     run_smoke,
     validate_operational_records,
 )
@@ -477,10 +492,21 @@ def test_semantic_replay_corruption_negatives(
     trajectory = collect_trajectory(
         arms["DUM"], state, device=cuda_device, episode_ids=(0,)
     )
-    _replay, errors = validate_replay(
+    _replay, report = validate_replay(
         arms["DUM"], trajectory, device=cuda_device
     )
-    assert max(errors.values()) <= 1e-6
+    errors = report["errors"]
+    assert report["passed"] and not report["failures"]
+    assert all(errors[name] == 0.0 for name in REPLAY_EXACT_FIELDS)
+    assert all(
+        errors[name] <= REPLAY_COMPONENT_TOLERANCE
+        for name in REPLAY_COMPONENT_FIELDS
+    )
+    assert all(
+        report["joints"][name]["excess"] <= 0.0
+        and report["joints"][name]["assembly_excess"] <= 0.0
+        for name in REPLAY_JOINT_FIELDS
+    )
     event_index = tuple(
         int(value) for value in torch.nonzero(
             trajectory.event_kind.ne(0), as_tuple=False
@@ -1393,6 +1419,34 @@ def test_checkpoint_strict_continuation_and_cuda_smoke(
         "discrete_equal", "lifecycle_equal", "owned_rng_equal", "global_rng_equal"
     ))
     assert (tmp_path / "smoke" / "smoke_result.json").is_file()
+    # The serialized replay evidence must survive the JSON round trip and
+    # still satisfy the same fail-closed validation the formal evaluation
+    # artifacts are held to -- named per-factor errors plus the derived
+    # joint bounds actually applied, never a single collapsed scalar.
+    serialized = json.loads(
+        (tmp_path / "smoke" / "smoke_result.json").read_text(encoding="utf-8")
+    )
+    for arm_name in ARMS:
+        record = serialized["arms"][arm_name]["replay"]
+        assert "maximum_error" not in record
+        event_rows = arm_name != "OR"
+        assert _replay_record_valid(record, event_rows_required=event_rows), arm_name
+        assert _replay_record_valid(
+            serialized["arms"][arm_name]["update"]["replay"],
+            event_rows_required=event_rows,
+        ), arm_name
+        assert record["joints"]["event_joint"]["factor_count"] == (
+            0.0 if arm_name == "OR" else 9.0
+        )
+        # An arm that carries an event head must have examined event rows;
+        # the ordinary source legitimately has none, and its event joint is
+        # then all-zero rather than merely row-less.
+        assert (record["joints"]["event_joint"]["rows"] > 0.0) is event_rows
+        assert record["joints"]["primitive_joint"]["rows"] > 0.0
+        assert _replay_record_valid(record) is event_rows, arm_name
+        # Clean trajectories leak nothing outside either factor's support.
+        assert record["errors"]["categorical_support_leak"] == 0.0, arm_name
+        assert record["errors"]["mark_support_leak"] == 0.0, arm_name
 
 
 def test_authoritative_seed_maps_and_independent_cells() -> None:
@@ -1420,6 +1474,48 @@ def test_authoritative_seed_maps_and_independent_cells() -> None:
     assert states[0].seed_map == states[1].seed_map == iid
     assert states[2].seed_map == states[3].seed_map == held
     assert all(set(state.rngs) == set(RNG_NAMES) for state in states)
+
+
+def _synthetic_replay_record() -> dict[str, object]:
+    """A clean structured replay record in the registered artifact shape.
+
+    Deliberately not a single scalar: every named factor is present, and
+    each derived joint carries the compositional bound it was tested
+    against. `_replay_record_valid` re-derives acceptance from these
+    numbers, so an incomplete record cannot pass by carrying `passed`.
+    """
+
+    def joint(factor_count: float, magnitude: float) -> dict[str, float]:
+        allowance = float(float32_reduction_gamma(factor_count) * magnitude)
+        return {
+            "error": 0.0,
+            "component_sum": 0.0,
+            "allowance": allowance,
+            "bound": allowance,
+            "excess": -allowance,
+            "factor_count": factor_count,
+            "float64_error": 0.0,
+            "assembly_residual": 0.0,
+            "assembly_allowance": allowance,
+            "assembly_excess": -allowance,
+            "rows": 1280.0,
+        }
+
+    return {
+        "errors": {
+            name: 0.0
+            for name in (
+                REPLAY_EXACT_FIELDS + REPLAY_COMPONENT_FIELDS + REPLAY_JOINT_FIELDS
+            )
+        },
+        "joints": {
+            "primitive_joint": joint(3.0, 12.0),
+            "event_joint": joint(float(EVENT_JOINT_FACTOR_COUNT), 16.0),
+        },
+        "component_tolerance": REPLAY_COMPONENT_TOLERANCE,
+        "failures": [],
+        "passed": True,
+    }
 
 
 def _synthetic_operational_records() -> tuple[
@@ -1477,7 +1573,7 @@ def _synthetic_operational_records() -> tuple[
                 "checkpoint_origin": "update_250.pt",
                 "counts": {"episodes": 256, "horizon": 80},
                 "seed_map": authoritative_seed_map(profile, 0),
-                "replay": {"maximum_error": 0.0},
+                "replay": _synthetic_replay_record(),
                 "operational": {
                     "probability_replay": True,
                     "lifecycle": True,
@@ -1501,6 +1597,45 @@ def test_fail_closed_operational_manifest_negatives() -> None:
     assert not validate_operational_records(
         training, corrupted_cell, expected_replicates=(0,)
     )[0]
+    # The replay record is conclusion-bearing evidence, so every way of
+    # degrading it must fail closed: the retired single-scalar shape, a
+    # dropped factor, a component over its own tolerance, a joint over its
+    # compositional bound, a joint that is not the sum of its factors, and
+    # a `passed` flag not supported by the numbers beneath it.
+    for label, mutation in (
+        ("legacy_scalar", lambda record: {"maximum_error": 0.0}),
+        ("dropped_factor", lambda record: record | {
+            "errors": {
+                name: value for name, value in record["errors"].items()
+                if name != "mark_component"
+            }
+        }),
+        ("component_over_tolerance", lambda record: record | {
+            "errors": record["errors"] | {"mark_component": 2e-6}
+        }),
+        ("joint_over_bound", lambda record: record | {
+            "joints": record["joints"] | {
+                "event_joint": record["joints"]["event_joint"] | {"excess": 1e-9}
+            }
+        }),
+        ("joint_assembly", lambda record: record | {
+            "joints": record["joints"] | {
+                "event_joint": record["joints"]["event_joint"]
+                | {"assembly_excess": 1e-9}
+            }
+        }),
+        ("unsupported_pass", lambda record: record | {
+            "errors": record["errors"] | {"mask_mismatch": 1.0}
+        }),
+        ("wrong_tolerance", lambda record: record | {"component_tolerance": 1e-5}),
+    ):
+        degraded = deepcopy(cells)
+        target = degraded[(0, "EHC", "iid_stochastic")]
+        target["replay"] = mutation(deepcopy(target["replay"]))
+        assert not _replay_record_valid(target["replay"]), label
+        assert not validate_operational_records(
+            training, degraded, expected_replicates=(0,)
+        )[0], label
     for family, mutation in (
         ("no_op", lambda value: value["replicates"]["0"]["operational"].__setitem__("no_op", False)),
         ("exposure", lambda value: value["replicates"]["0"]["arms"]["EHC"].__setitem__("base_steps", 999)),
@@ -1630,3 +1765,688 @@ def test_select_result_branch_rejects_non_three_k_bins() -> None:
     ):
         with pytest.raises(ValueError, match="k_bin_cis"):
             select_result_branch(**(base | {"k_bin_cis": wrong}))
+
+
+def _event_factor_tensors(
+    replay: Any, trajectory: Any, device: torch.device
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """The nine recorded event factors, stored and replayed, plus the rows."""
+
+    stored = torch.cat(
+        (
+            trajectory.event_old_cat_logp.to(device).unsqueeze(-1),
+            trajectory.event_old_mark_component_logp.to(device),
+        ),
+        dim=-1,
+    ).double()
+    replayed = torch.cat(
+        (
+            replay.event_cat_logp.unsqueeze(-1),
+            replay.event_mark_component_logp,
+        ),
+        dim=-1,
+    ).double()
+    return stored, replayed, replay.event_cat_mask | replay.event_mark_mask
+
+
+def test_derived_joint_bounds_are_recomputed_not_fitted(
+    cuda_device: torch.device,
+) -> None:
+    """The joint allowance follows from the factor algebra, not observation.
+
+    A derived joint accumulates its summands' replay differences, so it
+    cannot share a single summand's tolerance. The bound applied is
+    `sum_i|f_replay_i - f_stored_i| + gamma_n*(sum|f_stored| + sum|f_replay|)`
+    with `gamma_n = n*u/(1 - n*u)` and float32 unit roundoff `u = 2**-24`.
+    Every term is recomputed here from the recorded factors and the two
+    published contract constants alone -- the observed joint error appears
+    nowhere in the allowance -- so a bound quietly widened to whatever a
+    particular device happened to produce would fail this test.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    assert trajectory.active_mask.shape[1] == 16
+    replay = replay_trajectory(arm, trajectory, device=cuda_device)
+    joints = replay_joint_bounds(replay, trajectory)
+
+    unit_roundoff = 2.0**-24
+    assert FLOAT32_UNIT_ROUNDOFF == unit_roundoff
+    contract_block = registered_contract()["replay_tolerances"]
+    assert contract_block["float32_unit_roundoff"] == unit_roundoff
+    assert contract_block["event_joint_factor_count"] == EVENT_JOINT_FACTOR_COUNT == 9
+    gamma_nine = 9.0 * unit_roundoff / (1.0 - 9.0 * unit_roundoff)
+    assert float32_reduction_gamma(9.0) == gamma_nine
+    assert gamma_nine == pytest.approx(5.36442090748478e-07, rel=1e-12)
+
+    stored, replayed, rows = _event_factor_tensors(replay, trajectory, cuda_device)
+    assert bool(rows.any())
+    error = (
+        replay.event_joint_logp - trajectory.event_old_joint_logp.to(cuda_device)
+    ).double().abs()
+    component_sum = (replayed - stored).abs().sum(-1)
+    allowance = gamma_nine * (stored.abs().sum(-1) + replayed.abs().sum(-1))
+    worst = int(torch.argmax(error[rows]).detach().cpu())
+    record = joints["event_joint"]
+    assert record["factor_count"] == 9.0
+    assert record["error"] == pytest.approx(float(error[rows][worst]), rel=1e-12)
+    assert record["component_sum"] == pytest.approx(
+        float(component_sum[rows][worst]), rel=1e-12
+    )
+    assert record["allowance"] == pytest.approx(
+        float(allowance[rows][worst]), rel=1e-12
+    )
+    assert record["bound"] == pytest.approx(
+        float((component_sum + allowance)[rows][worst]), rel=1e-12
+    )
+    assert record["excess"] == pytest.approx(
+        float((error - component_sum - allowance)[rows].max()), rel=1e-12
+    )
+    assert record["excess"] <= 0.0
+    assert record["rows"] == float(int(rows.sum()))
+
+    active = trajectory.active_mask.to(cuda_device)
+    stored_logp = trajectory.old_log_probs.to(cuda_device)
+    terms = torch.where(active, (replay.log_probs - stored_logp).double(), 0.0)
+    primitive_error = (
+        torch.where(active, replay.log_probs - stored_logp, 0.0).sum(-1).double().abs()
+    )
+    counts = active.sum(-1).double()
+    primitive_gamma = counts * unit_roundoff / (1.0 - counts * unit_roundoff)
+    magnitude = torch.where(
+        active, stored_logp.double().abs(), 0.0
+    ).sum(-1) + torch.where(active, replay.log_probs.double().abs(), 0.0).sum(-1)
+    primitive_rows = active.any(-1)
+    assert bool(primitive_rows.any())
+    primitive_worst = int(torch.argmax(primitive_error[primitive_rows]).detach().cpu())
+    primitive = joints["primitive_joint"]
+    # The primitive factor count is the row's own active-lifecycle count,
+    # not a constant: a two-lifecycle row must not borrow a six-lifecycle
+    # row's allowance.
+    assert 1.0 <= primitive["factor_count"] <= float(MAX_LIFECYCLES)
+    assert primitive["factor_count"] == float(
+        counts[primitive_rows][primitive_worst]
+    )
+    assert primitive["component_sum"] == pytest.approx(
+        float(terms.abs().sum(-1)[primitive_rows][primitive_worst]), rel=1e-12
+    )
+    assert primitive["allowance"] == pytest.approx(
+        float((primitive_gamma * magnitude)[primitive_rows][primitive_worst]),
+        rel=1e-12,
+    )
+    assert primitive["excess"] <= 0.0
+    assert len(set(counts[primitive_rows].tolist())) > 1
+
+
+def _first_renew_index(trajectory: Any) -> tuple[int, ...]:
+    """A row whose support carries all nine event factors."""
+
+    rows = torch.nonzero(trajectory.event_kind.eq(RENEW), as_tuple=False)
+    assert rows.numel() > 0
+    return tuple(int(value) for value in rows[0].detach().cpu())
+
+
+def _restated_event_factors(
+    trajectory: Any,
+    *,
+    index: tuple[int, ...],
+    categorical: torch.Tensor | None = None,
+    marks: torch.Tensor | None = None,
+) -> Any:
+    """Rewrite one row's stored event factors and its stored joint together.
+
+    The joint is reassembled by the collector's own rule
+    (`categorical + marks.sum(-1)`, float32), so the recorded joint stays a
+    faithful sum of the recorded factors. That isolates the per-component
+    guard from the float64 assembly guard: whatever fails afterwards fails
+    because a *factor* is wrong, not because the joint stopped matching its
+    own factors.
+    """
+
+    stored_cat = trajectory.event_old_cat_logp.clone()
+    stored_mark = trajectory.event_old_mark_component_logp.clone()
+    if categorical is not None:
+        stored_cat[index] = categorical
+    if marks is not None:
+        stored_mark[index] = marks
+    stored_joint = trajectory.event_old_joint_logp.clone()
+    stored_joint[index] = stored_cat[index] + stored_mark[index].sum(-1)
+    return replace(
+        trajectory,
+        event_old_cat_logp=stored_cat,
+        event_old_mark_component_logp=stored_mark,
+        event_old_joint_logp=stored_joint,
+    )
+
+
+def test_defective_component_still_fails_under_the_relaxed_joint_rule(
+    cuda_device: torch.device,
+) -> None:
+    """The relaxed joint rule must never rescue a defective factor.
+
+    Each defect below is placed on a RENEW row (all nine factors in
+    support) and sized at `2e-6` -- above the unchanged `1e-6` per-component
+    bound but far below the derived joint bound, which is roughly `1e-5` on
+    these magnitudes. The decisive assertion is therefore not merely that
+    `validate_replay` raises, but that it raises *naming the component*
+    while the joint it belongs to is still comfortably inside its own
+    compositional bound. If the correction had widened the per-component
+    class, every case here would pass silently.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    replay = replay_trajectory(arm, trajectory, device=cuda_device)
+    assert replay_report(replay, trajectory)["passed"]
+    index = _first_renew_index(trajectory)
+    defect = 2e-6
+
+    inputs = trajectory.event_inputs[index].unsqueeze(0).to(cuda_device)
+    u_row = trajectory.event_u[index].unsqueeze(0).to(cuda_device)
+    with torch.no_grad():
+        mu, sigma = _normal_parameters(arm.mark_head(inputs))
+        correct_marks = transformed_mark_component_logp(u_row, mu, sigma)[0]
+        # The registered Jacobian, recomputed here from the contract's own
+        # stable form rather than read back from the module under test.
+        log_jacobian = (
+            2.0 * (math.log(2.0) - u_row - F.softplus(-2.0 * u_row))
+        )[0]
+    assert torch.allclose(
+        correct_marks,
+        trajectory.event_old_mark_component_logp[index],
+        atol=REPLAY_COMPONENT_TOLERANCE,
+    )
+    assert float(log_jacobian.abs().max()) > 0.0
+
+    omitted_jacobian = correct_marks + log_jacobian
+    # A Jacobian error of size `d` reaches the likelihood as a mark-component
+    # error of size `d`, because the component is `normal - log_jacobian`.
+    # `2e-6` is the smallest such error the per-component class must still
+    # reject; the whole-row omission is the coarse version of the same fault.
+    shifted_jacobian = correct_marks.clone()
+    shifted_jacobian[0] = correct_marks[0] - defect
+
+    displaced_marks = trajectory.event_old_mark_component_logp[index].clone()
+    displaced_marks[0] = displaced_marks[0] - defect
+    cases = {
+        "mark_component": _restated_event_factors(
+            trajectory, index=index, marks=displaced_marks
+        ),
+        "categorical_component": _restated_event_factors(
+            trajectory,
+            index=index,
+            categorical=trajectory.event_old_cat_logp[index] - defect,
+        ),
+        "jacobian_shift": _restated_event_factors(
+            trajectory, index=index, marks=shifted_jacobian
+        ),
+        "jacobian_omitted": _restated_event_factors(
+            trajectory, index=index, marks=omitted_jacobian
+        ),
+    }
+    expected_field = {
+        "mark_component": "mark_component",
+        "categorical_component": "categorical_component",
+        "jacobian_shift": "mark_component",
+        "jacobian_omitted": "mark_component",
+    }
+    for label, corrupted in cases.items():
+        corrupted_replay = replay_trajectory(arm, corrupted, device=cuda_device)
+        report = replay_report(corrupted_replay, corrupted)
+        assert not report["passed"], label
+        assert expected_field[label] in report["failures"], label
+        assert (
+            report["errors"][expected_field[label]] > REPLAY_COMPONENT_TOLERANCE
+        ), label
+        if label != "jacobian_omitted":
+            # The joint moved by the same amount and is still well inside
+            # its own bound: only the per-component class caught this.
+            assert "event_joint" not in report["failures"], label
+            assert report["joints"]["event_joint"]["excess"] < 0.0, label
+            assert (
+                report["errors"]["event_joint"]
+                <= report["joints"]["event_joint"]["bound"]
+            ), label
+        assert "event_joint_assembly" not in report["failures"], label
+        with pytest.raises(RuntimeError, match="semantic replay tolerance mismatch"):
+            validate_replay(arm, corrupted, device=cuda_device)
+
+
+def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
+    cuda_device: torch.device,
+) -> None:
+    """Accumulation across nine factors passes; a joint defect does not.
+
+    First case: every one of the nine factors on a RENEW row is displaced
+    by `2e-7`, which stacks on that row's own reduction-order difference and
+    still leaves every component inside the unchanged `1e-6` bound, and the
+    recorded joint is reassembled from them. Their sum then exceeds `1e-6`
+    -- exactly the situation the old single scalar declared a failure. It
+    must pass, and the measured numbers here prove the joint really did
+    exceed `1e-6` rather than the test asserting a vacuous inequality.
+
+    Second case: the recorded joint alone is displaced past its
+    compositional bound while every factor stays clean. It must raise, and
+    it must raise on the joint rather than on any component.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    index = _first_renew_index(trajectory)
+    displacement = 2e-7
+
+    accumulated = _restated_event_factors(
+        trajectory,
+        index=index,
+        categorical=trajectory.event_old_cat_logp[index] - displacement,
+        marks=trajectory.event_old_mark_component_logp[index] - displacement,
+    )
+    accumulated_replay = replay_trajectory(arm, accumulated, device=cuda_device)
+    report = replay_report(accumulated_replay, accumulated)
+    assert report["passed"], report["failures"]
+    assert all(
+        report["errors"][name] <= REPLAY_COMPONENT_TOLERANCE
+        for name in REPLAY_COMPONENT_FIELDS
+    )
+    assert report["errors"]["event_joint"] > REPLAY_COMPONENT_TOLERANCE
+    assert report["errors"]["event_joint"] <= report["joints"]["event_joint"]["bound"]
+    assert report["joints"]["event_joint"]["excess"] < 0.0
+    assert report["joints"]["event_joint"]["assembly_excess"] < 0.0
+    # It is the nine-way accumulation, not one large factor, that carries
+    # the joint past `1e-6`: no single component is even at half the bound.
+    assert (
+        report["errors"]["event_joint"]
+        > 2.0 * max(report["errors"][name] for name in REPLAY_COMPONENT_FIELDS)
+    )
+
+    over_bound = trajectory.event_old_joint_logp.clone()
+    over_bound[index] = over_bound[index] - 5e-5
+    defective = replace(trajectory, event_old_joint_logp=over_bound)
+    defective_replay = replay_trajectory(arm, defective, device=cuda_device)
+    defective_report = replay_report(defective_replay, defective)
+    assert not defective_report["passed"]
+    assert "event_joint" in defective_report["failures"]
+    assert defective_report["joints"]["event_joint"]["excess"] > 0.0
+    assert all(
+        defective_report["errors"][name] <= REPLAY_COMPONENT_TOLERANCE
+        for name in REPLAY_COMPONENT_FIELDS
+    )
+    # A joint that is no longer the sum of its own recorded factors is
+    # caught by the float64 assembly check as well, independently of the
+    # size of the displacement.
+    assert "event_joint_assembly" in defective_report["failures"]
+    with pytest.raises(RuntimeError, match="event_joint"):
+        validate_replay(arm, defective, device=cuda_device)
+
+
+def test_registered_contract_replay_block_and_checkpoint_strictness(
+    cuda_device: torch.device, tmp_path: Any
+) -> None:
+    """The contract carries the four classes, not one scalar.
+
+    `load_checkpoint` rejects on contract inequality, so a checkpoint
+    written under the retired scalar must fail strict load. That is the
+    intended consequence of the correction and there is no migration path.
+    """
+
+    contract = registered_contract()
+    block = contract["replay_tolerances"]
+    assert "replay_tolerance" not in contract["optimization"]
+    assert "replay_tolerance" not in contract
+    assert json.dumps(contract, sort_keys=True).count('"replay_tolerance"') == 0
+    assert block["exact_fields"] == list(REPLAY_EXACT_FIELDS)
+    assert block["continuous_component_fields"] == list(REPLAY_COMPONENT_FIELDS)
+    assert block["joint_fields"] == list(REPLAY_JOINT_FIELDS)
+    assert block["continuous_component_atol"] == REPLAY_COMPONENT_TOLERANCE == 1e-6
+    assert block["categorical_component_atol"] == REPLAY_COMPONENT_TOLERANCE
+    assert block["mark_component_atol"] == REPLAY_COMPONENT_TOLERANCE
+    assert block["primitive_joint_rule"] == "component_sum_plus_float32_reduction"
+    assert (
+        block["event_joint_rule"]
+        == "categorical_plus_8_marks_plus_float32_reduction"
+    )
+    assert block["float32_unit_roundoff"] == 2.0**-24
+    # Every field the validator checks is named in the contract, including
+    # the two support-leak fields and the full per-joint record shape.
+    assert block["support_leak_fields"] == [
+        "categorical_support_leak", "mark_support_leak"
+    ]
+    assert set(block["support_leak_fields"]) <= set(block["exact_fields"])
+    assert block["joint_record_fields"] == list(REPLAY_JOINT_RECORD_FIELDS)
+    # The two primitive joint gates are declared non-gating rather than
+    # advertised as coverage they cannot provide.
+    assert block["primitive_joint_gating"].startswith("non_gating")
+    assert block["primitive_joint_assembly_gating"].startswith("non_gating")
+    assert "primitive_component" in block["primitive_joint_gating"]
+    assert "triangle inequality" in block["event_joint_gating"]
+    # The intended relaxation is declared, not left to be discovered.
+    assert "9e-6" in block["correlated_bias_sensitivity"]
+    assert "rows > 0" in block["joint_record_internal_consistency"]
+    assert block["non_finite_rule"] == "any_non_finite_leaf_fails_closed"
+    # The same-checkpoint continuation invariant is a different quantity and
+    # is untouched by the replay correction.
+    assert contract["optimization"]["resume_tolerance"] == 1e-7
+
+    arms, base_optimizers, event_optimizers = initialize_arms(cuda_device)
+    state = make_training_state("EHC", 0)
+    path = tmp_path / "contract_strictness.pt"
+    save_checkpoint(
+        path, arm=arms["EHC"], base_optimizer=base_optimizers["EHC"],
+        event_optimizer=event_optimizers["EHC"], state=state,
+    )
+    loaded_arm, _, _, _ = load_checkpoint(
+        path, device=cuda_device, expected_arm="EHC", expected_replicate=0
+    )
+    assert nested_state_maximum_difference(
+        arms["EHC"].state_dict(), loaded_arm.state_dict()
+    ) == 0.0
+
+    payload = torch.load(path, map_location="cpu", weights_only=False)
+    legacy = deepcopy(contract)
+    legacy.pop("replay_tolerances")
+    legacy["optimization"] = dict(legacy["optimization"]) | {
+        "replay_tolerance": 1e-6
+    }
+    payload["contract"] = legacy
+    legacy_path = tmp_path / "legacy_contract.pt"
+    torch.save(payload, legacy_path)
+    with pytest.raises(ValueError, match="registered contract mismatch"):
+        load_checkpoint(
+            legacy_path, device=cuda_device, expected_arm="EHC",
+            expected_replicate=0,
+        )
+
+
+def test_merged_replay_records_keep_every_factor_named() -> None:
+    """Merging batches must not collapse the evidence back to one scalar."""
+
+    left = _synthetic_replay_record()
+    right = deepcopy(left)
+    right["errors"]["mark_component"] = 7e-7
+    right["errors"]["event_joint"] = 3e-6
+    allowance = float(right["joints"]["event_joint"]["allowance"])
+    bound = 2e-6 + allowance
+    right["joints"]["event_joint"] = dict(right["joints"]["event_joint"]) | {
+        "error": 3e-6, "component_sum": 2e-6, "bound": bound,
+        "excess": 3e-6 - bound, "rows": 600.0,
+    }
+    merged = merge_replay_records([left, right])
+    assert set(merged["errors"]) == set(
+        REPLAY_EXACT_FIELDS + REPLAY_COMPONENT_FIELDS + REPLAY_JOINT_FIELDS
+    )
+    assert merged["errors"]["mark_component"] == 7e-7
+    assert merged["errors"]["event_joint"] == 3e-6
+    # The retained bound is the one the retained error was tested against.
+    assert merged["joints"]["event_joint"]["error"] == 3e-6
+    assert merged["joints"]["event_joint"]["bound"] == bound
+    assert merged["joints"]["event_joint"]["rows"] == 1880.0
+    assert merged["joints"]["event_joint"]["excess"] == max(
+        left["joints"]["event_joint"]["excess"], 3e-6 - bound
+    )
+    # The three assembly numbers move together, so the merged record still
+    # satisfies `assembly_excess == assembly_residual - assembly_allowance`.
+    assert merged["joints"]["event_joint"]["assembly_excess"] == pytest.approx(
+        merged["joints"]["event_joint"]["assembly_residual"]
+        - merged["joints"]["event_joint"]["assembly_allowance"],
+        rel=1e-12,
+    )
+    assert _replay_record_valid(merged)
+    failing = deepcopy(left)
+    failing["passed"] = False
+    failing["failures"] = ["mark_component"]
+    assert not merge_replay_records([left, failing])["passed"]
+
+
+def _leaked_support_trajectory(
+    arm: Any, trajectory: Any, *, field: str, device: torch.device
+) -> tuple[Any, torch.Tensor, torch.Tensor]:
+    """Record one factor *outside* its own support and reassemble the joint.
+
+    This is the one-line collector regression made explicit. Dropping the
+    collector's `torch.where(derived_cat_mask, categorical_logp, 0.0)` records
+    a categorical factor on `CREATE` rows, where the factorization says there
+    is none, and folds it into the stored joint; the mark twin records a mark
+    component on `KEEP` rows from the candidate `u` that was drawn but not
+    committed. Both corruptions are built *outside* the factor's mask, which
+    is exactly where the masked component checks do not look, and the joint is
+    reassembled from the corrupted factors by the collector's own float32 rule
+    so the assembly check stays clean and the joint bound widens by precisely
+    the corruption.
+    """
+
+    kind = trajectory.event_kind.to(device)
+    rows = kind.eq(CREATE) if field == "categorical" else kind.eq(KEEP)
+    assert bool(rows.any())
+    stored_cat = trajectory.event_old_cat_logp.to(device).clone()
+    stored_mark = trajectory.event_old_mark_component_logp.to(device).clone()
+    inputs = trajectory.event_inputs.to(device)[rows]
+    with torch.no_grad():
+        if field == "categorical":
+            leaked = F.log_softmax(arm.event_head(inputs), dim=-1)[:, 0]
+            stored_cat[rows] = leaked
+        else:
+            mu, sigma = _normal_parameters(arm.mark_head(inputs))
+            leaked = transformed_mark_component_logp(
+                trajectory.candidate_u.to(device)[rows], mu, sigma
+            )
+            stored_mark[rows] = leaked
+    # Only the corrupted rows are reassembled, so no clean row picks up a
+    # reduction-order difference from this test's own summation.
+    reassembled = stored_cat + stored_mark.sum(-1)
+    stored_joint = torch.where(
+        rows, reassembled, trajectory.event_old_joint_logp.to(device)
+    )
+    corrupted = replace(
+        trajectory,
+        event_old_cat_logp=stored_cat,
+        event_old_mark_component_logp=stored_mark,
+        event_old_joint_logp=stored_joint,
+    )
+    return corrupted, leaked, rows
+
+
+def test_factor_recorded_outside_its_own_support_is_rejected(
+    cuda_device: torch.device,
+) -> None:
+    """A factor outside its mask is a defect no joint bound can catch.
+
+    Given the two assembly checks hold, the joint rule reduces to
+    `|sum d_i| <= sum|d_i| + gamma(...)`, the triangle inequality -- an
+    identity. So a factor recorded non-zero outside its own support, with the
+    stored joint reassembled to include it, is invisible three ways at once:
+    `categorical_component` is read only inside `event_cat_mask` and
+    `mark_component` only inside `event_mark_mask`, the assembly check sees a
+    self-consistent sum, and the joint bound widens by exactly the
+    corruption. Every other corruption test in this file builds its defect
+    *inside* the support, so this is the invariant a wrong implementation
+    could previously violate while passing all of them.
+
+    The stored joint is consumed unmasked at `event_ratio = torch.exp(...)`,
+    so what reaches PPO here is a first-pass importance ratio far from one.
+    Both assertions below are therefore load-bearing: the joint class must be
+    shown *not* to fire, and the exact class must.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    clean = replay_report(
+        replay_trajectory(arm, trajectory, device=cuda_device), trajectory
+    )
+    assert clean["passed"]
+    assert clean["errors"]["categorical_support_leak"] == 0.0
+    assert clean["errors"]["mark_support_leak"] == 0.0
+
+    for field, leak_name in (
+        ("categorical", "categorical_support_leak"),
+        ("mark", "mark_support_leak"),
+    ):
+        corrupted, leaked, rows = _leaked_support_trajectory(
+            arm, trajectory, field=field, device=cuda_device
+        )
+        assert float(leaked.abs().max()) > 1e-3, field
+        report = replay_report(
+            replay_trajectory(arm, corrupted, device=cuda_device), corrupted
+        )
+        assert not report["passed"], field
+        assert leak_name in report["failures"], field
+        assert report["errors"][leak_name] == pytest.approx(
+            float(leaked.abs().max()), rel=1e-12
+        ), field
+        # The corruption really does reach the ratio PPO would start from.
+        assert report["errors"]["event_joint"] > 0.1, field
+        # ... and none of the classes that already existed can see it.
+        assert "event_joint" not in report["failures"], field
+        assert "event_joint_assembly" not in report["failures"], field
+        assert report["joints"]["event_joint"]["excess"] <= 0.0, field
+        assert report["joints"]["event_joint"]["assembly_excess"] <= 0.0, field
+        assert "categorical_component" not in report["failures"], field
+        assert "mark_component" not in report["failures"], field
+        assert "mask_mismatch" not in report["failures"], field
+        with pytest.raises(RuntimeError, match=leak_name):
+            validate_replay(arm, corrupted, device=cuda_device)
+        # The other support-leak field is untouched: the two look in
+        # different places and neither stands in for the other.
+        other = (
+            "mark_support_leak" if field == "categorical"
+            else "categorical_support_leak"
+        )
+        assert report["errors"][other] == 0.0, field
+
+
+def test_replay_reports_and_records_fail_closed_on_non_finite_values(
+    cuda_device: torch.device,
+) -> None:
+    """NaN must fail, not pass. `nan > tol` and `nan > 0.0` are both false.
+
+    Written as `not (x <= limit)` throughout, a NaN fails every gate; written
+    as `x > limit` it satisfies every one of them, so a live replay producing
+    NaN would report `passed: True`. The record validator and the merge are
+    held to the same rule -- `max(0.0, nan)` is `0.0` in Python while
+    `max(nan, 0.0)` is `nan`, so a plain maximum launders NaN out of the
+    evidence depending on batch order.
+    """
+
+    arms, _, _ = initialize_arms(cuda_device)
+    arm = arms["EHC"]
+    state = make_training_state("EHC", 0)
+    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    index = _first_renew_index(trajectory)
+    for label, mutation in (
+        ("joint", "event_old_joint_logp"),
+        ("mark", "event_old_mark_component_logp"),
+    ):
+        tensor = getattr(trajectory, mutation).clone()
+        tensor[index] = float("nan")
+        corrupted = replace(trajectory, **{mutation: tensor})
+        report = replay_report(
+            replay_trajectory(arm, corrupted, device=cuda_device), corrupted
+        )
+        assert not report["passed"], label
+        assert any(
+            name.startswith("non_finite:") for name in report["failures"]
+        ), label
+        with pytest.raises(RuntimeError):
+            validate_replay(arm, corrupted, device=cuda_device)
+
+    clean = _synthetic_replay_record()
+    assert _replay_record_valid(clean)
+    for label, path in (
+        ("error_leaf", ("errors", "mark_component")),
+        ("exact_leaf", ("errors", "mark_support_leak")),
+        ("joint_excess", ("joints", "event_joint", "excess")),
+        ("joint_assembly", ("joints", "primitive_joint", "assembly_excess")),
+    ):
+        degraded = deepcopy(clean)
+        target = degraded
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = float("nan")
+        assert not _replay_record_valid(degraded), label
+        with pytest.raises(ValueError, match="non-finite"):
+            merge_replay_records([clean, degraded])
+        # Order must not decide: the laundering form of the bug is
+        # order-dependent, the fail-closed form is not.
+        with pytest.raises(ValueError, match="non-finite"):
+            merge_replay_records([degraded, clean])
+
+
+def test_replay_record_validator_rejects_degraded_joint_records() -> None:
+    """The validator is advertised as fail-closed re-derivation; hold it to that.
+
+    A record that carries only the three keys a reader happens to look at, a
+    record that examined no rows, and a record whose declared bound is not the
+    sum of its own parts all prove nothing, and all previously validated.
+    """
+
+    clean = _synthetic_replay_record()
+    assert _replay_record_valid(clean)
+
+    # Truncated joint: only the keys the old validator read.
+    truncated = deepcopy(clean)
+    truncated["joints"]["event_joint"] = {
+        key: clean["joints"]["event_joint"][key]
+        for key in ("excess", "assembly_excess", "bound")
+    }
+    assert not _replay_record_valid(truncated)
+    assert set(clean["joints"]["event_joint"]) == set(REPLAY_JOINT_RECORD_FIELDS)
+
+    # `rows: 0` on an arm that carries an event head proves nothing was
+    # examined; the ordinary source's all-zero event joint is the one lawful
+    # form of it, and only when every other number is zero too.
+    no_rows = deepcopy(clean)
+    no_rows["joints"]["event_joint"]["rows"] = 0.0
+    assert not _replay_record_valid(no_rows)
+    assert not _replay_record_valid(no_rows, event_rows_required=False)
+    ordinary = deepcopy(clean)
+    ordinary["joints"]["event_joint"] = {
+        key: 0.0 for key in REPLAY_JOINT_RECORD_FIELDS
+    }
+    assert not _replay_record_valid(ordinary)
+    assert _replay_record_valid(ordinary, event_rows_required=False)
+    no_primitive_rows = deepcopy(clean)
+    no_primitive_rows["joints"]["primitive_joint"]["rows"] = 0.0
+    assert not _replay_record_valid(no_primitive_rows, event_rows_required=False)
+
+    # A self-declared bound must be the sum of its own parts, and the parts
+    # must be supported by the recorded per-factor errors. Without both, a
+    # record can validate `error = 1e9` beneath `bound = 1e10`.
+    inconsistent = deepcopy(clean)
+    inconsistent["errors"]["event_joint"] = 1e9
+    inconsistent["joints"]["event_joint"] |= {
+        "error": 1e9, "bound": 1e10, "excess": -9e9
+    }
+    assert not _replay_record_valid(inconsistent)
+    self_consistent = deepcopy(inconsistent)
+    allowance = float(clean["joints"]["event_joint"]["allowance"])
+    self_consistent["joints"]["event_joint"] |= {
+        "component_sum": 1e10 - allowance
+    }
+    # Now `bound == component_sum + allowance`, so only the link to the
+    # recorded per-factor errors still rejects it.
+    assert self_consistent["joints"]["event_joint"]["bound"] == pytest.approx(
+        self_consistent["joints"]["event_joint"]["component_sum"] + allowance,
+        rel=1e-12,
+    )
+    assert not _replay_record_valid(self_consistent)
+
+    # `excess` must dominate `error - bound`; it is the row maximum and the
+    # reported error/bound come from the largest-error row.
+    understated = deepcopy(clean)
+    understated["joints"]["event_joint"] |= {
+        "error": 2e-6, "excess": -1e9
+    }
+    assert not _replay_record_valid(understated)
+
+    # The assembly triple is read at one row and one side, so it must be
+    # exactly self-consistent.
+    assembly = deepcopy(clean)
+    assembly["joints"]["event_joint"]["assembly_residual"] = 1e-7
+    assert not _replay_record_valid(assembly)
