@@ -22,7 +22,7 @@ model and never starts an experiment.
 Every assignment starts with:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 $hmasd-project-manager
 ```
 
@@ -101,7 +101,7 @@ Every implementer is spawned with `model=gpt-5.6-sol`,
 `reasoning_effort=high`, `fork_turns=none`, and a prompt explicitly invoking
 `$hmasd-implementer`. Pass only its frozen work package, inputs, write scope and
 protected invariants. Temporary implementers are not persistent sessions: they
-receive no `$hmasd-task-router`, session role, controller context, cross-session
+receive no `$hmasd-dispatch-task`, session role, controller context, cross-session
 callback or heartbeat.
 
 After all implementation packages are integrated and focused checks pass,
@@ -124,13 +124,13 @@ training or formal evaluation.
 
 ## Callbacks
 
-Resolve the controller live through `$hmasd-task-router`, send once with its
+Resolve the controller live through `$hmasd-dispatch-task`, send once with its
 route fields unchanged and verify post-send invariance.
 
 Scientific convergence returns:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 
 RESEARCH_CONVERGENCE_BRIEF
 role=research_project_manager
@@ -152,7 +152,7 @@ user_brief=<concise Chinese brief>
 An accepted implementation returns:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 
 IMPLEMENTATION_READY
 role=research_project_manager
@@ -168,7 +168,7 @@ risk=<remaining engineering risk or none>
 A genuine blocker returns:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 
 RESEARCH_MANAGER_BLOCKED
 role=research_project_manager

@@ -1,7 +1,7 @@
 {
   "schema_version": 8,
   "updated": "2026-07-20",
-  "session_role_registry": ".agents/skills/hmasd-task-router/references/session-roles.json",
+  "session_role_registry": ".agents/skills/hmasd-dispatch-task/references/session-roles.json",
   "automation": {
     "kind": "heartbeat",
     "name_template": "hmasd-experiment-<run-id>",

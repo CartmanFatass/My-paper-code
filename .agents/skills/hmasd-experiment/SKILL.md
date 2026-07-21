@@ -8,12 +8,12 @@ description: Use only inside the persistent HMASD experiment-monitor session whe
 Accept only an assignment whose first lines explicitly invoke:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 $hmasd-experiment
 ```
 
-Read `../hmasd-task-router/SKILL.md`, `references/monitor-task.json`,
-`../hmasd-task-router/references/session-roles.json`,
+Read `../hmasd-dispatch-task/SKILL.md`, `references/monitor-task.json`,
+`../hmasd-dispatch-task/references/session-roles.json`,
 `references/experiment-protocol.md`, and only the run paths supplied in the
 assignment. Do not read project-control, algorithm, implementation-plan,
 experiment-history, external-review, or archive documents.
@@ -36,7 +36,7 @@ Each heartbeat performs one bounded check and ends. Running progress remains in
 the monitor session. It estimates remaining time from registered counters and
 retargets only its own heartbeat; the interval is never shorter than 10
 minutes. At terminal state, actionable monitor error, or deadline, keep the
-heartbeat active, resolve the controller through `$hmasd-task-router`, and send
+heartbeat active, resolve the controller through `$hmasd-dispatch-task`, and send
 the stable terminal payload. Delete and verify deletion of the heartbeat only
 after the send tool confirms the controller task. Never use sleep, continuous
 polling, broad artifact scans, duplicate automations, or waiting messages to
@@ -67,12 +67,12 @@ router treats the repeated `handoff_id` idempotently.
 
 Take the controller session ID only from
 `session-roles.json.roles.controller.thread_id`. Immediately before a terminal
-callback, resolve that ID with `$hmasd-task-router`; copy the returned `hostId`,
+callback, resolve that ID with `$hmasd-dispatch-task`; copy the returned `hostId`,
 `threadId`, `model`, and `thinking` unchanged into the send. Never take a return
 ID or model setting from the assignment, monitor registry, conversation history,
 or heartbeat prompt. Delivery succeeds only when the send tool returns the same
 registered controller `threadId`; only then may this session delete its
 heartbeat.
 
-Every terminal callback prompt begins with `$hmasd-task-router`, followed by a
+Every terminal callback prompt begins with `$hmasd-dispatch-task`, followed by a
 blank line and the registered `EXPERIMENT_MONITOR` payload.

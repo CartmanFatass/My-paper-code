@@ -46,7 +46,7 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 ```
 
 The Exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` directly
-to the controller through the task router. After raw verification, the
+to the controller through the task dispatcher. After raw verification, the
 controller writes reconciliation and sends one `SCIENTIFIC_CONVERGENCE_TASK` to
 the Research Project Manager. The manager owns no heartbeat and returns
 `RESEARCH_CONVERGENCE_BRIEF` or `RESEARCH_MANAGER_BLOCKED`.
@@ -93,6 +93,6 @@ behavior lives in `.agents/skills/hmasd-review-round/SKILL.md`; registered
 Exchange behavior lives in `.agents/skills/hmasd-review-exchange/SKILL.md`.
 Scientific convergence behavior lives in
 `.agents/skills/hmasd-project-manager/SKILL.md`.
-Codex task IDs and role bindings live only in the router's
+Codex task IDs and role bindings live only in the dispatcher's
 `session-roles.json`; external reviewer conversations and URLs live only in
 `REVIEWER_CONVERSATIONS.json`.

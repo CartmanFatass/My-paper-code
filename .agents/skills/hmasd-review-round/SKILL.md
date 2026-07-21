@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use only by the active HMASD controller for one tracked scientific review round. It creates and pushes one Open-Pro divergent question, dispatches the registered Open-Pro Exchange through $hmasd-task-router, archives the returned raw, writes factual reconciliation, and sends the evidence to the Research Project Manager for scientific convergence and a code-ready next source or stop.
+description: Use only by the active HMASD controller for one tracked scientific review round. It creates and pushes one Open-Pro divergent question, dispatches the registered Open-Pro Exchange through $hmasd-dispatch-task, archives the returned raw, writes factual reconciliation, and sends the evidence to the Research Project Manager for scientific convergence and a code-ready next source or stop.
 ---
 
 # HMASD Review Round
@@ -51,7 +51,7 @@ and every exact Git-visible evidence path.
 ## Procedure
 
 1. Dispatch one `REVIEW_STAGE` to the registered
-   `open_divergent_exchange` with explicit `$hmasd-task-router` and
+   `open_divergent_exchange` with explicit `$hmasd-dispatch-task` and
    `$hmasd-review-exchange` activation.
 2. Accept the raw only from that registered task and preserve its semantic
    quality note separately from transport validity.
@@ -71,7 +71,7 @@ contains one external divergent stage followed by internal convergence.
 ## Exchange dispatch
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 $hmasd-review-exchange
 
 REVIEW_STAGE
@@ -91,7 +91,7 @@ fields unchanged, require delivery proof and verify post-send invariance.
 ## Manager dispatch
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 $hmasd-project-manager
 
 SCIENTIFIC_CONVERGENCE_TASK

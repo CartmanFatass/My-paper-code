@@ -3,9 +3,9 @@ param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory | Select-Object -ExpandProperty Name | Sort-Object)
-$expected = @('hmasd-experiment','hmasd-implementer','hmasd-project-manager','hmasd-review-exchange','hmasd-review-round','hmasd-reviewer','hmasd-task-router') | Sort-Object
+$expected = @('hmasd-dispatch-task','hmasd-experiment','hmasd-implementer','hmasd-project-manager','hmasd-review-exchange','hmasd-review-round','hmasd-reviewer') | Sort-Object
 if (Compare-Object $expected $skills) { throw "Unexpected active Skill set: $($skills -join ',')" }
-$paths = @('AGENTS.md','docs/external-review/README.md','.agents/skills/hmasd-task-router/SKILL.md','.agents/skills/hmasd-project-manager/SKILL.md','.agents/skills/hmasd-review-exchange/SKILL.md','.agents/skills/hmasd-review-round/SKILL.md')
+$paths = @('AGENTS.md','docs/external-review/README.md','.agents/skills/hmasd-dispatch-task/SKILL.md','.agents/skills/hmasd-project-manager/SKILL.md','.agents/skills/hmasd-review-exchange/SKILL.md','.agents/skills/hmasd-review-round/SKILL.md')
 $text = ($paths | ForEach-Object { Get-Content (Join-Path $repo $_) -Raw }) -join "`n"
 foreach ($required in @('open_divergent_exchange','research_project_manager','experiment_monitor','$hmasd-implementer','$hmasd-reviewer','native parent-child')) {
     if (-not $text.Contains($required)) { throw "Active workflow missing: $required" }

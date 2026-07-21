@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Communication"
-  short_description: "Route sessions and migrate topology safely"
-  default_prompt: "Use $hmasd-task-router to deliver one model-preserving persistent-session message or audit and update one explicit session-topology change; never use it for a subagent."

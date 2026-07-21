@@ -10,7 +10,7 @@ foreach ($required in @('SCIENTIFIC_CONVERGENCE_TASK','START_IMPLEMENTATION','RE
     if (-not $skill.Contains($required)) { throw "Project Manager missing: $required" }
 }
 if (-not $managerYaml.Contains('allow_implicit_invocation: false')) { throw 'Manager invocation must be explicit' }
-if ($implementer.Contains('$hmasd-task-router') -or $reviewer.Contains('$hmasd-task-router')) { throw 'Temporary subagent uses persistent router' }
+if ($implementer.Contains('$hmasd-dispatch-task') -or $reviewer.Contains('$hmasd-dispatch-task')) { throw 'Temporary subagent uses persistent dispatcher' }
 foreach ($text in @($implementer,$reviewer)) {
     foreach ($required in @('native parent-child','Do not read','AGENTS.md','CURRENT_WORK.md')) {
         if (-not $text.Contains($required)) { throw "Subagent isolation missing: $required" }

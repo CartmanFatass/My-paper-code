@@ -3,7 +3,7 @@
   "updated": "2026-07-20",
   "round_controller": {
     "kind": "active_controller_direct_exchange",
-    "session_role_registry": ".agents/skills/hmasd-task-router/references/session-roles.json",
+    "session_role_registry": ".agents/skills/hmasd-dispatch-task/references/session-roles.json",
     "external_stage": "OPEN_DIVERGENT",
     "scientific_convergence": "research_project_manager",
     "git_boundary_owner": "active_controller"

@@ -1,6 +1,6 @@
 interface:
   display_name: "HMASD Review Round"
   short_description: "Run Open-Pro review and internal convergence"
-  default_prompt: "Use $hmasd-review-round and $hmasd-task-router as controller to run one Open-Pro divergent review and Research Project Manager convergence."
+  default_prompt: "Use $hmasd-review-round and $hmasd-dispatch-task as controller to run one Open-Pro divergent review and Research Project Manager convergence."
 policy:
   allow_implicit_invocation: false

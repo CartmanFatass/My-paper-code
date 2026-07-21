@@ -11,17 +11,17 @@ Accept only one active run. A `MONITOR_ASSIGNMENT` must provide:
 - deadline.
 
 Use `monitor-task.json` for monitor and cadence policy only. Take monitor and
-controller session IDs from the router-owned `session-roles.json`. Resolve all
-live route fields through `$hmasd-task-router`; registry files never supply
+controller session IDs from the dispatcher-owned `session-roles.json`. Resolve all
+live route fields through `$hmasd-dispatch-task`; registry files never supply
 `hostId`, model, or reasoning effort.
 
 On acceptance, use `automation_update` to create one heartbeat named from the
 run ID and targeted to this monitor session. Start at the registry's fallback
 cadence, capture the returned heartbeat ID, then update that same heartbeat with
-its final prompt. The prompt contains only the router Skill path,
+its final prompt. The prompt contains only the dispatcher Skill path,
 `session-roles.json`, this Skill path, `monitor-task.json`, the assignment
 fields, and the heartbeat ID. Its first lines explicitly invoke
-`$hmasd-task-router` and `$hmasd-experiment`. Verify
+`$hmasd-dispatch-task` and `$hmasd-experiment`. Verify
 the target, prompt, cadence, and `ACTIVE` state. Do not put project-control,
 algorithm, review, conversation history, model, or thinking context in the
 prompt. Reuse the exact heartbeat if the same assignment is delivered again;
@@ -65,10 +65,10 @@ At terminal, error, or deadline:
 
 1. keep this session's heartbeat `ACTIVE`;
 2. resolve the controller's live route immediately;
-3. send exactly one payload through `$hmasd-task-router`:
+3. send exactly one payload through `$hmasd-dispatch-task`:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 
 EXPERIMENT_MONITOR
 role=experiment_monitor

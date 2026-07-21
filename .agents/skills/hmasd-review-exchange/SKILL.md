@@ -10,7 +10,7 @@ description: Use only inside the registered persistent HMASD Open-Pro Exchange s
 Accept only:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 $hmasd-review-exchange
 
 REVIEW_STAGE
@@ -86,11 +86,11 @@ alone fails, retry deletion only. Release the owned page after all three facts.
 
 ## Callback
 
-Resolve the controller live through `$hmasd-task-router`, preserve all route
+Resolve the controller live through `$hmasd-dispatch-task`, preserve all route
 fields and send once:
 
 ```text
-$hmasd-task-router
+$hmasd-dispatch-task
 
 REVIEW_STAGE_COMPLETE
 role=OPEN_DIVERGENT

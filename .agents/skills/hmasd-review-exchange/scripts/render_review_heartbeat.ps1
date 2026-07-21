@@ -25,11 +25,11 @@ if (-not (Test-Path -LiteralPath $question -PathType Leaf)) {
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "../../../..")).Path
 $roundId = Split-Path -Leaf $round
 @"
-`$hmasd-task-router
+`$hmasd-dispatch-task
 `$hmasd-review-exchange
 
 HMASD OPEN-PRO EXCHANGE HEARTBEAT
-Read the current router, role directory, Exchange Skill and reviewer registry.
+Read the current dispatcher, role directory, Exchange Skill and reviewer registry.
 heartbeat_id=$HeartbeatId
 round=$roundId
 round_path=$round

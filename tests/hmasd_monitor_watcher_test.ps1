@@ -16,7 +16,7 @@ $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 
 foreach ($required in @(
     'inside the persistent HMASD experiment-monitor session',
-    '$hmasd-task-router',
+    '$hmasd-dispatch-task',
     '$hmasd-experiment',
     'monitor session creates and owns its heartbeat',
     'session-roles.json.roles.experiment_monitor.thread_id',
@@ -50,7 +50,7 @@ foreach ($required in @(
 }
 
 if ($registry.schema_version -ne 8 -or
-    $registry.session_role_registry -ne '.agents/skills/hmasd-task-router/references/session-roles.json' -or
+    $registry.session_role_registry -ne '.agents/skills/hmasd-dispatch-task/references/session-roles.json' -or
     $registry.automation.kind -ne 'heartbeat' -or
     $registry.automation.name_template -ne 'hmasd-experiment-<run-id>' -or
     $registry.automation.owner -ne 'registered_monitor_session' -or
@@ -70,7 +70,7 @@ if ($registry.schema_version -ne 8 -or
 }
 foreach ($forbidden in @('monitor_route', 'controller_return_route', 'routing_skill', 'route_policy', 'model', 'thinking')) {
     if ($null -ne $registry.PSObject.Properties[$forbidden]) {
-        throw "Monitor registry duplicates router-owned session data: $forbidden"
+        throw "Monitor registry duplicates dispatcher-owned session data: $forbidden"
     }
 }
 
