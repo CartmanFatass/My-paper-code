@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any, Literal, Mapping, Sequence
 
 import numpy as np
+import torch
 from ha_ctse_process.dynamic_roster_testbed import (
     ACTION_COUNT,
     HORIZON,
@@ -71,6 +72,54 @@ INTERVENTION_THRESHOLD = 0.10
 IDENTIFIABILITY_OPPORTUNITIES = 1_000
 IDENTIFIABILITY_LIFECYCLES = 250
 SUPPORT_FLOOR = 128
+# Replacement C -- natural event-decision consequence. Both directions are
+# gated, and both are required: a one-sided pass is not sufficient and is not
+# expressible, because `select_result_branch` conjoins them and takes both as
+# required arguments. `LCB_95 > 0` is the interval gate; the point-estimate
+# floors are frozen here so they cannot be tuned after a result is seen.
+A_KEEP_LCB_FLOOR = 0.0
+A_RENEW_LCB_FLOOR = 0.0
+A_KEEP_MEAN_FLOOR = 0.02
+A_RENEW_MEAN_FLOOR = 0.02
+# The sole registered form of the fork budget. Full per-opportunity forking is
+# not the default. A replicate that cannot supply the quota for either natural
+# action makes the run non-identifiable; the quota is never lowered and rows are
+# never pooled across replicates to reach it, which is why
+# `select_result_branch` takes per-replicate counts and no pooled total.
+NATURAL_FORK_ACTIONS = ("KEEP", "RENEW")
+NATURAL_FORK_QUOTA_PER_ACTION = 32
+NATURAL_FORK_REPLICATES = 5
+NATURAL_FORK_PAIRS = (
+    NATURAL_FORK_QUOTA_PER_ACTION * len(NATURAL_FORK_ACTIONS) * NATURAL_FORK_REPLICATES
+)
+# Dedicated deterministic selection stream. It is derived from the registered
+# bootstrap seed under its own namespace coordinate, so it is distinct from the
+# bootstrap resample stream (`default_rng(BOOTSTRAP_SEED)`, i.e.
+# `SeedSequence(BOOTSTRAP_SEED)` with no coordinate) and from every owned
+# collector and fork stream (all seeded from `seed_map`, never from the
+# bootstrap seed). Registering the namespace fixes the stream identity before
+# any selection code exists.
+NATURAL_FORK_SELECTION_NAMESPACE = "natural_fork_selection"
+NATURAL_FORK_SELECTION_COORDINATE = 1
+# Registered execution backends. CPU is admitted as a first-class backend
+# because this workload is kernel-launch bound (14,980 parameters, batch 16,
+# ~480 sequential tiny calls per epoch): a full three-arm update measures 6.16s
+# on single-thread CPU against 20.10s on CUDA, and CPU scales to 5.94x across 15
+# concurrent workers where one card saturates near 2.0x. Admitting CPU is not a
+# fallback: an unavailable requested backend raises rather than substituting
+# another.
+REGISTERED_EXECUTION_BACKENDS = ("cuda", "cpu")
+# The backend the formal run is registered on, and therefore the backend the
+# focused suite exercises. Both entries of `REGISTERED_EXECUTION_BACKENDS` are
+# admitted, but one run uses exactly one of them.
+FORMAL_EXECUTION_BACKEND = "cuda"
+# One thread configuration for the whole run. Single-thread is measured faster
+# than 14 threads on collection (0.419s against 0.629s) because the tensors are
+# too small for thread synchronization to pay for itself, and pinning it makes
+# the recorded thread count a registered constant rather than a machine
+# property, so a checkpoint stays loadable on another host with a different
+# core count.
+REGISTERED_TORCH_THREADS = 1
 GAMMA = 0.99
 GAE_LAMBDA = 0.95
 PPO_CLIP = 0.20
@@ -149,6 +198,88 @@ REPLAY_JOINT_RECORD_FIELDS = (
 # portability, and deliberately unchanged by the replay-bound correction.
 RESUME_TOLERANCE = 1e-7
 OPPORTUNITY_SUPPORT = (4, 8, 12)
+
+
+_ACTIVE_EXECUTION_BACKEND: str | None = None
+
+
+def require_registered_backend(device_name: str) -> "torch.device":
+    """Activate one registered execution backend for this process.
+
+    Replaces the retired CUDA-only gate. `cuda` and `cpu` are both registered
+    backends; anything else, and any registered backend that is not actually
+    available, raises. Nothing is ever substituted -- an unavailable CUDA
+    request does not become a CPU run.
+
+    Activation is what makes the same-backend constraint structural rather
+    than documented. It pins the intra-op thread count to
+    `REGISTERED_TORCH_THREADS` and records the backend process-wide, and
+    `registered_contract()` reads that record. The contract is embedded in
+    every checkpoint and `load_checkpoint` rejects on contract inequality, so
+    a checkpoint written under one backend or thread configuration cannot be
+    loaded or continued under another. A second activation naming a different
+    backend raises, so one process cannot straddle two backends and let a
+    device-dependent optimization trajectory become an arm or replicate
+    confound.
+    """
+
+    global _ACTIVE_EXECUTION_BACKEND
+    if device_name not in REGISTERED_EXECUTION_BACKENDS:
+        raise ValueError(
+            f"{device_name!r} is not a registered execution backend; "
+            f"registered backends are {list(REGISTERED_EXECUTION_BACKENDS)}"
+        )
+    if device_name == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError(
+            "the requested cuda backend is unavailable; substituting another "
+            "backend is forbidden"
+        )
+    if (
+        _ACTIVE_EXECUTION_BACKEND is not None
+        and _ACTIVE_EXECUTION_BACKEND != device_name
+    ):
+        raise RuntimeError(
+            f"execution backend {_ACTIVE_EXECUTION_BACKEND!r} is already active; "
+            f"every arm and every paired replicate of one run executes on one "
+            f"backend, so activating {device_name!r} is refused"
+        )
+    torch.set_num_threads(REGISTERED_TORCH_THREADS)
+    if int(torch.get_num_threads()) != REGISTERED_TORCH_THREADS:
+        raise RuntimeError(
+            f"intra-op thread pin did not take effect: "
+            f"{torch.get_num_threads()} != {REGISTERED_TORCH_THREADS}"
+        )
+    _ACTIVE_EXECUTION_BACKEND = device_name
+    return torch.device(device_name)
+
+
+def active_execution_backend() -> str:
+    """The backend activated for this process.
+
+    Fail-closed: a contract cannot be built, and therefore no checkpoint can
+    be written or read, before a backend has been explicitly registered.
+    Defaulting here would let a run record an execution environment it is not
+    actually using.
+    """
+
+    if _ACTIVE_EXECUTION_BACKEND is None:
+        raise RuntimeError(
+            "no registered execution backend is active; call "
+            "require_registered_backend('cuda') or "
+            "require_registered_backend('cpu') first"
+        )
+    return _ACTIVE_EXECUTION_BACKEND
+
+
+def require_active_backend_device(device: "torch.device") -> None:
+    """Refuse a device that disagrees with the activated backend."""
+
+    backend = active_execution_backend()
+    if device.type != backend:
+        raise RuntimeError(
+            f"device {device!r} does not belong to the active execution "
+            f"backend {backend!r}"
+        )
 
 
 def float32_reduction_gamma(factor_count: Any) -> Any:
@@ -764,6 +895,21 @@ def frontier_order(
     return np.stack(rows)
 
 
+def _checked_interval(name: str, interval: Sequence[float]) -> tuple[float, float]:
+    """One two-sided confidence interval, low bound first.
+
+    An inverted interval is an analyzer defect, not a numerical pattern, and
+    would silently invert a `LCB > 0` gate into something else. It raises.
+    """
+
+    if len(interval) != 2:
+        raise ValueError(f"{name} must be a (lcb, ucb) pair; got {interval!r}")
+    low, high = float(interval[0]), float(interval[1])
+    if not low <= high:
+        raise ValueError(f"{name} is inverted: {low} > {high}")
+    return low, high
+
+
 def select_result_branch(
     *,
     operational_valid: bool,
@@ -771,10 +917,16 @@ def select_result_branch(
     multi_opportunity_lifecycles: int,
     eligible_keep_rows: int,
     eligible_renew_rows: int,
+    natural_keep_rows_by_replicate: Sequence[int],
+    natural_renew_rows_by_replicate: Sequence[int],
     utility_ci: Mapping[str, tuple[float, float]],
     g_ci: tuple[float, float],
     k_bin_cis: Sequence[tuple[float, float]],
     intervention_ci: tuple[float, float],
+    a_keep_ci: Sequence[float],
+    a_renew_ci: Sequence[float],
+    a_keep_mean: float,
+    a_renew_mean: float,
 ) -> str:
     """Apply the frozen eight-branch first-match precedence.
 
@@ -784,6 +936,28 @@ def select_result_branch(
     (`K==1`, `K==2`, `K>=3` over complete spells), not `CV(T)` or
     physical-time bins, which mix policy timing with exogenous gap variance
     and are reported only as descriptive diagnostics elsewhere.
+
+    Replacement C joins position 5. Both directions are required --
+    `LCB(A_KEEP) > 0` **and** `LCB(A_RENEW) > 0`, with the frozen point
+    floors `mean(A_KEEP) >= 0.02` and `mean(A_RENEW) >= 0.02`. A one-sided
+    pass is not expressible: the two gates are conjoined and both are
+    required arguments, so there is no input that reaches
+    `COMMITMENT_SUPPORTED` on one direction alone.
+
+    The registered fork budget arrives as per-replicate counts, never as a
+    pooled total. A replicate short of `NATURAL_FORK_QUOTA_PER_ACTION`
+    eligible rows for either natural action resolves at position 2 to
+    `BENCHMARK_NON_IDENTIFIABLE`, and because no pooled total is an input,
+    the shortfall cannot be repaired by pooling rows across replicates or by
+    lowering the quota.
+
+    "Behavior confidently fails" stays the *exact statistical dual* of the
+    pass rule: at least one required interval condition has `UCB <=` its
+    registered threshold, now including `UCB(A_KEEP) <= 0` and
+    `UCB(A_RENEW) <= 0`. The two point-estimate floors deliberately take no
+    part in the dual -- a point estimate carries no interval statement, so a
+    run that clears both `LCB` gates but misses a mean floor neither passes
+    nor confidently fails and lands in the underpowered branch.
     """
 
     if len(k_bin_cis) != 3:
@@ -791,6 +965,17 @@ def select_result_branch(
             "k_bin_cis must have exactly 3 entries (K==1, K==2, K>=3); "
             f"got {len(k_bin_cis)}"
         )
+    for name, counts in (
+        ("natural_keep_rows_by_replicate", natural_keep_rows_by_replicate),
+        ("natural_renew_rows_by_replicate", natural_renew_rows_by_replicate),
+    ):
+        if len(counts) != NATURAL_FORK_REPLICATES:
+            raise ValueError(
+                f"{name} must carry one count per replicate "
+                f"({NATURAL_FORK_REPLICATES}); got {len(counts)}"
+            )
+    a_keep_low, a_keep_high = _checked_interval("a_keep_ci", a_keep_ci)
+    a_renew_low, a_renew_high = _checked_interval("a_renew_ci", a_renew_ci)
     if not operational_valid:
         return "INVALID_OPERATIONAL"
     if (
@@ -798,6 +983,8 @@ def select_result_branch(
         or multi_opportunity_lifecycles < IDENTIFIABILITY_LIFECYCLES
         or eligible_keep_rows < SUPPORT_FLOOR
         or eligible_renew_rows < SUPPORT_FLOOR
+        or min(natural_keep_rows_by_replicate) < NATURAL_FORK_QUOTA_PER_ACTION
+        or min(natural_renew_rows_by_replicate) < NATURAL_FORK_QUOTA_PER_ACTION
     ):
         return "BENCHMARK_NON_IDENTIFIABLE"
     maximum_ucb = max(interval[1] for interval in utility_ci.values())
@@ -810,13 +997,21 @@ def select_result_branch(
         sum(ci[0] > LIFETIME_BIN_THRESHOLD for ci in k_bin_cis) >= 2
         and intervention_ci[0] > INTERVENTION_THRESHOLD
     )
-    if g_ci[0] > GAIN_THRESHOLD and behavior_passes:
+    consequence_passes = bool(
+        a_keep_low > A_KEEP_LCB_FLOOR
+        and a_renew_low > A_RENEW_LCB_FLOOR
+        and float(a_keep_mean) >= A_KEEP_MEAN_FLOOR
+        and float(a_renew_mean) >= A_RENEW_MEAN_FLOOR
+    )
+    if g_ci[0] > GAIN_THRESHOLD and behavior_passes and consequence_passes:
         return "COMMITMENT_SUPPORTED"
-    behavior_confidently_fails = bool(
+    confidently_fails = bool(
         sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in k_bin_cis) < 2
         or intervention_ci[1] <= INTERVENTION_THRESHOLD
+        or a_keep_high <= A_KEEP_LCB_FLOOR
+        or a_renew_high <= A_RENEW_LCB_FLOOR
     )
-    if g_ci[0] > GAIN_THRESHOLD and behavior_confidently_fails:
+    if g_ci[0] > GAIN_THRESHOLD and confidently_fails:
         return "REPRESENTATION_ONLY"
     if g_ci[1] <= GAIN_THRESHOLD:
         return "ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED"
@@ -824,9 +1019,36 @@ def select_result_branch(
 
 
 def registered_contract() -> dict[str, Any]:
+    """The frozen contract, embedded in every checkpoint and artifact.
+
+    The `execution` block is the structural form of the same-backend
+    constraint. It carries the backend actually activated for this process
+    and the live intra-op thread count, and `load_checkpoint` compares the
+    whole dictionary for equality, so a checkpoint written under one
+    execution environment is unloadable under another. Requiring an
+    activated backend, rather than defaulting to one, is what keeps the
+    recorded value honest.
+    """
+
     return {
         "name": REGISTERED_CONTRACT,
         "horizon": HORIZON,
+        "execution": {
+            "backend": active_execution_backend(),
+            "registered_backends": list(REGISTERED_EXECUTION_BACKENDS),
+            "torch_threads": int(torch.get_num_threads()),
+            "uniformity_rule": (
+                "every arm and every paired replicate of one run executes on "
+                "one backend and one thread configuration; the backend and "
+                "thread count recorded here are compared for equality by "
+                "load_checkpoint, so a checkpoint written under one execution "
+                "environment cannot be loaded or continued under another"
+            ),
+            "fallback_rule": (
+                "an unavailable requested backend raises; no other backend is "
+                "ever substituted"
+            ),
+        },
         "maximum_lifecycles": MAX_LIFECYCLES,
         "observation_width": OBSERVATION_DIM,
         "arms": ["OR", "DUM", "EHC"],
@@ -875,9 +1097,62 @@ def registered_contract() -> dict[str, Any]:
             "intervention": INTERVENTION_THRESHOLD,
             "identifiability_opportunities": IDENTIFIABILITY_OPPORTUNITIES,
             "identifiability_lifecycles": IDENTIFIABILITY_LIFECYCLES,
+            "a_keep_lcb": A_KEEP_LCB_FLOOR,
+            "a_renew_lcb": A_RENEW_LCB_FLOOR,
+            "a_keep_mean_floor": A_KEEP_MEAN_FLOOR,
+            "a_renew_mean_floor": A_RENEW_MEAN_FLOOR,
         },
         "k_bins": ["K==1", "K==2", "K>=3"],
         "intervention_metric": "primitive_action_total_variation",
+        "natural_fork": {
+            "actions": list(NATURAL_FORK_ACTIONS),
+            "quota_per_action_per_replicate": NATURAL_FORK_QUOTA_PER_ACTION,
+            "replicates": NATURAL_FORK_REPLICATES,
+            "pairs": NATURAL_FORK_PAIRS,
+            "budget_rule": (
+                "32 natural KEEP and 32 natural RENEW opportunities per "
+                "replicate, 320 fork pairs across five replicates. This is the "
+                "sole registered form; full per-opportunity forking is not the "
+                "default."
+            ),
+            "shortfall_rule": (
+                "a replicate supplying fewer than the quota of eligible rows "
+                "for either natural action makes the run "
+                "BENCHMARK_NON_IDENTIFIABLE; it is not repairable by lowering "
+                "the quota, by pooling rows across replicates, or by "
+                "post-result top-up"
+            ),
+            "gate_rule": (
+                "LCB_95>0 for A_KEEP and for A_RENEW, both required, with "
+                "frozen point floors mean(A_KEEP)>=0.02 and "
+                "mean(A_RENEW)>=0.02. A one-sided pass is not sufficient and "
+                "is not expressible."
+            ),
+            "confident_failure_dual": (
+                "the exact statistical dual of the interval gates: "
+                "UCB(A_KEEP)<=0 or UCB(A_RENEW)<=0. The two point floors are "
+                "point estimates and take no part in the dual."
+            ),
+            "selection_stream": {
+                "namespace": NATURAL_FORK_SELECTION_NAMESPACE,
+                "base_seed": BOOTSTRAP_SEED,
+                "coordinate": NATURAL_FORK_SELECTION_COORDINATE,
+                "rule": (
+                    "PCG64 over SeedSequence([bootstrap_seed, coordinate, ...]) "
+                    "-- a dedicated deterministic stream under its own "
+                    "namespace coordinate"
+                ),
+                "distinct_from": [
+                    "bootstrap_resample",
+                    "ledger",
+                    "order",
+                    "primitive",
+                    "opportunity",
+                    "event",
+                    "mark",
+                ],
+            },
+        },
         "optimization": {
             "gamma": GAMMA,
             "gae_lambda": GAE_LAMBDA,

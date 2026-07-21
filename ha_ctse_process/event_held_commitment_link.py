@@ -62,6 +62,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     make_noncalendar_ledger,
     make_rng,
     registered_contract,
+    require_active_backend_device,
     NoncalendarLedger,
     NoncalendarTrackingEnv,
     TrackingOutcome,
@@ -268,6 +269,10 @@ def initialize_arms(
     event_seed: int = EVENT_SEED,
     mark_seed: int = MARK_SEED,
 ) -> tuple[dict[ArmName, CommitmentArm], dict[ArmName, torch.optim.Optimizer], dict[ArmName, torch.optim.Optimizer | None]]:
+    # Every arm of every replicate is constructed here, so this is the single
+    # place where a device that disagrees with the activated execution backend
+    # can be refused before any parameter exists on it.
+    require_active_backend_device(device)
     cpu_rng = torch.get_rng_state().clone()
     cuda_rngs = [value.clone() for value in torch.cuda.get_rng_state_all()] if torch.cuda.is_available() else []
     try:
@@ -2531,6 +2536,7 @@ def load_checkpoint(
     torch.optim.Optimizer | None,
     TrainingState,
 ]:
+    require_active_backend_device(device)
     payload = torch.load(path, map_location="cpu", weights_only=False)
     required = {
         "schema_version", "kind", "contract", "arm", "replicate", "profile",

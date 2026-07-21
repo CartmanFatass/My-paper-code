@@ -44,15 +44,19 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     BOOTSTRAP_SEED,
     EVENT_JOINT_FACTOR_COUNT,
     FORMAL_EVAL_EPISODES,
+    FORMAL_EXECUTION_BACKEND,
     FORMAL_UPDATES,
     HORIZON,
+    NATURAL_FORK_REPLICATES,
     REGISTERED_CONTRACT,
+    REGISTERED_EXECUTION_BACKENDS,
     REPLAY_COMPONENT_FIELDS,
     REPLAY_COMPONENT_TOLERANCE,
     REPLAY_EXACT_FIELDS,
     REPLAY_JOINT_FIELDS,
     REPLAY_JOINT_RECORD_FIELDS,
     registered_contract,
+    require_registered_backend,
     select_result_branch,
 )
 
@@ -71,12 +75,20 @@ EVALUATION_CELLS = (
 )
 
 
-def _require_cuda(device_name: str) -> torch.device:
-    if device_name != "cuda":
-        raise ValueError("focused and formal execution requires --device cuda")
-    if not torch.cuda.is_available():
-        raise RuntimeError("CUDA is required; CPU fallback is forbidden")
-    return torch.device("cuda")
+# Stage 2 (the batched fork engine and its aggregation) is not wired, so this
+# runner has no A_KEEP/A_RENEW evidence to supply. It reports the evidence as
+# absent rather than as neutral: zero eligible rows per replicate resolves at
+# precedence position 2 to BENCHMARK_NON_IDENTIFIABLE, so an unevidenced run
+# cannot reach COMMITMENT_SUPPORTED. Replacing these with real aggregates is the
+# analyzer-wiring task; nothing here is a default that could survive it.
+ABSENT_NATURAL_FORK_EVIDENCE: dict[str, Any] = {
+    "natural_keep_rows_by_replicate": (0,) * NATURAL_FORK_REPLICATES,
+    "natural_renew_rows_by_replicate": (0,) * NATURAL_FORK_REPLICATES,
+    "a_keep_ci": (0.0, 0.0),
+    "a_renew_ci": (0.0, 0.0),
+    "a_keep_mean": 0.0,
+    "a_renew_mean": 0.0,
+}
 
 
 def _json_ready(value: Any) -> Any:
@@ -467,10 +479,15 @@ def _lifecycle_valid(trajectory: Any, arm: ArmName) -> bool:
     )
 
 
-def run_smoke(output_root: Path, *, device_name: str = "cuda") -> dict[str, Any]:
-    """One real, bounded, explicitly non-formal CUDA package exercise."""
+def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
+    """One real, bounded, explicitly non-formal package exercise.
 
-    device = _require_cuda(device_name)
+    The backend is named by the caller and must be a registered one; there is
+    no default, because a default would let the smoke silently run somewhere
+    other than the backend the run is registered on.
+    """
+
+    device = require_registered_backend(device_name)
     arms, base_optimizers, event_optimizers = initialize_arms(device)
     states = {name: make_training_state(name, 0) for name in ARMS}
     evidence: dict[str, Any] = {}
@@ -573,7 +590,7 @@ def formal_train(
 ) -> dict[str, Any]:
     if authorization != FORMAL_AUTHORIZATION:
         raise PermissionError("formal train requires the exact authorization token")
-    device = _require_cuda(device_name)
+    device = require_registered_backend(device_name)
     manifest: dict[str, Any] = {
         "schema_version": TRAIN_MANIFEST_SCHEMA,
         "contract": registered_contract(),
@@ -747,7 +764,7 @@ def formal_evaluate(
 ) -> dict[str, Any]:
     if authorization != FORMAL_AUTHORIZATION:
         raise PermissionError("formal evaluation requires the exact authorization token")
-    device = _require_cuda(device_name)
+    device = require_registered_backend(device_name)
     manifest: dict[str, Any] = {
         "schema_version": 1,
         "contract": registered_contract(),
@@ -884,6 +901,7 @@ def aggregate_analysis(
             "g_ci": (0.0, 0.0),
             "k_bin_cis": [(0.0, 0.0)] * 3,
             "intervention_ci": (0.0, 0.0),
+            **ABSENT_NATURAL_FORK_EVIDENCE,
         }
         result = {
             "branch": select_result_branch(**inputs),
@@ -995,6 +1013,7 @@ def aggregate_analysis(
         "g_ci": _percentile(gains),
         "k_bin_cis": [_percentile(values) for values in k_bin_values],
         "intervention_ci": _percentile(intervention_values),
+        **ABSENT_NATURAL_FORK_EVIDENCE,
     }
     result = {
         "branch": select_result_branch(**inputs),
@@ -1015,11 +1034,15 @@ def aggregate_analysis(
     return result
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(); parser.add_argument("--mode", choices=("contract", "smoke", "train", "evaluate", "analyze"), default="contract"); parser.add_argument("--output-root", type=Path, default=Path("logs/event_held_commitment_link_g0")); parser.add_argument("--device", choices=("cuda", "cpu"), default="cuda"); parser.add_argument("--authorize-formal", default=""); return parser.parse_args()
+    parser = argparse.ArgumentParser(); parser.add_argument("--mode", choices=("contract", "smoke", "train", "evaluate", "analyze"), default="contract"); parser.add_argument("--output-root", type=Path, default=Path("logs/event_held_commitment_link_g0")); parser.add_argument("--device", choices=REGISTERED_EXECUTION_BACKENDS, default=FORMAL_EXECUTION_BACKEND); parser.add_argument("--authorize-formal", default=""); return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    # Every mode activates the backend first, including `contract` and
+    # `analyze`: the contract carries the execution environment, so it cannot
+    # be printed or compared before that environment is registered.
+    require_registered_backend(args.device)
     if args.mode == "contract": result = registered_contract()
     elif args.mode == "smoke": result = run_smoke(args.output_root, device_name=args.device)
     elif args.mode == "train": result = formal_train(args.output_root, device_name=args.device, authorization=args.authorize_formal)

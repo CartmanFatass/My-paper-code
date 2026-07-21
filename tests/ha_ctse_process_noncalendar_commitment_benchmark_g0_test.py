@@ -16,6 +16,7 @@ import torch.nn.functional as F
 from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
+    EVENT_INPUT_DIM,
     FORK_STREAM_NAMES,
     KEEP,
     MARK_DIM,
@@ -54,16 +55,30 @@ from ha_ctse_process.event_held_commitment_link import (
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
+    A_KEEP_LCB_FLOOR,
+    A_KEEP_MEAN_FLOOR,
+    A_RENEW_LCB_FLOOR,
+    A_RENEW_MEAN_FLOOR,
+    BOOTSTRAP_SEED,
     EVENT_JOINT_FACTOR_COUNT,
     EVENT_SEED,
     FLOAT32_UNIT_ROUNDOFF,
+    FORMAL_EXECUTION_BACKEND,
     GAIN_THRESHOLD,
     HELD_OUT_EVAL_TASK_SEED,
     IID_EVAL_TASK_SEED,
     INTERVENTION_THRESHOLD,
     LIFETIME_BIN_THRESHOLD,
     MARK_SEED,
+    NATURAL_FORK_ACTIONS,
+    NATURAL_FORK_PAIRS,
+    NATURAL_FORK_QUOTA_PER_ACTION,
+    NATURAL_FORK_REPLICATES,
+    NATURAL_FORK_SELECTION_COORDINATE,
+    NATURAL_FORK_SELECTION_NAMESPACE,
     OPPORTUNITY_SEED,
+    REGISTERED_EXECUTION_BACKENDS,
+    REGISTERED_TORCH_THREADS,
     REPLAY_COMPONENT_FIELDS,
     REPLAY_COMPONENT_TOLERANCE,
     REPLAY_EXACT_FIELDS,
@@ -74,14 +89,17 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     TRAIN_ORDER_SEED,
     TRAIN_TASK_SEED,
     NoncalendarTrackingEnv,
+    active_execution_backend,
     float32_reduction_gamma,
     make_noncalendar_ledger,
     make_rng,
     paired_ledgers_equal_except_targets,
     registered_contract,
+    require_registered_backend,
     select_result_branch,
 )
 from scripts.run_noncalendar_commitment_benchmark_g0 import (
+    ABSENT_NATURAL_FORK_EVIDENCE,
     ARMS,
     EVALUATION_CELLS,
     EVALUATION_CELL_SCHEMA,
@@ -97,25 +115,125 @@ from scripts.run_noncalendar_commitment_benchmark_g0 import (
 )
 
 
-@pytest.fixture(scope="module")
-def cuda_device() -> torch.device:
-    if not torch.cuda.is_available():
+@pytest.fixture(scope="session", autouse=True)
+def registered_backend() -> str:
+    """Activate the registered execution backend once per session.
+
+    The rule is "never silently fall back", not "always CUDA": both `cuda`
+    and `cpu` are registered backends and the focused suite exercises the one
+    the formal run is registered on. It still fails closed -- an unavailable
+    registered backend fails the session rather than being substituted.
+
+    Autouse and session-scoped because `registered_contract()` refuses to
+    build a contract before a backend is active, and the contract is compared
+    for equality by every checkpoint and artifact assertion in this file.
+    """
+
+    try:
+        require_registered_backend(FORMAL_EXECUTION_BACKEND)
+    except (ValueError, RuntimeError) as error:
         pytest.fail(
-            "EVENT_HELD_COMMITMENT_LINK_G0 focused evidence requires CUDA; "
-            "no CPU fallback"
+            f"EVENT_HELD_COMMITMENT_LINK_G0 focused evidence requires the "
+            f"registered {FORMAL_EXECUTION_BACKEND!r} backend; no fallback "
+            f"({error})"
         )
-    return torch.device("cuda")
+    return FORMAL_EXECUTION_BACKEND
+
+
+@pytest.fixture(scope="module")
+def device(registered_backend: str) -> torch.device:
+    return torch.device(registered_backend)
+
+
+def dense_batch_invariance_error(device: torch.device) -> float:
+    """Largest change a row's dense-layer output suffers when one *other*
+    row leaves the packed batch, at the registered event-head shapes.
+
+    The fork engine reconstructs the forked step with the focal request
+    removed from the packed event/mark batch, so the surviving rows are
+    evaluated at width `n-1` where the collection evaluated them at width
+    `n`. Its bitwise-exactness guards therefore hold only on a backend whose
+    dense kernels give a row the same result regardless of how many other
+    rows share the call.
+
+    This is measured rather than assumed or keyed off a device name.
+    Measured on this machine at `torch.set_num_threads(1)`: CUDA returns
+    exactly 0.0; CPU returns 5.72e-06 with oneDNN either enabled or
+    disabled.
+    """
+
+    generator = torch.Generator(device="cpu").manual_seed(90_058)
+    weight = torch.randn(
+        (2 * MARK_DIM, EVENT_INPUT_DIM), generator=generator
+    ).to(device)
+    bias = torch.randn((2 * MARK_DIM,), generator=generator).to(device)
+    full = torch.randn((19, EVENT_INPUT_DIM), generator=generator).to(device)
+    dropped = 4
+    shorter = torch.cat((full[:dropped], full[dropped + 1:]), dim=0)
+    full_out = F.linear(full, weight, bias)
+    reference = torch.cat((full_out[:dropped], full_out[dropped + 1:]), dim=0)
+    return float((F.linear(shorter, weight, bias) - reference).abs().max())
+
+
+@pytest.fixture(scope="session")
+def dense_batch_invariant(registered_backend: str) -> bool:
+    return dense_batch_invariance_error(torch.device(registered_backend)) == 0.0
+
+
+def _assert_fork_refuses_without_batch_invariance(
+    arm: Any,
+    trajectory: Any,
+    state: Any,
+    device: torch.device,
+    coordinate: tuple[int, int, int],
+) -> None:
+    """On a backend that is not dense-batch invariant, the fork engine's own
+    unmodified guard must refuse rather than return an advantage built on a
+    drifted reconstruction. This is the fail-closed half of the same guard
+    the positive tests exercise elsewhere."""
+
+    time, env_index, key = coordinate
+    with pytest.raises(RuntimeError, match="not bitwise exact"):
+        fork_single_opportunity(
+            arm, trajectory, env_index=env_index, time=time, key=key,
+            device=device, state=state,
+        )
+
+
+def test_dense_batch_invariance_is_measured_not_assumed(
+    device: torch.device, dense_batch_invariant: bool,
+) -> None:
+    """The fork engine's precondition is a measurement of this backend.
+
+    A row's dense-layer output must not depend on how many other rows share
+    the call, because the fork drops the focal request from the packed
+    event/mark batch. The measurement decides which half of the fork
+    evidence this session can produce, so it is asserted to be a real,
+    finite, non-negative number rather than a device-name assumption.
+    """
+
+    error = dense_batch_invariance_error(device)
+    assert math.isfinite(error) and error >= 0.0
+    assert (error == 0.0) is dense_batch_invariant
+    if device.type == "cuda":
+        # Pinned: CUDA is exactly batch invariant at these shapes, which is
+        # why the fork engine's exactness contract was formulated there.
+        assert error == 0.0
+    else:
+        # Not a tolerance and not a bound -- a statement that this backend
+        # measurably lacks the invariance the fork engine requires.
+        assert error > 0.0
 
 
 def test_initialization_rng_isolation_and_capacity(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     random.seed(144)
     np.random.seed(145)
     torch.manual_seed(146)
     torch.cuda.manual_seed_all(147)
     before = runtime_rng_snapshot()
-    arms, base_optimizers, event_optimizers = initialize_arms(cuda_device)
+    arms, base_optimizers, event_optimizers = initialize_arms(device)
     after = runtime_rng_snapshot()
     assert runtime_rng_equal(before, after)
     for name in ("base", "W_z", "event_head", "mark_head"):
@@ -127,7 +245,7 @@ def test_initialization_rng_isolation_and_capacity(
             right = getattr(arms["EHC"], name).state_dict()
         assert nested_state_maximum_difference(left, right) == 0.0
     changed, _, _ = initialize_arms(
-        cuda_device, mark_seed=MARK_SEED + 1
+        device, mark_seed=MARK_SEED + 1
     )
     assert nested_state_maximum_difference(
         arms["DUM"].W_z.state_dict(), changed["DUM"].W_z.state_dict()
@@ -155,7 +273,7 @@ def test_initialization_rng_isolation_and_capacity(
 
 
 def test_ledger_rejoin_epoch_due_event_and_partial_continuity(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     left = make_noncalendar_ledger(
         0, profile="held_out", task_seed=HELD_OUT_EVAL_TASK_SEED,
@@ -168,18 +286,18 @@ def test_ledger_rejoin_epoch_due_event_and_partial_continuity(
     assert paired_ledgers_equal_except_targets(left, right)
     assert NoncalendarTrackingEnv(left).observe().observations.shape[1] == 15
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     full_state = make_training_state("EHC", 0)
     partial_state = make_training_state("EHC", 0)
     full = collect_trajectory(
-        arms["EHC"], full_state, device=cuda_device, episode_ids=(0,)
+        arms["EHC"], full_state, device=device, episode_ids=(0,)
     )
     first = collect_trajectory(
-        arms["EHC"], partial_state, device=cuda_device,
+        arms["EHC"], partial_state, device=device,
         episode_ids=(0,), max_steps=17,
     )
     second = collect_trajectory(
-        arms["EHC"], partial_state, device=cuda_device, cursor=first.cursor
+        arms["EHC"], partial_state, device=device, cursor=first.cursor
     )
     for name in (
         "actions", "old_log_probs", "old_values", "hidden_after",
@@ -202,7 +320,7 @@ def test_ledger_rejoin_epoch_due_event_and_partial_continuity(
 
     forced_state = make_training_state("EHC", 0)
     pre_rejoin = collect_trajectory(
-        arms["EHC"], forced_state, device=cuda_device,
+        arms["EHC"], forced_state, device=device,
         episode_ids=(0,), max_steps=40,
     )
     key = pre_rejoin.cursor.ledgers[0].temporary_key
@@ -214,7 +332,7 @@ def test_ledger_rejoin_epoch_due_event_and_partial_continuity(
     old_epoch = life.membership_epoch
     life.q = 0
     rejoin = collect_trajectory(
-        arms["EHC"], forced_state, device=cuda_device,
+        arms["EHC"], forced_state, device=device,
         cursor=pre_rejoin.cursor, max_steps=1,
     )
     event_kind = int(rejoin.event_kind[0, 0, key].detach().cpu())
@@ -264,13 +382,13 @@ def _reconstruct_key_spells(event_kind_row: list[int]) -> list[tuple[int, bool]]
 
 
 def test_k_accounting_complete_censored_and_temporary_absence(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     state = make_training_state("EHC", 0)
     episode_count = 8
     trajectory = collect_trajectory(
-        arms["EHC"], state, device=cuda_device,
+        arms["EHC"], state, device=device,
         episode_ids=tuple(range(episode_count)),
     )
 
@@ -315,7 +433,7 @@ def test_k_accounting_complete_censored_and_temporary_absence(
 
 
 def test_trajectory_episode_rows_k_accounting_and_complete_spell_bins(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """`_trajectory_episode_rows` and `aggregate_analysis` previously had no
     test at all -- the same unreachability that let a `torch.flatnonzero`
@@ -324,11 +442,11 @@ def test_trajectory_episode_rows_k_accounting_and_complete_spell_bins(
     evaluate/analyze split does through disk), and checks the row/segment
     accounting `aggregate_analysis` relies on."""
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+        arm, state, device=device, episode_ids=tuple(range(16))
     )
     rows = _trajectory_episode_rows(trajectory, arm, compute_intervention=True)
     round_tripped = json.loads(json.dumps(_json_ready(rows)))
@@ -374,14 +492,14 @@ def test_trajectory_episode_rows_k_accounting_and_complete_spell_bins(
 
 
 def test_action_distribution_tv_zero_under_constant_logit_shift(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     # This is the specific defect being fixed: the superseded
     # ||W_z(z - z_perm)|| / sqrt(3) metric is positive for a residual
     # proportional to (c, c, c), even though a softmax-common shift leaves
     # the three-action distribution exactly unchanged. Assert the fixed
     # I_TV metric is exactly (within float tolerance) zero in that case.
-    natural = torch.tensor([0.7, -1.3, 2.1], device=cuda_device)
+    natural = torch.tensor([0.7, -1.3, 2.1], device=device)
     for constant in (4.25, -9.0, 0.0):
         perturbed = natural + constant
         tv = action_distribution_tv(natural, perturbed)
@@ -389,33 +507,33 @@ def test_action_distribution_tv_zero_under_constant_logit_shift(
 
     # Batched form: a per-row constant shift must still cancel exactly.
     batch_natural = torch.tensor(
-        [[0.1, 0.2, 0.3], [-2.0, 0.5, 1.5], [3.0, -3.0, 0.0]], device=cuda_device
+        [[0.1, 0.2, 0.3], [-2.0, 0.5, 1.5], [3.0, -3.0, 0.0]], device=device
     )
-    shifts = torch.tensor([[1.0], [-3.5], [0.0]], device=cuda_device)
+    shifts = torch.tensor([[1.0], [-3.5], [0.0]], device=device)
     tv_batch = action_distribution_tv(batch_natural, batch_natural + shifts)
     assert torch.allclose(tv_batch, torch.zeros_like(tv_batch), atol=1e-6)
 
 
 def test_action_distribution_tv_bounded_and_realized_from_trajectory(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
-    generator = torch.Generator(device=cuda_device).manual_seed(4471)
-    random_natural = 6.0 * torch.randn((256, 3), generator=generator, device=cuda_device)
-    random_perm = 6.0 * torch.randn((256, 3), generator=generator, device=cuda_device)
+    generator = torch.Generator(device=device).manual_seed(4471)
+    random_natural = 6.0 * torch.randn((256, 3), generator=generator, device=device)
+    random_perm = 6.0 * torch.randn((256, 3), generator=generator, device=device)
     tv = action_distribution_tv(random_natural, random_perm)
     assert bool((tv >= -1e-6).all())
     assert bool((tv <= 1.0 + 1e-6).all())
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arms["EHC"], state, device=cuda_device, episode_ids=(0,)
+        arms["EHC"], state, device=device, episode_ids=(0,)
     )
     values: list[float] = []
     for time in range(trajectory.time_steps):
         values.extend(
             natural_and_permuted_action_tv(
-                arms["EHC"], trajectory, env_index=0, time=time, device=cuda_device
+                arms["EHC"], trajectory, env_index=0, time=time, device=device
             )
         )
     assert values, "expected at least one step with >=2 active lifecycles"
@@ -424,15 +542,15 @@ def test_action_distribution_tv_bounded_and_realized_from_trajectory(
     # OR carries no W_z treatment at all: the intervention is vacuous.
     or_state = make_training_state("OR", 0)
     or_trajectory = collect_trajectory(
-        arms["OR"], or_state, device=cuda_device, episode_ids=(0,)
+        arms["OR"], or_state, device=device, episode_ids=(0,)
     )
     assert natural_and_permuted_action_tv(
-        arms["OR"], or_trajectory, env_index=0, time=0, device=cuda_device
+        arms["OR"], or_trajectory, env_index=0, time=0, device=device
     ) == []
 
 
 def test_base_primitive_logits_reconstruction_matches_recorded_natural_log_probs(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """Guards acceptance item 7b: I_TV must be computed from the same
     held-fixed state as the natural action actually executed during
@@ -445,11 +563,11 @@ def test_base_primitive_logits_reconstruction_matches_recorded_natural_log_probs
     at the recorded natural action must reproduce the recorded
     `old_log_probs` exactly (up to float tolerance)."""
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+        arm, state, device=device, episode_ids=tuple(range(16))
     )
     maximum_error = 0.0
     checked_key_steps = 0
@@ -460,10 +578,10 @@ def test_base_primitive_logits_reconstruction_matches_recorded_natural_log_probs
             if not active_keys:
                 continue
             base_logits = base_primitive_logits(
-                arm, trajectory, env_index=env_index, time=time, device=cuda_device
+                arm, trajectory, env_index=env_index, time=time, device=device
             )
             for key in active_keys:
-                z = trajectory.primitive_z[time, env_index, key].to(cuda_device)
+                z = trajectory.primitive_z[time, env_index, key].to(device)
                 bias = arm.primitive_bias(z)
                 logits = base_logits[key] + bias
                 log_probability = F.log_softmax(logits, dim=-1)
@@ -485,15 +603,15 @@ def _corrupt_tensor(tensor: torch.Tensor, index: tuple[int, ...]) -> torch.Tenso
 
 
 def test_semantic_replay_corruption_negatives(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     state = make_training_state("DUM", 0)
     trajectory = collect_trajectory(
-        arms["DUM"], state, device=cuda_device, episode_ids=(0,)
+        arms["DUM"], state, device=device, episode_ids=(0,)
     )
     _replay, report = validate_replay(
-        arms["DUM"], trajectory, device=cuda_device
+        arms["DUM"], trajectory, device=device
     )
     errors = report["errors"]
     assert report["passed"] and not report["failures"]
@@ -550,19 +668,19 @@ def test_semantic_replay_corruption_negatives(
     corrupted[1].event_cat_mask[event_index] = ~corrupted[1].event_cat_mask[event_index]
     for value in corrupted:
         with pytest.raises(RuntimeError, match="semantic replay"):
-            validate_replay(arms["DUM"], value, device=cuda_device)
+            validate_replay(arms["DUM"], value, device=device)
 
     changed_kind = trajectory.event_kind.clone()
     changed_kind[event_index] = 0
     with pytest.raises(RuntimeError, match="semantic replay"):
         validate_replay(
             arms["DUM"], replace(trajectory, event_kind=changed_kind),
-            device=cuda_device,
+            device=device,
         )
 
 
 def test_candidate_retention_faithful_and_recovers_discarded_keep(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """Stage-1 retention (audit-only `candidate_u`/`candidate_z`): on
     CREATE/RENEW rows (`event_mark_mask` true) the retained candidate must
@@ -592,11 +710,11 @@ def test_candidate_retention_faithful_and_recovers_discarded_keep(
     rather than via the vacuous no-grad check."""
 
     def collect_and_optimize(*, corrupt: bool):
-        arms, base_optimizers, event_optimizers = initialize_arms(cuda_device)
+        arms, base_optimizers, event_optimizers = initialize_arms(device)
         arm = arms["EHC"]
         state = make_training_state("EHC", 0)
         trajectory = collect_trajectory(
-            arm, state, device=cuda_device, episode_ids=tuple(range(16))
+            arm, state, device=device, episode_ids=tuple(range(16))
         )
         if corrupt:
             trajectory = replace(
@@ -606,7 +724,7 @@ def test_candidate_retention_faithful_and_recovers_discarded_keep(
             )
         update = optimize_update(
             arm, base_optimizers["EHC"], event_optimizers["EHC"], state,
-            trajectory, device=cuda_device,
+            trajectory, device=device,
         )
         return trajectory, arm, base_optimizers["EHC"], event_optimizers["EHC"], update
 
@@ -664,7 +782,7 @@ def test_candidate_retention_faithful_and_recovers_discarded_keep(
 
 
 def test_candidate_retention_deterministic_matches_mu(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """With `deterministic=True` the registered mark rule sets `u = mu`
     for every request. `candidate_u`/`candidate_z` must retain exactly
@@ -672,11 +790,11 @@ def test_candidate_retention_deterministic_matches_mu(
     `event_inputs` and the arm's own `mark_head`, for every request row
     (CREATE/KEEP/RENEW alike, not only the categorical-masked ones)."""
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16)),
+        arm, state, device=device, episode_ids=tuple(range(16)),
         deterministic=True,
     )
     event_mask = trajectory.event_kind.ne(0)
@@ -714,9 +832,18 @@ def _fork_boundary_differences(
 
 
 def test_fork_single_opportunity_reproduces_the_natural_branch(
-    cuda_device: torch.device,
+    device: torch.device, dense_batch_invariant: bool,
 ) -> None:
     """Counterfactual KEEP/RENEW fork of one held-out opportunity.
+
+    Which half of this property the session can show is decided by the
+    measured dense-batch invariance of the active backend, never by a
+    device name. Where a row's dense output is independent of the packed
+    batch width, the reproduction below is asserted in full. Where it is
+    not -- the fork drops the focal request, so the surviving rows move by
+    about 5.7e-06 on CPU -- the engine's own unmodified guard must refuse
+    the fork, and that refusal is what is asserted instead. Neither guard
+    is relaxed in either case.
 
     The headline property is state-reconstruction correctness: the branch
     matching the naturally taken action must reproduce the *original*
@@ -740,11 +867,11 @@ def test_fork_single_opportunity_reproduces_the_natural_branch(
     test additionally reads back those engine-side error diagnostics.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0, profile="held_out")
     trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16)),
+        arm, state, device=device, episode_ids=tuple(range(16)),
         deterministic=True, profile="held_out",
     )
     kinds = trajectory.event_kind.detach().cpu()
@@ -762,6 +889,18 @@ def test_fork_single_opportunity_reproduces_the_natural_branch(
     owned_before = deepcopy(_rng_states(state))
     global_before = runtime_rng_snapshot()
 
+    if not dense_batch_invariant:
+        _assert_fork_refuses_without_batch_invariance(
+            arm, trajectory, state, device, natural_keep[0]
+        )
+        _assert_fork_refuses_without_batch_invariance(
+            arm, trajectory, state, device, natural_renew[0]
+        )
+        # A refused fork still leaves the caller's randomness untouched.
+        assert _nested_equal(owned_before, _rng_states(state))
+        assert runtime_rng_equal(global_before, runtime_rng_snapshot())
+        return
+
     checked: list[tuple[int, int, int]] = []
     discriminating = 0
     # One naturally-KEEP and one naturally-RENEW coordinate, so the
@@ -774,7 +913,7 @@ def test_fork_single_opportunity_reproduces_the_natural_branch(
             diagnostics: dict = {}
             result = fork_single_opportunity(
                 arm, trajectory, env_index=env_index, time=step, key=key,
-                device=cuda_device, state=state, diagnostics=diagnostics,
+                device=device, state=state, diagnostics=diagnostics,
             )
             checked.append((step, env_index, key))
 
@@ -904,7 +1043,7 @@ def _held_out_fork_setup(
 
 
 def test_fork_reproduces_hazardous_lifecycle_coordinates(
-    cuda_device: torch.device,
+    device: torch.device, dense_batch_invariant: bool,
 ) -> None:
     """Fork where reconstruction is structurally hardest, not only at `t=1`.
 
@@ -927,12 +1066,14 @@ def test_fork_reproduces_hazardous_lifecycle_coordinates(
       branch tail, so the branch must emit the censored TERMINAL_LEAVE
       close at the same sequence position the collector did.
 
-    All four are expected to reconstruct exactly; this is regression
-    protection for the reconstruction and segment-ordering contracts, not a
-    discovery test.
+    All four are expected to reconstruct exactly on a backend whose dense
+    kernels are batch-width invariant; this is regression protection for the
+    reconstruction and segment-ordering contracts, not a discovery test.
+    Where the backend measurably lacks that invariance, all four must
+    instead be refused by the engine's own unmodified guard.
     """
 
-    arm, state, trajectory, ledgers, eligible = _held_out_fork_setup(cuda_device)
+    arm, state, trajectory, ledgers, eligible = _held_out_fork_setup(device)
     temporary_leave_time = int(ledgers[0].temporary_leave_time)
     rejoin_time = int(ledgers[0].rejoin_time)
     terminal_leave_time = int(ledgers[0].terminal_leave_time)
@@ -967,11 +1108,18 @@ def test_fork_reproduces_hazardous_lifecycle_coordinates(
     assert bool(active[terminal_leave_time - 1, env_index, key])
     assert not bool(active[terminal_leave_time, env_index, key])
 
+    if not dense_batch_invariant:
+        for coordinate in coordinates.values():
+            _assert_fork_refuses_without_batch_invariance(
+                arm, trajectory, state, device, coordinate
+            )
+        return
+
     for label, (step, env_index, key) in coordinates.items():
         diagnostics: dict = {}
         result = fork_single_opportunity(
             arm, trajectory, env_index=env_index, time=step, key=key,
-            device=cuda_device, state=state, diagnostics=diagnostics,
+            device=device, state=state, diagnostics=diagnostics,
         )
         context = (label, step, env_index, key)
         natural_errors = diagnostics["natural_branch_errors"]
@@ -996,7 +1144,9 @@ def test_fork_reproduces_hazardous_lifecycle_coordinates(
         }
 
 
-def test_fork_rejects_a_corrupted_branch(cuda_device: torch.device, monkeypatch) -> None:
+def test_fork_rejects_a_corrupted_branch(
+    device: torch.device, dense_batch_invariant: bool, monkeypatch,
+) -> None:
     """The natural-branch reproduction guard must actually be able to fail.
 
     Every other fork test asserts that a correct branch is accepted, which
@@ -1016,20 +1166,32 @@ def test_fork_rejects_a_corrupted_branch(cuda_device: torch.device, monkeypatch)
     The third case is asserted to be caught by `segments` alone, with the
     continuous error still exactly zero, because that is the guard the
     other two do not exercise.
+
+    All three need an accepted control on the same coordinate, so they can
+    only be run on a dense-batch-invariant backend. Where that invariance is
+    absent the control itself is refused, and the only thing this test can
+    honestly assert is that refusal -- the corruption-rejection evidence is
+    unavailable on such a backend and is not simulated.
     """
 
-    arm, state, trajectory, _ledgers, eligible = _held_out_fork_setup(cuda_device)
+    arm, state, trajectory, _ledgers, eligible = _held_out_fork_setup(device)
     kinds = trajectory.event_kind.detach().cpu()
     step, env_index, key = next(
         row for row in eligible
         if row[0] >= HORIZON - 5 and int(kinds[row]) == RENEW
     )
 
+    if not dense_batch_invariant:
+        _assert_fork_refuses_without_batch_invariance(
+            arm, trajectory, state, device, (step, env_index, key)
+        )
+        return
+
     # Control: uncorrupted, the same coordinate is accepted.
     control: dict = {}
     fork_single_opportunity(
         arm, trajectory, env_index=env_index, time=step, key=key,
-        device=cuda_device, state=state, diagnostics=control,
+        device=device, state=state, diagnostics=control,
     )
     assert control["natural_action"] == "RENEW"
     assert control["natural_branch_errors"]["segment_mismatch"] == 0.0
@@ -1054,7 +1216,7 @@ def test_fork_rejects_a_corrupted_branch(cuda_device: torch.device, monkeypatch)
         with pytest.raises(RuntimeError, match="fork natural branch continuation"):
             fork_single_opportunity(
                 arm, trajectory, env_index=env_index, time=step, key=key,
-                device=cuda_device, state=state, diagnostics=stale,
+                device=device, state=state, diagnostics=stale,
             )
         # A raise must not leave the caller reading a previous fork's values.
         assert "stale_key" not in stale
@@ -1070,7 +1232,7 @@ def test_fork_rejects_a_corrupted_branch(cuda_device: torch.device, monkeypatch)
     with pytest.raises(RuntimeError) as excinfo:
         fork_single_opportunity(
             arm, trajectory, env_index=env_index, time=step, key=key,
-            device=cuda_device, state=state,
+            device=device, state=state,
         )
     message = str(excinfo.value)
     assert "fork natural branch continuation mismatch" in message
@@ -1082,7 +1244,7 @@ def test_fork_rejects_a_corrupted_branch(cuda_device: torch.device, monkeypatch)
 
 
 def test_fork_rejects_a_collector_state_from_another_profile(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """The fork must not silently rebuild a different task ledger.
 
@@ -1095,11 +1257,11 @@ def test_fork_rejects_a_collector_state_from_another_profile(
     full rollout, and not left to chance.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0, profile="held_out")
     trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16)),
+        arm, state, device=device, episode_ids=tuple(range(16)),
         deterministic=True, profile="held_out",
     )
     kinds = trajectory.event_kind.detach().cpu()
@@ -1115,7 +1277,7 @@ def test_fork_rejects_a_collector_state_from_another_profile(
     with pytest.raises(ValueError, match="disagrees with the collected trajectory"):
         fork_single_opportunity(
             arm, trajectory, env_index=env_index, time=step, key=key,
-            device=cuda_device, state=wrong_profile,
+            device=device, state=wrong_profile,
         )
 
     tampered = make_training_state("EHC", 0, profile="held_out")
@@ -1124,14 +1286,14 @@ def test_fork_rejects_a_collector_state_from_another_profile(
     with pytest.raises(ValueError, match="seed map is not the authoritative map"):
         fork_single_opportunity(
             arm, trajectory, env_index=env_index, time=step, key=key,
-            device=cuda_device, state=tampered,
+            device=device, state=tampered,
         )
 
     wrong_arm = make_training_state("DUM", 0, profile="held_out")
     with pytest.raises(ValueError, match="fork state owns arm"):
         fork_single_opportunity(
             arm, trajectory, env_index=env_index, time=step, key=key,
-            device=cuda_device, state=wrong_arm,
+            device=device, state=wrong_arm,
         )
 
 
@@ -1186,7 +1348,7 @@ def test_fork_generator_honors_the_requested_float_dtype() -> None:
 
 
 def test_candidate_retention_preserves_mark_rng_stream_position(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """No new RNG draw anywhere: retaining the discarded candidate must not
     perturb any owned RNG stream. Two identically seeded collections stay
@@ -1230,15 +1392,15 @@ def test_candidate_retention_preserves_mark_rng_stream_position(
     not by an independent reconstruction.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state_left = make_training_state("EHC", 0)
     state_right = make_training_state("EHC", 0)
     left = collect_trajectory(
-        arm, state_left, device=cuda_device, episode_ids=tuple(range(16))
+        arm, state_left, device=device, episode_ids=tuple(range(16))
     )
     right = collect_trajectory(
-        arm, state_right, device=cuda_device, episode_ids=tuple(range(16))
+        arm, state_right, device=device, episode_ids=tuple(range(16))
     )
     for name in (
         "actions", "event_categorical_actions", "old_log_probs",
@@ -1287,8 +1449,25 @@ def _tensor_sha256(tensor: torch.Tensor) -> str:
     ).hexdigest()
 
 
+# float32 reduction order is device-dependent, so the protected collector
+# outputs have one digest per registered backend rather than one digest. Both
+# were measured at `torch.set_num_threads(1)`; the CUDA pair is bit-for-bit the
+# pair pinned before CPU was admitted, which is direct evidence that the thread
+# pin does not perturb a CUDA collection.
+PINNED_COLLECTOR_DIGESTS = {
+    "cuda": (
+        "93456fbf72531b9deb203d86bcb1c012db4d072160450c9e26e333ebd0eb5fd3",
+        "2c0a71be5a455a3f1260149f5dac4527f6deabaa1ad9de6cfe3267fa8158a57f",
+    ),
+    "cpu": (
+        "3a9e4983bd78cee34375521c9b5df995d6785dde0df28a227dc7e75a77f50256",
+        "8dc39258eb5e12b3ac833305d8357696d9561366218c447b1d235a5004eb06b3",
+    ),
+}
+
+
 def test_collector_protected_outputs_pinned_digest(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """Regression pin against silent drift in the protected collector
     outputs `event_new_z` / `primitive_z`. `validate_replay` recomputes
@@ -1300,41 +1479,49 @@ def test_collector_protected_outputs_pinned_digest(
     of any code path in this module, for a fixed EHC collection at the
     registered 16-environment width, replicate 0, `train` profile.
 
-    Reproducibility was verified before pinning, not assumed: the SHA256
-    digest of both tensors was observed bit-for-bit identical across 3
-    collections within one process AND across 2 separate process
-    invocations of the same script (6 observations total on this machine,
-    zero variation -- see the probe run at task time). Because
+    Reproducibility was verified before pinning, not assumed. For each
+    registered backend the SHA256 digest of both tensors was observed
+    bit-for-bit identical across 3 collections within one process AND
+    across 2 separate process invocations of the same probe script (6
+    observations per backend on this machine, zero variation). Because
     bitwise-exact reproduction held in every observation, this pins an
     exact digest rather than falling back to a numeric summary at
     tolerance.
+
+    Both backends are pinned so the guard survives a change of registered
+    backend, but only the entry for the backend this session activated is
+    exercised: one process activates exactly one backend by construction,
+    so the other entry is carried, not checked, here.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    backend = active_execution_backend()
+    assert set(PINNED_COLLECTOR_DIGESTS) == set(REGISTERED_EXECUTION_BACKENDS)
+    expected_event_z, expected_primitive_z = PINNED_COLLECTOR_DIGESTS[backend]
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arm, state, device=cuda_device, episode_ids=tuple(range(16))
+        arm, state, device=device, episode_ids=tuple(range(16))
     )
-    assert _tensor_sha256(trajectory.event_new_z) == (
-        "93456fbf72531b9deb203d86bcb1c012db4d072160450c9e26e333ebd0eb5fd3"
-    )
-    assert _tensor_sha256(trajectory.primitive_z) == (
-        "2c0a71be5a455a3f1260149f5dac4527f6deabaa1ad9de6cfe3267fa8158a57f"
-    )
+    assert _tensor_sha256(trajectory.event_new_z) == expected_event_z
+    assert _tensor_sha256(trajectory.primitive_z) == expected_primitive_z
+    # The two backends genuinely disagree, which is why one digest could not
+    # serve both: this asserts the pin is backend-specific rather than an
+    # accidental duplicate.
+    assert len({tuple(value) for value in PINNED_COLLECTOR_DIGESTS.values()}) == 2
 
 
-def test_checkpoint_strict_continuation_and_cuda_smoke(
-    cuda_device: torch.device, tmp_path,
+def test_checkpoint_strict_continuation_and_registered_backend_smoke(
+    device: torch.device, tmp_path,
 ) -> None:
-    arms, base_optimizers, event_optimizers = initialize_arms(cuda_device)
+    arms, base_optimizers, event_optimizers = initialize_arms(device)
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arms["EHC"], state, device=cuda_device, episode_ids=(0,)
+        arms["EHC"], state, device=device, episode_ids=(0,)
     )
     update = optimize_update(
         arms["EHC"], base_optimizers["EHC"], event_optimizers["EHC"],
-        state, trajectory, device=cuda_device,
+        state, trajectory, device=device,
     )
     assert update["primitive_replays"] == 4
     assert update["event_head_replays"] == 4
@@ -1346,17 +1533,17 @@ def test_checkpoint_strict_continuation_and_cuda_smoke(
     )
     with pytest.raises(ValueError, match="arm/replicate"):
         load_checkpoint(
-            checkpoint, device=cuda_device,
+            checkpoint, device=device,
             expected_arm="DUM", expected_replicate=0,
         )
     with pytest.raises(ValueError, match="arm/replicate"):
         load_checkpoint(
-            checkpoint, device=cuda_device,
+            checkpoint, device=device,
             expected_arm="EHC", expected_replicate=1,
         )
     with pytest.raises(ValueError, match="update-250"):
         load_checkpoint(
-            checkpoint, device=cuda_device,
+            checkpoint, device=device,
             expected_arm="EHC", expected_replicate=0,
             formal_evaluation=True,
         )
@@ -1366,32 +1553,32 @@ def test_checkpoint_strict_continuation_and_cuda_smoke(
     torch.save(corrupt_payload, corrupt_path)
     with pytest.raises(ValueError, match="owned-RNG"):
         load_checkpoint(
-            corrupt_path, device=cuda_device,
+            corrupt_path, device=device,
             expected_arm="EHC", expected_replicate=0,
         )
 
     left_arm, left_base, left_event, left_state = load_checkpoint(
-        checkpoint, device=cuda_device,
+        checkpoint, device=device,
         expected_arm="EHC", expected_replicate=0,
     )
     left_trajectory = collect_trajectory(
-        left_arm, left_state, device=cuda_device, episode_ids=(1,)
+        left_arm, left_state, device=device, episode_ids=(1,)
     )
     optimize_update(
         left_arm, left_base, left_event, left_state,
-        left_trajectory, device=cuda_device,
+        left_trajectory, device=device,
     )
     left_global = runtime_rng_snapshot()
     right_arm, right_base, right_event, right_state = load_checkpoint(
-        checkpoint, device=cuda_device,
+        checkpoint, device=device,
         expected_arm="EHC", expected_replicate=0,
     )
     right_trajectory = collect_trajectory(
-        right_arm, right_state, device=cuda_device, episode_ids=(1,)
+        right_arm, right_state, device=device, episode_ids=(1,)
     )
     optimize_update(
         right_arm, right_base, right_event, right_state,
-        right_trajectory, device=cuda_device,
+        right_trajectory, device=device,
     )
     right_global = runtime_rng_snapshot()
     continuation = compare_continuations(
@@ -1410,8 +1597,8 @@ def test_checkpoint_strict_continuation_and_cuda_smoke(
         )
     ) <= 1e-7
 
-    smoke = run_smoke(tmp_path / "smoke", device_name="cuda")
-    assert smoke["device"] == "cuda" and smoke["formal"] is False
+    smoke = run_smoke(tmp_path / "smoke", device_name=device.type)
+    assert smoke["device"] == device.type and smoke["formal"] is False
     assert smoke["or_dum_no_op"]
     assert all(value["update"]["primitive_replays"] == 4 for value in smoke["arms"].values())
     assert smoke["arms"]["DUM"]["update"]["base_zero_gradients"] == [1, 1, 1, 1]
@@ -1659,12 +1846,22 @@ def _branch_inputs() -> dict[str, object]:
         "multi_opportunity_lifecycles": 250,
         "eligible_keep_rows": SUPPORT_FLOOR,
         "eligible_renew_rows": SUPPORT_FLOOR,
+        "natural_keep_rows_by_replicate": (
+            NATURAL_FORK_QUOTA_PER_ACTION,
+        ) * NATURAL_FORK_REPLICATES,
+        "natural_renew_rows_by_replicate": (
+            NATURAL_FORK_QUOTA_PER_ACTION,
+        ) * NATURAL_FORK_REPLICATES,
         "utility_ci": {
             "OR": (0.79, 0.81), "DUM": (0.79, 0.81), "EHC": (0.80, 0.84)
         },
         "g_ci": (0.11, 0.15),
         "k_bin_cis": ((0.11, 0.20), (0.11, 0.20), (0.05, 0.09)),
         "intervention_ci": (0.11, 0.20),
+        "a_keep_ci": (0.03, 0.09),
+        "a_renew_ci": (0.03, 0.09),
+        "a_keep_mean": 0.06,
+        "a_renew_mean": 0.06,
     }
 
 
@@ -1767,6 +1964,392 @@ def test_select_result_branch_rejects_non_three_k_bins() -> None:
             select_result_branch(**(base | {"k_bin_cis": wrong}))
 
 
+def test_registered_contract_carries_execution_and_replacement_c() -> None:
+    """The contract is about to be frozen into every checkpoint, so both the
+    execution environment and the whole of Replacement C must be readable
+    from it alone."""
+
+    contract = registered_contract()
+    execution = contract["execution"]
+    assert execution["backend"] == active_execution_backend()
+    assert execution["backend"] in REGISTERED_EXECUTION_BACKENDS
+    assert execution["registered_backends"] == list(REGISTERED_EXECUTION_BACKENDS)
+    assert execution["torch_threads"] == REGISTERED_TORCH_THREADS
+    assert execution["torch_threads"] == torch.get_num_threads()
+
+    thresholds = contract["thresholds"]
+    assert thresholds["a_keep_lcb"] == A_KEEP_LCB_FLOOR == 0.0
+    assert thresholds["a_renew_lcb"] == A_RENEW_LCB_FLOOR == 0.0
+    assert thresholds["a_keep_mean_floor"] == A_KEEP_MEAN_FLOOR == 0.02
+    assert thresholds["a_renew_mean_floor"] == A_RENEW_MEAN_FLOOR == 0.02
+
+    fork = contract["natural_fork"]
+    assert fork["actions"] == ["KEEP", "RENEW"] == list(NATURAL_FORK_ACTIONS)
+    assert fork["quota_per_action_per_replicate"] == 32 == NATURAL_FORK_QUOTA_PER_ACTION
+    assert fork["replicates"] == 5 == NATURAL_FORK_REPLICATES
+    assert fork["pairs"] == 320 == NATURAL_FORK_PAIRS
+    selection = fork["selection_stream"]
+    assert selection["namespace"] == NATURAL_FORK_SELECTION_NAMESPACE
+    assert selection["base_seed"] == BOOTSTRAP_SEED
+    assert selection["coordinate"] == NATURAL_FORK_SELECTION_COORDINATE
+    # A dedicated stream, not a re-use of an existing one: it must differ
+    # from the bootstrap resample stream that shares its base seed, and from
+    # every owned collector stream.
+    assert set(RNG_NAMES) <= set(selection["distinct_from"])
+    assert "bootstrap_resample" in selection["distinct_from"]
+    selection_state = make_rng(
+        BOOTSTRAP_SEED, NATURAL_FORK_SELECTION_COORDINATE
+    ).bit_generator.state
+    assert selection_state != np.random.default_rng(
+        BOOTSTRAP_SEED
+    ).bit_generator.state
+    seed_map = authoritative_seed_map("held_out", 0)
+    for name in RNG_NAMES:
+        assert selection_state != np.random.default_rng(
+            seed_map[name]
+        ).bit_generator.state
+
+
+def test_checkpoint_rejects_a_foreign_execution_backend(
+    device: torch.device, tmp_path,
+) -> None:
+    """The same-backend constraint is structural, not documented.
+
+    The execution block rides inside the contract that `load_checkpoint`
+    compares for equality, so a checkpoint produced under another backend --
+    or under another thread configuration -- is unloadable here. This test
+    edits only that block of an otherwise valid checkpoint, so a failure can
+    only come from the execution record.
+    """
+
+    arms, base_optimizers, event_optimizers = initialize_arms(device)
+    state = make_training_state("EHC", 0)
+    checkpoint = tmp_path / "origin.pt"
+    save_checkpoint(
+        checkpoint, arm=arms["EHC"], base_optimizer=base_optimizers["EHC"],
+        event_optimizer=event_optimizers["EHC"], state=state,
+    )
+    payload = torch.load(checkpoint, map_location="cpu", weights_only=False)
+    assert payload["contract"]["execution"]["backend"] == device.type
+    # Control: the unedited checkpoint loads, so the rejections below are
+    # caused by the edit and not by an unrelated defect.
+    load_checkpoint(
+        checkpoint, device=device, expected_arm="EHC", expected_replicate=0
+    )
+    foreign_backend = next(
+        name for name in REGISTERED_EXECUTION_BACKENDS if name != device.type
+    )
+    for label, mutation in (
+        ("backend", {"backend": foreign_backend}),
+        ("threads", {"torch_threads": REGISTERED_TORCH_THREADS + 13}),
+    ):
+        foreign = deepcopy(payload)
+        foreign["contract"]["execution"] |= mutation
+        foreign_path = tmp_path / f"foreign_{label}.pt"
+        torch.save(foreign, foreign_path)
+        with pytest.raises(ValueError, match="registered contract mismatch"):
+            load_checkpoint(
+                foreign_path, device=device,
+                expected_arm="EHC", expected_replicate=0,
+            )
+
+
+def test_registered_backend_activation_never_falls_back(
+    device: torch.device,
+) -> None:
+    """`cuda` and `cpu` are both registered; anything else raises, an
+    unavailable backend raises rather than being substituted, and a second
+    backend cannot be activated in a process that already has one."""
+
+    active = active_execution_backend()
+    assert require_registered_backend(active) == torch.device(active)
+    for unregistered in ("mps", "xpu", "CUDA", "cuda:0", ""):
+        with pytest.raises(ValueError, match="registered execution backend"):
+            require_registered_backend(unregistered)
+    other = next(
+        name for name in REGISTERED_EXECUTION_BACKENDS if name != active
+    )
+    with pytest.raises(RuntimeError, match="already active"):
+        require_registered_backend(other)
+    # A device from the other backend is refused everywhere arms are built,
+    # so a stray device object cannot smuggle work onto it.
+    with pytest.raises(RuntimeError, match="active execution backend"):
+        initialize_arms(torch.device(other))
+
+
+def test_replacement_c_requires_both_directions() -> None:
+    """Both `A_KEEP` and `A_RENEW` are required; one-sided is not a pass.
+
+    Covers the equality boundaries on both the interval gate (`LCB > 0`, so
+    `LCB == 0` does not pass; `UCB <= 0`, so `UCB == 0` confidently fails)
+    and the frozen point floors (`mean >= 0.02`, so exactly `0.02` passes).
+    """
+
+    base = _branch_inputs()
+    assert select_result_branch(**base) == "COMMITMENT_SUPPORTED"
+    passing = (0.03, 0.09)
+    crossing = (A_KEEP_LCB_FLOOR, 0.09)
+    failing = (-0.05, A_KEEP_LCB_FLOOR)
+    # One-sided pass: whichever direction is not established, the result is
+    # never COMMITMENT_SUPPORTED.
+    for one_sided in (
+        {"a_keep_ci": crossing, "a_renew_ci": passing},
+        {"a_keep_ci": passing, "a_renew_ci": crossing},
+        {"a_keep_ci": failing, "a_renew_ci": passing},
+        {"a_keep_ci": passing, "a_renew_ci": failing},
+        {"a_keep_mean": A_KEEP_MEAN_FLOOR - 0.001},
+        {"a_renew_mean": A_RENEW_MEAN_FLOOR - 0.001},
+    ):
+        assert select_result_branch(
+            **(base | one_sided)
+        ) != "COMMITMENT_SUPPORTED", one_sided
+    # `LCB == 0` does not clear a strict `> 0` gate, and `UCB > 0` is not the
+    # dual either, so the crossing case is underpowered, not a failure.
+    assert select_result_branch(
+        **(base | {"a_keep_ci": crossing})
+    ) == "MIXED_UNDERPOWERED"
+    assert select_result_branch(
+        **(base | {"a_renew_ci": crossing})
+    ) == "MIXED_UNDERPOWERED"
+    # `UCB == 0` is the exact statistical dual and confidently fails.
+    assert select_result_branch(
+        **(base | {"a_keep_ci": failing})
+    ) == "REPRESENTATION_ONLY"
+    assert select_result_branch(
+        **(base | {"a_renew_ci": failing})
+    ) == "REPRESENTATION_ONLY"
+    # The point floors are point estimates: exactly at the floor passes, and
+    # missing the floor is underpowered rather than a confident failure,
+    # because a point estimate carries no interval dual.
+    assert select_result_branch(
+        **(base | {
+            "a_keep_mean": A_KEEP_MEAN_FLOOR,
+            "a_renew_mean": A_RENEW_MEAN_FLOOR,
+        })
+    ) == "COMMITMENT_SUPPORTED"
+    assert select_result_branch(
+        **(base | {"a_keep_mean": A_KEEP_MEAN_FLOOR - 0.001})
+    ) == "MIXED_UNDERPOWERED"
+    assert select_result_branch(
+        **(base | {"a_renew_mean": A_RENEW_MEAN_FLOOR - 0.001})
+    ) == "MIXED_UNDERPOWERED"
+    for name in ("a_keep_ci", "a_renew_ci"):
+        with pytest.raises(ValueError, match="inverted"):
+            select_result_branch(**(base | {name: (0.09, 0.03)}))
+        with pytest.raises(ValueError, match="lcb, ucb"):
+            select_result_branch(**(base | {name: (0.03,)}))
+
+
+def test_natural_fork_quota_shortfall_is_non_identifiable_and_unpoolable() -> None:
+    """A replicate short of the registered quota for either natural action
+    makes the run non-identifiable, and no pooled total can rescue it.
+
+    Pooling is not merely rejected, it is inexpressible: the branch selector
+    takes exactly `NATURAL_FORK_REPLICATES` per-replicate counts and no
+    total, so there is no input through which a surplus in one replicate can
+    cover a shortfall in another.
+    """
+
+    base = _branch_inputs()
+    quota = NATURAL_FORK_QUOTA_PER_ACTION
+    assert select_result_branch(**base) == "COMMITMENT_SUPPORTED"
+    for name in (
+        "natural_keep_rows_by_replicate", "natural_renew_rows_by_replicate"
+    ):
+        for short_index in range(NATURAL_FORK_REPLICATES):
+            counts = [quota] * NATURAL_FORK_REPLICATES
+            counts[short_index] = quota - 1
+            assert select_result_branch(
+                **(base | {name: tuple(counts)})
+            ) == "BENCHMARK_NON_IDENTIFIABLE", (name, short_index)
+            # A large surplus everywhere else -- a pooled total far above
+            # 5*32 -- still does not rescue the short replicate.
+            surplus = [10 * quota] * NATURAL_FORK_REPLICATES
+            surplus[short_index] = quota - 1
+            assert sum(surplus) > quota * NATURAL_FORK_REPLICATES
+            assert select_result_branch(
+                **(base | {name: tuple(surplus)})
+            ) == "BENCHMARK_NON_IDENTIFIABLE", (name, short_index)
+        # Exactly the quota everywhere is sufficient; the quota is a floor,
+        # not a target, so a surplus is also fine.
+        assert select_result_branch(
+            **(base | {name: (quota,) * NATURAL_FORK_REPLICATES})
+        ) == "COMMITMENT_SUPPORTED"
+        # A pooled scalar, or any count vector that is not one entry per
+        # replicate, is rejected outright rather than interpreted.
+        for wrong in ((), (quota,), (quota,) * 4, (quota,) * 6):
+            with pytest.raises(ValueError, match=name):
+                select_result_branch(**(base | {name: wrong}))
+    # The shortfall resolves at position 2, ahead of every evidence branch,
+    # so it cannot be masked by otherwise passing statistics.
+    assert select_result_branch(
+        **(base | {
+            "natural_keep_rows_by_replicate": (quota - 1,) * NATURAL_FORK_REPLICATES,
+            "g_ci": (0.0, 0.01),
+        })
+    ) == "BENCHMARK_NON_IDENTIFIABLE"
+
+
+def test_absent_natural_fork_evidence_fails_closed() -> None:
+    """Until the analyzer is wired, the runner reports the C evidence as
+    absent, and absent evidence must resolve to non-identifiable rather than
+    let an unevidenced run reach a supported verdict."""
+
+    assert set(ABSENT_NATURAL_FORK_EVIDENCE) == {
+        "natural_keep_rows_by_replicate", "natural_renew_rows_by_replicate",
+        "a_keep_ci", "a_renew_ci", "a_keep_mean", "a_renew_mean",
+    }
+    assert select_result_branch(
+        **(_branch_inputs() | ABSENT_NATURAL_FORK_EVIDENCE)
+    ) == "BENCHMARK_NON_IDENTIFIABLE"
+
+
+_BRANCH_ORDER = (
+    "INVALID_OPERATIONAL",
+    "BENCHMARK_NON_IDENTIFIABLE",
+    "NO_ACCESS_THIS_BENCHMARK",
+    "UNDERPOWERED_ACCESS",
+    "COMMITMENT_SUPPORTED",
+    "REPRESENTATION_ONLY",
+    "ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED",
+    "MIXED_UNDERPOWERED",
+)
+
+
+def _independent_branch_predicates(inputs: dict[str, Any]) -> dict[str, bool]:
+    """The eight branch conditions, written out from the registered
+    precedence list rather than read back from the implementation."""
+
+    utility = inputs["utility_ci"]
+    k_bins = inputs["k_bin_cis"]
+    intervention = inputs["intervention_ci"]
+    gain = inputs["g_ci"]
+    keep_lcb, keep_ucb = inputs["a_keep_ci"]
+    renew_lcb, renew_ucb = inputs["a_renew_ci"]
+    access_established = (
+        max(interval[1] for interval in utility.values()) >= ACCESS_FLOOR
+        and max(interval[0] for interval in utility.values()) >= ACCESS_FLOOR
+    )
+    passes = (
+        sum(ci[0] > LIFETIME_BIN_THRESHOLD for ci in k_bins) >= 2
+        and intervention[0] > INTERVENTION_THRESHOLD
+        and keep_lcb > A_KEEP_LCB_FLOOR
+        and renew_lcb > A_RENEW_LCB_FLOOR
+        and inputs["a_keep_mean"] >= A_KEEP_MEAN_FLOOR
+        and inputs["a_renew_mean"] >= A_RENEW_MEAN_FLOOR
+    )
+    confidently_fails = (
+        sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in k_bins) < 2
+        or intervention[1] <= INTERVENTION_THRESHOLD
+        or keep_ucb <= A_KEEP_LCB_FLOOR
+        or renew_ucb <= A_RENEW_LCB_FLOOR
+    )
+    return {
+        "INVALID_OPERATIONAL": not inputs["operational_valid"],
+        "BENCHMARK_NON_IDENTIFIABLE": (
+            inputs["non_create_opportunities"] < 1000
+            or inputs["multi_opportunity_lifecycles"] < 250
+            or inputs["eligible_keep_rows"] < SUPPORT_FLOOR
+            or inputs["eligible_renew_rows"] < SUPPORT_FLOOR
+            or min(inputs["natural_keep_rows_by_replicate"])
+            < NATURAL_FORK_QUOTA_PER_ACTION
+            or min(inputs["natural_renew_rows_by_replicate"])
+            < NATURAL_FORK_QUOTA_PER_ACTION
+        ),
+        "NO_ACCESS_THIS_BENCHMARK": (
+            max(interval[1] for interval in utility.values()) < ACCESS_FLOOR
+        ),
+        "UNDERPOWERED_ACCESS": (
+            max(interval[0] for interval in utility.values()) < ACCESS_FLOOR
+        ),
+        "COMMITMENT_SUPPORTED": (
+            access_established and gain[0] > GAIN_THRESHOLD and passes
+        ),
+        "REPRESENTATION_ONLY": (
+            access_established and gain[0] > GAIN_THRESHOLD and confidently_fails
+        ),
+        "ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED": gain[1] <= GAIN_THRESHOLD,
+        "MIXED_UNDERPOWERED": True,
+    }
+
+
+def test_eight_branches_mutually_exclusive_under_first_match() -> None:
+    """Over a grid that includes every registered equality boundary, the
+    selector returns exactly the first satisfied branch of the eight.
+
+    Two things are checked together: the returned branch's own condition
+    holds, and no earlier branch's condition holds. That is what "mutually
+    exclusive under first-match precedence" means operationally -- a later
+    branch is only reachable when every earlier one is false.
+    """
+
+    import itertools
+
+    base = _branch_inputs()
+    quota = NATURAL_FORK_QUOTA_PER_ACTION
+    late_axes = {
+        "g_ci": ((0.11, 0.15), (GAIN_THRESHOLD, 0.15), (0.0, GAIN_THRESHOLD), (0.05, 0.11)),
+        "k_bin_cis": (
+            ((0.11, 0.20), (0.11, 0.20), (0.05, 0.09)),
+            ((0.01, 0.05), (0.01, LIFETIME_BIN_THRESHOLD), (0.11, 0.20)),
+            ((LIFETIME_BIN_THRESHOLD, 0.20), (0.11, 0.20), (0.05, 0.09)),
+        ),
+        "intervention_ci": (
+            (0.11, 0.20),
+            (0.05, INTERVENTION_THRESHOLD),
+            (INTERVENTION_THRESHOLD, 0.20),
+        ),
+        "a_keep_ci": ((0.03, 0.09), (A_KEEP_LCB_FLOOR, 0.09), (-0.05, A_KEEP_LCB_FLOOR)),
+        "a_renew_ci": ((0.03, 0.09), (A_RENEW_LCB_FLOOR, 0.09), (-0.05, A_RENEW_LCB_FLOOR)),
+        "a_keep_mean": (0.06, A_KEEP_MEAN_FLOOR, A_KEEP_MEAN_FLOOR - 0.001),
+    }
+    early_axes = {
+        "operational_valid": (True, False),
+        "non_create_opportunities": (1000, 999),
+        "multi_opportunity_lifecycles": (250, 249),
+        "eligible_keep_rows": (SUPPORT_FLOOR, SUPPORT_FLOOR - 1),
+        "eligible_renew_rows": (SUPPORT_FLOOR, SUPPORT_FLOOR - 1),
+        "natural_keep_rows_by_replicate": (
+            (quota,) * NATURAL_FORK_REPLICATES,
+            (quota, quota, quota - 1, quota, quota),
+        ),
+        "natural_renew_rows_by_replicate": (
+            (quota,) * NATURAL_FORK_REPLICATES,
+            (quota - 1,) + (quota,) * (NATURAL_FORK_REPLICATES - 1),
+        ),
+        "utility_ci": (
+            {"OR": (0.79, 0.81), "DUM": (0.79, 0.81), "EHC": (0.80, 0.84)},
+            {"OR": (0.1, ACCESS_FLOOR - 1e-6), "DUM": (0.1, 0.7), "EHC": (0.1, 0.7)},
+            {"OR": (0.7, ACCESS_FLOOR), "DUM": (0.7, 0.8), "EHC": (0.7, 0.8)},
+        ),
+    }
+
+    def grid(axes: dict[str, Any]) -> list[dict[str, Any]]:
+        names = tuple(axes)
+        return [
+            base | dict(zip(names, combination))
+            for combination in itertools.product(*(axes[name] for name in names))
+        ]
+
+    cases = grid(late_axes) + grid(early_axes)
+    assert len(cases) > 1000
+    seen: set[str] = set()
+    for inputs in cases:
+        predicates = _independent_branch_predicates(inputs)
+        assert set(predicates) == set(_BRANCH_ORDER)
+        expected = next(name for name in _BRANCH_ORDER if predicates[name])
+        branch = select_result_branch(**inputs)
+        assert branch == expected, inputs
+        # Nothing earlier in the precedence may also be satisfied.
+        assert not any(
+            predicates[name]
+            for name in _BRANCH_ORDER[: _BRANCH_ORDER.index(branch)]
+        ), inputs
+        seen.add(branch)
+    # A grid that never reaches a branch would prove nothing about it.
+    assert seen == set(_BRANCH_ORDER)
+
+
 def _event_factor_tensors(
     replay: Any, trajectory: Any, device: torch.device
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
@@ -1790,7 +2373,7 @@ def _event_factor_tensors(
 
 
 def test_derived_joint_bounds_are_recomputed_not_fitted(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """The joint allowance follows from the factor algebra, not observation.
 
@@ -1804,12 +2387,12 @@ def test_derived_joint_bounds_are_recomputed_not_fitted(
     particular device happened to produce would fail this test.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    trajectory = collect_trajectory(arm, state, device=device)
     assert trajectory.active_mask.shape[1] == 16
-    replay = replay_trajectory(arm, trajectory, device=cuda_device)
+    replay = replay_trajectory(arm, trajectory, device=device)
     joints = replay_joint_bounds(replay, trajectory)
 
     unit_roundoff = 2.0**-24
@@ -1821,10 +2404,10 @@ def test_derived_joint_bounds_are_recomputed_not_fitted(
     assert float32_reduction_gamma(9.0) == gamma_nine
     assert gamma_nine == pytest.approx(5.36442090748478e-07, rel=1e-12)
 
-    stored, replayed, rows = _event_factor_tensors(replay, trajectory, cuda_device)
+    stored, replayed, rows = _event_factor_tensors(replay, trajectory, device)
     assert bool(rows.any())
     error = (
-        replay.event_joint_logp - trajectory.event_old_joint_logp.to(cuda_device)
+        replay.event_joint_logp - trajectory.event_old_joint_logp.to(device)
     ).double().abs()
     component_sum = (replayed - stored).abs().sum(-1)
     allowance = gamma_nine * (stored.abs().sum(-1) + replayed.abs().sum(-1))
@@ -1847,8 +2430,8 @@ def test_derived_joint_bounds_are_recomputed_not_fitted(
     assert record["excess"] <= 0.0
     assert record["rows"] == float(int(rows.sum()))
 
-    active = trajectory.active_mask.to(cuda_device)
-    stored_logp = trajectory.old_log_probs.to(cuda_device)
+    active = trajectory.active_mask.to(device)
+    stored_logp = trajectory.old_log_probs.to(device)
     terms = torch.where(active, (replay.log_probs - stored_logp).double(), 0.0)
     primitive_error = (
         torch.where(active, replay.log_probs - stored_logp, 0.0).sum(-1).double().abs()
@@ -1922,7 +2505,7 @@ def _restated_event_factors(
 
 
 def test_defective_component_still_fails_under_the_relaxed_joint_rule(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """The relaxed joint rule must never rescue a defective factor.
 
@@ -1936,17 +2519,17 @@ def test_defective_component_still_fails_under_the_relaxed_joint_rule(
     class, every case here would pass silently.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(arm, state, device=cuda_device)
-    replay = replay_trajectory(arm, trajectory, device=cuda_device)
+    trajectory = collect_trajectory(arm, state, device=device)
+    replay = replay_trajectory(arm, trajectory, device=device)
     assert replay_report(replay, trajectory)["passed"]
     index = _first_renew_index(trajectory)
     defect = 2e-6
 
-    inputs = trajectory.event_inputs[index].unsqueeze(0).to(cuda_device)
-    u_row = trajectory.event_u[index].unsqueeze(0).to(cuda_device)
+    inputs = trajectory.event_inputs[index].unsqueeze(0).to(device)
+    u_row = trajectory.event_u[index].unsqueeze(0).to(device)
     with torch.no_grad():
         mu, sigma = _normal_parameters(arm.mark_head(inputs))
         correct_marks = transformed_mark_component_logp(u_row, mu, sigma)[0]
@@ -1995,7 +2578,7 @@ def test_defective_component_still_fails_under_the_relaxed_joint_rule(
         "jacobian_omitted": "mark_component",
     }
     for label, corrupted in cases.items():
-        corrupted_replay = replay_trajectory(arm, corrupted, device=cuda_device)
+        corrupted_replay = replay_trajectory(arm, corrupted, device=device)
         report = replay_report(corrupted_replay, corrupted)
         assert not report["passed"], label
         assert expected_field[label] in report["failures"], label
@@ -2013,11 +2596,11 @@ def test_defective_component_still_fails_under_the_relaxed_joint_rule(
             ), label
         assert "event_joint_assembly" not in report["failures"], label
         with pytest.raises(RuntimeError, match="semantic replay tolerance mismatch"):
-            validate_replay(arm, corrupted, device=cuda_device)
+            validate_replay(arm, corrupted, device=device)
 
 
 def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """Accumulation across nine factors passes; a joint defect does not.
 
@@ -2034,10 +2617,10 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     it must raise on the joint rather than on any component.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    trajectory = collect_trajectory(arm, state, device=device)
     index = _first_renew_index(trajectory)
     displacement = 2e-7
 
@@ -2047,7 +2630,7 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
         categorical=trajectory.event_old_cat_logp[index] - displacement,
         marks=trajectory.event_old_mark_component_logp[index] - displacement,
     )
-    accumulated_replay = replay_trajectory(arm, accumulated, device=cuda_device)
+    accumulated_replay = replay_trajectory(arm, accumulated, device=device)
     report = replay_report(accumulated_replay, accumulated)
     assert report["passed"], report["failures"]
     assert all(
@@ -2068,7 +2651,7 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     over_bound = trajectory.event_old_joint_logp.clone()
     over_bound[index] = over_bound[index] - 5e-5
     defective = replace(trajectory, event_old_joint_logp=over_bound)
-    defective_replay = replay_trajectory(arm, defective, device=cuda_device)
+    defective_replay = replay_trajectory(arm, defective, device=device)
     defective_report = replay_report(defective_replay, defective)
     assert not defective_report["passed"]
     assert "event_joint" in defective_report["failures"]
@@ -2082,11 +2665,11 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     # size of the displacement.
     assert "event_joint_assembly" in defective_report["failures"]
     with pytest.raises(RuntimeError, match="event_joint"):
-        validate_replay(arm, defective, device=cuda_device)
+        validate_replay(arm, defective, device=device)
 
 
 def test_registered_contract_replay_block_and_checkpoint_strictness(
-    cuda_device: torch.device, tmp_path: Any
+    device: torch.device, tmp_path: Any
 ) -> None:
     """The contract carries the four classes, not one scalar.
 
@@ -2133,7 +2716,7 @@ def test_registered_contract_replay_block_and_checkpoint_strictness(
     # is untouched by the replay correction.
     assert contract["optimization"]["resume_tolerance"] == 1e-7
 
-    arms, base_optimizers, event_optimizers = initialize_arms(cuda_device)
+    arms, base_optimizers, event_optimizers = initialize_arms(device)
     state = make_training_state("EHC", 0)
     path = tmp_path / "contract_strictness.pt"
     save_checkpoint(
@@ -2141,7 +2724,7 @@ def test_registered_contract_replay_block_and_checkpoint_strictness(
         event_optimizer=event_optimizers["EHC"], state=state,
     )
     loaded_arm, _, _, _ = load_checkpoint(
-        path, device=cuda_device, expected_arm="EHC", expected_replicate=0
+        path, device=device, expected_arm="EHC", expected_replicate=0
     )
     assert nested_state_maximum_difference(
         arms["EHC"].state_dict(), loaded_arm.state_dict()
@@ -2158,7 +2741,7 @@ def test_registered_contract_replay_block_and_checkpoint_strictness(
     torch.save(payload, legacy_path)
     with pytest.raises(ValueError, match="registered contract mismatch"):
         load_checkpoint(
-            legacy_path, device=cuda_device, expected_arm="EHC",
+            legacy_path, device=device, expected_arm="EHC",
             expected_replicate=0,
         )
 
@@ -2252,7 +2835,7 @@ def _leaked_support_trajectory(
 
 
 def test_factor_recorded_outside_its_own_support_is_rejected(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """A factor outside its mask is a defect no joint bound can catch.
 
@@ -2273,12 +2856,12 @@ def test_factor_recorded_outside_its_own_support_is_rejected(
     shown *not* to fire, and the exact class must.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    trajectory = collect_trajectory(arm, state, device=device)
     clean = replay_report(
-        replay_trajectory(arm, trajectory, device=cuda_device), trajectory
+        replay_trajectory(arm, trajectory, device=device), trajectory
     )
     assert clean["passed"]
     assert clean["errors"]["categorical_support_leak"] == 0.0
@@ -2289,11 +2872,11 @@ def test_factor_recorded_outside_its_own_support_is_rejected(
         ("mark", "mark_support_leak"),
     ):
         corrupted, leaked, rows = _leaked_support_trajectory(
-            arm, trajectory, field=field, device=cuda_device
+            arm, trajectory, field=field, device=device
         )
         assert float(leaked.abs().max()) > 1e-3, field
         report = replay_report(
-            replay_trajectory(arm, corrupted, device=cuda_device), corrupted
+            replay_trajectory(arm, corrupted, device=device), corrupted
         )
         assert not report["passed"], field
         assert leak_name in report["failures"], field
@@ -2311,7 +2894,7 @@ def test_factor_recorded_outside_its_own_support_is_rejected(
         assert "mark_component" not in report["failures"], field
         assert "mask_mismatch" not in report["failures"], field
         with pytest.raises(RuntimeError, match=leak_name):
-            validate_replay(arm, corrupted, device=cuda_device)
+            validate_replay(arm, corrupted, device=device)
         # The other support-leak field is untouched: the two look in
         # different places and neither stands in for the other.
         other = (
@@ -2322,7 +2905,7 @@ def test_factor_recorded_outside_its_own_support_is_rejected(
 
 
 def test_replay_reports_and_records_fail_closed_on_non_finite_values(
-    cuda_device: torch.device,
+    device: torch.device,
 ) -> None:
     """NaN must fail, not pass. `nan > tol` and `nan > 0.0` are both false.
 
@@ -2334,10 +2917,10 @@ def test_replay_reports_and_records_fail_closed_on_non_finite_values(
     evidence depending on batch order.
     """
 
-    arms, _, _ = initialize_arms(cuda_device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(arm, state, device=cuda_device)
+    trajectory = collect_trajectory(arm, state, device=device)
     index = _first_renew_index(trajectory)
     for label, mutation in (
         ("joint", "event_old_joint_logp"),
@@ -2347,14 +2930,14 @@ def test_replay_reports_and_records_fail_closed_on_non_finite_values(
         tensor[index] = float("nan")
         corrupted = replace(trajectory, **{mutation: tensor})
         report = replay_report(
-            replay_trajectory(arm, corrupted, device=cuda_device), corrupted
+            replay_trajectory(arm, corrupted, device=device), corrupted
         )
         assert not report["passed"], label
         assert any(
             name.startswith("non_finite:") for name in report["failures"]
         ), label
         with pytest.raises(RuntimeError):
-            validate_replay(arm, corrupted, device=cuda_device)
+            validate_replay(arm, corrupted, device=device)
 
     clean = _synthetic_replay_record()
     assert _replay_record_valid(clean)

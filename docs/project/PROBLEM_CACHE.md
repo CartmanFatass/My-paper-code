@@ -38,6 +38,34 @@ generator states, fix the float32 dtype facade first, and expect width drift to
 matter more because a uniform landing within ~1e-7 of a CDF boundary adds a
 second flip channel.
 
+### P1b. The fork engine cannot run on CPU
+
+Measured directly: over the first six eligible held-out coordinates,
+`fork_single_opportunity` succeeds 6 of 6 on CUDA and fails 6 of 6 on CPU, each
+with `continuous = 4.768e-07` on `event_old_joint_logp` — not bitwise exact.
+
+Cause: the fork reconstructs the forked step with the focal request removed from
+the packed event batch, so the branch packs one fewer row than the collection
+did. On CPU the surviving, unrelated rows then move, and the perturbation
+cascades through `z`. A synthetic `nn.Linear` sweep does not reproduce this
+cleanly — measured worst batch-size dependence was 3.4e-07 on CPU against
+4.8e-07 on CUDA — so the effect is specific to the shapes and values in the real
+path, and only the real fork is decisive.
+
+This is the same shape-identity requirement the plan already states for width-1
+versus width-16 prefixes; the fork engine additionally depends on the packed
+request batch having identical size, which CUDA satisfies and CPU does not.
+
+**Consequence:** CPU cannot produce `A_KEEP`/`A_RENEW`, and a CPU checkpoint
+cannot be loaded under CUDA by design, so a CPU run cannot be evaluated on CUDA
+either. The registered backend is therefore CUDA, and the measured 3.26x CPU
+speed advantage on training is unusable for this experiment.
+
+**What would resolve it:** make the branch pack the same number of requests as
+the collection at the forked step, for example by retaining a masked placeholder
+row instead of dropping the focal request. That requires changing
+`collect_trajectory`, which is frozen, so it needs its own authorized boundary.
+
 ## Open scientific questions
 
 ### P2. Should the likelihood be accumulated in float64?
