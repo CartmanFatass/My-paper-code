@@ -1,103 +1,13 @@
 # Efficiency Practices
 
-Living document. Records what we have measured about implementation and
-experiment throughput, the practices derived from those measurements, and the
-approaches we have already refuted so nobody retries them.
+Living document. Throughput measurements, dead ends, and what is currently
+blocked. The rules these support are in
+`docs/project/ENGINEERING_ADDITIONS.md`; read that for the brief and this for
+the numbers.
 
-Two things are kept apart deliberately:
-
-- **Measurements** are facts under stated conditions. They expire when the
-  hardware, the model shape or the batch width changes.
-- **Practices** are rules. They should survive a change of hardware, which is
-  why most of them are about how to decide rather than what to choose.
-
-Update this file when a measurement is taken or a practice is corrected. Record
-the conditions with every number; a number without its conditions becomes a
-false generalization within weeks.
-
-`docs/project/WORKING_PRINCIPLES.md` holds the abstract form of what the
-practices below instantiate. Read that first for a brief; read this for the
-evidence.
-
-## Practices
-
-### P1. Measure before you state a number
-
-Never report a cost, a speedup or a scaling factor that was not measured. If a
-decision depends on a number, the measurement is part of the decision, not an
-optional follow-up.
-
-This exists because four estimates in one session were wrong, each by enough to
-change a decision:
-
-| Claim | Reality | Cost of the error |
-|---|---|---|
-| Fork batching lands around 18 minutes | ~3 h per replicate at full scale | An expensive requirement was adopted partly on this number |
-| The 15 cells concurrent gives near-linear speedup | 2.0x, saturating at 4 processes | Would have specified the wrong parallelism strategy |
-| `A_KEEP` may be zero by construction | An artifact of forking deterministically | Nearly retired the only bidirectional consequence gate |
-| CUDA is the right device | CPU is 2.7-2.9x faster on this shape | Never questioned until measured |
-
-Each measurement cost minutes. Each error would have cost hours or a wrong
-scientific decision.
-
-### P2. Device choice is a measurement, not a default
-
-Do not assume CUDA. Decide by the ratio of kernel launch overhead to work per
-launch, and measure it.
-
-A workload is GPU-hostile when it has few parameters, a small batch, and many
-sequential steps — the launch overhead then dominates the arithmetic. It becomes
-GPU-favourable as model size, batch width or agent count grows.
-
-Because the project's target capability is large variable-membership teams, the
-correct device is expected to change as the work scales. Re-measure at each
-significant change of shape rather than carrying a past answer forward.
-
-### P3. Split correctness from performance, in that order
-
-Decompose a task so that a correct slow implementation is a complete deliverable
-before any performance work begins. Correctness gets its own review and its own
-acceptance evidence.
-
-A task scoped as "engine plus wiring" stalled for an hour and produced nothing,
-because the hard part (exact state reconstruction) and the orthogonal part
-(batched execution) were entangled. Re-scoped as "sequential single pair,
-natural-branch reproduction only", it succeeded.
-
-### P4. A test must be able to fail
-
-Before recording a test as covering an invariant, state what wrong
-implementation it would catch. If the answer is none, the test is worse than
-absent, because it reads as covered in every later audit.
-
-Verify the important ones by mutation: introduce the defect deliberately,
-confirm the test goes red, revert, confirm the tree is byte-identical to a
-pre-mutation backup.
-
-A test asserting `requires_grad is False` inside a `torch.no_grad()` block
-passed while proving nothing. In the other direction, a reviewer's claim that
-the suite would miss a swapped `candidate_z` was refuted in five seconds by
-mutation — the guard existed. Mutation testing settles both directions.
-
-### P5. Numerical tolerances are device- and shape-coupled
-
-A tolerance calibrated on one device at one batch width is not a property of the
-algorithm. State the conditions under which a bound was established, and expect
-any change of reduction order — a different device, a different batch width, a
-different accumulation path — to move the error.
-
-Prefer bounding each factor over bounding a derived sum. A quantity that
-accumulates several component errors will always be the marginal one under a
-single scalar bound.
-
-### P6. Fix an observed issue once
-
-From the standing engineering principles: do not create a separate performance
-gate or a speculative optimization loop. Measure to decide, fix once, move on.
-
-Applied in practice: a plausible optimization (sharing the frozen ledger between
-forks instead of deep-copying) was measured at 288 microseconds per clone and
-about 1.2 seconds across the whole fork budget, and dropped without being built.
+Record the conditions with every measurement — hardware, model shape, batch
+width. A number without its conditions becomes a false generalization within
+weeks. Add to this file whenever a measurement is taken.
 
 ## Measurements
 
