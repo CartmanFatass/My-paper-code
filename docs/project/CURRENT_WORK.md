@@ -39,6 +39,46 @@ Work is executed through bounded subagents under a single orchestrator.
 One writer holds a given file set at a time. Concurrent mutating tasks on the
 same scope are not dispatched.
 
+## Binding Engineering Constraints
+
+These are durable technical constraints, not workflow. They bind every
+implementation and every review regardless of which agent executes, and they
+are quoted into implementer and reviewer briefs:
+
+- `.agents/skills/hmasd-implementer/references/engineering-principles.md`
+- `.agents/skills/hmasd-project-manager/references/engineering-principles.md`
+- `.agents/skills/hmasd-reviewer/references/review-principles.md`
+
+Only `.agents/skills/hmasd-experiment/references/experiment-protocol.md` is
+Codex-session machinery and does not apply here.
+
+The load-bearing consequences:
+
+- Environment, member, **branch**, skill, **replica** and evaluation dimensions
+  are all batched through the existing tensor path. Loops are retained only for
+  genuine causal, autoregressive, simulator or recurrent dependence.
+- Batched inference is reused for evaluation, controls, **forced branches**,
+  replicas and audits whenever the estimand and RNG contract permit. A
+  counterfactual fork is a forced branch and is batched by default.
+- Replicate concurrency is achieved by batching the replica dimension inside one
+  known-good process and device topology. Spawning one process per replicate
+  creates duplicate CUDA contexts and is explicitly rejected.
+- Intended RNG independence, common-random-number coupling and exact checkpoint
+  continuation are preserved.
+- Rollout data is packed and transferred once per collection boundary and reused
+  across optimizer passes; metrics synchronize only at real control boundaries.
+- Conclusion-bearing runners expose stage-level wall time sufficient to locate
+  order-of-magnitude regressions.
+- Before returning any change, the end-to-end changed path is inspected once for
+  scalar CUDA work, repeated packing or transfer, premature synchronization,
+  recurrent leakage, replay mismatch, RNG drift, excessive persistence and
+  **serial evaluation**.
+- Performance structure is reviewed as code quality, not as a separate gate. An
+  observed issue is fixed once; no speculative optimization loop is created.
+
+Local testing assumes 16 parallel environments, matching `FORMAL_NUM_ENVS`.
+Batch sizing for new work is expressed in units of that width.
+
 Handoff note: the prior Codex controller task
 `019f5c78-0c91-7612-adb4-c1fcfe4484c8` left the
 `EVENT_HELD_COMMITMENT_LINK_G0` implementation complete but uncommitted. It was
@@ -151,8 +191,13 @@ roughly 1 to 1.5h, for about 10h continuous.
 
 Throughput is Python-loop and kernel-launch bound rather than compute bound at
 roughly 160 transitions/s for a 15k-parameter model, so the GPU stays nearly
-idle. The 15 `(arm, replicate)` cells are independent and can be executed
-concurrently before any formal launch is authorized.
+idle. The 15 `(arm, replicate)` cells are independent.
+
+An earlier proposal to run those cells as concurrent processes is **withdrawn**:
+it would create duplicate CUDA contexts, which the binding engineering
+constraints reject. The correct form is to batch the replica dimension inside
+one process and device topology, alongside the environment dimension already
+batched at width 16.
 
 ## Local Execution Environment
 
