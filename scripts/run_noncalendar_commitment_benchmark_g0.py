@@ -45,9 +45,11 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     EVENT_JOINT_FACTOR_COUNT,
     FORMAL_EVAL_EPISODES,
     FORMAL_EXECUTION_BACKEND,
+    FORMAL_NUM_ENVS,
     FORMAL_UPDATES,
     HORIZON,
     NATURAL_FORK_REPLICATES,
+    PPO_PASSES,
     REGISTERED_CONTRACT,
     REGISTERED_EXECUTION_BACKENDS,
     REPLAY_COMPONENT_FIELDS,
@@ -73,6 +75,24 @@ EVALUATION_CELLS = (
     ("held_out", True, "held_out_deterministic"),
     ("held_out", False, "held_out_stochastic"),
 )
+# The registered budget. `formal_train`, `formal_evaluate` and
+# `validate_operational_records` take it as keyword defaults so that a
+# bounded end-to-end exercise runs the same code rather than a copy of it.
+# `parse_args` deliberately exposes no flag for any of them, so a formal run
+# is neither shortenable nor extendable from the command line; the registered
+# numbers are the only ones `main` can ever produce.
+FORMAL_REPLICATES: tuple[int, ...] = tuple(range(5))
+
+
+def _checkpoint_name(updates: int) -> str:
+    """The training boundary a checkpoint stands at is part of its identity.
+
+    Recorded as `checkpoint_origin` in both the training manifest and every
+    evaluation artifact, so an artifact can never claim to descend from a
+    boundary its checkpoint did not reach.
+    """
+
+    return f"update_{int(updates)}.pt"
 
 
 # Stage 2 (the batched fork engine and its aggregation) is not wired, so this
@@ -354,11 +374,24 @@ def validate_operational_records(
     training_manifest: dict[str, Any],
     evaluation_payloads: dict[tuple[int, str, str], dict[str, Any]],
     *,
-    expected_replicates: tuple[int, ...] = tuple(range(5)),
+    expected_replicates: tuple[int, ...] = FORMAL_REPLICATES,
+    expected_updates: int = FORMAL_UPDATES,
+    expected_eval_episodes: int = FORMAL_EVAL_EPISODES,
+    expected_cells: tuple[tuple[str, bool, str], ...] = EVALUATION_CELLS,
 ) -> tuple[bool, list[str]]:
-    """Fail-closed validation of all conclusion-bearing operational evidence."""
+    """Fail-closed validation of all conclusion-bearing operational evidence.
+
+    The four `expected_*` budgets default to the registered ones, so a caller
+    that names none of them validates against update 250, 256 evaluation
+    episodes and all four cells exactly as before. They are keyword-only and
+    unreachable from `parse_args`, which is what keeps a formal artifact from
+    being validated against a smaller budget than it claims.
+    """
 
     errors: list[str] = []
+    expected_updates = int(expected_updates)
+    expected_eval_episodes = int(expected_eval_episodes)
+    expected_origin = _checkpoint_name(expected_updates)
     if set(training_manifest) != {
         "schema_version", "contract", "mode", "replicates"
     }:
@@ -386,7 +419,7 @@ def validate_operational_records(
             operational.get(name) is True for name in required_families
         ):
             errors.append(f"training_operational:{replicate}")
-        if len(record.get("updates", [])) != FORMAL_UPDATES:
+        if len(record.get("updates", [])) != expected_updates:
             errors.append(f"training_update_count:{replicate}")
         arms = record.get("arms", {})
         if set(arms) != set(ARMS):
@@ -394,14 +427,16 @@ def validate_operational_records(
             continue
         for arm in ARMS:
             entry = arms[arm]
-            expected_event = 0 if arm == "OR" else 1000
+            expected_base = expected_updates * PPO_PASSES
+            expected_event = 0 if arm == "OR" else expected_base
             if (
                 entry.get("arm") != arm
                 or entry.get("replicate") != replicate
-                or entry.get("checkpoint_origin") != "update_250.pt"
-                or entry.get("completed_update") != 250
-                or entry.get("next_episode_id") != 4000
-                or entry.get("base_steps") != 1000
+                or entry.get("checkpoint_origin") != expected_origin
+                or entry.get("completed_update") != expected_updates
+                or entry.get("next_episode_id")
+                != expected_updates * FORMAL_NUM_ENVS
+                or entry.get("base_steps") != expected_base
                 or entry.get("event_steps") != expected_event
                 or entry.get("seed_map") != authoritative_seed_map("train", replicate)
                 or entry.get("checkpoint_resume") is not True
@@ -412,12 +447,12 @@ def validate_operational_records(
         (replicate, arm, cell)
         for replicate in expected_replicates
         for arm in ARMS
-        for _profile, _deterministic, cell in EVALUATION_CELLS
+        for _profile, _deterministic, cell in expected_cells
     }
     if set(evaluation_payloads) != expected_keys:
         errors.append("evaluation_artifact_set")
     for replicate in expected_replicates:
-        for profile, deterministic, cell in EVALUATION_CELLS:
+        for profile, deterministic, cell in expected_cells:
             paired_ids: tuple[int, ...] | None = None
             for arm in ARMS:
                 payload = evaluation_payloads.get((replicate, arm, cell), {})
@@ -444,9 +479,11 @@ def validate_operational_records(
                     or payload.get("cell") != cell
                     or payload.get("profile") != profile
                     or payload.get("mode") != expected_mode
-                    or payload.get("checkpoint_origin") != "update_250.pt"
+                    or payload.get("checkpoint_origin") != expected_origin
                     or payload.get("checkpoint") != training_checkpoint
-                    or counts != {"episodes": FORMAL_EVAL_EPISODES, "horizon": HORIZON}
+                    or counts != {
+                        "episodes": expected_eval_episodes, "horizon": HORIZON
+                    }
                     or payload.get("seed_map") != authoritative_seed_map(profile, replicate)
                     or set(operational) != {"probability_replay", "lifecycle", "rng", "checkpoint", "finite"}
                     or not all(value is True for value in operational.values())
@@ -459,7 +496,7 @@ def validate_operational_records(
                     int(value.get("episode_id", -1))
                     for value in payload.get("episodes", [])
                 )
-                if episode_ids != tuple(range(FORMAL_EVAL_EPISODES)):
+                if episode_ids != tuple(range(expected_eval_episodes)):
                     errors.append(f"evaluation_episode_ids:{replicate}:{arm}:{cell}")
                 if paired_ids is None:
                     paired_ids = episode_ids
@@ -586,18 +623,35 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
 
 
 def formal_train(
-    output_root: Path, *, device_name: str, authorization: str
+    output_root: Path,
+    *,
+    device_name: str,
+    authorization: str,
+    updates: int = FORMAL_UPDATES,
+    replicates: tuple[int, ...] = FORMAL_REPLICATES,
 ) -> dict[str, Any]:
+    """Train every arm of every replicate and record per-update evidence.
+
+    `updates`/`replicates` default to the registered budget and are reachable
+    only from Python, never from `parse_args`. They exist so a bounded
+    exercise runs this function rather than a re-implementation of it; a
+    formal run passes neither and so cannot be shortened.
+    """
+
     if authorization != FORMAL_AUTHORIZATION:
         raise PermissionError("formal train requires the exact authorization token")
+    updates = int(updates)
+    if updates < 1:
+        raise ValueError("training requires at least one update")
     device = require_registered_backend(device_name)
+    checkpoint_name = _checkpoint_name(updates)
     manifest: dict[str, Any] = {
         "schema_version": TRAIN_MANIFEST_SCHEMA,
         "contract": registered_contract(),
         "mode": "formal_train",
         "replicates": {},
     }
-    for replicate in range(5):
+    for replicate in replicates:
         arms, base_optimizers, event_optimizers = initialize_arms(
             device, replicate=replicate
         )
@@ -612,7 +666,7 @@ def formal_train(
             "checkpoint_resume": True,
             "exposure": True,
         }
-        for update_index in range(FORMAL_UPDATES):
+        for update_index in range(updates):
             trajectories = {
                 arm: collect_trajectory(
                     arms[arm], states[arm], device=device
@@ -656,10 +710,10 @@ def formal_train(
             )
             finite = all(metrics["finite"] for metrics in update_metrics.values())
             exposure = all(
-                metrics["base_steps"] == 4
-                and metrics["primitive_replays"] == 4
+                metrics["base_steps"] == PPO_PASSES
+                and metrics["primitive_replays"] == PPO_PASSES
                 and metrics["packed_trajectory_count"] == 1
-                and metrics["event_steps"] == (0 if arm == "OR" else 4)
+                and metrics["event_steps"] == (0 if arm == "OR" else PPO_PASSES)
                 for arm, metrics in update_metrics.items()
             )
             base_noop_error = nested_state_maximum_difference(
@@ -692,15 +746,22 @@ def formal_train(
         for arm in ARMS:
             checkpoint = (
                 output_root / "train" / f"replicate_{replicate}"
-                / arm / "update_250.pt"
+                / arm / checkpoint_name
             )
             save_checkpoint(
                 checkpoint, arm=arms[arm], base_optimizer=base_optimizers[arm],
                 event_optimizer=event_optimizers[arm], state=states[arm],
             )
+            # `formal_evaluation` asserts the checkpoint stands at the
+            # *registered* update-250 boundary. A bounded run's checkpoint
+            # genuinely does not, so asserting it there would be a false
+            # claim rather than a stricter check; the ordinary load still
+            # verifies contract, arm, replicate, seed map, optimizer
+            # ownership, exposure algebra and an empty collector boundary.
             loaded_arm, loaded_base, loaded_event, loaded_state = load_checkpoint(
                 checkpoint, device=device, expected_arm=arm,
-                expected_replicate=replicate, formal_evaluation=True,
+                expected_replicate=replicate,
+                formal_evaluation=updates == FORMAL_UPDATES,
             )
             resume_valid = bool(
                 nested_state_maximum_difference(
@@ -713,15 +774,15 @@ def formal_train(
                     None if event_optimizers[arm] is None else event_optimizers[arm].state_dict(),
                     None if loaded_event is None else loaded_event.state_dict(),
                 ) == 0.0
-                and loaded_state.completed_update == FORMAL_UPDATES
-                and loaded_state.next_episode_id == 4000
+                and loaded_state.completed_update == updates
+                and loaded_state.next_episode_id == updates * FORMAL_NUM_ENVS
             )
             all_operational["checkpoint_resume"] &= resume_valid
             arm_records[arm] = {
                 "arm": arm,
                 "replicate": replicate,
                 "checkpoint": str(checkpoint),
-                "checkpoint_origin": "update_250.pt",
+                "checkpoint_origin": checkpoint_name,
                 "completed_update": states[arm].completed_update,
                 "next_episode_id": states[arm].next_episode_id,
                 "base_steps": states[arm].base_optimizer_steps,
@@ -770,28 +831,53 @@ def _trajectory_episode_rows(
 
 
 def formal_evaluate(
-    output_root: Path, *, device_name: str, authorization: str
+    output_root: Path,
+    *,
+    device_name: str,
+    authorization: str,
+    updates: int = FORMAL_UPDATES,
+    replicates: tuple[int, ...] = FORMAL_REPLICATES,
+    eval_episodes: int = FORMAL_EVAL_EPISODES,
+    cells: tuple[tuple[str, bool, str], ...] = EVALUATION_CELLS,
 ) -> dict[str, Any]:
+    """Evaluate every trained checkpoint over every registered cell.
+
+    The four keyword budgets default to the registered ones and, like
+    `formal_train`'s, are reachable only from Python. `updates` names the
+    training boundary the checkpoints are expected to stand at, so a bounded
+    evaluation reads the bounded run's own checkpoints and never a formal
+    run's.
+    """
+
     if authorization != FORMAL_AUTHORIZATION:
         raise PermissionError("formal evaluation requires the exact authorization token")
+    updates = int(updates)
+    eval_episodes = int(eval_episodes)
+    if eval_episodes < FORMAL_NUM_ENVS or eval_episodes % FORMAL_NUM_ENVS:
+        raise ValueError(
+            "evaluation episodes must be a positive multiple of the "
+            "registered collection width"
+        )
     device = require_registered_backend(device_name)
+    checkpoint_name = _checkpoint_name(updates)
     manifest: dict[str, Any] = {
         "schema_version": 1,
         "contract": registered_contract(),
         "mode": "formal_evaluate",
         "artifacts": {},
     }
-    for replicate in range(5):
+    for replicate in replicates:
         for arm_name in ARMS:
             checkpoint = (
                 output_root / "train" / f"replicate_{replicate}"
-                / arm_name / "update_250.pt"
+                / arm_name / checkpoint_name
             )
             arm, _, _, checkpoint_state = load_checkpoint(
                 checkpoint, device=device, expected_arm=arm_name,
-                expected_replicate=replicate, formal_evaluation=True,
+                expected_replicate=replicate,
+                formal_evaluation=updates == FORMAL_UPDATES,
             )
-            for profile, deterministic, cell in EVALUATION_CELLS:
+            for profile, deterministic, cell in cells:
                 state = _evaluation_state(
                     arm_name, replicate, profile=profile
                 )
@@ -799,10 +885,10 @@ def formal_evaluate(
                 replay_records: list[dict[str, Any]] = []
                 lifecycle_valid = True
                 finite = True
-                for start in range(0, FORMAL_EVAL_EPISODES, 16):
+                for start in range(0, eval_episodes, FORMAL_NUM_ENVS):
                     trajectory = collect_trajectory(
                         arm, state, device=device,
-                        episode_ids=range(start, start + 16),
+                        episode_ids=range(start, start + FORMAL_NUM_ENVS),
                         deterministic=deterministic, profile=profile,
                     )
                     _replay, replay_evidence = validate_replay(
@@ -835,8 +921,9 @@ def formal_evaluate(
                         and set(state.rngs) == set(RNG_NAMES)
                     ),
                     "checkpoint": (
-                        checkpoint_state.completed_update == 250
-                        and checkpoint_state.next_episode_id == 4000
+                        checkpoint_state.completed_update == updates
+                        and checkpoint_state.next_episode_id
+                        == updates * FORMAL_NUM_ENVS
                     ),
                     "finite": finite,
                 }
@@ -854,7 +941,7 @@ def formal_evaluate(
                     "profile": profile,
                     "mode": "deterministic" if deterministic else "stochastic",
                     "checkpoint": str(checkpoint),
-                    "checkpoint_origin": "update_250.pt",
+                    "checkpoint_origin": checkpoint_name,
                     "counts": {
                         "episodes": len(episode_rows),
                         "horizon": HORIZON,
