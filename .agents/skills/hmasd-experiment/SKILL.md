@@ -1,6 +1,6 @@
 ---
 name: hmasd-experiment
-description: Use only inside the persistent HMASD experiment-monitor session when it receives a registered run assignment, creates and manages that session's heartbeat, performs bounded ETA-based progress checks, deletes the heartbeat after a tool-confirmed terminal callback, or relays one terminal result. Do not use for experiment design, launch, code repair, scientific interpretation, ordinary status reads, or controller work.
+description: Use inside the registered HMASD experiment-monitor session when receiving MONITOR_ASSIGNMENT, EXPERIMENT_MONITOR, a monitor heartbeat wake, terminal run evidence, deadline evidence, or a monitoring callback/retry for one assigned run.
 ---
 
 # HMASD Experiment Monitor
@@ -41,6 +41,16 @@ the stable terminal payload. Delete and verify deletion of the heartbeat only
 after the send tool confirms the controller task. Never use sleep, continuous
 polling, broad artifact scans, duplicate automations, or waiting messages to
 the controller.
+
+Evidence priority is strict. On every heartbeat, inspect the assigned
+authoritative status artifact first. If it reports a terminal state such as
+`COMPLETE`, `FAILED`, `INVALID_OPERATIONAL`, `ACTIONABLE_ERROR` or `TIMEOUT`,
+stop progress estimation immediately, extract the registered terminal payload
+or direct failure artifact, relay it to the controller and then delete the
+heartbeat after confirmed delivery. Compute ETA only after the authoritative
+status is confirmed nonterminal. Never report `running` or ETA from process
+existence, stale counters or nominal duration when the authoritative artifact is
+terminal.
 
 Within those boundaries, use model judgment rather than a fixed progress state
 machine. Select the registered counters that best explain current progress,

@@ -42,6 +42,13 @@ code agents are registered under `.codex/agents/` and belong only to the
 Research Project Manager. They use native parent-child communication and are
 not controller dispatch targets.
 
+Execution-surface switches are the anti-drift boundary. Every controller
+message to a persistent role must explicitly invoke `hmasd-dispatch-task` and
+that role's Skill in the message body, and every persistent-role callback must
+explicitly invoke `hmasd-dispatch-task`. Once the message reaches the correct
+role, the role follows a wide process inside its authority; the controller does
+not prescribe internal steps or request per-edit approval.
+
 ## Authority and write ownership
 
 The Research Project Manager has two bounded modes:

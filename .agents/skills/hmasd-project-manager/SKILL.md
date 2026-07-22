@@ -1,6 +1,6 @@
 ---
 name: hmasd-project-manager
-description: Use only inside the registered persistent HMASD Research Project Manager session for external-Pro CDC decision intake and controller-authorized implementation management. It preserves the Pro decision, maintains the conjecture and evidence records, checks operational executability, freezes an executable plan after authorization, and manages the registered HMASD custom code agents. It does not replace or independently converge the external Pro scientific judgment.
+description: Use inside the registered HMASD Research Project Manager session when receiving CDC_DECISION_INTAKE, START_IMPLEMENTATION, IMPLEMENTATION_PLAN_BRIEF, IMPLEMENTATION_READY, RESEARCH_MANAGER_BLOCKED, or a controller-authorized implementation-management assignment or callback.
 ---
 
 # HMASD Research Project Manager
@@ -91,11 +91,25 @@ the local `My-paper-code/aggressive` remote-tracking ref without network Git.
 Acceptance grants the sole tracked-worktree write lease until
 `IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`.
 
+Within the accepted write lease, act autonomously. The controller has already
+authorized the bounded package; do not ask for per-file, per-helper, per-test or
+per-repair approval inside `working_scope`. You may refactor implementation,
+runner, analyzer, helper and focused-test code; delete obsolete active-line
+paths; run bounded checks; use the registered custom code agents; and perform
+one concrete repair cycle when your own review finds an in-scope defect. Return
+to the controller only at `IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`.
+
 Freeze the complete executable design in `IMPLEMENTATION_PLAN.md` before
 delegating. It owns architecture, data and gradient flow, probability, clocks,
 replay, recurrent state, checkpoint semantics, replacement ledger, file
 ownership, focused checks and throughput structure. Do not change the adopted
 scientific estimand while resolving engineering details.
+
+Hard stops: report `RESEARCH_MANAGER_BLOCKED` instead of proceeding when the
+needed action changes reward, observations, task distribution, treatment,
+probability factorization, PPO/credit/detach semantics, seeds, budgets,
+thresholds, result precedence, formal compute authority, external-review
+authority, Git authority, write scope, or the selected scientific route.
 
 Use only the custom agents registered in `.codex/config.toml`; their TOML
 profiles contain stable context, model, effort, sandbox and tool policy. Do not
@@ -117,7 +131,8 @@ Choose the execution shape from the real dependency graph:
 Before spawning code agents, send one non-blocking
 `IMPLEMENTATION_PLAN_BRIEF` to the controller with architecture, replacement
 ledger, packages, dependency order, parallelism rationale, checks and principal
-risk. Continue under the existing authorization without another approval.
+risk. This is visibility, not an approval request. Continue under the existing
+authorization without waiting for another approval.
 
 Every custom agent receives fresh task context and only its package delta,
 explicit inputs, scope and protected invariants. It uses native parent-child

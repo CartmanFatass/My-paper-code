@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-exchange
-description: Use only inside the registered persistent HMASD Open-Pro Exchange session for one controller-assigned blind divergent review. It owns the registered Pro browser conversation, exact raw capture, semantic quality note, one 5-minute heartbeat while pending, and one direct callback to the controller; it never performs convergence, implementation, Git, experiment or project management.
+description: Use inside the registered HMASD Open-Pro Exchange session when receiving REVIEW_STAGE, REVIEW_STAGE_COMPLETE, REVIEW_STAGE_BLOCKED, an assigned Pro review question/raw path, a review heartbeat wake, or a retry/callback for the registered OPEN_DIVERGENT external-review conversation.
 ---
 
 # HMASD Open-Pro Exchange
@@ -42,6 +42,13 @@ not write questions, reconciliation, disposition, Git, project control, code or
 experiments. Do not change models, rank routes, select a successor, dispatch
 another role or use an unrelated browser conversation.
 
+Use narrow interface and broad transport judgment. The controller supplies the
+round, commit, question and raw path; this Exchange chooses the in-scope browser
+inspection and recovery method. Do not ask the controller for selectors, page
+steps, tab commands or minor format decisions. Escalate only when the registered
+conversation, pushed boundary, raw archive, route delivery, or authority itself
+is unavailable.
+
 ## Stage
 
 Verify the pushed commit and question are remotely visible. Submit exactly one
@@ -67,6 +74,12 @@ When the current response stops naturally and is stable, archive it to the
 assigned raw, reread it and require exact text equality. Preserve every complete
 response even when content is incomplete or references the wrong evidence.
 Report content limitations as `COMPLETE_WITH_GAPS`, never as transport failure.
+
+Judge content gaps semantically. A missing label, reordered section or wording
+variation is not transport failure if the response is complete and archivable.
+Use `COMPLETE_WITH_GAPS` for substantive scientific or evidence omissions and
+let the controller or project manager decide whether a focused follow-up is
+needed.
 
 ## Heartbeat
 

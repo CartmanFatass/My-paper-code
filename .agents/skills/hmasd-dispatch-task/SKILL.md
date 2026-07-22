@@ -1,6 +1,6 @@
 ---
 name: hmasd-dispatch-task
-description: Automatically use for every HMASD controller task that may require direct execution, persistent-role dispatch, delegation, external review, or experiment monitoring, and for every persistent-session callback. Select the authorized execution surface, then resolve and deliver persistent messages without changing the recipient model or thinking. Do not use for temporary subagent communication.
+description: Use when an HMASD message or task mentions persistent-role routing, START_IMPLEMENTATION, IMPLEMENTATION_PLAN_BRIEF, IMPLEMENTATION_READY, RESEARCH_MANAGER_BLOCKED, CDC_DECISION_BRIEF, MONITOR_ASSIGNMENT, EXPERIMENT_MONITOR, REVIEW_STAGE, REVIEW_STAGE_COMPLETE, REVIEW_STAGE_BLOCKED, model-preserving session delivery, or a persistent role callback.
 ---
 
 # HMASD Task Dispatch
@@ -9,6 +9,14 @@ description: Automatically use for every HMASD controller task that may require 
 
 Choose who owns a task and safely deliver it. This Skill grants no research,
 implementation, review, experiment, Git, or project-state authority.
+
+Use narrow interfaces and broad role execution. A controller message states the
+bounded outcome, authority, inputs, write scope, hard exclusions, completion
+condition and callback. It does not prescribe internal mechanical steps unless
+the step is a hard safety boundary such as live-route preservation, raw archive
+equality, Git-visible evidence, formal-run authorization or protected algorithm
+semantics. The owning role uses its judgment inside the assigned boundary and
+returns only the registered terminal callback.
 
 ## Select the execution surface
 
@@ -56,8 +64,10 @@ $hmasd-dispatch-task
 ```
 
 A controller assignment names exactly one destination role Skill on the next
-line. A callback to the controller names only this Skill. Use the destination
-Skill's compact schema or:
+line. A callback to the controller names only this Skill. This explicit Skill
+activation is mandatory for every execution-surface switch; do not rely on the
+recipient's prior conversation context, title, remembered role, or an earlier
+message. Use the destination Skill's compact schema or:
 
 ```text
 $hmasd-dispatch-task
@@ -77,6 +87,12 @@ return=<terminal callback>
 ```
 
 Conversation history and nearby files are not implicit inputs.
+
+Assignments should be result-oriented. Do not ask a persistent role to seek
+controller approval for ordinary in-scope implementation, monitoring or review
+choices. Require controller contact only for authority expansion, protected
+semantic changes, formal compute launch, external-review dispatch, topology
+changes, or a genuine `BLOCKED` condition.
 
 ## Resolve and deliver
 
