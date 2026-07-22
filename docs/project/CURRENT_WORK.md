@@ -176,37 +176,19 @@ Monitor live, and read the current implementation plan plus relevant Pro raw
 before choosing any next evidence action. Formal compute remains stopped until
 the Controller authorizes a specific run.
 
-## Open Contract Questions
+## BATTERY_CONTRACT_RECONCILED
 
-One unresolved question stands against the result contract, raised before any
-result was observed and therefore not a post-hoc threshold rescue. It is
-recorded here because `ALGORITHM_PRINCIPLES.md` is reserved for generalized
-rules and this is specific to the active source.
-
-`ALGORITHM_PRINCIPLES.md` 2.3 requires that a long-lived skill arise from
-learned behavior under the declared clock contract. The lifetime gate
-`LCB(CV(T))>0.25` appears to be satisfied by construction. `Delta` is sampled
-uniformly from `{4,8,12}` and the policy selects only `KEEP`/`RENEW`, so a
-segment lifetime is a Geometric-count sum of `Delta` draws with
-`Var(Delta)/E[Delta]^2 = (32/3)/64`. That yields `CV(T)=0.408` under always-
-`RENEW` and `0.764` under a balanced policy, so every policy including an
-untrained one clears `0.25`. The lifetime-bin condition appears similarly
-satisfiable.
-
-Two related observations. The natural-use gates are non-degeneracy checks,
-since the support is binary and `P_KEEP+P_RENEW=1`, so a uniform random event
-head clears both; principle 2.2 holds that usage statistics are not evidence of
-a useful skill. The intervention gate measures logit-perturbation magnitude
-rather than behavioral consequence, so a large `W_z` applied to an
-uninformative `z` clears it.
-
-The primary estimand `G` is unaffected and remains mechanism-matched. The
-question is whether the behavioral battery discriminates the
-`COMMITMENT_SUPPORTED` and `REPRESENTATION_ONLY` branches at all. One candidate
-replacement conditions on the `KEEP`-chain length, which is purely
-policy-determined, instead of realized lifetime, which is dominated by the
-`Delta` draw. This is referred to the user and GPT-5.6 Pro; no threshold is
-changed here.
+The pre-result concern about `P_KEEP`, `P_RENEW`, `CV(T)`, physical-time bins
+and raw-logit norms is closed by the accepted lifetime-battery disposition.
+Those quantities are descriptive only. Active branch semantics are the
+policy-determined `K=1`/`K=2`/`K>=3` support, executable `I_TV`, and both
+natural-action `C_total` gates: `LCB(C_total_KEEP)>0`,
+`LCB(C_total_RENEW)>0`, and their frozen `>=0.02` point floors. `C_timing` and
+`C_mark` are reported causal decompositions only. The exact confident-failure
+duals are `UCB(C_total_KEEP)<=0` and `UCB(C_total_RENEW)<=0`; point-floor
+shortfall alone is underpowered. This reconciles the adopted design, active
+plan and executable selector without changing `G`, the three arms or any
+budget, seed, reward, observation or result-precedence rule.
 
 ## Measured Compute Cost
 
@@ -227,11 +209,12 @@ batched at width 16.
 
 ## Local Execution Environment
 
-Focused tests and the smoke fail closed without CUDA by design. The default
-interpreter carries a CPU-only `torch 2.8.0+cpu`; use
-`C:/Users/wu/.conda/envs/SB3/python.exe` (`torch 2.7.0+cu118`) directly.
-`conda run -n SB3` raises `UnicodeDecodeError` from a non-UTF-8 `.pth` during
-`site.py` and must not be used.
+The registered formal backend is CPU by explicit Controller authorization on
+2026-07-22. Use `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` with
+`torch 2.7.0+cpu`; all arms and paired replicates of one run remain on this one
+backend and one registered thread configuration. No fallback or cross-device
+equivalence claim is used. Historical CUDA acceptance evidence remains
+historical evidence only.
 
 ## Autonomous Boundary
 

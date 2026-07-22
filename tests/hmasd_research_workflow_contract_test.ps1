@@ -36,4 +36,25 @@ foreach ($required in @('ETA', '10 minutes', 'delete the heartbeat', 'EXPERIMENT
 }
 
 if (Test-Path (Join-Path $repo ('.o' + 'mp'))) { throw 'Legacy execution directory remains' }
+
+$batteryDocuments = @{
+    'docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md' = @(
+        'BATTERY_CONTRACT_RECONCILED', 'K=1', 'C_total', 'I_TV')
+    'docs/project/IMPLEMENTATION_PLAN.md' = @(
+        'BATTERY_CONTRACT_RECONCILED', 'C_total', 'LCB(C_total_KEEP)>0',
+        'LCB(C_total_RENEW)>0')
+    'docs/project/CURRENT_WORK.md' = @(
+        'BATTERY_CONTRACT_RECONCILED', 'five conclusion-bearing iterations')
+}
+foreach ($relative in $batteryDocuments.Keys) {
+    $content = Get-Content (Join-Path $repo $relative) -Raw
+    foreach ($required in $batteryDocuments[$relative]) {
+        if (-not $content.Contains($required)) {
+            throw "Battery contract is not reconciled in ${relative}: $required"
+        }
+    }
+}
+if ($current.Contains('One unresolved question stands against the result contract')) {
+    throw 'Retired behavioral-battery question remains active in CURRENT_WORK'
+}
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=native_codex'

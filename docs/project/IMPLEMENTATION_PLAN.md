@@ -922,6 +922,13 @@ learned deterministic `K=3` rule yields `0.236` and fails; and a residual
 proportional to `(c,c,c)` has positive norm yet leaves the three-action softmax
 exactly unchanged.
 
+### BATTERY_CONTRACT_RECONCILED
+
+The active result contract is the executable `registered_contract()` and
+`select_result_branch()` battery: support counts, `K==1`/`K==2`/`K>=3`,
+`I_TV`, and both natural-action `C_total` interval and point-floor gates. The
+retired timing diagnostics remain descriptive only.
+
 Define `K` for each commitment spell as the number of exogenous opportunity
 intervals it contains, so terminating `RENEW` at the first later opportunity is
 `K=1`, one `KEEP` then `RENEW` is `K=2`, and so on. `K` is policy-determined.
@@ -982,14 +989,16 @@ other sees. Truncating a branch to a fixed horizon is prohibited: this
 environment pays zero reward until the terminal step, so a truncated branch
 estimates a different quantity.
 
-For a natural `KEEP` row, `A_KEEP = U(KEEP) - U(RENEW(candidate_z))`. For a
-natural `RENEW` row, `A_RENEW = U(RENEW(candidate_z)) - U(KEEP)`. Cluster by
+For a natural `KEEP` row,
+`C_total_KEEP = U(KEEP_HELD_MARK) - U(RENEW_CANDIDATE_MARK)`; for a natural
+`RENEW` row,
+`C_total_RENEW = U(RENEW_CANDIDATE_MARK) - U(KEEP_HELD_MARK)`. Cluster by
 original sign-paired base episode, never by event row; multiple selected rows
 from one cluster travel together in every resample. Batch membership is not a
 statistical unit.
 
-Gates are `LCB(A_KEEP)>0` and `LCB(A_RENEW)>0` with frozen point floors
-`mean(A_KEEP)>=0.02` and `mean(A_RENEW)>=0.02`.
+Gates are `LCB(C_total_KEEP)>0` and `LCB(C_total_RENEW)>0` with frozen point
+floors `mean(C_total_KEEP)>=0.02` and `mean(C_total_RENEW)>=0.02`.
 
 Forks are a batched forced-branch dimension per the binding engineering
 constraints, sized in units of the registered 16-environment width. Batched and
@@ -1015,7 +1024,7 @@ post-result top-up are prohibited.
 
 Implementation is staged. Stage 1 is retention only. Stage 2 is the batched
 fork engine and its equivalence evidence. The result contract does not consume
-`A_KEEP`/`A_RENEW` until stage 2 is accepted.
+`C_total_KEEP`/`C_total_RENEW` until stage 2 is accepted.
 
 Candidate presence is determined by `event_kind != 0`, never by testing
 `candidate_u` against zero. Padded no-request positions hold zeros, and under
@@ -1040,27 +1049,25 @@ other observes. Pairs carry a stable pair identifier so they survive compaction;
 no tensor is written across fork identifiers, and batch position, padding and
 termination masks never influence RNG indexing.
 
-Forks are executed as a batched forced-branch dimension sized in units of the
-registered 16-environment width, not one pair at a time. Serial per-opportunity
-execution is rejected: it is roughly fifteen times slower and is the named
-serial-evaluation anti-pattern.
+Stage 2 executes canonical full-width layers cloned from each original
+`(batch,time)` prefix. One natural-control layer retains all original slots;
+counterfactuals share a layer only when their original environment indices do
+not collide. Serial per-opportunity execution and selected-row repacking are
+rejected.
 
-The pre-fork prefix is reconstructed at the registered 16-environment width, not
-at width 1. float32 reduction order depends on tensor shape, so a width-1
-reconstruction of a width-16 collection is not bitwise exact, and the relaxed
-derived-joint rule must not be used to admit it when matching the width removes
-the drift entirely. This also removes the argmax-flip risk that an unguarded
-width-1 reconstruction carries at evaluation scale.
+The prefix and every continuation preserve the original 16-environment width
+and slot layout. Dense-kernel batch-invariance measurements remain descriptive
+only: neither exact zero nor backend-specific nonzero error admits or rejects a
+canonical continuation.
 
-Acceptance requires that the natural-action branch reproduces the originally
-collected continuation exactly, checked inside the engine on every fork rather
-than only in a sampled test. Where a batched engine exists, batched and
-sequential execution must additionally agree exactly on discrete membership,
-event and primitive actions, on terminal outcomes and utilities, and on RNG
-states after continuation, with continuous values within `1e-7`.
+Acceptance requires exact discrete membership, event and primitive actions,
+terminal outcomes, utilities and RNG states. Every natural continuation is
+checked inside the engine, with continuous values bounded solely by
+`CAUSAL_AUDIT_CONTINUOUS_ATOL = 1e-7`; batched and sequential evidence retain
+the same protected semantics.
 
-`registered_contract()` gains the `A_KEEP` and `A_RENEW` gate thresholds and
-their point floors when this stage lands. That changes the contract dictionary,
+`registered_contract()` gains the `C_total_KEEP` and `C_total_RENEW` gate
+thresholds and their point floors when this stage lands. That changes the contract dictionary,
 and `load_checkpoint` rejects on contract inequality, so every checkpoint
 written before this stage becomes unloadable. Formal training must therefore be
 launched only after this stage is accepted and the contract is final.
@@ -1074,10 +1081,13 @@ Apply exactly this first-match result priority:
 3. `NO_ACCESS_THIS_BENCHMARK` if maximum arm utility UCB is `<0.78`.
 4. `UNDERPOWERED_ACCESS` if maximum arm utility LCB is `<0.78` while its UCB
    reaches the floor.
-5. `COMMITMENT_SUPPORTED` if access is established, `LCB(G)>0.10`, and every
-   `K`-bin and intervention condition passes.
+5. `COMMITMENT_SUPPORTED` if access is established, `LCB(G)>0.10`, every
+   `K`-bin and intervention condition passes, and both
+   `LCB(C_total_KEEP)>0`/`LCB(C_total_RENEW)>0` plus their frozen point floors
+   pass.
 6. `REPRESENTATION_ONLY` if `LCB(G)>0.10` and behavior confidently fails as
-   defined above.
+   defined above, including either `UCB(C_total_KEEP)<=0` or
+   `UCB(C_total_RENEW)<=0`.
 7. `ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED` if `UCB(G)<=0.10`.
 8. `MIXED_UNDERPOWERED` for every other valid numerical pattern.
 
@@ -1146,7 +1156,11 @@ training or registered evaluation. The shared row-stable event/mark-head
 helper is the sole arithmetic route for collection and teacher replay; the
 registered mixed, ratio, ULP-evidence, event-joint and exact-semantic rules are
 unchanged. The original CUDA collector digests remain pinned and the helper's
-gradient path is non-zero for its input, weights and biases.
+gradient path is non-zero for its input, weights and biases. Direct helper
+permutation, partition and single-row equivalence remains exact; full stochastic
+and deterministic replay is accepted only by the registered exact-field,
+state, mixed-component, ratio and joint predicates, never by an additional
+exact-zero requirement on tolerated continuous likelihood factors.
 
 The complete focused CUDA file passed `54/54` in `696.06s` before removal of
 one test that depended on untracked runtime logs. The final self-contained
@@ -1205,6 +1219,36 @@ unmeasured, and no new standalone exercise manifest was regenerated after the
 final evidence-only repair. Assurance for that repair rests on the final full
 CUDA acceptance suite and its focused independent-evidence negatives; no
 formal scientific result has been produced.
+
+## CPU Stage-2 canonical-packing repair boundary
+
+The bounded prelaunch repair preserves the existing causal estimand and freezes
+`CAUSAL_AUDIT_CONTINUOUS_ATOL = 1e-7` as the sole natural-continuation
+continuous tolerance in runtime, serialization, validation and focused tests.
+Discrete choices, RNG consumption, lifecycle/segment state, outcomes and
+utilities remain exact. A failing natural-continuation check reports the worst
+continuous field, coordinate, collected and regenerated binary32 values and
+their float32 ULP distance without expanding the persisted audit-row schema.
+
+Stage 2 no longer isolates selected environments or repacks selected branch
+rows. For each selected `(batch_index, time)` cell, the original 16-environment
+prefix cursor is cloned in its original episode/environment order, and one
+independently regenerated authoritative future row-stream map is supplied for
+every original environment. One full-width natural-control continuation
+regenerates all selected natural rows in the cell simultaneously. The two
+non-natural branch specifications per selected row are greedily partitioned
+into full-width layers with at most one focal intervention per original
+environment; distinct environments share a layer and same-environment
+collisions open another layer. Every result remains bound to its original
+`env_index`; all non-focal rows are independently regenerated peers rather than
+padding, donors or copied future references.
+
+The evidence budget remains three logical branch rows per selected state. The
+execution record changes only to identify canonical full-width natural-control
+and counterfactual layers and to count their physical rows and collector calls
+honestly. There is no compatibility reader. No Stage-2 future trajectory value,
+action, event, mark, hidden state, outcome or utility is copied into a branch;
+no new RNG draw or DirectPrimitiveARPolicy change is permitted.
 
 ## Prohibited mechanisms
 

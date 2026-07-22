@@ -71,6 +71,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     HORIZON,
     MAX_LIFECYCLES,
     CAUSAL_AUDIT_BRANCHES,
+    CAUSAL_AUDIT_CONTINUOUS_ATOL,
     CAUSAL_AUDIT_NATURAL_ACTIONS,
     CAUSAL_AUDIT_QUOTA_PER_ACTION,
     CAUSAL_AUDIT_REPLICATES,
@@ -1911,7 +1912,7 @@ def _causal_audit_valid(
     if not isinstance(record, dict) or set(record) != required_keys:
         return False
     if not (
-        record["schema"] == "event_held_commitment_link_g0.causal_audit.v1"
+        record["schema"] == "event_held_commitment_link_g0.causal_audit.v2"
         and _is_exact_int(record["replicate"])
         and record["replicate"] == replicate
         and _is_exact_int(record["quota_per_action"])
@@ -1928,11 +1929,14 @@ def _causal_audit_valid(
     execution = record["execution"]
     if not isinstance(execution, dict) or set(execution) != {
         "engine", "registered_width", "selected_state_count",
-        "branch_row_count", "padding_row_count", "collector_call_count",
+        "branch_row_count", "natural_control_layer_count",
+        "counterfactual_layer_count", "physical_row_count", "peer_row_count",
+        "collector_call_count",
     } or not _exact_int_fields(
         execution, (
             "registered_width", "selected_state_count", "branch_row_count",
-            "padding_row_count", "collector_call_count",
+            "natural_control_layer_count", "counterfactual_layer_count",
+            "physical_row_count", "peer_row_count", "collector_call_count",
         )
     ):
         return False
@@ -2195,8 +2199,12 @@ def _causal_audit_valid(
                 "discrete_mismatch", "continuous_error", "segment_equal",
                 "outcome_equal",
             }
-            and int(natural_errors["discrete_mismatch"]) == 0
-            and float(natural_errors["continuous_error"]) <= 1e-7
+            and type(natural_errors["discrete_mismatch"]) is int
+            and natural_errors["discrete_mismatch"] == 0
+            and type(natural_errors["continuous_error"]) in (int, float)
+            and math.isfinite(float(natural_errors["continuous_error"]))
+            and 0.0 <= float(natural_errors["continuous_error"])
+            <= CAUSAL_AUDIT_CONTINUOUS_ATOL
             and natural_errors["segment_equal"] is True
             and natural_errors["outcome_equal"] is True
             and set(rng_digests) == set(RNG_NAMES)
@@ -2209,26 +2217,45 @@ def _causal_audit_valid(
         (int(selected_records[key]["batch_index"]), int(selected_records[key]["time"]))
         for key in selected_flat
     ]
-    expected_branch_calls = sum(
-        math.ceil(count / 5)
-        for count in Counter(selected_cells).values()
+    expected_natural_layers = len(set(selected_cells))
+    selected_cell_envs = Counter(
+        (
+            int(selected_records[key]["batch_index"]),
+            int(selected_records[key]["time"]),
+            int(selected_records[key]["env_index"]),
+        )
+        for key in selected_flat
     )
-    expected_calls = len(set(selected_cells)) + expected_branch_calls
+    expected_counterfactual_layers = sum(
+        2 * max(
+            count for (row_batch, row_time, _env), count
+            in selected_cell_envs.items()
+            if (row_batch, row_time) == cell
+        )
+        for cell in set(selected_cells)
+    )
+    expected_branch_calls = (
+        expected_natural_layers + expected_counterfactual_layers
+    )
+    expected_calls = expected_natural_layers + expected_branch_calls
     expected_branch_rows = selected_count * len(CAUSAL_AUDIT_BRANCHES)
-    expected_padding_rows = (
-        expected_branch_calls * FORMAL_NUM_ENVS - expected_branch_rows
-    )
+    expected_physical_rows = expected_branch_calls * FORMAL_NUM_ENVS
+    expected_peer_rows = expected_physical_rows - expected_branch_rows
     serialized_size = len(json.dumps(
         {"raw_event_trace": record["raw_event_trace"], "audit_rows": record["audit_rows"]},
         sort_keys=True, separators=(",", ":"), ensure_ascii=True,
     ).encode("utf-8"))
     return bool(
         set(rows_by_key) == set(selected_flat)
-        and execution["engine"] == "registered_width_batched_causal_audit_v1"
+        and execution["engine"] == "canonical_width16_causal_audit_v2"
         and execution["registered_width"] == FORMAL_NUM_ENVS
         and execution["selected_state_count"] == selected_count
         and execution["branch_row_count"] == expected_branch_rows
-        and execution["padding_row_count"] == expected_padding_rows
+        and execution["natural_control_layer_count"] == expected_natural_layers
+        and execution["counterfactual_layer_count"]
+        == expected_counterfactual_layers
+        and execution["physical_row_count"] == expected_physical_rows
+        and execution["peer_row_count"] == expected_peer_rows
         and execution["collector_call_count"] == expected_calls
         and telemetry["selected_state_count"] == selected_count
         and telemetry["collector_call_count"] == expected_calls
@@ -3862,34 +3889,50 @@ def _collect_causal_audit_evidence(
                 for name in RNG_NAMES
             },
         })
-    branch_calls = sum(
-        math.ceil(count / 5)
-        for count in Counter(
-            (int(value["batch_index"]), int(value["time"]))
-            for value in selected_for_execution
-        ).values()
-    )
-    prefix_calls = len({
+    selected_cells = {
         (int(value["batch_index"]), int(value["time"]))
         for value in selected_for_execution
-    })
+    }
+    natural_control_layers = len(selected_cells)
+    selected_cell_envs = Counter(
+        (
+            int(value["batch_index"]), int(value["time"]),
+            int(value["env_index"]),
+        )
+        for value in selected_for_execution
+    )
+    counterfactual_layers = sum(
+        2 * max(
+            count for (row_batch, row_time, _env), count
+            in selected_cell_envs.items()
+            if (row_batch, row_time) == cell
+        )
+        for cell in selected_cells
+    )
+    branch_calls = natural_control_layers + counterfactual_layers
+    prefix_calls = natural_control_layers
     collector_calls = prefix_calls + branch_calls
     telemetry_source = results[0]["telemetry"] if results else {
         "prefix_seconds": 0.0, "branch_seconds": 0.0, "total_seconds": 0.0,
             "selected_state_count": 0, "collector_call_count": 0,
+            "natural_control_layer_count": 0,
+            "counterfactual_layer_count": 0, "physical_row_count": 0,
     }
     artifact = {
-        "schema": "event_held_commitment_link_g0.causal_audit.v1",
+        "schema": "event_held_commitment_link_g0.causal_audit.v2",
         "replicate": int(replicate),
         "quota_per_action": CAUSAL_AUDIT_QUOTA_PER_ACTION,
         "raw_event_trace": raw_event_trace,
         "selected_keys": selected_keys,
         "execution": {
-            "engine": "registered_width_batched_causal_audit_v1",
+            "engine": "canonical_width16_causal_audit_v2",
             "registered_width": FORMAL_NUM_ENVS,
             "selected_state_count": len(selected_for_execution),
             "branch_row_count": len(selected_for_execution) * len(CAUSAL_AUDIT_BRANCHES),
-            "padding_row_count": branch_calls * FORMAL_NUM_ENVS
+            "natural_control_layer_count": natural_control_layers,
+            "counterfactual_layer_count": counterfactual_layers,
+            "physical_row_count": branch_calls * FORMAL_NUM_ENVS,
+            "peer_row_count": branch_calls * FORMAL_NUM_ENVS
             - len(selected_for_execution) * len(CAUSAL_AUDIT_BRANCHES),
             "collector_call_count": collector_calls,
         },
@@ -3911,6 +3954,15 @@ def _collect_causal_audit_evidence(
         raise RuntimeError("causal audit selected-state telemetry mismatch")
     if int(telemetry_source["collector_call_count"]) != collector_calls:
         raise RuntimeError("causal audit collector-call telemetry mismatch")
+    if not (
+        int(telemetry_source["natural_control_layer_count"])
+        == natural_control_layers
+        and int(telemetry_source["counterfactual_layer_count"])
+        == counterfactual_layers
+        and int(telemetry_source["physical_row_count"])
+        == branch_calls * FORMAL_NUM_ENVS
+    ):
+        raise RuntimeError("causal audit canonical-layer telemetry mismatch")
     return artifact
 
 
@@ -4127,10 +4179,8 @@ def formal_evaluate(
 
 
 def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, Any]:
-    """Bounded non-formal CUDA exercise over the exact formal cores."""
+    """Bounded non-formal exercise over the exact registered formal cores."""
 
-    if device_name != "cuda":
-        raise ValueError("formal_path_exercise requires cuda and has no CPU fallback")
     device = require_registered_backend(device_name)
     exercise_root = output_root / "formal_path_exercise"
     completed_paths: list[str] = []
@@ -4168,7 +4218,7 @@ def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, An
         with stage2_path.open("r", encoding="utf-8") as handle:
             stage2 = json.load(handle)["causal_audit"]["execution"]
         if not (
-            stage2["engine"] == "registered_width_batched_causal_audit_v1"
+            stage2["engine"] == "canonical_width16_causal_audit_v2"
             and int(stage2["selected_state_count"]) > 0
             and int(stage2["collector_call_count"]) > 0
         ):
@@ -4177,7 +4227,7 @@ def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, An
             "artifact_schema": EXERCISE_MANIFEST_SCHEMA,
             "formal": False,
             "mode": "formal_path_exercise",
-            "device": "cuda",
+            "device": device.type,
             "replicates": [0],
             "arms": list(ARMS),
             "updates": 1,

@@ -173,30 +173,34 @@ training-seed triples, then whole paired episode IDs within each seed. Preserve
 all agents, events and censored segments. Use percentile 95% intervals and
 strict inequalities.
 
-Natural-use conditions on held-out stochastic non-CREATE opportunities:
+### BATTERY_CONTRACT_RECONCILED
 
-- `LCB(P_KEEP) > 0.20`;
-- `LCB(P_RENEW) > 0.10`.
+The retired `P_KEEP`, `P_RENEW`, `CV(T)`, physical-time-bin and raw
+logit-residual-norm gates are descriptive diagnostics only. They do not enter
+branch selection. The active held-out stochastic battery is:
 
-Complete lifetime is active primitive steps from `CREATE/RENEW` until `RENEW`.
-Temporary absence and rollout cutoff do not end it; forced close is censored.
-Require:
+- support, not evidence: at least 128 eligible natural `KEEP` rows and 128
+  eligible natural `RENEW` rows;
+- policy-determined lifetime realization: at least two complete-spell bins
+  `K=1`, `K=2`, `K>=3` have `LCB(proportion)>0.10`;
+- executable mark dependence: `LCB(I_TV)>0.10` under the same-snapshot
+  primitive-action total-variation derangement;
+- natural consequential selection: both `LCB(C_total_KEEP)>0` and
+  `LCB(C_total_RENEW)>0`, with both point floors
+  `mean(C_total_KEEP)>=0.02` and `mean(C_total_RENEW)>=0.02`.
 
-- `LCB(CV(T)) > 0.25`;
-- at least two of `[1,8]`, `[9,16]`, `[17,infinity]` have
-  `LCB(proportion) > 0.10`.
+For a natural `KEEP` row,
+`C_total_KEEP=U(KEEP_HELD_MARK)-U(RENEW_CANDIDATE_MARK)`; for a natural
+`RENEW` row,
+`C_total_RENEW=U(RENEW_CANDIDATE_MARK)-U(KEEP_HELD_MARK)`. `C_timing` and
+`C_mark` are separately reported causal decompositions only and introduce no
+threshold or precedence change. The causal audit is non-identifiable if either
+natural-action stratum lacks its registered per-replicate quota. `T`, `CV(T)`
+and physical-time bins remain serialized descriptive outputs only.
 
-For intervention, use held-out stochastic decision states with at least two
-active lifecycles. Derange `z` across lifecycles while holding `o,h`, environment
-and primitive RNG fixed, and compute:
-
-```text
-I = mean(||W_z(z - z_perm)||_2 / sqrt(3))
-```
-
-Require `LCB(I) > 0.10`. Evaluation is identifiable only with at least 1,000
-non-CREATE opportunities and 250 lifecycles containing at least two such
-opportunities across the five seeds.
+Evaluation is otherwise identifiable only with at least 1,000 non-CREATE
+opportunities and 250 lifecycles containing at least two such opportunities
+across the five seeds.
 
 ## Mutually exclusive result branches
 
@@ -211,11 +215,14 @@ Apply in order:
    only this comparison; do not veto stronger-MARL work.
 4. `UNDERPOWERED_ACCESS`: maximum arm LCB is below `0.78` while UCB reaches it.
    Close under the frozen budget with no rescue.
-5. `COMMITMENT_SUPPORTED`: access established, `LCB(G)>0.10`, and every natural
-   use, lifetime and intervention condition passes. This authorizes controller
-   consideration of integration, not automatic integration.
-6. `REPRESENTATION_ONLY`: `LCB(G)>0.10` but behavior confidently fails. Retire
-   the variable-lifetime claim.
+5. `COMMITMENT_SUPPORTED`: access established, `LCB(G)>0.10`, the `K`-bin and
+   `I_TV` conditions pass, and both `C_total` interval and point-floor gates
+   pass. This authorizes controller consideration of integration, not automatic
+   integration.
+6. `REPRESENTATION_ONLY`: `LCB(G)>0.10` and any required interval condition
+   confidently fails, including `UCB(C_total_KEEP)<=0` or
+   `UCB(C_total_RENEW)<=0`. Point-floor shortfall alone is underpowered, not a
+   confident failure. Retire the variable-lifetime claim.
 7. `ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED`: `UCB(G)<=0.10`. Retire the
    EHC link; any matched-control deviation is operational invalidity rather
    than capacity evidence.

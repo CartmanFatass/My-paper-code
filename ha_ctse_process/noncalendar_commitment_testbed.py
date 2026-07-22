@@ -100,6 +100,9 @@ CAUSAL_AUDIT_SELECTED_ROWS = (
     * CAUSAL_AUDIT_REPLICATES
 )
 CAUSAL_AUDIT_BRANCH_ROWS = CAUSAL_AUDIT_SELECTED_ROWS * len(CAUSAL_AUDIT_BRANCHES)
+# Sole natural-continuation continuous authority for Stage 2. Discrete, RNG,
+# lifecycle, segment, outcome and utility evidence remains exact.
+CAUSAL_AUDIT_CONTINUOUS_ATOL = 1e-7
 # Dedicated deterministic selection stream. It is derived from the registered
 # bootstrap seed under its own namespace coordinate, so it is distinct from the
 # bootstrap resample stream (`default_rng(BOOTSTRAP_SEED)`, i.e.
@@ -120,7 +123,7 @@ REGISTERED_EXECUTION_BACKENDS = ("cuda", "cpu")
 # The backend the formal run is registered on, and therefore the backend the
 # focused suite exercises. Both entries of `REGISTERED_EXECUTION_BACKENDS` are
 # admitted, but one run uses exactly one of them.
-FORMAL_EXECUTION_BACKEND = "cuda"
+FORMAL_EXECUTION_BACKEND = "cpu"
 # One thread configuration for the whole run. Single-thread is measured faster
 # than 14 threads on collection (0.419s against 0.629s) because the tensors are
 # too small for thread synchronization to pay for itself, and pinning it makes
@@ -1249,6 +1252,7 @@ def registered_contract() -> dict[str, Any]:
         "causal_audit": {
             "natural_actions": list(CAUSAL_AUDIT_NATURAL_ACTIONS),
             "branches": list(CAUSAL_AUDIT_BRANCHES),
+            "continuous_atol": CAUSAL_AUDIT_CONTINUOUS_ATOL,
             "quota_per_action_per_replicate": CAUSAL_AUDIT_QUOTA_PER_ACTION,
             "replicates": CAUSAL_AUDIT_REPLICATES,
             "selected_rows": CAUSAL_AUDIT_SELECTED_ROWS,

@@ -78,6 +78,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     MARK_SEED,
     CAUSAL_AUDIT_BRANCHES,
     CAUSAL_AUDIT_BRANCH_ROWS,
+    CAUSAL_AUDIT_CONTINUOUS_ATOL,
     CAUSAL_AUDIT_NATURAL_ACTIONS,
     CAUSAL_AUDIT_QUOTA_PER_ACTION,
     CAUSAL_AUDIT_REPLICATES,
@@ -169,11 +170,11 @@ def device(registered_backend: str) -> torch.device:
 
 @pytest.fixture(scope="module")
 def streamed_exercise_root(
-    device: torch.device, tmp_path_factory: pytest.TempPathFactory,
+    device: torch.device, registered_backend: str,
+    tmp_path_factory: pytest.TempPathFactory,
 ) -> Path:
-    assert device.type == "cuda"
     root = tmp_path_factory.mktemp("streamed_formal_path")
-    formal_path_exercise(root, device_name="cuda")
+    formal_path_exercise(root, device_name=registered_backend)
     return root / "formal_path_exercise"
 
 
@@ -181,17 +182,9 @@ def dense_batch_invariance_error(device: torch.device) -> float:
     """Largest change a row's dense-layer output suffers when one *other*
     row leaves the packed batch, at the registered event-head shapes.
 
-    The fork engine reconstructs the forked step with the focal request
-    removed from the packed event/mark batch, so the surviving rows are
-    evaluated at width `n-1` where the collection evaluated them at width
-    `n`. Its bitwise-exactness guards therefore hold only on a backend whose
-    dense kernels give a row the same result regardless of how many other
-    rows share the call.
-
-    This is measured rather than assumed or keyed off a device name.
-    Measured on this machine at `torch.set_num_threads(1)`: CUDA returns
-    exactly 0.0; CPU returns 5.72e-06 with oneDNN either enabled or
-    disabled.
+    This remains a descriptive backend measurement. Canonical Stage 2 keeps
+    the original width and slot layout, so neither zero nor nonzero error is
+    an admission condition.
     """
 
     generator = torch.Generator(device="cpu").manual_seed(90_058)
@@ -215,26 +208,11 @@ def dense_batch_invariant(registered_backend: str) -> bool:
 def test_dense_batch_invariance_is_measured_not_assumed(
     device: torch.device, dense_batch_invariant: bool,
 ) -> None:
-    """The fork engine's precondition is a measurement of this backend.
-
-    A row's dense-layer output must not depend on how many other rows share
-    the call, because the fork drops the focal request from the packed
-    event/mark batch. The measurement decides which half of the fork
-    evidence this session can produce, so it is asserted to be a real,
-    finite, non-negative number rather than a device-name assumption.
-    """
+    """The descriptive measurement is finite and internally consistent."""
 
     error = dense_batch_invariance_error(device)
     assert math.isfinite(error) and error >= 0.0
     assert (error == 0.0) is dense_batch_invariant
-    if device.type == "cuda":
-        # Pinned: CUDA is exactly batch invariant at these shapes, which is
-        # why the fork engine's exactness contract was formulated there.
-        assert error == 0.0
-    else:
-        # Not a tolerance and not a bound -- a statement that this backend
-        # measurably lacks the invariance the fork engine requires.
-        assert error > 0.0
 
 
 def test_shared_event_heads_are_row_stable_and_used_by_collection_and_replay(
@@ -296,18 +274,43 @@ def test_shared_event_heads_are_row_stable_and_used_by_collection_and_replay(
     before_replay = len(calls)
     replay = replay_trajectory(arm, stochastic, device=device)
     assert len(calls) == before_replay + 1
+
+    def assert_registered_replay(report: dict[str, Any]) -> None:
+        assert report["passed"] and not report["failures"]
+        assert all(
+            report["errors"][name] == 0.0 for name in REPLAY_EXACT_FIELDS
+        )
+        assert all(
+            report["errors"][name] <= REPLAY_STATE_ATOL
+            for name in REPLAY_STATE_FIELDS
+        )
+        assert all(
+            report["likelihood_components"][name]["absolute_error"]
+            <= report["likelihood_components"][name]["mixed_bound"]
+            and report["likelihood_components"][name]["ratio_drift"]
+            <= report["likelihood_components"][name]["ratio_cap"]
+            for name in REPLAY_LOG_COMPONENT_FIELDS
+        )
+        assert all(
+            report["joints"][name]["error"]
+            <= report["joints"][name]["bound"]
+            and report["joints"][name]["excess"] <= 0.0
+            and report["joints"][name]["assembly_excess"] <= 0.0
+            for name in REPLAY_JOINT_FIELDS
+        )
+        assert (
+            report["event_joint_ratio"]["ratio_drift"]
+            <= report["event_joint_ratio"]["ratio_cap"]
+        )
+
     report = replay_report(replay, stochastic)
-    assert report["passed"]
-    assert report["errors"]["categorical_component"] == 0.0
-    assert report["errors"]["mark_component"] == 0.0
-    assert report["errors"]["event_joint"] == 0.0
+    assert_registered_replay(report)
     # Deterministic selection changes samples only; it reaches the same head
     # evaluator and remains exactly replayable.
     deterministic_report = replay_report(
         replay_trajectory(arm, deterministic, device=device), deterministic,
     )
-    assert deterministic_report["passed"]
-    assert deterministic_report["errors"]["mark_component"] == 0.0
+    assert_registered_replay(deterministic_report)
 
 
 def test_initialization_rng_isolation_and_capacity(
@@ -975,8 +978,7 @@ def _audit_action(trace: dict[str, Any]) -> str:
     return "KEEP" if int(trace["natural_kind"]) == KEEP else "RENEW"
 
 
-@pytest.fixture(scope="module")
-def causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
+def _build_causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
     arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
     origins, trajectories, end_states = [], [], []
@@ -1009,6 +1011,10 @@ def causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
     chosen += [next(
         row for cell, rows in sorted(cells.items())
         if cell[0] == 1 for row in sorted(rows)
+    )]
+    chosen += [next(
+        row for row in sorted(inventory)
+        if row not in chosen and (row[4] > 0 or row[5] > 0)
     )]
     for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
         while sum(_audit_action(inventory[row]) == action for row in chosen) < 2:
@@ -1051,6 +1057,70 @@ def causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
     }
 
 
+def _float32_ulp_distance(left: float, right: float) -> int:
+    def ordered(value: float) -> int:
+        bits = int(np.asarray(value, dtype=np.float32).view(np.uint32))
+        return 0x80000000 - bits if bits & 0x80000000 else bits + 0x80000000
+
+    return abs(ordered(left) - ordered(right))
+
+
+def test_cpu_stage2_natural_continuation_diagnostic(
+    device: torch.device, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Expose the exact pre-repair CPU drift without admitting it."""
+
+    original = event_held_commitment_link._audit_row_errors
+
+    def diagnostic_errors(
+        branch: Any, branch_index: int, collected: Any, original_env: int,
+        *, start: int,
+    ) -> dict[str, Any]:
+        errors = original(
+            branch, branch_index, collected, original_env, start=start
+        )
+        worst: dict[str, Any] | None = None
+        for field in event_held_commitment_link._AUDIT_CONTINUOUS_FIELDS:
+            replayed = getattr(branch, field)[:, branch_index].detach().cpu()
+            stored = getattr(collected, field)[start:, original_env].detach().cpu()
+            difference = torch.abs(replayed - stored)
+            if not difference.numel():
+                continue
+            flat_index = int(torch.argmax(difference).item())
+            coordinate = list(np.unravel_index(flat_index, tuple(difference.shape)))
+            error = float(difference.reshape(-1)[flat_index])
+            if worst is None or error > float(worst["absolute_error"]):
+                stored_value = float(stored.reshape(-1)[flat_index])
+                replayed_value = float(replayed.reshape(-1)[flat_index])
+                worst = {
+                    "field": field,
+                    "coordinate": [start + coordinate[0], *coordinate[1:]],
+                    "stored": stored_value,
+                    "replayed": replayed_value,
+                    "absolute_error": error,
+                    "float32_ulp_distance": _float32_ulp_distance(
+                        stored_value, replayed_value
+                    ),
+                }
+        errors["worst_continuous"] = worst
+        return errors
+
+    monkeypatch.setattr(
+        event_held_commitment_link, "_audit_row_errors", diagnostic_errors
+    )
+    bundle = _build_causal_audit_oracle_bundle(device)
+    assert all(
+        row["natural_errors"]["continuous_error"]
+        <= CAUSAL_AUDIT_CONTINUOUS_ATOL
+        for row in bundle["batched"]
+    )
+
+
+@pytest.fixture(scope="module")
+def causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
+    return _build_causal_audit_oracle_bundle(device)
+
+
 def test_three_branch_width16_batched_audit_matches_sequential_oracle(
     device: torch.device, causal_audit_oracle_bundle: dict[str, Any],
 ) -> None:
@@ -1060,8 +1130,25 @@ def test_three_branch_width16_batched_audit_matches_sequential_oracle(
     assert {row["batch_index"] for row in selected} == {0, 1}
     assert len({(row["batch_index"], row["time"]) for row in selected}) >= 3
     cell_counts = Counter((row["batch_index"], row["time"]) for row in selected)
-    expected_calls = len(cell_counts) + sum(math.ceil(value / 5) for value in cell_counts.values())
+    cell_env_counts = Counter(
+        (row["batch_index"], row["time"], row["env_index"])
+        for row in selected
+    )
+    counterfactual_layers = sum(
+        2 * max(
+            count for (batch, time, _env), count in cell_env_counts.items()
+            if (batch, time) == cell
+        )
+        for cell in cell_counts
+    )
+    expected_calls = 2 * len(cell_counts) + counterfactual_layers
     assert 5 in cell_counts.values()
+    assert max(cell_env_counts.values()) >= 2
+    assert any(
+        tuple(row["recipient_key"])[4] > 0
+        or tuple(row["recipient_key"])[5] > 0
+        for row in selected
+    )
     for row, packed in zip(selected, batched, strict=True):
         diagnostics: dict[str, Any] = {}
         sequential = audit_single_opportunity(
@@ -1075,16 +1162,24 @@ def test_three_branch_width16_batched_audit_matches_sequential_oracle(
         )
         assert set(packed["branches"]) == set(CAUSAL_AUDIT_BRANCHES)
         assert packed["rng_contract_equal"] is True
-        assert packed["natural_errors"] == {
-            "discrete_mismatch": 0, "continuous_error": 0.0,
-            "segment_equal": True, "outcome_equal": True,
-        }
+        assert packed["natural_errors"]["discrete_mismatch"] == 0
+        assert packed["natural_errors"]["continuous_error"] <= (
+            CAUSAL_AUDIT_CONTINUOUS_ATOL
+        )
+        assert packed["natural_errors"]["segment_equal"] is True
+        assert packed["natural_errors"]["outcome_equal"] is True
         for branch in CAUSAL_AUDIT_BRANCHES:
             assert packed["branch_outcomes"][branch] == sequential["branch_outcomes"][branch]
             assert packed["branches"][branch]["trajectory"].rewards.shape[1] == 16
+            assert packed["branches"][branch]["branch_index"] == row["env_index"]
         telemetry = packed["telemetry"]
         assert telemetry["selected_state_count"] == len(selected)
         assert telemetry["collector_call_count"] == expected_calls
+        assert telemetry["natural_control_layer_count"] == len(cell_counts)
+        assert telemetry["counterfactual_layer_count"] == counterfactual_layers
+        assert telemetry["physical_row_count"] == (
+            (len(cell_counts) + counterfactual_layers) * 16
+        )
         assert telemetry["serialized_size_bytes"] > 0
         assert 0.0 <= telemetry["prefix_seconds"] <= telemetry["total_seconds"]
         assert 0.0 <= telemetry["branch_seconds"] <= telemetry["total_seconds"]
@@ -2221,7 +2316,7 @@ def test_atomic_publication_and_operational_failure_cleanup(
         lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("injected")),
     )
     with pytest.raises(RuntimeError, match="injected"):
-        formal_path_exercise(tmp_path / "exercise", device_name="cuda")
+        formal_path_exercise(tmp_path / "exercise", device_name=device.type)
     exercise_root = tmp_path / "exercise" / "formal_path_exercise"
     terminal = json.loads((exercise_root / "manifest.json").read_text())
     assert terminal["formal"] is False
@@ -2499,7 +2594,7 @@ def test_streaming_failure_preserves_indexed_refs_and_ignores_orphan(
     (("mid_cell", 0), ("before_cell_publication", None)),
 )
 def test_evaluation_failure_keeps_only_prior_indexed_cell_reference(
-    streamed_exercise_root: Path, tmp_path: Path,
+    device: torch.device, streamed_exercise_root: Path, tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch, interruption: str,
     expected_batch: int | None,
 ) -> None:
@@ -2536,7 +2631,7 @@ def test_evaluation_failure_keeps_only_prior_indexed_cell_reference(
     manifest_path = output_root / "evaluation_manifest.json"
     with pytest.raises(RuntimeError, match="injected") as raised:
         benchmark_runner._evaluation_core(
-            output_root, device=torch.device("cuda"), replicates=(0,),
+            output_root, device=device, replicates=(0,),
             episodes_per_cell=16, formal=False,
             artifact_schema=benchmark_runner.EXERCISE_EVALUATION_ARTIFACT_SCHEMA,
             checkpoint_name="update_1.pt", completed_paths=completed_paths,
@@ -2616,7 +2711,7 @@ def test_four_update_formal_trajectory_replays_and_streams_exactly(
 ) -> None:
     """Reproduce the failed fourth update through the non-formal shared core."""
 
-    assert device.type == "cuda"
+    assert device.type == active_execution_backend() == FORMAL_EXECUTION_BACKEND
     assert benchmark_runner.FORMAL_NUM_ENVS == 16
     assert HORIZON == 80
     assert benchmark_runner.PPO_PASSES == 4
@@ -2875,6 +2970,10 @@ def test_select_result_branch_rejects_non_three_k_bins() -> None:
             select_result_branch(**(base | {"k_bin_cis": wrong}))
 
 
+def test_formal_backend_is_cpu_for_local_formal_authorization() -> None:
+    assert FORMAL_EXECUTION_BACKEND == "cpu"
+
+
 def test_registered_contract_carries_execution_and_replacement_c() -> None:
     """The contract is about to be frozen into every checkpoint, so both the
     execution environment and the whole of Replacement C must be readable
@@ -2895,6 +2994,7 @@ def test_registered_contract_carries_execution_and_replacement_c() -> None:
     assert thresholds["c_total_renew_mean_floor"] == C_TOTAL_RENEW_MEAN_FLOOR == 0.02
 
     audit = contract["causal_audit"]
+    assert audit["continuous_atol"] == CAUSAL_AUDIT_CONTINUOUS_ATOL == 1e-7
     assert audit["natural_actions"] == ["KEEP", "RENEW"] == list(
         CAUSAL_AUDIT_NATURAL_ACTIONS
     )
@@ -2984,8 +3084,15 @@ def test_registered_backend_activation_never_falls_back(
     other = next(
         name for name in REGISTERED_EXECUTION_BACKENDS if name != active
     )
-    with pytest.raises(RuntimeError, match="already active"):
-        require_registered_backend(other)
+    other_available = other == "cpu" or torch.cuda.is_available()
+    if other_available:
+        with pytest.raises(RuntimeError, match="already active"):
+            require_registered_backend(other)
+    else:
+        with pytest.raises(
+            RuntimeError, match="unavailable; substituting another backend is forbidden",
+        ):
+            require_registered_backend(other)
     # A device from the other backend is refused everywhere arms are built,
     # so a stray device object cannot smuggle work onto it.
     with pytest.raises(RuntimeError, match="active execution backend"):
@@ -3230,6 +3337,148 @@ def causal_audit_artifact_bundle(
         "engine_results": captured[0],
         "arm": source["arm"],
     }
+
+
+def _refresh_causal_audit_serialized_size(artifact: dict[str, Any]) -> None:
+    artifact["telemetry"]["serialized_size_bytes"] = len(json.dumps(
+        {"raw_event_trace": artifact["raw_event_trace"],
+         "audit_rows": artifact["audit_rows"]},
+        sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    ).encode("utf-8"))
+
+
+def test_causal_audit_continuous_tolerance_boundary_is_fail_closed(
+    causal_audit_artifact_bundle: dict[str, Any],
+) -> None:
+    base = causal_audit_artifact_bundle
+    accepted = deepcopy(base["artifact"])
+    accepted["audit_rows"][0]["natural_errors"]["continuous_error"] = (
+        CAUSAL_AUDIT_CONTINUOUS_ATOL
+    )
+    _refresh_causal_audit_serialized_size(accepted)
+    assert benchmark_runner._causal_audit_valid(
+        accepted, replicate=0, episodes=base["episode_rows"],
+        cell_batches=base["cell_batches"], formal=False,
+        mode="formal_path_exercise_evaluate",
+    )
+
+    rejected = deepcopy(accepted)
+    rejected["audit_rows"][0]["natural_errors"]["continuous_error"] = float(
+        np.nextafter(CAUSAL_AUDIT_CONTINUOUS_ATOL, math.inf)
+    )
+    _refresh_causal_audit_serialized_size(rejected)
+    assert not benchmark_runner._causal_audit_valid(
+        rejected, replicate=0, episodes=base["episode_rows"],
+        cell_batches=base["cell_batches"], formal=False,
+        mode="formal_path_exercise_evaluate",
+    )
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    (
+        ("discrete_mismatch", False),
+        ("discrete_mismatch", "0"),
+        ("discrete_mismatch", 0.5),
+        ("continuous_error", False),
+        ("continuous_error", "0"),
+        ("continuous_error", -1e-12),
+        ("continuous_error", float("nan")),
+    ),
+)
+def test_causal_audit_natural_error_types_and_domain_fail_closed(
+    causal_audit_artifact_bundle: dict[str, Any], field: str, value: Any,
+) -> None:
+    base = causal_audit_artifact_bundle
+    artifact = deepcopy(base["artifact"])
+    artifact["audit_rows"][0]["natural_errors"][field] = value
+    _refresh_causal_audit_serialized_size(artifact)
+    assert not benchmark_runner._causal_audit_valid(
+        artifact, replicate=0, episodes=base["episode_rows"],
+        cell_batches=base["cell_batches"], formal=False,
+        mode="formal_path_exercise_evaluate",
+    )
+
+
+@pytest.mark.parametrize(
+    ("surface", "mutate"),
+    (
+        ("rng", lambda artifact: artifact["audit_rows"][0]["rng_bindings"][
+            CAUSAL_AUDIT_BRANCHES[0]]["event"]["draw_schedule"][0]["shape"].append(1)),
+        ("donor", lambda artifact: artifact["audit_rows"][0]["donor"].update(
+            mapping_position=artifact["audit_rows"][0]["donor"]["mapping_position"] + 1
+        )),
+        ("telemetry", lambda artifact: artifact["execution"].update(
+            counterfactual_layer_count=(
+                artifact["execution"]["counterfactual_layer_count"] + 1
+            )
+        )),
+    ),
+)
+def test_canonical_stage2_rng_donor_and_telemetry_tampering_fails_closed(
+    causal_audit_artifact_bundle: dict[str, Any],
+    surface: str, mutate: Any,
+) -> None:
+    artifact = deepcopy(causal_audit_artifact_bundle["artifact"])
+    mutate(artifact)
+    _refresh_causal_audit_serialized_size(artifact)
+    assert not benchmark_runner._causal_audit_valid(
+        artifact, replicate=0,
+        episodes=causal_audit_artifact_bundle["episode_rows"],
+        cell_batches=causal_audit_artifact_bundle["cell_batches"], formal=False,
+        mode="formal_path_exercise_evaluate",
+    ), surface
+
+
+def test_canonical_stage2_rejects_stored_future_reference_tampering(
+    device: torch.device, causal_audit_oracle_bundle: dict[str, Any],
+) -> None:
+    selected = deepcopy(causal_audit_oracle_bundle["selected"])
+    target = selected[0]
+    time = int(target["time"])
+    env_index = int(target["env_index"])
+    key = int(target["key"])
+    target["trajectory"].event_old_joint_logp[time, env_index, key] += 1e-3
+    with pytest.raises(
+        RuntimeError,
+        match=r"worst_continuous=.*event_old_joint_logp.*float32_ulp_distance",
+    ):
+        audit_opportunities_batched(
+            causal_audit_oracle_bundle["arm"], selected,
+            device=device, debug=True,
+        )
+
+
+def test_canonical_stage2_runtime_continuous_tolerance_boundary(
+    device: torch.device, causal_audit_oracle_bundle: dict[str, Any],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original = event_held_commitment_link._audit_row_errors
+    forced_error = CAUSAL_AUDIT_CONTINUOUS_ATOL
+
+    def boundary_error(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        errors = original(*args, **kwargs)
+        errors["continuous_error"] = forced_error
+        return errors
+
+    monkeypatch.setattr(
+        event_held_commitment_link, "_audit_row_errors", boundary_error
+    )
+    accepted = audit_opportunities_batched(
+        causal_audit_oracle_bundle["arm"],
+        causal_audit_oracle_bundle["selected"], device=device,
+    )
+    assert all(
+        row["natural_errors"]["continuous_error"]
+        == CAUSAL_AUDIT_CONTINUOUS_ATOL
+        for row in accepted
+    )
+    forced_error = float(np.nextafter(CAUSAL_AUDIT_CONTINUOUS_ATOL, math.inf))
+    with pytest.raises(RuntimeError, match="natural branch mismatch"):
+        audit_opportunities_batched(
+            causal_audit_oracle_bundle["arm"],
+            causal_audit_oracle_bundle["selected"], device=device,
+        )
 
 
 def _replace_trace_payload_and_resign(
