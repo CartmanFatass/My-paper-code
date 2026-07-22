@@ -8,20 +8,21 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-function Git([string[]]$Args) {
-    $out = & git -C $RepoRoot @Args 2>&1
-    if ($LASTEXITCODE -ne 0) { throw "git $($Args -join ' ') failed: $($out -join [Environment]::NewLine)" }
+function Git([string[]]$GitArgs) {
+    $out = & git.exe -C $RepoRoot @GitArgs 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "git $($GitArgs -join ' ') failed: $($out -join [Environment]::NewLine)" }
     @($out)
 }
 
-$resolved = ([string](Git @('rev-parse', "$Commit^{commit}"))[-1]).Trim()
+$resolvedOutput = @(Git @('rev-parse', "$Commit^{commit}"))
+$resolved = ([string]$resolvedOutput[-1]).Trim()
 if ($resolved -notmatch '^[0-9a-fA-F]{40}$') { throw 'Commit must resolve to 40 hexadecimal characters.' }
 $remoteLine = (Git @('ls-remote', $Remote, "refs/heads/$Branch")) -join "`n"
 $m = [regex]::Match($remoteLine, '^(?<sha>[0-9a-fA-F]{40})\s+')
 if (-not $m.Success) { throw 'Remote branch did not resolve.' }
 $tip = $m.Groups['sha'].Value.ToLowerInvariant()
 $null = Git @('cat-file', '-e', "$tip^{commit}")
-& git -C $RepoRoot merge-base --is-ancestor $resolved $tip 2>$null
+& git.exe -C $RepoRoot merge-base --is-ancestor $resolved $tip 2>$null
 if ($LASTEXITCODE -ne 0) { throw "Commit $resolved is not reachable from $Remote/$Branch." }
 
 $question = $QuestionPath.Replace('\', '/')
