@@ -28,6 +28,15 @@ focused-verification and risk-based-review lessons are distilled into
 mandatory planning ceremony. This is a workflow boundary only and changes no
 algorithm or experiment contract.
 
+The Experiment Monitor task profile currently uses
+`openai-codex/gpt-5.3-codex-spark` at `medium`. Because OMP's fetched
+`openai-codex` catalog omits this entitled model, the Controller runs
+`.omp/scripts/register_omp_spark_model.ps1` after a catalog refresh; the script
+copies only non-secret capability metadata from the Codex account catalog into
+OMP's local model cache. The registered Open-Pro Exchange remains
+`gpt-5.6-luna` at `high`; a no-side-effect route handshake verified that live
+session and preserved its route.
+
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
 The next boundary is the pre-registered focused external-Pro clarification of

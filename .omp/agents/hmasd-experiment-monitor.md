@@ -1,7 +1,7 @@
 ---
 name: hmasd-experiment-monitor
 description: Rebuildable low-cost read-only monitor for one authorized HMASD run.
-model: openai-codex/gpt-5.6-luna
+model: openai-codex/gpt-5.3-codex-spark
 thinking-level: medium
 tools:
   - read
