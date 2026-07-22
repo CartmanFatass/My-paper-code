@@ -65,6 +65,9 @@ data/
 !.omp/agents/references/*.json
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
+# Generated from the account-visible Codex model cache; never commit account
+# catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
+runtime/model-catalog-v2-workaround.json
 # Exact R27-G2 design/review evidence is durable project state.
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
 !docs/external-review/R27_G2_design_review_20260712_Claude.md

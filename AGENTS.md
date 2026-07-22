@@ -62,9 +62,14 @@ The active surfaces are:
 - the registered Open-Pro Exchange persistent session for external divergent
   review transport.
 
-The four code profiles under `.omp/agents/` belong only to the Project Manager
-task tree. The Controller does not dispatch them as implementation workers.
-Only the Project Manager may spawn them, and no child may spawn a successor.
+The code profiles belong only to the Project Manager task tree. The Controller
+does not dispatch them as implementation workers. Only the Project Manager may
+spawn them, and no child may spawn a successor. While `OMP: PAUSED`, the exact
+case-sensitive native Codex `agent_type` keys are `HMASDCodeScout`,
+`HMASDImplementer`, `HMASDVerifier` and `HMASDReviewer`, registered in
+`.codex/config.toml`. Lowercase profile filenames such as `hmasd-reviewer` are
+not callable agent types. `unknown agent_type` is a workflow blocker; never
+silently replace a registered custom agent with an unnamed/default child.
 
 OMP tasks receive a complete assignment and return through automatic result
 delivery with `agent://` output and `history://` transcript. They never use the

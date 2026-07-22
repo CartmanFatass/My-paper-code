@@ -2,6 +2,37 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$codexConfigPath = Join-Path $repo '.codex/config.toml'
+if (-not (Test-Path -LiteralPath $codexConfigPath -PathType Leaf)) { throw 'Missing native Codex agent registry' }
+$codexConfig = Get-Content -LiteralPath $codexConfigPath -Raw
+$nativeProfiles = @{
+    'HMASDCodeScout' = @('hmasd-code-scout.toml', 'model = "gpt-5.6-luna"', 'model_reasoning_effort = "medium"', 'sandbox_mode = "read-only"')
+    'HMASDImplementer' = @('hmasd-implementer.toml', 'model = "gpt-5.6-sol"', 'model_reasoning_effort = "high"', 'sandbox_mode = "workspace-write"')
+    'HMASDVerifier' = @('hmasd-verifier.toml', 'model = "gpt-5.6-luna"', 'model_reasoning_effort = "high"', 'sandbox_mode = "workspace-write"')
+    'HMASDReviewer' = @('hmasd-reviewer.toml', 'model = "gpt-5.6-sol"', 'model_reasoning_effort = "xhigh"', 'sandbox_mode = "read-only"')
+}
+foreach ($agentType in $nativeProfiles.Keys) {
+    if (-not $codexConfig.Contains("[agents.`"$agentType`"]")) { throw "Missing native agent_type: $agentType" }
+    $profileName = $nativeProfiles[$agentType][0]
+    if (-not $codexConfig.Contains("config_file = `"./agents/$profileName`"")) { throw "Registry path mismatch: $agentType" }
+    $profilePath = Join-Path $repo ".codex/agents/$profileName"
+    if (-not (Test-Path -LiteralPath $profilePath -PathType Leaf)) { throw "Missing native profile: $profileName" }
+    $profile = Get-Content -LiteralPath $profilePath -Raw
+    foreach ($required in $nativeProfiles[$agentType][1..($nativeProfiles[$agentType].Count - 1)]) {
+        if (-not $profile.Contains($required)) { throw "$profileName missing: $required" }
+    }
+    if (-not $profile.Contains('spawn agents')) { throw "$profileName must explicitly deny child spawn" }
+}
+foreach ($contractPath in @('AGENTS.md', '.agents/skills/hmasd-dispatch-task/SKILL.md')) {
+    $contract = Get-Content -LiteralPath (Join-Path $repo $contractPath) -Raw
+    foreach ($agentType in $nativeProfiles.Keys) {
+        if (-not $contract.Contains($agentType)) { throw "$contractPath omits native agent_type: $agentType" }
+    }
+    if (-not $contract.Contains('unknown agent_type') -or -not $contract.Contains('default')) {
+        throw "$contractPath does not fail closed against default-agent fallback"
+    }
+}
+
 $agentRoot = Join-Path $repo '.omp/agents'
 
 $profiles = @{

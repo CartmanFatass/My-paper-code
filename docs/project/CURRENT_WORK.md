@@ -27,8 +27,14 @@ authorized under this boundary.
 The interrupted OMP attempt is preserved only as unaccepted WIP at
 `C:\Users\wu\.omp\wt\t3f27b6427\m`. Its five modified tracked files have not
 been copied, staged, committed or merged into `aggressive`. No formal experiment
-was launched. The Controller must audit that WIP before selectively migrating
-anything through the pure Codex path.
+was launched. The pure Codex Project Manager completed a read-only audit with
+`PARTIAL_MIGRATION`: migrate only selected symbols after correcting the invalid
+held-mark timing contrast and the named evidence/hot-path defects.
+
+The native Codex child registry is restored under `.codex/`. Its exact callable
+types are `HMASDCodeScout`, `HMASDImplementer`, `HMASDVerifier` and
+`HMASDReviewer`; default-agent fallback is forbidden. Codex must be restarted
+once after this registry change before a live child invocation test.
 
 ## Dormant OMP Configuration
 
@@ -186,11 +192,12 @@ evidence.
 
 ## Next Action
 
-Audit the interrupted five-file WIP against the accepted Pro correction and the
-current implementation plan. Migrate only verified changes into `aggressive`
-through native Codex work, run the focused checks, and keep formal compute
-stopped until that package is accepted. Do not treat the interrupted OMP task or
-the operationally aborted runs as scientific evidence.
+After restarting Codex and confirming one registered custom-agent invocation,
+send the Project Manager the accepted `PARTIAL_MIGRATION` repair boundary. It
+must adapt only the verified WIP symbols into `aggressive`, preserve the current
+full implementation plan and tests, run the focused CUDA checks, and keep formal
+compute stopped until the resulting package is accepted. Do not treat the
+interrupted OMP task or operationally aborted runs as scientific evidence.
 
 ## Open Contract Questions
 
