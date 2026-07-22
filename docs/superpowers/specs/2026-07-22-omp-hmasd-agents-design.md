@@ -19,9 +19,10 @@ Create native OMP definitions for:
 - `hmasd-verifier`
 - `hmasd-reviewer`
 
-Update the protected workflow boundary in `AGENTS.md` and the active status in
-`docs/project/CURRENT_WORK.md`. Do not alter the existing `.codex/agents/*.toml`
-files.
+Update `.gitignore` so `.omp/agents/*.md` is durable tracked tooling, update the
+protected workflow boundary in `AGENTS.md`, and update the active status in
+`docs/project/CURRENT_WORK.md`. Do not alter the existing
+`.codex/agents/*.toml` files.
 
 ## Native OMP Mapping
 
