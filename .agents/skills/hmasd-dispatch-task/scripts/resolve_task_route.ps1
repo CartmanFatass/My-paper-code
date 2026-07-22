@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('controller', 'project_manager', 'open_divergent_exchange')]
+    [ValidateSet('controller', 'project_manager', 'experiment_monitor', 'open_divergent_exchange')]
     [string]$Role,
     [string]$RegistryPath = (Join-Path $PSScriptRoot '..\references\session-roles.json'),
     [string]$StateDb = (Join-Path $env:USERPROFILE '.codex\state_5.sqlite')

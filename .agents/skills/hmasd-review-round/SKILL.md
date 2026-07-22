@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use only by the active HMASD controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates one reviewer-visible question, dispatches Open-Pro Exchange, archives the natural response, performs direct evidence intake, applies durable record deltas, and prepares any later OMP Project Manager assignment.
+description: Use only by the active HMASD controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates one reviewer-visible question, dispatches Open-Pro Exchange, archives the natural response, performs direct evidence intake, applies durable record deltas, and prepares any later native Project Manager assignment.
 ---
 
 # HMASD External Pro Research Round
@@ -16,7 +16,7 @@ The Controller owns reviewer-visible Git boundaries, factual reconciliation,
 direct evidence intake, durable record writes, resource authorization and user
 communication. It never operates the browser, replaces Pro scientific judgment
 or designs the Project Manager's executable algorithm. If implementation is
-authorized later, the OMP Project Manager owns algorithm realization inside the
+authorized later, the Project Manager owns algorithm realization inside the
 Pro direction.
 
 Use a full plural review for competing explanations, proposed family
@@ -71,7 +71,7 @@ object and estimand; the Manager later freezes executable architecture.
 5. Show the Pro Chinese brief and record one disposition. A material scientific
    ambiguity returns as one focused continuation to the same Pro.
 6. If Pro selected implementation, produce its scientific direction and
-   estimand as explicit inputs for a separately authorized OMP Project Manager
+   estimand as explicit inputs for a separately authorized Project Manager
    task. Review and intake alone authorize neither implementation nor compute.
 
 ## Exchange dispatch
@@ -105,9 +105,9 @@ There is no independent Intake agent or Manager relay. A read-only scout may
 perform a bounded mechanical comparison but owns no scientific or adoption
 authority.
 
-When a later resource action is authorized, dispatch exact OMP profile
-`hmasd-project-manager` with the archived Pro direction, estimand,
-reconciliation, resource boundary, working scope and completion contract. The
+When a later resource action is authorized, dispatch the registered Project
+Manager with the archived Pro direction, estimand, reconciliation, resource
+boundary, working scope and completion contract. The
 Project Manager—not the Controller—freezes the executable algorithm.
 
 ## Recovery

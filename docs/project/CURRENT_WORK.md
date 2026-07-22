@@ -7,56 +7,39 @@ Updated: 2026-07-22
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
 - **Controller: current Codex root task.** `AGENTS.md` is its operating contract.
-- **Execution mode: OMP: PAUSED.** Do not launch, resume or route through OMP
-  until the user explicitly restores it.
+- **Execution mode: native Codex only.** There is no legacy execution route.
 - Scientific direction comes from the registered external GPT-5.6 Pro. The
   Codex Controller owns integration. The sole registered persistent Codex
   Project Manager is task `019f898b-2c57-79c0-a158-e694295b2254`; it owns
   research convergence, implementation planning, code realization coordination
   and package acceptance, and may use native Codex collaboration agents.
+- The registered native Experiment Monitor is task
+  `019f772b-355f-79f3-abbc-2f08800738f8`; it observes one already-authorized
+  run and must resolve as `gpt-5.3-codex-spark` at `medium` before assignment.
 
 ## Active Boundary
 
-The bounded autonomous research chain remains ACTIVE with five evidence-bearing
-iterations available, but its implementation and monitoring surfaces are now
-pure Codex. The controller automatically continues accepted results through
-persistent external-Pro review, direct CDC evidence intake, native Codex work,
-Git integration and terminal evidence integration. No OMP task is active or
-authorized under this boundary.
+The bounded autonomous research chain is paused after this closeout, with five
+evidence-bearing iterations retained. Its implementation and monitoring
+surfaces are native Codex. On explicit resume the Controller continues accepted
+results through external-Pro review, direct CDC intake, native work, Git, and
+terminal evidence integration.
 
-The interrupted OMP attempt is preserved only as unaccepted WIP at
-`C:\Users\wu\.omp\wt\t3f27b6427\m`. Its five modified tracked files have not
-been copied, staged, committed or merged into `aggressive`. No formal experiment
-was launched. The pure Codex Project Manager completed a read-only audit with
-`PARTIAL_MIGRATION`: migrate only selected symbols after correcting the invalid
-held-mark timing contrast and the named evidence/hot-path defects.
+The obsolete external WIP is not an execution surface. Its useful symbols were
+audited and adapted into the accepted native package; no formal experiment was
+launched from it.
 
 The native Codex child registry is restored under `.codex/`. Its exact callable
 types are `hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
 `hmasd-reviewer`; default-agent fallback is forbidden. A post-restart
 no-side-effect call to `hmasd-code-scout` returned `HMASD_CUSTOM_SCOUT_OK`.
 
-## Dormant OMP Configuration
+## Native role configuration
 
-The following OMP notes are retained only to make a later explicit restoration
-reproducible. They are not active routing or execution authority while
-`OMP: PAUSED`.
-
-Project OMP sessions now load only `hmasd-*` Skills. Superpowers process Skills
-are disabled at project scope; their useful bounded-task, causal-debugging,
-focused-verification and risk-based-review lessons are distilled into
-`docs/project/AGENT_CONTEXT.md` and the native OMP role profiles without their
-mandatory planning ceremony. This is a workflow boundary only and changes no
-algorithm or experiment contract.
-
-The Experiment Monitor task profile currently uses
-`openai-codex/gpt-5.3-codex-spark` at `medium`. Because OMP's fetched
-`openai-codex` catalog omits this entitled model, the Controller runs
-`.omp/scripts/register_omp_spark_model.ps1` after a catalog refresh; the script
-copies only non-secret capability metadata from the Codex account catalog into
-OMP's local model cache. The registered Open-Pro Exchange remains
-`gpt-5.6-luna` at `high`; a no-side-effect route handshake verified that live
-session and preserved its route.
+The Project Manager may use the native custom profiles recorded under `.codex/`.
+The Experiment Monitor is the registered native Codex session and must be
+verified as `gpt-5.3-codex-spark` at `medium` before a monitor assignment. The
+registered Open-Pro Exchange remains the sole external-review transport.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
@@ -96,19 +79,12 @@ session executed work through bounded subagents under a single orchestrator.
 One writer holds a given file set at a time. Concurrent mutating tasks on the
 same scope are not dispatched.
 
-## Binding Engineering Constraints (surface independent)
+## Binding Engineering Constraints
 
 These are durable technical constraints, not workflow. They bind algorithm
-realization and are embedded in the native OMP Project Manager and code-agent
-profiles:
-
-- `.omp/agents/references/hmasd-engineering-principles.md`
-- `.omp/agents/hmasd-project-manager.md`
-- `.omp/agents/hmasd-implementer.md`
-- `.omp/agents/hmasd-reviewer.md`
-
-Experiment observation uses the rebuildable task protocol at
-`.omp/agents/references/hmasd-experiment-monitor-protocol.md`.
+realization and are carried by the current implementation plan and native
+Project Manager task tree. Experiment observation follows the registered
+native Monitor Skill.
 
 The load-bearing consequences:
 
@@ -190,13 +166,13 @@ magnitude. A subsequent retry exposed the collection/replay arithmetic split;
 that defect is closed by `31aad0df`. None of these attempts is scientific
 evidence.
 
-## Next Action
+## Resume Point
 
-Send the Project Manager the accepted `PARTIAL_MIGRATION` repair boundary. It
-must adapt only the verified WIP symbols into `aggressive`, preserve the current
-full implementation plan and tests, run the focused CUDA checks, and keep formal
-compute stopped until the resulting package is accepted. Do not treat the
-interrupted OMP task or operationally aborted runs as scientific evidence.
+This package is accepted but not yet a formal experiment result. On the next
+machine, pull `My-paper-code/aggressive`, require a clean worktree, run
+`resolve_source_boundary.ps1`, resolve the registered Project Manager and
+Monitor live, and read the current implementation plan plus relevant Pro raw
+before choosing any next evidence action. Formal compute remains stopped.
 
 ## Open Contract Questions
 
@@ -257,18 +233,9 @@ interpreter carries a CPU-only `torch 2.8.0+cpu`; use
 
 ## Autonomous Boundary
 
-ACTIVE with five evidence-bearing iterations remaining. The controller must
-continue every valid terminal callback to the next legal event without asking
-the user to repeat this grant. External review, CDC intake, bounded
-implementation, Git integration, authorized formal execution, monitor
-assignment and terminal evidence integration are covered when they remain
-inside the adopted source and frozen experiment contract.
-
-Pause only on grant exhaustion, explicit user pause, a genuine unrecovered
-blocker, or a proposed expansion of protected scientific semantics or formal
-compute beyond the adopted contract. Workflow edits, focused clarification and
-operational repair do not consume an iteration. The prohibitions on concurrent
-mutating research routes and locally invented successor routes remain binding.
+**PAUSED_AFTER_CLOSEOUT** with five evidence-bearing iterations retained. Do
+not start a successor, external review, formal execution, or monitor assignment
+until the Controller on the next machine explicitly resumes this boundary.
 
 ## Durable Constraints
 

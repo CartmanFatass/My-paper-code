@@ -18,16 +18,12 @@ document needed at the current boundary:
 The durable research objects live under `docs/research/cdc/`. Load only the
 conjecture, ledger, portfolio or evidence note required at the current boundary.
 
-`CURRENT_WORK.md` also selects the active execution surface. If it declares
-OMP paused, every OMP-specific instruction below is inactive for that boundary:
-do not launch, resume or route work through OMP. The Controller works directly
-or delegates research convergence and code-side work to the ACTIVE persistent
-Codex `project_manager` registered in the dispatch Skill. That Project Manager
-may use native Codex collaboration agents; the Controller does not bypass it to
-dispatch implementation workers. Any existing OMP worktree is unaccepted
-evidence until the Controller explicitly audits and migrates it.
-Persistent external-Pro transport is unaffected unless `CURRENT_WORK.md` also
-pauses it.
+`CURRENT_WORK.md` selects the active execution surface. The Controller works
+directly or delegates research convergence and code-side work to the ACTIVE
+persistent Codex `project_manager` registered in the dispatch Skill. That
+Project Manager may use native Codex collaboration agents; the Controller does
+not bypass it to dispatch implementation workers. Persistent external-Pro
+transport is separately registered.
 
 Roles are resolved only from the dispatch Skill registry. Never infer a current
 role from a task title, an old callback or conversation search. Unregistered
@@ -35,48 +31,44 @@ former manager sessions are obsolete execution surfaces.
 
 An execution-surface change is one atomic control boundary: update
 `CURRENT_WORK.md`, the dispatch Skill, its role registry and the corresponding
-mode-specific contract tests together. Do not activate a mode when those
-sources disagree.
+contract tests together. Do not activate a topology when those sources disagree.
 
 The controller alone owns workflow and role-topology design, routing, direct
 evidence intake, resource and formal-experiment authorization, Git integration,
 project control, evidence integrity and user communication. External GPT-5.6
-Pro owns scientific direction. The OMP Project Manager owns in-scope algorithm
+Pro owns scientific direction. The Project Manager owns in-scope algorithm
 realization and code-side decisions.
 
 ## Task dispatch
 
 Automatically use `.agents/skills/hmasd-dispatch-task/SKILL.md` whenever work
-may require native OMP Project Manager or Monitor dispatch, persistent Open-Pro
-communication, external review or a role callback. That Skill selects the
-execution surface without turning OMP tasks into persistent roles.
+may require Project Manager or Monitor dispatch, persistent Open-Pro
+communication, external review or a role callback.
 
 The active surfaces are:
 
 - controller direct work for workflow design, routing, Git, direct Pro evidence
   intake, project control, evidence integration and user communication;
-- `hmasd-project-manager` as an isolated OMP task for one authorized algorithm
+- the registered native Codex `project_manager` for one authorized algorithm
   realization and implementation package;
-- `hmasd-experiment-monitor` as a non-isolated rebuildable OMP task for one
-  already authorized run;
+- the registered native Codex `experiment_monitor` for one already authorized
+  run;
 - the registered Open-Pro Exchange persistent session for external divergent
   review transport.
 
 The code profiles belong only to the Project Manager task tree. The Controller
 does not dispatch them as implementation workers. Only the Project Manager may
-spawn them, and no child may spawn a successor. While `OMP: PAUSED`, the exact
-case-sensitive native Codex `agent_type` values exposed by the profiles are
+spawn them, and no child may spawn a successor. The exact case-sensitive native
+Codex `agent_type` values exposed by the profiles are
 `hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
 `hmasd-reviewer`. The `HMASDCodeScout`-style names in `.codex/config.toml` are
 registry section identifiers, not callable `agent_type` values. An
 `unknown agent_type` response is a workflow blocker; never silently replace a
 registered custom agent with an unnamed/default child.
 
-OMP tasks receive a complete assignment and return through automatic result
-delivery with `agent://` output and `history://` transcript. They never use the
-persistent route resolver or callback protocol. Only Open-Pro Exchange uses a
-registered event such as `REVIEW_STAGE`, its role Skill and live route
-verification.
+Persistent roles receive a complete assignment through live route resolution.
+Only Open-Pro Exchange uses a registered event such as `REVIEW_STAGE`, its role
+Skill and live route verification.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -94,19 +86,28 @@ External GPT-5.6 Pro owns conjectures, scientific definitions, mechanism-family
 and research-route selection, estimands, evidence meaning and the next scheduled
 research action.
 
-The OMP Project Manager owns the executable algorithm inside that scientific
+The Project Manager owns the executable algorithm inside that scientific
 direction: network and state architecture, probability, gradients, credit,
 clocks, lifecycle, replay, RNG, checkpoint meaning, batching, replacement and
 implementation structure. It freezes `IMPLEMENTATION_PLAN.md`, selects and
 manages the code-agent task graph, integrates one package and performs one
 bounded repair cycle without per-choice Controller approval.
 
-The Controller dispatches Project Manager with `isolated: true` only after
-direct evidence intake and resource authorization. Its queued or running job is
-the sole tracked-worktree write lease. The Controller and other mutating tasks
-do not edit, stage, commit or push until that exact job yields ready/blocked or
-is definitely aborted. Project Manager never changes external scientific
-direction, formal-compute authority, Git, project control or external review.
+The Controller dispatches Project Manager only after direct evidence intake and
+resource authorization. Its active assignment is the sole write lease. The
+Controller and other mutating tasks do not edit, stage, commit or push until it
+yields ready/blocked or is definitely aborted. Project Manager never changes
+external scientific direction, formal-compute authority, Git, project control,
+or external review.
+
+For a persistent Codex Project Manager assignment, the source boundary is never
+a manually copied SHA. Controller and Manager each run the dispatch Skill's
+`resolve_source_boundary.ps1`; the assignment carries only
+`source_boundary=local_and_remote_aggressive_tip`. The script requires local
+`HEAD` and `refs/remotes/My-paper-code/aggressive` to be the same canonical
+commit. Its resolved `source_commit` is evidence output, not a task input. A
+disagreement is `SOURCE_BOUNDARY_DIVERGED`, not an invitation to guess, truncate
+or substitute a commit ID.
 
 The rebuildable Monitor observes one assigned run. It does not launch, restart,
 repair, extend or scientifically interpret it.
@@ -117,15 +118,15 @@ The persistent Open-Pro role receives its communication Skill, registered role
 identity and explicit inputs. It does not reconstruct Controller history,
 authorize another role or launch a successor.
 
-OMP task agents receive exactly one profile and one complete assignment. They
-do not read persistent routing state, reconstruct Controller history, change
-their model, expand authority or invoke unrelated Skills. Only Project Manager
-has child-spawn authority, limited to its four registered code profiles.
+Project Manager child agents receive exactly one profile and complete assignment.
+They do not reconstruct Controller history, change their model, expand
+authority, or invoke unrelated Skills. Only Project Manager has child-spawn
+authority, limited to its four registered code profiles.
 
 Scientific decision transport is sent only to Open-Pro Exchange. The Controller
 performs direct lightweight evidence intake and durable CDC record application.
-Authorized algorithm realization is sent only to `hmasd-project-manager`.
-Monitoring is sent only to `hmasd-experiment-monitor`. Automatic task results
+Authorized algorithm realization is sent only to `project_manager`. Monitoring
+is sent only to `experiment_monitor`. Automatic task results
 wake the Controller but never start a successor without Controller routing.
 
 For a persistent Codex Project Manager, terminal delivery is an explicit direct
@@ -222,5 +223,4 @@ terminal experiment disposition, accepted external disposition, autonomy-state
 change or explicit controller handoff. Report only the domain that changed.
 
 The controller may push `aggressive` with `git push My-paper-code aggressive`
-under the user's standing authorization. OMP task agents and persistent roles
-do not commit or push.
+under the user's standing authorization. Persistent roles do not commit or push.

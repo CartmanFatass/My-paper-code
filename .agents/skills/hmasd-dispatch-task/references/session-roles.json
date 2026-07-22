@@ -1,5 +1,5 @@
 {
-  "schema_version": 9,
+  "schema_version": 10,
   "updated": "2026-07-22",
   "roles": {
     "controller": {
@@ -14,6 +14,13 @@
       "contract": "AGENTS.md",
       "responsibility": "research convergence, implementation planning, code realization coordination, and package acceptance"
     },
+    "experiment_monitor": {
+      "kind": "persistent_codex_experiment_monitor",
+      "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
+      "registration_status": "ACTIVE",
+      "role_skill": ".agents/skills/hmasd-experiment-monitor/SKILL.md",
+      "responsibility": "bounded read-only run observation, ETA-aware heartbeat ownership, and terminal delivery"
+    },
     "open_divergent_exchange": {
       "kind": "persistent_reviewer_exchange",
       "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
@@ -27,7 +34,6 @@
     "registered_roles_only": true,
     "forbid_title_or_history_based_role_inference": true,
     "role_keyed_resolution_only": true,
-    "omp_task_agents_are_not_sessions": true,
     "live_route_source": ".agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1",
     "stored_fields": [
       "role",

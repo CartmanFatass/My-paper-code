@@ -12,6 +12,7 @@ import math
 import random
 import shutil
 import zlib
+from collections import Counter, defaultdict
 
 import numpy as np
 import pytest
@@ -23,15 +24,13 @@ from scripts import run_noncalendar_commitment_benchmark_g0 as benchmark_runner
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
     EVENT_INPUT_DIM,
-    FORK_STREAM_NAMES,
+    AUDIT_BRANCHES,
+    AUDIT_STREAM_NAMES,
     KEEP,
     MARK_DIM,
     OPPORTUNITY_SUPPORT,
     RENEW,
     RNG_NAMES,
-    _ForkGenerator,
-    _ForkStream,
-    _ForkStreamView,
     _nested_equal,
     _normal_parameters,
     _rng_states,
@@ -41,8 +40,8 @@ from ha_ctse_process.event_held_commitment_link import (
     collect_trajectory,
     compare_continuations,
     factor_counts,
-    fork_opportunities_batched,
-    fork_single_opportunity,
+    audit_opportunities_batched,
+    audit_single_opportunity,
     initialize_arms,
     load_checkpoint,
     make_training_state,
@@ -62,10 +61,10 @@ from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
     ADDED_PARAMETER_COUNT,
-    A_KEEP_LCB_FLOOR,
-    A_KEEP_MEAN_FLOOR,
-    A_RENEW_LCB_FLOOR,
-    A_RENEW_MEAN_FLOOR,
+    C_TOTAL_KEEP_LCB_FLOOR,
+    C_TOTAL_KEEP_MEAN_FLOOR,
+    C_TOTAL_RENEW_LCB_FLOOR,
+    C_TOTAL_RENEW_MEAN_FLOOR,
     BOOTSTRAP_SEED,
     EVENT_JOINT_FACTOR_COUNT,
     EVENT_SEED,
@@ -77,12 +76,14 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     INTERVENTION_THRESHOLD,
     LIFETIME_BIN_THRESHOLD,
     MARK_SEED,
-    NATURAL_FORK_ACTIONS,
-    NATURAL_FORK_PAIRS,
-    NATURAL_FORK_QUOTA_PER_ACTION,
-    NATURAL_FORK_REPLICATES,
-    NATURAL_FORK_SELECTION_COORDINATE,
-    NATURAL_FORK_SELECTION_NAMESPACE,
+    CAUSAL_AUDIT_BRANCHES,
+    CAUSAL_AUDIT_BRANCH_ROWS,
+    CAUSAL_AUDIT_NATURAL_ACTIONS,
+    CAUSAL_AUDIT_QUOTA_PER_ACTION,
+    CAUSAL_AUDIT_REPLICATES,
+    CAUSAL_AUDIT_SELECTED_ROWS,
+    CAUSAL_AUDIT_SELECTION_COORDINATE,
+    CAUSAL_AUDIT_SELECTION_NAMESPACE,
     OPPORTUNITY_SEED,
     PARAMETER_COUNT,
     REGISTERED_EXECUTION_BACKENDS,
@@ -209,26 +210,6 @@ def dense_batch_invariance_error(device: torch.device) -> float:
 @pytest.fixture(scope="session")
 def dense_batch_invariant(registered_backend: str) -> bool:
     return dense_batch_invariance_error(torch.device(registered_backend)) == 0.0
-
-
-def _assert_fork_refuses_without_batch_invariance(
-    arm: Any,
-    trajectory: Any,
-    state: Any,
-    device: torch.device,
-    coordinate: tuple[int, int, int],
-) -> None:
-    """On a backend that is not dense-batch invariant, the fork engine's own
-    unmodified guard must refuse rather than return an advantage built on a
-    drifted reconstruction. This is the fail-closed half of the same guard
-    the positive tests exercise elsewhere."""
-
-    time, env_index, key = coordinate
-    with pytest.raises(RuntimeError, match="not bitwise exact"):
-        fork_single_opportunity(
-            arm, trajectory, env_index=env_index, time=time, key=key,
-            device=device, state=state,
-        )
 
 
 def test_dense_batch_invariance_is_measured_not_assumed(
@@ -979,708 +960,223 @@ def test_candidate_retention_deterministic_matches_mu(
     assert torch.allclose(candidate_z, torch.tanh(mu), atol=1e-6, rtol=1e-5)
 
 
-def _fork_boundary_differences(
-    left: dict, right: dict
-) -> tuple[list[str], dict[int, list[str]]]:
-    """Field names that differ between the two branch states at the fork."""
+# CAUSAL_AUDIT_CORE_TESTS
 
-    assert set(left) == set(right)
-    assert set(left["lifecycles"]) == set(right["lifecycles"])
-    fields = sorted(
-        name for name in left
-        if name != "lifecycles" and not _nested_equal(left[name], right[name])
+def _trace_key(batch_index: int, trace: dict[str, Any]) -> tuple[int, ...]:
+    coordinate = trace["coordinate"]
+    return (
+        batch_index, int(coordinate["time"]), int(coordinate["env_index"]),
+        int(coordinate["key"]), int(coordinate["membership_epoch"]),
+        int(coordinate["segment_id"]),
     )
-    lifecycle_fields = {
-        key: sorted(
-            name for name in left["lifecycles"][key]
-            if not _nested_equal(
-                left["lifecycles"][key][name], right["lifecycles"][key][name]
-            )
-        )
-        for key in left["lifecycles"]
-    }
-    return fields, {key: value for key, value in lifecycle_fields.items() if value}
 
 
-def test_fork_single_opportunity_reproduces_the_natural_branch(
-    device: torch.device, dense_batch_invariant: bool,
-) -> None:
-    """Counterfactual KEEP/RENEW fork of one held-out opportunity.
+def _audit_action(trace: dict[str, Any]) -> str:
+    return "KEEP" if int(trace["natural_kind"]) == KEEP else "RENEW"
 
-    Which half of this property the session can show is decided by the
-    measured dense-batch invariance of the active backend, never by a
-    device name. Where a row's dense output is independent of the packed
-    batch width, the reproduction below is asserted in full. Where it is
-    not -- the fork drops the focal request, so the surviving rows move by
-    about 5.7e-06 on CPU -- the engine's own unmodified guard must refuse
-    the fork, and that refusal is what is asserted instead. Neither guard
-    is relaxed in either case.
 
-    The headline property is state-reconstruction correctness: the branch
-    matching the naturally taken action must reproduce the *original*
-    continuation exactly -- not merely a close terminal utility, but the
-    identical `TrackingOutcome` (utility, tracking/completion numerators
-    and denominators, roster sizes and the full reward trace), i.e. the
-    same environment terminal state the collected trajectory recorded for
-    that episode. Nothing weaker distinguishes a correct reconstruction
-    from one that merely lands nearby.
-
-    The same fork is used to check the four supporting properties: the
-    pair consumes identical randomness (the same realized variates, not
-    merely the same generator objects), the two branch states differ only
-    by the commitment mark `z`, neither branch is truncated (this
-    environment pays zero reward until the terminal step, so a truncated
-    branch would report zero utility), and the caller's owned and global
-    RNG state is untouched.
-
-    The exactness claim is enforced inside the engine on every fork, over
-    the whole reconstructed window at the registered collection width; this
-    test additionally reads back those engine-side error diagnostics.
-    """
-
+@pytest.fixture(scope="module")
+def causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
     arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
-    state = make_training_state("EHC", 0, profile="held_out")
-    trajectory = collect_trajectory(
-        arm, state, device=device, episode_ids=tuple(range(16)),
-        deterministic=True, profile="held_out",
-    )
-    kinds = trajectory.event_kind.detach().cpu()
-    eligible = [
-        tuple(int(v) for v in row)
-        for row in torch.nonzero(
-            kinds.eq(KEEP) | kinds.eq(RENEW), as_tuple=False
-        ).tolist()
-        if int(row[0]) >= 1
-    ]
-    natural_keep = [row for row in eligible if int(kinds[row]) == KEEP]
-    natural_renew = [row for row in eligible if int(kinds[row]) == RENEW]
-    assert natural_keep and natural_renew
-
-    owned_before = deepcopy(_rng_states(state))
-    global_before = runtime_rng_snapshot()
-
-    if not dense_batch_invariant:
-        _assert_fork_refuses_without_batch_invariance(
-            arm, trajectory, state, device, natural_keep[0]
-        )
-        _assert_fork_refuses_without_batch_invariance(
-            arm, trajectory, state, device, natural_renew[0]
-        )
-        # A refused fork still leaves the caller's randomness untouched.
-        assert _nested_equal(owned_before, _rng_states(state))
-        assert runtime_rng_equal(global_before, runtime_rng_snapshot())
-        return
-
-    checked: list[tuple[int, int, int]] = []
-    discriminating = 0
-    # One naturally-KEEP and one naturally-RENEW coordinate, so the
-    # reproduction claim is not carried by a single branch label. At least
-    # one of them must be *discriminating* (the two branches reach
-    # different terminal utilities); otherwise a fork that silently ignored
-    # `candidate_z` would reproduce the natural branch for free.
-    for coordinates in (natural_keep[:1], natural_renew[:4]):
-        for step, env_index, key in coordinates:
-            diagnostics: dict = {}
-            result = fork_single_opportunity(
-                arm, trajectory, env_index=env_index, time=step, key=key,
-                device=device, state=state, diagnostics=diagnostics,
-            )
-            checked.append((step, env_index, key))
-
-            expected = "KEEP" if int(kinds[step, env_index, key]) == KEEP else "RENEW"
-            assert result["natural_action"] == expected
-            assert set(result) == {"keep_utility", "renew_utility", "natural_action"}
-
-            # Natural-branch reproduction: exact, on the whole outcome.
-            natural_outcome = trajectory.outcomes[env_index]
-            branch_outcome = diagnostics["outcomes"][result["natural_action"]]
-            assert branch_outcome == natural_outcome, (step, env_index, key)
-            assert result[f"{result['natural_action'].lower()}_utility"] == float(
-                natural_outcome.utility
-            )
-
-            # No truncation: both branches run to the terminal step.
-            assert diagnostics["branch_cutoff"] == {"KEEP": False, "RENEW": False}
-            assert diagnostics["branch_terminal"] == {"KEEP": True, "RENEW": True}
-            assert diagnostics["branch_steps"] == {
-                "KEEP": HORIZON - step, "RENEW": HORIZON - step,
-            }
-
-            # Pair randomness identity: same draw counts on every stream and
-            # -- the falsifiable part -- the same realized variates actually
-            # consumed by the two branches. Comparing the two views' shared
-            # generator objects instead would assert nothing.
-            positions = diagnostics["stream_positions"]
-            assert set(positions["KEEP"]) == set(FORK_STREAM_NAMES)
-            assert positions["KEEP"] == positions["RENEW"]
-            assert diagnostics["stream_calls"]["KEEP"] == diagnostics["stream_calls"]["RENEW"]
-            assert _nested_equal(
-                diagnostics["stream_values"]["KEEP"],
-                diagnostics["stream_values"]["RENEW"],
-            )
-            assert positions["KEEP"]["opportunity"] > 0
-            assert len(diagnostics["stream_values"]["KEEP"]["opportunity"]) > 0
-
-            # Engine-side natural-branch guard: the reconstruction is exact
-            # on every recorded discrete field of the whole continuation,
-            # not only on the terminal outcome.
-            natural_errors = diagnostics["natural_branch_errors"]
-            assert natural_errors["outcome_mismatch"] == 0.0
-            assert natural_errors["discrete_mismatch"] == 0.0, natural_errors
-            assert diagnostics["prefix_errors"]["discrete_mismatch"] == 0.0
-
-            # Bitwise, not within tolerance. Reconstructing at the collected
-            # width instead of at width 1 is justified *only* by removing the
-            # float32 reduction-order drift class rather than bounding it, so
-            # the claim is pinned as exact equality on both windows. A
-            # width-1-grade residual is order 1e-6 and would satisfy any
-            # tolerance-shaped assertion while silently reintroducing the
-            # drift that can flip a primitive argmax.
-            assert natural_errors["continuous"] == 0.0, natural_errors
-            assert diagnostics["prefix_errors"]["continuous"] == 0.0, (
-                diagnostics["prefix_errors"]
-            )
-
-            # `segments` is part of the collected continuation and
-            # `compare_continuations` compares it order sensitively, so the
-            # natural branch must reproduce the whole per-environment
-            # sequence -- compared here directly against the record rather
-            # than by reading back the engine's own verdict. It is also the
-            # only place a `SegmentRecord`'s own fields are checked: the
-            # focal cell of the per-step `membership_epoch` tensor is the
-            # excluded coordinate, so a RENEW record written with a wrong
-            # epoch reaches no tensor comparison at all.
-            branch_segments = diagnostics["natural_branch_segments"]
-            assert branch_segments == trajectory.segments, (step, env_index, key)
-            assert branch_segments[env_index] == trajectory.segments[env_index]
-            focal_renewals = [
-                record for record in branch_segments[env_index]
-                if record.key == key and record.close_reason == "RENEW"
-            ]
-            if result["natural_action"] == "RENEW":
-                assert focal_renewals, (step, env_index, key)
-            assert natural_errors["segment_mismatch"] == 0.0, natural_errors
-            assert diagnostics["prefix_errors"]["segment_mismatch"] == 0.0
-
-            # Treatment isolation: only the focal key's `z` differs.
-            fields, lifecycle_fields = _fork_boundary_differences(
-                diagnostics["boundaries"]["KEEP"], diagnostics["boundaries"]["RENEW"]
-            )
-            assert fields == [], (step, env_index, key, fields)
-            assert lifecycle_fields == {key: ["z"]}, (step, env_index, key)
-
-            if result["keep_utility"] != result["renew_utility"]:
-                discriminating += 1
-                break
-
-    assert len(checked) >= 2
-    assert discriminating >= 1
-
-    # Caller RNG untouched: neither the collector state's owned streams nor
-    # the global Python/NumPy/CPU/CUDA snapshot moved.
-    assert _nested_equal(owned_before, _rng_states(state))
-    assert runtime_rng_equal(global_before, runtime_rng_snapshot())
-
-
-def test_stochastic_stage2_fork_replays_natural_branch_and_rng(
-    device: torch.device,
-) -> None:
-    arms, _, _ = initialize_arms(device)
-    state = make_training_state("EHC", 0, profile="held_out")
-    origin = deepcopy(state)
-    trajectory = collect_trajectory(
-        arms["EHC"], state, device=device,
-        episode_ids=tuple(range(16)), deterministic=False,
-        profile="held_out",
-    )
-    coordinate = torch.nonzero(
-        trajectory.event_kind.eq(KEEP) | trajectory.event_kind.eq(RENEW),
-        as_tuple=False,
-    )[0].detach().cpu().tolist()
-    diagnostics: dict[str, Any] = {}
-    result = fork_single_opportunity(
-        arms["EHC"], trajectory,
-        env_index=coordinate[1], time=coordinate[0], key=coordinate[2],
-        device=device, state=origin, deterministic=False,
-        diagnostics=diagnostics,
-    )
-    assert diagnostics["branch_rng_equal"] is True
-    assert diagnostics["prefix_errors"]["discrete_mismatch"] == 0.0
-    assert diagnostics["prefix_errors"]["continuous"] == 0.0
-    assert diagnostics["natural_branch_errors"]["discrete_mismatch"] == 0.0
-    assert diagnostics["natural_branch_errors"]["continuous"] == 0.0
-    assert result["natural_action"] == diagnostics["natural_action"]
-
-
-def test_stage2_natural_continuation_rejects_an_independent_row_script_perturbation(
-    device: torch.device, monkeypatch,
-) -> None:
-    arms, _, _ = initialize_arms(device)
-    state = make_training_state("EHC", 0, profile="held_out")
-    origin = deepcopy(state)
-    trajectory = collect_trajectory(
-        arms["EHC"], state, device=device, episode_ids=tuple(range(16)),
-        deterministic=False, profile="held_out",
-    )
-    time_index, env_index, key = torch.nonzero(
-        trajectory.event_kind.eq(KEEP) | trajectory.event_kind.eq(RENEW),
-        as_tuple=False,
-    )[0].detach().cpu().tolist()
-    pristine = event_held_commitment_link._fork_row_scripts
-
-    def shortened(*args, **kwargs):
-        streams, end_states, material = pristine(*args, **kwargs)
-        streams["primitive"].values = streams["primitive"].values[:-1]
-        return streams, end_states, material
-
-    monkeypatch.setattr(
-        event_held_commitment_link, "_fork_row_scripts", shortened
-    )
-    with pytest.raises(RuntimeError, match="stream exhausted"):
-        fork_opportunities_batched(
-            arms["EHC"], [{
-                "fork_id": "perturbed-row-script", "replicate": 0,
-                "batch_index": 0, "time": time_index,
-                "env_index": env_index, "key": key,
-                "natural_action": (
-                    "KEEP" if int(trajectory.event_kind[time_index, env_index, key])
-                    == KEEP else "RENEW"
-                ),
-                "trajectory": trajectory, "origin_state": origin,
-                "expected_end_rng_states": (
-                    event_held_commitment_link.owned_rng_states(state)
-                ),
-            }], device=device,
-        )
-
-
-def test_batched_stage2_matches_sequential_stochastic_oracle(
-    device: torch.device,
-) -> None:
-    arms, _, _ = initialize_arms(device)
-    state = make_training_state("EHC", 0, profile="held_out")
-    origin = deepcopy(state)
-    trajectory = collect_trajectory(
-        arms["EHC"], state, device=device,
-        episode_ids=tuple(range(16)), deterministic=False,
-        profile="held_out",
-    )
-    eligible = torch.nonzero(
-        trajectory.event_kind.eq(KEEP) | trajectory.event_kind.eq(RENEW),
-        as_tuple=False,
-    ).detach().cpu().tolist()
-    coordinates = []
-    for expected_kind in (KEEP, RENEW):
-        coordinates.append(next(
-            tuple(int(value) for value in row) for row in eligible
-            if int(trajectory.event_kind[tuple(row)]) == expected_kind
+    origins, trajectories, end_states = [], [], []
+    for batch_index in range(2):
+        state = make_training_state("EHC", 0, profile="held_out")
+        origins.append(deepcopy(state))
+        trajectories.append(collect_trajectory(
+            arm, state, device=device,
+            episode_ids=tuple(range(batch_index * 16, (batch_index + 1) * 16)),
+            deterministic=False, profile="held_out",
         ))
-    opportunities = []
-    for index, (time_index, env_index, key) in enumerate(coordinates):
-        natural_kind = int(trajectory.event_kind[time_index, env_index, key])
-        opportunities.append({
-            "fork_id": f"direct-{index}",
-            "replicate": 0,
-            "batch_index": 0,
-            "time": time_index,
-            "env_index": env_index,
-            "key": key,
-            "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
-            "trajectory": trajectory,
-            "origin_state": origin,
-        })
-    batched = fork_opportunities_batched(
-        arms["EHC"], opportunities, device=device, debug=True
+        end_states.append(event_held_commitment_link.owned_rng_states(state))
+    inventory: dict[tuple[int, ...], dict[str, Any]] = {}
+    cells: dict[tuple[int, int], list[tuple[int, ...]]] = defaultdict(list)
+    for batch_index, trajectory in enumerate(trajectories):
+        assert trajectory.raw_event_trace and trajectory.outcomes
+        for trace in trajectory.raw_event_trace:
+            key = _trace_key(batch_index, trace)
+            inventory[key] = trace
+            cells[(batch_index, key[1])].append(key)
+    anchor, keys = next(
+        (cell, rows) for cell, rows in sorted(cells.items())
+        if cell[0] == 0 and cell[1] > 0 and len(rows) >= 5
     )
-    assert len(batched) == len(opportunities)
-    for opportunity, batch_result in zip(opportunities, batched, strict=True):
-        diagnostics: dict[str, Any] = {}
-        sequential = fork_single_opportunity(
-            arms["EHC"], trajectory,
-            env_index=opportunity["env_index"], time=opportunity["time"],
-            key=opportunity["key"], device=device, state=origin,
-            deterministic=False, diagnostics=diagnostics,
-        )
-        assert batch_result["keep_utility"] == sequential["keep_utility"]
-        assert batch_result["renew_utility"] == sequential["renew_utility"]
-        assert batch_result["natural_action"] == sequential["natural_action"]
-        for action in ("KEEP", "RENEW"):
-            batch_branch = batch_result["branches"][action]
-            batch_trajectory = batch_branch["trajectory"]
-            batch_index = int(batch_branch["branch_index"])
-            sequential_trajectory = diagnostics["branch_trajectories"][action]
-            sequential_index = int(opportunity["env_index"])
-            for name in event_held_commitment_link._FORK_DISCRETE_FIELDS:
-                assert torch.equal(
-                    getattr(batch_trajectory, name)[:, batch_index].detach().cpu(),
-                    getattr(sequential_trajectory, name)[:, sequential_index].detach().cpu(),
-                ), (action, name)
-            maximum = 0.0
-            field_errors: dict[str, float] = {}
-            for name in event_held_commitment_link._FORK_CONTINUOUS_FIELDS:
-                difference = (
-                    getattr(batch_trajectory, name)[:, batch_index].detach().cpu()
-                    - getattr(sequential_trajectory, name)[:, sequential_index].detach().cpu()
-                )
-                maximum = max(
-                    maximum,
-                    float(difference.abs().max()) if difference.numel() else 0.0,
-                )
-                field_errors[name] = (
-                    float(difference.abs().max()) if difference.numel() else 0.0
-                )
-            assert maximum <= 1e-7, (
-                action, sorted(field_errors.items(), key=lambda value: value[1], reverse=True)
-            )
-            assert (
-                batch_trajectory.segments[batch_index]
-                == sequential_trajectory.segments[sequential_index]
-            )
-            assert (
-                batch_trajectory.outcomes[batch_index]
-                == sequential_trajectory.outcomes[sequential_index]
-            )
-            assert _nested_equal(
-                batch_result["end_rng_states"],
-                diagnostics["branch_rng_states"][action],
-            )
-
-
-def _held_out_fork_setup(
-    device: torch.device,
-) -> tuple[Any, Any, Any, tuple, list[tuple[int, int, int]]]:
-    """One deterministic held-out collection plus its eligible fork rows."""
-
-    arms, _, _ = initialize_arms(device)
-    arm = arms["EHC"]
-    state = make_training_state("EHC", 0, profile="held_out")
-    trajectory = collect_trajectory(
-        arm, state, device=device, episode_ids=tuple(range(16)),
-        deterministic=True, profile="held_out",
-    )
-    ledgers = tuple(
-        make_noncalendar_ledger(
-            value, profile="held_out",
-            task_seed=state.seed_map["ledger"], order_seed=state.seed_map["order"],
-        )
-        for value in trajectory.ledger_ids
-    )
-    kinds = trajectory.event_kind.detach().cpu()
-    eligible = [
-        tuple(int(v) for v in row)
-        for row in torch.nonzero(
-            kinds.eq(KEEP) | kinds.eq(RENEW), as_tuple=False
-        ).tolist()
-        if int(row[0]) >= 1
-    ]
-    return arm, state, trajectory, ledgers, eligible
-
-
-def test_fork_reproduces_hazardous_lifecycle_coordinates(
-    device: torch.device, dense_batch_invariant: bool,
-) -> None:
-    """Fork where reconstruction is structurally hardest, not only at `t=1`.
-
-    The headline fork test takes the earliest eligible coordinates, so its
-    branch tails start at the very beginning of the episode and never cross
-    a membership transition in a way the *branch* has to carry. Four
-    structurally different coordinates are pinned here:
-
-    * a late step, where almost the whole episode is prefix reconstruction
-      rather than branch tail, and where the branch is only a few steps
-      long -- the regime in which a per-step drift residual is smallest and
-      an exactness claim is easiest to lose unnoticed;
-    * the REJOIN step itself, where a lifecycle's membership epoch advances
-      and a second lifecycle genuinely JOINs in the same physical step the
-      forced event is recorded against;
-    * a coordinate whose focal lifecycle temporarily LEAVEs and REJOINs
-      *inside* the branch tail, so the branch must carry an absent
-      lifecycle across the gap and resume its spell accounting after it;
-    * a coordinate whose focal lifecycle terminally LEAVEs inside the
-      branch tail, so the branch must emit the censored TERMINAL_LEAVE
-      close at the same sequence position the collector did.
-
-    All four are expected to reconstruct exactly on a backend whose dense
-    kernels are batch-width invariant; this is regression protection for the
-    reconstruction and segment-ordering contracts, not a discovery test.
-    Where the backend measurably lacks that invariance, all four must
-    instead be refused by the engine's own unmodified guard.
-    """
-
-    arm, state, trajectory, ledgers, eligible = _held_out_fork_setup(device)
-    temporary_leave_time = int(ledgers[0].temporary_leave_time)
-    rejoin_time = int(ledgers[0].rejoin_time)
-    terminal_leave_time = int(ledgers[0].terminal_leave_time)
-    assert 0 < temporary_leave_time < rejoin_time < terminal_leave_time < HORIZON
-
-    def first(predicate) -> tuple[int, int, int]:
-        return next(row for row in eligible if predicate(row))
-
-    coordinates = {
-        "late_step": first(lambda row: row[0] >= HORIZON - 5),
-        "rejoin_step": first(lambda row: row[0] == rejoin_time),
-        "tail_spans_rejoin": first(
-            lambda row: row[0] < temporary_leave_time
-            and row[2] == int(ledgers[row[1]].temporary_key)
-        ),
-        "tail_spans_terminal_leave": first(
-            lambda row: row[0] < terminal_leave_time
-            and row[2] == int(ledgers[row[1]].terminal_key)
-        ),
+    chosen = sorted(keys)[:5]
+    chosen += [next(
+        row for cell, rows in sorted(cells.items())
+        if cell[0] == 0 and cell != anchor for row in sorted(rows)
+    )]
+    chosen += [next(
+        row for cell, rows in sorted(cells.items())
+        if cell[0] == 1 for row in sorted(rows)
+    )]
+    for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
+        while sum(_audit_action(inventory[row]) == action for row in chosen) < 2:
+            chosen.append(next(
+                row for row, trace in sorted(inventory.items())
+                if row not in chosen and _audit_action(trace) == action
+            ))
+    strata: dict[str, list[tuple[int, ...]]] = defaultdict(list)
+    for row in sorted(chosen):
+        strata[_audit_action(inventory[row])].append(row)
+    donor_for = {
+        recipient: rows[(index + 1) % len(rows)]
+        for rows in strata.values() for index, recipient in enumerate(rows)
     }
-    assert len(set(coordinates.values())) == 4
-
-    # The membership claims above are properties of the record, not of the
-    # selection comment: assert them so the coverage cannot go vacuous if
-    # the ledger contract moves.
-    active = trajectory.active_mask.detach().cpu()
-    step, env_index, key = coordinates["tail_spans_rejoin"]
-    assert bool(active[step, env_index, key])
-    assert not bool(active[rejoin_time - 1, env_index, key])
-    assert bool(active[rejoin_time, env_index, key])
-    step, env_index, key = coordinates["tail_spans_terminal_leave"]
-    assert bool(active[terminal_leave_time - 1, env_index, key])
-    assert not bool(active[terminal_leave_time, env_index, key])
-
-    if not dense_batch_invariant:
-        for coordinate in coordinates.values():
-            _assert_fork_refuses_without_batch_invariance(
-                arm, trajectory, state, device, coordinate
-            )
-        return
-
-    for label, (step, env_index, key) in coordinates.items():
-        diagnostics: dict = {}
-        result = fork_single_opportunity(
-            arm, trajectory, env_index=env_index, time=step, key=key,
-            device=device, state=state, diagnostics=diagnostics,
-        )
-        context = (label, step, env_index, key)
-        natural_errors = diagnostics["natural_branch_errors"]
-        prefix_errors = diagnostics["prefix_errors"]
-        assert natural_errors["outcome_mismatch"] == 0.0, (context, natural_errors)
-        assert natural_errors["discrete_mismatch"] == 0.0, (context, natural_errors)
-        assert natural_errors["continuous"] == 0.0, (context, natural_errors)
-        assert natural_errors["segment_mismatch"] == 0.0, (context, natural_errors)
-        assert prefix_errors["discrete_mismatch"] == 0.0, (context, prefix_errors)
-        assert prefix_errors["continuous"] == 0.0, (context, prefix_errors)
-        assert prefix_errors["segment_mismatch"] == 0.0, (context, prefix_errors)
-        assert diagnostics["natural_branch_segments"] == trajectory.segments, context
-        assert (
-            diagnostics["outcomes"][result["natural_action"]]
-            == trajectory.outcomes[env_index]
-        ), context
-        assert diagnostics["branch_steps"] == {
-            "KEEP": HORIZON - step, "RENEW": HORIZON - step,
-        }, context
-        assert diagnostics["coordinate"] == {
-            "time": step, "env_index": env_index, "key": key,
-        }
+    selected = []
+    for index, recipient in enumerate(sorted(chosen)):
+        batch_index, time, env_index, key, _epoch, _segment = recipient
+        donor = donor_for[recipient]
+        binding = {"recipient_key": list(recipient), "donor_key": list(donor)}
+        selected.append({
+            "audit_id": f"audit-{index}", "replicate": 0,
+            "batch_index": batch_index, "time": time,
+            "env_index": env_index, "key": key,
+            "natural_action": _audit_action(inventory[recipient]),
+            "trajectory": trajectories[batch_index],
+            "origin_state": origins[batch_index],
+            "recipient_key": list(recipient), "donor_key": list(donor),
+            "mapping_position": strata[_audit_action(inventory[recipient])].index(recipient),
+            "donor_candidate_u": inventory[donor]["candidate_u"],
+            "donor_candidate_z": inventory[donor]["candidate_z"],
+            "donor_binding": binding,
+            "selected_state": {"batch_index": batch_index, "time": time,
+                               "env_index": env_index, "key": key},
+        })
+    return {
+        "arm": arm, "origins": origins, "trajectories": trajectories,
+        "end_states": end_states,
+        "inventory": inventory, "selected": selected,
+        "batched": audit_opportunities_batched(arm, selected, device=device, debug=True),
+    }
 
 
-def test_fork_rejects_a_corrupted_branch(
-    device: torch.device, dense_batch_invariant: bool, monkeypatch,
+def test_three_branch_width16_batched_audit_matches_sequential_oracle(
+    device: torch.device, causal_audit_oracle_bundle: dict[str, Any],
 ) -> None:
-    """The natural-branch reproduction guard must actually be able to fail.
-
-    Every other fork test asserts that a correct branch is accepted, which
-    a guard that never fires would satisfy for free. Three corruptions of
-    the forced event are injected here, each on the same coordinate that
-    forks cleanly as the control:
-
-    * the assigned opportunity clock, which desynchronizes the focal
-      lifecycle's next request;
-    * the installed commitment mark, which changes the primitive logit bias
-      from the forked step onward;
-    * the recorded membership epoch of the forced RENEW's `SegmentRecord`,
-      which reaches *no* per-step tensor -- the focal cell of the per-step
-      `membership_epoch` grid is the excluded coordinate -- and is
-      therefore visible only to the order-sensitive `segments` comparison.
-
-    The third case is asserted to be caught by `segments` alone, with the
-    continuous error still exactly zero, because that is the guard the
-    other two do not exercise.
-
-    All three need an accepted control on the same coordinate, so they can
-    only be run on a dense-batch-invariant backend. Where that invariance is
-    absent the control itself is refused, and the only thing this test can
-    honestly assert is that refusal -- the corruption-rejection evidence is
-    unavailable on such a backend and is not simulated.
-    """
-
-    arm, state, trajectory, _ledgers, eligible = _held_out_fork_setup(device)
-    kinds = trajectory.event_kind.detach().cpu()
-    step, env_index, key = next(
-        row for row in eligible
-        if row[0] >= HORIZON - 5 and int(kinds[row]) == RENEW
-    )
-
-    if not dense_batch_invariant:
-        _assert_fork_refuses_without_batch_invariance(
-            arm, trajectory, state, device, (step, env_index, key)
+    bundle = causal_audit_oracle_bundle
+    selected, batched = bundle["selected"], bundle["batched"]
+    assert tuple(AUDIT_BRANCHES) == tuple(CAUSAL_AUDIT_BRANCHES)
+    assert {row["batch_index"] for row in selected} == {0, 1}
+    assert len({(row["batch_index"], row["time"]) for row in selected}) >= 3
+    cell_counts = Counter((row["batch_index"], row["time"]) for row in selected)
+    expected_calls = len(cell_counts) + sum(math.ceil(value / 5) for value in cell_counts.values())
+    assert 5 in cell_counts.values()
+    for row, packed in zip(selected, batched, strict=True):
+        diagnostics: dict[str, Any] = {}
+        sequential = audit_single_opportunity(
+            bundle["arm"], bundle["trajectories"][row["batch_index"]],
+            env_index=row["env_index"], time=row["time"], key=row["key"],
+            device=device, state=bundle["origins"][row["batch_index"]],
+            donor_candidate_u=row["donor_candidate_u"],
+            donor_candidate_z=row["donor_candidate_z"],
+            donor_binding=row["donor_binding"], deterministic=False,
+            diagnostics=diagnostics,
         )
-        return
-
-    # Control: uncorrupted, the same coordinate is accepted.
-    control: dict = {}
-    fork_single_opportunity(
-        arm, trajectory, env_index=env_index, time=step, key=key,
-        device=device, state=state, diagnostics=control,
-    )
-    assert control["natural_action"] == "RENEW"
-    assert control["natural_branch_errors"]["segment_mismatch"] == 0.0
-
-    pristine = event_held_commitment_link._apply_fork_event
-
-    def corrupted(offsets):
-        def wrapper(cursor, **kwargs):
-            kwargs["assigned_q"] += offsets.get("assigned_q", 0)
-            kwargs["record_epoch"] += offsets.get("record_epoch", 0)
-            if "new_z" in offsets:
-                kwargs["new_z"] = kwargs["new_z"] + offsets["new_z"]
-            return pristine(cursor, **kwargs)
-
-        return wrapper
-
-    for offsets in ({"assigned_q": 4}, {"new_z": 0.5}):
-        monkeypatch.setattr(
-            event_held_commitment_link, "_apply_fork_event", corrupted(offsets)
-        )
-        stale: dict = {"stale_key": "from a previous fork"}
-        with pytest.raises(RuntimeError, match="fork natural branch continuation"):
-            fork_single_opportunity(
-                arm, trajectory, env_index=env_index, time=step, key=key,
-                device=device, state=state, diagnostics=stale,
-            )
-        # A raise must not leave the caller reading a previous fork's values.
-        assert "stale_key" not in stale
-        assert stale["coordinate"] == {
-            "time": step, "env_index": env_index, "key": key,
+        assert set(packed["branches"]) == set(CAUSAL_AUDIT_BRANCHES)
+        assert packed["rng_contract_equal"] is True
+        assert packed["natural_errors"] == {
+            "discrete_mismatch": 0, "continuous_error": 0.0,
+            "segment_equal": True, "outcome_equal": True,
         }
-        monkeypatch.undo()
-
-    monkeypatch.setattr(
-        event_held_commitment_link, "_apply_fork_event",
-        corrupted({"record_epoch": 7}),
-    )
-    with pytest.raises(RuntimeError) as excinfo:
-        fork_single_opportunity(
-            arm, trajectory, env_index=env_index, time=step, key=key,
-            device=device, state=state,
-        )
-    message = str(excinfo.value)
-    assert "fork natural branch continuation mismatch" in message
-    # Caught by `segments` and by nothing else: every per-step tensor still
-    # reconstructs bitwise exactly under this corruption.
-    assert "'mismatched_fields': ('segments',)" in message, message
-    assert "'continuous': 0.0" in message, message
-    assert f"(time={step}, env_index={env_index}, key={key})" in message, message
+        for branch in CAUSAL_AUDIT_BRANCHES:
+            assert packed["branch_outcomes"][branch] == sequential["branch_outcomes"][branch]
+            assert packed["branches"][branch]["trajectory"].rewards.shape[1] == 16
+        telemetry = packed["telemetry"]
+        assert telemetry["selected_state_count"] == len(selected)
+        assert telemetry["collector_call_count"] == expected_calls
+        assert telemetry["serialized_size_bytes"] > 0
+        assert 0.0 <= telemetry["prefix_seconds"] <= telemetry["total_seconds"]
+        assert 0.0 <= telemetry["branch_seconds"] <= telemetry["total_seconds"]
+        assert packed["selected_state"] == row["selected_state"]
 
 
-def test_fork_rejects_a_collector_state_from_another_profile(
-    device: torch.device,
+def test_cyclic_donors_preserve_float32_multisets_and_frozen_additivity(
+    causal_audit_oracle_bundle: dict[str, Any],
 ) -> None:
-    """The fork must not silently rebuild a different task ledger.
-
-    An `EventTrajectory` does not record the profile it was collected
-    under, and the fork rebuilds every ledger from the caller's
-    `state.profile`/`state.seed_map`. Handing it the wrong profile yields a
-    different membership schedule and frontier priority order, i.e. a
-    reconstruction of a different episode. That must be named at the fork
-    boundary, not discovered as an opaque reconstruction mismatch after a
-    full rollout, and not left to chance.
-    """
-
-    arms, _, _ = initialize_arms(device)
-    arm = arms["EHC"]
-    state = make_training_state("EHC", 0, profile="held_out")
-    trajectory = collect_trajectory(
-        arm, state, device=device, episode_ids=tuple(range(16)),
-        deterministic=True, profile="held_out",
-    )
-    kinds = trajectory.event_kind.detach().cpu()
-    step, env_index, key = next(
-        tuple(int(v) for v in row)
-        for row in torch.nonzero(
-            kinds.eq(KEEP) | kinds.eq(RENEW), as_tuple=False
-        ).tolist()
-        if int(row[0]) >= 1
-    )
-
-    wrong_profile = make_training_state("EHC", 0, profile="train")
-    with pytest.raises(ValueError, match="disagrees with the collected trajectory"):
-        fork_single_opportunity(
-            arm, trajectory, env_index=env_index, time=step, key=key,
-            device=device, state=wrong_profile,
+    bundle = causal_audit_oracle_bundle
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in bundle["selected"]:
+        grouped[row["natural_action"]].append(row)
+        assert row["recipient_key"] != row["donor_key"]
+    for action, rows in grouped.items():
+        recipients = [bundle["inventory"][tuple(row["recipient_key"])] for row in rows]
+        donors = [bundle["inventory"][tuple(row["donor_key"])] for row in rows]
+        for field in ("candidate_u", "candidate_z"):
+            assert sorted(value[field]["bytes_b64"] for value in recipients) == sorted(
+                value[field]["bytes_b64"] for value in donors
+            ), (action, field)
+    for row, result in zip(bundle["selected"], bundle["batched"], strict=True):
+        outcomes = {
+            name: benchmark_runner._tracking_outcome_record(result["branch_outcomes"][name])
+            for name in CAUSAL_AUDIT_BRANCHES
+        }
+        contrasts = benchmark_runner._causal_contrasts(row["natural_action"], outcomes)
+        additivity = benchmark_runner._contrast_additivity_evidence(contrasts, outcomes)
+        held, deranged, candidate = (
+            outcomes[name]["utility"] for name in CAUSAL_AUDIT_BRANCHES
         )
-
-    tampered = make_training_state("EHC", 0, profile="held_out")
-    tampered.seed_map = dict(tampered.seed_map)
-    tampered.seed_map["mark"] += 1
-    with pytest.raises(ValueError, match="seed map is not the authoritative map"):
-        fork_single_opportunity(
-            arm, trajectory, env_index=env_index, time=step, key=key,
-            device=device, state=tampered,
+        if row["natural_action"] == "KEEP":
+            expected = (held - candidate, held - deranged, deranged - candidate)
+        else:
+            expected = (candidate - held, deranged - held, candidate - deranged)
+        assert tuple(contrasts[name] for name in ("total", "timing", "mark")) == expected
+        assert additivity == benchmark_runner._contrast_additivity_evidence(
+            contrasts, outcomes
         )
-
-    wrong_arm = make_training_state("DUM", 0, profile="held_out")
-    with pytest.raises(ValueError, match="fork state owns arm"):
-        fork_single_opportunity(
-            arm, trajectory, env_index=env_index, time=step, key=key,
-            device=device, state=wrong_arm,
-        )
+        assert additivity["residual"] <= additivity["bound"]
 
 
-def test_fork_generator_honors_the_requested_float_dtype() -> None:
-    """The fork RNG facade must draw in the precision it is asked for.
+def test_raw_pre_outcome_trace_is_minimal_and_origin_bound(
+    causal_audit_oracle_bundle: dict[str, Any],
+) -> None:
+    allowed = {"coordinate", "natural_kind", "installed_z", "candidate_u",
+               "candidate_z", "origin_binding"}
+    all_keys = set()
+    for batch_index, trajectory in enumerate(causal_audit_oracle_bundle["trajectories"]):
+        for trace in trajectory.raw_event_trace:
+            assert set(trace) == allowed
+            assert not {"reward", "outcome", "utility", "terminal", "future"} & set(trace)
+            for field in ("installed_z", "candidate_u", "candidate_z"):
+                payload = trace[field]
+                raw = base64.b64decode(payload["bytes_b64"], validate=True)
+                assert payload["shape"] == [MARK_DIM] and payload["dtype"] == "float32"
+                assert hashlib.sha256(raw).hexdigest() == payload["sha256"]
+            origin = trace["origin_binding"]
+            unsigned_row = deepcopy(trace)
+            unsigned_row["origin_binding"] = {
+                key: value for key, value in origin.items() if key != "binding_digest"
+            }
+            encoded = json.dumps(
+                unsigned_row, sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+            ).encode("utf-8")
+            assert origin["binding_digest"] == hashlib.sha256(
+                b"HMASD_RAW_EVENT_TRACE_V1\0" + encoded
+            ).hexdigest()
+            all_keys.add(_trace_key(batch_index, trace))
+    assert {tuple(row["recipient_key"]) for row in causal_audit_oracle_bundle["selected"]} <= all_keys
 
-    NumPy's float32 path consumes a different number of bits per variate
-    than its float64 path, so drawing in float64 and casting produces
-    *different values*, not a rounded copy of the same ones. The collector
-    draws its primitive uniform table as float32, so a facade that silently
-    drew float64 would not reproduce that stream once stochastic forking
-    exists. One fork stream is materialized exactly once and replayed, so a
-    second consumer asking for a different precision is a contradiction and
-    must raise rather than hand back the other precision's variates.
-    """
 
-    seed, count = 12345, 24
-
-    for dtype in (np.float32, np.float64):
-        view = _ForkStreamView(
-            {"primitive": _ForkStream("primitive", make_rng(seed, 7))}
-        )
-        drawn = _ForkGenerator(view, "primitive").random((3, 8), dtype=dtype)
-        reference = make_rng(seed, 7).random(count, dtype=dtype).reshape(3, 8)
-        assert drawn.dtype == np.dtype(dtype)
-        assert np.array_equal(drawn, reference)
-
-    # The two precisions really are different variates, so the equality
-    # above is not something a float64-and-cast implementation could pass.
-    narrow = _ForkGenerator(
-        _ForkStreamView({"primitive": _ForkStream("primitive", make_rng(seed, 7))}),
-        "primitive",
-    ).random(count, dtype=np.float32)
-    wide = make_rng(seed, 7).random(count)
-    assert float(np.max(np.abs(narrow.astype(np.float64) - wide))) > 1e-3
-
-    normal = _ForkGenerator(
-        _ForkStreamView({"mark": _ForkStream("mark", make_rng(seed, 9))}), "mark"
-    ).standard_normal((2, 4), dtype=np.float32)
-    assert np.array_equal(
-        normal, make_rng(seed, 9).standard_normal(8, dtype=np.float32).reshape(2, 4)
-    )
-
-    shared = _ForkStream("primitive", make_rng(seed, 7))
-    _ForkGenerator(_ForkStreamView({"primitive": shared}), "primitive").random(
-        4, dtype=np.float32
-    )
-    with pytest.raises(RuntimeError, match="dtype changed"):
-        _ForkGenerator(_ForkStreamView({"primitive": shared}), "primitive").random(
-            4, dtype=np.float64
-        )
-
+def test_no_active_legacy_or_scalar_audit_cuda_path() -> None:
+    legacy_prefix, legacy_schema = "fork" + "_", "natural" + "_fork"
+    production = [Path(event_held_commitment_link.__file__), Path(benchmark_runner.__file__),
+                  Path(__file__).parents[1] / "ha_ctse_process" / "noncalendar_commitment_testbed.py"]
+    for path in production:
+        source = path.read_text(encoding="utf-8")
+        # The frozen selection-stream namespace is preserved verbatim; it is
+        # RNG identity, not a callable API or evidence schema.
+        swept = source.replace('"' + legacy_schema + '_selection"', "")
+        assert legacy_prefix not in swept, path
+        assert legacy_schema not in swept, path
+    assert "audit_single_opportunity(" not in Path(benchmark_runner.__file__).read_text(encoding="utf-8")
+    import ast
+    tree = ast.parse(Path(event_held_commitment_link.__file__).read_text(encoding="utf-8"))
+    function = next(node for node in tree.body if isinstance(node, ast.FunctionDef)
+                    and node.name == "audit_opportunities_batched")
+    for loop in (node for node in ast.walk(function) if isinstance(node, (ast.For, ast.While))):
+        for call in (node for node in ast.walk(loop) if isinstance(node, ast.Call)):
+            if isinstance(call.func, ast.Attribute):
+                assert call.func.attr not in {"item", "numpy"}, ast.unparse(call)
 
 def test_candidate_retention_preserves_mark_rng_stream_position(
     device: torch.device,
@@ -2102,10 +1598,7 @@ def _synthetic_operational_records(
             "exposure": {"base": 1000, "event": 0 if arm == "OR" else 1000},
             "seed_map": authoritative_seed_map("train", 0),
             "parameter_counts": benchmark_runner._expected_parameter_counts(arm),
-            "roundtrip_errors": {
-                "model": 0.0, "base_optimizer": 0.0,
-                "event_optimizer": 0.0, "state": 0.0,
-            },
+            "restore_metrics": _zero_restore_metrics(),
             "checkpoint_sha256": "0" * 64,
         }
     replay = _synthetic_replay_record()
@@ -2461,6 +1954,14 @@ def _synthetic_operational_records(
             "episode_id": value, "utility": 0.0, "keep": 0, "renew": 0,
             "non_create": 0, "multi_opportunity_lifecycles": 0,
             "segments": [], "intervention": [],
+            "outcome": {
+                "tracking": 0.0, "completion": 0.0, "utility": 0.0,
+                "terminal_reward": 0.0, "tracking_quarter_units": 0,
+                "active_rows": 1, "completed_segments": 0,
+                "eligible_segments": 1,
+                "roster_sizes": [1] + [0] * (HORIZON - 1),
+                "reward_trace": [0.0] * HORIZON,
+            },
         }
         for value in range(256)
     ]
@@ -2505,6 +2006,9 @@ def _synthetic_operational_records(
                     "episodes_digest": _digest_json(
                         episodes[batch * 16:(batch + 1) * 16]
                     ),
+                    "raw_event_trace_binding": {
+                        "row_count": 0, "trace_sha256": _digest_json([]),
+                    },
                 })
             cells[(0, arm, cell)] = {
                 "artifact_schema": FORMAL_EVALUATION_ARTIFACT_SCHEMA,
@@ -2520,129 +2024,10 @@ def _synthetic_operational_records(
                 "checkpoint_origin": "update_250.pt",
                 "counts": {"episodes": 256, "horizon": 80, "batch_size": 16, "batches": 16},
                 "batches": batch_records,
-                "natural_fork": None,
+                "causal_audit": None,
                 "operational": True,
                 "episodes": deepcopy(episodes),
             }
-            if arm == "EHC" and cell == "held_out_stochastic":
-                eligible_keys = {
-                    action: [
-                        [0, index, index & 1, 1, index % 8, 0, 0, action]
-                        for index in range(NATURAL_FORK_QUOTA_PER_ACTION)
-                    ]
-                    for action in ("KEEP", "RENEW")
-                }
-                fork_rows = []
-                for action in ("KEEP", "RENEW"):
-                    for key_record in eligible_keys[action]:
-                        episode_id = 2 * key_record[1] + key_record[2]
-                        batch_index = episode_id // 16
-                        env_index = episode_id % 16
-                        cell_bindings = cells[(0, arm, cell)]["batches"][
-                            batch_index
-                        ]["rng_bindings"]
-                        fork_starts = {}
-                        fork_schedules = {}
-                        for name in RNG_NAMES:
-                            full = cell_bindings[name]["draw_schedule"]
-                            prefix = [
-                                entry for entry in full
-                                if int(entry["coordinates"].get("time", -1))
-                                < key_record[3]
-                            ]
-                            fork_starts[name] = (
-                                event_held_commitment_link.replay_rng_schedule_end_state(
-                                    cell_bindings[name]["start_state"], prefix,
-                                    seed=authoritative_seed_map("held_out", 0)[name],
-                                )
-                            )
-                            fork_schedules[name] = [
-                                entry for entry in full
-                                if int(entry["coordinates"].get("time", -1))
-                                >= key_record[3]
-                            ]
-                        fork_id = _digest_json(key_record)
-                        branch_bindings = {}
-                        stream_consumption = {}
-                        end_digests = None
-                        for branch_action in ("KEEP", "RENEW"):
-                            family, _ends, digests = binding_family(
-                                {
-                                    "domain": "stage2", "mode": "formal_evaluate",
-                                    "formal": True, "replicate": 0, "arm": "EHC",
-                                    "cell": "held_out_stochastic",
-                                    "batch": batch_index, "fork_id": fork_id,
-                                    "episode_id": episode_id,
-                                    "time": key_record[3], "key": key_record[4],
-                                    "membership_epoch": key_record[5],
-                                    "segment_id": key_record[6],
-                                    "natural_action": action,
-                                    "branch_action": branch_action,
-                                },
-                                authoritative_seed_map("held_out", 0),
-                                fork_starts, fork_schedules,
-                            )
-                            branch_bindings[branch_action] = family
-                            stream_consumption[branch_action] = {
-                                name: benchmark_runner._expected_fork_stream_consumption(
-                                    stream=name,
-                                    start_state=fork_starts[name],
-                                    schedule=fork_schedules[name],
-                                    seed=authoritative_seed_map("held_out", 0)[name],
-                                    env_index=env_index,
-                                )
-                                for name in benchmark_runner.FORK_STREAM_NAMES
-                            }
-                            end_digests = digests
-                        fork_rows.append({
-                            "replicate": key_record[0],
-                            "base_episode_id": key_record[1],
-                            "episode_id": episode_id,
-                            "sign_parity": key_record[2],
-                            "time": key_record[3],
-                            "key": key_record[4],
-                            "membership_epoch": key_record[5],
-                            "segment_id": key_record[6],
-                            "natural_action": action,
-                            "batch_index": batch_index,
-                            "env_index": env_index,
-                            "fork_id": fork_id,
-                            "keep_utility": 0.0,
-                            "renew_utility": 0.0,
-                            "natural_utility": 0.0,
-                            "advantage": 0.0,
-                            "natural_errors": {
-                                "discrete_mismatch": 0,
-                                "continuous_error": 0.0,
-                                "segment_equal": True,
-                                "outcome_equal": True,
-                            },
-                            "rng_bindings": branch_bindings,
-                            "stream_consumption": stream_consumption,
-                            "end_rng_digests": end_digests,
-                        })
-                cells[(0, arm, cell)]["natural_fork"] = {
-                    "schema": "event_held_commitment_link_g0.natural_fork.v5",
-                    "replicate": 0,
-                    "quota_per_action": NATURAL_FORK_QUOTA_PER_ACTION,
-                    "eligible_keys": eligible_keys,
-                    "selected_keys": deepcopy(eligible_keys),
-                    "execution": {
-                        "engine": "registered_width_batched_v1",
-                        "registered_width": 16,
-                        "selected_pairs": 2 * NATURAL_FORK_QUOTA_PER_ACTION,
-                        "collector_calls": math.ceil(
-                            2 * NATURAL_FORK_QUOTA_PER_ACTION / 8
-                        ),
-                    },
-                    "telemetry": {
-                        "elapsed_seconds": 1.0,
-                        "pairs_per_second": float(
-                            2 * NATURAL_FORK_QUOTA_PER_ACTION
-                        ),
-                    },
-                    "fork_rows": fork_rows,
-                }
     return training, cells
 
 
@@ -2767,7 +2152,7 @@ def test_fail_closed_operational_manifest_negatives() -> None:
     for family, mutation in (
         ("no_op", lambda value: value["replicates"]["0"]["updates"][0]["paired"].__setitem__("base_noop_error", 1.0)),
         ("exposure", lambda value: value["replicates"]["0"]["arms"]["EHC"]["exposure"].__setitem__("base", 999)),
-        ("resume", lambda value: value["replicates"]["0"]["arms"]["EHC"]["roundtrip_errors"].__setitem__("state", 1.0)),
+        ("resume", lambda value: value["replicates"]["0"]["arms"]["EHC"]["restore_metrics"]["continuous"].__setitem__("model", 1.0)),
     ):
         if family == "no_op":
             update = deepcopy(training["replicates"]["0"]["updates"][0])
@@ -2782,9 +2167,8 @@ def test_fail_closed_operational_manifest_negatives() -> None:
             mutation(wrapper)
             operational_valid = (
                 arm_entry["exposure"] == {"base": 1000, "event": 1000}
-                and all(
-                    float(value) <= 1e-7
-                    for value in arm_entry["roundtrip_errors"].values()
+                and benchmark_runner._restore_metrics_valid(
+                    arm_entry["restore_metrics"]
                 )
             )
         assert not operational_valid, family
@@ -3208,7 +2592,7 @@ def test_streamed_exercise_validates_one_verbose_artifact_at_a_time(
     assert valid and not errors
     assert maximum_live == 1 and not live
     assert set(compact["episodes"]) == {(0, arm) for arm in ARMS}
-    assert set(compact["fork_rows"]) == {0}
+    assert set(compact["audit_rows"]) == {0}
     with (streamed_exercise_root / "train_manifest.json").open(
         "r", encoding="utf-8"
     ) as handle:
@@ -3314,54 +2698,25 @@ def test_four_update_formal_trajectory_replays_and_streams_exactly(
         )
     } == {"update_1.json", "update_2.json", "update_3.json", "update_4.json"}
     assert all(
-        value <= 1e-7
+        benchmark_runner._restore_metrics_valid(
+            index["arms"][arm]["restore_metrics"]
+        )
         for arm in ARMS
-        for value in index["arms"][arm]["roundtrip_errors"].values()
     )
     assert not list(output_root.rglob("*.tmp"))
 
 
-def test_stage2_timing_is_descriptive_only_and_execution_is_strict() -> None:
-    _training, cells = _synthetic_operational_records(1)
-    cell = cells[(0, "EHC", "held_out_stochastic")]
-    record = deepcopy(cell["natural_fork"])
-
-    def valid(value: dict[str, Any]) -> bool:
-        return benchmark_runner._natural_fork_valid(
-            value, replicate=0, episodes=cell["episodes"],
-            cell_batches=cell["batches"],
-        )
-
-    assert valid(record)
-    for telemetry in (
-        None, {}, {"elapsed_seconds": float("nan")},
-        {"elapsed_seconds": -10.0, "pairs_per_second": float("inf")},
-    ):
-        mutated = deepcopy(record)
-        if telemetry is None:
-            mutated.pop("telemetry", None)
-        else:
-            mutated["telemetry"] = telemetry
-        assert valid(mutated)
-    for key, value in (
-        ("engine", "sequential"), ("registered_width", 8),
-        ("selected_pairs", 1), ("collector_calls", 1),
-    ):
-        mutated = deepcopy(record)
-        mutated["execution"][key] = value
-        assert not valid(mutated), key
-    for key in ("registered_width", "selected_pairs", "collector_calls"):
-        original = record["execution"][key]
-        for replacement in (True, float(original), str(original)):
-            mutated = deepcopy(record)
-            mutated["execution"][key] = replacement
-            assert not valid(mutated), (key, replacement)
-    for key in ("replicate", "quota_per_action"):
-        original = record[key]
-        for replacement in (True, float(original), str(original)):
-            mutated = deepcopy(record)
-            mutated[key] = replacement
-            assert not valid(mutated), (key, replacement)
+def test_causal_audit_telemetry_is_descriptive(
+    causal_audit_oracle_bundle: dict[str, Any],
+) -> None:
+    record = causal_audit_oracle_bundle["batched"][0]
+    outcomes = deepcopy(record["branch_outcomes"])
+    telemetry = record["telemetry"]
+    assert telemetry["selected_state_count"] == len(causal_audit_oracle_bundle["selected"])
+    assert telemetry["collector_call_count"] > 0 and telemetry["serialized_size_bytes"] > 0
+    mutated = deepcopy(record)
+    mutated["telemetry"] = {key: 0 for key in telemetry}
+    assert mutated["branch_outcomes"] == outcomes
 
 
 def test_formal_validator_rejects_exercise_identity(tmp_path: Any) -> None:
@@ -3402,22 +2757,22 @@ def _branch_inputs() -> dict[str, object]:
         "multi_opportunity_lifecycles": 250,
         "eligible_keep_rows": SUPPORT_FLOOR,
         "eligible_renew_rows": SUPPORT_FLOOR,
-        "natural_keep_rows_by_replicate": (
-            NATURAL_FORK_QUOTA_PER_ACTION,
-        ) * NATURAL_FORK_REPLICATES,
-        "natural_renew_rows_by_replicate": (
-            NATURAL_FORK_QUOTA_PER_ACTION,
-        ) * NATURAL_FORK_REPLICATES,
+        "causal_keep_rows_by_replicate": (
+            CAUSAL_AUDIT_QUOTA_PER_ACTION,
+        ) * CAUSAL_AUDIT_REPLICATES,
+        "causal_renew_rows_by_replicate": (
+            CAUSAL_AUDIT_QUOTA_PER_ACTION,
+        ) * CAUSAL_AUDIT_REPLICATES,
         "utility_ci": {
             "OR": (0.79, 0.81), "DUM": (0.79, 0.81), "EHC": (0.80, 0.84)
         },
         "g_ci": (0.11, 0.15),
         "k_bin_cis": ((0.11, 0.20), (0.11, 0.20), (0.05, 0.09)),
         "intervention_ci": (0.11, 0.20),
-        "a_keep_ci": (0.03, 0.09),
-        "a_renew_ci": (0.03, 0.09),
-        "a_keep_mean": 0.06,
-        "a_renew_mean": 0.06,
+        "c_total_keep_ci": (0.03, 0.09),
+        "c_total_renew_ci": (0.03, 0.09),
+        "c_total_keep_mean": 0.06,
+        "c_total_renew_mean": 0.06,
     }
 
 
@@ -3534,27 +2889,31 @@ def test_registered_contract_carries_execution_and_replacement_c() -> None:
     assert execution["torch_threads"] == torch.get_num_threads()
 
     thresholds = contract["thresholds"]
-    assert thresholds["a_keep_lcb"] == A_KEEP_LCB_FLOOR == 0.0
-    assert thresholds["a_renew_lcb"] == A_RENEW_LCB_FLOOR == 0.0
-    assert thresholds["a_keep_mean_floor"] == A_KEEP_MEAN_FLOOR == 0.02
-    assert thresholds["a_renew_mean_floor"] == A_RENEW_MEAN_FLOOR == 0.02
+    assert thresholds["c_total_keep_lcb"] == C_TOTAL_KEEP_LCB_FLOOR == 0.0
+    assert thresholds["c_total_renew_lcb"] == C_TOTAL_RENEW_LCB_FLOOR == 0.0
+    assert thresholds["c_total_keep_mean_floor"] == C_TOTAL_KEEP_MEAN_FLOOR == 0.02
+    assert thresholds["c_total_renew_mean_floor"] == C_TOTAL_RENEW_MEAN_FLOOR == 0.02
 
-    fork = contract["natural_fork"]
-    assert fork["actions"] == ["KEEP", "RENEW"] == list(NATURAL_FORK_ACTIONS)
-    assert fork["quota_per_action_per_replicate"] == 32 == NATURAL_FORK_QUOTA_PER_ACTION
-    assert fork["replicates"] == 5 == NATURAL_FORK_REPLICATES
-    assert fork["pairs"] == 320 == NATURAL_FORK_PAIRS
-    selection = fork["selection_stream"]
-    assert selection["namespace"] == NATURAL_FORK_SELECTION_NAMESPACE
+    audit = contract["causal_audit"]
+    assert audit["natural_actions"] == ["KEEP", "RENEW"] == list(
+        CAUSAL_AUDIT_NATURAL_ACTIONS
+    )
+    assert audit["branches"] == list(CAUSAL_AUDIT_BRANCHES)
+    assert audit["quota_per_action_per_replicate"] == 32 == CAUSAL_AUDIT_QUOTA_PER_ACTION
+    assert audit["replicates"] == 5 == CAUSAL_AUDIT_REPLICATES
+    assert audit["selected_rows"] == 320 == CAUSAL_AUDIT_SELECTED_ROWS
+    assert audit["branch_rows"] == 960 == CAUSAL_AUDIT_BRANCH_ROWS
+    selection = audit["selection_stream"]
+    assert selection["namespace"] == CAUSAL_AUDIT_SELECTION_NAMESPACE
     assert selection["base_seed"] == BOOTSTRAP_SEED
-    assert selection["coordinate"] == NATURAL_FORK_SELECTION_COORDINATE
+    assert selection["coordinate"] == CAUSAL_AUDIT_SELECTION_COORDINATE
     # A dedicated stream, not a re-use of an existing one: it must differ
     # from the bootstrap resample stream that shares its base seed, and from
     # every owned collector stream.
     assert set(RNG_NAMES) <= set(selection["distinct_from"])
     assert "bootstrap_resample" in selection["distinct_from"]
     selection_state = make_rng(
-        BOOTSTRAP_SEED, NATURAL_FORK_SELECTION_COORDINATE
+        BOOTSTRAP_SEED, CAUSAL_AUDIT_SELECTION_COORDINATE
     ).bit_generator.state
     assert selection_state != np.random.default_rng(
         BOOTSTRAP_SEED
@@ -3633,8 +2992,8 @@ def test_registered_backend_activation_never_falls_back(
         initialize_arms(torch.device(other))
 
 
-def test_replacement_c_requires_both_directions() -> None:
-    """Both `A_KEEP` and `A_RENEW` are required; one-sided is not a pass.
+def test_replacement_c_requires_both_natural_action_strata() -> None:
+    """Both natural-action total-consequence strata are required.
 
     Covers the equality boundaries on both the interval gate (`LCB > 0`, so
     `LCB == 0` does not pass; `UCB <= 0`, so `UCB == 0` confidently fails)
@@ -3644,17 +3003,17 @@ def test_replacement_c_requires_both_directions() -> None:
     base = _branch_inputs()
     assert select_result_branch(**base) == "COMMITMENT_SUPPORTED"
     passing = (0.03, 0.09)
-    crossing = (A_KEEP_LCB_FLOOR, 0.09)
-    failing = (-0.05, A_KEEP_LCB_FLOOR)
+    crossing = (C_TOTAL_KEEP_LCB_FLOOR, 0.09)
+    failing = (-0.05, C_TOTAL_KEEP_LCB_FLOOR)
     # One-sided pass: whichever direction is not established, the result is
     # never COMMITMENT_SUPPORTED.
     for one_sided in (
-        {"a_keep_ci": crossing, "a_renew_ci": passing},
-        {"a_keep_ci": passing, "a_renew_ci": crossing},
-        {"a_keep_ci": failing, "a_renew_ci": passing},
-        {"a_keep_ci": passing, "a_renew_ci": failing},
-        {"a_keep_mean": A_KEEP_MEAN_FLOOR - 0.001},
-        {"a_renew_mean": A_RENEW_MEAN_FLOOR - 0.001},
+        {"c_total_keep_ci": crossing, "c_total_renew_ci": passing},
+        {"c_total_keep_ci": passing, "c_total_renew_ci": crossing},
+        {"c_total_keep_ci": failing, "c_total_renew_ci": passing},
+        {"c_total_keep_ci": passing, "c_total_renew_ci": failing},
+        {"c_total_keep_mean": C_TOTAL_KEEP_MEAN_FLOOR - 0.001},
+        {"c_total_renew_mean": C_TOTAL_RENEW_MEAN_FLOOR - 0.001},
     ):
         assert select_result_branch(
             **(base | one_sided)
@@ -3662,74 +3021,74 @@ def test_replacement_c_requires_both_directions() -> None:
     # `LCB == 0` does not clear a strict `> 0` gate, and `UCB > 0` is not the
     # dual either, so the crossing case is underpowered, not a failure.
     assert select_result_branch(
-        **(base | {"a_keep_ci": crossing})
+        **(base | {"c_total_keep_ci": crossing})
     ) == "MIXED_UNDERPOWERED"
     assert select_result_branch(
-        **(base | {"a_renew_ci": crossing})
+        **(base | {"c_total_renew_ci": crossing})
     ) == "MIXED_UNDERPOWERED"
     # `UCB == 0` is the exact statistical dual and confidently fails.
     assert select_result_branch(
-        **(base | {"a_keep_ci": failing})
+        **(base | {"c_total_keep_ci": failing})
     ) == "REPRESENTATION_ONLY"
     assert select_result_branch(
-        **(base | {"a_renew_ci": failing})
+        **(base | {"c_total_renew_ci": failing})
     ) == "REPRESENTATION_ONLY"
     # The point floors are point estimates: exactly at the floor passes, and
     # missing the floor is underpowered rather than a confident failure,
     # because a point estimate carries no interval dual.
     assert select_result_branch(
         **(base | {
-            "a_keep_mean": A_KEEP_MEAN_FLOOR,
-            "a_renew_mean": A_RENEW_MEAN_FLOOR,
+            "c_total_keep_mean": C_TOTAL_KEEP_MEAN_FLOOR,
+            "c_total_renew_mean": C_TOTAL_RENEW_MEAN_FLOOR,
         })
     ) == "COMMITMENT_SUPPORTED"
     assert select_result_branch(
-        **(base | {"a_keep_mean": A_KEEP_MEAN_FLOOR - 0.001})
+        **(base | {"c_total_keep_mean": C_TOTAL_KEEP_MEAN_FLOOR - 0.001})
     ) == "MIXED_UNDERPOWERED"
     assert select_result_branch(
-        **(base | {"a_renew_mean": A_RENEW_MEAN_FLOOR - 0.001})
+        **(base | {"c_total_renew_mean": C_TOTAL_RENEW_MEAN_FLOOR - 0.001})
     ) == "MIXED_UNDERPOWERED"
-    for name in ("a_keep_ci", "a_renew_ci"):
+    for name in ("c_total_keep_ci", "c_total_renew_ci"):
         with pytest.raises(ValueError, match="inverted"):
             select_result_branch(**(base | {name: (0.09, 0.03)}))
         with pytest.raises(ValueError, match="lcb, ucb"):
             select_result_branch(**(base | {name: (0.03,)}))
 
 
-def test_natural_fork_quota_shortfall_is_non_identifiable_and_unpoolable() -> None:
+def test_causal_audit_quota_shortfall_is_non_identifiable_and_unpoolable() -> None:
     """A replicate short of the registered quota for either natural action
     makes the run non-identifiable, and no pooled total can rescue it.
 
     Pooling is not merely rejected, it is inexpressible: the branch selector
-    takes exactly `NATURAL_FORK_REPLICATES` per-replicate counts and no
+    takes exactly `CAUSAL_AUDIT_REPLICATES` per-replicate counts and no
     total, so there is no input through which a surplus in one replicate can
     cover a shortfall in another.
     """
 
     base = _branch_inputs()
-    quota = NATURAL_FORK_QUOTA_PER_ACTION
+    quota = CAUSAL_AUDIT_QUOTA_PER_ACTION
     assert select_result_branch(**base) == "COMMITMENT_SUPPORTED"
     for name in (
-        "natural_keep_rows_by_replicate", "natural_renew_rows_by_replicate"
+        "causal_keep_rows_by_replicate", "causal_renew_rows_by_replicate"
     ):
-        for short_index in range(NATURAL_FORK_REPLICATES):
-            counts = [quota] * NATURAL_FORK_REPLICATES
+        for short_index in range(CAUSAL_AUDIT_REPLICATES):
+            counts = [quota] * CAUSAL_AUDIT_REPLICATES
             counts[short_index] = quota - 1
             assert select_result_branch(
                 **(base | {name: tuple(counts)})
             ) == "BENCHMARK_NON_IDENTIFIABLE", (name, short_index)
             # A large surplus everywhere else -- a pooled total far above
             # 5*32 -- still does not rescue the short replicate.
-            surplus = [10 * quota] * NATURAL_FORK_REPLICATES
+            surplus = [10 * quota] * CAUSAL_AUDIT_REPLICATES
             surplus[short_index] = quota - 1
-            assert sum(surplus) > quota * NATURAL_FORK_REPLICATES
+            assert sum(surplus) > quota * CAUSAL_AUDIT_REPLICATES
             assert select_result_branch(
                 **(base | {name: tuple(surplus)})
             ) == "BENCHMARK_NON_IDENTIFIABLE", (name, short_index)
         # Exactly the quota everywhere is sufficient; the quota is a floor,
         # not a target, so a surplus is also fine.
         assert select_result_branch(
-            **(base | {name: (quota,) * NATURAL_FORK_REPLICATES})
+            **(base | {name: (quota,) * CAUSAL_AUDIT_REPLICATES})
         ) == "COMMITMENT_SUPPORTED"
         # A pooled scalar, or any count vector that is not one entry per
         # replicate, is rejected outright rather than interpreted.
@@ -3740,349 +3099,361 @@ def test_natural_fork_quota_shortfall_is_non_identifiable_and_unpoolable() -> No
     # so it cannot be masked by otherwise passing statistics.
     assert select_result_branch(
         **(base | {
-            "natural_keep_rows_by_replicate": (quota - 1,) * NATURAL_FORK_REPLICATES,
+            "causal_keep_rows_by_replicate": (quota - 1,) * CAUSAL_AUDIT_REPLICATES,
             "g_ci": (0.0, 0.01),
         })
     ) == "BENCHMARK_NON_IDENTIFIABLE"
 
 
-def test_stage2_natural_fork_evidence_is_recomputed_and_tamper_closed() -> None:
-    training, cells = _synthetic_operational_records(1)
-    clean_update = training["replicates"]["0"]["updates"][0]
-    assert _training_update_valid(clean_update, update=1, replicate=0)
-    clean_cell = cells[(0, "EHC", "held_out_stochastic")]
-    assert benchmark_runner._natural_fork_valid(
-        clean_cell["natural_fork"], replicate=0,
-        episodes=clean_cell["episodes"], cell_batches=clean_cell["batches"],
-    )
+# CAUSAL_AUDIT_EVIDENCE_TESTS
 
-    target_cell = cells[(0, "EHC", "held_out_stochastic")]
-    fork = deepcopy(target_cell["natural_fork"])
-    fork["selected_keys"]["KEEP"] = fork["selected_keys"]["KEEP"][:-1]
-    assert not benchmark_runner._natural_fork_valid(
-        fork, replicate=0,
-        episodes=target_cell["episodes"], cell_batches=target_cell["batches"],
-    )
-
-    wrong_advantage = deepcopy(target_cell["natural_fork"])
-    wrong_advantage["fork_rows"][0]["advantage"] = 1.0
-    assert not benchmark_runner._natural_fork_valid(
-        wrong_advantage, replicate=0,
-        episodes=target_cell["episodes"], cell_batches=target_cell["batches"],
-    )
-
-    wrong_seed = deepcopy(training["replicates"]["0"]["updates"][0])
-    wrong_seed["arms"]["EHC"]["seed_map"]["mark"] += 1
-    assert not _training_update_valid(
-        wrong_seed, update=1, replicate=0
-    )
-
-    for label, mutation in (
-        (
-            "training_rng_binding",
-            lambda train, _cells: train["replicates"]["0"]["updates"][0]["arms"]
-            ["EHC"]["owned_stream_digests"].__setitem__("mark", "e" * 64),
-        ),
-        (
-            "training_rng_format",
-            lambda train, _cells: train["replicates"]["0"]["updates"][0]["paired"]
-            ["dum_ehc_rng"]["mark"].__setitem__("right", "not-a-digest"),
-        ),
-        (
-            "evaluation_rng_binding",
-            lambda _train, values: values[(0, "EHC", "iid_stochastic")]["batches"]
-            [0]["owned_stream_digests"].__setitem__("mark", "e" * 64),
-        ),
-        (
-            "optimizer_nonfinite_gradient",
-            lambda train, _cells: train["replicates"]["0"]["updates"][0]["arms"]
-            ["EHC"]["optimizer"]["event_nonfinite_gradient_values"].__setitem__(0, 1),
-        ),
-        (
-            "optimizer_ownership",
-            lambda train, _cells: train["replicates"]["0"]["updates"][0]["arms"]
-            ["EHC"]["parameter_counts"].__setitem__("event_optimizer", 1583),
-        ),
-    ):
-        update_index = 0
-        corrupted_training = {
-            "replicates": {"0": {
-                "updates": [
-                    deepcopy(training["replicates"]["0"]["updates"][index])
-                    for index in range(update_index + 1)
-                ],
-                "arms": deepcopy(training["replicates"]["0"]["arms"]),
-            }}
-        }
-        corrupted_cells = {
-            (0, "EHC", "iid_stochastic"): {
-                "batches": [deepcopy(
-                    cells[(0, "EHC", "iid_stochastic")]["batches"][0]
-                )]
-            }
-        }
-        mutation(corrupted_training, corrupted_cells)
-        if label == "evaluation_rng_binding":
-            batch = corrupted_cells[(0, "EHC", "iid_stochastic")]["batches"][0]
-            valid_binding, ends = benchmark_runner._rng_bindings_valid(
-                batch["rng_bindings"],
-                expected_context={
-                    "domain": "evaluation", "mode": "formal_evaluate",
-                    "formal": True, "replicate": 0, "arm": "EHC",
-                    "cell": "iid_stochastic", "batch": 0,
-                },
-                seed_map=authoritative_seed_map("iid", 0),
-                expected_starts=benchmark_runner._initial_rng_states(
-                    authoritative_seed_map("iid", 0)
-                ),
-            )
-            assert valid_binding
-            assert not all(
-                batch["owned_stream_digests"][name] == _digest_json(ends[name])
-                for name in RNG_NAMES
-            ), label
-        else:
-            update = corrupted_training["replicates"]["0"]["updates"][update_index]
-            rng_starts = None
-            if update_index:
-                previous = training["replicates"]["0"]["updates"][0]
-                rng_starts = {
-                    arm: {
-                        name: previous["arms"][arm]["rng_bindings"][name]["end_state"]
-                        for name in RNG_NAMES
-                    }
-                    for arm in ARMS
-                }
-            assert not _training_update_valid(
-                update, update=update_index + 1, replicate=0,
-                rng_starts=rng_starts,
-            ), label
-
-    # The collector interface itself carries no factual-reference escape
-    # hatch: the natural continuation must execute the row script.
-    assert "event_references" not in collect_trajectory.__code__.co_varnames
-    assert "event_references" not in Path(
-        event_held_commitment_link.__file__
-    ).read_text(encoding="utf-8")
-
-    def assert_update_rejected(mutator) -> None:
-        corrupted = deepcopy(clean_update)
-        mutator(corrupted)
-        assert not _training_update_valid(
-            corrupted, update=1, replicate=0
-        )
-
-    def resign_binding(binding: dict[str, Any]) -> None:
-        unsigned = {
-            key: deepcopy(value) for key, value in binding.items()
-            if key != "binding_digest"
-        }
-        binding["binding_digest"] = _digest_json(unsigned)
-
-    def mutate_seed(update: dict[str, Any]) -> None:
-        binding = update["arms"]["EHC"]["rng_bindings"]["mark"]
-        binding["seed"] += 1
-        resign_binding(binding)
-
-    def mutate_context(update: dict[str, Any]) -> None:
-        binding = update["arms"]["EHC"]["rng_bindings"]["mark"]
-        binding["context"]["update"] = 2
-        resign_binding(binding)
-
-    def mutate_schedule_shape(update: dict[str, Any]) -> None:
-        evidence = update["arms"]["EHC"]
-        binding = evidence["rng_bindings"]["event"]
-        schedule = deepcopy(binding["draw_schedule"])
-        schedule[0]["shape"] = [1, schedule[0]["shape"][0]]
-        evidence["rng_bindings"]["event"] = (
-            event_held_commitment_link.make_rng_binding(
-                context=binding["context"], stream="event",
-                seed=binding["seed"], start_state=binding["start_state"],
-                draw_schedule=schedule,
-                expected_end_state=binding["end_state"],
-            )
-        )
-
-    def mutate_start_state(update: dict[str, Any]) -> None:
-        evidence = update["arms"]["EHC"]
-        binding = evidence["rng_bindings"]["event"]
-        start = deepcopy(binding["start_state"])
-        start["state"]["state"] += 1
-        schedule = binding["draw_schedule"]
-        end = event_held_commitment_link.replay_rng_schedule_end_state(
-            start, schedule, seed=binding["seed"]
-        )
-        evidence["rng_bindings"]["event"] = (
-            event_held_commitment_link.make_rng_binding(
-                context=binding["context"], stream="event", seed=binding["seed"],
-                start_state=start, draw_schedule=schedule,
-                expected_end_state=end,
-            )
-        )
-        evidence["owned_stream_digests"]["event"] = _digest_json(end)
-
-    def mutate_draw_digest(update: dict[str, Any]) -> None:
-        binding = update["arms"]["EHC"]["rng_bindings"]["mark"]
-        binding["draw_bytes_digest"] = "f" * 64
-        resign_binding(binding)
-
-    def mutate_all_convenience_digests(update: dict[str, Any]) -> None:
-        for arm in ("DUM", "EHC"):
-            update["arms"][arm]["owned_stream_digests"]["mark"] = "e" * 64
-        update["paired"]["dum_ehc_rng"]["mark"] = {
-            "left": "e" * 64, "right": "e" * 64,
-        }
-
-    def mutate_request_coordinates(update: dict[str, Any]) -> None:
-        """Re-sign all schedule envelopes while the call-site trace stays fixed."""
-
-        evidence = update["arms"]["EHC"]
-        for name in ("event", "mark", "opportunity"):
-            binding = evidence["rng_bindings"][name]
-            schedule = deepcopy(binding["draw_schedule"])
-            schedule[0]["coordinates"]["requests"][0][1] = (
-                int(schedule[0]["coordinates"]["requests"][0][1]) + 1
-            ) % MAX_LIFECYCLES
-            rebuilt = event_held_commitment_link.make_rng_binding(
-                context=binding["context"], stream=name, seed=binding["seed"],
-                start_state=binding["start_state"], draw_schedule=schedule,
-                expected_end_state=binding["end_state"],
-            )
-            evidence["rng_bindings"][name] = rebuilt
-            evidence["owned_stream_digests"][name] = _digest_json(
-                rebuilt["end_state"]
-            )
-        update["paired"]["dum_ehc_rng"] = {
-            name: {
-                "left": update["arms"]["DUM"]["owned_stream_digests"][name],
-                "right": evidence["owned_stream_digests"][name],
-            }
-            for name in RNG_NAMES
-        }
-
-    for mutator in (
-        mutate_seed, mutate_context, mutate_schedule_shape,
-        mutate_start_state, mutate_draw_digest, mutate_all_convenience_digests,
-        mutate_request_coordinates,
-    ):
-        assert_update_rejected(mutator)
-
-    fork_record = cells[(0, "EHC", "held_out_stochastic")]["natural_fork"]
-    corrupted_fork = deepcopy(fork_record)
-    binding = corrupted_fork["fork_rows"][0]["rng_bindings"]["KEEP"]["mark"]
-    binding["context"]["branch_action"] = "RENEW"
-    resign_binding(binding)
-    assert not benchmark_runner._natural_fork_valid(
-        corrupted_fork, replicate=0,
-        episodes=cells[(0, "EHC", "held_out_stochastic")]["episodes"],
-        cell_batches=cells[(0, "EHC", "held_out_stochastic")]["batches"],
-    )
-
-    # Add one fully re-signed primitive draw to both branches.  The forged
-    # record co-changes the consumed position, consumed-byte digest, terminal
-    # state, binding draw/end/digest envelope, and row convenience digest.
-    # Independent replay from the cell's fixed tail must still reject it.
-    consumed_tamper = deepcopy(fork_record)
-    consumed_row = consumed_tamper["fork_rows"][0]
-    seed_map = authoritative_seed_map("held_out", 0)
-    episode_ids = cells[(0, "EHC", "held_out_stochastic")]["batches"][
-        consumed_row["batch_index"]
-    ]["episode_ids"]
-    extra = {
-        "stream": "primitive", "operation": "random", "dtype": "float32",
-        "shape": [16, MAX_LIFECYCLES],
-        "coordinates": {
-            "time": HORIZON, "episode_ids": episode_ids,
-            "frontier_orders": [[] for _ in episode_ids],
+def _zero_restore_metrics() -> dict[str, Any]:
+    return {
+        "continuous": {"model": 0.0, "base_optimizer": 0.0, "event_optimizer": 0.0},
+        "discrete": {"training_state": 0},
+        "runtime_rng": {
+            "python": 0, "numpy_global": 0, "torch_cpu": 0,
+            "torch_cuda": {str(index): 0 for index in range(torch.cuda.device_count())},
         },
+        "owned_rng": {name: 0 for name in RNG_NAMES},
     }
-    for branch_action in ("KEEP", "RENEW"):
-        binding = consumed_row["rng_bindings"][branch_action]["primitive"]
-        schedule = deepcopy(binding["draw_schedule"]) + [deepcopy(extra)]
-        end = event_held_commitment_link.replay_rng_schedule_end_state(
-            binding["start_state"], schedule, seed=seed_map["primitive"]
+
+
+def test_strict_restore_metrics_cover_every_rng_owner_and_reject_bad_leaves() -> None:
+    clean = _zero_restore_metrics()
+    assert benchmark_runner._restore_metrics_valid(clean)
+    leaf_paths = [
+        ("continuous", name) for name in clean["continuous"]
+    ] + [("discrete", "training_state")] + [
+        ("runtime_rng", name) for name in ("python", "numpy_global", "torch_cpu")
+    ] + [
+        ("runtime_rng", "torch_cuda", name) for name in clean["runtime_rng"]["torch_cuda"]
+    ] + [("owned_rng", name) for name in RNG_NAMES]
+    assert {path[-1] for path in leaf_paths if path[0] == "owned_rng"} == set(RNG_NAMES)
+    for path in leaf_paths:
+        for bad in (True, float("nan"), float("inf"), -1e-12, 1.0000001e-7):
+            mutated = deepcopy(clean)
+            target = mutated
+            for key in path[:-1]:
+                target = target[key]
+            target[path[-1]] = bad
+            assert not benchmark_runner._restore_metrics_valid(mutated), (path, bad)
+        missing = deepcopy(clean)
+        target = missing
+        for key in path[:-1]:
+            target = target[key]
+        target.pop(path[-1])
+        assert not benchmark_runner._restore_metrics_valid(missing), path
+
+
+def _trace_inventory_inputs(bundle: dict[str, Any]) -> tuple[list[Any], list[Any]]:
+    raw, batches = [], []
+    for batch_index, trajectory in enumerate(bundle["trajectories"]):
+        rows = list(trajectory.raw_event_trace)
+        raw.extend({"batch_index": batch_index, "row": deepcopy(row)} for row in rows)
+        batches.append({
+            "episode_ids": list(trajectory.ledger_ids),
+            "rng_evidence": {"ledgers": deepcopy(trajectory.rng_audit["ledgers"])},
+            "raw_event_trace_binding": {
+                "row_count": len(rows), "trace_sha256": _digest_json(rows),
+            },
+        })
+    return raw, batches
+
+
+@pytest.fixture(scope="module")
+def causal_audit_artifact_bundle(
+    causal_audit_oracle_bundle: dict[str, Any],
+) -> dict[str, Any]:
+    source = causal_audit_oracle_bundle
+    episode_rows: list[dict[str, Any]] = []
+    cell_batches: list[dict[str, Any]] = []
+    audit_batches: list[tuple[Any, Any, Any]] = []
+    for batch_index, (trajectory, origin, end_state) in enumerate(zip(
+        source["trajectories"], source["origins"], source["end_states"], strict=True,
+    )):
+        rows, _counts = benchmark_runner._trajectory_episode_rows(
+            trajectory, source["arm"], compute_intervention=False,
         )
-        rebuilt = event_held_commitment_link.make_rng_binding(
-            context=binding["context"], stream="primitive",
-            seed=seed_map["primitive"], start_state=binding["start_state"],
-            draw_schedule=schedule, expected_end_state=end,
+        episode_rows.extend(rows)
+        cell_batches.append({
+            "episode_ids": list(trajectory.ledger_ids),
+            "rng_evidence": deepcopy(trajectory.rng_audit),
+            "rng_bindings": benchmark_runner._collection_rng_bindings(
+                context={
+                    "domain": "evaluation",
+                    "mode": "formal_path_exercise_evaluate",
+                    "formal": False,
+                    "replicate": 0,
+                    "arm": "EHC",
+                    "cell": "held_out_stochastic",
+                    "batch": batch_index,
+                },
+                seed_map=origin.seed_map,
+                start_states=event_held_commitment_link.owned_rng_states(origin),
+                end_states=end_state,
+                trajectory=trajectory,
+                deterministic=False,
+            ),
+            "raw_event_trace_binding": {
+                "row_count": len(trajectory.raw_event_trace),
+                "trace_sha256": _digest_json(list(trajectory.raw_event_trace)),
+            },
+        })
+        audit_batches.append((trajectory, origin, end_state))
+
+    captured: list[list[dict[str, Any]]] = []
+    original = benchmark_runner.audit_opportunities_batched
+
+    def capture_engine(*args: Any, **kwargs: Any) -> list[dict[str, Any]]:
+        result = original(*args, **kwargs)
+        captured.append(deepcopy(result))
+        return result
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(benchmark_runner, "audit_opportunities_batched", capture_engine)
+        artifact = benchmark_runner._collect_causal_audit_evidence(
+            source["arm"], replicate=0, batches=audit_batches,
+            episode_rows=episode_rows, device=next(source["arm"].parameters()).device,
+            formal=False, mode="formal_path_exercise_evaluate",
         )
-        consumed_row["rng_bindings"][branch_action]["primitive"] = rebuilt
-        consumed_row["stream_consumption"][branch_action]["primitive"] = (
-            benchmark_runner._expected_fork_stream_consumption(
-                stream="primitive", start_state=binding["start_state"],
-                schedule=schedule, seed=seed_map["primitive"],
-                env_index=consumed_row["env_index"],
-            )
+    assert len(captured) == 1
+    assert benchmark_runner._causal_audit_valid(
+        artifact, replicate=0, episodes=episode_rows, cell_batches=cell_batches,
+        formal=False, mode="formal_path_exercise_evaluate",
+    )
+    return {
+        "artifact": artifact,
+        "cell_batches": cell_batches,
+        "audit_batches": audit_batches,
+        "episode_rows": episode_rows,
+        "engine_results": captured[0],
+        "arm": source["arm"],
+    }
+
+
+def _replace_trace_payload_and_resign(
+    artifact: dict[str, Any], cell_batches: list[dict[str, Any]],
+    *, key: tuple[Any, ...], field: str,
+) -> None:
+    target_entry = next(
+        entry for entry in artifact["raw_event_trace"]
+        if (
+            0,
+            cell_batches[entry["batch_index"]]["episode_ids"][
+                entry["row"]["coordinate"]["env_index"]
+            ] // 2,
+            cell_batches[entry["batch_index"]]["episode_ids"][
+                entry["row"]["coordinate"]["env_index"]
+            ] & 1,
+            entry["row"]["coordinate"]["time"],
+            entry["row"]["coordinate"]["key"],
+            entry["row"]["coordinate"]["membership_epoch"],
+            entry["row"]["coordinate"]["segment_id"],
+            "KEEP" if entry["row"]["natural_kind"] == KEEP else "RENEW",
+        ) == key
+    )
+    payload = target_entry["row"][field]
+    values = np.frombuffer(
+        base64.b64decode(payload["bytes_b64"], validate=True), dtype=np.float32,
+    ).copy()
+    values[0] = np.nextafter(values[0], np.float32(np.inf), dtype=np.float32)
+    target_entry["row"][field] = benchmark_runner._float32_payload(values)
+    origin = target_entry["row"]["origin_binding"]
+    unsigned = deepcopy(target_entry["row"])
+    unsigned["origin_binding"] = {
+        name: value for name, value in origin.items() if name != "binding_digest"
+    }
+    encoded = json.dumps(
+        unsigned, sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    ).encode("utf-8")
+    origin["binding_digest"] = hashlib.sha256(
+        b"HMASD_RAW_EVENT_TRACE_V1\0" + encoded
+    ).hexdigest()
+    batch_index = target_entry["batch_index"]
+    batch_rows = [
+        entry["row"] for entry in artifact["raw_event_trace"]
+        if entry["batch_index"] == batch_index
+    ]
+    cell_batches[batch_index]["raw_event_trace_binding"] = {
+        "row_count": len(batch_rows), "trace_sha256": _digest_json(batch_rows),
+    }
+
+
+def _rederive_causal_payload_records(
+    artifact: dict[str, Any], cell_batches: list[dict[str, Any]],
+) -> None:
+    inventory = benchmark_runner._causal_audit_trace_inventory(
+        artifact["raw_event_trace"], replicate=0, cell_batches=cell_batches,
+    )
+    assert inventory is not None
+    donor_by_key: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
+    records: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
+        lookup = {
+            benchmark_runner._causal_audit_key(row): row for row in inventory[action]
+        }
+        chosen = [lookup[tuple(key)] for key in artifact["selected_keys"][action]]
+        chosen.sort(key=benchmark_runner._causal_audit_key)
+        for position, recipient in enumerate(chosen):
+            recipient_key = benchmark_runner._causal_audit_key(recipient)
+            records[recipient_key] = recipient
+            donor_by_key[recipient_key] = (position, chosen[(position + 1) % len(chosen)])
+    for row in artifact["audit_rows"]:
+        key = benchmark_runner._causal_audit_key(row)
+        position, donor = donor_by_key[key]
+        material = benchmark_runner._causal_audit_donor_material(
+            records[key], donor, position,
         )
-    consumed_row["end_rng_digests"]["primitive"] = _digest_json(end)
-    assert not benchmark_runner._natural_fork_valid(
-        consumed_tamper, replicate=0,
-        episodes=cells[(0, "EHC", "held_out_stochastic")]["episodes"],
-        cell_batches=cells[(0, "EHC", "held_out_stochastic")]["batches"],
+        row["donor"] = {
+            "mapping_position": position,
+            "donor_key": material["donor_key"],
+            "candidate_u": material["candidate_u"],
+            "candidate_z": material["candidate_z"],
+            "candidate_digest": material["candidate_digest"],
+        }
+        row["executed_branch_evidence"] = benchmark_runner._causal_audit_branch_evidence(
+            records[key], donor, position,
+        )
+    artifact["telemetry"]["serialized_size_bytes"] = len(json.dumps(
+        {"raw_event_trace": artifact["raw_event_trace"],
+         "audit_rows": artifact["audit_rows"]},
+        sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    ).encode("utf-8"))
+
+
+def test_trace_inventory_and_coherently_resigned_tampering_fail_closed(
+    causal_audit_oracle_bundle: dict[str, Any],
+) -> None:
+    raw, batches = _trace_inventory_inputs(causal_audit_oracle_bundle)
+    inventory = benchmark_runner._causal_audit_trace_inventory(
+        raw, replicate=0, cell_batches=batches
+    )
+    assert inventory is not None
+    assert all(inventory[action] for action in CAUSAL_AUDIT_NATURAL_ACTIONS)
+
+    duplicated = deepcopy(raw)
+    duplicated.append(deepcopy(duplicated[0]))
+    batch_index = duplicated[0]["batch_index"]
+    rows = [entry["row"] for entry in duplicated if entry["batch_index"] == batch_index]
+    duplicated_batches = deepcopy(batches)
+    duplicated_batches[batch_index]["raw_event_trace_binding"] = {
+        "row_count": len(rows), "trace_sha256": _digest_json(rows),
+    }
+    assert benchmark_runner._causal_audit_trace_inventory(
+        duplicated, replicate=0, cell_batches=duplicated_batches
+    ) is None
+
+    rebound = deepcopy(raw)
+    target = rebound[0]["row"]
+    target["origin_binding"]["episode_id"] += 1
+    unsigned = deepcopy(target)
+    unsigned["origin_binding"].pop("binding_digest")
+    encoded = json.dumps(unsigned, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+    target["origin_binding"]["binding_digest"] = hashlib.sha256(
+        b"HMASD_RAW_EVENT_TRACE_V1\0" + encoded
+    ).hexdigest()
+    rebound_batches = deepcopy(batches)
+    rows = [entry["row"] for entry in rebound if entry["batch_index"] == batch_index]
+    rebound_batches[batch_index]["raw_event_trace_binding"] = {
+        "row_count": len(rows), "trace_sha256": _digest_json(rows),
+    }
+    assert benchmark_runner._causal_audit_trace_inventory(
+        rebound, replicate=0, cell_batches=rebound_batches
+    ) is None
+
+
+def test_tracking_outcome_recomputation_rejects_utility_outcome_cotampering(
+    causal_audit_oracle_bundle: dict[str, Any],
+) -> None:
+    outcome = causal_audit_oracle_bundle["batched"][0]["branch_outcomes"][
+        CAUSAL_AUDIT_BRANCHES[0]
+    ]
+    clean = benchmark_runner._tracking_outcome_record(outcome)
+    assert benchmark_runner._tracking_outcome_valid(clean)
+    for field in (
+        "tracking", "completion", "utility", "terminal_reward",
+        "tracking_quarter_units", "active_rows", "completed_segments",
+        "eligible_segments", "roster_sizes", "reward_trace",
+    ):
+        mutated = deepcopy(clean)
+        if field == "roster_sizes":
+            mutated[field][0] = -1
+        elif isinstance(mutated[field], list):
+            mutated[field][-1] = mutated[field][-1] + 1
+        else:
+            mutated[field] = mutated[field] + 1
+        assert not benchmark_runner._tracking_outcome_valid(mutated), field
+    cotampered = deepcopy(clean)
+    cotampered["utility"] += 0.125
+    cotampered["terminal_reward"] = cotampered["utility"]
+    cotampered["reward_trace"][-1] = cotampered["utility"]
+    assert not benchmark_runner._tracking_outcome_valid(cotampered)
+
+    coordinated = deepcopy(clean)
+    coordinated["tracking_quarter_units"] *= 2
+    coordinated["active_rows"] *= 2
+    assert (
+        coordinated["tracking_quarter_units"]
+        / (4.0 * coordinated["active_rows"])
+        == clean["tracking"]
+    )
+    assert not benchmark_runner._tracking_outcome_valid(coordinated)
+
+
+@pytest.mark.parametrize("field", ["installed_z", "candidate_u"])
+def test_coherent_selected_and_donor_payload_redigests_retain_old_rng_and_fail(
+    causal_audit_artifact_bundle: dict[str, Any], field: str,
+) -> None:
+    artifact = deepcopy(causal_audit_artifact_bundle["artifact"])
+    cell_batches = deepcopy(causal_audit_artifact_bundle["cell_batches"])
+    if field == "installed_z":
+        target_key = tuple(artifact["selected_keys"]["KEEP"][0])
+        affected_row = next(
+            row for row in artifact["audit_rows"]
+            if benchmark_runner._causal_audit_key(row) == target_key
+        )
+    else:
+        target_key = tuple(artifact["audit_rows"][0]["donor"]["donor_key"])
+        affected_row = artifact["audit_rows"][0]
+    old_context_digest = affected_row["rng_bindings"][
+        CAUSAL_AUDIT_BRANCHES[0]
+    ][RNG_NAMES[0]]["context"]["executed_branch_evidence_digest"]
+    _replace_trace_payload_and_resign(
+        artifact, cell_batches, key=target_key, field=field,
+    )
+    _rederive_causal_payload_records(artifact, cell_batches)
+    changed_row = next(
+        row for row in artifact["audit_rows"]
+        if benchmark_runner._causal_audit_key(row)
+        == benchmark_runner._causal_audit_key(affected_row)
+    )
+    assert old_context_digest != _digest_json(changed_row["executed_branch_evidence"])
+    assert not benchmark_runner._causal_audit_valid(
+        artifact, replicate=0,
+        episodes=causal_audit_artifact_bundle["episode_rows"],
+        cell_batches=cell_batches, formal=False,
+        mode="formal_path_exercise_evaluate",
     )
 
-    def resign_pass(record: dict[str, Any]) -> None:
-        unsigned = {
-            key: deepcopy(value) for key, value in record.items()
-            if key != "record_digest"
-        }
-        record["record_digest"] = _digest_json(unsigned)
 
-    optimizer_mutations = []
-    def nonfinite_loss(record):
-        record["raw_loss"] = float("nan"); resign_pass(record)
-    optimizer_mutations.append(nonfinite_loss)
-    def wrong_norm(record):
-        record["unclipped_norm"] += 1.0; resign_pass(record)
-    optimizer_mutations.append(wrong_norm)
-    def wrong_squared(record):
-        record["parameters"][0]["squared_l2"] += 1.0; resign_pass(record)
-    optimizer_mutations.append(wrong_squared)
-    def wrong_digest(record):
-        record["parameters"][0]["preclip_gradient_digest"] = "f" * 64
-        resign_pass(record)
-    optimizer_mutations.append(wrong_digest)
-    def wrong_owner(record):
-        record["parameters"][0]["name"] = "foreign.weight"; resign_pass(record)
-    optimizer_mutations.append(wrong_owner)
-    def wrong_step(record):
-        record["step_after"] += 1; resign_pass(record)
-    optimizer_mutations.append(wrong_step)
-    def coordinated_derived_gradient(record):
-        parameter = record["parameters"][0]
-        parameter["squared_l2"] += 4.0
-        parameter["preclip_gradient_digest"] = "e" * 64
-        record["unclipped_norm"] = math.sqrt(sum(
-            float(value["squared_l2"]) for value in record["parameters"]
-        ))
-        record["clip_coefficient"] = min(
-            1.0, 0.5 / (record["unclipped_norm"] + 1e-6)
-        )
-        resign_pass(record)
-    optimizer_mutations.append(coordinated_derived_gradient)
-    def raw_loss_without_components(record):
-        record["raw_loss"] += 1.0
-        resign_pass(record)
-    optimizer_mutations.append(raw_loss_without_components)
-    def wrong_payload_length(record):
-        record["parameters"][0]["gradient_payload"]["uncompressed_nbytes"] += 4
-        resign_pass(record)
-    optimizer_mutations.append(wrong_payload_length)
-    def wrong_payload_dtype(record):
-        record["parameters"][0]["gradient_payload"]["dtype"] = "<f8"
-        resign_pass(record)
-    optimizer_mutations.append(wrong_payload_dtype)
-    def wrong_payload_shape(record):
-        payload = record["parameters"][0]["gradient_payload"]
-        payload["shape"] = [record["parameters"][0]["numel"]]
-        resign_pass(record)
-    optimizer_mutations.append(wrong_payload_shape)
-    for mutation in optimizer_mutations:
-        assert_update_rejected(
-            lambda update, mutation=mutation: mutation(
-                update["arms"]["EHC"]["optimizer"]["base_passes"][0]
-            )
+def test_engine_reported_collector_count_mismatch_fails_before_publication(
+    causal_audit_artifact_bundle: dict[str, Any], monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    stale = deepcopy(causal_audit_artifact_bundle["engine_results"])
+    for result in stale:
+        result["telemetry"]["collector_call_count"] += 1
+    monkeypatch.setattr(
+        benchmark_runner, "audit_opportunities_batched",
+        lambda *_args, **_kwargs: deepcopy(stale),
+    )
+    with pytest.raises(RuntimeError, match="collector-call telemetry mismatch"):
+        benchmark_runner._collect_causal_audit_evidence(
+            causal_audit_artifact_bundle["arm"], replicate=0,
+            batches=causal_audit_artifact_bundle["audit_batches"],
+            episode_rows=causal_audit_artifact_bundle["episode_rows"],
+            device=next(causal_audit_artifact_bundle["arm"].parameters()).device,
+            formal=False, mode="formal_path_exercise_evaluate",
         )
 
 
@@ -4106,8 +3477,8 @@ def _independent_branch_predicates(inputs: dict[str, Any]) -> dict[str, bool]:
     k_bins = inputs["k_bin_cis"]
     intervention = inputs["intervention_ci"]
     gain = inputs["g_ci"]
-    keep_lcb, keep_ucb = inputs["a_keep_ci"]
-    renew_lcb, renew_ucb = inputs["a_renew_ci"]
+    keep_lcb, keep_ucb = inputs["c_total_keep_ci"]
+    renew_lcb, renew_ucb = inputs["c_total_renew_ci"]
     access_established = (
         max(interval[1] for interval in utility.values()) >= ACCESS_FLOOR
         and max(interval[0] for interval in utility.values()) >= ACCESS_FLOOR
@@ -4115,16 +3486,16 @@ def _independent_branch_predicates(inputs: dict[str, Any]) -> dict[str, bool]:
     passes = (
         sum(ci[0] > LIFETIME_BIN_THRESHOLD for ci in k_bins) >= 2
         and intervention[0] > INTERVENTION_THRESHOLD
-        and keep_lcb > A_KEEP_LCB_FLOOR
-        and renew_lcb > A_RENEW_LCB_FLOOR
-        and inputs["a_keep_mean"] >= A_KEEP_MEAN_FLOOR
-        and inputs["a_renew_mean"] >= A_RENEW_MEAN_FLOOR
+        and keep_lcb > C_TOTAL_KEEP_LCB_FLOOR
+        and renew_lcb > C_TOTAL_RENEW_LCB_FLOOR
+        and inputs["c_total_keep_mean"] >= C_TOTAL_KEEP_MEAN_FLOOR
+        and inputs["c_total_renew_mean"] >= C_TOTAL_RENEW_MEAN_FLOOR
     )
     confidently_fails = (
         sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in k_bins) < 2
         or intervention[1] <= INTERVENTION_THRESHOLD
-        or keep_ucb <= A_KEEP_LCB_FLOOR
-        or renew_ucb <= A_RENEW_LCB_FLOOR
+        or keep_ucb <= C_TOTAL_KEEP_LCB_FLOOR
+        or renew_ucb <= C_TOTAL_RENEW_LCB_FLOOR
     )
     return {
         "INVALID_OPERATIONAL": not inputs["operational_valid"],
@@ -4133,10 +3504,10 @@ def _independent_branch_predicates(inputs: dict[str, Any]) -> dict[str, bool]:
             or inputs["multi_opportunity_lifecycles"] < 250
             or inputs["eligible_keep_rows"] < SUPPORT_FLOOR
             or inputs["eligible_renew_rows"] < SUPPORT_FLOOR
-            or min(inputs["natural_keep_rows_by_replicate"])
-            < NATURAL_FORK_QUOTA_PER_ACTION
-            or min(inputs["natural_renew_rows_by_replicate"])
-            < NATURAL_FORK_QUOTA_PER_ACTION
+            or min(inputs["causal_keep_rows_by_replicate"])
+            < CAUSAL_AUDIT_QUOTA_PER_ACTION
+            or min(inputs["causal_renew_rows_by_replicate"])
+            < CAUSAL_AUDIT_QUOTA_PER_ACTION
         ),
         "NO_ACCESS_THIS_BENCHMARK": (
             max(interval[1] for interval in utility.values()) < ACCESS_FLOOR
@@ -4168,7 +3539,7 @@ def test_eight_branches_mutually_exclusive_under_first_match() -> None:
     import itertools
 
     base = _branch_inputs()
-    quota = NATURAL_FORK_QUOTA_PER_ACTION
+    quota = CAUSAL_AUDIT_QUOTA_PER_ACTION
     late_axes = {
         "g_ci": ((0.11, 0.15), (GAIN_THRESHOLD, 0.15), (0.0, GAIN_THRESHOLD), (0.05, 0.11)),
         "k_bin_cis": (
@@ -4181,9 +3552,9 @@ def test_eight_branches_mutually_exclusive_under_first_match() -> None:
             (0.05, INTERVENTION_THRESHOLD),
             (INTERVENTION_THRESHOLD, 0.20),
         ),
-        "a_keep_ci": ((0.03, 0.09), (A_KEEP_LCB_FLOOR, 0.09), (-0.05, A_KEEP_LCB_FLOOR)),
-        "a_renew_ci": ((0.03, 0.09), (A_RENEW_LCB_FLOOR, 0.09), (-0.05, A_RENEW_LCB_FLOOR)),
-        "a_keep_mean": (0.06, A_KEEP_MEAN_FLOOR, A_KEEP_MEAN_FLOOR - 0.001),
+        "c_total_keep_ci": ((0.03, 0.09), (C_TOTAL_KEEP_LCB_FLOOR, 0.09), (-0.05, C_TOTAL_KEEP_LCB_FLOOR)),
+        "c_total_renew_ci": ((0.03, 0.09), (C_TOTAL_RENEW_LCB_FLOOR, 0.09), (-0.05, C_TOTAL_RENEW_LCB_FLOOR)),
+        "c_total_keep_mean": (0.06, C_TOTAL_KEEP_MEAN_FLOOR, C_TOTAL_KEEP_MEAN_FLOOR - 0.001),
     }
     early_axes = {
         "operational_valid": (True, False),
@@ -4191,13 +3562,13 @@ def test_eight_branches_mutually_exclusive_under_first_match() -> None:
         "multi_opportunity_lifecycles": (250, 249),
         "eligible_keep_rows": (SUPPORT_FLOOR, SUPPORT_FLOOR - 1),
         "eligible_renew_rows": (SUPPORT_FLOOR, SUPPORT_FLOOR - 1),
-        "natural_keep_rows_by_replicate": (
-            (quota,) * NATURAL_FORK_REPLICATES,
+        "causal_keep_rows_by_replicate": (
+            (quota,) * CAUSAL_AUDIT_REPLICATES,
             (quota, quota, quota - 1, quota, quota),
         ),
-        "natural_renew_rows_by_replicate": (
-            (quota,) * NATURAL_FORK_REPLICATES,
-            (quota - 1,) + (quota,) * (NATURAL_FORK_REPLICATES - 1),
+        "causal_renew_rows_by_replicate": (
+            (quota,) * CAUSAL_AUDIT_REPLICATES,
+            (quota - 1,) + (quota,) * (CAUSAL_AUDIT_REPLICATES - 1),
         ),
         "utility_ci": (
             {"OR": (0.79, 0.81), "DUM": (0.79, 0.81), "EHC": (0.80, 0.84)},

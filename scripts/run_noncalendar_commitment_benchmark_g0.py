@@ -38,7 +38,7 @@ from ha_ctse_process.event_held_commitment_link import (
     collection_rng_schedules,
     compare_continuations,
     factor_counts,
-    fork_opportunities_batched,
+    audit_opportunities_batched,
     initialize_arms,
     load_checkpoint,
     make_training_state,
@@ -70,9 +70,11 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     FORMAL_UPDATES,
     HORIZON,
     MAX_LIFECYCLES,
-    NATURAL_FORK_REPLICATES,
-    NATURAL_FORK_QUOTA_PER_ACTION,
-    NATURAL_FORK_SELECTION_COORDINATE,
+    CAUSAL_AUDIT_BRANCHES,
+    CAUSAL_AUDIT_NATURAL_ACTIONS,
+    CAUSAL_AUDIT_QUOTA_PER_ACTION,
+    CAUSAL_AUDIT_REPLICATES,
+    CAUSAL_AUDIT_SELECTION_COORDINATE,
     OPTIMIZER_CLIP_EPSILON,
     OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
     OPTIMIZER_NORM_ATOL,
@@ -109,27 +111,27 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
 
 FORMAL_AUTHORIZATION = "AUTHORIZE_EVENT_HELD_COMMITMENT_LINK_G0_FORMAL"
 TRAIN_MANIFEST_SCHEMA = 6
-TRAIN_INDEX_SCHEMA = 2
+TRAIN_INDEX_SCHEMA = 3
 TRAIN_UPDATE_SCHEMA = 2
 # 2: the replay record is the named per-factor error dictionary plus the
 # derived joint bounds actually applied and a normalized pass result, not a
 # single `maximum_error` scalar. Collapsing them hid which factor moved.
-EVALUATION_MANIFEST_SCHEMA = 4
-EVALUATION_CELL_SCHEMA = 7
+EVALUATION_MANIFEST_SCHEMA = 5
+EVALUATION_CELL_SCHEMA = 8
 FORMAL_TRAIN_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_train.v6"
-FORMAL_TRAIN_INDEX_SCHEMA = "event_held_commitment_link_g0.formal_train.index.v2"
+FORMAL_TRAIN_INDEX_SCHEMA = "event_held_commitment_link_g0.formal_train.index.v3"
 FORMAL_TRAIN_UPDATE_SCHEMA = "event_held_commitment_link_g0.formal_train.update.v2"
-FORMAL_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_evaluation_manifest.v4"
-FORMAL_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_evaluation.v7"
-FORMAL_ANALYSIS_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_analysis.v4"
+FORMAL_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_evaluation_manifest.v5"
+FORMAL_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_evaluation.v8"
+FORMAL_ANALYSIS_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_analysis.v5"
 EXERCISE_TRAIN_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.v5"
-EXERCISE_TRAIN_INDEX_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.index.v2"
+EXERCISE_TRAIN_INDEX_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.index.v3"
 EXERCISE_TRAIN_UPDATE_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.update.v2"
-EXERCISE_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation_manifest.v3"
-EXERCISE_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation.v5"
-EXERCISE_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.manifest.v2"
+EXERCISE_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation_manifest.v4"
+EXERCISE_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation.v6"
+EXERCISE_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.manifest.v3"
 ARMS: tuple[ArmName, ...] = ("OR", "DUM", "EHC")
-FORK_STREAM_NAMES = ("opportunity", "event", "mark", "primitive")
+CAUSAL_AUDIT_STREAM_NAMES = ("opportunity", "event", "mark", "primitive")
 EVALUATION_CELLS = (
     ("iid", True, "iid_deterministic"),
     ("iid", False, "iid_stochastic"),
@@ -1121,6 +1123,184 @@ def _exact_int_fields(value: Any, fields: tuple[str, ...]) -> bool:
     )
 
 
+def _exact_nested_equal(left: Any, right: Any) -> bool:
+    if isinstance(left, torch.Tensor) and isinstance(right, torch.Tensor):
+        return torch.equal(left.detach().cpu(), right.detach().cpu())
+    if isinstance(left, np.ndarray) and isinstance(right, np.ndarray):
+        return np.array_equal(left, right)
+    if isinstance(left, Mapping) and isinstance(right, Mapping):
+        return set(left) == set(right) and all(
+            _exact_nested_equal(left[key], right[key]) for key in left
+        )
+    if isinstance(left, (tuple, list)) and isinstance(right, (tuple, list)):
+        return len(left) == len(right) and all(
+            _exact_nested_equal(a, b) for a, b in zip(left, right, strict=True)
+        )
+    return type(left) is type(right) and left == right
+
+
+def _restore_metrics_valid(record: Any) -> bool:
+    """Validate the complete strict restore metric tree.
+
+    A boolean is not a numeric metric here.  Every leaf is independently
+    checked so NaN, negative and missing leaves cannot disappear behind an
+    aggregate maximum.
+    """
+
+    if not isinstance(record, dict) or set(record) != {
+        "continuous", "discrete", "runtime_rng", "owned_rng"
+    }:
+        return False
+    if not isinstance(record["continuous"], dict) or set(record["continuous"]) != {
+        "model", "base_optimizer", "event_optimizer"
+    }:
+        return False
+    if not isinstance(record["discrete"], dict) or set(record["discrete"]) != {
+        "training_state"
+    }:
+        return False
+    if not isinstance(record["runtime_rng"], dict) or set(record["runtime_rng"]) != {
+        "python", "numpy_global", "torch_cpu", "torch_cuda"
+    }:
+        return False
+    cuda_metrics = record["runtime_rng"]["torch_cuda"]
+    if not isinstance(cuda_metrics, dict) or set(cuda_metrics) != {
+        str(index) for index in range(torch.cuda.device_count())
+    }:
+        return False
+    if not isinstance(record["owned_rng"], dict) or set(record["owned_rng"]) != set(RNG_NAMES):
+        return False
+
+    leaves = [
+        *record["continuous"].values(),
+        *record["discrete"].values(),
+        record["runtime_rng"]["python"],
+        record["runtime_rng"]["numpy_global"],
+        record["runtime_rng"]["torch_cpu"],
+        *cuda_metrics.values(),
+        *record["owned_rng"].values(),
+    ]
+    return all(
+        type(value) in (int, float)
+        and math.isfinite(float(value))
+        and 0.0 <= float(value) <= 1e-7
+        for value in leaves
+    )
+
+
+_TRACKING_OUTCOME_FIELDS = frozenset({
+    "tracking", "completion", "utility", "terminal_reward",
+    "tracking_quarter_units", "active_rows", "completed_segments",
+    "eligible_segments", "roster_sizes", "reward_trace",
+})
+
+
+def _tracking_outcome_record(outcome: Any) -> dict[str, Any]:
+    return {
+        "tracking": float(outcome.tracking),
+        "completion": float(outcome.completion),
+        "utility": float(outcome.utility),
+        "terminal_reward": float(outcome.terminal_reward),
+        "tracking_quarter_units": int(outcome.tracking_quarter_units),
+        "active_rows": int(outcome.active_rows),
+        "completed_segments": int(outcome.completed_segments),
+        "eligible_segments": int(outcome.eligible_segments),
+        "roster_sizes": [int(value) for value in outcome.roster_sizes],
+        "reward_trace": [float(value) for value in outcome.reward_trace],
+    }
+
+
+def _tracking_outcome_valid(record: Any) -> bool:
+    if not isinstance(record, dict) or set(record) != _TRACKING_OUTCOME_FIELDS:
+        return False
+    integer_fields = (
+        "tracking_quarter_units", "active_rows", "completed_segments",
+        "eligible_segments",
+    )
+    if not _exact_int_fields(record, integer_fields):
+        return False
+    if (
+        record["tracking_quarter_units"] < 0
+        or record["active_rows"] <= 0
+        or record["completed_segments"] < 0
+        or record["eligible_segments"] <= 0
+        or record["completed_segments"] > record["eligible_segments"]
+        or record["eligible_segments"] > record["active_rows"]
+        or record["tracking_quarter_units"] > 4 * record["active_rows"]
+        or not isinstance(record["roster_sizes"], list)
+        or len(record["roster_sizes"]) != HORIZON
+        or any(
+            not _is_exact_int(value) or not 0 <= value <= MAX_LIFECYCLES
+            for value in record["roster_sizes"]
+        )
+        or record["active_rows"] != sum(record["roster_sizes"])
+        or not isinstance(record["reward_trace"], list)
+        or len(record["reward_trace"]) != HORIZON
+    ):
+        return False
+    numeric_fields = ("tracking", "completion", "utility", "terminal_reward")
+    if any(
+        type(record[name]) not in (int, float)
+        or not math.isfinite(float(record[name]))
+        or float(record[name]) < 0.0
+        for name in numeric_fields
+    ) or any(
+        type(value) not in (int, float)
+        or not math.isfinite(float(value))
+        or float(value) < 0.0
+        for value in record["reward_trace"]
+    ):
+        return False
+    tracking = record["tracking_quarter_units"] / float(4 * record["active_rows"])
+    completion = record["completed_segments"] / float(record["eligible_segments"])
+    utility = float(np.sqrt(tracking * completion))
+    return bool(
+        float(record["tracking"]) == tracking
+        and float(record["completion"]) == completion
+        and float(record["utility"]) == utility
+        and float(record["terminal_reward"]) == utility
+        and all(float(value) == 0.0 for value in record["reward_trace"][:-1])
+        and float(record["reward_trace"][-1]) == utility
+    )
+
+
+def _float32_payload(values: Any) -> dict[str, Any]:
+    array = np.ascontiguousarray(np.asarray(values, dtype=np.float32)).reshape(-1)
+    raw = array.tobytes(order="C")
+    return {
+        "dtype": "float32",
+        "shape": [int(array.size)],
+        "values": array.tolist(),
+        "bytes_b64": base64.b64encode(raw).decode("ascii"),
+        "sha256": hashlib.sha256(raw).hexdigest(),
+    }
+
+
+def _float32_payload_bytes(record: Any, *, size: int = MARK_DIM) -> bytes | None:
+    if not isinstance(record, dict) or set(record) != {
+        "dtype", "shape", "values", "bytes_b64", "sha256"
+    }:
+        return None
+    if not (
+        record["dtype"] == "float32"
+        and record["shape"] == [size]
+        and _is_sha256(record["sha256"])
+        and type(record["bytes_b64"]) is str
+        and isinstance(record["values"], list)
+        and len(record["values"]) == size
+    ):
+        return None
+    try:
+        raw = base64.b64decode(record["bytes_b64"], validate=True)
+    except (ValueError, binascii.Error):
+        return None
+    if len(raw) != size * 4 or hashlib.sha256(raw).hexdigest() != record["sha256"]:
+        return None
+    values = np.frombuffer(raw, dtype=np.float32)
+    supplied = np.asarray(record["values"], dtype=np.float32)
+    return raw if np.isfinite(values).all() and np.array_equal(values, supplied) else None
+
+
 def _tensor_pair_record(left: torch.Tensor, right: torch.Tensor) -> dict[str, Any]:
     left_cpu, right_cpu = left.detach().cpu(), right.detach().cpu()
     mismatch = torch.ne(left_cpu, right_cpu)
@@ -1466,11 +1646,11 @@ def _training_update_valid(
     )
 
 
-def _expected_fork_stream_consumption(
+def _expected_audit_stream_consumption(
     *, stream: str, start_state: Mapping[str, Any],
     schedule: list[dict[str, Any]], seed: int, env_index: int,
 ) -> dict[str, Any]:
-    """Derive the exact focal-row bytes consumed by a Stage-2 fork."""
+    """Derive the exact focal-row bytes consumed by one causal-audit branch."""
 
     arrays, end_state = replay_rng_schedule_arrays(
         start_state, schedule, seed=seed
@@ -1497,74 +1677,310 @@ def _expected_fork_stream_consumption(
     }
 
 
-def _natural_fork_valid(
+def _causal_audit_key(record: Mapping[str, Any]) -> tuple[Any, ...]:
+    return (
+        int(record["replicate"]),
+        int(record["base_episode_id"]),
+        int(record["sign_parity"]),
+        int(record["time"]),
+        int(record["key"]),
+        int(record["membership_epoch"]),
+        int(record["segment_id"]),
+        str(record["natural_action"]),
+    )
+
+
+def _causal_audit_donor_material(
+    recipient: Mapping[str, Any], donor: Mapping[str, Any], mapping_position: int,
+) -> dict[str, Any]:
+    recipient_key = _causal_audit_key(recipient)
+    donor_key = _causal_audit_key(donor)
+    binding_body = {
+        "recipient_key": list(recipient_key),
+        "donor_key": list(donor_key),
+        "mapping_position": mapping_position,
+        "candidate_u_sha256": donor["candidate_u"]["sha256"],
+        "candidate_z_sha256": donor["candidate_z"]["sha256"],
+    }
+    return {
+        "recipient_key": list(recipient_key),
+        "donor_key": list(donor_key),
+        "mapping_position": mapping_position,
+        "candidate_u": deepcopy(donor["candidate_u"]),
+        "candidate_z": deepcopy(donor["candidate_z"]),
+        "candidate_digest": _digest_json({
+            "candidate_u": donor["candidate_u"],
+            "candidate_z": donor["candidate_z"],
+        }),
+        "binding": binding_body | {"binding_digest": _digest_json(binding_body)},
+    }
+
+
+def _causal_audit_branch_evidence(
+    recipient: Mapping[str, Any], donor: Mapping[str, Any], mapping_position: int,
+    *, selected_payloads: Mapping[str, Any] | None = None,
+    donor_material: Mapping[str, Any] | None = None,
+    selected_state: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    payloads = (
+        {
+            name: deepcopy(recipient[name])
+            for name in ("installed_z", "candidate_u", "candidate_z")
+        }
+        if selected_payloads is None else deepcopy(dict(selected_payloads))
+    )
+    material = (
+        _causal_audit_donor_material(recipient, donor, mapping_position)
+        if donor_material is None else deepcopy(dict(donor_material))
+    )
+    state = (
+        {
+            "batch_index": int(recipient["batch_index"]),
+            "time": int(recipient["time"]),
+            "env_index": int(recipient["env_index"]),
+            "key": int(recipient["key"]),
+        }
+        if selected_state is None else deepcopy(dict(selected_state))
+    )
+    return {
+        "selected_state": state,
+        "selected_payloads": payloads,
+        "donor": material,
+        "branch_payload_sha256": {
+            "KEEP_HELD_MARK": payloads["installed_z"]["sha256"],
+            "RENEW_DERANGED_MARK": material["candidate_z"]["sha256"],
+            "RENEW_CANDIDATE_MARK": payloads["candidate_z"]["sha256"],
+        },
+    }
+
+
+def _causal_audit_bound_context(
+    base: Mapping[str, Any], *, key: tuple[Any, ...], donor_key: tuple[Any, ...],
+    branch_evidence: Mapping[str, Any],
+) -> dict[str, Any]:
+    return dict(base) | {
+        "recipient_key": list(key),
+        "donor_key": list(donor_key),
+        "executed_branch_evidence_digest": _digest_json(branch_evidence),
+    }
+
+
+def _causal_audit_trace_inventory(
+    raw_trace: Any, *, replicate: int, cell_batches: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Any]]] | None:
+    if not isinstance(raw_trace, list):
+        return None
+    inventory: dict[str, list[dict[str, Any]]] = {
+        action: [] for action in CAUSAL_AUDIT_NATURAL_ACTIONS
+    }
+    seen: set[tuple[Any, ...]] = set()
+    rows_by_batch: dict[int, list[dict[str, Any]]] = {
+        index: [] for index in range(len(cell_batches))
+    }
+    for entry in raw_trace:
+        if not isinstance(entry, dict) or set(entry) != {"batch_index", "row"}:
+            return None
+        batch_index, row = entry["batch_index"], entry["row"]
+        if not _is_exact_int(batch_index) or not 0 <= batch_index < len(cell_batches):
+            return None
+        if not isinstance(row, dict) or set(row) != {
+            "coordinate", "natural_kind", "installed_z", "candidate_u",
+            "candidate_z", "origin_binding",
+        }:
+            return None
+        coordinate = row["coordinate"]
+        origin = row["origin_binding"]
+        if not isinstance(coordinate, dict) or set(coordinate) != {
+            "time", "env_index", "key", "membership_epoch", "segment_id"
+        } or not _exact_int_fields(
+            coordinate, ("time", "env_index", "key", "membership_epoch", "segment_id")
+        ):
+            return None
+        env_index = coordinate["env_index"]
+        batch = cell_batches[batch_index]
+        if not 0 <= env_index < FORMAL_NUM_ENVS:
+            return None
+        episode_ids = batch.get("episode_ids", [])
+        ledgers = batch.get("rng_evidence", {}).get("ledgers", [])
+        if len(episode_ids) != FORMAL_NUM_ENVS or len(ledgers) != FORMAL_NUM_ENVS:
+            return None
+        episode_id = episode_ids[env_index]
+        expected_origin = {
+            "domain": "HMASD_RAW_EVENT_TRACE_V1",
+            "arm": "EHC", "profile": "held_out", "replicate": replicate,
+            "episode_id": episode_id,
+            "ledger_digest": ledgers[env_index].get("ledger_digest"),
+        }
+        if not isinstance(origin, dict) or set(origin) != set(expected_origin) | {"binding_digest"}:
+            return None
+        if {name: origin[name] for name in expected_origin} != expected_origin:
+            return None
+        unsigned_row = deepcopy(row)
+        unsigned_row["origin_binding"] = expected_origin
+        encoded_row = json.dumps(
+            unsigned_row, sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+        ).encode("utf-8")
+        if origin["binding_digest"] != hashlib.sha256(
+            b"HMASD_RAW_EVENT_TRACE_V1\0" + encoded_row
+        ).hexdigest():
+            return None
+        if row["natural_kind"] not in (KEEP, RENEW):
+            return None
+        for name in ("installed_z", "candidate_u", "candidate_z"):
+            if _float32_payload_bytes(row[name]) is None:
+                return None
+        action = "KEEP" if row["natural_kind"] == KEEP else "RENEW"
+        derived = {
+            "replicate": replicate,
+            "base_episode_id": episode_id // 2,
+            "episode_id": episode_id,
+            "sign_parity": episode_id & 1,
+            "time": coordinate["time"],
+            "key": coordinate["key"],
+            "membership_epoch": coordinate["membership_epoch"],
+            "segment_id": coordinate["segment_id"],
+            "natural_action": action,
+            "batch_index": batch_index,
+            "env_index": env_index,
+            "installed_z": deepcopy(row["installed_z"]),
+            "candidate_u": deepcopy(row["candidate_u"]),
+            "candidate_z": deepcopy(row["candidate_z"]),
+        }
+        key = _causal_audit_key(derived)
+        if key in seen:
+            return None
+        seen.add(key)
+        inventory[action].append(derived)
+        rows_by_batch[batch_index].append(row)
+    for batch_index, batch in enumerate(cell_batches):
+        binding = batch.get("raw_event_trace_binding")
+        batch_rows = rows_by_batch[batch_index]
+        if not isinstance(binding, dict) or binding != {
+            "row_count": len(batch_rows),
+            "trace_sha256": _digest_json(batch_rows),
+        }:
+            return None
+    for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
+        inventory[action].sort(key=_causal_audit_key)
+    return inventory
+
+
+def _causal_contrasts(
+    natural_action: str, outcomes: Mapping[str, Mapping[str, Any]],
+) -> dict[str, float]:
+    keep = float(outcomes["KEEP_HELD_MARK"]["utility"])
+    deranged = float(outcomes["RENEW_DERANGED_MARK"]["utility"])
+    candidate = float(outcomes["RENEW_CANDIDATE_MARK"]["utility"])
+    if natural_action == "KEEP":
+        return {
+            "total": keep - candidate,
+            "timing": keep - deranged,
+            "mark": deranged - candidate,
+        }
+    return {
+        "total": candidate - keep,
+        "timing": deranged - keep,
+        "mark": candidate - deranged,
+    }
+
+
+def _contrast_additivity_evidence(
+    contrasts: Mapping[str, float], outcomes: Mapping[str, Mapping[str, Any]],
+) -> dict[str, float]:
+    """Account only for deterministic binary64 subtraction/addition rounding."""
+
+    values = [
+        float(contrasts[name]) for name in ("total", "timing", "mark")
+    ] + [
+        float(outcomes[name]["utility"]) for name in CAUSAL_AUDIT_BRANCHES
+    ]
+    residual = abs(values[0] - (values[1] + values[2]))
+    bound = 4.0 * max(math.ulp(value) for value in values)
+    return {"residual": residual, "bound": bound}
+
+
+def _causal_audit_valid(
     record: Any, *, replicate: int, episodes: list[dict[str, Any]],
     cell_batches: list[dict[str, Any]], formal: bool = True,
     mode: str = "formal_evaluate",
 ) -> bool:
     required_keys = {
-        "schema", "replicate", "quota_per_action", "eligible_keys",
-        "selected_keys", "execution", "fork_rows",
+        "schema", "replicate", "quota_per_action", "raw_event_trace",
+        "selected_keys", "execution", "telemetry", "audit_rows",
     }
-    if not isinstance(record, dict) or set(record) not in (
-        required_keys, required_keys | {"telemetry"},
-    ):
+    if not isinstance(record, dict) or set(record) != required_keys:
         return False
     if not (
-        record["schema"] == "event_held_commitment_link_g0.natural_fork.v5"
+        record["schema"] == "event_held_commitment_link_g0.causal_audit.v1"
         and _is_exact_int(record["replicate"])
         and record["replicate"] == replicate
         and _is_exact_int(record["quota_per_action"])
-        and record["quota_per_action"] == NATURAL_FORK_QUOTA_PER_ACTION
-        and set(record["eligible_keys"]) == {"KEEP", "RENEW"}
-        and set(record["selected_keys"]) == {"KEEP", "RENEW"}
-        and isinstance(record["fork_rows"], list)
+        and record["quota_per_action"] == CAUSAL_AUDIT_QUOTA_PER_ACTION
+        and set(record["selected_keys"]) == set(CAUSAL_AUDIT_NATURAL_ACTIONS)
+        and isinstance(record["audit_rows"], list)
     ):
+        return False
+    inventory = _causal_audit_trace_inventory(
+        record["raw_event_trace"], replicate=replicate, cell_batches=cell_batches
+    )
+    if inventory is None:
         return False
     execution = record["execution"]
     if not isinstance(execution, dict) or set(execution) != {
-        "engine", "registered_width", "selected_pairs", "collector_calls",
+        "engine", "registered_width", "selected_state_count",
+        "branch_row_count", "padding_row_count", "collector_call_count",
     } or not _exact_int_fields(
-        execution, ("registered_width", "selected_pairs", "collector_calls")
+        execution, (
+            "registered_width", "selected_state_count", "branch_row_count",
+            "padding_row_count", "collector_call_count",
+        )
+    ):
+        return False
+    telemetry = record["telemetry"]
+    if not isinstance(telemetry, dict) or set(telemetry) != {
+        "prefix_seconds", "branch_seconds", "total_seconds",
+        "selected_state_count", "collector_call_count", "serialized_size_bytes",
+    } or not _exact_int_fields(
+        telemetry, ("selected_state_count", "collector_call_count", "serialized_size_bytes")
+    ) or telemetry["serialized_size_bytes"] < 0 or any(
+        type(telemetry[name]) not in (int, float)
+        or not math.isfinite(float(telemetry[name]))
+        or float(telemetry[name]) < 0.0
+        for name in ("prefix_seconds", "branch_seconds", "total_seconds")
     ):
         return False
     selected_flat: list[tuple[Any, ...]] = []
     quota_shortfall = any(
-        len(record["eligible_keys"][action]) < NATURAL_FORK_QUOTA_PER_ACTION
-        for action in ("KEEP", "RENEW")
+        len(inventory[action]) < CAUSAL_AUDIT_QUOTA_PER_ACTION
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
     )
-    for action_index, action in enumerate(("KEEP", "RENEW")):
+    selected_records: dict[tuple[Any, ...], dict[str, Any]] = {}
+    donor_by_key: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
+    for action_index, action in enumerate(CAUSAL_AUDIT_NATURAL_ACTIONS):
         try:
-            eligible = [tuple(value) for value in record["eligible_keys"][action]]
             selected = [tuple(value) for value in record["selected_keys"][action]]
         except TypeError:
             return False
-        if any(
-            len(value) != 8 or value[-1] != action
-            or any(not _is_exact_int(coordinate) for coordinate in value[:-1])
-            for value in eligible
-        ):
-            return False
+        eligible_rows = inventory[action]
+        eligible = [_causal_audit_key(value) for value in eligible_rows]
         if any(
             len(value) != 8 or value[-1] != action
             or any(not _is_exact_int(coordinate) for coordinate in value[:-1])
             for value in selected
         ):
             return False
-        if eligible != sorted(eligible) or len(set(eligible)) != len(eligible):
-            return False
         expected: list[tuple[Any, ...]] = []
         if not quota_shortfall:
             rng = make_rng(
                 BOOTSTRAP_SEED,
-                NATURAL_FORK_SELECTION_COORDINATE,
+                CAUSAL_AUDIT_SELECTION_COORDINATE,
                 replicate,
                 action_index,
             )
             expected = [
                 eligible[index] for index in sorted(
                     int(value) for value in rng.choice(
-                        len(eligible), size=NATURAL_FORK_QUOTA_PER_ACTION,
+                        len(eligible), size=CAUSAL_AUDIT_QUOTA_PER_ACTION,
                         replace=False,
                     )
                 )
@@ -1572,22 +1988,32 @@ def _natural_fork_valid(
         if selected != expected:
             return False
         selected_flat.extend(selected)
+        row_lookup = {_causal_audit_key(value): value for value in eligible_rows}
+        ordered_selected = [row_lookup[key] for key in sorted(selected)]
+        for position, recipient in enumerate(ordered_selected):
+            recipient_key = _causal_audit_key(recipient)
+            donor = ordered_selected[(position + 1) % len(ordered_selected)]
+            if recipient_key == _causal_audit_key(donor):
+                return False
+            selected_records[recipient_key] = recipient
+            donor_by_key[recipient_key] = (position, donor)
     if any(
         not isinstance(row, dict) or not _is_exact_int(row.get("episode_id"))
         for row in episodes
     ):
         return False
-    utilities = {row["episode_id"]: float(row["utility"]) for row in episodes}
+    episode_outcomes = {row["episode_id"]: row.get("outcome") for row in episodes}
     rows_by_key: dict[tuple[Any, ...], dict[str, Any]] = {}
     required = {
         "replicate", "base_episode_id", "episode_id", "sign_parity", "time",
         "key", "membership_epoch", "segment_id", "natural_action",
         "batch_index", "env_index",
-        "fork_id", "keep_utility", "renew_utility", "natural_utility",
-        "advantage", "natural_errors", "rng_bindings", "stream_consumption",
-        "end_rng_digests",
+        "audit_id", "donor", "executed_branch_evidence", "outcomes",
+        "natural_outcome", "contrasts",
+        "contrast_additivity",
+        "natural_errors", "rng_bindings", "stream_consumption", "end_rng_digests",
     }
-    for row in record["fork_rows"]:
+    for row in record["audit_rows"]:
         if not isinstance(row, dict) or set(row) != required:
             return False
         if not _exact_int_fields(row, (
@@ -1595,18 +2021,73 @@ def _natural_fork_valid(
             "key", "membership_epoch", "segment_id", "batch_index", "env_index",
         )):
             return False
-        key = _natural_fork_key(row)
+        key = _causal_audit_key(row)
         if key in rows_by_key or key not in selected_flat:
             return False
-        try:
-            keep = float(row["keep_utility"])
-            renew = float(row["renew_utility"])
-            natural = float(row["natural_utility"])
-            advantage = float(row["advantage"])
-        except (TypeError, ValueError):
+        donor = row["donor"]
+        expected_position, expected_donor = donor_by_key[key]
+        expected_branch_evidence = _causal_audit_branch_evidence(
+            selected_records[key], expected_donor, expected_position,
+        )
+        if not isinstance(donor, dict) or set(donor) != {
+            "mapping_position", "donor_key", "candidate_u", "candidate_z",
+            "candidate_digest",
+        }:
             return False
-        expected_natural = keep if row["natural_action"] == "KEEP" else renew
-        expected_advantage = keep - renew if row["natural_action"] == "KEEP" else renew - keep
+        donor_u = _float32_payload_bytes(donor["candidate_u"])
+        donor_z = _float32_payload_bytes(donor["candidate_z"])
+        if not (
+            _is_exact_int(donor["mapping_position"])
+            and donor["mapping_position"] == expected_position
+            and tuple(donor["donor_key"]) == _causal_audit_key(expected_donor)
+            and donor_u == _float32_payload_bytes(expected_donor["candidate_u"])
+            and donor_z == _float32_payload_bytes(expected_donor["candidate_z"])
+            and donor["candidate_digest"] == _digest_json({
+                "candidate_u": donor["candidate_u"],
+                "candidate_z": donor["candidate_z"],
+            })
+            and row["executed_branch_evidence"] == expected_branch_evidence
+        ):
+            return False
+        outcomes = row["outcomes"]
+        if not isinstance(outcomes, dict) or tuple(outcomes) != CAUSAL_AUDIT_BRANCHES:
+            return False
+        if not all(_tracking_outcome_valid(value) for value in outcomes.values()):
+            return False
+        expected_natural_branch = (
+            "KEEP_HELD_MARK" if row["natural_action"] == "KEEP"
+            else "RENEW_CANDIDATE_MARK"
+        )
+        expected_natural = episode_outcomes.get(int(row["episode_id"]))
+        expected_contrasts = _causal_contrasts(row["natural_action"], outcomes)
+        expected_additivity = _contrast_additivity_evidence(
+            expected_contrasts, outcomes
+        )
+        additivity = row["contrast_additivity"]
+        if not (
+            _tracking_outcome_valid(row["natural_outcome"])
+            and row["natural_outcome"] == expected_natural
+            and outcomes[expected_natural_branch] == expected_natural
+            and isinstance(row["contrasts"], dict)
+            and set(row["contrasts"]) == {"total", "timing", "mark"}
+            and all(
+                type(row["contrasts"][name]) in (int, float)
+                and math.isfinite(float(row["contrasts"][name]))
+                and float(row["contrasts"][name]) == expected_contrasts[name]
+                for name in expected_contrasts
+            )
+            and isinstance(additivity, dict)
+            and set(additivity) == {"residual", "bound"}
+            and all(
+                type(additivity[name]) in (int, float)
+                and math.isfinite(float(additivity[name]))
+                and float(additivity[name]) >= 0.0
+                and float(additivity[name]) == expected_additivity[name]
+                for name in ("residual", "bound")
+            )
+            and float(additivity["residual"]) <= float(additivity["bound"])
+        ):
+            return False
         natural_errors = row["natural_errors"]
         rng_digests = row["end_rng_digests"]
         batch_index = row["batch_index"]
@@ -1617,7 +2098,7 @@ def _natural_fork_valid(
             and env_index == int(row["episode_id"]) % FORMAL_NUM_ENVS
             and batch_index == int(row["episode_id"]) // FORMAL_NUM_ENVS
             and isinstance(binding_families, dict)
-            and set(binding_families) == {"KEEP", "RENEW"}
+            and tuple(binding_families) == CAUSAL_AUDIT_BRANCHES
         )
         branch_ends: dict[str, dict[str, Any]] = {}
         branch_schedules: dict[str, dict[str, Any]] = {}
@@ -1625,7 +2106,7 @@ def _natural_fork_valid(
         if rng_binding_valid:
             cell_bindings = cell_batches[batch_index].get("rng_bindings", {})
             seed_map = authoritative_seed_map("held_out", replicate)
-            for branch_action in ("KEEP", "RENEW"):
+            for branch in CAUSAL_AUDIT_BRANCHES:
                 expected_starts: dict[str, Any] = {}
                 expected_tails: dict[str, list[dict[str, Any]]] = {}
                 for name in RNG_NAMES:
@@ -1651,69 +2132,65 @@ def _natural_fork_valid(
                         break
                 if not rng_binding_valid:
                     break
-                context = {
+                context = _causal_audit_bound_context({
                     "domain": "stage2", "mode": mode,
                     "formal": formal, "replicate": int(replicate), "arm": "EHC",
                     "cell": "held_out_stochastic", "batch": batch_index,
-                    "fork_id": str(row["fork_id"]),
+                    "audit_id": str(row["audit_id"]),
                     "episode_id": int(row["episode_id"]),
                     "time": int(row["time"]), "key": int(row["key"]),
                     "membership_epoch": int(row["membership_epoch"]),
                     "segment_id": int(row["segment_id"]),
                     "natural_action": str(row["natural_action"]),
-                    "branch_action": branch_action,
-                }
+                    "branch": branch,
+                }, key=key, donor_key=_causal_audit_key(expected_donor),
+                    branch_evidence=expected_branch_evidence)
                 valid, ends = _rng_bindings_valid(
-                    binding_families[branch_action], expected_context=context,
+                    binding_families[branch], expected_context=context,
                     seed_map=seed_map, expected_starts=expected_starts,
                 )
                 rng_binding_valid = rng_binding_valid and valid
                 rng_binding_valid = rng_binding_valid and all(
-                    binding_families[branch_action][name]["draw_schedule"]
+                    binding_families[branch][name]["draw_schedule"]
                     == expected_tails[name]
                     for name in RNG_NAMES
                 )
-                branch_ends[branch_action] = ends
-                branch_schedules[branch_action] = {
-                    name: binding_families[branch_action][name]["draw_schedule"]
+                branch_ends[branch] = ends
+                branch_schedules[branch] = {
+                    name: binding_families[branch][name]["draw_schedule"]
                     for name in RNG_NAMES
                 }
                 try:
-                    branch_consumption[branch_action] = {
-                        name: _expected_fork_stream_consumption(
+                    branch_consumption[branch] = {
+                        name: _expected_audit_stream_consumption(
                             stream=name,
                             start_state=expected_starts[name],
                             schedule=expected_tails[name],
                             seed=int(seed_map[name]),
                             env_index=env_index,
                         )
-                        for name in FORK_STREAM_NAMES
+                        for name in CAUSAL_AUDIT_STREAM_NAMES
                     }
                 except (KeyError, TypeError, ValueError, IndexError):
                     rng_binding_valid = False
             rng_binding_valid = rng_binding_valid and (
-                branch_ends.get("KEEP") == branch_ends.get("RENEW")
-                and branch_schedules.get("KEEP") == branch_schedules.get("RENEW")
+                len({_digest_json(value) for value in branch_ends.values()}) == 1
+                and len({_digest_json(value) for value in branch_schedules.values()}) == 1
                 and isinstance(row["stream_consumption"], dict)
-                and set(row["stream_consumption"]) == {"KEEP", "RENEW"}
+                and tuple(row["stream_consumption"]) == CAUSAL_AUDIT_BRANCHES
                 and row["stream_consumption"] == branch_consumption
-                and branch_consumption.get("KEEP")
-                == branch_consumption.get("RENEW")
+                and len({_digest_json(value) for value in branch_consumption.values()}) == 1
                 and all(
                     rng_digests.get(name)
-                    == _digest_json(branch_ends["KEEP"][name])
+                    == _digest_json(branch_ends[CAUSAL_AUDIT_BRANCHES[0]][name])
                     for name in RNG_NAMES
                 )
             )
         if not (
-            all(math.isfinite(value) for value in (keep, renew, natural, advantage))
-            and row["episode_id"]
+            row["episode_id"]
             == 2 * row["base_episode_id"] + row["sign_parity"]
-            and natural == expected_natural
-            and natural == utilities.get(int(row["episode_id"]))
-            and advantage == expected_advantage
-            and isinstance(row["fork_id"], str) and bool(row["fork_id"])
-            and row["fork_id"] == _digest_json(list(key))
+            and isinstance(row["audit_id"], str) and bool(row["audit_id"])
+            and row["audit_id"] == _digest_json(list(key))
             and set(natural_errors) == {
                 "discrete_mismatch", "continuous_error", "segment_equal",
                 "outcome_equal",
@@ -1728,16 +2205,34 @@ def _natural_fork_valid(
             return False
         rows_by_key[key] = row
     selected_count = len(selected_flat)
-    expected_calls = sum(
-        math.ceil(count / 8)
-        for count in Counter(key[3] for key in selected_flat).values()
+    selected_cells = [
+        (int(selected_records[key]["batch_index"]), int(selected_records[key]["time"]))
+        for key in selected_flat
+    ]
+    expected_branch_calls = sum(
+        math.ceil(count / 5)
+        for count in Counter(selected_cells).values()
     )
+    expected_calls = len(set(selected_cells)) + expected_branch_calls
+    expected_branch_rows = selected_count * len(CAUSAL_AUDIT_BRANCHES)
+    expected_padding_rows = (
+        expected_branch_calls * FORMAL_NUM_ENVS - expected_branch_rows
+    )
+    serialized_size = len(json.dumps(
+        {"raw_event_trace": record["raw_event_trace"], "audit_rows": record["audit_rows"]},
+        sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    ).encode("utf-8"))
     return bool(
         set(rows_by_key) == set(selected_flat)
-        and execution["engine"] == "registered_width_batched_v1"
+        and execution["engine"] == "registered_width_batched_causal_audit_v1"
         and execution["registered_width"] == FORMAL_NUM_ENVS
-        and execution["selected_pairs"] == selected_count
-        and execution["collector_calls"] == expected_calls
+        and execution["selected_state_count"] == selected_count
+        and execution["branch_row_count"] == expected_branch_rows
+        and execution["padding_row_count"] == expected_padding_rows
+        and execution["collector_call_count"] == expected_calls
+        and telemetry["selected_state_count"] == selected_count
+        and telemetry["collector_call_count"] == expected_calls
+        and telemetry["serialized_size_bytes"] == serialized_size
     )
 
 
@@ -1762,7 +2257,7 @@ def _evaluation_cell_valid(
         "artifact_schema", "schema_version", "formal", "contract", "arm",
         "replicate", "cell", "profile", "mode", "checkpoint",
         "checkpoint_origin", "counts", "batches", "operational", "episodes",
-        "natural_fork",
+        "causal_audit",
     }
     if not isinstance(payload, dict) or set(payload) != required:
         return False, (), []
@@ -1799,20 +2294,24 @@ def _evaluation_cell_valid(
         and len(batches) == episodes_per_cell // FORMAL_NUM_ENVS
         and isinstance(episodes, list) and len(episodes) == episodes_per_cell
         and all(
-            isinstance(row, dict) and _is_exact_int(row.get("episode_id"))
+            isinstance(row, dict)
+            and _is_exact_int(row.get("episode_id"))
+            and _tracking_outcome_valid(row.get("outcome"))
+            and type(row.get("utility")) in (int, float)
+            and float(row["utility"]) == float(row["outcome"]["utility"])
             for row in episodes
         )
         and payload["operational"] is True
     ):
         return False, (), []
-    expected_fork = arm == "EHC" and cell == "held_out_stochastic"
-    if expected_fork:
-        if not _natural_fork_valid(
-            payload["natural_fork"], replicate=replicate, episodes=episodes,
+    expected_audit = arm == "EHC" and cell == "held_out_stochastic"
+    if expected_audit:
+        if not _causal_audit_valid(
+            payload["causal_audit"], replicate=replicate, episodes=episodes,
             cell_batches=batches, formal=formal, mode=mode,
         ):
             return False, (), []
-    elif payload["natural_fork"] is not None:
+    elif payload["causal_audit"] is not None:
         return False, (), []
     expected_rng_states = _initial_rng_states(
         authoritative_seed_map(profile, replicate)
@@ -1823,7 +2322,7 @@ def _evaluation_cell_valid(
             "batch_index", "episode_ids", "replay", "lifecycle_counts",
             "finite_checks", "seed_map", "owned_stream_digests",
             "rng_bindings", "rng_evidence", "reduction_counts",
-            "checkpoint_origin", "episodes_digest",
+            "checkpoint_origin", "episodes_digest", "raw_event_trace_binding",
         }:
             return False, (), []
         if not (
@@ -1831,6 +2330,11 @@ def _evaluation_cell_valid(
             and isinstance(batch["episode_ids"], list)
             and all(_is_exact_int(value) for value in batch["episode_ids"])
             and _is_sha256(batch["episodes_digest"])
+            and isinstance(batch["raw_event_trace_binding"], dict)
+            and set(batch["raw_event_trace_binding"]) == {"row_count", "trace_sha256"}
+            and _is_exact_int(batch["raw_event_trace_binding"]["row_count"])
+            and batch["raw_event_trace_binding"]["row_count"] >= 0
+            and _is_sha256(batch["raw_event_trace_binding"]["trace_sha256"])
         ):
             return False, (), []
         expected_ids = list(range(
@@ -1904,7 +2408,7 @@ def _evaluation_cell_valid(
 def _compact_episode(row: Mapping[str, Any]) -> dict[str, Any]:
     return {
         name: row[name] for name in (
-            "utility", "keep", "renew", "segments", "intervention",
+            "utility", "outcome", "keep", "renew", "segments", "intervention",
             "non_create", "multi_opportunity_lifecycles",
         )
     }
@@ -1919,7 +2423,7 @@ def _validate_streamed_operational_records(
     """Validate indexed evidence one verbose artifact at a time."""
 
     errors: list[str] = []
-    compact: dict[str, Any] = {"episodes": {}, "fork_rows": {}}
+    compact: dict[str, Any] = {"episodes": {}, "audit_rows": {}}
     train_path = output_root / "train_manifest.json"
     evaluation_path = output_root / "evaluation_manifest.json"
     try:
@@ -2106,7 +2610,7 @@ def _validate_streamed_operational_records(
             if not isinstance(entry, dict) or set(entry) != {
                 "arm", "replicate", "checkpoint", "checkpoint_origin",
                 "completed_update", "next_episode_id", "exposure", "seed_map",
-                "parameter_counts", "roundtrip_errors", "checkpoint_sha256",
+                "parameter_counts", "restore_metrics", "checkpoint_sha256",
                 "checkpoint_byte_count",
             }:
                 errors.append(f"training_arm_schema:{replicate}:{arm}")
@@ -2143,7 +2647,7 @@ def _validate_streamed_operational_records(
                 }
                 and entry["seed_map"] == authoritative_seed_map("train", replicate)
                 and entry["parameter_counts"] == _expected_parameter_counts(arm)
-                and all(float(value) <= 1e-7 for value in entry["roundtrip_errors"].values())
+                and _restore_metrics_valid(entry["restore_metrics"])
                 and entry["checkpoint_sha256"] == checkpoint_digest
                 and entry["checkpoint_byte_count"] == checkpoint_bytes
             ):
@@ -2265,13 +2769,13 @@ def _validate_streamed_operational_records(
                 _compact_episode(row) for row in payload["episodes"]
             ]
             if arm == "EHC":
-                compact["fork_rows"][replicate] = [
+                compact["audit_rows"][replicate] = [
                     {
                         "base_episode_id": row["base_episode_id"],
                         "natural_action": row["natural_action"],
-                        "advantage": row["advantage"],
+                        "contrasts": deepcopy(row["contrasts"]),
                     }
-                    for row in payload["natural_fork"]["fork_rows"]
+                    for row in payload["causal_audit"]["audit_rows"]
                 ]
         del payload
         if artifact_observer is not None:
@@ -2339,6 +2843,8 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
             states[name], trajectory, device=device,
         )
         checkpoint = output_root / "checkpoints" / name / "smoke_update_001.pt"
+        saved_runtime_rng = runtime_rng_snapshot()
+        saved_owned_rng = owned_rng_states(states[name])
         save_checkpoint(
             checkpoint, arm=arm, base_optimizer=base_optimizers[name],
             event_optimizer=event_optimizers[name], state=states[name],
@@ -2346,6 +2852,46 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
         loaded_arm, loaded_base, loaded_event, loaded_state = load_checkpoint(
             checkpoint, device=device, expected_arm=name, expected_replicate=0
         )
+        loaded_runtime_rng = runtime_rng_snapshot()
+        loaded_owned_rng = owned_rng_states(loaded_state)
+        restore_metrics = {
+            "continuous": {
+                "model": nested_state_maximum_difference(
+                    arm.state_dict(), loaded_arm.state_dict()
+                ),
+                "base_optimizer": nested_state_maximum_difference(
+                    base_optimizers[name].state_dict(), loaded_base.state_dict()
+                ),
+                "event_optimizer": nested_state_maximum_difference(
+                    None if event_optimizers[name] is None else event_optimizers[name].state_dict(),
+                    None if loaded_event is None else loaded_event.state_dict(),
+                ),
+            },
+            "discrete": {"training_state": float(not (
+                states[name].completed_update == loaded_state.completed_update
+                and states[name].next_episode_id == loaded_state.next_episode_id
+                and states[name].base_optimizer_steps == loaded_state.base_optimizer_steps
+                and states[name].event_optimizer_steps == loaded_state.event_optimizer_steps
+                and states[name].seed_map == loaded_state.seed_map
+            ))},
+            "runtime_rng": {
+                "python": float(not _exact_nested_equal(saved_runtime_rng["python"], loaded_runtime_rng["python"])),
+                "numpy_global": float(not _exact_nested_equal(saved_runtime_rng["numpy"], loaded_runtime_rng["numpy"])),
+                "torch_cpu": float(not _exact_nested_equal(saved_runtime_rng["torch_cpu"], loaded_runtime_rng["torch_cpu"])),
+                "torch_cuda": {
+                    str(index): float(not _exact_nested_equal(expected, actual))
+                    for index, (expected, actual) in enumerate(zip(
+                        saved_runtime_rng["torch_cuda"], loaded_runtime_rng["torch_cuda"], strict=True,
+                    ))
+                },
+            },
+            "owned_rng": {
+                stream: float(not _exact_nested_equal(saved_owned_rng[stream], loaded_owned_rng[stream]))
+                for stream in RNG_NAMES
+            },
+        }
+        if not _restore_metrics_valid(restore_metrics):
+            raise RuntimeError(f"smoke checkpoint restore failed for {name}")
         evidence[name] = {
             "replay": replay,
             "update": update,
@@ -2354,22 +2900,7 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
             "counts": parameter_and_optimizer_counts(
                 arm, base_optimizers[name], event_optimizers[name]
             ),
-            "checkpoint_model_error": nested_state_maximum_difference(
-                arm.state_dict(), loaded_arm.state_dict()
-            ),
-            "checkpoint_base_optimizer_error": nested_state_maximum_difference(
-                base_optimizers[name].state_dict(), loaded_base.state_dict()
-            ),
-            "checkpoint_event_optimizer_error": nested_state_maximum_difference(
-                None if event_optimizers[name] is None else event_optimizers[name].state_dict(),
-                None if loaded_event is None else loaded_event.state_dict(),
-            ),
-            "checkpoint_state_equal": (
-                states[name].completed_update == loaded_state.completed_update
-                and states[name].next_episode_id == loaded_state.next_episode_id
-                and states[name].base_optimizer_steps == loaded_state.base_optimizer_steps
-                and states[name].event_optimizer_steps == loaded_state.event_optimizer_steps
-            ),
+            "restore_metrics": restore_metrics,
             "artifact": str(checkpoint),
         }
     no_op = _no_op_equal(trajectories["OR"], trajectories["DUM"])
@@ -2901,6 +3432,8 @@ def _training_core(
         arm_records: dict[str, Any] = {}
         for arm in ARMS:
             checkpoint = output_root / "train" / f"replicate_{replicate}" / arm / checkpoint_name
+            saved_runtime_rng = runtime_rng_snapshot()
+            saved_owned_rng = owned_rng_states(states[arm])
             save_checkpoint(
                 checkpoint, arm=arms[arm], base_optimizer=base_optimizers[arm],
                 event_optimizer=event_optimizers[arm], state=states[arm],
@@ -2910,28 +3443,57 @@ def _training_core(
                 checkpoint, device=device, expected_arm=arm,
                 expected_replicate=replicate, formal_evaluation=formal,
             )
-            roundtrip_errors = {
-                "model": nested_state_maximum_difference(
-                    arms[arm].state_dict(), loaded_arm.state_dict()
-                ),
-                "base_optimizer": nested_state_maximum_difference(
-                    base_optimizers[arm].state_dict(), loaded_base.state_dict()
-                ),
-                "event_optimizer": nested_state_maximum_difference(
-                    None if event_optimizers[arm] is None else event_optimizers[arm].state_dict(),
-                    None if loaded_event is None else loaded_event.state_dict(),
-                ),
-                "state": float(not (
+            loaded_runtime_rng = runtime_rng_snapshot()
+            loaded_owned_rng = owned_rng_states(loaded_state)
+            restore_metrics = {
+                "continuous": {
+                    "model": nested_state_maximum_difference(
+                        arms[arm].state_dict(), loaded_arm.state_dict()
+                    ),
+                    "base_optimizer": nested_state_maximum_difference(
+                        base_optimizers[arm].state_dict(), loaded_base.state_dict()
+                    ),
+                    "event_optimizer": nested_state_maximum_difference(
+                        None if event_optimizers[arm] is None else event_optimizers[arm].state_dict(),
+                        None if loaded_event is None else loaded_event.state_dict(),
+                    ),
+                },
+                "discrete": {"training_state": float(not (
                     states[arm].completed_update == loaded_state.completed_update
                     and states[arm].next_episode_id == loaded_state.next_episode_id
                     and states[arm].base_optimizer_steps == loaded_state.base_optimizer_steps
                     and states[arm].event_optimizer_steps == loaded_state.event_optimizer_steps
                     and states[arm].seed_map == loaded_state.seed_map
-                    and _owned_stream_digests(states[arm]) == _owned_stream_digests(loaded_state)
-                )),
+                ))},
+                "runtime_rng": {
+                    "python": float(not _exact_nested_equal(
+                        saved_runtime_rng["python"], loaded_runtime_rng["python"]
+                    )),
+                    "numpy_global": float(not _exact_nested_equal(
+                        saved_runtime_rng["numpy"], loaded_runtime_rng["numpy"]
+                    )),
+                    "torch_cpu": float(not _exact_nested_equal(
+                        saved_runtime_rng["torch_cpu"], loaded_runtime_rng["torch_cpu"]
+                    )),
+                    "torch_cuda": {
+                        str(index): float(not _exact_nested_equal(expected, actual))
+                        for index, (expected, actual) in enumerate(zip(
+                            saved_runtime_rng["torch_cuda"],
+                            loaded_runtime_rng["torch_cuda"], strict=True,
+                        ))
+                    },
+                },
+                "owned_rng": {
+                    name: float(not _exact_nested_equal(
+                        saved_owned_rng[name], loaded_owned_rng[name]
+                    ))
+                    for name in RNG_NAMES
+                },
             }
-            if any(value > 1e-7 for value in roundtrip_errors.values()):
-                raise RuntimeError(f"checkpoint roundtrip failed {replicate}:{arm}:{roundtrip_errors}")
+            if not _restore_metrics_valid(restore_metrics):
+                raise RuntimeError(
+                    f"checkpoint roundtrip failed {replicate}:{arm}:{restore_metrics}"
+                )
             arm_records[arm] = {
                 "arm": arm, "replicate": replicate,
                 "checkpoint": _root_relative_path(output_root, checkpoint),
@@ -2946,7 +3508,7 @@ def _training_core(
                 "parameter_counts": parameter_and_optimizer_counts(
                     arms[arm], base_optimizers[arm], event_optimizers[arm]
                 ),
-                "roundtrip_errors": roundtrip_errors,
+                "restore_metrics": restore_metrics,
                 "checkpoint_sha256": _file_sha256(checkpoint),
                 "checkpoint_byte_count": checkpoint.stat().st_size,
             }
@@ -3047,6 +3609,7 @@ def _trajectory_episode_rows(
         rows.append({
             "episode_id": trajectory.ledger_ids[env_index],
             "utility": outcome.utility,
+            "outcome": _tracking_outcome_record(outcome),
             "keep": int(row_counts[0]),
             "renew": int(row_counts[1]),
             "non_create": int(row_counts[2]),
@@ -3066,22 +3629,7 @@ def _trajectory_episode_rows(
     return rows, reduction_counts
 
 
-def _natural_fork_key(record: dict[str, Any]) -> tuple[Any, ...]:
-    """The frozen action-independent selection key, in registered order."""
-
-    return (
-        int(record["replicate"]),
-        int(record["base_episode_id"]),
-        int(record["sign_parity"]),
-        int(record["time"]),
-        int(record["key"]),
-        int(record["membership_epoch"]),
-        int(record["segment_id"]),
-        str(record["natural_action"]),
-    )
-
-
-def _collect_natural_fork_evidence(
+def _collect_causal_audit_evidence(
     arm: Any,
     *,
     replicate: int,
@@ -3091,26 +3639,23 @@ def _collect_natural_fork_evidence(
     formal: bool,
     mode: str,
 ) -> dict[str, Any]:
-    """Select before outcome computation, then execute the frozen forks."""
+    """Derive selection and cyclic donors only from the raw pre-outcome trace."""
 
     candidates: dict[str, list[dict[str, Any]]] = {"KEEP": [], "RENEW": []}
+    raw_event_trace: list[dict[str, Any]] = []
     for batch_index, (trajectory, origin_state, _end_states) in enumerate(batches):
-        event_metadata = torch.stack(
-            (
-                trajectory.event_kind,
-                trajectory.membership_epoch,
-                trajectory.segment_id,
-            ),
-            dim=-1,
-        ).detach().cpu()
-        eligible = torch.nonzero(
-            event_metadata[..., 0].eq(KEEP) | event_metadata[..., 0].eq(RENEW),
-            as_tuple=False,
-        ).tolist()
-        for time_index, env_index, key in eligible:
-            kind = int(event_metadata[time_index, env_index, key, 0])
+        for trace_row in trajectory.raw_event_trace:
+            raw_event_trace.append({
+                "batch_index": batch_index,
+                "row": deepcopy(trace_row),
+            })
+            coordinate = trace_row["coordinate"]
+            time_index = int(coordinate["time"])
+            env_index = int(coordinate["env_index"])
+            key = int(coordinate["key"])
+            kind = int(trace_row["natural_kind"])
             action = "KEEP" if kind == KEEP else "RENEW"
-            episode_id = int(trajectory.ledger_ids[env_index])
+            episode_id = int(trace_row["origin_binding"]["episode_id"])
             candidates[action].append({
                 "replicate": int(replicate),
                 "base_episode_id": episode_id // 2,
@@ -3118,90 +3663,161 @@ def _collect_natural_fork_evidence(
                 "sign_parity": episode_id & 1,
                 "time": int(time_index),
                 "key": int(key),
-                "membership_epoch": int(
-                    event_metadata[time_index, env_index, key, 1]
-                ),
-                "segment_id": int(
-                    event_metadata[time_index, env_index, key, 2]
-                ),
+                "membership_epoch": int(coordinate["membership_epoch"]),
+                "segment_id": int(coordinate["segment_id"]),
                 "natural_action": action,
                 "batch_index": batch_index,
                 "env_index": int(env_index),
+                "installed_z": deepcopy(trace_row["installed_z"]),
+                "candidate_u": deepcopy(trace_row["candidate_u"]),
+                "candidate_z": deepcopy(trace_row["candidate_z"]),
             })
     selected: list[dict[str, Any]] = []
-    eligible_keys: dict[str, list[list[Any]]] = {}
     selected_keys: dict[str, list[list[Any]]] = {}
     ordered_by_action = {
-        action: sorted(candidates[action], key=_natural_fork_key)
-        for action in ("KEEP", "RENEW")
+        action: sorted(candidates[action], key=_causal_audit_key)
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
     }
     quota_shortfall = any(
-        len(ordered_by_action[action]) < NATURAL_FORK_QUOTA_PER_ACTION
-        for action in ("KEEP", "RENEW")
+        len(ordered_by_action[action]) < CAUSAL_AUDIT_QUOTA_PER_ACTION
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
     )
-    for action_index, action in enumerate(("KEEP", "RENEW")):
+    donor_for: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
+    for action_index, action in enumerate(CAUSAL_AUDIT_NATURAL_ACTIONS):
         ordered = ordered_by_action[action]
-        eligible_keys[action] = [list(_natural_fork_key(value)) for value in ordered]
         if quota_shortfall:
             selected_keys[action] = []
             continue
         selection_rng = make_rng(
             BOOTSTRAP_SEED,
-            NATURAL_FORK_SELECTION_COORDINATE,
+            CAUSAL_AUDIT_SELECTION_COORDINATE,
             replicate,
             action_index,
         )
         indices = sorted(int(value) for value in selection_rng.choice(
-            len(ordered), size=NATURAL_FORK_QUOTA_PER_ACTION, replace=False
+            len(ordered), size=CAUSAL_AUDIT_QUOTA_PER_ACTION, replace=False
         ))
         chosen = [ordered[index] for index in indices]
-        selected_keys[action] = [list(_natural_fork_key(value)) for value in chosen]
+        selected_keys[action] = [list(_causal_audit_key(value)) for value in chosen]
         selected.extend(chosen)
+        key_sorted = sorted(chosen, key=_causal_audit_key)
+        for position, recipient in enumerate(key_sorted):
+            donor_for[_causal_audit_key(recipient)] = (
+                position, key_sorted[(position + 1) % len(key_sorted)]
+            )
 
-    utilities = {int(row["episode_id"]): float(row["utility"]) for row in episode_rows}
-    fork_rows: list[dict[str, Any]] = []
+    natural_outcomes = {
+        int(row["episode_id"]): deepcopy(row["outcome"]) for row in episode_rows
+    }
+    audit_rows: list[dict[str, Any]] = []
     selected_for_execution: list[dict[str, Any]] = []
-    for record in sorted(selected, key=_natural_fork_key):
+    for record in sorted(selected, key=_causal_audit_key):
         trajectory, origin_state, expected_end_rng_states = batches[
             int(record["batch_index"])
         ]
-        key = _natural_fork_key(record)
+        key = _causal_audit_key(record)
+        mapping_position, donor = donor_for[key]
+        donor_key = _causal_audit_key(donor)
+        donor_material = _causal_audit_donor_material(
+            record, donor, mapping_position,
+        )
         selected_for_execution.append({
             **record,
-            "fork_id": _digest_json(list(key)),
+            "audit_id": _digest_json(list(key)),
             "trajectory": trajectory,
             "origin_state": origin_state,
             "expected_end_rng_states": deepcopy(expected_end_rng_states),
+            "recipient_key": list(key),
+            "donor_key": list(donor_key),
+            "mapping_position": mapping_position,
+            "donor_candidate_u": deepcopy(donor["candidate_u"]),
+            "donor_candidate_z": deepcopy(donor["candidate_z"]),
+            "donor_binding": deepcopy(donor_material["binding"]),
+            "selected_state": {
+                "batch_index": int(record["batch_index"]),
+                "time": int(record["time"]),
+                "env_index": int(record["env_index"]),
+                "key": int(record["key"]),
+            },
         })
-    results = fork_opportunities_batched(
+    results = audit_opportunities_batched(
         arm, selected_for_execution, device=device
     )
+    selected_payloads_by_key: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for batch_index in sorted({
+        int(value["batch_index"]) for value in selected_for_execution
+    }):
+        batch_records = [
+            value for value in selected_for_execution
+            if int(value["batch_index"]) == batch_index
+        ]
+        trajectory = batch_records[0]["trajectory"]
+        coordinates = torch.as_tensor(
+            [
+                (int(value["time"]), int(value["env_index"]), int(value["key"]))
+                for value in batch_records
+            ],
+            dtype=torch.long, device=trajectory.event_z_pre.device,
+        )
+        time_indices, env_indices, key_indices = coordinates.unbind(dim=1)
+        packed_payloads = torch.stack((
+            trajectory.event_z_pre[time_indices, env_indices, key_indices],
+            trajectory.candidate_u[time_indices, env_indices, key_indices],
+            trajectory.candidate_z[time_indices, env_indices, key_indices],
+        ), dim=1).detach().cpu().numpy()
+        for value, packed in zip(batch_records, packed_payloads, strict=True):
+            selected_payloads_by_key[_causal_audit_key(value)] = {
+                name: _float32_payload(packed[index])
+                for index, name in enumerate(
+                    ("installed_z", "candidate_u", "candidate_z")
+                )
+            }
     for record, result in zip(selected_for_execution, results, strict=True):
-        natural_utility = utilities[int(record["episode_id"])]
-        if record["natural_action"] == "KEEP":
-            advantage = float(result["keep_utility"] - result["renew_utility"])
-            reproduced = float(result["keep_utility"])
-        else:
-            advantage = float(result["renew_utility"] - result["keep_utility"])
-            reproduced = float(result["renew_utility"])
-        if reproduced != natural_utility or result["natural_action"] != record["natural_action"]:
-            raise RuntimeError("natural fork failed to reproduce selected episode utility")
+        mapping_position, donor = donor_for[_causal_audit_key(record)]
+        selected_payloads = selected_payloads_by_key[_causal_audit_key(record)]
+        executed_branch_evidence = _causal_audit_branch_evidence(
+            record, donor, mapping_position,
+            selected_payloads=selected_payloads,
+            donor_material=result.get("donor_binding_material", {}),
+            selected_state=result.get("selected_state", {}),
+        )
+        expected_branch_evidence = _causal_audit_branch_evidence(
+            record, donor, mapping_position,
+        )
+        if executed_branch_evidence != expected_branch_evidence:
+            raise RuntimeError("causal audit executed payload binding mismatch")
+        outcomes = {
+            branch: _tracking_outcome_record(result["branch_outcomes"][branch])
+            for branch in CAUSAL_AUDIT_BRANCHES
+        }
+        natural_outcome = natural_outcomes[int(record["episode_id"])]
+        natural_branch = (
+            "KEEP_HELD_MARK" if record["natural_action"] == "KEEP"
+            else "RENEW_CANDIDATE_MARK"
+        )
+        if outcomes[natural_branch] != natural_outcome:
+            raise RuntimeError("causal audit failed full natural-outcome equality")
+        contrasts = _causal_contrasts(record["natural_action"], outcomes)
+        contrast_additivity = _contrast_additivity_evidence(contrasts, outcomes)
+        if contrast_additivity["residual"] > contrast_additivity["bound"]:
+            raise RuntimeError("causal audit binary64 additivity bound failed")
         branch_bindings: dict[str, dict[str, Any]] = {}
-        for branch_action in ("KEEP", "RENEW"):
-            context = {
+        for branch in CAUSAL_AUDIT_BRANCHES:
+            context = _causal_audit_bound_context({
                 "domain": "stage2", "mode": mode, "formal": bool(formal),
                 "replicate": int(replicate), "arm": "EHC",
                 "cell": "held_out_stochastic",
                 "batch": int(record["batch_index"]),
-                "fork_id": str(result["fork_id"]),
+                "audit_id": str(result["audit_id"]),
                 "episode_id": int(record["episode_id"]),
                 "time": int(record["time"]), "key": int(record["key"]),
                 "membership_epoch": int(record["membership_epoch"]),
                 "segment_id": int(record["segment_id"]),
                 "natural_action": str(record["natural_action"]),
-                "branch_action": branch_action,
-            }
-            branch_bindings[branch_action] = {
+                "branch": branch,
+            }, key=_causal_audit_key(record), donor_key=_causal_audit_key(donor),
+                branch_evidence=executed_branch_evidence)
+            branch_bindings[branch] = {
                 name: make_rng_binding(
                     context=context, stream=name,
                     seed=authoritative_seed_map("held_out", replicate)[name],
@@ -3211,7 +3827,7 @@ def _collect_natural_fork_evidence(
                 )
                 for name in RNG_NAMES
             }
-        fork_rows.append({
+        audit_rows.append({
             **{name: record[name] for name in (
                 "replicate", "base_episode_id", "episode_id", "sign_parity",
                 "time", "key", "membership_epoch", "segment_id",
@@ -3219,49 +3835,83 @@ def _collect_natural_fork_evidence(
             )},
             "batch_index": int(record["batch_index"]),
             "env_index": int(record["env_index"]),
-            "keep_utility": float(result["keep_utility"]),
-            "renew_utility": float(result["renew_utility"]),
-            "natural_utility": natural_utility,
-            "advantage": advantage,
-            "fork_id": str(result["fork_id"]),
+            "audit_id": str(result["audit_id"]),
+            "donor": {
+                "mapping_position": mapping_position,
+                "donor_key": list(_causal_audit_key(donor)),
+                "candidate_u": deepcopy(donor["candidate_u"]),
+                "candidate_z": deepcopy(donor["candidate_z"]),
+                "candidate_digest": _digest_json({
+                    "candidate_u": donor["candidate_u"],
+                    "candidate_z": donor["candidate_z"],
+                }),
+            },
+            "executed_branch_evidence": executed_branch_evidence,
+            "outcomes": outcomes,
+            "natural_outcome": natural_outcome,
+            "contrasts": contrasts,
+            "contrast_additivity": contrast_additivity,
             "natural_errors": dict(result["natural_errors"]),
             "rng_bindings": branch_bindings,
             "stream_consumption": {
-                action: deepcopy(result["branches"][action]["stream_consumption"])
-                for action in ("KEEP", "RENEW")
+                branch: deepcopy(result["branches"][branch]["stream_consumption"])
+                for branch in CAUSAL_AUDIT_BRANCHES
             },
             "end_rng_digests": {
                 name: _digest_json(result["end_rng_states"][name])
                 for name in RNG_NAMES
             },
         })
-    elapsed = float(results[0]["elapsed_seconds"]) if results else 0.0
-    calls = sum(
-        math.ceil(count / 8)
+    branch_calls = sum(
+        math.ceil(count / 5)
         for count in Counter(
-            int(value["time"]) for value in selected_for_execution
+            (int(value["batch_index"]), int(value["time"]))
+            for value in selected_for_execution
         ).values()
     )
-    return {
-        "schema": "event_held_commitment_link_g0.natural_fork.v5",
+    prefix_calls = len({
+        (int(value["batch_index"]), int(value["time"]))
+        for value in selected_for_execution
+    })
+    collector_calls = prefix_calls + branch_calls
+    telemetry_source = results[0]["telemetry"] if results else {
+        "prefix_seconds": 0.0, "branch_seconds": 0.0, "total_seconds": 0.0,
+            "selected_state_count": 0, "collector_call_count": 0,
+    }
+    artifact = {
+        "schema": "event_held_commitment_link_g0.causal_audit.v1",
         "replicate": int(replicate),
-        "quota_per_action": NATURAL_FORK_QUOTA_PER_ACTION,
-        "eligible_keys": eligible_keys,
+        "quota_per_action": CAUSAL_AUDIT_QUOTA_PER_ACTION,
+        "raw_event_trace": raw_event_trace,
         "selected_keys": selected_keys,
         "execution": {
-            "engine": "registered_width_batched_v1",
+            "engine": "registered_width_batched_causal_audit_v1",
             "registered_width": FORMAL_NUM_ENVS,
-            "selected_pairs": len(selected_for_execution),
-            "collector_calls": calls,
+            "selected_state_count": len(selected_for_execution),
+            "branch_row_count": len(selected_for_execution) * len(CAUSAL_AUDIT_BRANCHES),
+            "padding_row_count": branch_calls * FORMAL_NUM_ENVS
+            - len(selected_for_execution) * len(CAUSAL_AUDIT_BRANCHES),
+            "collector_call_count": collector_calls,
         },
         "telemetry": {
-            "elapsed_seconds": elapsed,
-            "pairs_per_second": (
-                len(selected_for_execution) / elapsed if elapsed > 0.0 else 0.0
-            ),
+            "prefix_seconds": float(telemetry_source["prefix_seconds"]),
+            "branch_seconds": float(telemetry_source["branch_seconds"]),
+            "total_seconds": float(telemetry_source["total_seconds"]),
+            "selected_state_count": len(selected_for_execution),
+            "collector_call_count": collector_calls,
+            "serialized_size_bytes": 0,
         },
-        "fork_rows": fork_rows,
+        "audit_rows": audit_rows,
     }
+    artifact["telemetry"]["serialized_size_bytes"] = len(json.dumps(
+        {"raw_event_trace": raw_event_trace, "audit_rows": audit_rows},
+        sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    ).encode("utf-8"))
+    if int(telemetry_source["selected_state_count"]) != len(selected_for_execution):
+        raise RuntimeError("causal audit selected-state telemetry mismatch")
+    if int(telemetry_source["collector_call_count"]) != collector_calls:
+        raise RuntimeError("causal audit collector-call telemetry mismatch")
+    return artifact
 
 
 def _evaluation_core(
@@ -3314,7 +3964,7 @@ def _evaluation_core(
                 state = _evaluation_state(arm_name, replicate, profile=profile)
                 episode_rows: list[dict[str, Any]] = []
                 batches: list[dict[str, Any]] = []
-                fork_batches: list[tuple[Any, Any, Mapping[str, Any]]] = []
+                audit_batches: list[tuple[Any, Any, Mapping[str, Any]]] = []
                 for batch_index, start in enumerate(range(0, episodes_per_cell, FORMAL_NUM_ENVS)):
                     failure_context["batch"] = batch_index
                     episode_ids = list(range(start, start + FORMAL_NUM_ENVS))
@@ -3355,6 +4005,10 @@ def _evaluation_core(
                         "reduction_counts": reduction_counts,
                         "checkpoint_origin": checkpoint_name,
                         "episodes_digest": _digest_json(rows),
+                        "raw_event_trace_binding": {
+                            "row_count": len(trajectory.raw_event_trace),
+                            "trace_sha256": _digest_json(list(trajectory.raw_event_trace)),
+                        },
                     }
                     if not (
                         _replay_record_valid(
@@ -3371,15 +4025,15 @@ def _evaluation_core(
                     batches.append(batch_evidence)
                     episode_rows.extend(rows)
                     if arm_name == "EHC" and cell == "held_out_stochastic":
-                        fork_batches.append((
+                        audit_batches.append((
                             trajectory, batch_origin, owned_rng_states(state)
                         ))
                 failure_context["batch"] = None
-                natural_fork = (
-                    _collect_natural_fork_evidence(
+                causal_audit = (
+                    _collect_causal_audit_evidence(
                         arm,
                         replicate=replicate,
-                        batches=fork_batches,
+                        batches=audit_batches,
                         episode_rows=episode_rows,
                         device=device,
                         formal=formal,
@@ -3403,7 +4057,7 @@ def _evaluation_core(
                         "batch_size": FORMAL_NUM_ENVS, "batches": len(batches),
                     },
                     "batches": batches,
-                    "natural_fork": natural_fork,
+                    "causal_audit": causal_audit,
                     "operational": True,
                     "episodes": episode_rows,
                 }
@@ -3430,7 +4084,7 @@ def _evaluation_core(
                 _write_json(manifest_path, manifest)
                 completed_paths.append(reference["path"])
                 last_evidence.clear(); last_evidence.update(reference)
-                del payload, batches, episode_rows, natural_fork
+                del payload, batches, episode_rows, causal_audit
     manifest["status"] = "COMPLETE"
     manifest["branch"] = (
         "FORMAL_EVALUATION_COMPLETE" if formal
@@ -3512,11 +4166,11 @@ def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, An
             exercise_root, stage2_reference["path"]
         )
         with stage2_path.open("r", encoding="utf-8") as handle:
-            stage2 = json.load(handle)["natural_fork"]["execution"]
+            stage2 = json.load(handle)["causal_audit"]["execution"]
         if not (
-            stage2["engine"] == "registered_width_batched_v1"
-            and int(stage2["selected_pairs"]) > 0
-            and int(stage2["collector_calls"]) > 0
+            stage2["engine"] == "registered_width_batched_causal_audit_v1"
+            and int(stage2["selected_state_count"]) > 0
+            and int(stage2["collector_call_count"]) > 0
         ):
             raise RuntimeError("formal path exercise did not execute Stage-2 batches")
         result = {
@@ -3556,14 +4210,14 @@ def _percentile(values: list[float]) -> tuple[float, float]:
     return float(np.quantile(values, 0.025)), float(np.quantile(values, 0.975))
 
 
-def _empty_natural_fork_summary() -> dict[str, Any]:
+def _empty_causal_audit_summary() -> dict[str, Any]:
     return {
-        "natural_keep_rows_by_replicate": (0,) * NATURAL_FORK_REPLICATES,
-        "natural_renew_rows_by_replicate": (0,) * NATURAL_FORK_REPLICATES,
-        "a_keep_ci": (0.0, 0.0),
-        "a_renew_ci": (0.0, 0.0),
-        "a_keep_mean": 0.0,
-        "a_renew_mean": 0.0,
+        "causal_keep_rows_by_replicate": (0,) * CAUSAL_AUDIT_REPLICATES,
+        "causal_renew_rows_by_replicate": (0,) * CAUSAL_AUDIT_REPLICATES,
+        "c_total_keep_ci": (0.0, 0.0),
+        "c_total_renew_ci": (0.0, 0.0),
+        "c_total_keep_mean": 0.0,
+        "c_total_renew_mean": 0.0,
     }
 
 
@@ -3592,7 +4246,7 @@ def _aggregate_analysis_core(
             "g_ci": (0.0, 0.0),
             "k_bin_cis": [(0.0, 0.0)] * 3,
             "intervention_ci": (0.0, 0.0),
-            **_empty_natural_fork_summary(),
+            **_empty_causal_audit_summary(),
         }
         result = {
             "artifact_schema": FORMAL_ANALYSIS_ARTIFACT_SCHEMA,
@@ -3620,13 +4274,13 @@ def _aggregate_analysis_core(
         lambda k: k == 1, lambda k: k == 2, lambda k: k >= 3,
     )
     intervention_values: list[float] = []
-    fork_rows = compact["fork_rows"]
-    fork_by_base_episode = {
+    audit_rows = compact["audit_rows"]
+    audit_by_base_episode = {
         action: {
             replicate: {
                 base_episode_id: [
-                    float(row["advantage"])
-                    for row in fork_rows[replicate]
+                    deepcopy(row["contrasts"])
+                    for row in audit_rows[replicate]
                     if row["natural_action"] == action
                     and int(row["base_episode_id"]) == base_episode_id
                 ]
@@ -3636,8 +4290,10 @@ def _aggregate_analysis_core(
         }
         for action in ("KEEP", "RENEW")
     }
-    a_keep_values: list[float] = []
-    a_renew_values: list[float] = []
+    causal_values = {
+        action: {component: [] for component in ("total", "timing", "mark")}
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
+    }
     for _ in range(BOOTSTRAP_REPETITIONS):
         sampled_replicates = rng.integers(0, 5, size=5)
         sampled: dict[str, list[dict[str, Any]]] = {arm: [] for arm in ARMS}
@@ -3698,22 +4354,23 @@ def _aggregate_analysis_core(
         intervention_values.append(
             float(np.mean(intervention)) if intervention else 0.0
         )
-        for action, destination in (
-            ("KEEP", a_keep_values), ("RENEW", a_renew_values)
-        ):
-            sampled_advantages: list[float] = []
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
+            sampled_contrasts: list[dict[str, float]] = []
             for replicate, base_indices in zip(
                 sampled_replicates, sampled_base_indices
             ):
                 for base_episode_id in base_indices:
-                    sampled_advantages.extend(
-                        fork_by_base_episode[action][int(replicate)][
+                    sampled_contrasts.extend(
+                        audit_by_base_episode[action][int(replicate)][
                             int(base_episode_id)
                         ]
                     )
-            if not sampled_advantages:
-                raise RuntimeError("natural fork bootstrap drew no selected clusters")
-            destination.append(float(np.mean(sampled_advantages)))
+            if not sampled_contrasts:
+                raise RuntimeError("causal audit bootstrap drew no selected clusters")
+            for component in ("total", "timing", "mark"):
+                causal_values[action][component].append(float(np.mean([
+                    value[component] for value in sampled_contrasts
+                ])))
     utility_ci = {
         arm: _percentile(values) for arm, values in utilities.items()
     }
@@ -3742,22 +4399,22 @@ def _aggregate_analysis_core(
         "g_ci": _percentile(gains),
         "k_bin_cis": [_percentile(values) for values in k_bin_values],
         "intervention_ci": _percentile(intervention_values),
-        "natural_keep_rows_by_replicate": tuple(
-            sum(row["natural_action"] == "KEEP" for row in fork_rows[replicate])
+        "causal_keep_rows_by_replicate": tuple(
+            sum(row["natural_action"] == "KEEP" for row in audit_rows[replicate])
             for replicate in range(5)
         ),
-        "natural_renew_rows_by_replicate": tuple(
-            sum(row["natural_action"] == "RENEW" for row in fork_rows[replicate])
+        "causal_renew_rows_by_replicate": tuple(
+            sum(row["natural_action"] == "RENEW" for row in audit_rows[replicate])
             for replicate in range(5)
         ),
-        "a_keep_ci": _percentile(a_keep_values),
-        "a_renew_ci": _percentile(a_renew_values),
-        "a_keep_mean": float(np.mean([
-            row["advantage"] for rows in fork_rows.values() for row in rows
+        "c_total_keep_ci": _percentile(causal_values["KEEP"]["total"]),
+        "c_total_renew_ci": _percentile(causal_values["RENEW"]["total"]),
+        "c_total_keep_mean": float(np.mean([
+            row["contrasts"]["total"] for rows in audit_rows.values() for row in rows
             if row["natural_action"] == "KEEP"
         ])),
-        "a_renew_mean": float(np.mean([
-            row["advantage"] for rows in fork_rows.values() for row in rows
+        "c_total_renew_mean": float(np.mean([
+            row["contrasts"]["total"] for rows in audit_rows.values() for row in rows
             if row["natural_action"] == "RENEW"
         ])),
     }
@@ -3774,6 +4431,20 @@ def _aggregate_analysis_core(
             "physical_time_bin_cis": [_percentile(values) for values in bin_values],
             "complete_segment_count": complete_segment_count,
             "censored_segment_count": censored_segment_count,
+            "causal_components": {
+                action: {
+                    component: {
+                        "ci": _percentile(causal_values[action][component]),
+                        "mean": float(np.mean([
+                            row["contrasts"][component]
+                            for rows in audit_rows.values() for row in rows
+                            if row["natural_action"] == action
+                        ])),
+                    }
+                    for component in ("total", "timing", "mark")
+                }
+                for action in CAUSAL_AUDIT_NATURAL_ACTIONS
+            },
         },
         "secondary_v_ci": _percentile(secondary_gains),
         "operational_errors": [],

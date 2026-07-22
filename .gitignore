@@ -59,10 +59,6 @@ data/
 !docs/superpowers/specs/*.md
 # Custom subagent definitions are durable project tooling.
 !.claude/agents/*.md
-# Native OMP task-agent definitions are durable project tooling.
-!.omp/agents/*.md
-!.omp/agents/references/*.md
-!.omp/agents/references/*.json
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 # Generated from the account-visible Codex model cache; never commit account
@@ -85,6 +81,7 @@ runtime/model-catalog-v2-workaround.json
 !memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md
 *.txt
 !/requirements_server.txt
+!/requirements_sb3.txt
 !scripts/r27_g2_runtime_package_manifest.txt
 *.tar
 !ref/hmasd.tar

@@ -65,4 +65,4 @@ The Controller owns:
 External Pro review may be a full plural round or focused continuation. It
 selects scientific direction without writing an implementation plan. Direct
 Controller intake must not insert a local scientific decision between Pro and
-the OMP Project Manager.
+the Project Manager.

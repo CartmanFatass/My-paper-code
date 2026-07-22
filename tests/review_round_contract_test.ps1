@@ -11,7 +11,7 @@ if ($registry.schema_version -ne 25 -or @($registry.reviewers.PSObject.Propertie
     $registry.reviewers.open_divergent.session_role -ne 'open_divergent_exchange' -or
     $registry.round_controller.external_scientific_decision -ne 'open_divergent' -or
     $registry.round_controller.decision_intake -ne 'active_controller_direct') { throw 'Review registry mismatch' }
-foreach ($required in @('External GPT-5.6 Pro is the scientific decision source','one scheduled research action','Controller direct evidence intake','OMP Project Manager','50_DISPOSITION.md')) {
+foreach ($required in @('External GPT-5.6 Pro is the scientific decision source','one scheduled research action','Controller direct evidence intake','Project Manager','50_DISPOSITION.md')) {
     if (-not $round.Contains($required)) { throw "Review round missing: $required" }
 }
 foreach ($required in @('reviewer_role=OPEN_DIVERGENT','ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY','COMPLETE_WITH_GAPS','callback delivery','heartbeat was deleted','source_thread_id=<registered open_divergent_exchange thread ID>','handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>')) {

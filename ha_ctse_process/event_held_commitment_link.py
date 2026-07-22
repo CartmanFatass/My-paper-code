@@ -92,6 +92,11 @@ OPPORTUNITY_SUPPORT = np.asarray((4, 8, 12), dtype=np.int64)
 CREATE, KEEP, RENEW = 1, 2, 3
 EVENT_ENTROPY_COEFFICIENT = 0.01
 RNG_NAMES = ("ledger", "order", "primitive", "opportunity", "event", "mark")
+AUDIT_BRANCHES = (
+    "KEEP_HELD_MARK",
+    "RENEW_DERANGED_MARK",
+    "RENEW_CANDIDATE_MARK",
+)
 
 
 @dataclass
@@ -169,6 +174,7 @@ class EventTrajectory:
     membership_epoch: torch.Tensor
     segment_id: torch.Tensor
     q_before: torch.Tensor
+    raw_event_trace: tuple[dict[str, Any], ...]
     outcomes: tuple[TrackingOutcome, ...]
     segments: tuple[tuple[SegmentRecord, ...], ...]
     ledger_ids: tuple[int, ...]
@@ -415,6 +421,28 @@ def _canonical_json_digest(value: Any) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
+def _float32_payload(value: np.ndarray) -> dict[str, Any]:
+    """Canonical exact binary32 payload without any outcome information."""
+
+    array = np.ascontiguousarray(value, dtype=np.float32)
+    encoded = array.tobytes(order="C")
+    return {
+        "dtype": "float32",
+        "shape": [int(size) for size in array.shape],
+        "values": array.tolist(),
+        "bytes_b64": base64.b64encode(encoded).decode("ascii"),
+        "sha256": hashlib.sha256(encoded).hexdigest(),
+    }
+
+
+def _raw_event_trace_digest(row_without_digest: Mapping[str, Any]) -> str:
+    encoded = json.dumps(
+        row_without_digest, sort_keys=True, separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("utf-8")
+    return hashlib.sha256(b"HMASD_RAW_EVENT_TRACE_V1\0" + encoded).hexdigest()
+
+
 def owned_rng_states(state: TrainingState) -> dict[str, Any]:
     """Return canonical, independently cloneable owned-generator states."""
 
@@ -607,7 +635,7 @@ def validate_rng_binding(
 
 
 @dataclass
-class _ForkRowStream:
+class _AuditRowStream:
     """One fork-row replay stream with independent consumption state."""
 
     values: np.ndarray
@@ -649,8 +677,8 @@ class _ForkRowStream:
         }
 
 
-def _fork_row_draw(
-    row_rngs: list[Mapping[str, _ForkRowStream]],
+def _audit_row_draw(
+    row_rngs: list[Mapping[str, _AuditRowStream]],
     requests: list[tuple[int, int, int, torch.Tensor, torch.Tensor]],
     name: str,
     *,
@@ -734,7 +762,7 @@ def collect_trajectory(
     profile: Literal["train", "iid", "held_out"] = "train",
     forced_event: tuple[int, int, int, int, torch.Tensor] | None = None,
     forced_events: Mapping[tuple[int, int, int], tuple[int, torch.Tensor]] | None = None,
-    row_rngs: list[Mapping[str, _ForkRowStream]] | None = None,
+    row_rngs: list[Mapping[str, _AuditRowStream]] | None = None,
 ) -> EventTrajectory:
     if state.arm != arm.arm or set(state.rngs) != set(RNG_NAMES):
         raise ValueError("collector arm or owned-RNG key set mismatch")
@@ -742,6 +770,7 @@ def collect_trajectory(
         name: [] for name in RNG_NAMES
     }
     request_evidence: list[dict[str, Any]] = []
+    raw_event_trace: list[dict[str, Any]] = []
     if cursor is None:
         ids = tuple(int(v) for v in episode_ids) if episode_ids is not None else tuple(
             range(state.next_episode_id, state.next_episode_id + FORMAL_NUM_ENVS)
@@ -761,6 +790,7 @@ def collect_trajectory(
         if state.profile != profile:
             raise ValueError("cursor/state profile mismatch")
     env_count = len(cursor.environments)
+    ledger_evidence = tuple(_ledger_audit_evidence(value) for value in cursor.ledgers)
     if row_rngs is not None and len(row_rngs) != env_count:
         raise ValueError("fork row RNG count must match the collection width")
     remaining = HORIZON - cursor.environments[0].time
@@ -889,6 +919,7 @@ def collect_trajectory(
 
             selected_kind_grid = torch.zeros_like(kind)
             request_q = np.empty(len(requests), dtype=np.int64)
+            trace_payload_values: np.ndarray | None = None
             if requests:
                 assert arm.event_head is not None and arm.mark_head is not None
                 packed_inputs = torch.stack([value[3] for value in requests])
@@ -916,7 +947,7 @@ def collect_trajectory(
                     event_values = (
                         state.rngs["event"].random(len(requests))
                         if row_rngs is None
-                        else _fork_row_draw(row_rngs, requests, "event")
+                        else _audit_row_draw(row_rngs, requests, "event")
                     )
                     event_uniforms = torch.as_tensor(
                         event_values,
@@ -939,7 +970,7 @@ def collect_trajectory(
                             (len(requests), MARK_DIM)
                         )
                         if row_rngs is None
-                        else _fork_row_draw(
+                        else _audit_row_draw(
                             row_rngs, requests, "mark", width=MARK_DIM
                         )
                     )
@@ -1010,6 +1041,13 @@ def collect_trajectory(
                 )
                 candidate_u[env_indices, key_indices] = u.detach()
                 candidate_z[env_indices, key_indices] = candidate_tanh_u
+                # One packed transfer captures every raw mark field at this
+                # physical row.  Individual trace records are then assembled
+                # from host binary32 arrays before any environment step can
+                # consume reward or terminal outcome information.
+                trace_payload_values = torch.stack(
+                    (packed_z_pre, u.detach(), candidate_tanh_u), dim=1
+                ).cpu().numpy()
                 event_z_pre[env_indices, key_indices] = packed_z_pre
                 event_new_z[env_indices, key_indices] = packed_new_z
                 cat_mask[env_indices, key_indices] = derived_cat_mask
@@ -1030,7 +1068,7 @@ def collect_trajectory(
                         OPPORTUNITY_SUPPORT, size=len(requests)
                     )
                     if row_rngs is None
-                    else _fork_row_draw(
+                    else _audit_row_draw(
                         row_rngs, requests, "opportunity", dtype=np.int64
                     )
                 )
@@ -1088,6 +1126,41 @@ def collect_trajectory(
                     raise RuntimeError("CREATE support drift")
                 if request_kind != CREATE and selected_kind not in (KEEP, RENEW):
                     raise RuntimeError("opportunity support drift")
+                if selected_kind in (KEEP, RENEW):
+                    if trace_payload_values is None:
+                        raise RuntimeError("eligible event lacks raw trace payload")
+                    origin = {
+                        "domain": "HMASD_RAW_EVENT_TRACE_V1",
+                        "arm": arm.arm,
+                        "profile": profile,
+                        "replicate": int(state.replicate),
+                        "episode_id": int(cursor.episode_ids[env_index]),
+                        "ledger_digest": ledger_evidence[env_index]["ledger_digest"],
+                    }
+                    trace_row = {
+                        "coordinate": {
+                            "time": int(time),
+                            "env_index": int(env_index),
+                            "key": int(key),
+                            "membership_epoch": int(life.membership_epoch),
+                            "segment_id": int(life.segment_id),
+                        },
+                        "natural_kind": int(selected_kind),
+                        "installed_z": _float32_payload(
+                            trace_payload_values[index, 0]
+                        ),
+                        "candidate_u": _float32_payload(
+                            trace_payload_values[index, 1]
+                        ),
+                        "candidate_z": _float32_payload(
+                            trace_payload_values[index, 2]
+                        ),
+                        "origin_binding": origin,
+                    }
+                    trace_row["origin_binding"] = origin | {
+                        "binding_digest": _raw_event_trace_digest(trace_row)
+                    }
+                    raw_event_trace.append(trace_row)
                 if selected_kind != CREATE:
                     life.spell_opportunity_count += 1
                 if selected_kind == RENEW:
@@ -1216,6 +1289,7 @@ def collect_trajectory(
         membership_epoch=stacked["epoch"],
         segment_id=stacked["segment"],
         q_before=stacked["q"],
+        raw_event_trace=tuple(raw_event_trace),
         outcomes=outcomes,
         segments=tuple(tuple(value) for value in cursor.segments),
         ledger_ids=cursor.episode_ids,
@@ -1224,9 +1298,7 @@ def collect_trajectory(
         rng_audit={
             "streams": rng_trace,
             "request_evidence": request_evidence,
-            "ledgers": [
-                _ledger_audit_evidence(value) for value in cursor.ledgers
-            ],
+            "ledgers": list(ledger_evidence),
         },
         cursor=next_cursor,
     )
@@ -2074,13 +2146,13 @@ def batched_natural_and_permuted_action_tv(
 # realized event/mark/primitive variates are not recoverable from the
 # record), and `collect_trajectory`'s deterministic path draws no `event`,
 # `mark` or `primitive` variates at all. Those three streams -- and with
-# them the dtype-agreement check in `_ForkStream.take` and the
+# them the dtype-agreement check in `_AuditStream.take` and the
 # float32/float64 distinction it guards -- are registered groundwork for
 # stochastic forking, not exercised code.
-FORK_STREAM_NAMES = ("opportunity", "event", "mark", "primitive")
+AUDIT_STREAM_NAMES = ("opportunity", "event", "mark", "primitive")
 
 
-class _ForkStream:
+class _AuditStream:
     """One fork-owned variate stream shared by both branches of a pair.
 
     The stream owns exactly one generator and one realized-variate log. The
@@ -2145,12 +2217,12 @@ class _ForkStream:
         return np.asarray(self.values[position : position + count])
 
 
-class _ForkStreamView:
+class _AuditStreamView:
     """One branch's own position/consumption bookkeeping over shared streams."""
 
     def __init__(
         self,
-        streams: Mapping[str, _ForkStream],
+        streams: Mapping[str, _AuditStream],
         positions: Mapping[str, int] | None = None,
     ) -> None:
         self.streams = dict(streams)
@@ -2171,10 +2243,10 @@ class _ForkStreamView:
         return narrowed
 
 
-class _ForkGenerator:
+class _AuditGenerator:
     """`np.random.Generator` facade over one branch view of one fork stream."""
 
-    def __init__(self, view: _ForkStreamView, name: str) -> None:
+    def __init__(self, view: _AuditStreamView, name: str) -> None:
         self._view = view
         self._name = name
 
@@ -2217,7 +2289,7 @@ class _ForkGenerator:
         return values.reshape(shape) if shape else values[0]
 
 
-def _fork_opportunity_script(
+def _audit_opportunity_script(
     trajectory: EventTrajectory, *, fallback: np.random.Generator
 ) -> tuple[list[int], dict[tuple[int, int, int], int], list[int]]:
     """Recover the realized opportunity schedule for a collected batch.
@@ -2277,7 +2349,7 @@ def _fork_opportunity_script(
     return values, index_of, cumulative
 
 
-def _fork_cursor(
+def _audit_cursor(
     ledgers: tuple[NoncalendarLedger, ...],
     episode_ids: tuple[int, ...],
     device: torch.device,
@@ -2292,7 +2364,7 @@ def _fork_cursor(
     )
 
 
-def _clone_fork_cursor(cursor: CollectionCursor) -> CollectionCursor:
+def _clone_audit_cursor(cursor: CollectionCursor) -> CollectionCursor:
     """Independent branch state built on the environment snapshot contract."""
 
     return CollectionCursor(
@@ -2323,17 +2395,17 @@ def _clone_fork_cursor(cursor: CollectionCursor) -> CollectionCursor:
     )
 
 
-def _fork_branch_state(
+def _audit_branch_state(
     arm_name: ArmName,
     replicate: int,
     profile: Literal["train", "iid", "held_out"],
-    view: _ForkStreamView,
+    view: _AuditStreamView,
 ) -> TrainingState:
     rngs: dict[str, Any] = {
-        name: np.random.default_rng(0) for name in RNG_NAMES if name not in FORK_STREAM_NAMES
+        name: np.random.default_rng(0) for name in RNG_NAMES if name not in AUDIT_STREAM_NAMES
     }
-    for name in FORK_STREAM_NAMES:
-        rngs[name] = _ForkGenerator(view, name)
+    for name in AUDIT_STREAM_NAMES:
+        rngs[name] = _AuditGenerator(view, name)
     return TrainingState(
         arm=arm_name,
         replicate=int(replicate),
@@ -2377,7 +2449,7 @@ def _branch_boundary(cursor: CollectionCursor, env_index: int) -> dict[str, Any]
     }
 
 
-def _apply_fork_event(
+def _apply_audit_event(
     cursor: CollectionCursor,
     *,
     env_index: int,
@@ -2402,7 +2474,7 @@ def _apply_fork_event(
     place it ahead of every record the fork step itself produces and the
     branch would stop being a literal continuation of the collected segment
     sequence. The caller splices it into its frontier-order position once
-    the fork step has run (`_fork_focal_segment_index`).
+    the audit step has run (`_audit_focal_segment_index`).
     """
 
     life = cursor.lifecycles[env_index][key]
@@ -2423,7 +2495,7 @@ def _apply_fork_event(
     return record
 
 
-def _fork_focal_segment_index(
+def _audit_focal_segment_index(
     branch: EventTrajectory,
     *,
     env_index: int,
@@ -2467,7 +2539,7 @@ def _fork_focal_segment_index(
     )
 
 
-def _check_fork_provenance(
+def _check_audit_provenance(
     arm: CommitmentArm,
     trajectory: EventTrajectory,
     cursor: CollectionCursor,
@@ -2520,7 +2592,7 @@ def _check_fork_provenance(
             )
 
 
-def _isolate_fork_cursor(
+def _isolate_audit_cursor(
     cursor: CollectionCursor, env_index: int
 ) -> CollectionCursor:
     return CollectionCursor(
@@ -2535,7 +2607,7 @@ def _isolate_fork_cursor(
     )
 
 
-def _combine_fork_cursors(cursors: list[CollectionCursor]) -> CollectionCursor:
+def _combine_audit_cursors(cursors: list[CollectionCursor]) -> CollectionCursor:
     if not cursors or any(len(cursor.environments) != 1 for cursor in cursors):
         raise ValueError("batched fork cursors must each own one environment")
     times = {cursor.environments[0].time for cursor in cursors}
@@ -2553,14 +2625,14 @@ def _combine_fork_cursors(cursors: list[CollectionCursor]) -> CollectionCursor:
     )
 
 
-def _fork_row_scripts(
+def _audit_row_scripts(
     trajectory: EventTrajectory,
     rngs: Mapping[str, np.random.Generator],
     *,
     time: int,
     env_index: int,
 ) -> tuple[
-    dict[str, _ForkRowStream],
+    dict[str, _AuditRowStream],
     dict[str, Any],
     dict[str, dict[str, Any]],
 ]:
@@ -2581,7 +2653,7 @@ def _fork_row_scripts(
             for entry in trajectory.rng_audit["streams"][name]
             if "time" in entry["coordinates"]
         }
-        for name in FORK_STREAM_NAMES
+        for name in AUDIT_STREAM_NAMES
     }
     for step in range(int(time), int(trajectory.time_steps)):
         event_entry = audit_by_time["event"].get(step)
@@ -2629,7 +2701,7 @@ def _fork_row_scripts(
         name: deepcopy(owned[name].bit_generator.state) for name in RNG_NAMES
     }
     return (
-        {name: _ForkRowStream(value) for name, value in arrays.items()},
+        {name: _AuditRowStream(value) for name, value in arrays.items()},
         end_states,
         {
             name: {
@@ -2642,7 +2714,7 @@ def _fork_row_scripts(
     )
 
 
-def _fork_row_errors(
+def _audit_row_errors(
     branch: EventTrajectory,
     branch_index: int,
     original: EventTrajectory,
@@ -2650,51 +2722,97 @@ def _fork_row_errors(
     *,
     start: int,
 ) -> dict[str, Any]:
-    discrete_mismatch = 0
-    continuous_error = 0.0
-    for name in _FORK_DISCRETE_FIELDS:
-        if not torch.equal(
-            getattr(branch, name)[:, branch_index].detach().cpu(),
-            getattr(original, name)[start:, original_env].detach().cpu(),
-        ):
-            discrete_mismatch += 1
-    for name in _FORK_CONTINUOUS_FIELDS:
-        difference = (
-            getattr(branch, name)[:, branch_index].detach().cpu()
-            - getattr(original, name)[start:, original_env].detach().cpu()
+    device = branch.rewards.device
+    discrete_flags = [
+        torch.any(
+            getattr(branch, name)[:, branch_index]
+            != getattr(original, name)[start:, original_env].to(device)
+        ).to(torch.float32)
+        for name in _AUDIT_DISCRETE_FIELDS
+    ]
+    continuous_maxima = []
+    for name in _AUDIT_CONTINUOUS_FIELDS:
+        left = getattr(branch, name)[:, branch_index]
+        right = getattr(original, name)[start:, original_env].to(device)
+        continuous_maxima.append(
+            torch.max(torch.abs(left - right))
+            if left.numel() else torch.zeros((), device=device)
         )
-        continuous_error = max(
-            continuous_error,
-            float(difference.abs().max()) if difference.numel() else 0.0,
-        )
+    packed = torch.stack((
+        torch.stack(discrete_flags).sum(),
+        torch.stack(continuous_maxima).max(),
+    )).detach().cpu().tolist()
     return {
-        "discrete_mismatch": discrete_mismatch,
-        "continuous_error": continuous_error,
+        "discrete_mismatch": int(packed[0]),
+        "continuous_error": float(packed[1]),
         "segment_equal": branch.segments[branch_index] == original.segments[original_env],
         "outcome_equal": branch.outcomes[branch_index] == original.outcomes[original_env],
     }
 
 
-def fork_opportunities_batched(
+def _audit_payload_tensor(
+    value: Any, *, name: str, device: torch.device
+) -> tuple[torch.Tensor, dict[str, Any]]:
+    """Decode a supplied binary32 mark while preserving its exact bytes."""
+
+    if isinstance(value, Mapping) and "bytes_b64" in value:
+        encoded = base64.b64decode(str(value["bytes_b64"]), validate=True)
+        array = np.frombuffer(encoded, dtype=np.float32).copy()
+        if value.get("shape") != [MARK_DIM] or array.shape != (MARK_DIM,):
+            raise ValueError(f"{name} payload shape mismatch")
+        if hashlib.sha256(encoded).hexdigest() != value.get("sha256"):
+            raise ValueError(f"{name} payload digest mismatch")
+    elif isinstance(value, torch.Tensor):
+        if value.dtype != torch.float32 or tuple(value.shape) != (MARK_DIM,):
+            raise ValueError(f"{name} must be one float32 mark")
+        array = value.detach().cpu().contiguous().numpy().copy()
+    else:
+        array = np.asarray(value)
+        if array.dtype != np.float32 or array.shape != (MARK_DIM,):
+            raise ValueError(f"{name} must preserve an exact float32 payload")
+        array = np.ascontiguousarray(array)
+    payload = _float32_payload(array)
+    return torch.as_tensor(array, dtype=torch.float32, device=device), payload
+
+
+def _audit_serialized_size(value: Any) -> int:
+    def default(item: Any) -> Any:
+        if isinstance(item, np.ndarray):
+            return item.tolist()
+        if isinstance(item, np.generic):
+            return item.item()
+        if isinstance(item, torch.Tensor):
+            return item.detach().cpu().tolist()
+        if hasattr(item, "__dataclass_fields__"):
+            return {
+                name: getattr(item, name) for name in item.__dataclass_fields__
+            }
+        raise TypeError(f"unsupported audit evidence value {type(item)!r}")
+
+    return len(json.dumps(
+        value, sort_keys=True, separators=(",", ":"), default=default
+    ).encode("utf-8"))
+
+
+def audit_opportunities_batched(
     arm: CommitmentArm,
-    opportunities: list[dict[str, Any]],
+    selected_states: list[dict[str, Any]],
     *,
     device: torch.device,
     debug: bool = False,
 ) -> list[dict[str, Any]]:
-    """Execute selected stochastic forks in registered-width branch batches.
+    """Execute the frozen three-branch causal audit at registered width 16."""
 
-    Prefixes are reconstructed once per natural batch and selected physical
-    time. Continuations carry eight stable fork IDs as paired KEEP/RENEW rows
-    in one width-16 collector call. Each row owns an independent scripted CRN
-    view derived from the authoritative batch-origin generators.
-    """
-
-    if arm.arm == "OR" or not opportunities:
+    if arm.arm == "OR" or not selected_states:
         return []
+    total_started = perf_counter()
+    prefix_started = total_started
     prepared: list[dict[str, Any]] = []
     by_batch: dict[int, list[dict[str, Any]]] = {}
-    for value in opportunities:
+    prefix_cache: dict[tuple[int, int], CollectionCursor] = {}
+    row_script_cache: dict[tuple[int, int, int], tuple[Any, ...]] = {}
+    prefix_collector_calls = 0
+    for value in selected_states:
         by_batch.setdefault(int(value["batch_index"]), []).append(value)
     for batch_index, records in by_batch.items():
         origin = records[0]["origin_state"]
@@ -2705,7 +2823,7 @@ def fork_opportunities_batched(
         for time in sorted({int(value["time"]) for value in records}):
             delta = time - current_time
             if delta <= 0:
-                raise ValueError("batched fork opportunities must follow CREATE")
+                raise ValueError("batched audit opportunities must follow CREATE")
             prefix = collect_trajectory(
                 arm,
                 replay_state,
@@ -2717,55 +2835,84 @@ def fork_opportunities_batched(
                 profile=origin.profile,
             )
             cursor = prefix.cursor
+            prefix_collector_calls += 1
             if cursor is None:
-                raise RuntimeError("batched fork prefix unexpectedly terminated")
+                raise RuntimeError("batched audit prefix unexpectedly terminated")
             current_time = time
+            prefix_cache[(batch_index, time)] = cursor
             for record in records:
                 if int(record["time"]) != time:
                     continue
                 env_index = int(record["env_index"])
-                streams, end_rng_states, rng_binding_material = _fork_row_scripts(
-                    trajectory,
-                    replay_state.rngs,
-                    time=time,
-                    env_index=env_index,
-                )
+                script_key = (batch_index, time, env_index)
+                cached = row_script_cache.get(script_key)
+                if cached is None:
+                    cached = _audit_row_scripts(
+                        trajectory, replay_state.rngs,
+                        time=time, env_index=env_index,
+                    )
+                    row_script_cache[script_key] = cached
+                streams, end_rng_states, rng_binding_material = deepcopy(cached)
                 expected_end_rng_states = record.get("expected_end_rng_states")
                 if (
                     expected_end_rng_states is not None
                     and end_rng_states != expected_end_rng_states
                 ):
-                    raise RuntimeError("fork row script final RNG state mismatch")
+                    raise RuntimeError("audit row script final RNG state mismatch")
+                donor_u, donor_u_payload = _audit_payload_tensor(
+                    record["donor_candidate_u"],
+                    name="donor_candidate_u", device=device,
+                )
+                donor_z, donor_z_payload = _audit_payload_tensor(
+                    record["donor_candidate_z"],
+                    name="donor_candidate_z", device=device,
+                )
                 prepared.append({
                     **record,
-                    "cursor": _isolate_fork_cursor(cursor, env_index),
+                    "cursor": _isolate_audit_cursor(
+                        prefix_cache[(batch_index, time)], env_index
+                    ),
                     "streams": streams,
                     "end_rng_states": end_rng_states,
                     "rng_binding_material": rng_binding_material,
+                    "donor_u_tensor": donor_u,
+                    "donor_z_tensor": donor_z,
+                    "donor_candidate_u_payload": donor_u_payload,
+                    "donor_candidate_z_payload": donor_z_payload,
                 })
 
     results: dict[str, dict[str, Any]] = {}
-    started = perf_counter()
-    for time in sorted({int(value["time"]) for value in prepared}):
-        group = [value for value in prepared if int(value["time"]) == time]
-        for offset in range(0, len(group), 8):
-            pairs = group[offset:offset + 8]
+    prefix_seconds = perf_counter() - prefix_started
+    branch_started = perf_counter()
+    branch_collector_calls = 0
+    cells = sorted({
+        (int(value["batch_index"]), int(value["time"])) for value in prepared
+    })
+    for batch_index, time in cells:
+        group = [
+            value for value in prepared
+            if int(value["batch_index"]) == batch_index
+            and int(value["time"]) == time
+        ]
+        for offset in range(0, len(group), 5):
+            pairs = group[offset:offset + 5]
             branches: list[dict[str, Any]] = []
             for pair in pairs:
-                for action, kind, new_z in (
-                    ("KEEP", KEEP, pair["trajectory"].event_z_pre[
+                for branch_name, kind, new_z in (
+                    (AUDIT_BRANCHES[0], KEEP, pair["trajectory"].event_z_pre[
                         time, int(pair["env_index"]), int(pair["key"])
                     ]),
-                    ("RENEW", RENEW, pair["trajectory"].candidate_z[
+                    (AUDIT_BRANCHES[1], RENEW, pair["donor_z_tensor"]),
+                    (AUDIT_BRANCHES[2], RENEW, pair["trajectory"].candidate_z[
                         time, int(pair["env_index"]), int(pair["key"])
                     ]),
                 ):
                     branches.append({
                         "pair": pair,
-                        "action": action,
+                        "branch_name": branch_name,
                         "kind": kind,
                         "new_z": new_z,
-                        "cursor": _clone_fork_cursor(pair["cursor"]),
+                        "cursor": _clone_audit_cursor(pair["cursor"]),
                         "streams": deepcopy(pair["streams"]),
                         "padding": False,
                     })
@@ -2773,7 +2920,7 @@ def fork_opportunities_batched(
                 duplicate = deepcopy(branches[0])
                 duplicate["padding"] = True
                 branches.append(duplicate)
-            combined = _combine_fork_cursors([value["cursor"] for value in branches])
+            combined = _combine_audit_cursors([value["cursor"] for value in branches])
             forced = {
                 (time, index, int(value["pair"]["key"])): (
                     int(value["kind"]), value["new_z"]
@@ -2792,24 +2939,56 @@ def fork_opportunities_batched(
                 forced_events=forced,
                 row_rngs=[value["streams"] for value in branches],
             )
+            branch_collector_calls += 1
             for index, value in enumerate(branches):
                 if value["padding"]:
                     continue
                 pair = value["pair"]
-                fork_id = str(pair["fork_id"])
-                result = results.setdefault(fork_id, {
-                    "fork_id": fork_id,
-                    "natural_action": pair["natural_action"],
+                audit_id = str(pair["audit_id"])
+                natural_kind = int(pair["trajectory"].event_kind[
+                    time, int(pair["env_index"]), int(pair["key"])
+                ])
+                natural_branch = (
+                    AUDIT_BRANCHES[0] if natural_kind == KEEP
+                    else AUDIT_BRANCHES[2]
+                )
+                supplied_natural = pair.get("natural_action", natural_branch)
+                if supplied_natural not in (natural_branch, "KEEP" if natural_kind == KEEP else "RENEW"):
+                    raise ValueError("selected-state natural action contradicts trace")
+                result = results.setdefault(audit_id, {
+                    "audit_id": audit_id,
+                    "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
+                    "natural_branch": natural_branch,
                     "end_rng_states": pair["end_rng_states"],
                     "rng_binding_material": pair["rng_binding_material"],
+                    "donor_binding_material": {
+                        "recipient_key": deepcopy(pair.get("recipient_key")),
+                        "donor_key": deepcopy(pair.get("donor_key")),
+                        "mapping_position": deepcopy(pair.get("mapping_position")),
+                        "candidate_u": pair["donor_candidate_u_payload"],
+                        "candidate_z": pair["donor_candidate_z_payload"],
+                        "candidate_digest": _canonical_json_digest({
+                            "candidate_u": pair["donor_candidate_u_payload"],
+                            "candidate_z": pair["donor_candidate_z_payload"],
+                        }),
+                        "binding": deepcopy(pair.get("donor_binding")),
+                    },
+                    "selected_state": deepcopy(pair.get("selected_state", {
+                        "batch_index": int(pair["batch_index"]),
+                        "time": time,
+                        "env_index": int(pair["env_index"]),
+                        "key": int(pair["key"]),
+                    })),
                     "branches": {},
                 })
                 stream_positions = {
                     name: int(stream.position)
                     for name, stream in value["streams"].items()
                 }
-                result["branches"][value["action"]] = {
-                    "utility": float(branch_trajectory.outcomes[index].utility),
+                outcome = branch_trajectory.outcomes[index]
+                result["branches"][value["branch_name"]] = {
+                    "outcome": outcome,
+                    "utility": float(outcome.utility),
                     "stream_positions": stream_positions,
                     "stream_consumption": {
                         name: stream.consumption_record(
@@ -2819,10 +2998,10 @@ def fork_opportunities_batched(
                     },
                 }
                 if debug:
-                    result["branches"][value["action"]]["trajectory"] = branch_trajectory
-                    result["branches"][value["action"]]["branch_index"] = index
-                if value["action"] == pair["natural_action"]:
-                    natural_errors = _fork_row_errors(
+                    result["branches"][value["branch_name"]]["trajectory"] = branch_trajectory
+                    result["branches"][value["branch_name"]]["branch_index"] = index
+                if value["branch_name"] == natural_branch:
+                    natural_errors = _audit_row_errors(
                         branch_trajectory,
                         index,
                         pair["trajectory"],
@@ -2831,30 +3010,40 @@ def fork_opportunities_batched(
                     )
                     if not (
                         natural_errors["discrete_mismatch"] == 0
-                        and natural_errors["continuous_error"] <= RESUME_TOLERANCE
+                        and natural_errors["continuous_error"] == 0.0
                         and natural_errors["segment_equal"]
                         and natural_errors["outcome_equal"]
                     ):
                         raise RuntimeError(
-                            f"batched fork natural branch mismatch {natural_errors}"
+                            f"batched audit natural branch mismatch {natural_errors}"
                         )
                     result["natural_errors"] = natural_errors
-    elapsed = perf_counter() - started
+    branch_seconds = perf_counter() - branch_started
     ordered_results: list[dict[str, Any]] = []
-    for opportunity in opportunities:
-        result = results[str(opportunity["fork_id"])]
-        keep = result["branches"]["KEEP"]
-        renew = result["branches"]["RENEW"]
-        if keep["stream_positions"] != renew["stream_positions"]:
-            raise RuntimeError("batched fork pair stream positions diverged")
-        result["keep_utility"] = keep["utility"]
-        result["renew_utility"] = renew["utility"]
-        result["elapsed_seconds"] = elapsed
+    for selected in selected_states:
+        result = results[str(selected["audit_id"])]
+        branch_rows = [result["branches"][name] for name in AUDIT_BRANCHES]
+        positions = [row["stream_positions"] for row in branch_rows]
+        consumptions = [row["stream_consumption"] for row in branch_rows]
+        if positions[1:] != positions[:-1] or consumptions[1:] != consumptions[:-1]:
+            raise RuntimeError("batched audit branch RNG contract diverged")
+        result["branch_outcomes"] = {
+            name: result["branches"][name]["outcome"] for name in AUDIT_BRANCHES
+        }
+        result["rng_contract_equal"] = True
+        result["telemetry"] = {
+            "prefix_seconds": float(prefix_seconds),
+            "branch_seconds": float(branch_seconds),
+            "total_seconds": float(perf_counter() - total_started),
+            "selected_state_count": len(selected_states),
+            "collector_call_count": prefix_collector_calls + branch_collector_calls,
+        }
+        result["telemetry"]["serialized_size_bytes"] = _audit_serialized_size(result)
         ordered_results.append(result)
     return ordered_results
 
 
-def _fork_stochastic_opportunity(
+def _audit_stochastic_opportunity(
     arm: CommitmentArm,
     trajectory: EventTrajectory,
     *,
@@ -2863,6 +3052,9 @@ def _fork_stochastic_opportunity(
     key: int,
     device: torch.device,
     state: TrainingState,
+    donor_candidate_u: Any,
+    donor_candidate_z: Any,
+    donor_binding: Mapping[str, Any] | None,
     diagnostics: dict[str, Any] | None,
 ) -> dict[str, Any]:
     """Replay one stochastic batch prefix and force one paired branch.
@@ -2874,10 +3066,11 @@ def _fork_stochastic_opportunity(
     and installed mark differ.
     """
 
+    started = perf_counter()
     env_index, time, key = int(env_index), int(time), int(key)
     natural_kind = int(trajectory.event_kind[time, env_index, key])
     if natural_kind not in (KEEP, RENEW):
-        raise ValueError("fork coordinate is not an eligible non-CREATE opportunity")
+        raise ValueError("audit coordinate is not an eligible non-CREATE opportunity")
     if time <= 0 or trajectory.cutoff or not trajectory.outcomes:
         raise ValueError("stochastic fork requires a complete eligible trajectory")
     if state.pending_cursor is not None:
@@ -2894,23 +3087,32 @@ def _fork_stochastic_opportunity(
         deterministic=False,
         profile=state.profile,
     )
-    prefix_errors = _fork_window_errors(prefix, trajectory, start=0)
+    prefix_errors = _audit_window_errors(prefix, trajectory, start=0)
     if prefix_errors["discrete_mismatch"] != 0.0 or prefix_errors["continuous"] != 0.0:
         raise RuntimeError(f"stochastic fork prefix mismatch {prefix_errors}")
     if prefix_state.pending_cursor is None:
         raise RuntimeError("stochastic fork prefix unexpectedly terminated")
+    prefix_seconds = perf_counter() - started
+    branch_started = perf_counter()
 
     z_pre = trajectory.event_z_pre[time, env_index, key].to(device)
     candidate = trajectory.candidate_z[time, env_index, key].to(device)
-    natural_action = "KEEP" if natural_kind == KEEP else "RENEW"
+    donor_u, donor_u_payload = _audit_payload_tensor(
+        donor_candidate_u, name="donor_candidate_u", device=device
+    )
+    donor_z, donor_z_payload = _audit_payload_tensor(
+        donor_candidate_z, name="donor_candidate_z", device=device
+    )
+    natural_action = AUDIT_BRANCHES[0] if natural_kind == KEEP else AUDIT_BRANCHES[2]
     branches: dict[str, EventTrajectory] = {}
     branch_states: dict[str, TrainingState] = {}
     for name, kind, new_z in (
-        ("KEEP", KEEP, z_pre),
-        ("RENEW", RENEW, candidate),
+        (AUDIT_BRANCHES[0], KEEP, z_pre),
+        (AUDIT_BRANCHES[1], RENEW, donor_z),
+        (AUDIT_BRANCHES[2], RENEW, candidate),
     ):
         branch_state = deepcopy(prefix_state)
-        branch_cursor = _clone_fork_cursor(prefix_state.pending_cursor)
+        branch_cursor = _clone_audit_cursor(prefix_state.pending_cursor)
         branch_state.pending_cursor = branch_cursor
         branch = collect_trajectory(
             arm,
@@ -2925,7 +3127,7 @@ def _fork_stochastic_opportunity(
         branches[name] = branch
         branch_states[name] = branch_state
 
-    natural_errors = _fork_window_errors(
+    natural_errors = _audit_window_errors(
         branches[natural_action], trajectory, start=time
     )
     natural_outcome_mismatch = (
@@ -2935,14 +3137,13 @@ def _fork_stochastic_opportunity(
     if (
         natural_outcome_mismatch
         or natural_errors["discrete_mismatch"] != 0.0
-        or natural_errors["continuous"] > RESUME_TOLERANCE
+        or natural_errors["continuous"] != 0.0
     ):
         raise RuntimeError(
             f"stochastic fork natural branch continuation mismatch {natural_errors}"
         )
-    if not _nested_equal(
-        _rng_states(branch_states["KEEP"]), _rng_states(branch_states["RENEW"])
-    ):
+    rng_states = [_rng_states(branch_states[name]) for name in AUDIT_BRANCHES]
+    if any(not _nested_equal(rng_states[0], value) for value in rng_states[1:]):
         raise RuntimeError("stochastic fork branch RNG states diverged")
     if diagnostics is not None:
         diagnostics.clear()
@@ -2955,17 +3156,44 @@ def _fork_stochastic_opportunity(
             "branch_rng_equal": True,
             "branch_trajectories": branches,
             "branch_rng_states": {
-                name: _rng_states(branch_states[name]) for name in ("KEEP", "RENEW")
+                name: _rng_states(branch_states[name]) for name in AUDIT_BRANCHES
             },
         })
-    return {
-        "keep_utility": float(branches["KEEP"].outcomes[env_index].utility),
-        "renew_utility": float(branches["RENEW"].outcomes[env_index].utility),
-        "natural_action": natural_action,
+    result = {
+        "branches": {
+            name: {
+                "outcome": branches[name].outcomes[env_index],
+                "utility": float(branches[name].outcomes[env_index].utility),
+            }
+            for name in AUDIT_BRANCHES
+        },
+        "branch_outcomes": {
+            name: branches[name].outcomes[env_index] for name in AUDIT_BRANCHES
+        },
+        "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
+        "natural_branch": natural_action,
+        "rng_contract_equal": True,
+        "donor_binding_material": {
+            "candidate_u": donor_u_payload,
+            "candidate_z": donor_z_payload,
+            "candidate_digest": _canonical_json_digest({
+                "candidate_u": donor_u_payload, "candidate_z": donor_z_payload,
+            }),
+            "binding": deepcopy(None if donor_binding is None else dict(donor_binding)),
+        },
+        "telemetry": {
+            "prefix_seconds": float(prefix_seconds),
+            "branch_seconds": float(perf_counter() - branch_started),
+            "total_seconds": float(perf_counter() - started),
+            "selected_state_count": 1,
+            "collector_call_count": 4,
+        },
     }
+    result["telemetry"]["serialized_size_bytes"] = _audit_serialized_size(result)
+    return result
 
 
-def fork_single_opportunity(
+def audit_single_opportunity(
     arm: CommitmentArm,
     trajectory: EventTrajectory,
     *,
@@ -2974,6 +3202,9 @@ def fork_single_opportunity(
     key: int,
     device: torch.device,
     state: TrainingState,
+    donor_candidate_u: Any,
+    donor_candidate_z: Any,
+    donor_binding: Mapping[str, Any] | None = None,
     deterministic: bool = True,
     diagnostics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -3015,7 +3246,7 @@ def fork_single_opportunity(
     """
 
     if not deterministic:
-        return _fork_stochastic_opportunity(
+        return _audit_stochastic_opportunity(
             arm,
             trajectory,
             env_index=env_index,
@@ -3023,6 +3254,9 @@ def fork_single_opportunity(
             key=key,
             device=device,
             state=state,
+            donor_candidate_u=donor_candidate_u,
+            donor_candidate_z=donor_candidate_z,
+            donor_binding=donor_binding,
             diagnostics=diagnostics,
         )
 
@@ -3069,14 +3303,14 @@ def fork_single_opportunity(
     )
     stream_label = f" at (time={time}, env_index={env_index}, key={key})"
     streams = {
-        name: _ForkStream(
+        name: _AuditStream(
             name,
             make_rng(seed_map[name], episode_id, time, key, segment_id),
             label=stream_label,
         )
-        for name in FORK_STREAM_NAMES
+        for name in AUDIT_STREAM_NAMES
     }
-    script, script_index, cumulative = _fork_opportunity_script(
+    script, script_index, cumulative = _audit_opportunity_script(
         trajectory, fallback=streams["opportunity"].generator
     )
     focal_index = script_index.get((env_index, time, key))
@@ -3090,25 +3324,25 @@ def fork_single_opportunity(
         raise RuntimeError(
             f"fork opportunity precedes the reconstructed prefix{stream_label}"
         )
-    streams["opportunity"] = _ForkStream(
+    streams["opportunity"] = _AuditStream(
         "opportunity", streams["opportunity"].generator, script=script,
         label=stream_label,
     )
 
-    prefix_cursor = _fork_cursor(ledgers, episode_ids, device)
-    _check_fork_provenance(arm, trajectory, prefix_cursor, state, seed_map=seed_map)
+    prefix_cursor = _audit_cursor(ledgers, episode_ids, device)
+    _check_audit_provenance(arm, trajectory, prefix_cursor, state, seed_map=seed_map)
 
     training_mode = arm.training
     try:
-        prefix_view = _ForkStreamView(streams)
-        prefix_state = _fork_branch_state(arm.arm, replicate, profile, prefix_view)
+        prefix_view = _AuditStreamView(streams)
+        prefix_state = _audit_branch_state(arm.arm, replicate, profile, prefix_view)
         prefix = collect_trajectory(
             arm, prefix_state, device=device, cursor=prefix_cursor,
             max_steps=time, deterministic=True,
         )
         if prefix_view.positions["opportunity"] != prefix_position:
             raise RuntimeError("reconstructed prefix consumed an unexpected schedule")
-        prefix_errors = _fork_window_errors(prefix, trajectory, start=0)
+        prefix_errors = _audit_window_errors(prefix, trajectory, start=0)
         if prefix_errors["discrete_mismatch"] != 0.0:
             if diagnostics is not None:
                 diagnostics["prefix_errors"] = prefix_errors
@@ -3133,18 +3367,26 @@ def fork_single_opportunity(
                 f"fork prefix reconstruction is not bitwise exact {prefix_errors} "
                 f"at (time={time}, env_index={env_index}, key={key})"
             )
+        prefix_seconds = perf_counter() - started
+        branch_started = perf_counter()
 
         # The branch schedule drops the focal request: it is applied by the
         # treatment below, not sampled by the collector.
         branch_script = list(script)
         del branch_script[focal_index]
-        streams["opportunity"] = _ForkStream(
+        streams["opportunity"] = _AuditStream(
             "opportunity", streams["opportunity"].generator, script=branch_script,
             label=stream_label,
         )
         record_epoch = int(trajectory.membership_epoch[time, env_index, key])
         z_pre = trajectory.event_z_pre[time, env_index, key].to(device)
         candidate = trajectory.candidate_z[time, env_index, key].to(device)
+        donor_u, donor_u_payload = _audit_payload_tensor(
+            donor_candidate_u, name="donor_candidate_u", device=device
+        )
+        donor_z, donor_z_payload = _audit_payload_tensor(
+            donor_candidate_z, name="donor_candidate_z", device=device
+        )
         # How many TERMINAL_LEAVE closes this environment performs at the
         # fork step, read from the environment's own membership pass on a
         # throwaway snapshot clone rather than inferred from the record:
@@ -3160,23 +3402,25 @@ def fork_single_opportunity(
 
         results: dict[str, Any] = {}
         boundaries: dict[str, Any] = {}
-        views: dict[str, _ForkStreamView] = {}
+        views: dict[str, _AuditStreamView] = {}
         branch_trajectories: dict[str, EventTrajectory] = {}
         for name, selected_kind, new_z in (
-            ("KEEP", KEEP, z_pre), ("RENEW", RENEW, candidate),
+            (AUDIT_BRANCHES[0], KEEP, z_pre),
+            (AUDIT_BRANCHES[1], RENEW, donor_z),
+            (AUDIT_BRANCHES[2], RENEW, candidate),
         ):
-            branch_cursor = _clone_fork_cursor(prefix_cursor)
+            branch_cursor = _clone_audit_cursor(prefix_cursor)
             branch_cursor.lifecycles[env_index][key].z = new_z.detach().clone()
             boundaries[name] = _branch_boundary(branch_cursor, env_index)
             segment_base = len(branch_cursor.segments[env_index])
-            focal_record = _apply_fork_event(
+            focal_record = _apply_audit_event(
                 branch_cursor, env_index=env_index, key=key,
                 selected_kind=selected_kind,
                 new_z=new_z, assigned_q=assigned_q, record_epoch=record_epoch,
             )
-            branch_view = _ForkStreamView(streams, dict(prefix_view.positions))
+            branch_view = _AuditStreamView(streams, dict(prefix_view.positions))
             views[name] = branch_view
-            branch_state = _fork_branch_state(arm.arm, replicate, profile, branch_view)
+            branch_state = _audit_branch_state(arm.arm, replicate, profile, branch_view)
             branch = collect_trajectory(
                 arm, branch_state, device=device, cursor=branch_cursor,
                 deterministic=True,
@@ -3192,7 +3436,7 @@ def fork_single_opportunity(
                 )
             if focal_record is not None:
                 branch_cursor.segments[env_index].insert(
-                    _fork_focal_segment_index(
+                    _audit_focal_segment_index(
                         branch, env_index=env_index, key=key,
                         base=segment_base, leading_closes=leading_closes,
                     ),
@@ -3214,8 +3458,9 @@ def fork_single_opportunity(
     # test: the two branch tails carry two thirds of the reconstructed steps
     # and a drift-induced divergence there would otherwise be returned as a
     # silently corrupted advantage.
-    natural_action = "KEEP" if natural_kind == KEEP else "RENEW"
-    natural_errors = _fork_window_errors(
+    branch_seconds = perf_counter() - branch_started
+    natural_action = AUDIT_BRANCHES[0] if natural_kind == KEEP else AUDIT_BRANCHES[2]
+    natural_errors = _audit_window_errors(
         branch_trajectories[natural_action], trajectory, start=time,
         excluded=(env_index, key),
     )
@@ -3291,26 +3536,53 @@ def fork_single_opportunity(
             f"fork natural branch continuation is not bitwise exact {natural_errors} "
             f"at (time={time}, env_index={env_index}, key={key})"
         )
-    return {
-        "keep_utility": float(results["KEEP"].utility),
-        "renew_utility": float(results["RENEW"].utility),
-        "natural_action": natural_action,
+    positions = [views[name].positions for name in AUDIT_BRANCHES]
+    consumed = [views[name].consumed for name in AUDIT_BRANCHES]
+    if positions[1:] != positions[:-1] or consumed[1:] != consumed[:-1]:
+        raise RuntimeError("audit branch RNG contract diverged")
+    result = {
+        "branches": {
+            name: {"outcome": results[name], "utility": float(results[name].utility)}
+            for name in AUDIT_BRANCHES
+        },
+        "branch_outcomes": {name: results[name] for name in AUDIT_BRANCHES},
+        "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
+        "natural_branch": natural_action,
+        "natural_errors": natural_errors,
+        "rng_contract_equal": True,
+        "donor_binding_material": {
+            "candidate_u": donor_u_payload,
+            "candidate_z": donor_z_payload,
+            "candidate_digest": _canonical_json_digest({
+                "candidate_u": donor_u_payload, "candidate_z": donor_z_payload,
+            }),
+            "binding": deepcopy(None if donor_binding is None else dict(donor_binding)),
+        },
+        "telemetry": {
+            "prefix_seconds": float(prefix_seconds),
+            "branch_seconds": float(branch_seconds),
+            "total_seconds": float(perf_counter() - started),
+            "selected_state_count": 1,
+            "collector_call_count": 4,
+        },
     }
+    result["telemetry"]["serialized_size_bytes"] = _audit_serialized_size(result)
+    return result
 
 
-_FORK_DISCRETE_FIELDS = (
+_AUDIT_DISCRETE_FIELDS = (
     "actions", "active_mask", "orders", "terminal", "event_kind",
     "event_categorical_actions", "event_cat_mask", "event_mark_mask",
     "q_before", "membership_epoch", "segment_id",
 )
-_FORK_CONTINUOUS_FIELDS = (
+_AUDIT_CONTINUOUS_FIELDS = (
     "observations", "old_log_probs", "old_values", "rewards", "hidden_before",
     "hidden_after", "prefix_counts", "primitive_z", "event_inputs", "event_u",
     "event_z_pre", "event_new_z", "candidate_u", "candidate_z",
     "event_old_cat_logp", "event_old_mark_component_logp",
     "event_old_joint_logp",
 )
-_FORK_EVENT_FIELDS = frozenset(
+_AUDIT_EVENT_FIELDS = frozenset(
     {
         "event_kind", "event_categorical_actions", "event_cat_mask",
         "event_mark_mask", "q_before", "event_inputs", "event_u",
@@ -3321,7 +3593,7 @@ _FORK_EVENT_FIELDS = frozenset(
 )
 
 
-def _fork_segment_mismatches(
+def _audit_segment_mismatches(
     reconstruction: EventTrajectory,
     trajectory: EventTrajectory,
     *,
@@ -3359,7 +3631,7 @@ def _fork_segment_mismatches(
     return tuple(failures)
 
 
-def _fork_window_errors(
+def _audit_window_errors(
     reconstruction: EventTrajectory,
     trajectory: EventTrajectory,
     *,
@@ -3394,18 +3666,18 @@ def _fork_window_errors(
     def window(name: str) -> tuple[torch.Tensor, torch.Tensor]:
         left = getattr(reconstruction, name).detach().cpu()
         right = getattr(trajectory, name)[start:stop].detach().cpu()
-        if excluded is not None and name in _FORK_EVENT_FIELDS:
+        if excluded is not None and name in _AUDIT_EVENT_FIELDS:
             env_index, key = excluded
             left, right = left.clone(), right.clone()
             left[0, env_index, key] = 0
             right[0, env_index, key] = 0
         return left, right
 
-    for name in _FORK_DISCRETE_FIELDS:
+    for name in _AUDIT_DISCRETE_FIELDS:
         left, right = window(name)
         if left.shape != right.shape or not torch.equal(left, right):
             mismatched.append(name)
-    for name in _FORK_CONTINUOUS_FIELDS:
+    for name in _AUDIT_CONTINUOUS_FIELDS:
         left, right = window(name)
         if left.shape != right.shape:
             mismatched.append(name)
@@ -3415,7 +3687,7 @@ def _fork_window_errors(
         )
         if value > error:
             error, worst = value, name
-    segment_failures = _fork_segment_mismatches(
+    segment_failures = _audit_segment_mismatches(
         reconstruction, trajectory, complete=stop >= int(trajectory.time_steps)
     )
     if segment_failures:

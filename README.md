@@ -25,14 +25,14 @@ HMASD 包含三个主要组件：
 │       └── scenario2.py    # 场景2：协作组网模式
 ├── config.py               # 配置参数
 ├── main.py                 # 训练和评估的入口点
-├── requirements.txt        # 依赖包列表
+├── requirements_sb3.txt    # SB3 CUDA 环境精确依赖锁
 └── README.md               # 项目文档
 ```
 
 ## 安装依赖
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_sb3.txt
 ```
 
 ## 多无人机基站场景

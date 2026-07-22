@@ -4,7 +4,7 @@ External GPT-5.6 Pro owns scientific CDC direction. The active Controller owns
 round sequencing, factual reconciliation, direct evidence intake, durable
 record application, resource authorization and every Git-visible boundary. One
 persistent Open-Pro Exchange owns external transport, exact raw capture and its
-heartbeat. The OMP Project Manager later owns executable algorithm realization
+heartbeat. The native Codex Project Manager later owns executable algorithm realization
 for an authorized implementation action; it does not reconverge the science.
 
 ## Scientific sequence
@@ -16,7 +16,7 @@ for an authorized implementation action; it does not reconverge the science.
    applies the exact durable CDC record deltas and shows the Pro user brief.
 3. The Controller writes `50_DISPOSITION.md` and updates project control once.
 4. If implementation is selected and separately authorized, the Controller
-   dispatches an isolated OMP Project Manager with the Pro scientific direction,
+   dispatches the registered native Codex Project Manager with the Pro scientific direction,
    estimand, evidence and resource boundary. The Manager decides the complete
    executable algorithm and manages its code-agent task tree.
 
@@ -93,8 +93,8 @@ Raw responses are byte-preserved and precede downstream use. Controller round
 behavior lives in `.agents/skills/hmasd-review-round/SKILL.md`; registered
 Exchange behavior lives in `.agents/skills/hmasd-review-exchange/SKILL.md`.
 Direct scientific evidence intake lives in the Controller round Skill.
-Algorithm realization and implementation behavior live in
-`.omp/agents/hmasd-project-manager.md`. Persistent task IDs contain only the
+Algorithm realization and implementation behavior live with the registered
+`project_manager` role. Persistent task IDs contain only the
 Controller and Open-Pro Exchange in the dispatcher's `session-roles.json`;
 external reviewer conversations and URLs live only in
 `REVIEWER_CONVERSATIONS.json`.

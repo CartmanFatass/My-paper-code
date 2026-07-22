@@ -9,7 +9,7 @@ Current ownership and the scheduled action belong in
 counterexamples, idea status and evidence notes live under
 `docs/research/cdc/`. External GPT-5.6 Pro owns scientific CDC decisions. The
 Controller archives and adopts those decisions and maintains the research
-records. The OMP Project Manager translates an adopted implementation action
+records. The Project Manager translates an adopted implementation action
 into executable design.
 Formal experiment contracts and dispositions belong in
 `docs/project/ExpRecord.md`. Git history preserves removed research history.
@@ -93,7 +93,7 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
 External GPT-5.6 Pro owns scientific decisions in this loop. It may use a full
 plural review or a focused continuation in the same registered conversation.
-The Controller preserves and adopts that judgment; the OMP Project Manager
+The Controller preserves and adopts that judgment; the Project Manager
 realizes the adopted algorithm without replacing the scientific direction.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
@@ -199,7 +199,7 @@ External GPT-5.6 Pro generates and corrects conjectures, derives consequences,
 constructs counterexamples, extracts lemmas and chooses one scheduled action
 while retaining plural explanations. The Controller checks provenance and
 feasibility, maintains records and owns adoption, resources, Git, claim ceilings
-and user communication. The OMP Project Manager owns authorized algorithm
+and user communication. The Project Manager owns authorized algorithm
 realization and implementation. Review output never authorizes code or compute
 by itself.
 

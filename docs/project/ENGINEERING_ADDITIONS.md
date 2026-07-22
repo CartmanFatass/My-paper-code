@@ -1,8 +1,8 @@
 # Engineering Principles — Measured Additions
 
 Practical rules derived from measurements on this project. These extend, and do
-not replace, `.omp/agents/references/hmasd-engineering-principles.md` (batch
-independent dimensions, pack once, no scalar CUDA sync, no serial evaluation).
+not replace, the active-line engineering constraints (batch independent
+dimensions, pack once, no scalar CUDA sync, no serial evaluation).
 
 Numbers and conditions are in `docs/project/EFFICIENCY_PRACTICES.md`.
 

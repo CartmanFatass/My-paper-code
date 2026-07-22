@@ -1,9 +1,0 @@
-# Project agents are discovered natively from `.omp/agents/*.md`; they require
-# no duplicate registration in this file.
-skills:
-  includeSkills:
-    - "hmasd-*"
-
-task:
-  isolation:
-    mode: auto

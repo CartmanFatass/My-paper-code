@@ -2,17 +2,18 @@
 
 Updated: 2026-07-22
 Status: IMPLEMENTATION_READY
-Work ID: `event-held-commitment-formal-replay-gate-repair-20260722-retry1`
-Base/source boundary: `1e206db7b430423bc35bb5996293adf01acadd49`
+Work ID: `event-held-commitment-battery-partial-migration-20260722-retry1`
+Base/source boundary: `a2908ba578b27f5b5ce783a659ea3cfedb0c8f09`
 
-The preserved interrupted WIP is adopted as the starting implementation state;
-it remains unaccepted until every focused check and review below passes. The
-scientific design remains frozen. This boundary replaces only the
-unexecutable replay numerical specification and the operational packaging that
-prevented a safe launch. It does not authorize formal training or registered
-evaluation and changes no estimand, treatment, model, reward, observation,
-task distribution, PPO objective, seed, registered budget, scientific
-threshold or result meaning.
+The accepted mainline package at the source boundary is the starting
+implementation state. The interrupted isolated WIP is read-only candidate
+evidence: no tracked file is copied wholesale, its shortened plan is rejected,
+and only individually verified symbols may be adapted. The scientific design
+remains frozen. This boundary implements the accepted
+`BATTERY_REQUIRES_MINIMAL_CORRECTION` causal decomposition without authorizing
+formal training or registered evaluation and without changing `G`, the three
+arms, treatment, model, reward, observation, task distribution, PPO objective,
+seed, registered budget, threshold or result meaning.
 Scientific source: `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md`
 
 ## Outcome and authority
@@ -34,6 +35,103 @@ change only:
 
 No Git mutation, experiment launch, reward/observation/task change, compatibility
 adapter, successor route or project-control edit is authorized.
+
+## Behavioral-battery partial-migration repair
+
+Replace the active two-branch natural-fork measurement surface, not the frozen
+training or primary-estimand path, with one held-out evaluation-only causal
+audit. Delete the active `fork_*`/`natural_fork` API and schema rather than
+preserving an alias. The only active branch names, in order, are:
+
+```text
+KEEP_HELD_MARK
+RENEW_DERANGED_MARK
+RENEW_CANDIDATE_MARK
+```
+
+`KEEP_HELD_MARK` forces `KEEP` with the focal row's installed mark;
+`RENEW_CANDIDATE_MARK` forces `RENEW` with that row's already-drawn candidate
+mark; and `RENEW_DERANGED_MARK` forces `RENEW` with a candidate mark donated by
+another selected row in the same `(replicate, natural_action)` stratum. No
+branch adds a draw, changes likelihood or gradient exposure, or enters
+training. All three branches start from the same pre-opportunity state and use
+the existing cloned CRN continuation contract.
+
+Selection retains the existing registered quota, seeds and outcome-blind
+selection stream. Build one compact pre-outcome raw event trace at the actual
+collector boundary. It contains only the frozen selection coordinates,
+natural event kind, installed mark and unmasked candidate `u/z` as exact
+float32 payloads plus their origin binding; it contains no reward, terminal
+outcome, future trajectory or utility. The validator independently derives
+the eligible inventory, action strata, selected keys and donor mapping from
+this trace. Self-digested eligible/selected summaries are never authority.
+
+Within each replicate and natural-action stratum, sort selected rows by the
+frozen selection key and cyclically shift the exact candidate-mark payload by
+one position. Persist recipient key, donor key, donor candidate `u/z` float32
+bytes/digest and mapping position. The mapping consumes no RNG, has no fixed
+key, preserves the selected candidate-mark multiset byte-for-byte and fails
+closed on missing, duplicate, cross-stratum, re-signed or coherently tampered
+trace/donor evidence.
+
+For a natural `KEEP` row freeze:
+
+```text
+C_total  = U(KEEP_HELD_MARK) - U(RENEW_CANDIDATE_MARK)
+C_timing = U(KEEP_HELD_MARK) - U(RENEW_DERANGED_MARK)
+C_mark   = U(RENEW_DERANGED_MARK) - U(RENEW_CANDIDATE_MARK)
+```
+
+For a natural `RENEW` row freeze:
+
+```text
+C_total  = U(RENEW_CANDIDATE_MARK) - U(KEEP_HELD_MARK)
+C_timing = U(RENEW_DERANGED_MARK) - U(KEEP_HELD_MARK)
+C_mark   = U(RENEW_CANDIDATE_MARK) - U(RENEW_DERANGED_MARK)
+```
+
+Compute all three contrasts by their direct frozen utility subtractions. Record
+and independently recompute the binary64 closure residual
+`abs(C_total-(C_timing+C_mark))`; admit only the deterministic rounding bound
+`4 * max(ulp(contrasts and branch utilities))`. This is an arithmetic evidence
+rule, not a scientific threshold. `C_total` replaces only the old
+`A_KEEP/A_RENEW` measurement input under the same frozen interval and
+point-floor gates; timing and mark components are separately reported causal
+interpretations and do not change first-match result precedence.
+
+Persist the full `TrackingOutcome` for each branch: tracking/completion values,
+utility, terminal reward, integer numerators/denominators, roster sizes and the
+complete reward trace. Validation reconstructs tracking, completion, utility
+and terminal-reward equality from the raw leaves, recomputes every contrast and
+rejects outcome/utility/contrast co-tampering. Natural-branch equality compares
+the complete reconstructed outcome, not utility alone.
+
+Keep the existing strict checkpoint schema transition and restore identity,
+but make every restore metric an exact non-boolean finite nonnegative numeric
+leaf `<=1e-7`. Coverage includes saved Python, global NumPy, CPU and every CUDA
+torch RNG state plus every owned ledger, order, primitive, opportunity, event
+and mark stream; discrete state/key-set equality remains exact. Add independent
+mutations for missing, boolean, non-finite, negative and over-tolerance leaves
+and for every RNG ownership class.
+
+Adapt only the verified WIP throughput structure: cache prepared prefixes and
+row scripts per `(batch,time)`, bind all branches to one shared schedule, retain
+selected state until validation completes, aggregate branch/output errors on
+device, and transfer only completed packed evidence at a cell-batch boundary.
+Expose prefix, branch and total wall-time telemetry plus selected-state count,
+collector-call count and serialized size. Telemetry remains descriptive. The
+registered width is 16; five selected states produce fifteen branch rows plus
+one padding row per collector call. There is no production scalar audit,
+per-field CUDA-to-host loop, repeated prefix reconstruction or serial
+per-opportunity execution.
+
+Acceptance requires: a width-16 mixed-time/multi-batch CUDA three-branch oracle;
+donor no-fixed-point/multiset/additivity positives; raw-trace and donor coherent
+tamper negatives; strict restore/RNG negatives; full `TrackingOutcome`
+recomputation and co-tamper negatives; a static sweep proving no active legacy
+fork API, production scalar audit or per-field CUDA host loop; telemetry/size
+evidence; the preserved focused CUDA suite; and one unmistakably non-formal
+`formal_path_exercise` through the shared formal cores.
 
 ## Operational-readiness repair boundary
 
@@ -1075,6 +1173,38 @@ behavior across five replicates and 250 updates. Formal-scale execution was
 intentionally unmeasured, and any future reduction drift remains fail-closed by
 the unchanged per-component mixed and ratio predicates rather than being
 masked by the passing compositional joint bound.
+
+## Behavioral-battery partial-migration acceptance
+
+The bounded partial-migration package was manager-accepted on 2026-07-22. The
+active audit surface is exactly `KEEP_HELD_MARK`, `RENEW_DERANGED_MARK` and
+`RENEW_CANDIDATE_MARK`; selected rows are derived outcome-blind from the compact
+pre-outcome raw event trace, and the deterministic cyclic donor mapping has no
+fixed key, preserves the selected candidate-mark multiset, consumes no RNG and
+binds recipient/donor identity plus exact float32 payload to executed branch
+evidence and the Stage-2 RNG context. Full `TrackingOutcome` leaves, roster and
+count identities, utilities and frozen additive contrasts are independently
+recomputed. Strict checkpoint restore leaves, collector-call telemetry,
+atomic streamed publication and the width-16 CUDA execution contract remain
+fail-closed.
+
+The final post-repair CUDA acceptance file passed `54/54` in `495.34s`. The
+single reviewer-requested evidence repair additionally passed the three new
+coherent selected/donor/collector tamper negatives, a seven-test combined
+Stage-2 regression, a four-test post-batching CUDA rerun, and the direct
+synthetic-operational integration check. The existing bounded non-formal
+`formal_path_exercise` completed with `formal=false`, one `16x80` update, four
+PPO passes, all four 16-episode cells, `update_1.pt` round trip, width 16 and no
+temporary residue; the final acceptance file also preserves formal-analyzer
+rejection of exercise identity. A fresh custom CUDA verifier returned
+`VERIFIED`, and the same fresh read-only final reviewer re-inspected the repaired
+diff and returned `APPROVED` with all three findings closed.
+
+Formal-scale five-replicate/250-update runtime and storage remain intentionally
+unmeasured, and no new standalone exercise manifest was regenerated after the
+final evidence-only repair. Assurance for that repair rests on the final full
+CUDA acceptance suite and its focused independent-evidence negatives; no
+formal scientific result has been produced.
 
 ## Prohibited mechanisms
 

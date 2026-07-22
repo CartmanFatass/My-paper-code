@@ -100,7 +100,6 @@ and flag it rather than proceeding.
 - `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract.
 - `docs/project/CURRENT_WORK.md` — live project state and binding engineering
   constraints.
-- `.omp/agents/references/hmasd-engineering-principles.md` — implementation
-  engineering constraints.
-- `.omp/agents/hmasd-reviewer.md` — bounded review authority and evidence
-  requirements.
+- `docs/project/CURRENT_WORK.md` — active-line engineering constraints.
+- `docs/project/IMPLEMENTATION_PLAN.md` — accepted executable design and
+  evidence requirements.

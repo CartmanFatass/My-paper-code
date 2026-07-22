@@ -62,7 +62,7 @@ ACTIVE = "active"
 TEMPORARILY_ABSENT = "temporarily_absent"
 TERMINAL = "terminal"
 
-CHECKPOINT_SCHEMA_VERSION = 7
+CHECKPOINT_SCHEMA_VERSION = 8
 CHECKPOINT_KIND = "event_held_commitment_link_g0"
 REGISTERED_CONTRACT = "EVENT_HELD_COMMITMENT_LINK_G0"
 ACCESS_FLOOR = 0.78
@@ -72,35 +72,43 @@ INTERVENTION_THRESHOLD = 0.10
 IDENTIFIABILITY_OPPORTUNITIES = 1_000
 IDENTIFIABILITY_LIFECYCLES = 250
 SUPPORT_FLOOR = 128
-# Replacement C -- natural event-decision consequence. Both directions are
+# Replacement C -- causal-audit total consequence. Both natural-action strata are
 # gated, and both are required: a one-sided pass is not sufficient and is not
 # expressible, because `select_result_branch` conjoins them and takes both as
 # required arguments. `LCB_95 > 0` is the interval gate; the point-estimate
 # floors are frozen here so they cannot be tuned after a result is seen.
-A_KEEP_LCB_FLOOR = 0.0
-A_RENEW_LCB_FLOOR = 0.0
-A_KEEP_MEAN_FLOOR = 0.02
-A_RENEW_MEAN_FLOOR = 0.02
-# The sole registered form of the fork budget. Full per-opportunity forking is
+C_TOTAL_KEEP_LCB_FLOOR = 0.0
+C_TOTAL_RENEW_LCB_FLOOR = 0.0
+C_TOTAL_KEEP_MEAN_FLOOR = 0.02
+C_TOTAL_RENEW_MEAN_FLOOR = 0.02
+# The sole registered form of the causal-audit budget. Full per-opportunity audit is
 # not the default. A replicate that cannot supply the quota for either natural
 # action makes the run non-identifiable; the quota is never lowered and rows are
 # never pooled across replicates to reach it, which is why
 # `select_result_branch` takes per-replicate counts and no pooled total.
-NATURAL_FORK_ACTIONS = ("KEEP", "RENEW")
-NATURAL_FORK_QUOTA_PER_ACTION = 32
-NATURAL_FORK_REPLICATES = 5
-NATURAL_FORK_PAIRS = (
-    NATURAL_FORK_QUOTA_PER_ACTION * len(NATURAL_FORK_ACTIONS) * NATURAL_FORK_REPLICATES
+CAUSAL_AUDIT_NATURAL_ACTIONS = ("KEEP", "RENEW")
+CAUSAL_AUDIT_BRANCHES = (
+    "KEEP_HELD_MARK",
+    "RENEW_DERANGED_MARK",
+    "RENEW_CANDIDATE_MARK",
 )
+CAUSAL_AUDIT_QUOTA_PER_ACTION = 32
+CAUSAL_AUDIT_REPLICATES = 5
+CAUSAL_AUDIT_SELECTED_ROWS = (
+    CAUSAL_AUDIT_QUOTA_PER_ACTION
+    * len(CAUSAL_AUDIT_NATURAL_ACTIONS)
+    * CAUSAL_AUDIT_REPLICATES
+)
+CAUSAL_AUDIT_BRANCH_ROWS = CAUSAL_AUDIT_SELECTED_ROWS * len(CAUSAL_AUDIT_BRANCHES)
 # Dedicated deterministic selection stream. It is derived from the registered
 # bootstrap seed under its own namespace coordinate, so it is distinct from the
 # bootstrap resample stream (`default_rng(BOOTSTRAP_SEED)`, i.e.
 # `SeedSequence(BOOTSTRAP_SEED)` with no coordinate) and from every owned
-# collector and fork stream (all seeded from `seed_map`, never from the
+# collector and causal-audit stream (all seeded from `seed_map`, never from the
 # bootstrap seed). Registering the namespace fixes the stream identity before
 # any selection code exists.
-NATURAL_FORK_SELECTION_NAMESPACE = "natural_fork_selection"
-NATURAL_FORK_SELECTION_COORDINATE = 1
+CAUSAL_AUDIT_SELECTION_NAMESPACE = "natural_fork_selection"
+CAUSAL_AUDIT_SELECTION_COORDINATE = 1
 # Registered execution backends. CPU is admitted as a first-class backend
 # because this workload is kernel-launch bound (14,980 parameters, batch 16,
 # ~480 sequential tiny calls per epoch): a full three-arm update measures 6.16s
@@ -1035,16 +1043,16 @@ def select_result_branch(
     multi_opportunity_lifecycles: int,
     eligible_keep_rows: int,
     eligible_renew_rows: int,
-    natural_keep_rows_by_replicate: Sequence[int],
-    natural_renew_rows_by_replicate: Sequence[int],
+    causal_keep_rows_by_replicate: Sequence[int],
+    causal_renew_rows_by_replicate: Sequence[int],
     utility_ci: Mapping[str, tuple[float, float]],
     g_ci: tuple[float, float],
     k_bin_cis: Sequence[tuple[float, float]],
     intervention_ci: tuple[float, float],
-    a_keep_ci: Sequence[float],
-    a_renew_ci: Sequence[float],
-    a_keep_mean: float,
-    a_renew_mean: float,
+    c_total_keep_ci: Sequence[float],
+    c_total_renew_ci: Sequence[float],
+    c_total_keep_mean: float,
+    c_total_renew_mean: float,
 ) -> str:
     """Apply the frozen eight-branch first-match precedence.
 
@@ -1056,14 +1064,15 @@ def select_result_branch(
     and are reported only as descriptive diagnostics elsewhere.
 
     Replacement C joins position 5. Both directions are required --
-    `LCB(A_KEEP) > 0` **and** `LCB(A_RENEW) > 0`, with the frozen point
-    floors `mean(A_KEEP) >= 0.02` and `mean(A_RENEW) >= 0.02`. A one-sided
+    `LCB(C_total|KEEP) > 0` **and** `LCB(C_total|RENEW) > 0`, with the frozen
+    point floors `mean(C_total|KEEP) >= 0.02` and
+    `mean(C_total|RENEW) >= 0.02`. A one-sided
     pass is not expressible: the two gates are conjoined and both are
     required arguments, so there is no input that reaches
     `COMMITMENT_SUPPORTED` on one direction alone.
 
-    The registered fork budget arrives as per-replicate counts, never as a
-    pooled total. A replicate short of `NATURAL_FORK_QUOTA_PER_ACTION`
+    The registered causal-audit budget arrives as per-replicate counts, never
+    as a pooled total. A replicate short of `CAUSAL_AUDIT_QUOTA_PER_ACTION`
     eligible rows for either natural action resolves at position 2 to
     `BENCHMARK_NON_IDENTIFIABLE`, and because no pooled total is an input,
     the shortfall cannot be repaired by pooling rows across replicates or by
@@ -1071,8 +1080,8 @@ def select_result_branch(
 
     "Behavior confidently fails" stays the *exact statistical dual* of the
     pass rule: at least one required interval condition has `UCB <=` its
-    registered threshold, now including `UCB(A_KEEP) <= 0` and
-    `UCB(A_RENEW) <= 0`. The two point-estimate floors deliberately take no
+    registered threshold, now including `UCB(C_total|KEEP) <= 0` and
+    `UCB(C_total|RENEW) <= 0`. The two point-estimate floors deliberately take no
     part in the dual -- a point estimate carries no interval statement, so a
     run that clears both `LCB` gates but misses a mean floor neither passes
     nor confidently fails and lands in the underpowered branch.
@@ -1084,16 +1093,20 @@ def select_result_branch(
             f"got {len(k_bin_cis)}"
         )
     for name, counts in (
-        ("natural_keep_rows_by_replicate", natural_keep_rows_by_replicate),
-        ("natural_renew_rows_by_replicate", natural_renew_rows_by_replicate),
+        ("causal_keep_rows_by_replicate", causal_keep_rows_by_replicate),
+        ("causal_renew_rows_by_replicate", causal_renew_rows_by_replicate),
     ):
-        if len(counts) != NATURAL_FORK_REPLICATES:
+        if len(counts) != CAUSAL_AUDIT_REPLICATES:
             raise ValueError(
                 f"{name} must carry one count per replicate "
-                f"({NATURAL_FORK_REPLICATES}); got {len(counts)}"
+                f"({CAUSAL_AUDIT_REPLICATES}); got {len(counts)}"
             )
-    a_keep_low, a_keep_high = _checked_interval("a_keep_ci", a_keep_ci)
-    a_renew_low, a_renew_high = _checked_interval("a_renew_ci", a_renew_ci)
+    c_total_keep_low, c_total_keep_high = _checked_interval(
+        "c_total_keep_ci", c_total_keep_ci
+    )
+    c_total_renew_low, c_total_renew_high = _checked_interval(
+        "c_total_renew_ci", c_total_renew_ci
+    )
     if not operational_valid:
         return "INVALID_OPERATIONAL"
     if (
@@ -1101,8 +1114,8 @@ def select_result_branch(
         or multi_opportunity_lifecycles < IDENTIFIABILITY_LIFECYCLES
         or eligible_keep_rows < SUPPORT_FLOOR
         or eligible_renew_rows < SUPPORT_FLOOR
-        or min(natural_keep_rows_by_replicate) < NATURAL_FORK_QUOTA_PER_ACTION
-        or min(natural_renew_rows_by_replicate) < NATURAL_FORK_QUOTA_PER_ACTION
+        or min(causal_keep_rows_by_replicate) < CAUSAL_AUDIT_QUOTA_PER_ACTION
+        or min(causal_renew_rows_by_replicate) < CAUSAL_AUDIT_QUOTA_PER_ACTION
     ):
         return "BENCHMARK_NON_IDENTIFIABLE"
     maximum_ucb = max(interval[1] for interval in utility_ci.values())
@@ -1116,18 +1129,18 @@ def select_result_branch(
         and intervention_ci[0] > INTERVENTION_THRESHOLD
     )
     consequence_passes = bool(
-        a_keep_low > A_KEEP_LCB_FLOOR
-        and a_renew_low > A_RENEW_LCB_FLOOR
-        and float(a_keep_mean) >= A_KEEP_MEAN_FLOOR
-        and float(a_renew_mean) >= A_RENEW_MEAN_FLOOR
+        c_total_keep_low > C_TOTAL_KEEP_LCB_FLOOR
+        and c_total_renew_low > C_TOTAL_RENEW_LCB_FLOOR
+        and float(c_total_keep_mean) >= C_TOTAL_KEEP_MEAN_FLOOR
+        and float(c_total_renew_mean) >= C_TOTAL_RENEW_MEAN_FLOOR
     )
     if g_ci[0] > GAIN_THRESHOLD and behavior_passes and consequence_passes:
         return "COMMITMENT_SUPPORTED"
     confidently_fails = bool(
         sum(ci[1] > LIFETIME_BIN_THRESHOLD for ci in k_bin_cis) < 2
         or intervention_ci[1] <= INTERVENTION_THRESHOLD
-        or a_keep_high <= A_KEEP_LCB_FLOOR
-        or a_renew_high <= A_RENEW_LCB_FLOOR
+        or c_total_keep_high <= C_TOTAL_KEEP_LCB_FLOOR
+        or c_total_renew_high <= C_TOTAL_RENEW_LCB_FLOOR
     )
     if g_ci[0] > GAIN_THRESHOLD and confidently_fails:
         return "REPRESENTATION_ONLY"
@@ -1170,10 +1183,10 @@ def registered_contract() -> dict[str, Any]:
         "evidence_streaming": {
             "layout": "root_immutable_index_generation_update_shard_and_cell_reference_v2",
             "train_manifest_schema": 6,
-            "train_index_schema": 2,
+            "train_index_schema": 3,
             "train_update_schema": 2,
-            "evaluation_manifest_schema": 4,
-            "evaluation_cell_schema": 7,
+            "evaluation_manifest_schema": 5,
+            "evaluation_cell_schema": 8,
             "digest": "sha256",
             "path_rule": "strict_root_relative_contained",
             "publication": "same_directory_fsync_atomic_replace",
@@ -1226,22 +1239,25 @@ def registered_contract() -> dict[str, Any]:
             "intervention": INTERVENTION_THRESHOLD,
             "identifiability_opportunities": IDENTIFIABILITY_OPPORTUNITIES,
             "identifiability_lifecycles": IDENTIFIABILITY_LIFECYCLES,
-            "a_keep_lcb": A_KEEP_LCB_FLOOR,
-            "a_renew_lcb": A_RENEW_LCB_FLOOR,
-            "a_keep_mean_floor": A_KEEP_MEAN_FLOOR,
-            "a_renew_mean_floor": A_RENEW_MEAN_FLOOR,
+            "c_total_keep_lcb": C_TOTAL_KEEP_LCB_FLOOR,
+            "c_total_renew_lcb": C_TOTAL_RENEW_LCB_FLOOR,
+            "c_total_keep_mean_floor": C_TOTAL_KEEP_MEAN_FLOOR,
+            "c_total_renew_mean_floor": C_TOTAL_RENEW_MEAN_FLOOR,
         },
         "k_bins": ["K==1", "K==2", "K>=3"],
         "intervention_metric": "primitive_action_total_variation",
-        "natural_fork": {
-            "actions": list(NATURAL_FORK_ACTIONS),
-            "quota_per_action_per_replicate": NATURAL_FORK_QUOTA_PER_ACTION,
-            "replicates": NATURAL_FORK_REPLICATES,
-            "pairs": NATURAL_FORK_PAIRS,
+        "causal_audit": {
+            "natural_actions": list(CAUSAL_AUDIT_NATURAL_ACTIONS),
+            "branches": list(CAUSAL_AUDIT_BRANCHES),
+            "quota_per_action_per_replicate": CAUSAL_AUDIT_QUOTA_PER_ACTION,
+            "replicates": CAUSAL_AUDIT_REPLICATES,
+            "selected_rows": CAUSAL_AUDIT_SELECTED_ROWS,
+            "branch_rows": CAUSAL_AUDIT_BRANCH_ROWS,
             "budget_rule": (
                 "32 natural KEEP and 32 natural RENEW opportunities per "
-                "replicate, 320 fork pairs across five replicates. This is the "
-                "sole registered form; full per-opportunity forking is not the "
+                "replicate, 320 selected rows and 960 three-branch rows across "
+                "five replicates. This is the sole registered form; full "
+                "per-opportunity auditing is not the "
                 "default."
             ),
             "shortfall_rule": (
@@ -1252,20 +1268,20 @@ def registered_contract() -> dict[str, Any]:
                 "post-result top-up"
             ),
             "gate_rule": (
-                "LCB_95>0 for A_KEEP and for A_RENEW, both required, with "
-                "frozen point floors mean(A_KEEP)>=0.02 and "
-                "mean(A_RENEW)>=0.02. A one-sided pass is not sufficient and "
+                "LCB_95>0 for C_total in each natural-action stratum, both "
+                "required, with frozen point floors mean(C_total)>=0.02 in "
+                "each stratum. A one-sided pass is not sufficient and "
                 "is not expressible."
             ),
             "confident_failure_dual": (
                 "the exact statistical dual of the interval gates: "
-                "UCB(A_KEEP)<=0 or UCB(A_RENEW)<=0. The two point floors are "
+                "UCB(C_total|KEEP)<=0 or UCB(C_total|RENEW)<=0. The two point floors are "
                 "point estimates and take no part in the dual."
             ),
             "selection_stream": {
-                "namespace": NATURAL_FORK_SELECTION_NAMESPACE,
+                "namespace": CAUSAL_AUDIT_SELECTION_NAMESPACE,
                 "base_seed": BOOTSTRAP_SEED,
-                "coordinate": NATURAL_FORK_SELECTION_COORDINATE,
+                "coordinate": CAUSAL_AUDIT_SELECTION_COORDINATE,
                 "rule": (
                     "PCG64 over SeedSequence([bootstrap_seed, coordinate, ...]) "
                     "-- a dedicated deterministic stream under its own "
@@ -1315,9 +1331,9 @@ def registered_contract() -> dict[str, Any]:
                 "replicate", "arm", "cell", "stream", "batch"
             ],
             "stage2_context": [
-                "fork_id", "episode_id", "time", "key",
+                "audit_id", "episode_id", "time", "key", "donor_key",
                 "membership_epoch", "segment_id", "natural_action",
-                "branch_action",
+                "branch",
             ],
         },
         "replay_tolerances": {
