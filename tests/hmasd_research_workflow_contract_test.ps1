@@ -10,7 +10,7 @@ if ($currentWork.Contains('OMP: PAUSED')) {
     $roles = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
     $dispatcher = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
     if ($roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
-        $roles.roles.project_manager.thread_id -ne '019f7e6e-2f81-7463-93a6-4bb836585fb8') {
+        $roles.roles.project_manager.thread_id -ne '019f898b-2c57-79c0-a158-e694295b2254') {
         throw 'Paused-OMP mode requires the registered persistent Codex project_manager'
     }
     foreach ($required in @('Persistent Codex Project Manager delivery', '-Role project_manager', 'controller <-> project_manager')) {

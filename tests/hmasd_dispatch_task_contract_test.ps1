@@ -13,7 +13,7 @@ if ($roles.schema_version -ne 9 -or (Compare-Object $expected $actual)) {
     throw 'Persistent role graph must contain controller, project_manager and open_divergent_exchange at schema 9'
 }
 if ($roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
-    $roles.roles.project_manager.thread_id -ne '019f7e6e-2f81-7463-93a6-4bb836585fb8' -or
+    $roles.roles.project_manager.thread_id -ne '019f898b-2c57-79c0-a158-e694295b2254' -or
     $roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
     $roles.roles.open_divergent_exchange.thread_id -ne '019f716c-3c8a-7891-8c89-c94dc94fab4c' -or
     $roles.roles.open_divergent_exchange.reviewer_role -ne 'OPEN_DIVERGENT' -or

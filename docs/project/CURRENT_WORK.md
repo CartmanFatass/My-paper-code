@@ -11,7 +11,7 @@ Updated: 2026-07-22
   until the user explicitly restores it.
 - Scientific direction comes from the registered external GPT-5.6 Pro. The
   Codex Controller owns integration. The sole registered persistent Codex
-  Project Manager is task `019f7e6e-2f81-7463-93a6-4bb836585fb8`; it owns
+  Project Manager is task `019f898b-2c57-79c0-a158-e694295b2254`; it owns
   research convergence, implementation planning, code realization coordination
   and package acceptance, and may use native Codex collaboration agents.
 
