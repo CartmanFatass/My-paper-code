@@ -55,6 +55,8 @@ data/
 !memory/*.md
 # Project control plane is load-bearing collaboration state.
 !docs/project/*.md
+# Claude Code controller state and role briefs on the `Claude` branch.
+!docs/claude/**/*.md
 !docs/superpowers/plans/*.md
 !docs/superpowers/specs/*.md
 # Custom subagent definitions are durable project tooling.

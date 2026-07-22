@@ -6,14 +6,24 @@ embeds only the standing constraints required by that role.
 
 ## Execution environment
 
-- Run Python with `C:/Users/wu/.conda/envs/SB3/python.exe` directly
-  (`torch 2.7.0+cu118`, RTX 4070). The default `python` on PATH is a CPU-only
-  build and will fail.
-- Never use `conda run -n SB3`. It raises `UnicodeDecodeError` from a non-UTF-8
-  `.pth` during `site.py`.
-- For scripts outside the repository root, set `PYTHONPATH=C:/project/HMASD`.
-- The focused suite requires CUDA and **fails closed** by design. Never add a
-  CPU fallback, and never weaken a test so it passes without a GPU.
+- Run Python with `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`
+  directly (python 3.10.20, `torch 2.7.0+cpu`). The default `python` on PATH is
+  a Windows Store stub and will fail.
+- Never invoke the environment through `conda run`. It raises
+  `UnicodeDecodeError` from a non-UTF-8 `.pth` during `site.py`.
+- For scripts outside the repository root, set
+  `PYTHONPATH=C:/Projects/My-paper-code`.
+- **This host has no CUDA.** The registered execution backend on the `Claude`
+  branch is `cpu` (`FORMAL_EXECUTION_BACKEND`), which the testbed admits as a
+  first-class backend, not a fallback.
+- The focused suite **fails closed** on the *registered* backend: an unavailable
+  registered backend fails the session rather than being substituted. That rule
+  is about never silently substituting, not about CUDA specifically. Never
+  weaken a test so it passes on a backend it was not run on.
+- Do not assert a measurement of this host as a universal property of a device
+  class. Assert the invariant and measure the host — a test that hardcoded one
+  machine's CPU batch-invariance error as a fact about all CPUs has already cost
+  time here.
 - Collections run at 16 parallel environments (`FORMAL_NUM_ENVS`). Never write a
   test at width 1 or 2; behavior at those widths is not representative and
   reconstruction drift is width-sensitive.
@@ -23,9 +33,8 @@ embeds only the standing constraints required by that role.
 You do not commit. Leave your work in the working tree.
 
 No `git add`, `commit`, `push`, `stash`, `reset`, `checkout` of tracked files, or
-branch manipulation. The Project Manager integrates its assigned package; the
-Controller verifies it independently and owns every commit. Read-only Git
-inspection is allowed only when the assignment needs it.
+branch manipulation. The Controller verifies your work independently and owns
+every commit. Read-only Git inspection is allowed and encouraged.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.
@@ -97,9 +106,7 @@ and flag it rather than proceeding.
 
 ## Pointers
 
-- `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract.
-- `docs/project/CURRENT_WORK.md` — live project state and binding engineering
-  constraints.
-- `docs/project/CURRENT_WORK.md` — active-line engineering constraints.
-- `docs/project/IMPLEMENTATION_PLAN.md` — accepted executable design and
-  evidence requirements.
+- `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract and
+  its evidence requirements.
+- `docs/project/PROBLEM_CACHE.md` — parked problems and what each one blocks.
+- `docs/claude/SESSION_STATE.md` — live controller state on the `Claude` branch.
