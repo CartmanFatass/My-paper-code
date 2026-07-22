@@ -59,6 +59,12 @@ data/
 !docs/superpowers/specs/*.md
 # Custom subagent definitions are durable project tooling.
 !.claude/agents/*.md
+# Native OMP task-agent definitions are durable project tooling.
+!.omp/agents/*.md
+!.omp/agents/references/*.md
+!.omp/agents/references/*.json
+# Visual brainstorming and runtime capability probes are local scratch.
+.superpowers/
 # Exact R27-G2 design/review evidence is durable project state.
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
 !docs/external-review/R27_G2_design_review_20260712_Claude.md

@@ -1,31 +1,34 @@
 # HMASD External Review Workflow
 
-External GPT-5.6 Pro owns scientific CDC decisions. The active controller owns
-round sequencing, factual reconciliation, adoption and every Git-visible
-boundary. One persistent Open-Pro Exchange owns external transport, exact raw
-capture and its heartbeat. The Research Project Manager preserves the Pro
-decision, maintains the research records and checks operational executability;
-it does not independently reconverge the science.
+External GPT-5.6 Pro owns scientific CDC direction. The active Controller owns
+round sequencing, factual reconciliation, direct evidence intake, durable
+record application, resource authorization and every Git-visible boundary. One
+persistent Open-Pro Exchange owns external transport, exact raw capture and its
+heartbeat. The OMP Project Manager later owns executable algorithm realization
+for an authorized implementation action; it does not reconverge the science.
 
 ## Scientific sequence
 
 1. GPT-5.6 Pro performs CDC scientific review of the Git-visible evidence under
    `OPEN_REVIEW_PRINCIPLES.md`, preserving plural conjectures while selecting
    one scheduled research action.
-2. The controller writes factual reconciliation without changing the science.
-3. The Research Project Manager performs `CDC_DECISION_INTAKE`: it projects the
-   Pro decision onto durable records and checks operational feasibility.
-4. The controller shows the resulting user brief, adopts or rejects the action,
-   writes `50_DISPOSITION.md` and updates project control once.
+2. The Controller writes factual reconciliation without changing the science,
+   applies the exact durable CDC record deltas and shows the Pro user brief.
+3. The Controller writes `50_DISPOSITION.md` and updates project control once.
+4. If implementation is selected and separately authorized, the Controller
+   dispatches an isolated OMP Project Manager with the Pro scientific direction,
+   estimand, evidence and resource boundary. The Manager decides the complete
+   executable algorithm and manages its code-agent task tree.
 
-Review does not authorize code or training. Pro owns science; the Manager owns
-evidence-preserving operationalization. The target remains a stronger MARL
-algorithm, while hierarchy, skills, variable lifetime, ordinary-MARL controls
-and causal diagnostics are mechanisms or evidence, not universal prerequisites.
+Review and direct evidence intake do not authorize code or training. Pro owns
+science; Project Manager owns authorized algorithm realization; Controller owns
+the workflow and resource gate. The target remains a stronger MARL algorithm,
+while hierarchy, skills, variable lifetime, ordinary-MARL controls and causal
+diagnostics are mechanisms or evidence, not universal prerequisites.
 
 `docs/project/ALGORITHM_PRINCIPLES.md` is the common scientific contract and
-`OPEN_REVIEW_PRINCIPLES.md` specializes the external Pro role. Operational
-intake guidance lives only in the Research Project Manager Skill.
+`OPEN_REVIEW_PRINCIPLES.md` specializes the external Pro role. Direct intake
+guidance lives in the Controller `hmasd-review-round` Skill.
 
 ## Direct Exchange interface
 
@@ -46,19 +49,17 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 ```
 
 The Exchange returns `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED` directly
-to the controller through the task dispatcher. After raw verification, the
-controller writes reconciliation and sends one `CDC_DECISION_INTAKE` to the
-Research Project Manager. The manager owns no heartbeat and returns
-`CDC_DECISION_BRIEF` or `RESEARCH_MANAGER_BLOCKED`.
+to the Controller through the persistent task dispatcher. After raw
+verification, the Controller writes reconciliation and applies direct evidence
+intake. There is no independent Intake or persistent Manager relay.
 
 Each raw has exactly one writer: its registered Exchange. A raw becomes
 immutable after that Exchange verifies natural response completion and exact
 captured-text equality after rereading the file. Every naturally completed
 response is preserved even when its content has gaps. The Exchange reports a
-semantic quality note; the controller and Research Project Manager decide
-whether the scientific contract is sufficient or needs a focused follow-up. A
-content gap is not a transport failure. An externally accepted stage is never
-resubmitted.
+semantic quality note; the Controller decides whether the scientific contract
+needs a focused Pro follow-up. A content gap is not a transport failure. An
+externally accepted stage is never resubmitted.
 
 Each Pro Exchange uses one browser lifecycle per assigned stage. At the end of
 a waiting wake it finalizes the registered page with `status: "handoff"`, which
@@ -91,8 +92,9 @@ rounds/YYYYMMDD_topic/
 Raw responses are byte-preserved and precede downstream use. Controller round
 behavior lives in `.agents/skills/hmasd-review-round/SKILL.md`; registered
 Exchange behavior lives in `.agents/skills/hmasd-review-exchange/SKILL.md`.
-Scientific intake and implementation behavior live in
-`.agents/skills/hmasd-project-manager/SKILL.md`.
-Codex task IDs and role bindings live only in the dispatcher's
-`session-roles.json`; external reviewer conversations and URLs live only in
+Direct scientific evidence intake lives in the Controller round Skill.
+Algorithm realization and implementation behavior live in
+`.omp/agents/hmasd-project-manager.md`. Persistent task IDs contain only the
+Controller and Open-Pro Exchange in the dispatcher's `session-roles.json`;
+external reviewer conversations and URLs live only in
 `REVIEWER_CONVERSATIONS.json`.

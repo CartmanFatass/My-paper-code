@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use only by the active HMASD controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates and pushes one reviewer-visible question, dispatches the registered Open-Pro Exchange through $hmasd-dispatch-task, archives the natural response exactly, writes factual reconciliation, and sends the Pro decision to the Research Project Manager for evidence-preserving intake and operationalization.
+description: Use only by the active HMASD controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates one reviewer-visible question, dispatches Open-Pro Exchange, archives the natural response, performs direct evidence intake, applies durable record deltas, and prepares any later OMP Project Manager assignment.
 ---
 
 # HMASD External Pro Research Round
@@ -12,11 +12,12 @@ definition correction, derivation, counterexample search, retained lemmas,
 portfolio meaning and selection of one scheduled research action. That action
 serializes resources; it does not make other defensible explanations illegal.
 
-The controller owns reviewer-visible Git boundaries, factual reconciliation,
-adoption, durable record writes and user communication. It never operates the
-browser or replaces the Pro scientific judgment. The Research Project Manager
-checks provenance and executability and translates an adopted implementation
-action; it does not independently reconverge the science.
+The Controller owns reviewer-visible Git boundaries, factual reconciliation,
+direct evidence intake, durable record writes, resource authorization and user
+communication. It never operates the browser, replaces Pro scientific judgment
+or designs the Project Manager's executable algorithm. If implementation is
+authorized later, the OMP Project Manager owns algorithm realization inside the
+Pro direction.
 
 Use a full plural review for competing explanations, proposed family
 retirement, benchmark-identification disputes, repeated ambiguity or
@@ -64,11 +65,14 @@ object and estimand; the Manager later freezes executable architecture.
 2. Accept a naturally completed raw only from that task. Preserve semantic
    quality notes separately from transport validity.
 3. Write factual `30_EVIDENCE_RECONCILIATION.md` without changing Pro science.
-4. Send `CDC_DECISION_INTAKE` to `research_project_manager` with the raw,
-   reconciliation, CDC records and evidence.
-5. Show the returned Chinese brief. Controller adoption permits one
-   disposition, durable CDC updates and project-control update. A material
-   scientific ambiguity returns as one focused continuation to the same Pro.
+4. Read `references/cdc-principles.md`, distinguish Pro science from repository
+   fact and operational inference, and apply the smallest exact conjecture,
+   lemma, counterexample, portfolio and evidence-note deltas.
+5. Show the Pro Chinese brief and record one disposition. A material scientific
+   ambiguity returns as one focused continuation to the same Pro.
+6. If Pro selected implementation, produce its scientific direction and
+   estimand as explicit inputs for a separately authorized OMP Project Manager
+   task. Review and intake alone authorize neither implementation nor compute.
 
 ## Exchange dispatch
 
@@ -90,25 +94,27 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY
 Resolve the Exchange immediately before sending, copy its live route fields
 unchanged, require delivery proof and verify post-send invariance.
 
-## Manager intake
+## Controller direct evidence intake
 
-```text
-$hmasd-dispatch-task
-$hmasd-project-manager
+Use the archived raw, factual reconciliation, current CDC records and
+`references/cdc-principles.md`. Preserve the Pro decision without a second
+scientific convergence step. Apply durable deltas directly and record
+operational feasibility as repository fact or inference, never as Pro text.
 
-CDC_DECISION_INTAKE
-role_skill=.agents/skills/hmasd-project-manager/SKILL.md
-research_id=<round>:cdc-intake
-inputs=<brief, raw, reconciliation, CDC records and evidence paths>
-question=Preserve the Pro decision, update the durable research objects, and assess operational executability without making a new scientific choice.
-```
+There is no independent Intake agent or Manager relay. A read-only scout may
+perform a bounded mechanical comparison but owns no scientific or adoption
+authority.
 
-This is read-only and creates no write lease or heartbeat.
+When a later resource action is authorized, dispatch exact OMP profile
+`hmasd-project-manager` with the archived Pro direction, estimand,
+reconciliation, resource boundary, working scope and completion contract. The
+Project Manager—not the Controller—freezes the executable algorithm.
 
 ## Recovery
 
-There is no review state file or controller heartbeat. A naturally completed
+There is no review state file or Controller heartbeat. A naturally completed
 raw with gaps remains valid transport. If a gap changes science, ask the same
-Pro one focused question; if it is engineering-only, the Manager bounds it.
-Never prescribe selectors, clicks or browser commands. Review and intake never
-authorize implementation or compute by themselves.
+Pro one focused question; if it is algorithm-realization-only, the later
+Project Manager resolves it inside its assignment. Never prescribe selectors,
+clicks or browser commands. Review and direct evidence intake never authorize
+implementation or compute by themselves.

@@ -6,19 +6,20 @@ Updated: 2026-07-22
 
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
-- **Controller: current Codex root task.** `AGENTS.md` is its operating contract.
-- Scientific decisions come from the registered external GPT-5.6 Pro. The
-  Research Project Manager preserves and operationalizes them; it does not
-  independently select research directions.
+- **Controller: current OMP root task.** `AGENTS.md` is its operating contract.
+- Scientific direction comes from the registered external GPT-5.6 Pro. The
+  native OMP Project Manager owns algorithm realization and code-side decisions
+  inside that direction; it does not select a different research direction.
 
 ## Active Boundary
 
 The bounded autonomous research chain is ACTIVE. Five evidence-bearing
 iterations remain available. The controller automatically continues accepted
-callbacks through external-Pro review, CDC intake, authorized implementation,
-Git integration, authorized experiment monitoring and terminal evidence
-integration. Persistent roles never call one another directly; every transition
-returns through the controller.
+results through persistent external-Pro review, direct CDC evidence intake,
+authorized OMP Project Manager work, Git integration, authorized rebuildable
+OMP Monitor work and terminal evidence integration. Open-Pro Exchange is the
+only persistent non-Controller role; OMP task results return automatically to
+the Controller, and no role or task starts its successor directly.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
@@ -59,15 +60,17 @@ same scope are not dispatched.
 
 ## Binding Engineering Constraints
 
-These are durable technical constraints, not workflow. They bind implementation
-management and are embedded in the registered custom-agent profiles:
+These are durable technical constraints, not workflow. They bind algorithm
+realization and are embedded in the native OMP Project Manager and code-agent
+profiles:
 
-- `.agents/skills/hmasd-project-manager/references/engineering-principles.md`
-- `.codex/agents/hmasd-implementer.toml`
-- `.codex/agents/hmasd-reviewer.toml`
+- `.omp/agents/references/hmasd-engineering-principles.md`
+- `.omp/agents/hmasd-project-manager.md`
+- `.omp/agents/hmasd-implementer.md`
+- `.omp/agents/hmasd-reviewer.md`
 
-Only `.agents/skills/hmasd-experiment/references/experiment-protocol.md` is
-Codex-session machinery and does not apply here.
+Experiment observation uses the rebuildable task protocol at
+`.omp/agents/references/hmasd-experiment-monitor-protocol.md`.
 
 The load-bearing consequences:
 
@@ -153,11 +156,11 @@ evidence.
 
 Automatically send the behavioral-battery identifiability question to the
 registered Open-Pro Exchange as one focused continuation. After the raw response
-returns, automatically send it to the Research Project Manager for CDC intake,
-show the resulting concise brief, and continue the already-authorized branch:
-either one bounded measurement-contract implementation or the unchanged formal
-launch with Experiment Monitor ownership. Do not treat operationally aborted
-runs as scientific evidence.
+returns, perform direct Controller CDC evidence intake, apply the exact durable
+deltas, show the concise Pro brief and continue the already-authorized branch:
+either one bounded measurement-contract package through the OMP Project Manager
+or the unchanged formal launch with one rebuildable OMP Monitor task. Do not
+treat operationally aborted runs as scientific evidence.
 
 ## Open Contract Questions
 

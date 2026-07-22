@@ -101,6 +101,8 @@ route fields and send once:
 
 ```text
 REVIEW_STAGE_COMPLETE
+source_thread_id=<registered open_divergent_exchange thread ID>
+role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
 role=OPEN_DIVERGENT
 handoff_id=<round>:OPEN_DIVERGENT:complete:<question>
 round=<id>
@@ -112,6 +114,7 @@ quality_notes=<concise semantic observation or none>
 ```
 
 For a genuine operational boundary send `REVIEW_STAGE_BLOCKED` with the same
-role, stable handoff, round and direct reason. Diagnose and attempt reasonable
-in-scope recovery before blocking; do not ask the controller for selectors,
-browser commands or click sequences.
+`source_thread_id`, `role_skill`, role and round,
+`handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>` and the direct reason.
+Diagnose and attempt reasonable in-scope recovery before blocking; do not ask the
+Controller for selectors, browser commands or click sequences.

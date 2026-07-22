@@ -1,6 +1,0 @@
-interface:
-  display_name: "HMASD Research Project Manager"
-  short_description: "Operationalize Pro CDC decisions and manage implementation"
-  default_prompt: "Use $hmasd-dispatch-task and $hmasd-project-manager in the registered manager session to intake one external-Pro CDC decision or manage one authorized implementation."
-policy:
-  allow_implicit_invocation: false

@@ -1,149 +1,146 @@
 ---
 name: hmasd-dispatch-task
-description: Use when an HMASD message or task mentions persistent-role routing, START_IMPLEMENTATION, IMPLEMENTATION_PLAN_BRIEF, IMPLEMENTATION_READY, RESEARCH_MANAGER_BLOCKED, CDC_DECISION_BRIEF, MONITOR_ASSIGNMENT, EXPERIMENT_MONITOR, REVIEW_STAGE, REVIEW_STAGE_COMPLETE, REVIEW_STAGE_BLOCKED, model-preserving session delivery, or a persistent role callback.
+description: Route HMASD work among Controller direct control-plane work, native OMP Project Manager or Monitor tasks, and the persistent Open-Pro Exchange.
 ---
 
 # HMASD Task Dispatch
 
 ## Purpose
 
-Choose who owns a task and safely deliver it. This Skill grants no research,
-implementation, review, experiment, Git, or project-state authority.
+Choose the execution surface and deliver one bounded assignment. This Skill
+grants no scientific, algorithm, implementation, experiment, Git or
+project-control authority by itself.
 
-Use narrow interfaces and broad role execution. A controller message states the
-bounded outcome, authority, inputs, write scope, hard exclusions, completion
-condition and callback. It does not prescribe internal mechanical steps unless
-the step is a hard safety boundary such as live-route preservation, raw archive
-equality, Git-visible evidence, formal-run authorization or protected algorithm
-semantics. The owning role uses its judgment inside the assigned boundary and
-returns only the registered terminal callback.
+The Controller owns continuation: every accepted OMP task result or persistent
+role callback is a wake-up. Integrate the evidence, update control state only at
+a real boundary and continue the next already authorized event. Do not stop at a
+task boundary when an active grant still determines the next action.
 
 ## Select the execution surface
 
-For controller work, classify the requested outcome before using any delegation
-tool:
+Classify the requested outcome before any delivery:
 
-- ordinary inspection, project management, Git, evidence integration, user
-  communication, or a small direct controller edit -> controller works directly;
-- external-Pro CDC decision intake or controller-authorized implementation management ->
-  registered `research_project_manager` with `hmasd-project-manager`;
-- external GPT-5.6 Pro CDC decision -> registered `open_divergent_exchange` with
-  `hmasd-review-exchange`;
-- monitoring an already authorized run -> registered `experiment_monitor` with
-  `hmasd-experiment`.
+- Controller direct control-plane work: workflow and topology design, routing,
+  Git, direct external-Pro evidence intake, durable record application, evidence
+  integration, project control and user communication.
+- Native OMP `hmasd-project-manager`: one Controller-authorized algorithm
+  realization and implementation package inside an external-Pro scientific
+  direction. Dispatch with `isolated: true`.
+- Native OMP `hmasd-experiment-monitor`: one already authorized run. Use exact
+  stable task name `monitor-<run-id>` and do not isolate it from the run root or
+  shared `hub` process.
+- Persistent `open_divergent_exchange`: external GPT-5.6 Pro transport through
+  the registered conversation and `hmasd-review-exchange` Skill.
 
-Temporary implementation and review subagents belong only to the Research
-Project Manager and use native parent-child communication. Their existence does
-not create a controller execution surface.
-
-If the controller works directly, stop dispatch classification and do not call
-a persistent-session or subagent delivery tool. If a persistent role owns the
-task, continue below.
-
-## Role registry
-
-Read `references/session-roles.json` immediately before every persistent send
-or callback. Require the recipient task ID and role Skill to match one active
-entry. The registry stores stable task IDs only; never take live route fields
-from it, conversation history, an incoming message, or cached context.
-
-The only persistent edges are:
+The only persistent edge is:
 
 ```text
-controller <-> research_project_manager
 controller <-> open_divergent_exchange
-controller <-> experiment_monitor
 ```
 
-## Message shape
+Code Scout, Implementer, Verifier and Reviewer belong only to the Project
+Manager's child task graph. The Controller does not dispatch them as writers.
 
-Persistent messages are triggered by their registered event name, not by
-forwarding Skill names as text. Do not add a mechanical Skill-name preamble to
-cross-session messages. Include `role`,
-`role_skill`, `handoff_id` and the event-specific fields so the recipient Skill
-can verify the assignment. Use the destination Skill's compact schema or:
+## Native OMP Project Manager delivery
+
+Require one complete assignment with:
 
 ```text
-HMASD_SESSION_TASK
-task_id=<stable id>
-role=<registered role>
-role_skill=<registered Skill path>
-objective=<bounded outcome>
-authority=<allowed mutations or read-only>
-inputs=<explicit paths or none>
-write_scope=<explicit paths or none>
-forbidden=<explicit exclusions>
-completion=<observable condition>
-return=<terminal callback>
+PROJECT_MANAGER_ASSIGNMENT
+work_id=<stable id>
+source_commit=<40-character pushed SHA>
+scientific_direction=<external Pro decision and estimand>
+inputs=<raw, reconciliation and exact evidence paths>
+authority=<resource and protected algorithm realization authority>
+working_scope=<exact project paths>
+protected_boundaries=<semantics to preserve or decide>
+forbidden=<scientific direction, compute, Git, review and control exclusions>
+completion=<observable package and focused checks>
 ```
 
-Conversation history and nearby files are not implicit inputs.
+Dispatch exact profile `hmasd-project-manager`, stable name derived from
+`work_id`, and `isolated: true`. Its queued or running job is the sole write
+lease. The Controller does not mutate, stage, commit or push until that job
+returns ready/blocked or is definitely aborted.
 
-Assignments should be result-oriented. Do not ask a persistent role to seek
-controller approval for ordinary in-scope implementation, monitoring or review
-choices. Require controller contact only for authority expansion, protected
-semantic changes, formal compute launch, external-review dispatch, topology
-changes, or a genuine `BLOCKED` condition.
+Project Manager may send a non-blocking plan brief through `hub`. Its terminal
+value arrives by automatic result delivery. Read full output at `agent://<id>`
+and transcript at `history://<id>`. Never resolve a persistent route or send a
+session callback for an OMP task.
 
-## Resolve and deliver
+## Native OMP Monitor delivery
 
-Immediately before sending, run:
+Require a valid run manifest and an already authorized named persistent `hub`
+process. Dispatch exact profile `hmasd-experiment-monitor`, exact name
+`monitor-<run-id>`, and `isolated: false`.
 
-```text
-scripts/resolve_task_route.ps1 -ThreadId <registered recipient id>
-```
+A root OMP restart may rebuild the same Monitor only when no matching job
+exists and its terminal idempotency key has not already been accepted. A
+nonterminal replacement resumes bounded observation; an already-terminal
+replacement reads retained status and returns the same terminal payload.
+Automatic result delivery is the only callback. Accept terminal results
+idempotently by the manifest's run ID, terminal state and status update
+identity. A Monitor abort never restarts or changes the experiment.
 
-Require one unarchived task and nonempty `hostId`, `threadId`, `model`, and
-`thinking`. Copy all four values unchanged into one `send_message_to_thread`
-call. Delivery succeeds only when the tool returns the same recipient
-`threadId`.
+## Persistent Open-Pro delivery
+
+Immediately before every outbound persistent send, read
+`references/session-roles.json`. Require the recipient task ID and role Skill
+to match the active `open_divergent_exchange` entry. Static registry data never
+supplies `hostId`, model or thinking.
+
+Resolve the registered Exchange with
+`scripts/resolve_task_route.ps1 -ThreadId <registered id>`. Require one
+unarchived task and nonempty `hostId`, `threadId`, `model` and `thinking`. Copy
+all four unchanged into one send. Delivery succeeds only when the returned
+`threadId` matches the registered recipient.
 
 Resolve the same task again immediately after delivery and require all four
 fields to match the pre-send values. On change, do not resend or repair task
-settings; report `TASK_ROUTE_CORRUPTION` with before/after evidence. A definite
-pre-acceptance `notLoaded` permits one identical retry; an accepted or ambiguous
-send is never repeated.
+settings; report route corruption. A definite pre-acceptance `notLoaded` permits
+one identical retry; an accepted or ambiguous send is never repeated.
 
-Before a callback, resolve the controller anew. Never reuse incoming route
-metadata.
+Accept only these terminal callback events:
 
-## Callback acceptance
+```text
+REVIEW_STAGE_COMPLETE
+source_thread_id=<registered open_divergent_exchange thread ID>
+role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+role=OPEN_DIVERGENT
+handoff_id=<round>:OPEN_DIVERGENT:complete:<question>
+round=<id>
+stage_commit=<40-character pushed SHA>
+raw=<round_path>/<raw>
+verification=natural_complete;exact_text_equal
+quality=<COMPLETE|COMPLETE_WITH_GAPS>
+quality_notes=<concise semantic observation or none>
 
-Accept a callback only when its event name matches this Skill's trigger
-description, its native `source_thread_id` equals the registered role task, its
-stable `handoff_id` matches the assignment, and the sender/receiver form one
-legal edge. Repeated role plus `handoff_id` is one idempotent delivery.
+REVIEW_STAGE_BLOCKED
+source_thread_id=<registered open_divergent_exchange thread ID>
+role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+role=OPEN_DIVERGENT
+handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>
+round=<id>
+reason=<direct operational blocker>
+```
 
-## Controller continuation duty
+Immediately before acceptance, reread the registry. Require the callback
+recipient to match the registered Controller task ID and `AGENTS.md` contract,
+and require `source_thread_id`, `role_skill` and `role` to match the registered
+Exchange. The event, handoff ID and legal
+`controller <-> open_divergent_exchange` edge must match. Repeated source role
+plus handoff ID is one idempotent delivery.
 
-After accepting a terminal callback, read the autonomy boundary and remaining
-budget in `docs/project/CURRENT_WORK.md`. If the boundary is active, the
-controller must complete its direct integration work and dispatch the next
-already-authorized role event in the same logical continuation. Do not stop at
-a recommendation such as "next send this to Pro" and do not ask the user to
-repeat an existing grant.
+## Context and authority
 
-The controller, not the returning role, chooses and sends the next event. Common
-continuations include integrating `IMPLEMENTATION_READY`, sending a focused
-`REVIEW_STAGE` for a remaining scientific ambiguity, sending completed external
-evidence for CDC intake, assigning monitoring for an authorized run, and
-integrating a terminal monitor result before the next CDC decision. These are
-examples, not a rigid state machine; choose the smallest legal continuation
-from current evidence and authority.
+Assignments state outcome, authority, inputs, write scope, hard exclusions,
+completion and return semantics. They do not forward conversation history.
+Project Manager owns in-scope algorithm realization; Monitor owns bounded
+observation; Exchange owns transport. None receives Controller Git, project
+control, formal-compute or user-communication authority.
 
-Pause only when the autonomy boundary is inactive or exhausted, the callback is
-invalid, the owning role reports a genuine unrecovered blocker, or the next
-action would exceed the registered scientific or formal-compute authority.
-Record any pause and its exact reason in the controller control plane. A role's
-prohibition on launching a successor never prohibits controller continuation.
-
-## Recovery and topology
-
-Let the owning role diagnose recoverable failures inside its authority. A retry
-returns the same bounded assignment to the same role with observed evidence and
-the desired outcome; do not prescribe internal mechanical steps.
-
-For a persistent topology change, run `scripts/audit_session_topology.ps1`,
-update the registry, affected role Skills, prompts, heartbeat callbacks, helper
-scripts and contract tests in one Git boundary, and do not message an affected
-session during a partial migration.
+OMP task agents do not invoke persistent role Skills or read the session
+registry. The persistent Exchange does not spawn OMP tasks. Completion of any
+surface never starts a successor directly; automatic result delivery wakes the
+Controller, whose controller continuation duty selects the next authorized
+surface.

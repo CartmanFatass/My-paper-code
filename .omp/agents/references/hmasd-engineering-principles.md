@@ -1,7 +1,8 @@
-# HMASD Manager Engineering Principles
+# HMASD Project Manager Engineering Principles
 
-Require the implementation package to preserve the accepted scientific
-contract while remaining computationally coherent.
+Require each implementation package to preserve the selected scientific
+direction while making all algorithm-realization decisions computationally
+coherent.
 
 - Batch independent environment, member, branch, skill, replica and evaluation
   dimensions. Retain loops only for genuine causal, autoregressive, simulator

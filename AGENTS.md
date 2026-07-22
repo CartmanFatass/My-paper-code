@@ -16,38 +16,39 @@ document needed at the current boundary:
 The durable research objects live under `docs/research/cdc/`. Load only the
 conjecture, ledger, portfolio or evidence note required at the current boundary.
 
-The controller alone owns scientific adoption, implementation and experiment
-authorization, Git integration, project control, evidence integrity and user
-communication.
+The controller alone owns workflow and role-topology design, routing, direct
+evidence intake, resource and formal-experiment authorization, Git integration,
+project control, evidence integrity and user communication. External GPT-5.6
+Pro owns scientific direction. The OMP Project Manager owns in-scope algorithm
+realization and code-side decisions.
 
 ## Task dispatch
 
-Automatically use `.agents/skills/hmasd-dispatch-task/SKILL.md` whenever a task
-may require delegation, persistent-session communication, external review,
-implementation management or experiment monitoring. That Skill selects the
-execution surface and preserves the recipient task's live model and thinking
-during delivery.
+Automatically use `.agents/skills/hmasd-dispatch-task/SKILL.md` whenever work
+may require native OMP Project Manager or Monitor dispatch, persistent Open-Pro
+communication, external review or a role callback. That Skill selects the
+execution surface without turning OMP tasks into persistent roles.
 
 The active surfaces are:
 
-- controller direct work for ordinary inspection, project management, Git,
-  evidence integration, user communication and small controller edits;
-- Research Project Manager for external-Pro CDC decision intake and authorized
-  implementation management;
-- Open-Pro Exchange for external divergent review;
-- Experiment Monitor for an already authorized run.
+- controller direct work for workflow design, routing, Git, direct Pro evidence
+  intake, project control, evidence integration and user communication;
+- `hmasd-project-manager` as an isolated OMP task for one authorized algorithm
+  realization and implementation package;
+- `hmasd-experiment-monitor` as a non-isolated rebuildable OMP task for one
+  already authorized run;
+- the registered Open-Pro Exchange persistent session for external divergent
+  review transport.
 
-Role procedures and callback schemas live only in their role Skills. Temporary
-code agents are registered under `.codex/agents/` and belong only to the
-Research Project Manager. They use native parent-child communication and are
-not controller dispatch targets.
+The four code profiles under `.omp/agents/` belong only to the Project Manager
+task tree. The Controller does not dispatch them as implementation workers.
+Only the Project Manager may spawn them, and no child may spawn a successor.
 
-Execution-surface switches are the anti-drift boundary. Persistent-role
-messages use registered event names such as `START_IMPLEMENTATION`,
-`MONITOR_ASSIGNMENT` and `REVIEW_STAGE`; those event names trigger the relevant
-Skill. Do not forward Skill names as a mechanical preamble. Once the message
-reaches the correct role, the role follows a wide process inside its authority;
-the controller does not prescribe internal steps or request per-edit approval.
+OMP tasks receive a complete assignment and return through automatic result
+delivery with `agent://` output and `history://` transcript. They never use the
+persistent route resolver or callback protocol. Only Open-Pro Exchange uses a
+registered event such as `REVIEW_STAGE`, its role Skill and live route
+verification.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -61,37 +62,43 @@ the next action would expand protected scientific or formal-compute authority.
 
 ## Authority and write ownership
 
-The Research Project Manager has two bounded modes:
+External GPT-5.6 Pro owns conjectures, scientific definitions, mechanism-family
+and research-route selection, estimands, evidence meaning and the next scheduled
+research action.
 
-- CDC decision intake: preserve the external Pro scientific decision, maintain
-  conjecture/lemma/counterexample/portfolio records, and assess operational
-  executability without choosing a local route;
-- implementation management: after controller authorization, freeze the
-  executable architecture, maintain `IMPLEMENTATION_PLAN.md`, manage temporary
-  implementation/review work and return one integrated package.
+The OMP Project Manager owns the executable algorithm inside that scientific
+direction: network and state architecture, probability, gradients, credit,
+clocks, lifecycle, replay, RNG, checkpoint meaning, batching, replacement and
+implementation structure. It freezes `IMPLEMENTATION_PLAN.md`, selects and
+manages the code-agent task graph, integrates one package and performs one
+bounded repair cycle without per-choice Controller approval.
 
-After a mutating `START_IMPLEMENTATION` is accepted, the Research Project
-Manager holds the sole tracked-worktree write lease until it reports
-`IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`. The controller does not
-edit, stage, commit or push during that lease. The controller retains adoption,
-Git and experiment authority.
+The Controller dispatches Project Manager with `isolated: true` only after
+direct evidence intake and resource authorization. Its queued or running job is
+the sole tracked-worktree write lease. The Controller and other mutating tasks
+do not edit, stage, commit or push until that exact job yields ready/blocked or
+is definitely aborted. Project Manager never changes external scientific
+direction, formal-compute authority, Git, project control or external review.
 
-An external reviewer advises; it does not authorize code, compute or scientific
-adoption. An experiment monitor observes one assigned run; it does not launch,
-repair, extend or interpret it.
+The rebuildable Monitor observes one assigned run. It does not launch, restart,
+repair, extend or scientifically interpret it.
 
 ## Context isolation
 
-Each role receives its communication Skill, exactly one role Skill and explicit
-inputs. A role Skill is both an authority grant and a context denylist. Roles do
-not reconstruct controller history, read unrelated project control, change a
-task model, authorize another role or launch a successor.
+The persistent Open-Pro role receives its communication Skill, registered role
+identity and explicit inputs. It does not reconstruct Controller history,
+authorize another role or launch a successor.
 
-Scientific decision work is sent only to the Open-Pro Exchange. CDC decision
-intake and implementation work are sent only to the Research Project Manager.
-Monitoring is sent only to the Experiment Monitor. A role never starts another
-role itself; it returns to the controller. This isolation rule does not suspend
-the controller's duty to continue an active authorized chain.
+OMP task agents receive exactly one profile and one complete assignment. They
+do not read persistent routing state, reconstruct Controller history, change
+their model, expand authority or invoke unrelated Skills. Only Project Manager
+has child-spawn authority, limited to its four registered code profiles.
+
+Scientific decision transport is sent only to Open-Pro Exchange. The Controller
+performs direct lightweight evidence intake and durable CDC record application.
+Authorized algorithm realization is sent only to `hmasd-project-manager`.
+Monitoring is sent only to `hmasd-experiment-monitor`. Automatic task results
+wake the Controller but never start a successor without Controller routing.
 
 ## Protected changes
 
@@ -133,14 +140,15 @@ result, update the smallest implicated unit: engineering path, implementation,
 measurement, benchmark-comparator pair, conjecture scope or, only with strong
 independent evidence, mechanism family.
 
-Before adopting a scheduled action as code or experiment authority, receive the
-external Pro decision and the Research Project Manager `CDC_DECISION_BRIEF`,
-then show its concise user-facing summary. The controller checks evidence,
-authority and feasibility but does not replace the Pro scientific choice. It
-records adopted conjecture, lemma, counterexample, portfolio and evidence-note
-deltas under `docs/research/cdc/`. Use a full plural Pro round for genuinely
-open boundaries and a focused continuation in the same Pro conversation for a
-local scientific ambiguity; the Manager never fills that ambiguity itself.
+Before authorizing a scheduled action as code or experiment work, receive and
+archive the external Pro decision, write factual reconciliation, perform direct
+evidence intake and show its concise user-facing summary. The Controller checks
+provenance, authority and feasibility but does not replace the Pro scientific
+choice or design the Project Manager's algorithm realization. It records
+conjecture, lemma, counterexample, portfolio and evidence-note deltas under
+`docs/research/cdc/`. Use a full plural Pro round for genuinely open boundaries
+and a focused continuation in the same Pro conversation for a local scientific
+ambiguity; neither Controller nor Manager fills that ambiguity locally.
 
 Intrinsic reward remains environment-agnostic. Task fields, identity, roles,
 success predicates, progress measures and external reward may not be smuggled
@@ -177,5 +185,5 @@ terminal experiment disposition, accepted external disposition, autonomy-state
 change or explicit controller handoff. Report only the domain that changed.
 
 The controller may push `aggressive` with `git push My-paper-code aggressive`
-under the user's standing authorization. Role tasks do not commit or push unless
-their Skill grants a narrower boundary.
+under the user's standing authorization. OMP task agents and persistent roles
+do not commit or push.

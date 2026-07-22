@@ -2,30 +2,60 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$skill = Get-Content (Join-Path $repo '.agents/skills/hmasd-project-manager/SKILL.md') -Raw
-$managerYaml = Get-Content (Join-Path $repo '.agents/skills/hmasd-project-manager/agents/openai.yaml') -Raw
-$config = Get-Content (Join-Path $repo '.codex/config.toml') -Raw
-foreach ($required in @('CDC_DECISION_INTAKE','CDC_DECISION_BRIEF','START_IMPLEMENTATION','IMPLEMENTATION_PLAN_BRIEF','IMPLEMENTATION_READY','HMASDCodeScout','HMASDImplementer','HMASDVerifier','HMASDReviewer','native parent-child','This manager owns no heartbeat')) {
-    if (-not $skill.Contains($required)) { throw "Project Manager missing: $required" }
-}
-if (-not $managerYaml.Contains('allow_implicit_invocation: false')) { throw 'Manager invocation must be explicit' }
-foreach ($required in @('does not replace or independently converge','override or silently substitute','boundary fails twice')) {
-    if (-not $skill.Contains($required)) { throw "Manager authority boundary missing: $required" }
-}
+$agentRoot = Join-Path $repo '.omp/agents'
+
 $profiles = @{
-    HMASDCodeScout = @('hmasd-code-scout.toml','model = "gpt-5.6-luna"','model_reasoning_effort = "high"','sandbox_mode = "read-only"')
-    HMASDImplementer = @('hmasd-implementer.toml','model = "gpt-5.6-sol"','model_reasoning_effort = "high"','sandbox_mode = "workspace-write"')
-    HMASDVerifier = @('hmasd-verifier.toml','model = "gpt-5.6-luna"','model_reasoning_effort = "high"','sandbox_mode = "workspace-write"')
-    HMASDReviewer = @('hmasd-reviewer.toml','model = "gpt-5.6-sol"','model_reasoning_effort = "xhigh"','sandbox_mode = "read-only"')
+    'hmasd-project-manager.md' = @(
+        'name: hmasd-project-manager',
+        'model: openai-codex/gpt-5.6-sol',
+        'thinking-level: xhigh',
+        '  - task',
+        '  - hmasd-code-scout',
+        '  - hmasd-implementer',
+        '  - hmasd-verifier',
+        '  - hmasd-reviewer')
+    'hmasd-code-scout.md' = @('name: hmasd-code-scout', 'model: openai-codex/gpt-5.6-luna', 'thinking-level: medium')
+    'hmasd-implementer.md' = @('name: hmasd-implementer', 'model: openai-codex/gpt-5.6-sol', 'thinking-level: high')
+    'hmasd-verifier.md' = @('name: hmasd-verifier', 'model: openai-codex/gpt-5.6-luna', 'thinking-level: high')
+    'hmasd-reviewer.md' = @('name: hmasd-reviewer', 'model: openai-codex/gpt-5.6-sol', 'thinking-level: xhigh')
 }
-foreach ($name in $profiles.Keys) {
-    if (-not $config.Contains("[agents.`"$name`"]")) { throw "Custom agent not registered: $name" }
-    $profile = Get-Content (Join-Path $repo ".codex/agents/$($profiles[$name][0])") -Raw
-    foreach ($required in $profiles[$name][1..3]) {
-        if (-not $profile.Contains($required)) { throw "$name profile missing: $required" }
+foreach ($file in $profiles.Keys) {
+    $path = Join-Path $agentRoot $file
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing OMP profile: $file" }
+    $text = Get-Content -LiteralPath $path -Raw
+    if (-not $text.StartsWith("---`n") -and -not $text.StartsWith("---`r`n")) { throw "Missing frontmatter: $file" }
+    foreach ($required in $profiles[$file]) {
+        if (-not $text.Contains($required)) { throw "$file missing: $required" }
     }
-    if ($profile.Contains('$hmasd-dispatch-task')) { throw "$name uses persistent dispatcher" }
+    if ($file -ne 'hmasd-project-manager.md') {
+        if ($text -notmatch '(?m)^spawns:\s*\[\]\s*$') { throw "$file must deny child spawn" }
+        if ($text -match '(?m)^\s*-\s+task\s*$') { throw "$file exposes task tool" }
+    }
 }
-if (Test-Path (Join-Path $repo '.agents/skills/hmasd-implementer/SKILL.md')) { throw 'Superseded implementer Skill remains' }
-if (Test-Path (Join-Path $repo '.agents/skills/hmasd-reviewer/SKILL.md')) { throw 'Superseded reviewer Skill remains' }
+
+$manager = Get-Content -LiteralPath (Join-Path $agentRoot 'hmasd-project-manager.md') -Raw
+$normalizedManager = $manager -replace '\s+', ' '
+foreach ($required in @(
+    'algorithm realization',
+    'scientific direction',
+    'IMPLEMENTATION_PLAN.md',
+    'isolated',
+    'sole tracked-worktree write lease',
+    'one writer',
+    'one bounded repair cycle',
+    'formal compute',
+    'Git authority',
+    'external reviewer',
+    'project control')) {
+    if ($normalizedManager -notmatch [regex]::Escape($required)) { throw "Project Manager authority missing: $required" }
+}
+$scout = Get-Content -LiteralPath (Join-Path $agentRoot 'hmasd-code-scout.md') -Raw
+$reviewer = Get-Content -LiteralPath (Join-Path $agentRoot 'hmasd-reviewer.md') -Raw
+foreach ($pair in @(@('Scout', $scout), @('Reviewer', $reviewer))) {
+    foreach ($forbidden in @('  - edit', '  - write', '  - bash', '  - task')) {
+        if ($pair[1] -match "(?m)^$([regex]::Escape($forbidden))\s*$") { throw "$($pair[0]) exposes mutation/spawn tool: $forbidden" }
+    }
+}
+$engineering = Join-Path $agentRoot 'references/hmasd-engineering-principles.md'
+if (-not (Test-Path -LiteralPath $engineering -PathType Leaf)) { throw 'Missing OMP engineering principles' }
 Write-Output 'HMASD_PROJECT_MANAGER_CONTRACT_OK'

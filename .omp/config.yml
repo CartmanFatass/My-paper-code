@@ -1,0 +1,5 @@
+# Project agents are discovered natively from `.omp/agents/*.md`; they require
+# no duplicate registration in this file.
+task:
+  isolation:
+    mode: auto
