@@ -678,11 +678,48 @@ def _fork_row_draw(
     return values[:, 0] if width == 1 else values
 
 
-def _fork_stable_linear(inputs: torch.Tensor, layer: nn.Linear) -> torch.Tensor:
-    """Batched row-local linear map whose reduction is width independent."""
+def _row_stable_event_heads(
+    inputs: torch.Tensor,
+    event_head: nn.Linear,
+    mark_head: nn.Linear,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Evaluate both event heads with one row-local float32 reduction path.
 
-    output = (inputs.unsqueeze(1) * layer.weight.unsqueeze(0)).sum(dim=-1)
-    return output if layer.bias is None else output + layer.bias
+    Each output coordinate is reduced only across that row's input features,
+    so its binary32 result cannot depend on the number or ordering of other
+    packed requests. Collection, fork collection and teacher replay all call
+    this helper; there is intentionally no direct ``nn.Linear`` replay path.
+    """
+
+    if not (
+        inputs.dtype == torch.float32
+        and event_head.weight.dtype == torch.float32
+        and mark_head.weight.dtype == torch.float32
+        and event_head.bias is not None
+        and mark_head.bias is not None
+        and event_head.bias.dtype == torch.float32
+        and mark_head.bias.dtype == torch.float32
+    ):
+        raise RuntimeError("event/mark heads require explicit float32 evaluation")
+    row_count = int(inputs.shape[0])
+    # CUDA selects a different small-outer-dimension reduction below the
+    # registered 16-environment collection width. Zero-row padding keeps
+    # every partition on the same reduction path while retaining the exact
+    # arithmetic already used by registered collection (which has at least
+    # one live request per environment). Rows remain mutually independent.
+    padded_inputs = (
+        F.pad(inputs, (0, 0, 0, FORMAL_NUM_ENVS - row_count))
+        if row_count < FORMAL_NUM_ENVS
+        else inputs
+    )
+
+    def evaluate(layer: nn.Linear) -> torch.Tensor:
+        output = (
+            padded_inputs.unsqueeze(1) * layer.weight.unsqueeze(0)
+        ).sum(dim=-1) + layer.bias
+        return output[:row_count]
+
+    return evaluate(event_head), evaluate(mark_head)
 
 
 def collect_trajectory(
@@ -856,13 +893,11 @@ def collect_trajectory(
                 assert arm.event_head is not None and arm.mark_head is not None
                 packed_inputs = torch.stack([value[3] for value in requests])
                 packed_z_pre = torch.stack([value[4] for value in requests])
-                # The explicit multiply/reduce is algebraically the same linear
-                # map as ``nn.Linear`` but is row local: adding, removing or
-                # reordering other requests cannot select a different GEMM
-                # reduction path for this row.  Ordinary and fork collection
-                # deliberately share this one implementation.
-                logits = _fork_stable_linear(packed_inputs, arm.event_head)
-                mark_output = _fork_stable_linear(packed_inputs, arm.mark_head)
+                # All collection modes and teacher replay deliberately share
+                # this one row-local binary32 head evaluation.
+                logits, mark_output = _row_stable_event_heads(
+                    packed_inputs, arm.event_head, arm.mark_head
+                )
                 mu, sigma = _normal_parameters(mark_output)
                 create_mask = torch.as_tensor(
                     [value[2] == CREATE for value in requests], dtype=torch.bool, device=device
@@ -1297,7 +1332,9 @@ def _replay_event_heads(
     if arm.arm != "OR":
         assert arm.event_head is not None and arm.mark_head is not None
         inputs = reconstructed_inputs[event_mask]
-        logits = arm.event_head(inputs)
+        logits, mark_output = _row_stable_event_heads(
+            inputs, arm.event_head, arm.mark_head
+        )
         log_probability = F.log_softmax(logits, dim=-1)
         probability = torch.exp(log_probability)
         cat_entropy[event_mask] = -(probability * log_probability).sum(-1)
@@ -1306,7 +1343,7 @@ def _replay_event_heads(
             log_probability, 1, safe_actions.unsqueeze(-1)
         ).squeeze(-1)
         cat_logp[event_mask] = cat_values
-        mu, sigma = _normal_parameters(arm.mark_head(inputs))
+        mu, sigma = _normal_parameters(mark_output)
         u = trajectory.event_u.to(device)[event_mask]
         mark_component[event_mask] = transformed_mark_component_logp(u, mu, sigma)
     cat_logp = torch.where(cat_mask, cat_logp, 0.0)

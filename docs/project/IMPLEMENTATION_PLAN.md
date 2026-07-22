@@ -2,8 +2,8 @@
 
 Updated: 2026-07-22
 Status: IMPLEMENTATION_READY
-Work ID: `event-held-commitment-formal-evidence-streaming-repair-20260722`
-Base/source boundary: `a5835b571638edee12dbc7129a280d6b47782bc2`
+Work ID: `event-held-commitment-formal-replay-gate-repair-20260722-retry1`
+Base/source boundary: `1e206db7b430423bc35bb5996293adf01acadd49`
 
 The preserved interrupted WIP is adopted as the starting implementation state;
 it remains unaccepted until every focused check and review below passes. The
@@ -44,6 +44,80 @@ This is one coupled replacement package across
 The prior executable path is replaced in place; no old schema, scalar replay
 gate, direct-write helper, scalar evaluation fallback or compatibility loader
 remains active.
+
+### Formal replay gate repair
+
+The formal train failure after three indexed updates is operational evidence,
+not a scientific result. Its exact-support, state, detach, support-leak, RNG
+and event-joint assembly checks passed. The failing fourth collection/replay
+comparison reported a `mark_component` drift of
+`1.9073486328125e-6`; the event-joint error was the same while its registered
+compositional bound was `1.0300217821000548e-5`.
+
+The executable cause is a split arithmetic path, not an inadequate tolerance.
+The collector computes both event logits and Normal mark parameters with the
+explicit row-local multiply/reduce helper so one request is independent of the
+number and ordering of other packed requests. Teacher replay instead sends the
+compacted event rows through `nn.Linear`, allowing CUDA GEMM shape and
+reduction selection to change after the weights evolve. The first three
+archived updates already show non-zero 2--20 ULP component drift while passing
+the mixed and ratio gates; the next trajectory crosses only the component
+gate. A derived-joint bound correctly passing does not override a failed
+actual factor.
+
+Freeze one shared event/mark-head evaluation helper. Collection, teacher
+replay, stochastic/deterministic modes and fork collection all call that same
+row-local float32 linear evaluation for both heads. Sampling support, masks,
+categorical action, transformed-Normal formula, stored `u/z`, factorization,
+joint assembly, RNG draw order and gradients remain unchanged. Do not convert
+the behavior policy or replay to float64 and do not widen, reinterpret or
+replace any registered tolerance.
+
+The existing component predicate remains authoritative at every eligible
+coordinate:
+
+```text
+absolute_error <= 1e-6 + (8 * 2^-24) * max_abs
+abs(expm1(replayed - stored)) <= 1e-4
+```
+
+The worst-coordinate selector continues to rank the maximum of mixed-bound
+severity and ratio severity. `float32_ulp_at_max_magnitude` and
+`ulp_distance` remain exact recomputable evidence for the selected stored and
+replayed binary32 values; ULP is not a third admission gate and cannot rescue
+a component that fails either registered predicate. State fields remain
+absolute-only, exact semantic/support/detach fields remain exact, and the
+event-joint compositional/assembly and ratio gates remain independent.
+
+No replay, artifact or checkpoint schema increment is required because the
+serialized predicates, fields and scientific meaning do not change. The old
+split replay arithmetic path is deleted rather than retained as a fallback.
+Formal train, non-formal exercise and archived-evidence validation continue to
+share one report generator and one fail-closed record validator.
+
+Acceptance requires all of the following on CUDA without a formal run:
+
+1. A bounded shared training-core reproduction executes replicate 0, all
+   `OR/DUM/EHC` arms, four 16x80 updates and four PPO passes. All four update
+   shards publish and revalidate; the fourth update's primitive/categorical/
+   mark records satisfy their mixed and ratio gates and the event joint
+   satisfies its unchanged assembly, compositional and ratio gates.
+2. A shape/order test proves that the shared event/mark helper gives the same
+   row result when requests are evaluated together, permuted or partitioned,
+   and that collection and teacher replay call this helper rather than a
+   separate `nn.Linear` route.
+3. Existing and new negatives still reject wrong factor masks/actions,
+   support leakage, detach changes, omitted or sign-reversed Jacobian,
+   missing mark components, a re-signed stored component beyond its mixed or
+   ratio gate, non-finite/ULP/coordinate tampering and joint assembly
+   corruption. A passing joint never admits a failing component.
+4. The three archived accepted update shards remain valid under the unchanged
+   schema. The recorded failure artifact remains evidence of the superseded
+   split arithmetic path and is never relabeled as a scientific result.
+5. The complete focused CUDA suite and one fresh bounded
+   `formal_path_exercise` pass, formal analysis still rejects exercise
+   artifacts, checkpoint continuation remains within `1e-7`, and no
+   temporary residue or new scalar CUDA/packing path appears.
 
 ### Formal evidence streaming repair
 
@@ -970,20 +1044,37 @@ one concrete repair cycle is allowed before manager acceptance or a blocker.
 ## Implementation acceptance
 
 Manager acceptance was completed on 2026-07-22 without launching formal
-training or registered evaluation. The final integrated CUDA suite passed
-`51/51` in `363.81s`. Independent post-repair checks passed `6/6`, and a fresh
-non-formal shared-core exercise completed at
-`logs/verifier_eventheld_streaming_repair_20260722_1020/formal_path_exercise`.
-It produced one immutable generation-6 training index, one update shard and
-12 evaluation-cell references; every recorded SHA-256 and byte count matched.
-Streaming validation was operationally valid with one verbose artifact live at
-peak and zero after release. The formal analyzer rejected the exercise
-identity, no mutable `index.json` existed and no temporary artifact remained.
+training or registered evaluation. The shared row-stable event/mark-head
+helper is the sole arithmetic route for collection and teacher replay; the
+registered mixed, ratio, ULP-evidence, event-joint and exact-semantic rules are
+unchanged. The original CUDA collector digests remain pinned and the helper's
+gradient path is non-zero for its input, weights and biases.
 
-The fresh final reviewer approved the package after the sole allowed repair
-cycle. The remaining risk is formal-scale storage and I/O behavior across five
-replicates and 250 updates; this is intentionally unmeasured because formal
-execution was outside implementation authority.
+The complete focused CUDA file passed `54/54` in `696.06s` before removal of
+one test that depended on untracked runtime logs. The final self-contained
+targeted CUDA set then passed `6/6` in `150.86s`; an independent verifier
+repeated the same six checks in `150.74s` and separately passed strict
+checkpoint continuation. The bounded four-update shared training-core
+reproduction published and revalidated all four update shards for
+`OR/DUM/EHC` at 16 environments, horizon 80 and four PPO passes; its fourth
+update had zero primitive, categorical, mark and event-joint replay error.
+The three archived accepted formal updates revalidated under the unchanged
+contract for all nine arm records, while component, support, leak, RNG,
+likelihood, joint-assembly and evidence-corruption negatives remained closed.
+
+A fresh non-formal shared-core exercise completed at
+`logs/verifier_eventheld_replay_gate_repair_20260722/formal_path_exercise` with
+one update, all 12 evaluation cells, strict checkpoint round trip and zero
+temporary residue. Its streamed operational record validated, and the formal
+analyzer and CPU fallback correctly rejected the exercise identity. The fresh
+read-only final reviewer independently reran six CUDA checks and approved the
+integrated package without a repair request.
+
+The remaining risk is formal-scale runtime, storage and future backend-kernel
+behavior across five replicates and 250 updates. Formal-scale execution was
+intentionally unmeasured, and any future reduction drift remains fail-closed by
+the unchanged per-component mixed and ratio predicates rather than being
+masked by the passing compositional joint bound.
 
 ## Prohibited mechanisms
 

@@ -256,6 +256,79 @@ def test_dense_batch_invariance_is_measured_not_assumed(
         assert error > 0.0
 
 
+def test_shared_event_heads_are_row_stable_and_used_by_collection_and_replay(
+    device: torch.device, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Both heads have one packing-independent binary32 implementation."""
+
+    arms, _, _ = initialize_arms(device)
+    arm = arms["EHC"]
+    assert arm.event_head is not None and arm.mark_head is not None
+    generator = torch.Generator(device="cpu").manual_seed(202_607_22)
+    inputs = torch.randn(
+        (23, EVENT_INPUT_DIM), generator=generator, dtype=torch.float32,
+    ).to(device)
+    helper = event_held_commitment_link._row_stable_event_heads
+    together = helper(inputs, arm.event_head, arm.mark_head)
+
+    permutation = torch.tensor(
+        [7, 2, 19, 0, 13, 22, 5, 11, 1, 17, 8, 21, 3, 15, 6, 20, 9,
+         4, 18, 10, 14, 12, 16],
+        device=device,
+    )
+    inverse = torch.argsort(permutation)
+    permuted = helper(inputs[permutation], arm.event_head, arm.mark_head)
+    partitioned_pairs = [
+        helper(part, arm.event_head, arm.mark_head)
+        for part in inputs.split((1, 4, 7, 11))
+    ]
+    partitioned = tuple(
+        torch.cat([pair[head] for pair in partitioned_pairs], dim=0)
+        for head in range(2)
+    )
+    singled = helper(inputs[9:10], arm.event_head, arm.mark_head)
+    for head in range(2):
+        assert torch.equal(together[head], permuted[head][inverse])
+        assert torch.equal(together[head], partitioned[head])
+        assert torch.equal(together[head][9:10], singled[head])
+
+    calls: list[int] = []
+
+    def observed(
+        packed: torch.Tensor, event_head: Any, mark_head: Any,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        calls.append(int(packed.shape[0]))
+        return helper(packed, event_head, mark_head)
+
+    monkeypatch.setattr(
+        event_held_commitment_link, "_row_stable_event_heads", observed,
+    )
+    stochastic = collect_trajectory(
+        arm, make_training_state("EHC", 0), device=device,
+    )
+    collection_calls = len(calls)
+    assert collection_calls > 0
+    deterministic = collect_trajectory(
+        arm, make_training_state("EHC", 0), device=device, deterministic=True,
+    )
+    assert len(calls) > collection_calls
+    before_replay = len(calls)
+    replay = replay_trajectory(arm, stochastic, device=device)
+    assert len(calls) == before_replay + 1
+    report = replay_report(replay, stochastic)
+    assert report["passed"]
+    assert report["errors"]["categorical_component"] == 0.0
+    assert report["errors"]["mark_component"] == 0.0
+    assert report["errors"]["event_joint"] == 0.0
+    # Deterministic selection changes samples only; it reaches the same head
+    # evaluator and remains exactly replayable.
+    deterministic_report = replay_report(
+        replay_trajectory(arm, deterministic, device=device), deterministic,
+    )
+    assert deterministic_report["passed"]
+    assert deterministic_report["errors"]["mark_component"] == 0.0
+
+
 def test_initialization_rng_isolation_and_capacity(
     device: torch.device,
 ) -> None:
@@ -3154,6 +3227,100 @@ def test_streamed_exercise_validates_one_verbose_artifact_at_a_time(
         )
 
 
+def test_four_update_formal_trajectory_replays_and_streams_exactly(
+    device: torch.device, tmp_path: Path,
+) -> None:
+    """Reproduce the failed fourth update through the non-formal shared core."""
+
+    assert device.type == "cuda"
+    assert benchmark_runner.FORMAL_NUM_ENVS == 16
+    assert HORIZON == 80
+    assert benchmark_runner.PPO_PASSES == 4
+    output_root = tmp_path / "four_update_replay_gate"
+    completed_paths: list[str] = []
+    last_evidence: dict[str, Any] = {}
+    manifest = benchmark_runner._training_core(
+        output_root,
+        device=device,
+        replicates=(0,),
+        updates=4,
+        formal=False,
+        artifact_schema=benchmark_runner.EXERCISE_TRAIN_ARTIFACT_SCHEMA,
+        completed_paths=completed_paths,
+        last_evidence=last_evidence,
+    )
+    assert manifest["status"] == "COMPLETE"
+    assert manifest["progress"] == {
+        "completed_updates": 4,
+        "total_updates": 4,
+        "completed_replicates": 1,
+        "total_replicates": 1,
+    }
+    index_path, index = benchmark_runner._verified_json_reference(
+        output_root,
+        manifest["replicate_indexes"][0],
+        identity_keys=frozenset({"replicate", "generation"}),
+    )
+    assert index["status"] == "COMPLETE"
+    assert [reference["update"] for reference in index["updates"]] == [1, 2, 3, 4]
+    assert index_path.name == f"index_{index['generation']}.json"
+
+    rng_chain = {
+        arm: benchmark_runner._initial_rng_states(
+            authoritative_seed_map("train", 0)
+        )
+        for arm in ARMS
+    }
+    ledger_cache: dict[Any, Any] = {}
+    for update, reference in enumerate(index["updates"], start=1):
+        shard_path, shard = benchmark_runner._verified_json_reference(
+            output_root, reference, identity_keys=frozenset({"update"}),
+        )
+        assert shard_path.name == f"update_{update}.json"
+        ends: dict[str, dict[str, Any]] = {}
+        assert _training_update_valid(
+            shard["evidence"],
+            update=update,
+            replicate=0,
+            formal=False,
+            mode="formal_path_exercise_train",
+            rng_starts=rng_chain,
+            validated_rng_ends=ends,
+            ledger_cache=ledger_cache,
+        )
+        for arm_name in ARMS:
+            replay = shard["evidence"]["arms"][arm_name]["replay"]
+            assert replay["passed"] and not replay["failures"]
+            for component in REPLAY_LOG_COMPONENT_FIELDS:
+                record = replay["likelihood_components"][component]
+                assert record["absolute_error"] <= record["mixed_bound"]
+                assert record["ratio_drift"] <= record["ratio_cap"]
+            for joint_name in REPLAY_JOINT_FIELDS:
+                joint = replay["joints"][joint_name]
+                assert joint["error"] <= joint["bound"]
+                assert joint["excess"] <= 0.0
+                assert joint["assembly_excess"] <= 0.0
+            assert (
+                replay["event_joint_ratio"]["ratio_drift"]
+                <= replay["event_joint_ratio"]["ratio_cap"]
+            )
+        rng_chain = ends
+        del shard
+
+    assert {
+        path.name
+        for path in (output_root / "train" / "replicate_0" / "evidence").glob(
+            "update_*.json"
+        )
+    } == {"update_1.json", "update_2.json", "update_3.json", "update_4.json"}
+    assert all(
+        value <= 1e-7
+        for arm in ARMS
+        for value in index["arms"][arm]["roundtrip_errors"].values()
+    )
+    assert not list(output_root.rglob("*.tmp"))
+
+
 def test_stage2_timing_is_descriptive_only_and_execution_is_strict() -> None:
     _training, cells = _synthetic_operational_records(1)
     cell = cells[(0, "EHC", "held_out_stochastic")]
@@ -4441,8 +4608,8 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     """Accumulation across nine factors passes; a joint defect does not.
 
     First case: every one of the nine factors on a RENEW row is displaced
-    by `2e-7`, which stacks on that row's own reduction-order difference and
-    still leaves every component inside the unchanged `1e-6` bound, and the
+    by `4e-7`, which stacks across the row while still leaving every component
+    inside the unchanged `1e-6` bound, and the
     recorded joint is reassembled from them. Their sum then exceeds `1e-6`
     -- exactly the situation the old single scalar declared a failure. It
     must pass, and the measured numbers here prove the joint really did
@@ -4458,7 +4625,7 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(arm, state, device=device)
     index = _first_renew_index(trajectory)
-    displacement = 2e-7
+    displacement = 4e-7
 
     accumulated = _restated_event_factors(
         trajectory,
@@ -4895,3 +5062,35 @@ def test_worst_coordinate_and_ulp_evidence_is_strict() -> None:
     assembly = deepcopy(clean)
     assembly["joints"]["event_joint"]["assembly_residual"] = 1e-7
     assert not _replay_record_valid(assembly)
+
+    # A serialized component beyond its own mixed bound is rejected even
+    # when the separately recorded event joint remains wholly passing.
+    component_failure = deepcopy(clean)
+    stored = np.float32(1.0)
+    replayed = stored
+    for _ in range(13):
+        replayed = np.nextafter(
+            replayed, np.float32(np.inf), dtype=np.float32,
+        )
+    absolute_error = abs(float(replayed) - float(stored))
+    mixed_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * max(
+        abs(float(stored)), abs(float(replayed))
+    )
+    spacing, distance = benchmark_runner._recompute_ulp(
+        float(stored), float(replayed)
+    )
+    component_failure["errors"]["mark_component"] = absolute_error
+    component_failure["likelihood_components"]["mark_component"] |= {
+        "stored_value": float(stored),
+        "replayed_value": float(replayed),
+        "absolute_error": absolute_error,
+        "mixed_bound": mixed_bound,
+        "ratio_drift": abs(math.expm1(float(replayed) - float(stored))),
+        "float32_ulp_at_max_magnitude": spacing,
+        "ulp_distance": distance,
+    }
+    assert absolute_error > mixed_bound
+    assert component_failure["joints"]["event_joint"]["error"] == 0.0
+    assert component_failure["joints"]["event_joint"]["excess"] < 0.0
+    assert component_failure["joints"]["event_joint"]["assembly_excess"] < 0.0
+    assert not _replay_record_valid(component_failure)
