@@ -19,11 +19,10 @@ Updated: 2026-07-22
 
 ## Active Boundary
 
-The bounded autonomous research chain is paused after this closeout, with five
-evidence-bearing iterations retained. Its implementation and monitoring
-surfaces are native Codex. On explicit resume the Controller continues accepted
-results through external-Pro review, direct CDC intake, native work, Git, and
-terminal evidence integration.
+The bounded autonomous research chain has completed iteration 1 and retains
+four conclusion-bearing iterations. Its implementation and monitoring surfaces
+are native Codex. The completed result is accepted for intake; the next boundary
+is external-Pro review before any iteration-2 action.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -43,7 +42,7 @@ registered Open-Pro Exchange is task `019f8a2f-22be-7db3-aa74-7fdeb9c03772`
 and remains the sole external-review transport.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
-through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
+through `fb9909711a2ca8628f3d534936b771885e53b26d`. Nothing is currently running.
 The focused external-Pro clarification returned
 `BATTERY_REQUIRES_MINIMAL_CORRECTION`: keep `G` and the three arms, but separate
 same-state forced-event timing effects, mark effects, representation influence
@@ -53,8 +52,9 @@ iteration is consumed only by a conclusion-bearing evidence action.
 Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 `docs/project/` at the user's direction, under a different model: the user held
 scientific authority, that session implemented and verified, and GPT-5.6 Pro
-reviewed science through the GitHub connector. No formal experiment completed, so
-no scientific disposition was produced.
+reviewed science through the GitHub connector. The first formal
+`EVENT_HELD_COMMITMENT_LINK_G0` run has now completed and is recorded below;
+external-Pro review is required before iteration 2.
 
 ## Execution Flow (historical — Claude Code session, 2026-07-21/22)
 
@@ -158,23 +158,24 @@ retention, the sequential counterfactual fork engine, the per-factor replay
 tolerance classes and the registered execution backend and result gates are all
 in history.
 
-**Formal training attempts were operationally aborted. Nothing is running and
-no usable formal checkpoint exists.** The first attempt died at update 4 on a
+**The first formal CPU run is complete and valid. Nothing is running.** The
+initial detached launch was operationally aborted before producing a result; the
+replacement run completed on CPU with five paired replicates. The first attempt died at update 4 on a
 replay record merged across arms, fixed at `e80cef0`. The second died mid-
 training on a flat absolute per-component replay tolerance that cannot be
 executed in float32, because four of the nine bounded quantities have unbounded
 magnitude. A subsequent retry exposed the collection/replay arithmetic split;
-that defect is closed by `31aad0df`. None of these attempts is scientific
-evidence.
+that defect is closed by `31aad0df`. The completed replacement is a valid
+`NO_ACCESS_THIS_BENCHMARK` result and is archived in `docs/project/ExpRecord.md`.
 
 ## Resume Point
 
-This package is accepted but not yet a formal experiment result. On the next
-machine, pull `My-paper-code/aggressive`, require a clean worktree, run
-`resolve_source_boundary.ps1`, resolve the registered Project Manager and
-Monitor live, and read the current implementation plan plus relevant Pro raw
-before choosing any next evidence action. Formal compute remains stopped until
-the Controller authorizes a specific run.
+Iteration 1 is accepted for direct evidence intake. Its raw run is
+`logs/formal_event_held_cpu_20260722_fb99097_r2`; the next action is the neutral
+external-Pro result review recorded in
+`docs/external-review/rounds/20260722_ehc_formal_result_review/`. No iteration 2
+formal compute is authorized until that review and Controller disposition are
+archived.
 
 ## BATTERY_CONTRACT_RECONCILED
 
@@ -218,11 +219,10 @@ historical evidence only.
 
 ## Autonomous Boundary
 
-**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN** with five conclusion-bearing iterations
-authorized by the Controller after local environment recovery on 2026-07-22.
-Each iteration must follow the registered external-Pro, native Codex, Git and
-evidence gates; formal execution and monitor assignment still require a
-specific Controller-authorized run.
+**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN** with four conclusion-bearing iterations
+remaining after the valid iteration-1 result on 2026-07-22. Each later iteration
+must follow the registered external-Pro, native Codex, Git and evidence gates;
+iteration 2 is held at the external result-review boundary.
 
 ## Durable Constraints
 

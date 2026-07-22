@@ -44,7 +44,7 @@ $batteryDocuments = @{
         'BATTERY_CONTRACT_RECONCILED', 'C_total', 'LCB(C_total_KEEP)>0',
         'LCB(C_total_RENEW)>0')
     'docs/project/CURRENT_WORK.md' = @(
-        'BATTERY_CONTRACT_RECONCILED', 'five conclusion-bearing iterations')
+        'BATTERY_CONTRACT_RECONCILED', 'four conclusion-bearing iterations')
 }
 foreach ($relative in $batteryDocuments.Keys) {
     $content = Get-Content (Join-Path $repo $relative) -Raw
