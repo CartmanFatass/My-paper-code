@@ -9,16 +9,16 @@ $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 
 $expected = @('controller', 'project_manager', 'experiment_monitor', 'open_divergent_exchange')
 $actual = @($roles.roles.PSObject.Properties.Name)
-if ($roles.schema_version -ne 10 -or (Compare-Object $expected $actual)) {
-    throw 'Persistent role graph must contain controller, project_manager, experiment_monitor and open_divergent_exchange at schema 10'
+if ($roles.schema_version -ne 11 -or (Compare-Object $expected $actual)) {
+    throw 'Persistent role graph must contain controller, project_manager, experiment_monitor and open_divergent_exchange at schema 11'
 }
-if ($roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
-    $roles.roles.project_manager.thread_id -ne '019f898b-2c57-79c0-a158-e694295b2254' -or
+if ($roles.roles.controller.thread_id -ne '019f8995-7550-7c82-8f31-ad08a3d381d4' -or
+    $roles.roles.project_manager.thread_id -ne '019f8a2e-ed73-7a02-9bb9-4a57b2054cf3' -or
     $roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
-    $roles.roles.experiment_monitor.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
+    $roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
     $roles.roles.experiment_monitor.registration_status -ne 'ACTIVE' -or
     $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md' -or
-    $roles.roles.open_divergent_exchange.thread_id -ne '019f716c-3c8a-7891-8c89-c94dc94fab4c' -or
+    $roles.roles.open_divergent_exchange.thread_id -ne '019f8a2f-22be-7db3-aa74-7fdeb9c03772' -or
     $roles.roles.open_divergent_exchange.reviewer_role -ne 'OPEN_DIVERGENT' -or
     $roles.roles.open_divergent_exchange.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md') {
     throw 'Persistent controller/Open-Pro binding mismatch'

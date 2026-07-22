@@ -1,29 +1,29 @@
 {
-  "schema_version": 10,
+  "schema_version": 11,
   "updated": "2026-07-22",
   "roles": {
     "controller": {
       "kind": "active_controller",
-      "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
+      "thread_id": "019f8995-7550-7c82-8f31-ad08a3d381d4",
       "contract": "AGENTS.md"
     },
     "project_manager": {
       "kind": "persistent_codex_project_manager",
-      "thread_id": "019f898b-2c57-79c0-a158-e694295b2254",
+      "thread_id": "019f8a2e-ed73-7a02-9bb9-4a57b2054cf3",
       "registration_status": "ACTIVE",
       "contract": "AGENTS.md",
       "responsibility": "research convergence, implementation planning, code realization coordination, and package acceptance"
     },
     "experiment_monitor": {
       "kind": "persistent_codex_experiment_monitor",
-      "thread_id": "019f772b-355f-79f3-abbc-2f08800738f8",
+      "thread_id": "019f8a2f-08a2-73e1-b539-2dc5a6db0fc1",
       "registration_status": "ACTIVE",
       "role_skill": ".agents/skills/hmasd-experiment-monitor/SKILL.md",
       "responsibility": "bounded read-only run observation, ETA-aware heartbeat ownership, and terminal delivery"
     },
     "open_divergent_exchange": {
       "kind": "persistent_reviewer_exchange",
-      "thread_id": "019f716c-3c8a-7891-8c89-c94dc94fab4c",
+      "thread_id": "019f8a2f-22be-7db3-aa74-7fdeb9c03772",
       "registration_status": "ACTIVE",
       "reviewer_role": "OPEN_DIVERGENT",
       "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md"

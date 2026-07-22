@@ -24,8 +24,19 @@ if ($ThreadId -notmatch '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-
 if (-not (Test-Path -LiteralPath $StateDb -PathType Leaf)) {
     throw "Codex task database not found: $StateDb"
 }
-if (-not (Get-Command sqlite3 -ErrorAction SilentlyContinue)) {
-    throw 'sqlite3 is required to resolve live Codex task routes'
+$sqliteCommand = Get-Command sqlite3 -ErrorAction SilentlyContinue
+if ($null -ne $sqliteCommand) {
+    $sqliteExe = $sqliteCommand.Source
+} else {
+    $sqliteCandidates = @(
+        (Join-Path $env:USERPROFILE '.conda\envs\hmasd-amd-cpu\Library\bin\sqlite3.exe'),
+        'C:\ProgramData\anaconda3\Library\bin\sqlite3.exe'
+    )
+    $sqliteExe = @($sqliteCandidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1)
+    if ($sqliteExe.Count -ne 1) {
+        throw 'sqlite3 is required to resolve live Codex task routes'
+    }
+    $sqliteExe = [string]$sqliteExe[0]
 }
 
 $query = @"
@@ -33,7 +44,7 @@ SELECT id, model, reasoning_effort, archived
 FROM threads
 WHERE id = '$ThreadId';
 "@
-$json = & sqlite3 -json $StateDb $query
+$json = & $sqliteExe -json $StateDb $query
 if ($LASTEXITCODE -ne 0) { throw "Unable to read live Codex task metadata for $ThreadId" }
 
 $rows = @($json | ConvertFrom-Json)

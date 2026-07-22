@@ -16,7 +16,7 @@ $roles = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/refere
 foreach ($role in @('project_manager', 'experiment_monitor', 'open_divergent_exchange')) {
     if ($roles.roles.$role.registration_status -ne 'ACTIVE') { throw "Inactive registered role: $role" }
 }
-if ($roles.roles.experiment_monitor.thread_id -ne '019f772b-355f-79f3-abbc-2f08800738f8' -or
+if ($roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
     $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
     throw 'Native Spark Monitor registry mismatch'
 }

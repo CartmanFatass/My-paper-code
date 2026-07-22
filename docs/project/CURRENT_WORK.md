@@ -10,11 +10,11 @@ Updated: 2026-07-22
 - **Execution mode: native Codex only.** There is no legacy execution route.
 - Scientific direction comes from the registered external GPT-5.6 Pro. The
   Codex Controller owns integration. The sole registered persistent Codex
-  Project Manager is task `019f898b-2c57-79c0-a158-e694295b2254`; it owns
+  Project Manager is task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3`; it owns
   research convergence, implementation planning, code realization coordination
   and package acceptance, and may use native Codex collaboration agents.
 - The registered native Experiment Monitor is task
-  `019f772b-355f-79f3-abbc-2f08800738f8`; it observes one already-authorized
+  `019f8a2f-08a2-73e1-b539-2dc5a6db0fc1`; it observes one already-authorized
   run and must resolve as `gpt-5.3-codex-spark` at `medium` before assignment.
 
 ## Active Boundary
@@ -39,7 +39,8 @@ no-side-effect call to `hmasd-code-scout` returned `HMASD_CUSTOM_SCOUT_OK`.
 The Project Manager may use the native custom profiles recorded under `.codex/`.
 The Experiment Monitor is the registered native Codex session and must be
 verified as `gpt-5.3-codex-spark` at `medium` before a monitor assignment. The
-registered Open-Pro Exchange remains the sole external-review transport.
+registered Open-Pro Exchange is task `019f8a2f-22be-7db3-aa74-7fdeb9c03772`
+and remains the sole external-review transport.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
@@ -172,7 +173,8 @@ This package is accepted but not yet a formal experiment result. On the next
 machine, pull `My-paper-code/aggressive`, require a clean worktree, run
 `resolve_source_boundary.ps1`, resolve the registered Project Manager and
 Monitor live, and read the current implementation plan plus relevant Pro raw
-before choosing any next evidence action. Formal compute remains stopped.
+before choosing any next evidence action. Formal compute remains stopped until
+the Controller authorizes a specific run.
 
 ## Open Contract Questions
 
@@ -233,9 +235,11 @@ interpreter carries a CPU-only `torch 2.8.0+cpu`; use
 
 ## Autonomous Boundary
 
-**PAUSED_AFTER_CLOSEOUT** with five evidence-bearing iterations retained. Do
-not start a successor, external review, formal execution, or monitor assignment
-until the Controller on the next machine explicitly resumes this boundary.
+**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN** with five conclusion-bearing iterations
+authorized by the Controller after local environment recovery on 2026-07-22.
+Each iteration must follow the registered external-Pro, native Codex, Git and
+evidence gates; formal execution and monitor assignment still require a
+specific Controller-authorized run.
 
 ## Durable Constraints
 

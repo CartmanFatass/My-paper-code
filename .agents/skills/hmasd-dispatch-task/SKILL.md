@@ -29,6 +29,11 @@ four resolved values unchanged into exactly one send. Resolve again afterward;
 if identity, model, or thinking changed, report route corruption and do not
 resend. Static registry data never stores route metadata.
 
+On this Windows workspace, the resolver may use the project Conda
+environment's bundled `sqlite3.exe` when no `sqlite3` command is on `PATH`.
+That fallback reads only live route metadata and never adds static route fields
+to the registry.
+
 ## Project Manager
 
 Use `project_manager` for an authorized implementation realization, WIP audit,
