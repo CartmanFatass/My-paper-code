@@ -11,7 +11,9 @@ document needed at the current boundary:
 
 - `docs/project/ALGORITHM_PRINCIPLES.md` for scientific constraints;
 - `docs/project/IMPLEMENTATION_PLAN.md` for an active executable design;
-- `docs/project/ExpRecord.md` for a formal experiment contract or disposition.
+- `docs/project/ExpRecord.md` for a formal experiment contract or disposition;
+- `docs/project/AGENT_CONTEXT.md` for lightweight Agent and Skill execution
+  principles when changing project workflow or task profiles.
 
 The durable research objects live under `docs/research/cdc/`. Load only the
 conjecture, ledger, portfolio or evidence note required at the current boundary.

@@ -1,9 +1,8 @@
 # Engineering Principles — Measured Additions
 
 Practical rules derived from measurements on this project. These extend, and do
-not replace, `.agents/skills/hmasd-implementer/references/engineering-principles.md`
-(batch independent dimensions, pack once, no scalar CUDA sync, no serial
-evaluation).
+not replace, `.omp/agents/references/hmasd-engineering-principles.md` (batch
+independent dimensions, pack once, no scalar CUDA sync, no serial evaluation).
 
 Numbers and conditions are in `docs/project/EFFICIENCY_PRACTICES.md`.
 
@@ -24,19 +23,19 @@ on a 32-wide GRU cell at batch 16.
 
 ## Parallelism
 
-**Parallelize independent runs at the process level before restructuring
-tensors.** It is zero-risk: each process runs the already-verified serial code
-path, so no statistical or RNG invariant can change.
+**Batch independent runs as a replica dimension inside one known-good process
+and device topology.** Reuse the verified tensor path, preserve RNG and
+common-random-number coupling, and avoid duplicate CUDA contexts. One process
+per replica is not a scaling strategy for this project.
 
-**Know the ceiling before designing for it.** One CUDA card saturates near 2.0x
-across concurrent processes — kernels from separate contexts serialize under
-WDDM, and this is not a memory limit. CPU reached 5.9x on 20 cores, bounded by
-memory bandwidth rather than core count.
+**Know the ceiling before changing topology.** One CUDA card saturated near
+2.0x across concurrent processes because kernels from separate WDDM contexts
+serialize. Separate processes are allowed only for work that cannot share the
+registered tensor/device path and has an explicit resource assignment.
 
-**Batch a dimension only when the serial cost is worth it.** Batching the
-counterfactual forks would have saved minutes on a 5.65-minute stage. Batching
-the replicate dimension is worth considering only because the serial cost is
-hours.
+**Batch branches and replicas when they are independent.** Counterfactual forks
+and repeated evidence runs are batched by default; keep a loop only for genuine
+causal, autoregressive, simulator or recurrent dependence.
 
 ## Wasted compute
 

@@ -1,8 +1,8 @@
 # HMASD Agent Context
 
-Standing constraints for every subagent working in this repository. Read this
-before doing anything else. Your assignment brief carries what is true for this
-task; this file carries what is true every time.
+Normative source for designing HMASD task profiles and assignment briefs. Task
+agents do not load this document automatically: each profile and assignment
+embeds only the standing constraints required by that role.
 
 ## Execution environment
 
@@ -23,9 +23,9 @@ task; this file carries what is true every time.
 You do not commit. Leave your work in the working tree.
 
 No `git add`, `commit`, `push`, `stash`, `reset`, `checkout` of tracked files, or
-branch manipulation. The orchestrator verifies your work independently and owns
-every commit. Read-only git (`status`, `diff`, `log`, `show`) is fine and
-encouraged.
+branch manipulation. The Project Manager integrates its assigned package; the
+Controller verifies it independently and owns every commit. Read-only Git
+inspection is allowed only when the assignment needs it.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.
@@ -38,13 +38,35 @@ compatibility adapters, deprecated aliases, legacy branches, or inactive
 fallbacks. When a path is superseded, delete it in the same change. Git history
 is the archive.
 
+## Lightweight execution
+
+This project optimizes conclusion-bearing iteration, not process artifacts.
+
+- Start from one bounded brief with outcome, authority, scope, exclusions and an
+  observable completion condition. Ordinary work does not require a separate
+  brainstorm, spec, plan or worktree. Any protected-semantics change, multiple
+  writers or a real isolation boundary requires its frozen plan before
+  implementation begins.
+- Make the smallest real change that can answer the question. Do not scaffold a
+  future architecture or preserve a superseded path.
+- Match proof to the claim: reproduce and close a bug, run an investigation,
+  exercise the changed path, or use the smallest existing focused check. Add a
+  permanent test only for a new observable contract or a plausible regression.
+- Parallelize only genuinely independent scopes. One writer owns a path at a
+  time; dependent steps remain serial.
+- Use an independent reviewer for protected semantics, cross-scope integration
+  or a concrete high-risk boundary—not as ceremony for every edit.
+- On failure, identify the first causal boundary. Do not replace diagnosis with
+  retries, weakened checks, fallbacks or extra abstraction.
+
 ## Working discipline
 
 This is a requirement, not advice. A previous agent produced zero file writes in
 an hour of reasoning and had to be killed.
 
-- Make your first code edit within your first few tool calls, even if
-  incomplete, then iterate against the tests.
+- After reading the brief, named files and immediate interfaces, make the first
+  real edit within the next few tool calls. Do not substitute broad exploration
+  for progress; iterate against the smallest focused check.
 - On a design question your brief does not answer, take the smallest reasonable
   choice, record it, and keep moving. Report the ambiguity at the end.
 - A working implementation with a noted simplification beats an unwritten
@@ -64,10 +86,11 @@ an hour of reasoning and had to be killed.
 
 ## Protected semantics
 
-These carry experiment validity and are reviewed before any commit:
-probability factorization, gradients and detach boundaries, RNG stream
-ownership and consumption, replay, lifecycle clocks, credit assignment, masks,
-and checkpoint meaning.
+These carry experiment validity and are reviewed before any commit: reward and
+intrinsic-signal construction, probability support and factorization, gradients
+and detach boundaries, recurrent state, masks, clocks and lifecycle ownership,
+RNG stream ownership and consumption, replay, credit assignment and checkpoint
+meaning.
 
 If your task appears to touch any of them and your brief did not say so, stop
 and flag it rather than proceeding.
@@ -77,7 +100,7 @@ and flag it rather than proceeding.
 - `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract.
 - `docs/project/CURRENT_WORK.md` — live project state and binding engineering
   constraints.
-- `.agents/skills/hmasd-implementer/references/engineering-principles.md` —
-  implementation engineering constraints.
-- `.agents/skills/hmasd-reviewer/references/review-principles.md` — review
-  constraints.
+- `.omp/agents/references/hmasd-engineering-principles.md` — implementation
+  engineering constraints.
+- `.omp/agents/hmasd-reviewer.md` — bounded review authority and evidence
+  requirements.

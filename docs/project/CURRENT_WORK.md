@@ -21,6 +21,13 @@ OMP Monitor work and terminal evidence integration. Open-Pro Exchange is the
 only persistent non-Controller role; OMP task results return automatically to
 the Controller, and no role or task starts its successor directly.
 
+Project OMP sessions now load only `hmasd-*` Skills. Superpowers process Skills
+are disabled at project scope; their useful bounded-task, causal-debugging,
+focused-verification and risk-based-review lessons are distilled into
+`docs/project/AGENT_CONTEXT.md` and the native OMP role profiles without their
+mandatory planning ceremony. This is a workflow boundary only and changes no
+algorithm or experiment contract.
+
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
 The next boundary is the pre-registered focused external-Pro clarification of

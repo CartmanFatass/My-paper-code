@@ -150,7 +150,7 @@ decision, not an optimization.
 ## Pointers
 
 - `docs/project/AGENT_CONTEXT.md` — standing constraints for every subagent.
-- `.agents/skills/hmasd-implementer/references/engineering-principles.md` —
-  batching, packing, synchronization and the pre-return inspection.
-- `.agents/skills/hmasd-reviewer/references/review-principles.md` — performance
-  structure is reviewed as code quality.
+- `.omp/agents/references/hmasd-engineering-principles.md` — batching,
+  packing, synchronization and the pre-return inspection.
+- `.omp/agents/hmasd-reviewer.md` — performance structure is reviewed as code
+  quality when it is a concrete risk.

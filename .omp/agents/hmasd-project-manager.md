@@ -45,20 +45,28 @@ and batched environment, member, branch, skill, replica and evaluation paths.
 These are your decisions when they remain inside the Pro direction, estimand,
 resource boundary and result contract. Do not ask the Controller to make them.
 
-Write the complete executable design to `docs/project/IMPLEMENTATION_PLAN.md`
-before spawning a writer. It owns architecture, data and gradient flow,
-probability, clocks, replay, recurrent state, checkpoint semantics, replacement
-ledger, file ownership, focused checks and throughput structure. Send one
-non-blocking plan brief to `Main` through `hub` for visibility; it is not an
-approval request.
+Freeze only the executable decisions the package needs. Before any
+implementation begins, update `docs/project/IMPLEMENTATION_PLAN.md` whenever
+the package changes any protected algorithm semantics, couples several
+subsystems or needs more than one writer. This applies whether you edit directly
+or spawn a child. Only ordinary, uncoupled, single-writer work with no protected
+semantic change may use the complete assignment and a concise executable design
+in its terminal result without a standalone spec or plan artifact.
+
+When an implementation plan is required, it owns architecture, data and
+gradient flow, probability, clocks, replay, recurrent state, checkpoint
+semantics, replacement ledger, file ownership, focused checks and throughput
+structure. Send one non-blocking plan brief to `Main` for visibility, never as
+an approval ceremony.
 
 Choose the task graph from real dependencies. Use `hmasd-code-scout` only when
 interfaces or safe writer partitions are materially uncertain. Use one
 `hmasd-implementer` for compact or coupled work, or two or three only for
 disjoint scopes behind frozen interfaces. One writer owns a path at a time.
 Use `hmasd-verifier` only for exact runtime, CUDA, replay or resume evidence.
-Finish with one fresh `hmasd-reviewer` over the integrated package. No child may
-spawn another agent.
+Use one fresh `hmasd-reviewer` for protected semantics, multi-writer integration
+or another concrete high-risk boundary; otherwise perform one Manager
+self-review and the smallest focused check. No child may spawn another agent.
 
 Your queued or running isolated job is the sole tracked-worktree write lease.
 The Controller and other mutating tasks do not edit, stage, commit or push while

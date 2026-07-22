@@ -15,6 +15,79 @@ $expectedAgents = @(
 foreach ($agent in $expectedAgents) {
     if (-not (Test-Path -LiteralPath (Join-Path $repo ".omp/agents/$agent") -PathType Leaf)) { throw "Missing active OMP agent: $agent" }
 }
+$config = Get-Content -LiteralPath (Join-Path $repo '.omp/config.yml') -Raw
+foreach ($required in @('skills:', 'includeSkills:', '- "hmasd-*"')) {
+    if (-not $config.Contains($required)) { throw "Project Skill allowlist missing: $required" }
+}
+if ($config.Contains('skills.enabled: false') -or $config.Contains('using-superpowers')) {
+    throw 'Project Skill filter must preserve HMASD Skills and exclude Superpowers by allowlist'
+}
+
+if ($null -eq (Get-Command omp -ErrorAction SilentlyContinue)) {
+    throw 'OMP CLI is required to verify the effective project Skill boundary'
+}
+$effective = @{}
+Push-Location $repo
+try {
+    foreach ($key in @('skills.includeSkills', 'skills.enabled', 'skills.enableAgentsProject')) {
+        $effective[$key] = (& omp config get $key | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0) { throw "OMP config lookup failed: $key" }
+    }
+} finally {
+    Pop-Location
+}
+if ($effective['skills.includeSkills'] -ne '["hmasd-*"]' -or
+    $effective['skills.enabled'] -ne 'true' -or
+    $effective['skills.enableAgentsProject'] -ne 'true') {
+    throw "Unexpected effective project Skill boundary: $($effective | ConvertTo-Json -Compress)"
+}
+
+$managerProfile = Get-Content -LiteralPath (Join-Path $repo '.omp/agents/hmasd-project-manager.md') -Raw
+foreach ($required in @(
+    'Before any',
+    'implementation begins',
+    'changes any protected algorithm semantics',
+    'couples several',
+    'needs more than one writer',
+    'whether you edit directly',
+    'Only ordinary, uncoupled, single-writer work with no protected')) {
+    if (-not $managerProfile.Contains($required)) { throw "Project Manager planning safeguard missing: $required" }
+}
+
+$agentContext = Get-Content -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md') -Raw
+foreach ($required in @(
+    'Any protected-semantics change',
+    'requires its frozen plan before',
+    'reward and',
+    'recurrent state')) {
+    if (-not $agentContext.Contains($required)) { throw "Agent design safeguard missing: $required" }
+}
+
+$engineering = Get-Content -LiteralPath (Join-Path $repo 'docs/project/ENGINEERING_ADDITIONS.md') -Raw
+foreach ($required in @(
+    'replica dimension inside one known-good process',
+    'per replica is not a scaling strategy',
+    'Batch branches and replicas when they are independent')) {
+    if (-not $engineering.Contains($required)) { throw "Engineering topology safeguard missing: $required" }
+}
+
+$lightweight = @(
+    'docs/project/AGENT_CONTEXT.md',
+    '.omp/agents/hmasd-project-manager.md',
+    '.omp/agents/hmasd-implementer.md') |
+    ForEach-Object { Get-Content -LiteralPath (Join-Path $repo $_) -Raw }
+$lightweight = $lightweight -join "`n"
+foreach ($required in @(
+    'conclusion-bearing iteration',
+    'Ordinary work does not require a separate',
+    'Match proof to the claim',
+    'Parallelize only genuinely independent scopes',
+    'independent reviewer for protected semantics',
+    'standalone spec or plan artifact',
+    'Do not create a brainstorm, spec or broad implementation plan')) {
+    if (-not $lightweight.Contains($required)) { throw "Lightweight execution principle missing: $required" }
+}
+
 $activePaths = @(
     'AGENTS.md',
     'docs/project/CURRENT_WORK.md',

@@ -25,6 +25,10 @@ interfaces needed inside the granted write scope. If a missing decision would
 materially change algorithm behavior, return BLOCKED to the Project Manager
 with the exact decision needed.
 
+Do not create a brainstorm, spec or broad implementation plan. Once the bounded
+decision is clear, make the smallest real edit and iterate against the smallest
+focused check that can prove the assigned contract.
+
 Preserve every protected semantic not explicitly changed: reward, probability
 support and factorization, sampled/stored/replayed likelihood, gradients and
 detach paths, credit, recurrent state, masks, clocks, lifecycle ownership, RNG
