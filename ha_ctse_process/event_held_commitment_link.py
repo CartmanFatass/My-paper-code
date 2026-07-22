@@ -4,11 +4,17 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass, field, replace
+import base64
+import hashlib
+import json
 import math
+import os
 from pathlib import Path
 import random
+import tempfile
 from time import perf_counter
 from typing import Any, Iterable, Literal, Mapping
+import zlib
 
 import numpy as np
 import torch
@@ -46,14 +52,25 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     MARK_SEED,
     MODEL_INITIALIZATION_SEED,
     OPPORTUNITY_SEED,
+    OPTIMIZER_CLIP_EPSILON,
+    OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
     PARAMETER_COUNT,
     REGISTERED_CONTRACT,
     REPLAY_COMPONENT_FIELDS,
-    REPLAY_COMPONENT_TOLERANCE,
+    REPLAY_EVENT_JOINT_RATIO_FIELDS,
     REPLAY_EXACT_FIELDS,
     REPLAY_JOINT_FIELDS,
     REPLAY_JOINT_RECORD_FIELDS,
+    REPLAY_LOG_COMPONENT_ATOL,
+    REPLAY_LOG_COMPONENT_FIELDS,
+    REPLAY_LOG_COMPONENT_RTOL,
+    REPLAY_LOG_RATIO_DRIFT_CAP,
+    REPLAY_RECORD_SCHEMA_VERSION,
+    REPLAY_STATE_ATOL,
+    REPLAY_STATE_FIELDS,
+    REPLAY_WORST_RECORD_FIELDS,
     RESUME_TOLERANCE,
+    RNG_BINDING_SCHEMA_VERSION,
     TRAIN_ORDER_SEED,
     TRAIN_TASK_SEED,
     TRAIN_ACTION_SEED,
@@ -157,6 +174,7 @@ class EventTrajectory:
     ledger_ids: tuple[int, ...]
     cutoff: bool
     bootstrap_values: torch.Tensor
+    rng_audit: dict[str, Any]
     cursor: CollectionCursor | None
 
     @property
@@ -332,10 +350,20 @@ def _event_input(observation: torch.Tensor, h_pre: torch.Tensor, context: torch.
     return value
 
 
-def _new_cursor(state: TrainingState, episode_ids: tuple[int, ...], device: torch.device, *, profile: Literal["train", "iid", "held_out"]) -> CollectionCursor:
+def _new_cursor(
+    state: TrainingState, episode_ids: tuple[int, ...], device: torch.device,
+    *, profile: Literal["train", "iid", "held_out"],
+    audit_trace: dict[str, list[dict[str, Any]]] | None = None,
+) -> CollectionCursor:
     if state.profile != profile or state.seed_map != authoritative_seed_map(profile, state.replicate):
         raise ValueError("collector state/profile seed map mismatch")
-    ledgers = tuple(make_noncalendar_ledger(v, profile=profile, task_seed=state.seed_map["ledger"], order_seed=state.seed_map["order"]) for v in episode_ids)
+    ledgers = tuple(
+        make_noncalendar_ledger(
+            v, profile=profile, task_seed=state.seed_map["ledger"],
+            order_seed=state.seed_map["order"], audit_trace=audit_trace,
+        )
+        for v in episode_ids
+    )
     return CollectionCursor(
         episode_ids=episode_ids,
         ledgers=ledgers,
@@ -355,6 +383,308 @@ def _zeros(shape: tuple[int, ...], *, dtype: torch.dtype = torch.float32) -> tor
     return torch.zeros(shape, dtype=dtype)
 
 
+def _ledger_audit_evidence(ledger: NoncalendarLedger) -> dict[str, Any]:
+    payload = {
+        "episode_id": int(ledger.episode_id), "base_id": int(ledger.base_id),
+        "sign_parity": int(ledger.sign_parity), "profile": ledger.profile,
+        "generation_attempt": int(ledger.generation_attempt),
+        "routing_permutation": list(ledger.routing_permutation),
+        "initial_count": int(ledger.initial_count),
+        "temporary_key": int(ledger.temporary_key),
+        "terminal_key": int(ledger.terminal_key),
+        "duration_streams": ledger.duration_streams.tolist(),
+        "initial_targets": ledger.initial_targets.tolist(),
+        "direct_frontier_priorities": ledger.direct_frontier_priorities.tolist(),
+    }
+    return payload | {"ledger_digest": _canonical_json_digest(payload)}
+
+
+_RNG_BINDING_KEYS = frozenset({
+    "schema_version", "context", "stream", "seed", "start_state",
+    "draw_schedule", "draw_bytes_digest", "end_state", "binding_digest",
+})
+_RNG_SCHEDULE_KEYS = frozenset({
+    "stream", "operation", "dtype", "shape", "coordinates"
+})
+
+
+def _canonical_json_digest(value: Any) -> str:
+    encoded = json.dumps(
+        value, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def owned_rng_states(state: TrainingState) -> dict[str, Any]:
+    """Return canonical, independently cloneable owned-generator states."""
+
+    return {
+        name: deepcopy(state.rngs[name].bit_generator.state)
+        for name in RNG_NAMES
+    }
+
+
+def collection_rng_schedules(
+    trajectory: EventTrajectory, *, deterministic: bool
+) -> dict[str, list[dict[str, Any]]]:
+    """Reconstruct the collector's exact per-stream draw calls.
+
+    Values are deliberately absent.  A validator replays these calls from the
+    canonical start state and regenerates the bytes and end state itself.
+    """
+
+    schedules = deepcopy(trajectory.rng_audit["streams"])
+    if set(schedules) != set(RNG_NAMES):
+        raise RuntimeError("collector RNG audit stream set mismatch")
+    return schedules
+
+
+def _replay_rng_schedule(
+    start_state: Mapping[str, Any], schedule: list[dict[str, Any]],
+    *, seed: int | None = None,
+) -> tuple[str, dict[str, Any], list[np.ndarray]]:
+    generator = np.random.default_rng()
+    generator.bit_generator.state = deepcopy(dict(start_state))
+    digest = hashlib.sha256()
+    arrays: list[np.ndarray] = []
+    seeded_generators: dict[tuple[Any, ...], np.random.Generator] = {}
+    for entry in schedule:
+        if not isinstance(entry, dict) or set(entry) != _RNG_SCHEDULE_KEYS:
+            raise ValueError("RNG draw schedule schema mismatch")
+        shape = tuple(int(value) for value in entry["shape"])
+        if any(value < 0 for value in shape):
+            raise ValueError("RNG draw schedule has a negative shape")
+        dtype = np.dtype(str(entry["dtype"]))
+        operation = str(entry["operation"])
+        if operation.startswith("seeded_"):
+            if seed is None:
+                raise ValueError("seeded RNG audit operation lacks authoritative seed")
+            coordinates = entry["coordinates"]
+            identity = (
+                int(coordinates["episode_id"]), int(coordinates["attempt"]),
+                *tuple(int(value) for value in coordinates["generator_coordinates"]),
+            )
+            local = seeded_generators.get(identity)
+            if local is None:
+                local = make_rng(
+                    int(seed), *tuple(
+                        int(value) for value in coordinates["generator_coordinates"]
+                    )
+                )
+                seeded_generators[identity] = local
+            argument = coordinates.get("argument")
+            if operation == "seeded_permutation":
+                drawn = local.permutation(
+                    int(argument) if isinstance(argument, int)
+                    else np.asarray(argument, dtype=dtype)
+                )
+            elif operation == "seeded_permutation_blocks":
+                expected_shape = (
+                    len(coordinates["key_order"]),
+                    len(coordinates["offset_order"]),
+                    len(argument),
+                )
+                if shape != expected_shape:
+                    raise ValueError("duration permutation block shape mismatch")
+                drawn = np.empty(shape, dtype=dtype)
+                values = np.asarray(argument, dtype=dtype)
+                for key_index, _key in enumerate(coordinates["key_order"]):
+                    for offset_index, _offset in enumerate(
+                        coordinates["offset_order"]
+                    ):
+                        drawn[key_index, offset_index] = local.permutation(values)
+            elif operation == "seeded_choice":
+                drawn = local.choice(
+                    np.asarray(argument, dtype=dtype),
+                    size=shape if shape else None,
+                    replace=bool(coordinates["replace"]),
+                )
+            elif operation == "seeded_random":
+                drawn = local.random(shape, dtype=dtype)
+            else:
+                raise ValueError("unknown seeded RNG audit operation")
+        elif operation == "random":
+            drawn = generator.random(shape, dtype=dtype)
+        elif operation == "standard_normal" and dtype == np.dtype(np.float64):
+            drawn = generator.standard_normal(shape)
+        elif operation == "choice_opportunity" and dtype == np.dtype(np.int64):
+            drawn = generator.choice(OPPORTUNITY_SUPPORT, size=shape)
+        else:
+            raise ValueError("RNG draw schedule operation/dtype mismatch")
+        array = np.asarray(drawn, dtype=dtype).reshape(shape)
+        digest.update(array.tobytes(order="C"))
+        arrays.append(array.copy())
+    return digest.hexdigest(), deepcopy(generator.bit_generator.state), arrays
+
+
+def replay_rng_schedule_end_state(
+    start_state: Mapping[str, Any], schedule: list[dict[str, Any]],
+    *, seed: int | None = None,
+) -> dict[str, Any]:
+    """Public state-only replay used to validate a Stage-2 fork coordinate."""
+
+    return _replay_rng_schedule(start_state, schedule, seed=seed)[1]
+
+
+def replay_rng_schedule_arrays(
+    start_state: Mapping[str, Any], schedule: list[dict[str, Any]],
+    *, seed: int | None = None,
+) -> tuple[list[np.ndarray], dict[str, Any]]:
+    """Replay and expose generated arrays for strict Stage-2 consumption audit."""
+
+    _digest, end_state, arrays = _replay_rng_schedule(
+        start_state, schedule, seed=seed
+    )
+    return arrays, end_state
+
+
+def make_rng_binding(
+    *, context: Mapping[str, Any], stream: str, seed: int,
+    start_state: Mapping[str, Any], draw_schedule: list[dict[str, Any]],
+    expected_end_state: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Create a context-bound record only after independent schedule replay."""
+
+    if stream not in RNG_NAMES:
+        raise ValueError("unknown owned RNG stream")
+    if any(entry.get("stream") != stream for entry in draw_schedule):
+        raise ValueError("RNG draw schedule stream label mismatch")
+    draw_digest, end_state, _arrays = _replay_rng_schedule(
+        start_state, draw_schedule, seed=seed
+    )
+    if end_state != dict(expected_end_state):
+        raise RuntimeError(f"RNG schedule does not reach supplied {stream} end state")
+    record: dict[str, Any] = {
+        "schema_version": RNG_BINDING_SCHEMA_VERSION,
+        "context": deepcopy(dict(context)),
+        "stream": stream,
+        "seed": int(seed),
+        "start_state": deepcopy(dict(start_state)),
+        "draw_schedule": deepcopy(draw_schedule),
+        "draw_bytes_digest": draw_digest,
+        "end_state": end_state,
+    }
+    record["binding_digest"] = _canonical_json_digest(record)
+    return record
+
+
+def validate_rng_binding(
+    record: Any, *, expected_context: Mapping[str, Any], expected_stream: str,
+    expected_seed: int, expected_start_state: Mapping[str, Any],
+) -> tuple[bool, dict[str, Any] | None]:
+    """Regenerate draws and state; supplied digests are never trusted."""
+
+    try:
+        if not isinstance(record, dict) or set(record) != _RNG_BINDING_KEYS:
+            return False, None
+        if not (
+            int(record["schema_version"]) == RNG_BINDING_SCHEMA_VERSION
+            and record["context"] == dict(expected_context)
+            and record["stream"] == expected_stream
+            and int(record["seed"]) == int(expected_seed)
+            and record["start_state"] == dict(expected_start_state)
+            and all(
+                entry.get("stream") == expected_stream
+                for entry in record["draw_schedule"]
+            )
+        ):
+            return False, None
+        draw_digest, end_state, _arrays = _replay_rng_schedule(
+            record["start_state"], record["draw_schedule"],
+            seed=int(expected_seed),
+        )
+        payload = {key: deepcopy(value) for key, value in record.items()
+                   if key != "binding_digest"}
+        if not (
+            draw_digest == record["draw_bytes_digest"]
+            and end_state == record["end_state"]
+            and _canonical_json_digest(payload) == record["binding_digest"]
+        ):
+            return False, None
+        return True, end_state
+    except (KeyError, TypeError, ValueError, OverflowError):
+        return False, None
+
+
+@dataclass
+class _ForkRowStream:
+    """One fork-row replay stream with independent consumption state."""
+
+    values: np.ndarray
+    position: int = 0
+
+    def _take(self, size: int) -> np.ndarray:
+        stop = self.position + int(size)
+        if stop > int(self.values.size):
+            raise RuntimeError("batched fork row stream exhausted")
+        result = self.values.reshape(-1)[self.position:stop].copy()
+        self.position = stop
+        return result
+
+    def random(
+        self, size: int | tuple[int, ...] | None = None, dtype: Any = np.float64
+    ) -> np.ndarray | float:
+        shape = () if size is None else ((size,) if isinstance(size, int) else tuple(size))
+        count = int(np.prod(shape, dtype=np.int64)) if shape else 1
+        result = self._take(count).astype(dtype, copy=False)
+        return float(result[0]) if not shape else result.reshape(shape)
+
+    def standard_normal(
+        self, size: int | tuple[int, ...] | None = None
+    ) -> np.ndarray | float:
+        return self.random(size=size, dtype=np.float64)
+
+    def choice(self, _support: Any, size: int | tuple[int, ...] | None = None) -> Any:
+        result = self.random(size=size, dtype=np.int64)
+        return int(result) if size is None else result
+
+    def consumption_record(self, terminal_state: Mapping[str, Any]) -> dict[str, Any]:
+        consumed = self.values.reshape(-1)[: self.position]
+        return {
+            "position": int(self.position),
+            "consumed_bytes_digest": hashlib.sha256(
+                consumed.tobytes(order="C")
+            ).hexdigest(),
+            "terminal_state": deepcopy(dict(terminal_state)),
+        }
+
+
+def _fork_row_draw(
+    row_rngs: list[Mapping[str, _ForkRowStream]],
+    requests: list[tuple[int, int, int, torch.Tensor, torch.Tensor]],
+    name: str,
+    *,
+    width: int = 1,
+    dtype: Any = np.float64,
+) -> np.ndarray:
+    values = np.empty((len(requests), width), dtype=dtype)
+    offset = 0
+    while offset < len(requests):
+        env_index = int(requests[offset][0])
+        stop = offset + 1
+        while stop < len(requests) and int(requests[stop][0]) == env_index:
+            stop += 1
+        shape: int | tuple[int, int] = (
+            stop - offset if width == 1 else (stop - offset, width)
+        )
+        method = (
+            row_rngs[env_index][name].standard_normal
+            if name == "mark"
+            else row_rngs[env_index][name].random
+        )
+        drawn = np.asarray(method(shape), dtype=dtype).reshape(stop - offset, width)
+        values[offset:stop] = drawn
+        offset = stop
+    return values[:, 0] if width == 1 else values
+
+
+def _fork_stable_linear(inputs: torch.Tensor, layer: nn.Linear) -> torch.Tensor:
+    """Batched row-local linear map whose reduction is width independent."""
+
+    output = (inputs.unsqueeze(1) * layer.weight.unsqueeze(0)).sum(dim=-1)
+    return output if layer.bias is None else output + layer.bias
+
+
 def collect_trajectory(
     arm: CommitmentArm,
     state: TrainingState,
@@ -365,16 +695,25 @@ def collect_trajectory(
     max_steps: int | None = None,
     deterministic: bool = False,
     profile: Literal["train", "iid", "held_out"] = "train",
+    forced_event: tuple[int, int, int, int, torch.Tensor] | None = None,
+    forced_events: Mapping[tuple[int, int, int], tuple[int, torch.Tensor]] | None = None,
+    row_rngs: list[Mapping[str, _ForkRowStream]] | None = None,
 ) -> EventTrajectory:
     if state.arm != arm.arm or set(state.rngs) != set(RNG_NAMES):
         raise ValueError("collector arm or owned-RNG key set mismatch")
+    rng_trace: dict[str, list[dict[str, Any]]] = {
+        name: [] for name in RNG_NAMES
+    }
+    request_evidence: list[dict[str, Any]] = []
     if cursor is None:
         ids = tuple(int(v) for v in episode_ids) if episode_ids is not None else tuple(
             range(state.next_episode_id, state.next_episode_id + FORMAL_NUM_ENVS)
         )
         if not ids:
             raise ValueError("collection requires episodes")
-        cursor = _new_cursor(state, ids, device, profile=profile)
+        cursor = _new_cursor(
+            state, ids, device, profile=profile, audit_trace=rng_trace
+        )
     else:
         if episode_ids is not None:
             raise ValueError("cursor continuation does not accept episode_ids")
@@ -385,6 +724,8 @@ def collect_trajectory(
         if state.profile != profile:
             raise ValueError("cursor/state profile mismatch")
     env_count = len(cursor.environments)
+    if row_rngs is not None and len(row_rngs) != env_count:
+        raise ValueError("fork row RNG count must match the collection width")
     remaining = HORIZON - cursor.environments[0].time
     steps = remaining if max_steps is None else min(int(max_steps), remaining)
     if steps <= 0 or any(env.time != cursor.environments[0].time for env in cursor.environments):
@@ -435,7 +776,8 @@ def collect_trajectory(
 
             observations = torch.as_tensor(obs_np, device=device)
             active = torch.as_tensor(active_np, device=device)
-            order = torch.as_tensor(frontier_order(cursor.ledgers, active_np, time), device=device)
+            order_np = frontier_order(cursor.ledgers, active_np, time)
+            order = torch.as_tensor(order_np, device=device)
             h_before = cursor.hidden.clone()
             prepared = arm.base.prepare_step(
                 observations=observations, active_mask=active, validated=True
@@ -479,14 +821,49 @@ def collect_trajectory(
                             )
                             requests.append((env_index, key, request_kind, inp, z_pre))
 
+            request_coordinates = [
+                [int(env_index), int(key), int(request_kind)]
+                for env_index, key, request_kind, _inp, _z_pre in requests
+            ]
+            request_evidence.append({
+                "time": int(time),
+                "environments": [
+                    {
+                        "env_index": int(env_index),
+                        "episode_id": int(cursor.episode_ids[env_index]),
+                        "frontier": [
+                            {
+                                "key": int(key),
+                                "priority": float(
+                                    cursor.ledgers[env_index]
+                                    .direct_frontier_priorities[time, key]
+                                ),
+                                "q_before": (
+                                    int(cursor.lifecycles[env_index][int(key)].q)
+                                    if arm.arm != "OR" else None
+                                ),
+                            }
+                            for key in order_np[env_index] if int(key) >= 0
+                        ],
+                    }
+                    for env_index in range(env_count)
+                ],
+            })
+
             selected_kind_grid = torch.zeros_like(kind)
             request_q = np.empty(len(requests), dtype=np.int64)
             if requests:
                 assert arm.event_head is not None and arm.mark_head is not None
                 packed_inputs = torch.stack([value[3] for value in requests])
                 packed_z_pre = torch.stack([value[4] for value in requests])
-                logits = arm.event_head(packed_inputs)
-                mu, sigma = _normal_parameters(arm.mark_head(packed_inputs))
+                # The explicit multiply/reduce is algebraically the same linear
+                # map as ``nn.Linear`` but is row local: adding, removing or
+                # reordering other requests cannot select a different GEMM
+                # reduction path for this row.  Ordinary and fork collection
+                # deliberately share this one implementation.
+                logits = _fork_stable_linear(packed_inputs, arm.event_head)
+                mark_output = _fork_stable_linear(packed_inputs, arm.mark_head)
+                mu, sigma = _normal_parameters(mark_output)
                 create_mask = torch.as_tensor(
                     [value[2] == CREATE for value in requests], dtype=torch.bool, device=device
                 )
@@ -494,8 +871,20 @@ def collect_trajectory(
                     selected_cat = torch.argmax(logits, dim=-1)
                     u = mu
                 else:
+                    rng_trace["event"].append({
+                        "stream": "event", "operation": "random",
+                        "dtype": "float64", "shape": [len(requests)],
+                        "coordinates": {
+                            "time": int(time), "requests": request_coordinates,
+                        },
+                    })
+                    event_values = (
+                        state.rngs["event"].random(len(requests))
+                        if row_rngs is None
+                        else _fork_row_draw(row_rngs, requests, "event")
+                    )
                     event_uniforms = torch.as_tensor(
-                        state.rngs["event"].random(len(requests)),
+                        event_values,
                         dtype=logits.dtype,
                         device=device,
                     )
@@ -503,15 +892,57 @@ def collect_trajectory(
                         event_uniforms.unsqueeze(-1) > torch.cumsum(torch.softmax(logits, -1), -1),
                         dim=-1,
                     ).clamp(max=1)
-                    mark_eps = torch.as_tensor(
+                    rng_trace["mark"].append({
+                        "stream": "mark", "operation": "standard_normal",
+                        "dtype": "float64", "shape": [len(requests), MARK_DIM],
+                        "coordinates": {
+                            "time": int(time), "requests": request_coordinates,
+                        },
+                    })
+                    mark_values = (
                         state.rngs["mark"].standard_normal(
                             (len(requests), MARK_DIM)
-                        ),
+                        )
+                        if row_rngs is None
+                        else _fork_row_draw(
+                            row_rngs, requests, "mark", width=MARK_DIM
+                        )
+                    )
+                    mark_eps = torch.as_tensor(
+                        mark_values,
                         dtype=mu.dtype,
                         device=device,
                     )
                     u = mu + sigma * mark_eps
                 selected_kind = torch.where(create_mask, torch.full_like(selected_cat, CREATE), selected_cat + KEEP)
+                active_forced: dict[tuple[int, int], tuple[int, torch.Tensor]] = {}
+                if forced_event is not None and time == int(forced_event[0]):
+                    active_forced[(int(forced_event[1]), int(forced_event[2]))] = (
+                        int(forced_event[3]), forced_event[4]
+                    )
+                if forced_events is not None:
+                    active_forced.update({
+                        (int(env), int(key)): (int(kind), new_z)
+                        for (forced_time, env, key), (kind, new_z)
+                        in forced_events.items() if int(forced_time) == time
+                    })
+                forced_indices: list[tuple[int, torch.Tensor]] = []
+                if active_forced:
+                    selected_cat = selected_cat.clone()
+                    selected_kind = selected_kind.clone()
+                for (forced_env, forced_key), (forced_kind, forced_value) in active_forced.items():
+                    matching = [
+                        index for index, value in enumerate(requests)
+                        if value[0] == forced_env and value[1] == forced_key
+                    ]
+                    if len(matching) != 1:
+                        raise RuntimeError("forced event coordinate is not one request")
+                    forced_index = matching[0]
+                    if forced_kind not in (KEEP, RENEW) or bool(create_mask[forced_index]):
+                        raise ValueError("forced event must be a non-CREATE KEEP/RENEW")
+                    selected_cat[forced_index] = forced_kind - KEEP
+                    selected_kind[forced_index] = forced_kind
+                    forced_indices.append((forced_index, forced_value.to(device).detach()))
                 derived_cat_mask = ~create_mask
                 derived_mark_mask = create_mask | selected_kind.eq(RENEW)
                 component_logp = transformed_mark_component_logp(u.detach(), mu, sigma)
@@ -526,14 +957,19 @@ def collect_trajectory(
                 packed_new_z = torch.where(
                     derived_mark_mask.unsqueeze(-1), candidate_tanh_u, packed_z_pre
                 )
+                if forced_indices:
+                    packed_new_z = packed_new_z.clone()
+                    for forced_index, forced_value in forced_indices:
+                        packed_new_z[forced_index] = forced_value
+                joint_logp = categorical_logp + component_logp.sum(-1)
                 env_indices = torch.as_tensor([v[0] for v in requests], dtype=torch.long, device=device)
                 key_indices = torch.as_tensor([v[1] for v in requests], dtype=torch.long, device=device)
                 kind[env_indices, key_indices] = selected_kind
                 selected_kind_grid[env_indices, key_indices] = selected_kind
-                event_inputs[env_indices, key_indices] = packed_inputs
                 event_actions[env_indices, key_indices] = torch.where(
                     derived_cat_mask, selected_cat, torch.full_like(selected_cat, -1)
                 )
+                event_inputs[env_indices, key_indices] = packed_inputs
                 event_u[env_indices, key_indices] = torch.where(
                     derived_mark_mask.unsqueeze(-1), u.detach(), torch.zeros_like(u)
                 )
@@ -545,19 +981,55 @@ def collect_trajectory(
                 mark_mask[env_indices, key_indices] = derived_mark_mask
                 old_cat[env_indices, key_indices] = categorical_logp
                 old_mark[env_indices, key_indices] = component_logp
-                old_joint[env_indices, key_indices] = categorical_logp + component_logp.sum(-1)
+                old_joint[env_indices, key_indices] = joint_logp
                 primitive_z[env_indices, key_indices] = packed_new_z
-                request_q[:] = state.rngs["opportunity"].choice(
-                    OPPORTUNITY_SUPPORT, size=len(requests)
+                rng_trace["opportunity"].append({
+                    "stream": "opportunity", "operation": "choice_opportunity",
+                    "dtype": "int64", "shape": [len(requests)],
+                    "coordinates": {
+                        "time": int(time), "requests": request_coordinates,
+                    },
+                })
+                request_q[:] = (
+                    state.rngs["opportunity"].choice(
+                        OPPORTUNITY_SUPPORT, size=len(requests)
+                    )
+                    if row_rngs is None
+                    else _fork_row_draw(
+                        row_rngs, requests, "opportunity", dtype=np.int64
+                    )
                 )
 
             if deterministic:
                 primitive_kwargs: dict[str, Any] = {"deterministic": True}
             else:
-                uniforms = torch.as_tensor(
+                rng_trace["primitive"].append({
+                    "stream": "primitive", "operation": "random",
+                    "dtype": "float32",
+                    "shape": [env_count, MAX_LIFECYCLES],
+                    "coordinates": {
+                        "time": int(time),
+                        "episode_ids": [int(value) for value in cursor.episode_ids],
+                        "frontier_orders": [
+                            [int(value) for value in row if int(value) >= 0]
+                            for row in order_np
+                        ],
+                    },
+                })
+                primitive_values = (
                     state.rngs["primitive"].random(
                         (env_count, MAX_LIFECYCLES), dtype=np.float32
-                    ),
+                    )
+                    if row_rngs is None
+                    else np.stack([
+                        value["primitive"].random(
+                            MAX_LIFECYCLES, dtype=np.float32
+                        )
+                        for value in row_rngs
+                    ])
+                )
+                uniforms = torch.as_tensor(
+                    primitive_values,
                     device=device,
                 )
                 primitive_kwargs = {"sampling_uniforms": uniforms}
@@ -714,6 +1186,13 @@ def collect_trajectory(
         ledger_ids=cursor.episode_ids,
         cutoff=not finished,
         bootstrap_values=bootstrap,
+        rng_audit={
+            "streams": rng_trace,
+            "request_evidence": request_evidence,
+            "ledgers": [
+                _ledger_audit_evidence(value) for value in cursor.ledgers
+            ],
+        },
         cursor=next_cursor,
     )
 
@@ -875,6 +1354,104 @@ def replay_trajectory(
     )
 
 
+def _ordered_float32_encoding(value: np.float32) -> int:
+    bits = int(value.view(np.uint32))
+    return bits ^ (0xFFFFFFFF if bits & 0x80000000 else 0x80000000)
+
+
+def _float32_ulp_evidence(stored: float, replayed: float) -> tuple[float, int]:
+    stored32 = np.float32(stored)
+    replayed32 = np.float32(replayed)
+    if not np.isfinite(stored32) or not np.isfinite(replayed32):
+        return float("nan"), 0
+    reference = stored32 if abs(float(stored32)) >= abs(float(replayed32)) else replayed32
+    direction = np.float32(np.inf if not np.signbit(reference) else -np.inf)
+    neighbor = np.nextafter(reference, direction, dtype=np.float32)
+    spacing = abs(float(np.float64(neighbor) - np.float64(reference)))
+    distance = abs(
+        _ordered_float32_encoding(stored32)
+        - _ordered_float32_encoding(replayed32)
+    )
+    return spacing, int(distance)
+
+
+def _worst_likelihood_record(
+    stored: torch.Tensor,
+    replayed: torch.Tensor,
+    mask: torch.Tensor,
+    *,
+    mixed_bound_override: torch.Tensor | None = None,
+    ratio_only: bool = False,
+) -> dict[str, Any]:
+    """Serialize the coordinate that is closest to violating either gate."""
+
+    if not bool(mask.any()):
+        return {
+            "stored_value": 0.0,
+            "replayed_value": 0.0,
+            "absolute_error": 0.0,
+            "mixed_bound": 0.0,
+            "ratio_drift": 0.0,
+            "ratio_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+            "float32_ulp_at_max_magnitude": 0.0,
+            "ulp_distance": 0,
+            "coordinate": None,
+        }
+    difference = replayed - stored
+    absolute_error = difference.double().abs()
+    mixed_bound = (
+        REPLAY_LOG_COMPONENT_ATOL
+        + REPLAY_LOG_COMPONENT_RTOL
+        * torch.maximum(replayed.double().abs(), stored.double().abs())
+        if mixed_bound_override is None
+        else mixed_bound_override.double()
+    )
+    ratio_drift = torch.expm1(difference.double()).abs()
+    severity = (
+        ratio_drift / REPLAY_LOG_RATIO_DRIFT_CAP
+        if ratio_only
+        else torch.maximum(
+            absolute_error / mixed_bound,
+            ratio_drift / REPLAY_LOG_RATIO_DRIFT_CAP,
+        )
+    )
+    finite = (
+        torch.isfinite(stored)
+        & torch.isfinite(replayed)
+        & torch.isfinite(absolute_error)
+        & torch.isfinite(mixed_bound)
+        & torch.isfinite(ratio_drift)
+    )
+    severity = torch.where(
+        mask & finite,
+        severity,
+        torch.where(mask, torch.full_like(severity, float("inf")), torch.full_like(severity, -float("inf"))),
+    )
+    flat_index = int(torch.argmax(severity.reshape(-1)).detach().cpu())
+    coordinate = [int(value) for value in np.unravel_index(flat_index, stored.shape)]
+    selected = torch.stack(
+        (
+            stored.reshape(-1)[flat_index].double(),
+            replayed.reshape(-1)[flat_index].double(),
+            absolute_error.reshape(-1)[flat_index],
+            mixed_bound.reshape(-1)[flat_index],
+            ratio_drift.reshape(-1)[flat_index],
+        )
+    ).detach().cpu().numpy()
+    spacing, distance = _float32_ulp_evidence(float(selected[0]), float(selected[1]))
+    return {
+        "stored_value": float(selected[0]),
+        "replayed_value": float(selected[1]),
+        "absolute_error": float(selected[2]),
+        "mixed_bound": float(selected[3]),
+        "ratio_drift": float(selected[4]),
+        "ratio_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+        "float32_ulp_at_max_magnitude": spacing,
+        "ulp_distance": distance,
+        "coordinate": coordinate,
+    }
+
+
 def replay_errors(replay: ReplayOutput, trajectory: EventTrajectory) -> dict[str, float]:
     device = replay.log_probs.device
     active = trajectory.active_mask.to(device)
@@ -966,6 +1543,43 @@ def replay_errors(replay: ReplayOutput, trajectory: EventTrajectory) -> dict[str
         "categorical_support_leak": maximum(categorical_support_leak),
         "mark_support_leak": maximum(mark_support_leak),
     }
+
+
+def replay_likelihood_records(
+    replay: ReplayOutput, trajectory: EventTrajectory
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
+    """Worst-coordinate mixed/ratio evidence for every likelihood factor."""
+
+    device = replay.log_probs.device
+    active = trajectory.active_mask.to(device)
+    categorical_mask = replay.event_cat_mask
+    mark_mask = replay.event_mark_mask.unsqueeze(-1).expand_as(
+        replay.event_mark_component_logp
+    )
+    records = {
+        "primitive_component": _worst_likelihood_record(
+            trajectory.old_log_probs.to(device), replay.log_probs, active
+        ),
+        "categorical_component": _worst_likelihood_record(
+            trajectory.event_old_cat_logp.to(device),
+            replay.event_cat_logp,
+            categorical_mask,
+        ),
+        "mark_component": _worst_likelihood_record(
+            trajectory.event_old_mark_component_logp.to(device),
+            replay.event_mark_component_logp,
+            mark_mask,
+        ),
+    }
+    event = _worst_likelihood_record(
+        trajectory.event_old_joint_logp.to(device),
+        replay.event_joint_logp,
+        replay.event_cat_mask | replay.event_mark_mask,
+        mixed_bound_override=torch.ones_like(replay.event_joint_logp),
+        ratio_only=True,
+    )
+    event_ratio = {name: event[name] for name in REPLAY_EVENT_JOINT_RATIO_FIELDS}
+    return records, event_ratio
 
 
 def _joint_row_summary(
@@ -1071,9 +1685,8 @@ def replay_joint_bounds(
       float32 and float64 reductions of the *same* difference terms against
       a bound orders of magnitude larger, and is likewise invariant to any
       injected corruption. Real primitive coverage is
-      `primitive_component <= REPLAY_COMPONENT_TOLERANCE`, which is
-      adequate; these two are reported for continuity of the record shape,
-      not as gates.
+      the primitive component gates, which are adequate; these two are
+      reported for continuity of the record shape, not as gates.
     * `event_joint` gates only joint *assembly* drift. Once the stored and
       replayed assembly checks hold, its rule reduces to the same triangle
       inequality, so a factor-level defect is caught by the component class
@@ -1177,8 +1790,6 @@ def replay_joint_bounds(
 def replay_report(
     replay: ReplayOutput,
     trajectory: EventTrajectory,
-    *,
-    tolerance: float = REPLAY_COMPONENT_TOLERANCE,
 ) -> dict[str, Any]:
     """Named per-factor errors, applied joint bounds and a pass result.
 
@@ -1195,6 +1806,9 @@ def replay_report(
 
     errors = replay_errors(replay, trajectory)
     joints = replay_joint_bounds(replay, trajectory)
+    likelihood_components, event_joint_ratio = replay_likelihood_records(
+        replay, trajectory
+    )
     # The partition is the contract. A factor silently dropped from the
     # error dictionary would otherwise be reported as covered, so an
     # unclassified or missing name is a failure of the check itself.
@@ -1204,6 +1818,15 @@ def replay_report(
         raise RuntimeError(f"replay error fields do not match the contract {set(errors)}")
     if any(set(joints[name]) != set(REPLAY_JOINT_RECORD_FIELDS) for name in joints):
         raise RuntimeError(f"replay joint record fields do not match the contract {joints}")
+    if (
+        set(likelihood_components) != set(REPLAY_LOG_COMPONENT_FIELDS)
+        or any(
+            set(record) != set(REPLAY_WORST_RECORD_FIELDS)
+            for record in likelihood_components.values()
+        )
+        or set(event_joint_ratio) != set(REPLAY_EVENT_JOINT_RATIO_FIELDS)
+    ):
+        raise RuntimeError("replay likelihood evidence fields do not match contract")
     failures: list[str] = sorted(
         f"non_finite:{name}"
         for name, value in (
@@ -1213,12 +1836,43 @@ def replay_report(
                 for joint, record in joints.items()
                 for key, number in record.items()
             ),
+            *(
+                (f"{component}.{key}", number)
+                for component, record in likelihood_components.items()
+                for key, number in record.items()
+                if key != "coordinate"
+            ),
+            *(
+                (f"event_joint_ratio.{key}", number)
+                for key, number in event_joint_ratio.items()
+                if key != "coordinate"
+            ),
         )
         if not math.isfinite(float(value))
     )
     failures.extend(name for name in REPLAY_EXACT_FIELDS if errors[name] != 0.0)
     failures.extend(
-        name for name in REPLAY_COMPONENT_FIELDS if not errors[name] <= tolerance
+        name for name in REPLAY_STATE_FIELDS
+        if not errors[name] <= REPLAY_STATE_ATOL
+    )
+    failures.extend(
+        name
+        for name, record in likelihood_components.items()
+        if not (
+            float(record["absolute_error"]) <= float(record["mixed_bound"])
+            and float(record["ratio_drift"]) <= REPLAY_LOG_RATIO_DRIFT_CAP
+        )
+    )
+    has_event_rows = bool(
+        (trajectory.event_kind.eq(CREATE)
+         | trajectory.event_kind.eq(KEEP)
+         | trajectory.event_kind.eq(RENEW)).any()
+    )
+    failures.extend(
+        f"empty_support:{name}"
+        for name, record in likelihood_components.items()
+        if record["coordinate"] is None
+        and (name == "primitive_component" or has_event_rows)
     )
     failures.extend(
         name for name in REPLAY_JOINT_FIELDS if not joints[name]["excess"] <= 0.0
@@ -1228,10 +1882,18 @@ def replay_report(
         for name in REPLAY_JOINT_FIELDS
         if not joints[name]["assembly_excess"] <= 0.0
     )
+    if not float(event_joint_ratio["ratio_drift"]) <= REPLAY_LOG_RATIO_DRIFT_CAP:
+        failures.append("event_joint_ratio")
     return {
+        "schema_version": REPLAY_RECORD_SCHEMA_VERSION,
         "errors": errors,
+        "likelihood_components": likelihood_components,
         "joints": joints,
-        "component_tolerance": float(tolerance),
+        "event_joint_ratio": event_joint_ratio,
+        "log_component_atol": REPLAY_LOG_COMPONENT_ATOL,
+        "log_component_rtol": REPLAY_LOG_COMPONENT_RTOL,
+        "ratio_drift_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+        "state_atol": REPLAY_STATE_ATOL,
         "failures": failures,
         "passed": not failures,
     }
@@ -1242,10 +1904,9 @@ def validate_replay(
     trajectory: EventTrajectory,
     *,
     device: torch.device,
-    tolerance: float = REPLAY_COMPONENT_TOLERANCE,
 ) -> tuple[ReplayOutput, dict[str, Any]]:
     replay = replay_trajectory(arm, trajectory, device=device)
-    report = replay_report(replay, trajectory, tolerance=tolerance)
+    report = replay_report(replay, trajectory)
     if not report["passed"]:
         errors = report["errors"]
         if any(name in REPLAY_EXACT_FIELDS for name in report["failures"]):
@@ -1277,46 +1938,58 @@ def action_distribution_tv(
     return 0.5 * torch.abs(pi_natural - pi_perm).sum(dim=-1)
 
 
-def base_primitive_logits(
+def batched_natural_and_permuted_action_tv(
     arm: CommitmentArm,
     trajectory: EventTrajectory,
     *,
-    env_index: int,
-    time: int,
     device: torch.device,
-) -> dict[int, torch.Tensor]:
-    """Recompute pre-bias primitive logits for one recorded physical step.
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Trajectory-batched teacher-forced `I_TV` with one AR-position loop.
 
-    Reuses `DirectPrimitiveARPolicy`'s exact member/context encoding, GRU
-    cell and action head with the natural recorded hidden state and
-    teacher-forced natural actions, so the reconstructed autoregressive
-    prefix matches the one that actually produced the stored trajectory
-    (each active key's own hidden slot is untouched until its own position,
-    so its pre-step hidden state always equals `trajectory.hidden_before`).
-    `primitive_logit_bias` is intentionally not added here; callers combine
-    the result with `arm.primitive_bias(z)` themselves, exactly reproducing
-    `forward_step`'s `logits = base_logits + primitive_logit_bias`
-    composition.
+    Time and environment are flattened into one batch. The only loop is the
+    genuine autoregressive primitive position; focal-key gathers, prefix
+    updates, ascending-key cyclic mark permutation and both W_z evaluations
+    remain on device. The returned dense tensor and eligibility mask have
+    shape `(time, environment, lifecycle)` and perform no host conversion.
     """
 
-    observations = trajectory.observations[time, env_index : env_index + 1].to(device)
-    active = trajectory.active_mask[time, env_index : env_index + 1].to(device)
-    order = trajectory.orders[time, env_index : env_index + 1].to(device)
-    hidden_before = trajectory.hidden_before[time, env_index : env_index + 1].to(device)
-    natural_actions = trajectory.actions[time, env_index : env_index + 1].to(device)
-    logits_by_key: dict[int, torch.Tensor] = {}
+    shape = trajectory.active_mask.shape
+    if arm.arm != "EHC" or arm.W_z is None:
+        return (
+            torch.zeros(shape, dtype=torch.float32, device=device),
+            torch.zeros(shape, dtype=torch.bool, device=device),
+        )
+    time_steps, environments, lifecycles = shape
+    batch = time_steps * environments
+    observations = trajectory.observations.to(device).reshape(
+        batch, lifecycles, OBSERVATION_DIM
+    )
+    active = trajectory.active_mask.to(device).reshape(batch, lifecycles)
+    order = trajectory.orders.to(device).reshape(batch, lifecycles)
+    hidden_before = trajectory.hidden_before.to(device).reshape(
+        batch, lifecycles, -1
+    )
+    natural_actions = trajectory.actions.to(device).reshape(batch, lifecycles)
+    z = trajectory.primitive_z.to(device).reshape(batch, lifecycles, MARK_DIM)
+    batch_indices = torch.arange(batch, device=device)
     with torch.no_grad():
         prepared = arm.base.prepare_step(
             observations=observations, active_mask=active, validated=True
         )
-        active_count = int(active.sum(dim=1).item())
+        active_counts = active.sum(dim=1)
         prefix = torch.zeros(
-            (1, ACTION_COUNT), dtype=observations.dtype, device=device
+            (batch, ACTION_COUNT), dtype=observations.dtype, device=device
         )
-        for position in range(active_count):
-            focal = int(order[0, position].item())
-            local_embedding = prepared.member_embeddings[:, focal]
-            local_hidden = hidden_before[:, focal]
+        base_logits = torch.zeros(
+            (batch, lifecycles, ACTION_COUNT),
+            dtype=observations.dtype,
+            device=device,
+        )
+        for position in range(lifecycles):
+            valid = position < active_counts
+            focal = order[:, position].clamp(0, lifecycles - 1)
+            local_embedding = prepared.member_embeddings[batch_indices, focal]
+            local_hidden = hidden_before[batch_indices, focal]
             candidate_hidden = arm.base.actor_rnn(
                 torch.cat((local_embedding, prepared.context, prefix), dim=-1),
                 local_hidden,
@@ -1324,52 +1997,39 @@ def base_primitive_logits(
             logits = arm.base.action_head(
                 torch.cat((candidate_hidden, prefix), dim=-1)
             )
-            logits_by_key[focal] = logits[0]
-            selected = int(natural_actions[0, focal].item())
-            prefix = prefix.clone()
-            prefix[0, selected] += 1.0
-    return logits_by_key
+            previous = base_logits[batch_indices, focal]
+            base_logits[batch_indices, focal] = torch.where(
+                valid.unsqueeze(-1), logits, previous
+            )
+            selected = natural_actions[batch_indices, focal].clamp(0, ACTION_COUNT - 1)
+            prefix = prefix + F.one_hot(
+                selected, num_classes=ACTION_COUNT
+            ).to(prefix.dtype) * valid.unsqueeze(-1)
 
-
-def natural_and_permuted_action_tv(
-    arm: CommitmentArm,
-    trajectory: EventTrajectory,
-    *,
-    env_index: int,
-    time: int,
-    device: torch.device,
-) -> list[float]:
-    """Per-active-key primitive `I_TV` under a same-step `z` derangement.
-
-    Empty unless the arm carries the `W_z` treatment (EHC) and at least two
-    lifecycles are active at this step. Derangement reuses the registered
-    `torch.roll(z, 1, 0)` strategy over the active keys at this physical
-    step. Observation, recurrent hidden state, action mask, active-set
-    context and primitive prefix are held fixed at their natural recorded
-    values (via `base_primitive_logits`); only `z` differs between the two
-    action distributions being compared.
-    """
-
-    if arm.arm != "EHC" or arm.W_z is None:
-        return []
-    active_row = trajectory.active_mask[time, env_index].to(device)
-    keys = torch.nonzero(active_row, as_tuple=True)[0]
-    if keys.numel() < 2:
-        return []
-    z = trajectory.primitive_z[time, env_index, keys].to(device)
-    perm_z = torch.roll(z, 1, 0)
-    base_logits = base_primitive_logits(
-        arm, trajectory, env_index=env_index, time=time, device=device
+        keys = torch.arange(lifecycles, device=device)
+        candidates = keys.view(1, 1, lifecycles)
+        targets = keys.view(1, lifecycles, 1)
+        lower_active = active.unsqueeze(1) & (candidates < targets)
+        lower_key = torch.where(
+            lower_active, candidates, torch.full_like(candidates, -1)
+        ).amax(dim=-1)
+        maximum_active = torch.where(
+            active, keys.view(1, lifecycles), torch.full_like(active, -1, dtype=torch.long)
+        ).amax(dim=-1, keepdim=True)
+        predecessor = torch.where(lower_key >= 0, lower_key, maximum_active)
+        predecessor = predecessor.clamp_min(0)
+        permuted_z = z.gather(
+            1, predecessor.unsqueeze(-1).expand(-1, -1, MARK_DIM)
+        )
+        natural_logits = base_logits + arm.W_z(z.detach())
+        permuted_logits = base_logits + arm.W_z(permuted_z.detach())
+        tv = action_distribution_tv(natural_logits, permuted_logits)
+        eligible = active & active_counts.unsqueeze(-1).ge(2)
+        tv = torch.where(eligible, tv, torch.zeros_like(tv))
+    return (
+        tv.reshape(time_steps, environments, lifecycles),
+        eligible.reshape(time_steps, environments, lifecycles),
     )
-    values: list[float] = []
-    with torch.no_grad():
-        for index, key in enumerate(keys.tolist()):
-            logits = base_logits[key]
-            natural_logits = logits + arm.primitive_bias(z[index])
-            perm_logits = logits + arm.primitive_bias(perm_z[index])
-            tv = action_distribution_tv(natural_logits, perm_logits)
-            values.append(float(tv.detach().cpu()))
-    return values
 
 
 # Streams a fork branch owns. Only `opportunity` is ever consumed: forking
@@ -1823,6 +2483,451 @@ def _check_fork_provenance(
             )
 
 
+def _isolate_fork_cursor(
+    cursor: CollectionCursor, env_index: int
+) -> CollectionCursor:
+    return CollectionCursor(
+        episode_ids=(int(cursor.episode_ids[env_index]),),
+        ledgers=(deepcopy(cursor.ledgers[env_index]),),
+        environments=[NoncalendarTrackingEnv.from_snapshot_state(
+            cursor.environments[env_index].snapshot_state()
+        )],
+        hidden=cursor.hidden[env_index:env_index + 1].detach().clone(),
+        lifecycles=[deepcopy(cursor.lifecycles[env_index])],
+        segments=[deepcopy(cursor.segments[env_index])],
+    )
+
+
+def _combine_fork_cursors(cursors: list[CollectionCursor]) -> CollectionCursor:
+    if not cursors or any(len(cursor.environments) != 1 for cursor in cursors):
+        raise ValueError("batched fork cursors must each own one environment")
+    times = {cursor.environments[0].time for cursor in cursors}
+    if len(times) != 1:
+        raise ValueError("batched fork cursor group must share physical time")
+    return CollectionCursor(
+        episode_ids=tuple(cursor.episode_ids[0] for cursor in cursors),
+        ledgers=tuple(deepcopy(cursor.ledgers[0]) for cursor in cursors),
+        environments=[NoncalendarTrackingEnv.from_snapshot_state(
+            cursor.environments[0].snapshot_state()
+        ) for cursor in cursors],
+        hidden=torch.cat([cursor.hidden for cursor in cursors], dim=0),
+        lifecycles=[deepcopy(cursor.lifecycles[0]) for cursor in cursors],
+        segments=[deepcopy(cursor.segments[0]) for cursor in cursors],
+    )
+
+
+def _fork_row_scripts(
+    trajectory: EventTrajectory,
+    rngs: Mapping[str, np.random.Generator],
+    *,
+    time: int,
+    env_index: int,
+) -> tuple[
+    dict[str, _ForkRowStream],
+    dict[str, Any],
+    dict[str, dict[str, Any]],
+]:
+    owned = {name: deepcopy(rngs[name]) for name in RNG_NAMES}
+    start_states = {
+        name: deepcopy(owned[name].bit_generator.state) for name in RNG_NAMES
+    }
+    schedules: dict[str, list[dict[str, Any]]] = {
+        name: [] for name in RNG_NAMES
+    }
+    event_values: list[np.ndarray] = []
+    mark_values: list[np.ndarray] = []
+    opportunity_values: list[np.ndarray] = []
+    primitive_values: list[np.ndarray] = []
+    audit_by_time = {
+        name: {
+            int(entry["coordinates"]["time"]): entry
+            for entry in trajectory.rng_audit["streams"][name]
+            if "time" in entry["coordinates"]
+        }
+        for name in FORK_STREAM_NAMES
+    }
+    for step in range(int(time), int(trajectory.time_steps)):
+        event_entry = audit_by_time["event"].get(step)
+        request_rows = (
+            [] if event_entry is None
+            else event_entry["coordinates"]["requests"]
+        )
+        coordinates = np.asarray(
+            [[int(row[0]), int(row[1])] for row in request_rows],
+            dtype=np.int64,
+        ).reshape(-1, 2)
+        count = int(len(coordinates))
+        if count:
+            schedules["event"].append(deepcopy(audit_by_time["event"][step]))
+            schedules["mark"].append(deepcopy(audit_by_time["mark"][step]))
+            schedules["opportunity"].append(
+                deepcopy(audit_by_time["opportunity"][step])
+            )
+            event = owned["event"].random(count)
+            mark = owned["mark"].standard_normal((count, MARK_DIM))
+            opportunity = owned["opportunity"].choice(
+                OPPORTUNITY_SUPPORT, size=count
+            )
+            selected = coordinates[:, 0] == int(env_index)
+            event_values.append(np.asarray(event)[selected])
+            mark_values.append(np.asarray(mark)[selected])
+            opportunity_values.append(np.asarray(opportunity)[selected])
+        primitive = owned["primitive"].random(
+            (len(trajectory.ledger_ids), MAX_LIFECYCLES), dtype=np.float32
+        )
+        schedules["primitive"].append(
+            deepcopy(audit_by_time["primitive"][step])
+        )
+        primitive_values.append(np.asarray(primitive)[env_index])
+    arrays = {
+        "event": np.concatenate(event_values) if event_values else np.empty(0),
+        "mark": np.concatenate(mark_values, axis=0).reshape(-1)
+        if mark_values else np.empty(0),
+        "opportunity": np.concatenate(opportunity_values)
+        if opportunity_values else np.empty(0, dtype=np.int64),
+        "primitive": np.concatenate(primitive_values)
+        if primitive_values else np.empty(0, dtype=np.float32),
+    }
+    end_states = {
+        name: deepcopy(owned[name].bit_generator.state) for name in RNG_NAMES
+    }
+    return (
+        {name: _ForkRowStream(value) for name, value in arrays.items()},
+        end_states,
+        {
+            name: {
+                "start_state": start_states[name],
+                "draw_schedule": schedules[name],
+                "end_state": end_states[name],
+            }
+            for name in RNG_NAMES
+        },
+    )
+
+
+def _fork_row_errors(
+    branch: EventTrajectory,
+    branch_index: int,
+    original: EventTrajectory,
+    original_env: int,
+    *,
+    start: int,
+) -> dict[str, Any]:
+    discrete_mismatch = 0
+    continuous_error = 0.0
+    for name in _FORK_DISCRETE_FIELDS:
+        if not torch.equal(
+            getattr(branch, name)[:, branch_index].detach().cpu(),
+            getattr(original, name)[start:, original_env].detach().cpu(),
+        ):
+            discrete_mismatch += 1
+    for name in _FORK_CONTINUOUS_FIELDS:
+        difference = (
+            getattr(branch, name)[:, branch_index].detach().cpu()
+            - getattr(original, name)[start:, original_env].detach().cpu()
+        )
+        continuous_error = max(
+            continuous_error,
+            float(difference.abs().max()) if difference.numel() else 0.0,
+        )
+    return {
+        "discrete_mismatch": discrete_mismatch,
+        "continuous_error": continuous_error,
+        "segment_equal": branch.segments[branch_index] == original.segments[original_env],
+        "outcome_equal": branch.outcomes[branch_index] == original.outcomes[original_env],
+    }
+
+
+def fork_opportunities_batched(
+    arm: CommitmentArm,
+    opportunities: list[dict[str, Any]],
+    *,
+    device: torch.device,
+    debug: bool = False,
+) -> list[dict[str, Any]]:
+    """Execute selected stochastic forks in registered-width branch batches.
+
+    Prefixes are reconstructed once per natural batch and selected physical
+    time. Continuations carry eight stable fork IDs as paired KEEP/RENEW rows
+    in one width-16 collector call. Each row owns an independent scripted CRN
+    view derived from the authoritative batch-origin generators.
+    """
+
+    if arm.arm == "OR" or not opportunities:
+        return []
+    prepared: list[dict[str, Any]] = []
+    by_batch: dict[int, list[dict[str, Any]]] = {}
+    for value in opportunities:
+        by_batch.setdefault(int(value["batch_index"]), []).append(value)
+    for batch_index, records in by_batch.items():
+        origin = records[0]["origin_state"]
+        trajectory = records[0]["trajectory"]
+        replay_state = deepcopy(origin)
+        cursor: CollectionCursor | None = None
+        current_time = 0
+        for time in sorted({int(value["time"]) for value in records}):
+            delta = time - current_time
+            if delta <= 0:
+                raise ValueError("batched fork opportunities must follow CREATE")
+            prefix = collect_trajectory(
+                arm,
+                replay_state,
+                device=device,
+                episode_ids=trajectory.ledger_ids if cursor is None else None,
+                cursor=cursor,
+                max_steps=delta,
+                deterministic=False,
+                profile=origin.profile,
+            )
+            cursor = prefix.cursor
+            if cursor is None:
+                raise RuntimeError("batched fork prefix unexpectedly terminated")
+            current_time = time
+            for record in records:
+                if int(record["time"]) != time:
+                    continue
+                env_index = int(record["env_index"])
+                streams, end_rng_states, rng_binding_material = _fork_row_scripts(
+                    trajectory,
+                    replay_state.rngs,
+                    time=time,
+                    env_index=env_index,
+                )
+                expected_end_rng_states = record.get("expected_end_rng_states")
+                if (
+                    expected_end_rng_states is not None
+                    and end_rng_states != expected_end_rng_states
+                ):
+                    raise RuntimeError("fork row script final RNG state mismatch")
+                prepared.append({
+                    **record,
+                    "cursor": _isolate_fork_cursor(cursor, env_index),
+                    "streams": streams,
+                    "end_rng_states": end_rng_states,
+                    "rng_binding_material": rng_binding_material,
+                })
+
+    results: dict[str, dict[str, Any]] = {}
+    started = perf_counter()
+    for time in sorted({int(value["time"]) for value in prepared}):
+        group = [value for value in prepared if int(value["time"]) == time]
+        for offset in range(0, len(group), 8):
+            pairs = group[offset:offset + 8]
+            branches: list[dict[str, Any]] = []
+            for pair in pairs:
+                for action, kind, new_z in (
+                    ("KEEP", KEEP, pair["trajectory"].event_z_pre[
+                        time, int(pair["env_index"]), int(pair["key"])
+                    ]),
+                    ("RENEW", RENEW, pair["trajectory"].candidate_z[
+                        time, int(pair["env_index"]), int(pair["key"])
+                    ]),
+                ):
+                    branches.append({
+                        "pair": pair,
+                        "action": action,
+                        "kind": kind,
+                        "new_z": new_z,
+                        "cursor": _clone_fork_cursor(pair["cursor"]),
+                        "streams": deepcopy(pair["streams"]),
+                        "padding": False,
+                    })
+            while len(branches) < FORMAL_NUM_ENVS:
+                duplicate = deepcopy(branches[0])
+                duplicate["padding"] = True
+                branches.append(duplicate)
+            combined = _combine_fork_cursors([value["cursor"] for value in branches])
+            forced = {
+                (time, index, int(value["pair"]["key"])): (
+                    int(value["kind"]), value["new_z"]
+                )
+                for index, value in enumerate(branches)
+            }
+            state = make_training_state(
+                arm.arm, int(pairs[0]["replicate"]), profile="held_out"
+            )
+            branch_trajectory = collect_trajectory(
+                arm,
+                state,
+                device=device,
+                cursor=combined,
+                deterministic=False,
+                forced_events=forced,
+                row_rngs=[value["streams"] for value in branches],
+            )
+            for index, value in enumerate(branches):
+                if value["padding"]:
+                    continue
+                pair = value["pair"]
+                fork_id = str(pair["fork_id"])
+                result = results.setdefault(fork_id, {
+                    "fork_id": fork_id,
+                    "natural_action": pair["natural_action"],
+                    "end_rng_states": pair["end_rng_states"],
+                    "rng_binding_material": pair["rng_binding_material"],
+                    "branches": {},
+                })
+                stream_positions = {
+                    name: int(stream.position)
+                    for name, stream in value["streams"].items()
+                }
+                result["branches"][value["action"]] = {
+                    "utility": float(branch_trajectory.outcomes[index].utility),
+                    "stream_positions": stream_positions,
+                    "stream_consumption": {
+                        name: stream.consumption_record(
+                            pair["end_rng_states"][name]
+                        )
+                        for name, stream in value["streams"].items()
+                    },
+                }
+                if debug:
+                    result["branches"][value["action"]]["trajectory"] = branch_trajectory
+                    result["branches"][value["action"]]["branch_index"] = index
+                if value["action"] == pair["natural_action"]:
+                    natural_errors = _fork_row_errors(
+                        branch_trajectory,
+                        index,
+                        pair["trajectory"],
+                        int(pair["env_index"]),
+                        start=time,
+                    )
+                    if not (
+                        natural_errors["discrete_mismatch"] == 0
+                        and natural_errors["continuous_error"] <= RESUME_TOLERANCE
+                        and natural_errors["segment_equal"]
+                        and natural_errors["outcome_equal"]
+                    ):
+                        raise RuntimeError(
+                            f"batched fork natural branch mismatch {natural_errors}"
+                        )
+                    result["natural_errors"] = natural_errors
+    elapsed = perf_counter() - started
+    ordered_results: list[dict[str, Any]] = []
+    for opportunity in opportunities:
+        result = results[str(opportunity["fork_id"])]
+        keep = result["branches"]["KEEP"]
+        renew = result["branches"]["RENEW"]
+        if keep["stream_positions"] != renew["stream_positions"]:
+            raise RuntimeError("batched fork pair stream positions diverged")
+        result["keep_utility"] = keep["utility"]
+        result["renew_utility"] = renew["utility"]
+        result["elapsed_seconds"] = elapsed
+        ordered_results.append(result)
+    return ordered_results
+
+
+def _fork_stochastic_opportunity(
+    arm: CommitmentArm,
+    trajectory: EventTrajectory,
+    *,
+    env_index: int,
+    time: int,
+    key: int,
+    device: torch.device,
+    state: TrainingState,
+    diagnostics: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Replay one stochastic batch prefix and force one paired branch.
+
+    ``state`` is the owned-RNG state at the beginning of the collected batch.
+    Prefix replay therefore consumes the exact registered streams that made
+    the natural record. Both branch states are cloned after that prefix and
+    consume identical subsequent variates; only the focal KEEP/RENEW choice
+    and installed mark differ.
+    """
+
+    env_index, time, key = int(env_index), int(time), int(key)
+    natural_kind = int(trajectory.event_kind[time, env_index, key])
+    if natural_kind not in (KEEP, RENEW):
+        raise ValueError("fork coordinate is not an eligible non-CREATE opportunity")
+    if time <= 0 or trajectory.cutoff or not trajectory.outcomes:
+        raise ValueError("stochastic fork requires a complete eligible trajectory")
+    if state.pending_cursor is not None:
+        raise ValueError("stochastic fork requires a batch-origin collector state")
+    if state.arm != arm.arm or state.profile != "held_out":
+        raise ValueError("stochastic fork requires the matching held-out arm state")
+    prefix_state = deepcopy(state)
+    prefix = collect_trajectory(
+        arm,
+        prefix_state,
+        device=device,
+        episode_ids=trajectory.ledger_ids,
+        max_steps=time,
+        deterministic=False,
+        profile=state.profile,
+    )
+    prefix_errors = _fork_window_errors(prefix, trajectory, start=0)
+    if prefix_errors["discrete_mismatch"] != 0.0 or prefix_errors["continuous"] != 0.0:
+        raise RuntimeError(f"stochastic fork prefix mismatch {prefix_errors}")
+    if prefix_state.pending_cursor is None:
+        raise RuntimeError("stochastic fork prefix unexpectedly terminated")
+
+    z_pre = trajectory.event_z_pre[time, env_index, key].to(device)
+    candidate = trajectory.candidate_z[time, env_index, key].to(device)
+    natural_action = "KEEP" if natural_kind == KEEP else "RENEW"
+    branches: dict[str, EventTrajectory] = {}
+    branch_states: dict[str, TrainingState] = {}
+    for name, kind, new_z in (
+        ("KEEP", KEEP, z_pre),
+        ("RENEW", RENEW, candidate),
+    ):
+        branch_state = deepcopy(prefix_state)
+        branch_cursor = _clone_fork_cursor(prefix_state.pending_cursor)
+        branch_state.pending_cursor = branch_cursor
+        branch = collect_trajectory(
+            arm,
+            branch_state,
+            device=device,
+            cursor=branch_cursor,
+            deterministic=False,
+            forced_event=(time, env_index, key, kind, new_z),
+        )
+        if branch.cutoff or not branch.outcomes:
+            raise RuntimeError(f"stochastic fork {name} branch did not terminate")
+        branches[name] = branch
+        branch_states[name] = branch_state
+
+    natural_errors = _fork_window_errors(
+        branches[natural_action], trajectory, start=time
+    )
+    natural_outcome_mismatch = (
+        branches[natural_action].outcomes[env_index]
+        != trajectory.outcomes[env_index]
+    )
+    if (
+        natural_outcome_mismatch
+        or natural_errors["discrete_mismatch"] != 0.0
+        or natural_errors["continuous"] > RESUME_TOLERANCE
+    ):
+        raise RuntimeError(
+            f"stochastic fork natural branch continuation mismatch {natural_errors}"
+        )
+    if not _nested_equal(
+        _rng_states(branch_states["KEEP"]), _rng_states(branch_states["RENEW"])
+    ):
+        raise RuntimeError("stochastic fork branch RNG states diverged")
+    if diagnostics is not None:
+        diagnostics.clear()
+        diagnostics.update({
+            "coordinate": {"time": time, "env_index": env_index, "key": key},
+            "episode_id": int(trajectory.ledger_ids[env_index]),
+            "natural_action": natural_action,
+            "prefix_errors": prefix_errors,
+            "natural_branch_errors": natural_errors,
+            "branch_rng_equal": True,
+            "branch_trajectories": branches,
+            "branch_rng_states": {
+                name: _rng_states(branch_states[name]) for name in ("KEEP", "RENEW")
+            },
+        })
+    return {
+        "keep_utility": float(branches["KEEP"].outcomes[env_index].utility),
+        "renew_utility": float(branches["RENEW"].outcomes[env_index].utility),
+        "natural_action": natural_action,
+    }
+
+
 def fork_single_opportunity(
     arm: CommitmentArm,
     trajectory: EventTrajectory,
@@ -1832,6 +2937,7 @@ def fork_single_opportunity(
     key: int,
     device: torch.device,
     state: TrainingState,
+    deterministic: bool = True,
     diagnostics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Sequentially fork one eligible non-CREATE opportunity into KEEP/RENEW.
@@ -1865,11 +2971,23 @@ def fork_single_opportunity(
     from their own positions. The request schedule is action-independent,
     so the two branches' draw counts align step for step.
 
-    Only deterministic policy decisions are supported: the factual event,
-    mark and primitive variates of a stochastic collection are not
-    recoverable from the record, so a stochastically collected trajectory
-    could not be reproduced by its own natural branch.
+    This implementation body is the deterministic verification path. The
+    stochastic Stage-2 path dispatches above to a batch-origin RNG replay,
+    because its factual event, mark and primitive variates must be recovered
+    from the owned stream state rather than inferred from the trajectory.
     """
+
+    if not deterministic:
+        return _fork_stochastic_opportunity(
+            arm,
+            trajectory,
+            env_index=env_index,
+            time=time,
+            key=key,
+            device=device,
+            state=state,
+            diagnostics=diagnostics,
+        )
 
     started = perf_counter()
     env_index, time, key = int(env_index), int(time), int(key)
@@ -1965,7 +3083,7 @@ def fork_single_opportunity(
         # exists precisely to remove the float32 reduction-order drift class
         # rather than bound it, so any non-zero residual here is the drift
         # this design eliminated and must fail. Deliberately not expressed
-        # against the replay contract: `REPLAY_COMPONENT_TOLERANCE` and the
+        # against the replay contract: the replay component gates and the
         # derived-joint compositional bound cover the replay of a collected
         # batch under a different code path and are owned elsewhere; a
         # fork's acceptance criterion must not move with them, and the
@@ -2129,7 +3247,7 @@ def fork_single_opportunity(
         )
     # Exactness, not tolerance -- see the prefix guard above. A fork-owned
     # constant would be required before any non-zero allowance is admitted
-    # here; neither `REPLAY_COMPONENT_TOLERANCE` nor the derived-joint
+    # here; neither the replay component gates nor the derived-joint
     # compositional bound is that constant.
     if natural_errors["continuous"] != 0.0:
         raise RuntimeError(
@@ -2301,6 +3419,114 @@ def compute_gae(trajectory: EventTrajectory, *, device: torch.device) -> tuple[t
     returns = advantages + values; return (advantages - advantages.mean()) / advantages.std(unbiased=False).clamp_min(1e-8), returns
 
 
+def optimizer_ownership_manifest(arm: CommitmentArm) -> dict[str, Any]:
+    """Canonical ordered optimizer ownership for the frozen arm architecture."""
+
+    names = {id(parameter): name for name, parameter in arm.named_parameters()}
+
+    def group(parameters: list[nn.Parameter]) -> list[dict[str, Any]]:
+        return [
+            {
+                "name": names[id(parameter)],
+                "shape": [int(value) for value in parameter.shape],
+                "numel": int(parameter.numel()),
+            }
+            for parameter in parameters
+        ]
+
+    return {
+        "schema_version": OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
+        "arm": arm.arm,
+        "groups": {
+            "base": group(arm.base_optimizer_parameters()),
+            "event": group(arm.event_parameters()),
+        },
+    }
+
+
+def _gradient_summaries(
+    arm: CommitmentArm, parameters: list[nn.Parameter]
+) -> list[dict[str, Any]]:
+    names = {id(parameter): name for name, parameter in arm.named_parameters()}
+    summaries: list[dict[str, Any]] = []
+    for parameter in parameters:
+        gradient = parameter.grad
+        present = gradient is not None
+        if gradient is None:
+            nonfinite = zero = 0
+            squared_l2 = maxabs = 0.0
+            digest = hashlib.sha256(b"").hexdigest()
+            dtype = "<f4"
+            payload = None
+        else:
+            contiguous = gradient.detach().contiguous()
+            cpu = contiguous.cpu()
+            array = np.asarray(
+                cpu.numpy(), dtype=np.dtype(cpu.numpy().dtype).newbyteorder("<"),
+                order="C",
+            )
+            raw = array.tobytes(order="C")
+            widened = array.astype(np.float64)
+            nonfinite = int((~np.isfinite(array)).sum())
+            zero = int((array == 0).sum())
+            squared_l2 = float(np.square(widened).sum())
+            maxabs = float(np.abs(widened).max()) if array.size else 0.0
+            encoded = base64.b64encode(zlib.compress(raw, level=9)).decode("ascii")
+            digest = hashlib.sha256(raw).hexdigest()
+            dtype = array.dtype.str
+            payload = {
+                "encoding": "zlib9_base64", "dtype": dtype,
+                "shape": [int(value) for value in parameter.shape],
+                "uncompressed_nbytes": len(raw), "data": encoded,
+            }
+        summaries.append({
+            "name": names[id(parameter)],
+            "shape": [int(value) for value in parameter.shape],
+            "numel": int(parameter.numel()),
+            "dtype": dtype,
+            "gradient_present": bool(present),
+            "nonfinite_count": nonfinite,
+            "zero_count": zero,
+            "squared_l2": squared_l2,
+            "maxabs": maxabs,
+            "preclip_gradient_digest": digest,
+            "gradient_payload": payload,
+        })
+    return summaries
+
+
+def _optimizer_pass_record(
+    *, group: str, pass_index: int, step_before: int,
+    loss: torch.Tensor, summaries: list[dict[str, Any]],
+    loss_components: Mapping[str, float],
+    unclipped_norm: torch.Tensor,
+) -> dict[str, Any]:
+    norm = float(unclipped_norm.detach().cpu())
+    clip_coefficient = min(1.0, GRADIENT_CLIP / (norm + OPTIMIZER_CLIP_EPSILON))
+    record = {
+        "schema_version": OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
+        "group": group,
+        "pass_index": int(pass_index),
+        "step_before": int(step_before),
+        "step_after": int(step_before) + 1,
+        "raw_loss": float(loss.detach().cpu()),
+        "loss_components": dict(loss_components),
+        "unclipped_norm": norm,
+        "clip_coefficient": clip_coefficient,
+        "parameters": summaries,
+        "payload_raw_bytes": sum(
+            int(value["gradient_payload"]["uncompressed_nbytes"])
+            for value in summaries if value["gradient_payload"] is not None
+        ),
+        "payload_encoded_bytes": sum(
+            len(value["gradient_payload"]["data"].encode("ascii"))
+            for value in summaries if value["gradient_payload"] is not None
+        ),
+    }
+    record["record_digest"] = _canonical_json_digest(record)
+    return record
+
+
 def optimize_update(
     arm: CommitmentArm,
     base_optimizer: torch.optim.Optimizer,
@@ -2316,7 +3542,7 @@ def optimize_update(
     packed = _pack_trajectory_once(trajectory, device)
     arm.train()
     _validated_replay, replay_evidence = validate_replay(
-        arm, packed, device=device, tolerance=REPLAY_COMPONENT_TOLERANCE
+        arm, packed, device=device
     )
     advantages, returns = compute_gae(packed, device=device)
     active = packed.active_mask
@@ -2334,12 +3560,21 @@ def optimize_update(
         "primitive_replays": 0,
         "event_head_replays": 0,
         "packed_trajectory_count": 1,
-        "finite": True,
         "base_non_none_gradients": [],
         "base_zero_gradients": [],
+        "base_nonfinite_gradient_values": [],
+        "base_nonfinite_loss_values": [],
+        "base_nonfinite_norm_values": [],
         "event_non_none_gradients": [],
+        "event_zero_gradients": [],
+        "event_nonfinite_gradient_values": [],
+        "event_nonfinite_loss_values": [],
+        "event_nonfinite_norm_values": [],
+        "ownership_manifest": optimizer_ownership_manifest(arm),
+        "base_passes": [],
+        "event_passes": [],
     }
-    for _ in range(int(ppo_passes)):
+    for pass_index in range(int(ppo_passes)):
         primitive = _replay_primitive(arm, packed, device=device)
         metrics["primitive_replays"] += 1
         ratio = torch.exp(primitive[0] - old_logp)
@@ -2370,10 +3605,16 @@ def optimize_update(
         base_optimizer.zero_grad(set_to_none=True)
         base_loss.backward()
         base_parameters = arm.base_optimizer_parameters()
+        base_gradient_evidence = _gradient_summaries(
+            arm, base_parameters
+        )
         base_norm = torch.nn.utils.clip_grad_norm_(base_parameters, GRADIENT_CLIP)
-        metrics["finite"] = metrics["finite"] and bool(
-            torch.isfinite(base_loss).detach().cpu()
-        ) and bool(torch.isfinite(base_norm).detach().cpu())
+        metrics["base_nonfinite_loss_values"].append(
+            int((~torch.isfinite(base_loss)).sum().detach().cpu())
+        )
+        metrics["base_nonfinite_norm_values"].append(
+            int((~torch.isfinite(base_norm)).sum().detach().cpu())
+        )
         metrics["base_non_none_gradients"].append(
             sum(parameter.grad is not None for parameter in base_parameters)
         )
@@ -2384,6 +3625,22 @@ def optimize_update(
                 for parameter in base_parameters
             )
         )
+        metrics["base_nonfinite_gradient_values"].append(sum(
+            int((~torch.isfinite(parameter.grad)).sum().detach().cpu())
+            for parameter in base_parameters if parameter.grad is not None
+        ))
+        base_record = _optimizer_pass_record(
+            group="base", pass_index=pass_index + 1,
+            step_before=state.base_optimizer_steps + metrics["base_steps"],
+            loss=base_loss, summaries=base_gradient_evidence,
+            loss_components={
+                "policy_loss": float(policy_loss.detach().cpu()),
+                "value_loss": float(value_loss.detach().cpu()),
+                "primitive_entropy": float(entropy.detach().cpu()),
+            },
+            unclipped_norm=base_norm,
+        )
+        metrics["base_passes"].append(base_record)
         base_optimizer.step()
         metrics["base_steps"] += 1
 
@@ -2412,19 +3669,55 @@ def optimize_update(
             event_optimizer.zero_grad(set_to_none=True)
             event_loss.backward()
             event_parameters = arm.event_parameters()
+            event_gradient_evidence = _gradient_summaries(
+                arm, event_parameters
+            )
             event_norm = torch.nn.utils.clip_grad_norm_(
                 event_parameters, GRADIENT_CLIP
             )
-            metrics["finite"] = metrics["finite"] and bool(
-                torch.isfinite(event_loss).detach().cpu()
-            ) and bool(torch.isfinite(event_norm).detach().cpu())
+            metrics["event_nonfinite_loss_values"].append(
+                int((~torch.isfinite(event_loss)).sum().detach().cpu())
+            )
+            metrics["event_nonfinite_norm_values"].append(
+                int((~torch.isfinite(event_norm)).sum().detach().cpu())
+            )
             metrics["event_non_none_gradients"].append(
                 sum(parameter.grad is not None for parameter in event_parameters)
             )
+            metrics["event_zero_gradients"].append(
+                sum(
+                    parameter.grad is not None
+                    and bool(torch.count_nonzero(parameter.grad).eq(0).detach().cpu())
+                    for parameter in event_parameters
+                )
+            )
+            metrics["event_nonfinite_gradient_values"].append(sum(
+                int((~torch.isfinite(parameter.grad)).sum().detach().cpu())
+                for parameter in event_parameters if parameter.grad is not None
+            ))
+            event_record = _optimizer_pass_record(
+                group="event", pass_index=pass_index + 1,
+                step_before=state.event_optimizer_steps + metrics["event_steps"],
+                loss=event_loss, summaries=event_gradient_evidence,
+                loss_components={
+                    "event_policy_loss": float((-event_surrogate.mean()).detach().cpu()),
+                    "categorical_entropy": float(categorical_entropy.detach().cpu()),
+                },
+                unclipped_norm=event_norm,
+            )
+            metrics["event_passes"].append(event_record)
             event_optimizer.step()
             metrics["event_steps"] += 1
     if metrics["primitive_replays"] != int(ppo_passes):
         raise RuntimeError("primitive replay count drift")
+    all_passes = metrics["base_passes"] + metrics["event_passes"]
+    encoded_bytes = sum(int(value["payload_encoded_bytes"]) for value in all_passes)
+    raw_bytes = sum(int(value["payload_raw_bytes"]) for value in all_passes)
+    metrics["evidence_storage"] = {
+        "raw_bytes": raw_bytes,
+        "encoded_bytes": encoded_bytes,
+        "formal_scale_projected_encoded_bytes": encoded_bytes * FORMAL_UPDATES,
+    }
     state.completed_update += 1
     state.base_optimizer_steps += int(ppo_passes)
     state.event_optimizer_steps += int(
@@ -2520,7 +3813,21 @@ def save_checkpoint(
         "torch_cuda_rng": global_state["torch_cuda"],
         "owned_rngs": _rng_states(state),
     }
-    torch.save(payload, path)
+    temporary_path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb", dir=path.parent, prefix=f".{path.name}.",
+            suffix=".tmp", delete=False,
+        ) as handle:
+            temporary_path = Path(handle.name)
+            torch.save(payload, handle)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary_path, path)
+        temporary_path = None
+    finally:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
 
 
 def load_checkpoint(

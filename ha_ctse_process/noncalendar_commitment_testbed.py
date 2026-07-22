@@ -62,7 +62,7 @@ ACTIVE = "active"
 TEMPORARILY_ABSENT = "temporarily_absent"
 TERMINAL = "terminal"
 
-CHECKPOINT_SCHEMA_VERSION = 2
+CHECKPOINT_SCHEMA_VERSION = 7
 CHECKPOINT_KIND = "event_held_commitment_link_g0"
 REGISTERED_CONTRACT = "EVENT_HELD_COMMITMENT_LINK_G0"
 ACCESS_FLOOR = 0.78
@@ -133,11 +133,25 @@ LEARNING_RATE = 3e-4
 ADAM_EPSILON = 1e-5
 WEIGHT_DECAY = 0.0
 PPO_PASSES = 4
+RNG_BINDING_SCHEMA_VERSION = 2
+OPTIMIZER_EVIDENCE_SCHEMA_VERSION = 2
+# ``clip_grad_norm_`` derives its multiplier as max_norm/(norm + 1e-6),
+# clamped to one.  The evidence validator repeats that arithmetic and admits
+# only float serialization rounding at this fixed comparison.
+OPTIMIZER_NORM_ATOL = 1e-6
+OPTIMIZER_NORM_RTOL = 1e-6
+OPTIMIZER_CLIP_EPSILON = 1e-6
+OPTIMIZER_LOSS_ATOL = 1e-7
+OPTIMIZER_LOSS_RTOL = 1e-7
 # Replay portability contract. One scalar cannot bound both a single
 # continuous quantity and a sum of nine of them: a derived joint accumulates
 # its summands' errors, so it needs the summands' allowance plus the float32
 # reduction error of the sum itself. Four classes, not one number.
-REPLAY_COMPONENT_TOLERANCE = 1e-6
+REPLAY_LOG_COMPONENT_ATOL = 1e-6
+REPLAY_LOG_COMPONENT_RTOL = 8.0 * 2.0**-24
+REPLAY_LOG_RATIO_DRIFT_CAP = 1e-4
+REPLAY_STATE_ATOL = 1e-6
+REPLAY_RECORD_SCHEMA_VERSION = 3
 FLOAT32_UNIT_ROUNDOFF = 2.0**-24
 # Categorical factor plus the eight transformed-mark components. Fixed at 9
 # for every event row: factors outside a row's support are exactly zero and
@@ -162,21 +176,23 @@ REPLAY_EXACT_FIELDS = (
     "categorical_support_leak",
     "mark_support_leak",
 )
-# Ordinary continuous state, each an individual quantity rather than a sum,
-# and so gated at `REPLAY_COMPONENT_TOLERANCE` unchanged.
-REPLAY_COMPONENT_FIELDS = (
+# Actual likelihood factors use the mixed absolute-relative and ratio gates.
+REPLAY_LOG_COMPONENT_FIELDS = (
     "primitive_component",
+    "categorical_component",
+    "mark_component",
+)
+# Ordinary continuous state remains absolute-only.
+REPLAY_STATE_FIELDS = (
     "value",
     "hidden",
     "prefix",
     "event_input",
-    "categorical_component",
-    "mark_component",
     "event_new_z",
     "primitive_event_z",
 )
-# Derived sums, gated by their own compositional bound rather than by
-# `REPLAY_COMPONENT_TOLERANCE`.
+REPLAY_COMPONENT_FIELDS = REPLAY_LOG_COMPONENT_FIELDS + REPLAY_STATE_FIELDS
+# Derived sums, gated by their own compositional bound.
 REPLAY_JOINT_FIELDS = ("primitive_joint", "event_joint")
 # The complete per-joint record. A serialized joint reduced to the three keys
 # a validator happens to read would otherwise pass while carrying no evidence,
@@ -193,6 +209,24 @@ REPLAY_JOINT_RECORD_FIELDS = (
     "assembly_allowance",
     "assembly_excess",
     "rows",
+)
+REPLAY_WORST_RECORD_FIELDS = (
+    "stored_value",
+    "replayed_value",
+    "absolute_error",
+    "mixed_bound",
+    "ratio_drift",
+    "ratio_cap",
+    "float32_ulp_at_max_magnitude",
+    "ulp_distance",
+    "coordinate",
+)
+REPLAY_EVENT_JOINT_RATIO_FIELDS = (
+    "stored_value",
+    "replayed_value",
+    "ratio_drift",
+    "ratio_cap",
+    "coordinate",
 )
 # Same-checkpoint continuation, a different invariant from replay
 # portability, and deliberately unchanged by the replay-bound correction.
@@ -400,12 +434,31 @@ class NoncalendarLedger:
         return ()
 
 
-def _duration_streams(rng: np.random.Generator, support: tuple[int, ...]) -> np.ndarray:
+def _duration_streams(
+    rng: np.random.Generator,
+    support: tuple[int, ...],
+    *,
+    audit_trace: list[dict[str, Any]] | None = None,
+    audit_coordinates: Mapping[str, Any] | None = None,
+) -> np.ndarray:
     rows = np.empty((MAX_LIFECYCLES, 30), dtype=np.int64)
     values = np.asarray(support, dtype=np.int64)
     for key in range(MAX_LIFECYCLES):
         for offset in range(0, rows.shape[1], 3):
             rows[key, offset : offset + 3] = rng.permutation(values)
+    if audit_trace is not None:
+        audit_trace.append({
+            "stream": "ledger",
+            "operation": "seeded_permutation_blocks",
+            "dtype": "int64",
+            "shape": [MAX_LIFECYCLES, rows.shape[1] // 3, len(values)],
+            "coordinates": dict(audit_coordinates or {}) | {
+                "purpose": "duration_blocks",
+                "key_order": list(range(MAX_LIFECYCLES)),
+                "offset_order": list(range(0, rows.shape[1], 3)),
+                "argument": values.tolist(),
+            },
+        })
     return rows
 
 
@@ -463,6 +516,7 @@ def make_noncalendar_ledger(
     profile: Profile,
     task_seed: int,
     order_seed: int,
+    audit_trace: dict[str, list[dict[str, Any]]] | None = None,
 ) -> NoncalendarLedger:
     """Materialize one sign-paired task ledger with no causal future input."""
 
@@ -472,18 +526,82 @@ def make_noncalendar_ledger(
     support = _profile_contract(profile)[0]
     for attempt in range(10_000):
         rng = make_rng(task_seed, base_id, attempt)
+        coordinates = {
+            "episode_id": episode_id, "base_id": base_id,
+            "attempt": attempt, "generator_coordinates": [base_id, attempt],
+        }
         routing = tuple(int(v) for v in rng.permutation(MAX_LIFECYCLES))
+        if audit_trace is not None:
+            audit_trace["ledger"].append({
+                "stream": "ledger", "operation": "seeded_permutation",
+                "dtype": "int64", "shape": [MAX_LIFECYCLES],
+                "coordinates": coordinates | {
+                    "purpose": "routing", "argument": MAX_LIFECYCLES,
+                },
+            })
         initial_count = int(rng.choice((3, 4) if profile in ("train", "iid") else (2, 5)))
+        if audit_trace is not None:
+            audit_trace["ledger"].append({
+                "stream": "ledger", "operation": "seeded_choice",
+                "dtype": "int64", "shape": [],
+                "coordinates": coordinates | {
+                    "purpose": "initial_count",
+                    "argument": list((3, 4) if profile in ("train", "iid") else (2, 5)),
+                    "replace": True,
+                },
+            })
         temporary_key = int(rng.choice(np.asarray(routing[:initial_count], dtype=np.int64)))
+        if audit_trace is not None:
+            audit_trace["ledger"].append({
+                "stream": "ledger", "operation": "seeded_choice",
+                "dtype": "int64", "shape": [],
+                "coordinates": coordinates | {
+                    "purpose": "temporary_key",
+                    "argument": list(routing[:initial_count]), "replace": True,
+                },
+            })
         terminal_candidates = np.asarray((*routing[:initial_count], routing[initial_count]), dtype=np.int64)
         terminal_key = int(rng.choice(terminal_candidates))
-        durations = _duration_streams(rng, support)
+        if audit_trace is not None:
+            audit_trace["ledger"].append({
+                "stream": "ledger", "operation": "seeded_choice",
+                "dtype": "int64", "shape": [],
+                "coordinates": coordinates | {
+                    "purpose": "terminal_key",
+                    "argument": terminal_candidates.tolist(), "replace": True,
+                },
+            })
+        durations = _duration_streams(
+            rng, support,
+            audit_trace=None if audit_trace is None else audit_trace["ledger"],
+            audit_coordinates=coordinates,
+        )
         base_targets = rng.choice(
             np.asarray((-2, 2), dtype=np.int64), size=MAX_LIFECYCLES, replace=True
         )
+        if audit_trace is not None:
+            audit_trace["ledger"].append({
+                "stream": "ledger", "operation": "seeded_choice",
+                "dtype": "int64", "shape": [MAX_LIFECYCLES],
+                "coordinates": coordinates | {
+                    "purpose": "initial_targets", "argument": [-2, 2],
+                    "replace": True,
+                },
+            })
         if sign_parity:
             base_targets = -base_targets
         order_rng = make_rng(order_seed, base_id, 0)
+        priorities = order_rng.random((HORIZON, MAX_LIFECYCLES))
+        if audit_trace is not None:
+            audit_trace["order"].append({
+                "stream": "order", "operation": "seeded_random",
+                "dtype": "float64", "shape": [HORIZON, MAX_LIFECYCLES],
+                "coordinates": {
+                    "episode_id": episode_id, "base_id": base_id,
+                    "attempt": attempt, "generator_coordinates": [base_id, 0],
+                    "purpose": "frontier_priorities",
+                },
+            })
         ledger = NoncalendarLedger(
             episode_id=episode_id,
             base_id=base_id,
@@ -495,7 +613,7 @@ def make_noncalendar_ledger(
             terminal_key=terminal_key,
             duration_streams=durations,
             initial_targets=np.asarray(base_targets, dtype=np.int64),
-            direct_frontier_priorities=order_rng.random((HORIZON, MAX_LIFECYCLES)),
+            direct_frontier_priorities=priorities,
             generation_attempt=attempt,
         )
         ledger.validate()
@@ -1049,6 +1167,17 @@ def registered_contract() -> dict[str, Any]:
                 "ever substituted"
             ),
         },
+        "evidence_streaming": {
+            "layout": "root_immutable_index_generation_update_shard_and_cell_reference_v2",
+            "train_manifest_schema": 6,
+            "train_index_schema": 2,
+            "train_update_schema": 2,
+            "evaluation_manifest_schema": 4,
+            "evaluation_cell_schema": 7,
+            "digest": "sha256",
+            "path_rule": "strict_root_relative_contained",
+            "publication": "same_directory_fsync_atomic_replace",
+        },
         "maximum_lifecycles": MAX_LIFECYCLES,
         "observation_width": OBSERVATION_DIM,
         "arms": ["OR", "DUM", "EHC"],
@@ -1169,15 +1298,40 @@ def registered_contract() -> dict[str, Any]:
             "ppo_passes": PPO_PASSES,
             "resume_tolerance": RESUME_TOLERANCE,
             "opportunity_support": list(OPPORTUNITY_SUPPORT),
+            "evidence_schema_version": OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
+            "norm_atol": OPTIMIZER_NORM_ATOL,
+            "norm_rtol": OPTIMIZER_NORM_RTOL,
+            "clip_epsilon": OPTIMIZER_CLIP_EPSILON,
+            "loss_atol": OPTIMIZER_LOSS_ATOL,
+            "loss_rtol": OPTIMIZER_LOSS_RTOL,
+            "gradient_payload": "zlib9_base64_little_endian",
+        },
+        "rng_binding": {
+            "schema_version": RNG_BINDING_SCHEMA_VERSION,
+            "generator": "numpy.random.PCG64",
+            "digest": "sha256",
+            "training_chain": ["replicate", "arm", "stream", "update"],
+            "evaluation_chain": [
+                "replicate", "arm", "cell", "stream", "batch"
+            ],
+            "stage2_context": [
+                "fork_id", "episode_id", "time", "key",
+                "membership_epoch", "segment_id", "natural_action",
+                "branch_action",
+            ],
         },
         "replay_tolerances": {
             "exact_fields": list(REPLAY_EXACT_FIELDS),
-            "continuous_component_fields": list(REPLAY_COMPONENT_FIELDS),
+            "log_component_fields": list(REPLAY_LOG_COMPONENT_FIELDS),
+            "state_fields": list(REPLAY_STATE_FIELDS),
             "joint_fields": list(REPLAY_JOINT_FIELDS),
             "joint_record_fields": list(REPLAY_JOINT_RECORD_FIELDS),
-            "continuous_component_atol": REPLAY_COMPONENT_TOLERANCE,
-            "categorical_component_atol": REPLAY_COMPONENT_TOLERANCE,
-            "mark_component_atol": REPLAY_COMPONENT_TOLERANCE,
+            "worst_record_fields": list(REPLAY_WORST_RECORD_FIELDS),
+            "event_joint_ratio_fields": list(REPLAY_EVENT_JOINT_RATIO_FIELDS),
+            "log_component_atol": REPLAY_LOG_COMPONENT_ATOL,
+            "log_component_rtol": REPLAY_LOG_COMPONENT_RTOL,
+            "log_ratio_drift_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+            "state_atol": REPLAY_STATE_ATOL,
             "primitive_joint_rule": "component_sum_plus_float32_reduction",
             "event_joint_rule": (
                 "categorical_plus_8_marks_plus_float32_reduction"
@@ -1198,8 +1352,8 @@ def registered_contract() -> dict[str, Any]:
                 "non_gating: there is no independently stored primitive joint, "
                 "so the error |sum(replay-stored)| is bounded by "
                 "sum|replay-stored| plus slack -- the triangle inequality, an "
-                "identity. Real primitive coverage is primitive_component <= "
-                "continuous_component_atol."
+                "identity. Real primitive coverage is the mixed and ratio "
+                "gate on primitive_component."
             ),
             "primitive_joint_assembly_gating": (
                 "non_gating: compares float32 and float64 reductions of the "
@@ -1226,9 +1380,9 @@ def registered_contract() -> dict[str, Any]:
             "correlated_bias_sensitivity": (
                 "per-factor gating is ~9x weaker than the retired single "
                 "scalar against a bias correlated across all nine event "
-                "factors: a uniform displacement up to about 9e-6 nats passes "
-                "where the scalar rule failed. This relaxation is intended "
-                "and immaterial to PPO at an importance ratio of 1 + 9e-6."
+                "factors: the compositional rule can admit correlated drift, "
+                "while each factor and the final event joint remain capped "
+                "at replay-only ratio drift 1e-4."
             ),
             "non_finite_rule": "any_non_finite_leaf_fails_closed",
         },

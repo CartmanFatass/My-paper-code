@@ -2,11 +2,16 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import replace
+from pathlib import Path
 from typing import Any
+import base64
+import functools
 import hashlib
 import json
 import math
 import random
+import shutil
+import zlib
 
 import numpy as np
 import pytest
@@ -14,6 +19,7 @@ import torch
 import torch.nn.functional as F
 
 from ha_ctse_process import event_held_commitment_link
+from scripts import run_noncalendar_commitment_benchmark_g0 as benchmark_runner
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
     EVENT_INPUT_DIM,
@@ -31,15 +37,15 @@ from ha_ctse_process.event_held_commitment_link import (
     _rng_states,
     action_distribution_tv,
     authoritative_seed_map,
-    base_primitive_logits,
+    batched_natural_and_permuted_action_tv,
     collect_trajectory,
     compare_continuations,
     factor_counts,
+    fork_opportunities_batched,
     fork_single_opportunity,
     initialize_arms,
     load_checkpoint,
     make_training_state,
-    natural_and_permuted_action_tv,
     nested_state_maximum_difference,
     optimize_update,
     parameter_and_optimizer_counts,
@@ -55,6 +61,7 @@ from ha_ctse_process.event_held_commitment_link import (
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
+    ADDED_PARAMETER_COUNT,
     A_KEEP_LCB_FLOOR,
     A_KEEP_MEAN_FLOOR,
     A_RENEW_LCB_FLOOR,
@@ -77,13 +84,22 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     NATURAL_FORK_SELECTION_COORDINATE,
     NATURAL_FORK_SELECTION_NAMESPACE,
     OPPORTUNITY_SEED,
+    PARAMETER_COUNT,
     REGISTERED_EXECUTION_BACKENDS,
     REGISTERED_TORCH_THREADS,
     REPLAY_COMPONENT_FIELDS,
-    REPLAY_COMPONENT_TOLERANCE,
+    REPLAY_EVENT_JOINT_RATIO_FIELDS,
     REPLAY_EXACT_FIELDS,
     REPLAY_JOINT_FIELDS,
     REPLAY_JOINT_RECORD_FIELDS,
+    REPLAY_LOG_COMPONENT_ATOL,
+    REPLAY_LOG_COMPONENT_FIELDS,
+    REPLAY_LOG_COMPONENT_RTOL,
+    REPLAY_LOG_RATIO_DRIFT_CAP,
+    REPLAY_RECORD_SCHEMA_VERSION,
+    REPLAY_STATE_ATOL,
+    REPLAY_STATE_FIELDS,
+    REPLAY_WORST_RECORD_FIELDS,
     SUPPORT_FLOOR,
     TRAIN_ACTION_SEED,
     TRAIN_ORDER_SEED,
@@ -99,19 +115,24 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     select_result_branch,
 )
 from scripts.run_noncalendar_commitment_benchmark_g0 import (
-    ABSENT_NATURAL_FORK_EVIDENCE,
     ARMS,
     EVALUATION_CELLS,
     EVALUATION_CELL_SCHEMA,
+    FORMAL_EVALUATION_ARTIFACT_SCHEMA,
     FORMAL_AUTHORIZATION,
+    FORMAL_TRAIN_ARTIFACT_SCHEMA,
     TRAIN_MANIFEST_SCHEMA,
+    _aggregate_analysis_core,
+    _digest_json,
     _evaluation_state,
-    _json_ready,
+    _json_default,
     _replay_record_valid,
+    _training_update_valid,
     _trajectory_episode_rows,
+    _write_json,
+    formal_path_exercise,
     merge_replay_records,
     run_smoke,
-    validate_operational_records,
 )
 
 
@@ -143,6 +164,16 @@ def registered_backend() -> str:
 @pytest.fixture(scope="module")
 def device(registered_backend: str) -> torch.device:
     return torch.device(registered_backend)
+
+
+@pytest.fixture(scope="module")
+def streamed_exercise_root(
+    device: torch.device, tmp_path_factory: pytest.TempPathFactory,
+) -> Path:
+    assert device.type == "cuda"
+    root = tmp_path_factory.mktemp("streamed_formal_path")
+    formal_path_exercise(root, device_name="cuda")
+    return root / "formal_path_exercise"
 
 
 def dense_batch_invariance_error(device: torch.device) -> float:
@@ -448,8 +479,15 @@ def test_trajectory_episode_rows_k_accounting_and_complete_spell_bins(
     trajectory = collect_trajectory(
         arm, state, device=device, episode_ids=tuple(range(16))
     )
-    rows = _trajectory_episode_rows(trajectory, arm, compute_intervention=True)
-    round_tripped = json.loads(json.dumps(_json_ready(rows)))
+    rows, reduction_counts = _trajectory_episode_rows(
+        trajectory, arm, compute_intervention=True
+    )
+    assert reduction_counts["keep"] == sum(row["keep"] for row in rows)
+    assert reduction_counts["renew"] == sum(row["renew"] for row in rows)
+    assert reduction_counts["intervention_values"] == sum(
+        len(row["intervention"]) for row in rows
+    )
+    round_tripped = json.loads(json.dumps(rows, default=_json_default))
 
     all_segments = [segment for row in round_tripped for segment in row["segments"]]
     complete_segments = [segment for segment in all_segments if not segment["censored"]]
@@ -514,7 +552,61 @@ def test_action_distribution_tv_zero_under_constant_logit_shift(
     assert torch.allclose(tv_batch, torch.zeros_like(tv_batch), atol=1e-6)
 
 
-def test_action_distribution_tv_bounded_and_realized_from_trajectory(
+def _sequential_intervention_oracle(
+    arm: Any, trajectory: Any, *, device: torch.device
+) -> tuple[torch.Tensor, torch.Tensor, float]:
+    """Independent sequential oracle for the registered TV estimand."""
+
+    values = torch.zeros_like(trajectory.active_mask, dtype=torch.float32, device=device)
+    eligible = torch.zeros_like(trajectory.active_mask, dtype=torch.bool, device=device)
+    natural_logp_error = 0.0
+    for env_index in range(len(trajectory.ledger_ids)):
+        for time in range(trajectory.time_steps):
+            active = trajectory.active_mask[time, env_index:env_index + 1].to(device)
+            keys = torch.nonzero(active[0], as_tuple=True)[0]
+            observations = trajectory.observations[time, env_index:env_index + 1].to(device)
+            order = trajectory.orders[time, env_index:env_index + 1].to(device)
+            hidden = trajectory.hidden_before[time, env_index:env_index + 1].to(device)
+            actions = trajectory.actions[time, env_index:env_index + 1].to(device)
+            prepared = arm.base.prepare_step(
+                observations=observations, active_mask=active, validated=True
+            )
+            prefix = torch.zeros((1, 3), dtype=observations.dtype, device=device)
+            logits_by_key: dict[int, torch.Tensor] = {}
+            for position in range(int(active.sum())):
+                key = int(order[0, position])
+                candidate = arm.base.actor_rnn(
+                    torch.cat((
+                        prepared.member_embeddings[:, key], prepared.context, prefix
+                    ), dim=-1),
+                    hidden[:, key],
+                )
+                logits = arm.base.action_head(torch.cat((candidate, prefix), dim=-1))[0]
+                logits_by_key[key] = logits
+                action = int(actions[0, key])
+                prefix[0, action] += 1.0
+                z = trajectory.primitive_z[time, env_index, key].to(device)
+                reconstructed = F.log_softmax(logits + arm.primitive_bias(z), dim=-1)[action]
+                stored = trajectory.old_log_probs[time, env_index, key].to(device)
+                natural_logp_error = max(
+                    natural_logp_error, float((reconstructed - stored).abs())
+                )
+            if keys.numel() < 2:
+                continue
+            z = trajectory.primitive_z[time, env_index, keys].to(device)
+            permuted = torch.roll(z, 1, 0)
+            for index, key_tensor in enumerate(keys):
+                key = int(key_tensor)
+                natural_logits = logits_by_key[key] + arm.primitive_bias(z[index])
+                permuted_logits = logits_by_key[key] + arm.primitive_bias(permuted[index])
+                values[time, env_index, key] = action_distribution_tv(
+                    natural_logits, permuted_logits
+                )
+                eligible[time, env_index, key] = True
+    return values, eligible, natural_logp_error
+
+
+def test_batched_intervention_matches_sequential_oracle_registered_shape(
     device: torch.device,
 ) -> None:
     generator = torch.Generator(device=device).manual_seed(4471)
@@ -527,73 +619,75 @@ def test_action_distribution_tv_bounded_and_realized_from_trajectory(
     arms, _, _ = initialize_arms(device)
     state = make_training_state("EHC", 0)
     trajectory = collect_trajectory(
-        arms["EHC"], state, device=device, episode_ids=(0,)
+        arms["EHC"], state, device=device, episode_ids=tuple(range(16))
     )
-    values: list[float] = []
-    for time in range(trajectory.time_steps):
-        values.extend(
-            natural_and_permuted_action_tv(
-                arms["EHC"], trajectory, env_index=0, time=time, device=device
-            )
+    batched_values, batched_eligible = batched_natural_and_permuted_action_tv(
+        arms["EHC"], trajectory, device=device
+    )
+    oracle_values, oracle_eligible, natural_logp_error = _sequential_intervention_oracle(
+        arms["EHC"], trajectory, device=device
+    )
+    assert torch.equal(batched_eligible, oracle_eligible)
+    assert torch.equal(
+        torch.nonzero(batched_eligible), torch.nonzero(oracle_eligible)
+    )
+    assert int(batched_eligible.sum()) > 0
+    assert torch.allclose(
+        batched_values[batched_eligible], oracle_values[oracle_eligible],
+        atol=2.0 * FLOAT32_UNIT_ROUNDOFF, rtol=0.0,
+    )
+    assert natural_logp_error <= 1e-6
+    assert bool((batched_values[batched_eligible] >= -1e-7).all())
+    assert bool((batched_values[batched_eligible] <= 1.0 + 1e-7).all())
+    rows, reductions = _trajectory_episode_rows(
+        trajectory, arms["EHC"], compute_intervention=True
+    )
+    kind_cpu = trajectory.event_kind.detach().cpu()
+    oracle_cpu = oracle_values.detach().cpu()
+    eligible_cpu = oracle_eligible.detach().cpu()
+    for env_index, row in enumerate(rows):
+        keep = renew = 0
+        lifecycle_opportunities = [0] * MAX_LIFECYCLES
+        intervention_values: list[float] = []
+        for time_index in range(trajectory.time_steps):
+            for key in range(MAX_LIFECYCLES):
+                kind = int(kind_cpu[time_index, env_index, key])
+                keep += int(kind == KEEP)
+                renew += int(kind == RENEW)
+                lifecycle_opportunities[key] += int(kind in (KEEP, RENEW))
+                if bool(eligible_cpu[time_index, env_index, key]):
+                    intervention_values.append(
+                        float(oracle_cpu[time_index, env_index, key])
+                    )
+        assert row["keep"] == keep
+        assert row["renew"] == renew
+        assert row["non_create"] == keep + renew
+        assert row["multi_opportunity_lifecycles"] == sum(
+            value >= 2 for value in lifecycle_opportunities
         )
-    assert values, "expected at least one step with >=2 active lifecycles"
-    assert all(-1e-6 <= value <= 1.0 + 1e-6 for value in values)
+        assert row["intervention"] == pytest.approx(
+            intervention_values, abs=2.0 * FLOAT32_UNIT_ROUNDOFF
+        )
+    assert reductions == {
+        "keep": sum(row["keep"] for row in rows),
+        "renew": sum(row["renew"] for row in rows),
+        "non_create": sum(row["non_create"] for row in rows),
+        "multi_opportunity_lifecycles": sum(
+            row["multi_opportunity_lifecycles"] for row in rows
+        ),
+        "intervention_values": sum(len(row["intervention"]) for row in rows),
+    }
 
     # OR carries no W_z treatment at all: the intervention is vacuous.
     or_state = make_training_state("OR", 0)
     or_trajectory = collect_trajectory(
         arms["OR"], or_state, device=device, episode_ids=(0,)
     )
-    assert natural_and_permuted_action_tv(
-        arms["OR"], or_trajectory, env_index=0, time=0, device=device
-    ) == []
-
-
-def test_base_primitive_logits_reconstruction_matches_recorded_natural_log_probs(
-    device: torch.device,
-) -> None:
-    """Guards acceptance item 7b: I_TV must be computed from the same
-    held-fixed state as the natural action actually executed during
-    collection. `base_primitive_logits` hand-reimplements the autoregressive
-    loop of `DirectPrimitiveARPolicy.forward_step` from a different module;
-    nothing else asserts the two stay in lockstep. If a future edit to
-    `forward_step` silently repoints `base_primitive_logits` at a policy that
-    was never executed, this test catches it: for every active key-step,
-    `log_softmax(base_primitive_logits(...)[key] + arm.primitive_bias(z))`
-    at the recorded natural action must reproduce the recorded
-    `old_log_probs` exactly (up to float tolerance)."""
-
-    arms, _, _ = initialize_arms(device)
-    arm = arms["EHC"]
-    state = make_training_state("EHC", 0)
-    trajectory = collect_trajectory(
-        arm, state, device=device, episode_ids=tuple(range(16))
+    or_values, or_eligible = batched_natural_and_permuted_action_tv(
+        arms["OR"], or_trajectory, device=device
     )
-    maximum_error = 0.0
-    checked_key_steps = 0
-    for env_index in range(len(trajectory.ledger_ids)):
-        for time in range(trajectory.time_steps):
-            active_row = trajectory.active_mask[time, env_index]
-            active_keys = torch.nonzero(active_row, as_tuple=True)[0].tolist()
-            if not active_keys:
-                continue
-            base_logits = base_primitive_logits(
-                arm, trajectory, env_index=env_index, time=time, device=device
-            )
-            for key in active_keys:
-                z = trajectory.primitive_z[time, env_index, key].to(device)
-                bias = arm.primitive_bias(z)
-                logits = base_logits[key] + bias
-                log_probability = F.log_softmax(logits, dim=-1)
-                action = int(trajectory.actions[time, env_index, key].item())
-                reconstructed = float(log_probability[action].detach().cpu())
-                stored = float(
-                    trajectory.old_log_probs[time, env_index, key].detach().cpu()
-                )
-                maximum_error = max(maximum_error, abs(reconstructed - stored))
-                checked_key_steps += 1
-    assert checked_key_steps > 0
-    assert maximum_error <= 1e-6
+    assert not bool(or_eligible.any())
+    assert bool(or_values.eq(0).all())
 
 
 def _corrupt_tensor(tensor: torch.Tensor, index: tuple[int, ...]) -> torch.Tensor:
@@ -616,9 +710,13 @@ def test_semantic_replay_corruption_negatives(
     errors = report["errors"]
     assert report["passed"] and not report["failures"]
     assert all(errors[name] == 0.0 for name in REPLAY_EXACT_FIELDS)
+    assert all(errors[name] <= REPLAY_STATE_ATOL for name in REPLAY_STATE_FIELDS)
     assert all(
-        errors[name] <= REPLAY_COMPONENT_TOLERANCE
-        for name in REPLAY_COMPONENT_FIELDS
+        report["likelihood_components"][name]["absolute_error"]
+        <= report["likelihood_components"][name]["mixed_bound"]
+        and report["likelihood_components"][name]["ratio_drift"]
+        <= REPLAY_LOG_RATIO_DRIFT_CAP
+        for name in REPLAY_LOG_COMPONENT_FIELDS
     )
     assert all(
         report["joints"][name]["excess"] <= 0.0
@@ -1010,6 +1108,170 @@ def test_fork_single_opportunity_reproduces_the_natural_branch(
     # the global Python/NumPy/CPU/CUDA snapshot moved.
     assert _nested_equal(owned_before, _rng_states(state))
     assert runtime_rng_equal(global_before, runtime_rng_snapshot())
+
+
+def test_stochastic_stage2_fork_replays_natural_branch_and_rng(
+    device: torch.device,
+) -> None:
+    arms, _, _ = initialize_arms(device)
+    state = make_training_state("EHC", 0, profile="held_out")
+    origin = deepcopy(state)
+    trajectory = collect_trajectory(
+        arms["EHC"], state, device=device,
+        episode_ids=tuple(range(16)), deterministic=False,
+        profile="held_out",
+    )
+    coordinate = torch.nonzero(
+        trajectory.event_kind.eq(KEEP) | trajectory.event_kind.eq(RENEW),
+        as_tuple=False,
+    )[0].detach().cpu().tolist()
+    diagnostics: dict[str, Any] = {}
+    result = fork_single_opportunity(
+        arms["EHC"], trajectory,
+        env_index=coordinate[1], time=coordinate[0], key=coordinate[2],
+        device=device, state=origin, deterministic=False,
+        diagnostics=diagnostics,
+    )
+    assert diagnostics["branch_rng_equal"] is True
+    assert diagnostics["prefix_errors"]["discrete_mismatch"] == 0.0
+    assert diagnostics["prefix_errors"]["continuous"] == 0.0
+    assert diagnostics["natural_branch_errors"]["discrete_mismatch"] == 0.0
+    assert diagnostics["natural_branch_errors"]["continuous"] == 0.0
+    assert result["natural_action"] == diagnostics["natural_action"]
+
+
+def test_stage2_natural_continuation_rejects_an_independent_row_script_perturbation(
+    device: torch.device, monkeypatch,
+) -> None:
+    arms, _, _ = initialize_arms(device)
+    state = make_training_state("EHC", 0, profile="held_out")
+    origin = deepcopy(state)
+    trajectory = collect_trajectory(
+        arms["EHC"], state, device=device, episode_ids=tuple(range(16)),
+        deterministic=False, profile="held_out",
+    )
+    time_index, env_index, key = torch.nonzero(
+        trajectory.event_kind.eq(KEEP) | trajectory.event_kind.eq(RENEW),
+        as_tuple=False,
+    )[0].detach().cpu().tolist()
+    pristine = event_held_commitment_link._fork_row_scripts
+
+    def shortened(*args, **kwargs):
+        streams, end_states, material = pristine(*args, **kwargs)
+        streams["primitive"].values = streams["primitive"].values[:-1]
+        return streams, end_states, material
+
+    monkeypatch.setattr(
+        event_held_commitment_link, "_fork_row_scripts", shortened
+    )
+    with pytest.raises(RuntimeError, match="stream exhausted"):
+        fork_opportunities_batched(
+            arms["EHC"], [{
+                "fork_id": "perturbed-row-script", "replicate": 0,
+                "batch_index": 0, "time": time_index,
+                "env_index": env_index, "key": key,
+                "natural_action": (
+                    "KEEP" if int(trajectory.event_kind[time_index, env_index, key])
+                    == KEEP else "RENEW"
+                ),
+                "trajectory": trajectory, "origin_state": origin,
+                "expected_end_rng_states": (
+                    event_held_commitment_link.owned_rng_states(state)
+                ),
+            }], device=device,
+        )
+
+
+def test_batched_stage2_matches_sequential_stochastic_oracle(
+    device: torch.device,
+) -> None:
+    arms, _, _ = initialize_arms(device)
+    state = make_training_state("EHC", 0, profile="held_out")
+    origin = deepcopy(state)
+    trajectory = collect_trajectory(
+        arms["EHC"], state, device=device,
+        episode_ids=tuple(range(16)), deterministic=False,
+        profile="held_out",
+    )
+    eligible = torch.nonzero(
+        trajectory.event_kind.eq(KEEP) | trajectory.event_kind.eq(RENEW),
+        as_tuple=False,
+    ).detach().cpu().tolist()
+    coordinates = []
+    for expected_kind in (KEEP, RENEW):
+        coordinates.append(next(
+            tuple(int(value) for value in row) for row in eligible
+            if int(trajectory.event_kind[tuple(row)]) == expected_kind
+        ))
+    opportunities = []
+    for index, (time_index, env_index, key) in enumerate(coordinates):
+        natural_kind = int(trajectory.event_kind[time_index, env_index, key])
+        opportunities.append({
+            "fork_id": f"direct-{index}",
+            "replicate": 0,
+            "batch_index": 0,
+            "time": time_index,
+            "env_index": env_index,
+            "key": key,
+            "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
+            "trajectory": trajectory,
+            "origin_state": origin,
+        })
+    batched = fork_opportunities_batched(
+        arms["EHC"], opportunities, device=device, debug=True
+    )
+    assert len(batched) == len(opportunities)
+    for opportunity, batch_result in zip(opportunities, batched, strict=True):
+        diagnostics: dict[str, Any] = {}
+        sequential = fork_single_opportunity(
+            arms["EHC"], trajectory,
+            env_index=opportunity["env_index"], time=opportunity["time"],
+            key=opportunity["key"], device=device, state=origin,
+            deterministic=False, diagnostics=diagnostics,
+        )
+        assert batch_result["keep_utility"] == sequential["keep_utility"]
+        assert batch_result["renew_utility"] == sequential["renew_utility"]
+        assert batch_result["natural_action"] == sequential["natural_action"]
+        for action in ("KEEP", "RENEW"):
+            batch_branch = batch_result["branches"][action]
+            batch_trajectory = batch_branch["trajectory"]
+            batch_index = int(batch_branch["branch_index"])
+            sequential_trajectory = diagnostics["branch_trajectories"][action]
+            sequential_index = int(opportunity["env_index"])
+            for name in event_held_commitment_link._FORK_DISCRETE_FIELDS:
+                assert torch.equal(
+                    getattr(batch_trajectory, name)[:, batch_index].detach().cpu(),
+                    getattr(sequential_trajectory, name)[:, sequential_index].detach().cpu(),
+                ), (action, name)
+            maximum = 0.0
+            field_errors: dict[str, float] = {}
+            for name in event_held_commitment_link._FORK_CONTINUOUS_FIELDS:
+                difference = (
+                    getattr(batch_trajectory, name)[:, batch_index].detach().cpu()
+                    - getattr(sequential_trajectory, name)[:, sequential_index].detach().cpu()
+                )
+                maximum = max(
+                    maximum,
+                    float(difference.abs().max()) if difference.numel() else 0.0,
+                )
+                field_errors[name] = (
+                    float(difference.abs().max()) if difference.numel() else 0.0
+                )
+            assert maximum <= 1e-7, (
+                action, sorted(field_errors.items(), key=lambda value: value[1], reverse=True)
+            )
+            assert (
+                batch_trajectory.segments[batch_index]
+                == sequential_trajectory.segments[sequential_index]
+            )
+            assert (
+                batch_trajectory.outcomes[batch_index]
+                == sequential_trajectory.outcomes[sequential_index]
+            )
+            assert _nested_equal(
+                batch_result["end_rng_states"],
+                diagnostics["branch_rng_states"][action],
+            )
 
 
 def _held_out_fork_setup(
@@ -1456,12 +1718,12 @@ def _tensor_sha256(tensor: torch.Tensor) -> str:
 # pin does not perturb a CUDA collection.
 PINNED_COLLECTOR_DIGESTS = {
     "cuda": (
-        "93456fbf72531b9deb203d86bcb1c012db4d072160450c9e26e333ebd0eb5fd3",
-        "2c0a71be5a455a3f1260149f5dac4527f6deabaa1ad9de6cfe3267fa8158a57f",
+        "891f0914729c09633a57c3557a36b9066b66c4cbffdbee299783a25bc551d047",
+        "3376441c78954199d112ab9b591e0b29464c2842dcb706ccfd8d88c718eae639",
     ),
     "cpu": (
-        "3a9e4983bd78cee34375521c9b5df995d6785dde0df28a227dc7e75a77f50256",
-        "8dc39258eb5e12b3ac833305d8357696d9561366218c447b1d235a5004eb06b3",
+        "59752b3f61f2a80a5e1def2c586832d295b471947c64bdfd63ff8e7544146268",
+        "185453bc48be61a775332bb1a29e6d3d5692945db19c47d46fee405ae03faaf9",
     ),
 }
 
@@ -1526,6 +1788,17 @@ def test_checkpoint_strict_continuation_and_registered_backend_smoke(
     assert update["primitive_replays"] == 4
     assert update["event_head_replays"] == 4
     assert update["packed_trajectory_count"] == 1
+    expected_manifest = benchmark_runner._expected_optimizer_manifest("EHC")
+    assert update["ownership_manifest"] == expected_manifest
+    for group in ("base", "event"):
+        for index, record in enumerate(update[f"{group}_passes"]):
+            valid, summary = benchmark_runner._optimizer_pass_valid(
+                record, group=group, pass_index=index + 1,
+                step_before=index,
+                manifest=expected_manifest["groups"][group],
+            )
+            assert valid, (group, index, record)
+            assert summary["nonfinite_values"] == 0
     checkpoint = tmp_path / "origin.pt"
     save_checkpoint(
         checkpoint, arm=arms["EHC"], base_optimizer=base_optimizers["EHC"],
@@ -1688,7 +1961,23 @@ def _synthetic_replay_record() -> dict[str, object]:
             "rows": 1280.0,
         }
 
+    def worst(dimensions: int) -> dict[str, object]:
+        stored = np.float32(0.0)
+        neighbor = np.nextafter(stored, np.float32(np.inf), dtype=np.float32)
+        return {
+            "stored_value": 0.0,
+            "replayed_value": 0.0,
+            "absolute_error": 0.0,
+            "mixed_bound": REPLAY_LOG_COMPONENT_ATOL,
+            "ratio_drift": 0.0,
+            "ratio_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+            "float32_ulp_at_max_magnitude": float(neighbor),
+            "ulp_distance": 0,
+            "coordinate": [0] * dimensions,
+        }
+
     return {
+        "schema_version": REPLAY_RECORD_SCHEMA_VERSION,
         "errors": {
             name: 0.0
             for name in (
@@ -1699,17 +1988,35 @@ def _synthetic_replay_record() -> dict[str, object]:
             "primitive_joint": joint(3.0, 12.0),
             "event_joint": joint(float(EVENT_JOINT_FACTOR_COUNT), 16.0),
         },
-        "component_tolerance": REPLAY_COMPONENT_TOLERANCE,
+        "likelihood_components": {
+            "primitive_component": worst(3),
+            "categorical_component": worst(3),
+            "mark_component": worst(4),
+        },
+        "event_joint_ratio": {
+            "stored_value": 0.0,
+            "replayed_value": 0.0,
+            "ratio_drift": 0.0,
+            "ratio_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+            "coordinate": [0, 0, 0],
+        },
+        "log_component_atol": REPLAY_LOG_COMPONENT_ATOL,
+        "log_component_rtol": REPLAY_LOG_COMPONENT_RTOL,
+        "ratio_drift_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+        "state_atol": REPLAY_STATE_ATOL,
         "failures": [],
         "passed": True,
     }
 
 
-def _synthetic_operational_records() -> tuple[
+@functools.lru_cache(maxsize=1)
+def _synthetic_operational_records(
+    training_updates: int = benchmark_runner.FORMAL_UPDATES,
+) -> tuple[
     dict[str, object], dict[tuple[int, str, str], dict[str, object]]
 ]:
     contract = registered_contract()
-    arms = {}
+    arms: dict[str, dict[str, object]] = {}
     for arm in ARMS:
         checkpoint = f"replicate_0/{arm}/update_250.pt"
         arms[arm] = {
@@ -1719,37 +2026,417 @@ def _synthetic_operational_records() -> tuple[
             "checkpoint_origin": "update_250.pt",
             "completed_update": 250,
             "next_episode_id": 4000,
-            "base_steps": 1000,
-            "event_steps": 0 if arm == "OR" else 1000,
+            "exposure": {"base": 1000, "event": 0 if arm == "OR" else 1000},
             "seed_map": authoritative_seed_map("train", 0),
-            "checkpoint_resume": True,
+            "parameter_counts": benchmark_runner._expected_parameter_counts(arm),
+            "roundtrip_errors": {
+                "model": 0.0, "base_optimizer": 0.0,
+                "event_optimizer": 0.0, "state": 0.0,
+            },
+            "checkpoint_sha256": "0" * 64,
         }
+    replay = _synthetic_replay_record()
+    lifecycle = {
+        "create": 1, "keep": 1, "renew": 1,
+        "categorical": 2, "mark": 2,
+        "invalid_segment_lifetimes": 0, "segment_count": 2,
+    }
+    finite = {
+        name: 0 for name in (
+            "old_log_probs", "old_values", "hidden_after", "prefix_counts",
+            "event_inputs", "event_old_cat_logp",
+            "event_old_mark_component_logp", "event_old_joint_logp",
+        )
+    }
+    ledger_audit_cache: dict[
+        tuple[str, int, int, tuple[int, ...]],
+        tuple[list[Any], dict[str, list[dict[str, Any]]]],
+    ] = {}
+    schedule_evidence_cache: dict[
+        tuple[Any, ...],
+        tuple[dict[str, list[dict[str, Any]]], dict[str, Any]],
+    ] = {}
+    def schedules_for(
+        counts: dict[str, int], *, arm: str, profile: str,
+        seed_map: dict[str, int], deterministic: bool,
+        episode_ids: list[int], start_time: int = 0,
+    ) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
+        schedule_key = (
+            arm == "OR", profile, bool(deterministic), tuple(episode_ids),
+            int(start_time), tuple(sorted(counts.items())),
+        )
+        if schedule_key in schedule_evidence_cache:
+            return schedule_evidence_cache[schedule_key]
+        cache_key = (
+            profile, int(seed_map["ledger"]), int(seed_map["order"]),
+            tuple(episode_ids),
+        )
+        if cache_key not in ledger_audit_cache:
+            ledger_trace = {name: [] for name in RNG_NAMES}
+            ledgers = [
+                make_noncalendar_ledger(
+                    episode_id, profile=profile, task_seed=seed_map["ledger"],
+                    order_seed=seed_map["order"], audit_trace=ledger_trace,
+                )
+                for episode_id in episode_ids
+            ]
+            ledger_audit_cache[cache_key] = (ledgers, ledger_trace)
+        ledgers, ledger_trace = ledger_audit_cache[cache_key]
+        schedules = deepcopy(ledger_trace)
+        request_count = sum(counts[name] for name in ("create", "keep", "renew"))
+        request_rows: list[list[int]] = []
+        request_evidence = []
+        for time in range(HORIZON):
+            environments = []
+            for env_index, (episode_id, ledger) in enumerate(
+                zip(episode_ids, ledgers, strict=True)
+            ):
+                frontier = []
+                if arm != "OR" and time == start_time and env_index == 0:
+                    keys = sorted(
+                        range(MAX_LIFECYCLES),
+                        key=lambda key: float(
+                            ledger.direct_frontier_priorities[time, key]
+                        ),
+                    )[:request_count]
+                    for request_index, key in enumerate(keys):
+                        q_before = -1 if request_index == 0 else 0
+                        request_kind = CREATE if q_before < 0 else KEEP
+                        frontier.append({
+                            "key": key,
+                            "priority": float(
+                                ledger.direct_frontier_priorities[time, key]
+                            ),
+                            "q_before": q_before,
+                        })
+                        request_rows.append([env_index, key, request_kind])
+                environments.append({
+                    "env_index": env_index, "episode_id": episode_id,
+                    "frontier": frontier,
+                })
+            request_evidence.append({"time": time, "environments": environments})
+        coordinates = {
+            "time": start_time,
+            "requests": request_rows,
+        }
+        if request_count:
+            schedules["opportunity"] = [{
+                "stream": "opportunity",
+                "operation": "choice_opportunity", "dtype": "int64",
+                "shape": [request_count], "coordinates": coordinates,
+            }]
+            if not deterministic:
+                schedules["event"] = [{
+                    "stream": "event",
+                    "operation": "random", "dtype": "float64",
+                    "shape": [request_count], "coordinates": coordinates,
+                }]
+                schedules["mark"] = [{
+                    "stream": "mark",
+                    "operation": "standard_normal", "dtype": "float64",
+                    "shape": [request_count, MARK_DIM], "coordinates": coordinates,
+                }]
+        if not deterministic:
+            schedules["primitive"] = [
+                {
+                    "stream": "primitive",
+                    "operation": "random", "dtype": "float32",
+                    "shape": [16, MAX_LIFECYCLES],
+                    "coordinates": {
+                        "time": time, "episode_ids": episode_ids,
+                        "frontier_orders": [
+                            [value["key"] for value in environment["frontier"]]
+                            for environment in request_evidence[time]["environments"]
+                        ],
+                    },
+                }
+                for time in range(HORIZON)
+            ]
+        result = schedules, {
+            "streams": schedules,
+            "request_evidence": request_evidence,
+            "ledgers": [benchmark_runner._ledger_record(ledger) for ledger in ledgers],
+        }
+        schedule_evidence_cache[schedule_key] = result
+        return result
+
+    def binding_family(
+        context: dict[str, Any], seed_map: dict[str, int],
+        starts: dict[str, Any], schedules: dict[str, list[dict[str, Any]]],
+    ) -> tuple[dict[str, Any], dict[str, Any], dict[str, str]]:
+        ends = {
+            name: event_held_commitment_link.replay_rng_schedule_end_state(
+                starts[name], schedules[name], seed=seed_map[name]
+            )
+            for name in RNG_NAMES
+        }
+        bindings = {}
+        for name in RNG_NAMES:
+            binding = event_held_commitment_link.make_rng_binding(
+                context=context, stream=name, seed=seed_map[name],
+                start_state=starts[name], draw_schedule=schedules[name],
+                expected_end_state=ends[name],
+            )
+            binding["draw_schedule"] = schedules[name]
+            binding["binding_digest"] = _digest_json({
+                key: value for key, value in binding.items()
+                if key != "binding_digest"
+            })
+            bindings[name] = binding
+        return bindings, ends, {
+            name: _digest_json(ends[name]) for name in RNG_NAMES
+        }
+
+    optimizer_parameters_cache: dict[
+        tuple[str, str], list[dict[str, Any]]
+    ] = {}
+    def optimizer_pass(
+        arm: str, group: str, pass_index: int, step_before: int,
+    ) -> dict[str, Any]:
+        manifest = benchmark_runner._expected_optimizer_manifest(arm)["groups"][group]
+        cache_key = (arm, group)
+        if cache_key not in optimizer_parameters_cache:
+            parameters = []
+            for owner in manifest:
+                all_zero = arm == "DUM" and owner["name"] == "W_z.weight"
+                array = np.zeros(tuple(owner["shape"]), dtype="<f4")
+                if not all_zero:
+                    array.reshape(-1)[0] = 1.0
+                raw = array.tobytes(order="C")
+                encoded = base64.b64encode(
+                    zlib.compress(raw, level=9)
+                ).decode("ascii")
+                parameters.append({
+                    **owner,
+                    "dtype": "<f4",
+                    "gradient_present": True,
+                    "nonfinite_count": 0,
+                    "zero_count": (
+                        owner["numel"] if all_zero else owner["numel"] - 1
+                    ),
+                    "squared_l2": 0.0 if all_zero else 1.0,
+                    "maxabs": 0.0 if all_zero else 1.0,
+                    "preclip_gradient_digest": hashlib.sha256(raw).hexdigest(),
+                    "gradient_payload": {
+                        "encoding": "zlib9_base64", "dtype": "<f4",
+                        "shape": list(owner["shape"]),
+                        "uncompressed_nbytes": len(raw), "data": encoded,
+                    },
+                })
+            optimizer_parameters_cache[cache_key] = parameters
+        parameters = optimizer_parameters_cache[cache_key]
+        norm = math.sqrt(sum(float(value["squared_l2"]) for value in parameters))
+        components = (
+            {"policy_loss": 0.0, "value_loss": 0.0, "primitive_entropy": 0.0}
+            if group == "base" else
+            {"event_policy_loss": 0.0, "categorical_entropy": 0.0}
+        )
+        unsigned = {
+            "schema_version": benchmark_runner.OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
+            "group": group, "pass_index": pass_index,
+            "step_before": step_before, "step_after": step_before + 1,
+            "raw_loss": 0.0, "loss_components": components,
+            "unclipped_norm": norm,
+            "clip_coefficient": min(1.0, 0.5 / (norm + 1e-6)),
+            "parameters": parameters,
+            "payload_raw_bytes": sum(
+                value["gradient_payload"]["uncompressed_nbytes"]
+                for value in parameters
+            ),
+            "payload_encoded_bytes": sum(
+                len(value["gradient_payload"]["data"].encode("ascii"))
+                for value in parameters
+            ),
+        }
+        return unsigned | {"record_digest": _digest_json(unsigned)}
+    pair_tensor = {
+        "left_digest": "a", "right_digest": "a",
+        "mismatch_count": 0, "maximum_absolute_error": 0.0,
+    }
+    updates = []
+    train_rng_states = {
+        arm: benchmark_runner._initial_rng_states(
+            authoritative_seed_map("train", 0)
+        )
+        for arm in ARMS
+    }
+    for update in range(1, int(training_updates) + 1):
+        arm_evidence = {}
+        for arm in ARMS:
+            event_steps = 0 if arm == "OR" else 4
+            arm_lifecycle = ({name: 0 for name in lifecycle} if arm == "OR" else dict(lifecycle))
+            train_seed_map = authoritative_seed_map("train", 0)
+            schedules, rng_evidence = schedules_for(
+                arm_lifecycle, arm=arm, profile="train",
+                seed_map=train_seed_map, deterministic=False,
+                episode_ids=list(range(
+                    (update - 1) * 16, update * 16
+                )),
+            )
+            bindings, train_rng_states[arm], owned_digests = binding_family(
+                {
+                    "domain": "training", "mode": "formal_train",
+                    "formal": True, "replicate": 0, "arm": arm,
+                    "update": update,
+                },
+                train_seed_map, train_rng_states[arm], schedules,
+            )
+            manifest = benchmark_runner._expected_optimizer_manifest(arm)
+            base_passes = [
+                optimizer_pass(arm, "base", index + 1, 4 * (update - 1) + index)
+                for index in range(4)
+            ]
+            event_passes = [
+                optimizer_pass(arm, "event", index + 1, 4 * (update - 1) + index)
+                for index in range(event_steps)
+            ]
+            arm_evidence[arm] = {
+                "arm": arm,
+                "seed_map": authoritative_seed_map("train", 0),
+                "owned_stream_digests": owned_digests,
+                "rng_bindings": bindings,
+                "rng_evidence": rng_evidence,
+                "replay": deepcopy(replay),
+                "lifecycle_counts": arm_lifecycle,
+                "finite_checks": dict(finite),
+                "exposure": {
+                    "before": {"base": 4 * (update - 1), "event": event_steps * (update - 1)},
+                    "delta": {"base": 4, "event": event_steps},
+                    "after": {"base": 4 * update, "event": event_steps * update},
+                },
+                "optimizer": {
+                    "base_steps": 4, "event_steps": event_steps,
+                    "primitive_replays": 4, "event_head_replays": event_steps,
+                    "packed_trajectory_count": 1,
+                    "base_non_none_gradients": [18 if arm == "OR" else 19] * 4,
+                    "base_zero_gradients": [1 if arm == "DUM" else 0] * 4,
+                    "base_nonfinite_gradient_values": [0] * 4,
+                    "base_nonfinite_loss_values": [0] * 4,
+                    "base_nonfinite_norm_values": [0] * 4,
+                    "event_non_none_gradients": [4] * event_steps,
+                    "event_zero_gradients": [0] * event_steps,
+                    "event_nonfinite_gradient_values": [0] * event_steps,
+                    "event_nonfinite_loss_values": [0] * event_steps,
+                    "event_nonfinite_norm_values": [0] * event_steps,
+                    "ownership_manifest": manifest,
+                    "base_passes": base_passes,
+                    "event_passes": event_passes,
+                    "evidence_storage": {
+                        "raw_bytes": sum(
+                            value["payload_raw_bytes"]
+                            for value in base_passes + event_passes
+                        ),
+                        "encoded_bytes": sum(
+                            value["payload_encoded_bytes"]
+                            for value in base_passes + event_passes
+                        ),
+                        "formal_scale_projected_encoded_bytes": sum(
+                            value["payload_encoded_bytes"]
+                            for value in base_passes + event_passes
+                        ) * benchmark_runner.FORMAL_UPDATES,
+                    },
+                },
+                "parameter_counts": benchmark_runner._expected_parameter_counts(arm),
+            }
+        updates.append({
+            "update": update,
+            "arms": arm_evidence,
+            "paired": {
+                "or_dum_tensors": {
+                    name: dict(pair_tensor) for name in (
+                        "observations", "active_mask", "orders", "actions",
+                        "old_log_probs", "old_values", "hidden_before",
+                        "hidden_after", "prefix_counts", "rewards", "terminal",
+                    )
+                },
+                "or_dum_rng": {
+                    name: {
+                        "left": arm_evidence["OR"]["owned_stream_digests"][name],
+                        "right": arm_evidence["DUM"]["owned_stream_digests"][name],
+                    }
+                    for name in ("ledger", "order", "primitive")
+                },
+                "dum_ehc_rng": {
+                    name: {
+                        "left": arm_evidence["DUM"]["owned_stream_digests"][name],
+                        "right": arm_evidence["EHC"]["owned_stream_digests"][name],
+                    }
+                    for name in RNG_NAMES
+                },
+                "base_noop_error": 0.0,
+            },
+        })
     training = {
+        "artifact_schema": FORMAL_TRAIN_ARTIFACT_SCHEMA,
         "schema_version": TRAIN_MANIFEST_SCHEMA,
+        "formal": True,
         "contract": contract,
         "mode": "formal_train",
+        "status": "COMPLETE",
+        "branch": "FORMAL_TRAIN_COMPLETE",
         "replicates": {
             "0": {
-                "operational": {
-                    "no_op": True,
-                    "probability_replay": True,
-                    "lifecycle": True,
-                    "finiteness": True,
-                    "rng_pairing": True,
-                    "checkpoint_resume": True,
-                    "exposure": True,
-                },
-                "updates": [{} for _ in range(250)],
+                "operational": True,
+                "updates": updates,
                 "arms": arms,
             }
         },
     }
     cells = {}
-    episodes = [{"episode_id": value} for value in range(256)]
+    episodes = [
+        {
+            "episode_id": value, "utility": 0.0, "keep": 0, "renew": 0,
+            "non_create": 0, "multi_opportunity_lifecycles": 0,
+            "segments": [], "intervention": [],
+        }
+        for value in range(256)
+    ]
     for arm in ARMS:
         for profile, deterministic, cell in EVALUATION_CELLS:
+            arm_lifecycle = ({name: 0 for name in lifecycle} if arm == "OR" else dict(lifecycle))
+            eval_rng_states = benchmark_runner._initial_rng_states(
+                authoritative_seed_map(profile, 0)
+            )
+            batch_records = []
+            for batch in range(16):
+                eval_seed_map = authoritative_seed_map(profile, 0)
+                schedules, rng_evidence = schedules_for(
+                    arm_lifecycle, arm=arm, profile=profile,
+                    seed_map=eval_seed_map, deterministic=deterministic,
+                    episode_ids=list(range(batch * 16, (batch + 1) * 16)),
+                )
+                bindings, eval_rng_states, owned_digests = binding_family(
+                    {
+                        "domain": "evaluation", "mode": "formal_evaluate",
+                        "formal": True, "replicate": 0, "arm": arm,
+                        "cell": cell, "batch": batch,
+                    },
+                    eval_seed_map, eval_rng_states, schedules,
+                )
+                batch_records.append({
+                    "batch_index": batch,
+                    "episode_ids": list(range(batch * 16, (batch + 1) * 16)),
+                    "replay": deepcopy(replay),
+                    "lifecycle_counts": dict(arm_lifecycle),
+                    "finite_checks": dict(finite),
+                    "seed_map": authoritative_seed_map(profile, 0),
+                    "owned_stream_digests": owned_digests,
+                    "rng_bindings": bindings,
+                    "rng_evidence": rng_evidence,
+                    "reduction_counts": {
+                        "keep": 0, "renew": 0, "non_create": 0,
+                        "multi_opportunity_lifecycles": 0,
+                        "intervention_values": 0,
+                    },
+                    "checkpoint_origin": "update_250.pt",
+                    "episodes_digest": _digest_json(
+                        episodes[batch * 16:(batch + 1) * 16]
+                    ),
+                })
             cells[(0, arm, cell)] = {
+                "artifact_schema": FORMAL_EVALUATION_ARTIFACT_SCHEMA,
                 "schema_version": EVALUATION_CELL_SCHEMA,
+                "formal": True,
                 "contract": contract,
                 "arm": arm,
                 "replicate": 0,
@@ -1758,31 +2445,211 @@ def _synthetic_operational_records() -> tuple[
                 "mode": "deterministic" if deterministic else "stochastic",
                 "checkpoint": arms[arm]["checkpoint"],
                 "checkpoint_origin": "update_250.pt",
-                "counts": {"episodes": 256, "horizon": 80},
-                "seed_map": authoritative_seed_map(profile, 0),
-                "replay": _synthetic_replay_record(),
-                "operational": {
-                    "probability_replay": True,
-                    "lifecycle": True,
-                    "rng": True,
-                    "checkpoint": True,
-                    "finite": True,
-                },
+                "counts": {"episodes": 256, "horizon": 80, "batch_size": 16, "batches": 16},
+                "batches": batch_records,
+                "natural_fork": None,
+                "operational": True,
                 "episodes": deepcopy(episodes),
             }
+            if arm == "EHC" and cell == "held_out_stochastic":
+                eligible_keys = {
+                    action: [
+                        [0, index, index & 1, 1, index % 8, 0, 0, action]
+                        for index in range(NATURAL_FORK_QUOTA_PER_ACTION)
+                    ]
+                    for action in ("KEEP", "RENEW")
+                }
+                fork_rows = []
+                for action in ("KEEP", "RENEW"):
+                    for key_record in eligible_keys[action]:
+                        episode_id = 2 * key_record[1] + key_record[2]
+                        batch_index = episode_id // 16
+                        env_index = episode_id % 16
+                        cell_bindings = cells[(0, arm, cell)]["batches"][
+                            batch_index
+                        ]["rng_bindings"]
+                        fork_starts = {}
+                        fork_schedules = {}
+                        for name in RNG_NAMES:
+                            full = cell_bindings[name]["draw_schedule"]
+                            prefix = [
+                                entry for entry in full
+                                if int(entry["coordinates"].get("time", -1))
+                                < key_record[3]
+                            ]
+                            fork_starts[name] = (
+                                event_held_commitment_link.replay_rng_schedule_end_state(
+                                    cell_bindings[name]["start_state"], prefix,
+                                    seed=authoritative_seed_map("held_out", 0)[name],
+                                )
+                            )
+                            fork_schedules[name] = [
+                                entry for entry in full
+                                if int(entry["coordinates"].get("time", -1))
+                                >= key_record[3]
+                            ]
+                        fork_id = _digest_json(key_record)
+                        branch_bindings = {}
+                        stream_consumption = {}
+                        end_digests = None
+                        for branch_action in ("KEEP", "RENEW"):
+                            family, _ends, digests = binding_family(
+                                {
+                                    "domain": "stage2", "mode": "formal_evaluate",
+                                    "formal": True, "replicate": 0, "arm": "EHC",
+                                    "cell": "held_out_stochastic",
+                                    "batch": batch_index, "fork_id": fork_id,
+                                    "episode_id": episode_id,
+                                    "time": key_record[3], "key": key_record[4],
+                                    "membership_epoch": key_record[5],
+                                    "segment_id": key_record[6],
+                                    "natural_action": action,
+                                    "branch_action": branch_action,
+                                },
+                                authoritative_seed_map("held_out", 0),
+                                fork_starts, fork_schedules,
+                            )
+                            branch_bindings[branch_action] = family
+                            stream_consumption[branch_action] = {
+                                name: benchmark_runner._expected_fork_stream_consumption(
+                                    stream=name,
+                                    start_state=fork_starts[name],
+                                    schedule=fork_schedules[name],
+                                    seed=authoritative_seed_map("held_out", 0)[name],
+                                    env_index=env_index,
+                                )
+                                for name in benchmark_runner.FORK_STREAM_NAMES
+                            }
+                            end_digests = digests
+                        fork_rows.append({
+                            "replicate": key_record[0],
+                            "base_episode_id": key_record[1],
+                            "episode_id": episode_id,
+                            "sign_parity": key_record[2],
+                            "time": key_record[3],
+                            "key": key_record[4],
+                            "membership_epoch": key_record[5],
+                            "segment_id": key_record[6],
+                            "natural_action": action,
+                            "batch_index": batch_index,
+                            "env_index": env_index,
+                            "fork_id": fork_id,
+                            "keep_utility": 0.0,
+                            "renew_utility": 0.0,
+                            "natural_utility": 0.0,
+                            "advantage": 0.0,
+                            "natural_errors": {
+                                "discrete_mismatch": 0,
+                                "continuous_error": 0.0,
+                                "segment_equal": True,
+                                "outcome_equal": True,
+                            },
+                            "rng_bindings": branch_bindings,
+                            "stream_consumption": stream_consumption,
+                            "end_rng_digests": end_digests,
+                        })
+                cells[(0, arm, cell)]["natural_fork"] = {
+                    "schema": "event_held_commitment_link_g0.natural_fork.v5",
+                    "replicate": 0,
+                    "quota_per_action": NATURAL_FORK_QUOTA_PER_ACTION,
+                    "eligible_keys": eligible_keys,
+                    "selected_keys": deepcopy(eligible_keys),
+                    "execution": {
+                        "engine": "registered_width_batched_v1",
+                        "registered_width": 16,
+                        "selected_pairs": 2 * NATURAL_FORK_QUOTA_PER_ACTION,
+                        "collector_calls": math.ceil(
+                            2 * NATURAL_FORK_QUOTA_PER_ACTION / 8
+                        ),
+                    },
+                    "telemetry": {
+                        "elapsed_seconds": 1.0,
+                        "pairs_per_second": float(
+                            2 * NATURAL_FORK_QUOTA_PER_ACTION
+                        ),
+                    },
+                    "fork_rows": fork_rows,
+                }
     return training, cells
 
 
 def test_fail_closed_operational_manifest_negatives() -> None:
     training, cells = _synthetic_operational_records()
-    valid, errors = validate_operational_records(
-        training, cells, expected_replicates=(0,)
+    clean_cell = cells[(0, "EHC", "iid_deterministic")]
+    valid, _episode_ids, _rng_digests = benchmark_runner._evaluation_cell_valid(
+        clean_cell, replicate=0, arm="EHC", profile="iid",
+        deterministic=True, cell="iid_deterministic", formal=True,
+        mode="formal_evaluate", episodes_per_cell=256,
+        checkpoint_origin="update_250.pt",
+        checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+        ledger_cache={},
     )
-    assert valid and not errors
-    corrupted_cell = deepcopy(cells)
-    corrupted_cell[(0, "EHC", "iid_deterministic")]["profile"] = "held_out"
-    assert not validate_operational_records(
-        training, corrupted_cell, expected_replicates=(0,)
+    assert valid
+    for key in ("schema_version", "replicate"):
+        original = clean_cell[key]
+        for replacement in (True, float(original), str(original)):
+            mutated = deepcopy(clean_cell)
+            mutated[key] = replacement
+            assert not benchmark_runner._evaluation_cell_valid(
+                mutated, replicate=0, arm="EHC", profile="iid",
+                deterministic=True, cell="iid_deterministic", formal=True,
+                mode="formal_evaluate", episodes_per_cell=256,
+                checkpoint_origin="update_250.pt",
+                checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+                ledger_cache={},
+            )[0], (key, replacement)
+    for key in ("episodes", "horizon", "batch_size", "batches"):
+        original = clean_cell["counts"][key]
+        for replacement in (True, float(original), str(original)):
+            mutated = deepcopy(clean_cell)
+            mutated["counts"][key] = replacement
+            assert not benchmark_runner._evaluation_cell_valid(
+                mutated, replicate=0, arm="EHC", profile="iid",
+                deterministic=True, cell="iid_deterministic", formal=True,
+                mode="formal_evaluate", episodes_per_cell=256,
+                checkpoint_origin="update_250.pt",
+                checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+                ledger_cache={},
+            )[0], (key, replacement)
+    for replacement in (True, 0.0, "0"):
+        mutated = deepcopy(clean_cell)
+        mutated["batches"][0]["batch_index"] = replacement
+        assert not benchmark_runner._evaluation_cell_valid(
+            mutated, replicate=0, arm="EHC", profile="iid",
+            deterministic=True, cell="iid_deterministic", formal=True,
+            mode="formal_evaluate", episodes_per_cell=256,
+            checkpoint_origin="update_250.pt",
+            checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+            ledger_cache={},
+        )[0], ("batch_index", replacement)
+    for replacement in (True, 0.0, "0"):
+        mutated = deepcopy(clean_cell)
+        mutated["episodes"][0]["episode_id"] = replacement
+        mutated["batches"][0]["episode_ids"][0] = replacement
+        mutated["batches"][0]["episodes_digest"] = _digest_json(
+            mutated["episodes"][:16]
+        )
+        assert not benchmark_runner._evaluation_cell_valid(
+            mutated, replicate=0, arm="EHC", profile="iid",
+            deterministic=True, cell="iid_deterministic", formal=True,
+            mode="formal_evaluate", episodes_per_cell=256,
+            checkpoint_origin="update_250.pt",
+            checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+            ledger_cache={},
+        )[0], ("episode_id_rehashed", replacement)
+    update_record = deepcopy(training["replicates"]["0"]["updates"][0])
+    for replacement in (True, 1.0, "1"):
+        mutated = deepcopy(update_record)
+        mutated["update"] = replacement
+        assert not _training_update_valid(mutated, update=1, replicate=0)
+    corrupted_cell = clean_cell | {"profile": "held_out"}
+    assert not benchmark_runner._evaluation_cell_valid(
+        corrupted_cell, replicate=0, arm="EHC", profile="iid",
+        deterministic=True, cell="iid_deterministic", formal=True,
+        mode="formal_evaluate", episodes_per_cell=256,
+        checkpoint_origin="update_250.pt",
+        checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+        ledger_cache={},
     )[0]
     # The replay record is conclusion-bearing evidence, so every way of
     # degrading it must fail closed: the retired single-scalar shape, a
@@ -1798,7 +2665,11 @@ def test_fail_closed_operational_manifest_negatives() -> None:
             }
         }),
         ("component_over_tolerance", lambda record: record | {
-            "errors": record["errors"] | {"mark_component": 2e-6}
+            "likelihood_components": record["likelihood_components"] | {
+                "mark_component": record["likelihood_components"]["mark_component"]
+                | {"replayed_value": 2e-6, "absolute_error": 2e-6,
+                   "ratio_drift": math.expm1(2e-6)}
+            }
         }),
         ("joint_over_bound", lambda record: record | {
             "joints": record["joints"] | {
@@ -1814,29 +2685,547 @@ def test_fail_closed_operational_manifest_negatives() -> None:
         ("unsupported_pass", lambda record: record | {
             "errors": record["errors"] | {"mask_mismatch": 1.0}
         }),
-        ("wrong_tolerance", lambda record: record | {"component_tolerance": 1e-5}),
+        ("wrong_tolerance", lambda record: record | {"log_component_rtol": 1e-5}),
     ):
-        degraded = deepcopy(cells)
-        target = degraded[(0, "EHC", "iid_stochastic")]
-        target["replay"] = mutation(deepcopy(target["replay"]))
-        assert not _replay_record_valid(target["replay"]), label
-        assert not validate_operational_records(
-            training, degraded, expected_replicates=(0,)
-        )[0], label
+        degraded = mutation(deepcopy(
+            cells[(0, "EHC", "iid_stochastic")]["batches"][0]["replay"]
+        ))
+        assert not _replay_record_valid(degraded), label
     for family, mutation in (
-        ("no_op", lambda value: value["replicates"]["0"]["operational"].__setitem__("no_op", False)),
-        ("exposure", lambda value: value["replicates"]["0"]["arms"]["EHC"].__setitem__("base_steps", 999)),
-        ("resume", lambda value: value["replicates"]["0"]["arms"]["EHC"].__setitem__("checkpoint_resume", False)),
+        ("no_op", lambda value: value["replicates"]["0"]["updates"][0]["paired"].__setitem__("base_noop_error", 1.0)),
+        ("exposure", lambda value: value["replicates"]["0"]["arms"]["EHC"]["exposure"].__setitem__("base", 999)),
+        ("resume", lambda value: value["replicates"]["0"]["arms"]["EHC"]["roundtrip_errors"].__setitem__("state", 1.0)),
     ):
-        corrupted = deepcopy(training)
-        mutation(corrupted)
-        operational_valid = validate_operational_records(
-            corrupted, cells, expected_replicates=(0,)
-        )[0]
+        if family == "no_op":
+            update = deepcopy(training["replicates"]["0"]["updates"][0])
+            wrapper = {"replicates": {"0": {"updates": [update]}}}
+            mutation(wrapper)
+            operational_valid = _training_update_valid(
+                update, update=1, replicate=0
+            )
+        else:
+            arm_entry = deepcopy(training["replicates"]["0"]["arms"]["EHC"])
+            wrapper = {"replicates": {"0": {"arms": {"EHC": arm_entry}}}}
+            mutation(wrapper)
+            operational_valid = (
+                arm_entry["exposure"] == {"base": 1000, "event": 1000}
+                and all(
+                    float(value) <= 1e-7
+                    for value in arm_entry["roundtrip_errors"].values()
+                )
+            )
         assert not operational_valid, family
         assert select_result_branch(
             **(_branch_inputs() | {"operational_valid": operational_valid})
         ) == "INVALID_OPERATIONAL"
+
+
+def test_atomic_publication_and_operational_failure_cleanup(
+    device: torch.device, tmp_path: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    json_path = tmp_path / "atomic.json"
+    pristine_replace = benchmark_runner.os.replace
+    monkeypatch.setattr(
+        benchmark_runner.os,
+        "replace",
+        lambda _source, _target: (_ for _ in ()).throw(OSError("json publish")),
+    )
+    with pytest.raises(OSError, match="json publish"):
+        _write_json(json_path, {"complete": True})
+    assert not json_path.exists()
+    assert not list(tmp_path.glob(".atomic.json.*.tmp"))
+    monkeypatch.setattr(benchmark_runner.os, "replace", pristine_replace)
+
+    arms, base_optimizers, event_optimizers = initialize_arms(device)
+    checkpoint = tmp_path / "atomic.pt"
+    pristine_checkpoint_replace = event_held_commitment_link.os.replace
+    monkeypatch.setattr(
+        event_held_commitment_link.os,
+        "replace",
+        lambda _source, _target: (_ for _ in ()).throw(OSError("checkpoint publish")),
+    )
+    with pytest.raises(OSError, match="checkpoint publish"):
+        save_checkpoint(
+            checkpoint,
+            arm=arms["EHC"],
+            base_optimizer=base_optimizers["EHC"],
+            event_optimizer=event_optimizers["EHC"],
+            state=make_training_state("EHC", 0),
+        )
+    assert not checkpoint.exists()
+    assert not list(tmp_path.glob(".atomic.pt.*.tmp"))
+    monkeypatch.setattr(
+        event_held_commitment_link.os, "replace", pristine_checkpoint_replace
+    )
+
+    monkeypatch.setattr(
+        benchmark_runner,
+        "_training_core",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("injected")),
+    )
+    with pytest.raises(RuntimeError, match="injected"):
+        formal_path_exercise(tmp_path / "exercise", device_name="cuda")
+    exercise_root = tmp_path / "exercise" / "formal_path_exercise"
+    terminal = json.loads((exercise_root / "manifest.json").read_text())
+    assert terminal["formal"] is False
+    assert terminal["status"] == terminal["branch"] == "INVALID_OPERATIONAL"
+    failure_path, failure = benchmark_runner._verified_json_reference(
+        exercise_root, terminal["failure_artifact"],
+        identity_keys=frozenset({"artifact"}),
+    )
+    assert failure_path.is_file()
+    assert failure["exception_type"] == "RuntimeError"
+    assert failure["last_complete_evidence"] == {}
+
+
+def test_direct_atomic_json_streaming_and_incremental_reference_publication(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = {
+        "nested": [{"array": np.arange(8, dtype=np.int64)}],
+        "tensor": torch.arange(4, dtype=torch.float32),
+    }
+    observed: list[bool] = []
+    pristine_dump = benchmark_runner.json.dump
+
+    def observing_dump(value: Any, *args: Any, **kwargs: Any) -> Any:
+        observed.append(value is source)
+        return pristine_dump(value, *args, **kwargs)
+
+    monkeypatch.setattr(benchmark_runner.json, "dump", observing_dump)
+    direct_path = tmp_path / "direct.json"
+    _write_json(direct_path, source)
+    assert observed == [True]
+    with direct_path.open("r", encoding="utf-8") as handle:
+        assert json.load(handle) == {
+            "nested": [{"array": list(range(8))}],
+            "tensor": [0.0, 1.0, 2.0, 3.0],
+        }
+    assert "_json_ready" not in benchmark_runner.__dict__
+
+    train_root = {
+        "identity": "synthetic_streaming", "status": "IN_PROGRESS",
+        "progress": {"completed_updates": 0, "total_updates": 2},
+        "replicate_indexes": [],
+    }
+    train_root_path = tmp_path / "train_manifest.json"
+    indexes_path = tmp_path / "train" / "replicate_0" / "indexes"
+    evidence_path = tmp_path / "train" / "replicate_0" / "evidence"
+    index = {
+        "replicate": 0, "generation": 0, "updates": [],
+        "progress": {"completed_updates": 0, "total_updates": 2},
+    }
+    snapshots = []
+    generation_bytes: list[bytes] = []
+    for update in (1, 2):
+        shard_path = evidence_path / f"update_{update}.json"
+        _write_json(shard_path, {"update": update, "verbose": [update] * 32})
+        index["updates"].append(
+            benchmark_runner._artifact_reference(
+                tmp_path, shard_path, update=update,
+            )
+        )
+        index["progress"]["completed_updates"] = update
+        index["generation"] = update
+        index_path = indexes_path / f"index_{update}.json"
+        _write_json(index_path, index)
+        generation_bytes.append(index_path.read_bytes())
+        train_root["replicate_indexes"] = [
+            benchmark_runner._artifact_reference(
+                tmp_path, index_path, replicate=0, generation=update,
+            )
+        ]
+        train_root["progress"]["completed_updates"] = update
+        _write_json(train_root_path, train_root)
+        with train_root_path.open("r", encoding="utf-8") as handle:
+            snapshots.append(json.load(handle))
+    assert [value["progress"]["completed_updates"] for value in snapshots] == [1, 2]
+    assert all("updates" not in value and "evidence" not in value for value in snapshots)
+    assert [value["update"] for value in index["updates"]] == [1, 2]
+    assert (indexes_path / "index_1.json").read_bytes() == generation_bytes[0]
+    assert not (indexes_path.parent / "index.json").exists()
+
+    # Publishing the next immutable generation without the root swap leaves
+    # the prior root/index authoritative and byte-identical.
+    orphan = deepcopy(index)
+    orphan["generation"] = 3
+    orphan_path = indexes_path / "index_3.json"
+    before_interrupted_swap = train_root_path.read_bytes()
+    proposed_root = deepcopy(train_root)
+    pristine_write = benchmark_runner._write_json
+
+    def interrupt_root_swap(path: Path, value: Any) -> None:
+        if path == train_root_path:
+            raise RuntimeError("injected after generation before root swap")
+        pristine_write(path, value)
+
+    monkeypatch.setattr(
+        benchmark_runner, "_write_json", interrupt_root_swap,
+    )
+    with pytest.raises(RuntimeError, match="before root swap"):
+        benchmark_runner._write_json(orphan_path, orphan)
+        proposed_root["replicate_indexes"] = [
+            benchmark_runner._artifact_reference(
+                tmp_path, orphan_path, replicate=0, generation=3,
+            )
+        ]
+        benchmark_runner._write_json(train_root_path, proposed_root)
+    monkeypatch.setattr(benchmark_runner, "_write_json", pristine_write)
+    assert train_root_path.read_bytes() == before_interrupted_swap
+    authoritative = json.loads(train_root_path.read_text(encoding="utf-8"))
+    assert authoritative["replicate_indexes"][0]["generation"] == 2
+    assert authoritative["replicate_indexes"][0]["path"].endswith(
+        "indexes/index_2.json"
+    )
+    assert orphan_path.as_posix() not in json.dumps(authoritative)
+
+    evaluation_root = {"progress": {"completed_cells": 0, "total_cells": 2}, "cells": []}
+    evaluation_root_path = tmp_path / "evaluation_manifest.json"
+    for number, cell in enumerate(("iid_deterministic", "iid_stochastic"), start=1):
+        cell_path = tmp_path / "evaluation" / "replicate_0" / "OR" / f"{cell}.json"
+        _write_json(cell_path, {"cell": cell, "verbose": [number] * 32})
+        evaluation_root["cells"].append(
+            benchmark_runner._artifact_reference(
+                tmp_path, cell_path, replicate=0, arm="OR", cell=cell,
+            )
+        )
+        evaluation_root["progress"]["completed_cells"] = number
+        _write_json(evaluation_root_path, evaluation_root)
+    assert "verbose" not in json.dumps(evaluation_root)
+    assert not list(tmp_path.rglob("*.tmp"))
+
+
+def test_streaming_reference_fail_closed_variants_and_order_contract(
+    tmp_path: Path,
+) -> None:
+    artifact = tmp_path / "evidence" / "update_1.json"
+    _write_json(artifact, {"payload": list(range(64))})
+    reference = benchmark_runner._artifact_reference(tmp_path, artifact, update=1)
+    path, payload = benchmark_runner._verified_json_reference(
+        tmp_path, reference, identity_keys=frozenset({"update"}),
+    )
+    assert path == artifact.resolve() and payload["payload"][-1] == 63
+    assert benchmark_runner._ordered_reference_values(
+        [{"update": 1}, {"update": 2}], "update", [1, 2]
+    )
+    for values in (
+        [], [{"update": 1}], [{"update": 1}, {"update": 1}],
+        [{"update": 2}, {"update": 1}],
+        [{"update": 1}, {"update": 2}, {"update": 3}],
+    ):
+        assert not benchmark_runner._ordered_reference_values(
+            values, "update", [1, 2]
+        )
+
+    for label, mutation in (
+        ("size", lambda value: value.__setitem__("byte_count", value["byte_count"] + 1)),
+        ("hash", lambda value: value.__setitem__("sha256", "f" * 64)),
+        ("escape", lambda value: value.__setitem__("path", "../escape.json")),
+        ("absolute", lambda value: value.__setitem__("path", str(artifact.resolve()))),
+    ):
+        corrupted = deepcopy(reference)
+        mutation(corrupted)
+        with pytest.raises(ValueError):
+            benchmark_runner._verified_json_reference(
+                tmp_path, corrupted, identity_keys=frozenset({"update"}),
+            )
+
+    for key, replacements in (
+        ("byte_count", (True, float(reference["byte_count"]), str(reference["byte_count"]))),
+        ("update", (True, 1.0, "1")),
+        ("sha256", (reference["sha256"].upper(),)),
+    ):
+        for replacement in replacements:
+            corrupted = deepcopy(reference)
+            corrupted[key] = replacement
+            with pytest.raises(ValueError, match="type mismatch"):
+                benchmark_runner._verified_json_reference(
+                    tmp_path, corrupted, identity_keys=frozenset({"update"}),
+                )
+    generated_reference = benchmark_runner._artifact_reference(
+        tmp_path, artifact, replicate=0, generation=1,
+    )
+    for key in ("replicate", "generation"):
+        original = generated_reference[key]
+        for replacement in (True, float(original), str(original)):
+            corrupted = deepcopy(generated_reference)
+            corrupted[key] = replacement
+            with pytest.raises(ValueError, match="type mismatch"):
+                benchmark_runner._verified_json_reference(
+                    tmp_path, corrupted,
+                    identity_keys=frozenset({"replicate", "generation"}),
+                )
+
+    pristine_bytes = artifact.read_bytes()
+    artifact.write_bytes(pristine_bytes[:-5])
+    with pytest.raises(ValueError, match="byte count"):
+        benchmark_runner._verified_json_reference(
+            tmp_path, reference, identity_keys=frozenset({"update"}),
+        )
+    artifact.write_bytes(b"{corrupt")
+    corrupt_reference = benchmark_runner._artifact_reference(
+        tmp_path, artifact, update=1,
+    )
+    with pytest.raises(json.JSONDecodeError):
+        benchmark_runner._verified_json_reference(
+            tmp_path, corrupt_reference, identity_keys=frozenset({"update"}),
+        )
+    artifact.unlink()
+    with pytest.raises(ValueError, match="missing"):
+        benchmark_runner._verified_json_reference(
+            tmp_path, reference, identity_keys=frozenset({"update"}),
+        )
+
+
+def test_streaming_failure_preserves_indexed_refs_and_ignores_orphan(
+    tmp_path: Path,
+) -> None:
+    indexed_path = tmp_path / "train" / "replicate_0" / "evidence" / "update_1.json"
+    _write_json(indexed_path, {"update": 1, "accepted": True})
+    indexed = benchmark_runner._artifact_reference(
+        tmp_path, indexed_path, update=1,
+    )
+    index_path = indexed_path.parent.parent / "indexes" / "index_1.json"
+    _write_json(index_path, {
+        "replicate": 0, "generation": 1, "updates": [indexed],
+    })
+    index_reference = benchmark_runner._artifact_reference(
+        tmp_path, index_path, replicate=0, generation=1,
+    )
+    manifest_path = tmp_path / "train_manifest.json"
+    root = {
+        "artifact_schema": FORMAL_TRAIN_ARTIFACT_SCHEMA,
+        "formal": True, "mode": "formal_train", "status": "IN_PROGRESS",
+        "branch": "IN_PROGRESS", "replicate_indexes": [index_reference],
+    }
+    _write_json(manifest_path, root)
+
+    orphan_path = indexed_path.parent / "update_2.json"
+    _write_json(orphan_path, {"update": 2, "accepted": False})
+    terminal = benchmark_runner._publish_operational_failure(
+        tmp_path, mode="formal_train", formal=True, stage="training",
+        replicate=0, arm=None, cell=None, batch=None,
+        exception=RuntimeError("injected after shard before index"),
+        completed_paths=[indexed["path"]], last_evidence=indexed,
+        manifest_path=manifest_path,
+    )
+    assert terminal["replicate_indexes"] == [index_reference]
+    assert terminal["status"] == terminal["branch"] == "INVALID_OPERATIONAL"
+    valid, errors = benchmark_runner._operational_failure_manifest_valid(
+        tmp_path, manifest_path,
+    )
+    assert valid and not errors
+    with index_path.open("r", encoding="utf-8") as handle:
+        assert json.load(handle)["updates"] == [indexed]
+    assert orphan_path.as_posix() not in json.dumps(terminal)
+    failure_path = benchmark_runner._resolve_artifact_path(
+        tmp_path, terminal["failure_artifact"]["path"],
+    )
+    failure = json.loads(failure_path.read_text(encoding="utf-8"))
+    failure["last_complete_evidence"] = benchmark_runner._artifact_reference(
+        tmp_path, orphan_path, update=2,
+    )
+    _write_json(failure_path, failure)
+    terminal["failure_artifact"] = benchmark_runner._artifact_reference(
+        tmp_path, failure_path, artifact="operational_failure",
+    )
+    _write_json(manifest_path, terminal)
+    valid, errors = benchmark_runner._operational_failure_manifest_valid(
+        tmp_path, manifest_path,
+    )
+    assert not valid and "failure_last_reference_not_indexed" in errors
+    assert not list(tmp_path.rglob("*.tmp"))
+
+
+@pytest.mark.parametrize(
+    ("interruption", "expected_batch"),
+    (("mid_cell", 0), ("before_cell_publication", None)),
+)
+def test_evaluation_failure_keeps_only_prior_indexed_cell_reference(
+    streamed_exercise_root: Path, tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch, interruption: str,
+    expected_batch: int | None,
+) -> None:
+    output_root = tmp_path / interruption
+    shutil.copytree(streamed_exercise_root / "train", output_root / "train")
+    completed_paths: list[str] = []
+    last_evidence: dict[str, Any] = {}
+    context: dict[str, Any] = {
+        "replicate": None, "arm": None, "cell": None, "batch": None,
+    }
+    if interruption == "mid_cell":
+        pristine_rows = benchmark_runner._trajectory_episode_rows
+        calls = 0
+
+        def interrupted_rows(*args: Any, **kwargs: Any) -> Any:
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise RuntimeError("injected mid-cell")
+            return pristine_rows(*args, **kwargs)
+
+        monkeypatch.setattr(
+            benchmark_runner, "_trajectory_episode_rows", interrupted_rows,
+        )
+    else:
+        pristine_write = benchmark_runner._write_json
+
+        def interrupted_write(path: Path, value: Any) -> None:
+            if path.name == "iid_stochastic.json":
+                raise RuntimeError("injected before cell publication")
+            pristine_write(path, value)
+
+        monkeypatch.setattr(benchmark_runner, "_write_json", interrupted_write)
+    manifest_path = output_root / "evaluation_manifest.json"
+    with pytest.raises(RuntimeError, match="injected") as raised:
+        benchmark_runner._evaluation_core(
+            output_root, device=torch.device("cuda"), replicates=(0,),
+            episodes_per_cell=16, formal=False,
+            artifact_schema=benchmark_runner.EXERCISE_EVALUATION_ARTIFACT_SCHEMA,
+            checkpoint_name="update_1.pt", completed_paths=completed_paths,
+            last_evidence=last_evidence, failure_context=context,
+        )
+    terminal = benchmark_runner._publish_operational_failure(
+        output_root, mode="formal_path_exercise_evaluate", formal=False,
+        stage="evaluation", replicate=context["replicate"], arm=context["arm"],
+        cell=context["cell"], batch=context["batch"],
+        exception=raised.value, completed_paths=completed_paths,
+        last_evidence=last_evidence, manifest_path=manifest_path,
+    )
+    assert terminal["status"] == terminal["branch"] == "INVALID_OPERATIONAL"
+    assert len(terminal["cells"]) == 1
+    prior = terminal["cells"][0]
+    _failure_path, failure = benchmark_runner._verified_json_reference(
+        output_root, terminal["failure_artifact"],
+        identity_keys=frozenset({"artifact"}),
+    )
+    assert failure["last_complete_evidence"] == prior
+    assert not {"batch_index", "episode_ids", "replay"} & set(
+        failure["last_complete_evidence"]
+    )
+    assert failure["replicate"] == 0
+    assert failure["arm"] == "OR"
+    assert failure["cell"] == "iid_stochastic"
+    assert failure["batch"] == expected_batch
+    valid, errors = benchmark_runner._operational_failure_manifest_valid(
+        output_root, manifest_path,
+    )
+    assert valid and not errors
+    assert not list(output_root.rglob("*.tmp"))
+
+
+def test_streamed_exercise_validates_one_verbose_artifact_at_a_time(
+    streamed_exercise_root: Path,
+) -> None:
+    live: set[Path] = set()
+    maximum_live = 0
+
+    def observer(event: str, path: Path) -> None:
+        nonlocal maximum_live
+        if event == "loaded":
+            live.add(path)
+            maximum_live = max(maximum_live, len(live))
+        else:
+            live.remove(path)
+
+    valid, errors, compact = benchmark_runner._validate_streamed_operational_records(
+        streamed_exercise_root, expected_replicates=(0,), expected_updates=1,
+        episodes_per_cell=16, formal=False, artifact_observer=observer,
+    )
+    assert valid and not errors
+    assert maximum_live == 1 and not live
+    assert set(compact["episodes"]) == {(0, arm) for arm in ARMS}
+    assert set(compact["fork_rows"]) == {0}
+    with (streamed_exercise_root / "train_manifest.json").open(
+        "r", encoding="utf-8"
+    ) as handle:
+        train_root = json.load(handle)
+    with (streamed_exercise_root / "evaluation_manifest.json").open(
+        "r", encoding="utf-8"
+    ) as handle:
+        evaluation_root = json.load(handle)
+    assert "updates" not in train_root and "replicates" not in train_root
+    assert "artifacts" not in evaluation_root
+    assert all("batches" not in reference and "episodes" not in reference for reference in evaluation_root["cells"])
+    assert not list(streamed_exercise_root.rglob("*.tmp"))
+    with pytest.raises(ValueError, match="rejects non-formal training"):
+        _aggregate_analysis_core(
+            streamed_exercise_root, authorization=FORMAL_AUTHORIZATION,
+        )
+
+
+def test_stage2_timing_is_descriptive_only_and_execution_is_strict() -> None:
+    _training, cells = _synthetic_operational_records(1)
+    cell = cells[(0, "EHC", "held_out_stochastic")]
+    record = deepcopy(cell["natural_fork"])
+
+    def valid(value: dict[str, Any]) -> bool:
+        return benchmark_runner._natural_fork_valid(
+            value, replicate=0, episodes=cell["episodes"],
+            cell_batches=cell["batches"],
+        )
+
+    assert valid(record)
+    for telemetry in (
+        None, {}, {"elapsed_seconds": float("nan")},
+        {"elapsed_seconds": -10.0, "pairs_per_second": float("inf")},
+    ):
+        mutated = deepcopy(record)
+        if telemetry is None:
+            mutated.pop("telemetry", None)
+        else:
+            mutated["telemetry"] = telemetry
+        assert valid(mutated)
+    for key, value in (
+        ("engine", "sequential"), ("registered_width", 8),
+        ("selected_pairs", 1), ("collector_calls", 1),
+    ):
+        mutated = deepcopy(record)
+        mutated["execution"][key] = value
+        assert not valid(mutated), key
+    for key in ("registered_width", "selected_pairs", "collector_calls"):
+        original = record["execution"][key]
+        for replacement in (True, float(original), str(original)):
+            mutated = deepcopy(record)
+            mutated["execution"][key] = replacement
+            assert not valid(mutated), (key, replacement)
+    for key in ("replicate", "quota_per_action"):
+        original = record[key]
+        for replacement in (True, float(original), str(original)):
+            mutated = deepcopy(record)
+            mutated[key] = replacement
+            assert not valid(mutated), (key, replacement)
+
+
+def test_formal_validator_rejects_exercise_identity(tmp_path: Any) -> None:
+    training, cells = _synthetic_operational_records()
+    with pytest.raises(ValueError, match="monolithic"):
+        benchmark_runner._reject_monolithic_operational_records(
+            training, cells, expected_replicates=(0,),
+        )
+    exercise_training = dict(training)
+    exercise_training["artifact_schema"] = benchmark_runner.EXERCISE_TRAIN_ARTIFACT_SCHEMA
+    exercise_training["formal"] = False
+    exercise_training["mode"] = "formal_path_exercise_train"
+    exercise_training["branch"] = "FORMAL_PATH_EXERCISE_TRAIN_COMPLETE"
+    assert exercise_training["artifact_schema"] != FORMAL_TRAIN_ARTIFACT_SCHEMA
+    assert exercise_training["formal"] is False
+    _write_json(tmp_path / "train_manifest.json", exercise_training)
+    with pytest.raises(ValueError, match="rejects non-formal training"):
+        _aggregate_analysis_core(tmp_path, authorization=FORMAL_AUTHORIZATION)
+
+    copied = cells[(0, "EHC", "held_out_stochastic")] | {
+        "artifact_schema": benchmark_runner.EXERCISE_EVALUATION_ARTIFACT_SCHEMA,
+        "formal": False,
+    }
+    assert not benchmark_runner._evaluation_cell_valid(
+        copied, replicate=0, arm="EHC", profile="held_out",
+        deterministic=False, cell="held_out_stochastic", formal=True,
+        mode="formal_evaluate", episodes_per_cell=256,
+        checkpoint_origin="update_250.pt",
+        checkpoint_path=training["replicates"]["0"]["arms"]["EHC"]["checkpoint"],
+        ledger_cache={},
+    )[0]
 
 
 def _branch_inputs() -> dict[str, object]:
@@ -2190,18 +3579,344 @@ def test_natural_fork_quota_shortfall_is_non_identifiable_and_unpoolable() -> No
     ) == "BENCHMARK_NON_IDENTIFIABLE"
 
 
-def test_absent_natural_fork_evidence_fails_closed() -> None:
-    """Until the analyzer is wired, the runner reports the C evidence as
-    absent, and absent evidence must resolve to non-identifiable rather than
-    let an unevidenced run reach a supported verdict."""
+def test_stage2_natural_fork_evidence_is_recomputed_and_tamper_closed() -> None:
+    training, cells = _synthetic_operational_records(1)
+    clean_update = training["replicates"]["0"]["updates"][0]
+    assert _training_update_valid(clean_update, update=1, replicate=0)
+    clean_cell = cells[(0, "EHC", "held_out_stochastic")]
+    assert benchmark_runner._natural_fork_valid(
+        clean_cell["natural_fork"], replicate=0,
+        episodes=clean_cell["episodes"], cell_batches=clean_cell["batches"],
+    )
 
-    assert set(ABSENT_NATURAL_FORK_EVIDENCE) == {
-        "natural_keep_rows_by_replicate", "natural_renew_rows_by_replicate",
-        "a_keep_ci", "a_renew_ci", "a_keep_mean", "a_renew_mean",
+    target_cell = cells[(0, "EHC", "held_out_stochastic")]
+    fork = deepcopy(target_cell["natural_fork"])
+    fork["selected_keys"]["KEEP"] = fork["selected_keys"]["KEEP"][:-1]
+    assert not benchmark_runner._natural_fork_valid(
+        fork, replicate=0,
+        episodes=target_cell["episodes"], cell_batches=target_cell["batches"],
+    )
+
+    wrong_advantage = deepcopy(target_cell["natural_fork"])
+    wrong_advantage["fork_rows"][0]["advantage"] = 1.0
+    assert not benchmark_runner._natural_fork_valid(
+        wrong_advantage, replicate=0,
+        episodes=target_cell["episodes"], cell_batches=target_cell["batches"],
+    )
+
+    wrong_seed = deepcopy(training["replicates"]["0"]["updates"][0])
+    wrong_seed["arms"]["EHC"]["seed_map"]["mark"] += 1
+    assert not _training_update_valid(
+        wrong_seed, update=1, replicate=0
+    )
+
+    for label, mutation in (
+        (
+            "training_rng_binding",
+            lambda train, _cells: train["replicates"]["0"]["updates"][0]["arms"]
+            ["EHC"]["owned_stream_digests"].__setitem__("mark", "e" * 64),
+        ),
+        (
+            "training_rng_format",
+            lambda train, _cells: train["replicates"]["0"]["updates"][0]["paired"]
+            ["dum_ehc_rng"]["mark"].__setitem__("right", "not-a-digest"),
+        ),
+        (
+            "evaluation_rng_binding",
+            lambda _train, values: values[(0, "EHC", "iid_stochastic")]["batches"]
+            [0]["owned_stream_digests"].__setitem__("mark", "e" * 64),
+        ),
+        (
+            "optimizer_nonfinite_gradient",
+            lambda train, _cells: train["replicates"]["0"]["updates"][0]["arms"]
+            ["EHC"]["optimizer"]["event_nonfinite_gradient_values"].__setitem__(0, 1),
+        ),
+        (
+            "optimizer_ownership",
+            lambda train, _cells: train["replicates"]["0"]["updates"][0]["arms"]
+            ["EHC"]["parameter_counts"].__setitem__("event_optimizer", 1583),
+        ),
+    ):
+        update_index = 0
+        corrupted_training = {
+            "replicates": {"0": {
+                "updates": [
+                    deepcopy(training["replicates"]["0"]["updates"][index])
+                    for index in range(update_index + 1)
+                ],
+                "arms": deepcopy(training["replicates"]["0"]["arms"]),
+            }}
+        }
+        corrupted_cells = {
+            (0, "EHC", "iid_stochastic"): {
+                "batches": [deepcopy(
+                    cells[(0, "EHC", "iid_stochastic")]["batches"][0]
+                )]
+            }
+        }
+        mutation(corrupted_training, corrupted_cells)
+        if label == "evaluation_rng_binding":
+            batch = corrupted_cells[(0, "EHC", "iid_stochastic")]["batches"][0]
+            valid_binding, ends = benchmark_runner._rng_bindings_valid(
+                batch["rng_bindings"],
+                expected_context={
+                    "domain": "evaluation", "mode": "formal_evaluate",
+                    "formal": True, "replicate": 0, "arm": "EHC",
+                    "cell": "iid_stochastic", "batch": 0,
+                },
+                seed_map=authoritative_seed_map("iid", 0),
+                expected_starts=benchmark_runner._initial_rng_states(
+                    authoritative_seed_map("iid", 0)
+                ),
+            )
+            assert valid_binding
+            assert not all(
+                batch["owned_stream_digests"][name] == _digest_json(ends[name])
+                for name in RNG_NAMES
+            ), label
+        else:
+            update = corrupted_training["replicates"]["0"]["updates"][update_index]
+            rng_starts = None
+            if update_index:
+                previous = training["replicates"]["0"]["updates"][0]
+                rng_starts = {
+                    arm: {
+                        name: previous["arms"][arm]["rng_bindings"][name]["end_state"]
+                        for name in RNG_NAMES
+                    }
+                    for arm in ARMS
+                }
+            assert not _training_update_valid(
+                update, update=update_index + 1, replicate=0,
+                rng_starts=rng_starts,
+            ), label
+
+    # The collector interface itself carries no factual-reference escape
+    # hatch: the natural continuation must execute the row script.
+    assert "event_references" not in collect_trajectory.__code__.co_varnames
+    assert "event_references" not in Path(
+        event_held_commitment_link.__file__
+    ).read_text(encoding="utf-8")
+
+    def assert_update_rejected(mutator) -> None:
+        corrupted = deepcopy(clean_update)
+        mutator(corrupted)
+        assert not _training_update_valid(
+            corrupted, update=1, replicate=0
+        )
+
+    def resign_binding(binding: dict[str, Any]) -> None:
+        unsigned = {
+            key: deepcopy(value) for key, value in binding.items()
+            if key != "binding_digest"
+        }
+        binding["binding_digest"] = _digest_json(unsigned)
+
+    def mutate_seed(update: dict[str, Any]) -> None:
+        binding = update["arms"]["EHC"]["rng_bindings"]["mark"]
+        binding["seed"] += 1
+        resign_binding(binding)
+
+    def mutate_context(update: dict[str, Any]) -> None:
+        binding = update["arms"]["EHC"]["rng_bindings"]["mark"]
+        binding["context"]["update"] = 2
+        resign_binding(binding)
+
+    def mutate_schedule_shape(update: dict[str, Any]) -> None:
+        evidence = update["arms"]["EHC"]
+        binding = evidence["rng_bindings"]["event"]
+        schedule = deepcopy(binding["draw_schedule"])
+        schedule[0]["shape"] = [1, schedule[0]["shape"][0]]
+        evidence["rng_bindings"]["event"] = (
+            event_held_commitment_link.make_rng_binding(
+                context=binding["context"], stream="event",
+                seed=binding["seed"], start_state=binding["start_state"],
+                draw_schedule=schedule,
+                expected_end_state=binding["end_state"],
+            )
+        )
+
+    def mutate_start_state(update: dict[str, Any]) -> None:
+        evidence = update["arms"]["EHC"]
+        binding = evidence["rng_bindings"]["event"]
+        start = deepcopy(binding["start_state"])
+        start["state"]["state"] += 1
+        schedule = binding["draw_schedule"]
+        end = event_held_commitment_link.replay_rng_schedule_end_state(
+            start, schedule, seed=binding["seed"]
+        )
+        evidence["rng_bindings"]["event"] = (
+            event_held_commitment_link.make_rng_binding(
+                context=binding["context"], stream="event", seed=binding["seed"],
+                start_state=start, draw_schedule=schedule,
+                expected_end_state=end,
+            )
+        )
+        evidence["owned_stream_digests"]["event"] = _digest_json(end)
+
+    def mutate_draw_digest(update: dict[str, Any]) -> None:
+        binding = update["arms"]["EHC"]["rng_bindings"]["mark"]
+        binding["draw_bytes_digest"] = "f" * 64
+        resign_binding(binding)
+
+    def mutate_all_convenience_digests(update: dict[str, Any]) -> None:
+        for arm in ("DUM", "EHC"):
+            update["arms"][arm]["owned_stream_digests"]["mark"] = "e" * 64
+        update["paired"]["dum_ehc_rng"]["mark"] = {
+            "left": "e" * 64, "right": "e" * 64,
+        }
+
+    def mutate_request_coordinates(update: dict[str, Any]) -> None:
+        """Re-sign all schedule envelopes while the call-site trace stays fixed."""
+
+        evidence = update["arms"]["EHC"]
+        for name in ("event", "mark", "opportunity"):
+            binding = evidence["rng_bindings"][name]
+            schedule = deepcopy(binding["draw_schedule"])
+            schedule[0]["coordinates"]["requests"][0][1] = (
+                int(schedule[0]["coordinates"]["requests"][0][1]) + 1
+            ) % MAX_LIFECYCLES
+            rebuilt = event_held_commitment_link.make_rng_binding(
+                context=binding["context"], stream=name, seed=binding["seed"],
+                start_state=binding["start_state"], draw_schedule=schedule,
+                expected_end_state=binding["end_state"],
+            )
+            evidence["rng_bindings"][name] = rebuilt
+            evidence["owned_stream_digests"][name] = _digest_json(
+                rebuilt["end_state"]
+            )
+        update["paired"]["dum_ehc_rng"] = {
+            name: {
+                "left": update["arms"]["DUM"]["owned_stream_digests"][name],
+                "right": evidence["owned_stream_digests"][name],
+            }
+            for name in RNG_NAMES
+        }
+
+    for mutator in (
+        mutate_seed, mutate_context, mutate_schedule_shape,
+        mutate_start_state, mutate_draw_digest, mutate_all_convenience_digests,
+        mutate_request_coordinates,
+    ):
+        assert_update_rejected(mutator)
+
+    fork_record = cells[(0, "EHC", "held_out_stochastic")]["natural_fork"]
+    corrupted_fork = deepcopy(fork_record)
+    binding = corrupted_fork["fork_rows"][0]["rng_bindings"]["KEEP"]["mark"]
+    binding["context"]["branch_action"] = "RENEW"
+    resign_binding(binding)
+    assert not benchmark_runner._natural_fork_valid(
+        corrupted_fork, replicate=0,
+        episodes=cells[(0, "EHC", "held_out_stochastic")]["episodes"],
+        cell_batches=cells[(0, "EHC", "held_out_stochastic")]["batches"],
+    )
+
+    # Add one fully re-signed primitive draw to both branches.  The forged
+    # record co-changes the consumed position, consumed-byte digest, terminal
+    # state, binding draw/end/digest envelope, and row convenience digest.
+    # Independent replay from the cell's fixed tail must still reject it.
+    consumed_tamper = deepcopy(fork_record)
+    consumed_row = consumed_tamper["fork_rows"][0]
+    seed_map = authoritative_seed_map("held_out", 0)
+    episode_ids = cells[(0, "EHC", "held_out_stochastic")]["batches"][
+        consumed_row["batch_index"]
+    ]["episode_ids"]
+    extra = {
+        "stream": "primitive", "operation": "random", "dtype": "float32",
+        "shape": [16, MAX_LIFECYCLES],
+        "coordinates": {
+            "time": HORIZON, "episode_ids": episode_ids,
+            "frontier_orders": [[] for _ in episode_ids],
+        },
     }
-    assert select_result_branch(
-        **(_branch_inputs() | ABSENT_NATURAL_FORK_EVIDENCE)
-    ) == "BENCHMARK_NON_IDENTIFIABLE"
+    for branch_action in ("KEEP", "RENEW"):
+        binding = consumed_row["rng_bindings"][branch_action]["primitive"]
+        schedule = deepcopy(binding["draw_schedule"]) + [deepcopy(extra)]
+        end = event_held_commitment_link.replay_rng_schedule_end_state(
+            binding["start_state"], schedule, seed=seed_map["primitive"]
+        )
+        rebuilt = event_held_commitment_link.make_rng_binding(
+            context=binding["context"], stream="primitive",
+            seed=seed_map["primitive"], start_state=binding["start_state"],
+            draw_schedule=schedule, expected_end_state=end,
+        )
+        consumed_row["rng_bindings"][branch_action]["primitive"] = rebuilt
+        consumed_row["stream_consumption"][branch_action]["primitive"] = (
+            benchmark_runner._expected_fork_stream_consumption(
+                stream="primitive", start_state=binding["start_state"],
+                schedule=schedule, seed=seed_map["primitive"],
+                env_index=consumed_row["env_index"],
+            )
+        )
+    consumed_row["end_rng_digests"]["primitive"] = _digest_json(end)
+    assert not benchmark_runner._natural_fork_valid(
+        consumed_tamper, replicate=0,
+        episodes=cells[(0, "EHC", "held_out_stochastic")]["episodes"],
+        cell_batches=cells[(0, "EHC", "held_out_stochastic")]["batches"],
+    )
+
+    def resign_pass(record: dict[str, Any]) -> None:
+        unsigned = {
+            key: deepcopy(value) for key, value in record.items()
+            if key != "record_digest"
+        }
+        record["record_digest"] = _digest_json(unsigned)
+
+    optimizer_mutations = []
+    def nonfinite_loss(record):
+        record["raw_loss"] = float("nan"); resign_pass(record)
+    optimizer_mutations.append(nonfinite_loss)
+    def wrong_norm(record):
+        record["unclipped_norm"] += 1.0; resign_pass(record)
+    optimizer_mutations.append(wrong_norm)
+    def wrong_squared(record):
+        record["parameters"][0]["squared_l2"] += 1.0; resign_pass(record)
+    optimizer_mutations.append(wrong_squared)
+    def wrong_digest(record):
+        record["parameters"][0]["preclip_gradient_digest"] = "f" * 64
+        resign_pass(record)
+    optimizer_mutations.append(wrong_digest)
+    def wrong_owner(record):
+        record["parameters"][0]["name"] = "foreign.weight"; resign_pass(record)
+    optimizer_mutations.append(wrong_owner)
+    def wrong_step(record):
+        record["step_after"] += 1; resign_pass(record)
+    optimizer_mutations.append(wrong_step)
+    def coordinated_derived_gradient(record):
+        parameter = record["parameters"][0]
+        parameter["squared_l2"] += 4.0
+        parameter["preclip_gradient_digest"] = "e" * 64
+        record["unclipped_norm"] = math.sqrt(sum(
+            float(value["squared_l2"]) for value in record["parameters"]
+        ))
+        record["clip_coefficient"] = min(
+            1.0, 0.5 / (record["unclipped_norm"] + 1e-6)
+        )
+        resign_pass(record)
+    optimizer_mutations.append(coordinated_derived_gradient)
+    def raw_loss_without_components(record):
+        record["raw_loss"] += 1.0
+        resign_pass(record)
+    optimizer_mutations.append(raw_loss_without_components)
+    def wrong_payload_length(record):
+        record["parameters"][0]["gradient_payload"]["uncompressed_nbytes"] += 4
+        resign_pass(record)
+    optimizer_mutations.append(wrong_payload_length)
+    def wrong_payload_dtype(record):
+        record["parameters"][0]["gradient_payload"]["dtype"] = "<f8"
+        resign_pass(record)
+    optimizer_mutations.append(wrong_payload_dtype)
+    def wrong_payload_shape(record):
+        payload = record["parameters"][0]["gradient_payload"]
+        payload["shape"] = [record["parameters"][0]["numel"]]
+        resign_pass(record)
+    optimizer_mutations.append(wrong_payload_shape)
+    for mutation in optimizer_mutations:
+        assert_update_rejected(
+            lambda update, mutation=mutation: mutation(
+                update["arms"]["EHC"]["optimizer"]["base_passes"][0]
+            )
+        )
 
 
 _BRANCH_ORDER = (
@@ -2541,7 +4256,8 @@ def test_defective_component_still_fails_under_the_relaxed_joint_rule(
     assert torch.allclose(
         correct_marks,
         trajectory.event_old_mark_component_logp[index],
-        atol=REPLAY_COMPONENT_TOLERANCE,
+        atol=REPLAY_LOG_COMPONENT_ATOL,
+        rtol=REPLAY_LOG_COMPONENT_RTOL,
     )
     assert float(log_jacobian.abs().max()) > 0.0
 
@@ -2582,8 +4298,10 @@ def test_defective_component_still_fails_under_the_relaxed_joint_rule(
         report = replay_report(corrupted_replay, corrupted)
         assert not report["passed"], label
         assert expected_field[label] in report["failures"], label
+        likelihood = report["likelihood_components"][expected_field[label]]
         assert (
-            report["errors"][expected_field[label]] > REPLAY_COMPONENT_TOLERANCE
+            likelihood["absolute_error"] > likelihood["mixed_bound"]
+            or likelihood["ratio_drift"] > REPLAY_LOG_RATIO_DRIFT_CAP
         ), label
         if label != "jacobian_omitted":
             # The joint moved by the same amount and is still well inside
@@ -2597,6 +4315,124 @@ def test_defective_component_still_fails_under_the_relaxed_joint_rule(
         assert "event_joint_assembly" not in report["failures"], label
         with pytest.raises(RuntimeError, match="semantic replay tolerance mismatch"):
             validate_replay(arm, corrupted, device=device)
+
+
+def test_independent_float64_transformed_density_and_mutations(
+    device: torch.device,
+) -> None:
+    # Deterministic saturated tails, independent of model weights and sampled
+    # trajectories. Both signs are present in every coordinate pair and the
+    # reference uses logaddexp rather than the production softplus identity.
+    u_tail = torch.tensor(
+        [[-20.0, 20.0, -24.0, 24.0, -28.0, 28.0, -32.0, 32.0]],
+        dtype=torch.float64, device=device,
+    )
+    mu_tail = torch.tensor(
+        [[-0.4, 0.3, -0.2, 0.1, 0.0, -0.1, 0.2, -0.3]],
+        dtype=torch.float64, device=device,
+    )
+    sigma_tail = torch.tensor(
+        [[0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 0.25]],
+        dtype=torch.float64, device=device,
+    )
+    independent_normal = (
+        -0.5 * ((u_tail - mu_tail) / sigma_tail).square()
+        - sigma_tail.log()
+        - 0.5 * math.log(2.0 * math.pi)
+    )
+    independent_jacobian = 2.0 * (
+        math.log(2.0) - u_tail
+        - torch.logaddexp(torch.zeros_like(u_tail), -2.0 * u_tail)
+    )
+    independent_density = independent_normal - independent_jacobian
+    production_density = transformed_mark_component_logp(
+        u_tail, mu_tail, sigma_tail
+    )
+    tail_error = (production_density - independent_density).abs()
+    tail_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * torch.maximum(
+        production_density.abs(), independent_density.abs()
+    )
+    tail_ratio = torch.expm1(tail_error)
+    assert bool((tail_error <= tail_bound).all())
+    assert bool((tail_ratio <= REPLAY_LOG_RATIO_DRIFT_CAP).all())
+    assert torch.equal(torch.tanh(u_tail), torch.sign(u_tail))
+    missing_tail = independent_density.clone()
+    missing_tail[0, 0] = 0.0
+    for label, mutation in (
+        ("tail_omitted_jacobian", independent_normal),
+        ("tail_reversed_jacobian", independent_normal + independent_jacobian),
+        ("tail_missing_component", missing_tail),
+    ):
+        mutation_error = (mutation - production_density).abs()
+        mutation_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * torch.maximum(
+            mutation.abs(), production_density.abs()
+        )
+        mutation_ratio = torch.expm1(torch.clamp(mutation_error, max=80.0))
+        assert bool(
+            ((mutation_error > mutation_bound)
+             | (mutation_ratio > REPLAY_LOG_RATIO_DRIFT_CAP)).any()
+        ), label
+
+    arms, _, _ = initialize_arms(device)
+    arm = arms["EHC"]
+    trajectory = collect_trajectory(
+        arm, make_training_state("EHC", 0), device=device
+    )
+    rows = torch.nonzero(
+        trajectory.event_kind.eq(RENEW), as_tuple=False
+    )
+    assert len(rows) >= 2
+    magnitudes = torch.stack([
+        trajectory.event_u[tuple(index)].abs().max() for index in rows
+    ])
+    chosen = (rows[int(torch.argmin(magnitudes))], rows[int(torch.argmax(magnitudes))])
+    references: list[tuple[tuple[int, ...], torch.Tensor, torch.Tensor, torch.Tensor]] = []
+    with torch.no_grad():
+        for index_tensor in chosen:
+            index = tuple(int(value) for value in index_tensor)
+            inputs = trajectory.event_inputs[index].unsqueeze(0).to(device)
+            u64 = trajectory.event_u[index].unsqueeze(0).to(device).double()
+            mu32, sigma32 = _normal_parameters(arm.mark_head(inputs))
+            mu64, sigma64 = mu32.double(), sigma32.double()
+            normal64 = (
+                -0.5 * torch.square((u64 - mu64) / sigma64)
+                - torch.log(sigma64)
+                - 0.5 * math.log(2.0 * math.pi)
+            )
+            log_jacobian64 = 2.0 * (
+                math.log(2.0) - u64 - torch.log1p(torch.exp(-2.0 * u64))
+            )
+            density64 = normal64 - log_jacobian64
+            stored64 = trajectory.event_old_mark_component_logp[index].double()
+            assert torch.allclose(stored64, density64[0], atol=2e-6, rtol=1e-6)
+            references.append((index, density64[0], normal64[0], log_jacobian64[0]))
+
+    index, density64, normal64, log_jacobian64 = references[1]
+    assert float(log_jacobian64.abs().max()) > 1e-3
+    missing = density64.clone()
+    missing[0] = 0.0
+    for label, mutated64 in (
+        ("omitted_jacobian", normal64),
+        ("reversed_jacobian", normal64 + log_jacobian64),
+        ("missing_component", missing),
+    ):
+        corrupted = _restated_event_factors(
+            trajectory, index=index, marks=mutated64.float()
+        )
+        report = replay_report(
+            replay_trajectory(arm, corrupted, device=device), corrupted
+        )
+        assert not report["passed"], label
+        assert "mark_component" in report["failures"], label
+
+    wrong_mask = trajectory.event_mark_mask.clone()
+    wrong_mask[index] = False
+    corrupted_mask = replace(trajectory, event_mark_mask=wrong_mask)
+    report = replay_report(
+        replay_trajectory(arm, corrupted_mask, device=device), corrupted_mask
+    )
+    assert not report["passed"]
+    assert "mask_mismatch" in report["failures"]
 
 
 def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
@@ -2633,19 +4469,21 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     accumulated_replay = replay_trajectory(arm, accumulated, device=device)
     report = replay_report(accumulated_replay, accumulated)
     assert report["passed"], report["failures"]
+    assert all(report["errors"][name] <= REPLAY_STATE_ATOL for name in REPLAY_STATE_FIELDS)
     assert all(
-        report["errors"][name] <= REPLAY_COMPONENT_TOLERANCE
-        for name in REPLAY_COMPONENT_FIELDS
+        report["likelihood_components"][name]["absolute_error"]
+        <= report["likelihood_components"][name]["mixed_bound"]
+        for name in REPLAY_LOG_COMPONENT_FIELDS
     )
-    assert report["errors"]["event_joint"] > REPLAY_COMPONENT_TOLERANCE
+    assert report["errors"]["event_joint"] > 1e-6
     assert report["errors"]["event_joint"] <= report["joints"]["event_joint"]["bound"]
     assert report["joints"]["event_joint"]["excess"] < 0.0
     assert report["joints"]["event_joint"]["assembly_excess"] < 0.0
     # It is the nine-way accumulation, not one large factor, that carries
-    # the joint past `1e-6`: no single component is even at half the bound.
+        # the joint past `1e-6`: no single component exceeds half the joint error.
     assert (
         report["errors"]["event_joint"]
-        > 2.0 * max(report["errors"][name] for name in REPLAY_COMPONENT_FIELDS)
+        >= 2.0 * max(report["errors"][name] for name in REPLAY_LOG_COMPONENT_FIELDS)
     )
 
     over_bound = trajectory.event_old_joint_logp.clone()
@@ -2657,8 +4495,13 @@ def test_joint_rule_admits_accumulation_and_rejects_a_joint_defect(
     assert "event_joint" in defective_report["failures"]
     assert defective_report["joints"]["event_joint"]["excess"] > 0.0
     assert all(
-        defective_report["errors"][name] <= REPLAY_COMPONENT_TOLERANCE
-        for name in REPLAY_COMPONENT_FIELDS
+        defective_report["errors"][name] <= REPLAY_STATE_ATOL
+        for name in REPLAY_STATE_FIELDS
+    )
+    assert all(
+        defective_report["likelihood_components"][name]["absolute_error"]
+        <= defective_report["likelihood_components"][name]["mixed_bound"]
+        for name in REPLAY_LOG_COMPONENT_FIELDS
     )
     # A joint that is no longer the sum of its own recorded factors is
     # caught by the float64 assembly check as well, independently of the
@@ -2684,11 +4527,13 @@ def test_registered_contract_replay_block_and_checkpoint_strictness(
     assert "replay_tolerance" not in contract
     assert json.dumps(contract, sort_keys=True).count('"replay_tolerance"') == 0
     assert block["exact_fields"] == list(REPLAY_EXACT_FIELDS)
-    assert block["continuous_component_fields"] == list(REPLAY_COMPONENT_FIELDS)
+    assert block["log_component_fields"] == list(REPLAY_LOG_COMPONENT_FIELDS)
+    assert block["state_fields"] == list(REPLAY_STATE_FIELDS)
     assert block["joint_fields"] == list(REPLAY_JOINT_FIELDS)
-    assert block["continuous_component_atol"] == REPLAY_COMPONENT_TOLERANCE == 1e-6
-    assert block["categorical_component_atol"] == REPLAY_COMPONENT_TOLERANCE
-    assert block["mark_component_atol"] == REPLAY_COMPONENT_TOLERANCE
+    assert block["log_component_atol"] == REPLAY_LOG_COMPONENT_ATOL == 1e-6
+    assert block["log_component_rtol"] == REPLAY_LOG_COMPONENT_RTOL
+    assert block["log_ratio_drift_cap"] == REPLAY_LOG_RATIO_DRIFT_CAP
+    assert block["state_atol"] == REPLAY_STATE_ATOL == 1e-6
     assert block["primitive_joint_rule"] == "component_sum_plus_float32_reduction"
     assert (
         block["event_joint_rule"]
@@ -2709,7 +4554,7 @@ def test_registered_contract_replay_block_and_checkpoint_strictness(
     assert "primitive_component" in block["primitive_joint_gating"]
     assert "triangle inequality" in block["event_joint_gating"]
     # The intended relaxation is declared, not left to be discovered.
-    assert "9e-6" in block["correlated_bias_sensitivity"]
+    assert "ratio drift 1e-4" in block["correlated_bias_sensitivity"]
     assert "rows > 0" in block["joint_record_internal_consistency"]
     assert block["non_finite_rule"] == "any_non_finite_leaf_fails_closed"
     # The same-checkpoint continuation invariant is a different quantity and
@@ -3019,6 +4864,23 @@ def test_replay_record_validator_rejects_degraded_joint_records() -> None:
         rel=1e-12,
     )
     assert not _replay_record_valid(self_consistent)
+
+
+def test_worst_coordinate_and_ulp_evidence_is_strict() -> None:
+    clean = _synthetic_replay_record()
+    assert _replay_record_valid(clean)
+    for mutation in ("ulp", "coordinate", "bound", "ratio"):
+        degraded = deepcopy(clean)
+        record = degraded["likelihood_components"]["mark_component"]
+        if mutation == "ulp":
+            record["ulp_distance"] += 1
+        elif mutation == "coordinate":
+            record["coordinate"] = [0, 0, 0]
+        elif mutation == "bound":
+            record["mixed_bound"] *= 2.0
+        else:
+            record["ratio_drift"] = 1e-8
+        assert not _replay_record_valid(degraded), mutation
 
     # `excess` must dominate `error - bound`; it is the row maximum and the
     # reported error/bound come from the largest-error row.
