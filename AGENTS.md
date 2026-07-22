@@ -128,6 +128,15 @@ Authorized algorithm realization is sent only to `hmasd-project-manager`.
 Monitoring is sent only to `hmasd-experiment-monitor`. Automatic task results
 wake the Controller but never start a successor without Controller routing.
 
+For a persistent Codex Project Manager, terminal delivery is an explicit direct
+message, not an assumption about the task UI. Before returning
+`IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`, resolve the active
+Controller through the dispatch registry and send the complete terminal payload
+with `codex_app__send_message_to_thread`, copying that resolved target's
+`hostId`, `threadId`, model and thinking unchanged. A failed delivery is itself
+`PROJECT_MANAGER_DELIVERY_BLOCKED`; it never authorizes a default-route retry
+or a successor task.
+
 ## Protected changes
 
 Strict authorization applies to:

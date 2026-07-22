@@ -99,6 +99,18 @@ package acceptance. It returns directly to the Controller. It never uses OMP,
 contacts Open-Pro, commits, pushes, starts formal compute or changes project
 control unless the assignment explicitly grants that authority.
 
+### Persistent Project Manager terminal delivery
+
+`IMPLEMENTATION_READY` and `RESEARCH_MANAGER_BLOCKED` must be delivered to the
+Controller as a real cross-thread message. Immediately before terminal delivery,
+resolve `-Role controller`; require nonempty `hostId`, `threadId`, `model` and
+`thinking`, then call `codex_app__send_message_to_thread` once with those exact
+resolved values and the complete terminal payload. Do not rely on a final answer
+in the Manager task being surfaced elsewhere. If route resolution or the send
+fails, return `PROJECT_MANAGER_DELIVERY_BLOCKED` with the unchanged terminal
+payload and direct error; do not resend through a guessed thread, change target
+model settings, or start a successor.
+
 ## Native OMP Project Manager delivery
 
 Require one complete assignment with:

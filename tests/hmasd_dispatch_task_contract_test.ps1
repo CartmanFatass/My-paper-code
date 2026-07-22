@@ -46,7 +46,13 @@ foreach ($required in @(
     'REVIEW_STAGE_COMPLETE',
     'REVIEW_STAGE_BLOCKED',
     'source_thread_id',
-    'registered Controller task ID')) {
+    'registered Controller task ID',
+    'Persistent Project Manager terminal delivery',
+    'IMPLEMENTATION_READY',
+    'RESEARCH_MANAGER_BLOCKED',
+    'codex_app__send_message_to_thread',
+    'PROJECT_MANAGER_DELIVERY_BLOCKED',
+    'resolve `-Role controller`')) {
     if (-not $skill.Contains($required)) { throw "Dispatcher missing: $required" }
 }
 foreach ($forbidden in @('controller <-> research_project_manager', 'controller <-> experiment_monitor', '-ThreadId <registered id>')) {
