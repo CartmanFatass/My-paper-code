@@ -25,7 +25,10 @@ foreach ($required in @(
     'controller <-> open_divergent_exchange',
     'controller <-> experiment_monitor',
     'Temporary implementation and review subagents belong only to the Research',
-    'Resolve the same task again immediately after delivery')) {
+    'Resolve the same task again immediately after delivery',
+    'Controller continuation duty',
+    'Do not stop at',
+    'never prohibits controller continuation')) {
     if (-not $skill.Contains($required)) { throw "Dispatcher missing: $required" }
 }
 Write-Output 'HMASD_DISPATCH_TASK_CONTRACT_OK'

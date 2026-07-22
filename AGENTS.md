@@ -49,6 +49,16 @@ Skill. Do not forward Skill names as a mechanical preamble. Once the message
 reaches the correct role, the role follows a wide process inside its authority;
 the controller does not prescribe internal steps or request per-edit approval.
 
+The active controller owns automatic continuation. When `CURRENT_WORK.md`
+records an active bounded autonomous grant, every accepted role callback is a
+controller wake-up: integrate the evidence, update the control plane at a real
+boundary, determine the next already-authorized event and dispatch it without
+asking the user to restate the grant. Routine coordination, Git integration,
+focused external follow-up, CDC intake, implementation handoff and monitor
+assignment do not require repeated approval when they remain inside that grant.
+Stop only when the grant is exhausted or paused, a genuine blocker remains, or
+the next action would expand protected scientific or formal-compute authority.
+
 ## Authority and write ownership
 
 The Research Project Manager has two bounded modes:
@@ -79,8 +89,9 @@ task model, authorize another role or launch a successor.
 
 Scientific decision work is sent only to the Open-Pro Exchange. CDC decision
 intake and implementation work are sent only to the Research Project Manager.
-Monitoring is sent only to the Experiment Monitor. Completion of one role never
-starts another role automatically.
+Monitoring is sent only to the Experiment Monitor. A role never starts another
+role itself; it returns to the controller. This isolation rule does not suspend
+the controller's duty to continue an active authorized chain.
 
 ## Protected changes
 

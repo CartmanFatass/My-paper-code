@@ -114,6 +114,29 @@ description, its native `source_thread_id` equals the registered role task, its
 stable `handoff_id` matches the assignment, and the sender/receiver form one
 legal edge. Repeated role plus `handoff_id` is one idempotent delivery.
 
+## Controller continuation duty
+
+After accepting a terminal callback, read the autonomy boundary and remaining
+budget in `docs/project/CURRENT_WORK.md`. If the boundary is active, the
+controller must complete its direct integration work and dispatch the next
+already-authorized role event in the same logical continuation. Do not stop at
+a recommendation such as "next send this to Pro" and do not ask the user to
+repeat an existing grant.
+
+The controller, not the returning role, chooses and sends the next event. Common
+continuations include integrating `IMPLEMENTATION_READY`, sending a focused
+`REVIEW_STAGE` for a remaining scientific ambiguity, sending completed external
+evidence for CDC intake, assigning monitoring for an authorized run, and
+integrating a terminal monitor result before the next CDC decision. These are
+examples, not a rigid state machine; choose the smallest legal continuation
+from current evidence and authority.
+
+Pause only when the autonomy boundary is inactive or exhausted, the callback is
+invalid, the owning role reports a genuine unrecovered blocker, or the next
+action would exceed the registered scientific or formal-compute authority.
+Record any pause and its exact reason in the controller control plane. A role's
+prohibition on launching a successor never prohibits controller continuation.
+
 ## Recovery and topology
 
 Let the owning role diagnose recoverable failures inside its authority. A retry

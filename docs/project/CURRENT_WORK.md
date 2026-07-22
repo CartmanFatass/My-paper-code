@@ -13,27 +13,19 @@ Updated: 2026-07-22
 
 ## Active Boundary
 
-Research, implementation and formal compute are paused. The workflow now uses
-an external-Pro CDC outer loop and registered custom code-agent inner loop. The
-pause does not consume the standing five-iteration intent.
+The bounded autonomous research chain is ACTIVE. Five evidence-bearing
+iterations remain available. The controller automatically continues accepted
+callbacks through external-Pro review, CDC intake, authorized implementation,
+Git integration, authorized experiment monitoring and terminal evidence
+integration. Persistent roles never call one another directly; every transition
+returns through the controller.
 
-The interrupted implementation left five unaccepted WIP paths:
-
-- `docs/project/IMPLEMENTATION_PLAN.md`
-- `ha_ctse_process/event_held_commitment_link.py`
-- `ha_ctse_process/noncalendar_commitment_testbed.py`
-- `scripts/run_noncalendar_commitment_benchmark_g0.py`
-- `tests/ha_ctse_process_noncalendar_commitment_benchmark_g0_test.py`
-
-They have partial edits and partial CUDA evidence only. No final syntax check,
-focused suite, review, formal-path exercise, commit or scientific result exists.
-Preserve them exactly until a fresh post-refactor implementation assignment
-either adopts or replaces that WIP.
-
-The workflow-only boundary installs the CDC research records, assigns scientific
-judgment to external Pro, limits the Manager to evidence-preserving intake and
-implementation management, and registers Scout/Implementer/Verifier/Reviewer
-custom agents. No algorithm action follows automatically.
+`EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
+through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
+The next boundary is the pre-registered focused external-Pro clarification of
+whether the behavioral battery distinguishes learned commitment from metrics
+that are satisfied by construction. This coordination consumes no iteration;
+an iteration is consumed only by a conclusion-bearing evidence action.
 
 Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 `docs/project/` at the user's direction, under a different model: the user held
@@ -139,28 +131,33 @@ until implementation and focused review complete.
 ## Implementation State
 
 `EVENT_HELD_COMMITMENT_LINK_G0` is implemented, reviewed and committed through
-`a83db26` on `aggressive`, with 38 focused tests passing on the CUDA backend.
+`31aad0df80d637fd095655bf8c0b112e4bf1cdfd` on `aggressive`. The final replay
+repair made collection and teacher replay share one row-stable float32
+event/mark-head evaluator without changing probability, replay thresholds,
+RNG, gradients, schemas, budgets or scientific meaning.
 The three-arm package, the revised behavioural battery, Replacement C stage 1
 retention, the sequential counterfactual fork engine, the per-factor replay
 tolerance classes and the registered execution backend and result gates are all
 in history.
 
-**Formal training was attempted twice and aborted both times. Nothing is
-running and no checkpoint exists.** The first attempt died at update 4 on a
+**Formal training attempts were operationally aborted. Nothing is running and
+no usable formal checkpoint exists.** The first attempt died at update 4 on a
 replay record merged across arms, fixed at `e80cef0`. The second died mid-
 training on a flat absolute per-component replay tolerance that cannot be
 executed in float32, because four of the nine bounded quantities have unbounded
-magnitude. That blocker is pre-existing rather than introduced.
+magnitude. A subsequent retry exposed the collection/replay arithmetic split;
+that defect is closed by `31aad0df`. None of these attempts is scientific
+evidence.
 
 ## Next Action
 
-Finish and validate the workflow-only Git boundary. Then obtain a fresh
-external-Pro CDC decision over the preserved evidence and updated conjecture
-records. Only after controller adoption may the Manager receive a new
-`START_IMPLEMENTATION` assignment for the preserved WIP or a replacement.
-
-Do not launch formal training, interpret partial WIP checks as evidence, or
-resume the old completion-loop contract.
+Automatically send the behavioral-battery identifiability question to the
+registered Open-Pro Exchange as one focused continuation. After the raw response
+returns, automatically send it to the Research Project Manager for CDC intake,
+show the resulting concise brief, and continue the already-authorized branch:
+either one bounded measurement-contract implementation or the unchanged formal
+launch with Experiment Monitor ownership. Do not treat operationally aborted
+runs as scientific evidence.
 
 ## Open Contract Questions
 
@@ -221,16 +218,18 @@ interpreter carries a CPU-only `torch 2.8.0+cpu`; use
 
 ## Autonomous Boundary
 
-INACTIVE during workflow refactor. The inherited five evidence-bearing
-iterations remain available after the user or controller explicitly resumes the
-new external-Pro CDC loop. No iteration is consumed by workflow edits or custom
-agent registration.
+ACTIVE with five evidence-bearing iterations remaining. The controller must
+continue every valid terminal callback to the next legal event without asking
+the user to repeat this grant. External review, CDC intake, bounded
+implementation, Git integration, authorized formal execution, monitor
+assignment and terminal evidence integration are covered when they remain
+inside the adopted source and frozen experiment contract.
 
-Under current ownership each mutating step is authorized by the user directly.
-Nothing runs formal training, changes a registered threshold, selects a
-successor route or creates a terminal disposition without that explicit
-authorization. The prohibitions on concurrent mutating research routes and on
-locally invented successor routes still hold.
+Pause only on grant exhaustion, explicit user pause, a genuine unrecovered
+blocker, or a proposed expansion of protected scientific semantics or formal
+compute beyond the adopted contract. Workflow edits, focused clarification and
+operational repair do not consume an iteration. The prohibitions on concurrent
+mutating research routes and locally invented successor routes remain binding.
 
 ## Durable Constraints
 
