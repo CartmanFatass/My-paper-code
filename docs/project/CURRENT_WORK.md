@@ -10,8 +10,10 @@ Updated: 2026-07-22
 - **Execution mode: OMP: PAUSED.** Do not launch, resume or route through OMP
   until the user explicitly restores it.
 - Scientific direction comes from the registered external GPT-5.6 Pro. The
-  Codex Controller currently owns integration and may use native Codex
-  collaboration agents for bounded implementation and verification.
+  Codex Controller owns integration. The sole registered persistent Codex
+  Project Manager is task `019f7e6e-2f81-7463-93a6-4bb836585fb8`; it owns
+  research convergence, implementation planning, code realization coordination
+  and package acceptance, and may use native Codex collaboration agents.
 
 ## Active Boundary
 
@@ -21,6 +23,9 @@ pure Codex. The controller automatically continues accepted results through
 persistent external-Pro review, direct CDC evidence intake, native Codex work,
 Git integration and terminal evidence integration. No OMP task is active or
 authorized under this boundary.
+
+The former Code Manager task `019f7bd8-b4db-71f2-9a6e-f0082a0dc3d5` is not a
+registered role and must never be selected by title or history search.
 
 The interrupted OMP attempt is preserved only as unaccepted WIP at
 `C:\Users\wu\.omp\wt\t3f27b6427\m`. Its five modified tracked files have not

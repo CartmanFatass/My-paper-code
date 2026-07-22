@@ -21,10 +21,17 @@ conjecture, ledger, portfolio or evidence note required at the current boundary.
 `CURRENT_WORK.md` also selects the active execution surface. If it declares
 OMP paused, every OMP-specific instruction below is inactive for that boundary:
 do not launch, resume or route work through OMP. The Controller works directly
-or uses native Codex collaboration agents, and any existing OMP worktree is
-unaccepted evidence until the Controller explicitly audits and migrates it.
+or delegates research convergence and code-side work to the ACTIVE persistent
+Codex `project_manager` registered in the dispatch Skill. That Project Manager
+may use native Codex collaboration agents; the Controller does not bypass it to
+dispatch implementation workers. Any existing OMP worktree is unaccepted
+evidence until the Controller explicitly audits and migrates it.
 Persistent external-Pro transport is unaffected unless `CURRENT_WORK.md` also
 pauses it.
+
+Roles are resolved only from the dispatch Skill registry. Never infer a current
+role from a task title, an old callback or conversation search. Unregistered
+former manager sessions are obsolete execution surfaces.
 
 The controller alone owns workflow and role-topology design, routing, direct
 evidence intake, resource and formal-experiment authorization, Git integration,

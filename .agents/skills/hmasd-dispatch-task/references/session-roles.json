@@ -1,11 +1,18 @@
 {
-  "schema_version": 8,
+  "schema_version": 9,
   "updated": "2026-07-22",
   "roles": {
     "controller": {
       "kind": "active_controller",
       "thread_id": "019f5c78-0c91-7612-adb4-c1fcfe4484c8",
       "contract": "AGENTS.md"
+    },
+    "project_manager": {
+      "kind": "persistent_codex_project_manager",
+      "thread_id": "019f7e6e-2f81-7463-93a6-4bb836585fb8",
+      "registration_status": "ACTIVE",
+      "contract": "AGENTS.md",
+      "responsibility": "research convergence, implementation planning, code realization coordination, and package acceptance"
     },
     "open_divergent_exchange": {
       "kind": "persistent_reviewer_exchange",
@@ -17,6 +24,8 @@
   },
   "policy": {
     "one_session_one_role": true,
+    "registered_roles_only": true,
+    "forbid_title_or_history_based_role_inference": true,
     "omp_task_agents_are_not_sessions": true,
     "live_route_source": ".agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1",
     "stored_fields": [

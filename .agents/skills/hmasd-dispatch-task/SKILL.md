@@ -20,14 +20,20 @@ When it says `OMP: PAUSED`:
 
 - do not start, resume, inspect through, or send assignments to OMP;
 - do not interpret an old OMP task, worktree or transcript as an active lease;
-- use Controller-direct work or native Codex collaboration agents for bounded
-  implementation and verification;
+- send research convergence, implementation planning, code realization,
+  package review and WIP audit only to the registered persistent Codex
+  `project_manager`; that Manager may use native Codex collaboration agents;
 - keep any OMP-produced WIP isolated until the Controller explicitly audits
   and migrates it;
 - retain the registered Open-Pro Exchange route unless separately paused.
 
 The OMP sections below apply only when `CURRENT_WORK.md` explicitly says
 `OMP: ACTIVE`.
+
+Never infer a role from a task title, old callback, conversation history or
+search result. Read `references/session-roles.json` and use only an ACTIVE
+registered role. An unregistered former Code Manager is obsolete even if its
+old task can still be found.
 
 The Controller owns continuation: every accepted OMP task result or persistent
 role callback is a wake-up. Integrate the evidence, update control state only at
@@ -41,6 +47,10 @@ Classify the requested outcome before any delivery:
 - Controller direct control-plane work: workflow and topology design, routing,
   Git, direct external-Pro evidence intake, durable record application, evidence
   integration, project control and user communication.
+- Persistent Codex `project_manager` when `OMP: PAUSED`: research convergence,
+  implementation planning, code realization coordination, WIP audit, focused
+  verification and package acceptance. The Controller does not bypass it to
+  dispatch implementation workers directly.
 - Native OMP `hmasd-project-manager`: one Controller-authorized algorithm
   realization and implementation package inside an external-Pro scientific
   direction. Dispatch with `isolated: true`.
@@ -50,14 +60,34 @@ Classify the requested outcome before any delivery:
 - Persistent `open_divergent_exchange`: external GPT-5.6 Pro transport through
   the registered conversation and `hmasd-review-exchange` Skill.
 
-The only persistent edge is:
+The persistent edges while `OMP: PAUSED` are:
 
 ```text
 controller <-> open_divergent_exchange
+controller <-> project_manager
 ```
 
 Code Scout, Implementer, Verifier and Reviewer belong only to the Project
 Manager's child task graph. The Controller does not dispatch them as writers.
+
+## Persistent Codex Project Manager delivery
+
+Immediately before every Project Manager send, read
+`references/session-roles.json` and require the ACTIVE `project_manager` entry.
+Resolve that exact task with
+`scripts/resolve_task_route.ps1 -ThreadId <registered id>`. Require nonempty
+`hostId`, `threadId`, `model` and `thinking`, and require the resolved thread ID
+to equal the registry. Send one complete assignment to that exact route while
+copying the resolved model and thinking unchanged. Resolve it again after the
+send; if identity, model or thinking changed, report route corruption and do
+not resend.
+
+The assignment states objective, authority, inputs, exact write or read-only
+scope, protected semantics, forbidden work, verification and return contract.
+The Manager owns planning, task decomposition, native Codex child-agent use and
+package acceptance. It returns directly to the Controller. It never uses OMP,
+contacts Open-Pro, commits, pushes, starts formal compute or changes project
+control unless the assignment explicitly grants that authority.
 
 ## Native OMP Project Manager delivery
 
