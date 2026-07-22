@@ -32,9 +32,9 @@ was launched. The pure Codex Project Manager completed a read-only audit with
 held-mark timing contrast and the named evidence/hot-path defects.
 
 The native Codex child registry is restored under `.codex/`. Its exact callable
-types are `HMASDCodeScout`, `HMASDImplementer`, `HMASDVerifier` and
-`HMASDReviewer`; default-agent fallback is forbidden. Codex must be restarted
-once after this registry change before a live child invocation test.
+types are `hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
+`hmasd-reviewer`; default-agent fallback is forbidden. A post-restart
+no-side-effect call to `hmasd-code-scout` returned `HMASD_CUSTOM_SCOUT_OK`.
 
 ## Dormant OMP Configuration
 
@@ -192,8 +192,7 @@ evidence.
 
 ## Next Action
 
-After restarting Codex and confirming one registered custom-agent invocation,
-send the Project Manager the accepted `PARTIAL_MIGRATION` repair boundary. It
+Send the Project Manager the accepted `PARTIAL_MIGRATION` repair boundary. It
 must adapt only the verified WIP symbols into `aggressive`, preserve the current
 full implementation plan and tests, run the focused CUDA checks, and keep formal
 compute stopped until the resulting package is accepted. Do not treat the

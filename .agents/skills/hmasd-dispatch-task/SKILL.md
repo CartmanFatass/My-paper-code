@@ -70,12 +70,14 @@ controller <-> project_manager
 Code Scout, Implementer, Verifier and Reviewer belong only to the Project
 Manager's child task graph. The Controller does not dispatch them as writers.
 
-In pure Codex mode the exact case-sensitive child `agent_type` keys are
-`HMASDCodeScout`, `HMASDImplementer`, `HMASDVerifier` and `HMASDReviewer`, as
-registered in `.codex/config.toml`. Lowercase profile filenames are not agent
-types. Include the permitted exact keys in a Manager assignment whenever child
-work is allowed. An unavailable or `unknown agent_type` key is a workflow
-blocker; Manager and Controller must not fall back to a default unnamed child.
+In pure Codex mode the exact case-sensitive child `agent_type` values are
+`hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
+`hmasd-reviewer`, taken from each profile's `name` field. The
+`HMASDCodeScout`-style names in `.codex/config.toml` are registry section
+identifiers, not callable types. Include the permitted exact values in a
+Manager assignment whenever child work is allowed. An unavailable or
+`unknown agent_type` value is a workflow blocker; Manager and Controller must
+not fall back to a default unnamed child.
 
 ## Persistent Codex Project Manager delivery
 

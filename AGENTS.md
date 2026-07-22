@@ -65,11 +65,12 @@ The active surfaces are:
 The code profiles belong only to the Project Manager task tree. The Controller
 does not dispatch them as implementation workers. Only the Project Manager may
 spawn them, and no child may spawn a successor. While `OMP: PAUSED`, the exact
-case-sensitive native Codex `agent_type` keys are `HMASDCodeScout`,
-`HMASDImplementer`, `HMASDVerifier` and `HMASDReviewer`, registered in
-`.codex/config.toml`. Lowercase profile filenames such as `hmasd-reviewer` are
-not callable agent types. `unknown agent_type` is a workflow blocker; never
-silently replace a registered custom agent with an unnamed/default child.
+case-sensitive native Codex `agent_type` values exposed by the profiles are
+`hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
+`hmasd-reviewer`. The `HMASDCodeScout`-style names in `.codex/config.toml` are
+registry section identifiers, not callable `agent_type` values. An
+`unknown agent_type` response is a workflow blocker; never silently replace a
+registered custom agent with an unnamed/default child.
 
 OMP tasks receive a complete assignment and return through automatic result
 delivery with `agent://` output and `history://` transcript. They never use the
