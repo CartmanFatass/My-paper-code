@@ -26,11 +26,11 @@ tool:
 - ordinary inspection, project management, Git, evidence integration, user
   communication, or a small direct controller edit -> controller works directly;
 - external-Pro CDC decision intake or controller-authorized implementation management ->
-  registered `research_project_manager` with `$hmasd-project-manager`;
+  registered `research_project_manager` with `hmasd-project-manager`;
 - external GPT-5.6 Pro CDC decision -> registered `open_divergent_exchange` with
-  `$hmasd-review-exchange`;
+  `hmasd-review-exchange`;
 - monitoring an already authorized run -> registered `experiment_monitor` with
-  `$hmasd-experiment`.
+  `hmasd-experiment`.
 
 Temporary implementation and review subagents belong only to the Research
 Project Manager and use native parent-child communication. Their existence does
@@ -55,24 +55,15 @@ controller <-> open_divergent_exchange
 controller <-> experiment_monitor
 ```
 
-## Explicit message envelope
+## Message shape
 
-Every persistent message begins with:
-
-```text
-$hmasd-dispatch-task
-```
-
-A controller assignment names exactly one destination role Skill on the next
-line. A callback to the controller names only this Skill. This explicit Skill
-activation is mandatory for every execution-surface switch; do not rely on the
-recipient's prior conversation context, title, remembered role, or an earlier
-message. Use the destination Skill's compact schema or:
+Persistent messages are triggered by their registered event name, not by
+forwarding Skill names as text. Do not add a mechanical Skill-name preamble to
+cross-session messages. Include `role`,
+`role_skill`, `handoff_id` and the event-specific fields so the recipient Skill
+can verify the assignment. Use the destination Skill's compact schema or:
 
 ```text
-$hmasd-dispatch-task
-$<destination-role-skill>
-
 HMASD_SESSION_TASK
 task_id=<stable id>
 role=<registered role>
@@ -118,10 +109,10 @@ metadata.
 
 ## Callback acceptance
 
-Accept a callback only when it explicitly activates this Skill, its native
-`source_thread_id` equals the registered role task, its stable `handoff_id`
-matches the assignment, and the sender/receiver form one legal edge. Repeated
-role plus `handoff_id` is one idempotent delivery.
+Accept a callback only when its event name matches this Skill's trigger
+description, its native `source_thread_id` equals the registered role task, its
+stable `handoff_id` matches the assignment, and the sender/receiver form one
+legal edge. Repeated role plus `handoff_id` is one idempotent delivery.
 
 ## Recovery and topology
 

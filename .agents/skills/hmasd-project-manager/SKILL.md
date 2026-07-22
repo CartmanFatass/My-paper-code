@@ -25,12 +25,11 @@ model and never launches an experiment.
 
 ## Common entry
 
-Every assignment starts with:
-
-```text
-$hmasd-dispatch-task
-$hmasd-project-manager
-```
+Every assignment uses a registered event name from this Skill's trigger
+description, such as `CDC_DECISION_INTAKE`, `START_IMPLEMENTATION`,
+`IMPLEMENTATION_PLAN_BRIEF`, `IMPLEMENTATION_READY` or
+`RESEARCH_MANAGER_BLOCKED`. Do not require or add a mechanical Skill-name
+preamble.
 
 Read the router and this Skill, then only the mode-specific reference and
 explicit inputs. Verify this task is the registered `research_project_manager`.
@@ -150,14 +149,12 @@ role Skills or routing. Do not launch training or formal evaluation.
 
 ## Callbacks
 
-Resolve the controller through `$hmasd-dispatch-task`, send once with live route
-fields unchanged and verify post-send invariance.
+Resolve the controller with the dispatcher route resolver, send once with live
+route fields unchanged and verify post-send invariance.
 
 CDC intake returns:
 
 ```text
-$hmasd-dispatch-task
-
 CDC_DECISION_BRIEF
 role=research_project_manager
 handoff_id=<research_id>:brief

@@ -5,12 +5,10 @@ description: Use inside the registered HMASD experiment-monitor session when rec
 
 # HMASD Experiment Monitor
 
-Accept only an assignment whose first lines explicitly invoke:
-
-```text
-$hmasd-dispatch-task
-$hmasd-experiment
-```
+Accept only an assignment whose event name matches this Skill's trigger
+description, such as `MONITOR_ASSIGNMENT`, `EXPERIMENT_MONITOR`, a monitor
+heartbeat wake, terminal run evidence, deadline evidence, or a monitoring
+callback/retry for one assigned run.
 
 Read `../hmasd-dispatch-task/SKILL.md`, `references/monitor-task.json`,
 `../hmasd-dispatch-task/references/session-roles.json`,
@@ -36,8 +34,8 @@ Each heartbeat performs one bounded check and ends. Running progress remains in
 the monitor session. It estimates remaining time from registered counters and
 retargets only its own heartbeat; the interval is never shorter than 10
 minutes. At terminal state, actionable monitor error, or deadline, keep the
-heartbeat active, resolve the controller through `$hmasd-dispatch-task`, and send
-the stable terminal payload. Delete and verify deletion of the heartbeat only
+heartbeat active, resolve the controller with the dispatcher route resolver, and
+send the stable terminal payload. Delete and verify deletion of the heartbeat only
 after the send tool confirms the controller task. Never use sleep, continuous
 polling, broad artifact scans, duplicate automations, or waiting messages to
 the controller.
@@ -64,9 +62,9 @@ to one universal progress template.
 Diagnose a monitoring anomaly from the registered evidence before reporting it.
 Try reasonable read-only alternatives inside the run boundary; do not ask the
 controller for a command sequence or file-by-file recipe. A retry reuses the
-same assignment with semantic `recovery_context` and an observable outcome,
-explicitly activates both Skills again, and leaves the monitor free to choose
-the bounded recovery method.
+same assignment with semantic `recovery_context`, the same registered event
+name and an observable outcome, and leaves the monitor free to choose the
+bounded recovery method.
 
 If callback delivery fails, leave the heartbeat active. Its next wake retries
 only the same `handoff_id`; it does not reread unrelated artifacts or repeat
@@ -77,12 +75,12 @@ router treats the repeated `handoff_id` idempotently.
 
 Take the controller session ID only from
 `session-roles.json.roles.controller.thread_id`. Immediately before a terminal
-callback, resolve that ID with `$hmasd-dispatch-task`; copy the returned `hostId`,
-`threadId`, `model`, and `thinking` unchanged into the send. Never take a return
+callback, resolve that ID with the dispatcher route resolver; copy the returned
+`hostId`, `threadId`, `model`, and `thinking` unchanged into the send. Never take a return
 ID or model setting from the assignment, monitor registry, conversation history,
 or heartbeat prompt. Delivery succeeds only when the send tool returns the same
 registered controller `threadId`; only then may this session delete its
 heartbeat.
 
-Every terminal callback prompt begins with `$hmasd-dispatch-task`, followed by a
-blank line and the registered `EXPERIMENT_MONITOR` payload.
+Every terminal callback prompt begins with the registered `EXPERIMENT_MONITOR`
+event payload. Do not add a mechanical Skill-name preamble.

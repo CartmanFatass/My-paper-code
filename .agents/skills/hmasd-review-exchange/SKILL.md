@@ -10,9 +10,6 @@ description: Use inside the registered HMASD Open-Pro Exchange session when rece
 Accept only:
 
 ```text
-$hmasd-dispatch-task
-$hmasd-review-exchange
-
 REVIEW_STAGE
 role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
 reviewer_role=OPEN_DIVERGENT
@@ -99,12 +96,10 @@ alone fails, retry deletion only. Release the owned page after all three facts.
 
 ## Callback
 
-Resolve the controller live through `$hmasd-dispatch-task`, preserve all route
-fields and send once:
+Resolve the controller live with the dispatcher route resolver, preserve all
+route fields and send once:
 
 ```text
-$hmasd-dispatch-task
-
 REVIEW_STAGE_COMPLETE
 role=OPEN_DIVERGENT
 handoff_id=<round>:OPEN_DIVERGENT:complete:<question>
