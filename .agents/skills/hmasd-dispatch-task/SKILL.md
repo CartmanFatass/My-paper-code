@@ -75,12 +75,13 @@ Manager's child task graph. The Controller does not dispatch them as writers.
 Immediately before every Project Manager send, read
 `references/session-roles.json` and require the ACTIVE `project_manager` entry.
 Resolve that exact task with
-`scripts/resolve_task_route.ps1 -ThreadId <registered id>`. Require nonempty
-`hostId`, `threadId`, `model` and `thinking`, and require the resolved thread ID
-to equal the registry. Send one complete assignment to that exact route while
-copying the resolved model and thinking unchanged. Resolve it again after the
-send; if identity, model or thinking changed, report route corruption and do
-not resend.
+`scripts/resolve_task_route.ps1 -Role project_manager`. The resolver owns the
+registry lookup; callers never supply or search for a task ID. Require nonempty
+`hostId`, `threadId`, `model` and `thinking`, and require the returned role to be
+`project_manager`. Send one complete assignment to that exact route while
+copying the resolved model and thinking unchanged. Resolve the same role again
+after the send; if identity, model or thinking changed, report route corruption
+and do not resend.
 
 The assignment states objective, authority, inputs, exact write or read-only
 scope, protected semantics, forbidden work, verification and return contract.
@@ -138,7 +139,7 @@ to match the active `open_divergent_exchange` entry. Static registry data never
 supplies `hostId`, model or thinking.
 
 Resolve the registered Exchange with
-`scripts/resolve_task_route.ps1 -ThreadId <registered id>`. Require one
+`scripts/resolve_task_route.ps1 -Role open_divergent_exchange`. Require one
 unarchived task and nonempty `hostId`, `threadId`, `model` and `thinking`. Copy
 all four unchanged into one send. Delivery succeeds only when the returned
 `threadId` matches the registered recipient.
@@ -192,3 +193,7 @@ registry. The persistent Exchange does not spawn OMP tasks. Completion of any
 surface never starts a successor directly; automatic result delivery wakes the
 Controller, whose controller continuation duty selects the next authorized
 surface.
+
+Any topology change is atomic: update `CURRENT_WORK.md`, this Skill, the role
+registry and the mode-specific contract tests in one Git boundary. A mode
+change is invalid while those four sources disagree.

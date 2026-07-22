@@ -26,6 +26,7 @@
     "one_session_one_role": true,
     "registered_roles_only": true,
     "forbid_title_or_history_based_role_inference": true,
+    "role_keyed_resolution_only": true,
     "omp_task_agents_are_not_sessions": true,
     "live_route_source": ".agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1",
     "stored_fields": [
@@ -37,6 +38,6 @@
     ],
     "forbidden_fields": ["hostId", "model", "thinking"],
     "update_owner": "active_controller",
-    "update_condition": "explicit persistent topology change or controller handoff"
+    "update_condition": "atomic update of CURRENT_WORK, dispatcher, registry, and contract tests"
   }
 }

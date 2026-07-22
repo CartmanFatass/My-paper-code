@@ -1,12 +1,26 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidatePattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')]
-    [string]$ThreadId,
+    [ValidateSet('controller', 'project_manager', 'open_divergent_exchange')]
+    [string]$Role,
+    [string]$RegistryPath = (Join-Path $PSScriptRoot '..\references\session-roles.json'),
     [string]$StateDb = (Join-Path $env:USERPROFILE '.codex\state_5.sqlite')
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not (Test-Path -LiteralPath $RegistryPath -PathType Leaf)) {
+    throw "Session role registry not found: $RegistryPath"
+}
+$registry = Get-Content -LiteralPath $RegistryPath -Raw | ConvertFrom-Json
+$entry = $registry.roles.PSObject.Properties[$Role].Value
+if ($null -eq $entry) { throw "Unregistered Codex role: $Role" }
+if ($Role -ne 'controller' -and [string]$entry.registration_status -ne 'ACTIVE') {
+    throw "Codex role is not ACTIVE: $Role"
+}
+$ThreadId = [string]$entry.thread_id
+if ($ThreadId -notmatch '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') {
+    throw "Registered Codex role has invalid thread ID: $Role"
+}
 if (-not (Test-Path -LiteralPath $StateDb -PathType Leaf)) {
     throw "Codex task database not found: $StateDb"
 }
@@ -32,6 +46,7 @@ if ([string]::IsNullOrWhiteSpace([string]$row.model) -or
 }
 
 [ordered]@{
+    role = $Role
     hostId = 'local'
     threadId = [string]$row.id
     model = [string]$row.model

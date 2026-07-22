@@ -7,12 +7,14 @@ $rolesPath = Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/sess
 $skill = Get-Content -LiteralPath $skillPath -Raw
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 
-$expected = @('controller', 'open_divergent_exchange')
+$expected = @('controller', 'project_manager', 'open_divergent_exchange')
 $actual = @($roles.roles.PSObject.Properties.Name)
-if ($roles.schema_version -ne 8 -or (Compare-Object $expected $actual)) {
-    throw 'Persistent role graph must contain only controller and open_divergent_exchange at schema 8'
+if ($roles.schema_version -ne 9 -or (Compare-Object $expected $actual)) {
+    throw 'Persistent role graph must contain controller, project_manager and open_divergent_exchange at schema 9'
 }
 if ($roles.roles.controller.thread_id -ne '019f5c78-0c91-7612-adb4-c1fcfe4484c8' -or
+    $roles.roles.project_manager.thread_id -ne '019f7e6e-2f81-7463-93a6-4bb836585fb8' -or
+    $roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
     $roles.roles.open_divergent_exchange.thread_id -ne '019f716c-3c8a-7891-8c89-c94dc94fab4c' -or
     $roles.roles.open_divergent_exchange.reviewer_role -ne 'OPEN_DIVERGENT' -or
     $roles.roles.open_divergent_exchange.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md') {
@@ -25,6 +27,10 @@ foreach ($entry in $roles.roles.PSObject.Properties.Value) {
 }
 foreach ($required in @(
     'Controller direct control-plane work',
+    'Persistent Codex `project_manager`',
+    'controller <-> project_manager',
+    '-Role project_manager',
+    'callers never supply or search for a task ID',
     'hmasd-project-manager',
     'isolated: true',
     'hmasd-experiment-monitor',
@@ -43,7 +49,15 @@ foreach ($required in @(
     'registered Controller task ID')) {
     if (-not $skill.Contains($required)) { throw "Dispatcher missing: $required" }
 }
-foreach ($forbidden in @('controller <-> research_project_manager', 'controller <-> experiment_monitor')) {
+foreach ($forbidden in @('controller <-> research_project_manager', 'controller <-> experiment_monitor', '-ThreadId <registered id>')) {
     if ($skill.Contains($forbidden)) { throw "Retired persistent edge remains: $forbidden" }
+}
+$resolver = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1') -Raw
+foreach ($required in @("ValidateSet('controller', 'project_manager', 'open_divergent_exchange')", 'Unregistered Codex role', 'role = $Role')) {
+    if (-not $resolver.Contains($required)) { throw "Role resolver missing: $required" }
+}
+$currentWork = Get-Content -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
+if ($currentWork.Contains('OMP: PAUSED') -and -not $currentWork.Contains($roles.roles.project_manager.thread_id)) {
+    throw 'Paused-OMP boundary does not name the registered project_manager'
 }
 Write-Output 'HMASD_DISPATCH_TASK_CONTRACT_OK'

@@ -15,6 +15,7 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
 
 $alwaysInspect = @(
     'AGENTS.md',
+    'docs/project/CURRENT_WORK.md',
     '.omp/config.yml',
     '.agents/skills/hmasd-dispatch-task/SKILL.md',
     '.agents/skills/hmasd-dispatch-task/references/session-roles.json',
@@ -37,8 +38,9 @@ if (Test-Path -LiteralPath $skillRoot -PathType Container) {
         Where-Object { $_.Extension -in @('.md', '.json', '.yaml', '.yml', '.ps1', '.py') } |
         ForEach-Object { $files.Add($_.FullName) }
 }
+$currentWork = Get-Content -LiteralPath (Join-Path $RepoRoot 'docs/project/CURRENT_WORK.md') -Raw
 $ompRoot = Join-Path $RepoRoot '.omp/agents'
-if (Test-Path -LiteralPath $ompRoot -PathType Container) {
+if (-not $currentWork.Contains('OMP: PAUSED') -and (Test-Path -LiteralPath $ompRoot -PathType Container)) {
     Get-ChildItem -LiteralPath $ompRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.md', '.json', '.yaml', '.yml') } |
         ForEach-Object { $files.Add($_.FullName) }

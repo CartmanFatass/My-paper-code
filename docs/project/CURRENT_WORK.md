@@ -24,9 +24,6 @@ persistent external-Pro review, direct CDC evidence intake, native Codex work,
 Git integration and terminal evidence integration. No OMP task is active or
 authorized under this boundary.
 
-The former Code Manager task `019f7bd8-b4db-71f2-9a6e-f0082a0dc3d5` is not a
-registered role and must never be selected by title or history search.
-
 The interrupted OMP attempt is preserved only as unaccepted WIP at
 `C:\Users\wu\.omp\wt\t3f27b6427\m`. Its five modified tracked files have not
 been copied, staged, committed or merged into `aggressive`. No formal experiment

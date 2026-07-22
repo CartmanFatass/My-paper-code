@@ -33,6 +33,11 @@ Roles are resolved only from the dispatch Skill registry. Never infer a current
 role from a task title, an old callback or conversation search. Unregistered
 former manager sessions are obsolete execution surfaces.
 
+An execution-surface change is one atomic control boundary: update
+`CURRENT_WORK.md`, the dispatch Skill, its role registry and the corresponding
+mode-specific contract tests together. Do not activate a mode when those
+sources disagree.
+
 The controller alone owns workflow and role-topology design, routing, direct
 evidence intake, resource and formal-experiment authorization, Git integration,
 project control, evidence integrity and user communication. External GPT-5.6

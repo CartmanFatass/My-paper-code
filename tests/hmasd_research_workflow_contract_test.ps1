@@ -5,6 +5,23 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } | Select-Object -ExpandProperty Name | Sort-Object)
 $expectedSkills = @('hmasd-dispatch-task', 'hmasd-review-exchange', 'hmasd-review-round') | Sort-Object
 if (Compare-Object $expectedSkills $skills) { throw "Unexpected active Skill set: $($skills -join ',')" }
+$currentWork = Get-Content -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
+if ($currentWork.Contains('OMP: PAUSED')) {
+    $roles = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
+    $dispatcher = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
+    if ($roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
+        $roles.roles.project_manager.thread_id -ne '019f7e6e-2f81-7463-93a6-4bb836585fb8') {
+        throw 'Paused-OMP mode requires the registered persistent Codex project_manager'
+    }
+    foreach ($required in @('Persistent Codex Project Manager delivery', '-Role project_manager', 'controller <-> project_manager')) {
+        if (-not $dispatcher.Contains($required)) { throw "Paused-OMP dispatcher missing: $required" }
+    }
+    foreach ($forbidden in @('current OMP root task', 'authorized OMP Project Manager work', 'authorized rebuildable OMP Monitor work')) {
+        if ($currentWork.Contains($forbidden)) { throw "Paused-OMP active boundary retains OMP authority: $forbidden" }
+    }
+    Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=codex_persistent'
+    exit 0
+}
 $expectedAgents = @(
     'hmasd-project-manager.md',
     'hmasd-experiment-monitor.md',
