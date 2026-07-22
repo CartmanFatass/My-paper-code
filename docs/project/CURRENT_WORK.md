@@ -39,10 +39,11 @@ session and preserved its route.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
-The next boundary is the pre-registered focused external-Pro clarification of
-whether the behavioral battery distinguishes learned commitment from metrics
-that are satisfied by construction. This coordination consumes no iteration;
-an iteration is consumed only by a conclusion-bearing evidence action.
+The focused external-Pro clarification returned
+`BATTERY_REQUIRES_MINIMAL_CORRECTION`: keep `G` and the three arms, but separate
+same-state forced-event timing effects, mark effects, representation influence
+and natural selection/support. This coordination consumes no iteration; an
+iteration is consumed only by a conclusion-bearing evidence action.
 
 Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 `docs/project/` at the user's direction, under a different model: the user held
@@ -170,12 +171,12 @@ evidence.
 
 ## Next Action
 
-Automatically send the behavioral-battery identifiability question to the
-registered Open-Pro Exchange as one focused continuation. After the raw response
-returns, perform direct Controller CDC evidence intake, apply the exact durable
-deltas, show the concise Pro brief and continue the already-authorized branch:
-either one bounded measurement-contract package through the OMP Project Manager
-or the unchanged formal launch with one rebuildable OMP Monitor task. Do not
+Dispatch one isolated OMP Project Manager task to realize the adopted minimal
+measurement correction. It must retain the unchanged formal training and
+primary `G`, make the causal decomposition and result interpretation executable,
+reuse the single future frozen formal checkpoint, and return one reviewed
+package without launching compute. After Controller integration, launch the
+already-authorized formal chain with one rebuildable OMP Monitor task. Do not
 treat operationally aborted runs as scientific evidence.
 
 ## Open Contract Questions

@@ -5,12 +5,13 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live, conditional.
+- Status: live, scheduled for minimally corrected causal measurement.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
-- Intervention consequence: changing the held state changes later behavior, not
-  merely internal logits.
+- Intervention consequence: changing the held state changes primitive behavior,
+  and a same-state forced event changes later external utility beyond natural
+  event-selection correlation.
 - Natural consequence: renewal and persistence respond to policy context rather
   than a random head or exogenous opportunity spacing alone.
 - Held-out consequence: benefit survives unseen membership and lifetime
@@ -53,8 +54,9 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 
 ## C-MEASURE — Current behavior metrics do not identify commitment
 
-- Status: live.
+- Status: partially confirmed; smallest refuted unit isolated.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
-- Separating evidence: explicit counterexamples and a corrected behavior-level
-  estimand.
+- Separating evidence: same-state exact-snapshot forced KEEP/RENEW effects,
+  separated from mark intervention, representation influence and natural
+  selection/support statistics.

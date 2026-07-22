@@ -10,6 +10,8 @@
 | L-D | The ordinary recurrent arm shows partial learning without registered access. | The frozen G0 ordinary arm. | Ordinary recurrence is universally insufficient. |
 | L-OBJ | Ordinary no-access cannot be a stronger-MARL research admission gate. | Research-direction logic. | Ordinary baselines can be omitted from superiority claims. |
 | L-BAT | Usage, exogenous lifetime variation and logit magnitude can admit trivial passing constructions. | The current EHC behavioral battery. | Event-held state is useless. |
+| L-FORCED-EVENT | At an eligible naturally reached decision state, exact-snapshot CRN forcing identifies the local consequence of KEEP versus RENEW; comparing naturally occurring event groups does not. | The corrected EHC continuation estimand. | General learned hierarchy, skills or variable-lifetime capability. |
+| L-MARK-TV | Same-state mark intervention identifies a causal path from the held mark to primitive behavior. | The EHC mark adapter and intervention population. | Utility, persistence or semantic usefulness. |
 
 ## Counterexamples
 
@@ -34,3 +36,20 @@ sequence behavior. It refutes logit magnitude as sufficient behavioral evidence.
 
 Failure of ordinary control on one benchmark limits that comparison but does
 not imply a structurally different stronger algorithm should not be studied.
+
+### CE-CONTEXT-INSENSITIVE-HAZARD
+
+A fixed or context-insensitive renewal hazard can produce nondegenerate event
+support and opportunity-count spread without learned demand-responsive timing.
+
+### CE-USEFUL-MARK-ARBITRARY-TIMING
+
+A useful mark can change primitive behavior and improve utility while renewal
+timing remains arbitrary. It separates representation value from learned event
+timing.
+
+### CE-NATURAL-EVENT-SELECTION
+
+Natural KEEP and RENEW rows need not be exchangeable. Their unpaired future
+returns can differ because the policy selects different contexts, so only the
+same-state forced alternative is a causal continuation estimand.
