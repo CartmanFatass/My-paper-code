@@ -47,9 +47,11 @@ Never mutate source, project control, experiment evidence or the manifest.
 
 A root OMP restart does not stop a persistent `hub` run. On recovery, the
 Controller reads the manifest and authoritative status, checks `hub` process
-state and current task roster, and creates `monitor-<run-id>` only when the run
-is nonterminal and no matching task exists. If status is already terminal, a
-bounded replacement Monitor may return that payload immediately.
+state and current task roster, and creates `monitor-<run-id>` only when no
+matching task exists and its terminal idempotency key has not already been
+accepted. A nonterminal replacement resumes bounded observation; if status is
+already terminal, a bounded replacement returns that retained payload
+immediately.
 
 A missing process with nonterminal status is an actionable operational error,
 not permission to restart. A replacement Monitor uses the same manifest and

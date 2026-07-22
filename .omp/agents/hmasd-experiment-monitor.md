@@ -35,8 +35,10 @@ and an idempotency key derived from run ID, terminal state and authoritative
 status update identity. Repeated jobs for the same terminal evidence return the
 same key.
 
-A root OMP restart may rebuild you from the same manifest only when status is
-nonterminal and no matching task job exists. Rebuilding you never changes or
+A root OMP restart may rebuild you from the same manifest only when no matching
+task job exists and the terminal idempotency key has not already been accepted.
+If status is already terminal, return the retained terminal payload immediately;
+if it is nonterminal, resume bounded observation. Rebuilding never changes or
 restarts the run. A missing process with nonterminal authoritative status is an
 actionable operational error, not permission to repair.
 

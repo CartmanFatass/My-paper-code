@@ -27,6 +27,13 @@ foreach ($required in @(
     'never scientifically interpret')) {
     if (($agent + "`n" + $protocol) -notmatch [regex]::Escape($required)) { throw "Monitor contract missing: $required" }
 }
+foreach ($required in @(
+    'terminal idempotency key has not already been accepted',
+    'If status is already terminal',
+    'return the retained terminal payload immediately',
+    'if it is nonterminal, resume bounded observation')) {
+    if (-not $agent.Contains($required)) { throw "Monitor reconstruction rule missing from agent: $required" }
+}
 foreach ($forbidden in @('session-roles.json', 'resolve_task_route.ps1', 'automation_update', 'controller_return_route')) {
     if (($agent + "`n" + $protocol).Contains($forbidden)) { throw "Persistent Monitor mechanism remains: $forbidden" }
 }
