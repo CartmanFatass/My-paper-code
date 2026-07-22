@@ -6,20 +6,33 @@ Updated: 2026-07-22
 
 - Workspace: `C:\project\HMASD`
 - Branch: `aggressive`
-- **Controller: current OMP root task.** `AGENTS.md` is its operating contract.
+- **Controller: current Codex root task.** `AGENTS.md` is its operating contract.
+- **Execution mode: OMP: PAUSED.** Do not launch, resume or route through OMP
+  until the user explicitly restores it.
 - Scientific direction comes from the registered external GPT-5.6 Pro. The
-  native OMP Project Manager owns algorithm realization and code-side decisions
-  inside that direction; it does not select a different research direction.
+  Codex Controller currently owns integration and may use native Codex
+  collaboration agents for bounded implementation and verification.
 
 ## Active Boundary
 
-The bounded autonomous research chain is ACTIVE. Five evidence-bearing
-iterations remain available. The controller automatically continues accepted
-results through persistent external-Pro review, direct CDC evidence intake,
-authorized OMP Project Manager work, Git integration, authorized rebuildable
-OMP Monitor work and terminal evidence integration. Open-Pro Exchange is the
-only persistent non-Controller role; OMP task results return automatically to
-the Controller, and no role or task starts its successor directly.
+The bounded autonomous research chain remains ACTIVE with five evidence-bearing
+iterations available, but its implementation and monitoring surfaces are now
+pure Codex. The controller automatically continues accepted results through
+persistent external-Pro review, direct CDC evidence intake, native Codex work,
+Git integration and terminal evidence integration. No OMP task is active or
+authorized under this boundary.
+
+The interrupted OMP attempt is preserved only as unaccepted WIP at
+`C:\Users\wu\.omp\wt\t3f27b6427\m`. Its five modified tracked files have not
+been copied, staged, committed or merged into `aggressive`. No formal experiment
+was launched. The Controller must audit that WIP before selectively migrating
+anything through the pure Codex path.
+
+## Dormant OMP Configuration
+
+The following OMP notes are retained only to make a later explicit restoration
+reproducible. They are not active routing or execution authority while
+`OMP: PAUSED`.
 
 Project OMP sessions now load only `hmasd-*` Skills. Superpowers process Skills
 are disabled at project scope; their useful bounded-task, causal-debugging,
@@ -75,7 +88,7 @@ session executed work through bounded subagents under a single orchestrator.
 One writer holds a given file set at a time. Concurrent mutating tasks on the
 same scope are not dispatched.
 
-## Binding Engineering Constraints
+## Binding Engineering Constraints (surface independent)
 
 These are durable technical constraints, not workflow. They bind algorithm
 realization and are embedded in the native OMP Project Manager and code-agent
@@ -171,13 +184,11 @@ evidence.
 
 ## Next Action
 
-Dispatch one isolated OMP Project Manager task to realize the adopted minimal
-measurement correction. It must retain the unchanged formal training and
-primary `G`, make the causal decomposition and result interpretation executable,
-reuse the single future frozen formal checkpoint, and return one reviewed
-package without launching compute. After Controller integration, launch the
-already-authorized formal chain with one rebuildable OMP Monitor task. Do not
-treat operationally aborted runs as scientific evidence.
+Audit the interrupted five-file WIP against the accepted Pro correction and the
+current implementation plan. Migrate only verified changes into `aggressive`
+through native Codex work, run the focused checks, and keep formal compute
+stopped until that package is accepted. Do not treat the interrupted OMP task or
+the operationally aborted runs as scientific evidence.
 
 ## Open Contract Questions
 

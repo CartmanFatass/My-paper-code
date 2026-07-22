@@ -18,6 +18,14 @@ document needed at the current boundary:
 The durable research objects live under `docs/research/cdc/`. Load only the
 conjecture, ledger, portfolio or evidence note required at the current boundary.
 
+`CURRENT_WORK.md` also selects the active execution surface. If it declares
+OMP paused, every OMP-specific instruction below is inactive for that boundary:
+do not launch, resume or route work through OMP. The Controller works directly
+or uses native Codex collaboration agents, and any existing OMP worktree is
+unaccepted evidence until the Controller explicitly audits and migrates it.
+Persistent external-Pro transport is unaffected unless `CURRENT_WORK.md` also
+pauses it.
+
 The controller alone owns workflow and role-topology design, routing, direct
 evidence intake, resource and formal-experiment authorization, Git integration,
 project control, evidence integrity and user communication. External GPT-5.6

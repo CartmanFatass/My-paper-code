@@ -1,6 +1,6 @@
 ---
 name: hmasd-dispatch-task
-description: Route HMASD work among Controller direct control-plane work, native OMP Project Manager or Monitor tasks, and the persistent Open-Pro Exchange.
+description: Route HMASD work using the execution mode selected in CURRENT_WORK.md. Never dispatch OMP when that active boundary pauses it.
 ---
 
 # HMASD Task Dispatch
@@ -10,6 +10,24 @@ description: Route HMASD work among Controller direct control-plane work, native
 Choose the execution surface and deliver one bounded assignment. This Skill
 grants no scientific, algorithm, implementation, experiment, Git or
 project-control authority by itself.
+
+## Mandatory execution-mode check
+
+Read `docs/project/CURRENT_WORK.md` before selecting a surface. Its active
+execution mode is authoritative.
+
+When it says `OMP: PAUSED`:
+
+- do not start, resume, inspect through, or send assignments to OMP;
+- do not interpret an old OMP task, worktree or transcript as an active lease;
+- use Controller-direct work or native Codex collaboration agents for bounded
+  implementation and verification;
+- keep any OMP-produced WIP isolated until the Controller explicitly audits
+  and migrates it;
+- retain the registered Open-Pro Exchange route unless separately paused.
+
+The OMP sections below apply only when `CURRENT_WORK.md` explicitly says
+`OMP: ACTIVE`.
 
 The Controller owns continuation: every accepted OMP task result or persistent
 role callback is a wake-up. Integrate the evidence, update control state only at
