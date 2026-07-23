@@ -78,13 +78,13 @@ the Project Manager-accepted CDC state.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 
-- Status: active useful-effect definition after the structural G3 roster gate
-  passed.
+- Status: useful-effect G3 formal contract frozen; implementation pending.
 - Claim: the important variable-N difficulty is joint complementary allocation,
   not an individual lifetime mechanism in isolation.
 - Separating evidence: a roster-only intervention changes an asynchronous
-  editor's choice and complementary value, followed by natural and held-out
-  transport beyond matched TEAM_REC and independent-editor explanations.
+  editor's demand-served effect and value, followed by natural and held-out
+  transport beyond matched TEAM_REC and NO_ROSTER explanations. Duplicate-
+  optimal demand prevents label diversity from satisfying the claim.
 
 ## C-LINK-NULL — Commitment is not load-bearing for the source family
 

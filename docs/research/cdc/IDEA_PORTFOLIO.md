@@ -19,17 +19,17 @@ compute authority.
 ## Scheduled action
 
 ```text
-completed_action=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
+completed_action=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION
 source_family=USEFUL_EFFECT_ROSTER_G3
 nonformal_disposition=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
-next_action=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION
+next_action=USEFUL_EFFECT_ROSTER_G3_IMPLEMENTATION
 authorization_status=authorized_under_autonomous_grant
 conclusion_bearing_iterations_consumed=3
 iterations_remaining=2
 ```
 
-The multi-record roster gate passes without consuming an iteration. Its
-uniqueness metric is retained only as structural evidence; it is not promoted
-into learned or formal work. The active zero-compute definition uses realized
-service effects and demand-served utility, with TEAM_REC as the primary simpler
-explanation. Two conclusion-bearing iterations remain.
+The learned contract is frozen around realized service effects and
+demand-served utility. It includes duplicate-optimal demands, zero-demand
+labels, held-out cardinality plus long gaps, and TEAM_REC as the primary simpler
+explanation. Proof-sized implementation is next; no compute or iteration has
+been consumed and two conclusion-bearing iterations remain.

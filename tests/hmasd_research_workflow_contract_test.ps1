@@ -42,11 +42,11 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION',
+    'active_assignment_id=USEFUL_EFFECT_ROSTER_G3_IMPLEMENTATION',
     'iterations_remaining=2',
     'conclusion_bearing_iterations_consumed=3',
     'intermediate_authorization_prompts=forbidden',
-    'formal_compute_status=not_launchable_until_separate_g3_contract',
+    'formal_compute_status=not_launchable_until_g3_implementation_acceptance',
     'g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2',
     'g2_g_team_ci95=[0.0,0.0]',
     'g2_g_link_ci95=[0.5,0.5]',
@@ -54,17 +54,20 @@ foreach ($required in @(
     'g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3',
     'g3_gate_cases=18400',
     'g3_gate_tests=5_passed',
+    'g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md',
+    'g3_primary_arm=ROSTER_ATTN',
+    'g3_primary_comparator=TEAM_REC',
     'iteration_report_status=iterations_1_to_3_complete',
     'latest_iteration_report=docs/report/ITERATION_3.md',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=not_launchable',
-    'active_implementation=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION',
-    'sum_k min(service_count_k, demand_k) / sum_k demand_k',
-    'NO_ROSTER, TEAM_REC and ROSTER_ATTN',
-    'This definition consumes zero iterations')) {
+    'formal_run_status=not_launchable_until_implementation_acceptance',
+    'active_implementation=USEFUL_EFFECT_ROSTER_G3',
+    'ROSTER_ATTN/TEAM_REC/NO_ROSTER',
+    'primary_comparator=TEAM_REC',
+    'Implementation and exercise consume zero iterations')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
 foreach ($required in @(
