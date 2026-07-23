@@ -15,6 +15,7 @@ You are the external GPT-5.6 Pro scientific decision authority for the next HMAS
 - `docs/research/cdc/CONJECTURES.md`
 - `docs/research/cdc/IDEA_PORTFOLIO.md`
 - `docs/research/cdc/LEMMA_COUNTEREXAMPLE_LEDGER.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_CPU_NATURAL_BRANCH_TYPED_CONTRACT.md`
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/50_DISPOSITION.md`
