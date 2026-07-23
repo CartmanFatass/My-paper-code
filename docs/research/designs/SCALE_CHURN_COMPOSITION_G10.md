@@ -1,7 +1,7 @@
 # Scale-by-churn composition G10
 
-Status: executable definition and implementation accepted; bounded nonformal
-exercise operationally valid; formal iteration 11 ready.
+Status: formal closed as `ROBUST_SCALE_CHURN_COMPOSITION_G10`; no rerun, tuning
+or relabeling.
 
 ## Frozen policy and source
 

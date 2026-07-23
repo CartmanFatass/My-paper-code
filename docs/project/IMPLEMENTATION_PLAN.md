@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=SCALE_CHURN_COMPOSITION_G10
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_ROBUST_SCALE_CHURN_COMPOSITION_G10
 design=docs/research/designs/SCALE_CHURN_COMPOSITION_G10.md
 backend=cpu
 torch_threads=1
@@ -63,3 +63,13 @@ Integrate the prelaunch package and assign its exact formal iteration-11
 commands to the fixed Luna-low operator. A valid result consumes iteration 11
 and leaves six authorized iterations; operationally invalid evidence consumes
 none.
+
+## Formal closure and successor
+
+Source `e66a202673ea91711d9d122d1807e9597e3dba43` completed all 18 cells and
+returned `ROBUST_SCALE_CHURN_COMPOSITION_G10`. The three deterministic lower
+bounds are `0.9296265`, `0.9245605` and `0.9272461`; mixed stochastic mean is
+`0.8963305`. G10 is closed without rerun or tuning.
+
+The next zero-compute boundary is `SLOT_LAYOUT_INVARIANCE_G11_DERIVATION`;
+its paired relabeling/padding contract is not yet frozen here.

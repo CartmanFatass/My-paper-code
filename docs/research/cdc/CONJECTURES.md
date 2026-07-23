@@ -7,8 +7,8 @@ the Project Manager-accepted CDC state.
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
 - Status: supported as a usable prefix-normalized dynamic-roster algorithm
-  through N=40 by formal G8 and under eight-edit churn through N=16 by formal
-  G9; their cross-product remains open.
+  through N=40 with eight-edit churn by formal G10; slot-layout invariance
+  remains open.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -39,10 +39,13 @@ the Project Manager-accepted CDC state.
   `0.9309692`, `0.9294434` and `0.9299316` across repeated-rejoin,
   load-proximal and mixed eight-edit domains; the mixed stochastic mean is
   `0.9099933`.
-- Strongest remaining counterexample: scale and churn have only been tested
-  separately. Their errors may interact when a large active set changes often.
-- Separating evidence: freeze G8 finals and evaluate the large-count/high-churn
-  cross-product with zero optimizer steps before another algorithm change.
+- Formal composition evidence: G10 places N=12--40 and eight membership edits
+  in the same episodes. Its deterministic lower bounds are `0.9296265`,
+  `0.9245605` and `0.9272461`, with mixed stochastic mean `0.8963305`.
+- Strongest remaining counterexample: dense low-numbered lifecycle keys and
+  capacity close to active N may conceal dependence on a fixed slot layout.
+- Separating evidence: paired isomorphic episodes under sparse/permuted keys and
+  larger padding, with frozen checkpoints and zero optimizer steps.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.
