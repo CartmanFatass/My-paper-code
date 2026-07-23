@@ -29,9 +29,18 @@ listed Git-visible evidence. Require the current task to equal the registered
 `open_divergent_exchange`, and require the registered external conversation,
 question and raw paths to match. Reject every other reviewer role.
 
-The question must list `docs/project/ALGORITHM_PRINCIPLES.md` and
-`docs/external-review/OPEN_REVIEW_PRINCIPLES.md` and must not list internal
-manager references.
+For every new `REVIEW_STAGE`, the brief and question must declare
+`semantic_author=project_manager`,
+`artifact_scope=reviewer_visible_code_side`, and
+`scientific_authority=external_pro`. They must list
+`docs/project/ALGORITHM_PRINCIPLES.md` and
+`docs/external-review/OPEN_REVIEW_PRINCIPLES.md`. PM-authored reviewer-visible
+artifacts carrying those markers are admissible; internal manager audits,
+callbacks, scratch notes and work logs are forbidden.
+
+An assignment whose freshness fence was visibly accepted before this ownership
+contract changed may finish transport and raw archival only. Report it as a
+superseded process; it cannot supply adoption or successor authority.
 
 ## Authority
 
@@ -41,11 +50,14 @@ experiments. Do not change models, rank routes, select a successor, dispatch
 another role or use an unrelated browser conversation.
 
 Use narrow interface and broad transport judgment. The controller supplies the
-round, commit, question and raw path; this Exchange chooses the in-scope browser
+round, commit, exact PM-authored question and raw path unchanged; this Exchange chooses the in-scope browser
 inspection and recovery method. Do not ask the controller for selectors, page
 steps, tab commands or minor format decisions. Escalate only when the registered
 conversation, pushed boundary, raw archive, route delivery, or authority itself
 is unavailable.
+
+The Exchange reads and transports the exact PM-authored files unchanged. It
+does not normalize their wording or substitute a Controller-authored summary.
 
 ## Stage
 
@@ -95,6 +107,10 @@ recovery remains. Emit `REVIEW_STAGE_BLOCKED` only when the registered
 conversation, pushed boundary, raw archive, callback route or authority remains
 unavailable after all safe in-scope recovery is exhausted.
 
+If package validation fails, do not invite Controller rewriting. Return the
+direct validation evidence with `repair_owner=project_manager`; Controller
+routes it unchanged to PM, which owns the semantic repair.
+
 When the current response stops naturally and is stable, archive it to the
 assigned raw, reread it and require exact text equality. Preserve every complete
 response even when content is incomplete or references the wrong evidence.
@@ -102,9 +118,10 @@ Report content limitations as `COMPLETE_WITH_GAPS`, never as transport failure.
 
 Judge content gaps semantically. A missing label, reordered section or wording
 variation is not transport failure if the response is complete and archivable.
-Use `COMPLETE_WITH_GAPS` for substantive scientific or evidence omissions and
-let the controller or project manager decide whether a focused follow-up is
-needed.
+Use `COMPLETE_WITH_GAPS` for substantive scientific or evidence omissions.
+Project Manager decides whether a code-side gap needs a focused follow-up;
+exact Pro text determines whether Pro left a scientific question open.
+Controller only routes the resulting request.
 
 ## Heartbeat
 
@@ -140,12 +157,21 @@ raw=<round_path>/<raw>
 verification=natural_complete;exact_text_equal
 quality=<COMPLETE|COMPLETE_WITH_GAPS>
 quality_notes=<concise semantic observation or none>
+repair_owner=<project_manager when package repair is required|none>
+superseded_process=<true|false>
+adoption_authority=<false|external_pro_raw_only>
 ```
 
 For a genuine operational boundary send `REVIEW_STAGE_BLOCKED` with the same
 `source_thread_id`, `skill`, role and round,
 `handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>` and the direct reason.
-It also includes `recovery_attempts=<count>`, a concise attempt summary and
-`recovery_exhausted=true`. Do not ask the Controller for selectors, browser
+It also includes `recovery_attempts=<count>`, a concise attempt summary,
+`recovery_exhausted=true`, and `repair_owner=project_manager` when the boundary
+is package content. Do not ask the Controller for selectors, browser
 commands or click sequences; request user action only when the application
 itself exposes a required approval.
+
+For the pre-contract accepted fence, set `superseded_process=true` and
+`adoption_authority=false`. Every current PM-authored round sets
+`superseded_process=false`; `external_pro_raw_only` means only the exact raw may
+supply science and still grants no automatic code, compute or successor action.

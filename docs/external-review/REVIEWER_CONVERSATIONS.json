@@ -1,11 +1,11 @@
 {
-  "schema_version": 25,
+  "schema_version": 26,
   "updated": "2026-07-22",
   "round_controller": {
-    "kind": "active_controller_direct_exchange",
+    "kind": "active_controller_mechanical_exchange",
     "session_role_registry": ".agents/skills/hmasd-dispatch-task/references/session-roles.json",
     "external_scientific_decision": "open_divergent",
-    "decision_intake": "active_controller_direct",
+    "decision_intake": "active_controller_mechanical",
     "git_boundary_owner": "active_controller"
   },
   "exchange_contract": {

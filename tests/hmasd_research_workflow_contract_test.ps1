@@ -63,6 +63,16 @@ foreach ($required in @('C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'torch 2.7.0+cpu', 'CPU', 'torch threads 1')) {
     if (-not $agentContext.Contains($required)) { throw "Agent context missing CPU contract: $required" }
 }
+$agents = Get-Content (Join-Path $repo 'AGENTS.md') -Raw
+foreach ($required in @('semantic_author=project_manager',
+    'artifact_scope=reviewer_visible_code_side', 'repair_owner=project_manager',
+    'exact PM-authored files unchanged')) {
+    if (-not $agents.Contains($required)) { throw "Controller/PM ownership boundary missing: $required" }
+    if (-not $agentContext.Contains($required)) { throw "Agent context ownership boundary missing: $required" }
+}
+if (-not $agentContext.Contains('does not apply to protected scientific choices')) {
+    throw 'Agent context reasonable-choice rule still reaches protected science'
+}
 $portfolio = Get-Content (Join-Path $repo 'docs/research/cdc/IDEA_PORTFOLIO.md') -Raw
 foreach ($required in @('ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1', 'C-BASE', 'C-LINK-NULL')) {
     if (-not $portfolio.Contains($required)) { throw "Portfolio missing Pro intake: $required" }
@@ -85,11 +95,15 @@ foreach ($relative in @(
         throw "Missing completed Pro intake file: $relative"
     }
 }
-foreach ($required in @('external-Pro review is complete',
+foreach ($required in @('external-Pro result review is complete',
     'ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1',
-    'no iteration-2 formal compute is authorized yet',
+    'cannot authorize code, science, a successor, or iteration-2',
     'No iteration-2 formal compute is authorized until')) {
     if (-not $current.Contains($required)) { throw "Current boundary missing Pro intake: $required" }
+}
+foreach ($required in @('Controller-authored G1 clarification is transport-only',
+    'cannot be adopted', 'Project Manager-owned replacement package')) {
+    if (-not $current.Contains($required)) { throw "Current ownership correction missing: $required" }
 }
 $reconciliation = Get-Content (Join-Path $roundRoot '30_EVIDENCE_RECONCILIATION.md') -Raw
 foreach ($required in @('exact G0', 'first-match', 'Lower-precedence `G`', 'K-bin',
@@ -112,15 +126,6 @@ foreach ($match in $listedEvidence) {
     if (-not (Test-Path (Join-Path $repo $listedPath) -PathType Leaf)) {
         throw "G1 Pro question lists missing evidence: $listedPath"
     }
-}
-if (-not $g1Question.Contains('02_SOURCE_CONTRACT_GAP.md') -or
-    -not (Test-Path (Join-Path $g1RoundRoot '02_SOURCE_CONTRACT_GAP.md') -PathType Leaf)) {
-    throw 'G1 Pro question is missing the Controller-owned source-contract gap'
-}
-$g1Gap = Get-Content (Join-Path $g1RoundRoot '02_SOURCE_CONTRACT_GAP.md') -Raw
-foreach ($required in @('authority=controller_owned_reviewer_visible_fact',
-    'not scientific authority', 'cannot be selected by the Controller or implementation roles')) {
-    if (-not $g1Gap.Contains($required)) { throw "G1 source gap authority missing: $required" }
 }
 if ($current.Contains('iteration 2 is held at the external result-review boundary')) {
     throw 'CURRENT_WORK still holds iteration 2 at the completed review boundary'

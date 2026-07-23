@@ -26,7 +26,7 @@ catalog trigger in `$skill-name` form. Use `$hmasd-review-exchange` and
 assets only and are not dispatch syntax.
 
 The Controller owns routing, continuation, Git, formal-compute authority, and
-direct evidence intake. Under an active autonomous grant, an accepted callback
+mechanical provenance intake. Under an active autonomous grant, an accepted callback
 wakes the Controller to route the next already-authorized action. Stop only on
 a paused/exhausted grant, genuine blocker, or protected-scope expansion. A
 reported failure is not a genuine blocker until the role has completed bounded self-recovery
@@ -83,9 +83,27 @@ to guess a nearby SHA.
 
 The assignment includes objective, external-Pro scientific direction, evidence
 inputs, exact scope, protected semantics, exclusions, checks, and return
-contract. The Manager owns decomposition and native child-agent use. It does
-not change science, Git, project control, external review, or formal-compute
-authority.
+contract. The Manager owns decomposition, native child-agent use, and all
+code-side semantic artifacts. It does not change science, Git, project control,
+external-review transport, or formal-compute authority.
+
+If a protected scientific choice blocks executable definition or implementation,
+the Manager owns the full reviewer-visible code-side package rather than an
+internal audit that Controller must translate. Its brief, evidence manifest and
+question declare:
+
+```text
+semantic_author=project_manager
+artifact_scope=reviewer_visible_code_side
+scientific_authority=external_pro
+```
+
+The package isolates the exact missing choice without selecting it. Internal PM
+logs and audits stay internal. Controller checks only role/source provenance,
+required fields, paths, authority markers and Git visibility, then commits,
+pushes and sends the exact PM-authored files unchanged. Controller never
+paraphrases or repairs code-side or scientific semantics. Validation failure is
+returned as `repair_owner=project_manager` to the same Manager assignment.
 
 Before `IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`, the Manager resolves
 `controller` and calls `codex_app__send_message_to_thread` once with one complete
@@ -117,10 +135,20 @@ Begin every review assignment or recovery continuation with
 
 Accept a callback only after matching its registered source role, round,
 handoff ID, and raw path. `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED`
-wakes the Controller for direct evidence intake and next-action routing. A
+wakes the Controller for mechanical provenance intake and next-action routing. A
 blocked callback is accepted only when it also reports recovery attempts and
 `recovery_exhausted=true`; otherwise continue the same handoff under the shared
 recovery contract.
+
+A callback for any fence accepted before the PM semantic-ownership contract is
+transport evidence only. Require `superseded_process=true` and
+`adoption_authority=false`; archive it without adoption, code authorization or
+successor routing. A current package must identify its external-Pro raw as the
+only scientific authority and still cannot self-authorize compute.
+
+For a package-validation failure, accept `repair_owner=project_manager` and
+redispatch the unchanged failure evidence to Project Manager. The Controller
+must not edit the question or substitute a Controller-authored evidence file.
 
 ## Authority boundary
 

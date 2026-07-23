@@ -21,12 +21,17 @@ Updated: 2026-07-22
 
 The bounded autonomous research chain has completed iteration 1 and retains
 four conclusion-bearing iterations. Its implementation and monitoring surfaces
-are native Codex. The external-Pro review is complete and its Controller
-disposition is accepted. The next boundary is the bounded executable definition
-for `ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`. The Project Manager isolated a
-protected source-contract gap after four bounded recovery audits; the active
-boundary is now the focused Pro round
-`docs/external-review/rounds/20260722_ehc_g1_source_contract/`; no iteration-2 formal compute is authorized yet.
+are native Codex. The external-Pro result review is complete. The next boundary
+is the bounded executable definition for
+`ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`. The Project Manager isolated a
+protected source-contract gap after four bounded recovery audits.
+
+The Controller-authored G1 clarification is transport-only and cannot be adopted:
+it was packaged by the wrong semantic owner before the ownership
+contract was corrected. Any natural raw may be archived as superseded process
+evidence, but it cannot authorize code, science, a successor, or iteration-2
+compute. The next admissible boundary is a Project Manager-owned replacement package;
+Controller will only validate, commit, push and route its exact files.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -176,14 +181,17 @@ that defect is closed by `31aad0df`. The completed replacement is a valid
 
 ## Resume Point
 
-Iteration 1 and its external review are accepted. The raw run is
+Iteration 1 and its external result review are accepted. The raw run is
 `logs/formal_event_held_cpu_20260722_fb99097_r2`; the complete review and
 Controller disposition are recorded in
 `docs/external-review/rounds/20260722_ehc_formal_result_review/`. The next action
-is a Project Manager executable-definition package for
-`ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`, but its exact task, observations,
-reward/utility, distributions, access/identifiability floors, budget and seeds
-must first be frozen by the focused Pro source-contract round. No iteration-2 formal compute is authorized until the resulting package is verified, integrated and given an exact Controller run authorization.
+is for Project Manager to author the replacement reviewer-visible G1 source
+contract package from the accepted result-review evidence and its own code-side
+gap analysis. External Pro must freeze the exact task, observations,
+reward/utility, distributions, access/identifiability floors, budget and seeds.
+No iteration-2 formal compute is authorized until the PM-authored package and
+the resulting exact Pro response are verified and integrated, and Controller
+issues an exact run authorization.
 
 ## BATTERY_CONTRACT_RECONCILED
 
@@ -231,8 +239,8 @@ historical evidence only.
 remaining after the valid iteration-1 result on 2026-07-22. Each later iteration
 must follow the registered external-Pro, native Codex, Git and evidence gates;
 iteration 2 is at the executable-definition boundary selected by the completed
-external review, currently paused only for the focused Pro source-contract
-definition above.
+external result review, currently paused for the PM-authored replacement source
+contract package and its external-Pro decision.
 
 ## Durable Constraints
 

@@ -58,10 +58,24 @@ foreach ($required in @(
 foreach ($forbidden in @('controller <-> research_project_manager', 'agent://', 'history://')) {
     if ($skill.Contains($forbidden)) { throw "Retired persistent edge remains: $forbidden" }
 }
+if ($skill.Contains('direct evidence intake')) {
+    throw 'Dispatcher still assigns semantic evidence intake to Controller'
+}
 foreach ($required in @('$hmasd-dispatch-task', '$hmasd-review-exchange', '$hmasd-experiment-monitor',
     'bounded self-recovery', 'recovery attempts')) {
     if (-not $agents.Contains($required)) { throw "Controller contract missing: $required" }
     if (-not $skill.Contains($required)) { throw "Dispatcher recovery contract missing: $required" }
+}
+foreach ($required in @(
+    'semantic_author=project_manager',
+    'artifact_scope=reviewer_visible_code_side',
+    'repair_owner=project_manager',
+    'exact PM-authored files unchanged')) {
+    if (-not $agents.Contains($required)) { throw "Controller semantic-ownership contract missing: $required" }
+    if (-not $skill.Contains($required)) { throw "Dispatcher semantic-ownership contract missing: $required" }
+}
+foreach ($required in @('superseded_process=true', 'adoption_authority=false')) {
+    if (-not $skill.Contains($required)) { throw "Dispatcher superseded-process guard missing: $required" }
 }
 if ($exchange.Contains('role_skill=.agents/skills/')) {
     throw 'Exchange still sends a Skill path instead of a $skill_name trigger'

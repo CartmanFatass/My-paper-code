@@ -34,6 +34,26 @@ If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.
 Report it rather than working around it.
 
+## Code-side semantic ownership
+
+Project Manager owns every concrete code-side artifact from executable
+definition through implementation, tests, acceptance evidence and code-side
+reconciliation. If external Pro must freeze a protected choice before that work
+can continue, PM also authors and repairs the reviewer-visible brief, evidence
+manifest and question. Those files declare:
+
+```text
+semantic_author=project_manager
+artifact_scope=reviewer_visible_code_side
+scientific_authority=external_pro
+```
+
+This does not let PM choose science or operate external-review transport.
+Controller checks provenance, required fields, paths and Git visibility, then
+commits, pushes and transmits the exact PM-authored files unchanged. Internal PM
+audits are never converted by Controller into reviewer prose. Package failures
+return with `repair_owner=project_manager` for PM correction.
+
 ## Active-line development
 
 This is an active research line, not a maintained product. Do not add backward
@@ -71,7 +91,8 @@ an hour of reasoning and had to be killed.
   real edit within the next few tool calls. Do not substitute broad exploration
   for progress; iterate against the smallest focused check.
 - On a design question your brief does not answer, take the smallest reasonable
-  choice, record it, and keep moving. Report the ambiguity at the end.
+  choice, record it, and keep moving. This reasonable-choice rule does not apply to protected scientific choices;
+  isolate those in a PM-authored review package instead.
 - A working implementation with a noted simplification beats an unwritten
   perfect one.
 - If you conclude the task cannot be done as specified, say so early and

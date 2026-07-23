@@ -33,11 +33,13 @@ An execution-surface change is one atomic control boundary: update
 `CURRENT_WORK.md`, the dispatch Skill, its role registry and the corresponding
 contract tests together. Do not activate a topology when those sources disagree.
 
-The controller alone owns workflow and role-topology design, routing, direct
-evidence intake, resource and formal-experiment authorization, Git integration,
-project control, evidence integrity and user communication. External GPT-5.6
-Pro owns scientific direction. The Project Manager owns in-scope algorithm
-realization and code-side decisions.
+The controller alone owns workflow and role-topology design, routing, resource
+and formal-experiment authorization, Git integration, project control, evidence
+integrity and user communication. It is not a semantic author for concrete
+science or engineering. External GPT-5.6 Pro owns scientific direction. The
+Project Manager owns every code-side semantic artifact: executable definition,
+algorithm realization, implementation, verification, and any reviewer-visible
+clarification package needed to unblock that work.
 
 ## Task dispatch
 
@@ -53,8 +55,8 @@ registry metadata, but they are not Skill invocation syntax.
 
 The active surfaces are:
 
-- controller direct work for workflow design, routing, Git, direct Pro evidence
-  intake, project control, evidence integration and user communication;
+- controller direct work for workflow design, routing, Git, mechanical
+  provenance/completeness checks, project control and user communication;
 - the registered native Codex `project_manager` for one authorized algorithm
   realization and implementation package;
 - the registered native Codex `experiment_monitor` for one already authorized
@@ -109,12 +111,30 @@ implementation structure. It freezes `IMPLEMENTATION_PLAN.md`, selects and
 manages the code-agent task graph, integrates one package and performs one
 bounded repair cycle without per-choice Controller approval.
 
-The Controller dispatches Project Manager only after direct evidence intake and
+When code-side work is blocked by a protected scientific choice, Project
+Manager also authors the complete reviewer-visible clarification package. Every
+such package declares `semantic_author=project_manager` and
+`artifact_scope=reviewer_visible_code_side`. This authorship grants no
+scientific decision authority: the package isolates the missing choice and asks
+external Pro to decide it. Internal PM audits and work logs are not reviewer
+evidence.
+
+Controller mechanically verifies role identity, source boundary, required
+fields, path existence, authority markers and Git visibility, then commits,
+pushes and transmits the exact PM-authored files unchanged. It does not
+paraphrase, summarize, normalize, rank options, add evidence meaning, or convert
+an internal PM audit into reviewer text. A rejected or incomplete package is
+returned with `repair_owner=project_manager`; Controller never repairs its
+semantic content.
+
+The Controller dispatches Project Manager only after provenance intake and
 resource authorization. Its active assignment is the sole write lease. The
 Controller and other mutating tasks do not edit, stage, commit or push until it
 yields ready/blocked or is definitely aborted. Project Manager never changes
 external scientific direction, formal-compute authority, Git, project control,
-or external review.
+or external-review transport. Authoring and repairing its reviewer-visible
+code-side package is part of Project Manager's code-side work, not ownership of
+the Pro conversation.
 
 For a persistent Codex Project Manager assignment, the source boundary is never
 a manually copied SHA. Controller and Manager each run the dispatch Skill's
@@ -140,7 +160,8 @@ authority, or invoke unrelated Skills. Only Project Manager has child-spawn
 authority, limited to its four registered code profiles.
 
 Scientific decision transport is sent only to Open-Pro Exchange. The Controller
-performs direct lightweight evidence intake and durable CDC record application.
+performs mechanical evidence intake and applies only exact Pro-authored or
+PM-authored durable files without semantic rewriting.
 Authorized algorithm realization is sent only to `project_manager`. Monitoring
 is sent only to `experiment_monitor`. Automatic task results
 wake the Controller but never start a successor without Controller routing.
@@ -199,13 +220,12 @@ measurement, benchmark-comparator pair, conjecture scope or, only with strong
 independent evidence, mechanism family.
 
 Before authorizing a scheduled action as code or experiment work, receive and
-archive the external Pro decision, write factual reconciliation, perform direct
-evidence intake and show its concise user-facing summary. The Controller checks
-provenance, authority and feasibility but does not replace the Pro scientific
-choice or design the Project Manager's algorithm realization. It records
-conjecture, lemma, counterexample, portfolio and evidence-note deltas under
-`docs/research/cdc/`. Use a full plural Pro round for genuinely open boundaries
-and a focused continuation in the same Pro conversation for a local scientific
+archive the external Pro decision and verify provenance, authority and
+completeness. Scientific deltas come from Pro; code-side reconciliation and
+executable artifacts come from Project Manager. Controller integrates those
+exact artifacts and reports their status, but does not create a second
+interpretation. Use a full plural Pro round for genuinely open boundaries and a
+focused continuation in the same Pro conversation for a local scientific
 ambiguity; neither Controller nor Manager fills that ambiguity locally.
 
 Intrinsic reward remains environment-agnostic. Task fields, identity, roles,
