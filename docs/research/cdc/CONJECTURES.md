@@ -6,9 +6,10 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live; the exact G0 source is closed at its access boundary. The G1
-  source concept is retained, while its measurement implication has been
-  corrected before any prototype or run.
+- Status: live; the G1 nonformal prototype made the corrected measurement path
+  executable and separated the three constructed nulls, but ordinary recurrence
+  matched the mechanism controller's natural capability. No mechanism adoption
+  or superiority follows.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
@@ -26,7 +27,9 @@ the Project Manager-accepted CDC state.
 
 ## C-REC — Ordinary recurrence is sufficient
 
-- Status: live.
+- Status: live and strengthened by the G1 prototype: the recurrent control
+  reached hidden correctness 1.0 and the same fitting/held-out natural utility
+  as the synthetic mechanism control without an EHC intervention path.
 - Claim: a matched recurrent MARL controller can represent the required
   persistence without an explicit commitment object when access and training
   are adequate.
@@ -77,8 +80,9 @@ the Project Manager-accepted CDC state.
 
 ## C-MEASURE — Current behavior metrics do not identify commitment
 
-- Status: corrected measurement contract retained; the G0 source did not reach
-  the first-match branch where its predicates have disposition authority.
+- Status: corrected measurement contract retained and executable in the G1
+  nonformal prototype; the G0 source still did not reach the first-match branch
+  where its predicates have disposition authority.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
 - Counterexamples: `CE-RANDOM-USE`, `CE-EXOGENOUS-LIFETIME`, and
@@ -87,3 +91,6 @@ the Project Manager-accepted CDC state.
   intervention, natural mediation, simpler-explanation resistance, and
   held-out robustness, with event forcing separated from mark intervention,
   representation influence and natural selection/support statistics.
+- Prototype evidence: the combined tuple rejects the three constructed nulls;
+  recurrence remains a distinct sufficient capability explanation rather than
+  being mislabeled as an event-held mechanism.

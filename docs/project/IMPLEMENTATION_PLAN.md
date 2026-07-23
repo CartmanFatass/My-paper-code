@@ -1,12 +1,14 @@
 # EHC minimal sequence-mediation prototype G1 implementation plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use
-> `superpowers:subagent-driven-development` or `superpowers:executing-plans`.
-> Execute each task with RED, observed failure, minimal GREEN and focused
-> verification.
+> **For Project Manager and code workers:** REQUIRED PROJECT SKILL: Use
+> `$hmasd-agile-research-development`. Generic Superpowers execution is
+> disabled; use the project Skill's proof-sized implementation and verification
+> procedure.
 
 ```text
 active_implementation=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
+implementation_status=PM_ACCEPTED_COMPLETE_NONFORMAL
+next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
 design=docs/research/designs/EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1.md
 backend=cpu
 torch_threads=1
@@ -68,17 +70,17 @@ def make_episode_spec(split: str, roster_size: int, duration: int,
                       sign_start: int, rotation: int) -> G1EpisodeSpec: ...
 ```
 
-- [ ] Write failing tests for the two-step cue, hidden actor fields, JOIN reset,
+- [x] Write failing tests for the two-step cue, hidden actor fields, JOIN reset,
   LEAVE freeze, REJOIN restore, terminal censoring, duration split, shifted and
   permuted held-out membership, exact logical-to-physical schedule mapping,
   every-active-transition opportunity law, `/4` count normalization, horizon
   censoring, utility range and reward-sum identity.
-- [ ] Run
+- [x] Run
   `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest tests/ha_ctse_process_temporal_duty_g1_test.py -q`;
   observe import/behavior failures.
-- [ ] Implement only the interfaces above with action domain `{-1,0,+1}` and
+- [x] Implement only the interfaces above with action domain `{-1,0,+1}` and
   exact snapshot round-trip.
-- [ ] Re-run the focused test; require all pass.
+- [x] Re-run the focused test; require all pass.
 
 ### Task 2: Controllers and natural trajectories
 
@@ -103,13 +105,13 @@ def collect_natural_episode(spec: G1EpisodeSpec, controller: str,
                             seeds: dict[str, int]) -> dict[str, object]: ...
 ```
 
-- [ ] Write failing tests for `base_logits + W_z(m*z)`, DUM `m=0`, recurrent
+- [x] Write failing tests for `base_logits + W_z(m*z)`, DUM `m=0`, recurrent
   no-mark behavior, nondegenerate random use, exogenous renewal, logit-only
   one-step influence, greedy tie-breaking, zero action-RNG draws, natural-row
   provenance and RNG namespace separation.
-- [ ] Run the focused module and observe expected failures.
-- [ ] Implement deterministic action selection and controller-owned state/RNG.
-- [ ] Re-run and require all pass.
+- [x] Run the focused module and observe expected failures.
+- [x] Implement deterministic action selection and controller-owned state/RNG.
+- [x] Re-run and require all pass.
 
 ### Task 3: Exact-snapshot branches and measurements
 
@@ -128,13 +130,13 @@ def run_mark_intervention(snapshot: dict[str, object], controller: str,
 def analyze_prototype(records: list[dict[str, object]]) -> dict[str, object]: ...
 ```
 
-- [ ] Add failing tests for outcome-blind `age=3` selection, exact branch-origin
+- [x] Add failing tests for outcome-blind `age=3` selection, exact branch-origin
   equality, CRN equality, no future-reference copy, separate event/mark
   contrasts, downstream-window exclusion of the intervention action, finite
   metrics and measurement-tuple-only output.
-- [ ] Run focused tests and observe expected failures.
-- [ ] Implement paired continuations and the six named measurement families.
-- [ ] Re-run and require all pass.
+- [x] Run focused tests and observe expected failures.
+- [x] Implement paired continuations and the six named measurement families.
+- [x] Re-run and require all pass.
 
 ### Task 4: Nonformal runner and fail-closed artifacts
 
@@ -151,25 +153,25 @@ python scripts/run_ehc_sequence_mediation_prototype_g1.py --output-dir <path>
   -> prototype_analysis.json
 ```
 
-- [ ] Write failing tests that recompute the 192-episode inventory, `formal=false`, exact
+- [x] Write failing tests that recompute the 192-episode inventory, `formal=false`, exact
   design/seeds/source identity, bounded branch count, no G0 identifiers,
   fail-closed malformed records and formal-analyzer rejection.
-- [ ] Run focused tests and observe expected failures.
-- [ ] Implement the thin runner and schema validator without training.
-- [ ] Re-run and require all pass.
+- [x] Run focused tests and observe expected failures.
+- [x] Implement the thin runner and schema validator without training.
+- [x] Re-run and require all pass.
 
 ### Task 5: Bounded CPU acceptance
 
 **Files:** no tracked-source write during execution.
 
-- [ ] Run all three focused test files with the registered interpreter and
+- [x] Run all three focused test files with the registered interpreter and
   `OMP_NUM_THREADS=1`, `MKL_NUM_THREADS=1`.
-- [ ] Run one prototype into a new `logs/nonformal_ehc_sequence_mediation_g1_*`
+- [x] Run one prototype into a new `logs/nonformal_ehc_sequence_mediation_g1_*`
   directory.
-- [ ] Verify manifest/analysis hashes, `formal=false`, complete cells, finite
+- [x] Verify manifest/analysis hashes, `formal=false`, complete cells, finite
   metrics, reward identity, snapshot/CRN validity, `status=COMPLETE`, controller
   provenance and the validated measurement tuple.
-- [ ] Inspect the path for hidden actor fields, G0 coupling, serial per-row
+- [x] Inspect the path for hidden actor fields, G0 coupling, serial per-row
   tensor transfer, RNG drift and excess persistence.
-- [ ] Record the smallest CDC delta and let Project Manager select the next
+- [x] Record the smallest CDC delta and let Project Manager select the next
   automatic boundary. This task consumes zero conclusion-bearing iterations.

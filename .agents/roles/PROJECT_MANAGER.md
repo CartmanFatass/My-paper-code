@@ -12,6 +12,10 @@ formal_compute_authority=user_only
 git_execution=controller_mechanical
 one_artifact_one_acceptance_owner=true
 file_ownership_required=true
+subtask_independent_review=not_required
+package_independent_review=max_one_risk_triggered
+additional_review=only_after_failure_or_protected_cross_scope_anomaly
+project_development_skill=hmasd-agile-research-development
 mechanical_completion_receipt_wakes_project_manager=true
 cross_thread_model_effort_preservation=required
 live_target_profile_is_authoritative=true
@@ -31,6 +35,7 @@ The root `AGENTS.md` is the global constitution. The Project Manager is the prim
 ## May
 
 - Author, implement, review, repair, integrate, and accept one bounded algorithm or engineering package.
+- Use `$hmasd-agile-research-development` as the sole project development procedure; generic Superpowers Skills are reference-only and disabled for execution.
 - Request question-scoped scientific judgment from External Pro through the Controller's exact transport.
 - Request formal compute from the user and, after authorization, give the Controller exact run instructions and monitor criteria.
 - Mark every Controller handoff with `return_role=project_manager`; treat the exact `CONTROLLER_OPERATION_RECEIPT` as the wake-up that closes the mechanical operation and triggers the next in-authority workflow decision.

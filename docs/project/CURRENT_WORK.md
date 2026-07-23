@@ -25,8 +25,8 @@ state file declares no independent authority.
 ## Active boundary
 
 ```text
-last_completed_assignment_id=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION
-active_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
+last_completed_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
+active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
 source_boundary=local_and_remote_aggressive_tip
 accepted_base_source_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
 derivation_source_commit=3b5e86a6ef4e8731a37232df3f1828affb0d62fc
@@ -45,13 +45,19 @@ external_review_transport_status=authorized_when_pm_selected
 monitoring_status=authorized_for_active_runs
 grant_stop_conditions=iterations_exhausted|user_pause|unrecoverable_blocker|scope_outside_hmasd_mission
 derivation_status=complete
-next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
+prototype_status=complete_valid_nonformal
+next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
 prototype_authorization_status=authorized_under_autonomous_grant
 prototype_design_status=PM_ACCEPTED
-prototype_design_activation=on_integration_commit
+prototype_design_activation=integrated_37d6556a3a4b5bf4ed70a15834e946005354f91f
 prototype_execution_kind=bounded_nonformal_measurement_prototype
 prototype_conclusion_bearing_iterations_consumed=0
-controller_integration_receipt_status=user_relayed_to_project_manager
+prototype_artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3
+prototype_manifest_sha256=40ac6659d4c8ef67a35aafc6b40bc2529b9c131c2c2888851bda4335c9324608
+prototype_analysis_sha256=d40b3849679bada56cbfffb5c06f6ec1b1d19757b7adc55d6c386578f6cff316
+prototype_measurement_disposition=measurement_path_valid_recurrence_remains_sufficient
+formal_evidence_contract_status=not_yet_frozen
+controller_integration_receipt_status=pending_for_prototype_package
 callback_contract_activation=on_integration_commit
 callback_receipt_requires_followup_commit=false
 ```
@@ -83,8 +89,19 @@ evidence contract before a conclusion-bearing run and for stopping when the
 iteration chain is exhausted, the user pauses it, an unrecoverable blocker
 remains, or the next action leaves the HMASD mission.
 
-This zero-compute derivation consumes no conclusion-bearing iteration;
-four conclusion-bearing iterations remain.
+Project Manager then completed the bounded nonformal prototype recorded at
+`docs/research/cdc/EVIDENCE_NOTES/20260723_EHC_SEQUENCE_MEDIATION_PROTOTYPE_G1.md`.
+Its validated 192-cell CPU artifact distinguishes the random-use,
+exogenous-lifetime and logit-without-behavior nulls with the corrected
+sequence-mediation tuple. The matched recurrent control reaches the same hidden
+correctness and natural utility as the mechanism control, so recurrence remains
+a sufficient ordinary capability explanation and the prototype carries no
+adoption or superiority meaning.
+
+The smallest next boundary is the trainable G1 formal executable definition.
+It freezes the access-first result contract and ordinary-explanation outcome,
+then implements focused prelaunch evidence. No formal run starts before that
+contract is frozen. The derivation and prototype each consume no conclusion-bearing iteration; four conclusion-bearing iterations remain.
 
 ## Accepted evidence state
 
@@ -151,7 +168,7 @@ All parallel child scopes and Project Manager integration are complete:
 
 ```text
 active_file_writers=none
-package_status=PROTOTYPE_DESIGN_PM_ACCEPTED_ACTIVATES_ON_INTEGRATION_COMMIT
+package_status=PROTOTYPE_IMPLEMENTATION_PM_ACCEPTED_AWAITING_CONTROLLER_GIT_INTEGRATION
 ```
 
 The derivation package was mechanically integrated and pushed as

@@ -5,15 +5,22 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expected = @('hmasd-dispatch-task', 'hmasd-experiment-monitor',
-    'hmasd-review-round') | Sort-Object
+$expected = @('hmasd-agile-research-development', 'hmasd-dispatch-task',
+    'hmasd-experiment-monitor', 'hmasd-review-round') | Sort-Object
 if (Compare-Object $expected $skills) { throw "Unexpected active Skill set: $($skills -join ',')" }
 
 $current = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
+$implementationPlan = Get-Content (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md') -Raw
+if (-not $implementationPlan.Contains('$hmasd-agile-research-development')) {
+    throw 'Active implementation plan does not route through the HMASD development Skill'
+}
+if ($implementationPlan.Contains('superpowers:')) {
+    throw 'Active implementation plan still activates a generic Superpowers Skill'
+}
 $legacyToken = 'O' + 'MP'
 if ($current -match "(?i)\b$legacyToken\b|\.omp") { throw 'Current control plane retains a legacy execution route' }
 $roles = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
-foreach ($role in @('project_manager')) {
+foreach ($role in @('controller', 'project_manager')) {
     if ($roles.roles.$role.registration_status -ne 'ACTIVE') { throw "Inactive registered role: $role" }
 }
 if ($roles.interfaces.experiment_monitor.persistent_task -ne $false -or
@@ -81,6 +88,48 @@ foreach ($required in @('project_manager_project_authority=primary',
     'controller_validation_authority=none')) {
     if (-not $agents.Contains($required)) { throw "Global role constitution missing: $required" }
 }
+$agileDevelopment = Get-Content (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md') -Raw
+$agileDevelopmentLines = @(Get-Content (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md'))
+if ($agileDevelopmentLines.Count -lt 4 -or
+    $agileDevelopmentLines[0] -ne '---' -or
+    $agileDevelopmentLines[1] -ne 'name: hmasd-agile-research-development' -or
+    $agileDevelopmentLines[2] -notmatch '^description: Use when .+' -or
+    $agileDevelopmentLines[3] -ne '---') {
+    throw 'Agile development Skill frontmatter is malformed or undiscoverable'
+}
+foreach ($required in @(
+    'name: hmasd-agile-research-development',
+    'superpowers_plugin=reference_only',
+    'superpowers_execution=disabled',
+    'development_mode=agile_algorithm_research',
+    'backward_compatibility=not_required',
+    'test_scope=proof_sized',
+    'codebase_policy=small_active_line_only',
+    'No backward compatibility',
+    'Proof proportional to the claim',
+    'This procedure grants no science, formal compute, Git, transport, or acceptance authority',
+    'A bounded child requires an exact assignment',
+    'Only Project Manager acting within direct user authority',
+    'Inspect and report',
+    'Project Manager alone accepts or directs repair',
+    'At most one integrated advisory review is optional when protected semantics, cross-file integration, or material execution risk makes it useful',
+    'Additional targeted review is allowed only after a failed check or a concrete protected cross-scope anomaly',
+    'is not another approval layer')) {
+    if (-not $agileDevelopment.Contains($required)) { throw "Agile development Skill missing: $required" }
+}
+foreach ($forbidden in @('superpowers_execution=enabled',
+    'generic_superpowers_workflow_authority=enabled')) {
+    if ($agileDevelopment.Contains($forbidden)) { throw "Agile development Skill contradicts isolation: $forbidden" }
+}
+foreach ($required in @('superpowers_plugin=reference_only',
+    'superpowers_execution=disabled',
+    'project_development_skill=hmasd-agile-research-development',
+    'development_mode=agile_algorithm_research',
+    'backward_compatibility=not_required',
+    'test_scope=proof_sized',
+    'codebase_policy=small_active_line_only')) {
+    if (-not $agents.Contains($required)) { throw "Global Skill isolation missing: $required" }
+}
 $reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 $reviewReadme = Get-Content (Join-Path $repo 'docs/external-review/README.md') -Raw
 $principles = Get-Content (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md') -Raw
@@ -110,8 +159,19 @@ foreach ($content in @($agentContext, $dispatcher, $reviewRound, $reviewReadme, 
 }
 foreach ($required in @('role=project_manager', 'project_authority=primary',
     'research_workflow_authority=exclusive',
-    'technical_acceptance_authority=exclusive')) {
+    'technical_acceptance_authority=exclusive',
+    'subtask_independent_review=not_required',
+    'package_independent_review=max_one_risk_triggered',
+    'additional_review=only_after_failure_or_protected_cross_scope_anomaly',
+    'project_development_skill=hmasd-agile-research-development')) {
     if (-not $projectManagerRole.Contains($required)) { throw "PM role contract missing: $required" }
+}
+foreach ($required in @(
+    'Subtasks close with their TDD evidence and one fresh focused Project Manager check',
+    'Do not queue an independent reviewer for every implementation subtask',
+    'Additional targeted review is allowed',
+    'only after a failed check')) {
+    if (-not $agents.Contains($required)) { throw "Root acceptance policy missing: $required" }
 }
 foreach ($required in @('role=controller', 'role_class=mechanical_operator',
     'scientific_authority=none', 'workflow_decision_authority=none')) {
@@ -152,8 +212,8 @@ foreach ($relative in @(
     }
 }
 foreach ($required in @(
-    'assignment_id=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
-    'EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
+    'last_completed_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
     'accepted_reconciliation_sha256=700ca469ca131c58186a872dc3d8149dbb35f100910a632de0a81689d43d1a28',
     'iterations_remaining=4',
     'autonomous_research_grant=ACTIVE',
@@ -165,14 +225,40 @@ foreach ($required in @(
     'git_integration_status=authorized_for_pm_accepted_packages',
     'external_review_transport_status=authorized_when_pm_selected',
     'monitoring_status=authorized_for_active_runs',
-    'derivation_status=complete',
-    'next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'prototype_status=complete_valid_nonformal',
+    'next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
     'prototype_authorization_status=authorized_under_autonomous_grant',
-    'Project Manager completed the zero-compute CDC action',
-    'consumes no conclusion-bearing iteration',
+    'prototype_artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3',
+    'prototype_manifest_sha256=40ac6659d4c8ef67a35aafc6b40bc2529b9c131c2c2888851bda4335c9324608',
+    'prototype_analysis_sha256=d40b3849679bada56cbfffb5c06f6ec1b1d19757b7adc55d6c386578f6cff316',
+    'prototype_measurement_disposition=measurement_path_valid_recurrence_remains_sufficient',
+    'formal_evidence_contract_status=not_yet_frozen',
+    'prototype_conclusion_bearing_iterations_consumed=0',
     'global_write_lease=disabled',
     'Different ownership sets may proceed concurrently')) {
     if (-not $current.Contains($required)) { throw "Current active boundary missing: $required" }
+}
+$prototypeNotePath = Join-Path $repo 'docs/research/cdc/EVIDENCE_NOTES/20260723_EHC_SEQUENCE_MEDIATION_PROTOTYPE_G1.md'
+if (-not (Test-Path -LiteralPath $prototypeNotePath -PathType Leaf)) {
+    throw 'Missing G1 prototype evidence note'
+}
+$prototypeNote = Get-Content -Raw -LiteralPath $prototypeNotePath
+foreach ($required in @(
+    'disposition=MEASUREMENT_PATH_VALID_RECURRENCE_REMAINS_SUFFICIENT',
+    'manifest_sha256=40ac6659d4c8ef67a35aafc6b40bc2529b9c131c2c2888851bda4335c9324608',
+    'analysis_sha256=d40b3849679bada56cbfffb5c06f6ec1b1d19757b7adc55d6c386578f6cff316',
+    'measurement_tuple_sha256=673db4684404f1ac45f0bb797a0c0570f4fa0f5739757e0bb774ab56f1029f45',
+    'CE-RANDOM-USE', 'CE-EXOGENOUS-LIFETIME', 'CE-LOGIT-WITHOUT-BEHAVIOR',
+    'RECURRENT_CONTROL',
+    'next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
+    'iterations_remaining=4')) {
+    if (-not $prototypeNote.Contains($required)) { throw "G1 prototype evidence note missing: $required" }
+}
+foreach ($required in @(
+    'completed_action=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'next_action=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
+    'prototype_disposition=MEASUREMENT_PATH_VALID_RECURRENCE_REMAINS_SUFFICIENT')) {
+    if (-not $portfolio.Contains($required)) { throw "Portfolio missing prototype delta: $required" }
 }
 foreach ($forbidden in @(
     'prototype_authorization_status=requested_not_authorized',
@@ -321,8 +407,9 @@ foreach ($required in @('L-EHC-MEASUREMENT-NECESSITY',
     'CE-LOGIT-WITHOUT-BEHAVIOR', 'Preserves:', 'Violates:')) {
     if (-not $ledger.Contains($required)) { throw "CDC ledger missing derivation delta: $required" }
 }
-foreach ($required in @('EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
-    'EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+foreach ($required in @('EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'MEASUREMENT_PATH_VALID_RECURRENCE_REMAINS_SUFFICIENT',
+    'ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
     'authorization_status=authorized_under_autonomous_grant')) {
     if (-not $portfolio.Contains($required)) { throw "Portfolio missing derivation delta: $required" }
 }

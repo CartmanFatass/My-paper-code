@@ -42,6 +42,13 @@ formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
 mechanical_completion_callback=required
 mechanical_completion_receipt_wakes_project_manager=true
+superpowers_plugin=reference_only
+superpowers_execution=disabled
+project_development_skill=hmasd-agile-research-development
+development_mode=agile_algorithm_research
+backward_compatibility=not_required
+test_scope=proof_sized
+codebase_policy=small_active_line_only
 ```
 
 The user owns project intent and every expansion of protected scope or formal
@@ -120,14 +127,17 @@ Every artifact has exactly one acceptance owner:
   mechanical operation succeeded.
 - Monitor accepts nothing; it reports observations.
 
-Project Manager may request at most one independent advisory code-side review
-per acceptance boundary when
-protected semantics, cross-file integration, or material execution risk makes
-it useful. The reviewer reports findings to Project Manager; Project Manager
-repairs and accepts. Routine exploratory changes need only a focused correctness
-check. There is no Controller re-review, review-of-review, mandatory review
-stack, or external scientific review of implementation details. Renaming or
-splitting the same artifact does not reset this limit.
+Subtasks close with their TDD evidence and one fresh focused Project Manager check.
+Do not queue an independent reviewer for every implementation subtask. At the
+integrated package boundary, Project Manager may request at most one independent advisory code-side review when protected semantics, cross-file integration, or
+material execution risk makes it useful. Additional targeted review is allowed
+only after a failed check or a concrete protected cross-scope anomaly; it is a
+repair diagnostic, not another approval layer. The reviewer reports findings to
+Project Manager; Project Manager repairs and accepts. Routine exploratory
+changes need only the focused correctness check. There is no Controller
+re-review, review-of-review, mandatory review stack, or external scientific
+review of implementation details. Renaming or splitting the same artifact does
+not reset this limit.
 
 Tests enforce evidence and operational invariants. They do not grant an
 independent approval role and must not convert exploratory code into a
@@ -186,6 +196,12 @@ Controller Git work does not freeze the worktree. Before staging or committing,
 it uses the exact Project Manager-accepted file list, verifies those files are
 no longer being written, and leaves all other WIP untouched.
 
+Project Manager may use the registered native child profiles
+`hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier`, and
+`hmasd-reviewer` within exact file ownership and assignment bounds. A child
+never dispatches a successor. An `unknown agent_type` response is a blocker;
+never substitute an unnamed or `default` child.
+
 ## Cross-task execution profile
 
 Before every cross-task send, the sender resolves the target's live route and
@@ -211,11 +227,21 @@ accounting, and active file ownership; it does not define durable role power.
 
 Skills contain reusable mechanics only:
 
+- `hmasd-agile-research-development`: active-line algorithm implementation,
+  minimal diagnostics, proof-sized testing, bounded repair and code acceptance;
 - `hmasd-dispatch-task`: registry, source and live-route resolution, exact send,
   delivery recovery;
 - `hmasd-review-round`: deterministic external-review browser transport and raw
   archival;
 - `hmasd-experiment-monitor`: observation, heartbeat and terminal reporting.
+
+The generic Superpowers plugin is reference-only and disabled for HMASD
+execution. Its own `using-superpowers` precedence rule defers to direct user and
+`AGENTS.md` instructions; this paragraph is the explicit disable instruction.
+Do not invoke or chain its Skills for HMASD work. A user may explicitly request
+inspection of one named generic Skill as reference, but it grants no workflow
+authority and its procedure is not inherited. Use
+`$hmasd-agile-research-development` for project code work.
 
 A Skill must link to the relevant role contract and explicitly grant no
 authority. Role changes update this file, affected role contracts, the role
@@ -241,6 +267,8 @@ result precedence change only at an explicitly accepted scientific boundary.
 Move quickly and keep only the active implementation. Do not preserve backward
 compatibility adapters, deprecated branches, legacy schemas, superseded
 checkpoint migrations, or obsolete workflow state. Git history is the archive.
+This is a research repository, not a compatibility product: keep the executable
+surface small and delete replaced code, state, and tests at the same boundary.
 Use the smallest focused test or bounded nonformal exercise that distinguishes
 the current hypothesis; do not add ceremony that cannot affect the algorithmic
 decision.
