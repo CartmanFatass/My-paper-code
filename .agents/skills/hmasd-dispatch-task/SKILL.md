@@ -90,6 +90,34 @@ identical payload only when no accepted delivery exists and the live profile is
 unchanged. Exhausted delivery recovery is
 `PROJECT_MANAGER_DELIVERY_BLOCKED`.
 
+## Controller completion callback
+
+Every Project Manager-to-Controller handoff declares
+`return_role=project_manager`. When the requested mechanical operation completes
+or becomes blocked, Controller constructs exactly one receipt:
+
+```text
+CONTROLLER_OPERATION_RECEIPT
+return_role=project_manager
+request_identity=<assignment, package, review, or run identity>
+operation=<mechanical operation>
+operation_status=<COMPLETE or BLOCKED>
+source_commit=<accepted source identity>
+result_identity=<commit, raw hash, artifact root, or route receipt>
+path_hash_source_status=<exact mechanical outcome>
+remaining_authority=<unchanged authorization state>
+blockers=<none or exact mechanical blocker>
+```
+
+Before stopping or making a user-only completion report, run
+`scripts/resolve_task_route.ps1 -Role project_manager`, send that receipt once
+with the resolved live profile unchanged, then re-resolve and verify the same
+identity, model, and effort. The receipt contains no approval, interpretation,
+workflow choice, or successor instruction; it only wakes Project Manager.
+Delivery recovery follows the rules above. If no safe recovery remains, report
+`CONTROLLER_CALLBACK_BLOCKED` with the attempts and keep the workflow visibly
+open.
+
 ## Experiment Monitor
 
 There is no persistent Monitor route and no fixed Monitor model or effort.

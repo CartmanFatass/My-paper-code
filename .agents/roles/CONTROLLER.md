@@ -16,6 +16,7 @@ live_target_profile_is_authoritative=true
 resolved_model_effort_copy=exact
 static_profile_expectation=forbidden
 sender_profile_override=forbidden
+mechanical_completion_callback=required
 ```
 
 The root `AGENTS.md` is the global constitution. This charter narrows the Controller to mechanical execution; it grants no acceptance authority.
@@ -33,6 +34,7 @@ The root `AGENTS.md` is the global constitution. This charter narrows the Contro
 - Invoke `$hmasd-dispatch-task` for registered routing, `$hmasd-review-round` with `$browser:control-in-app-browser` for exact external transport, and `$hmasd-experiment-monitor` directly for an already-authorized run.
 - Report mechanical success, failure, identity, and provenance without interpreting scientific or technical meaning.
 - Before every cross-task send, resolve the target's live model and thinking/effort, require both to be nonempty, and copy both unchanged into the send. The live target is authoritative; never keep a fixed expected-profile table or substitute the sender's profile or a default. After sending, verify that the target profile did not change.
+- After every Project Manager-requested operation completes or becomes mechanically blocked, send exactly one unchanged `CONTROLLER_OPERATION_RECEIPT` to the registered Project Manager before stopping or making a user-only completion report.
 
 ## Must not
 
@@ -49,5 +51,5 @@ The root `AGENTS.md` is the global constitution. This charter narrows the Contro
 
 ## Outputs and stop
 
-- Exact delivery, Git, source-identity, hash/path, command, and monitor-coordination receipts, or a mechanical failure report that preserves the received content unchanged.
-- Stop when the assigned operation is complete, required authority or exact identity is absent, routing cannot be recovered, or execution would require a scientific, technical-validation, workflow, package-rewrite, or successor decision. One artifact has one declared acceptance owner; the Controller never substitutes itself for that owner.
+- Exact delivery, Git, source-identity, hash/path, command, and monitor-coordination receipts, or a mechanical failure report that preserves the received content unchanged. A Project Manager-requested operation returns as `CONTROLLER_OPERATION_RECEIPT` with `return_role=project_manager`, request identity, `operation_status`, `result_identity`, source/path/hash facts, `remaining_authority`, and blockers.
+- Stop only after that required callback is confirmed, or after callback recovery is exhausted and `CONTROLLER_CALLBACK_BLOCKED` has been reported. Required authority or exact identity absence remains a mechanical blocked result; scientific, technical-validation, workflow, package-rewrite, or successor decisions remain forbidden. One artifact has one declared acceptance owner; the Controller never substitutes itself for that owner.

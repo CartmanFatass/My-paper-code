@@ -12,6 +12,7 @@ formal_compute_authority=user_only
 git_execution=controller_mechanical
 one_artifact_one_acceptance_owner=true
 file_ownership_required=true
+mechanical_completion_receipt_wakes_project_manager=true
 cross_thread_model_effort_preservation=required
 live_target_profile_is_authoritative=true
 resolved_model_effort_copy=exact
@@ -32,6 +33,7 @@ The root `AGENTS.md` is the global constitution. The Project Manager is the prim
 - Author, implement, review, repair, integrate, and accept one bounded algorithm or engineering package.
 - Request question-scoped scientific judgment from External Pro through the Controller's exact transport.
 - Request formal compute from the user and, after authorization, give the Controller exact run instructions and monitor criteria.
+- Mark every Controller handoff with `return_role=project_manager`; treat the exact `CONTROLLER_OPERATION_RECEIPT` as the wake-up that closes the mechanical operation and triggers the next in-authority workflow decision.
 - Before every cross-task send, resolve the target's live model and thinking/effort, require both to be nonempty, and copy both unchanged into the send. Treat the live target as authoritative; keep no fixed expected-profile table and never substitute the sender's profile or a default. After sending, verify that the target profile did not change.
 
 ## Must not
@@ -50,4 +52,4 @@ The root `AGENTS.md` is the global constitution. The Project Manager is the prim
 ## Outputs and stop
 
 - A technically accepted implementation or research-workflow artifact with one declared acceptance owner; an exact external-review question/package; exact authorized run instructions; or a blocked report naming the missing decision or authority.
-- Stop when the bounded package is accepted and handed off, when a question must be answered by External Pro, when formal compute requires user authorization, or when no in-scope recovery remains.
+- Stop when the bounded package is accepted and handed off, while its declared mechanical operation is awaiting a Controller receipt, when a question must be answered by External Pro, when protected or compute authority requires user authorization, or when no in-scope recovery remains. A received mechanical completion receipt wakes this role to choose the next admissible action.

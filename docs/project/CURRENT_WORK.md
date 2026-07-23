@@ -1,6 +1,6 @@
 # HA-CTSE Current Work
 
-Last updated: 2026-07-22
+Last updated: 2026-07-23
 
 This file records active state only. Durable authority is defined by
 `AGENTS.md` and `.agents/roles/*.md`.
@@ -25,9 +25,11 @@ state file declares no independent authority.
 ## Active boundary
 
 ```text
-assignment_id=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION
+last_completed_assignment_id=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION
 source_boundary=local_and_remote_aggressive_tip
-source_commit=3b5e86a6ef4e8731a37232df3f1828affb0d62fc
+accepted_base_source_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
+derivation_source_commit=3b5e86a6ef4e8731a37232df3f1828affb0d62fc
+derivation_integration_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
 accepted_reconciliation=docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/30_PM_CODE_SIDE_RECONCILIATION.md
 accepted_reconciliation_sha256=700ca469ca131c58186a872dc3d8149dbb35f100910a632de0a81689d43d1a28
 iterations_remaining=4
@@ -36,6 +38,9 @@ implementation_status=unauthorized
 derivation_status=complete
 next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
 prototype_authorization_status=requested_not_authorized
+controller_integration_receipt_status=user_relayed_to_project_manager
+callback_contract_activation=on_integration_commit
+callback_receipt_requires_followup_commit=false
 ```
 
 Project Manager completed the zero-compute CDC action
@@ -124,10 +129,17 @@ All parallel child scopes and Project Manager integration are complete:
 
 ```text
 active_file_writers=none
-package_status=PM_ACCEPTED_PENDING_CONTROLLER_MECHANICAL_INTEGRATION
+package_status=CALLBACK_CONTRACT_REPAIR_PM_ACCEPTED_ACTIVATES_ON_INTEGRATION_COMMIT
 ```
 
-The exact accepted file list is carried in the terminal Project Manager payload.
+The derivation package was mechanically integrated and pushed as
+`688d95e32b86f4ee4151b4b12ddbcaf14beee18e`. Controller did not send the
+required completion receipt to Project Manager; the user relayed the exact
+receipt and woke the workflow. The callback-contract repair owns only the files
+declared in its terminal Project Manager payload. The repaired callback contract
+becomes active in the commit that integrates it. Its subsequent mechanical
+receipt is runtime coordination evidence and does not require a follow-up state
+commit, avoiding a recursive commit/receipt chain.
 
 Different ownership sets may proceed concurrently. No repository-wide write
 lease is active. Controller must wait only for a file it intends to stage while

@@ -74,6 +74,14 @@ foreach ($required in @(
     'RESEARCH_MANAGER_BLOCKED',
     'codex_app__send_message_to_thread',
     'PROJECT_MANAGER_DELIVERY_BLOCKED',
+    'Controller completion callback',
+    'CONTROLLER_OPERATION_RECEIPT',
+    'return_role=project_manager',
+    'operation_status',
+    'result_identity',
+    'remaining_authority',
+    'resolve_task_route.ps1 -Role project_manager',
+    'CONTROLLER_CALLBACK_BLOCKED',
     '`controller` and calls',
     'resolve_source_boundary.ps1',
     'source_boundary=local_and_remote_aggressive_tip',
@@ -123,6 +131,8 @@ foreach ($required in @(
     'resolved_model_effort_copy=exact',
     'static_profile_expectation=forbidden',
     'sender_profile_override=forbidden',
+    'mechanical_completion_callback=required',
+    'mechanical_completion_receipt_wakes_project_manager=true',
     'at most one independent advisory code-side review',
     'does not create a repository-wide write lease')) {
     if (-not $agents.Contains($required)) { throw "Global role constitution missing: $required" }
@@ -136,7 +146,8 @@ foreach ($required in @(
     'formal_compute_authority=user_only',
     'git_execution=controller_mechanical',
     'one_artifact_one_acceptance_owner=true',
-    'file_ownership_required=true')) {
+    'file_ownership_required=true',
+    'mechanical_completion_receipt_wakes_project_manager=true')) {
     if (-not $projectManagerRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -152,7 +163,9 @@ foreach ($required in @(
     'live_target_profile_is_authoritative=true',
     'resolved_model_effort_copy=exact',
     'static_profile_expectation=forbidden',
-    'sender_profile_override=forbidden')) {
+    'sender_profile_override=forbidden',
+    'mechanical_completion_callback=required',
+    'CONTROLLER_OPERATION_RECEIPT')) {
     if (-not $controllerRole.Contains($required)) { throw "Controller role missing: $required" }
 }
 foreach ($required in @('role=experiment_monitor',
@@ -230,7 +243,12 @@ foreach ($forbidden in @('gpt-5.3-codex-spark', 'expected_target_model',
 $currentWork = Get-Content -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 if (-not $currentWork.Contains($roles.roles.project_manager.thread_id) -or
     -not $currentWork.Contains('No persistent Experiment Monitor task is active') -or
-    -not $currentWork.Contains('Controller-direct external-Pro transport')) {
+    -not $currentWork.Contains('Controller-direct external-Pro transport') -or
+    -not $currentWork.Contains('callback_contract_activation=on_integration_commit') -or
+    -not $currentWork.Contains('callback_receipt_requires_followup_commit=false')) {
     throw 'Current boundary does not name the active direct-transport topology'
+}
+if ($currentWork.Contains('callback_contract_repair_status=pm_accepted_pending_mechanical_integration')) {
+    throw 'Current boundary creates a recursive post-integration status commit'
 }
 Write-Output 'HMASD_DISPATCH_TASK_CONTRACT_OK'

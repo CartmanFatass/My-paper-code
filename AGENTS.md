@@ -40,6 +40,8 @@ controller_workflow_decision_authority=none
 external_pro_scientific_authority=question_scoped
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
+mechanical_completion_callback=required
+mechanical_completion_receipt_wakes_project_manager=true
 ```
 
 The user owns project intent and every expansion of protected scope or formal
@@ -147,6 +149,18 @@ platform permits; an unavoidable Controller callback is an unchanged envelope.
 No Project Manager child, Controller, or Monitor starts a successor. Project
 Manager alone chooses and issues the next bounded action inside active user
 authority.
+
+For every Project Manager-requested mechanical operation, the handoff declares
+`return_role=project_manager`. After the operation completes or becomes
+mechanically blocked, Controller must resolve the live Project Manager route and
+send exactly one `CONTROLLER_OPERATION_RECEIPT` before stopping or making a
+user-only completion report. That receipt is a wake-up event, not a semantic
+review or successor authorization. It carries the request identity, operation
+status, exact result identity, source/path/hash facts, unchanged remaining
+authority, and blockers. Project Manager then selects the next admissible action
+inside existing user authority. If callback delivery cannot be recovered,
+Controller reports `CONTROLLER_CALLBACK_BLOCKED`; it does not silently close the
+handoff.
 
 ## File-level concurrency
 
