@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=HIGH_FREQUENCY_ROSTER_CHURN_G9
-implementation_status=FOCUSED_CHECKS_COMPLETE_NONFORMAL_EXERCISE_PENDING
+implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
 design=docs/research/designs/HIGH_FREQUENCY_ROSTER_CHURN_G9.md
 backend=cpu
 torch_threads=1
@@ -52,13 +52,19 @@ episode/profile inventories, source-control rows and serialized means. Apply
 the frozen first-match order from the G9 design. Threshold equality passes and
 the immediately lower floating-point value fails.
 
-## Current acceptance boundary
+## Acceptance and formal launch
 
 The G9 focused suite passes `6/6`; the combined G9 plus shared G5 regression
 passes `11/11`. The official bounded nonformal CPU `train(import) -> evaluate ->
-analyze` exercise remains the only prelaunch check. Once it is operationally
-valid, record a short prelaunch note, integrate the accepted source, and assign
-the exact formal iteration-10 pipeline to the fixed Luna-low operator.
+analyze` exercise at
+`logs/nonformal_high_frequency_churn_g9_20260723_pm2` is operationally valid.
+It records zero optimizer steps, exact checkpoint copying, three passing source
+controls, six immutable evaluation cells and the required nonformal branch.
+
+No advisory review is added because the focused reproducer, shared regression
+and complete bounded path show no concrete anomaly. Integrate this accepted
+source and assign the exact formal iteration-10 pipeline in the prelaunch note
+to the fixed Luna-low operator.
 
 A valid formal result consumes iteration 10 and leaves seven authorized
 iterations. Invalid operational evidence consumes none and is repaired without
