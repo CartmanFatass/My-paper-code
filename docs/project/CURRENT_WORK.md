@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
-active_assignment_id=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_PRELAUNCH_GIT_INTEGRATION
-next_boundary=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_ITERATION_7
+last_completed_assignment_id=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_ITERATION_7
+active_assignment_id=BEYOND_DECLARED_COUNT_G7_DERIVATION
+next_boundary=BEYOND_DECLARED_COUNT_G7_EXECUTABLE_DEFINITION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=11
-conclusion_bearing_iterations_consumed=6
-implementation_status=G6_PM_ACCEPTED_FORMAL_READY
+iterations_remaining=10
+conclusion_bearing_iterations_consumed=7
+implementation_status=G6_CLOSED_SUCCESS_G7_DERIVATION_ACTIVE
 nonformal_compute_status=g6_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=authorized_after_g6_implementation_git_integration
+formal_compute_status=authorized_after_next_evidence_contract_freeze
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_6_complete
-latest_iteration_report=docs/report/ITERATION_6.md
+iteration_report_status=iterations_1_to_7_complete
+latest_iteration_report=docs/report/ITERATION_7.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=implementation_and_bounded_nonformal_acceptance
+next_action_class=zero_compute_algorithmic_derivation
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -149,6 +149,17 @@ g6_nonformal_optimizer_steps=0
 g6_nonformal_model_state_unchanged_exact=true
 g6_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_OPEN_ROSTER_ZERO_SHOT_SCALE_G6_PRELAUNCH.md
 g6_review_result=REPAIR_ACCEPTED
+g6_formal_source_commit=909ced01ee58e2690fd7cd0ec2da214e99203af5
+g6_formal_run=logs/formal_open_roster_zero_shot_g6_cpu_20260723_909ced0_r1
+g6_formal_result=ROBUST_ZERO_SHOT_OPEN_ROSTER_G6
+g6_operational_valid=true
+g6_count_scale_utility_ci95=[0.929481077286684,0.9728003881841198,0.9990977160094806]
+g6_event_time_utility_ci95=[0.9854642427884616,0.9951547475961539,1.0]
+g6_joint_utility_ci95=[0.9358802132191993,0.9763486212085679,0.9999523628048781]
+g6_joint_min_replicate_mean=0.9358802132191995
+g6_joint_stochastic_mean=0.9501188486944967
+g6_scientific_disposition=closed_success_no_rerun_tuning_or_relabeling
+g7_candidate_question=zero_training_transport_beyond_declared_count_16
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -207,6 +218,10 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   `[0.98288796, 0.99399266, 1.0]` on unseen counts through nine and a larger
   padding capacity. This is a usable dynamic-roster MVP, not evidence of
   arbitrary-count scaling, event-time robustness or skill/lifetime competence.
+- Formal G6 now establishes zero-training transport through active count 16,
+  unseen safe membership-event times and their composition. The remaining
+  scale question begins beyond the declared count-feature limit rather than by
+  modifying the already successful checkpoint.
 
 ## Runtime and protected semantics
 

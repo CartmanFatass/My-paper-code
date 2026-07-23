@@ -6,14 +6,14 @@
 
 ```text
 active_implementation=OPEN_ROSTER_ZERO_SHOT_SCALE_G6
-implementation_status=PM_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_COMPLETE_CLOSED_SUCCESS
 design=docs/research/designs/OPEN_ROSTER_ZERO_SHOT_SCALE_G6.md
 backend=cpu
 torch_threads=1
 training_operation=none_frozen_g5_checkpoint_import
 asynchronous_skill_lifetime=frozen
 formal_iteration=7
-chain_iterations_remaining_before_run=11
+chain_iterations_remaining_after_run=10
 ```
 
 ## Goal
@@ -70,3 +70,16 @@ with zero optimizer steps and exact model immutability. One advisory review
 found a missing G5 authorization-token provenance check; the repaired intake,
 record, analyzer and two tamper cases were accepted by the same reviewer. The
 package is formal-ready after Git integration.
+
+## Formal disposition
+
+Formal iteration 7 is operationally valid and returns
+`ROBUST_ZERO_SHOT_OPEN_ROSTER_G6`. Count-scale, event-time and joint
+deterministic CI95 lower bounds are respectively `0.9294811`, `0.9854642` and
+`0.9358802`; the minimum joint replicate is `0.9358802` and joint stochastic
+mean is `0.9501188`. All gates pass with zero optimizer exposure and exact model
+immutability.
+
+G6 is closed. The next active boundary is a zero-compute derivation for frozen-
+checkpoint transport beyond the declared N=16 count-feature limit. Ten
+conclusion-bearing iterations remain.

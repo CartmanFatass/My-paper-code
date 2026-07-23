@@ -6,8 +6,8 @@ the Project Manager-accepted CDC state.
 
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
-- Status: supported at usable-MVP scope by formal G5; selected for scale and
-  schedule robustness refinement.
+- Status: supported as a robust zero-shot dynamic-roster MVP through N=16 by
+  formal G5/G6; selected for beyond-declared-count refinement.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -16,16 +16,16 @@ the Project Manager-accepted CDC state.
   `[0.9985352, 0.9994303, 1.0]` and held-out CI95
   `[0.9828880, 0.9939927, 1.0]`; the worst held-out replicate is `0.9828880`.
   One checkpoint transfers from training counts through seven to held-out
-  counts through nine and from capacity 10 to 12. R49 independently proves
-  active-only permutation, padding, replay and membership mechanics through
-  `N=16`.
-- Strongest remaining counterexample: G5 can succeed because its held-out
-  counts are near the training range and all membership events occur at the
-  same phase times. Active-embedding sums may also become ill-conditioned at
-  substantially larger unseen N.
-- Separating evidence: freeze the successful G5 checkpoints and independently
-  stress unseen count scale and unseen event times before introducing a
-  count-normalized correction.
+  counts through nine and from capacity 10 to 12. Formal G6 then freezes those
+  checkpoints and reaches count-scale CI95 `[0.9294811, 0.9728004, 0.9990977]`
+  and joint CI95 `[0.9358802, 0.9763486, 0.9999524]` through N=16 with unseen
+  event times. R49 independently proves active-only permutation, padding,
+  replay and membership mechanics through `N=16`.
+- Strongest remaining counterexample: success stops at the exact declared
+  count-feature limit; active-embedding sums and out-of-range count features may
+  become ill-conditioned above N=16.
+- Separating evidence: keep the successful checkpoints frozen and test bands
+  above N=16 before introducing a count-normalized correction.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

@@ -1,7 +1,6 @@
 # Open-roster zero-shot scale G6
 
-Status: executable definition frozen; implementation PM-accepted and formal-
-ready after Git integration.
+Status: formally complete and closed as `ROBUST_ZERO_SHOT_OPEN_ROSTER_G6`.
 
 ## Question
 
@@ -114,3 +113,15 @@ Success supports zero-shot transport only on the exact count/time range. It is
 not arbitrary-N generalization or algorithmic advantage. Failure does not
 relabel G5; it selects the corresponding smallest independent G7 repair. Skill
 selection, asynchronous skill lifetime, EHC and intrinsic reward remain frozen.
+
+## Formal disposition
+
+The exact CPU one-thread run at source
+`909ced01ee58e2690fd7cd0ec2da214e99203af5` is operationally valid with zero
+optimizer steps and exact model immutability. Count-scale, event-time and joint
+CI95 lower bounds are `0.9294811`, `0.9854642` and `0.9358802`; the registered
+first match is `ROBUST_ZERO_SHOT_OPEN_ROSTER_G6`.
+
+The result rejects the three registered counterexamples through N=16 but does
+not cross the declared count-feature limit. G6 is closed without tuning or
+relabeling; beyond-limit transport is independent G7 evidence.
