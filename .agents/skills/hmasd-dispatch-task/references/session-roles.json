@@ -1,5 +1,5 @@
 {
-  "schema_version": 11,
+  "schema_version": 12,
   "updated": "2026-07-22",
   "roles": {
     "controller": {
@@ -20,13 +20,6 @@
       "registration_status": "ACTIVE",
       "role_skill": ".agents/skills/hmasd-experiment-monitor/SKILL.md",
       "responsibility": "bounded read-only run observation, ETA-aware heartbeat ownership, and terminal delivery"
-    },
-    "open_divergent_exchange": {
-      "kind": "persistent_reviewer_exchange",
-      "thread_id": "019f8a2f-22be-7db3-aa74-7fdeb9c03772",
-      "registration_status": "ACTIVE",
-      "reviewer_role": "OPEN_DIVERGENT",
-      "role_skill": ".agents/skills/hmasd-review-exchange/SKILL.md"
     }
   },
   "policy": {
@@ -39,7 +32,6 @@
       "role",
       "thread_id",
       "role_skill_or_contract",
-      "reviewer_role",
       "registration_status"
     ],
     "forbidden_fields": ["hostId", "model", "thinking"],

@@ -6,14 +6,14 @@ $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expected = @('hmasd-dispatch-task', 'hmasd-experiment-monitor',
-    'hmasd-review-exchange', 'hmasd-review-round') | Sort-Object
+    'hmasd-review-round') | Sort-Object
 if (Compare-Object $expected $skills) { throw "Unexpected active Skill set: $($skills -join ',')" }
 
 $current = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 $legacyToken = 'O' + 'MP'
 if ($current -match "(?i)\b$legacyToken\b|\.omp") { throw 'Current control plane retains a legacy execution route' }
 $roles = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
-foreach ($role in @('project_manager', 'experiment_monitor', 'open_divergent_exchange')) {
+foreach ($role in @('project_manager', 'experiment_monitor')) {
     if ($roles.roles.$role.registration_status -ne 'ACTIVE') { throw "Inactive registered role: $role" }
 }
 if ($roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
@@ -23,11 +23,15 @@ if ($roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a
 
 $dispatcher = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
 foreach ($required in @('controller <-> project_manager', 'controller <-> experiment_monitor',
-    'controller <-> open_divergent_exchange', 'source_boundary=local_and_remote_aggressive_tip',
+    'Controller-direct external review', '$hmasd-review-round',
+    'source_boundary=local_and_remote_aggressive_tip',
     'gpt-5.3-codex-spark', 'PROJECT_MANAGER_DELIVERY_BLOCKED')) {
     if (-not $dispatcher.Contains($required)) { throw "Dispatcher missing: $required" }
 }
 if ($dispatcher -match '(?i)\bOMP\b|agent://|history://') { throw 'Dispatcher retains a legacy task-delivery path' }
+if ($dispatcher.Contains('open_divergent_exchange') -or $dispatcher.Contains('$hmasd-review-exchange')) {
+    throw 'Dispatcher retains the retired Exchange surface'
+}
 
 $monitor = Get-Content (Join-Path $repo '.agents/skills/hmasd-experiment-monitor/SKILL.md') -Raw
 foreach ($required in @('ETA', '10 minutes', 'delete the heartbeat', 'EXPERIMENT_MONITOR',
@@ -104,9 +108,14 @@ foreach ($required in @('external-Pro result review is complete',
 foreach ($required in @('Controller-authored G1 clarification is transport-only',
     'cannot be adopted', 'PM-owned G1 external-Pro raw is archived',
     'PM reconciliation is archived and blocked on protected source contract',
-    'next boundary is PM-authored focused Pro package',
+    'PM-authored focused Pro package is committed and awaiting Controller-direct',
     'Formal compute remains unauthorized')) {
     if (-not $current.Contains($required)) { throw "Current ownership correction missing: $required" }
+}
+foreach ($required in @('Controller-direct external-Pro transport',
+    'persistent Open-Pro Exchange is retired',
+    'late Exchange output has no authority')) {
+    if (-not $current.Contains($required)) { throw "Current direct-review topology missing: $required" }
 }
 $g1Mechanical = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_source_contract_pm_owned/50_MECHANICAL_INTAKE_RECORD.md'
 if (-not (Test-Path -LiteralPath $g1Mechanical -PathType Leaf)) {

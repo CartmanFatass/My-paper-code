@@ -7,24 +7,21 @@ $rolesPath = Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/sess
 $skill = Get-Content -LiteralPath $skillPath -Raw
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 $agents = Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md') -Raw
-$exchange = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md') -Raw
+$review = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 $monitor = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-experiment-monitor/SKILL.md') -Raw
 
-$expected = @('controller', 'project_manager', 'experiment_monitor', 'open_divergent_exchange')
+$expected = @('controller', 'project_manager', 'experiment_monitor')
 $actual = @($roles.roles.PSObject.Properties.Name)
-if ($roles.schema_version -ne 11 -or (Compare-Object $expected $actual)) {
-    throw 'Persistent role graph must contain controller, project_manager, experiment_monitor and open_divergent_exchange at schema 11'
+if ($roles.schema_version -ne 12 -or (Compare-Object $expected $actual)) {
+    throw 'Persistent role graph must contain only controller, project_manager and experiment_monitor at schema 12'
 }
 if ($roles.roles.controller.thread_id -ne '019f8995-7550-7c82-8f31-ad08a3d381d4' -or
     $roles.roles.project_manager.thread_id -ne '019f8a2e-ed73-7a02-9bb9-4a57b2054cf3' -or
     $roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
     $roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
     $roles.roles.experiment_monitor.registration_status -ne 'ACTIVE' -or
-    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md' -or
-    $roles.roles.open_divergent_exchange.thread_id -ne '019f8a2f-22be-7db3-aa74-7fdeb9c03772' -or
-    $roles.roles.open_divergent_exchange.reviewer_role -ne 'OPEN_DIVERGENT' -or
-    $roles.roles.open_divergent_exchange.role_skill -ne '.agents/skills/hmasd-review-exchange/SKILL.md') {
-    throw 'Persistent controller/Open-Pro binding mismatch'
+    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
+    throw 'Persistent controller/manager/monitor binding mismatch'
 }
 foreach ($entry in $roles.roles.PSObject.Properties.Value) {
     foreach ($field in @('hostId', 'model', 'thinking')) {
@@ -35,15 +32,14 @@ foreach ($required in @(
     'The Controller owns routing',
     'Use `project_manager`',
     'controller <-> project_manager',
+    'controller <-> experiment_monitor',
     'resolve_task_route.ps1 -Role <role>',
     'experiment_monitor',
     'hmasd-experiment-monitor',
     'gpt-5.3-codex-spark',
-    'open_divergent_exchange',
-    'controller <-> open_divergent_exchange',
-    'REVIEW_STAGE_COMPLETE',
-    'REVIEW_STAGE_BLOCKED',
-    'raw path',
+    'Controller-direct external review',
+    '$hmasd-review-round',
+    '$browser:control-in-app-browser',
     'Before `IMPLEMENTATION_READY`',
     'IMPLEMENTATION_READY',
     'RESEARCH_MANAGER_BLOCKED',
@@ -55,13 +51,22 @@ foreach ($required in @(
     'SOURCE_BOUNDARY_DIVERGED')) {
     if (-not $skill.Contains($required)) { throw "Dispatcher missing: $required" }
 }
-foreach ($forbidden in @('controller <-> research_project_manager', 'agent://', 'history://')) {
+foreach ($forbidden in @(
+    'controller <-> research_project_manager',
+    'controller <-> open_divergent_exchange',
+    'open_divergent_exchange',
+    '$hmasd-review-exchange',
+    'REVIEW_STAGE_COMPLETE',
+    'REVIEW_STAGE_BLOCKED',
+    'agent://',
+    'history://')) {
     if ($skill.Contains($forbidden)) { throw "Retired persistent edge remains: $forbidden" }
 }
 if ($skill.Contains('direct evidence intake')) {
     throw 'Dispatcher still assigns semantic evidence intake to Controller'
 }
-foreach ($required in @('$hmasd-dispatch-task', '$hmasd-review-exchange', '$hmasd-experiment-monitor',
+foreach ($required in @('$hmasd-dispatch-task', '$hmasd-review-round',
+    '$browser:control-in-app-browser', '$hmasd-experiment-monitor',
     'bounded self-recovery', 'recovery attempts')) {
     if (-not $agents.Contains($required)) { throw "Controller contract missing: $required" }
     if (-not $skill.Contains($required)) { throw "Dispatcher recovery contract missing: $required" }
@@ -74,14 +79,11 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "Controller semantic-ownership contract missing: $required" }
     if (-not $skill.Contains($required)) { throw "Dispatcher semantic-ownership contract missing: $required" }
 }
-foreach ($required in @('superseded_process=true', 'adoption_authority=false')) {
-    if (-not $skill.Contains($required)) { throw "Dispatcher superseded-process guard missing: $required" }
-}
-if ($exchange.Contains('role_skill=.agents/skills/')) {
-    throw 'Exchange still sends a Skill path instead of a $skill_name trigger'
-}
-foreach ($required in @('$hmasd-review-exchange', 'RECOVERY_ATTEMPT', 'recovery_exhausted=true')) {
-    if (-not $exchange.Contains($required)) { throw "Exchange recovery contract missing: $required" }
+foreach ($required in @(
+    'inspect the registered conversation before submission',
+    'never classifies scientific completeness',
+    'late output from a retired role has no authority')) {
+    if (-not $review.Contains($required)) { throw "Direct review contract missing: $required" }
 }
 foreach ($required in @('$hmasd-experiment-monitor', 'RECOVERY_ATTEMPT', 'recovery_exhausted=true')) {
     if (-not $monitor.Contains($required)) { throw "Monitor recovery contract missing: $required" }
@@ -95,12 +97,14 @@ if ($sourceBoundary.source_boundary -ne 'local_and_remote_aggressive_tip' -or
     throw 'Source-boundary resolver did not return a canonical aggressive tip'
 }
 $resolver = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1') -Raw
-foreach ($required in @("ValidateSet('controller', 'project_manager', 'experiment_monitor', 'open_divergent_exchange')", 'Unregistered Codex role', 'role = $Role')) {
+foreach ($required in @("ValidateSet('controller', 'project_manager', 'experiment_monitor')", 'Unregistered Codex role', 'role = $Role')) {
     if (-not $resolver.Contains($required)) { throw "Role resolver missing: $required" }
 }
+if ($resolver.Contains('open_divergent_exchange')) { throw 'Role resolver retains retired Exchange route' }
 $currentWork = Get-Content -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 if (-not $currentWork.Contains($roles.roles.project_manager.thread_id) -or
-    -not $currentWork.Contains($roles.roles.experiment_monitor.thread_id)) {
-    throw 'Current boundary does not name the registered native roles'
+    -not $currentWork.Contains($roles.roles.experiment_monitor.thread_id) -or
+    -not $currentWork.Contains('Controller-direct external-Pro transport')) {
+    throw 'Current boundary does not name the active direct-transport topology'
 }
 Write-Output 'HMASD_DISPATCH_TASK_CONTRACT_OK'

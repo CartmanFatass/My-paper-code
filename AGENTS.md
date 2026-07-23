@@ -23,7 +23,8 @@ directly or delegates research convergence and code-side work to the ACTIVE
 persistent Codex `project_manager` registered in the dispatch Skill. That
 Project Manager may use native Codex collaboration agents; the Controller does
 not bypass it to dispatch implementation workers. Persistent external-Pro
-transport is separately registered.
+transport is not a separate task: the active Controller operates the registered
+conversation directly under `$hmasd-review-round`.
 
 Roles are resolved only from the dispatch Skill registry. Never infer a current
 role from a task title, an old callback or conversation search. Unregistered
@@ -44,25 +45,30 @@ clarification package needed to unblock that work.
 ## Task dispatch
 
 Automatically use `$hmasd-dispatch-task` whenever work
-may require Project Manager or Monitor dispatch, persistent Open-Pro
+may require Project Manager or Monitor dispatch, Controller-direct Open-Pro
 communication, external review or a role callback.
 
 Every cross-task assignment that requires a Skill starts with the exact catalog
-trigger `$skill-name`. Send `$hmasd-review-exchange` and
-`$hmasd-experiment-monitor` as triggers; never send a `SKILL.md` path or use a
+trigger `$skill-name`. Send `$hmasd-experiment-monitor` as a trigger; never send
+a `SKILL.md` path or use a
 path-valued `role_skill` field to request loading. Filesystem paths may remain
 registry metadata, but they are not Skill invocation syntax.
+
+External review is Controller-direct. Activate `$hmasd-review-round` and
+`$browser:control-in-app-browser` in the active Controller; do not create or
+route a persistent Exchange task.
 
 The active surfaces are:
 
 - controller direct work for workflow design, routing, Git, mechanical
-  provenance/completeness checks, project control and user communication;
+  provenance and required package-field checks, project control and user
+  communication;
 - the registered native Codex `project_manager` for one authorized algorithm
   realization and implementation package;
 - the registered native Codex `experiment_monitor` for one already authorized
   run;
-- the registered Open-Pro Exchange persistent session for external divergent
-  review transport.
+- Controller-direct external-Pro browser transport for one mechanically
+  validated PM-authored review package.
 
 The code profiles belong only to the Project Manager task tree. The Controller
 does not dispatch them as implementation workers. Only the Project Manager may
@@ -75,8 +81,8 @@ registry section identifiers, not callable `agent_type` values. An
 registered custom agent with an unnamed/default child.
 
 Persistent roles receive a complete assignment through live route resolution.
-Only Open-Pro Exchange uses a registered event such as `REVIEW_STAGE`, the
-`$hmasd-review-exchange` trigger and live route verification.
+External review is not a persistent-role assignment and uses no cross-task
+terminal callback.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -150,18 +156,21 @@ repair, extend or scientifically interpret it.
 
 ## Context isolation
 
-The persistent Open-Pro role receives its communication Skill, registered role
-identity and explicit inputs. It does not reconstruct Controller history,
-authorize another role or launch a successor.
+Controller-direct external review receives only the PM-authored package, its
+pushed source boundary, the reviewer registry and the registered conversation.
+Browser transport grants no authority to author, repair, summarize or interpret
+the package or Pro response.
 
 Project Manager child agents receive exactly one profile and complete assignment.
 They do not reconstruct Controller history, change their model, expand
 authority, or invoke unrelated Skills. Only Project Manager has child-spawn
 authority, limited to its four registered code profiles.
 
-Scientific decision transport is sent only to Open-Pro Exchange. The Controller
-performs mechanical evidence intake and applies only exact Pro-authored or
-PM-authored durable files without semantic rewriting.
+Scientific decision transport is performed only by the active Controller under
+`$hmasd-review-round`. The Controller archives exact Pro text, performs
+mechanical evidence intake and applies only exact Pro-authored or PM-authored
+durable files without semantic rewriting. Exact raw always returns to Project
+Manager before any focused clarification or code-side realization is selected.
 Authorized algorithm realization is sent only to `project_manager`. Monitoring
 is sent only to `experiment_monitor`. Automatic task results
 wake the Controller but never start a successor without Controller routing.
@@ -220,8 +229,10 @@ measurement, benchmark-comparator pair, conjecture scope or, only with strong
 independent evidence, mechanism family.
 
 Before authorizing a scheduled action as code or experiment work, receive and
-archive the external Pro decision and verify provenance, authority and
-completeness. Scientific deltas come from Pro; code-side reconciliation and
+archive the external Pro decision, verify provenance and authority, and require
+the Project Manager's code-side reconciliation. Controller does not classify
+the Pro response's scientific completeness. Scientific deltas come from Pro;
+code-side reconciliation and
 executable artifacts come from Project Manager. Controller integrates those
 exact artifacts and reports their status, but does not create a second
 interpretation. Use a full plural Pro round for genuinely open boundaries and a

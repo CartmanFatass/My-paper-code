@@ -3,6 +3,8 @@ param(
     [Parameter(Mandatory = $true)][string]$RoundPath,
     [Parameter(Mandatory = $true)]
     [ValidateSet("OPEN_DIVERGENT")][string]$Stage,
+    [Parameter(Mandatory = $true)]
+    [ValidatePattern('^[0-9a-f]{40}$')][string]$StageCommit,
     [Parameter(Mandatory = $true)][string]$QuestionPath,
     [Parameter(Mandatory = $true)][string]$RawPath,
     [Parameter(Mandatory = $true)][string]$HeartbeatId
@@ -22,24 +24,28 @@ if (-not (Test-Path -LiteralPath $question -PathType Leaf)) {
     throw "Missing review question: $question"
 }
 
-$repo = (Resolve-Path (Join-Path $PSScriptRoot "../../../..")).Path
 $roundId = Split-Path -Leaf $round
 @"
-`$hmasd-dispatch-task
-`$hmasd-review-exchange
+`$hmasd-review-round
+`$browser:control-in-app-browser
 
-HMASD OPEN-PRO EXCHANGE HEARTBEAT
-Read the current dispatcher, role directory, Exchange Skill and reviewer registry.
+HMASD CONTROLLER-DIRECT PRO REVIEW HEARTBEAT
+This wake belongs to the active Controller. Read the current review Skill and
+reviewer registry, then inspect the registered conversation once.
 heartbeat_id=$HeartbeatId
 round=$roundId
 round_path=$round
 reviewer_role=$Stage
+stage_commit=$StageCommit
 question=$question
 raw=$raw
 
-Confirm the registered conversation and current assignment, then perform one
-bounded read-only inspection using any reliable method. Preserve the owned page
-while pending. Archive a stable natural response exactly and report semantic
-gaps separately. Never resubmit, operate another task, or claim completion
-without raw equality, controller callback proof and heartbeat-deletion proof.
+Never submit or resubmit from a heartbeat. If the matching response is pending,
+leave this single heartbeat active. A home-page redirect triggers registered
+conversation discovery, not blocking. Identify the assistant message after the
+matching fence and use two stable text snapshots plus generation-control state;
+a Thinking label alone is not pending. If the response is naturally complete,
+archive it exactly and reread for equality. Write the mechanical intake; delete this heartbeat and confirm absence; then return the exact raw to Project Manager.
+Do not interpret scientific completeness, repair the package,
+authorize code, or start compute.
 "@

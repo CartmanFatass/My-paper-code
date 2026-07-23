@@ -50,9 +50,13 @@ scientific_authority=external_pro
 
 This does not let PM choose science or operate external-review transport.
 Controller checks provenance, required fields, paths and Git visibility, then
-commits, pushes and transmits the exact PM-authored files unchanged. Internal PM
-audits are never converted by Controller into reviewer prose. Package failures
-return with `repair_owner=project_manager` for PM correction.
+commits, pushes and transmits the exact PM-authored files unchanged through
+`$hmasd-review-round` and `$browser:control-in-app-browser`. Controller owns the
+registered conversation, exact raw archive and heartbeat mechanically; it never
+classifies response completeness, interprets science or authors a follow-up.
+Internal PM audits are never converted by Controller into reviewer prose. Exact
+raw returns to PM before code-side reconciliation or a focused package. Package
+failures return with `repair_owner=project_manager` for PM correction.
 
 ## Active-line development
 

@@ -1,10 +1,8 @@
-# HMASD Controller CDC Research Principles
+# HMASD CDC Research Principles
 
 The scientific outer loop is Conjecture -> Derivation -> Counterexample or
 Disproof -> Correction. External GPT-5.6 Pro owns scientific decisions in this
-loop. The Controller preserves the decision, writes factual reconciliation,
-applies its durable record delta and checks authority and operational
-feasibility without replacing the scientific choice.
+loop. Project Manager authors code-side reconciliation only. Controller owns only exact raw archival and mechanical intake. External Pro owns the scientific content and remains the scientific authority.
 
 ## Research objects
 
@@ -55,14 +53,19 @@ algorithm objective and does not automatically select a successor.
 
 ## Durable records
 
-The Controller owns:
+External Pro owns the scientific content of:
 
 - `docs/research/cdc/CONJECTURES.md`;
 - `docs/research/cdc/LEMMA_COUNTEREXAMPLE_LEDGER.md`;
 - `docs/research/cdc/IDEA_PORTFOLIO.md`;
 - `docs/research/cdc/EVIDENCE_NOTES/<id>.md`.
 
+Controller may mechanically apply only an exact Pro-authored target-file delta.
+If Pro does not supply one, leave these records unchanged; Project Manager may
+author a focused question requesting exact scientific clarification, but
+Project Manager does not author these scientific records.
+
 External Pro review may be a full plural round or focused continuation. It
 selects scientific direction without writing an implementation plan. Direct
-Controller intake must not insert a local scientific decision between Pro and
-the Project Manager.
+Controller intake is mechanical and must not insert a local scientific decision
+between Pro and Project Manager.

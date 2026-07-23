@@ -1,6 +1,4 @@
 interface:
   display_name: "HMASD Review Round"
   short_description: "Obtain an external-Pro CDC decision"
-  default_prompt: "Use $hmasd-review-round and $hmasd-dispatch-task when a Project Manager-authored external GPT-5.6 Pro package needs mechanical provenance intake, Git integration, and exact transport without Controller semantic rewriting."
-policy:
-  allow_implicit_invocation: false
+  default_prompt: "Use $hmasd-review-round and $browser:control-in-app-browser when a Project Manager-authored external GPT-5.6 Pro package needs Controller-direct browser transport, mechanical provenance intake, exact raw archival, and return to Project Manager without Controller semantic rewriting."

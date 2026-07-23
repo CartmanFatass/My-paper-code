@@ -55,6 +55,7 @@ data/
 !memory/*.md
 # Project control plane is load-bearing collaboration state.
 !docs/project/*.md
+!docs/plans/*.md
 !docs/superpowers/plans/*.md
 !docs/superpowers/specs/*.md
 # Custom subagent definitions are durable project tooling.
