@@ -7,7 +7,8 @@ the Project Manager-accepted CDC state.
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
 - Status: supported as a usable prefix-normalized dynamic-roster algorithm
-  through N=40 by formal G8; high-frequency churn robustness remains open.
+  through N=40 by formal G8 and under eight-edit churn through N=16 by formal
+  G9; their cross-product remains open.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -34,11 +35,14 @@ the Project Manager-accepted CDC state.
   `0.9432373` IID, `0.9469604` held-out, `0.9321289` moderate, `0.9302979` far
   and `0.9299927` joint, with joint stochastic mean `0.8994221` and positive
   learned-gain LCB. G7 remains the valid frozen raw-prefix failure.
-- Strongest remaining counterexample: training and current evaluation contain
-  only three membership edits; repeated leave/rejoin/join operations near task
-  load may break lifecycle-state composition despite count-scale success.
-- Separating evidence: freeze G8 finals and evaluate load-proximal high-frequency
-  churn with zero optimizer steps before another algorithm change.
+- Formal churn evidence: frozen G8 finals retain deterministic CI95 LCBs
+  `0.9309692`, `0.9294434` and `0.9299316` across repeated-rejoin,
+  load-proximal and mixed eight-edit domains; the mixed stochastic mean is
+  `0.9099933`.
+- Strongest remaining counterexample: scale and churn have only been tested
+  separately. Their errors may interact when a large active set changes often.
+- Separating evidence: freeze G8 finals and evaluate the large-count/high-churn
+  cross-product with zero optimizer steps before another algorithm change.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

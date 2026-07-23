@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_ITERATION_9
-active_assignment_id=HIGH_FREQUENCY_ROSTER_CHURN_G9_FORMAL_ITERATION_10
-next_boundary=HIGH_FREQUENCY_ROSTER_CHURN_G9_FORMAL_ITERATION_10
+last_completed_assignment_id=HIGH_FREQUENCY_ROSTER_CHURN_G9_FORMAL_ITERATION_10
+active_assignment_id=SCALE_CHURN_COMPOSITION_G10_DERIVATION
+next_boundary=SCALE_CHURN_COMPOSITION_G10_DERIVATION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=8
-conclusion_bearing_iterations_consumed=9
+iterations_remaining=7
+conclusion_bearing_iterations_consumed=10
 implementation_status=G8_CLOSED_USABLE_PREFIX_NORMALIZED
 nonformal_compute_status=g9_exercise_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=g9_prelaunch_accepted_ready_for_fixed_operator
+formal_compute_status=g9_complete_next_formal_not_yet_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_9_complete
-latest_iteration_report=docs/report/ITERATION_9.md
+iteration_report_status=iterations_1_to_10_complete
+latest_iteration_report=docs/report/ITERATION_10.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -242,6 +242,18 @@ g9_nonformal_checkpoint_copy_maximum_difference=0.0
 g9_nonformal_model_state_unchanged_exact=true
 g9_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_HIGH_FREQUENCY_ROSTER_CHURN_G9_PRELAUNCH.md
 g9_review_status=no_new_review_no_anomaly
+g9_formal_source_commit=ff7461fd2b0f3cfb7ad13a5f6f2730eb6bac3d99
+g9_formal_run=logs/formal_high_frequency_churn_g9_cpu_20260723_ff7461f_r1
+g9_formal_result=ROBUST_HIGH_FREQUENCY_CHURN_G9
+g9_operational_valid=true
+g9_repeated_rejoin_utility_ci95=[0.93096923828125,0.95562744140625,1.0]
+g9_load_proximal_utility_ci95=[0.929443359375,0.9545491536458334,1.0]
+g9_mixed_churn_utility_ci95=[0.929931640625,0.9543050130208334,1.0]
+g9_mixed_churn_min_replicate_mean=0.929931640625
+g9_mixed_churn_stochastic_mean=0.9099933159413526
+g9_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_HIGH_FREQUENCY_ROSTER_CHURN_G9_FORMAL_RESULT.md
+g9_scientific_disposition=closed_success_no_rerun_tuning_or_relabeling
+g10_candidate_question=zero_training_composition_of_large_active_count_and_high_frequency_churn
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -313,12 +325,17 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   correction by a `0.0563965` minimum-domain margin. The active algorithm keeps
   the G5 embedding sum and log-count coordinate but feeds action-prefix
   fractions to the actor. Its focused and shared regressions plus bounded
-  nonformal full path are accepted; iteration-9 formal execution is next.
+  nonformal full path are accepted.
 - Formal G8 now closes as `USABLE_PREFIX_NORMALIZED_OPEN_ROSTER_G8`. All five
   deterministic CI95 lower bounds exceed `0.929`; the minimum joint replicate
   is `0.92999` and stochastic joint utility is `0.89942`. This is the current
   usable N<=40 algorithm test version. The next independent question is
   repeated membership churn, not another scale increase.
+- Formal G9 freezes those checkpoints and closes as
+  `ROBUST_HIGH_FREQUENCY_CHURN_G9`. All three eight-edit deterministic CI95
+  lower bounds exceed `0.929`; mixed stochastic mean is `0.90999`. Scale
+  through N=40 and churn through N=16 are separately supported. Their
+  cross-product is the next untested boundary.
 
 ## Runtime and protected semantics
 

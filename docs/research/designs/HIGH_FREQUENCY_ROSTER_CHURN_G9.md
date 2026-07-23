@@ -1,7 +1,7 @@
 # High-frequency roster churn G9
 
-Status: executable definition and implementation accepted; bounded nonformal
-exercise operationally valid; formal iteration 10 ready.
+Status: formal closed as `ROBUST_HIGH_FREQUENCY_CHURN_G9`; no rerun, tuning or
+relabeling.
 
 ## Frozen source and policy
 

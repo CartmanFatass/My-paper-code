@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=HIGH_FREQUENCY_ROSTER_CHURN_G9
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_ROBUST_HIGH_FREQUENCY_CHURN_G9
 design=docs/research/designs/HIGH_FREQUENCY_ROSTER_CHURN_G9.md
 backend=cpu
 torch_threads=1
@@ -66,6 +66,16 @@ and complete bounded path show no concrete anomaly. Integrate this accepted
 source and assign the exact formal iteration-10 pipeline in the prelaunch note
 to the fixed Luna-low operator.
 
-A valid formal result consumes iteration 10 and leaves seven authorized
-iterations. Invalid operational evidence consumes none and is repaired without
-changing gates.
+The valid formal result consumes iteration 10 and leaves seven authorized
+iterations. Operationally invalid evidence would have consumed none.
+
+## Formal closure and successor
+
+Source `ff7461fd2b0f3cfb7ad13a5f6f2730eb6bac3d99` completed all 18 registered
+cells and returned `ROBUST_HIGH_FREQUENCY_CHURN_G9`. The three deterministic
+CI95 lower bounds are `0.9309692`, `0.9294434` and `0.9299316`; mixed stochastic
+mean is `0.9099933`. G9 is closed without rerun or tuning.
+
+The next active boundary is zero-compute
+`SCALE_CHURN_COMPOSITION_G10_DERIVATION`. This plan does not yet freeze its
+large-count profiles or result gates.
