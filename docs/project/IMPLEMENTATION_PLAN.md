@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=SLOT_LAYOUT_INVARIANCE_G11
-implementation_status=FOCUSED_CHECKS_COMPLETE_NONFORMAL_EXERCISE_PENDING
+implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
 design=docs/research/designs/SLOT_LAYOUT_INVARIANCE_G11.md
 backend=cpu
 torch_threads=1
@@ -46,8 +46,14 @@ from its dense pair. Require zero mismatches per transformed layout and retain
 the absolute access/stability floors from the design. Threshold equality passes
 and the immediately lower value fails.
 
-## Current acceptance boundary
+## Acceptance and formal launch
 
 The G11 focused suite passes `6/6`; G11 plus shared G5 regression passes
-`11/11`. One official bounded nonformal CPU full path remains. A valid formal
-result consumes iteration 12 and leaves five authorized iterations.
+`11/11`. The official bounded nonformal full path at
+`logs/nonformal_slot_layout_g11_20260723_pm2` is operationally valid. It records
+zero optimizer steps, eight immutable cells, exact source controls and zero
+paired mismatch for every transformed layout.
+
+No additional advisory review is triggered. Integrate this package and assign
+the exact formal commands in the prelaunch note. A valid result consumes
+iteration 12 and leaves five authorized iterations.

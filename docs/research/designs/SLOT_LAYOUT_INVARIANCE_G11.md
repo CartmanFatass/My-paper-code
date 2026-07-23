@@ -1,7 +1,7 @@
 # Slot-layout invariance G11
 
-Status: executable definition frozen; focused implementation checks complete;
-bounded nonformal exercise pending.
+Status: executable definition and implementation accepted; bounded nonformal
+exercise operationally valid; formal iteration 12 ready.
 
 ## Frozen logical source
 
