@@ -123,7 +123,7 @@ def make_layout_factory(
     return partial(make_layout_ledger, layout=layout)
 
 
-def remap_uniforms(
+def pad_position_uniforms(
     logical_uniforms: np.ndarray,
     layout: SlotLayout,
 ) -> np.ndarray:
@@ -134,8 +134,10 @@ def remap_uniforms(
         (values.shape[0], values.shape[1], layout.capacity),
         dtype=values.dtype,
     )
-    for logical, physical in enumerate(layout.logical_to_physical):
-        result[:, :, physical] = values[:, :, logical]
+    # DirectPrimitiveARPolicy consumes sampling uniforms by autoregressive
+    # token position, not by focal lifecycle key.  Layout isomorphism therefore
+    # retains the first 48 position draws and only pads unused later positions.
+    result[:, :, :LOGICAL_CAPACITY] = values
     return result
 
 

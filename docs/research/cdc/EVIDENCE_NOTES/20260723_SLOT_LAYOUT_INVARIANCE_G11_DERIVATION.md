@@ -24,10 +24,11 @@ logical episode. Evaluate four isomorphic physical layouts:
 3. odd sparse slots in capacity 96;
 4. affine-scattered slots in capacity 128.
 
-Remap all membership keys, priority tables and stochastic action uniforms by
-the same bijection. The logical wave arrivals, observations, actions draws and
-task outcomes are thereby held fixed. Require exact paired persistent, short
-and utility arrays, not merely similar means.
+Remap all membership keys and priority tables by the same bijection. Keep
+stochastic action uniforms fixed by autoregressive token position, which is how
+the actor consumes them, and pad only unused later positions. The logical wave
+arrivals, observations and action draws are thereby held fixed. Require exact
+paired persistent, short and utility arrays, not merely similar means.
 
 ## Interpretation
 

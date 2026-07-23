@@ -32,10 +32,12 @@ affine_padded128:    physical(k)=(37*k+11) mod 128, capacity=128
 ```
 
 Each map is injective. Membership events and owner, presentation and frontier
-priority columns are mapped by the same function. Stochastic action-uniform
-columns are also mapped exactly; inactive padding values are unused. Source
-controls require equal wave arrivals, mapped priority equality, exact roster
-schedules/demand, lifecycle freeze/restore and constructive utility one.
+priority columns are mapped by the same function. The actor consumes stochastic
+uniforms by autoregressive token position rather than lifecycle key, so the
+first 48 position draws remain in place and only unused later positions are
+padded. Source controls require equal wave arrivals, mapped priority equality,
+exact roster schedules/demand, lifecycle freeze/restore and constructive
+utility one.
 
 ## Formal execution
 

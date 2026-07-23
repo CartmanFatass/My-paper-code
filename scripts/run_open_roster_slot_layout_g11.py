@@ -35,7 +35,7 @@ from ha_ctse_process.open_roster_slot_layout_g11 import (
     LOGICAL_CAPACITY,
     make_layout_factory,
     make_layout_ledger,
-    remap_uniforms,
+    pad_position_uniforms,
 )
 from scripts import run_open_roster_high_churn_g9 as core
 
@@ -207,7 +207,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
                     uniforms=(
                         None
                         if deterministic
-                        else remap_uniforms(logical_uniforms, layout)
+                        else pad_position_uniforms(logical_uniforms, layout)
                     ),
                     ledger_factory=factory,
                     environment_factory=HighChurnEnv,

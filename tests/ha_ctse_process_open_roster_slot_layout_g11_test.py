@@ -24,7 +24,7 @@ from ha_ctse_process.open_roster_slot_layout_g11 import (
     SlotLayout,
     make_layout_factory,
     make_layout_ledger,
-    remap_uniforms,
+    pad_position_uniforms,
 )
 from scripts import run_open_roster_slot_layout_g11 as runner
 
@@ -68,12 +68,12 @@ def test_layout_and_uniform_mapping_fail_closed() -> None:
         action_seed=runner.ACTION_SEED_BASE,
     )
     for layout in LAYOUTS:
-        physical = remap_uniforms(logical, layout)
+        physical = pad_position_uniforms(logical, layout)
         assert physical.shape == (HORIZON, 2, layout.capacity)
-        for source, target in enumerate(layout.logical_to_physical):
-            assert np.array_equal(physical[:, :, target], logical[:, :, source])
+        assert np.array_equal(physical[:, :, :LOGICAL_CAPACITY], logical)
+        assert not bool(physical[:, :, LOGICAL_CAPACITY:].any())
     with pytest.raises(ValueError, match="shape"):
-        remap_uniforms(logical[:, :, :-1], DENSE_LAYOUT)
+        pad_position_uniforms(logical[:, :, :-1], DENSE_LAYOUT)
 
 
 def test_sparse_padding_preserves_lifecycle_state_contract() -> None:
