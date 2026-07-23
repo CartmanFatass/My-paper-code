@@ -1,7 +1,7 @@
 # CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2
 
-Status: bounded information gate passed; formal evidence contract frozen;
-trainable implementation and nonformal prelaunch accepted by Project Manager.
+Status: permanently closed as `TEAM_REC_SUFFICIENT_HANDOFF_G2` after one valid
+formal CPU run.
 
 ## Provenance and correction
 
@@ -282,3 +282,19 @@ implementation and bounded exercise on one integrated source commit. The
 registered silent experiment operator then owns exactly one foreground
 `train -> evaluate -> analyze` run. Three conclusion-bearing iterations remain
 until a valid formal G2 result is produced.
+
+## Closed formal result
+
+The exact run at
+`logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1` completed from
+source commit `9a72dc6a0f776aa3e6dfa96d86f5265f12717ace`. TEAM_REC and EHC both
+attained held-out utility 1.0, DUM attained 0.5, `G_team` was exactly 0.0 and
+`G_link` was exactly 0.5. Source identification and exact-snapshot held-mark
+consequences passed.
+
+Frozen first-match step 6 therefore selected
+`TEAM_REC_SUFFICIENT_HANDOFF_G2`. The result consumes conclusion-bearing
+iteration 3 and leaves two iterations. The exact G2 source/comparison is closed
+without rerun, tuning, renaming or rescue. Full disposition and the
+label-symmetry measurement correction are in
+`docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md`.

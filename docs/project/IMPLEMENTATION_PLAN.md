@@ -1,109 +1,73 @@
-# Cross-lifecycle handoff G2 trainable implementation plan
+# Async commitment roster G3 information-gate plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
-> Generic Superpowers execution and workflow hash handoffs are disabled.
+> Generic Superpowers execution, compatibility work and workflow hash handoffs
+> are disabled.
 
 ```text
-active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE
+active_implementation=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
 implementation_status=AUTHORIZED
-design=docs/research/designs/CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2.md
+design=docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md
 backend=cpu
 torch_threads=1
-formal_run_status=not_launchable_until_implementation_acceptance
-G0_G1_mutation=forbidden
+formal_run_status=forbidden_for_this_gate
+closed_G0_G1_G2_mutation=forbidden
 backward_compatibility=not_required
 ```
 
 ## Goal
 
-Implement the frozen TEAM_REC/DUM/EHC comparison and its fail-closed formal
-analyzer. Keep the passed information gate as source-control logic, then remove
-superseded G1 executable code/tests after G2 acceptance because Git history and
-formal artifacts preserve G1.
+Build the smallest exhaustive source gate showing that a lifecycle-owned,
+unordered roster of standing commitments can causally control an asynchronous
+editor and complementary external utility. Retain TEAM_REC as a constructive
+simpler explanation. This gate identifies a source boundary only; it cannot
+support algorithm adoption or consume a conclusion-bearing iteration.
 
-The primary comparator is persistent TEAM_REC; DUM is the link-null control.
+## Task 1 — Pure roster transition model
 
-## Task 1 — Trainable handoff environment
+**Status:** pending.
 
-**Status:** complete and PM accepted.
+Create one active-line module for anonymous active counts 2/3/4, lifecycle-owned
+commitments, JOIN/RENEW/temporary absence/rejoin/terminal replacement, balanced
+physical packing and exhaustive standing-roster permutations. The external
+utility is the fraction of unique active commitments.
 
-Extend `ha_ctse_process/cross_lifecycle_handoff_g2.py` with counter-based
-train/IID/held-out ledgers, exact sign mates, the six-field actor and ten-field
-critic views, nuisance independence, membership transitions, reward/utility,
-snapshot/restore and constructive controls.
+**Focused proof:** exact case balance; physical-slot invariance; terminal delete,
+temporary freeze/rejoin restore and fresh JOIN ownership; no future/lifetime or
+identity leakage; exact utility identity.
 
-**Focused proof:** distribution support and independence; no actor leakage;
-creator terminal deletion; same/cross-slot successor reset; team/held ownership;
-reward identity; snapshot equality; information-gate preservation.
+## Task 2 — Constructive controls and roster intervention
 
-## Task 2 — Matched learned arms and PPO
+**Status:** pending.
 
-**Status:** complete and PM accepted.
+Implement ROSTER_EDITOR, TEAM_REC_ORACLE, INDEPENDENT_EDITOR and SHUFFLED_ROSTER
+as pure deterministic/enumerated controls. Snapshot before the edit, replace one
+retained commitment, and verify the adapted roster choice and value consequence
+under an otherwise identical continuation.
 
-Create `ha_ctse_process/ehc_handoff_g2.py` with the shared module inventory,
-per-member and team recurrence, CREATE mark, link-specific logits, rollout,
-stored-draw replay, GAE/PPO, gradient fences, counters and CPU checkpoint.
+**Focused proof:** both constructive controls equal 1.0; nulls equal their
+enumerated expectations and remain below 1.0 by active-count stratum; the
+roster-only intervention changes the selected commitment and improves utility;
+no primitive-logit, PPO, gradient or learned parameter path exists.
 
-**Focused proof:** matched initialization/parameters/exposure; exact TEAM_REC,
-DUM and EHC logit paths; member/team/held reset rules; no critic leakage; replay
-equality and corruption rejection; finite joint ratios/gradients; same-source
-CPU resume and foreign checkpoint rejection.
+## Task 3 — Runner and bounded acceptance
 
-## Task 3 — Runner, audit and first-match analyzer
+**Status:** pending.
 
-**Status:** complete and PM accepted.
+Add one `formal=false` runner and a focused test file. The runner writes the
+fixed PASS/FAIL/INVALID result and compact deterministic telemetry. Run focused tests and one fresh CPU exercise
+with one thread. Inspect exact ownership,
+permutation invariance, intervention isolation, scalar loops and persistence.
 
-Replace `scripts/run_cross_lifecycle_handoff_g2.py` with `train`, `evaluate`,
-`analyze` and `exercise`. Persist only final formal checkpoints, 60 evaluation
-cells, compact source controls and held-out EHC snapshot interventions. Rederive
-all predicates and call one pure first-match selector.
+**Acceptance:** focused tests pass; fresh artifact is nonformal; all exhaustive
+references and metrics close; no temporary residue; no closed G2 import or
+compatibility reader.
 
-**Focused proof:** exact inventory, paired hierarchical bootstrap, selector
-precedence, evidence/reference/schema tamper negatives, formal rejection of an
-exercise artifact and no import of a G0/G1 selector or schema.
+## Successor decision
 
-## Task 4 — Active-line replacement
-
-**Status:** complete.
-
-Delete the closed G1 executable line:
-
-- `ha_ctse_process/temporal_duty_g1.py`;
-- `ha_ctse_process/ehc_g1.py`;
-- `scripts/run_access_positive_ehc_g1.py`;
-- `tests/ha_ctse_process_temporal_duty_g1_test.py`;
-- `tests/ha_ctse_process_ehc_g1_test.py`;
-- `tests/run_access_positive_ehc_g1_test.py`.
-
-Retain G1 design, evidence note, formal artifacts and Git history. No reader,
-migration, alias or compatibility test remains.
-
-## Task 5 — Bounded prelaunch acceptance
-
-**Status:** complete and PM accepted.
-
-Run only the focused G2 environment/model/runner tests with the registered CPU
-interpreter and one thread, then one fresh reduced `formal=false exercise` that
-covers collection, replay, one PPO update, checkpoint reload, all three arms,
-evaluation, intervention and analyzer rejection.
-
-Project Manager inspects actor/critic separation, identity leakage, RNG draw
-ownership, recurrent contamination, held-state persistence, rollout packing,
-scalar transfer, synchronization and serial evaluation. Repair the first failed
-invariant; do not weaken the frozen contract or add a broad compatibility suite.
-
-After acceptance, Project Manager commits and pushes the exact active path set.
-Only that integrated commit may be assigned to the silent experiment operator
-for formal iteration 3. The bounded package consumes zero iterations; three conclusion-bearing iterations remain.
-
-Accepted evidence:
-
-- focused G2 suite: 15 passed;
-- artifact:
-  `logs/nonformal_cross_lifecycle_handoff_g2_trainable_20260723_pm2`;
-- three final checkpoints, 12 evaluation cells, eight post-departure snapshot
-  audits, exact replay and exposure counters;
-- result `formal=false`, `SOURCE_NON_IDENTIFIABLE_HANDOFF_G2`, no operational
-  errors; formal validator rejection confirmed;
-- transient OneDrive progress-replace retry and evidence-tamper failure covered;
-- no `latest.pt`, temporary artifact, G1 compatibility line or formal result.
+After a pass, perform a zero-compute sufficiency audit. A learned G3 comparison
+is admissible only if the gate yields a precise permutation-equivariant roster
+editor versus matched TEAM_REC and independent/no-roster controls, with
+held-out active-count/lifetime transport and label-invariant mediation. Freeze a
+separate formal contract before using either remaining conclusion-bearing
+iteration.

@@ -6,40 +6,39 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live but narrowed after formal G1 selected
-  `ORDINARY_EXPLANATION_G1`. Within-lifecycle cue retention is reducible to
-  ordinary recurrence; EHC now requires a cross-lifecycle or cross-member
-  information-ownership boundary before superiority is testable.
-- Claim: under genuinely asynchronous decisions, an event-held per-member state
-  can create intervention-sensitive sequence behavior and improve held-out
-  variable-membership/lifetime capability.
+- Status: live only as a variable-cardinality event-roster factorization.
+  Formal G1 reduced within-lifecycle memory to per-member recurrence and formal
+  G2 reduced one global cross-lifecycle bit to persistent TEAM_REC.
+- Claim: under genuinely asynchronous partial edits, an unordered roster of
+  lifecycle-owned commitments may improve learning and held-out transport when
+  value depends on complementarity among retained and newly selected records.
 - Necessary measurement consequences: policy-dependent persistence;
-  sequence-level intervention from an exact snapshot; natural mediation from
-  event through persistence and future behavior to value; simpler-explanation
-  resistance against matched recurrence/capacity plus random-event,
-  exogenous-lifetime and uninformative-mark nulls; and held-out robustness to
-  unseen membership/lifetime patterns.
-- Instantaneous mark/logit sensitivity, natural use, realized lifetime diversity
-  and external value remain separate diagnostics and are not sufficient support.
-- Strongest simpler explanation: ordinary recurrence, added capacity, random
-  event timing, exogenous opportunity spacing, or a useful mark with arbitrary
-  renewal timing carries the observed effect.
-- G2 information gate: fresh per-member recurrence is bounded at 0.5 after an
-  anonymous terminal handoff, but persistent team recurrence and EHC both attain
-  1.0. TEAM_REC is now the strongest required comparator.
+  sequence-level exact-snapshot intervention; natural mediation through later
+  behavior and value; multiple simultaneous records; asynchronous edit/KEEP
+  composition; resistance to TEAM_REC, independent-editor and shuffled-roster
+  explanations; and held-out active-count/lifetime robustness.
+- A single global record, instantaneous mark/logit sensitivity, natural use,
+  realized lifetime diversity and external value are insufficient support.
+- Strongest simpler explanation: a persistent recurrent team state or an
+  ordinary roster/set encoder supplies the same useful context without a
+  policy-selected event-held mechanism.
+- Natural mark evidence must be invariant to mark-label permutation within each
+  replicate. Raw `P(m=b)` is not an admissible future gate.
 
 ## C-REC — Ordinary recurrence is sufficient
 
-- Status: selected for the exact formal G1 source. OR and DUM reached the same
-  `0.9344202` mean utility, while both EHC gain UCBs were only `0.0026465`.
+- Status: selected for both exact formal memory sources. In G1, OR and DUM
+  reached the same `0.9344202` mean utility and both EHC gain UCBs were
+  `0.0026465`. In G2, TEAM_REC and EHC both reached 1.0 and `G_team=0`.
 - Claim: a matched recurrent MARL controller can represent the required
   persistence without an explicit commitment object when access and training
   are adequate.
 - Separating evidence: matched capacity and information with held-out dynamic
   membership/lifetime evaluation.
 - Scope correction: per-member recurrence loses creator-only information at a
-  terminal handoff, but team recurrence can carry it. Future evidence must
-  compare EHC against TEAM_REC rather than claim representational impossibility.
+  terminal handoff, but team recurrence carries one global bit exactly. Future
+  evidence must target structured variable-cardinality factorization and
+  held-out transport, not claim finite-network representational impossibility.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -62,28 +61,32 @@ the Project Manager-accepted CDC state.
 
 ## C-BENCH — The benchmark is not identifying
 
-- Status: live and strengthened. Formal G1 shows that individual cue memory,
-  even with event opportunities and commitment records, does not identify an
-  event-held advantage over matched recurrence.
+- Status: live and strengthened. Formal G1 shows that individual cue memory
+  does not identify EHC over per-member recurrence; formal G2 shows that one
+  global handoff bit does not identify EHC over team recurrence.
 - Claim: current benchmark/control pairs do not separate representation,
   access, credit and coordination explanations.
 - Separating evidence: a constructive policy or alternative task family that
   changes identification without changing the algorithm claim.
-- G2 information gate: the anonymous handoff source passes its deterministic
-  information boundary and is eligible for a separate trainable contract.
+- Required correction: a source must contain multiple standing commitments,
+  asynchronous partial edits and value-bearing composition before a roster
+  factorization claim is eligible.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 
-- Status: live.
+- Status: active next boundary after G2 selected TEAM_REC sufficiency.
 - Claim: the important variable-N difficulty is joint complementary allocation,
   not an individual lifetime mechanism in isolation.
-- Separating evidence: joint intervention and natural coordination consequences
-  that individual persistence cannot explain.
+- Separating evidence: a roster-only intervention changes an asynchronous
+  editor's choice and complementary value, followed by natural and held-out
+  transport beyond matched TEAM_REC and independent-editor explanations.
 
 ## C-LINK-NULL — Commitment is not load-bearing for the source family
 
 - Status: selected for the exact formal G1 source/comparator pair; it remains
-  unselected by the G0 no-access result and is not a family-wide conclusion.
+  unselected by G0. G2 rejects link-null locally because EHC-DUM gain is 0.5 and
+  mark intervention consequences are 1.0, while still selecting TEAM_REC
+  sufficiency at higher precedence.
 - Claim: ordinary recurrence may represent the useful behavior, or the task's
   temporal structure may be mismatched to KEEP/RENEW event-held commitment.
 - Separating evidence: an access-positive mechanism-matched source with
@@ -92,9 +95,8 @@ the Project Manager-accepted CDC state.
 
 ## C-MEASURE — Current behavior metrics do not identify commitment
 
-- Status: retained and formally validated in G1. It correctly exposed a
-  decorative link: K-bin support was present while action-TV and both causal
-  utility consequences were near zero.
+- Status: retained and corrected by formal G2. G1 exposed a decorative link;
+  G2 exposed arbitrary latent-label symmetry despite perfect behavioral use.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
 - Counterexamples: `CE-RANDOM-USE`, `CE-EXOGENOUS-LIFETIME`, and
@@ -109,3 +111,6 @@ the Project Manager-accepted CDC state.
 - Formal evidence: `CE-RECURRENT-CUE-MEMORY`, `CE-LOCAL-UTILITY-DOMINANCE`, and
   `CE-DECORATIVE-COMMITMENT-CHANNEL` require the next source to place useful
   state across an anonymous creator-to-successor handoff.
+- G2 correction: `CE-GLOBAL-BIT-TEAM-REC`, `CE-SINGLE-RECORD-NO-COMPOSITION`,
+  `CE-PASSIVE-HANDOFF`, and `CE-LABEL-SYMMETRY` require multiple standing
+  records, complementarity and label-invariant natural mediation.

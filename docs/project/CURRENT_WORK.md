@@ -8,109 +8,80 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active execution surface
 
 - Project Manager task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3` is the sole
-  persistent project task and owns workflow, science reconciliation,
-  implementation acceptance, Git, external-review transport, experiment
-  orchestration, evidence intake, and successor selection.
-- `hmasd-experiment-operator` is a registered nonpersistent native child fixed
-  to `gpt-5.6-luna` with `low` reasoning. It is spawned for one authorized run,
-  remains silent during execution, and returns exactly one `COMPLETE` or
-  `ERROR` final payload.
-- No Controller, persistent Monitor, dispatcher, monitor Skill, callback route,
-  or experiment heartbeat is active.
-- External GPT-5.6 Pro remains question-scoped scientific authority reached by
-  Project Manager direct transport with `$hmasd-review-round`.
+  persistent project task and owns workflow, scientific reconciliation,
+  implementation acceptance, Git, review transport, experiment orchestration,
+  result intake and successor selection.
+- Formal and bounded runs use only the registered nonpersistent
+  `hmasd-experiment-operator`, fixed to `gpt-5.6-luna` with `low` reasoning. It
+  remains silent and returns exactly one `COMPLETE` or `ERROR` terminal payload.
+- No Controller, persistent Monitor, dispatcher, callback route, global write
+  lease, workflow hash handoff or compatibility line is active.
 
 ## Active boundary
 
 ```text
-last_completed_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION
-active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_ITERATION_3
-accepted_g1_source_commit=de9a315b4969ee6920be08a3d911d559fe362f03
-implementation_base_commit=0aeccfc444b514bb2ed405163c940b0242384137
-g2_launch_source_commit=resolve_integrated_head_after_acceptance_commit
-next_boundary=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_ITERATION_3
-iterations_remaining=3
-conclusion_bearing_iterations_consumed_by_failed_r1=0
-conclusion_bearing_iterations_consumed_by_valid_r2=1
+last_completed_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_ITERATION_3
+active_assignment_id=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
+next_boundary=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
 autonomous_research_grant=ACTIVE
-grant_scope=remaining_three_conclusion_bearing_iterations
+grant_scope=remaining_two_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
-implementation_status=G2_PM_ACCEPTED_PRELAUNCH
+iterations_remaining=2
+conclusion_bearing_iterations_consumed=3
+implementation_status=G3_INFORMATION_GATE_AUTHORIZED
 nonformal_compute_status=authorized
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=authorized_after_integrated_source_commit
+formal_compute_status=not_launchable_until_separate_g3_contract
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
-closed_g1_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
-formal_evidence_contract_status=G2_PM_FROZEN
-formal_evidence_contract=docs/research/designs/CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2.md
-formal_implementation_status=G2_PM_ACCEPTED_PRELAUNCH
-formal_run_status=g2_ready_after_git_integration
-formal_r2_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_de9a315_r2
-formal_r2_result=ORDINARY_EXPLANATION_G1
-formal_r2_operational_valid=true
-formal_r2_source_identifiable=true
-formal_r2_max_arm_utility_ci95=[0.9293551393,0.9420615267]
-formal_r2_gain_ucb=0.0026465277
-formal_r2_scientific_disposition=closed_no_rerun_tuning_rename_or_rescue
-formal_r1_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1
-formal_r1_status=operationally_invalid_no_scientific_disposition
-g2_information_gate_status=PASS_HANDOFF_INFORMATION_GATE_G2
-g2_information_gate_artifact=logs/nonformal_cross_lifecycle_handoff_g2_20260723_pm2/result.json
-g2_information_gate_iteration_cost=0
-g2_primary_comparator=TEAM_REC
-g2_primary_estimand=U_EHC_minus_U_TEAM_REC
-g2_link_estimand=U_EHC_minus_U_DUM
-g2_access_floor=0.80
-g2_gain_margin=0.10
-g2_prelaunch_artifact=logs/nonformal_cross_lifecycle_handoff_g2_trainable_20260723_pm2
-g2_prelaunch_tests=15_passed
-g2_prelaunch_result=SOURCE_NON_IDENTIFIABLE_HANDOFF_G2_nonformal_expected
-next_action_class=git_integration_then_registered_operator_formal_run
-next_action_evidence=docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_PRELAUNCH.md
+g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
+g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
+g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
+g2_operational_valid=true
+g2_source_identifiable=true
+g2_team_rec_utility_ci95=[1.0,1.0]
+g2_ehc_utility_ci95=[1.0,1.0]
+g2_dum_utility_ci95=[0.5,0.5]
+g2_g_team_ci95=[0.0,0.0]
+g2_g_link_ci95=[0.5,0.5]
+g2_scientific_disposition=closed_no_rerun_tuning_rename_or_rescue
+g3_gate_contract=docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md
+g3_gate_iteration_cost=0
+next_action_class=zero_training_bounded_prototype
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
 
-The clean r2 formal pipeline completed train, evaluate and analyze under the
-registered silent operator. Project Manager validation closed all 15 final
-checkpoints, 60 evaluation files, source controls and causal-audit evidence and
-independently reproduced `ORDINARY_EXPLANATION_G1` from the frozen first-match
-selector. The source is accessible, but both EHC gain upper bounds are
-`0.0026465277 <= 0.10`. The result consumes conclusion-bearing iteration 2 and
-leaves three iterations.
+The G2 formal pipeline completed from the exact integrated source. Project
+Manager reclosed 15 checkpoints, 60 evaluation references, 15,360 evaluation
+rows, 640 causal audits and all source controls, then independently reproduced
+the first-match branch. TEAM_REC and EHC both reached utility 1.0 while DUM
+reached 0.5. The link is load-bearing, but `G_team=0`, so TEAM_REC is sufficient
+for this exact one-bit source. Iteration 3 is consumed and two remain.
 
-The exact G1 pair is permanently closed. The older r1 directory remains an
-operationally invalid, non-conclusion-bearing record; it is never resumed or
-combined with r2.
+The G2 mark labels also exposed a measurement symmetry: two replicates learned
+the opposite internal sign with perfect behavior. Future natural mediation is
+label-permutation invariant; raw `P(m=b)` is not reused as a gate.
 
 ## Accepted scientific state
 
-- `EVENT_HELD_COMMITMENT_LINK_G0` is permanently closed as
-  `NO_ACCESS_THIS_BENCHMARK`; it may not be rerun, renamed, modified, or rescued.
-- The G1 formal contract at
-  `docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md` is frozen.
-- The bounded prelaunch artifact
-  `logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2` validated the
-  learned G1 execution path and was correctly rejected as nonformal.
-- G1 is valid `ORDINARY_EXPLANATION_G1`: ordinary per-lifecycle recurrence is
-  sufficient and the commitment link is non-load-bearing for this exact source.
-- C-EHC remains live only where task-relevant state must survive an anonymous
-  lifecycle handoff after the creator's recurrent state is unavailable.
-- The next zero-compute boundary defines that information-ownership separation;
-  the bounded gate passed without launching iteration 3.
-- The G2 gate proves fresh per-member recurrence is information-limited to 0.5,
-  but TEAM_REC and EHC both constructively attain 1.0. TEAM_REC is therefore the
-  mandatory strongest comparator for any trainable G2 claim.
-- The trainable contract is now frozen with TEAM_REC as primary comparator and EHC-minus-
-  TEAM_REC as primary gain.
-- G2 implementation and the bounded nonformal exercise are PM accepted. Formal
-  iteration 3 becomes launchable on the exact integrated commit and a fresh run
-  root; no further approval or review is required.
-- Three conclusion-bearing iterations remain.
+- G0 is permanently closed as `NO_ACCESS_THIS_BENCHMARK`.
+- G1 is permanently closed as `ORDINARY_EXPLANATION_G1`; per-member recurrence
+  suffices for within-lifecycle cue memory.
+- G2 is permanently closed as `TEAM_REC_SUFFICIENT_HANDOFF_G2`; persistent team
+  recurrence suffices for one global cross-lifecycle bit.
+- G2 nevertheless validates a learned, intervention-sensitive EHC link relative
+  to DUM. That lower-precedence fact does not establish EHC advantage.
+- C-EHC is narrowed from generic persistence to variable-cardinality,
+  event-indexed roster factorization under asynchronous partial edits.
+- C-COORD is the active mission-aligned explanation: later value must depend on
+  complementarity among retained and newly selected commitments.
+- The next bounded gate is zero-training and nonformal. It must retain TEAM_REC
+  as the strongest simpler explanation and consumes no conclusion-bearing
+  iteration.
 
 ## Runtime and protected semantics
 
@@ -121,15 +92,11 @@ torch_threads=1
 backend=cpu
 ```
 
-There is no CUDA fallback, backend mixing, cross-backend resume, or CPU/CUDA
-equivalence requirement. Preserve every closed G0/G1 source, estimand and result.
-The active G2 contract uses TEAM_REC/DUM/EHC, retains
-`primitive_logits = base_logits + W_z(m*z)` for EHC, and freezes primary
-`G_team = U_EHC - U_TEAM_REC` plus link control
-`G_link = U_EHC - U_DUM`. Preserve its anonymous membership/lifecycle semantics,
-reward, observation, probability factorization, gradients/detach, clocks, RNG,
-replay, checkpoint meaning, seeds, budgets, thresholds, bootstrap, causal gates,
-and first-match result precedence.
+There is no CUDA fallback, backend mixing, cross-backend resume or CPU/CUDA
+equivalence requirement. Preserve every closed G0/G1/G2 source, result and
+first-match meaning. The G3 information gate may add only its independent
+roster source; it cannot change reward, observations, thresholds, seeds or
+semantics of any closed experiment.
 
 ## Concurrency
 
@@ -138,17 +105,18 @@ concurrency_policy=file_ownership_only
 global_write_lease=disabled
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
-active_file_writers=none
+active_file_writers=project_manager_exact_active_path_set
 ```
 
-Children do not run Git; Project Manager directly commits and pushes the
-accepted exact path set. No workflow hash or callback receipt is required.
+Project Manager directly stages accepted paths, checks the staged path set and
+`git diff --cached --check`, commits and pushes `aggressive`. Per-file hash and
+callback receipts are forbidden.
 
 ## Pointers
 
-- `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — project authority.
-- `.agents/roles/EXPERIMENT_OPERATOR.md` — silent single-run child contract.
-- `.codex/agents/hmasd-experiment-operator.toml` — fixed Luna-low profile.
-- `docs/project/IMPLEMENTATION_PLAN.md` — active executable plan.
-- `docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md` — frozen
-  formal evidence contract.
+- `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — authority.
+- `.agents/roles/EXPERIMENT_OPERATOR.md` — silent single-run contract.
+- `docs/project/IMPLEMENTATION_PLAN.md` — active proof-sized gate plan.
+- `docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md` — frozen gate.
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md`
+  — G2 closure and correction.
