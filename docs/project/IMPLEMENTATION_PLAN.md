@@ -179,3 +179,10 @@ does not repeatedly open a live writer's progress file, emits no intermediate
 messages, and returns exactly one terminal payload. After the repair source is
 committed, use a fresh r2 run root; never resume the r1 checkpoint across the
 source commit.
+
+The profile is integrated at `21978ee541d8f592d0864fd1ae11c910019d30cf`.
+Because the active parent runtime loaded its native-agent registry before that
+commit, its exact activation probe returned `unknown agent_type`; it launched no
+compute. Reload the native registry and retry only the exact
+`hmasd-experiment-operator`. No default/ad hoc child or separate session is an
+admissible fallback.

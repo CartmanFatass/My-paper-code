@@ -37,7 +37,10 @@ nonformal_compute_status=authorized
 formal_compute_status=authorized_cpu_only_under_frozen_evidence_contract
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
-experiment_operator_status=registered_pm_accepted
+experiment_operator_status=registered_pm_accepted_runtime_reload_required
+experiment_operator_activation_probe=unknown_agent_type_in_prechange_parent_runtime
+experiment_operator_activation_condition=reload_native_agent_registry_then_spawn_exact_hmasd_experiment_operator
+experiment_operator_fallback=forbidden
 formal_evidence_contract_status=PM_FROZEN
 formal_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
 formal_implementation_status=PM_ACCEPTED_PRELAUNCH
@@ -71,6 +74,14 @@ started. The run consumed no conclusion-bearing iteration and must remain as
 operationally invalid evidence. After the atomic-write and operator topology
 package is accepted and committed, iteration 2 restarts from a fresh run root
 under that new source commit; the old checkpoint is not resumed across commits.
+
+The operator profile and role are integrated at source commit
+`21978ee541d8f592d0864fd1ae11c910019d30cf`. The current Project Manager runtime
+was created before that profile existed, so its first exact spawn probe returned
+`unknown agent_type 'hmasd-experiment-operator'`. No run was launched. The only
+activation condition is a native agent-registry reload followed by the same
+exact custom type; using `default`, an unnamed child, a manual model override,
+or a separate persistent task is forbidden.
 
 ## Accepted scientific state
 
