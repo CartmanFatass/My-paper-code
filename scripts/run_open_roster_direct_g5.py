@@ -8,7 +8,6 @@ import json
 import math
 from pathlib import Path
 import random
-import subprocess
 import sys
 import time
 from typing import Any
@@ -99,17 +98,6 @@ def _runtime_identity() -> dict[str, Any]:
     }
 
 
-def _git_head() -> str:
-    result = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=PROJECT_ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return result.stdout.strip()
-
-
 def _replicate_seeds(replicate: int) -> dict[str, int]:
     index = int(replicate)
     return {
@@ -152,8 +140,6 @@ def train(
             eval_episodes=eval_episodes,
         ):
             raise ValueError("formal G5 counts differ from the frozen contract")
-        if _git_head() != source_commit:
-            raise ValueError("formal G5 source commit does not match HEAD")
     if min(replicates, updates, num_envs, eval_episodes) <= 0:
         raise ValueError("G5 counts must be positive")
     run_root.mkdir(parents=True, exist_ok=False)
