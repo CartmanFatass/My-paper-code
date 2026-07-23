@@ -1,7 +1,7 @@
 # ASYNC_COMMITMENT_ROSTER_G3
 
-Status: zero-training information-gate contract frozen; no trainable or formal
-contract exists.
+Status: information gate passed; exact structural source retained as nonformal;
+no trainable or formal contract exists.
 
 ## Provenance and independence
 
@@ -86,3 +86,19 @@ compare a permutation-equivariant roster-conditioned editor against matched
 TEAM_REC and independent/no-roster controls, freeze held-out active-count and
 lifetime transport, use label-invariant natural mediation, and retain
 first-match access before mechanism interpretation.
+
+## Accepted gate result
+
+The exact artifact
+`logs/nonformal_async_commitment_roster_g3_20260723_pm1/result.json` passed all
+18,400 cases from source commit
+`b5b67853a2012dd6957e30ad1a6d05d16dff02fe`. Both constructive policies attain
+1.0; all null strata remain below 1.0; lifecycle ownership, anonymity,
+permutation balance and roster-only intervention pass. Five focused tests pass.
+
+The uniqueness fraction is a structural gate metric only. It is not a legal
+formal objective because label diversity need not produce useful behavior.
+`USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION` must instead bind each standing
+commitment to a realized service effect and external demand served, including
+demand states where duplicate effects are optimal. The information gate is not
+rerun or relabeled.

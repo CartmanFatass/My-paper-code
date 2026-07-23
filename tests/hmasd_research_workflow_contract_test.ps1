@@ -42,7 +42,7 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE',
+    'active_assignment_id=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION',
     'iterations_remaining=2',
     'conclusion_bearing_iterations_consumed=3',
     'intermediate_authorization_prompts=forbidden',
@@ -51,17 +51,20 @@ foreach ($required in @(
     'g2_g_team_ci95=[0.0,0.0]',
     'g2_g_link_ci95=[0.5,0.5]',
     'g3_gate_contract=docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md',
+    'g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3',
+    'g3_gate_cases=18400',
+    'g3_gate_tests=5_passed',
     'iteration_report_status=iterations_1_to_3_complete',
     'latest_iteration_report=docs/report/ITERATION_3.md',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=forbidden_for_this_gate',
-    'active_implementation=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE',
-    'ROSTER_EDITOR, TEAM_REC_ORACLE, INDEPENDENT_EDITOR and SHUFFLED_ROSTER',
-    'focused tests and one fresh CPU exercise',
-    'support algorithm adoption or consume a conclusion-bearing iteration')) {
+    'formal_run_status=not_launchable',
+    'active_implementation=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION',
+    'sum_k min(service_count_k, demand_k) / sum_k demand_k',
+    'NO_ROSTER, TEAM_REC and ROSTER_ATTN',
+    'This definition consumes zero iterations')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
 foreach ($required in @(

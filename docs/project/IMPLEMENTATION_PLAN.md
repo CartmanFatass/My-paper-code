@@ -1,73 +1,77 @@
-# Async commitment roster G3 information-gate plan
+# Useful-effect roster G3 executable-definition plan
 
-> **Required project procedure:** use `$hmasd-agile-research-development`.
-> Generic Superpowers execution, compatibility work and workflow hash handoffs
-> are disabled.
+> **Required project procedure:** use `$hmasd-agile-research-development` for
+> later realization. Generic Superpowers execution, compatibility work and
+> workflow hash handoffs remain disabled.
 
 ```text
-active_implementation=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
-implementation_status=AUTHORIZED
-design=docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md
+active_implementation=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION
+implementation_status=ZERO_COMPUTE_DESIGN_AUTHORIZED
+upstream_gate=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 backend=cpu
 torch_threads=1
-formal_run_status=forbidden_for_this_gate
+formal_run_status=not_launchable
 closed_G0_G1_G2_mutation=forbidden
 backward_compatibility=not_required
 ```
 
 ## Goal
 
-Build the smallest exhaustive source gate showing that a lifecycle-owned,
-unordered roster of standing commitments can causally control an asynchronous
-editor and complementary external utility. Retain TEAM_REC as a constructive
-simpler explanation. This gate identifies a source boundary only; it cannot
-support algorithm adoption or consume a conclusion-bearing iteration.
+Replace the structural gate's uniqueness score with a minimal realized-effect
+source in which held commitments drive service behavior and external utility is
+demand served. Freeze one learned comparison only if two reasonable
+implementations instantiate the same estimand and the source cannot be solved by
+label diversity alone.
 
-## Task 1 — Pure roster transition model
+## Task 1 — Demand and effect source
 
-**Status:** pending.
+**Status:** in progress.
 
-Create one active-line module for anonymous active counts 2/3/4, lifecycle-owned
-commitments, JOIN/RENEW/temporary absence/rejoin/terminal replacement, balanced
-physical packing and exhaustive standing-roster permutations. The external
-utility is the fraction of unique active commitments.
+Define four anonymous service effects and a demand-count vector whose total
+equals active capacity. Standing commitments emit their service effect until
+their own asynchronous edit event. External utility is fulfilled demand divided
+by total demand: `sum_k min(service_count_k, demand_k) / sum_k demand_k`.
 
-**Focused proof:** exact case balance; physical-slot invariance; terminal delete,
-temporary freeze/rejoin restore and fresh JOIN ownership; no future/lifetime or
-identity leakage; exact utility identity.
+The support must include demand states requiring duplicate effects and zero-
+demand labels. Training/IID and held-out active counts, lifetimes, event orders
+and membership transitions are disjoint but constructively accessible. Reward
+and observations stay environment-side; no intrinsic reward or uniqueness
+shaping exists.
 
-## Task 2 — Constructive controls and roster intervention
-
-**Status:** pending.
-
-Implement ROSTER_EDITOR, TEAM_REC_ORACLE, INDEPENDENT_EDITOR and SHUFFLED_ROSTER
-as pure deterministic/enumerated controls. Snapshot before the edit, replace one
-retained commitment, and verify the adapted roster choice and value consequence
-under an otherwise identical continuation.
-
-**Focused proof:** both constructive controls equal 1.0; nulls equal their
-enumerated expectations and remain below 1.0 by active-count stratum; the
-roster-only intervention changes the selected commitment and improves utility;
-no primitive-logit, PPO, gradient or learned parameter path exists.
-
-## Task 3 — Runner and bounded acceptance
+## Task 2 — Matched learned arms and estimands
 
 **Status:** pending.
 
-Add one `formal=false` runner and a focused test file. The runner writes the
-fixed PASS/FAIL/INVALID result and compact deterministic telemetry. Run focused tests and one fresh CPU exercise
-with one thread. Inspect exact ownership,
-permutation invariance, intervention isolation, scalar loops and persistence.
+Specify NO_ROSTER, TEAM_REC and ROSTER_ATTN with one shared encoder, edit head,
+critic, PPO contract, parameter-scale control and event exposure. ROSTER_ATTN
+receives the unordered standing records through a permutation-equivariant
+shared-token encoder; TEAM_REC receives the same public event history in one
+persistent state; NO_ROSTER receives neither memory source.
 
-**Acceptance:** focused tests pass; fresh artifact is nonformal; all exhaustive
-references and metrics close; no temporary residue; no closed G2 import or
-compatibility reader.
+Freeze primary `G_team=U_ROSTER_ATTN-U_TEAM_REC` and access/control estimands.
+Keep TEAM_REC as the strongest simpler explanation. Any explicit event memory
+gain is a structured-generalization claim, not a finite expressivity claim.
 
-## Successor decision
+## Task 3 — Consequences and first-match semantics
 
-After a pass, perform a zero-compute sufficiency audit. A learned G3 comparison
-is admissible only if the gate yields a precise permutation-equivariant roster
-editor versus matched TEAM_REC and independent/no-roster controls, with
-held-out active-count/lifetime transport and label-invariant mediation. Freeze a
-separate formal contract before using either remaining conclusion-bearing
-iteration.
+**Status:** pending.
+
+Require exact-snapshot roster intervention, natural assignment mediation,
+realized service changes and held-out active-count/lifetime transport. All
+internal commitment evidence is label-permutation invariant. Freeze access and
+source-identification branches before mechanism support, then TEAM_REC
+sufficiency and no-roster/null branches without rescue precedence.
+
+## Task 4 — Budget and realization boundary
+
+**Status:** pending.
+
+Choose the smallest CPU one-thread PPO budget capable of exercising all three
+arms and paired held-out cells. Before formal compute, implement through focused
+tests plus one bounded `formal=false` exercise, delete the superseded G2 active
+executable line after acceptance, freeze an authorization token and integrate
+one exact source commit.
+
+This definition consumes zero iterations. Two conclusion-bearing iterations
+remain; no learned, nonformal or formal G3 run is authorized until this contract
+is complete enough to implement without a protected scientific choice.

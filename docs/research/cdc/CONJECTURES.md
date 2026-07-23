@@ -6,9 +6,10 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live only as a variable-cardinality event-roster factorization.
-  Formal G1 reduced within-lifecycle memory to per-member recurrence and formal
-  G2 reduced one global cross-lifecycle bit to persistent TEAM_REC.
+- Status: multi-record information gate passed. Formal G1 reduced
+  within-lifecycle memory to per-member recurrence, formal G2 reduced one global
+  cross-lifecycle bit to TEAM_REC, and the nonformal G3 gate now validates
+  lifecycle-owned roster intervention without yet validating learned advantage.
 - Claim: under genuinely asynchronous partial edits, an unordered roster of
   lifecycle-owned commitments may improve learning and held-out transport when
   value depends on complementarity among retained and newly selected records.
@@ -24,6 +25,9 @@ the Project Manager-accepted CDC state.
   policy-selected event-held mechanism.
 - Natural mark evidence must be invariant to mark-label permutation within each
   replicate. Raw `P(m=b)` is not an admissible future gate.
+- Gate correction: uniqueness utility is structural only.
+  `CE-DIVERSITY-AS-UTILITY` requires the learned source to score realized useful
+  effects under demand states where duplicate commitments can be optimal.
 
 ## C-REC — Ordinary recurrence is sufficient
 
@@ -68,13 +72,14 @@ the Project Manager-accepted CDC state.
   access, credit and coordination explanations.
 - Separating evidence: a constructive policy or alternative task family that
   changes identification without changing the algorithm claim.
-- Required correction: a source must contain multiple standing commitments,
-  asynchronous partial edits and value-bearing composition before a roster
-  factorization claim is eligible.
+- Current correction: the G3 gate now contains multiple standing commitments and
+  asynchronous partial edits, but its uniqueness score does not identify useful
+  composition. The learned source must use demand-served realized effects.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 
-- Status: active next boundary after G2 selected TEAM_REC sufficiency.
+- Status: active useful-effect definition after the structural G3 roster gate
+  passed.
 - Claim: the important variable-N difficulty is joint complementary allocation,
   not an individual lifetime mechanism in isolation.
 - Separating evidence: a roster-only intervention changes an asynchronous
@@ -114,3 +119,6 @@ the Project Manager-accepted CDC state.
 - G2 correction: `CE-GLOBAL-BIT-TEAM-REC`, `CE-SINGLE-RECORD-NO-COMPOSITION`,
   `CE-PASSIVE-HANDOFF`, and `CE-LABEL-SYMMETRY` require multiple standing
   records, complementarity and label-invariant natural mediation.
+- G3 gate correction: `CE-DIVERSITY-AS-UTILITY` separates a causal roster edit
+  from task-useful complementary effects; formal evidence must measure demand
+  served rather than label uniqueness.

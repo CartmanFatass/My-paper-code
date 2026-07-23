@@ -20,15 +20,15 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_ITERATION_3
-active_assignment_id=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
-next_boundary=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
+last_completed_assignment_id=ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE
+active_assignment_id=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION
+next_boundary=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION
 autonomous_research_grant=ACTIVE
 grant_scope=remaining_two_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
 iterations_remaining=2
 conclusion_bearing_iterations_consumed=3
-implementation_status=G3_INFORMATION_GATE_AUTHORIZED
+implementation_status=G3_USEFUL_EFFECT_ZERO_COMPUTE_DESIGN
 nonformal_compute_status=authorized
 formal_compute_authority=standing_user_grant_cpu_only
 formal_compute_status=not_launchable_until_separate_g3_contract
@@ -52,8 +52,13 @@ g2_g_team_ci95=[0.0,0.0]
 g2_g_link_ci95=[0.5,0.5]
 g2_scientific_disposition=closed_no_rerun_tuning_rename_or_rescue
 g3_gate_contract=docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md
+g3_gate_source_commit=b5b67853a2012dd6957e30ad1a6d05d16dff02fe
+g3_gate_artifact=logs/nonformal_async_commitment_roster_g3_20260723_pm1/result.json
+g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
+g3_gate_cases=18400
+g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=zero_training_bounded_prototype
+next_action_class=zero_compute_executable_definition
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -82,9 +87,11 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   event-indexed roster factorization under asynchronous partial edits.
 - C-COORD is the active mission-aligned explanation: later value must depend on
   complementarity among retained and newly selected commitments.
-- The next bounded gate is zero-training and nonformal. It must retain TEAM_REC
-  as the strongest simpler explanation and consumes no conclusion-bearing
-  iteration.
+- The zero-training G3 information gate passed and retains TEAM_REC as a complete
+  simpler explanation. Its uniqueness utility is structural only and cannot be
+  promoted as useful complementarity.
+- The active zero-compute definition replaces label diversity with realized
+  service effects and demand-served external utility before any learned G3 work.
 
 ## Runtime and protected semantics
 
@@ -119,9 +126,11 @@ callback receipts are forbidden.
 
 - `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — authority.
 - `.agents/roles/EXPERIMENT_OPERATOR.md` — silent single-run contract.
-- `docs/project/IMPLEMENTATION_PLAN.md` — active proof-sized gate plan.
+- `docs/project/IMPLEMENTATION_PLAN.md` — active useful-effect definition plan.
 - `docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md` — frozen gate.
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md`
   — G2 closure and correction.
 - `docs/report/ITERATION_1.md`, `ITERATION_2.md`, `ITERATION_3.md` — 用户可读的
   中文结论性迭代报告。
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE.md`
+  — nonformal gate evidence and successor correction.
