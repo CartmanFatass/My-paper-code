@@ -51,8 +51,8 @@ $batteryDocuments = @{
     'docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md' = @(
         'BATTERY_CONTRACT_RECONCILED', 'K=1', 'C_total', 'I_TV')
     'docs/project/IMPLEMENTATION_PLAN.md' = @(
-        'BATTERY_CONTRACT_RECONCILED', 'C_total', 'LCB(C_total_KEEP)>0',
-        'LCB(C_total_RENEW)>0')
+        'active_implementation=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+        'formal_path_exercise=forbidden', 'select_result_branch=forbidden')
     'docs/project/CURRENT_WORK.md' = @(
         'BATTERY_CONTRACT_RECONCILED', 'four conclusion-bearing iterations')
 }
@@ -156,16 +156,29 @@ foreach ($required in @(
     'EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
     'accepted_reconciliation_sha256=700ca469ca131c58186a872dc3d8149dbb35f100910a632de0a81689d43d1a28',
     'iterations_remaining=4',
-    'formal_compute_status=unauthorized',
-    'implementation_status=unauthorized',
+    'autonomous_research_grant=ACTIVE',
+    'grant_scope=remaining_four_conclusion_bearing_iterations',
+    'intermediate_authorization_prompts=forbidden',
+    'implementation_status=authorized',
+    'nonformal_compute_status=authorized',
+    'formal_compute_status=authorized_cpu_only_under_frozen_evidence_contract',
+    'git_integration_status=authorized_for_pm_accepted_packages',
+    'external_review_transport_status=authorized_when_pm_selected',
+    'monitoring_status=authorized_for_active_runs',
     'derivation_status=complete',
     'next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
-    'prototype_authorization_status=requested_not_authorized',
+    'prototype_authorization_status=authorized_under_autonomous_grant',
     'Project Manager completed the zero-compute CDC action',
     'consumes no conclusion-bearing iteration',
     'global_write_lease=disabled',
     'Different ownership sets may proceed concurrently')) {
     if (-not $current.Contains($required)) { throw "Current active boundary missing: $required" }
+}
+foreach ($forbidden in @(
+    'prototype_authorization_status=requested_not_authorized',
+    'formal_compute_status=unauthorized',
+    'implementation_status=unauthorized')) {
+    if ($current.Contains($forbidden)) { throw "Current boundary retains superseded authorization state: $forbidden" }
 }
 foreach ($required in @('Controller-direct external-Pro transport',
     'primary research/workflow/algorithm/engineering authority',
@@ -237,6 +250,62 @@ foreach ($required in @('CE-RANDOM-USE', 'CE-EXOGENOUS-LIFETIME',
         throw "EHC derivation note missing: $required"
     }
 }
+$prototypeDesignPath = Join-Path $repo 'docs/research/designs/EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1.md'
+$gitignore = Get-Content -Raw -LiteralPath (Join-Path $repo '.gitignore')
+if (-not $gitignore.Contains('!docs/research/designs/*.md')) {
+    throw 'Durable PM research designs are not Git-visible'
+}
+if (-not (Test-Path -LiteralPath $prototypeDesignPath -PathType Leaf)) {
+    throw 'Missing PM-accepted G1 sequence-mediation prototype design'
+}
+$prototypeDesign = Get-Content -Raw -LiteralPath $prototypeDesignPath
+foreach ($required in @(
+    'assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'design_status=PM_ACCEPTED',
+    'action_kind=bounded_nonformal_measurement_prototype',
+    'conclusion_bearing_iterations_consumed=0',
+    'fitting_duration_support={6,14}',
+    'heldout_duration_support={10,18}',
+    'registered_roster_sizes={2,3}',
+    'horizon=80',
+    'sequence_window_active_steps=6',
+    'opportunity_rule=every_active_transition',
+    'maximum_roster_capacity=4',
+    'normalized_active_count_denominator=4',
+    'schedule_mapping=cyclic_split_permutation',
+    'action_selection=greedy_argmax_lowest_index_tie_break',
+    'episode_cutoff=unfinished_segment_censored_and_eligible',
+    'splits=2', 'roster_sizes=2', 'durations_per_split=2',
+    'duty_sign_starts=2', 'schedule_rotations=2', 'controller_count=6',
+    'episodes_per_controller=32', 'total_natural_episodes=192',
+    'exact-snapshot paired sequence mediation',
+    'MECHANISM_CONTROL', 'RANDOM_USE', 'EXOGENOUS_LIFETIME',
+    'LOGIT_WITHOUT_BEHAVIOR', 'RECURRENT_CONTROL',
+    'primitive_logits = base_logits + W_z(m*z)',
+    'policy_dependence', 'sequence_hamming', 'terminal_utility_delta',
+    'natural_mediation', 'heldout_robustness',
+    'analysis_output=measurement_tuple_only',
+    'interpretation_authority=project_manager',
+    'formal_result_branch=none',
+    'G0 source, runner, analyzer, thresholds, seeds and result remain closed')) {
+    if (-not $prototypeDesign.Contains($required)) {
+        throw "G1 sequence-mediation prototype design missing: $required"
+    }
+}
+if ((2 * 2 * 2 * 2 * 2) -ne 32 -or (32 * 6) -ne 192) {
+    throw 'G1 prototype inventory arithmetic is inconsistent'
+}
+foreach ($forbidden in @('MEASUREMENT_PATH_DISTINGUISHES_THREE_NULLS',
+    'SURVIVING_COUNTEREXAMPLE',
+    'MEASUREMENT_PATH_WITH_ORDINARY_REDUCTION_UNRESOLVED')) {
+    if ($prototypeDesign.Contains($forbidden)) {
+        throw "Prototype analyzer retains a post-result scientific label: $forbidden"
+    }
+}
+$implementationPlan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
+if ($implementationPlan.Contains('diagnostic disposition')) {
+    throw 'G1 implementation plan retains a scientific-disposition analyzer requirement'
+}
 foreach ($required in @('policy-dependent persistence',
     'sequence-level intervention', 'natural mediation',
     'simpler-explanation resistance', 'held-out robustness',
@@ -254,7 +323,7 @@ foreach ($required in @('L-EHC-MEASUREMENT-NECESSITY',
 }
 foreach ($required in @('EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
     'EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
-    'authorization_status=requested_not_authorized')) {
+    'authorization_status=authorized_under_autonomous_grant')) {
     if (-not $portfolio.Contains($required)) { throw "Portfolio missing derivation delta: $required" }
 }
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=native_codex'

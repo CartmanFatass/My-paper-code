@@ -22,12 +22,12 @@ compute authority.
 completed_action=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION
 source_family=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1
 next_action=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
-authorization_status=requested_not_authorized
+authorization_status=authorized_under_autonomous_grant
 conclusion_bearing_iterations_consumed=0
 iterations_remaining=4
 ```
 
-The next proposed action is one bounded nonformal diagnostic prototype on the
+The active action is one bounded nonformal diagnostic prototype on the
 independent G1 source. It preserves OR/DUM/EHC,
 `primitive_logits=base_logits+W_z(m*z)`, primary `G=U_EHC-U_DUM`, anonymous
 membership/lifecycle semantics and G0 closure, while testing whether the five

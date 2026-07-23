@@ -63,6 +63,8 @@ data/
 !docs/superpowers/specs/*.md
 # CDC records are durable algorithm-research state.
 !docs/research/cdc/**/*.md
+# PM-accepted active research designs are durable algorithm source.
+!docs/research/designs/*.md
 # Custom subagent definitions are durable project tooling.
 !.claude/agents/*.md
 # Visual brainstorming and runtime capability probes are local scratch.

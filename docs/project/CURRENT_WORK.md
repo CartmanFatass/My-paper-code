@@ -26,6 +26,7 @@ state file declares no independent authority.
 
 ```text
 last_completed_assignment_id=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION
+active_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
 source_boundary=local_and_remote_aggressive_tip
 accepted_base_source_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
 derivation_source_commit=3b5e86a6ef4e8731a37232df3f1828affb0d62fc
@@ -33,11 +34,23 @@ derivation_integration_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
 accepted_reconciliation=docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/30_PM_CODE_SIDE_RECONCILIATION.md
 accepted_reconciliation_sha256=700ca469ca131c58186a872dc3d8149dbb35f100910a632de0a81689d43d1a28
 iterations_remaining=4
-formal_compute_status=unauthorized
-implementation_status=unauthorized
+autonomous_research_grant=ACTIVE
+grant_scope=remaining_four_conclusion_bearing_iterations
+intermediate_authorization_prompts=forbidden
+implementation_status=authorized
+nonformal_compute_status=authorized
+formal_compute_status=authorized_cpu_only_under_frozen_evidence_contract
+git_integration_status=authorized_for_pm_accepted_packages
+external_review_transport_status=authorized_when_pm_selected
+monitoring_status=authorized_for_active_runs
+grant_stop_conditions=iterations_exhausted|user_pause|unrecoverable_blocker|scope_outside_hmasd_mission
 derivation_status=complete
 next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
-prototype_authorization_status=requested_not_authorized
+prototype_authorization_status=authorized_under_autonomous_grant
+prototype_design_status=PM_ACCEPTED
+prototype_design_activation=on_integration_commit
+prototype_execution_kind=bounded_nonformal_measurement_prototype
+prototype_conclusion_bearing_iterations_consumed=0
 controller_integration_receipt_status=user_relayed_to_project_manager
 callback_contract_activation=on_integration_commit
 callback_receipt_requires_followup_commit=false
@@ -57,9 +70,18 @@ It formalized:
 
 The action recorded the smallest measurement/conjecture correction, retained
 lemmas and portfolio delta. It selected one bounded diagnostic prototype as the
-cheapest next separating action, but that selection does not authorize
-implementation, nonformal or formal compute, external transport, monitoring,
-Git operations, or a successor.
+cheapest next separating action. On 2026-07-23 the user activated a continuing
+autonomous grant for the remaining four-iteration research chain. Project
+Manager may now advance the selected prototype through design, implementation,
+bounded nonformal diagnostics, frozen-contract formal CPU runs, needed external
+review, mechanical Git integration, monitoring and successor selection without
+intermediate authorization prompts.
+
+The grant does not relax frozen scientific semantics or let Controller choose
+research actions. Project Manager remains responsible for freezing each
+evidence contract before a conclusion-bearing run and for stopping when the
+iteration chain is exhausted, the user pauses it, an unrecoverable blocker
+remains, or the next action leaves the HMASD mission.
 
 This zero-compute derivation consumes no conclusion-bearing iteration;
 four conclusion-bearing iterations remain.
@@ -96,9 +118,9 @@ backend=cpu
 ```
 
 There is no CUDA fallback, backend mixing, cross-backend resume, or required
-CPU/CUDA equivalence comparison. These are execution conditions, not permission
-to run. Formal compute remains unauthorized until the user explicitly grants
-it for a frozen evidence contract.
+CPU/CUDA equivalence comparison. Under the active autonomous grant, Project
+Manager may authorize the Controller to execute a formal CPU run only after its
+evidence contract is frozen. No additional intermediate user prompt is needed.
 
 ## Frozen scientific semantics
 
@@ -129,7 +151,7 @@ All parallel child scopes and Project Manager integration are complete:
 
 ```text
 active_file_writers=none
-package_status=CALLBACK_CONTRACT_REPAIR_PM_ACCEPTED_ACTIVATES_ON_INTEGRATION_COMMIT
+package_status=PROTOTYPE_DESIGN_PM_ACCEPTED_ACTIVATES_ON_INTEGRATION_COMMIT
 ```
 
 The derivation package was mechanically integrated and pushed as
