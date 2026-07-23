@@ -21,17 +21,17 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ```text
 last_completed_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
-active_assignment_id=FIVE_ITERATION_CHAIN_COMPLETE
-next_boundary=USER_AUTHORITY_REQUIRED_FOR_NEW_RESEARCH_CHAIN
-autonomous_research_grant=EXHAUSTED
-grant_scope=none
+active_assignment_id=OPEN_ROSTER_DIRECT_MVP_G5_PRELAUNCH
+next_boundary=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
+autonomous_research_grant=ACTIVE_EIGHT_ITERATION_DYNAMIC_ROSTER_CHAIN
+grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=0
+iterations_remaining=8
 conclusion_bearing_iterations_consumed=5
-implementation_status=G4_COUNT_PRESERVING_CLOSED_NO_ACCESS
-nonformal_compute_status=complete
+implementation_status=G5_OPEN_ROSTER_DIRECT_PM_ACCEPTED
+nonformal_compute_status=complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=complete_no_remaining_authority
+formal_compute_status=authorized_ready_after_git_integration
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
@@ -103,7 +103,26 @@ g4_roster_sum_utility_ci95=[0.8580078125,0.8875]
 g4_g_attn_ci95=[-0.02431640625,0.0119140625]
 g4_g_team_ci95=[0.00302734375,0.04111328125]
 g4_scientific_disposition=closed_no_rerun_tuning_threshold_or_budget_rescue
-terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE
+previous_chain_terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE
+new_chain_authorized_by_user=true
+new_chain_iterations=8
+new_chain_report_range=ITERATION_6_to_ITERATION_13
+primary_research_axis=dynamic_agent_count
+asynchronous_skill_lifetime_status=frozen_out_of_active_scope
+skill_controller_status=removed_from_mvp
+initial_objective=absolute_usability_not_comparative_advantage
+active_algorithm=OPEN_ROSTER_DIRECT_MVP_G5
+active_design=docs/research/designs/OPEN_ROSTER_DIRECT_MVP_G5.md
+g5_authorization_token=AUTHORIZE_OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_CPU_V1
+g5_focused_tests=6_passed
+g5_nonformal_exercise=logs/nonformal_open_roster_direct_g5_20260723_pm1
+g5_nonformal_probe=logs/nonformal_open_roster_direct_g5_probe20_20260723_pm1
+g5_nonformal_probe_iid_utility=0.682373046875
+g5_nonformal_probe_heldout_utility=0.6054909446022727
+g5_formal_replicates=3
+g5_formal_updates_per_replicate=250
+g5_formal_num_envs=8
+g5_formal_eval_episodes=128
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -149,9 +168,14 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
 - All five conclusion-bearing iterations are consumed. The chain establishes
   causal state sensitivity in G2-G4 but no robust EHC/roster advantage over
   ordinary recurrence under the tested sources and frozen PPO budgets.
-- No successor action is authorized. A new chain would need explicit user scope;
-  the smallest recommended question is representation-fixed optimization/access
-  separation.
+- The user has now authorized a separate eight-iteration chain whose primary
+  axis is dynamic agent count. Asynchronous skill lifetime is frozen, not
+  rejected; no active skill controller or skill-advantage claim is carried into
+  the MVP.
+- The new chain begins from the access-valid direct recurrent active-set path
+  and the R49 `N`-independent interface lemma. Its first goal is absolute task
+  usability across within-episode membership changes and unseen counts, not
+  superiority over a comparator.
 
 ## Runtime and protected semantics
 

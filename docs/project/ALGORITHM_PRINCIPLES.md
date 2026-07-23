@@ -26,6 +26,14 @@ The method must remain useful beyond one UAV benchmark. A toy, diagnostic, or
 mechanism is relevant only when it tests a capability consumed by this final
 target.
 
+Development may stage these two dimensions instead of forcing both into every
+early experiment. A user-authorized variable-membership stage may freeze skill
+lifetime and remove the skill controller entirely. The first objective of such
+a stage is an absolutely usable shared policy under changing membership; it
+does not have to establish superiority over a fixed-`N` or hierarchical
+algorithm. Comparative advantage and the frozen lifetime dimension are added
+only after the shared dynamic-roster path is reliable.
+
 HMASD and OPT are sources of functional ideas, evidence, and baselines. They are
 not compatibility contracts. New work may retain useful functions while
 replacing their concrete modules, interfaces, checkpoints, or training paths.

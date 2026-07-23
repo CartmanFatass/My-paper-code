@@ -4,6 +4,27 @@ These are scientific possibilities, not implementation authority. Active role
 authority is defined by `AGENTS.md` and `.agents/roles/`; this ledger records
 the Project Manager-accepted CDC state.
 
+## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
+
+- Status: selected as the primary eight-iteration research direction.
+- Claim: a parameter-shape-`N`-independent direct recurrent policy with
+  lifecycle-owned hidden state and active-set aggregation can learn one task
+  policy that remains usable under within-episode JOIN, temporary leave,
+  rejoin, genuine join and terminal leave, including held-out active counts.
+- Retained evidence: Stage-B and clean-carrier direct access reached
+  deterministic utility about `0.9991`; R49 proved active-only permutation,
+  padding, replay and membership correctness through `N=16`; the old fixed
+  six-slot collection path is therefore an operational limitation, not a
+  required model parameterization.
+- Strongest counterexample: a policy can succeed only because training and
+  evaluation share one `4 -> 2 -> 6 -> 4` schedule or one padding capacity.
+- Separating evidence: one checkpoint trained on several dynamic schedules,
+  evaluated on unseen counts and a different operational capacity, with
+  exact lifecycle state ownership and an absolute utility floor.
+- Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
+  advantage are frozen out. Success establishes a usable dynamic-roster base,
+  not the final two-axis HMASD algorithm.
+
 ## C-EHC — Event-held temporal state
 
 - Status: unsupported after the five-iteration chain. G2 proves an event-held
