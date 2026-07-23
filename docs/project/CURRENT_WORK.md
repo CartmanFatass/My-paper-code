@@ -30,8 +30,10 @@ The Controller-authored G1 clarification is transport-only and cannot be adopted
 it was packaged by the wrong semantic owner before the ownership
 contract was corrected. Any natural raw may be archived as superseded process
 evidence, but it cannot authorize code, science, a successor, or iteration-2
-compute. The next admissible boundary is a Project Manager-owned replacement package;
-Controller will only validate, commit, push and route its exact files.
+compute. The replacement package was authored by Project Manager and transported
+without Controller semantic rewriting. The PM-owned G1 external-Pro raw is archived
+with exact-text verification. The next boundary is Project Manager code-side reconciliation;
+formal compute remains unauthorized.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -185,13 +187,12 @@ Iteration 1 and its external result review are accepted. The raw run is
 `logs/formal_event_held_cpu_20260722_fb99097_r2`; the complete review and
 Controller disposition are recorded in
 `docs/external-review/rounds/20260722_ehc_formal_result_review/`. The next action
-is for Project Manager to author the replacement reviewer-visible G1 source
-contract package from the accepted result-review evidence and its own code-side
-gap analysis. External Pro must freeze the exact task, observations,
-reward/utility, distributions, access/identifiability floors, budget and seeds.
-No iteration-2 formal compute is authorized until the PM-authored package and
-the resulting exact Pro response are verified and integrated, and Controller
-issues an exact run authorization.
+is for Project Manager to consume the exact archived external-Pro raw, author
+`30_PM_CODE_SIDE_RECONCILIATION.md`, freeze the executable definition, and own
+all subsequent code-side realization and validation. Controller performs no
+semantic relay. No iteration-2 formal compute is authorized until the PM-owned
+implementation package is verified and integrated and Controller issues an
+exact run authorization.
 
 ## BATTERY_CONTRACT_RECONCILED
 
@@ -239,8 +240,8 @@ historical evidence only.
 remaining after the valid iteration-1 result on 2026-07-22. Each later iteration
 must follow the registered external-Pro, native Codex, Git and evidence gates;
 iteration 2 is at the executable-definition boundary selected by the completed
-external result review, currently paused for the PM-authored replacement source
-contract package and its external-Pro decision.
+external result review. The PM-owned clarification raw is archived; the active
+step is Project Manager code-side reconciliation and executable realization.
 
 ## Durable Constraints
 

@@ -102,8 +102,21 @@ foreach ($required in @('external-Pro result review is complete',
     if (-not $current.Contains($required)) { throw "Current boundary missing Pro intake: $required" }
 }
 foreach ($required in @('Controller-authored G1 clarification is transport-only',
-    'cannot be adopted', 'Project Manager-owned replacement package')) {
+    'cannot be adopted', 'PM-owned G1 external-Pro raw is archived',
+    'next boundary is Project Manager code-side reconciliation',
+    'formal compute remains unauthorized')) {
     if (-not $current.Contains($required)) { throw "Current ownership correction missing: $required" }
+}
+$g1Mechanical = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_source_contract_pm_owned/50_MECHANICAL_INTAKE_RECORD.md'
+if (-not (Test-Path -LiteralPath $g1Mechanical -PathType Leaf)) {
+    throw 'Missing PM-owned G1 mechanical intake record'
+}
+$g1MechanicalText = Get-Content -Raw -LiteralPath $g1Mechanical
+foreach ($required in @('record_author=controller_mechanical',
+    'adoption_authority=external_pro_raw_only',
+    '1ba6bdd5a8f776c1840462037a6303d587d9dc7777bf064ef2d360d36bc2781f',
+    'formal_compute_status=unauthorized')) {
+    if (-not $g1MechanicalText.Contains($required)) { throw "G1 mechanical intake missing: $required" }
 }
 $reconciliation = Get-Content (Join-Path $roundRoot '30_EVIDENCE_RECONCILIATION.md') -Raw
 foreach ($required in @('exact G0', 'first-match', 'Lower-precedence `G`', 'K-bin',
