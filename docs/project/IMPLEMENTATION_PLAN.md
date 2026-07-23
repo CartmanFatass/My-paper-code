@@ -1,177 +1,161 @@
-# EHC minimal sequence-mediation prototype G1 implementation plan
+# Access-positive mechanism-matched EHC G1 implementation plan
 
-> **For Project Manager and code workers:** REQUIRED PROJECT SKILL: Use
-> `$hmasd-agile-research-development`. Generic Superpowers execution is
-> disabled; use the project Skill's proof-sized implementation and verification
-> procedure.
+> **Required project procedure:** use `$hmasd-agile-research-development`.
+> Generic Superpowers execution and workflow hash handoffs are disabled.
 
 ```text
-active_implementation=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
-implementation_status=PM_ACCEPTED_COMPLETE_NONFORMAL
-next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
-design=docs/research/designs/EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1.md
+active_implementation=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1
+implementation_status=PM_ACCEPTED_PRELAUNCH
+design=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
 backend=cpu
 torch_threads=1
-formal=false
-formal_path_exercise=forbidden
-select_result_branch=forbidden
+formal_run_status=authorized_pending_controller_integration_and_launch
 G0_mutation=forbidden
+backward_compatibility=not_required
 ```
 
-**Goal:** Build the smallest independent G1 diagnostic that tests whether the
-corrected sequence-mediation measurements separate three counterexample
-families without training or consuming a conclusion-bearing iteration.
+**Goal:** replace the completed synthetic G1 measurement prototype with the
+smallest independent learned OR/DUM/EHC source, trainer, evaluator, causal
+audit, and first-match analyzer that instantiate the frozen formal contract.
 
-**Architecture:** A new temporal-duty taskbed owns source dynamics, lifecycle,
-reward identity, snapshots and RNG. A separate prototype module owns synthetic
-controllers, exact-snapshot interventions and metrics. A thin runner validates
-the complete nonformal schema and writes artifacts. No G0 runner, analyzer,
-branch selector, audit row or formal artifact is reused.
+**Architecture:** `temporal_duty_g1.py` owns stochastic exogenous ledgers and
+the anonymous environment. A new `ehc_g1.py` owns the separated actor/critic,
+event-held state, collection, replay, PPO and checkpoints. A new formal runner
+owns train/evaluate/analyze artifact schemas. G0 remains untouched.
 
-**Tech stack:** Python 3.11, standard library, NumPy if already available, the
-registered CPU interpreter, pytest/unittest-compatible focused tests.
+## Global invariants
 
-## Global constraints
+- Exact six-field actor input; critic tensors never enter actor/event paths.
+- Segment success is both 75% whole-segment accuracy and final-two correctness.
+- Reward sum equals `U=0.75A+0.25B`; no intrinsic reward.
+- JOIN/reset, temporary freeze/restore, terminal censor and opportunity clocks
+  follow the design.
+- OR/DUM/EHC base initialization is matched; DUM/EHC event exposure is matched;
+  only EHC executes `W_z(m*z)`.
+- Separate RNG namespaces, stored-draw replay, CPU one-thread checkpoint fence.
+- Access and source identification precede every mechanism interpretation.
+- No per-file hash handshake, compatibility layer, G0 import, or legacy schema.
 
-- Preserve the accepted G1 design exactly; no tuning after result inspection.
-- Do not modify G0 environment, event-link module, runner, analyzer or tests.
-- Use new seed namespaces beginning at 731001.
-- Actor fields are exactly the six frozen fields; tests fail closed on leakage.
-- Snapshot branches clone all state/RNG and never copy future outcomes.
-- Artifacts are nonformal and cannot enter any formal analyzer.
-- No compatibility adapter, legacy reader, migration or fallback.
+## Task 1 — Formal temporal-duty source
 
-### Task 1: Independent temporal-duty taskbed
+**Status:** complete and PM accepted.
 
-**Files:**
+**Own:**
 
-- Create: `ha_ctse_process/temporal_duty_g1.py`
-- Create: `tests/ha_ctse_process_temporal_duty_g1_test.py`
+- Modify `ha_ctse_process/temporal_duty_g1.py`.
+- Replace `tests/ha_ctse_process_temporal_duty_g1_test.py`.
 
-**Produces:**
+**Implement:** formal train/IID/held-out ledgers, sign mates, stochastic duty and
+opportunity streams, exact actor/critic views, lifecycle transitions, corrected
+completion, reward identity, snapshot/restore, oracle and history-free controls.
 
-```python
-@dataclass(frozen=True)
-class G1EpisodeSpec: ...
+**Focused proof:** distribution balance/independence, no leakage, cue expiry,
+75%+last-two boundary, membership pattern transport, freeze/restore, censoring,
+reward identity, RNG ownership, source-identification controls.
 
-@dataclass(frozen=True)
-class G1Observation:
-    actor: tuple[float, float, float, float, float, float]
+## Task 2 — Learned arms and collection
 
-class TemporalDutyG1Env:
-    def observe(self) -> dict[int, G1Observation]: ...
-    def step(self, actions: dict[int, int]) -> dict[str, object]: ...
-    def snapshot_state(self) -> dict[str, object]: ...
-    @classmethod
-    def from_snapshot_state(cls, state: dict[str, object]) -> "TemporalDutyG1Env": ...
-    def outcome(self) -> dict[str, float]: ...
+**Status:** complete and PM accepted.
 
-def make_episode_spec(split: str, roster_size: int, duration: int,
-                      sign_start: int, rotation: int) -> G1EpisodeSpec: ...
-```
+**Own:**
 
-- [x] Write failing tests for the two-step cue, hidden actor fields, JOIN reset,
-  LEAVE freeze, REJOIN restore, terminal censoring, duration split, shifted and
-  permuted held-out membership, exact logical-to-physical schedule mapping,
-  every-active-transition opportunity law, `/4` count normalization, horizon
-  censoring, utility range and reward-sum identity.
-- [x] Run
-  `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest tests/ha_ctse_process_temporal_duty_g1_test.py -q`;
-  observe import/behavior failures.
-- [x] Implement only the interfaces above with action domain `{-1,0,+1}` and
-  exact snapshot round-trip.
-- [x] Re-run the focused test; require all pass.
+- Create `ha_ctse_process/ehc_g1.py`.
+- Create `tests/ha_ctse_process_ehc_g1_test.py`.
 
-### Task 2: Controllers and natural trajectories
+**Implement:** separated 6-field actor and 10-field critic, 32-unit recurrent
+base, OR/DUM/EHC masks, event/mark heads, commitment lifecycle, exact
+factorization, stochastic/deterministic draws, 16x80 collection and natural
+KEEP/RENEW/spell records.
 
-**Files:**
+**Focused proof:** matched initialization/capacity/exposure, EHC-only logit
+treatment, actor/critic separation, hidden/reset/freeze ownership, action/event/
+mark probability support, no extra RNG draw, row provenance and mixed lifecycle
+packing.
 
-- Create: `ha_ctse_process/ehc_sequence_mediation_g1.py`
-- Create: `tests/ha_ctse_process_ehc_sequence_mediation_g1_test.py`
+## Task 3 — Replay, PPO and checkpoint
 
-**Consumes:** `TemporalDutyG1Env`, `G1EpisodeSpec`, and exact snapshots.
+**Status:** complete and PM accepted.
 
-**Produces:**
+**Own:** same Task-2 files.
 
-```python
-CONTROLLERS = (
-    "MECHANISM_CONTROL", "RANDOM_USE", "EXOGENOUS_LIFETIME",
-    "LOGIT_WITHOUT_BEHAVIOR", "RECURRENT_CONTROL", "DUM_CONTROL",
-)
+**Implement:** stored-draw replay, joint ratios, GAE, four full-rollout PPO
+passes, base/event gradient fences, optimizer counters, atomic rolling/final
+checkpoint and exact CPU resume.
 
-def primitive_logits(base_logits: tuple[float, float, float],
-                     treatment: int, mark: int) -> tuple[float, float, float]: ...
-def collect_natural_episode(spec: G1EpisodeSpec, controller: str,
-                            seeds: dict[str, int]) -> dict[str, object]: ...
-```
+**Focused proof:** replay equality and corruption negatives, detach/parameter
+ownership, finite ratios/gradients, counter/exposure totals, RNG restoration,
+same-backend continuation and foreign/non-G1 checkpoint rejection.
 
-- [x] Write failing tests for `base_logits + W_z(m*z)`, DUM `m=0`, recurrent
-  no-mark behavior, nondegenerate random use, exogenous renewal, logit-only
-  one-step influence, greedy tie-breaking, zero action-RNG draws, natural-row
-  provenance and RNG namespace separation.
-- [x] Run the focused module and observe expected failures.
-- [x] Implement deterministic action selection and controller-owned state/RNG.
-- [x] Re-run and require all pass.
+## Task 4 — Formal runner, audit and result
 
-### Task 3: Exact-snapshot branches and measurements
+**Status:** complete and PM accepted.
 
-**Files:**
+**Own:**
 
-- Modify: `ha_ctse_process/ehc_sequence_mediation_g1.py`
-- Modify: `tests/ha_ctse_process_ehc_sequence_mediation_g1_test.py`
+- Create `scripts/run_access_positive_ehc_g1.py`.
+- Create `tests/run_access_positive_ehc_g1_test.py`.
 
-**Produces:**
+**Implement:** `train`, `evaluate`, `analyze`, and bounded `exercise` commands;
+exact manifests and reference closure; four evaluation cells; oracle/reactive
+controls; 10,000 paired hierarchical bootstrap; held-out EHC causal branches;
+the independent eight-branch G1 selector.
 
-```python
-def run_event_intervention(snapshot: dict[str, object], controller: str,
-                           window: int = 6) -> dict[str, object]: ...
-def run_mark_intervention(snapshot: dict[str, object], controller: str,
-                          window: int = 6) -> dict[str, object]: ...
-def analyze_prototype(records: list[dict[str, object]]) -> dict[str, object]: ...
-```
+**Focused proof:** exact exposure/evaluation inventories, cluster resampling,
+natural quotas, K/I-TV/C-total definitions, selector equality and exhaustive
+first-match precedence, schema/tamper rejection, nonformal exercise rejection by
+formal analyzer, and no G0 result/schema import.
 
-- [x] Add failing tests for outcome-blind `age=3` selection, exact branch-origin
-  equality, CRN equality, no future-reference copy, separate event/mark
-  contrasts, downstream-window exclusion of the intervention action, finite
-  metrics and measurement-tuple-only output.
-- [x] Run focused tests and observe expected failures.
-- [x] Implement paired continuations and the six named measurement families.
-- [x] Re-run and require all pass.
+## Task 5 — Active-line deletion
 
-### Task 4: Nonformal runner and fail-closed artifacts
+**Status:** complete.
 
-**Files:**
+After Tasks 1--4 pass, delete:
 
-- Create: `scripts/run_ehc_sequence_mediation_prototype_g1.py`
-- Create: `tests/run_ehc_sequence_mediation_prototype_g1_test.py`
+- `ha_ctse_process/ehc_sequence_mediation_g1.py`;
+- `scripts/run_ehc_sequence_mediation_prototype_g1.py`;
+- `tests/ha_ctse_process_ehc_sequence_mediation_g1_test.py`;
+- `tests/run_ehc_sequence_mediation_prototype_g1_test.py`.
 
-**Produces:**
+Keep the prototype design, CDC evidence note, and Git history. Update workflow
+contract tests to the new active implementation only.
 
-```text
-python scripts/run_ehc_sequence_mediation_prototype_g1.py --output-dir <path>
-  -> prototype_manifest.json
-  -> prototype_analysis.json
-```
+## Task 6 — Bounded prelaunch acceptance
 
-- [x] Write failing tests that recompute the 192-episode inventory, `formal=false`, exact
-  design/seeds/source identity, bounded branch count, no G0 identifiers,
-  fail-closed malformed records and formal-analyzer rejection.
-- [x] Run focused tests and observe expected failures.
-- [x] Implement the thin runner and schema validator without training.
-- [x] Re-run and require all pass.
+**Status:** complete and PM accepted.
 
-### Task 5: Bounded CPU acceptance
+Run the focused G1 suite with the registered CPU interpreter and one thread,
+then one small `formal=false exercise` covering collection, replay, one PPO
+update, checkpoint reload, evaluation, causal audit and analyzer rejection.
+Inspect the changed path for leakage, RNG drift, recurrent contamination,
+scalar transfer, repeated packing, premature synchronization, excess
+persistence and serial evaluation.
 
-**Files:** no tracked-source write during execution.
+Project Manager freezes the final artifact/command contract and accepts or
+repairs the package. The exercise consumes zero conclusion-bearing iterations.
+After acceptance, Controller may launch the already-authorized formal CPU run
+without another user prompt.
 
-- [x] Run all three focused test files with the registered interpreter and
-  `OMP_NUM_THREADS=1`, `MKL_NUM_THREADS=1`.
-- [x] Run one prototype into a new `logs/nonformal_ehc_sequence_mediation_g1_*`
-  directory.
-- [x] Verify exact manifest/analysis schemas, `formal=false`, complete cells, finite
-  metrics, reward identity, snapshot/CRN validity, `status=COMPLETE`, controller
-  provenance and the validated measurement tuple.
-- [x] Inspect the path for hidden actor fields, G0 coupling, serial per-row
-  tensor transfer, RNG drift and excess persistence.
-- [x] Record the smallest CDC delta and let Project Manager select the next
-  automatic boundary. This task consumes zero conclusion-bearing iterations.
+Accepted nonformal evidence:
+
+- artifact: `logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2`;
+- focused suite: 36 passed;
+- exercise: CPU one thread, one update, three final checkpoints, 12 reduced
+  evaluation cells, two causal-audit continuations, eight bootstrap repetitions;
+- result: `formal=false`, `SOURCE_NON_IDENTIFIABLE_G1`, no operational errors;
+- formal validator: rejected the exercise because `formal=true` was absent.
+
+The accepted analyzer persists cluster-level source-control utilities and
+recomputes source summaries, episode/audit metrics, source identifiability,
+predicate inputs and first-match selection from referenced evidence. Observed
+evidence supplies all point estimates; bootstrap samples supply confidence
+bounds only. A formal `analyze` command validates this complete binding before
+it can return success.
+
+The formal command contract is `train -> evaluate -> analyze`, all against one
+new run directory. `train` requires the exact integrated 40-character source
+commit and authorization token
+`AUTHORIZE_ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_CPU_V1`; all three
+commands use the registered CPU interpreter and one thread. Controller fills
+only the integrated commit and run-directory identity, then launches and
+monitors the already-authorized run. No scientific field or result gate is
+filled at launch time.

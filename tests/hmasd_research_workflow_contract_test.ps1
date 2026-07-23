@@ -59,8 +59,9 @@ $batteryDocuments = @{
     'docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md' = @(
         'BATTERY_CONTRACT_RECONCILED', 'K=1', 'C_total', 'I_TV')
     'docs/project/IMPLEMENTATION_PLAN.md' = @(
-        'active_implementation=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
-        'formal_path_exercise=forbidden', 'select_result_branch=forbidden')
+        'active_implementation=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1',
+        'formal_run_status=authorized_pending_controller_integration_and_launch',
+        'one small `formal=false exercise`')
     'docs/project/CURRENT_WORK.md' = @(
         'BATTERY_CONTRACT_RECONCILED', 'four conclusion-bearing iterations')
 }
@@ -226,8 +227,8 @@ foreach ($relative in @(
     }
 }
 foreach ($required in @(
-    'last_completed_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
-    'active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
+    'last_completed_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
+    'active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2',
     'iterations_remaining=4',
     'autonomous_research_grant=ACTIVE',
     'grant_scope=remaining_four_conclusion_bearing_iterations',
@@ -239,12 +240,20 @@ foreach ($required in @(
     'external_review_transport_status=authorized_when_pm_selected',
     'monitoring_status=authorized_for_active_runs',
     'prototype_status=complete_valid_nonformal',
-    'next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
+    'next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2',
     'prototype_authorization_status=authorized_under_autonomous_grant',
     'prototype_artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3',
     'prototype_measurement_disposition=measurement_path_valid_recurrence_remains_sufficient',
-    'formal_evidence_contract_status=not_yet_frozen',
-    'controller_integration_receipt_status=complete_1a4fb630d8c3075380cc3c6562199ee3ea28e9de',
+    'formal_evidence_contract_status=PM_FROZEN',
+    'formal_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md',
+    'formal_implementation_status=PM_ACCEPTED_PRELAUNCH',
+    'formal_run_status=authorized_pending_controller_integration_and_launch',
+    'formal_run_command_status=frozen_pending_integrated_source_commit',
+    'formal_prelaunch_artifact=logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2',
+    'formal_conclusion_bearing_iterations_consumed=0',
+    'package_status=IMPLEMENTATION_READY',
+    'controller_integration_receipt_status=complete_94a54507e5ed6757d7cf8fc00ea511971a71641b',
+    'workflow_package_integration=94a54507e5ed6757d7cf8fc00ea511971a71641b',
     'workflow_hash_validation=disabled',
     'code_handoff_identity=git_commit_and_exact_path_set',
     'prototype_conclusion_bearing_iterations_consumed=0',
@@ -405,6 +414,30 @@ foreach ($forbidden in @('MEASUREMENT_PATH_DISTINGUISHES_THREE_NULLS',
 $implementationPlan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 if ($implementationPlan.Contains('diagnostic disposition')) {
     throw 'G1 implementation plan retains a scientific-disposition analyzer requirement'
+}
+$formalDesignPath = Join-Path $repo 'docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md'
+if (-not (Test-Path -LiteralPath $formalDesignPath -PathType Leaf)) {
+    throw 'Missing PM-frozen G1 formal evidence contract'
+}
+$formalDesign = Get-Content -Raw -LiteralPath $formalDesignPath
+foreach ($required in @(
+    'assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
+    'formal_evidence_contract=PM_FROZEN',
+    'G0_reuse=forbidden',
+    '4 * correct_count >= 3 * duration',
+    'primitive_logits = base_logits + W_z(m*z)',
+    'G_DUM = U_EHC - U_DUM',
+    'G_OR = U_EHC - U_OR',
+    'SOURCE_NON_IDENTIFIABLE_G1',
+    'NO_ACCESS_THIS_G1_SOURCE',
+    'COMMITMENT_SUPPORTED_G1',
+    'ORDINARY_EXPLANATION_G1',
+    '10,000 percentile hierarchical bootstrap repetitions',
+    'A completed segment resets the',
+    'does not reset the lifecycle-held')) {
+    if (-not $formalDesign.Contains($required)) {
+        throw "G1 formal evidence contract missing: $required"
+    }
 }
 foreach ($required in @('policy-dependent persistence',
     'sequence-level intervention', 'natural mediation',

@@ -1,233 +1,527 @@
-"""Independent temporal-duty source for the bounded G1 mediation prototype."""
+"""Independent formal temporal-duty source for mechanism-matched EHC G1."""
 
 from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import asdict, dataclass
 from numbers import Integral
-from typing import Any
+from typing import Any, Literal
+
+import numpy as np
 
 
+SOURCE_FAMILY = "ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1"
+SCHEMA_VERSION = 1
 HORIZON = 80
 MAXIMUM_CAPACITY = 4
+DURATION_SUPPORT = (6, 10, 14, 18)
 ACTION_DOMAIN = frozenset((-1, 0, 1))
-_SPLIT_DURATIONS = {"fitting": frozenset((6, 14)), "heldout": frozenset((10, 18))}
-_SPLIT_EVENT_STEPS = {
-    "fitting": (12, 16, 28, 68),
-    "heldout": (13, 17, 29, 69),
-}
-_EVENT_NAMES = ("TEMP_LEAVE", "REJOIN", "JOIN", "TERMINAL_LEAVE")
+PROFILE_DOMAIN = frozenset(("train", "iid", "heldout"))
+_LEDGER_LENGTH = HORIZON // min(DURATION_SUPPORT) + 3
+_DOMAIN_TARGET = 101
+_DOMAIN_DURATION = 211
+_DOMAIN_OPPORTUNITY = 307
+_DOMAIN_MEMBERSHIP = {"train": 401, "iid": 401, "heldout": 409}
+_DOMAIN_HISTORY_FREE = 503
+
+
+@dataclass(frozen=True)
+class G1LifecycleLedger:
+    physical_slot: int
+    logical_lifecycle: int
+    targets: tuple[int, ...]
+    durations: tuple[int, ...]
+    opportunity_gaps: tuple[int, ...]
 
 
 @dataclass(frozen=True)
 class G1EpisodeSpec:
-    split: str
-    roster_size: int
-    duration: int
-    sign_start: int
-    rotation: int
+    source_family: str
+    schema_version: int
+    profile: str
+    base_id: int
+    sign_mate: int
+    task_seed: int
+    membership_seed: int
+    duty_seed: int
+    opportunity_seed: int
     horizon: int
+    maximum_capacity: int
+    roster_size: int
+    packing_mode: str
     logical_to_physical: tuple[int, ...]
     temp_target: int
     terminal_target: int
     join_target: int
     membership_events: tuple[tuple[int, str, int], ...]
-    action_denominator: int
-    eligible_segment_denominator: int
+    lifecycle_ledgers: tuple[G1LifecycleLedger, ...]
+    active_action_denominator: int
+    started_segment_denominator: int
 
 
 @dataclass(frozen=True)
 class G1Observation:
     actor: tuple[float, float, float, float, float, float]
+    critic: tuple[float, float, float, float, float, float, float, float, float, float]
+    opportunity_kind: Literal["CREATE", "EVENT"] | None
 
 
-def _active_action_counts(
+def _checked_nonnegative_int(name: str, value: object) -> int:
+    if isinstance(value, bool) or not isinstance(value, Integral) or int(value) < 0:
+        raise ValueError(f"{name} must be a nonnegative integer, got {value!r}")
+    normalized = int(value)
+    if normalized >= 2**63:
+        raise ValueError(f"{name} must be smaller than 2**63, got {value!r}")
+    return normalized
+
+
+def _counter_rng(seed: int, base_id: int, domain: int, coordinate: int = 0) -> np.random.Generator:
+    sequence = np.random.SeedSequence([seed, base_id, domain, coordinate])
+    return np.random.Generator(np.random.Philox(sequence))
+
+
+def _draw_inclusive(generator: np.random.Generator, low: int, high: int) -> int:
+    return int(generator.integers(low, high + 1))
+
+
+def _packing(profile: str, roster_size: int, base_id: int) -> tuple[str, tuple[int, ...]]:
+    if profile != "heldout":
+        return "IDENTITY", tuple(range(roster_size))
+    reversed_slots = tuple(reversed(range(roster_size)))
+    rotation = base_id % roster_size
+    return (
+        "REVERSED_ROTATED",
+        reversed_slots[rotation:] + reversed_slots[:rotation],
+    )
+
+
+def _membership_ledger(
+    profile: str,
+    roster_size: int,
+    logical_to_physical: tuple[int, ...],
+    membership_seed: int,
+    base_id: int,
+) -> tuple[int, int, int, tuple[tuple[int, str, int], ...]]:
+    generator = _counter_rng(
+        membership_seed, base_id, _DOMAIN_MEMBERSHIP[profile], roster_size
+    )
+    initial_order = [int(value) for value in generator.permutation(roster_size)]
+    temp_target = logical_to_physical[initial_order[0]]
+    terminal_target = logical_to_physical[initial_order[1]]
+    join_target = roster_size
+    if profile in ("train", "iid"):
+        leave = _draw_inclusive(generator, 10, 18)
+        rejoin = leave + _draw_inclusive(generator, 3, 7)
+        join = _draw_inclusive(generator, 28, 38)
+        terminal = _draw_inclusive(generator, 58, 70)
+        events = (
+            (leave, "TEMP_LEAVE", temp_target),
+            (rejoin, "REJOIN", temp_target),
+            (join, "JOIN", join_target),
+            (terminal, "TERMINAL_LEAVE", terminal_target),
+        )
+    else:
+        join = _draw_inclusive(generator, 8, 14)
+        leave = _draw_inclusive(generator, 30, 38)
+        rejoin = leave + _draw_inclusive(generator, 8, 12)
+        terminal = _draw_inclusive(generator, 62, 74)
+        events = (
+            (join, "JOIN", join_target),
+            (leave, "TEMP_LEAVE", temp_target),
+            (rejoin, "REJOIN", temp_target),
+            (terminal, "TERMINAL_LEAVE", terminal_target),
+        )
+    return temp_target, terminal_target, join_target, events
+
+
+def _lifecycle_ledgers(
+    profile: str,
+    roster_size: int,
+    logical_to_physical: tuple[int, ...],
+    duty_seed: int,
+    opportunity_seed: int,
+    base_id: int,
+    sign_mate: int,
+) -> tuple[G1LifecycleLedger, ...]:
+    ledgers: list[G1LifecycleLedger] = []
+    for logical_lifecycle in range(roster_size + 1):
+        physical_slot = (
+            logical_to_physical[logical_lifecycle]
+            if logical_lifecycle < roster_size
+            else roster_size
+        )
+        target_rng = _counter_rng(
+            duty_seed, base_id, _DOMAIN_TARGET, logical_lifecycle
+        )
+        targets = tuple(
+            sign_mate * (2 * int(value) - 1)
+            for value in target_rng.integers(0, 2, size=_LEDGER_LENGTH)
+        )
+        duration_rng = _counter_rng(
+            duty_seed, base_id, _DOMAIN_DURATION, logical_lifecycle
+        )
+        if profile == "heldout":
+            offset = int(duration_rng.integers(0, len(DURATION_SUPPORT)))
+            cycle = DURATION_SUPPORT[offset:] + DURATION_SUPPORT[:offset]
+            durations = tuple(
+                cycle[index % len(cycle)] for index in range(_LEDGER_LENGTH)
+            )
+        else:
+            durations = tuple(
+                int(DURATION_SUPPORT[int(index)])
+                for index in duration_rng.integers(
+                    0, len(DURATION_SUPPORT), size=_LEDGER_LENGTH
+                )
+            )
+        opportunity_rng = _counter_rng(
+            opportunity_seed, base_id, _DOMAIN_OPPORTUNITY, logical_lifecycle
+        )
+        opportunity_gaps = tuple(
+            int(value)
+            for value in opportunity_rng.integers(1, 3, size=HORIZON + 1)
+        )
+        ledgers.append(
+            G1LifecycleLedger(
+                physical_slot=physical_slot,
+                logical_lifecycle=logical_lifecycle,
+                targets=targets,
+                durations=durations,
+                opportunity_gaps=opportunity_gaps,
+            )
+        )
+    return tuple(sorted(ledgers, key=lambda ledger: ledger.physical_slot))
+
+
+def _active_at(
+    slot: int,
+    time: int,
     roster_size: int,
     membership_events: tuple[tuple[int, str, int], ...],
-) -> dict[int, int]:
-    active = set(range(roster_size))
-    counts = {slot: 0 for slot in range(roster_size + 1)}
-    events_by_step: dict[int, list[tuple[str, int]]] = {}
-    for step, event, target in membership_events:
-        events_by_step.setdefault(step, []).append((event, target))
+) -> bool:
+    active = slot < roster_size
+    for event_time, event, target in membership_events:
+        if event_time > time or target != slot:
+            continue
+        if event in ("TEMP_LEAVE", "TERMINAL_LEAVE"):
+            active = False
+        elif event in ("REJOIN", "JOIN"):
+            active = True
+    return active
 
-    for step in range(HORIZON):
-        for event, target in events_by_step.get(step, ()):
-            if event in ("TEMP_LEAVE", "TERMINAL_LEAVE"):
-                active.remove(target)
-            elif event in ("REJOIN", "JOIN"):
-                active.add(target)
-        for target in active:
-            counts[target] += 1
-    return counts
+
+def _denominators(
+    roster_size: int,
+    membership_events: tuple[tuple[int, str, int], ...],
+    lifecycle_ledgers: tuple[G1LifecycleLedger, ...],
+) -> tuple[int, int]:
+    action_denominator = 0
+    started_segments = 0
+    for ledger in lifecycle_ledgers:
+        active_times = [
+            time
+            for time in range(HORIZON)
+            if _active_at(
+                ledger.physical_slot, time, roster_size, membership_events
+            )
+        ]
+        if not active_times:
+            continue
+        started_segments += 1
+        segment_index = 0
+        remaining = ledger.durations[segment_index]
+        for time in active_times:
+            action_denominator += 1
+            remaining -= 1
+            if remaining == 0 and time + 1 < HORIZON:
+                segment_index += 1
+                started_segments += 1
+                remaining = ledger.durations[segment_index]
+    return action_denominator, started_segments
 
 
 def make_episode_spec(
-    split: str,
-    roster_size: int,
-    duration: int,
-    sign_start: int,
-    rotation: int,
+    profile: str,
+    *,
+    task_seed: int,
+    membership_seed: int,
+    duty_seed: int,
+    opportunity_seed: int,
+    base_id: int,
+    sign_mate: int,
 ) -> G1EpisodeSpec:
-    if split not in _SPLIT_DURATIONS:
-        raise ValueError(f"split must be one of {tuple(_SPLIT_DURATIONS)}, got {split!r}")
-    if type(roster_size) is not int or roster_size not in (2, 3):
-        raise ValueError(f"roster_size must be 2 or 3, got {roster_size!r}")
-    if type(duration) is not int or duration not in _SPLIT_DURATIONS[split]:
-        raise ValueError(
-            f"duration for {split!r} must be one of "
-            f"{tuple(sorted(_SPLIT_DURATIONS[split]))}, got {duration!r}"
-        )
-    if type(sign_start) is not int or sign_start not in (-1, 1):
-        raise ValueError(f"sign_start must be -1 or +1, got {sign_start!r}")
-    if type(rotation) is not int or rotation not in (0, 1):
-        raise ValueError(f"rotation must be 0 or 1, got {rotation!r}")
+    """Build one policy-independent, counter-generated formal G1 ledger."""
 
-    split_shift = 0 if split == "fitting" else 1
-    logical_to_physical = tuple(
-        (logical_slot + rotation + split_shift) % roster_size
-        for logical_slot in range(roster_size)
-    )
-    temp_target = logical_to_physical[1]
-    terminal_target = logical_to_physical[0]
-    join_target = roster_size
-    targets = (temp_target, temp_target, join_target, terminal_target)
-    membership_events = tuple(
-        (step, event, target)
-        for step, event, target in zip(
-            _SPLIT_EVENT_STEPS[split], _EVENT_NAMES, targets, strict=True
+    if profile not in PROFILE_DOMAIN:
+        raise ValueError(
+            f"profile must be one of {tuple(sorted(PROFILE_DOMAIN))}, got {profile!r}"
         )
+    task_seed = _checked_nonnegative_int("task_seed", task_seed)
+    membership_seed = _checked_nonnegative_int("membership_seed", membership_seed)
+    duty_seed = _checked_nonnegative_int("duty_seed", duty_seed)
+    opportunity_seed = _checked_nonnegative_int("opportunity_seed", opportunity_seed)
+    base_id = _checked_nonnegative_int("base_id", base_id)
+    if isinstance(sign_mate, bool) or not isinstance(sign_mate, Integral) or int(sign_mate) not in (-1, 1):
+        raise ValueError(f"sign_mate must be -1 or +1, got {sign_mate!r}")
+    sign_mate = int(sign_mate)
+
+    # Consecutive base IDs are exactly balanced while the task seed chooses phase.
+    roster_size = 2 + ((base_id + (task_seed & 1)) % 2)
+    packing_mode, logical_to_physical = _packing(profile, roster_size, base_id)
+    temp_target, terminal_target, join_target, membership_events = _membership_ledger(
+        profile,
+        roster_size,
+        logical_to_physical,
+        membership_seed,
+        base_id,
     )
-    active_counts = _active_action_counts(roster_size, membership_events)
-    action_denominator = sum(active_counts.values())
-    eligible_segment_denominator = sum(
-        (count + duration - 1) // duration for count in active_counts.values() if count
+    lifecycle_ledgers = _lifecycle_ledgers(
+        profile,
+        roster_size,
+        logical_to_physical,
+        duty_seed,
+        opportunity_seed,
+        base_id,
+        sign_mate,
+    )
+    action_denominator, started_segments = _denominators(
+        roster_size, membership_events, lifecycle_ledgers
     )
     return G1EpisodeSpec(
-        split=split,
-        roster_size=roster_size,
-        duration=duration,
-        sign_start=sign_start,
-        rotation=rotation,
+        source_family=SOURCE_FAMILY,
+        schema_version=SCHEMA_VERSION,
+        profile=profile,
+        base_id=base_id,
+        sign_mate=sign_mate,
+        task_seed=task_seed,
+        membership_seed=membership_seed,
+        duty_seed=duty_seed,
+        opportunity_seed=opportunity_seed,
         horizon=HORIZON,
+        maximum_capacity=MAXIMUM_CAPACITY,
+        roster_size=roster_size,
+        packing_mode=packing_mode,
         logical_to_physical=logical_to_physical,
         temp_target=temp_target,
         terminal_target=terminal_target,
         join_target=join_target,
         membership_events=membership_events,
-        action_denominator=action_denominator,
-        eligible_segment_denominator=eligible_segment_denominator,
+        lifecycle_ledgers=lifecycle_ledgers,
+        active_action_denominator=action_denominator,
+        started_segment_denominator=started_segments,
     )
 
 
-def _new_lifecycle(sign: int, duration: int, *, join_flag: bool) -> dict[str, Any]:
-    return {
-        "g": sign,
-        "age": 0,
-        "remaining": duration,
-        "correct_count": 0,
-        "terminal_streak": 0,
-        "active": True,
-        "terminal": False,
-        "join_flag": join_flag,
-        "rejoin_flag": False,
-        "opportunities": 0,
-    }
+def _canonical_spec(spec: G1EpisodeSpec) -> G1EpisodeSpec:
+    return make_episode_spec(
+        spec.profile,
+        task_seed=spec.task_seed,
+        membership_seed=spec.membership_seed,
+        duty_seed=spec.duty_seed,
+        opportunity_seed=spec.opportunity_seed,
+        base_id=spec.base_id,
+        sign_mate=spec.sign_mate,
+    )
 
 
 class TemporalDutyG1Env:
     def __init__(self, spec: G1EpisodeSpec):
         if not isinstance(spec, G1EpisodeSpec):
             raise TypeError("spec must be a G1EpisodeSpec")
-        canonical = make_episode_spec(
-            spec.split, spec.roster_size, spec.duration, spec.sign_start, spec.rotation
-        )
-        if spec != canonical:
-            raise ValueError("spec does not match the canonical G1 episode manifest")
-        self._spec = spec
-        self._time = 0
-        self._lifecycles = {
-            slot: _new_lifecycle(spec.sign_start, spec.duration, join_flag=False)
-            for slot in range(spec.roster_size)
+        if spec != _canonical_spec(spec):
+            raise ValueError("spec does not match its canonical formal G1 ledger")
+        self.spec = spec
+        self._ledgers = {
+            ledger.physical_slot: ledger for ledger in spec.lifecycle_ledgers
         }
+        self._time = 0
+        self._lifecycles: dict[int, dict[str, Any]] = {}
+        self._segment_records: list[dict[str, Any]] = []
         self._correct_actions = 0
         self._action_opportunities = 0
         self._successful_segments = 0
-        self._started_segments = spec.roster_size
+        self._completed_segments = 0
+        self._started_segments = 0
         self._reward_sum = 0.0
         self._step_rewards: list[float] = []
+        for slot in spec.logical_to_physical:
+            self._create_lifecycle(slot, start_time=0)
+
+    def _create_lifecycle(self, slot: int, *, start_time: int) -> None:
+        ledger = self._ledgers[slot]
+        lifecycle: dict[str, Any] = {
+            "target": ledger.targets[0],
+            "duration": ledger.durations[0],
+            "age": 0,
+            "remaining": ledger.durations[0],
+            "correct_count": 0,
+            "terminal_streak": 0,
+            "segment_index": 0,
+            "active_steps": 0,
+            "next_opportunity_active_step": 0,
+            "opportunity_index": 0,
+            "create_pending": True,
+            "active": True,
+            "terminal": False,
+            "join_flag": True,
+            "rejoin_flag": False,
+            "segment_record_index": -1,
+        }
+        self._lifecycles[slot] = lifecycle
+        self._start_segment(slot, start_time=start_time)
+
+    def _start_segment(self, slot: int, *, start_time: int) -> None:
+        lifecycle = self._lifecycles[slot]
+        record = {
+            "slot": slot,
+            "segment_index": lifecycle["segment_index"],
+            "start_time": start_time,
+            "end_time": None,
+            "target": lifecycle["target"],
+            "duration": lifecycle["duration"],
+            "correct_count": None,
+            "success": None,
+            "status": "OPEN",
+        }
+        lifecycle["segment_record_index"] = len(self._segment_records)
+        self._segment_records.append(record)
+        self._started_segments += 1
+
+    def _utility_from_counts(self) -> float:
+        return (
+            0.75
+            * self._correct_actions
+            / self.spec.active_action_denominator
+            + 0.25
+            * self._successful_segments
+            / self.spec.started_segment_denominator
+        )
 
     def observe(self) -> dict[int, G1Observation]:
-        if self._time >= self._spec.horizon:
+        if self._time >= self.spec.horizon:
             return {}
         active_count = sum(
-            1 for lifecycle in self._lifecycles.values() if lifecycle["active"]
+            int(lifecycle["active"]) for lifecycle in self._lifecycles.values()
         )
-        normalized_active_count = active_count / MAXIMUM_CAPACITY
-        observations: dict[int, G1Observation] = {}
+        normalized_active_count = active_count / self.spec.maximum_capacity
+        result: dict[int, G1Observation] = {}
         for slot in sorted(self._lifecycles):
             lifecycle = self._lifecycles[slot]
             if not lifecycle["active"]:
                 continue
             cue_present = lifecycle["age"] < 2
-            observations[slot] = G1Observation(
-                actor=(
-                    float(lifecycle["g"] if cue_present else 0),
-                    float(cue_present),
-                    float(lifecycle["age"] == 0),
-                    float(lifecycle["join_flag"]),
-                    float(lifecycle["rejoin_flag"]),
-                    float(normalized_active_count),
-                )
+            actor = (
+                float(lifecycle["target"] if cue_present else 0),
+                float(cue_present),
+                float(lifecycle["age"] == 0),
+                float(lifecycle["join_flag"]),
+                float(lifecycle["rejoin_flag"]),
+                float(normalized_active_count),
             )
-        return observations
+            critic = actor + (
+                float(lifecycle["age"] / 18),
+                float(lifecycle["remaining"] / 18),
+                float(
+                    lifecycle["correct_count"] / max(lifecycle["age"], 1)
+                ),
+                float(lifecycle["terminal_streak"] / 2),
+            )
+            if lifecycle["create_pending"]:
+                opportunity_kind: Literal["CREATE", "EVENT"] | None = "CREATE"
+            elif (
+                lifecycle["active_steps"]
+                == lifecycle["next_opportunity_active_step"]
+            ):
+                opportunity_kind = "EVENT"
+            else:
+                opportunity_kind = None
+            result[slot] = G1Observation(actor, critic, opportunity_kind)
+        return result
 
-    def _utility_from_counts(self) -> float:
-        action_term = self._correct_actions / self._spec.action_denominator
-        segment_term = (
-            self._successful_segments / self._spec.eligible_segment_denominator
+    def oracle_actions(self) -> dict[int, int]:
+        """Registered persistent oracle: act directly on the hidden current target."""
+
+        return {
+            slot: int(lifecycle["target"])
+            for slot, lifecycle in sorted(self._lifecycles.items())
+            if lifecycle["active"]
+        }
+
+    def history_free_actions(self, *, seed: int) -> dict[int, int]:
+        """Registered stateless control: visible cue, then a fair coordinate sign."""
+
+        seed = _checked_nonnegative_int("seed", seed)
+        result: dict[int, int] = {}
+        for slot, observation in self.observe().items():
+            if observation.actor[1] == 1.0:
+                result[slot] = int(observation.actor[0])
+            else:
+                generator = _counter_rng(
+                    seed,
+                    self.spec.base_id,
+                    _DOMAIN_HISTORY_FREE + self._time,
+                    slot,
+                )
+                result[slot] = 2 * int(generator.integers(0, 2)) - 1
+        return result
+
+    def _censor_segment(self, slot: int, *, status: str, end_time: int) -> dict[str, Any]:
+        lifecycle = self._lifecycles[slot]
+        record = self._segment_records[lifecycle["segment_record_index"]]
+        if record["status"] != "OPEN":
+            raise RuntimeError("only an open segment can be censored")
+        record.update(
+            end_time=end_time,
+            correct_count=lifecycle["correct_count"],
+            success=False,
+            status=status,
         )
-        return 0.75 * action_term + 0.25 * segment_term
+        return deepcopy(record)
 
-    def _apply_membership_events(self) -> None:
-        for step, event, target in self._spec.membership_events:
-            if step != self._time:
+    def _apply_membership_events(self) -> list[dict[str, Any]]:
+        censored: list[dict[str, Any]] = []
+        for event_time, event, target in self.spec.membership_events:
+            if event_time != self._time:
                 continue
             if event == "TEMP_LEAVE":
                 lifecycle = self._lifecycles[target]
                 if not lifecycle["active"] or lifecycle["terminal"]:
-                    raise RuntimeError("TEMP_LEAVE target is not an active lifecycle")
+                    raise RuntimeError("TEMP_LEAVE target is not active")
                 lifecycle["active"] = False
+                lifecycle["rejoin_flag"] = False
             elif event == "REJOIN":
                 lifecycle = self._lifecycles[target]
                 if lifecycle["active"] or lifecycle["terminal"]:
-                    raise RuntimeError("REJOIN target is not a frozen lifecycle")
+                    raise RuntimeError("REJOIN target is not frozen")
                 lifecycle["active"] = True
                 lifecycle["rejoin_flag"] = True
             elif event == "JOIN":
                 if target in self._lifecycles:
-                    raise RuntimeError("JOIN target already has a lifecycle")
-                self._lifecycles[target] = _new_lifecycle(
-                    self._spec.sign_start, self._spec.duration, join_flag=True
-                )
-                self._started_segments += 1
+                    raise RuntimeError("JOIN target already exists")
+                self._create_lifecycle(target, start_time=self._time)
             elif event == "TERMINAL_LEAVE":
                 lifecycle = self._lifecycles[target]
                 if not lifecycle["active"] or lifecycle["terminal"]:
                     raise RuntimeError("TERMINAL_LEAVE target is not active")
+                censored.append(
+                    self._censor_segment(
+                        target,
+                        status="CENSORED_TERMINAL",
+                        end_time=self._time,
+                    )
+                )
                 lifecycle["active"] = False
                 lifecycle["terminal"] = True
-            else:  # pragma: no cover - canonical manifests prevent this path
+            else:  # pragma: no cover - canonical ledgers exclude this path
                 raise RuntimeError(f"unknown membership event {event!r}")
+        return censored
 
     def step(self, actions: dict[int, int]) -> dict[str, object]:
-        if self._time >= self._spec.horizon:
+        if self._time >= self.spec.horizon:
             raise RuntimeError("episode is already complete")
         if not isinstance(actions, dict):
             raise TypeError("actions must be a dict keyed by active physical slot")
-        active_slots = {
-            slot for slot, lifecycle in self._lifecycles.items() if lifecycle["active"]
-        }
+        observations = self.observe()
+        active_slots = set(observations)
         if set(actions) != active_slots:
             raise ValueError(
                 f"actions must contain exactly the active slots {sorted(active_slots)}"
@@ -236,62 +530,115 @@ class TemporalDutyG1Env:
         for slot, action in actions.items():
             if isinstance(action, bool) or not isinstance(action, Integral):
                 raise ValueError(f"action for slot {slot} must be an integer in {-1, 0, 1}")
-            normalized_action = int(action)
-            if normalized_action not in ACTION_DOMAIN:
+            normalized = int(action)
+            if normalized not in ACTION_DOMAIN:
                 raise ValueError(f"action for slot {slot} must be in {-1, 0, 1}")
-            normalized_actions[slot] = normalized_action
+            normalized_actions[slot] = normalized
 
-        previous_utility = self._reward_sum
+        previous_utility = self._utility_from_counts()
+        segment_events: list[dict[str, Any]] = []
+        opportunity_events = {
+            slot: observation.opportunity_kind
+            for slot, observation in observations.items()
+            if observation.opportunity_kind is not None
+        }
         for slot in sorted(active_slots):
             lifecycle = self._lifecycles[slot]
-            correct = normalized_actions[slot] == lifecycle["g"]
-            lifecycle["opportunities"] += 1
+            ledger = self._ledgers[slot]
+            correct = normalized_actions[slot] == lifecycle["target"]
             self._action_opportunities += 1
             if correct:
                 lifecycle["correct_count"] += 1
-                lifecycle["terminal_streak"] += 1
+                lifecycle["terminal_streak"] = min(
+                    2, lifecycle["terminal_streak"] + 1
+                )
                 self._correct_actions += 1
             else:
                 lifecycle["terminal_streak"] = 0
+
+            if observations[slot].opportunity_kind is not None:
+                gap = ledger.opportunity_gaps[lifecycle["opportunity_index"]]
+                lifecycle["opportunity_index"] += 1
+                lifecycle["next_opportunity_active_step"] = (
+                    lifecycle["active_steps"] + gap
+                )
+                lifecycle["create_pending"] = False
+            lifecycle["active_steps"] += 1
             lifecycle["age"] += 1
             lifecycle["remaining"] -= 1
             lifecycle["join_flag"] = False
             lifecycle["rejoin_flag"] = False
 
             if lifecycle["remaining"] == 0:
-                if lifecycle["terminal_streak"] >= 2:
-                    self._successful_segments += 1
-                if self._time + 1 < self._spec.horizon:
-                    lifecycle["g"] = -lifecycle["g"]
-                    lifecycle["age"] = 0
-                    lifecycle["remaining"] = self._spec.duration
-                    lifecycle["correct_count"] = 0
-                    lifecycle["terminal_streak"] = 0
-                    self._started_segments += 1
+                self._completed_segments += 1
+                success = (
+                    4 * lifecycle["correct_count"]
+                    >= 3 * lifecycle["duration"]
+                    and lifecycle["terminal_streak"] >= 2
+                )
+                self._successful_segments += int(success)
+                record = self._segment_records[lifecycle["segment_record_index"]]
+                record.update(
+                    end_time=self._time + 1,
+                    correct_count=lifecycle["correct_count"],
+                    success=success,
+                    status="COMPLETED",
+                )
+                segment_events.append(deepcopy(record))
+                if self._time + 1 < self.spec.horizon:
+                    lifecycle["segment_index"] += 1
+                    segment_index = lifecycle["segment_index"]
+                    lifecycle.update(
+                        target=ledger.targets[segment_index],
+                        duration=ledger.durations[segment_index],
+                        age=0,
+                        remaining=ledger.durations[segment_index],
+                        correct_count=0,
+                        terminal_streak=0,
+                    )
+                    self._start_segment(slot, start_time=self._time + 1)
 
         self._time += 1
-        if self._time < self._spec.horizon:
-            self._apply_membership_events()
+        if self._time < self.spec.horizon:
+            segment_events.extend(self._apply_membership_events())
+        else:
+            for slot, lifecycle in sorted(self._lifecycles.items()):
+                if lifecycle["active"]:
+                    record = self._segment_records[lifecycle["segment_record_index"]]
+                    if record["status"] == "OPEN":
+                        segment_events.append(
+                            self._censor_segment(
+                                slot,
+                                status="CENSORED_HORIZON",
+                                end_time=self._time,
+                            )
+                        )
+
         self._reward_sum = self._utility_from_counts()
         reward = self._reward_sum - previous_utility
         self._step_rewards.append(reward)
         return {
             "observations": self.observe(),
             "reward": reward,
-            "done": self._time == self._spec.horizon,
+            "done": self._time == self.spec.horizon,
             "time": self._time,
+            "opportunities": opportunity_events,
+            "segment_events": tuple(segment_events),
         }
 
     def snapshot_state(self) -> dict[str, object]:
         return deepcopy(
             {
-                "version": 1,
-                "spec": asdict(self._spec),
+                "version": 2,
+                "source_family": SOURCE_FAMILY,
+                "spec": asdict(self.spec),
                 "time": self._time,
                 "lifecycles": self._lifecycles,
+                "segment_records": self._segment_records,
                 "correct_actions": self._correct_actions,
                 "action_opportunities": self._action_opportunities,
                 "successful_segments": self._successful_segments,
+                "completed_segments": self._completed_segments,
                 "started_segments": self._started_segments,
                 "reward_sum": self._reward_sum,
                 "step_rewards": tuple(self._step_rewards),
@@ -300,46 +647,71 @@ class TemporalDutyG1Env:
 
     @classmethod
     def from_snapshot_state(cls, state: dict[str, object]) -> "TemporalDutyG1Env":
-        if not isinstance(state, dict) or state.get("version") != 1:
-            raise ValueError("state is not a version-1 TemporalDutyG1Env snapshot")
+        if (
+            not isinstance(state, dict)
+            or state.get("version") != 2
+            or state.get("source_family") != SOURCE_FAMILY
+        ):
+            raise ValueError("state is not a formal TemporalDutyG1Env snapshot")
         copied = deepcopy(state)
-        spec_state = copied["spec"]
+        spec_state = copied.get("spec")
         if not isinstance(spec_state, dict):
             raise ValueError("snapshot spec must be a dict")
-        canonical = make_episode_spec(
-            str(spec_state["split"]),
-            int(spec_state["roster_size"]),
-            int(spec_state["duration"]),
-            int(spec_state["sign_start"]),
-            int(spec_state["rotation"]),
-        )
+        try:
+            canonical = make_episode_spec(
+                str(spec_state["profile"]),
+                task_seed=spec_state["task_seed"],
+                membership_seed=spec_state["membership_seed"],
+                duty_seed=spec_state["duty_seed"],
+                opportunity_seed=spec_state["opportunity_seed"],
+                base_id=spec_state["base_id"],
+                sign_mate=spec_state["sign_mate"],
+            )
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError("snapshot spec is invalid") from error
         if asdict(canonical) != spec_state:
             raise ValueError("snapshot spec is not canonical")
+        time = copied.get("time")
+        if isinstance(time, bool) or not isinstance(time, Integral) or not 0 <= int(time) <= HORIZON:
+            raise ValueError("snapshot time is outside the episode horizon")
 
-        environment = cls.__new__(cls)
-        environment._spec = canonical
-        environment._time = int(copied["time"])
+        environment = cls(canonical)
+        environment._time = int(time)
         environment._lifecycles = copied["lifecycles"]
+        environment._segment_records = copied["segment_records"]
         environment._correct_actions = int(copied["correct_actions"])
         environment._action_opportunities = int(copied["action_opportunities"])
         environment._successful_segments = int(copied["successful_segments"])
+        environment._completed_segments = int(copied["completed_segments"])
         environment._started_segments = int(copied["started_segments"])
         environment._reward_sum = float(copied["reward_sum"])
         environment._step_rewards = list(copied["step_rewards"])
+        if set(environment._lifecycles) - set(environment._ledgers):
+            raise ValueError("snapshot contains an unknown lifecycle slot")
+        if environment._started_segments > canonical.started_segment_denominator:
+            raise ValueError("snapshot exceeds the registered segment denominator")
+        if environment._action_opportunities > canonical.active_action_denominator:
+            raise ValueError("snapshot exceeds the registered action denominator")
+        if environment._reward_sum != environment._utility_from_counts():
+            raise ValueError("snapshot reward sum does not match its utility counts")
         return environment
 
     def outcome(self) -> dict[str, float]:
-        action_accuracy = self._correct_actions / self._spec.action_denominator
+        action_accuracy = (
+            self._correct_actions / self.spec.active_action_denominator
+        )
         segment_success_rate = (
-            self._successful_segments / self._spec.eligible_segment_denominator
+            self._successful_segments / self.spec.started_segment_denominator
         )
         utility = 0.75 * action_accuracy + 0.25 * segment_success_rate
         return {
             "correct_actions": float(self._correct_actions),
             "action_opportunities": float(self._action_opportunities),
-            "action_denominator": float(self._spec.action_denominator),
+            "action_denominator": float(self.spec.active_action_denominator),
             "successful_segments": float(self._successful_segments),
-            "eligible_segments": float(self._spec.eligible_segment_denominator),
+            "completed_segments": float(self._completed_segments),
+            "started_segments": float(self._started_segments),
+            "eligible_segments": float(self.spec.started_segment_denominator),
             "action_accuracy": float(action_accuracy),
             "segment_success_rate": float(segment_success_rate),
             "utility": float(utility),

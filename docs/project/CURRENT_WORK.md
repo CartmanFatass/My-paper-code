@@ -25,8 +25,8 @@ state file declares no independent authority.
 ## Active boundary
 
 ```text
-last_completed_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
-active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
+last_completed_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
+active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2
 source_boundary=local_and_remote_aggressive_tip
 accepted_base_source_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
 derivation_source_commit=3b5e86a6ef4e8731a37232df3f1828affb0d62fc
@@ -45,7 +45,7 @@ monitoring_status=authorized_for_active_runs
 grant_stop_conditions=iterations_exhausted|user_pause|unrecoverable_blocker|scope_outside_hmasd_mission
 derivation_status=complete
 prototype_status=complete_valid_nonformal
-next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
+next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2
 prototype_authorization_status=authorized_under_autonomous_grant
 prototype_design_status=PM_ACCEPTED
 prototype_design_activation=integrated_37d6556a3a4b5bf4ed70a15834e946005354f91f
@@ -53,8 +53,15 @@ prototype_execution_kind=bounded_nonformal_measurement_prototype
 prototype_conclusion_bearing_iterations_consumed=0
 prototype_artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3
 prototype_measurement_disposition=measurement_path_valid_recurrence_remains_sufficient
-formal_evidence_contract_status=not_yet_frozen
-controller_integration_receipt_status=complete_1a4fb630d8c3075380cc3c6562199ee3ea28e9de
+formal_evidence_contract_status=PM_FROZEN
+formal_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
+formal_implementation_status=PM_ACCEPTED_PRELAUNCH
+formal_run_status=authorized_pending_controller_integration_and_launch
+formal_run_command_status=frozen_pending_integrated_source_commit
+formal_prelaunch_artifact=logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2
+formal_conclusion_bearing_iterations_consumed=0
+controller_integration_receipt_status=complete_94a54507e5ed6757d7cf8fc00ea511971a71641b
+workflow_package_integration=94a54507e5ed6757d7cf8fc00ea511971a71641b
 workflow_hash_validation=disabled
 code_handoff_identity=git_commit_and_exact_path_set
 callback_contract_activation=on_integration_commit
@@ -98,9 +105,21 @@ a sufficient ordinary capability explanation and the prototype carries no
 adoption or superiority meaning.
 
 The smallest next boundary is the trainable G1 formal executable definition.
-It freezes the access-first result contract and ordinary-explanation outcome,
-then implements focused prelaunch evidence. No formal run starts before that
-contract is frozen. The derivation and prototype each consume no conclusion-bearing iteration; four conclusion-bearing iterations remain.
+Project Manager froze the independent evidence contract at
+`docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md`, implemented
+the focused learned OR/DUM/EHC path, and accepted it for prelaunch. The formal
+source uses the exact Pro rule that a segment succeeds only when whole-segment
+accuracy is at least 75% and the final two actions are correct. The earlier
+last-two-only prototype remains bounded measurement evidence and is not a
+formal-source implementation; its superseded executable code has been removed.
+The bounded CPU exercise at
+`logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2` closed collection,
+replay, four-pass PPO, checkpoint reload, evaluation, causal audit and analysis,
+including raw cluster-level source-control evidence, and was rejected by the
+formal validator because `formal=false`. The next
+already-authorized action is Controller mechanical integration followed by the
+formal iteration-2 CPU launch with the integrated source commit. No
+conclusion-bearing iteration has yet been consumed; four conclusion-bearing iterations remain.
 
 ## Accepted evidence state
 
@@ -167,17 +186,14 @@ All parallel child scopes and Project Manager integration are complete:
 
 ```text
 active_file_writers=none
-package_status=PROTOTYPE_IMPLEMENTATION_INTEGRATED_1a4fb630d8c3075380cc3c6562199ee3ea28e9de
+package_status=IMPLEMENTATION_READY
 ```
 
-The derivation package was mechanically integrated and pushed as
-`688d95e32b86f4ee4151b4b12ddbcaf14beee18e`. Controller did not send the
-required completion receipt to Project Manager; the user relayed the exact
-receipt and woke the workflow. The callback-contract repair owns only the files
-declared in its terminal Project Manager payload. The repaired callback contract
-becomes active in the commit that integrates it. Its subsequent mechanical
-receipt is runtime coordination evidence and does not require a follow-up state
-commit, avoiding a recursive commit/receipt chain.
+The active workflow package, including removal of workflow hash handshakes, was
+mechanically integrated and pushed as
+`94a54507e5ed6757d7cf8fc00ea511971a71641b`. Controller receipts wake the
+Project Manager directly. A receipt is runtime coordination evidence and does
+not require a follow-up state commit, avoiding recursive commit/receipt chains.
 
 Different ownership sets may proceed concurrently. No repository-wide write
 lease is active. Controller must wait only for a file it intends to stage while
