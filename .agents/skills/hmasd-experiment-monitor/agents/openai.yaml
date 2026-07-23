@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Experiment Monitor"
-  short_description: "Monitor one authorized HMASD run and report terminal state."
-  default_prompt: "Monitor an already-authorized HMASD experiment run and report only bounded progress or terminal evidence."

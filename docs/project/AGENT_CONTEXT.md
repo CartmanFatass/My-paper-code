@@ -26,12 +26,10 @@ constraints they need.
 
 ## Git
 
-You do not commit. Leave your work in the working tree.
-
-No `git add`, `commit`, `push`, `stash`, `reset`, `checkout` of tracked files, or
-branch manipulation. Git ownership and integration routing follow the canonical
-role contracts. Read-only Git inspection is allowed only when the assignment
-needs it.
+The root Project Manager directly stages, commits, and pushes accepted work.
+Native children never run Git and leave their exact owned paths in the shared
+working tree. Git authority follows the applicable role charter; there is no
+Controller handoff, per-file hash exchange, or callback receipt.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.
@@ -41,9 +39,10 @@ Report it rather than working around it.
 
 Role-specific semantic ownership, reviewer-package authorship, acceptance,
 repair, transport and archival responsibilities live in root `AGENTS.md` and
-the applicable `.agents/roles/*.md` contracts. Consult those sources directly
-when constructing an assignment; do not copy their authority markers or turn
-this environment reference into a parallel policy source.
+the applicable `.agents/roles/*.md` contracts. The experiment operator is a
+fixed native child, not a persistent task or Skill-driven monitor. Consult those
+sources directly when constructing an assignment; do not turn this environment
+reference into a parallel policy source.
 
 ## Development procedure
 

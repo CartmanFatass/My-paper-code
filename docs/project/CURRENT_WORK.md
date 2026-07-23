@@ -2,148 +2,90 @@
 
 Last updated: 2026-07-23
 
-This file records active state only. Durable authority is defined by
-`AGENTS.md` and `.agents/roles/*.md`.
+This file records active state only. Durable authority is in `AGENTS.md` and
+`.agents/roles/*.md`.
 
-## Active roles
+## Active execution surface
 
-- Project Manager: task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3`, ACTIVE,
-  primary research/workflow/algorithm/engineering authority.
-- Controller: task `019f8995-7550-7c82-8f31-ad08a3d381d4`, ACTIVE mechanical operator
-  for exact routing, Git, external-review transport, authorized run commands,
-  artifact collection, and direct bounded monitoring.
-- No persistent Experiment Monitor task is active. Controller performs bounded
-  monitoring directly with `$hmasd-experiment-monitor` after a run is authorized.
-- External GPT-5.6 Pro is not a persistent task. It is question-scoped external
-  scientific authority reached through Controller-direct external-Pro transport
-  performed mechanically.
-
-Role identity and contracts are resolved from
-`.agents/skills/hmasd-dispatch-task/references/session-roles.json`; this active
-state file declares no independent authority.
+- Project Manager task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3` is the sole
+  persistent project task and owns workflow, science reconciliation,
+  implementation acceptance, Git, external-review transport, experiment
+  orchestration, evidence intake, and successor selection.
+- `hmasd-experiment-operator` is a registered nonpersistent native child fixed
+  to `gpt-5.6-luna` with `low` reasoning. It is spawned for one authorized run,
+  remains silent during execution, and returns exactly one `COMPLETE` or
+  `ERROR` final payload.
+- No Controller, persistent Monitor, dispatcher, monitor Skill, callback route,
+  or experiment heartbeat is active.
+- External GPT-5.6 Pro remains question-scoped scientific authority reached by
+  Project Manager direct transport with `$hmasd-review-round`.
 
 ## Active boundary
 
 ```text
 last_completed_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
-active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2
-source_boundary=local_and_remote_aggressive_tip
-accepted_base_source_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
-derivation_source_commit=3b5e86a6ef4e8731a37232df3f1828affb0d62fc
-derivation_integration_commit=688d95e32b86f4ee4151b4b12ddbcaf14beee18e
-accepted_reconciliation=docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/30_PM_CODE_SIDE_RECONCILIATION.md
+active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2_OPERATIONAL_REPAIR
+accepted_source_commit=3d1d92711763034bf7f022b812f3f3431bb59776
+next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2_CLEAN_R2
 iterations_remaining=4
+conclusion_bearing_iterations_consumed_by_failed_r1=0
 autonomous_research_grant=ACTIVE
 grant_scope=remaining_four_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
 implementation_status=authorized
 nonformal_compute_status=authorized
 formal_compute_status=authorized_cpu_only_under_frozen_evidence_contract
-git_integration_status=authorized_for_pm_accepted_packages
-external_review_transport_status=authorized_when_pm_selected
-monitoring_status=authorized_for_active_runs
-grant_stop_conditions=iterations_exhausted|user_pause|unrecoverable_blocker|scope_outside_hmasd_mission
-derivation_status=complete
-prototype_status=complete_valid_nonformal
-next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2
-prototype_authorization_status=authorized_under_autonomous_grant
-prototype_design_status=PM_ACCEPTED
-prototype_design_activation=integrated_37d6556a3a4b5bf4ed70a15834e946005354f91f
-prototype_execution_kind=bounded_nonformal_measurement_prototype
-prototype_conclusion_bearing_iterations_consumed=0
-prototype_artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3
-prototype_measurement_disposition=measurement_path_valid_recurrence_remains_sufficient
+git_integration_status=project_manager_direct_authorized
+external_review_transport_status=project_manager_direct_authorized_when_selected
+experiment_operator_status=registered_pm_accepted
 formal_evidence_contract_status=PM_FROZEN
 formal_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
 formal_implementation_status=PM_ACCEPTED_PRELAUNCH
-formal_run_status=authorized_pending_controller_integration_and_launch
-formal_run_command_status=frozen_pending_integrated_source_commit
-formal_prelaunch_artifact=logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2
-formal_conclusion_bearing_iterations_consumed=0
-controller_integration_receipt_status=complete_94a54507e5ed6757d7cf8fc00ea511971a71641b
-workflow_package_integration=94a54507e5ed6757d7cf8fc00ea511971a71641b
+formal_run_status=r1_operational_error_no_valid_analysis
+formal_r1_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1
+formal_r1_terminal_phase=TRAIN
+formal_r1_last_progress=replicate_1_arm_OR_update_90
+formal_r1_error=PermissionError_WinError_5_atomic_progress_replace
+formal_r1_evaluate_status=not_launched
+formal_r1_analyze_status=not_launched
+formal_r1_scientific_disposition=none
+operational_repair_status=PM_ACCEPTED
+operational_repair=bounded_permission_retry_plus_silent_foreground_operator
+restart_policy=clean_run_root_after_repair_commit_no_cross_commit_resume
 workflow_hash_validation=disabled
-code_handoff_identity=git_commit_and_exact_path_set
-callback_contract_activation=on_integration_commit
-callback_receipt_requires_followup_commit=false
+backward_compatibility=not_required
 ```
 
-Project Manager completed the zero-compute CDC action
-`EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION`, recorded at
-`docs/research/cdc/EVIDENCE_NOTES/20260722_EHC_MEASUREMENT_COUNTEREXAMPLES.md`.
-It formalized:
+The first formal G1 run has no valid scientific result. Its same-command
+foreground resume exited while atomically replacing `progress.json` under a
+Windows/OneDrive sharing lock:
 
-- `CE-RANDOM-USE`;
-- `CE-EXOGENOUS-LIFETIME`;
-- `CE-LOGIT-WITHOUT-BEHAVIOR`;
-- the necessary policy-dependent persistence, sequence-level intervention,
-  natural mediation, simpler-explanation resistance, and held-out robustness
-  conditions.
+```text
+PermissionError: [WinError 5] Access is denied:
+'logs\\formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1\\.progress.json.35684.tmp'
+-> 'logs\\formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1\\progress.json'
+```
 
-The action recorded the smallest measurement/conjecture correction, retained
-lemmas and portfolio delta. It selected one bounded diagnostic prototype as the
-cheapest next separating action. On 2026-07-23 the user activated a continuing
-autonomous grant for the remaining four-iteration research chain. Project
-Manager may now advance the selected prototype through design, implementation,
-bounded nonformal diagnostics, frozen-contract formal CPU runs, needed external
-review, mechanical Git integration, monitoring and successor selection without
-intermediate authorization prompts.
+Training stopped at replicate 1, OR update 90. Evaluation and analysis were not
+started. The run consumed no conclusion-bearing iteration and must remain as
+operationally invalid evidence. After the atomic-write and operator topology
+package is accepted and committed, iteration 2 restarts from a fresh run root
+under that new source commit; the old checkpoint is not resumed across commits.
 
-The grant does not relax frozen scientific semantics or let Controller choose
-research actions. Project Manager remains responsible for freezing each
-evidence contract before a conclusion-bearing run and for stopping when the
-iteration chain is exhausted, the user pauses it, an unrecoverable blocker
-remains, or the next action leaves the HMASD mission.
-
-Project Manager then completed the bounded nonformal prototype recorded at
-`docs/research/cdc/EVIDENCE_NOTES/20260723_EHC_SEQUENCE_MEDIATION_PROTOTYPE_G1.md`.
-Its validated 192-cell CPU artifact distinguishes the random-use,
-exogenous-lifetime and logit-without-behavior nulls with the corrected
-sequence-mediation tuple. The matched recurrent control reaches the same hidden
-correctness and natural utility as the mechanism control, so recurrence remains
-a sufficient ordinary capability explanation and the prototype carries no
-adoption or superiority meaning.
-
-The smallest next boundary is the trainable G1 formal executable definition.
-Project Manager froze the independent evidence contract at
-`docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md`, implemented
-the focused learned OR/DUM/EHC path, and accepted it for prelaunch. The formal
-source uses the exact Pro rule that a segment succeeds only when whole-segment
-accuracy is at least 75% and the final two actions are correct. The earlier
-last-two-only prototype remains bounded measurement evidence and is not a
-formal-source implementation; its superseded executable code has been removed.
-The bounded CPU exercise at
-`logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2` closed collection,
-replay, four-pass PPO, checkpoint reload, evaluation, causal audit and analysis,
-including raw cluster-level source-control evidence, and was rejected by the
-formal validator because `formal=false`. The next
-already-authorized action is Controller mechanical integration followed by the
-formal iteration-2 CPU launch with the integrated source commit. No
-conclusion-bearing iteration has yet been consumed; four conclusion-bearing iterations remain.
-
-## Accepted evidence state
+## Accepted scientific state
 
 - `EVENT_HELD_COMMITMENT_LINK_G0` is permanently closed as
-  `NO_ACCESS_THIS_BENCHMARK`. It may not be rerun, renamed, modified, or rescued.
-- The formal CPU run completed operationally and its first-match branch is
-  accepted. CPU/CUDA comparison is not an evidence requirement.
-- The external-Pro result review is complete and retained the four live
-  explanations: shared credit/optimization failure, shared base-policy
-  insufficiency, useful EHC masked by no access, and link-null/task-mechanism
-  mismatch.
-- The PM-owned G1 raw, focused raw, mechanical intake records, and accepted
-  code-side reconciliation are archived under
-  `docs/external-review/rounds/20260722_ehc_g1_*_pm_owned/`.
-- The accepted reconciliation classified the remaining source-field detail as
-  algorithm semantics, deferred evidence contract, PM-owned engineering, or
-  premature ontology. It selected derivation before implementation.
+  `NO_ACCESS_THIS_BENCHMARK`; it may not be rerun, renamed, modified, or rescued.
+- The G1 formal contract at
+  `docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md` is frozen.
+- The bounded prelaunch artifact
+  `logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2` validated the
+  learned G1 execution path and was correctly rejected as nonformal.
+- The r1 operational error changes no estimand, source, threshold, budget,
+  branch, or scientific result gate.
+- Four conclusion-bearing iterations remain.
 
-Lower-precedence `G`, K-bin, `I_TV`, and `C_total` diagnostics never relabel the
-closed G0 result. `BATTERY_CONTRACT_RECONCILED` remains in force.
-
-## Runtime condition
-
-The registered runtime is CPU only:
+## Runtime and protected semantics
 
 ```text
 python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
@@ -152,63 +94,32 @@ torch_threads=1
 backend=cpu
 ```
 
-There is no CUDA fallback, backend mixing, cross-backend resume, or required
-CPU/CUDA equivalence comparison. Under the active autonomous grant, Project
-Manager may authorize the Controller to execute a formal CPU run only after its
-evidence contract is frozen. No additional intermediate user prompt is needed.
+There is no CUDA fallback, backend mixing, cross-backend resume, or CPU/CUDA
+equivalence requirement. Preserve the closed G0 source; OR/DUM/EHC;
+`primitive_logits = base_logits + W_z(m*z)`; primary
+`G = U_EHC - U_DUM`; anonymous membership/lifecycle semantics; reward,
+observation, probability factorization, gradients/detach, clocks, RNG, replay,
+checkpoint meaning, seeds, budgets, thresholds, bootstrap, causal gates, and
+first-match result precedence.
 
-## Frozen scientific semantics
-
-Until a later accepted scientific boundary explicitly changes them, preserve:
-
-- the closed G0 source and its registered first-match result;
-- OR/DUM/EHC and `primitive_logits = base_logits + W_z(m*z)`;
-- primary `G = U_EHC - U_DUM`;
-- anonymous membership and lifecycle semantics;
-- reward, observation, probability factorization, gradients/detach, clocks,
-  RNG ownership/draw order, replay, checkpoint meaning, seeds, budgets,
-  thresholds, bootstrap, causal gates, and result precedence;
-- the unchanged behavioral battery and intrinsic-reward environment agnosticism.
-
-Evidence gates answer local measurement questions. They are not global
-admission gates for the algorithm family.
-
-## Concurrency and current file ownership
+## Concurrency
 
 ```text
 concurrency_policy=file_ownership_only
 global_write_lease=disabled
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
-```
-
-All parallel child scopes and Project Manager integration are complete:
-
-```text
 active_file_writers=none
-package_status=IMPLEMENTATION_READY
 ```
 
-The active workflow package, including removal of workflow hash handshakes, was
-mechanically integrated and pushed as
-`94a54507e5ed6757d7cf8fc00ea511971a71641b`. Controller receipts wake the
-Project Manager directly. A receipt is runtime coordination evidence and does
-not require a follow-up state commit, avoiding recursive commit/receipt chains.
-
-Different ownership sets may proceed concurrently. No repository-wide write
-lease is active. Controller must wait only for a file it intends to stage while
-that exact file still has an active writer.
+Children do not run Git; Project Manager directly commits and pushes the
+accepted exact path set. No workflow hash or callback receipt is required.
 
 ## Pointers
 
-- `AGENTS.md` — global role constitution and workflow.
-- `.agents/roles/` — normative role contracts.
-- `docs/project/ALGORITHM_PRINCIPLES.md` — scientific constraints.
-- `docs/project/AGENT_CONTEXT.md` — execution environment and lightweight task
-  practices.
-- `docs/external-review/rounds/20260722_ehc_formal_result_review/` — accepted G0
-  formal-result review.
-- `docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/`
-  — focused Pro raw, mechanical intake, and PM reconciliation.
-- `docs/research/cdc/CONJECTURES.md` and `docs/research/cdc/IDEA_PORTFOLIO.md` —
-  active durable research state.
+- `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — project authority.
+- `.agents/roles/EXPERIMENT_OPERATOR.md` — silent single-run child contract.
+- `.codex/agents/hmasd-experiment-operator.toml` — fixed Luna-low profile.
+- `docs/project/IMPLEMENTATION_PLAN.md` — active executable plan.
+- `docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md` — frozen
+  formal evidence contract.

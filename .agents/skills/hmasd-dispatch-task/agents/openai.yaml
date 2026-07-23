@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Task Dispatch"
-  short_description: "Select the correct role and deliver safely"
-  default_prompt: "Use $hmasd-dispatch-task to decide whether the controller works directly or dispatches to one registered HMASD role, then preserve the recipient model and thinking during delivery."

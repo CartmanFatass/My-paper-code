@@ -2,32 +2,50 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$configPath = Join-Path $repo '.codex/config.toml'
-if (-not (Test-Path -LiteralPath $configPath -PathType Leaf)) { throw 'Missing native Codex agent registry' }
-$config = Get-Content -LiteralPath $configPath -Raw
+
+$config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $profiles = @{
     'HMASDCodeScout' = @('hmasd-code-scout.toml', 'hmasd-code-scout', 'gpt-5.6-luna', 'medium', 'read-only')
     'HMASDImplementer' = @('hmasd-implementer.toml', 'hmasd-implementer', 'gpt-5.6-sol', 'high', 'workspace-write')
     'HMASDVerifier' = @('hmasd-verifier.toml', 'hmasd-verifier', 'gpt-5.6-luna', 'high', 'workspace-write')
     'HMASDReviewer' = @('hmasd-reviewer.toml', 'hmasd-reviewer', 'gpt-5.6-sol', 'xhigh', 'read-only')
+    'HMASDExperimentOperator' = @('hmasd-experiment-operator.toml', 'hmasd-experiment-operator', 'gpt-5.6-luna', 'low', 'workspace-write')
 }
-foreach ($key in $profiles.Keys) {
-    $spec = $profiles[$key]
-    if (-not $config.Contains("[agents.`"$key`"]")) { throw "Missing registry entry: $key" }
+foreach ($entry in $profiles.GetEnumerator()) {
+    if (-not $config.Contains("[agents.`"$($entry.Key)`"]")) {
+        throw "Missing native agent registry entry: $($entry.Key)"
+    }
+    $spec = $entry.Value
     $path = Join-Path $repo ".codex/agents/$($spec[0])"
-    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing profile: $($spec[0])" }
-    $text = Get-Content -LiteralPath $path -Raw
-    foreach ($required in @("name = `"$($spec[1])`"", "model = `"$($spec[2])`"", "model_reasoning_effort = `"$($spec[3])`"", "sandbox_mode = `"$($spec[4])`"", 'spawn agents')) {
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing profile: $path" }
+    $text = Get-Content -Raw -LiteralPath $path
+    foreach ($required in @(
+        "name = `"$($spec[1])`"",
+        "model = `"$($spec[2])`"",
+        "model_reasoning_effort = `"$($spec[3])`"",
+        "sandbox_mode = `"$($spec[4])`"")) {
         if (-not $text.Contains($required)) { throw "$($spec[0]) missing: $required" }
     }
 }
-foreach ($path in @('AGENTS.md')) {
-    $text = Get-Content (Join-Path $repo $path) -Raw
-    foreach ($callable in @('hmasd-code-scout', 'hmasd-implementer', 'hmasd-verifier', 'hmasd-reviewer')) {
-        if (-not $text.Contains($callable)) { throw "$path omits callable profile: $callable" }
-    }
-    if (-not $text.Contains('unknown agent_type') -or -not $text.Contains('default')) {
-        throw "$path does not fail closed against default-agent fallback"
-    }
+
+$agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+$pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+foreach ($required in @(
+    'project_manager_project_authority=exclusive',
+    'project_manager_git_authority=direct',
+    'project_manager_external_review_transport=direct',
+    'callable_agent_type=hmasd-experiment-operator',
+    'unknown agent_type',
+    'never substitute `default`')) {
+    if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
+foreach ($required in @(
+    'role_kind=sole_persistent_project_task',
+    'git_execution=direct',
+    'external_review_transport=direct',
+    'experiment_orchestration=registered_native_child',
+    'Continue automatically within an active user grant')) {
+    if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+
 Write-Output 'HMASD_PROJECT_MANAGER_CONTRACT_OK'

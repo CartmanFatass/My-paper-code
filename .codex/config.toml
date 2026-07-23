@@ -31,3 +31,8 @@ nickname_candidates = ["HMASD Verifier", "CUDA Verifier", "Evidence Verifier"]
 description = "Read-only HMASD reviewer for an integrated implementation package."
 config_file = "./agents/hmasd-reviewer.toml"
 nickname_candidates = ["HMASD Reviewer", "Algorithm Reviewer", "Runtime Reviewer"]
+
+[agents."HMASDExperimentOperator"]
+description = "Silent mechanical operator for one authorized HMASD train-evaluate-analyze run."
+config_file = "./agents/hmasd-experiment-operator.toml"
+nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]

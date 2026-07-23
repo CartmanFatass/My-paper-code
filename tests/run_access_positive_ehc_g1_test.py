@@ -374,3 +374,67 @@ def test_formal_analysis_writer_invokes_strengthened_validator(tmp_path: Path, m
     _write_and_validate_analysis(tmp_path, {"formal": True}, formal=True)
     assert calls == [tmp_path]
     assert json.loads((tmp_path / "analysis_result.json").read_text(encoding="utf-8")) == {"formal": True}
+
+
+@pytest.mark.parametrize("artifact_kind", ("json", "jsonl"))
+def test_runner_atomic_writers_retry_transient_permission_error(
+    tmp_path: Path, monkeypatch, artifact_kind: str
+):
+    destination = tmp_path / f"artifact.{artifact_kind}"
+    real_replace = runner.os.replace
+    calls = 0
+    sleeps: list[float] = []
+
+    def flaky_replace(source, target):
+        nonlocal calls
+        calls += 1
+        if calls < 3:
+            raise PermissionError("transient OneDrive lock")
+        real_replace(source, target)
+
+    monkeypatch.setattr(runner.os, "replace", flaky_replace)
+    monkeypatch.setattr(runner.time, "sleep", sleeps.append)
+
+    if artifact_kind == "json":
+        runner._atomic_json(destination, {"value": 1})
+        assert json.loads(destination.read_text(encoding="utf-8")) == {"value": 1}
+    else:
+        runner._write_jsonl(destination, ({"value": 1}, {"value": 2}))
+        assert [json.loads(line) for line in destination.read_text(encoding="utf-8").splitlines()] == [
+            {"value": 1},
+            {"value": 2},
+        ]
+
+    assert calls == 3
+    assert sleeps == [
+        runner._ATOMIC_REPLACE_RETRY_DELAY_SECONDS,
+        runner._ATOMIC_REPLACE_RETRY_DELAY_SECONDS,
+    ]
+    assert not list(tmp_path.glob("*.tmp"))
+
+
+@pytest.mark.parametrize("artifact_kind", ("json", "jsonl"))
+def test_runner_atomic_writers_exhaustion_reraises_and_cleans_temp(
+    tmp_path: Path, monkeypatch, artifact_kind: str
+):
+    destination = tmp_path / f"artifact.{artifact_kind}"
+    destination.write_text("prior artifact\n", encoding="utf-8")
+    calls = 0
+
+    def locked_replace(_source, _target):
+        nonlocal calls
+        calls += 1
+        raise PermissionError("persistent OneDrive lock")
+
+    monkeypatch.setattr(runner.os, "replace", locked_replace)
+    monkeypatch.setattr(runner.time, "sleep", lambda _seconds: None)
+
+    with pytest.raises(PermissionError, match="persistent OneDrive lock"):
+        if artifact_kind == "json":
+            runner._atomic_json(destination, {"value": 1})
+        else:
+            runner._write_jsonl(destination, ({"value": 1},))
+
+    assert calls == runner._ATOMIC_REPLACE_ATTEMPTS
+    assert destination.read_text(encoding="utf-8") == "prior artifact\n"
+    assert not list(tmp_path.glob("*.tmp"))

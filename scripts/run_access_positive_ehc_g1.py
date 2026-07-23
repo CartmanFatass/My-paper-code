@@ -11,6 +11,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import sys
+import time
 from typing import Any, Iterable, Mapping, Sequence
 
 import numpy as np
@@ -44,6 +45,20 @@ EVALUATION_ROW_SCHEMA = "access_positive_mechanism_matched_ehc_g1_eval_row_v1"
 SOURCE_CONTROL_SCHEMA = "access_positive_mechanism_matched_ehc_g1_controls_v1"
 AUDIT_ROW_SCHEMA = "access_positive_mechanism_matched_ehc_g1_audit_row_v1"
 MANIFEST_SCHEMA = "access_positive_mechanism_matched_ehc_g1_manifest_v1"
+
+_ATOMIC_REPLACE_ATTEMPTS = 100
+_ATOMIC_REPLACE_RETRY_DELAY_SECONDS = 0.05
+
+
+def _replace_with_permission_retry(temporary: Path, destination: Path) -> None:
+    for attempt in range(_ATOMIC_REPLACE_ATTEMPTS):
+        try:
+            os.replace(temporary, destination)
+            return
+        except PermissionError:
+            if attempt + 1 == _ATOMIC_REPLACE_ATTEMPTS:
+                raise
+            time.sleep(_ATOMIC_REPLACE_RETRY_DELAY_SECONDS)
 
 ARMS = ("OR", "DUM", "EHC")
 REPLICATES = tuple(range(5))
@@ -592,7 +607,7 @@ def _atomic_json(path: Path, value: Mapping[str, object]) -> None:
             json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n",
             encoding="utf-8",
         )
-        os.replace(temporary, path)
+        _replace_with_permission_retry(temporary, path)
     except BaseException:
         if temporary.exists():
             temporary.unlink()
@@ -611,7 +626,7 @@ def _write_jsonl(path: Path, rows: Iterable[Mapping[str, object]]) -> None:
                     json.dumps(row, sort_keys=True, separators=(",", ":"), allow_nan=False)
                     + "\n"
                 )
-        os.replace(temporary, path)
+        _replace_with_permission_retry(temporary, path)
     except BaseException:
         if temporary.exists():
             temporary.unlink()

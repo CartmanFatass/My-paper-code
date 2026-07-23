@@ -29,8 +29,8 @@ $roundId = Split-Path -Leaf $round
 `$hmasd-review-round
 `$browser:control-in-app-browser
 
-HMASD CONTROLLER-DIRECT PRO REVIEW HEARTBEAT
-This wake belongs to the active Controller. Read the current review Skill and
+HMASD PROJECT-MANAGER-DIRECT PRO REVIEW HEARTBEAT
+This wake belongs to the active Project Manager. Read the current review Skill and
 reviewer registry, then inspect the registered conversation once.
 heartbeat_id=$HeartbeatId
 round=$roundId
@@ -47,10 +47,10 @@ matching fence and use two stable text snapshots plus generation-control state;
 a Thinking label alone is not pending, while an active Stop answering control is.
 If a completed message explicitly reports missing question-listed evidence,
 treat it as a transport diagnostic and do not archive it as scientific raw.
-Leave the handoff active for Controller evidence-access recovery under the same
+Leave the round active for Project Manager evidence-access recovery under the same
 fence. If the response is naturally complete and is not a transport diagnostic,
-archive it exactly and reread for equality. Write the mechanical intake; delete this heartbeat
-and confirm absence; then return the exact raw to Project Manager.
+archive it exactly and reread for equality. Write the provenance intake; delete
+this heartbeat and confirm absence; then reconcile the exact raw in Project Manager.
 Do not interpret scientific completeness, repair the package,
 authorize code, or start compute.
 "@

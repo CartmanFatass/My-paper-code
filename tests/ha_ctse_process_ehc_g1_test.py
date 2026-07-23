@@ -8,6 +8,7 @@ import numpy as np
 import pytest
 import torch
 
+import ha_ctse_process.ehc_g1 as ehc_g1
 from ha_ctse_process.ehc_g1 import (
     ACTION_VALUES,
     ACTOR_WIDTH,
@@ -175,6 +176,56 @@ def test_checkpoint_is_g1_only_atomic_and_restores_owned_and_runtime_rng(tmp_pat
         load_checkpoint(
             foreign, arm="OR", replicate=3, backend="cpu", torch_threads=1
         )
+
+
+def test_checkpoint_replace_retries_transient_permission_error(tmp_path, monkeypatch):
+    destination = tmp_path / "update_0.pt"
+    state = initialize_matched_arms(replicate=0)["EHC"]
+    real_replace = ehc_g1.os.replace
+    calls = 0
+    sleeps: list[float] = []
+
+    def flaky_replace(source, target):
+        nonlocal calls
+        calls += 1
+        if calls < 3:
+            raise PermissionError("transient OneDrive lock")
+        real_replace(source, target)
+
+    monkeypatch.setattr(ehc_g1.os, "replace", flaky_replace)
+    monkeypatch.setattr(ehc_g1.time, "sleep", sleeps.append)
+
+    save_checkpoint(destination, state)
+
+    assert calls == 3
+    assert sleeps == [
+        ehc_g1._ATOMIC_REPLACE_RETRY_DELAY_SECONDS,
+        ehc_g1._ATOMIC_REPLACE_RETRY_DELAY_SECONDS,
+    ]
+    assert destination.is_file()
+    assert not list(tmp_path.glob("*.tmp"))
+
+
+def test_checkpoint_replace_exhaustion_reraises_and_cleans_temp(tmp_path, monkeypatch):
+    destination = tmp_path / "update_0.pt"
+    destination.write_bytes(b"prior checkpoint")
+    state = initialize_matched_arms(replicate=0)["EHC"]
+    calls = 0
+
+    def locked_replace(_source, _target):
+        nonlocal calls
+        calls += 1
+        raise PermissionError("persistent OneDrive lock")
+
+    monkeypatch.setattr(ehc_g1.os, "replace", locked_replace)
+    monkeypatch.setattr(ehc_g1.time, "sleep", lambda _seconds: None)
+
+    with pytest.raises(PermissionError, match="persistent OneDrive lock"):
+        save_checkpoint(destination, state)
+
+    assert calls == ehc_g1._ATOMIC_REPLACE_ATTEMPTS
+    assert destination.read_bytes() == b"prior checkpoint"
+    assert not list(tmp_path.glob("*.tmp"))
 
 
 def test_seed_registry_is_exact_and_rejects_mutated_registry():

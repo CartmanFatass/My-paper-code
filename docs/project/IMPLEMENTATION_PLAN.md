@@ -9,7 +9,7 @@ implementation_status=PM_ACCEPTED_PRELAUNCH
 design=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
 backend=cpu
 torch_threads=1
-formal_run_status=authorized_pending_controller_integration_and_launch
+formal_run_status=operational_repair_pending_clean_operator_launch
 G0_mutation=forbidden
 backward_compatibility=not_required
 ```
@@ -132,8 +132,8 @@ persistence and serial evaluation.
 
 Project Manager freezes the final artifact/command contract and accepts or
 repairs the package. The exercise consumes zero conclusion-bearing iterations.
-After acceptance, Controller may launch the already-authorized formal CPU run
-without another user prompt.
+After acceptance, Project Manager may assign the already-authorized formal CPU
+run to the registered `hmasd-experiment-operator` without another user prompt.
 
 Accepted nonformal evidence:
 
@@ -152,10 +152,30 @@ bounds only. A formal `analyze` command validates this complete binding before
 it can return success.
 
 The formal command contract is `train -> evaluate -> analyze`, all against one
-new run directory. `train` requires the exact integrated 40-character source
+fresh run directory. `train` requires the exact integrated 40-character source
 commit and authorization token
 `AUTHORIZE_ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_CPU_V1`; all three
-commands use the registered CPU interpreter and one thread. Controller fills
-only the integrated commit and run-directory identity, then launches and
-monitors the already-authorized run. No scientific field or result gate is
-filled at launch time.
+commands use the registered CPU interpreter and one thread. Project Manager
+fills only the integrated commit and fresh run-directory identity, then gives
+the immutable commands to the registered Luna-low experiment operator. The
+operator remains silent while waiting on the foreground process and returns
+once at COMPLETE or ERROR. No scientific field or result gate is filled at
+launch time.
+
+## Task 7 — Operational r1 repair and clean r2
+
+**Status:** PM accepted; no formal compute was launched by this task.
+
+The first r1 attempt exited during atomic `progress.json` replacement with
+`PermissionError: [WinError 5]`. It produced no evaluation or analysis and
+consumed no conclusion-bearing iteration. The operational repair keeps the
+existing temporary-file-plus-atomic-replace semantics, retries only
+`PermissionError` for a bounded five-second window, preserves the previous
+destination on exhaustion, and removes the temporary file.
+
+The separate monitoring session is replaced by the registered
+`hmasd-experiment-operator`. It keeps train/evaluate/analyze in the foreground,
+does not repeatedly open a live writer's progress file, emits no intermediate
+messages, and returns exactly one terminal payload. After the repair source is
+committed, use a fresh r2 run root; never resume the r1 checkpoint across the
+source commit.

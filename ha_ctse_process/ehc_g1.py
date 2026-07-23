@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass
 import os
 from pathlib import Path
 import random
+import time
 from typing import Any, Mapping, Sequence
 
 import numpy as np
@@ -37,6 +38,20 @@ EVENT_ENTROPY_COEFFICIENT = 0.01
 GRADIENT_CLIP = 0.50
 LEARNING_RATE = 0.0003
 PPO_PASSES = 4
+
+_ATOMIC_REPLACE_ATTEMPTS = 100
+_ATOMIC_REPLACE_RETRY_DELAY_SECONDS = 0.05
+
+
+def _replace_with_permission_retry(temporary: Path, destination: Path) -> None:
+    for attempt in range(_ATOMIC_REPLACE_ATTEMPTS):
+        try:
+            os.replace(temporary, destination)
+            return
+        except PermissionError:
+            if attempt + 1 == _ATOMIC_REPLACE_ATTEMPTS:
+                raise
+            time.sleep(_ATOMIC_REPLACE_RETRY_DELAY_SECONDS)
 
 
 @dataclass(frozen=True)
@@ -344,7 +359,7 @@ def save_checkpoint(path: str | os.PathLike[str], state: ArmTrainingState) -> No
         raise FileExistsError(f"checkpoint temporary path already exists: {temporary}")
     try:
         torch.save(_checkpoint_payload(state), temporary)
-        os.replace(temporary, destination)
+        _replace_with_permission_retry(temporary, destination)
     except BaseException:
         if temporary.exists():
             temporary.unlink()

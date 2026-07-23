@@ -7,7 +7,7 @@ description: Use when implementing, debugging, refactoring, or validating explor
 
 ## Contract boundary
 
-Read `AGENTS.md`, the role contract, and brief. This procedure grants no science, formal compute, Git, transport, or acceptance authority. Project Manager alone accepts or directs repair. A bounded child requires an exact assignment and never scopes or accepts its work.
+Read `AGENTS.md`, the role contract, and brief. This procedure grants no science, formal compute, transport, or acceptance authority. Project Manager alone accepts or directs repair and owns direct Git integration under its role charter. A bounded child requires an exact assignment and never scopes, accepts, or commits its work.
 
 ```text
 superpowers_plugin=reference_only
@@ -46,8 +46,8 @@ only for plausible recurrence, repair, and rerun. Never weaken checks or retry b
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
-- Children do not perform Git. Controller integrates the exact PM-accepted file
-  set and returns the mechanical receipt.
+- Children do not perform Git. Project Manager integrates the exact accepted
+  file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
 - Subtasks close on evidence plus one fresh PM check. At most one integrated advisory review is optional when protected semantics, cross-file integration, or material execution risk makes it useful. Additional targeted review is allowed only after a failed check or a concrete protected cross-scope anomaly; it diagnoses repair and is not another approval layer.
