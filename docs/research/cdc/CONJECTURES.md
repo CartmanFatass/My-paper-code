@@ -42,10 +42,14 @@ the Project Manager-accepted CDC state.
 - Formal composition evidence: G10 places N=12--40 and eight membership edits
   in the same episodes. Its deterministic lower bounds are `0.9296265`,
   `0.9245605` and `0.9272461`, with mixed stochastic mean `0.8963305`.
-- Strongest remaining counterexample: dense low-numbered lifecycle keys and
-  capacity close to active N may conceal dependence on a fixed slot layout.
-- Separating evidence: paired isomorphic episodes under sparse/permuted keys and
-  larger padding, with frozen checkpoints and zero optimizer steps.
+- Formal layout evidence: G11 produces exactly zero persistent, short or utility
+  mismatches under reversed keys, odd sparse keys and affine-scattered capacity
+  128. Every deterministic layout has CI95
+  `[0.9252930, 0.9513707, 0.9991316]`; stochastic mean is `0.8969246`.
+- Strongest remaining counterexample: the same slot-invariant representation
+  may still lose allocation quality when active count exceeds 40.
+- Separating evidence: freeze the G8 finals and cross the observed N=40 boundary
+  without retraining, threshold changes or task-semantic changes.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=SCALE_CHURN_COMPOSITION_G10_FORMAL_ITERATION_11
-active_assignment_id=SLOT_LAYOUT_INVARIANCE_G11_FORMAL_ITERATION_12
-next_boundary=SLOT_LAYOUT_INVARIANCE_G11_FORMAL_ITERATION_12
+last_completed_assignment_id=SLOT_LAYOUT_INVARIANCE_G11_FORMAL_ITERATION_12
+active_assignment_id=ULTRA_SCALE_OPEN_ROSTER_G12_DERIVATION
+next_boundary=ULTRA_SCALE_OPEN_ROSTER_G12_DERIVATION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=6
-conclusion_bearing_iterations_consumed=11
+iterations_remaining=5
+conclusion_bearing_iterations_consumed=12
 implementation_status=G8_CLOSED_USABLE_PREFIX_NORMALIZED
 nonformal_compute_status=g11_exercise_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=g11_prelaunch_accepted_ready_for_fixed_operator
+formal_compute_status=g11_complete_g12_not_yet_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_11_complete
-latest_iteration_report=docs/report/ITERATION_11.md
+iteration_report_status=iterations_1_to_12_complete
+latest_iteration_report=docs/report/ITERATION_12.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -298,6 +298,16 @@ g11_nonformal_model_state_unchanged_exact=true
 g11_nonformal_all_paired_mismatches=0
 g11_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_SLOT_LAYOUT_INVARIANCE_G11_PRELAUNCH.md
 g11_review_status=no_new_review_no_anomaly
+g11_formal_source_commit=5713af3d477f10c41cb3f1925a2b920dfdc7dd74
+g11_formal_run=logs/formal_slot_layout_g11_cpu_20260723_5713af3_r1
+g11_formal_result=SLOT_LAYOUT_INVARIANT_G11
+g11_operational_valid=true
+g11_dense48_utility_ci95=[0.92529296875,0.9513706931089744,0.9991316105769231]
+g11_all_transformed_paired_mismatches=0
+g11_layout_min_replicate_mean=0.92529296875
+g11_layout_stochastic_mean=0.8969245793269232
+g11_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_SLOT_LAYOUT_INVARIANCE_G11_FORMAL_RESULT.md
+g11_scientific_disposition=closed_success_no_rerun_tuning_or_relabeling
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -380,6 +390,15 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   lower bounds exceed `0.929`; mixed stochastic mean is `0.90999`. Scale
   through N=40 and churn through N=16 are separately supported. Their
   cross-product is the next untested boundary.
+- Formal G10 closes that cross-product as
+  `ROBUST_SCALE_CHURN_COMPOSITION_G10`. The lowest deterministic LCB is
+  `0.92456`, the minimum mixed replicate mean is `0.92725`, and mixed
+  stochastic mean is `0.89633` under N=12--40 with eight edits.
+- Formal G11 closes as `SLOT_LAYOUT_INVARIANT_G11`. Reverse-48, sparse-96 and
+  affine-padded-128 layouts have exactly zero paired persistent, short or
+  utility mismatch against dense-48; the common deterministic LCB is
+  `0.92529`. The nearest remaining dynamic-count question is transport above
+  N=40, not a slot-layout repair.
 
 ## Runtime and protected semantics
 

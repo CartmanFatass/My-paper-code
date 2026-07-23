@@ -1,7 +1,7 @@
 # Slot-layout invariance G11
 
-Status: executable definition and implementation accepted; bounded nonformal
-exercise operationally valid; formal iteration 12 ready.
+Status: formal iteration 12 closed as `SLOT_LAYOUT_INVARIANT_G11`; no rerun,
+tuning, threshold change or relabeling is admissible.
 
 ## Frozen logical source
 
@@ -80,3 +80,24 @@ After operational validity, first match is:
 Invalid evidence returns `INVALID_SLOT_LAYOUT_INVARIANCE_G11` and consumes no
 iteration. Nonformal evidence returns
 `NONFORMAL_SLOT_LAYOUT_G11_EXERCISE_COMPLETE`.
+
+## Closed formal result
+
+The exact source `5713af3d477f10c41cb3f1925a2b920dfdc7dd74`
+completed at
+`logs/formal_slot_layout_g11_cpu_20260723_5713af3_r1`.
+
+```text
+branch=SLOT_LAYOUT_INVARIANT_G11
+operational_valid=true
+dense48_deterministic_utility_ci95=[0.92529296875,0.9513706931089744,0.9991316105769231]
+reverse48_paired_outcome_mismatch_count=0
+sparse96_paired_outcome_mismatch_count=0
+affine_padded128_paired_outcome_mismatch_count=0
+layout_min_replicate_mean=0.92529296875
+layout_stochastic_mean=0.8969245793269232
+```
+
+This closes the registered layout counterexample for N=12--40 and eight-edit
+churn. It does not establish arbitrary-count scaling or reopen any G8--G10
+result.

@@ -6,12 +6,12 @@
 
 ```text
 active_implementation=SLOT_LAYOUT_INVARIANCE_G11
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_SLOT_LAYOUT_INVARIANT
 design=docs/research/designs/SLOT_LAYOUT_INVARIANCE_G11.md
 backend=cpu
 torch_threads=1
 formal_iteration=12
-chain_iterations_remaining_before_run=6
+chain_iterations_remaining_after_run=5
 ```
 
 ## Goal
@@ -54,6 +54,10 @@ The G11 focused suite passes `6/6`; G11 plus shared G5 regression passes
 zero optimizer steps, eight immutable cells, exact source controls and zero
 paired mismatch for every transformed layout.
 
-No additional advisory review is triggered. Integrate this package and assign
-the exact formal commands in the prelaunch note. A valid result consumes
-iteration 12 and leaves five authorized iterations.
+No additional advisory review was triggered. The exact formal pipeline closed
+as `SLOT_LAYOUT_INVARIANT_G11`: all three transformed layouts have zero paired
+outcome mismatches, the deterministic LCB is `0.92529296875`, the minimum
+layout/replicate mean is `0.92529296875`, and stochastic mean is
+`0.8969245793269232`. Iteration 12 is closed and five authorized iterations
+remain. The next active implementation boundary is the zero-training
+`ULTRA_SCALE_OPEN_ROSTER_G12` derivation.
