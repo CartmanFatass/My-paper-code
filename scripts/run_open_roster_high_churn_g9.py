@@ -59,6 +59,7 @@ DEFAULT_G8_RUN_ROOT = PROJECT_ROOT / G8_RUN_RELATIVE
 G8_UPDATES = 250
 G8_NUM_ENVS = 8
 G8_PPO_PASSES = 4
+G8_EVAL_EPISODES = 128
 FORMAL_REPLICATES = 3
 FORMAL_EVAL_EPISODES = 128
 FORMAL_BOOTSTRAP_REPETITIONS = 10_000
@@ -133,7 +134,7 @@ def _validate_g8_provenance(g8_run_root: Path) -> dict[str, Any]:
         "replicates": FORMAL_REPLICATES,
         "updates": G8_UPDATES,
         "num_envs": G8_NUM_ENVS,
-        "eval_episodes": FORMAL_EVAL_EPISODES,
+        "eval_episodes": G8_EVAL_EPISODES,
         "ppo_passes": G8_PPO_PASSES,
         "bootstrap_repetitions": FORMAL_BOOTSTRAP_REPETITIONS,
     }
@@ -425,7 +426,7 @@ def _training_errors(training: dict[str, Any], run_root: Path) -> list[str]:
             "replicates": FORMAL_REPLICATES,
             "updates": G8_UPDATES,
             "num_envs": G8_NUM_ENVS,
-            "eval_episodes": FORMAL_EVAL_EPISODES,
+            "eval_episodes": G8_EVAL_EPISODES,
             "ppo_passes": G8_PPO_PASSES,
             "bootstrap_repetitions": FORMAL_BOOTSTRAP_REPETITIONS,
         }
