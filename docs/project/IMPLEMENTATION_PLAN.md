@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=SCALE_CHURN_COMPOSITION_G10
-implementation_status=FOCUSED_CHECKS_COMPLETE_NONFORMAL_EXERCISE_PENDING
+implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
 design=docs/research/designs/SCALE_CHURN_COMPOSITION_G10.md
 backend=cpu
 torch_threads=1
@@ -50,9 +50,16 @@ domains, exactly 18 formal cells. Retain the 0.90 deterministic LCB, 0.85
 minimum mixed replicate and 0.80 mixed stochastic gates. Test equality and the
 next lower floating-point value under the frozen first-match order.
 
-## Current acceptance boundary
+## Acceptance and formal launch
 
 The G10 focused suite passes `6/6`; the combined G10 plus shared G5 regression
-passes `11/11`. One official bounded nonformal CPU full-path exercise is the
-remaining prelaunch check. A valid formal result will consume iteration 11 and
-leave six authorized iterations; operationally invalid evidence consumes none.
+passes `11/11`. The official bounded nonformal CPU full path at
+`logs/nonformal_scale_churn_g10_20260723_pm2` is operationally valid with zero
+optimizer steps, exact source controls, six immutable cells and the required
+nonformal branch. No additional advisory review is triggered because no
+scientific or runtime anomaly remains.
+
+Integrate the prelaunch package and assign its exact formal iteration-11
+commands to the fixed Luna-low operator. A valid result consumes iteration 11
+and leaves six authorized iterations; operationally invalid evidence consumes
+none.

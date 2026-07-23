@@ -1,7 +1,7 @@
 # Scale-by-churn composition G10
 
-Status: executable definition frozen; focused implementation checks complete;
-bounded nonformal exercise pending.
+Status: executable definition and implementation accepted; bounded nonformal
+exercise operationally valid; formal iteration 11 ready.
 
 ## Frozen policy and source
 
