@@ -25,7 +25,7 @@ The primary comparator is persistent TEAM_REC; DUM is the link-null control.
 
 ## Task 1 — Trainable handoff environment
 
-**Status:** pending.
+**Status:** complete and PM accepted.
 
 Extend `ha_ctse_process/cross_lifecycle_handoff_g2.py` with counter-based
 train/IID/held-out ledgers, exact sign mates, the six-field actor and ten-field
@@ -38,7 +38,7 @@ reward identity; snapshot equality; information-gate preservation.
 
 ## Task 2 — Matched learned arms and PPO
 
-**Status:** pending.
+**Status:** complete and PM accepted.
 
 Create `ha_ctse_process/ehc_handoff_g2.py` with the shared module inventory,
 per-member and team recurrence, CREATE mark, link-specific logits, rollout,
@@ -51,7 +51,7 @@ CPU resume and foreign checkpoint rejection.
 
 ## Task 3 — Runner, audit and first-match analyzer
 
-**Status:** pending.
+**Status:** complete and PM accepted.
 
 Replace `scripts/run_cross_lifecycle_handoff_g2.py` with `train`, `evaluate`,
 `analyze` and `exercise`. Persist only final formal checkpoints, 60 evaluation
@@ -64,7 +64,7 @@ exercise artifact and no import of a G0/G1 selector or schema.
 
 ## Task 4 — Active-line replacement
 
-**Status:** pending until Tasks 1–3 pass.
+**Status:** complete.
 
 Delete the closed G1 executable line:
 
@@ -80,7 +80,7 @@ migration, alias or compatibility test remains.
 
 ## Task 5 — Bounded prelaunch acceptance
 
-**Status:** pending.
+**Status:** complete and PM accepted.
 
 Run only the focused G2 environment/model/runner tests with the registered CPU
 interpreter and one thread, then one fresh reduced `formal=false exercise` that
@@ -95,3 +95,15 @@ invariant; do not weaken the frozen contract or add a broad compatibility suite.
 After acceptance, Project Manager commits and pushes the exact active path set.
 Only that integrated commit may be assigned to the silent experiment operator
 for formal iteration 3. The bounded package consumes zero iterations; three conclusion-bearing iterations remain.
+
+Accepted evidence:
+
+- focused G2 suite: 15 passed;
+- artifact:
+  `logs/nonformal_cross_lifecycle_handoff_g2_trainable_20260723_pm2`;
+- three final checkpoints, 12 evaluation cells, eight post-departure snapshot
+  audits, exact replay and exposure counters;
+- result `formal=false`, `SOURCE_NON_IDENTIFIABLE_HANDOFF_G2`, no operational
+  errors; formal validator rejection confirmed;
+- transient OneDrive progress-replace retry and evidence-tamper failure covered;
+- no `latest.pt`, temporary artifact, G1 compatibility line or formal result.

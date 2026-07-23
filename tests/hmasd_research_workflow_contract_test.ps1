@@ -38,12 +38,12 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION',
+    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_ITERATION_3',
     'iterations_remaining=3',
     'conclusion_bearing_iterations_consumed_by_failed_r1=0',
     'conclusion_bearing_iterations_consumed_by_valid_r2=1',
     'intermediate_authorization_prompts=forbidden',
-    'formal_run_status=g2_not_launched_contract_frozen_implementation_pending',
+    'formal_run_status=g2_ready_after_git_integration',
     'formal_r2_result=ORDINARY_EXPLANATION_G1',
     'formal_r1_status=operationally_invalid_no_scientific_disposition',
     'g2_information_gate_status=PASS_HANDOFF_INFORMATION_GATE_G2',
@@ -56,6 +56,7 @@ foreach ($required in @(
     'active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE',
     'primary comparator is persistent TEAM_REC',
     'CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE',
+    'focused G2 suite: 15 passed',
     'three conclusion-bearing iterations remain')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
@@ -79,6 +80,18 @@ foreach ($text in @($agents, $current, $context, $plan, $agile)) {
     }
     if ($text.Contains('superpowers_execution=enabled')) {
         throw 'Active workflow enables generic Superpowers execution'
+    }
+}
+
+foreach ($retired in @(
+    'ha_ctse_process/temporal_duty_g1.py',
+    'ha_ctse_process/ehc_g1.py',
+    'scripts/run_access_positive_ehc_g1.py',
+    'tests/ha_ctse_process_temporal_duty_g1_test.py',
+    'tests/ha_ctse_process_ehc_g1_test.py',
+    'tests/run_access_positive_ehc_g1_test.py')) {
+    if (Test-Path -LiteralPath (Join-Path $repo $retired)) {
+        throw "Closed G1 executable remains on the active line: $retired"
     }
 }
 

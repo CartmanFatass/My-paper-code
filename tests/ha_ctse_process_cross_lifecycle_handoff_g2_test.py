@@ -1,16 +1,17 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
-import subprocess
-import sys
-
 import pytest
 
 from ha_ctse_process.cross_lifecycle_handoff_g2 import (
+    CrossLifecycleHandoffG2Env,
+    HELDOUT_DUTY_DURATIONS,
+    HELDOUT_GAPS,
     PASS_RESULT,
+    TRAIN_DUTY_DURATIONS,
+    TRAIN_GAPS,
     build_cases,
     evaluate_information_gate,
+    make_episode_spec,
     simulate_handoff,
     validate_cases,
 )
@@ -87,45 +88,75 @@ def test_successor_trace_has_no_bit_or_identity_leakage() -> None:
         assert state.with_held_mark(-case.bit).held_mark == -case.bit
 
 
-def test_nonformal_runner_writes_one_compact_result(tmp_path: Path) -> None:
-    run_root = tmp_path / "handoff-g2"
-    script = Path(__file__).resolve().parents[1] / "scripts" / "run_cross_lifecycle_handoff_g2.py"
-    completed = subprocess.run(
-        [
-            sys.executable,
-            str(script),
-            "exercise",
-            "--output-dir",
-            str(run_root),
-            "--source-commit",
-            "a" * 40,
-        ],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    assert completed.returncode == 0, completed.stderr
+def test_train_iid_heldout_ledgers_are_paired_independent_and_cover_support() -> None:
+    for profile in ("train", "iid", "heldout"):
+        plus = make_episode_spec(profile, base_id=11, sign_mate=1)
+        minus = make_episode_spec(profile, base_id=11, sign_mate=-1)
+        assert minus.bit == -plus.bit
+        assert minus.creator_slot == plus.creator_slot
+        assert minus.successor_slot == plus.successor_slot
+        assert minus.survivor_slot == plus.survivor_slot
+        assert minus.creator_duration == plus.creator_duration
+        assert minus.gap == plus.gap
+        assert minus.successor_duration == plus.successor_duration
+        assert minus.nuisance == plus.nuisance
 
-    artifact = json.loads((run_root / "result.json").read_text(encoding="utf-8"))
-    assert artifact["formal"] is False
-    assert artifact["source_commit"] == "a" * 40
-    assert artifact["result"] == PASS_RESULT
-    assert artifact["case_count"] == 96
-    assert sorted(path.name for path in run_root.iterdir()) == ["result.json"]
-
-    repeated = subprocess.run(
-        [
-            sys.executable,
-            str(script),
-            "exercise",
-            "--output-dir",
-            str(run_root),
-            "--source-commit",
-            "a" * 40,
-        ],
-        check=False,
-        capture_output=True,
-        text=True,
+    train = [make_episode_spec("train", base_id=index, sign_mate=1) for index in range(96)]
+    heldout = [
+        make_episode_spec("heldout", base_id=index, sign_mate=1) for index in range(96)
+    ]
+    assert {spec.gap for spec in train} == set(TRAIN_GAPS)
+    assert {spec.successor_duration for spec in train} == set(TRAIN_DUTY_DURATIONS)
+    assert {spec.gap for spec in heldout} == set(HELDOUT_GAPS)
+    assert {spec.successor_duration for spec in heldout} == set(
+        HELDOUT_DUTY_DURATIONS
     )
-    assert repeated.returncode != 0
-    assert "already exists" in repeated.stderr
+    assert {
+        (spec.creator_slot, spec.successor_slot, spec.survivor_slot)
+        for spec in train + heldout
+    } == {
+        (case.creator_slot, case.successor_slot, case.survivor_slot)
+        for case in build_cases()
+    }
+
+
+def test_trainable_environment_has_no_actor_leak_and_exact_reward_snapshot() -> None:
+    plus_spec = make_episode_spec("heldout", base_id=7, sign_mate=1)
+    minus_spec = make_episode_spec("heldout", base_id=7, sign_mate=-1)
+    plus = CrossLifecycleHandoffG2Env(plus_spec)
+    minus = CrossLifecycleHandoffG2Env(minus_spec)
+
+    assert plus.observe()[plus_spec.creator_slot].actor[0] == plus_spec.bit
+    assert minus.observe()[minus_spec.creator_slot].actor[0] == minus_spec.bit
+    while plus.time < plus_spec.successor_join_time:
+        plus.step(plus.oracle_actions())
+        minus.step(minus.oracle_actions())
+
+    plus_successor = plus.observe()[plus_spec.successor_slot]
+    minus_successor = minus.observe()[minus_spec.successor_slot]
+    assert plus_successor.lifecycle == minus_successor.lifecycle == 1
+    assert plus_successor.actor == minus_successor.actor
+    assert plus_successor.critic != minus_successor.critic
+    assert plus_successor.actor[0:2] == (0.0, 0.0)
+    assert plus_successor.actor[2] == 1.0
+
+    snapshot = plus.snapshot_state()
+    restored = CrossLifecycleHandoffG2Env.from_snapshot(snapshot)
+    assert restored.snapshot_state() == snapshot
+    while not plus.done:
+        plus_result = plus.step(plus.oracle_actions())
+        restored_result = restored.step(restored.oracle_actions())
+        assert plus_result == restored_result
+    assert plus_result["utility"] == 1.0
+    assert plus_result["reward"] == 1.0
+
+    reactive = CrossLifecycleHandoffG2Env(minus_spec)
+    reward_sum = 0.0
+    while not reactive.done:
+        actions = reactive.reactive_actions()
+        if reactive.time >= minus_spec.successor_join_time:
+            actions[minus_spec.successor_slot] = -minus_spec.bit
+        result = reactive.step(actions)
+        reward_sum += float(result["reward"])
+    assert result["utility"] == 0.0
+    assert reward_sum == 0.0

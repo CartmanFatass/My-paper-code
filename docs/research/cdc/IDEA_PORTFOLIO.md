@@ -19,10 +19,10 @@ compute authority.
 ## Scheduled action
 
 ```text
-completed_action=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION
+completed_action=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION
 source_family=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2
 nonformal_disposition=PASS_HANDOFF_INFORMATION_GATE_G2
-next_action=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION
+next_action=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_ITERATION_3
 authorization_status=authorized_under_autonomous_grant
 conclusion_bearing_iterations_consumed=1
 iterations_remaining=3
@@ -30,5 +30,6 @@ iterations_remaining=3
 
 The G2 trainable contract is now frozen. Its primary comparator is persistent
 TEAM_REC, its primary gain is `U_EHC-U_TEAM_REC`, and DUM remains the link-null
-control. Implementation and bounded nonformal acceptance are the active action;
-no formal run has started.
+control. Implementation and bounded nonformal acceptance passed. The exact
+integrated commit is the only remaining precondition for formal iteration 3;
+no formal run has started and three iterations remain.

@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+from copy import deepcopy
 from dataclasses import dataclass, replace
+from hashlib import blake2b
 from itertools import product
-from typing import Iterable
+from typing import Any, Iterable, Mapping
 
 
 SOURCE_FAMILY = "CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2"
@@ -18,6 +20,294 @@ BITS = (-1, 1)
 PHYSICAL_SLOTS = (0, 1, 2)
 CREATOR_DURATIONS = (1, 2)
 SUCCESSOR_DURATIONS = (2, 4)
+
+ACTION_VALUES = (-1, 1)
+ACTOR_WIDTH = 6
+CRITIC_WIDTH = 10
+MAXIMUM_CAPACITY = 3
+TRAIN_GAPS = (1, 2, 3)
+HELDOUT_GAPS = (8, 12)
+TRAIN_DUTY_DURATIONS = (4, 6)
+HELDOUT_DUTY_DURATIONS = (8, 10)
+
+
+@dataclass(frozen=True, slots=True)
+class G2EpisodeSpec:
+    profile: str
+    base_id: int
+    sign_mate: int
+    bit: int
+    creator_slot: int
+    successor_slot: int
+    survivor_slot: int
+    creator_duration: int
+    gap: int
+    successor_duration: int
+    nuisance: tuple[int, ...]
+
+    @property
+    def successor_join_time(self) -> int:
+        return self.creator_duration + self.gap
+
+    @property
+    def horizon(self) -> int:
+        return self.successor_join_time + self.successor_duration
+
+
+@dataclass(frozen=True, slots=True)
+class G2Observation:
+    actor: tuple[float, float, float, float, float, float]
+    critic: tuple[
+        float, float, float, float, float, float, float, float, float, float
+    ]
+    lifecycle: int
+    opportunity_kind: str | None
+
+
+def _checked_nonnegative_int(name: str, value: object) -> int:
+    if type(value) is not int or value < 0:
+        raise ValueError(f"{name} must be a nonnegative integer")
+    return value
+
+
+def _counter_index(seed: int, domain: str, base_id: int, modulo: int) -> int:
+    _checked_nonnegative_int("seed", seed)
+    _checked_nonnegative_int("base_id", base_id)
+    if type(modulo) is not int or modulo <= 0:
+        raise ValueError("modulo must be a positive integer")
+    digest = blake2b(
+        f"{seed}:{domain}:{base_id}".encode("ascii"), digest_size=8
+    ).digest()
+    return int.from_bytes(digest, "little") % modulo
+
+
+def make_episode_spec(
+    profile: str,
+    *,
+    base_id: int,
+    sign_mate: int,
+    task_seed: int = 273101,
+    membership_seed: int = 273201,
+    nuisance_seed: int = 273301,
+) -> G2EpisodeSpec:
+    """Create one paired counter-based train/IID/held-out episode ledger."""
+
+    if profile not in ("train", "iid", "heldout"):
+        raise ValueError("profile must be train, iid, or heldout")
+    base_id = _checked_nonnegative_int("base_id", base_id)
+    if sign_mate not in BITS:
+        raise ValueError("sign_mate must be -1 or +1")
+    for name, seed in (
+        ("task_seed", task_seed),
+        ("membership_seed", membership_seed),
+        ("nuisance_seed", nuisance_seed),
+    ):
+        _checked_nonnegative_int(name, seed)
+
+    root_bit = BITS[_counter_index(task_seed, "bit", base_id, len(BITS))]
+    bit = sign_mate * root_bit
+    creator_duration = CREATOR_DURATIONS[
+        _counter_index(task_seed, "creator_duration", base_id, 2)
+    ]
+    if profile == "heldout":
+        gaps = HELDOUT_GAPS
+        duties = HELDOUT_DUTY_DURATIONS
+    else:
+        gaps = TRAIN_GAPS
+        duties = TRAIN_DUTY_DURATIONS
+    gap = gaps[_counter_index(task_seed, f"{profile}:gap", base_id, len(gaps))]
+    successor_duration = duties[
+        _counter_index(task_seed, f"{profile}:duty", base_id, len(duties))
+    ]
+    mapping = _mapping_support()[
+        _counter_index(membership_seed, f"{profile}:mapping", base_id, 12)
+    ]
+    horizon = creator_duration + gap + successor_duration
+    nuisance = tuple(
+        BITS[_counter_index(nuisance_seed, f"{profile}:nuisance:{time}", base_id, 2)]
+        for time in range(horizon)
+    )
+    return G2EpisodeSpec(
+        profile=profile,
+        base_id=base_id,
+        sign_mate=sign_mate,
+        bit=bit,
+        creator_slot=mapping[0],
+        successor_slot=mapping[1],
+        survivor_slot=mapping[2],
+        creator_duration=creator_duration,
+        gap=gap,
+        successor_duration=successor_duration,
+        nuisance=nuisance,
+    )
+
+
+class CrossLifecycleHandoffG2Env:
+    """Anonymous trainable creator-to-successor handoff source."""
+
+    def __init__(self, spec: G2EpisodeSpec) -> None:
+        if type(spec) is not G2EpisodeSpec:
+            raise TypeError("spec must be an exact G2EpisodeSpec")
+        self.spec = spec
+        self._time = 0
+        self._successor_correct = 0
+        self._successor_rows = 0
+        self._successor_actions: list[int] = []
+
+    @property
+    def done(self) -> bool:
+        return self._time >= self.spec.horizon
+
+    @property
+    def time(self) -> int:
+        return self._time
+
+    def _active_slots(self) -> tuple[int, ...]:
+        if self.done:
+            return ()
+        if self._time < self.spec.creator_duration:
+            return tuple(sorted((self.spec.creator_slot, self.spec.survivor_slot)))
+        if self._time < self.spec.successor_join_time:
+            return (self.spec.survivor_slot,)
+        return tuple(sorted((self.spec.successor_slot, self.spec.survivor_slot)))
+
+    def observe(self) -> dict[int, G2Observation]:
+        if self.done:
+            return {}
+        active_slots = self._active_slots()
+        active_count = len(active_slots)
+        if self._time < self.spec.creator_duration:
+            phase = 0.0
+            remaining_gap = float(self.spec.gap)
+            remaining_duty = float(self.spec.successor_duration)
+        elif self._time < self.spec.successor_join_time:
+            phase = 0.5
+            remaining_gap = float(self.spec.successor_join_time - self._time)
+            remaining_duty = float(self.spec.successor_duration)
+        else:
+            phase = 1.0
+            remaining_gap = 0.0
+            remaining_duty = float(self.spec.horizon - self._time)
+
+        result: dict[int, G2Observation] = {}
+        for slot in active_slots:
+            is_creator = (
+                slot == self.spec.creator_slot
+                and self._time < self.spec.creator_duration
+            )
+            is_successor = (
+                slot == self.spec.successor_slot
+                and self._time >= self.spec.successor_join_time
+            )
+            cue_present = is_creator and self._time == 0
+            join_flag = self._time == 0 or (
+                is_successor and self._time == self.spec.successor_join_time
+            )
+            if is_successor:
+                lifecycle = 1
+                age = self._time - self.spec.successor_join_time
+            else:
+                lifecycle = 0
+                age = self._time
+            actor = (
+                float(self.spec.bit if cue_present else 0),
+                float(cue_present),
+                float(join_flag),
+                float(min(age, 12) / 12),
+                float(active_count / MAXIMUM_CAPACITY),
+                float(self.spec.nuisance[self._time]),
+            )
+            critic = actor + (
+                float(self.spec.bit),
+                phase,
+                float(remaining_duty / 10),
+                float(remaining_gap / 12),
+            )
+            result[slot] = G2Observation(
+                actor=actor,
+                critic=critic,
+                lifecycle=lifecycle,
+                opportunity_kind="CREATE" if cue_present else None,
+            )
+        return result
+
+    def oracle_actions(self) -> dict[int, int]:
+        return {
+            slot: (
+                self.spec.bit
+                if self._time >= self.spec.successor_join_time
+                and slot == self.spec.successor_slot
+                else 1
+            )
+            for slot in self._active_slots()
+        }
+
+    def reactive_actions(self) -> dict[int, int]:
+        return {slot: 1 for slot in self._active_slots()}
+
+    def step(self, actions: Mapping[int, int]) -> dict[str, object]:
+        if self.done:
+            raise RuntimeError("cannot step a completed handoff episode")
+        if not isinstance(actions, Mapping):
+            raise TypeError("actions must be a mapping")
+        active_slots = set(self._active_slots())
+        if set(actions) != active_slots:
+            raise ValueError(f"actions must contain exactly active slots {sorted(active_slots)}")
+        normalized: dict[int, int] = {}
+        for slot, action in actions.items():
+            if type(action) is not int or action not in ACTION_VALUES:
+                raise ValueError("every action must be the integer -1 or +1")
+            normalized[slot] = action
+
+        successor_active = self._time >= self.spec.successor_join_time
+        reward = 0.0
+        successor_action: int | None = None
+        if successor_active:
+            successor_action = normalized[self.spec.successor_slot]
+            reward = float(successor_action == self.spec.bit)
+            self._successor_correct += int(reward)
+            self._successor_rows += 1
+            self._successor_actions.append(successor_action)
+
+        self._time += 1
+        done = self.done
+        utility = (
+            self._successor_correct / self._successor_rows
+            if done and self._successor_rows
+            else None
+        )
+        return {
+            "reward": reward,
+            "done": done,
+            "successor_action": successor_action,
+            "utility": utility,
+        }
+
+    def snapshot_state(self) -> dict[str, Any]:
+        return deepcopy(
+            {
+                "schema": "cross_lifecycle_handoff_g2_env_state_v1",
+                "spec": self.spec,
+                "time": self._time,
+                "successor_correct": self._successor_correct,
+                "successor_rows": self._successor_rows,
+                "successor_actions": tuple(self._successor_actions),
+            }
+        )
+
+    @classmethod
+    def from_snapshot(cls, snapshot: Mapping[str, Any]) -> "CrossLifecycleHandoffG2Env":
+        copied = deepcopy(dict(snapshot))
+        if copied.pop("schema", None) != "cross_lifecycle_handoff_g2_env_state_v1":
+            raise ValueError("snapshot schema mismatch")
+        environment = cls(copied.pop("spec"))
+        environment._time = copied.pop("time")
+        environment._successor_correct = copied.pop("successor_correct")
+        environment._successor_rows = copied.pop("successor_rows")
+        environment._successor_actions = list(copied.pop("successor_actions"))
+        if copied or not 0 <= environment._time <= environment.spec.horizon:
+            raise ValueError("snapshot contents are invalid")
+        return environment
 
 
 @dataclass(frozen=True, slots=True)

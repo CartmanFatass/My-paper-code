@@ -1,7 +1,7 @@
 # CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2
 
-Status: bounded information gate passed; trainable G2 formal evidence contract
-frozen by Project Manager; implementation pending.
+Status: bounded information gate passed; formal evidence contract frozen;
+trainable implementation and nonformal prelaunch accepted by Project Manager.
 
 ## Provenance and correction
 
