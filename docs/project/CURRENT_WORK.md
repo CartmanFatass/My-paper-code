@@ -23,30 +23,31 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_INFORMATION_GATE
-active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION
+last_completed_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION
+active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION
 accepted_source_commit=de9a315b4969ee6920be08a3d911d559fe362f03
-implementation_base_commit=849b1e9ca3b0f619ecb1076c12a3eb1146f37209
-next_boundary=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION
+implementation_base_commit=f54ffb643beb6d1acc925cde8e424533dfef5080
+next_boundary=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION
 iterations_remaining=3
 conclusion_bearing_iterations_consumed_by_failed_r1=0
 conclusion_bearing_iterations_consumed_by_valid_r2=1
 autonomous_research_grant=ACTIVE
 grant_scope=remaining_three_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
-implementation_status=G2_INFORMATION_GATE_PM_ACCEPTED
+implementation_status=G2_TRAINABLE_AUTHORIZED
 nonformal_compute_status=authorized
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=not_launchable_until_next_evidence_contract_is_frozen
+formal_compute_status=not_launchable_until_g2_implementation_acceptance
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
-formal_evidence_contract_status=G1_EXECUTED_AND_CLOSED
-formal_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
-formal_implementation_status=PM_ACCEPTED_PRELAUNCH
-formal_run_status=r2_complete_valid_ordinary_explanation_g1
+closed_g1_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
+formal_evidence_contract_status=G2_PM_FROZEN_IMPLEMENTATION_PENDING
+formal_evidence_contract=docs/research/designs/CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2.md
+formal_implementation_status=G2_PENDING
+formal_run_status=g2_not_launched_contract_frozen_implementation_pending
 formal_r2_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_de9a315_r2
 formal_r2_result=ORDINARY_EXPLANATION_G1
 formal_r2_operational_valid=true
@@ -60,8 +61,12 @@ g2_information_gate_status=PASS_HANDOFF_INFORMATION_GATE_G2
 g2_information_gate_artifact=logs/nonformal_cross_lifecycle_handoff_g2_20260723_pm2/result.json
 g2_information_gate_iteration_cost=0
 g2_primary_comparator=TEAM_REC
-next_action_class=zero_compute_design
-next_action_evidence=docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_INFORMATION_GATE.md
+g2_primary_estimand=U_EHC_minus_U_TEAM_REC
+g2_link_estimand=U_EHC_minus_U_DUM
+g2_access_floor=0.80
+g2_gain_margin=0.10
+next_action_class=implementation_and_bounded_nonformal_acceptance
+next_action_evidence=docs/research/designs/CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2.md
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -96,8 +101,11 @@ combined with r2.
 - The G2 gate proves fresh per-member recurrence is information-limited to 0.5,
   but TEAM_REC and EHC both constructively attain 1.0. TEAM_REC is therefore the
   mandatory strongest comparator for any trainable G2 claim.
-- The active zero-compute task freezes that trainable comparison; formal
-  iteration 3 is not launchable until its contract and implementation pass.
+- The trainable contract is now frozen with TEAM_REC as primary comparator and EHC-minus-
+  TEAM_REC as primary gain.
+- G2 implementation and a bounded nonformal exercise are active. Formal
+  iteration 3 is not launchable until Project Manager accepts and integrates
+  that exact implementation.
 - Three conclusion-bearing iterations remain.
 
 ## Runtime and protected semantics
@@ -110,12 +118,14 @@ backend=cpu
 ```
 
 There is no CUDA fallback, backend mixing, cross-backend resume, or CPU/CUDA
-equivalence requirement. Preserve the closed G0 source; OR/DUM/EHC;
-`primitive_logits = base_logits + W_z(m*z)`; primary
-`G = U_EHC - U_DUM`; anonymous membership/lifecycle semantics; reward,
-observation, probability factorization, gradients/detach, clocks, RNG, replay,
-checkpoint meaning, seeds, budgets, thresholds, bootstrap, causal gates, and
-first-match result precedence.
+equivalence requirement. Preserve every closed G0/G1 source, estimand and result.
+The active G2 contract uses TEAM_REC/DUM/EHC, retains
+`primitive_logits = base_logits + W_z(m*z)` for EHC, and freezes primary
+`G_team = U_EHC - U_TEAM_REC` plus link control
+`G_link = U_EHC - U_DUM`. Preserve its anonymous membership/lifecycle semantics,
+reward, observation, probability factorization, gradients/detach, clocks, RNG,
+replay, checkpoint meaning, seeds, budgets, thresholds, bootstrap, causal gates,
+and first-match result precedence.
 
 ## Concurrency
 

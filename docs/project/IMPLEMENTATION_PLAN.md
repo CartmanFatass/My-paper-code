@@ -1,86 +1,97 @@
-# Cross-lifecycle commitment handoff G2 implementation plan
+# Cross-lifecycle handoff G2 trainable implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution and workflow hash handoffs are disabled.
 
 ```text
-active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_INFORMATION_GATE
-implementation_status=AUTHORIZED_NONFORMAL
+active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE
+implementation_status=AUTHORIZED
 design=docs/research/designs/CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2.md
 backend=cpu
 torch_threads=1
-formal_run_status=not_launchable_until_trainable_contract_is_frozen
-G1_mutation=forbidden
+formal_run_status=not_launchable_until_implementation_acceptance
+G0_G1_mutation=forbidden
 backward_compatibility=not_required
 ```
 
 ## Goal
 
-Implement the smallest deterministic proof that creator-only information is
-lost by fresh per-member recurrence at terminal handoff, while both team
-recurrence and an event-held team commitment can carry it. This is a no-training
-information gate, not formal iteration 3.
+Implement the frozen TEAM_REC/DUM/EHC comparison and its fail-closed formal
+analyzer. Keep the passed information gate as source-control logic, then remove
+superseded G1 executable code/tests after G2 acceptance because Git history and
+formal artifacts preserve G1.
 
-## Owned active line
+The primary comparator is persistent TEAM_REC; DUM is the link-null control.
 
-- create `ha_ctse_process/cross_lifecycle_handoff_g2.py`;
-- create `scripts/run_cross_lifecycle_handoff_g2.py`;
-- create `tests/ha_ctse_process_cross_lifecycle_handoff_g2_test.py`;
-- update only the active project/CDC contract paths required by acceptance.
+## Task 1 — Trainable handoff environment
 
-No G0/G1 source, learner, checkpoint, runner, result selector or test is changed.
+**Status:** pending.
 
-## Task 1 — Exhaustive source and information proof
+Extend `ha_ctse_process/cross_lifecycle_handoff_g2.py` with counter-based
+train/IID/held-out ledgers, exact sign mates, the six-field actor and ten-field
+critic views, nuisance independence, membership transitions, reward/utility,
+snapshot/restore and constructive controls.
 
-**Status:** complete and PM accepted.
+**Focused proof:** distribution support and independence; no actor leakage;
+creator terminal deletion; same/cross-slot successor reset; team/held ownership;
+reward identity; snapshot equality; information-gate preservation.
 
-Enumerate the balanced bit, creator/successor/survivor packing, same-slot reuse,
-cross-slot transfer and heterogeneous lifetime cases from the design. Expose an
-exact successor-visible trace key and compute its Bayes-optimal bit accuracy.
-Reject missing sign mates, identity leakage, nonzero successor initial state or
-unbalanced physical mappings.
+## Task 2 — Matched learned arms and PPO
 
-**Proof-sized tests:** exact case inventory and a deleted-sign-mate negative.
+**Status:** pending.
 
-## Task 2 — Constructive controls and intervention
+Create `ha_ctse_process/ehc_handoff_g2.py` with the shared module inventory,
+per-member and team recurrence, CREATE mark, link-specific logits, rollout,
+stored-draw replay, GAE/PPO, gradient fences, counters and CPU checkpoint.
 
-**Status:** complete and PM accepted.
+**Focused proof:** matched initialization/parameters/exposure; exact TEAM_REC,
+DUM and EHC logit paths; member/team/held reset rules; no critic leakage; replay
+equality and corruption rejection; finite joint ratios/gradients; same-source
+CPU resume and foreign checkpoint rejection.
 
-Evaluate PER_MEMBER_REC, DUM, TEAM_REC, EHC and RANDOM_MARK without optimization.
-Snapshot after creator departure and flip only the event-held mark under the same
-future schedule.
+## Task 3 — Runner, audit and first-match analyzer
 
-**Proof-sized tests:** exact natural utilities, mark-flip action change/utility
-drop, creator-state deletion, successor zero initialization and team-state
-survival.
+**Status:** pending.
 
-## Task 3 — Nonformal runner
+Replace `scripts/run_cross_lifecycle_handoff_g2.py` with `train`, `evaluate`,
+`analyze` and `exercise`. Persist only final formal checkpoints, 60 evaluation
+cells, compact source controls and held-out EHC snapshot interventions. Rederive
+all predicates and call one pure first-match selector.
 
-**Status:** complete and PM accepted.
+**Focused proof:** exact inventory, paired hierarchical bootstrap, selector
+precedence, evidence/reference/schema tamper negatives, formal rejection of an
+exercise artifact and no import of a G0/G1 selector or schema.
 
-Write one compact JSON artifact containing the design identity, `formal=false`,
-case inventory, exact metrics, invariant list and first-match result. Reject an
-existing output root and do not persist per-case traces.
+## Task 4 — Active-line replacement
 
-**Bounded exercise:** CPU one thread, one deterministic invocation, no Torch,
-training, checkpoint, RNG or formal flag.
+**Status:** pending until Tasks 1–3 pass.
 
-## Acceptance
+Delete the closed G1 executable line:
 
-Project Manager runs the focused test file and one fresh exercise, inspects the
-implementation for identity leakage, hidden-state carryover, task-specific
-reward, accidental randomness and excess persistence, then accepts or repairs.
+- `ha_ctse_process/temporal_duty_g1.py`;
+- `ha_ctse_process/ehc_g1.py`;
+- `scripts/run_access_positive_ehc_g1.py`;
+- `tests/ha_ctse_process_temporal_duty_g1_test.py`;
+- `tests/ha_ctse_process_ehc_g1_test.py`;
+- `tests/run_access_positive_ehc_g1_test.py`.
 
-`PASS_HANDOFF_INFORMATION_GATE_G2` advances only to a separate trainable
-TEAM_REC/DUM/EHC evidence-contract definition. It consumes zero iterations;
-three conclusion-bearing iterations remain. Formal CPU execution remains under
-the standing user grant but is not launchable from this information gate.
+Retain G1 design, evidence note, formal artifacts and Git history. No reader,
+migration, alias or compatibility test remains.
 
-Accepted evidence:
+## Task 5 — Bounded prelaunch acceptance
 
-- focused test: 4 passed;
-- artifact: `logs/nonformal_cross_lifecycle_handoff_g2_20260723_pm2/result.json`;
-- 96 exhaustive cases, exact sign mates and 12 physical mappings;
-- PER_MEMBER_REC/DUM/RANDOM_MARK `0.5`, TEAM_REC/EHC `1.0`;
-- held-mark flip action change and utility drop `1.0`;
-- `formal=false`, no training, optimizer, checkpoint or RNG.
+**Status:** pending.
+
+Run only the focused G2 environment/model/runner tests with the registered CPU
+interpreter and one thread, then one fresh reduced `formal=false exercise` that
+covers collection, replay, one PPO update, checkpoint reload, all three arms,
+evaluation, intervention and analyzer rejection.
+
+Project Manager inspects actor/critic separation, identity leakage, RNG draw
+ownership, recurrent contamination, held-state persistence, rollout packing,
+scalar transfer, synchronization and serial evaluation. Repair the first failed
+invariant; do not weaken the frozen contract or add a broad compatibility suite.
+
+After acceptance, Project Manager commits and pushes the exact active path set.
+Only that integrated commit may be assigned to the silent experiment operator
+for formal iteration 3. The bounded package consumes zero iterations; three conclusion-bearing iterations remain.

@@ -1,7 +1,7 @@
 # CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2
 
-Status: bounded information gate passed and Project Manager accepted; no formal
-G2 contract is frozen yet.
+Status: bounded information gate passed; trainable G2 formal evidence contract
+frozen by Project Manager; implementation pending.
 
 ## Provenance and correction
 
@@ -117,5 +117,168 @@ After a pass, freeze a separate trainable G2 evidence contract with:
 - exact budgets, seeds, thresholds and first-match branches chosen before any
   conclusion-bearing run.
 
-Until that later contract is frozen, formal compute is not launchable. Three
-conclusion-bearing iterations remain.
+## Frozen trainable G2 contract
+
+This section freezes formal iteration 3. It is an independent source and does
+not rescue G0 or G1.
+
+### Scientific question
+
+Under anonymous creator-to-successor turnover, does event-conditioned held state
+learn and transport the creator bit better than both a link-null control and a
+persistent team recurrent state, especially across longer unseen handoff gaps?
+
+The claim is an inductive-bias and robustness claim, not an expressivity claim.
+TEAM_REC is constructively sufficient and is the strongest primary comparator.
+
+### Source distribution
+
+Every episode has one fair sign-mated bit, one creator, one neutral survivor and
+one anonymous successor. Physical packing uses the 12 mappings from the passed
+information gate and is never actor-visible.
+
+- Creator lifetime support is `{1,2}` active steps. The bit is visible only to
+  the creator at its first step, which is the single CREATE opportunity.
+- The creator terminally leaves; the survivor remains during a gap; the
+  successor then JOINs with zero member state.
+- Training and IID gap support is `{1,2,3}` and successor duty support is `{4,6}`.
+- Held-out gap support is `{8,12}` and successor duty support is `{8,10}`.
+- A fair nuisance sign changes during the gap independently of the target bit,
+  packing and lifetimes. It is actor-visible with `cue_present=0` and prevents a
+  degenerate constant team-memory input without carrying target information.
+- External reward is one for each correct successor duty action and zero
+  otherwise. Episode utility is successor accuracy. Creator/survivor actions
+  receive zero reward. There is no intrinsic reward or shaping.
+
+Actor input has exactly six anonymous fields: cue value, cue-present flag,
+JOIN flag, normalized lifecycle age, normalized active count and nuisance sign.
+It excludes physical/logical identity, target after CREATE, phase name, remaining
+lifetime and reward history. The centralized critic adds target bit, phase
+coordinate, remaining duty and remaining gap for ten fields total; critic fields
+never enter an actor, event or treatment path.
+
+### Matched learned arms
+
+All arms instantiate the same 32-wide actor encoder, per-member GRU, anonymous
+mean-pooled 32-wide team GRU, primitive head, centralized critic, CREATE mark
+head, team treatment `W_T`, and event-held treatment `W_z`. Initialization,
+parameter count, observations, rewards, rollout exposure, PPO passes and RNG
+namespaces are matched.
+
+- `TEAM_REC`: primitive logits are `base_logits + W_T(h_team)`. The team GRU
+  updates every environment step and survives member turnover. The sampled mark
+  is recorded but has no primitive path.
+- `DUM`: primitive logits are `base_logits`. Team recurrence and the sampled
+  mark are recorded but neither treatment reaches primitive logits.
+- `EHC`: primitive logits are `base_logits + W_z(m*z)`. CREATE samples
+  `m in {-1,+1}` from creator features; signed learned embedding `m*z` is held
+  unchanged across terminal LEAVE, gap and successor JOIN. Team recurrence is
+  recorded but has no primitive path.
+
+Unused links remain instantiated but receive no gradient through primitive
+behavior. Event/mark PPO exposure is matched across arms. Primitive action
+probability and CREATE mark probability form the declared joint policy; stored
+draw replay owns their exact old log probabilities. Per-member state deletes on
+terminal LEAVE, freezes only on temporary absence, and resets at a new JOIN.
+Team and held state reset only at episode start.
+
+Use the accepted G1 optimizer contract unchanged: Adam `3e-4`, gamma `0.99`,
+GAE lambda `0.95`, PPO clip/value clip `0.20`, value coefficient `0.50`, primitive
+and mark entropy coefficient `0.01`, gradient clip `0.50`, and four full-rollout
+passes. This reuse is implementation control, not a G1 rescue.
+
+### Budget, provenance and backend
+
+```text
+replicates=5
+environments=16
+horizon=64
+updates=160
+episodes_per_arm_minimum=2560
+ppo_passes=4
+evaluation_episodes_per_cell=256
+evaluation_profiles=iid_deterministic,iid_stochastic,heldout_deterministic,heldout_stochastic
+bootstrap_repetitions=10000
+backend=cpu
+torch=2.7.0+cpu
+torch_threads=1
+```
+
+One fixed seed registry owns model initialization, source ledgers, nuisance,
+primitive draws, mark draws, evaluation, audit and bootstrap, with a disjoint
+offset per replicate. Numeric seed labels are implementation-only provenance:
+changing them before launch cannot change an estimand, but after launch they are
+frozen and never swept. No CPU/CUDA comparison or cross-backend resume exists.
+
+### Estimands and source identification
+
+For each arm, primary utility `U` is held-out deterministic successor accuracy.
+The primary gain is `G_team = U_EHC - U_TEAM_REC`; the link gain is
+`G_link = U_EHC - U_DUM`. Use paired hierarchical bootstrap over replicate and
+sign-mated source clusters for means and 95% intervals.
+
+Before gain interpretation, formal evidence must reproduce the information
+gate, both constructive oracle utilities `1.0`, fresh per-member/reactive bound
+`0.5`, exact sign/mapping/lifetime balance, actor-trace bit independence, creator
+state deletion and successor zero initialization. It must also contain at least
+128 natural held-out EHC successor episodes per replicate.
+
+The access floor remains `0.80`; the meaningful gain margin remains `0.10`.
+These are the only result-scale thresholds.
+
+### Minimal EHC consequence battery
+
+On held-out EHC episodes, record:
+
+- natural CREATE mark accuracy `P(m=b)`;
+- exact-snapshot held-mark flip action-TV across the full successor sequence;
+- paired natural-minus-flipped successor utility;
+- deterministic held-out EHC utility.
+
+The support battery passes only when mark-accuracy LCB is above `0.75`, both
+flip action-TV and utility-drop LCBs are above `0.10`, and held-out EHC utility
+LCB reaches `0.80`. These consequences do not replace either gain estimand.
+
+### First-match result
+
+Apply exactly in this order:
+
+1. `INVALID_OPERATIONAL_HANDOFF_G2`: any runtime, finite-value, probability,
+   gradient, replay, lifecycle, state ownership, RNG, checkpoint, backend,
+   reference or schema invariant fails.
+2. `SOURCE_NON_IDENTIFIABLE_HANDOFF_G2`: any information-gate, constructive
+   control, balance, anonymity or natural-quota predicate fails.
+3. `NO_ACCESS_HANDOFF_G2`: maximum arm utility UCB is strictly below `0.80`.
+4. `UNDERPOWERED_ACCESS_HANDOFF_G2`: maximum arm LCB is below `0.80` while its
+   UCB reaches `0.80`.
+5. `EHC_HANDOFF_SUPPORTED_G2`: both gain LCBs exceed `0.10` and the complete
+   consequence battery passes.
+6. `TEAM_REC_SUFFICIENT_HANDOFF_G2`: `UCB(G_team) <= 0.10`.
+7. `LINK_NULL_HANDOFF_G2`: `UCB(G_link) <= 0.10`.
+8. `REPRESENTATION_ONLY_HANDOFF_G2`: both gain LCBs exceed `0.10` and at least
+   one battery interval confidently fails its threshold.
+9. `MIXED_UNDERPOWERED_HANDOFF_G2`: every other valid numerical pattern.
+
+A battery interval confidently fails only when its UCB is at or below the
+registered threshold. Crossing intervals fall through to mixed/underpowered.
+No lower-precedence diagnostic relabels an earlier branch.
+
+### Artifact and launch contract
+
+The active runner exposes `train`, `evaluate`, `analyze` and reduced `exercise`.
+A conclusion requires `formal=true`, the exact integrated 40-character source
+commit, five complete replicates, final update-160 checkpoints, 60 evaluation
+cells, source controls, held-out audit rows and 10,000 bootstrap repetitions.
+The analyzer rederives metrics and first-match selection from referenced rows.
+Per-file hashes are not an authority gate.
+
+`exercise` is always `formal=false`, uses reduced counts, covers collection,
+replay, one optimization, checkpoint reload, evaluation and analysis, and must
+be rejected by formal validation. The formal authorization token is
+`AUTHORIZE_CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_FORMAL_CPU_V1`.
+
+Formal iteration 3 becomes launchable only after Project Manager accepts the
+implementation and bounded exercise on one integrated source commit. The
+registered silent experiment operator then owns exactly one foreground
+`train -> evaluate -> analyze` run. Three conclusion-bearing iterations remain
+until a valid formal G2 result is produced.

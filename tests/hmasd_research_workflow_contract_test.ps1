@@ -38,12 +38,12 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION',
+    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_IMPLEMENTATION',
     'iterations_remaining=3',
     'conclusion_bearing_iterations_consumed_by_failed_r1=0',
     'conclusion_bearing_iterations_consumed_by_valid_r2=1',
     'intermediate_authorization_prompts=forbidden',
-    'formal_run_status=r2_complete_valid_ordinary_explanation_g1',
+    'formal_run_status=g2_not_launched_contract_frozen_implementation_pending',
     'formal_r2_result=ORDINARY_EXPLANATION_G1',
     'formal_r1_status=operationally_invalid_no_scientific_disposition',
     'g2_information_gate_status=PASS_HANDOFF_INFORMATION_GATE_G2',
@@ -52,10 +52,10 @@ foreach ($required in @(
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=not_launchable_until_trainable_contract_is_frozen',
-    'active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_INFORMATION_GATE',
-    'PASS_HANDOFF_INFORMATION_GATE_G2',
-    'TEAM_REC/DUM/EHC evidence-contract definition',
+    'formal_run_status=not_launchable_until_implementation_acceptance',
+    'active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE',
+    'primary comparator is persistent TEAM_REC',
+    'CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE',
     'three conclusion-bearing iterations remain')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
