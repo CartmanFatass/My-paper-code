@@ -43,6 +43,8 @@ from ha_ctse_process.open_roster_high_churn_g9 import (
 SCHEMA_VERSION = 1
 ALGORITHM_ID = "HIGH_FREQUENCY_ROSTER_CHURN_G9"
 AUTHORIZATION_TOKEN = "AUTHORIZE_HIGH_FREQUENCY_ROSTER_CHURN_G9_FORMAL_CPU_V1"
+INVALID_BRANCH = "INVALID_HIGH_FREQUENCY_CHURN_G9"
+NONFORMAL_BRANCH = "NONFORMAL_HIGH_FREQUENCY_CHURN_G9_EXERCISE_COMPLETE"
 G8_ALGORITHM_ID = "PREFIX_NORMALIZED_OPEN_ROSTER_G8"
 G8_SOURCE_COMMIT = "fcce714c296c55f3dcb5a0c0ee11090b393c26ba"
 G8_AUTHORIZATION_TOKEN = "AUTHORIZE_PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_CPU_V1"
@@ -582,7 +584,7 @@ def analyze(*, run_root: Path) -> dict[str, Any]:
     errors = _training_errors(training, run_root) + _evaluation_errors(training, evaluation)
     operational_valid = not errors
     metrics: dict[str, Any] = {}
-    branch = "INVALID_HIGH_FREQUENCY_CHURN_G9"
+    branch = INVALID_BRANCH
     if operational_valid:
         cells = evaluation["cells"]
         for domain in DOMAIN_FLOORS:
@@ -612,7 +614,7 @@ def analyze(*, run_root: Path) -> dict[str, Any]:
         branch = (
             select_result_branch(metrics)
             if bool(training["formal"])
-            else "NONFORMAL_HIGH_FREQUENCY_CHURN_G9_EXERCISE_COMPLETE"
+            else NONFORMAL_BRANCH
         )
     result = {
         "schema_version": SCHEMA_VERSION,

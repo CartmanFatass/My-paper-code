@@ -1,81 +1,58 @@
-# High-frequency roster churn G9 implementation plan
+# Scale-by-churn composition G10 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution, compatibility work and workflow hashes are
 > disabled.
 
 ```text
-active_implementation=HIGH_FREQUENCY_ROSTER_CHURN_G9
-implementation_status=FORMAL_CLOSED_ROBUST_HIGH_FREQUENCY_CHURN_G9
-design=docs/research/designs/HIGH_FREQUENCY_ROSTER_CHURN_G9.md
+active_implementation=SCALE_CHURN_COMPOSITION_G10
+implementation_status=FOCUSED_CHECKS_COMPLETE_NONFORMAL_EXERCISE_PENDING
+design=docs/research/designs/SCALE_CHURN_COMPOSITION_G10.md
 backend=cpu
 torch_threads=1
-formal_iteration=10
-chain_iterations_remaining_before_run=8
+formal_iteration=11
+chain_iterations_remaining_before_run=7
 ```
 
 ## Goal
 
-Test whether the usable G8 prefix-normalized policy survives eight membership
-edits, repeated absence/rejoin cycles and membership changes at short-wave
-boundaries. This is a zero-training stress evaluation of frozen G8 finals, not
-a new algorithm fit or a rescue of any closed result.
+Test whether the separately supported G8 count-scale and G9 high-churn
+properties compose in one episode. Freeze the same G8 finals, train nothing and
+place eight roster edits across active counts through 40.
 
-## Task 1 - Replace the completed G8 active line
+## Task 1 - Parameterize the accepted churn source
 
-Remove the G8-specific stress module, runner and test after preserving its
-result in Git, reports and formal artifacts. Keep the shared
-`DirectPrimitiveARPolicy(autoregressive_prefix="active_fraction")` implementation
-as the active algorithm. Add only the three G9 churn profiles and their exact
-lifecycle transition machinery.
+Retain the G9 event, lifecycle, ledger and environment machinery as the shared
+active core. Parameterize each profile with its capacity and maximum active
+count without changing the exact G9 profile values. Add only the three G10
+large-count profiles.
 
-Focused proof: simulate every transition; reject collisions and terminal
-lifecycle reuse; require exact active-count schedules, post-event wave demand
-and a constructive utility-one controller.
+Focused proof: simulate every transition, reject event collisions, lifecycle
+reuse and understated count bounds, and require exact count ranges, post-event
+wave demand and constructive utility one.
 
-## Task 2 - Import, do not train
+## Task 2 - Reuse one frozen-checkpoint evaluator
 
-Require the exact successful G8 source, result branch, representation, CPU
-runtime, counts and three update-250 final checkpoints. Copy those checkpoints
-into a fresh G9 run root and require bitwise-identical model state. Record zero
-optimizer steps.
+Reuse the G9 import/evaluate/analyze implementation by configuring an explicit
+G10 contract: algorithm identity, domains, seeds, thresholds and terminal
+branches. Do not duplicate checkpoint or artifact validation. Each process has
+one activated contract; the formal G9 source remains preserved by its commit
+and artifacts and is never rerun.
 
-Focused proof: repeated temporary absence freezes hidden state at every absent
-step; rejoin restores it; genuine join starts from zero; terminal leave remains
-inactive. Evaluation must not change model state.
+Focused proof: G10 identity reaches manifests and branches; imported G8 state
+is exact; optimizer steps remain zero; lifecycle freeze/restore and evaluation
+immutability hold at capacities 32 and 48.
 
-## Task 3 - Freeze evidence and first-match semantics
+## Task 3 - Freeze result semantics
 
-Evaluate deterministic and stochastic policy behavior on `repeated_rejoin`,
-`load_proximal` and `mixed_churn`, for exactly 18 formal cells. Validate exact
-episode/profile inventories, source-control rows and serialized means. Apply
-the frozen first-match order from the G9 design. Threshold equality passes and
-the immediately lower floating-point value fails.
+Evaluate deterministic and stochastic behavior across the three registered
+domains, exactly 18 formal cells. Retain the 0.90 deterministic LCB, 0.85
+minimum mixed replicate and 0.80 mixed stochastic gates. Test equality and the
+next lower floating-point value under the frozen first-match order.
 
-## Acceptance and formal launch
+## Current acceptance boundary
 
-The G9 focused suite passes `6/6`; the combined G9 plus shared G5 regression
-passes `11/11`. The official bounded nonformal CPU `train(import) -> evaluate ->
-analyze` exercise at
-`logs/nonformal_high_frequency_churn_g9_20260723_pm2` is operationally valid.
-It records zero optimizer steps, exact checkpoint copying, three passing source
-controls, six immutable evaluation cells and the required nonformal branch.
-
-No advisory review is added because the focused reproducer, shared regression
-and complete bounded path show no concrete anomaly. Integrate this accepted
-source and assign the exact formal iteration-10 pipeline in the prelaunch note
-to the fixed Luna-low operator.
-
-The valid formal result consumes iteration 10 and leaves seven authorized
-iterations. Operationally invalid evidence would have consumed none.
-
-## Formal closure and successor
-
-Source `ff7461fd2b0f3cfb7ad13a5f6f2730eb6bac3d99` completed all 18 registered
-cells and returned `ROBUST_HIGH_FREQUENCY_CHURN_G9`. The three deterministic
-CI95 lower bounds are `0.9309692`, `0.9294434` and `0.9299316`; mixed stochastic
-mean is `0.9099933`. G9 is closed without rerun or tuning.
-
-The next active boundary is zero-compute
-`SCALE_CHURN_COMPOSITION_G10_DERIVATION`. This plan does not yet freeze its
-large-count profiles or result gates.
+The G10 focused suite passes `6/6`; the combined G10 plus shared G5 regression
+passes `11/11`. One official bounded nonformal CPU full-path exercise is the
+remaining prelaunch check. A valid formal result will consume iteration 11 and
+leave six authorized iterations; operationally invalid evidence consumes none.

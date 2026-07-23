@@ -58,10 +58,11 @@ class ChurnProfile:
     initial_join: tuple[int, ...]
     events: tuple[ChurnEvent, ...]
     capacity: int = CHURN_CAPACITY
+    maximum_active_count: int = MAXIMUM_ACTIVE_COUNT
 
     def validate(self) -> None:
-        if self.capacity != CHURN_CAPACITY:
-            raise ValueError("G9 capacity differs from the frozen contract")
+        if not 2 <= int(self.maximum_active_count) <= int(self.capacity):
+            raise ValueError("churn capacity/count bound is invalid")
         if (
             len(self.initial_join) < 2
             or len(set(self.initial_join)) != len(self.initial_join)
@@ -100,8 +101,8 @@ class ChurnProfile:
             if active_count < 2:
                 raise ValueError("G9 churn profile emptied the useful roster")
             maximum = max(maximum, active_count)
-        if maximum > MAXIMUM_ACTIVE_COUNT:
-            raise ValueError("G9 profile exceeds the frozen count range")
+        if maximum > self.maximum_active_count:
+            raise ValueError("churn profile exceeds its frozen count range")
 
     def active_count_at(self, time: int) -> int:
         status = [NOT_JOINED] * self.capacity
