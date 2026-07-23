@@ -11,7 +11,7 @@ torch_threads=1
 formal=true
 result=USABLE_OPEN_ROSTER_DIRECT_G5
 conclusion_bearing_iteration=6
-iterations_remaining=7
+iterations_remaining=11
 ```
 
 ## Evidence closure
@@ -68,5 +68,5 @@ checkpoint without tuning or relabeling G5.
 ```text
 scientific_disposition=closed_success_no_rerun_tuning_or_threshold_change
 next_boundary=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION
-iterations_remaining=7
+iterations_remaining=11
 ```

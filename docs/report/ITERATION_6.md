@@ -87,8 +87,8 @@ USABLE_OPEN_ROSTER_DIRECT_G5
 
 ## 下一边界与迭代计数
 
-G5 按原合同永久闭合作为成功结果，不重跑、不调门槛、不用后续结果改写。本轮消耗新链
-8 次中的第 1 次，尚余 7 次。下一步是零训练的
+G5 按原合同永久闭合作为成功结果，不重跑、不调门槛、不用后续结果改写。用户随后把
+动态-roster 自动研究链扩展为 12 次；本轮是其中第 1 次，尚余 11 次。下一步是零训练的
 `OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION`：定义如何用冻结的 G5 checkpoint
 分离“更大未见 agent 数量”与“未见 membership 事件时刻”的外推能力，再决定是否需要
 最小的 count-normalized 算法修正。异步技能周期继续冻结。
@@ -96,6 +96,6 @@ G5 按原合同永久闭合作为成功结果，不重跑、不调门槛、不�
 ```text
 conclusion_bearing_iterations_consumed_total=6
 new_chain_iterations_consumed=1
-iterations_remaining=7
+iterations_remaining=11
 next_boundary=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION
 ```

@@ -21,17 +21,17 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ```text
 last_completed_assignment_id=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
-active_assignment_id=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION
-next_boundary=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_EXECUTABLE_DEFINITION
-autonomous_research_grant=ACTIVE_EIGHT_ITERATION_DYNAMIC_ROSTER_CHAIN
+active_assignment_id=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_PRELAUNCH_GIT_INTEGRATION
+next_boundary=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_ITERATION_7
+autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=7
+iterations_remaining=11
 conclusion_bearing_iterations_consumed=6
-implementation_status=G5_CLOSED_SUCCESS_G6_DERIVATION_ACTIVE
-nonformal_compute_status=complete_operational_valid
+implementation_status=G6_PM_ACCEPTED_FORMAL_READY
+nonformal_compute_status=g6_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=authorized_after_next_evidence_contract_freeze
+formal_compute_status=authorized_after_g6_implementation_git_integration
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=zero_compute_algorithmic_derivation
+next_action_class=implementation_and_bounded_nonformal_acceptance
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -105,8 +105,8 @@ g4_g_team_ci95=[0.00302734375,0.04111328125]
 g4_scientific_disposition=closed_no_rerun_tuning_threshold_or_budget_rescue
 previous_chain_terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE
 new_chain_authorized_by_user=true
-new_chain_iterations=8
-new_chain_report_range=ITERATION_6_to_ITERATION_13
+new_chain_iterations=12
+new_chain_report_range=ITERATION_6_to_ITERATION_17
 primary_research_axis=dynamic_agent_count
 asynchronous_skill_lifetime_status=frozen_out_of_active_scope
 skill_controller_status=removed_from_mvp
@@ -134,6 +134,21 @@ g5_heldout_stochastic_mean=0.9737067945075756
 g5_heldout_final_minus_zero_ci95=[0.48288796164772724,0.5434274384469696,0.6483043323863636]
 g5_scientific_disposition=closed_success_no_rerun_tuning_or_threshold_change
 g6_candidate_question=zero_shot_count_scale_and_membership_event_time_transport
+g6_derivation=docs/research/cdc/EVIDENCE_NOTES/20260723_OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION.md
+g6_formal_contract=docs/research/designs/OPEN_ROSTER_ZERO_SHOT_SCALE_G6.md
+g6_authorization_token=AUTHORIZE_OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_CPU_V1
+g6_training_operation=none_frozen_g5_checkpoint_import
+g6_formal_eval_episodes=128
+g6_formal_eval_cells=18
+g6_focused_tests=7_passed
+g6_combined_g5_tests=12_passed
+g6_nonformal_exercise=logs/nonformal_open_roster_zero_shot_g6_20260723_pm2
+g6_nonformal_result=NONFORMAL_OPEN_ROSTER_G6_EXERCISE_COMPLETE
+g6_nonformal_operational_valid=true
+g6_nonformal_optimizer_steps=0
+g6_nonformal_model_state_unchanged_exact=true
+g6_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_OPEN_ROSTER_ZERO_SHOT_SCALE_G6_PRELAUNCH.md
+g6_review_result=REPAIR_ACCEPTED
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -179,7 +194,7 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
 - All five conclusion-bearing iterations are consumed. The chain establishes
   causal state sensitivity in G2-G4 but no robust EHC/roster advantage over
   ordinary recurrence under the tested sources and frozen PPO budgets.
-- The user has now authorized a separate eight-iteration chain whose primary
+- The user has now authorized a separate twelve-iteration chain whose primary
   axis is dynamic agent count. Asynchronous skill lifetime is frozen, not
   rejected; no active skill controller or skill-advantage claim is carried into
   the MVP.

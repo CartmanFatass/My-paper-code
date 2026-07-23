@@ -23,10 +23,10 @@ compute authority.
 completed_action=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
 source_family=OPEN_ROSTER_ZERO_SHOT_SCALE_G6
 formal_disposition=USABLE_OPEN_ROSTER_DIRECT_G5
-next_action=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION
-authorization_status=eight_iteration_dynamic_roster_grant_active
+next_action=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_ITERATION_7
+authorization_status=twelve_iteration_dynamic_roster_grant_active
 conclusion_bearing_iterations_consumed=6
-iterations_remaining=7
+iterations_remaining=11
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
