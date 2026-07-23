@@ -1,199 +1,86 @@
-# Access-positive mechanism-matched EHC G1 implementation plan
+# Cross-lifecycle commitment handoff G2 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution and workflow hash handoffs are disabled.
 
 ```text
-active_implementation=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1
-implementation_status=PM_ACCEPTED_PRELAUNCH
-design=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
+active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_INFORMATION_GATE
+implementation_status=AUTHORIZED_NONFORMAL
+design=docs/research/designs/CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2.md
 backend=cpu
 torch_threads=1
-formal_run_status=complete_valid_ordinary_explanation_g1
-G0_mutation=forbidden
+formal_run_status=not_launchable_until_trainable_contract_is_frozen
+G1_mutation=forbidden
 backward_compatibility=not_required
 ```
 
-**Goal:** replace the completed synthetic G1 measurement prototype with the
-smallest independent learned OR/DUM/EHC source, trainer, evaluator, causal
-audit, and first-match analyzer that instantiate the frozen formal contract.
+## Goal
 
-**Architecture:** `temporal_duty_g1.py` owns stochastic exogenous ledgers and
-the anonymous environment. A new `ehc_g1.py` owns the separated actor/critic,
-event-held state, collection, replay, PPO and checkpoints. A new formal runner
-owns train/evaluate/analyze artifact schemas. G0 remains untouched.
+Implement the smallest deterministic proof that creator-only information is
+lost by fresh per-member recurrence at terminal handoff, while both team
+recurrence and an event-held team commitment can carry it. This is a no-training
+information gate, not formal iteration 3.
 
-## Global invariants
+## Owned active line
 
-- Exact six-field actor input; critic tensors never enter actor/event paths.
-- Segment success is both 75% whole-segment accuracy and final-two correctness.
-- Reward sum equals `U=0.75A+0.25B`; no intrinsic reward.
-- JOIN/reset, temporary freeze/restore, terminal censor and opportunity clocks
-  follow the design.
-- OR/DUM/EHC base initialization is matched; DUM/EHC event exposure is matched;
-  only EHC executes `W_z(m*z)`.
-- Separate RNG namespaces, stored-draw replay, CPU one-thread checkpoint fence.
-- Access and source identification precede every mechanism interpretation.
-- No per-file hash handshake, compatibility layer, G0 import, or legacy schema.
+- create `ha_ctse_process/cross_lifecycle_handoff_g2.py`;
+- create `scripts/run_cross_lifecycle_handoff_g2.py`;
+- create `tests/ha_ctse_process_cross_lifecycle_handoff_g2_test.py`;
+- update only the active project/CDC contract paths required by acceptance.
 
-## Task 1 — Formal temporal-duty source
+No G0/G1 source, learner, checkpoint, runner, result selector or test is changed.
+
+## Task 1 — Exhaustive source and information proof
 
 **Status:** complete and PM accepted.
 
-**Own:**
+Enumerate the balanced bit, creator/successor/survivor packing, same-slot reuse,
+cross-slot transfer and heterogeneous lifetime cases from the design. Expose an
+exact successor-visible trace key and compute its Bayes-optimal bit accuracy.
+Reject missing sign mates, identity leakage, nonzero successor initial state or
+unbalanced physical mappings.
 
-- Modify `ha_ctse_process/temporal_duty_g1.py`.
-- Replace `tests/ha_ctse_process_temporal_duty_g1_test.py`.
+**Proof-sized tests:** exact case inventory and a deleted-sign-mate negative.
 
-**Implement:** formal train/IID/held-out ledgers, sign mates, stochastic duty and
-opportunity streams, exact actor/critic views, lifecycle transitions, corrected
-completion, reward identity, snapshot/restore, oracle and history-free controls.
-
-**Focused proof:** distribution balance/independence, no leakage, cue expiry,
-75%+last-two boundary, membership pattern transport, freeze/restore, censoring,
-reward identity, RNG ownership, source-identification controls.
-
-## Task 2 — Learned arms and collection
+## Task 2 — Constructive controls and intervention
 
 **Status:** complete and PM accepted.
 
-**Own:**
+Evaluate PER_MEMBER_REC, DUM, TEAM_REC, EHC and RANDOM_MARK without optimization.
+Snapshot after creator departure and flip only the event-held mark under the same
+future schedule.
 
-- Create `ha_ctse_process/ehc_g1.py`.
-- Create `tests/ha_ctse_process_ehc_g1_test.py`.
+**Proof-sized tests:** exact natural utilities, mark-flip action change/utility
+drop, creator-state deletion, successor zero initialization and team-state
+survival.
 
-**Implement:** separated 6-field actor and 10-field critic, 32-unit recurrent
-base, OR/DUM/EHC masks, event/mark heads, commitment lifecycle, exact
-factorization, stochastic/deterministic draws, 16x80 collection and natural
-KEEP/RENEW/spell records.
-
-**Focused proof:** matched initialization/capacity/exposure, EHC-only logit
-treatment, actor/critic separation, hidden/reset/freeze ownership, action/event/
-mark probability support, no extra RNG draw, row provenance and mixed lifecycle
-packing.
-
-## Task 3 — Replay, PPO and checkpoint
+## Task 3 — Nonformal runner
 
 **Status:** complete and PM accepted.
 
-**Own:** same Task-2 files.
+Write one compact JSON artifact containing the design identity, `formal=false`,
+case inventory, exact metrics, invariant list and first-match result. Reject an
+existing output root and do not persist per-case traces.
 
-**Implement:** stored-draw replay, joint ratios, GAE, four full-rollout PPO
-passes, base/event gradient fences, optimizer counters, atomic rolling/final
-checkpoint and exact CPU resume.
+**Bounded exercise:** CPU one thread, one deterministic invocation, no Torch,
+training, checkpoint, RNG or formal flag.
 
-**Focused proof:** replay equality and corruption negatives, detach/parameter
-ownership, finite ratios/gradients, counter/exposure totals, RNG restoration,
-same-backend continuation and foreign/non-G1 checkpoint rejection.
+## Acceptance
 
-## Task 4 — Formal runner, audit and result
+Project Manager runs the focused test file and one fresh exercise, inspects the
+implementation for identity leakage, hidden-state carryover, task-specific
+reward, accidental randomness and excess persistence, then accepts or repairs.
 
-**Status:** complete and PM accepted.
+`PASS_HANDOFF_INFORMATION_GATE_G2` advances only to a separate trainable
+TEAM_REC/DUM/EHC evidence-contract definition. It consumes zero iterations;
+three conclusion-bearing iterations remain. Formal CPU execution remains under
+the standing user grant but is not launchable from this information gate.
 
-**Own:**
+Accepted evidence:
 
-- Create `scripts/run_access_positive_ehc_g1.py`.
-- Create `tests/run_access_positive_ehc_g1_test.py`.
-
-**Implement:** `train`, `evaluate`, `analyze`, and bounded `exercise` commands;
-exact manifests and reference closure; four evaluation cells; oracle/reactive
-controls; 10,000 paired hierarchical bootstrap; held-out EHC causal branches;
-the independent eight-branch G1 selector.
-
-**Focused proof:** exact exposure/evaluation inventories, cluster resampling,
-natural quotas, K/I-TV/C-total definitions, selector equality and exhaustive
-first-match precedence, schema/tamper rejection, nonformal exercise rejection by
-formal analyzer, and no G0 result/schema import.
-
-## Task 5 — Active-line deletion
-
-**Status:** complete.
-
-After Tasks 1--4 pass, delete:
-
-- `ha_ctse_process/ehc_sequence_mediation_g1.py`;
-- `scripts/run_ehc_sequence_mediation_prototype_g1.py`;
-- `tests/ha_ctse_process_ehc_sequence_mediation_g1_test.py`;
-- `tests/run_ehc_sequence_mediation_prototype_g1_test.py`.
-
-Keep the prototype design, CDC evidence note, and Git history. Update workflow
-contract tests to the new active implementation only.
-
-## Task 6 — Bounded prelaunch acceptance
-
-**Status:** complete and PM accepted.
-
-Run the focused G1 suite with the registered CPU interpreter and one thread,
-then one small `formal=false exercise` covering collection, replay, one PPO
-update, checkpoint reload, evaluation, causal audit and analyzer rejection.
-Inspect the changed path for leakage, RNG drift, recurrent contamination,
-scalar transfer, repeated packing, premature synchronization, excess
-persistence and serial evaluation.
-
-Project Manager freezes the final artifact/command contract and accepts or
-repairs the package. The exercise consumes zero conclusion-bearing iterations.
-After acceptance, Project Manager may assign the already-authorized formal CPU
-run to the registered `hmasd-experiment-operator` without another user prompt.
-
-Accepted nonformal evidence:
-
-- artifact: `logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2`;
-- focused suite: 36 passed;
-- exercise: CPU one thread, one update, three final checkpoints, 12 reduced
-  evaluation cells, two causal-audit continuations, eight bootstrap repetitions;
-- result: `formal=false`, `SOURCE_NON_IDENTIFIABLE_G1`, no operational errors;
-- formal validator: rejected the exercise because `formal=true` was absent.
-
-The accepted analyzer persists cluster-level source-control utilities and
-recomputes source summaries, episode/audit metrics, source identifiability,
-predicate inputs and first-match selection from referenced evidence. Observed
-evidence supplies all point estimates; bootstrap samples supply confidence
-bounds only. A formal `analyze` command validates this complete binding before
-it can return success.
-
-The formal command contract is `train -> evaluate -> analyze`, all against one
-fresh run directory. `train` requires the exact integrated 40-character source
-commit and authorization token
-`AUTHORIZE_ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_CPU_V1`; all three
-commands use the registered CPU interpreter and one thread. Project Manager
-fills only the integrated commit and fresh run-directory identity, then gives
-the immutable commands to the registered Luna-low experiment operator. The
-operator remains silent while waiting on the foreground process and returns
-once at COMPLETE or ERROR. No scientific field or result gate is filled at
-launch time.
-
-## Task 7 — Operational r1 repair and clean r2
-
-**Status:** complete and PM accepted.
-
-The first r1 attempt exited during atomic `progress.json` replacement with
-`PermissionError: [WinError 5]`. It produced no evaluation or analysis and
-consumed no conclusion-bearing iteration. The operational repair keeps the
-existing temporary-file-plus-atomic-replace semantics, retries only
-`PermissionError` for a bounded five-second window, preserves the previous
-destination on exhaustion, and removes the temporary file.
-
-The separate monitoring session is replaced by the registered
-`hmasd-experiment-operator`. It keeps train/evaluate/analyze in the foreground,
-does not repeatedly open a live writer's progress file, emits no intermediate
-messages, and returns exactly one terminal payload. After the repair source is
-committed, use a fresh r2 run root; never resume the r1 checkpoint across the
-source commit.
-
-After the native registry reload, the exact `hmasd-experiment-operator` ran the
-fresh r2 pipeline at source `de9a315b4969ee6920be08a3d911d559fe362f03`.
-Train, evaluate and analyze all returned zero. The validator closed 15 final
-checkpoints and 60 evaluation files and reproduced
-`ORDINARY_EXPLANATION_G1`. Both gain UCBs were `0.0026465277`, so the exact G1
-source is closed without rescue and three conclusion-bearing iterations remain.
-
-## Task 8 — Result correction and next algorithmic boundary
-
-**Status:** complete and PM accepted.
-
-Record the formal closure and derive the smallest counterexample correction.
-Within-lifecycle cue memory is reducible to ordinary recurrence; the next source
-must instead transport a task-relevant commitment across an anonymous
-creator-to-successor lifecycle handoff. The next executable-definition task is
-zero-compute and may not launch formal iteration 3 until its evidence contract
-is frozen.
+- focused test: 4 passed;
+- artifact: `logs/nonformal_cross_lifecycle_handoff_g2_20260723_pm2/result.json`;
+- 96 exhaustive cases, exact sign mates and 12 physical mappings;
+- PER_MEMBER_REC/DUM/RANDOM_MARK `0.5`, TEAM_REC/EHC `1.0`;
+- held-mark flip action change and utility drop `1.0`;
+- `formal=false`, no training, optimizer, checkpoint or RNG.

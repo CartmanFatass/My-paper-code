@@ -23,17 +23,18 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=EHC_RECURRENCE_REDUCTION_COUNTEREXAMPLE_DERIVATION
-active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION
+last_completed_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_INFORMATION_GATE
+active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION
 accepted_source_commit=de9a315b4969ee6920be08a3d911d559fe362f03
-next_boundary=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION
+implementation_base_commit=849b1e9ca3b0f619ecb1076c12a3eb1146f37209
+next_boundary=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION
 iterations_remaining=3
 conclusion_bearing_iterations_consumed_by_failed_r1=0
 conclusion_bearing_iterations_consumed_by_valid_r2=1
 autonomous_research_grant=ACTIVE
 grant_scope=remaining_three_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
-implementation_status=authorized
+implementation_status=G2_INFORMATION_GATE_PM_ACCEPTED
 nonformal_compute_status=authorized
 formal_compute_authority=standing_user_grant_cpu_only
 formal_compute_status=not_launchable_until_next_evidence_contract_is_frozen
@@ -55,8 +56,12 @@ formal_r2_gain_ucb=0.0026465277
 formal_r2_scientific_disposition=closed_no_rerun_tuning_rename_or_rescue
 formal_r1_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1
 formal_r1_status=operationally_invalid_no_scientific_disposition
+g2_information_gate_status=PASS_HANDOFF_INFORMATION_GATE_G2
+g2_information_gate_artifact=logs/nonformal_cross_lifecycle_handoff_g2_20260723_pm2/result.json
+g2_information_gate_iteration_cost=0
+g2_primary_comparator=TEAM_REC
 next_action_class=zero_compute_design
-next_action_evidence=docs/research/cdc/EVIDENCE_NOTES/20260723_ACCESS_POSITIVE_EHC_G1_FORMAL_RESULT.md
+next_action_evidence=docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_INFORMATION_GATE.md
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -87,7 +92,12 @@ combined with r2.
 - C-EHC remains live only where task-relevant state must survive an anonymous
   lifecycle handoff after the creator's recurrent state is unavailable.
 - The next zero-compute boundary defines that information-ownership separation;
-  no G1 rescue or immediate iteration-3 run is admissible.
+  the bounded gate passed without launching iteration 3.
+- The G2 gate proves fresh per-member recurrence is information-limited to 0.5,
+  but TEAM_REC and EHC both constructively attain 1.0. TEAM_REC is therefore the
+  mandatory strongest comparator for any trainable G2 claim.
+- The active zero-compute task freezes that trainable comparison; formal
+  iteration 3 is not launchable until its contract and implementation pass.
 - Three conclusion-bearing iterations remain.
 
 ## Runtime and protected semantics

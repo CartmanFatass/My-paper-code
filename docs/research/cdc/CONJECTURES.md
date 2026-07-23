@@ -24,6 +24,9 @@ the Project Manager-accepted CDC state.
 - Strongest simpler explanation: ordinary recurrence, added capacity, random
   event timing, exogenous opportunity spacing, or a useful mark with arbitrary
   renewal timing carries the observed effect.
+- G2 information gate: fresh per-member recurrence is bounded at 0.5 after an
+  anonymous terminal handoff, but persistent team recurrence and EHC both attain
+  1.0. TEAM_REC is now the strongest required comparator.
 
 ## C-REC — Ordinary recurrence is sufficient
 
@@ -34,6 +37,9 @@ the Project Manager-accepted CDC state.
   are adequate.
 - Separating evidence: matched capacity and information with held-out dynamic
   membership/lifetime evaluation.
+- Scope correction: per-member recurrence loses creator-only information at a
+  terminal handoff, but team recurrence can carry it. Future evidence must
+  compare EHC against TEAM_REC rather than claim representational impossibility.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -63,6 +69,8 @@ the Project Manager-accepted CDC state.
   access, credit and coordination explanations.
 - Separating evidence: a constructive policy or alternative task family that
   changes identification without changing the algorithm claim.
+- G2 information gate: the anonymous handoff source passes its deterministic
+  information boundary and is eligible for a separate trainable contract.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 

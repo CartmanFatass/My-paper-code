@@ -38,7 +38,7 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION',
+    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_TRAINABLE_CONTRACT_DEFINITION',
     'iterations_remaining=3',
     'conclusion_bearing_iterations_consumed_by_failed_r1=0',
     'conclusion_bearing_iterations_consumed_by_valid_r2=1',
@@ -46,15 +46,16 @@ foreach ($required in @(
     'formal_run_status=r2_complete_valid_ordinary_explanation_g1',
     'formal_r2_result=ORDINARY_EXPLANATION_G1',
     'formal_r1_status=operationally_invalid_no_scientific_disposition',
+    'g2_information_gate_status=PASS_HANDOFF_INFORMATION_GATE_G2',
+    'g2_primary_comparator=TEAM_REC',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=complete_valid_ordinary_explanation_g1',
-    'bounded five-second window',
-    'hmasd-experiment-operator',
-    'emits no intermediate',
-    'fresh r2 run root',
+    'formal_run_status=not_launchable_until_trainable_contract_is_frozen',
+    'active_implementation=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_INFORMATION_GATE',
+    'PASS_HANDOFF_INFORMATION_GATE_G2',
+    'TEAM_REC/DUM/EHC evidence-contract definition',
     'three conclusion-bearing iterations remain')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
