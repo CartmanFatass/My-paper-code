@@ -1,7 +1,7 @@
 # USEFUL_EFFECT_ROSTER_G3
 
-Status: formal evidence contract frozen; implementation and formal compute have
-not started.
+Status: formal evidence contract frozen; implementation and bounded nonformal
+acceptance are Project-Manager accepted; formal compute has not started.
 
 ## Scientific provenance
 
@@ -199,8 +199,9 @@ The access floor is `0.90`; the meaningful gain margin is `0.10`.
 On heldout-joint ROSTER_ATTN decisions, record:
 
 - natural optimal-effect probability and deterministic utility;
-- exact-snapshot replacement of one standing effect with the natural selected
-  effect while keeping query, demand, membership, packing and future duty fixed;
+- exact-snapshot replacement of one standing effect with the source-optimal
+  deficit effect while keeping query, demand, membership, packing and future
+  duty fixed;
 - edit-distribution TV between natural and intervened standing rosters;
 - natural-choice replay utility versus adapted-choice utility under the
   intervened roster; and

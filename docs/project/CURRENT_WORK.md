@@ -20,18 +20,18 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=USEFUL_EFFECT_ROSTER_G3_EXECUTABLE_DEFINITION
-active_assignment_id=USEFUL_EFFECT_ROSTER_G3_IMPLEMENTATION
-next_boundary=USEFUL_EFFECT_ROSTER_G3_IMPLEMENTATION
+last_completed_assignment_id=USEFUL_EFFECT_ROSTER_G3_IMPLEMENTATION
+active_assignment_id=USEFUL_EFFECT_ROSTER_G3_FORMAL_ITERATION_4
+next_boundary=USEFUL_EFFECT_ROSTER_G3_FORMAL_ITERATION_4
 autonomous_research_grant=ACTIVE
 grant_scope=remaining_two_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
 iterations_remaining=2
 conclusion_bearing_iterations_consumed=3
-implementation_status=G3_USEFUL_EFFECT_AUTHORIZED
-nonformal_compute_status=authorized
+implementation_status=G3_USEFUL_EFFECT_PM_ACCEPTED
+nonformal_compute_status=complete
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=not_launchable_until_g3_implementation_acceptance
+formal_compute_status=launchable_after_integrated_source_commit
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=proof_sized_implementation_and_nonformal_exercise
+next_action_class=conclusion_bearing_formal_cpu_run
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -66,6 +66,11 @@ g3_primary_estimand=U_ROSTER_ATTN_minus_U_TEAM_REC
 g3_access_floor=0.90
 g3_gain_margin=0.10
 g3_formal_authorization_token=AUTHORIZE_USEFUL_EFFECT_ROSTER_G3_FORMAL_CPU_V1
+g3_implementation_tests=11_passed
+g3_nonformal_exercise=logs/nonformal_useful_effect_roster_g3_20260723_pm1
+g3_nonformal_result=SOURCE_NON_IDENTIFIABLE_USEFUL_ROSTER_G3
+g3_nonformal_operational_valid=true
+g3_nonformal_formal_validator_rejection=true
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -97,9 +102,10 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
 - The zero-training G3 information gate passed and retains TEAM_REC as a complete
   simpler explanation. Its uniqueness utility is structural only and cannot be
   promoted as useful complementarity.
-- The useful-effect formal contract is frozen. It replaces label diversity with
-  realized service effects and demand-served external utility, keeps TEAM_REC as
-  the primary comparator and is ready for proof-sized implementation.
+- The useful-effect implementation is Project-Manager accepted. It replaces
+  label diversity with realized service effects and demand-served external
+  utility, retains TEAM_REC as the primary comparator, and is ready for one
+  integrated-source formal CPU assignment.
 
 ## Runtime and protected semantics
 
@@ -134,7 +140,10 @@ callback receipts are forbidden.
 
 - `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — authority.
 - `.agents/roles/EXPERIMENT_OPERATOR.md` — silent single-run contract.
-- `docs/project/IMPLEMENTATION_PLAN.md` — active useful-effect implementation.
+- `docs/project/IMPLEMENTATION_PLAN.md` — accepted useful-effect implementation
+  and prelaunch evidence.
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_USEFUL_EFFECT_ROSTER_G3_PRELAUNCH.md`
+  — bounded nonformal acceptance and formal launch boundary.
 - `docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md` — frozen learned/formal
   evidence contract.
 - `docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md` — frozen gate.
