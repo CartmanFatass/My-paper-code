@@ -13,7 +13,7 @@ torch_threads=1
 primary_comparator=ROSTER_ATTN
 mission_comparator=TEAM_REC
 primary_estimand=U_ROSTER_SUM_minus_U_ROSTER_ATTN
-formal_run_status=launchable_from_integrated_source
+formal_run_status=completed_no_access
 closed_G0_G1_G2_G3_mutation=forbidden
 backward_compatibility=not_required
 ```
@@ -89,3 +89,14 @@ may be assigned to the silent experiment operator with token
 `AUTHORIZE_COUNT_PRESERVING_ROSTER_G4_FORMAL_CPU_V1`. A valid run consumes the
 fifth and final conclusion-bearing iteration and requires the Chinese
 `docs/report/ITERATION_5.md` before terminal project disposition.
+
+## Formal disposition
+
+The integrated source completed formal iteration 5 at
+`logs/formal_count_preserving_roster_g4_cpu_20260723_64a04fa_r1`. All
+operational and source-identification checks pass. ROSTER_SUM utility CI95 is
+`[0.8580078, 0.8875]`, so its UCB is below the frozen 0.90 access floor. The
+registered result is `NO_ACCESS_COUNT_ROSTER_G4`. The count-preserving
+correction does not improve ROSTER_ATTN: `G_attn` CI95 is
+`[-0.0243164, 0.0119141]`. The exact package is closed, all five
+conclusion-bearing iterations are consumed, and no successor is active.

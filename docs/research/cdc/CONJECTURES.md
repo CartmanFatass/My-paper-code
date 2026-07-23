@@ -6,10 +6,10 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: formal G3 is validly underpowered on access and establishes no learned
-  advantage. The independent G4 correction is launch-ready: it preserves the
-  source and makes absolute roster multiplicity a direct additive policy path,
-  with ROSTER_ATTN and TEAM_REC retained as matched comparators.
+- Status: unsupported after the five-iteration chain. G2 proves an event-held
+  link can be causal, but ordinary recurrence is sufficient in G1/G2 and neither
+  G3 attention nor G4 count preservation establishes robust roster access or
+  advantage.
 - Claim: under genuinely asynchronous partial edits, an unordered roster of
   lifecycle-owned commitments may improve learning and held-out transport when
   value depends on complementarity among retained and newly selected records.
@@ -28,10 +28,9 @@ the Project Manager-accepted CDC state.
 - Gate correction: uniqueness utility is structural only.
   `CE-DIVERSITY-AS-UTILITY` requires the learned source to score realized useful
   effects under demand states where duplicate commitments can be optimal.
-- G3 correction: softmax-normalized roster attention is not accepted as a
-  stable count-sensitive editor merely because its mean exceeds ordinary
-  controls. The next candidate must preserve absolute multiset multiplicity and
-  show cross-seed access before gain or mediation is interpreted.
+- G3/G4 correction: neither softmax-normalized attention nor direct absolute
+  multiset counts is accepted as a stable editor. `CE-COUNT-PRESERVATION-AS-
+  SOLUTION` forbids treating a count-sufficient interface as learned competence.
 
 ## C-REC — Ordinary recurrence is sufficient
 
@@ -50,8 +49,9 @@ the Project Manager-accepted CDC state.
 
 ## C-BASE — The shared base policy class is insufficient
 
-- Status: live for other source families but rejected as the explanation of
-  formal G1, where all three arms accessed the source above the `0.80` floor.
+- Status: live and strengthened as an optimization/access explanation for the
+  identified G3/G4 useful-effect source, while still rejected for formal G1
+  where every arm accessed above the `0.80` floor.
 - Claim: the shared recurrent actor, critic, primitive distribution or state
   representation may be unable to express or stabilize the required policy;
   the EHC adapter cannot repair every common base limitation.
@@ -60,8 +60,8 @@ the Project Manager-accepted CDC state.
 
 ## C-CREDIT — Temporal credit is the bottleneck
 
-- Status: live generally but unsupported as a rescue of formal G1; all three
-  arms learned high utility and the EHC-specific gain was confidently null.
+- Status: live generally but not selected for the one-step G4 decision, where
+  delayed temporal credit is absent. It remains unsupported as a rescue of G1.
 - Claim: representation is adequate but primitive-step credit cannot assign
   delayed consequences to asynchronous events.
 - Separating evidence: representation held fixed while only a well-defined
@@ -69,10 +69,9 @@ the Project Manager-accepted CDC state.
 
 ## C-BENCH — The benchmark is not identifying
 
-- Status: the useful-effect G3 source is identified, but learned access is
-  underpowered. Formal G1 shows that individual cue memory does not identify EHC
-  over per-member recurrence; formal G2 shows that one global handoff bit does
-  not identify EHC over team recurrence.
+- Status: the useful-effect G3/G4 source is identified while learned access is
+  underpowered/no-access. Formal G1 and G2 separately show that cue memory and a
+  global handoff bit do not identify EHC over ordinary recurrence.
 - Claim: current benchmark/control pairs do not separate representation,
   access, credit and coordination explanations.
 - Separating evidence: a constructive policy or alternative task family that
@@ -83,18 +82,18 @@ the Project Manager-accepted CDC state.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 
-- Status: G3 shows a causal roster response without registered access or a
-  >0.10 advantage. ROSTER_ATTN mean utility is highest, but one training seed
-  produces a large held-out failure and exact optimal-choice probability is low.
+- Status: causal roster response without registered competence. G3 and G4 both
+  change policy under roster intervention, yet G3 access is underpowered and G4
+  count-preserving access fails; neither establishes a >0.10 advantage.
 - Claim: the important variable-N difficulty is joint complementary allocation,
   not an individual lifetime mechanism in isolation.
 - Separating evidence: a roster-only intervention changes an asynchronous
   editor's demand-served effect and value, followed by natural and held-out
   transport beyond matched TEAM_REC and NO_ROSTER explanations. Duplicate-
   optimal demand prevents label diversity from satisfying the claim.
-- Next correction: the permutation-invariant, count-preserving multiset encoder
-  is implemented under the unchanged budget. Formal evidence must establish its
-  own access before any gain or mediation interpretation.
+- Next correction under any new user authority: hold the count-sufficient
+  representation fixed and separate policy optimization/access from
+  representation before returning to a mechanism-gain claim.
 
 ## C-LINK-NULL — Commitment is not load-bearing for the source family
 
@@ -132,3 +131,6 @@ the Project Manager-accepted CDC state.
 - G3 gate correction: `CE-DIVERSITY-AS-UTILITY` separates a causal roster edit
   from task-useful complementary effects; formal evidence must measure demand
   served rather than label uniqueness.
+- G3/G4 correction: `CE-CAUSAL-RESPONSE-WITHOUT-COMPETENCE` shows that positive
+  roster intervention TV can coexist with underpowered/no-access natural
+  behavior and cannot substitute for competence or mediation.

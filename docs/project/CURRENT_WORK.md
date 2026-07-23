@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=COUNT_PRESERVING_ROSTER_G4_IMPLEMENTATION
-active_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
-next_boundary=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
-autonomous_research_grant=ACTIVE
-grant_scope=remaining_one_conclusion_bearing_iteration
+last_completed_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
+active_assignment_id=FIVE_ITERATION_CHAIN_COMPLETE
+next_boundary=USER_AUTHORITY_REQUIRED_FOR_NEW_RESEARCH_CHAIN
+autonomous_research_grant=EXHAUSTED
+grant_scope=none
 intermediate_authorization_prompts=forbidden
-iterations_remaining=1
-conclusion_bearing_iterations_consumed=4
-implementation_status=G4_COUNT_PRESERVING_PM_ACCEPTED
+iterations_remaining=0
+conclusion_bearing_iterations_consumed=5
+implementation_status=G4_COUNT_PRESERVING_CLOSED_NO_ACCESS
 nonformal_compute_status=complete
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=launchable_after_integrated_source_commit
+formal_compute_status=complete_no_remaining_authority
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_4_complete
-latest_iteration_report=docs/report/ITERATION_4.md
+iteration_report_status=iterations_1_to_5_complete
+latest_iteration_report=docs/report/ITERATION_5.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=conclusion_bearing_final_formal_cpu_run
+next_action_class=terminal_project_disposition
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -94,6 +94,16 @@ g4_nonformal_exercise=logs/nonformal_count_preserving_roster_g4_20260723_pm1
 g4_nonformal_result=SOURCE_NON_IDENTIFIABLE_COUNT_ROSTER_G4
 g4_nonformal_operational_valid=true
 g4_nonformal_formal_validator_rejection=true
+g4_formal_source_commit=64a04fafd5abd4e2955382063a97bff290548513
+g4_formal_run=logs/formal_count_preserving_roster_g4_cpu_20260723_64a04fa_r1
+g4_formal_result=NO_ACCESS_COUNT_ROSTER_G4
+g4_formal_operational_valid=true
+g4_formal_source_identifiable=true
+g4_roster_sum_utility_ci95=[0.8580078125,0.8875]
+g4_g_attn_ci95=[-0.02431640625,0.0119140625]
+g4_g_team_ci95=[0.00302734375,0.04111328125]
+g4_scientific_disposition=closed_no_rerun_tuning_threshold_or_budget_rescue
+terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -134,8 +144,14 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   evaluation-row scarcity, motivates a count-preserving roster derivation.
 - The count-preserving G4 correction is implemented and PM-accepted under the
   unchanged source, reward, budget and thresholds. `ROSTER_SUM` exposes current
-  commitment multiplicity through a permutation-invariant count skip and is
-  ready for the integrated-source final formal iteration.
+  commitment multiplicity through a permutation-invariant count skip. Its exact
+  formal result is NO_ACCESS and it does not improve ROSTER_ATTN.
+- All five conclusion-bearing iterations are consumed. The chain establishes
+  causal state sensitivity in G2-G4 but no robust EHC/roster advantage over
+  ordinary recurrence under the tested sources and frozen PPO budgets.
+- No successor action is authorized. A new chain would need explicit user scope;
+  the smallest recommended question is representation-fixed optimization/access
+  separation.
 
 ## Runtime and protected semantics
 
@@ -182,6 +198,8 @@ callback receipts are forbidden.
   contract.
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_COUNT_PRESERVING_ROSTER_G4_PRELAUNCH.md`
   — focused implementation acceptance and launch boundary.
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_COUNT_PRESERVING_ROSTER_G4_FORMAL_RESULT.md`
+  — iteration-5 closure and five-iteration terminal disposition.
 - `docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md` — frozen learned/formal
   evidence contract.
 - `docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md` — frozen gate.

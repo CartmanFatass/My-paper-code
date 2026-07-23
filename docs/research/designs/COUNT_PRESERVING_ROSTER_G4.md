@@ -1,8 +1,7 @@
 # COUNT_PRESERVING_ROSTER_G4
 
-Status: executable evidence contract frozen; implementation and bounded
-nonformal acceptance are Project-Manager accepted; formal compute has not
-started.
+Status: exact formal package completed with `NO_ACCESS_COUNT_ROSTER_G4`; the
+package is closed against rerun, tuning, renaming or threshold/budget rescue.
 
 ## Independent algorithm boundary
 

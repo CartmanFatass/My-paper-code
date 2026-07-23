@@ -42,11 +42,11 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5',
-    'iterations_remaining=1',
-    'conclusion_bearing_iterations_consumed=4',
+    'active_assignment_id=FIVE_ITERATION_CHAIN_COMPLETE',
+    'iterations_remaining=0',
+    'conclusion_bearing_iterations_consumed=5',
     'intermediate_authorization_prompts=forbidden',
-    'formal_compute_status=launchable_after_integrated_source_commit',
+    'formal_compute_status=complete_no_remaining_authority',
     'g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2',
     'g2_g_team_ci95=[0.0,0.0]',
     'g2_g_link_ci95=[0.5,0.5]',
@@ -57,18 +57,20 @@ foreach ($required in @(
     'g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md',
     'g3_primary_arm=ROSTER_ATTN',
     'g3_primary_comparator=TEAM_REC',
-    'iteration_report_status=iterations_1_to_4_complete',
-    'latest_iteration_report=docs/report/ITERATION_4.md',
+    'iteration_report_status=iterations_1_to_5_complete',
+    'latest_iteration_report=docs/report/ITERATION_5.md',
     'g3_formal_result=UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3',
     'g4_formal_contract=docs/research/designs/COUNT_PRESERVING_ROSTER_G4.md',
     'g4_primary_arm=ROSTER_SUM',
     'g4_primary_comparator=ROSTER_ATTN',
     'g4_implementation_tests=12_passed',
+    'g4_formal_result=NO_ACCESS_COUNT_ROSTER_G4',
+    'terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=launchable_from_integrated_source',
+    'formal_run_status=completed_no_access',
     'active_implementation=COUNT_PRESERVING_ROSTER_G4',
     'primary_comparator=ROSTER_ATTN',
     'mission_comparator=TEAM_REC',
@@ -121,7 +123,8 @@ $reportResults = @(
     @{ Name = 'ITERATION_1.md'; Result = 'NO_ACCESS_THIS_BENCHMARK' },
     @{ Name = 'ITERATION_2.md'; Result = 'ORDINARY_EXPLANATION_G1' },
     @{ Name = 'ITERATION_3.md'; Result = 'TEAM_REC_SUFFICIENT_HANDOFF_G2' },
-    @{ Name = 'ITERATION_4.md'; Result = 'UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3' }
+    @{ Name = 'ITERATION_4.md'; Result = 'UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3' },
+    @{ Name = 'ITERATION_5.md'; Result = 'NO_ACCESS_COUNT_ROSTER_G4' }
 )
 foreach ($item in $reportResults) {
     $path = Join-Path $repo (Join-Path 'docs/report' $item.Name)
