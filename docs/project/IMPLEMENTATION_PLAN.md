@@ -1,8 +1,8 @@
 # HA-CTSE Active Implementation Plan
 
 Updated: 2026-07-23
-Status: `BLOCKED_CDC_CAUSAL_QUOTA_BRANCH_AND_MONITOR_QUOTA`
-Work ID: `event-held-formal-or-dum-ehc-preregistration-v1-20260723`
+Status: `COMPLETE_BROWSER_PRO_BOUNDED_MESSAGE_TRANSPORT`
+Work ID: `browsermcp-pro-bounded-message-v2-20260723`
 Scientific source:
 `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/21_PRO_OPEN_RAW.md`
 Executable source boundary: branch `Claude`,
@@ -265,3 +265,108 @@ commit `1cc6552...` is not launch-ready and must not be authorized. The next
 action is one focused external GPT-5.6 Pro continuation deciding the shortfall's
 scientific terminal meaning and, if it remains non-identifiability, the exact
 evidence-preserving implementation boundary. No code or compute is authorized.
+
+## BrowserMCP bounded-message transport repair
+
+The three-way character interleaving is an operational transport defect, not a
+scientific response. The installed `@browsermcp/mcp@0.1.3` server abandons its
+WebSocket response listener after 30 seconds without cancelling the extension
+action. Browser MCP extension `1.3.4` clears the selected editor and then emits
+the supplied string one character at a time; common ASCII characters require
+sequential key-down/key-up CDP round trips. Retrying after a timeout can
+therefore run multiple uncancelled loops against the same editor. A fresh
+snapshot may observe an empty or partial composer while the earlier loop is
+still active, so it cannot prove that retry is safe.
+
+Keep BrowserMCP message submission. Do not upload or attach a file. Replace the
+unbounded full-question keystroke payload with one deterministic, single-line
+`HMASD_BP_D1` message of at most 352 UTF-16 code units. It binds repository,
+review branch, exact stage commit, canonical round/question basename and
+question body SHA-256, and tells Pro to read and follow that pushed question
+through the already-registered GitHub connector. The complete scientific
+request remains the immutable pushed `20_PRO_OPEN_QUESTION.md`; the browser
+transport is still an ordinary user message, not a file transfer.
+
+Generate the dispatch through one shared implementation used by a renderer and
+the submission recorder. Reject CR/LF, over-limit payloads, noncanonical paths
+and malformed identities before BrowserMCP runs. Type exactly one dispatch in
+one `browser_type` call and submit it with a separate Enter action. A timed-out
+type is permanently indeterminate for that live extension connection: never
+retry, retype or submit from a snapshot-only observation. Fail closed, clear no
+state, publish no receipt, and require a fresh BrowserMCP process/extension
+connection before a later attempt.
+
+The recorder must require the draft composer to byte-match the deterministic
+dispatch, require the last submitted user turn to contain that exact dispatch,
+and publish a no-clobber `hmasd.browser_pro_submission.v2` receipt binding both
+question and dispatch SHA-256 values. The validator rejects malformed or
+mismatched unarchived receipts. Raw-first `ALREADY_ARCHIVED` handling preserves
+completed historical evidence without a compatibility execution path.
+
+The independent review found one HIGH restart-integrity defect: the first v2
+validator recomputes dispatch identity from values read from the receipt itself,
+so a syntactically valid evidence-commit or conversation mutation, or a coherent
+stage/repository/branch plus digest rewrite, can still return
+`RESUME_SUBMITTED`. One bounded repair is authorized. Every active-receipt
+validation must receive the immutable expected stage commit, evidence commit,
+repository, review branch, registered conversation URL and model from the
+already-verified boundary/registry, compare every receipt field to those values,
+and recompute the dispatch only from the expected identity. Thread those
+expected values through recorder and archiver; raw-first `ALREADY_ARCHIVED`
+remains exempt. Add evidence-only, conversation-only and coherent
+stage/repository/branch-plus-dispatch mutation negatives.
+
+The repair re-review closed self-binding but found one further HIGH
+time-of-check/time-of-use defect: the archiver validates the receipt, releases
+that check, rereads mutable bytes and later publishes terminal raw. A concurrent
+receipt replacement can therefore be hidden by the later raw-first state. Close
+the same bounded repair cycle by returning the validated receipt-byte SHA-256,
+opening the canonical receipt read-only with write/delete sharing denied,
+revalidating under that held handle, comparing the locked bytes to the returned
+digest, using only validator-returned round/question identity, and retaining
+the handle through raw publication and exact reread. Add a deterministic
+concurrency regression proving replacement is denied until archival completes.
+
+The atomicity re-review found the remaining path-identity gap: a normal
+`FileStream` follows a final reparse point before the later path-based attribute
+check. Replace it with a Windows no-follow `CreateFileW` handle using
+`FILE_FLAG_OPEN_REPARSE_POINT` and `FILE_SHARE_READ`, reject directory/reparse
+attributes from that same handle, and require its normalized final path to equal
+the canonical receipt path so reparse ancestors are rejected. Retain this
+verified handle through the existing action. Add deterministic junction,
+delete/rename denial and exception-release regressions.
+
+Update the BrowserMCP exchange Skill, review-round Skill, dispatch role
+registry, conversation registry and focused contract tests atomically. Preserve
+the pinned server, registered conversation, Controller ownership, live
+preflight, fresh refs, stable-twice archival, no-clobber behavior, GitHub
+evidence verification and every scientific/formal-compute prohibition.
+
+Acceptance requires a red/green regression at the real recorder/renderer seam:
+the old multiline full-question draft is rejected; one bounded dispatch
+round-trips exactly; wrong question digest, stage/evidence commits, repository,
+branch, conversation, path, bytes, stale turn and coherent receipt mutation fail
+closed; receipt bytes remain locked and digest-stable through raw publication;
+final and ancestor reparse paths are rejected from the held-handle identity;
+and all focused BrowserMCP, dispatch-topology and research-workflow contract
+checks pass.
+
+## Bounded-message package acceptance
+
+The final collective gate passed. The Verifier reproduced all four focused
+contract suites and the current round's `READY_TO_SUBMIT` state with no receipt
+or raw. The Reviewer closed the dispatch-interleaving, v2 self-binding,
+receipt-to-raw TOCTOU and reparse-path findings. The accepted package:
+
+- sends only one 315-character current-round `HMASD_BP_D1` message;
+- forbids every same-connection retry after a type timeout;
+- rejects full-question drafts, over-limit or multiline dispatches, stale turns
+  and mismatched trusted identities;
+- holds the exact validated receipt bytes with write/delete exclusion and
+  no-follow same-handle path identity through raw publication and reread; and
+- preserves raw-first history, stable-twice capture, no-clobber publication,
+  GitHub evidence transport and all `NOT_AUTHORIZED` scientific boundaries.
+
+No BrowserMCP submission, formal token, algorithm change or formal compute was
+performed by this repair.
+

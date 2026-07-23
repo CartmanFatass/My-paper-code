@@ -8,8 +8,8 @@ $rolesRaw = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/ref
 $roles = $rolesRaw | ConvertFrom-Json
 
 $expectedRoles = @('controller', 'experiment_monitor')
-if ($roles.schema_version -ne 20 -or (Compare-Object $expectedRoles @($roles.roles.PSObject.Properties.Name))) {
-    throw 'Persistent role graph must contain only controller and experiment_monitor at schema 20'
+if ($roles.schema_version -ne 21 -or (Compare-Object $expectedRoles @($roles.roles.PSObject.Properties.Name))) {
+    throw 'Persistent role graph must contain only controller and experiment_monitor at schema 21'
 }
 if ($roles.roles.controller.thread_id -ne '019f8995-7550-7c82-8f31-ad08a3d381d4' -or
     $roles.roles.controller.kind -ne 'active_unified_omp_controller' -or
@@ -27,7 +27,13 @@ if ($transport.kind -ne 'controller_owned_browsermcp_state_machine' -or
     $transport.evidence_transport -ne 'github_connector' -or
     $transport.repository -ne 'CartmanFatass/My-paper-code' -or
     $transport.review_branch -ne 'Claude' -or
-    $transport.receipt_schema -ne 'hmasd.browser_pro_submission.v1' -or
+    $transport.dispatch_marker -ne 'HMASD_BP_D1' -or
+    $transport.dispatch_max_utf16_code_units -ne 352 -or
+    $transport.dispatch_line_breaks_allowed -or $transport.browser_type_actions -ne 1 -or
+    $transport.enter_action -ne 'separate_browser_press_key' -or $transport.file_upload_allowed -or
+    $transport.full_question_browser_type_allowed -or
+    $transport.type_timeout_policy -ne 'fresh_process_extension_connection_required_no_retry_retype_submit_even_empty_snapshot' -or
+    $transport.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
     $transport.wait_chunk_seconds -ne 20 -or
     -not $transport.controller_only -or
     $transport.fallback -ne 'none' -or

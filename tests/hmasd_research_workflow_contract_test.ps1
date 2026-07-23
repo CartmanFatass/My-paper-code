@@ -12,15 +12,28 @@ if (Compare-Object $expectedSkills $skills) { throw "Unexpected active Skill set
 $reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 foreach ($path in @(
     '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1',
+    '.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1',
     '.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1',
     '.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1',
     '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1')) {
     if (-not $reviewRound.Contains($path)) { throw "Review workflow omits executable interface: $path" }
     if (-not (Test-Path (Join-Path $repo $path) -PathType Leaf)) { throw "Missing workflow interface: $path" }
 }
+if (-not (Test-Path (Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/browser_pro_dispatch.psm1') -PathType Leaf)) {
+    throw 'Missing shared Browser Pro dispatch constructor'
+}
 $roles = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
 if (Compare-Object @('controller','experiment_monitor') @($roles.roles.PSObject.Properties.Name)) {
     throw 'Unexpected persistent role graph'
+}
+if ($roles.schema_version -ne 21 -or
+    $roles.external_review_transport.dispatch_marker -ne 'HMASD_BP_D1' -or
+    $roles.external_review_transport.dispatch_max_utf16_code_units -ne 352 -or
+    $roles.external_review_transport.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
+    $roles.external_review_transport.browser_type_actions -ne 1 -or
+    $roles.external_review_transport.file_upload_allowed -or
+    $roles.external_review_transport.full_question_browser_type_allowed) {
+    throw 'Bounded Browser Pro transport registry changed'
 }
 if ($roles.roles.experiment_monitor.registration_status -ne 'ARCHIVED_REBUILD_REQUIRED' -or
     $roles.roles.experiment_monitor.last_route_check -ne 'ARCHIVED_TASK' -or

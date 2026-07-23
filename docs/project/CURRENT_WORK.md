@@ -80,17 +80,20 @@ VALIDATED
 ```
 
 Future rounds carry `19_BROWSER_PRO_SUBMISSION.json`. Its immutable
-`hmasd.browser_pro_submission.v1` receipt binds the unique marked question,
-round, stage/evidence commits, repository, branch, conversation and expected
-model. Receipt existence forbids resubmission; raw existence forbids all
-browser work.
+`hmasd.browser_pro_submission.v2` receipt binds the marked question and bounded
+dispatch digests, round, stage/evidence commits, repository, branch, registered
+conversation and expected model. Receipt existence forbids resubmission; raw
+existence forbids all browser work.
 
-The Controller alone types the exact question, submits with
-`browser_press_key Enter`, observes in 20-second wait chunks, reconciles every
-indeterminate timeout with a fresh snapshot and archives only byte-identical
-marked response content from two stable snapshots. It never blindly retries or
-clicks Send, Stop answering, Answer now or Copy response. Full-page snapshots
-are temporary outside the repository and are deleted after the transition.
+The Controller renders one deterministic, zero-linebreak `HMASD_BP_D1` message
+of at most 352 UTF-16 code units, types it in exactly one `browser_type` action,
+and submits with a separate `browser_press_key Enter`. Pro reads the complete
+pushed question through the GitHub connector; BrowserMCP uploads no file and
+never types the full question. Any type timeout permanently forbids retry,
+retype or Enter on that live process/extension connection even when a snapshot
+looks empty. Stable-twice archival holds the trusted v2 receipt by a no-follow,
+same-handle digest lock through no-clobber raw publication and exact reread.
+Full-page snapshots remain temporary outside the repository and are deleted.
 
 The former `hmasd-pro-monitor` and `hmasd-pro-monitor-luna` profiles and routes
 are deleted. External review has no child observer, callback or alternate
@@ -134,9 +137,10 @@ Independently, the exact Spark-medium Monitor rebuild remains blocked by model
 quota. The failed zero-token task is archived and the registry remains on the
 prior `ARCHIVED_REBUILD_REQUIRED` task.
 
-The completed BrowserMCP stability package remains accepted. Its validator,
-receipt and no-clobber two-snapshot capture prevent resubmission of the archived
-round and are not part of the formal scientific implementation.
+The completed bounded-message BrowserMCP package is accepted after final
+Reviewer and Verifier `PASS`. Its v2 trusted-identity receipt, no-follow
+receipt-to-raw lock and no-clobber stable-twice capture are transport controls,
+not part of the formal scientific implementation.
 
 ## Formal compute boundary
 
@@ -162,10 +166,13 @@ repetitions.
 
 ## Resume point
 
-Open one focused marked continuation in the registered GPT-5.6 Pro conversation
-for the causal-audit quota-shortfall terminal semantics. Preserve
-`NOT_AUTHORIZED`; do not change code, use the formal token, create the output
-root or launch compute. The Monitor quota blocker remains independent.
+Reconnect the registered GPT-5.6 Pro tab, repeat live preflight, and submit one
+renderer-produced bounded dispatch for the existing causal-audit quota-shortfall
+continuation. Pro must read the complete pushed question with body SHA-256
+`0988a600a4f2e3da450f7cb2b91bf182b0e42a9e3717be4c98d485084e0efcb0` through
+the GitHub connector. Preserve `NOT_AUTHORIZED`; do not change algorithm code,
+use the formal token, create the output root or launch compute. The Monitor
+quota blocker remains independent.
 
 ## Active references
 

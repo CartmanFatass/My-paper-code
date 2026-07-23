@@ -5,12 +5,20 @@ param(
     [Parameter(Mandatory = $true)][string]$RawPath,
     [Parameter(Mandatory = $true)][string]$SnapshotPathOne,
     [Parameter(Mandatory = $true)][string]$SnapshotPathTwo,
+    [Parameter(Mandatory = $true)][string]$StageCommit,
+    [Parameter(Mandatory = $true)][string]$EvidenceCommit,
+    [Parameter(Mandatory = $true)][string]$Repository,
+    [Parameter(Mandatory = $true)][string]$ReviewBranch,
+    [Parameter(Mandatory = $true)][string]$ConversationUrl,
+    [Parameter(Mandatory = $true)][string]$ExpectedModel,
     [string]$RepoRoot
 )
 
 $ErrorActionPreference = 'Stop'
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
 $validator = Join-Path $PSScriptRoot 'validate_browser_pro_round.ps1'
+$receiptLockModule = Join-Path $PSScriptRoot 'browser_pro_receipt_lock.psm1'
+Import-Module $receiptLockModule -Force
 
 function Get-Sha256 {
     param([byte[]]$Bytes)
@@ -166,58 +174,72 @@ function Get-StableResponse {
 
 $validated = (& $validator -RoundPath $RoundPath -QuestionPath '20_PRO_OPEN_QUESTION.md' `
     -ReceiptPath $ReceiptPath -RawPath $RawPath -RepoRoot $RepoRoot `
-    -SnapshotPaths @($SnapshotPathOne, $SnapshotPathTwo)) | ConvertFrom-Json
+    -SnapshotPaths @($SnapshotPathOne, $SnapshotPathTwo) `
+    -ExpectedStageCommit $StageCommit -ExpectedEvidenceCommit $EvidenceCommit `
+    -ExpectedRepository $Repository -ExpectedReviewBranch $ReviewBranch `
+    -ExpectedConversationUrl $ConversationUrl -ExpectedModel $ExpectedModel) | ConvertFrom-Json
 if ($validated.status -ne 'RESUME_SUBMITTED') {
     throw "Browser Pro response cannot be archived from state $($validated.status)"
 }
 $acceptedSnapshots = @($validated.snapshot_paths)
 try {
-    $captureOne = Get-Item -LiteralPath $acceptedSnapshots[0]
-    $captureTwo = Get-Item -LiteralPath $acceptedSnapshots[1]
-    if ($captureTwo.LastWriteTimeUtc -lt $captureOne.LastWriteTimeUtc.AddSeconds(10)) {
-        throw 'BrowserMCP stable snapshots must be captured at least ten seconds apart in chronological order'
-    }
-    $receipt = (Read-Utf8NoBom ([string]$validated.receipt) 'Browser Pro submission receipt') | ConvertFrom-Json
-    $contentOne = Get-StableResponse $acceptedSnapshots[0] ([string]$receipt.round) ([string]$receipt.question_sha256)
-    $contentTwo = Get-StableResponse $acceptedSnapshots[1] ([string]$receipt.round) ([string]$receipt.question_sha256)
-    $bytesOne = $utf8.GetBytes($contentOne)
-    $bytesTwo = $utf8.GetBytes($contentTwo)
-    if ([Convert]::ToBase64String($bytesOne) -cne [Convert]::ToBase64String($bytesTwo)) {
-        throw 'BrowserMCP marked response content differs across the two snapshots'
-    }
+    $archiveAction = {
+        param([byte[]]$LockedReceiptBytes)
 
-    $raw = [string]$validated.raw
-    $temp = Join-Path ([IO.Path]::GetDirectoryName($raw)) `
-        ('.' + [IO.Path]::GetFileName($raw) + '.' + [Guid]::NewGuid().ToString('N') + '.tmp')
-    try {
-        if (Test-Path -LiteralPath $raw) { throw [IO.IOException]::new("Final raw already exists: $raw") }
-        $stream = [IO.FileStream]::new($temp, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
-    try {
-        $stream.Write($bytesOne, 0, $bytesOne.Length)
-        $stream.Flush($true)
-    } finally { $stream.Dispose() }
-    $prepared = [IO.File]::ReadAllBytes($temp)
-    if ([Convert]::ToBase64String($prepared) -cne [Convert]::ToBase64String($bytesOne)) {
-        throw 'Browser Pro temporary raw reread mismatch'
+        $captureOne = Get-Item -LiteralPath $acceptedSnapshots[0]
+        $captureTwo = Get-Item -LiteralPath $acceptedSnapshots[1]
+        if ($captureTwo.LastWriteTimeUtc -lt $captureOne.LastWriteTimeUtc.AddSeconds(10)) {
+            throw 'BrowserMCP stable snapshots must be captured at least ten seconds apart in chronological order'
+        }
+        $contentOne = Get-StableResponse $acceptedSnapshots[0] `
+            ([string]$validated.round_id) ([string]$validated.question_sha256)
+        $contentTwo = Get-StableResponse $acceptedSnapshots[1] `
+            ([string]$validated.round_id) ([string]$validated.question_sha256)
+        $bytesOne = $utf8.GetBytes($contentOne)
+        $bytesTwo = $utf8.GetBytes($contentTwo)
+        if ([Convert]::ToBase64String($bytesOne) -cne [Convert]::ToBase64String($bytesTwo)) {
+            throw 'BrowserMCP marked response content differs across the two snapshots'
+        }
+
+        $raw = [string]$validated.raw
+        $temp = Join-Path ([IO.Path]::GetDirectoryName($raw)) `
+            ('.' + [IO.Path]::GetFileName($raw) + '.' + [Guid]::NewGuid().ToString('N') + '.tmp')
+        try {
+            if (Test-Path -LiteralPath $raw) { throw [IO.IOException]::new("Final raw already exists: $raw") }
+            $stream = [IO.FileStream]::new(
+                $temp, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
+            try {
+                $stream.Write($bytesOne, 0, $bytesOne.Length)
+                $stream.Flush($true)
+            } finally {
+                $stream.Dispose()
+            }
+            $prepared = [IO.File]::ReadAllBytes($temp)
+            if ([Convert]::ToBase64String($prepared) -cne [Convert]::ToBase64String($bytesOne)) {
+                throw 'Browser Pro temporary raw reread mismatch'
+            }
+            [IO.File]::Move($temp, $raw)
+        } catch [IO.IOException] {
+            throw "Browser Pro raw cannot be atomically published without clobbering: $raw"
+        } finally {
+            if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Force }
+        }
+
+        $archived = [IO.File]::ReadAllBytes($raw)
+        if ([Convert]::ToBase64String($archived) -cne [Convert]::ToBase64String($bytesOne)) {
+            throw "Browser Pro published raw reread mismatch; preserve for manual recovery: $raw"
+        }
+        [ordered]@{
+            status = 'ARCHIVED'
+            raw = $raw
+            sha256 = Get-Sha256 $archived
+            snapshot_one_sha256 = Get-Sha256 $bytesOne
+            snapshot_two_sha256 = Get-Sha256 $bytesTwo
+            bytes = $archived.Length
+        } | ConvertTo-Json -Compress
     }
-    [IO.File]::Move($temp, $raw)
-} catch [IO.IOException] {
-    throw "Browser Pro raw cannot be atomically published without clobbering: $raw"
-} finally {
-    if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Force }
-}
-$archived = [IO.File]::ReadAllBytes($raw)
-if ([Convert]::ToBase64String($archived) -cne [Convert]::ToBase64String($bytesOne)) {
-    throw "Browser Pro published raw reread mismatch; preserve for manual recovery: $raw"
-}
-[ordered]@{
-    status = 'ARCHIVED'
-    raw = $raw
-    sha256 = Get-Sha256 $archived
-    snapshot_one_sha256 = Get-Sha256 $bytesOne
-    snapshot_two_sha256 = Get-Sha256 $bytesTwo
-    bytes = $archived.Length
-} | ConvertTo-Json -Compress
+    Invoke-HmasdBrowserProReceiptLock -ReceiptPath ([string]$validated.receipt) `
+        -ExpectedSha256 ([string]$validated.receipt_sha256) -Action $archiveAction
 } finally {
     foreach ($snapshot in $acceptedSnapshots) {
         if (Test-Path -LiteralPath $snapshot -PathType Leaf) { Remove-Item -LiteralPath $snapshot -Force }

@@ -5,11 +5,19 @@ param(
     [Parameter(Mandatory = $true)][string]$ReceiptPath,
     [Parameter(Mandatory = $true)][string]$RawPath,
     [string]$RepoRoot,
-    [string[]]$SnapshotPaths = @()
+    [string[]]$SnapshotPaths = @(),
+    [string]$ExpectedStageCommit,
+    [string]$ExpectedEvidenceCommit,
+    [string]$ExpectedRepository,
+    [string]$ExpectedReviewBranch,
+    [string]$ExpectedConversationUrl,
+    [string]$ExpectedModel
 )
 
 $ErrorActionPreference = 'Stop'
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
+$dispatchModule = Join-Path $PSScriptRoot 'browser_pro_dispatch.psm1'
+Import-Module $dispatchModule -Force
 
 function Get-Sha256 {
     param([byte[]]$Bytes)
@@ -153,29 +161,100 @@ if ($markerMatch.Groups[2].Value -cne $questionSha256) {
     throw 'Browser Pro question marker body digest mismatch'
 }
 
+$receiptSha256 = $null
 $status = 'READY_TO_SUBMIT'
 if (Test-Path -LiteralPath $receipt) {
     if (-not (Test-Path -LiteralPath $receipt -PathType Leaf)) { throw "Browser Pro receipt is not a file: $receipt" }
+    $expectedParameters = @(
+        'ExpectedStageCommit', 'ExpectedEvidenceCommit', 'ExpectedRepository',
+        'ExpectedReviewBranch', 'ExpectedConversationUrl', 'ExpectedModel')
+    $missingExpected = @($expectedParameters | Where-Object {
+        -not $PSBoundParameters.ContainsKey($_) -or
+        [string]::IsNullOrWhiteSpace([string](Get-Variable -Name $_ -ValueOnly))
+    })
+    if ($missingExpected.Count -gt 0) {
+        throw "Browser Pro active receipt requires the complete trusted expected identity tuple; missing: $($missingExpected -join ', ')"
+    }
+    if ($ExpectedStageCommit -cnotmatch '^[0-9a-f]{40}$' -or
+        $ExpectedEvidenceCommit -cnotmatch '^[0-9a-f]{40}$') {
+        throw 'Browser Pro trusted expected identity requires exact 40-character lowercase stage and evidence commits'
+    }
+    if ($ExpectedRepository -cnotmatch '^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$' -or
+        $ExpectedRepository.Contains('..') -or $ExpectedRepository.EndsWith('.') -or
+        $ExpectedReviewBranch -cnotmatch '^[A-Za-z0-9][A-Za-z0-9._/-]*$' -or
+        $ExpectedReviewBranch.Contains('..') -or $ExpectedReviewBranch.Contains('//') -or
+        $ExpectedReviewBranch.Contains('@{') -or $ExpectedReviewBranch.EndsWith('/') -or
+        $ExpectedReviewBranch.EndsWith('.') -or $ExpectedReviewBranch.EndsWith('.lock')) {
+        throw 'Browser Pro trusted expected identity requires valid repository and review branch tokens'
+    }
+    if ($ExpectedConversationUrl -cnotmatch '^https://chatgpt\.com/c/[A-Za-z0-9-]+/?$' -or
+        $ExpectedModel -cne 'Pro') {
+        throw 'Browser Pro trusted expected identity requires the registered ChatGPT conversation URL and expected model Pro'
+    }
     try {
-        $receiptObject = (Read-Utf8NoBom $receipt 'Browser Pro submission receipt') | ConvertFrom-Json
+        $receiptStream = [IO.FileStream]::new(
+            $receipt, [IO.FileMode]::Open, [IO.FileAccess]::Read,
+            ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
+        try {
+            $receiptMemory = [IO.MemoryStream]::new()
+            try {
+                $receiptStream.CopyTo($receiptMemory)
+                [byte[]]$receiptBytes = $receiptMemory.ToArray()
+            } finally {
+                $receiptMemory.Dispose()
+            }
+        } finally {
+            $receiptStream.Dispose()
+        }
+        $receiptSha256 = Get-Sha256 $receiptBytes
+        if ($receiptBytes.Length -ge 3 -and
+            $receiptBytes[0] -eq 0xef -and $receiptBytes[1] -eq 0xbb -and $receiptBytes[2] -eq 0xbf) {
+            throw 'receipt has a UTF-8 BOM'
+        }
+        $receiptObject = $utf8.GetString($receiptBytes) | ConvertFrom-Json
     } catch {
         throw "Malformed Browser Pro submission receipt: $receipt"
     }
-    $requiredFields = @('schema', 'status', 'round', 'question_sha256', 'stage_commit', 'evidence_commit',
-        'repository', 'review_branch', 'conversation_url', 'expected_model')
+    $requiredFields = @('schema', 'status', 'round', 'question_sha256', 'dispatch_sha256',
+        'stage_commit', 'evidence_commit', 'repository', 'review_branch', 'conversation_url',
+        'expected_model')
     $actualFields = @($receiptObject.PSObject.Properties.Name)
     if ((Compare-Object $requiredFields $actualFields) -or
-        $receiptObject.schema -cne 'hmasd.browser_pro_submission.v1' -or
+        $receiptObject.schema -cne 'hmasd.browser_pro_submission.v2' -or
         $receiptObject.status -cne 'SUBMISSION_CONFIRMED' -or
         $receiptObject.round -cne $roundId -or
         $receiptObject.question_sha256 -cne $questionSha256 -or
-        [string]$receiptObject.stage_commit -cnotmatch '^[0-9a-fA-F]{40}$' -or
-        [string]$receiptObject.evidence_commit -cnotmatch '^[0-9a-fA-F]{40}$' -or
-        [string]$receiptObject.repository -cnotmatch '^[^/\s]+/[^/\s]+$' -or
-        [string]::IsNullOrWhiteSpace([string]$receiptObject.review_branch) -or
+        [string]$receiptObject.dispatch_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+        [string]$receiptObject.stage_commit -cnotmatch '^[0-9a-f]{40}$' -or
+        [string]$receiptObject.evidence_commit -cnotmatch '^[0-9a-f]{40}$' -or
+        [string]$receiptObject.repository -cnotmatch '^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$' -or
+        [string]$receiptObject.review_branch -cnotmatch '^[A-Za-z0-9][A-Za-z0-9._/-]*$' -or
         [string]$receiptObject.conversation_url -cnotmatch '^https://chatgpt\.com/c/[A-Za-z0-9-]+/?$' -or
         $receiptObject.expected_model -cne 'Pro') {
-        throw "Browser Pro submission receipt does not match round and question digest: $receipt"
+        throw "Browser Pro submission receipt does not match round and question digest or required shape: $receipt"
+    }
+    $identityMismatches = @()
+    foreach ($identity in ([ordered]@{
+        stage_commit = $ExpectedStageCommit
+        evidence_commit = $ExpectedEvidenceCommit
+        repository = $ExpectedRepository
+        review_branch = $ExpectedReviewBranch
+        conversation_url = $ExpectedConversationUrl
+        expected_model = $ExpectedModel
+    }).GetEnumerator()) {
+        if ([string]$receiptObject.($identity.Key) -cne [string]$identity.Value) {
+            $identityMismatches += $identity.Key
+        }
+    }
+    if ($identityMismatches.Count -gt 0) {
+        throw "Browser Pro submission receipt does not match trusted expected identity: $($identityMismatches -join ', ')"
+    }
+    $receiptQuestionPath = "docs/external-review/rounds/$roundId/20_PRO_OPEN_QUESTION.md"
+    $expectedDispatch = New-HmasdBrowserProDispatch -Repository $ExpectedRepository `
+        -ReviewBranch $ExpectedReviewBranch -StageCommit $ExpectedStageCommit `
+        -QuestionSha256 $questionSha256 -QuestionPath $receiptQuestionPath
+    if ($receiptObject.dispatch_sha256 -cne $expectedDispatch.dispatch_sha256) {
+        throw "Browser Pro submission receipt dispatch digest does not match deterministic trusted dispatch: $receipt"
     }
     $status = 'RESUME_SUBMITTED'
 }
@@ -247,6 +326,7 @@ if ($SnapshotPaths.Count -gt 0) {
     receipt = $receipt
     raw = $raw
     question_sha256 = $questionSha256
+    receipt_sha256 = $receiptSha256
     question_marker = $marker
     snapshot_paths = $safeSnapshots
 } | ConvertTo-Json -Compress

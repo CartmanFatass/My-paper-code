@@ -1,5 +1,5 @@
 {
-  "schema_version": 20,
+  "schema_version": 21,
   "updated": "2026-07-23",
   "roles": {
     "controller": {
@@ -27,6 +27,14 @@
     "evidence_transport": "github_connector",
     "repository": "CartmanFatass/My-paper-code",
     "review_branch": "Claude",
+    "dispatch_marker": "HMASD_BP_D1",
+    "dispatch_max_utf16_code_units": 352,
+    "dispatch_line_breaks_allowed": false,
+    "browser_type_actions": 1,
+    "enter_action": "separate_browser_press_key",
+    "file_upload_allowed": false,
+    "full_question_browser_type_allowed": false,
+    "type_timeout_policy": "fresh_process_extension_connection_required_no_retry_retype_submit_even_empty_snapshot",
     "long_lived_controller_required": true,
     "user_connected_tab_required": true,
     "state_machine": [
@@ -38,7 +46,7 @@
       "STABLE_TWICE",
       "ARCHIVED"
     ],
-    "receipt_schema": "hmasd.browser_pro_submission.v1",
+    "receipt_schema": "hmasd.browser_pro_submission.v2",
     "wait_chunk_seconds": 20,
     "controller_only": true,
     "fallback": "none"

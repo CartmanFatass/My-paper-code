@@ -18,6 +18,8 @@ param(
 $ErrorActionPreference = 'Stop'
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
 $validator = Join-Path $PSScriptRoot 'validate_browser_pro_round.ps1'
+$dispatchModule = Join-Path $PSScriptRoot 'browser_pro_dispatch.psm1'
+Import-Module $dispatchModule -Force
 
 function Get-Sha256 {
     param([byte[]]$Bytes)
@@ -93,9 +95,21 @@ function Get-StructuralTurns {
     $turnIndent = ($candidates | Measure-Object -Property Indent -Minimum).Minimum
     return @($candidates | Where-Object { $_.Indent -eq $turnIndent })
 }
+function Get-UserTurnText {
+    param([string[]]$Lines, [int]$Start, [int]$End)
+    $values = @()
+    for ($i = $Start + 1; $i -lt $End; $i++) {
+        if ($Lines[$i] -match '^\s*-\s+paragraph(?:\s+\[[^\]]+\])?\s*(?::(.*))?\s*$') {
+            $scalar = if ($null -eq $Matches[1]) { '' } else { [string]$Matches[1] }
+            $values += Convert-ParagraphScalar $scalar
+        }
+    }
+    if ($values.Count -eq 0) { throw 'BrowserMCP submitted user turn has no paragraph text' }
+    return $values -join "`n"
+}
 
-if ($StageCommit -cnotmatch '^[0-9a-fA-F]{40}$' -or $EvidenceCommit -cnotmatch '^[0-9a-fA-F]{40}$') {
-    throw 'Browser Pro receipt requires exact 40-character stage and evidence commits'
+if ($StageCommit -cnotmatch '^[0-9a-f]{40}$' -or $EvidenceCommit -cnotmatch '^[0-9a-f]{40}$') {
+    throw 'Browser Pro receipt requires exact 40-character lowercase stage and evidence commits'
 }
 if ($Repository -cnotmatch '^[^/\s]+/[^/\s]+$' -or [string]::IsNullOrWhiteSpace($ReviewBranch)) {
     throw 'Browser Pro receipt requires repository owner/name and a nonempty review branch'
@@ -106,7 +120,10 @@ if ($ConversationUrl -cnotmatch '^https://chatgpt\.com/c/[A-Za-z0-9-]+/?$' -or $
 
 $validated = (& $validator -RoundPath $RoundPath -QuestionPath $QuestionPath `
     -ReceiptPath $ReceiptPath -RawPath $RawPath -RepoRoot $RepoRoot `
-    -SnapshotPaths @($DraftSnapshotPath, $SubmittedSnapshotPath)) | ConvertFrom-Json
+    -SnapshotPaths @($DraftSnapshotPath, $SubmittedSnapshotPath) `
+    -ExpectedStageCommit $StageCommit -ExpectedEvidenceCommit $EvidenceCommit `
+    -ExpectedRepository $Repository -ExpectedReviewBranch $ReviewBranch `
+    -ExpectedConversationUrl $ConversationUrl -ExpectedModel $ExpectedModel) | ConvertFrom-Json
 $acceptedSnapshots = @($validated.snapshot_paths)
 try {
     if ($validated.status -ne 'READY_TO_SUBMIT') {
@@ -114,21 +131,20 @@ try {
     }
     $draft = (Read-Utf8NoBom $acceptedSnapshots[0] 'BrowserMCP draft snapshot') -replace "`r`n", "`n" -replace "`r", "`n"
     $submitted = (Read-Utf8NoBom $acceptedSnapshots[1] 'BrowserMCP submitted snapshot') -replace "`r`n", "`n" -replace "`r", "`n"
-    $canonicalQuestion = (Read-Utf8NoBom ([string]$validated.question) 'Browser Pro question') -replace "`r`n", "`n" -replace "`r", "`n"
-    $draftQuestion = Get-ComposerText $draft
-    if ([Convert]::ToBase64String($utf8.GetBytes($draftQuestion)) -cne
-        [Convert]::ToBase64String($utf8.GetBytes($canonicalQuestion))) {
-        throw 'BrowserMCP draft composer does not byte-match the canonical question'
+    $questionRepoRelative = "docs/external-review/rounds/$($validated.round_id)/20_PRO_OPEN_QUESTION.md"
+    $dispatch = New-HmasdBrowserProDispatch -Repository $Repository -ReviewBranch $ReviewBranch `
+        -StageCommit $StageCommit -QuestionSha256 ([string]$validated.question_sha256) `
+        -QuestionPath $questionRepoRelative
+    $expectedComposer = ([string]$dispatch.message) + "`n"
+    $draftDispatch = Get-ComposerText $draft
+    if ([Convert]::ToBase64String($utf8.GetBytes($draftDispatch)) -cne
+        [Convert]::ToBase64String($utf8.GetBytes($expectedComposer))) {
+        throw 'BrowserMCP draft composer does not byte-match the deterministic dispatch'
     }
     if ((Get-ComposerText $submitted).Length -ne 0) {
         throw 'BrowserMCP submitted composer is not empty'
     }
 
-    $marker = [string]$validated.question_marker
-    $markerCount = [regex]::Matches($submitted, [regex]::Escape($marker)).Count
-    if ($markerCount -ne 1) {
-        throw "BrowserMCP submitted snapshot must contain the exact unique question marker once; found $markerCount"
-    }
     $lines = $submitted -split "`n", -1
     $turns = Get-StructuralTurns $lines
     $userTurns = @($turns | Where-Object { $_.Type -eq 'user' })
@@ -138,18 +154,20 @@ try {
     foreach ($turn in $turns) {
         if ($turn.Index -gt $lastUser) { $segmentEnd = $turn.Index; break }
     }
-    $lastUserText = $lines[$lastUser..($segmentEnd - 1)] -join "`n"
-    if (-not $lastUserText.Contains($marker)) {
-        throw 'Exact question marker is stale; the last visible user turn does not contain it'
+    $lastUserText = Get-UserTurnText $lines $lastUser $segmentEnd
+    if ([Convert]::ToBase64String($utf8.GetBytes($lastUserText)) -cne
+        [Convert]::ToBase64String($utf8.GetBytes([string]$dispatch.message))) {
+        throw 'Exact dispatch is stale or altered; the last visible user turn does not byte-match it'
     }
 
     $receiptObject = [ordered]@{
-        schema = 'hmasd.browser_pro_submission.v1'
+        schema = 'hmasd.browser_pro_submission.v2'
         status = 'SUBMISSION_CONFIRMED'
         round = [string]$validated.round_id
         question_sha256 = [string]$validated.question_sha256
-        stage_commit = $StageCommit.ToLowerInvariant()
-        evidence_commit = $EvidenceCommit.ToLowerInvariant()
+        dispatch_sha256 = [string]$dispatch.dispatch_sha256
+        stage_commit = $StageCommit
+        evidence_commit = $EvidenceCommit
         repository = $Repository
         review_branch = $ReviewBranch
         conversation_url = $ConversationUrl
@@ -184,6 +202,7 @@ try {
         receipt = $receiptPathResolved
         receipt_sha256 = Get-Sha256 $published
         question_sha256 = [string]$validated.question_sha256
+        dispatch_sha256 = [string]$dispatch.dispatch_sha256
         bytes = $published.Length
     } | ConvertTo-Json -Compress
 } finally {

@@ -5,7 +5,13 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $utf8 = [Text.UTF8Encoding]::new($false)
 $validator = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
 $recorder = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1'
+$renderer = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1'
 $archiver = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1'
+$receiptLockModule = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/browser_pro_receipt_lock.psm1'
+if (-not (Test-Path -LiteralPath $receiptLockModule -PathType Leaf)) {
+    throw 'Browser Pro receipt lock module is missing; validated receipt bytes can change before raw publication'
+}
+Import-Module $receiptLockModule -Force
 $boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
 $exchange = Get-Content (Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/SKILL.md') -Raw
 $reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
@@ -20,6 +26,11 @@ function Write-Utf8 { param([string]$Path, [string]$Content)
 function Get-Sha256 { param([string]$Content)
     $h = [Security.Cryptography.SHA256]::Create()
     try { -join @($h.ComputeHash($utf8.GetBytes($Content)) | ForEach-Object { $_.ToString('x2') }) }
+    finally { $h.Dispose() }
+}
+function Get-ByteSha256 { param([byte[]]$Bytes)
+    $h = [Security.Cryptography.SHA256]::Create()
+    try { -join @($h.ComputeHash($Bytes) | ForEach-Object { $_.ToString('x2') }) }
     finally { $h.Dispose() }
 }
 function Assert-Failure { param([scriptblock]$Action, [string]$Pattern, [string]$Label)
@@ -38,14 +49,22 @@ if ((Compare-Object @('browsermcp-pro') $serverKeys) -or $server.type -ne 'stdio
     $server.args[0] -ne '-y' -or $server.args[1] -ne '@browsermcp/mcp@0.1.3' -or
     $server.timeout -ne 120000) { throw 'Pinned singular BrowserMCP server changed' }
 if (-not (Test-Path $boundaryVerifier -PathType Leaf)) { throw 'Pushed-boundary verifier was removed' }
-if ($registry.schema_version -ne 31 -or
+if ($registry.schema_version -ne 32 -or
     $registry.round_controller.kind -ne 'active_controller_owned_browsermcp_state_machine' -or
     $registry.exchange_contract.server_package -ne '@browsermcp/mcp@0.1.3' -or
     $registry.exchange_contract.evidence_transport -ne 'github_connector' -or
     $registry.exchange_contract.repository -ne 'CartmanFatass/My-paper-code' -or
     $registry.exchange_contract.review_branch -ne 'Claude' -or
     $registry.exchange_contract.connection_state -ne 'LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND' -or
-    $registry.exchange_contract.receipt_schema -ne 'hmasd.browser_pro_submission.v1' -or
+    $registry.exchange_contract.dispatch_marker -ne 'HMASD_BP_D1' -or
+    $registry.exchange_contract.dispatch_max_utf16_code_units -ne 352 -or
+    $registry.exchange_contract.dispatch_line_breaks_allowed -or
+    $registry.exchange_contract.browser_type_actions -ne 1 -or
+    $registry.exchange_contract.enter_action -ne 'separate_browser_press_key' -or
+    $registry.exchange_contract.file_upload_allowed -or
+    $registry.exchange_contract.full_question_browser_type_allowed -or
+    $registry.exchange_contract.type_timeout_policy -ne 'fresh_process_extension_connection_required_no_retry_retype_submit_even_empty_snapshot' -or
+    $registry.exchange_contract.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
     $registry.exchange_contract.wait_chunk_seconds -ne 20 -or
     $registry.exchange_contract.fallback -ne 'none' -or
     $registry.reviewers.open_divergent.url -ne 'https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
@@ -57,15 +76,20 @@ $states = @('VALIDATED','RECONCILED_IDLE','DRAFT_CONFIRMED','SUBMISSION_CONFIRME
 if (Compare-Object $states @($registry.exchange_contract.state_machine)) { throw 'Registry state machine mismatch' }
 foreach ($required in @('30-second timeout', '20-second', 'browser_type', 'browser_press_key',
     '`Enter`', 'immediately preceding fresh snapshot', 'Never blind retry', '`Send`',
-    '`Stop answering`', '`Answer now`', '`Copy response`', 'record_browser_pro_submission.ps1',
-    'two distinct temporary BrowserMCP', 'substantive fenced plaintext block',
-    'live preflight')) {
+    '`Stop answering`', '`Answer now`', '`Copy response`', 'render_browser_pro_dispatch.ps1',
+    'record_browser_pro_submission.ps1', 'two distinct temporary BrowserMCP',
+    'substantive fenced plaintext block', 'live preflight', 'HMASD_BP_D1', '352 UTF-16',
+    'fresh BrowserMCP process/extension connection', '-ExpectedStageCommit',
+    'complete trusted expected identity tuple', 'mandatory `StageCommit`',
+    'receipt_sha256', 'writer/delete-capable handle', 'digest-stable')) {
     if (-not $exchange.Contains($required)) { throw "Browser exchange missing state-machine rule: $required" }
 }
 foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json', 'HMASD_BROWSER_PRO_QUESTION_V1',
     'HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN', 'fenced `text` block',
     'record_browser_pro_submission.ps1', 'archive_browser_pro_raw.ps1',
-    'requires a live', 'no completion observer')) {
+    'requires a live', 'no completion observer', '-ExpectedStageCommit',
+    'without receipt compatibility execution', 'mandatory `StageCommit`',
+    'receipt_sha256', 'writer/delete-capable handle', 'digest-stable')) {
     if (-not $reviewRound.Contains($required)) { throw "Review round missing: $required" }
 }
 foreach ($forbidden in @('hmasd-pro-monitor', 'hmasd-pro-monitor-luna')) {
@@ -87,6 +111,8 @@ $rawName = '21_PRO_OPEN_RAW.md'
 $stage = '1111111111111111111111111111111111111111'
 $evidence = '2222222222222222222222222222222222222222'
 $conversation = 'https://chatgpt.com/c/fixture-conversation'
+$repository = 'fixture-owner/fixture-repo'
+$branch = 'Claude'
 function Assert-Removed { param([string[]]$Paths, [string]$Label)
     foreach ($path in $Paths) { if (Test-Path -LiteralPath $path) { throw "$Label did not delete accepted snapshot: $path" } }
 }
@@ -102,43 +128,56 @@ try {
     $digest = Get-Sha256 $body
     $marker = "HMASD_BROWSER_PRO_QUESTION_V1 round=$roundId body_sha256=$digest"
     Write-Utf8 (Join-Path $roundPath $questionName) "$marker`n`n$body"
+    $rendered = (& $renderer -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -StageCommit $stage -EvidenceCommit $evidence `
+        -Repository $repository -ReviewBranch $branch -RepoRoot $fixtureRepo) | ConvertFrom-Json
+    $dispatch = $utf8.GetString([Convert]::FromBase64String([string]$rendered.dispatch_base64))
+    $dispatchScalar = $dispatch | ConvertTo-Json -Compress
 
     function New-DraftSnapshot { param([string]$Path, [string]$Mode = 'exact')
-        $paragraphs = if ($Mode -eq 'marker_only') {
-            "    - paragraph: `"$marker`""
-        } elseif ($Mode -eq 'wrong_body') {
-            "    - paragraph: `"$marker`"`n    - paragraph`n    - paragraph: Wrong body"
+        $value = if ($Mode -eq 'legacy_question') {
+            ("$marker`n`n$body").TrimEnd("`n")
+        } elseif ($Mode -eq 'wrong_bytes') {
+            $dispatch + 'x'
         } else {
-            "    - paragraph: `"$marker`"`n    - paragraph`n" +
-                (($bodyLines | ForEach-Object { "    - paragraph: $_" }) -join "`n")
+            $dispatch
         }
-        Write-Utf8 $Path "- main [ref=draft]:`n  - textbox `"Message ChatGPT`" [ref=composer]:`n$paragraphs`n"
+        $scalar = $value | ConvertTo-Json -Compress
+        Write-Utf8 $Path "- main [ref=draft]:`n  - textbox `"Message ChatGPT`" [ref=composer]:`n    - paragraph: $scalar`n"
     }
     function New-SubmittedSnapshot { param([string]$Path, [bool]$Stale = $false)
         $later = if ($Stale) {
             "`n  - article [ref=later]:`n    - heading `"You said:`"`n    - paragraph: Later unrelated question"
         } else { '' }
-        Write-Utf8 $Path "- main [ref=submitted]:`n  - article [ref=user]:`n    - heading `"You said:`"`n    - paragraph: $marker$later`n  - textbox `"Message ChatGPT`" [ref=composer]:`n"
+        Write-Utf8 $Path "- main [ref=submitted]:`n  - article [ref=user]:`n    - heading `"You said:`"`n    - paragraph: $dispatchScalar$later`n  - textbox `"Message ChatGPT`" [ref=composer]:`n"
     }
     function Invoke-Recorder { param([string]$Draft, [string]$Submitted)
         & $recorder -RoundPath $roundRelative -QuestionPath $questionName -ReceiptPath $receiptName `
             -RawPath $rawName -DraftSnapshotPath $Draft -SubmittedSnapshotPath $Submitted `
-            -StageCommit $stage -EvidenceCommit $evidence -Repository 'fixture-owner/fixture-repo' `
-            -ReviewBranch 'Claude' -ConversationUrl $conversation -RepoRoot $fixtureRepo
+            -StageCommit $stage -EvidenceCommit $evidence -Repository $repository `
+            -ReviewBranch $branch -ConversationUrl $conversation -RepoRoot $fixtureRepo
+    }
+    function Invoke-ValidatorExpected {
+        & $validator -RoundPath $roundRelative -QuestionPath $questionName `
+            -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo `
+            -ExpectedStageCommit $stage -ExpectedEvidenceCommit $evidence `
+            -ExpectedRepository $repository -ExpectedReviewBranch $branch `
+            -ExpectedConversationUrl $conversation -ExpectedModel 'Pro'
     }
 
     $ready = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
         -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
-    if ($ready.status -ne 'READY_TO_SUBMIT' -or $ready.question_sha256 -ne $digest) { throw 'READY_TO_SUBMIT fixture failed' }
+    if ($ready.status -ne 'READY_TO_SUBMIT' -or $ready.question_sha256 -ne $digest -or
+        $null -ne $ready.receipt_sha256) { throw 'READY_TO_SUBMIT fixture failed' }
     Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath '../20_PRO_OPEN_QUESTION.md' `
         -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'canonical basename' 'Question traversal'
 
-    foreach ($mode in @('marker_only','wrong_body')) {
+    foreach ($mode in @('legacy_question','wrong_bytes')) {
         $draft = Join-Path $captureRoot "draft-$mode.yml"
         $submitted = Join-Path $captureRoot "submitted-$mode.yml"
         New-DraftSnapshot $draft $mode
         New-SubmittedSnapshot $submitted
-        Assert-Failure { Invoke-Recorder $draft $submitted } 'does not byte-match' "Draft $mode"
+        Assert-Failure { Invoke-Recorder $draft $submitted } 'dispatch|does not byte-match' "Draft $mode"
         Assert-Removed @($draft,$submitted) "Draft $mode"
     }
     $draft = Join-Path $captureRoot 'draft-stale.yml'
@@ -163,7 +202,8 @@ try {
     New-SubmittedSnapshot $submitted
     $recorded = (Invoke-Recorder $draft $submitted) | ConvertFrom-Json
     Assert-Removed @($draft,$submitted) 'Successful recorder'
-    if ($recorded.status -ne 'SUBMISSION_CONFIRMED' -or $recorded.question_sha256 -ne $digest) { throw 'Submission recorder failed' }
+    if ($recorded.status -ne 'SUBMISSION_CONFIRMED' -or $recorded.question_sha256 -ne $digest -or
+        $recorded.dispatch_sha256 -ne $rendered.dispatch_sha256) { throw 'Submission recorder failed' }
     $receiptFile = Join-Path $roundPath $receiptName
     $receiptBytes = [IO.File]::ReadAllBytes($receiptFile)
 
@@ -176,18 +216,90 @@ try {
     if ([Convert]::ToBase64String([IO.File]::ReadAllBytes($receiptFile)) -cne [Convert]::ToBase64String($receiptBytes)) {
         throw 'Receipt no-clobber rerun changed bytes'
     }
-    $resume = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
-        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
+    $resume = (Invoke-ValidatorExpected) | ConvertFrom-Json
     if ($resume.status -ne 'RESUME_SUBMITTED') { throw 'RESUME_SUBMITTED fixture failed' }
+    $receiptDigest = Get-ByteSha256 $receiptBytes
+    if ($resume.status -ne 'RESUME_SUBMITTED' -or $resume.receipt_sha256 -cne $receiptDigest) {
+        throw 'RESUME_SUBMITTED receipt digest does not match the exact receipt bytes'
+    }
+    $lockedRenameFile = Join-Path $fixtureContainer 'receipt-lock-rename.json'
+    $lockedBase64 = Invoke-HmasdBrowserProReceiptLock -ReceiptPath $receiptFile `
+        -ExpectedSha256 $receiptDigest -Action {
+            param([byte[]]$LockedReceiptBytes)
+            $writerDenied = $false
+            $writer = $null
+            try {
+                $writer = [IO.FileStream]::new(
+                    $receiptFile, [IO.FileMode]::Open, [IO.FileAccess]::Write, [IO.FileShare]::ReadWrite)
+            } catch [IO.IOException] {
+                $writerDenied = $true
+            } finally {
+                if ($null -ne $writer) { $writer.Dispose() }
+            }
+            if (-not $writerDenied) { throw 'Receipt lock allowed a concurrent writer handle' }
+            $deleteDenied = $false
+            try {
+                [IO.File]::Delete($receiptFile)
+            } catch [IO.IOException] {
+                $deleteDenied = $true
+            }
+            if (-not $deleteDenied) { throw 'Receipt lock allowed a concurrent delete' }
+            $renameDenied = $false
+            try {
+                [IO.File]::Move($receiptFile, $lockedRenameFile)
+            } catch [IO.IOException] {
+                $renameDenied = $true
+            }
+            if (-not $renameDenied) { throw 'Receipt lock allowed a concurrent rename' }
+            [Convert]::ToBase64String($LockedReceiptBytes)
+        }
+    if ($lockedBase64 -cne [Convert]::ToBase64String($receiptBytes)) {
+        throw 'Receipt lock action did not receive the exact held receipt bytes'
+    }
+    Assert-Failure {
+        Invoke-HmasdBrowserProReceiptLock -ReceiptPath $receiptFile `
+            -ExpectedSha256 $receiptDigest -Action { throw 'Intentional receipt action failure' }
+    } 'Intentional receipt action failure' 'Receipt lock action exception'
+    $releasedWriter = [IO.FileStream]::new(
+        $receiptFile, [IO.FileMode]::Open, [IO.FileAccess]::Write, [IO.FileShare]::ReadWrite)
+    $releasedWriter.Dispose()
+    $wrongReceiptDigest = '0' + $receiptDigest.Substring(1)
+    if ($wrongReceiptDigest -ceq $receiptDigest) {
+        $wrongReceiptDigest = '1' + $receiptDigest.Substring(1)
+    }
+    Assert-Failure {
+        Invoke-HmasdBrowserProReceiptLock -ReceiptPath $receiptFile `
+            -ExpectedSha256 $wrongReceiptDigest -Action { throw 'Digest mismatch action must not run' }
+    } 'changed between validation and locked archival' 'Receipt lock digest mismatch'
+    $reparseTarget = Join-Path $fixtureContainer 'receipt-target'
+    $reparseAncestor = Join-Path $fixtureContainer 'receipt-junction'
+    $finalReparse = Join-Path $fixtureContainer 'receipt-final-junction'
+    [IO.Directory]::CreateDirectory($reparseTarget) | Out-Null
+    $reparseReceipt = Join-Path $reparseTarget $receiptName
+    [IO.File]::WriteAllBytes($reparseReceipt, $receiptBytes)
+    New-Item -ItemType Junction -Path $reparseAncestor -Target $reparseTarget | Out-Null
+    New-Item -ItemType Junction -Path $finalReparse -Target $reparseTarget | Out-Null
+    try {
+        Assert-Failure {
+            Invoke-HmasdBrowserProReceiptLock -ReceiptPath $finalReparse `
+                -ExpectedSha256 $receiptDigest -Action { 'Final reparse action must not run' }
+        } 'reparse' 'Receipt final reparse'
+        Assert-Failure {
+            Invoke-HmasdBrowserProReceiptLock -ReceiptPath (Join-Path $reparseAncestor $receiptName) `
+                -ExpectedSha256 $receiptDigest -Action { 'Reparse action must not run' }
+        } 'reparse|resolved.*path|canonical.*path' 'Receipt reparse ancestry'
+    } finally {
+        if (Test-Path -LiteralPath $finalReparse) { [IO.Directory]::Delete($finalReparse) }
+        if (Test-Path -LiteralPath $reparseAncestor) { [IO.Directory]::Delete($reparseAncestor) }
+        if (Test-Path -LiteralPath $reparseTarget) { Remove-Item -LiteralPath $reparseTarget -Recurse -Force }
+    }
     Write-Utf8 $receiptFile '{bad json'
-    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
-        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'Malformed Browser Pro submission receipt' 'Malformed receipt'
+    Assert-Failure { Invoke-ValidatorExpected } 'Malformed Browser Pro submission receipt' 'Malformed receipt'
     [IO.File]::WriteAllBytes($receiptFile, $receiptBytes)
     $mismatch = ([Text.Encoding]::UTF8.GetString($receiptBytes) | ConvertFrom-Json)
     $mismatch.question_sha256 = '0' * 64
     Write-Utf8 $receiptFile (($mismatch | ConvertTo-Json) + "`n")
-    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
-        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'does not match round and question digest' 'Mismatched receipt'
+    Assert-Failure { Invoke-ValidatorExpected } 'does not match round and question digest' 'Mismatched receipt'
     [IO.File]::WriteAllBytes($receiptFile, $receiptBytes)
 
     $begin = "HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN round=$roundId question_sha256=$digest"
@@ -200,7 +312,7 @@ try {
 - main [ref=page-$Ref]:
   - article [ref=user-$Ref]:
     - heading "You said:"
-    - paragraph: $marker
+    - paragraph: $dispatchScalar
   - article [ref=assistant-$Ref]:
     - heading "ChatGPT said:"
     - group [ref=group-$Ref]:
@@ -225,7 +337,9 @@ $Extra
     }
     function Invoke-Archive { param([string]$One, [string]$Two)
         & $archiver -RoundPath $roundRelative -ReceiptPath $receiptName -RawPath $rawName `
-            -SnapshotPathOne $One -SnapshotPathTwo $Two -RepoRoot $fixtureRepo
+            -SnapshotPathOne $One -SnapshotPathTwo $Two -StageCommit $stage `
+            -EvidenceCommit $evidence -Repository $repository -ReviewBranch $branch `
+            -ConversationUrl $conversation -ExpectedModel 'Pro' -RepoRoot $fixtureRepo
     }
     function Invoke-ArchiveNegative {
         param([string]$Name, [string]$Pattern, [string]$Extra = '', [string]$ContentOne = 'Natural Pro response',
@@ -265,6 +379,22 @@ $Extra
     Invoke-ArchiveNegative 'arbitrary-button' 'forbidden extra ARIA node' '      - button "Read aloud" [ref=bad]'
     Invoke-ArchiveNegative 'named-group' 'forbidden extra ARIA node' '    - group "Injected group" [ref=bad]'
     Invoke-ArchiveNegative 'named-img' 'forbidden extra ARIA node' '    - img "Injected image" [ref=bad]'
+    $lockOne = Join-Path $captureRoot 'lock-failure-one.yml'
+    $lockTwo = Join-Path $captureRoot 'lock-failure-two.yml'
+    New-ResponseSnapshot $lockOne 'lock-failure-1'
+    New-ResponseSnapshot $lockTwo 'lock-failure-2'
+    Set-StableTimes $lockOne $lockTwo
+    $openWriter = [IO.FileStream]::new(
+        $receiptFile, [IO.FileMode]::Open, [IO.FileAccess]::Write, [IO.FileShare]::ReadWrite)
+    try {
+        Assert-Failure { Invoke-Archive $lockOne $lockTwo } 'lock/open failed' 'Receipt writer exclusion'
+    } finally {
+        $openWriter.Dispose()
+    }
+    Assert-Removed @($lockOne,$lockTwo) 'Receipt writer exclusion'
+    if (Test-Path -LiteralPath (Join-Path $roundPath $rawName)) {
+        throw 'Receipt writer exclusion published raw before acquiring the held receipt lock'
+    }
 
     $one = Join-Path $captureRoot 'response-one.yml'
     $two = Join-Path $captureRoot 'response-two.yml'
@@ -287,6 +417,14 @@ $Extra
     $already = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
         -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
     if ($already.status -ne 'ALREADY_ARCHIVED') { throw 'ALREADY_ARCHIVED fixture failed' }
+    $historicalReceipt = $utf8.GetString($receiptBytes) | ConvertFrom-Json
+    $historicalReceipt.schema = 'hmasd.browser_pro_submission.v1'
+    $historicalReceipt.PSObject.Properties.Remove('dispatch_sha256')
+    Write-Utf8 $receiptFile (($historicalReceipt | ConvertTo-Json) + "`n")
+    $historical = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
+    if ($historical.status -ne 'ALREADY_ARCHIVED') { throw 'Raw-first historical v1 archival failed' }
+    [IO.File]::WriteAllBytes($receiptFile, $receiptBytes)
     Remove-Item $rawFile -Force
     [IO.Directory]::CreateDirectory($rawFile) | Out-Null
     Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `

@@ -52,11 +52,23 @@ those review artifacts as the stage commit. A commit cannot contain its own
 hash, so the artifacts name the evidence commit while the Controller records
 the stage commit that contains them.
 
-Run `.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1`,
-then `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`.
-Require both to return the same canonical question and source manifest before
-touching the browser. Local, ignored, or unpushed files are not reviewer
-evidence. Preserve the pushed-boundary verifier unchanged.
+An initial no-receipt READY check may run
+`.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1`
+without expected identity. Verify the pushed boundary with
+`.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`.
+When raw is absent and a receipt exists, invoke the validator with the complete
+trusted `-ExpectedStageCommit`, `-ExpectedEvidenceCommit`,
+`-ExpectedRepository`, `-ExpectedReviewBranch`, `-ExpectedConversationUrl`, and
+`-ExpectedModel` tuple from pushed-boundary verification and the registered
+conversation, never from receipt fields. Require validator and verifier to
+return the same canonical question and source manifest, and retain validator
+`receipt_sha256` as the exact active receipt identity for archival. Raw-first
+`ALREADY_ARCHIVED` remains terminal without receipt compatibility execution.
+For `READY_TO_SUBMIT`, run
+`.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1`
+to obtain the deterministic compact dispatch before touching the browser.
+Local, ignored, or unpushed files are not reviewer evidence. Preserve the
+pushed-boundary verifier unchanged.
 
 ## Mandatory future question envelope
 
@@ -112,20 +124,40 @@ The Controller runs the exchange Skill's exact
 `VALIDATED -> RECONCILED_IDLE -> DRAFT_CONFIRMED -> SUBMISSION_CONFIRMED -> GENERATING -> STABLE_TWICE -> ARCHIVED`
 state machine inline in the same long-lived session. Every round requires a live
 preflight; neither registry state nor an earlier round claims a durable live
-connection. Use fresh refs, `browser_type`, `browser_press_key Enter`, 20-second
-wait chunks, post-timeout snapshot reconciliation, the immutable receipt, and
+connection. Use fresh refs, exactly one `browser_type` action for the no-newline
+`HMASD_BP_D1` dispatch of at most 352 UTF-16 code units, a separate
+`browser_press_key Enter`, 20-second wait chunks, the immutable v2 receipt, and
 two stable temporary snapshots separated by file timestamps of at least ten
-seconds. Never blind retry or click Send, Stop answering, Answer now, or Copy
-response. Run
+seconds. Never type the full question, upload or attach a file, blind retry, or
+click Send, Stop answering, Answer now, or Copy response. A `browser_type`
+timeout is permanently indeterminate even if a later snapshot looks empty:
+never retry, retype, or submit on that live connection; fail closed and require
+a fresh BrowserMCP process/extension connection and live preflight. Run
 `.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1`
-with distinct pre-submit draft and post-submit snapshots; its reconstructed
-draft composer must byte-match the canonical question before the final user turn
-and empty submitted composer prove submission. Run
-`.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1`
-with the receipt and two stable snapshots for exclusive no-clobber archival.
+with distinct pre-submit draft and post-submit snapshots and the Controller's
+already-owned boundary/registry identity; the recorder threads that tuple
+through validation. Its reconstructed draft composer must byte-match the
+dispatch plus snapshot normalization LF, and the final user turn must byte-match
+the exact no-LF dispatch before an empty submitted composer proves submission.
+Run `.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1`
+with the receipt, two stable snapshots, and mandatory `StageCommit`,
+`EvidenceCommit`, `Repository`, `ReviewBranch`, `ConversationUrl`, and
+`ExpectedModel` values from pushed-boundary verification and the registered
+conversation. The archiver passes the tuple to receipt validation for exclusive
+no-clobber archival, then opens the canonical receipt through a Windows
+no-follow final-component handle with read access and reader-only sharing. File
+attributes and the normalized final path come from that same handle;
+directories, final reparse points, and case-insensitive final-handle-path
+mismatches (including reparse ancestry) fail before the handle is wrapped in
+the retained read stream. The held bytes must match validator
+`receipt_sha256`; any writer/delete-capable handle or byte change fails before
+raw publication. The digest-stable receipt handle remains alive throughout
+snapshot parsing, temporary raw preparation, atomic move, and exact raw reread,
+using only the validator-returned round and question identity.
 Every full-page snapshot must be a distinct regular file under the canonical OS
 temporary root, outside the repository and free of reparse-point ancestry; the
-scripts delete accepted inputs in `finally` on success or content failure.
+scripts delete accepted inputs in `finally` on success, receipt-lock failure,
+or content failure.
 
 ## Controller direct evidence intake
 
@@ -143,9 +175,12 @@ scope, and completion contract, then dispatches project-local OMP agents.
 
 ## Recovery
 
-A valid submission receipt forbids resubmission and resumes observation. An
-existing raw forbids all browser work. A naturally completed raw with scientific
-gaps remains valid transport and is classified separately. If Pro cannot read
+A valid submission receipt matching the complete trusted boundary/registry
+identity forbids resubmission and resumes observation; missing expected identity
+fails closed. An existing raw forbids all browser work and returns
+`ALREADY_ARCHIVED` without receipt compatibility execution. A naturally
+completed raw with scientific gaps remains valid transport and is classified
+separately. If Pro cannot read
 pushed evidence, repair the GitHub-connector boundary rather than pasting local
 source. There is no persistent Exchange role, completion-agent route, heartbeat,
 or alternate browser fallback. Review and direct evidence intake never authorize

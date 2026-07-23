@@ -26,9 +26,10 @@ reparse point on the file or any ancestor through the temporary root. Once
 accepted, the recorder and archiver delete every snapshot input in a guaranteed
 `finally` path on success or content failure.
 
-The registered Pro conversation reads the pushed repository evidence through
-its GitHub connector. BrowserMCP carries only the exact question and visible
-response. It never uploads local source or replaces the connector.
+The registered Pro conversation reads the exact pushed question and repository
+evidence through its GitHub connector. BrowserMCP carries only one ordinary
+bounded dispatch message and the visible response. It never uploads or attaches
+a file, carries the full question, or replaces the connector.
 
 ## Canonical round contract
 
@@ -57,9 +58,31 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_EXACTLY
 beneath `round_path`; reject separators, traversal, absolute paths, and aliases.
 Run `scripts/validate_browser_pro_round.ps1` before any browser work. It returns
 exactly one state: `READY_TO_SUBMIT`, `RESUME_SUBMITTED`, or
-`ALREADY_ARCHIVED`. An existing raw means `ALREADY_ARCHIVED` and forbids all
-browser work. A valid existing receipt means `RESUME_SUBMITTED` and forbids
-submission. A missing receipt and raw means `READY_TO_SUBMIT`.
+`ALREADY_ARCHIVED`. An initial validation with no receipt may omit expected
+identity and returns `READY_TO_SUBMIT`. When raw is absent and a receipt exists,
+first verify the pushed boundary and registered conversation, then supply the
+complete trusted tuple as `-ExpectedStageCommit`, `-ExpectedEvidenceCommit`,
+`-ExpectedRepository`, `-ExpectedReviewBranch`, `-ExpectedConversationUrl`, and
+`-ExpectedModel`; the tuple must never be sourced from the receipt. Only an
+exactly matching valid receipt returns `RESUME_SUBMITTED`, the `receipt_sha256`
+of the exact bytes parsed, and forbids submission. An existing raw returns
+`ALREADY_ARCHIVED` before receipt compatibility validation and forbids all
+browser work.
+
+For `READY_TO_SUBMIT`, run
+`scripts/render_browser_pro_dispatch.ps1` with the same validated identity and
+pushed boundary. It uses the validator and shared dispatch constructor and must
+return `DISPATCH_READY`. Decode `dispatch_base64` as UTF-8/no-BOM and require the
+exact payload to have zero CR/LF and at most 352 UTF-16 code units:
+
+```text
+HMASD_BP_D1 repo=<owner/repository> b=<review-branch> stage=<40 lowercase hex> q=<question-body-sha256> round=<round-id> file=20_PRO_OPEN_QUESTION.md Read via GitHub connector; follow fully; no upload/code/compute.
+```
+
+The fixed field order binds the repository, branch, stage commit, canonical
+round plus question basename, and question body digest. The final instruction
+tells Pro to read that exact pushed question through the GitHub connector and
+follow it completely without upload, code, or compute.
 
 Every future `20_PRO_OPEN_QUESTION.md` begins exactly:
 
@@ -100,7 +123,10 @@ VALIDATED
 Require the canonical validator and pushed-boundary verifier to agree on the
 same question and source manifest. The verifier binds repository, branch,
 40-character stage/evidence commits, GitHub remote, evidence ancestry, and exact
-local-versus-pushed blobs. Local, ignored, or unpushed files are not evidence.
+local-versus-pushed blobs. On every `RESUME_SUBMITTED` validation, pass those
+verified boundary values plus the registry-owned conversation URL and model as
+the validator's complete trusted expected identity tuple. Local, ignored, or
+unpushed files are not evidence.
 
 ### RECONCILED_IDLE
 
@@ -119,25 +145,30 @@ after any action or wait.
 
 ### DRAFT_CONFIRMED
 
-Use `browser_type` on the fresh composer ref to enter the exact complete
-question in one action; never use an OS clipboard, paraphrase, append hidden
-instructions, or paste local source. Save this pre-submit full snapshot outside
-the repository. Its textbox descendant paragraph scalars must reconstruct the
-exact canonical question bytes after LF normalization, including its trailing
-LF; a marker-only or wrong-body draft is not `DRAFT_CONFIRMED`.
+Use exactly one `browser_type` action on the fresh composer ref to enter the
+renderer-produced no-newline dispatch. Never type the full question, use an OS
+clipboard, paraphrase, append hidden instructions, upload or attach a file, or
+paste local source. Save this pre-submit full snapshot outside the repository.
+Its textbox descendant paragraph scalars must reconstruct the exact dispatch
+bytes plus the single LF introduced by snapshot paragraph normalization; any
+other draft is not `DRAFT_CONFIRMED`.
 
 ### SUBMISSION_CONFIRMED
 
-Use `browser_press_key` with `Enter`; never click `Send`. Save a distinct
-post-submit full snapshot and require its last visible user turn to contain the
-exact unique question marker and its composer to be empty. Then run
+Use a separate `browser_press_key` action with `Enter`; never include a newline
+in `browser_type` and never click `Send`. Save a distinct post-submit full
+snapshot and require its last visible user turn to byte-match the exact no-LF
+dispatch and its composer to be empty. Then run
 `scripts/record_browser_pro_submission.ps1` with `DraftSnapshotPath` and
-`SubmittedSnapshotPath`. It validates and deletes both temporary inputs,
-atomically publishes, and exactly rereads `19_BROWSER_PRO_SUBMISSION.json`
-without replacement. The receipt schema `hmasd.browser_pro_submission.v1`
-binds `SUBMISSION_CONFIRMED`, round, question digest, stage/evidence commits,
-repository, review branch, registered conversation URL, and expected model
-`Pro`. Receipt existence permanently forbids resubmission.
+`SubmittedSnapshotPath`. The recorder passes its already-owned stage/evidence,
+repository/branch, conversation, and model identity to the validator. It
+derives the dispatch through the same shared implementation, validates and
+deletes both temporary inputs, atomically publishes, and exactly rereads
+`19_BROWSER_PRO_SUBMISSION.json` without replacement. Receipt schema
+`hmasd.browser_pro_submission.v2` binds `SUBMISSION_CONFIRMED`, round, question
+and dispatch digests, stage/evidence commits, repository, review branch,
+registered conversation URL, and expected model `Pro`. Receipt existence
+permanently forbids resubmission.
 
 ### GENERATING
 
@@ -153,7 +184,22 @@ After natural completion, save exactly two distinct temporary BrowserMCP
 snapshots outside the repository. The second file's `LastWriteTimeUtc` must be
 at least ten seconds after the first. Refs and UI chrome may change. Never click
 `Copy response`. Run `scripts/archive_browser_pro_raw.ps1` with the immutable
-receipt and both snapshot paths. It reads only the final assistant turn. Before
+receipt, both snapshot paths, and mandatory `StageCommit`, `EvidenceCommit`,
+`Repository`, `ReviewBranch`, `ConversationUrl`, and `ExpectedModel` values
+from pushed-boundary verification and the registered conversation. The
+archiver passes them to the validator as trusted expected identity, then opens
+the canonical receipt through a Windows no-follow final-component handle with
+read access and reader-only sharing. It obtains file attributes and the
+normalized final path from that same handle, rejecting directories, final
+reparse points, and any path whose case-insensitive final handle path differs
+from the canonical receipt path (including reparse ancestry). Only after those
+checks does it wrap the same handle in the retained read stream. The held bytes
+must match validator `receipt_sha256`, thereby denying a
+writer/delete-capable handle, and the digest-stable handle remains alive through stable-response
+parsing, temporary raw preparation, atomic publication, and the exact raw
+reread. It uses only validator-returned round and question identity and never
+reparses identity from the receipt. It reads
+only the final assistant turn. Before
 the structural `Response actions` boundary it permits only unnamed structural
 groups/images and exact ChatGPT controls `Worked for <duration>`, `Copy`,
 `Copy code`, and `Sources`; any other named UI node fails closed. It parses ARIA
@@ -166,22 +212,25 @@ extracted contents to be byte-identical.
 ### ARCHIVED
 
 The archiver atomically/no-clobber publishes `21_PRO_OPEN_RAW.md`, exactly
-rereads it, and returns its hash, byte count, and status `ARCHIVED`. Raw is
-immutable. Delete the two temporary full snapshots and disconnect the extension
+rereads it while the digest-stable receipt handle is still held, and returns
+its hash, byte count, and status `ARCHIVED`. Raw is immutable. Delete the two
+temporary full snapshots after archival or any accepted-input content/receipt
+lock failure, and disconnect the extension
 after archival. Semantic gaps are recorded separately as `COMPLETE_WITH_GAPS`;
 never rewrite raw text.
 
 ## Indeterminate actions and fail-closed recovery
 
-`browser_click` and `browser_type` can perform their action before their
-automatic post-action snapshot hits the upstream timeout.
-`browser_press_key` has no automatic post-action snapshot in
-`@browsermcp/mcp@0.1.3`, but its timeout is still indeterminate. After every
-indeterminate click/type/press timeout, assume the action may have happened.
-Take one read-only snapshot, obtain fresh refs, and classify the visible state
-before any decision. Retry only when that reconciliation proves
-the action had no effect. Never blind retry, blindly retype, or blindly
-resubmit. An ambiguous state is `BROWSERMCP_PRO_BLOCKED`.
+`browser_click`, `browser_type`, and `browser_press_key` can perform their
+action before an upstream timeout is reported. A `browser_type` timeout is
+permanently indeterminate for that live process/extension connection. Even if a
+fresh snapshot looks empty, never retry or retype, never press `Enter`, clear no
+state, and publish no receipt. Return `BROWSERMCP_PRO_BLOCKED`; a later attempt
+requires a fresh BrowserMCP process/extension connection and a new live
+preflight. For an indeterminate click or press-key action, assume the action may
+have happened, take one read-only snapshot with fresh refs, and reconcile
+without a blind retry. An ambiguous state is `BROWSERMCP_PRO_BLOCKED`.
+Never blind retry any BrowserMCP action.
 
 No state permits clicks on `Send`, `Stop answering`, `Answer now`, or
 `Copy response`. No state permits a completion monitor, headless browser, CDP,
