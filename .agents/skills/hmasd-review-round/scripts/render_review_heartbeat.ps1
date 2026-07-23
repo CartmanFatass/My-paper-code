@@ -44,8 +44,13 @@ Never submit or resubmit from a heartbeat. If the matching response is pending,
 leave this single heartbeat active. A home-page redirect triggers registered
 conversation discovery, not blocking. Identify the assistant message after the
 matching fence and use two stable text snapshots plus generation-control state;
-a Thinking label alone is not pending. If the response is naturally complete,
-archive it exactly and reread for equality. Write the mechanical intake; delete this heartbeat and confirm absence; then return the exact raw to Project Manager.
+a Thinking label alone is not pending, while an active Stop answering control is.
+If a completed message explicitly reports missing question-listed evidence,
+treat it as a transport diagnostic and do not archive it as scientific raw.
+Leave the handoff active for Controller evidence-access recovery under the same
+fence. If the response is naturally complete and is not a transport diagnostic,
+archive it exactly and reread for equality. Write the mechanical intake; delete this heartbeat
+and confirm absence; then return the exact raw to Project Manager.
 Do not interpret scientific completeness, repair the package,
 authorize code, or start compute.
 "@

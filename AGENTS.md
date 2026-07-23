@@ -133,6 +133,19 @@ an internal PM audit into reviewer text. A rejected or incomplete package is
 returned with `repair_owner=project_manager`; Controller never repairs its
 semantic content.
 
+External-review browser recovery is also mechanical. A home-page redirect
+triggers registered-conversation discovery, and a matching conversation with an
+empty message pane receives one bounded reload before it can be considered
+unavailable. Generation state is determined from the exact round message,
+stable message snapshots and active controls such as `Stop answering`; a
+`Thinking` label alone is not authoritative. If Pro explicitly reports that
+question-listed evidence was unavailable, that response is an operational
+transport diagnostic, not scientific raw. Controller may attach only the exact
+question allow-list materialized from the pushed `stage_commit`, with
+repository-relative paths preserved, and continue under the same accepted
+freshness fence. It never substitutes current-working-tree files, adds unlisted
+evidence or interprets the missing science.
+
 The Controller dispatches Project Manager only after provenance intake and
 resource authorization. Its active assignment is the sole write lease. The
 Controller and other mutating tasks do not edit, stage, commit or push until it

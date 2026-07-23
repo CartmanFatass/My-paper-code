@@ -152,6 +152,10 @@ discovery ladder before reporting transport unavailable:
 2. Open the registered URL once. If it redirects to the signed-in home page,
    inspect visible conversation links and the sidebar/history for that same
    `conversation_id`.
+   If the matching URL has a composer but no visible message-role containers
+   after one bounded wait, reload the same tab once and take a fresh snapshot.
+   An empty content pane is a recoverable render state, not proof that the
+   conversation or assignment is absent.
 3. Use the signed-in conversation search with unique current-round evidence:
    the exact `round`, `stage_commit`, and question basename. A candidate is
    accepted only when the candidate URL contains the registered
@@ -178,7 +182,7 @@ Require two stable snapshots from distinct inspections separated by at least thr
 - the same assistant message identity and complete visible text appear in two
   stable snapshots from distinct inspections;
 - the second snapshot adds no text and exposes no active `Stop generating` or
-  cancel-generation control for that turn;
+  `Stop answering` or cancel-generation control for that turn;
 - no response error, `Retry`, or continue-generation control exists for the
   current turn; partial assistant text plus such a control is not complete; and
 - the response belongs to the exact matching fence rather than an earlier
@@ -196,6 +200,40 @@ no completed assistant message, a same-turn `Retry` may be used once as a
 recorded recovery after confirming it cannot submit another freshness fence.
 Do not assess whether requested scientific sections are present; that belongs
 to Project Manager after exact archival.
+
+### Evidence-access transport recovery
+
+An assistant message that explicitly says it could not read one or more
+question-listed evidence paths, asks for those files, or reports unavailable
+repository/connector access is an operational transport diagnostic. This is an
+objective provenance failure, not a Controller judgment about scientific
+completeness. Do not archive that diagnostic as scientific raw and do not send
+it to Project Manager as the round answer.
+
+Recover in the same registered conversation and under the same accepted fence:
+
+1. Parse the exact evidence paths listed by the question. Ignore any additional
+   path invented or requested by the diagnostic response.
+2. Verify every listed path exists at the pushed `stage_commit`, then
+   materialize them from `stage_commit`, not from the current working tree.
+   Use one archive with repository-relative paths preserved when duplicate
+   basenames exist. Verify the archive member set equals the question allow-list
+   exactly and contains no extra file.
+3. Attach that exact archive to the same conversation and send one mechanical
+   continuation stating its commit, allow-list identity and that the prior
+   response is a transport diagnostic. Do not submit another freshness fence.
+4. The candidate scientific raw is the stable assistant response after the
+   latest Controller transport-repair message, still anchored to the original
+   matching fence. Apply the same two-snapshot and generation-control checks to
+   that candidate.
+5. If archive ingestion explicitly fails, try one materially distinct
+   path-preserving delivery of only the same allow-listed files. Never add
+   current-worktree content, an internal manager artifact, an unlisted Skill or
+   a Controller-authored scientific explanation.
+
+Record the diagnostic and recovery as transport facts in the mechanical intake.
+They never change question semantics, scientific authority or the single-fence
+rule.
 
 ## Controller mechanical intake
 

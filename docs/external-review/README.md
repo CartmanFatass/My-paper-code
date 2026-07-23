@@ -55,6 +55,23 @@ assignment is resumed and never resubmitted. Absence must be proven before the
 single allowed submission. While pending, the Controller owns one five-minute
 heartbeat that inspects only; it never submits.
 
+A redirect to the signed-in home page starts registered-conversation discovery,
+not a block. If the registered URL opens with a composer but an empty message
+pane, Controller reloads that tab once before using conversation search. A
+`Thinking` label is only descriptive: active generation requires changing
+message text or an active control such as `Stop answering`; completion requires
+two stable snapshots at least three seconds apart and no retry/error/continue
+control.
+
+If a completed assistant message explicitly reports that listed repository
+evidence was unavailable, it is a transport diagnostic and is not written to
+`21_PRO_OPEN_RAW.md`. Controller takes the allow-list only from the question,
+materializes exactly those paths from `stage_commit` rather than the current
+working tree, verifies the path-preserving archive has no extras, and attaches
+it in the same registered conversation. This is one mechanical continuation
+under the existing fence, never a second freshness submission. The stable
+assistant response after that continuation is the raw candidate.
+
 Each raw has exactly one writer: the active Controller. A raw becomes immutable
 after natural completion and exact captured-text equality are verified by
 rereading it. Controller records only transport facts. Exact raw then returns

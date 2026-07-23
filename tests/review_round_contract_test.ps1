@@ -12,6 +12,7 @@ $boundaryVerifierPath = Join-Path $repo '.agents/skills/hmasd-review-round/scrip
 $retiredExchange = Join-Path $repo '.agents/skills/hmasd-review-exchange'
 $activeRound = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned'
 $activeRaw = Get-Content (Join-Path $activeRound '21_PRO_OPEN_RAW.md') -Raw
+$activeIntakePath = Join-Path $activeRound '50_MECHANICAL_INTAKE_RECORD.md'
 $proReadme = Get-Content (Join-Path $repo 'docs/external-review/gpt5_6_pro/README.md') -Raw
 
 if ($registry.schema_version -ne 27 -or @($registry.reviewers.PSObject.Properties).Count -ne 1 -or
@@ -46,13 +47,24 @@ foreach ($required in @(
     'A redirect to the ChatGPT home page is not a blocker',
     'Conversation discovery ladder',
     'visible conversation links',
+    'matching URL has a composer but no visible message-role containers',
+    'reload the same tab once',
     'two stable snapshots',
     'at least three seconds',
     'candidate URL',
     'data-message-author-role',
     'Stop generating',
+    'Stop answering',
     'Retry',
     'A visible `Thinking` label alone does not prove generation is active',
+    'operational transport diagnostic',
+    'Do not archive that diagnostic as scientific raw',
+    'exact evidence paths listed by the question',
+    'materialize them from `stage_commit`',
+    'not from the current working tree',
+    'repository-relative paths preserved',
+    'Do not submit another freshness fence',
+    'latest Controller transport-repair message',
     'recovery_exhausted=true')) {
     if (-not $round.Contains($required)) { throw "Review round missing: $required" }
 }
@@ -96,6 +108,7 @@ if ($roundAgent.Contains('allow_implicit_invocation: false')) {
 foreach ($required in @('$hmasd-review-round', '$browser:control-in-app-browser',
     'Never submit or resubmit', 'active Controller', 'stage_commit=',
     'home-page redirect', 'two stable text snapshots', 'Thinking label alone',
+    'Stop answering', 'transport diagnostic',
     'Write the mechanical intake', 'return the exact raw to Project Manager',
     'delete this heartbeat')) {
     if (-not $heartbeat.Contains($required)) { throw "Controller heartbeat missing: $required" }
@@ -126,11 +139,29 @@ foreach ($stale in @('registered Open-Pro Exchange must replace',
         throw "Active review source retains retired transport authority: $stale"
     }
 }
-foreach ($required in @('status=AWAITING_EXTERNAL_PRO_RESPONSE',
-    'semantic_author=project_manager',
-    'scientific_authority=external_pro',
-    'active Controller under `$hmasd-review-round` is the sole mechanical writer')) {
-    if (-not $activeRaw.Contains($required)) { throw "Active raw placeholder missing: $required" }
+if ($activeRaw.Contains('status=AWAITING_EXTERNAL_PRO_RESPONSE')) {
+    foreach ($required in @('semantic_author=project_manager',
+        'scientific_authority=external_pro',
+        'active Controller under `$hmasd-review-round` is the sole mechanical writer')) {
+        if (-not $activeRaw.Contains($required)) { throw "Active raw placeholder missing: $required" }
+    }
+}
+else {
+    if (-not (Test-Path -LiteralPath $activeIntakePath -PathType Leaf)) {
+        throw 'Completed active raw lacks Controller mechanical intake'
+    }
+    $activeIntake = Get-Content -Raw -LiteralPath $activeIntakePath
+    foreach ($required in @('artifact_scope=mechanical_transport_only',
+        'transport_status=COMPLETE',
+        'scientific_quality=not_classified_by_controller',
+        'operational transport diagnostic',
+        'heartbeat_terminal_status=absent_confirmed_by_delete_not_found')) {
+        if (-not $activeIntake.Contains($required)) { throw "Mechanical intake missing: $required" }
+    }
+    $rawHash = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $activeRound '21_PRO_OPEN_RAW.md')).Hash.ToLowerInvariant()
+    if (-not $activeIntake.Contains("raw_sha256=$rawHash")) {
+        throw 'Mechanical intake raw hash does not match completed raw'
+    }
 }
 try {
     & $boundaryVerifierPath -Commit 'not-a-commit' -QuestionPath 'docs/external-review/rounds/invalid/20_PRO_OPEN_QUESTION.md' -RepoRoot $repo

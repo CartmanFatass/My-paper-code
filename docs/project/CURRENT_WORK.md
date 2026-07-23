@@ -33,8 +33,10 @@ evidence, but it cannot authorize code, science, a successor, or iteration-2
 compute. The replacement package was authored by Project Manager and transported
 without Controller semantic rewriting. The PM-owned G1 external-Pro raw is archived
 with exact-text verification. PM reconciliation is archived and blocked on protected source contract;
-the PM-authored focused Pro package is committed and awaiting Controller-direct
-external-Pro transport. Formal compute remains unauthorized.
+the PM-authored focused Pro package was transported directly by Controller. Its
+exact raw and mechanical intake are archived after one evidence-access recovery
+under the same freshness fence. The next boundary is Project Manager code-side
+reconciliation of that exact focused raw. Formal compute remains unauthorized.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -52,7 +54,8 @@ The Experiment Monitor is the registered native Codex session and must be
 verified as `gpt-5.3-codex-spark` at `medium` before a monitor assignment.
 Controller-direct external-Pro transport is active under
 `$hmasd-review-round`; the persistent Open-Pro Exchange is retired and removed
-from the role graph. Its heartbeat is absent. Any late Exchange output has no authority to write raw or advance the workflow.
+from the role graph. The focused-round heartbeat is absent. Any late Exchange
+output has no authority to write raw or advance the workflow.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `fb9909711a2ca8628f3d534936b771885e53b26d`; workflow hardening is
