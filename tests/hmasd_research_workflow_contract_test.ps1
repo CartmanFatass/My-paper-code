@@ -42,11 +42,11 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=USEFUL_EFFECT_ROSTER_G3_FORMAL_ITERATION_4',
-    'iterations_remaining=2',
-    'conclusion_bearing_iterations_consumed=3',
+    'active_assignment_id=COUNT_PRESERVING_ROSTER_ENCODER_G4_DERIVATION',
+    'iterations_remaining=1',
+    'conclusion_bearing_iterations_consumed=4',
     'intermediate_authorization_prompts=forbidden',
-    'formal_compute_status=launchable_after_integrated_source_commit',
+    'formal_compute_status=not_launchable_until_g4_evidence_contract',
     'g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2',
     'g2_g_team_ci95=[0.0,0.0]',
     'g2_g_link_ci95=[0.5,0.5]',
@@ -57,13 +57,14 @@ foreach ($required in @(
     'g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md',
     'g3_primary_arm=ROSTER_ATTN',
     'g3_primary_comparator=TEAM_REC',
-    'iteration_report_status=iterations_1_to_3_complete',
-    'latest_iteration_report=docs/report/ITERATION_3.md',
+    'iteration_report_status=iterations_1_to_4_complete',
+    'latest_iteration_report=docs/report/ITERATION_4.md',
+    'g3_formal_result=UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=launchable_from_integrated_source',
+    'formal_run_status=completed_underpowered_access',
     'active_implementation=USEFUL_EFFECT_ROSTER_G3',
     'ROSTER_ATTN/TEAM_REC/NO_ROSTER',
     'primary_comparator=TEAM_REC',
@@ -114,7 +115,8 @@ foreach ($required in @(
 $reportResults = @(
     @{ Name = 'ITERATION_1.md'; Result = 'NO_ACCESS_THIS_BENCHMARK' },
     @{ Name = 'ITERATION_2.md'; Result = 'ORDINARY_EXPLANATION_G1' },
-    @{ Name = 'ITERATION_3.md'; Result = 'TEAM_REC_SUFFICIENT_HANDOFF_G2' }
+    @{ Name = 'ITERATION_3.md'; Result = 'TEAM_REC_SUFFICIENT_HANDOFF_G2' },
+    @{ Name = 'ITERATION_4.md'; Result = 'UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3' }
 )
 foreach ($item in $reportResults) {
     $path = Join-Path $repo (Join-Path 'docs/report' $item.Name)

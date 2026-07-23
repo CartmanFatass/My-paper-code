@@ -12,7 +12,7 @@ backend=cpu
 torch_threads=1
 primary_comparator=TEAM_REC
 primary_estimand=U_ROSTER_ATTN_minus_U_TEAM_REC
-formal_run_status=launchable_from_integrated_source
+formal_run_status=completed_underpowered_access
 closed_G0_G1_G2_mutation=forbidden
 backward_compatibility=not_required
 ```
@@ -101,3 +101,13 @@ The reduced exercise intentionally fails only the formal natural-audit quota:
 ledger balance, runner closure, replay, gradients, checkpoints and CPU/thread
 identity pass. The exercise result is operational evidence only and cannot be
 used as a conclusion-bearing branch.
+
+## Formal disposition
+
+The integrated source completed formal iteration 4 at
+`logs/formal_useful_effect_roster_g3_cpu_20260723_3f636aa_r1`. All operational
+and source-identification checks pass, but ROSTER_ATTN access CI95
+`[0.8633789, 0.9163086]` crosses 0.90. The registered result is
+`UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3`; the exact package is closed without
+rerun, tuning or budget rescue. The active successor is the zero-compute
+`COUNT_PRESERVING_ROSTER_ENCODER_G4_DERIVATION`.

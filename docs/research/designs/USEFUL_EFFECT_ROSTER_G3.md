@@ -1,7 +1,8 @@
 # USEFUL_EFFECT_ROSTER_G3
 
-Status: formal evidence contract frozen; implementation and bounded nonformal
-acceptance are Project-Manager accepted; formal compute has not started.
+Status: exact formal package completed with
+`UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3`; the package is closed against rerun,
+tuning, renaming or threshold/budget rescue.
 
 ## Scientific provenance
 

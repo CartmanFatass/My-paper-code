@@ -6,10 +6,10 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: multi-record information gate passed. Formal G1 reduced
-  within-lifecycle memory to per-member recurrence, formal G2 reduced one global
-  cross-lifecycle bit to TEAM_REC, and the nonformal G3 gate now validates
-  lifecycle-owned roster intervention without yet validating learned advantage.
+- Status: formal G3 is validly underpowered on access. ROSTER_ATTN has the
+  highest mean utility and responds to roster intervention, but its access CI
+  crosses 0.90, both gain UCBs are below 0.10, and one of five training seeds
+  fails markedly. No learned advantage is established.
 - Claim: under genuinely asynchronous partial edits, an unordered roster of
   lifecycle-owned commitments may improve learning and held-out transport when
   value depends on complementarity among retained and newly selected records.
@@ -28,6 +28,10 @@ the Project Manager-accepted CDC state.
 - Gate correction: uniqueness utility is structural only.
   `CE-DIVERSITY-AS-UTILITY` requires the learned source to score realized useful
   effects under demand states where duplicate commitments can be optimal.
+- G3 correction: softmax-normalized roster attention is not accepted as a
+  stable count-sensitive editor merely because its mean exceeds ordinary
+  controls. The next candidate must preserve absolute multiset multiplicity and
+  show cross-seed access before gain or mediation is interpreted.
 
 ## C-REC — Ordinary recurrence is sufficient
 
@@ -65,26 +69,32 @@ the Project Manager-accepted CDC state.
 
 ## C-BENCH — The benchmark is not identifying
 
-- Status: live and strengthened. Formal G1 shows that individual cue memory
-  does not identify EHC over per-member recurrence; formal G2 shows that one
-  global handoff bit does not identify EHC over team recurrence.
+- Status: the useful-effect G3 source is identified, but learned access is
+  underpowered. Formal G1 shows that individual cue memory does not identify EHC
+  over per-member recurrence; formal G2 shows that one global handoff bit does
+  not identify EHC over team recurrence.
 - Claim: current benchmark/control pairs do not separate representation,
   access, credit and coordination explanations.
 - Separating evidence: a constructive policy or alternative task family that
   changes identification without changing the algorithm claim.
-- Current correction: the G3 gate now contains multiple standing commitments and
-  asynchronous partial edits, but its uniqueness score does not identify useful
-  composition. The learned source must use demand-served realized effects.
+- Current correction: G3 now uses demand-served realized effects and passes its
+  source controls. The remaining ambiguity is algorithmic access stability, not
+  source identifiability or label-diversity reward.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 
-- Status: useful-effect G3 formal contract frozen; implementation pending.
+- Status: G3 shows a causal roster response without registered access or a
+  >0.10 advantage. ROSTER_ATTN mean utility is highest, but one training seed
+  produces a large held-out failure and exact optimal-choice probability is low.
 - Claim: the important variable-N difficulty is joint complementary allocation,
   not an individual lifetime mechanism in isolation.
 - Separating evidence: a roster-only intervention changes an asynchronous
   editor's demand-served effect and value, followed by natural and held-out
   transport beyond matched TEAM_REC and NO_ROSTER explanations. Duplicate-
   optimal demand prevents label diversity from satisfying the claim.
+- Next correction: derive a permutation-invariant, count-preserving multiset
+  roster encoder and reject any proposal that only increases evaluation support
+  or rescues the closed G3 budget.
 
 ## C-LINK-NULL — Commitment is not load-bearing for the source family
 
