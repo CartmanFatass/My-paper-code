@@ -55,8 +55,10 @@ the Project Manager-accepted CDC state.
 - Strongest remaining counterexample: each registered domain still uses one
   hand-authored membership schedule, so process-level schedule memorization is
   not excluded.
-- Separating evidence: draw valid event time, type, magnitude and active-count
-  trajectories independently per evaluation episode under frozen checkpoints.
+- Separating evidence: G13 now draws valid event time, type, magnitude, member
+  keys and active-count trajectories independently per episode under frozen
+  checkpoints; every source instance is recomputed and its formal result is
+  pending.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

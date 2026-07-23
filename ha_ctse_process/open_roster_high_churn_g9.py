@@ -59,6 +59,7 @@ class ChurnProfile:
     events: tuple[ChurnEvent, ...]
     capacity: int = CHURN_CAPACITY
     maximum_active_count: int = MAXIMUM_ACTIVE_COUNT
+    required_event_count: int = 8
 
     def validate(self) -> None:
         if not 2 <= int(self.maximum_active_count) <= int(self.capacity):
@@ -69,8 +70,8 @@ class ChurnProfile:
             or any(key < 0 or key >= self.capacity for key in self.initial_join)
         ):
             raise ValueError("G9 initial roster is invalid")
-        if len(self.events) != 8:
-            raise ValueError("G9 profile requires exactly eight edits")
+        if self.required_event_count < 1 or len(self.events) != self.required_event_count:
+            raise ValueError("churn profile event-count contract failed")
         if tuple(event.time for event in self.events) != tuple(
             sorted(event.time for event in self.events)
         ) or len({event.time for event in self.events}) != len(self.events):

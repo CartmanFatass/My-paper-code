@@ -77,6 +77,8 @@ DOMAIN_FLOORS = {
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
 MIXED_STOCHASTIC_MEAN_FLOOR = 0.80
+EXPECTED_EVENT_COUNT = 8
+REQUIRE_UNIQUE_PROFILES = False
 EXPECTED_TORCH = "2.7.0+cpu"
 
 
@@ -274,35 +276,51 @@ def train(
     return result
 
 
-def _source_controls() -> dict[str, Any]:
+def _event_signature(profile: Any) -> list[dict[str, Any]]:
+    return [
+        {
+            "time": int(event.time),
+            "temporarily_left": list(event.temporarily_left),
+            "rejoined": list(event.rejoined),
+            "joined": list(event.joined),
+            "terminally_left": list(event.terminally_left),
+        }
+        for event in profile.events
+    ]
+
+
+def _source_controls(*, episode_ids: tuple[int, ...]) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     lifecycle_rows: list[dict[str, Any]] = []
-    for domain, profiles in DOMAIN_PROFILES.items():
-        profile = profiles[0]
+    for domain in DOMAIN_PROFILES:
         factory = LEDGER_FACTORIES[domain]
-        ledger = factory(0, master_seed=DOMAIN_LEDGER_SEEDS[domain])
-        environment = HighChurnEnv(ledger)
-        while environment.time < HORIZON:
-            view = environment.observe()
-            environment.step(constructive_actions(environment, view))
-        outcome = environment.outcome()
-        expected_schedule = expected_roster_schedule(profile)
-        rows.append(
-            {
-                "domain": domain,
-                "profile": profile.name,
-                "event_count": len(profile.events),
-                "utility": outcome.utility,
-                "roster_sizes": list(outcome.roster_sizes),
-                "expected_roster_sizes": list(expected_schedule),
-                "short_required_total": outcome.short_required_total,
-                "expected_short_requirement": ledger.expected_short_requirement,
-            }
-        )
+        for episode_id in episode_ids:
+            ledger = factory(episode_id, master_seed=DOMAIN_LEDGER_SEEDS[domain])
+            profile = ledger.profile
+            environment = HighChurnEnv(ledger)
+            while environment.time < HORIZON:
+                view = environment.observe()
+                environment.step(constructive_actions(environment, view))
+            outcome = environment.outcome()
+            expected_schedule = expected_roster_schedule(profile)
+            rows.append(
+                {
+                    "domain": domain,
+                    "episode_id": episode_id,
+                    "profile": profile.name,
+                    "event_count": len(profile.events),
+                    "event_signature": _event_signature(profile),
+                    "utility": outcome.utility,
+                    "roster_sizes": list(outcome.roster_sizes),
+                    "expected_roster_sizes": list(expected_schedule),
+                    "short_required_total": outcome.short_required_total,
+                    "expected_short_requirement": ledger.expected_short_requirement,
+                }
+            )
         configure_runtime(2_281_000)
         trajectory = collect_direct_trajectory(
             _model(),
-            ledger_ids=(0,),
+            ledger_ids=(episode_ids[0],),
             ledger_seed=DOMAIN_LEDGER_SEEDS[domain],
             action_seed=ACTION_SEED_BASE,
             device=torch.device("cpu"),
@@ -330,8 +348,23 @@ def _source_controls() -> dict[str, Any]:
             row["short_required_total"] == row["expected_short_requirement"]
             for row in rows
         ),
-        "all_event_counts_exact": all(row["event_count"] == 8 for row in rows),
+        "all_event_counts_exact": all(
+            row["event_count"] == EXPECTED_EVENT_COUNT for row in rows
+        ),
         "all_lifecycle_states_exact": all(row["valid"] for row in lifecycle_rows),
+        "all_profile_names_unique": (
+            not REQUIRE_UNIQUE_PROFILES
+            or len({row["profile"] for row in rows}) == len(rows)
+        ),
+        "all_event_operation_types_present": all(
+            any(event[name] for row in rows for event in row["event_signature"])
+            for name in (
+                "temporarily_left",
+                "rejoined",
+                "joined",
+                "terminally_left",
+            )
+        ),
     }
 
 
@@ -367,7 +400,13 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
                         "domain": domain,
                         "deterministic": deterministic,
                         "episode_ids": list(episode_ids),
-                        "profile_names": [DOMAIN_PROFILES[domain][0].name] * eval_episodes,
+                        "profile_names": [
+                            factory(
+                                episode_id,
+                                master_seed=DOMAIN_LEDGER_SEEDS[domain],
+                            ).profile.name
+                            for episode_id in episode_ids
+                        ],
                         "persistent": values["persistent"].tolist(),
                         "short": values["short"].tolist(),
                         "utility": values["utility"].tolist(),
@@ -386,7 +425,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
         "formal": bool(training["formal"]),
         "source_commit": training["source_commit"],
         "runtime": _runtime_identity(),
-        "source_controls": _source_controls(),
+        "source_controls": _source_controls(episode_ids=episode_ids),
         "cells": cells,
     }
     _write_json(run_root / "evaluation_manifest.json", result)
@@ -458,41 +497,50 @@ def _evaluation_errors(training: dict[str, Any], evaluation: dict[str, Any]) -> 
     if not _runtime_valid(evaluation.get("runtime")):
         errors.append("evaluation runtime mismatch")
     controls = evaluation.get("source_controls", {})
+    eval_episodes = int(training["counts"]["eval_episodes"])
     if (
         not isinstance(controls, dict)
-        or len(controls.get("rows", [])) != 3
+        or len(controls.get("rows", [])) != len(DOMAIN_PROFILES) * eval_episodes
         or not controls.get("all_constructive_utility_one")
         or not controls.get("all_roster_schedules_exact")
         or not controls.get("all_actual_wave_requirements_exact")
         or not controls.get("all_event_counts_exact")
         or not controls.get("all_lifecycle_states_exact")
+        or not controls.get("all_profile_names_unique")
+        or not controls.get("all_event_operation_types_present")
     ):
         errors.append("source controls failed")
     else:
         expected_control_rows = {}
-        for domain, profiles in DOMAIN_PROFILES.items():
-            profile = profiles[0]
-            ledger = LEDGER_FACTORIES[domain](
-                0, master_seed=DOMAIN_LEDGER_SEEDS[domain]
-            )
-            expected_control_rows[domain] = {
-                "profile": profile.name,
-                "event_count": len(profile.events),
-                "roster_sizes": list(expected_roster_schedule(profile)),
-                "expected_short_requirement": ledger.expected_short_requirement,
-            }
+        for domain in DOMAIN_PROFILES:
+            for episode_id in range(eval_episodes):
+                ledger = LEDGER_FACTORIES[domain](
+                    episode_id, master_seed=DOMAIN_LEDGER_SEEDS[domain]
+                )
+                profile = ledger.profile
+                expected_control_rows[(domain, episode_id)] = {
+                    "profile": profile.name,
+                    "event_count": len(profile.events),
+                    "event_signature": _event_signature(profile),
+                    "roster_sizes": list(expected_roster_schedule(profile)),
+                    "expected_short_requirement": ledger.expected_short_requirement,
+                }
         observed_control_rows = controls["rows"]
         if {
-            row.get("domain") for row in observed_control_rows
+            (row.get("domain"), row.get("episode_id"))
+            for row in observed_control_rows
         } != set(expected_control_rows):
             errors.append("source-control domain inventory mismatch")
         for row in observed_control_rows:
-            expected_row = expected_control_rows.get(row.get("domain"))
+            expected_row = expected_control_rows.get(
+                (row.get("domain"), row.get("episode_id"))
+            )
             if expected_row is None:
                 continue
             if (
                 row.get("profile") != expected_row["profile"]
                 or row.get("event_count") != expected_row["event_count"]
+                or row.get("event_signature") != expected_row["event_signature"]
                 or row.get("roster_sizes") != expected_row["roster_sizes"]
                 or row.get("expected_roster_sizes")
                 != expected_row["roster_sizes"]
@@ -506,7 +554,7 @@ def _evaluation_errors(training: dict[str, Any], evaluation: dict[str, Any]) -> 
         lifecycle_rows = controls.get("lifecycle_rows")
         if not isinstance(lifecycle_rows, list) or {
             (row.get("domain"), row.get("valid")) for row in lifecycle_rows
-        } != {(domain, True) for domain in expected_control_rows}:
+        } != {(domain, True) for domain in DOMAIN_PROFILES}:
             errors.append("source-control lifecycle inventory mismatch")
     cells = evaluation.get("cells")
     if not isinstance(cells, list):
@@ -525,7 +573,6 @@ def _evaluation_errors(training: dict[str, Any], evaluation: dict[str, Any]) -> 
     }
     if actual != expected or len(cells) != len(expected):
         errors.append("evaluation cell inventory mismatch")
-    eval_episodes = int(training["counts"]["eval_episodes"])
     for cell in cells:
         if not cell.get("model_state_unchanged_exact") or float(cell.get("model_state_maximum_difference", math.nan)) != 0.0:
             errors.append("evaluation changed model state")
@@ -534,10 +581,17 @@ def _evaluation_errors(training: dict[str, Any], evaluation: dict[str, Any]) -> 
             errors.append("evaluation checkpoint label mismatch")
         if cell.get("episode_ids") != list(range(eval_episodes)):
             errors.append("evaluation episode inventory mismatch")
-        expected_profile = (
-            DOMAIN_PROFILES[domain][0].name if domain in DOMAIN_PROFILES else None
+        expected_profiles = (
+            [
+                LEDGER_FACTORIES[domain](
+                    episode_id, master_seed=DOMAIN_LEDGER_SEEDS[domain]
+                ).profile.name
+                for episode_id in range(eval_episodes)
+            ]
+            if domain in DOMAIN_PROFILES
+            else None
         )
-        if cell.get("profile_names") != [expected_profile] * eval_episodes:
+        if cell.get("profile_names") != expected_profiles:
             errors.append("evaluation profile inventory mismatch")
         for name in ("persistent", "short", "utility"):
             values = cell.get(name)

@@ -1,64 +1,61 @@
-# Ultra-scale open-roster G12 implementation plan
+# Randomized roster-process G13 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution, compatibility work and workflow hashes are
 > disabled.
 
 ```text
-active_implementation=ULTRA_SCALE_OPEN_ROSTER_G12
-implementation_status=FORMAL_CLOSED_ROBUST_ULTRA_SCALE
-design=docs/research/designs/ULTRA_SCALE_OPEN_ROSTER_G12.md
+active_implementation=RANDOMIZED_ROSTER_PROCESS_G13
+implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+design=docs/research/designs/RANDOMIZED_ROSTER_PROCESS_G13.md
 backend=cpu
 torch_threads=1
-formal_iteration=13
-chain_iterations_remaining_after_run=4
+formal_iteration=14
+chain_iterations_remaining_before_run=4
 ```
 
 ## Goal
 
-Determine whether the same frozen prefix-normalized G8 policy remains usable
-when active roster size crosses the N=40 evidence boundary and reaches 48, 64
-and 80 under the already established eight-edit churn mechanics.
+Separate genuine roster-process robustness from success on a few fixed count
+schedules by drawing a fresh, fully recorded valid membership process for every
+evaluation episode.
 
-## Task 1 - Define above-range profiles
+## Task 1 - Generate identifiable random processes
 
-Use capacities 64, 80 and 96 with maxima 48, 64 and 80. Retain the horizon,
-wave source, membership-event transaction semantics and lifecycle ownership.
-Each profile must be transition-valid and constructively attain utility one.
+Sample initial count/keys, safe event times, affected keys and positive batch
+magnitudes from an episode-owned seed. Use 12 operations containing three
+leave/rejoin and terminal/join motifs. Keep declared count bounds and prohibit
+lifecycle reuse.
 
-Focused proof: exact count schedules, eight events, expected/actual wave demand,
-finite observations, lifecycle freeze/restore and constructive outcomes.
+Focused proof: reproducibility, profile uniqueness, schedule diversity, all
+operation types, transition validity and exact count bounds.
 
-## Task 2 - Pair with frozen G8 finals
+## Task 2 - Close every source instance
 
-Import the exact three G8 terminal checkpoints with zero optimizer steps. Run
-all three domains under deterministic and stochastic actions without modifying
-policy state. Preserve the 128-episode G8 provenance while using 64 episodes per
-new G12 cell.
+Generalize the active frozen-checkpoint evaluator from one source-control row
+per domain to one row per domain/episode. Record exact event signatures,
+schedules, wave demand and constructive outcomes. Recompute every row during
+analysis and retain one shared lifecycle-state proof per domain.
 
-Focused proof: checkpoint inventory, copy difference zero, immutable model,
-complete 18-cell inventory and exact serialized arrays.
+Focused proof: tampered event signatures fail closed; nonformal records cannot
+be promoted to formal; all generated source rows attain utility one.
 
-## Task 3 - Freeze conclusion semantics
+## Task 3 - Evaluate the frozen algorithm
 
-Keep the absolute deterministic floor 0.90, minimum ultra replicate floor 0.85
-and ultra stochastic floor 0.80. Apply the edge -> far -> ultra -> stability ->
-success first-match order. Equality passes; the immediately lower float fails.
-Formal token, counts, source commit and CPU runtime fail closed.
+Import the exact three G8 finals with zero optimizer steps. Evaluate all three
+random-process domains under deterministic and stochastic action modes for 48
+episodes per cell. Preserve exact model state, CPU runtime, G8 provenance and
+the predeclared first-match access/stability gates.
 
 ## Acceptance and launch
 
-The G12 focused suite passes 5/5 and the G12 plus shared G5 suite passes 10/10.
-The official bounded nonformal pipeline at
-`logs/nonformal_ultra_scale_g12_20260723_pm1` is operationally valid with six
-cells, 24 utility values, zero optimizer steps, exact checkpoint copy, immutable
-model state and all source/lifecycle controls true. Nonformal evidence is not a
-scientific result.
+The focused suite passes 6/6 and the G13 plus shared G5 suite passes 11/11. The
+official bounded nonformal pipeline at
+`logs/nonformal_random_roster_g13_20260723_pm1` is operationally valid with 12
+unique source rows, six cells, zero optimizer steps, exact checkpoint copy,
+immutable model state and every source/lifecycle control true.
 
-No additional review was selected because the new code is a thin profile and
-contract specialization over the already accepted frozen-checkpoint core, and
-focused evidence found no anomaly. The exact formal run closes as
-`ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12`; all three deterministic LCBs exceed 0.923,
-the N=80 minimum replicate mean is 0.9270 and stochastic mean is 0.8974.
-Iteration 13 is closed with four iterations remaining. The next active boundary
-is `RANDOMIZED_ROSTER_PROCESS_G13`.
+The first failing probe localized an invalid mid-wave removal support and was
+repaired at the source generator; it neither changed policy nor weakened a
+gate. No further review is selected. Integrate and launch the exact formal
+commands through the fixed operator.

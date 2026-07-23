@@ -1,4 +1,4 @@
-"""Configure the frozen-G8 evaluation core for N=48--80 G12."""
+"""Configure frozen-G8 evaluation for episode-random roster processes."""
 
 from __future__ import annotations
 
@@ -16,61 +16,62 @@ from ha_ctse_process.open_roster_high_churn_g9 import (
     expected_roster_schedule,
     high_churn_lifecycle_contract_valid,
 )
-from ha_ctse_process.open_roster_ultra_scale_g12 import (
+from ha_ctse_process.open_roster_random_process_g13 import (
     DOMAIN_PROFILES,
     LEDGER_FACTORIES,
 )
 from scripts import run_open_roster_high_churn_g9 as core
 
 
-ALGORITHM_ID = "ULTRA_SCALE_OPEN_ROSTER_G12"
-AUTHORIZATION_TOKEN = "AUTHORIZE_ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_CPU_V1"
-INVALID_BRANCH = "INVALID_ULTRA_SCALE_OPEN_ROSTER_G12"
-NONFORMAL_BRANCH = "NONFORMAL_ULTRA_SCALE_G12_EXERCISE_COMPLETE"
+ALGORITHM_ID = "RANDOMIZED_ROSTER_PROCESS_G13"
+AUTHORIZATION_TOKEN = "AUTHORIZE_RANDOMIZED_ROSTER_PROCESS_G13_FORMAL_CPU_V1"
+INVALID_BRANCH = "INVALID_RANDOMIZED_ROSTER_PROCESS_G13"
+NONFORMAL_BRANCH = "NONFORMAL_RANDOMIZED_ROSTER_G13_EXERCISE_COMPLETE"
 FORMAL_REPLICATES = core.FORMAL_REPLICATES
-FORMAL_EVAL_EPISODES = 64
+FORMAL_EVAL_EPISODES = 48
 FORMAL_BOOTSTRAP_REPETITIONS = core.FORMAL_BOOTSTRAP_REPETITIONS
 DOMAIN_LEDGER_SEEDS = {
-    "edge_ultra_scale": 3_081_000,
-    "far_ultra_scale": 3_081_100,
-    "mixed_churn": 3_081_200,
+    "random_moderate": 3_481_000,
+    "random_wide": 3_481_100,
+    "mixed_churn": 3_481_200,
 }
-ACTION_SEED_BASE = 3_181_000
-BOOTSTRAP_SEED = 3_281_012
+ACTION_SEED_BASE = 3_581_000
+BOOTSTRAP_SEED = 3_681_013
 DOMAIN_FLOORS = {
-    "edge_ultra_scale": 0.90,
-    "far_ultra_scale": 0.90,
+    "random_moderate": 0.90,
+    "random_wide": 0.90,
     "mixed_churn": 0.90,
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
 MIXED_STOCHASTIC_MEAN_FLOOR = 0.80
+EXPECTED_EVENT_COUNT = 12
 DEFAULT_G8_RUN_ROOT = core.DEFAULT_G8_RUN_ROOT
 
 
 def select_result_branch(metrics: dict[str, object]) -> str:
     if (
-        float(metrics["edge_ultra_scale_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["edge_ultra_scale"]
+        float(metrics["random_moderate_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["random_moderate"]
     ):
-        return "NO_EDGE_SCALE_ACCESS_G12"
+        return "NO_RANDOM_MODERATE_ACCESS_G13"
     if (
-        float(metrics["far_ultra_scale_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["far_ultra_scale"]
+        float(metrics["random_wide_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["random_wide"]
     ):
-        return "NO_FAR_SCALE_ACCESS_G12"
+        return "NO_RANDOM_WIDE_ACCESS_G13"
     if (
         float(metrics["mixed_churn_deterministic_utility_ci95"][0])
         < DOMAIN_FLOORS["mixed_churn"]
     ):
-        return "NO_ULTRA_SCALE_ACCESS_G12"
+        return "NO_RANDOM_ULTRA_ACCESS_G13"
     if (
         float(metrics["mixed_churn_min_replicate_mean"])
         < MINIMUM_MIXED_REPLICATE_FLOOR
         or float(metrics["mixed_churn_stochastic_mean"])
         < MIXED_STOCHASTIC_MEAN_FLOOR
     ):
-        return "UNSTABLE_ULTRA_SCALE_G12"
-    return "ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12"
+        return "UNSTABLE_RANDOM_ROSTER_G13"
+    return "ROBUST_RANDOMIZED_ROSTER_PROCESS_G13"
 
 
 def _activate_contract() -> None:
@@ -90,6 +91,8 @@ def _activate_contract() -> None:
     core.DOMAIN_FLOORS = DOMAIN_FLOORS
     core.MINIMUM_MIXED_REPLICATE_FLOOR = MINIMUM_MIXED_REPLICATE_FLOOR
     core.MIXED_STOCHASTIC_MEAN_FLOOR = MIXED_STOCHASTIC_MEAN_FLOOR
+    core.EXPECTED_EVENT_COUNT = EXPECTED_EVENT_COUNT
+    core.REQUIRE_UNIQUE_PROFILES = True
     core.select_result_branch = select_result_branch
 
 
