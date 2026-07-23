@@ -10,9 +10,10 @@ Updated: 2026-07-23
 - **Execution mode: unified OMP Controller with project-local task agents.**
   There is no persistent implementation relay or legacy native-agent fallback.
 - Scientific direction comes from the external GPT-5.6 Pro conversation
-  registered in `REVIEWER_CONVERSATIONS.json`. The Controller owns direct
-  BrowserMCP exchange, evidence intake, executable planning, local agent
-  coordination, package acceptance, Git and project control.
+  registered in `REVIEWER_CONVERSATIONS.json`. The Controller owns BrowserMCP
+  submission/capture, evidence intake, executable planning, local-agent
+  coordination, package acceptance, Git and project control. One project-local
+  Spark task may observe Pro completion through wait/snapshot only.
 - The registered native Experiment Monitor is task
   `019f8a2f-08a2-73e1-b539-2dc5a6db0fc1`; it observes one already-authorized
   run and must resolve as `gpt-5.3-codex-spark` at `medium` before assignment.
@@ -32,25 +33,29 @@ launched from it.
 
 The project-local OMP child registry lives under `.omp/agents/`. Its exact
 callable types are `hmasd-code-scout`, `hmasd-implementer`,
-`hmasd-verifier`, `hmasd-reviewer` and `hmasd-exp-manager`; bundled/default
-fallback is forbidden. Children are depth one and cannot spawn successors.
+`hmasd-verifier`, `hmasd-reviewer`, `hmasd-exp-manager` and
+`hmasd-pro-monitor`; bundled/default fallback is forbidden. Children are depth
+one and cannot spawn successors.
 
 ## Role configuration
 
 Mechanical exploration and verification use GPT-5.6 Luna at high reasoning.
 Core implementation uses GPT-5.6 Sol at high reasoning and independent core
 review uses Sol at xhigh. Experiment monitoring uses GPT-5.3 Codex Spark at
-medium; experiment evidence and record work uses Spark at high. External review
-uses the pinned `browsermcp-pro` server and the user-connected ChatGPT Pro tab
+medium; experiment evidence and record work uses Spark at high. Pro response
+completion observation uses Spark at medium with BrowserMCP wait/snapshot only.
+External review uses the pinned `browsermcp-pro` server and the user-connected
+ChatGPT Pro tab
 registered in `REVIEWER_CONVERSATIONS.json`. The evidence repository is
 `CartmanFatass/My-paper-code` and the current review branch is `Claude`.
 The restarted long-lived OMP Controller exposes BrowserMCP tools. A read-only
 snapshot verified the exact registered conversation URL, authenticated Pro
 account and visible `Pro` model; connection state is `CONNECTED_PREFLIGHT_OK`.
-No reviewer message has yet been submitted in the new conversation. Startup
-inspection and repair are complete; the first resumed round uses the exact CPU
-formal-path smoke failure and accepted Pro raw as scientific inputs. No
-headless, CDP or former Codex-Exchange fallback is authorized.
+The first resumed round is in flight and uses the exact registered-CPU
+formal-path smoke failure and accepted Pro raw as scientific inputs. The
+Controller submitted the Git-visible question; `hmasd-pro-monitor` may observe
+only natural completion and response stability. No headless, CDP or former
+Codex-Exchange fallback is authorized.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.

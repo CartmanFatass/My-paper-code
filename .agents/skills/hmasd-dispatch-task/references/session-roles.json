@@ -1,12 +1,12 @@
 {
-  "schema_version": 16,
+  "schema_version": 17,
   "updated": "2026-07-23",
   "roles": {
     "controller": {
       "kind": "active_unified_omp_controller",
       "thread_id": "019f8995-7550-7c82-8f31-ad08a3d381d4",
       "contract": "AGENTS.md",
-      "responsibility": "scientific intake, direct BrowserMCP exchange, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
+      "responsibility": "scientific intake, BrowserMCP submission/capture, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
     },
     "experiment_monitor": {
       "kind": "persistent_codex_experiment_monitor",
@@ -18,7 +18,7 @@
     }
   },
   "external_review_transport": {
-    "kind": "controller_direct_browsermcp",
+    "kind": "controller_owned_browsermcp_with_readonly_task_monitor",
     "server": "browsermcp-pro",
     "config": ".omp/mcp.json",
     "skill": ".agents/skills/hmasd-browser-pro-exchange/SKILL.md",
@@ -29,6 +29,9 @@
     "review_branch": "Claude",
     "long_lived_controller_required": true,
     "user_connected_tab_required": true,
+    "completion_monitor_agent": "hmasd-pro-monitor",
+    "completion_monitor_mode": "one_shot_wait_snapshot_only",
+    "controller_only_actions": ["click", "type", "navigate", "capture", "archive", "interpret", "intake"],
     "fallback": "none"
   },
   "local_agents": {
@@ -40,7 +43,8 @@
       "hmasd-implementer",
       "hmasd-verifier",
       "hmasd-reviewer",
-      "hmasd-exp-manager"
+      "hmasd-exp-manager",
+      "hmasd-pro-monitor"
     ]
   },
   "policy": {

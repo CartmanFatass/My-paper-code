@@ -1,6 +1,6 @@
 ---
 name: hmasd-dispatch-task
-description: Route HMASD work to the registered experiment monitor. Use for monitor delivery or its role callback; local agents and BrowserMCP external review remain in the unified Controller session.
+description: Route HMASD work to the registered experiment monitor. Use for monitor delivery or its role callback; local agents include a one-shot read-only Pro completion monitor while BrowserMCP submission and intake remain in the unified Controller session.
 ---
 
 # HMASD Task Dispatch
@@ -12,7 +12,8 @@ manually copied task ID.
 
 ```text
 controller -> local OMP task agents
-controller -> BrowserMCP Pro exchange
+controller -> BrowserMCP Pro submission/capture
+controller -> hmasd-pro-monitor -> BrowserMCP wait/snapshot
 controller <-> experiment_monitor
 ```
 
@@ -34,6 +35,7 @@ hmasd-implementer  openai-codex/gpt-5.6-sol:high
 hmasd-verifier     openai-codex/gpt-5.6-luna:high
 hmasd-reviewer     openai-codex/gpt-5.6-sol:xhigh
 hmasd-exp-manager  openai-codex/gpt-5.3-codex-spark:high
+hmasd-pro-monitor   openai-codex/gpt-5.3-codex-spark:medium
 ```
 
 Before implementation, record the current branch, `HEAD` and inherited
@@ -75,16 +77,21 @@ It never launches, restarts, repairs, extends, edits, or interprets the run.
 
 External scientific review is not a persistent dispatch role. The long-lived
 Controller starts the pinned `browsermcp-pro` server, then the user connects the
-registered Pro tab. The Controller uses `hmasd-browser-pro-exchange` directly
-on the current pushed branch. A disconnected extension or ephemeral OMP process
-is a blocker, never permission to route through a former Exchange session.
+registered Pro tab. The Controller uses `hmasd-browser-pro-exchange` on the
+current pushed branch and owns submission, capture, archival and intake. After
+submission it may dispatch one `hmasd-pro-monitor`; that local Spark task
+receives only BrowserMCP wait/snapshot tools and returns one stability callback.
+A disconnected extension or ephemeral OMP process is a blocker, never
+permission to route through a former Exchange session.
 
 ## Authority boundary
 
 External GPT-5.6 Pro owns scientific direction and evidence meaning. The
 Controller owns executable realization inside that direction and every
 resource-consuming action. Local agents execute bounded work; BrowserMCP
-transports one review in the Controller session; the persistent Monitor only
-observes. No local or persistent role starts a successor. A topology change
-updates `CURRENT_WORK.md`, this Skill, the role registry, local profiles,
-external transport configuration and their contract tests in one Git boundary.
+submission and capture stay in the Controller session; `hmasd-pro-monitor`
+observes completion read-only; the persistent Monitor only observes an
+authorized experiment. No local or persistent role starts a successor. A
+topology change updates `CURRENT_WORK.md`, this Skill, the role registry, local
+profiles, external transport configuration and their contract tests in one Git
+boundary.

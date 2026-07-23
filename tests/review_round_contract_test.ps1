@@ -15,9 +15,9 @@ $boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/v
 $reviewerKeys = @($registry.reviewers.PSObject.Properties.Name)
 $serverKeys = @($mcp.mcpServers.PSObject.Properties.Name)
 $currentBranch = (& git.exe -C $repo branch --show-current).Trim()
-if ($registry.schema_version -ne 28 -or
+if ($registry.schema_version -ne 29 -or
     (Compare-Object @('open_divergent') $reviewerKeys) -or
-    $registry.round_controller.kind -ne 'active_controller_direct_browsermcp' -or
+    $registry.round_controller.kind -ne 'active_controller_owned_browsermcp_with_readonly_task_monitor' -or
     $registry.round_controller.external_scientific_decision -ne 'open_divergent' -or
     $registry.round_controller.decision_intake -ne 'active_controller_direct' -or
     $registry.exchange_contract.transport_server -ne 'browsermcp-pro' -or
@@ -28,6 +28,12 @@ if ($registry.schema_version -ne 28 -or
     -not $registry.exchange_contract.terminal_order.Contains('verify_pushed_boundary') -or
     -not $registry.exchange_contract.terminal_order.Contains('archive_raw_no_clobber') -or
     $registry.exchange_contract.connection_state -ne 'CONNECTED_PREFLIGHT_OK' -or
+    $registry.exchange_contract.completion_monitor.agent -ne 'hmasd-pro-monitor' -or
+    $registry.exchange_contract.completion_monitor.model -ne 'openai-codex/gpt-5.3-codex-spark' -or
+    $registry.exchange_contract.completion_monitor.thinking -ne 'medium' -or
+    $registry.exchange_contract.completion_monitor.lifecycle -ne 'one_shot_task_callback' -or
+    (Compare-Object @('mcp__browsermcp_pro_browser_snapshot',
+        'mcp__browsermcp_pro_browser_wait') @($registry.exchange_contract.completion_monitor.tools)) -or
     $registry.exchange_contract.fallback -ne 'none' -or
     $registry.reviewers.open_divergent.conversation_id -ne '6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
     $registry.reviewers.open_divergent.url -ne 'https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
@@ -66,9 +72,23 @@ foreach ($required in @('browsermcp-pro', '@browsermcp/mcp@0.1.3',
     'GitHub connector', 'ARCHIVE_NATURAL_RESPONSE_EXACTLY',
     'archive_browser_pro_raw.ps1', 'same-directory temporary file',
     'ephemeral `omp --no-session` probe', 'long-lived',
-    'There is no callback', 'persistent Exchange task',
-    'never compensate by pasting local source')) {
+    'hmasd-pro-monitor', 'wait and snapshot', 'neither a persistent role',
+    'a transport relay', 'never compensate by pasting local source')) {
     if (-not $browserExchange.Contains($required)) { throw "Browser Pro Exchange missing: $required" }
+}
+$proMonitorPath = Join-Path $repo '.omp/agents/hmasd-pro-monitor.md'
+if (-not (Test-Path -LiteralPath $proMonitorPath -PathType Leaf)) {
+    throw 'Missing read-only Pro completion monitor profile'
+}
+$proMonitor = Get-Content -LiteralPath $proMonitorPath -Raw
+foreach ($required in @('mcp__browsermcp_pro_browser_snapshot',
+        'mcp__browsermcp_pro_browser_wait', 'STABLE_COMPLETE|BLOCKED',
+        'The Controller remains the sole owner')) {
+    if (-not $proMonitor.Contains($required)) { throw "Pro monitor missing: $required" }
+}
+$proMonitorTools = [regex]::Match($proMonitor, '(?m)^tools: \[([^\r\n]+)\]$').Groups[1].Value
+foreach ($forbidden in @('click', 'type', 'navigate', 'bash', 'edit', 'write')) {
+    if ($proMonitorTools.Contains($forbidden)) { throw "Pro monitor exposes forbidden tool: $forbidden" }
 }
 foreach ($required in @('ephemeral process is not a valid',
     'name one exact ancestor evidence commit', 'Raw archival is exclusive and no-clobber',

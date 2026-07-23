@@ -18,6 +18,7 @@ foreach ($required in @(
     'hmasd-verifier: openai-codex/gpt-5.6-luna:high',
     'hmasd-reviewer: openai-codex/gpt-5.6-sol:xhigh',
     'hmasd-exp-manager: openai-codex/gpt-5.3-codex-spark:high',
+    'hmasd-pro-monitor: openai-codex/gpt-5.3-codex-spark:medium',
     'includeSkills:',
     '- hmasd-*',
     'enableClaudeProject: false')) {
@@ -30,6 +31,7 @@ $profiles = @{
     'hmasd-verifier.md' = @('hmasd-verifier', 'openai-codex/gpt-5.6-luna', 'high')
     'hmasd-reviewer.md' = @('hmasd-reviewer', 'openai-codex/gpt-5.6-sol', 'xhigh')
     'hmasd-exp-manager.md' = @('hmasd-exp-manager', 'openai-codex/gpt-5.3-codex-spark', 'high')
+    'hmasd-pro-monitor.md' = @('hmasd-pro-monitor', 'openai-codex/gpt-5.3-codex-spark', 'medium')
 }
 
 Push-Location $repo
@@ -68,6 +70,18 @@ foreach ($file in $profiles.Keys) {
     }
     $toolLine = [regex]::Match($text, '(?m)^tools: \[([^\r\n]+)\]$').Groups[1].Value
     if (", $toolLine," -match ',\s*task\s*,') { throw "$file can spawn a successor" }
+}
+$proMonitor = Get-Content -LiteralPath (Join-Path $repo '.omp/agents/hmasd-pro-monitor.md') -Raw
+foreach ($required in @(
+        'mcp__browsermcp_pro_browser_snapshot',
+        'mcp__browsermcp_pro_browser_wait',
+        'do not submit, edit, click, navigate, stop, retry or interpret anything',
+        'STABLE_COMPLETE|BLOCKED')) {
+    if (-not $proMonitor.Contains($required)) { throw "Pro monitor missing: $required" }
+}
+foreach ($forbidden in @('browser_click', 'browser_type', 'browser_navigate', 'bash', 'edit', 'write')) {
+    $toolLine = [regex]::Match($proMonitor, '(?m)^tools: \[([^\r\n]+)\]$').Groups[1].Value
+    if ($toolLine.Contains($forbidden)) { throw "Pro monitor has forbidden tool: $forbidden" }
 }
 
 foreach ($file in @('hmasd-implementer.md', 'hmasd-verifier.md')) {

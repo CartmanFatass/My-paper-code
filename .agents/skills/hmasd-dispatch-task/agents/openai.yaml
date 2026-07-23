@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Task Dispatch"
   short_description: "Route the persistent HMASD Monitor safely"
-  default_prompt: "Use $hmasd-dispatch-task only for the registered Experiment Monitor. Local implementation agents and BrowserMCP Pro exchange stay in the unified Controller session."
+  default_prompt: "Use $hmasd-dispatch-task for the registered Experiment Monitor contract. Local OMP agents include one read-only Spark Pro completion monitor; BrowserMCP submission, capture, archival and intake stay in the unified Controller session."

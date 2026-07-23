@@ -52,26 +52,31 @@ work uses the project OMP task profiles directly.
 The active surfaces are:
 
 - the unified Controller for workflow design, executable planning, direct local
-  agent coordination, BrowserMCP Pro exchange, integration, verification, Git,
-  direct evidence intake, project control, evidence integration and user
-  communication;
+  agent coordination, BrowserMCP Pro submission and capture, integration,
+  verification, Git, direct evidence intake, project control, evidence
+  integration and user communication;
 - the pinned `browsermcp-pro` server and one user-connected authenticated
   ChatGPT Pro tab for external scientific review;
+- the one-shot project-local `hmasd-pro-monitor`, using Codex Spark only for
+  read-only BrowserMCP wait/snapshot completion observation after submission;
 - the registered native Codex `experiment_monitor` slot for one
   already-authorized run. Its archived task is rebuild-required before the next
   formal run; external review and local OMP work do not route through it.
 
 The exact case-sensitive OMP `agent` values exposed under `.omp/agents/` are
 `hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier`,
-`hmasd-reviewer` and `hmasd-exp-manager`. The Controller dispatches them
-directly. No child may spawn a successor. An `unknown agent` response is a
-workflow blocker; never silently replace a registered project agent with an
-unnamed or bundled default child.
+`hmasd-reviewer`, `hmasd-exp-manager` and `hmasd-pro-monitor`. The Controller
+dispatches them directly. No child may spawn a successor. An `unknown agent`
+response is a workflow blocker; never silently replace a registered project
+agent with an unnamed or bundled default child.
 
 The persistent Monitor receives a complete assignment through live route
-resolution. BrowserMCP Pro exchange remains in the Controller session and uses
-no persistent relay or callback. Local agents receive one complete bounded
-assignment through the OMP task tool.
+resolution. BrowserMCP remains a Controller-owned connection. After the
+Controller submits one validated question, it may delegate only read-only
+wait/snapshot stability observation to one `hmasd-pro-monitor` task callback;
+submission, interaction, capture, archival and intake remain in the Controller
+session. Local agents receive one complete bounded assignment through the OMP
+task tool.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -114,9 +119,11 @@ The long-lived OMP Controller starts the pinned BrowserMCP server before the
 user connects one exact ChatGPT Pro tab; an ephemeral process is not a valid
 transport. BrowserMCP receives one exact Git-visible question. Pro reads pushed
 result and evidence files plus named reference-code paths through its GitHub
-connector; BrowserMCP does not upload local source. Neither surface reconstructs
-Controller history, reads credentials or unrelated tabs, authorizes work, or
-starts a successor.
+connector; BrowserMCP does not upload local source. The `hmasd-pro-monitor`
+reuses the Controller's MCP connection with only wait and snapshot tools; it
+cannot click, type, navigate, archive, interpret, authorize work, read
+credentials or unrelated tabs, reconstruct Controller history, or start a
+successor.
 
 Local task agents receive exactly one project profile and one complete
 assignment. They do not reconstruct Controller history, change their model,
@@ -130,8 +137,9 @@ Reviewer evidence retrieval uses the GitHub connector at that evidence commit.
 Raw archival is exclusive and no-clobber. The Controller performs direct
 factual reconciliation, evidence intake
 and durable CDC record application. Authorized algorithm realization remains
-in the Controller's local OMP task tree. Monitoring is sent only to
-`experiment_monitor`. Browser responses and automatic task results wake the
+in the Controller's local OMP task tree. Experiment-run monitoring is sent only
+to `experiment_monitor`; Pro response completion observation may be sent only
+to `hmasd-pro-monitor`. Browser responses and automatic task results wake the
 Controller but never start a successor without Controller routing.
 
 ## Protected changes

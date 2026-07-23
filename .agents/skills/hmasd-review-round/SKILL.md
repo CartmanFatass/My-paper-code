@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use only by the active HMASD Controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates one reviewer-visible question, operates the pinned BrowserMCP exchange directly, archives the natural response, performs direct evidence intake, applies durable record deltas, and prepares any later Controller-owned implementation action.
+description: Use only by the active HMASD Controller for a tracked external GPT-5.6 Pro scientific CDC decision. It creates one reviewer-visible question, owns the pinned BrowserMCP submission/capture boundary, may delegate read-only completion observation to one Spark task, archives the natural response, performs direct evidence intake, applies durable record deltas, and prepares any later Controller-owned implementation action.
 ---
 
 # HMASD External Pro Research Round
@@ -72,9 +72,10 @@ object and estimand; the Controller later freezes executable architecture.
 
 1. Activate `hmasd-browser-pro-exchange`, run its round-path validator and
    complete the BrowserMCP fail-closed preflight on the user-connected Pro tab.
-2. Submit one exact question and accept a naturally completed raw only after
-   stable BrowserMCP capture and exact reread equality. Preserve semantic
-   quality notes separately from transport validity.
+2. Submit one exact question, optionally delegate only wait/snapshot stability
+   observation to `hmasd-pro-monitor`, and accept a naturally completed raw only
+   after Controller capture and exact reread equality. Preserve semantic quality
+   notes separately from transport validity.
 3. Write factual `30_EVIDENCE_RECONCILIATION.md` without changing Pro science.
 4. Read `references/cdc-principles.md`, distinguish Pro science from repository
    fact and operational inference, and apply the smallest exact conjecture,
@@ -110,8 +111,9 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_EXACTLY
 
 The Controller uses the pinned `browsermcp-pro` server in the same long-lived
 OMP session. Require direct preflight and exclusive no-clobber archival. There
-is no persistent Exchange role, live route resolution, callback, heartbeat or
-alternate browser fallback.
+is no persistent Exchange role, live route resolution, heartbeat or alternate
+browser fallback. One `hmasd-pro-monitor` task callback may report stable
+completion; it has no interaction, capture, archival or scientific authority.
 
 ## Controller direct evidence intake
 

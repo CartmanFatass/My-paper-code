@@ -1,8 +1,8 @@
 {
-  "schema_version": 28,
+  "schema_version": 29,
   "updated": "2026-07-23",
   "round_controller": {
-    "kind": "active_controller_direct_browsermcp",
+    "kind": "active_controller_owned_browsermcp_with_readonly_task_monitor",
     "external_scientific_decision": "open_divergent",
     "decision_intake": "active_controller_direct",
     "git_boundary_owner": "active_controller"
@@ -15,9 +15,16 @@
     "evidence_transport": "github_connector",
     "repository": "CartmanFatass/My-paper-code",
     "review_branch": "Claude",
-    "controller_contact": "same_session_direct",
-    "heartbeat": "none",
-    "terminal_order": "validate_canonical_paths_then_verify_pushed_boundary_then_start_long_lived_omp_then_user_connect_then_preflight_tab_then_submit_then_archive_raw_no_clobber",
+    "controller_contact": "same_session_submission_capture_and_intake",
+    "completion_monitor": {
+      "agent": "hmasd-pro-monitor",
+      "model": "openai-codex/gpt-5.3-codex-spark",
+      "thinking": "medium",
+      "lifecycle": "one_shot_task_callback",
+      "tools": ["mcp__browsermcp_pro_browser_snapshot", "mcp__browsermcp_pro_browser_wait"],
+      "forbidden_actions": ["click", "type", "navigate", "stop", "retry", "archive", "interpret"]
+    },
+    "terminal_order": "validate_canonical_paths_then_verify_pushed_boundary_then_start_long_lived_omp_then_user_connect_then_preflight_tab_then_submit_then_readonly_monitor_stability_callback_then_controller_capture_then_archive_raw_no_clobber",
     "connection_state": "CONNECTED_PREFLIGHT_OK",
     "fallback": "none"
   },

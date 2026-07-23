@@ -87,8 +87,10 @@ if ($roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a
 
 $dispatcher = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
 foreach ($required in @('controller -> local OMP task agents',
-    'controller -> BrowserMCP Pro exchange', 'controller <-> experiment_monitor',
-    'gpt-5.3-codex-spark', 'hmasd-exp-manager')) {
+    'controller -> BrowserMCP Pro submission/capture',
+    'controller -> hmasd-pro-monitor -> BrowserMCP wait/snapshot',
+    'controller <-> experiment_monitor', 'gpt-5.3-codex-spark',
+    'hmasd-exp-manager', 'hmasd-pro-monitor')) {
     if (-not $dispatcher.Contains($required)) { throw "Dispatcher missing: $required" }
 }
 if ($dispatcher -match $retiredRolePattern) {
