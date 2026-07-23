@@ -31,6 +31,8 @@ persistent HMASD authority and the user's direct project interface.
 - Freezing a formal evidence contract and assigning one authorized run to the
   registered `hmasd-experiment-operator`.
 - Validation and interpretation of the operator's terminal artifacts.
+- The Chinese user-facing report after each valid conclusion-bearing iteration,
+  stored as `docs/report/ITERATION_<n>.md` before successor work.
 
 ## Operating rules
 
@@ -47,6 +49,9 @@ persistent HMASD authority and the user's direct project interface.
   for routine implementation, Git, focused review, bounded diagnostics,
   authorized run execution, evidence intake, or successor selection already
   covered by that grant.
+- Write the iteration report directly under standing authority. It summarizes
+  the accepted evidence and its scientific effect for the user; it never
+  creates a second acceptance owner or blocks on separate approval.
 - Stage only accepted files, inspect the staged path set, run
   `git diff --cached --check`, commit, and push `aggressive`. Children do not
   perform Git.

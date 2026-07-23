@@ -35,6 +35,10 @@ project_manager_experiment_orchestration=direct_via_registered_child
 formal_compute_authority=user_only
 external_pro_scientific_authority=question_scoped
 experiment_operator_authority=one_exact_authorized_run
+iteration_report_owner=project_manager
+iteration_report_language=zh-CN
+iteration_report_path=docs/report/ITERATION_<n>.md
+iteration_report_authorization=standing
 one_artifact_one_acceptance_owner=true
 superpowers_plugin=reference_only
 superpowers_execution=disabled
@@ -105,8 +109,16 @@ never substitute `default`, an unnamed child, or an ad hoc worker.
 6. Project Manager spawns one `hmasd-experiment-operator` with the complete
    immutable run assignment. The child silently executes
    `train -> evaluate -> analyze` and returns one terminal payload.
-7. Project Manager validates artifacts, records the smallest supported CDC
-   update, performs Git integration, and selects the next in-authority action.
+7. Project Manager validates artifacts and records the smallest supported CDC
+   update.
+8. After every valid conclusion-bearing iteration, Project Manager writes
+   `docs/report/ITERATION_<n>.md` in Chinese before advancing. It explains the
+   scientific question and decision, source/environment/runtime/budget, evidence
+   closure, registered result, impact on conjectures, excluded conclusions and
+   next boundary. This user-facing report is mandatory under standing authority
+   but is not another review, approval or scientific evidence source.
+9. Project Manager performs Git integration and selects the next in-authority
+   action.
 
 No child launches a successor. Automatic continuation belongs only to Project
 Manager. One scheduled action is not the only legal scientific explanation;

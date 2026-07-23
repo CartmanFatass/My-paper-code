@@ -37,6 +37,9 @@ external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
+iteration_report_requirement=required_before_successor
+iteration_report_status=iterations_1_to_3_complete
+latest_iteration_report=docs/report/ITERATION_3.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -120,3 +123,5 @@ callback receipts are forbidden.
 - `docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md` — frozen gate.
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md`
   — G2 closure and correction.
+- `docs/report/ITERATION_1.md`, `ITERATION_2.md`, `ITERATION_3.md` — 用户可读的
+  中文结论性迭代报告。
