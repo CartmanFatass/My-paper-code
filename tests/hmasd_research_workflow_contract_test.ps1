@@ -70,9 +70,28 @@ foreach ($required in @('C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
 $agents = Get-Content (Join-Path $repo 'AGENTS.md') -Raw
 foreach ($required in @('semantic_author=project_manager',
     'artifact_scope=reviewer_visible_code_side', 'repair_owner=project_manager',
-    'exact PM-authored files unchanged')) {
+    'exact PM-accepted files unchanged', 'pm_acceptance_authority=exclusive',
+    'controller_validation_authority=none')) {
     if (-not $agents.Contains($required)) { throw "Controller/PM ownership boundary missing: $required" }
     if (-not $agentContext.Contains($required)) { throw "Agent context ownership boundary missing: $required" }
+}
+$reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
+$reviewReadme = Get-Content (Join-Path $repo 'docs/external-review/README.md') -Raw
+$principles = Get-Content (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md') -Raw
+foreach ($content in @($agents, $agentContext, $dispatcher, $reviewRound, $reviewReadme, $principles)) {
+    foreach ($required in @('pm_acceptance_authority=exclusive',
+        'controller_validation_authority=none')) {
+        if (-not $content.Contains($required)) { throw "PM exclusive acceptance boundary missing: $required" }
+    }
+}
+foreach ($forbidden in @('Controller verifies it independently',
+    'Controller mechanically verifies author markers, required fields',
+    'Controller validates and transmits those files',
+    'mechanically validates the PM-authored package',
+    'Controller checks provenance, required fields')) {
+    foreach ($content in @($agents, $agentContext, $dispatcher, $reviewRound, $reviewReadme, $principles)) {
+        if ($content.Contains($forbidden)) { throw "Controller retains PM validation authority: $forbidden" }
+    }
 }
 if (-not $agentContext.Contains('does not apply to protected scientific choices')) {
     throw 'Agent context reasonable-choice rule still reaches protected science'
@@ -107,14 +126,17 @@ foreach ($required in @('external-Pro result review is complete',
 }
 foreach ($required in @('Controller-authored G1 clarification is transport-only',
     'cannot be adopted', 'PM-owned G1 external-Pro raw is archived',
-    'PM reconciliation is archived and blocked on protected source contract',
-    'PM-authored focused Pro package is committed and awaiting Controller-direct',
+    'PM-authored focused Pro package was transported',
+    'exact raw and mechanical intake are archived',
+    'exclusively accepted the code-side disposition',
+    'ALGORITHM_SCOPE_RECONCILED_EXECUTION_CONTRACT_DEFERRED',
+    'EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
     'Formal compute remains unauthorized')) {
     if (-not $current.Contains($required)) { throw "Current ownership correction missing: $required" }
 }
 foreach ($required in @('Controller-direct external-Pro transport',
     'persistent Open-Pro Exchange is retired',
-    'late Exchange output has no authority')) {
+    'Any late Exchange')) {
     if (-not $current.Contains($required)) { throw "Current direct-review topology missing: $required" }
 }
 $g1Mechanical = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_source_contract_pm_owned/50_MECHANICAL_INTAKE_RECORD.md'

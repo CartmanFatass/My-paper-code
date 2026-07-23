@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use when an HMASD external GPT-5.6 Pro decision or focused clarification must be transported through the registered conversation, or when its direct browser transport, heartbeat, raw archive, or recovery state needs handling.
+description: Use for every HMASD external GPT-5.6 Pro browser review, including registered-session discovery, ChatGPT home-page redirects, exact freshness-fence submission, stable response-completion detection, evidence-access recovery, heartbeat cleanup, and exact raw archival.
 ---
 
 # HMASD External Pro Research Round
@@ -17,12 +17,22 @@ briefs, manifests and questions, including concrete scientific gaps that block
 code-side work. It does not decide those gaps. External Pro remains the
 scientific authority.
 
-Controller owns only mechanical validation, reviewer-visible Git boundaries,
+Controller owns only mechanical identity/provenance checks, reviewer-visible Git boundaries,
 Controller-direct transport, exact raw archival, heartbeat lifecycle,
 Controller mechanical intake, routing, resource authorization and user
-communication. It transports the exact PM-authored files unchanged and never
+communication. It transports the exact PM-accepted files unchanged and never
 rewrites, summarizes, normalizes, ranks or completes them.
 Controller never classifies scientific completeness of the Pro response.
+
+```text
+pm_acceptance_authority=exclusive
+controller_validation_authority=none
+repair_owner=project_manager
+```
+
+Project Manager self-validates and accepts every code-side/reviewer-visible
+package. Controller performs no technical or algorithmic validation; its checks
+are limited to exact artifact identity, source/hash/path and Git transport.
 
 Activate this Skill as `$hmasd-review-round` in the active Controller. Browser
 work requires `$browser:control-in-app-browser`. Do not create another Codex
@@ -82,11 +92,12 @@ object and estimand; the Manager later freezes executable architecture.
 ## Procedure
 
 1. Assign Project Manager the round path and scientific evidence boundary. It
-   authors and, after validation feedback, repairs the complete reviewer-visible
-   package under its code-side write lease.
-2. Controller mechanically verifies author markers, required fields, source and
-   path provenance, forbidden internal references and Git visibility. It then
-   commits and pushes the exact PM-authored files unchanged.
+   authors, self-validates, independently reviews, repairs and accepts the
+   complete reviewer-visible package under its code-side write lease.
+2. Controller compares the returned route, source, exact paths and hashes with
+   the delivered files and Git visibility. It then commits and pushes the exact
+   PM-accepted files unchanged. This is non-discretionary identity/provenance
+   work, not package validation.
 3. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and inspect the
    registered conversation before submission using
    `$browser:control-in-app-browser`.
@@ -105,15 +116,34 @@ object and estimand; the Manager later freezes executable architecture.
    separately authorized Project Manager task. Review and intake alone
    authorize neither implementation nor compute.
 
-At every validation failure the returned evidence carries
-`repair_owner=project_manager`. Controller forwards the failure evidence and
-does not alter package semantics.
+PM validation and repair remain inside the Project Manager task tree with
+`repair_owner=project_manager`. A Controller-observed hash/path/source mismatch
+is only a delivery-integrity mismatch and does not authorize Controller review
+or semantic repair.
 
 External Pro raw is the only scientific disposition authority. Project Manager
 owns code-side reconciliation. Controller has no reconciliation or disposition
 authorship, even when an older round used those filenames.
 
 ## Controller-direct transport
+
+### Deterministic browser state machine
+
+Execute these states in order. Do not skip a state because an older response is
+visible or the page title looks familiar.
+
+| State | Required observation | Mechanical action | Exit condition |
+|---|---|---|---|
+| `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
+| `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
+| `WAIT_FOR_RESPONSE` | Latest assistant turn after the fence or latest transport-repair message is identifiable | While text changes or `Stop generating`/`Stop answering` is active, remain pending. Otherwise compare two snapshots at least three seconds apart. Ignore a stale `Thinking` label by itself. | Same message ID/text, no active stop, retry, error or continue control. |
+| `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
+| `ARCHIVE_AND_RETURN` | Candidate passes stable completion checks | Write exact visible text to raw, reread/hash for equality, write mechanical intake, confirm heartbeat absence and route raw to PM. | Project Manager receives exact raw; Controller performs no semantic or technical validation. |
+
+`Response actions` such as `Copy response` plus stable text are supporting
+completion evidence, not a substitute for message identity and inactive
+generation controls. A CAPTCHA, login or application-approval boundary requires
+user action; a generic ChatGPT home page does not.
 
 Always inspect the registered conversation before submission.
 
@@ -218,7 +248,18 @@ Recover in the same registered conversation and under the same accepted fence:
    materialize them from `stage_commit`, not from the current working tree.
    Use one archive with repository-relative paths preserved when duplicate
    basenames exist. Verify the archive member set equals the question allow-list
-   exactly and contains no extra file.
+   exactly and contains no extra file. Use the deterministic builder rather
+   than assembling paths manually:
+
+   ```powershell
+   & .agents/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1 `
+     -Commit <stage_commit> `
+     -QuestionPath <repository-relative-question-path> `
+     -OutputPath <new-absolute-zip-path>
+   ```
+
+   Continue only when it returns `REVIEW_EVIDENCE_ARCHIVE_READY` with the
+   expected commit and file count.
 3. Attach that exact archive to the same conversation and send one mechanical
    continuation stating its commit, allow-list identity and that the prior
    response is a transport diagnostic. Do not submit another freshness fence.

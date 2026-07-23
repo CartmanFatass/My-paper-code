@@ -8,6 +8,9 @@ Updated: 2026-07-22
 - Branch: `aggressive`
 - **Controller: current Codex root task.** `AGENTS.md` is its operating contract.
 - **Execution mode: native Codex only.** There is no legacy execution route.
+- `pm_acceptance_authority=exclusive` and
+  `controller_validation_authority=none`: Controller performs only mechanical
+  route/hash/path/source/Git/resource work and does not validate PM algorithms.
 - Scientific direction comes from the registered external GPT-5.6 Pro. The
   Codex Controller owns integration. The sole registered persistent Codex
   Project Manager is task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3`; it owns
@@ -32,11 +35,14 @@ contract was corrected. Any natural raw may be archived as superseded process
 evidence, but it cannot authorize code, science, a successor, or iteration-2
 compute. The replacement package was authored by Project Manager and transported
 without Controller semantic rewriting. The PM-owned G1 external-Pro raw is archived
-with exact-text verification. PM reconciliation is archived and blocked on protected source contract;
-the PM-authored focused Pro package was transported directly by Controller. Its
-exact raw and mechanical intake are archived after one evidence-access recovery
-under the same freshness fence. The next boundary is Project Manager code-side
-reconciliation of that exact focused raw. Formal compute remains unauthorized.
+with exact-text verification. The PM-authored focused Pro package was transported
+directly by Controller; its exact raw and mechanical intake are archived after
+one evidence-access recovery under the same freshness fence. Project Manager
+exclusively accepted the code-side disposition
+`ALGORITHM_SCOPE_RECONCILED_EXECUTION_CONTRACT_DEFERRED`. The next boundary is
+the zero-compute Project Manager action
+`EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION`.
+Formal compute remains unauthorized. Implementation remains unauthorized.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was

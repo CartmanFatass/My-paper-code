@@ -75,7 +75,9 @@ foreach ($required in @(
     'semantic_author=project_manager',
     'artifact_scope=reviewer_visible_code_side',
     'repair_owner=project_manager',
-    'exact PM-authored files unchanged')) {
+    'exact PM-accepted files unchanged',
+    'pm_acceptance_authority=exclusive',
+    'controller_validation_authority=none')) {
     if (-not $agents.Contains($required)) { throw "Controller semantic-ownership contract missing: $required" }
     if (-not $skill.Contains($required)) { throw "Dispatcher semantic-ownership contract missing: $required" }
 }

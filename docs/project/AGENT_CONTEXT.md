@@ -26,8 +26,9 @@ embeds only the standing constraints required by that role.
 You do not commit. Leave your work in the working tree.
 
 No `git add`, `commit`, `push`, `stash`, `reset`, `checkout` of tracked files, or
-branch manipulation. The Project Manager integrates its assigned package; the
-Controller verifies it independently and owns every commit. Read-only Git
+branch manipulation. The Project Manager integrates, self-validates and accepts
+its assigned package; the Controller owns every commit but performs no technical
+or algorithmic validation. Read-only Git
 inspection is allowed only when the assignment needs it.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
@@ -49,14 +50,23 @@ scientific_authority=external_pro
 ```
 
 This does not let PM choose science or operate external-review transport.
-Controller checks provenance, required fields, paths and Git visibility, then
-commits, pushes and transmits the exact PM-authored files unchanged through
+Project Manager owns required-field validation, technical review, tests and
+package acceptance. Controller checks only route/source identity, exact declared
+paths and hashes, and Git visibility, then commits, pushes and transmits the
+exact PM-accepted files unchanged through
 `$hmasd-review-round` and `$browser:control-in-app-browser`. Controller owns the
 registered conversation, exact raw archive and heartbeat mechanically; it never
 classifies response completeness, interprets science or authors a follow-up.
 Internal PM audits are never converted by Controller into reviewer prose. Exact
-raw returns to PM before code-side reconciliation or a focused package. Package
-failures return with `repair_owner=project_manager` for PM correction.
+raw returns to PM before code-side reconciliation or a focused package. PM
+repairs its own findings before readiness; Controller does not approve or reject
+the package.
+
+```text
+pm_acceptance_authority=exclusive
+controller_validation_authority=none
+repair_owner=project_manager
+```
 
 ## Active-line development
 

@@ -9,6 +9,7 @@ $registry = Get-Content (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSA
 $heartbeatPath = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/render_review_heartbeat.ps1'
 $heartbeat = Get-Content $heartbeatPath -Raw
 $boundaryVerifierPath = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
+$evidenceBuilderPath = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1'
 $retiredExchange = Join-Path $repo '.agents/skills/hmasd-review-exchange'
 $activeRound = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned'
 $activeRaw = Get-Content (Join-Path $activeRound '21_PRO_OPEN_RAW.md') -Raw
@@ -38,6 +39,12 @@ foreach ($required in @(
     '50_MECHANICAL_INTAKE_RECORD.md',
     'only scientific disposition authority',
     'Controller-direct transport',
+    'Deterministic browser state machine',
+    'RESOLVE_REGISTERED_CONVERSATION',
+    'VERIFY_FRESHNESS_FENCE',
+    'WAIT_FOR_RESPONSE',
+    'RECOVER_EVIDENCE_ACCESS',
+    'ARCHIVE_AND_RETURN',
     '$browser:control-in-app-browser',
     'inspect the registered conversation before submission',
     'An accepted matching fence is never resubmitted',
@@ -65,12 +72,16 @@ foreach ($required in @(
     'repository-relative paths preserved',
     'Do not submit another freshness fence',
     'latest Controller transport-repair message',
+    'pm_acceptance_authority=exclusive',
+    'controller_validation_authority=none',
+    'Project Manager self-validates',
+    'no technical or algorithmic validation',
     'recovery_exhausted=true')) {
     if (-not $round.Contains($required)) { throw "Review round missing: $required" }
 }
 foreach ($required in @('semantic_author=project_manager',
     'artifact_scope=reviewer_visible_code_side', 'repair_owner=project_manager',
-    'exact PM-authored files unchanged')) {
+    'exact PM-accepted files unchanged')) {
     if (-not $round.Contains($required)) { throw "Review round semantic ownership missing: $required" }
 }
 foreach ($required in @('Project Manager authors code-side reconciliation',
@@ -91,7 +102,8 @@ foreach ($forbidden in @(
     'REVIEW_STAGE_COMPLETE',
     'REVIEW_STAGE_BLOCKED',
     'callback delivery',
-    'Judge content gaps semantically')) {
+    'Judge content gaps semantically',
+    'Controller mechanically verifies author markers, required fields')) {
     if ($round.Contains($forbidden)) { throw "Review round retains Exchange behavior: $forbidden" }
 }
 if ($round.Contains('It creates one reviewer-visible question')) {
@@ -99,7 +111,10 @@ if ($round.Contains('It creates one reviewer-visible question')) {
 }
 if ($roundAgent.Contains('direct evidence intake') -or
     -not $roundAgent.Contains('mechanical provenance intake') -or
-    -not $roundAgent.Contains('$browser:control-in-app-browser')) {
+    -not $roundAgent.Contains('$browser:control-in-app-browser') -or
+    -not $roundAgent.Contains('home-page redirect') -or
+    -not $roundAgent.Contains('registered-session recovery') -or
+    -not $roundAgent.Contains('stable response-completion detection')) {
     throw 'Review-round agent prompt does not enforce direct mechanical transport'
 }
 if ($roundAgent.Contains('allow_implicit_invocation: false')) {
@@ -185,5 +200,25 @@ $boundaryJson = & $boundaryVerifierPath `
 $boundary = $boundaryJson | ConvertFrom-Json
 if ($boundary.status -ne 'REMOTE_EVIDENCE_READY' -or $boundary.commit -ne $head) {
     throw 'Boundary verifier failed a local reachable review boundary'
+}
+$archiveTestPath = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-review-evidence-$([Guid]::NewGuid().ToString('N')).zip")
+try {
+    $archiveJson = & $evidenceBuilderPath `
+        -Commit '50f95da37496b092128c2136d50503ac3e18a5c1' `
+        -QuestionPath 'docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/20_PRO_OPEN_QUESTION.md' `
+        -OutputPath $archiveTestPath `
+        -RepoRoot $repo
+    $archiveResult = $archiveJson | ConvertFrom-Json
+    if ($archiveResult.status -ne 'REVIEW_EVIDENCE_ARCHIVE_READY' -or
+        $archiveResult.commit -ne '50f95da37496b092128c2136d50503ac3e18a5c1' -or
+        $archiveResult.file_count -ne 12 -or
+        -not (Test-Path -LiteralPath $archiveTestPath -PathType Leaf)) {
+        throw 'Review evidence archive builder returned an invalid contract'
+    }
+}
+finally {
+    if (Test-Path -LiteralPath $archiveTestPath) {
+        Remove-Item -LiteralPath $archiveTestPath -Force
+    }
 }
 Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK'

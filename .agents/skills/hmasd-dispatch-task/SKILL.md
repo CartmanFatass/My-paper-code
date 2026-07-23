@@ -33,6 +33,16 @@ Stop only on a paused/exhausted grant, genuine blocker, or protected-scope
 expansion. A reported failure is not a genuine blocker until the owning role
 has completed bounded self-recovery and reported its recovery attempts.
 
+```text
+pm_acceptance_authority=exclusive
+controller_validation_authority=none
+repair_owner=project_manager
+```
+
+Project Manager owns technical and algorithmic validation, executable
+sufficiency, independent review, tests and package acceptance. Controller never
+re-validates that work.
+
 ## Recovery before blocked
 
 On timeout, approval wait, missing state, route failure, delivery failure or
@@ -92,10 +102,11 @@ artifact_scope=reviewer_visible_code_side
 scientific_authority=external_pro
 ```
 
-Controller checks only role/source provenance, required fields, paths,
-authority markers and Git visibility, then commits, pushes and transports the
-exact PM-authored files unchanged. It never paraphrases or repairs their
-semantics. Validation failure returns `repair_owner=project_manager`.
+Project Manager self-validates required fields, technical content, reviewer
+safety and package readiness. Controller checks only the delivered route,
+declared source, file paths/hashes and Git visibility, then commits, pushes and
+transports the exact PM-accepted files unchanged. A mechanical delivery mismatch
+is reported as such; it is never converted into Controller package validation.
 
 Before `IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`, the Manager resolves
 `controller` and calls `codex_app__send_message_to_thread` once with one complete
@@ -115,7 +126,7 @@ edits or interprets the run.
 
 External review is not dispatched through this role graph. The active
 Controller loads `$hmasd-review-round` and `$browser:control-in-app-browser`,
-mechanically validates the PM-authored package, and operates the registered Pro
+checks the PM-accepted artifact identity mechanically, and operates the registered Pro
 conversation directly. It must inspect the registered conversation before
 submission, preserve exact raw text and return that raw to Project Manager.
 It never classifies scientific completeness or authors a focused follow-up.

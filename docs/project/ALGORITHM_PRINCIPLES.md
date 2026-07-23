@@ -197,11 +197,18 @@ alone are support work.
 
 External GPT-5.6 Pro generates and corrects conjectures, derives consequences,
 constructs counterexamples, extracts lemmas and chooses one scheduled action
-while retaining plural explanations. The Controller checks provenance and
-feasibility, maintains records and owns adoption, resources, Git, claim ceilings
-and user communication. The Project Manager owns authorized algorithm
-realization and implementation. Review output never authorizes code or compute
-by itself.
+while retaining plural explanations. The Project Manager owns algorithmic and
+technical feasibility, realization, independent review, tests and acceptance.
+The Controller checks only mechanical provenance, maintains records and owns
+resources, Git, claim ceilings and user communication; it does not validate PM
+work.
+
+```text
+pm_acceptance_authority=exclusive
+controller_validation_authority=none
+```
+
+Review output never authorizes code or compute by itself.
 
 Integration is a separate late decision. Require natural use, intervention-
 sensitive sequential behavior, external value, held-out transport, resistance

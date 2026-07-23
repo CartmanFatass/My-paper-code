@@ -61,7 +61,7 @@ route a persistent Exchange task.
 The active surfaces are:
 
 - controller direct work for workflow design, routing, Git, mechanical
-  provenance and required package-field checks, project control and user
+  provenance and artifact-identity checks, project control and user
   communication;
 - the registered native Codex `project_manager` for one authorized algorithm
   realization and implementation package;
@@ -117,6 +117,17 @@ implementation structure. It freezes `IMPLEMENTATION_PLAN.md`, selects and
 manages the code-agent task graph, integrates one package and performs one
 bounded repair cycle without per-choice Controller approval.
 
+```text
+pm_acceptance_authority=exclusive
+controller_validation_authority=none
+repair_owner=project_manager
+```
+
+Project Manager alone validates and accepts code-side semantics, executable
+sufficiency, implementation quality, tests, reviewer findings and package
+readiness. Controller performs no technical or algorithmic validation and does
+not rerun a PM review in reduced context.
+
 When code-side work is blocked by a protected scientific choice, Project
 Manager also authors the complete reviewer-visible clarification package. Every
 such package declares `semantic_author=project_manager` and
@@ -125,13 +136,13 @@ scientific decision authority: the package isolates the missing choice and asks
 external Pro to decide it. Internal PM audits and work logs are not reviewer
 evidence.
 
-Controller mechanically verifies role identity, source boundary, required
-fields, path existence, authority markers and Git visibility, then commits,
-pushes and transmits the exact PM-authored files unchanged. It does not
-paraphrase, summarize, normalize, rank options, add evidence meaning, or convert
-an internal PM audit into reviewer text. A rejected or incomplete package is
-returned with `repair_owner=project_manager`; Controller never repairs its
-semantic content.
+Project Manager self-validates role-specific fields, reviewer safety, technical
+content and readiness before returning a package. Controller then checks only
+non-discretionary delivery identity: registered route, declared source, exact
+file paths and hashes, and Git visibility. It commits, pushes and transmits the
+exact PM-accepted files unchanged. These are transport/Git integrity checks, not
+validation of Project Manager. Controller does not paraphrase, summarize,
+normalize, rank, approve, reject or repair PM semantics.
 
 External-review browser recovery is also mechanical. A home-page redirect
 triggers registered-conversation discovery, and a matching conversation with an

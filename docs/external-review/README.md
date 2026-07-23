@@ -8,13 +8,23 @@ code-side package, reconciliation and executable algorithm realization. It does
 not select protected science; external Pro remains the only scientific
 authority.
 
+```text
+pm_acceptance_authority=exclusive
+controller_validation_authority=none
+```
+
+Project Manager self-validates technical content and package readiness.
+Controller performs no technical or algorithmic validation; it checks only
+route/source identity, exact hashes/paths and Git transport.
+
 ## Scientific sequence
 
 1. GPT-5.6 Pro performs CDC scientific review of the Git-visible evidence under
    `OPEN_REVIEW_PRINCIPLES.md`, preserving plural conjectures while selecting
    one scheduled research action.
-2. Project Manager authors and repairs the reviewer-visible brief, manifest and
-   question. Controller validates and transmits those files unchanged.
+2. Project Manager authors, reviews, repairs and accepts the reviewer-visible
+   brief, manifest and question. Controller transmits those accepted files
+   unchanged after non-discretionary identity/hash/path checks.
 3. Controller archives the exact natural response, writes mechanical intake,
    deletes its heartbeat, and returns the raw to Project Manager without a
    scientific quality classification.
@@ -71,6 +81,9 @@ working tree, verifies the path-preserving archive has no extras, and attaches
 it in the same registered conversation. This is one mechanical continuation
 under the existing fence, never a second freshness submission. The stable
 assistant response after that continuation is the raw candidate.
+The archive is built by
+`.agents/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1`;
+manual working-tree packaging is not an admissible fallback.
 
 Each raw has exactly one writer: the active Controller. A raw becomes immutable
 after natural completion and exact captured-text equality are verified by
