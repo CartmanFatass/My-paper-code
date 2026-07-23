@@ -18,10 +18,13 @@ You are the external GPT-5.6 Pro scientific decision authority for the next HMAS
 - `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_CPU_NATURAL_BRANCH_TYPED_CONTRACT.md`
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/30_EVIDENCE_RECONCILIATION.md`
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/50_DISPOSITION.md`
 - `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md`
 - `ha_ctse_process/event_held_commitment_link.py`
+- `ha_ctse_process/noncalendar_commitment_testbed.py`
 - `scripts/run_noncalendar_commitment_benchmark_g0.py`
+- `tests/ha_ctse_process_noncalendar_commitment_benchmark_g0_test.py`
 
 ## New factual input
 
