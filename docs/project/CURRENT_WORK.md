@@ -23,7 +23,10 @@ The bounded autonomous research chain has completed iteration 1 and retains
 four conclusion-bearing iterations. Its implementation and monitoring surfaces
 are native Codex. The external-Pro review is complete and its Controller
 disposition is accepted. The next boundary is the bounded executable definition
-for `ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`; no iteration-2 formal compute is authorized yet.
+for `ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`. The Project Manager isolated a
+protected source-contract gap after four bounded recovery audits; the active
+boundary is now the focused Pro round
+`docs/external-review/rounds/20260722_ehc_g1_source_contract/`; no iteration-2 formal compute is authorized yet.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -178,8 +181,9 @@ Iteration 1 and its external review are accepted. The raw run is
 Controller disposition are recorded in
 `docs/external-review/rounds/20260722_ehc_formal_result_review/`. The next action
 is a Project Manager executable-definition package for
-`ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`. No iteration-2 formal compute is authorized until that package is verified, integrated and given an exact
-Controller run authorization.
+`ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`, but its exact task, observations,
+reward/utility, distributions, access/identifiability floors, budget and seeds
+must first be frozen by the focused Pro source-contract round. No iteration-2 formal compute is authorized until the resulting package is verified, integrated and given an exact Controller run authorization.
 
 ## BATTERY_CONTRACT_RECONCILED
 
@@ -227,7 +231,8 @@ historical evidence only.
 remaining after the valid iteration-1 result on 2026-07-22. Each later iteration
 must follow the registered external-Pro, native Codex, Git and evidence gates;
 iteration 2 is at the executable-definition boundary selected by the completed
-external review.
+external review, currently paused only for the focused Pro source-contract
+definition above.
 
 ## Durable Constraints
 
