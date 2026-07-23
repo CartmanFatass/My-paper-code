@@ -7,30 +7,29 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-EHC | live, measurement executable | The G1 prototype separated the three constructed nulls and exposed an event-to-sequence-to-utility path, but it was nonformal and ordinary recurrence matched natural capability. | Freeze and execute the trainable access-first G1 contract; never infer EHC superiority from the prototype. |
-| C-REC | live, strengthened | The G1 recurrent control matched mechanism-control hidden correctness and fitting/held-out utility without an EHC intervention path. | Trainable matched OR/DUM/EHC evidence under the frozen access-first contract. |
-| C-BASE | live | The common recurrent policy/critic/representation may be the shared access bottleneck. | An information-matched stronger base accesses the same benchmark under the same credit semantics. |
-| C-CREDIT | live | Shared external-credit or optimization failure may explain no access across all three arms. | A representation-fixed causal credit comparison after access is established. |
-| C-BENCH | live | The exact G0 benchmark-comparator pair is closed; a different identifying source is required. | A separately reviewed access-positive, mechanism-matched source. |
+| C-EHC | live, narrowed | Formal G1 accessed the source but selected ordinary explanation; within-lifecycle cue memory is not an EHC advantage. | A task-relevant commitment must survive an anonymous creator-to-successor handoff and mediate successor behavior/value. |
+| C-REC | selected for G1 | OR/DUM matched EHC near `0.934` utility; both EHC gain UCBs were `0.0026465`. | Retain as the mandatory matched explanation in any cross-lifecycle source. |
+| C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
+| C-CREDIT | live elsewhere; unsupported for G1 | High utility in every G1 arm and confidently null EHC gain give no credit-bottleneck rescue. | A representation-fixed causal credit comparison on an independently identified source. |
+| C-BENCH | strengthened | G0 was no-access; G1 was accessible but reducible to individual recurrent memory. | A source with an explicit cross-lifecycle information-ownership boundary. |
 | C-COORD | live | Team complementarity may carry the actual many-agent burden. | Joint causal consequence that individual persistence cannot explain. |
-| C-LINK-NULL | live | Commitment may be non-load-bearing or mismatched to this task family; G0 no-access does not select it. | An access-positive source with `UCB(G)<=0.10` or confident behavioral-consequence failure. |
-| C-MEASURE | retained, prototype-validated | The corrected tuple distinguishes `CE-RANDOM-USE`, `CE-EXOGENOUS-LIFETIME`, and `CE-LOGIT-WITHOUT-BEHAVIOR` while keeping recurrence separate from EHC. | Carry the tuple into the formal G1 contract without turning local diagnostics into an adoption gate. |
+| C-LINK-NULL | selected for exact G1 | Access passed and both registered gain UCBs were `0.0026465 <= 0.10`; the exact link is non-load-bearing. | Do not reactivate this exact pair; test only a structurally different handoff source. |
+| C-MEASURE | retained, formally validated | Formal G1 had broad opportunity/K-bin support but near-zero I-TV and C totals, correctly exposing a decorative link. | Reuse the tuple in a handoff source without promoting diagnostics into result gates. |
 
 ## Scheduled action
 
 ```text
-completed_action=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
+completed_action=EHC_RECURRENCE_REDUCTION_COUNTEREXAMPLE_DERIVATION
 source_family=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1
-prototype_disposition=MEASUREMENT_PATH_VALID_RECURRENCE_REMAINS_SUFFICIENT
-next_action=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
+formal_disposition=ORDINARY_EXPLANATION_G1
+next_action=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION
 authorization_status=authorized_under_autonomous_grant
-conclusion_bearing_iterations_consumed=0
-iterations_remaining=4
+conclusion_bearing_iterations_consumed=1
+iterations_remaining=3
 ```
 
-The nonformal prototype completed without consuming an iteration. The three
-constructed nulls no longer pass the corrected measurement tuple jointly;
-ordinary recurrence still matches natural capability. The next boundary is the
-PM-owned trainable executable definition and frozen access-first evidence
-contract. Formal CPU execution remains gated on that contract, not on another
-field-completion or compatibility round.
+Formal G1 consumed iteration 2 and permanently closed its exact source as
+`ORDINARY_EXPLANATION_G1`. The next zero-compute definition must move the useful
+bit across an anonymous lifecycle handoff that legitimately destroys the
+creator's per-member recurrent state. It consumes no iteration and precedes any
+new implementation or formal run.

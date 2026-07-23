@@ -9,7 +9,7 @@ implementation_status=PM_ACCEPTED_PRELAUNCH
 design=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
 backend=cpu
 torch_threads=1
-formal_run_status=operational_repair_pending_clean_operator_launch
+formal_run_status=complete_valid_ordinary_explanation_g1
 G0_mutation=forbidden
 backward_compatibility=not_required
 ```
@@ -164,7 +164,7 @@ launch time.
 
 ## Task 7 — Operational r1 repair and clean r2
 
-**Status:** PM accepted; no formal compute was launched by this task.
+**Status:** complete and PM accepted.
 
 The first r1 attempt exited during atomic `progress.json` replacement with
 `PermissionError: [WinError 5]`. It produced no evaluation or analysis and
@@ -180,9 +180,20 @@ messages, and returns exactly one terminal payload. After the repair source is
 committed, use a fresh r2 run root; never resume the r1 checkpoint across the
 source commit.
 
-The profile is integrated at `21978ee541d8f592d0864fd1ae11c910019d30cf`.
-Because the active parent runtime loaded its native-agent registry before that
-commit, its exact activation probe returned `unknown agent_type`; it launched no
-compute. Reload the native registry and retry only the exact
-`hmasd-experiment-operator`. No default/ad hoc child or separate session is an
-admissible fallback.
+After the native registry reload, the exact `hmasd-experiment-operator` ran the
+fresh r2 pipeline at source `de9a315b4969ee6920be08a3d911d559fe362f03`.
+Train, evaluate and analyze all returned zero. The validator closed 15 final
+checkpoints and 60 evaluation files and reproduced
+`ORDINARY_EXPLANATION_G1`. Both gain UCBs were `0.0026465277`, so the exact G1
+source is closed without rescue and three conclusion-bearing iterations remain.
+
+## Task 8 — Result correction and next algorithmic boundary
+
+**Status:** complete and PM accepted.
+
+Record the formal closure and derive the smallest counterexample correction.
+Within-lifecycle cue memory is reducible to ordinary recurrence; the next source
+must instead transport a task-relevant commitment across an anonymous
+creator-to-successor lifecycle handoff. The next executable-definition task is
+zero-compute and may not launch formal iteration 3 until its evidence contract
+is frozen.

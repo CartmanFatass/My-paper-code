@@ -38,22 +38,24 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2_OPERATIONAL_REPAIR',
-    'iterations_remaining=4',
+    'active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION',
+    'iterations_remaining=3',
     'conclusion_bearing_iterations_consumed_by_failed_r1=0',
+    'conclusion_bearing_iterations_consumed_by_valid_r2=1',
     'intermediate_authorization_prompts=forbidden',
-    'formal_run_status=r1_operational_error_no_valid_analysis',
-    'formal_r1_scientific_disposition=none',
-    'restart_policy=clean_run_root_after_repair_commit_no_cross_commit_resume',
+    'formal_run_status=r2_complete_valid_ordinary_explanation_g1',
+    'formal_r2_result=ORDINARY_EXPLANATION_G1',
+    'formal_r1_status=operationally_invalid_no_scientific_disposition',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=operational_repair_pending_clean_operator_launch',
+    'formal_run_status=complete_valid_ordinary_explanation_g1',
     'bounded five-second window',
     'hmasd-experiment-operator',
     'emits no intermediate',
-    'fresh r2 run root')) {
+    'fresh r2 run root',
+    'three conclusion-bearing iterations remain')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
 foreach ($required in @(

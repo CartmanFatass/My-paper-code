@@ -6,10 +6,10 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live; the G1 nonformal prototype made the corrected measurement path
-  executable and separated the three constructed nulls, but ordinary recurrence
-  matched the mechanism controller's natural capability. No mechanism adoption
-  or superiority follows.
+- Status: live but narrowed after formal G1 selected
+  `ORDINARY_EXPLANATION_G1`. Within-lifecycle cue retention is reducible to
+  ordinary recurrence; EHC now requires a cross-lifecycle or cross-member
+  information-ownership boundary before superiority is testable.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
@@ -27,9 +27,8 @@ the Project Manager-accepted CDC state.
 
 ## C-REC — Ordinary recurrence is sufficient
 
-- Status: live and strengthened by the G1 prototype: the recurrent control
-  reached hidden correctness 1.0 and the same fitting/held-out natural utility
-  as the synthetic mechanism control without an EHC intervention path.
+- Status: selected for the exact formal G1 source. OR and DUM reached the same
+  `0.9344202` mean utility, while both EHC gain UCBs were only `0.0026465`.
 - Claim: a matched recurrent MARL controller can represent the required
   persistence without an explicit commitment object when access and training
   are adequate.
@@ -38,7 +37,8 @@ the Project Manager-accepted CDC state.
 
 ## C-BASE — The shared base policy class is insufficient
 
-- Status: live after the G0 no-access result.
+- Status: live for other source families but rejected as the explanation of
+  formal G1, where all three arms accessed the source above the `0.80` floor.
 - Claim: the shared recurrent actor, critic, primitive distribution or state
   representation may be unable to express or stabilize the required policy;
   the EHC adapter cannot repair every common base limitation.
@@ -47,7 +47,8 @@ the Project Manager-accepted CDC state.
 
 ## C-CREDIT — Temporal credit is the bottleneck
 
-- Status: live.
+- Status: live generally but unsupported as a rescue of formal G1; all three
+  arms learned high utility and the EHC-specific gain was confidently null.
 - Claim: representation is adequate but primitive-step credit cannot assign
   delayed consequences to asynchronous events.
 - Separating evidence: representation held fixed while only a well-defined
@@ -55,7 +56,9 @@ the Project Manager-accepted CDC state.
 
 ## C-BENCH — The benchmark is not identifying
 
-- Status: live.
+- Status: live and strengthened. Formal G1 shows that individual cue memory,
+  even with event opportunities and commitment records, does not identify an
+  event-held advantage over matched recurrence.
 - Claim: current benchmark/control pairs do not separate representation,
   access, credit and coordination explanations.
 - Separating evidence: a constructive policy or alternative task family that
@@ -71,7 +74,8 @@ the Project Manager-accepted CDC state.
 
 ## C-LINK-NULL — Commitment is not load-bearing for the source family
 
-- Status: live; not selected by the G0 no-access result.
+- Status: selected for the exact formal G1 source/comparator pair; it remains
+  unselected by the G0 no-access result and is not a family-wide conclusion.
 - Claim: ordinary recurrence may represent the useful behavior, or the task's
   temporal structure may be mismatched to KEEP/RENEW event-held commitment.
 - Separating evidence: an access-positive mechanism-matched source with
@@ -80,9 +84,9 @@ the Project Manager-accepted CDC state.
 
 ## C-MEASURE — Current behavior metrics do not identify commitment
 
-- Status: corrected measurement contract retained and executable in the G1
-  nonformal prototype; the G0 source still did not reach the first-match branch
-  where its predicates have disposition authority.
+- Status: retained and formally validated in G1. It correctly exposed a
+  decorative link: K-bin support was present while action-TV and both causal
+  utility consequences were near zero.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
 - Counterexamples: `CE-RANDOM-USE`, `CE-EXOGENOUS-LIFETIME`, and
@@ -94,3 +98,6 @@ the Project Manager-accepted CDC state.
 - Prototype evidence: the combined tuple rejects the three constructed nulls;
   recurrence remains a distinct sufficient capability explanation rather than
   being mislabeled as an event-held mechanism.
+- Formal evidence: `CE-RECURRENT-CUE-MEMORY`, `CE-LOCAL-UTILITY-DOMINANCE`, and
+  `CE-DECORATIVE-COMMITMENT-CHANNEL` require the next source to place useful
+  state across an anonymous creator-to-successor handoff.

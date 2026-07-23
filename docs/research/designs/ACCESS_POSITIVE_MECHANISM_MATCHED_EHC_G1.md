@@ -343,5 +343,6 @@ compatibility reader or migration is created.
 Prelaunch completion requires focused source/model/replay/checkpoint/selector
 tests, one bounded `formal=false` CPU exercise, exact inspection for leakage,
 RNG drift, repeated packing, scalar transfers, synchronization and serial
-evaluation, and Project Manager acceptance. Only then may Controller launch the
-already user-authorized formal CPU run.
+evaluation, and Project Manager acceptance. Only then may Project Manager assign
+the already user-authorized formal CPU run to the registered experiment
+operator.

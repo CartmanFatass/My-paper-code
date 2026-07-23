@@ -23,65 +23,55 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION
-active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2_OPERATIONAL_REPAIR
-accepted_source_commit=3d1d92711763034bf7f022b812f3f3431bb59776
-next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_ITERATION_2_CLEAN_R2
-iterations_remaining=4
+last_completed_assignment_id=EHC_RECURRENCE_REDUCTION_COUNTEREXAMPLE_DERIVATION
+active_assignment_id=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION
+accepted_source_commit=de9a315b4969ee6920be08a3d911d559fe362f03
+next_boundary=CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION
+iterations_remaining=3
 conclusion_bearing_iterations_consumed_by_failed_r1=0
+conclusion_bearing_iterations_consumed_by_valid_r2=1
 autonomous_research_grant=ACTIVE
-grant_scope=remaining_four_conclusion_bearing_iterations
+grant_scope=remaining_three_conclusion_bearing_iterations
 intermediate_authorization_prompts=forbidden
 implementation_status=authorized
 nonformal_compute_status=authorized
-formal_compute_status=authorized_cpu_only_under_frozen_evidence_contract
+formal_compute_authority=standing_user_grant_cpu_only
+formal_compute_status=not_launchable_until_next_evidence_contract_is_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
-experiment_operator_status=registered_pm_accepted_runtime_reload_required
-experiment_operator_activation_probe=unknown_agent_type_in_prechange_parent_runtime
-experiment_operator_activation_condition=reload_native_agent_registry_then_spawn_exact_hmasd_experiment_operator
+experiment_operator_status=registered_available_idle
+experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
-formal_evidence_contract_status=PM_FROZEN
+formal_evidence_contract_status=G1_EXECUTED_AND_CLOSED
 formal_evidence_contract=docs/research/designs/ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1.md
 formal_implementation_status=PM_ACCEPTED_PRELAUNCH
-formal_run_status=r1_operational_error_no_valid_analysis
+formal_run_status=r2_complete_valid_ordinary_explanation_g1
+formal_r2_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_de9a315_r2
+formal_r2_result=ORDINARY_EXPLANATION_G1
+formal_r2_operational_valid=true
+formal_r2_source_identifiable=true
+formal_r2_max_arm_utility_ci95=[0.9293551393,0.9420615267]
+formal_r2_gain_ucb=0.0026465277
+formal_r2_scientific_disposition=closed_no_rerun_tuning_rename_or_rescue
 formal_r1_artifact=logs/formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1
-formal_r1_terminal_phase=TRAIN
-formal_r1_last_progress=replicate_1_arm_OR_update_90
-formal_r1_error=PermissionError_WinError_5_atomic_progress_replace
-formal_r1_evaluate_status=not_launched
-formal_r1_analyze_status=not_launched
-formal_r1_scientific_disposition=none
-operational_repair_status=PM_ACCEPTED
-operational_repair=bounded_permission_retry_plus_silent_foreground_operator
-restart_policy=clean_run_root_after_repair_commit_no_cross_commit_resume
+formal_r1_status=operationally_invalid_no_scientific_disposition
+next_action_class=zero_compute_design
+next_action_evidence=docs/research/cdc/EVIDENCE_NOTES/20260723_ACCESS_POSITIVE_EHC_G1_FORMAL_RESULT.md
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
 
-The first formal G1 run has no valid scientific result. Its same-command
-foreground resume exited while atomically replacing `progress.json` under a
-Windows/OneDrive sharing lock:
+The clean r2 formal pipeline completed train, evaluate and analyze under the
+registered silent operator. Project Manager validation closed all 15 final
+checkpoints, 60 evaluation files, source controls and causal-audit evidence and
+independently reproduced `ORDINARY_EXPLANATION_G1` from the frozen first-match
+selector. The source is accessible, but both EHC gain upper bounds are
+`0.0026465277 <= 0.10`. The result consumes conclusion-bearing iteration 2 and
+leaves three iterations.
 
-```text
-PermissionError: [WinError 5] Access is denied:
-'logs\\formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1\\.progress.json.35684.tmp'
--> 'logs\\formal_access_positive_ehc_g1_cpu_20260723_3d1d927_r1\\progress.json'
-```
-
-Training stopped at replicate 1, OR update 90. Evaluation and analysis were not
-started. The run consumed no conclusion-bearing iteration and must remain as
-operationally invalid evidence. After the atomic-write and operator topology
-package is accepted and committed, iteration 2 restarts from a fresh run root
-under that new source commit; the old checkpoint is not resumed across commits.
-
-The operator profile and role are integrated at source commit
-`21978ee541d8f592d0864fd1ae11c910019d30cf`. The current Project Manager runtime
-was created before that profile existed, so its first exact spawn probe returned
-`unknown agent_type 'hmasd-experiment-operator'`. No run was launched. The only
-activation condition is a native agent-registry reload followed by the same
-exact custom type; using `default`, an unnamed child, a manual model override,
-or a separate persistent task is forbidden.
+The exact G1 pair is permanently closed. The older r1 directory remains an
+operationally invalid, non-conclusion-bearing record; it is never resumed or
+combined with r2.
 
 ## Accepted scientific state
 
@@ -92,9 +82,13 @@ or a separate persistent task is forbidden.
 - The bounded prelaunch artifact
   `logs/nonformal_access_positive_ehc_g1_prelaunch_20260723_pm2` validated the
   learned G1 execution path and was correctly rejected as nonformal.
-- The r1 operational error changes no estimand, source, threshold, budget,
-  branch, or scientific result gate.
-- Four conclusion-bearing iterations remain.
+- G1 is valid `ORDINARY_EXPLANATION_G1`: ordinary per-lifecycle recurrence is
+  sufficient and the commitment link is non-load-bearing for this exact source.
+- C-EHC remains live only where task-relevant state must survive an anonymous
+  lifecycle handoff after the creator's recurrent state is unavailable.
+- The next zero-compute boundary defines that information-ownership separation;
+  no G1 rescue or immediate iteration-3 run is admissible.
+- Three conclusion-bearing iterations remain.
 
 ## Runtime and protected semantics
 
