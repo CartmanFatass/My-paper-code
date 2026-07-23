@@ -32,8 +32,8 @@ contract was corrected. Any natural raw may be archived as superseded process
 evidence, but it cannot authorize code, science, a successor, or iteration-2
 compute. The replacement package was authored by Project Manager and transported
 without Controller semantic rewriting. The PM-owned G1 external-Pro raw is archived
-with exact-text verification. The next boundary is Project Manager code-side reconciliation;
-formal compute remains unauthorized.
+with exact-text verification. PM reconciliation is archived and blocked on protected source contract;
+the next boundary is PM-authored focused Pro package. Formal compute remains unauthorized.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -187,12 +187,11 @@ Iteration 1 and its external result review are accepted. The raw run is
 `logs/formal_event_held_cpu_20260722_fb99097_r2`; the complete review and
 Controller disposition are recorded in
 `docs/external-review/rounds/20260722_ehc_formal_result_review/`. The next action
-is for Project Manager to consume the exact archived external-Pro raw, author
-`30_PM_CODE_SIDE_RECONCILIATION.md`, freeze the executable definition, and own
-all subsequent code-side realization and validation. Controller performs no
-semantic relay. No iteration-2 formal compute is authorized until the PM-owned
-implementation package is verified and integrated and Controller issues an
-exact run authorization.
+is for Project Manager to author the focused reviewer-visible Pro package from
+the exact archived raw and its own reconciliation. Controller performs no
+semantic relay or field completion. No iteration-2 formal compute is authorized
+until the focused Pro response and PM-owned implementation package are verified
+and integrated and Controller issues an exact run authorization.
 
 ## BATTERY_CONTRACT_RECONCILED
 
@@ -240,8 +239,8 @@ historical evidence only.
 remaining after the valid iteration-1 result on 2026-07-22. Each later iteration
 must follow the registered external-Pro, native Codex, Git and evidence gates;
 iteration 2 is at the executable-definition boundary selected by the completed
-external result review. The PM-owned clarification raw is archived; the active
-step is Project Manager code-side reconciliation and executable realization.
+external result review. The PM-owned clarification raw and reconciliation are
+archived; the active step is the PM-authored focused Pro package.
 
 ## Durable Constraints
 

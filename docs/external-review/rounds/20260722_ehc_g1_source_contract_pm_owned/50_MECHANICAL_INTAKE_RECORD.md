@@ -20,6 +20,9 @@ repair_owner=project_manager
 formal_compute_status=unauthorized
 conclusion_bearing_iterations_remaining=4
 next_route=project_manager_code_side_reconciliation
+pm_reconciliation_status=PROTECTED_SOURCE_CONTRACT_INCOMPLETE
+pm_reconciliation_sha256=eba2160e813b13df5cbe0b819104e83a2c7750882dc4427dbad686f85ef420ae
+next_route_after_pm_reconciliation=focused_external_pro_package
 
 This record contains provenance and transport state only. It supplies no
 scientific or engineering interpretation and authorizes no code, experiment or
