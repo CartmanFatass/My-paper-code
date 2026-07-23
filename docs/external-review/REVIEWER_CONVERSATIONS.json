@@ -1,8 +1,8 @@
 {
-  "schema_version": 30,
+  "schema_version": 31,
   "updated": "2026-07-23",
   "round_controller": {
-    "kind": "active_controller_owned_browsermcp_with_readonly_task_monitor",
+    "kind": "active_controller_owned_browsermcp_state_machine",
     "external_scientific_decision": "open_divergent",
     "decision_intake": "active_controller_direct",
     "git_boundary_owner": "active_controller"
@@ -15,21 +15,21 @@
     "evidence_transport": "github_connector",
     "repository": "CartmanFatass/My-paper-code",
     "review_branch": "Claude",
-    "controller_contact": "same_session_submission_capture_and_intake",
-    "completion_monitor": {
-      "primary_agent": "hmasd-pro-monitor",
-      "primary_model": "openai-codex/gpt-5.3-codex-spark",
-      "primary_thinking": "medium",
-      "backup_agent": "hmasd-pro-monitor-luna",
-      "backup_model": "openai-codex/gpt-5.6-luna",
-      "backup_thinking": "low",
-      "selection": "exactly_one",
-      "lifecycle": "one_shot_task_callback",
-      "tools": ["mcp__browsermcp_pro_browser_snapshot", "mcp__browsermcp_pro_browser_wait"],
-      "forbidden_actions": ["click", "type", "navigate", "stop", "retry", "archive", "interpret"]
-    },
-    "terminal_order": "validate_canonical_paths_then_verify_pushed_boundary_then_start_long_lived_omp_then_user_connect_then_preflight_tab_then_submit_then_readonly_monitor_stability_callback_then_controller_capture_then_archive_raw_no_clobber",
-    "connection_state": "CONNECTED_PREFLIGHT_OK",
+    "controller_contact": "same_session_submission_observation_capture_and_intake",
+    "connection_state": "LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND",
+    "state_machine": [
+      "VALIDATED",
+      "RECONCILED_IDLE",
+      "DRAFT_CONFIRMED",
+      "SUBMISSION_CONFIRMED",
+      "GENERATING",
+      "STABLE_TWICE",
+      "ARCHIVED"
+    ],
+    "receipt_file": "19_BROWSER_PRO_SUBMISSION.json",
+    "receipt_schema": "hmasd.browser_pro_submission.v1",
+    "wait_chunk_seconds": 20,
+    "terminal_order": "validate_canonical_paths_then_verify_pushed_boundary_then_start_long_lived_omp_then_user_connect_then_live_preflight_then_type_exact_question_then_press_enter_then_record_submission_no_clobber_then_controller_observe_then_two_snapshot_capture_then_archive_raw_no_clobber",
     "fallback": "none"
   },
   "reviewers": {
@@ -39,7 +39,8 @@
       "url": "https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207",
       "expected_model_ui": "Pro",
       "transport": "browsermcp_connected_tab",
-      "connection_state": "CONNECTED_PREFLIGHT_OK",
+      "connection_state": "LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND",
+      "receipt_file": "19_BROWSER_PRO_SUBMISSION.json",
       "question_file": "20_PRO_OPEN_QUESTION.md",
       "raw_file": "21_PRO_OPEN_RAW.md"
     }

@@ -2,337 +2,299 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$round = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
-$browserExchange = Get-Content (Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/SKILL.md') -Raw
-$controller = Get-Content (Join-Path $repo 'AGENTS.md') -Raw
+$utf8 = [Text.UTF8Encoding]::new($false)
+$validator = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
+$recorder = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1'
+$archiver = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1'
+$boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
+$exchange = Get-Content (Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/SKILL.md') -Raw
+$reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 $registryRaw = Get-Content (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') -Raw
 $registry = $registryRaw | ConvertFrom-Json
 $mcp = Get-Content (Join-Path $repo '.omp/mcp.json') -Raw | ConvertFrom-Json
-$roundValidator = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
-$rawArchiver = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1'
-$boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
 
-$reviewerKeys = @($registry.reviewers.PSObject.Properties.Name)
-$serverKeys = @($mcp.mcpServers.PSObject.Properties.Name)
-$currentBranch = (& git.exe -C $repo branch --show-current).Trim()
-if ($registry.schema_version -ne 30 -or
-    (Compare-Object @('open_divergent') $reviewerKeys) -or
-    $registry.round_controller.kind -ne 'active_controller_owned_browsermcp_with_readonly_task_monitor' -or
-    $registry.round_controller.external_scientific_decision -ne 'open_divergent' -or
-    $registry.round_controller.decision_intake -ne 'active_controller_direct' -or
-    $registry.exchange_contract.transport_server -ne 'browsermcp-pro' -or
-    $registry.exchange_contract.server_package -ne '@browsermcp/mcp@0.1.3' -or
-    $registry.exchange_contract.evidence_transport -ne 'github_connector' -or
-    $registry.exchange_contract.repository -ne 'CartmanFatass/My-paper-code' -or
-    $registry.exchange_contract.review_branch -ne $currentBranch -or
-    -not $registry.exchange_contract.terminal_order.Contains('verify_pushed_boundary') -or
-    -not $registry.exchange_contract.terminal_order.Contains('archive_raw_no_clobber') -or
-    $registry.exchange_contract.connection_state -ne 'CONNECTED_PREFLIGHT_OK' -or
-    $registry.exchange_contract.completion_monitor.primary_agent -ne 'hmasd-pro-monitor' -or
-    $registry.exchange_contract.completion_monitor.primary_model -ne 'openai-codex/gpt-5.3-codex-spark' -or
-    $registry.exchange_contract.completion_monitor.primary_thinking -ne 'medium' -or
-    $registry.exchange_contract.completion_monitor.backup_agent -ne 'hmasd-pro-monitor-luna' -or
-    $registry.exchange_contract.completion_monitor.backup_model -ne 'openai-codex/gpt-5.6-luna' -or
-    $registry.exchange_contract.completion_monitor.backup_thinking -ne 'low' -or
-    $registry.exchange_contract.completion_monitor.selection -ne 'exactly_one' -or
-    $registry.exchange_contract.completion_monitor.lifecycle -ne 'one_shot_task_callback' -or
-    (Compare-Object @('mcp__browsermcp_pro_browser_snapshot',
-        'mcp__browsermcp_pro_browser_wait') @($registry.exchange_contract.completion_monitor.tools)) -or
-    $registry.exchange_contract.fallback -ne 'none' -or
-    $registry.reviewers.open_divergent.conversation_id -ne '6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
-    $registry.reviewers.open_divergent.url -ne 'https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
-    $registry.reviewers.open_divergent.expected_model_ui -ne 'Pro' -or
-    $registry.reviewers.open_divergent.transport -ne 'browsermcp_connected_tab' -or
-    $registry.reviewers.open_divergent.connection_state -ne 'CONNECTED_PREFLIGHT_OK' -or
-    $registry.reviewers.open_divergent.question_file -ne '20_PRO_OPEN_QUESTION.md' -or
-    $registry.reviewers.open_divergent.raw_file -ne '21_PRO_OPEN_RAW.md') {
-    throw 'BrowserMCP review registry mismatch'
-}
-foreach ($forbidden in @('headless', 'cdp', 'codex_exchange', 'alternate_transport')) {
-    if ($registryRaw.Contains($forbidden)) { throw "Review registry retains alternate transport: $forbidden" }
-}
-
-$server = $mcp.mcpServers.'browsermcp-pro'
-if ((Compare-Object @('browsermcp-pro') $serverKeys) -or
-    $server.type -ne 'stdio' -or $server.command -ne 'npx' -or
-    @($server.args).Count -ne 2 -or $server.args[0] -ne '-y' -or
-    $server.args[1] -ne '@browsermcp/mcp@0.1.3' -or
-    $server.timeout -ne 120000) {
-    throw 'Pinned singular BrowserMCP server config mismatch'
-}
-
-foreach ($required in @('External GPT-5.6 Pro is the scientific decision source',
-    'one scheduled research action', 'Controller direct evidence intake',
-    'Controller later freezes executable architecture', '$hmasd-browser-pro-exchange',
-    'stage_commit=<40-character pushed SHA>',
-    'evidence_commit=<40-character pushed evidence SHA>',
-    'evidence_transport=github_connector', 'source_manifest=01_SHARED_SOURCE_MANIFEST.md',
-    'question=20_PRO_OPEN_QUESTION.md', 'raw=21_PRO_OPEN_RAW.md',
-    'exclusive no-clobber archival', '50_DISPOSITION.md')) {
-    if (-not $round.Contains($required)) { throw "Review round missing: $required" }
-}
-foreach ($required in @('browsermcp-pro', '@browsermcp/mcp@0.1.3',
-    'BROWSERMCP_PRO_BLOCKED', 'GITHUB_CONNECTOR_EVIDENCE_BLOCKED',
-    'GitHub connector', 'ARCHIVE_NATURAL_RESPONSE_EXACTLY',
-    'archive_browser_pro_raw.ps1', 'same-directory temporary file',
-    'ephemeral `omp --no-session` probe', 'long-lived',
-    'hmasd-pro-monitor', 'hmasd-pro-monitor-luna', 'Luna-low',
-    'wait and snapshot', 'neither a', 'persistent role',
-    'transport relay', 'never compensate by pasting local source')) {
-    if (-not $browserExchange.Contains($required)) { throw "Browser Pro Exchange missing: $required" }
-}
-foreach ($monitorFile in @('hmasd-pro-monitor.md', 'hmasd-pro-monitor-luna.md')) {
-    $proMonitorPath = Join-Path $repo ".omp/agents/$monitorFile"
-    if (-not (Test-Path -LiteralPath $proMonitorPath -PathType Leaf)) {
-        throw "Missing read-only Pro completion monitor profile: $monitorFile"
-    }
-    $proMonitor = Get-Content -LiteralPath $proMonitorPath -Raw
-    foreach ($required in @('mcp__browsermcp_pro_browser_snapshot',
-            'mcp__browsermcp_pro_browser_wait', 'STABLE_COMPLETE|BLOCKED',
-            'The Controller remains the sole owner')) {
-        if (-not $proMonitor.Contains($required)) { throw "$monitorFile missing: $required" }
-    }
-    $proMonitorTools = [regex]::Match($proMonitor, '(?m)^tools: \[([^\r\n]+)\]$').Groups[1].Value
-    foreach ($forbidden in @('click', 'type', 'navigate', 'bash', 'edit', 'write')) {
-        if ($proMonitorTools.Contains($forbidden)) { throw "$monitorFile exposes forbidden tool: $forbidden" }
-    }
-}
-foreach ($required in @('ephemeral process is not a valid',
-    'name one exact ancestor evidence commit', 'Raw archival is exclusive and no-clobber',
-    'BrowserMCP does not upload local source')) {
-    if (-not $controller.Contains($required)) { throw "Controller contract missing: $required" }
-}
-if (Test-Path (Join-Path $repo '.agents/skills/hmasd-review-exchange')) {
-    throw 'Superseded persistent review Exchange remains'
-}
-
-function Invoke-FixtureGit {
-    param([string]$Root, [string[]]$GitArgs)
-    $previousErrorAction = $ErrorActionPreference
-    try {
-        $ErrorActionPreference = 'Continue'
-        $output = & git.exe -C $Root @GitArgs 2>&1
-        $exitCode = $LASTEXITCODE
-    } finally {
-        $ErrorActionPreference = $previousErrorAction
-    }
-    if ($exitCode -ne 0) {
-        throw "fixture git $($GitArgs -join ' ') failed: $($output -join [Environment]::NewLine)"
-    }
-    @($output)
-}
-function Write-Utf8 {
-    param([string]$Path, [string]$Content)
+function Write-Utf8 { param([string]$Path, [string]$Content)
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($Path)) | Out-Null
-    [IO.File]::WriteAllText($Path, $Content, [Text.UTF8Encoding]::new($false))
+    [IO.File]::WriteAllText($Path, $Content, $utf8)
 }
-function Assert-Failure {
-    param([scriptblock]$Action, [string]$Pattern, [string]$Label)
+function Get-Sha256 { param([string]$Content)
+    $h = [Security.Cryptography.SHA256]::Create()
+    try { -join @($h.ComputeHash($utf8.GetBytes($Content)) | ForEach-Object { $_.ToString('x2') }) }
+    finally { $h.Dispose() }
+}
+function Assert-Failure { param([scriptblock]$Action, [string]$Pattern, [string]$Label)
     $failed = $false
-    try {
-        & $Action | Out-Null
-    } catch {
+    try { & $Action | Out-Null } catch {
         $failed = $true
-        if ([string]$_ -notmatch $Pattern) {
-            throw "$Label failed for the wrong reason: $_"
-        }
+        if ([string]$_ -notmatch $Pattern) { throw "$Label failed for the wrong reason: $_" }
     }
     if (-not $failed) { throw "$Label unexpectedly succeeded" }
 }
 
-$fixtureRoot = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-browser-pro-" + [Guid]::NewGuid().ToString('N'))
-$fixtureRepo = Join-Path $fixtureRoot 'source'
-$fixtureRemote = Join-Path $fixtureRoot 'fixture-owner/fixture-repo.git'
-$fixtureRound = 'docs/external-review/rounds/fixture_round'
-$questionRelative = "$fixtureRound/20_PRO_OPEN_QUESTION.md"
-$manifestRelative = "$fixtureRound/01_SHARED_SOURCE_MANIFEST.md"
-try {
-    [IO.Directory]::CreateDirectory($fixtureRepo) | Out-Null
-    [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($fixtureRemote)) | Out-Null
-    Invoke-FixtureGit $fixtureRoot @('init', '--bare', $fixtureRemote) | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('init', '-b', 'Claude') | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('config', 'user.name', 'HMASD Contract Test') | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('config', 'user.email', 'hmasd-contract@example.invalid') | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('config', 'core.autocrlf', 'false') | Out-Null
-    Write-Utf8 (Join-Path $fixtureRepo 'docs/project/ALGORITHM_PRINCIPLES.md') "# Algorithm principles`n"
-    Write-Utf8 (Join-Path $fixtureRepo 'docs/external-review/OPEN_REVIEW_PRINCIPLES.md') "# Open review principles`n"
-    Write-Utf8 (Join-Path $fixtureRepo 'docs/results/result.json') "{`"status`":`"fixture`"}`n"
-    Write-Utf8 (Join-Path $fixtureRepo 'ha_ctse_process/reference.py') "VALUE = 1`n"
-    Invoke-FixtureGit $fixtureRepo @('add', '.') | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('commit', '-m', 'fixture evidence') | Out-Null
-    $evidenceCommit = ([string]@(Invoke-FixtureGit $fixtureRepo @('rev-parse', 'HEAD'))[-1]).Trim()
-
-    $metadata = @(
-        'Repository: `fixture-owner/fixture-repo`',
-        'Review branch: `Claude`',
-        "Evidence commit: ``$evidenceCommit``"
-    ) -join "`n"
-    $evidencePaths = @(
-        'docs/project/ALGORITHM_PRINCIPLES.md',
-        'docs/external-review/OPEN_REVIEW_PRINCIPLES.md',
-        'docs/results/result.json',
-        'ha_ctse_process/reference.py'
-    )
-    $pathList = ($evidencePaths | ForEach-Object { "- ``$_``" }) -join "`n"
-    $manifestText = "# Shared Source Manifest`n`n$metadata`n`n$pathList`n"
-    $questionText = "# Pro Review Question`n`n$metadata`n`n- ``$manifestRelative```n$pathList`n"
-    Write-Utf8 (Join-Path $fixtureRepo $manifestRelative) $manifestText
-    Write-Utf8 (Join-Path $fixtureRepo $questionRelative) $questionText
-    Invoke-FixtureGit $fixtureRepo @('add', '.') | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('commit', '-m', 'fixture review stage') | Out-Null
-    $stageCommit = ([string]@(Invoke-FixtureGit $fixtureRepo @('rev-parse', 'HEAD'))[-1]).Trim()
-    Invoke-FixtureGit $fixtureRepo @('remote', 'add', 'origin', $fixtureRemote) | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('push', 'origin', 'HEAD:refs/heads/Claude') | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('remote', 'add', 'wrong-origin', $fixtureRemote) | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('remote', 'add', 'ssh-origin', $fixtureRemote) | Out-Null
-
-    $validatedJson = & $roundValidator `
-        -RoundPath $fixtureRound `
-        -QuestionPath '20_PRO_OPEN_QUESTION.md' `
-        -RawPath '21_PRO_OPEN_RAW.md' `
-        -RepoRoot $fixtureRepo
-    $validated = $validatedJson | ConvertFrom-Json
-    $global:HmasdRealGitExe = @(Get-Command git.exe -CommandType Application)[0].Source
-    $global:HmasdFixtureRepo = [IO.Path]::GetFullPath($fixtureRepo)
-    function global:git.exe {
-        $arguments = @($args)
-        if ($arguments.Count -ge 5 -and $arguments[0] -eq '-C' -and
-            [IO.Path]::GetFullPath([string]$arguments[1]) -eq $global:HmasdFixtureRepo -and
-            $arguments[2] -eq 'remote' -and $arguments[3] -eq 'get-url' -and
-            $arguments[4] -in @('origin', 'ssh-origin')) {
-            $reportedUrl = if ($arguments[4] -eq 'ssh-origin') {
-                'git@github.com:fixture-owner/fixture-repo.git'
-            } else {
-                'https://github.com/fixture-owner/fixture-repo.git'
-            }
-            Write-Output $reportedUrl
-            $global:LASTEXITCODE = 0
-            return
-        }
-        $output = & $global:HmasdRealGitExe @arguments
-        $exitCode = $LASTEXITCODE
-        $global:LASTEXITCODE = $exitCode
-        $output
+$serverKeys = @($mcp.mcpServers.PSObject.Properties.Name)
+$server = $mcp.mcpServers.'browsermcp-pro'
+if ((Compare-Object @('browsermcp-pro') $serverKeys) -or $server.type -ne 'stdio' -or
+    $server.command -ne 'npx' -or @($server.args).Count -ne 2 -or
+    $server.args[0] -ne '-y' -or $server.args[1] -ne '@browsermcp/mcp@0.1.3' -or
+    $server.timeout -ne 120000) { throw 'Pinned singular BrowserMCP server changed' }
+if (-not (Test-Path $boundaryVerifier -PathType Leaf)) { throw 'Pushed-boundary verifier was removed' }
+if ($registry.schema_version -ne 31 -or
+    $registry.round_controller.kind -ne 'active_controller_owned_browsermcp_state_machine' -or
+    $registry.exchange_contract.server_package -ne '@browsermcp/mcp@0.1.3' -or
+    $registry.exchange_contract.evidence_transport -ne 'github_connector' -or
+    $registry.exchange_contract.repository -ne 'CartmanFatass/My-paper-code' -or
+    $registry.exchange_contract.review_branch -ne 'Claude' -or
+    $registry.exchange_contract.connection_state -ne 'LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND' -or
+    $registry.exchange_contract.receipt_schema -ne 'hmasd.browser_pro_submission.v1' -or
+    $registry.exchange_contract.wait_chunk_seconds -ne 20 -or
+    $registry.exchange_contract.fallback -ne 'none' -or
+    $registry.reviewers.open_divergent.url -ne 'https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
+    $registry.reviewers.open_divergent.expected_model_ui -ne 'Pro' -or
+    $null -ne $registry.exchange_contract.PSObject.Properties['completion_monitor']) {
+    throw 'BrowserMCP review registry mismatch'
+}
+$states = @('VALIDATED','RECONCILED_IDLE','DRAFT_CONFIRMED','SUBMISSION_CONFIRMED','GENERATING','STABLE_TWICE','ARCHIVED')
+if (Compare-Object $states @($registry.exchange_contract.state_machine)) { throw 'Registry state machine mismatch' }
+foreach ($required in @('30-second timeout', '20-second', 'browser_type', 'browser_press_key',
+    '`Enter`', 'immediately preceding fresh snapshot', 'Never blind retry', '`Send`',
+    '`Stop answering`', '`Answer now`', '`Copy response`', 'record_browser_pro_submission.ps1',
+    'two distinct temporary BrowserMCP', 'substantive fenced plaintext block',
+    'live preflight')) {
+    if (-not $exchange.Contains($required)) { throw "Browser exchange missing state-machine rule: $required" }
+}
+foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json', 'HMASD_BROWSER_PRO_QUESTION_V1',
+    'HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN', 'fenced `text` block',
+    'record_browser_pro_submission.ps1', 'archive_browser_pro_raw.ps1',
+    'requires a live', 'no completion observer')) {
+    if (-not $reviewRound.Contains($required)) { throw "Review round missing: $required" }
+}
+foreach ($forbidden in @('hmasd-pro-monitor', 'hmasd-pro-monitor-luna')) {
+    if ($exchange.Contains($forbidden) -or $reviewRound.Contains($forbidden) -or $registryRaw.Contains($forbidden)) {
+        throw "Removed completion-agent route remains: $forbidden"
     }
-    $boundaryJson = & $boundaryVerifier `
-        -StageCommit $stageCommit `
-        -EvidenceCommit $evidenceCommit `
-        -Repository 'fixture-owner/fixture-repo' `
-        -Remote 'origin' `
-        -Branch 'Claude' `
-        -QuestionPath $questionRelative `
-        -ValidatedQuestionPath $validated.question `
-        -RepoRoot $fixtureRepo
-    $boundary = $boundaryJson | ConvertFrom-Json
-    if ($boundary.status -ne 'REMOTE_EVIDENCE_READY' -or
-        $boundary.stage_commit -ne $stageCommit -or
-        $boundary.evidence_commit -ne $evidenceCommit -or
-        $boundary.validated_question -ne $validated.question -or
-        $boundary.source_manifest -ne $manifestRelative) {
-        throw 'Boundary verifier failed the exact staged/evidence fixture'
-    }
-
-    $sshBoundary = (& $boundaryVerifier -StageCommit $stageCommit `
-        -EvidenceCommit $evidenceCommit -Repository 'fixture-owner/fixture-repo' `
-        -Remote 'ssh-origin' -Branch 'Claude' -QuestionPath $questionRelative `
-        -ValidatedQuestionPath $validated.question -RepoRoot $fixtureRepo) | ConvertFrom-Json
-    if ($sshBoundary.status -ne 'REMOTE_EVIDENCE_READY' -or
-        $sshBoundary.remote_url -ne 'git@github.com:fixture-owner/fixture-repo.git') {
-        throw 'Boundary verifier rejected the exact SCP-style GitHub remote'
-    }
-
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $stageCommit -EvidenceCommit $evidenceCommit `
-            -Repository 'fixture-owner/fixture-repo' -Remote 'wrong-origin' -Branch 'Claude' `
-            -QuestionPath $questionRelative -ValidatedQuestionPath $validated.question `
-            -RepoRoot $fixtureRepo
-    } 'does not resolve to GitHub repository' 'Non-GitHub remote'
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $stageCommit.Substring(0, 12) `
-            -EvidenceCommit $evidenceCommit -Repository 'fixture-owner/fixture-repo' `
-            -Remote 'origin' -Branch 'Claude' -QuestionPath $questionRelative `
-            -ValidatedQuestionPath $validated.question -RepoRoot $fixtureRepo
-    } 'exactly 40 hexadecimal' 'Short stage SHA'
-    Invoke-FixtureGit $fixtureRepo @('push', 'origin', "$stageCommit`:refs/heads/wrong") | Out-Null
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $stageCommit -EvidenceCommit $evidenceCommit `
-            -Repository 'fixture-owner/fixture-repo' -Remote 'origin' -Branch 'wrong' `
-            -QuestionPath $questionRelative -ValidatedQuestionPath $validated.question `
-            -RepoRoot $fixtureRepo
-    } 'missing exact boundary metadata' 'Wrong branch'
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $stageCommit -EvidenceCommit $evidenceCommit `
-            -Repository 'other-owner/other-repo' -Remote 'origin' -Branch 'Claude' `
-            -QuestionPath $questionRelative -ValidatedQuestionPath $validated.question `
-            -RepoRoot $fixtureRepo
-    } 'does not resolve to GitHub repository' 'Wrong remote/repository identity'
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $stageCommit -EvidenceCommit $evidenceCommit `
-            -Repository 'fixture-owner/fixture-repo' -Remote 'origin' -Branch 'Claude' `
-            -QuestionPath "$fixtureRound/../fixture_round/20_PRO_OPEN_QUESTION.md" `
-            -ValidatedQuestionPath $validated.question `
-            -RepoRoot $fixtureRepo
-    } 'canonical review-round question' 'Wrong round path'
-
-    Write-Utf8 (Join-Path $fixtureRepo $questionRelative) "$questionText`nDIRTY"
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $stageCommit -EvidenceCommit $evidenceCommit `
-            -Repository 'fixture-owner/fixture-repo' -Remote 'origin' -Branch 'Claude' `
-            -QuestionPath $questionRelative -ValidatedQuestionPath $validated.question `
-            -RepoRoot $fixtureRepo
-    } 'differs from the pushed stage blob' 'Dirty local question'
-    Write-Utf8 (Join-Path $fixtureRepo $questionRelative) $questionText
-
-    $orphanTemp = Join-Path (Join-Path $fixtureRepo $fixtureRound) '.21_PRO_OPEN_RAW.md.orphan.tmp'
-    Write-Utf8 $orphanTemp 'incomplete temporary capture'
-    $orphanValidated = (& $roundValidator -RoundPath $fixtureRound `
-        -QuestionPath '20_PRO_OPEN_QUESTION.md' -RawPath '21_PRO_OPEN_RAW.md' `
-        -RepoRoot $fixtureRepo) | ConvertFrom-Json
-    if ($orphanValidated.raw -ne $validated.raw) {
-        throw 'Orphan temporary capture poisoned canonical raw validation'
-    }
-    Remove-Item -LiteralPath $orphanTemp -Force
-    Assert-Failure {
-        & $rawArchiver -RoundPath $fixtureRound -RawPath '21_PRO_OPEN_RAW.md' `
-            -Content '   ' -RepoRoot $fixtureRepo
-    } 'natural non-whitespace response' 'Empty raw archive'
-
-    $rawContent = "Natural Pro response`nSecond line"
-    $archiveJson = & $rawArchiver -RoundPath $fixtureRound `
-        -RawPath '21_PRO_OPEN_RAW.md' -Content $rawContent -RepoRoot $fixtureRepo
-    $archive = $archiveJson | ConvertFrom-Json
-    if ($archive.status -ne 'BROWSER_PRO_RAW_ARCHIVED_NO_CLOBBER' -or
-        [IO.File]::ReadAllText($archive.raw, [Text.UTF8Encoding]::new($false)) -cne $rawContent) {
-        throw 'Browser Pro no-clobber archive failed exact reread equality'
-    }
-    Assert-Failure {
-        & $roundValidator -RoundPath $fixtureRound -QuestionPath '20_PRO_OPEN_QUESTION.md' `
-            -RawPath '21_PRO_OPEN_RAW.md' -RepoRoot $fixtureRepo
-    } 'raw already exists and is immutable' 'Completed raw validation'
-    Assert-Failure {
-        & $rawArchiver -RoundPath $fixtureRound -RawPath '21_PRO_OPEN_RAW.md' `
-            -Content 'replacement' -RepoRoot $fixtureRepo
-    } 'cannot be atomically published without clobbering' 'Raw overwrite'
-
-    Invoke-FixtureGit $fixtureRepo @('rm', $manifestRelative) | Out-Null
-    Invoke-FixtureGit $fixtureRepo @('commit', '-m', 'fixture missing manifest') | Out-Null
-    $missingManifestCommit = ([string]@(Invoke-FixtureGit $fixtureRepo @('rev-parse', 'HEAD'))[-1]).Trim()
-    Invoke-FixtureGit $fixtureRepo @('push', 'origin', 'HEAD:refs/heads/MissingManifest') | Out-Null
-    Assert-Failure {
-        & $boundaryVerifier -StageCommit $missingManifestCommit -EvidenceCommit $evidenceCommit `
-            -Repository 'fixture-owner/fixture-repo' -Remote 'origin' -Branch 'MissingManifest' `
-            -QuestionPath $questionRelative -ValidatedQuestionPath $validated.question `
-            -RepoRoot $fixtureRepo
-    } 'Canonical local question or source manifest is missing' 'Missing pushed manifest'
-} finally {
-    if (Test-Path Function:\git.exe) {
-        Remove-Item Function:\git.exe -Force
-    }
-    Remove-Variable HmasdRealGitExe -Scope Global -ErrorAction SilentlyContinue
-    Remove-Variable HmasdFixtureRepo -Scope Global -ErrorAction SilentlyContinue
-    if (Test-Path -LiteralPath $fixtureRoot) {
-        Remove-Item -LiteralPath $fixtureRoot -Recurse -Force
-    }
+    if (Test-Path (Join-Path $repo ".omp/agents/$forbidden.md")) { throw "Removed profile remains: $forbidden" }
 }
 
-Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK transport=browsermcp github_connector=exact no_clobber=true'
+$fixtureContainer = Join-Path ([IO.Path]::GetTempPath()) ('hmasd-browser-pro-' + [Guid]::NewGuid().ToString('N'))
+$fixtureRepo = Join-Path $fixtureContainer 'source'
+$captureRoot = Join-Path $fixtureContainer 'captures'
+$roundId = 'fixture_round'
+$roundRelative = "docs/external-review/rounds/$roundId"
+$roundPath = Join-Path $fixtureRepo $roundRelative
+$questionName = '20_PRO_OPEN_QUESTION.md'
+$receiptName = '19_BROWSER_PRO_SUBMISSION.json'
+$rawName = '21_PRO_OPEN_RAW.md'
+$stage = '1111111111111111111111111111111111111111'
+$evidence = '2222222222222222222222222222222222222222'
+$conversation = 'https://chatgpt.com/c/fixture-conversation'
+function Assert-Removed { param([string[]]$Paths, [string]$Label)
+    foreach ($path in $Paths) { if (Test-Path -LiteralPath $path) { throw "$Label did not delete accepted snapshot: $path" } }
+}
+try {
+    [IO.Directory]::CreateDirectory($roundPath) | Out-Null
+    [IO.Directory]::CreateDirectory($captureRoot) | Out-Null
+    Write-Utf8 (Join-Path $roundPath '01_SHARED_SOURCE_MANIFEST.md') "# Fixture manifest`n"
+    $bodyLines = @(
+        'Read the pushed fixture evidence through the GitHub connector.',
+        'Return no substantive text outside exactly one fenced text block.',
+        'The first and last block lines must be the supplied response markers.')
+    $body = ($bodyLines -join "`n") + "`n"
+    $digest = Get-Sha256 $body
+    $marker = "HMASD_BROWSER_PRO_QUESTION_V1 round=$roundId body_sha256=$digest"
+    Write-Utf8 (Join-Path $roundPath $questionName) "$marker`n`n$body"
+
+    function New-DraftSnapshot { param([string]$Path, [string]$Mode = 'exact')
+        $paragraphs = if ($Mode -eq 'marker_only') {
+            "    - paragraph: `"$marker`""
+        } elseif ($Mode -eq 'wrong_body') {
+            "    - paragraph: `"$marker`"`n    - paragraph`n    - paragraph: Wrong body"
+        } else {
+            "    - paragraph: `"$marker`"`n    - paragraph`n" +
+                (($bodyLines | ForEach-Object { "    - paragraph: $_" }) -join "`n")
+        }
+        Write-Utf8 $Path "- main [ref=draft]:`n  - textbox `"Message ChatGPT`" [ref=composer]:`n$paragraphs`n"
+    }
+    function New-SubmittedSnapshot { param([string]$Path, [bool]$Stale = $false)
+        $later = if ($Stale) {
+            "`n  - article [ref=later]:`n    - heading `"You said:`"`n    - paragraph: Later unrelated question"
+        } else { '' }
+        Write-Utf8 $Path "- main [ref=submitted]:`n  - article [ref=user]:`n    - heading `"You said:`"`n    - paragraph: $marker$later`n  - textbox `"Message ChatGPT`" [ref=composer]:`n"
+    }
+    function Invoke-Recorder { param([string]$Draft, [string]$Submitted)
+        & $recorder -RoundPath $roundRelative -QuestionPath $questionName -ReceiptPath $receiptName `
+            -RawPath $rawName -DraftSnapshotPath $Draft -SubmittedSnapshotPath $Submitted `
+            -StageCommit $stage -EvidenceCommit $evidence -Repository 'fixture-owner/fixture-repo' `
+            -ReviewBranch 'Claude' -ConversationUrl $conversation -RepoRoot $fixtureRepo
+    }
+
+    $ready = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
+    if ($ready.status -ne 'READY_TO_SUBMIT' -or $ready.question_sha256 -ne $digest) { throw 'READY_TO_SUBMIT fixture failed' }
+    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath '../20_PRO_OPEN_QUESTION.md' `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'canonical basename' 'Question traversal'
+
+    foreach ($mode in @('marker_only','wrong_body')) {
+        $draft = Join-Path $captureRoot "draft-$mode.yml"
+        $submitted = Join-Path $captureRoot "submitted-$mode.yml"
+        New-DraftSnapshot $draft $mode
+        New-SubmittedSnapshot $submitted
+        Assert-Failure { Invoke-Recorder $draft $submitted } 'does not byte-match' "Draft $mode"
+        Assert-Removed @($draft,$submitted) "Draft $mode"
+    }
+    $draft = Join-Path $captureRoot 'draft-stale.yml'
+    $submitted = Join-Path $captureRoot 'submitted-stale.yml'
+    New-DraftSnapshot $draft
+    New-SubmittedSnapshot $submitted $true
+    Assert-Failure { Invoke-Recorder $draft $submitted } 'last visible user turn' 'Stale submitted marker'
+    Assert-Removed @($draft,$submitted) 'Stale submitted marker'
+
+    $repoDraft = Join-Path $fixtureRepo 'unsafe-draft.yml'
+    $safeSubmitted = Join-Path $captureRoot 'safe-submitted.yml'
+    Write-Utf8 $repoDraft 'unsafe'
+    New-SubmittedSnapshot $safeSubmitted
+    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo `
+        -SnapshotPaths @($repoDraft,$safeSubmitted) } 'beneath RepoRoot' 'Repository snapshot privacy'
+    Remove-Item $repoDraft,$safeSubmitted -Force
+
+    $draft = Join-Path $captureRoot 'draft-success.yml'
+    $submitted = Join-Path $captureRoot 'submitted-success.yml'
+    New-DraftSnapshot $draft
+    New-SubmittedSnapshot $submitted
+    $recorded = (Invoke-Recorder $draft $submitted) | ConvertFrom-Json
+    Assert-Removed @($draft,$submitted) 'Successful recorder'
+    if ($recorded.status -ne 'SUBMISSION_CONFIRMED' -or $recorded.question_sha256 -ne $digest) { throw 'Submission recorder failed' }
+    $receiptFile = Join-Path $roundPath $receiptName
+    $receiptBytes = [IO.File]::ReadAllBytes($receiptFile)
+
+    $draft = Join-Path $captureRoot 'draft-no-clobber.yml'
+    $submitted = Join-Path $captureRoot 'submitted-no-clobber.yml'
+    New-DraftSnapshot $draft
+    New-SubmittedSnapshot $submitted
+    Assert-Failure { Invoke-Recorder $draft $submitted } 'cannot be recorded from state RESUME_SUBMITTED' 'Receipt no-clobber'
+    Assert-Removed @($draft,$submitted) 'Receipt no-clobber'
+    if ([Convert]::ToBase64String([IO.File]::ReadAllBytes($receiptFile)) -cne [Convert]::ToBase64String($receiptBytes)) {
+        throw 'Receipt no-clobber rerun changed bytes'
+    }
+    $resume = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
+    if ($resume.status -ne 'RESUME_SUBMITTED') { throw 'RESUME_SUBMITTED fixture failed' }
+    Write-Utf8 $receiptFile '{bad json'
+    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'Malformed Browser Pro submission receipt' 'Malformed receipt'
+    [IO.File]::WriteAllBytes($receiptFile, $receiptBytes)
+    $mismatch = ([Text.Encoding]::UTF8.GetString($receiptBytes) | ConvertFrom-Json)
+    $mismatch.question_sha256 = '0' * 64
+    Write-Utf8 $receiptFile (($mismatch | ConvertTo-Json) + "`n")
+    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'does not match round and question digest' 'Mismatched receipt'
+    [IO.File]::WriteAllBytes($receiptFile, $receiptBytes)
+
+    $begin = "HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN round=$roundId question_sha256=$digest"
+    $end = "HMASD_BROWSER_PRO_RESPONSE_V1_END round=$roundId question_sha256=$digest"
+    function New-ResponseSnapshot {
+        param([string]$Path, [string]$Ref, [string]$Content = 'Natural Pro response',
+            [string]$EndMarker = $end, [string]$Extra = '', [bool]$SecondBlock = $false)
+        $second = if ($SecondBlock) { "`n      - code [ref=second-$Ref]: 'another substantive block'" } else { '' }
+        Write-Utf8 $Path @"
+- main [ref=page-$Ref]:
+  - article [ref=user-$Ref]:
+    - heading "You said:"
+    - paragraph: $marker
+  - article [ref=assistant-$Ref]:
+    - heading "ChatGPT said:"
+    - group [ref=group-$Ref]:
+      - button "Worked for 1m 2s" [ref=worked-$Ref]
+      - button "Copy code" [ref=copy-$Ref]
+      - code [ref=code-$Ref]:
+        - text: |-
+            $begin
+            $Content
+            $EndMarker$second
+$Extra
+    - group "Response actions" [ref=actions-$Ref]:
+      - button "Good response" [ref=good-$Ref]
+  - paragraph: ChatGPT can make mistakes. Check important info.
+  - textbox "Message ChatGPT" [ref=composer-$Ref]:
+"@
+    }
+    function Set-StableTimes { param([string]$One, [string]$Two, [int]$Seconds = 10)
+        $start = [DateTime]::UtcNow.AddMinutes(-1)
+        [IO.File]::SetLastWriteTimeUtc($One, $start)
+        [IO.File]::SetLastWriteTimeUtc($Two, $start.AddSeconds($Seconds))
+    }
+    function Invoke-Archive { param([string]$One, [string]$Two)
+        & $archiver -RoundPath $roundRelative -ReceiptPath $receiptName -RawPath $rawName `
+            -SnapshotPathOne $One -SnapshotPathTwo $Two -RepoRoot $fixtureRepo
+    }
+    function Invoke-ArchiveNegative {
+        param([string]$Name, [string]$Pattern, [string]$Extra = '', [string]$ContentOne = 'Natural Pro response',
+            [string]$ContentTwo = 'Natural Pro response', [string]$EndOne = $end, [string]$EndTwo = $end,
+            [bool]$SecondBlock = $false)
+        $one = Join-Path $captureRoot "$Name-one.yml"
+        $two = Join-Path $captureRoot "$Name-two.yml"
+        New-ResponseSnapshot $one "$Name-1" $ContentOne $EndOne $Extra $SecondBlock
+        New-ResponseSnapshot $two "$Name-2" $ContentTwo $EndTwo $Extra $SecondBlock
+        Set-StableTimes $one $two
+        Assert-Failure { Invoke-Archive $one $two } $Pattern $Name
+        Assert-Removed @($one,$two) $Name
+    }
+
+    $same = Join-Path $captureRoot 'same.yml'
+    New-ResponseSnapshot $same 'same'
+    Assert-Failure { Invoke-Archive $same $same } 'distinct files' 'Same stable snapshot'
+    Remove-Item $same -Force
+    $hardSource = Join-Path $captureRoot 'hard-source.yml'
+    $hardLink = Join-Path $captureRoot 'hard-link.yml'
+    New-ResponseSnapshot $hardSource 'hard'
+    New-Item -ItemType HardLink -Path $hardLink -Target $hardSource | Out-Null
+    Assert-Failure { Invoke-Archive $hardSource $hardLink } 'distinct file identities' 'Hard-link snapshot identity'
+    Remove-Item $hardSource,$hardLink -Force
+    $closeOne = Join-Path $captureRoot 'close-one.yml'; $closeTwo = Join-Path $captureRoot 'close-two.yml'
+    New-ResponseSnapshot $closeOne 'close-1'; New-ResponseSnapshot $closeTwo 'close-2'; Set-StableTimes $closeOne $closeTwo 9
+    Assert-Failure { Invoke-Archive $closeOne $closeTwo } 'at least ten seconds' 'Too-close snapshots'
+    Assert-Removed @($closeOne,$closeTwo) 'Too-close snapshots'
+
+    Invoke-ArchiveNegative 'truncated' 'wrong, missing, or truncated' '' 'Natural Pro response' 'Natural Pro response' 'TRUNCATED' 'TRUNCATED'
+    Invoke-ArchiveNegative 'mismatch' 'differs across' '' 'First response' 'Different response'
+    Invoke-ArchiveNegative 'extra-heading' 'forbidden extra ARIA node' '    - heading "Unexpected response heading"'
+    Invoke-ArchiveNegative 'second-block' 'exactly one substantive code block' '' 'Natural Pro response' 'Natural Pro response' $end $end $true
+    Invoke-ArchiveNegative 'wrong-marker' 'wrong, missing, or truncated' '' 'Natural Pro response' 'Natural Pro response' `
+        "HMASD_BROWSER_PRO_RESPONSE_V1_END round=wrong question_sha256=$digest" `
+        "HMASD_BROWSER_PRO_RESPONSE_V1_END round=wrong question_sha256=$digest"
+    Invoke-ArchiveNegative 'arbitrary-button' 'forbidden extra ARIA node' '      - button "Read aloud" [ref=bad]'
+    Invoke-ArchiveNegative 'named-group' 'forbidden extra ARIA node' '    - group "Injected group" [ref=bad]'
+    Invoke-ArchiveNegative 'named-img' 'forbidden extra ARIA node' '    - img "Injected image" [ref=bad]'
+
+    $one = Join-Path $captureRoot 'response-one.yml'
+    $two = Join-Path $captureRoot 'response-two.yml'
+    $ariaLookingContent = "Natural Pro response`n            - heading `"ChatGPT said:`" [level=4]`n            - group `"Response actions`""
+    New-ResponseSnapshot $one '101' $ariaLookingContent
+    New-ResponseSnapshot $two '909' $ariaLookingContent
+    Set-StableTimes $one $two
+    $archived = (Invoke-Archive $one $two) | ConvertFrom-Json
+    Assert-Removed @($one,$two) 'Successful archiver'
+    $expectedRaw = "Natural Pro response`n- heading `"ChatGPT said:`" [level=4]`n- group `"Response actions`"`n"
+    if ($archived.status -ne 'ARCHIVED' -or
+        [IO.File]::ReadAllText((Join-Path $roundPath $rawName), $utf8) -cne $expectedRaw -or
+        $archived.snapshot_one_sha256 -cne $archived.snapshot_two_sha256) { throw 'Exact two-snapshot raw archival failed' }
+    $rawFile = Join-Path $roundPath $rawName
+    $rawBytes = [IO.File]::ReadAllBytes($rawFile)
+    Assert-Failure { Invoke-Archive 'missing-one' 'missing-two' } 'cannot be archived from state ALREADY_ARCHIVED' 'Immutable raw'
+    if ([Convert]::ToBase64String([IO.File]::ReadAllBytes($rawFile)) -cne [Convert]::ToBase64String($rawBytes)) {
+        throw 'Immutable raw changed after rejected overwrite'
+    }
+    $already = (& $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo) | ConvertFrom-Json
+    if ($already.status -ne 'ALREADY_ARCHIVED') { throw 'ALREADY_ARCHIVED fixture failed' }
+    Remove-Item $rawFile -Force
+    [IO.Directory]::CreateDirectory($rawFile) | Out-Null
+    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } 'occupied by a non-file' 'Non-file raw occupation'
+    Remove-Item $rawFile -Recurse -Force
+    [IO.File]::WriteAllBytes($rawFile, $rawBytes)
+    Write-Output 'HMASD_BROWSER_PRO_FIXTURE_SEQUENCE READY_TO_SUBMIT -> SUBMISSION_CONFIRMED -> RESUME_SUBMITTED -> ARCHIVED -> ALREADY_ARCHIVED'
+} finally {
+    if (Test-Path $fixtureContainer) { Remove-Item $fixtureContainer -Recurse -Force }
+}
+Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK state_machine=restart_safe receipt=no_clobber capture=stable_twice'

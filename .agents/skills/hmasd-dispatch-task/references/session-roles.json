@@ -1,12 +1,12 @@
 {
-  "schema_version": 19,
+  "schema_version": 20,
   "updated": "2026-07-23",
   "roles": {
     "controller": {
       "kind": "active_unified_omp_controller",
       "thread_id": "019f8995-7550-7c82-8f31-ad08a3d381d4",
       "contract": "AGENTS.md",
-      "responsibility": "scientific intake, BrowserMCP submission/capture, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
+      "responsibility": "scientific intake, complete BrowserMCP exchange state machine, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
     },
     "experiment_monitor": {
       "kind": "persistent_codex_experiment_monitor",
@@ -18,24 +18,29 @@
     }
   },
   "external_review_transport": {
-    "kind": "controller_owned_browsermcp_with_readonly_task_monitor",
+    "kind": "controller_owned_browsermcp_state_machine",
     "server": "browsermcp-pro",
     "config": ".omp/mcp.json",
     "skill": ".agents/skills/hmasd-browser-pro-exchange/SKILL.md",
     "package": "@browsermcp/mcp@0.1.3",
-    "state": "CONNECTED_PREFLIGHT_OK",
+    "connection_state": "LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND",
     "evidence_transport": "github_connector",
     "repository": "CartmanFatass/My-paper-code",
     "review_branch": "Claude",
     "long_lived_controller_required": true,
     "user_connected_tab_required": true,
-    "completion_monitor_agents": {
-      "primary": "hmasd-pro-monitor",
-      "backup": "hmasd-pro-monitor-luna",
-      "selection": "exactly_one"
-    },
-    "completion_monitor_mode": "one_shot_wait_snapshot_only",
-    "controller_only_actions": ["click", "type", "navigate", "capture", "archive", "interpret", "intake"],
+    "state_machine": [
+      "VALIDATED",
+      "RECONCILED_IDLE",
+      "DRAFT_CONFIRMED",
+      "SUBMISSION_CONFIRMED",
+      "GENERATING",
+      "STABLE_TWICE",
+      "ARCHIVED"
+    ],
+    "receipt_schema": "hmasd.browser_pro_submission.v1",
+    "wait_chunk_seconds": 20,
+    "controller_only": true,
     "fallback": "none"
   },
   "local_agents": {
@@ -48,9 +53,7 @@
       "hmasd-frontier-implementer",
       "hmasd-verifier",
       "hmasd-reviewer",
-      "hmasd-exp-manager",
-      "hmasd-pro-monitor",
-      "hmasd-pro-monitor-luna"
+      "hmasd-exp-manager"
     ]
   },
   "policy": {
@@ -67,6 +70,6 @@
     ],
     "forbidden_fields": ["hostId", "model", "thinking"],
     "update_owner": "active_controller",
-    "update_condition": "atomic update of CURRENT_WORK, dispatcher, registry, BrowserMCP transport, local OMP profiles, and contract tests"
+    "update_condition": "atomic update of Controller control plane, dispatcher, registry, BrowserMCP transport, local OMP profiles, and contract tests"
   }
 }

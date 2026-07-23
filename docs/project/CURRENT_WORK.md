@@ -7,362 +7,175 @@ Updated: 2026-07-23
 - Workspace: `C:\Projects\My-paper-code`
 - Branch: `Claude`
 - **Controller: current OMP root task.** `AGENTS.md` is its operating contract.
-- **Execution mode: unified OMP Controller with project-local task agents.**
-  There is no persistent implementation relay or legacy native-agent fallback.
-- Scientific direction comes from the external GPT-5.6 Pro conversation
-  registered in `REVIEWER_CONVERSATIONS.json`. The Controller owns BrowserMCP
-  submission/capture, evidence intake, executable planning, local-agent
-  coordination, package acceptance, Git and project control. Exactly one
-  project-local Spark-medium or Luna-low task may observe Pro completion
-  through wait/snapshot only.
+- **Execution mode: one unified OMP Controller with project-local task agents.**
+  There is no implementation relay, external-review relay or bundled-agent
+  fallback.
+- External GPT-5.6 Pro remains the scientific decision source. The Controller
+  owns BrowserMCP transport, direct evidence intake, executable planning, local
+  agent coordination, integration, Git, project control and resource
+  authorization.
 - The registered native Experiment Monitor is task
-  `019f8a2f-08a2-73e1-b539-2dc5a6db0fc1`; it observes one already-authorized
-  run and must resolve as `gpt-5.3-codex-spark` at `medium` before assignment.
+  `019f8a2f-08a2-73e1-b539-2dc5a6db0fc1`. It is
+  `ARCHIVED_REBUILD_REQUIRED` and cannot receive a run until rebuilt and
+  atomically re-registered.
 
-## Active Boundary
+An exact rebuild attempt created Spark-medium task
+`019f8ffe-197e-7fb1-8cc0-0b55c830ff5e`, but its first turn failed with the
+GPT-5.3-Codex-Spark usage limit and zero consumed tokens. The Controller
+archived the unusable task without registering it. The CLI reported retry
+availability at `Jul 28th, 2026 10:31 AM`; no substitute model or role is legal.
 
-The bounded autonomous research chain is active under the user's 2026-07-23
-grant for exactly five conclusion-bearing iterations. The Controller advances
-accepted results through external-Pro review, direct CDC intake, project-local
-OMP work, Git and terminal evidence integration without intermediate approval.
-One iteration is consumed only by a conclusion-bearing scientific action.
-Formal compute still requires one exact Controller-authorized run.
+## Active boundary
 
-The obsolete external WIP is not an execution surface. Its useful symbols were
-audited and adapted into the accepted native package; no formal experiment was
-launched from it.
+The user's 2026-07-23 bounded autonomous grant remains active for exactly five
+conclusion-bearing iterations. Two are consumed:
 
-The project-local OMP child registry lives under `.omp/agents/`. Its exact
-callable types are `hmasd-code-scout`, `hmasd-implementer`,
-`hmasd-frontier-implementer`, `hmasd-verifier`, `hmasd-reviewer`,
-`hmasd-exp-manager`, `hmasd-pro-monitor` and `hmasd-pro-monitor-luna`;
-bundled/default fallback is forbidden. Children are depth one and cannot spawn
-successors.
+1. refutation of the heterogeneous natural-branch scalar classifier and
+   adoption of the typed discriminator;
+2. the terminal unchanged non-formal registered-CPU `formal_path_exercise`.
 
-## Role configuration
+The second action exited 0 after 12m34s with
+`FORMAL_PATH_EXERCISE_COMPLETE`. Its real Stage-2 path validated 64/64 selected
+source-natural rows at registered width 16, including exact causal identity,
+actual event/mark/primitive kernels, bijective binding, RNG and separate
+derived-record fidelity. This proves typed fork capability only for those
+non-formal fixture coordinates. It is not `G`, `V`, `C`, access, held-out
+utility, a CPU-wide theorem or formal evidence.
 
-Mechanical exploration and verification use GPT-5.6 Luna at high reasoning.
-Core implementation uses GPT-5.6 Sol at high reasoning. A reproduced bug that
-needs bounded systematic diagnosis uses the Frontier Implementer on GPT-5.6
-Sol at max reasoning for at most five repair attempts. Every checkpoint names
-the problem source, classifies it as code engineering or scientific decision,
-states its approximate scale and automatically adopts one recommended solution
-inside the current grant. The terminal result is a verified fix or a structured
-unresolved-error report with next actions. Independent core
-review uses Sol at xhigh. Experiment monitoring uses GPT-5.3 Codex Spark at
-medium; experiment evidence and record work uses Spark at high. Pro response
-completion observation uses either Spark at medium or Luna at low with
-BrowserMCP wait/snapshot only; exactly one observer runs per review.
-External review uses the pinned `browsermcp-pro` server and the user-connected
-ChatGPT Pro tab
-registered in `REVIEWER_CONVERSATIONS.json`. The evidence repository is
-`CartmanFatass/My-paper-code` and the current review branch is `Claude`.
-The restarted long-lived OMP Controller exposes BrowserMCP tools. A read-only
-snapshot verified the exact registered conversation URL, authenticated Pro
-account and visible `Pro` model; connection state is `CONNECTED_PREFLIGHT_OK`.
-The first resumed external-Pro round completed in the registered conversation.
-The Controller archived the complete visible response at
-`docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/21_PRO_OPEN_RAW.md`,
-performed direct CDC intake and accepted `50_DISPOSITION.md`. No headless, CDP
-or former Codex-Exchange fallback was used.
+The follow-up GPT-5.6 Pro response is naturally complete and archived at:
 
-`EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work remains accepted through
-`31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. The startup registered-CPU smoke
-reached the real training/evaluation cores and failed in the production
-natural-branch scalar gate with `continuous_error=9.5367431640625e-07`, while
-discrete action, segment and outcome equality remained exact.
+`docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/21_PRO_OPEN_RAW.md`
 
-External GPT-5.6 Pro accepted a narrower conclusion: the heterogeneous scalar
-classifier is refuted, but typed CPU natural-branch causal identity remains
-unresolved because actual causal fields, executed event/primitive kernels and
-source-natural binding were not recorded. The first resumed conclusion-bearing
-action is accepted and one of five autonomous slots is consumed.
+The Controller compared two stable BrowserMCP snapshots and archived the
+response-only visible-text projection without clobbering:
+SHA-256 `9f7d8c05362f625c67feb49960d32c58d6275f4a2d83d86a7d48c1f32d7ad22c`,
+29,124 UTF-8 bytes. The Controller accepted the Pro selection
+`SCHEDULE_ONE_PREREGISTERED_FORMAL_OR_DUM_EHC_COMPARISON` in this round's
+`30_EVIDENCE_RECONCILIATION.md` and `50_DISPOSITION.md`. Execution remains
+`NOT_AUTHORIZED`; review and preregistration consume no conclusion-bearing
+iteration and authorize no formal token, compute or Monitor assignment.
 
-The `CPU_NATURAL_BRANCH_TYPED_CONTRACT` implementation action is complete. The
-single collective review, Controller-owned repairs and direct verification are
-closed. The one authorized unchanged non-formal registered-CPU
-`formal_path_exercise` exited 0 after 12m34s and produced
-`FORMAL_PATH_EXERCISE_COMPLETE`.
+## BrowserMCP external-review transport
 
-The terminal typed audit is `complete`: 64/64 actual selected rows, registered
-width 16, 192 branch rows, 672 padding rows and 72 independently rederived
-collector calls. Controller direct intake revalidated all 64 serialized typed
-records; causal identity, RNG and derived fidelity passed on every row; event
-and primitive evidence were nonvacuous; KEEP/RENEW mapped only to their exact
-natural branches; no scalar natural-audit field remained. The conclusion is
-only typed fork capability for this exercised non-formal fixture. It is not
-`G`, `V`, `C`, held-out utility, a CPU-wide theorem or formal evidence.
+External review now uses one deep Controller-owned Skill:
 
-No experiment is running. Formal training, evaluation, analysis, the formal
-authorization token and Monitor assignment remain unauthorized. The next action
-is one external GPT-5.6 Pro CDC decision over the pushed terminal evidence.
-No resource-consuming successor is scheduled locally.
+`.agents/skills/hmasd-browser-pro-exchange/SKILL.md`
 
-Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
-`docs/project/` at the user's direction, under a different model: the user held
-scientific authority, that session implemented and verified, and GPT-5.6 Pro
-reviewed science through the GitHub connector. No formal experiment completed, so
-no scientific disposition was produced.
+The only browser server remains `browsermcp-pro` from `.omp/mcp.json`, pinned to
+`@browsermcp/mcp@0.1.3`. The registered ChatGPT conversation, visible `Pro`
+model and GitHub-connector evidence transport remain unchanged. A live
+preflight is required every round; no registry field claims a durable browser
+connection.
 
-## Active Execution Flow
+The restart-safe transition order is:
 
-- Controller/main conversation: owns the Superpowers-style design pass, compares
-  2-3 implementation approaches, selects the recommended approach inside the
-  active grant, freezes exact files/interfaces/invariants/red-green checks in
-  `IMPLEMENTATION_PLAN.md`, writes every bounded child assignment, integrates
-  returned work, independently verifies it, owns Git and updates project
-  control. Planning is never delegated.
-- Scout: one bounded read-only interface map when immediate code boundaries are
-  genuinely unknown.
-- Implementer: executes one Controller-frozen write scope; no planning, science,
-  Git, project-control or successor authority.
-- Frontier Implementer: executes one Controller-planned, already-reproduced bug
-  with one fast red-capable loop, at most five hypothesis/probe/repair attempts
-  and either verified `BUG_FIXED` evidence or a `BUG_UNRESOLVED` ledger.
-- Verifier and Reviewer: exactly one parallel collective gate over the stable
-  complete code implementation round after all tasks, repairs and focused checks
-  finish; no per-task or per-attempt review.
-- Exp Manager: applies only Controller-frozen factual experiment transitions and
-  record deltas; it never interprets results, changes science or starts runs.
-- Experiment Monitor: observes one already-authorized run and returns its
-  authoritative terminal paths without mutation or interpretation.
+```text
+VALIDATED
+  -> RECONCILED_IDLE
+  -> DRAFT_CONFIRMED
+  -> SUBMISSION_CONFIRMED
+  -> GENERATING
+  -> STABLE_TWICE
+  -> ARCHIVED
+```
 
-## Execution Flow (historical — Claude Code session, 2026-07-21/22)
+Future rounds carry `19_BROWSER_PRO_SUBMISSION.json`. Its immutable
+`hmasd.browser_pro_submission.v1` receipt binds the unique marked question,
+round, stage/evidence commits, repository, branch, conversation and expected
+model. Receipt existence forbids resubmission; raw existence forbids all
+browser work.
 
-Recorded for reference. Codex uses `AGENTS.md` and `.agents/skills/`. That
-session executed work through bounded subagents under a single orchestrator.
+The Controller alone types the exact question, submits with
+`browser_press_key Enter`, observes in 20-second wait chunks, reconciles every
+indeterminate timeout with a fresh snapshot and archives only byte-identical
+marked response content from two stable snapshots. It never blindly retries or
+clicks Send, Stop answering, Answer now or Copy response. Full-page snapshots
+are temporary outside the repository and are deleted after the transition.
 
-- Orchestrator: writes the frozen plan, dispatches, integrates the result,
-  reruns the focused suite itself, commits and maintains `docs/project/`. A
-  subagent's own claim that tests pass is never accepted as evidence.
-- Implementer: one bounded task against a frozen plan, receiving the plan, the
-  exact file scope, the acceptance criteria and the execution-environment
-  facts. It receives no research context and holds no Git authority.
-- Reviewer: a separate read-only spawn with fresh context that audits the diff
-  against the plan and returns findings without editing. A review pass is
-  mandatory before committing any change touching protected semantics, meaning
-  probability factorization, gradients and detach boundaries, RNG stream
-  ownership, replay, lifecycle clocks, credit assignment, masks and checkpoint
-  meaning.
-- Mechanical work such as inventories, search sweeps, log scraping and
-  packaging is delegated to a low-cost tier and never touches algorithm
-  semantics.
+The former `hmasd-pro-monitor` and `hmasd-pro-monitor-luna` profiles and routes
+are deleted. External review has no child observer, callback or alternate
+browser path.
 
-One writer holds a given file set at a time. Concurrent mutating tasks on the
-same scope are not dispatched.
+## Local task topology
 
-## Binding Engineering Constraints
+The exact project-local OMP agent types are:
 
-These are durable technical constraints, not workflow. They bind algorithm
-realization and are carried by the current implementation plan and the
-Controller's local OMP task tree. Experiment observation follows the registered
-native Monitor Skill.
+- `hmasd-code-scout`
+- `hmasd-implementer`
+- `hmasd-frontier-implementer`
+- `hmasd-verifier`
+- `hmasd-reviewer`
+- `hmasd-exp-manager`
 
-The load-bearing consequences:
+Children are depth one, receive one complete bounded assignment, own one file
+lease, never perform Git operations and cannot spawn successors. The Frontier
+Implementer remains reserved for one reproduced bug and at most five
+falsifiable repair attempts. One collective Reviewer+Verifier gate follows a
+complete stable implementation package, never individual child tasks.
 
-- Environment, member, **branch**, skill, **replica** and evaluation dimensions
-  are all batched through the existing tensor path. Loops are retained only for
-  genuine causal, autoregressive, simulator or recurrent dependence.
-- Batched inference is reused for evaluation, controls, **forced branches**,
-  replicas and audits whenever the estimand and RNG contract permit. A
-  counterfactual fork is a forced branch and is batched by default.
-- Replicate concurrency is achieved by batching the replica dimension inside one
-  known-good process and device topology. Spawning one process per replicate
-  creates duplicate runtime contexts and is explicitly rejected.
-- Intended RNG independence, common-random-number coupling and exact checkpoint
-  continuation are preserved.
-- Rollout data is packed and transferred once per collection boundary and reused
-  across optimizer passes; metrics synchronize only at real control boundaries.
-- Conclusion-bearing runners expose stage-level wall time sufficient to locate
-  order-of-magnitude regressions.
-- Before returning any change, the end-to-end changed path is inspected once for
-  scalar device work, repeated packing or transfer, premature synchronization,
-  recurrent leakage, replay mismatch, RNG drift, excessive persistence and
-  **serial evaluation**.
-- Performance structure is reviewed as code quality, not as a separate gate. An
-  observed issue is fixed once; no speculative optimization loop is created.
+## Active preregistration package
 
-Local testing assumes 16 parallel environments, matching `FORMAL_NUM_ENVS`.
-Batch sizing for new work is expressed in units of that width.
+`docs/project/IMPLEMENTATION_PLAN.md` freezes
+`event-held-formal-or-dum-ehc-preregistration-v1-20260723` at executable source
+commit `1cc6552a00c06bc7389235a4474ca0005c4ca9b6`. This package is
+documentation and control work only. Documentation-only canonicalization, the
+blocked `NOT_AUTHORIZED` experiment row, measured resource caps, clean source
+worktree and fresh absent output root are complete. The collective gate returned
+Verifier `PASS` and Reviewer `FAIL`.
 
-Handoff note: the prior Codex controller task
-`019f5c78-0c91-7612-adb4-c1fcfe4484c8` left the
-`EVENT_HELD_COMMITMENT_LINK_G0` implementation complete but uncommitted. It was
-verified and committed under the ownership above.
+The HIGH finding is an end-to-end scientific terminal mismatch. The frozen
+selector maps a per-replicate causal-audit 32/32 shortfall to
+`BENCHMARK_NON_IDENTIFIABLE`; the formal evaluator instead raises and publishes
+`INVALID_OPERATIONAL`, and its validator forbids a shortfall artifact. The
+design/code reconciliation is therefore not documentation-only. Source
+`1cc6552...` is not launch-ready and cannot be authorized.
 
-## Last Scientific Boundary (paused)
+Independently, the exact Spark-medium Monitor rebuild remains blocked by model
+quota. The failed zero-token task is archived and the registry remains on the
+prior `ARCHIVED_REBUILD_REQUIRED` task.
 
-The independent `NONCALENDAR_HETEROGENEOUS_TRACKING_G0` benchmark qualification
-is valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`. H establishes structural
-reachability, C the current-demand/error information null, S the cost of one
-shared four-step renewal restriction, and D partial causal learning without
-ordinary access. It does not establish hierarchy, learned skills or learned
-heterogeneous lifetime.
+The completed BrowserMCP stability package remains accepted. Its validator,
+receipt and no-clobber two-snapshot capture prevent resubmission of the archived
+round and are not part of the formal scientific implementation.
 
-The prior external clarification selected
-`D0_D1_CAUSAL_OBSERVATION_REFACTOR_G0`, but the controller retracted that route
-before implementation or compute. It inverted the research objective by making
-ordinary-controller access a prerequisite for developing the hierarchy,
-skills and variable-lifetime mechanisms whose purpose is to build a stronger
-MARL algorithm. That raw remains historical reviewer evidence; its route is not
-active authority.
+## Formal compute boundary
 
-Prior convergence work produced the controller-adopted
-`EVENT_HELD_COMMITMENT_LINK_G0`. It isolates one treatment: whether an
-event-held commitment reaches primitive action logits. Ordinary recurrent `OR`
-is the full-algorithm comparator; `DUM` and `EHC` have identical commitment
-state, capacity, event learning and optimizer exposure, while only `EHC`
-enables the commitment-to-action link. The execution, probability, replay,
-lifecycle, checkpoint, experiment and mutually exclusive result contracts are
-frozen in the durable design. No formal experiment is authorized until
-implementation and focused review complete.
+No experiment is running, no output root was created and no usable formal
+checkpoint exists. Formal compute is blocked by two independent boundaries:
 
-## Implementation State
+1. `BLOCKED_CDC_CAUSAL_AUDIT_QUOTA_BRANCH`: source `1cc6552...` cannot emit the
+   preregistered non-identifiable branch for a per-replicate 32/32 audit
+   shortfall. The plan requires focused external GPT-5.6 Pro clarification
+   before any code change.
+2. `BLOCKED_RESOURCE_MONITOR_QUOTA`: the required native Spark-medium Monitor
+   could not complete registration because the CLI reported its model usage
+   limit until `Jul 28th, 2026 10:31 AM`. No substitute is legal.
 
-`EVENT_HELD_COMMITMENT_LINK_G0` is implemented, reviewed and committed through
-`31aad0df80d637fd095655bf8c0b112e4bf1cdfd` on `aggressive`. The final replay
-repair made collection and teacher replay share one row-stable float32
-event/mark-head evaluator without changing probability, replay thresholds,
-RNG, gradients, schemas, budgets or scientific meaning.
-The three-arm package, the revised behavioural battery, Replacement C stage 1
-retention, the sequential counterfactual fork engine, the per-factor replay
-tolerance classes and the registered execution backend and result gates are all
-in history.
+After both blockers close, a new exact source commit, clean worktree, fresh
+Monitor registration, repeated preregistration gate and separate Controller
+authorization are required. The existing 18-hour/32-GiB/30-day boundary remains
+frozen.
 
-**Formal training attempts were operationally aborted. Nothing is running and
-no usable formal checkpoint exists.** The first attempt died at update 4 on a
-replay record merged across arms, fixed at `e80cef0`. The second died mid-
-training on a flat absolute per-component replay tolerance that cannot be
-executed in float32, because four of the nine bounded quantities have unbounded
-magnitude. A subsequent retry exposed the collection/replay arithmetic split;
-that defect is closed by `31aad0df`. None of these attempts is scientific
-evidence.
+Insufficient resources must return `BLOCKED_RESOURCE`; they never permit fewer
+replicates, seeds, updates, audit rows, evaluation episodes or bootstrap
+repetitions.
 
-## Resume Point
+## Resume point
 
-The intended branch is `Claude`; the visible startup working tree, exact
-project-local OMP agent registry, HMASD-only Skill allowlist, BrowserMCP
-conversation and current implementation plan have been inspected. The
-registered Monitor route check failed closed because task
-`019f8a2f-08a2-73e1-b539-2dc5a6db0fc1` is archived. External review,
-derivation, evidence reanalysis and local code work may proceed; no formal run
-or monitor assignment may start until the Controller rebuilds the registered
-Spark-medium Monitor and atomically updates the role registry. No fallback
-Monitor is authorized.
+Open one focused marked continuation in the registered GPT-5.6 Pro conversation
+for the causal-audit quota-shortfall terminal semantics. Preserve
+`NOT_AUTHORIZED`; do not change code, use the formal token, create the output
+root or launch compute. The Monitor quota blocker remains independent.
 
-## Open Contract Questions
+## Active references
 
-One unresolved question stands against the result contract, raised before any
-result was observed and therefore not a post-hoc threshold rescue. It is
-recorded here because `ALGORITHM_PRINCIPLES.md` is reserved for generalized
-rules and this is specific to the active source.
-
-`ALGORITHM_PRINCIPLES.md` 2.3 requires that a long-lived skill arise from
-learned behavior under the declared clock contract. The lifetime gate
-`LCB(CV(T))>0.25` appears to be satisfied by construction. `Delta` is sampled
-uniformly from `{4,8,12}` and the policy selects only `KEEP`/`RENEW`, so a
-segment lifetime is a Geometric-count sum of `Delta` draws with
-`Var(Delta)/E[Delta]^2 = (32/3)/64`. That yields `CV(T)=0.408` under always-
-`RENEW` and `0.764` under a balanced policy, so every policy including an
-untrained one clears `0.25`. The lifetime-bin condition appears similarly
-satisfiable.
-
-Two related observations. The natural-use gates are non-degeneracy checks,
-since the support is binary and `P_KEEP+P_RENEW=1`, so a uniform random event
-head clears both; principle 2.2 holds that usage statistics are not evidence of
-a useful skill. The intervention gate measures logit-perturbation magnitude
-rather than behavioral consequence, so a large `W_z` applied to an
-uninformative `z` clears it.
-
-The primary estimand `G` is unaffected and remains mechanism-matched. The
-question is whether the behavioral battery discriminates the
-`COMMITMENT_SUPPORTED` and `REPRESENTATION_ONLY` branches at all. One candidate
-replacement conditions on the `KEEP`-chain length, which is purely
-policy-determined, instead of realized lifetime, which is dominated by the
-`Delta` draw. This is referred to the user and GPT-5.6 Pro; no threshold is
-changed here.
-
-## Measured Compute Cost
-
-Registered `16 x 80` four-epoch update on the local RTX 4070: 8.61s for `OR`,
-8.14s for `DUM`, 8.18s for `EHC`. Serial formal training over 250 updates,
-three arms and five replicates is 8.65h, and the four evaluation cells add
-roughly 1 to 1.5h, for about 10h continuous.
-
-Throughput is Python-loop and kernel-launch bound rather than compute bound at
-roughly 160 transitions/s for a 15k-parameter model, so the GPU stays nearly
-idle. The 15 `(arm, replicate)` cells are independent.
-
-An earlier proposal to run those cells as concurrent processes is **withdrawn**:
-it would create duplicate CUDA contexts, which the binding engineering
-constraints reject. The correct form is to batch the replica dimension inside
-one process and device topology, alongside the environment dimension already
-batched at width 16.
-
-## Local Execution Environment
-
-Focused tests and smoke checks fail closed when the registered backend is
-unavailable. Use `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`
-directly (Python 3.10.20, `torch 2.7.0+cpu`); this host has no CUDA and the
-registered backend is `cpu`, not a fallback. The default `python` is a Windows
-Store stub. Never use `conda run`.
-
-## Autonomous Boundary
-
-**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN.** Exactly five conclusion-bearing iterations
-were authorized. Two slots are consumed: the accepted typed-contract
-reanalysis/scalar-gate counterexample, and the valid complete typed
-registered-CPU non-formal smoke. Three slots remain. The Controller
-automatically continues between external-Pro decisions, direct evidence intake,
-bounded local OMP work, Git integration and the next already-authorized action
-without asking for intermediate approval. The next event is external Pro review,
-not formal compute. Stop only after five conclusion-bearing iterations, a
-genuine blocker, or a requested expansion of protected scientific or formal
-compute authority. Formal execution and Monitor assignment still require one
-specific Controller-authorized run.
-
-## Durable Constraints
-
-- Active research line: implementation exists only for the current hypothesis's
-  shortest discriminating observation; do not build a general platform.
-- Clean cutover: when a replacement is accepted, delete the old interface,
-  adapter, migration path and invalid test; Git history is the archive.
-- Lightweight tests: retain only hypothesis-separating checks, key algorithm
-  invariants and prevention of an observed real recurrence.
-
-- Target capability: one shared algorithm with runtime-variable team membership
-  and variable individual skill lifetime.
-- Preserve the ordinary recurrent direct learner as the access null.
-- Intrinsic reward remains environment-agnostic: no task field, identity, role,
-  success predicate, progress measure, or external reward may enter it.
-- R41B is the positive fixed-`N` source anchor. Retired mechanisms and old
-  carriers are evidence, not executable dependencies.
-- Do not rescue a valid failure by changing budget, seed, threshold, reward,
-  model, task, skill count, or carrier under the same claim.
-- Active-line development applies; no backward-compatibility or legacy path is
-  required.
-
-## Pointers
-
-- `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints.
-- `docs/project/IMPLEMENTATION_PLAN.md` — current frozen executable design, or
-  explicit `NONE` when no implementation is authorized.
-- `docs/project/ExpRecord.md` — formal experiment history and dispositions. It
-  carries no `EVENT_HELD_COMMITMENT_LINK_G0` row, correctly, because no formal
-  experiment has been authorized or run.
-- `docs/external-review/gpt5_6_pro/20260721_event_held_commitment_link_g0_code_review/`
-  — active implementation review package awaiting `RESPONSE_RAW.md`.
-- `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md` — current adopted
-  scientific and executable source.
-- `docs/external-review/rounds/20260719_clean_process_access_portfolio/`
-  — completed review evidence and accepted `50_DISPOSITION.md`.
-- `docs/external-review/rounds/20260720_noncalendar_g0_no_access_portfolio/`
-  — completed G0 no-access portfolio and accepted evidence boundary.
-- `docs/external-review/rounds/20260720_noncalendar_g0_direct_access_clarification/`
-  — immutable clarification raw plus retracted objective-inverting disposition.
-- `docs/external-review/rounds/20260720_event_held_commitment_replay_statistical_finalization/`
-  — final focused raw and controller non-adoption record; no code or experiment
-  handoff.
-- `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/`
-  — accepted typed-contract decision, factual reconciliation and implementation
-  authorization for one non-formal real-path smoke.
+- `AGENTS.md`
+- `docs/project/AGENT_CONTEXT.md`
+- `docs/project/IMPLEMENTATION_PLAN.md`
+- `.agents/skills/hmasd-browser-pro-exchange/SKILL.md`
+- `.agents/skills/hmasd-review-round/SKILL.md`
+- `.agents/skills/hmasd-dispatch-task/SKILL.md`
+- `.agents/skills/hmasd-dispatch-task/references/session-roles.json`
+- `docs/external-review/REVIEWER_CONVERSATIONS.json`
+- `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/`
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_TYPED_CPU_SMOKE_FORMAL_SELECTION.md`

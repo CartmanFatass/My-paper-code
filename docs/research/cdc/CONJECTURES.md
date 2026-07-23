@@ -5,9 +5,11 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live; the typed registered-CPU capability gate passed for one
-  exercised non-formal fixture, while formal measurement remains separately
-  unauthorized.
+- Status: live; external GPT-5.6 Pro selected one preregistered formal
+  OR/DUM/EHC comparison, while execution remains unauthorized pending the
+  Controller's documentation, resource, Monitor and explicit-authorization
+  checks. The typed registered-CPU gate remains supported only for one
+  exercised non-formal fixture.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
@@ -77,9 +79,13 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 
 ## C-MEASURE — Current behavior metrics do not identify commitment
 
-- Status: partially confirmed; smallest refuted unit isolated.
+- Status: live; the old battery counterexamples remain retained, and the
+  corrected executable battery has a preregistered interpretation ceiling.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
 - Separating evidence: same-state exact-snapshot forced KEEP/RENEW effects,
   separated from mark intervention, representation influence and natural
   selection/support statistics.
+- Formal interpretation ceiling: positive `C_total` supports the current link
+  but not an independently identified timing mechanism unless two-sided
+  `C_timing` evidence is positive in both natural-action strata.

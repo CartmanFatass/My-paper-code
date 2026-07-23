@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Task Dispatch"
-  short_description: "Route the persistent HMASD Monitor safely"
-  default_prompt: "Use $hmasd-dispatch-task for the registered Experiment Monitor contract. Local OMP agents include mutually exclusive Spark-medium and Luna-low read-only Pro completion observers; BrowserMCP submission, capture, archival and intake stay in the unified Controller session."
+  short_description: "Route the persistent HMASD experiment Monitor safely"
+  default_prompt: "Use $hmasd-dispatch-task only for the registered Experiment Monitor contract. Dispatch the six local code-agent profiles directly. Keep BrowserMCP submission, observation, receipt, capture, archival, and intake inside the active unified Controller; no Pro completion-agent route exists."

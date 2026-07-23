@@ -16,6 +16,7 @@
 | L-DERIVED-RECORD | After causal identity is established, bounded post-decision critic or likelihood drift is derived-record fidelity, not causal-state drift. | Fields accepted by the frozen replay validators. | A derived-fidelity failure may be ignored; it remains operational invalidity. |
 | L-FIXTURE-LOCAL | A passing real-path fixture establishes capability only at its exercised coordinates. | One registered-CPU non-formal smoke. | Future trained coordinates, CUDA or held-out utility. |
 | L-PROVENANCE-INVALID | Missing or inconsistent binding, RNG, donor, schema or instrumentation evidence is operational invalidity, not fork unavailability. | Typed partial-evidence quarantine. | A malformed record can preserve natural or causal claims. |
+| L-TYPED-64 | Every one of the 64 actual selected source-natural pairs in the single registered-CPU non-formal exercise passed typed causal identity, executed event/mark/primitive binding, RNG validity and separate derived-record fidelity. | Exactly those fixture coordinates at width 16. | Formal or CPU-wide fork capability, access, utility, `G`, `V`, `C` or learned commitment. |
 
 ## Counterexamples
 

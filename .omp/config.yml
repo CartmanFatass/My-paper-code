@@ -31,8 +31,6 @@ task:
     hmasd-verifier: openai-codex/gpt-5.6-luna:high
     hmasd-reviewer: openai-codex/gpt-5.6-sol:xhigh
     hmasd-exp-manager: openai-codex/gpt-5.3-codex-spark:high
-    hmasd-pro-monitor: openai-codex/gpt-5.3-codex-spark:medium
-    hmasd-pro-monitor-luna: openai-codex/gpt-5.6-luna:low
   isolation:
     mode: none
   disabledAgents:
