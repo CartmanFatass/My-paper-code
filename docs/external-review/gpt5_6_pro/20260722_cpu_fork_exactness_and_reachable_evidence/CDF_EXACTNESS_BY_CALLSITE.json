@@ -1,0 +1,163 @@
+{
+  "torch": "2.7.0+cpu",
+  "per_op_site": {
+    "softmax @ event_held_commitment_link.py:958": {
+      "calls": 62,
+      "distinct_rows": 1596,
+      "rows_compared_at_multiple_widths": 204,
+      "widths_seen": [
+        14,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        28,
+        29,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        37,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "example_multi_width_sets": [
+        [
+          56,
+          68
+        ],
+        [
+          56,
+          68
+        ],
+        [
+          56,
+          68
+        ]
+      ]
+    },
+    "cumsum @ event_held_commitment_link.py:958": {
+      "calls": 62,
+      "distinct_rows": 1575,
+      "rows_compared_at_multiple_widths": 206,
+      "widths_seen": [
+        14,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        28,
+        29,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        37,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "example_multi_width_sets": [
+        [
+          56,
+          68
+        ],
+        [
+          56,
+          68
+        ],
+        [
+          56,
+          68
+        ]
+      ]
+    },
+    "log_softmax @ event_held_commitment_link.py:1016": {
+      "calls": 62,
+      "distinct_rows": 1596,
+      "rows_compared_at_multiple_widths": 204,
+      "widths_seen": [
+        14,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        28,
+        29,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        37,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "example_multi_width_sets": [
+        [
+          56,
+          68
+        ],
+        [
+          56,
+          68
+        ],
+        [
+          56,
+          68
+        ]
+      ]
+    },
+    "log_softmax @ dynamic_roster_direct.py:286": {
+      "calls": 1488,
+      "distinct_rows": 15482,
+      "rows_compared_at_multiple_widths": 0,
+      "widths_seen": [
+        16
+      ],
+      "example_multi_width_sets": []
+    },
+    "cumsum @ dynamic_roster_direct.py:294": {
+      "calls": 1488,
+      "distinct_rows": 15365,
+      "rows_compared_at_multiple_widths": 0,
+      "widths_seen": [
+        16
+      ],
+      "example_multi_width_sets": []
+    }
+  },
+  "violation_count": 0,
+  "violations": []
+}

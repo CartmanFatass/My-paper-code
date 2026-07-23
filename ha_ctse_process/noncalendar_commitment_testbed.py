@@ -120,7 +120,7 @@ REGISTERED_EXECUTION_BACKENDS = ("cuda", "cpu")
 # The backend the formal run is registered on, and therefore the backend the
 # focused suite exercises. Both entries of `REGISTERED_EXECUTION_BACKENDS` are
 # admitted, but one run uses exactly one of them.
-FORMAL_EXECUTION_BACKEND = "cuda"
+FORMAL_EXECUTION_BACKEND = "cpu"
 # One thread configuration for the whole run. Single-thread is measured faster
 # than 14 threads on collection (0.419s against 0.629s) because the tensors are
 # too small for thread synchronization to pay for itself, and pinning it makes

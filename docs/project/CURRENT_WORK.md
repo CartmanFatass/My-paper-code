@@ -1,46 +1,56 @@
 # HA-CTSE Current Work
 
-Updated: 2026-07-22
+Updated: 2026-07-23
 
 ## Ownership
 
-- Workspace: `C:\project\HMASD`
-- Branch: `aggressive`
-- **Controller: current Codex root task.** `AGENTS.md` is its operating contract.
-- **Execution mode: native Codex only.** There is no legacy execution route.
-- Scientific direction comes from the registered external GPT-5.6 Pro. The
-  Codex Controller owns integration. The sole registered persistent Codex
-  Project Manager is task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3`; it owns
-  research convergence, implementation planning, code realization coordination
-  and package acceptance, and may use native Codex collaboration agents.
+- Workspace: `C:\Projects\My-paper-code`
+- Branch: `Claude`
+- **Controller: current OMP root task.** `AGENTS.md` is its operating contract.
+- **Execution mode: unified OMP Controller with project-local task agents.**
+  There is no persistent implementation relay or legacy native-agent fallback.
+- Scientific direction comes from the external GPT-5.6 Pro conversation
+  registered in `REVIEWER_CONVERSATIONS.json`. The Controller owns direct
+  BrowserMCP exchange, evidence intake, executable planning, local agent
+  coordination, package acceptance, Git and project control.
 - The registered native Experiment Monitor is task
   `019f8a2f-08a2-73e1-b539-2dc5a6db0fc1`; it observes one already-authorized
   run and must resolve as `gpt-5.3-codex-spark` at `medium` before assignment.
 
 ## Active Boundary
 
-The bounded autonomous research chain is paused after this closeout, with five
-evidence-bearing iterations retained. Its implementation and monitoring
-surfaces are native Codex. On explicit resume the Controller continues accepted
-results through external-Pro review, direct CDC intake, native work, Git, and
-terminal evidence integration.
+The bounded autonomous research chain is active under the user's 2026-07-23
+grant for exactly five conclusion-bearing iterations. The Controller advances
+accepted results through external-Pro review, direct CDC intake, project-local
+OMP work, Git and terminal evidence integration without intermediate approval.
+One iteration is consumed only by a conclusion-bearing scientific action.
+Formal compute still requires one exact Controller-authorized run.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
 launched from it.
 
-The native Codex child registry is restored under `.codex/`. Its exact callable
-types are `hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
-`hmasd-reviewer`; default-agent fallback is forbidden. A post-restart
-no-side-effect call to `hmasd-code-scout` returned `HMASD_CUSTOM_SCOUT_OK`.
+The project-local OMP child registry lives under `.omp/agents/`. Its exact
+callable types are `hmasd-code-scout`, `hmasd-implementer`,
+`hmasd-verifier`, `hmasd-reviewer` and `hmasd-exp-manager`; bundled/default
+fallback is forbidden. Children are depth one and cannot spawn successors.
 
-## Native role configuration
+## Role configuration
 
-The Project Manager may use the native custom profiles recorded under `.codex/`.
-The Experiment Monitor is the registered native Codex session and must be
-verified as `gpt-5.3-codex-spark` at `medium` before a monitor assignment. The
-registered Open-Pro Exchange is task `019f8a2f-22be-7db3-aa74-7fdeb9c03772`
-and remains the sole external-review transport.
+Mechanical exploration and verification use GPT-5.6 Luna at high reasoning.
+Core implementation uses GPT-5.6 Sol at high reasoning and independent core
+review uses Sol at xhigh. Experiment monitoring uses GPT-5.3 Codex Spark at
+medium; experiment evidence and record work uses Spark at high. External review
+uses the pinned `browsermcp-pro` server and the user-connected ChatGPT Pro tab
+registered in `REVIEWER_CONVERSATIONS.json`. The evidence repository is
+`CartmanFatass/My-paper-code` and the current review branch is `Claude`.
+The restarted long-lived OMP Controller exposes BrowserMCP tools. A read-only
+snapshot verified the exact registered conversation URL, authenticated Pro
+account and visible `Pro` model; connection state is `CONNECTED_PREFLIGHT_OK`.
+No reviewer message has yet been submitted in the new conversation. Startup
+inspection and repair are complete; the first resumed round uses the exact CPU
+formal-path smoke failure and accepted Pro raw as scientific inputs. No
+headless, CDP or former Codex-Exchange fallback is authorized.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
 through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
@@ -50,11 +60,34 @@ same-state forced-event timing effects, mark effects, representation influence
 and natural selection/support. This coordination consumes no iteration; an
 iteration is consumed only by a conclusion-bearing evidence action.
 
+The startup smoke reached the real registered-CPU training/evaluation cores and
+failed closed in the production natural-branch audit with
+`continuous_error=9.5367431640625e-07`, while discrete action, segment and
+outcome equality remained exact. This is operational prelaunch evidence, not a
+scientific result or permission to weaken exact causal identity. The synthetic
+dense-layer probe and its vacuous permanent test were deleted.
+
 Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 `docs/project/` at the user's direction, under a different model: the user held
 scientific authority, that session implemented and verified, and GPT-5.6 Pro
 reviewed science through the GitHub connector. No formal experiment completed, so
 no scientific disposition was produced.
+
+## Active Execution Flow
+
+- Controller: receives the scientific decision, freezes the executable plan,
+  writes every bounded child assignment, integrates returned work, independently
+  verifies it, owns Git and updates project control.
+- Scout: one bounded read-only interface map when immediate code boundaries are
+  genuinely unknown.
+- Implementer: one frozen write scope; no science, Git, project-control or
+  successor authority.
+- Verifier and Reviewer: independent evidence and audit over one stable
+  integrated package; they may run in parallel because neither edits source.
+- Exp Manager: applies only Controller-frozen factual experiment transitions and
+  record deltas; it never interprets results, changes science or starts runs.
+- Experiment Monitor: observes one already-authorized run and returns its
+  authoritative terminal paths without mutation or interpretation.
 
 ## Execution Flow (historical — Claude Code session, 2026-07-21/22)
 
@@ -83,8 +116,8 @@ same scope are not dispatched.
 ## Binding Engineering Constraints
 
 These are durable technical constraints, not workflow. They bind algorithm
-realization and are carried by the current implementation plan and native
-Project Manager task tree. Experiment observation follows the registered
+realization and are carried by the current implementation plan and the
+Controller's local OMP task tree. Experiment observation follows the registered
 native Monitor Skill.
 
 The load-bearing consequences:
@@ -97,7 +130,7 @@ The load-bearing consequences:
   counterfactual fork is a forced branch and is batched by default.
 - Replicate concurrency is achieved by batching the replica dimension inside one
   known-good process and device topology. Spawning one process per replicate
-  creates duplicate CUDA contexts and is explicitly rejected.
+  creates duplicate runtime contexts and is explicitly rejected.
 - Intended RNG independence, common-random-number coupling and exact checkpoint
   continuation are preserved.
 - Rollout data is packed and transferred once per collection boundary and reused
@@ -105,7 +138,7 @@ The load-bearing consequences:
 - Conclusion-bearing runners expose stage-level wall time sufficient to locate
   order-of-magnitude regressions.
 - Before returning any change, the end-to-end changed path is inspected once for
-  scalar CUDA work, repeated packing or transfer, premature synchronization,
+  scalar device work, repeated packing or transfer, premature synchronization,
   recurrent leakage, replay mismatch, RNG drift, excessive persistence and
   **serial evaluation**.
 - Performance structure is reviewed as code quality, not as a separate gate. An
@@ -136,15 +169,15 @@ skills and variable-lifetime mechanisms whose purpose is to build a stronger
 MARL algorithm. That raw remains historical reviewer evidence; its route is not
 active authority.
 
-The Research Project Manager has now converged the unresolved proposal into
-controller-adopted `EVENT_HELD_COMMITMENT_LINK_G0`. It isolates one treatment:
-whether an event-held commitment reaches primitive action logits. Ordinary
-recurrent `OR` is the full-algorithm comparator; `DUM` and `EHC` have identical
-commitment state, capacity, event learning and optimizer exposure, while only
-`EHC` enables the commitment-to-action link. The execution, probability,
-replay, lifecycle, checkpoint, experiment and mutually exclusive result
-contracts are frozen in the durable design. No formal experiment is authorized
-until implementation and focused review complete.
+Prior convergence work produced the controller-adopted
+`EVENT_HELD_COMMITMENT_LINK_G0`. It isolates one treatment: whether an
+event-held commitment reaches primitive action logits. Ordinary recurrent `OR`
+is the full-algorithm comparator; `DUM` and `EHC` have identical commitment
+state, capacity, event learning and optimizer exposure, while only `EHC`
+enables the commitment-to-action link. The execution, probability, replay,
+lifecycle, checkpoint, experiment and mutually exclusive result contracts are
+frozen in the durable design. No formal experiment is authorized until
+implementation and focused review complete.
 
 ## Implementation State
 
@@ -169,12 +202,15 @@ evidence.
 
 ## Resume Point
 
-This package is accepted but not yet a formal experiment result. On the next
-machine, pull `My-paper-code/aggressive`, require a clean worktree, run
-`resolve_source_boundary.ps1`, resolve the registered Project Manager and
-Monitor live, and read the current implementation plan plus relevant Pro raw
-before choosing any next evidence action. Formal compute remains stopped until
-the Controller authorizes a specific run.
+The intended branch is `Claude`; the visible startup working tree, exact
+project-local OMP agent registry, HMASD-only Skill allowlist, BrowserMCP
+conversation and current implementation plan have been inspected. The
+registered Monitor route check failed closed because task
+`019f8a2f-08a2-73e1-b539-2dc5a6db0fc1` is archived. External review,
+derivation, evidence reanalysis and local code work may proceed; no formal run
+or monitor assignment may start until the Controller rebuilds the registered
+Spark-medium Monitor and atomically updates the role registry. No fallback
+Monitor is authorized.
 
 ## Open Contract Questions
 
@@ -227,21 +263,31 @@ batched at width 16.
 
 ## Local Execution Environment
 
-Focused tests and the smoke fail closed without CUDA by design. The default
-interpreter carries a CPU-only `torch 2.8.0+cpu`; use
-`C:/Users/wu/.conda/envs/SB3/python.exe` (`torch 2.7.0+cu118`) directly.
-`conda run -n SB3` raises `UnicodeDecodeError` from a non-UTF-8 `.pth` during
-`site.py` and must not be used.
+Focused tests and smoke checks fail closed when the registered backend is
+unavailable. Use `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`
+directly (Python 3.10.20, `torch 2.7.0+cpu`); this host has no CUDA and the
+registered backend is `cpu`, not a fallback. The default `python` is a Windows
+Store stub. Never use `conda run`.
 
 ## Autonomous Boundary
 
-**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN** with five conclusion-bearing iterations
-authorized by the Controller after local environment recovery on 2026-07-22.
-Each iteration must follow the registered external-Pro, native Codex, Git and
-evidence gates; formal execution and monitor assignment still require a
+**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN.** Exactly five conclusion-bearing iteration
+slots are authorized and unconsumed. The Controller automatically continues
+between external-Pro decisions, direct evidence intake, bounded local OMP work,
+Git integration and the next already-authorized action without asking for
+intermediate approval. Stop only after five conclusion-bearing iterations, a
+genuine blocker, or a requested expansion of protected scientific or formal
+compute authority. Formal execution and Monitor assignment still require one
 specific Controller-authorized run.
 
 ## Durable Constraints
+
+- Active research line: implementation exists only for the current hypothesis's
+  shortest discriminating observation; do not build a general platform.
+- Clean cutover: when a replacement is accepted, delete the old interface,
+  adapter, migration path and invalid test; Git history is the archive.
+- Lightweight tests: retain only hypothesis-separating checks, key algorithm
+  invariants and prevention of an observed real recurrence.
 
 - Target capability: one shared algorithm with runtime-variable team membership
   and variable individual skill lifetime.

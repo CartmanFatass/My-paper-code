@@ -21,7 +21,7 @@ $alwaysInspect = @(
     'docs/external-review/REVIEWER_CONVERSATIONS.json',
     'docs/external-review/README.md',
     'tests/hmasd_dispatch_task_contract_test.ps1',
-    'tests/hmasd_project_manager_contract_test.ps1',
+    'tests/hmasd_controller_subagent_contract_test.ps1',
     'tests/hmasd_research_workflow_contract_test.ps1'
 )
 

@@ -1,0 +1,47 @@
+modelRoles:
+  default: openai-codex/gpt-5.6-sol:high
+  smol: openai-codex/gpt-5.6-luna:high
+  slow: openai-codex/gpt-5.6-sol:xhigh
+  plan: "@slow"
+  task: "@default"
+  tiny: "@smol"
+  commit: "@smol"
+
+cycleOrder:
+  - smol
+  - default
+  - slow
+
+async:
+  enabled: true
+
+lsp:
+  enabled: true
+  lazy: true
+
+task:
+  batch: true
+  maxConcurrency: 8
+  maxRecursionDepth: 1
+  enableLsp: true
+  agentModelOverrides:
+    hmasd-code-scout: openai-codex/gpt-5.6-luna:high
+    hmasd-implementer: openai-codex/gpt-5.6-sol:high
+    hmasd-verifier: openai-codex/gpt-5.6-luna:high
+    hmasd-reviewer: openai-codex/gpt-5.6-sol:xhigh
+    hmasd-exp-manager: openai-codex/gpt-5.3-codex-spark:high
+  isolation:
+    mode: none
+  disabledAgents:
+    - scout
+    - designer
+    - reviewer
+    - librarian
+    - task
+    - sonic
+    - codex-rescue
+
+skills:
+  includeSkills:
+    - hmasd-*
+  enableClaudeProject: false

@@ -60,6 +60,6 @@ unique causal role.
 Return a plural portfolio, objections, and candidate separating evidence—not a
 single legal route. Include concrete counterexamples, retained lemmas, the
 smallest refuted unit, one scheduled action, evidence semantics to freeze and
-reactivation conditions. Preserve worthwhile speculative ideas so the Research
-Project Manager can record rather than silently discard them. Mark repository
-fact, external evidence and inference separately.
+reactivation conditions. Preserve worthwhile speculative ideas so the
+Controller can record rather than silently discard them. Mark repository fact,
+external evidence and inference separately.

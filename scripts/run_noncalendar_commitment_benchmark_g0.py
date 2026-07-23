@@ -4127,10 +4127,8 @@ def formal_evaluate(
 
 
 def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, Any]:
-    """Bounded non-formal CUDA exercise over the exact formal cores."""
+    """Bounded non-formal exercise over the exact formal cores."""
 
-    if device_name != "cuda":
-        raise ValueError("formal_path_exercise requires cuda and has no CPU fallback")
     device = require_registered_backend(device_name)
     exercise_root = output_root / "formal_path_exercise"
     completed_paths: list[str] = []
@@ -4177,7 +4175,7 @@ def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, An
             "artifact_schema": EXERCISE_MANIFEST_SCHEMA,
             "formal": False,
             "mode": "formal_path_exercise",
-            "device": "cuda",
+            "device": device.type,
             "replicates": [0],
             "arms": list(ARMS),
             "updates": 1,

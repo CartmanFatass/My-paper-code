@@ -42,10 +42,11 @@ Report it rather than working around it.
 
 ## Active-line development
 
-This is an active research line, not a maintained product. Do not add backward
-compatibility adapters, deprecated aliases, legacy branches, or inactive
-fallbacks. When a path is superseded, delete it in the same change. Git history
-is the archive.
+This is an active research line, not a maintained platform. Use the shortest
+discriminator that can separate the live hypotheses; do not build infrastructure
+for hypothetical future work. Do not add backward-compatibility adapters,
+deprecated aliases, legacy branches, or inactive fallbacks. Delete every
+superseded path cleanly in the same change. Git history is the archive.
 
 ## Lightweight execution
 
@@ -56,11 +57,13 @@ This project optimizes conclusion-bearing iteration, not process artifacts.
   brainstorm, spec, plan or worktree. Any protected-semantics change, multiple
   writers or a real isolation boundary requires its frozen plan before
   implementation begins.
-- Make the smallest real change that can answer the question. Do not scaffold a
-  future architecture or preserve a superseded path.
-- Match proof to the claim: reproduce and close a bug, run an investigation,
-  exercise the changed path, or use the smallest existing focused check. Add a
-  permanent test only for a new observable contract or a plausible regression.
+- Build the shortest discriminator that separates the live hypotheses. Do not
+  scaffold a platform, preserve a superseded path, or generalize beyond the
+  active question.
+- Match proof to the claim: reproduce and close a bug, run the investigation, or
+  exercise the changed path. Add or retain a permanent test only when it
+  separates hypotheses, protects a key algorithm invariant, or covers a real
+  observed recurrence.
 - Parallelize only genuinely independent scopes. One writer owns a path at a
   time; dependent steps remain serial.
 - Use an independent reviewer for protected semantics, cross-scope integration
@@ -109,4 +112,3 @@ and flag it rather than proceeding.
 - `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract and
   its evidence requirements.
 - `docs/project/PROBLEM_CACHE.md` — parked problems and what each one blocks.
-- `docs/claude/SESSION_STATE.md` — live controller state on the `Claude` branch.

@@ -30,11 +30,11 @@ of accepted evidence, constructive toy, bounded prototype, formal experiment.
 An action is a resource decision, not an epistemic declaration. Unscheduled
 ideas retain explicit reactivation conditions.
 
-Create a Project Manager assignment only when implementation is the cheapest
+Create an implementation assignment only when implementation is the cheapest
 necessary action, external Pro has defined the scientific direction and
 estimand, and the Controller has separately authorized the resource action. The
-Project Manager—not the Controller—then chooses the complete executable
-algorithm realization.
+Controller then freezes the complete executable algorithm realization and
+dispatches bounded project-local OMP agents.
 
 ## Evidence discipline
 
@@ -64,5 +64,5 @@ The Controller owns:
 
 External Pro review may be a full plural round or focused continuation. It
 selects scientific direction without writing an implementation plan. Direct
-Controller intake must not insert a local scientific decision between Pro and
-the Project Manager.
+Controller intake must preserve that scientific decision while the Controller
+owns its later executable realization.

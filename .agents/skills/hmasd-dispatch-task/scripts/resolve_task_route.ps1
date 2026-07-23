@@ -1,13 +1,19 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('controller', 'project_manager', 'experiment_monitor', 'open_divergent_exchange')]
+    [ValidateSet('controller', 'experiment_monitor')]
     [string]$Role,
-    [string]$RegistryPath = (Join-Path $PSScriptRoot '..\references\session-roles.json'),
-    [string]$StateDb = (Join-Path $env:USERPROFILE '.codex\state_5.sqlite')
+    [string]$RegistryPath,
+    [string]$StateDb
 )
 
 $ErrorActionPreference = 'Stop'
+if ([string]::IsNullOrWhiteSpace($RegistryPath)) {
+    $RegistryPath = Join-Path $PSScriptRoot '..\references\session-roles.json'
+}
+if ([string]::IsNullOrWhiteSpace($StateDb)) {
+    $StateDb = Join-Path $env:USERPROFILE '.codex\state_5.sqlite'
+}
 if (-not (Test-Path -LiteralPath $RegistryPath -PathType Leaf)) {
     throw "Session role registry not found: $RegistryPath"
 }

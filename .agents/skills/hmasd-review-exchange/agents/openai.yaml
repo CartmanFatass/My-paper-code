@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Reviewer Exchange"
-  short_description: "Run one registered external reviewer exchange"
-  default_prompt: "Use $hmasd-dispatch-task and $hmasd-review-exchange to execute one registered HMASD reviewer stage with strict identity and flexible transport judgment."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "HMASD Browser Pro Exchange"
+  short_description: "Exchange one tracked review through BrowserMCP"
+  default_prompt: "Use $hmasd-browser-pro-exchange as the active long-lived Controller to start the pinned BrowserMCP server before user connection, validate one exact staged question and GitHub Connector evidence commit on the current branch, archive the natural response without clobbering, and fail closed without another transport."
+policy:
+  allow_implicit_invocation: false

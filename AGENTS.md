@@ -18,57 +18,60 @@ document needed at the current boundary:
 The durable research objects live under `docs/research/cdc/`. Load only the
 conjecture, ledger, portfolio or evidence note required at the current boundary.
 
-`CURRENT_WORK.md` selects the active execution surface. The Controller works
-directly or delegates research convergence and code-side work to the ACTIVE
-persistent Codex `project_manager` registered in the dispatch Skill. That
-Project Manager may use native Codex collaboration agents; the Controller does
-not bypass it to dispatch implementation workers. Persistent external-Pro
-transport is separately registered.
+`CURRENT_WORK.md` selects the active execution surface. The Controller is one
+unified scientific-to-code orchestrator: it performs direct evidence intake,
+freezes executable plans inside the accepted scientific direction, dispatches
+project-local OMP task agents, and operates the user-connected ChatGPT Pro tab
+through BrowserMCP. Experiment monitoring remains separately registered.
 
-Roles are resolved only from the dispatch Skill registry. Never infer a current
-role from a task title, an old callback or conversation search. Unregistered
-former manager sessions are obsolete execution surfaces.
+Persistent roles are resolved only from the dispatch Skill registry. Local code
+agents are resolved only from `.omp/agents/`; external scientific transport is
+resolved only from `.omp/mcp.json` plus
+`hmasd-browser-pro-exchange`. Never infer a current role from a task title, an
+old callback or conversation search. Unregistered former relay sessions and
+removed profile roots are obsolete execution surfaces.
 
 An execution-surface change is one atomic control boundary: update
-`CURRENT_WORK.md`, the dispatch Skill, its role registry and the corresponding
-contract tests together. Do not activate a topology when those sources disagree.
+`CURRENT_WORK.md`, the dispatch Skill, its role registry, local agent profiles
+and the corresponding contract tests together. Do not activate a topology when
+those sources disagree.
 
 The controller alone owns workflow and role-topology design, routing, direct
-evidence intake, resource and formal-experiment authorization, Git integration,
-project control, evidence integrity and user communication. External GPT-5.6
-Pro owns scientific direction. The Project Manager owns in-scope algorithm
-realization and code-side decisions.
+evidence intake, executable algorithm realization, resource and
+formal-experiment authorization, Git integration, project control, evidence
+integrity and user communication. External GPT-5.6 Pro owns scientific
+direction.
 
 ## Task dispatch
 
 Automatically use `.agents/skills/hmasd-dispatch-task/SKILL.md` whenever work
-may require Project Manager or Monitor dispatch, persistent Open-Pro
-communication, external review or a role callback.
+may require Monitor dispatch or a persistent role callback. Use
+`hmasd-browser-pro-exchange` for external review transport. Local code-agent
+work uses the project OMP task profiles directly.
 
 The active surfaces are:
 
-- controller direct work for workflow design, routing, Git, direct Pro evidence
-  intake, project control, evidence integration and user communication;
-- the registered native Codex `project_manager` for one authorized algorithm
-  realization and implementation package;
-- the registered native Codex `experiment_monitor` for one already authorized
-  run;
-- the registered Open-Pro Exchange persistent session for external divergent
-  review transport.
+- the unified Controller for workflow design, executable planning, direct local
+  agent coordination, BrowserMCP Pro exchange, integration, verification, Git,
+  direct evidence intake, project control, evidence integration and user
+  communication;
+- the pinned `browsermcp-pro` server and one user-connected authenticated
+  ChatGPT Pro tab for external scientific review;
+- the registered native Codex `experiment_monitor` slot for one
+  already-authorized run. Its archived task is rebuild-required before the next
+  formal run; external review and local OMP work do not route through it.
 
-The code profiles belong only to the Project Manager task tree. The Controller
-does not dispatch them as implementation workers. Only the Project Manager may
-spawn them, and no child may spawn a successor. The exact case-sensitive native
-Codex `agent_type` values exposed by the profiles are
-`hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier` and
-`hmasd-reviewer`. The `HMASDCodeScout`-style names in `.codex/config.toml` are
-registry section identifiers, not callable `agent_type` values. An
-`unknown agent_type` response is a workflow blocker; never silently replace a
-registered custom agent with an unnamed/default child.
+The exact case-sensitive OMP `agent` values exposed under `.omp/agents/` are
+`hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier`,
+`hmasd-reviewer` and `hmasd-exp-manager`. The Controller dispatches them
+directly. No child may spawn a successor. An `unknown agent` response is a
+workflow blocker; never silently replace a registered project agent with an
+unnamed or bundled default child.
 
-Persistent roles receive a complete assignment through live route resolution.
-Only Open-Pro Exchange uses a registered event such as `REVIEW_STAGE`, its role
-Skill and live route verification.
+The persistent Monitor receives a complete assignment through live route
+resolution. BrowserMCP Pro exchange remains in the Controller session and uses
+no persistent relay or callback. Local agents receive one complete bounded
+assignment through the OMP task tool.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -86,57 +89,50 @@ External GPT-5.6 Pro owns conjectures, scientific definitions, mechanism-family
 and research-route selection, estimands, evidence meaning and the next scheduled
 research action.
 
-The Project Manager owns the executable algorithm inside that scientific
-direction: network and state architecture, probability, gradients, credit,
-clocks, lifecycle, replay, RNG, checkpoint meaning, batching, replacement and
+Inside that scientific direction, the Controller owns the executable algorithm:
+network and state architecture, probability, gradients, credit, clocks,
+lifecycle, replay, RNG, checkpoint meaning, batching, replacement and
 implementation structure. It freezes `IMPLEMENTATION_PLAN.md`, selects and
-manages the code-agent task graph, integrates one package and performs one
-bounded repair cycle without per-choice Controller approval.
+manages the local agent task graph, integrates one package and performs one
+bounded repair cycle.
 
-The Controller dispatches Project Manager only after direct evidence intake and
-resource authorization. Its active assignment is the sole write lease. The
-Controller and other mutating tasks do not edit, stage, commit or push until it
-yields ready/blocked or is definitely aborted. Project Manager never changes
-external scientific direction, formal-compute authority, Git, project control,
-or external review.
+Before implementation, the Controller records the current branch, `HEAD` and
+inherited working-tree state in the assignment. Local agents work on that exact
+visible source, preserve unrelated changes and never perform Git operations.
 
-For a persistent Codex Project Manager assignment, the source boundary is never
-a manually copied SHA. Controller and Manager each run the dispatch Skill's
-`resolve_source_boundary.ps1`; the assignment carries only
-`source_boundary=local_and_remote_aggressive_tip`. The script requires local
-`HEAD` and `refs/remotes/My-paper-code/aggressive` to be the same canonical
-commit. Its resolved `source_commit` is evidence output, not a task input. A
-disagreement is `SOURCE_BOUNDARY_DIVERGED`, not an invitation to guess, truncate
-or substitute a commit ID.
+One writer owns a file scope at a time. A local agent's assignment is its sole
+write lease. The Controller does not concurrently edit that scope and verifies
+the returned package before Git integration. Local agents never stage, commit,
+push, stash, reset, checkout tracked files or manipulate branches.
 
 The rebuildable Monitor observes one assigned run. It does not launch, restart,
 repair, extend or scientifically interpret it.
 
 ## Context isolation
 
-The persistent Open-Pro role receives its communication Skill, registered role
-identity and explicit inputs. It does not reconstruct Controller history,
-authorize another role or launch a successor.
+The long-lived OMP Controller starts the pinned BrowserMCP server before the
+user connects one exact ChatGPT Pro tab; an ephemeral process is not a valid
+transport. BrowserMCP receives one exact Git-visible question. Pro reads pushed
+result and evidence files plus named reference-code paths through its GitHub
+connector; BrowserMCP does not upload local source. Neither surface reconstructs
+Controller history, reads credentials or unrelated tabs, authorizes work, or
+starts a successor.
 
-Project Manager child agents receive exactly one profile and complete assignment.
-They do not reconstruct Controller history, change their model, expand
-authority, or invoke unrelated Skills. Only Project Manager has child-spawn
-authority, limited to its four registered code profiles.
+Local task agents receive exactly one project profile and one complete
+assignment. They do not reconstruct Controller history, change their model,
+expand authority, invoke unrelated Skills or spawn agents. Their tool lists and
+the project recursion limit enforce a depth-one task graph.
 
-Scientific decision transport is sent only to Open-Pro Exchange. The Controller
-performs direct lightweight evidence intake and durable CDC record application.
-Authorized algorithm realization is sent only to `project_manager`. Monitoring
-is sent only to `experiment_monitor`. Automatic task results
-wake the Controller but never start a successor without Controller routing.
-
-For a persistent Codex Project Manager, terminal delivery is an explicit direct
-message, not an assumption about the task UI. Before returning
-`IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`, resolve the active
-Controller through the dispatch registry and send the complete terminal payload
-with `codex_app__send_message_to_thread`, copying that resolved target's
-`hostId`, `threadId`, model and thinking unchanged. A failed delivery is itself
-`PROJECT_MANAGER_DELIVERY_BLOCKED`; it never authorizes a default-route retry
-or a successor task.
+Scientific decision interaction uses only the pinned BrowserMCP Pro channel.
+The stage commit contains the canonical question and manifest; those artifacts
+name one exact ancestor evidence commit, current pushed branch and repository.
+Reviewer evidence retrieval uses the GitHub connector at that evidence commit.
+Raw archival is exclusive and no-clobber. The Controller performs direct
+factual reconciliation, evidence intake
+and durable CDC record application. Authorized algorithm realization remains
+in the Controller's local OMP task tree. Monitoring is sent only to
+`experiment_monitor`. Browser responses and automatic task results wake the
+Controller but never start a successor without Controller routing.
 
 ## Protected changes
 
@@ -181,12 +177,12 @@ independent evidence, mechanism family.
 Before authorizing a scheduled action as code or experiment work, receive and
 archive the external Pro decision, write factual reconciliation, perform direct
 evidence intake and show its concise user-facing summary. The Controller checks
-provenance, authority and feasibility but does not replace the Pro scientific
-choice or design the Project Manager's algorithm realization. It records
-conjecture, lemma, counterexample, portfolio and evidence-note deltas under
-`docs/research/cdc/`. Use a full plural Pro round for genuinely open boundaries
-and a focused continuation in the same Pro conversation for a local scientific
-ambiguity; neither Controller nor Manager fills that ambiguity locally.
+provenance, authority and feasibility, preserves the Pro scientific choice, and
+owns the executable realization inside it. It records conjecture, lemma,
+counterexample, portfolio and evidence-note deltas under `docs/research/cdc/`.
+Use a full plural Pro round for genuinely open boundaries and a focused
+continuation in the same Pro conversation for a local scientific ambiguity;
+neither the Controller nor a local worker fills a scientific ambiguity locally.
 
 Intrinsic reward remains environment-agnostic. Task fields, identity, roles,
 success predicates, progress measures and external reward may not be smuggled
@@ -204,7 +200,7 @@ Git boundary. Preserve only unique scientific evidence or artifacts explicitly
 named by the current control plane.
 
 Implementation acceptance includes one focused correctness check and inspection
-of the changed end-to-end path for scalar CUDA work, repeated packing or
+of the changed end-to-end path for scalar device work, repeated packing or
 transfer, premature synchronization, recurrent leakage, replay mismatch, RNG
 drift and serial evaluation. Performance is code quality, not a separate
 scientific gate.
@@ -223,4 +219,5 @@ terminal experiment disposition, accepted external disposition, autonomy-state
 change or explicit controller handoff. Report only the domain that changed.
 
 The controller may push `aggressive` with `git push My-paper-code aggressive`
-under the user's standing authorization. Persistent roles do not commit or push.
+under the user's standing authorization. Local agents and persistent roles do
+not commit or push.

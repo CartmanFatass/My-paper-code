@@ -55,17 +55,12 @@ data/
 !memory/*.md
 # Project control plane is load-bearing collaboration state.
 !docs/project/*.md
-# Claude Code controller state and role briefs on the `Claude` branch.
-!docs/claude/**/*.md
-!docs/superpowers/plans/*.md
-!docs/superpowers/specs/*.md
-# Custom subagent definitions are durable project tooling.
-!.claude/agents/*.md
+# Claude Code local residue is not an execution surface.
+.claude/
+# OMP project task-agent profiles are durable workflow source.
+!.omp/agents/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
-# Generated from the account-visible Codex model cache; never commit account
-# catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
-runtime/model-catalog-v2-workaround.json
 # Exact R27-G2 design/review evidence is durable project state.
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
 !docs/external-review/R27_G2_design_review_20260712_Claude.md
